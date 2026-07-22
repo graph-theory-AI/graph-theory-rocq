@@ -1,0 +1,15 @@
+{
+ "schema_version": 1,
+ "prospective_v2_wave_min": 211,
+ "grounding": {
+  "required_statement_states": [
+   "done"
+  ],
+  "required_fields": [
+   "hyp_inhabited",
+   "not_trivially_true",
+   "helper_sanity"
+  ]
+ },
+ "notes": "X1-X210 are the audited legacy baseline. X211 and later must pass hard lint and carry grounding-certificate metadata before a done statement leg is accepted."
+}

@@ -1,9 +1,7 @@
 name: corpus-status
 
-# Backs the public "statement-complete" claim WITHOUT the Coq toolchain: the manifest reproduces,
-# the edge graph has no drift, and CORPUS_STATUS.md matches the committed manifest/overlay with the
-# headline invariants intact (227 total, 0 todo). The full `make gate` (per-milestone Coq builds,
-# axiom-free + Print-Assumptions checks) runs in the Rocq+MathComp+coq-graph-theory environment.
+# The audit job backs corpus/status claims without Rocq. The container job installs the pinned
+# Rocq/MathComp graph stack and runs full acceptance plus active probes for changed milestones.
 on:
   push:
     branches: [main]
@@ -19,3 +17,19 @@ jobs:
           python-version: '3.x'
       - name: Toolchain-free corpus-status audit
         run: make audit
+
+  changed-milestones:
+    runs-on: ubuntu-latest
+    container: mathcomp/mathcomp:2.5.0-rocq-prover-9.1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install graph-theory dependencies
+        run: |
+          opam repo add rocq-released https://rocq-prover.org/opam/released --all-switches || true
+          opam install -y coq-graph-theory coq-mathcomp-classical
+      - name: Gate changed milestones and prospective probes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python3 meta/changed_milestones.py --base "$BASE_SHA" --head "$GITHUB_SHA" --run

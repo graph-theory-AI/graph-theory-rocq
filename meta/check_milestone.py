@@ -13,6 +13,8 @@ Verifies, against the live opam switch `digraph`:
      source-verification tuple (locator + hash + second-reader identity + date).
   7. no forbidden exact-type faithfulness signatures are committed:
      unconditional refutations of non-disproved rows, or direct proofs of undecided rows.
+  8. prospective v2 waves (X211+) pass hard faithfulness lint and every done row carries
+     independently-audited grounding metadata naming Qed certificates in grounding_<phase>.v.
 Exit 0 iff all pass. Run only inside (or with) the `digraph` switch on PATH.
 """
 import json, os, re, sys, subprocess, glob
@@ -142,6 +144,88 @@ implications = os.path.join(pkg, "theories", "conjectures", f"implications_{phas
 chk(ns, "package known", package if ns else f"unknown package {package}")
 chk(os.path.exists(stmt), "statement file exists", stmt)
 
+# 8) Prospective acceptance policy. Legacy X1-X210 rows remain auditable backlog; X211+
+# cannot reach statement=done without hard lint, an independent wave verdict, and named
+# grounding certificates for inhabited hypotheses / non-triviality / helper sanity.
+policy = json.load(open(os.path.join(META, "faithfulness_policy.json")))
+phase_number = re.fullmatch(r"X(\d+)", phase)
+prospective = CORPUS == "v2" and phase_number \
+    and int(phase_number.group(1)) >= int(policy["prospective_v2_wave_min"])
+grounding_certificates = []
+prospective_errors = []
+if prospective:
+    lint = subprocess.run(
+        [sys.executable, os.path.join(META, "faithfulness_lint.py"),
+         "--files", os.path.relpath(stmt, MONO), "--check"],
+        cwd=MONO, capture_output=True, text=True,
+    )
+    chk(lint.returncode == 0, "prospective hard faithfulness lint",
+        "" if lint.returncode == 0 else (lint.stdout + lint.stderr)[-1000:])
+
+    wave_data = json.load(open(os.path.join(META, "v2_statement_waves.json"))).get("waves", {})
+    matching_waves = [w for w in wave_data.values()
+                      if w.get("phase") == phase and w.get("repo") == package]
+    if len(matching_waves) != 1:
+        prospective_errors.append(f"expected one wave metadata record, found {len(matching_waves)}")
+        wave = {"rows": {}}
+    else:
+        wave = matching_waves[0]
+        reader = wave.get("faithfulness_verified_by")
+        if not reader or not wave.get("faithfulness_result"):
+            prospective_errors.append("wave lacks faithfulness_verified_by/faithfulness_result")
+        if reader and reader == wave.get("implemented_by"):
+            prospective_errors.append("faithfulness_verified_by equals implemented_by")
+
+    manifest_by_slug = {r["slug"]: r for r in REG.load_manifest(CORPUS)["rows"]}
+    statement_src = strip_comments(open(stmt).read()) if os.path.exists(stmt) else ""
+    helper_prefix = f"x{phase_number.group(1)}_"
+    local_helpers = [name for name in re.findall(
+        r"^\s*Definition\s+([A-Za-z0-9_']+)", statement_src, re.M)
+                     if name.startswith(helper_prefix) and not name.endswith("_statement")]
+    required_fields = policy["grounding"]["required_fields"]
+    required_states = set(policy["grounding"]["required_statement_states"])
+    for slug in slugs:
+        row = manifest_by_slug[slug]
+        state = row.get("legs", {}).get("statement", "todo")
+        if state not in required_states:
+            continue
+        row_wave = wave.get("rows", {}).get(slug, {})
+        spec = row_wave.get("grounding")
+        if not isinstance(spec, dict):
+            prospective_errors.append(f"{slug}: missing grounding metadata object")
+            continue
+        missing_fields = [field for field in required_fields if field not in spec]
+        if missing_fields:
+            prospective_errors.append(f"{slug}: grounding metadata misses {missing_fields}")
+            continue
+        for field in ("hyp_inhabited", "not_trivially_true"):
+            if not isinstance(spec[field], str) or not spec[field]:
+                prospective_errors.append(f"{slug}: grounding.{field} must name one certificate")
+            else:
+                grounding_certificates.append(spec[field])
+        helpers = spec["helper_sanity"]
+        if not isinstance(helpers, list) or not all(isinstance(x, str) and x for x in helpers):
+            prospective_errors.append(f"{slug}: grounding.helper_sanity must be a list of names")
+        else:
+            grounding_certificates.extend(helpers)
+            if local_helpers and not helpers:
+                prospective_errors.append(
+                    f"{slug}: local helpers {local_helpers[:5]} require helper_sanity certificates")
+
+    if not os.path.exists(grounding):
+        prospective_errors.append(f"prospective done rows require {os.path.basename(grounding)}")
+    else:
+        grounding_src = strip_comments(open(grounding).read())
+        proof_decl_re = re.compile(
+            r"^\s*(?:Lemma|Theorem|Corollary|Proposition|Fact|Remark|Definition)\s+"
+            r"([A-Za-z0-9_']+)\b", re.M)
+        declared_certs = set(proof_decl_re.findall(grounding_src))
+        missing_certs = sorted(set(grounding_certificates) - declared_certs)
+        if missing_certs:
+            prospective_errors.append(f"grounding file misses named certificates {missing_certs}")
+    chk(not prospective_errors, "prospective audit + grounding contract",
+        "; ".join(prospective_errors[:8]) if prospective_errors else "")
+
 # 1) every expected formal_name is Defined — search ALL conjecture files, not just
 #    <phase>.v: some milestones (e.g. the absorbed Digraph P9) define "already-formalized"
 #    rows in sibling files (classic_core.v / packing.v / sad.v) re-exported by <phase>.v.
@@ -197,8 +281,11 @@ if compiles and ns:
     # import EVERY conjecture module that defines an expected name (not just <phase>.v):
     # milestones like Digraph P9 spread "already-formalized" rows across sibling files.
     mods = sorted({defined_in[n] for n in expected if n in defined_in} | {phase})
-    body = f"From {ns}.conjectures Require Import {' '.join(mods)}.\n" + \
-           "".join(f"Print Assumptions {n}.\n" for n in expected)
+    if grounding_certificates:
+        mods.append(f"grounding_{phase}")
+    assumption_names = expected + grounding_certificates
+    body = f"From {ns}.conjectures Require Import {' '.join(sorted(set(mods)))}.\n" + \
+           "".join(f"Print Assumptions {n}.\n" for n in assumption_names)
     open(probe, "w").write(body)
     # build coqc include flags as an argv LIST (no shell string interpolation of _CoqProject paths)
     incl_flags = incl_flags_from_cqp(cqp_txt)
@@ -208,13 +295,16 @@ if compiles and ns:
     out = pr.stdout + pr.stderr
     closed = out.count("Closed under the global context")
     has_axioms = "Axioms:" in out
-    assum_ok = (pr.returncode == 0) and (not has_axioms) and (closed == len(expected))
-    assum_detail = "" if assum_ok else f"closed={closed}/{len(expected)} has_axioms={has_axioms}; {out[-300:]}"
+    assum_ok = (pr.returncode == 0) and (not has_axioms) and (closed == len(assumption_names))
+    assum_detail = "" if assum_ok else \
+        f"closed={closed}/{len(assumption_names)} has_axioms={has_axioms}; {out[-300:]}"
     for f in glob.glob(os.path.join(pkg, "theories", "conjectures", f"_assum_{phase}*")) + \
              glob.glob(os.path.join(pkg, "theories", "conjectures", f"._assum_{phase}*")):
         os.remove(f)
-n_axfree = closed if (compiles and ns) else 0
-chk(assum_ok, f"Print Assumptions clean ({n_axfree}/{len(expected)} statements)", assum_detail)
+n_axfree = min(closed, len(expected)) if (compiles and ns) else 0
+chk(assum_ok, f"Print Assumptions clean ({n_axfree}/{len(expected)} statements"
+    + (f" + {len(grounding_certificates)} grounding certificates" if grounding_certificates else "")
+    + ")", assum_detail)
 
 # 7) Exact-type faithfulness probes:
 #    - no unconditional refutation of a non-disproved row;

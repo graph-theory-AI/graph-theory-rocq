@@ -54,6 +54,28 @@
 | U8 | 3 | 0 | 0 | 3 |
 | U9 | 13 | 0 | 0 | 13 |
 
+## Foundation fidelity registry
+
+- **102 audited primitives**: 88 faithful · 12 lightweight · 2 broken.
+- Registry: `meta/foundation_fidelity.json`; validate declarations and evidence names with `python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is never inferred from compilation.
+
+| verdict | primitive | misuse watch |
+|---|---|---|
+| LIGHTWEIGHT | `GTBase.finite_graph.fg_event_at_least_ratio` | A threshold on one finite space, not a with-high-probability notion. Do not use it to encode almost-all or whp claims. |
+| LIGHTWEIGHT | `GTBase.finite_graph.fg_event_at_most_ratio` | A threshold on one finite space, not an asymptotic probability notion. |
+| BROKEN | `GTBase.surface.clustered_chromatic_at_most` | Its graph-local existential clustering bound is vacuous for finite graphs when used as a class-uniform conclusion; quantify c before the graph class instead. |
+| LIGHTWEIGHT | `GTBase.surface.surface_embeddable` | The module supplies a finite rotation-system surface, not a drawing/crossing layer; consumers must respect connectedness and cellular-embedding assumptions. |
+| BROKEN | `GTBase.surface.surface_embeddable_with_boundary` | The boundary witness can be empty, so the boundary parameter is vacuous. |
+| LIGHTWEIGHT | `GTBase.surface.surface_embedding_edges` | The module supplies a finite rotation-system surface, not a drawing/crossing layer; consumers must respect connectedness and cellular-embedding assumptions. |
+| LIGHTWEIGHT | `GTBase.surface.surface_embedding_faces` | The module supplies a finite rotation-system surface, not a drawing/crossing layer; consumers must respect connectedness and cellular-embedding assumptions. |
+| LIGHTWEIGHT | `GTBase.surface.surface_embedding_vertices` | The module supplies a finite rotation-system surface, not a drawing/crossing layer; consumers must respect connectedness and cellular-embedding assumptions. |
+| LIGHTWEIGHT | `GTBase.surface.surface_embeds_in_euler_genus` | The module supplies a finite rotation-system surface, not a drawing/crossing layer; consumers must respect connectedness and cellular-embedding assumptions. |
+| LIGHTWEIGHT | `GTBase.surface.surface_embeds_in_fixed_surface` | The module supplies a finite rotation-system surface, not a drawing/crossing layer; consumers must respect connectedness and cellular-embedding assumptions. |
+| LIGHTWEIGHT | `GTBase.surface.surface_euler_genus` | The module supplies a finite rotation-system surface, not a drawing/crossing layer; consumers must respect connectedness and cellular-embedding assumptions. |
+| LIGHTWEIGHT | `GTMisc.conjectures.D7.NP_hard` | Machine-free relational hardness layer; acceptable only when the claim is explicitly at that abstraction level. |
+| LIGHTWEIGHT | `GTMisc.conjectures.D7.in_NP` | The verifier and verifier-cost function are decoupled. Use only as an abstract relational layer until GTBase gains a coupled NP verifier. |
+| LIGHTWEIGHT | `GTMisc.conjectures.D7.poly_reduces` | Relational reduction vocabulary with a decoupled abstract cost function; unsuitable for positive algorithm-existence claims. |
+
 ## Partial — faithful but conditional / needs a deferred layer (12)
 
 | area | slug | reason |
@@ -63,8 +85,8 @@
 | extremal-graph-theory | mixing_circular_colourings_0 | M_c real infimum; rational-threshold approximation |
 | graph-theory-misc | finding_k_edge_outerplanar_graph_embeddings | Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial — proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up) |
 | infinite-graph-theory | coloring_the_odd_distance_graph | D4inf5: iGraph on R*R over rcfType, sqrt-free odd-integer-distance edge; chi=infinity via READING-2 (finite-subgraph chromatic unboundedness: forall n, exists finite S not n-colourable). PROXY on two documented axes: reading-2 is the choice-free direction of chi=infinity (converse = De Bruijn-Erdos), and forall R:rcfType is field-generic vs the specific reals. Audited partial: odd_dist faithful, n>=1 slice carries open content (grounding not_1_colorable), axiom-free. |
-| infinite-graph-theory | hamiltonian_cycles_in_line_graphs_of_infinite_graphs | iGraph carrier suffices; needs infinite Hamiltonicity (topological double-ray cycles) |
-| infinite-graph-theory | hamiltonian_cycles_in_powers_of_infinite_graphs | iGraph carrier suffices; needs infinite Hamiltonicity |
+| infinite-graph-theory | hamiltonian_cycles_in_line_graphs_of_infinite_graphs | PARTIAL proxy, explicit statement in Infinite.conjectures.D4legacy: Hamilton circle rendered by the D4inf3 spanning double-ray proxy; edge-connectivity rendered as kappa(L(G))>=4. infinite_graph guard added by audit 2026-07-22 (load-bearing: finite carriers refute the unguarded double-ray proxy while the source holds there via finite Hamilton cycles). Needs the topological circle layer to return to done. |
+| infinite-graph-theory | hamiltonian_cycles_in_powers_of_infinite_graphs | PARTIAL proxy, explicit statement in Infinite.conjectures.D4legacy: cube/square Hamilton circles via the spanning double-ray proxy. infinite_graph guard added by audit 2026-07-22 (unguarded form was machine-refuted axiom-free at K_1). Needs the topological circle layer to return to done. |
 | infinite-graph-theory | infinite_uniquely_hamiltonian_graphs | D4inf3: exists locally_finite 1-ended r-regular (r>2) uniquely-hamiltonian G. PROXY: uniquely_hamiltonian = spanning DOUBLE RAY (int-indexed), faithful to a Hamilton CIRCLE only in the co-assumed 1-ended locally-finite class (not the general Freudenthal topological circle). Audited partial: guards 2<r/one_ended/locally_finite load-bearing, trivialization+refutation fail, axiom-free. |
 | topological-graph-theory | crossing_numbers_and_coloring | PARTIAL proxy: sub-level comparison over xsplit-achievable counts, robust to exactly-k non-monotonicity but not yet validated as drawing crossing number because local rotation/alternation data is missing. The t=5 slice remains a useful strength check. |
 | topological-graph-theory | the_crossing_number_of_the_complete_bipartite_graph | PARTIAL proxy: direct form is_crossing_number (KB m n) (Zarankiewicz value) over the xsplit planarization model. Readback/external-review proxy flagged missing local drawing rotation/alternation data, so equivalence to drawing crossing number is unvalidated; degenerate m,n<=2 planar/0 checks remain useful grounding. |
@@ -118,13 +140,13 @@ Release: **`opg-v1.0.1-227-attempted`** (supersedes `opg-v1.0-227-attempted`, wh
 CI (toolchain-free — no Coq build, no external OPG clone needed):
 
 ```sh
-make audit   # build_edge_graph.py --check + report_corpus_status.py --check (invariants + no drift)
+make audit   # edge/v2 drift + foundation registry + warning lint + status/LANDED invariants
 ```
 
 Full acceptance (dev environment: Rocq/MathComp toolchain + the OpenProblemGarden clone):
 
 ```sh
-make gate    # regenerates the manifest, then check_milestone for EVERY LANDED milestone:
+make gate    # regenerates OPG, fully checks v2 against its pinned upstream, then every LANDED milestone:
              #   compiles, axiom-free, Print Assumptions clean, overlay leg-state justified
 ```
 

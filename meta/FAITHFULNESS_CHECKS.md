@@ -37,6 +37,11 @@ green release) is the standing reminder of why this matters.
   source — with distinct lenses (oracle-attack / mathematician / Rocq-semantics) and a synthesizer.
   These caught the Track-B vacuity, the crossing-number `euler_genus` proxy, and forced several
   over-claimed `done`s down to `partial`. Recorded in each package's `docs/*_AUDIT_NOTES.md`.
+- **Prospective X211 policy**: hard suspicion lint, an independent wave verdict, and named
+  grounding certificates are acceptance requirements. The same lint is warning-only on the
+  X1-X210 legacy baseline so old risk stays visible without falsifying its historical gate.
+- **Foundation fidelity registry**: audited primitives carry FAITHFUL/LIGHTWEIGHT/BROKEN verdicts;
+  statement lint follows local helper definitions and flags use of risky primitives.
 
 ## Baseline mechanical sweep (current state)
 
@@ -112,8 +117,10 @@ definitions:
 - `wagner_planar` weakened to `True`;
 - `has_girth` weakened by dropping the witnessed cycle of length `g`;
 - `strongly_colorable` weakened from "all partitions" to "some partition".
+- X138's class-uniform clustering constant moved inside `forall G`;
+- X125's ratio-to-one `fg_whp` replaced by a fixed 9/10 event threshold.
 
-Current baseline: **7/7 mutants killed**. This is now a standing mutation smoke test for the checks
+Current baseline: **9/9 mutants killed**. This is now a standing mutation smoke test for the checks
 themselves. It is not an exhaustive mutation campaign; add a targeted mutant whenever a new
 load-bearing definition, guard, inequality, or quantifier choice becomes part of a faithfulness claim.
 

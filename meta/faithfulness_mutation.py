@@ -12,9 +12,11 @@ signatures that would have caught the historical U4-style failure:
   * an undecided row made trivially true, with a committed direct proof;
   * an undecided row made false, with a committed unconditional refutation.
 
-The remaining canaries mutate load-bearing definitions and require existing
+The next canaries mutate load-bearing definitions and require existing
 grounding / settled-case lemmas to fail compilation.  A surviving mutant means
 that the current faithfulness net did not notice a targeted semantic drift.
+The v2 canaries exercise the prospective static lint on the historical
+quantifier-order and fixed-ratio-for-whp defect classes.
 """
 
 from __future__ import annotations
@@ -57,6 +59,7 @@ class Mutant:
     appendices: tuple[Appendix, ...]
     expected_signature: str
     note: str
+    detector: str = "milestone"
 
 
 MUTANTS = [
@@ -211,6 +214,55 @@ Definition strongly_colorable (G : sgraph) (r : nat) : Prop :=
         expected_signature="[FAIL] package compiles",
         note="flips strongly_colorable from all partitions to one partition",
     ),
+    Mutant(
+        name="x138_class_bound_quantifier_swap",
+        phase="X138",
+        package="topological-graph-theory",
+        replacements=(
+            Replacement(
+                "topological-graph-theory/theories/conjectures/X138.v",
+                "esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+                """
+Definition esperet_joret_surface_triangle_free_clustered_two_colouring_statement : Prop :=
+  forall (surface Delta0 : nat) (G : sgraph),
+    girth_geq G 4 ->
+    Delta G <= Delta0 ->
+    x138_embeddable_on_surface surface G ->
+    exists c : nat, x138_clustered_two_colourable_with_clustering c G.
+""",
+            ),
+        ),
+        appendices=(),
+        expected_signature="[exists-after-graph-forall]",
+        note="moves the class-uniform clustering constant inside forall G",
+        detector="lint",
+    ),
+    Mutant(
+        name="x125_fixed_ratio_for_whp",
+        phase="X125",
+        package="extremal-graph-theory",
+        replacements=(
+            Replacement(
+                "extremal-graph-theory/theories/conjectures/X125.v",
+                "x125_almost_all",
+                """
+Definition x125_almost_all
+    (ell : nat -> nat) (P : forall n : nat, sgraph -> Prop) : Prop :=
+  exists (M : x125_lift_model ell)
+         (good : forall n : nat, pred (x125_sample M n)),
+    (forall n : nat,
+       @fg_event_at_least_ratio (x125_sample M n) (@x125_weight ell M n)
+         (good n) 9 10) /\\
+    forall (n : nat) (x : x125_sample M n),
+      good n x -> P n (@x125_observe ell M n x).
+""",
+            ),
+        ),
+        appendices=(),
+        expected_signature="[fixed-ratio-whp]",
+        note="replaces ratio-to-one whp with a fixed 9/10 event threshold",
+        detector="lint",
+    ),
 ]
 
 
@@ -262,7 +314,11 @@ def sibling_deps(package: str) -> list[str]:
 
 def copy_workspace(mutant: Mutant, dst: Path) -> None:
     """Copy the minimal monorepo subset needed by check_milestone."""
+    # The fidelity registry includes the area-local D7 complexity surface, so lint mutants
+    # need that source present even when their target package is elsewhere.
     rels = ["meta", "base", mutant.package]
+    if "graph-theory-misc" not in rels:
+        rels.append("graph-theory-misc")
     for dep in sibling_deps(mutant.package):
         if dep not in rels:
             rels.append(dep)
@@ -313,8 +369,14 @@ def run_check(workspace: Path, mutant: Mutant, timeout: int) -> subprocess.Compl
     if switch_bin.is_dir():
         env["PATH"] = str(switch_bin) + os.pathsep + env.get("PATH", "")
         env.setdefault("OPAM_SWITCH_PREFIX", str(Path.home() / ".opam" / "digraph"))
+    if mutant.detector == "lint":
+        command = [sys.executable, "meta/faithfulness_lint.py", "--files",
+                   *sorted({replacement.relpath for replacement in mutant.replacements}),
+                   "--check"]
+    else:
+        command = [sys.executable, "meta/check_milestone.py", mutant.phase, mutant.package]
     return subprocess.run(
-        [sys.executable, "meta/check_milestone.py", mutant.phase, mutant.package],
+        command,
         cwd=workspace,
         env=env,
         text=True,
