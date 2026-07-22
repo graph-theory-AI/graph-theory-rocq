@@ -60,7 +60,12 @@ MONO = os.path.dirname(META)
 sys.path.insert(0, META)
 import corpus_registry as REG
 
-GC = REG.graph_conjectures_dir()
+try:
+    GC = REG.graph_conjectures_dir()
+except SystemExit:
+    # No usable clone (CI): point at an absent directory so that `--check` without
+    # --require-upstream takes the pinned local replay below instead of failing.
+    GC = os.path.join(os.path.dirname(MONO), "graph-conjectures")
 
 OUT_MANIFEST = REG.manifest_path("v2")
 OUT_OVERLAY = REG.overlay_path("v2")
@@ -71,6 +76,122 @@ INTERNAL_RE = re.compile(
     r"\b(Theorem|Lemma|Corollary|Conjecture|Question|Problem|Proposition|Claim|Section|Equation)\s+\d")
 STATUS_MAP = {"open": "open", "partial": "partial", "solved": "solved",
               "disproved": "disproved", "unclear": "open"}
+
+
+def local_replay_check():
+    """Check every locally-derived v2 surface when the pinned upstream checkout is absent.
+
+    This is intentionally narrower than rebuilding source-owned rows: the committed manifest is
+    the pinned source snapshot in that environment.  It still catches the drift that occurs during
+    normal statement work: wave routing/provenance, all overlay legs, statement declarations, and
+    prospective faithfulness/grounding policy.
+    """
+    manifest = REG.load_manifest("v2")
+    overlay = REG.load_overlay("v2")
+    waves = json.load(open(os.path.join(META, "v2_statement_waves.json"))).get("waves", {})
+    policy = json.load(open(os.path.join(META, "faithfulness_policy.json")))
+    minimum = int(policy["prospective_v2_wave_min"])
+    rows = manifest["rows"]
+    by_slug = {r["slug"]: r for r in rows}
+    entries = overlay.get("entries", {})
+    leg_names = overlay.get("_legs", [])
+    errors = []
+
+    expected_overlay = {r["slug"] for r in rows if not r.get("alias_of")}
+    if set(entries) != expected_overlay:
+        missing = sorted(expected_overlay - set(entries))
+        extra = sorted(set(entries) - expected_overlay)
+        errors.append(f"overlay key mismatch: missing={missing[:6]} extra={extra[:6]}")
+    for r in rows:
+        if r.get("alias_of"):
+            continue
+        entry = entries.get(r["slug"], {})
+        for leg in leg_names:
+            if entry.get(leg, "todo") != r.get("legs", {}).get(leg, "todo"):
+                errors.append(f"{r['slug']}: overlay/manifest drift on {leg}")
+
+    covered = set()
+    for wave_key, wave in waves.items():
+        phase = wave.get("phase")
+        repo = wave.get("repo")
+        if phase != wave_key and not wave_key.startswith(f"{phase}:"):
+            errors.append(f"wave key {wave_key!r} disagrees with phase {phase!r}")
+        source = os.path.join(MONO, repo or "", "theories", "conjectures",
+                              wave.get("defines_file", ""))
+        source_text = open(source).read() if os.path.isfile(source) else ""
+        if not source_text:
+            errors.append(f"{wave_key}: statement source missing: {source}")
+        phase_match = re.fullmatch(r"X(\d+)", phase or "")
+        prospective = bool(phase_match and int(phase_match.group(1)) >= minimum)
+        if prospective:
+            reader = wave.get("faithfulness_verified_by")
+            if not reader or not wave.get("faithfulness_result"):
+                errors.append(f"{wave_key}: prospective wave lacks independent faithfulness verdict")
+            if reader and reader == wave.get("implemented_by"):
+                errors.append(f"{wave_key}: faithfulness reader equals implementer")
+        for slug, wr in wave.get("rows", {}).items():
+            covered.add(slug)
+            r = by_slug.get(slug)
+            if r is None:
+                errors.append(f"{wave_key}: unknown row {slug}")
+                continue
+            state = wr.get("state", "done")
+            grounding_state = "done" if state == "done" and wr.get("grounding") else "todo"
+            expected = {
+                "phase": phase, "repo": repo, "formal_name": wr.get("formal_name"),
+            }
+            for field, value in expected.items():
+                if r.get(field) != value:
+                    errors.append(f"{slug}: manifest {field}={r.get(field)!r}, want {value!r}")
+            entry = entries.get(slug, {})
+            if entry.get("statement") != state:
+                errors.append(f"{slug}: overlay statement={entry.get('statement')!r}, want {state!r}")
+            if entry.get("grounding", "todo") != grounding_state:
+                errors.append(f"{slug}: overlay grounding={entry.get('grounding')!r}, "
+                              f"want {grounding_state!r}")
+            if entry.get("package") != repo or entry.get("commit") != wave.get("commit", phase.lower()):
+                errors.append(f"{slug}: overlay package/commit disagrees with wave")
+            formal_name = wr.get("formal_name", "")
+            if source_text and not re.search(
+                    rf"^\s*Definition\s+{re.escape(formal_name)}\b", source_text, re.M):
+                errors.append(f"{slug}: {formal_name} is not Defined in {source}")
+            if prospective and state == "done" and not wr.get("grounding"):
+                errors.append(f"{slug}: prospective done row lacks grounding metadata")
+
+    wave_phases = {wave.get("phase") for wave in waves.values()}
+    orphaned = [r["slug"] for r in rows
+                if r.get("phase") in wave_phases and not r.get("alias_of")
+                and not r.get("already_formalized") and r["slug"] not in covered]
+    if orphaned:
+        errors.append(f"manifest wave rows absent from v2_statement_waves: {orphaned[:6]}")
+
+    provenance = manifest.get("provenance", {})
+    if not re.fullmatch(r"[0-9a-f]{40}", provenance.get("graph_conjectures_commit", "")):
+        errors.append("manifest does not pin a graph_conjectures_commit")
+    for field in ("arxiv_conjectures_sha256", "erdos_graph_sha256", "intersection_sha256",
+                  "arxiv_opg_matches_sha256"):
+        if not re.fullmatch(r"[0-9a-f]{64}", provenance.get(field, "")):
+            errors.append(f"manifest provenance has invalid {field}")
+
+    if errors:
+        sys.exit("V2 LOCAL-REPLAY GATE FAILED:\n  - " + "\n  - ".join(errors[:30]))
+    print(f"v2 local-replay gate OK: {len(rows)} pinned rows, {len(waves)} waves, "
+          "all overlay legs and prospective policy consistent")
+
+
+SOURCE_INPUTS = [
+    os.path.join(GC, "data", "arxiv_conjectures.json"),
+    os.path.join(GC, "data", "erdos_graph.json"),
+    os.path.join(GC, "data", "intersection.json"),
+    os.path.join(GC, "data", "arxiv_opg_matches.json"),
+    os.path.join(GC, "ARXIV_OPEN_DIFFICULTY_RANKING.md"),
+]
+if not all(os.path.isfile(path) for path in SOURCE_INPUTS):
+    if "--check" in sys.argv and "--require-upstream" not in sys.argv:
+        local_replay_check()
+        sys.exit(0)
+    sys.exit("graph-conjectures inputs unavailable; set GRAPH_CONJECTURES, or use --check "
+             "without --require-upstream for the pinned local replay")
 
 # ── S3 errata status corrections (ABOULKER_CONJECTURES_RANKED.md, revised draft 2026-05-21) ──
 ERRATA = [
@@ -641,8 +762,9 @@ if os.path.exists(WAVES_PATH):
                     f"BLOCKED — {wr.get('blocked_reason', wr.get('note', ''))}")[:600]
             r["source_locator"] = (r.get("source_locator") or "") + \
                 f" | Rocq: {repo}/theories/conjectures/{defines_file}#{wr['formal_name']}"
+            grounding_state = "done" if state == "done" and wr.get("grounding") else "todo"
             wave_overlay[slug] = {
-                "statement": state, "grounding": "todo", "edges": "todo",
+                "statement": state, "grounding": grounding_state, "edges": "todo",
                 "correspondence": "todo", "audit_page": "todo",
                 "commit": wave.get("commit", phase.lower()), "package": repo,
                 "note": r["verification_note"],
@@ -738,6 +860,7 @@ if "--check" in sys.argv:
     old_ov = open(OUT_OVERLAY).read() if os.path.exists(OUT_OVERLAY) else ""
     if old != new or old_ov != new_overlay:
         sys.exit("V2-MANIFEST DRIFT: regenerate with `python3 meta/build_v2_manifest.py`")
+    local_replay_check()
     print(f"v2-manifest gate OK: {totals['rows']} rows ({totals['by_corpus']}), no drift")
 else:
     open(OUT_MANIFEST, "w").write(new)

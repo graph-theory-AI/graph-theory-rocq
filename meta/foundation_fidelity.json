@@ -1,0 +1,182 @@
+{
+ "schema_version": 1,
+ "audit_source": "meta/BLOCKED_RETARGETING_AUDIT.md (2026-07-17), with repaired-row re-verification recorded 2026-07-18",
+ "verdicts": [
+  "FAITHFUL",
+  "LIGHTWEIGHT",
+  "BROKEN"
+ ],
+ "modules": {
+  "GTBase.finite_graph": {
+   "path": "base/theories/finite_graph.v",
+   "default": {
+    "verdict": "FAITHFUL",
+    "note": "Finite weighted-space and labelled-graph primitives have their literal finite combinatorial meanings."
+   },
+   "overrides": {
+    "fg_event_at_least_ratio": {
+     "verdict": "LIGHTWEIGHT",
+     "note": "A threshold on one finite space, not a with-high-probability notion. Do not use it to encode almost-all or whp claims."
+    },
+    "fg_event_at_most_ratio": {
+     "verdict": "LIGHTWEIGHT",
+     "note": "A threshold on one finite space, not an asymptotic probability notion."
+    }
+   },
+   "machine_evidence": [
+    "fg_srel_sym",
+    "fg_srel_irrefl"
+   ]
+  },
+  "GTBase.surface": {
+   "path": "base/theories/surface.v",
+   "default": {
+    "verdict": "LIGHTWEIGHT",
+    "note": "The module supplies a finite rotation-system surface, not a drawing/crossing layer; consumers must respect connectedness and cellular-embedding assumptions."
+   },
+   "overrides": {
+    "surface_dart": {
+     "verdict": "FAITHFUL",
+     "note": "Directed darts of the undirected edge relation."
+    },
+    "surface_rev_dart": {
+     "verdict": "FAITHFUL",
+     "note": "Dart reversal."
+    },
+    "surface_edge_perm": {
+     "verdict": "FAITHFUL",
+     "note": "The involutive edge permutation on darts."
+    },
+    "surface_embedding": {
+     "verdict": "FAITHFUL",
+     "note": "A genuine local rotation system."
+    },
+    "surface_face_perm": {
+     "verdict": "FAITHFUL",
+     "note": "Face permutation induced by rotation and dart reversal."
+    },
+    "same_colour_on": {
+     "verdict": "FAITHFUL",
+     "note": "Literal monochromatic-set predicate."
+    },
+    "clustered_colouring": {
+     "verdict": "FAITHFUL",
+     "note": "A k-colouring whose monochromatic connected sets have size at most the explicit bound c."
+    },
+    "surface_embeddable_with_boundary": {
+     "verdict": "BROKEN",
+     "note": "The boundary witness can be empty, so the boundary parameter is vacuous."
+    },
+    "clustered_chromatic_at_most": {
+     "verdict": "BROKEN",
+     "note": "Its graph-local existential clustering bound is vacuous for finite graphs when used as a class-uniform conclusion; quantify c before the graph class instead."
+    }
+   },
+   "machine_evidence": [
+    "surface_rev_dartK"
+   ]
+  },
+  "GTBase.complexity": {
+   "path": "base/theories/complexity.v",
+   "default": {
+    "verdict": "FAITHFUL",
+    "note": "Output and cost are coupled through one fixed interpreter; no independently chosen zero-cost function exists."
+   },
+   "overrides": {},
+   "machine_evidence": [
+    "pcost_pos",
+    "no_zero_cost_program",
+    "trivial_decider",
+    "Peq_diag"
+   ]
+  },
+  "GTBase.graph_metric": {
+   "path": "base/theories/graph_metric.v",
+   "default": {
+    "verdict": "FAITHFUL",
+    "note": "Finite graph-distance, metric-line, deletion, and bridge primitives have their literal meanings; this module does not provide coarse asymptotic dimension or shallow minors."
+   },
+   "overrides": {},
+   "machine_evidence": [
+    "graph_dist_ex"
+   ]
+  },
+  "GTBase.asymptotics": {
+   "path": "base/theories/asymptotics.v",
+   "default": {
+    "verdict": "FAITHFUL",
+    "note": "Natural-valued eventual O/Omega/Theta and epsilon-free little-o/subpolynomial predicates retain their stated two-sided or quantified meanings."
+   },
+   "overrides": {},
+   "machine_evidence": [
+    "eventually_mono",
+    "big_Theta_nat_refl",
+    "little_o_zero_nat",
+    "sqrt_ceil_spec"
+   ]
+  },
+  "GTBase.list_flexibility": {
+   "path": "base/theories/list_flexibility.v",
+   "default": {
+    "verdict": "FAITHFUL",
+    "note": "Weighted and unweighted request satisfaction use explicit positive rational parameters and proper list colourings."
+   },
+   "overrides": {},
+   "machine_evidence": [
+    "weighted_epsilon_flexible_params",
+    "epsilon_flexible_params"
+   ]
+  },
+  "GTBase.posets": {
+   "path": "base/theories/posets.v",
+   "default": {
+    "verdict": "FAITHFUL",
+    "note": "Finite poset, cover graph, realizer, and dimension vocabulary has its standard finite meaning."
+   },
+   "overrides": {},
+   "machine_evidence": [
+    "poset_cover_adj_sym",
+    "poset_cover_adj_irrefl",
+    "unit_poset_le_trans"
+   ]
+  },
+  "GTBase.base": {
+   "path": "base/theories/base.v",
+   "default": null,
+   "overrides": {
+    "girth_geq": {
+     "verdict": "FAITHFUL",
+     "note": "Lower bound on lengths of genuine undirected cycles."
+    },
+    "has_girth": {
+     "verdict": "FAITHFUL",
+     "note": "Exact girth: a witnessed g-cycle plus the lower-bound predicate."
+    },
+    "wagner_planar": {
+     "verdict": "FAITHFUL",
+     "note": "Finite simple-graph planarity through Wagner's forbidden-minor characterization."
+    }
+   },
+   "machine_evidence": []
+  },
+  "GTMisc.conjectures.D7": {
+   "path": "graph-theory-misc/theories/conjectures/D7.v",
+   "default": null,
+   "overrides": {
+    "poly_reduces": {
+     "verdict": "LIGHTWEIGHT",
+     "note": "Relational reduction vocabulary with a decoupled abstract cost function; unsuitable for positive algorithm-existence claims."
+    },
+    "in_NP": {
+     "verdict": "LIGHTWEIGHT",
+     "note": "The verifier and verifier-cost function are decoupled. Use only as an abstract relational layer until GTBase gains a coupled NP verifier."
+    },
+    "NP_hard": {
+     "verdict": "LIGHTWEIGHT",
+     "note": "Machine-free relational hardness layer; acceptable only when the claim is explicitly at that abstraction level."
+    }
+   },
+   "machine_evidence": []
+  }
+ }
+}
