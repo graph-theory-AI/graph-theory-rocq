@@ -26,21 +26,34 @@ Definition x127_two_tree_width_le (G : sgraph) (k : nat) : Prop :=
 
 (** ** X127 statements *****************************************************)
 
-(** Dujmović–Joret–Morin–Norin–Wood question: is there a single function
-    f : ℕ → ℕ such that every graph G of 2-tree-width at most k is f(k)-colourable?
-    The ∃ f comes BEFORE the ∀ k, G (one universal function); chromatic number is
-    the corpus [χ([set: G])].
-
-    FAITHFUL-TO-REFUTED (like X14/X92/X73): this DJMNW question is now RESOLVED
-    NEGATIVELY.  Felsner–Joret–Micek–Trotter–Wiechert (arXiv:1703.07871) show the
-    Burling graphs G_k have χ(G_k) ≥ k (Thm 1) yet admit a tree-decomposition and
-    a path-decomposition — hence two tree-decompositions — with all pairwise bag
-    intersections ≤ 2 (Thm 2), i.e. 2-tree-width ≤ 2 with unbounded χ; so no such
-    f exists and the statement below is FALSE.  The encoding is nonetheless the
-    faithful reading of the row's (open-as-recorded) question — the leg tracks
-    faithful formalization, not truth.  Note: this is DISTINCT from FJMTW's
-    separate still-open Conjecture 3 (which restricts to a *spaghetti*
-    tree-decomposition orthogonal to a path-decomposition). *)
+(** Corpus row: studies:std_dujmovi_joret_morin_norin_wood_question_2_tree_w
+    Site: none
+    Review: none
+    English statement: (Dujmovic, Joret, Morin, Norin and Wood, question on 2-tree-width and
+      chromatic number)
+      There is a single function f from the naturals to the naturals such that for every
+      natural number k, every finite simple graph of 2-tree-width at most k has chromatic
+      number at most f(k).
+    Definitions: [x127_two_tree_width_le G k] - G admits two tree-decompositions whose bags are
+      pairwise k-orthogonal: every bag of the first decomposition meets every bag of the second
+      in at most k vertices (minor-theory/theories/conjectures/X127.v);
+      [x27_tree_decomposition bag] - every vertex lies in some bag, every edge has both ends in
+      a common bag, and the bags containing a fixed vertex form a connected set of the index
+      tree (minor-theory/theories/conjectures/X27.v).
+    Notes: the function f is quantified before k and G, so one function must serve all k.  The
+      "2" of 2-tree-width counts the decompositions, not the width; the parameter is the
+      minimum k for which such a pair exists, so "2-tree-width at most k" is exactly the
+      existence of such a pair, and every graph has 2-tree-width at most its number of vertices
+      via two single-bag decompositions, so the hypothesis is not vacuous.  This is the k = 2
+      case of median tree-width (Felsner, Joret, Micek, Trotter, Wiechert, arXiv:1703.07871).
+      FAITHFUL-TO-REFUTED: the question is resolved negatively - the Burling graphs have
+      chromatic number at least k (their Theorem 1) yet admit a tree-decomposition and a
+      path-decomposition with all pairwise bag intersections of size at most 2 (their
+      Theorem 2), so no such f exists and this statement is false.  The encoding is still the
+      faithful reading of the row as recorded (the statement leg tracks faithfulness, not
+      truth).  It is distinct from the same authors' still-open Conjecture 3, which restricts
+      the first decomposition to a spaghetti tree-decomposition orthogonal to a
+      path-decomposition. *)
 Definition dujmovic_joret_morin_norin_wood_two_tree_width_chi_statement : Prop :=
   exists f : nat -> nat,
     forall (k : nat) (G : sgraph),

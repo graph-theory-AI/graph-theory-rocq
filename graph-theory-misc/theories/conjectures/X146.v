@@ -54,8 +54,27 @@ Definition x146_every_A_path_hits_ball
 
 (** ** X146 statements *****************************************************)
 
-(** Geelen coarse Gallai: either there are k pairwise distance-at-least-d
-    A-paths, or a bounded set Z has a g(d)-neighbourhood meeting every A-path. *)
+(** Corpus row: studies:std_geelen_s_coarse_gallai_conjecture
+    Site: none
+    Review: none
+    English statement: (Geelen, coarse Gallai conjecture)
+      There are functions f and g such that for all k, d >= 1, every finite simple graph G and
+      every vertex set A, either G contains k distinct A-paths that are pairwise at distance at
+      least d, or there is a vertex set Z with |Z| <= f(k) such that every A-path contains a
+      vertex in the closed g(d)-ball around Z.
+    Definitions: [x146_ball r x] / [x146_set_ball r S] - the closed r-ball around a vertex and
+      around a vertex set (this file); [x146_path_vertices p] - the vertex set of a walk (this
+      file); [x146_A_path A p] - a simple path whose two distinct endpoints lie in A and none
+      of whose internal vertices does (this file); [x146_pairwise_distant_A_paths d ps] -
+      distinct paths of ps are vertex-disjoint and the closed (d-1)-ball around one avoids the
+      other (this file); [x146_has_k_distant_A_paths A d k] - k distinct such paths exist (this
+      file); [x146_every_A_path_hits_ball A Z r] - every A-path meets the closed r-ball around
+      Z (this file).
+    Notes: f and g are chosen before k, d, G and A, matching the min-max shape of the source.
+      "Distance at least d" is rendered as vertex-disjointness together with the (d-1)-ball
+      condition, so d = 1 means exactly vertex-disjoint.  The source conclusion "G minus the
+      g(d)-neighbourhood of Z has no A-path" is stated in the equivalent hitting form "every
+      A-path of G meets that neighbourhood". *)
 Definition geelen_coarse_gallai_A_paths_statement : Prop :=
   exists f g : nat -> nat,
     forall (k d : nat) (G : sgraph) (A : {set G}),

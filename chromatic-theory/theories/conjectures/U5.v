@@ -126,12 +126,28 @@ Definition strong_edge_colourable (G : sgraph) (k : nat) : Prop :=
     (forall x y u v : G, x -- y -> u -- v ->
         diff_edge x y u v -> near_edge x y u v -> col x y != col u v).
 
-(** Non-triviality guard [0 < Delta G]: for an edgeless graph Delta G = 0, the
-    even branch gives bound 0 and the conclusion would demand a TOTAL function
-    into the empty ordinal ['I_0] (refutable on any inhabited vertex type).  The
-    guard excludes exactly that degenerate edgeless case; sχ'(edgeless)=0 ≤ 0 is
-    mathematically trivial and so harmlessly dropped.  For [0 < Delta G] both
-    branches are ≥ 1, so the colour type is inhabited. *)
+(** Corpus row: opg:strong_edge_colouring_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/strong_edge_colouring_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/strong_edge_colouring_conjecture.json
+    English statement: (Erdos and Nesetril 1989; Open Problem Garden, "Strong edge colouring conjecture")
+      Every finite simple graph G with maximum degree at least 1 has a strong edge colouring using
+      5*Delta^2/4 colours when Delta is even and (5*Delta^2 - 2*Delta + 1)/4 colours when Delta is
+      odd, where a strong edge colouring gives distinct colours to any two distinct edges that share
+      a vertex or have an endpoint of one adjacent to an endpoint of the other, i.e. every colour
+      class is an induced matching.
+    Definitions: [strong_edge_colourable G k] - there is a symmetric map col from ordered vertex
+      pairs to ['I_k] such that any two adjacent pairs that are distinct as unordered pairs and are
+      near receive different colours (this file); [diff_edge x y u v] - the unordered pairs {x,y}
+      and {u,v} differ (this file); [near_edge x y u v] - the two pairs share a vertex or some
+      endpoint of one is adjacent to some endpoint of the other, i.e. line-graph distance at most 1
+      (this file); [Delta] (GTBase base/theories/base.v).
+    Notes: Edges are modelled as a SYMMETRIC function on adjacent vertex pairs rather than as a
+      separate edge type, which is faithful for simple graphs since a pair carries at most one edge.
+      Both bounds are exact integers, 4 divides 5*Delta^2 for even Delta and 5*Delta^2 - 2*Delta + 1
+      for odd Delta, so the truncating nat division %/ 4 loses nothing. The guard 0 < Delta G
+      excludes the edgeless case, where the even branch would give the bound 0 and force a total
+      function into the empty ordinal, making the statement false for a degenerate reason; the
+      excluded case is trivially true mathematically. *)
 Definition strong_edge_colouring_statement : Prop :=
   forall G : sgraph, 0 < Delta G ->
     strong_edge_colourable G
@@ -153,6 +169,23 @@ Definition is_r_graph (G : mgraph) (r : nat) : Prop :=
   (forall v : G, #|edges_at v| = r) /\
   (forall X : {set G}, odd #|X| -> r <= #|edge_boundary X|).
 
+(** Corpus row: opg:seymours_r_graph_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/seymours_r_graph_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/seymours_r_graph_conjecture.json
+    English statement: (Seymour 1979; Open Problem Garden, "Seymour's r-graph conjecture")
+      For every r and every multigraph G that is an r-graph, that is every vertex is incident with
+      exactly r edges and every vertex set of odd size has at least r edges in its edge boundary,
+      the chromatic index of G is at most r.
+    Definitions: [is_r_graph G r] - r-regularity counted with parallel edges together with the
+      odd-cut condition |edge boundary of X| >= r for every X of odd size (this file);
+      [edge_boundary X] - the edges with exactly one endpoint in X (this file); [edge_colourable G
+      k] - the chromatic index of G, i.e. chi of its line graph, is at most k (GTBase
+      base/theories/base.v).
+    Notes: DISCREPANCY with the corpus text: the source conjecture is chi'(G) <= r + 1 for every
+      r-graph, whereas the Rocq body concludes [edge_colourable G r], i.e. chi'(G) <= r. As written
+      the Rocq statement is strictly stronger than Seymour's conjecture and is in fact refutable:
+      the Petersen graph is a 3-graph with chromatic index 4. This is recorded in
+      meta/STATEMENT_IMPROVEMENTS.md; the body is left untouched here, WP4 changes comments only. *)
 Definition seymours_r_graph_statement : Prop :=
   forall (r : nat) (G : mgraph), is_r_graph G r -> edge_colourable G r.
 
@@ -199,6 +232,25 @@ Inductive subdivR_s : sgraph -> sgraph -> Prop :=
 Definition homeomorphic_s (G H : sgraph) : Prop :=
   exists K : sgraph, subdivR_s K G /\ subdivR_s K H.
 
+(** Corpus row: opg:3_edge_coloring_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/3_edge_coloring_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/3_edge_coloring_conjecture.json
+    English statement: (Open Problem Garden, "3-Edge-Coloring Conjecture")
+      For every loopless cubic multigraph G that is connected, has more than two vertices and has a
+      proper 3-edge-colouring, there are an edge e of G and a cubic multigraph H such that the
+      underlying simple graph of H is homeomorphic to the underlying simple graph of G with e
+      deleted, and H also has a proper 3-edge-colouring.
+    Definitions: [cubic G] - every vertex is incident with exactly 3 edges, parallel edges counted
+      (this file); [mconnected G] - the underlying simple graph is [connected] (this file);
+      [remove_edge e] - delete the single edge e (this file); [usimple G] - the underlying simple
+      graph of a multigraph, built from base's [madj] (this file); [homeomorphic_s G H] - G and H
+      have a common subdivision, where [subdivR_s] is the reflexive-transitive closure of single-
+      edge subdivision up to graph isomorphism (this file); [edge_colourable G 3] - chromatic index
+      at most 3 (GTBase base/theories/base.v).
+    Notes: The source phrase "the cubic graph homeomorphic to G-e" is encoded as an EXISTENTIAL
+      over cubic multigraphs H whose underlying simple graph is homeomorphic to that of G-e, since
+      suppressing the two degree-2 vertices of G-e is not a primitive here. Homeomorphism is taken
+      on the underlying SIMPLE graphs, so parallel edges created by the suppression are not tracked. *)
 Definition three_edge_coloring_statement : Prop :=
   forall G : mgraph,
     loopless G -> cubic G -> mconnected G -> 2 < #|G| -> edge_colourable G 3 ->
@@ -218,6 +270,21 @@ Definition three_edge_coloring_statement : Prop :=
 Definition overfull_parameter (G : mgraph) : nat :=
   \max_(S : {set G}) ceil_div #|edge_set S| (#|S| %/ 2).
 
+(** Corpus row: opg:goldbergs_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/goldbergs_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/goldbergs_conjecture.json
+    English statement: (Goldberg 1973, also Seymour 1979; Open Problem Garden, "Goldberg's conjecture")
+      Every multigraph G satisfies chi'(G) <= max(Delta(G) + 1, w(G)), where w(G) is the maximum
+      over vertex subsets S of the ceiling of the number of edges inside S divided by the floor of
+      |S|/2.
+    Definitions: [overfull_parameter G] - the maximum over all vertex sets S of [ceil_div
+      #|edge_set S| (#|S| %/ 2)] (this file); [ceil_div a b] - ceiling of a/b with ceil_div a 0 = 0
+      (GTBase base/theories/base.v); [mDelta G] - maximum degree of a multigraph, parallel edges
+      counted (base.v); [chromatic_index G] - chi of the line graph (base.v); [edge_set S] - the
+      edges with both endpoints in S (coq-graph-theory mgraph.v).
+    Notes: The source maximum ranges over all subgraphs H of G; the Rocq body ranges over INDUCED
+      subgraphs, given by vertex sets S, which is equivalent since removing edges only decreases the
+      numerator. The convention ceil_div a 0 = 0 makes the terms with |S| <= 1 vanish, as intended. *)
 Definition goldbergs_statement : Prop :=
   forall G : mgraph,
     chromatic_index G <= maxn (mDelta G).+1 (overfull_parameter G).
@@ -243,6 +310,22 @@ Definition simple_hg (H : hypergraph) : Prop := injective (@hinc H).
 Definition hg_codegree_le (H : hypergraph) (d r : nat) : Prop :=
   forall T : {set hv H}, #|T| = d.-1 -> #|[set e | T \subset hinc e]| <= r.
 
+(** Corpus row: opg:a_generalization_of_vizings_theorem
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/a_generalization_of_vizings_theorem/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/a_generalization_of_vizings_theorem.json
+    English statement: (Open Problem Garden, "A generalization of Vizing's Theorem?")
+      For every simple d-uniform hypergraph H with d at least 1, in which every set of d-1 points is
+      contained in at most r edges, there is a colouring of the edges by r + d - 1 colours such that
+      any two distinct edges whose intersection has exactly d-1 points receive different colours.
+    Definitions: [hypergraph] - a record with a finite point type, a finite edge type and an
+      incidence map sending each edge to its point set (this file); [uniform_hg H d] - every edge
+      has exactly d points (this file); [simple_hg H] - distinct edges have distinct point sets
+      (this file); [hg_codegree_le H d r] - every set of d-1 points is contained in at most r edges
+      (this file).
+    Notes: The number of colours r + d - 1 uses truncated nat subtraction, harmless under the
+      guard 1 <= d. "Two edges which share d-1 vertices" is read as "their intersection has exactly
+      d-1 points", which for d-uniform edges is the same as sharing at least d-1 points without
+      being equal. *)
 Definition a_generalization_of_vizings_theorem_statement : Prop :=
   forall (H : hypergraph) (d r : nat),
     1 <= d -> uniform_hg H d -> simple_hg H -> hg_codegree_le H d r ->
@@ -282,6 +365,25 @@ Definition sts_edge_colourable (G : mgraph) (S : sts) : Prop :=
 Definition is_universal_sts (S : sts) : Prop :=
   forall G : mgraph, loopless G -> cubic G -> sts_edge_colourable G S.
 
+(** Corpus row: opg:universal_steiner_triple_systems
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/universal_steiner_triple_systems/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/universal_steiner_triple_systems.json
+    English statement: (Open Problem Garden, "Universal Steiner triple systems")
+      There exists a Steiner triple system S, that is a finite point set with a family of blocks of
+      size three such that every pair of distinct points lies in exactly one block, which is
+      universal: every loopless cubic multigraph admits a colouring of its edges by points of S such
+      that at every vertex the three colours of the incident edges form a block of S.
+    Definitions: [sts] - a record with a finite point type and a set of blocks (this file);
+      [sts_valid S] - every block has exactly 3 points and every pair of distinct points lies in a
+      unique block (this file); [sts_edge_colourable G S] - there is a map from edges to points
+      whose image on the edges at each vertex is a block (this file); [is_universal_sts S] - every
+      loopless cubic multigraph is S-edge-colourable (this file); [cubic] (this file).
+    Notes: The corpus row is the classification PROBLEM "Which Steiner triple systems are
+      universal?". The Rocq body states only the associated existence proposition, that SOME valid
+      Steiner triple system is universal; it is therefore weaker than a classification and does not
+      answer the problem, it only formalises the property [is_universal_sts] the problem asks to
+      characterise. Requiring the three colours at a vertex to form a block forces them to be
+      distinct, hence the colouring is proper on cubic graphs. *)
 Definition universal_steiner_triple_systems_statement : Prop :=
   exists S : sts, sts_valid S /\ is_universal_sts S.
 
@@ -304,6 +406,21 @@ Definition acyclic_edge_colouring (G : sgraph) (k : nat) (col : G -> G -> 'I_k)
     & forall s : seq G, ucycleb (--) s -> 2 < size s ->
         2 < size (undup (edge_colour_seq col s))].
 
+(** Corpus row: opg:acyclic_edge_coloring
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/acyclic_edge_coloring/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/acyclic_edge_coloring.json
+    English statement: (Fiamcik 1978, Alon, Sudakov and Zaks 2001; Open Problem Garden, "Acyclic edge-colouring")
+      Every finite simple graph G has an edge colouring with Delta(G) + 2 colours that is proper,
+      meaning two edges sharing a vertex get different colours, and acyclic, meaning every cycle of
+      G carries at least three distinct edge colours.
+    Definitions: [acyclic_edge_colouring col] - col is symmetric, gives different colours to two
+      edges at a common vertex with distinct other ends, and every [ucycle] of size greater than 2
+      carries more than two distinct colours (this file); [edge_colour_seq col s] - the list of
+      colours of the consecutive pairs of the closed walk s, read off [zip s (rot 1 s)] (this file);
+      [Delta] (GTBase base/theories/base.v).
+    Notes: Edges are modelled as a symmetric colouring function on vertex pairs, faithful for
+      simple graphs. The size guard 2 < size s drops the empty and single-edge [ucycle] artefacts.
+      No degree guard is needed since the palette ['I_(Delta G + 2)] is always inhabited. *)
 Definition acyclic_edge_coloring_statement : Prop :=
   forall G : sgraph,
     exists col : G -> G -> 'I_(Delta G + 2), acyclic_edge_colouring col.
@@ -330,24 +447,48 @@ Definition star_edge_colouring (G : sgraph) (k : nat) (col : G -> G -> 'I_k)
           uniq [:: x0; x1; x2; x3] ->
           ~ (col x0 x1 = col x2 x3 /\ col x1 x2 = col x3 x0))].
 
+(** Corpus row: opg:star_chromatic_index_of_cubic_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/star_chromatic_index_of_cubic_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/star_chromatic_index_of_cubic_graphs.json
+    English statement: (Dvorak, Mohar and Samal 2013; Open Problem Garden, "Star chromatic index of cubic graphs")
+      Every finite simple graph with maximum degree at most 3 has a proper edge colouring with 6
+      colours in which no path with four edges and no cycle with four edges is bicoloured;
+      equivalently the star chromatic index of every subcubic graph is at most 6.
+    Definitions: [star_edge_colouring G k col] - col is symmetric, proper at every vertex, and for
+      every path on five distinct vertices the colours of the first and third edges differ or the
+      colours of the second and fourth edges differ, with the same condition for every cycle on four
+      distinct vertices (this file); [Delta] (GTBase base/theories/base.v).
+    Notes: The corpus row is the QUESTION "Is it true that for every (sub)cubic graph the star
+      chromatic index is at most 6?"; the Rocq body is its affirmative reading. "Length four" is
+      read as four EDGES, so the forbidden bicoloured configurations are a P5 and a C4; properness
+      already forbids equal consecutive colours, so being bicoloured amounts to the two stated
+      colour repetitions. Subcubic is encoded as Delta <= 3, which also covers the cubic case of the
+      title. *)
 Definition star_chromatic_index_of_cubic_graphs_statement : Prop :=
   forall G : sgraph, Delta G <= 3 ->
     exists col : G -> G -> 'I_6, star_edge_colouring col.
 
-(** ============================================================================
-    Row 9 — Behzad's total colouring conjecture — OPEN.
-    "A total colouring assigns colours to vertices AND edges so adjacent
-    vertices, adjacent edges, and incident vertex–edge pairs differ; χ''(G) is
-    the minimum.  Behzad: χ''(G) = Δ(G)+1 or Δ(G)+2."  Stated as the two-sided
-    bound Δ+1 ≤ χ''(G) ≤ Δ+2.
-
-    CARRIER: Behzad's Total Colouring Conjecture is a statement about SIMPLE
-    graphs; over multigraphs the Δ+2 upper bound is FALSE (the "fat triangle"
-    K3 with p parallel edges per pair is loopless with Δ=2p but χ''≥χ'=3p>2p+2
-    for p≥3).  We therefore guard with [msimple G] (loopless + no parallel
-    edges) so the statement is exactly the open conjecture, while still reusing
-    base's [total_chromatic_number] machinery on [mgraph]. *)
-
+(** Corpus row: opg:behzads_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/behzads_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/behzads_conjecture.json
+    English statement: (Behzad 1965 and Vizing 1964; Open Problem Garden, "Total Colouring Conjecture")
+      For every multigraph G that is simple, i.e. loopless and without parallel edges, and has at
+      least one vertex, the total chromatic number of G is at least Delta(G) + 1 and at most
+      Delta(G) + 2, which is the source's "the total chromatic number equals Delta + 1 or Delta + 2".
+    Definitions: [msimple G] - G is loopless and the endpoint-pair map on edges is injective, so G
+      has no parallel edges (this file); [edge_ends e] - the set of endpoints of e (this file);
+      [total_chromatic_number G] - chi of the total graph of G (GTBase base/theories/base.v);
+      [mDelta G] - multigraph maximum degree (base.v).
+    Notes: Carrier choice is load-bearing: Behzad's conjecture is about SIMPLE graphs, and over
+      multigraphs the Delta + 2 upper bound is false, as the triangle with p parallel edges per pair
+      is loopless with Delta = 2p but has total chromatic number at least chi' = 3p > 2p + 2 for p
+      >= 3. The guard [msimple G] restricts the statement to exactly the open conjecture while
+      reusing the multigraph total-colouring machinery of base. The disjunction "Delta+1 or Delta+2"
+      is stated as the equivalent two-sided bound.
+      GUARD REPAIR (2026-09-24, wave E2b): the unguarded body was axiom-free refutable on the empty
+      multigraph (the empty multigraph is simple with mDelta = 0 and total chromatic number 0, so
+      the lower bound 1 <= 0 fails); the guard [0 < #|G|] excludes only the empty graph, where
+      Behzad's lower bound Delta + 1 <= chi'' is meaningless. *)
 Definition behzads_statement : Prop :=
-  forall G : mgraph, msimple G ->
+  forall G : mgraph, msimple G -> (0 < #|G|)%N ->
     (mDelta G).+1 <= total_chromatic_number G <= (mDelta G).+2.

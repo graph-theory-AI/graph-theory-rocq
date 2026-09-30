@@ -35,7 +35,24 @@ Definition x25_perfect_one_factorization
 
 (** ** X25 statements ******************************************************)
 
-(** Studies slice: Kotzig's perfect 1-factorization conjecture. *)
+(** Corpus row: studies:std_kotzig_s_perfect_1_factorization_conjecture
+    Site: none
+    Review: none
+    English statement: (Kotzig, "Kotzig's perfect 1-factorization conjecture")
+      For every even n > 2 there is a colouring col of the vertex pairs of the complete
+      graph K_n by n-1 colours such that each colour class is a perfect matching of
+      K_n, and the union of any two distinct colour classes is the edge set of a
+      Hamiltonian cycle of K_n.
+    Definitions: [x25_edge_set G] — the two-element vertex sets {x, y} with x -- y
+      (this file); [x25_perfect_matching M] — a set of edges in which every vertex lies
+      in exactly one (this file); [x25_cycle_edge_seq c] — the edges of the closed walk
+      through the sequence c (this file); [x25_hamiltonian_edge_set F] — F is the edge
+      set of some uniq cycle visiting all |V(G)| vertices (this file);
+      [x25_perfect_one_factorization col] — the two conditions above (this file);
+      ['K_n] — the complete graph, [ucycle] — MathComp / coq-graph-theory.
+    Notes: col is typed as a total function on all vertex sets of K_n, but only its
+      restriction to edges matters, since the colour classes are carved out of
+      [x25_edge_set 'K_n]. "n even and n > 2" is written [2 < n] and [~~ odd n]. *)
 Definition kotzig_perfect_one_factorization_statement : Prop :=
   forall n : nat,
     2 < n ->

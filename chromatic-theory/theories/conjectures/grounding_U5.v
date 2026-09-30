@@ -18,6 +18,7 @@
 
 From GTBase Require Import base.
 From GraphTheory Require Import mgraph.
+From Chromatic.foundations Require Import chi_bounding.
 From Chromatic.conjectures Require Import U5.
 
 Set Implicit Arguments.
@@ -320,6 +321,36 @@ split.
 Qed.
 
 (** ============================================================================
+    Row 9 — [behzads_statement]: guard repair (wave E2b, 2026-09-24).
+    ========================================================================== *)
+
+(** ** Guard has teeth: the OLD (unguarded) body, spelled out inline, is
+    refutable -- the empty multigraph is simple, has [mDelta = 0] and total
+    chromatic number [0], so the lower bound [1 <= 0] fails.  The guard
+    [0 < #|G|] of the repaired row excludes exactly this counterexample. *)
+Lemma behzads_unguarded_body_refutable :
+  ~ (forall G : mgraph, msimple G ->
+       (mDelta G).+1 <= total_chromatic_number G <= (mDelta G).+2).
+Proof.
+move=> H.
+pose G : mgraph := @void_graph unit unit.
+have sG : msimple G by split; [case | case].
+have /andP[lo _] := H G sG.
+have f : total_graph G -> 'I_0 by case=> -[].
+have hf : forall x y : total_graph G, x -- y -> f x != f y by case=> -[].
+by move: (leq_trans lo (chi_le_palette hf)); rewrite card_ord.
+Qed.
+
+(** ** Non-vacuity: a concrete NON-EMPTY simple multigraph (one vertex, no
+    edges) meets both hypotheses of the repaired row. *)
+Lemma behzads_hypotheses_satisfiable :
+  exists G : mgraph, msimple G /\ (0 < #|G|)%N.
+Proof.
+exists (unit_graph tt); split; first exact: msimple_unit.
+by apply/card_gt0P; exists tt.
+Qed.
+
+(** ============================================================================
     Axiom-freeness audit for the (tooling-awkward) trailing statements.
     ========================================================================== *)
 
@@ -332,3 +363,5 @@ Print Assumptions universal_steiner_triple_systems_statement.
 Print Assumptions acyclic_edge_coloring_statement.
 Print Assumptions star_chromatic_index_of_cubic_graphs_statement.
 Print Assumptions behzads_statement.
+Print Assumptions behzads_unguarded_body_refutable.
+Print Assumptions behzads_hypotheses_satisfiable.

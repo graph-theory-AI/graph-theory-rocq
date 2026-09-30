@@ -12,18 +12,86 @@
       owned here:   [Delta] (Δ), [common_nbr], [regular], [girth_geq], [ceil_div].
 
     Planarity is NOT here yet: the [coq-graph-theory-planar] / [coq-fourcolor]
-    layer (plan gate G2) is added only once that spike passes. *)
+    layer (plan gate G2) is added only once that spike passes.
+
+    ** Vocabulary statements MUST use (WP4b)
+
+    Before introducing a [Local xNNN_...] definition in a conjecture file, look
+    here and in [GRAPHTHEORY_API.md] / [MATHCOMP_EXTRAITS.md].  A notion needed by
+    >= 2 packages belongs in [GTBase.common]; by >= 2 waves of one package, in that
+    package's [foundations/]; only then local.
+
+    From coq-graph-theory (all re-exported above):
+    - [sgraph.v]: [sgraph], [x -- y], [N(x)] ([open_neigh]), [NS(S)],
+      [E(G)] ([sg_edge_set]), [in_edges], [card_edge_Kn], [connected],
+      [connectedb], [clique]/[cliqueb], [is_forest]/[is_tree]/[is_forestb],
+      [Path]/[upath]/[irred]/[IPath], [subgraph]/[induced]/[induced_type],
+      [add_node]/[del_edges], ['K_n] ([complete]), ['K_n,m] ([KB]),
+      [diso] ([F ≃ G]), [num_edges], [components].
+    - [digraph.v]: [diGraph] ([relType]), [DiGraph], [edge_rel], [connect],
+      [Path]/[pathp]/[upath], [induced]/[del_edge] on digraphs.
+    - [connectivity.v]: [separator]/[separatorb], [separates], [vseparator],
+      [kconnected] ([k.-connected], Menger form), [matching], [dimatching].
+    - [minor.v]: [minor], [strict_minor], [minor_map], [minor_rmap] (re-exported as
+      abbreviations).  [K4_free] is NOT re-exported — see the import block below.
+    - [treewidth.v]: [sdecomp] (tree decomposition; [width] itself is in [sgraph.v]).
+    - [dom.v]: [stable], [dominating], [irredundant] (booleans), [max_st]/[min_dom]/
+      [max_irr], the weighted [gamma_w]/[alpha_w]/[IR_w], [hereditary]/
+      [superhereditary], [weight_set].  NB these live in
+      [Section Domination_Theory (G : sgraph)], so after the section they read
+      [stable S], [dominating S], ... with [G] implicit.
+    - [coloring.v]: [coloring], [chi_mem] ([χ(A)]), [omega_mem] ([ω(A)]), [α].
+    - MathComp [path.v]: [path]/[sorted], [cycle]/[ucycle]/[ucycleb], [upath],
+      [arc], [rot], [next].
+    - [partition.v] / [helly.v] are LEMMA modules: [Require Import] them on demand.
+
+    From [GTBase.common] (see that file): [sg_edge_setE]/[in_sg_edge_set] (the
+    bridge from the local [*_edge_set] comprehensions to [E(G)]; there is NO
+    [edge_set] in base — that name belongs to [mgraph.edge_set]), [edge_disjoint],
+    [perfect_matching], [hamiltonian_cycle]/[hamiltonian], [hamiltonian_path]/
+    [traceable], [del_edge_set], [k_edge_connected], [has_subgraph],
+    [induced_free], [complete_bipartite], [oriented], [tournament], [acyclic].
+
+    Owned by this file: [Delta] (Δ), [ceil_div], [common_nbr], [regular],
+    [girth_geq], [has_girth], [bipartite], [triangle_free], [cycle_graph],
+    [k_connected] (Whitney form, with [k_connected1]; the library's Menger-form
+    [kconnected] is also available), [k_degenerate]/[k_degenerate_on], [average_degree_geq],
+    [is_hom]/[homs_to]/[is_core], [cartesian_product], [tensor_product],
+    [graph_power], [subdivision], [frac_power], [wagner_planar], [minor_card],
+    [mgraph] notation, [loopless], [line_graph], [total_graph],
+    [chromatic_index] (χ'), [total_chromatic_number] (χ''), [edge_colourable],
+    [total_colourable], [mDelta], [uwalk], [list_colourable]/[list_colourable_on],
+    [choosable], [is_choice_number].
+    Owned by the other [GTBase] modules re-exported below: [asymptotics],
+    [complexity], [finite_graph], [graph_metric] (distances), [list_flexibility],
+    [posets], [surface]. *)
 
 From mathcomp Require Export all_boot.
-From GraphTheory Require Export digraph sgraph coloring.
+(* WP4b: the core undirected vocabulary of coq-graph-theory is exported from ONE place.
+   [connectivity] (connected/connectedb, separator/separates/vseparator, kconnected,
+   matching/dimatching), [treewidth] (sdecomp) and [dom]
+   (stable/dominating/irredundant, gamma_w/alpha_w/IR_w) joined the original
+   [digraph sgraph coloring] so that conjecture statements reuse the library instead of
+   re-encoding these notions locally.  [partition]/[helly] stay out: they are lemma modules,
+   imported on demand.  The package is compiled with [-w -notation-overridden]. *)
+From GraphTheory Require Export digraph sgraph coloring connectivity treewidth dom.
 (* mgraph is IMPORTED, not EXPORTED: base needs the multigraph type to define the line/total
    graph below, but mgraph's notations/coercions would shadow the sgraph vocabulary in pure-sgraph
    importers (U1/U3). Downstream gets base's [mgraph] notation + line_graph/total_graph/χ'/χ'';
    an mgraph-area milestone (U5) imports mgraph itself for the raw edge/source/incident API. *)
 From GraphTheory Require Import mgraph.
-(* minor is IMPORTED (for the combinatorial [wagner_planar] definition); downstream uses
-   [wagner_planar] opaquely and need not import minor. *)
+(* minor is IMPORTED and then SELECTIVELY re-exported.  A full [Require Export minor] also
+   exports [minor.K4_free] (on [sgraph]), which shadows the [K4_free] on [iGraph] owned by
+   infinite-graph-theory/foundations/igraph.v and breaks
+   infinite-graph-theory/theories/conjectures/grounding_D4inf1.v (a file base does not own).
+   The abbreviations below give downstream the minor vocabulary without that one name;
+   a package that wants [K4_free] on [sgraph] does [From GraphTheory Require Import minor]. *)
 From GraphTheory Require Import minor.
+Notation minor := GraphTheory.core.minor.minor.
+Notation strict_minor := GraphTheory.core.minor.strict_minor.
+Notation minor_map := GraphTheory.core.minor.minor_map.
+Notation minor_rmap := GraphTheory.core.minor.minor_rmap.
+From GTBase Require Export common.
 From GTBase Require Export asymptotics.
 From GTBase Require Export complexity.
 From GTBase Require Export finite_graph.
@@ -234,6 +302,16 @@ Definition mDelta (G : mgraph) : nat := \max_(v : G) #|edges_at v|.
     Uses [ [set: G] :\: S ] (= [~: S]) — the form U2/U9 already use. *)
 Definition k_connected (G : sgraph) (k : nat) : Prop :=
   (k < #|G|) /\ forall S : {set G}, #|S| < k -> connected ([set: G] :\: S).
+
+(** Consistency of the Whitney form at [k = 1]: 1-connected = at least two
+    vertices and connected (companion of [common.k_edge_connected1]). *)
+Lemma k_connected1 (G : sgraph) :
+  k_connected G 1 <-> (1 < #|G|) /\ connected [set: G].
+Proof.
+split=> -[cG hG]; split => //.
+- by have := hG set0; rewrite cards0 setD0 => /(_ isT).
+- by move=> S; rewrite ltnS leqn0 cards_eq0 => /eqP ->; rewrite setD0.
+Qed.
 
 (** Triangle-free: no three mutually adjacent vertices. *)
 Definition triangle_free (G : sgraph) : Prop :=

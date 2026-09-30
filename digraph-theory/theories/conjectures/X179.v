@@ -48,8 +48,25 @@ Definition x179_arc_kappa_maderian (D : diGraphType) : Prop :=
 
 (** ** X179 statements *****************************************************)
 
-(** Problem 16 from Aboulker-Cohen-Havet-Lochet-Moura-Thomasse: are all
-    digraphs kappa-maderian and kappa'-maderian? *)
+(** Corpus row: arxiv:1610.00876#05
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1610.00876__05/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1610.00876__05.json
+    English statement: (Aboulker, Cohen, Havet, Lochet, Moura, Thomasse 2016, arXiv:1610.00876, Problem 16)
+      Every finite digraph D is kappa-maderian and kappa-prime-maderian: there is a k such that
+      every k-strongly-connected digraph contains a subdivision of D, and there is a k such that
+      every k-arc-strongly-connected digraph contains a subdivision of D.
+    Definitions: [x179_k_vertex_strongly_connected G k] - deleting fewer than k vertices leaves
+      every remaining ordered pair mutually reachable (this file);
+      [x179_k_arc_strongly_connected G k] - every nonempty proper vertex set has out-cut at
+      least k (this file); [x179_directed_subdivision G D] - injective branch vertices in G
+      with, for every arc of D, an internally-branch-free directed path (this file);
+      [x179_kappa_maderian] / [x179_arc_kappa_maderian] (this file).
+    Notes: The corpus poses two questions (are all digraphs kappa-maderian,
+      kappa-prime-maderian); the body encodes the conjunction of the two affirmative answers.
+      The subdivision notion here requires only that internal vertices avoid branch vertices;
+      unlike [contains_subdivision] of conjectures/X2.v it does not require the interiors of
+      distinct replacement paths to be pairwise disjoint, so the containment is weaker and the
+      statement correspondingly weaker. *)
 Definition digraph_kappa_maderian_statement : Prop :=
   forall D : diGraphType,
     x179_kappa_maderian D /\ x179_arc_kappa_maderian D.

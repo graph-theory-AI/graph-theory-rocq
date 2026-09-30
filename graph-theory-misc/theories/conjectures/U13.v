@@ -79,6 +79,25 @@ Definition monochromatic (G : sgraph) (c : G -> bool) (Q : {set G}) : Prop :=
 Definition splits_max_cliques (G : sgraph) (c : G -> bool) : Prop :=
   forall Q : {set G}, is_max_clique Q -> ~ monochromatic c Q.
 
+(** Corpus row: opg:2_colouring_a_graph_without_a_monochromatic_maximum_clique
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/2_colouring_a_graph_without_a_monochromatic_maximum_clique/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/2_colouring_a_graph_without_a_monochromatic_maximum_clique.json
+    English statement: (Open Problem Garden, "2-colouring a graph without a monochromatic
+      maximum clique")
+      For every finite simple graph G with at least one vertex, if G has no induced cycle of
+      odd length at least 5, then there is a two-colouring of the vertices of G in which no
+      maximum clique is monochromatic, i.e. every clique of size omega(G) contains two vertices
+      of different colours.
+    Definitions: [induced_cycle f] / [has_induced_cycle G k] - an induced k-cycle is an
+      injective map f from the k cyclic positions to V(G) whose only adjacencies are the
+      cyclic-successor pairs, the iff clause making it chord-free (this file);
+      [is_max_clique Q] - Q is a clique of size omega(G) (this file); [monochromatic c Q] - c
+      is constant on Q (this file); [splits_max_cliques c] - no maximum clique is
+      monochromatic under c (this file); [clique], [omega] - cliques and the clique number
+      (coq-graph-theory / GTBase).
+    Notes: "non-empty graph" is read as "at least one vertex" ([0 < #|G|]).  The colouring is a
+      map into [bool], so exactly two colours are available and the colouring is not required
+      to be proper. *)
 Definition two_colouring_a_graph_without_a_monochromatic_maximu_statement : Prop :=
   forall G : sgraph,
     0 < #|G| ->
@@ -118,6 +137,24 @@ Definition is_book_thickness (G : sgraph) (k : nat) : Prop :=
 
 Definition subdivide1 (G : sgraph) : sgraph := subdivision G 2.
 
+(** Corpus row: opg:book_thickness_of_subdivisions
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/book_thickness_of_subdivisions/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/book_thickness_of_subdivisions.json
+    English statement: (Open Problem Garden, "Book Thickness of Subdivisions")
+      There is a function f from naturals to naturals such that, for every finite simple graph
+      G, if bG is the book thickness of G and bG' is the book thickness of the graph obtained
+      from G by subdividing every edge exactly once, then bG <= f(bG').
+    Definitions: [book_embedding G k] - there are an injective vertex position map (a linear
+      order) and a symmetric edge colouring into k colours such that no two edges of the same
+      colour cross, crossing meaning pos a < pos c < pos b < pos d for edges ab and cd (this
+      file); [is_book_thickness G k] - k is the least such number of pages (this file);
+      [subdivide1 G] - the one-subdivision of G, i.e. [subdivision G 2], one internal vertex per
+      edge (this file); [subdivision] - GTBase.
+    Notes: the book thickness is stated relationally (as a predicate "k is the book thickness")
+      rather than as a function, to stay proof-free; consequently the statement is conditional
+      on both book thicknesses being realized, and says nothing about a graph for which no
+      minimum exists.  The colouring is non-proper (edges sharing a vertex may share a
+      colour), as in the source. *)
 Definition book_thickness_of_subdivisions_statement : Prop :=
   exists f : nat -> nat,
     forall (G : sgraph) (bG bG' : nat),
@@ -147,6 +184,23 @@ Definition avgdeg_geq (G : sgraph) (d : nat) : Prop := average_degree_geq G d 1.
 Definition subgraph_of (H G : sgraph) : Prop :=
   exists f : H -> G, injective f /\ is_hom f.
 
+(** Corpus row: opg:subgraph_of_large_average_degree_and_large_average_degree
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/subgraph_of_large_average_degree_and_large_average_degree/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/subgraph_of_large_average_degree_and_large_average_degree.json
+    English statement: (Open Problem Garden, "Subgraph of large average degree and large
+      girth")
+      For all positive integers g and k there is an integer d such that every finite simple
+      graph G with at least one vertex and average degree at least d contains a non-empty
+      subgraph H whose average degree is at least k and whose girth is greater than g.
+    Definitions: [avgdeg_geq G d] - average degree at least d, in the fraction-free form
+      d * |V(G)| <= 2 * |E(G)| (this file, via [average_degree_geq] of GTBase);
+      [subgraph_of H G] - there is an injective homomorphism from H to G, i.e. G contains a
+      copy of H, not necessarily induced (this file); [oedges] / [n_edges] - the edges of a
+      simple graph as oriented pairs in [enum_rank] order, giving the true edge count (this
+      file); [girth_geq H g.+1] - girth greater than g (GTBase); [is_hom] -
+      adjacency preservation (coq-graph-theory).
+    Notes: the host graph is guarded by [0 < #|G|] because average degree is undefined on the
+      empty graph; the witness H is also required to be non-empty. *)
 Definition subgraph_of_large_average_degree_and_large_average_d_statement : Prop :=
   forall g k : nat,
     0 < g -> 0 < k ->
@@ -190,8 +244,22 @@ Definition edge_union (r1 r2 : rel V) : sgraph :=
   mk_sgraph (fun x y => r1 x y || r2 x y).
 End EdgeUnion.
 
-(* [degenerate] -> base [k_degenerate] (= k_degenerate_on [set:G]). *)
-
+(** Corpus row: opg:coloring_the_union_of_degenerate_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/coloring_the_union_of_degenerate_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/coloring_the_union_of_degenerate_graphs.json
+    English statement: (Open Problem Garden, "Coloring the union of degenerate graphs")
+      For every non-empty finite vertex type V and all edge relations r1 and r2 on V, if the
+      simple graph with edge relation r1 is 1-degenerate (a forest) and the simple graph with
+      edge relation r2 is 2-degenerate, then the simple graph whose edges are the union of r1
+      and r2 has chromatic number at most 5.
+    Definitions: [relAdj] / [mk_sgraph r] - the simple graph on V whose adjacency is the
+      symmetric irreflexive closure of r (this file); [edge_union r1 r2] - [mk_sgraph] of the
+      pointwise disjunction of the two relations (this file); [k_degenerate G k] - every
+      non-empty vertex set contains a vertex of degree at most k inside that set, which for
+      k = 1 is exactly "forest" (GTBase, equal to [k_degenerate_on [set: G]]);
+      [chi] - chromatic number (coq-graph-theory colouring).
+    Notes: an edge union needs a common vertex set, so both summands are given as edge
+      relations on one shared finite vertex type rather than as two [sgraph]s. *)
 Definition coloring_the_union_of_degenerate_graphs_statement : Prop :=
   forall (V : finType) (r1 r2 : rel V),
     0 < #|V| ->
@@ -260,6 +328,29 @@ Definition se_adj (k n : nat) : rel 'I_(k ^ (n - 1)) :=
     let t := k ^ (n - 1) in
     (val j + (t - (k * val i) %% t)) %% t < k.
 
+(** Corpus row: opg:shuffle_exchange_conjecture_graph_theoretic_form
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/shuffle_exchange_conjecture_graph_theoretic_form/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/shuffle_exchange_conjecture_graph_theoretic_form.json
+    English statement: (Open Problem Garden, "Shuffle-Exchange Conjecture (graph-theoretic
+      form)")
+      For all integers k, n >= 2, writing SE(k,n) for the shuffle-exchange stage relation on
+      the k^(n-1) positions (position i is joined to position j exactly when
+      (j - k*i) mod k^(n-1) < k), the network made of 2n-2 consecutive copies of SE(k,n) is
+      rearrangeable, and every r >= 2 for which r-1 copies already suffice satisfies
+      r >= 2n-1.  Together these say that the least number of stages r(k,n) equals 2n-1.
+    Definitions: [se_adj k n] - the shuffle-exchange stage relation above, with the modular
+      difference computed as (j + (t - (k*i) mod t)) mod t for t = k^(n-1) (this file);
+      [stage_regular], [stage_reachable], [externally_connected] - stage vocabulary (this
+      file); [multistage_route S r route pi] - a routing of the permutation pi through r
+      stages: every message starts at its own position, ends at its image, steps along S, and
+      at every layer the positions form a bijection, i.e. node-disjoint routing (this file);
+      [rearrangeable S r] - every permutation is so routable through r stages (this file).
+    Notes: the corpus row contains both a "Problem (find r(k,n))" proposition and the
+      "Conjecture r(k,n) = 2n-1"; only the conjecture is formalized, and as a conjunction of
+      the achievability and the optimality halves rather than as an equality between r(k,n)
+      and 2n-1, since r(k,n) is not introduced as a function.  Note the off-by-one convention
+      of the source: (SE(k,n))^(r-1) denotes r-1 concatenated copies, so r = 2n-1 corresponds
+      to [rearrangeable] at 2n-2 stages. *)
 Definition shuffle_exchange_conjecture_statement : Prop :=
   forall k n : nat,
     2 <= k -> 2 <= n ->
@@ -298,6 +389,21 @@ Definition is_pebbling_number (G : sgraph) (N : nat) : Prop :=
      (forall D : G -> nat, \sum_(v : G) D v = M -> forall r : G, solvable D r) ->
      N <= M).
 
+(** Corpus row: opg:pebbling_a_cartesian_product
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/pebbling_a_cartesian_product/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/pebbling_a_cartesian_product.json
+    English statement: (Graham; Open Problem Garden, "Pebbling a cartesian product")
+      For all non-empty finite simple graphs G1 and G2, if p1 is the pebbling number of G1, p2
+      that of G2 and p12 that of their Cartesian product, then p12 <= p1 * p2.
+    Definitions: [pebble_move D D'] - one pebbling move: remove two pebbles from a vertex and
+      add one to an adjacent vertex (this file); [reaches] - the reflexive transitive closure
+      of [pebble_move] (this file); [solvable D r] - some reachable distribution puts at least
+      one pebble on the target r (this file); [is_pebbling_number G N] - N is the least number
+      such that every distribution of exactly N pebbles is solvable for every target (this
+      file); [cartesian_product] - the Cartesian graph product (GTBase).
+    Notes: the pebbling numbers are stated relationally (a predicate "N is the pebbling number
+      of G") rather than as a function, so the statement is conditional on all three minima
+      being realized. *)
 Definition pebbling_a_cartesian_product_statement : Prop :=
   forall (G1 G2 : sgraph) (p1 p2 p12 : nat),
     0 < #|G1| -> 0 < #|G2| ->
@@ -321,8 +427,19 @@ Definition pebbling_a_cartesian_product_statement : Prop :=
 Definition has_diameter (G : sgraph) (d : nat) : Prop :=
   (forall u v : G, v \in ball d u) /\ (exists u v : G, v \notin ball d.-1 u).
 
-(* [has_girth] now from graph-theory-base (identical). *)
-
+(** Corpus row: opg:57_regular_moore_graph
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/57_regular_moore_graph/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/57_regular_moore_graph.json
+    English statement: (Open Problem Garden, "57-regular Moore graph?")
+      There exists a finite simple graph that is 57-regular, has diameter exactly 2 and girth
+      exactly 5.
+    Definitions: [has_diameter G d] - every pair of vertices lies within distance d and some
+      pair does not lie within distance d-1, so the diameter is exactly d (this file);
+      [has_girth G g] - no cycle shorter than g exists and a g-cycle does exist, so the girth
+      is exactly g (GTBase); [regular G 57], [ball], [girth_geq] - regularity, distance balls
+      and the girth lower bound (GTBase).
+    Notes: the source asks a question; the Rocq body is its positive answer, an existential
+      over graphs, so the open question is the truth value of the statement. *)
 Definition fiftyseven_regular_moore_graph_statement : Prop :=
   exists G : sgraph, [/\ regular G 57, has_diameter G 2 & has_girth G 5].
 
@@ -354,6 +471,25 @@ Definition graceful_labeling (G : sgraph) (l : G -> nat) : Prop :=
          (1 <= edge_label l p) && (edge_label l p <= n_edges G)) &
       {in oedges G &, injective (edge_label l)}].
 
+(** Corpus row: opg:graceful_tree_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/graceful_tree_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/graceful_tree_conjecture.json
+    English statement: (Ringel-Kotzig; Open Problem Garden, "Graceful Tree Conjecture")
+      Every finite simple graph with at least one vertex that is connected and has exactly
+      |V| - 1 edges admits a graceful labelling: an injective vertex labelling into
+      {0, ..., |E|} whose induced edge labels |l u - l v| are pairwise distinct and all lie
+      between 1 and |E|.
+    Definitions: [is_tree_card G] - connected with |E(G)| = |V(G)| - 1, an edge-count
+      characterization of "tree" named so as not to shadow the re-exported
+      [GraphTheory.core.sgraph.is_tree] (forest and connected on a vertex set); the two agree
+      on non-empty finite graphs (this file); [edge_label l p] - the truncated-subtraction form
+      of the absolute difference of the two endpoint labels (this file);
+      [graceful_labeling l] - the four conditions above (this file); [oedges] / [n_edges] - the
+      oriented-pair edge set and the edge count (this file); [connected] - coq-graph-theory
+      connectivity.
+    Notes: with |oedges G| = |E(G)| the two conditions "edge labels are distinct" and "edge
+      labels lie in 1..|E|" force the edge labels to be exactly the set {1, ..., |E|}, which
+      is the classical gracefulness condition. *)
 Definition graceful_tree_statement : Prop :=
   forall G : sgraph, 0 < #|G| -> is_tree_card G -> exists l : G -> nat, graceful_labeling l.
 
@@ -380,6 +516,23 @@ Definition seq_M_G (G : sgraph) : seq nat := [seq imb p | p <- enum (oedges G)].
 Definition graphic (s : seq nat) : Prop :=
   exists H : sgraph, perm_eq s [seq #|N(v)| | v <- enum [set: H]].
 
+(** Corpus row: opg:imbalance_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/imbalance_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/imbalance_conjecture.json
+    English statement: (Open Problem Garden, "Imbalance conjecture")
+      For every finite simple graph G, if every edge uv of G has imbalance |deg u - deg v| > 0,
+      then the sequence of edge imbalances of G is graphic, i.e. it is a permutation of the
+      degree sequence of some finite simple graph.
+    Definitions: [vdeg v] - the degree of v (this file); [imb p] - the truncated-subtraction
+      form of |deg u - deg v| for the oriented edge p = (u,v) (this file); [seq_M_G G] - the
+      sequence of edge imbalances over [oedges G], i.e. the multiset M_G of the source (this
+      file); [graphic s] - s is a permutation of the degree sequence of some [sgraph] (this
+      file); [oedges] - the canonical oriented representative of each undirected edge (this
+      file).
+    Notes: M_G is modelled as a [seq nat] in the [enum] order of [oedges G] and "graphic" is
+      taken up to permutation ([perm_eq]), so the order of the sequence is immaterial, as it
+      should be for a multiset.  No guard on the emptiness of G: on the empty graph the
+      hypothesis is vacuous and the empty sequence is graphic. *)
 Definition imbalance_statement : Prop :=
   forall G : sgraph,
     (forall p : G * G, p \in oedges G -> 0 < imb p) ->
@@ -421,6 +574,28 @@ Definition leaf_game_solution (G : sgraph) (g : G -> nat)
            (forall w : G, is_leaf S w ->
               g w + gold_total g (S :\ w) - val (S :\ w) <= val S)]).
 
+(** Corpus row: opg:a_gold_grabbing_game
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/a_gold_grabbing_game/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/a_gold_grabbing_game.json
+    English statement: (Open Problem Garden, "A gold-grabbing game")
+      For every non-empty tree G (connected with |V| - 1 edges) and every assignment g of a
+      non-negative amount of gold to each vertex, there exist a value function val on vertex
+      subsets and a move function sigma satisfying the Bellman optimality recursion of the
+      leaf-removal game: val is 0 on states with no takeable vertex, and otherwise sigma S is
+      takeable, val S equals g(sigma S) plus the gold remaining in S minus sigma S minus
+      val(S minus sigma S), and no other takeable vertex w gives a larger value.
+    Definitions: [is_leaf S v] - v belongs to the remaining set S and has at most one
+      neighbour inside S, so leaves and the last isolated vertex are takeable (this file);
+      [gold_total g S] - the sum of the gold on S (this file); [leaf_game_solution g val sigma]
+      - the Bellman recursion above (this file); [is_tree_card G] - connected with |E| = |V| - 1
+      (this file).
+    Notes: the corpus proposition is a Problem ("find optimal strategies"), not a yes/no
+      claim.  The chosen rendering is the existence of an optimal-play value function together
+      with an attaining move function - the standard game-theoretic meaning of "optimal
+      strategies" for this finite perfect-information game.  Because the total gold in a state
+      is fixed, the mover taking v guarantees g v + (total(S minus v) - val(S minus v)), which
+      is the right-hand side of the recursion; so val S is the max over takeable vertices and
+      sigma S attains it.  All arithmetic is on naturals, hence truncated subtraction. *)
 Definition a_gold_grabbing_game_statement : Prop :=
   forall (G : sgraph) (g : G -> nat),
     0 < #|G| ->
@@ -429,17 +604,25 @@ Definition a_gold_grabbing_game_statement : Prop :=
       leaf_game_solution g val sigma.
 
 (** ================================================================= *)
-(** ** Row 11 — Beneš conjecture (◇)  (OPEN)
-
-    Source: "Conjecture (◇) Let L be a simple regular ordered 2-stage graph.
-    Suppose that the graph L^m is externally connected, for some m ≥ 1.  Then the
-    graph L^{2m} is rearrangeable."
-
-    Carrier: an ordered bipartite stage [L : rel 'I_t] (a "2-stage graph" = one
-    bipartite layer between two ordered parts ['I_t]).  "simple regular ordered"
-    = [stage_regular L d]; L^m externally connected = [externally_connected L m]
-    (reachability through [m] copies); L^{2m} rearrangeable = [rearrangeable L
-    (2*m)] (both shared primitives above).  Guard [0 < t]. *)
+(** Corpus row: opg:bene_conjecture_graph_theoretic_form_0
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/bene_conjecture_graph_theoretic_form_0/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/bene_conjecture_graph_theoretic_form_0.json
+    English statement: (Benes; Open Problem Garden, "Benes Conjecture (graph-theoretic form)")
+      For every t > 0, every relation L on the t ordered positions and every d, if L is
+      d-regular (every input has out-degree d and every output in-degree d), then for every
+      m >= 1 such that L is externally connected in m steps (every input reaches every output
+      through m copies of L), the 2m-stage network built from L is rearrangeable, i.e. every
+      permutation of the t positions can be routed node-disjointly through 2m stages.
+    Definitions: [stage_regular L d] - d-regularity of the stage on both sides (this file);
+      [stage_reachable L m a b] / [externally_connected L m] - reachability through exactly m
+      stages / from every input to every output (this file); [multistage_route L r route pi] -
+      a node-disjoint routing of the permutation pi through r stages (this file);
+      [rearrangeable L r] - every permutation is so routable (this file).
+    Notes: a "simple regular ordered 2-stage graph" of the source is modelled as one bipartite
+      layer L between two copies of the linearly ordered set of t positions, which is what the
+      r-fold concatenation iterates; L^m is m concatenated copies.  The corpus row also carries
+      a Problem proposition (find a sufficient condition for rearrangeability of a straight
+      l-stage graph); only the Conjecture proposition is formalized. *)
 Definition bene_conjecture_graph_theoretic_form_0_statement : Prop :=
   forall (t : nat) (L : rel 'I_t) (d : nat),
     0 < t ->
@@ -492,6 +675,26 @@ Definition weighted_colourable (G : sgraph) (p : G -> nat) (k : nat) : Prop :=
 Definition weighted_chromatic_number (G : sgraph) (p : G -> nat) (k : nat) : Prop :=
   weighted_colourable p k /\ (forall m : nat, weighted_colourable p m -> k <= m).
 
+(** Corpus row: opg:weighted_colouring_of_hexagonal_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/weighted_colouring_of_hexagonal_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/weighted_colouring_of_hexagonal_graphs.json
+    English statement: (Open Problem Garden, "Weighted colouring of hexagonal graphs")
+      There is a constant c such that for every hexagonal graph G, every vertex weighting p of
+      G, every weighted chromatic number chiP of (G,p) and every weighted clique number omegaP
+      of (G,p), the inequality 8 * chiP <= 9 * omegaP + 8 * c holds, which is the
+      fraction-free form of chi(G,p) <= (9/8) * omega(G,p) + c.
+    Definitions: [tri_adj] - adjacency of the triangular lattice on integer coordinate pairs
+      (this file); [hexagonal G] - G is an induced subgraph of the triangular lattice, i.e.
+      there is an injective coordinate map whose images are [tri_adj]-adjacent exactly for the
+      adjacent vertices of G (this file); [weighted_clique_number p w] - w is the maximum over
+      cliques Q of the total weight of Q (this file); [weighted_colourable p k] /
+      [weighted_chromatic_number p k] - each vertex v receives a set of exactly p v colours out
+      of k, adjacent vertices receiving disjoint sets, and k is least with this property (this
+      file); [clique] - coq-graph-theory.
+    Notes: the two weighted parameters are stated relationally rather than as functions, so
+      the statement is conditional on both extrema being realized.  c ranges over naturals, so
+      "absolute constant" is read as a non-negative integer, which is no loss for an upper
+      bound. *)
 Definition weighted_colouring_of_hexagonal_graphs_statement : Prop :=
   exists c : nat,
     forall (G : sgraph) (p : G -> nat) (chiP omegaP : nat),

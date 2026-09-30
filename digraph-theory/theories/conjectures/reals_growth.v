@@ -156,29 +156,36 @@ Definition is_tvec (tv : nat -> nat) : Prop :=
         [/\ #|D| = n, oriented_tfree D,
             dicolorableb D (tv n) & ~~ dicolorableb D (tv n).-1]).
 
-(** ** Conjecture 3 (arXiv:2403.02298): a⃗(n) = Θ(√(n·ln n))
-
-    For ANY extremal function [av] (one satisfying [is_avec]), the real sequence
-    [n ↦ av n] is Θ of [√(n·ln n)].  Quantifying over every [is_avec av] is
-    faithful: it constrains exactly the growth of the genuine a⃗ without forcing
-    a concrete fold. *)
+(** No corpus row: the real-valued asymptotic envelope of Conjecture 3 of arXiv:2403.02298 (the
+    minimum acyclic number over oriented triangle-free digraphs of order n is Theta of the
+    square root of n times ln n), stated for EVERY function satisfying the extremal relation
+    [is_avec]. The corpus carries no row for that paper; its combinatorial core is the likewise
+    row-less [avec_core_statement] of conjectures/chi_bounded.v. *)
 Definition conj3_avec_Theta_statement : Prop :=
   forall av : nat -> nat,
     is_avec av ->
     is_Theta (fun n => INR (av n)) env_a.
 
-(** A self-contained (concrete-function) reading, equivalent in content: there
-    EXISTS an extremal a⃗ and it is Θ(√(n ln n)). *)
+(** No corpus row: the concrete-function reading of the same asymptotic envelope (there EXISTS a
+    function satisfying the extremal relation [is_avec] whose real image is Theta of the square
+    root of n times ln n); a variant of [conj3_avec_Theta_statement] above, with no corpus row. *)
 Definition conj3_avec_exists_statement : Prop :=
   exists av : nat -> nat,
     is_avec av /\ is_Theta (fun n => INR (av n)) env_a.
 
-(** ** Conjecture 4 (arXiv:2403.02298): t⃗(n) = Θ(√(n / ln n)) *)
+(** No corpus row: the real-valued asymptotic envelope of Conjecture 4 of arXiv:2403.02298 (the
+    maximum dichromatic number over oriented triangle-free digraphs of order n is Theta of the
+    square root of n divided by ln n), stated for EVERY function satisfying the extremal
+    relation [is_tvec]. No corpus row; the combinatorial core is [tvec_core_statement] of
+    conjectures/chi_bounded.v. *)
 Definition conj4_tvec_Theta_statement : Prop :=
   forall tv : nat -> nat,
     is_tvec tv ->
     is_Theta (fun n => INR (tv n)) env_t.
 
+(** No corpus row: the concrete-function reading of the same envelope (there EXISTS a function
+    satisfying [is_tvec] whose real image is Theta of the square root of n divided by ln n); a
+    variant of [conj4_tvec_Theta_statement] above, with no corpus row. *)
 Definition conj4_tvec_exists_statement : Prop :=
   exists tv : nat -> nat,
     is_tvec tv /\ is_Theta (fun n => INR (tv n)) env_t.
@@ -193,16 +200,12 @@ Definition indeg (D : diGraphType) (v : D) : nat := #|[set w : D | w --> v]|.
 Definition eulerian (D : diGraphType) : Prop :=
   forall v : D, indeg v = outdeg v.
 
-(** The EC-log lemma (Bang-Jensen–Yeo Eulerian logarithmic milestone): there is
-    an absolute constant — here the proven [C = 6] with threshold order [n₀ = 3]
-    — such that every Eulerian digraph of order [n] whose arc-strength [k] meets
-    the REAL threshold [k ≥ 6·log₂ n] admits a Strong Arc Decomposition.
-
-    Faithful encoding: arc-strength is the nat [arc_strong D k] of [sad.v]
-    ([λ(D) ≥ k]); the comparison to the real threshold [6·log₂ n] is
-    [INR k >= 6 * log2 (INR n)] in [%R].  We GUARD [3 <= n] (the proven [n₀]); the
-    parameter [k] is the witnessing arc-strength.  Stated existentially over the
-    constant [c = 6] so the milestone is "∃ C, …", matching its statement. *)
+(** No corpus row: the Eulerian logarithmic milestone of the Bang-Jensen-Yeo
+    strong-arc-decomposition attack (problems/arc_disjoint_strong_spanning_subdigraphs): there
+    is a positive real constant c such that every Eulerian digraph on at least three vertices
+    whose arc-strength k satisfies k >= c * log2(n) has a strong arc decomposition. It is a
+    proved milestone of the attack, not a corpus conjecture; the corpus row for the conjecture
+    itself is on [bang_jensen_yeo_SAD_statement] in conjectures/sad.v. *)
 Definition ec_log_statement : Prop :=
   exists c : R,
     0 < c /\
@@ -213,8 +216,10 @@ Definition ec_log_statement : Prop :=
       INR k >= c * log2 (INR #|D|) ->
       SAD D.
 
-(** The concrete proven form ([C = 6]): instantiates the existential.  This is an
-    EDGE (Qed-closed): the [C = 6] form implies the [∃ C] milestone. *)
+(** No corpus row: the concrete c = 6 instance of [ec_log_statement] above (every Eulerian
+    digraph on at least three vertices with arc-strength at least 6 * log2(n) has a strong arc
+    decomposition), which implies the existential form through the Qed edge
+    [ec_log_c6_implies_exists] of this file. No corpus row. *)
 Definition ec_log_c6_statement : Prop :=
   forall (D : diGraphType) (k : nat),
     (3 <= #|D|)%N ->
@@ -227,14 +232,10 @@ Theorem ec_log_c6_implies_exists :
   ec_log_c6_statement -> ec_log_statement.
 Proof. by move=> H; exists 6; split; [prove_sup0 | exact: H]. Qed.
 
-(** ** unvd Problem 6 (P5): bounded-mad ⟹ polynomial unavoidability bound
-
-    Re-exported verbatim from [unvd.v]: [prob_6] already states, for every
-    rational bound [alpha] on mad, the existence of a CONCRETE polynomial bound
-    [a·|V(D)|^d + b] on the unavoidability number.  This is exactly the
-    "∃ a polynomial bound" the P8 assignment requests; no reals are needed for it,
-    but we surface it here under the P8 umbrella as the asymptotic envelope of the
-    unavoidability number. *)
+(** No corpus row: a verbatim re-export of [unvd.prob_6], which owns the corpus row
+    arxiv:2410.23566#00 and is documented at its definition in conjectures/unvd.v; this alias
+    only surfaces the polynomial unavoidability bound under the asymptotic umbrella of this
+    file, together with the real-envelope edge [prob6_nat_bound_real_envelope]. *)
 Definition prob6_unvd_statement : Prop := unvd.prob_6.
 
 (** EDGE (Qed-closed): the concrete [nat] polynomial bound of [unvd.prob_6]

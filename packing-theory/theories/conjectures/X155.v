@@ -64,7 +64,40 @@ Definition x155_constant_factor_approximation (C : sgraph -> Prop) : Prop :=
 
 (** ** X155 statements *****************************************************)
 
-(** VC-dimension dichotomy for identifying codes on hereditary graph classes. *)
+(** Corpus row: arxiv:1407.5833#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1407.5833__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1407.5833__00.json
+    English statement: (Bousquet, Lagoutte, Li, Parreau, Thomasse 2017, "VC-Dimension
+      Dichotomy for Identifying Codes (Approximation)")
+      For every class C of simple graphs closed under induced subgraphs, either (a) the
+      minimum identifying-code size in C has a logarithmic lower bound — for every n
+      some graph of C has at least n vertices and no identifying code with at most
+      trunc_log 2 n vertices — and Min Id Code is log-APX-hard in C, meaning no positive
+      constant factor K admits an approximation; or (b) it has a polynomial lower bound
+      — there is an exponent e >= 1 such that for every n some graph of C has at least n
+      vertices and every identifying code of it has at least n^e vertices — and Min Id
+      Code admits a constant-factor approximation in C.
+    Definitions: [x155_hereditary_class C] — C is closed under [induced] subgraphs
+      (this file); [x155_closed_neighbourhood v] — v together with its neighbours (this
+      file); [x155_identifying_code Code] — Code meets every closed neighbourhood and
+      separates distinct vertices by those intersections (this file);
+      [x155_identifying_code_number_at_least/at_most], [x155_shatters],
+      [x155_vc_dimension_at_most], [x155_log_lower_bound],
+      [x155_polynomial_lower_bound], [x155_constant_factor_approximation_with],
+      [x155_constant_factor_approximation], [x155_log_APX_hard] (all this file);
+      [polytime_outputs_graph_on], [data_nat_value] — the complexity layer of GTBase
+      base; [induced] — coq-graph-theory sgraph.v; [trunc_log] — MathComp.
+    Notes: BLOCKED, and refutable as written. Faithfulness audit 2026-07-17
+      (meta/BLOCKED_RETARGETING_AUDIT.md): the body has the shape
+      "forall C hereditary, (A1 /\ A2) \/ (B1 /\ B2)" where A1 and B1 both start with
+      "exists G, C G /\ ..."; instantiating C with the empty class (vacuously
+      hereditary) makes A1 and B1 false, so the whole disjunction is false regardless of
+      B2 — machine-refuted by the probe. The corpus text is an informal survey
+      observation about hereditary classes that contain graphs, and the Rocq body
+      carries no such non-emptiness guard. Approximation and hardness are also modelled
+      through the abstract complexity layer rather than a genuine machine model, and the
+      VC-dimension notion [x155_vc_dimension_at_most] that motivates the dichotomy does
+      not occur in the body at all. *)
 Definition identifying_code_vc_dimension_approximation_dichotomy_statement : Prop :=
   forall C : sgraph -> Prop,
     x155_hereditary_class C ->

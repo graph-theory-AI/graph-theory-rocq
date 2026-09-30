@@ -27,9 +27,27 @@ Definition x192_polytime_additive_chromatic_approx
 
 (** ** X192 statements *****************************************************)
 
-(** Dvorak-Kawarabayashi open question: whether a universal additive constant
-    suffices for polynomial-time approximation of chromatic number on
-    triangle-free graphs in every proper minor-closed class. *)
+(** Corpus row: arxiv:1707.03888#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1707.03888__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1707.03888__00.json
+    English statement: (Dvorak and Kawarabayashi 2017, open question, arXiv:1707.03888)
+      There is a natural alpha such that for every proper minor-closed class of graphs there is a
+      polynomial-time algorithm computing, for every triangle-free graph in the class, a number
+      between chi(G) and chi(G) + alpha; that is, the chromatic number of triangle-free graphs in
+      any proper minor-closed class can be approximated in polynomial time within a universal
+      additive error.
+    Definitions: [x192_proper_minor_closed_class C] - some graph H is a minor of no member of C
+      (this file); [x192_triangle_free G] - girth at least 4 (this file);
+      [x192_additive_chromatic_output alpha G out] - the decoded output lies between chi(G) and
+      chi(G) + alpha (this file); [x192_polytime_additive_chromatic_approx C alpha] -
+      [polytime_outputs_graph_on] for that specification on the triangle-free members of C (this
+      file); [polytime_outputs_graph_on], [data_nat_value] (GTBase base/theories/complexity.v);
+      [minor] (coq-graph-theory minor.v).
+    Notes: The corpus row is a QUESTION; the Rocq body is its affirmative reading. The quantifier
+      order matters and follows the source: the additive error alpha is uniform, chosen before the
+      class. Minor-closedness itself is not asserted, only properness in the form of a forbidden
+      minor, which is what the statement uses. The row was retargeted in 2026-07-16 from a blocked
+      placeholder, see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. *)
 Definition triangle_free_minor_closed_chromatic_additive_approx_statement : Prop :=
   exists alpha : nat,
     forall C : sgraph -> Prop,

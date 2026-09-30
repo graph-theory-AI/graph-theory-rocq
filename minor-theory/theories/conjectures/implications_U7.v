@@ -25,7 +25,8 @@
 
 From GTBase Require Import base.
 From GraphTheory Require Import minor connectivity coloring.
-From Minor.conjectures Require Import U7.
+From Minor.foundations Require Import minor_dec.
+From Minor.conjectures Require Import U7 X5.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -89,7 +90,47 @@ Qed.
     not derivable from Jørgensen, since high min degree does not force
     6-connectivity).  status=candidate, proved=false; needs_external. *)
 
+(** ** e043 : Hadwiger-type independence bound ⟹ the seagull problem (PROVED)
+
+    Corpus argument (gc:e043).  Let [h] be the largest [k] with a [K_k] minor of
+    [G].  Then [G] has no [K_(h+1)] minor, so the source row at [t = h] gives
+    [n <= h * α(G) <= 2h], hence [ceil(n/2) <= h] and, by monotonicity of
+    complete-graph minors, [G] has a [K_ceil(n/2)] minor.
+
+    Re-derivation used here.  The "largest [k]" is avoided: one applies the
+    source at the single value [t = ceil(n/2) - 1].  The step "G has no
+    [K_(t+1)] minor OR we are done" is the elimination of a double negation,
+    which is legitimate because [minor] is DECIDABLE on finite simple graphs
+    ([Minor.foundations.minor_dec.minorNN], proved there from [minorRE] /
+    [minor_of_rmap] and the Boolean [connectedb] / [neighbor]) — so no classical
+    axiom is used.  Arithmetic: with [m := ceil(n/2) >= 2] and [t := m - 1] we
+    get [n <= t * α(G) <= 2t = 2m - 2], i.e. [n + 2 <= 2m], while
+    [2 * ceil(n/2) <= n + 1] always holds ([leq_trunc_div]) — contradiction.  The
+    degenerate range [ceil(n/2) <= 1] needs no source at all: a nonempty graph
+    has a [K_1] minor. *)
+Theorem hadwiger_independence_minor_implies_seagull :
+  hadwiger_independence_minor_statement -> seagull_statement.
+Proof.
+move=> src G G0 a2.
+have K1 : minor G 'K_1 := minor_K1 G0.
+have hceil : ceil_div #|G| 2 * 2 <= #|G| + 1.
+  by rewrite /ceil_div addn2 subn1 /= -addn1; exact: leq_divM.
+have [m1|m2] := leqP (ceil_div #|G| 2) 1; first exact: minor_K_le m1 K1.
+apply: minorNN => nm.
+have m_gt0 : 0 < ceil_div #|G| 2 := ltnW m2.
+have m0 : 0 < (ceil_div #|G| 2).-1 by rewrite -subn1 subn_gt0.
+have e : ((ceil_div #|G| 2).-1).+1 = ceil_div #|G| 2 := prednK m_gt0.
+have key : #|G| <= (ceil_div #|G| 2).-1 * α(G).
+  by apply: (src _ #|G| G m0 erefl); rewrite e; exact: nm.
+have key2 : #|G| + 2 <= ceil_div #|G| 2 * 2.
+  rewrite -e mulSn [2 + _]addnC leq_add2r.
+  by apply: leq_trans key _; exact: leq_mul (leqnn _) a2.
+by move: (leq_trans key2 hceil); rewrite leq_add2l.
+Qed.
+
 (** Machine-readable edge records (extracted by meta/build_edge_graph.py): *)
-(*@EDGE from=high_connectivity_no_k_n_statement to=jorgensens_statement kind=implies status=candidate cite="OPG minor-theory" note="FAILS Qed: size hypothesis missing; both endpoints G2-blocked (abstract is_planar)" *)
-(*@EDGE from=jorgensens_statement to=high_connectivity_no_k_n_statement kind=implies status=candidate cite="OPG minor-theory" note="FAILS Qed: needs the n<>6 cases; both endpoints G2-blocked" *)
+(*@EDGE from=hadwiger_independence_minor_statement to=seagull_statement kind=implies status=verified proved=true proof=hadwiger_independence_minor_implies_seagull cite="gc:e043" note="Seagull is the alpha<=2 case: apply the source at t = ceil(n/2)-1, which gives n <= t*alpha(G) <= 2t = 2*ceil(n/2)-2, contradicting 2*ceil(n/2) <= n+1; the case ceil(n/2)<=1 is the K_1 minor of a nonempty graph. The 'G has no K_(t+1) minor' step is a double-negation elimination, licensed axiom-free by decidability of minor (Minor.foundations.minor_dec.minorNN)." *)
+(*@EDGE from=high_connectivity_no_k_n_statement to=jorgensens_statement kind=implies status=refuted-direction cite="OPG minor-theory" note="REFUTED-DIRECTION (metadata wave M, 2026-09-24): fails Qed: the exists-N size bound never constrains small 6-connected graphs; both endpoints G2-blocked (abstract planarity). Earlier note: FAILS Qed: size hypothesis missing; both endpoints G2-blocked (abstract is_planar)" *)
+(*@EDGE from=jorgensens_statement to=high_connectivity_no_k_n_statement kind=implies status=refuted-direction cite="OPG minor-theory" note="REFUTED-DIRECTION (metadata wave M, 2026-09-24): fails Qed: no way to discharge the n <> 6 cases. Earlier note: FAILS Qed: needs the n<>6 cases; both endpoints G2-blocked" *)
 (*@EDGE from=jorgensens_statement to=forcing_a_k_6_minor_statement kind=implies status=candidate cite="Jorgensen 1994" note="needs_external: planar=>connectivity<=5 (G2); targets only the connectivity conjunct" *)
+Print Assumptions hadwiger_independence_minor_implies_seagull.

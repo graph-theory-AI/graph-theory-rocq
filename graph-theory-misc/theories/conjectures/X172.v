@@ -49,8 +49,30 @@ Definition x172_counterexample_to_lines_bridges_bound (G : sgraph) : Prop :=
 
 (** ** X172 statements *****************************************************)
 
-(** Open question: whether all counterexamples to [ell(G)+br(G)>=|G|] arise
-    from finitely many graphs by repeatedly replacing a bridge by a path. *)
+(** Corpus row: arxiv:1606.06011#01
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1606.06011__01/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1606.06011__01.json
+    English statement: (Aboulker, Matamala, Rochet and Zamora 2016, "A new class of graphs that
+      satisfies the Chen-Chvatal Conjecture", open question on counter-examples)
+      There is a bound B such that every connected finite simple graph G with
+      l(G) + br(G) < |V(G)| is obtained from some graph with at most B vertices by finitely
+      many steps, each replacing one bridge by a path of arbitrary length.
+    Definitions: [x172_path_edges s] / [x172_path_internal s] - the edge set and the internal
+      vertices of a vertex sequence (this file); [x172_one_bridge_replacement G H] - H arises
+      from G by picking a bridge ab, embedding V(G) injectively into V(H) and replacing that
+      bridge by a path from the image of a to the image of b whose internal vertices are new,
+      all other adjacencies being preserved and no other edges of H existing (this file);
+      [x172_generated_by_bridge_replacement] - the reflexive transitive closure of that step
+      (this file); [x172_counterexample_to_lines_bridges_bound G] - G is connected and
+      l(G) + br(G) < |V(G)| (this file); [metric_line_count], [bridge_count], [graph_bridge] -
+      the Chen-Chvatal metric-line count, the bridge count and the bridge predicate (GTBase
+      graph_metric.v).
+    Notes: retargeted on 2026-07-16 from a blocked placeholder to this axiom-free finite-witness
+      formulation, see meta/BLOCKED_RETARGETING_FOUNDATIONS.md.  "A finite set of graphs" is
+      encoded by an order bound on the seed rather than by an explicit finite family, which is
+      equivalent up to the fact that finitely many graphs of bounded order exist for each
+      bound.  The source phrases the question as "it remains unknown whether"; the Rocq body is
+      the positive answer. *)
 Definition metric_lines_bridges_counterexamples_finitely_generated_statement : Prop :=
   exists finite_seed_bound : nat,
     forall G : sgraph,

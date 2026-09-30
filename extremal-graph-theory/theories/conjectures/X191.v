@@ -47,10 +47,34 @@ Definition x191_subquadratic_deletion_to_partite
         #|X| ^ delta_den <= C * n ^ (2 * delta_den - delta_num) + C /\
         χ([set: x191_delete_edges X]) <= parts.
 
-(** ** X191 statements *****************************************************)
-
-(** Alon-Shikhelman informal conjecture: the [o(n^2)] deletion error term in
-    Proposition 1.4 can be improved to [O(n^(2-delta(H)))]. *)
+(** Corpus row: arxiv:1706.05642#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1706.05642__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1706.05642__00.json
+    English statement: (Alon, Shikhelman 2017, arXiv:1706.05642, Informal Conjecture on the error term in Proposition 1.4)
+      For every graph H there are a positive rational delta = delta_num/delta_den <= 1 and
+      constants C, N such that for every graph G on at least N vertices and every spanning
+      H-minor-free subgraph F of G maximising the number of copies of the clique blow-up
+      K_m[t], one can delete at most O(|V(F)|^(2-delta)) edges from F and obtain a graph of
+      chromatic number at most chi(H) - 1.
+    Definitions: [x191_clique_blowup m t] - the blow-up of K_m in which each of the m classes has t
+      vertices, two vertices adjacent exactly when their classes differ (X191.v);
+      [x191_copy_count P G] - the number of injective adjacency-preserving maps P -> G
+      (X191.v); [x191_spanning_subgraph_of F G] - a bijection V(F) -> V(G) mapping edges to
+      edges, i.e. F is a spanning subgraph of G (X191.v);
+      [x191_dense_H_free_clique_blowup_extremal H G F m t] - F is a spanning H-minor-free
+      subgraph of G maximising [x191_copy_count] of the blow-up (X191.v); [x191_delete_edges F
+      X] - F with the edges listed in X removed (X191.v);
+      [x191_subquadratic_deletion_to_partite F parts dnum dden] - a deletion set X with
+      |X|^dden <= C * n^(2*dden - dnum) + C and chromatic number at most parts (X191.v);
+      [minor], [chi], [fg_mk_sgraph] - coq-graph-theory / GTBase.
+    Notes: this row is recorded as BLOCKED. The 2026-07-17 faithfulness audit
+      (meta/BLOCKED_RETARGETING_AUDIT.md) found a FINITENESS COLLAPSE: the whole content of the
+      conjecture is quantitative (improving an o(n^2) error to O(n^(2-delta))), but inside
+      [x191_subquadratic_deletion_to_partite] the constant C is chosen AFTER F is fixed, and the
+      apparently asymptotic [forall n, #|F| = n -> ...] pins n to the single value |V(F)|. One
+      graph is not a growing family, so the exponent carries no content and the predicate is
+      satisfiable by taking C large. The statement is therefore trivially true / too weak
+      (ledger). [chi(H) - 1] is nat subtraction. *)
 Definition dense_H_free_clique_blowup_subquadratic_error_statement : Prop :=
   forall H : sgraph,
     exists delta_num delta_den C N : nat,

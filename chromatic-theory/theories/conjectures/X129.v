@@ -14,18 +14,23 @@ Definition x129_maxdeg (G : sgraph) : nat := Delta G.
 
 (** ** X129 statements ******************************************************)
 
-(** Dvořák–Kráľ–Nejedlý–Škrekovski: there is a degree threshold Δ₀ such that
-    every planar graph G of girth at least 5 whose maximum degree is at least
-    Δ₀ satisfies χ(G²) ≤ Δ(G) + 2, where G² = [graph_power G 2].
-
-    Faithfulness. (i) "girth at least 5" is [girth_geq G 5] (every genuine cycle
-    has length ≥ 5), NOT [has_girth G 5]: the latter is base's "girth EXACTLY 5"
-    (girth_geq ∧ a genuine 5-cycle exists) and would wrongly exclude the girth-6+
-    planar graphs the conjecture also covers — making the statement strictly
-    weaker. (ii) The threshold is in the correct ∃Δ₀,∀G order (a single uniform
-    Δ₀, not a per-graph one). (iii) The guard [Δ₀ ≤ Δ(G)] is satisfiable together
-    with the hypotheses for every Δ₀ (e.g. a large star is a girth-≥5 planar graph
-    of arbitrarily large maximum degree), so the ∀ is not vacuous. *)
+(** Corpus row: studies:std_dvo_k_kr_nejedl_krekovski_conjecture_square_of_p
+    Site: none
+    Review: none
+    English statement: (Dvorak, Kral, Nejedly and Skrekovski, studies slice of the corpus)
+      There is a threshold D0 such that every planar finite simple graph G of girth at least 5 whose
+      maximum degree is at least D0 satisfies chi(G^2) <= Delta(G) + 2, where G^2 is the square of
+      G, i.e. two distinct vertices are adjacent when they are at distance at most 2.
+    Definitions: [x129_maxdeg G] - a local synonym for base's [Delta G] (this file); [graph_power
+      G 2] - the square of G (GTBase base/theories/base.v); [wagner_planar G] - no K5 and no K3,3
+      minor, which is planarity by Wagner's theorem (base.v); [girth_geq G 5] - every cycle has at
+      least 5 vertices (base.v).
+    Notes: This row has no site or review page in the corpus, hence the literal "none" above.
+      Faithfulness points inherited from the previous comment: girth at least 5 uses [girth_geq],
+      not base's [has_girth] which means girth EXACTLY 5 and would wrongly exclude planar graphs of
+      larger girth; the threshold D0 is in the order there exists D0 for all G, i.e. uniform; and
+      the hypotheses are jointly satisfiable for every D0, for instance by a large star, so the
+      statement is not vacuous. *)
 Definition dvorak_kral_nejedly_skrekovski_planar_girth5_square_statement : Prop :=
   exists D0 : nat,
     forall G : sgraph,

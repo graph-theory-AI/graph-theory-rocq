@@ -77,11 +77,34 @@ Definition x89_two_thirds_asymptotic (f : nat -> nat) : Prop :=
 
 (** ** X89 statements ******************************************************)
 
-(** Studies slice: Bandelt-Dress conjecture that the maximum quartet distance
-    between two n-leaf phylogenetic trees is (2/3+o(1))*binomial(n,4).  The
-    quartet topology of a tree is the DEFINED edge-separation function
-    [x89_quartet_shape] (not free data), so distinct trees cannot differ on all
-    C(n,4) quartets — see meta/X10-X110_faithfulness_audit.md (X89). *)
+(** Corpus row: studies:std_bandelt_dress_conjecture_maximum_quartet_distanc
+    Site: none
+    Review: none
+    English statement: (Bandelt and Dress, conjecture on the maximum quartet distance)
+      There is a function f such that, for every n, f(n) is the maximum over pairs of
+      phylogenetic trees on n labelled leaves of the number of four-leaf subsets on which the
+      two trees induce different quartet topologies, and f(n) is asymptotically two thirds of
+      binomial(n,4): for every q >= 3, eventually
+      3*q*f(n) <= (2*q+3)*binomial(n,4) and (2*q-3)*binomial(n,4) <= 3*q*f(n).
+    Definitions: [x89_restr A] / [x89_conn A x y] - adjacency and connectivity restricted to a
+      vertex set (this file); [x89_pathset c d] - the vertex set of the unique c-d path of a
+      tree, described as the two endpoints together with the vertices whose deletion separates
+      them (this file); [x89_split a b c d] - the quartet topology ab|cd, i.e. a and b remain
+      connected after deleting the c-d path (this file); [x89_phylogenetic_tree n] - a record
+      for a trivalent tree with n injectively labelled degree-1 leaves, every non-leaf having
+      exactly three neighbours (this file); [x89_quartet_shape T Q] - the topology, one of
+      three values, that T induces on the four leaves of Q taken in index order (this file);
+      [x89_quartet_distance T U] - the number of four-element leaf sets on which the two
+      topologies differ (this file); [x89_max_quartet_distance n m] - m is attained and is an
+      upper bound (this file); [x89_two_thirds_asymptotic f] - the rational-epsilon form of
+      f(n) = (2/3 + o(1)) * binomial(n,4) (this file); [is_tree], [connect] - coq-graph-theory
+      / MathComp.
+    Notes: the quartet topology is a DEFINED function of the tree, through the edge-separation
+      predicate [x89_split], not free data; this matters for faithfulness, since it prevents
+      two trees from differing on all binomial(n,4) quartets - see
+      meta/X10-X110_faithfulness_audit.md (X89).  The maximum is stated relationally, so the
+      statement asserts both that the maximum is attained at every n and that it satisfies the
+      asymptotic. *)
 Definition bandelt_dress_maximum_quartet_distance_statement : Prop :=
   exists f : nat -> nat,
     (forall n : nat, x89_max_quartet_distance n (f n)) /\

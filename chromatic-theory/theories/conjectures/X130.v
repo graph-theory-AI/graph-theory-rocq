@@ -28,18 +28,23 @@ Definition x130_frac_chi_le (G : sgraph) (p q : nat) : Prop :=
 
 (** ** X130 statements ******************************************************)
 
-(** Dvořák–Mnich: there is a real number c < 3 such that every planar graph of
-    girth at least 5 has fractional chromatic number at most c.
-
-    Faithfulness. The fractional chromatic number of a finite graph is RATIONAL,
-    and the conjecture asserts a UNIFORM bound strictly below 3; hence "∃ real
-    c < 3" is faithfully captured by "∃ rational p/q < 3" (encoded [0 < q] and
-    [p < 3q]) — a single bound in the correct ∃(p,q),∀G order (a per-graph bound
-    would be trivially true and wrong). "girth at least 5" is [girth_geq G 5]
-    (girth ≥ 5), not [has_girth] (girth exactly 5). Non-vacuity: [p = 0] cannot
-    satisfy the existential, since [x130_frac_chi_le G 0 q] would force a·q ≤ 0,
-    i.e. a 0-colour palette, impossible for a nonempty graph; so no degenerate
-    (p,q) witness exists and the statement is the genuine open problem. *)
+(** Corpus row: studies:std_dvo_k_mnich_conjecture_fractional_chromatic_numb
+    Site: none
+    Review: none
+    English statement: (Dvorak and Mnich, studies slice of the corpus)
+      There are naturals p and q with q > 0 and p < 3q such that every planar finite simple graph of
+      girth at least 5 has fractional chromatic number at most p/q; that is, some rational bound
+      strictly below 3 holds uniformly for all such graphs.
+    Definitions: [x130_frac_chi_le G p q] - there are a, b with b > 0 and an (a:b)-fold colouring
+      of G with a*q <= p*b, the cross-multiplied form of a/b <= p/q (this file);
+      [x130_bfold_colouring G a b f] - each vertex gets a b-element subset of an a-element palette
+      and adjacent vertices get disjoint subsets (this file); [wagner_planar], [girth_geq] (GTBase
+      base/theories/base.v).
+    Notes: This row has no site or review page in the corpus, hence the literal "none" above. The
+      source's real constant c < 3 is captured by a RATIONAL p/q < 3, which is faithful because the
+      fractional chromatic number of a finite graph is rational and attained. The bound is uniform,
+      quantified before the graphs. The degenerate witness p = 0 is impossible, since it would force
+      a colouring over an empty palette on a nonempty graph, so the statement has teeth. *)
 Definition dvorak_mnich_planar_girth5_fractional_chromatic_statement : Prop :=
   exists p q : nat,
     [/\ (0 < q)%N, (p < 3 * q)%N &

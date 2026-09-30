@@ -161,6 +161,32 @@ Definition plane_represents (R : realFieldType) (T : finType) (E : {set {set T}}
     forall e : {set T}, e \in E ->
       forall v : T, (v \in e) <-> in_obj (obj e) (pt v).
 
+(** Corpus row: opg:linear_hypergraphs_with_dimension_3
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/linear_hypergraphs_with_dimension_3/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/linear_hypergraphs_with_dimension_3.json
+    English statement: (Open Problem Garden, "Linear Hypergraphs with Dimension 3")
+      Over every ordered field R, every non-empty linear hypergraph (any two distinct
+      hyperedges share at most one vertex) whose incidence poset has order dimension at most 3
+      is the intersection hypergraph of a family of triangles and segments in the plane: there
+      are a point for each vertex and a triangle or segment for each hyperedge such that a
+      vertex lies in a hyperedge exactly when its point lies in that region.
+    Definitions: [linear_hypergraph E] - distinct hyperedges meet in at most one vertex (D2str.v);
+      [inc_le E] - the incidence order on T + {set T}: a vertex is below a hyperedge of E
+      containing it, and vertices and hyperedges are otherwise comparable only to themselves
+      (D2str.v); [is_linear_order], [order_extends], [realizer], [poset_dim_le le d] - a
+      realizer is a list of linear extensions whose intersection is exactly le, and the order
+      dimension is at most d when a realizer of length at most d exists (D2str.v);
+      [incidence_poset_dim_le E d] (D2str.v); [plane_obj R] - a segment or a triangle given by
+      its 2 or 3 corner points (D2str.v); [in_seg], [in_tri], [in_obj] - membership as a convex
+      combination of the corners (D2str.v); [plane_represents R E] - the points-in-regions
+      representation above (D2str.v).
+    Notes: the incidence poset is taken on the FULL ground type T + {set T}, so subsets that are
+      not hyperedges sit as isolated points. Isolated points never change a poset's order
+      dimension across the "at most 3" threshold (they are realised by any two or more linear
+      extensions), so this is faithful to the textbook incidence-poset dimension. The plane is
+      an arbitrary ordered field rather than the reals specifically; triangles and segments are
+      filled convex hulls. The guard E != set0 keeps the geometry non-vacuous. Since [rel X] is
+      not an eqType, realizer membership is index-based. *)
 Definition linear_hypergraphs_with_dimension_3_statement : Prop :=
   forall (R : realFieldType) (T : finType) (E : {set {set T}}),
     E != set0 ->
@@ -231,6 +257,27 @@ Definition induced_cycle (G : sgraph) (c : seq G) : Prop :=
 Definition peripheral_cycle (G : sgraph) (c : seq G) : Prop :=
   induced_cycle c /\ connected (~: [set x in c]).
 
+(** Corpus row: opg:geodesic_cycles_and_tuttes_theorem
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/geodesic_cycles_and_tuttes_theorem/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/geodesic_cycles_and_tuttes_theorem.json
+    English statement: (Open Problem Garden, "Geodesic cycles and Tutte's Theorem")
+      Over every ordered field R, every 3-connected finite graph G admits a positive symmetric
+      edge-length assignment ell such that every ell-geodesic cycle of G is peripheral, i.e.
+      induced and non-separating.
+    Definitions: [cyc_edge c] - two vertices are cyclically consecutive in the list c (D2str.v);
+      [on_cycle_walk c u p] - every step of the walk u :: p is a cycle edge of c (D2str.v);
+      [wlen ell u p] - the ell-length of the walk u :: p (D2str.v); [edge_length ell] - ell is
+      symmetric and strictly positive on edges (D2str.v); [shortest_walk ell u v p] - p is a
+      u-v walk of minimal ell-length among all u-v walks (D2str.v); [geodesic_cycle ell c] - c
+      is a uniform cycle and between any two of its vertices SOME cyclic arc is a shortest walk
+      (D2str.v); [induced_cycle c] - every edge of G between cycle vertices is a cycle edge
+      (D2str.v); [peripheral_cycle c] - induced and with connected complement (D2str.v);
+      [k_connected G 3] - base's Whitney form: 3 < |V(G)| and deleting fewer than 3 vertices
+      keeps the rest connected (GTBase).
+    Notes: "ell-geodesic" is the standard isometric-cycle property: between any two cycle vertices
+      one of the two arcs realises the ell-distance, the distance being taken over ALL walks of
+      G, not only those on the cycle. Lengths live in an arbitrary ordered field rather than
+      the positive reals. *)
 Definition geodesic_cycles_and_tuttes_theorem_statement : Prop :=
   forall (R : realFieldType) (G : sgraph),
     k_connected G 3 ->
@@ -258,6 +305,20 @@ Definition k_regular_subgraph (G : sgraph) (S : {set G}) (adj : rel G) (k : nat)
       (forall x y : G, adj x y -> (x \in S) && (y \in S)) &
       (forall v : G, v \in S -> #|[set u in S | adj v u]| = k)].
 
+(** Corpus row: opg:nearly_spanning_regular_subgraphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/nearly_spanning_regular_subgraphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/nearly_spanning_regular_subgraphs.json
+    English statement: (Open Problem Garden, "Nearly spanning regular subgraphs")
+      For every positive rational eps = p/q and every k > 0 there is r0 such that every
+      r-regular graph G with r >= r0 has a k-regular subgraph carried by a vertex set S with
+      (q - p) * |V(G)| <= q * |S|, i.e. |S| >= (1 - eps) * |V(G)|.
+    Definitions: [k_regular_subgraph G S adj k] - adj is a symmetric irreflexive relation whose pairs are
+      edges of G with both endpoints in S, and every vertex of S has exactly k adj-neighbours
+      in S (D2str.v); [regular G r] - every vertex of G has degree r (GTBase).
+    Notes: the subgraph is carried by a vertex set S together with an explicit edge relation adj,
+      rather than by an induced subgraph, because a k-regular subgraph need not be induced. eps
+      is a ratio of positive naturals; the nat truncated subtraction q - p makes the conclusion
+      trivially true when eps >= 1, which matches the intended content. *)
 Definition nearly_spanning_regular_subgraphs_statement : Prop :=
   forall (p q k : nat), 0 < p -> 0 < q -> 0 < k ->
     exists r0 : nat,
@@ -289,6 +350,24 @@ Definition uniform_hypergraph (T : finType) (E : {set {set T}}) (r : nat) : Prop
 Definition rainbow (T : finType) (r : nat) (part : T -> 'I_r) (e : {set T}) : bool :=
   [forall j : 'I_r, [exists v, (v \in e) && (part v == j)]].
 
+(** Corpus row: opg:simultaneous_partition_of_hypergraphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/simultaneous_partition_of_hypergraphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/simultaneous_partition_of_hypergraphs.json
+    English statement: (Open Problem Garden, "Simultaneous partition of hypergraphs")
+      For every r > 0 and every positive rational eps = a/b there is a threshold N such that
+      for any two r-uniform hypergraphs E1, E2 on the same finite vertex set, each with at
+      least N hyperedges, there is a partition of the vertices into r classes for which, for
+      both i = 1 and i = 2, the number of hyperedges of E_i meeting every class satisfies
+      b * r^r * rainbow_i + a * r^r * m_i >= b * r! * m_i, i.e.
+      rainbow_i >= r! * m_i / r^r - eps * m_i.
+    Definitions: [uniform_hypergraph E r] - every hyperedge has exactly r vertices (D2str.v);
+      [rainbow r part e] - the hyperedge e contains a vertex of every one of the r parts
+      (D2str.v); [factorial] - MathComp factorial.
+    Notes: the o(m_i) slack of the source is rendered in eventual epsilon-N form with the threshold
+      N depending only on r and eps, uniform in the vertex type and the two hypergraphs. The
+      inequality is cross-multiplied by b * r^r and the subtraction is moved to the other side,
+      so no nat subtraction occurs. A "partition into r classes" is a total map to 'I_r;
+      classes are allowed to be empty, in which case no hyperedge is rainbow. *)
 Definition simultaneous_partition_of_hypergraphs_statement : Prop :=
   forall (r a b : nat), 0 < r -> 0 < a -> 0 < b ->
     exists N : nat,
@@ -344,6 +423,26 @@ Definition is_eq_cover_number (G : sgraph) (m : nat) : Prop :=
   (exists es : seq (rel G), eq_covers es /\ size es = m) /\
   (forall es : seq (rel G), eq_covers es -> m <= size es).
 
+(** Corpus row: opg:covering_powers_of_cycles_with_equivalence_subgraphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/covering_powers_of_cycles_with_equivalence_subgraphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/covering_powers_of_cycles_with_equivalence_subgraphs.json
+    English statement: (Open Problem Garden, "Covering powers of cycles with equivalence subgraphs")
+      There are positive naturals cnum, cden, a growth threshold g and a base point k0 such
+      that for every k >= k0, every n >= g k and every m that is the equivalence covering number
+      of the k-th power of the n-cycle, cnum * k <= cden * m; that is, eq(C_n^k) is Omega(k).
+    Definitions: [equivalence_graph G e] - e is an equivalence relation all of whose non-trivial related
+      pairs are edges of G, i.e. a disjoint union of cliques of G (D2str.v); [eq_covers G es] -
+      every entry of the list es is such an equivalence subgraph and every edge of G is
+      related by some entry (D2str.v); [is_eq_cover_number G m] - m is the minimum length of
+      such a cover (D2str.v); [graph_power G k] - the distance power, x and y adjacent when
+      they are at distance at most k (GTBase); [cycle_graph n] - C_n on 'I_n (GTBase).
+    Notes: this row is recorded as PARTIAL. Omega(k) is an asymptotic-in-n lower bound, so the
+      n-regime is an EXISTENTIALLY quantified growth threshold g with n >= g k, NOT a bare
+      guard such as 2k < n: near-complete powers like C_{2k+1}^k = K_{2k+1} (covering number 1)
+      or the cocktail-party graph C_{2k+2}^k (covering number O(log k)) violate any linear
+      bound, so g must be allowed to grow past them. The constant is the ratio cnum/cden.
+      Because g is existentially quantified with no growth constraint, the statement is
+      formally weaker than the source conjecture (ledger). *)
 Definition covering_powers_of_cycles_with_equivalence_subgraphs_statement : Prop :=
   exists cnum cden : nat,
     [/\ 0 < cnum, 0 < cden &

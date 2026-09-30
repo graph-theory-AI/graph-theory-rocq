@@ -32,8 +32,27 @@ Definition x159_correspondence_3_colourable (G : sgraph) : Prop :=
 
 (** ** X159 statements *****************************************************)
 
-(** Informal conjecture: every planar graph without cycles of lengths 4..8 has
-    correspondence chromatic number at most 3. *)
+(** Corpus row: arxiv:1508.03437#01
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1508.03437__01/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1508.03437__01.json
+    English statement: (Dvorak and Postle 2016, informal conjecture, arXiv:1508.03437)
+      Every planar finite simple graph with no cycle of length between 4 and 8 has correspondence
+      chromatic number at most 3: for every correspondence assignment giving, for each edge, a
+      partial matching between the three colours at its two ends, there is a choice of one colour
+      per vertex such that no edge has its two chosen colours matched.
+    Definitions: [x159_no_cycle_length_between G lo hi] - G has no cycle whose number of vertices
+      lies between lo and hi (this file); [x159_correspondence_assignment C] - for every edge the
+      relation C is symmetric under swapping the two ends and is a partial matching, i.e. functional
+      in each argument (this file); [x159_correspondence_colouring C] - a colouring by ['I_3]
+      avoiding all matched pairs on edges (this file); [x159_correspondence_3_colourable G] - such a
+      colouring exists for every correspondence assignment (this file); [wagner_planar] (GTBase
+      base/theories/base.v).
+    Notes: The palette is fixed to three colours per vertex, as in DP-colouring with lists of size
+      3, and no consistency assumption on closed walks of length 3 is imposed, which is exactly the
+      stronger claim the source leaves open. Corpus status: solved, by Jin, Kang and Zhu 2024 who
+      proved DP-3-colourability for planar graphs with no cycle of length 4, 6 or 8; stated only
+      here. The row was retargeted in 2026-07-16 from a blocked placeholder, see
+      meta/BLOCKED_RETARGETING_FOUNDATIONS.md. *)
 Definition planar_no_cycles_4_to_8_correspondence_chromatic_three_statement : Prop :=
   forall G : sgraph,
     wagner_planar G ->

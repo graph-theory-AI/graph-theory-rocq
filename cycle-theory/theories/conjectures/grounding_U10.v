@@ -48,8 +48,13 @@ Qed.
 Lemma edges_at_Ge (v : Ge) : edges_at v = [set: edge Ge].
 Proof. by apply/setP => e; rewrite !inE inc_all_Ge. Qed.
 
+(** [Ge] is LOOPLESS, so the arc-end degree [subdeg] agrees with the incidence
+    count (a loop would count twice). *)
+Lemma loopless_Ge : loopless Ge.
+Proof. by case=> [[[]|[]]|]. Qed.
+
 Lemma subdeg_Ge (H : {set edge Ge}) (v : Ge) : subdeg H v = #|H|.
-Proof. by rewrite /subdeg edges_at_Ge setTI. Qed.
+Proof. by rewrite (subdeg_loopless _ _ loopless_Ge) edges_at_Ge setTI. Qed.
 
 Lemma src_Ge (e : edge Ge) : source e = inl tt.
 Proof. by do ![case: e => [e|] //=]. Qed.
@@ -151,7 +156,7 @@ Lemma edges_at_Gt (v : Gt) : edges_at v = [set: edge Gt].
 Proof. by apply/setP => e; rewrite !inE inc_all_Gt. Qed.
 
 Lemma mdeg_Gt (v : Gt) : mdeg v = 3.
-Proof. by rewrite /mdeg edges_at_Gt cardsT card_edge_Gt. Qed.
+Proof. by rewrite (mdeg_loopless _ loopless_Gt) edges_at_Gt cardsT card_edge_Gt. Qed.
 
 Lemma cubic_Gt : cubic Gt.
 Proof. by split; [exact: loopless_Gt | exact: mdeg_Gt]. Qed.
@@ -163,9 +168,8 @@ pose e' : edge Gt := if e == None then Some None else None.
 have ne : e' != e.
   rewrite /e'; case: ifPn => [/eqP -> // | hne].
   by rewrite eq_sym.
-have hw : walk (source e) (target e) [:: e'].
-  change ((source e' == source e) && walk (target e') (target e) [::]).
-  by rewrite (src_Gt e) (src_Gt e') (tgt_Gt e) (tgt_Gt e') !eqxx.
+have hw : uwalk (source e) (target e) [:: e'].
+  by apply: uwalk_one; [rewrite (src_Gt e') (src_Gt e) | rewrite (tgt_Gt e') (tgt_Gt e)].
 case: (He _ hw) => f; rewrite inE => /eqP ->; rewrite mem_seq1 => /eqP ef.
 by move: ne; rewrite ef eqxx.
 Qed.

@@ -45,9 +45,23 @@ Definition x86_in_branching_on
 
 (** ** X86 statements ******************************************************)
 
-(** Studies slice: Balliu-Brunelli-Crescenzi-Olivetti-Viennot conjecture that
-    every strongly connected digraph has same-root arc-disjoint in/out
-    branchings of linear size. *)
+(** Corpus row: studies:std_balliu_brunelli_crescenzi_olivetti_viennot_conje
+    Site: none
+    Review: none
+    English statement: (Balliu, Brunelli, Crescenzi, Olivetti and Viennot, arc-disjoint linear branchings)
+      There is a positive rational constant c such that every nonempty strongly connected finite
+      digraph has a vertex r, two vertex sets Sin and Sout each containing r and each of size at
+      least c times the number of vertices, and two arc selectors that are, respectively, an
+      in-branching on Sin rooted at r and an out-branching on Sout rooted at r, using no common
+      arc.
+    Definitions: [x86_out_branching_on S f r] / [x86_in_branching_on S f r] - arc selectors
+      staying inside S, with root r and every other vertex of S having exactly one kept in-arc,
+      resp. out-arc, and acyclic kept relation (this file); [x86_real_sel] / [x86_inside] /
+      [x86_arc_disjoint] / [x86_sel_indeg] (this file); [outsel f] (core/oriented.v); [acyclicb]
+      (conjectures/dichromatic.v); [strongb] (invariants/strong.v).
+    Notes: Linear size is cleared of division as cnum * #|D| <= cden * #|S|. The two branchings
+      are spanning only on their own vertex sets Sin and Sout, which is the arbitrary
+      vertex-overlap reading of the source; they share the root r and no arc. *)
 Definition strongly_connected_same_root_linear_branchings_statement : Prop :=
   exists cnum cden : nat,
     [/\ 0 < cnum, 0 < cden

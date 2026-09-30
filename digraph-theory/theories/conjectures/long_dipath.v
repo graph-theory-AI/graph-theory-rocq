@@ -19,8 +19,20 @@ Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
-(** ** Node *)
-
+(** Corpus row: opg:directed_cycle_of_length_twice_the_minimum_outdegree
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/directed_cycle_of_length_twice_the_minimum_outdegree/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/directed_cycle_of_length_twice_the_minimum_outdegree.json
+    English statement: (Open Problem Garden, Directed path of length twice the minimum outdegree (Thomasse; Cheng-Keevash Conjecture 1, arXiv:2402.16776))
+      Every nonempty finite oriented graph in which every vertex has out-degree at least d has a
+      directed path with at least 2d arcs, that is the length of a longest directed path
+      satisfies 2 * d <= ell(D).
+    Definitions: [orientedDigraph] - irreflexive asymmetric arc relation (core/oriented.v);
+      [outdeg v] (core/oriented.v); [ell D] - the maximum number of arcs of a directed path,
+      paths being duplicate-free (core/dipath.v).
+    Notes: Path length is counted in ARCS, as in the source. The d = 3 instance is proved
+      unconditionally in this package (applications ck3, recorded here as [conj1_delta3_proved])
+      and the d = 4 cases on 10 and 11 vertices are the project's computer-aided results, so the
+      remaining content is the general d. *)
 Definition cheng_keevash_conj1_statement : Prop :=
   forall (D : orientedDigraph) (d : nat),
     0 < #|D| -> (forall v : D, d <= outdeg v) -> 2 * d <= ell D.

@@ -82,8 +82,23 @@ Definition no_induced_Kl (l : nat) (D : diGraphType) : Prop :=
 
 (** ** The conjectures *)
 
-(** Conjecture 6.2 (smallest OPEN beachhead): every oriented, C₃-free, S₂⁺-free digraph
-    is 2-dicolourable. (Value-2: ≤ 2 is the open content; the directed C₄ attains 2.) *)
+(** Corpus row: derived:drv_heroforest_h1
+    Site: none
+    Review: none
+    English statement: (Aboulker, Charbit, Naserasr 2020, Extension of Gyarfas-Sumner conjecture to digraphs, arXiv:2009.13319, Conjecture 6.2; corpus derived row)
+      Every finite digraph that is oriented (no digon and no loop), has no directed triangle,
+      and has no induced out-star S2-plus (no three distinct vertices x, a, b with arcs from x
+      to a and from x to b and no arc at all between a and b, nor back to x) has dichromatic
+      number at most 2.
+    Definitions: [oriented_dg D] - asymmetric arc relation, hence also loopless (this file);
+      [no_induced_C3 D] - no three vertices carrying a directed triangle (this file);
+      [no_induced_S2plus D] - no induced out-star on three vertices (this file); [dicolorableb D
+      2] - the vertex set splits into two parts each inducing an acyclic subdigraph
+      (conjectures/dichromatic.v).
+    Notes: The value-2 statement of the source is an equality; the open content is the upper
+      bound, the lower bound being witnessed by the directed 4-cycle, which lies in the class
+      and has dichromatic number 2. In an oriented graph a directed triangle is automatically
+      induced, which is why [no_induced_C3] needs no non-adjacency clauses. *)
 Definition conj_6_2 : Prop :=
   forall D : diGraphType,
     oriented_dg D -> no_induced_C3 D -> no_induced_S2plus D -> dicolorableb D 2.
@@ -94,17 +109,44 @@ Definition thm_6_1 : Prop :=
   forall D : diGraphType,
     oriented_dg D -> no_induced_C3 D -> no_induced_arrowK2_K1 D -> dicolorableb D 2.
 
-(** Conjecture 4.4: for every oriented forest F and every l, the set {digon, K_l, F} is
-    heroic — i.e. oriented K_l-free F-free digraphs have bounded dichromatic number. *)
+(** Corpus row: arxiv:2009.13319#02
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2009.13319__02/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2009.13319__02.json
+    English statement: (Aboulker, Charbit, Naserasr 2020, Extension of Gyarfas-Sumner conjecture to digraphs, arXiv:2009.13319, Conjecture 4.4)
+      For every oriented forest F and every l, the class of oriented digraphs that contain no l
+      pairwise adjacent vertices and no induced copy of F has bounded dichromatic number: one
+      constant dicolours every member. Equivalently the set consisting of the digon, the
+      complete graph on l vertices and F is heroic.
+    Definitions: [oriented_forest F] - the underlying simple graph of F is acyclic (this file);
+      [no_induced_Kl l D] - no l vertices pairwise joined by an arc in some direction (this
+      file); [ind_free F D] - no induced copy of F (conjectures/heroes.v); [dichromatic_bounded
+      C] - one constant k with every member of C k-dicolourable (conjectures/dichromatic.v);
+      [underlying] and [oriented_dg] (this file).
+    Notes: Forbidding the digon is the [oriented_dg] hypothesis; forbidding K_l is read as
+      forbidding every orientation of K_l as an induced subdigraph, which is the
+      no-l-pairwise-adjacent-vertices condition. *)
 Definition conj_4_4 : Prop :=
   forall (F : orientedDigraph) (l : nat),
     oriented_forest F ->
     dichromatic_bounded
       (fun D : diGraphType => [/\ oriented_dg D, no_induced_Kl l D & ind_free F D]).
 
-(** Conjecture 4.2 (the hero dichotomy): for a hero H and an oriented forest F, the set
-    {digon, H, F} is heroic iff F is a disjoint union of oriented stars or H is a
-    transitive tournament. *)
+(** Corpus row: arxiv:2009.13319#01
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2009.13319__01/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2009.13319__01.json
+    English statement: (Aboulker, Charbit, Naserasr 2020, Extension of Gyarfas-Sumner conjecture to digraphs, arXiv:2009.13319, Conjecture 4.2, the hero dichotomy)
+      For every hero H and every oriented forest F, the class of oriented digraphs with no
+      induced copy of H and no induced copy of F has bounded dichromatic number IF AND ONLY IF F
+      is a disjoint union of oriented stars or H is a transitive tournament.
+    Definitions: [hero H] - H is a hero, the class of digraphs with no induced copy of H having
+      bounded dichromatic number (conjectures/heroes.v); [oriented_forest F] and
+      [union_of_oriented_stars F] - oriented forest, resp. oriented forest with no path on four
+      vertices (this file); [transitive_tournament H] - tournament with transitive arc relation
+      (this file); [ind_free] (conjectures/heroes.v); [dichromatic_bounded]
+      (conjectures/dichromatic.v); [no_P4] and [underlying] (this file).
+    Notes: Disjoint union of oriented stars is encoded as oriented forest without an underlying
+      path on four vertices, which is equivalent for forests. The only-if direction is proved in
+      the source; the if direction is the open content. *)
 Definition conj_4_2 : Prop :=
   forall (H F : orientedDigraph),
     hero H -> oriented_forest F ->

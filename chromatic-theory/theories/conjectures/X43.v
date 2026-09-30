@@ -66,8 +66,23 @@ Definition x43_induced_free (G H : sgraph) : Prop :=
 
 (** ** X43 statements ******************************************************)
 
-(** arXiv:2511.02892, strong edge-colouring of diamond-free claw-free cubic
-    graphs. *)
+(** Corpus row: arxiv:2511.02892#03
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2511.02892__03/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2511.02892__03.json
+    English statement: (Barat, Dvorak, Haxell, Kardos, Luzar, Onderko, Rajnik, Sotak and Ulyanov 2025, Problem 4.1, arXiv:2511.02892)
+      Every cubic finite simple graph with no induced diamond, the complete graph on four vertices
+      minus an edge, and no induced claw, the star with three leaves, is strongly 6-edge-colourable:
+      the square of its line graph has chromatic number at most 6.
+    Definitions: [x43_strong_edge_colourable G k] - chi of [graph_power (x43_line_graph G) 2] is
+      at most k, the standard reduction of strong edge colouring to colouring the square of the line
+      graph (this file); [x43_line_graph G] - the line graph built on the edges of a simple graph,
+      two edges adjacent when distinct and meeting (this file); [x43_diamond] and [x43_claw] - the
+      two forbidden graphs, built explicitly on [bool + bool] and [option 'I_3] (this file);
+      [x43_induced_free G H] - no vertex set of G induces a copy of H (this file); [regular G 3]
+      (GTBase base/theories/base.v).
+    Notes: The corpus row is a QUESTION; the Rocq body is its affirmative reading. The source also
+      gives an equivalent phrasing in terms of the truncated graph T(G) of an arbitrary cubic graph,
+      which is NOT encoded here; only the diamond-free claw-free cubic formulation is. *)
 Definition diamond_free_claw_free_cubic_strong_six_edge_colourable_statement : Prop :=
   forall G : sgraph,
     regular G 3 ->

@@ -62,10 +62,28 @@ Definition x124_bounded_merge_width (C : sgraph -> Prop) : Prop :=
 
 (** ** X124 statements *****************************************************)
 
-(** Studies slice: Dreier-Torunczyk conjecture -- bounded merge-width classes are
-    polynomially chi-bounded.  The antecedent now uses finite labelled expression
-    syntax with explicit merge/relabel/join constructors and a surjective
-    realisation of the resulting merged graph. *)
+(** Corpus row: studies:std_dreier_toru_czyk_conjecture_merge_width_polynomi
+    Site: none
+    Review: none
+    English statement: (Dreier and Torunczyk, studies slice of the corpus)
+      For every class C of finite simple graphs, if C has bounded merge-width then C is polynomially
+      chi-bounded, that is, some polynomial with natural coefficients p satisfies chi(G) <=
+      p(omega(G)) for every G in C.
+    Definitions: [x124_poly_chi_bounded C] - one coefficient list bounds chi by its Horner
+      evaluation at omega, uniformly over the class (this file); [x124_merge_expr k] - the syntax of
+      labelled merge expressions with vertex, disjoint union, join-labels, relabel and merge-label
+      constructors (this file); [x124_merge_realisation G e] - a record presenting G as the image of
+      a labelled pre-merge structure whose vertex count is bounded by the number of leaves of e
+      (this file); [x124_merge_width_le C w] and [x124_bounded_merge_width C] - every member has
+      such a realisation from an expression with at most w labels (this file).
+    Notes: KNOWN UNFAITHFUL ANTECEDENT, corpus leg blocked. The faithfulness audit of 2026-07-17,
+      recorded in meta/BLOCKED_RETARGETING_AUDIT.md and in the row's verification_note, found that
+      the merge expression e is consumed only through [x124_expr_leaves e], a single natural
+      bounding the size of the pre-merge vertex type, while the join-labels, relabel and merge-label
+      constructors impose nothing on the edge relation. The antecedent is therefore satisfiable by
+      every class and the implication degenerates to the false claim that every class of graphs is
+      polynomially chi-bounded. The CONCLUSION [x124_poly_chi_bounded] is faithful. The body is left
+      untouched here, WP4 changes comments only. *)
 Definition dreier_torunczyk_merge_width_poly_chi_bounded_statement : Prop :=
   forall C : sgraph -> Prop,
     x124_bounded_merge_width C -> x124_poly_chi_bounded C.

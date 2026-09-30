@@ -289,7 +289,22 @@ Definition xe1_between_rational_power_bounds
   n ^ (b1 + 3 * a1) <= C1 * h ^ (3 * b1) /\
   h ^ (2 * b2) <= C2 * n ^ (b2 - 2 * a2).
 
-(** Erdos Problems #1035. *)
+(** Corpus row: erdos:1035
+    Site: none
+    Review: none
+    English statement: (Erdos problem #1035)
+      There is a positive rational constant c/d (0 < c < d) such that for every n, every
+      graph G on exactly 2^n vertices in which every vertex v satisfies
+      d * deg(v) > (d - c) * 2^n contains the n-dimensional hypercube Q_n as a subgraph.
+    Definitions: [xe1_hypercube n] - the n-dimensional hypercube, built by n iterated Cartesian
+      products of 'K_2 with 'K_1 as base (XE1.v); [xe1_subgraph_of H G] - an injective map
+      H -> G carrying every edge of H to an edge of G, i.e. H is a (not necessarily induced)
+      subgraph of G (XE1.v); [N(v)] - neighbourhood, [cartesian_product] - GTBase.
+    Notes: the real constant c of the source is encoded as the rational c/d with naturals
+      0 < c < d, so the minimum-degree hypothesis d * deg(v) > (d - c) * 2^n reads
+      deg(v) > (1 - c/d) * 2^n; nat subtraction is safe because c < d is assumed. The
+      hypothesis is stated vertexwise (every vertex has large degree), which is the minimum
+      degree condition. *)
 Definition erdos_1035_statement : Prop :=
   exists c d : nat,
     0 < c /\ c < d /\
@@ -298,14 +313,42 @@ Definition erdos_1035_statement : Prop :=
       (forall v : G, d * #|N(v)| > (d - c) * 2 ^ n) ->
       xe1_subgraph_of (xe1_hypercube n) G.
 
-(** Erdos Problems #128. *)
+(** Corpus row: erdos:128
+    Site: none
+    Review: none
+    English statement: (Erdos problem #128)
+      For every n and every graph G on n vertices: if every vertex subset S with
+      |S| >= floor(n/2) induces more than n^2/50 edges (written n^2 < 50 * e(G[S])), then G
+      contains a triangle.
+    Definitions: [x4_edge_count G] - the number of 2-element subsets of vertices that are
+      edges of G (X4.v); [x4_triangle_set T] - T is a 3-element set of pairwise adjacent
+      vertices (X4.v); [induced S] - the induced subgraph on S (coq-graph-theory).
+    Notes: the division by 50 is cleared to keep the statement over nat, and floor(n/2) is
+      [n %/ 2]. The conclusion asserts the existence of a triangle vertex set in G itself,
+      not in an induced subgraph. *)
 Definition erdos_128_statement : Prop :=
   forall (n : nat) (G : sgraph),
     #|G| = n ->
     (forall S : {set G}, n %/ 2 <= #|S| -> n ^ 2 < 50 * x4_edge_count (induced S)) ->
     exists T : {set G}, x4_triangle_set T.
 
-(** Erdos Problems #129. *)
+(** Corpus row: erdos:129
+    Site: none
+    Review: none
+    English statement: (Erdos problem #129)
+      For every number r >= 1 of colours there is a constant C > 1 such that for all n, if R
+      is the least N for which every r-colouring of the edges of the complete graph on N
+      vertices admits a set of n vertices missing a copy of K_3 in at least one colour, then
+      R < C^s where s is the least integer with n <= s^2, i.e. s = ceil(sqrt n).
+    Definitions: [xe1_multicolour_missing_clique_ramsey_number n k r R] - R is minimal such
+      that every colouring col of the 2-element subsets of 'I_R by 'I_r leaves some n-set S
+      and some colour c with no k-clique of S monochromatic in c, via
+      [xe1_colour_k_free_on] (XE1.v); [xe1_sqrt_ceil n s] - n <= s^2 and s is least with that
+      property (XE1.v).
+    Notes: the source bound is C^{sqrt n}; the Rocq body uses the integer ceiling of sqrt n,
+      hence bounds R by C^{ceil(sqrt n)}, which is formally a weaker conclusion than
+      C^{sqrt n} (recorded in the ledger). The colouring is a total function on all subsets
+      of 'I_R, and [xe1_colour_k_free_on] only constrains the 2-element ones. *)
 Definition erdos_129_statement : Prop :=
   forall r : nat, 1 <= r -> exists C : nat,
     1 < C /\
@@ -313,7 +356,18 @@ Definition erdos_129_statement : Prop :=
       xe1_multicolour_missing_clique_ramsey_number n 3 r R ->
       exists s : nat, xe1_sqrt_ceil n s /\ R < C ^ s.
 
-(** Erdos Problems #23. *)
+(** Corpus row: erdos:23
+    Site: none
+    Review: none
+    English statement: (Erdos problem #23)
+      For every n, every triangle-free graph G on exactly 5n vertices has a set F of at most
+      n^2 of its edges whose deletion leaves a bipartite graph.
+    Definitions: [x4_edge_set G] - the set of 2-element vertex sets that are edges of G
+      (X4.v); [xe1_delete_edges G F] - the graph on the same vertices keeping exactly the
+      edges of G whose 2-element vertex set is not in F (XE1.v); [triangle_free],
+      [bipartite] - GTBase.
+    Notes: the answer to the source question is asserted positively (the source phrases it as
+      a question). *)
 Definition erdos_23_statement : Prop :=
   forall (n : nat) (G : sgraph),
     #|G| = 5 * n ->
@@ -323,7 +377,24 @@ Definition erdos_23_statement : Prop :=
       #|F| <= n ^ 2 /\
       bipartite (@xe1_delete_edges G F).
 
-(** Erdos Problems #545. *)
+(** Corpus row: erdos:545
+    Site: none
+    Review: none
+    English statement: (Erdos problem #545)
+      For all m, n, t: if G has m edges and no isolated vertex, m = binomial(n,2) + t with
+      t < n, and H is obtained from the complete graph on n vertices by adding one new vertex
+      joined to exactly t of them, then the diagonal Ramsey number of G is at most that of H.
+    Definitions: [xe1_graph_ramsey_number G G R] - R is the least N such that in every graph
+      on N vertices, G embeds either in the graph or in its complement, where an embedding is
+      [xe1_subgraph_of] (an injective edge-preserving map) and the complement is
+      [xe1_complement_graph] (XE1.v); [xe1_no_isolated_vertices G] - every vertex has degree
+      at least 1 (XE1.v); [xe1_complete_plus_vertex H n t] - H consists of an n-clique K plus
+      one extra vertex x adjacent to exactly t vertices of K and to nothing else (XE1.v);
+      [x4_edge_count] - number of edges (X4.v).
+    Notes: R(G) is read as the diagonal Ramsey number R(G,G), as in the source. The two
+      Ramsey numbers are passed as parameters constrained by the minimality predicate rather
+      than computed, so the statement is vacuous for a pair (G,H) whose Ramsey numbers do not
+      exist in this sense. *)
 Definition erdos_545_statement : Prop :=
   forall (m n t RG RH : nat) (G H : sgraph),
     x4_edge_count G = m -> xe1_no_isolated_vertices G ->
@@ -333,7 +404,19 @@ Definition erdos_545_statement : Prop :=
     xe1_graph_ramsey_number H H RH ->
     RG <= RH.
 
-(** Erdos Problems #548. *)
+(** Corpus row: erdos:548
+    Site: none
+    Review: none
+    English statement: (Erdos problem #548)
+      For all n >= k+1, every graph G on n vertices with at least ((k-1)/2) * n + 1 edges
+      (written 2 * e(G) >= (k-1) * n + 2) contains every tree T on k+1 vertices as a
+      subgraph.
+    Definitions: [xe1_tree T] - the whole vertex set of T is a forest and is connected
+      (XE1.v, on coq-graph-theory's [is_forest] and [connected]); [xe1_subgraph_of T G] -
+      injective edge-preserving map T -> G (XE1.v); [x4_edge_count] - number of edges (X4.v).
+    Notes: the edge bound is doubled to stay in nat. [k - 1] is nat subtraction, so for k = 0
+      the hypothesis degenerates to 2 * e(G) >= 2; the intended range k >= 1 is implied by
+      k+1 <= n together with the tree having k+1 vertices. *)
 Definition erdos_548_statement : Prop :=
   forall (n k : nat) (G T : sgraph),
     k.+1 <= n ->
@@ -341,7 +424,24 @@ Definition erdos_548_statement : Prop :=
     2 * x4_edge_count G >= (k - 1) * n + 2 ->
     xe1_subgraph_of T G.
 
-(** Erdos Problems #550. *)
+(** Corpus row: erdos:550
+    Site: none
+    Review: none
+    English statement: (Erdos problem #550)
+      Let k >= 2 and let sizes be positive part sizes with two smallest values m1 <= m2. Then
+      there is N such that for every n >= N, every tree T on n vertices and every complete
+      multipartite graph G with those part sizes, the Ramsey number R(T,G) is at most
+      (chi(G) - 1) * (R(T, K_{m1,m2}) - 1) + m1.
+    Definitions: [xe1_two_smallest_part_sizes sizes m1 m2] - two distinct part indices realise
+      m1 and m2, m1 bounds every size from below and m2 bounds every size other than the
+      m1-index from below (XE1.v); [xe1_complete_multipartite_with_sizes G k sizes] - the
+      vertices of G split into k classes of the given sizes with adjacency exactly across
+      classes (XE1.v); [xe1_tree] - connected forest (XE1.v); [xe1_graph_ramsey_number H K R]
+      - the least N forcing H in the graph or K in the complement (XE1.v); [KB m1 m2] -
+      complete bipartite graph (GTBase); [chi] - chromatic number (coq-graph-theory).
+    Notes: both subtractions are nat subtractions, harmless because chi(G) >= 1 and the
+      Ramsey number is at least 1 in the intended range. "n sufficiently large" is encoded as
+      an existential N depending only on k and the part sizes. *)
 Definition erdos_550_statement : Prop :=
   forall (k : nat) (sizes : 'I_k -> nat) (m1 m2 : nat),
     2 <= k ->
@@ -355,7 +455,20 @@ Definition erdos_550_statement : Prop :=
       xe1_graph_ramsey_number T G RTG ->
       RTG <= (χ([set: G]) - 1) * (RTB - 1) + m1.
 
-(** Erdos Problems #552. *)
+(** Corpus row: erdos:552
+    Site: none
+    Review: none
+    English statement: (Erdos problem #552)
+      For every constant c and every bound M there is n >= M such that the Ramsey number
+      R(C_4, K_{1,n}) satisfies R + c <= n + floor(sqrt n); that is, for every c there are
+      infinitely many n with R(C_4, S_n) <= n + sqrt(n) - c.
+    Definitions: [xe1_sqrt_floor n s] - s^2 <= n and s is largest with that property (XE1.v);
+      [xe1_graph_ramsey_number H K R] - the least N forcing H in the graph or K in the
+      complement (XE1.v); [cycle_graph 4], [KB 1 n] (the star S_n = K_{1,n}) - GTBase.
+    Notes: only the second half of the source problem is formalised; the first half
+      ("determine R(C_4,S_n)") has no Prop form. The subtraction of c is moved to the left
+      side to stay in nat, and floor(sqrt n) replaces sqrt(n), so the encoded bound is
+      slightly stronger than the source for non-square n. *)
 Definition erdos_552_statement : Prop :=
   forall c M : nat, exists n R s : nat,
     M <= n /\
@@ -363,7 +476,20 @@ Definition erdos_552_statement : Prop :=
     xe1_graph_ramsey_number (cycle_graph 4) (KB 1 n) R /\
     R + c <= n + s.
 
-(** Erdos Problems #557. *)
+(** Corpus row: erdos:557
+    Site: none
+    Review: none
+    English statement: (Erdos problem #557)
+      For every number k >= 1 of colours there is a constant C such that for every tree T on
+      n vertices, the k-colour Ramsey number R_k(T) - the least N such that every k-colouring
+      of the edges of the complete graph on N vertices contains a monochromatic copy of T -
+      is at most k * n + C.
+    Definitions: [xe1_multicolour_graph_ramsey_number k H R] - R is least such that every
+      colouring of the 2-element subsets of 'I_R by 'I_k admits a colour and an injective map
+      H -> 'I_R sending every edge of H to a pair of that colour
+      ([xe1_monochromatic_copy_in_complete], XE1.v); [xe1_tree] - connected forest (XE1.v).
+    Notes: the O(1) of the source is encoded as a constant C depending only on k, uniform in
+      the tree and in n, which is the intended reading. *)
 Definition erdos_557_statement : Prop :=
   forall k : nat, 1 <= k -> exists C : nat,
     forall (n R : nat) (T : sgraph),
@@ -371,7 +497,26 @@ Definition erdos_557_statement : Prop :=
       xe1_multicolour_graph_ramsey_number k T R ->
       R <= k * n + C.
 
-(** Erdos Problems #561. *)
+(** Corpus row: erdos:561
+    Site: none
+    Review: none
+    English statement: (Erdos problem #561)
+      Let ns and ms be non-empty, positive, non-increasing sequences and let F1, F2 be the
+      disjoint unions of stars with those numbers of leaves. Then the size Ramsey number
+      Rhat(F1,F2) equals the sum over q = 2..|ns|+|ms| of l_q, where
+      l_q = max { ns_i + ms_j - 1 : (i+1) + (j+1) = q }.
+    Definitions: [xe1_size_ramsey_number F1 F2 m] - m is the least number of edges of a graph
+      G such that every symmetric 2-colouring of the adjacency of G yields a copy of F1 on
+      edges of the first colour or a copy of F2 on edges of the second (XE1.v);
+      [xe1_star_forest_with_leaves G leaves] - the vertices of G partition into star centres
+      and leaves realising the given leaf counts, with no edges between stars (XE1.v);
+      [xe1_star_forest_formula ns ms value] - value is the sum of the terms
+      [xe1_star_formula_term] (XE1.v); [xe1_positive_sequence],
+      [xe1_nonincreasing_sequence] - pointwise positivity and monotonicity of a [seq nat]
+      (XE1.v).
+    Notes: indices are 0-based in the Rocq body and shifted by one in the formula term
+      ([i.+1 + j.+1 = q]) to match the source's 1-based indexing. The subtraction
+      [ns_i + ms_j - 1] is nat subtraction, harmless since the sequences are positive. *)
 Definition erdos_561_statement : Prop :=
   forall (ns ms : seq nat) (F1 F2 : sgraph) (m formula : nat),
     0 < size ns -> 0 < size ms ->
@@ -383,7 +528,20 @@ Definition erdos_561_statement : Prop :=
     xe1_size_ramsey_number F1 F2 m ->
     m = formula.
 
-(** Erdos Problems #566. *)
+(** Corpus row: erdos:566
+    Site: none
+    Review: none
+    English statement: (Erdos problem #566)
+      If G is a graph in which every set of k vertices induces at most 2k - 3 edges (for
+      every k), then there is a constant C such that every graph H with m edges and no
+      isolated vertex satisfies R(G,H) <= C * m.
+    Definitions: [xe1_every_k_set_sparse G k] - every k-element vertex set induces at most
+      2k - 3 edges (XE1.v); [xe1_graph_ramsey_number G H R] - the least N forcing G in the
+      graph or H in the complement (XE1.v); [xe1_no_isolated_vertices] - every vertex has a
+      neighbour (XE1.v); [x4_edge_count] - number of edges (X4.v).
+    Notes: C is quantified after G, so it may depend on G, matching the source's implicit
+      constant. [2 * k - 3] is nat subtraction, so for k <= 1 the hypothesis says the induced
+      subgraph has no edge, which is automatic. *)
 Definition erdos_566_statement : Prop :=
   forall G : sgraph,
     (forall k : nat, xe1_every_k_set_sparse G k) ->
@@ -393,7 +551,20 @@ Definition erdos_566_statement : Prop :=
         xe1_graph_ramsey_number G H R ->
         R <= C * m.
 
-(** Erdos Problems #567. *)
+(** Corpus row: erdos:567
+    Site: none
+    Review: none
+    English statement: (Erdos problem #567)
+      If G is the 3-dimensional hypercube Q_3, or K_{3,3}, or H_5 (the 5-cycle plus two
+      vertex-disjoint chords), then there is a constant C such that every graph H with m
+      edges and no isolated vertex satisfies R(G,H) <= C * m.
+    Definitions: [xe1_hypercube 3] - Q_3 as iterated Cartesian product (XE1.v); [KB 3 3] -
+      K_{3,3} (GTBase); [xe1_h5_graph G] - G has 5 vertices carrying a spanning cycle plus
+      exactly two disjoint non-cycle edges (XE1.v); [xe1_graph_ramsey_number],
+      [xe1_no_isolated_vertices] (XE1.v); [x4_edge_count] (X4.v).
+    Notes: Q_3 and K_{3,3} are pinned by Rocq equality of the sgraph structure, whereas H_5
+      is characterised up to isomorphism; the mixture is harmless here because the conclusion
+      is isomorphism-invariant, but it is inconsistent vocabulary (ledger). *)
 Definition erdos_567_statement : Prop :=
   forall G : sgraph,
     (G = xe1_hypercube 3 \/ G = KB 3 3 \/ xe1_h5_graph G) ->
@@ -403,7 +574,19 @@ Definition erdos_567_statement : Prop :=
         xe1_graph_ramsey_number G H R ->
         R <= C * m.
 
-(** Erdos Problems #568. *)
+(** Corpus row: erdos:568
+    Site: none
+    Review: none
+    English statement: (Erdos problem #568)
+      If G is a graph such that R(G,T) <= C1 * n for every tree T on n vertices and
+      R(G,K_n) <= C2 * n^2 for every n, then there is a constant C such that every graph H
+      with m edges and no isolated vertex satisfies R(G,H) <= C * m.
+    Definitions: [xe1_graph_ramsey_number G H R] - the least N forcing G in the graph or H in
+      the complement (XE1.v); [xe1_tree] - connected forest (XE1.v);
+      [xe1_no_isolated_vertices] (XE1.v); ['K_n] - complete graph (coq-graph-theory);
+      [x4_edge_count] (X4.v).
+    Notes: the two "much less than" hypotheses of the source are encoded as explicit linear
+      and quadratic bounds with existentially quantified constants C1, C2. *)
 Definition erdos_568_statement : Prop :=
   forall G : sgraph,
     (exists C1 : nat, forall (n R : nat) (T : sgraph),
@@ -415,7 +598,23 @@ Definition erdos_568_statement : Prop :=
       xe1_graph_ramsey_number G H R ->
       R <= C * m.
 
-(** Erdos Problems #619. *)
+(** Corpus row: erdos:619
+    Site: none
+    Review: none
+    English statement: (Erdos problem #619)
+      There is a positive rational constant c/d (0 < c < d) such that for every connected
+      triangle-free graph G on n vertices, the least number h of edges that must be added to
+      G to make it have diameter at most 4 while staying triangle-free satisfies
+      d * h < (d - c) * n, i.e. h < (1 - c/d) * n.
+    Definitions: [xe1_triangle_free_diameter_completion_number G r h] - h is the least size
+      of a set F of non-edges of G such that adding F ([xe1_add_edges]) keeps the graph
+      triangle-free and makes every vertex reachable within r steps
+      ([xe1_diameter_at_most], via [ball]) (XE1.v); [triangle_free], [connected] - GTBase /
+      coq-graph-theory; [x4_edge_set] - the edges as 2-element sets (X4.v).
+    Notes: the real constant c is encoded as the rational c/d over nat with 0 < c < d. The
+      source restricts h_r to triangle-free G; the Rocq body carries [triangle_free G] as an
+      explicit hypothesis, and the completion predicate itself requires the completed graph to
+      remain triangle-free. *)
 Definition erdos_619_statement : Prop :=
   exists c d : nat,
     0 < c /\ c < d /\
@@ -424,7 +623,22 @@ Definition erdos_619_statement : Prop :=
       xe1_triangle_free_diameter_completion_number G 4 h ->
       d * h < (d - c) * n.
 
-(** Erdos Problems #766. *)
+(** Corpus row: erdos:766
+    Site: none
+    Review: none
+    English statement: (Erdos problem #766)
+      For all k < l with 4(l+1) <= k^2, there is N such that for every n >= N the quantity
+      f(n;k,l) = min { ex(n;F) : F has k vertices and l edges } is strictly increasing in l,
+      i.e. f(n;k,l) < f(n;k,l+1).
+    Definitions: [xe1_turan_number_for_graph F n m] - m is the maximum number of edges of an
+      F-free graph on n vertices, F-freeness being the negation of [xe1_subgraph_of] (XE1.v);
+      [xe1_min_turan_over_size_edges k l n a] - a is the minimum of that Turan number over
+      all graphs F with k vertices and l edges (XE1.v); [x4_edge_count] - number of edges
+      (X4.v).
+    Notes: the source's range k < l <= k^2/4 is encoded as k < l together with
+      4 * (l+1) <= k^2, which is the condition needed for both l and l+1 to lie in the range.
+      Only the second (monotonicity) question of the source is formalised; "give good
+      estimates" has no Prop form. *)
 Definition erdos_766_statement : Prop :=
   forall k l : nat, k < l -> 4 * l.+1 <= k ^ 2 ->
     exists N : nat,
@@ -434,13 +648,22 @@ Definition erdos_766_statement : Prop :=
         xe1_min_turan_over_size_edges k l.+1 n b ->
         a < b.
 
-(** Erdos Problems #802. *)
-(** The hypothesis is average degree (at most) t: [\sum_v #|N(v)| = 2|E| <= t*n],
-    i.e. average degree <= t.  Encoding it as [average_degree_geq G t 1] (a LOWER
-    bound) is wrong: since log t / t is decreasing, a graph of much larger degree
-    would make the target unattainable.  The logarithm is [trunc_log 2] (mathcomp
-    floor-log2, as in D2pr.v); [logn 2] is the 2-adic valuation, a different
-    object that vanishes on odd t. *)
+(** Corpus row: erdos:802
+    Site: none
+    Review: none
+    English statement: (Erdos problem #802)
+      For every r there is a constant C > 0 such that every K_r-free graph G on n vertices
+      whose degree sum is at most t * n (average degree at most t) has an independent set A
+      with C * t * |A| >= n * floor(log_2 t), i.e. |A| >= (log t / t) * n / C.
+    Definitions: [xe1_subgraph_of 'K_r G] - K_r embeds in G, so its negation is K_r-freeness
+      (XE1.v); [xe1_stable_set A] - no two vertices of A are adjacent (XE1.v);
+      [trunc_log 2 t] - MathComp floor of log base 2.
+    Notes: the hypothesis is average degree AT MOST t, written as the degree-sum bound
+      [\sum_v #|N(v)| <= t * #|G|]; encoding it as a LOWER bound on the average degree would
+      be wrong, since log t / t is decreasing and a graph of much larger degree would make
+      the target unattainable. The logarithm is [trunc_log 2] (floor-log2, as in D2pr.v);
+      [logn 2] is the 2-adic valuation, a different object that vanishes on odd t. The
+      implicit constant of the source is inverted into the multiplier C on the left. *)
 Definition erdos_802_statement : Prop :=
   forall r : nat, exists C : nat,
     0 < C /\
@@ -451,7 +674,20 @@ Definition erdos_802_statement : Prop :=
       exists A : {set G},
         xe1_stable_set A /\ C * t * #|A| >= n * trunc_log 2 t.
 
-(** Erdos Problems #812. *)
+(** Corpus row: erdos:812
+    Site: none
+    Review: none
+    English statement: (Erdos problem #812)
+      Both of the following hold for the diagonal Ramsey numbers R(n) = R(K_n,K_n): there are
+      positive naturals cnum, cden and a threshold N with cden * R(n+1) >= (cden + cnum) * R(n)
+      for all n >= N (that is, R(n+1)/R(n) >= 1 + cnum/cden); and there are positive naturals
+      Cnum, Cden and a threshold N with Cden * R(n) + Cnum * n^2 <= Cden * R(n+1) for all
+      n >= N (that is, R(n+1) - R(n) >= (Cnum/Cden) * n^2).
+    Definitions: [xe1_graph_ramsey_number 'K_n 'K_n R] - R is the least N such that every
+      graph on N vertices contains K_n or its complement does (XE1.v).
+    Notes: the source asks the two questions separately; the Rocq body asserts their
+      conjunction, which is therefore at least as strong as either. Real constants are
+      encoded as ratios of positive naturals. *)
 Definition erdos_812_statement : Prop :=
   (exists cnum cden N : nat, 0 < cnum /\ 0 < cden /\
     forall n Rn Rn1 : nat,
@@ -466,7 +702,24 @@ Definition erdos_812_statement : Prop :=
       xe1_graph_ramsey_number 'K_n.+1 'K_n.+1 Rn1 ->
       Cden * Rn + Cnum * n ^ 2 <= Cden * Rn1).
 
-(** Erdos Problems #813. *)
+(** Corpus row: erdos:813
+    Site: none
+    Review: none
+    English statement: (Erdos problem #813)
+      There are positive rationals c1 = a1/b1 and c2 = a2/b2 with 2*a2 < b2, constants
+      C1, C2 > 0 and a threshold N such that for all n >= N, the largest h with the property
+      that every graph on n vertices in which every 7 vertices contain a triangle has a
+      clique of size at least h satisfies n^(b1+3*a1) <= C1 * h^(3*b1) and
+      h^(2*b2) <= C2 * n^(b2-2*a2); equivalently n^{1/3+c1} << h << n^{1/2-c2}.
+    Definitions: [xe1_every_7_set_has_triangle G] - every 7-element vertex set contains a
+      triangle ([x4_triangle_set], X4.v) (XE1.v);
+      [xe1_seven_triangle_clique_guarantee n h] - h is the largest value for which every such
+      graph on n vertices has a clique of size at least h (XE1.v);
+      [xe1_between_rational_power_bounds] - the two power inequalities above (XE1.v);
+      [clique] - coq-graph-theory.
+    Notes: real exponents are encoded as ratios a/b of positive naturals and the inequalities
+      are raised to a common integral power to stay in nat; 2*a2 < b2 keeps the exponent
+      b2 - 2*a2 positive, so the nat subtraction is safe. *)
 Definition erdos_813_statement : Prop :=
   exists a1 b1 a2 b2 C1 C2 N : nat,
     0 < a1 /\ 0 < b1 /\ 0 < a2 /\ 0 < b2 /\
@@ -476,7 +729,18 @@ Definition erdos_813_statement : Prop :=
       xe1_seven_triangle_clique_guarantee n h ->
       xe1_between_rational_power_bounds n h a1 b1 a2 b2 C1 C2.
 
-(** Erdos Problems #85. *)
+(** Corpus row: erdos:85
+    Site: none
+    Review: none
+    English statement: (Erdos problem #85)
+      There is a threshold N such that for all n >= max(N,4), if f(n) is the least minimum
+      degree forcing a C_4 in every graph on n vertices, then f(n) <= f(n+1).
+    Definitions: [xe1_c4_forcing_min_degree n f] - f is least such that every graph on n
+      vertices with all degrees at least f contains a 4-cycle as a subgraph (XE1.v);
+      [xe1_min_degree_at_least] (XE1.v); [xe1_subgraph_of] - injective edge-preserving map
+      (XE1.v); [cycle_graph 4] - GTBase.
+    Notes: "for all large n" is an existential threshold N, and the source's standing
+      hypothesis n >= 4 is kept as a separate assumption. *)
 Definition erdos_85_statement : Prop :=
   exists N : nat,
     forall n fn fn1 : nat,
@@ -485,7 +749,21 @@ Definition erdos_85_statement : Prop :=
       xe1_c4_forcing_min_degree n.+1 fn1 ->
       fn <= fn1.
 
-(** Erdos Problems #87. *)
+(** Corpus row: erdos:87
+    Site: none
+    Review: none
+    English statement: (Erdos problem #87)
+      There are positive naturals cnum, cden and a threshold N such that for every k >= N and
+      every graph G with chromatic number exactly k, the diagonal Ramsey number R(G) and the
+      usual Ramsey number R(k) = R(K_k,K_k) satisfy cden * R(G) >= cnum * R(k), i.e.
+      R(G) >= (cnum/cden) * R(k).
+    Definitions: [xe1_diagonal_ramsey_number G R] - [xe1_graph_ramsey_number G G R], the
+      least N forcing G in the graph or in its complement (XE1.v); [chi] - chromatic number
+      of the whole vertex set (coq-graph-theory).
+    Notes: the source asks two questions; the Rocq body formalises only the second, stronger
+      one (a uniform constant c with R(G) > c R(k)), and states it with >= rather than >.
+      That is deliberate - the stronger form implies the (1-eps)^k form - but it is a
+      divergence from the literal source text (ledger). *)
 Definition erdos_87_statement : Prop :=
   exists cnum cden N : nat,
     0 < cnum /\ 0 < cden /\

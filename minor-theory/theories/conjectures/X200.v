@@ -39,8 +39,30 @@ Definition x200_H_model_erdos_posa_oklogk (H : sgraph) : Prop :=
 
 (** ** X200 statements *****************************************************)
 
-(** Conjecture 1.2 from the wheel-minor paper: for every planar [H], [H]-models
-    have the Erdos-Posa property with [O(k log k)] bounding function. *)
+(** Corpus row: arxiv:1710.06282#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1710.06282__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1710.06282__00.json
+    English statement: (Aboulker, Fiorini, Huynh, Joret, Raymond and Sau 2018, "A tight
+      Erdos-Posa function for wheel minors", Conjecture 1.2)
+      For every planar graph H there is a constant C such that for every finite simple graph G
+      and every k at least 1, either G contains k H-models with pairwise disjoint vertex sets,
+      or G has a set of at most C times k times (one plus the base-2 logarithm of k+1, rounded
+      down) vertices meeting the vertex set of every H-model of G.
+    Definitions: [x200_minor_model G H branch] - an assignment of nonempty, connected, pairwise
+      disjoint branch sets to the vertices of H with an edge of G between the branch sets of any
+      two adjacent vertices of H (minor-theory/theories/conjectures/X200.v);
+      [x200_model_vertices branch] - the union of the branch sets (same file);
+      [x200_k_disjoint_H_models G H k] - k H-models whose vertex sets are pairwise disjoint
+      (same file); [x200_H_model_hitting_set G H X] - X meets the vertex set of every H-model of
+      G (same file); [x200_H_model_erdos_posa_oklogk H] - the Erdos-Posa dichotomy above with
+      bounding function C * k * (trunc_log 2 (k+1)).+1 (same file); [wagner_planar H] - H has
+      neither K_5 nor K_(3,3) as a minor, i.e. planarity by Wagner's theorem
+      (base/theories/base.v); [trunc_log 2 n] - the base-2 logarithm rounded down (MathComp).
+    Notes: the O(k log k) bounding function is realised by the explicit finite envelope
+      C * k * (1 + trunc_log 2 (k+1)), with C chosen after H and before G and k; the "+1"
+      keeps the factor positive at k = 1.  Planarity is the combinatorial Wagner predicate, so
+      the statement is axiom-free.  The corpus records this row as solved (Cames van Batenburg,
+      Huynh, Joret and Raymond, arXiv:1807.04969). *)
 Definition planar_H_model_erdos_posa_oklogk_statement : Prop :=
   forall H : sgraph,
     wagner_planar H ->

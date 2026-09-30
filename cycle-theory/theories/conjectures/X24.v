@@ -30,7 +30,28 @@ Definition x24_rainbow_cycle
 
 (** ** X24 statements ******************************************************)
 
-(** Studies slice: rainbow cycle in every 1-factorization of K_n. *)
+(** Corpus row: studies:std_akbari_etesami_mahini_mahmoody_question_on_long
+    Site: none
+    Review: none
+    English statement: (Akbari, Etesami, Mahini and Mahmoody, "Akbari-Etesami-Mahini-
+      Mahmoody question on long rainbow cycles in 1-factorizations of K_n")
+      For every even natural number n greater than 2 and every colouring of the vertex
+      pairs of the complete graph on n vertices by n-1 colours which is a 1-factorization,
+      meaning that each of the n-1 colour classes is a perfect matching, there is a rainbow
+      cycle of length at least n-2: a cycle through more than two vertices whose
+      consecutive edges all receive pairwise distinct colours.
+    Definitions: [x24_edge_set G] - the two-element vertex sets that are edges (X24.v);
+      [x24_perfect_matching M] - M is a set of edges in which every vertex lies on exactly
+      one member (X24.v); [x24_one_factorization col] - for each of the n-1 colours the
+      class of that colour is a perfect matching of the complete graph (X24.v);
+      [x24_cycle_edge_seq c] and [x24_rainbow_cycle col c] - the consecutive-pair edges of
+      c, and c being a [ucycle] of length more than two with duplicate-free colour list
+      (X24.v); ['K_n], written [complete n] - the complete graph on n vertices
+      (coq-graph-theory sgraph); [ucycle] (MathComp path.v).
+    Notes: the parity hypothesis [~~ odd n] is what makes a 1-factorization of the complete
+      graph exist; for odd n the hypothesis [x24_one_factorization] is unsatisfiable. The
+      corpus row is a studies slice with no site or review page, and is phrased there as a
+      question; the Rocq statement is its affirmative form. *)
 Definition one_factorization_long_rainbow_cycle_statement : Prop :=
   forall (n : nat) (col : {set 'K_n} -> 'I_(n.-1)),
     2 < n ->

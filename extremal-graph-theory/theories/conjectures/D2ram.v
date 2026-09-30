@@ -119,6 +119,23 @@ Definition palette_on (n m : nat) (col : 'I_n -> 'I_n -> 'I_m) (A : {set 'I_n}) 
 
 End MulticolourEH.
 
+(** Corpus row: opg:multicolour_erdos_hajnal_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/multicolour_erdos_hajnal_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/multicolour_erdos_hajnal_conjecture.json
+    English statement: (Open Problem Garden, "Multicolour Erdos-Hajnal Conjecture")
+      For every k >= 2, every m > 0 and every symmetric pattern colouring chi of the edges of
+      K_k that uses all m colours, there is a positive rational eps = a/b such that for every n
+      and every symmetric m-colouring col of the edges of K_n, either col contains k vertices
+      whose induced colouring is exactly chi, or there is a vertex set A with n^a <= |A|^b
+      (i.e. |A| >= n^eps) on whose edges at most m-1 colours occur.
+    Definitions: [uses_all_colours chi] - every colour of 'I_m occurs on some pair of distinct pattern
+      vertices (D2ram.v); [contains_pattern chi col] - some injection g of 'I_k into 'I_n has
+      col (g i) (g j) = chi i j for all distinct i, j (D2ram.v); [palette_on col A] - the set
+      of colours occurring on pairs of distinct vertices of A (D2ram.v).
+    Notes: colourings of K_n are symmetric functions on ordered pairs; the diagonal is ignored
+      everywhere. The exponent eps > 0 is a ratio a/b of positive naturals and "|A| >= n^eps"
+      is raised to the b-th power to stay in nat, log-free. [m - 1] is nat subtraction, safe
+      because m > 0 is assumed. *)
 Definition multicolour_erdos_hajnal_statement : Prop :=
   forall (k m : nat) (chi : 'I_k -> 'I_k -> 'I_m),
     (2 <= k)%N -> (0 < m)%N ->
@@ -152,6 +169,22 @@ Definition perfect_graph (G : sgraph) : Prop := forall A : {set G}, χ(A) = ω(A
 Definition complete_bipartite_sub (G : sgraph) (A B : {set G}) : Prop :=
   [disjoint A & B] /\ (forall a b : G, a \in A -> b \in B -> a -- b).
 
+(** Corpus row: opg:complete_bipartite_subgraphs_of_perfect_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/complete_bipartite_subgraphs_of_perfect_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/complete_bipartite_subgraphs_of_perfect_graphs.json
+    English statement: (Open Problem Garden, "Complete bipartite subgraphs of perfect graphs")
+      For all naturals 0 < a < b there is a threshold N such that every perfect graph G on
+      n >= N vertices has disjoint vertex sets A, B with n^(b-a) <= |A|^b and n^(b-a) <= |B|^b
+      that are completely joined either in G or in its complement; since (b-a)/b takes every
+      value below 1, this says |A|, |B| >= n^(1-o(1)).
+    Definitions: [perfect_graph G] - chi(A) = omega(A) for every vertex set A, the Lovasz
+      characterisation using base's subset-relative chi and omega (D2ram.v);
+      [complete_bipartite_sub G A B] - A and B are disjoint and every vertex of A is adjacent
+      to every vertex of B (D2ram.v); [compl G] - the complement graph, same vertex type
+      (GTBase); [edge_count G] - |E(G)| via coq-graph-theory's [E(_)] (D2ram.v).
+    Notes: n^(1-o(1)) is rendered as the eventual bound with exponent (b-a)/b < 1, the threshold N
+      depending on a and b only and not on G, which is the intended uniform reading. The
+      subtraction b - a is safe because a < b is assumed. *)
 Definition complete_bipartite_subgraphs_of_perfect_graphs_statement : Prop :=
   forall a b : nat, (0 < a)%N -> (a < b)%N ->
     exists N : nat, forall (G : sgraph) (n : nat),
@@ -199,6 +232,27 @@ Definition common_graph (H : sgraph) : Prop :=
   exists N : nat, forall (n : nat) (col : rel 'I_n), symmetric col -> (N <= n)%N ->
     (n ^ #|H| <= mono_copies H col * 2 ^ edge_count H)%N.
 
+(** Corpus row: opg:chromatic_number_of_common_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/chromatic_number_of_common_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/chromatic_number_of_common_graphs.json
+    English statement: (Open Problem Garden, "Chromatic Number of Common Graphs")
+      There is a bound k such that every non-empty common graph H has chromatic number at most
+      k, where H is common when there is a threshold N with: for every n >= N and every
+      symmetric 2-colouring of the edges of K_n, the number of monochromatic homomorphic copies
+      of H in K_n is at least n^|V(H)| / 2^|E(H)|.
+    Definitions: [mono_copies H n col] - the number of maps f from V(H) to 'I_n sending every edge of H to
+      a pair of DISTINCT vertices all of one common colour (D2ram.v); [common_graph H] - the
+      eventual counting bound above, cross-multiplied to n^|V(H)| <= mono_copies * 2^|E(H)|
+      (D2ram.v); [edge_count H] - |E(H)| (D2ram.v); [chi] - chromatic number
+      (coq-graph-theory).
+    Notes: this row is recorded as PARTIAL. "Common" is an analytic / graph-limit notion (the
+      random 2-colouring asymptotically minimises the number of monochromatic copies of H);
+      with no graphon, homomorphism-density or probability layer the body uses the finite
+      eventual counting core. The leading factor is 1 rather than 2, which keeps EDGELESS H -
+      genuinely common, with chi = 1 - inside the class (there mono_copies = n^|V(H)| and
+      |E(H)| = 0, so the bound is an equality); the eventual threshold N removes the small-n
+      degeneracy. MISSING: the genuine (1+o(1)) asymptotic form. The class [common_graph] is
+      therefore a proxy that may be wider or narrower than the true one (ledger). *)
 Definition chromatic_number_of_common_graphs_statement : Prop :=
   exists k : nat,
     forall H : sgraph, (0 < #|H|)%N -> common_graph H -> (χ([set: H]) <= k)%N.
@@ -239,6 +293,22 @@ Definition cayley_graph : sgraph := SGraph cayley_adj_sym cayley_adj_irrefl.
 
 End CayleyGraph.
 
+(** Corpus row: opg:ramsey_properties_of_cayley_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/ramsey_properties_of_cayley_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/ramsey_properties_of_cayley_graphs.json
+    English statement: (Open Problem Garden, "Ramsey properties of Cayley graphs")
+      There is a fixed constant c > 0 such that every abelian group with more than one element
+      has a symmetric connection set S (x is in S exactly when its inverse is) whose Cayley
+      graph satisfies 2^omega <= |G|^c and 2^alpha <= |G|^c, i.e. it has neither a clique nor
+      an independent set of size more than c * log_2 |G|.
+    Definitions: [cayley_adj S] - x is adjacent to y when x != y and x^-1 y or y^-1 x lies in S (D2ram.v);
+      [cayley_graph S] - the undirected sgraph it carries (D2ram.v, tagged MOVE-to-base);
+      [omega], [alpha] - clique and independence numbers, subset-relative (GTBase).
+    Notes: the adjacency is made symmetric unconditionally by the disjunction; under the
+      conjecture's hypothesis that S is symmetric the two disjuncts coincide, so this is
+      exactly the standard Cayley graph. "No clique or independent set of size > c log |G|"
+      is rendered log-free as 2^omega <= |G|^c and 2^alpha <= |G|^c. The guard 1 < |G| excludes
+      the trivial group, where log |G| = 0. *)
 Definition ramsey_properties_of_cayley_graphs_statement : Prop :=
   exists c : nat, (0 < c)%N /\
     forall gT : finGroupType, abelian [set: gT] -> (1 < #|gT|)%N ->
@@ -263,6 +333,20 @@ Definition ramsey_properties_of_cayley_graphs_statement : Prop :=
 
 Definition has_induced_copy (H G : sgraph) : Prop := inhabited (H ⇀ G).
 
+(** Corpus row: opg:the_erdos_hajnal_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/the_erdos_hajnal_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/the_erdos_hajnal_conjecture.json
+    English statement: (Open Problem Garden, "The Erdos-Hajnal Conjecture")
+      For every graph H there are naturals 0 < a <= b such that every non-empty graph G with no
+      induced copy of H satisfies |V(G)|^a <= max(omega(G), alpha(G))^b, i.e. G has a clique or
+      an independent set of size at least |V(G)|^(a/b).
+    Definitions: [has_induced_copy H G] - inhabitation of coq-graph-theory's induced-subgraph embedding
+      H -> G (injective and adjacency-mono), so its negation is H-induced-freeness (D2ram.v);
+      [omega], [alpha] - clique and independence numbers (GTBase); [maxn] - MathComp maximum.
+    Notes: the constant delta(H) of the source is the ratio a/b, constrained to lie in (0,1] by
+      0 < a <= b, and the size bound is raised to the b-th power to stay in nat. The guard
+      0 < |G| excludes the empty graph, where the bound would read 0 <= 0 but the intended
+      content is vacuous anyway. *)
 Definition the_erdos_hajnal_statement : Prop :=
   forall H : sgraph, exists a b : nat, (0 < a)%N /\ (a <= b)%N /\
     forall G : sgraph, (0 < #|G|)%N -> ~ has_induced_copy H G ->

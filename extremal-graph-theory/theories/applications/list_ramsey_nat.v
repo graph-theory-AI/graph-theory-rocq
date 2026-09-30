@@ -92,6 +92,12 @@ Definition lr_nat_forces (s k n : nat) : Prop :=
 Definition lr_nat_is_number (s k r : nat) : Prop :=
   lr_nat_forces s k r /\ forall n, lr_nat_forces s k n -> r <= n.
 
+(** No corpus row: natural-number-colour variant of the list Ramsey equality R_l(H_s, k) = s^k + 1,
+    PROVED below as [list_ramsey_natural]: edge lists are ordinary finite [seq nat] and the
+    Ramsey number is the least n forcing a non-avoiding colouring. Same underlying result
+    as arXiv:2103.15175 Section 3.1, whose corpus row arxiv:2103.15175#00 carries no
+    formal_name and so cannot be cited; see
+    https://graph-theory-ai.github.io/graph-conjectures/arxiv/2103.15175__00/ *)
 Definition list_ramsey_natural_statement : Prop :=
   forall s k : nat, 2 <= s -> 0 < k -> lr_nat_is_number s k (s ^ k).+1.
 

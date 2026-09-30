@@ -34,8 +34,21 @@ Definition x64_bridgeless (G : sgraph) : Prop :=
 
 (** ** X64 statements ******************************************************)
 
-(** arXiv:2511.02892, Problem 5.2: only finitely many connected bridgeless
-    cubic graphs fail to admit a 2-homogeneous colouring. *)
+(** Corpus row: arxiv:2511.02892#05
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2511.02892__05/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2511.02892__05.json
+    English statement: (Barat, Dvorak, Haxell, Kardos, Luzar, Onderko, Rajnik, Sotak and Ulyanov 2025, Problem 5.2, arXiv:2511.02892)
+      There is a bound N such that every connected bridgeless cubic finite simple graph with at
+      least N vertices admits a 2-homogeneous colouring; equivalently, only finitely many connected
+      bridgeless cubic graphs fail to admit one.
+    Definitions: [x64_bridgeless G] - deleting any single edge leaves the graph connected (this
+      file); [x64_delete_edge_graph G e] (this file); [x64_edge_set G] (this file);
+      [x63_k_homogeneous_colouring G 2] - a proper colouring in which every vertex sees exactly two
+      colours among its neighbours (X63.v); [regular G 3], [connected] (GTBase
+      base/theories/base.v).
+    Notes: "Finitely many exceptions" is encoded as a SIZE THRESHOLD: all graphs of the class with
+      at least N vertices are good. This is equivalent to finiteness up to isomorphism, since for
+      each fixed number of vertices there are finitely many graphs. *)
 Definition finite_bridgeless_cubic_two_homogeneous_exceptions_statement : Prop :=
   exists N : nat,
     forall G : sgraph,

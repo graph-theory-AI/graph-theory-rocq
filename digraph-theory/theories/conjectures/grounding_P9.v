@@ -44,7 +44,7 @@ From HB Require Import structures.
 From mathcomp Require Import all_boot all_fingroup all_algebra.
 From Digraph Require Import prelude digraph oriented dipath strong tournament.
 From Digraph Require Import classic_core dichromatic packing colouring_variants two_extremal.
-From Digraph Require Import interop_graph_theory chi_bounded P9.
+From Digraph Require Import interop_graph_theory chi_bounded subdivision P9.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -224,6 +224,52 @@ apply/and3P; split.
   apply/negP=> /and3P[uv vw wu].
   by have uw := ltn_trans uv vw; rewrite ltnNge (ltnW uw) in wu.
 Qed.
+
+(** ** Wave-E4 GUARD REPAIR grounding for row
+    opg:subdivision_of_a_transitive_tournament_in_digraphs_with_large_outdegree
+
+    The row's host now carries the guard [0 < #|D|].  Two facts justify it:
+    the UNGUARDED body (spelled out below, so that nothing here refutes a
+    committed row) is FALSE because the EMPTY digraph satisfies every pointwise
+    out-degree requirement vacuously while admitting no injective branch map
+    ([p9_subdivision_TT_unguarded_false], the wave-E3 scratch refutation
+    P9_subdivision_TT_false ported); and the guarded hypothesis class is
+    inhabited at every threshold by the complete digraph
+    ([p9_outdeg_host_nonvacuous]). *)
+
+Definition p9_emptyD : Type := 'I_0.
+HB.instance Definition _ := Finite.on p9_emptyD.
+HB.instance Definition _ := HasArc.Build p9_emptyD (fun _ _ : 'I_0 => false).
+
+Lemma p9_emptyD_card : #|{: p9_emptyD}| = 0.
+Proof. exact: card_ord. Qed.
+
+Lemma no_subdivides_emptyD (H : diGraphType) : (0 < #|H|)%N ->
+  ~ subdivides (p9_emptyD : diGraphType) H.
+Proof.
+move=> hH [b _]; move/card_gt0P: hH => [x _].
+by case: (b x) => m; rewrite ltn0.
+Qed.
+
+Lemma p9_subdivision_TT_unguarded_false :
+  ~ (exists f : nat -> nat,
+       forall (k : nat) (D : diGraphType),
+         (forall v : D, f k <= outdeg v) -> subdivides D (TT k : diGraphType)).
+Proof.
+move=> [f hf].
+apply: (no_subdivides_emptyD (H := (TT 1 : diGraphType))); first by rewrite card_TT.
+by apply: hf; case.
+Qed.
+
+Lemma p9_outdeg_host_nonvacuous (b : nat) :
+  exists D : diGraphType, (0 < #|D|)%N /\ (forall v : D, b <= outdeg v).
+Proof.
+exists (dense_dg b : diGraphType); split; first by rewrite card_dense.
+by move=> v; rewrite outdeg_dense.
+Qed.
+
+Print Assumptions p9_subdivision_TT_unguarded_false.
+Print Assumptions p9_outdeg_host_nonvacuous.
 
 (** ** Print Assumptions audit on representative grounded facts. *)
 Print Assumptions nb_arcs_sum_outdeg.

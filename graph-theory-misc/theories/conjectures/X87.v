@@ -54,10 +54,30 @@ Definition x87_at_least_half_factorial (speed : nat -> nat) : Prop :=
 
 (** ** X87 statements ******************************************************)
 
-(** Studies slice: Balogh-Bollobas-Morris speed-gap conjecture for hereditary
-    classes of totally ordered graphs.  Ordered graphs are represented on the
-    canonical ordered vertex set 'I_n, so the speed counts ordered isomorphism
-    types by their unique increasing relabelling. *)
+(** Corpus row: studies:std_balogh_bollob_s_morris_conjecture_speed_gap_for
+    Site: none
+    Review: none
+    English statement: (Balogh, Bollobas and Morris, speed-gap conjecture for ordered graphs)
+      For every function speed that counts, for each n, the graphs on the ordered vertex set
+      {0, ..., n-1} belonging to some hereditary class of ordered graphs, either speed(n) is
+      eventually at most 2^(c*n) for some constant c, or for every q >= 3 it is eventually at
+      least n^(n*(q-2)/(2q)); that is, the speed is either at most 2^O(n) or at least
+      n^(n/2+o(n)).
+    Definitions: [x87_edge_fun n] - a boolean adjacency table on the ordered vertex set of size
+      n (this file); [x87_sgraph_edge E] - E is irreflexive and symmetric, i.e. a simple graph
+      (this file); [x87_ordered_class] - a class given by a predicate at every size (this
+      file); [x87_order_preserving f] - f is strictly increasing (this file);
+      [x87_induced_edge E f] - the ordered induced subgraph along f (this file);
+      [x87_hereditary C] - C is closed under order-preserving injective induced subgraphs (this
+      file); [x87_speed C n] - the number of simple ordered graphs of size n in C (this file);
+      [x87_is_hereditary_ordered_graph_speed speed] - speed is the speed of some hereditary
+      ordered class (this file); [x87_at_most_exponential], [x87_at_least_half_factorial] - the
+      two branches above (this file).
+    Notes: ordered graphs are represented on the canonical ordered vertex set of size n, so
+      counting labelled adjacency tables in the class counts ordered isomorphism types by their
+      unique increasing relabelling - which is why no quotient is needed.  The lower branch
+      n^(n/2+o(n)) is rendered in the rational-epsilon form: for each q >= 3, eventually
+      n^(n*(q-2) div (2q)) <= speed(n), the exponent being an integer division. *)
 Definition hereditary_ordered_graph_speed_gap_statement : Prop :=
   forall speed : nat -> nat,
     x87_is_hereditary_ordered_graph_speed speed ->

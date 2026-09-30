@@ -56,9 +56,32 @@ End OddDistance.
 Arguments odd_dist {R} p q.
 Arguments n_colorable {R} S n.
 
-(** ** coloring_the_odd_distance_graph  (Question, OPEN — PARTIAL)
-
-    Reading-2: the odd-distance graph's finite subgraphs have UNBOUNDED chromatic
-    number — for every [n] a finite point set fails to be [n]-colourable. *)
+(** Corpus row: opg:coloring_the_odd_distance_graph
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/coloring_the_odd_distance_graph/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/coloring_the_odd_distance_graph.json
+    English statement: (Open Problem Garden, "Coloring the Odd Distance Graph")
+      The Odd Distance Graph has the points of the plane as vertices, two points
+      adjacent when their distance is an odd integer; the question is whether
+      its chromatic number is infinite.  Back-translating the Rocq body: for
+      every real-closed field R and every number of colours n there is a finite
+      list S of points of R x R that is not properly n-colourable - no map from
+      points to n colours gives different colours to every two points of S whose
+      squared distance is the square of an odd natural number.
+    Definitions: [oddpt] - a point, an element of R x R (this file, D4inf5.v);
+      [odd_dist p q] - there is an odd natural m with
+      (p1 - q1)^2 + (p2 - q2)^2 = m^2, the sqrt-free form of "the distance is an
+      odd integer" (D4inf5.v); [OddG] - the resulting [iGraph] (D4inf5.v);
+      [n_colorable S n] - S admits a proper colouring by 'I_n for the
+      odd-distance relation (D4inf5.v); [iGraph]/[irel_sym]/[irel_irr]
+      (infinite-graph-theory/theories/foundations/igraph.v).
+    Notes: PARTIAL, two labelled PROXIES.  (1) READING: "chromatic number is
+      infinite" is rendered as "the finite subgraphs have unbounded chromatic
+      number".  This IMPLIES the literal statement; the converse is
+      De Bruijn-Erdos and needs choice, so the choice-free direction chosen here
+      is formally stronger.  (2) FIELD-GENERIC: quantifying over every
+      [rcfType] is a proxy for the specific field of real numbers - colourings
+      are second-order, so Tarski transfer does not apply - and again makes the
+      statement formally stronger.  Distance is kept squared to avoid a square
+      root, which is exact for odd-integer distances. *)
 Definition coloring_the_odd_distance_graph_statement : Prop :=
   forall (R : rcfType) (n : nat), exists S : seq (R * R), ~ n_colorable S n.

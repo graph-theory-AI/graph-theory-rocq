@@ -46,7 +46,30 @@ Definition x26_separates_xy (G : sgraph) (X Y Z : {set G}) : Prop :=
 
 (** ** X26 statements ******************************************************)
 
-(** arXiv:2309.07905, distant induced-Menger type conjecture. *)
+(** Corpus row: arxiv:2309.07905#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2309.07905__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2309.07905__00.json
+    English statement: (Hendrey, Norin, Steiner, Turcotte 2023, "Conjecture 1.4")
+      For all natural numbers d and Dmax there is a constant C > 0 such that for every
+      k, every simple graph G of maximum degree at most Dmax and all vertex sets X and
+      Y: either G contains k pairwise distinct X-Y paths that are pairwise at distance
+      at least d, or there is a vertex set Z of fewer than C * k vertices meeting every
+      X-Y path.
+    Definitions: [x26_ball r x] / [x26_set_ball r S] — the vertices at distance at most
+      r from x, resp. from some member of S (this file); [x26_path_vertices p] — the
+      set of vertices on the sequence p (this file); [x26_xy_path X Y p] — a nonempty
+      vertex sequence with no repetitions, starting in X, ending in Y and with
+      consecutive entries adjacent (this file); [x26_pairwise_distant_paths d paths] —
+      for distinct members p, q of the list, the (d-1)-ball around the vertices of p is
+      disjoint from the vertices of q (this file); [x26_has_k_distant_xy_paths d k X Y]
+      — such a list of k pairwise distinct X-Y paths (this file); [x26_separates_xy X Y
+      Z] — no X-Y path avoids Z (this file); [Delta] — maximum degree (GTBase base).
+    Notes: "pairwise at distance at least d" is encoded as the (d-1)-ball around one
+      path missing the other path's vertex set, so d = 0 degenerates to "the paths are
+      vertex-disjoint from their own 0-balls". The k paths are required to be distinct
+      as sequences (a uniq list), not vertex-disjoint. The separator Z is not required
+      to avoid X and Y. C is quantified after d and Dmax and before k, matching the
+      source's C = C(d, Delta). *)
 Definition bounded_degree_distant_induced_menger_statement : Prop :=
   forall d Dmax : nat, exists C : nat,
     0 < C /\

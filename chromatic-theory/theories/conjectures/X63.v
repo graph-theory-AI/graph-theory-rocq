@@ -28,8 +28,21 @@ Definition x63_k_homogeneous_with
 
 (** ** X63 statements ******************************************************)
 
-(** arXiv:2511.02892, Problem 5.1: if a cubic graph admits a 2-homogeneous
-    colouring, then four colours suffice. *)
+(** Corpus row: arxiv:2511.02892#04
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2511.02892__04/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2511.02892__04.json
+    English statement: (Barat, Dvorak, Haxell, Kardos, Luzar, Onderko, Rajnik, Sotak and Ulyanov 2025, Problem 5.1, arXiv:2511.02892)
+      Every cubic finite simple graph that admits some 2-homogeneous colouring, i.e. a proper
+      colouring in which exactly two colours appear in the open neighbourhood of every vertex,
+      admits one with only four colours.
+    Definitions: [x63_k_homogeneous_colouring G k] - there are a finite palette and a proper
+      colouring in which every vertex sees exactly k colours in its open neighbourhood (this file);
+      [x63_k_homogeneous_with col k] - the same condition for a GIVEN colouring (this file);
+      [x63_neighbour_colours col v] - the set of colours occurring on the neighbours of v (this
+      file); [x63_proper_colouring] (this file); [regular G 3] (GTBase base/theories/base.v).
+    Notes: "Four colours are always sufficient" is encoded as the existence of a 2-homogeneous
+      colouring into ['I_4], not merely as a bound on some chromatic parameter, which is the
+      constructive reading of the source. *)
 Definition cubic_two_homogeneous_four_colour_statement : Prop :=
   forall G : sgraph,
     regular G 3 ->

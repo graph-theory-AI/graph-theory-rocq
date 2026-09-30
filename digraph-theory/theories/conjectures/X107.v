@@ -22,9 +22,22 @@ Definition x107_oriented_ramsey_at_most (H : diGraphType) (N : nat) : Prop :=
 
 (** ** X107 statements *****************************************************)
 
-(** Studies slice: Bucic-Letzter-Sudakov problem asking whether the oriented
-    Ramsey number of every n-vertex acyclic digraph with maximum degree Delta
-    is O_Delta(n). *)
+(** Corpus row: studies:std_buci_letzter_sudakov_problem_oriented_ramsey_num
+    Site: none
+    Review: none
+    English statement: (Bucic, Letzter and Sudakov, oriented Ramsey number of bounded-degree acyclic digraphs)
+      For every Delta there is a constant C such that every acyclic digraph H on n vertices in
+      which every vertex has in-degree plus out-degree at most Delta has oriented Ramsey number
+      at most C times n: every tournament with at least C * n vertices contains H as a
+      subdigraph via an injective arc-preserving map.
+    Definitions: [x107_total_degree_at_most H Delta] - in-degree plus out-degree is at most
+      Delta at every vertex (this file); [x107_oriented_ramsey_at_most H N] - every tournament
+      on at least N vertices contains H (this file); [subdigraph_embed H T] - injective
+      arc-preserving map (conjectures/X2.v); [acyclicb] (conjectures/dichromatic.v);
+      [tournament] (core/tournament.v).
+    Notes: The asymptotic statement oriented Ramsey number is O_Delta(n) is encoded by an
+      explicit constant C depending only on Delta, which is the combinatorial content; maximum
+      degree is read as total (in plus out) degree. *)
 Definition bounded_degree_acyclic_oriented_ramsey_linear_statement : Prop :=
   forall Delta : nat,
     exists C : nat,

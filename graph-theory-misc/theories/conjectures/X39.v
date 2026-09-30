@@ -48,7 +48,27 @@ Definition x39_separates_xy
 
 (** ** X39 statements ******************************************************)
 
-(** Studies slice: Georgakopoulos-Papasoglu coarse Menger conjecture. *)
+(** Corpus row: studies:std_coarse_menger_conjecture_georgakopoulos_papasogl
+    Site: none
+    Review: none
+    English statement: (Georgakopoulos and Papasoglu; also Albrechtsen et al., coarse Menger
+      conjecture)
+      For every k there is a c such that for every d, every finite simple graph G and all
+      vertex sets X and Y, either G contains k distinct X-Y paths pairwise at distance at
+      least d, or there is a vertex set Z with |Z| < k such that the closed (c*d)-ball around
+      Z meets every X-Y path.
+    Definitions: [x39_ball r x] / [x39_set_ball r S] - the closed r-ball around a vertex and
+      around a vertex set (this file); [x39_path_vertices p] - the vertex set of a walk (this
+      file); [x39_xy_path X Y p] - a simple path from X to Y (this file);
+      [x39_pairwise_distant_paths d ps] - distinct paths of ps are vertex-disjoint and the
+      closed (d-1)-ball around one avoids the other (this file);
+      [x39_has_k_distant_xy_paths G d k X Y] - k distinct such paths exist (this file);
+      [x39_separates_xy X Y A] - no X-Y path avoids A, i.e. A separates X from Y (this file).
+    Notes: the constant c depends only on k and the separator radius is c*d, which is what
+      distinguishes this row from graph-theory-misc/theories/conjectures/X116.v, where the
+      radius is an arbitrary function of both k and d.  "Distance at least d" is rendered as
+      vertex-disjointness together with the (d-1)-ball condition, so d = 1 means exactly
+      vertex-disjoint. *)
 Definition coarse_menger_ball_separator_statement : Prop :=
   forall k : nat, exists c : nat,
     forall (d : nat) (G : sgraph) (X Y : {set G}),

@@ -47,15 +47,28 @@ Definition x111_nu (G : sgraph) (r : nat) (U : {set G}) : nat :=
 
 (** ** X111 statements ******************************************************)
 
-(** Chepoi–Estellon–Vaxès conjecture.  There is a UNIVERSAL constant [c]
-    (∃ BEFORE all the ∀'s — one constant for every instance) such that for
-    every radius [r], every PLANAR graph [G] ([wagner_planar]) and every choice
-    of ball centres [U ⊆ V(G)], the transversal number of the r-ball hypergraph
-    is at most [c] times its packing number:  τ(H) ≤ c · ν(H).  This is a
-    bounded covering-vs-packing (fractional-Helly-flavoured) ratio for ball
-    hypergraphs of planar graphs; τ and ν range over the SAME centre set [U].
-    Empty [U] gives τ = ν = 0 (the bound still holds), and any nonempty [U]
-    forces ν ≥ 1, so the statement is not vacuous. *)
+(** Corpus row: studies:std_chepoi_estellon_vax_s_conjecture
+    Site: none
+    Review: none
+    English statement: (Chepoi, Estellon and Vaxes, "Chepoi-Estellon-Vaxes conjecture")
+      There is a single constant c such that for every radius r, every planar simple
+      graph G and every set U of ball centres in G, the transversal number of the
+      r-ball hypergraph of G with centres U is at most c times its packing number.
+    Definitions: [x111_ball r x] — the vertices at graph distance at most r from x,
+      built by iterated neighbourhood closure, so always nonempty (this file);
+      [x111_is_transversal r U T] — T meets the r-ball of every u in U (this file);
+      [x111_is_packing r U S] — S is a subset of U whose members have pairwise disjoint
+      r-balls (this file); [x111_tau r U] — the least size of a transversal, with the
+      full vertex set as arg-min default, which is always a transversal (this file);
+      [x111_nu r U] — the greatest size of a packing, the empty set always being one
+      (this file); [wagner_planar G] — no K5 minor and no K3,3 minor (GTBase base).
+    Notes: the constant is quantified before every universal, so it is uniform over
+      radius, graph and centre set, as the source demands; tau and nu range over the
+      same centre set U. Empty U gives tau = nu = 0 and any nonempty U forces nu >= 1,
+      so the statement is not vacuous. The centres range over an arbitrary set U rather
+      than over all of V(G), which covers the source's "every r-ball hypergraph of G".
+      [x111_ball] is replicated locally from the X39 idiom to avoid a cross-repo
+      import. *)
 Definition chepoi_estellon_vaxes_ball_hypergraph_transversal_statement : Prop :=
   exists c : nat,
     forall (r : nat) (G : sgraph),

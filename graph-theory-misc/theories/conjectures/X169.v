@@ -48,8 +48,34 @@ Definition x169_polytime_decides_TS_connectivity (k D : nat) : Prop :=
 
 (** ** X169 statements *****************************************************)
 
-(** Disproved question: for fixed k,D, can connectivity of the token-sliding
-    reconfiguration graph TS_k(G) be decided in polynomial time on chordal graphs
-    of clique-tree degree at most D? *)
+(** Corpus row: arxiv:1605.00442#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1605.00442__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1605.00442__00.json
+    English statement: (Bonamy and Bousquet 2016, "Token Sliding on Chordal Graphs",
+      Question 1)
+      For all k and D there is a program with polynomially bounded step count that decides, for
+      every chordal graph of clique-tree degree at most D given by its adjacency matrix,
+      whether any two k-element stable sets can be transformed into one another by a sequence
+      of single-token slides along edges.
+    Definitions: [x169_tree_decomposition bag] - the bags cover every vertex and every edge and
+      each vertex occupies a connected part of the tree (this file); [x169_clique_tree bag] -
+      a tree decomposition all of whose bags are cliques (this file); [x169_chordal G] - some
+      clique tree exists (this file); [x169_clique_tree_degree_at_most G D] - some clique tree
+      has all node degrees at most D (this file); [x169_stable_set S] - S is stable (this
+      file); [x169_ts_step k] - a one-token slide between k-element vertex sets: one element is
+      replaced by an adjacent vertex outside the set (this file);
+      [x169_token_sliding_connected G k] - all k-element stable sets are joined by slide paths
+      (this file); [polytime_decides_graph_on Class P] - some [prog] with polynomially bounded
+      step count decides P on the adjacency-matrix encoding of every graph in Class (GTBase
+      complexity.v, via [poly_cost_on] and [decides_on_class]).
+    Notes: KNOWN UNFAITHFUL, row leg is blocked (faithfulness audit 2026-07-17,
+      meta/BLOCKED_RETARGETING_AUDIT.md).  The decided predicate is not TS_k connectivity:
+      [x169_ts_step] constrains only the cardinality, the replaced element, the adjacency and
+      the resulting set, and never requires the INTERMEDIATE sets along the path to be stable.
+      Intermediate independence is the defining constraint of token sliding of independent sets
+      and the sole source of the problem's hardness, so the formalized predicate is a different
+      and much weaker reachability notion.  The corpus row is disproved (Adak, Nanoti and Tale,
+      arXiv:2502.12749), but the disproof concerns the true predicate.  Recorded in
+      meta/STATEMENT_IMPROVEMENTS.md. *)
 Definition token_sliding_chordal_clique_tree_degree_polytime_statement : Prop :=
   forall k D : nat, x169_polytime_decides_TS_connectivity k D.

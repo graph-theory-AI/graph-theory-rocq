@@ -67,8 +67,8 @@ MUTANTS = [
         replacements=(
             Replacement(
                 "chromatic-theory/theories/conjectures/U4.v",
-                "partial_list_coloring_0_statement",
-                "Definition partial_list_coloring_0_statement : Prop :=\n  True.",
+                "choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
+                "Definition choice_number_of_k_chromatic_graphs_of_bounded_order_statement : Prop :=\n  True.",
             ),
         ),
         appendices=(
@@ -79,14 +79,14 @@ MUTANTS = [
 (** MUTATION TEST CANARY: this lemma is written only in a temporary copy.
     If committed, it would prove an open row directly and must be rejected by
     the exact-type faithfulness gate. *)
-Lemma mutation_direct_proof_partial_list_coloring_0_statement :
-  partial_list_coloring_0_statement.
+Lemma mutation_direct_proof_choice_number_of_k_chromatic_graphs_of_bounded_order_statement :
+  choice_number_of_k_chromatic_graphs_of_bounded_order_statement.
 Proof. exact I. Qed.
 """,
             ),
         ),
         expected_signature="direct-proof-undecided",
-        note="trivializes an open row to True and commits a direct proof",
+        note="trivializes an open row (no dependent theorem, so the exact-type gate is what must catch it) to True and commits a direct proof",
     ),
     Mutant(
         name="u4_open_row_false_unconditional_refutation",
@@ -95,8 +95,8 @@ Proof. exact I. Qed.
         replacements=(
             Replacement(
                 "chromatic-theory/theories/conjectures/U4.v",
-                "partial_list_coloring_0_statement",
-                "Definition partial_list_coloring_0_statement : Prop :=\n  False.",
+                "choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
+                "Definition choice_number_of_k_chromatic_graphs_of_bounded_order_statement : Prop :=\n  False.",
             ),
         ),
         appendices=(
@@ -107,8 +107,8 @@ Proof. exact I. Qed.
 (** MUTATION TEST CANARY: this lemma is written only in a temporary copy.
     If committed, it would refute a non-disproved row unconditionally and must
     be rejected by the exact-type faithfulness gate. *)
-Lemma mutation_refutes_partial_list_coloring_0_statement :
-  ~ partial_list_coloring_0_statement.
+Lemma mutation_refutes_choice_number_of_k_chromatic_graphs_of_bounded_order_statement :
+  ~ choice_number_of_k_chromatic_graphs_of_bounded_order_statement.
 Proof. by []. Qed.
 """,
             ),
@@ -210,6 +210,53 @@ Definition strongly_colorable (G : sgraph) (r : nat) : Prop :=
         appendices=(),
         expected_signature="[FAIL] package compiles",
         note="flips strongly_colorable from all partitions to one partition",
+    ),
+    Mutant(
+        name="cycle_subdeg_counts_loop_once",
+        phase="X212",
+        package="cycle-theory",
+        replacements=(
+            Replacement(
+                "cycle-theory/theories/foundations/connectivity.v",
+                "subdeg",
+                """
+Definition subdeg (G : mgraph) (H : {set edge G}) (v : G) : nat :=
+  #|edges_at v :&: H|.
+""",
+            ),
+        ),
+        appendices=(),
+        expected_signature="[FAIL] package compiles",
+        note=("reverts subdeg to the incidence count, giving a LOOP degree 1 instead of the "
+              "textbook 2; killed inside the foundation by connectivity.subdeg_loop and "
+              "downstream by grounding_U6.mdeg_Gloop / grounding_X212.x212_mdeg_Lp, the "
+              "lemmas that make the one-vertex one-loop multigraph a circuit and an even "
+              "subgraph"),
+    ),
+    Mutant(
+        name="base_surface_vertices_orbit_count",
+        phase="X213",
+        package="chromatic-theory",
+        replacements=(
+            Replacement(
+                "base/theories/surface.v",
+                "surface_embedding_vertices",
+                """
+Definition surface_embedding_vertices (E : surface_embedding) : nat :=
+  #|porbits (surface_erot E)|.
+""",
+            ),
+        ),
+        appendices=(),
+        expected_signature="[FAIL] package compiles",
+        note=("reverts the Euler-formula vertex count of base/theories/surface.v to the "
+              "rotation-orbit count repaired on 2026-09-23, which by surface_erot_vertex sees "
+              "only the vertices CARRYING A DART: isolated vertices become invisible and every "
+              "edgeless graph is pushed to genus 1, so surface_euler_genus overstates the genus "
+              "of any graph with an isolated vertex and the surface rows (X150/X152/X164/X210/"
+              "X213/X219, X167, X138/X202) silently admit fewer graphs than intended; killed "
+              "inside the foundation by surface.surface_edgeless_genus0 and the canary "
+              "surface.surface_embeddable_K1 (K_1 is planar)"),
     ),
 ]
 

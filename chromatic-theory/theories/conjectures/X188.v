@@ -47,8 +47,28 @@ Definition x188_component_not_complete (G : sgraph) : Prop :=
 
 (** ** X188 statements *****************************************************)
 
-(** Bonamy-Meeks Conjecture 1.1: if some connected component of [G] is not a
-    complete graph, then [chi_ISC(G) < chi_SC(G)]. *)
+(** Corpus row: arxiv:1703.05380#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1703.05380__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1703.05380__00.json
+    English statement: (Bonamy and Meeks 2021, Conjecture 1.1, arXiv:1703.05380)
+      For every finite simple graph G having a connected component that is not a complete graph, the
+      interactive sum choice number of G is strictly smaller than its sum choice number.
+    Definitions: [x188_size_choosable G f] - every list assignment with #|L v| = f v admits a
+      proper colouring from the lists (this file); [x188_sum_choice_at_most G k] and
+      [x188_sum_choice_number G k] - the least total list size that guarantees colourability (this
+      file); [x188_add_colour L v c] - add colour c to the list of v (this file);
+      [x188_requester_wins G k fuel L] - the Requester wins the interactive game with the given
+      fuel, either because the current lists already permit a colouring or because some vertex can
+      be requested for which every adversary answer keeps the Requester winning (this file);
+      [x188_interactive_sum_choice_number] (this file); [x188_component_not_complete G] - some
+      connected component is not a clique (this file).
+    Notes: KNOWN UNFAITHFUL ENCODING, corpus leg blocked. The faithfulness audit of 2026-07-17,
+      meta/BLOCKED_RETARGETING_AUDIT.md and the row's verification_note, found that the game does
+      not model the interactive sum choice number: [x188_add_colour] unions a colour into the list,
+      so the adversary may re-supply a colour already present and the list does not grow, whereas in
+      the Bonamy and Meeks game each request increases the size of the chosen vertex's list by one.
+      The fuel is also tied to k rather than to the number of requests. The body is left untouched
+      here, WP4 changes comments only. *)
 Definition interactive_sum_choice_strict_statement : Prop :=
   forall (G : sgraph) (isc sc : nat),
     x188_component_not_complete G ->

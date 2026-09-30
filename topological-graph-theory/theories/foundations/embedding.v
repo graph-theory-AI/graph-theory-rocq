@@ -10,8 +10,9 @@
       (source-preserving, and one cycle per vertex) — i.e. a cyclic ordering of the
       darts around each vertex, which is exactly an orientable combinatorial embedding;
     - FACES are the orbits of [face_perm = erot * edge_perm]; the orientable Euler genus
-      is [(2 + E - V - F) / 2] on the map's own [V]/[E]/[F] (orbit counts of the three
-      permutations), for a connected embedding.
+      is [(2 + E - V - F) / 2], where [V = #|G|] counts EVERY vertex (isolated ones
+      included, fix of 2026-09-23 mirroring base/theories/surface.v), [E] is the number of
+      edges and [F] the number of face orbits, for a connected embedding.
 
     From these: [planar_embedding] (genus 0), [embeds_in_genus], [min_genus], [toroidal]
     (genus ≤ 1), [triangulation] (every face a triangle), and the combinatorial (corner)
@@ -136,7 +137,14 @@ Definition face_perm (E : embedding) : {perm dart} := (erot E * edge_perm)%g.
 Definition face_of (E : embedding) (d : dart) : {set dart} := porbit (face_perm E) d.
 Definition darts_at (v : G) : {set dart} := [set d : dart | (sval d).1 == v].
 
-Definition emV (E : embedding) : nat := #|porbits (erot E)|.
+(** The vertex count of the map.  [V] counts EVERY vertex of [G], isolated ones
+    included (fix of 2026-09-23, mirroring base/theories/surface.v).  It used to be
+    [#|porbits (erot E)|], which by [erot_vertex] counts only the vertices CARRYING A
+    DART (see [emV_orbits] below), so isolated vertices were invisible and [euler_genus]
+    OVERSTATED the genus of every graph with an isolated vertex -- an edgeless graph came
+    out at genus 1 and [planar_embedding] was refutable on [K_1].  The parameter [E] is
+    kept so that the call sites are unchanged. *)
+Definition emV (E : embedding) : nat := #|G|.
 Definition emE : nat := #|{: dart}| %/ 2.
 Definition emF (E : embedding) : nat := #|porbits (face_perm E)|.
 
@@ -147,13 +155,15 @@ Definition emF (E : embedding) : nat := #|porbits (face_perm E)|.
     disconnected graphs this formula computes [max(0, Σgᵢ + 1 - c)] — it
     UNDERSTATES genus by [c-1] (e.g. K7 ⊎ K7 with torus triangulations gets
     genus 1, though the true genus is 2) and can truncate to 0 (disjoint
-    triangles).  Also, [emV] counts erot-orbits, so ISOLATED vertices are
-    invisible, and an EDGELESS graph gets [euler_genus = 1] (empty-map anomaly).
-    Every consumer of [planar_embedding]/[embeds_in_genus]/[min_genus]/[toroidal]
-    must therefore carry a connectivity hypothesis (all current rows do:
-    U2 via [k_connected G 4], U13 + the D6emb curvature row via
-    [connected [set: G]]); an unguarded use on possibly-disconnected graphs is
-    UNFAITHFUL. *)
+    triangles).  Every consumer of
+    [planar_embedding]/[embeds_in_genus]/[min_genus]/[toroidal] must therefore carry a
+    connectivity hypothesis (all current rows do: U2 via [k_connected G 4], U13 + the
+    D6emb curvature row + X80 via [connected [set: G]]); an unguarded use on
+    possibly-disconnected graphs is UNFAITHFUL.  The isolated-vertex half of the old
+    caveat is GONE since 2026-09-23: [emV] is now [#|G|], so isolated vertices are
+    counted and an edgeless graph with at least one vertex has [euler_genus = 0]
+    ([edgeless_planar_embedding]).  Residual truncation wrinkle: the EMPTY graph still
+    evaluates to [(2 - 0 - 0) %/ 2 = 1]. *)
 Definition euler_genus (E : embedding) : nat := (2 + emE - emV E - emF E) %/ 2.
 Definition planar_embedding (E : embedding) : Prop := euler_genus E = 0.
 Definition embeds_in_genus (g : nat) : Prop := exists E : embedding, euler_genus E <= g.
@@ -227,7 +237,61 @@ Qed.
 Definition embedding_of : embedding := Emb rot_perm_src rot_perm_vertex.
 Lemma embedding_exists : inhabited embedding. Proof. exact: (inhabits embedding_of). Qed.
 
+(** ** Sanity lemmas for the repaired vertex count (2026-09-23) *)
+
+(** What the OLD [emV] was: by [erot_vertex] the rotation orbits are exactly the dart
+    sets of the vertices that carry a dart, so [#|porbits (erot E)|] is the number of
+    NON-ISOLATED vertices; old and new count agree as soon as every vertex carries a
+    dart. *)
+Lemma emV_orbits (E : embedding) :
+  #|porbits (erot E)| = #|[set v : G | [exists d : dart, (sval d).1 == v]]|.
+Proof.
+pose A := [set v : G | [exists d : dart, (sval d).1 == v]].
+pose phi (v : G) := [set d : dart | (sval d).1 == v].
+have AE : forall v : G, (v \in A) = [exists d : dart, (sval d).1 == v].
+  by move=> v; rewrite /A inE.
+have phiE : forall (v : G) (d : dart), (d \in phi v) = ((sval d).1 == v).
+  by move=> v d; rewrite /phi inE.
+have eqim : porbits (erot E) = [set phi v | v in A].
+  apply/setP => X; apply/idP/idP.
+    case/imsetP => d _ ->; apply/imsetP; exists (sval d).1.
+      by rewrite AE; apply/existsP; exists d.
+    by rewrite erot_vertex.
+  case/imsetP => v; rewrite AE => /existsP[d /eqP dv] ->.
+  by apply/imsetP; exists d; rewrite ?inE // erot_vertex dv.
+have phi_inj : {in A &, injective phi}.
+  move=> v w; rewrite AE => /existsP[d /eqP dv] _ eqphi.
+  have dw : d \in phi w by rewrite -eqphi phiE dv.
+  by move: dw; rewrite phiE dv => /eqP.
+by rewrite eqim card_in_imset.
+Qed.
+
+(** An EDGELESS graph with at least one vertex is PLANAR under the repaired count.  With
+    the old count every edgeless graph came out at genus 1. *)
+Lemma edgeless_planar_embedding :
+  (forall d : dart, False) -> 0 < #|G| -> planar_embedding embedding_of.
+Proof.
+move=> nodart cG.
+have c0 : #|{: dart}| = 0 by apply: eq_card0 => d; case: (nodart d).
+have f0 : emF embedding_of = 0.
+  apply/eqP; rewrite cards_eq0; apply/eqP; apply/setP => X.
+  by rewrite !inE; apply/negbTE; apply/negP => /imsetP[d]; case: (nodart d).
+rewrite /planar_embedding /euler_genus /emE /emV c0 div0n addn0 f0 subn0.
+by apply: divn_small; rewrite ltn_subrL cG.
+Qed.
+
 End Embedding.
+
+(** CANARY for the vertex-count convention (2026-09-23): [K_1] is PLANAR.  With the old
+    orbit count [emV] was 0 here and [euler_genus] returned 1, so this was refutable. *)
+Lemma no_dart_K1 (d : dart 'K_1) : False.
+Proof. by case: d => [[x y]] /=; rewrite /edge_rel /= (ord1 x) (ord1 y) eqxx. Qed.
+
+Lemma planar_embedding_K1 : planar_embedding (embedding_of 'K_1).
+Proof. by apply: edgeless_planar_embedding no_dart_K1 _; rewrite card_ord. Qed.
+
+Lemma embeds_in_genus_K1_0 : embeds_in_genus 'K_1 0.
+Proof. by exists (embedding_of 'K_1); rewrite planar_embedding_K1. Qed.
 
 (** A graph is toroidal iff it embeds in the orientable genus-1 surface. *)
 Definition toroidal (G : sgraph) : Prop := embeds_in_genus G 1.

@@ -36,10 +36,38 @@ Definition x156_random_block_tree_diameter_bound
 
 (** ** X156 statements *****************************************************)
 
-(** Informal conjecture: the extra sqrt(log n) factor in the random block-tree
-    diameter bound can be replaced by any function tending to infinity.  The
-    random model is any finite labelled model [R n] with observation map [obs];
-    high probability is exact counting over [R n]. *)
+(** Corpus row: arxiv:1408.4257#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1408.4257__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1408.4257__00.json
+    English statement: (McDiarmid and Scott 2014, "Random graphs from a block-stable class",
+      informal conjecture on the diameter bound)
+      For every family of finite sets of labelled objects R with an observation map sending an
+      object of R n to a graph on n vertices, and for every f such that for all N there is an
+      n >= N with f(n) >= N, with high probability the observed graph admits a block-tree
+      certificate of diameter at most ceil(sqrt n) * f(n).
+    Definitions: [x156_two_connected_piece G B] - B has at least two vertices, is connected and
+      stays connected after deleting any one of its vertices (this file);
+      [x156_block_tree_certificate G diam] - a tree T with a block map and a cut-vertex map
+      such that the blocks cover V(G), each block is a forest or 2-connected, adjacent tree
+      nodes share a designated cut vertex, and the tree has diameter at most diam (this file);
+      [x156_random_block_stable_model obs] - every object of R n is observed as a graph on
+      exactly n vertices (this file); [x156_random_block_tree_diameter_bound obs f] - some
+      predicate holds with high probability and forces that certificate (this file);
+      [fg_whp] - the exact finite "with high probability" vocabulary, cross-multiplied natural
+      weights eventually covering all but a ratio a/b of the total weight (GTBase
+      finite_graph.v); [eventually] - holds for all sufficiently large n (GTBase
+      asymptotics.v); [sqrt_ceil n] - the least s with n <= s^2 (GTBase asymptotics.v);
+      [is_tree], [is_forest], [connected], [graph_dist] - coq-graph-theory / GTBase.
+    Notes: KNOWN UNFAITHFUL, row leg is blocked (faithfulness audit 2026-07-17,
+      meta/BLOCKED_RETARGETING_AUDIT.md).  The hypothesis on f, "for all N there is an n >= N
+      with N <= f n", says that f is UNBOUNDED, whereas the conjecture assumes f TENDS TO
+      infinity.  Being the weaker hypothesis, it makes the statement strictly stronger, and in
+      fact false: an f that dips to 0 at infinitely many n still satisfies it, forcing
+      certificate diameter 0 at those n, which the cofinite [eventually] inside [fg_whp] cannot
+      accommodate.  Further modelling choices: the random model is any weighted family of
+      finite labelled objects rather than the block-stable class of the paper, and all weights
+      are 1 here, so "with high probability" is uniform counting.  Recorded in
+      meta/STATEMENT_IMPROVEMENTS.md. *)
 Definition block_tree_diameter_bound_improvement_statement : Prop :=
   forall (R : nat -> finType) (obs : forall n : nat, R n -> sgraph) (f : nat -> nat),
     x156_random_block_stable_model obs ->

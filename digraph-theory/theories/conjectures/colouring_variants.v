@@ -67,18 +67,50 @@ Lemma kmajority_col2 (D : diGraphType) (col : D -> 'I_2) :
   kmajority_col 2 col = majority_col col.
 Proof. by []. Qed.
 
-(** Conjecture 2 (1608.03040): every digraph admits a majority 3-colouring. *)
+(** Corpus row: arxiv:1608.03040#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__00.json
+    English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Conjecture 2)
+      Every finite digraph has a majority 3-colouring: there is a colouring of its vertices by
+      three colours such that every vertex v has at most half of its out-neighbours coloured
+      like v.
+    Definitions: [majority_col col] - at every vertex at most half of its out-neighbours carry
+      the same colour as itself, written without division as 2 * #(same-coloured out-neighbours)
+      <= outdeg (this file); [same_col_outnb col v] - the out-neighbours of v with the colour of
+      v (this file); [outdeg v] - out-degree (core/oriented.v); ['I_3] - a three-element colour
+      set (MathComp).
+    Notes: The empty digraph and isolated vertices satisfy the condition trivially; no guard is
+      needed because the conclusion is an existential over colourings, which is inhabited. *)
 Definition majority_3col_statement : Prop :=
   forall D : diGraphType, exists col : D -> 'I_3, majority_col col.
 
-(** Conjecture 9 (1608.03040): for every [k >= 2], every digraph admits a
-    (k+1)-colouring with at most [(1/k)·deg⁺] same-coloured out-neighbours. *)
+(** Corpus row: arxiv:1608.03040#01
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__01/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__01.json
+    English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Conjecture 9)
+      For every k >= 2 and every finite digraph there is a colouring of the vertices by k+1
+      colours such that every vertex v has at most a fraction 1/k of its out-neighbours coloured
+      like v, written without division as k * #(same-coloured out-neighbours of v) <= outdeg v.
+    Definitions: [kmajority_col k col] - the parametric bound k * #(same-coloured
+      out-neighbours) <= outdeg at every vertex (this file); [same_col_outnb col v] (this file);
+      [outdeg v] (core/oriented.v); ['I_k.+1] - a colour set of size k+1 (MathComp).
+    Notes: The corpus row is marked disproved (Girao, Kittipassorn, Popielarz showed k+1 colours
+      do not suffice for k >= 3); the definition encodes the conjecture as originally stated,
+      which is what a refutation must contradict. At k = 2 it is exactly majority colouring
+      ([kmajority_col2] in this file). *)
 Definition majority_k1col_statement : Prop :=
   forall (k : nat), 2 <= k ->
     forall D : diGraphType, exists col : D -> 'I_k.+1, kmajority_col k col.
 
-(** Open Problem 2 (1608.03040): does every tournament have a majority
-    3-colouring? *)
+(** Corpus row: arxiv:1608.03040#03
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__03/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__03.json
+    English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 2)
+      Every finite tournament has a majority 3-colouring: a colouring of its vertices by three
+      colours in which every vertex has at most half of its out-neighbours coloured like itself.
+    Definitions: [tournament] - a finite digraph whose arc relation is irreflexive and, for any
+      two distinct vertices, holds in exactly one direction (core/tournament.v); [majority_col]
+      (this file). *)
 Definition majority_3col_tournament_statement : Prop :=
   forall T : tournament, exists col : T -> 'I_3, majority_col col.
 
@@ -87,8 +119,19 @@ Definition indeg (D : diGraphType) (v : D) : nat := #|[set u | u --> v]|.
 Definition eulerian (D : diGraphType) : bool :=
   [forall v : D, indeg v == outdeg v].
 
-(** Open Problem 3 (1608.03040): does every Eulerian digraph have a majority
-    3-colouring? *)
+(** Corpus row: arxiv:1608.03040#04
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__04/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__04.json
+    English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 3)
+      Every finite Eulerian digraph, that is every digraph in which in-degree equals out-degree
+      at every vertex, has a majority 3-colouring.
+    Definitions: [eulerian D] - in-degree equals out-degree at every vertex (this file); [indeg
+      v] - in-degree (this file, also defined in conjectures/classic_core.v); [majority_col]
+      (this file).
+    Notes: [eulerian] encodes only the balanced-degree condition and drops the connectivity
+      usually required of an Eulerian digraph, so the hypothesis is weaker and the statement
+      correspondingly stronger; majority colouring is a local condition, and a balanced digraph
+      is a disjoint union of connected balanced digraphs, so the two readings are equivalent. *)
 Definition majority_3col_eulerian_statement : Prop :=
   forall D : diGraphType, eulerian D ->
     exists col : D -> 'I_3, majority_col col.
@@ -157,13 +200,10 @@ move=> dDD' [T [Tk hom']]; exists T; split=> //.
 exact: dhom_trans dDD' hom'.
 Qed.
 
-(** Courcelle / Sopena: the oriented chromatic number is BOUNDED over all
-    orientations of planar graphs. We range over oriented digraphs whose
-    underlying simple graph (built via [two_extremal.underlyingG], which needs
-    looplessness) is planar in the Wagner sense [two_extremal.planar_sg], and
-    assert a single [k] orienting-colours them all. Guarded against the empty
-    universe by the [(0 < #|D|)%N] presence (the bound must hold for nonempty
-    members too — vacuity is impossible since [k] is uniform). *)
+(** No corpus row: the boundedness form used inside this file for the relative edges (there is a
+    single k that oriented-k-colours every loopless digraph with planar underlying graph); the
+    corpus row opg:oriented_chromatic_number_of_planar_graphs asks for the maximum value and is
+    carried by [oriented_chromatic_number_of_planar_graphs_statement] in conjectures/P9.v. *)
 Definition oriented_chromatic_planar_bounded_statement : Prop :=
   exists k : nat,
     forall (D : diGraphType) (llD : loopless D),
@@ -209,10 +249,27 @@ Definition rainbow_triangle (D : diGraphType) (c : arc_colouring D 3) : Prop :=
     [/\ a --> b, b --> c0, c0 --> a
       & uniq [:: c a b; c b c0; c c0 a]].
 
-(** Monochromatic reachability OR rainbow triangles (Sands–Sauer–Woodrow
-    variant; Bang-Jensen / Aharoni et al.): every 3-arc-coloured tournament has
-    a rainbow triangle or a monochromatic-reachability root. Guarded with
-    [(0 < #|T|)%N] so the root quantifier is not vacuous. *)
+(** Corpus row: opg:monochromatoc_reachability_in_arc_colored_digraphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/monochromatoc_reachability_in_arc_colored_digraphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/monochromatoc_reachability_in_arc_colored_digraphs.json
+    English statement: (Open Problem Garden, Monochromatic reachability in arc-colored digraphs; the body encodes the tournament rainbow-triangle variant of Sands-Sauer-Woodrow)
+      For every finite tournament T with at least one vertex and every colouring of its arcs by
+      three colours, either T has a rainbow directed triangle, that is a directed 3-cycle whose
+      three arcs carry three distinct colours, or T has a vertex v from which every vertex is
+      reachable by a directed path all of whose arcs have one and the same colour (the colour
+      may depend on the target).
+    Definitions: [arc_colouring D k] - a function assigning a colour in 'I_k to each ordered
+      pair, read only on actual arcs (this file); [rainbow_triangle c] - a directed triangle
+      with three distinct arc colours (this file); [mono_reach c i v w] - reachability in the
+      sub-relation of arcs of colour i, reflexive-transitive (this file); [mono_root c v] - v
+      reaches every vertex monochromatically (this file); [tournament] (core/tournament.v).
+    Notes: DISCREPANCY: the corpus statement_text of this row is the general Sands-Sauer-Woodrow
+      statement (for every k there is f(k) such that every k-arc-coloured digraph has a set S, a
+      union of f(k) stable sets, monochromatically reachable from every vertex). That statement
+      is formalised in this file as [sands_sauer_woodrow_statement], which the manifest leaves
+      without a row; the body documented here is instead the three-colour tournament variant.
+      Recorded in meta/STATEMENT_IMPROVEMENTS.md. The guard 0 < #|T| keeps the root disjunct
+      from being vacuously satisfiable on the empty tournament. *)
 Definition mono_reach_or_rainbow_statement : Prop :=
   forall (T : tournament) (c : arc_colouring T 3),
     (0 < #|T|)%N ->
@@ -227,10 +284,12 @@ Definition union_of_stables (D : diGraphType) (m : nat) (S : {set D}) : Prop :=
         all (fun P => stable P) parts
       & S = \bigcup_(P <- parts) P].
 
-(** Sands–Sauer–Woodrow (general digraph version): for every number of colours
-    [k] there is a bound [f] such that every [k]-arc-coloured digraph has a set
-    [S], a union of at most [f] stable sets, with every vertex reaching [S]
-    monochromatically. *)
+(** No corpus row: this is the general Sands-Sauer-Woodrow statement (for every number k of arc
+    colours there is a bound f such that every k-arc-coloured digraph has a set S, a union of at
+    most f stable sets, with every vertex reaching S by a monochromatic directed path), and it
+    is the text of the corpus row opg:monochromatoc_reachability_in_arc_colored_digraphs; the
+    manifest attaches that row to [mono_reach_or_rainbow_statement] above instead, so this
+    definition owns no row. Recorded in meta/STATEMENT_IMPROVEMENTS.md. *)
 Definition sands_sauer_woodrow_statement : Prop :=
   forall k : nat, exists f : nat,
     forall (D : diGraphType) (c : arc_colouring D k),

@@ -25,10 +25,25 @@ Definition x144_pure_pair (G : sgraph) (A B : {set G}) : Prop :=
 
 (** ** X144 statements *****************************************************)
 
-(** Fox: every sufficiently large n-vertex perfect graph has a pure pair whose
-    two sides both have size at least n^(1-o(1)).  The asymptotic lower bound is
-    encoded in the standard rational-epsilon form: for every 0<e1/e2<1, for all
-    sufficiently large n, both sizes are at least n^(1-e1/e2). *)
+(** Corpus row: studies:std_fox_s_pure_pair_conjecture_for_perfect_graphs
+    Site: none
+    Review: none
+    English statement: (Fox, pure-pair conjecture for perfect graphs)
+      For every rational e1/e2 with 0 < e1 < e2 there is an N such that every perfect graph G
+      on n >= N vertices contains two disjoint non-empty vertex sets A and B that are either
+      completely adjacent or completely non-adjacent and satisfy n^(e2-e1) <= |A|^e2 and
+      n^(e2-e1) <= |B|^e2, i.e. |A|, |B| >= n^(1 - e1/e2).
+    Definitions: [x144_perfect_graph G] - every induced subgraph of G has chromatic number
+      equal to its clique number (this file); [x144_complete_between A B] /
+      [x144_anticomplete_between A B] - every vertex of A is adjacent to / non-adjacent to every
+      vertex of B (this file); [x144_pure_pair A B] - A and B are disjoint, non-empty, and one
+      of the two previous conditions holds (this file); [chi], [omega], [induced] -
+      coq-graph-theory colouring and induced subgraphs.
+    Notes: the source exponent n^(1-o(1)) is rendered in the standard rational-epsilon form:
+      the bound is asked for every rational epsilon = e1/e2 strictly between 0 and 1, with the
+      threshold N chosen after epsilon, and the inequality |A| >= n^(1-epsilon) is stated
+      fraction-free as n^(e2-e1) <= |A|^e2.  Perfection is required of G itself through the
+      induced-subgraph definition, so no separate hereditary hypothesis is needed. *)
 Definition fox_pure_pair_perfect_graphs_statement : Prop :=
   forall e1 e2 : nat,
     0 < e1 ->

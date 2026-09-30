@@ -2,6 +2,27 @@
 -Q ../base/theories GTBase
 -arg -w -arg -notation-overridden
 
+theories/foundations/chi_bounding.v
+# poly_forms.v converts between the two encodings of "polynomially chi-bounded"
+# (X3.v's coefficient list vs chi_bounding.v's c * omega ^ d normal form), so it
+# sits after X3.v in the dependency order computed by coqdep.
+theories/foundations/poly_forms.v
+# forest_paths.v: every path of a forest is induced (needed by the X218 e041 edge).
+theories/foundations/forest_paths.v
+# critical.v: criticality helpers for the chromatic number (U1/X213 e228 edge).
+theories/foundations/critical.v
+
+# choice_number.v: existence of the choice number ch(G) -- palette canonicalisation
+# turns [choosable G k] into a boolean over the fixed palette 'I_(k * #|G|), so that
+# [ex_minn] applies (U1/X7 e004 edge, U4 e039).
+theories/foundations/choice_number.v
+# edge_colourings.v: K_n as a loopless multigraph, line-graph choosability ->
+# edge-choosability, and chi'(K_n) <= n-1 for even n (round robin) (X219 e039 edge).
+theories/foundations/edge_colourings.v
+# partial_lists.v: existence of lambda_t (partial list colouring) by palette
+# canonicalisation (U4 e000 edge).
+theories/foundations/partial_lists.v
+
 theories/conjectures/U1.v
 theories/conjectures/grounding_U1.v
 theories/conjectures/implications_U1.v
@@ -31,6 +52,7 @@ theories/conjectures/X63.v
 theories/conjectures/X64.v
 theories/conjectures/X65.v
 theories/conjectures/X66.v
+theories/conjectures/implications_X66.v
 theories/conjectures/X68.v
 theories/conjectures/X69.v
 theories/conjectures/X70.v
@@ -75,6 +97,15 @@ theories/conjectures/X203.v
 theories/conjectures/X204.v
 theories/conjectures/X206.v
 theories/conjectures/X210.v
+theories/conjectures/X213.v
+theories/conjectures/grounding_X213.v
+theories/conjectures/implications_X213.v
+theories/conjectures/X218.v
+theories/conjectures/grounding_X218.v
+theories/conjectures/implications_X218.v
+theories/conjectures/X219.v
+theories/conjectures/grounding_X219.v
+theories/conjectures/implications_X219.v
 
 # Checked formal resolutions (2026-09-05)
 theories/applications/cochromatic_gap/clique_bounds.v

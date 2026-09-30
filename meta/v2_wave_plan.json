@@ -1,0 +1,1915 @@
+{
+ "_README": "Wave plan for the X211-X229 statement-authoring waves (WP5 triage, 2026-09-23, Claude Opus 5 subagent, session 01P75Y6ikkgDyzUzzoef316Z). Triaged: the 38 Bondy-Murty / 'others' rows of WP1, the 136 arXiv rows that are endpoints of an implies/equivalent_to edge in meta/corpus_relations.json and have no statement, the 6 new arXiv rows (2309.04460__01..03, 2308.15387__02..04) and axv_2310_04265_03 (re-encoding). Each row is 'author' (a finite graph/digraph/hypergraph proposition statable with coq-graph-theory + GTBase + MathComp) or 'blocked' (a graph statement whose faithful encoding needs an out-of-scope layer -- a computation model, probability, real geometry -- kept in the wave as a placeholder definition plus blocked_reason, per the X124/X210 convention, only where a companion row of the same paper is authored in the same phase, so the corpus edge stays complete). Rows that are neither are listed under 'deferred': they keep legs.statement = todo and carry a defer_reason in meta/v2_classification.json. 'needed_vocabulary' lists the notions a row needs that are absent from coq-graph-theory and from base/theories (base.v, common.v, surface.v, posets.v, asymptotics.v, graph_metric.v, complexity.v); a notion needed by >= 2 packages belongs in base/theories/common.v, one needed by >= 2 waves of one package in that package's foundations/, otherwise it stays local (WP4b rule 3). 'related_edges' are the implies/equivalent_to edge ids of meta/corpus_relations.json whose BOTH endpoints already own a Rocq statement or are planned in this file, i.e. the implications_X2nn.v candidates the wave unlocks. Wave keys follow meta/v2_statement_waves.json: X2nn, or X2nn:<repo> when one phase spans several packages. X222 and X224 are unused: after triage the digraph-theory and extremal-graph-theory rows each fit in a single wave. This file is a plan, not state: meta/v2_statement_waves.json stays the authority once a wave is implemented.",
+ "generated": "2026-09-23",
+ "waves": {
+  "X211": {
+   "repo": "hamiltonicity-theory",
+   "topic_group": "Bondy-Murty Appendix A: hamiltonicity and toughness",
+   "rows": [
+    {
+     "slug": "bm_079",
+     "row_id": "bm:bm-079",
+     "title": "Matthews–Sumner conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "claw-free (induced_free with K_{1,3})",
+      "k_connected (GTBase.common)",
+      "hamiltonian (GTBase.common)"
+     ],
+     "related_edges": [
+      "e234",
+      "e244"
+     ]
+    },
+    {
+     "slug": "bm_080",
+     "row_id": "bm:bm-080",
+     "title": "Barnette's conjecture on 4-regular 4-polytopes",
+     "decision": "blocked",
+     "blocked_reason": "The graph of a 4-regular 4-polytope is defined through a convex polytope in R^4; GTBase has no real-geometry / polytope layer, so the hypothesis cannot be stated faithfully (a purely combinatorial 4-regular 4-connected planar-like surrogate would be a proxy encoding).",
+     "needed_vocabulary": [
+      "graph of a 4-dimensional simple convex polytope"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_085",
+     "row_id": "bm:bm-085",
+     "title": "Cantoni's conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "planarity (wagner_planar)",
+      "cubic graph",
+      "exact count of Hamilton cycles",
+      "triangle"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_088",
+     "row_id": "bm:bm-088",
+     "title": "Thomassen's conjecture on Hamiltonian vertex-transitive graphs",
+     "decision": "author",
+     "needed_vocabulary": [
+      "vertex-transitive graph (transitive automorphism action)",
+      "hamiltonian",
+      "'all but finitely many' as exists n0, forall G with #|G| >= n0"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_089",
+     "row_id": "bm:bm-089",
+     "title": "Chvátal's toughness conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "toughness (k-tough: #components of G-S <= |S|/k)",
+      "hamiltonian"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_090",
+     "row_id": "bm:bm-090",
+     "title": "Hypohamiltonian graphs of minimum degree at least 4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "hypohamiltonian",
+      "minimum degree"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_091",
+     "row_id": "bm:bm-091",
+     "title": "Grötschel's conjecture on bipartite hypotraceable graphs",
+     "decision": "author",
+     "needed_vocabulary": [
+      "hypotraceable",
+      "bipartite (GTBase.base)",
+      "traceable (GTBase.common)"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Plan wave X211 as written. bm_080 is pre-declared blocked (convex 4-polytopes); the other six are authorable with a toughness and a vertex-transitivity primitive."
+  },
+  "X212": {
+   "repo": "cycle-theory",
+   "topic_group": "Bondy-Murty Appendix A: cycle and edge decompositions",
+   "rows": [
+    {
+     "slug": "bm_011",
+     "row_id": "bm:bm-011",
+     "title": "Barát–Thomassen conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "k_edge_connected (GTBase.common)",
+      "decomposition of E(G) into copies of a tree T",
+      "edge_set (GTBase.common)"
+     ],
+     "related_edges": [
+      "e208",
+      "e237"
+     ]
+    },
+    {
+     "slug": "bm_013",
+     "row_id": "bm:bm-013",
+     "title": "Bondy's small cycle double cover conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "cycle double cover",
+      "cut edge / bridge"
+     ],
+     "related_edges": [
+      "e209"
+     ]
+    },
+    {
+     "slug": "bm_016",
+     "row_id": "bm:bm-016",
+     "title": "Linear arboricity conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "linear arboricity (partition of E into linear forests)",
+      "k-regular (GTBase.base regular)"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_026",
+     "row_id": "bm:bm-026",
+     "title": "Orientable five cycle double cover conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "orientable cycle double cover",
+      "even subgraph",
+      "2-edge-connected",
+      "surface orientation (GTBase.surface)"
+     ],
+     "related_edges": [
+      "e218",
+      "e246"
+     ]
+    },
+    {
+     "slug": "bm_062",
+     "row_id": "bm:bm-062",
+     "title": "Kotzig's unique $k$-path conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "unique path of length k between every vertex pair"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_064",
+     "row_id": "bm:bm-064",
+     "title": "Smith's conjecture on longest cycles",
+     "decision": "author",
+     "needed_vocabulary": [
+      "k_connected",
+      "longest cycle"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_065",
+     "row_id": "bm:bm-065",
+     "title": "Bondy's linear-length cycle conjecture for cyclically 4-edge-connected cubic graphs",
+     "decision": "author",
+     "needed_vocabulary": [
+      "cyclically 4-edge-connected",
+      "cubic",
+      "3-connected",
+      "linear-length cycle (existential rational constant)"
+     ],
+     "related_edges": [
+      "e244"
+     ]
+    },
+    {
+     "slug": "bm_066",
+     "row_id": "bm:bm-066",
+     "title": "Birmelé's conjecture on long cycles",
+     "decision": "author",
+     "needed_vocabulary": [
+      "cycles of length >= k",
+      "transversal of all long cycles"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Plan wave X212 as written. bm_026 (orientable 5-CDC) needs the surface/orientation foundation; bm_013/bm_014 share the cycle-double-cover primitive and bm_014 is an alias of opg:m_n_cycle_covers (no own statement)."
+  },
+  "X213": {
+   "repo": "chromatic-theory",
+   "topic_group": "Bondy-Murty Appendix A: colouring",
+   "rows": [
+    {
+     "slug": "bm_045",
+     "row_id": "bm:bm-045",
+     "title": "Erdős–Lovász Tihany conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "chromatic number",
+      "clique (GraphTheory.sgraph)",
+      "vertex-disjoint induced subgraphs"
+     ],
+     "related_edges": [
+      "e228"
+     ]
+    },
+    {
+     "slug": "bm_046",
+     "row_id": "bm:bm-046",
+     "title": "El-Zahar–Erdős conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "chromatic number",
+      "induced disjoint union of two k-chromatic graphs",
+      "bounding function f(r,k)"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_050",
+     "row_id": "bm:bm-050",
+     "title": "Gyárfás's tree conjecture for triangle-free graphs",
+     "decision": "author",
+     "needed_vocabulary": [
+      "infinite graph of infinite chromatic number",
+      "induced tree"
+     ],
+     "related_edges": [
+      "e229"
+     ]
+    },
+    {
+     "slug": "bm_053",
+     "row_id": "bm:bm-053",
+     "title": "Albertson's toroidal colouring conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "toroidal graph (GTBase.surface, genus 1)",
+      "4-colourability after deleting three vertices"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_057",
+     "row_id": "bm:bm-057",
+     "title": "1-factorization conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "d-regular",
+      "chromatic_index (GTBase.base)",
+      "perfect_matching (GTBase.common)"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_060",
+     "row_id": "bm:bm-060",
+     "title": "Vizing's interchange conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "proper edge colouring",
+      "Kempe change on an alternating path or cycle",
+      "chromatic_index"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Plan wave X213 as written. bm_050 is an infinite-graph statement kept in chromatic-theory per its classification; bm_053 needs the torus layer."
+  },
+  "X214:minor-theory": {
+   "repo": "minor-theory",
+   "topic_group": "Bondy-Murty Appendix A: minors and subdivisions",
+   "rows": [
+    {
+     "slug": "bm_029",
+     "row_id": "bm:bm-029",
+     "title": "Kelmans–Seymour conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "k_connected",
+      "planarity (wagner_planar)",
+      "subdivision of K_5"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_041",
+     "row_id": "bm:bm-041",
+     "title": "Hadwiger's conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "minor (GraphTheory.minor)",
+      "complete graph 'K_n",
+      "chromatic number"
+     ],
+     "related_edges": [
+      "e223",
+      "e224",
+      "e240"
+     ]
+    },
+    {
+     "slug": "bm_042",
+     "row_id": "bm:bm-042",
+     "title": "Hajós conjecture for $k = 5$ and $k = 6$",
+     "decision": "author",
+     "needed_vocabulary": [
+      "subdivision of K_k",
+      "chromatic number"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Plan wave X214, minor half."
+  },
+  "X214:packing-theory": {
+   "repo": "packing-theory",
+   "topic_group": "Bondy-Murty Appendix A: spanning subgraphs",
+   "rows": [
+    {
+     "slug": "bm_025",
+     "row_id": "bm:bm-025",
+     "title": "Thomassen's spanning k-connected bipartite subgraph conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "k_connected",
+      "spanning subgraph",
+      "bipartite (GTBase.base)"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Plan wave X214, packing half (single row)."
+  },
+  "X215": {
+   "repo": "extremal-graph-theory",
+   "topic_group": "Bondy-Murty Appendix A: extremal and Ramsey",
+   "rows": [
+    {
+     "slug": "bm_033",
+     "row_id": "bm:bm-033",
+     "title": "Erdős–Sós conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "tree with k edges",
+      "has_subgraph (GTBase.common)",
+      "num_edges"
+     ],
+     "related_edges": [
+      "e239"
+     ]
+    },
+    {
+     "slug": "bm_034",
+     "row_id": "bm:bm-034",
+     "title": "Even-cycle Turán number",
+     "decision": "author",
+     "needed_vocabulary": [
+      "Turan number ex(n, C_2k)",
+      "asymptotic lower bound with a rational constant"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_037",
+     "row_id": "bm:bm-037",
+     "title": "Constructive exponential lower bound for diagonal Ramsey numbers",
+     "decision": "blocked",
+     "blocked_reason": "Asks for a CONSTRUCTIVE proof of r(k,k) >= c^k; constructivity (an explicit family, or an algorithm) is a property of the proof, not of the proposition, and needs the computation model that these waves keep out of scope.",
+     "needed_vocabulary": [
+      "explicit/constructive proof (a meta-property of proofs, not a proposition)",
+      "Ramsey number r(k,k)"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_038",
+     "row_id": "bm:bm-038",
+     "title": "Limit of $r(k,k)^{1/k}$",
+     "decision": "blocked",
+     "blocked_reason": "Asks whether lim_k r(k,k)^{1/k} exists and what its value is; the existence of a real limit needs a reals layer, and the 'determine its value' half has no conjectured value to state.",
+     "needed_vocabulary": [
+      "limit of a real sequence r(k,k)^{1/k}",
+      "Ramsey number"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_039",
+     "row_id": "bm:bm-039",
+     "title": "Burr–Erdős tree Ramsey conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "Ramsey number r(T,T)",
+      "tree"
+     ],
+     "related_edges": [
+      "e239"
+     ]
+    }
+   ],
+   "notes": "Plan wave X215. Per the plan's 'blocked or partial per needs-asymptotics convention', bm_037 (constructive lower bound) and bm_038 (existence of a real limit) are pre-declared blocked; bm_034's asymptotic lower bound is authorable with an existential rational constant."
+  },
+  "X216:infinite-graph-theory": {
+   "repo": "infinite-graph-theory",
+   "topic_group": "Bondy-Murty Appendix A: infinite graphs",
+   "rows": [
+    {
+     "slug": "bm_003",
+     "row_id": "bm:bm-003",
+     "title": "Halin's conjecture on hypomorphic infinite graphs",
+     "decision": "author",
+     "needed_vocabulary": [
+      "infinite graph",
+      "hypomorphism (bijection matching vertex-deleted subgraphs)",
+      "subgraph embedding"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Plan wave X216, infinite half."
+  },
+  "X216:digraph-theory": {
+   "repo": "digraph-theory",
+   "topic_group": "Bondy-Murty Appendix A: digraphs",
+   "rows": [
+    {
+     "slug": "bm_070",
+     "row_id": "bm:bm-070",
+     "title": "Weighted Caccetta–Häggkvist conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "arc-weighted digraph",
+      "strongly connected digraph",
+      "weight of a directed cycle"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Plan wave X216, digraph half."
+  },
+  "X216:graph-theory-misc": {
+   "repo": "graph-theory-misc",
+   "topic_group": "Bondy-Murty Appendix A: complexity questions",
+   "rows": [
+    {
+     "slug": "bm_021",
+     "row_id": "bm:bm-021",
+     "title": "Finding a second Hamilton cycle in a cubic graph",
+     "decision": "blocked",
+     "blocked_reason": "'Is this problem in P?' — needs the GTBase.complexity cost-coupled model plus a search-problem (not decision-problem) reading; the 2026-07-17 blocked-retargeting audit rejected the finite-witness encodings of this family.",
+     "needed_vocabulary": [
+      "computation model (GTBase.complexity prog/pcost)",
+      "search problem: second Hamilton cycle in a cubic graph"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "bm_022",
+     "row_id": "bm:bm-022",
+     "title": "Internally disjoint odd paths: is it in co-NP?",
+     "decision": "blocked",
+     "blocked_reason": "'Is this problem in co-NP?' — needs a certificate/complexity-class layer; the GTMisc in_NP/NP_hard layer was machine-confirmed decoupled (satisfiable by fun _ => 0) by the 2026-07-17 audit.",
+     "needed_vocabulary": [
+      "computation model / co-NP certificates",
+      "k internally disjoint (X,Y)-paths of odd length"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Plan wave X216, misc half: both rows are pre-declared blocked on the computation model, as the plan's wave table states. NOTE the deviation from the plan on bm_031 (thrackle drawings), bm_032 and bm_054: the WP1 classification already parked all three as B5 with a defer_reason, so they are listed under 'deferred' rather than authored/blocked here."
+  },
+  "X217:graph-theory-misc": {
+   "repo": "graph-theory-misc",
+   "topic_group": "cops and robbers",
+   "rows": [
+    {
+     "slug": "oth_meyniels_conjecture",
+     "row_id": "others:meyniels-conjecture",
+     "title": "Meyniel's conjecture on the cop number",
+     "decision": "author",
+     "needed_vocabulary": [
+      "cop number (finite pursuit game on a graph)",
+      "O(sqrt n) as an existential constant"
+     ],
+     "related_edges": [
+      "e243"
+     ]
+    }
+   ],
+   "notes": "Plan wave X217. Needs a finite cops-and-robbers foundation (winning strategies on a finite graph are finitely definable)."
+  },
+  "X217:hypergraph-theory": {
+   "repo": "hypergraph-theory",
+   "topic_group": "cops and robbers on hypergraphs",
+   "rows": [
+    {
+     "slug": "axv_2307_15512_00",
+     "row_id": "arxiv:2307.15512#00",
+     "title": "Conjecture 1.4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "hypergraph (finite incidence structure)",
+      "cop number of a hypergraph (finite winning strategy)",
+      "O() as an existential constant"
+     ],
+     "related_edges": [
+      "e243"
+     ]
+    }
+   ],
+   "notes": "Plan wave X217, hypergraph half. Shares the cop-number foundation with oth_meyniels_conjecture and implies it (edge e243), so the two halves must land together. NOTE: only one of the three cops-and-robbers arXiv rows survived triage; axv_1709_09050_00/01 are 'classify which planar/outerplanar graphs have cop number i' characterizations and are deferred."
+  },
+  "X218": {
+   "repo": "chromatic-theory",
+   "topic_group": "chi-boundedness, polynomial chi-bounding, clustered and fractional colouring",
+   "rows": [
+    {
+     "slug": "axv_2202_10412_00",
+     "row_id": "arxiv:2202.10412#00",
+     "title": "Informal Conjecture (every forest is good)",
+     "decision": "author",
+     "needed_vocabulary": [
+      "induced_free (GTBase.common)",
+      "forest (is_forest, GraphTheory.sgraph)",
+      "polynomial chi-bounding function as exists c d"
+     ],
+     "related_edges": [
+      "e036",
+      "e170",
+      "e171"
+     ]
+    },
+    {
+     "slug": "axv_2302_08922_00",
+     "row_id": "arxiv:2302.08922#00",
+     "title": "Polynomial bounds for path-induced copy theorem (1.2)",
+     "decision": "author",
+     "needed_vocabulary": [
+      "path-induced copy of a rooted tree (T,r)",
+      "polynomial chi-bounding function"
+     ],
+     "related_edges": [
+      "e041"
+     ]
+    },
+    {
+     "slug": "axv_2302_08922_01",
+     "row_id": "arxiv:2302.08922#01",
+     "title": "Polynomial bounds for the Gyárfás-Sumner conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "induced_free",
+      "tree (is_tree)",
+      "polynomial chi-bounding function"
+     ],
+     "related_edges": [
+      "e033",
+      "e041",
+      "e175"
+     ]
+    },
+    {
+     "slug": "axv_2303_11766_00",
+     "row_id": "arxiv:2303.11766#00",
+     "title": "Conjecture 1.6",
+     "decision": "author",
+     "needed_vocabulary": [
+      "multibounding",
+      "K_d(t) complete multipartite subgraph",
+      "polynomial bounding function"
+     ],
+     "related_edges": [
+      "e034",
+      "e035",
+      "e171"
+     ]
+    },
+    {
+     "slug": "axv_1609_00314_00",
+     "row_id": "arxiv:1609.00314#00",
+     "title": "Conjecture: every forest of lanterns is pervasive",
+     "decision": "author",
+     "needed_vocabulary": [
+      "lantern / forest of lanterns",
+      "(>= l)-subdivision",
+      "pervasive"
+     ],
+     "related_edges": [
+      "e064"
+     ]
+    },
+    {
+     "slug": "axv_1701_05597_00",
+     "row_id": "arxiv:1701.05597#00",
+     "title": "Conjecture 1.8",
+     "decision": "author",
+     "needed_vocabulary": [
+      "widespread multigraph",
+      "multigraph subdivision",
+      "banana"
+     ],
+     "related_edges": [
+      "e064"
+     ]
+    },
+    {
+     "slug": "axv_2308_15721_00",
+     "row_id": "arxiv:2308.15721#00",
+     "title": "Conjecture 2",
+     "decision": "author",
+     "needed_vocabulary": [
+      "odd minor",
+      "defective chromatic number of a class",
+      "clustered chromatic number of a class",
+      "connected tree-depth td-bar"
+     ],
+     "related_edges": [
+      "e168"
+     ]
+    },
+    {
+     "slug": "axv_2601_15245_04",
+     "row_id": "arxiv:2601.15245#04",
+     "title": "Problem 6.4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "fractional chromatic number (b-fold colouring)",
+      "d-degenerate",
+      "little-o wrapper over rationals"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Four rows share one 'polynomial chi-bounding function' wrapper (exists c d, chi <= c*omega^d), which should go to chromatic-theory/foundations rather than each file. axv_1701_05597_00 is authored through the paper's own equivalent finite form 1.10, avoiding quantification over ideals. axv_2308_15721_00 must quantify the clustering constant CLASS-uniformly (the X138/X194 collapse found by the 2026-07-17 audit)."
+  },
+  "X219": {
+   "repo": "chromatic-theory",
+   "topic_group": "list colouring, list colouring on surfaces, planar colouring",
+   "rows": [
+    {
+     "slug": "axv_2407_18800_00",
+     "row_id": "arxiv:2407.18800#00",
+     "title": "Conjecture 2",
+     "decision": "author",
+     "needed_vocabulary": [
+      "torus embedding (surface.v rotation system, genus 1)",
+      "criticality for 5-choosability",
+      "6-critical"
+     ],
+     "related_edges": [
+      "e027"
+     ]
+    },
+    {
+     "slug": "axv_2407_18800_01",
+     "row_id": "arxiv:2407.18800#01",
+     "title": "Conjecture 3",
+     "decision": "author",
+     "needed_vocabulary": [
+      "torus embedding",
+      "choosable (GTBase.base)",
+      "colourable"
+     ],
+     "related_edges": [
+      "e027",
+      "e123"
+     ]
+    },
+    {
+     "slug": "axv_2407_18800_02",
+     "row_id": "arxiv:2407.18800#02",
+     "title": "Conjecture 4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "torus embedding",
+      "edge-width (shortest non-contractible cycle)",
+      "choosable"
+     ],
+     "related_edges": [
+      "e123"
+     ]
+    },
+    {
+     "slug": "axv_1802_03727_00",
+     "row_id": "arxiv:1802.03727#00",
+     "title": "Conjecture 1.3",
+     "decision": "author",
+     "needed_vocabulary": [
+      "separation choosability ch_sep (list assignment with separation)",
+      "minimum degree"
+     ],
+     "related_edges": [
+      "e026"
+     ]
+    },
+    {
+     "slug": "axv_2004_07457_01",
+     "row_id": "arxiv:2004.07457#01",
+     "title": "Conjecture 7",
+     "decision": "author",
+     "needed_vocabulary": [
+      "(k_A,k_B)-choosability for bipartite graphs",
+      "part-wise maximum degree",
+      "trunc_log-based log, rational eps"
+     ],
+     "related_edges": [
+      "e025"
+     ]
+    },
+    {
+     "slug": "axv_1902_07018_00",
+     "row_id": "arxiv:1902.07018#00",
+     "title": "Open question on $R_\\ell(K_{1,2}, k)$ for odd $k$",
+     "decision": "author",
+     "needed_vocabulary": [
+      "list chromatic index chi'_ell (choosable on the line graph)",
+      "chromatic_index (GTBase.base)"
+     ],
+     "related_edges": [
+      "e039"
+     ]
+    },
+    {
+     "slug": "axv_2009_12189_00",
+     "row_id": "arxiv:2009.12189#00",
+     "title": "Conjecture 1.1",
+     "decision": "author",
+     "needed_vocabulary": [
+      "fractional vertex-arboricity (b-fold induced-forest cover)",
+      "planarity (wagner_planar / K5,K33-minor-free)"
+     ],
+     "related_edges": [
+      "e121"
+     ]
+    },
+    {
+     "slug": "axv_1709_04036_01",
+     "row_id": "arxiv:1709.04036#01",
+     "title": "Informal belief: 5/6 bound attainable",
+     "decision": "author",
+     "needed_vocabulary": [
+      "2-degenerate induced subgraph",
+      "planarity",
+      "triangle-free"
+     ],
+     "related_edges": [
+      "e082"
+     ]
+    }
+   ],
+   "notes": "The three 2407.18800 rows share the torus/edge-width layer and two of them are joined by an equivalent_to edge (e027), so they must land together. axv_1802_03727_00 re-authors the existing blocked placeholder separation_choosability_min_degree_unbounded_statement. axv_2004_07457_01 is the riskiest row of the wave (real exponents Delta^eps and (Delta/log Delta)^{1/k} cleared by rearrangement)."
+  },
+  "X220": {
+   "repo": "minor-theory",
+   "topic_group": "width parameters: treewidth, tree-independence, twin-width, clique-width",
+   "rows": [
+    {
+     "slug": "axv_2008_05504_01",
+     "row_id": "arxiv:2008.05504#01",
+     "title": "Conjecture 3",
+     "decision": "author",
+     "needed_vocabulary": [
+      "(k x k) wall",
+      "line graph (GTBase.base line_graph)",
+      "induced subgraph isomorphism",
+      "treewidth (sdecomp)"
+     ],
+     "related_edges": [
+      "e053"
+     ]
+    },
+    {
+     "slug": "axv_2109_01310_00",
+     "row_id": "arxiv:2109.01310#00",
+     "title": "Conjecture 1.10",
+     "decision": "author",
+     "needed_vocabulary": [
+      "wall W_{t x t} and its subdivisions",
+      "line graph",
+      "treewidth",
+      "logarithm (trunc_log 2)"
+     ],
+     "related_edges": [
+      "e052"
+     ]
+    },
+    {
+     "slug": "axv_2203_06775_00",
+     "row_id": "arxiv:2203.06775#00",
+     "title": "Conjecture 1.6",
+     "decision": "author",
+     "needed_vocabulary": [
+      "theta, prism, even wheel, diamond as induced subgraphs",
+      "treewidth"
+     ],
+     "related_edges": [
+      "e051"
+     ]
+    },
+    {
+     "slug": "axv_2305_16258_01",
+     "row_id": "arxiv:2305.16258#01",
+     "title": "Conjecture 1.7",
+     "decision": "author",
+     "needed_vocabulary": [
+      "even hole",
+      "treewidth",
+      "logarithm (trunc_log 2)"
+     ],
+     "related_edges": [
+      "e052"
+     ]
+    },
+    {
+     "slug": "axv_2305_16258_00",
+     "row_id": "arxiv:2305.16258#00",
+     "title": "Conjecture 1.6",
+     "decision": "author",
+     "needed_vocabulary": [
+      "tree-independence number (tree-alpha)",
+      "even hole",
+      "diamond"
+     ],
+     "related_edges": [
+      "e050"
+     ]
+    },
+    {
+     "slug": "axv_2511_03864_00",
+     "row_id": "arxiv:2511.03864#00",
+     "title": "Question 5.2",
+     "decision": "author",
+     "needed_vocabulary": [
+      "tree-independence number",
+      "induced matching treewidth (tree-mu)",
+      "K_{t,t}-free",
+      "polynomial as exists c d"
+     ],
+     "related_edges": [
+      "e072"
+     ]
+    },
+    {
+     "slug": "axv_2511_03864_01",
+     "row_id": "arxiv:2511.03864#01",
+     "title": "Question 5.3",
+     "decision": "author",
+     "needed_vocabulary": [
+      "tree-independence number",
+      "induced matching treewidth",
+      "induced biclique number"
+     ],
+     "related_edges": [
+      "e072"
+     ]
+    },
+    {
+     "slug": "axv_2006_09877_00",
+     "row_id": "arxiv:2006.09877#00",
+     "title": "The Small Conjecture",
+     "decision": "author",
+     "needed_vocabulary": [
+      "twin-width (contraction sequence, red degree)",
+      "hereditary class",
+      "small class (labelled-graph counting n! c^n)"
+     ],
+     "related_edges": [
+      "e078"
+     ]
+    },
+    {
+     "slug": "axv_2006_09877_01",
+     "row_id": "arxiv:2006.09877#01",
+     "title": "Question: polynomial expansion and twin-width",
+     "decision": "author",
+     "needed_vocabulary": [
+      "twin-width",
+      "shallow minor at depth r",
+      "polynomial expansion (grad_r bounded by a polynomial)"
+     ],
+     "related_edges": [
+      "e078"
+     ]
+    },
+    {
+     "slug": "axv_2001_01607_02",
+     "row_id": "arxiv:2001.01607#02",
+     "title": "Open Question: (triangle, S1,2,3)-free graphs cliquewidth",
+     "decision": "author",
+     "needed_vocabulary": [
+      "clique-width (k-expressions)",
+      "subdivided claw S_{1,2,3}"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Ten rows, the wave cap. Shared new vocabulary: walls W_{txt} and their subdivisions, line graphs of walls, tree-independence number, induced matching treewidth, twin-width (contraction sequences), clique-width, shallow minors / polynomial expansion. axv_2511_03864_00/01 are joined by an equivalent_to edge (e072). The queue-number and poset-unavoidability minor-theory rows spill to X228:minor-theory."
+  },
+  "X221": {
+   "repo": "digraph-theory",
+   "topic_group": "dichromatic number, heroes, tournament structure, unavoidability",
+   "rows": [
+    {
+     "slug": "axv_2306_04710_02",
+     "row_id": "arxiv:2306.04710#02",
+     "title": "Open problem: hero status of $\\Delta(1,2,2)$",
+     "decision": "author",
+     "needed_vocabulary": [
+      "dichromatic number chi-vec",
+      "hero / chi-vec-finite family",
+      "Delta(1,2,2)",
+      "induced subdigraph"
+     ],
+     "related_edges": [
+      "e105"
+     ]
+    },
+    {
+     "slug": "axv_2202_13306_00",
+     "row_id": "arxiv:2202.13306#00",
+     "title": "Question 1.4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "dichromatic number",
+      "hero",
+      "oriented complete multipartite digraph",
+      "Delta(1,2,2)"
+     ],
+     "related_edges": [
+      "e105"
+     ]
+    },
+    {
+     "slug": "axv_2403_02298_00",
+     "row_id": "arxiv:2403.02298#00",
+     "title": "Conjecture 3",
+     "decision": "author",
+     "needed_vocabulary": [
+      "acyclic number of a digraph",
+      "oriented triangle-free graph",
+      "Theta() over nat (asymptotics.v big_O_nat)"
+     ],
+     "related_edges": [
+      "e158"
+     ]
+    },
+    {
+     "slug": "axv_2403_02298_01",
+     "row_id": "arxiv:2403.02298#01",
+     "title": "Conjecture 4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "maximum dichromatic number over oriented triangle-free graphs of order n",
+      "Theta() over nat"
+     ],
+     "related_edges": [
+      "e158"
+     ]
+    },
+    {
+     "slug": "axv_2310_04265_03",
+     "row_id": "arxiv:2310.04265#03",
+     "title": "Conjecture 3.13",
+     "decision": "author",
+     "needed_vocabulary": [
+      "twin-width of an ordered tournament tww((T,<*))",
+      "tournament clique number omega-vec",
+      "backedge graph T^{<*} of an ordering",
+      "tournament (GTBase.common)"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "axv_2410_23566_05",
+     "row_id": "arxiv:2410.23566#05",
+     "title": "Conjecture 11",
+     "decision": "author",
+     "needed_vocabulary": [
+      "linearly unavoidable family",
+      "k-extension of a digraph",
+      "tournament"
+     ],
+     "related_edges": [
+      "e106"
+     ]
+    },
+    {
+     "slug": "axv_2510_11311_04",
+     "row_id": "arxiv:2510.11311#04",
+     "title": "Question 6.4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "Eulerian digraph",
+      "Eulerian-avoidable",
+      "F-free subdigraph with large minimum out-degree",
+      "orientation of C_4"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "The plan reserved X221-X222 for digraph-theory; after triage the digraph rows fit in a single wave, so X222 is unused. axv_2310_04265_03 is the RE-ENCODING row (its previous encoding used f(omega-bar(T)) in the twin-width clause instead of f(tww(T))); it shares the twin-width-of-an-ordered-tournament primitive with the already-done conj_3_12/conj_3_16 statements of digraph-theory/theories/conjectures/twinwidth.v, which should be reused, not re-declared."
+  },
+  "X223": {
+   "repo": "extremal-graph-theory",
+   "topic_group": "Sidorenko, sparse anticomplete pairs, Erdos-Hajnal, Ramsey-nice, induced Turan",
+   "rows": [
+    {
+     "slug": "axv_2210_16971_00",
+     "row_id": "arxiv:2210.16971#00",
+     "title": "Conjecture 1.4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "directed Sidorenko property (homomorphism-count inequality)",
+      "bipartite oriented graph",
+      "homomorphism to the directed edge"
+     ],
+     "related_edges": [
+      "e109"
+     ]
+    },
+    {
+     "slug": "axv_2210_16971_01",
+     "row_id": "arxiv:2210.16971#01",
+     "title": "Conjecture 1.7",
+     "decision": "blocked",
+     "blocked_reason": "The directed FORCING property is a quasirandomness statement (a homomorphism-density equality forcing quasirandomness in the limit); it needs a graph-limit / real-density layer that GTBase does not have, whereas the Sidorenko property of the companion row axv_2210_16971_00 has an equivalent finite homomorphism-counting form.",
+     "needed_vocabulary": [
+      "directed forcing property",
+      "homomorphism densities / quasirandomness"
+     ],
+     "related_edges": [
+      "e109"
+     ]
+    },
+    {
+     "slug": "axv_1810_00058_01",
+     "row_id": "arxiv:1810.00058#01",
+     "title": "Open case H = K3 for Conjecture 1.4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "c-sparse (a,b)-pair",
+      "epsilon-bounded graph",
+      "H-free"
+     ],
+     "related_edges": [
+      "e076"
+     ]
+    },
+    {
+     "slug": "axv_1810_00058_02",
+     "row_id": "arxiv:1810.00058#02",
+     "title": "Conjecture 3.4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "c-sparse (a,b)-pair",
+      "epsilon-bounded graph"
+     ],
+     "related_edges": [
+      "e077"
+     ]
+    },
+    {
+     "slug": "axv_1912_02342_00",
+     "row_id": "arxiv:1912.02342#00",
+     "title": "Conjecture 4.1",
+     "decision": "author",
+     "needed_vocabulary": [
+      "VC-dimension of the neighbourhood set system",
+      "clique / stable (GraphTheory.dom)",
+      "n^eps via exists q with s^q >= n"
+     ],
+     "related_edges": [
+      "e116"
+     ]
+    },
+    {
+     "slug": "axv_2405_05902_01",
+     "row_id": "arxiv:2405.05902#01",
+     "title": "Conjecture 6.1",
+     "decision": "author",
+     "needed_vocabulary": [
+      "induced Turan number ex(Gamma,P) in a host graph",
+      "(c,t)-sparse host graph",
+      "the family P_{C_2l}"
+     ],
+     "related_edges": []
+    },
+    {
+     "slug": "axv_1708_07369_00",
+     "row_id": "arxiv:1708.07369#00",
+     "title": "Question 1.1",
+     "decision": "author",
+     "needed_vocabulary": [
+      "k-nice family of graphs",
+      "Ramsey number of a family",
+      "forest"
+     ],
+     "related_edges": [
+      "e160"
+     ]
+    },
+    {
+     "slug": "axv_1708_07369_01",
+     "row_id": "arxiv:1708.07369#01",
+     "title": "Conjecture 1.5",
+     "decision": "author",
+     "needed_vocabulary": [
+      "k-nice family of graphs",
+      "'for infinitely many k' as forall k0, exists k >= k0"
+     ],
+     "related_edges": [
+      "e160"
+     ]
+    }
+   ],
+   "notes": "The plan split these over X223-X224; after triage (online-ramsey, subgraph-query and random-graphs deferred) they fit in one wave, so X224 is unused. axv_2210_16971_01 is pre-declared blocked with its companion axv_2210_16971_00 authored in the same wave (edge e109). axv_1708_07369_00/01 re-author the two existing blocked placeholders with the recovered 'k-nice' definition. Shared vocabulary: c-sparse/(x,y)-pairs and eps-bounded graphs (two rows), homomorphism counts on oriented graphs."
+  },
+  "X225": {
+   "repo": "hypergraph-theory",
+   "topic_group": "hypergraph Turan exponents and hypergraph minors",
+   "rows": [
+    {
+     "slug": "axv_2401_00359_01",
+     "row_id": "arxiv:2401.00359#01",
+     "title": "Conjecture 6.2",
+     "decision": "author",
+     "needed_vocabulary": [
+      "k-uniform k-partite hypergraph",
+      "Turan number ex(n,H) for hypergraphs",
+      "the degeneracy-type parameters d_i(H), d_max(H)",
+      "exponent cleared to nat form"
+     ],
+     "related_edges": [
+      "e145"
+     ]
+    },
+    {
+     "slug": "axv_2401_00359_02",
+     "row_id": "arxiv:2401.00359#02",
+     "title": "Conjecture 6.4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "Latin square",
+      "3-uniform 3-partite hypergraph H_L",
+      "Turan number ex(n,H) for hypergraphs"
+     ],
+     "related_edges": [
+      "e145"
+     ]
+    },
+    {
+     "slug": "axv_2206_13635_00",
+     "row_id": "arxiv:2206.13635#00",
+     "title": "Conjecture 2",
+     "decision": "author",
+     "needed_vocabulary": [
+      "hypergraph minor (K_t minor in a hypergraph)",
+      "chromatic number of a hypergraph"
+     ],
+     "related_edges": [
+      "e049"
+     ]
+    },
+    {
+     "slug": "axv_2206_13635_01",
+     "row_id": "arxiv:2206.13635#01",
+     "title": "Problem 1",
+     "decision": "author",
+     "needed_vocabulary": [
+      "hypergraph minor",
+      "chromatic number of a hypergraph"
+     ],
+     "related_edges": [
+      "e049"
+     ]
+    }
+   ],
+   "notes": "Two pairs, each joined by an implies edge (e145, e049). Shared vocabulary: a finite hypergraph type with a Turan number ex(n,H), and the paper's hypergraph-minor notion (branch sets joined by a hyperedge inside their union). NOTE: the plan's 'set-systems 4' rows for this wave did NOT re-scope to B2 — axv_1909_11578_01/02 are families of vectors in [k]^n with real exponents and axv_2208_06858_00/01 are probability statements, so they are deferred resp. blocked in X227."
+  },
+  "X226": {
+   "repo": "packing-theory",
+   "topic_group": "eta-boundedness and hypercube partitions",
+   "rows": [
+    {
+     "slug": "axv_2302_04986_00",
+     "row_id": "arxiv:2302.04986#00",
+     "title": "Conjecture 1.8",
+     "decision": "author",
+     "needed_vocabulary": [
+      "eta(G): minimum size of a set meeting every maximum stable set",
+      "eta-bounded class",
+      "forest, H-free"
+     ],
+     "related_edges": [
+      "e012",
+      "e013"
+     ]
+    },
+    {
+     "slug": "axv_2302_04986_01",
+     "row_id": "arxiv:2302.04986#01",
+     "title": "Conjecture 1.13",
+     "decision": "author",
+     "needed_vocabulary": [
+      "eta(G)",
+      "eta-bounded class",
+      "P_t-free"
+     ],
+     "related_edges": [
+      "e012"
+     ]
+    },
+    {
+     "slug": "axv_2302_04986_04",
+     "row_id": "arxiv:2302.04986#04",
+     "title": "Open problem on $\\eta$-boundedness for disjoint union of two stars",
+     "decision": "author",
+     "needed_vocabulary": [
+      "eta(G)",
+      "eta-bounded class",
+      "disjoint union of two stars S_a u S_b"
+     ],
+     "related_edges": [
+      "e013"
+     ]
+    },
+    {
+     "slug": "axv_2401_00299_04",
+     "row_id": "arxiv:2401.00299#04",
+     "title": "Problem 1.10",
+     "decision": "author",
+     "needed_vocabulary": [
+      "subcube partitions of Q_d and their counts f(d), f_{<=2}(d)",
+      "subexponential wrapper over nat"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "The three eta rows share one primitive, eta(G) = minimum size of a set meeting every maximum stable set (recovered from arXiv:2302.04986), and form a fan of implies edges (e012, e013) from axv_2302_04986_00. NOTE: the plan's 'edge-covering 2' and 'domination 2' rows for this wave are determine-the-value / class-quantified questions and are deferred."
+  },
+  "X227:graph-theory-misc": {
+   "repo": "graph-theory-misc",
+   "topic_group": "hat guessing and independent sets under random subsets",
+   "rows": [
+    {
+     "slug": "axv_1812_09752_00",
+     "row_id": "arxiv:1812.09752#00",
+     "title": "Problem 1.4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "hat guessing number HG(G) (finite guessing-strategy game)",
+      "degeneracy",
+      "f3 -> infinity as forall k, exists delta, ..."
+     ],
+     "related_edges": [
+      "e061"
+     ]
+    },
+    {
+     "slug": "axv_2107_05995_00",
+     "row_id": "arxiv:2107.05995#00",
+     "title": "Informal Belief on Degeneracy Bound for Hat Guessing Number",
+     "decision": "author",
+     "needed_vocabulary": [
+      "hat guessing number HG(G)",
+      "degeneracy"
+     ],
+     "related_edges": [
+      "e061"
+     ]
+    },
+    {
+     "slug": "axv_2208_06858_04",
+     "row_id": "arxiv:2208.06858#04",
+     "title": "Conjecture 2.9",
+     "decision": "author",
+     "needed_vocabulary": [
+      "independence number alpha (GraphTheory.dom stable)",
+      "finite average over all vertex subsets",
+      "rational thresholds"
+     ],
+     "related_edges": [
+      "e152"
+     ]
+    },
+    {
+     "slug": "axv_2208_06858_03",
+     "row_id": "arxiv:2208.06858#03",
+     "title": "Conjecture 2.8",
+     "decision": "blocked",
+     "blocked_reason": "alpha*(G) is defined through an OPTIMAL PARTITION of V(G)^r together with a positively-correlated random-subset distribution with Bernoulli(1/2) marginals; that is a genuine correlated probability space, which GTBase has no layer for (the binomial special case is the companion row axv_2208_06858_04, authored in the same wave).",
+     "needed_vocabulary": [
+      "alpha*(G) via correlated distributions on V(G)^r",
+      "positive correlation"
+     ],
+     "related_edges": [
+      "e151",
+      "e152"
+     ]
+    },
+    {
+     "slug": "axv_2208_06858_00",
+     "row_id": "arxiv:2208.06858#00",
+     "title": "Conjecture 2.1",
+     "decision": "blocked",
+     "blocked_reason": "p_intersecting(t) is the supremum of a success probability over intersecting winning-set families on {0,1}^n in Levine's hat problem; it needs a probability layer over families of subsets of the cube. The equivalent GRAPH form, Conjecture 2.6 on the independence ratio of Cartesian powers of the Kneser graph (edge e150, equivalent_to), is authored in the same phase as axv_2208_06858_02.",
+     "needed_vocabulary": [
+      "success probability of Levine's hat game",
+      "intersecting families on {0,1}^n"
+     ],
+     "related_edges": [
+      "e149",
+      "e150"
+     ]
+    },
+    {
+     "slug": "axv_2208_06858_01",
+     "row_id": "arxiv:2208.06858#01",
+     "title": "Conjecture 2.2",
+     "decision": "blocked",
+     "blocked_reason": "p_monotone(t) is the same success probability taken over all balanced monotone winning-set families on {0,1}^n; same missing probability layer as axv_2208_06858_00, and it implies that row (edge e149).",
+     "needed_vocabulary": [
+      "success probability of Levine's hat game",
+      "balanced monotone families on {0,1}^n"
+     ],
+     "related_edges": [
+      "e149"
+     ]
+    }
+   ],
+   "notes": "Three rows of arXiv:2208.06858 are pre-declared blocked (probability layer) and land with their authored companions axv_2208_06858_04 (same wave key) and axv_2208_06858_02 (X227:homomorphism-theory), which keeps edges e149, e150, e151, e152 complete. The two hat-guessing rows share the hat-guessing-number game primitive and are joined by e061. NOTE the plan's 'graph-products 3' for this wave: axv_2401_06062_01/02 (prime Cayley graphs) are 'when is X prime' characterizations and are deferred."
+  },
+  "X227:homomorphism-theory": {
+   "repo": "homomorphism-theory",
+   "topic_group": "independence ratio of Kneser-graph Cartesian powers",
+   "rows": [
+    {
+     "slug": "axv_2208_06858_02",
+     "row_id": "arxiv:2208.06858#02",
+     "title": "Conjecture 2.6",
+     "decision": "author",
+     "needed_vocabulary": [
+      "Kneser graph K(n) on {0,1}^n",
+      "Cartesian product power (GTBase.base cartesian_product)",
+      "independence ratio",
+      "iterated-limit wrapper over rationals"
+     ],
+     "related_edges": [
+      "e150",
+      "e151"
+     ]
+    }
+   ],
+   "notes": "Graph form of Levine's hat problem; equivalent_to the blocked axv_2208_06858_00 (edge e150) and implied by the blocked axv_2208_06858_03 (e151), both in X227:graph-theory-misc."
+  },
+  "X228:topological-graph-theory": {
+   "repo": "topological-graph-theory",
+   "topic_group": "expected number of faces of a random embedding",
+   "rows": [
+    {
+     "slug": "axv_2202_07746_00",
+     "row_id": "arxiv:2202.07746#00",
+     "title": "Conjecture 4",
+     "decision": "author",
+     "needed_vocabulary": [
+      "rotation system (GTBase.surface)",
+      "face count of a rotation system",
+      "finite average over all rotation systems"
+     ],
+     "related_edges": [
+      "e125"
+     ]
+    },
+    {
+     "slug": "axv_2103_05036_00",
+     "row_id": "arxiv:2103.05036#00",
+     "title": "Conjecture 1",
+     "decision": "author",
+     "needed_vocabulary": [
+      "rotation system",
+      "face count",
+      "finite average over all rotation systems",
+      "O() as an existential constant"
+     ],
+     "related_edges": [
+      "e125"
+     ]
+    }
+   ],
+   "notes": "Both rows are finite averages over the finitely many rotation systems of a graph, so no probability layer is needed and they are authorable (edge e125 joins them). NOTE: the three G(n,p)-based random-embedding rows (axv_2211_01032_00/01) and the crossing-number row axv_2009_03418_00 are deferred instead."
+  },
+  "X228:minor-theory": {
+   "repo": "minor-theory",
+   "topic_group": "queue number and poset-unavoidable minors (spillover from X220)",
+   "rows": [
+    {
+     "slug": "axv_1810_08314_00",
+     "row_id": "arxiv:1810.08314#00",
+     "title": "Open problem on queue-number of bounded layered treewidth graphs",
+     "decision": "author",
+     "needed_vocabulary": [
+      "queue number (vertex ordering with k queues, no two nested edges per queue)",
+      "layered treewidth (layering + tree decomposition)"
+     ],
+     "related_edges": [
+      "e126"
+     ]
+    },
+    {
+     "slug": "axv_2002_00496_02",
+     "row_id": "arxiv:2002.00496#02",
+     "title": "Conjecture 6",
+     "decision": "author",
+     "needed_vocabulary": [
+      "cover graph of a finite poset (GTBase.posets)",
+      "poset dimension",
+      "Kelly's construction",
+      "minor (GraphTheory.minor)"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Spillover from the ten-row cap of X220. axv_2002_00496_02 uses the paper's own reformulation of Kelly's construction (path-like gluings of K_4 with subdivided horizontal edges) because the element-level definition is only given by a figure in the paper."
+  },
+  "X228:cycle-theory": {
+   "repo": "cycle-theory",
+   "topic_group": "flow pairs",
+   "rows": [
+    {
+     "slug": "axv_2511_02892_06",
+     "row_id": "arxiv:2511.02892#06",
+     "title": "Conjecture 6.1",
+     "decision": "author",
+     "needed_vocabulary": [
+      "nowhere-zero k-flow / integer k-flow on an orientation",
+      "bridgeless (2-edge-connected)"
+     ],
+     "related_edges": [
+      "e174"
+     ]
+    }
+   ],
+   "notes": "Needs a nowhere-zero k-flow foundation; implies opg:5_flow_conjecture (edge e174), whose statement is already done, so the implication theorem is available immediately."
+  },
+  "X228:infinite-graph-theory": {
+   "repo": "infinite-graph-theory",
+   "topic_group": "induced saturation for infinite tournaments",
+   "rows": [
+    {
+     "slug": "axv_2506_08810_03",
+     "row_id": "arxiv:2506.08810#03",
+     "title": "Conjecture 24",
+     "decision": "author",
+     "needed_vocabulary": [
+      "countably infinite tournament (relation on nat)",
+      "locally finite perturbation",
+      "transitive tournament"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Countably infinite tournaments as relations on nat, with locally finite perturbations. Its edge e108 points at axv_2506_08810_02, a 'for which tournaments' characterization that is deferred, so the edge stays incomplete."
+  },
+  "X229:extremal-graph-theory": {
+   "repo": "extremal-graph-theory",
+   "topic_group": "new corpus rows (2309.04460, 2308.15387)",
+   "rows": [
+    {
+     "slug": "axv_2309_04460_01",
+     "row_id": "arxiv:2309.04460#01",
+     "title": "Question 10.2",
+     "decision": "author",
+     "needed_vocabulary": [
+      "robust sublinear expander (Komlos-Szemeredi)",
+      "proper edge colouring",
+      "decomposition into two spanning connected subgraphs with disjoint colour sets",
+      "average degree >= C log n"
+     ],
+     "related_edges": []
+    }
+   ],
+   "notes": "Only one of the six new arXiv rows is authorable: 2309.04460#02/#03 are group-theory / permutation questions and 2308.15387#02/#03/#04 are determine-the-value or 'for which values' questions about intersecting hypergraphs (all deferred). Its siblings axv_2309_04460_00 (B3, rainbow-cycles) and axv_2308_15387_00/01 (B2/B3, edge-coloring-connectivity) are existing extremal-graph-theory rows with defer_reason null that were OUTSIDE this triage's candidate set; the authoring wave should pick them up in the same phase, after checking axv_2309_04460_00's own recovery flag."
+  }
+ },
+ "deferred": [
+  {
+   "slug": "axv_1010_2472_00",
+   "row_id": "arxiv:1010.2472#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1604_07976_00",
+   "row_id": "arxiv:1604.07976#00",
+   "defer_reason": "Extension complexity of the spanning-tree polytope needs a real polyhedral/LP layer (no reals or polytopes in GTBase); the 2026-07-17 audit machine-confirmed the earlier finite-witness encoding vacuous (X167)."
+  },
+  {
+   "slug": "axv_1604_07976_01",
+   "row_id": "arxiv:1604.07976#01",
+   "defer_reason": "Same polytope/extension-complexity layer as axv_1604_07976_00 (audit verdict X168: extension complexity not modelled at all)."
+  },
+  {
+   "slug": "axv_1709_09050_00",
+   "row_id": "arxiv:1709.09050#00",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_1709_09050_01",
+   "row_id": "arxiv:1709.09050#01",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_1710_11281_01",
+   "row_id": "arxiv:1710.11281#01",
+   "defer_reason": "Real/Riemannian geometry, out of scope (non-graph objects)."
+  },
+  {
+   "slug": "axv_1710_11281_04",
+   "row_id": "arxiv:1710.11281#04",
+   "defer_reason": "Real/Riemannian geometry, out of scope (non-graph objects)."
+  },
+  {
+   "slug": "axv_1803_05396_00",
+   "row_id": "arxiv:1803.05396#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1806_09726_00",
+   "row_id": "arxiv:1806.09726#00",
+   "defer_reason": "Online random Ramsey game: Painter colours each edge with probability p, plus 2^{(1+o(1))cn} asymptotics; needs a probability layer."
+  },
+  {
+   "slug": "axv_1806_09726_01",
+   "row_id": "arxiv:1806.09726#01",
+   "defer_reason": "Subgraph Query Game on G(Z,p): probabilistic query model, and the record states the exponent formula is garbled in PDF extraction."
+  },
+  {
+   "slug": "axv_1806_11196_00",
+   "row_id": "arxiv:1806.11196#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1811_12252_02",
+   "row_id": "arxiv:1811.12252#02",
+   "defer_reason": "The five remaining (H1,H2) pairs are not listed in the record, so there is no statable proposition; also a determine-the-status task."
+  },
+  {
+   "slug": "axv_1812_02420_00",
+   "row_id": "arxiv:1812.02420#00",
+   "defer_reason": "Statement of a decision problem (instance/question), not a proposition; the companion NP-completeness claim needs the computation model."
+  },
+  {
+   "slug": "axv_1812_02420_01",
+   "row_id": "arxiv:1812.02420#01",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1904_12273_00",
+   "row_id": "arxiv:1904.12273#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1907_01083_00",
+   "row_id": "arxiv:1907.01083#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1908_06300_00",
+   "row_id": "arxiv:1908.06300#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1908_06300_01",
+   "row_id": "arxiv:1908.06300#01",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1909_07141_00",
+   "row_id": "arxiv:1909.07141#00",
+   "defer_reason": "Fair division (measures on the circle), not a graph statement."
+  },
+  {
+   "slug": "axv_1909_07141_01",
+   "row_id": "arxiv:1909.07141#01",
+   "defer_reason": "Fair division (measures on the circle), not a graph statement."
+  },
+  {
+   "slug": "axv_1909_08426_00",
+   "row_id": "arxiv:1909.08426#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1909_08426_02",
+   "row_id": "arxiv:1909.08426#02",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1909_08426_03",
+   "row_id": "arxiv:1909.08426#03",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_1909_11578_01",
+   "row_id": "arxiv:1909.11578#01",
+   "defer_reason": "Set systems of vectors in [k]^n with real exponents; not a plain hypergraph statement."
+  },
+  {
+   "slug": "axv_1909_11578_02",
+   "row_id": "arxiv:1909.11578#02",
+   "defer_reason": "Set systems of vectors in [k]^n with real exponents; not a plain hypergraph statement."
+  },
+  {
+   "slug": "axv_1911_03427_00",
+   "row_id": "arxiv:1911.03427#00",
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement."
+  },
+  {
+   "slug": "axv_1911_03427_01",
+   "row_id": "arxiv:1911.03427#01",
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement."
+  },
+  {
+   "slug": "axv_1912_11246_01",
+   "row_id": "arxiv:1912.11246#01",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2001_01607_04",
+   "row_id": "arxiv:2001.01607#04",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2001_03794_00",
+   "row_id": "arxiv:2001.03794#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2001_03794_01",
+   "row_id": "arxiv:2001.03794#01",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2002_00496_01",
+   "row_id": "arxiv:2002.00496#01",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2003_05185_00",
+   "row_id": "arxiv:2003.05185#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2005_12861_00",
+   "row_id": "arxiv:2005.12861#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2006_00534_00",
+   "row_id": "arxiv:2006.00534#00",
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement."
+  },
+  {
+   "slug": "axv_2006_00534_01",
+   "row_id": "arxiv:2006.00534#01",
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement."
+  },
+  {
+   "slug": "axv_2008_01616_00",
+   "row_id": "arxiv:2008.01616#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2008_01616_01",
+   "row_id": "arxiv:2008.01616#01",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2009_03418_00",
+   "row_id": "arxiv:2009.03418#00",
+   "defer_reason": "Crossing number is not modelled by GTBase.surface (rotation systems give embeddings, not crossings) and needs a plane-drawings layer; the only corpus edge (e128) goes to opg:the_crossing_number_of_the_complete_graph, whose own statement is only 'partial', so no same-paper companion could be authored alongside it."
+  },
+  {
+   "slug": "axv_2009_13319_00",
+   "row_id": "arxiv:2009.13319#00",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2009_13319_03",
+   "row_id": "arxiv:2009.13319#03",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2102_01034_00",
+   "row_id": "arxiv:2102.01034#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2102_10220_02",
+   "row_id": "arxiv:2102.10220#02",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "axv_2102_10220_03",
+   "row_id": "arxiv:2102.10220#03",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "axv_2103_08698_01",
+   "row_id": "arxiv:2103.08698#01",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2105_01780_00",
+   "row_id": "arxiv:2105.01780#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2105_01787_00",
+   "row_id": "arxiv:2105.01787#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2206_00594_00",
+   "row_id": "arxiv:2206.00594#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2206_00594_02",
+   "row_id": "arxiv:2206.00594#02",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2208_06629_00",
+   "row_id": "arxiv:2208.06629#00",
+   "defer_reason": "Permutation / sorting-network statement, not a graph statement."
+  },
+  {
+   "slug": "axv_2208_06630_01",
+   "row_id": "arxiv:2208.06630#01",
+   "defer_reason": "Permutation / sorting-network statement, not a graph statement."
+  },
+  {
+   "slug": "axv_2210_12754_01",
+   "row_id": "arxiv:2210.12754#01",
+   "defer_reason": "'Provide a more accurate estimate' — improve-the-bounds meta task over G(n,p); also needs probability."
+  },
+  {
+   "slug": "axv_2211_01032_00",
+   "row_id": "arxiv:2211.01032#00",
+   "defer_reason": "Needs a probability layer (random graphs G(n,p) / whp / expectation over an infinite family), out of scope for these waves."
+  },
+  {
+   "slug": "axv_2211_01032_01",
+   "row_id": "arxiv:2211.01032#01",
+   "defer_reason": "Needs a probability layer (random graphs G(n,p) / whp / expectation over an infinite family), out of scope for these waves."
+  },
+  {
+   "slug": "axv_2211_14218_00",
+   "row_id": "arxiv:2211.14218#00",
+   "defer_reason": "Needs a probability layer (random graphs G(n,p) / whp / expectation over an infinite family), out of scope for these waves."
+  },
+  {
+   "slug": "axv_2211_14218_01",
+   "row_id": "arxiv:2211.14218#01",
+   "defer_reason": "Needs a probability layer (random graphs G(n,p) / whp / expectation over an infinite family), out of scope for these waves."
+  },
+  {
+   "slug": "axv_2212_05133_00",
+   "row_id": "arxiv:2212.05133#00",
+   "defer_reason": "Real/Riemannian geometry, out of scope (non-graph objects)."
+  },
+  {
+   "slug": "axv_2212_05133_01",
+   "row_id": "arxiv:2212.05133#01",
+   "defer_reason": "Real/Riemannian geometry, out of scope (non-graph objects)."
+  },
+  {
+   "slug": "axv_2308_15387_02",
+   "row_id": "arxiv:2308.15387#02",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "axv_2308_15387_03",
+   "row_id": "arxiv:2308.15387#03",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "axv_2308_15387_04",
+   "row_id": "arxiv:2308.15387#04",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2309_04460_02",
+   "row_id": "arxiv:2309.04460#02",
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement."
+  },
+  {
+   "slug": "axv_2309_04460_03",
+   "row_id": "arxiv:2309.04460#03",
+   "defer_reason": "Permutation / sorting-network statement, not a graph statement."
+  },
+  {
+   "slug": "axv_2311_05713_00",
+   "row_id": "arxiv:2311.05713#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2311_05713_01",
+   "row_id": "arxiv:2311.05713#01",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2401_00299_01",
+   "row_id": "arxiv:2401.00299#01",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "axv_2401_06062_01",
+   "row_id": "arxiv:2401.06062#01",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2401_06062_02",
+   "row_id": "arxiv:2401.06062#02",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2405_05902_00",
+   "row_id": "arxiv:2405.05902#00",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "axv_2407_08927_00",
+   "row_id": "arxiv:2407.08927#00",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful."
+  },
+  {
+   "slug": "axv_2503_05562_00",
+   "row_id": "arxiv:2503.05562#00",
+   "defer_reason": "Quantified over an arbitrary graph class with no conjectured constant; a question schema, not a proposition."
+  },
+  {
+   "slug": "axv_2503_05562_01",
+   "row_id": "arxiv:2503.05562#01",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2503_20045_02",
+   "row_id": "arxiv:2503.20045#02",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2503_20045_03",
+   "row_id": "arxiv:2503.20045#03",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "axv_2506_08810_02",
+   "row_id": "arxiv:2506.08810#02",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2510_11311_03",
+   "row_id": "arxiv:2510.11311#03",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition."
+  },
+  {
+   "slug": "axv_2601_15245_00",
+   "row_id": "arxiv:2601.15245#00",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "axv_2604_13700_00",
+   "row_id": "arxiv:2604.13700#00",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "axv_2604_13700_01",
+   "row_id": "arxiv:2604.13700#01",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state."
+  },
+  {
+   "slug": "bm_031",
+   "row_id": "bm:bm-031",
+   "defer_reason": "Conway's thrackle conjecture is a statement about drawings in the plane (a thrackle is a drawing in which every pair of edges meets exactly once); no planar-drawing foundation in scope, parked like the other geometry rows (bm_032, bm_054)."
+  },
+  {
+   "slug": "bm_032",
+   "row_id": "bm:bm-032",
+   "defer_reason": "Integral straight-line plane drawings: Euclidean/Diophantine geometry, not a finite graph statement; parked as B5 (the planarity side alone would be D6-style)."
+  },
+  {
+   "slug": "bm_054",
+   "row_id": "bm:bm-054",
+   "defer_reason": "Chromatic number of an INFINITE geometric graph on R^2 (unit distances); Euclidean geometry plus an infinite vertex set, parked as B5 like the other geometry rows."
+  }
+ ]
+}

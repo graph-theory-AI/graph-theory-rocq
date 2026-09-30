@@ -22,9 +22,22 @@ Definition x36_nonempty_k_divisible_subgraph (G : sgraph) (k : nat) : Prop :=
     F \subset x36_edge_set G /\
     forall v : G, x36_degree_in_edge_set F v %% k == 0.
 
-(** ** X36 statements ******************************************************)
-
-(** Studies slice: Alon-Friedland-Kalai k-divisible subgraph conjecture. *)
+(** Corpus row: studies:std_alon_friedland_kalai_conjecture
+    Site: none
+    Review: none
+    English statement: (Alon, Friedland and Kalai, "Alon-Friedland-Kalai Conjecture")
+      For every k > 0, every graph G containing no non-empty k-divisible subgraph (a non-empty
+      set of edges in which every vertex has degree divisible by k) has at most (k-1) * |V(G)|
+      edges.
+    Definitions: [x36_edge_set G] - the edges of G as 2-element vertex sets (X36.v);
+      [x36_degree_in_edge_set G F v] - the number of edges of F containing v (X36.v);
+      [x36_nonempty_k_divisible_subgraph G k] - a non-empty subset of the edges in which every
+      vertex of G has degree divisible by k (X36.v).
+    Notes: this row comes from the studies slice of the corpus, which has no site or review page. A
+      subgraph is modelled by its edge set, and the divisibility condition is required at every
+      vertex of G, which is equivalent to requiring it at the vertices the edge set touches
+      (untouched vertices have degree 0, divisible by k). The subtraction k - 1 is safe because
+      0 < k is assumed. *)
 Definition alon_friedland_kalai_divisible_subgraph_statement : Prop :=
   forall (k : nat) (G : sgraph),
     0 < k ->

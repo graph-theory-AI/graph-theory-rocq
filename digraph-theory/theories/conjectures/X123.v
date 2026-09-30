@@ -25,13 +25,24 @@ Definition x123_forb_pair (H F D : diGraphType) : Prop :=
 
 (** ** X123 statements ******************************************************)
 
-(** Aboulker–Charbit–Naserasr directed Gyarfas-Sumner: if [H] is a transitive
-    tournament and [F] is a directed forest, then {H,F} is χ⃗-finite — the class
-    of oriented graphs with no induced copy of [H] and no induced copy of [F]
-    has bounded dichromatic number.  DISTINCT from X71, whose forbidden set is
-    the single forest [F]; here it is the PAIR {transitive tournament, forest}.
-    [F] is guarded oriented + underlying-forest ("directed forest", as in X71);
-    [H] transitive-tournament is itself oriented via [is_tournament]. *)
+(** Corpus row: studies:std_directed_gy_rf_s_sumner_conjecture_aboulker_char
+    Site: none
+    Review: none
+    English statement: (Aboulker, Charbit and Naserasr, directed Gyarfas-Sumner conjecture, tournament and forest case)
+      For every transitive tournament H and every oriented forest F, the class of oriented
+      graphs containing no induced copy of H and no induced copy of F has bounded dichromatic
+      number: one constant dicolours every member.
+    Definitions: [x123_transitive_tournament H] - a tournament (irreflexive, semicomplete,
+      asymmetric) whose arc relation is transitive (this file); [x123_forb_pair H F D] - D is
+      oriented and free of induced copies of both H and F (this file); [is_tournament] and
+      [ind_free] (conjectures/heroes.v); [oriented_forest] and [oriented_dg]
+      (conjectures/chi_bounded.v); [dichromatic_bounded C] - a single constant k dicolours every
+      member of the class C (conjectures/dichromatic.v).
+    Notes: chi-vec-finite of the source is the CONSTANT bound [dichromatic_bounded], not a
+      function of the clique number; forbidding a transitive tournament bounds the directed
+      clique number, which is what turns the function bound of
+      [directed_gyarfas_sumner_oriented_forest_dichromatic_statement] (conjectures/X71.v) into a
+      constant here. *)
 Definition directed_gyarfas_sumner_tournament_forest_statement : Prop :=
   forall H F : diGraphType,
     x123_transitive_tournament H ->

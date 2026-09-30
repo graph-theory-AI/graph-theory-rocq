@@ -66,10 +66,36 @@ Definition x103_simultaneously_embeddable (G H : sgraph) : Prop :=
 
 (** ** X103 statements *****************************************************)
 
-(** Studies slice: Brass et al. problem asking for two same-order planar
-    graphs that are not simultaneously embeddable on a common point set.  The
-    point-set drawing/crossing-free condition is kept as the local graph-drawing
-    primitive for this row. *)
+(** Corpus row: studies:std_brass_et_al_simultaneous_embeddability_problem
+    Site: none
+    Review: none
+    English statement: (Brass, Cenek, Duncan, Efrat, Erten, Ismailescu, Kobourov, Lubiw,
+      Mitchell 2007, "simultaneous embeddability problem", studies slice)
+      Is there a pair of planar graphs of the same order that is not simultaneously
+      embeddable?  The Rocq body asserts it positively: there exist two finite simple graphs
+      G and H, both with no K5 and no K3,3 minor, with the same number of vertices, such that
+      G and H have no simultaneous straight-line embedding on a common point set.
+    Definitions: [x103_point] - a pair of integers, i.e. a point with integer coordinates
+      (this file); [x103_cross], [x103_on_segment], [x103_segments_intersect] - the standard
+      orientation-determinant tests for two CLOSED segments meeting, including the collinear
+      overlap cases (this file); [x103_crossing_free_drawing G place] - [place] is injective
+      and no two edges with four distinct endpoints have intersecting segments (this file);
+      [x103_same_point_set] - the two placements have the same image (this file);
+      [x103_simultaneously_embeddable G H] - both graphs have a crossing-free straight-line
+      drawing on one and the same point set (this file); [wagner_planar] -
+      base/theories/base.v.
+    Notes: PROXY choices.  (1) Points have INTEGER coordinates; the source speaks of the real
+      plane.  Restricting to the integer grid is harmless for the positive direction (a
+      simultaneous embedding on the reals can be perturbed to a rational, hence integer,
+      one), but the statement asserted here is the NEGATIVE one, so the integer restriction
+      makes it a priori WEAKER than the source question: a pair with no integer common point
+      set could still have a real one.  (2) The crossing-free condition only forbids
+      intersections between edges with four DISTINCT endpoints, so a vertex lying in the
+      interior of a non-incident edge is not forbidden (unlike
+      [geometry.straightline_planar], which does forbid it).  (3) "Same order" is written
+      with [Nat.eq] on the cardinalities.  (4) This file duplicates the segment-intersection
+      vocabulary of topological-graph-theory/theories/foundations/geometry.v over Z instead
+      of reusing it over an [rcfType]; see the ledger. *)
 Definition two_planar_graphs_not_simultaneously_embeddable_statement : Prop :=
   exists G H : sgraph,
     [/\ wagner_planar G,

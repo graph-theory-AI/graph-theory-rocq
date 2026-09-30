@@ -58,43 +58,57 @@ Definition is_domination_number (G : sgraph) (m : nat) : Prop :=
   (forall D : {set G}, dom.dominating D -> m <= #|D|).
 
 (** ================================================================= *)
-(** ** Row 1 — Domination in cubic graphs  (OPEN)
-
-    Source: "Problem: Does every 3-connected cubic graph G satisfy
-    γ(G) ≤ ⌈|G|/3⌉ ?"
-
-    Carrier: [sgraph].  cubic = [regular G 3] (base); 3-connected =
-    [k_connected G 3] (base, which forces [3 < #|G|], the non-triviality guard);
-    γ(G) = the [m] with [is_domination_number G m]; ⌈|G|/3⌉ = [ceil_div #|G| 3]
-    (base).  This is the faithful reading of the idiom [domnum G <= ⌈|G|/3⌉]:
-    γ(G) ≤ k ⟺ for the (unique) domination number [m], [m ≤ k]. *)
+(** Corpus row: opg:domination_in_cubic_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/domination_in_cubic_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/domination_in_cubic_graphs.json
+    English statement: (Open Problem Garden, "Domination in cubic graphs")
+      For every simple graph G and every natural number m, if G is 3-regular, G is
+      3-connected, and m is the domination number of G, then m is at most the ceiling
+      of |V(G)| divided by 3.
+    Definitions: [is_domination_number G m] — some dominating set of G has exactly m
+      vertices and every dominating set of G has at least m vertices (this file);
+      [dom.dominating D] — the closed neighbourhood of D is the whole vertex set
+      (coq-graph-theory dom.v); [regular G 3] — every vertex has exactly three
+      neighbours (GTBase base); [k_connected G 3] — Whitney 3-connectivity, which
+      itself carries the guard 3 < |V(G)| (GTBase base); [ceil_div a b] — (a+b-1) %/ b
+      (GTBase base).
+    Notes: "gamma(G) <= k" is rendered relationally: the statement quantifies over a
+      witness m constrained by [is_domination_number G m] rather than over a defined
+      gamma function (gamma(G) <= k iff the unique domination number m satisfies
+      m <= k). [k_connected G 3] also supplies the non-triviality guard 3 < |V(G)|. *)
 Definition domination_in_cubic_graphs_statement : Prop :=
   forall (G : sgraph) (m : nat),
     regular G 3 -> k_connected G 3 ->
     is_domination_number G m ->
     m <= ceil_div #|G| 3.
 
-(** ** Row 2 — Domination in plane triangulations  (OPEN — done, Wave 1)
-
-    Source: "Conjecture: Every sufficiently large plane triangulation G has a
-    dominating set of size ≤ (1/4)|V(G)|."
-
-    Wave 1 (Track-A embedding foundation): "plane triangulation" is the REAL
-    combinatorial notion — a CONNECTED graph with a genus-0 rotation-system
-    embedding all of whose faces are triangles ([planar_embedding E] +
-    [triangulation E] from [Topological.foundations.embedding]).
-
-    [connected [set: G]] is REQUIRED, not cosmetic: [euler_genus] is the
-    connected-map Euler relation over truncating nat arithmetic, so without it
-    disconnected pseudo-planar instances slip in (e.g. c ≥ 2 disjoint triangles
-    have [2+E-V-F = 2-2c ≤ 0 → genus 0] yet need γ = n/3 > n/4, making the
-    unguarded statement provably FALSE — caught by the Track-A review).  Plane
-    triangulations are connected by definition, so the guard is faithful.
-
-    "Sufficiently large" = an order threshold [n0] beyond which the bound holds;
-    [n0 <= #|G|] also supplies the non-triviality guard.  "dominating set of size
-    ≤ (1/4)|V(G)|" = γ(G) ≤ ⌊|G|/4⌋, i.e. the domination number [m]
-    ([is_domination_number G m]) satisfies [m <= #|G| %/ 4]. *)
+(** Corpus row: opg:domination_in_plane_triangulations
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/domination_in_plane_triangulations/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/domination_in_plane_triangulations.json
+    English statement: (Open Problem Garden, "Domination in plane triangulations")
+      There is an order threshold n0 such that for every simple graph G, every
+      embedding E of G and every natural number m: if G is connected, E is a genus-0
+      (planar) rotation-system embedding all of whose faces are triangles, G has at
+      least n0 vertices, and m is the domination number of G, then m is at most the
+      floor of |V(G)| divided by 4.
+    Definitions: [is_domination_number G m] — some dominating set of G has exactly m
+      vertices and every dominating set has at least m (this file); [embedding],
+      [planar_embedding E], [triangulation E] — rotation-system embedding, Euler genus
+      0, every face a triangle (Topological.foundations.embedding); [dom.dominating],
+      [connected [set: G]] — coq-graph-theory.
+    Notes: "plane triangulation" is the real combinatorial notion (Wave 1 Track-A
+      embedding foundation), not an abstract placeholder. "Sufficiently large" is an
+      existential order threshold n0, which doubles as the non-triviality guard, and
+      "dominating set of size <= (1/4)|V(G)|" is rendered as m <= |V(G)| %/ 4 (floor
+      division). The connectedness guard is load-bearing, not cosmetic: [euler_genus]
+      is the connected-map Euler relation over truncating nat arithmetic, so without it
+      disconnected pseudo-planar instances slip in (c >= 2 disjoint triangles satisfy
+      2+E-V-F = 2-2c <= 0, hence genus 0, yet need gamma = n/3 > n/4, making the
+      unguarded statement provably false — caught by the Track-A review); plane
+      triangulations are connected by definition, so the guard is faithful.  Vertex-count
+      convention: [emV] counts every vertex including isolated ones (embedding.v fix
+      2026-09-23, mirroring base/theories/surface.v); this does not move the statement,
+      whose order threshold [n0] is existential and now simply has to exceed 1. *)
 Definition domination_in_plane_triangulations_statement : Prop :=
   exists n0 : nat,
     forall (G : sgraph) (E : embedding G) (m : nat),

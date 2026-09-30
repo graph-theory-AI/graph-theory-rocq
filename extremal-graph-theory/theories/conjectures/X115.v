@@ -31,18 +31,29 @@ Definition x115_odd_induced_cycle (G : sgraph) (S : {set G}) : bool :=
 Definition x115_count (G : sgraph) : nat :=
   #|[set S : {set G} | x115_odd_induced_cycle S]|.
 
-(** ** X115 statements *****************************************************)
-
-(** Chvatal--Tuza (1988): the maximum possible number of odd induced cycles in
-    a graph on [n] vertices is [3 ^ (n / 3)].  Resolved by Morrison--Scott
-    (arXiv:1603.02960, Theorem 1.6): the maximum [m_o(n)] equals [3^{n/3}] up
-    to an [O(n)] additive term when [n = 3 (mod 6)] and up to a constant factor
-    otherwise, and only for all [n >= n0].  Since [3^{n/3}] is not an integer,
-    the bound [count <= 3^{n/3}] is cubed to [count^3 <= 3^n] (equivalent over
-    the naturals).  We encode the resolved statement -- "the maximum is
-    [Theta(3^{n/3})]" -- as a two-sided constant-factor bound with a threshold
-    [N]: an upper constant [Cu] bounding every graph, and a lower constant [Cl]
-    witnessed by an extremal graph at each [n >= N]. *)
+(** Corpus row: studies:std_chv_tal_tuza_conjecture_on_maximum_odd_induced_c
+    Site: none
+    Review: none
+    English statement: (Chvatal and Tuza 1988, "Chvatal-Tuza conjecture on maximum odd induced cycles")
+      There are constants Cu, Cl > 0 and a threshold N such that for every n >= N: every graph
+      G on n vertices has at most Cu * 3^n odd induced cycles cubed (count^3 <= Cu * 3^n), and
+      some graph on n vertices attains 3^n <= Cl * count^3; that is, the maximum number of odd
+      induced cycles on n vertices is of order 3^(n/3).
+    Definitions: [x115_scycle_rel G S] - adjacency of G restricted to both ends inside S (X115.v);
+      [x115_connected G S] - every two vertices of S are joined using only S-internal edges
+      (X115.v); [x115_two_regular G S] - every vertex of S has exactly two neighbours inside S
+      (X115.v); [x115_odd_induced_cycle G S] - S has at least 3 vertices, odd size, is
+      2-regular and connected, which characterises an induced odd cycle (X115.v);
+      [x115_count G] - the number of such vertex sets (X115.v).
+    Notes: this row comes from the studies slice of the corpus, which has no site or review page,
+      and is recorded as PARTIAL (a disclosed PROXY). The source's literal "is 3^(n/3)" is
+      ill-posed over the naturals (3^(n/3) is irrational unless 3 divides n) and machine-refuted
+      (K_6 already has at least 20 odd induced cycles, and 20^3 = 8000 > 729 = 3^6); the sharp
+      asymptotic is also false (Morrison-Scott, arXiv:1603.02960, Theorem 1.6, which gives the
+      maximum up to an O(n) additive term when n = 3 mod 6 and up to a constant factor
+      otherwise, for n large). The body therefore encodes the resolved form, a two-sided
+      constant-factor bound with a threshold, cubed to stay integral. This is strictly weaker
+      than the literal source text (ledger). *)
 Definition chvatal_tuza_max_odd_induced_cycles_statement : Prop :=
   exists Cu Cl N : nat,
     [/\ 0 < Cu, 0 < Cl,

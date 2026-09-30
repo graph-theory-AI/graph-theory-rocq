@@ -83,30 +83,38 @@ Definition is_prism (G : sgraph) : Prop :=
 Definition is_antiprism (G : sgraph) : Prop :=
   exists n : nat, 2 < n /\ inhabited (G ≃ antiprism n).
 
-(** ** Row 1 — Grünbaum's conjecture (3-edge-colourability of the dual of a
-    triangulation of an orientable surface).  Recorded OPEN in the OPG source;
-    STATUS CAVEAT (Track-A review): the general orientable form encoded here was
-    REFUTED by Kochol (2009, polyhedral embeddings of snarks in orientable
-    surfaces of large genus); the low-genus (e.g. toroidal) cases remain open.
-    The encoding is faithful to the source conjecture as stated.
-    ORIENTABILITY IS LOAD-BEARING (signed-layer audit): quantifying over [emap]
-    (all surfaces) instead of [embedding] (orientable) would make the row
-    classically FALSE outright — K6 triangulates the projective plane N_1 with
-    the Petersen graph as dual, which is not 3-edge-colourable.  The orientable
-    quantification is exactly the source's class.
-
-    Source (Conjecture): "If [G] is a simple loopless triangulation of an
-    orientable surface, then the dual of [G] is 3-edge-colorable."
-
-    Encoding.  [G : sgraph] is simple + loopless; the rotation system [E] is
-    orientable by construction, and [triangulation E] says every face is a
-    triangle.  The dual of a triangulation is 3-regular, and a proper
-    3-edge-colouring of the dual assigns to each PRIMAL EDGE (a pair of darts
-    [d], [edge_perm G d]) a colour in ['I_3] such that the three edges bounding
-    each triangular face receive pairwise-distinct colours.  The three darts of a
-    face are [d], [face_perm E d], [face_perm E (face_perm E d)] (a triangular
-    face has period 3 under [face_perm]); each carries the colour of its
-    underlying edge (first conjunct: [c] is [edge_perm]-invariant). *)
+(** Corpus row: opg:grunbaums_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/grunbaums_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/grunbaums_conjecture.json
+    English statement: (Open Problem Garden, "Grunbaum's Conjecture")
+      Corpus claim: if G is a simple loopless triangulation of an orientable surface then the
+      dual of G is 3-edge-colourable.  Back-translation of the Rocq body: for every finite
+      simple graph G and every rotation system E on G all of whose faces have exactly three
+      darts, there is a map c from darts of G to a 3-element set that (i) gives the two darts
+      of each edge the same colour and (ii) gives the three darts d, face_perm(d),
+      face_perm(face_perm(d)) of every face pairwise different colours - which is exactly a
+      proper 3-edge-colouring of the dual of the triangulation.
+    Definitions: [dart G] - an ordered pair of adjacent vertices
+      (topological-graph-theory/theories/foundations/embedding.v); [edge_perm G] - the
+      dart-reversing involution, so an edge is a pair {d, edge_perm d} (same file);
+      [embedding G] - an orientable rotation system, i.e. a permutation of the darts whose
+      orbits are exactly the dart sets of the individual vertices (same file), PROVEN
+      inhabited for every G by [embedding_exists]; [face_perm E] - the composite
+      rotation * edge_perm, whose orbits are the faces (same file); [triangulation E] -
+      every face orbit has exactly 3 darts (same file).
+    Notes: (1) ORIENTABILITY IS LOAD-BEARING: quantifying over the general-surface layer
+      [emap] (signed_embedding.v) instead of the orientable [embedding] would make the row
+      classically FALSE - K6 triangulates the projective plane with the Petersen graph as
+      dual, which is not 3-edge-colourable.  [embedding] is orientable by construction, which
+      is exactly the source's class.  (2) STATUS CAVEAT: the OPG source records the row as
+      open, but the general orientable form encoded here was REFUTED by Kochol (2009,
+      polyhedral embeddings of snarks in orientable surfaces of large genus); the low-genus
+      (e.g. toroidal) cases remain open.  The encoding is faithful to the source conjecture
+      as stated, not to its surviving special cases.  (3) The dual is not constructed as a
+      graph: "the dual is 3-edge-colourable" is rendered directly as a colouring of the
+      primal darts, constant on edges and rainbow on each triangular face - legitimate
+      because the dual of a triangulation is cubic and its edges are the primal edges.
+      (4) The [triangulation] filter is a conjecture hypothesis, not proven realizable. *)
 Definition grunbaums_statement : Prop :=
   forall (G : sgraph) (E : embedding G),
     triangulation E ->
@@ -117,42 +125,68 @@ Definition grunbaums_statement : Prop :=
          c (face_perm E d) <> c (face_perm E (face_perm E d)) /\
          c d <> c (face_perm E (face_perm E d))).
 
-(** ** Row 2 — The circular-embedding conjecture.  OPEN — done (signed-map form).
-
-    Source (Conjecture): "Every 2-connected graph may be embedded in a surface so
-    that the boundary of each face is a cycle."
-
-    Encoding (GENERAL surfaces — the signed-rotation-system layer
-    [Topological.foundations.signed_embedding]).  An [emap G] is a rotation
-    system PLUS an edge signature, capturing embeddings in ALL closed surfaces,
-    orientable or not (Mohar–Thomassen embedding schemes) — this closes the
-    orientability gap found by the Track-A review (the earlier [embedding G]
-    quantification expressed only the strictly stronger ORIENTABLE strong
-    embedding conjecture).  [circular_emap M] says every face-tracing orbit
-    visits pairwise-distinct vertices (the source map is injective on each flag
-    orbit), i.e. every face boundary is a simple cycle.  Non-vacuity:
-    [emap_exists] (every graph has a signed map — trivial signature), and
-    non-orientable signatures are genuinely expressible
-    ([twisted_triangle_nonorientable]). *)
+(** Corpus row: opg:the_circular_embedding_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/the_circular_embedding_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/the_circular_embedding_conjecture.json
+    English statement: (Open Problem Garden, "The circular embedding conjecture")
+      Every 2-connected finite simple graph admits an embedding in some closed surface,
+      orientable or not, in which the boundary of every face is a cycle.  In the Rocq body:
+      for every finite simple graph G that is 2-connected there is a signed rotation system M
+      on G such that every face-tracing orbit of M visits pairwise-distinct vertices.
+    Definitions: [emap G] - a rotation system together with an edge signature, i.e. a
+      Mohar-Thomassen embedding scheme, covering embeddings in ALL closed surfaces
+      (topological-graph-theory/theories/foundations/signed_embedding.v), proven inhabited
+      for every G by [emap_exists]; [circular_emap M] - the source-vertex map is injective on
+      each orbit of the signed face permutation (same file); [k_connected G 2] - more than 2
+      vertices, and deleting any single vertex leaves the graph connected
+      (base/theories/base.v).
+    Notes: The signed layer is a deliberate correction found by the Track-A review: the
+      earlier [embedding G] quantification expressed only the strictly stronger ORIENTABLE
+      strong-embedding conjecture, whereas the source allows any surface.  PROXY CAVEAT
+      recorded in signed_embedding.v: on graphs with degree-1 vertices [circular_emap] is
+      strictly WEAKER than "every face boundary is a cycle" (a pendant edge yields a 2-flag
+      orbit with distinct sources although its facial walk traverses one edge twice - K2
+      satisfies [circular_emap] yet has no cycle); a 2-flag orbit forces a rotation-fixed
+      dart, hence a degree-1 source, so under the [k_connected G 2] hypothesis used here
+      orbit length is at least 3 and the predicate is EXACTLY "the boundary is a simple
+      cycle".  Non-orientable signatures are genuinely expressible
+      ([twisted_triangle_nonorientable]), so the general-surface quantifier is not
+      degenerate. *)
 Definition the_circular_embedding_statement : Prop :=
   forall (G : sgraph),
     k_connected G 2 ->
     exists M : emap G, circular_emap M.
 
-(** ** Row 3 — Largest planar graph of everywhere-positive combinatorial
-    curvature that is neither a prism nor an antiprism.  (Open problem: what IS
-    it?  The statement below asserts the finiteness that makes "largest"
-    meaningful — a uniform vertex bound over the whole class.)
-
-    Source (Problem): "What is the largest connected planar graph of minimum
-    degree 3 which has everywhere positive combinatorial curvature, but is not a
-    prism or antiprism?"
-
-    Encoding.  There is a uniform bound [Nmax] on the order of any [G] that is
-    connected, carries a planar embedding [E] of everywhere-positive
-    combinatorial curvature, has minimum degree ≥ 3 ([2 < #|N(v)|] for every [v]),
-    and is neither a prism nor an antiprism.  ([Nmax] being an explicit finite
-    bound is exactly the content of "there is a largest such graph".) *)
+(** Corpus row: opg:what_is_the_largest_graph_of_positive_curvature
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/what_is_the_largest_graph_of_positive_curvature/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/what_is_the_largest_graph_of_positive_curvature.json
+    English statement: (Open Problem Garden, "What is the largest graph of positive
+      curvature?")
+      Corpus question: what is the largest connected planar graph of minimum degree 3 that
+      has everywhere positive combinatorial curvature but is neither a prism nor an
+      antiprism?  Back-translation of the Rocq body: there is a natural number Nmax such that
+      every finite simple graph G carrying a genus-0 rotation system E is bounded by Nmax in
+      its number of vertices, provided G is connected, every vertex has more than 2
+      neighbours, the corner curvature of E is positive at every vertex, and G is neither a
+      prism nor an antiprism.
+    Definitions: [embedding G], [planar_embedding E] (Euler genus 0),
+      [combinatorial_curvature E v] (the rational 1 - deg(v)/2 + the sum over the corners at
+      v of 1/face_size) and [positive_curvature E] (positive at every vertex) - all in
+      topological-graph-theory/theories/foundations/embedding.v; [antiprism n] - the
+      n-antiprism on 'I_n * bool, two n-cycles plus the vertical and slanted rungs that make
+      the connecting triangles (this file); [is_prism G] / [is_antiprism G] - G is isomorphic
+      to [cycle_graph n] box ['K_2], respectively to [antiprism n], for some n > 2 (this
+      file); [cartesian_product], [cycle_graph], [k_connected], [connected], [N(_)] are reused
+      verbatim from base/theories/base.v and coq-graph-theory.
+    Notes: The OPG entry is a "what is it?" PROBLEM; the encoding states the FINITENESS that
+      makes "largest" meaningful - a uniform vertex bound over the whole class - rather than
+      naming the extremal graph.  This is weaker than answering the problem but is the
+      natural Prop-valued reading and is non-trivial (the class is conjecturally finite).
+      "Planar" is here a genus-0 ROTATION SYSTEM, not base's [wagner_planar], because the
+      curvature is defined from the faces of a fixed embedding.  [is_prism]/[is_antiprism]
+      use graph isomorphism, so the exclusion is up to isomorphism as in the source; the
+      guard n > 2 excludes the degenerate small cases.  The prism/antiprism primitives are
+      intrinsically tied to this classification and stay local (not tagged @MOVE-to-base). *)
 Definition what_is_the_largest_graph_of_positive_curvature_statement : Prop :=
   exists Nmax : nat,
     forall (G : sgraph) (E : embedding G),

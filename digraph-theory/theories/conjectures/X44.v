@@ -21,7 +21,20 @@ Definition x44_even_dicycle (D : diGraphType) : Prop :=
 
 (** ** X44 statements ******************************************************)
 
-(** Studies slice: Lovasz even directed cycle conjecture. *)
+(** Corpus row: studies:std_lov_sz_s_even_directed_cycle_conjecture
+    Site: none
+    Review: none
+    English statement: (Lovasz, Even Directed Cycle Conjecture)
+      There is an integer p such that every p-strongly-connected finite digraph has a directed
+      cycle of even length.
+    Definitions: [x44_p_strongly_connected D p] - more than p vertices and deleting any fewer
+      than p vertices leaves a strongly connected induced subdigraph (this file);
+      [x44_even_dicycle D] - some directed cycle has an even number of vertices (this file);
+      [strongb] (invariants/strong.v); [induced_digraph] (core/digraph.v); [dicycle]
+      (core/dipath.v).
+    Notes: Cycle length is counted in vertices, so even length means even size. The guard p <
+      #|D| inside [x44_p_strongly_connected] keeps small digraphs from satisfying the hypothesis
+      vacuously. *)
 Definition lovasz_even_directed_cycle_statement : Prop :=
   exists p : nat,
     forall D : diGraphType,

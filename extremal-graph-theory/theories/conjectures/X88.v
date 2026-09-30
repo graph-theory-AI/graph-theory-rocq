@@ -39,14 +39,30 @@ Definition x88_within_part_edges (G : sgraph) (r : nat) (c : {ffun G -> 'I_r}) :
 Definition x88_edit_to_r_partite (G : sgraph) (r : nat) : nat :=
   \big[minn/(#|G| * #|G|)]_(c : {ffun G -> 'I_r}) x88_within_part_edges c.
 
-(** ** X88 statements ******************************************************)
-
-(** Studies slice: Balogh-Clemen-Lavrov-Lidicky-Pfender conjecture.  The
-    pentagonal Turan target is carried by the standard blow-up template with a
-    C5 part and r-2 complete Turan parts.  The dominated quantity is [D_r] (the
-    edit distance to r-partiteness), NOT the r-clique count: the Turan graph
-    T(n,r) maximises both e(G) and #K_r yet is itself r-partite (D_r = 0), so a
-    #K_r target would be dominated by T(n,r) for every G and hence vacuous. *)
+(** Corpus row: studies:std_balogh_clemen_lavrov_lidick_pfender_conjecture
+    Site: none
+    Review: none
+    English statement: (Balogh, Clemen, Lavrov, Lidicky and Pfender, "Balogh-Clemen-Lavrov-Lidicky-Pfender Conjecture")
+      For every r >= 2 there is a positive rational delta_r such that every K_{r+1}-free graph G
+      on n vertices with e(G) >= t_r(n) - delta_r * n^2 edges is dominated by some pentagonal
+      Turan graph Gstar on n vertices: e(G) <= e(Gstar) and D_r(G) <= D_r(Gstar), where D_r
+      is the
+      minimum number of edges whose deletion makes the graph r-partite.
+    Definitions: [x88_clique_count G r] - the number of r-element cliques (X88.v); [x88_c5_part_adj],
+      [x88_pentagonal_part_adj] - the adjacency template of the blow-up with one C_5 part class
+      and r-2 complete Turan part classes (X88.v); [x88_pentagonal_turan_graph G r n] - G is a
+      blow-up of that template on n vertices (X88.v); [x88_within_part_edges G r c] - the number
+      of edges monochromatic under the r-colouring c, counted once each (X88.v);
+      [x88_edit_to_r_partite G r] - D_r(G), the minimum of that count over all r-colourings
+      (X88.v); [x4_turan_number r n tr] - tr is the Turan number t_r(n) (X4.v);
+      [x4_K_free G t], [x4_edge_count] (X4.v).
+    Notes: this row comes from the studies slice of the corpus, which has no site or review page.
+      The dominated quantity is D_r (the edit distance to r-partiteness), NOT the r-clique
+      count: the Turan graph T(n,r) maximises both e(G) and the number of K_r yet is itself
+      r-partite (D_r = 0), so an r-clique target would be dominated by T(n,r) for every G and
+      hence vacuous. The neutral element |V(G)|^2 of the minimum fold bounds every summand, so
+      the fold is the genuine minimum. The edge condition is cross-multiplied and the
+      subtraction moved to the other side, so no nat subtraction occurs. *)
 Definition pentagonal_turan_stability_dominates_clique_count_statement : Prop :=
   forall r : nat,
     2 <= r ->

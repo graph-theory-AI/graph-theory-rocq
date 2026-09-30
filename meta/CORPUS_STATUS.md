@@ -87,7 +87,7 @@
 
 Cross-area primitives every area may reuse (promoted only when ≥2 areas need them):
 
-`mgraph`, `Delta`, `ceil_div`, `common_nbr`, `regular`, `girth_geq`, `is_hom`, `homs_to`, `is_core`, `cartesian_product`, `graph_power`, `subdivision`, `frac_power`, `list_colourable`, `list_colourable_on`, `choosable`, `is_choice_number`, `chromatic_index`, `edge_colourable`, `mDelta`, `k_connected`, `triangle_free`, `k_degenerate_on`, `k_degenerate`, `average_degree_geq`, `has_girth`, `wagner_planar`, `bipartite`, `cycle_graph`
+`minor`, `strict_minor`, `minor_map`, `minor_rmap`, `mgraph`, `Delta`, `ceil_div`, `common_nbr`, `regular`, `girth_geq`, `is_hom`, `homs_to`, `is_core`, `cartesian_product`, `graph_power`, `subdivision`, `frac_power`, `list_colourable`, `list_colourable_on`, `choosable`, `is_choice_number`, `chromatic_index`, `edge_colourable`, `mDelta`, `k_connected`, `triangle_free`, `k_degenerate_on`, `k_degenerate`, `average_degree_geq`, `has_girth`, `wagner_planar`, `bipartite`, `cycle_graph`
 
 ## Per-area foundation modules
 
@@ -95,23 +95,147 @@ Area-local foundations (each area builds these on top of `base`):
 
 | area | foundation modules |
 |---|---|
-| chromatic-theory | `alon_tarsi` |
-| cycle-theory | `connectivity` |
-| digraph-theory | `interop_graph_theory`, `prelude` |
-| extremal-graph-theory | `circular_colouring`, `list_ramsey` |
-| graph-theory-misc | `complexity` |
+| chromatic-theory | `alon_tarsi`, `chi_bounding`, `choice_number`, `critical`, `edge_colourings`, `forest_paths`, `partial_lists`, `poly_forms` |
+| cycle-theory | `comp_reduce`, `connectivity`, `cycle_space`, `matchings_cuts` |
+| digraph-theory | `cycles`, `interop_graph_theory`, `prelude`, `subdivision` |
+| extremal-graph-theory | `circular_colouring`, `degree_bounds`, `edge_colourings`, `list_ramsey`, `lp_rational`, `ramsey`, `vc` |
+| graph-theory-misc | `complexity`, `cops` |
+| hypergraph-theory | `hypergraph` |
 | infinite-graph-theory | `igraph` |
-| packing-theory | `fair_matching` |
+| minor-theory | `containment`, `hole_containments`, `minor_dec`, `ramsey_small`, `width_params` |
+| packing-theory | `fair_matching`, `tree_leaves` |
+| reconstruction-theory | `kelly` |
 | spectral-graph-theory | `spectral` |
-| topological-graph-theory | `crossing`, `crossing_genus`, `embedding`, `geometry`, `signed_embedding` |
+| topological-graph-theory | `crossing`, `crossing_genus`, `embedding`, `geometry`, `girth`, `signed_embedding` |
 
 ## Conjecture dependency graph
 
-- **46 edges** — by status {'candidate': 27, 'refuted-direction': 16, 'verified': 3}, by kind {'equiv': 0, 'implies': 45, 'refutes': 0, 'specializes': 1}; 3 Qed-proved relative theorems.
+- **144 edges** — by status {'candidate': 32, 'conditional': 13, 'refuted-direction': 33, 'verified': 66}, by kind {'equiv': 6, 'implies': 138, 'refutes': 0, 'specializes': 0}; 82 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
+  - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
+  - `bipartite_digraph_asymmetric_outdegree_girth_statement` implies `bipartite_digraph_outdegree_girth_statement` (digraph-theory/implications_X46.v)
+  - `bounded_tree_mu_polynomial_biclique_tree_alpha_statement` equiv `tree_mu_ktt_free_polynomial_tree_alpha_statement` (minor-theory/implications_X220.v)
+  - `chen_chvatal_metric_lines_statement` equiv `chen_chvatal_guarded_metric_lines_statement` (graph-theory-misc/implications_X110.v)
+  - `delta122_hero_k1_plus_dipath2_free_statement` implies `delta122_hero_oriented_complete_multipartite_statement` (digraph-theory/implications_X221.v)
+  - `delta122_hero_oriented_complete_multipartite_statement` implies `delta122_hero_k1_plus_dipath2_free_statement` (digraph-theory/implications_X221.v)
+  - `edge_list_coloring_statement` implies `list_chromatic_index_even_clique_statement` (chromatic-theory/implications_X219.v)
+  - `epsilon_bounded_h_free_anticomplete_pair_statement` implies `triangle_free_eps_bounded_anticomplete_pair_statement` (extremal-graph-theory/implications_X223.v)
+  - `erdos_lovasz_tihany_statement` implies `double_critical_graph_statement` (chromatic-theory/implications_U1.v)
+  - `erdos_sos_tree_embedding_statement` implies `burr_erdos_tree_ramsey_statement` (extremal-graph-theory/implications_X215.v)
+  - `eta_bounded_forest_free_classes_statement` implies `eta_bounded_path_free_classes_statement` (packing-theory/implications_X226.v)
+  - `eta_bounded_forest_free_classes_statement` implies `eta_bounded_two_stars_free_classes_statement` (packing-theory/implications_X226.v)
+  - `even_hole_diamond_free_bounded_tree_alpha_statement` implies `even_hole_k4_diamond_free_bounded_treewidth_statement` (minor-theory/implications_X42.v)
+  - `every_forest_is_good_statement` implies `every_forest_is_multibounding_statement` (chromatic-theory/implications_X218.v)
+  - `every_forest_is_good_statement` implies `good_trees_disjoint_union_good_statement` (chromatic-theory/implications_X66.v)
+  - `every_forest_is_multibounding_statement` implies `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` (chromatic-theory/implications_X218.v)
   - `faithful_cycle_covers_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
-  - `jaegers_modular_orientation_statement` implies `three_flow_statement` (cycle-theory/implications_D1.v)
-  - `petersen_coloring_statement` implies `the_berge_fulkerson_statement` (cycle-theory/implications_U10.v)
+  - `forest_free_polynomial_chi_bound_statement` equiv `every_forest_is_good_statement` (chromatic-theory/implications_X218.v)
+  - `forest_free_polynomial_chi_bound_statement` implies `every_forest_is_multibounding_statement` (chromatic-theory/implications_X218.v)
+  - `forest_free_polynomial_chi_bound_statement` implies `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` (chromatic-theory/implications_U8.v)
+  - `forest_free_polynomial_chi_bound_statement` implies `polynomial_gyarfas_sumner_tree_statement` (chromatic-theory/implications_X218.v)
+  - `fractional_hadwiger_statement` implies `hadwiger_independence_minor_statement` (atlas/implications_A1.v)
+  - `fractional_hadwiger_statement` implies `seagull_statement` (atlas/implications_A1.v)
+  - `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` implies `triangle_free_induced_tree_chi_bounded_statement` (chromatic-theory/implications_X213.v)
+  - `hadwiger_chromatic_clique_minor_statement` implies `fractional_hadwiger_statement` (atlas/implications_A1.v)
+  - `hadwiger_chromatic_clique_minor_statement` implies `hadwiger_independence_minor_statement` (minor-theory/implications_X214.v)
+  - `hadwiger_chromatic_clique_minor_statement` implies `seagull_statement` (minor-theory/implications_X214.v)
+  - `hadwiger_independence_minor_statement` implies `seagull_statement` (minor-theory/implications_U7.v)
+  - `hat_guessing_degree_degeneracy_bounds_statement` implies `hat_guessing_degeneracy_bounded_statement` (graph-theory-misc/implications_X227.v)
+  - `hoand_reed_statement` implies `caccetta_haggkvist_statement` (digraph-theory/implications_P9.v)
+  - `hypergraph_cop_number_sqrt_n_over_k_statement` implies `meyniel_cop_number_sqrt_statement` (atlas/implications_A1.v)
+  - `kt_minor_free_hypergraph_chromatic_three_halves_statement` implies `k3_minor_free_hypergraph_three_colourable_statement` (hypergraph-theory/implications_X225.v)
+  - `kt_minor_free_two_s_plus_t_choosable_statement` implies `list_hadwiger_statement` (atlas/implications_A1.v)
+  - `list_reed_choice_number_statement` implies `reeds_omega_delta_and_chi_statement` (chromatic-theory/implications_U1.v)
+  - `m_n_cycle_covers_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
+  - `majority_3col_statement` implies `majority_3col_eulerian_statement` (digraph-theory/implications_X1.v)
+  - `majority_3col_statement` implies `majority_3col_tournament_statement` (digraph-theory/implications_X1.v)
+  - `majority_3col_statement` implies `majority_three_colouring_beta_statement` (digraph-theory/implications_X45.v)
+  - `majority_k1col_statement` implies `majority_3col_statement` (digraph-theory/implications_X1.v)
+  - `matthews_sumner_four_connected_claw_free_statement` implies `hamiltonian_cycles_in_line_graphs_statement` (hamiltonicity-theory/implications_X211.v)
+  - `min_degree_forces_large_clique_or_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
+  - `min_degree_six_max_degree_eight_k6_minor_statement` implies `six_regular_has_k6_minor_statement` (minor-theory/implications_X5.v)
+  - `multicolour_erdos_hajnal_statement` implies `the_erdos_hajnal_statement` (extremal-graph-theory/implications_D2ram.v)
+  - `orientable_five_cycle_double_cover_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
+  - `orientable_five_cycle_double_cover_statement` implies `five_flow_statement` (cycle-theory/implications_D1.v)
+  - `orientable_five_cycle_double_cover_statement` implies `m_n_cycle_covers_statement` (cycle-theory/implications_U6.v)
+  - `oriented_trees_in_n_chromatic_digraphs_statement` implies `oriented_tree_mader_chi_linear_bound_statement` (digraph-theory/implications_X52.v)
+  - `partial_list_coloring_0_statement` implies `partial_list_coloring_statement` (chromatic-theory/implications_U4.v)
+  - `planar_fractional_vertex_arboricity_two_statement` implies `large_induced_forest_in_a_planar_graph_statement` (atlas/implications_A1.v)
+  - `polynomial_gyarfas_sumner_tree_statement` implies `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` (chromatic-theory/implications_X218.v)
+  - `polynomial_gyarfas_sumner_tree_statement` implies `path_induced_rooted_tree_polynomial_chi_bound_statement` (chromatic-theory/implications_X218.v)
+  - `r_partite_matching_deletion_tradeoff_statement` implies `rysers_statement` (hypergraph-theory/implications_U12.v)
+  - `ramsey_nice_forest_family_eventual_statement` implies `ramsey_nice_forest_family_infinite_statement` (extremal-graph-theory/implications_X223.v)
+  - `reeds_omega_delta_and_chi_statement` implies `bounding_the_chromatic_number_of_triangle_free_graph_statement` (chromatic-theory/implications_U8.v)
+  - `smith_two_longest_cycles_statement` equiv `smith_longest_cycles_r_connected_statement` (cycle-theory/implications_X212.v)
+  - `subdivision_of_a_transitive_tournament_in_digraphs_w_statement` implies `oriented_trees_delta_plus_maderian_statement` (digraph-theory/implications_X2.v)
+  - `subgraph_of_large_average_degree_and_large_average_d_statement` implies `chromatic_girth_average_degree_subgraph_statement` (atlas/implications_A1.v)
+  - `the_berge_fulkerson_statement` implies `intersecting_two_perfect_matchings_statement` (cycle-theory/implications_U10.v)
+  - `the_erdos_hajnal_statement` implies `vc_dimension_erdos_hajnal_statement` (extremal-graph-theory/implications_X223.v)
+  - `total_list_colouring_delta_plus_two_statement` implies `behzads_statement` (chromatic-theory/implications_U5.v)
+  - `tournament_outneighborhood_degeneracy_statement` implies `tournament_outneighborhood_cycle_statement` (digraph-theory/implications_X2.v)
+  - `tree_decomposition_delta_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
+  - `tree_decomposition_delta_edge_connected_statement` implies `tree_decomposition_leaf_edge_connected_statement` (packing-theory/implications_X48.v)
+  - `tree_decomposition_leaf_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
+  - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
+  - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
+- Edge evidence: **66 verified** (Qed-closed, no external assumption) · **13 conditional** (Qed-closed relative to a named external assumption).
+- Conditional edges (with the external assumptions they are relative to):
+  - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
+  - `circular_flow_numbers_of_r_graphs_statement` implies `circular_flow_number_of_regular_class_1_graphs_statement` — external: `external_tutte_class1_cubic_statement` (cycle-theory/implications_D1.v)
+  - `circular_flow_numbers_of_r_graphs_statement` implies `three_flow_statement` — external: `external_steffen_3flow_5graphs_statement` (cycle-theory/implications_D1.v)
+  - `cycle_double_covers_containing_predefined_2_regular_statement` implies `cycle_double_cover_statement` — external: `external_cdc_cubic_2connected_reduction_statement` (cycle-theory/implications_U6.v)
+  - `half_flow_pair_statement` implies `five_flow_statement` — external: `external_circular_5_flow_statement` (cycle-theory/implications_X228.v)
+  - `jaegers_modular_orientation_statement` implies `three_flow_statement` — external: `external_modular_orientation_to_flow_statement` (cycle-theory/implications_D1.v)
+  - `petersen_coloring_statement` implies `cycle_double_cover_statement` — external: `external_five_even_cover_cubic_reduction_statement` (cycle-theory/implications_U6.v)
+  - `petersen_coloring_statement` implies `m_n_cycle_covers_statement` — external: `external_five_even_cover_cubic_reduction_statement` (cycle-theory/implications_U6.v)
+  - `petersen_coloring_statement` implies `the_berge_fulkerson_statement` — external: `external_petersen_BF_cover_statement` (cycle-theory/implications_U10.v)
+  - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
+  - `small_cycle_double_cover_statement` implies `cycle_double_cover_statement` — external: `external_cdc_simple_reduction_statement` (cycle-theory/implications_U6.v)
+  - `strong_5_cycle_double_cover_statement` implies `cycle_double_cover_statement` — external: `external_five_even_cover_cubic_reduction_statement` (cycle-theory/implications_U6.v)
+  - `strong_5_cycle_double_cover_statement` implies `m_n_cycle_covers_statement` — external: `external_five_even_cover_cubic_reduction_statement` (cycle-theory/implications_U6.v)
+- Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
+  - **opg**: 34 done · 14 partial · 0 blocked · 179 todo  (227 rows)
+  - **v2**: 77 done · 7 partial · 0 blocked · 1589 todo  (1673 rows)
+
+### Documented non-edges (33 `refuted-direction`)
+
+Pairs deliberately NOT connected: the direction was examined and rejected (the implication does not hold, or holds only via a layer out of scope). A documented non-edge discharges the corresponding corpus relation for the `edges` leg.
+
+| from | to | kind | reason |
+|---|---|---|---|
+| `approximation_ratio_for_maximum_edge_disjoint_paths_statement` | `finding_k_edge_outerplanar_graph_embeddings_statement` | implies | Non-edge. The two planar rows share only the ambient hypothesis wagner_planar; a poly-time o(sqrt n)-approximation (or inapproximability) for MaxEDP gives no algorithm for computing a minimal k-edge-outerplanar embedding, and vice versa. No specialisation/reduction holds in either direction. Not stated. |
+| `bene_conjecture_graph_theoretic_form_0_statement` | `shuffle_exchange_conjecture_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): gives only the upper conjunct; the 2n-1 optimality lower bound is itself open. Earlier note: General stage-regular rearrangeability (Beneš) would give the UPPER-bound conjunct (se_adj k n rearrangeable at 2*n-2) via external connectivity of the shuffle-exchange graph in n-1 steps, but shuffle_exchange_conjecture_statement also demands the matching LOWER bound (optimality 2*n-1<=r), which Beneš does not yield and is itself open; also needs external facts that se_adj is stage-regular and externally connected in n-1. Does NOT close as a single relative theorem. |
+| `circular_choosability_of_planar_graphs_statement` | `circular_chromatic_number_of_triangle_free_planar_gr_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): self-described refuted by the Qed gate (cch >= chi_c gives B >= 4 > 20/7). Earlier note: Candidate refuted by the Qed gate: the real relation cch(G) >= chi_c(G) (lemma cch_gives_pq_colouring) only gives chi_c(G) <= B for planar G that possess a circular-choosability value, but Row 6's least planar cch bound B is >= 4 > 20/7, so it cannot yield Row 8's 20/7 bound (and gives no handle on an arbitrary triangle-free cubic planar G). Not stated. |
+| `circular_chromatic_number_of_triangle_free_planar_gr_statement` | `circular_colouring_the_orthogonality_graph_statement` | implies | Non-edge. Both ask for a circular chromatic value via is_circular_chromatic, but on disjoint carriers: Row 8 bounds chi_c on FINITE triangle-free cubic Wagner-planar sgraphs; Row 9 pins chi_c=4 of the INFINITE orthogonality graph on nonzero 3-vectors of a real-closed field. Disjoint vertex types, adjacencies and hypotheses; no value/bound transports. Neither direction holds. Not stated. |
+| `counting_3_colorings_of_the_hex_lattice_statement` | `exact_colorings_of_graphs_statement` | implies | Non-edge. Row 1 is a thermodynamic-limit existence claim: a real sequence of per-site values built from chi(H_k,3) (proper 3-VERTEX-colourings of FINITE honeycomb tori hex_torus k) converges to L>=1. Row 2 is a Ramsey biconditional on the INFINITE edge-coloured Komega. Disjoint carriers (finite sgraph vs iGraph Komega), disjoint colouring notions (vertex counting vs edge exact-colouring), disjoint targets (a real number vs a biconditional). No reduction transports the real limit to the Ramsey claim. Not stated. |
+| `degenerate_colorings_of_planar_graphs_statement` | `large_induced_forest_in_a_planar_graph_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): strict weakening: the best 2-class union gives 2n/5 < n/2 (five equal classes show 2/5 is unimprovable by this route). Earlier note: k=2 clause: union of any two of the five colour classes is 1-degenerate, i.e. an induced forest (acyclic colouring). Largest 2-class union has only >= 2n/5 vertices, strictly short of the n/2 (#/G/ <= 2*#/S/) required by the target. Five equal classes is a witness that 2/5 cannot be improved by this argument, so the edge does NOT close; candidate, never scheduled. |
+| `domination_in_cubic_graphs_statement` | `domination_in_plane_triangulations_statement` | implies | Disjoint classes (3-regular vs maximal planar; only common member K4) and different constants (⌈n/3⌉ vs ⌊n/4⌋). The historical G2 proxy target was refutable on edgeless graphs (γ=n>⌊n/4⌋); a true cubic hypothesis cannot derive it, so the edge would FAIL to compile. Never asserted. |
+| `domination_in_plane_triangulations_statement` | `domination_in_cubic_graphs_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): disjoint carriers (only K4 in common) and different constants; the historical route closed only vacuously. Earlier note: Independent nodes over disjoint classes; would close only VACUOUSLY because the historical G2 proxy target was refutable (ex-falso), which first resolves R2 — forbidden by the 'without resolving either endpoint' framing and an artifact of that proxy, not the genuine conjecture. Not verified-literature; not scheduled. |
+| `edge_list_coloring_statement` | `goldbergs_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): no logical implication: list chromatic index equal to chromatic index does not bound chi' by the Goldberg density. Earlier note: CROSS-MILESTONE: edge-list-colouring is U4; not a U5-internal edge |
+| `exact_colorings_of_graphs_statement` | `counting_3_colorings_of_the_hex_lattice_statement` | implies | Non-edge. The exact-colourings biconditional on Komega (edge colourings, infinite carrier, Ramsey-type) gives no handle on the convergence of the hexagonal-tori per-site 3-colouring-count sequence (vertex colourings, finite carriers, real-analysis limit). Disjoint carriers, colouring notions and targets; no reduction. Not stated. |
+| `five_flow_statement` | `three_flow_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): classical antichain: a nowhere-zero 5-flow does not yield a nowhere-zero 3-flow. Earlier note: edge_connected 4 => bridgeless (hypothesis ok) but a nowhere-zero 5-flow does NOT yield a nowhere-zero 3-flow; conclusion implication fails. Does not compile. |
+| `four_flow_statement` | `five_flow_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): classical antichain (Jaeger 1979 survey): the 3-/4-/5-flow conjectures are mutually independent; corpus e176 is related_only. Earlier note: 4-flow's class (bridgeless, no Petersen minor) is not contained in 5-flow's class (all bridgeless); and nz-4 => nz-5 runs the wrong way against the hypotheses. Does not compile. |
+| `geodesic_cycles_and_tuttes_theorem_statement` | `covering_powers_of_cycles_with_equivalence_subgraphs_statement` | implies | Non-edge. Both mention 'cycles' but denote different objects: Row 2 is a metric/peripheral-cycle existence statement over arbitrary 3-connected G; Row 5 is an Omega(k) lower bound on the equivalence covering number of the specific family C_n^k. An edge-length/peripheral assignment yields no bound on a cover by equivalence subgraphs (nor vice versa). No direction holds. Not stated. |
+| `goldbergs_statement` | `seymours_r_graph_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): Goldberg gives chi' <= r+1, not chi' = r; corpus e001 claims the wrong direction (reported upstream, meta/CORPUS_FEEDBACK.md). Earlier note: Goldberg bound gives chi'<=r+1, not the chi'=r faithful Seymour requires; deep relationship (Chen-Jing-Zang 2019), not an elementary Qed |
+| `high_connectivity_no_k_n_statement` | `jorgensens_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): fails Qed: the exists-N size bound never constrains small 6-connected graphs; both endpoints G2-blocked (abstract planarity). Earlier note: FAILS Qed: size hypothesis missing; both endpoints G2-blocked (abstract is_planar) |
+| `jorgensens_statement` | `high_connectivity_no_k_n_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): fails Qed: no way to discharge the n <> 6 cases. Earlier note: FAILS Qed: needs the n<>6 cases; both endpoints G2-blocked |
+| `linear_hypergraphs_with_dimension_3_statement` | `simultaneous_partition_of_hypergraphs_statement` | implies | Non-edge. The only two D2str nodes sharing a hypergraph carrier (T:finType, {set {set T}}), but independent: Row 1 assumes a LINEAR dim-3 hypergraph and concludes a plane triangle/segment representation; Row 4 assumes two r-UNIFORM families and concludes a single rainbow-dense r-partition. Neither hypothesis class contains the other and neither conclusion transports. No reduction/specialisation in either direction. Not stated. |
+| `list_chromatic_number_and_maximum_degree_of_bipartit_statement` | `choosability_of_graph_powers_statement` | implies | Non-edge. Both bound a choice number via is_choice_number, but over disjoint families with incomparable parameters: Row 3 wants ch(G) <= c*log(Delta) for BIPARTITE G; Row 5 wants ch(G^2) <= f(chi(G^2)) with f = o(k^2) for the SQUARE of an arbitrary G. Neither hypothesis class contains the other and neither bound implies the other. Neither direction holds. Not stated. |
+| `list_hadwiger_statement` | `hadwiger_statement` | implies | FORBIDDEN and CROSS-MILESTONE (Hadwiger is U7): the recorded list-Hadwiger gives only c*t-list-colourability, not (t-1)-colourability |
+| `list_total_colouring_statement` | `behzads_statement` | implies | FORBIDDEN and CROSS-MILESTONE (Behzad node defined in U5): chi''_l = chi'' does not yield the chi'' <= Delta+2 bound |
+| `partitioning_planar_digraphs_statement` | `large_acyclic_induced_subdigraph_in_a_planar_oriente_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): strict weakening: a 2-acyclic partition gives only >= /V//2 < 3/5. Earlier note: Identical planar hypotheses; pigeonhole on a 2-acyclic-partition yields an acyclic induced subdigraph of order only >= /V//2, strictly weaker than the required 3/5 (1/2 < 3/5), so the implication does not close. Strict weakening, not a valid edge. |
+| `pentagon_statement` | `weak_pentagon_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): unprovable as formulated: girth-threshold gap and homs_to C5 vs 5-colouring-with-bipartite-complements construction gap |
+| `ptas_for_feedback_arc_set_in_tournaments_statement` | `algorithm_for_graph_homomorphisms_statement` | implies | Non-edge. Row 4 is SOLVED hence literature-true, but a true sink does NOT entail a different open problem; any X->Row4 would be a vacuous hypothesis-discarding edge and is policy-forbidden. The reverse (Row4->Row1) likewise has no logical content: tournament feedback arc sets and graph-homomorphism existence share no object. Not stated. |
+| `reeds_omega_delta_and_chi_statement` | `the_borodin_kostochka_statement` | implies | false at Δ=9,ω=8 (Cranston-Rabern) |
+| `small_hereditary_class_bounded_twin_width_statement` | `polynomial_expansion_bounded_twin_width_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): source row is DISPROVED upstream; the annotation documents a historical route, not a live implication. Earlier note: Corpus argument: a class of polynomial expansion is small and may be taken hereditary (expansion is monotone under subgraphs), so the Small Conjecture bounds its twin-width. Not closed here: 'polynomial expansion implies small' is the counting theorem of Twin-width II and is not available; note also that the source row is recorded upstream as DISPROVED, so this edge documents a historical route, not a live one. |
+| `the_borodin_kostochka_statement` | `reeds_omega_delta_and_chi_statement` | implies | independent; neither implies the other |
+| `the_crossing_number_of_the_complete_bipartite_graph_statement` | `the_crossing_number_of_the_complete_graph_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): needs Guy's counting inequality plus crossing-number subgraph monotonicity, open in this geometry-free model. Earlier note: Zarankiewicz (exact cr(K_{m,n})) is conjectured to imply Guy (exact cr(K_n)) via the counting inequality cr(K_{2n}) >= cr(K_{n,n}) + 2 cr(K_n) and cr(K_n) >= (n/(n-4)) cr(K_{n-1}). The conjectured formulas even satisfy 4*Guy(n) = Zarankiewicz(n,n-2) exactly. But transferring a value from carrier K_{m,n} to carrier K_n needs that counting inequality plus cr subgraph monotonicity, which is OPEN in this geometry-free model (only wagner_planar_sub, the planar base case, is proved in crossing.v). The bare is_crossing_number value constraints do not yield it, so the edge does not close as a Qed relative theorem; candidate, never scheduled. |
+| `three_flow_statement` | `five_flow_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): classical antichain: 4-edge-connected is a proper subclass of bridgeless and has_nz_kflow_mono runs the wrong way. Earlier note: Antichain: 3-flow's hypothesis (4-edge-connected) is STRICTLY stronger than 5-flow's (bridgeless), so 3-flow covers fewer graphs; the conclusion-monotone has_nz_kflow_mono runs the wrong way to close this. Does not compile. |
+| `triangle_packing_vs_triangle_edge_transversal_statement` | `jones_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): structural analogy only, two object levels; not a logical implication. Earlier note: Structural analogy only: both are factor-2 covering<=2*packing dualities (Tuza: triangle-edge transversal <= 2*triangle-packing; Jones: feedback-vertex-set <= 2*cycle-packing on planar graphs). Not a logical implication across the two object levels; does not close under Qed without resolving an endpoint. Candidate per plan v4 §6 (Tuza -> fractional relaxation / relation to Jones). |
+| `turan_number_of_a_finite_family_statement` | `number_of_cliques_in_minor_closed_classes_statement` | implies | Non-edge. Both are extremal counts under a forbidden substructure, but (2) bounds the EDGE count of family-(subgraph)-free n-vertex graphs while (5) bounds the CLIQUE count of K_t-MINOR-free graphs by c^t*/V/. The forbidden relation (subgraph vs minor) and the counted object (edges vs cliques) both differ; neither bound entails the other. Not stated. |
+| `turan_number_of_a_finite_family_statement` | `sidorenkos_statement` | implies | Non-edge. Both involve a graph's edge count, but (4) is a homomorphism-count LOWER bound for a bipartite H into an arbitrary G, while (2) is an asymptotic UPPER bound on the extremal edge count of family-free graphs. They share no common inequality in either direction. Not stated. |
+| `vertex_minor_closed_classes_are_chi_bounded_statement` | `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): induced-subgraph-free classes are not closed under local complementation; the real route is rank-width (GKMW 2023). Earlier note: Refuted by the Qed gate under the faithful U8.v statements: deriving Row2 from Row3 needs vminor_closed (fun G => ~ has_induced T G), but forbidden-INDUCED-subgraph classes are NOT closed under local complementation, so Row 3 does not apply. Deep relationship is via rank-width, not an elementary relative implication. |
+| `what_is_the_smallest_number_of_disjoint_spanning_tre_statement` | `minimal_graphs_with_a_prescribed_number_of_spanning_statement` | implies | Non-edge. Both mention spanning trees but over disjoint carriers: (1) asserts existence + minimality of a greedy disjoint shortest-spanning-tree decomposition index k whose union contains a Hamiltonian path on a weighted complete finType graph; (6) is an asymptotic bound on the least vertex count realising a prescribed spanning-tree COUNT. Neither reduces to the other; the shared phrase is not shared structure. Not stated. |
 
 ## Verifying this claim
 
@@ -136,12 +260,12 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
-- **1745 tracked rows** — by corpus tag: arxiv 762, arxiv-studied 568, derived 138, erdos 277; **116 alias rows** (no statement owed).
-- Statement legs over the 1629 non-alias rows: **332 done** · 10 partial · 36 blocked · 1251 todo.
+- **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
+- Statement legs over the 1673 non-alias rows: **414 done** · 10 partial · 47 blocked · 1202 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
-| X1 | 21 | 0 | 0 | 0 | 21 |
+| X1 | 20 | 0 | 0 | 0 | 20 |
 | X10 | 2 | 0 | 0 | 0 | 2 |
 | X100 | 1 | 0 | 0 | 0 | 1 |
 | X101 | 1 | 0 | 0 | 0 | 1 |
@@ -247,8 +371,8 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X192 | 1 | 0 | 0 | 0 | 1 |
 | X193 | 1 | 0 | 0 | 0 | 1 |
 | X194 | 1 | 0 | 0 | 0 | 1 |
-| X195 | 0 | 0 | 1 | 0 | 1 |
-| X196 | 0 | 0 | 1 | 0 | 1 |
+| X195 | 1 | 0 | 0 | 0 | 1 |
+| X196 | 1 | 0 | 0 | 0 | 1 |
 | X197 | 0 | 0 | 1 | 0 | 1 |
 | X198 | 1 | 0 | 0 | 0 | 1 |
 | X199 | 0 | 0 | 1 | 0 | 1 |
@@ -266,7 +390,24 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X209 | 0 | 1 | 0 | 0 | 1 |
 | X21 | 3 | 0 | 0 | 0 | 3 |
 | X210 | 0 | 0 | 1 | 0 | 1 |
+| X211 | 6 | 0 | 1 | 0 | 7 |
+| X212 | 8 | 0 | 0 | 0 | 8 |
+| X213 | 6 | 0 | 0 | 0 | 6 |
+| X214 | 4 | 0 | 0 | 0 | 4 |
+| X215 | 3 | 0 | 2 | 0 | 5 |
+| X216 | 2 | 0 | 2 | 0 | 4 |
+| X217 | 2 | 0 | 0 | 0 | 2 |
+| X218 | 5 | 0 | 1 | 0 | 6 |
+| X219 | 6 | 0 | 1 | 0 | 7 |
 | X22 | 1 | 0 | 0 | 0 | 1 |
+| X220 | 10 | 0 | 0 | 0 | 10 |
+| X221 | 6 | 0 | 1 | 0 | 7 |
+| X223 | 5 | 0 | 1 | 0 | 6 |
+| X225 | 4 | 0 | 0 | 0 | 4 |
+| X226 | 4 | 0 | 0 | 0 | 4 |
+| X227 | 4 | 0 | 3 | 0 | 7 |
+| X228 | 5 | 0 | 1 | 0 | 6 |
+| X229 | 1 | 0 | 0 | 0 | 1 |
 | X23 | 2 | 0 | 0 | 0 | 2 |
 | X24 | 1 | 0 | 0 | 0 | 1 |
 | X25 | 1 | 0 | 0 | 0 | 1 |
@@ -353,4 +494,13 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X99 | 1 | 0 | 0 | 0 | 1 |
 | XE1 | 33 | 0 | 0 | 0 | 33 |
 | XE2 | 43 | 0 | 0 | 0 | 43 |
+
+## Corpus relations (graph-conjectures data/relations.json)
+
+> Upstream relations between corpus rows (adversarial AI review of the statements + literature), resolved against the manifests by `meta/build_corpus_relations.py` into `meta/corpus_relations.json`. **Not machine-checked** — the formally verified graph is the dependency graph above; these edges only say where an implication theorem is worth attempting (`cite="gc:<edge_id>"` on the resulting `@EDGE`).
+
+- **225 edges** from clone `b72c585` — by relation equivalent_to 8, implies 159, related_only 42, same_conjecture 16; by verdict confirmed 214, plausible 11; 0 endpoints without a manifest row.
+- **112 of the 167 implies/equivalent_to edges have both endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool for `implications_X2nn.v`.
+- **108 edges are already mirrored by a Rocq `@EDGE`** (implies→`implies`, equivalent_to→`equiv`; `same_conjecture`/`related_only` are never mirrored).
+- **79 distinct endpoints of *confirmed* implies/equivalent_to edges own no done statement** — each is a row whose formalization would unlock at least one cross-check.
 

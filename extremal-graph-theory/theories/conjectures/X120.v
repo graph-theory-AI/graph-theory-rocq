@@ -26,25 +26,25 @@ Definition x120_edges_between (G : sgraph) (A B : {set G}) : nat :=
 Definition x120_nonedges_between (G : sgraph) (A B : {set G}) : nat :=
   #|[set p : G * G | [&& p.1 \in A, p.2 \in B & ~~ (p.1 -- p.2)]]|.
 
-(** ** X120 statements *****************************************************)
-
-(** Conlon--Fox--Sudakov, sparse pair: for every graph [H] there exist
-    [c1, c2 > 0] such that for every [H]-free graph [G] with [#|G| >= 2] and
-    all [x] in [(0, 1/2)], there exist disjoint [A, B \subseteq V(G)] with
-    [#|A|, #|B| >= x^{c1} * #|G|^{c2}] such that [B] is [x]-sparse to [A] in
-    one of [G], [G-bar].
-
-    "[B] is [x]-sparse to [A]" means the edge-density between [A] and [B] is
-    [<= x], i.e. [e(A,B) <= x * #|A| * #|B|]; "in one of [G], [G-bar]" is the
-    disjunction over [G] and its complement.  Rationals: [x = xn/xd] with
-    [0 < x < 1/2] encoded as [0 < xn] and [2*xn < xd]; exponents [c1 = a1/a2],
-    [c2 = b1/b2] with all four numbers positive, chosen (per [H]) before [G].
-    The fractional-power size bounds are cleared by raising to the power
-    [a2*b2] and cross-multiplying:
-      [#|A| >= x^{c1} * #|G|^{c2}]  <->
-        [xn^(a1*b2) * #|G|^(b1*a2) <= xd^(a1*b2) * #|A|^(a2*b2)].
-    [x]-sparse in [G] is [xd * e_G(A,B) <= xn * #|A| * #|B|]; in [G-bar] it is
-    [xd * e_{G-bar}(A,B) <= xn * #|A| * #|B|]. *)
+(** Corpus row: studies:std_conlon_fox_sudakov_sparse_pair_conjecture
+    Site: none
+    Review: none
+    English statement: (Conlon, Fox and Sudakov, "Conlon-Fox-Sudakov sparse pair conjecture")
+      For every graph H there are positive rationals c1 = a1/a2 and c2 = b1/b2 such that for
+      every graph G on at least 2 vertices with no INDUCED copy of H and every rational
+      x = xn/xd with 0 < x < 1/2, there are disjoint vertex sets A, B with
+      |A|, |B| >= x^c1 * |V(G)|^c2 such that the density between A and B is at most x either in
+      G or in the complement of G.
+    Definitions: [x120_induced_free G H] - no vertex set of G induces a graph isomorphic to H (X120.v);
+      [x120_edges_between G A B] - the ordered pairs (a,b) in A x B with a adjacent to b
+      (X120.v); [x120_nonedges_between G A B] - the ordered pairs (a,b) in A x B with a and b
+      NON-adjacent, which for disjoint A, B are exactly the complement's cross edges (X120.v).
+    Notes: this row comes from the studies slice of the corpus, which has no site or review page.
+      x = xn/xd with 0 < x < 1/2 is written 0 < xn and 2 * xn < xd; the exponents are ratios
+      a1/a2 and b1/b2 of positive naturals, chosen per H before G. The double fractional-power
+      size bound is cleared by raising to the power a2 * b2 and cross-multiplying. "B is
+      x-sparse to A" is the density bound xd * e(A,B) <= xn * |A| * |B|, and "in one of G,
+      G-bar" is the disjunction with the non-edge count. *)
 Definition conlon_fox_sudakov_sparse_pair_statement : Prop :=
   forall H : sgraph,
     exists a1 a2 b1 b2 : nat,

@@ -52,12 +52,28 @@ Definition x119_sqrt (m : nat) : nat := ex_minn (x119_sqrt_ex m).
 
 (** ** X119 statements *****************************************************)
 
-(** Conlon-Fox-Sudakov.  For every number of colours [q >= 2] there is a
-    constant [c_q] such that every 3-uniform hypergraph [H] with [m] edges
-    and no isolated vertices has [q]-colour Ramsey number
-    [r_3(H;q) <= 2^(2^(c_q * sqrt m))].  The constant [c_q] depends on [q]
-    only (existential placed after [forall q]); [m = #|E|] is the number of
-    edges; [sqrt m] is the ceiling square root [x119_sqrt]. *)
+(** Corpus row: studies:std_conlon_fox_sudakov_problem_on_3_uniform_hypergra
+    Site: none
+    Review: none
+    English statement: (Conlon, Fox and Sudakov, problem on 3-uniform hypergraph Ramsey
+      numbers)
+      For every number of colours q at least 2 there is a constant c_q such that every
+      3-uniform hypergraph H with m hyperedges and no isolated vertices has q-colour Ramsey
+      number at most 2 raised to the power 2 raised to the power c_q times the square root of m.
+    Definitions: [x119_uniform E r] - every hyperedge has exactly r vertices
+      (hypergraph-theory/theories/conjectures/X119.v); [x119_no_isolated E] - every vertex of
+      the ground type lies in some hyperedge (same file); [x119_image_edge f e] - the image of a
+      hyperedge under f (same file); [x119_monochromatic_copy E col] - there are a colour and an
+      injection of the vertices into the host with every image hyperedge of that colour (same
+      file); [x119_forces_mono E q N] - every q-colouring of the subsets of an N-element host
+      admits such a copy (same file); [x119_ramsey_number E q R] - R is the least host size
+      forcing a monochromatic copy of H (same file); [x119_sqrt m] - the least s with m <= s^2,
+      i.e. the integer ceiling square root (same file).
+    Notes: the constant c_q is quantified after q and before the hypergraph, matching "there
+      exists c_q".  The no-isolated-vertices guard is load-bearing: it is what ties the number
+      of vertices of H to its number m of hyperedges, without which a bound depending on m alone
+      would be false.  The ceiling square root over-approximates the true square root, so the
+      upper bound stays honest; the outer existential c_q absorbs the rounding factor. *)
 Definition conlon_fox_sudakov_three_uniform_ramsey_tower_statement : Prop :=
   forall q : nat,
     2 <= q ->

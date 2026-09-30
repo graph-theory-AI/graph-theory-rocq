@@ -8,13 +8,45 @@ since downgraded to partial — `meta/CORPUS_STATUS.md` is the canonical living 
 completion report: [`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALIZATION_PLAN.md).
 
 **v2 corpus (growing)** — every conjecture source of the upstream `graph-conjectures` repo:
-**1,745 rows tracked** (762 arXiv + 277 erdősproblems + 138 attack-engine derived + 568
-studies-slice) · ~1,075 statement-owing after triage, the rest parked/alias/edge-anchor with
-documented dispositions · **312 statements done · 1 partial · 65 blocked** (waves X1–X210: directed reconciliation +
-directed/χ-boundedness/extremal/structural/topological/cycle/minor/misc/packing/quasi-kernel/reconstruction/deck/nonrepetitive/normal/treewidth/total-list/linear-arboricity/coarse-Menger/coarse-Erdős–Pósa/tree-decomposition/hedgehog-and-3-uniform-Ramsey/Erdős–Hajnal-pairs/dijoin-inversion/directed-Gyárfás–Sumner/fractional-and-distance-colouring/induced-subdivision-complexity authored statements — every one
+**1,790 rows tracked** (768 arXiv + 277 erdősproblems + 138 attack-engine derived + 568
+studies-slice + 38 Bondy–Murty Appendix A `bm-NNN` + 1 curated `others`; corpus pinned to
+graph-conjectures `b72c585`) · ~1,100 statement-owing after triage, the rest parked/alias/edge-anchor
+with documented dispositions · **414 statements done · 10 partial · 47 blocked · 1,202 todo** over the
+1,673 non-alias rows (waves X1–X229: directed reconciliation +
+directed/χ-boundedness/extremal/structural/topological/cycle/minor/misc/packing/quasi-kernel/reconstruction/deck/nonrepetitive/normal/treewidth/total-list/linear-arboricity/coarse-Menger/coarse-Erdős–Pósa/tree-decomposition/hedgehog-and-3-uniform-Ramsey/Erdős–Hajnal-pairs/dijoin-inversion/directed-Gyárfás–Sumner/fractional-and-distance-colouring/induced-subdivision-complexity/Bondy–Murty-Appendix-A/cops-and-robbers/χ-boundedness/list-colouring-on-surfaces/treewidth-and-twin-width/dichromatic-and-tournaments/Sidorenko-and-Ramsey/hypergraph-Turán/η-boundedness/hat-guessing/flows-and-crossings authored statements — every one
 axiom-free with a faithfulness audit recorded in the manifest; blocked rows need a foundation deliberately out of scope, e.g. merge-width, random-lift probability, bounded-expansion sparsity, fixed-surface clustered colouring, graphon forcing, asymptotic dimension, computation-model, random-graph, DP-colouring, Kempe-class, polyhedral extension-complexity, metric-line/bridge-generation, poset-dimension, flow, thin-overlay, Ramsey-nice, cops-and-robbers, hypergraph-cut, or conflict-colouring layers). Plan:
 [`meta/V2_FULL_CORPUS_PLAN.md`](meta/V2_FULL_CORPUS_PLAN.md); live counts in
 [`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md).
+
+**Latest update (2026-09-23/24, branch `conjecture-relations`)** — re-synchronised the Rocq
+statements with the graph-conjectures corpus at commit `b72c585` (pending PR): 38 Bondy–Murty
+Appendix A rows and the curated `others` row joined the manifest, every one of the 741
+conjecture statements now carries a doc block with its corpus row, site and review links, an
+English back-translation of the Rocq body and its non-standard definitions, a shared vocabulary
+layer was added in `base/theories/common.v`, the 225 corpus relations were mirrored and
+cross-checked against the machine-verified edge graph, and waves X211–X229 authored 90 new
+statements (13 blocked with a stated reason) under a two-reader faithfulness protocol with
+grounding lemmas, vacuity probes and mutation canaries. The audits uncovered and repaired six
+foundation-level defects (directed-walk bridges, loop degree counted once, torus encoded as
+Euler genus two, missing connectivity and degree guards, uncounted isolated vertices in the
+surface layer); every gate (`make all`, `make audit`, `make mutation`, `make gate`, a full
+vacuity sweep) is green. **Total cost: 10,832,396 tokens** metered over 42 Claude Opus 5
+sub-agents, plus the orchestrating Claude session (not metered, of the order of one million
+tokens).
+
+**Implication programme (2026-09-24, branch `conjecture-relations`)** — every implication relation
+between formalized conjectures (the corpus's `implies`/`equivalent_to` relations plus the ones this
+repository identified) now has a machine-checked disposition: **66 verified** (Qed, `Print
+Assumptions` closed under the global context; 20 before), **13 conditional** (Qed under one of 10
+registered, second-read external theorems such as Tutte's flow theorems, Jaeger's CDC reductions
+or Dujmović–Morin–Wood's layered treewidth; `meta/external_theorems.json`), **33 refuted
+directions** documented with their reason, and 32 candidates blocked on a named ingredient.
+Cross-package edges live in the new `atlas/` package; the `edges` legs are derived from the edge
+graph (`meta/sync_edge_legs.py`) and every proved edge is re-checked for its exact type and
+axiom-freedom by `meta/check_edges.py` in `make gate`. The proofs exposed and repaired seven
+unfaithful statements (empty-digraph guards, Behzad's row, the multibounding quantifier order,
+the vacuous fractional-Hadwiger row). **Cost: 7,242,533 tokens** metered over 26 Claude Opus 5
+sub-agents, plus the orchestrating session (not metered).
 
 A monorepo of Rocq/MathComp **graph-theory** libraries — the math-comp model (one repo,
 many independently-installable opam packages). Each `<area>-theory/` subdir states the open
@@ -75,14 +107,65 @@ The full acceptance gate additionally builds every landed milestone and checks i
 axiom-free with `Print Assumptions` clean:
 
 ```sh
-git clone https://github.com/graph-theory-AI/graph-conjectures ../../graph-conjectures
+git clone https://github.com/graph-theory-AI/graph-conjectures graph-conjectures
+git -C graph-conjectures checkout b72c585      # the pinned corpus commit (see below)
 make gate
 ```
 
-`make gate` regenerates the manifest from the upstream conjecture source, so it needs that
-checkout. It is looked for at `../../graph-conjectures` relative to this repo (i.e. a sibling
-of this repo's parent); override with `GRAPH_CONJECTURES=/path/to/graph-conjectures`. Pin it to
-`f6901fb371155678980a84306f6208fa0f166a6b` to reproduce the committed manifest exactly.
+`make gate` regenerates the manifests from the conjecture source, so it needs that checkout.
+It is looked for, in order, at `$GRAPH_CONJECTURES`, `./graph-conjectures` (the nested clone,
+git-ignored) and `../../graph-conjectures` (`meta/corpus_registry.py:graph_conjectures_dir`).
+The committed manifests are pinned to commit `b72c585` of the branch `CDC-relations-update`
+(`meta/corpus_registry.py:GRAPH_CONJECTURES_PIN`): as of 2026-09-23 that branch is a pending
+pull request of the official repository and is the reference corpus until it is merged; if it
+is not yet on the official remote, fetch it from the fork `lviennot/graph-conjectures`. That
+commit adds the Bondy–Murty Appendix A records (`bm-NNN`), the curated `others` records and
+the relations graph (`data/relations.json`) to the arXiv, OpenProblemGarden and erdősproblems
+corpora.
+
+### 4. Statement documentation, corpus links and relations
+
+Every `Definition <name>_statement` (741 of them) is immediately preceded by a doc block
+```
+(** Corpus row: bm:bm-026
+    Site: https://graph-theory-ai.github.io/graph-conjectures/bm/bm-026/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/bondy_murty_reviews/bm-026.json
+    English statement: ... (back-translated from the Rocq body, attribution first)
+    Definitions: ... (every non-standard notion, with the file it lives in)
+    Notes: ... (modelling choices, repairs, known settled cases) *)
+```
+whose row id and links must match the manifest (`python3 meta/check_statement_docs.py`, part of
+`make audit`; the links assume the pinned corpus branch is merged into `main`). Statements
+without a corpus row carry `(** No corpus row: <reason> *)`. The corpus relations file
+(`data/relations.json`, 225 edges) is mirrored in `meta/corpus_relations.json` and cross-checked
+against the machine-verified edge graph (`meta/dependency_graph.json`, 97 edges of which 20 are
+Qed theorems). Shared vocabulary lives in `base/theories/common.v` (matchings, hamiltonicity,
+edge-connectivity, tournaments, ...) on top of the coq-graph-theory modules re-exported by
+`base/theories/base.v`; the ledger `meta/STATEMENT_IMPROVEMENTS.md` lists local notions that
+duplicate library ones and the defects found and fixed, and
+`meta/X211-X229_faithfulness_audit.md` records the two-reader readbacks, active probes and
+repairs of the 2026-09-23 update.
+
+The scope and token cost of that update are summarised in the "Latest update" paragraph at the
+top of this file.
+
+**Relations.** [github.com/graph-theory-ai/graph-conjectures](https://github.com/graph-theory-ai/graph-conjectures)
+(`data/relations.json`) records 225 relations between its conjectures: 159 `implies`, 8
+`equivalent_to`, 16 `same_conjecture` (aliases) and 42 `related_only`. Of the 167 implications
+and equivalences, 112 have both endpoints formalized here and every one has a machine-checked
+disposition: 62 are Qed theorems, 15 hold conditionally on a registered external theorem (the ten
+theorems still to formalize are listed in [`classical-lemmas/TODO.md`](classical-lemmas/TODO.md)), 2 are
+refuted as encoded, 24 are candidates blocked on a named ingredient, and 9 are kept as candidates
+in the registry only (deep classical theorems such as Ryjáček's closure, or the unproved half of
+an equivalence). The other 55 cannot be attempted yet: 33 join two rows with no statement (rows
+parked as needing a computation model, a probability layer, or a proposition the source does not
+state), 11 have one such endpoint, and 11 touch a statement that is itself a blocked placeholder.
+On top of those, the repository's own audits contributed 5 verified Rocq-only relations, 31
+documented non-edges and 4 further candidates (`meta/dependency_graph.json`, registry
+`meta/edge_waves.json`, upstream feedback `meta/CORPUS_FEEDBACK.md`). Getting to this state cost
+**18,074,929 metered sub-agent tokens** in total: 10,832,396 for the corpus re-sync, doc blocks,
+base layer and waves X211–X229, and 7,242,533 for the implication programme (68 agents), plus the
+two orchestrating Claude sessions, which are not metered.
 
 ### Note on `digraph-theory/theories/applications/ck_path`
 
@@ -128,11 +211,14 @@ check their exact theorem types and closed assumptions.
 
 ## Layout
 - `base/` — `coq-graph-theory-base`: the single owner of cross-area primitives (interop façade,
-  homomorphism, products, list-χ, line/total-graph, Δ).
+  homomorphism, products, list-χ, line/total-graph, Δ, surfaces) and, in `theories/common.v`,
+  the shared conjecture vocabulary built on the re-exported coq-graph-theory modules
+  (`connectivity`, `minor`, `treewidth`, `dom`).
 - `<area>-theory/` — the area packages (each: foundations/core/invariants/constructions/conjectures/applications).
 - `meta/` — the v1 completion report + roadmap (`OPG_FULL_FORMALIZATION_PLAN.md`), the validated 227-row
   manifest + leg-state overlay, the federated dependency graph (`dependency_graph.json`), the status report
-  (`CORPUS_STATUS.md`), and the gates (`check_milestone.py`, `report_corpus_status.py`, `build_edge_graph.py`).
+  (`CORPUS_STATUS.md`), the corpus relations mirror (`corpus_relations.json`), and the gates
+  (`check_milestone.py`, `report_corpus_status.py`, `build_edge_graph.py`, `check_statement_docs.py`).
 - `atlas/`, `blueprint/` — *scaffolds* reserved for later extraction of the cross-area edge atlas and the
   shared dev tooling; both currently live in `meta/` (see the stubs' `Status: scaffold`).
 

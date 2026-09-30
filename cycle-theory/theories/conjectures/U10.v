@@ -62,7 +62,8 @@ Definition is_perfect_matching (G : mgraph) (M : {set edge G}) : Prop :=
   forall v : G, subdeg M v = 1.
 
 (** Cubic and bridgeless together: the shared "bridgeless cubic graph" hypothesis
-    used uniformly by all three rows. *)
+    used uniformly by all three rows.  [bridgeless] is the UNDIRECTED (cut-edge)
+    notion of [Cycle.foundations.connectivity]. *)
 Definition cubic_bridgeless (G : mgraph) : Prop := cubic G /\ bridgeless G.
 
 (** ================================================================= *)
@@ -81,6 +82,35 @@ Definition perfect_matching_cover (G : mgraph) (k : nat)
       (forall M, M \in L -> is_perfect_matching M)
     & forall e : edge G, count (fun M : {set edge G} => e \in M) L = 2].
 
+(** Corpus row: opg:the_berge_fulkerson_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/the_berge_fulkerson_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/the_berge_fulkerson_conjecture.json
+    English statement: (Open Problem Garden, "The Berge-Fulkerson conjecture")
+      For every multigraph G with at least one vertex that is cubic, that is, loopless with
+      every vertex on exactly three edges, and bridgeless, there is a list of six perfect
+      matchings of G, each a set of edges meeting every vertex exactly once, such that
+      every edge of G belongs to exactly two members of the list, counted with
+      multiplicity in the list.
+    Definitions: [is_perfect_matching M] - every vertex has exactly one incident edge in M
+      (U10.v); [perfect_matching_cover k L] - L has exactly k members, all perfect
+      matchings, and every edge is counted exactly twice over L (U10.v);
+      [cubic_bridgeless G] - cubic and bridgeless (U10.v); [cubic G] - loopless and every
+      vertex has multigraph degree 3 (cycle-theory/theories/conjectures/U6.v);
+      [subdeg M v] - the number of edges of M incident with v, [mdeg], [bridgeless]
+      (cycle-theory/theories/foundations/connectivity.v); [loopless]
+      (base/theories/base.v).
+    Notes: the six matchings form a LIST, not a set, so repetitions are allowed, which
+      matches the source's M_1, ..., M_6 with "every edge contained in exactly two of
+      them", the count being taken over positions. The guard [0 < #|G|] excludes the empty
+      graph.
+      REPAIRED (foundation repair, 2026-09-23): [bridgeless], hence
+      [cubic_bridgeless], now reads [is_bridge] through the UNDIRECTED [uwalk]
+      of GTBase.base, so it is the textbook "no cut edge". Under the previous
+      DIRECTED reading (coq-graph-theory's [eseparates] over [walk]) a cubic
+      loopless multigraph could only be a disjoint union of triple-edge
+      dipoles - no snark, no Petersen graph - so the hypothesis class was
+      essentially empty of the conjecture's content; that is no longer the
+      case. *)
 Definition the_berge_fulkerson_statement : Prop :=
   forall G : mgraph,
     (0 < #|G|)%N -> cubic_bridgeless G ->
@@ -136,10 +166,36 @@ Definition Padj (q r : Pedge) : bool :=
 Definition mut_adj3 (T : Type) (r : rel T) (a b c : T) : bool :=
   [&& r a b, r b c & r a c].
 
-(** A Petersen colouring: a map from the edges of [G] to the edges of the
-    Petersen graph sending every mutually-adjacent triple of [G]-edges (edges
-    pairwise sharing an endpoint, i.e. adjacent in [line_graph G]) to a
-    mutually-adjacent triple of Petersen edges. *)
+(** Corpus row: opg:petersen_coloring_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/petersen_coloring_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/petersen_coloring_conjecture.json
+    English statement: (Open Problem Garden, "Petersen coloring conjecture")
+      For every bridgeless cubic multigraph G with at least one vertex there is a map f
+      from the edges of G to the edges of the Petersen graph such that whenever three edges
+      of G are pairwise adjacent, that is, pairwise share an endpoint, their three images
+      are pairwise adjacent edges of the Petersen graph, where two Petersen edges are
+      adjacent when they are distinct and share a vertex.
+    Definitions: [petersenV], [padj] and [petersen] - the Petersen graph built as the
+      Kneser graph on the two-element subsets of a five-element set with disjointness as
+      adjacency (U10.v); [Pedge] - an edge of the Petersen graph, given as an adjacent
+      ordered pair of vertices, with [psupp] its unordered endpoint set (U10.v);
+      [Padj q r] - the supports of q and r differ and meet (U10.v); [mut_adj3 r a b c] -
+      a, b, c are pairwise related by r (U10.v); [cubic_bridgeless] (U10.v);
+      [line_rel] - two multigraph edges share an endpoint, the adjacency of base's
+      undirected line graph (base/theories/base.v).
+    Notes: adjacency of Petersen edges is taken on supports, so it does not depend on the
+      ordered representative chosen for an edge. The triple condition is imposed on all
+      ordered triples e1, e2, e3 that are pairwise [line_rel]-adjacent; since [line_rel]
+      is irreflexive on distinct edges only, a triple with repetitions cannot satisfy the
+      hypothesis.
+      REPAIRED (foundation repair, 2026-09-23): [bridgeless], hence
+      [cubic_bridgeless], now reads [is_bridge] through the UNDIRECTED [uwalk]
+      of GTBase.base, so it is the textbook "no cut edge". Under the previous
+      DIRECTED reading (coq-graph-theory's [eseparates] over [walk]) a cubic
+      loopless multigraph could only be a disjoint union of triple-edge
+      dipoles - no snark, no Petersen graph - so the hypothesis class was
+      essentially empty of the conjecture's content; that is no longer the
+      case. *)
 Definition petersen_coloring_statement : Prop :=
   forall G : mgraph,
     (0 < #|G|)%N -> cubic_bridgeless G ->
@@ -165,9 +221,32 @@ Definition is_odd_edge_cut (G : mgraph) (T : {set edge G}) : Prop :=
 Definition contains_odd_edge_cut (G : mgraph) (H : {set edge G}) : Prop :=
   exists T : {set edge G}, T \subset H /\ is_odd_edge_cut T.
 
-(** NOTE: following the source ("two perfect matchings M1, M2") no distinctness
-    [M1 != M2] is imposed; coincident matchings are deliberately permitted (the
-    single-matching case is still non-trivial). *)
+(** Corpus row: opg:intersecting_two_perfect_matchings
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/intersecting_two_perfect_matchings/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/intersecting_two_perfect_matchings.json
+    English statement: (Open Problem Garden, "The intersection of two perfect matchings")
+      Every bridgeless cubic multigraph with at least one vertex has two perfect matchings
+      M1 and M2 such that the intersection of M1 and M2 contains no odd edge-cut, that is,
+      no subset of it is the set of edges with exactly one endpoint in some vertex set and
+      of odd cardinality.
+    Definitions: [is_perfect_matching M] - every vertex has exactly one incident edge in M
+      (U10.v); [cubic_bridgeless] (U10.v); [is_odd_edge_cut T] - T is the edge cut of some
+      vertex set, is nonempty and has odd size (U10.v); [contains_odd_edge_cut H] - some
+      odd edge-cut is a subset of H (U10.v); [cut S] - the edges with exactly one endpoint
+      in S (cycle-theory/theories/foundations/connectivity.v).
+    Notes: following the source, which says "two perfect matchings M_1, M_2", no
+      distinctness M1 different from M2 is imposed, so the two matchings may coincide; the
+      resulting single-matching case is still non-trivial. The nonemptiness clause in
+      [is_odd_edge_cut] is redundant, since a set of odd size is nonempty, and is kept for
+      readability, see [grounding_U10.is_odd_edge_cut_neq0].
+      REPAIRED (foundation repair, 2026-09-23): [bridgeless], hence
+      [cubic_bridgeless], now reads [is_bridge] through the UNDIRECTED [uwalk]
+      of GTBase.base, so it is the textbook "no cut edge". Under the previous
+      DIRECTED reading (coq-graph-theory's [eseparates] over [walk]) a cubic
+      loopless multigraph could only be a disjoint union of triple-edge
+      dipoles - no snark, no Petersen graph - so the hypothesis class was
+      essentially empty of the conjecture's content; that is no longer the
+      case. *)
 Definition intersecting_two_perfect_matchings_statement : Prop :=
   forall G : mgraph,
     (0 < #|G|)%N -> cubic_bridgeless G ->

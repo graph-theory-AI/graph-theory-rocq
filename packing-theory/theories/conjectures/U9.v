@@ -291,14 +291,21 @@ Definition is_tjoin (G : mgraph) (T : {set G}) (J : {set edge G}) : Prop :=
   forall v : G, odd #|edges_at v :&: J| = (v \in T).
 
 (** ================================================================= *)
-(** ** Row 1 — Partition of cubic 3-connected graphs into paths of length 2  (OPEN)
-
-    Source: "Problem: Does every 3-connected cubic graph on 3k vertices admit a
-    partition into k paths of length 2?"
-
-    Carrier: [sgraph].  cubic = [regular G 3] (base); 3-connected = [k_connected G 3];
-    a "path of length 2" is a [P3] ([is_P3]); the partition's blocks are exactly the
-    [k] paths.  Guard [0 < k] excludes the degenerate empty partition. *)
+(** Corpus row: opg:partition_of_a_cubic_3_connected_graphs_into_paths_of_length_2
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/partition_of_a_cubic_3_connected_graphs_into_paths_of_length_2/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/partition_of_a_cubic_3_connected_graphs_into_paths_of_length_2.json
+    English statement: (Open Problem Garden, "Partition of a cubic 3-connected graphs
+      into paths of length 2")
+      For every k >= 1 and every simple graph G: if G is 3-regular, 3-connected and has
+      exactly 3k vertices, then there is a family P of vertex sets that partitions
+      V(G), every member of which is a path on three vertices (a path of length 2), and
+      P has exactly k members.
+    Definitions: [is_P3 S] — S = {x, b, y} with b adjacent to both x and y and x != y
+      (this file); [regular G 3] — cubic, [k_connected G 3] — Whitney 3-connectivity,
+      which carries the guard 3 < |V(G)| (both GTBase base); [partition] — MathComp
+      finset partition of the vertex set.
+    Notes: the blocks of the partition are exactly the k paths. The guard 0 < k
+      excludes the degenerate empty partition. *)
 Definition partition_of_a_cubic_3_connected_graphs_into_paths_o_statement : Prop :=
   forall (k : nat) (G : sgraph),
     0 < k -> regular G 3 -> k_connected G 3 -> #|G| = 3 * k ->
@@ -307,14 +314,23 @@ Definition partition_of_a_cubic_3_connected_graphs_into_paths_o_statement : Prop
           (forall S : {set G}, S \in P -> is_P3 S)
         & #|P| = k].
 
-(** ** Row 2 — Triangle packing vs. triangle edge transversal  (OPEN)
-
-    Source: "Conjecture: If G has at most k edge-disjoint triangles, then there is
-    a set of 2k edges whose deletion destroys every triangle."
-
-    Carrier: [sgraph] (edges as 2-subsets).  Hypothesis: every set of pairwise
-    edge-disjoint triangles has size ≤ k (triangle-packing ≤ k).  Conclusion: a
-    triangle-edge-transversal [S] of ≤ 2k edges meeting every triangle. *)
+(** Corpus row: opg:triangle_packing_vs_triangle_edge_transversal
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/triangle_packing_vs_triangle_edge_transversal/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/triangle_packing_vs_triangle_edge_transversal.json
+    English statement: (Open Problem Garden, "Triangle-packing vs triangle
+      edge-transversal")
+      For every natural number k and every simple graph G: if every set P of triangles
+      of G whose edge sets are pairwise disjoint has at most k members, then there is a
+      set S of at most 2k two-element vertex sets such that every triangle of G has one
+      of its three edges in S.
+    Definitions: [is_triangle T] — T is a clique with exactly three vertices (this
+      file); [tri_edges T] — the two-element subsets of T, which for a clique are
+      exactly the edges it spans (this file); [clique] — coq-graph-theory sgraph.v.
+    Notes: the packing hypothesis quantifies over sets of pairwise edge-disjoint
+      triangles (not lists), so repetitions cannot inflate a packing. The transversal S
+      is an arbitrary set of two-element vertex sets rather than a subset of E(G);
+      since only its intersections with triangle edge sets are used, non-edges in S
+      only waste the budget 2k, so this reading is at least as strong as the source. *)
 Definition triangle_packing_vs_triangle_edge_transversal_statement : Prop :=
   forall (k : nat) (G : sgraph),
     (forall P : {set {set G}},
@@ -327,29 +343,43 @@ Definition triangle_packing_vs_triangle_edge_transversal_statement : Prop :=
       (forall T : {set G}, is_triangle T ->
          exists2 e : {set G}, e \in tri_edges T & e \in S).
 
-(** ** Row 3 — Friendly partitions  (OPEN)
-
-    Source: "A friendly partition of a graph is a partition of the vertices into
-    two sets so that every vertex has at least as many neighbours in its own class
-    as in the other.  Problem: Is it true that for every r, all but finitely many
-    r-regular graphs have friendly partitions?"
-
-    Carrier: [sgraph].  "All but finitely many [r]-regular graphs" =
-    [all_but_finitely_many_regular] (an order threshold). *)
+(** Corpus row: opg:friendly_partitions
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/friendly_partitions/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/friendly_partitions.json
+    English statement: (Open Problem Garden, "Friendly partitions")
+      For every r there is an order threshold N such that every r-regular simple graph
+      with more than N vertices has a friendly partition: a vertex set A, neither empty
+      nor the whole vertex set, such that every vertex of A has at least as many
+      neighbours inside A as outside it, and every vertex outside A has at least as
+      many neighbours outside A as inside it.
+    Definitions: [friendly_partition A] — the three conjuncts just described (this
+      file); [all_but_finitely_many_regular r P] — there is an N such that every
+      r-regular G with N < |V(G)| satisfies P (this file); [regular] — GTBase base.
+    Notes: "all but finitely many r-regular graphs" is read as cofinite in the order:
+      there are finitely many graphs of each order, so an order threshold is the
+      faithful reading. *)
 Definition friendly_partitions_statement : Prop :=
   forall r : nat,
     all_but_finitely_many_regular r
       (fun G => exists A : {set G}, friendly_partition A).
 
-(** ** Row 4 — Partitioning edge connectivity  (OPEN)
-
-    Source: "Question: Let G be an (a+b+2)-edge-connected graph.  Does there exist
-    a partition {A,B} of E(G) so that (V,A) is a-edge-connected and (V,B) is
-    b-edge-connected?"
-
-    Carrier: [mgraph] (edge sets).  Whole-graph (a+b+2)-edge-connectivity is
-    [edge_conn_subset [set: edge G] (a+b+2)]; the spanning subgraphs [(V,A)],
-    [(V,B)] reuse the same primitive on the edge subsets. *)
+(** Corpus row: opg:partitioning_edge_connectivity
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/partitioning_edge_connectivity/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/partitioning_edge_connectivity.json
+    English statement: (Open Problem Garden, "Partitioning edge-connectivity")
+      For all a and b and every multigraph G with at least one vertex: if G is
+      (a+b+2)-edge-connected, then its edge set splits into two disjoint parts A and B
+      covering every edge such that the spanning subgraph (V, A) is a-edge-connected
+      and the spanning subgraph (V, B) is b-edge-connected.
+    Definitions: [edge_conn_via E] — every two vertices are joined by an undirected
+      walk using only edges of E (this file); [edge_conn_subset E a] — deleting fewer
+      than a edges of E leaves the spanning subgraph on the remaining edges connected
+      (this file); [uwalk] — undirected multigraph walk (GTBase base); [mgraph],
+      [edge], [source]/[target] — coq-graph-theory mgraph.v.
+    Notes: the carrier is a multigraph at the edge-set level. An undirected walk is
+      used instead of the library's [walk], which on the directed carrier
+      [mgraph = graph unit unit] would encode strong reachability rather than the
+      undirected edge-connectivity the row is about. Guard 0 < |V(G)|. *)
 Definition partitioning_edge_connectivity_statement : Prop :=
   forall (a b : nat) (G : mgraph),
     0 < #|G| -> edge_conn_subset [set: edge G] (a + b + 2) ->
@@ -357,27 +387,43 @@ Definition partitioning_edge_connectivity_statement : Prop :=
       [/\ A :|: B = [set: edge G], [disjoint A & B],
           edge_conn_subset A a & edge_conn_subset B b].
 
-(** ** Row 5 — Bollobás–Eldridge–Catlin (BEC) packing conjecture  (OPEN)
-
-    Source: "Conjecture (BEC-conjecture): If G1 and G2 are n-vertex graphs and
-    (Δ(G1)+1)(Δ(G2)+1) < n+1, then G1 and G2 pack."
-
-    Carrier: a pair of [sgraph]s on a common order [n].  Δ = base [Delta]
-    (max-degree, REUSED); packing = [pack] (edge-disjoint placement). *)
+(** Corpus row: opg:the_bollobas_eldridge_catlin_conjecture_on_graph_packing
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/the_bollobas_eldridge_catlin_conjecture_on_graph_packing/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/the_bollobas_eldridge_catlin_conjecture_on_graph_packing.json
+    English statement: (Bollobas, Eldridge and Catlin, "The Bollobas-Eldridge-Catlin
+      Conjecture on graph packing")
+      For every n and all simple graphs G1 and G2 with exactly n vertices each: if
+      (Delta(G1)+1) * (Delta(G2)+1) < n+1, then G1 and G2 pack, that is, there is a
+      bijection f from V(G1) to V(G2) such that no edge of G1 is mapped onto an edge
+      of G2.
+    Definitions: [pack G1 G2] — a bijection f with f x not adjacent to f y whenever
+      x -- y (this file); [Delta] — maximum degree (GTBase base).
+    Notes: the common order n is imposed by two separate cardinality hypotheses rather
+      than by a shared vertex type. *)
 Definition the_bollobas_eldridge_catlin_conjecture_on_graph_pac_statement : Prop :=
   forall (n : nat) (G1 G2 : sgraph),
     #|G1| = n -> #|G2| = n ->
     (Delta G1 + 1) * (Delta G2 + 1) < n + 1 ->
     pack G1 G2.
 
-(** ** Row 6 — Lovász path-removal conjecture  (OPEN)
-
-    Source: "Conjecture: There is an integer-valued function f(k) such that if G is
-    any f(k)-connected graph and x and y are any two vertices of G, then there
-    exists an induced path P with ends x and y such that G−V(P) is k-connected."
-
-    Carrier: [sgraph].  [is_induced_path] (induced-path); [k_connected] /
-    [k_connected_on] (k-connectivity); the removed vertex set is [V(P)]. *)
+(** Corpus row: opg:lovasz_path_removal_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/lovasz_path_removal_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/lovasz_path_removal_conjecture.json
+    English statement: (Lovasz, "Lovasz Path Removal Conjecture")
+      There is a function f on natural numbers such that for every k, every simple
+      graph G and all distinct vertices x and y of G: if G is f(k)-connected, then
+      there is an induced path p from x to y such that the set of vertices of G not on
+      p is k-connected.
+    Definitions: [consec p a b] — a and b are consecutive on the sequence p (this
+      file); [spath x y p] — a nonempty vertex sequence starting at x, ending at y,
+      with consecutive entries adjacent (this file); [is_induced_path x y p] — such a
+      path with distinct vertices and no chords, i.e. any two of its vertices adjacent
+      in G are consecutive on p (this file); [k_connected_on U k] — k < |U| and U minus
+      any set of fewer than k vertices is connected (this file); [k_connected] —
+      Whitney k-connectivity (GTBase base).
+    Notes: "G - V(P) is k-connected" is rendered on the complement vertex set through
+      [k_connected_on] rather than on an induced-subgraph object; the constraint
+      k < |U| inside [k_connected_on] is part of the conclusion. *)
 Definition lovasz_path_removal_statement : Prop :=
   exists f : nat -> nat,
     forall (k : nat) (G : sgraph) (x y : G),
@@ -386,32 +432,44 @@ Definition lovasz_path_removal_statement : Prop :=
         is_induced_path x y p /\
         k_connected_on ([set: G] :\: [set z in p]) k.
 
-(** ** Row 7 — Jones' conjecture  (OPEN — PLANAR, FAITHFUL)
-
-    Source: "For a graph G, let cp(G) denote the cardinality of a maximum cycle
-    packing (collection of vertex disjoint cycles) and let cc(G) denote the
-    cardinality of a minimum feedback vertex set (set of vertices X so that G−X is
-    acyclic).  Conjecture: For every planar graph G, cc(G) ≤ 2·cp(G)."
-
-    Carrier: [sgraph].  PLANARITY is now the base-provided combinatorial predicate
-    [wagner_planar G := ~ minor G 'K_5 /\ ~ minor G (KB 3 3)] (no K5 and no K3,3
-    minor).  By Wagner's theorem this IS planarity, so the row is FAITHFUL and
-    Four-Colour-free; [wagner_planar] is used opaquely (we do not import [minor]).
-    The former abstract [forall planar : sgraph -> Prop] placeholder is gone.
-    cc = [is_min_fvs] (feedback-vertex-set); cp = [is_max_cycle_packing]
-    (cycle-packing), both stated relationally (no min/max existence proof needed). *)
+(** Corpus row: opg:jones_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/jones_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/jones_conjecture.json
+    English statement: (Jones, "Jones' conjecture")
+      For every simple graph G and all natural numbers ccn and cpn: if G is planar, ccn
+      is the least size of a feedback vertex set of G (a vertex set meeting every cycle
+      of length greater than 2), and cpn is the greatest number of pairwise
+      vertex-disjoint such cycles in G, then ccn <= 2 * cpn.
+    Definitions: [hits_all_cycles X] — X meets every cycle of length greater than 2
+      (this file); [is_min_fvs G m] / [is_max_cycle_packing G m] — relational minimum /
+      maximum, i.e. a witness attaining m plus the corresponding bound on all witnesses
+      (this file); [cycle_packing cs] — a list of cycles of length greater than 2 with
+      every vertex on at most one of them (this file); [wagner_planar G] — no K5 minor
+      and no K3,3 minor (GTBase base); [ucycle] — MathComp / coq-graph-theory.
+    Notes: planarity is the Wagner minor characterisation, used opaquely, so the row is
+      faithful and Four-Colour-free (the former abstract [planar : sgraph -> Prop]
+      placeholder is gone). Stating cc and cp relationally avoids having to prove that
+      the extrema exist. The corpus row is marked partial: the bound is known for
+      planar graphs, which is exactly the case the body states. *)
 Definition jones_statement : Prop :=
   forall (G : sgraph) (ccn cpn : nat),
     wagner_planar G -> is_min_fvs G ccn -> is_max_cycle_packing G cpn ->
     ccn <= 2 * cpn.
 
-(** ** Row 8 — Odd cycle transversal in triangle-free graphs  (OPEN)
-
-    Source: "Conjecture: If G is a simple triangle-free graph, then there is a set
-    of at most n²/25 edges whose deletion destroys every odd cycle."
-
-    Carrier: [sgraph].  [triangle_free]; the transversal [S] is a set of edges with
-    [#|S| ≤ n²/25] whose removal makes the graph bipartite ([del_bipartite]). *)
+(** Corpus row: opg:odd_cycle_transversal_in_triangle_free_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/odd_cycle_transversal_in_triangle_free_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/odd_cycle_transversal_in_triangle_free_graphs.json
+    English statement: (Open Problem Garden, "Odd-cycle transversal in triangle-free
+      graphs")
+      For every triangle-free simple graph G there is a set S of edges of G with at most
+      floor(|V(G)|^2 / 25) members whose deletion leaves a bipartite graph: there is a
+      vertex set A such that every edge of G outside S has exactly one endpoint in A.
+    Definitions: [edge_setG G] — the two-element vertex sets {x, y} with x -- y (this
+      file); [del_bipartite S] — there is an A with (x in A) != (y in A) for every edge
+      {x, y} not in S (this file); [triangle_free] — no three pairwise adjacent
+      vertices (GTBase base).
+    Notes: "deleting S destroys every odd cycle" is rendered as "the remaining graph is
+      bipartite", which is equivalent; n^2/25 is MathComp floor division. *)
 Definition odd_cycle_transversal_in_triangle_free_graphs_statement : Prop :=
   forall G : sgraph,
     triangle_free G ->
@@ -420,28 +478,42 @@ Definition odd_cycle_transversal_in_triangle_free_graphs_statement : Prop :=
           #|S| <= (#|G| ^ 2) %/ 25
         & del_bipartite S].
 
-(** ** Row 9 — Matching-cut and girth  (OPEN)
-
-    Source: "Question: For every d does there exists a g such that every graph with
-    average degree smaller than d and girth at least g has a matching-cut?"
-
-    Carrier: [sgraph].  average degree < d = [avg_deg_lt]; girth ≥ g = base
-    [girth_geq] (REUSED); [matching_cut]. *)
+(** Corpus row: opg:matching_cut_and_girth
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/matching_cut_and_girth/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/matching_cut_and_girth.json
+    English statement: (Open Problem Garden, "Matching cut and girth")
+      For every d there is a g such that every simple graph G with at least one vertex,
+      average degree smaller than d, and girth at least g has a matching-cut: a vertex
+      set A, neither empty nor the whole vertex set, such that every vertex of A has at
+      most one neighbour outside A and every vertex outside A has at most one neighbour
+      in A.
+    Definitions: [avg_deg_lt G d] — the sum of the degrees is strictly less than
+      d * |V(G)| (this file, fraction-free); [matching_cut G] — the bipartition
+      condition just described (this file); [girth_geq] — GTBase base.
+    Notes: the average-degree bound is cross-multiplied to avoid rationals; guard
+      0 < |V(G)| keeps that reading faithful. *)
 Definition matching_cut_and_girth_statement : Prop :=
   forall d : nat, exists g : nat,
     forall G : sgraph,
       0 < #|G| -> avg_deg_lt G d -> girth_geq G g -> matching_cut G.
 
-(** ** Row 10 — Kriesel's conjecture  (OPEN)
-
-    Source: "Conjecture: Let G be a graph and let T ⊆ V(G) such that for any pair
-    u,v ∈ T there are 2k edge-disjoint paths from u to v in G.  Then G contains k
-    edge-disjoint trees, each of which contains T."
-
-    Carrier: [mgraph].  Hypothesis: [edge_disjoint_uv_paths u v (2*k)] for every
-    pair in [T] (edge-disjoint-paths-count).  Conclusion: [k] pairwise
-    edge-disjoint trees each connecting [T] (edge-disjoint Steiner trees).  Guard
-    [0 < k] excludes the boundary-trivial [k = 0] case (empty witnesses). *)
+(** Corpus row: opg:kriesells_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/kriesells_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/kriesells_conjecture.json
+    English statement: (Kriesell, "Kriesell's Conjecture")
+      For every multigraph G with at least one vertex, every vertex set T and every
+      k >= 1: if every pair u, v of vertices of T is joined by 2k pairwise edge-disjoint
+      u-v walks, then there are k pairwise edge-disjoint trees (acyclic edge sets) each
+      of which connects all of T.
+    Definitions: [edge_disjoint_uv_paths u v m] — a list of m walks from u to v with
+      every edge on at most one of them (this file); [acyclic_mg H] — every nonempty
+      subset of H has a vertex of odd degree inside it, i.e. trivial binary cycle space
+      (this file); [tree_contains_T T H] — H is acyclic and any two vertices of T are
+      joined by a walk inside H (this file); [walk], [edges_at] — coq-graph-theory
+      mgraph.v.
+    Notes: guard 0 < k excludes the trivially satisfiable k = 0 (empty list of trees);
+      guard 0 < |V(G)| excludes the empty multigraph. Edge-disjointness of the k trees
+      is expressed as "every edge lies in at most one member of the list". *)
 Definition kriesells_statement : Prop :=
   forall (G : mgraph) (T : {set G}) (k : nat),
     0 < #|G| -> 0 < k ->
@@ -451,14 +523,21 @@ Definition kriesells_statement : Prop :=
           (forall Ti : {set edge G}, Ti \in Ts -> tree_contains_T T Ti)
         & (forall e : edge G, count (fun Ti : {set edge G} => e \in Ti) Ts <= 1)].
 
-(** ** Row 11 — Matchings extend to Hamilton cycles in hypercubes  (OPEN)
-
-    Source: "Question: Does every matching of hypercube extend to a Hamiltonian
-    cycle?"
-
-    Carrier: the [hypercube] graph Q_d.  [is_matching_edges] (matching as an edge
-    set); extension = a Hamilton cycle whose edge set contains [M]
-    (matching-extension).  Guard [2 ≤ d] (Q_0/Q_1 have no Hamilton cycle). *)
+(** Corpus row: opg:matchings_extends_to_hamilton_cycles_in_hypercubes
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/matchings_extends_to_hamilton_cycles_in_hypercubes/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/matchings_extends_to_hamilton_cycles_in_hypercubes.json
+    English statement: (Open Problem Garden, "Matchings extend to Hamiltonian cycles in
+      hypercubes")
+      For every d >= 2 and every set M of edges of the d-dimensional hypercube that is a
+      matching, there is a Hamiltonian cycle of the hypercube whose edge set contains M.
+    Definitions: [hypercube d] — the graph on d-bit tuples in which two tuples are
+      adjacent exactly when they differ in one coordinate (this file); [is_matching_edges
+      M] — every member of M is a genuine edge and every vertex lies in at most one
+      member (this file); [hamiltonian_cycleG G c] — c is a uniq cycle of length |V(G)|
+      (this file, from MathComp's [ucycleb]); [cycle_edgesG G c] — the edges {x, next c
+      x} for x on c (this file).
+    Notes: guard 2 <= d, since the hypercubes of dimension 0 and 1 have no Hamiltonian
+      cycle. *)
 Definition matchings_extends_to_hamilton_cycles_in_hypercubes_statement : Prop :=
   forall (d : nat) (M : {set {set hypercube d}}),
     2 <= d -> is_matching_edges M ->
@@ -466,29 +545,45 @@ Definition matchings_extends_to_hamilton_cycles_in_hypercubes_statement : Prop :
       hamiltonian_cycleG (hypercube d) c /\
       M \subset cycle_edgesG (hypercube d) c.
 
-(** ** Row 12 — Weak saturation of the cube in the clique  (OPEN)
-
-    Source: "Problem: Determine wsat(K_n, Q_3)."
-
-    Carrier: graphs on K_n = edge sets over ['I_n]; Q_3 = [hypercube 3].  A
-    "Determine X" problem is formalized as well-definedness of the quantity:
-    wsat(K_n, Q_3) is a well-defined number ([is_wsat], the least weakly
-    Q_3-saturating edge count).  Guard [8 ≤ n] (need ≥ |V(Q_3)| = 8 vertices). *)
+(** Corpus row: opg:weak_saturation_of_the_cube_in_the_clique
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/weak_saturation_of_the_cube_in_the_clique/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/weak_saturation_of_the_cube_in_the_clique.json
+    English statement: (Open Problem Garden, "Weak saturation of the cube in the
+      clique")
+      For every n >= 8 the weak saturation number wsat(K_n, Q_3) is well defined: there
+      is a natural number m that is the least number of edges of a graph on n vertices
+      which weakly saturates the 3-dimensional cube in K_n.
+    Definitions: [copy_Q3_through E e] — an injective map of the vertices of
+      [hypercube 3] into 'I_n sending every cube edge into E, one of them onto e (this
+      file); [weakly_saturates n F] — F is a set of two-element subsets of 'I_n and the
+      missing two-subsets can be enumerated without repetition so that adding each one
+      (together with all earlier additions) completes a new cube copy through it (this
+      file); [is_wsat n m] — some weakly saturating F has exactly m edges and every
+      weakly saturating F has at least m (this file); [hypercube] — this file.
+    Notes: PROXY ENCODING. The source is a "Determine wsat(K_n, Q_3)" problem with no
+      proposition to prove; it is formalised as well-definedness of the quantity (the
+      minimum exists), not as a closed-form value, so the Rocq statement is weaker than
+      a determination of wsat. Guard 8 <= n, since Q_3 has eight vertices. *)
 Definition weak_saturation_of_the_cube_in_the_clique_statement : Prop :=
   forall n : nat, 8 <= n -> exists m : nat, is_wsat n m.
 
-(** ** Row 13 — Packing T-joins  (OPEN)
-
-    Source: "Conjecture: There exists a fixed constant c (probably c=1 suffices) so
-    that every graft with minimum T-cut size at least k contains a T-join packing
-    of size at least (2/3)k − c."
-
-    Carrier: a graft [(G, T)] with [G : mgraph] and [T] of even size.  min T-cut ≥ k:
-    every [S] with [#|S ∩ T|] odd has cut size ≥ k (t-cut).  Conclusion: [m]
-    pairwise edge-disjoint [T]-joins (t-join packing) with [2k ≤ 3(m+c)]
-    (= [m ≥ (2/3)k − c], fraction-free).  Guard [0 < #|T|] excludes the degenerate
-    empty graft ([T = set0], where the cut hypothesis is vacuous and [J = set0]
-    repeated trivially satisfies the bound). *)
+(** Corpus row: opg:packing_t_joins
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/packing_t_joins/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/packing_t_joins.json
+    English statement: (Open Problem Garden, "Packing T-joins")
+      There is a fixed constant c such that for every multigraph G with at least one
+      vertex, every nonempty vertex set T of even size and every k: if every vertex set
+      S with |S intersect T| odd has an edge cut of at least k edges, then there are
+      pairwise edge-disjoint T-joins J_0, ..., J_{m-1} with 2k <= 3(m + c), that is,
+      m >= (2/3)k - c.
+    Definitions: [cut_mg S] — the edges with exactly one endpoint in S (this file);
+      [is_tjoin T J] — an edge set whose odd-degree vertices are exactly those of T
+      (this file); [edges_at] — coq-graph-theory mgraph.v.
+    Notes: the constant c is existentially quantified before all the universals, as in
+      the source. The bound m >= (2/3)k - c is rendered fraction-free and without
+      truncated subtraction as 2k <= 3(m + c). Guard 0 < |T| excludes the degenerate
+      empty graft, where the cut hypothesis is vacuous and a repeated empty T-join
+      would satisfy the bound trivially. *)
 Definition packing_t_joins_statement : Prop :=
   exists c : nat,
     forall (G : mgraph) (T : {set G}) (k : nat),

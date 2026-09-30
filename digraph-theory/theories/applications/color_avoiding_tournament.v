@@ -15,6 +15,11 @@ Set Implicit Arguments.
 Theorem transitive_minimum_eight : transitive_minimum_is 8.
 Proof. exact (benchmark_from_word_certificate all_eight_words_good). Qed.
 
+(** No corpus row: the finite affirmative resolution of Problem 5.1 of arXiv:2512.10438 proved
+    in this file (a 6-arc-coloured nontransitive tournament on 9 vertices whose longest
+    colour-avoiding path has 7 vertices, together with the exact transitive minimum 8); the
+    corpus has no row for that paper, and the witness lives in the applications layer rather
+    than the conjectures one. *)
 Definition problem_5_1_q6_n9_statement :=
   exists (T : tournament) (chi : T -> T -> 'I_6),
     [/\ #|T| = 9, ~~ transb T, longest_avoiding_vertices chi 7 &

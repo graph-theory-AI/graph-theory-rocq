@@ -33,9 +33,31 @@ Definition x147_quasi_isometric_to_H_minor_free
 
 (** ** X147 statements *****************************************************)
 
-(** Georgakopoulos-Papasoglu: for every graph H and fatness c, H-c-fat-minor-free
-    graphs are quasi-isometric, with constants depending on H,c, to H-minor-free
-    graphs. *)
+(** Corpus row: studies:std_georgakopoulos_papasoglu_conjecture_fat_minors
+    Site: none
+    Review: none
+    English statement: (Georgakopoulos and Papasoglu, conjecture on fat minors)
+      For every finite simple graph H and every fatness parameter c there are constants L and
+      C such that every finite simple graph G that does not contain H as a c-fat minor is
+      related, by maps with the (L,C) bounds recorded below, to some graph with no H minor.
+    Definitions: [x147_c_fat_minor G H c] - there is an assignment of nonempty, connected,
+      pairwise disjoint branch sets to the vertices of H such that adjacent vertices of H have
+      an edge between their branch sets and distinct non-adjacent vertices of H have their
+      branch sets at graph distance at least c (minor-theory/theories/conjectures/X147.v);
+      [x147_quasi_isometric_to_H_minor_free G H L C] - there is a graph Q with no H minor and
+      maps f from G to Q and g from Q to G, each satisfying only the upper bound
+      dist(f x, f y) <= L * dist(x,y) + C (respectively for g) and each coarsely surjective
+      within C (same file); [graph_dist x y] - the graph metric, defined as the least radius
+      of a ball around x containing y, saturating at the number of vertices when y is
+      unreachable (base/theories/graph_metric.v).
+    Notes: PROXY, weaker than the source (faithfulness audit 2026-07-17,
+      meta/BLOCKED_RETARGETING_AUDIT.md).  A genuine (L,C)-quasi-isometry also requires the
+      lower bound dist(x,y)/L - C <= dist(f x, f y) and that g be a quasi-inverse of f; the
+      encoding supplies neither, giving two decoupled coarsely surjective maps with upper
+      Lipschitz bounds only.  The conclusion is therefore strictly weaker than "G admits an
+      (L,C)-quasi-isometry to an H-minor-free graph".  A second modelling choice: distances
+      between vertices in different components are capped at the number of vertices rather
+      than infinite. *)
 Definition georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement : Prop :=
   forall (H : sgraph) (c : nat),
     exists L C : nat,

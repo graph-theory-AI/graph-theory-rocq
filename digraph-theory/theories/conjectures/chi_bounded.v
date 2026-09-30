@@ -75,10 +75,24 @@ Definition chi_bounded_under (C : diGraphType -> Prop) : Prop :=
       C G -> (0 < #|G|)%N ->
       (χ([set: underlying G]) <= f (ω([set: underlying G])))%N.
 
-(** ** Conjecture 2 (1605.07411): Forb(H) is χ-bounded iff underlying H is a forest
-
-    For an oriented graph [H], the class of oriented graphs with no induced copy of [H]
-    is χ-bounded iff the underlying graph of [H] is a forest. *)
+(** Corpus row: arxiv:1605.07411#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1605.07411__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1605.07411__00.json
+    English statement: (Aboulker, Bang-Jensen, Bousquet, Charbit, Havet, Maffray, Zamora 2016, chi-bounded families of oriented graphs, arXiv:1605.07411, Conjecture 2)
+      For every oriented graph H, the class of oriented graphs having no induced copy of H is
+      chi-bounded if and only if the underlying simple graph of H is a forest.
+    Definitions: [chi_bounded_under C] - there is one function f such that every nonempty member
+      G of the class C satisfies chi(U(G)) <= f(omega(U(G))), where U(G) is the underlying
+      simple graph and chi, omega are the ordinary undirected chromatic and clique numbers of
+      coq-graph-theory (this file); [oriented_dg D] - the arc relation is asymmetric, hence also
+      loopless (this file); [underlying D] - the underlying simple graph, u and v adjacent when
+      distinct and joined by an arc either way (this file); [ind_free H G] - G has no induced
+      subdigraph isomorphic to H, an injection preserving and reflecting arcs
+      (conjectures/heroes.v); [oriented_forest H] - the underlying simple graph of H is acyclic
+      (this file).
+    Notes: chi-boundedness here is the ORDINARY undirected chi and omega of the underlying
+      graph, as in the source paper, not the dichromatic number. The bound is required only of
+      nonempty members, so the empty digraph is never load-bearing. *)
 Definition conj2_1605_statement : Prop :=
   forall H : diGraphType,
     oriented_dg H ->
@@ -95,8 +109,23 @@ Definition oriented_star (S : diGraphType) : Prop :=
     (forall v : S, v != c -> @urel S c v) /\
     (forall u v : S, u != c -> v != c -> u != v -> ~~ @urel S u v).
 
-(** Conjecture 4: every oriented star is χ-bounding. (A special case of Conjecture 2,
-    since a star is an oriented forest; stated separately as in the paper.) *)
+(** Corpus row: arxiv:1605.07411#01
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1605.07411__01/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1605.07411__01.json
+    English statement: (Aboulker, Bang-Jensen, Bousquet, Charbit, Havet, Maffray, Zamora 2016, chi-bounded families of oriented graphs, arXiv:1605.07411, Conjecture 4)
+      For every oriented star S, that is every orientation of a complete bipartite graph K_{1,t}
+      (a centre adjacent in the underlying graph to all other vertices, the leaves pairwise
+      non-adjacent), the class of oriented graphs with no induced copy of S is chi-bounded.
+    Definitions: [chi_bounded_under C] - there is one function f such that every nonempty member
+      G of the class C satisfies chi(U(G)) <= f(omega(U(G))), where U(G) is the underlying
+      simple graph and chi, omega are the ordinary undirected chromatic and clique numbers of
+      coq-graph-theory (this file); [oriented_dg D] - the arc relation is asymmetric, hence also
+      loopless (this file); [underlying D] - the underlying simple graph, u and v adjacent when
+      distinct and joined by an arc either way (this file); [oriented_star S] - oriented, with a
+      centre adjacent to every other vertex and pairwise non-adjacent leaves (this file);
+      [ind_free S G] (conjectures/heroes.v).
+    Notes: A one-vertex or two-vertex S is an oriented star under this definition, which matches
+      the paper's degenerate cases k = 0 and k = l = 1. *)
 Definition conj4_1605_statement : Prop :=
   forall S : diGraphType,
     oriented_star S ->
@@ -137,11 +166,10 @@ Definition is_altP4 (P : diGraphType) : Prop :=
         forall x : P, x \in [:: a; b; c; d],
         a --> b, c --> b & c --> d].
 
-(** Conjecture 5: any non-empty family [forb] of orientations of P₄ that is neither the
-    singleton [{→P₄}] nor the singleton [{P⁺(1,1,1)}] is χ-bounding. We encode "[forb] is
-    a non-empty subset of Or(P₄) that is neither exceptional singleton" by: [forb] holds
-    only of P₄-orientations, is inhabited, and contains a member that is neither the
-    directed nor the alternating P₄ (this rules out both exceptional singletons). *)
+(** No corpus row: Conjecture 5 of arXiv:1605.07411 (every nonempty family of orientations of
+    the path on four vertices, other than the two exceptional singletons, is chi-bounding); the
+    corpus carries only rows __00 (Conjecture 2) and __01 (Conjecture 4) for that paper, so this
+    third conjecture of the same cluster owns no row. *)
 Definition conj5_1605_statement : Prop :=
   forall forb : diGraphType -> Prop,
     (forall P : diGraphType, forb P -> P4_underlying P) ->
@@ -171,8 +199,11 @@ Definition has_induced_long_dicycle (D : diGraphType) : Prop :=
 Definition chordal_C3 (D : diGraphType) : Prop :=
   [/\ oriented_dg D, no_induced_TT3 D & ~ has_induced_long_dicycle D].
 
-(** Chordal directed graphs are NOT directed-χ-bounded (arXiv:2202.01006): the class C₃
-    has unbounded dichromatic number, i.e. [dichromatic_bounded] FAILS on C₃. *)
+(** No corpus row: the theorem of Aboulker, Bousquet, de Joannis de Verclos, Chordal directed
+    graphs are not chi-bounded (arXiv:2202.01006): the chordal class C3 (oriented, no induced
+    transitive triangle, no induced directed cycle of length at least 4) has unbounded
+    dichromatic number; it is stated here as the context of the chi-boundedness cluster and is
+    not a conjecture row of the corpus. *)
 Definition chordal_not_dichromatic_bounded_statement : Prop :=
   ~ dichromatic_bounded chordal_C3.
 
@@ -186,12 +217,11 @@ Definition has_acyclic_set (D : diGraphType) (m : nat) : bool :=
 (** [acyclic_number_ge D m] : the acyclic number of [D] is at least [m]. *)
 Definition acyclic_number_ge (D : diGraphType) (m : nat) : Prop := has_acyclic_set D m.
 
-(** Conjecture 3 core (a⃗): the minimum, over oriented triangle-free graphs of order [n]
-    (n > 0), of the acyclic number is bounded below by [g n] for a binding sequence [g] —
-    every such graph has a large acyclic induced set. (The Θ(√(n log n)) envelope itself is
-    asymptotic/real-valued; this is the combinatorial core "a⃗(n) grows", with the lower
-    bound abstracted as an unspecified [g] — the conjecture asserts such a [g] of the right
-    order exists.) *)
+(** No corpus row: combinatorial core extracted from arXiv:2403.02298 (minimum acyclic number of
+    oriented triangle-free graphs of a given order): a sequence g attaining, at every order n,
+    the minimum acyclic number over oriented triangle-free digraphs of that order. The paper's
+    Theta(sqrt(n log n)) envelope is asymptotic and real-valued, so only this core is formalised
+    and the corpus has no row for it. *)
 Definition avec_core_statement : Prop :=
   exists g : nat -> nat,
     forall n : nat, (0 < n)%N ->
@@ -205,10 +235,11 @@ Definition avec_core_statement : Prop :=
          [/\ #|D| = n, oriented_dg D, underlying_triangle_free D
            & ~ acyclic_number_ge D (g n).+1]).
 
-(** Conjecture 4 core (t⃗): the maximum dichromatic number over oriented triangle-free
-    graphs of order [n] grows — there is an order-[n] oriented triangle-free graph whose
-    dichromatic number reaches [h n] (it is not (h n − 1)-dicolourable), for a binding
-    sequence [h]. (Again the Θ(√(n/log n)) envelope is the asymptotic refinement.) *)
+(** No corpus row: combinatorial core extracted from arXiv:2403.02298 (maximum dichromatic
+    number of oriented triangle-free graphs of a given order): a sequence h that upper-bounds,
+    and is attained by, the dichromatic number over oriented triangle-free digraphs of each
+    order n. The paper's Theta(sqrt(n/log n)) envelope is asymptotic, so only this core is
+    formalised and the corpus has no row for it. *)
 Definition tvec_core_statement : Prop :=
   exists h : nat -> nat,
     forall n : nat, (0 < n)%N ->
@@ -223,9 +254,10 @@ Definition tvec_core_statement : Prop :=
          [/\ #|D| = n, oriented_dg D, underlying_triangle_free D
            & ~~ dicolorableb D (h n).-1]).
 
-(** The m(3) landmark: there exists an oriented triangle-free graph that is NOT
-    2-dicolourable (its dichromatic number is at least 3) — so the least order m(3)
-    realizing dichromatic number 3 among oriented triangle-free graphs is finite. *)
+(** No corpus row: the m(3) landmark of arXiv:2403.02298 (some nonempty oriented digraph with
+    triangle-free underlying graph is not 2-dicolourable, so the least order realising
+    dichromatic number 3 in that class is finite); a bounded existential recorded as context for
+    [avec_core_statement] and [tvec_core_statement], with no corpus row. *)
 Definition m3_landmark_statement : Prop :=
   exists D : diGraphType,
     [/\ (0 < #|D|)%N, oriented_dg D, underlying_triangle_free D & ~~ dicolorableb D 2].

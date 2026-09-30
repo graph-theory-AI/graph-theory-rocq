@@ -17,7 +17,7 @@
       all_boot -> GraphTheory.sgraph -> GTBase.base -> all_algebra ; then perm. *)
 
 From mathcomp Require Import all_boot.
-From GraphTheory Require Import sgraph.
+From GraphTheory Require Import digraph sgraph bij.
 From GTBase Require Import base.
 From mathcomp Require Import all_algebra perm.
 
@@ -129,3 +129,69 @@ Definition total_count (n : nat) : nat := #|lgraphs n|.
 
 Definition determined_count (n : nat) : nat :=
   #|[set r in lgraphs n | lspec_determined r]|.
+
+(** ** Wave-V vocabulary equivalence: the labelled model vs [sgraph] ******
+
+    meta/STATEMENT_IMPROVEMENTS.md (section "## spectral-graph-theory",
+    "### Suspected unfaithful or proxy encodings", entry
+    [opg:are_almost_all_graphs_determined_by_their_spectrum]) records that this
+    file carries TWO notions of graph isomorphism: [liso] (permutation
+    relabelling of a labelled adjacency [ladj n], used by [lspec_determined] and
+    hence by the density row) and the [sgraph]-level [_ ≃ _] (used by
+    [determined_by_spectrum], which no statement of the package uses).  The
+    ledger asks for the equivalence [liso r r' <-> inhabited (sgraph_of r ≃
+    sgraph_of r')] "before any proof work"; there was no [sgraph_of], so it is
+    defined here and the equivalence is proved.
+
+    The equivalence is UNCONDITIONAL on [is_lgraph r] / [is_lgraph r'] once
+    [sgraph_of] is available: [sgraph_of] needs those two proofs to build the
+    [sgraph] (adjacency must be symmetric and irreflexive), and no further
+    hypothesis is required.  In particular nothing here depends on labels: on a
+    labelled graph the [sgraph] carrier IS [['I_n]], so every bijection of
+    carriers is a permutation and the two notions coincide exactly.  (Had the
+    [sgraph] been taken on an abstract vertex type, the [sgraph] isomorphism
+    would be the coarser notion.)
+
+    No statement body is changed. *)
+
+Section LabelledSgraph.
+Variable n : nat.
+Variables (r : ladj n) (rG : is_lgraph r).
+
+Lemma lg_sym : symmetric (fun i j : 'I_n => r (i, j)).
+Proof. by move: rG => /andP[/forallP Hs _] i j; apply/eqP; exact: (Hs (i, j)). Qed.
+
+Lemma lg_irrefl : irreflexive (fun i j : 'I_n => r (i, j)).
+Proof. by move: rG => /andP[_ /forallP Hi] i; apply/negbTE; exact: Hi. Qed.
+
+(** The simple graph on [['I_n]] described by the labelled adjacency [r]. *)
+Definition sgraph_of : sgraph := SGraph lg_sym lg_irrefl.
+
+Lemma sgraph_ofE (i j : 'I_n) : (i : sgraph_of) -- j = r (i, j).
+Proof. by []. Qed.
+
+End LabelledSgraph.
+
+Lemma liso_equiv_sgraph_of (n : nat) (r r' : ladj n)
+    (rG : is_lgraph r) (rG' : is_lgraph r') :
+  liso r r' <-> inhabited (sgraph_of rG ≃ sgraph_of rG').
+Proof.
+split=> [/existsP[s /forallP Hs]|[h]].
+- have h1 : forall x y : sgraph_of rG', x -- y -> (s x : sgraph_of rG) -- s y.
+    by move=> x y xy; rewrite sgraph_ofE (eqP (forallP (Hs x) y)) -sgraph_ofE.
+  have h2 : forall x y : sgraph_of rG,
+      x -- y -> ((s^-1)%g x : sgraph_of rG') -- (s^-1)%g y.
+    move=> x y xy.
+    rewrite sgraph_ofE -(eqP (forallP (Hs ((s^-1)%g x)) ((s^-1)%g y))).
+    by rewrite !permKV -sgraph_ofE.
+  split; apply: diso_sym.
+  exact: (@Diso'' (sgraph_of rG') (sgraph_of rG) s (s^-1)%g
+            (permK s) (permKV s) h1 h2).
+- pose h' := diso_sym h.
+  have hinj : injective (fun x : 'I_n => (h' x : 'I_n)) by apply: can_inj (bijK h').
+  apply/existsP; exists (perm hinj); apply/forallP => i; apply/forallP => j.
+  rewrite !permE -sgraph_ofE -[r' _]sgraph_ofE.
+  by apply/eqP; exact: (edge_diso h' i j).
+Qed.
+
+Print Assumptions liso_equiv_sgraph_of.

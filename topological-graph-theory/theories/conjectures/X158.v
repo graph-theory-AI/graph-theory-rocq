@@ -38,9 +38,31 @@ Definition x158_queue_layout (G : sgraph) (q : nat) : Prop :=
 
 (** ** X158 statements *****************************************************)
 
-(** Solved external problem: planar graphs have bounded queue number.  A
-    q-queue layout is a vertex order plus a q-colouring of the edges with no two
-    nested edges in the same queue. *)
+(** Corpus row: arxiv:1507.01120#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1507.01120__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1507.01120__00.json
+    English statement: (Joret, Micek, Wiechert 2015, arXiv:1507.01120, "Queue Number of
+      Planar Graphs")
+      There is a constant q such that every planar graph has a q-queue layout, i.e. a linear
+      order of its vertices and a partition of its edges into q queues, no queue containing
+      two nested edges.  In the Rocq body: there is a natural q such that every finite simple
+      graph with no K5 and no K3,3 minor has a [x158_queue_layout] with q queues.
+    Definitions: [x158_edge_set G] - the set of 2-element vertex sets that are edges (this
+      file); [x158_edge_ordered_endpoints ord e a b] - a and b are the two distinct endpoints
+      of e, listed in the order [ord] (this file); [x158_nested_edges ord e f] - the endpoints
+      satisfy a < b < c < d in [ord] with e = {a,d} and f = {b,c}, i.e. f is nested inside e
+      (this file); [x158_queue_layout G q] - an enumeration [ord] of the vertices (uniq, of
+      length |G|) together with a colouring of the edge sets by q colours such that two
+      distinct edges of the same colour are never nested (this file); [wagner_planar] -
+      base/theories/base.v.
+    Notes: The corpus row is recorded SOLVED: Dujmovic, Joret, Micek, Morin, Ueckerdt and
+      Wood proved in 2019 (J. ACM 2020) that every planar graph has queue number at most 49,
+      via layered partitions; the statement here is the existential "bounded queue number"
+      form of the question as it was posed.  Modelling choices: edges are 2-element vertex
+      sets rather than a dedicated edge type, and the queue assignment is a total map on all
+      vertex SETS, of which only the values on genuine edges are constrained - harmless,
+      since the nesting condition is imposed only for members of [x158_edge_set].  [index]
+      on a duplicate-free enumeration of all vertices is used as the linear order. *)
 Definition planar_graphs_bounded_queue_number_statement : Prop :=
   exists q : nat,
     forall G : sgraph,

@@ -123,4 +123,27 @@ Unset Printing Implicit Defensive.
     axiom-free. *)
 
 (** Machine-readable edge records (extracted by meta/build_edge_graph.py): *)
-(*@EDGE from=pentagon_statement to=weak_pentagon_statement kind=implies status=candidate cite="Nesetril; girth+construction gaps, not Qed-closed as formulated" *)
+(*@EDGE from=pentagon_statement to=weak_pentagon_statement kind=implies status=refuted-direction cite="Nesetril; girth+construction gaps, not Qed-closed as formulated" note="REFUTED-DIRECTION (metadata wave M, 2026-09-24): unprovable as formulated: girth-threshold gap and homs_to C5 vs 5-colouring-with-bipartite-complements construction gap" *)
+
+(** ** Wave-V vocabulary equivalence (2026-09-24) *************************
+
+    meta/STATEMENT_IMPROVEMENTS.md (section "## homomorphism-theory",
+    "### Duplicated vocabulary") records [U3.v:418 bipartite_rel] as the
+    relation-level form of [GTBase.base.bipartite]: instantiating the relation
+    argument at the adjacency of [G] gives back base's notion.  The two bodies
+    are convertible, so the identity holds by [erefl]; it is recorded as a lemma
+    so that a future drift of either definition breaks this file rather than
+    silently changing the meaning of the two rows that use [bipartite_rel]
+    ([mapping_planar_graphs_to_odd_cycles_statement] and the girth row).
+
+    Statement bodies are unchanged: this only makes the duplication formal. *)
+
+Lemma bipartite_relE (G : sgraph) : bipartite_rel (G := G) (--) = bipartite G.
+Proof. by []. Qed.
+
+Lemma bipartite_rel_equiv_bipartite (G : sgraph) :
+  bipartite_rel (G := G) (--) <-> bipartite G.
+Proof. by split=> H; exact: H. Qed.
+
+Print Assumptions bipartite_relE.
+Print Assumptions bipartite_rel_equiv_bipartite.

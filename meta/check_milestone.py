@@ -26,9 +26,20 @@ import rocq_toolchain as ROCQ
 import formal_resolutions as RESOLUTIONS
 NS = REG.NS
 
-if len(sys.argv) < 3:
-    sys.exit("usage: check_milestone.py <phase> <package>")
-phase, package = sys.argv[1], sys.argv[2]
+argv = sys.argv[1:]
+# `--overlay <path>` (debugging only): read the leg-state overlay of check 6 from another file,
+# e.g. a scratch copy produced by `meta/sync_edge_legs.py --write`, so a candidate sync can be
+# gate-tested before it touches the committed overlays. Everything else is unaffected.
+overlay_override = None
+if "--overlay" in argv:
+    i = argv.index("--overlay")
+    if i + 1 >= len(argv):
+        sys.exit("usage: check_milestone.py <phase> <package> [--overlay <legs_state.json>]")
+    overlay_override = os.path.abspath(argv[i + 1])
+    del argv[i:i + 2]
+if len(argv) < 2:
+    sys.exit("usage: check_milestone.py <phase> <package> [--overlay <legs_state.json>]")
+phase, package = argv[0], argv[1]
 CORPUS = REG.corpus_for_phase(phase)
 pkg = os.path.join(MONO, package)
 # graph-theory-base is in the registry NS map (report display) but is NOT a milestone package —
@@ -266,10 +277,32 @@ if compiles and ns:
 chk(faith_ok, f"faithfulness exact-type probes ({len(cases)} forbidden shapes tested)", faith_detail)
 
 # 6) overlay legs justified by artifacts + provenance (+ v2: source-verification tuple)
-legs_path = REG.overlay_path(CORPUS)
+legs_path = overlay_override or REG.overlay_path(CORPUS)
 overlay = json.load(open(legs_path)).get("entries", {}) if os.path.exists(legs_path) else {}
 needs_sver = REG.CORPORA[CORPUS]["requires_source_verification"]
 rows_by_slug = {r["slug"]: r for r in rows}
+# An `edges` leg is justified either by THIS milestone's implications file, or by an artifact the
+# milestone does not host: the proof of an edge touching the row may live in another phase's
+# implications file (waves X21x/X22x host cross-milestone edges) or, later, in the `atlas`
+# package, and a corpus relation may be discharged by a DOCUMENTED NON-EDGE instead of a proof.
+# The discharge logic is not duplicated here: meta/sync_edge_legs.py owns it (EdgeEvidence.
+# leg_artifact) and derives the same legs the overlay carries. The import is guarded — the wave
+# registry meta/edge_waves.json and meta/corpus_relations.json are optional inputs, and a missing
+# module must degrade to the historical "implications file required" rule, never crash the gate.
+EDGE_EVIDENCE = None
+try:
+    import sync_edge_legs as EDGELEGS
+    EDGE_EVIDENCE = EDGELEGS.EdgeEvidence()
+except Exception as _exc:                                    # noqa: BLE001 (gate must not crash)
+    sys.stderr.write(f"WARNING: edge-evidence unavailable ({_exc}); an `edges` leg is justified "
+                     f"only by this milestone's implications file\n")
+
+def edges_leg_artifact(slug):
+    """Reason a non-todo `edges` leg on this row is backed by an out-of-milestone artifact, or ''."""
+    if EDGE_EVIDENCE is None:
+        return ""
+    return EDGE_EVIDENCE.leg_artifact(rows_by_slug.get(slug, {}).get("formal_name")) or ""
+
 unjust = []
 for s in slugs:
     e = overlay.get(s)
@@ -280,8 +313,12 @@ for s in slugs:
         unjust.append(f"{s}: statement=done but not (compiles & defined)")
     if e.get("grounding") == "done" and not (compiles and os.path.exists(grounding)):
         unjust.append(f"{s}: grounding=done but grounding file missing/not compiled")
-    if e.get("edges") in ("partial", "done") and not os.path.exists(implications):
-        unjust.append(f"{s}: edges={e.get('edges')} but no implications file")
+    if e.get("edges") in ("partial", "done") and not os.path.exists(implications) \
+            and not edges_leg_artifact(s):
+        unjust.append(f"{s}: edges={e.get('edges')} but no implications file, no "
+                      f"verified/conditional edge touching "
+                      f"{rows_by_slug.get(s, {}).get('formal_name')!r} in "
+                      f"meta/dependency_graph.json, and an undischarged corpus relation")
     for lg in ("statement", "grounding", "edges", "correspondence", "audit_page"):
         if e.get(lg, "todo") not in ("todo", "partial", "done", "blocked"):
             unjust.append(f"{s}: leg {lg} has out-of-vocabulary state {e.get(lg)!r}")

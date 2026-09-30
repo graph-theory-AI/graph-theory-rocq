@@ -86,13 +86,23 @@ Definition mad (D : diGraphType) : rat :=
 
 (** ** The conjectures *)
 
-(** Conjecture 9 (arXiv:2410.23566): there is an absolute constant [C] such that for
-    every ACYCLIC digraph [D] (with at least one vertex, so [unvd] is meaningful) and
-    every vertex [v], the unavoidability number of [D] is at most [C] times that of
-    [D − v]. Quantified over the unvd VALUES [nD] (of [D]) and [nDv] (of [D − v]) via
-    the [unvd] relation, the bound is [nD ≤ C · nDv]. The guards
-    [0 < #|D|] / [1 < #|D|] keep both sides well-defined (deleting a vertex from a
-    1-vertex digraph leaves the empty digraph). *)
+(** Corpus row: arxiv:2410.23566#03
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2410.23566__03/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2410.23566__03.json
+    English statement: (Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud 2024, Blow-ups and extensions of trees in tournaments, arXiv:2410.23566, Conjecture 9)
+      There is a constant C such that for every acyclic finite digraph D with more than one
+      vertex and every vertex v of D, if the unavoidability number of D is nD and that of D
+      minus v is nDv, then nD <= C * nDv. The unavoidability number of a digraph is the least N
+      such that every tournament on N vertices contains it as a subdigraph.
+    Definitions: [unavoidable D N] - every tournament on exactly N vertices contains D via an
+      injective arc-preserving map (this file); [unvd D N] - D is N-unavoidable and no smaller
+      value is (this file); [contains_subdigraph] (this file); [is_tournament]
+      (conjectures/heroes.v); [del_vertex v] (core/digraph.v); [acyclicb]
+      (conjectures/dichromatic.v).
+    Notes: The unavoidability number is a RELATION rather than a total function, so the bound is
+      quantified over the values nD and nDv it pins down; this is vacuous for digraphs whose
+      unavoidability number is not pinned. The guard 1 < #|D| keeps both sides meaningful,
+      deleting a vertex from a one-vertex digraph leaving the empty digraph. *)
 Definition conj_9 : Prop :=
   exists C : nat,
     forall (D : diGraphType) (v : D),
@@ -101,14 +111,21 @@ Definition conj_9 : Prop :=
         unvd D nD -> unvd (del_vertex v) nDv ->
         (nD <= C * nDv)%N.
 
-(** Problem 6 (arXiv:2410.23566): for every rational [alpha] (≥ 0; a rational bound,
-    NOT reals), there is a polynomial bound — given here as a [polynomial] over the
-    rationals together with a degree witness, equivalently a [nat -> nat] dominated by
-    some [n ↦ a·nᵈ + b] — such that [unvd(D) ≤ P(|V(D)|)] for every digraph [D] of
-    maximum average degree at most [alpha]. We encode "polynomial" concretely as
-    coefficients [a, d, b] giving the bound [a·|V(D)|^d + b], which is faithful (a
-    universally-quantified existence of a genuine polynomial bound) and avoids an
-    abstract polynomial type. The guard [0 < #|D|] keeps [unvd] meaningful. *)
+(** Corpus row: arxiv:2410.23566#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2410.23566__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2410.23566__00.json
+    English statement: (Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud 2024, Blow-ups and extensions of trees in tournaments, arXiv:2410.23566, Problem 6)
+      For every rational alpha there are naturals a, d and b such that every nonempty finite
+      digraph D whose maximum average degree is at most alpha has unavoidability number at most
+      a * #|D| ^ d + b.
+    Definitions: [unvd D N] and [unavoidable D N] (this file); [mad D] - the maximum over
+      nonempty vertex sets of twice the number of arcs inside the set divided by its size, as a
+      rational (this file); [density] and [narcs_in] (this file).
+    Notes: The polynomial of the source is encoded concretely by coefficients a, d, b giving the
+      bound a * n ^ d + b, which is a genuine polynomial bound and avoids an abstract polynomial
+      type. The bound alpha is a rational, not a real; the source says positive real alpha, and
+      every real bound can be replaced by a rational one above it, so the two readings agree.
+      The unavoidability number appears relationally, as in [conj_9]. *)
 Definition prob_6 : Prop :=
   forall alpha : rat,
     exists a d b : nat,

@@ -32,8 +32,25 @@ Definition x185_widespread (H : mgraph) : Prop :=
 
 (** ** X185 statements *****************************************************)
 
-(** Scott-Seymour Conjecture 1.8: every loopless multigraph is widespread.  The
-    multigraph target is represented through its line graph, with widespreadness
-    stated as the usual large-chromatic induced-subdivision forcing property. *)
+(** Corpus row: arxiv:1701.05597#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1701.05597__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1701.05597__00.json
+    English statement: (Scott and Seymour 2019, Conjecture 1.8, arXiv:1701.05597)
+      Every loopless multigraph H is widespread: for all nu and ell there is a c such that every
+      finite simple graph G with clique number at most nu and chromatic number greater than c
+      contains a long subdivision of H, realised here as a branch map on the vertices of the LINE
+      GRAPH of H with all edges subdivided at least ell times.
+    Definitions: [x185_widespread H] - the forcing property just described (this file);
+      [x185_contains_induced_long_subdivision G H ell] - an injective branch map from the vertices
+      of H into G together with, for each edge of H, a path with at least ell internal vertices
+      avoiding the other branch vertices (this file); [line_graph H] (GTBase base/theories/base.v);
+      [loopless] (base.v).
+    Notes: KNOWN UNFAITHFUL ENCODING, corpus leg blocked. The faithfulness audit of 2026-07-17,
+      meta/BLOCKED_RETARGETING_AUDIT.md and the row's verification_note, found the WRONG TARGET
+      OBJECT: widespreadness of a multigraph H is about induced subdivisions of H itself, whose
+      edges become internally disjoint paths, whereas the encoding subdivides the LINE GRAPH of H, a
+      different graph. The "induced" requirement is also absent, since the branch paths are not
+      required to be chordless nor internally disjoint from each other. The body is left untouched
+      here, WP4 changes comments only. *)
 Definition every_multigraph_widespread_statement : Prop :=
   forall H : mgraph, loopless H -> x185_widespread H.

@@ -55,12 +55,24 @@ Definition x122_inv_eq (D : diGraphType) (k : nat) : Prop :=
 
 (** ** X122 statements ******************************************************)
 
-(** Bang-Jensen–da Silva–Havet "Dijoin conjecture": for oriented graphs [L] and
-    [R], inv(L -> R) = inv(L) + inv(R).  Encoded relationally: whenever
-    inv(L) = kL and inv(R) = kR (each pinned uniquely by [x122_inv_eq]), the
-    dijoin [L -> R] has inversion number kL + kR.  (The dijoin of two oriented
-    graphs is oriented — cross-arcs go only L -> R — so its inversion number is
-    well-defined, i.e. [x122_inv_eq (x122_dijoin L R)] is satisfiable.) *)
+(** Corpus row: studies:std_dijoin_conjecture_bang_jensen_da_silva_havet
+    Site: none
+    Review: none
+    English statement: (Bang-Jensen, da Silva and Havet, Dijoin conjecture)
+      For all oriented graphs L and R and all naturals kL and kR, if the inversion number of L
+      is kL and the inversion number of R is kR, then the inversion number of the dijoin of L
+      and R is kL + kR. The dijoin is the disjoint union of L and R with every arc from the L
+      side to the R side added and no arc back. The inversion number is the least length of a
+      sequence of vertex subsets whose successive inversions (reversing every arc with both ends
+      in the subset) make the digraph acyclic.
+    Definitions: [x122_oriented D] - asymmetric arc relation, hence loopless (this file);
+      [x122_dijoin L R] - the dijoin construction on the sum type (this file); [x122_inv_eq D k]
+      - some length-k inversion sequence makes D acyclic and no shorter one does (this file);
+      [x92_inverts_to_acyclic] and [x92_after_inversions] (conjectures/X92.v).
+    Notes: The inversion number is expressed relationally rather than as a total function: the
+      statement quantifies over the values kL and kR pinned by [x122_inv_eq], which holds of
+      exactly one k whenever the digraph can be made acyclic at all, as every oriented graph
+      can. *)
 Definition dijoin_inversion_number_additive_statement : Prop :=
   forall (L R : diGraphType) (kL kR : nat),
     x122_oriented L -> x122_oriented R ->

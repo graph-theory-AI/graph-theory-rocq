@@ -51,7 +51,24 @@ Definition x157_polytime_colouring_or_none (k : nat) : Prop :=
 
 (** ** X157 statements *****************************************************)
 
-(** Question 1.7: for fixed k>=4, decide/find k-colourability on k-connected
-    graphs of maximal local connectivity k in polynomial time. *)
+(** Corpus row: arxiv:1505.01616#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1505.01616__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1505.01616__00.json
+    English statement: (Aboulker, Brettell, Havet, Marx and Trotignon 2016, Question 1.7, arXiv:1505.01616)
+      For every fixed k >= 4 there is a polynomial-time algorithm that, given a k-connected graph
+      whose maximal local connectivity is at most k, outputs either a proper k-colouring of it or
+      the answer that none exists.
+    Definitions: [x157_max_local_connectivity_at_most G k] - for any two distinct vertices, any
+      family of internally disjoint paths between them has at most k members (this file);
+      [x157_internally_disjoint_xy_paths x y m] - m paths from x to y whose internal vertex sets are
+      pairwise disjoint (this file); [x157_simple_xy_path] (this file);
+      [x157_output_k_colouring_or_none k G out] - the output is either the number 0 together with
+      the fact that chi(G) > k, or a list of naturals read modulo k that is a proper colouring (this
+      file); [x157_output_colour] and [x157_data_nth_nat] - decoding of the output data (this file);
+      [polytime_outputs_graph_on] (GTBase base/theories/complexity.v); [k_connected] (base.v).
+    Notes: The corpus row is a QUESTION; the Rocq body asserts the affirmative answer. The
+      algorithmic output is specified by a decoding relation on the program's output data, colours
+      being read modulo k, so the specification is axiom-free and finite. The row was retargeted in
+      2026-07-16 from a blocked placeholder, see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. *)
 Definition local_connectivity_k_colouring_polytime_statement : Prop :=
   forall k : nat, 4 <= k -> x157_polytime_colouring_or_none k.

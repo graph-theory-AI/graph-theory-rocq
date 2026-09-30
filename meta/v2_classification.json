@@ -1,5 +1,5 @@
 {
- "_README": "Committed classifier output for the v2 corpus (X0b). Produced by the v2-classify workflow (32 batch classifiers over all 1,024 non-alias rows + stratified blind re-verification + adjudication of 21 disputes; run wf_977d0681). Merged into the manifest by meta/build_v2_manifest.py — edit HERE (or re-run classification), then rebuild; never hand-edit the manifest. Buckets: B2 direct statement target, B3 statement-recovery needed, B4 vague/meta (parked), B5 out-of-scope non-graph (parked); b1_adjudication resolves the 40 accepted-OPG-match candidates (31 variant / 9 unrelated / 0 alias).",
+ "_README": "Committed classifier output for the v2 corpus (X0b). Produced by the v2-classify workflow (32 batch classifiers over all 1,024 non-alias rows + stratified blind re-verification + adjudication of 21 disputes; run wf_977d0681). Merged into the manifest by meta/build_v2_manifest.py — edit HERE (or re-run classification), then rebuild; never hand-edit the manifest. Buckets: B2 direct statement target, B3 statement-recovery needed, B4 vague/meta (parked), B5 out-of-scope non-graph (parked); b1_adjudication resolves the 40 accepted-OPG-match candidates (31 variant / 9 unrelated / 0 alias). WP5 triage pass 2026-09-23 (Claude Opus 5 subagent, session 01P75Y6ikkgDyzUzzoef316Z): the 136 arXiv rows that are implies/equivalent_to endpoints without a statement, the 6 new arXiv rows (2309.04460__01..03, 2308.15387__02..04) and axv_2310_04265_03 were re-triaged into author / blocked-in-wave / deferred; recovered statements (from the papers) are written into class_notes, wave assignment in meta/v2_wave_plan.json; second reading pending. bm_*/oth_* entries hand-classified 2026-09-23 by Claude Opus 5 subagent (session 01P75Y6ikkgDyzUzzoef316Z); second reading pending.",
  "rows": {
   "axv_0806_0178_00": {
    "slug": "axv_0806_0178_00",
@@ -31,7 +31,7 @@
    "formalizability": "needs-computation-model",
    "b1_adjudication": null,
    "class_notes": "Clean yes/no algorithmic question: polytime 4-colorability testing on a fixed surface.",
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null
   },
   "axv_1302_2158_00": {
@@ -317,7 +317,7 @@
    "formalizability": "needs-asymptotics",
    "b1_adjudication": null,
    "class_notes": "Precise O(|V|) claim but extension complexity of the spanning tree polytope needs real polyhedral machinery beyond graph vocabulary.",
-   "defer_reason": null,
+   "defer_reason": "Extension complexity of the spanning-tree polytope needs a real polyhedral/LP layer (no reals or polytopes in GTBase); the 2026-07-17 audit machine-confirmed the earlier finite-witness encoding vacuous (X167).",
    "duplicate_of_hint": null
   },
   "axv_1604_07976_01": {
@@ -328,7 +328,7 @@
    "formalizability": "needs-asymptotics",
    "b1_adjudication": null,
    "class_notes": "Minor-closed generalization of Conjecture 1 (axv_1604_07976_00); same polytope/reals machinery.",
-   "defer_reason": null,
+   "defer_reason": "Same polytope/extension-complexity layer as axv_1604_07976_00 (audit verdict X168: extension complexity not modelled at all).",
    "duplicate_of_hint": null
   },
   "axv_1605_00442_00": {
@@ -580,7 +580,7 @@
    "formalizability": "needs-primitive",
    "repo": "chromatic-theory",
    "b1_adjudication": null,
-   "class_notes": "'Forest of lanterns' is paper-local (Scott–Seymour) and not defined in the record; pervasiveness itself is defined inline.",
+   "class_notes": "RECOVERED from arXiv:1609.00314 (Chudnovsky-Scott-Seymour, 'Chandeliers and strings'): a LANTERN with pivot v is obtained from a tree T with at least two vertices by adding v adjacent to every leaf of T (and possibly to further vertices of T); a TREE OF LANTERNS is built by repeatedly identifying the pivot of a new lantern with a vertex of what is already built, and a FOREST OF LANTERNS is a graph all of whose components are trees of lanterns. H is PERVASIVE if for all nu, l >= 0 there is c such that every graph G with omega(G) <= nu and chi(G) > c has an induced subgraph isomorphic to an (>= l)-subdivision of H. The claim: every forest of lanterns is pervasive (in the ideal of all graphs). All notions are finite-graph notions, so the statement is authorable once lantern / forest-of-lanterns / (>= l)-subdivision are defined.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -822,7 +822,7 @@
    "formalizability": "needs-primitive",
    "repo": "chromatic-theory",
    "b1_adjudication": null,
-   "class_notes": "'Widespread' is a paper-local definition not reproduced in context_text (recovery flagged).",
+   "class_notes": "RECOVERED from arXiv:1701.05597 (Scott-Seymour, 'Induced subgraphs of graphs with large chromatic number VI. Banana trees'), Conjecture 1.8 'Every multigraph is widespread', where: a multigraph H is WIDESPREAD if for every subdivision J of H there is rho >= 0 such that every rho-bounded ideal of J-subdivision-free graphs is colourable (chi^rho(G) = max_v chi(N^rho[v]); an ideal is rho-bounded if chi^rho is bounded on it, colourable if chi is bounded on it). MODELLING CHOICE: the paper's own equivalent finite-graph form 1.10 is used instead of the ideal-quantified form -- 'for every graph J and every integer tau >= 0 there exists c such that every graph G with chi(G) > c either has an induced subgraph that is a subdivision of J, or satisfies chi^2(G) > tau' -- which avoids quantifying over classes.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -1131,7 +1131,7 @@
    "repo": "extremal-graph-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Precise question but the key notion 'k-nice family' is never defined in the record; recoverable from the paper.",
+   "class_notes": "RECOVERED from arXiv:1708.07369 (Aharoni-Alon-Amir-Haxell-Hefetz-Jiang-Kronenberg-Naor): R_k(F) is the least n such that every k-colouring of E(K_n) has a monochromatic copy of some member of F, and F is K-NICE if for every graph G with chi(G) = R_k(F) and every k-colouring of E(G) there is a monochromatic copy of some member of F. Question 1.1 (verbatim): 'Is it true that for any finite family of graphs F that contains at least one forest, there exists a constant k_0 = k_0(F) such that F is k-nice for all k >= k_0?' Existing blocked placeholder ramsey_nice_forest_family_eventual_statement is re-authored with the recovered definition.",
    "duplicate_of_hint": null
   },
   "axv_1708_07369_01": {
@@ -1142,7 +1142,7 @@
    "repo": "extremal-graph-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Weaker sibling of Question 1.1 in the same paper; 'k-nice' undefined in the record.",
+   "class_notes": "RECOVERED from arXiv:1708.07369: same k-nice definition as axv_1708_07369_00 (via R_k(F) and chi(G) = R_k(F)). Conjecture 1.5 (verbatim): 'Any finite family of graphs F that contains at least one forest is k-nice for infinitely many integers k' -- the weaker sibling of Question 1.1 (edge e160). MODELLING: 'infinitely many k' as forall k0, exists k >= k0. Existing blocked placeholder ramsey_nice_forest_family_infinite_statement is re-authored.",
    "duplicate_of_hint": null
   },
   "axv_1708_08486_00": {
@@ -1191,13 +1191,13 @@
   },
   "axv_1709_04036_01": {
    "slug": "axv_1709_04036_01",
-   "bucket": "B4",
+   "bucket": "B3",
    "topic": "planar-degeneracy",
    "formalizability": "needs-planarity",
-   "repo": null,
+   "repo": "chromatic-theory",
    "b1_adjudication": null,
-   "defer_reason": "Meta remark about strengthening the authors' own argument; the implicit 5/6 bound is anyway subsumed by the 7/8 conjecture recorded as axv_1709_04036_00.",
-   "class_notes": "If desired, the 5/6 bound could be extracted as a clean B2 weakening of Conjecture 1.1.",
+   "defer_reason": null,
+   "class_notes": "RECOVERED from arXiv:1709.04036 (Dvorak-Kelly): Conjecture 1.1 is 'Every triangle-free planar graph contains an induced 2-degenerate subgraph on at least 7/8 of its vertices' and Theorem 1.2 proves the 4/5 bound. The row records the authors' belief that their argument can be pushed to 5/6; as a self-contained proposition: every triangle-free planar graph G has an induced subgraph on at least 5|V(G)|/6 vertices that is 2-degenerate. MODELLING: 6*|W| >= 5*|V(G)| over nat; re-scoped from B4 to B3 because the record's text is a methodological remark whose mathematical content is exactly this weakening of Conjecture 1.1.",
    "duplicate_of_hint": "axv_1709_04036_00"
   },
   "axv_1709_04440_00": {
@@ -1218,7 +1218,7 @@
    "formalizability": "hard-structural",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'Classify which planar graphs have cop number i' is a grand characterization request, not a single proposition.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -1229,7 +1229,7 @@
    "formalizability": "hard-structural",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Classification request (outerplanar graphs by cop number), not a single proposition.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -1328,7 +1328,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Continuous pursuit-evasion game on Riemannian surfaces, not graph theory.",
+   "defer_reason": "Real/Riemannian geometry, out of scope (non-graph objects).",
    "class_notes": "Recorded as solved.",
    "duplicate_of_hint": null
   },
@@ -1361,7 +1361,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Supremum of cop numbers over Riemannian surfaces with injectivity-radius/area constraints; continuous geometry, not graph theory.",
+   "defer_reason": "Real/Riemannian geometry, out of scope (non-graph objects).",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -1395,7 +1395,7 @@
    "repo": "chromatic-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Needs separation choosability ch_sep as a primitive (established list-coloring-with-separation notion, definable finitely).",
+   "class_notes": "Esperet-Kang-Thomasse Conjecture 1.3: separation choosability is unbounded on graphs of large minimum degree, i.e. there is x1(d) -> infinity with ch_sep(G) >= x1(d) for every G of minimum degree d. Modelling: 'x1(d) -> infinity' as forall k, exists d, forall G with min degree >= d, ch_sep(G) >= k. Existing blocked placeholder separation_choosability_min_degree_unbounded_statement is re-authored.",
    "duplicate_of_hint": null
   },
   "axv_1802_03727_01": {
@@ -1516,7 +1516,7 @@
    "formalizability": "needs-computation-model",
    "b1_adjudication": null,
    "duplicate_of_hint": null,
-   "defer_reason": "'determine the complexity' asks for a classification, not a yes/no proposition",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": null
   },
   "axv_1803_05396_01": {
@@ -1692,7 +1692,7 @@
    "formalizability": "needs-asymptotics",
    "b1_adjudication": null,
    "duplicate_of_hint": null,
-   "defer_reason": null,
+   "defer_reason": "Online random Ramsey game: Painter colours each edge with probability p, plus 2^{(1+o(1))cn} asymptotics; needs a probability layer.",
    "class_notes": "Online random Ramsey game r~(m,n;p) is only sketched in context; game semantics plus (1+o(1)) asymptotics required."
   },
   "axv_1806_09726_01": {
@@ -1703,7 +1703,7 @@
    "formalizability": "needs-asymptotics",
    "b1_adjudication": null,
    "duplicate_of_hint": null,
-   "defer_reason": null,
+   "defer_reason": "Subgraph Query Game on G(Z,p): probabilistic query model, and the record states the exponent formula is garbled in PDF extraction.",
    "class_notes": "Record explicitly says the case formula for c_m is garbled in PDF extraction; query-game model also paper-local."
   },
   "axv_1806_09726_02": {
@@ -1725,7 +1725,7 @@
    "formalizability": "needs-computation-model",
    "b1_adjudication": null,
    "duplicate_of_hint": "axv_1803_05396_00",
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Clean yes/no form of the same open problem as axv_1803_05396_00 (3-coloring P_t-free in P for every t)."
   },
   "axv_1807_04969_00": {
@@ -1825,7 +1825,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "References Conjecture 1.4 without restating it; special case H=K3 of axv_1810_00058_00."
+   "class_notes": "RECOVERED from arXiv:1810.00058 (Chudnovsky-Fox-Scott-Seymour-Spirkl), Conjecture 1.4: 'For every graph H there exists eps > 0 such that in every H-free eps-bounded graph G with |G| > 1 there is an anticomplete (eps|G|^eps, eps|G|)-pair', where G is EPS-BOUNDED if |N[v]| < eps|G| for every v, and (A,B) is an (x,y)-PAIR if A and B are disjoint with |A| >= x and |B| >= y. This row is the open case H = K_3 of that conjecture. MODELLING: eps = 1/q with q : nat clears the real exponent (|G|^eps becomes s^q >= |G|)."
   },
   "axv_1810_00058_02": {
    "slug": "axv_1810_00058_02",
@@ -1836,7 +1836,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "'c-sparse pair' and Conjecture 3.3 are paper-local and not defined in the record."
+   "class_notes": "RECOVERED from arXiv:1810.00058, Conjecture 3.4: 'For every graph H there exist eps, s > 0 such that for every H-free eps-bounded graph G with |G| > 1, and all c with 0 <= c <= 1, there is a c-sparse (eps c^s |G|, eps|G|)-pair in G', where (A,B) is C-SPARSE if A and B are disjoint and |E(A,B)| <= c|A||B|. Implications recorded upstream: 3.3 => 3.4 => 1.4. MODELLING: eps rational (1/q), s a nat exponent, c rational in [0,1]."
   },
   "axv_1810_00065_00": {
    "slug": "axv_1810_00065_00",
@@ -1891,7 +1891,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Clean yes/no boundedness question; needs queue-number and layered-treewidth primitives."
+   "class_notes": "Dujmovic-Eppstein-Joret-Morin-Wood: do graphs of bounded layered treewidth have bounded queue-number? Modelling: exists f, forall k G, layered treewidth of G <= k implies qn(G) <= f k."
   },
   "axv_1811_08750_00": {
    "slug": "axv_1811_08750_00",
@@ -1933,7 +1933,7 @@
    "formalizability": "needs-primitive",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'Determine for each of the five remaining pairs' — the pairs are not listed in the record and it is a classification task, not one proposition.",
+   "defer_reason": "The five remaining (H1,H2) pairs are not listed in the record, so there is no statable proposition; also a determine-the-status task.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -1966,7 +1966,7 @@
    "formalizability": "needs-computation-model",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Record is a decision-problem definition (instance/question), not a proposition; the associated conjecture is the separate row axv_1812_02420_01.",
+   "defer_reason": "Statement of a decision problem (instance/question), not a proposition; the companion NP-completeness claim needs the computation model.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -1977,7 +1977,7 @@
    "formalizability": "needs-computation-model",
    "repo": "homomorphism-theory",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null,
    "class_notes": "NP-completeness dichotomy claim, but 'circular homomorphism' is paper-local and not defined in the record."
   },
@@ -2056,7 +2056,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Three-part existence-of-bounding-functions conjunction; needs a hat-guessing-number primitive (standard game definition)."
+   "class_notes": "Alon-Ben-Eliezer-Shangguan-Tamo Problem 1.4: existence of f1 (HG(G) <= f1(Delta)), f2 (HG(G) <= f2(d) for d-degenerate G) and f3 (HG(G) >= f3(delta) with f3 -> infinity). Modelling: the hat guessing number is the value of a finite perfect-information game, so it is definable as a bounded existential over guessing strategies."
   },
   "axv_1812_09752_01": {
    "slug": "axv_1812_09752_01",
@@ -2111,7 +2111,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Two-valued dichotomy question; list Ramsey number R_ell not defined in the record; equivalent to the List Colouring Conjecture for even cliques."
+   "class_notes": "Alon-Bucic-Kalvari-Kuperwasser-Szabo: the value of the list Ramsey number R_ell(K_{1,2},k) for odd k (k+1 or k+2). Modelling: the record's context states this case is EQUIVALENT to the List Colouring Conjecture for cliques of even order, so the Rocq statement is the determinate form chi'_ell(K_n) = chi'(K_n) = n-1 for every even n >= 2; the equivalence with R_ell is recorded as a modelling choice in the doc block."
   },
   "axv_1902_07018_01": {
    "slug": "axv_1902_07018_01",
@@ -2263,7 +2263,7 @@
    "repo": "graph-theory-misc",
    "formalizability": "needs-computation-model",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null,
    "class_notes": "Clean yes/no poly-time detection question for induced st-path of excess length three."
   },
@@ -2340,7 +2340,7 @@
    "repo": null,
    "formalizability": "needs-computation-model",
    "b1_adjudication": null,
-   "defer_reason": "'Combinatorial algorithm' (not ellipsoid-based) is an informal notion; not a precise proposition.",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": "axv_1903_04761_00",
    "class_notes": "Restates the combinatorial-MIS-on-perfect-graphs open problem also recorded at axv_1903_04761_00."
   },
@@ -2505,7 +2505,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "The IP half is informal; the formalizable core is: stable set is polynomial on graphs with odd cycle packing number <= k for each fixed k.",
    "duplicate_of_hint": null
   },
@@ -2516,7 +2516,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Clean yes/no: drop the genus bound from Theorem 2 while keeping ocp fixed.",
    "duplicate_of_hint": null
   },
@@ -2549,7 +2549,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Cake-cutting / disproportionate division of the interval; measure partitioning, not graph theory.",
+   "defer_reason": "Fair division (measures on the circle), not a graph statement.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -2560,7 +2560,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Topological measure-partitioning statement on non-atomic measures on S^1; not graph/hypergraph theory.",
+   "defer_reason": "Fair division (measures on the circle), not a graph statement.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -2571,7 +2571,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Full P-vs-NP-complete dichotomy for MIS in H-free graphs; 'only if' side implicitly conditioned on P != NP.",
    "duplicate_of_hint": null
   },
@@ -2593,7 +2593,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "P(t,t,t,t) = 4-vertex path with clique substitutions; gloss in context suffices to recover the definition.",
    "duplicate_of_hint": null
   },
@@ -2604,7 +2604,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Generalization of Conjecture 1 (axv_1909_08426_02) to clique-substituted paths of arbitrary length.",
    "duplicate_of_hint": null
   },
@@ -2637,7 +2637,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Symmetric intersecting families of vectors — set systems, out of graph scope; also hedged ('seems possible').",
+   "defer_reason": "Set systems of vectors in [k]^n with real exponents; not a plain hypergraph statement.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -2648,7 +2648,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Precise bound but about symmetric intersecting families in [k]^n — set systems, not graph/hypergraph theory.",
+   "defer_reason": "Set systems of vectors in [k]^n with real exponents; not a plain hypergraph statement.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -2681,7 +2681,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Arithmetic removal lemmas over finite fields / abelian groups — additive combinatorics; also an 'extend the result' meta request.",
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -2692,7 +2692,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Additive combinatorics (removal for arbitrary abelian groups); authors themselves decline a precise formulation.",
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -2726,7 +2726,7 @@
    "repo": "extremal-graph-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Erdos-Hajnal for graphs of bounded VC-dimension; VC-dimension of the neighborhood set system is a buildable finite primitive; marked solved.",
+   "class_notes": "Fox-Pach-Suk Conjecture 4.1: for d >= 2 there is eps(d) > 0 such that every n-vertex graph of VC-dimension at most d has a clique or a stable set of size n^{eps(d)}. Modelling: eps = 1/q with q : nat, so the conclusion is (clique or stable set size)^q >= n; VC-dimension of the neighbourhood set system is a finite primitive.",
    "duplicate_of_hint": null
   },
   "axv_1912_07205_00": {
@@ -2802,7 +2802,7 @@
    "formalizability": "needs-computation-model",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'The complexity ... is not known' — determine-the-complexity meta statement rather than a fixed yes/no proposition.",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Could be recast as 'MIS is in P on even-hole-free graphs?' but the record does not commit to a polarity.",
    "duplicate_of_hint": null
   },
@@ -2870,7 +2870,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Cliquewidth is a buildable but nonstandard primitive; S_{1,2,3} is standard subdivided-claw vocabulary."
+   "class_notes": "Pilipczuk-Sintiari-Thomasse-Trotignon: do (triangle, S_{1,2,3})-free graphs have bounded clique-width? Modelling: clique-width via k-expressions over labelled graphs."
   },
   "axv_2001_01607_03": {
    "slug": "axv_2001_01607_03",
@@ -2890,7 +2890,7 @@
    "formalizability": "needs-computation-model",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'Determine the computational complexity' over a family of H is not a single proposition.",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -2901,7 +2901,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null,
    "class_notes": "Clean yes/no FPT question (conjunction of two problems); half-graph H_{t,t} is standard vocabulary."
   },
@@ -2912,7 +2912,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null,
    "class_notes": "Solved yes/no FPT question on K_{t,t}-free graphs."
   },
@@ -2978,7 +2978,7 @@
    "formalizability": "hard-structural",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'Obtain a full characterization' is a characterization goal, not a proposition; the concrete version is Conjecture 6 (next row).",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "duplicate_of_hint": "axv_2002_00496_02",
    "class_notes": null
   },
@@ -2991,7 +2991,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Precise iff, but Kelly's construction and poset-dimension cover-graph machinery are not defined in the record."
+   "class_notes": "RECOVERED from arXiv:2002.00496 (Huynh-Joret-Micek-Seweryn-Wollan): a graph H is UNAVOIDABLE if the cover graph of every poset of large enough dimension contains H as a minor. Conjecture 6 (verbatim): 'A graph H is unavoidable if and only if H is a minor of some graph from Kelly's construction.' MODELLING CHOICE: the paper does NOT give an element-level definition of Kelly's construction (it defers to a figure), but it supplies an equivalent graph-theoretic reformulation that the Rocq statement should use -- 'H is unavoidable if and only if H is a minor of some graph obtained by gluing copies of K_4 along edges in a path-like way, and subdividing all horizontal edges of the K_4s once'. The 'only if' direction is known; the conjectured content is the 'if' direction."
   },
   "axv_2002_05383_00": {
    "slug": "axv_2002_05383_00",
@@ -3033,7 +3033,7 @@
    "formalizability": "needs-computation-model",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'Design a combinatorial algorithm' is a task; 'combinatorial' has no formal meaning.",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -3129,12 +3129,12 @@
    "slug": "axv_2004_07457_01",
    "bucket": "B2",
    "topic": "list-coloring",
-   "formalizability": "bounded",
+   "formalizability": "needs-asymptotics",
    "repo": "chromatic-theory",
    "b1_adjudication": "variant",
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Asymmetric strengthening/analogue of the Alon–Krivelevich OPG conjecture; (k_A,k_B)-choosability is defined in the sibling row's context and is a routine list-coloring wrapper."
+   "class_notes": "Alon-Cambie-Kang Conjecture 7: three sufficient conditions (i)-(iii) on (Delta_A,Delta_B,k_A,k_B) each force every bipartite graph with part-wise maximum degrees Delta_A, Delta_B to be (k_A,k_B)-choosable. Modelling: real eps and C become rationals (eps = 1/q), real powers become the rearranged nat inequalities k_A^q >= Delta_A, and log Delta becomes trunc_log 2."
   },
   "axv_2004_10180_00": {
    "slug": "axv_2004_10180_00",
@@ -3253,7 +3253,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null,
    "class_notes": "Clean yes/no: poly-time detection of an induced uv-path of length >= d(u,v)+k for fixed k."
   },
@@ -3264,7 +3264,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Minimal complements / maximal supplements in abelian groups — additive combinatorics, not graph theory.",
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -3275,7 +3275,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Additive combinatorics in finite groups, not graph theory; also a vague 'how much does it depend' question.",
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -3321,7 +3321,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Small conjecture (disproved): 'small' defined in context (at most n! c^n labeled graphs); quantifies over hereditary classes, twin-width primitive required."
+   "class_notes": "RECOVERED from arXiv:2006.09877 (Bonnet-Geniet-Kim-Thomasse-Watrigant, 'Twin-width II'): a class C is SMALL if there is a constant c such that C contains at most n! c^n graphs on the labelled vertex set [n], for every n (counted up to equality, NOT up to isomorphism); twin-width is the least d admitting a d-contraction-sequence of trigraphs of red degree at most d. The SMALL CONJECTURE (verbatim): 'Every small hereditary class has bounded twin-width' -- the converse of the paper's theorem that bounded twin-width implies small. The hereditary hypothesis is essential (dropping it gives a trivial counterexample). Recorded upstream as disproved."
   },
   "axv_2006_09877_01": {
    "slug": "axv_2006_09877_01",
@@ -3332,7 +3332,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": "axv_2004_14789_00",
-   "class_notes": "Same proposition as the Twin-width I remark on polynomial expansion vs bounded twin-width."
+   "class_notes": "Bonnet-Geniet-Kim-Thomasse-Watrigant: do classes of polynomial expansion have bounded twin-width? Modelling: polynomial expansion needs a shallow-minor / greatest reduced average density primitive, which the 2026-07-17 audit noted is absent from GTBase."
   },
   "axv_2007_14161_00": {
    "slug": "axv_2007_14161_00",
@@ -3352,7 +3352,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null,
    "class_notes": "Fine-grained lower-bound conjecture (no truly subquadratic map-isomorphism algorithm); objects are combinatorial maps."
   },
@@ -3363,7 +3363,7 @@
    "formalizability": "needs-computation-model",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Task to 'prove a conditional truly superlinear lower bound for any of the mentioned problems' — meta, hypothesis unspecified.",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -3409,7 +3409,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Induced grid theorem for bounded degree: needs wall and line-graph-of-wall primitives; solved (Korhonen)."
+   "class_notes": "Aboulker-Adler-Kim-Sintiari-Trotignon Conjecture 3: for every d there is f_d with every graph of maximum degree <= d and treewidth >= f_d(k) containing an induced (k x k)-wall or the line graph of a (k x k)-wall. Modelling: an induced grid theorem for bounded degree; treewidth via GraphTheory.treewidth sdecomp."
   },
   "axv_2008_09692_00": {
    "slug": "axv_2008_09692_00",
@@ -3429,7 +3429,7 @@
    "formalizability": "needs-planarity",
    "repo": "topological-graph-theory",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "Crossing number is not modelled by GTBase.surface (rotation systems give embeddings, not crossings) and needs a plane-drawings layer; the only corpus edge (e128) goes to opg:the_crossing_number_of_the_complete_graph, whose own statement is only 'partial', so no same-paper companion could be authored alongside it.",
    "duplicate_of_hint": null,
    "class_notes": "H(n) is the standard Harary-Hill value for cr(K_n); M_{n,t} = K_n minus a size-t matching is defined in context."
   },
@@ -3486,7 +3486,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Fractional vertex-arboricity of planar graphs at most 2; fractional relaxation of Albertson-Berman, rational-valued parameter is fine."
+   "class_notes": "Bonamy-Kardos-Kelly-Postle Conjecture 1.1: every planar graph has fractional vertex-arboricity at most two. Modelling: va_f <= 2 via the b-fold form (for every b there is a family of 2b induced forests covering every vertex b times), keeping everything over nat."
   },
   "axv_2009_13319_00": {
    "slug": "axv_2009_13319_00",
@@ -3495,7 +3495,7 @@
    "formalizability": "hard-structural",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'What are the finite sets F ...' — a characterization program (heroic sets), not a single proposition.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -3528,7 +3528,7 @@
    "formalizability": "hard-structural",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Open-ended characterization request ('characterize all minimal heroic families'), not a single proposition.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "class_notes": "Heroic-set vocabulary is precise but the target is a grand classification.",
    "duplicate_of_hint": null
   },
@@ -3627,7 +3627,7 @@
    "formalizability": "needs-computation-model",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'What is the complexity of Sigma-k-Dicolourability for k in {4,5}?' — open-ended complexity determination.",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -3693,7 +3693,7 @@
    "formalizability": "bounded",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'How many edges can we cover by k neighborhoods?' — open-ended quantity question, not a proposition.",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -3704,7 +3704,7 @@
    "formalizability": "needs-asymptotics",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'What is the exact or asymptotic value of m(n,k)?' — value-determination request.",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -3716,7 +3716,7 @@
    "repo": "topological-graph-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Needs the 2-cell embedding/rotation-system layer plus expectation over uniform random embeddings and an O(n) wrapper; solved (right-polarity target).",
+   "class_notes": "Campion Loth-Halasz-Masarik-Mohar-Samal Conjecture 1: for every n-vertex simple graph the expected number of faces of a uniformly random orientable embedding is O(n). Same finite-average modelling as axv_2202_07746_00 (edge e125, which it is implied by).",
    "duplicate_of_hint": null
   },
   "axv_2103_05998_00": {
@@ -3748,7 +3748,7 @@
    "formalizability": "needs-computation-model",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Compound meta-question (two questions: constant-factor approx in bounded expansion, and PTASes in treewidth-fragile classes) over FO-expressible problem families.",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Its concrete test case (weighted VC PTAS) reappears in axv_2105_01780_00.",
    "duplicate_of_hint": null
   },
@@ -3847,7 +3847,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Concrete yes/no core: does weighted Minimum Vertex Cover admit a PTAS on fractionally treewidth-fragile classes; same test case is cited in context of axv_2103_08698_01.",
    "duplicate_of_hint": null
   },
@@ -3858,7 +3858,7 @@
    "formalizability": "needs-computation-model",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Describes the remaining open family of cases in a complexity dichotomy ('remains open when...'), not a single proposition.",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Status solved — the dichotomy gap was later closed.",
    "duplicate_of_hint": null
   },
@@ -3980,7 +3980,7 @@
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Needs hat guessing number HG(G) as a new finite game-theoretic primitive",
+   "class_notes": "Alon-Chizewer: there is f with HG(G) <= f(d) for every d-degenerate graph G (part (ii) of Problem 1.4 of the companion paper, edge e061).",
    "duplicate_of_hint": null
   },
   "axv_2107_05995_01": {
@@ -4101,7 +4101,7 @@
    "repo": "minor-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Needs walls W_{txt}, subdivisions, line graphs and treewidth; all standard structural vocabulary",
+   "class_notes": "Abrishami-Chudnovsky-Hajebi-Spirkl Conjecture 1.10: excluding K_t, K_{t,t}, subdivisions of the t x t wall and line graphs of such subdivisions as induced subgraphs forces tw(G) <= c(t) log |V(G)|.",
    "duplicate_of_hint": null
   },
   "axv_2109_09205_00": {
@@ -4464,7 +4464,7 @@
    "repo": "topological-graph-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Expected face count over uniformly random rotation systems: finite probability plus embedding layer.",
+   "class_notes": "Campion Loth-Mohar Conjecture 4: for every simple graph G of order n the expected number of faces of a uniformly random (orientable) embedding is at most n/3 + 1. Modelling: rotation systems of a finite graph form a FINITE set, so E[F] is the finite rational average (sum over rotation systems of the face count) / (product over v of (deg(v)-1)!) — no probability layer is needed.",
    "duplicate_of_hint": null
   },
   "axv_2202_09118_00": {
@@ -4530,7 +4530,7 @@
    "repo": "chromatic-theory",
    "b1_adjudication": "variant",
    "defer_reason": null,
-   "class_notes": "Polynomial strengthening of Gyarfas-Sumner (the matched OPG problem); restates axv_2202_05557_00.",
+   "class_notes": "Chudnovsky-Scott-Seymour-Spirkl informal conjecture: every forest H is 'good', i.e. the class of H-free graphs is polynomially chi-bounded. Modelling: 'polynomially chi-bounded' is exists c d, forall G H-free, chi(G) <= c * omega(G)^d.",
    "duplicate_of_hint": "axv_2202_05557_00"
   },
   "axv_2202_10412_01": {
@@ -4563,7 +4563,7 @@
    "repo": "digraph-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "'Hero' (bounded dichromatic number in H-free members) and Delta(1,2,2) are standard in the hero literature; disproved, so right-polarity target.",
+   "class_notes": "Aboulker-Aubian-Charbit Question 1.4: is Delta(1,2,2) a hero in oriented complete multipartite graphs?",
    "duplicate_of_hint": null
   },
   "axv_2202_13306_01": {
@@ -4619,7 +4619,7 @@
    "b1_adjudication": null,
    "duplicate_of_hint": null,
    "defer_reason": null,
-   "class_notes": "Needs theta/prism/even-wheel induced-subgraph primitives (standard in even-hole literature, buildable); generalizes Sintiari-Trotignon Conjecture 1.5."
+   "class_notes": "Abrishami-Chudnovsky-Hajebi-Spirkl Conjecture 1.6: for every t the class of (C_4, diamond, theta, prism, even wheel, K_t)-free graphs has bounded treewidth."
   },
   "axv_2204_00722_00": {
    "slug": "axv_2204_00722_00",
@@ -4805,7 +4805,7 @@
    "formalizability": "needs-computation-model",
    "b1_adjudication": null,
    "duplicate_of_hint": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "O_k-free = induced cycle packing number < k, adequately determined by title/context; poly-time MIS claim needs the computation model."
   },
   "axv_2206_00594_01": {
@@ -4827,7 +4827,7 @@
    "formalizability": "needs-computation-model",
    "b1_adjudication": null,
    "duplicate_of_hint": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Hedged ('could be tractable') but a single yes/no: MIS polynomial on bounded induced-odd-cycle-packing graphs; generalizes axv_2206_00594_00."
   },
   "axv_2206_10733_00": {
@@ -4883,7 +4883,7 @@
    "b1_adjudication": null,
    "duplicate_of_hint": null,
    "defer_reason": null,
-   "class_notes": "Needs a hypergraph-minor primitive (paper's notion of K_t minor in hypergraphs); given that, a clean h(t)=ceil(3(t-1)/2) bound."
+   "class_notes": "RECOVERED from arXiv:2206.13635 (Steiner, 'Coloring hypergraphs with excluded minors'): hypergraphs are loopless (every hyperedge has size >= 2); W is independent if H[W] has no hyperedge and chi(H) is the least number of independent classes covering V(H). H_2 is a MINOR of H_1 if it is obtained by taking subhypergraphs and contracting hyperedges (identifying all vertices of a hyperedge); equivalently, an H_2-minor model is a family of disjoint connected branch sets (B_h) such that every hyperedge f of H_2 is witnessed by a hyperedge e of H_1 with e contained in the union of the B_h (h in f) and meeting each of them. Conjecture 2 (verbatim): 'For every integer t >= 2 we have h(t) = ceil(3(t-1)/2). In other words, if a hypergraph H does not contain K_t as a minor, then chi(H) <= ceil(3(t-1)/2).' The lower bound is proved in the paper, so the open half is the upper bound."
   },
   "axv_2206_13635_01": {
    "slug": "axv_2206_13635_01",
@@ -4894,7 +4894,7 @@
    "b1_adjudication": null,
    "duplicate_of_hint": null,
    "defer_reason": null,
-   "class_notes": "Smallest open case (t=3) of axv_2206_13635_00; same hypergraph-minor primitive needed."
+   "class_notes": "RECOVERED from arXiv:2206.13635: same hypergraph-minor notion as axv_2206_13635_00 (K_3-minor = three disjoint connected branch sets pairwise joined by a hyperedge inside their union). Problem 1 (verbatim): 'Is every K_3-minor-free hypergraph 3-colorable?' -- the smallest open case (t = 3) of Conjecture 2, where the best known upper bound is 4."
   },
   "axv_2207_07775_00": {
    "slug": "axv_2207_07775_00",
@@ -4958,7 +4958,7 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "Lazy-transposition shuffling networks for counters: permutation/sorting-network combinatorics, not graph theory",
+   "defer_reason": "Permutation / sorting-network statement, not a graph statement.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -4980,31 +4980,31 @@
    "formalizability": "out-of-scope",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "2-uniformity networks of lazy transpositions: randomized sorting-network combinatorics, not graph theory",
+   "defer_reason": "Permutation / sorting-network statement, not a graph statement.",
    "duplicate_of_hint": null,
    "class_notes": "Otherwise a precise exact-value conjecture (2n-3)."
   },
   "axv_2208_06858_00": {
    "slug": "axv_2208_06858_00",
-   "bucket": "B5",
-   "topic": "set-systems",
-   "formalizability": "out-of-scope",
-   "repo": null,
+   "bucket": "B3",
+   "topic": "independent-sets",
+   "formalizability": "needs-asymptotics",
+   "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": "Levine hat-game success probability over intersecting families on {0,1}^n: set systems/probability without graphs",
+   "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Graph-theoretic equivalent appears as sibling row axv_2208_06858_02."
+   "class_notes": "BLOCKED IN WAVE: p_intersecting(t) is the supremum of a success probability over intersecting winning-set families on {0,1}^n in Levine's hat problem; it needs a probability layer over families of subsets of the cube. The equivalent GRAPH form, Conjecture 2.6 on the independence ratio of Cartesian powers of the Kneser graph (edge e150, equivalent_to), is authored in the same phase as axv_2208_06858_02."
   },
   "axv_2208_06858_01": {
    "slug": "axv_2208_06858_01",
-   "bucket": "B5",
-   "topic": "set-systems",
-   "formalizability": "out-of-scope",
-   "repo": null,
+   "bucket": "B3",
+   "topic": "independent-sets",
+   "formalizability": "needs-asymptotics",
+   "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": "Hat-game probability over balanced monotone families on {0,1}^n: set systems/Boolean functions, not graph theory",
+   "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": null
+   "class_notes": "BLOCKED IN WAVE: p_monotone(t) is the same success probability taken over all balanced monotone winning-set families on {0,1}^n; same missing probability layer as axv_2208_06858_00, and it implies that row (edge e149)."
   },
   "axv_2208_06858_02": {
    "slug": "axv_2208_06858_02",
@@ -5015,7 +5015,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": "axv_2208_06858_00",
-   "class_notes": "Independence ratio of Cartesian powers of Kneser graph K(n); context defines K(n), 'Hamming product' is the Cartesian product; double limit needs reals."
+   "class_notes": "Alon-Friedgut-Kalai-Kindler Conjecture 2.6: lim_{t->inf} lim_{n->inf} alpha-bar(K(n)^{box t}) = 0, where K(n) is the Kneser graph on {0,1}^n (x ~ y iff their supports are disjoint), box is the Cartesian product and alpha-bar the independence RATIO. Modelling: the double limit becomes forall eps = 1/q, exists t, exists n0, forall n >= n0, q * alpha(K(n)^{box t}) <= #|K(n)^{box t}| ; the ratio stays in nat form."
   },
   "axv_2208_06858_03": {
    "slug": "axv_2208_06858_03",
@@ -5026,7 +5026,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "alpha*(G) via 'optimal partition and positively-correlated random-subset distribution' is only sketched, not defined."
+   "class_notes": "BLOCKED IN WAVE: alpha*(G) is defined through an OPTIMAL PARTITION of V(G)^r together with a positively-correlated random-subset distribution with Bernoulli(1/2) marginals; that is a genuine correlated probability space, which GTBase has no layer for (the binomial special case is the companion row axv_2208_06858_04, authored in the same wave)."
   },
   "axv_2208_06858_04": {
    "slug": "axv_2208_06858_04",
@@ -5037,7 +5037,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Self-contained (binomial random subset, expected independence); minor ambiguity in 'maximal independent set contained in W' (should be maximum of G[W])."
+   "class_notes": "Alon-Friedgut-Kalai-Kindler Conjecture 2.9: there is a monotone non-decreasing eps** such that if alpha(G) = alpha*n and W is a uniformly random subset of V(G) then E_W[alpha(G[W])]/n <= alpha - eps**(alpha), for every alpha in (0,1/2). Modelling: the expectation over the 2^n subsets is the finite rational average (sum over W of alpha(G[W])) / 2^n, so no probability layer is needed; alpha is taken rational. Note the record's 'maximal independent set contained in W' is read as alpha(G[W]) (maximum), as the context intends."
   },
   "axv_2208_10074_00": {
    "slug": "axv_2208_10074_00",
@@ -5178,7 +5178,7 @@
    "formalizability": "needs-asymptotics",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'Provide a more accurate estimate' is an improve-the-bounds request",
+   "defer_reason": "'Provide a more accurate estimate' — improve-the-bounds meta task over G(n,p); also needs probability.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -5224,7 +5224,7 @@
    "b1_adjudication": "variant",
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Directed analogue of Sidorenko's conjecture; 'directed Sidorenko property' is paper-local and undefined in the record."
+   "class_notes": "RECOVERED from arXiv:2210.16971 (Fox-Himwich-Mani-Zhou): an oriented graph B has the DIRECTED SIDORENKO PROPERTY if t(B,G) >= t(K_2-vec,G)^{e(B)} for every oriented graph G, where t is the homomorphism density and K_2-vec is the single directed edge. The paper gives an equivalent COUNTING form: the number of labelled copies of B in G is at least ((e(G)/v(G)^2)^{e(B)} - o(1)) v(G)^{v(B)}. Conjecture 1.4 (verbatim): 'If B is a bipartite oriented graph with a homomorphism B -> K_2-vec, then B has the directed Sidorenko property.' MODELLING: the counting form keeps everything in nat (hom(B,G) * v(G)^{2e(B)} >= (2 e(G))^{e(B)} v(G)^{v(B)} style), avoiding graphons."
   },
   "axv_2210_16971_01": {
    "slug": "axv_2210_16971_01",
@@ -5235,7 +5235,7 @@
    "b1_adjudication": "variant",
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Directed analogue of the Skokan-Thoma forcing conjecture (Sidorenko-adjacent); 'directed forcing property' undefined here."
+   "class_notes": "RECOVERED from arXiv:2210.16971: an oriented graph B has the DIRECTED FORCING PROPERTY if, for every p in [0,1] and every sequence of oriented graphs G_n with t(K_2-vec, G_n) -> p/2 and t(B, W_{G_n}) -> (p/2)^{e(B)}, the sequence is p-quasirandom (quasirandomness defined by the cut norm of graphons). Conjecture 1.7 (verbatim): 'If B is an oriented graph with a homomorphism to an edge and whose underlying undirected graph has a cycle, then B has the directed forcing property.' BLOCKED in the wave: unlike the Sidorenko property, forcing is a limit/graphon statement with no known equivalent finite counting form, so no faithful finite encoding is available. BLOCKED IN WAVE: The directed FORCING property is a quasirandomness statement (a homomorphism-density equality forcing quasirandomness in the limit); it needs a graph-limit / real-density layer that GTBase does not have, whereas the Sidorenko property of the companion row axv_2210_16971_00 has an equivalent finite homomorphism-counting form."
   },
   "axv_2210_16971_02": {
    "slug": "axv_2210_16971_02",
@@ -5255,7 +5255,7 @@
    "formalizability": "needs-planarity",
    "repo": "topological-graph-theory",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "Needs a probability layer (random graphs G(n,p) / whp / expectation over an infinite family), out of scope for these waves.",
    "duplicate_of_hint": null,
    "class_notes": "Expected face count of a uniformly random rotation-system embedding of G(n,p); needs embedding layer plus (1+o(1)) asymptotics."
   },
@@ -5266,7 +5266,7 @@
    "formalizability": "needs-planarity",
    "repo": "topological-graph-theory",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "Needs a probability layer (random graphs G(n,p) / whp / expectation over an infinite family), out of scope for these waves.",
    "duplicate_of_hint": null,
    "class_notes": "Weaker O(log n) form implied by sibling Conjecture 1.13 (axv_2211_01032_00); needs embeddings + asymptotics."
   },
@@ -5311,7 +5311,7 @@
    "repo": "reconstruction-theory",
    "b1_adjudication": null,
    "class_notes": "Precise existential threshold statement (whp reconstructibility of G(n,p) from r-neighbourhoods); open cases r=1,2.",
-   "defer_reason": null,
+   "defer_reason": "Needs a probability layer (random graphs G(n,p) / whp / expectation over an infinite family), out of scope for these waves.",
    "duplicate_of_hint": null
   },
   "axv_2211_14218_01": {
@@ -5322,7 +5322,7 @@
    "repo": "reconstruction-theory",
    "b1_adjudication": null,
    "class_notes": "Statement text missing from record (explicit placeholder); underlying question is the exact threshold for r in {1,2}.",
-   "defer_reason": null,
+   "defer_reason": "Needs a probability layer (random graphs G(n,p) / whp / expectation over an infinite family), out of scope for these waves.",
    "duplicate_of_hint": null
   },
   "axv_2212_02737_00": {
@@ -5344,7 +5344,7 @@
    "repo": null,
    "b1_adjudication": null,
    "class_notes": "Also non-self-contained (points to an unstated conjecture in the paper's final section).",
-   "defer_reason": "Neighborly boxes in R^d is discrete geometry, not graph/hypergraph theory.",
+   "defer_reason": "Real/Riemannian geometry, out of scope (non-graph objects).",
    "duplicate_of_hint": null
   },
   "axv_2212_05133_01": {
@@ -5355,7 +5355,7 @@
    "repo": null,
    "b1_adjudication": null,
    "class_notes": "Clean limit-existence question but about the geometric quantity n(2,d) for neighborly boxes.",
-   "defer_reason": "Discrete geometry (neighborly boxes in R^d), out of graph-theory scope.",
+   "defer_reason": "Real/Riemannian geometry, out of scope (non-graph objects).",
    "duplicate_of_hint": null
   },
   "axv_2301_02020_00": {
@@ -5508,7 +5508,7 @@
    "formalizability": "needs-primitive",
    "repo": "packing-theory",
    "b1_adjudication": null,
-   "class_notes": "eta(G) (min size of a set hitting all maximum stable sets) is paper-local and never defined in the record.",
+   "class_notes": "RECOVERED from arXiv:2302.04986 (Hajebi-Li-Spirkl): a HITTING SET for G is X subset of V(G) meeting every maximum stable set (equivalently alpha(G - X) < alpha(G)), and eta(G) is the minimum size of a hitting set; a class C is ETA-BOUNDED if there is f with eta(G) <= f(omega(G)) for every G in C. Conjecture 1.8 (verbatim): 'For every forest H, there exists a function f : N -> N such that every H-free graph G satisfies eta(G) <= f(omega(G))' -- the eta-analogue of Gyarfas-Sumner.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -5519,7 +5519,7 @@
    "formalizability": "needs-primitive",
    "repo": "packing-theory",
    "b1_adjudication": null,
-   "class_notes": "'eta-bounded' undefined in record; otherwise a clean P_t-free class statement.",
+   "class_notes": "RECOVERED from arXiv:2302.04986: eta(G) = minimum size of a set meeting every maximum stable set of G; a class is ETA-BOUNDED if eta is bounded by a function of omega on it. Conjecture 1.13 (verbatim): 'For every integer t >= 6, the class of P_t-free graphs is eta-bounded.' (t <= 5 is Theorem 1.12 of the same paper.)",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -5552,7 +5552,7 @@
    "formalizability": "needs-primitive",
    "repo": "packing-theory",
    "b1_adjudication": null,
-   "class_notes": "eta-boundedness undefined in record; instance (union of two stars) of Conjecture 1.8 (axv_2302_04986_00).",
+   "class_notes": "RECOVERED from arXiv:2302.04986: eta(G) = minimum size of a set meeting every maximum stable set; ETA-BOUNDED as above. The open problem is the instance of Conjecture 1.8 for H = S_a u S_b, the disjoint union of two stars: is the class of (S_a u S_b)-free graphs eta-bounded for all a, b >= 1? The authors note the component-wise reduction available for chi-boundedness is not known for eta.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -5574,7 +5574,7 @@
    "formalizability": "needs-primitive",
    "repo": "chromatic-theory",
    "b1_adjudication": null,
-   "class_notes": "References internal statement 1.2 and the paper-local 'path-induced copy of a rooted tree', not defined in the record.",
+   "class_notes": "RECOVERED from arXiv:2302.08922 (Nguyen-Scott-Seymour, 'A note on the Gyarfas-Sumner conjecture'): phi is a PATH-INDUCED COPY of a rooted tree (T,r) in G if phi is an isomorphism from T onto a (not necessarily induced) subgraph of G and, for every path P of T with one end r, phi(P) is an INDUCED path of G. The paper's 1.2 says that for every rooted tree (T,r) and every t, graphs with no path-induced copy of (T,r) and no K_t have bounded chromatic number. The open question (prose, not a numbered statement): can 1.2 be strengthened to a POLYNOMIAL bound -- i.e. for every rooted tree (T,r) is there a polynomial f such that every graph with no path-induced copy of (T,r) and with clique number at most t has chi <= f(t)? MODELLING CHOICE: 'polynomial' as exists c d, chi <= c*t^d.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -5585,7 +5585,7 @@
    "formalizability": "bounded",
    "repo": "chromatic-theory",
    "b1_adjudication": null,
-   "class_notes": "Polynomial-chi-bounding-function version of Gyarfas-Sumner; standard vocabulary plus an exists-polynomial wrapper.",
+   "class_notes": "Nguyen-Scott-Seymour: the Gyarfas-Sumner conjecture holds with a chi-bounding function polynomial in the clique number, for every fixed tree T. Modelling: exists c d, forall t, forall T-free G with omega(G) <= t, chi(G) <= c*t^d.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -5624,12 +5624,12 @@
   },
   "axv_2303_11766_00": {
    "slug": "axv_2303_11766_00",
-   "bucket": "B2",
+   "bucket": "B3",
    "topic": "chi-boundedness",
    "formalizability": "bounded",
    "repo": "chromatic-theory",
    "b1_adjudication": null,
-   "class_notes": "'Multibounding' is fully defined in context_text, so B2 despite recovery flag; needs exists-polynomial wrapper.",
+   "class_notes": "RECOVERED from arXiv:2303.11766 (Nguyen-Scott-Seymour VIII), Conjecture 1.6 'Every forest is multibounding', where H is MULTIBOUNDING if for every d >= 1 there is a polynomial f such that every H-free graph containing no K_d(t) (complete d-partite graph with all parts of size t) as a SUBGRAPH satisfies chi(G) <= f(t), for all t >= 1. MODELLING: exists-polynomial as exists c e, chi <= c*t^e; K_d(t) is excluded as a subgraph, not an induced subgraph.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -5794,7 +5794,7 @@
    "formalizability": "needs-primitive",
    "repo": "minor-theory",
    "b1_adjudication": null,
-   "class_notes": "Needs tree-independence-number (tree-alpha) primitive; even hole/diamond are standard forbidden-subgraph vocabulary.",
+   "class_notes": "Same paper, Conjecture 1.6: the class of (even hole, diamond)-free graphs has bounded tree-independence number (tree-alpha).",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -5805,7 +5805,7 @@
    "formalizability": "needs-asymptotics",
    "repo": "minor-theory",
    "b1_adjudication": null,
-   "class_notes": "Solved: (even hole, K_t)-free graphs have treewidth O(log n).",
+   "class_notes": "Abrishami-Alecu-Chudnovsky-Hajebi-Spirkl et al. Conjecture 1.7: the class of (even hole, K_t)-free graphs has logarithmic treewidth, i.e. exists c, forall G in the class, tw(G) <= c * log|V(G)| + c.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -5838,7 +5838,7 @@
    "formalizability": "needs-primitive",
    "repo": "digraph-theory",
    "b1_adjudication": null,
-   "class_notes": "B3-vs-B2 resolved to B2: hero, chi-vec-finite and Delta(1,2,2) are standard vocabulary of the heroes-in-digraphs literature (Berger et al.), so the yes/no question is self-contained; still needs dichromatic/hero primitives, so not clean.",
+   "class_notes": "Carbonero-Koerts-Moore-Spirkl: is Delta(1,2,2) a hero in {K_1 + P_2-vec}-free digraphs, i.e. is {Delta(1,2,2), K_1 + P_2-vec} chi-vec-finite? Modelling: hero = the class of digraphs with the forbidden induced subdigraphs has bounded dichromatic number.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -5926,7 +5926,7 @@
    "formalizability": "needs-primitive",
    "repo": "hypergraph-theory",
    "b1_adjudication": null,
-   "class_notes": "Meyniel-type bound c(H)=O(sqrt(n/k)); needs cop-number game primitive on hypergraphs plus O() wrapper.",
+   "class_notes": "Erde-Kang-Lehner-Mohar-Schmid Conjecture 1.4: the cop number of every connected k-uniform hypergraph on n vertices is O(sqrt(n/k)) — a hypergraph analogue of Meyniel's conjecture. Modelling: the cops-and-robbers game on the incidence structure of a finite hypergraph is a finite perfect-information game, so 'c(H) <= k' is definable by a finite winning-strategy predicate; the O() is a single existential constant C with c(H)*c(H)*k <= C*C*n.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -6037,7 +6037,7 @@
    "repo": "chromatic-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Needs defective/clustered chromatic number of a class, odd minors, and connected tree-depth as primitives; all standard in this literature",
+   "class_notes": "Hickingbotham-Kang-Oum-Steiner-Wood Conjecture 2: for every graph H the defective and the clustered chromatic number of the class of odd-H-minor-free graphs both equal td-bar(H)-1. Modelling: the two class parameters must be quantified CLASS-UNIFORMLY (exists c, forall G in the class, ...), the collapse the 2026-07-17 audit found in X138/X194.",
    "duplicate_of_hint": null
   },
   "axv_2309_04385_00": {
@@ -6114,7 +6114,7 @@
    "repo": "digraph-theory",
    "b1_adjudication": null,
    "defer_reason": null,
-   "class_notes": "Statement truncated ('such that:' with the conditions missing)",
+   "class_notes": "Aboulker-Aubian-Charbit-Lopes Conjecture 3.14 (v2 numbering; 3.13 in v1): there is a function f such that every tournament T admits an ordering <* of V(T) with omega(T^{<*}) <= f(omega-vec(T)) and tww((T,<*)) <= f(tww(T)). PREVIOUS ENCODING WAS WRONG (it used f(omega-bar(T)) for the twin-width clause); the corrected reading is the one above, with the SAME f bounding both quantities. Modelling: omega(T^{<*}) is the clique number of the underlying graph of the backedge digraph of the ordering, omega-vec is the tournament clique number, tww((T,<*)) the twin-width of the ordered tournament.",
    "duplicate_of_hint": null
   },
   "axv_2310_04265_04": {
@@ -6289,7 +6289,7 @@
    "formalizability": "needs-computation-model",
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": "Precise converse of Holyer/Kaminski-Lozin: linear-forest H implies poly-time 3-Coloring on H-free graphs; needs P/NP layer",
    "duplicate_of_hint": null
   },
@@ -6300,7 +6300,7 @@
    "formalizability": "needs-computation-model",
    "repo": null,
    "b1_adjudication": null,
-   "defer_reason": "'Characterise the graphs H...' full-dichotomy request, not a single proposition",
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "class_notes": null,
    "duplicate_of_hint": null
   },
@@ -6410,7 +6410,7 @@
    "repo": null,
    "formalizability": "needs-asymptotics",
    "b1_adjudication": null,
-   "defer_reason": "'What is the order of magnitude' — multi-part value question, not a single proposition.",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -6445,7 +6445,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": "axv_2401_00299_01",
-   "class_notes": "Precise yes/no form of Problem 1.2(iii); f and f_{<=2} are adequately described in context (subcube-partition counts of Q_d)."
+   "class_notes": "Alon-Balogh-Potapov Problem 1.10 (= Problem 1.2(iii)): is f(d)/f_{<=2}(d) subexponential in n = 2^{d-1}, where f(d) counts all partitions of the hypercube Q_d into subcubes and f_{<=2}(d) counts those using only subcubes of dimension at most 2? Modelling: 'subexponential in n' as forall eps = 1/q, exists d0, forall d >= d0, (f(d)/f_{<=2}(d))^q <= 2^n."
   },
   "axv_2401_00359_00": {
    "slug": "axv_2401_00359_00",
@@ -6467,7 +6467,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Statement truncated in source; the d_max-controlled Turan exponent claim is not fully given."
+   "class_notes": "Fox-Sankar-Simkin-Tidor-Zhou Conjecture 6.2: there is c_k > 0 such that ex(n,H) = O_H(n^{k - c_k/d_max(H)}) for every k-uniform k-partite H, where d_max(H) = max_{1<=i<k} d_i(H). Modelling: the real exponent is cleared by raising to the power d_max: ex(n,H)^{d_max} <= C * n^{k*d_max - c_k}."
   },
   "axv_2401_00359_02": {
    "slug": "axv_2401_00359_02",
@@ -6478,7 +6478,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Self-contained: H_L is fully defined in the statement; asserts ex(n,H_L)=n^{3-Theta(1/d)}."
+   "class_notes": "Same paper, Conjecture 6.4: for a d x d Latin square L, the 3-uniform 3-partite hypergraph H_L on [d]+[d]+[d] with (i,j,k) an edge iff L(i,j)=k satisfies ex(n,H_L) = n^{3-Theta(1/d)}. Modelling: the Theta(1/d) exponent is cleared to nat inequalities in both directions."
   },
   "axv_2401_00359_03": {
    "slug": "axv_2401_00359_03",
@@ -6509,7 +6509,7 @@
    "repo": null,
    "formalizability": "hard-structural",
    "b1_adjudication": null,
-   "defer_reason": "'When is X_R prime?' — open-ended characterization question over a paper-local construction.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -6520,7 +6520,7 @@
    "repo": null,
    "formalizability": "hard-structural",
    "b1_adjudication": null,
-   "defer_reason": "'When is the tensor product of complete graphs prime?' — characterization question; primality (join-indecomposability) not pinned to a proposition.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "duplicate_of_hint": null,
    "class_notes": "Combinatorially concrete objects (Kronecker products of K_n) but still a characterize-question."
   },
@@ -6586,7 +6586,7 @@
    "formalizability": "needs-asymptotics",
    "repo": "digraph-theory",
    "b1_adjudication": null,
-   "class_notes": "B3-vs-B2 resolved to B2: a-vec(n) is fully determined by the paper title (minimum acyclic number over oriented triangle-free graphs of order n) plus the standard acyclic-number definition; Theta claim, open part is the sqrt(n log n) upper bound.",
+   "class_notes": "RECOVERED from arXiv:2403.02298 (Aboulker-Havet-Pirot-Schabanel): the ACYCLIC NUMBER alpha-vec(D) of a digraph is the maximum order of an acyclic induced subdigraph, and a-vec(n) is the MINIMUM of alpha-vec(D) over all oriented triangle-free graphs D of order n (an oriented graph whose underlying graph is triangle-free). Conjecture 3 (verbatim): 'a-vec(n) = Theta(sqrt(n log n))'. Known: (1/sqrt2 - eps) sqrt(n log n) <= a-vec(n) <= (107/8) sqrt(n) log n, so the open half is the sqrt(n log n) upper bound. MODELLING: Theta over nat via two existential constants (asymptotics.v big_O_nat), with log as trunc_log 2 and the square root cleared by squaring.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -6599,7 +6599,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Same issue as Conjecture 3: t(n)-arrow (max dichromatic number) undefined in the record; follows from axv_2403_02298_00."
+   "class_notes": "RECOVERED from arXiv:2403.02298: the DICHROMATIC NUMBER chi-vec(D) is the least k with V(D) partitioned into k acyclic-inducing sets, and t-vec(n) is the MAXIMUM of chi-vec(D) over all oriented triangle-free graphs of order n. Conjecture 4 (verbatim): 't-vec(n) = Theta(sqrt(n / log n))'; it follows from Conjecture 3 (edge e158) via t-vec(n) >= n / a-vec(n). Same Theta/log/sqrt modelling as axv_2403_02298_00."
   },
   "axv_2403_08303_00": {
    "slug": "axv_2403_08303_00",
@@ -6719,7 +6719,7 @@
    "repo": null,
    "b1_adjudication": null,
    "class_notes": "Asks for a unified Turan-type theory for (c,t)-sparse hosts.",
-   "defer_reason": "'Determine ex(Gamma,P)' is a research program, not a single proposition.",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
    "duplicate_of_hint": null
   },
   "axv_2405_05902_01": {
@@ -6729,7 +6729,7 @@
    "formalizability": "bounded",
    "repo": "extremal-graph-theory",
    "b1_adjudication": null,
-   "class_notes": "Precise inequality but the induced Turan number ex(Gamma,P_{C_{2l}}) and the role of n are paper-local and not fully defined in the record; status solved.",
+   "class_notes": "RECOVERED from arXiv:2405.05902 (Fox-Nenadov-Pham): for a hereditary property P and a host graph Gamma, ex(Gamma,P) is the maximum number of edges of a subgraph of Gamma belonging to P; Gamma is (C,T)-SPARSE if e(A,B) <= (1-c)|A||B| for all vertex subsets A, B (not necessarily disjoint) with |A|,|B| >= t; P_{C_2l} is the property of having no induced C_{2l}. Conjecture 6.1 (verbatim): 'For every c > 0 and integer l there exists C > 1 such that if Gamma is a (c,t)-sparse graph then ex(Gamma, P_{C_2l}) <= C t^{1-1/l} n^{1+1/l}', n = |V(Gamma)|. MODELLING: the fractional exponents are cleared by raising to the power l (ex^l <= C^l t^{l-1} n^{l+1}), and c is taken rational.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -6796,7 +6796,7 @@
    "repo": "graph-theory-misc",
    "b1_adjudication": null,
    "class_notes": "Clean yes/no: poly-time MWIS on even-hole-free graphs; needs a computation-model foundation.",
-   "defer_reason": null,
+   "defer_reason": "computation-model layer out of scope for the X211-X229 waves: GTBase.complexity's cost-coupled prog/pcost core only supports positive 'there is a polynomial-time algorithm' claims, and the 2026-07-17 blocked-retargeting audit (meta/BLOCKED_RETARGETING_AUDIT.md) rejected 48/72 of the finite-witness encodings of poly-time / NP-hardness / dichotomy rows as unfaithful.",
    "duplicate_of_hint": null
   },
   "axv_2407_08927_01": {
@@ -6817,7 +6817,7 @@
    "formalizability": "needs-planarity",
    "repo": "chromatic-theory",
    "b1_adjudication": null,
-   "class_notes": "Criticality for 5-choosability vs 6-criticality on the torus; standard list-coloring/criticality vocabulary plus torus embedding layer.",
+   "class_notes": "Dvorak-Moreno Penarrubia Conjecture 2: a graph drawn on the torus is critical for 5-choosability iff it is 6-critical. Modelling: torus drawing via GTBase.surface rotation systems of genus 1; criticality for a property = the property fails but holds for every proper subgraph.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -6828,7 +6828,7 @@
    "formalizability": "needs-planarity",
    "repo": "chromatic-theory",
    "b1_adjudication": null,
-   "class_notes": "Toroidal 5-choosable iff 5-colorable; stated as equivalent to the paper's Conjecture 2 (axv_2407_18800_00).",
+   "class_notes": "Dvorak-Moreno Penarrubia Conjecture 3: a toroidal graph is 5-choosable iff it is 5-colourable (the choosability analogue of Thomassen's characterization on the torus).",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -6839,7 +6839,7 @@
    "formalizability": "needs-planarity",
    "repo": "chromatic-theory",
    "b1_adjudication": null,
-   "class_notes": "Edge-width (shortest non-contractible cycle) is standard for embedded graphs.",
+   "class_notes": "Dvorak-Moreno Penarrubia Conjecture 4: every graph drawn on the torus with edge-width at least four is 5-choosable.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -7026,7 +7026,7 @@
    "formalizability": "needs-primitive",
    "repo": "digraph-theory",
    "b1_adjudication": null,
-   "class_notes": "Same gap as Conjecture 10: 'k-extension' is paper-local and undefined in the record.",
+   "class_notes": "RECOVERED from arXiv:2410.23566 (Aboulker-Havet-Lochet-Lopes-Picasarri-Arrieta): unvd(D) is the least p such that D is contained in every tournament of order p; a family F is LINEARLY UNAVOIDABLE if there is C with unvd(D) <= C|V(D)| for every D in F; an acyclic digraph D is a K-EXTENSION of A if there is a set S of k vertices with D - S = A. Conjecture 11 (verbatim): 'If F is linearly unavoidable, then the family of k-extensions of digraphs in F is also linearly unavoidable.' It follows from Conjecture 9 (already formalized as conj_9 for axv_2410_23566_03), and is proved in the paper for oriented trees and forests.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -7214,7 +7214,7 @@
    "repo": null,
    "b1_adjudication": null,
    "class_notes": "Question schema quantified over an arbitrary graph class G, not a single proposition.",
-   "defer_reason": "'Given a graph class, is there a constant' — parameterized meta-question over all classes.",
+   "defer_reason": "Quantified over an arbitrary graph class with no conjectured constant; a question schema, not a proposition.",
    "duplicate_of_hint": null
   },
   "axv_2503_05562_01": {
@@ -7225,7 +7225,7 @@
    "repo": null,
    "b1_adjudication": null,
    "class_notes": "Grand-characterization form of Question 1.1 from the same paper.",
-   "defer_reason": "Explicit 'characterize those graph classes' request.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "duplicate_of_hint": null
   },
   "axv_2503_16882_00": {
@@ -7269,7 +7269,7 @@
    "repo": null,
    "b1_adjudication": null,
    "class_notes": null,
-   "defer_reason": "'For which fixed digraphs H' — characterization request.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "duplicate_of_hint": null
   },
   "axv_2503_20045_03": {
@@ -7280,7 +7280,7 @@
    "repo": null,
    "b1_adjudication": null,
    "class_notes": "Directed chromatic threshold epsilon_H.",
-   "defer_reason": "'What is the minimum value' — determine-a-quantity question.",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
    "duplicate_of_hint": null
   },
   "axv_2503_23191_00": {
@@ -7566,7 +7566,7 @@
    "repo": null,
    "b1_adjudication": null,
    "class_notes": null,
-   "defer_reason": "'For which finite tournaments H ...' characterization question, not a single proposition.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "duplicate_of_hint": null
   },
   "axv_2506_08810_03": {
@@ -7576,7 +7576,7 @@
    "formalizability": "infinite",
    "repo": "infinite-graph-theory",
    "b1_adjudication": null,
-   "class_notes": "Countably infinite tournament with locally-finite-perturbation saturation; digraph flavor but infinite structure dominates.",
+   "class_notes": "Bonamy-Groenland-Johnston-Morrison-Scott Conjecture 24: for every non-transitive finite tournament T there is a countably infinite T-free tournament S_T such that every locally finite perturbation of S_T contains an induced copy of T. Modelling: a countable tournament is a relation on nat; a locally finite perturbation changes only finitely many arcs at each vertex.",
    "defer_reason": null,
    "duplicate_of_hint": null
   },
@@ -7830,7 +7830,7 @@
    "repo": null,
    "b1_adjudication": null,
    "duplicate_of_hint": null,
-   "defer_reason": "'Which digraphs are Eulerian-avoidable?' is an open-ended characterization request, not a single proposition.",
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
    "class_notes": "Eulerian-avoidability is fully defined in context, so extracted instances would be formalizable."
   },
   "axv_2510_11311_04": {
@@ -7842,7 +7842,7 @@
    "b1_adjudication": null,
    "duplicate_of_hint": null,
    "defer_reason": null,
-   "class_notes": "Clean yes/no, but 'Eulerian-avoidable' is fully defined only in the sibling record axv_2510_11311_03, not here."
+   "class_notes": "RECOVERED from arXiv:2510.11311 (Christoph-Janzer-Petrova-Steiner): a digraph F is EULERIAN-AVOIDABLE if there is d_F : N -> N such that for every k, every Eulerian digraph (every vertex has equal out- and in-degree) with minimum out-degree at least d_F(k) contains an F-free subdigraph of minimum out-degree at least k. (The printed definition leaves d and k unbound; this is the intended reading, matching the paper's definition of AVOIDABLE.) Question 6.4 (verbatim): 'Is every orientation of C_4 Eulerian-avoidable?'"
   },
   "axv_2511_02892_00": {
    "slug": "axv_2511_02892_00",
@@ -7919,7 +7919,7 @@
    "b1_adjudication": null,
    "duplicate_of_hint": null,
    "defer_reason": null,
-   "class_notes": "1/2-flow-pair conjecture implying the 5-flow conjecture."
+   "class_notes": "Workshop on Cycles and Colourings Conjecture 6.1: every bridgeless graph admits a 2-flow phi_2 and a 4-flow phi_4 such that |phi_4(e)| >= 2 whenever phi_2(e) = 0 (a '1/2-flow-pair'); it implies the 5-flow conjecture (edge e174 to opg:5_flow_conjecture, whose statement is done)."
   },
   "axv_2511_02892_07": {
    "slug": "axv_2511_02892_07",
@@ -7941,7 +7941,7 @@
    "b1_adjudication": null,
    "duplicate_of_hint": null,
    "defer_reason": null,
-   "class_notes": "Needs tree-independence-number and induced-matching-treewidth primitives (buildable finite width parameters)."
+   "class_notes": "Alon-Milanic-Rzazewski Question 5.2: for every mu there is a polynomial p_mu such that every K_{t,t}-free graph of induced matching treewidth <= mu has tree-alpha <= p_mu(t)."
   },
   "axv_2511_03864_01": {
    "slug": "axv_2511_03864_01",
@@ -7952,7 +7952,7 @@
    "b1_adjudication": null,
    "duplicate_of_hint": "axv_2511_03864_00",
    "defer_reason": null,
-   "class_notes": "Context states this is an equivalent restatement of Question 5.2 (axv_2511_03864_00) via the induced biclique number."
+   "class_notes": "Alon-Milanic-Rzazewski Question 5.3: for classes of bounded induced matching treewidth, tree-alpha is bounded by a polynomial in the induced biclique number; the record states this is an equivalent restatement of Question 5.2 (edge e072)."
   },
   "axv_2511_07601_00": {
    "slug": "axv_2511_07601_00",
@@ -8094,7 +8094,7 @@
    "repo": null,
    "b1_adjudication": null,
    "duplicate_of_hint": null,
-   "defer_reason": "'What is the maximum fractional chromatic number ...' is a determine-the-value problem with no conjectured answer (the natural guess is refuted in the paper).",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
    "class_notes": null
   },
   "axv_2601_15245_01": {
@@ -8139,7 +8139,7 @@
    "b1_adjudication": null,
    "defer_reason": null,
    "duplicate_of_hint": null,
-   "class_notes": "Fractional chromatic number is standard; o_r(d) needs asymptotic wrapper."
+   "class_notes": "Bradac-Fox-Steiner-Sudakov-Zhang Problem 6.4: for r >= 4, is the maximum fractional chromatic number of K_r-free d-degenerate graphs o_r(d)? Modelling: chi_f as a rational LP value (b-fold colourings), and o(d) as forall eps=1/q, exists d0, forall d >= d0, q*chi_f <= d."
   },
   "axv_2602_07435_00": {
    "slug": "axv_2602_07435_00",
@@ -8346,7 +8346,7 @@
    "repo": null,
    "formalizability": "needs-asymptotics",
    "b1_adjudication": null,
-   "defer_reason": "'Determine the limit' — asks for a value; c_r also paper-local.",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -8357,7 +8357,7 @@
    "repo": null,
    "formalizability": "bounded",
    "b1_adjudication": null,
-   "defer_reason": "Asks for the best-possible constant epsilon, not a single proposition.",
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
    "duplicate_of_hint": null,
    "class_notes": null
   },
@@ -11262,6 +11262,501 @@
    "repo": "packing-theory",
    "b1_adjudication": null,
    "class_notes": "Both agree B2/clean (Alavi-Malde-Schwenk-Erdos unimodality for trees/forests, fully finite standard vocabulary); repo resolved to packing-theory since independent sets are its core object.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "axv_2308_15387_02": {
+   "slug": "axv_2308_15387_02",
+   "bucket": "B4",
+   "topic": "hypergraph-turan",
+   "formalizability": "needs-asymptotics",
+   "repo": null,
+   "b1_adjudication": null,
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
+   "class_notes": "Alon-Bucic-Christoph-Krivelevich Question 4.4: minimum number of edges of an r-vertex s-uniform intersecting hypergraph with cover number exactly s (r >= 2s-1 >= 3). Plain finite hypergraph objects, but the record asks for the extremal value with no conjectured formula.",
+   "duplicate_of_hint": null
+  },
+  "axv_2308_15387_03": {
+   "slug": "axv_2308_15387_03",
+   "bucket": "B4",
+   "topic": "hypergraph-turan",
+   "formalizability": "needs-asymptotics",
+   "repo": null,
+   "b1_adjudication": null,
+   "defer_reason": "Determine-the-value / order-of-magnitude question with no conjectured proposition to state.",
+   "class_notes": "Alon-Bucic-Christoph-Krivelevich Question 4.5: minimum number of edges of an r-vertex intersecting hypergraph in which every m-subset of vertices contains at least t edges. Plain hypergraph objects, but a determine-the-value question with free parameters m,t.",
+   "duplicate_of_hint": null
+  },
+  "axv_2308_15387_04": {
+   "slug": "axv_2308_15387_04",
+   "bucket": "B4",
+   "topic": "hypergraph-turan",
+   "formalizability": "needs-primitive",
+   "repo": null,
+   "b1_adjudication": null,
+   "defer_reason": "Grand-characterization request ('which / for which / characterize'), not a single proposition.",
+   "class_notes": "Alon-Bucic-Christoph-Krivelevich Question 4.6: for which r,s does there exist an r-vertex (s+1)-uniform intersecting hypergraph in which every (r-s)-subset contains the same positive number of edges? Plain hypergraph objects but a 'for which values' characterization.",
+   "duplicate_of_hint": null
+  },
+  "axv_2309_04460_01": {
+   "slug": "axv_2309_04460_01",
+   "bucket": "B3",
+   "topic": "rainbow-cycles",
+   "formalizability": "needs-primitive",
+   "repo": "extremal-graph-theory",
+   "b1_adjudication": null,
+   "defer_reason": null,
+   "class_notes": "NEW ROW (arXiv:2309.04460, Alon-Bucic-Sauermann-Zakharov-Zamir, 'Essentially tight bounds for rainbow cycles in proper edge-colourings'), Question 10.2: is there a constant C > 0 such that the edges of any n-vertex properly edge-coloured ROBUST SUBLINEAR EXPANDER G with average degree at least C log n can be decomposed into two spanning connected subgraphs in such a way that every colour appears on only one of them? The objects are finite edge-coloured graphs, so the claim is a finite graph statement; the paper-local notion that still has to be recovered at authoring time is 'robust sublinear expander' (Komlos-Szemeredi: every vertex set X with s/2 <= |X| <= n/2 has |N(X)| >= eps(|X|)|X| with eps(x) = eps_1 / log^2(15x/s), robustly under deletion of a small fraction of edges). MODELLING: C log n via trunc_log 2 and an existential nat constant. Grouped with its sibling axv_2309_04460_00 (extremal-graph-theory, rainbow-cycles) in phase X229.",
+   "duplicate_of_hint": null
+  },
+  "axv_2309_04460_02": {
+   "slug": "axv_2309_04460_02",
+   "bucket": "B5",
+   "topic": "additive-nt",
+   "formalizability": "out-of-scope",
+   "repo": null,
+   "b1_adjudication": null,
+   "defer_reason": "Additive number theory / group theory, not a graph, digraph or hypergraph statement.",
+   "class_notes": "Alon-Bucic-Sauermann-Zakharov-Zamir Question 10.3: smallest d(n) such that every subset S of size >= d of any group of order n admits a non-empty product of distinct elements of S with +-1 exponents equal to the identity. Group-theoretic Davenport-type quantity, no graph object; also a determine-the-value question.",
+   "duplicate_of_hint": null
+  },
+  "axv_2309_04460_03": {
+   "slug": "axv_2309_04460_03",
+   "bucket": "B5",
+   "topic": "permutations",
+   "formalizability": "out-of-scope",
+   "repo": null,
+   "b1_adjudication": null,
+   "defer_reason": "Permutation / sorting-network statement, not a graph statement.",
+   "class_notes": "Alon-Bucic-Sauermann-Zakharov-Zamir Question 10.4: minimum t(k) such that any t transpositions of S_k contain a non-empty subset that multiplies (in some order) to the identity. Permutation-group statement, and a determine-the-value question.",
+   "duplicate_of_hint": null
+  },
+  "bm_003": {
+   "slug": "bm_003",
+   "bucket": "B2",
+   "topic": "reconstruction",
+   "repo": "infinite-graph-theory",
+   "formalizability": "infinite",
+   "b1_adjudication": null,
+   "class_notes": "Halin's conjecture: hypomorphic infinite graphs embed in each other; review 2026-09-10 disproved (Bowler-Erde-Heinig-Lehner-Pitz 2017 build two hypomorphic locally finite trees with no embedding either way), so the row is a refutation target, not a proof target.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_011": {
+   "slug": "bm_011",
+   "bucket": "B2",
+   "topic": "edge-decomposition",
+   "repo": "cycle-theory",
+   "formalizability": "bounded",
+   "b1_adjudication": null,
+   "class_notes": "Barat-Thomassen: for every tree T some k(T) makes every simple k-edge-connected graph with e(T) | e(G) decompose into copies of T; review 2026-09-10 solved (Bensmail-Harutyunyan-Le-Merker-Thomasse 2017) — the statement keeps its 'exists k(T)' wrapper.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_013": {
+   "slug": "bm_013",
+   "bucket": "B2",
+   "topic": "cycle-decomposition",
+   "repo": "cycle-theory",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Bondy's small cycle double cover conjecture: every bridgeless simple graph on n vertices has a cycle double cover with at most n-1 cycles; review 2026-09-10 partial (planar cases only).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_014": {
+   "slug": "bm_014",
+   "bucket": "B2",
+   "topic": "cycle-decomposition",
+   "repo": "cycle-theory",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Five cycle double cover conjecture: every 2-edge-connected graph has a double cover by at most five even subgraphs; review 2026-09-10 open. ALIAS row — the same statement as the OPG node m_n_cycle_covers, which owns the Rocq statement; classified for completeness only.",
+   "defer_reason": null,
+   "duplicate_of_hint": "opg:m_n_cycle_covers (same_conjecture, relations edge e213, verdict confirmed)"
+  },
+  "bm_016": {
+   "slug": "bm_016",
+   "bucket": "B2",
+   "topic": "linear-arboricity",
+   "repo": "cycle-theory",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Linear arboricity conjecture: every simple k-regular graph has linear arboricity ceil((k+1)/2); review 2026-09-10 partial (k <= 3 classical; general bound Delta/2 + O(log n)).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_021": {
+   "slug": "bm_021",
+   "bucket": "B2",
+   "topic": "complexity",
+   "repo": "graph-theory-misc",
+   "formalizability": "needs-computation-model",
+   "b1_adjudication": null,
+   "class_notes": "Thomason-style question: is finding a SECOND Hamilton cycle of a cubic graph, given one, in P? Review 2026-09-10 open (best exact algorithm O(n 2^(0.3-eps)n)). Needs a cost model.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_022": {
+   "slug": "bm_022",
+   "bucket": "B2",
+   "topic": "complexity",
+   "repo": "graph-theory-misc",
+   "formalizability": "needs-computation-model",
+   "b1_adjudication": null,
+   "class_notes": "Thomassen (1980): is deciding the existence of k internally disjoint (X,Y)-paths of odd length in co-NP (k part of the input)? Review 2026-09-10 open. Needs a complexity model.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_025": {
+   "slug": "bm_025",
+   "bucket": "B2",
+   "topic": "bipartite-subgraph",
+   "repo": "packing-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Thomassen: every 2k-connected graph has a spanning k-connected BIPARTITE subgraph; review 2026-09-10 partial (Delcourt-Ferber, Yuster: 22k^2 log n connectivity suffices).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_026": {
+   "slug": "bm_026",
+   "bucket": "B2",
+   "topic": "cycle-decomposition",
+   "repo": "cycle-theory",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Orientable five cycle double cover conjecture (Archdeacon, Jaeger): every 2-edge-connected graph has an ORIENTABLE double cover by five even subgraphs; review 2026-09-10 open.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_029": {
+   "slug": "bm_029",
+   "bucket": "B2",
+   "topic": "subdivisions",
+   "repo": "minor-theory",
+   "formalizability": "needs-planarity",
+   "b1_adjudication": null,
+   "class_notes": "Kelmans-Seymour: every 5-connected non-planar graph contains a K_5-subdivision; review 2026-09-10 solved (He-Wang-Yu, JCTB 144, 2020). The non-planarity hypothesis needs planarity.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_031": {
+   "slug": "bm_031",
+   "bucket": "B5",
+   "topic": "drawings",
+   "repo": "topological-graph-theory",
+   "formalizability": "out-of-scope",
+   "b1_adjudication": null,
+   "class_notes": "Conway's thrackle conjecture: no graph with more edges than vertices has a thrackle drawing; review 2026-09-10 partial (Fulek-Pach bound ~1.393n). BLOCKED: a thrackle drawing is a continuous plane drawing, with no finite combinatorial encoding in scope.",
+   "defer_reason": "Conway's thrackle conjecture is a statement about drawings in the plane (a thrackle is a drawing in which every pair of edges meets exactly once); no planar-drawing foundation in scope, parked like the other geometry rows (bm_032, bm_054).",
+   "duplicate_of_hint": null
+  },
+  "bm_032": {
+   "slug": "bm_032",
+   "bucket": "B5",
+   "topic": "geometry",
+   "repo": "topological-graph-theory",
+   "formalizability": "out-of-scope",
+   "b1_adjudication": null,
+   "class_notes": "Harborth's conjecture: every simple planar graph has a straight-line planar drawing with all edge lengths integral; review 2026-09-10 partial (cubic planar graphs, planar 3-trees).",
+   "defer_reason": "Integral straight-line plane drawings: Euclidean/Diophantine geometry, not a finite graph statement; parked as B5 (the planarity side alone would be D6-style).",
+   "duplicate_of_hint": null
+  },
+  "bm_033": {
+   "slug": "bm_033",
+   "bucket": "B2",
+   "topic": "tree-embedding",
+   "repo": "extremal-graph-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Erdos-Sos: a simple graph on n vertices with more than n(k-1)/2 edges contains every tree with k edges; review 2026-09-10 partial (Pokrovskiy 2024 large bounded-degree trees; Reed-Stein 2026 exact cases).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_034": {
+   "slug": "bm_034",
+   "bucket": "B2",
+   "topic": "even-cycles",
+   "repo": "extremal-graph-theory",
+   "formalizability": "needs-asymptotics",
+   "b1_adjudication": null,
+   "class_notes": "Even-cycle Turan number: for every k >= 2 there is c > 0 with ex(n, C_2k) >= c n^(1+1/k); review 2026-09-10 partial (known only for k = 2, 3, 5). The n^(1+1/k) growth is asymptotic.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_037": {
+   "slug": "bm_037",
+   "bucket": "B2",
+   "topic": "ramsey",
+   "repo": "extremal-graph-theory",
+   "formalizability": "needs-asymptotics",
+   "b1_adjudication": null,
+   "class_notes": "Erdos: give a CONSTRUCTIVE proof that r(k,k) >= c^k for some c > 1; review 2026-09-10 open (the 1947 probabilistic bound is still the only exponential one). Asymptotic + constructive.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_038": {
+   "slug": "bm_038",
+   "bucket": "B2",
+   "topic": "ramsey",
+   "repo": "extremal-graph-theory",
+   "formalizability": "needs-asymptotics",
+   "b1_adjudication": null,
+   "class_notes": "Does lim_k r(k,k)^(1/k) exist, and what is it? Review 2026-09-10 partial (liminf >= sqrt 2; Campos-Griffiths-Morris-Sahasrabudhe 2023 give (4-eps)^k). A limit statement over reals.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_039": {
+   "slug": "bm_039",
+   "bucket": "B2",
+   "topic": "ramsey",
+   "repo": "extremal-graph-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Burr-Erdos tree Ramsey conjecture: r(T,T) <= 2n-2 for every tree T on n vertices; review 2026-09-10 partial (Lee 2017 gives r(T,T) = O(n) with an unspecified constant).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_041": {
+   "slug": "bm_041",
+   "bucket": "B2",
+   "topic": "minors",
+   "repo": "minor-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Hadwiger's conjecture: every k-chromatic graph has a K_k-minor; review 2026-09-10 open for k >= 7 (k <= 6 settled; Delcourt-Postle give O(t log log t) colourings).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_042": {
+   "slug": "bm_042",
+   "bucket": "B2",
+   "topic": "subdivisions",
+   "repo": "minor-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Hajos conjecture for k = 5 and k = 6: does every k-chromatic graph contain a K_k-subdivision? Review 2026-09-10 open (true for k <= 4, Catlin refuted k >= 7, so only 5 and 6 remain).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_045": {
+   "slug": "bm_045",
+   "bucket": "B2",
+   "topic": "erdos-lovasz-tihany",
+   "repo": "chromatic-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Erdos-Lovasz Tihany: a k-chromatic K_k-free graph splits off vertex-disjoint k_1- and k_2-chromatic subgraphs whenever k+1 = k_1+k_2 with k_i >= 2; review 2026-09-10 partial (k_1 = 2 by Stiebitz; claw-free and line-graph cases).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_046": {
+   "slug": "bm_046",
+   "bucket": "B2",
+   "topic": "chi-boundedness",
+   "repo": "chromatic-theory",
+   "formalizability": "bounded",
+   "b1_adjudication": null,
+   "class_notes": "El-Zahar-Erdos: is there f(r,k) such that chi(G) >= f(r,k) forces an r-clique or an induced disjoint union of two k-chromatic graphs? Review 2026-09-10 partial (Nguyen-Scott-Seymour 2023 prove a weaker variant). Carries an 'exists f' wrapper.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_050": {
+   "slug": "bm_050",
+   "bucket": "B2",
+   "topic": "infinite-chromatic",
+   "repo": "chromatic-theory",
+   "formalizability": "infinite",
+   "b1_adjudication": null,
+   "class_notes": "Gyarfas: every triangle-free graph of INFINITE chromatic number contains every finite tree as an induced subgraph; review 2026-09-10 partial (follows from the open Gyarfas-Sumner conjecture; radius-three cases known). Infinite chromatic number needs infinite graphs.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_053": {
+   "slug": "bm_053",
+   "bucket": "B2",
+   "topic": "planar-coloring",
+   "repo": "chromatic-theory",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Albertson: every toroidal graph has three vertices whose deletion leaves a 4-colourable graph; review 2026-09-10 open (three deletions are necessary for an infinite family). Needs torus embeddability (surface.v), not just planarity.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_054": {
+   "slug": "bm_054",
+   "bucket": "B5",
+   "topic": "geometry",
+   "repo": "chromatic-theory",
+   "formalizability": "out-of-scope",
+   "b1_adjudication": null,
+   "class_notes": "Hadwiger-Nelson: determine the chromatic number of the unit-distance graph of the plane; review 2026-09-10 partial (5 <= chi <= 7 since de Grey 2018).",
+   "defer_reason": "Chromatic number of an INFINITE geometric graph on R^2 (unit distances); Euclidean geometry plus an infinite vertex set, parked as B5 like the other geometry rows.",
+   "duplicate_of_hint": null
+  },
+  "bm_057": {
+   "slug": "bm_057",
+   "bucket": "B2",
+   "topic": "edge-coloring",
+   "repo": "chromatic-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "1-factorization conjecture: every simple d-regular graph on an even number n of vertices with d >= n/2 is d-edge-colourable; review 2026-09-10 partial (Csaba-Kuhn-Lo-Osthus-Treglown proved it for all sufficiently large n).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_060": {
+   "slug": "bm_060",
+   "bucket": "B2",
+   "topic": "kempe-changes",
+   "repo": "chromatic-theory",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Vizing's interchange conjecture: from any proper edge colouring a chi'(G)-colouring is reachable by Kempe changes; review 2026-09-10 solved (Narboni, arXiv:2302.12914, 2023). Needs the Kempe-change reachability relation as a primitive.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_062": {
+   "slug": "bm_062",
+   "bucket": "B2",
+   "topic": "cycle-structure",
+   "repo": "cycle-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Kotzig's unique k-path conjecture: for k >= 3 no graph has every pair of vertices joined by a UNIQUE path of length k; review 2026-09-10 partial (verified for k <= 20 by Kostochka 1988).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_064": {
+   "slug": "bm_064",
+   "bucket": "B2",
+   "topic": "longest-cycles",
+   "repo": "cycle-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Smith: any two longest cycles of a k-connected graph (k >= 2) share at least k vertices; review 2026-09-10 partial (Gutierrez-Valqui 2023 for k >= (n+16)/7; Ma-Zhao 2025 give Omega(k^(2/3))).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_065": {
+   "slug": "bm_065",
+   "bucket": "B2",
+   "topic": "longest-cycles",
+   "repo": "cycle-theory",
+   "formalizability": "bounded",
+   "b1_adjudication": null,
+   "class_notes": "Bondy: some c > 0 makes every 3-connected cyclically 4-edge-connected cubic graph on n vertices contain a cycle of length at least cn; review 2026-09-10 open. Needs cyclic edge-connectivity and carries an 'exists c' wrapper.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_066": {
+   "slug": "bm_066",
+   "bucket": "B2",
+   "topic": "erdos-posa",
+   "repo": "cycle-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Birmele(-Bondy-Reed): if any two cycles of length at least k meet, then k vertices hit every cycle of length at least k; review 2026-09-10 partial (best known bound 5l/3 + 29/2 and later improvements, not l).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_070": {
+   "slug": "bm_070",
+   "bucket": "B2",
+   "topic": "caccetta-haggkvist",
+   "repo": "digraph-theory",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Weighted Caccetta-Haggkvist (Bollobas-Scott): a strongly connected digraph with arc weights having w^-(v) >= 1 and w^+(v) >= 1 at every vertex has a directed cycle of weight at least 1; review 2026-09-10 open (the directed-PATH analogue is proved). Needs weighted arcs.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_079": {
+   "slug": "bm_079",
+   "bucket": "B2",
+   "topic": "hamiltonicity",
+   "repo": "hamiltonicity-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Matthews-Sumner: every 4-connected claw-free graph is Hamiltonian; review 2026-09-10 partial (equivalent to Thomassen's line-graph conjecture; Kaiser-Vrana 2012 for 5-connected line graphs of min degree >= 6).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_080": {
+   "slug": "bm_080",
+   "bucket": "B2",
+   "topic": "hamiltonicity",
+   "repo": "hamiltonicity-theory",
+   "formalizability": "hard-structural",
+   "b1_adjudication": null,
+   "class_notes": "Barnette: the graph of every simple (4-regular) 4-dimensional convex polytope is Hamiltonian; review 2026-09-10 open (verified for Kalai's squeezed polytopes). Needs a combinatorial characterisation of 4-polytope graphs.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_085": {
+   "slug": "bm_085",
+   "bucket": "B2",
+   "topic": "hamiltonicity",
+   "repo": "hamiltonicity-theory",
+   "formalizability": "needs-planarity",
+   "b1_adjudication": null,
+   "class_notes": "Cantoni: every planar cubic graph with exactly three Hamilton cycles contains a triangle; review 2026-09-10 partial (computationally verified up to 48 vertices).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_088": {
+   "slug": "bm_088",
+   "bucket": "B2",
+   "topic": "vertex-transitive-cycles",
+   "repo": "hamiltonicity-theory",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Thomassen: all but finitely many connected vertex-transitive graphs are Hamiltonian; review 2026-09-10 partial (longest cycles of length n^(2/3-o(1))). Needs vertex-transitivity and a 'all but finitely many' encoding.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_089": {
+   "slug": "bm_089",
+   "bucket": "B2",
+   "topic": "hamiltonicity",
+   "repo": "hamiltonicity-theory",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Chvatal's toughness conjecture: some k makes every k-tough graph Hamiltonian; review 2026-09-10 partial (k >= 9/4 necessary; chordal, claw-free and planar cases known). Needs toughness, stated in the integral t*k form to stay rational-free.",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_090": {
+   "slug": "bm_090",
+   "bucket": "B2",
+   "topic": "hamiltonicity",
+   "repo": "hamiltonicity-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Thomassen (1978): is there a hypohamiltonian graph of minimum degree at least 4? Review 2026-09-10 open (any example must be non-planar).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "bm_091": {
+   "slug": "bm_091",
+   "bucket": "B2",
+   "topic": "hamiltonicity",
+   "repo": "hamiltonicity-theory",
+   "formalizability": "clean",
+   "b1_adjudication": null,
+   "class_notes": "Grotschel (1978): there is no bipartite hypotraceable graph; review 2026-09-10 open (the hypohamiltonian analogue is a theorem, the hypotraceable case is not).",
+   "defer_reason": null,
+   "duplicate_of_hint": null
+  },
+  "oth_meyniels_conjecture": {
+   "slug": "oth_meyniels_conjecture",
+   "bucket": "B2",
+   "topic": "cops-and-robbers",
+   "repo": "graph-theory-misc",
+   "formalizability": "needs-primitive",
+   "b1_adjudication": null,
+   "class_notes": "Meyniel: some absolute constant C bounds the cop number of every connected n-vertex graph by C sqrt(n); review 2026-09-10 partial (best general bound n 2^(-(1-o(1)) sqrt(log n)); full conjecture known for dense large-girth graphs). Needs a finite cops-and-robbers winning-strategy primitive.",
    "defer_reason": null,
    "duplicate_of_hint": null
   }

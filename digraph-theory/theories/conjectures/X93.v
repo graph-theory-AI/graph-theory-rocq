@@ -15,9 +15,17 @@ Definition x93_t_local_tournament (T : tournament) (t : nat) : Prop :=
 
 (** ** X93 statements ******************************************************)
 
-(** Studies slice: Berger et al. local-to-global conjecture for tournaments:
-    bounded dichromatic number on every out-neighbourhood forces bounded global
-    dichromatic number. *)
+(** Corpus row: studies:std_berger_et_al_local_to_global_tournament_colourin
+    Site: none
+    Review: none
+    English statement: (Berger, Choromanski, Chudnovsky, Fox, Loebl, Scott, Seymour and Thomasse, local-to-global tournament colouring conjecture)
+      There is a function f such that every t-local tournament, that is every tournament in
+      which the subtournament induced by the out-neighbourhood of each vertex has dichromatic
+      number at most t, has dichromatic number at most f(t).
+    Definitions: [x93_t_local_tournament T t] - every out-neighbourhood induces a t-dicolourable
+      subdigraph (this file); [dicolorableb D k] (conjectures/dichromatic.v); [N_out v] and
+      [tournament] (core/tournament.v); [induced_digraph] (core/digraph.v).
+    Notes: The single function f is quantified outside t and T, as in the source. *)
 Definition local_tournament_dichromatic_bound_statement : Prop :=
   exists f : nat -> nat,
     forall (t : nat) (T : tournament),

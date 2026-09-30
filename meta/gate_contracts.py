@@ -54,6 +54,32 @@ def strip_comments(src: str) -> str:
     return "".join(out)
 
 
+def comment_spans(src: str) -> list[tuple[int, int]]:
+    """Offsets ``(start, end)`` of every top-level Rocq comment (``end`` exclusive).
+
+    Same nesting walk as :func:`strip_comments`; nested comments are folded into the
+    enclosing top-level span, and an unterminated comment yields no span. Used by the
+    statement-doc gate to pick the comment attached to a declaration.
+    """
+    spans: list[tuple[int, int]] = []
+    i = depth = 0
+    start = -1
+    while i < len(src):
+        if src.startswith("(*", i):
+            if depth == 0:
+                start = i
+            depth += 1
+            i += 2
+        elif depth and src.startswith("*)", i):
+            depth -= 1
+            i += 2
+            if depth == 0:
+                spans.append((start, i))
+        else:
+            i += 1
+    return spans
+
+
 def sentence_from(src: str, start: int) -> str:
     """Return the Rocq command beginning at ``start`` through its final period."""
     i = start
@@ -137,3 +163,23 @@ def forbidden_exact_types(
     if status in ("open", "partial") and (statement, candidate, "prove") not in verified_resolutions:
         cases.append(("direct-proof-undecided", statement))
     return cases
+
+
+def incl_flags_from_cqp(cqp_txt: str) -> list[str]:
+    """``-Q``/``-R`` include flags of a ``_CoqProject``, as an argv list.
+
+    Copied verbatim (behaviour-wise) from the private helper of
+    ``check_milestone.py`` so that ``check_edges.py`` can compile a probe with a
+    package's own logical paths without importing the milestone gate. Returned as
+    a list so no path is ever interpolated into a shell string.
+    """
+    incl_flags: list[str] = []
+    for m in re.findall(r"-[QR]\s+\S+\s+\S+", cqp_txt):
+        incl_flags += m.split()
+    return incl_flags
+
+
+def namespace_from_cqp(cqp_txt: str) -> str | None:
+    """The package's own logical namespace: the ``-R theories <NS>`` binding."""
+    m = re.search(r"^\s*-R\s+theories\s+(\S+)", cqp_txt, re.M)
+    return m.group(1) if m else None

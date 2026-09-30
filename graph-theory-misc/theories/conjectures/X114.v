@@ -86,13 +86,34 @@ Definition x114_subcubic (H : sgraph) : Prop := Delta H <= 3.
 
 (** ** X114 statements *****************************************************)
 
-(** Studies slice: Chudnovsky-Seymour-Trotignon question -- is there a subcubic
-    graph H such that H-ISC (deciding whether an input graph contains H as an
-    induced subdivision) is NP-complete?  Encoded as the existence of a subcubic
-    H whose H-ISC problem is in NP and NP-hard on the D7 [problem]/[in_NP]/
-    [NP_hard] complexity layer (the honest cost-bounded reading: NP-hardness is a
-    universal claim over all NP problems, non-vacuous by construction; [in_NP]
-    supplies a poly-size certificate + poly-cost correct verifier). *)
+(** Corpus row: studies:std_chudnovsky_seymour_trotignon_question_on_subcubi
+    Site: none
+    Review: none
+    English statement: (Chudnovsky, Seymour and Trotignon, question on subcubic induced
+      subdivisions)
+      There is a finite simple graph H of maximum degree at most 3 such that the decision
+      problem "does the input graph G contain an induced subdivision of H?" is both in NP and
+      NP-hard.
+    Definitions: [x114_consecutive_in_path], [x114_induced_path_between a b p] - p is an
+      induced path from a to b, i.e. a simple adjacency-path whose only edges are consecutive
+      pairs (this file); [x114_internal], [x114_model_vertex] - the internal vertices of a path
+      and the vertices used by a subdivision model (this file);
+      [x114_induced_subdivision_model H G] - injective branch vertices, internally disjoint
+      induced edge-paths avoiding the other branch vertices, and global inducedness: the only
+      edges of G among model vertices join consecutive path vertices (this file);
+      [x114_induced_subdivision H G] - such a model exists (this file);
+      [x114_hisc_problem H] - that containment problem packaged as a [problem], instances being
+      graphs with size |V(G)| (this file); [x114_np_complete P] - [in_NP P] and [NP_hard P]
+      (this file); [x114_subcubic H] - [Delta H <= 3] (this file); [problem], [in_NP],
+      [NP_hard], [poly_reduces] - the machine-free relational complexity layer of
+      graph-theory-misc/theories/conjectures/D7.v, where "polynomial time" is an abstract cost
+      bound a*n^d+b rather than a machine model; [Delta] - maximum degree (GTBase).
+    Notes: the induced-subdivision model is replicated byte for byte from
+      extremal-graph-theory/theories/conjectures/X98.v because graph-theory-misc does not
+      import that package.  The graph content is faithful; the complexity wrapper is the
+      corpus-standard relational proxy also used by the done row
+      opg:complexity_of_the_h_factor_problem, and is weaker than a machine-model NP-completeness
+      claim. *)
 Definition subcubic_induced_subdivision_np_complete_statement : Prop :=
   exists H : sgraph,
     x114_subcubic H /\ x114_np_complete (x114_hisc_problem H).

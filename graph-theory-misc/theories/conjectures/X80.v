@@ -41,10 +41,28 @@ Definition x80_cop_number_at_most (G : sgraph) (k : nat) : Prop :=
 
 (** ** X80 statements ******************************************************)
 
-(** Studies slice: Andreae-Schroeder toroidal cop-number conjecture.  The
-    topological foundation's orientable torus predicate is exact on connected
-    graph embeddings, so the standard connected-graph cop-number convention is
-    carried explicitly. *)
+(** Corpus row: studies:std_andreae_schr_der_conjecture_toroidal_cop_number
+    Site: none
+    Review: none
+    English statement: (Andreae and Schroeder, toroidal cop-number conjecture)
+      Every connected finite simple graph that embeds in the torus has cop number at most 3:
+      three cops have a starting position and a strategy that captures the robber from every
+      starting vertex, in finitely many rounds.
+    Definitions: [x80_legal_move x y] - staying put or moving along an edge (this file);
+      [x80_cop_positions G k] - a placement of k cops (this file); [x80_captured c r] - some
+      cop occupies the robber's vertex (this file); [x80_cops_move c c'] - every cop makes a
+      legal move (this file); [x80_cop_number_at_most G k] - a starting position, a strategy, a
+      winning region W and a rank function such that every uncaptured position of W leads,
+      after the cops' move and any robber move, either to a capture or to a position of W of
+      strictly smaller rank (this file); [toroidal G] - G embeds in a surface of genus 1
+      (topological-graph-theory/theories/foundations/embedding.v); [connected] -
+      coq-graph-theory.
+    Notes: termination of the pursuit is certified by a rank function that strictly decreases
+      on the winning region, which is the finite-witness rendering of "the cops win in finitely
+      many rounds" and avoids any coinductive or transfinite notion.  Connectedness is carried
+      explicitly because the orientable-torus predicate of the topological foundation is exact
+      on connected graph embeddings, and because the cop number is conventionally taken per
+      connected graph. *)
 Definition toroidal_graph_cop_number_three_statement : Prop :=
   forall G : sgraph,
     connected [set: G] ->

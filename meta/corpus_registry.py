@@ -10,10 +10,16 @@ instead of keeping private copies.
 Corpora:
   opg — the frozen v1 OpenProblemGarden corpus (227 rows, statement-complete; release
         opg-v1.0.1-227-attempted). Invariants: exactly 227 rows, 0 todo.
-  v2  — the growing graph-conjectures corpus (corpus tags arxiv/erdos/derived/arxiv-studied;
-        manifest appears at milestone X0b). Invariants: overlay consistency only; todo rows
-        are allowed until M-V2-STATEMENT-COMPLETE. Statement legs may reach `done` only with
-        a complete source-verification tuple (see VERIFICATION_FIELDS).
+  v2  — the growing graph-conjectures corpus (corpus tags arxiv/erdos/derived/arxiv-studied,
+        plus bm = Bondy–Murty Appendix A records `bm-NNN` and others = the curated
+        `data/others_conjectures.json` records; manifest appears at milestone X0b).
+        Invariants: overlay consistency only; todo rows are allowed until
+        M-V2-STATEMENT-COMPLETE. Statement legs may reach `done` only with a complete
+        source-verification tuple (see VERIFICATION_FIELDS).
+
+The upstream corpus clone (graph-conjectures) is located ONLY through graph_conjectures_dir();
+the public URLs of a corpus row (site page + per-record review file on GitHub) are derived ONLY
+through row_urls(), so the manifest builders and the statement-doc gate agree byte for byte.
 """
 import json
 import os
@@ -21,6 +27,64 @@ import re
 
 META = os.path.dirname(os.path.abspath(__file__))
 MONO = os.path.dirname(META)
+
+# ── the graph-conjectures clone ──
+# Reference clone (2026-09-23): the nested checkout <repo>/graph-conjectures, pinned to commit
+# b72c585 of branch CDC-relations-update (a pending pull request of the official repository
+# https://github.com/graph-theory-AI/graph-conjectures; until it is merged that branch, not
+# upstream main, is the reference). $GRAPH_CONJECTURES overrides; the old sibling location
+# ../../graph-conjectures is kept as a fallback.
+GRAPH_CONJECTURES_PIN = "b72c585"
+GRAPH_CONJECTURES_BRANCH = "CDC-relations-update"
+
+
+def graph_conjectures_dir():
+    """Directory of the graph-conjectures clone (must contain data/), or SystemExit."""
+    cands = [os.environ.get("GRAPH_CONJECTURES"),
+             os.path.join(MONO, "graph-conjectures"),
+             os.path.join(os.path.dirname(MONO), "graph-conjectures"),
+             os.path.expanduser("~/Recherche/graph-conjectures")]
+    for c in cands:
+        if c and os.path.isdir(os.path.join(c, "data")):
+            return c
+    raise SystemExit("corpus_registry: graph-conjectures clone not found (looked at "
+                     f"{[c for c in cands if c]}); clone it into {MONO}/graph-conjectures "
+                     f"(pin {GRAPH_CONJECTURES_PIN}, branch {GRAPH_CONJECTURES_BRANCH}) or set "
+                     "GRAPH_CONJECTURES=/path/to/graph-conjectures")
+
+
+# ── public URLs of a corpus row ──
+# Site pages are rendered from data/*.json by graph-conjectures/scraper/build.py:
+#   arxiv  -> /arxiv/<safe_id>__<nn>/   bm -> /bm/<bm_id>/   others -> /others/<id>/   opg -> /op/<slug>/
+# The only stable per-record file on GitHub is the review file (status + summary); the statement
+# text itself lives inside one JSON array per corpus, without a stable anchor.
+SITE = "https://graph-theory-ai.github.io/graph-conjectures"
+GH_DATA = "https://github.com/graph-theory-AI/graph-conjectures/blob/main/data"
+
+ROW_ID_RE = re.compile(r"^(?P<tag>arxiv|bm|others|opg|erdos|derived|studies):(?P<key>.+)$")
+
+
+def row_urls(row_id):
+    """(site_url, review_url) of a corpus row id, or (None, None) for rows without a site page
+    (erdos / derived / studies). row ids: 'arxiv:<aid>#<nn>', 'bm:bm-NNN', 'others:<id>',
+    'opg:<slug>'."""
+    m = ROW_ID_RE.match(row_id or "")
+    if not m:
+        raise ValueError(f"row_urls: malformed row id {row_id!r}")
+    tag, key = m.group("tag"), m.group("key")
+    if tag == "arxiv":
+        aid, _, nn = key.partition("#")
+        if not nn:
+            raise ValueError(f"row_urls: arXiv row id without record index: {row_id!r}")
+        rk = f"{aid.replace('/', '_')}__{nn}"
+        return f"{SITE}/arxiv/{rk}/", f"{GH_DATA}/arxiv_reviews/{rk}.json"
+    if tag == "bm":
+        return f"{SITE}/bm/{key}/", f"{GH_DATA}/bondy_murty_reviews/{key}.json"
+    if tag == "others":
+        return f"{SITE}/others/{key}/", f"{GH_DATA}/others_reviews/{key}.json"
+    if tag == "opg":
+        return f"{SITE}/op/{key}/", f"{GH_DATA}/reviews/{key}.json"
+    return None, None
 
 # package -> Rocq namespace (the only copy in the repo)
 NS = {
@@ -143,3 +207,19 @@ def verification_tuple_errors(row):
             and row["source_verified_by"] == row["implemented_by"]:
         errs.append("source_verified_by == implemented_by (second reader required)")
     return errs
+
+
+def status_by_formal_name():
+    """formal_name -> the corpus `status` of its row ('open' / 'partial' / 'solved' / 'disproved').
+
+    Union over every existing corpus manifest. formal_names are unique across the manifests (both
+    builders enforce it), so the map is unambiguous; a row without a formal_name or without a
+    status contributes nothing. Used by the edge-graph status tripwire (build_edge_graph.py): a
+    verified/conditional implies edge may not point at a row the corpus calls `disproved`."""
+    out = {}
+    for name in existing_corpora():
+        for r in load_manifest(name)["rows"]:
+            fn, st = r.get("formal_name"), r.get("status")
+            if fn and st and fn not in out:
+                out[fn] = st
+    return out

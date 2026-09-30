@@ -30,8 +30,25 @@ Definition x82_outerplanar (G : sgraph) : Prop :=
 
 (** ** X82 statements ******************************************************)
 
-(** Studies slice: Araujo-Havet-Linhares Sales-Silva conjecture that
-    outerplanar graphs have bounded proper orientation number. *)
+(** Corpus row: studies:std_araujo_havet_linhares_sales_silva_conjecture_on
+    Site: none
+    Review: none
+    English statement: (Araujo, Havet, Linhares Sales and Silva, conjecture on the bounded
+      proper orientation number of outerplanar graphs)
+      There is a natural number C such that every outerplanar finite simple graph G admits an
+      orientation of its edges in which adjacent vertices have different in-degrees and every
+      in-degree is at most C.
+    Definitions: [x82_orientation_of G D] - D orients every edge of G exactly one way and
+      relates no non-adjacent pair (this file); [x82_indegree D v] - the number of vertices
+      sending an arc to v (this file); [x82_proper_orientation D] - adjacent vertices receive
+      distinct in-degrees (this file); [x82_proper_orientation_bound G k] - some proper
+      orientation of G has all in-degrees at most k (this file); [x82_outerplanar G] -
+      outerplanarity in the Chartrand-Harary minor sense, no K4 minor and no K2,3 minor (this
+      file); [minor], ['K_4], [KB 2 3] - minors and the complete / complete-bipartite graphs
+      (coq-graph-theory).
+    Notes: the constant C is chosen before the graph, so "bounded" is uniform over the class.
+      Outerplanarity is rendered by the forbidden-minor characterization rather than by an
+      embedding. *)
 Definition outerplanar_bounded_proper_orientation_number_statement : Prop :=
   exists C : nat,
     forall G : sgraph,

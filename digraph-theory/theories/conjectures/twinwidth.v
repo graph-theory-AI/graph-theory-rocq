@@ -166,14 +166,24 @@ Definition tww_le (D : diGraphType) (k : nat) : Prop :=
   exists s : seq (rel D),
     contraction_seq s /\ (seq_width s <= k)%N.
 
-(** ** Conjecture 3.12 (verbatim): bounded-twin-width tournaments are ω̄-bounded
-
-    For every [k], the class of tournaments with twin-width [≤ k] is
-    ω̄-bounded: there is a binding function [f_k] such that every tournament [T]
-    with [tww_le T k] is [f_k(ω̄(T))]-dicolourable (χ⃗(T) ≤ f_k(ω̄(T))).
-    [dicolorableb T m] is exactly "χ⃗(T) ≤ m" ([dichromatic.v]).  Guarded by
-    [0 < #|T|] so the empty tournament is not load-bearing. *)
-
+(** Corpus row: arxiv:2310.04265#02
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__02/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__02.json
+    English statement: (Aboulker, Aubian, Charbit, Lopes 2023, Clique number of tournaments, arXiv:2310.04265, Conjecture 3.12)
+      For every k there is a function f such that every nonempty tournament whose twin-width is
+      at most k has dichromatic number at most f applied to its tournament clique number; that
+      is, the class of tournaments of twin-width at most k is omega-bar-bounded.
+    Definitions: [tww_le D k] - some contraction sequence, a chain of equivalence relations from
+      the discrete to the total partition merging two parts at a time, has all red degrees at
+      most k, red adjacency between two parts meaning that the arc relation between them is not
+      constant (this file); [contraction_seq], [red_width], [seq_width] (this file); [omegabar
+      T] - the tournament clique number (invariants/omegabar.v); [dicolorableb T m] -
+      dichromatic number at most m (conjectures/dichromatic.v).
+    Notes: Twin-width is modelled concretely by contraction sequences, matching the directed
+      trigraph oracle of the problem folder. The guard 0 < #|T| keeps the empty tournament from
+      being load-bearing. A class-level restatement with a uniform bound is recorded in this
+      file as [conj_3_12_classwise]; the form documented here, with one binding function per k,
+      is the stronger one. *)
 Definition conj_3_12_statement : Prop :=
   forall k : nat,
     exists f : nat -> nat,
@@ -239,12 +249,21 @@ Definition otww_total : Prop :=
   forall (T : tournament) (p : {perm T}),
     exists k : nat, otww_le p k.
 
-(** *** Conjecture 3.13: a single ordering bounds BOTH ω(T^p) and tww(T,p)
-
-    There is one function [f] such that every tournament [T] (nonempty) has an
-    order [p] simultaneously bounding the backedge clique number ω(T^p) ≤
-    f(ω̄(T)) AND the ordered twin-width tww(T,p) ≤ f(ω̄(T)). *)
-
+(** No corpus row: Conjecture 3.13 of Aboulker, Aubian, Charbit and Lopes, Clique number of
+    tournaments (arXiv:2310.04265). The corpus row arxiv:2310.04265#03 no longer names this
+    definition: its statement_text was changed upstream and its formal_name was detached
+    (statement leg back to todo) during the corpus re-sync, because the corpus now reads tww(T,
+    p) <= f(tww(T)) -- the ordered twin-width bounded by a function of the TWIN-WIDTH of T --
+    while the body below reads: there is a function f such that every nonempty tournament T has
+    one vertex ordering p with the clique number of the back-edge graph of T under p at most
+    f(omega-bar(T)) and the ordered twin-width of T under p at most that same f(omega-bar(T)),
+    i.e. both bounds are taken in the tournament CLIQUE NUMBER. Vocabulary: [bclique p] is the
+    clique number of the back-edge graph under p (this file, over invariants/omegabar.v and
+    core/order.v), [omegabar T] the tournament clique number (invariants/omegabar.v), and
+    [otww_le] the ordered twin-width, an abstract section variable constrained by the faithful
+    axioms [otww_dominates_tww] and [otww_total] because order-contiguity of contractions has no
+    faithful one-file concrete form. The body is left untouched; the divergence is recorded in
+    meta/STATEMENT_IMPROVEMENTS.md and is being adjudicated against the paper. *)
 Definition conj_3_13_statement : Prop :=
   exists f : nat -> nat,
     forall T : tournament,
@@ -273,11 +292,20 @@ Variable bst_order : forall {T : tournament}, {perm T} -> Prop.
 Definition bst_order_exists : Prop :=
   forall T : tournament, (0 < #|T|)%N -> exists p : {perm T}, bst_order p.
 
-(** *** Conjecture 3.16: a BST-ordering bounds the backedge clique number
-
-    There is a function [f] such that every tournament [T] (nonempty) has a
-    BST-ordering [p] with backedge clique number ω(T^p) ≤ f(ω̄(T)). *)
-
+(** Corpus row: arxiv:2310.04265#04
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__04/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__04.json
+    English statement: (Aboulker, Aubian, Charbit, Lopes 2023, Clique number of tournaments, arXiv:2310.04265, Conjecture 3.16)
+      There is a function f such that every nonempty tournament T has a BST-ordering p whose
+      back-edge graph has clique number at most f applied to the tournament clique number of T.
+    Definitions: [bclique p] (this file); [omegabar T] (invariants/omegabar.v); [bst_order] -
+      the BST-ordering predicate, an ABSTRACT section variable constrained by the faithful
+      non-vacuity axiom [bst_order_exists] (every nonempty tournament has at least one), because
+      the in-order traversal of the recursively built binary search tree has no faithful
+      one-file concrete form (this file).
+    Notes: The statement lives inside a section over the abstract [bst_order], so it is
+      parametric in the BST-ordering predicate; that abstraction is the blocked structural
+      piece. *)
 Definition conj_3_16_statement : Prop :=
   exists f : nat -> nat,
     forall T : tournament,

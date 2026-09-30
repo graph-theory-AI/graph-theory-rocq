@@ -1,0 +1,129 @@
+{
+  "_README": "Register of the EXTERNAL classical facts that `status=conditional` @EDGE annotations may assume. A conditional edge is Qed-closed but takes cited literature as an explicit hypothesis (`Definition external_*_statement : Prop`, never an Axiom, never Admitted); this file is the human-reviewable half of that contract: what the cited theorem actually says, where it is published, and which edges depend on it. meta/build_edge_graph.py requires every name in an `external=` list to appear here with kind=\"theorem\" AND to exist as a `Definition external_*_statement` in some */theories/conjectures/*.v. `kind` is \"theorem\" for a published, proved result (the only kind a conditional edge may assume — assuming a conjecture makes the edge a `candidate`, not a `conditional`, one). `used_by` lists the edges as \"<from>-><to>:<kind>\".",
+  "theorems": [
+    {
+      "name": "external_circular_5_flow_statement",
+      "file": "cycle-theory/theories/conjectures/implications_X228.v",
+      "citation": "L. A. Goddyn, M. Tarsi, C.-Q. Zhang, On (k,d)-colorings and fractional nowhere-zero flows, Journal of Graph Theory 28 (1998) 155-161",
+      "claim": "The flow number of a graph is the ceiling of its circular flow number; in particular a graph carrying a circular 5-flow (a real-valued Kirchhoff flow with |phi(e)| in [1,4] on every edge) has a nowhere-zero integer 5-flow. The Rocq Prop states the instance needed here in the denominator-free form: if an integer edge weighting chi of a multigraph is Kirchhoff-conservative at every vertex and satisfies 2 <= |chi e| <= 8 on every edge -- equivalently, chi/2 is a nowhere-zero circular 5-flow -- then the multigraph has a nowhere-zero integer 5-flow.",
+      "kind": "theorem",
+      "used_by": [
+        "half_flow_pair_statement->five_flow_statement:implies"
+      ],
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS -- a theorem, correctly stated and neither stronger nor weaker than needed: chi/2 is a real nowhere-zero flow with values of modulus in [1,4], and Goddyn-Tarsi-Zhang (flow number = ceiling of circular flow number; already the Hoffman/Tutte rounding of a real flow to an integer flow between floor and ceiling edgewise) gives an integer flow with modulus in [1,4]. Loops cancel in iconservative and may take any nonzero value. Not trivial (it is the integrality step), not refutable, no numeric boundary to guard."
+    },
+    {
+      "name": "external_five_even_cover_cubic_reduction_statement",
+      "file": "cycle-theory/theories/conjectures/implications_U6.v",
+      "citation": "F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Annals of Discrete Mathematics 27 (1985) 1-12, DOI 10.1016/S0304-0208(08)72993-1, Section 2; see also C.-Q. Zhang, Integer Flows and Cycle Covers of Graphs, Marcel Dekker 1997, Chapter 3",
+      "claim": "The cycle-double-cover and k-cycle-double-cover problems reduce to CUBIC bridgeless graphs (suppress vertices of degree two, split vertices of degree at least four, a splitting that preserves bridgelessness by Fleischner's lemma and under which a cover of the cubic expansion restricts to a cover of the original graph). The Rocq Prop states the instance needed here: if every cubic bridgeless multigraph with at least one vertex and at least one edge has a double cover by five even subgraphs, then so does every bridgeless multigraph with at least one vertex and at least one edge.",
+      "kind": "theorem",
+      "used_by": [
+        "petersen_coloring_statement->cycle_double_cover_statement:implies",
+        "petersen_coloring_statement->m_n_cycle_covers_statement:implies",
+        "strong_5_cycle_double_cover_statement->cycle_double_cover_statement:implies",
+        "strong_5_cycle_double_cover_statement->m_n_cycle_covers_statement:implies"
+      ],
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS-WITH-NOTE -- a true reduction and not smuggling (same property, cubic case => general case). The cited sources state the cubic reduction for the CDC family; for the 5-even-subgraph double cover the same argument works (Fleischner splitting of degree >= 4 vertices preserves bridgelessness, an even subgraph of the split graph contains both or neither split edges and restricts to an even subgraph; degree-2 vertices are suppressed; components that are cycles are covered by (C,C,0,0,0)). The Rocq body additionally covers LOOPS (a loop is an even subgraph, add it to two of the five members) and isolated vertices, which the sources handle implicitly; 'cubic' is loopless here, and a cubic bridgeless multigraph has no loop anyway. Guards (0 < #|G|, 0 < #|edge G|) harmless. NOTE: the citation is to a folklore reduction; Zhang 1997 Ch. 3 is the better primary pointer."
+    },
+    {
+      "name": "external_cdc_simple_reduction_statement",
+      "file": "cycle-theory/theories/conjectures/implications_U6.v",
+      "citation": "F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Annals of Discrete Mathematics 27 (1985) 1-12, DOI 10.1016/S0304-0208(08)72993-1, Section 2; see also C.-Q. Zhang, Integer Flows and Cycle Covers of Graphs, Marcel Dekker 1997, Chapter 3",
+      "claim": "The cycle double cover conjecture reduces to SIMPLE (indeed simple cubic 3-connected) graphs: a loop is a circuit and may be covered twice on its own, vertices of degree two are suppressed, and parallel edges are subdivided or split away without affecting bridgelessness. The Rocq Prop states the instance needed here: if every simple bridgeless multigraph with at least one vertex has a cycle double cover, then so does every bridgeless multigraph with at least one vertex and at least one edge.",
+      "kind": "theorem",
+      "used_by": [
+        "small_cycle_double_cover_statement->cycle_double_cover_statement:implies"
+      ],
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS -- true and elementary: subdivide every edge of a bridgeless multigraph twice; the result is simple and bridgeless, and a circuit of it is a subdivided circuit of the original (a loop gives a triangle, a digon a 4-cycle, both mapping back to is_circuit edge sets since subdeg counts a loop twice), so a CDC transports back edge for edge. Not stronger than needed (hypothesis is the simple case of the same property); the edgeless simple case is satisfied by the empty list, so the hypothesis is consistent."
+    },
+    {
+      "name": "external_steffen_3flow_5graphs_statement",
+      "file": "cycle-theory/theories/conjectures/implications_D1.v",
+      "citation": "E. Steffen, Edge-colorings and circular flow numbers on regular graphs, Journal of Graph Theory 79 (2015) 1-7, arXiv:1310.8441, DOI 10.1002/jgt.21778; M. Kochol, An equivalent version of the 3-flow conjecture, J. Combin. Theory Ser. B 83 (2001) 258-261 (the direction used: 5-edge-connected reduction, with the circular flow number attained); L. A. Goddyn, M. Tarsi, C.-Q. Zhang, J. Graph Theory 28 (1998) 155-161",
+      "claim": "Tutte's 3-flow conjecture is EQUIVALENT to the statement that the circular flow number of every 5-graph is at most 3. The Rocq Prop states the direction used here: if every 5-graph (a 5-regular multigraph in which every odd vertex set has an edge cut of at least five edges) has circular flow number at most 3, then every 4-edge-connected multigraph with an edge has a nowhere-zero integer 3-flow.",
+      "kind": "theorem",
+      "used_by": [
+        "circular_flow_numbers_of_r_graphs_statement->three_flow_statement:implies"
+      ],
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS-WITH-NOTE -- Steffen (JGT 79 (2015), arXiv:1310.8441, end of Section 3) states verbatim 'Tutte's 3-flow conjecture is equivalent to the statement that F_c(G) <= 3 for every 5-graph G' (no proof there). The direction used is a theorem: every 5-edge-connected 5-regular graph is a 5-graph, F_c <= 3 in the repo's 'every rational r > 3' sense gives a nowhere-zero 3-flow because the circular flow number of a finite graph is attained (Goddyn-Tarsi-Zhang 1998), and Kochol (JCTB 83 (2001)) reduces Tutte's 3-flow conjecture to 5-edge-connected (5-regular) graphs. A 5-graph cannot carry a loop (cut of the singleton would be 3), so is_2t1_graph needs no loopless guard. NOTE: the citation should add Kochol 2001 as the proof source of the equivalence. Since the source row at t = 2 is literally the external's hypothesis, the conditional edge is carried entirely by the external -- honest, but the edge has no content beyond Steffen's remark."
+    },
+    {
+      "name": "external_tutte_class1_cubic_statement",
+      "file": "cycle-theory/theories/conjectures/implications_D1.v",
+      "citation": "W. T. Tutte, On the imbedding of linear graphs in surfaces, Proc. London Math. Soc. 51 (1949) 474-483, and A contribution to the theory of chromatic polynomials, Canad. J. Math. 6 (1954) 80-91, DOI 10.4153/CJM-1954-010-9; cited as 'Tutte's characterization of cubic graphs with flow number 4' by E. Steffen, Edge-colorings and circular flow numbers on regular graphs, J. Graph Theory 79 (2015) 1-7",
+      "claim": "A cubic graph has a nowhere-zero 4-flow if and only if it is 3-edge-colourable; hence every loopless 3-regular class-1 multigraph with at least one vertex has flow number, and so circular flow number, at most 4 -- a nowhere-zero rational r-flow for every rational r > 4.",
+      "kind": "theorem",
+      "used_by": [
+        "circular_flow_numbers_of_r_graphs_statement->circular_flow_number_of_regular_class_1_graphs_statement:implies"
+      ],
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS -- a theorem (Tutte): a 3-edge-colouring of a loopless cubic multigraph is a nowhere-zero Z2xZ2-flow, hence a nowhere-zero 4-flow, hence a real r-flow for every r >= 4, so circular_flow_number_le G 4. is_class1 with mreg G 3 and loopless is exactly '3-edge-colourable cubic'. Not stronger than needed; the 0 < #|G| guard is harmless (the empty graph satisfies the conclusion anyway)."
+    },
+    {
+      "name": "external_modular_orientation_to_flow_statement",
+      "file": "cycle-theory/theories/conjectures/implications_D1.v",
+      "citation": "W. T. Tutte, A contribution to the theory of chromatic polynomials, Canad. J. Math. 6 (1954) 80-91, DOI 10.4153/CJM-1954-010-9 (the Z_k-flow / k-flow equivalence), in the modular-orientation form used by F. Jaeger, Nowhere-zero flow problems, in Selected Topics in Graph Theory 3 (1988) 71-95",
+      "claim": "For every k >= 1, if a multigraph carries an orientation whose imbalance (indegree minus outdegree) is a multiple of 2k+1 at every vertex, then it has a nowhere-zero integer (2k+1)-flow: the constant weighting 1 on such an orientation is a nowhere-zero Z_(2k+1)-flow, and Tutte's theorem turns a nowhere-zero Z_m-flow into a nowhere-zero integer m-flow. NOTE the guard 0 < k, added 2026-09-24: without it the Prop is axiom-free REFUTABLE at k = 0.",
+      "kind": "theorem",
+      "used_by": [
+        "jaegers_modular_orientation_statement->three_flow_statement:implies"
+      ],
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS -- with the 0 < k guard (E5) it is exactly Tutte's Z_m-flow => integer m-flow theorem at m = 2k+1 applied to the constant-1 weighting of a modular orientation (loops have imbalance 0 and any nonzero value). The k = 0 refutation is gone; the edge only uses k = 1. Not trivially true, not refutable."
+    },
+    {
+      "name": "external_petersen_BF_cover_statement",
+      "file": "cycle-theory/theories/conjectures/implications_U10.v",
+      "citation": "D. A. Holton and J. Sheehan, The Petersen Graph, Australian Mathematical Society Lecture Series 7, Cambridge University Press 1993, DOI 10.1017/CBO9780511662058, Chapter 5; see also F. Jaeger, A survey of the cycle double cover conjecture, Ann. Discrete Math. 27 (1985) 1-12",
+      "claim": "The Petersen graph has exactly six perfect matchings, and every edge lies in exactly two of them; they therefore form a Berge-Fulkerson cover of the Petersen graph -- six sets of Petersen edges such that each meets every claw (every triple of pairwise adjacent Petersen edges, which in the triangle-free Petersen graph is a triple of edges through one vertex) in exactly one edge, and every Petersen edge lies in exactly two of the six.",
+      "kind": "theorem",
+      "used_by": [
+        "petersen_coloring_statement->the_berge_fulkerson_statement:implies"
+      ],
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS-WITH-NOTE -- true: take the six perfect matchings of the Petersen graph, each doubled over the two orientations since Pedge is the ORDERED pair type {p | padj p.1 p.2}; mut_adj3 Padj needs pairwise distinct supports, so in the triangle-free Petersen graph a triple is a claw at one vertex, met exactly once by a perfect matching, and each (oriented) edge lies in exactly two of the six. Not stronger than the cited fact. NOTE: it is a closed finite statement about a fixed 15-edge graph, so it is decidable and could be PROVED in Rocq by computation, turning edge petersen_coloring -> berge_fulkerson from conditional into verified."
+    },
+    {
+      "name": "external_whitney_line_inversion_statement",
+      "file": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "citation": "H. Whitney, Congruent graphs and the connectivity of graphs, Amer. J. Math. 54 (1932) 150-168; R. L. Hemminger, On reconstructing a graph, Proc. AMS 20 (1969) 185-187; D. L. Greenwell, Reconstruction of graphs, Proc. AMS 30 (1971) 431-433",
+      "claim": "Two graphs with at least four edges, the same edge deck and isomorphic line graphs are isomorphic: Whitney's theorem applied componentwise leaves only K3/K1,3 component swaps, which Kelly's lemma on the edge deck (triangle count, m >= 4) rules out, and the edge deck fixes the number of isolated vertices (Hemminger 1969, Greenwell 1971).",
+      "kind": "theorem",
+      "used_by": [
+        "reconstruction_statement->edge_reconstruction_statement:implies"
+      ],
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS-WITH-NOTE: theorem of the literature though neither paper states it standalone; derivation recorded in meta/E1-A1_edge_audit.md"
+    },
+    {
+      "name": "external_cdc_cubic_2connected_reduction_statement",
+      "file": "cycle-theory/theories/conjectures/implications_U6.v",
+      "citation": "F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12, DOI 10.1016/S0304-0208(08)72993-1, Section 2; C.-Q. Zhang, Integer Flows and Cycle Covers of Graphs, Marcel Dekker 1997, Chapter 3",
+      "claim": "If every cubic 2-connected multigraph (loopless, all degrees 3, at least three vertices, connected after deleting any one vertex) has a cycle double cover, then every bridgeless multigraph with at least one vertex and at least one edge has one. Weaker than the cited reduction (a minimal CDC counterexample is cubic and 3-connected); loops are covered by themselves twice.",
+      "kind": "theorem",
+      "used_by": [
+        "cycle_double_covers_containing_predefined_2_regular_statement->cycle_double_cover_statement:implies"
+      ],
+      "probe": "manual ladder under 3 GB memcap: done/by []/trivial, hnf;intros;done, eauto 6 neither prove nor refute (positive and negated); the `now firstorder` branch exceeds the memcap (as in playbook 343) and was not retried.",
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS-WITH-NOTE -- a theorem, and strictly weaker than the cited one: Jaeger 1985 Sec. 2 / Zhang 1997 Ch. 3 show a minimal CDC counterexample is cubic and 3-connected (indeed a snark), which gives this 2-connected form a fortiori. Exact on the U6 vocabulary: the conclusion is literally cycle_double_cover_statement (bridgeless, >= 1 vertex, >= 1 edge); cubic is loopless + mdeg 3; two_connected is >= 3 vertices + connected after deleting any one vertex. Corners are all covered by the standard minimal-counterexample argument: loops are circuits covered twice by themselves; bridgeless graphs split into 2-connected blocks and circuits live in blocks; cycle components are covered by the cycle twice; degree-2 vertices are suppressed and degree >= 4 vertices split by Fleischner's lemma (a circuit through the new edge that revisits v becomes an even subgraph and is re-decomposed into circuits, which cdc allows); the only loopless cubic 2-connected multigraph with fewer than 3 vertices, the theta graph, is excluded by the >= 3 guard but has the obvious CDC by its three digons. Not trivially true (the conclusion is the CDC conjecture) and not refutable; the hypothesis class is inhabited (K_4). The 0 < #|G| in the premise is redundant with two_connected."
+    },
+    {
+      "name": "external_layered_treewidth_planar_statement",
+      "file": "atlas/theories/conjectures/implications_A1.v",
+      "citation": "V. Dujmovic, P. Morin, D. R. Wood, Layered separators in minor-closed graph classes with applications, J. Combin. Theory Ser. B 127 (2017) 111-147, arXiv:1306.1595; K. Wagner, Über eine Eigenschaft der ebenen Komplexe, Math. Ann. 114 (1937) 570-590 (planar = no K5 and no K3,3 minor, the hypothesis form used)",
+      "claim": "Every planar graph has layered treewidth at most 3: a layering (adjacent vertices in equal or consecutive layers, e.g. BFS layers) and a tree decomposition each bag of which contains at most 3 vertices of each layer. The Rocq Prop states it on minor-theory width_params' layered_tw_le (layering L : G -> nat with |L u - L v| <= 1 on edges, sdecomp over a forest, every bag meets every layer in at most 3 vertices, width counted in vertices as in the source) for wagner_planar graphs (no K5, no K3,3 minor), which are the planar graphs by Wagner's theorem.",
+      "kind": "theorem",
+      "used_by": [
+        "bounded_layered_treewidth_bounded_queue_number_statement->planar_graphs_bounded_queue_number_statement:implies"
+      ],
+      "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
+      "review": "PASS-WITH-NOTE -- exactly Dujmovic-Morin-Wood's theorem 'every planar graph has layered treewidth at most 3' (JCTB 127 (2017)), stated on minor-theory width_params.layered_tw_le, the SAME predicate used by the source row X228.bounded_layered_treewidth_bounded_queue_number_statement: a layering L : G -> nat with |L u - L v| <= 1 on edges, a coq-graph-theory sdecomp over a forest (equivalent to a tree decomposition), and every bag meeting every layer in at most 3 vertices -- layered width counted in vertices, with no -1, as in the source, so the constant 3 is the paper's. Not stronger (no extra requirement on the layering, e.g. BFS, is imposed; the paper's layering is a BFS one, which satisfies this) and not refutable (the empty and small cases are covered by a one-bag decomposition). NOTE: the hypothesis is wagner_planar (no K5 and no K3,3 minor), so the Prop is DMW composed with Wagner's theorem (1937); add Wagner to the citation."
+    }
+  ]
+}

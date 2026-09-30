@@ -48,10 +48,32 @@ Definition proper_self_minor (G : iGraph) : Prop :=
   exists (H : iGraph) (b : iV H -> iV G -> Prop),
     [/\ iIso H G, minor_model b & proper_witness b].
 
-(** ** Seymour's self-minor conjecture  (Conjecture, OPEN)
-
-    Guarded by [infinite_graph]: FINITE graphs are provably NOT proper minors of
-    themselves (a proper minor is strictly smaller, hence not isomorphic), so the
-    guard is essential — without it the statement is refutable. *)
+(** Corpus row: opg:seymours_self_minor_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/seymours_self_minor_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/seymours_self_minor_conjecture.json
+    English statement: (Open Problem Garden, "Seymour's self-minor conjecture")
+      Every infinite graph is a proper minor of itself: for every graph G whose
+      vertex type contains an injective copy of the naturals there are a graph H
+      isomorphic to G and a minor model of H inside G - an assignment to each
+      H-vertex of a nonempty connected branch set, the branch sets pairwise
+      disjoint, with every H-edge realised by a G-edge between the corresponding
+      branch sets - which performs at least one nontrivial minor operation:
+      either some G-vertex lies in no branch set (a vertex deletion), or some
+      branch set contains two distinct vertices (an edge contraction), or some
+      G-edge runs between the branch sets of two non-adjacent H-vertices (an
+      edge deletion).
+    Definitions: [iGraph]/[iV]/[iadj] and [infinite_graph G] (Dedekind
+      infiniteness: nat injects into the vertices), [connected_set] (finite-walk
+      reachability inside a Prop-subset, via [reachP]) - all in
+      infinite-graph-theory/theories/foundations/igraph.v; [iIso G H] - an
+      adjacency-preserving bijection (this file, D4inf2.v); [minor_model G H b]
+      and [proper_witness G H b] and [proper_self_minor G] (D4inf2.v).
+    Notes: the [infinite_graph] guard is load-bearing - finite graphs are
+      provably NOT proper minors of themselves, so without it the statement is
+      refutable.  [proper_witness] is the other load-bearing guard: the identity
+      model (singleton branch sets, all edges kept) satisfies none of its three
+      disjuncts, so it cannot witness the conjecture.  The minor relation is
+      encoded combinatorially by branch sets; no well-quasi-order theory, choice
+      or cardinal arithmetic is used. *)
 Definition seymours_self_minor_statement : Prop :=
   forall G : iGraph, infinite_graph G -> proper_self_minor G.

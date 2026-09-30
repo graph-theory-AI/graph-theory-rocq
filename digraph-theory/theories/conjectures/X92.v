@@ -37,9 +37,21 @@ Definition x92_tournament_inversion_number_at_most
 
 (** ** X92 statements ******************************************************)
 
-(** Studies slice: Belkhechine-Bouaziz-Boudabbous-Pouzet conjecture that the
-    maximum number of subset inversions needed to make an n-vertex tournament
-    acyclic is at most floor((n-1)/2). *)
+(** Corpus row: studies:std_belkhechine_bouaziz_boudabbous_pouzet_inversion
+    Site: none
+    Review: none
+    English statement: (Belkhechine, Bouaziz, Boudabbous and Pouzet, inversion-number bound conjecture)
+      For every n, every tournament on n vertices can be made acyclic by at most floor((n-1)/2)
+      successive subset inversions, where one inversion picks a vertex subset and reverses every
+      arc with both ends in it.
+    Definitions: [x92_after_inversions steps] - the arc relation after applying the inversions
+      of the list steps (this file); [x92_acyclic_rel] - no vertex reaches itself back along a
+      forward arc (this file); [x92_inverts_to_acyclic] and
+      [x92_tournament_inversion_number_at_most n k] (this file); [tournament]
+      (core/tournament.v).
+    Notes: inv(n) of the source, the maximum inversion number over n-vertex tournaments, is
+      encoded as the upper bound holding for every tournament of that order; the floor is the
+      natural-number quotient n.-1 %/ 2. *)
 Definition tournament_inversion_number_half_bound_statement : Prop :=
   forall n : nat,
     x92_tournament_inversion_number_at_most n (n.-1 %/ 2).

@@ -120,6 +120,13 @@ split=> -[q [qpos [L [valid force]]]]; exists q; split=> //; exists L; split=> /
   exact: force phi legal.
 Qed.
 
+(** No corpus row: graph-theoretic read-back of the finite-palette list Ramsey theorem of
+    foundations/list_ramsey.v, PROVED below as [list_ramsey_chromatic_graph]: it replaces
+    the abstract avoidance predicate by the library chromatic number, forcing a colour
+    class of chromatic number greater than s. Same underlying result as
+    arXiv:2103.15175 Section 3.1, whose corpus row arxiv:2103.15175#00 carries no
+    formal_name and so cannot be cited; see
+    https://graph-theory-ai.github.io/graph-conjectures/arxiv/2103.15175__00/ *)
 Definition list_ramsey_chromatic_graph_statement : Prop :=
   forall s k : nat, 2 <= s -> 0 < k ->
     lr_graph_forces s k (s ^ k).+1 /\
@@ -195,9 +202,13 @@ move=> spos; split=> -[L [valid force]]; exists L; split=> //.
   exact: force phi legal.
 Qed.
 
-(** Exact source-facing statement: colors are arbitrary natural numbers,
-    monochromatic graphs use the library's chromatic number, and the Ramsey
-    number is expressed by its least-forcing-order characterization. *)
+(** No corpus row: source-facing form of the list Ramsey equality, PROVED below as
+    [list_ramsey_chromatic_resolution]: colours are arbitrary natural numbers,
+    monochromatic graphs use the library chromatic number, and the Ramsey number is
+    expressed by its least-forcing-order characterisation. Same underlying result as
+    arXiv:2103.15175 Section 3.1, whose corpus row arxiv:2103.15175#00 carries no
+    formal_name and so cannot be cited; see
+    https://graph-theory-ai.github.io/graph-conjectures/arxiv/2103.15175__00/ *)
 Definition list_ramsey_chromatic_resolution_statement : Prop :=
   forall s k : nat, 2 <= s -> 0 < k ->
     lr_nat_graph_forces s k (s ^ k).+1 /\

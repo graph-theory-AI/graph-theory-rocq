@@ -43,7 +43,24 @@ Definition x29_has_induced_cycle (G : sgraph) (n : nat) : Prop :=
 
 (** ** X29 statements ******************************************************)
 
-(** Studies slice: de Simone-Korner normal graph conjecture. *)
+(** Corpus row: studies:std_normal_graph_conjecture_de_simone_k_rner
+    Site: none
+    Review: none
+    English statement: (De Simone and Korner, normal graph conjecture)
+      Every finite simple graph G with no induced 5-cycle, no induced 7-cycle and whose
+      complement has no induced 7-cycle is normal, i.e. there are a family of cliques covering
+      all vertices and a family of stable sets covering all vertices such that every chosen
+      clique meets every chosen stable set.
+    Definitions: [x29_complement_rel] / [x29_complement G] - the complement graph (this file);
+      [x29_stable_set S] - S is stable (this file); [x29_clique_cover C] - a list of cliques
+      covering every vertex (this file); [x29_stable_cover S] - a list of stable sets covering
+      every vertex (this file); [x29_normal_graph G] - such a pair of covers exists with every
+      clique meeting every stable set (this file); [x29_has_induced_cycle G n] - some n-element
+      vertex set induces a subgraph isomorphic to the n-cycle (this file); [cycle_graph],
+      [induced], [clique] - GTBase / coq-graph-theory.
+    Notes: "G has no induced complement of C7" is rendered as "the complement of G has no
+      induced C7", which is equivalent since induced subgraphs commute with complementation.
+      The covers are lists rather than sets, so repetitions are allowed, which is immaterial. *)
 Definition no_c5_c7_complement_c7_normal_graph_statement : Prop :=
   forall G : sgraph,
     ~ x29_has_induced_cycle G 5 ->

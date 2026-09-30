@@ -6,6 +6,10 @@
 # --- foundations ---
 theories/foundations/prelude.v
 theories/foundations/interop_graph_theory.v
+theories/foundations/cycles.v
+# depends on theories/core (subdivision models / topological orders of digraphs);
+# `rocq makefile` orders by coqdep, so the listing order here is immaterial.
+theories/foundations/subdivision.v
 
 # --- core ---
 theories/core/digraph.v
@@ -113,6 +117,7 @@ theories/conjectures/grounding_P9.v
 theories/conjectures/implications_P9.v
 theories/conjectures/X1.v
 theories/conjectures/X2.v
+theories/conjectures/grounding_X2.v
 theories/conjectures/X16.v
 theories/conjectures/X17.v
 theories/conjectures/X19.v
@@ -121,6 +126,7 @@ theories/conjectures/X45.v
 theories/conjectures/X46.v
 theories/conjectures/X51.v
 theories/conjectures/X52.v
+theories/conjectures/grounding_X52.v
 theories/conjectures/X53.v
 theories/conjectures/X54.v
 theories/conjectures/X71.v
@@ -137,6 +143,16 @@ theories/conjectures/X136.v
 theories/conjectures/X166.v
 theories/conjectures/X179.v
 theories/conjectures/X193.v
+theories/conjectures/X216.v
+theories/conjectures/grounding_X216.v
+theories/conjectures/X221.v
+theories/conjectures/grounding_X221.v
+theories/conjectures/implications_X221.v
+theories/conjectures/implications_X1.v
+theories/conjectures/implications_X2.v
+theories/conjectures/implications_X45.v
+theories/conjectures/implications_X46.v
+theories/conjectures/implications_X52.v
 
 # Checked formal resolutions (2026-09-05)
 theories/applications/color_avoiding_benchmark.v

@@ -36,28 +36,70 @@ Unset Printing Implicit Defensive.
 
 (** ** Nodes *)
 
-(** Conjecture 5.10: for every k ≥ 3 there are arbitrarily large k-ω̄-critical
-    tournaments (≡ infinitely many up to isomorphism). *)
+(** Corpus row: arxiv:2310.04265#10
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__10/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__10.json
+    English statement: (Aboulker, Aubian, Charbit, Lopes 2023, Clique number of tournaments, arXiv:2310.04265, Conjecture 5.10)
+      For every k >= 3 and every N there is a tournament with more than N vertices that is
+      k-omega-bar-critical, that is whose tournament clique number equals k while deleting any
+      single vertex drops it to k-1; equivalently there are infinitely many k-omega-bar-critical
+      tournaments.
+    Definitions: [omegabar T] (written omega-bar) - the tournament clique number, the minimum
+      over vertex orderings of the clique number of the back-edge graph (invariants/omegabar.v,
+      over core/order.v); [sub_tournament S] (core/tournament.v); [kcritical k T] - omega-bar of
+      T equals k and omega-bar of every vertex-deleted tournament equals k-1
+      (invariants/critical.v).
+    Notes: Infinitely many up to isomorphism is encoded as arbitrarily large, which is
+      equivalent here because tournaments of a fixed order form a finite set. The row is marked
+      solved (Chen and Wang); the definition encodes the original conjecture. *)
 Definition conjecture_5_10_statement : Prop :=
   forall k : nat, (3 <= k)%N ->
     forall N : nat, exists T : tournament, kcritical k T /\ (N < #|T|)%N.
 
-(** Question 5.9 (positive / f = id form): there is a bound ℓ such that whenever
-    ω̄(T) ≥ k, some subtournament A with |A| ≤ ℓ(k) already has ω̄(A) ≥ k. *)
+(** Corpus row: arxiv:2310.04265#09
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__09/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__09.json
+    English statement: (Aboulker, Aubian, Charbit, Lopes 2023, Clique number of tournaments, arXiv:2310.04265, Question 5.9)
+      There is a function ell such that for every tournament T and every k, if the tournament
+      clique number of T is at least k then T has a subtournament on at most ell(k) vertices
+      whose tournament clique number is still at least k.
+    Definitions: [omegabar T] (written omega-bar) - the tournament clique number, the minimum
+      over vertex orderings of the clique number of the back-edge graph (invariants/omegabar.v,
+      over core/order.v); [sub_tournament S] (core/tournament.v).
+    Notes: The positive (f = id) form of the question: the threshold on T is the same k that the
+      witness must reach. The row is marked disproved, the refutation being the arbitrarily
+      large critical tournaments of [conjecture_5_10_statement]; the edge
+      [conj_5_10_implies_neg_Q5_9] in this file proves that implication. *)
 Definition question_5_9_statement : Prop :=
   exists ell : nat -> nat,
     forall (T : tournament) (k : nat), (k <= ω̄(T))%N ->
       exists S : {set T}, (#|S| <= ell k)%N /\ (k <= ω̄(sub_tournament S))%N.
 
-(** Conjecture 5.8: the f ≠ id weakening — two functions f, ℓ with ω̄(T) ≥ f(k) forcing a
-    size-≤ ℓ(k) subtournament of ω̄ ≥ k. *)
+(** No corpus row: Conjecture 5.8 of arXiv:2310.04265, the f different from identity weakening
+    of Question 5.9 (two functions f and ell such that omega-bar(T) >= f(k) forces a
+    subtournament of size at most ell(k) with omega-bar at least k); the corpus has no row for
+    it, the neighbouring rows being __09 (Question 5.9, on [question_5_9_statement]) and __07
+    (Conjecture 5.3, on [dom_omega_cluster_statement]). It is kept as the middle node of the
+    implication chain proved in this file. *)
 Definition conjecture_5_8_statement : Prop :=
   exists f ell : nat -> nat,
     forall (T : tournament) (k : nat), (f k <= ω̄(T))%N ->
       exists S : {set T}, (#|S| <= ell k)%N /\ (k <= ω̄(sub_tournament S))%N.
 
-(** "Large domination ⇒ ω̄-cluster": the same conclusion under a domination-number
-    hypothesis dom(T) ≥ f(k). *)
+(** Corpus row: arxiv:2310.04265#07
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__07/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__07.json
+    English statement: (Aboulker, Aubian, Charbit, Lopes 2023, Clique number of tournaments, arXiv:2310.04265, Conjecture 5.3, large dom implies an omega-bar-cluster)
+      There are functions f and ell such that for every tournament T and every k, if the
+      directed domination number of T is at least f(k) then T has a subtournament on at most
+      ell(k) vertices whose tournament clique number is at least k.
+    Definitions: [omegabar T] (written omega-bar) - the tournament clique number, the minimum
+      over vertex orderings of the clique number of the back-edge graph (invariants/omegabar.v,
+      over core/order.v); [sub_tournament S] (core/tournament.v); [domnum T] - the directed
+      domination number, the least size of a set that dominates every vertex
+      (invariants/domination.v).
+    Notes: The row is marked solved: it follows from Conjecture 5.8 via dom(T) <= omega-bar(T),
+      which is the edge [conj_5_8_implies_dom_cluster] proved in this file. *)
 Definition dom_omega_cluster_statement : Prop :=
   exists f ell : nat -> nat,
     forall (T : tournament) (k : nat), (f k <= domnum T)%N ->

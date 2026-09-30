@@ -70,6 +70,20 @@ Definition k_uniform (T : finType) (E : {set {set T}}) (k : nat) : Prop :=
 Definition union_closed (T : finType) (F : {set {set T}}) : Prop :=
   forall A B : {set T}, A \in F -> B \in F -> (A :|: B) \in F.
 
+(** Corpus row: opg:frankls_union_closed_sets_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/frankls_union_closed_sets_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/frankls_union_closed_sets_conjecture.json
+    English statement: (Open Problem Garden, "Frankl's union-closed sets conjecture")
+      Let F be a finite family of finite sets, not all empty, that is closed under taking
+      unions.  Then some element x belongs to at least half of the members of F.
+    Definitions: [union_closed F] - the union of any two members of F is again a member
+      (hypergraph-theory/theories/conjectures/U12.v).
+    Notes: hypergraphs and set families are modelled as a finite vertex type T together with a
+      family of vertex subsets; here the carrier is the family F itself.  "At least half" is
+      stated fraction-free as #|F| <= 2 * #|members of F containing x|.  "Not all empty" is the
+      guard "some member of F is nonempty", which also forces F to be nonempty; it is
+      load-bearing, since the family consisting of the empty set alone is union-closed and no
+      element lies in any of its members. *)
 Definition frankls_union_closed_sets_statement : Prop :=
   forall (T : finType) (F : {set {set T}}),
     union_closed F ->
@@ -102,6 +116,24 @@ Definition complete_sub (T : finType) (E : {set {set T}}) (S : {set T}) (k : nat
 Definition contains_complete (T : finType) (E : {set {set T}}) (m k : nat) : Prop :=
   exists S : {set T}, #|S| = m /\ complete_sub E S k.
 
+(** Corpus row: opg:turans_problem_for_hypergraphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/turans_problem_for_hypergraphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/turans_problem_for_hypergraphs.json
+    English statement: (Open Problem Garden, "Turan's problem for hypergraphs")
+      For every n at least 1, every simple 3-uniform hypergraph on 3n vertices that contains no
+      complete 3-uniform hypergraph on four vertices has at most one half of n squared times
+      (5n-3) hyperedges.
+    Definitions: [k_uniform E k] - every hyperedge of E has exactly k vertices
+      (hypergraph-theory/theories/conjectures/U12.v); [complete_sub E S k] - every k-element
+      subset of S is a hyperedge of E (same file); [contains_complete E m k] - some m-element
+      vertex set spans a complete k-uniform hypergraph inside E (same file).
+    Notes: a hyperedge family is a [{set {set T}}], so simplicity (no repeated hyperedge) holds
+      by construction.  The bound is stated fraction-free as 2 * #|E| <= n^2 * (5n - 3), and the
+      guard [0 < n] keeps 5n - 3 out of natural truncation.  PARTIAL COVERAGE: the corpus row
+      carries TWO conjectures - the one above and "every simple 3-uniform hypergraph on 2n
+      vertices with no complete 3-uniform hypergraph on five vertices has at most n^2(n-1)
+      hyperedges" - and only the first is formalised here (see
+      meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition turans_problem_for_hypergraphs_statement : Prop :=
   forall (n : nat) (T : finType) (E : {set {set T}}),
     0 < n ->
@@ -172,6 +204,28 @@ Definition critical_k_forest (T : finType) (E : {set {set T}}) (k : nat) : Prop 
   k_forest E k /\
   (forall e : {set T}, #|e| = k -> e \notin E -> berge_cycle (e |: E)).
 
+(** Corpus row: opg:are_critical_k_forests_tight
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/are_critical_k_forests_tight/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/are_critical_k_forests_tight.json
+    English statement: (Open Problem Garden, "Are critical k-forests tight?")
+      For every k at least 1, every k-uniform hypergraph with at least one hyperedge that is a
+      critical k-forest is a k-tree.
+    Definitions: [k_uniform E k] - every hyperedge has exactly k vertices
+      (hypergraph-theory/theories/conjectures/U12.v); [berge_cycle E] - there are t at least 2
+      pairwise distinct vertices and t pairwise distinct hyperedges of E, arranged cyclically,
+      with the i-th vertex lying in both the i-th and the (i+1)-st hyperedge (same file);
+      [berge_acyclic E] - E has no Berge cycle (same file); [hg_connected E] - E is nonempty and
+      any two of its hyperedges are joined by a chain of hyperedges of E with consecutive
+      members intersecting (same file); [k_forest E k] - E is k-uniform and Berge-acyclic (same
+      file); [k_tree E k] - a connected k-forest (same file); [critical_k_forest E k] - a
+      k-forest to which no further k-element hyperedge can be added without creating a Berge
+      cycle (same file).
+    Notes: hypergraph acyclicity is read as Berge-acyclicity and "critical" as maximality among
+      Berge-acyclic k-uniform families, so the conjecture becomes "a maximal k-forest is
+      connected".  The guards are load-bearing: without [E != set0] the empty family over a
+      carrier with fewer than k vertices vacuously satisfies [critical_k_forest] yet is not a
+      k-tree, which would refute the statement; [E != set0] together with k-uniformity also
+      forces k <= #|T|. *)
 Definition are_critical_k_forests_tight_statement : Prop :=
   forall (k : nat) (T : finType) (E : {set {set T}}),
     0 < k ->
@@ -224,6 +278,28 @@ Definition is_cover_number (T : finType) (E : {set {set T}}) (tau : nat) : Prop 
   (exists X : {set T}, hg_cover X E /\ #|X| = tau) /\
   (forall X : {set T}, hg_cover X E -> tau <= #|X|).
 
+(** Corpus row: opg:rysers_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/rysers_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/rysers_conjecture.json
+    English statement: (Open Problem Garden, "Ryser's conjecture")
+      Let r be at least 2 and let H be an r-uniform r-partite hypergraph.  If nu is the maximum
+      number of pairwise disjoint hyperedges of H and tau is the size of the smallest vertex set
+      meeting every hyperedge, then tau is at most (r-1) times nu.
+    Definitions: [r_partite_uniform part E] - every hyperedge meets each of the r parts, given
+      by the vertex map part, in exactly one vertex, so it has exactly r vertices
+      (hypergraph-theory/theories/conjectures/U12.v); [hg_matching M E] - M is a subfamily of E
+      whose hyperedges are pairwise disjoint (same file); [is_matching_number E nu] - nu is
+      attained by some matching and bounds the size of every matching (same file);
+      [hg_cover X E] - the vertex set X meets every hyperedge (same file);
+      [is_cover_number E tau] - tau is attained by some cover and is a lower bound for the size
+      of every cover (same file).
+    Notes: r-uniformity is not a separate hypothesis; it follows from meeting each of the r
+      parts exactly once.  Both nu and tau are introduced as universally quantified numbers
+      characterised by an "attained and extremal" pair, so no minimum or maximum operator is
+      needed.  The guard [1 < r] is the faithful domain of Ryser's conjecture: at r = 1 the
+      bound degenerates to tau <= 0 while tau = nu > 0 as soon as a hyperedge exists, which
+      would make the row refutable instead of open.  r = 2 is Koenig's theorem, r = 3 is
+      Aharoni's theorem, and the problem is open for r at least 4. *)
 Definition rysers_statement : Prop :=
   forall (r : nat) (T : finType) (part : T -> 'I_r) (E : {set {set T}})
          (nu tau : nat),

@@ -181,18 +181,40 @@ Qed.
 
 (** ** Bang-Jensen–Yeo SAD existence conjecture *)
 
-(** There is an absolute constant [K] such that every K-arc-strong digraph admits
-    a Strong Arc Decomposition.  (Bang-Jensen, Yeo 2004.  Known: K = 2 is FALSE —
-    infinite obstruction families exist; no 3-arc-strong obstruction is known.)
-    The nonemptiness guard [0 < #|D|] excludes the empty digraph. *)
+(** Corpus row: opg:arc_disjoint_strongly_connected_spanning_subdigraphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/arc_disjoint_strongly_connected_spanning_subdigraphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/arc_disjoint_strongly_connected_spanning_subdigraphs.json
+    English statement: (Open Problem Garden, Arc-disjoint strongly connected spanning subdigraphs (Bang-Jensen and Yeo 2004))
+      There is an integer K such that every nonempty finite K-arc-strong digraph has a strong
+      arc decomposition: its arc set splits into two disjoint parts, each of which, taken with
+      the full vertex set, is a strongly connected spanning subdigraph. K-arc-strong means that
+      every nonempty proper vertex set has at least K arcs leaving it.
+    Definitions: [arcset D] - the set of ordered pairs that are arcs (this file); [outcut X] -
+      the arcs from X to its complement (this file); [arc_strong D k] - every nonempty proper
+      vertex set has out-cut of size at least k, that is arc-connectivity at least k (this
+      file); [spanning_strong A] - A uses only real arcs and every ordered pair of vertices is
+      joined by a path using only arcs of A (this file); [SAD D] - the arc set partitions into
+      two spanning-strong parts (this file).
+    Notes: A subdigraph is represented by its arc set, the vertex set always being the whole of
+      V(D), so spanning is automatic. The two parts being arc-disjoint AND covering the arc set
+      is a partition, which is the decomposition reading; K = 2 is known to be false. *)
 Definition bang_jensen_yeo_SAD_statement : Prop :=
   exists K : nat,
     forall D : diGraphType, (0 < #|D|)%N -> arc_strong D K -> SAD D.
 
 (** ** WC3 — the working conjecture (K = 3 form) *)
 
-(** Every 3-arc-strong digraph has a Strong Arc Decomposition.  If true, settles
-    Bang-Jensen–Yeo with K = 3; a 3-arc-strong counterexample would refute it. *)
+(** Corpus row: derived:drv_sad_wc3
+    Site: none
+    Review: none
+    English statement: (corpus derived row WC3, the K = 3 working instance of the Bang-Jensen-Yeo conjecture)
+      Every nonempty finite 3-arc-strong digraph (every nonempty proper vertex set has at least
+      3 arcs leaving it) has a strong arc decomposition: its arc set splits into two disjoint
+      parts each inducing, on the full vertex set, a strongly connected spanning subdigraph.
+    Definitions: [arc_strong D 3] and [SAD D] and [spanning_strong] and [outcut] (this file).
+    Notes: All known obstructions to a strong arc decomposition are exactly 2-arc-strong, which
+      is why 3 is conjectured to suffice; the edge [WC3_implies_SAD] in this file derives the
+      Bang-Jensen-Yeo statement with K = 3. *)
 Definition WC3_statement : Prop :=
   forall D : diGraphType, (0 < #|D|)%N -> arc_strong D 3 -> SAD D.
 
@@ -203,18 +225,12 @@ Proof. by move=> H; exists 3 => D n0 h3; exact: H. Qed.
 
 (** ** CL1 — bilateral controlled-lifting lemma (Theorem-target) *)
 
-(** CL1 (ledger entry P2-CL1).  Bilateral lifting: if the vertex set splits as
-    [V = V1 ⊎ V2] with each side of size ≥ 2, each induced subdigraph [D[Vi]]
-    admits a SAD, and each of the two bridge sets — the V1→V2 out-cut [δ⁺(V1)] and
-    the V2→V1 out-cut [δ⁺(V2)] — splits into two NONEMPTY colour parts, then [D]
-    admits a SAD (recolour [A_red = R1 ∪ R2 ∪ (red part of δ⁺(V1)) ∪ (red part of
-    δ⁺(V2))], symmetrically for blue).  This is a RELATIVE theorem-target: it
-    asserts a SAD-from-SAD lifting and is provable WITHOUT resolving WC3/SAD.
-
-    Faithful encoding: "each bridge set splits into two nonempty colour parts" is
-    "∃ a bipartition of [outcut Vi] into [B1i], [B2i] both nonempty"; we existential
-    over those four parts.  [induced_digraph V1] / [induced_digraph V2] are the two
-    induced subdigraphs; [SAD] of each is the per-side hypothesis. *)
+(** No corpus row: the bilateral controlled-lifting lemma P2-CL1 of
+    problems/arc_disjoint_strong_spanning_subdigraphs: if the vertex set splits into two parts
+    of size at least 2, each induced subdigraph has a strong arc decomposition, and each of the
+    two bridge cuts splits into two nonempty parts, then the whole digraph has a strong arc
+    decomposition. It is a relative theorem-target of the SAD attack, provable without resolving
+    WC3, and has no corpus row. *)
 Definition CL1_statement : Prop :=
   forall (D : diGraphType) (V1 : {set D}),
     let V2 := ~: V1 in

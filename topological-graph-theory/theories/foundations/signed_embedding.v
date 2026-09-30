@@ -40,10 +40,13 @@
       predicate needed by the circular-embedding conjecture.
 
     SCOPE CAVEATS (inherited from the orientable layer, same review): the doubled
-    Euler relation is the CONNECTED-map one over truncating nat arithmetic;
-    consumers must carry a connectivity hypothesis, isolated vertices are
-    invisible to [emV], and edgeless graphs hit the empty-map anomaly.  Everything
-    is finite/decidable at the term level, hence axiom-free. *)
+    Euler relation is the CONNECTED-map one over truncating nat arithmetic, so
+    consumers must carry a connectivity hypothesis.  The isolated-vertex caveat is
+    GONE since 2026-09-23: [emV] is now [#|G|] (embedding.v, mirroring
+    base/theories/surface.v), so isolated vertices are counted and an edgeless graph
+    with at least one vertex has genus 0; only the EMPTY graph still hits the
+    empty-map truncation anomaly.  Everything is finite/decidable at the term level,
+    hence axiom-free. *)
 
 From mathcomp Require Import all_boot fingroup perm.
 From GTBase Require Import base.

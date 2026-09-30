@@ -55,15 +55,31 @@ Definition x117_ramsey_number (t R : nat) : Prop :=
 
 (** ** X117 statements *****************************************************)
 
-(** Conlon-Fox-Rodl.  Question: is [r(H_t;2) = t^{2+o(1)}]?  Here [H_t] is
-    the hedgehog above.  We encode "[= t^{2+o(1)}]" two-sidedly: for every
-    rational [eps = e1/e2 > 0] there is a threshold [t0] such that for all
-    [t >= t0], [t^{2-eps} <= r(H_t;2) <= t^{2+eps}].  The exponents are made
-    integral by raising to the power [e2] and cross-multiplying:
-    [t^{2-eps} <= R  <->  t^{2 e2 - e1} <= R^{e2}] and
-    [R <= t^{2+eps}  <->  R^{e2} <= t^{2 e2 + e1}].
-    (Truncated nat subtraction only weakens the lower bound for [eps >= 2],
-    where it is already implied; the binding content is at small [eps].) *)
+(** Corpus row: studies:std_conlon_fox_r_dl_question_on_hedgehog_ramsey_numb
+    Site: none
+    Review: none
+    English statement: (Conlon, Fox and Rodl, question on hedgehog Ramsey numbers)
+      Is the two-colour Ramsey number of the hedgehog H_t equal to t raised to the power
+      2 + o(1)?  Formalised two-sidedly: for every positive rational epsilon there is a
+      threshold t0 such that for every t at least t0, the two-colour Ramsey number R of H_t
+      satisfies t^(2 - epsilon) <= R <= t^(2 + epsilon).
+    Definitions: [x117_spike t] - an unordered pair of body vertices, presented as an ordered
+      pair with the first index smaller (hypergraph-theory/theories/conjectures/X117.v);
+      [x117_vertex t] - a body vertex or a spike vertex (same file); [x117_edge s] - the
+      hyperedge consisting of the two body vertices of the spike s together with s itself (same
+      file); [x117_edges t] - the hedgehog H_t, i.e. the family of all those hyperedges, a
+      3-uniform hypergraph with t body vertices and one spike and one hyperedge per unordered
+      pair (same file); [x117_image_edge f e] - the image of a hyperedge under f (same file);
+      [x117_monochromatic_copy E col] - there are a colour and an injection of the vertices into
+      the host with every image hyperedge of that colour (same file);
+      [x117_forces_mono E N] - every two-colouring of the subsets of an N-element host admits
+      such a copy (same file); [x117_ramsey_number t R] - R is the least host size forcing a
+      monochromatic copy of H_t (same file).
+    Notes: "t^(2+o(1))" is read as the two-sided rational-epsilon envelope, with the threshold
+      t0 chosen after epsilon.  The exponents are cleared by raising to the power e2, so the two
+      inequalities become t^(2*e2 - e1) <= R^e2 and R^e2 <= t^(2*e2 + e1).  Truncated natural
+      subtraction only weakens the lower bound when epsilon is at least 2, where it is already
+      implied, so the binding content sits at small epsilon. *)
 Definition conlon_fox_rodl_hedgehog_ramsey_statement : Prop :=
   forall e1 e2 : nat,
     0 < e1 -> 0 < e2 ->

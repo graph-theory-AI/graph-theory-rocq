@@ -66,6 +66,7 @@
 
 From GraphTheory Require Import mgraph sgraph.
 From GTBase Require Export base.
+From Cycle.foundations Require Import matchings_cuts.
 From Cycle.conjectures Require Import U6 U10.
 
 Set Implicit Arguments.
@@ -74,12 +75,22 @@ Unset Printing Implicit Defensive.
 
 (** ** The carried bridge fact: the Petersen graph's own Berge–Fulkerson cover *)
 
-(** A list of six edge-sets of the Petersen graph such that (i) each
-    mutually-adjacent triple of Petersen edges (= a claw, the Petersen graph
-    being cubic and triangle-free) is met in EXACTLY one edge by every member,
-    and (ii) every Petersen edge lies in exactly two members.  This is a fixed
-    finite property of THE Petersen graph (its six perfect matchings); it does
-    not mention any host graph [G]. *)
+(** External theorem: D. A. Holton and J. Sheehan, The Petersen Graph, Australian
+    Mathematical Society Lecture Series 7, Cambridge University Press 1993,
+    Chapter 5 (the Petersen graph has exactly six perfect matchings, and every
+    edge lies in exactly two of them); see also F. Jaeger, A survey of the cycle
+    double cover conjecture, Ann. Discrete Math. 27 (1985) 1-12, where this
+    six-matching cover is the Berge-Fulkerson cover of the Petersen graph.
+    DOI 10.1017/CBO9780511662058.
+    Claim: the six perfect matchings of the Petersen graph form a
+    Berge-Fulkerson cover of it -- six sets of Petersen edges such that each of
+    them meets every claw (every triple of pairwise adjacent Petersen edges, which
+    in the triangle-free Petersen graph is a triple of edges through one vertex)
+    in exactly one edge, and every Petersen edge lies in exactly two of the six.
+    Not formalized here: it is carried as an explicit hypothesis of the
+    conditional edge below (never an [Axiom], never [Admitted]), which is why
+    that edge is [status=conditional external=...] rather than [verified]. It
+    mentions no host graph. *)
 Definition external_petersen_BF_cover_statement : Prop :=
   exists LP : seq {set Pedge},
     [/\ size LP = 6,
@@ -116,7 +127,7 @@ Qed.
 
 (** ** The scheduled edge *)
 
-(*@EDGE from=petersen_coloring_statement to=the_berge_fulkerson_statement kind=implies status=verified-literature proved=true proof=petersen_coloring_implies_berge_fulkerson cite="F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12" note="Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (carried as the explicit Petersen-side hypothesis external_petersen_BF_cover_statement) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f" *)
+(*@EDGE from=petersen_coloring_statement to=the_berge_fulkerson_statement kind=implies status=conditional external="external_petersen_BF_cover_statement" proof=petersen_coloring_implies_berge_fulkerson cite="F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12" note="Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (carried as the explicit Petersen-side hypothesis external_petersen_BF_cover_statement) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f" *)
 Theorem petersen_coloring_implies_berge_fulkerson :
   external_petersen_BF_cover_statement ->
   petersen_coloring_statement ->
@@ -125,13 +136,13 @@ Proof.
 move=> [LP [Hsize Hone Htwice]] Hpc G Hn Hcb.
 have [f Hf] := Hpc G Hn Hcb.
 have [Hcubic _] := Hcb.
-have [_ Hreg] := Hcubic.
+have [Hll Hreg] := Hcubic.
 exists (map (fun S : {set Pedge} => [set e : edge G | f e \in S]) LP).
 split.
 - by rewrite size_map.
 - (* every pullback member is a perfect matching of G *)
   move=> M /mapP[S HS ->] v.
-  have Hd3 : #|edges_at v| = 3 by exact: (Hreg v).
+  have Hd3 : #|edges_at v| = 3 by rewrite -(mdeg_loopless v Hll); exact: (Hreg v).
   have [e1 [e2 [e3 [n12 n13 n23 Heq]]]] := set3 Hd3.
   have inc : forall e : edge G, e \in edges_at v -> incident v e.
     by move=> e; rewrite inE.
@@ -149,7 +160,7 @@ split.
     + by apply: (line _ _ m1 m3 n13).
   have mp := Hf e1 e2 e3 ml.
   have Hsum := Hone S (f e1) (f e2) (f e3) HS mp.
-  rewrite /subdeg -preliminaries.sum_cardI.
+  rewrite (subdeg_loopless _ _ Hll) -preliminaries.sum_cardI.
   rewrite (eq_bigr (fun e => (f e \in S : nat))); last by move=> e _; rewrite inE.
   rewrite Heq.
   have h1 : e1 \notin [set e2; e3] by rewrite !inE negb_or n12 n13.
@@ -164,7 +175,44 @@ split.
   exact: Htwice (f e).
 Qed.
 
-(** ── Audited candidate (non-scheduled) edges (machine-readable) ── *)
+(** ================================================================= *)
+(** ** Berge-Fulkerson =>  intersecting two perfect matchings (Row 1 => Row 3)
 
-(*@EDGE from=the_berge_fulkerson_statement to=intersecting_two_perfect_matchings_statement kind=implies status=candidate proved=false cite="Fan-Raspaud 1994 (Berge-Fulkerson => Fan-Raspaud)" note="Plausible literature implication, but Row 3 here is the 'M1 cap M2 contains no odd edge-cut' formulation, not the three-matchings empty-intersection form; exact endpoint match must be re-derived before scheduling" *)
+    A Berge-Fulkerson cover [L] has SIX members, so after picking the first two
+    as [M1] and [M2] a THIRD perfect matching [M3] is still available.  Suppose
+    [M1 :&: M2] contained an odd edge cut [T = cut S].  Every edge of [T] lies in
+    both [M1] and [M2], i.e. at two positions of [L] already, and the cover
+    condition caps the total at two, so [M3] misses [T] entirely.  But F27
+    ([matchings_cuts.pm_meets_odd_cut]: the [M3]-degree sum over [S] is [#|S|],
+    the handshake identity makes [#|M3 :&: cut S|] and [#|S|] equal mod 2, and
+    3-regularity makes [#|cut S|] and [#|S|] equal mod 2) forces [M3] to MEET
+    every odd cut.  Contradiction, so no odd cut sits inside [M1 :&: M2]. *)
+
+(*@EDGE from=the_berge_fulkerson_statement to=intersecting_two_perfect_matchings_statement kind=implies status=verified proof=the_berge_fulkerson_implies_intersecting_two_perfect_matchings cite="gc:e092" note="Berge-Fulkerson cover of six perfect matchings: take M1, M2 the first two members; an odd cut inside M1 cap M2 would already use up both of its two allowed covering positions, so the third member M3 would miss it, contradicting F27 (matchings_cuts.pm_meets_odd_cut: a perfect matching of a 3-regular multigraph meets every odd edge cut, by the handshake identity relative to S)" *)
+Theorem the_berge_fulkerson_implies_intersecting_two_perfect_matchings :
+  the_berge_fulkerson_statement -> intersecting_two_perfect_matchings_statement.
+Proof.
+move=> HBF G Hn Hcb.
+have [[Hll Hreg] Hbl] := Hcb.
+have [L [Hsize Hpm Htwice]] := HBF G Hn Hcb.
+have gen : forall (T : Type) (s : seq T), size s = 6 ->
+    exists a b c s', s = [:: a, b, c & s'].
+  move=> T [|a [|b [|c s']]] //= _.
+  by exists a, b, c, s'.
+have [M1 [M2 [M3 [L' HL]]]] := gen _ L Hsize.
+have pm1 : is_perfect_matching M1 by apply: Hpm; rewrite HL !inE eqxx.
+have pm2 : is_perfect_matching M2 by apply: Hpm; rewrite HL !inE eqxx orbT.
+have pm3 : is_perfect_matching M3 by apply: Hpm; rewrite HL !inE eqxx !orbT.
+exists M1, M2; split; [exact: pm1 | exact: pm2 |].
+move=> [T [Tsub [S [Tcut _ Todd]]]].
+have oc : odd #|cut S| by rewrite -Tcut.
+have /set0Pn [e] := @pm_meets_odd_cut G M3 S Hreg pm3 oc.
+rewrite inE => /andP[e3 ec].
+have eT : e \in T by rewrite Tcut.
+have e12 := subsetP Tsub _ eT.
+rewrite inE in e12; have [e1 e2] := andP e12.
+by move: (Htwice e); rewrite HL /= e1 e2 e3.
+Qed.
+
+(** ── Audited candidate (non-scheduled) edges (machine-readable) ── *)
 (*@EDGE from=petersen_coloring_statement to=intersecting_two_perfect_matchings_statement kind=implies status=candidate proved=false cite="snark-colouring literature" note="Petersen colouring is expected to imply the Fan-Raspaud-type Row 3, but only via the Berge-Fulkerson route whose endpoint match to the committed odd-edge-cut formulation is unverified" *)

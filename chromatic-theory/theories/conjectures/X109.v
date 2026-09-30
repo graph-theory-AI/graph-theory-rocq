@@ -35,8 +35,25 @@ Definition x109_recolour_diameter_at_most
 
 (** ** X109 statements *****************************************************)
 
-(** Studies slice: Cereceda's conjecture: the recolouring graph R_{k+2}(G) of
-    a k-degenerate n-vertex graph has diameter O(n^2). *)
+(** Corpus row: studies:std_cereceda_s_conjecture
+    Site: none
+    Review: none
+    English statement: (Cereceda, studies slice of the corpus)
+      There is a constant C such that for every k and every k-degenerate finite simple graph G on n
+      vertices, any two proper colourings of G with k+2 colours are joined by a sequence of at most
+      C*n^2 single-vertex recolouring steps, each intermediate colouring being proper; that is, the
+      recolouring graph R_{k+2}(G) has diameter O(n^2).
+    Definitions: [x109_proper_colouring col] - adjacent vertices get different colours (this
+      file); [x109_recolour_step c d] - c and d differ at exactly one vertex (this file);
+      [x109_recolour_walk c d w] - w is a path of recolouring steps from c to d all of whose
+      colourings are proper (this file); [x109_recolour_diameter_at_most G q bound] - any two proper
+      q-colourings are joined by such a walk of length at most bound (this file); [k_degenerate G k]
+      - every nonempty vertex subset contains a vertex of degree at most k inside it (GTBase
+      base/theories/base.v).
+    Notes: This row has no site or review page in the corpus, hence the literal "none" above. The
+      asymptotic O(n^2) is made concrete by an explicit constant C quantified OUTSIDE k, n and G,
+      which is a slightly stronger reading than a constant depending on k. Colourings are finite
+      functions [{ffun G -> 'I_q}] so that the recolouring graph is a genuine finite object. *)
 Definition cereceda_degenerate_recolouring_quadratic_diameter_statement : Prop :=
   exists C : nat,
     forall (k n : nat) (G : sgraph),

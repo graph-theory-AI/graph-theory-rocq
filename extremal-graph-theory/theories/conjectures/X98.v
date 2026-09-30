@@ -72,11 +72,29 @@ Record x98_induced_subdivision_model (H G : sgraph) := X98Model {
 Definition x98_induced_subdivision (H G : sgraph) : Prop :=
   inhabited (x98_induced_subdivision_model H G).
 
-(** ** X98 statements ******************************************************)
-
-(** Studies slice: Bonamy et al. polynomial Kuhn-Osthus conjecture: for every
-    fixed graph H, a polynomial in s average-degree threshold forces an induced
-    subdivision of H in every K_{s,s}-free graph. *)
+(** Corpus row: studies:std_bonamy_et_al_polynomial_k_hn_osthus_conjecture
+    Site: none
+    Review: none
+    English statement: (Bonamy, Bousquet, Pilipczuk, Rzazewski, Thomasse and Walczak, "Bonamy et al. polynomial Kuhn-Osthus conjecture")
+      For every graph H there is a polynomial p such that for every s >= 1, every graph G with
+      no K_{s,s} subgraph whose average degree is at least p(s) contains an induced subdivision
+      of H; that is, the Kuhn-Osthus threshold p(s,H) can be taken polynomial in s.
+    Definitions: [x98_consecutive_in_path p u v] - u and v are consecutive in the list p (X98.v);
+      [x98_induced_path_between G a b p] - p is a duplicate-free path from a to b whose only
+      internal edges are the consecutive ones, i.e. an induced path (X98.v); [x98_internal p a b
+      x] - x is a non-endpoint vertex of p (X98.v); [x98_model_vertex br ep x] - x is a branch
+      vertex or lies on some edge-path (X98.v); [x98_induced_subdivision_model H G] - a record
+      with injective branch vertices, induced edge-paths for the edges of H, internal vertices
+      avoiding branch vertices, pairwise internally disjoint paths, and global inducedness (the
+      only edges of G among model vertices are consecutive pairs on a single path) (X98.v);
+      [x98_induced_subdivision H G] - inhabitation of that record (X98.v);
+      [x59_subgraph_of], [x59_poly_eval] (X59.v); [KB s s] - the complete bipartite graph
+      K_{s,s} (GTBase); [average_degree_geq G d 1] - average degree at least d (GTBase).
+    Notes: this row comes from the studies slice of the corpus, which has no site or review page.
+      The polynomial is a coefficient list, so only non-negative integer coefficients are
+      available, which suffices for a threshold. K_{s,s}-freeness is subgraph-freeness, as in
+      the Kuhn-Osthus theorem. The polynomial may depend on H but not on s or G, as the source
+      requires. *)
 Definition polynomial_kuhn_osthus_induced_subdivision_statement : Prop :=
   forall H : sgraph,
     exists p : seq nat,

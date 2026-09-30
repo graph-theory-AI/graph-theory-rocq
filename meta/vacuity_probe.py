@@ -24,7 +24,7 @@ Usage:
   python3 meta/vacuity_probe.py --wave X35                            # every _statement of a wave (via waves json)
   python3 meta/vacuity_probe.py --all                                 # whole v2 conjecture corpus (slow)
   python3 meta/vacuity_probe.py --validate                            # self-test: regression + recall + control
-Runs against the `digraph` opam switch (Rocq 9.1.1).  Read-only w.r.t. the repo (scratch in a tmpdir).
+Runs with the coqc on PATH, or through `opam exec --switch $ROCQ_OPAM_SWITCH` when set (Rocq 9.1.1).  Read-only w.r.t. the repo (scratch in a tmpdir).
 Exit code 0 iff nothing was FLAGGED (suitable for `make probe`).
 """
 from __future__ import annotations
@@ -34,7 +34,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 META = ROOT / "meta"
 HINTS = META / "probe_hints"
-SWITCH = "digraph"
+SWITCH = os.environ.get("ROCQ_OPAM_SWITCH", "")   # empty: use the coqc on PATH (default switch)
+
+
+def coqc_cmd():
+    """The coqc invocation: through `opam exec --switch $ROCQ_OPAM_SWITCH` when that variable is
+    set, else the ambient coqc. A missing toolchain must abort the probe rather than report every
+    statement as `ok` (a silent false green, observed on a machine without the `digraph` switch)."""
+    return (["opam", "exec", "--switch", SWITCH, "--", "coqc"] if SWITCH else ["coqc"])
 DEFAULT_TIMEOUT = 45
 
 sys.path.insert(0, str(META))
@@ -100,7 +107,9 @@ def compile_snippet(area: str, ns: str, stem: str, body: str, timeout: int) -> t
     with tempfile.TemporaryDirectory() as td:
         f = Path(td) / "probe.v"
         f.write_text(header + body + "\n")
-        rc, log = sh(["opam", "exec", "--switch", SWITCH, "--", "coqc", "-q", *area_flags(area), str(f)], timeout)
+        rc, log = sh([*coqc_cmd(), "-q", *area_flags(area), str(f)], timeout)
+        if rc != 0 and ("No such file" in log or "not installed" in log or "command not found" in log):
+            sys.exit(f"vacuity_probe: coqc toolchain unavailable ({log.strip()[:200]})")
         return rc == 0, log
 
 
@@ -112,8 +121,7 @@ def compile_hint(area: str, hint: Path, timeout: int) -> bool:
     with tempfile.TemporaryDirectory() as td:
         f = Path(td) / hint.name
         f.write_text(hint.read_text())
-        rc, _ = sh(["opam", "exec", "--switch", SWITCH, "--", "coqc", "-q",
-                    *area_flags(area), str(f)], max(timeout, 90))
+        rc, _ = sh([*coqc_cmd(), "-q", *area_flags(area), str(f)], max(timeout, 90))
         return rc == 0
 
 

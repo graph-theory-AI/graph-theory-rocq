@@ -74,14 +74,56 @@ Definition se_adj (k n : nat) : rel 'I_(k ^ (n - 1)) :=
   fun i j =>
     let t := k ^ (n - 1) in
     (val j + (t - (k * val i) %% t)) %% t < k.
+(** Corpus row: opg:shuffle_exchange_conjecture_graph_theoretic_form
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/shuffle_exchange_conjecture_graph_theoretic_form/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/shuffle_exchange_conjecture_graph_theoretic_form.json
+    English statement: (Open Problem Garden, "Shuffle-Exchange Conjecture (graph-theoretic
+      form)")
+      For all integers k, n >= 2, writing SE(k,n) for the shuffle-exchange stage relation on
+      the k^(n-1) positions (position i is joined to position j exactly when
+      (j - k*i) mod k^(n-1) < k), the network made of 2n-2 consecutive copies of SE(k,n) is
+      rearrangeable, and every r >= 2 for which r-1 copies already suffice satisfies
+      r >= 2n-1; that is, the least such r equals 2n-1.
+    Definitions: [se_adj k n] - the shuffle-exchange stage relation above (this file);
+      [stage_regular], [stage_reachable], [externally_connected], [multistage_route],
+      [rearrangeable] - the multistage-network routing layer, every permutation routable
+      node-disjointly through r stages (this file).
+    Notes: this definition is a verbatim restatement of the one in
+      graph-theory-misc/theories/conjectures/U13.v, so that both endpoints of the candidate
+      edge below are in scope inside this self-contained file; the two copies must stay
+      identical.  The corpus row also carries a Problem proposition (find r(k,n)); only the
+      Conjecture proposition is formalized, as a conjunction of the achievability and the
+      optimality halves.  The source's (SE(k,n))^(r-1) denotes r-1 concatenated copies, so
+      r = 2n-1 corresponds to [rearrangeable] at 2n-2 stages. *)
 Definition shuffle_exchange_conjecture_statement : Prop :=
   forall k n : nat,
     2 <= k -> 2 <= n ->
     rearrangeable (@se_adj k n) (2 * n - 2) /\
     (forall r : nat, 2 <= r -> rearrangeable (@se_adj k n) (r - 1) -> 2 * n - 1 <= r).
 
-(** ** Row 11 node (Beneš, graph-theoretic form), verbatim *)
+(** ** Row 11 node (Benes, graph-theoretic form), verbatim *)
 
+(** Corpus row: opg:bene_conjecture_graph_theoretic_form_0
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/bene_conjecture_graph_theoretic_form_0/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/bene_conjecture_graph_theoretic_form_0.json
+    English statement: (Benes; Open Problem Garden, "Benes Conjecture (graph-theoretic form)")
+      For every t > 0, every relation L on the t ordered positions and every d, if L is
+      d-regular (every input has out-degree d and every output in-degree d), then for every
+      m >= 1 such that L is externally connected in m steps (every input reaches every output
+      through m copies of L), the 2m-stage network built from L is rearrangeable, i.e. every
+      permutation of the t positions can be routed node-disjointly through 2m stages.
+    Definitions: [stage_regular L d] - d-regularity of the stage on both sides (this file);
+      [stage_reachable] / [externally_connected L m] - reachability through exactly m stages /
+      from every input to every output (this file); [multistage_route L r route pi] - a
+      node-disjoint routing of the permutation pi through r stages (this file);
+      [rearrangeable L r] - every permutation is so routable (this file).
+    Notes: this definition is a verbatim restatement of the one in
+      graph-theory-misc/theories/conjectures/U13.v, so that both endpoints of the candidate
+      edge below are in scope inside this self-contained file; the two copies must stay
+      identical.  A "simple regular ordered 2-stage graph" of the source is modelled as one
+      bipartite layer L between two copies of the linearly ordered set of t positions; L^m is
+      m concatenated copies.  The corpus row also carries a Problem proposition; only the
+      Conjecture proposition is formalized. *)
 Definition bene_conjecture_graph_theoretic_form_0_statement : Prop :=
   forall (t : nat) (L : rel 'I_t) (d : nat),
     0 < t ->
@@ -97,4 +139,4 @@ Definition bene_conjecture_graph_theoretic_form_0_statement : Prop :=
     [Theorem … Qed] is asserted here.  The lone literature-motivated direction
     is recorded as a candidate only. *)
 
-(*@EDGE from=bene_conjecture_graph_theoretic_form_0_statement to=shuffle_exchange_conjecture_statement kind=implies status=candidate proved=false cite="Beneš 1965; Stone 1971 (shuffle-exchange); Beauquier–Darrot 2002 (graph-theoretic Beneš)" note="General stage-regular rearrangeability (Beneš) would give the UPPER-bound conjunct (se_adj k n rearrangeable at 2*n-2) via external connectivity of the shuffle-exchange graph in n-1 steps, but shuffle_exchange_conjecture_statement also demands the matching LOWER bound (optimality 2*n-1<=r), which Beneš does not yield and is itself open; also needs external facts that se_adj is stage-regular and externally connected in n-1. Does NOT close as a single relative theorem." *)
+(*@EDGE from=bene_conjecture_graph_theoretic_form_0_statement to=shuffle_exchange_conjecture_statement kind=implies status=refuted-direction cite="Beneš 1965; Stone 1971 (shuffle-exchange); Beauquier–Darrot 2002 (graph-theoretic Beneš)" note="REFUTED-DIRECTION (metadata wave M, 2026-09-24): gives only the upper conjunct; the 2n-1 optimality lower bound is itself open. Earlier note: General stage-regular rearrangeability (Beneš) would give the UPPER-bound conjunct (se_adj k n rearrangeable at 2*n-2) via external connectivity of the shuffle-exchange graph in n-1 steps, but shuffle_exchange_conjecture_statement also demands the matching LOWER bound (optimality 2*n-1<=r), which Beneš does not yield and is itself open; also needs external facts that se_adj is stage-regular and externally connected in n-1. Does NOT close as a single relative theorem." *)

@@ -1,0 +1,10 @@
+{
+ "_README": "Whitelist for the corpus-status tripwire of meta/build_edge_graph.py. The tripwire fails the build when a verified/conditional implies/specializes @EDGE points at a corpus row whose upstream `status` is `disproved` while its source row is not (for `equiv`: when exactly one endpoint is disproved), because the edge and the two statuses cannot all three be right. An entry here says WHICH contradiction is upstream's rather than ours: the Rocq edge is sound, the corpus statuses disagree with each other, and the discrepancy is to be reported to graph-conjectures. Whitelisted edges are printed as warnings, never silently. `edge` is \"<from>-><to>:<kind>\" with the formal_names of the annotation; `reason` says why the Rocq edge stands; `corpus_feedback_item` names the upstream item that tracks the fix. Drop an entry as soon as upstream reconciles the statuses (the builder then warns that it is stale).",
+ "exceptions": [
+  {
+   "edge": "delta122_hero_k1_plus_dipath2_free_statement->delta122_hero_oriented_complete_multipartite_statement:implies",
+   "reason": "The faithfulness audit (meta/X211-X229_faithfulness_audit.md:178) shows that the two Props are logically EQUIVALENT (the two hero classes coincide once the degenerate equalities are discharged), so the corpus statuses cannot both be right: arxiv:2306.04710#02 is listed `open` and arxiv:2202.13306#00 `disproved`. The `open` status of 2306.04710#02 predates Walczak's remark. The Rocq edge (implications_X221.v) proves one direction and is sound; it is the pair of corpus statuses that must be reconciled upstream.",
+   "corpus_feedback_item": "e105-status-contradiction: reconcile the statuses of arxiv:2306.04710#02 (open) and arxiv:2202.13306#00 (disproved), which encode equivalent Props — to report upstream (evidence: meta/X211-X229_faithfulness_audit.md:178)"
+  }
+ ]
+}

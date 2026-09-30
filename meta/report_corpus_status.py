@@ -5,6 +5,7 @@ Deterministic from the committed sources of truth, routed by meta/corpus_registr
   - meta/opg_corpus_manifest.json + meta/opg_legs_state.json   (the frozen v1 OPG corpus)
   - meta/v2_corpus_manifest.json  + meta/v2_legs_state.json    (the growing v2 corpus, from X0b)
   - meta/dependency_graph.json     (the federation edge graph)
+  - meta/corpus_relations.json     (upstream corpus relations, once built; NOT machine-checked)
   - base/theories/base.v           (the cross-area base surfaces)
 
 Default: regenerate meta/CORPUS_STATUS.md (OPG section always; v2 section once its manifest
@@ -16,6 +17,19 @@ exists). `--check`: regenerate in-memory and assert PER-CORPUS invariants —
 then fail on drift vs the committed report, so the public claims are machine-backed. No
 volatile data (timestamps / global HEAD) is embedded, so the report is stable until a
 manifest/overlay genuinely changes.
+
+Flags:
+  --check       invariants + no drift vs the committed report (writes nothing)
+  --edge-legs   additionally assert the edge-leg invariant "a row touched by a verified edge
+                owns an `edges` leg != todo" (OFF by default: it only holds once the overlays
+                have been synced with `python3 meta/sync_edge_legs.py --write`; the Makefile
+                turns it on after that sync)
+  --out PATH    write the report to PATH instead of meta/CORPUS_STATUS.md (inspection copy;
+                leaves the committed report untouched)
+  --relations PATH
+                read the corpus relations from PATH instead of meta/corpus_relations.json (e.g. a
+                candidate file from `build_corpus_relations.py --out`); with `--check` the
+                report-drift comparison is skipped, the manifest-consistency checks are not
 """
 import json, os, re, sys
 
@@ -133,6 +147,64 @@ w("- Verified (Qed-closed, sound) edges:")
 for e in edges["edges"]:
     if e["status"] == "verified":
         w(f"  - `{e['from']}` {e['kind']} `{e['to']}` ({', '.join(e['sources'])})")
+
+# ── edge evidence: verified vs conditional, and the documented non-edges ──
+# `conditional` (Qed-closed relative to a NAMED external assumption listed in `external`) and the
+# per-edge `note` are fields meta/build_edge_graph.py is growing; read them tolerantly so this
+# report works before and after that lands.
+EDGE_EVIDENCE_STATUSES = ("verified", "conditional")
+verified_edges = [e for e in edges["edges"] if e["status"] == "verified"]
+conditional_edges = [e for e in edges["edges"] if e["status"] == "conditional"]
+refuted_edges = [e for e in edges["edges"] if e["status"] == "refuted-direction"]
+w(f"- Edge evidence: **{len(verified_edges)} verified** (Qed-closed, no external assumption) · "
+  f"**{len(conditional_edges)} conditional** (Qed-closed relative to a named external "
+  f"assumption).")
+if conditional_edges:
+    w("- Conditional edges (with the external assumptions they are relative to):")
+    for e in conditional_edges:
+        ext = e.get("external") or []
+        w(f"  - `{e['from']}` {e['kind']} `{e['to']}` — external: "
+          + (", ".join(f"`{x}`" for x in ext) if ext else "(none named)")
+          + f" ({', '.join(e['sources'])})")
+
+# Edge legs per corpus, from the overlays (the `edges` leg's source of truth; derived from the
+# edge evidence by meta/sync_edge_legs.py).
+def edge_leg_counts(corpus):
+    """({state: n}, n_rows) over the corpus's non-alias rows, or None if the corpus has no
+    manifest/overlay yet."""
+    m = REG.load_manifest(corpus, required=False)
+    ov = REG.load_overlay(corpus, required=False)
+    if m is None or ov is None:
+        return None
+    entries = ov.get("entries", {})
+    c, n = {s: 0 for s in STATES}, 0
+    for r in m["rows"]:
+        if r.get("alias_of"):
+            continue
+        st = (entries.get(r["slug"], {}) or {}).get("edges", "todo")
+        c[st] = c.get(st, 0) + 1
+        n += 1
+    return c, n
+
+w("- Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the "
+  "evidence above by `meta/sync_edge_legs.py`):")
+for corpus in sorted(REG.CORPORA):
+    got = edge_leg_counts(corpus)
+    if got is None:
+        continue
+    c, n = got
+    w(f"  - **{corpus}**: {c['done']} done · {c['partial']} partial · {c['blocked']} blocked · "
+      f"{c['todo']} todo  ({n} rows)")
+w("")
+w(f"### Documented non-edges ({len(refuted_edges)} `refuted-direction`)\n")
+w("Pairs deliberately NOT connected: the direction was examined and rejected (the implication "
+  "does not hold, or holds only via a layer out of scope). A documented non-edge discharges the "
+  "corresponding corpus relation for the `edges` leg.\n")
+w("| from | to | kind | reason |")
+w("|---|---|---|---|")
+for e in refuted_edges:
+    reason = (e.get("note") or "").strip() or (e.get("cite") or "").strip() or "(no note recorded)"
+    w(f"| `{e['from']}` | `{e['to']}` | {e['kind']} | {reason.replace('|', '/')} |")
 w("")
 
 # verification
@@ -181,6 +253,51 @@ if v2m is not None:
         for ph in sorted(v2_phases):
             c = count(v2_phases[ph])
             w(f"| {ph} | {c['done']} | {c['partial']} | {c['blocked']} | {c['todo']} | {len(v2_phases[ph])} |")
+    w("")
+
+# ── corpus relations (upstream graph-conjectures data/relations.json, resolved to manifest rows
+# by meta/build_corpus_relations.py; the file exists only once that builder has run) ──
+def arg_after(flag, default):
+    """Value of a `--flag <value>` option (default when absent)."""
+    if flag in sys.argv[:-1]:
+        return os.path.abspath(sys.argv[sys.argv.index(flag) + 1])
+    return default
+
+# `--relations <path>`: validate/report a candidate relations file (e.g. one just built with
+# `build_corpus_relations.py --out`) instead of the committed one. Debugging override; with
+# `--check` it skips the report-drift comparison, since the report then describes another input.
+CREL = arg_after("--relations", os.path.join(META, "corpus_relations.json"))
+crel = json.load(open(CREL)) if os.path.exists(CREL) else None
+DONE_LEGS = ("done", "opg-done")
+crel_impl, crel_both, crel_mirrored, crel_open_ends = [], [], [], []
+if crel is not None:
+    cedges = crel["edges"]
+    cprov = crel.get("provenance", {})
+    crel_impl = [e for e in cedges if e["relation"] in ("implies", "equivalent_to")]
+    crel_both = [e for e in crel_impl if e["both_formalized"]]
+    crel_mirrored = [e for e in cedges if e.get("rocq_edge")]
+    crel_open_ends = sorted({e[f"{s}_row"] for e in crel_impl if e["verdict"] == "confirmed"
+                             for s in ("from", "to")
+                             if not (e[f"{s}_formal_name"] and e[f"{s}_leg"] in DONE_LEGS)})
+    w("## Corpus relations (graph-conjectures data/relations.json)\n")
+    w("> Upstream relations between corpus rows (adversarial AI review of the statements + "
+      "literature), resolved against the manifests by `meta/build_corpus_relations.py` into "
+      "`meta/corpus_relations.json`. **Not machine-checked** — the formally verified graph is the "
+      "dependency graph above; these edges only say where an implication theorem is worth "
+      "attempting (`cite=\"gc:<edge_id>\"` on the resulting `@EDGE`).\n")
+    w(f"- **{len(cedges)} edges** from clone `{(cprov.get('graph_conjectures_commit') or '?')[:7]}` "
+      "— by relation " + ", ".join(f"{k} {v}" for k, v in sorted(cprov.get("by_relation", {}).items()))
+      + "; by verdict " + ", ".join(f"{k} {v}" for k, v in sorted(cprov.get("by_verdict", {}).items()))
+      + f"; {cprov.get('n_unmapped_endpoints', 0)} endpoints without a manifest row.")
+    w(f"- **{len(crel_both)} of the {len(crel_impl)} implies/equivalent_to edges have both "
+      f"endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool "
+      f"for `implications_X2nn.v`.")
+    w(f"- **{len(crel_mirrored)} edges are already mirrored by a Rocq `@EDGE`** "
+      f"(implies→`implies`, equivalent_to→`equiv`; `same_conjecture`/`related_only` are never "
+      f"mirrored).")
+    w(f"- **{len(crel_open_ends)} distinct endpoints of *confirmed* implies/equivalent_to edges "
+      f"own no done statement** — each is a row whose formalization would unlock at least one "
+      f"cross-check.")
     w("")
 
 report = "\n".join(L) + "\n"
@@ -245,18 +362,113 @@ if "--check" in sys.argv:
                     unver.append(f"{r['slug']}: {e}")
         if unver:
             errs.append(f"{len(unver)} v2 statement=done verification-tuple violations: {unver[:6]}")
-    committed = open(OUT).read() if os.path.exists(OUT) else ""
-    if committed != report:
-        errs.append("CORPUS_STATUS.md is stale — run `python3 meta/report_corpus_status.py`")
+    # ── corpus relations vs the manifests ──
+    # corpus_relations.json is derived data (build_corpus_relations.py); here we only assert that
+    # it still AGREES with the committed manifests: every endpoint it claims to have resolved
+    # names a real row, and the formal_name/leg it cached is the one the manifest carries. A
+    # manifest rebuild that renames or reclassifies a row must invalidate the relations file.
+    if crel is not None:
+        if crel.get("schema_version") != 1:
+            errs.append(f"corpus_relations.json schema_version {crel.get('schema_version')!r} "
+                        "unknown to this report (expected 1)")
+        if crel.get("provenance", {}).get("graph_conjectures_pin") != REG.GRAPH_CONJECTURES_PIN:
+            errs.append("corpus_relations.json was built against graph_conjectures_pin "
+                        f"{crel.get('provenance', {}).get('graph_conjectures_pin')!r} != "
+                        f"{REG.GRAPH_CONJECTURES_PIN!r} (rebuild it)")
+        by_slug = {("opg", r["slug"]): r for r in rows}
+        by_slug.update({("v2", r["slug"]): r for r in v2rows})
+        # Alias endpoints: `<s>_slug`/`<s>_row` keep naming the endpoint's OWN row, while
+        # `<s>_formal_name`/`<s>_leg` describe the row the alias resolves to, named by
+        # `via_alias[s]` (a manifest ROW ID: `opg:<slug>`, `arxiv:<aid>#<nn>`, ...). So the
+        # statement fields are validated against the alias TARGET, and the slug only against the
+        # original row. An absent/null via_alias keeps the exact previous behaviour; a via_alias
+        # naming a row that is in no manifest is the builder's "left unresolved" case, where the
+        # statement fields still describe the original row — so fall back to it.
+        by_row_id = {}
+        for corpus_name, corpus_rows in (("v2", v2rows), ("opg", rows)):
+            for r in corpus_rows:
+                rid = r.get("row_id") if corpus_name == "v2" else (f"opg:{r['slug']}" if r.get("slug") else None)
+                if rid:
+                    by_row_id.setdefault(rid, (corpus_name, r))
+        bad_rel = []
+        for e in crel["edges"]:
+            via_alias = e.get("via_alias") or {}
+            for s in ("from", "to"):
+                slug = e[f"{s}_slug"]
+                if slug is None:                       # endpoint without a manifest row (expected)
+                    if e[f"{s}_formal_name"] or e[f"{s}_leg"]:
+                        bad_rel.append(f"{e['edge_id']}: unmapped {s} endpoint carries a "
+                                       f"formal_name/leg")
+                    continue
+                corpus = "opg" if e[f"{s}_row"].startswith("opg:") else "v2"
+                row = by_slug.get((corpus, slug))
+                if row is None:
+                    bad_rel.append(f"{e['edge_id']}: {s}_slug {slug!r} is not a {corpus} row")
+                    continue
+                # the row whose statement the relation record caches (alias target, or the row)
+                stmt_corpus, stmt_row, via = corpus, row, via_alias.get(s)
+                if via:
+                    got = by_row_id.get(via)
+                    if got is not None:
+                        stmt_corpus, stmt_row = got
+                where = f"{slug} via alias {via}" if via and stmt_row is not row else slug
+                if (stmt_row.get("formal_name") or None) != e[f"{s}_formal_name"]:
+                    bad_rel.append(f"{e['edge_id']}: {s} formal_name {e[f'{s}_formal_name']!r} != "
+                                   f"manifest {stmt_row.get('formal_name')!r} ({where})")
+                leg = stmt_row.get("legs", {}).get("statement", "todo")
+                want = f"opg-{leg}" if stmt_corpus == "opg" else leg
+                if e[f"{s}_leg"] != want:
+                    bad_rel.append(f"{e['edge_id']}: {s} leg {e[f'{s}_leg']!r} != manifest "
+                                   f"{want!r} ({where})")
+        if bad_rel:
+            errs.append(f"{len(bad_rel)} corpus_relations.json inconsistencies with the manifests "
+                        f"(rebuild with `python3 meta/build_corpus_relations.py`): {bad_rel[:6]}")
+    # ── edge legs vs the edge evidence (opt-in: `--edge-legs`) ──
+    # A row touched by a VERIFIED edge has real, machine-checked edge work, so its `edges` leg
+    # must not be todo. This only holds once the overlays have been synced with
+    # `meta/sync_edge_legs.py --write`, so it is opt-in (the Makefile enables it after the sync)
+    # and the pre-sync tree keeps passing `--check`.
+    if "--edge-legs" in sys.argv:
+        verified_ends = {n for e in verified_edges for n in (e["from"], e["to"])}
+        stale_legs = []
+        for corpus in sorted(REG.CORPORA):
+            m = REG.load_manifest(corpus, required=False)
+            ov = REG.load_overlay(corpus, required=False)
+            if m is None or ov is None:
+                continue
+            entries = ov.get("entries", {})
+            for r in m["rows"]:
+                if r.get("alias_of") or r.get("formal_name") not in verified_ends:
+                    continue
+                if (entries.get(r["slug"], {}) or {}).get("edges", "todo") == "todo":
+                    stale_legs.append(f"{corpus}/{r['slug']} ({r['formal_name']})")
+        if stale_legs:
+            errs.append(f"{len(stale_legs)} rows are endpoints of a VERIFIED edge but keep "
+                        f"edges=todo (run `python3 meta/sync_edge_legs.py --write`): "
+                        f"{stale_legs[:6]}")
+    drift_checked = "--relations" not in sys.argv     # a candidate relations file != the report's input
+    if drift_checked:
+        committed = open(OUT).read() if os.path.exists(OUT) else ""
+        if committed != report:
+            errs.append("CORPUS_STATUS.md is stale — run `python3 meta/report_corpus_status.py`")
     if errs:
         sys.exit("CORPUS-STATUS GATE FAILED:\n  - " + "\n  - ".join(errs))
     v2note = (f"; v2: {len(v2rows)} rows, {v2_stmt['done']} done / {v2_stmt['partial']} partial / "
               f"{v2_stmt['blocked']} blocked / {v2_stmt['todo']} todo" if v2m is not None else "")
     print(f"corpus-status gate OK: OPG {attempted}/{total} attempted, 0 todo; "
           f"{overall['done']} done / {overall['partial']} partial / {overall['blocked']} blocked; "
-          f"no drift{v2note}")
+          f"{'no drift' if drift_checked else f'drift check skipped (--relations {os.path.relpath(CREL, MONO) if CREL.startswith(MONO + os.sep) else CREL})'}"
+          f"{v2note}")
 else:
-    open(OUT, "w").write(report)
+    # `--out PATH` writes an inspection copy elsewhere, leaving the committed report untouched.
+    dest = OUT
+    if "--out" in sys.argv:
+        i = sys.argv.index("--out")
+        if i + 1 >= len(sys.argv):
+            sys.exit("report_corpus_status: --out needs a path")
+        dest = os.path.abspath(sys.argv[i + 1])
+    open(dest, "w").write(report)
     v2note = f" | v2: {len(v2rows)} rows" if v2m is not None else ""
-    print(f"wrote {os.path.relpath(OUT, MONO)}: OPG {attempted}/{total} attempted, "
+    shown = os.path.relpath(dest, MONO) if dest.startswith(MONO + os.sep) else dest
+    print(f"wrote {shown}: OPG {attempted}/{total} attempted, "
           f"{overall['done']} done / {overall['partial']} partial / {overall['blocked']} blocked{v2note}")

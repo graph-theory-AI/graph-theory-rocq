@@ -18,13 +18,24 @@ Definition x137_sunflower (T : finType) (petals : seq {set T}) : Prop :=
 
 (** ** X137 statements *****************************************************)
 
-(** Erdos-Rado sunflower conjecture: for every petal count [k] there is a
-    constant [C(k)] such that every r-uniform family with more than [C^r]
-    members contains a k-sunflower.  The constant depends on the PETAL COUNT
-    and the exponent is the SET SIZE r; the opposite binder assignment
-    (C depending on r, exponent k) is a consequence of the 1960 Erdos-Rado
-    sunflower LEMMA and carries none of the open content (audit fix
-    2026-07-18, meta/BLOCKED_RETARGETING_AUDIT.md, fresh-rows section). *)
+(** Corpus row: studies:std_erd_s_rado_sunflower_conjecture
+    Site: none
+    Review: none
+    English statement: (Erdos and Rado, sunflower conjecture)
+      For every petal count k at least 2 there is a constant C depending only on k such that
+      every family of sets, all of the same size r, with more than C to the power r members
+      contains k distinct members forming a sunflower, i.e. any two of them meet in the same
+      common core.
+    Definitions: [x137_uniform F r] - every member of F has exactly r elements
+      (hypergraph-theory/theories/conjectures/X137.v); [x137_sunflower petals] - there is a core
+      set such that any two distinct entries of the list meet exactly in that core (same file).
+    Notes: the k petals are presented as a duplicate-free list of members of F, so they are
+      pairwise distinct.  BINDER ASSIGNMENT: the corpus statement_text reads "there is a
+      constant C = C(r) depending only on r such that f_r(k) <= C^k"; the body here puts the
+      constant on the PETAL COUNT and the SET SIZE in the exponent.  That is deliberate (audit
+      fix 2026-07-18, meta/BLOCKED_RETARGETING_AUDIT.md, fresh-rows section): the opposite
+      assignment follows from the 1960 Erdos-Rado sunflower LEMMA and carries none of the open
+      content.  Recorded in meta/STATEMENT_IMPROVEMENTS.md. *)
 Definition erdos_rado_sunflower_statement : Prop :=
   forall k : nat,
     2 <= k ->

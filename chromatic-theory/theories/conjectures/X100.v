@@ -26,9 +26,24 @@ Definition x100_modular_edge_colourable
 
 (** ** X100 statements *****************************************************)
 
-(** Studies slice: Botler-Colucci-Kohayakawa modular edge-colouring conjecture:
-    for every modulus k >= 2, k plus a constant number of edge colours suffice
-    for every finite graph. *)
+(** Corpus row: studies:std_botler_colucci_kohayakawa_modular_edge_colouring
+    Site: none
+    Review: none
+    English statement: (Botler, Colucci and Kohayakawa, studies slice of the corpus)
+      For every integer k >= 2 there is a constant C, depending on k but not on the graph, such that
+      every finite simple graph admits a modular k-edge-colouring with k + C colours, i.e. an
+      assignment of colours to the edges such that at every vertex, for every colour, the number of
+      incident edges of that colour is either 0 or congruent to 1 modulo k.
+    Definitions: [x100_modular_edge_colouring G k q col] - for every vertex v and colour c, the
+      number of edges at v coloured c is 0 or is 1 modulo k (this file); [x100_col_deg col v c] -
+      that number, counted over [x100_edge_set G] (this file); [x100_edge_set G] - the 2-element
+      vertex sets that are cliques, i.e. the edges (this file); [x100_modular_edge_colourable G k q]
+      - such a colouring with q colours exists (this file).
+    Notes: This row has no site or review page in the corpus, hence the literal "none" above. The
+      source bound chi'_k(G) <= k + C is encoded as colourability with exactly k + C colours, which
+      is equivalent since a colouring with fewer colours can be seen as one with k + C. The constant
+      C is chosen after k and before the graph, matching "there is a constant C such that ... for
+      every graph G". *)
 Definition modular_edge_colouring_k_plus_constant_statement : Prop :=
   forall k : nat,
     2 <= k ->

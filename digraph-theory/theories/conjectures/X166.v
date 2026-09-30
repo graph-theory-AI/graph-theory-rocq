@@ -65,7 +65,26 @@ Definition x166_k_disjoint_paths_NP_complete_on_stability_two (k : nat) : Prop :
 
 (** ** X166 statements *****************************************************)
 
-(** Informal conjecture: the k vertex-disjoint paths problem might be
-    NP-complete for digraphs with stability number two. *)
+(** Corpus row: arxiv:1604.02317#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1604.02317__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1604.02317__00.json
+    English statement: (Chudnovsky, Scott, Seymour 2016, Disjoint paths in unions of tournaments, arXiv:1604.02317, informal conjecture)
+      There is a k >= 2 for which the k vertex-disjoint directed paths problem, restricted to
+      digraphs with stability number two, is NP-complete: the problem (given a digraph and k
+      ordered terminal pairs, are there k directed paths joining them whose interiors are
+      pairwise disjoint) lies in NP, is NP-hard, and is decided on every instance whose digraph
+      has stability number exactly two.
+    Definitions: [x166_instance k] - a digraph together with k ordered terminal pairs (this
+      file); [x166_vertex_disjoint_directed_paths] - the k paths exist with pairwise disjoint
+      interiors (this file); [x166_stable_set] / [x166_stability_number_two] - a set with no arc
+      between distinct members, and the property that the largest such set has size two (this
+      file); [x166_in_np] / [x166_np_hard] - membership and hardness in the shared cost-coupled
+      computation model (this file, over [polytime_decides_on_class], [poly_cost_on], [prun] of
+      GTBase complexity.v); [x166_enc_digraph] - the adjacency-matrix encoding (this file).
+    Notes: The corpus is an informal suspicion (we suspect the problem might be NP-complete);
+      the body encodes the affirmative form. Complexity notions come from the GTBase computation
+      model, so the statement is only as faithful as that model; the hardness clause
+      [x166_np_hard] uses identity-output reductions, which is weaker than a general many-one
+      reduction. *)
 Definition vertex_disjoint_paths_stability_two_np_complete_statement : Prop :=
   exists k : nat, x166_k_disjoint_paths_NP_complete_on_stability_two k.

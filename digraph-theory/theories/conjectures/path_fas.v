@@ -158,9 +158,12 @@ End FAS.
 Definition has_pathFAS (T : tournament) : Prop :=
   exists F : {set T * T}, is_FAS F /\ linear_forest (farc_graph F).
 
-(** The reduction (path_matching_fas/docs/path_fas.md): a tournament has a
-    path-shaped feedback arc set iff some vertex order has a linear-forest back-arc
-    graph.  Stated as the formalization target (its proof is the open reduction). *)
+(** No corpus row: the reduction target of the Path-FAS family (Aboulker, Aubian, Lopes, Finding
+    forest-orderings of tournaments is NP-complete, arXiv:2402.10782, Problem 4.4): a tournament
+    has a feedback arc set whose underlying simple graph is a linear forest if and only if some
+    vertex ordering has a linear-forest back-arc graph. The corpus carries no row for Problem
+    4.4 or its reduction; this is the working formalisation target of
+    problems/path_matching_fas. *)
 Definition pathFAS_iff_LFO_statement : Prop :=
   forall T : tournament, has_pathFAS T <-> has_LFO T.
 
@@ -176,9 +179,10 @@ Definition matching (G : sgraph) : Prop :=
 Definition has_matchingFAS (T : tournament) : Prop :=
   exists F : {set T * T}, is_FAS F /\ matching (farc_graph F).
 
-(** The sparse-tournament fact (Davot–Isenmann–Roy–Thiebaut, arXiv:2212.06007):
-    a tournament admits a matching feedback arc set iff its degreewidth is ≤ 1.
-    Stated as a target Prop (it is known, but stated here uniformly, not proved). *)
+(** No corpus row: the sparse-tournament fact of Davot, Isenmann, Roy and Thiebaut
+    (arXiv:2212.06007): a tournament has a feedback arc set whose underlying simple graph is a
+    matching if and only if its degreewidth is at most 1. A known theorem stated here uniformly
+    with the Path-FAS targets, not a corpus conjecture row. *)
 Definition matchingFAS_iff_dw1_statement : Prop :=
   forall T : tournament, has_matchingFAS T <-> (Delta_star T <= 1)%N.
 
@@ -191,11 +195,10 @@ Definition hits_34cycles (T : tournament) (F : {set T * T}) : Prop :=
   (forall c : seq T, di3cycle c -> cycle_uses F c) /\
   (forall c : seq T, di4cycle c -> cycle_uses F c).
 
-(** The equivalence target: [T] has a linear-forest ordering iff there is an arc
-    set whose underlying simple graph is a linear forest and which hits every
-    directed 3-cycle and every directed 4-cycle.  (For tournaments the back-arc
-    graph of a degree-2 order being acyclic is governed by short cycles; this is
-    the open characterization in path_matching_fas/docs/q2_acyclicity_core.md.) *)
+(** No corpus row: the equivalence target of problems/path_matching_fas (a tournament has a
+    linear-forest ordering if and only if some arc set whose underlying simple graph is a linear
+    forest hits every directed 3-cycle and every directed 4-cycle); an internal characterisation
+    goal of the Path-FAS attack, with no corpus row. *)
 Definition LFO_iff_34transversal_statement : Prop :=
   forall T : tournament,
     has_LFO T <->
@@ -211,11 +214,9 @@ Definition LFO_no (T : tournament) : Prop := ~ has_LFO T.
 Definition minimal_LFO_no (T : tournament) : Prop :=
   LFO_no T /\ forall v : T, has_LFO (del_tournament v).
 
-(** There is no largest vertex-minimal obstruction: for every [N] there is a
-    vertex-minimal LFO-NO tournament on more than [N] vertices.  (An infinite
-    minimal-obstruction family would rule out a finite forbidden-subtournament
-    characterization of Path-FAS; cf. the growing minimal-NO catalogues in
-    path_matching_fas/docs/minimal_no_obstruction_catalogue.md.) *)
+(** No corpus row: an internal Path-FAS target of problems/path_matching_fas: for every N there
+    is a vertex-minimal tournament without a linear-forest ordering on more than N vertices, so
+    the minimal obstructions do not form a finite family. No corpus row. *)
 Definition minimal_LFO_no_infinite_statement : Prop :=
   forall N : nat, exists T : tournament, minimal_LFO_no T /\ (N < #|T|)%N.
 

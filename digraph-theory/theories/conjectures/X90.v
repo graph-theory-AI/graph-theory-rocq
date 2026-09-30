@@ -50,11 +50,21 @@ Definition x90_f_subdivision_problem (F : diGraphType) : x90_problem :=
 
 (** ** X90 statements ******************************************************)
 
-(** Studies slice: Bang-Jensen et al. dichotomy conjecture for the
-    F-Subdivision problem.  The computation model is the shared cost-coupled
-    [prog]/[pcost] interpreter from [GTBase.complexity]; reductions and
-    deciders are programs whose outputs and costs are computed by the same
-    syntax, avoiding the former decoupled-cost vacuity. *)
+(** Corpus row: studies:std_bang_jensen_et_al_conjecture_f_subdivision_compl
+    Site: none
+    Review: none
+    English statement: (Bang-Jensen et al., F-Subdivision complexity dichotomy)
+      For every finite digraph F, the problem of deciding whether an input digraph contains a
+      subdivision of F is either decidable in polynomial time or NP-complete.
+    Definitions: [x90_f_subdivision_problem F] - the decision problem given by
+      [contains_subdivision F] (this file, using conjectures/X2.v);
+      [x90_polynomial_time_decidable] / [x90_in_np] / [x90_np_complete] /
+      [x90_many_one_poly_reduces] - the complexity notions over the shared cost-coupled
+      interpreter [prog], [prun], [poly_cost_on], [polytime_decides_on_class] of GTBase
+      complexity.v (this file); [x90_enc_digraph] - the adjacency-matrix encoding (this file).
+    Notes: Statement and cost live in the same syntax, which avoids the decoupled-cost vacuity
+      of an earlier model; faithfulness is relative to that computation model. Problems are
+      predicates on [diGraphType] and instances are encoded by adjacency matrices. *)
 Definition f_subdivision_complexity_dichotomy_statement : Prop :=
   forall F : diGraphType,
     x90_polynomial_time_decidable (x90_f_subdivision_problem F) \/

@@ -173,11 +173,31 @@ Definition sg_minor (G H : sgraph) : Prop := exists phi, @sg_minor_rmap G H phi.
 Definition planar_sg (G : sgraph) : Prop :=
   ~ sg_minor G 'K_5 /\ ~ sg_minor G 'K_3,3.
 
-(** ** CONJECTURE-P : 2-extremal ⇒ planar underlying graph
-
-    The cleanest P12 target (necessary-condition form of 9.2): the underlying graph
-    of every 2-extremal digraph is planar.  Guarded: the looplessness proof packaged
-    in [two_extremal] provides [underlyingG]. *)
+(** Corpus row: derived:drv_twoext_conjp
+    Site: none
+    Review: none
+    English statement: (Aboulker, Aubian, Charbit 2023, Digraph Colouring and Arc-Connectivity, arXiv:2304.04690 section 9; corpus derived row Conjecture P)
+      For every finite loopless digraph D that is 2-extremal, the underlying simple graph U(D)
+      is planar. D is 2-extremal when it is strongly connected, U(D) is 2-connected, lambda(D) =
+      2 and the dichromatic number of D is exactly 3.
+    Definitions: [loopless D] - the arc relation is irreflexive (this file); [underlyingG llD] -
+      the underlying simple graph U(D), where u and v are adjacent when D has an arc in either
+      direction (this file); [digonG llD] - the spanning simple graph F_D whose edges are the
+      pairs joined by a digon, i.e. by arcs in both directions (this file); [arc_conn D] - the
+      maximum over ordered pairs (u,v) of distinct vertices of the minimum size of a u-v dicut,
+      which by Menger is lambda(D), the maximum number of pairwise arc-disjoint directed u-v
+      paths (this file); [dicolorableb D k] - the vertex set splits into k parts each inducing
+      an acyclic subdigraph, i.e. the dichromatic number is at most k
+      (conjectures/dichromatic.v); [strongb D] - strong connectivity (invariants/strong.v);
+      [two_connected_sg G] - more than two vertices, connected, and connected after deleting any
+      single vertex (this file); [chi_vec_eq D m] - dichromatic number exactly m, encoded as m
+      >= 1, m-dicolourable and not (m-1)-dicolourable (this file); [k_extremal llD k] /
+      [two_extremal llD] - strong, U(D) 2-connected, lambda(D) = k and dichromatic number k+1,
+      at k = 2 (this file); [planar_sg G] - no K_5 minor and no K_3,3 minor (this file).
+    Notes: Planarity is taken in the Wagner form (no K_5 and no K_3,3 minor) so the file
+      compiles without coq-fourcolor; minors use the branch-set map [sg_minor_rmap] of this
+      file. Looplessness is threaded as an explicit argument llD rather than existentially
+      quantified, so that U(D) can be formed inside the statement. *)
 Definition conjecture_P : Prop :=
   forall (D : diGraphType) (llD : loopless D),
     two_extremal llD -> planar_sg (underlyingG llD).
@@ -198,11 +218,29 @@ Definition two_extremal_digonG_forest : Prop :=
   forall (D : diGraphType) (llD : loopless D),
     two_extremal llD -> is_forest [set: digonG llD].
 
-(** The Step-1 crux (no digon-free cut = digon graph is a SPANNING TREE).  For a
-    3-connected 2-extremal digraph, the digon graph is connected (equivalently: every
-    vertex bipartition has a digon crossing it; equivalently [F_D] is spanning &
-    connected, i.e. a spanning tree given the forest lemma).  We state the connected
-    form. *)
+(** Corpus row: derived:drv_twoext_step1
+    Site: none
+    Review: none
+    English statement: (Aboulker, Aubian, Charbit 2023, arXiv:2304.04690 section 9; corpus derived row Step 1, the open crux of the ledger)
+      For every finite loopless digraph D, if D is 2-extremal (strongly connected, U(D)
+      2-connected, lambda(D) = 2 and dichromatic number 3) and U(D) is 3-connected, then the
+      digon graph F_D is connected on the whole vertex set; equivalently, since F_D is a forest
+      for 2-extremal digraphs, F_D is a spanning tree of U(D), and equivalently D has no
+      digon-free vertex cut.
+    Definitions: [loopless D] - the arc relation is irreflexive (this file); [underlyingG llD] -
+      the underlying simple graph U(D), where u and v are adjacent when D has an arc in either
+      direction (this file); [digonG llD] - the spanning simple graph F_D whose edges are the
+      pairs joined by a digon, i.e. by arcs in both directions (this file); [arc_conn D] - the
+      maximum over ordered pairs (u,v) of distinct vertices of the minimum size of a u-v dicut,
+      which by Menger is lambda(D), the maximum number of pairwise arc-disjoint directed u-v
+      paths (this file); [dicolorableb D k] - the vertex set splits into k parts each inducing
+      an acyclic subdigraph, i.e. the dichromatic number is at most k
+      (conjectures/dichromatic.v); [strongb D] - strong connectivity (invariants/strong.v);
+      [two_extremal llD] (this file); [three_connected_sg G] - more than three vertices,
+      connected, and connected after deleting any two vertices (this file); [connected [set: G]]
+      - connectivity of the whole vertex set (coq-graph-theory connectivity.v).
+    Notes: The spanning-tree phrasing of the source is stated in its connected form; the
+      companion forest half is the separate target [two_extremal_digonG_forest] in this file. *)
 Definition three_connected_digonG_connected : Prop :=
   forall (D : diGraphType) (llD : loopless D),
     two_extremal llD ->
@@ -215,10 +253,29 @@ Definition three_connected_digonG_connected : Prop :=
 Definition Eulerian (D : diGraphType) : Prop :=
   forall v : D, indeg v = outdeg v.
 
-(** H6: under the standing 2-extremal side hypotheses minus χ⃗=3, a disconnected
-    digon graph forces 2-dicolourability.  A counterexample is exactly a 3-connected
-    2-extremal digraph with disconnected [F_D], so this lemma ⟹ the 3-connected case
-    of 9.2 up to assembly (team docs). *)
+(** Corpus row: derived:drv_twoext_h6
+    Site: none
+    Review: none
+    English statement: (Aboulker, Aubian, Charbit 2023, arXiv:2304.04690 section 9; corpus derived row H6, the criticality barrier / no-full-cover lemma)
+      For every finite loopless digraph D with at least one vertex, if D is strongly connected,
+      Eulerian (in-degree equals out-degree at every vertex), lambda(D) = 2, U(D) is 3-connected
+      and the digon graph F_D is disconnected (equivalently D has a digon-free cut), then D is
+      2-dicolourable, i.e. its dichromatic number is at most 2.
+    Definitions: [loopless D] - the arc relation is irreflexive (this file); [underlyingG llD] -
+      the underlying simple graph U(D), where u and v are adjacent when D has an arc in either
+      direction (this file); [digonG llD] - the spanning simple graph F_D whose edges are the
+      pairs joined by a digon, i.e. by arcs in both directions (this file); [arc_conn D] - the
+      maximum over ordered pairs (u,v) of distinct vertices of the minimum size of a u-v dicut,
+      which by Menger is lambda(D), the maximum number of pairwise arc-disjoint directed u-v
+      paths (this file); [dicolorableb D k] - the vertex set splits into k parts each inducing
+      an acyclic subdigraph, i.e. the dichromatic number is at most k
+      (conjectures/dichromatic.v); [strongb D] - strong connectivity (invariants/strong.v);
+      [Eulerian D] - in-degree equals out-degree at every vertex (this file);
+      [three_connected_sg G] (this file); [indeg v] (conjectures/classic_core.v); [outdeg v]
+      (core/oriented.v).
+    Notes: The contrapositive is the statement of the row: under 3-connectivity, Eulerian and
+      lambda = 2, dichromatic number 3 forces F_D connected, so this is the barrier form of Step
+      1 for Eulerian digraphs. *)
 Definition H6_no_full_cover : Prop :=
   forall (D : diGraphType) (llD : loopless D),
     (0 < #|D|)%N -> strongb D -> Eulerian D ->

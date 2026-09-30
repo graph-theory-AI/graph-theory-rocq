@@ -51,6 +51,31 @@ Definition strongly_minimal_cover (H : iHypergraph) (X : hV H -> Prop) : Prop :=
   forall X' : hV H -> Prop, hcover X' ->
     card_le (fun v => X v /\ ~ X' v) (fun v => X' v /\ ~ X v).
 
+(** Corpus row: opg:strong_matchings_and_covers
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/strong_matchings_and_covers/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/strong_matchings_and_covers.json
+    English statement: (Open Problem Garden, "Strong matchings and covers") For
+      every (possibly infinite) hypergraph H and every k such that every edge of
+      H has at most k vertices, H has a strongly maximal matching and a strongly
+      minimal cover.  A matching is a set F of pairwise vertex-disjoint edges,
+      and it is strongly maximal when for every matching F' the edges of F' not
+      in F inject into the edges of F not in F'.  A cover is a set X of vertices
+      meeting every edge, and it is strongly minimal when for every cover X' the
+      vertices of X not in X' inject into the vertices of X' not in X.
+    Definitions: [iHypergraph] - a record of a vertex Type, an edge Type and a
+      Prop-valued incidence (this file, D4inf4.v); [hedge_le k e] - the vertices
+      of e are covered by a map from 'I_k, i.e. e has at most k vertices
+      (D4inf4.v); [hmatching F], [hcover X], [strongly_maximal_matching F],
+      [strongly_minimal_cover X] (D4inf4.v); [card_le P Q] - an injection from
+      the subtype of P into the subtype of Q, the choice-free reading of "at
+      most as many" (infinite-graph-theory/theories/foundations/igraph.v).
+    Notes: the cardinal comparisons use [card_le], the injection form, so no
+      choice or cardinal arithmetic is needed.  CAVEAT (recorded in
+      meta/STATEMENT_IMPROVEMENTS.md): nothing forbids an EMPTY edge.  With
+      k = 0, [hedge_le 0 e] forces every edge to have no vertices, and then
+      [hcover X] is unsatisfiable as soon as one edge exists, so the statement
+      is refutable by the one-edge hypergraph with empty incidence; the source
+      implicitly assumes nonempty edges. *)
 Definition strong_matchings_and_covers_statement : Prop :=
   forall (H : iHypergraph) (k : nat),
     (forall e : hE H, hedge_le k e) ->
@@ -123,6 +148,31 @@ Definition d_infinite (G : iDigraph) : Prop := exists f : nat -> dV G, injective
 Definition d_no_sink_source (G : iDigraph) : Prop :=
   forall x : dV G, (exists y, darc x y) /\ (exists y, darc y x).
 
+(** Corpus row: opg:universal_highly_arc_transitive_digraphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/universal_highly_arc_transitive_digraphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/universal_highly_arc_transitive_digraphs.json
+    English statement: (Open Problem Garden, "Universal highly arc transitive
+      digraphs") There exists a digraph G that is locally finite (finite in- and
+      out-neighbourhoods at every vertex), highly arc transitive (for any two
+      directed paths of the same length some automorphism maps the first onto
+      the second) and universal (any two arcs lie on a common alternating walk,
+      a walk whose successive steps alternate in direction), and that moreover
+      is nondegenerate: it has at least one arc, infinitely many vertices, and
+      neither sinks nor sources.
+    Definitions: [iDigraph] - a record of a vertex Type and an irreflexive
+      Prop-valued arc relation (this file, D4inf4.v); [dautomorphism f] - an
+      arc-preserving and arc-reflecting bijection (D4inf4.v); [darc_path p] -
+      all consecutive pairs of p are arcs (D4inf4.v);
+      [highly_arc_transitive G], [alt_walk_from b x p], [walk_uses b x p a c],
+      [universal G], [d_locally_finite G] (D4inf4.v); [d_has_arc G],
+      [d_infinite G], [d_no_sink_source G] - the nondegeneracy guards
+      (D4inf4.v).
+    Notes: "highly arc transitive" is the automorphism ACTION written out,
+      never a constructed automorphism group object.  The source is a Question
+      and the body asserts existence.  The three nondegeneracy guards are
+      MODELLING ADDITIONS, added so that the finite directed cycle and the
+      edgeless digraph cannot answer the question vacuously; they make the
+      formal statement STRICTLY STRONGER than the literal source. *)
 Definition universal_highly_arc_transitive_digraphs_statement : Prop :=
   exists G : iDigraph,
     [/\ d_locally_finite G, highly_arc_transitive G, universal G

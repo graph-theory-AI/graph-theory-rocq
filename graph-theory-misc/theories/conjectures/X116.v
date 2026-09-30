@@ -51,18 +51,27 @@ Definition x116_has_k_distant_ST_paths
 
 (** ** X116 statement *****************************************************)
 
-(** Coarse Menger conjecture, bounded-separator form (Albrechtsen-Huynh-Jacobs-
-    Knappe-Wollan / Georgakopoulos-Papasoglu): for all [k, d >= 1] there is an
-    [l > 0] such that for every graph [G] and every pair of vertex sets [S], [T],
-    either there are [k] paths from [S] to [T] pairwise at distance at least [d],
-    or there is a set [X] of at most [k-1] vertices whose closed [l]-ball meets
-    every [S]-[T] path (every such path has a vertex within distance [l] of [X]).
-
-    Distinct from [GTMisc.conjectures.X39] (Georgakopoulos-Papasoglu ball-separator
-    form): there the separator radius is [c * d] for a single constant [c] chosen
-    with [forall k, exists c, forall d]; here [l] is an arbitrary function of both
-    [k] and [d] ([forall k d, exists l]), and the separator is stated as "every
-    [S]-[T] path meets the [l]-ball of [X]" with [#|X| <= k-1]. *)
+(** Corpus row: studies:std_coarse_menger_conjecture
+    Site: none
+    Review: none
+    English statement: (Albrechtsen, Huynh, Jacobs, Knappe and Wollan; independently
+      Georgakopoulos and Papasoglu, coarse Menger conjecture)
+      For all integers k, d >= 1 there is an integer l > 0 such that for every finite simple
+      graph G and all vertex sets S and T, either G contains k distinct S-T paths that are
+      pairwise at distance at least d, or there is a vertex set X with |X| <= k-1 such that
+      every S-T path contains a vertex lying in the closed l-ball around X.
+    Definitions: [x116_ball r x] / [x116_set_ball r S] - the closed r-ball around a vertex, and
+      around a vertex set (this file); [x116_path_vertices p] - the vertex set of a walk (this
+      file); [x116_ST_path S T p] - p is a simple path whose first vertex is in S and whose last
+      vertex is in T (this file); [x116_pairwise_distant_paths d ps] - distinct paths of ps are
+      vertex-disjoint and the closed (d-1)-ball around one avoids the other (this file);
+      [x116_has_k_distant_ST_paths G d k S T] - k distinct such paths exist (this file).
+    Notes: l is allowed to depend on both k and d (the quantifier shape is "for all k, d there
+      is l"), which is what distinguishes this row from
+      graph-theory-misc/theories/conjectures/X39.v, where a single constant c is chosen for each
+      k and the separator radius is c*d.  "Pairwise at distance at least d" is rendered as
+      vertex-disjointness together with the (d-1)-ball condition, so that d = 1 means exactly
+      vertex-disjoint. *)
 Definition coarse_menger_paths_bounded_separator_statement : Prop :=
   forall (k d : nat),
     1 <= k -> 1 <= d ->

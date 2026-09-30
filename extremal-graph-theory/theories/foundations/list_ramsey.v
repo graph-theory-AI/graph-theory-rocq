@@ -195,6 +195,15 @@ Definition lr_forces (s k n : nat) : Prop :=
 Definition lr_is_number (s k r : nat) : Prop :=
   lr_forces s k r /\ forall n, lr_forces s k n -> r <= n.
 
+(** No corpus row: in-repo formalisation target of the Fox-He-Luo-Xu list Ramsey equality
+    R_l(H_s, k) = s^k + 1 (arXiv:2103.15175, Section 3.1), which is PROVED below as
+    [list_ramsey_chromatic]. The corpus row arxiv:2103.15175#00 exists but carries no
+    formal_name, so it cannot be cited here; see
+    https://graph-theory-ai.github.io/graph-conjectures/arxiv/2103.15175__00/. This
+    foundations variant states the equality over a FINITE ordinal palette 'I_q and phrases
+    the Ramsey number by its least-forcing-order characterisation [lr_is_number]; the
+    source-facing variant with arbitrary natural-number colours is
+    [list_ramsey_natural_statement] in applications/list_ramsey_nat.v *)
 Definition list_ramsey_chromatic_statement : Prop :=
   forall s k : nat, 2 <= s -> 0 < k -> lr_is_number s k (s ^ k).+1.
 

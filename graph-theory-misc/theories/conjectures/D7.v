@@ -104,6 +104,26 @@ Definition dnat_val (d : data) : nat := if d is Dnat n then n else 0.
 Definition enc_hom (GH : sgraph * sgraph) : data :=
   Dpair (enc_graph GH.1) (enc_graph GH.2).
 
+(** Corpus row: opg:algorithm_for_graph_homomorphisms
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/algorithm_for_graph_homomorphisms/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/algorithm_for_graph_homomorphisms.json
+    English statement: (Open Problem Garden, "Algorithm for graph homomorphisms")
+      There are an integer c > 1, a program p and constants a and b such that, for every pair
+      (G, H) of finite simple graphs, p applied to the encoding of (G, H) answers yes exactly
+      when some homomorphism from G to H exists, and the number of steps p takes on that same
+      encoding is at most a * c ^ (|V(G)| + |V(H)|) + b.
+    Definitions: [enc_hom] - the instance encoding of a pair of graphs, the [Dpair] of their two
+      adjacency matrices (this file); [prog], [prun], [pcost] - the cost-coupled computation
+      model, i.e. programs of a fixed total combinator language whose output AND whose step
+      count are both produced by one fixed interpreter
+      (graph-theory-misc/theories/foundations/complexity.v); [decides_on enc P p] - on every
+      encoded instance the output of p is the boolean truth value of P (same file);
+      [homs_to G H] - existence of an adjacency-preserving map from G to H (coq-graph-theory).
+    Notes: the source asks a question; the Rocq body is its positive answer (the existential
+      over c, p, a, b), so the open question is the truth value of the statement.  "Time" is
+      rendered as the step count of the very program that produces the answers, which excludes
+      the decoupled "exact answer at zero cost" vacuity; [dsize (enc_hom GH)] is polynomially
+      equivalent to |V(G)| + |V(H)|, so the bound is in the natural instance size. *)
 Definition algorithm_for_graph_homomorphisms_statement : Prop :=
   exists (c : nat) (p : prog) (a b : nat),
     [/\ 1 < c,
@@ -187,22 +207,37 @@ Definition maxedp_approx (p : prog) (rho : nat -> nat) : Prop :=
 Definition little_o_sqrt (rho : nat -> nat) : Prop :=
   forall c : nat, exists N : nat, forall n : nat, N <= n -> c * (rho n) ^ 2 <= n.
 
-(** DISJUNCTION FIX (Track-B skeptic, machine-checked): the source poses a
-    disjunctive research QUESTION — "improve the O(√n) ratio, or show a
-    constant ratio is impossible".  Encoding it as [LEFT \/ RIGHT] is a
-    CLASSICAL TAUTOLOGY: the right branch's ratio family (positive constants)
-    is a SUBSET of the left branch's family (o(√n) functions — constants ARE
-    o(√n)), so excluded middle alone decides the disjunction with zero MaxEDP
-    content (a Qed'd probe derives it from [forall P, P \/ ~P]).  No two-branch
-    rendering survives when the hardness branch is the complement of a
-    subfamily of the algorithm branch.  SELECTED PROPOSITION (the open
-    algorithmic content): the IMPROVEMENT branch — a poly-cost program
-    approximating MaxEDP within a ratio that is o(√n).  This Prop is genuinely
-    open (best known ratio is O(√n), Chekuri–Khanna–Shepherd; no o(√n)
-    algorithm and no matching lower bound are known).  Fidelity note: the spec
-    is the VALUE-ESTIMATION form (output approximates the optimum value; it
-    does not demand a routing witness) — documented, weaker than
-    solution-producing approximation, still open. *)
+(** Corpus row: opg:approximation_ratio_for_maximum_edge_disjoint_paths_problem
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/approximation_ratio_for_maximum_edge_disjoint_paths_problem/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/approximation_ratio_for_maximum_edge_disjoint_paths_problem.json
+    English statement: (Open Problem Garden, "Approximation Ratio for Maximum Edge Disjoint
+      Paths problem")
+      There are a program p and a function rho with rho(n) = o(sqrt n) such that p has
+      polynomially bounded running time and, on every instance consisting of a planar graph G
+      and a list D of terminal pairs whose maximum number of simultaneously edge-disjointly
+      routable demands is k, the numerical output v of p satisfies v <= k and
+      k <= rho(|V(G)|) * v.
+    Definitions: [edp_input] - an instance, a graph together with a list of terminal pairs (this
+      file); [walkb s t p] / [walk_uses] - a non-empty walk from s to t, and the undirected edges
+      it traverses (this file); [edp_feasible S route] - the demands indexed by S are routed by
+      pairwise edge-disjoint walks (this file); [edp_opt D k] - k is the maximum size of such an
+      S (this file); [enc_edp] - the encoding, adjacency matrix paired with the demand list as
+      [enum_rank] index pairs (this file); [dnat_val] - reads a [Dnat] output as its value and
+      any other output as 0 (this file); [maxedp_approx p rho] - p realizes the ratio
+      specification on every encoded instance and has polynomially bounded step count
+      ([realizes_on], [poly_cost_on] from
+      graph-theory-misc/theories/foundations/complexity.v); [little_o_sqrt rho] - for every c
+      eventually c * rho(n) ^ 2 <= n (this file); [wagner_planar] - combinatorial Wagner
+      planarity, no K5 and no K3,3 minor (GTBase).
+    Notes: the source poses a two-branch question (improve the O(sqrt n) ratio, or prove
+      inapproximability stronger than APX-hardness).  Rendering it as a disjunction is a
+      classical tautology - the hardness branch quantifies over constant ratios, a subfamily of
+      the o(sqrt n) ratios of the algorithm branch, so excluded middle alone decides it with no
+      MaxEDP content (machine-checked).  The body therefore selects the improvement branch
+      only, which is the genuinely open algorithmic content (best known ratio O(sqrt n),
+      Chekuri-Khanna-Shepherd).  Documented weakening: the specification is the
+      value-estimation form - the output approximates the optimum value and no routing witness
+      is demanded - so it is weaker than solution-producing approximation. *)
 Definition approximation_ratio_for_maximum_edge_disjoint_paths_statement : Prop :=
   exists (p : prog) (rho : nat -> nat),
     maxedp_approx p rho /\ little_o_sqrt rho.
@@ -280,11 +315,36 @@ Definition hfactor_problem (H : sgraph) (a b : nat) : problem :=
    open.  We restrict to the regime the source intends ("a fixed graph H"): H
    CONNECTED on at least 3 vertices (the Hell–Kirkpatrick threshold of a
    component of order >= 3), where NP-hardness is the genuine OPEN question. *)
-(** GUARD FIX (Track-B skeptic): the density ratio c = a/b must be STRICTLY
-    below 1 — at a = b (c = 1) [mindeg_cn G a a] demands deg(v) >= #|G|, which
-    is impossible on an irreflexive graph, so the instance class is empty and
-    [NP_hard] is FALSE there, making the former [a <= b] form refutable
-    axiom-free.  The source's "fixed positive real c" means 0 < c < 1. *)
+(** Corpus row: opg:complexity_of_the_h_factor_problem
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/complexity_of_the_h_factor_problem/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/complexity_of_the_h_factor_problem.json
+    English statement: (Open Problem Garden, "Complexity of the H-factor problem")
+      For every finite simple graph H that is connected and has more than three vertices, and
+      for all natural numbers a < b with a > 0, the decision problem whose instances are the
+      graphs G with a * |V(G)| <= b * deg(v) for every vertex v, and whose yes-instances are
+      those G admitting an H-factor (a family of vertex-disjoint injective homomorphic copies
+      of H whose images partition V(G)), is NP-hard.
+    Definitions: [is_copy f] - f is an injective homomorphism, i.e. a copy of H inside G (this
+      file); [h_factor H G] - a finite family of copies of H whose vertex images partition
+      V(G) (this file); [mindeg_cn G a b] - the fraction-free form of "minimum degree at least
+      c*n" for the rational c = a/b (this file); [problem] - a decision problem as a typed
+      instance family with a size measure and a yes-predicate (this file); [poly_reduces] - a
+      many-one reduction with polynomially bounded cost and output size (this file); [in_NP] -
+      a polynomial-size certificate plus a polynomial-time boolean verifier (this file);
+      [NP_hard B] - every problem in NP poly-reduces to B (this file); [is_hom] - adjacency
+      preservation (coq-graph-theory); [connected [set: H]] - connectedness of H
+      (coq-graph-theory connectivity).
+    Notes: this hardness row deliberately stays in the machine-free relational complexity layer
+      (abstract cost bounds rather than the [prog] model): the claim is universal, hence not
+      vacuous in that reading.  "Polynomial" is the concrete bound n |-> a*n^d + b, the
+      repo-wide convention.  Two guards depart from the literal source text and are
+      load-bearing.  (i) H is restricted to be connected with at least four vertices: with only
+      |V(H)| > 0 the claim is refutable, since H = K1 makes every graph a yes-instance and
+      H = K2 is perfect matching (Edmonds), both in P; the source's "a fixed graph H" is read
+      as the Hell-Kirkpatrick regime of a component of order at least 3.  (ii) the density
+      ratio is strictly below 1 (a < b): at a = b the min-degree condition demands
+      deg(v) >= |V(G)| on an irreflexive graph, the instance class is empty and NP-hardness
+      would be false, so "a fixed positive real c" is read as 0 < c < 1. *)
 Definition complexity_of_the_h_factor_statement : Prop :=
   forall (H : sgraph) (a b : nat),
     0 < a -> a < b -> 2 < #|H| -> connected [set: H] ->
@@ -341,6 +401,31 @@ Definition fas_ptas_spec (num den : nat) (x : t_input) (out : data) : Prop :=
     is_tournament (projT2 x) -> fas_opt (projT2 x) k ->
     k <= dnat_val out /\ den * dnat_val out <= (den + num) * k.
 
+(** Corpus row: opg:ptas_for_feedback_arc_set_in_tournaments
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/ptas_for_feedback_arc_set_in_tournaments/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/ptas_for_feedback_arc_set_in_tournaments.json
+    English statement: (Open Problem Garden, "PTAS for feedback arc set in tournaments")
+      For every positive rational error p/q there is a program alg with polynomially bounded
+      step count such that, on the encoding of every tournament whose minimum feedback arc set
+      over linear orders has size k, the numerical output v of alg satisfies k <= v and
+      q * v <= (q + p) * k.
+    Definitions: [is_tournament T r] - r is irreflexive and, for distinct x and y, exactly one
+      of r x y and r y x holds (this file); [back_arcs r pos] - the number of arcs pointing
+      backwards under the injective position function pos (this file); [fas_opt r k] - k is the
+      minimum of [back_arcs] over injective position functions, i.e. the minimum feedback arc
+      set of a tournament (this file); [t_input], [enc_tournament] - an instance is a finite
+      type with an arc relation, encoded as its arc matrix over [enum] (this file);
+      [fas_ptas_spec num den] - the per-instance correctness clause above (this file);
+      [dnat_val] - reads a [Dnat] output as its value, anything else as 0 (this file);
+      [prog], [realizes_on], [poly_cost_on] - the cost-coupled computation model, its
+      output specification and its polynomial step-count bound
+      (graph-theory-misc/theories/foundations/complexity.v).
+    Notes: status of the row is solved (Kenyon-Mathieu-Schudy 2007); only the predicate
+      "a PTAS exists" is stated here, no algorithm is built.  The program, and hence its
+      polynomial cost bound, is chosen after the error p/q, which is exactly what PTAS means
+      as opposed to the stronger uniform or FPTAS reading.  The optimum is taken over linear
+      orders (injective position functions), which for tournaments coincides with the minimum
+      feedback arc set. *)
 Definition ptas_for_feedback_arc_set_in_tournaments_statement : Prop :=
   forall p q : nat, 0 < p -> 0 < q ->
     exists alg : prog,
@@ -412,6 +497,36 @@ Definition min_eop_spec (G : sgraph) (out : data) : Prop :=
   0 < #|G| -> wagner_planar G -> (exists x y : G, x -- y) ->
   min_edge_outerplanar G (dnat_val out).
 
+(** Corpus row: opg:finding_k_edge_outerplanar_graph_embeddings
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/finding_k_edge_outerplanar_graph_embeddings/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/finding_k_edge_outerplanar_graph_embeddings.json
+    English statement: (Open Problem Garden, "Finding k-edge-outerplanar graph embeddings")
+      There is a program p with polynomially bounded step count such that, on the encoding of
+      every non-empty planar graph G that has at least one edge, the numerical output of p is
+      the least k for which the edges of G can be assigned k levels so that each level's edge
+      subgraph is outerplanar.
+    Definitions: [outerplanar_w G] - outerplanarity in the Chartrand-Harary minor sense, no K4
+      minor and no K2,3 minor (this file); [level_rel] / [level_graph lev j] - the subgraph of G
+      carrying exactly the edges that the symmetric level function lev sends to j (this file);
+      [edge_outerplanar G k] - G is planar and has a level function of depth k all of whose
+      level graphs are outerplanar (this file); [min_edge_outerplanar G k] - k is the least such
+      depth (this file); [min_eop_spec] - the per-instance output specification above (this
+      file); [dnat_val] - reads a [Dnat] output as its value, anything else as 0 (this file);
+      [enc_graph], [prog], [realizes_on], [poly_cost_on] - adjacency-matrix encoding and the
+      cost-coupled computation model
+      (graph-theory-misc/theories/foundations/complexity.v); [wagner_planar] - combinatorial
+      Wagner planarity (GTBase); [minor], ['K_4], [KB 2 3] - minors and the complete /
+      complete-bipartite graphs (coq-graph-theory).
+    Notes: documented proxy.  True k-edge-outerplanarity is defined through faces and outer
+      boundaries and needs the embedding API (gate G2); the available combinatorial skeleton is
+      the edge-layering above, and a genuine k-edge-outerplanar graph does peel into k
+      outerplanar edge layers, so the proxy is implied by the true notion.  The
+      outerplanarity clause on each level is load-bearing: without it the all-zero level
+      function makes the minimum depth 1 on every planar edged instance and the constant
+      program [Pconst (Dnat 1)] proves the "open" statement outright (machine-checked).  With
+      it the minima genuinely differ across instances (K2 has depth 1, K4 is planar but not
+      outerplanar so it needs at least 2 levels).  Only the value is demanded, not the
+      witnessing layering. *)
 Definition finding_k_edge_outerplanar_graph_embeddings_statement : Prop :=
   exists p : prog,
     realizes_on enc_graph min_eop_spec p /\ poly_cost_on enc_graph p.

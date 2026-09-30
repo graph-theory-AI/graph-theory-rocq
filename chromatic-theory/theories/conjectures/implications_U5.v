@@ -84,7 +84,8 @@
 
 From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
-From Chromatic.conjectures Require Import U5.
+From Chromatic.foundations Require Import chi_bounding.
+From Chromatic.conjectures Require Import U5 X33.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -240,11 +241,126 @@ Qed.
     against which the edge was trivially provable — but that endpoint WEAKENED the conjecture (now
     corrected to [edge_colourable G r]).  Recorded as a candidate; the genuine Goldberg–Seymour
     relationship is the deep Chen–Jing–Zang theorem, not this elementary bound. *)
-(*@EDGE from=goldbergs_statement to=seymours_r_graph_statement kind=implies status=candidate proved=false cite="Goldberg 1973; Seymour, On multicolourings of cubic graphs, Proc. LMS (3) 38 (1979) 423-460" note="Goldberg bound gives chi'<=r+1, not the chi'=r faithful Seymour requires; deep relationship (Chen-Jing-Zang 2019), not an elementary Qed" *)
+(*@EDGE from=goldbergs_statement to=seymours_r_graph_statement kind=implies status=refuted-direction cite="Goldberg 1973; Seymour, On multicolourings of cubic graphs, Proc. LMS (3) 38 (1979) 423-460" note="REFUTED-DIRECTION (metadata wave M, 2026-09-24): Goldberg gives chi' <= r+1, not chi' = r; corpus e001 claims the wrong direction (reported upstream, meta/CORPUS_FEEDBACK.md). Earlier note: Goldberg bound gives chi'<=r+1, not the chi'=r faithful Seymour requires; deep relationship (Chen-Jing-Zang 2019), not an elementary Qed" *)
+
+(** ** e002: X33's list total colouring bound ==> Behzad (verified)
+
+    The carrier bridge that the earlier candidate note asked for, now proved:
+    [bz_h] maps base's multigraph total graph of a SIMPLE multigraph [G]
+    homomorphically into X33's total graph of the underlying simple graph
+    [usimple G] (vertices to vertices, an edge to its endpoint pair -- distinct
+    edges go to distinct pairs exactly because [msimple] forbids parallel edges);
+    [bz_Delta] bounds [Delta (usimple G)] by [mDelta G] (every neighbour is the
+    other end of an incident edge); [bz_upper] pulls X33's colouring back along
+    [bz_h]; [bz_lower] is the Behzad LOWER bound (a maximum-degree vertex and its
+    incident edges form a clique of the total graph).
+
+    Closing the edge needed a guard in the TARGET statement: the unguarded
+    [behzads_statement] was refutable on the EMPTY multigraph (simple, with
+    [mDelta = 0] and total chromatic number [0], so the lower bound [1 <= 0]
+    fails).  Wave E2b added the guard [0 < #|G|] to Row 9 of U5.v (see its
+    GUARD REPAIR note and [grounding_U5.behzads_unguarded_body_refutable]);
+    with it, [bz_lower] and [bz_upper] give the edge directly. *)
+
+Section BehzadBridge.
+Variable G : mgraph.
+
+Lemma bz_incidentP (x : G) (e : edge G) :
+  incident x e -> x \in [set source e; target e].
+Proof. by case/existsP => -[] /eqP <-; rewrite !inE eqxx ?orbT. Qed.
+
+Lemma bz_ends_in (lo : loopless G) (e : edge G) :
+  [set source e; target e] \in x33_edge_set (usimple G).
+Proof.
+rewrite inE; apply/existsP; exists (source e); apply/existsP; exists (target e).
+rewrite eqxx andbT; change (madj (source e) (target e)); rewrite /madj (lo e) /=.
+apply/existsP; exists e; apply/andP; split; apply/existsP; [exists false | exists true] => //.
+Qed.
+
+Definition bz_h (lo : loopless G) (x : total_graph G) : x33_total_graph (usimple G) :=
+  match x with
+  | inl v => inl v
+  | inr e => inr (exist _ [set source e; target e] (bz_ends_in lo e))
+  end.
+
+Lemma bz_h_hom (lo : loopless G) : injective (@edge_ends G) ->
+  forall x y : total_graph G, x -- y -> bz_h lo x -- bz_h lo y.
+Proof.
+move=> inj [x|e] [y|f] //=.
+- exact: bz_incidentP.
+- exact: bz_incidentP.
+case/andP => ef /existsP[v /andP[ve vf]]; apply/andP; split.
+  by apply: contra ef => /eqP h; apply/eqP; exact: inj h.
+by apply/set0Pn; exists v; rewrite inE (bz_incidentP ve) (bz_incidentP vf).
+Qed.
+
+Lemma bz_Delta : Delta (usimple G) <= mDelta G.
+Proof.
+apply/bigmax_leqP => x _.
+pose oth (e : edge G) : G := if source e == x then target e else source e.
+have sub : N(x) \subset oth @: edges_at x.
+  apply/subsetP => y; rewrite inE /= /madj => /andP[xy /existsP[e /andP[xe ye]]].
+  apply/imsetP; exists e; first by rewrite inE.
+  move: xe ye => /existsP[b /eqP bx] /existsP[c /eqP cy].
+  case: b c bx cy => -[] /= bx cy.
+  - by move: xy; rewrite -bx -cy eqxx.
+  - by rewrite /oth cy eq_sym (negbTE xy).
+  - by rewrite /oth bx eqxx cy.
+  - by move: xy; rewrite -bx -cy eqxx.
+apply: leq_trans (subset_leq_card sub) _.
+apply: leq_trans (leq_imset_card _ _) _.
+rewrite /mDelta; exact: (@leq_bigmax G (fun v : G => #|edges_at v|) x).
+Qed.
+
+Lemma bz_upper : total_list_colouring_delta_plus_two_statement -> msimple G ->
+  total_chromatic_number G <= (mDelta G).+2.
+Proof.
+move=> X [lo inj].
+pose k := Delta (usimple G) + 2.
+have hL : forall v : x33_total_graph (usimple G), k <= #|[set: 'I_k]|.
+  by move=> _; rewrite cardsT card_ord.
+have [g [_ hg]] := X (usimple G) 'I_k (fun _ => [set: 'I_k]) hL.
+have hp : forall x y : total_graph G, x -- y -> g (bz_h lo x) != g (bz_h lo y).
+  by move=> x y xy; apply: hg; exact: (@bz_h_hom lo inj x y xy).
+apply: leq_trans (chi_le_palette hp) _.
+by rewrite card_ord /k addn2 ltnS ltnS bz_Delta.
+Qed.
+
+Lemma bz_lower : 0 < #|G| -> (mDelta G).+1 <= total_chromatic_number G.
+Proof.
+move=> gpos.
+have [v vE] := @eq_bigmax G (fun u => #|edges_at u|) gpos.
+pose K : {set total_graph G} := inl v |: [set inr e | e in edges_at v].
+have inj_inr : injective (@inr G (edge G)) by move=> e f [->].
+have clK : clique K.
+  move=> x y; rewrite !inE => /orP[/eqP->|/imsetP[e eE ->]] /orP[/eqP->|/imsetP[f fE ->]].
+  - by rewrite eqxx.
+  - by move=> _; move: fE; rewrite inE.
+  - by move=> _; move: eE; rewrite inE.
+  move=> ef; rewrite /= /line_rel; apply/andP; split.
+    by apply: contra ef => /eqP->.
+  by apply/existsP; exists v; move: eE fE; rewrite !inE => -> ->.
+have cK : #|K| = (#|edges_at v|).+1.
+  rewrite cardsU1 card_imset //; case: imsetP => // -[e _] //.
+rewrite /total_chromatic_number /mDelta vE -cK -(chi_clique clK).
+exact: sub_chi (subsetT K).
+Qed.
+
+End BehzadBridge.
+
+Theorem total_list_colouring_delta_plus_two_implies_behzads :
+  total_list_colouring_delta_plus_two_statement -> behzads_statement.
+Proof.
+move=> X G sG gpos; apply/andP; split; first exact: bz_lower.
+exact: bz_upper X sG.
+Qed.
 
 (** ── Machine-readable edge records (extracted by meta/build_edge_graph.py) ───
     The forbidden / cross-milestone relationships audited above, recorded so the
     extractor never re-derives or mis-schedules them. *)
 
-(*@EDGE from=edge_list_coloring_statement to=goldbergs_statement kind=implies status=candidate proved=false cite="OPG_FULL_FORMALIZATION_PLAN §6 (edge-list-colouring/LCC <-> Goldberg region)" note="CROSS-MILESTONE: edge-list-colouring is U4; not a U5-internal edge" *)
+(*@EDGE from=total_list_colouring_delta_plus_two_statement to=behzads_statement kind=implies status=verified proof=total_list_colouring_delta_plus_two_implies_behzads cite="gc:e002" note="X33 (chi''_l of the total graph of a simple graph <= Delta+2) implies Behzad on nonempty simple multigraphs. Carrier bridge: bz_h maps base's total graph of a simple multigraph G homomorphically into X33's total graph of usimple G (msimple forbids parallel edges, so distinct edges map to distinct endpoint pairs); bz_Delta: Delta(usimple G) <= mDelta G; bz_upper: pull X33's list colouring with constant lists back along bz_h and bound chi by the palette (chi_bounding.chi_le_palette); bz_lower: the max-degree vertex and its incident edges form a clique of size mDelta+1 in the total graph. Uses the E2b guard 0 < #|G| on behzads_statement (the unguarded row was refuted by the empty multigraph)." *)
+(*@EDGE from=edge_list_coloring_statement to=goldbergs_statement kind=implies status=refuted-direction cite="OPG_FULL_FORMALIZATION_PLAN §6 (edge-list-colouring/LCC <-> Goldberg region)" note="REFUTED-DIRECTION (metadata wave M, 2026-09-24): no logical implication: list chromatic index equal to chromatic index does not bound chi' by the Goldberg density. Earlier note: CROSS-MILESTONE: edge-list-colouring is U4; not a U5-internal edge" *)
 (*@EDGE from=list_total_colouring_statement to=behzads_statement kind=implies status=refuted-direction cite="OPG_FULL_FORMALIZATION_PLAN §6" note="FORBIDDEN and CROSS-MILESTONE (list-total is U4): chi''_l = chi'' does not yield the chi'' <= Delta+2 bound" *)
+
+Print Assumptions total_list_colouring_delta_plus_two_implies_behzads.

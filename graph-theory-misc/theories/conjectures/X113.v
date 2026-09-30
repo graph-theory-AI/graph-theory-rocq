@@ -62,13 +62,30 @@ Definition x113_is_forest_after
 
 (** ** X113 statement *****************************************************)
 
-(** Coarse Erdos-Posa property for cycles (Chudnovsky-Seymour): there exist
-    functions [f], [g] such that for every [k, d >= 1] and every graph [G],
-    either [G] contains [k] cycles pairwise at distance greater than [d], or a
-    set [X] of at most [f k] vertices can be found whose closed [g d]-ball meets
-    every cycle -- deleting that ball leaves a forest.  The two functions are
-    chosen up front (uniformly in [G, k, d]), matching the [exists f g, forall
-    ...] shape of the coarse Erdos-Posa duality. *)
+(** Corpus row: studies:std_chudnovsky_seymour_coarse_erd_s_p_sa_conjecture
+    Site: none
+    Review: none
+    English statement: (Chudnovsky and Seymour; also Ahn, Gollin, Huynh and Kwon, coarse
+      Erdos-Posa conjecture)
+      There are functions f and g from naturals to naturals such that for all integers
+      k, d >= 1 and every finite simple graph G, either G contains k distinct cycles that are
+      pairwise at distance greater than d, or there is a vertex set X with |X| <= f(k) such
+      that deleting the closed g(d)-ball around X leaves a forest.
+    Definitions: [x113_ball r x] / [x113_set_ball r S] - the closed r-ball around a vertex, and
+      the union of the r-balls over a vertex set (this file); [x113_path_vertices p] - the
+      vertex set of a walk (this file); [x113_is_cycle c] - c is a genuine simple cycle, a
+      uniform closed adjacency-walk on at least three vertices, encoded as in the girth
+      vocabulary of GTBase by [ucycle (--) c] together with [2 < size c] (this file);
+      [x113_pairwise_distant_cycles d cs] - for distinct cycles of cs, the closed d-ball around
+      one avoids the other, which for d >= 1 already forces vertex-disjointness (this file);
+      [x113_has_k_distant_cycles G d k] - k distinct such cycles exist (this file);
+      [x113_is_forest_after A] - no genuine cycle of G avoids A, i.e. G minus A is acyclic
+      (this file).
+    Notes: the two Erdos-Posa functions are quantified before k, d and G, which is the intended
+      uniform reading.  "Distance greater than d" is rendered as "the closed d-ball around one
+      cycle misses the other", and "G minus the ball is a forest" as "every cycle of G meets the
+      ball"; because adjacency is inherited by induced subgraphs, the latter is equivalent to
+      acyclicity of the induced subgraph on the complement. *)
 Definition coarse_erdos_posa_cycles_forest_statement : Prop :=
   exists f g : nat -> nat,
     forall (k d : nat) (G : sgraph),

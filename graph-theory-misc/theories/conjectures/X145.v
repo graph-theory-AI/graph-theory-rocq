@@ -32,8 +32,28 @@ Definition x145_class_asymptotic_dimension_at_most
 
 (** ** X145 statements *****************************************************)
 
-(** Fujiwara-Papasoglu: the class of planar graphs has asymptotic dimension at
-    most two, rendered by uniformly bounded covers with r-multiplicity at most
-    three. *)
+(** Corpus row: studies:std_fujiwara_papasoglu_question_asymptotic_dimension
+    Site: none
+    Review: none
+    English statement: (Fujiwara and Papasoglu, question on the asymptotic dimension of planar
+      graphs)
+      For every r there is a D such that every planar finite simple graph admits a finite
+      family of vertex sets that covers all vertices, each of diameter at most D in the graph
+      metric, and such that every vertex has at most 3 family members within distance r of it.
+      That is, the class of planar graphs has asymptotic dimension at most 2.
+    Definitions: [x145_set_diameter_at_most G S D] - all pairs of S are at graph distance at
+      most D (this file); [x145_cover U] - the family U covers every vertex (this file);
+      [x145_r_multiplicity_at_most U r k] - every vertex has at most k members of U containing
+      a point within distance r (this file);
+      [x145_class_asymptotic_dimension_at_most C k] - for every r there is a uniform diameter
+      bound D such that every member of C has a D-bounded cover of r-multiplicity at most k+1
+      (this file); [wagner_planar] - combinatorial Wagner planarity (GTBase); [graph_dist] -
+      graph distance (GTBase graph_metric.v).
+    Notes: retargeted on 2026-07-16 from a blocked placeholder to this axiom-free finite-witness
+      formulation, see meta/BLOCKED_RETARGETING_FOUNDATIONS.md.  Asymptotic dimension at most k
+      is rendered by the multiplicity form (covers of uniformly bounded diameter with
+      r-multiplicity at most k+1), so dimension at most 2 becomes multiplicity at most 3; the
+      diameter bound D is chosen after r and before the graph, which is the required
+      uniformity over the class. *)
 Definition fujiwara_papasoglu_planar_asymptotic_dimension_two_statement : Prop :=
   x145_class_asymptotic_dimension_at_most wagner_planar 2.

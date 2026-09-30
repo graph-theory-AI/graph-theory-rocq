@@ -1,0 +1,26 @@
+-R theories Atlas
+-Q ../base/theories GTBase
+-Q ../chromatic-theory/theories Chromatic
+-Q ../cycle-theory/theories Cycle
+-Q ../extremal-graph-theory/theories Extremal
+-Q ../graph-theory-misc/theories GTMisc
+-Q ../hamiltonicity-theory/theories Hamilton
+-Q ../homomorphism-theory/theories Hom
+-Q ../hypergraph-theory/theories Hypergraph
+-Q ../infinite-graph-theory/theories Infinite
+-Q ../minor-theory/theories Minor
+-Q ../packing-theory/theories Packing
+-Q ../reconstruction-theory/theories Reconstruction
+-Q ../spectral-graph-theory/theories Spectral
+-Q ../topological-graph-theory/theories Topological
+-Q ../digraph-theory/theories Digraph
+-arg -w -arg -notation-overridden,-ambiguous-paths
+
+theories/foundations/fractional.v
+theories/foundations/degeneracy.v
+theories/foundations/tree_decompositions.v
+theories/foundations/cops_bridge.v
+theories/foundations/complete_minors.v
+theories/foundations/queue_layouts.v
+theories/conjectures/implications_A1.v
+theories/conjectures/implications_A2.v

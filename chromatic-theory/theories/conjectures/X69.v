@@ -20,7 +20,20 @@ Definition x69_triangles_distance_at_least (G : sgraph) (d : nat) : Prop :=
 
 (** ** X69 statements ******************************************************)
 
-(** Studies slice: Havel's problem on planar graphs with distant triangles. *)
+(** Corpus row: studies:std_havel_s_problem
+    Site: none
+    Review: none
+    English statement: (Havel, studies slice of the corpus)
+      There is a constant d > 0 such that every planar finite simple graph in which any two distinct
+      triangles are at distance at least d has chromatic number at most 3.
+    Definitions: [x69_triangle T] - T is a 3-element clique (this file);
+      [x69_triangles_distance_at_least G d] - for any two distinct triangles and any vertices a in
+      one and b in the other, b is not within distance d-1 of a (this file); [ball], [wagner_planar]
+      (GTBase base/theories/base.v).
+    Notes: This row has no site or review page in the corpus, hence the literal "none" above. The
+      corpus row is a QUESTION; the Rocq body is its affirmative reading. The distance condition is
+      imposed on every pair of vertices of two distinct triangles, which is the intended reading of
+      "the distance between the two triangles is at least d". *)
 Definition havel_distant_triangles_three_colourable_statement : Prop :=
   exists d : nat,
     0 < d /\

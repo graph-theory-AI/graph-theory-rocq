@@ -64,10 +64,23 @@ Inductive x112_closure (C : sgraph -> Prop) (b : nat) : sgraph -> Prop :=
 
 (** ** X112 statements *****************************************************)
 
-(** Chudnovsky–Penev–Scott–Trotignon.  "Is the closure of a χ-bounded class
-    under substitution and gluing along a bounded number of vertices also
-    χ-bounded?"  Encoded as: for every class [C] and bound [b], if [C] is
-    χ-bounded then so is its substitution/gluing closure. *)
+(** Corpus row: studies:std_chudnovsky_penev_scott_trotignon_conjecture_boun
+    Site: none
+    Review: none
+    English statement: (Chudnovsky, Penev, Scott and Trotignon, studies slice of the corpus)
+      For every class C of finite simple graphs and every bound b, if C is chi-bounded then so is
+      the closure of C under substitution of a graph for a single vertex and under gluing two graphs
+      along at most b common vertices.
+    Definitions: [x112_chi_bounded D] - one function f bounds chi(G) by f(omega(G)) for every
+      member, the function being chosen before the graphs (this file); [x112_is_substitution G G1 H]
+      - G arises from G1 by replacing one vertex by a copy of H, encoded by a quotient map whose
+      non-trivial fibre induces H and which preserves adjacency across distinct fibres (this file);
+      [x112_glue_le b G G1 G2] - the vertices of G are covered by two sets inducing copies of G1 and
+      G2, overlapping in at most b vertices, with no edge between the two private parts (this file);
+      [x112_closure C b] - the inductive closure of C under these two operations (this file).
+    Notes: This row has no site or review page in the corpus, hence the literal "none" above. The
+      corpus row is a QUESTION; the Rocq body is its affirmative reading. Substitution is restricted
+      to a SINGLE vertex at a time, which generates the same closure as simultaneous substitution. *)
 Definition chi_bounded_closure_substitution_gluing_statement : Prop :=
   forall (C : sgraph -> Prop) (b : nat),
     x112_chi_bounded C -> x112_chi_bounded (x112_closure C b).

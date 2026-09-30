@@ -72,9 +72,28 @@ Definition x94_pure_pair
 
 (** ** X94 statements ******************************************************)
 
-(** Studies slice: Bipartite strong Erdos-Hajnal conjecture for forest
-    bigraphs and their bicomplements, with the linear pure-pair threshold
-    written as a positive rational epsilon. *)
+(** Corpus row: studies:std_bipartite_strong_erd_s_hajnal_conjecture
+    Site: none
+    Review: none
+    English statement: (Alecu, Atminas, Lozin and Zamaraev; Axenovich, Tompkins and Weber,
+      bipartite strong Erdos-Hajnal conjecture)
+      For every bigraph H whose underlying graph is a forest there is a positive rational
+      eps = eps_num/eps_den such that every bigraph G containing no induced copy of H and no
+      induced copy of the bicomplement of H has a pure pair (ZL, ZR), i.e. ZL on the left and
+      ZR on the right that are either completely adjacent or completely non-adjacent, with
+      eps_num * |left(G)| <= eps_den * |ZL| and eps_num * |right(G)| <= eps_den * |ZR|.
+    Definitions: [x94_bigraph] - a record with a left finite type, a right finite type and a
+      biadjacency relation (this file); [x94_underlying_graph B] - the simple graph on the
+      disjoint union of the two sides (this file); [x94_forest_bigraph B] - that graph is a
+      forest (this file); [x94_bicomplement B] - the bigraph with the complemented biadjacency,
+      the two sides kept (this file); [x94_induced_copy H G] - injective side-preserving maps
+      reproducing the biadjacency exactly (this file); [x94_H_free G H] - no such copy (this
+      file); [x94_complete_pair], [x94_anticomplete_pair], [x94_pure_pair] - the three pair
+      conditions (this file); [is_forest] - coq-graph-theory.
+    Notes: bigraphs are ordered pairs of sides, so both "H-free" and the pure pair respect the
+      bipartition, as the source requires.  The linear threshold eps is a positive rational
+      given by a numerator and a denominator, the inequalities being cross-multiplied; both
+      sides get the SAME eps, chosen before G. *)
 Definition bipartite_strong_erdos_hajnal_forest_bigraph_statement : Prop :=
   forall H : x94_bigraph,
     @x94_forest_bigraph H ->

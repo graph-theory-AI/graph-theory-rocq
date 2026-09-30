@@ -1,5 +1,5 @@
 {
- "_README": "X1 directed reconciliation (plan §1.5). Maps 24 v2 rows onto pre-existing Rocq constants in digraph-theory (written in the pre-monorepo directed campaign), verified faithful by the x1-reconcile-directed workflow (run wf_05f12221: per-file matcher + independent second-reader faithfulness check; only both-agree-faithful rows kept). Merged by build_v2_manifest.py: sets formal_name/repo=digraph-theory/phase=X1/already_formalized + the source-verification tuple, and drives the v2 overlay statement=done. re-encodings are technique-#3 independent encodings of the same row (recorded, not the canonical formal_name). followups_* are X2 work: proxy = an existing NON-faithful constant (row stays todo — do not mark partial for a vacuous/weaker encoding); unmatched = an existing constant with no corpus row (candidate to mint a row or an OPG/settled-theorem to leave alone).",
+ "_README": "X1 directed reconciliation (plan §1.5). Maps 24 v2 rows onto pre-existing Rocq constants in digraph-theory (written in the pre-monorepo directed campaign), verified faithful by the x1-reconcile-directed workflow (run wf_05f12221: per-file matcher + independent second-reader faithfulness check; only both-agree-faithful rows kept). Merged by build_v2_manifest.py: sets formal_name/repo=digraph-theory/phase=X1/already_formalized + the source-verification tuple, and drives the v2 overlay statement=done. re-encodings are technique-#3 independent encodings of the same row (recorded, not the canonical formal_name). followups_* are X2 work: proxy = an existing NON-faithful constant (row stays todo — do not mark partial for a vacuous/weaker encoding); unmatched = an existing constant with no corpus row (candidate to mint a row or an OPG/settled-theorem to leave alone). Opt-in per-row hash pin (plan WP3): `source_hash` records the corpus statement text the second reader actually read, and `source_verified_by`/`source_verified_at` override the file/wave-level values for that row. build_v2_manifest.py exits with \"source text changed since verification; re-verify\" when the upstream text is later reworded, so a silent corpus edit can never leave a statement leg `done`.",
  "phase": "X1",
  "repo": "digraph-theory",
  "implemented_by": "digraph-theory pre-monorepo directed campaign",
@@ -115,15 +115,6 @@
    ],
    "note": "forall k, exists f, forall nonempty tournament T with tww_le T k -> dicolorableb T (f (omegabar T)). Encodes Conj 3.12 'the class of tournaments with twin-width <= k is chi-vec-bounded': dicolorableb T m = chi-vec(T)<=m, omegabar T = omega-bar(T), tww_le is the concrete contraction-sequence twin-width. Deltas are harmless: k ranges over all nat vs paper's k>=1 (k=0 class subset of k=1 class, so eq"
   },
-  "axv_2310_04265_03": {
-   "row_id": "arxiv:2310.04265#03",
-   "formal_name": "conj_3_13_statement",
-   "defines_file": "twinwidth.v",
-   "reencodings": [
-    "conj_3_13_concrete"
-   ],
-   "note": "exists f, forall nonempty tournament T, exists order p:{perm T}, bclique p <= f(omegabar T) /\\ otww_le p (f(omegabar T)). Encodes Conj 3.13 'exists f s.t. every T has an ordering with omega(T^p)<=f(omega-bar) AND tww(T,p)<=f(omega-bar)': bclique p = omega(T^p) backedge clique number, both conjuncts present with correct exists-f/forall-T/exists-p structure. CAVEAT: ordered twin-width tww(T,p) is PA"
-  },
   "axv_2310_04265_04": {
    "row_id": "arxiv:2310.04265#04",
    "formal_name": "conj_3_16_statement",
@@ -131,7 +122,10 @@
    "reencodings": [
     "conj_3_16_concrete"
    ],
-   "note": "exists f, forall nonempty tournament T, exists order p:{perm T}, bst_order p /\\ bclique p <= f(omegabar T). Encodes Conj 3.16 'exists f s.t. every T has a BST-ordering with omega(T^p)<=f(omega-bar)': bclique p = omega(T^p), correct exists-f/forall-T/exists-p structure with the BST-ordering conjunct. CAVEAT: BST-ordering is PARAMETRIC -- bst_order is an abstract Section Variable (recursive BST in-o"
+   "note": "exists f, forall nonempty tournament T, exists order p:{perm T}, bst_order p /\\ bclique p <= f(omegabar T). Encodes Conj 3.16 'exists f s.t. every T has a BST-ordering with omega(T^p)<=f(omega-bar)': bclique p = omega(T^p), correct exists-f/forall-T/exists-p structure with the BST-ordering conjunct. CAVEAT: BST-ordering is PARAMETRIC -- bst_order is an abstract Section Variable (recursive BST in-o | 2026-09-23 re-read against graph-conjectures@b72c585 and arXiv:2310.04265v2 (renumbered Conjecture 3.17): \"There exists a function f such that, for every tournament T, there exists a BST-ordering < of T such that: omega(T^<) <= f(omegabar(T))\" — the Rocq body matches conjunct for conjunct; source_hash pinned.",
+   "source_hash": "c8592ff5152b4692f17aa9e858e5a72ae45a616b9c93f0fbc1dec54df0822d6c",
+   "source_verified_by": "Claude Opus 5 subagent re-read (session 01P75Y6ikkgDyzUzzoef316Z)",
+   "source_verified_at": "2026-09-23"
   },
   "drv_twoext_h6": {
    "row_id": "derived:drv_twoext_h6",
@@ -234,6 +228,12 @@
    "file": "two_extremal_hajos.v",
    "v2_row_id": "arxiv:2304.04690#00",
    "issue": "`in_H2_contains_base in_H2 -> in_H2_closed_dhajos in_H2 -> in_H2_closed_treejoin -> forall D llD, two_extremal llD <-> in_H2 D` — the parametric-with-all-three-closure-constraints re-encoding of Conjecture 9.2 (strictly more faithful than committed conj_9_2, which folded the tree-join into in_H2 as "
+  },
+  {
+   "constant": "conj_3_13_statement",
+   "file": "twinwidth.v",
+   "v2_row_id": "arxiv:2310.04265#03",
+   "issue": "Slug axv_2310_04265_03. Moved OUT of `reconciled` on 2026-09-23 (statement leg back to todo). The reconciliation was made against a TRUNCATED corpus statement_text (the record ended at the colon, the displayed formula was missing), so the second conjunct was guessed. graph-conjectures@b72c585 now carries the full text, and arXiv:2310.04265v2 (22 Jun 2026, where the conjecture is renumbered 3.14) reads: \"There exists a function f, such that for every tournament T, there exists an ordering <* of V(T) such that: omega(T^<*) <= f(omegabar(T)) and tww((T,<*)) <= f(tww(T))\". The Rocq body bounds BOTH conjuncts by f(omegabar T) — `otww_le p (f (omegabar T))` instead of `otww_le p (f (tww T))` — which is a DIFFERENT (and in the bounded-omegabar / unbounded-tww regime much stronger) claim, not the paper's. NOT faithful: needs a re-encoding in a later wave, where the ordered twin-width bound is taken over f applied to the unordered twin-width tww(T). No registered resolution targets conj_3_13_statement, and the relative theorem conj_3_13_implies_3_16 is unaffected (it is stated over the parametric section variables)."
   }
  ],
  "followups_unmatched": [

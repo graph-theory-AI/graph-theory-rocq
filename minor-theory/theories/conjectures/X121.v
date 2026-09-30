@@ -32,17 +32,33 @@ Definition x121_tree_alpha_le (G : sgraph) (k : nat) : Prop :=
 
 (** ** X121 statements *****************************************************)
 
-(** Dallard–Milanič–Štorgel.  A class C of graphs is (tw,ω)-BOUNDED — treewidth
-    is bounded by some function of the clique number ω throughout C — if and only
-    if C has BOUNDED tree-independence number (bounded tree-α).
-
-    "(tw,ω)-bounded"  ≡  ∃ f, ∀ G ∈ C, tw(G) ≤ f(ω(G));
-    "bounded tree-α"  ≡  ∃ k, ∀ G ∈ C, tree-α(G) ≤ k.
-
-    Both sides are ∃-witness-BEFORE-∀-G ("there is one f / one k that works for
-    every graph in the class"), and the theorem is the biconditional over ALL
-    classes C : sgraph -> Prop.  Treewidth is the corpus predicate
-    [x27_treewidth_at_most G m] (= tw(G) ≤ m). *)
+(** Corpus row: studies:std_dallard_milani_torgel_conjecture
+    Site: none
+    Review: none
+    English statement: (Dallard, Milanic and Storgel, conjecture)
+      For every class C of finite simple graphs the following two properties are equivalent.
+      First, C is (treewidth, clique-number)-bounded: there is a single function f from the
+      naturals to the naturals such that every graph G in C has treewidth at most f applied to
+      the clique number of G.  Second, C has bounded tree-independence number: there is a
+      single natural number k such that every graph G in C has tree-independence number at
+      most k.
+    Definitions: [x121_omega G] - the clique number of G, i.e. the coq-graph-theory clique
+      number taken on the full vertex set (minor-theory/theories/conjectures/X121.v);
+      [x121_tree_alpha_le G k] - G admits a tree-decomposition every one of whose bags B has
+      independence number at most k, which is exactly "tree-alpha(G) <= k" (same file);
+      [x27_treewidth_at_most G m] - G admits a tree-decomposition all of whose bags have at
+      most m+1 vertices, i.e. treewidth at most m (minor-theory/theories/conjectures/X27.v);
+      [x27_tree_decomposition bag] - every vertex lies in some bag, every edge has both ends in
+      a common bag, and the bags containing a fixed vertex form a connected set of the index
+      tree (same file).
+    Notes: on both sides the existential witness is chosen before the graph is quantified, so
+      one f and one k must serve the whole class.  "tree-alpha(G) <= k" is encoded as the
+      existence of one decomposition with all bags of independence number at most k, which
+      avoids a literal minimum over decompositions and agrees with the minimum-based
+      definition.  The class C is an arbitrary predicate on [sgraph]; no hereditary or
+      induced-minor-closure assumption is imposed, whereas the literature states the
+      conjecture for hereditary classes, so the encoding is at least as strong as the source
+      (see meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition dallard_milanic_storgel_tw_omega_tree_alpha_statement : Prop :=
   forall C : sgraph -> Prop,
     (exists f : nat -> nat,

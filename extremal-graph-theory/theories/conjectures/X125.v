@@ -73,10 +73,34 @@ Definition x125_almost_all
     forall (n : nat) (x : x125_sample M n),
       good n x -> P n (@x125_observe ell M n x).
 
-(** ** X125 statements *****************************************************)
-
-(** Studies slice: Drier-Linial conjecture -- for ell >= Omega(n), almost all
-    ell-lifts of K_n have Hajos number Theta(n). *)
+(** Corpus row: studies:std_drier_linial_conjecture_haj_s_number_of_random_l
+    Site: none
+    Review: none
+    English statement: (Drier and Linial, "Drier-Linial conjecture (Hajos number of random lifts of complete graphs)")
+      For every fibre-size function ell that is eventually at least linear (c * n <= ell n for
+      some c > 0 and all large n) there are a, b > 0 such that almost all ell(n)-lifts of K_n
+      have Hajos number between a * n and b * n, i.e. a topological K_{a*n} minor and no
+      topological K_k minor for k > b * n.
+    Definitions: [x125_lift n ell G] - G is an ell-lift of K_n: a fibre map to 'I_n with all fibres of
+      size ell, no edge inside a fibre, and a perfect matching between any two distinct fibres
+      (X125.v); [x125_topological_minor_K G k] - injective branch vertices for K_k joined by
+      internally disjoint paths avoiding the other branch vertices (X125.v);
+      [x125_hajos_at_least G k] - the same (X125.v); [x125_isomorphic] - a bijection preserving
+      and reflecting adjacency (X125.v); [x125_lift_model ell] - a record packaging, for each n,
+      a non-empty finite sample type with positive uniform weights whose observations are
+      exactly the ell(n)-lifts of K_n up to isomorphism (X125.v); [x125_almost_all ell P] -
+      existence of such a model and of a good predicate holding with high probability under
+      [fg_whp] and implying P (X125.v); [x125_linear_lower_bound] (X125.v); [eventually],
+      [fg_whp] - GTBase asymptotics.
+    Notes: this row is recorded as BLOCKED. The adversarial repair verification of 2026-07-18 found
+      that the [exists M : x125_lift_model ell] quantifier admits a multiplicity-skewed
+      observation model (extra sample points all observing the trivial disjoint-copies lift)
+      that satisfies every record field yet concentrates the high-probability ratio on a single
+      lift, making the statement provable with a = b = 1 independently of Drier-Linial (the
+      engine is machine-checked in probe_x125_skew.v). The structural fix would be to pin the
+      canonical uniform LABELLED lift model (matching-tuple sample space) or add a
+      measure-faithfulness side condition. As it stands the body is VACUOUS-LOOKING / too weak
+      (ledger). This row also comes from the studies slice, which has no site or review page. *)
 Definition drier_linial_random_lift_hajos_number_statement : Prop :=
   forall ell : nat -> nat,
     x125_linear_lower_bound ell ->

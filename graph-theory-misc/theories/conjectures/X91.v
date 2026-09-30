@@ -47,10 +47,26 @@ Definition x91_Pk_free (G : sgraph) (k : nat) : Prop :=
 
 (** ** X91 statements ******************************************************)
 
-(** Studies slice: Beisegel-Chudnovsky-Gurvich-Milanic-Servatius conjecture:
-    every graph either has no induced copy of [P_k] or contains an avoidable
-    induced copy of [P_k].  Avoidability is spelled as the standard extension
-    property: every induced two-sided extension lies in an induced cycle. *)
+(** Corpus row: studies:std_beisegel_chudnovsky_gurvich_milani_servatius_con
+    Site: none
+    Review: none
+    English statement: (Beisegel, Chudnovsky, Gurvich, Milanic and Servatius, conjecture on
+      avoidable paths)
+      For every k >= 1, every finite simple graph G either contains no induced path on k
+      vertices, or contains an induced path p on k vertices that is avoidable: every induced
+      path obtained by adding one vertex at each end of p is contained in an induced cycle.
+    Definitions: [x91_consecutive_in_path] / [x91_consecutive_in_cycle] - being consecutive in
+      a sequence, resp. cyclically (this file); [x91_induced_path p] - p is a non-empty
+      sequence of distinct vertices, consecutive ones adjacent and no other pair adjacent (this
+      file); [x91_induced_cycle c] - c is a uniform closed adjacency-walk on at least three
+      vertices with no chords (this file); [x91_sequence_contained p c] - every vertex of p
+      occurs in c (this file); [x91_avoidable_path p] - p is induced and every induced
+      two-sided extension of p lies inside an induced cycle (this file); [x91_Pk_free G k] - no
+      induced path on k vertices (this file); [ucycle] - MathComp uniform cycle.
+    Notes: paths are measured by their number of vertices, so P_k is a path on k vertices.
+      Avoidability is spelled out by the standard extension property (every induced extension
+      u :: p ++ [v] lies in an induced cycle) rather than by the neighbourhood formulation;
+      the two are the usual equivalent definitions. *)
 Definition avoidable_path_or_pk_free_statement : Prop :=
   forall k : nat,
     0 < k ->

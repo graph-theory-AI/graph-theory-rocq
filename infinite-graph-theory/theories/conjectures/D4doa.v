@@ -120,6 +120,34 @@ Definition persite_cauchy (count vsize : nat -> nat) : Prop :=
         (sm ^+ (vsize m) = (count m)%:R)%R -> (sk ^+ (vsize k) = (count k)%:R)%R ->
         (`| sm - sk | < eps)%R.
 
+(** Corpus row: opg:counting_3_colorings_of_the_hex_lattice
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/counting_3_colorings_of_the_hex_lattice/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/counting_3_colorings_of_the_hex_lattice.json
+    English statement: (Open Problem Garden, "Counting 3-colorings of the hex
+      lattice") The source asks for the value of the limit, as n grows, of the
+      number of proper 3-colourings of the n-th hexagonal torus H_n raised to
+      the power one over its number of vertices.  The Rocq body asserts that
+      this limit EXISTS, in Cauchy form: for every real-closed field R and every
+      positive eps of R there is N such that for all m, k at least N, any
+      nonnegative elements s_m and s_k of R whose |V(H_m)|-th and |V(H_k)|-th
+      powers are the respective 3-colouring counts differ by less than eps.
+    Definitions: [hex_torus n] - a concrete finite honeycomb torus: vertices are
+      a cell of the discrete torus Z_(n+1) x Z_(n+1) together with a sublattice
+      flag, the A-vertex of a cell joined to the B-vertices of that cell and of
+      its two successor cells (this file, D4doa.v); [is_proper3 c] - the finite
+      function c into 'I_3 gives different colours to adjacent vertices
+      (D4doa.v); [n3colorings G] - the number of such colourings, i.e. the
+      chromatic polynomial of G evaluated at 3 (D4doa.v);
+      [persite_cauchy count vsize] - the Cauchy condition on the per-site roots
+      above (D4doa.v).
+    Notes: three modelling choices.  (1) "Find the limit" is rendered as "the
+      limit exists"; the value is not named.  (2) The ambient field is an
+      arbitrary [rcfType] rather than Stdlib's R, to keep the file free of the
+      classical-reals axioms; the limit itself lives in the completion of R.
+      (3) The per-site roots are not constructed but quantified by their
+      defining power equation, so the statement ranges over all nonnegative s
+      with s^|V| equal to the count.  The carrier is FINITE (the tori), so no
+      infinite carrier is needed for this row. *)
 Definition counting_3_colorings_of_the_hex_lattice_statement : Prop :=
   persite_cauchy (fun k => n3colorings (hex_torus k)) (fun k => #|hex_torus k|).
 
@@ -142,7 +170,31 @@ Definition Pcm (c m : nat) : Prop :=
     sym_coloring col -> exact_coloring col ->
     exists s : nat -> nat, injective s /\ exactly_m_colored col s m.
 
-(** The conjecture: for c >= m >= 1, P(c,m) holds iff m = 1, m = 2, or c = m. *)
+(** Corpus row: opg:exact_colorings_of_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/exact_colorings_of_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/exact_colorings_of_graphs.json
+    English statement: (Open Problem Garden, "Exact colorings of graphs") For all
+      c >= m >= 1, the following holds if and only if m = 1, m = 2 or c = m:
+      every symmetric exact c-colouring of the edges of the countably infinite
+      complete graph (a colouring by c colours in which every colour is used at
+      least once) contains a countably infinite complete subgraph whose edges
+      use exactly m colours.
+    Definitions: [Komega] - the countable complete graph, vertices nat, distinct
+      vertices adjacent (infinite-graph-theory/theories/foundations/igraph.v);
+      [Kedge_coloring c] - a function nat -> nat -> 'I_c (igraph.v);
+      [sym_coloring] - the colouring is symmetric (igraph.v);
+      [exact_coloring] - every colour of 'I_c occurs on some pair of distinct
+      vertices (igraph.v); [exactly_m_colored col s m] - the set of colours
+      occurring inside the subgraph indexed by s has exactly m elements
+      (igraph.v); [Pcm c m] - the property P(c,m) of the source (this file,
+      D4doa.v).
+    Notes: the countably infinite complete subgraph is given by an INJECTIVE
+      sequence of vertices, which is faithful because in K_omega every infinite
+      vertex set is a clique.  The colouring is a total symmetric function on
+      ordered pairs; its diagonal values are unconstrained and never read, since
+      all predicates evaluate it on distinct arguments only.  Non-vacuity of the
+      premise (a symmetric exact c-colouring exists for every c >= 1) is proved
+      in grounding_D4doa. *)
 Definition exact_colorings_of_graphs_statement : Prop :=
   forall c m : nat, (1 <= m)%nat -> (m <= c)%nat ->
     (Pcm c m <-> (m = 1 \/ m = 2 \/ c = m)).

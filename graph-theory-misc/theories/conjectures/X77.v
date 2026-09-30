@@ -29,8 +29,23 @@ Definition x77_separation_dimension_at_most (G : sgraph) (k : nat) : Prop :=
 
 (** ** X77 statements ******************************************************)
 
-(** Studies slice: Alon et al. conjecture that separation dimension is linear
-    in maximum degree. *)
+(** Corpus row: studies:std_alon_et_al_conjecture_on_separation_dimension_an
+    Site: none
+    Review: none
+    English statement: (Alon et al., conjecture on separation dimension and maximum degree)
+      There is a constant c such that every finite simple graph G has separation dimension at
+      most c * Delta(G): there are c * Delta(G) injective vertex orderings such that any two
+      distinct disjoint edges of G are separated by one of them, an ordering separating two
+      edges when all endpoints of the first precede all endpoints of the second, or conversely.
+    Definitions: [x77_edge_set G] - the edges of G as two-element vertex sets (this file);
+      [x77_separates_edges pos e f] - under the position map pos, every vertex of e precedes
+      every vertex of f, or the other way round (this file);
+      [x77_separation_dimension_at_most G k] - k injective orderings exist separating every
+      pair of distinct disjoint edges (this file); [Delta] - maximum degree (GTBase).
+    Notes: the source writes O(Delta); the Rocq body fixes the implied constant c before the
+      graph, which is the intended uniform reading.  Only disjoint pairs of edges are required
+      to be separated, which is the standard definition of separation dimension; orderings are
+      given as injective maps into the naturals, hence as linear orders on the vertices. *)
 Definition separation_dimension_maximum_degree_linear_statement : Prop :=
   exists c : nat,
     forall G : sgraph,

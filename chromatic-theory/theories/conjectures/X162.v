@@ -52,9 +52,29 @@ Definition x162_kempe_class_for_q (G : sgraph) (q : nat) : Prop :=
 
 (** ** X162 statements *****************************************************)
 
-(** Open case: validity of the WSK algorithm for q=5 colourings of the periodic
-    triangular lattice, equivalently whether the 5-colourings form one Kempe
-    class under two-colour component swaps. *)
+(** Corpus row: arxiv:1510.06964#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1510.06964__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1510.06964__00.json
+    English statement: (Bonamy, Bousquet, Feghali and Johnson 2016, open case q = 5 of the WSK algorithm, arXiv:1510.06964)
+      For all m, n > 0, any two proper 5-colourings of the periodic triangular lattice on m by n
+      vertices are connected by a finite sequence of Kempe steps, each step swapping two colours on
+      a connected vertex set using only those two colours; that is, the 5-colourings of the
+      triangular lattice with periodic boundary conditions form a single Kempe class, which is the
+      validity of the Wang-Swendsen-Kotecky algorithm for q = 5.
+    Definitions: [x162_periodic_triangular_lattice m n] - the graph on ['I_m * 'I_n] with the
+      three triangular-lattice adjacencies taken modulo m and n, i.e. periodic boundary conditions
+      (this file); [x162_kempe_step col col'] - there are two distinct colours and a connected
+      vertex set carrying only those two colours such that col' swaps them on that set and agrees
+      with col elsewhere (this file); [x162_kempe_reachable] - the reflexive-transitive closure of
+      Kempe steps (this file); [x162_kempe_class_for_q G q] - any two proper q-colourings are Kempe-
+      reachable (this file); [x162_proper_colouring] (this file).
+    Notes: KNOWN UNFAITHFUL ENCODING, corpus leg blocked. The faithfulness audit of 2026-07-17,
+      meta/BLOCKED_RETARGETING_AUDIT.md and the row's verification_note, found the statement
+      TRIVIALLY TRUE for every finite graph and every q, so that the lattice, the periodic boundary
+      conditions and q = 5 are decorative. The defect is in [x162_kempe_step]: it asks only that S
+      be connected and two-coloured, not that S be a whole Kempe component of the two colour
+      classes, and the resulting colouring is not required to be proper, so arbitrary recolourings
+      are reachable. The body is left untouched here, WP4 changes comments only. *)
 Definition wsk_triangular_lattice_q5_kempe_class_statement : Prop :=
   forall m n : nat,
     0 < m -> 0 < n ->

@@ -17,6 +17,8 @@ From GraphTheory Require Import minor.
 From Extremal.foundations Require Import circular_colouring.
 From mathcomp Require Import all_algebra.
 From Extremal.conjectures Require Import D2chr.
+(* Re-import after D2chr: its re-exported base shadows the ring-scope [1] on [rat]. *)
+From mathcomp Require Import all_algebra.
 Import GRing.Theory Num.Theory.
 
 Set Implicit Arguments.
@@ -71,6 +73,153 @@ move=> [E1 UB1] [E2 UB2]; apply: rle_anti.
 - by case: E1 => n1 [B1 [w1 H1]]; apply: (UB2 _ B1 w1).
 - by case: E2 => n2 [B2 [w2 H2]]; apply: (UB1 _ B2 w2).
 Qed.
+
+(** *** Wave-E10 GUARD REPAIR of row 1 (2026-09-24).
+    [old_frac_clique_minor] is the PRE-REPAIR body of [frac_clique_minor], spelled out
+    verbatim (branch sets could be EMPTY).  TEETH: under it the fractional Hadwiger
+    number exists for NO graph, so the old [fractional_hadwiger_statement] was vacuously
+    true — one empty branch set is [connected] ([connected0]), meets no adjacency
+    constraint (a single index) and covers no vertex, so it carries any weight (port of
+    the wave-A1 witness atlas [fractional.is_fractional_hadwiger_unsat]). *)
+Definition old_frac_clique_minor (G : sgraph) (n : nat)
+    (B : 'I_n -> {set G}) (w : 'I_n -> rat) (r : rat) : Prop :=
+  [/\ (forall i, 0 <= w i),
+      (forall i, connected (B i)),
+      (forall i j, i != j -> exists x y : G, [/\ x \in B i, y \in B j & x -- y]),
+      (forall v : G, \sum_(i | v \in B i) w i <= (1 : rat))
+    & r = \sum_i w i].
+
+Lemma old_is_fractional_hadwiger_unsat (G : sgraph) (hf : rat) :
+  ~ ((exists (n : nat) (B : 'I_n -> {set G}) (w : 'I_n -> rat), old_frac_clique_minor B w hf) /\
+     (forall (n : nat) (B : 'I_n -> {set G}) (w : 'I_n -> rat) (r' : rat),
+        old_frac_clique_minor B w r' -> r' <= hf)).
+Proof.
+case=> _ H.
+have := H 1%N (fun _ => set0) (fun _ => `|hf| + 1) (`|hf| + 1).
+have le : hf < `|hf| + 1.
+  by rewrite (order.Order.POrderTheory.le_lt_trans (ler_norm hf)) // ltrDl ltr01.
+have ok : old_frac_clique_minor (fun _ : 'I_1 => @set0 G) (fun _ => `|hf| + 1) (`|hf| + 1).
+  split => //.
+  - by move=> _; rewrite addr_ge0.
+  - by move=> _; exact: connected0.
+  - by move=> i j; rewrite (ord1 i) (ord1 j) eqxx.
+  - by move=> v; rewrite big_pred0 // => i; rewrite inE.
+  - by rewrite big_ord1.
+by move=> /(_ ok); rewrite order.Order.TotalTheory.leNgt le.
+Qed.
+
+(** The repaired LP excludes exactly that witness: every branch set is non-empty. *)
+Lemma frac_clique_minor_nonempty (G : sgraph) n (B : 'I_n -> {set G}) w r i :
+  frac_clique_minor B w r -> B i != set0.
+Proof. by case=> _ /(_ i) []. Qed.
+
+(** Boundedness of the repaired LP: since every branch set is non-empty,
+    [sum_i w i <= sum_i sum_(v in B i) w i = sum_v sum_(i | v in B i) w i <= |V(G)|],
+    so had_f(G) <= |V(G)| (the maximum is finite). *)
+Lemma frac_clique_minor_le_card (G : sgraph) n (B : 'I_n -> {set G}) w r :
+  frac_clique_minor B w r -> r <= (#|G|)%:R.
+Proof.
+case=> w0 ne _ cov ->.
+have step1 : \sum_i w i <= \sum_i \sum_(v in B i) w i.
+  apply: ler_sum => i _; rewrite sumr_const.
+  have [/set0Pn [x xB] _] := ne i.
+  have c1 : (1 <= #|B i|)%N by rewrite card_gt0; apply/set0Pn; exists x.
+  case: #|B i| c1 => // k _.
+  by rewrite mulrS lerDl mulrn_wge0.
+apply: (order.Order.POrderTheory.le_trans step1).
+have -> : \sum_i \sum_(v in B i) w i = \sum_(v : G) \sum_(i | v \in B i) w i.
+  rewrite (eq_bigr (fun i => \sum_(v : G) (if v \in B i then w i else 0))); last first.
+    by move=> i _; rewrite big_mkcond.
+  rewrite exchange_big; apply: eq_bigr => v _; by rewrite [RHS]big_mkcond.
+rewrite -[X in _ <= X]mulr1n -sumr_const.
+by apply: ler_sum => v _; exact: cov.
+Qed.
+
+(** NON-VACUITY (attainment for small graphs): had_f(K_1) = 1 ... *)
+Lemma is_fractional_hadwiger_K1 : is_fractional_hadwiger 'K_1 1.
+Proof.
+split.
+  exists 1%N, (fun _ => [set ord0]), (fun _ => 1); split => //.
+  - by move=> _; split; [apply/set0Pn; exists ord0; rewrite inE | exact: connected1].
+  - by move=> i j; rewrite (ord1 i) (ord1 j) eqxx.
+  - by move=> v; rewrite (ord1 v) big_mkcond big_ord1 inE eqxx.
+  - by rewrite big_ord1.
+move=> n B w r' /frac_clique_minor_le_card; by rewrite card_ord.
+Qed.
+
+(** ... and had_f(K_2) = 2 (the two singletons with weight 1), both matched by the
+    upper bound [frac_clique_minor_le_card]. *)
+Lemma is_fractional_hadwiger_K2 : is_fractional_hadwiger 'K_2 2.
+Proof.
+split.
+  exists 2%N, (fun i : 'I_2 => [set (i : 'K_2)]), (fun _ => 1); split => //.
+  - by move=> i; split; [apply/set0Pn; exists i; rewrite inE | exact: connected1].
+  - by move=> i j ij; exists i, j; rewrite !inE !eqxx.
+  - move=> v; rewrite (big_pred1 v) // => i; by rewrite inE eq_sym.
+  - by rewrite big_ord_recl big_ord1.
+move=> n B w r' /frac_clique_minor_le_card; by rewrite card_ord.
+Qed.
+
+(** χ(K_2) = 2, had(K_2) = 2, χ_f(K_2) = 2 (a (2:1)-colouring; any (a:b)-colouring
+    of K_2 has two disjoint b-subsets of an a-palette, so 2b <= a). *)
+Lemma chi_K2 : χ([set: 'K_2]) = 2%N.
+Proof.
+rewrite chi_clique ?cardsT ?card_ord // => x y _ _ xy; exact: xy.
+Qed.
+
+Lemma is_hadwiger_K2 : is_hadwiger 'K_2 2.
+Proof.
+split; first by apply: sub_minor; exists id.
+by move=> h' /minor_card; rewrite !card_ord.
+Qed.
+
+Lemma is_fractional_chromatic_K2 : is_fractional_chromatic 'K_2 2.
+Proof.
+split.
+  exists 2%N, 1%N; split => //; split; last by rewrite divr1.
+  exists (fun v : 'K_2 => [set (v : 'I_2)]); split => [v|x y xy].
+    by rewrite cards1.
+  by rewrite disjoints1 inE; exact: xy.
+move=> a b b0 [f H]; case: H => cf df.
+have d := df ord0 (ord_max : 'K_2) isT.
+have : (b + b <= a)%N.
+  have e : #|f ord0 :|: f ord_max| = (b + b)%N.
+    by rewrite cardsU (disjoint_setI0 d) cards0 subn0 !cf.
+  by rewrite -e -[X in (_ <= X)%N]card_ord max_card.
+rewrite addnn -mul2n => le2.
+rewrite ler_pdivlMr ?ltr0n // -natrM ler_nat.
+exact: le2.
+Qed.
+
+(** All four hypotheses of [fractional_hadwiger_statement] hold simultaneously on K_2
+    with non-degenerate values: the repaired row is no longer vacuous. *)
+Lemma fractional_hadwiger_hyps_K2 :
+  [/\ (0 < #|'K_2|)%N, is_fractional_chromatic 'K_2 2, is_hadwiger 'K_2 2
+    & is_fractional_hadwiger 'K_2 2].
+Proof.
+split; [by rewrite card_ord | exact: is_fractional_chromatic_K2 | exact: is_hadwiger_K2
+       | exact: is_fractional_hadwiger_K2].
+Qed.
+
+(** The row's instance on K_2 pins every parameter (xf = h = hf = χ = 2) and its
+    conclusion holds there, tightly (all three inequalities are equalities). *)
+Lemma fractional_hadwiger_instance_K2 (xf hf : rat) (h : nat) :
+  is_fractional_chromatic 'K_2 xf -> is_hadwiger 'K_2 h -> is_fractional_hadwiger 'K_2 hf ->
+  [/\ xf = 2, h = 2%N, hf = 2, (χ([set: 'K_2]))%:Q = 2
+    & [/\ xf <= h%:Q, (χ([set: 'K_2]))%:Q <= hf & xf <= hf]].
+Proof.
+move=> Hx Hh Hf.
+have ex := is_fractional_chromatic_unique Hx is_fractional_chromatic_K2.
+have eh := is_hadwiger_unique Hh is_hadwiger_K2.
+have ef := is_fractional_hadwiger_unique Hf is_fractional_hadwiger_K2.
+by rewrite ex eh ef chi_K2; split.
+Qed.
+
+(** The conclusion is not a tautology: with the value 1 in place of had_f(K_2) (and
+    of had(K_2)), it fails on K_2. *)
+Lemma fractional_hadwiger_conclusion_has_content :
+  ~ [/\ (2 : rat) <= (1%N)%:Q, (χ([set: 'K_2]))%:Q <= (1 : rat) & (2 : rat) <= 1].
+Proof. by case; rewrite chi_K2. Qed.
 
 (** ** Row 2 — colouring-mixing primitives *)
 

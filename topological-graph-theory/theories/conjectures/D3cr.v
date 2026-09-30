@@ -66,99 +66,112 @@ Fixpoint hypercube (d : nat) : sgraph :=
   | d'.+1 => cartesian_product 'K_2 (hypercube d')
   end.
 
-(** ** Row 1 — Crossing number of the complete bipartite graph (Zarankiewicz)
-    OPEN (Zarankiewicz's conjecture; known for min(m,n) ≤ 6).
-
-    Source: "The crossing number cr(G) of G is the minimum number of crossings in
-    all drawings of G in the plane.  Conjecture
-      cr(K_{m,n}) = ⌊m/2⌋⌊(m−1)/2⌋⌊n/2⌋⌊(n−1)/2⌋."
-
-    Carrier: the complete bipartite graph [KB m n].  Floors are nat division
-    [_ %/ 2].
-
-    WAVE-2 FORM (direct, NON-VACUOUS): asserts that the Zarankiewicz product IS
-    the crossing number — both achievability of that many crossings (the known
-    Zarankiewicz drawing) and minimality (the open part) are part of the
-    conjecture's own claim, so no separate totality theorem is needed.  The
-    former relational form [forall v, is_crossing_number _ v -> v = _] was
-    vacuity-conditional on inhabitance. *)
+(** Corpus row: opg:the_crossing_number_of_the_complete_bipartite_graph
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/the_crossing_number_of_the_complete_bipartite_graph/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/the_crossing_number_of_the_complete_bipartite_graph.json
+    English statement: (Open Problem Garden, "The Crossing Number of the Complete Bipartite
+      Graph"; Zarankiewicz's conjecture)
+      For all naturals m and n, the crossing number of the complete bipartite graph K(m,n)
+      equals the product of the floors of m/2, (m-1)/2, n/2 and (n-1)/2.  In the Rocq body
+      this is the assertion that exactly that many crossing splits planarize K(m,n) and that
+      no smaller number of splits does.
+    Definitions: [is_crossing_number G n] - n is the LEAST k such that k successive
+      "crossing splits" (each replacing two vertex-disjoint edges a-b and c-d by a new
+      degree-4 vertex joined to a, b, c, d) turn G into a graph with no K5 and no K3,3 minor
+      (topological-graph-theory/theories/foundations/crossing.v, on top of [wagner_planar],
+      base/theories/base.v); [KB m n] - the complete bipartite graph (coq-graph-theory
+      sgraph.v).  Floors are nat division.
+    Notes: PARTIAL PROXY.  The crossing number is the axiom-free split-planarization
+      invariant of crossing.v, not the drawing crossing number: the #5/#6 readback review
+      found the model lacks the local rotation/alternation data at each new degree-4
+      crossing vertex, so equality with the usual cr is not validated (the split value is at
+      least well defined - [is_crossing_number_uniq] - and grounded by
+      [crossing_number0]: split-cr = 0 iff planar, [wagner_planar_sub], and
+      [is_crossing_number_K5]).  A total nat-valued cr is deliberately avoided: totality
+      would need "every finite graph admits a finite-crossing drawing", i.e. geometry, which
+      this layer excludes; hence the relational form.  The statement is stated DIRECTLY
+      (not gated on inhabitance), so both achievability of the Zarankiewicz value and its
+      minimality are part of the claim and the row is non-vacuous. *)
 Definition the_crossing_number_of_the_complete_bipartite_graph_statement : Prop :=
   forall m n : nat,
     is_crossing_number (KB m n)
       ((m %/ 2) * ((m - 1) %/ 2) * (n %/ 2) * ((n - 1) %/ 2)).
 
-(** ** Row 2 — Crossing number of the complete graph (Guy)
-    OPEN (Guy's conjecture; known for n ≤ 12).
-
-    Source: "The crossing number cr(G) of G is the minimum number of crossings in
-    all drawings of G in the plane.  Conjecture
-      cr(K_n) = ¼⌊n/2⌋⌊(n−1)/2⌋⌊(n−2)/2⌋⌊(n−3)/2⌋."
-
-    Carrier: the complete graph ['K_n].  The Guy product is always divisible by 4,
-    so the ¼ factor is the EXACT nat division [_ %/ 4].  (This divisibility is a
-    relied-upon arithmetic fact about the Guy product — verified for all checked n
-    — not enforced by the encoding; were it ever to fail, [%/ 4] would truncate.)
-
-    WAVE-2 FORM (direct, NON-VACUOUS): asserts the Guy value IS the crossing
-    number (achievability = Guy's construction + minimality = the open part). *)
+(** Corpus row: opg:the_crossing_number_of_the_complete_graph
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/the_crossing_number_of_the_complete_graph/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/the_crossing_number_of_the_complete_graph.json
+    English statement: (Open Problem Garden, "The Crossing Number of the Complete Graph";
+      Guy's conjecture)
+      For every natural n, the crossing number of the complete graph on n vertices equals one
+      quarter of the product of the floors of n/2, (n-1)/2, (n-2)/2 and (n-3)/2.  In the Rocq
+      body this is the assertion that exactly that many crossing splits planarize K_n and
+      that no smaller number of splits does.
+    Definitions: [is_crossing_number G n] - the least number of crossing splits planarizing
+      G, relational (topological-graph-theory/theories/foundations/crossing.v); ['K_n] - the
+      complete graph (coq-graph-theory sgraph.v).  Floors and the quarter are nat division.
+    Notes: PARTIAL PROXY - same split-planarization model and same missing
+      rotation/alternation layer as the Zarankiewicz row above; equality with the drawing
+      crossing number is not validated.  ARITHMETIC ASSUMPTION: the Guy product is divisible
+      by 4 (checked for all n in the literature), and the encoding relies on it - the
+      division [_ %/ 4] is nat division and would silently truncate were divisibility ever to
+      fail.  Stated directly, so achievability (Guy's construction) and minimality (the open
+      half) are both part of the claim. *)
 Definition the_crossing_number_of_the_complete_graph_statement : Prop :=
   forall n : nat,
     is_crossing_number 'K_n
       (((n %/ 2) * ((n - 1) %/ 2) * ((n - 2) %/ 2) * ((n - 3) %/ 2)) %/ 4).
 
-(** ** Row 3 — Crossing numbers and colouring (Albertson)
-    OPEN (Albertson's conjecture; known for t ≤ 18 and via the four-colour theorem
-    for small cases).
-
-    Source: "We let cr(G) denote the crossing number of a graph G.  Conjecture
-      Every graph G with χ(G) ≥ t satisfies cr(G) ≥ cr(K_t)."
-
-    Carrier: arbitrary [sgraph]; χ([set: G]) is the whole-graph chromatic number
-    (base/coloring).
-
-    WAVE-2 FORM (sub-level, NON-VACUOUS): the source inequality cr(K_t) ≤ cr(G)
-    is represented in the split model as "every planarization count achievable
-    for G dominates some achievable count for K_t":
-    [forall k, crossing_planar_in k G -> exists j <= k, crossing_planar_in
-    j 'K_t].  The [exists j <= k] (rather than exactly [k]) is deliberate —
-    [crossing_planar_in] counts EXACT split numbers and is not monotone in [k],
-    so the sub-level form is the correct encoding of the ≤ comparison of minima.
-    It has content for every planarizable G (no inhabitance gate). *)
+(** Corpus row: opg:crossing_numbers_and_coloring
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/crossing_numbers_and_coloring/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/crossing_numbers_and_coloring.json
+    English statement: (Open Problem Garden, "Crossing numbers and coloring"; Albertson's
+      conjecture)
+      Corpus claim: every graph G whose chromatic number is at least t satisfies
+      cr(G) >= cr(K_t).  Back-translation of the Rocq body: for every finite simple graph G
+      and all naturals t and k, if t is at most the chromatic number of G and k crossing
+      splits planarize G, then some j <= k crossing splits planarize the complete graph K_t.
+    Definitions: [crossing_planar_in k G] - EXACTLY k successive crossing splits turn G into
+      a graph with no K5 and no K3,3 minor
+      (topological-graph-theory/theories/foundations/crossing.v); the chromatic number is
+      coq-graph-theory's [chi(A)] taken on the full vertex set; ['K_t] - the complete graph.
+    Notes: PARTIAL PROXY (split-planarization model, see the two rows above).  The source
+      inequality cr(K_t) <= cr(G) is rendered at the level of ACHIEVABLE split counts rather
+      than of the two minima: [crossing_planar_in] counts EXACT split numbers and is not
+      monotone in k, so "every count achievable for G dominates some count achievable for
+      K_t" is the correct rendering of the comparison of minima; the [exists j <= k] (rather
+      than exactly k) is deliberate.  The form has content for every planarizable G, with no
+      inhabitance gate. *)
 Definition crossing_numbers_and_coloring_statement : Prop :=
   forall (G : sgraph) (t k : nat),
     (t <= χ([set: G]))%N ->
     crossing_planar_in k G ->
     exists j : nat, (j <= k)%N /\ crossing_planar_in j 'K_t.
 
-(** ** Row 4 — Crossing number of the hypercube
-    OPEN (the limit is known to exist and lie in a narrow interval around 5/32;
-    the exact value 5/32 is conjectural).
-
-    Source: "The crossing number cr(G) of G is the minimum number of crossings in
-    all drawings of G in the plane.  The d-dimensional (hyper)cube Q_d ... .
-    Conjecture  lim cr(Q_d)/4^d = 5/32."
-
-    Carrier: [hypercube d].  The limit is stated by the eventual-bound (ε–N)
-    idiom over ℕ with the rational target 5/32, cross-multiplied (denominators are
-    positive): for every positive rational ε = eps_num/eps_den there is an N past
-    which |cr(Q_d)/4^d − 5/32| < ε, i.e.
-      eps_den · |32·cr − 5·4^d|  <  eps_num · (32·4^d),
-    the absolute value written as a sum of truncated nat subtractions.
-
-    WAVE-2 FORM (two-sided, NON-VACUOUS).  The former ε–N body was gated by
-    [is_crossing_number (hypercube d) v] and hence vacuity-conditional exactly
-    where the limit lives (d ≥ 4).  The direct form asserts, past N, BOTH sides
-    of |cr(Q_d)/4^d − 5/32| < ε on the achievable planarization counts:
-    - UPPER + achievability: SOME count [k] is achievable with
-      [|32k − 5·4^d| < ε·32·4^d]  (in particular cr ≤ k, giving the upper bound;
-      the existence half is part of the conjecture's own claim);
-    - LOWER: EVERY achievable count [k] satisfies [(5/32 − ε)·4^d < k], written
-      additively as [eps_den·5·4^d < eps_den·32·k + eps_num·32·4^d] so no
-      truncated subtraction is needed.  (One-sided on purpose: counts above the
-      minimum are legitimate, so only the lower bound may quantify over all [k].)
-    Together these pin the minimum into the ε-window, i.e. the limit is 5/32.
-    Non-vacuity of the family's planar base stays certified in [grounding_D3cr]
-    ([cr_hypercube0]/[cr_hypercube1], [cr_K1]). *)
+(** Corpus row: opg:the_crossing_number_of_the_hypercube
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/the_crossing_number_of_the_hypercube/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/the_crossing_number_of_the_hypercube.json
+    English statement: (Open Problem Garden, "The Crossing Number of the Hypercube")
+      Corpus claim: cr(Q_d)/4^d tends to 5/32, where Q_d is the d-dimensional hypercube (its
+      vertices are the binary strings of length d, two being adjacent when they differ in
+      exactly one coordinate).  Back-translation of the Rocq body: for every positive
+      rational epsilon = eps_num/eps_den there is an N such that for every d >= N, (i) some
+      split count k planarizes Q_d with eps_den * |32k - 5*4^d| < eps_num * 32 * 4^d, and
+      (ii) every split count k that planarizes Q_d satisfies
+      eps_den * 5 * 4^d < eps_den * 32 * k + eps_num * 32 * 4^d.
+    Definitions: [crossing_planar_in k G] - exactly k crossing splits planarize G
+      (topological-graph-theory/theories/foundations/crossing.v); [hypercube d] - Q_d as the
+      d-fold cartesian (box) power of ['K_2] over base's [cartesian_product], with Q_0 = 'K_1
+      (this file).
+    Notes: PARTIAL PROXY (split-planarization model; see the rows above).  The limit is
+      written in cross-multiplied epsilon-N form over the naturals, with the absolute value
+      expressed as the sum of the two truncated nat subtractions.  Clause (i) carries BOTH
+      the upper bound and the achievability half (existence of a planarizing count in the
+      window); clause (ii) is the lower bound and is the only one quantified over ALL
+      achievable counts - one-sided on purpose, since counts above the minimum are
+      legitimate.  Together they pin the minimum into the epsilon window.  [hypercube] is not
+      base's [graph_power] (that is the DISTANCE power, not the cartesian power); it is
+      tagged @MOVE-to-base as a generic graph family, with witnesses and the identities
+      Q_0 = 'K_1, the recurrence and |Q_d| = 2^d proved in grounding_D3cr.v. *)
 Definition the_crossing_number_of_the_hypercube_statement : Prop :=
   forall (eps_num eps_den : nat),
     (0 < eps_num)%N -> (0 < eps_den)%N ->

@@ -174,11 +174,21 @@ Arguments dijoin {D}.
 Arguments pp_partition {D}.
 Arguments pp_knorm {D}.
 
-(** ** Bermond–Thomassen Conjecture
-
-    Every digraph of minimum out-degree ≥ 2k−1 contains k vertex-disjoint directed cycles.
-    (Verbatim sketch: [min_outdeg D >= 2*k-1 -> exists cs, vertex_disjoint cs /\ size cs = k
-    /\ all (dicycle D) cs].) Min out-degree is pointwise [forall v, 2*k-1 <= outdeg v]. *)
+(** Corpus row: opg:the_bermond_thomassen_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/the_bermond_thomassen_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/the_bermond_thomassen_conjecture.json
+    English statement: (Open Problem Garden, The Bermond-Thomassen Conjecture)
+      For every natural k and every finite digraph D with at least one vertex in which every
+      vertex has out-degree at least 2k-1, there is a list of exactly k directed cycles that are
+      pairwise vertex-disjoint.
+    Definitions: [cycle_pack P] - every member of the list P is a directed cycle (this file);
+      [vtx_disjoint_pack P] - any two members of P at different positions share no vertex (this
+      file); [dicycle c] - directed cycle as a duplicate-free vertex sequence (core/dipath.v);
+      [outdeg v] - out-degree (core/oriented.v).
+    Notes: Minimum out-degree is phrased pointwise as forall v, 2*k-1 <= outdeg v; the
+      subtraction is natural-number subtraction, so at k = 0 the hypothesis is vacuous and the
+      conclusion asks for the empty list, which is correct. Disjointness is indexed by position,
+      so repeated members would not be allowed to coexist. *)
 Definition bermond_thomassen_statement : Prop :=
   forall (D : diGraphType) (k : nat),
     (0 < #|D|)%N ->
@@ -186,13 +196,10 @@ Definition bermond_thomassen_statement : Prop :=
     exists P : seq (seq D),
       [/\ cycle_pack P, vtx_disjoint_pack P & size P = k].
 
-(** ** Hoàng–Reed Conjecture
-
-    Every digraph of minimum out-degree ≥ k contains k directed cycles
-    [C_1, …, C_k] with the laminar / intersection-forest property: for every
-    [2 ≤ j ≤ k], [C_j] meets [C_1 ∪ ⋯ ∪ C_{j−1}] in at most one vertex.
-    (Verbatim sketch: [(forall v, outdeg v >= k) -> exists Cs : k.-tuple (dicycle),
-    forall j, 2<=j<=k -> #|verts (Cs j) :&: ⋃_{i<j} verts (Cs i)| <= 1].) *)
+(** No corpus row: the corpus row opg:hoand_reed_conjecture is carried by [hoand_reed_statement]
+    in conjectures/P9.v, which is defined as an alias of this statement (Hoang-Reed: minimum
+    out-degree at least k forces k directed cycles such that each meets the union of the earlier
+    ones in at most one vertex). *)
 Definition hoang_reed_statement : Prop :=
   forall (D : diGraphType) (k : nat),
     (0 < #|D|)%N ->
@@ -206,14 +213,22 @@ Definition hoang_reed_statement : Prop :=
             (#|[set v : D | (v \in nth [::] P j) &&
                  [exists i : 'I_(size P), (i < j)%N && (v \in nth [::] P i)]]| <= 1)%N].
 
-(** ** Woodall's Conjecture (directed Lucchesi–Younger)
-
-    In every digraph the minimum size of a dicut equals the maximum number of
-    arc-disjoint dijoins: if the minimum dicut size is [k] then there exist [k]
-    pairwise arc-disjoint dijoins.
-    (Verbatim sketch: [min_dicut_size G = k -> exists Js, size Js = k /\
-    arc_disjoint Js /\ all (dijoin G) Js].) We phrase "minimum dicut size = k" as: some
-    one-way set has dicut [k], and no one-way set has a smaller dicut. *)
+(** Corpus row: opg:woodalls_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/woodalls_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/woodalls_conjecture.json
+    English statement: (Open Problem Garden, Woodall's Conjecture (directed Lucchesi-Younger))
+      For every finite digraph D and every k, if some one-way vertex set has a dicut of size
+      exactly k and every one-way vertex set has a dicut of size at least k, then there are k
+      pairwise arc-disjoint dijoins, that is k arc selectors each meeting the dicut of every
+      one-way set, no two of them keeping a common arc.
+    Definitions: [oneway B] - B is nonempty, proper, and no arc enters B from outside, so B is
+      the source side of a directed cut (this file); [in_dicut B u v] / [dicut_size B] - the
+      forward-crossing arcs of B and their number (this file); [dijoin f] - an arc selector
+      keeping only real arcs and at least one arc of the dicut of every one-way set (this file);
+      [arc_disjoint_sel f g] - f and g never keep the same ordered pair (this file).
+    Notes: A subdigraph keeping all vertices and some arcs is modelled by an arc selector f : D
+      -> {set D}, with w in f u meaning that the arc (u,w) is kept. The minimum dicut size being
+      k is split into the two hypotheses attained and lower bound. *)
 Definition woodall_statement : Prop :=
   forall (D : diGraphType) (k : nat),
     (exists B : {set D}, oneway B /\ dicut_size B = k) ->
@@ -226,16 +241,23 @@ Definition woodall_statement : Prop :=
              (i != j) ==>
              arc_disjoint_sel (nth (fun _ => set0) Js i) (nth (fun _ => set0) Js j)]].
 
-(** ** Linial–Berge path-partition duality
-
-    For every digraph and every [k], the minimum k-norm over all path-partitions equals
-    the maximum, over induced subdigraphs that are k-colourable (in the directed/acyclic
-    sense χ⃗ ≤ k), of the number of vertices. We state the LE direction that is the
-    content of the conjecture (the dual GE is the easy direction):
-       min over path-partitions of (k-norm)  ≥  |S|  for every χ⃗(D[S]) ≤ k induced S,
-    and a path-partition realizing the value [|S|] exists.
-    (Verbatim sketch: [min_over_path_partitions (k_norm k) D <=
-    max_over_induced (fun S => k_colorableb S && #|S|) D].) *)
+(** Corpus row: opg:linial_berge_path_partition_duality
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/linial_berge_path_partition_duality/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/linial_berge_path_partition_duality.json
+    English statement: (Open Problem Garden, Linial-Berge path partition duality)
+      For every finite digraph D and every k there are a partition Q of the vertex set into
+      directed paths and a vertex set S such that the subdigraph induced by S is k-dicolourable,
+      the k-norm of Q, that is the sum over its paths of min(k, number of vertices of the path),
+      equals the size of S, and no path partition of D has k-norm smaller than the size of S.
+    Definitions: [pp_partition Q] - Q is a list of directed paths whose vertex sets cover every
+      vertex exactly once (this file); [pp_knorm k Q] - the k-norm of a path partition (this
+      file); [dicolorableb D k] - the vertex set splits into k parts each inducing an acyclic
+      subdigraph, i.e. the dichromatic number is at most k (conjectures/dichromatic.v);
+      [induced_digraph S] - the subdigraph induced by S (core/digraph.v).
+    Notes: The corpus states the inequality min k-norm <= max size of an induced k-colourable
+      subdigraph; the Rocq body states the equality form of the duality by exhibiting a path
+      partition and a certificate S that attain the common value, which also carries the easy
+      converse inequality. Path sizes are counted in vertices. *)
 Definition linial_berge_statement : Prop :=
   forall (D : diGraphType) (k : nat),
     exists (Q : seq (D * seq D)) (S : {set D}),
@@ -263,6 +285,21 @@ Definition linial_berge_statement : Prop :=
 Definition meets_long_dicycles (D : diGraphType) (ell : nat) (T : {set D}) : Prop :=
   forall c : seq D, dicycle c -> (ell <= size c)%N -> exists2 v, v \in T & v \in c.
 
+(** Corpus row: opg:erdos_posa_property_for_long_directed_cycles
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/erdos_posa_property_for_long_directed_cycles/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/erdos_posa_property_for_long_directed_cycles.json
+    English statement: (Open Problem Garden, Erdos-Posa property for long directed cycles)
+      For every ell >= 2 and every n there is a bound t such that every finite digraph D either
+      contains n pairwise vertex-disjoint directed cycles each with at least ell vertices, or
+      has a set T of at most t vertices meeting every directed cycle of D with at least ell
+      vertices.
+    Definitions: [cycle_pack P] / [vtx_disjoint_pack P] - list of directed cycles, pairwise
+      vertex-disjoint (this file); [meets_long_dicycles ell T] - every directed cycle with at
+      least ell vertices contains a vertex of T (this file).
+    Notes: Deleting T is expressed by the transversal condition meets_long_dicycles rather than
+      by building D - T; the two are equivalent since a directed cycle of D - T is exactly a
+      directed cycle of D avoiding T. Cycle length is counted in vertices. The order of
+      quantifiers is the corpus one: t may depend on ell and n but not on D. *)
 Definition erdos_posa_long_dicycles_statement : Prop :=
   forall ell : nat, (2 <= ell)%N ->
   forall n : nat, exists t : nat,

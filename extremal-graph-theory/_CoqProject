@@ -5,6 +5,11 @@
 
 # --- foundations ---
 theories/foundations/circular_colouring.v
+theories/foundations/degree_bounds.v
+theories/foundations/edge_colourings.v
+theories/foundations/ramsey.v
+theories/foundations/vc.v
+theories/foundations/lp_rational.v
 
 # --- D2 sub-batches (chromatic / ramsey / turan / probabilistic / structural) ---
 theories/conjectures/D2chr.v
@@ -27,6 +32,7 @@ theories/conjectures/XE1.v
 theories/conjectures/XE2.v
 theories/conjectures/X13.v
 theories/conjectures/X30.v
+theories/conjectures/implications_X13.v
 theories/conjectures/X36.v
 theories/conjectures/X49.v
 theories/conjectures/X56.v
@@ -60,3 +66,13 @@ theories/conjectures/X207.v
 theories/applications/list_ramsey_graph.v
 theories/applications/list_ramsey_nat.v
 theories/foundations/list_ramsey.v
+
+# --- wave X215 / X223 / X229 (2026-09-23) ---
+theories/conjectures/X215.v
+theories/conjectures/grounding_X215.v
+theories/conjectures/implications_X215.v
+theories/conjectures/X223.v
+theories/conjectures/grounding_X223.v
+theories/conjectures/implications_X223.v
+theories/conjectures/X229.v
+theories/conjectures/grounding_X229.v

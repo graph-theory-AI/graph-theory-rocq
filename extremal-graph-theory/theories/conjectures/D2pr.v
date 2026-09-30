@@ -143,6 +143,24 @@ Definition NHB (n:nat) : nat :=
   #|[set E : {set {set 'I_(2*n)}} |
        [&& valid_edges E, regularb E 3, ~~ hamiltonianb E & connectedb E]]|.
 
+(** Corpus row: opg:almost_all_non_hamiltonian_3_regular_graphs_are_1_connected
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/almost_all_non_hamiltonian_3_regular_graphs_are_1_connected/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/almost_all_non_hamiltonian_3_regular_graphs_are_1_connected.json
+    English statement: (Open Problem Garden, "Almost all non-Hamiltonian 3-regular graphs are 1-connected")
+      For every positive rational eps = a/b there is N such that for all n >= N the counts
+      NH(n) of non-Hamiltonian 3-regular labelled graphs on 2n vertices and NHB(n) of those
+      that are additionally connected satisfy (b-a) * NH(n) <= b * NHB(n), i.e.
+      NHB(n)/NH(n) >= 1 - eps; since NHB <= NH this says the ratio tends to 1.
+    Definitions: [valid_edges E] - every listed edge is a genuine 2-element vertex set (D2pr.v);
+      [adjb E] - the adjacency carried by an edge set (D2pr.v); [regularb E d] - every vertex
+      has [adjb]-degree d (D2pr.v); [connectedb E] - every two vertices are [adjb]-connected
+      (D2pr.v); [hamiltonianb E] - some duplicate-free tuple of all |V| vertices is a cycle
+      (D2pr.v); [NH n], [NHB n] - the two counts above, over edge sets on 'I_(2n) (D2pr.v).
+    Notes: graphs are counted LABELLED, as edge sets over 'I_(2n); the source speaks of
+      (isomorphism-class) graphs. Iso-class enumeration is not available, and labelled
+      counting is the faithful finite core, "almost all" being stable under this choice.
+      "1-connected" is rendered as connected. The limit is cross-multiplied, so no guard on
+      NH(n) = 0 is needed (both sides then vanish); instances with a >= b are trivially true. *)
 Definition almost_all_non_hamiltonian_3_regular_graphs_are_1_co_statement : Prop :=
   forall a b : nat, (0 < a)%N -> (0 < b)%N ->
     exists N : nat, forall n : nat, (N <= n)%N ->
@@ -164,6 +182,23 @@ Definition Echi (G:sgraph) : rat :=
   ((\sum_(S : {set {set G}} | S \subset edge2 G) (χ([set: mkG (adjb S)]))%:Q)
     / (2 ^ #|edge2 G|)%:Q)%R.
 
+(** Corpus row: opg:coloring_random_subgraphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/coloring_random_subgraphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/coloring_random_subgraphs.json
+    English statement: (Open Problem Garden, "Coloring random subgraphs")
+      There is a positive rational constant c such that every graph G with chromatic number at
+      least 2 satisfies c * chi(G) / floor(log_2 chi(G)) < E(chi(G_{1/2})), the expectation of
+      the chromatic number of the random subgraph keeping each edge with probability 1/2.
+    Definitions: [edge2 G] - the edges of G as 2-element vertex sets (D2pr.v); [adjb S] - the adjacency
+      carried by an edge set (D2pr.v); [mkG r] - the sgraph that is the symmetric irreflexive
+      closure of a boolean relation (D2pr.v); [Echi G] - the EXACT rational expectation, the
+      sum of chi over all subsets S of [edge2 G] divided by 2^|E(G)| (D2pr.v); [trunc_log 2] -
+      MathComp floor of log base 2; [chi] - chromatic number (coq-graph-theory).
+    Notes: the sample space is finite, so the expectation is an exact counting quotient in [rat];
+      no measure-theoretic layer is used. The logarithm is [trunc_log 2]; the QUESTION is
+      whether a constant exists, and its truth value is invariant under replacing the natural
+      logarithm by any function within a constant factor of it, so this is faithful. The guard
+      2 <= chi(G) keeps the denominator non-zero. *)
 Definition coloring_random_subgraphs_statement : Prop :=
   exists c : rat, (0 < c)%R /\
     forall G : sgraph, (2 <= χ([set: G]))%N ->
@@ -194,6 +229,26 @@ Definition is_shannon_capacity (R:realFieldType)(G:sgraph)(c:R) : Prop :=
   (forall b : R, (forall n, (0 < n)%N -> ((alpha (strong_power G n))%:R <= b ^+ n)%R) ->
      (c <= b)%R).
 
+(** Corpus row: opg:shannon_capacity_of_the_seven_cycle
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/shannon_capacity_of_the_seven_cycle/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/shannon_capacity_of_the_seven_cycle.json
+    English statement: (Open Problem Garden, "Shannon capacity of the seven-cycle")
+      Over every ordered field R there is c >= 1 that is the Shannon capacity of the 7-cycle:
+      the independence number of the n-fold strong power of C_7 is at most c^n for every
+      n >= 1, and c is the least element of R with that property.
+    Definitions: [strong_power G n] - the n-fold strong product of G on {ffun 'I_n -> G}, distinct tuples
+      adjacent when in every coordinate the entries are equal or adjacent (D2pr.v);
+      [is_shannon_capacity R G c] - c bounds every alpha(G^n) by c^n and is least such
+      (D2pr.v); [mkG] (D2pr.v); [alpha] - independence number (coq-graph-theory dom.v);
+      [cycle_graph 7] - C_7 (GTBase).
+    Notes: the source asks for the VALUE, which is not a Prop; the body asserts instead that the
+      capacity EXISTS (is well defined) over every ordered field, via the root-free infimum
+      characterisation c = inf{b : alpha(G^n) <= b^n for all n}, equal to sup alpha^(1/n) by
+      Fekete. A COMPLETE real field would make that infimum provably attained; mathcomp-analysis
+      is not installed in this switch, so the carrier is [realFieldType], over which the
+      infimum need not be attained. The statement therefore encodes well-definedness up to that
+      completeness gate. This is a proxy for the source question (recorded in the ledger).
+      Note [strong_power] is NOT base's [graph_power] (the distance power). *)
 Definition shannon_capacity_of_the_seven_cycle_statement : Prop :=
   forall R : realFieldType,
     exists c : R, (1 <= c)%R /\ is_shannon_capacity (cycle_graph 7) c.
@@ -219,6 +274,22 @@ Definition cpts (V:finType)(S:{set {set V}}) : nat :=
 Definition forestb (G:sgraph)(S:{set {set G}}) : bool :=
   (S \subset edge2 G) && (#|S| + cpts S == #|[set: G]|).
 
+(** Corpus row: opg:negative_association_in_uniform_forests
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/negative_association_in_uniform_forests/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/negative_association_in_uniform_forests.json
+    English statement: (Open Problem Garden, "Negative association in uniform forests")
+      For every finite graph G and all DISTINCT edges e, f of G, if F is a uniformly random
+      forest (acyclic edge subset) of G then P(e in F | f in F) <= P(e in F); cross-multiplied,
+      #{F : e,f in F} * #{F} <= #{F : e in F} * #{F : f in F}.
+    Definitions: [edge2 G] - the edges of G as 2-element sets (D2pr.v); [cpts S] - the number of connected
+      components of the graph carried by the edge set S (D2pr.v); [forestb G S] - S is a subset
+      of [edge2 G] with |S| + cpts S = |V(G)|, i.e. S is acyclic (D2pr.v); [adjb] (D2pr.v).
+    Notes: uniformity over forests makes both probabilities counting quotients, and clearing the
+      positive denominators gives the division-free inequality in the body. The source says
+      "let e, f in E(G)" without distinctness; the body adds e != f, because at e = f the
+      inequality degenerates to "every forest contains e", which is generically false, so
+      distinctness is required to state the genuine negative-association conjecture rather than
+      a false instance (recorded in the ledger as a deliberate added guard). *)
 Definition negative_association_in_uniform_forests_statement : Prop :=
   forall (G:sgraph)(e f:{set G}),
     e \in edge2 G -> f \in edge2 G -> e != f ->
@@ -246,6 +317,24 @@ Definition liftadj (h:nat)(p:{ffun ('I_5 * 'I_5) -> {perm 'I_h}}) : rel ('I_5 * 
 Definition chiLift (h:nat)(p:{ffun ('I_5 * 'I_5) -> {perm 'I_h}}) : nat :=
   χ([set: mkG (liftadj p)]).
 
+(** Corpus row: opg:chromatic_number_of_random_lifts_of_complete_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/chromatic_number_of_random_lifts_of_complete_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/chromatic_number_of_random_lifts_of_complete_graphs.json
+    English statement: (Open Problem Garden, "Chromatic number of random lifts of complete graphs")
+      For every positive rational eps = a/b there is H such that for every h >= H there is a
+      single value k with at least a (1 - eps) fraction of the h-lift parameters of K_5 giving
+      a lift of chromatic number exactly k; that is, the chromatic number of a random lift of
+      K_5 is concentrated on one value with high probability.
+    Definitions: [liftadj h p] - the adjacency of the h-lift of K_5 given by a permutation for each
+      ordered pair of K_5 vertices: (u,i) is joined to (v,j) when u < v and j = p(u,v)(i)
+      (D2pr.v); [chiLift p] - the chromatic number of the sgraph carried by [liftadj] via [mkG]
+      (D2pr.v); [mkG] takes the symmetric closure, so only the u < v case needs specifying
+      (D2pr.v); [chi] - chromatic number (coq-graph-theory).
+    Notes: the probability is a counting quotient over the finite parameter space
+      {ffun 'I_5 * 'I_5 -> {perm 'I_h}}, cross-multiplied to avoid division. The unused ffun
+      entries (diagonal and reversed pairs) multiply numerator and denominator equally, so the
+      quotient is exactly the true uniform-lift probability. "Concentrated on a single value"
+      is rendered as: for every eps there is eventually a k with P(chi = k) >= 1 - eps. *)
 Definition chromatic_number_of_random_lifts_of_complete_graphs_statement : Prop :=
   forall a b : nat, (0 < a)%N -> (0 < b)%N ->
     exists H : nat, forall h : nat, (H <= h)%N ->
@@ -277,6 +366,21 @@ Definition Pstar (n:nat) : rat :=
   ((#|[set pr : {ffun 'I_n -> {perm 'I_n}} | stable_solvableb pr]|)%:Q
     / (#|[set: {ffun 'I_n -> {perm 'I_n}}]|)%:Q)%R.
 
+(** Corpus row: opg:random_stable_roommates
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/random_stable_roommates/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/random_stable_roommates.json
+    English statement: (Open Problem Garden, "Random stable roommates")
+      There are rationals 0 < A <= B and a threshold N such that for every even n >= N the
+      probability P(n) that a uniformly random stable-roommates preference profile on n people
+      admits a solution satisfies A <= P(n)^4 * n <= B; equivalently P(n) is Theta(n^(-1/4)).
+    Definitions: [stable_solvableb n pr] - some fixed-point-free involution m of 'I_n has no blocking
+      pair, i.e. no distinct i, j each of which ranks the other strictly above its own partner
+      (D2pr.v); [Pstar n] - the EXACT rational ratio of solvable profiles to all profiles in
+      {ffun 'I_n -> {perm 'I_n}} (D2pr.v).
+    Notes: a profile assigns each person a strict ranking of everyone, [(pr i) j] being the rank j
+      receives from i (smaller = more preferred). Theta(n^(-1/4)) is made root-free by raising
+      to the fourth power: P ~ n^(-1/4) iff P^4 * n is bounded above and below by positive
+      constants. The source restricts to n in 2N, which is the [~~ odd n] guard. *)
 Definition random_stable_roommates_statement : Prop :=
   exists A B : rat, (0 < A)%R /\ (A <= B)%R /\
     exists N : nat, forall n : nat, ~~ odd n -> (N <= n)%N ->
@@ -319,6 +423,28 @@ Definition is_beta_limit (F:rat -> rat) : Prop :=
     exists K : nat, forall k : nat, (K <= k)%N -> (0 < Dk k)%N ->
       (b%:Q * `|(Bk k x)%:Q - F x * (Dk k)%:Q| <= a%:Q * (Dk k)%:Q)%R.
 
+(** Corpus row: opg:asymptotic_distribution_of_form_of_polyhedra
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/asymptotic_distribution_of_form_of_polyhedra/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/asymptotic_distribution_of_form_of_polyhedra.json
+    English statement: (Open Problem Garden, "Asymptotic Distribution of Form of Polyhedra")
+      There is a function F from rationals to rationals with values in [0,1] that is the
+      limiting cumulative distribution of the form parameter beta = v/(k+2): for every
+      threshold x and every positive rational eps = a/b there is K such that for all k >= K
+      with at least one graph counted, the empirical fraction Bk(k,x)/Dk(k) is within eps of
+      F(x).
+    Definitions: [three_connb E] - more than 3 vertices, every vertex set of size less than 3 leaves the
+      rest connected, and [valid_edges] (D2pr.v); [polyhedralb v E] - the polyhedron test, here
+      just [three_connb] (D2pr.v); [cP v k] - the number of labelled such graphs on 'I_v with k
+      edges (D2pr.v); [Dk k] - their total over v <= k (D2pr.v); [Bk k x] - the total over the
+      v with beta = v/(k+2) <= x (D2pr.v); [is_beta_limit F] - the eventual convergence above,
+      cross-multiplied with an absolute value (D2pr.v); [radj E S] - adjacency avoiding the set
+      S, used to express vertex deletion (D2pr.v).
+    Notes: this row is recorded as PARTIAL. Planarity is not available as a decidable predicate in
+      the installed toolchain, so [polyhedralb] uses only 3-connectivity, an OVER-approximation
+      of polyhedra (by Steinitz, polyhedra are exactly the 3-connected PLANAR graphs). Graphs
+      are counted LABELLED, whereas the source counts topologically inequivalent polyhedra.
+      The source asks WHAT the distribution is; the body asserts only that a limiting
+      distribution F exists. All three gaps are recorded in the ledger. *)
 Definition asymptotic_distribution_of_form_of_polyhedra_statement : Prop :=
   exists F : rat -> rat,
     (forall x:rat, (0 <= F x)%R /\ (F x <= 1)%R) /\ is_beta_limit F.

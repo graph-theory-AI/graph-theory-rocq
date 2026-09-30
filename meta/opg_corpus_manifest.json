@@ -1,9 +1,9 @@
 {
- "_README": "Validated 227-row corpus manifest (v2, 2026-06-26). Each row → exactly one phase+repo (tier-respecting → counts reconcile to 142 core / 85 deferred / 227). formal_name is a VALID, UNIQUE planned Rocq identifier (finalized at implementation). status_semantics gives the exact settled/open proposition for every non-open record. Provenance: graph-conjectures@f6901fb371, data/problems.json@27aec7fadb. phase_basis records how the phase was chosen.",
+ "_README": "Validated 227-row corpus manifest (v2, 2026-06-26). Each row → exactly one phase+repo (tier-respecting → counts reconcile to 142 core / 85 deferred / 227). formal_name is a VALID, UNIQUE planned Rocq identifier (finalized at implementation). status_semantics gives the exact settled/open proposition for every non-open record. Provenance: graph-conjectures@b72c585706, data/problems.json@56fa4523d6. phase_basis records how the phase was chosen.",
  "provenance": {
   "corpus": "openproblemgarden via graph-conjectures/data/problems.json",
-  "repo_commit": "f6901fb371155678980a84306f6208fa0f166a6b",
-  "problems_json_commit": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+  "repo_commit": "b72c5857060addbe4523016e88ae3aa626e958fd",
+  "problems_json_commit": "56fa4523d69544a34c6df4280302fcc2af3943fe",
   "n": 227
  },
  "totals": {
@@ -64,8 +64,8 @@
    "title": "2-colouring a graph without a monochromatic maximum clique",
    "node_id": 56230,
    "canonical_url": "http://www.openproblemgarden.org/op/2_colouring_a_graph_without_a_monochromatic_maximum_clique",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a non-empty graph containing no induced odd cycle of length at least $ 5 $ , then there is a $ 2 $ -vertex colouring of $ G $ in which no maximum clique is monochromatic.",
    "source_propositions": [
     {
@@ -111,8 +111,8 @@
    "title": "Algorithm for graph homomorphisms",
    "node_id": 37232,
    "canonical_url": "http://www.openproblemgarden.org/op/algorithm_for_graph_homomorphisms",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Is there an algorithm that decides, for input graphs $ G $ and $ H $ , whether there exists a homomorphism from $ G $ to $ H $ in time $ O(c^{|V(G)|+|V(H)|}) $ for some constant $ c $ ?",
    "source_propositions": [
     {
@@ -155,8 +155,8 @@
    "title": "Book Thickness of Subdivisions",
    "node_id": 34908,
    "canonical_url": "http://www.openproblemgarden.org/op/book_thickness_of_subdivisions",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Let $ G $ be a finite undirected simple graph. A $ k $ -page book embedding of $ G $ consists of a linear order $ \\preceq $ of $ V(G) $ and a (non-proper) $ k $ -colouring of $ E(G) $ such that edges with the same colour do not cross with respect to $ \\preceq $ . That is, if $ v\\prec x\\prec w\\prec y $ for some edges $ vw,xy\\in E(G) $ , then $ vw $ and $ xy $ receive distinct colours. One can think that the vertices are placed along the spine of a book, and the edges are drawn without crossings on the pages of the book. The book thickness of $ G $ , denoted by bt $ (G) $ is the minimum integer $ k $ for which there is a $ k $ -page book embedding of $ G $ . Let $ G' $ be the graph obtained by subdividing each edge of $ G $ exactly once. Conjecture There is a function $ f $ such that for every graph $ G $ , $$ \\text{bt}(G) \\leq f( \\text{bt}(G') )\\enspace. $$",
    "source_propositions": [
     {
@@ -200,8 +200,8 @@
    "title": "Circular flow numbers of r-graphs",
    "node_id": 59997,
    "canonical_url": "http://www.openproblemgarden.org/op/circular_flow_numbers_of_r_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "A nowhere-zero $ r $ -flow $ (D(G),\\phi) $ on $ G $ is an orientation $ D $ of $ G $ together with a function $ \\phi $ from the edge set of $ G $ into the real numbers such that $ 1 \\leq |\\phi(e)| \\leq r-1 $ , for all $ e \\in E(G) $ , and $ \\sum_{e \\in E^+(v)}\\phi(e) = \\sum_{e \\in E^-(v)}\\phi(e), \\textrm{ for all } v \\in V(G) $ . A $ (2t+1) $ -regular graph $ G $ is a $ (2t+1) $ -graph if $ |\\partial_G(X)| \\geq 2t+1 $ for every $ X \\subseteq V(G) $ with $ |X| $ odd. Conjecture Let $ t > 1 $ be an integer. If $ G $ is a $ (2t+1) $ -graph, then $ F_c(G) \\leq 2 + \\frac{2}{t} $ .",
    "source_propositions": [
     {
@@ -246,8 +246,8 @@
    "title": "Cycle Double Covers Containing Predefined 2-Regular Subgraphs",
    "node_id": 60029,
    "canonical_url": "http://www.openproblemgarden.org/op/cycle_double_covers_containing_predefined_2_regular_subgraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be a $ 2 $ -connected cubic graph and let $ S $ be a $ 2 $ -regular subgraph such that $ G-E(S) $ is connected. Then $ G $ has a cycle double cover which contains $ S $ (i.e all cycles of $ S $ ).",
    "source_propositions": [
     {
@@ -281,7 +281,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -292,8 +292,8 @@
    "title": "Double-critical graph conjecture",
    "node_id": 34839,
    "canonical_url": "http://www.openproblemgarden.org/op/double_critical_graph_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "A connected simple graph $ G $ is called double-critical, if removing any pair of adjacent vertexes lowers the chromatic number by two. Conjecture $ K_n $ is the only $ n $ -chromatic double-critical graph",
    "source_propositions": [
     {
@@ -326,7 +326,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -337,8 +337,8 @@
    "title": "Forcing a K_6-minor",
    "node_id": 37379,
    "canonical_url": "http://www.openproblemgarden.org/op/forcing_a_k_6_minor",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every graph with minimum degree at least 7 contains a $ K_6 $ -minor. Conjecture Every 7-connected graph contains a $ K_6 $ -minor.",
    "source_propositions": [
     {
@@ -374,7 +374,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -385,8 +385,8 @@
    "title": "Hamiltonian paths and cycles in vertex transitive graphs",
    "node_id": 161,
    "canonical_url": "http://www.openproblemgarden.org/op/hamiltonian_paths_and_cycles_in_vertex_transitive_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Does every connected vertex-transitive graph have a Hamiltonian path ?",
    "source_propositions": [
     {
@@ -430,8 +430,8 @@
    "title": "Large induced forest in a planar graph",
    "node_id": 46634,
    "canonical_url": "http://www.openproblemgarden.org/op/large_induced_forest_in_a_planar_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every planar graph on $ n $ verices has an induced forest with at least $ n/2 $ vertices.",
    "source_propositions": [
     {
@@ -465,7 +465,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -476,8 +476,8 @@
    "title": "Minimum number of arc-disjoint transitive subtournaments of order 3 in a tournament",
    "node_id": 49795,
    "canonical_url": "http://www.openproblemgarden.org/op/minimum_number_of_transitive_subtournaments_of_order_3_in_a_tournament",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ T $ is a tournament of order $ n $ , then it contains $ \\left \\lceil n(n-1)/6 - n/3\\right\\rceil $ arc-disjoint transitive subtournaments of order 3.",
    "source_propositions": [
     {
@@ -521,8 +521,8 @@
    "title": "Partial List Coloring",
    "node_id": 771,
    "canonical_url": "http://www.openproblemgarden.org/op/partial_list_coloring",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be a simple graph with $ n $ vertices and list chromatic number $ \\chi_\\ell(G) $ . Suppose that $ 0\\leq t\\leq \\chi_\\ell $ and each vertex of $ G $ is assigned a list of $ t $ colors. Then at least $ \\frac{tn}{\\chi_\\ell(G)} $ vertices of $ G $ can be colored from these lists.",
    "source_propositions": [
     {
@@ -556,7 +556,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -567,8 +567,8 @@
    "title": "Seagull problem",
    "node_id": 729,
    "canonical_url": "http://www.openproblemgarden.org/op/seagull_problem",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every $ n $ vertex graph with no independent set of size $ 3 $ has a complete graph on $ \\ge \\frac{n}{2} $ vertices as a minor.",
    "source_propositions": [
     {
@@ -600,7 +600,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -611,8 +611,8 @@
    "title": "Strong edge colouring conjecture",
    "node_id": 46475,
    "canonical_url": "http://www.openproblemgarden.org/op/strong_edge_colouring_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "A strong edge-colouring of a graph $ G $ is a edge-colouring in which every colour class is an induced matching; that is, any two vertices belonging to distinct edges with the same colour are not adjacent. The strong chromatic index $ s\\chi'(G) $ is the minimum number of colours in a strong edge-colouring of $ G $ . Conjecture $$s\\chi'(G) \\leq \\frac{5\\Delta^2}{4}, \\text{if $\\Delta$ is even,}$$ $$s\\chi'(G) \\leq \\frac{5\\Delta^2-2\\Delta +1}{4},&\\text{if $\\Delta$ is odd.}$$",
    "source_propositions": [
     {
@@ -657,8 +657,8 @@
    "title": "Three-chromatic (0,2)-graphs",
    "node_id": 562,
    "canonical_url": "http://www.openproblemgarden.org/op/three_chromatic_0_2_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Are there any (0,2)-graphs with chromatic number exactly three?",
    "source_propositions": [
     {
@@ -702,8 +702,8 @@
    "title": "What is the largest graph of positive curvature?",
    "node_id": 157,
    "canonical_url": "http://www.openproblemgarden.org/op/what_is_the_largest_graph_of_positive_curvature",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem What is the largest connected planar graph of minimum degree 3 which has everywhere positive combinatorial curvature, but is not a prism or antiprism ?",
    "source_propositions": [
     {
@@ -749,8 +749,8 @@
    "title": "3-Colourability of Arrangements of Great Circles",
    "node_id": 34915,
    "canonical_url": "http://www.openproblemgarden.org/op/3_colourability_of_arrangements_of_great_circles",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Consider a set $ S $ of great circles on a sphere with no three circles meeting at a point. The arrangement graph of $ S $ has a vertex for each intersection point, and an edge for each arc directly connecting two intersection points. So this arrangement graph is 4-regular and planar. Conjecture Every arrangement graph of a set of great circles is $ 3 $ -colourable.",
    "source_propositions": [
     {
@@ -796,8 +796,8 @@
    "title": "Almost all non-Hamiltonian 3-regular graphs are 1-connected",
    "node_id": 56028,
    "canonical_url": "http://www.openproblemgarden.org/op/almost_all_non_hamiltonian_3_regular_graphs_are_1_connected",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Denote by $ NH(n) $ the number of non-Hamiltonian 3-regular graphs of size $ 2n $ , and similarly denote by $ NHB(n) $ the number of non-Hamiltonian 3-regular 1-connected graphs of size $ 2n $ . Is it true that $ \\lim\\limits_{n \\rightarrow \\infty} \\displaystyle\\frac{NHB(n)}{NH(n)} = 1 $ ?",
    "source_propositions": [
     {
@@ -842,8 +842,8 @@
    "title": "Bouchet's 6-flow conjecture",
    "node_id": 131,
    "canonical_url": "http://www.openproblemgarden.org/op/bouchets_6_flow_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every bidirected graph with a nowhere-zero $ k $ -flow for some $ k $ , has a nowhere-zero $ 6 $ -flow.",
    "source_propositions": [
     {
@@ -885,8 +885,8 @@
    "title": "Coloring and immersion",
    "node_id": 550,
    "canonical_url": "http://www.openproblemgarden.org/op/coloring_and_immersion",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every positive integer $ t $ , every (loopless) graph $ G $ with $ \\chi(G) \\ge t $ immerses $ K_t $ .",
    "source_propositions": [
     {
@@ -931,8 +931,8 @@
    "title": "Cycles in Graphs of Large Chromatic Number",
    "node_id": 60001,
    "canonical_url": "http://www.openproblemgarden.org/op/cycles_in_graphs_of_large_chromatic_number",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ \\chi(G)>k $ , then $ G $ contains at least $ \\frac{(k+1)(k-1)!}{2} $ cycles of length $ 0\\bmod k $ .",
    "source_propositions": [
     {
@@ -978,8 +978,8 @@
    "title": "Drawing disconnected graphs on surfaces",
    "node_id": 322,
    "canonical_url": "http://www.openproblemgarden.org/op/drawing_disconnected_graphs_on_surfaces",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be the disjoint union of the graphs $ G_1 $ and $ G_2 $ and let $ \\Sigma $ be a surface. Is it true that every optimal drawing of $ G $ on $ \\Sigma $ has the property that $ G_1 $ and $ G_2 $ are disjoint?",
    "source_propositions": [
     {
@@ -1023,8 +1023,8 @@
    "title": "Fractional Hadwiger",
    "node_id": 59908,
    "canonical_url": "http://www.openproblemgarden.org/op/fractional_hadwiger",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every graph $ G $ , (a) $ \\chi_f(G)\\leq\\text{had}(G) $ (b) $ \\chi(G)\\leq\\text{had}_f(G) $ (c) $ \\chi_f(G)\\leq\\text{had}_f(G) $ .",
    "source_propositions": [
     {
@@ -1058,7 +1058,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1069,8 +1069,8 @@
    "title": "Hamiltonicity of Cayley graphs",
    "node_id": 2095,
    "canonical_url": "http://www.openproblemgarden.org/op/hamiltonicity_of_cayley_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Is every Cayley graph Hamiltonian?",
    "source_propositions": [
     {
@@ -1116,8 +1116,8 @@
    "title": "Linear Hypergraphs with Dimension 3",
    "node_id": 596,
    "canonical_url": "http://www.openproblemgarden.org/op/linear_hypergraphs_with_dimension_3",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Any linear hypergraph with incidence poset of dimension at most 3 is the intersection hypergraph of a family of triangles and segments in the plane.",
    "source_propositions": [
     {
@@ -1160,8 +1160,8 @@
    "title": "Mixing Circular Colourings",
    "node_id": 37907,
    "canonical_url": "http://www.openproblemgarden.org/op/mixing_circular_colourings_0",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Is $ \\mathfrak{M}_c(G) $ always rational?",
    "source_propositions": [
     {
@@ -1205,8 +1205,8 @@
    "title": "Partial List Coloring",
    "node_id": 788,
    "canonical_url": "http://www.openproblemgarden.org/op/partial_list_coloring_0",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Let $ G $ be a simple graph, and for every list assignment $ \\mathcal{L} $ let $ \\lambda_{\\mathcal{L}} $ be the maximum number of vertices of $ G $ which are colorable with respect to $ \\mathcal{L} $ . Define $ \\lambda_t = \\min{ \\lambda_{\\mathcal{L}} } $ , where the minimum is taken over all list assignments $ \\mathcal{L} $ with $ |\\mathcal{L}| = t $ for all $ v \\in V(G) $ . Conjecture [2] Let $ G $ be a graph with list chromatic number $ \\chi_\\ell $ and $ 1\\leq r\\leq s\\leq \\chi_\\ell $ . Then \\[\\frac{\\lambda_r}{r}\\geq\\frac{\\lambda_s}{s}.\\]",
    "source_propositions": [
     {
@@ -1240,7 +1240,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1251,8 +1251,8 @@
    "title": "Seymour's r-graph conjecture",
    "node_id": 2226,
    "canonical_url": "http://www.openproblemgarden.org/op/seymours_r_graph_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "An $ r $ - graph is an $ r $ -regular graph $ G $ with the property that $ |\\delta(X)| \\ge r $ for every $ X \\subseteq V(G) $ with odd size. Conjecture $ \\chi'(G) \\le r+1 $ for every $ r $ -graph $ G $ .",
    "source_propositions": [
     {
@@ -1285,7 +1285,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1296,8 +1296,8 @@
    "title": "Strong matchings and covers",
    "node_id": 690,
    "canonical_url": "http://www.openproblemgarden.org/op/strong_matchings_and_covers",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Let $ H $ be a hypergraph . A strongly maximal matching is a matching $ F \\subseteq E(H) $ so that $ |F' \\setminus F| \\le |F \\setminus F'| $ for every matching $ F' $ . A strongly minimal cover is a (vertex) cover $ X \\subseteq V(H) $ so that $ |X' \\setminus X| \\ge |X \\setminus X'| $ for every cover $ X' $ . Conjecture If $ H $ is a (possibly infinite) hypergraph in which all edges have size $ \\le k $ for some integer $ k $ , then $ H $ has a strongly maximal matching and a strongly minimal cover.",
    "source_propositions": [
     {
@@ -1342,8 +1342,8 @@
    "title": "Triangle free strongly regular graphs",
    "node_id": 345,
    "canonical_url": "http://www.openproblemgarden.org/op/triangle_free_strongly_regular_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Is there an eighth triangle free strongly regular graph?",
    "source_propositions": [
     {
@@ -1376,7 +1376,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1387,12 +1387,12 @@
    "title": "What is the smallest number of disjoint spanning trees made a graph Hamiltonian",
    "node_id": 567,
    "canonical_url": "http://www.openproblemgarden.org/op/what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "We are given a complete simple undirected weighted graph $ G_1=(V,E) $ and its first arbitrary shortest spanning tree $ T_1=(V,E_1) $ . We define the next graph $ G_2=(V,E\\setminus E_1) $ and find on $ G_2 $ the second arbitrary shortest spanning tree $ T_2=(V,E_2) $ . We continue similarly by finding $ T_3=(V,E_3) $ on $ G_3=(V,E\\setminus \\cup_{i=1}^{2}E_i) $ , etc. Let k be the smallest number of disjoint shortest spanning trees as defined above and let $ T^{k}=(V,\\cup_{i=1}^{k}E_i) $ be the graph obtained as union of all $ k $ disjoint trees. Question 1 . What is the smallest number of disjoint spanning trees creates a graph $ T^{k} $ containing a Hamiltonian path. Question 2 . What is the smallest number of disjoint spanning trees creates a graph $ T^{k} $ containing a shortest Hamiltonian path? Questions 3 and 4 . Replace in questions 1 and 2 a shortest spanning tree by a 1-tree. What is the smallest number of disjoint 1-trees creates a Hamiltonian graph? What is the smallest number of disjoint 1-trees creates a graph containing a shortest Hamiltonian cycle?",
    "source_propositions": [
     {
-     "kind": "Statement",
+     "kind": "Problem",
      "text": "We are given a complete simple undirected weighted graph $ G_1=(V,E) $ and its first arbitrary shortest spanning tree $ T_1=(V,E_1) $ . We define the next graph $ G_2=(V,E\\setminus E_1) $ and find on $ G_2 $ the second arbitrary shortest spanning tree $ T_2=(V,E_2) $ . We continue similarly by finding $ T_3=(V,E_3) $ on $ G_3=(V,E\\setminus \\cup_{i=1}^{2}E_i) $ , etc. Let k be the smallest number of disjoint shortest spanning trees as defined above and let $ T^{k}=(V,\\cup_{i=1}^{k}E_i) $ be the graph obtained as union of all $ k $ disjoint trees. Question 1 . What is the smallest number of disj"
     }
    ],
@@ -1434,8 +1434,8 @@
    "title": "3-Decomposition Conjecture",
    "node_id": 60027,
    "canonical_url": "http://www.openproblemgarden.org/op/3_decomposition_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture (3-Decomposition Conjecture) Every connected cubic graph $ G $ has a decomposition into a spanning tree, a family of cycles and a matching.",
    "source_propositions": [
     {
@@ -1481,8 +1481,8 @@
    "title": "Antichains in the cycle continuous order",
    "node_id": 323,
    "canonical_url": "http://www.openproblemgarden.org/op/antichains_in_the_cycle_continuous_order",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "If $ G $ , $ H $ are graphs, a function $ f : E(G) \\rightarrow E(H) $ is called cycle-continuous if the pre-image of every element of the (binary) cycle space of $ H $ is a member of the cycle space of $ G $ . Problem Does there exist an infinite set of graphs $ \\{G_1,G_2,\\ldots \\} $ so that there is no cycle continuous mapping between $ G_i $ and $ G_j $ whenever $ i \\neq j $ ?",
    "source_propositions": [
     {
@@ -1526,8 +1526,8 @@
    "title": "Bounding the chromatic number of triangle-free graphs with fixed maximum degree",
    "node_id": 36907,
    "canonical_url": "http://www.openproblemgarden.org/op/bounding_the_chromatic_number_of_triangle_free_graphs_with_fixed_maximum_degree",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture A triangle-free graph with maximum degree $ \\Delta $ has chromatic number at most $ \\ceil{\\frac{\\Delta}{2}}+2 $ .",
    "source_propositions": [
     {
@@ -1559,7 +1559,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -1570,8 +1570,8 @@
    "title": "Coloring random subgraphs",
    "node_id": 827,
    "canonical_url": "http://www.openproblemgarden.org/op/coloring_random_subgraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "If $ G $ is a graph and $ p \\in [0,1] $ , we let $ G_p $ denote a subgraph of $ G $ where each edge of $ G $ appears in $ G_p $ with independently with probability $ p $ . Problem Does there exist a constant $ c $ so that $ {\\mathbb E}(\\chi(G_{1/2})) > c \\frac{\\chi(G)}{\\log \\chi(G)} $ ?",
    "source_propositions": [
     {
@@ -1615,8 +1615,8 @@
    "title": "Cyclic spanning subdigraph with small cyclomatic number",
    "node_id": 50631,
    "canonical_url": "http://www.openproblemgarden.org/op/cyclic_spanning_subdigraph_with_small_cyclomatic_number",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ D $ be a digraph all of whose strong components are nontrivial. Then $ D $ contains a cyclic spanning subdigraph with cyclomatic number at most $ \\alpha(D) $ .",
    "source_propositions": [
     {
@@ -1662,8 +1662,8 @@
    "title": "Earth-Moon Problem",
    "node_id": 46900,
    "canonical_url": "http://www.openproblemgarden.org/op/earth_moon_problem",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem What is the maximum number of colours needed to colour countries such that no two countries sharing a common border have the same colour in the case where each country consists of one region on earth and one region on the moon ?",
    "source_propositions": [
     {
@@ -1707,8 +1707,8 @@
    "title": "Frankl's union-closed sets conjecture",
    "node_id": 2108,
    "canonical_url": "http://www.openproblemgarden.org/op/frankls_union_closed_sets_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ F $ be a finite family of finite sets, not all empty, that is closed under taking unions. Then there exists $ x $ such that $ x $ is an element of at least half the members of $ F $ .",
    "source_propositions": [
     {
@@ -1752,8 +1752,8 @@
    "title": "Hedetniemi's Conjecture",
    "node_id": 806,
    "canonical_url": "http://www.openproblemgarden.org/op/hedetniemis_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G,H $ are simple finite graphs, then $ \\chi(G \\times H) = \\min \\{ \\chi(G), \\chi(H) \\} $ . Here $ G \\times H $ is the tensor product (also called the direct or categorical product) of $ G $ and $ H $ .",
    "source_propositions": [
     {
@@ -1797,8 +1797,8 @@
    "title": "Linial-Berge path partition duality",
    "node_id": 170,
    "canonical_url": "http://www.openproblemgarden.org/op/linial_berge_path_partition_duality",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture The minimum $ k $ -norm of a path partition on a directed graph $ D $ is no more than the maximal size of an induced $ k $ -colorable subgraph.",
    "source_propositions": [
     {
@@ -1845,8 +1845,8 @@
    "title": "Monochromatic reachability or rainbow triangles",
    "node_id": 1808,
    "canonical_url": "http://www.openproblemgarden.org/op/monochromatic_reachability_vs_rainbow_triangles",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "In an edge-colored digraph, we say that a subgraph is rainbow if all its edges have distinct colors, and monochromatic if all its edges have the same color. Problem Let $ G $ be a tournament with edges colored from a set of three colors. Is it true that $ G $ must have either a rainbow directed cycle of length three or a vertex $ v $ so that every other vertex can be reached from $ v $ by a monochromatic (directed) path?",
    "source_propositions": [
     {
@@ -1893,8 +1893,8 @@
    "title": "Partition of a cubic 3-connected graphs into paths of length 2",
    "node_id": 46613,
    "canonical_url": "http://www.openproblemgarden.org/op/partition_of_a_cubic_3_connected_graphs_into_paths_of_length_2",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Does every $ 3 $ -connected cubic graph on $ 3k $ vertices admit a partition into $ k $ paths of length $ 2 $ ?",
    "source_propositions": [
     {
@@ -1940,8 +1940,8 @@
    "title": "Seymour's Second Neighbourhood Conjecture",
    "node_id": 646,
    "canonical_url": "http://www.openproblemgarden.org/op/seymours_second_neighbourhood_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Any oriented graph has a vertex whose outdegree is at most its second outdegree.",
    "source_propositions": [
     {
@@ -1987,8 +1987,8 @@
    "title": "Subdivision of a transitive tournament in digraphs with large outdegree",
    "node_id": 46680,
    "canonical_url": "http://www.openproblemgarden.org/op/subdivision_of_a_transitive_tournament_in_digraphs_with_large_outdegree",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For all $ k $ there is an integer \u000e $ f(k) $ such that every digraph of minimum outdegree at least \u000e $ f(k) $ contains a subdivision of a transitive tournament of order $ k $ .",
    "source_propositions": [
     {
@@ -2023,7 +2023,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2034,8 +2034,8 @@
    "title": "Triangle-packing vs triangle edge-transversal",
    "node_id": 46837,
    "canonical_url": "http://www.openproblemgarden.org/op/triangle_packing_vs_triangle_edge_transversal",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ has at most $ k $ edge-disjoint triangles, then there is a set of $ 2k $ edges whose deletion destroys every triangle.",
    "source_propositions": [
     {
@@ -2069,7 +2069,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2080,8 +2080,8 @@
    "title": "Woodall's Conjecture",
    "node_id": 179,
    "canonical_url": "http://www.openproblemgarden.org/op/woodalls_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a directed graph with smallest directed cut of size $ k $ , then $ G $ has $ k $ disjoint dijoins.",
    "source_propositions": [
     {
@@ -2127,8 +2127,8 @@
    "title": "3-Edge-Coloring Conjecture",
    "node_id": 60046,
    "canonical_url": "http://www.openproblemgarden.org/op/3_edge_coloring_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Suppose $ G $ with $ |V(G)|>2 $ is a connected cubic graph admitting a $ 3 $ -edge coloring. Then there is an edge $ e \\in E(G) $ such that the cubic graph homeomorphic to $ G-e $ has a $ 3 $ -edge coloring.",
    "source_propositions": [
     {
@@ -2173,8 +2173,8 @@
    "title": "Antidirected trees in digraphs",
    "node_id": 46279,
    "canonical_url": "http://www.openproblemgarden.org/op/antidirected_trees_in_digraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "An antidirected tree is an orientation of a tree in which every vertex has either indegree 0 or outdergree 0. Conjecture Let $ D $ be a digraph. If $ |A(D)| > (k-2) |V(D)| $ , then $ D $ contains every antidirected tree of order $ k $ .",
    "source_propositions": [
     {
@@ -2221,8 +2221,8 @@
    "title": "Bounding the on-line choice number in terms of the choice number",
    "node_id": 48583,
    "canonical_url": "http://www.openproblemgarden.org/op/bounding_the_on_line_choice_number_in_terms_of_the_choice_number",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Are there graphs for which $ \\text{ch}^{\\text{OL}}-\\text{ch} $ is arbitrarily large?",
    "source_propositions": [
     {
@@ -2267,8 +2267,8 @@
    "title": "Coloring the Odd Distance Graph",
    "node_id": 616,
    "canonical_url": "http://www.openproblemgarden.org/op/coloring_the_odd_distance_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "The Odd Distance Graph , denoted $ {\\mathcal O} $ , is the graph with vertex set $ {\\mathbb R}^2 $ and two points adjacent if the distance between them is an odd integer. Question Is $ \\chi({\\mathcal O}) = \\infty $ ?",
    "source_propositions": [
     {
@@ -2311,8 +2311,8 @@
    "title": "Decomposing a connected graph into paths.",
    "node_id": 46583,
    "canonical_url": "http://www.openproblemgarden.org/op/decomposing_a_connected_graph_into_paths",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every simple connected graph on $ n $ vertices can be decomposed into at most $ \\frac{1}{2}(n+1) $ paths.",
    "source_propositions": [
     {
@@ -2356,8 +2356,8 @@
    "title": "Edge-disjoint Hamilton cycles in highly strongly connected tournaments.",
    "node_id": 47031,
    "canonical_url": "http://www.openproblemgarden.org/op/edge_disjoint_hamilton_cycles",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every $ k\\geq 2 $ , there is an integer $ f(k) $ so that every strongly $ f(k) $ -connected tournament has $ k $ edge-disjoint Hamilton cycles.",
    "source_propositions": [
     {
@@ -2404,8 +2404,8 @@
    "title": "Friendly partitions",
    "node_id": 37163,
    "canonical_url": "http://www.openproblemgarden.org/op/friendly_partitions",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "A friendly partition of a graph is a partition of the vertices into two sets so that every vertex has at least as many neighbours in its own class as in the other. Problem Is it true that for every $ r $ , all but finitely many $ r $ -regular graphs have friendly partitions?",
    "source_propositions": [
     {
@@ -2449,8 +2449,8 @@
    "title": "Highly connected graphs with no K_n minor",
    "node_id": 153,
    "canonical_url": "http://www.openproblemgarden.org/op/high_connectivity_no_k_n",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Is it true for all $ n \\ge 0 $ , that every sufficiently large $ n $ - connected graph without a $ K_n $ minor has a set of $ n-5 $ vertices whose deletion results in a planar graph ?",
    "source_propositions": [
     {
@@ -2484,7 +2484,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2495,8 +2495,8 @@
    "title": "List chromatic number and maximum degree of bipartite graphs",
    "node_id": 47358,
    "canonical_url": "http://www.openproblemgarden.org/op/list_chromatic_number_and_maximum_degree_of_bipartite_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture There is a constant $ c $ such that the list chromatic number of any bipartite graph $ G $ of maximum degree $ \\Delta $ is at most $ c \\log \\Delta $ .",
    "source_propositions": [
     {
@@ -2529,7 +2529,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2540,8 +2540,8 @@
    "title": "Monochromatic vertex colorings inherited from Perfect Matchings",
    "node_id": 60030,
    "canonical_url": "http://www.openproblemgarden.org/op/monochromatic_vertex_colorings_inherited_from_perfect_matchings",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For which values of $ n $ and $ d $ are there bi-colored graphs on $ n $ vertices and $ d $ different colors with the property that all the $ d $ monochromatic colorings have unit weight, and every other coloring cancels out?",
    "source_propositions": [
     {
@@ -2585,8 +2585,8 @@
    "title": "Partitioning edge-connectivity",
    "node_id": 146,
    "canonical_url": "http://www.openproblemgarden.org/op/partitioning_edge_connectivity",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Let $ G $ be an $ (a+b+2) $ - edge-connected graph. Does there exist a partition $ \\{A,B\\} $ of $ E(G) $ so that $ (V,A) $ is $ a $ -edge-connected and $ (V,B) $ is $ b $ -edge-connected?",
    "source_propositions": [
     {
@@ -2630,8 +2630,8 @@
    "title": "Seymour's self-minor conjecture",
    "node_id": 333,
    "canonical_url": "http://www.openproblemgarden.org/op/seymours_self_minor_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every infinite graph is a proper minor of itself.",
    "source_propositions": [
     {
@@ -2675,8 +2675,8 @@
    "title": "Subgraph of large average degree and large girth.",
    "node_id": 46708,
    "canonical_url": "http://www.openproblemgarden.org/op/subgraph_of_large_average_degree_and_large_average_degree",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For all positive integers $ g $ and $ k $ , there exists an integer $ d $ such that every graph of average degree at least $ d $ contains a subgraph of average degree at least $ k $ and girth greater than $ g $ .",
    "source_propositions": [
     {
@@ -2710,7 +2710,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2721,8 +2721,8 @@
    "title": "Turán number of a finite family.",
    "node_id": 46706,
    "canonical_url": "http://www.openproblemgarden.org/op/turan_number_of_a_finite_family",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Given a finite family $ {\\cal F} $ of graphs and an integer $ n $ , the Turán number $ ex(n,{\\cal F}) $ of $ {\\cal F} $ is the largest integer $ m $ such that there exists a graph on $ n $ vertices with $ m $ edges which contains no member of $ {\\cal F} $ as a subgraph. Conjecture For every finite family $ {\\cal F} $ of graphs there exists an $ F\\in {\\cal F} $ such that $ ex(n, F ) = O(ex(n, {\\cal F})) $ .",
    "source_propositions": [
     {
@@ -2767,8 +2767,8 @@
    "title": "3-flow conjecture",
    "node_id": 128,
    "canonical_url": "http://www.openproblemgarden.org/op/3_flow_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every 4- edge-connected graph has a nowhere-zero 3-flow.",
    "source_propositions": [
     {
@@ -2799,7 +2799,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2810,8 +2810,8 @@
    "title": "Approximation ratio for k-outerplanar graphs",
    "node_id": 37217,
    "canonical_url": "http://www.openproblemgarden.org/op/approximation_ratio_for_k_outerplanar_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Is the approximation ratio for the Maximum Edge Disjoint Paths (MaxEDP) or the Maximum Integer Multiflow problem (MaxIMF) bounded by a constant in $ k $ -outerplanar graphs or tree-width graphs?",
    "source_propositions": [
     {
@@ -2856,8 +2856,8 @@
    "title": "Caccetta-Häggkvist Conjecture",
    "node_id": 46385,
    "canonical_url": "http://www.openproblemgarden.org/op/caccetta_haggkvist_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every simple digraph of order $ n $ with minimum outdegree at least $ r $ has a cycle with length at most $ \\lceil n/r\\rceil $",
    "source_propositions": [
     {
@@ -2889,7 +2889,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -2900,8 +2900,8 @@
    "title": "Coloring the union of degenerate graphs",
    "node_id": 46533,
    "canonical_url": "http://www.openproblemgarden.org/op/coloring_the_union_of_degenerate_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture The union of a $ 1 $ -degenerate graph (a forest) and a $ 2 $ -degenerate graph is $ 5 $ -colourable.",
    "source_propositions": [
     {
@@ -2945,8 +2945,8 @@
    "title": "Decomposing an eulerian graph into cycles",
    "node_id": 46584,
    "canonical_url": "http://www.openproblemgarden.org/op/decomposing_an_eulerian_graph_into_cycles",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every simple eulerian graph on $ n $ vertices can be decomposed into at most $ \\frac{1}{2}(n-1) $ cycles.",
    "source_propositions": [
     {
@@ -2990,8 +2990,8 @@
    "title": "Edge list coloring conjecture",
    "node_id": 2110,
    "canonical_url": "http://www.openproblemgarden.org/op/edge_list_coloring_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be a loopless multigraph. Then the edge chromatic number of $ G $ equals the list edge chromatic number of $ G $ .",
    "source_propositions": [
     {
@@ -3026,7 +3026,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3037,8 +3037,8 @@
    "title": "Geodesic cycles and Tutte's Theorem",
    "node_id": 500,
    "canonical_url": "http://www.openproblemgarden.org/op/geodesic_cycles_and_tuttes_theorem",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem If $ G $ is a $ 3 $ -connected finite graph, is there an assignment of lengths $ \\ell: E(G) \\to \\mathb R^+ $ to the edges of $ G $ , such that every $ \\ell $ -geodesic cycle is peripheral ?",
    "source_propositions": [
     {
@@ -3084,8 +3084,8 @@
    "title": "4-regular 4-chromatic graphs of high girth",
    "node_id": 830,
    "canonical_url": "http://www.openproblemgarden.org/op/high_girth_low_degree_4_chromatic_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Do there exist 4-regular 4-chromatic graphs of arbitrarily high girth?",
    "source_propositions": [
     {
@@ -3129,8 +3129,8 @@
    "title": "List colorings of edge-critical graphs",
    "node_id": 388,
    "canonical_url": "http://www.openproblemgarden.org/op/list_colorings_of_edge_critical_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Suppose that $ G $ is a $ \\Delta $ -edge-critical graph. Suppose that for each edge $ e $ of $ G $ , there is a list $ L(e) $ of $ \\Delta $ colors. Then $ G $ is $ L $ -edge-colorable unless all lists are equal to each other.",
    "source_propositions": [
     {
@@ -3175,8 +3175,8 @@
    "title": "Monochromatic reachability in arc-colored digraphs",
    "node_id": 60028,
    "canonical_url": "http://www.openproblemgarden.org/op/monochromatoc_reachability_in_arc_colored_digraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every $ k $ , there exists an integer $ f(k) $ such that if $ D $ is a digraph whose arcs are colored with $ k $ colors, then $ D $ has a $ S $ set which is the union of $ f(k) $ stables sets so that every vertex has a monochromatic path to some vertex in $ S $ .",
    "source_propositions": [
     {
@@ -3222,8 +3222,8 @@
    "title": "The Two Color Conjecture",
    "node_id": 169,
    "canonical_url": "http://www.openproblemgarden.org/op/partitioning_planar_digraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is an orientation of a simple planar graph, then there is a partition of $ V(G) $ into $ \\{X_1,X_2\\} $ so that the graph induced by $ X_i $ is acyclic for $ i=1,2 $ .",
    "source_propositions": [
     {
@@ -3269,8 +3269,8 @@
    "title": "Shannon capacity of the seven-cycle",
    "node_id": 36879,
    "canonical_url": "http://www.openproblemgarden.org/op/shannon_capacity_of_the_seven_cycle",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem What is the Shannon capacity of $ C_7 $ ?",
    "source_propositions": [
     {
@@ -3315,8 +3315,8 @@
    "title": "Switching reconstruction conjecture",
    "node_id": 46951,
    "canonical_url": "http://www.openproblemgarden.org/op/switching_reconstruction_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every simple graph on five or more vertices is switching-reconstructible.",
    "source_propositions": [
     {
@@ -3361,8 +3361,8 @@
    "title": "Turán's problem for hypergraphs",
    "node_id": 47343,
    "canonical_url": "http://www.openproblemgarden.org/op/turans_problem_for_hypergraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every simple $ 3 $ -uniform hypergraph on $ 3n $ vertices which contains no complete $ 3 $ -uniform hypergraph on four vertices has at most $ \\frac12 n^2(5n-3) $ hyperedges. Conjecture Every simple $ 3 $ -uniform hypergraph on $ 2n $ vertices which contains no complete $ 3 $ -uniform hypergraph on five vertices has at most $ n^2(n-1) $ hyperedges.",
    "source_propositions": [
     {
@@ -3409,8 +3409,8 @@
    "title": "4-connected graphs are not uniquely hamiltonian",
    "node_id": 47294,
    "canonical_url": "http://www.openproblemgarden.org/op/4_connected_graphs_are_not_uniquely_hamiltonian",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every $ 4 $ -connected graph with a Hamilton cycle has a second Hamilton cycle.",
    "source_propositions": [
     {
@@ -3454,8 +3454,8 @@
    "title": "Approximation Ratio for Maximum Edge Disjoint Paths problem",
    "node_id": 37211,
    "canonical_url": "http://www.openproblemgarden.org/op/approximation_ratio_for_maximum_edge_disjoint_paths_problem",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Can the approximation ratio $ O(\\sqrt{n}) $ be improved for the Maximum Edge Disjoint Paths problem (MaxEDP) in planar graphs or can an inapproximability result stronger than $ \\mathcal{APX} $ -hardness?",
    "source_propositions": [
     {
@@ -3498,8 +3498,8 @@
    "title": "Characterizing (aleph_0,aleph_1)-graphs",
    "node_id": 1750,
    "canonical_url": "http://www.openproblemgarden.org/op/characterizing_aleph_0_aleph_1_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Call a graph an $ (\\aleph_0,\\aleph_1) $ - graph if it has a bipartition $ (A,B) $ so that every vertex in $ A $ has degree $ \\aleph_0 $ and every vertex in $ B $ has degree $ \\aleph_1 $ . Problem Characterize the $ (\\aleph_0,\\aleph_1) $ -graphs.",
    "source_propositions": [
     {
@@ -3543,8 +3543,8 @@
    "title": "Colouring the square of a planar graph",
    "node_id": 47470,
    "canonical_url": "http://www.openproblemgarden.org/op/colouring_the_square_of_a_planar_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be a planar graph of maximum degree $ \\Delta $ . The chromatic number of its square is \\item at most $ 7 $ if $ \\Delta =3 $ , \\item at most $ \\Delta+5 $ if $ 4\\leq\\Delta\\leq 7 $ , \\item at most $ \\left\\lfloor\\frac32\\,\\Delta\\right\\rfloor+1 $ if $ \\Delta\\ge8 $ .",
    "source_propositions": [
     {
@@ -3589,8 +3589,8 @@
    "title": "Decomposing an eulerian graph into cycles with no two consecutive edges on a prescribed eulerian tour",
    "node_id": 46606,
    "canonical_url": "http://www.openproblemgarden.org/op/decomposing_an_eulerian_graph_into_cycles_with_no_two_consecutives_edges_on_a_prescirbed_eulerian_tour",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be an eulerian graph of minimum degree $ 4 $ , and let $ W $ be an eulerian tour of $ G $ . Then $ G $ admits a decomposition into cycles none of which contains two consecutive edges of $ W $ .",
    "source_propositions": [
     {
@@ -3635,8 +3635,8 @@
    "title": "Edge Reconstruction Conjecture",
    "node_id": 804,
    "canonical_url": "http://www.openproblemgarden.org/op/edge_reconstruction_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every simple graph with at least 4 edges is reconstructible from it's edge deleted subgraphs",
    "source_propositions": [
     {
@@ -3681,8 +3681,8 @@
    "title": "Goldberg's conjecture",
    "node_id": 2242,
    "canonical_url": "http://www.openproblemgarden.org/op/goldbergs_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "The overfull parameter is defined as follows: \\[ w(G) = \\max_{H \\subseteq G} \\left\\lceil \\frac{ |E(H)| }{ \\lfloor \\tfrac{1}{2} |V(H)| \\rfloor} \\right\\rceil. \\] Conjecture Every graph $ G $ satisfies $ \\chi'(G) \\le \\max\\{ \\Delta(G) + 1, w(G) \\} $ .",
    "source_propositions": [
     {
@@ -3717,7 +3717,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3728,8 +3728,8 @@
    "title": "Highly arc transitive two ended digraphs",
    "node_id": 691,
    "canonical_url": "http://www.openproblemgarden.org/op/highly_arc_transitive_two_ended_digraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a highly arc transitive digraph with two ends, then every tile of $ G $ is a disjoint union of complete bipartite graphs.",
    "source_propositions": [
     {
@@ -3775,8 +3775,8 @@
    "title": "List Colourings of Complete Multipartite Graphs with 2 Big Parts",
    "node_id": 59927,
    "canonical_url": "http://www.openproblemgarden.org/op/list_colourings_of_complete_multipartite_graphs_with_2_big_parts",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Given $ a,b\\geq2 $ , what is the smallest integer $ t\\geq0 $ such that $ \\chi_\\ell(K_{a,b}+K_t)= \\chi(K_{a,b}+K_t) $ ?",
    "source_propositions": [
     {
@@ -3820,8 +3820,8 @@
    "title": "Multicolour Erdős–Hajnal Conjecture",
    "node_id": 60042,
    "canonical_url": "http://www.openproblemgarden.org/op/multicolour_erdos_hajnal_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every fixed $ k\\geq2 $ and fixed colouring $ \\chi $ of $ E(K_k) $ with $ m $ colours, there exists $ \\varepsilon>0 $ such that every colouring of the edges of $ K_n $ contains either $ k $ vertices whose edges are coloured according to $ \\chi $ or $ n^\\varepsilon $ vertices whose edges are coloured with at most $ m-1 $ colours.",
    "source_propositions": [
     {
@@ -3855,7 +3855,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -3866,8 +3866,8 @@
    "title": "Partitioning a tournament into k-strongly connected subtournaments",
    "node_id": 47643,
    "canonical_url": "http://www.openproblemgarden.org/op/partitionning_a_tournament_into_k_strongly_connected_subtournaments",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Let $ k_1, \\dots , k_p $ be positve integer Does there exists an integer $ g(k_1, \\dots , k_p) $ such that every $ g(k_1, \\dots , k_p) $ -strong tournament $ T $ admits a partition $ (V_1\\dots , V_p) $ of its vertex set such that the subtournament induced by $ V_i $ is a non-trivial $ k_i $ -strong for all $ 1\\leq i\\leq p $ .",
    "source_propositions": [
     {
@@ -3911,8 +3911,8 @@
    "title": "Shuffle-Exchange Conjecture (graph-theoretic form)",
    "node_id": 37089,
    "canonical_url": "http://www.openproblemgarden.org/op/shuffle_exchange_conjecture_graph_theoretic_form",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Given integers $ k,n \\ge 2 $ , the 2-stage Shuffle-Exchange graph/network , denoted $ \\text{SE}(k,n) $ , is the simple $ k $ -regular bipartite graph with the ordered pair $ (U,V) $ of linearly labeled parts $ U:=\\{u_0,\\dots,u_{t-1}\\} $ and $ V:=\\{v_0,\\dots,v_{t-1}\\} $ , where $ t:=k^{n-1} $ , such that vertices $ u_i $ and $ v_j $ are adjacent if and only if $ (j - ki) \\text{ mod } t < k $ (see Fig.1). Given integers $ k,n,r \\ge 2 $ , the $ r $ -stage Shuffle-Exchange graph/network , denoted $ (\\text{SE}(k,n))^{r-1} $ , is the proper (i.e., respecting all the orders) concatenation of $ r-1 $ identical copies of $ \\text{SE}(k,n) $ (see Fig.1). Let $ r(k,n) $ be the smallest integer $ r\\ge 2 $ such that the graph $ (\\text{SE}(k,n))^{r-1} $ is rearrangeable. Problem Find $ r(k,n) $ . Conjecture $ r(k,n)=2n-1 $ .",
    "source_propositions": [
     {
@@ -3963,8 +3963,8 @@
    "title": "Switching reconstruction of digraphs",
    "node_id": 46952,
    "canonical_url": "http://www.openproblemgarden.org/op/switching_reconstruction_of_digraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Are there any switching-nonreconstructible digraphs on twelve or more vertices?",
    "source_propositions": [
     {
@@ -4009,8 +4009,8 @@
    "title": "Unfriendly partitions",
    "node_id": 687,
    "canonical_url": "http://www.openproblemgarden.org/op/unfriendly_partitions",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "If $ G $ is a graph, we say that a partition of $ V(G) $ is unfriendly if every vertex has at least as many neighbors in the other classes as in its own. Problem Does every countably infinite graph have an unfriendly partition into two sets?",
    "source_propositions": [
     {
@@ -4054,8 +4054,8 @@
    "title": "4-flow conjecture",
    "node_id": 127,
    "canonical_url": "http://www.openproblemgarden.org/op/4_flow_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every bridgeless graph with no Petersen minor has a nowhere-zero 4-flow.",
    "source_propositions": [
     {
@@ -4099,8 +4099,8 @@
    "title": "Arc-disjoint directed cycles in regular directed graphs",
    "node_id": 49573,
    "canonical_url": "http://www.openproblemgarden.org/op/arc_disjoint_directed_cycles_in_regular_directed_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a $ k $ -regular directed graph with no parallel arcs, then $ G $ contains a collection of $ {k+1 \\choose 2} $ arc-disjoint directed cycles.",
    "source_propositions": [
     {
@@ -4145,8 +4145,8 @@
    "title": "Choice Number of k-Chromatic Graphs of Bounded Order",
    "node_id": 44879,
    "canonical_url": "http://www.openproblemgarden.org/op/choice_number_of_k_chromatic_graphs_of_bounded_order",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a $ k $ -chromatic graph on at most $ mk $ vertices, then $ \\text{ch}(G)\\leq \\text{ch}(K_{m*k}) $ .",
    "source_propositions": [
     {
@@ -4191,8 +4191,8 @@
    "title": "Complete bipartite subgraphs of perfect graphs",
    "node_id": 826,
    "canonical_url": "http://www.openproblemgarden.org/op/complete_bipartite_subgraphs_of_perfect_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Let $ G $ be a perfect graph on $ n $ vertices. Is it true that either $ G $ or $ \\bar{G} $ contains a complete bipartite subgraph with bipartition $ (A,B) $ so that $ |A|, |B| \\ge n^{1 - o(1)} $ ?",
    "source_propositions": [
     {
@@ -4236,8 +4236,8 @@
    "title": "Decomposing an even tournament in directed paths",
    "node_id": 46237,
    "canonical_url": "http://www.openproblemgarden.org/op/decomposing_an_even_tournament_in_directed_paths",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every tournament $ D $ on an even number of vertices can be decomposed into $ \\sum_{v\\in V}\\max\\{0,d^+(v)-d^-(v)\\} $ directed paths.",
    "source_propositions": [
     {
@@ -4285,8 +4285,8 @@
    "title": "End-Devouring Rays",
    "node_id": 735,
    "canonical_url": "http://www.openproblemgarden.org/op/end_devouring_rays",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Let $ G $ be a graph, $ \\omega $ a countable end of $ G $ , and $ K $ an infinite set of pairwise disjoint $ \\omega $ -rays in $ G $ . Prove that there is a set $ K' $ of pairwise disjoint $ \\omega $ -rays that devours $ \\omega $ such that the set of starting vertices of rays in $ K' $ equals the set of starting vertices of rays in $ K $ .",
    "source_propositions": [
     {
@@ -4328,8 +4328,8 @@
    "title": "Good Edge Labelings",
    "node_id": 37323,
    "canonical_url": "http://www.openproblemgarden.org/op/good_edge_labelings",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question What is the maximum edge density of a graph which has a good edge labeling? We say that a graph is good-edge-labeling critical , if it has no good edge labeling, but every proper subgraph has a good edge labeling. Conjecture For every $ c<4 $ , there is only a finite number of good-edge-labeling critical graphs with average degree less than $ c $ .",
    "source_propositions": [
     {
@@ -4378,8 +4378,8 @@
    "title": "Hoàng-Reed Conjecture",
    "node_id": 47282,
    "canonical_url": "http://www.openproblemgarden.org/op/hoand_reed_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every digraph in which each vertex has outdegree at least $ k $ contains $ k $ directed cycles $ C_1, \\ldots, C_k $ such that $ C_j $ meets $ \\cup_{i=1}^{j-1}C_i $ in at most one vertex, $ 2 \\leq j \\leq k $ .",
    "source_propositions": [
     {
@@ -4413,7 +4413,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -4424,8 +4424,8 @@
    "title": "List Hadwiger Conjecture",
    "node_id": 59943,
    "canonical_url": "http://www.openproblemgarden.org/op/list_hadwiger_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every $ K_t $ -minor-free graph is $ c t $ -list-colourable for some constant $ c\\geq1 $ .",
    "source_propositions": [
     {
@@ -4458,7 +4458,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -4469,8 +4469,8 @@
    "title": "Nearly spanning regular subgraphs",
    "node_id": 801,
    "canonical_url": "http://www.openproblemgarden.org/op/nearly_spanning_regular_subgraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every $ \\epsilon > 0 $ and every positive integer $ k $ , there exists $ r_0 = r_0(\\epsilon,k) $ so that every simple $ r $ -regular graph $ G $ with $ r \\ge r_0 $ has a $ k $ -regular subgraph $ H $ with $ |V(H)| \\ge (1- \\epsilon) |V(G)| $ .",
    "source_propositions": [
     {
@@ -4514,8 +4514,8 @@
    "title": "Pebbling a cartesian product",
    "node_id": 586,
    "canonical_url": "http://www.openproblemgarden.org/op/pebbling_a_cartesian_product",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "We let $ p(G) $ denote the pebbling number of a graph $ G $ . Conjecture $ p(G_1 \\Box G_2) \\le p(G_1) p(G_2) $ .",
    "source_propositions": [
     {
@@ -4559,8 +4559,8 @@
    "title": "Sidorenko's Conjecture",
    "node_id": 60039,
    "canonical_url": "http://www.openproblemgarden.org/op/sidorenkos_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For any bipartite graph $ H $ and graph $ G $ , the number of homomorphisms from $ H $ to $ G $ is at least $ \\left(\\frac{2|E(G)|}{|V(G)|^2}\\right)^{|E(H)|}|V(G)|^{|V(H)|} $ .",
    "source_propositions": [
     {
@@ -4603,8 +4603,8 @@
    "title": "The Berge-Fulkerson conjecture",
    "node_id": 142,
    "canonical_url": "http://www.openproblemgarden.org/op/the_berge_fulkerson_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a bridgeless cubic graph, then there exist 6 perfect matchings $ M_1,\\ldots,M_6 $ of $ G $ with the property that every edge of $ G $ is contained in exactly two of $ M_1,\\ldots,M_6 $ .",
    "source_propositions": [
     {
@@ -4637,7 +4637,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -4648,8 +4648,8 @@
    "title": "Unions of triangle free graphs",
    "node_id": 349,
    "canonical_url": "http://www.openproblemgarden.org/op/unions_of_triangle_free_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Does there exist a graph with no subgraph isomorphic to $ K_4 $ which cannot be expressed as a union of $ \\aleph_0 $ triangle free graphs?",
    "source_propositions": [
     {
@@ -4692,8 +4692,8 @@
    "title": "57-regular Moore graph?",
    "node_id": 160,
    "canonical_url": "http://www.openproblemgarden.org/op/57_regular_moore_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Does there exist a 57- regular graph with diameter 2 and girth 5?",
    "source_propositions": [
     {
@@ -4727,7 +4727,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -4738,8 +4738,8 @@
    "title": "Arc-disjoint out-branching and in-branching",
    "node_id": 46495,
    "canonical_url": "http://www.openproblemgarden.org/op/arc_disjoint_out_branching_and_in_branching",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture There exists an integer $ k $ such that every $ k $ -arc-strong digraph $ D $ with specified vertices $ u $ and $ v $ contains an out-branching rooted at $ u $ and an in-branching rooted at $ v $ which are arc-disjoint.",
    "source_propositions": [
     {
@@ -4786,8 +4786,8 @@
    "title": "Choosability of Graph Powers",
    "node_id": 53019,
    "canonical_url": "http://www.openproblemgarden.org/op/choosability_of_graph_powers",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question (Noel, 2013) Does there exist a function $ f(k)=o(k^2) $ such that for every graph $ G $ , \\[\\text{ch}\\left(G^2\\right)\\leq f\\left(\\chi\\left(G^2\\right)\\right)?\\]",
    "source_propositions": [
     {
@@ -4831,8 +4831,8 @@
    "title": "Complexity of the H-factor problem.",
    "node_id": 46738,
    "canonical_url": "http://www.openproblemgarden.org/op/complexity_of_the_h_factor_problem",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "An $ H $ -factor in a graph $ G $ is a set of vertex-disjoint copies of $ H $ covering all vertices of $ G $ . Problem Let $ c $ be a fixed positive real number and $ H $ a fixed graph. Is it NP-hard to determine whether a graph $ G $ on $ n $ vertices and minimum degree $ cn $ contains and $ H $ -factor?",
    "source_propositions": [
     {
@@ -4876,8 +4876,8 @@
    "title": "Decomposing eulerian graphs",
    "node_id": 141,
    "canonical_url": "http://www.openproblemgarden.org/op/decomposing_eulerian_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a 6- edge-connected Eulerian graph and $ P $ is a 2-transition system for $ G $ , then $ (G,P) $ has a compaible decomposition.",
    "source_propositions": [
     {
@@ -4923,8 +4923,8 @@
    "title": "Erdős–Faber–Lovász conjecture",
    "node_id": 55984,
    "canonical_url": "http://www.openproblemgarden.org/op/erdos_faber_lovasz_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a simple graph which is the union of $ k $ pairwise edge-disjoint complete graphs, each of which has $ k $ vertices, then the chromatic number of $ G $ is $ k $ .",
    "source_propositions": [
     {
@@ -4968,8 +4968,8 @@
    "title": "Graceful Tree Conjecture",
    "node_id": 439,
    "canonical_url": "http://www.openproblemgarden.org/op/graceful_tree_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture All trees are graceful",
    "source_propositions": [
     {
@@ -5013,8 +5013,8 @@
    "title": "Imbalance conjecture",
    "node_id": 57613,
    "canonical_url": "http://www.openproblemgarden.org/op/imbalance_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Suppose that for all edges $ e\\in E(G) $ we have $ imb(e)>0 $ . Then $ M_{G} $ is graphic.",
    "source_propositions": [
     {
@@ -5058,8 +5058,8 @@
    "title": "List Total Colouring Conjecture",
    "node_id": 56449,
    "canonical_url": "http://www.openproblemgarden.org/op/list_total_colouring_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is the total graph of a multigraph, then $ \\chi_\\ell(G)=\\chi(G) $ .",
    "source_propositions": [
     {
@@ -5092,7 +5092,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5103,8 +5103,8 @@
    "title": "Negative association in uniform forests",
    "node_id": 1757,
    "canonical_url": "http://www.openproblemgarden.org/op/negative_association_in_uniform_forests",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be a finite graph, let $ e,f \\in E(G) $ , and let $ F $ be the edge set of a forest chosen uniformly at random from all forests of $ G $ . Then \\[ {\\mathbb P}(e \\in F \\mid f \\in F}) \\le {\\mathbb P}(e \\in F) \\]",
    "source_propositions": [
     {
@@ -5148,8 +5148,8 @@
    "title": "Pentagon problem",
    "node_id": 167,
    "canonical_url": "http://www.openproblemgarden.org/op/pentagon_problem",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Let $ G $ be a 3-regular graph that contains no cycle of length shorter than $ g $ . Is it true that for large enough~ $ g $ there is a homomorphism $ G \\to C_5 $ ?",
    "source_propositions": [
     {
@@ -5183,7 +5183,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5194,8 +5194,8 @@
    "title": "Signing a graph to have small magnitude eigenvalues",
    "node_id": 48264,
    "canonical_url": "http://www.openproblemgarden.org/op/signing_a_graph_to_have_small_magnitude_eigenvalues",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ A $ is the adjacency matrix of a $ d $ -regular graph, then there is a symmetric signing of $ A $ (i.e. replace some $ +1 $ entries by $ -1 $ ) so that the resulting matrix has all eigenvalues of magnitude at most $ 2 \\sqrt{d-1} $ .",
    "source_propositions": [
     {
@@ -5240,8 +5240,8 @@
    "title": "The Bermond-Thomassen Conjecture",
    "node_id": 611,
    "canonical_url": "http://www.openproblemgarden.org/op/the_bermond_thomassen_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every positive integer $ k $ , every digraph with minimum out-degree at least $ 2k-1 $ contains $ k $ disjoint cycles.",
    "source_propositions": [
     {
@@ -5284,8 +5284,8 @@
    "title": "r-regular graphs are not uniquely hamiltonian.",
    "node_id": 480,
    "canonical_url": "http://www.openproblemgarden.org/op/uniquely_hamiltonian_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a finite $ r $ -regular graph, where $ r > 2 $ , then $ G $ is not uniquely hamiltonian.",
    "source_propositions": [
     {
@@ -5330,8 +5330,8 @@
    "title": "5-flow conjecture",
    "node_id": 126,
    "canonical_url": "http://www.openproblemgarden.org/op/5_flow_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every bridgeless graph has a nowhere-zero 5-flow.",
    "source_propositions": [
     {
@@ -5363,7 +5363,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5374,8 +5374,8 @@
    "title": "Arc-disjoint strongly connected spanning subdigraphs",
    "node_id": 46496,
    "canonical_url": "http://www.openproblemgarden.org/op/arc_disjoint_strongly_connected_spanning_subdigraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture There exists an ineteger $ k $ so that every $ k $ -arc-connected digraph contains a pair of arc-disjoint strongly connected spanning subdigraphs?",
    "source_propositions": [
     {
@@ -5420,8 +5420,8 @@
    "title": "Chords of longest cycles",
    "node_id": 700,
    "canonical_url": "http://www.openproblemgarden.org/op/chords_of_longest_cycles",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a 3-connected graph, every longest cycle in $ G $ has a chord.",
    "source_propositions": [
     {
@@ -5466,8 +5466,8 @@
    "title": "Consecutive non-orientable embedding obstructions",
    "node_id": 172,
    "canonical_url": "http://www.openproblemgarden.org/op/consecutive_non_orientable_embedding_obstructions",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Is there a graph $ G $ that is a minor-minimal obstruction for two non-orientable surfaces?",
    "source_propositions": [
     {
@@ -5512,8 +5512,8 @@
    "title": "Decomposing k-arc-strong tournament into k spanning strong digraphs",
    "node_id": 47651,
    "canonical_url": "http://www.openproblemgarden.org/op/decomposing_k_arc_strong_tournament_into_k_spanning_strong_digraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every k-arc-strong tournament decomposes into k spanning strong digraphs.",
    "source_propositions": [
     {
@@ -5548,7 +5548,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5559,8 +5559,8 @@
    "title": "Erdős-Posa property for long directed cycles",
    "node_id": 52200,
    "canonical_url": "http://www.openproblemgarden.org/op/erdos_posa_property_for_long_directed_cycles",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ \\ell \\geq 2 $ be an integer. For every integer $ n\\geq 0 $ , there exists an integer $ t_n=t_n(\\ell) $ such that for every digraph $ D $ , either $ D $ has a $ n $ pairwise-disjoint directed cycles of length at least $ \\ell $ , or there exists a set $ T $ of at most $ t_n $ vertices such that $ D-T $ has no directed cycles of length at least $ \\ell $ .",
    "source_propositions": [
     {
@@ -5606,8 +5606,8 @@
    "title": "Graham's conjecture on tree reconstruction",
    "node_id": 164,
    "canonical_url": "http://www.openproblemgarden.org/op/grahams_conjecture_on_tree_reconstruction",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem for every graph $ G $ , we let $ L(G) $ denote the line graph of $ G $ . Given that $ G $ is a tree, can we determine it from the integer sequence $ |V(G)|, |V(L(G))|, |V(L(L(G)))|, \\ldots $ ?",
    "source_propositions": [
     {
@@ -5651,8 +5651,8 @@
    "title": "Infinite uniquely hamiltonian graphs",
    "node_id": 484,
    "canonical_url": "http://www.openproblemgarden.org/op/infinite_uniquely_hamiltonian_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Are there any uniquely hamiltonian locally finite 1-ended graphs which are regular of degree $ r > 2 $ ?",
    "source_propositions": [
     {
@@ -5695,8 +5695,8 @@
    "title": "Long directed cycles in diregular digraphs",
    "node_id": 46460,
    "canonical_url": "http://www.openproblemgarden.org/op/long_directed_cycles_in_digraph_with_minimum_in_and_out_degree",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every strong oriented graph in which each vertex has indegree and outdegree at least $ d $ contains a directed cycle of length at least $ 2d+1 $ .",
    "source_propositions": [
     {
@@ -5744,8 +5744,8 @@
    "title": "Non-edges vs. feedback edge sets in digraphs",
    "node_id": 1793,
    "canonical_url": "http://www.openproblemgarden.org/op/non_edges_vs_feedback_edge_sets_in_digraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "For any simple digraph $ G $ , we let $ \\gamma(G) $ be the number of unordered pairs of nonadjacent vertices (i.e. the number of non-edges), and $ \\beta(G) $ be the size of the smallest feedback edge set . Conjecture If $ G $ is a simple digraph without directed cycles of length $ \\le 3 $ , then $ \\beta(G) \\le \\frac{1}{2} \\gamma(G) $ .",
    "source_propositions": [
     {
@@ -5792,8 +5792,8 @@
    "title": "Petersen coloring conjecture",
    "node_id": 143,
    "canonical_url": "http://www.openproblemgarden.org/op/petersen_coloring_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be a cubic graph with no bridge . Then there is a coloring of the edges of $ G $ using the edges of the Petersen graph so that any three mutually adjacent edges of $ G $ map to three mutually adjancent edges in the Petersen graph.",
    "source_propositions": [
     {
@@ -5827,7 +5827,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "done",
+    "edges": "partial",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5838,8 +5838,8 @@
    "title": "Simultaneous partition of hypergraphs",
    "node_id": 46817,
    "canonical_url": "http://www.openproblemgarden.org/op/simultaneous_partition_of_hypergraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Let $ H_1 $ and $ H_2 $ be two $ r $ -uniform hypergraph on the same vertex set $ V $ . Does there always exist a partition of $ V $ into $ r $ classes $ V_1, \\dots , V_r $ such that for both $ i=1,2 $ , at least $ r!m_i/r^r -o(m_i) $ hyperedges of $ H_i $ meet each of the classes $ V_1, \\dots , V_r $ ?",
    "source_propositions": [
     {
@@ -5881,8 +5881,8 @@
    "title": "The Bollobás-Eldridge-Catlin Conjecture on graph packing",
    "node_id": 48232,
    "canonical_url": "http://www.openproblemgarden.org/op/the_bollobas_eldridge_catlin_conjecture_on_graph_packing",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture (BEC-conjecture) If $ G_1 $ and $ G_2 $ are $ n $ -vertex graphs and $ (\\Delta(G_1) + 1) (\\Delta(G_2) + 1) < n + 1 $ , then $ G_1 $ and $ G_2 $ pack.",
    "source_propositions": [
     {
@@ -5926,8 +5926,8 @@
    "title": "Unit vector flows",
    "node_id": 136,
    "canonical_url": "http://www.openproblemgarden.org/op/unit_vector_flows",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every graph $ G $ without a bridge , there is a flow $ \\phi : E(G) \\rightarrow S^2 = \\{ x \\in {\\mathbb R}^3 : |x| = 1 \\} $ . Conjecture There exists a map $ q:S^2 \\rightarrow \\{-4,-3,-2,-1,1,2,3,4\\} $ so that antipodal points of $ S^2 $ receive opposite values, and so that any three points which are equidistant on a great circle have values which sum to zero.",
    "source_propositions": [
     {
@@ -5964,7 +5964,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -5975,8 +5975,8 @@
    "title": "5-local-tensions",
    "node_id": 411,
    "canonical_url": "http://www.openproblemgarden.org/op/5_local_tensions",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture There exists a fixed constant $ c $ (probably $ c=4 $ suffices) so that every embedded (loopless) graph with edge-width $ \\ge c $ has a 5-local-tension.",
    "source_propositions": [
     {
@@ -6022,8 +6022,8 @@
    "title": "Are almost all graphs determined by their spectrum?",
    "node_id": 48368,
    "canonical_url": "http://www.openproblemgarden.org/op/are_almost_all_graphs_determined_by_their_spectrum",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Are almost all graphs uniquely determined by the spectrum of their adjacency matrix?",
    "source_propositions": [
     {
@@ -6065,8 +6065,8 @@
    "title": "Chromatic Number of Common Graphs",
    "node_id": 59952,
    "canonical_url": "http://www.openproblemgarden.org/op/chromatic_number_of_common_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Do common graphs have bounded chromatic number?",
    "source_propositions": [
     {
@@ -6110,8 +6110,8 @@
    "title": "Cores of Cayley graphs",
    "node_id": 125,
    "canonical_url": "http://www.openproblemgarden.org/op/cores_of_cayley_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ M $ be an abelian group. Is the core of a Cayley graph (on some power of $ M $ ) a Cayley graph (on some power of $ M $ )?",
    "source_propositions": [
     {
@@ -6156,8 +6156,8 @@
    "title": "Hamilton decomposition of prisms over 3-connected cubic planar graphs",
    "node_id": 47356,
    "canonical_url": "http://www.openproblemgarden.org/op/decomposing_the_prism_of_a_3_connected_cubic_planar_graphs_in_hamilton_cycles",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every prism over a $ 3 $ -connected cubic planar graph can be decomposed into two Hamilton cycles.",
    "source_propositions": [
     {
@@ -6202,8 +6202,8 @@
    "title": "Every 4-connected toroidal graph has a Hamilton cycle",
    "node_id": 46943,
    "canonical_url": "http://www.openproblemgarden.org/op/every_4_connected_toroidal_graph_has_a_hamilton_cycle",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every 4-connected toroidal graph has a Hamilton cycle.",
    "source_propositions": [
     {
@@ -6248,8 +6248,8 @@
    "title": "Graphs with a forbidden induced tree are chi-bounded",
    "node_id": 36936,
    "canonical_url": "http://www.openproblemgarden.org/op/graphs_with_a_forbidden_induced_tree_are_chi_bounded",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Say that a family $ {\\mathcal F} $ of graphs is $ \\chi $ - bounded if there exists a function $ f: {\\mathbb N} \\rightarrow {\\mathbb N} $ so that every $ G \\in {\\mathcal F} $ satisfies $ \\chi(G) \\le f (\\omega(G)) $ . Conjecture For every fixed tree $ T $ , the family of graphs with no induced subgraph isomorphic to $ T $ is $ \\chi $ -bounded.",
    "source_propositions": [
     {
@@ -6283,7 +6283,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6294,8 +6294,8 @@
    "title": "The intersection of two perfect matchings",
    "node_id": 543,
    "canonical_url": "http://www.openproblemgarden.org/op/intersecting_two_perfect_matchings",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every bridgeless cubic graph has two perfect matchings $ M_1 $ , $ M_2 $ so that $ M_1 \\cap M_2 $ does not contain an odd edge-cut.",
    "source_propositions": [
     {
@@ -6328,7 +6328,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6339,8 +6339,8 @@
    "title": "Lovász Path Removal Conjecture",
    "node_id": 46629,
    "canonical_url": "http://www.openproblemgarden.org/op/lovasz_path_removal_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture There is an integer-valued function $ f(k) $ such that if $ G $ is any $ f(k) $ -connected graph and $ x $ and $ y $ are any two vertices of $ G $ , then there exists an induced path $ P $ with ends $ x $ and $ y $ such that $ G-V(P) $ is $ k $ -connected.",
    "source_propositions": [
     {
@@ -6385,8 +6385,8 @@
    "title": "Number of Cliques in Minor-Closed Classes",
    "node_id": 37081,
    "canonical_url": "http://www.openproblemgarden.org/op/number_of_cliques_in_minor_closed_classes",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Is there a constant $ c $ such that every $ n $ -vertex $ K_t $ -minor-free graph has at most $ c^tn $ cliques?",
    "source_propositions": [
     {
@@ -6420,7 +6420,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6431,8 +6431,8 @@
    "title": "PTAS for feedback arc set in tournaments",
    "node_id": 47646,
    "canonical_url": "http://www.openproblemgarden.org/op/ptas_for_feedback_arc_set_in_tournaments",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Is there a polynomial time approximation scheme for the feedback arc set problem for the class of tournaments?",
    "source_propositions": [
     {
@@ -6477,8 +6477,8 @@
    "title": "Universal point sets for planar graphs",
    "node_id": 326,
    "canonical_url": "http://www.openproblemgarden.org/op/small_universal_point_sets_for_planar_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "We say that a set $ P \\subseteq {\\mathbb R}^2 $ is $ n $ - universal if every $ n $ vertex planar graph can be drawn in the plane so that each vertex maps to a distinct point in $ P $ , and all edges are (non-intersecting) straight line segments. Question Does there exist an $ n $ -universal set of size $ O(n) $ ?",
    "source_propositions": [
     {
@@ -6522,8 +6522,8 @@
    "title": "The Borodin-Kostochka Conjecture",
    "node_id": 37670,
    "canonical_url": "http://www.openproblemgarden.org/op/the_borodin_kostochka_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every graph with maximum degree $ \\Delta \\geq 9 $ has chromatic number at most $ \\max\\{\\Delta-1, \\omega\\} $ .",
    "source_propositions": [
     {
@@ -6555,7 +6555,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -6566,8 +6566,8 @@
    "title": "Universal highly arc transitive digraphs",
    "node_id": 677,
    "canonical_url": "http://www.openproblemgarden.org/op/universal_highly_arc_transitive_digraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "An alternating walk in a digraph is a walk $ v_0,e_1,v_1,\\ldots,v_m $ so that the vertex $ v_i $ is either the head of both $ e_i $ and $ e_{i+1} $ or the tail of both $ e_i $ and $ e_{i+1} $ for every $ 1 \\le i \\le m-1 $ . A digraph is universal if for every pair of edges $ e,f $ , there is an alternating walk containing both $ e $ and $ f $ Question Does there exist a locally finite highly arc transitive digraph which is universal?",
    "source_propositions": [
     {
@@ -6613,8 +6613,8 @@
    "title": "A generalization of Vizing's Theorem?",
    "node_id": 182,
    "canonical_url": "http://www.openproblemgarden.org/op/a_generalization_of_vizings_theorem",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ H $ be a simple $ d $ - uniform hypergraph, and assume that every set of $ d-1 $ points is contained in at most $ r $ edges. Then there exists an $ r+d-1 $ -edge-coloring so that any two edges which share $ d-1 $ vertices have distinct colors.",
    "source_propositions": [
     {
@@ -6658,8 +6658,8 @@
    "title": "Are critical k-forests tight?",
    "node_id": 547,
    "canonical_url": "http://www.openproblemgarden.org/op/are_critical_k_forests_tight",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ H $ be a $ k $ - uniform hypergraph. If $ H $ is a critical $ k $ -forest, then it is a $ k $ -tree.",
    "source_propositions": [
     {
@@ -6704,8 +6704,8 @@
    "title": "Chromatic number of 3/3-power of graph",
    "node_id": 60055,
    "canonical_url": "http://www.openproblemgarden.org/op/chromatic_number_of_frac_3_3_power_of_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Let $ G $ be a graph and $ m,n\\in \\mathbb{N} $ . The graph $ G^{\\frac{m}{n}} $ is defined to be the $ m $ -power of the $ n $ -subdivision of $ G $ . In other words, $ G^{\\frac{m}{n}}=(G^{\\frac{1}{n}})^m $ . Conjecture Let $ G $ be a graph with $ \\Delta(G)\\geq 2 $ . Then $ \\chi(G^{\\frac{3}{3}})\\leq 2\\Delta(G)+1 $ .",
    "source_propositions": [
     {
@@ -6750,8 +6750,8 @@
    "title": "Cores of strongly regular graphs",
    "node_id": 824,
    "canonical_url": "http://www.openproblemgarden.org/op/cores_of_strongly_regular_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Does every strongly regular graph have either itself or a complete graph as a core ?",
    "source_propositions": [
     {
@@ -6797,8 +6797,8 @@
    "title": "Degenerate colorings of planar graphs",
    "node_id": 798,
    "canonical_url": "http://www.openproblemgarden.org/op/degenerate_colorings_of_planar_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "A graph $ G $ is $ k $ - degenerate if every subgraph of $ G $ has a vertex of degree $ \\le k $ . Conjecture Every simple planar graph has a 5-coloring so that for $ 1 \\le k \\le 4 $ , the union of any $ k $ color classes induces a $ (k-1) $ -degenerate graph.",
    "source_propositions": [
     {
@@ -6843,8 +6843,8 @@
    "title": "Every prism over a 3-connected planar graph is hamiltonian",
    "node_id": 47285,
    "canonical_url": "http://www.openproblemgarden.org/op/every_prism_over_a_3_connected_planar_graph_is_hamiltonian",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a $ 3 $ -connected planar graph, then $ G\\square K_2 $ has a Hamilton cycle.",
    "source_propositions": [
     {
@@ -6889,8 +6889,8 @@
    "title": "Grunbaum's Conjecture",
    "node_id": 177,
    "canonical_url": "http://www.openproblemgarden.org/op/grunbaums_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a simple loopless triangulation of an orientable surface , then the dual of $ G $ is 3-edge-colorable.",
    "source_propositions": [
     {
@@ -6936,8 +6936,8 @@
    "title": "Jaeger's modular orientation conjecture",
    "node_id": 130,
    "canonical_url": "http://www.openproblemgarden.org/op/jaegers_modular_orientation_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every $ 4k $ - edge-connected graph can be oriented so that $ {\\mathit indegree}(v) - {\\mathit outdegree}(v) \\cong 0 $ (mod $ 2k+1 $ ) for every vertex $ v $ .",
    "source_propositions": [
     {
@@ -6982,8 +6982,8 @@
    "title": "(m,n)-cycle covers",
    "node_id": 139,
    "canonical_url": "http://www.openproblemgarden.org/op/m_n_cycle_covers",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every bridgeless graph has a (5,2)-cycle-cover.",
    "source_propositions": [
     {
@@ -7028,12 +7028,12 @@
    "title": "Obstacle number of planar graphs",
    "node_id": 37357,
    "canonical_url": "http://www.openproblemgarden.org/op/obstacle_number_of_planar_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Does there exist a planar graph with obstacle number greater than 1? Is there some $ k $ such that every planar graph has obstacle number at most $ k $ ?",
    "source_propositions": [
     {
-     "kind": "Statement",
+     "kind": "Problem",
      "text": "Does there exist a planar graph with obstacle number greater than 1? Is there some $ k $ such that every planar graph has obstacle number at most $ k $ ?"
     }
    ],
@@ -7073,8 +7073,8 @@
    "title": "Ramsey properties of Cayley graphs",
    "node_id": 372,
    "canonical_url": "http://www.openproblemgarden.org/op/ramsey_properties_of_cayley_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture There exists a fixed constant $ c $ so that every abelian group $ G $ has a subset $ S \\subseteq G $ with $ -S = S $ so that the Cayley graph $ {\\mathit Cayley}(G,S) $ has no clique or independent set of size $ > c \\log |G| $ .",
    "source_propositions": [
     {
@@ -7120,8 +7120,8 @@
    "title": "Splitting a digraph with minimum outdegree constraints",
    "node_id": 46456,
    "canonical_url": "http://www.openproblemgarden.org/op/splitting_a_digraph_with_minimum_outdegree_constraints",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Is there a minimum integer $ f(d) $ such that the vertices of any digraph with minimum outdegree $ d $ can be partitioned into two classes so that the minimum outdegree of the subgraph induced by each class is at least $ d $ ?",
    "source_propositions": [
     {
@@ -7163,8 +7163,8 @@
    "title": "The circular embedding conjecture",
    "node_id": 138,
    "canonical_url": "http://www.openproblemgarden.org/op/the_circular_embedding_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every 2- connected graph may be embedded in a surface so that the boundary of each face is a cycle.",
    "source_propositions": [
     {
@@ -7198,7 +7198,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7209,8 +7209,8 @@
    "title": "Universal Steiner triple systems",
    "node_id": 624,
    "canonical_url": "http://www.openproblemgarden.org/op/universal_steiner_triple_systems",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Which Steiner triple systems are universal?",
    "source_propositions": [
     {
@@ -7255,8 +7255,8 @@
    "title": "A gold-grabbing game",
    "node_id": 37079,
    "canonical_url": "http://www.openproblemgarden.org/op/a_gold_grabbing_game",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Setup Fix a tree $ T $ and for every vertex $ v \\in V(T) $ a non-negative integer $ g(v) $ which we think of as the amount of gold at $ v $ . 2-Player game Players alternate turns. On each turn, a player chooses a leaf vertex $ v $ of the tree, takes the gold at this vertex, and then deletes $ v $ . The game ends when the tree is empty, and the winner is the player who has accumulated the most gold. Problem Find optimal strategies for the players.",
    "source_propositions": [
     {
@@ -7301,8 +7301,8 @@
    "title": "Are different notions of the crossing number the same?",
    "node_id": 37117,
    "canonical_url": "http://www.openproblemgarden.org/op/are_different_notions_of_the_crossing_number_the_same",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Does the following equality hold for every graph $ G $ ? \\[ \\text{pair-cr}(G) = \\text{cr}(G) \\] The crossing number $ \\text{cr}(G) $ of a graph $ G $ is the minimum number of edge crossings in any drawing of $ G $ in the plane. In the pairwise crossing number $ \\text{pair-cr}(G) $ , we minimize the number of pairs of edges that cross.",
    "source_propositions": [
     {
@@ -7345,8 +7345,8 @@
    "title": "Chromatic number of random lifts of complete graphs",
    "node_id": 37656,
    "canonical_url": "http://www.openproblemgarden.org/op/chromatic_number_of_random_lifts_of_complete_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Is the chromatic number of a random lift of $ K_5 $ concentrated on a single value?",
    "source_propositions": [
     {
@@ -7390,8 +7390,8 @@
    "title": "Counting 3-colorings of the hex lattice",
    "node_id": 1764,
    "canonical_url": "http://www.openproblemgarden.org/op/counting_3_colorings_of_the_hex_lattice",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Find $ \\lim_{n \\rightarrow \\infty} (\\chi( H_n , 3)) ^{ 1 / |V(H_n)| } $ .",
    "source_propositions": [
     {
@@ -7435,8 +7435,8 @@
    "title": "Directed path of length twice the minimum outdegree",
    "node_id": 46359,
    "canonical_url": "http://www.openproblemgarden.org/op/directed_cycle_of_length_twice_the_minimum_outdegree",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every oriented graph with minimum outdegree $ k $ contains a directed path of length $ 2k $ .",
    "source_propositions": [
     {
@@ -7480,8 +7480,8 @@
    "title": "Exact colorings of graphs",
    "node_id": 37229,
    "canonical_url": "http://www.openproblemgarden.org/op/exact_colorings_of_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For $ c \\geq m \\geq 1 $ , let $ P(c,m) $ be the statement that given any exact $ c $ -coloring of the edges of a complete countably infinite graph (that is, a coloring with $ c $ colors all of which must be used at least once), there exists an exactly $ m $ -colored countably infinite complete subgraph. Then $ P(c,m) $ is true if and only if $ m=1 $ , $ m=2 $ , or $ c=m $ .",
    "source_propositions": [
     {
@@ -7523,8 +7523,8 @@
    "title": "Half-integral flow polynomial values",
    "node_id": 348,
    "canonical_url": "http://www.openproblemgarden.org/op/half_integral_flow_polynomial_values",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Let $ \\Phi(G,x) $ be the flow polynomial of a graph $ G $ . So for every positive integer $ k $ , the value $ \\Phi(G,k) $ equals the number of nowhere-zero $ k $ -flows in $ G $ . Conjecture $ \\Phi(G,5.5) > 0 $ for every 2-edge-connected graph $ G $ .",
    "source_propositions": [
     {
@@ -7557,7 +7557,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7568,8 +7568,8 @@
    "title": "Jones' conjecture",
    "node_id": 638,
    "canonical_url": "http://www.openproblemgarden.org/op/jones_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "For a graph $ G $ , let $ cp(G) $ denote the cardinality of a maximum cycle packing (collection of vertex disjoint cycles) and let $ cc(G) $ denote the cardinality of a minimum feedback vertex set (set of vertices $ X $ so that $ G-X $ is acyclic). Conjecture For every planar graph $ G $ , $ cc(G)\\leq 2cp(G) $ .",
    "source_propositions": [
     {
@@ -7603,7 +7603,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7614,8 +7614,8 @@
    "title": "Mapping planar graphs to odd cycles",
    "node_id": 412,
    "canonical_url": "http://www.openproblemgarden.org/op/mapping_planar_graphs_to_odd_cycles",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every planar graph of girth $ \\ge 4k $ has a homomorphism to $ C_{2k+1} $ .",
    "source_propositions": [
     {
@@ -7649,7 +7649,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -7660,8 +7660,8 @@
    "title": "Odd-cycle transversal in triangle-free graphs",
    "node_id": 46824,
    "canonical_url": "http://www.openproblemgarden.org/op/odd_cycle_transversal_in_triangle_free_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a simple triangle-free graph, then there is a set of at most $ n^2/25 $ edges whose deletion destroys every odd cycle.",
    "source_propositions": [
     {
@@ -7705,8 +7705,8 @@
    "title": "Random stable roommates",
    "node_id": 743,
    "canonical_url": "http://www.openproblemgarden.org/op/random_stable_roommates",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture The probability that a random instance of the stable roommates problem on $ n \\in 2{\\mathbb N} $ people admits a solution is $ \\Theta( n ^{-1/4} ) $ .",
    "source_propositions": [
     {
@@ -7750,8 +7750,8 @@
    "title": "Stable set meeting all longest directed paths",
    "node_id": 46443,
    "canonical_url": "http://www.openproblemgarden.org/op/stable_set_meeting_all_longest_directed_paths",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every digraph has a stable set meeting all longest directed paths",
    "source_propositions": [
     {
@@ -7797,8 +7797,8 @@
    "title": "The Crossing Number of the Complete Bipartite Graph",
    "node_id": 310,
    "canonical_url": "http://www.openproblemgarden.org/op/the_crossing_number_of_the_complete_bipartite_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "The crossing number $ cr(G) $ of $ G $ is the minimum number of crossings in all drawings of $ G $ in the plane. Conjecture $ \\displaystyle cr(K_{m,n}) = \\floor{\\frac m2} \\floor{\\frac {m-1}2} \\floor{\\frac n2} \\floor{\\frac {n-1}2} $",
    "source_propositions": [
     {
@@ -7842,8 +7842,8 @@
    "title": "Vertex Coloring of graph fractional powers",
    "node_id": 37316,
    "canonical_url": "http://www.openproblemgarden.org/op/vertex_coloring_of_graph_fractional_powers",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be a graph and $ k $ be a positive integer. The $ k- $ power of $ G $ , denoted by $ G^k $ , is defined on the vertex set $ V(G) $ , by connecting any two distinct vertices $ x $ and $ y $ with distance at most $ k $ . In other words, $ E(G^k)=\\{xy:1\\leq d_G(x,y)\\leq k\\} $ . Also $ k- $ subdivision of $ G $ , denoted by $ G^\\frac{1}{k} $ , is constructed by replacing each edge $ ij $ of $ G $ with a path of length $ k $ . Note that for $ k=1 $ , we have $ G^\\frac{1}{1}=G^1=G $ . Now we can define the fractional power of a graph as follows: Let $ G $ be a graph and $ m,n\\in \\mathbb{N} $ . The graph $ G^{\\frac{m}{n}} $ is defined by the $ m- $ power of the $ n- $ subdivision of $ G $ . In other words $ G^{\\frac{m}{n}}\\isdef (G^{\\frac{1}{n}})^m $ . Conjecture. Let $ G $ be a connected graph with $ \\Delta(G)\\geq3 $ and $ m $ be a positive integer greater than 1. Then for any positive integer $ n>m $ , we have $ \\chi(G^{\\frac{m}{n}})=\\omega(G^\\frac{m}{n}) $ . In [1], it was shown that this conjecture is true in some special cases.",
    "source_propositions": [
     {
@@ -7890,8 +7890,8 @@
    "title": "A homomorphism problem for flows",
    "node_id": 134,
    "canonical_url": "http://www.openproblemgarden.org/op/a_homomorphism_problem_for_flows",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ M,M' $ be abelian groups and let $ B \\subseteq M $ and $ B' \\subseteq M' $ satisfy $ B=-B $ and $ B' = -B' $ . If there is a homomorphism from $ Cayley(M,B) $ to $ Cayley(M',B') $ , then every graph with a B-flow has a B'-flow.",
    "source_propositions": [
     {
@@ -7935,8 +7935,8 @@
    "title": "Asymptotic Distribution of Form of Polyhedra",
    "node_id": 36933,
    "canonical_url": "http://www.openproblemgarden.org/op/asymptotic_distribution_of_form_of_polyhedra",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Consider the set of all topologically inequivalent polyhedra with $ k $ edges. Define a form parameter for a polyhedron as $ \\beta:= v/(k+2) $ where $ v $ is the number of vertices. What is the distribution of $ \\beta $ for $ k \\to \\infty $ ?",
    "source_propositions": [
     {
@@ -7980,8 +7980,8 @@
    "title": "Circular choosability of planar graphs",
    "node_id": 37619,
    "canonical_url": "http://www.openproblemgarden.org/op/circular_choosability_of_planar_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Let $ G = (V, E) $ be a graph. If $ p $ and $ q $ are two integers, a $ (p,q) $ -colouring of $ G $ is a function $ c $ from $ V $ to $ \\{0,\\dots,p-1\\} $ such that $ q \\le |c(u)-c(v)| \\le p-q $ for each edge $ uv\\in E $ . Given a list assignment $ L $ of $ G $ , i.e.~a mapping that assigns to every vertex $ v $ a set of non-negative integers, an $ L $ -colouring of $ G $ is a mapping $ c : V \\to N $ such that $ c(v)\\in L(v) $ for every $ v\\in V $ . A list assignment $ L $ is a $ t $ - $ (p,q) $ -list-assignment if $ L(v) \\subseteq \\{0,\\dots,p-1\\} $ and $ |L(v)| \\ge tq $ for each vertex $ v \\in V $ . Given such a list assignment $ L $ , the graph G is $ (p,q) $ - $ L $ -colourable if there exists a $ (p,q) $ - $ L $ -colouring $ c $ , i.e. $ c $ is both a $ (p,q) $ -colouring and an $ L $ -colouring. For any real number $ t \\ge 1 $ , the graph $ G $ is $ t $ - $ (p,q) $ -choosable if it is $ (p,q) $ - $ L $ -colourable for every $ t $ - $ (p,q) $ -list-assignment $ L $ . Last, $ G $ is circularly $ t $ -choosable if it is $ t $ - $ (p,q) $ -choosable for any $ p $ , $ q $ . The circular choosability (or circular list chromatic number or circular choice number) of G is $$cch(G) := \\inf\\{t \\ge 1 : G \\text{ is circularly $t$-choosable}\\}.$$ Problem What is the best upper bound on circular choosability for planar graphs?",
    "source_propositions": [
     {
@@ -8026,8 +8026,8 @@
    "title": "Covering powers of cycles with equivalence subgraphs",
    "node_id": 37325,
    "canonical_url": "http://www.openproblemgarden.org/op/covering_powers_of_cycles_with_equivalence_subgraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Given $ k $ and $ n $ , the graph $ C_{n}^k $ has equivalence covering number $ \\Omega(k) $ .",
    "source_propositions": [
     {
@@ -8071,8 +8071,8 @@
    "title": "Do any three longest paths in a connected graph have a vertex in common?",
    "node_id": 46538,
    "canonical_url": "http://www.openproblemgarden.org/op/do_any_three_longest_paths_in_a_connected_graph_have_a_vertex_in_common",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Do any three longest paths in a connected graph have a vertex in common?",
    "source_propositions": [
     {
@@ -8116,8 +8116,8 @@
    "title": "Extremal problem on the number of tree endomorphism",
    "node_id": 37305,
    "canonical_url": "http://www.openproblemgarden.org/op/extremal_problem_on_the_number_of_tree_endomorphism",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture An endomorphism of a graph is a mapping on the vertex set of the graph which preserves edges. Among all the $ n $ vertices' trees, the star with $ n $ vertices has the most endomorphisms, while the path with $ n $ vertices has the least endomorphisms.",
    "source_propositions": [
     {
@@ -8160,8 +8160,8 @@
    "title": "Hamilton cycle in small d-diregular graphs",
    "node_id": 47028,
    "canonical_url": "http://www.openproblemgarden.org/op/hamilton_cycle_in_small_d_diregular_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "An directed graph is $ k $ -diregular if every vertex has indegree and outdegree at least $ k $ . Conjecture For $ d >2 $ , every $ d $ -diregular oriented graph on at most $ 4d+1 $ vertices has a Hamilton cycle.",
    "source_propositions": [
     {
@@ -8208,8 +8208,8 @@
    "title": "Jorgensen's Conjecture",
    "node_id": 154,
    "canonical_url": "http://www.openproblemgarden.org/op/jorgensens_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every 6- connected graph without a $ K_6 $ minor is apex (planar plus one vertex).",
    "source_propositions": [
     {
@@ -8244,7 +8244,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8255,8 +8255,8 @@
    "title": "Matching cut and girth",
    "node_id": 37364,
    "canonical_url": "http://www.openproblemgarden.org/op/matching_cut_and_girth",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question For every $ d $ does there exists a $ g $ such that every graph with average degree smaller than $ d $ and girth at least $ g $ has a matching-cut?",
    "source_propositions": [
     {
@@ -8302,8 +8302,8 @@
    "title": "Odd cycles and low oddness",
    "node_id": 37182,
    "canonical_url": "http://www.openproblemgarden.org/op/odd_cycles_and_low_oddness",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If in a bridgeless cubic graph $ G $ the cycles of any $ 2 $ -factor are odd, then $ \\omega(G)\\leq 2 $ , where $ \\omega(G) $ denotes the oddness of the graph $ G $ , that is, the minimum number of odd cycles in a $ 2 $ -factor of $ G $ .",
    "source_propositions": [
     {
@@ -8349,8 +8349,8 @@
    "title": "Real roots of the flow polynomial",
    "node_id": 135,
    "canonical_url": "http://www.openproblemgarden.org/op/real_roots_of_the_flow_polynomial",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture All real roots of nonzero flow polynomials are at most 4.",
    "source_propositions": [
     {
@@ -8381,7 +8381,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8392,8 +8392,8 @@
    "title": "Star chromatic index of complete graphs",
    "node_id": 37275,
    "canonical_url": "http://www.openproblemgarden.org/op/star_chromatic_index_of_complete_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Is it possible to color edges of the complete graph $ K_n $ using $ O(n) $ colors, so that the coloring is proper and no 4-cycle and no 4-edge path is using only two colors? Equivalently: is the star chromatic index of $ K_n $ linear in $ n $ ?",
    "source_propositions": [
     {
@@ -8438,8 +8438,8 @@
    "title": "The Crossing Number of the Complete Graph",
    "node_id": 307,
    "canonical_url": "http://www.openproblemgarden.org/op/the_crossing_number_of_the_complete_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "The crossing number $ cr(G) $ of $ G $ is the minimum number of crossings in all drawings of $ G $ in the plane. Conjecture $ \\displaystyle cr(K_n) = \\frac 14 \\floor{\\frac n2} \\floor{\\frac{n-1}2} \\floor{\\frac{n-2}2} \\floor{\\frac{n-3}2} $",
    "source_propositions": [
     {
@@ -8483,8 +8483,8 @@
    "title": "Are vertex minor closed classes chi-bounded?",
    "node_id": 36939,
    "canonical_url": "http://www.openproblemgarden.org/op/vertex_minor_closed_classes_are_chi_bounded",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Is every proper vertex-minor closed class of graphs chi-bounded?",
    "source_propositions": [
     {
@@ -8520,7 +8520,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8531,8 +8531,8 @@
    "title": "Acyclic edge-colouring",
    "node_id": 145,
    "canonical_url": "http://www.openproblemgarden.org/op/acyclic_edge_coloring",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every simple graph with maximum degree $ \\Delta $ has a proper $ (\\Delta+2) $ - edge-colouring so that every cycle contains edges of at least three distinct colours.",
    "source_propositions": [
     {
@@ -8577,8 +8577,8 @@
    "title": "Barnette's Conjecture",
    "node_id": 385,
    "canonical_url": "http://www.openproblemgarden.org/op/barnettes_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every 3-connected cubic planar bipartite graph is Hamiltonian.",
    "source_propositions": [
     {
@@ -8625,8 +8625,8 @@
    "title": "Circular coloring triangle-free subcubic planar graphs",
    "node_id": 401,
    "canonical_url": "http://www.openproblemgarden.org/op/circular_chromatic_number_of_triangle_free_planar_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Does every triangle-free planar graph of maximum degree three have circular chromatic number at most $ \\frac{20}{7} $ ?",
    "source_propositions": [
     {
@@ -8671,8 +8671,8 @@
    "title": "Crossing numbers and coloring",
    "node_id": 37068,
    "canonical_url": "http://www.openproblemgarden.org/op/crossing_numbers_and_coloring",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "We let $ cr(G) $ denote the crossing number of a graph $ G $ . Conjecture Every graph $ G $ with $ \\chi(G) \\ge t $ satisfies $ cr(G) \\ge cr(K_t) $ .",
    "source_propositions": [
     {
@@ -8716,8 +8716,8 @@
    "title": "Does the chromatic symmetric function distinguish between trees?",
    "node_id": 36880,
    "canonical_url": "http://www.openproblemgarden.org/op/does_the_symmetric_chromatic_function_distinguish_trees",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Do there exist non-isomorphic trees which have the same chromatic symmetric function?",
    "source_propositions": [
     {
@@ -8763,8 +8763,8 @@
    "title": "Faithful cycle covers",
    "node_id": 140,
    "canonical_url": "http://www.openproblemgarden.org/op/faithful_cycle_covers",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G = (V,E) $ is a graph, $ p : E \\rightarrow {\\mathbb Z} $ is admissable, and $ p(e) $ is even for every $ e \\in E(G) $ , then $ (G,p) $ has a faithful cover.",
    "source_propositions": [
     {
@@ -8809,8 +8809,8 @@
    "title": "Hamiltonian cycles in line graphs",
    "node_id": 485,
    "canonical_url": "http://www.openproblemgarden.org/op/hamiltonian_cycles_in_line_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every 4-connected line graph is hamiltonian .",
    "source_propositions": [
     {
@@ -8844,7 +8844,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -8855,8 +8855,8 @@
    "title": "Kriesell's Conjecture",
    "node_id": 56233,
    "canonical_url": "http://www.openproblemgarden.org/op/kriesells_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ G $ be a graph and let $ T\\subseteq V(G) $ such that for any pair $ u,v\\in T $ there are $ 2k $ edge-disjoint paths from $ u $ to $ v $ in $ G $ . Then $ G $ contains $ k $ edge-disjoint trees, each of which contains $ T $ .",
    "source_propositions": [
     {
@@ -8902,8 +8902,8 @@
    "title": "Matchings extend to Hamiltonian cycles in hypercubes",
    "node_id": 600,
    "canonical_url": "http://www.openproblemgarden.org/op/matchings_extends_to_hamilton_cycles_in_hypercubes",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Question Does every matching of hypercube extend to a Hamiltonian cycle ?",
    "source_propositions": [
     {
@@ -8949,8 +8949,8 @@
    "title": "Oriented chromatic number of planar graphs",
    "node_id": 494,
    "canonical_url": "http://www.openproblemgarden.org/op/oriented_chromatic_number_of_planar_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "An oriented colouring of an oriented graph is assignment $ c $ of colours to the vertices such that no two arcs receive ordered pairs of colours $ (c_1,c_2) $ and $ (c_2,c_1) $ . It is equivalent to a homomorphism of the digraph onto some tournament of order $ k $ . Problem What is the maximal possible oriented chromatic number of an oriented planar graph?",
    "source_propositions": [
     {
@@ -8997,8 +8997,8 @@
    "title": "Reconstruction conjecture",
    "node_id": 658,
    "canonical_url": "http://www.openproblemgarden.org/op/reconstruction_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "The deck of a graph $ G $ is the multiset consisting of all unlabelled subgraphs obtained from $ G $ by deleting a vertex in all possible ways (counted according to multiplicity). Conjecture If two graphs on $ \\ge 3 $ vertices have the same deck, then they are isomorphic.",
    "source_propositions": [
     {
@@ -9044,8 +9044,8 @@
    "title": "Star chromatic index of cubic graphs",
    "node_id": 37271,
    "canonical_url": "http://www.openproblemgarden.org/op/star_chromatic_index_of_cubic_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "The star chromatic index $ \\chi_s'(G) $ of a graph $ G $ is the minimum number of colors needed to properly color the edges of the graph so that no path or cycle of length four is bi-colored. Question Is it true that for every (sub)cubic graph $ G $ , we have $ \\chi_s'(G) \\le 6 $ ?",
    "source_propositions": [
     {
@@ -9091,8 +9091,8 @@
    "title": "The Crossing Number of the Hypercube",
    "node_id": 313,
    "canonical_url": "http://www.openproblemgarden.org/op/the_crossing_number_of_the_hypercube",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "The crossing number $ cr(G) $ of $ G $ is the minimum number of crossings in all drawings of $ G $ in the plane. The $ d $ -dimensional (hyper)cube $ Q_d $ is the graph whose vertices are all binary sequences of length $ d $ , and two of the sequences are adjacent in $ Q_d $ if they differ in precisely one coordinate. Conjecture $ \\displaystyle \\lim \\frac{cr(Q_d)}{4^d} = \\frac{5}{32} $",
    "source_propositions": [
     {
@@ -9136,8 +9136,8 @@
    "title": "Weak pentagon problem",
    "node_id": 434,
    "canonical_url": "http://www.openproblemgarden.org/op/weak_pentagon_problem",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a cubic graph not containing a triangle, then it is possible to color the edges of $ G $ by five colors, so that the complement of every color class is a bipartite graph.",
    "source_propositions": [
     {
@@ -9172,7 +9172,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9183,8 +9183,8 @@
    "title": "Acyclic list colouring of planar graphs.",
    "node_id": 46940,
    "canonical_url": "http://www.openproblemgarden.org/op/acyclic_list_colouring_of_planar_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every planar graph is acyclically 5-choosable.",
    "source_propositions": [
     {
@@ -9231,8 +9231,8 @@
    "title": "Total Colouring Conjecture",
    "node_id": 815,
    "canonical_url": "http://www.openproblemgarden.org/op/behzads_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture A total coloring of a graph $ G = (V,E) $ is an assignment of colors to the vertices and the edges of $ G $ such that every pair of adjacent vertices, every pair of adjacent edges and every vertex and incident edge pair, receive different colors. The total chromatic number of a graph $ G $ , $ \\chi''(G) $ , equals the minimum number of colors needed in a total coloring of $ G $ . It is an old conjecture of Behzad that for every graph $ G $ , the total chromatic number equals the maximum degree of a vertex in $ G $ , $ \\Delta(G) $ plus one or two. In other words, \\[\\chi''(G)=\\Delta(G)+1\\ \\ or \\ \\ \\Delta(G)+2.\\]",
    "source_propositions": [
     {
@@ -9267,7 +9267,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9278,8 +9278,8 @@
    "title": "Circular colouring the orthogonality graph",
    "node_id": 2040,
    "canonical_url": "http://www.openproblemgarden.org/op/circular_colouring_the_orthogonality_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Let $ {\\mathcal O} $ denote the graph with vertex set consisting of all lines through the origin in $ {\\mathbb R}^3 $ and two vertices adjacent in $ {\\mathcal O} $ if they are perpendicular. Problem Is $ \\chi_c({\\mathcal O}) = 4 $ ?",
    "source_propositions": [
     {
@@ -9323,8 +9323,8 @@
    "title": "Crossing sequences",
    "node_id": 1812,
    "canonical_url": "http://www.openproblemgarden.org/op/crossing_sequences",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ (a_0,a_1,a_2,\\ldots,0) $ be a sequence of nonnegative integers which strictly decreases until $ 0 $ . Then there exists a graph that be drawn on a surface with orientable (nonorientable, resp.) genus $ i $ with $ a_i $ crossings, but not with less crossings.",
    "source_propositions": [
     {
@@ -9368,8 +9368,8 @@
    "title": "Domination in cubic graphs",
    "node_id": 37038,
    "canonical_url": "http://www.openproblemgarden.org/op/domination_in_cubic_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Does every 3-connected cubic graph $ G $ satisfy $ \\gamma(G) \\le \\lceil |G|/3 \\rceil $ ?",
    "source_propositions": [
     {
@@ -9413,8 +9413,8 @@
    "title": "Finding k-edge-outerplanar graph embeddings",
    "node_id": 37218,
    "canonical_url": "http://www.openproblemgarden.org/op/finding_k_edge_outerplanar_graph_embeddings",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture It has been shown that a $ k $ -outerplanar embedding for which $ k $ is minimal can be found in polynomial time. Does a similar result hold for $ k $ -edge-outerplanar graphs?",
    "source_propositions": [
     {
@@ -9458,8 +9458,8 @@
    "title": "Hamiltonian cycles in line graphs of infinite graphs",
    "node_id": 488,
    "canonical_url": "http://www.openproblemgarden.org/op/hamiltonian_cycles_in_line_graphs_of_infinite_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture \\item If $ G $ is a 4-edge-connected locally finite graph, then its line graph is hamiltonian. \\item If the line graph $ L(G) $ of a locally finite graph $ G $ is 4-connected, then $ L(G) $ is hamiltonian.",
    "source_propositions": [
     {
@@ -9493,7 +9493,7 @@
    "legs": {
     "statement": "partial",
     "grounding": "partial",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9504,8 +9504,8 @@
    "title": "Laplacian Degrees of a Graph",
    "node_id": 407,
    "canonical_url": "http://www.openproblemgarden.org/op/laplacian_degrees_of_a_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture If $ G $ is a connected graph on $ n $ vertices, then $ c_k(G) \\ge d_k(G) $ for $ k = 1, 2, \\dots, n-1 $ .",
    "source_propositions": [
     {
@@ -9549,8 +9549,8 @@
    "title": "Melnikov's valency-variety problem",
    "node_id": 46575,
    "canonical_url": "http://www.openproblemgarden.org/op/melnikovs_valency_variety_problem",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem The valency-variety $ w(G) $ of a graph $ G $ is the number of different degrees in $ G $ . Is the chromatic number of any graph $ G $ with at least two vertices greater than $$\\ceil{ \\frac{\\floor{w(G)/2}}{|V(G)| - w(G)} } ~ ?$$",
    "source_propositions": [
     {
@@ -9595,8 +9595,8 @@
    "title": "Oriented trees in n-chromatic digraphs",
    "node_id": 46167,
    "canonical_url": "http://www.openproblemgarden.org/op/oriented_trees_in_n_chromatic_digraphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every digraph with chromatic number at least $ 2k-2 $ contains every oriented tree of order $ k $ as a subdigraph.",
    "source_propositions": [
     {
@@ -9631,7 +9631,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9642,8 +9642,8 @@
    "title": "Reed's omega, delta, and chi conjecture",
    "node_id": 335,
    "canonical_url": "http://www.openproblemgarden.org/op/reeds_omega_delta_and_chi_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "For a graph $ G $ , we define $ \\Delta(G) $ to be the maximum degree, $ \\omega(G) $ to be the size of the largest clique subgraph, and $ \\chi(G) $ to be the chromatic number of $ G $ . Conjecture $ \\chi(G) \\le \\ceil{\\frac{1}{2}(\\Delta(G)+1) + \\frac{1}{2}\\omega(G)} $ for every graph $ G $ .",
    "source_propositions": [
     {
@@ -9676,7 +9676,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9687,8 +9687,8 @@
    "title": "Strong 5-cycle double cover conjecture",
    "node_id": 37241,
    "canonical_url": "http://www.openproblemgarden.org/op/strong_5_cycle_double_cover_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ C $ be a circuit in a bridgeless cubic graph $ G $ . Then there is a five cycle double cover of $ G $ such that $ C $ is a subgraph of one of these five cycles.",
    "source_propositions": [
     {
@@ -9733,8 +9733,8 @@
    "title": "The Erdös-Hajnal Conjecture",
    "node_id": 162,
    "canonical_url": "http://www.openproblemgarden.org/op/the_erdos_hajnal_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every fixed graph $ H $ , there exists a constant $ \\delta(H) $ , so that every graph $ G $ without an induced subgraph isomorphic to $ H $ contains either a clique or an independent set of size $ |V(G)|^{\\delta(H)} $ .",
    "source_propositions": [
     {
@@ -9770,7 +9770,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9781,8 +9781,8 @@
    "title": "Weak saturation of the cube in the clique",
    "node_id": 60013,
    "canonical_url": "http://www.openproblemgarden.org/op/weak_saturation_of_the_cube_in_the_clique",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem Determine $ \\text{wsat}(K_n,Q_3) $ .",
    "source_propositions": [
     {
@@ -9828,8 +9828,8 @@
    "title": "Ádám's Conjecture",
    "node_id": 46432,
    "canonical_url": "http://www.openproblemgarden.org/op/adams_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every digraph with at least one directed cycle has an arc whose reversal reduces the number of directed cycles.",
    "source_propositions": [
     {
@@ -9874,8 +9874,8 @@
    "title": "Beneš Conjecture (graph-theoretic form)",
    "node_id": 37210,
    "canonical_url": "http://www.openproblemgarden.org/op/bene_conjecture_graph_theoretic_form_0",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Problem ( $ \\dag $ ) Find a sufficient condition for a straight $ \\ell $ -stage graph to be rearrangeable. In particular, what about a straight uniform graph? Conjecture ( $ \\diamond $ ) Let $ L $ be a simple regular ordered $ 2 $ -stage graph. Suppose that the graph $ L^m $ is externally connected, for some $ m\\ge1 $ . Then the graph $ L^{2m} $ is rearrangeable.",
    "source_propositions": [
     {
@@ -9912,7 +9912,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -9923,8 +9923,8 @@
    "title": "Circular flow number of regular class 1 graphs",
    "node_id": 59994,
    "canonical_url": "http://www.openproblemgarden.org/op/circular_flow_number_of_regular_class_1_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "A nowhere-zero $ r $ -flow $ (D(G),\\phi) $ on $ G $ is an orientation $ D $ of $ G $ together with a function $ \\phi $ from the edge set of $ G $ into the real numbers such that $ 1 \\leq |\\phi(e)| \\leq r-1 $ , for all $ e \\in E(G) $ , and $ \\sum_{e \\in E^+(v)}\\phi(e) = \\sum_{e \\in E^-(v)}\\phi(e), \\textrm{ for all } v \\in V(G) $ . The circular flow number of $ G $ is inf $ \\{ r | G $ has a nowhere-zero $ r $ -flow $ \\} $ , and it is denoted by $ F_c(G) $ . A graph with maximum vertex degree $ k $ is a class 1 graph if its edge chromatic number is $ k $ . Conjecture Let $ t \\geq 1 $ be an integer and $ G $ a $ (2t+1) $ -regular graph. If $ G $ is a class 1 graph, then $ F_c(G) \\leq 2 + \\frac{2}{t} $ .",
    "source_propositions": [
     {
@@ -9967,8 +9967,8 @@
    "title": "Cycle double cover conjecture",
    "node_id": 137,
    "canonical_url": "http://www.openproblemgarden.org/op/cycle_double_cover_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every graph with no bridge , there is a list of cycles so that every edge is contained in exactly two.",
    "source_propositions": [
     {
@@ -10012,8 +10012,8 @@
    "title": "Domination in plane triangulations",
    "node_id": 36922,
    "canonical_url": "http://www.openproblemgarden.org/op/domination_in_plane_triangulations",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every sufficiently large plane triangulation $ G $ has a dominating set of size $ \\le \\frac{1}{4} |V(G)| $ .",
    "source_propositions": [
     {
@@ -10057,8 +10057,8 @@
    "title": "Forcing a 2-regular minor",
    "node_id": 59911,
    "canonical_url": "http://www.openproblemgarden.org/op/forcing_a_2_regular_minor",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every graph with average degree at least $ \\frac{4}{3}t-2 $ contains every 2-regular graph on $ t $ vertices as a minor.",
    "source_propositions": [
     {
@@ -10102,8 +10102,8 @@
    "title": "Hamiltonian cycles in powers of infinite graphs",
    "node_id": 490,
    "canonical_url": "http://www.openproblemgarden.org/op/hamiltonian_cycles_in_powers_of_infinite_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture \\item If $ G $ is a countable connected graph then its third power is hamiltonian. \\item If $ G $ is a 2-connected countable graph then its square is hamiltonian.",
    "source_propositions": [
     {
@@ -10147,8 +10147,8 @@
    "title": "Large acyclic induced subdigraph in a planar oriented graph",
    "node_id": 52197,
    "canonical_url": "http://www.openproblemgarden.org/op/large_acyclic_induced_subdigraph_in_a_planar_oriented_graph",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Every planar oriented graph $ D $ has an acyclic induced subdigraph of order at least $ \\frac{3}{5} |V(D)| $ .",
    "source_propositions": [
     {
@@ -10183,7 +10183,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "partial",
+    "edges": "todo",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -10194,8 +10194,8 @@
    "title": "Minimal graphs with a prescribed number of spanning trees",
    "node_id": 37420,
    "canonical_url": "http://www.openproblemgarden.org/op/minimal_graphs_with_a_prescribed_number_of_spanning_trees",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ n \\geq 3 $ be an integer and let $ \\alpha(n) $ denote the least integer $ k $ such that there exists a simple graph on $ k $ vertices having precisely $ n $ spanning trees. Then $ \\alpha(n) = o(\\log{n}). $",
    "source_propositions": [
     {
@@ -10238,8 +10238,8 @@
    "title": "Packing T-joins",
    "node_id": 144,
    "canonical_url": "http://www.openproblemgarden.org/op/packing_t_joins",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture There exists a fixed constant $ c $ (probably $ c=1 $ suffices) so that every graft with minimum $ T $ -cut size at least $ k $ contains a $ T $ -join packing of size at least $ (2/3)k-c $ .",
    "source_propositions": [
     {
@@ -10285,8 +10285,8 @@
    "title": "Ryser's conjecture",
    "node_id": 165,
    "canonical_url": "http://www.openproblemgarden.org/op/rysers_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture Let $ H $ be an $ r $ - uniform $ r $ -partite hypergraph. If $ \\nu $ is the maximum number of pairwise disjoint edges in $ H $ , and $ \\tau $ is the size of the smallest set of vertices which meets every edge, then $ \\tau \\le (r-1) \\nu $ .",
    "source_propositions": [
     {
@@ -10319,7 +10319,7 @@
    "legs": {
     "statement": "done",
     "grounding": "done",
-    "edges": "todo",
+    "edges": "done",
     "correspondence": "todo",
     "audit_page": "todo"
    },
@@ -10330,8 +10330,8 @@
    "title": "Strong colorability",
    "node_id": 171,
    "canonical_url": "http://www.openproblemgarden.org/op/strong_colorability",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Let $ r $ be a positive integer. We say that a graph $ G $ is strongly $ r $ -colorable if for every partition of the vertices to sets of size at most $ r $ there is a proper $ r $ -coloring of $ G $ in which the vertices in each set of the partition have distinct colors. Conjecture If $ \\Delta $ is the maximal degree of a graph $ G $ , then $ G $ is strongly $ 2 \\Delta $ -colorable.",
    "source_propositions": [
     {
@@ -10376,8 +10376,8 @@
    "title": "The three 4-flows conjecture",
    "node_id": 132,
    "canonical_url": "http://www.openproblemgarden.org/op/three_4_flows_conjecture",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture For every graph $ G $ with no bridge , there exist three disjoint sets $ A_1,A_2,A_3 \\subseteq E(G) $ with $ A_1 \\cup A_2 \\cup A_3 = E(G) $ so that $ G \\setminus A_i $ has a nowhere-zero 4-flow for $ 1 \\le i \\le 3 $ .",
    "source_propositions": [
     {
@@ -10421,8 +10421,8 @@
    "title": "Weighted colouring of hexagonal graphs",
    "node_id": 47511,
    "canonical_url": "http://www.openproblemgarden.org/op/weighted_colouring_of_hexagonal_graphs",
-   "source_commit_repo": "f6901fb371155678980a84306f6208fa0f166a6b",
-   "source_commit_problems_json": "27aec7fadb54b371fdee44e51e96a5f525c372a0",
+   "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+   "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
    "source_text": "Conjecture There is an absolute constant $ c $ such that for every hexagonal graph $ G $ and vertex weighting $ p:V(G)\\rightarrow \\mathbb{N} $ , $$\\chi(G,p) \\leq \\frac{9}{8}\\omega(G,p) + c $$",
    "source_propositions": [
     {

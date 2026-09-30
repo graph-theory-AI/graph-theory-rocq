@@ -2,15 +2,17 @@
 """Build the validated 227-row corpus manifest (v2 — review fixes 2026-06-26):
 valid+unique Rocq formal_names, no empty source_propositions, exact status_semantics for all
 18 non-open records, resolved routing, corrected existing-node mapping, precise Ádám encoding."""
-import json, re, os
+import json, re, os, sys
 from collections import Counter, OrderedDict
 
 META = os.path.dirname(os.path.abspath(__file__))           # graph-theory-rocq/meta
 REPO = os.path.dirname(META)                                # graph-theory-rocq (monorepo root)
-GC = os.environ.get("GRAPH_CONJECTURES",                    # ~/Recherche/graph-conjectures
-                    os.path.join(os.path.dirname(os.path.dirname(REPO)), "graph-conjectures"))
-SRC_COMMIT_REPO = "f6901fb371155678980a84306f6208fa0f166a6b"
-SRC_COMMIT_PROBLEMS = "27aec7fadb54b371fdee44e51e96a5f525c372a0"
+sys.path.insert(0, META)
+import corpus_registry as REG
+GC = REG.graph_conjectures_dir()                            # the nested graph-conjectures clone
+# HEAD of the clone, and the last commit touching data/problems.json (the OPG source array).
+SRC_COMMIT_REPO = "b72c5857060addbe4523016e88ae3aa626e958fd"
+SRC_COMMIT_PROBLEMS = "56fa4523d69544a34c6df4280302fcc2af3943fe"
 
 prob = {p['slug']: p for p in json.load(open(f"{GC}/data/problems.json"))}
 # raw classifier output committed in meta/ (the manifest's upstream); GRAPH_CONJECTURES env

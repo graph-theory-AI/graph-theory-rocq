@@ -125,7 +125,7 @@
   "axv_1507_01120_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x151-x170-batch1",
@@ -135,7 +135,7 @@
   "axv_1507_08208_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x47-packing-clean1",
@@ -276,7 +276,7 @@
   "axv_1604_07976_00": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x151-x170-batch1",
@@ -286,7 +286,7 @@
   "axv_1604_07976_01": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x151-x170-batch1",
@@ -306,7 +306,7 @@
   "axv_1605_07411_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -376,7 +376,7 @@
   "axv_1606_06810_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "asymptotics-foundation-retarget",
@@ -386,7 +386,7 @@
   "axv_1608_03040_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -396,7 +396,7 @@
   "axv_1608_03040_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -406,7 +406,7 @@
   "axv_1608_03040_02": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x45-digraph-clean1",
@@ -416,7 +416,7 @@
   "axv_1608_03040_03": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -426,7 +426,7 @@
   "axv_1608_03040_04": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x1-reconcile",
@@ -501,7 +501,7 @@
   "axv_1609_00314_00": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x171-x190-batch1",
@@ -540,17 +540,17 @@
    "audit_page": "todo",
    "commit": "x2-clean11",
    "package": "digraph-theory",
-   "note": "Authored in X2.v:mader_delta0_transitive_tournament_statement. Encodes Conjecture 3 as existence of the least minimum-semidegree Mader bound for subdivisions of TT_k."
+   "note": "Authored in X2.v:mader_delta0_transitive_tournament_statement. Encodes Conjecture 3 as existence of the least minimum-semidegree Mader bound for subdivisions of TT_k. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS-WITH-NOTE -- the 0 < #|D| guard is the minimal faithful repair (the pointwise semidegree condition admits the vertexless host, which cannot contain a subdivision of the nonempty TT k; paper Conjecture 3 of arXiv:1610.00876 speaks of digraphs with delta^0 >= m). Teeth (x2_delta0_unguarded_false spells the old body inline and refutes it at k = 1) and non-vacuity (x2_delta0_hyp"
   },
   "axv_1610_00876_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x2-clean11",
    "package": "digraph-theory",
-   "note": "Authored in X2.v:oriented_trees_delta_plus_maderian_statement. Encodes Conjecture 4: every oriented tree has some minimum-outdegree bound forcing a subdivision."
+   "note": "Authored in X2.v:oriented_trees_delta_plus_maderian_statement. Encodes Conjecture 4: every oriented tree has some minimum-outdegree bound forcing a subdivision. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS -- minimal guard 0 < #|D| inside mader_delta_plus_bound; Conjecture 4 of arXiv:1610.00876 ('every oriented tree is delta^+-maderian') quantifies over digraphs of large minimum out-degree, which have vertices. x2_delta_plus_unguarded_false refutes the old body at the one-vertex tree, x2_delta_plus_hyps_nonvacuous and x2_oriented_tree_TT2 inhabit the hypotheses. The guarded row is n"
   },
   "axv_1610_00876_02": {
    "statement": "done",
@@ -560,17 +560,17 @@
    "audit_page": "todo",
    "commit": "x2-clean11",
    "package": "digraph-theory",
-   "note": "Authored in X2.v:delta_plus_maderian_disjoint_union_statement. Encodes Conjecture 7: delta-plus-maderian digraphs are closed under disjoint union."
+   "note": "Authored in X2.v:delta_plus_maderian_disjoint_union_statement. Encodes Conjecture 7: delta-plus-maderian digraphs are closed under disjoint union. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS-WITH-NOTE -- the body is unchanged and inherits the guard through delta_plus_maderian; this STRENGTHENS the row from vacuously true (unguarded delta_plus_maderian F was false for every nonempty F) to the genuine Conjecture 7 of arXiv:1610.00876. The inheritance note in the doc block is accurate."
   },
   "axv_1610_00876_03": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x52-digraph-clean1",
    "package": "digraph-theory",
-   "note": "Authored in X52.v:oriented_tree_mader_chi_linear_bound_statement. Encodes Conjecture 11: every oriented tree T of order k has chromatic Mader threshold at most 2k-2."
+   "note": "Authored in X52.v:oriented_tree_mader_chi_linear_bound_statement. Encodes Conjecture 11: every oriented tree T of order k has chromatic Mader threshold at most 2k-2. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS -- guard 0 < #|D| inside x52_mader_chi_bound; Conjecture 11 of arXiv:1610.00876 (mader_chi(T) <= 2k-2 for every oriented tree of order k, no lower bound on k) is a threshold on the chromatic number of digraphs that have vertices. x52_unguarded_false refutes the old body at k = 1 on the empty host, x52_k1_holds shows the guard needs no extra 2 <= k, x52_hyps_nonvacuous inhabit"
   },
   "axv_1610_00876_04": {
    "statement": "todo",
@@ -703,7 +703,7 @@
   "axv_1701_05597_00": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x171-x190-batch1",
@@ -942,24 +942,24 @@
    "note": "Authored in X194.v:clustered_chromatic_minor_class_treedepth_bound_statement. Faithful re-encoding 2026-07-17: x194_clustered_chromatic_minor_class_le now carries a class-uniform clustering constant c before quantifying over H-minor-free graphs. | VERIFY FIX 2026-07-18: 2<=k guard added (treedepth-1/edgeless-H hole: unguarded form was machine-refuted axiom-free via H=I2, 0 colours, K1). Recompiled axiom-free."
   },
   "axv_1708_07369_00": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x191-x210-batch1",
+   "commit": "x223-conjecture-relations",
    "package": "extremal-graph-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the surface does not encode \"k-nice\" and is outright FALSE, so no weaker true statement survives. The paper's k-nice = the k-COLOUR Ramsey number R(F;k) meeting the natural construction lower bound with EQUALITY; the Rocq x195_k_nice instead (a) fixes exactly 2 colours ({set 'K_N} -> 'I_2, never k), (b) leaves its `k` argument completely unused in the body (X125-family mis-quantification: machine-confirmed k_is_deco"
+   "note": "Authored in X195.v:ramsey_nice_forest_family_eventual_statement. RE-AUTHORED 2026-09-23 (wave X223 pass, same formal name and file) with the k-nice definition recovered from arXiv:1708.07369: R_k(F) is the least n such that every k-colouring of E(K_n) has a monochromatic copy of some member of F, and F is k-nice when every graph G with chi(G) = R_k(F) also arrows F in k colours. The 2026-07-17 audit had blocked the previous encoding because its x195_k_nice fixed two colours and never used its k argument; in the new one the colourings take k values and k is load-bearing. Conjecture 1.1 then rea"
   },
   "axv_1708_07369_01": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x191-x210-batch1",
+   "commit": "x223-conjecture-relations",
    "package": "extremal-graph-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = mis-quantification / lightweight-witness, and it fires on the load-bearing quantifier. The whole content of Conj 1.5 is that \"k-nice\" holds for INFINITELY MANY k, where k-nice is a genuinely k-dependent property (the k-colour Ramsey number R(F;k) meets its natural lower bound). But the imported predicate x195_k_nice (X195.v:21-25) takes a k parameter that NEVER appears in its body: it is hard-coded to 2-colourings "
+   "note": "Authored in X196.v:ramsey_nice_forest_family_infinite_statement. RE-AUTHORED 2026-09-23 (wave X223 pass, same formal name and file) on top of the recovered, genuinely k-dependent x195_k_nice of X195.v. Conjecture 1.5: every finite family containing a forest is k-nice for infinitely many k, rendered in the standard finite form 'for every k0 there is k >= k0'. READBACK 2026-09-23 (second reader): PASS. Conjecture 1.5 ('Any finite family of graphs F that contains at least one forest is k-nice for infinitely many integers k') is rendered as 'forall k0, exists k, k0 <= k /\\ k_nice k', the standard "
   },
   "axv_1708_08486_00": {
    "statement": "todo",
@@ -985,7 +985,7 @@
   "axv_1709_04036_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x32-chromatic-clean1",
@@ -993,11 +993,14 @@
    "note": "Authored in X32.v:triangle_free_planar_large_induced_two_degenerate_statement. Encodes the triangle-free planar induced-degeneracy row: an induced 2-degenerate subgraph has at least 7/8 of the vertices."
   },
   "axv_1709_04036_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x219-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X219.v:triangle_free_planar_five_sixths_two_degenerate_statement. Dvorak-Kelly, the remark after Theorem 1.2 taken as a proposition: every triangle-free planar graph has an induced 2-degenerate subgraph on at least five sixths of its vertices, cross-multiplied as 6*|S| >= 5*|V(G)|. implications_X219.v derives it from X32's 7/8 statement (corpus edge e082, status=verified)."
   },
   "axv_1709_04440_00": {
    "statement": "todo",
@@ -1139,7 +1142,7 @@
   "axv_1802_03727_00": {
    "statement": "blocked",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x191-x210-batch1",
@@ -1149,7 +1152,7 @@
   "axv_1802_03727_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x13-extremal-clean2",
@@ -1159,7 +1162,7 @@
   "axv_1802_03727_02": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x30-extremal-clean1",
@@ -1169,7 +1172,7 @@
   "axv_1802_03727_03": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x13-extremal-clean2",
@@ -1223,7 +1226,7 @@
   "axv_1803_01051_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x7-chromatic-clean5",
@@ -1336,7 +1339,7 @@
   "axv_1806_00825_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x9-cycle-clean2",
@@ -1409,7 +1412,7 @@
   "axv_1808_01605_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x31-chromatic-clean1",
@@ -1433,7 +1436,7 @@
   "axv_1809_08324_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x46-digraph-clean1",
@@ -1443,7 +1446,7 @@
   "axv_1809_08324_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x53-digraph-clean1",
@@ -1453,7 +1456,7 @@
   "axv_1810_00058_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x58-extremal-clean1",
@@ -1461,18 +1464,24 @@
    "note": "Authored in X58.v:epsilon_bounded_h_free_anticomplete_pair_statement. Encodes Conjecture 1.4: epsilon-bounded H-free graphs contain a linear anticomplete pair."
   },
   "axv_1810_00058_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x223-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X223.v:triangle_free_eps_bounded_anticomplete_pair_statement. The open case H = K_3 of Conjecture 1.4 of arXiv:1810.00058, in the same shape as its parent row X58.v: eps = p/d rational, |A| >= eps|G|^eps cleared as p^d |G|^p <= d^d |A|^d, |B| >= eps|G| as p|G| <= d|B|. eps-boundedness uses the source's CLOSED-neighbourhood form (|N[v]| < eps|G| for every v), which is the stronger hypothesis; implications_X223.v proves the corpus edge e076 with Qed (status verified). READBACK 2026-09-23 (second reader): PASS. Checked verbatim against arXiv:1810.00058 -- 'G is eps-bounded if |N[v]| <"
   },
   "axv_1810_00058_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x223-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X223.v:h_free_eps_bounded_sparse_pair_statement. Conjecture 3.4 of arXiv:1810.00058: for every H there are eps = p/d and a nat exponent s such that every H-free eps-bounded G with |G| > 1 and every rational c = a/b in [0,1] admit a c-sparse pair (A,B) with |A| >= eps c^s |G| and |B| >= eps |G|. c-sparseness is b * e(A,B) <= a * |A||B| with e(A,B) the ordered-pair count (equal to |E(A,B)| for disjoint A, B). Corpus edge e077 recorded as a candidate (needs the paper's cleaning argument). READBACK 2026-09-23 (second reader): PASS. Conjecture 3.4 reads 'for every graph H there exist ep"
   },
   "axv_1810_00065_00": {
    "statement": "todo",
@@ -1506,11 +1515,14 @@
    "audit_page": "todo"
   },
   "axv_1810_08314_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x228-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X228.v:bounded_layered_treewidth_bounded_queue_number_statement. Dujmovic-Eppstein-Joret-Morin-Wood: do graphs of bounded layered treewidth have bounded queue-number? New vocabulary in foundations/width_params.v: layering L (adjacent vertices in the same or consecutive layers, stated without subtraction as L u <= L v + 1 and L v <= L u + 1), layered_tw_le (a layering plus a tree decomposition whose bags meet each layer in at most l vertices) and queue_number_le (an injective vertex order plus an assignment of the edges to k queues with no two NESTED edges in one queue). 'Bounded im"
   },
   "axv_1811_08750_00": {
    "statement": "todo",
@@ -1614,11 +1626,14 @@
    "audit_page": "todo"
   },
   "axv_1812_09752_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x227-conjecture-relations",
+   "package": "graph-theory-misc",
+   "note": "Authored in X227.v:hat_guessing_degree_degeneracy_bounds_statement. Alon-Ben-Eliezer-Shangguan-Tamo Problem 1.4, the conjunction of its three parts: (i) exists f1 with HG(G) <= f1(Delta G); (ii) exists f2 with HG(G) <= f2(d) for every d-degenerate G; (iii) exists f3 with HG(G) >= f3(d) for every G of minimum degree exactly d, and f3 tending to infinity (GTBase asymptotics' eventually). The hat game is local x227 vocabulary: a strategy is one guessing function per vertex, admissible when it depends only on the colours of N(v); HG(G) >= q is x227_hat_guessing_win and HG(G) <= m is x227_hat_guess"
   },
   "axv_1812_09752_01": {
    "statement": "todo",
@@ -1649,11 +1664,14 @@
    "audit_page": "todo"
   },
   "axv_1902_07018_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x219-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X219.v:list_chromatic_index_even_clique_statement. Alon-Bucic-Kalvari-Kuperwasser-Szabo: the record's open case (the list Ramsey number R_ell(K_{1,2},k) for odd k) is stated in the determinate form its own context declares EQUIVALENT to it -- the List Colouring Conjecture for cliques of even order, i.e. 'K_n is (n-1)-edge-choosable for every positive even n'. Only the upper bound is stated, since the lower bound chi'_ell >= chi' = n-1 is a theorem. Edge choosability is local x219 vocabulary on simple graphs."
   },
   "axv_1902_07018_01": {
    "statement": "todo",
@@ -1742,7 +1760,7 @@
   "axv_1904_12060_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x33-chromatic-clean1",
@@ -1857,7 +1875,7 @@
   "axv_1907_11600_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x48-packing-clean1",
@@ -1874,7 +1892,7 @@
   "axv_1907_12999_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x5-structural",
@@ -2053,11 +2071,14 @@
    "audit_page": "todo"
   },
   "axv_1912_02342_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x223-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X223.v:vc_dimension_erdos_hajnal_statement. Fox-Pach-Suk Conjecture 4.1: for d >= 2 there is q > 0 with every graph of VC-dimension at most d containing a clique or stable set S with |G| <= |S|^q (eps(d) = 1/q). VC-dimension is that of the neighbourhood set system: S is shattered when every T subset S equals N(v) cap S for some v. Corpus edge e116 (Erdos-Hajnal => this row) recorded as a candidate (needs the shattering gadget H_d). READBACK 2026-09-23 (second reader): PASS. Conjecture 4.1 and the VC-dimension definition were re-fetched: the set system is the OPEN neighbourhoods N(v"
   },
   "axv_1912_07205_00": {
    "statement": "todo",
@@ -2132,7 +2153,7 @@
   "axv_2001_01607_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x42-minor-clean1",
@@ -2150,11 +2171,14 @@
    "note": "Authored in X67.v:theta_triangle_free_bounded_degree_treewidth_statement. Encodes the bounded-treewidth question for bounded-degree theta-free triangle-free graphs."
   },
   "axv_2001_01607_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:triangle_s123_free_bounded_clique_width_statement. Pilipczuk-Sintiari-Thomasse-Trotignon open question: do (triangle, S_{1,2,3})-free graphs have bounded clique-width? Clique-width is encoded by k-EXPRESSIONS (x220_cw_expr: labelled vertex, disjoint union, join of two DISTINCT labels, relabelling), whose denotation is the label list x220_cw_labels e together with the adjacency x220_cw_edge e on positions; a graph is realised when a bijection with the positions is an isomorphism. S_{1,2,3} is the seven-vertex subdivided claw, given by an edge list on 'I_7 through the new el_g"
   },
   "axv_2001_01607_03": {
    "statement": "todo",
@@ -2227,11 +2251,14 @@
    "audit_page": "todo"
   },
   "axv_2002_00496_02": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x228-conjecture-relations",
+   "package": "minor-theory",
+   "note": "BLOCKED — Huynh-Joret-Micek-Seweryn-Wollan Conjecture 6 says 'a graph H is unavoidable if and only if H is a minor of some graph from Kelly's construction'. Kelly's construction has NO element-level definition in the source: the paper gives it by Figure 2 and states verbatim that 'its definition for an arbitrary order k can be inferred from the figure'. The equivalent reformulation the paper offers, 'H is a minor of some graph obtained by gluing copies of K_4 along edges in a path-like way, and subdividing all horizontal edges of the K_4s once', is likewise given by a figure (Figure 3) and lea"
   },
   "axv_2002_05383_00": {
    "statement": "todo",
@@ -2318,11 +2345,14 @@
    "audit_page": "todo"
   },
   "axv_2004_07457_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x219-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X219.v:asymmetric_bipartite_list_colouring_statement. Alon-Cambie-Kang Conjecture 7, the conjunction of its three sufficient conditions for (k_A,k_B)-choosability of bipartite graphs with part-wise maximum degrees. Real parameters are cleared by rearrangement over nat: epsilon = 1/q gives Delta_A <= k_A^q; the constants C become naturals; log becomes trunc_log 2; condition (iii) is raised to the power k_A and multiplied by log Delta, giving k_B^k_A >= C^k_A * D * (log D)^(k_A - 1), with no division or root. The wave's riskiest row. FIX 2026-09-23 (main session): conditions (ii) and"
   },
   "axv_2004_10180_00": {
    "statement": "todo",
@@ -2437,18 +2467,24 @@
    "audit_page": "todo"
   },
   "axv_2006_09877_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:small_hereditary_class_bounded_twin_width_statement. Bonnet-Geniet-Kim-Thomasse-Watrigant Twin-width II, the Small Conjecture. Twin-width is encoded by CONTRACTION SEQUENCES in partition form (x220_twin_width_le): the trigraph reached is determined by the partition, a pair of parts being red exactly when it is neither complete nor anticomplete, the sequence running from the singleton partition to a partition with at most one part (which also covers the empty graph) with red degree always at most d. A class is a Prop on sgraph; hereditary = isomorphism-closed and closed under"
   },
   "axv_2006_09877_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:polynomial_expansion_bounded_twin_width_statement. Same paper, the open question following the Small Conjecture. Polynomial expansion is stated as an edge-density bound on all shallow minors: x220_shallow_minor G H r uses pairwise disjoint branch sets of radius at most r around centres (distance measured INSIDE the branch set by x220_ball_in) and requires only the edges of H to be realised, so a shallow minor may be a subgraph of the contraction, as in the standard definition. The bound is #|E(H)| <= p(r) * #|H| for one polynomial p with natural coefficients."
   },
   "axv_2007_14161_00": {
    "statement": "todo",
@@ -2496,11 +2532,14 @@
    "note": "Authored in X27.v:bounded_degree_even_hole_free_bounded_treewidth_statement. Encodes the even-hole-free bounded-treewidth theorem row as a function f with treewidth at most f(d) for graphs of degree at most d."
   },
   "axv_2008_05504_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:bounded_degree_induced_wall_or_line_wall_statement. Aboulker-Adler-Kim-Sintiari-Trotignon Conjecture 3: for every d there is f_d with every graph of maximum degree <= d and treewidth >= f_d(k) containing an induced k-by-k wall or an induced line graph of one. New vocabulary: x220_wall (the elementary brick wall on 'I_t * 'I_t: all horizontal grid edges, plus the vertical edge from (i,j) when i+j is even) and sline_graph (line graph of a SIMPLE graph, foundations/containment.v). 'Treewidth at least r' is tw_ge (a lower bound on every admissible width, the X201 device); induce"
   },
   "axv_2008_09692_00": {
    "statement": "todo",
@@ -2545,11 +2584,14 @@
    "audit_page": "todo"
   },
   "axv_2009_12189_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x219-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X219.v:planar_fractional_vertex_arboricity_two_statement. Bonamy-Kardos-Kelly-Postle Conjecture 1.1: every planar graph (wagner_planar) has fractional vertex-arboricity at most two, in the b-fold form (for every b >= 1, 2*b induced forests covering every vertex at least b times), which keeps everything over nat. FIX 2026-09-23 (main session): x219_frac_vertex_arboricity_le_two now EXISTENTIALLY quantifies the fold parameter b (`exists b, 0 < b /\\ exists F : 'I_(2*b) -> {set G}, ...`), modelled on X130's x130_frac_chi_le, instead of universally quantifying it (which collapsed to the"
   },
   "axv_2009_13319_00": {
    "statement": "todo",
@@ -2701,11 +2743,14 @@
    "audit_page": "todo"
   },
   "axv_2103_05036_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x228-conjecture-relations",
+   "package": "topological-graph-theory",
+   "note": "Authored in X228.v:random_embedding_expected_faces_linear_statement. Campion Loth-Halasz-Masarik-Mohar-Samal Conjecture 1 (SOLVED): E[F] = O(n). Same finite-average modelling as the companion row; O(n) is an EXISTENTIAL CONSTANT quantified outside the graph quantifier: exists c, forall G, total <= c * #|G| * nrot. implications_X228.v proves the corpus edge gc:e125 (Conjecture 4 implies Conjecture 1) with c = 2."
   },
   "axv_2103_05998_00": {
    "statement": "todo",
@@ -2869,11 +2914,14 @@
    "audit_page": "todo"
   },
   "axv_2107_05995_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x227-conjecture-relations",
+   "package": "graph-theory-misc",
+   "note": "Authored in X227.v:hat_guessing_degeneracy_bounded_statement. Alon-Chizewer: exists f with HG(G) <= f(d) for every d-degenerate G, in the same hat-game vocabulary; this is part (ii) of the companion row. implications_X227.v carries the corpus edge e061 as a Qed projection (status=verified), recorded as a shared-vocabulary consistency check rather than as evidence."
   },
   "axv_2107_05995_01": {
    "statement": "todo",
@@ -2952,11 +3000,14 @@
    "audit_page": "todo"
   },
   "axv_2109_01310_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:four_family_free_logarithmic_treewidth_statement. Abrishami-Chudnovsky-Hajebi-Spirkl Conjecture 1.10: excluding K_t, K_{t,t}, subdivisions of the t-by-t wall and line graphs of such subdivisions as INDUCED subgraphs forces tw(G) <= c(t) log|V(G)|. Subdivisions are quantified as arbitrary graphs W with is_subdivision_of W (x220_wall t) (a spanning and exact subdivision model, foundations/containment.v), so every subdivision pattern is covered. The logarithmic envelope is c * (trunc_log 2 #|G|).+1, the successor absorbing the rounding of trunc_log (X201 device)."
   },
   "axv_2109_09205_00": {
    "statement": "todo",
@@ -3137,7 +3188,7 @@
   "axv_2201_09115_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x8-minor-list-clean2",
@@ -3171,7 +3222,7 @@
   "axv_2202_05557_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x65-chromatic-clean1",
@@ -3207,11 +3258,14 @@
    "audit_page": "todo"
   },
   "axv_2202_07746_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x228-conjecture-relations",
+   "package": "topological-graph-theory",
+   "note": "Authored in X228.v:random_embedding_expected_faces_third_statement. Campion Loth-Mohar Conjecture 4: E[F] <= n/3 + 1 for a uniformly random orientable embedding of an n-vertex simple graph. Modelled as a FINITE AVERAGE over the finitely many rotation systems (no probability layer): X228.v adds [x228_rotation_system G], the boolean subset of {perm surface_dart G} transcribing GTBase.surface's [surface_erot_src]/[surface_erot_vertex], plus [x228_faces], [x228_nrot], [x228_total_faces]. The inequality is cleared of both divisions: 3 * total <= (#|G| + 3) * nrot. grounding_X228.v proves the bridge"
   },
   "axv_2202_09118_00": {
    "statement": "todo",
@@ -3237,7 +3291,7 @@
   "axv_2202_09118_03": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x66-chromatic-clean1",
@@ -3252,11 +3306,14 @@
    "audit_page": "todo"
   },
   "axv_2202_10412_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x218-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X218.v:every_forest_is_good_statement. Chudnovsky-Scott-Seymour-Spirkl: every forest H is 'good', i.e. the H-free class is polynomially chi-bounded, in the shared normal form chi <= c * omega^d (Chromatic.foundations chi_bounding.poly_chi_bounded). Same mathematical conjecture as arxiv:2202.05557#00 (X65.v), which encodes the polynomial as a coefficient list. implications_X218.v proves it implies the multibounding row (corpus edge e171, status=verified)."
   },
   "axv_2202_10412_01": {
    "statement": "todo",
@@ -3273,11 +3330,14 @@
    "audit_page": "todo"
   },
   "axv_2202_13306_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x221-conjecture-relations",
+   "package": "digraph-theory",
+   "note": "Authored in X221.v:delta122_hero_oriented_complete_multipartite_statement. Question 1.4: is Delta(1,2,2) a hero in oriented complete multipartite graphs? dichromatic_bounded of the class of x221_oriented_complete_multipartite (oriented + transitive non-adjacency) Delta(1,2,2)-free digraphs. The corpus row is DISPROVED (Walczak, Remark 1.5 of the published version), so the Prop is expected false; no refutation is committed."
   },
   "axv_2202_13306_01": {
    "statement": "todo",
@@ -3311,11 +3371,14 @@
    "note": "Authored in X50.v:triangle_free_same_girth_high_chromatic_induced_free_statement. Encodes the same-girth triangle-free row: for each triangle-free F there are arbitrarily high-chromatic graphs with the same girth and bounded-chromatic F-free induced subgraphs."
   },
   "axv_2203_06775_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:theta_prism_even_wheel_free_bounded_treewidth_statement. Abrishami-Chudnovsky-Hajebi-Spirkl Conjecture 1.6: for every t the class C*_t of (C_4, diamond, theta, prism, even wheel, K_t)-free graphs has bounded treewidth. Modelling of the three-path configurations: a THETA is a subdivision of K_2,3 (x220_theta), a PRISM is a subdivision of the 3-prism in which the six triangle edges are left unsubdivided (x220_prism), both via the subdiv_model record; an EVEN WHEEL is a hole plus an outside vertex with at least three neighbours on it, x220_even_wheel_free saying every such whee"
   },
   "axv_2204_00722_00": {
    "statement": "todo",
@@ -3341,7 +3404,7 @@
   "axv_2204_10119_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x5-structural",
@@ -3351,7 +3414,7 @@
   "axv_2204_10119_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x5-structural",
@@ -3491,18 +3554,24 @@
    "audit_page": "todo"
   },
   "axv_2206_13635_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x225-conjecture-relations",
+   "package": "hypergraph-theory",
+   "note": "Authored in X225.v:kt_minor_free_hypergraph_chromatic_three_halves_statement. Steiner Conjecture 2: h(t) = ceil(3(t-1)/2) for every t >= 2, rendered as the CONJUNCTION of the upper half (every loopless K_t-minor-free hypergraph is ceil_div (3 * t.-1) 2 - colourable, the open content and the source's own 'in other words' reading) and the tightness half (some loopless K_t-minor-free hypergraph is not colourable with one colour fewer, proved in the source). Vocabulary from the new shared foundation: [hg_loopless] (every hyperedge has >= 2 vertices), [hg_colourable E m] (no hyperedge monochromatic"
   },
   "axv_2206_13635_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x225-conjecture-relations",
+   "package": "hypergraph-theory",
+   "note": "Authored in X225.v:k3_minor_free_hypergraph_three_colourable_statement. Steiner Problem 1 ('Is every K_3-minor-free hypergraph 3-colorable?'), stated in the affirmative per repository convention, on the same vocabulary as the companion row; [ceil_div (3 * 3.-1) 2] computes to 3, so implications_X225.v carries the corpus edge e049 as a Qed theorem (status=verified): the companion conjecture at t = 3 IS this problem."
   },
   "axv_2207_07775_00": {
    "statement": "todo",
@@ -3561,39 +3630,54 @@
    "audit_page": "todo"
   },
   "axv_2208_06858_00": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x227-conjecture-relations",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — p_intersecting(t) is the supremum of a success probability over intersecting winning-set families on {0,1}^n in Levine's hat problem; it needs a probability layer over families of subsets of the cube (and the absorption of n), which GTBase does not have. The placeholder keeps only the two properties the corpus records (each term a probability, non-increasing in the number of players), so it is refutable as written (the constant sequence 1/2 satisfies the hypotheses: grounding_X227.v proves x227_half_levine and x227_half_not_to_zero as separate lemmas, so no refutation of a statement "
   },
   "axv_2208_06858_01": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x227-conjecture-relations",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — p_monotone(t) is the same success probability taken over all balanced monotone winning-set families on {0,1}^n; the missing probability layer is the same as for axv_2208_06858_00, and the only difference between the two rows (the winning-set class) is carried by an inert label. Refutable as written, for the same reason."
   },
   "axv_2208_06858_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x227-conjecture-relations",
+   "package": "homomorphism-theory",
+   "note": "Authored in X227.v:kneser_cartesian_power_independence_ratio_statement. Alon-Friedgut-Kalai-Kindler Conjecture 2.6, graph form of Levine's hat problem: lim_t lim_n alpha-bar(K(n)^{box t}) = 0. New local vocabulary in X227.v: [x227_kneser n] (Kneser graph on {set 'I_n}, distinct subsets adjacent iff disjoint - the x != y guard is what makes it irreflexive) and [x227_box_power G t] (t-fold Cartesian power on base's [cartesian_product], with 'K_1 as the empty power). The independence number is coq-graph-theory's [alpha]; the RATIO is kept division-free as q * alpha <= #|V| for eps = 1/q. The iter"
   },
   "axv_2208_06858_03": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x227-conjecture-relations",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — alpha*(G) is a supremum over an OPTIMAL PARTITION of V(G)^r together with POSITIVELY CORRELATED random-subset distributions with Bernoulli(1/2) marginals. That is a genuine correlated probability space over subsets (r-fold product structure plus a positive-correlation constraint on increasing events) and GTBase has no layer for it; the finite-average trick that makes the binomial companion expressible does not apply, since the distribution is quantified over and is not uniform."
   },
   "axv_2208_06858_04": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x227-conjecture-relations",
+   "package": "graph-theory-misc",
+   "note": "Authored in X227.v:independent_set_binomial_gap_statement. Alon-Friedgut-Kalai-Kindler Conjecture 2.9: for every rational a/b in (0,1/2) there is a positive rational e1/e2 such that every nonempty G with b * alpha(G) = a * n satisfies avg_W alpha(G[W]) / n <= a/b - e1/e2, where the expectation over the binomial (uniform) random subset is the finite sum x227_stable_sum G = sum over all W of alpha(W) divided by 2^n, and the inequality is cross-multiplied without subtraction. alpha(G[W]) is the library's alpha(W) (alpha_induced). Quantifier order is the displayed 'for all alpha there is eps > 0';"
   },
   "axv_2208_10074_00": {
    "statement": "todo",
@@ -3708,18 +3792,24 @@
    "audit_page": "todo"
   },
   "axv_2210_16971_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x223-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X223.v:directed_sidorenko_bipartite_statement. Directed Sidorenko (Conjecture 1.4): an oriented bipartite B with a homomorphism to the directed edge satisfies t(B,D) >= t(arc,D)^e(B) for every oriented D, stated in the cross-multiplied nat form e(D)^e(B) * |D|^|B| <= hom(B,D) * |D|^(2 e(B)). No o(1) term: the density inequality is exact for every finite D. READBACK 2026-09-23 (second reader): PASS. Definition 1.3 of the source quantifies over ALL oriented D and reads t(B,D) >= t(K_2^->,D)^e(B); with t(B,D) = hom(B,D)/|D|^|B| and t(arc,D) = e(D)/|D|^2 (hom from the single arc = the "
   },
   "axv_2210_16971_01": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x223-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — The directed FORCING property is a quasirandomness statement (a homomorphism-density equality forcing quasirandomness in the limit); it needs a graph-limit / real-density layer that GTBase does not have, whereas the Sidorenko property of the companion row arxiv:2210.16971#00 has an equivalent finite homomorphism-counting form. The compiling placeholder therefore states the weaker Sidorenko conclusion and is NOT Conjecture 1.7."
   },
   "axv_2210_16971_02": {
    "statement": "todo",
@@ -3893,18 +3983,24 @@
    "audit_page": "todo"
   },
   "axv_2302_04986_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x226-conjecture-relations",
+   "package": "packing-theory",
+   "note": "Authored in X226.v:eta_bounded_forest_free_classes_statement. Hajebi-Li-Spirkl Conjecture 1.8 (the eta-analogue of Gyarfas-Sumner): for every forest H the class of H-free graphs is eta-bounded. eta is recovered vocabulary, local to X226: [x226_hitting_set X] says X meets every maximum stable set (over the library's [maxstabsets]), and eta(G) <= b is encoded as the BOUND [x226_eta_le G b] (some hitting set of size at most b), so no minimum or choice operator is needed. [x226_eta_bounded C] carries a [0 < #|G|] guard, which is load-bearing: a vertexless graph has the empty set as its unique maxi"
   },
   "axv_2302_04986_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x226-conjecture-relations",
+   "package": "packing-theory",
+   "note": "Authored in X226.v:eta_bounded_path_free_classes_statement. Conjecture 1.13: for every t >= 6 the class of P_t-free graphs is eta-bounded (t <= 5 is the paper's Theorem 1.12). Same eta vocabulary as row #00; P_t is the local [x226_path_graph t] on 'I_t with consecutive indices adjacent (the same carrier X18.v uses). The quantifier over t is outermost, so the bounding function may depend on t. implications_X226.v derives this row from row #00 as a Qed theorem (corpus edge gc:e012), which required proving that P_t is a forest."
   },
   "axv_2302_04986_02": {
    "statement": "todo",
@@ -3921,11 +4017,14 @@
    "audit_page": "todo"
   },
   "axv_2302_04986_04": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x226-conjecture-relations",
+   "package": "packing-theory",
+   "note": "Authored in X226.v:eta_bounded_two_stars_free_classes_statement. The paper's open problem on the disjoint union of two stars: for all a, b >= 1 the class of (S_a u S_b)-free graphs is eta-bounded. S_a is the local [x226_star a], the star with a leaves (vertex 0 of 'I_a.+1 joined to the a others, which are pairwise non-adjacent), and the disjoint union is the library's [sjoin]. Recorded as its own row because the component-wise reduction available for chi-boundedness is not known for eta; implications_X226.v nevertheless derives it from row #00 as a Qed theorem (corpus edge gc:e013), since a di"
   },
   "axv_2302_08182_00": {
    "statement": "todo",
@@ -3935,18 +4034,24 @@
    "audit_page": "todo"
   },
   "axv_2302_08922_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x218-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X218.v:path_induced_rooted_tree_polynomial_chi_bound_statement. Nguyen-Scott-Seymour, open question after 1.2, stated affirmatively: for every rooted tree (T,r) the class of graphs with no PATH-INDUCED COPY of (T,r) is polynomially chi-bounded. A path-induced copy is an injective edge-preserving map whose image of every path of T ending at r is an induced path of G (local x218 vocabulary x218_path_induced_copy / x218_induced_run)."
   },
   "axv_2302_08922_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x218-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X218.v:polynomial_gyarfas_sumner_tree_statement. Nguyen-Scott-Seymour: the Gyarfas-Sumner conjecture with a chi-bounding function polynomial in the clique number, in the normal form c * omega^d. implications_X218.v proves it implies U8's graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement (corpus edge e175, status=verified)."
   },
   "axv_2302_12633_00": {
    "statement": "todo",
@@ -3973,11 +4078,14 @@
    "note": "Authored in X34.v:planar_odd_degree_linear_forests_plus_matching_statement. Encodes the odd-maximum-degree planar linear-arboricity refinement: (Delta-1)/2 linear forests plus one matching."
   },
   "axv_2303_11766_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x218-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X218.v:every_forest_is_multibounding_statement. Nguyen-Scott-Seymour VIII, Conjecture 1.6: every forest is multibounding, where for every d >= 1 there are c, e with chi(G) <= c*t^e for every t >= 1 and every H-free G containing no K_d(t) SUBGRAPH. K_d(t) is the local x218_complete_multipartite on 'I_d * 'I_t. SECOND-READER RE-READ 2026-09-24 (edge programme): PASS-WITH-NOTE -- the re-encoded x218_multibounding (exists c e : nat -> nat, forall d >= 1, t >= 1, G H-free with no K_d(t) SUBGRAPH, chi <= c d * t^(e d)) still gives, for each FIXED d, a polynomial c d * t^(e d) in t with c"
   },
   "axv_2304_01281_00": {
    "statement": "todo",
@@ -4052,7 +4160,7 @@
   "axv_2305_15585_00": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x2-clean11",
@@ -4062,7 +4170,7 @@
   "axv_2305_15585_01": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x2-clean11",
@@ -4084,18 +4192,24 @@
    "audit_page": "todo"
   },
   "axv_2305_16258_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:even_hole_diamond_free_bounded_tree_alpha_statement. Same paper, Conjecture 1.6: (even hole, diamond)-free graphs have bounded tree-independence number. tree_alpha_le (foundations/width_params.v) is the library sdecomp with alpha(bag) <= k in every bag; the constant is existentially quantified BEFORE the graph, as 'bounded for the class' requires. Corpus status partial."
   },
   "axv_2305_16258_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:even_hole_kt_free_logarithmic_treewidth_statement. Abrishami-Alecu-Chudnovsky-Hajebi-Spirkl Conjecture 1.7: (even hole, K_t)-free graphs have logarithmic treewidth, read as one constant c per t with tw(G) <= c * (trunc_log 2 #|G|).+1. Reuses x27_even_hole_free (X27.v) and the new x220_clique_free. Corpus status solved (arXiv:2402.14211)."
   },
   "axv_2306_04710_00": {
    "statement": "todo",
@@ -4112,11 +4226,14 @@
    "audit_page": "todo"
   },
   "axv_2306_04710_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x221-conjecture-relations",
+   "package": "digraph-theory",
+   "note": "Authored in X221.v:delta122_hero_k1_plus_dipath2_free_statement. Is {Delta(1,2,2), K_1 + P_2-directed} chi-vec-finite? Encoded as dichromatic_bounded of the class of ORIENTED digraphs (oriented_dg, heroes_dichotomy.v) that are no_induced_arrowK2_K1 (= no induced K_1 + P_2-directed, heroes_dichotomy.v) and ind_free of x221_Delta122 = c3sub (TT 1) (TT 2) (TT 2). The oriented_dg guard is load-bearing (see faithfulness_result). Edge e105 to axv_2202_13306_00 is PROVED in implications_X221.v."
   },
   "axv_2307_02816_00": {
    "statement": "todo",
@@ -4171,11 +4288,14 @@
    "audit_page": "todo"
   },
   "axv_2307_15512_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x217-conjecture-relations",
+   "package": "hypergraph-theory",
+   "note": "Authored in X217.v:hypergraph_cop_number_sqrt_n_over_k_statement. Erde-Kang-Lehner-Mohar-Schmid Conjecture 1.4: the cop number of a connected k-uniform hypergraph on n vertices is O(sqrt(n/k)). The cops-and-robbers game is defined locally in the new shared foundation hypergraph-theory/theories/foundations/hypergraph.v as a finite-horizon cop-win closure on positions: [hg_win E m C r] is a Boolean fixpoint on the number of remaining rounds (cops move first along [hg_move] = stay or step to a vertex of a common hyperedge, catching the robber the instant one lands on him; then the robber moves th"
   },
   "axv_2308_02981_00": {
    "statement": "todo",
@@ -4240,12 +4360,36 @@
    "correspondence": "todo",
    "audit_page": "todo"
   },
-  "axv_2308_15721_00": {
+  "axv_2308_15387_02": {
    "statement": "todo",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo"
+  },
+  "axv_2308_15387_03": {
+   "statement": "todo",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo"
+  },
+  "axv_2308_15387_04": {
+   "statement": "todo",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo"
+  },
+  "axv_2308_15721_00": {
+   "statement": "blocked",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x218-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Two primitives could not be verified against arXiv:2308.15721 from the corpus text available here. (1) The ODD MINOR normalisation: the placeholder uses the standard model (nonempty connected pairwise-disjoint branch sets, a 2-colouring of G making every edge inside a branch set bichromatic and giving a monochromatic edge for every edge of H), but the paper's own convention -- whether the bipartition is required on all of G or only on the union of the branch sets -- is not recorded. (2) td-bar(H), the CONNECTED tree-depth, is encoded as the least tree-depth of a connected graph conta"
   },
   "axv_2309_04385_00": {
    "statement": "todo",
@@ -4255,6 +4399,30 @@
    "audit_page": "todo"
   },
   "axv_2309_04460_00": {
+   "statement": "todo",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo"
+  },
+  "axv_2309_04460_01": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x229-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X229.v:expander_proper_colouring_two_connected_palettes_statement. Question 10.2 of arXiv:2309.04460. The paper-local 'robust sublinear expander' was NOT recovered by the triage; it was fetched from the source at authoring time (Definition 3.1: for every 0 <= eps <= 1 and every non-empty U with |U| <= n^(1-eps), and every F subset E(G) with |F| <= (eps/3) d(G) |U|, |N_{G-F}(U)| >= (eps/3)|U|, with N(U) the EXTERNAL neighbourhood per the paper's Notation paragraph). eps = a/b rational, all divisions cleared; 'average degree >= C log n' is rendered as 'for every L with 2^L <= n, C*(n"
+  },
+  "axv_2309_04460_02": {
+   "statement": "todo",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo"
+  },
+  "axv_2309_04460_03": {
    "statement": "todo",
    "grounding": "todo",
    "edges": "todo",
@@ -4301,9 +4469,9 @@
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x1-reconcile",
+   "commit": "x221-conjecture-relations",
    "package": "digraph-theory",
-   "note": "Reconciled to twinwidth.v:conj_3_13_statement (re-encodings: conj_3_13_concrete). exists f, forall nonempty tournament T, exists order p:{perm T}, bclique p <= f(omegabar T) /\\ otww_le p (f(omegabar T)). Encodes Conj 3.13 'exists f s.t. every T has an ordering with omega(T^p)<=f(omega-bar) AND tww(T,p)<=f(omega-bar)': bclique p = omega(T^p) backedge clique number, both conjuncts present with correct exists-f/forall-T/exists-p structure. CAVEAT: ordered twin-width tww(T,p) is PA"
+   "note": "Authored in X221.v:ordered_twinwidth_clique_and_tww_bound_statement. RE-ENCODING of Conjecture 3.13 (v1) / 3.14 (v2): one f with omega(T^{<*}) <= f(omega-bar(T)) AND tww((T,<*)) <= f(tww(T)). The previous encoding conj_3_13_statement (conjectures/twinwidth.v) used f(omega-bar(T)) in the twin-width clause and is left untouched with its own 'No corpus row' block. Uses bclique + omegabar, the CONCRETE concrete_otww_le of conjectures/twinwidth_ordered.v, and the new relation x221_tww_eq pinning the twin-width value as the least k with tww_le T k."
   },
   "axv_2310_04265_04": {
    "statement": "done",
@@ -4313,7 +4481,7 @@
    "audit_page": "todo",
    "commit": "x1-reconcile",
    "package": "digraph-theory",
-   "note": "Reconciled to twinwidth.v:conj_3_16_statement (re-encodings: conj_3_16_concrete). exists f, forall nonempty tournament T, exists order p:{perm T}, bst_order p /\\ bclique p <= f(omegabar T). Encodes Conj 3.16 'exists f s.t. every T has a BST-ordering with omega(T^p)<=f(omega-bar)': bclique p = omega(T^p), correct exists-f/forall-T/exists-p structure with the BST-ordering conjunct. CAVEAT: BST-ordering is PARAMETRIC -- bst_order is an abstract Section Variable (recursive BST in-o"
+   "note": "Reconciled to twinwidth.v:conj_3_16_statement (re-encodings: conj_3_16_concrete). exists f, forall nonempty tournament T, exists order p:{perm T}, bst_order p /\\ bclique p <= f(omegabar T). Encodes Conj 3.16 'exists f s.t. every T has a BST-ordering with omega(T^p)<=f(omega-bar)': bclique p = omega(T^p), correct exists-f/forall-T/exists-p structure with the BST-ordering conjunct. CAVEAT: BST-ordering is PARAMETRIC -- bst_order is an abstract Section Variable (recursive BST in-o | 2026-09-23 re-read against graph-conjectures@b72c585 and arXiv:2310.04265v2 (renumbered Conjecture 3.17): \"There ex"
   },
   "axv_2310_04265_05": {
    "statement": "todo",
@@ -4524,11 +4692,14 @@
    "audit_page": "todo"
   },
   "axv_2401_00299_04": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x226-conjecture-relations",
+   "package": "packing-theory",
+   "note": "Authored in X226.v:subcube_partition_count_ratio_subexponential_statement. Alon-Balogh-Potapov Problem 1.10 (= Problem 1.2 (iii)): is f(d) / f_2(d) subexponential in n = 2^(d-1), where f(d) counts the partitions of the vertex set of Q_d into subcubes and f_2(d) those using only subcubes of dimension at most 2? A subcube is local X226 vocabulary: a partial assignment [c : {ffun 'I_d -> option bool}] of the coordinates, its dimension being the number of free ones; the carrier Q_d is this package's [hypercube] (Packing.conjectures.U9), reused rather than redefined, and 'partition' is MathComp's. "
   },
   "axv_2401_00359_00": {
    "statement": "todo",
@@ -4538,18 +4709,24 @@
    "audit_page": "todo"
   },
   "axv_2401_00359_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x225-conjecture-relations",
+   "package": "hypergraph-theory",
+   "note": "Authored in X225.v:kpartite_hypergraph_turan_exponent_dmax_statement. Fox-Sankar-Simkin-Tidor-Zhou Conjecture 6.2: for each k a constant c_k > 0 with ex(n,H) <= O_H(n^{k - c_k/d_max(H)}) for every k-uniform k-partite H. EXPONENT CLEARED TO NAT FORM by raising to the power d_max and multiplying through: (hg_turan F k n)^(hg_dmax F k) * n^ck <= K * n^(k * hg_dmax F k), eventually in n, with c_k depending only on k and the O_H constant K chosen after H. New shared vocabulary: [hg_containsb] (injective, non-induced copy of a pattern), [hg_turan F k n] (max hyperedges of an F-free k-uniform hypergr"
   },
   "axv_2401_00359_02": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x225-conjecture-relations",
+   "package": "hypergraph-theory",
+   "note": "Authored in X225.v:latin_square_hypergraph_turan_exponent_statement. Fox-Sankar-Simkin-Tidor-Zhou Conjecture 6.4: ex(n,H_L) = n^{3-Theta(1/d)} for the 3-uniform 3-partite hypergraph H_L of a d x d Latin square. Theta(1/d) is rendered with two ABSOLUTE constants a, b > 0 quantified outermost (independent of d and of L) and both inequalities are cleared by raising to the power d without any truncated subtraction: n^(3*d) <= ex^d * n^a (lower) and ex^d * n^b <= n^(3*d) (upper). Local vocabulary: [x225_latin_square L] (rows and columns injective) and [x225_latin_hypergraph L] on 'I_3 * 'I_d with h"
   },
   "axv_2401_00359_03": {
    "statement": "todo",
@@ -4615,18 +4792,24 @@
    "audit_page": "todo"
   },
   "axv_2403_02298_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x221-conjecture-relations",
+   "package": "digraph-theory",
+   "note": "Authored in X221.v:oriented_triangle_free_acyclic_number_theta_statement. Conjecture 3: a-vec(n) = Theta(sqrt(n log n)). a-vec is the relation x221_abar (minimum of the nat-valued acyclic number x221_alphavec over oriented triangle-free digraphs of order n, attained); the statement quantifies over any total function realizing it, and big_Theta_nat / sqrt_ceil (GTBase.asymptotics) with trunc_log 2 discretise Theta, the square root and the logarithm."
   },
   "axv_2403_02298_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x221-conjecture-relations",
+   "package": "digraph-theory",
+   "note": "Authored in X221.v:oriented_triangle_free_dichromatic_theta_statement. Conjecture 4: t-vec(n) = Theta(sqrt(n / log n)). Same shape with the relation x221_tbar (maximum of the nat-valued dichromatic number x221_dichro, a min-bigop over dicolorableb with neutral #|D|) and sqrt_ceil (n %/ trunc_log 2 n). Edge e158 from Conjecture 3 recorded as a candidate."
   },
   "axv_2403_08303_00": {
    "statement": "todo",
@@ -4706,11 +4889,14 @@
    "audit_page": "todo"
   },
   "axv_2405_05902_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x223-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X223.v:induced_turan_even_cycle_sparse_statement. Fox-Nenadov-Pham Conjecture 6.1: for rational c = a/b in (0,1] and l >= 1 there is C > 1 with ex(Gamma, P_{C_2l}) <= C t^(1-1/l) n^(1+1/l) for every (c,t)-sparse Gamma, cleared to m^l <= C^l t^(l-1) n^(l+1). ex is not a maximum: the bound is stated as 'every spanning subgraph of Gamma (an edge set F deleted) with no induced C_2l has at most that many edges', which is equivalent since deleting isolated vertices changes neither the edge count nor the induced C_2l. READBACK 2026-09-23 (second reader): PASS. The two primitives were re-f"
   },
   "axv_2405_10854_00": {
    "statement": "todo",
@@ -4762,25 +4948,34 @@
    "audit_page": "todo"
   },
   "axv_2407_18800_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x219-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X219.v:toroidal_five_choosability_critical_iff_six_critical_statement. Dvorak-Moreno Penarrubia Conjecture 2: on the torus (surface_embeddable 2), critical for 5-choosability iff 6-critical. Criticality is the local x219_subgraph_critical_for wrapper: the property fails on G but holds after deleting any one vertex or any one edge, which for the two subgraph-monotone properties involved is 'holds on every proper subgraph'. FIX 2026-09-23 (main session): the toroidal hypothesis is now `surface_embeddable 1 G` (ORIENTABLE genus at most one, the torus) together with `connected [set: G]"
   },
   "axv_2407_18800_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x219-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X219.v:toroidal_five_choosable_iff_five_colourable_statement. Dvorak-Moreno Penarrubia Conjecture 3: a toroidal graph is 5-choosable iff its chromatic number is at most 5, with GTBase's choosable and chi. Only the colourable-implies-choosable direction is open. FIX 2026-09-23 (main session): the toroidal hypothesis is now `surface_embeddable 1 G` together with `connected [set: G]`, which both corrects the surface (surface_euler_genus is the orientable genus, so the torus is index 1) and kills the padding refutation (a graph padded with disjoint copies of K_2 is disconnected); the d"
   },
   "axv_2407_18800_02": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x219-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "BLOCKED — Edge-width is the length of a shortest NON-CONTRACTIBLE cycle of the drawing. GTBase's surface layer (base/theories/surface.v) provides rotation systems, faces and Euler genus but no contractibility or homotopy predicate for cycles, so edge-width cannot be defined. Girth at least four implies edge-width at least four but not conversely (a toroidal triangulation may have only contractible triangles), so the placeholder body is a weakening. Re-author once a contractibility predicate lands in base/theories/surface.v. CONFIRMED by the second-reader readback 2026-09-23 (the paper defines "
   },
   "axv_2407_18800_03": {
    "statement": "todo",
@@ -4907,11 +5102,14 @@
    "audit_page": "todo"
   },
   "axv_2410_23566_05": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x221-conjecture-relations",
+   "package": "digraph-theory",
+   "note": "Authored in X221.v:kextension_linear_unavoidability_statement. Conjecture 11: linear unavoidability is preserved by k-extensions. New local vocabulary x221_linearly_unavoidable (one constant C with unvd(D) <= C*|V(D)| throughout the family) and x221_kextension k F D (D acyclic, and deleting some k-element vertex set leaves a digraph dgiso to a member of F); unvd is the relational invariant of conjectures/unvd.v. Edge e106 from conj_9 recorded as a candidate."
   },
   "axv_2410_23566_06": {
    "statement": "todo",
@@ -5167,7 +5365,7 @@
   "axv_2505_05339_02": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x6-hypergraph-spectral-topological",
@@ -5275,11 +5473,14 @@
    "audit_page": "todo"
   },
   "axv_2506_08810_03": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x228-conjecture-relations",
+   "package": "infinite-graph-theory",
+   "note": "Authored in X228.v:infinite_tournament_induced_saturation_statement. Bonamy-Groenland-Johnston-Morrison-Scott Conjecture 24: for every non-transitive finite tournament T there is a countably infinite T-free tournament every locally finite perturbation of which contains an induced copy of T. The finite tournament is a [diGraph] carrying GTBase.common's [tournament]; the countable side is a [rel nat] (the vertex set IS countably infinite by construction). New local vocabulary in X228.v: [x228_ctournament], [x228_transitive], [x228_induced_copy], [x228_lf_perturbation]. The NONEMPTINESS clause of"
   },
   "axv_2506_08810_04": {
    "statement": "todo",
@@ -5452,11 +5653,14 @@
    "audit_page": "todo"
   },
   "axv_2510_11311_04": {
-   "statement": "todo",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x221-conjecture-relations",
+   "package": "digraph-theory",
+   "note": "BLOCKED — Second-reader readback 2026-09-23 (session 01P75Y6ikkgDyzUzzoef316Z): TOO STRONG (failure mode 3). arXiv:2510.11311 defines 'F is Eulerian-avoidable' as 'there exists d_F : N -> N such that every Eulerian digraph of minimum out-degree at least d_F(k) contains an F-free SUBDIGRAPH of minimum out-degree at least k', where a subdigraph may live on any subset of the vertices. x221_eulerian_avoidable instead requires a SPANNING witness: outsel f has vertex type D, so 'forall v : outsel f, k <= outdeg v' forces EVERY vertex of the host to keep k out-arcs. Spanning implies the source's form"
   },
   "axv_2511_02892_00": {
    "statement": "todo",
@@ -5510,11 +5714,14 @@
    "note": "Authored in X64.v:finite_bridgeless_cubic_two_homogeneous_exceptions_statement. Encodes Problem 5.2: finitely many connected bridgeless cubic graphs lack a 2-homogeneous colouring."
   },
   "axv_2511_02892_06": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "partial",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x228-conjecture-relations",
+   "package": "cycle-theory",
+   "note": "Authored in X228.v:half_flow_pair_statement. Workshop on Cycles and Colourings 2025, Conjecture 6.1 (1/2-flow-pair): every bridgeless multigraph carries a 2-flow phi2 and a 4-flow phi4 with 2 <= |phi4 e| whenever phi2 e = 0. Carrier mgraph, reusing D1.iconservative and foundations/connectivity.bridgeless. A k-flow here ALLOWS the value zero (x228_kflow is deliberately weaker than D1.has_nz_kflow); only the compatibility condition makes the pair nowhere-zero in the combined sense. implications_X228.v proves the corpus edge e174 to five_flow_statement (Qed, status verified) modulo one explicit e"
   },
   "axv_2511_02892_07": {
    "statement": "todo",
@@ -5524,18 +5731,24 @@
    "audit_page": "todo"
   },
   "axv_2511_03864_00": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:tree_mu_ktt_free_polynomial_tree_alpha_statement. Alon-Milanic-Rzazewski Question 5.2. tree_mu_le (foundations/width_params.v) is the paper's induced matching treewidth, verified against the source: a tree decomposition bounds by m the size of every INDUCED MATCHING all of whose edges have at least one endpoint in ONE common bag. K_{t,t}-free is INDUCED-K_{t,t}-free, as the paper's conventions state. A polynomial is a list of natural coefficients evaluated by Horner (x220_poly_eval); the 0 < m positivity hypothesis of the source is kept."
   },
   "axv_2511_03864_01": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x220-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X220.v:bounded_tree_mu_polynomial_biclique_tree_alpha_statement. Alon-Milanic-Rzazewski Question 5.3, the paper's own equivalent restatement of Question 5.2 (corpus edge e072). 'Classes of bounded induced matching treewidth' is modelled by the maximal such classes, fun G => tree_mu_le G m for a fixed m. x220_ibn G t is the induced biclique number, defined relationally (an induced K_{t,t} exists and no induced K_{s,s} with s > t). implications_X220.v records e072 as a candidate and proves the two halves of the dictionary it needs (x220_poly_eval_mono, x220_ibn_free)."
   },
   "axv_2511_07601_00": {
    "statement": "todo",
@@ -5653,11 +5866,14 @@
    "audit_page": "todo"
   },
   "axv_2601_15245_04": {
-   "statement": "todo",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x218-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X218.v:kr_free_degenerate_fractional_chromatic_sublinear_statement. Bradac-Fox-Steiner-Sudakov-Zhang Problem 6.4, stated affirmatively: for r >= 4 and every positive q (standing for epsilon = 1/q) there is d0 such that every d-degenerate graph with omega < r and d >= d0 has fractional chromatic number at most d/q, in X130's attained (a:b)-fold cross-multiplied form x130_frac_chi_le G d q."
   },
   "axv_2602_07435_00": {
    "statement": "todo",
@@ -5688,7 +5904,7 @@
    "audit_page": "todo",
    "commit": "x2-clean11",
    "package": "digraph-theory",
-   "note": "Authored in X2.v:vertex_transitive_longest_dicycles_intersect_statement. Encodes Question 4.3: connected vertex-transitive digraphs have pairwise-intersecting longest directed cycles."
+   "note": "Authored in X2.v:vertex_transitive_longest_dicycles_intersect_statement. Encodes Question 4.3: connected vertex-transitive digraphs have pairwise-intersecting longest directed cycles. Re-read 2026-09-23 against the reworded graph-conjectures@b72c585 text (\"Is it true that in any connected vertex transitive digraph, any two longest directed cycles intersect?\", previously a synonymous paraphrase): same proposition, the Rocq body is unchanged and faithful; source_hash pinned."
   },
   "axv_2602_16333_03": {
    "statement": "todo",
@@ -5815,6 +6031,367 @@
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo"
+  },
+  "bm_003": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x216-conjecture-relations",
+   "package": "infinite-graph-theory",
+   "note": "Authored in X216.v:halin_hypomorphic_infinite_subgraph_statement. Halin 1970 (Bondy-Murty Appendix A #3), status DISPROVED (Bowler-Erde-Heinig-Lehner-Pitz 2017, Theorem 1.6): hypomorphic infinite graphs embed in each other. Authored faithfully as a refutation target; NO refutation is committed. Carrier is igraph.v's Prop-level [iGraph] with its [infinite_graph] (Dedekind infiniteness). New local vocabulary in X216.v: [x216_embeds] (isomorphism onto a NON-induced subgraph), [x216_del_iso] (G - v isomorphic to H - w, stated on the ambient vertex types so that no eqType is needed) and [x216_hypom"
+  },
+  "bm_011": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "done",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x212-conjecture-relations",
+   "package": "cycle-theory",
+   "note": "Authored in X212.v:barat_thomassen_tree_decomposition_statement. Barat-Thomassen: for every nonempty tree T there is k(T) such that every k(T)-edge-connected simple graph whose edge count is divisible by #|E(T)| decomposes into copies of T. Carrier sgraph; a copy of T is the image edge set x212_copy_edges f of an injective adjacency-preserving f : T -> G (not necessarily induced); the decomposition is a seq of edge sets with count (e in A) over the list equal to (e in E(G)). Library vocabulary: GTBase.common k_edge_connected, sgraph is_tree / E(G). Review 2026-09-10 solved (Bensmail-Harutyunya"
+  },
+  "bm_013": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "partial",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x212-conjecture-relations",
+   "package": "cycle-theory",
+   "note": "Authored in X212.v:small_cycle_double_cover_statement. Bondy's small cycle double cover conjecture: every simple bridgeless multigraph on n vertices has a cdc with at most n-1 members. Carrier mgraph with an explicit simple_mgraph hypothesis so that the row shares U6.cdc with cycle_double_cover_statement, which it strengthens (corpus edge e209, candidate in implications_X212.v). The bound uses truncated natural subtraction under the guard 0 < #|G|. Inherited caveat: bridgeless (foundations/connectivity.v) is stated with coq-graph-theory's DIRECTED walk. RE-READ 2026-09-23 after the bridgeless/"
+  },
+  "bm_016": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x212-conjecture-relations",
+   "package": "cycle-theory",
+   "note": "Authored in X212.v:linear_arboricity_regular_statement. Linear arboricity conjecture: la(G) = ceil((k+1)/2) for every simple k-regular G. Carrier sgraph; the same encoding as topological-graph-theory X23.v, an edge colouring {set G} -> 'I_q all of whose colour graphs are forests of maximum degree at most 2, with achievability AND minimality (the conjectured value is an equality). Because 'I_0 is empty while {set G} is not, the encoded minimum is always at least 1, which makes the degenerate k = 0 case (edgeless graph, ceil_div 1 2 = 1) come out right; the guard 0 < #|G| excludes the empty grap"
+  },
+  "bm_021": {
+   "statement": "blocked",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x216-conjecture-relations",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — 'Is this problem in P?' is a verdict about a SEARCH problem in a model of computation. GTBase.complexity fixes one interpreter and one program class and measures cost in its steps over one chosen data encoding, so a positive answer there is not membership in P; and the search/decision/promise readings of the source question differ. The 2026-07-17 blocked-retargeting audit rejected the finite-witness encodings of this family (needs-computation-model), and the wave plan pre-declares the row blocked."
+  },
+  "bm_022": {
+   "statement": "blocked",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x216-conjecture-relations",
+   "package": "graph-theory-misc",
+   "note": "BLOCKED — Three blockers. (1) GTBase has no certificate/complexity-class layer; x216_in_coNP is a bespoke rendering of 'the complement is in NP' in the fixed prog model, and the 2026-07-17 audit machine-confirmed that the earlier GTMisc in_NP/NP_hard layer was DECOUPLED (satisfiable by fun _ => 0). (2) k is part of the input in the source with |X| = |Y| = k; the encoding recovers k as |X| and does not record |X| = |Y|. (3) 'Internally disjoint' is rendered as pairwise disjoint internal vertex sets, which is weaker than the source's linkage reading (distinct endpoints, one per vertex of X and o"
+  },
+  "bm_025": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x214-conjecture-relations",
+   "package": "packing-theory",
+   "note": "Authored in X214.v:spanning_k_connected_bipartite_subgraph_statement. Thomassen's conjecture in the form the book states it (f(k) = 2k): every 2k-connected graph has a spanning k-connected bipartite subgraph. No local vocabulary: [k_connected] is base's Whitney form, [bipartite] base's 2-colouring form, and 'spanning subgraph' is GTBase.common's [del_edge_set G F] (same vertex type, the edges of G outside F), so spanningness is definitional rather than a side condition. Guard [0 < k]: the k = 0 instance is trivially true (delete every edge) and is excluded. The source's partial results (Delcou"
+  },
+  "bm_026": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "done",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x212-conjecture-relations",
+   "package": "cycle-theory",
+   "note": "Authored in X212.v:orientable_five_cycle_double_cover_statement. Orientable five cycle double cover conjecture (Archdeacon, Jaeger): every 2-edge-connected multigraph has five even subgraphs, indexed by 'I_5, each carrying a balanced (eulerian) orientation, covering every edge exactly twice, the two covering members traversing it in opposite directions. 'Orientable' is exactly the combinatorial condition recorded in the corpus context, so NO surface or embedding layer is used (base/surface.v is not needed). 2-edge-connected is foundations/connectivity.v's two_edge_connected = mconnected /\\ bri"
+  },
+  "bm_029": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x214-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X214.v:kelmans_seymour_k5_subdivision_statement. Kelmans-Seymour: every 5-connected non-planar graph contains a K_5 subdivision. Planarity is base's wagner_planar (no K_5 and no K_3,3 minor, i.e. Wagner's theorem), so the row needs no embedding layer; 5-connectivity is base's Whitney-form k_connected. Subdivision containment is the new has_subdivision of minor-theory/theories/foundations/containment.v (injective branch vertices plus internally disjoint paths, NOT required to be induced). Corpus status solved (He-Wang-Yu, JCTB 144, 2020)."
+  },
+  "bm_031": {
+   "statement": "todo",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo"
+  },
+  "bm_032": {
+   "statement": "todo",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo"
+  },
+  "bm_033": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "done",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x215-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X215.v:erdos_sos_tree_embedding_statement. Erdos-Sos: a graph with #|G|*k < 2*#|E(G)| + #|G| (i.e. m > n(k-1)/2) contains every tree with k edges. 'Tree with k edges' is rendered by the equivalent PAIR of hypotheses #|E(T)| = k and #|T| = k.+1, so that the vertex count is available to the e239 implication without the (unavailable) |E(T)| = |V(T)|-1 lemma. READBACK 2026-09-23 (second reader): PASS. Back-translation matches bm-033 verbatim; is_tree + [#|E(T)|=k, #|T|=k.+1] selects exactly the trees with k edges (for a tree the two are equivalent, so neither half is a strengthening); "
+  },
+  "bm_034": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x215-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X215.v:even_cycle_turan_lower_bound_statement. ex(n,C_2k) >= c n^(1+1/k) for k >= 2, stated as: exists rational c = p/q > 0 and a threshold n0 such that for every n >= n0 some C_2k-free graph on n vertices has p^k n^(k+1) <= q^k |E|^k. ex is not defined as a maximum (graphs on a fixed vertex set are not a finite type); the lower bound is the equivalent existential form. READBACK 2026-09-23 (second reader): PASS. p^k*n^(k+1) <= q^k*m^k is exactly m >= (p/q)*n^(1+1/k) after clearing, and the existential lower-bound form is equivalent to a lower bound on the (undefined) maximum. Not v"
+  },
+  "bm_037": {
+   "statement": "blocked",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x215-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — The row asks for a CONSTRUCTIVE proof that r(k,k) >= c^k. Constructivity (an explicit family, or an algorithm producing the colouring) is a property of a PROOF, not of a proposition, and expressing it needs the computation model these waves keep out of scope. The compiling placeholder states only the underlying inequality -- and, as the 2026-09-23 second-reader readback established, it states it over [0 < k], which makes the placeholder axiom-free REFUTABLE (k = 1, N = 1 forces [~ x215_arrows 1 1], contradicting the Qed lemma x215_arrows_1_1 of grounding_X215.v; see meta/probe_hints/"
+  },
+  "bm_038": {
+   "statement": "blocked",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x215-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "BLOCKED — The row asks whether lim_k r(k,k)^(1/k) EXISTS and, if so, what its value is. The existence of a real limit needs a reals layer GTBase does not have, and the 'determine its value' half records no conjectured value at all. The placeholder pins the limit to a rational p/q, a strictly different and possibly false statement (wrong object)."
+  },
+  "bm_039": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "done",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x215-conjecture-relations",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X215.v:burr_erdos_tree_ramsey_statement. r(T,T) <= 2n-2 for every tree T on n >= 2 vertices, stated over trees with k >= 1 edges (n = k+1, 2n-2 = 2k) so that no natural subtraction occurs. The degenerate n = 1 case is excluded because r(K_1,K_1) = 1 > 0 = 2n-2 there. implications_X215.v proves the corpus edge e239 (Erdos-Sos => Burr-Erdos) with Qed, status verified. READBACK 2026-09-23 (second reader): PASS. N = 2*k = 2n-2 with n = k+1; the [0 < k] guard excludes exactly the n = 1 corner where the literal source bound is false (r(K_1,K_1) = 1 > 0). Checked tight at k = 3 (T = K_{1,"
+  },
+  "bm_041": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "done",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x214-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X214.v:hadwiger_chromatic_clique_minor_statement. Hadwiger: every k-chromatic graph has a K_k minor, stated with the exact equality chi([set: G]) = k and the library minor. implications_X214.v proves two corpus edges out of it, e224 to seagull_statement (U7.v) and e240 to hadwiger_independence_minor_statement (X5.v), both Qed and status verified, through the bridge lemma #|A| <= chi(A) * alpha(A); the third edge e223 targets fractional_hadwiger_statement in extremal-graph-theory and is not recordable from this package."
+  },
+  "bm_042": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x214-conjecture-relations",
+   "package": "minor-theory",
+   "note": "Authored in X214.v:hajos_k5_k6_subdivision_statement. Hajos for k = 5 and k = 6 only, the two cases the source leaves open (Dirac settled k <= 4, Catlin refuted every k >= 7); the restriction is carried as the hypothesis 'k = 5 or k = 6' rather than by quantifying over all k. Uses chi([set: G]) = k and has_subdivision (foundations/containment.v)."
+  },
+  "bm_045": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "done",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x213-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X213.v:erdos_lovasz_tihany_statement. Erdos-Lovasz Tihany (Bondy-Murty A.45): a graph with chi(G) = k and every clique smaller than k splits into two DISJOINT vertex sets of chromatic numbers exactly k1 and k2 whenever k+1 = k1+k2 with k1, k2 >= 2; the source's 'vertex-disjoint subgraphs' is read as induced subgraphs (chi(A) is the chromatic number of the subgraph induced on A), which is equivalent."
+  },
+  "bm_046": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x213-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X213.v:el_zahar_erdos_statement. El-Zahar-Erdos (Bondy-Murty A.46): one function f of (r,k), quantified before the graphs, such that chi(G) >= f(r,k) forces either an r-clique or an ANTICOMPLETE pair of vertex sets each of chromatic number exactly k (X3's x3_anticomplete), i.e. an induced subgraph that is the disjoint union of two k-chromatic graphs."
+  },
+  "bm_050": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "done",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x213-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X213.v:triangle_free_induced_tree_chi_bounded_statement. Gyarfas (Bondy-Murty A.50) in its FINITE equivalent form: for every finite tree T there is c bounding the chromatic number of every triangle-free graph with no induced T. The source speaks of infinite chromatic number; the two are equivalent by De Bruijn-Erdos in one direction and by a disjoint union of finite counterexamples in the other, which the doc block spells out. implications_X213.v derives this statement from U8's Gyarfas-Sumner (corpus edge e229, status=verified)."
+  },
+  "bm_053": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x213-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X213.v:albertson_toroidal_delete_three_statement. Albertson (Bondy-Murty A.53): every toroidal graph, i.e. surface_embeddable 2 (Euler genus at most two, GTBase surface.v), has a set S of at most three vertices with chi([set: G] :\\: S) <= 4. Uses the rotation-system predicate, not planarity. FIX 2026-09-23 (main session): the toroidal hypothesis is now `surface_embeddable 1 G` (ORIENTABLE genus at most one, the torus) together with `connected [set: G]`, replacing the false `surface_embeddable 2 G`; the doc block's English statement/Definitions/Notes were rewritten accordingly, and "
+  },
+  "bm_054": {
+   "statement": "todo",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo"
+  },
+  "bm_057": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x213-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X213.v:one_factorization_conjecture_statement. 1-factorization conjecture (Bondy-Murty A.57): every d-regular simple graph on a positive EVEN number n of vertices with n <= 2*d is d-edge-colourable. Edge colourings are local x213 vocabulary (a symmetric colour of ordered pairs, distinct on two edges sharing an endpoint) because GTBase's chromatic_index lives on multigraphs; the 1-factorization form of the source's context is the same statement."
+  },
+  "bm_060": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x213-conjecture-relations",
+   "package": "chromatic-theory",
+   "note": "Authored in X213.v:vizing_kempe_interchange_statement. Vizing's interchange conjecture (Bondy-Murty A.60), corpus status SOLVED (Narboni 2023): from every proper k-edge-colouring a colouring using at most m colours is reachable by Kempe changes, for every achievable m <= k -- which avoids naming chi'(G), the least such m. A Kempe change interchanges two colours on a line-adjacency-CLOSED set of two-coloured edges (a union of alternating paths and cycles); reachability is a nat-indexed Fixpoint."
+  },
+  "bm_062": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x212-conjecture-relations",
+   "package": "cycle-theory",
+   "note": "Authored in X212.v:kotzig_unique_k_path_statement. Kotzig's unique k-path conjecture: for k >= 3 no graph has a unique path of length k between every two DISTINCT vertices. The Rocq body is the negation of the unique-path property, universally quantified over k >= 3 and over G, guarded by 1 < #|G| (on a graph with fewer than two vertices the property holds vacuously, which would make the statement false for trivial reasons). Paths of length k are lists p with path (--) x p, size p = k, uniq (x :: p) and last x p = y; uniqueness is exists!. The distinct-pairs reading is the one under which k = "
+  },
+  "bm_064": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "done",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x212-conjecture-relations",
+   "package": "cycle-theory",
+   "note": "Authored in X212.v:smith_two_longest_cycles_statement. Smith: two longest cycles of a k-connected graph (k >= 2) share at least k vertices. Cycles are ucycleb on more than two vertices; longest is relative to that class. The same conjecture is also carried by the studies row std_smith_s_conjecture_longest_cycles_in_r_connected (X10.smith_longest_cycles_r_connected_statement); implications_X212.v proves the two bodies EQUIVALENT (Qed), as a cross-corpus faithfulness check."
+  },
+  "bm_065": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x212-conjecture-relations",
+   "package": "cycle-theory",
+   "note": "Authored in X212.v:bondy_linear_cycle_cubic_statement. Bondy: some positive constant c makes every 3-connected cyclically 4-edge-connected cubic graph contain a cycle of length at least c*n. The positive real constant is encoded as the positive rational p/q by two positive naturals, the conclusion being the cross-multiplied p * #|G| <= q * size c; this is equivalent to the real form because every positive real constant can be lowered to a positive rational one. Cyclic edge connectivity is local vocabulary (x212_edge_cut, x212_cycle_within): every vertex set whose two sides both contain a cycle"
+  },
+  "bm_066": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x212-conjecture-relations",
+   "package": "cycle-theory",
+   "note": "Authored in X212.v:birmele_long_cycle_transversal_statement. Birmele-Bondy-Reed: if any two cycles on at least k vertices meet, then some set of AT MOST k vertices meets every cycle on at least k vertices. The guard 3 <= k is load-bearing: for k <= 2 the hypothesis only says that any two cycles meet, which holds in K_5, while no single vertex or pair meets all cycles of K_5, so the unguarded statement is false; the conjecture is posed for k >= 3. 'A set of k vertices' is read as at most k (a set of exactly k vertices need not exist when #|G| < k)."
+  },
+  "bm_070": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x216-conjecture-relations",
+   "package": "digraph-theory",
+   "note": "Authored in X216.v:weighted_caccetta_haggkvist_statement. Weighted Caccetta-Haggkvist (Bollobas-Scott): a strongly connected loopless digraph with positive rational arc weights and w^-(v) >= 1, w^+(v) >= 1 at every vertex has a directed cycle of weight at least 1. New local vocabulary x216_win / x216_wout / x216_cycle_weight (arc weights in rat, cycle weight as the sum of w z (next c z) over the vertices of a dicycle); strongb (invariants/strong.v) and dicycle (core/dipath.v) reused. The looplessness and 0 < #|D| guards are load-bearing, both refuted in grounding_X216.v. No implication file: t"
+  },
+  "bm_079": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "partial",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x211-conjecture-relations",
+   "package": "hamiltonicity-theory",
+   "note": "Authored in X211.v:matthews_sumner_four_connected_claw_free_statement. Matthews-Sumner: every 4-connected claw-free graph is Hamiltonian. Claw-freeness is GTBase.common's [induced_free G 'K_1,3] (no INDUCED K_{1,3}); 4-connectivity is base's Whitney-form [k_connected G 4], which forces 4 < #|G| so the digon convention of [hamiltonian] is inert. implications_X211.v proves the easy direction of the confirmed corpus equivalence gc:e234 (Matthews-Sumner => opg:hamiltonian_cycles_in_line_graphs, via the Qed lemma line_graph_claw_free)."
+  },
+  "bm_080": {
+   "statement": "blocked",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x211-conjecture-relations",
+   "package": "hamiltonicity-theory",
+   "note": "BLOCKED — The hypothesis is geometric: G must be the 1-skeleton of a simple 4-dimensional convex polytope. Neither coq-graph-theory 0.9.7 nor GTBase has a real-geometry / convexity / polytope layer (no R^n points, convex hulls, faces or simplicity), and no combinatorial characterisation of 4-polytope graphs is known (already in dimension 3 this is Steinitz's theorem, a nontrivial result and a different statement). Any purely combinatorial surrogate (4-regular + 4-connected, or 4-regular + 4-connected + planar-like) is a proxy encoding with a strictly larger hypothesis class, i.e. an over-stron"
+  },
+  "bm_085": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x211-conjecture-relations",
+   "package": "hamiltonicity-theory",
+   "note": "Authored in X211.v:cantoni_planar_cubic_three_hamilton_cycles_statement. Cantoni: a planar cubic graph with exactly three Hamilton cycles contains a triangle. Planarity is base's combinatorial [wagner_planar] (no K5 and no K3,3 minor = planarity by Wagner's theorem, axiom-free, no embedding needed); cubic is [regular G 3]; 'exactly three Hamilton cycles' counts cycles UP TO ROTATION AND REFLECTION, by identifying each Hamilton cycle with its edge set ([x211_hamilton_cycle_edge_sets], built from GTBase.common's [hamiltonian_cycle] over the #|G|-tuples of vertices); the conclusion is the positiv"
+  },
+  "bm_088": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x211-conjecture-relations",
+   "package": "hamiltonicity-theory",
+   "note": "Authored in X211.v:thomassen_vertex_transitive_all_but_finitely_many_statement. Thomassen: all but finitely many connected vertex-transitive graphs are Hamiltonian, encoded as a size threshold (exists n0, every connected vertex-transitive G with n0 <= #|G| is Hamiltonian). Vertex-transitivity is local ([x211_vertex_transitive] over [x211_graph_automorphism], byte-identical to U2's pair -- candidate for base/common.v); connectedness is the library's [connected [set: G]]."
+  },
+  "bm_089": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x211-conjecture-relations",
+   "package": "hamiltonicity-theory",
+   "note": "Authored in X211.v:chvatal_toughness_hamiltonian_statement. Chvatal's toughness conjecture: exists a positive integer k such that every k-tough graph on more than two vertices is Hamiltonian. Toughness is rational-free in the cleared form [k * #|components (~: S)| <= #|S|] for every S leaving at least two components (library [components]). The guard 2 < #|G| is load-bearing and proved to have teeth in grounding_X211.v ('K_1 is vacuously k-tough for every k and is not Hamiltonian under GTBase.common's cycle convention)."
+  },
+  "bm_090": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x211-conjecture-relations",
+   "package": "hamiltonicity-theory",
+   "note": "Authored in X211.v:hypohamiltonian_minimum_degree_four_statement. Thomassen's question 'is there a hypohamiltonian graph of minimum degree at least 4?', formalised as the existence statement it asks about: exists G with every degree >= 4 that is not Hamiltonian while every vertex-deleted subgraph [induced ([set: G] :\\ v)] is. Minimum degree >= 4 forces #|G| >= 5, so no vertex-deleted subgraph is a digon and the cycle convention is inert. An exhaustive search over all graphs on at most 7 vertices found no witness (consistent with the row's open status)."
+  },
+  "bm_091": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "todo",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x211-conjecture-relations",
+   "package": "hamiltonicity-theory",
+   "note": "Authored in X211.v:grotschel_no_bipartite_hypotraceable_statement. Grotschel: no bipartite hypotraceable graph. Bipartite is base's 2-colouring form; hypotraceable is 'no Hamilton path, but every vertex-deleted subgraph has one' over GTBase.common's [traceable]. The guard 2 < #|G| is load-bearing and proved to have teeth in grounding_X211.v: the edgeless graph on two vertices is bipartite and literally hypotraceable, and an exhaustive search over all graphs on at most 7 vertices shows it is the ONLY such degenerate example."
   },
   "drv_3dc_antichain_coverage": {
    "statement": "todo",
@@ -8922,6 +9499,16 @@
    "package": "packing-theory",
    "note": "Authored in XE1.v:erdos_993_statement. Encodes Erdos Problems #993 in the XE Erdos clean/bounded statement wave."
   },
+  "oth_meyniels_conjecture": {
+   "statement": "done",
+   "grounding": "todo",
+   "edges": "done",
+   "correspondence": "todo",
+   "audit_page": "todo",
+   "commit": "x217-conjecture-relations",
+   "package": "graph-theory-misc",
+   "note": "Authored in X217.v:meyniel_cop_number_sqrt_statement. Meyniel: one absolute constant C bounds the cop number of every connected nonempty graph by C * sqrt_ceil(n). New shared foundation graph-theory-misc/theories/foundations/cops.v (self-contained, generic over an sgraph, also intended for the hypergraph-theory half of X217): cop_position k = {ffun 'I_k -> G}, captured/cop_move/robber_move, the boolean bounded-horizon cops_capture t C r (cops move first, a cop landing on the robber ends the play), cops_win_within k t, cops_win k = exists t, cops_win_within k t, and cop_number_le k = exists j <"
+  },
   "std_aboulker_aubian_charbit_lopes_question_on_certif": {
    "statement": "todo",
    "grounding": "todo",
@@ -9835,7 +10422,7 @@
   "std_chen_chv_tal_conjecture": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x55-misc-clean1",
@@ -9845,7 +10432,7 @@
   "std_chen_chv_tal_conjecture_146": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x110-misc-clean1",
@@ -12148,7 +12735,7 @@
   "std_smith_s_conjecture_longest_cycles_in_r_connected": {
    "statement": "done",
    "grounding": "todo",
-   "edges": "todo",
+   "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x10-cycle-clean2",

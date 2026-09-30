@@ -167,6 +167,29 @@ Definition same_switching_deck (G H : sgraph) : Prop :=
 Definition switching_reconstructible (G : sgraph) : Prop :=
   forall H : sgraph, same_switching_deck G H -> inhabited (G ≃ H).
 
+(** Corpus row: opg:switching_reconstruction_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/switching_reconstruction_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/switching_reconstruction_conjecture.json
+    English statement: (OPG "Switching reconstruction conjecture", attributed to Stanley)
+      For every simple graph G on at least five vertices and every simple graph H: if there
+      is a bijection f from the vertices of G to the vertices of H such that, for every
+      vertex v of G, the Seidel switch of G at v is isomorphic to the Seidel switch of H at
+      f(v), then G and H are isomorphic.
+    Definitions: [switch_vertex G v] — the Seidel switch of G at the single vertex v: every
+      pair containing v is toggled (a neighbour of v becomes a non-neighbour and conversely)
+      and all other adjacencies are kept (U11.v, built from [vertex_switch G S], the Seidel
+      switch with respect to a vertex set S, which toggles the pairs with exactly one
+      endpoint in S); [same_switching_deck G H] — some vertex bijection f matches the two
+      switching decks card by card up to isomorphism (U11.v);
+      [switching_reconstructible G] — every H with the same switching deck is isomorphic to
+      G (U11.v); [sgraph], [diso] written [F ≃ G] are coq-graph-theory, re-exported by
+      GTBase (base/theories/base.v).
+    Notes: a deck is modelled as a family of cards indexed by the deleted object, and having
+      the same deck as a bijection of the index sets matching corresponding cards up to
+      isomorphism (the standard multiset-up-to-isomorphism reading; the bijection forces
+      equal vertex counts). Isomorphism [≃] is Type-valued, so it is wrapped in [inhabited]
+      to land in Prop. Neither GTBase nor coq-graph-theory ships a Seidel switch, hence the
+      local [vertex_switch] (tagged @MOVE-to-base in this file). *)
 Definition switching_reconstruction_statement : Prop :=
   forall G : sgraph, (5 <= #|G|)%N -> switching_reconstructible G.
 
@@ -192,21 +215,51 @@ Definition same_edge_deck (G H : sgraph) : Prop :=
 Definition edge_reconstructible (G : sgraph) : Prop :=
   forall H : sgraph, same_edge_deck G H -> inhabited (G ≃ H).
 
+(** Corpus row: opg:edge_reconstruction_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/edge_reconstruction_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/edge_reconstruction_conjecture.json
+    English statement: (OPG "Edge Reconstruction Conjecture", Harary)
+      For every simple graph G with at least four edges and every simple graph H: if there
+      is a bijection f from the edges of G to the edges of H such that, for every edge e of
+      G, the graph obtained from G by deleting e is isomorphic to the graph obtained from H
+      by deleting f(e), then G and H are isomorphic.
+    Definitions: [sdel_edge G e] — the graph on the vertices of G with the single undirected
+      edge e (given as its two-element endpoint set) removed and every other adjacency kept
+      (U11.v; named apart from coq-graph-theory's [del_edge], which deletes a directed arc
+      and returns a diGraph, so it is unusable here); [same_edge_deck G H] — some bijection
+      between the edge sig-types matches the edge-deleted cards up to isomorphism (U11.v);
+      [edge_reconstructible G] — every H with the same edge deck is isomorphic to G (U11.v);
+      [E(G)] — the edge set [sg_edge_set] of a simple graph (coq-graph-theory).
+    Notes: same deck model as the vertex-deleted case (a bijection of index sets, cards
+      compared up to isomorphism), here indexed by the edge sig-type
+      [{e : {set G} | e \in E(G)}], so the bijection forces G and H to have equally many
+      edges. The four-edge guard is stated on G only; H inherits it through the bijection. *)
 Definition edge_reconstruction_statement : Prop :=
   forall G : sgraph, (4 <= #|E(G)|)%N -> edge_reconstructible G.
 
 (** ============================================================================
     Row 3 — Graham's tree-reconstruction Problem — OPEN.
-
-    Source: "for every graph G, we let L(G) denote the line graph of G.  Given
-    that G is a tree, can we determine it from the integer sequence
-    |V(G)|, |V(L(G))|, |V(L(L(G)))|, … ?"
-
-    Stated as the affirmative proposition: two trees whose iterated-line-graph
-    vertex-count sequences agree at every index are isomorphic.  [L] is
-    [sline_graph]; [L^i(T)] is [iter i sline_graph T]; [|V(·)|] is the vertex
-    count [#|·|].
     ========================================================================== *)
+
+(** Corpus row: opg:grahams_conjecture_on_tree_reconstruction
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/grahams_conjecture_on_tree_reconstruction/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/grahams_conjecture_on_tree_reconstruction.json
+    English statement: (OPG "Graham's conjecture on tree reconstruction", Graham)
+      Write L for the line-graph operation. For any two trees T1 and T2: if for every
+      natural number i the i-th iterate of L applied to T1 has the same number of vertices
+      as the i-th iterate of L applied to T2 (i = 0 giving the vertex counts of T1 and T2
+      themselves), then T1 and T2 are isomorphic.
+    Definitions: [sline_graph G] — the simple-graph line operation, of type
+      [sgraph -> sgraph]: its vertices are the edges of G, and two of them are adjacent when
+      they are distinct and their endpoint sets meet (U11.v; GTBase ships only
+      [line_graph : mgraph -> sgraph], which cannot be iterated on simple graphs, so this is
+      a counterpart and not a redefinition); [is_tree [set: T]] — T is a connected forest
+      (coq-graph-theory); [iter i f x] and the cardinality [#|_|] are MathComp.
+    Notes: the corpus row is a Problem — given that G is a tree, can we determine it from
+      the integer sequence |V(G)|, |V(L(G))|, |V(L(L(G)))|, ... ? It is formalized here as
+      the affirmative proposition that the whole sequence determines the tree up to
+      isomorphism. The sequence is indexed from i = 0 and equality is demanded at every
+      index, which is the literal reading of "the integer sequence". *)
 
 Definition grahams_conjecture_on_tree_reconstruction_statement : Prop :=
   forall T1 T2 : sgraph,
@@ -235,6 +288,23 @@ Definition same_deck (G H : sgraph) : Prop :=
 Definition reconstructible (G : sgraph) : Prop :=
   forall H : sgraph, same_deck G H -> inhabited (G ≃ H).
 
+(** Corpus row: opg:reconstruction_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/reconstruction_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/reconstruction_conjecture.json
+    English statement: (OPG "Reconstruction conjecture", Kelly and Ulam)
+      For any two simple graphs G and H, each on at least three vertices: if there is a
+      bijection f from the vertices of G to the vertices of H such that, for every vertex v
+      of G, the graph G with v deleted is isomorphic to the graph H with f(v) deleted, then
+      G and H are isomorphic.
+    Definitions: [vdel_card G v] — the card G - v, that is the subgraph of G induced on the
+      vertices different from v (U11.v); [same_deck G H] — some vertex bijection matches the
+      two vertex-deleted decks up to isomorphism (U11.v); [reconstructible G] — every H with
+      the same deck is isomorphic to G (U11.v; the statement below spells the two-graph form
+      out instead of using it); [induced] is coq-graph-theory.
+    Notes: the corpus describes the deck as a multiset of unlabelled cards counted with
+      multiplicity; the bijection-of-index-sets model used here is the standard equivalent
+      reading. The three-vertex guard is imposed on both G and H, although the bijection
+      already forces their vertex counts to agree. *)
 Definition reconstruction_statement : Prop :=
   forall G H : sgraph,
     (3 <= #|G|)%N -> (3 <= #|H|)%N -> same_deck G H -> inhabited (G ≃ H).

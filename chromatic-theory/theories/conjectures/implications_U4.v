@@ -76,6 +76,7 @@
 
 From GTBase Require Import base.
 From GraphTheory Require Import minor mgraph.
+From Chromatic.foundations Require Import choice_number partial_lists.
 From Chromatic.conjectures Require Import U4.
 
 Set Implicit Arguments.
@@ -111,6 +112,27 @@ Qed.
     No scheduled edge: see the AUDIT RESULT above.  The records below carry the
     status/citation for the audited (and deliberately UNSCHEDULED) relationships. *)
 
-(*@EDGE from=partial_list_coloring_0_statement to=partial_list_coloring_statement kind=implies status=candidate proved=false cite="Albertson-Grossman-Haas, Partial list colorings, Discrete Math. 214 (2000); Iradmusa 2010 (ratio conj strengthens AGH)" note="ratio (Row 2) strengthens AGH-partial (Row 1) via lambda_{chi_l}=n at s:=chi_l; the earlier empty-palette/t=0 defect in Row 1 is FIXED (list_colourable_on is now partial/option-valued), so the edge is schedulable — its Rocq proof is future work (edge-expansion track)" *)
+(*@EDGE from=partial_list_coloring_0_statement to=partial_list_coloring_statement kind=implies status=verified proved=true proof=partial_list_coloring_0_implies_partial_list_coloring cite="gc:e000" note="Corpus relation e000 (Albertson-Grossman-Haas, Discrete Math. 214 (2000); Iradmusa 2010). Now CLOSED. The corners t = 0 and #|G| = 0 are witnessed by W = set0. Otherwise instantiate the ratio row at r := t, s := cl: lambda_t and lambda_cl EXIST by [Chromatic.foundations.partial_lists.lambda_ex] -- the missing lemma of the old candidate note, proved by palette canonicalisation (list_colourable_on is a boolean over {ffun G -> option C}; every size-t assignment is relabelled into I_(t * #|G|) along a map injective on the colours used, which preserves the colourable sets in both directions (lco_inj, preimages by [pick], no choice axiom); the minimum over canonical assignments is an ex_minn); lambda_cl = #|G| because G is cl-choosable (pl_lambda_choosable); and lambda_t <= mu_L for the given L, where mu_L is realised by a colourable W (muf_count, a bigmax). Hence t * #|G| = t * lambda_cl <= cl * lambda_t <= cl * #|W|." *)
+Theorem partial_list_coloring_0_implies_partial_list_coloring :
+  partial_list_coloring_0_statement -> partial_list_coloring_statement.
+Proof.
+move=> PLC G t cl icn tcl C L hL.
+have W0 : list_colourable_on L set0.
+  by exists (fun _ => None); split => v; rewrite inE.
+case: (posnP t) => [t0|tpos]; first by exists set0; rewrite t0 mul0n.
+case: (posnP #|G|) => [g0|gpos]; first by exists set0; rewrite g0 muln0.
+have clpos : 0 < cl by apply: leq_trans tpos tcl.
+have [lr lrP] := lambda_ex tpos gpos.
+have [ls lsP] := lambda_ex clpos gpos.
+have lsE : ls = #|G| := pl_lambda_choosable (proj1 icn) lsP.
+have key := PLC G t cl cl lr ls icn tpos tcl (leqnn cl) lrP lsP.
+have [[W [hW cW]] _] := muf_count L.
+have lrle : lr <= muf L := (proj2 lrP) C L (muf L) hL (muf_count L).
+exists W; split => //.
+rewrite -lsE cW; apply: leq_trans key _.
+by rewrite leq_mul2l lrle orbT.
+Qed.
 (*@EDGE from=list_hadwiger_statement to=hadwiger_statement kind=implies status=refuted-direction cite="OPG_FULL_FORMALIZATION_PLAN §6" note="FORBIDDEN and CROSS-MILESTONE (Hadwiger is U7): the recorded list-Hadwiger gives only c*t-list-colourability, not (t-1)-colourability" *)
 (*@EDGE from=list_total_colouring_statement to=behzads_statement kind=implies status=refuted-direction cite="OPG_FULL_FORMALIZATION_PLAN §6" note="FORBIDDEN and CROSS-MILESTONE (Behzad node defined in U5): chi''_l = chi'' does not yield the chi'' <= Delta+2 bound" *)
+
+Print Assumptions partial_list_coloring_0_implies_partial_list_coloring.

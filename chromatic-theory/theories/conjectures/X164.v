@@ -57,8 +57,32 @@ Definition x164_linear_time_outputs_three_colouring (surface boundary : nat) : P
 
 (** ** X164 statements *****************************************************)
 
-(** Open problem: output a 3-colouring of a triangle-free graph embedded in a
-    fixed surface, with bounded precoloured boundary vertices, in linear time. *)
+(** Corpus row: arxiv:1601.01197#00
+    Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1601.01197__00/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1601.01197__00.json
+    English statement: (Dvorak, Kral and Thomas 2020, open problem on linear-time 3-colouring output, arXiv:1601.01197)
+      For every fixed surface and every bound on the number of precoloured boundary vertices there
+      is a linear-time algorithm that, given a triangle-free graph embeddable in that surface
+      together with a set of at most that many boundary vertices and a precolouring of them by three
+      colours, outputs a proper 3-colouring of the graph extending the precolouring on the boundary.
+    Definitions: [x164_instance] - a graph together with a boundary vertex set and a 3-colouring
+      used as the precolouring (this file); [x164_enc_instance] - its encoding as complexity-model
+      data (this file); [x164_valid_output I out] - the decoded output is a proper colouring
+      agreeing with the precolouring on the boundary (this file); [x164_instance_class surface
+      boundary] - triangle-free, embeddable in the surface, boundary of size at most the bound (this
+      file); [linear_time_outputs_on_class] (GTBase base/theories/complexity.v);
+      [surface_embeddable] (GTBase base/theories/surface.v).
+    Notes: KNOWN UNFAITHFUL ENCODING, corpus leg blocked. The faithfulness audit of 2026-07-17,
+      meta/BLOCKED_RETARGETING_AUDIT.md and the row's verification_note, found a missing
+      precondition that over-strengthens the row into a provably FALSE claim: the source asks for a
+      linear-time OUTPUT algorithm in the affirmative case, i.e. when the precolouring does extend,
+      while [x164_instance_class] drops that precondition and therefore demands a valid output even
+      for instances where no extension exists. The surface primitive is moreover orientable-genus
+      only, and the boundary parameter does not constrain the embedding. The body is left untouched
+      here, WP4 changes comments only.
+      V counts every vertex including isolated ones (base fix 2026-09-23): the old count saw
+      only the vertices carrying a dart, so the Euler count overstated the genus of every
+      graph with an isolated vertex and this hypothesis admitted fewer graphs than intended. *)
 Definition linear_time_surface_triangle_free_three_colouring_output_statement : Prop :=
   forall surface boundary : nat,
     x164_linear_time_outputs_three_colouring surface boundary.

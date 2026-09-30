@@ -68,7 +68,7 @@ Proof. by apply/eqP; rewrite cards_eq0; apply/eqP/setP => -[]. Qed.
        connectivity, [is_circuit] (digon), [two_edge_connected] *)
 
 Lemma mdeg_U (v : U) : mdeg v = 0.
-Proof. by rewrite /mdeg edges_at_U cards0. Qed.
+Proof. by rewrite /mdeg /subdeg !card_edgeU. Qed.
 
 Lemma mreg_U : mreg U 0.
 Proof. exact: mdeg_U. Qed.
@@ -115,11 +115,16 @@ Qed.
 Lemma edges_at_Gd (v : Gd) : edges_at v = [set: edge Gd].
 Proof. by apply/setP => e; rewrite !inE inc_all. Qed.
 
+(** [Gd] is LOOPLESS, so [subdeg] (which counts arc ENDS, giving a loop the
+    textbook degree 2) agrees with the incidence count here. *)
+Lemma loopless_Gd : loopless Gd.
+Proof. by case=> [[[[]|[]]|]|]. Qed.
+
 Lemma subdeg_Gd (H : {set edge Gd}) (v : Gd) : subdeg H v = #|H|.
-Proof. by rewrite /subdeg edges_at_Gd setTI. Qed.
+Proof. by rewrite (subdeg_loopless _ _ loopless_Gd) edges_at_Gd setTI. Qed.
 
 Lemma mdeg_Gd (v : Gd) : mdeg v = 2.
-Proof. by rewrite /mdeg edges_at_Gd cardsT card_edge_Gd. Qed.
+Proof. by rewrite /mdeg subdeg_Gd cardsT card_edge_Gd. Qed.
 
 Lemma subgraph_kregular_Gd : subgraph_kregular (G:=Gd) [set: edge Gd] 2.
 Proof. by move=> v; right; rewrite subdeg_Gd cardsT card_edge_Gd. Qed.
@@ -222,6 +227,320 @@ Proof. by rewrite /is_class1 chromatic_index_U mDelta_U. Qed.
 (** Identity: class-1 means [chi' = Delta]. *)
 Lemma is_class1E (G : mgraph) : is_class1 G -> chromatic_index G = mDelta G.
 Proof. by []. Qed.
+
+(** ================================================================= *)
+(** ** The LOOPLESS guard of the two [mreg] / [mDelta] rows (2026-09-23)
+
+    Second-reader prescription after the loop-degree repair.  [mdeg] counts ARC
+    ENDS, so a LOOP contributes 2 and loopful carriers can be [mreg _ (2t+1)].
+    The two rows react differently:
+      - [circular_flow_numbers_of_r_graphs_statement] is SAFE: its
+        [is_2t1_graph G t] guard already forces [loopless G]
+        ([is_2t1_loopless] below, a THEOREM under either degree convention);
+      - [circular_flow_number_of_regular_class_1_graphs_statement] was NOT:
+        nothing excluded loops, and [Gcl] below -- three parallel edges x-y, a
+        loop at u, an edge u-v, a loop at v -- is [mreg _ 3] and [is_class1]
+        (base's [line_graph] makes a loop non-adjacent to itself, so
+        [chromatic_index] stays finite where the source's edge chromatic number
+        is undefined) yet carries no nowhere-zero flow at all (at u the loop
+        cancels in [rconservative], forcing the pendant-adjacent edge to 0).
+        The row now carries [loopless G]; [class1_3reg_loopful_Gcl] shows the
+        guard has TEETH and [loopless_class1_3reg_G3p] shows it is not vacuous.
+    *)
+
+(** The loops of [G] at [v] (both ends at [v]). *)
+Definition loops_at (G : mgraph) (v : G) : {set edge G} :=
+  [set e | (source e == v) && (target e == v)].
+
+Lemma cutI_loops (G : mgraph) (v : G) : cut [set v] :&: loops_at v = set0.
+Proof.
+apply/setP => e; rewrite !inE.
+by case: (source e == v); case: (target e == v).
+Qed.
+
+Lemma cutU_loops (G : mgraph) (v : G) : cut [set v] :|: loops_at v = edges_at v.
+Proof.
+apply/setP => e; rewrite !inE incidentE.
+by case: (source e == v); case: (target e == v).
+Qed.
+
+(** Degree = (edges leaving [v]) + twice (loops at [v]). *)
+Lemma mdeg_cut (G : mgraph) (v : G) :
+  mdeg v = (#|cut [set v]| + (#|loops_at v| + #|loops_at v|))%N.
+Proof.
+rewrite /mdeg subdegE setIT.
+have -> : [set e in [set: edge G] | (source e == v) && (target e == v)]
+        = loops_at v by apply/setP => e; rewrite !inE.
+have := cardsUI (cut [set v]) (loops_at v).
+rewrite cutU_loops cutI_loops cards0 addn0 => ->.
+by rewrite addnA.
+Qed.
+
+(** A [(2t+1)]-graph is LOOPLESS: the singleton [ [set v] ] is an odd vertex
+    set, so its cut already accounts for all [2t+1] arc ends at [v] and no loop
+    is left over.  Hence the loop-degree convention does not widen the carrier
+    class of [circular_flow_numbers_of_r_graphs_statement]. *)
+Lemma is_2t1_loopless (G : mgraph) (t : nat) : is_2t1_graph G t -> loopless G.
+Proof.
+case=> reg cutb e; apply/negP => /eqP se.
+have h0 : (0 < #|loops_at (target e)|)%N.
+  by apply/card_gt0P; exists e; rewrite inE se !eqxx.
+have hc : (2 * t + 1 <= #|cut [set (target e)]|)%N.
+  by apply: cutb; rewrite cards1.
+have hm : (2 * t + 1)%N
+        = (#|cut [set (target e)]|
+           + (#|loops_at (target e)| + #|loops_at (target e)|))%N.
+  by rewrite -(reg (target e)) mdeg_cut.
+rewrite hm -{2}[#|cut [set (target e)]|]addn0 leq_add2l leqn0 addn_eq0
+        andbb in hc.
+by rewrite (eqP hc) in h0.
+Qed.
+
+(** ** Degree bookkeeping for [add_edge] (used by the two carriers below) *)
+
+(** Adding an arc [x -> y] adds one end at [x] and one at [y]; at a LOOP
+    ([x = y]) both land on the same vertex, which is the textbook 2. *)
+Lemma card_ends_at_add (G : mgraph) (x y : G) (b : bool) (v : G) :
+  #|ends_at [set: edge (mgraph.add_edge G x y tt)] b v|
+  = (#|ends_at [set: edge G] b v| + (((if b then y else x) == v) : nat))%N.
+Proof.
+set GG := mgraph.add_edge G x y tt.
+rewrite (cardsD1 (None : edge GG)) addnC; congr (_ + _)%N; last by rewrite !inE.
+have -> : ends_at [set: edge GG] b v :\ (None : edge GG)
+        = [set Some e | e in ends_at [set: edge G] b v].
+  apply/setP => -[e|].
+  - rewrite !inE /=; apply/idP/imsetP.
+    + by move=> he; exists e; rewrite // !inE.
+    + by move=> [f]; rewrite !inE /= => hf [->].
+  - rewrite !inE /=.
+    by apply/esym/negP => /imsetP[f _ hfe]; move: hfe.
+by rewrite card_imset //; exact: (@Some_inj _).
+Qed.
+
+Lemma mdeg_add_edge (G : mgraph) (x y : G) (v : G) :
+  mdeg (G := mgraph.add_edge G x y tt) v
+  = (mdeg v + (((x == v) : nat) + ((y == v) : nat)))%N.
+Proof. by rewrite /mdeg /subdeg !card_ends_at_add /= addnACA. Qed.
+
+(** [mDelta] of a regular multigraph with at least one vertex. *)
+Lemma mDelta_mreg (G : mgraph) (d : nat) (v0 : G) : mreg G d -> mDelta G = d.
+Proof.
+move=> hr; apply/eqP; rewrite eqn_leq; apply/andP; split.
+- by apply/bigmax_leqP => v _; rewrite hr.
+- by rewrite -(hr v0); exact: leq_bigmax.
+Qed.
+
+(** ** NON-VACUITY of the guard: the triple edge [G3p] is a LOOPLESS 3-regular
+       class-1 multigraph (its line graph is a triangle, so chi' = 3 = Delta) *)
+
+Definition G2p : mgraph := mgraph.add_edge G1 (inl tt) (inr tt) tt.
+Definition G3p : mgraph := mgraph.add_edge G2p (inl tt) (inr tt) tt.
+
+Lemma card_edge_G3p : #|edge G3p| = 3.
+Proof. by rewrite /G3p /G2p /G1 /G0 !card_option card_sum !card_void. Qed.
+
+Lemma inc_all_G3p (v : G3p) (e : edge G3p) : incident v e.
+Proof.
+rewrite /incident; apply/existsP.
+by case: v => -[]; case: e => [[[[[]|[]]|]|]|];
+  [exists false|exists false|exists false|exists true|exists true|exists true].
+Qed.
+
+Lemma edges_at_G3p (v : G3p) : edges_at v = [set: edge G3p].
+Proof. by apply/setP => e; rewrite !inE inc_all_G3p. Qed.
+
+Lemma loopless_G3p : loopless G3p.
+Proof. by case=> [[[[[]|[]]|]|]|]. Qed.
+
+Lemma mdeg_G3p (v : G3p) : mdeg v = 3.
+Proof.
+by rewrite (mdeg_loopless _ loopless_G3p) edges_at_G3p cardsT card_edge_G3p.
+Qed.
+
+Lemma mreg_G3p : mreg G3p 3.
+Proof. exact: mdeg_G3p. Qed.
+
+Lemma mDelta_G3p : mDelta G3p = 3.
+Proof. exact: (mDelta_mreg (inl tt : G3p) mreg_G3p). Qed.
+
+Lemma clique_line_G3p : clique [set: line_graph G3p].
+Proof.
+move=> e f _ _ ef; apply/andP; split; first exact: ef.
+by apply/existsP; exists (inl tt : G3p); rewrite !inc_all_G3p.
+Qed.
+
+Lemma chromatic_index_G3p : chromatic_index G3p = 3.
+Proof.
+rewrite /chromatic_index (chi_clique clique_line_G3p) cardsT.
+exact: card_edge_G3p.
+Qed.
+
+Lemma is_class1_G3p : is_class1 G3p.
+Proof. by rewrite /is_class1 chromatic_index_G3p mDelta_G3p. Qed.
+
+(** The guard is NOT vacuous: a loopless 3-regular class-1 multigraph exists,
+    so the repaired row still quantifies over a nonempty carrier class. *)
+Lemma loopless_class1_3reg_G3p :
+  [/\ (0 < #|G3p|)%N, loopless G3p, mreg G3p (2 * 1 + 1)%N & is_class1 G3p].
+Proof.
+split=> //.
+- by rewrite -cardsT; apply/card_gt0P; exists (inl tt : G3p); rewrite inE.
+- exact: loopless_G3p.
+- exact: mreg_G3p.
+- exact: is_class1_G3p.
+Qed.
+
+(** ** TEETH of the guard: the loopful 3-regular class-1 carrier [Gcl]
+
+    Vertices x = [inl (inl tt)], y = [inl (inr tt)], u = [inr (inl tt)],
+    v = [inr (inr tt)]; edges: three parallel x-y ([ea], [eb], [ec]), a loop at
+    u ([elu]), the edge u-v ([eh]) and a loop at v ([elv]).  Arc-end degrees:
+    x: 3, y: 3, u: 2+1 = 3, v: 1+2 = 3.  Its line graph is a triangle on
+    {ea, eb, ec} together with the path elu - eh - elv, so its chromatic index
+    is 3 = [mDelta]: it IS [is_class1] although it has a loop. *)
+
+Definition Gc0 : mgraph := union (two_graph tt tt) (two_graph tt tt).
+Definition Gc1 : mgraph := mgraph.add_edge Gc0 (inl (inl tt)) (inl (inr tt)) tt.
+Definition Gc2 : mgraph := mgraph.add_edge Gc1 (inl (inl tt)) (inl (inr tt)) tt.
+Definition Gc3 : mgraph := mgraph.add_edge Gc2 (inl (inl tt)) (inl (inr tt)) tt.
+Definition Gc4 : mgraph := mgraph.add_edge Gc3 (inr (inl tt)) (inr (inl tt)) tt.
+Definition Gc5 : mgraph := mgraph.add_edge Gc4 (inr (inl tt)) (inr (inr tt)) tt.
+Definition Gcl : mgraph := mgraph.add_edge Gc5 (inr (inr tt)) (inr (inr tt)) tt.
+
+Definition ea : edge Gcl := Some (Some (Some (Some (Some None)))).
+Definition eb : edge Gcl := Some (Some (Some (Some None))).
+Definition ec : edge Gcl := Some (Some (Some None)).
+Definition elu : edge Gcl := Some (Some None).
+Definition eh : edge Gcl := Some None.
+Definition elv : edge Gcl := None.
+
+Lemma card_edge_Gc0 (A : {set edge Gc0}) : #|A| = 0.
+Proof. by apply/eqP; rewrite cards_eq0; apply/eqP/setP => -[[]|[]]. Qed.
+
+Lemma mdeg_Gc0 (v : Gc0) : mdeg v = 0.
+Proof. by rewrite /mdeg /subdeg !card_edge_Gc0. Qed.
+
+Lemma card_edge_Gcl : #|edge Gcl| = 6.
+Proof.
+rewrite /Gcl /Gc5 /Gc4 /Gc3 /Gc2 /Gc1 /Gc0 !card_option.
+by rewrite !card_sum !card_void.
+Qed.
+
+(** THE POINT: every vertex has arc-end degree 3, the two loops counting 2. *)
+Lemma mreg_Gcl : mreg Gcl 3.
+Proof.
+move=> v; rewrite /Gcl /Gc5 /Gc4 /Gc3 /Gc2 /Gc1 !mdeg_add_edge mdeg_Gc0.
+by case: v => [[[]|[]]|[[]|[]]].
+Qed.
+
+Lemma not_loopless_Gcl : ~ loopless Gcl.
+Proof. by move=> /(_ elv). Qed.
+
+Definition S1 : {set line_graph Gcl} := [set ea; elu; elv].
+Definition S2 : {set line_graph Gcl} := [set eb; eh].
+Definition S3 : {set line_graph Gcl} := [set ec].
+Definition Sabc : {set line_graph Gcl} := [set ea; eb; ec].
+
+Lemma edgeT_line_Gcl : [set: line_graph Gcl] = S1 :|: (S2 :|: (S3 :|: set0)).
+Proof.
+apply/setP => e; rewrite /S1 /S2 /S3 !inE /ea /eb /ec /elu /eh /elv.
+by case: e => [[[[[[[[[]|[]]|[[]|[]]]|]|]|]|]|]|].
+Qed.
+
+Lemma card_abc_Gcl : #|Sabc| = 3.
+Proof. by rewrite /Sabc -setUA cardsU1 cards2 !inE /ea /eb /ec. Qed.
+
+(** The three parallel edges are pairwise adjacent in the line graph. *)
+Lemma clique_abc_Gcl : clique Sabc.
+Proof.
+move=> e f; rewrite /Sabc !inE => he hf hef; apply/andP; split; first exact: hef.
+apply/existsP; exists (inl (inl tt) : Gcl); rewrite !incidentE.
+by move: he hf => /orP[/orP[/eqP->|/eqP->]|/eqP->] /orP[/orP[/eqP->|/eqP->]|/eqP->];
+   rewrite /ea /eb /ec.
+Qed.
+
+Lemma nadj_Gcl (e f : edge Gcl) :
+  (forall w : Gcl, ~~ (incident w e && incident w f)) ->
+  ~~ ((e : line_graph Gcl) -- (f : line_graph Gcl)).
+Proof.
+by move=> h; apply/negP => /andP[_ /existsP[w hw]]; move: (h w); rewrite hw.
+Qed.
+
+Lemma stable_S1_Gcl : stable S1.
+Proof.
+apply/stableP => e f; rewrite /S1 !inE => he hf.
+move: he hf => /orP[/orP[/eqP->|/eqP->]|/eqP->] /orP[/orP[/eqP->|/eqP->]|/eqP->];
+  rewrite ?sg_irrefl //;
+  apply: nadj_Gcl => w; rewrite !incidentE /ea /elu /elv;
+  by case: w => [[[]|[]]|[[]|[]]].
+Qed.
+
+Lemma stable_S2_Gcl : stable S2.
+Proof.
+apply/stableP => e f; rewrite /S2 !inE => he hf.
+move: he hf => /orP[/eqP->|/eqP->] /orP[/eqP->|/eqP->];
+  rewrite ?sg_irrefl //;
+  apply: nadj_Gcl => w; rewrite !incidentE /eb /eh;
+  by case: w => [[[]|[]]|[[]|[]]].
+Qed.
+
+(** The explicit proper 3-edge-colouring {ea, elu, elv} / {eb, eh} / {ec}. *)
+Lemma coloring_Gcl :
+  coloring (S1 |: (S2 |: (S3 |: set0))) [set: line_graph Gcl].
+Proof.
+rewrite edgeT_line_Gcl.
+apply: coloringU1; [exact: stable_S1_Gcl | | | ].
+- by apply/set0Pn; exists ea; rewrite /S1 !inE eqxx.
+- apply: coloringU1; [exact: stable_S2_Gcl | | | ].
+  + by apply/set0Pn; exists eb; rewrite /S2 !inE eqxx.
+  + apply: coloringU1; [exact: stable1 | | exact: empty_coloring | ].
+    * by apply/set0Pn; exists ec; rewrite /S3 !inE eqxx.
+    * by rewrite -setI_eq0 setI0.
+  + rewrite -setI_eq0; apply/eqP/setP => z.
+    rewrite /S2 /S3 !inE /ea /eb /ec /elu /eh /elv.
+    by case: z => [[[[[[[[[]|[]]|[[]|[]]]|]|]|]|]|]|].
+- rewrite -setI_eq0; apply/eqP/setP => z.
+  rewrite /S1 /S2 /S3 !inE /ea /eb /ec /elu /eh /elv.
+  by case: z => [[[[[[[[[]|[]]|[[]|[]]]|]|]|]|]|]|].
+Qed.
+
+Lemma chromatic_index_Gcl : chromatic_index Gcl = 3.
+Proof.
+apply/eqP; rewrite eqn_leq; apply/andP; split.
+- apply: leq_trans (color_bound coloring_Gcl) _.
+  rewrite !cardsU1 cards0 addn0.
+  apply: (@leq_trans (1 + (1 + 1))%N); last by [].
+  by apply: leq_add; [exact: leq_b1 | apply: leq_add; exact: leq_b1].
+- rewrite /chromatic_index -card_abc_Gcl -(chi_clique clique_abc_Gcl).
+  by apply: sub_chi; exact: subsetT.
+Qed.
+
+Lemma mDelta_Gcl : mDelta Gcl = 3.
+Proof. exact: (mDelta_mreg (inl (inl tt) : Gcl) mreg_Gcl). Qed.
+
+Lemma is_class1_Gcl : is_class1 Gcl.
+Proof. by rewrite /is_class1 chromatic_index_Gcl mDelta_Gcl. Qed.
+
+(** TEETH: [Gcl] meets every OTHER hypothesis of
+    [circular_flow_number_of_regular_class_1_graphs_statement] at [t = 1] and
+    is excluded ONLY by the new [loopless] guard. *)
+Lemma class1_3reg_loopful_Gcl :
+  [/\ (0 < #|Gcl|)%N, mreg Gcl (2 * 1 + 1)%N, is_class1 Gcl & ~ loopless Gcl].
+Proof.
+split.
+- by rewrite -cardsT; apply/card_gt0P; exists (inl (inl tt) : Gcl); rewrite inE.
+- exact: mreg_Gcl.
+- exact: is_class1_Gcl.
+- exact: not_loopless_Gcl.
+Qed.
+
+(** Axiom audit for the loopless-guard lemmas ***************************** *)
+
+Print Assumptions mdeg_cut.
+Print Assumptions is_2t1_loopless.
+Print Assumptions mdeg_add_edge.
+Print Assumptions loopless_class1_3reg_G3p.
+Print Assumptions class1_3reg_loopful_Gcl.
 
 (** ================================================================= *)
 (** ** Bidirected graphs *)
@@ -549,8 +868,11 @@ Qed.
 Lemma edges_at_T3 (v : T3) : edges_at v = [set: edge T3].
 Proof. by apply/setP => e; rewrite !inE inc_all_T3. Qed.
 
+Lemma loopless_T3 : loopless T3.
+Proof. by case=> [[[[[]|[]]|]|]|]. Qed.
+
 Lemma mdeg_T3 (v : T3) : mdeg v = 3.
-Proof. by rewrite /mdeg edges_at_T3 cardsT card_edge_T3. Qed.
+Proof. by rewrite (mdeg_loopless _ loopless_T3) edges_at_T3 cardsT card_edge_T3. Qed.
 
 (** Teeth: [T3] genuinely inhabits the odd-regularity guard at [t=1]
     ([mreg T3 (2·1+1)]) — a graph that really has edges, not the vacuous
@@ -588,10 +910,7 @@ Lemma reg_odd_has_edge (t : nat) (G : mgraph) :
   (1 <= t)%N -> (0 < #|G|)%N -> mreg G (2 * t + 1)%N -> (0 < #|edge G|)%N.
 Proof.
 move=> _ /card_gt0P[v _] Hreg.
-have Hpos : (0 < mdeg v)%N by rewrite Hreg addn1.
-apply: leq_trans Hpos _.
-rewrite /mdeg -cardsT.
-by apply: subset_leq_card; apply: subsetT.
+by apply: (mdeg_gt0_edge (v := v)); rewrite Hreg addn1.
 Qed.
 
 (** Boundary: the conjectured target bound [2 + 2/t] lies in the valid

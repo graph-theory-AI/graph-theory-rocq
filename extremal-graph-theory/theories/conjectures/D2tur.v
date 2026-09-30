@@ -133,6 +133,31 @@ Definition ham_path_edges (E : {set V * V}) : Prop :=
 
 End WeightedSpanningTrees.
 
+(** Corpus row: opg:what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian.json
+    English statement: (Open Problem Garden, "What is the smallest number of disjoint spanning trees made a graph Hamiltonian")
+      For every finite vertex set with at least 2 elements carrying a symmetric weight on all
+      pairs, there exist a greedy decomposition D and a number k such that D 0, ..., D (k-1)
+      are successive minimum-weight spanning trees of the complete graph with the previously
+      used edges removed, the union of the first k of them contains a Hamiltonian path, and no
+      smaller union does; that is, the smallest such k is well defined.
+    Definitions: [all_pairs] - the edge set of the complete graph on V, all ordered pairs of distinct
+      vertices (D2tur.v); [tree_on A E] - E is a spanning tree drawn from the available edge
+      set A: symmetric, irreflexive, spanning-connected and with exactly 2*(|V|-1) ordered
+      pairs (D2tur.v); [tree_weight w E] - the total weight of an edge set (D2tur.v);
+      [shortest_tree_on w A E] - E is a minimum-weight spanning tree of A (D2tur.v);
+      [greedy_decomp w D k] - each D i is a shortest spanning tree of the complete graph minus
+      the edges of D 0, ..., D (i-1) (D2tur.v); [ham_path_edges E] - E contains a Hamiltonian
+      path, i.e. a duplicate-free ordering of all vertices with consecutive pairs in E
+      (D2tur.v).
+    Notes: this row is PARTIAL: only Question 1 of the source is formalised. Question 2 (the union
+      contains a SHORTEST Hamiltonian path) and Questions 3 and 4 (spanning trees replaced by
+      1-trees, Hamiltonian cycle) need an optimisation over all Hamiltonian paths and a 1-tree
+      primitive, both deferred. The source asks WHAT the smallest k is; the body asserts that
+      the question is well posed, i.e. such a k exists. Edge sets are sets of ORDERED pairs, so
+      a tree on |V| vertices has 2*(|V|-1) of them. "Arbitrary shortest spanning tree" is the
+      existential witness D. *)
 Definition what_is_the_smallest_number_of_disjoint_spanning_tre_statement : Prop :=
   forall (V : finType) (w : V -> V -> nat),
     (2 <= #|V|)%N -> (forall x y : V, w x y = w y x) ->
@@ -166,6 +191,23 @@ Definition is_turan_number (n : nat) (k : nat) (Fam : 'I_k -> sgraph) (m : nat) 
      (exists G : sgraph, [/\ #|G| = n, edge_count G = m' & family_free G Fam]) ->
      (m' <= m)%N).
 
+(** Corpus row: opg:turan_number_of_a_finite_family
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/turan_number_of_a_finite_family/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/turan_number_of_a_finite_family.json
+    English statement: (Open Problem Garden, "Turan number of a finite family.")
+      For every non-empty finite family of graphs Fam indexed by 'I_k there are a member index
+      i and constants C, N such that for every n >= N, if ex(n,Fam) and ex(n,{Fam i}) are the
+      largest edge counts of n-vertex graphs containing no member of the respective family as a
+      subgraph, then ex(n,{Fam i}) <= C * ex(n,Fam).
+    Definitions: [family_free G Fam] - G contains no member of the family as a subgraph, using
+      coq-graph-theory's [subgraph] (injective adjacency-preserving embedding) (D2tur.v);
+      [is_turan_number n Fam m] - m is the maximum edge count of an n-vertex family-free graph
+      (D2tur.v); [edge_count G] - |E(G)| via base's [oedge] selector (D2tur.v).
+    Notes: the family is indexed by a finite ordinal rather than given as a set, because [sgraph] is
+      not an eqType. The singleton family {F0} is the constant function on 'I_1. O(...) is
+      rendered as an eventual bound with explicit constants C and N. The two Turan numbers are
+      passed as parameters constrained by the extremal predicate, so an n at which no extremal
+      graph exists gives a vacuous instance. *)
 Definition turan_number_of_a_finite_family_statement : Prop :=
   forall (k : nat) (Fam : 'I_k -> sgraph), (0 < k)%N ->
     exists (i : 'I_k) (C N : nat),
@@ -212,6 +254,26 @@ Definition gel_critical (G : sgraph) : Prop :=
   ~ good_edge_labeling G /\
   (forall H : sgraph, proper_subgraph H G -> good_edge_labeling H).
 
+(** Corpus row: opg:good_edge_labelings
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/good_edge_labelings/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/good_edge_labelings.json
+    English statement: (Open Problem Garden, "Good Edge Labelings")
+      For every rational c = a/b < 4 there is a bound N such that every good-edge-labeling
+      critical graph of average degree less than c has at most N vertices.
+    Definitions: [incr_path G l u v p] - u :: p is a duplicate-free path from u to v whose sequence of
+      edge labels is strictly increasing, and is non-empty (D2tur.v);
+      [good_edge_labeling G] - there is a symmetric labelling of the edges, injective on edges,
+      such that between every ordered pair of vertices there is at most one increasing path
+      (D2tur.v); [proper_subgraph H G] - H embeds in G but not conversely (D2tur.v);
+      [gel_critical G] - G has no good edge labelling but every proper subgraph does (D2tur.v);
+      [average_degree_geq G a b] - base's average-degree surface, unfolding to
+      b * sum of degrees >= a * |V(G)| (GTBase).
+    Notes: only the Conjecture of the source is formalised; the companion Question (the maximum edge
+      density of a good-edge-labelable graph) is not a Prop and is omitted. "Finitely many
+      graphs" is rendered as a bound N on the number of vertices, which is equivalent up to
+      isomorphism since there are finitely many graphs on any fixed vertex count. c < 4 is
+      a < 4 * b with b > 0, and "average degree less than c" is the negation of base's
+      [average_degree_geq]. *)
 Definition good_edge_labelings_statement : Prop :=
   forall a b : nat, (0 < b)%N -> (a < 4 * b)%N ->
     exists N : nat, forall G : sgraph,
@@ -245,6 +307,21 @@ Definition good_edge_labelings_statement : Prop :=
 Definition hom_count (H G : sgraph) : nat :=
   #|[set f : {ffun H -> G} | [forall x : H, [forall y : H, (x -- y) ==> (f x -- f y)]]]|.
 
+(** Corpus row: opg:sidorenkos_conjecture
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/sidorenkos_conjecture/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/sidorenkos_conjecture.json
+    English statement: (Open Problem Garden, "Sidorenko's Conjecture")
+      For every bipartite graph H and every non-empty graph G, the number of homomorphisms from
+      H to G is at least (2|E(G)|/|V(G)|^2)^|E(H)| * |V(G)|^|V(H)|; cross-multiplied,
+      (2|E(G)|)^|E(H)| * |V(G)|^|V(H)| <= hom(H,G) * |V(G)|^(2|E(H)|).
+    Definitions: [oedges G] - the number of ORDERED adjacent pairs, equal to 2|E(G)| (D2tur.v);
+      [edge_count G] - |E(G)|, counting each undirected edge once via base's [oedge] selector
+      (D2tur.v); [hom_count H G] - the number of adjacency-preserving maps H -> G over
+      {ffun H -> G}, the boolean form of base's [is_hom] (D2tur.v); [bipartite] - a 2-colouring
+      of the vertices with no monochromatic edge (GTBase).
+    Notes: the inequality is multiplied through by |V(G)|^(2|E(H)|) to stay in nat, and 2|E(G)| is
+      [oedges G] directly. The guard 0 < |V(G)| avoids the empty host, where both sides would
+      involve 0^0. *)
 Definition sidorenkos_statement : Prop :=
   forall H G : sgraph, bipartite H -> (0 < #|G|)%N ->
     ((oedges G) ^ (edge_count H) * (#|G|) ^ (#|H|)
@@ -270,6 +347,18 @@ Definition clique_count (G : sgraph) : nat :=
 
 Definition Kt_minor_free (G : sgraph) (t : nat) : Prop := ~ minor G 'K_t.
 
+(** Corpus row: opg:number_of_cliques_in_minor_closed_classes
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/number_of_cliques_in_minor_closed_classes/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/number_of_cliques_in_minor_closed_classes.json
+    English statement: (Open Problem Garden, "Number of Cliques in Minor-Closed Classes")
+      There is a constant c such that for every t > 0, every graph G with no K_t minor has at
+      most c^t * |V(G)| non-empty cliques.
+    Definitions: [clique_count G] - the number of non-empty vertex sets that are cliques (D2tur.v);
+      [Kt_minor_free G t] - the negation of coq-graph-theory's [minor G 'K_t] (D2tur.v);
+      [cliqueb] - boolean cliqueness (coq-graph-theory).
+    Notes: cliques are counted as vertex subsets, including the singletons, and the empty set is
+      excluded. The guard 0 < t excludes the vacuous case t = 0: every graph has a K_0 minor,
+      so [Kt_minor_free G 0] is always false. *)
 Definition number_of_cliques_in_minor_closed_classes_statement : Prop :=
   exists c : nat, forall (t : nat) (G : sgraph), (0 < t)%N ->
     Kt_minor_free G t -> (clique_count G <= c ^ t * #|G|)%N.
@@ -303,6 +392,22 @@ Definition is_alpha (n k : nat) : Prop :=
   (forall k' : nat,
      (exists G : sgraph, #|G| = k' /\ spanning_tree_count G = n) -> (k <= k')%N).
 
+(** Corpus row: opg:minimal_graphs_with_a_prescribed_number_of_spanning_trees
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/minimal_graphs_with_a_prescribed_number_of_spanning_trees/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/minimal_graphs_with_a_prescribed_number_of_spanning_trees.json
+    English statement: (Open Problem Garden, "Minimal graphs with a prescribed number of spanning trees")
+      For every positive rational eps = a/b there is N such that for every n >= max(N,3), if k
+      is the least number of vertices of a simple graph having exactly n spanning trees, then
+      2^(b*k) < n^a, i.e. k < eps * log_2 n; that is, alpha(n) = o(log n).
+    Definitions: [spanning_tree_count G] - the number of spanning trees of G, counted as sets of ordered
+      adjacent pairs that are symmetric, irreflexive, connect all vertices and have exactly
+      2*(|V(G)|-1) elements, which for a connected spanning subgraph characterises a tree
+      (D2tur.v); [is_alpha n k] - k is the least vertex count of a graph with exactly n spanning
+      trees (D2tur.v).
+    Notes: o(log n) is rendered log-free and base-independent by the equivalence
+      k < (a/b) * log_2 n iff 2^(b*k) < n^a; the base of the logarithm is immaterial because
+      the ratio a/b ranges over all positive rationals. The source's n >= 3 is kept as a
+      separate guard alongside the threshold N. *)
 Definition minimal_graphs_with_a_prescribed_number_of_spanning_statement : Prop :=
   forall a b : nat, (0 < a)%N -> (0 < b)%N ->
     exists N : nat, forall (n k : nat),

@@ -40,17 +40,26 @@ Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
-(** ** Row 1 — Large induced forest in a planar graph
-    PARTIAL (partial lower bounds proven; the conjectured 1/2 fraction is open).
-    G2-GATE (planarity).
-
-    Source (Conjecture): "Every planar graph on n vertices has an induced forest
-    with at least n/2 vertices."
-
-    Carrier: [sgraph].  "induced forest" = [is_forest S] (coq-graph-theory):
-    the induced subgraph on the vertex set [S] is acyclic.  The bound
-    |S| ≥ n/2 is stated multiplied through as [#|G| <= 2 * #|S|] to avoid the
-    nat division. *)
+(** Corpus row: opg:large_induced_forest_in_a_planar_graph
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/large_induced_forest_in_a_planar_graph/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/large_induced_forest_in_a_planar_graph.json
+    English statement: (Open Problem Garden, "Large induced forest in a planar graph";
+      Albertson-Berman)
+      Every planar graph on n vertices has an induced forest on at least n/2 vertices.  In
+      the Rocq body: for every finite simple graph G with no K5 and no K3,3 minor there is a
+      vertex set S such that the subgraph induced on S is acyclic and the number of vertices
+      of G is at most twice the size of S.
+    Definitions: standard - [wagner_planar] (no K5 and no K3,3 minor, i.e. planarity by
+      Wagner's theorem, base/theories/base.v) and [is_forest S] (coq-graph-theory sgraph.v:
+      the subgraph induced on S is acyclic).
+    Notes: The bound |S| >= n/2 is cross-multiplied as [#|G| <= 2 * #|S|] to avoid nat
+      division, which is equivalent over the naturals and slightly stronger than the floor
+      reading when n is odd (it demands |S| >= n/2 exactly, i.e. ceil(n/2)).  The corpus row
+      is PARTIAL: partial lower bounds on the induced-forest size are proven, the conjectured
+      fraction 1/2 is open.  The milestone header of this file describes an earlier encoding
+      in which planarity was a universally-quantified oracle [is_planar] (planarity gate G2);
+      the definition now uses the concrete [wagner_planar], so that caveat no longer applies
+      here - but it still applies to the copy of this statement in implications_U13.v. *)
 Definition large_induced_forest_in_a_planar_graph_statement : Prop :=
   forall (G : sgraph),
     wagner_planar G ->
@@ -96,23 +105,56 @@ Definition union_of_two_planar
         is_planar (SGraph s2 i2)
       & forall x y : G, (x -- y) = e1 x y || e2 x y ].
 
+(** Corpus row: opg:earth_moon_problem
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/earth_moon_problem/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/earth_moon_problem.json
+    English statement: (Open Problem Garden, "Earth-Moon Problem"; Ringel)
+      Corpus question: what is the maximum number of colours needed to colour countries so
+      that no two countries sharing a border get the same colour, when each country consists
+      of one region on earth and one region on the moon?  By duality this is the maximum
+      chromatic number of a graph that is the edge-union of two planar graphs on a common
+      vertex set (a graph of thickness at most 2).  Back-translation of the Rocq body:
+      assuming at least one such biplanar graph exists, there is a number m that is
+      simultaneously an upper bound on the chromatic number of every biplanar graph and is
+      attained by some biplanar graph - i.e. the maximum exists and equals m.
+    Definitions: [union_of_two_planar is_planar G] - the adjacency of G is the disjunction of
+      two symmetric irreflexive relations each of which, read as an [sgraph] on the same
+      vertex type, is planar (defined just above in this file, instantiated here with
+      [wagner_planar]); [wagner_planar] - no K5 and no K3,3 minor (base/theories/base.v); the
+      chromatic number is coq-graph-theory's [chi(A)] on the full vertex set.
+    Notes: The open "what is the maximum?" problem is rendered as the EXISTENCE of the
+      maximum together with its two defining properties, not as a numeric answer (the value
+      is known only to lie between 9 and 12).  NON-VACUITY GUARD: the "attained" clause is an
+      existential over biplanar graphs, so the statement is prefixed by the hypothesis that
+      at least one biplanar graph exists; with the concrete [wagner_planar] that guard is
+      automatically satisfied and adds nothing mathematically, but it keeps the statement
+      non-refutable for the degenerate planarity predicates the earlier oracle-based encoding
+      allowed.  [union_of_two_planar] is area-specific (intrinsically thickness-2) and stays
+      local. *)
 Definition earth_moon_statement : Prop :=
     (exists G0 : sgraph, union_of_two_planar wagner_planar G0) ->
     exists m : nat,
       (forall G : sgraph, union_of_two_planar wagner_planar G -> (χ([set: G]) <= m)%N)
    /\ (exists G : sgraph, union_of_two_planar wagner_planar G /\ χ([set: G]) = m).
 
-(** ** Row 3 — Colouring the square of a planar graph (Wegner)
-    OPEN.
-    G2-GATE (planarity).
-
-    Source (Conjecture): "Let G be a planar graph of maximum degree Δ.  The
-    chromatic number of its square is at most 7 if Δ = 3, at most Δ+5 if
-    4 ≤ Δ ≤ 7, at most ⌊3Δ/2⌋+1 if Δ ≥ 8."
-
-    Carrier: [sgraph].  "graph-square" = [graph_power G 2] (base); χ of the
-    square = [χ([set: graph_power G 2])]; "max-degree" Δ = [Delta G] (base).
-    The three regimes are stated as a guarded conjunction. *)
+(** Corpus row: opg:colouring_the_square_of_a_planar_graph
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/colouring_the_square_of_a_planar_graph/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/colouring_the_square_of_a_planar_graph.json
+    English statement: (Open Problem Garden, "Colouring the square of a planar graph";
+      Wegner's conjecture)
+      For every planar graph G with at least one vertex and maximum degree D, the chromatic
+      number of the square of G is at most 7 when D = 3, at most D + 5 when 4 <= D <= 7, and
+      at most floor(3D/2) + 1 when D >= 8.  The Rocq body is exactly this three-regime
+      guarded conjunction, with planarity read as "no K5 and no K3,3 minor".
+    Definitions: standard - [wagner_planar] (base/theories/base.v), [Delta G] (maximum
+      degree, base/theories/base.v), [graph_power G 2] (the square: distinct vertices at
+      distance at most 2 are adjacent, base/theories/base.v), and coq-graph-theory's [chi(A)]
+      on the full vertex set.
+    Notes: floor(3D/2) is the nat halving [(3 * Delta G)./2].  The [0 < #|G|] guard keeps
+      [Delta] meaningful on the empty graph.  The three regimes are conjoined rather than
+      given as a case split, which is equivalent since the guards are mutually exclusive and,
+      together with D <= 2, exhaust the possibilities - note that D <= 2 is left
+      unconstrained here, as in the source. *)
 Definition colouring_the_square_of_a_planar_graph_statement : Prop :=
   forall (G : sgraph),
     wagner_planar G -> (0 < #|G|)%N ->
@@ -122,33 +164,28 @@ Definition colouring_the_square_of_a_planar_graph_statement : Prop :=
       & ( (8 <= Delta G)%N ->
             (χ([set: graph_power G 2]) <= (3 * Delta G)./2 + 1)%N ) ].
 
-(** ** Row 4 — Degenerate colourings of planar graphs
-    OPEN.
-    G2-GATE (planarity).
-
-    Source: "A graph G is k-degenerate if every subgraph of G has a vertex of
-    degree ≤ k.  Conjecture: Every simple planar graph has a 5-coloring so that
-    for 1 ≤ k ≤ 4, the union of any k color classes induces a (k−1)-degenerate
-    graph."
-
-    Carrier: [sgraph].  New AREA primitives:
-      - [k_degenerate_on G W k] : the induced subgraph on [W : {set G}] is
-        k-degenerate — every NONEMPTY subset [S ⊆ W] has a vertex whose degree
-        WITHIN [S] (i.e. [#|N(x) :&: S|]) is ≤ k.  (Quantifying over induced
-        subgraphs suffices for degeneracy.)
-      - [k_degenerate G k := k_degenerate_on [set:G] k] : whole-graph form,
-        matching the source's definition of k-degenerate.  Not used by the
-        four [_statement]s here (only [k_degenerate_on] is); it is EXPORTED as
-        public milestone API for downstream reuse.
-    [@MOVE-to-base]: [k_degenerate_on] / [k_degenerate] are a generic graph-
-    sparsity primitive, not planarity-specific; migrate to base when a second
-    area needs degeneracy.
-    A 5-colouring is a vertex map [col : G -> 'I_5] that is proper; the "union
-    of k colour classes" picked by a palette [T : {set 'I_5}] with |T| = k is
-    the vertex set [[set v | col v \in T]], which must be (k−1)-degenerate for
-    1 ≤ k ≤ 4. *)
-(* [k_degenerate_on] / [k_degenerate] now from graph-theory-base. *)
-
+(** Corpus row: opg:degenerate_colorings_of_planar_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/degenerate_colorings_of_planar_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/degenerate_colorings_of_planar_graphs.json
+    English statement: (Open Problem Garden, "Degenerate colorings of planar graphs")
+      Every simple planar graph has a 5-colouring such that, for every k between 1 and 4, the
+      union of any k colour classes induces a (k-1)-degenerate graph (a graph is
+      j-degenerate when every subgraph of it has a vertex of degree at most j).  In the Rocq
+      body: for every finite simple graph G with no K5 and no K3,3 minor there is a map col
+      from vertices to a 5-element set that is proper (adjacent vertices get different
+      colours) and such that for every palette T of between 1 and 4 of the five colours, the
+      vertex set {v : col v in T} is (|T| - 1)-degenerate.
+    Definitions: [k_degenerate_on W k] - every non-empty subset S of W contains a vertex with
+      at most k neighbours inside S (base/theories/base.v; it was promoted there from this
+      milestone, which is why the definition is no longer local); [wagner_planar] -
+      base/theories/base.v.
+    Notes: Degeneracy of "the graph induced by the union of k colour classes" is expressed by
+      quantifying over induced subgraphs of that vertex set, which is equivalent to the
+      subgraph formulation used by the source (a vertex of minimum degree in a subgraph can
+      be found in the induced subgraph on the same vertex set).  The palette is a set T of
+      colours with 1 <= |T| <= 4 and the degeneracy parameter is |T| - 1, matching the
+      source's k and k-1.  The companion whole-graph form [k_degenerate] also lives in
+      base/theories/base.v and is not used by this statement. *)
 Definition degenerate_colorings_of_planar_graphs_statement : Prop :=
   forall (G : sgraph),
     wagner_planar G ->
