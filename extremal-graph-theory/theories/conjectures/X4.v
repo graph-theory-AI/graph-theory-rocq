@@ -124,8 +124,7 @@ Definition x4_c5_edge_count (G : sgraph) : nat :=
         & x4_edge_in_c5 p.1 p.2]]|.
 
 Definition x4_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition x4_at_most_one_triangle_edge (G : sgraph) (F : {set {set G}}) : Prop :=
   F \subset x4_edge_set G /\

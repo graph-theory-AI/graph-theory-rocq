@@ -27,6 +27,7 @@ From GraphTheory Require Import minor.
 From GTBase Require Export asymptotics.
 From GTBase Require Export complexity.
 From GTBase Require Export finite_graph.
+From GTBase Require Export simple_edges.
 From GTBase Require Export graph_metric.
 From GTBase Require Export list_flexibility.
 From GTBase Require Export posets.

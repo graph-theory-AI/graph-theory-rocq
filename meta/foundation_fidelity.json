@@ -1,5 +1,5 @@
 {
- "schema_version": 1,
+ "schema_version": 2,
  "audit_source": "meta/BLOCKED_RETARGETING_AUDIT.md (2026-07-17), with repaired-row re-verification recorded 2026-07-18",
  "verdicts": [
   "FAITHFUL",
@@ -13,6 +13,24 @@
     "verdict": "FAITHFUL",
     "note": "Finite weighted-space and labelled-graph primitives have their literal finite combinatorial meanings."
    },
+   "audited_primitives": [
+    "fg_complete_edge_universe",
+    "fg_edge_count",
+    "fg_edge_set_rel",
+    "fg_edges",
+    "fg_event_at_least_ratio",
+    "fg_event_at_most_ratio",
+    "fg_event_weight",
+    "fg_gnp_weight",
+    "fg_labelled_sgraph",
+    "fg_mk_sgraph",
+    "fg_probability_bounded_away_from_one",
+    "fg_srel",
+    "fg_total_weight",
+    "fg_valid_edge_set",
+    "fg_valid_labelled_edges",
+    "fg_whp"
+   ],
    "overrides": {
     "fg_event_at_least_ratio": {
      "verdict": "LIGHTWEIGHT",
@@ -25,7 +43,40 @@
    },
    "machine_evidence": [
     "fg_srel_sym",
-    "fg_srel_irrefl"
+    "fg_srel_irrefl",
+    "fg_event_at_least_ratio_total_weight_pos",
+    "fg_event_at_most_ratio_total_weight_pos",
+    "fg_whp_eventually_total_weight_pos",
+    "fg_probability_bounded_away_from_one_eventually_total_weight_pos"
+   ]
+  },
+  "GTBase.simple_edges": {
+   "path": "base/theories/simple_edges.v",
+   "default": {
+    "verdict": "FAITHFUL",
+    "note": "Finite simple edges are represented as two-element vertex sets and proved extensionally equal to GraphTheory.sgraph.sg_edge_set; incidence, counting, and deletion retain their literal finite meanings."
+   },
+   "audited_primitives": [
+    "delete_edge_graph",
+    "delete_edges_graph",
+    "delete_edges_rel",
+    "simple_edge_count",
+    "simple_edge_incident",
+    "simple_edge_set"
+   ],
+   "overrides": {},
+   "machine_evidence": [
+    "adjacent_neq",
+    "simple_edge_setE",
+    "simple_edge_set_cliqueE",
+    "simple_edge_incidentE",
+    "delete_edge_graphE",
+    "delete_edge_removes",
+    "delete_edge_preserves_other",
+    "simple_edge_count_K0",
+    "simple_edge_count_K1",
+    "simple_edge_count_K2",
+    "simple_edge_count_K3"
    ]
   },
   "GTBase.surface": {
@@ -34,6 +85,24 @@
     "verdict": "LIGHTWEIGHT",
     "note": "The module supplies a finite rotation-system surface, not a drawing/crossing layer; consumers must respect connectedness and cellular-embedding assumptions."
    },
+   "audited_primitives": [
+    "clustered_chromatic_at_most",
+    "clustered_colouring",
+    "same_colour_on",
+    "surface_dart",
+    "surface_edge_perm",
+    "surface_embeddable",
+    "surface_embeddable_with_boundary",
+    "surface_embedding",
+    "surface_embedding_edges",
+    "surface_embedding_faces",
+    "surface_embedding_vertices",
+    "surface_embeds_in_euler_genus",
+    "surface_embeds_in_fixed_surface",
+    "surface_euler_genus",
+    "surface_face_perm",
+    "surface_rev_dart"
+   ],
    "overrides": {
     "surface_dart": {
      "verdict": "FAITHFUL",
@@ -55,6 +124,22 @@
      "verdict": "FAITHFUL",
      "note": "Face permutation induced by rotation and dart reversal."
     },
+    "surface_orientable_genus": {
+     "verdict": "FAITHFUL",
+     "note": "Orientable genus computed from the connected cellular rotation-system Euler characteristic."
+    },
+    "surface_embeds_in_orientable_genus": {
+     "verdict": "FAITHFUL",
+     "note": "Connected-graph existence of a cellular orientable rotation system within the stated orientable-genus bound."
+    },
+    "surface_embeds_in_orientable_euler_genus": {
+     "verdict": "FAITHFUL",
+     "note": "Connected-graph existence of a cellular orientable rotation system within the stated orientable Euler-genus bound."
+    },
+    "surface_embedding_K1": {
+     "verdict": "FAITHFUL",
+     "note": "Concrete dartless cellular rotation-system witness for the connected one-vertex graph."
+    },
     "same_colour_on": {
      "verdict": "FAITHFUL",
      "note": "Literal monochromatic-set predicate."
@@ -73,7 +158,8 @@
     }
    },
    "machine_evidence": [
-    "surface_rev_dartK"
+    "surface_rev_dartK",
+    "surface_embeddable_K1"
    ]
   },
   "GTBase.complexity": {
@@ -82,6 +168,31 @@
     "verdict": "FAITHFUL",
     "note": "Output and cost are coupled through one fixed interpreter; no independently chosen zero-cost function exists."
    },
+   "audited_primitives": [
+    "data",
+    "data_nat_value",
+    "decides_on",
+    "decides_on_class",
+    "deq",
+    "dsize",
+    "enc_bool",
+    "enc_graph",
+    "enc_list",
+    "enc_nat",
+    "eval",
+    "linear_time_cost_on",
+    "linear_time_outputs_graph_on",
+    "linear_time_outputs_on_class",
+    "pcost",
+    "poly_cost_on",
+    "polytime_decides_graph_on",
+    "polytime_decides_on_class",
+    "polytime_outputs_graph_on",
+    "polytime_outputs_on_class",
+    "prog",
+    "prun",
+    "realizes_on"
+   ],
    "overrides": {},
    "machine_evidence": [
     "pcost_pos",
@@ -96,6 +207,17 @@
     "verdict": "FAITHFUL",
     "note": "Finite graph-distance, metric-line, deletion, and bridge primitives have their literal meanings; this module does not provide coarse asymptotic dimension or shallow minors."
    },
+   "audited_primitives": [
+    "bridge_count",
+    "edge_deleted_rel",
+    "graph_between",
+    "graph_bridge",
+    "graph_dist",
+    "graph_edge_set",
+    "metric_line",
+    "metric_line_count",
+    "rel_ball"
+   ],
    "overrides": {},
    "machine_evidence": [
     "graph_dist_ex"
@@ -107,6 +229,21 @@
     "verdict": "FAITHFUL",
     "note": "Natural-valued eventual O/Omega/Theta and epsilon-free little-o/subpolynomial predicates retain their stated two-sided or quantified meanings."
    },
+   "audited_primitives": [
+    "big_O_nat",
+    "big_O_nat_from",
+    "big_O_with_slack_nat",
+    "big_Omega_nat",
+    "big_Theta_nat",
+    "eventually",
+    "eventually_ge",
+    "eventually_le",
+    "little_o_nat",
+    "near_linear_lower_nat",
+    "polynomial_bound_nat",
+    "sqrt_ceil",
+    "subpolynomial_nat"
+   ],
    "overrides": {},
    "machine_evidence": [
     "eventually_mono",
@@ -121,6 +258,14 @@
     "verdict": "FAITHFUL",
     "note": "Weighted and unweighted request satisfaction use explicit positive rational parameters and proper list colourings."
    },
+   "audited_primitives": [
+    "epsilon_flexible",
+    "proper_list_colouring",
+    "request_satisfied",
+    "weighted_epsilon_flexible",
+    "weighted_request_satisfied",
+    "weighted_request_total"
+   ],
    "overrides": {},
    "machine_evidence": [
     "weighted_epsilon_flexible_params",
@@ -133,6 +278,21 @@
     "verdict": "FAITHFUL",
     "note": "Finite poset, cover graph, realizer, and dimension vocabulary has its standard finite meaning."
    },
+   "audited_primitives": [
+    "finite_poset",
+    "is_linear_order",
+    "order_extends",
+    "poset_chain",
+    "poset_cover_adj",
+    "poset_cover_graph",
+    "poset_cover_rel",
+    "poset_dimension_at_most",
+    "poset_height_at_most",
+    "poset_lt",
+    "realizer",
+    "unit_poset",
+    "unit_poset_le"
+   ],
    "overrides": {},
    "machine_evidence": [
     "poset_cover_adj_sym",

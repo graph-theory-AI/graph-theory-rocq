@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X33 vocabulary ************************************************)
 
 Definition x33_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition x33_total_vertex (G : sgraph) : Type :=
   (G + {e : {set G} | e \in x33_edge_set G})%type.

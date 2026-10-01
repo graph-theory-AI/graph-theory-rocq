@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "resolutions": [
+    {
+      "record_key": "2103.15175__00",
+      "row_id": "arxiv:2103.15175#00",
+      "source_hash": "535d4a72e1dc3f9bb52adccf4ae3b9f5bbaf55de5275a5f497cc6ecdf9e32d31",
+      "source_text": "For $s \\geq 2$, if $\\mathcal{H}_s$ is the family of graphs with chromatic number greater than $s$, then $R_\\ell(\\mathcal{H}_s, k) = s^k + 1$.",
+      "source_locator": "arXiv:2103.15175 — Conjecture on $R_\\ell(\\mathcal{H}_s, k)$",
+      "corpus": "v2",
+      "package": "extremal-graph-theory",
+      "statement": "Extremal.applications.list_ramsey_graph.list_ramsey_chromatic_resolution_statement",
+      "statement_file": "extremal-graph-theory/theories/applications/list_ramsey_graph.v",
+      "statement_sha256": "4a046cb88f2c9e18ee42444a7aaf5f4077c01a51272e41208b4971baeb81a6f1",
+      "theorem": "Extremal.applications.list_ramsey_graph.list_ramsey_chromatic_resolution",
+      "theorem_file": "extremal-graph-theory/theories/applications/list_ramsey_graph.v",
+      "direction": "prove",
+      "correspondence": {
+        "explanation": "For every s>=2 and k>=1, the least n admitting symmetric k-element lists on the unordered edges of K_n such that every list-respecting coloring has a monochromatic graph of chromatic number greater than s is s^k+1. Lists contain arbitrary natural-number colors, uniqueness enforces k distinct colors, list membership is symmetric, and diagonal values are irrelevant. The monochromatic spanning color graph uses GraphTheory chromatic number; a monochromatic member of H_s exists exactly when one such graph has chromatic number greater than s. Independent review checked the finite-palette union bound, natural-palette reduction, stable-partition coloring equivalence, finite support of used colors, and both least-number inequalities.",
+        "implemented_by": "Codex /root (finite core and graph interpretation), integration_audit (natural palette reduction)",
+        "reviewed_by": "Codex integration_audit (independent finite core and graph readback), /root (independent natural-palette readback)",
+        "reviewed_at": "2026-09-05"
+      }
+    },
+    {
+      "record_key": "2310.04265__09",
+      "row_id": "arxiv:2310.04265#09",
+      "source_hash": "e3136e5b80c2da4df0d943cd8cf2ddf93b2157b8835b15d3563dc7b021150f27",
+      "source_text": "Is there a function $\\ell$ such that, for every tournament $T$, if $\\operatorname{\\overrightarrow{\\omega}}(T)\\geq k$, then $T$ has a subtournament $A$ such that $|A|\\leq\\ell(k)$ and $\\operatorname{\\overrightarrow{\\omega}}(A)\\geq k$.",
+      "source_locator": "arXiv:2310.04265 — Question 5.9 | Rocq: digraph-theory/theories/conjectures/clique_cluster.v#question_5_9_statement",
+      "corpus": "v2",
+      "package": "digraph-theory",
+      "statement": "Digraph.conjectures.clique_cluster.question_5_9_statement",
+      "statement_file": "digraph-theory/theories/conjectures/clique_cluster.v",
+      "statement_sha256": "5599801eb2bc59217266d1d8e2496914c37bb7d0855d530194b9ceff7e0cc5ff",
+      "theorem": "Digraph.applications.question_5_9_resolution.question_5_9_disproved",
+      "theorem_file": "digraph-theory/theories/applications/question_5_9_resolution.v",
+      "direction": "disprove",
+      "correspondence": {
+        "explanation": "The positive statement requires a universal bounded-size subtournament witnessing tournament clique number k. The existing k=3 critical family has unbounded order and no proper subtournament of clique number at least 3; instantiate the proposed bound at k=3 to contradict it.",
+        "implemented_by": "Codex integration_audit",
+        "reviewed_by": "Codex /root (independent source correspondence readback)",
+        "reviewed_at": "2026-09-05"
+      }
+    },
+    {
+      "record_key": "2408.02400__00",
+      "row_id": "arxiv:2408.02400#00",
+      "source_hash": "2b0431c1d8f576c80ce590b765cf5df415d21889a70500b1742680a051c9b217",
+      "source_text": "Let $k\\geq 5$. Is there a graph $G_{k}$ with $\\omega(G_{k})<5$, $\\zeta(G_{k})=k$ and $\\chi(G_{k})=\\zeta(G_{k})+3$?",
+      "source_locator": "arXiv:2408.02400 — Problem 1.5 | Rocq: chromatic-theory/theories/conjectures/X7.v#cochromatic_gap_three_statement",
+      "corpus": "v2",
+      "package": "chromatic-theory",
+      "statement": "Chromatic.conjectures.X7.cochromatic_gap_three_statement",
+      "statement_file": "chromatic-theory/theories/conjectures/X7.v",
+      "statement_sha256": "4cf62c680b721946d961aa328f2268f8d8db12dedd2d4f0b4e2e619b71ea9764",
+      "theorem": "Chromatic.applications.cochromatic_gap.cochromatic_gap.cochromatic_gap_three_proved",
+      "theorem_file": "chromatic-theory/theories/applications/cochromatic_gap/cochromatic_gap.v",
+      "direction": "prove",
+      "correspondence": {
+        "explanation": "The theorem has exactly the existing X7 proposition: for every k>=5 there is a finite simple graph G with omega(G)<5, exact cochromatic number k, and chi(G)=k+3. The complement of C_13(1,5) supplies a 13-vertex seed with omega=4, cochromatic number 4, and chromatic number 7; iterated Mycielski constructions preserve clique number 4 and increase both exact coloring numbers by one. Set the iteration count to k-4. Independent review checked the original seed definition, exhaustive clique/stable-set certificates, explicit upper colorings, the Mycielski identities, the exact cochromatic-number predicate, and the final bridge to the unchanged X7 statement.",
+        "implemented_by": "Codex /root/cochromatic_proof",
+        "reviewed_by": "Codex /root (independent seed, construction and X7 source readback)",
+        "reviewed_at": "2026-09-05"
+      }
+    },
+    {
+      "record_key": "2512.10438__00",
+      "row_id": "arxiv:2512.10438#00",
+      "source_hash": "67ddb30b457e47cb38ccf298d2da33a23d96779607bbed2f36dc188e2dd9fa15",
+      "source_text": "For some integers $q\\geqslant 4$ and $N$, does there exist a non-transitive $q$-edge-colored $N$-vertex tournament whose longest color-avoiding path has strictly fewer than $f_{q,q-1}(N)$ vertices?",
+      "source_locator": "arXiv:2512.10438 — Problem 5.1",
+      "corpus": "v2",
+      "package": "digraph-theory",
+      "statement": "Digraph.applications.color_avoiding_tournament.problem_5_1_q6_n9_statement",
+      "statement_file": "digraph-theory/theories/applications/color_avoiding_tournament.v",
+      "statement_sha256": "2de2725f3074770f1e3c86447bd16d94f54fa1e89c4951de79af234bc0ff9c74",
+      "theorem": "Digraph.applications.color_avoiding_tournament.problem_5_1_q6_n9",
+      "theorem_file": "digraph-theory/theories/applications/color_avoiding_tournament.v",
+      "direction": "prove",
+      "correspondence": {
+        "explanation": "The stronger concrete witness fixes q=6 and N=9: a nontransitive six-edge-colored nine-vertex tournament has longest color-avoiding simple directed path exactly seven vertices, while the minimum of longest avoiding-path sizes over every six-coloring of the canonical transitive nine-vertex tournament is exactly eight. Thus 6>=4 and 7<8 witness the source existential question. A color is avoided when no path edge uses it; lengths count vertices. The source definition of f_{q,r}(N) is minimization over transitive tournaments, so transitive_minimum_is 8 supplies f_{6,5}(9)=8. Independent review checked the directed-path and search-completeness definitions, explicit nontransitive tournament and coloring, positive seven-vertex witness, universal transitive benchmark, symmetry reduction of all eight-edge color words to two exhaustive six-letter suffix certificates, and the original paper definitions at https://arxiv.org/html/2512.10438v1. The source requires no strong connectivity.",
+        "implemented_by": "Codex /root/tournament_proof",
+        "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
+        "reviewed_at": "2026-09-05"
+      }
+    }
+  ]
+}

@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Build the validated 227-row corpus manifest (v2 — review fixes 2026-06-26):
+"""Build or verify the validated 227-row OPG corpus manifest.
+
+The upstream checkout is accepted only when its pinned commits and
+``data/problems.json`` content match the audited snapshot.  ``--check`` never
+writes the committed manifest; use the explicit ``--write`` mode to refresh it.
+
+Validation includes:
 valid+unique Rocq formal_names, no empty source_propositions, exact status_semantics for all
 18 non-open records, resolved routing, corrected existing-node mapping, precise Ádám encoding."""
-import json, re, os
+import argparse, hashlib, json, re, os, subprocess
 from collections import Counter, OrderedDict
 
 META = os.path.dirname(os.path.abspath(__file__))           # graph-theory-rocq/meta
@@ -11,8 +17,52 @@ GC = os.environ.get("GRAPH_CONJECTURES",                    # ~/Recherche/graph-
                     os.path.join(os.path.dirname(os.path.dirname(REPO)), "graph-conjectures"))
 SRC_COMMIT_REPO = "f6901fb371155678980a84306f6208fa0f166a6b"
 SRC_COMMIT_PROBLEMS = "27aec7fadb54b371fdee44e51e96a5f525c372a0"
+SRC_PROBLEMS_SHA256 = "81252ed94c37ab500ebf6760fa433cd7347077bb6170c295d5e7380c5c1d6da3"
 
-prob = {p['slug']: p for p in json.load(open(f"{GC}/data/problems.json"))}
+parser = argparse.ArgumentParser(description=__doc__)
+mode = parser.add_mutually_exclusive_group()
+mode.add_argument("--check", action="store_true", help="verify the committed manifest without writing")
+mode.add_argument("--write", action="store_true", help="replace the committed manifest after validation")
+args = parser.parse_args()
+if not args.write:
+    args.check = True
+
+
+def git_gc(*git_args):
+    proc = subprocess.run(
+        ["git", "-C", GC, *git_args], capture_output=True, text=True
+    )
+    if proc.returncode:
+        raise SystemExit(
+            f"invalid graph-conjectures checkout {GC!r}: git {' '.join(git_args)} failed: "
+            + proc.stderr.strip()
+        )
+    return proc.stdout.strip()
+
+
+problems_path = os.path.join(GC, "data", "problems.json")
+checkout_root = os.path.realpath(git_gc("rev-parse", "--show-toplevel"))
+if checkout_root != os.path.realpath(GC):
+    raise SystemExit(f"GRAPH_CONJECTURES must name the checkout root, got {GC!r}")
+git_gc("cat-file", "-e", SRC_COMMIT_REPO + "^{commit}")
+git_gc("merge-base", "--is-ancestor", SRC_COMMIT_REPO, "HEAD")
+if git_gc("log", "-1", "--format=%H", "--", "data/problems.json") != SRC_COMMIT_PROBLEMS:
+    raise SystemExit("graph-conjectures data/problems.json is not at the pinned source commit")
+if git_gc("status", "--porcelain", "--", "data/problems.json"):
+    raise SystemExit("graph-conjectures data/problems.json has uncommitted changes")
+with open(problems_path, "rb") as source_file:
+    problems_bytes = source_file.read()
+if hashlib.sha256(problems_bytes).hexdigest() != SRC_PROBLEMS_SHA256:
+    raise SystemExit("graph-conjectures data/problems.json does not match the pinned sha256")
+pinned_bytes = subprocess.run(
+    ["git", "-C", GC, "show", SRC_COMMIT_REPO + ":data/problems.json"],
+    capture_output=True,
+    check=True,
+).stdout
+if pinned_bytes != problems_bytes:
+    raise SystemExit("graph-conjectures data/problems.json differs from the pinned repository snapshot")
+
+prob = {p['slug']: p for p in json.loads(problems_bytes)}
 # raw classifier output committed in meta/ (the manifest's upstream); GRAPH_CONJECTURES env
 # overrides the corpus location for provenance/source_text.
 cls = json.load(open(f"{META}/opg_full_classification.json"))['classifications']
@@ -239,5 +289,22 @@ out={"_README":"Validated 227-row corpus manifest (v2, 2026-06-26). Each row →
                "by_status":dict(Counter(r['status'] for r in rows)),
                "already_formalized":sum(1 for r in rows if r['already_formalized'])},
      "rows":rows}
-json.dump(out,open(f"{META}/opg_corpus_manifest.json","w"),ensure_ascii=False,indent=1)
-print("wrote meta/opg_corpus_manifest.json")
+manifest_path = f"{META}/opg_corpus_manifest.json"
+rendered = json.dumps(out, ensure_ascii=False, indent=1)
+if args.check:
+    try:
+        committed = open(manifest_path, encoding="utf-8").read()
+    except FileNotFoundError:
+        raise SystemExit("OPG MANIFEST MISSING: run build_opg_manifest.py --write")
+    if committed != rendered:
+        raise SystemExit("OPG MANIFEST DRIFT: run build_opg_manifest.py --write and review the diff")
+    print(
+        "opg-manifest gate OK: committed manifest matches pinned upstream "
+        + SRC_COMMIT_REPO[:12]
+        + "/"
+        + SRC_PROBLEMS_SHA256[:12]
+    )
+else:
+    with open(manifest_path, "w", encoding="utf-8") as manifest_file:
+        manifest_file.write(rendered)
+    print("wrote meta/opg_corpus_manifest.json from validated pinned inputs")

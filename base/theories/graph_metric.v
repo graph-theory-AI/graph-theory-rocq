@@ -2,6 +2,7 @@
 
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import digraph sgraph.
+From GTBase Require Import simple_edges.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -36,10 +37,9 @@ Definition metric_line_count (G : sgraph) : nat :=
   #|[set L : {set G} |
       [exists a : G, [exists b : G, (a != b) && (L == metric_line a b)]]]|.
 
-(** Simple graph edges as two-element vertex sets. *)
+(** Deprecated compatibility name.  New code should use [simple_edge_set]. *)
 Definition graph_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x != y) && (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition edge_deleted_rel (G : sgraph) (e : {set G}) : rel G :=
   fun x y => (x -- y) && ~~ ((x \in e) && (y \in e)).

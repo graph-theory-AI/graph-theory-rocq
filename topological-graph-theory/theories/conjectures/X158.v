@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X158 vocabulary ***********************************************)
 
 Definition x158_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition x158_edge_ordered_endpoints
     (G : sgraph) (ord : seq G) (e : {set G}) (a b : G) : Prop :=
@@ -45,4 +44,3 @@ Definition planar_graphs_bounded_queue_number_statement : Prop :=
   exists q : nat,
     forall G : sgraph,
       wagner_planar G -> x158_queue_layout G q.
-

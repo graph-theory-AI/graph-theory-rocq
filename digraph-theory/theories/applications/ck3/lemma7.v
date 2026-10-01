@@ -60,6 +60,10 @@ Definition ckC (x : D) s (a : nat) : seq D := drop a (x :: s).
 (** Its vertex set. *)
 Definition ckCset x s a : {set D} := [set z in ckC x s a].
 
+(** A = the out-neighbours of [v_(a-1)] in the path prefix. *)
+Definition ckA (x : D) s (a : nat) : {set D} :=
+  [set z in take a (x :: s) | nth x (x :: s) a.-1 --> z].
+
 (** B = the out-neighbours of v_{a-1} on the cycle. *)
 Definition ckB x s a : {set D} :=
   [set z in ckC x s a | nth x (x :: s) a.-1 --> z].
@@ -69,6 +73,72 @@ Definition ckS x s a : {set D} :=
   [set prev (ckC x s a) z | z in ckB x s a].
 
 End CKDefs.
+
+(** In an oriented graph, the two final vertices of the prefix cannot be
+    out-neighbours of [v_(a-1)]: one is [v_(a-1)] itself, and the other
+    sends the preceding path arc into it. *)
+Lemma ck_path_prefix_out_card (H : orientedDigraph) (x : H) (s : seq H)
+    (a : nat) :
+  dipath x s -> 1 <= a -> a < size (x :: s) ->
+  #|ckA x s a| <= a.-2.
+Proof.
+move=> ps a_ge1 a_lt.
+rewrite /ckA.
+pose P := x :: s.
+pose w := nth x P a.-1.
+pose A : {set H} := [set z in take a P | w --> z].
+have uP : uniq P by exact: dipath_uniq ps.
+have sub : A \subset [set z in take a.-2 P].
+  apply/subsetP=> z; rewrite !inE => /andP[zt az].
+  have zP : z \in P by exact: mem_take zt.
+  have iz_lt : index z P < a by exact: index_ltn zt.
+  have iz_ne_last : index z P != a.-1.
+    apply/eqP=> izE.
+    have zE : z = w.
+      rewrite /w -izE.
+      by rewrite nth_index.
+    by move: az; rewrite zE arc_irrefl.
+  have a_ge2 : 2 <= a.
+    move: a_ge1; rewrite leq_eqVlt => /orP[/eqP aE|a2]; last exact: a2.
+    move: iz_lt iz_ne_last; rewrite -aE /=.
+    by case: (x == z).
+  have ale_s : a <= size s by move: a_lt; rewrite /P /= ltnS.
+  have ap1pos : 0 < a.-1 by rewrite ltn_predRL.
+  have ap2p1 : a.-2 < a.-1 by rewrite ltn_predL ap1pos.
+  have ap1_lt_s : a.-1 < size s.
+    rewrite -ltnS (prednK a_ge1) ltnS.
+    exact: ale_s.
+  have ia : a.-2 < size s := ltn_trans ap2p1 ap1_lt_s.
+  have arc_prev : nth x P a.-2 --> w.
+    have h := dipath_arc_nth (dipath_path ps) (i := a.-2).
+    have h2 := h ia.
+    have succE : (a.-2).+1 = a.-1 by exact: prednK ap1pos.
+    by rewrite /w -succE.
+  have iz_ne_prev : index z P != a.-2.
+    apply/eqP=> izE.
+    have zE : z = nth x P a.-2.
+      rewrite -izE.
+      by rewrite nth_index.
+    by move: az; rewrite zE (arc_asymm _ _ arc_prev).
+  have iz_lt_pred : index z P < a.-1.
+    rewrite ltn_neqAle; apply/andP; split; first exact: iz_ne_last.
+    by rewrite -ltnS (prednK a_ge1).
+  have iz_small : index z P < a.-2.
+    rewrite ltn_neqAle; apply/andP; split; first exact: iz_ne_prev.
+    by rewrite -ltnS (prednK ap1pos).
+  rewrite in_take //.
+have leA := subset_leq_card sub.
+rewrite /A /P /w in leA.
+rewrite /P in leA.
+suff hcard : #|[set z in take a.-2 (x :: s)]| <= a.-2.
+  exact: leq_trans leA hcard.
+rewrite cardsE.
+have utake : uniq (take a.-2 (x :: s))
+  by exact: take_uniq _ (dipath_uniq ps).
+rewrite (card_uniqP utake) size_takel //.
+exact: leq_trans (leq_pred (a.-1))
+  (leq_trans (leq_pred a) (ltnW a_lt)).
+Qed.
 
 (** ** The kernel section (KS) *)
 
@@ -402,7 +472,7 @@ by apply: ltn_trans Hell _; rewrite -addn2 -[X in X < _]addn0 ltn_add2l.
 Qed.
 
 (** K-AB. *)
-Let Aset : {set H} := [set z in take a (x :: s) | w --> z].
+Let Aset : {set H} := ckA x s a.
 Let Bset : {set H} := ckB x s a.
 
 Let BsetE : Bset = [set z in Cs | w --> z]. Proof. by []. Qed.
@@ -425,26 +495,14 @@ rewrite i0 cards0 addn0 -NE => <-.
 by rewrite -[RHS](Hreg w).
 Qed.
 
+Let A_le2 : #|Aset| <= a.-2.
+Proof.
+exact: ck_path_prefix_out_card ps a_ge1 a_lt.
+Qed.
+
 Let A_le : #|Aset| <= a.-1.
 Proof.
-have wtake : w \in take a (x :: s).
-  apply/(nthP x); exists a.-1.
-    by rewrite size_takel ?prednK // ltnW.
-  by rewrite nth_take ?prednK.
-have utake : uniq (take a (x :: s)).
-  by have := uP; rewrite {1}prefC cat_uniq => /and3P[].
-have cardtake : #|[set z in take a (x :: s)]| = a.
-  rewrite cardsE (card_uniqP utake) size_takel //.
-  exact: ltnW.
-have sub : Aset \subset [set z in take a (x :: s)] :\ w.
-  apply/subsetP=> z; rewrite !inE => /andP[zt az].
-  rewrite zt andbT; apply: contraTneq az => ->.
-  by rewrite arc_irrefl.
-have := subset_leq_card sub.
-move=> le; apply: leq_trans le _.
-have := cardsD1 w [set z in take a (x :: s)].
-rewrite inE wtake cardtake /= add1n => eq1.
-by move: eq1 => /(congr1 predn) /= <-.
+exact: leq_trans A_le2 (leq_pred (a.-1)).
 Qed.
 
 Let va_B : nth x (x :: s) a \in Bset.
@@ -625,6 +683,41 @@ exists x, s, a; split.
   + by rewrite -(AB_part) addnC leq_add2l A_le.
 - exact: claim12.
 - by move=> v vS; split; [exact: countA | exact: countB].
+Qed.
+
+(** The full kernel package together with the exact A/B partition and the
+    oriented-prefix improvement [|A| <= a.-2].  This is a separate API so
+    clients of [kernel_full] keep their existing destruct patterns. *)
+Theorem kernel_full_AB :
+  exists (x0 : H) (s0 : seq H) (a0 : nat),
+  [/\ #|ckA x0 s0 a0| + #|ckB x0 s0 a0| = delta,
+      #|ckA x0 s0 a0| <= a0.-2
+    & [/\ [/\ dipath x0 s0, size s0 = L, 1 <= a0 & a0 + delta <= L],
+          [/\ dicycle (ckC x0 s0 a0), size (ckC x0 s0 a0) = L.+1 - a0
+            & #|ckCset x0 s0 a0| = L.+1 - a0],
+          [/\ #|ckS x0 s0 a0| = #|ckB x0 s0 a0|,
+              #|ckB x0 s0 a0| <= delta,
+              delta <= #|ckB x0 s0 a0| + a0.-1
+            & last x0 s0 \in ckS x0 s0 a0],
+          (forall b z, b \in ckS x0 s0 a0 -> b --> z ->
+             z \in ckC x0 s0 a0)
+        & (forall v, v \in ckS x0 s0 a0 ->
+             [/\ #|ckS x0 s0 a0| + delta -
+                    outdeg_in (ckS x0 s0 a0) v <= #|ckCset x0 s0 a0|
+               & 2 * delta - L <= outdeg_in (ckS x0 s0 a0) v]) ] ].
+Proof.
+exists x, s, a; split.
+- exact: AB_part.
+- exact: A_le2.
+- split.
+  + by split.
+  + split=> //.
+    by rewrite cardsE (card_uniqP uC) szC.
+  + split=> //.
+    * by rewrite -(AB_part) leq_addl.
+    * by rewrite -(AB_part) addnC leq_add2l A_le.
+  + exact: claim12.
+  + by move=> v vS; split; [exact: countA | exact: countB].
 Qed.
 
 (** The bare Lemma 7 witness. *)

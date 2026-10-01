@@ -32,9 +32,13 @@ import tempfile
 import textwrap
 from pathlib import Path
 
+import rocq_toolchain as ROCQ
+
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_TIMEOUT = 180
+# Exact-type canaries request a milestone-scoped build; other canaries retain
+# the historical finite bound around their full detector.
+DEFAULT_TIMEOUT = 300
 
 
 @dataclasses.dataclass(frozen=True)
@@ -90,6 +94,7 @@ Proof. exact I. Qed.
         ),
         expected_signature="direct-proof-undecided",
         note="trivializes an open row to True and commits a direct proof",
+        detector="milestone-scoped",
     ),
     Mutant(
         name="u4_open_row_false_unconditional_refutation",
@@ -118,6 +123,34 @@ Proof. by []. Qed.
         ),
         expected_signature="unconditional-refutation",
         note="mutates an open row to False and commits an unconditional refutation",
+        detector="milestone-scoped",
+    ),
+    Mutant(
+        name="u4_open_row_alias_hidden_direct_proof",
+        phase="U4",
+        package="chromatic-theory",
+        replacements=(
+            Replacement(
+                "chromatic-theory/theories/conjectures/U4.v",
+                "partial_list_coloring_0_statement",
+                "Definition partial_list_coloring_0_statement : Prop :=\n  True.",
+            ),
+        ),
+        appendices=(
+            Appendix(
+                "chromatic-theory/theories/conjectures/grounding_U4.v",
+                """
+
+(** A transparent alias must not hide a forbidden direct proof from the gate. *)
+Definition mutation_statement_alias : Prop :=
+  partial_list_coloring_0_statement.
+Definition mutation_hidden_direct_proof : mutation_statement_alias := I.
+""",
+            ),
+        ),
+        expected_signature="direct-proof-undecided",
+        note="hides a direct proof of a trivialized open row behind a transparent alias",
+        detector="milestone-scoped",
     ),
     Mutant(
         name="base_list_colourable_on_total_coloring",
@@ -136,8 +169,9 @@ Definition list_colourable_on (G : sgraph) (C : finType) (L : G -> {set C}) (W :
             ),
         ),
         appendices=(),
-        expected_signature="[FAIL] package compiles",
+        expected_signature="[FAIL] milestone closure compiles",
         note="reintroduces the historical total-colouring bug for list_colourable_on",
+        detector="milestone-scoped",
     ),
     Mutant(
         name="base_girth_geq_without_genuine_cycle_guard",
@@ -154,8 +188,9 @@ Definition girth_geq (G : sgraph) (g : nat) : Prop :=
             ),
         ),
         appendices=(),
-        expected_signature="[FAIL] package compiles",
+        expected_signature="[FAIL] milestone closure compiles",
         note="drops the load-bearing 2 < size c guard from girth_geq",
+        detector="milestone-scoped",
     ),
     Mutant(
         name="base_wagner_planar_trivial_true",
@@ -171,8 +206,9 @@ Definition wagner_planar (G : sgraph) : Prop := True.
             ),
         ),
         appendices=(),
-        expected_signature="[FAIL] package compiles",
+        expected_signature="[FAIL] milestone closure compiles",
         note="weakens the Wagner-planarity guard to True",
+        detector="milestone-scoped",
     ),
     Mutant(
         name="base_has_girth_drops_witness_cycle",
@@ -189,8 +225,9 @@ Definition has_girth (G : sgraph) (g : nat) : Prop :=
             ),
         ),
         appendices=(),
-        expected_signature="[FAIL] package compiles",
+        expected_signature="[FAIL] milestone closure compiles",
         note="weakens exact girth by deleting the required witnessed g-cycle",
+        detector="milestone-scoped",
     ),
     Mutant(
         name="u4_strongly_colorable_exists_partition",
@@ -211,30 +248,32 @@ Definition strongly_colorable (G : sgraph) (r : nat) : Prop :=
             ),
         ),
         appendices=(),
-        expected_signature="[FAIL] package compiles",
+        expected_signature="[FAIL] milestone closure compiles",
         note="flips strongly_colorable from all partitions to one partition",
+        detector="milestone-scoped",
     ),
     Mutant(
-        name="x138_class_bound_quantifier_swap",
-        phase="X138",
-        package="topological-graph-theory",
+        name="x185_class_bound_quantifier_swap",
+        phase="X185",
+        package="chromatic-theory",
         replacements=(
             Replacement(
-                "topological-graph-theory/theories/conjectures/X138.v",
-                "esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+                "chromatic-theory/theories/conjectures/X185.v",
+                "every_multigraph_widespread_statement",
                 """
-Definition esperet_joret_surface_triangle_free_clustered_two_colouring_statement : Prop :=
-  forall (surface Delta0 : nat) (G : sgraph),
-    girth_geq G 4 ->
-    Delta G <= Delta0 ->
-    x138_embeddable_on_surface surface G ->
-    exists c : nat, x138_clustered_two_colourable_with_clustering c G.
+Definition every_multigraph_widespread_statement : Prop :=
+  forall (H : mgraph) (nu ell : nat) (G : sgraph),
+    loopless H ->
+    ω([set: G]) <= nu ->
+    exists c : nat,
+      c < χ([set: G]) ->
+      x185_contains_induced_long_subdivision G (line_graph H) ell.
 """,
             ),
         ),
         appendices=(),
         expected_signature="[exists-after-graph-forall]",
-        note="moves the class-uniform clustering constant inside forall G",
+        note="moves the class-uniform widespreadness threshold inside forall G",
         detector="lint",
     ),
     Mutant(
@@ -364,16 +403,14 @@ def apply_mutation(workspace: Path, mutant: Mutant) -> None:
 
 
 def run_check(workspace: Path, mutant: Mutant, timeout: int) -> subprocess.CompletedProcess[str]:
-    env = dict(os.environ)
-    switch_bin = Path.home() / ".opam" / "digraph" / "bin"
-    if switch_bin.is_dir():
-        env["PATH"] = str(switch_bin) + os.pathsep + env.get("PATH", "")
-        env.setdefault("OPAM_SWITCH_PREFIX", str(Path.home() / ".opam" / "digraph"))
+    env = ROCQ.environment()
     if mutant.detector == "lint":
         command = [sys.executable, "meta/faithfulness_lint.py", "--files",
                    *sorted({replacement.relpath for replacement in mutant.replacements}),
                    "--check"]
     else:
+        if mutant.detector == "milestone-scoped":
+            env["CHECK_MILESTONE_SCOPED_BUILD"] = mutant.phase
         command = [sys.executable, "meta/check_milestone.py", mutant.phase, mutant.package]
     return subprocess.run(
         command,
@@ -390,12 +427,16 @@ def run_mutant(mutant: Mutant, timeout: int, keep: bool) -> tuple[bool, str, Pat
     kept: Path | None = tmp if keep else None
     try:
         copy_workspace(mutant, tmp)
+        baseline = run_check(tmp, mutant, timeout)
+        if baseline.returncode != 0:
+            tail = (baseline.stdout + baseline.stderr)[-800:].replace("\n", "\\n")
+            return False, f"BASELINE REJECTED before mutation; tail={tail}", kept
         apply_mutation(tmp, mutant)
         proc = run_check(tmp, mutant, timeout)
         output = proc.stdout + proc.stderr
         killed = proc.returncode != 0 and mutant.expected_signature in output
         if killed:
-            detail = f"killed by {mutant.expected_signature}"
+            detail = f"baseline accepted; killed by {mutant.expected_signature}"
         elif proc.returncode == 0:
             detail = "SURVIVED: check_milestone accepted the mutant"
         else:
@@ -425,6 +466,13 @@ def main(argv: list[str]) -> int:
         for mutant in selected:
             print(f"{mutant.name}: {mutant.note}")
         return 0
+
+    contracts = subprocess.run(
+        [sys.executable, "meta/gate_contracts.py"], cwd=ROOT, text=True
+    )
+    if contracts.returncode != 0:
+        print("REJECTED: gate-contract regression fixture failed")
+        return 1
 
     failures = 0
     print(f"running {len(selected)} faithfulness mutation canary/canaries")

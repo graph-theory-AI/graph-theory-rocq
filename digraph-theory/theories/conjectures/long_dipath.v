@@ -6,14 +6,14 @@
     See docs/CONJECTURES_FORMALIZATION_PLAN.md §1, §5 (P1), §7.
 
     [outdeg v] is the out-degree and [ell D] the length of a longest directed simple path,
-    both reused from the core. The δ = 3 instance is already PROVED unconditionally in
-    applications/ck3 ([ck_conj1_at_3]); recorded here as [conj1_delta3_proved]. The δ = 4
-    cases (n ∈ {10, 11}) are the project's computer-aided results and appear as the general
-    conjecture instantiated at d = 4 under the extra side-condition #|D| ∈ {10, 11}. *)
+    both reused from the core. The instances δ = 3, 4, 5, 6 are PROVED
+    unconditionally in [applications/ck3] and [applications/ck_path], and
+    are recorded below as closed specializations of the general node. *)
 
 From HB Require Import structures.
 From mathcomp Require Import all_boot.
-From Digraph Require Import prelude digraph oriented dipath ck3_main.
+From Digraph Require Import prelude digraph oriented dipath ck3_main
+  ckpath_k4 ckpath_k5 ckpath_k6.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -33,13 +33,39 @@ Theorem conj1_implies_delta3 :
   forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 3 <= outdeg v) -> 2 * 3 <= ell D.
 Proof. by move=> H D *; apply: H. Qed.
 
-(** General ⟹ the δ = 4 instance (the project's n ∈ {10,11} results add #|D| = n). *)
+(** General ⟹ the δ = 4 instance. *)
 Theorem conj1_implies_delta4 :
   cheng_keevash_conj1_statement ->
   forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 4 <= outdeg v) -> 2 * 4 <= ell D.
+Proof. by move=> H D *; apply: H. Qed.
+
+(** General ⟹ the δ = 5 instance. *)
+Theorem conj1_implies_delta5 :
+  cheng_keevash_conj1_statement ->
+  forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 5 <= outdeg v) -> 2 * 5 <= ell D.
+Proof. by move=> H D *; apply: H. Qed.
+
+(** General ⟹ the δ = 6 instance. *)
+Theorem conj1_implies_delta6 :
+  cheng_keevash_conj1_statement ->
+  forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 6 <= outdeg v) -> 2 * 6 <= ell D.
 Proof. by move=> H D *; apply: H. Qed.
 
 (** ** The δ = 3 node is unconditionally PROVED (applications/ck3). *)
 Remark conj1_delta3_proved :
   forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 3 <= outdeg v) -> 2 * 3 <= ell D.
 Proof. exact: ck_conj1_at_3. Qed.
+
+(** ** The δ = 4, 5, 6 nodes are unconditionally PROVED
+    ([applications/ck_path]). *)
+Remark conj1_delta4_proved :
+  forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 4 <= outdeg v) -> 2 * 4 <= ell D.
+Proof. exact: ck_conj1_at_4. Qed.
+
+Remark conj1_delta5_proved :
+  forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 5 <= outdeg v) -> 2 * 5 <= ell D.
+Proof. exact: ck_conj1_at_5. Qed.
+
+Remark conj1_delta6_proved :
+  forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 6 <= outdeg v) -> 2 * 6 <= ell D.
+Proof. exact: ck_conj1_at_6. Qed.

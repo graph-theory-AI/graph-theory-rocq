@@ -61,11 +61,13 @@ Definition fg_event_weight (T : finType) (w : T -> nat) (P : pred T) : nat :=
 Definition fg_event_at_least_ratio
     (T : finType) (w : T -> nat) (P : pred T) (num den : nat) : Prop :=
   0 < den /\ num <= den /\
+  0 < fg_total_weight w /\
   den * fg_event_weight w P >= num * fg_total_weight w.
 
 Definition fg_event_at_most_ratio
     (T : finType) (w : T -> nat) (P : pred T) (num den : nat) : Prop :=
   0 < den /\ num <= den /\
+  0 < fg_total_weight w /\
   den * fg_event_weight w P <= num * fg_total_weight w.
 
 Definition fg_whp
@@ -73,6 +75,7 @@ Definition fg_whp
     (P : forall n : nat, pred (T n)) : Prop :=
   forall a b : nat, 0 < a -> a <= b ->
     eventually (fun n =>
+      0 < fg_total_weight (w n) /\
       b * fg_event_weight (w n) (P n) >= (b - a) * fg_total_weight (w n)).
 
 Definition fg_probability_bounded_away_from_one
@@ -80,4 +83,35 @@ Definition fg_probability_bounded_away_from_one
     (P : forall n : nat, pred (T n)) : Prop :=
   exists a b : nat, 0 < a /\ a <= b /\
     eventually (fun n =>
+      0 < fg_total_weight (w n) /\
       b * fg_event_weight (w n) (P n) <= (b - a) * fg_total_weight (w n)).
+
+(** The probability predicates expose their positive-mass contract. *)
+Lemma fg_event_at_least_ratio_total_weight_pos
+    (T : finType) (w : T -> nat) (P : pred T) (num den : nat) :
+  fg_event_at_least_ratio w P num den -> 0 < fg_total_weight w.
+Proof. by move=> [_ [_ [H _]]]. Qed.
+
+Lemma fg_event_at_most_ratio_total_weight_pos
+    (T : finType) (w : T -> nat) (P : pred T) (num den : nat) :
+  fg_event_at_most_ratio w P num den -> 0 < fg_total_weight w.
+Proof. by move=> [_ [_ [H _]]]. Qed.
+
+Lemma fg_whp_eventually_total_weight_pos
+    (T : nat -> finType) (w : forall n : nat, T n -> nat)
+    (P : forall n : nat, pred (T n)) :
+  fg_whp w P -> eventually (fun n => 0 < fg_total_weight (w n)).
+Proof.
+move=> Hwhp; move: (Hwhp 1 1 erefl erefl) => [N HN].
+by exists N => n Nn; have [] := HN n Nn.
+Qed.
+
+Lemma fg_probability_bounded_away_from_one_eventually_total_weight_pos
+    (T : nat -> finType) (w : forall n : nat, T n -> nat)
+    (P : forall n : nat, pred (T n)) :
+  fg_probability_bounded_away_from_one w P ->
+  eventually (fun n => 0 < fg_total_weight (w n)).
+Proof.
+move=> [a [b [_ [_ [N HN]]]]].
+by exists N => n Nn; have [] := HN n Nn.
+Qed.

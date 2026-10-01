@@ -23,6 +23,9 @@ META = os.path.dirname(os.path.abspath(__file__))
 MONO = os.path.dirname(META)
 sys.path.insert(0, META)
 import corpus_registry as REG
+import gate_contracts as CONTRACTS
+import rocq_toolchain as ROCQ
+import formal_resolutions as RESOLUTIONS
 NS = REG.NS
 
 if len(sys.argv) < 3:
@@ -101,31 +104,18 @@ def incl_flags_from_cqp(cqp_txt):
 
 def faithfulness_candidates(pkg, ns, cqp_txt, target_names):
     files = project_v_files(pkg, cqp_txt)
-    candidates = {n: [] for n in target_names}
-    pats = {n: re.compile(rf"(?<![{IDENT_CHARS}]){re.escape(n)}(?![{IDENT_CHARS}])")
-            for n in target_names}
+    sources = []
     for rel in files:
         try:
-            src = strip_comments(open(os.path.join(pkg, rel)).read())
+            src = open(os.path.join(pkg, rel)).read()
         except OSError:
             continue
         mod = module_of_rel(ns, rel)
-        for m in DECL_RE.finditer(src):
-            decl = coq_sentence_from(src, m.start())
-            mentioned = [n for n, pat in pats.items() if pat.search(decl)]
-            if not mentioned:
-                continue
-            qname = f"{mod}.{m.group(1)}"
-            for n in mentioned:
-                candidates[n].append((qname, rel, m.group(1)))
-    return candidates
+        sources.append((mod, rel, src))
+    return CONTRACTS.faithfulness_candidate_records(sources, target_names)
 
-# switch resolution: prefer PATH, else the known global switch bin
-SW = os.path.expanduser("~/.opam/digraph/bin")
-env = dict(os.environ)
-if os.path.isdir(SW):
-    env["PATH"] = SW + os.pathsep + env.get("PATH", "")
-    env.setdefault("OPAM_SWITCH_PREFIX", os.path.expanduser("~/.opam/digraph"))
+# Resolve Rocq exactly as the migration assumptions gate does.
+env = ROCQ.environment()
 def run(cmd, cwd=None):
     return subprocess.run(cmd, cwd=cwd or pkg, env=env, capture_output=True, text=True)
 
@@ -152,8 +142,17 @@ phase_number = re.fullmatch(r"X(\d+)", phase)
 prospective = CORPUS == "v2" and phase_number \
     and int(phase_number.group(1)) >= int(policy["prospective_v2_wave_min"])
 grounding_certificates = []
+grounding_type_checks = []
 prospective_errors = []
 if prospective:
+    ownership = subprocess.run(
+        [sys.executable, os.path.join(META, "library_inventory.py"),
+         "--check", "--wave", phase],
+        cwd=MONO, capture_output=True, text=True,
+    )
+    chk(ownership.returncode == 0, "prospective helper ownership",
+        "" if ownership.returncode == 0 else (ownership.stdout + ownership.stderr)[-1000:])
+
     lint = subprocess.run(
         [sys.executable, os.path.join(META, "faithfulness_lint.py"),
          "--files", os.path.relpath(stmt, MONO), "--check"],
@@ -177,13 +176,19 @@ if prospective:
             prospective_errors.append("faithfulness_verified_by equals implemented_by")
 
     manifest_by_slug = {r["slug"]: r for r in REG.load_manifest(CORPUS)["rows"]}
-    statement_src = strip_comments(open(stmt).read()) if os.path.exists(stmt) else ""
-    helper_prefix = f"x{phase_number.group(1)}_"
-    local_helpers = [name for name in re.findall(
-        r"^\s*Definition\s+([A-Za-z0-9_']+)", statement_src, re.M)
-                     if name.startswith(helper_prefix) and not name.endswith("_statement")]
+    statement_rel = os.path.relpath(stmt, MONO).replace(os.sep, "/")
+    try:
+        helper_inventory = json.load(open(os.path.join(META, "library_helper_inventory.json")))
+    except (OSError, json.JSONDecodeError) as exc:
+        prospective_errors.append(f"cannot load helper inventory: {exc}")
+        helper_inventory = {"helpers": []}
+    local_helpers = sorted(
+        helper["name"] for helper in helper_inventory.get("helpers", [])
+        if helper.get("path") == statement_rel
+    )
     required_fields = policy["grounding"]["required_fields"]
     required_states = set(policy["grounding"]["required_statement_states"])
+    grounding_src = strip_comments(open(grounding).read()) if os.path.exists(grounding) else ""
     for slug in slugs:
         row = manifest_by_slug[slug]
         state = row.get("legs", {}).get("statement", "todo")
@@ -198,31 +203,15 @@ if prospective:
         if missing_fields:
             prospective_errors.append(f"{slug}: grounding metadata misses {missing_fields}")
             continue
-        for field in ("hyp_inhabited", "not_trivially_true"):
-            if not isinstance(spec[field], str) or not spec[field]:
-                prospective_errors.append(f"{slug}: grounding.{field} must name one certificate")
-            else:
-                grounding_certificates.append(spec[field])
-        helpers = spec["helper_sanity"]
-        if not isinstance(helpers, list) or not all(isinstance(x, str) and x for x in helpers):
-            prospective_errors.append(f"{slug}: grounding.helper_sanity must be a list of names")
-        else:
-            grounding_certificates.extend(helpers)
-            if local_helpers and not helpers:
-                prospective_errors.append(
-                    f"{slug}: local helpers {local_helpers[:5]} require helper_sanity certificates")
+        checks, certificate_errors = CONTRACTS.validate_grounding_contract(
+            slug, row["formal_name"], local_helpers, spec, grounding_src
+        )
+        prospective_errors.extend(certificate_errors)
+        grounding_type_checks.extend(checks)
+        grounding_certificates.extend(theorem for theorem, _claim in checks)
 
     if not os.path.exists(grounding):
         prospective_errors.append(f"prospective done rows require {os.path.basename(grounding)}")
-    else:
-        grounding_src = strip_comments(open(grounding).read())
-        proof_decl_re = re.compile(
-            r"^\s*(?:Lemma|Theorem|Corollary|Proposition|Fact|Remark|Definition)\s+"
-            r"([A-Za-z0-9_']+)\b", re.M)
-        declared_certs = set(proof_decl_re.findall(grounding_src))
-        missing_certs = sorted(set(grounding_certificates) - declared_certs)
-        if missing_certs:
-            prospective_errors.append(f"grounding file misses named certificates {missing_certs}")
     chk(not prospective_errors, "prospective audit + grounding contract",
         "; ".join(prospective_errors[:8]) if prospective_errors else "")
 
@@ -253,17 +242,43 @@ chk(os.path.exists(cqp) and not notlisted, "files in _CoqProject", f"not listed:
 
 # 3) build sibling dependencies referenced in _CoqProject (e.g. -Q ../base/theories GTBase), then compile
 deps = re.findall(r"-[QR]\s+\.\./([\w.-]+)/theories\s+\S+", cqp_txt)
+# Mutation canaries may request a milestone-scoped build. Their current target
+# files all import GTBase directly and do not import the package-wide optional
+# siblings; normal acceptance never sets this variable.
+scoped_build = os.environ.get("CHECK_MILESTONE_SCOPED_BUILD") == phase
 dep_fail = []
 for dep in deps:
+    if scoped_build and dep != "base":
+        continue
     dpath = os.path.join(MONO, dep)
     if os.path.isfile(os.path.join(dpath, "_CoqProject")):
         dm = run(["bash", "-c", "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"], cwd=dpath)
         if dm.returncode != 0:
             dep_fail.append(dep)
 chk(not dep_fail, f"dependencies build ({', '.join(deps) or 'none'})", f"failed: {dep_fail}" if dep_fail else "")
-mk = run(["bash", "-c", "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"])
+# Mutation canaries exercise this same acceptance logic in isolated workspaces.
+# They request a milestone-scoped build so a canary does not spend its timeout
+# compiling hundreds of unrelated conjecture files. Normal acceptance always
+# builds the full package.
+if scoped_build:
+    scoped_sources = [
+        p for p in (stmt, grounding, implications)
+        if os.path.exists(p)
+    ]
+    scoped_targets = [
+        os.path.relpath(p, pkg)[:-2] + ".vo"
+        for p in scoped_sources
+    ]
+    build_command = (
+        "rocq makefile -f _CoqProject -o Makefile.coq && "
+        "make -f Makefile.coq " + " ".join(scoped_targets)
+    )
+else:
+    build_command = "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"
+mk = run(["bash", "-c", build_command])
 compiles = mk.returncode == 0
-chk(compiles, "package compiles", "" if compiles else (mk.stdout + mk.stderr)[-500:])
+compile_label = "milestone closure compiles" if scoped_build else "package compiles"
+chk(compiles, compile_label, "" if compiles else (mk.stdout + mk.stderr)[-500:])
 
 # 5) no top-level axioms/admits (outside comments)
 axiom_re = re.compile(r"^\s*(Axiom|Parameter|Admitted|Conjecture|Hypothesis|admit)\b", re.M)
@@ -285,6 +300,8 @@ if compiles and ns:
         mods.append(f"grounding_{phase}")
     assumption_names = expected + grounding_certificates
     body = f"From {ns}.conjectures Require Import {' '.join(sorted(set(mods)))}.\n" + \
+           "".join(f"Check ({theorem} : {claim}).\nCheck ({claim} : Prop).\n"
+                   for theorem, claim in grounding_type_checks) + \
            "".join(f"Print Assumptions {n}.\n" for n in assumption_names)
     open(probe, "w").write(body)
     # build coqc include flags as an argv LIST (no shell string interpolation of _CoqProject paths)
@@ -311,6 +328,18 @@ chk(assum_ok, f"Print Assumptions clean ({n_axfree}/{len(expected)} statements"
 #    - no direct proof of an undecided row (manifest status open/partial).
 faith_ok, faith_detail = False, "skipped (compile failed)"
 cases = []
+verified_resolution_keys = set()
+resolution_error = ""
+if compiles and ns:
+    statement_names = {f"{ns}.conjectures.{defined_in[n]}.{n}"
+                       for n in expected if n in defined_in}
+    try:
+        checked_resolutions = RESOLUTIONS.verify_resolutions(
+            package=package, statement_names=statement_names, build=False)
+        verified_resolution_keys = {r.exact_type_key for r in checked_resolutions}
+    except (RESOLUTIONS.ResolutionError, RuntimeError) as exc:
+        resolution_error = str(exc)
+    chk(not resolution_error, "registered formal resolutions checked", resolution_error)
 if compiles and ns:
     probe = os.path.join(pkg, "theories", "conjectures", f"_faith_{phase}.v")
     incl_flags = incl_flags_from_cqp(cqp_txt)
@@ -325,10 +354,9 @@ if compiles and ns:
         stmt_q = f"{ns}.conjectures.{defined_in[n]}.{n}" if n in defined_in else n
         for qname, rel, decl in candidates.get(n, []):
             modules.add(qname.rsplit(".", 1)[0])
-            if status != "disproved":
-                cases.append(("unconditional-refutation", n, qname, rel, decl, f"~ {stmt_q}"))
-            if status in ("open", "partial"):
-                cases.append(("direct-proof-undecided", n, qname, rel, decl, stmt_q))
+            for kind, typ in CONTRACTS.forbidden_exact_types(
+                    status, stmt_q, qname, verified_resolution_keys):
+                cases.append((kind, n, qname, rel, decl, typ))
 
     lines = [f"Require Import {m}." for m in sorted(modules)]
     line_map = {}

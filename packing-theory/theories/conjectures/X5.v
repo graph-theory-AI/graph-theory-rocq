@@ -15,8 +15,7 @@ Definition x5_tri_edges (G : sgraph) (T : {set G}) : {set {set G}} :=
   [set e : {set G} | (e \subset T) && (#|e| == 2)].
 
 Definition x5_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition x5_edge_disjoint_triangles (G : sgraph) (ts : seq {set G}) : Prop :=
   uniq ts /\

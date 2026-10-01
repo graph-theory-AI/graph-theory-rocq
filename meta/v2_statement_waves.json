@@ -3139,17 +3139,19 @@
       "repo": "topological-graph-theory",
       "defines_file": "X138.v",
       "implemented_by": "Codex faithful re-encoding wave 1, 2026-07-17",
-      "source_verified_by": "Codex source-faithfulness re-read for repaired blocked rows, 2026-07-17",
-      "source_verified_at": "2026-07-17",
+      "source_verified_by": "Codex connected-surface semantic re-audit, 2026-08-21",
+      "source_verified_at": "2026-08-21",
       "commit": "faithful-reencoding-wave1",
       "rows": {
         "std_esperet_joret_question_on_clustered_colouring_of": {
           "formal_name": "esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
-          "note": "Faithful re-encoding 2026-07-17: moves the clustering bound outside the graph quantifier, asserting a surface/Delta-uniform constant c with clustered_colouring G 2 c."
+          "note": "PARTIAL connected-orientable proxy: the uniform clustering bound has the source quantifier order, but the foundation currently represents only connected graphs with a cellular rotation system on a closed orientable surface. Disconnected graphs and non-orientable surfaces from the source class are not yet modeled.",
+          "state": "partial",
+          "partial_reason": "The uniform clustering bound has the source quantifier order, but surface_embeddable intentionally represents only connected graphs of bounded orientable genus. The source ranges over arbitrary graphs embeddable in an arbitrary fixed surface, including disconnected graphs and non-orientable surfaces; that correspondence is not formalized."
         }
       },
-      "faithfulness_verified_by": "Adversarial repair verification, machine probes both directions (2026-07-18)",
-      "faithfulness_result": "CONFIRMED REPAIRED. exists-c sits between (surface,Delta0) and forall-G; per-graph constant-colouring witness machine-checked to FAIL against the repaired statement (evar scope blocks c:=#|G|), while the old per-graph shape remains trivially provable (documents the closed collapse). Class matches the source (triangle-free via girth_geq 4, Delta<=Delta0, genus-bounded rotation-system embedding)."
+      "faithfulness_verified_by": "Adversarial quantifier repair verification (2026-07-18); connected-surface semantic re-audit (2026-08-21)",
+      "faithfulness_result": "PARTIAL (connected-orientable proxy). exists-c sits between (orientable_genus,Delta0) and forall-G, so the repaired uniformity quantifier is preserved. The graph class is narrower than the source: surface_embeddable now explicitly requires a connected graph and a closed-orientable rotation-system embedding; disconnected and non-orientable embeddability remain unmodeled."
     },
     "X139": {
       "phase": "X139",

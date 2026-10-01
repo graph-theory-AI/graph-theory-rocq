@@ -10513,14 +10513,14 @@
    "audit_page": "todo"
   },
   "std_esperet_joret_question_on_clustered_colouring_of": {
-   "statement": "done",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "faithful-reencoding-wave1",
    "package": "topological-graph-theory",
-   "note": "Authored in X138.v:esperet_joret_surface_triangle_free_clustered_two_colouring_statement. Faithful re-encoding 2026-07-17: moves the clustering bound outside the graph quantifier, asserting a surface/Delta-uniform constant c with clustered_colouring G 2 c."
+   "note": "PARTIAL (proxy) — The uniform clustering bound has the source quantifier order, but surface_embeddable intentionally represents only connected graphs of bounded orientable genus. The source ranges over arbitrary graphs embeddable in an arbitrary fixed surface, including disconnected graphs and non-orientable surfaces; that correspondence is not formalized. Authored in X138.v:esperet_joret_surface_triangle_free_clustered_two_colouring_statement."
   },
   "std_esperet_labourel_ochem_problem_on_induced_univer": {
    "statement": "todo",

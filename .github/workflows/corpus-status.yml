@@ -1,7 +1,7 @@
 name: corpus-status
 
-# The audit job backs corpus/status claims without Rocq. The container job installs the pinned
-# Rocq/MathComp graph stack and runs full acceptance plus active probes for changed milestones.
+# The audit job backs corpus/status claims without Rocq. The container job installs the versioned
+# Rocq/MathComp graph stack and runs acceptance plus active probes for changed milestones.
 on:
   push:
     branches: [main]
@@ -14,7 +14,17 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.12'
+      - name: Checkout pinned OpenProblemGarden source
+        uses: actions/checkout@v4
+        with:
+          repository: mlelarge/graph-conjectures
+          ref: f6901fb371155678980a84306f6208fa0f166a6b
+          path: graph-conjectures-upstream
+      - name: Verify OPG generator against pinned inputs
+        env:
+          GRAPH_CONJECTURES: ${{ github.workspace }}/graph-conjectures-upstream
+        run: python3 meta/build_opg_manifest.py --check
       - name: Toolchain-free corpus-status audit
         run: make audit
 
@@ -25,10 +35,23 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Checkout pinned OpenProblemGarden source
+        uses: actions/checkout@v4
+        with:
+          repository: mlelarge/graph-conjectures
+          ref: f6901fb371155678980a84306f6208fa0f166a6b
+          path: graph-conjectures-upstream
       - name: Install graph-theory dependencies
         run: |
           opam repo add rocq-released https://rocq-prover.org/opam/released --all-switches || true
-          opam install -y coq-graph-theory coq-mathcomp-classical
+          opam install -y coq-graph-theory.0.9.7 coq-mathcomp-classical.1.16.0
+      - name: Exercise audit-gate controls
+        env:
+          GRAPH_CONJECTURES: ${{ github.workspace }}/graph-conjectures-upstream
+        run: |
+          python3 meta/build_opg_manifest.py --check
+          make mutation
+          python3 meta/check_library_migration.py
       - name: Gate changed milestones and prospective probes
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}

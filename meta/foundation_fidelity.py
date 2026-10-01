@@ -32,6 +32,31 @@ def load_registry() -> dict:
     return json.loads(REGISTRY.read_text())
 
 
+def selected_primitives(spec: dict) -> set[str]:
+    """Return only explicitly enrolled primitives; never infer trust from a file."""
+    return set(spec.get("audited_primitives", [])) | set(spec.get("overrides", {}))
+
+
+def strip_comments(src: str) -> str:
+    """Remove nested Rocq comments before looking for declarations."""
+    out: list[str] = []
+    i = depth = 0
+    while i < len(src):
+        if src.startswith("(*", i):
+            depth += 1
+            i += 2
+        elif depth and src.startswith("*)", i):
+            depth -= 1
+            i += 2
+        elif depth:
+            out.append("\n" if src[i] == "\n" else " ")
+            i += 1
+        else:
+            out.append(src[i])
+            i += 1
+    return "".join(out)
+
+
 def expand_registry(data: dict | None = None) -> tuple[list[dict], list[str]]:
     data = data or load_registry()
     allowed = set(data.get("verdicts", []))
@@ -39,8 +64,8 @@ def expand_registry(data: dict | None = None) -> tuple[list[dict], list[str]]:
     errors: list[str] = []
     seen: set[str] = set()
 
-    if data.get("schema_version") != 1:
-        errors.append("schema_version must be 1")
+    if data.get("schema_version") != 2:
+        errors.append("schema_version must be 2")
     if allowed != {"FAITHFUL", "LIGHTWEIGHT", "BROKEN"}:
         errors.append("verdicts must be exactly FAITHFUL/LIGHTWEIGHT/BROKEN")
 
@@ -50,11 +75,26 @@ def expand_registry(data: dict | None = None) -> tuple[list[dict], list[str]]:
         if not path.is_file():
             errors.append(f"{module}: path does not exist: {rel}")
             continue
-        src = path.read_text()
+        src = strip_comments(path.read_text())
         declarations = set(DECL_RE.findall(src))
         proofs = set(PROOF_RE.findall(src))
         default = spec.get("default")
         overrides = spec.get("overrides", {})
+
+        audited = spec.get("audited_primitives", [])
+        if default is not None and "audited_primitives" not in spec:
+            errors.append(
+                f"{module}: default verdict requires an explicit audited_primitives list"
+            )
+        if not isinstance(audited, list) or not all(isinstance(name, str) for name in audited):
+            errors.append(f"{module}: audited_primitives must be a string list")
+            audited = []
+        if len(audited) != len(set(audited)):
+            errors.append(f"{module}: audited_primitives contains duplicates")
+        unknown_audited = sorted(set(audited) - declarations)
+        if unknown_audited:
+            errors.append(f"{module}: audited_primitives name undeclared primitives: "
+                          f"{unknown_audited}")
 
         unknown = sorted(set(overrides) - declarations)
         if unknown:
@@ -64,7 +104,9 @@ def expand_registry(data: dict | None = None) -> tuple[list[dict], list[str]]:
             errors.append(f"{module}: machine_evidence names are not proof declarations: "
                           f"{missing_evidence}")
 
-        selected = declarations if default is not None else set(overrides)
+        # A module default is only shorthand for the explicitly audited names.
+        # Newly added declarations remain unaudited until this list is updated.
+        selected = selected_primitives(spec)
         for primitive in sorted(selected):
             verdict_spec = overrides.get(primitive, default)
             verdict = (verdict_spec or {}).get("verdict")
@@ -104,7 +146,19 @@ def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--json", action="store_true")
+    parser.add_argument("--validate", action="store_true")
     args = parser.parse_args(argv)
+
+    if args.validate:
+        fixture = {
+            "default": {"verdict": "FAITHFUL", "note": "fixture"},
+            "audited_primitives": ["audited"],
+            "overrides": {"exception": {"verdict": "BROKEN", "note": "fixture"}},
+        }
+        selected = selected_primitives(fixture)
+        ok = selected == {"audited", "exception"} and "new_unreviewed" not in selected
+        print(f"foundation-fidelity self-test {'OK' if ok else 'FAILED'}")
+        return 0 if ok else 1
 
     entries, errors = expand_registry()
     counts = Counter(e["verdict"] for e in entries)

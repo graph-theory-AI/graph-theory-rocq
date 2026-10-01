@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X24 vocabulary ************************************************)
 
 Definition x24_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition x24_perfect_matching (G : sgraph) (M : {set {set G}}) : Prop :=
   M \subset x24_edge_set G /\

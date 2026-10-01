@@ -56,7 +56,7 @@
 
 ## Foundation fidelity registry
 
-- **102 audited primitives**: 88 faithful · 12 lightweight · 2 broken.
+- **112 audited primitives**: 98 faithful · 12 lightweight · 2 broken.
 - Registry: `meta/foundation_fidelity.json`; validate declarations and evidence names with `python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is never inferred from compilation.
 
 | verdict | primitive | misuse watch |
@@ -140,13 +140,13 @@ Release: **`opg-v1.0.1-227-attempted`** (supersedes `opg-v1.0-227-attempted`, wh
 CI (toolchain-free — no Coq build, no external OPG clone needed):
 
 ```sh
-make audit   # edge/v2 drift + foundation registry + warning lint + status/LANDED invariants
+make audit   # routing fixtures + edge/v2 drift + foundation/inventory/lint/status invariants
 ```
 
 Full acceptance (dev environment: Rocq/MathComp toolchain + the OpenProblemGarden clone):
 
 ```sh
-make gate    # regenerates OPG, fully checks v2 against its pinned upstream, then every LANDED milestone:
+make gate    # verifies pinned OPG/v2 inputs, then checks every LANDED milestone:
              #   compiles, axiom-free, Print Assumptions clean, overlay leg-state justified
 ```
 
@@ -157,7 +157,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1745 tracked rows** — by corpus tag: arxiv 762, arxiv-studied 568, derived 138, erdos 277; **116 alias rows** (no statement owed).
-- Statement legs over the 1629 non-alias rows: **332 done** · 10 partial · 36 blocked · 1251 todo.
+- Statement legs over the 1629 non-alias rows: **331 done** · 11 partial · 36 blocked · 1251 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -204,7 +204,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X135 | 0 | 1 | 0 | 0 | 1 |
 | X136 | 1 | 0 | 0 | 0 | 1 |
 | X137 | 1 | 0 | 0 | 0 | 1 |
-| X138 | 1 | 0 | 0 | 0 | 1 |
+| X138 | 0 | 1 | 0 | 0 | 1 |
 | X139 | 0 | 0 | 1 | 0 | 1 |
 | X14 | 2 | 0 | 0 | 0 | 2 |
 | X140 | 0 | 0 | 1 | 0 | 1 |

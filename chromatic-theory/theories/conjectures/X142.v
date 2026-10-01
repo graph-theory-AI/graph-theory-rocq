@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X142 vocabulary ***********************************************)
 
 Definition x142_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition x142_edges_incident (G : sgraph) (v : G) : {set {set G}} :=
   [set e in x142_edge_set G | v \in e].
@@ -51,4 +50,3 @@ Definition flandrin_neighbour_sum_distinguishing_edge_colouring_statement : Prop
     3 <= #|G| ->
     ~ inhabited (G ≃ cycle_graph 5) ->
     x142_neighbour_sum_edge_colourable G (Delta G + 2).
-

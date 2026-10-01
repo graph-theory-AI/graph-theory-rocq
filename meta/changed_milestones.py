@@ -14,10 +14,47 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 META = ROOT / "meta"
+PACKAGE_DIRS = {"base"} | {
+    path.name
+    for path in ROOT.iterdir()
+    if path.is_dir() and path.name.endswith("-theory")
+}
 MILESTONE_RE = re.compile(
     r"^([^/]+)/theories/conjectures/(?:grounding_|implications_)?"
     r"((?:U|D|P|X|XE|T)[A-Za-z0-9_]+)\.v$"
 )
+
+# Package dependency edges not already represented by the ubiquitous GTBase
+# dependency.  A changed package is rebuilt together with every reverse
+# dependency in this closure.
+REVERSE_DEPENDENCIES = {
+    "minor-theory": {"graph-theory-misc"},
+    "topological-graph-theory": {
+        "hamiltonicity-theory",
+        "packing-theory",
+        "graph-theory-misc",
+    },
+}
+
+MUTATION_GATE_PATHS = {
+    "meta/check_milestone.py",
+    "meta/faithfulness_mutation.py",
+    "meta/faithfulness_policy.json",
+    "meta/faithfulness_lint.py",
+    "meta/foundation_fidelity.py",
+    "meta/foundation_fidelity.json",
+    "meta/library_inventory.py",
+    "meta/library_helper_inventory.json",
+    "meta/library_primitives.json",
+}
+
+MIGRATION_GATE_PATHS = {
+    "meta/check_library_migration.py",
+    "meta/library_inventory.py",
+    "meta/library_helper_inventory.json",
+    "meta/library_primitives.json",
+    "base/theories/simple_edges.v",
+}
 
 
 def git(*args: str) -> subprocess.CompletedProcess[str]:
@@ -68,12 +105,85 @@ def run(command: list[str]) -> None:
         raise SystemExit(proc.returncode)
 
 
+def package_source_change(path: str) -> str | None:
+    """Return the package whose compilable source/config changed."""
+    parts = Path(path).parts
+    if not parts or parts[0] not in PACKAGE_DIRS:
+        return None
+    if path.endswith(".v") or path.endswith(".opam"):
+        return parts[0]
+    if len(parts) == 2 and parts[1] in {"_CoqProject", "Makefile"}:
+        return parts[0]
+    return None
+
+
+def reverse_dependency_closure(packages: set[str]) -> set[str]:
+    closure = set(packages)
+    while True:
+        expanded = closure | {
+            dependent
+            for package in closure
+            for dependent in REVERSE_DEPENDENCIES.get(package, set())
+        }
+        if expanded == closure:
+            return closure
+        closure = expanded
+
+
+def validate_project_membership(paths: list[str]) -> None:
+    """Reject a new/renamed Rocq source that its package build would ignore."""
+    errors = []
+    for path in paths:
+        package = package_source_change(path)
+        source = ROOT / path
+        if not package or not path.endswith(".v") or not source.exists():
+            continue
+        relative = source.relative_to(ROOT / package).as_posix()
+        project = ROOT / package / "_CoqProject"
+        listed = {
+            line.split("#", 1)[0].strip()
+            for line in project.read_text().splitlines()
+            if line.split("#", 1)[0].strip().endswith(".v")
+        }
+        if relative not in listed:
+            errors.append(f"{path}: missing from {package}/_CoqProject")
+    if errors:
+        raise SystemExit("changed Rocq sources excluded from package builds:\n  " + "\n  ".join(errors))
+
+
+def validate_routing_fixtures() -> None:
+    fixtures = {
+        "base/_CoqProject": "base",
+        "chromatic-theory/theories/migration/simple_edges.v": "chromatic-theory",
+        "digraph-theory/rocq-digraph-theory.opam": "digraph-theory",
+        "meta/check_milestone.py": None,
+    }
+    for path, expected in fixtures.items():
+        actual = package_source_change(path)
+        if actual != expected:
+            raise SystemExit(f"routing fixture failed for {path}: {actual!r} != {expected!r}")
+    expected_closure = {
+        "topological-graph-theory",
+        "hamiltonicity-theory",
+        "packing-theory",
+        "graph-theory-misc",
+    }
+    actual_closure = reverse_dependency_closure({"topological-graph-theory"})
+    if actual_closure != expected_closure:
+        raise SystemExit(f"reverse-dependency fixture failed: {actual_closure!r}")
+    print("changed-path routing fixtures OK")
+
+
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base", default="HEAD^")
     parser.add_argument("--head", default="HEAD")
     parser.add_argument("--run", action="store_true")
+    parser.add_argument("--validate", action="store_true", help="run deterministic routing fixtures")
     args = parser.parse_args(argv)
+    if args.validate:
+        validate_routing_fixtures()
+        return 0
     base = normalize_base(args.base, args.head)
     pairs, paths = changed_pairs(base, args.head)
 
@@ -82,12 +192,43 @@ def main(argv: list[str]) -> int:
     if not args.run:
         return 0
 
+    validate_project_membership(paths)
+    if any(path.startswith("meta/") and path.endswith(".py") for path in paths):
+        run([sys.executable, "-m", "compileall", "-q", "meta"])
     run([sys.executable, "meta/foundation_fidelity.py", "--check"])
     run([sys.executable, "meta/faithfulness_lint.py", "--new-waves", "--check"])
     run(["make", "audit"])
 
-    if any(path.startswith("base/theories/") and path.endswith(".v") for path in paths):
-        run(["make", "base"])
+    changed_packages = {
+        package for path in paths if (package := package_source_change(path))
+    }
+    base_changed = "base" in changed_packages or "Makefile" in paths
+    if base_changed:
+        # A shared foundation change must compile its reverse dependencies, not
+        # merely GTBase itself. The root `all` target follows package topology.
+        run(["make", "all"])
+    else:
+        build_packages = sorted(reverse_dependency_closure(changed_packages))
+        if build_packages:
+            run(["make", *build_packages])
+
+    changed_opams = [path for path in paths if path.endswith(".opam") and (ROOT / path).exists()]
+    if changed_opams:
+        run(["opam", "lint", *changed_opams])
+
+    mutation_changed = any(
+        path in MUTATION_GATE_PATHS or path.startswith("meta/probe_hints/")
+        for path in paths
+    )
+    if mutation_changed:
+        run(["make", "mutation"])
+
+    migration_changed = base_changed or any(
+        path in MIGRATION_GATE_PATHS or "/theories/migration/" in path
+        for path in paths
+    )
+    if migration_changed:
+        run([sys.executable, "meta/check_library_migration.py"])
     for phase, package in pairs:
         run([sys.executable, "meta/check_milestone.py", phase, package])
         match = re.fullmatch(r"X(\d+)", phase)

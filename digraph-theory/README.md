@@ -78,17 +78,20 @@ All 13 new exits `Print Assumptions`-clean; plan in `docs/PLAN_K34.md`,
 dossier in `docs/k34_dossier.md`, oracle `scripts/k4_oracle.py`
 (114 tests).
 
-**CK3 (M7–M12) — done (2026-06-11): the δ = 3 path theorem.**
-`ck_conj1_delta3`: every nonempty oriented digraph with minimum out-degree
-≥ 3 contains a directed simple path of length 6 — the δ = 3 case of
-Cheng–Keevash Conjecture 1 (Thomassé's path conjecture), formalizing the
-hand proof of the companion search project. On the way the library gained
+**Cheng–Keevash paths — the δ = 3, 4, 5, 6 cases.**
+`ck_conj1_delta3`, `ck_conj1_delta4`, `ck_conj1_delta5`, and
+`ck_conj1_delta6`: every nonempty oriented digraph with minimum out-degree
+at least δ contains a directed simple path of length `2*δ` for
+δ ∈ {3,4,5,6}.  The original δ = 3 development supplied
 the `Oriented` structure, directed simple paths and ℓ(D) (`core/dipath`),
 strong connectivity with the sink-SCC reduction (`invariants/strong`),
 and — uniform in δ — **Cheng–Keevash Lemma 7** with its corollaries
 `ck_theorem4_oriented` (ℓ ≥ 2δ − ⌊(δ−1)/2⌋) and the δ = 2 case
-(`applications/ck3/`). All axiom-free; plan in `docs/PLAN_CK3.md`,
-self-contained proof dossier in `docs/ck3_dossier.md`.
+(`applications/ck3/`).  The δ = 4,5,6 endgames live in
+`applications/ck_path/`; their finite C9/C10/C11 cases are discharged by a
+transparent hinted-RUP/DRUP checker whose generated traces are untrusted data.
+All public results are axiom-free.  See `applications/ck_path/README.md` and
+the original plan in `docs/PLAN_CK3.md`.
 
 ## What's here / coming
 
@@ -101,6 +104,7 @@ self-contained proof dossier in `docs/ck3_dossier.md`.
 | General theorems | `substitution` ✅, `transitive` ✅ | M3 |
 | Application (k=5) | `applications/k5/{acn_arc_facts,acn_base,k5_lower,in_neighbourhood,cells,obstructions,coverage,k5_upper,main}` ✅ | M4–M6 |
 | Application (CK3) | `applications/ck3/{lemma7,ck3_main}` ✅ + `core/{oriented,dipath}` ✅, `invariants/strong` ✅ | M7–M12 |
+| Application (CK paths δ=4,5,6) | `applications/ck_path/` ✅ | post-M17 |
 | Application (k=4) + unified | `applications/k4/{k4_lower,k4_value,k4_del,k4_main}` ✅, `applications/{acn_bands,unified}` ✅ | M13–M17 |
 
 ## For mathematicians: the statement-audit site and PDF

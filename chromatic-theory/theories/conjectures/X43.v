@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X43 vocabulary ************************************************)
 
 Definition x43_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition x43_line_vertex (G : sgraph) : Type :=
   {e : {set G} | e \in x43_edge_set G}.

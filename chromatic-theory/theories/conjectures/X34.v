@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X34 vocabulary ************************************************)
 
 Definition x34_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition x34_edge_colour_rel
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : rel G :=

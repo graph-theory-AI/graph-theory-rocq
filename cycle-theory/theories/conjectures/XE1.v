@@ -7,8 +7,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Definition xe1_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  simple_edge_set G.
 
 Definition xe1_cycle_edges (G : sgraph) (c : seq G) : {set {set G}} :=
   [set e : {set G} |
@@ -42,4 +41,3 @@ Definition erdos_184_statement : Prop :=
         xe1_pairwise_edge_disjoint P /\
         xe1_covers_edges P /\
         forall i : 'I_m, xe1_cycle_or_edge_piece (P i).
-

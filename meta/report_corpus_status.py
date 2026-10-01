@@ -160,9 +160,9 @@ w("## Verifying this claim\n")
 w("Release: **`opg-v1.0.1-227-attempted`** (supersedes `opg-v1.0-227-attempted`, which had a since-fixed "
   "U4 encoding blocker + P9 gate-coverage gap). The git tag pins the exact commit; run the gate at that tag.\n")
 w("CI (toolchain-free — no Coq build, no external OPG clone needed):\n")
-w("```sh\nmake audit   # edge/v2 drift + foundation registry + warning lint + status/LANDED invariants\n```\n")
+w("```sh\nmake audit   # routing fixtures + edge/v2 drift + foundation/inventory/lint/status invariants\n```\n")
 w("Full acceptance (dev environment: Rocq/MathComp toolchain + the OpenProblemGarden clone):\n")
-w("```sh\nmake gate    # regenerates OPG, fully checks v2 against its pinned upstream, then every LANDED milestone:\n"
+w("```sh\nmake gate    # verifies pinned OPG/v2 inputs, then checks every LANDED milestone:\n"
   "             #   compiles, axiom-free, Print Assumptions clean, overlay leg-state justified\n```\n")
 w("Per-row provenance (the commit + package that landed each leg) lives in `meta/opg_legs_state.json`; "
   "routing/source-text provenance in `meta/opg_corpus_manifest.json`.\n")
@@ -266,6 +266,19 @@ if "--check" in sys.argv:
                     unver.append(f"{r['slug']}: {e}")
         if unver:
             errs.append(f"{len(unver)} v2 statement=done verification-tuple violations: {unver[:6]}")
+
+        # Keep the public README headline tied to the same canonical counters.
+        readme = re.sub(r"\s+", " ", open(os.path.join(MONO, "README.md")).read())
+        expected_readme_counts = (
+            f"**{len(v2_live):,} non-alias statement legs**, with the rest recorded as aliases · "
+            f"**{v2_stmt['done']:,} done · {v2_stmt['partial']:,} partial · "
+            f"{v2_stmt['blocked']:,} blocked · {v2_stmt['todo']:,} todo**"
+        )
+        if expected_readme_counts not in readme:
+            errs.append(
+                "README.md v2 headline is stale; expected canonical counts: "
+                + expected_readme_counts
+            )
 
     # Makefile LANDED is the executable acceptance inventory. Every v2 wave cell and every
     # manifest row must be covered either directly or through an OPG subbatch tag.

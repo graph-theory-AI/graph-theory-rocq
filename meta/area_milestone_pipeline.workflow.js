@@ -307,14 +307,18 @@ const auditorThunks = rows.map((r) => () =>
       : '') +
     `\n\`\`\`coq\n${draft.source}\n\`\`\`\nReturn faithful, selected_proposition_matches, issues, suggested fix, verdict.`,
     { label: `audit:${r.slug}`, phase: 'Review+Audit', schema: AUDIT_SCHEMA, effort: 'high' }))
-const ra = (await parallel(reviewerThunks.concat(auditorThunks))).filter(Boolean)
+// Preserve positional slots: filtering failures here shifts auditors into the
+// reviewer slice and can turn missing evidence into a false-green result.
+const ra = await parallel(reviewerThunks.concat(auditorThunks))
 const reviews = ra.slice(0, CONCERNS.length)
 const audits = ra.slice(CONCERNS.length)
 // key audits by BOTH slug and formal_name — agents inconsistently return one or the other
 const auditBySlug = {}
 for (const a of audits) { if (!a) continue; if (a.slug) auditBySlug[a.slug] = a; if (a.formal_name) auditBySlug[a.formal_name] = a }
 const unfaithful = audits.filter((a) => a && (a.faithful === false || a.selected_proposition_matches === false))
-log(`Reviews ${reviews.length}; faithfulness audits ${audits.length} (${unfaithful.length} flagged unfaithful/mismatched)`)
+const missingReviews = reviews.filter((r) => !r).length
+const missingAudits = rows.filter((r) => !(auditBySlug[r.slug] || auditBySlug[r.formal_name]))
+log(`Reviews ${reviews.length - missingReviews}/${reviews.length}; faithfulness audits ${audits.length - missingAudits.length}/${audits.length} (${unfaithful.length} flagged unfaithful/mismatched)`)
 
 // ── PHASE 3: CORRECT & GROUND ───────────────────────────────────────────────
 phase('Correct+Ground')
@@ -403,17 +407,20 @@ const files = { statements: `${pkgRel}.v`, grounding: `${M.repo}/theories/conjec
   implications: `${M.repo}/theories/conjectures/implications_${M.phase}.v` }
 // ready_to_land needs the GLOBAL gates (G0 monorepo+package, G1 dep-graph, G3-core base) AND a
 // clean green build AND no G2-blocked (planar) rows left in this milestone.
-const ready_to_land = M.g0_ready && M.g1_ready && M.base_ready && !anyBlocked && sComp && sAx && unfaithful.length === 0
+const ready_to_land = M.g0_ready && M.g1_ready && M.base_ready && !anyBlocked && sComp && sAx &&
+  missingReviews === 0 && missingAudits.length === 0 && unfaithful.length === 0
 const landing = { monorepo: 'graph-theory-rocq', package: M.repo, namespace: NS[M.repo],
   files,
   coqproject_add: [files.statements, files.grounding, files.implications],
   build_cmd: 'make   # root build (rocq makefile -f _CoqProject), matrix over packages',
-  manifest_patch: 'apply legs_update to meta/opg_corpus_manifest.json (match by slug); re-run meta/build_opg_manifest.py to re-validate',
+  manifest_patch: 'apply legs_update to meta/opg_legs_state.json (match by slug); run meta/build_opg_manifest.py --write, then --check',
   ready_to_land,
   blockers: [ M.g0_ready ? null : 'G0: graph-theory-rocq monorepo / target package subdir not stood up',
     M.g1_ready ? null : 'G1: dependency-graph metric gate not cleared',
     M.base_ready ? null : 'G3-core: graph-theory-base not stood up (pre-G3 mode)',
     hasPlanar ? `G2: ${planarSlugs.size} planar row(s) blocked (fourcolor not installed): ${[...planarSlugs].join(', ')}` : null,
+    missingReviews ? `${missingReviews} reviewer result(s) missing` : null,
+    missingAudits.length ? `${missingAudits.length} faithfulness audit result(s) missing` : null,
     !sComp ? 'statements do not compile' : null, sComp && !sAx ? 'statements not axiom-free' : null,
     unfaithful.length ? `${unfaithful.length} faithfulness blocker(s)` : null ].filter(Boolean) }
 

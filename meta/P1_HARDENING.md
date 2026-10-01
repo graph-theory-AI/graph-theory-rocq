@@ -19,10 +19,11 @@ later are rejected unless they satisfy the hardened acceptance contract.
   routing/provenance. `make gate` requires the full upstream mode.
 - `report_corpus_status.py --check` proves LANDED coverage of every v2 wave,
   every assigned v2 manifest cell, and every OPG row (including subbatches).
-- `check_milestone.py` requires X211+ done rows to name Qed certificates for
-  inhabited hypotheses, a non-trivial conclusion, and helper sanity. It also
-  checks the independent faithfulness verdict and runs Print Assumptions on the
-  certificates.
+- `check_milestone.py` requires X211+ done rows to provide typed certificate
+  objects for inhabited hypotheses, a non-trivial conclusion, and helper sanity.
+  Each object names a `Prop` claim, a distinct proof theorem, and explicit
+  row/helper references. The gate checks `claim : Prop`, `theorem : claim`, the
+  reference anchors, the independent faithfulness verdict, and Print Assumptions.
 - `vacuity_probe.py` specializes supported leading quantifiers at 0/1, the
   empty graph, and labelled complete graphs through K6. Its self-test has a
   separate specialization-recall fixture.
