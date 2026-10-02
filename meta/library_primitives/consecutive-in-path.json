@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "family": "consecutive-in-path",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_consecutive",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "consecutive_in_path"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X3.x3_consecutive_in_path",
+      "Extremal.conjectures.X98.x98_consecutive_in_path",
+      "GTMisc.conjectures.X114.x114_consecutive_in_path",
+      "GTMisc.conjectures.X91.x91_consecutive_in_path",
+      "Minor.conjectures.X67.x67_consecutive_in_path"
+    ],
+    "consumers_remaining": 7,
+    "relation": "definitional equality: every helper body is the body of seq_consecutive p u v, the pair (u, v) or the pair (v, u) occurs in zip p (behead p)",
+    "semantic_classes": {
+      "raw-sequence-undirected-adjacency": {
+        "count": 5,
+        "verdict": "equivalent",
+        "certificate": "GTBase.walks_paths.seq_consecutiveE",
+        "note": "X3, X67, X91, X98 and X114 all state ((u, v) \\in zip p (behead p)) \\/ ((v, u) \\in zip p (behead p)) over a raw sequence with a Prop codomain, convertible to seq_consecutive p u v; no edge, path, uniqueness or distinct-endpoint premise."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.consecutive_in_path.aravind_rainbow_induced_chromatic_path_statement_compat",
+      "Chromatic.migration.consecutive_in_path.stable_cover_unique_induced_path_statement_compat",
+      "Chromatic.migration.consecutive_in_path.stable_cover_unique_induced_path_statement_original_compat",
+      "Chromatic.migration.consecutive_in_path.x3_consecutive_in_path_compat",
+      "Chromatic.migration.consecutive_in_path.x3_induced_path_compat",
+      "Chromatic.migration.consecutive_in_path.x83_rainbow_induced_path_compat",
+      "Extremal.migration.consecutive_in_path.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "Extremal.migration.consecutive_in_path.x98_consecutive_in_path_compat",
+      "Extremal.migration.consecutive_in_path.x98_induced_path_between_compat",
+      "Extremal.migration.consecutive_in_path.x98_induced_subdivision_compat",
+      "Extremal.migration.consecutive_in_path.x98_induced_subdivision_model_compat",
+      "GTMisc.migration.consecutive_in_path.avoidable_path_or_pk_free_statement_compat",
+      "GTMisc.migration.consecutive_in_path.subcubic_induced_subdivision_np_complete_statement_compat",
+      "GTMisc.migration.consecutive_in_path.x114_consecutive_in_path_compat",
+      "GTMisc.migration.consecutive_in_path.x114_hisc_problem_compat",
+      "GTMisc.migration.consecutive_in_path.x114_induced_path_between_compat",
+      "GTMisc.migration.consecutive_in_path.x114_induced_subdivision_compat",
+      "GTMisc.migration.consecutive_in_path.x114_induced_subdivision_model_compat",
+      "GTMisc.migration.consecutive_in_path.x114_np_complete_hisc_problem_compat",
+      "GTMisc.migration.consecutive_in_path.x91_Pk_free_compat",
+      "GTMisc.migration.consecutive_in_path.x91_avoidable_path_compat",
+      "GTMisc.migration.consecutive_in_path.x91_consecutive_in_path_compat",
+      "GTMisc.migration.consecutive_in_path.x91_induced_path_compat",
+      "Minor.migration.consecutive_in_path.theta_triangle_free_bounded_degree_treewidth_statement_compat",
+      "Minor.migration.consecutive_in_path.theta_triangle_free_bounded_degree_treewidth_statement_original_compat",
+      "Minor.migration.consecutive_in_path.x67_consecutive_in_path_compat",
+      "Minor.migration.consecutive_in_path.x67_induced_path_between_compat",
+      "Minor.migration.consecutive_in_path.x67_theta_compat",
+      "Minor.migration.consecutive_in_path.x67_theta_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.mem_zip_behead",
+      "GTBase.walks_paths.seq_consecutiveP",
+      "GTBase.walks_paths.seq_consecutiveE",
+      "GTBase.walks_paths.seq_consecutive_sym",
+      "GTBase.walks_paths.seq_consecutive_nil",
+      "GTBase.walks_paths.seq_consecutive_seq1",
+      "GTBase.walks_paths.seq_consecutive_cons2",
+      "GTBase.walks_paths.seq_consecutive_pair",
+      "GTBase.walks_paths.seq_consecutive_repeat",
+      "GTBase.walks_paths.seq_consecutive_rev",
+      "GTBase.walks_paths.seq_consecutive_mem",
+      "GTBase.walks_paths.seq_consecutive_cat",
+      "GTBase.walks_paths.seq_consecutive_cons",
+      "GTBase.walks_paths.seq_consecutive_rcons",
+      "GTBase.walks_paths.seq_consecutive_path",
+      "GTBase.walks_paths.seq_consecutive_path_sym",
+      "GTBase.walks_paths.seq_consecutive_map",
+      "GTBase.walks_paths.seq_consecutive_nodes",
+      "GTBase.walks_paths.seq_consecutive_ground_nil",
+      "GTBase.walks_paths.seq_consecutive_ground_seq1",
+      "GTBase.walks_paths.seq_consecutive_ground_pair",
+      "GTBase.walks_paths.seq_consecutive_ground_path",
+      "GTBase.walks_paths.seq_consecutive_ground_not_adjacent",
+      "GTBase.walks_paths.seq_consecutive_ground_not_cyclic",
+      "GTBase.walks_paths.seq_consecutive_ground_repeated",
+      "GTBase.walks_paths.seq_consecutive_ground_repeated_apart"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.path",
+        "mathcomp.boot.seq"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "mathcomp.boot.seq.infix",
+      "note": "Neither MathComp nor coq-graph-theory names the relation 'u and v are adjacent entries of a raw sequence'. MathComp's path e x s constrains every adjacent pair of x :: s and its infix decides contiguous occurrence, so the canonical is GTBase.walks_paths.seq_consecutive s u v := ((u, v) \\in zip s (behead s)) \\/ ((v, u) \\in zip s (behead s)), with mem_zip_behead / seq_consecutiveP stating the exact infix [:: u; v] s || infix [:: v; u] s reflection, seq_consecutive_path for MathComp paths and seq_consecutive_nodes for coq-graph-theory's packaged Path. The cyclic variants consecutive_in_cycle (zip c (rot 1 c), with Prop and bool interfaces) are the next family and are not claimed. Legacy bodies and per-row certificates: meta/migration_reports/consecutive_in_path.md.",
+      "audited_at": "2026-10-02"
+    },
+    "migration_report": "meta/migration_reports/consecutive_in_path.md",
+    "reviewed_by": "path_review",
+    "reviewed_commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+    "independent_review": "meta/migration_reviews/consecutive_in_path.md",
+    "migration_spec": "meta/migration_reports/consecutive_in_path.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/consecutive-in-path.json"
+  }
+}

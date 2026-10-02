@@ -4,10 +4,12 @@
     gathers the reusable finite path and cycle vocabulary of the corpus in this
     module, one concept family per reviewed change: the vertex set of a raw
     vertex sequence, [seq_vertices] (registry
-    meta/library_primitives/path-vertices.json), and the internal vertices of a
+    meta/library_primitives/path-vertices.json), the internal vertices of a
     sequence, [seq_interior] and [seq_inner] (registry
     meta/library_primitives/internal-vertices.json, section "Internal vertices"
-    below).
+    below), and the consecutive entries of a sequence, [seq_consecutive]
+    (registry meta/library_primitives/consecutive-in-path.json, section
+    "Consecutive entries" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -401,3 +403,206 @@ Lemma seq_inner_ground_closed_walk : seq_inner [:: o0; o1; o0] = [set o1].
 Proof. exact: seq_interior_ground_equal_endpoints. Qed.
 
 End InteriorGrounding.
+
+(** ** Consecutive entries of a sequence
+
+    [seq_consecutive s u v] states that [u] and [v] are adjacent entries of the
+    raw sequence [s], in either order: the pair [(u, v)] or the pair [(v, u)]
+    occurs in [zip s (behead s)], the list of the pairs of adjacent entries of
+    [s].  The codomain is [Prop]; [seq_consecutiveP] reflects it to MathComp's
+    [infix [:: u; v] s || infix [:: v; u] s]: two values are consecutive exactly
+    when [[:: u; v]] or [[:: v; u]] occurs contiguously in [s].
+
+    Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
+    MathComp's [path e x s] asks every adjacent pair of [x :: s] to satisfy
+    [e], and [infix] (with [infixP] and [infix_rev]) decides contiguous
+    occurrence; neither library names the relation "u and v are adjacent
+    entries of s".  coq-graph-theory's packaged [Path x y] has no such notion
+    either: its vertex list [nodes p] is a MathComp path of the edge relation,
+    so its consecutive entries are adjacent ([seq_consecutive_nodes]).
+
+    Specification, every clause proved below:
+    - pair form: [((u, v) \in zip s (behead s)) = infix [:: u; v] s]
+      ([mem_zip_behead]) and the reflection [seq_consecutiveP];
+    - symmetry in [u] and [v];
+    - degenerate sequences: the empty and the one-entry sequences have no
+      consecutive pair, [[:: x; y]] relates exactly [x] and [y], and a repeated
+      adjacent entry relates a value to itself ([seq_consecutive_repeat]);
+    - recursion on [[:: x, y & s]], invariance under [rev], monotonicity under
+      [cons], [rcons], concatenation and [map], and both values occur in [s];
+    - the pair closing a cyclic sequence (its last and first entries) is not
+      consecutive unless it also occurs adjacently;
+    - no graph-edge, path, uniqueness or distinct-endpoint premise: on a
+      MathComp path consecutive entries are related ([seq_consecutive_path]),
+      but on a raw sequence they need not be. *)
+
+Section SeqConsecutive.
+Variable T : eqType.
+Implicit Types (s : seq T) (u v x y : T).
+
+(** [u] and [v] are adjacent entries of [s], in either order. *)
+Definition seq_consecutive s u v : Prop :=
+  ((u, v) \in zip s (behead s)) \/ ((v, u) \in zip s (behead s)).
+
+Lemma mem_zip_behead s u v : ((u, v) \in zip s (behead s)) = infix [:: u; v] s.
+Proof.
+elim: s => [|x s IH]; first by rewrite infixs0.
+case: s IH => [|y s] IH; first by rewrite /= andbF.
+rewrite [zip _ _]/= in_cons xpair_eqE infix_consl -IH.
+by case: s {IH} => [|z s]; rewrite /= ?andbT.
+Qed.
+
+Lemma seq_consecutiveP s u v :
+  reflect (seq_consecutive s u v) (infix [:: u; v] s || infix [:: v; u] s).
+Proof. by rewrite -!mem_zip_behead; apply: orP. Qed.
+
+Lemma seq_consecutiveE s u v :
+  seq_consecutive s u v <-> infix [:: u; v] s \/ infix [:: v; u] s.
+Proof. by rewrite /seq_consecutive !mem_zip_behead. Qed.
+
+Lemma seq_consecutive_sym s u v : seq_consecutive s u v <-> seq_consecutive s v u.
+Proof. by split=> -[]; [right | left | right | left]. Qed.
+
+Lemma seq_consecutive_nil u v : ~ seq_consecutive [::] u v.
+Proof. by case. Qed.
+
+Lemma seq_consecutive_seq1 x u v : ~ seq_consecutive [:: x] u v.
+Proof. by case. Qed.
+
+Lemma seq_consecutive_cons2 x y s u v :
+  seq_consecutive [:: x, y & s] u v <->
+  [\/ u = x /\ v = y, u = y /\ v = x | seq_consecutive (y :: s) u v].
+Proof.
+rewrite /seq_consecutive /= !in_cons !xpair_eqE.
+split=> [[/orP[/andP[/eqP-> /eqP->]|uv]|/orP[/andP[/eqP-> /eqP->]|vu]]|].
+- by constructor 1.
+- by constructor 3; left.
+- by constructor 2.
+- by constructor 3; right.
+case=> [[-> ->]|[-> ->]|[uv|vu]]; rewrite ?eqxx.
+- by left.
+- by right.
+- by left; rewrite uv orbT.
+- by right; rewrite vu orbT.
+Qed.
+
+Lemma seq_consecutive_pair x y u v :
+  seq_consecutive [:: x; y] u v <-> (u = x /\ v = y) \/ (u = y /\ v = x).
+Proof.
+rewrite seq_consecutive_cons2; split; last by case=> ?; [constructor 1 | constructor 2].
+by case=> [?|?|/seq_consecutive_seq1]; [left | right |].
+Qed.
+
+(** A repeated adjacent entry relates a value to itself. *)
+Lemma seq_consecutive_repeat x s : seq_consecutive [:: x, x & s] x x.
+Proof. by apply/seq_consecutive_cons2; constructor 1. Qed.
+
+Lemma seq_consecutive_rev s u v : seq_consecutive (rev s) u v <-> seq_consecutive s u v.
+Proof.
+have rv a b : infix [:: a; b] (rev s) = infix [:: b; a] s by rewrite -[RHS]infix_rev.
+rewrite !seq_consecutiveE !rv.
+by split=> -[]; [right | left | right | left].
+Qed.
+
+Lemma seq_consecutive_mem s u v : seq_consecutive s u v -> u \in s /\ v \in s.
+Proof.
+by case/seq_consecutiveE => /infixP[s1 [s2 ->]]; rewrite !(mem_cat, inE, eqxx, orbT).
+Qed.
+
+Lemma seq_consecutive_cat s1 s2 u v :
+  seq_consecutive s1 u v \/ seq_consecutive s2 u v -> seq_consecutive (s1 ++ s2) u v.
+Proof.
+rewrite !seq_consecutiveE => -[] [] /infixP[t1 [t2 ->]].
+- by left; apply/infixP; exists t1, (t2 ++ s2); rewrite -!catA.
+- by right; apply/infixP; exists t1, (t2 ++ s2); rewrite -!catA.
+- by left; apply/infixP; exists (s1 ++ t1), t2; rewrite -!catA.
+- by right; apply/infixP; exists (s1 ++ t1), t2; rewrite -!catA.
+Qed.
+
+Lemma seq_consecutive_cons x s u v :
+  seq_consecutive s u v -> seq_consecutive (x :: s) u v.
+Proof. by move=> uv; rewrite -cat1s; apply: seq_consecutive_cat; right. Qed.
+
+Lemma seq_consecutive_rcons x s u v :
+  seq_consecutive s u v -> seq_consecutive (rcons s x) u v.
+Proof. by move=> uv; rewrite -cats1; apply: seq_consecutive_cat; left. Qed.
+
+(** On a MathComp path, consecutive entries are related one way or the other;
+    for a symmetric relation, they are related. *)
+Lemma seq_consecutive_path (e : rel T) x s u v :
+  path e x s -> seq_consecutive (x :: s) u v -> e u v || e v u.
+Proof.
+elim: s x => [|y s IH] x; first by move=> _ /seq_consecutive_seq1.
+rewrite /= => /andP[xy ys] /seq_consecutive_cons2[[-> ->]|[-> ->]|/(IH y ys)//].
+- by rewrite xy.
+- by rewrite xy orbT.
+Qed.
+
+Lemma seq_consecutive_path_sym (e : rel T) x s u v :
+  symmetric e -> path e x s -> seq_consecutive (x :: s) u v -> e u v.
+Proof. by move=> esym p /(seq_consecutive_path p); rewrite (esym v) orbb. Qed.
+
+End SeqConsecutive.
+
+(** Consecutive entries are preserved by a map of the values. *)
+Lemma seq_consecutive_map (T T' : eqType) (f : T -> T') (s : seq T) (u v : T) :
+  seq_consecutive s u v -> seq_consecutive (map f s) (f u) (f v).
+Proof.
+rewrite !seq_consecutiveE => -[] /infixP[t1 [t2 ->]]; rewrite !map_cat.
+- by left; apply/infixP; exists (map f t1), (map f t2).
+- by right; apply/infixP; exists (map f t1), (map f t2).
+Qed.
+
+(** Consecutive vertices of the library's packaged paths are adjacent. *)
+Section UpstreamConsecutive.
+Variables (G : relType) (x y : G).
+
+Lemma seq_consecutive_nodes (p : Path x y) u v :
+  seq_consecutive (nodes p) u v -> (u -- v) || (v -- u).
+Proof.
+rewrite nodesE; apply: seq_consecutive_path.
+by case/andP: (valP p).
+Qed.
+
+End UpstreamConsecutive.
+
+(** *** Grounding of the consecutive entries
+
+    Three vertices [o0], [o1], [o2] of ['I_3], a type with no edges at all: the
+    empty and one-entry sequences, both orders of an adjacent pair, a
+    non-adjacent pair of a three-entry sequence, the closing pair of a cyclic
+    sequence, a repeated adjacent entry relating a vertex to itself, and a
+    repeated non-adjacent value that is not related to itself. *)
+
+Section ConsecutiveGrounding.
+Local Notation o0 := (@Ordinal 3 0 isT).
+Local Notation o1 := (@Ordinal 3 1 isT).
+Local Notation o2 := (@Ordinal 3 2 isT).
+
+Lemma seq_consecutive_ground_nil : ~ seq_consecutive ([::] : seq 'I_3) o0 o1.
+Proof. exact: seq_consecutive_nil. Qed.
+
+Lemma seq_consecutive_ground_seq1 : ~ seq_consecutive [:: o0] o0 o0.
+Proof. exact: seq_consecutive_seq1. Qed.
+
+Lemma seq_consecutive_ground_pair :
+  seq_consecutive [:: o0; o1] o0 o1 /\ seq_consecutive [:: o0; o1] o1 o0.
+Proof. by split; apply/seq_consecutive_pair; [left | right]. Qed.
+
+Lemma seq_consecutive_ground_path : seq_consecutive [:: o0; o1; o2] o2 o1.
+Proof. by apply/seq_consecutiveP. Qed.
+
+Lemma seq_consecutive_ground_not_adjacent : ~ seq_consecutive [:: o0; o1; o2] o0 o2.
+Proof. by move/seq_consecutiveP. Qed.
+
+(** The closing pair of the cyclic sequence [o0, o1, o2] is not consecutive. *)
+Lemma seq_consecutive_ground_not_cyclic : ~ seq_consecutive [:: o0; o1; o2] o2 o0.
+Proof. by move/seq_consecutiveP. Qed.
+
+Lemma seq_consecutive_ground_repeated : seq_consecutive [:: o0; o0; o1] o0 o0.
+Proof. exact: seq_consecutive_repeat. Qed.
+
+Lemma seq_consecutive_ground_repeated_apart : ~ seq_consecutive [:: o0; o1; o0] o0 o0.
+Proof. by move/seq_consecutiveP. Qed.
+
+End ConsecutiveGrounding.

@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X91 vocabulary ************************************************)
 
 Definition x91_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
-  (u, v) \in zip p (behead p) \/ (v, u) \in zip p (behead p).
+  seq_consecutive p u v.
 
 Definition x91_induced_path (G : sgraph) (p : seq G) : Prop :=
   match p with
