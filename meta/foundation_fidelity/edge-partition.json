@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "family": "edge-partition",
+  "modules": {
+    "Packing.foundations.edge_partitions": {
+      "path": "packing-theory/theories/foundations/edge_partitions.v",
+      "overrides": {
+        "edge_partition": {
+          "verdict": "FAITHFUL",
+          "note": "An ordinal-indexed family of simple-edge sets whose union is E(G) and whose distinct indices are disjoint. Empty and repeated empty parts are allowed; zero parts is equivalent to edgelessness. Every edge has a unique index and the part cardinalities sum to the edge count."
+        }
+      },
+      "machine_evidence": [
+        "edge_partition_cover",
+        "edge_partition_sub",
+        "edge_partition_disjoint",
+        "edge_partition_uniqP",
+        "edge_partition_inj_nonempty",
+        "card_edge_partition",
+        "not_edge_partition_non_edge",
+        "edge_partition0",
+        "edge_partition_K1_0",
+        "not_edge_partition_K2_0",
+        "edge_partition_single_part",
+        "edge_partition_K2_empty_part",
+        "K2_repeated_empty_parts",
+        "not_edge_partition_K2_duplicate",
+        "not_edge_partition_K2_loop"
+      ]
+    }
+  }
+}
