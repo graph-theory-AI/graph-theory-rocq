@@ -186,8 +186,8 @@ Proof. exact: conj1_implies_delta3. Qed.
 (** *** B.5  TRIVIALITY PROBE for [cheng_keevash_conj1_statement].
 
     - Provable from tiny grounds?  No: the statement is `∀ D d, … → 2d ≤ ℓ(D)`
-      for ARBITRARY d; the project has unconditional proofs only at d = 3
-      ([ck_conj1_at_3]) and computer-aided d = 4 (n ∈ {10,11}); d ≥ 5 is open.
+      for ARBITRARY d; the project now has unconditional proofs at
+      d ∈ {3,4,5,6}, while d ≥ 7 remains open.
       C3 only certifies the d = 1 instance.  So no `Qed` of the full statement.
     - Refutable from tiny grounds?  No: on C3 (the smallest non-transitive
       oriented digraph) the conclusion HOLDS and is TIGHT [gr_ck_tight_on_C3];
