@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "family": "edge-partition",
+  "primitive": {
+    "canonical_name": "Packing.foundations.edge_partitions.edge_partition",
+    "owner": "packing-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "edge_partition"
+    ],
+    "source_definitions": [
+      "Packing.conjectures.X15.x15_edge_partition",
+      "Packing.conjectures.X15alone.x15_edge_partition"
+    ],
+    "consumers_remaining": 2,
+    "relation": "logical-equivalence",
+    "legacy_baseline": "9e030727db115917ae077ac07a8fc6aa68661f73",
+    "semantic_classes": {
+      "indexed-simple-edges": {
+        "members": [
+          "Packing.conjectures.X15.x15_edge_partition"
+        ],
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "count": 1
+      },
+      "excluded-self-contained-variant": {
+        "members": [
+          "Packing.conjectures.X15alone.x15_edge_partition"
+        ],
+        "state": "deferred-excluded",
+        "verdict": "identical helper body, excluded statement variant",
+        "count": 1
+      }
+    },
+    "migration_notes": "C3 preserves index multiplicity and empty parts. Reuses C1 frozen bodies and all three old/new statements, including their M1/C2 history. Only the compiled X15 helper becomes a public alias; X15alone and other representations remain unchanged.",
+    "distinct_variants": {
+      "Packing.conjectures.X15alone.x15_edge_partition": "Identical source body, but this deliberately self-contained variant is not build-listed and has a distinct stronger statement. Classify unchanged; no migration claim.",
+      "Cycle.conjectures.U6.edge_partitionT": "A list of sets of multigraph edge identities; different carrier and representation.",
+      "Cycle.conjectures.U6.edge_partition_of": "The multigraph list-partition predicate, not an ordinal-indexed family of simple vertex pairs.",
+      "Packing.conjectures.XE1.xe1_clique_edge_partition": "Clique blocks impose additional requirements; this separate representation is unchanged.",
+      "Packing.conjectures.X18.x18_vertex_partition": "A partition of vertices rather than simple edges; unchanged."
+    },
+    "compatibility_theorems": [
+      "Packing.migration.edge_partitions.brualdi_stein_partial_transversal_statement_compat",
+      "Packing.migration.edge_partitions.fair_matching_edge_partition_statement_compat",
+      "Packing.migration.edge_partitions.knn_fair_perfect_matching_statement_compat",
+      "Packing.migration.edge_partitions.x15_edge_partition_compat",
+      "Packing.migration.matching.x15_edge_set_compat",
+      "Packing.migration.matching.x15_matching_compat",
+      "Packing.migration.matching.x18_perfect_matching_compat"
+    ],
+    "api_theorems": [
+      "Packing.foundations.edge_partitions.edge_partition_cover",
+      "Packing.foundations.edge_partitions.edge_partition_sub",
+      "Packing.foundations.edge_partitions.edge_partition_disjoint",
+      "Packing.foundations.edge_partitions.edge_partition_uniqP",
+      "Packing.foundations.edge_partitions.edge_partition_inj_nonempty",
+      "Packing.foundations.edge_partitions.card_edge_partition",
+      "Packing.foundations.edge_partitions.not_edge_partition_non_edge",
+      "Packing.foundations.edge_partitions.edge_partition0",
+      "Packing.foundations.edge_partitions.edge_partition_K1_0",
+      "Packing.foundations.edge_partitions.not_edge_partition_K2_0",
+      "Packing.foundations.edge_partitions.edge_partition_single_part",
+      "Packing.foundations.edge_partitions.edge_partition_K2_empty_part",
+      "Packing.foundations.edge_partitions.K2_repeated_empty_parts",
+      "Packing.foundations.edge_partitions.not_edge_partition_K2_duplicate",
+      "Packing.foundations.edge_partitions.not_edge_partition_K2_loop"
+    ],
+    "migration_report": "meta/migration_reports/edge_partition.md",
+    "migration_spec": "meta/migration_reports/edge_partition.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C3.md",
+    "downstream_client": "packing-theory/theories/examples/edge_partitions.v",
+    "foundation_fidelity": "meta/foundation_fidelity/edge-partition.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "mathcomp.boot.finset",
+        "GraphTheory.sgraph",
+        "Packing.foundations.matching"
+      ],
+      "result": "new-indexed-public-wrapper-with-upstream-counting-lemma",
+      "candidate": "MathComp partition_disjoint_bigcup",
+      "note": "MathComp partition requires nonempty blocks and its set of blocks forgets duplicate indices, so it cannot replace this predicate unconditionally. partition_disjoint_bigcup applies to the indexed disjoint family and proves the cardinal sum without excluding empty parts. E(G) is the existing upstream simple-edge set.",
+      "audited_at": "2026-10-02"
+    },
+    "reviewed_by": null
+  }
+}

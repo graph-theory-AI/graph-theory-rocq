@@ -36,6 +36,7 @@
     No new cross-area (base) primitives are introduced. *)
 
 From GTBase Require Export base.
+From GTBase Require Import colourings.
 From Infinite Require Import foundations.igraph.
 From mathcomp Require Import all_boot.
 From mathcomp Require Import all_algebra.
@@ -93,7 +94,7 @@ End HexTorus.
     the chromatic polynomial of [G] evaluated at 3. *)
 
 Definition is_proper3 (G : sgraph) (c : {ffun G -> 'I_3}) : bool :=
-  [forall x, [forall y, (x -- y) ==> (c x != c y)]].
+  colourings.proper_colouring c.
 
 (** [n3colorings G] is the chromatic polynomial of [G] evaluated at 3; it has
     no graph-theory-base counterpart (base's [coloring] is a partition

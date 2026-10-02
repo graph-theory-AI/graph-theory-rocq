@@ -28,6 +28,7 @@
     graphs, Stanley's chromatic symmetric function) are defined locally here. *)
 
 From mathcomp Require Import all_boot.
+From GTBase Require Import colourings.
 From GraphTheory Require Import sgraph.
 From GTBase Require Import base.
 From mathcomp Require Import all_algebra perm.
@@ -164,7 +165,7 @@ Definition are_almost_all_graphs_determined_by_their_spectrum_statement : Prop :
 
     "Do there exist non-isomorphic TREES with the same chromatic symmetric function?" *)
 Definition proper_colb (G : sgraph) (k : nat) (c : {ffun G -> 'I_k}) : bool :=
-  [forall x, [forall y, (x -- y) ==> (c x != c y)]].
+  colourings.proper_colouring c.
 
 Definition csf_coeff (G : sgraph) (k : nat) (a : 'I_k -> nat) : nat :=
   #|[set c : {ffun G -> 'I_k} |

@@ -45,7 +45,7 @@
     Axiom-free: no Axiom/Parameter/Admitted; Print Assumptions at the end. *)
 
 From GTBase Require Import base common.
-From Packing.foundations Require Import matching.
+From Packing.foundations Require Import matching edge_partitions edge_families.
 From Packing.conjectures Require Import X15 X18.
 
 Set Implicit Arguments.
@@ -171,14 +171,16 @@ Lemma x15_edge_partition_compat
     (G : sgraph) (m : nat) (E : 'I_m -> {set {set G}}) :
   X15Legacy.edge_partition E <-> x15_edge_partition E.
 Proof.
-by rewrite /X15Legacy.edge_partition /x15_edge_partition x15_edge_set_compat.
+by rewrite /X15Legacy.edge_partition /x15_edge_partition
+  /edge_partitions.edge_partition x15_edge_set_compat.
 Qed.
 
 Lemma x15_edge_family_compat
     (G : sgraph) (m : nat) (E : 'I_m -> {set {set G}}) :
   X15Legacy.edge_family E <-> x15_edge_family E.
 Proof.
-by rewrite /X15Legacy.edge_family /x15_edge_family x15_edge_set_compat.
+by rewrite /X15Legacy.edge_family /x15_edge_family
+  /edge_families.edge_family x15_edge_set_compat.
 Qed.
 
 (** arxiv:1611.03196#02 (REFUTED, unchanged). *)
@@ -287,11 +289,16 @@ Definition brualdi_stein_partial_transversal_statement : Prop :=
 
 End X18Legacy.
 
+(** Since C2 (2026-10-02) the live [x18_perfect_matching] is the alias of
+    [GTBase.common.perfect_matching]; the frozen body above is unchanged and the
+    certificate goes through [perfect_matching_exactly_oneP]. *)
 Lemma x18_perfect_matching_compat (G : sgraph) (M : {set {set G}}) :
   X18Legacy.perfect_matching M <-> x18_perfect_matching M.
 Proof.
-rewrite /X18Legacy.perfect_matching /x18_perfect_matching.
-by split=> -[mM sat]; split=> //; apply/x15_matching_compat.
+rewrite /X18Legacy.perfect_matching /x18_perfect_matching perfect_matching_exactly_oneP.
+split=> -[mM one]; split=> //.
+- exact: matching_subset ((x15_matching_compat M).1 mM).
+- by apply/x15_matching_compat/matching_at_most_oneP; split=> // v; rewrite one.
 Qed.
 
 (** arxiv:1611.03196#01 (partial row, unchanged). *)

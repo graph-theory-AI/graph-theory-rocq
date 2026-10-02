@@ -11,9 +11,11 @@ Unset Printing Implicit Defensive.
 Definition x24_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
+(** Since the C2 library migration (2026-10-02) a transparent alias of
+    [GTBase.common.perfect_matching]; the original "every vertex lies in exactly
+    one member" body is frozen and certified in theories/migration/perfect_matching.v. *)
 Definition x24_perfect_matching (G : sgraph) (M : {set {set G}}) : Prop :=
-  M \subset x24_edge_set G /\
-  forall v : G, #|[set e in M | v \in e]| = 1.
+  perfect_matching M.
 
 Definition x24_one_factorization
     (n : nat) (col : {set 'K_n} -> 'I_(n.-1)) : Prop :=
