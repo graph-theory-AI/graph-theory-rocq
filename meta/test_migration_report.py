@@ -283,6 +283,43 @@ class ReportTests(unittest.TestCase):
             (details / "test_family.json").write_text("untracked details may be discarded\n")
             self.assertEqual(REPORT.main(["--all", "--check"]), 0)
 
+    def test_all_check_rejects_verbose_json_but_allows_specs_and_docs(self):
+        self.write_json("meta/migration_reports/test_family.spec.json", self.spec)
+        self.write("meta/migration_reports/README.md", "Report documentation.\n")
+        self.write("meta/migration_reports/docs/format.txt", "Format documentation.\n")
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(REPORT.main(["--all", "--write"]), 0)
+            self.assertEqual(REPORT.main(["--all", "--check"]), 0)
+            for name in ("test_family.json", "details/test_family.json"):
+                with self.subTest(name=name):
+                    path = REPORT.REPORTS / name
+                    self.write_json(str(path.relative_to(self.root)), {"frozen": [], "checks": []})
+                    errors = io.StringIO()
+                    with contextlib.redirect_stderr(errors):
+                        self.assertEqual(REPORT.main(["--all", "--check"]), 1)
+                    self.assertIn("unexpected non-specification JSON", errors.getvalue())
+                    self.assertIn(name, errors.getvalue())
+                    path.unlink()
+            self.assertEqual(REPORT.main(["--all", "--check"]), 0)
+
+    def test_details_cannot_write_inside_report_tree_even_through_symlinks(self):
+        self.write_json("meta/migration_reports/test_family.spec.json", self.spec)
+        alias = self.root / "report-alias"
+        alias.symlink_to(REPORT.REPORTS, target_is_directory=True)
+        destinations = (REPORT.REPORTS, REPORT.REPORTS / "details" / "nested",
+                        alias, alias / "details")
+        for destination in destinations:
+            for selector in ("test_family", "--all"):
+                with self.subTest(destination=destination, selector=selector):
+                    errors = io.StringIO()
+                    with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(errors):
+                        self.assertEqual(REPORT.main([
+                            selector, "--write", "--details", str(destination)]), 1)
+                    self.assertIn("outside the report directory and its descendants", errors.getvalue())
+                    self.assertFalse((REPORT.REPORTS / "test_family.md").exists())
+                    self.assertFalse((destination / "test_family.json").exists())
+        self.assertFalse((REPORT.REPORTS / "details").exists())
+
     def compile_fixture(self):
         for relative in ("theories/common.v", "theories/conjectures/X0.v", "theories/migration/test_family.v"):
             result = subprocess.run(["coqc", "-Q", "theories", "GTBase", relative],
