@@ -277,25 +277,8 @@
   "GTBase.common": {
    "path": "base/theories/common.v",
    "default": null,
-   "overrides": {
-    "induced_free": {
-     "verdict": "FAITHFUL",
-     "note": "Induced-subgraph exclusion, host first and pattern second: no vertex set S of G, the empty set and [set: G] included, induces a graph diso-isomorphic to H. An empty pattern is induced by S = set0, so no graph is free of it; the empty host is free of exactly the nonempty patterns; invariant under isomorphism of the pattern."
-    }
-   },
-   "machine_evidence": [
-    "induced_free_inhabited",
-    "induced_free_diso",
-    "induced_free_card",
-    "induced_free_host0",
-    "induced_free_K1",
-    "induced_free_Kn",
-    "induced_free_K4_claw",
-    "not_induced_free_pattern0",
-    "not_induced_free_self",
-    "not_induced_free_clique",
-    "not_induced_free_K3_K2"
-   ]
+   "overrides": {},
+   "machine_evidence": []
   },
   "GTMisc.conjectures.D7": {
    "path": "graph-theory-misc/theories/conjectures/D7.v",

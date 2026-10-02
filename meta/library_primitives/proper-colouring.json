@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "family": "proper-colouring",
+  "primitive": {
+    "canonical_name": null,
+    "owner": "chromatic-theory",
+    "status": "proposed",
+    "fidelity": "PENDING",
+    "normalized_names": [
+      "proper_colouring"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X109.x109_proper_colouring",
+      "Chromatic.conjectures.X162.x162_proper_colouring",
+      "Chromatic.conjectures.X3.x3_proper_colouring",
+      "Chromatic.conjectures.X63.x63_proper_colouring"
+    ],
+    "consumers_remaining": 6,
+    "compatibility_theorems": [],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.coloring",
+        "GraphTheory.sgraph"
+      ],
+      "result": "representation-mismatch",
+      "candidate": "GraphTheory.coloring.coloring",
+      "note": "Upstream coloring is a partition into stable sets, while these helpers mostly use functions into finite palettes. An area adapter should relate the representations instead of replacing either blindly.",
+      "audited_at": "2026-07-22"
+    }
+  }
+}

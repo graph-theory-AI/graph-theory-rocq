@@ -54,6 +54,7 @@ audit:
 	python3 meta/library_inventory.py --check
 
 mutation:
+	python3 meta/test_family_registry.py
 	python3 meta/test_formal_resolutions.py
 	python3 meta/test_statement_docs.py
 	python3 meta/test_check_edges.py

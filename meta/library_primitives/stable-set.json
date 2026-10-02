@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "family": "stable-set",
+  "primitive": {
+    "canonical_name": "GraphTheory.dom.stable",
+    "owner": "upstream-adapter",
+    "status": "auditing",
+    "fidelity": "PENDING",
+    "normalized_names": [
+      "stable_set"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X3.x3_stable_set",
+      "Chromatic.conjectures.XE1.xe1_stable_set",
+      "Digraph.conjectures.X166.x166_stable_set",
+      "Extremal.conjectures.X56.x56_stable_set",
+      "Extremal.conjectures.X97.x97_stable_set",
+      "Extremal.conjectures.XE1.xe1_stable_set",
+      "GTMisc.conjectures.X169.x169_stable_set",
+      "GTMisc.conjectures.X208.x208_stable_set",
+      "GTMisc.conjectures.X29.x29_stable_set",
+      "Packing.conjectures.XE1.xe1_stable_set"
+    ],
+    "consumers_remaining": 10,
+    "compatibility_theorems": [],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.dom",
+        "GraphTheory.coloring"
+      ],
+      "result": "candidate-found",
+      "candidate": "GraphTheory.dom.stable",
+      "note": "Upstream stable is a boolean predicate with stableP and standard closure lemmas. Directed and undirected local variants must be separated before migration.",
+      "audited_at": "2026-07-22"
+    }
+  }
+}

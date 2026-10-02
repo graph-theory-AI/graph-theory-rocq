@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "family": "path-vertices",
+  "primitive": {
+    "canonical_name": "GraphTheory.digraph.nodes",
+    "owner": "upstream-adapter",
+    "status": "auditing",
+    "fidelity": "PENDING",
+    "normalized_names": [
+      "path_vertices"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X3.x3_path_vertices",
+      "Digraph.conjectures.X2.x2_path_vertices",
+      "GTMisc.conjectures.X113.x113_path_vertices",
+      "GTMisc.conjectures.X116.x116_path_vertices",
+      "GTMisc.conjectures.X146.x146_path_vertices",
+      "GTMisc.conjectures.X39.x39_path_vertices",
+      "Minor.conjectures.X11.x11_path_vertices",
+      "Minor.conjectures.X67.x67_path_vertices",
+      "Packing.conjectures.X26.x26_path_vertices"
+    ],
+    "consumers_remaining": 15,
+    "compatibility_theorems": [],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.sgraph"
+      ],
+      "result": "candidate-found",
+      "candidate": "GraphTheory.digraph.nodes",
+      "note": "The upstream Path record exposes nodes and interior. Local helpers often use raw vertex sequences, so M3 must compare endpoint and repetition conventions before choosing an adapter.",
+      "audited_at": "2026-07-22"
+    }
+  }
+}

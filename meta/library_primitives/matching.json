@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "family": "matching",
+  "primitive": {
+    "canonical_name": "GraphTheory.connectivity.matching",
+    "owner": "split-by-representation",
+    "status": "auditing",
+    "fidelity": "PENDING",
+    "normalized_names": [
+      "matching"
+    ],
+    "source_definitions": [
+      "Digraph.conjectures.path_fas.matching",
+      "Extremal.conjectures.X180.x180_matching",
+      "GTMisc.conjectures.X14.x14_matching",
+      "Hypergraph.conjectures.X6.x6_matching",
+      "Packing.conjectures.X15.x15_matching",
+      "Packing.conjectures.X15alone.x15_matching"
+    ],
+    "consumers_remaining": 13,
+    "compatibility_theorems": [],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.connectivity",
+        "GraphTheory.sgraph"
+      ],
+      "result": "candidate-found-with-splits",
+      "candidate": "GraphTheory.connectivity.matching",
+      "note": "Upstream matching covers simple-graph edge sets. The same suffix also names directed, hypergraph, and bipartite relation matchings, so this registry family must split before migration.",
+      "audited_at": "2026-07-22"
+    }
+  }
+}

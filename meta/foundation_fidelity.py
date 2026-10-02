@@ -10,10 +10,10 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+from family_registry import RegistryError, load_fidelity_registry
 
 ROOT = Path(__file__).resolve().parents[1]
 META = ROOT / "meta"
-REGISTRY = META / "foundation_fidelity.json"
 DECL_RE = re.compile(
     r"^\s*(?:Local\s+|Global\s+|Polymorphic\s+|Program\s+)*"
     r"(?:Definition|Inductive|CoInductive|Record|Class|Fixpoint|CoFixpoint)\s+"
@@ -29,7 +29,7 @@ PROOF_RE = re.compile(
 
 
 def load_registry() -> dict:
-    return json.loads(REGISTRY.read_text())
+    return load_fidelity_registry(ROOT)
 
 
 def selected_primitives(spec: dict) -> set[str]:
@@ -58,7 +58,11 @@ def strip_comments(src: str) -> str:
 
 
 def expand_registry(data: dict | None = None) -> tuple[list[dict], list[str]]:
-    data = data or load_registry()
+    if data is None:
+        try:
+            data = load_registry()
+        except RegistryError as exc:
+            return [], [str(exc)]
     allowed = set(data.get("verdicts", []))
     entries: list[dict] = []
     errors: list[str] = []

@@ -404,6 +404,14 @@ def copy_workspace(mutant: Mutant, dst: Path) -> None:
     # The fidelity registry includes the area-local D7 complexity surface, so lint mutants
     # need that source present even when their target package is elsewhere.
     rels = ["meta", "base", mutant.package]
+    # Fidelity fragments can enroll an area foundation outside the mutated
+    # package. The copied gate must inspect those same source declarations.
+    import foundation_fidelity as fidelity
+
+    for spec in fidelity.load_registry()["modules"].values():
+        package = Path(spec["path"]).parts[0]
+        if package not in rels:
+            rels.append(package)
     if "graph-theory-misc" not in rels:
         rels.append("graph-theory-misc")
     for dep in sibling_deps(mutant.package):
