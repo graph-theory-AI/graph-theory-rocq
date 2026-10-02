@@ -58,7 +58,7 @@
     "",
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of the six frozen statements and the two originals contains no live helper or chain declaration of this family and not `seq_consecutive`, the frozen record types are checked by conversion (`Print All Dependencies` lists constants only), and each live statement reaches `seq_consecutive` and its alias (/srv/graph-theory-rocq/coordination/evidence/B3-consecutive_in_path/print_all_dependencies_summary.txt, with the probes and the full output beside it).",
     "",
-    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented discrepancies of the affected rows stay verbatim, including X114's relational complexity proxy, X98's coefficient-list polynomial, X3's exactly-s-vertex path and X67's solved status. The cyclic variants `consecutive_in_cycle` (X3, X91 and four others, over `zip c (rot 1 c)`) are the next family and are untouched."
+    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented discrepancies of the affected rows stay verbatim, including X114's relational complexity proxy, X98's coefficient-list polynomial, X3's exactly-s-vertex path and X67's solved status. The cyclic variants `consecutive_in_cycle` (X3, X91 and four others, over `zip c (rot 1 c)`) were classified here as the next family and were later migrated by B4 (family consecutive-in-cycle, report `consecutive_in_cycle`), so they are no longer listed as untouched variants."
   ],
   "frozen": [
     {
@@ -510,7 +510,9 @@
   ],
   "known_stale_snapshots": {
     "chromatic-theory/theories/migration/path_vertices.v#X3Legacy.statement": "B1 snapshot limitation: family path-vertices (B1) froze only the path-vertex chain of X3, so this copy still resolves through the live x3_induced_path; after B3 its body reaches the canonical seq_consecutive and is no longer the pre-migration statement. B1's stable_cover_unique_induced_path_statement_compat stays true (a conversion) but now certifies only the path-vertex step. The fully frozen pre-migration statement is Chromatic.migration.consecutive_in_path.X3Original.statement, related to the live one by stable_cover_unique_induced_path_statement_original_compat.",
-    "minor-theory/theories/migration/path_vertices.v#X67Legacy.theta": "B1 snapshot limitation: family path-vertices (B1) froze only the path-vertex chain of X67, so this copy still resolves through the live x67_induced_path_between; after B3 its body reaches the canonical seq_consecutive and is no longer the pre-migration theta. B1's X67Legacy.statement is built on it; B1's x67_theta_compat and theta_triangle_free_bounded_degree_treewidth_statement_compat and B2's Minor.migration.internal_vertices certificates over the same bodies stay true (conversions) but now certify only the path-vertex and internal-vertex steps. The fully frozen pre-migration theta is Minor.migration.consecutive_in_path.X67Original.theta (and X67Original.statement), related to the live one by x67_theta_original_compat (and theta_triangle_free_bounded_degree_treewidth_statement_original_compat)."
+    "minor-theory/theories/migration/path_vertices.v#X67Legacy.theta": "B1 snapshot limitation: family path-vertices (B1) froze only the path-vertex chain of X67, so this copy still resolves through the live x67_induced_path_between; after B3 its body reaches the canonical seq_consecutive and is no longer the pre-migration theta. B1's X67Legacy.statement is built on it; B1's x67_theta_compat and theta_triangle_free_bounded_degree_treewidth_statement_compat and B2's Minor.migration.internal_vertices certificates over the same bodies stay true (conversions) but now certify only the path-vertex and internal-vertex steps. The fully frozen pre-migration theta is Minor.migration.consecutive_in_path.X67Original.theta (and X67Original.statement), related to the live one by x67_theta_original_compat (and theta_triangle_free_bounded_degree_treewidth_statement_original_compat).",
+    "graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path": "Later-family snapshot (B4, consecutive-in-cycle): B4 froze only its cyclic chain of X91 at its baseline 49ddc03, where x91_induced_path had already been migrated by this family, so this copy calls that live (migrated) helper by design. The end-to-end pre-migration row, over the frozen chains of B3 and B4, is GTMisc.migration.consecutive_in_cycle.X91Original, certified by avoidable_path_or_pk_free_statement_original_compat.",
+    "graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path_or_pk_free_statement": "Later-family snapshot (B4, consecutive-in-cycle): B4 froze only its cyclic chain of X91 at its baseline 49ddc03, where x91_Pk_free had already been migrated by this family, so this copy calls that live (migrated) helper by design. The end-to-end pre-migration row, over the frozen chains of B3 and B4, is GTMisc.migration.consecutive_in_cycle.X91Original, certified by avoidable_path_or_pk_free_statement_original_compat."
   },
   "cross_module_consumers": [
     {
@@ -519,42 +521,5 @@
       "note": "Cross-module row X83: x83_rainbow_induced_path uses X3's x3_induced_path. Frozen as X83Legacy.rainbow_induced_path over X3Legacy.induced_path; statement text unchanged."
     }
   ],
-  "distinct_variants": [
-    {
-      "qualified": "Chromatic.conjectures.X3.x3_consecutive_in_cycle",
-      "path": "chromatic-theory/theories/conjectures/X3.v",
-      "name": "x3_consecutive_in_cycle",
-      "note": "cyclic Prop variant over zip c (rot 1 c) in the same file as a B3 source: the closing pair (last c, head c) also counts; family consecutive_in_cycle, untouched"
-    },
-    {
-      "qualified": "GTMisc.conjectures.X91.x91_consecutive_in_cycle",
-      "path": "graph-theory-misc/theories/conjectures/X91.v",
-      "name": "x91_consecutive_in_cycle",
-      "note": "cyclic Prop variant over zip c (rot 1 c) in the same file as a B3 source; family consecutive_in_cycle, untouched"
-    },
-    {
-      "qualified": "Chromatic.conjectures.XE1.xe1_consecutive_in_cycle",
-      "path": "chromatic-theory/theories/conjectures/XE1.v",
-      "name": "xe1_consecutive_in_cycle",
-      "note": "cyclic bool variant; family consecutive_in_cycle (Prop versus bool interfaces), untouched"
-    },
-    {
-      "qualified": "Cycle.conjectures.X9.x9_consecutive_in_cycle",
-      "path": "cycle-theory/theories/conjectures/X9.v",
-      "name": "x9_consecutive_in_cycle",
-      "note": "cyclic bool variant; family consecutive_in_cycle, untouched"
-    },
-    {
-      "qualified": "Extremal.conjectures.X4.x4_consecutive_in_cycle",
-      "path": "extremal-graph-theory/theories/conjectures/X4.v",
-      "name": "x4_consecutive_in_cycle",
-      "note": "cyclic bool variant; family consecutive_in_cycle, untouched"
-    },
-    {
-      "qualified": "Minor.conjectures.X27.x27_consecutive_in_cycle",
-      "path": "minor-theory/theories/conjectures/X27.v",
-      "name": "x27_consecutive_in_cycle",
-      "note": "cyclic bool variant; family consecutive_in_cycle, untouched"
-    }
-  ]
+  "distinct_variants": []
 }

@@ -152,7 +152,7 @@ Qed.
 (** Textbook identity: the cyclic edge relation is symmetric. *)
 Lemma cyc_edge_sym (G : sgraph) (c : seq G) (x y : G) :
   cyc_edge c x y = cyc_edge c y x.
-Proof. by rewrite /cyc_edge orbC. Qed.
+Proof. by rewrite /cyc_edge /seq_cyclic_consecutiveb orbC. Qed.
 
 (** Witness: the empty walk is on any cycle. *)
 Lemma on_cycle_walk_nil (G : sgraph) (c : seq G) (u : G) : on_cycle_walk c u [::].

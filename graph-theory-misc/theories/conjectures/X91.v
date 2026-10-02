@@ -23,7 +23,7 @@ Definition x91_induced_path (G : sgraph) (p : seq G) : Prop :=
   end.
 
 Definition x91_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : Prop :=
-  (u, v) \in zip c (rot 1 c) \/ (v, u) \in zip c (rot 1 c).
+  seq_cyclic_consecutive c u v.
 
 Definition x91_induced_cycle (G : sgraph) (c : seq G) : Prop :=
   ucycle (--) c /\

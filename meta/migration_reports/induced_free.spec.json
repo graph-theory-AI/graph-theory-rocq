@@ -465,7 +465,8 @@
     }
   ],
   "known_stale_snapshots": {
-    "graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.statement": "M1 snapshot limitation: M1 froze only the edge-set chain of X102, so this copy still resolves through the live x102_free_class_tree_alpha_bounded; after A1 its body uses the canonical induced_free and is no longer the pre-M1 statement. M1's x102_statement_compat stays true but now certifies only the edge-set step. The fully frozen pre-migration statement is GTMisc.migration.induced_free.X102Original.statement, related to the live statement by x102_statement_original_compat."
+    "graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.statement": "M1 snapshot limitation: M1 froze only the edge-set chain of X102, so this copy still resolves through the live x102_free_class_tree_alpha_bounded; after A1 its body uses the canonical induced_free and is no longer the pre-M1 statement. M1's x102_statement_compat stays true but now certifies only the edge-set step. The fully frozen pre-migration statement is GTMisc.migration.induced_free.X102Original.statement, related to the live statement by x102_statement_original_compat.",
+    "minor-theory/theories/migration/consecutive_in_cycle.v#X42Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement": "B4 per-row snapshot: B4 (consecutive-in-cycle) froze only its even-hole chain of X42 at its baseline 49ddc03, where x42_induced_free had already been migrated by A1, so this copy calls the live x42_induced_free, which unfolds to the canonical induced_free, by design. The fully frozen A1+B4 row is Minor.migration.consecutive_in_cycle.X42Original.even_hole_k4_diamond_free_bounded_treewidth_statement, certified by even_hole_k4_diamond_free_bounded_treewidth_statement_original_compat."
   },
   "cross_module_consumers": [
     {

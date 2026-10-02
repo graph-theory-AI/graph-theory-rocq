@@ -1,0 +1,40 @@
+{
+ "schema_version": 1,
+ "family": "consecutive-in-cycle",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_cyclic_consecutiveb": {
+     "verdict": "FAITHFUL",
+     "note": "seq_cyclic_consecutiveb c u v holds when u and v are adjacent in the cyclic order of the raw sequence c, in either order: (u, v) or (v, u) occurs in zip c (rot 1 c), i.e. among the adjacent pairs and the closing pair (last, first). No path, edge, uniqueness, size or distinctness premise: [::] relates nothing, [:: a] relates a to itself, [:: a; b] relates exactly a and b, the closing pair of a longer sequence is adjacent, a repeated value may be self-adjacent through the closing pair; symmetric and invariant under rot, rotr and rev; on a MathComp cycle cyclically consecutive entries are related."
+    },
+    "seq_cyclic_consecutive": {
+     "verdict": "FAITHFUL",
+     "note": "The Prop form of seq_cyclic_consecutiveb (the same two memberships joined by \\/), reflected by seq_cyclic_consecutiveP; equal to the open-path relation seq_consecutive of the closed sequence a :: rcons p a on a :: p."
+    }
+   },
+   "machine_evidence": [
+    "seq_cyclic_consecutiveP",
+    "zip_rot",
+    "seq_cyclic_consecutive_closed",
+    "seq_cyclic_consecutive_seq1",
+    "seq_cyclic_consecutive_pair",
+    "seq_cyclic_consecutive_rot",
+    "seq_cyclic_consecutiveb_rot",
+    "seq_cyclic_consecutive_rotr",
+    "seq_cyclic_consecutive_rev",
+    "seq_cyclic_consecutive_last",
+    "seq_cyclic_consecutive_cycle",
+    "seq_cyclic_consecutive_ground_nil",
+    "seq_cyclic_consecutive_ground_seq1",
+    "seq_cyclic_consecutive_ground_pair",
+    "seq_cyclic_consecutive_ground_closing",
+    "seq_cyclic_consecutiveb_ground_closing",
+    "seq_cyclic_consecutive_ground_not_adjacent",
+    "seq_cyclic_consecutive_ground_repeated",
+    "seq_cyclic_consecutive_ground_repeated_apart"
+   ]
+  }
+ }
+}
