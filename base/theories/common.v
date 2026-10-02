@@ -81,9 +81,61 @@ Definition edge_disjoint (G : sgraph) (A B : {set {set G}}) : bool := [disjoint 
 
 (** ** Matchings *)
 
-(** A PERFECT matching: a [connectivity.matching] covering every vertex. *)
+(** A PERFECT matching: a [connectivity.matching] covering every vertex.
+
+    Contract: [M] is a set of edges of [G] in which two members through a
+    common vertex are equal ([matching M]), and every vertex lies in a member
+    ([cover M = [set: G]]).  Equivalently ([perfect_matching_exactly_oneP]),
+    in the presentation of the corpus-local copies, every member is an edge
+    and every vertex lies in EXACTLY one member.  Degenerate cases: on the
+    empty graph [set0] is a perfect matching ([perfect_matching0_K0]), on a
+    nonempty graph it is not ([not_perfect_matching0]); a family with a member
+    that is not an edge, such as a loop [[set x]], is never one
+    ([not_perfect_matching_loop]); the members pair the vertices up, so
+    [#|G| = 2 * #|M|] ([card_perfect_matching]) and a graph of odd order has
+    none ([not_perfect_matching_odd], for instance [K_3]:
+    [not_perfect_matching_K3]); the edge of [K_2] is one
+    ([perfect_matching_K2]). *)
 Definition perfect_matching (G : sgraph) (M : {set {set G}}) : Prop :=
   matching M /\ cover M = [set: G].
+
+Lemma perfect_matching_matching (G : sgraph) (M : {set {set G}}) :
+  perfect_matching M -> matching M.
+Proof. by case. Qed.
+
+Lemma perfect_matching_cover (G : sgraph) (M : {set {set G}}) :
+  perfect_matching M -> cover M = [set: G].
+Proof. by case. Qed.
+
+(** Every member is an edge. *)
+Lemma perfect_matching_edge (G : sgraph) (M : {set {set G}}) (e : {set G}) :
+  perfect_matching M -> e \in M -> e \in E(G).
+Proof. by move=> [[MS _] _] /MS. Qed.
+
+(** The presentation of the corpus-local copies (X18, X24, X25): every member
+    is an edge and every vertex lies in exactly one member. *)
+Lemma perfect_matching_exactly_oneP (G : sgraph) (M : {set {set G}}) :
+  perfect_matching M <->
+  M \subset E(G) /\ forall v : G, #|[set e in M | v \in e]| = 1.
+Proof.
+split=> [[[MS M1] covM]|[MS M1]].
+- split=> [|v]; first exact/subsetP.
+  apply/eqP; rewrite eqn_leq; apply/andP; split.
+  + apply/card_le1_eqP => e1 e2; rewrite !inE => /andP[e1M ve1] /andP[e2M ve2].
+    exact: (M1 _ _ e2M e1M v ve2 ve1).
+  + rewrite card_gt0; apply/set0Pn.
+    have: v \in cover M by rewrite covM inE.
+    by case/bigcupP=> e eM ve; exists e; rewrite inE eM ve.
+- split.
+  + split=> [e /(subsetP MS) //|e1 e2 e1M e2M x xe1 xe2].
+    have /card_le1_eqP H : #|[set e in M | x \in e]| <= 1 by rewrite M1.
+    symmetry; apply: H; rewrite !inE.
+    * by rewrite e1M xe1.
+    * by rewrite e2M xe2.
+  + apply/setP => v; rewrite in_setT; apply/bigcupP.
+    have: 0 < #|[set e in M | v \in e]| by rewrite M1.
+    by rewrite card_gt0 => /set0Pn[e]; rewrite inE => /andP[eM ve]; exists e.
+Qed.
 
 (** ** Hamiltonicity *)
 
@@ -233,6 +285,46 @@ Proof.
 move=> /card_gt0P[x _] [_]; rewrite /cover big_set0 => /setP/(_ x).
 by rewrite !inE.
 Qed.
+
+(** The empty family is a perfect matching of the empty graph. *)
+Lemma perfect_matching0_K0 : perfect_matching (G := 'K_0) set0.
+Proof.
+split; first by split=> [e|e1 e2]; rewrite inE.
+by apply/setP => v; have := ltn_ord v; rewrite ltn0.
+Qed.
+
+(** A loop [[set x]] is never a member (members are edges). *)
+Lemma not_perfect_matching_loop (G : sgraph) (M : {set {set G}}) (x : G) :
+  [set x] \in M -> ~ perfect_matching M.
+Proof.
+move=> xM pm; have /edgesP[y [z [eq yz]]] := perfect_matching_edge pm xM.
+by have := cards1 x; rewrite eq cards2 (sg_edgeNeq yz).
+Qed.
+
+(** The members pair the vertices up. *)
+Lemma card_perfect_matching (G : sgraph) (M : {set {set G}}) :
+  perfect_matching M -> #|G| = 2 * #|M|.
+Proof.
+move=> [[MS M1] covM].
+have e2 : forall e, e \in M -> #|e| = 2.
+  by move=> e /MS /edgesP[x [y [-> xy]]]; rewrite cards2 (sg_edgeNeq xy).
+have part : partition M [set: G].
+  rewrite /partition covM eqxx /=; apply/andP; split.
+  - apply/trivIsetP => e1 e2' e1M e2M' e12; rewrite -setI_eq0; apply/eqP/setP => x.
+    rewrite !inE; apply/negbTE/negP => /andP[xe1 xe2].
+    by move: e12; rewrite (M1 _ _ e1M e2M' x xe1 xe2) eqxx.
+  - by apply/negP => /e2; rewrite cards0.
+by rewrite -cardsT (card_partition part) (eq_bigr (fun _ => 2) e2) sum_nat_const mulnC.
+Qed.
+
+(** Hence a graph of odd order has no perfect matching. *)
+Lemma not_perfect_matching_odd (G : sgraph) (M : {set {set G}}) :
+  odd #|G| -> ~ perfect_matching M.
+Proof. by move=> oddG pm; move: oddG; rewrite (card_perfect_matching pm) oddM. Qed.
+
+(** [K_3]: three vertices cannot be paired up. *)
+Lemma not_perfect_matching_K3 (M : {set {set 'K_3}}) : ~ perfect_matching M.
+Proof. by apply: not_perfect_matching_odd; rewrite card_ord. Qed.
 
 (** *** hamiltonian / traceable *)
 
@@ -483,7 +575,9 @@ Proof. by move=> ac x; apply/negP => xx; move: (ac x x xx); rewrite connect0. Qe
     Every lemma above was checked with [Print Assumptions] and reported
     "Closed under the global context": [sg_edge_setE], [in_sg_edge_set],
     [card_sg_edge_set_K3], [sg_edge_set_K1], [no_sg_edge_K1], [perfect_matching_K2],
-    [not_perfect_matching0], [hamiltonian_K3], [not_hamiltonian_K1],
+    [not_perfect_matching0], [perfect_matching_exactly_oneP], [perfect_matching0_K0],
+    [not_perfect_matching_loop], [card_perfect_matching], [not_perfect_matching_odd],
+    [not_perfect_matching_K3], [hamiltonian_K3], [not_hamiltonian_K1],
     [traceable_K1], [hamiltonian_cycle_size], [hamiltonian_K2], [edge_disjointC], [edge_disjoint0],
     [not_edge_disjoint_self], [del_edge_set0], [connected_del_edge_set0],
     [k_edge_connected1], [connected_K2], [k_edge_connected_K2],

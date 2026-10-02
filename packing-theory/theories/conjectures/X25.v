@@ -11,9 +11,11 @@ Unset Printing Implicit Defensive.
 Definition x25_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
+(** Since the C2 library migration (2026-10-02) a transparent alias of
+    [GTBase.common.perfect_matching]; the original "every vertex lies in exactly
+    one member" body is frozen (M1) and certified in theories/migration/simple_edges.v. *)
 Definition x25_perfect_matching (G : sgraph) (M : {set {set G}}) : Prop :=
-  M \subset x25_edge_set G /\
-  forall v : G, #|[set e in M | v \in e]| = 1.
+  perfect_matching M.
 
 Definition x25_cycle_edge_seq (G : sgraph) (c : seq G) : seq {set G} :=
   map (fun p : G * G => [set p.1; p.2]) (zip c (rot 1 c)).

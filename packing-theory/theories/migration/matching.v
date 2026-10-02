@@ -287,11 +287,16 @@ Definition brualdi_stein_partial_transversal_statement : Prop :=
 
 End X18Legacy.
 
+(** Since C2 (2026-10-02) the live [x18_perfect_matching] is the alias of
+    [GTBase.common.perfect_matching]; the frozen body above is unchanged and the
+    certificate goes through [perfect_matching_exactly_oneP]. *)
 Lemma x18_perfect_matching_compat (G : sgraph) (M : {set {set G}}) :
   X18Legacy.perfect_matching M <-> x18_perfect_matching M.
 Proof.
-rewrite /X18Legacy.perfect_matching /x18_perfect_matching.
-by split=> -[mM sat]; split=> //; apply/x15_matching_compat.
+rewrite /X18Legacy.perfect_matching /x18_perfect_matching perfect_matching_exactly_oneP.
+split=> -[mM one]; split=> //.
+- exact: matching_subset ((x15_matching_compat M).1 mM).
+- by apply/x15_matching_compat/matching_at_most_oneP; split=> // v; rewrite one.
 Qed.
 
 (** arxiv:1611.03196#01 (partial row, unchanged). *)

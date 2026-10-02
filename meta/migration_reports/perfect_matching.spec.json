@@ -1,0 +1,248 @@
+{
+  "family": "perfect-matching",
+  "canonical_name": "GTBase.common.perfect_matching",
+  "canonical_short_name": "perfect_matching",
+  "relation": "logical equivalence, not convertibility: the three local copies say that every member is an edge and every vertex lies in exactly one member, the canonical says matching M (members are edges, two members through a vertex are equal) and cover M = [set: G]; certified by GTBase.common.perfect_matching_exactly_oneP (X18's first clause is C1's alias of connectivity.matching)",
+  "baseline_commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+  "pre_m1_commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+  "namespaces": {
+    "base": "GTBase",
+    "cycle-theory": "Cycle",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/common.v",
+    "cycle-theory/theories/migration/perfect_matching.v",
+    "packing-theory/theories/migration/perfect_matching.v",
+    "packing-theory/theories/migration/matching.v",
+    "packing-theory/theories/migration/simple_edges.v"
+  ],
+  "extra_certificates": [
+    "GTBase.common.perfect_matching_matching",
+    "GTBase.common.perfect_matching_cover",
+    "GTBase.common.perfect_matching_edge",
+    "GTBase.common.perfect_matching_exactly_oneP",
+    "GTBase.common.perfect_matching_K2",
+    "GTBase.common.not_perfect_matching0",
+    "GTBase.common.perfect_matching0_K0",
+    "GTBase.common.not_perfect_matching_loop",
+    "GTBase.common.card_perfect_matching",
+    "GTBase.common.not_perfect_matching_odd",
+    "GTBase.common.not_perfect_matching_K3"
+  ],
+  "downstream_client": "base/theories/examples/perfect_matching.v",
+  "summary": [
+    "Batch C, family C2 (`perfect_matching`). The three inventory definitions `x24_perfect_matching` (cycle), `x18_perfect_matching` and `x25_perfect_matching` (packing) all read \"every member is an edge and every vertex lies in exactly one member\" (X18 states the edge clause through C1's `x15_matching`, now the alias of `connectivity.matching`); they now unfold to the existing `GTBase.common.perfect_matching M := matching M /\\ cover M = [set: G]`, keeping their names as transparent aliases for one migration cycle. The two readings are logically equivalent without any guard (`perfect_matching_exactly_oneP`): exactly one = at most one (the matching clause) and at least one (the cover clause); on the empty graph `set0` is a perfect matching in both, a family with a non-edge member is rejected by both. Statement texts, doc blocks, manifest rows and leg states are unchanged (checked below).",
+    "",
+    "Three statements are affected: X24's row through `x24_one_factorization`, X18's row through `x18_perfect_matching` (its frozen chain was already built by C1 in `Packing.migration.matching`) and X25's row through `x25_perfect_one_factorization` (its frozen chain was already built by M1 in `Packing.migration.simple_edges`; M1's copies `X25Legacy.hamiltonian_edge_set` and `cycle_edge_seq` reach no helper of this family and are convertible to the live declarations, so they are not objects of this spec). C2 preserves those frozen bodies and theorem statements, re-proves the old helper certificates `x18_perfect_matching_compat` and `x25_perfect_matching_compat` (which unfolded the exact-one incidence) through the new presentation lemma, and states this family's helper and row certificates over the same frozen bodies in its per-area entry point `Packing.migration.perfect_matching`, proved from the adapted old certificates; the statement-level certificates of C1 and M1 are unchanged. X24's chain and the pre-M1 edge set are frozen in `Cycle.migration.perfect_matching` in A1's convention.",
+    "",
+    "Canonical API and grounding in common.v's perfect-matching section (narrow edits): `perfect_matching_matching`, `perfect_matching_cover`, `perfect_matching_edge`, `perfect_matching_exactly_oneP`; grounding `perfect_matching0_K0` (empty graph), `not_perfect_matching0` and `perfect_matching_K2` (existing), `not_perfect_matching_loop`, `card_perfect_matching` (`#|G| = 2 * #|M|`), `not_perfect_matching_odd` and `not_perfect_matching_K3`. The public client `base/theories/examples/perfect_matching.v` imports `GTBase.base` only and constructs a positive K4 matching with the two edges {0,1} and {2,3}, alongside its K0/K2 positive and K3 negative cases. The fidelity fragment `meta/foundation_fidelity/perfect-matching.json` enrols `perfect_matching` in `GTBase.common` with these lemmas as machine evidence; the family document is `meta/library_primitives/perfect-matching.json`.",
+    "",
+    "Distinct, not claimed: `Cycle.conjectures.U10.is_perfect_matching` and `perfect_matching_cover` live on U10's multigraph edge type (`{set edge G}`, `subdeg`), a different carrier. Edge partitions (`x15_edge_partition`, X18) and edge families stay the next family."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X24.x24_perfect_matching",
+      "path": "cycle-theory/theories/conjectures/X24.v",
+      "name": "x24_perfect_matching",
+      "frozen_path": "cycle-theory/theories/migration/perfect_matching.v",
+      "frozen": "Legacy.x24_perfect_matching",
+      "substitutions": {},
+      "certificate": "Cycle.migration.perfect_matching.x24_perfect_matching_compat",
+      "source_declaration_sha256": "bbd548c8d071c710cdedffae4165c13bb235bc408430ae5e23d960e3d4540e5e",
+      "source_body_sha256": "07a9e84e4132dba5af71ac49d75194a7142239f8ef6fc351da09b24c48c2a510",
+      "live_unfolds_to": "perfect_matching M"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X18.x18_perfect_matching",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_perfect_matching",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X18Legacy.perfect_matching",
+      "substitutions": {
+        "x18_perfect_matching": "perfect_matching",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.perfect_matching.x18_perfect_matching_compat",
+      "source_declaration_sha256": "08c9b80515a04dd33fda7624fcffd35dfeeafe50f9d0cb402793ea5a20147632",
+      "source_body_sha256": "2d7da5cdc6bea83708102aed820bf5483acdcdc58b1e1f6e93aa32bba6792082",
+      "live_unfolds_to": "perfect_matching M",
+      "note": "frozen by C1 (family matching) inside its X18 chain; the snapshot is preserved, C1's certificate was re-proved through GTBase.common.perfect_matching_exactly_oneP and this family's entry point Packing.migration.perfect_matching restates it over the same frozen body"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X25.x25_perfect_matching",
+      "path": "packing-theory/theories/conjectures/X25.v",
+      "name": "x25_perfect_matching",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "X25Legacy.perfect_matching",
+      "substitutions": {
+        "x25_perfect_matching": "perfect_matching",
+        "x25_edge_set": "Legacy.edge_set"
+      },
+      "certificate": "Packing.migration.perfect_matching.x25_perfect_matching_compat",
+      "source_declaration_sha256": "2dc8bc8bc6ba14b0f39a64628b8f1e20a63fb56aca250d1dbe4ba96ce8283b61",
+      "source_body_sha256": "06417e195d834b98a6b3032b5a62d8a9d261a665cf36986654effa72bdd1e1e2",
+      "live_unfolds_to": "perfect_matching M",
+      "note": "frozen by M1 (family simple-graph-edge-set) inside its X25 chain, over M1's frozen pre-M1 edge set; the snapshot is preserved, M1's certificate was re-proved through perfect_matching_exactly_oneP and this family's entry point Packing.migration.perfect_matching restates it over the same frozen body"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Cycle.conjectures.X24.x24_edge_set",
+      "path": "cycle-theory/theories/conjectures/X24.v",
+      "name": "x24_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "cycle-theory/theories/migration/perfect_matching.v",
+      "frozen": "Legacy.x24_edge_set",
+      "substitutions": {},
+      "certificate": "Cycle.migration.perfect_matching.x24_edge_set_compat",
+      "source_declaration_sha256": "4edbfb35b0b524f11504192bea7727154de94b9adab86289a8dc7d9514001f20",
+      "source_body_sha256": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
+      "note": "the comprehension body x24_edge_set had before M1 (M1 froze the same text as Cycle.migration.simple_edges.Legacy.edge_set); the live name is the M1 alias sg_edge_set G"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X25.x25_edge_set",
+      "path": "packing-theory/theories/conjectures/X25.v",
+      "name": "x25_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x25_edge_set": "edge_set"
+      },
+      "certificate": "Packing.migration.simple_edges.x25_edge_set_compat",
+      "source_declaration_sha256": "e2be8bbe3a2fc66f88547fe4e6656a62e43af87c420da92961d552e6df71b192",
+      "source_body_sha256": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
+      "note": "M1's frozen pre-M1 edge set of the packing copies, checked here against X25.v at 061154c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X24.x24_one_factorization",
+      "path": "cycle-theory/theories/conjectures/X24.v",
+      "name": "x24_one_factorization",
+      "frozen_path": "cycle-theory/theories/migration/perfect_matching.v",
+      "frozen": "X24Legacy.one_factorization",
+      "substitutions": {
+        "x24_one_factorization": "one_factorization",
+        "x24_perfect_matching": "Legacy.x24_perfect_matching",
+        "x24_edge_set": "Legacy.x24_edge_set"
+      },
+      "certificate": "Cycle.migration.perfect_matching.x24_one_factorization_compat",
+      "source_declaration_sha256": "3007e5a9f6402803c2be317f71d73fd595d0386a6cb030e28b7b96c5b5e02dbf",
+      "source_body_sha256": "1d7643890a6592d2dc54b10178170f77151fa2e7ae12c947b08d907e4356bdd8"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X25.x25_perfect_one_factorization",
+      "path": "packing-theory/theories/conjectures/X25.v",
+      "name": "x25_perfect_one_factorization",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "X25Legacy.perfect_one_factorization",
+      "substitutions": {
+        "x25_perfect_one_factorization": "perfect_one_factorization",
+        "x25_perfect_matching": "perfect_matching",
+        "x25_edge_set": "Legacy.edge_set",
+        "x25_hamiltonian_edge_set": "hamiltonian_edge_set"
+      },
+      "certificate": "Packing.migration.simple_edges.x25_perfect_one_factorization_compat",
+      "source_declaration_sha256": "93482f5dceff9fe38a69fd0e96a5cef77fed6c01c2640453d08b5164ed414080",
+      "source_body_sha256": "958220ef3da6f79bd0b7367601d5ab4a5361c03edf09c8897358134e8dfb5ff3"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X24.one_factorization_long_rainbow_cycle_statement",
+      "path": "cycle-theory/theories/conjectures/X24.v",
+      "name": "one_factorization_long_rainbow_cycle_statement",
+      "frozen_path": "cycle-theory/theories/migration/perfect_matching.v",
+      "frozen": "X24Legacy.one_factorization_long_rainbow_cycle_statement",
+      "substitutions": {
+        "x24_one_factorization": "one_factorization"
+      },
+      "certificate": "Cycle.migration.perfect_matching.one_factorization_long_rainbow_cycle_statement_compat",
+      "source_declaration_sha256": "eb342147adf95f4466b16a66c24e8e19c0709d09f7a7bac0279c723b398e006e",
+      "source_body_sha256": "665998130d4e7b7e0df3f61e4a813e1d3e1018f984c4b346edc07becb0a9a53f",
+      "corpus": "v2",
+      "row": "studies:std_akbari_etesami_mahini_mahmoody_question_on_long",
+      "documented_status": "open; question row encoded in its affirmative form, parity hypothesis documented; unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X18.knn_fair_perfect_matching_statement",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "knn_fair_perfect_matching_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X18Legacy.knn_fair_perfect_matching_statement",
+      "substitutions": {
+        "x15_edge_partition": "X15Legacy.edge_partition",
+        "x18_perfect_matching": "perfect_matching"
+      },
+      "certificate": "Packing.migration.perfect_matching.knn_fair_perfect_matching_statement_compat",
+      "source_declaration_sha256": "8c796d2465926081a3d63673093b92f60897b2f9a12c3ccdf1602796fa7e4c74",
+      "source_body_sha256": "6235cef68dad11ea65fd87bf2f0220eeb53e4befde204fdf7558ece4c7a2e5a8",
+      "corpus": "v2",
+      "row": "arxiv:1611.03196#01",
+      "documented_status": "partial row (m = 2, 3 in the source); frozen by C1, restated by this family's entry point"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X25.kotzig_perfect_one_factorization_statement",
+      "path": "packing-theory/theories/conjectures/X25.v",
+      "name": "kotzig_perfect_one_factorization_statement",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "X25Legacy.statement",
+      "substitutions": {
+        "kotzig_perfect_one_factorization_statement": "statement",
+        "x25_perfect_one_factorization": "perfect_one_factorization"
+      },
+      "certificate": "Packing.migration.perfect_matching.kotzig_perfect_one_factorization_statement_compat",
+      "source_declaration_sha256": "dbf933bbf10bd481f4a48c2d7eaff4f61d07394a828612a5babfaa8243900784",
+      "source_body_sha256": "4a9cba747f6977e3a3494fe906ac9bf6f82fc8dfc92ebcd9ee3a84f41e0f8a75",
+      "corpus": "v2",
+      "row": "studies:std_kotzig_s_perfect_1_factorization_conjecture",
+      "documented_status": "open; frozen by M1, restated by this family's entry point"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "x18_perfect_matching",
+      "note": "wave-V bridge x18_perfect_matching_equiv_x25_perfect_matching now holds by reflexivity (both aliases of the canonical); lemma statement unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "x25_perfect_matching",
+      "note": "same bridge; lemma statement unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Cycle.conjectures.U10.is_perfect_matching",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "is_perfect_matching",
+      "note": "name match only: a set of edges of an mgraph (edge type, subdeg M v = 1), not a family of vertex 2-sets of an sgraph; untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.U10.perfect_matching_cover",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "perfect_matching_cover",
+      "note": "name match only: a list of k perfect matchings of an mgraph covering its edges; untouched"
+    }
+  ],
+  "unchanged_live_helpers": [
+    {
+      "source": "Cycle.conjectures.X24.x24_rainbow_cycle",
+      "source_declaration_sha256": "00f8b85e07b852cad8ef4e6a6d859d1f049cdc7069f419af652b8466eaee3108",
+      "source_body_sha256": "921bdad35c72abcf1d2f772a23c343d779b044ab0b65b66a21959c94eae09fb8"
+    },
+    {
+      "source": "Cycle.conjectures.X24.x24_cycle_edge_seq",
+      "source_declaration_sha256": "cde5e34a20b9f82ada12971d3e49884d03118cfb244204e067bccc6f2f06b278",
+      "source_body_sha256": "123180971543b2488699564751e31753114798021bed6270d2967aa62f7b259a"
+    }
+  ],
+  "kernel_evidence": "Print All Dependencies of the three frozen and three live statements and Print Assumptions of every certificate, run through the pinned image; files under /srv/graph-theory-rocq/coordination/evidence/C2-perfect_matching/ (outside the repository)"
+}

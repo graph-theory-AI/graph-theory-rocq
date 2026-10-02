@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "family": "perfect-matching",
+  "modules": {
+    "GTBase.common": {
+      "path": "base/theories/common.v",
+      "overrides": {
+        "perfect_matching": {
+          "verdict": "FAITHFUL",
+          "note": "A matching (members are edges, two members through a vertex are equal) whose members cover every vertex; equivalently every member is an edge and every vertex lies in exactly one member (perfect_matching_exactly_oneP). On the empty graph set0 is a perfect matching; a family with a non-edge member never is; the members pair the vertices up, so a graph of odd order has none."
+        }
+      },
+      "machine_evidence": [
+        "perfect_matching_exactly_oneP",
+        "perfect_matching_edge",
+        "perfect_matching0_K0",
+        "not_perfect_matching_loop",
+        "card_perfect_matching",
+        "not_perfect_matching_odd",
+        "not_perfect_matching_K3",
+        "perfect_matching_K2",
+        "not_perfect_matching0"
+      ]
+    }
+  }
+}
