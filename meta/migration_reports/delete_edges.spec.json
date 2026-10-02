@@ -34,7 +34,7 @@
     "Extremal.migration.delete_edges.xe1_diameter_at_most_diso"
   ],
   "summary": [
-    "Batch A, family A2 (set-of-edges deletion). Three relations and four graph wrappers now unfold to `GTBase.common.del_es_rel` and `GTBase.common.del_edge_set`: X7, chromatic XE1, extremal XE1, and X191 (`fg_mk_sgraph`). Each frozen copy is checked against the source at 03742d1. Each frozen graph freezes its opaque symmetry and irreflexivity proofs. Each frozen statement goes through frozen copies along its whole affected chain, including XE2, which reaches the extremal XE1 helper across modules. Graph properties move along the identity isomorphism: χ by `chi_diso`, bipartiteness by `bipartite_diso`, balls and diameter by `ball_diso`. X191's blocked row and XE2's solved rows keep their statements. Single-edge deletion (X60, X64, U11) and the dead completion helper were classified and deferred here. The X60 and X64 single-edge helpers were later migrated by A3 (family single-edge-deletion, report `delete_edge`), so they are no longer listed as untouched variants; U11's `sdel_edge` and the dead completion helper still are."
+    "Batch A, family A2 (set-of-edges deletion). Three relations and four graph wrappers now unfold to `GTBase.common.del_es_rel` and `GTBase.common.del_edge_set`: X7, chromatic XE1, extremal XE1, and X191 (`fg_mk_sgraph`). Each frozen copy is checked against the source at 03742d1. Each frozen graph freezes its opaque symmetry and irreflexivity proofs. Each frozen statement goes through frozen copies along its whole affected chain, including XE2, which reaches the extremal XE1 helper across modules. Graph properties move along the identity isomorphism: χ by `chi_diso`, bipartiteness by `bipartite_diso`, balls and diameter by `ball_diso`. X191's blocked row and XE2's solved rows keep their statements. Single-edge deletion (X60, X64, U11) and the dead completion helper were classified and deferred here. The X60 and X64 single-edge helpers were later migrated by A3 (family single-edge-deletion, report `delete_edge`), so they are no longer listed as untouched variants; U11's `sdel_edge` was migrated by A4 (family single-edge-deletion-u11, report `sdel_edge`); the dead completion helper is still listed."
   ],
   "frozen": [
     {
@@ -393,12 +393,6 @@
     }
   ],
   "distinct_variants": [
-    {
-      "qualified": "Reconstruction.conjectures.U11.sdel_edge",
-      "path": "reconstruction-theory/theories/conjectures/U11.v",
-      "name": "sdel_edge",
-      "note": "cross-name single-edge deletion consumed by foundations/kelly.v, deferred"
-    },
     {
       "qualified": "Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_edges",
       "path": "extremal-graph-theory/theories/conjectures/XE1.v",
