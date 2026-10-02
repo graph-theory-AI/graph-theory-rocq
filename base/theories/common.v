@@ -283,6 +283,30 @@ Lemma induced_free_diso (G H H' : sgraph) :
   diso H H' -> induced_free G H -> induced_free G H'.
 Proof. by move=> i free S j; apply: (free S); exact: diso_comp j (diso_sym i). Qed.
 
+(** An isomorphism of hosts carries induced copies, with their size: an induced
+    copy of [H] on [S] in [G] gives one on a vertex set of the same size in [G']. *)
+Lemma induced_copy_host_diso (G G' H : sgraph) (i : diso G G') (S : {set G}) :
+  diso (induced S) H -> exists S' : {set G'}, #|S'| = #|S| /\ inhabited (induced S' ≃ H).
+Proof.
+move=> j; pose k : H ⇀ G' :=
+  isubgraph_comp (iso_isubgraph (diso_sym j)) (isubgraph_comp (induced_isubgraph S) (iso_isubgraph i)).
+exists [set x in codom k]; split; last by split; exact: diso_sym (isubgraph_induced k).
+have kinj : injective k by exact: isubgraph_inj.
+have e1 : #|[set x in codom k]| = #|H| by rewrite cardsE card_codom.
+have e2 : #|induced S| = #|S| by rewrite card_sig; apply: eq_card => x; rewrite !inE.
+by rewrite e1 -e2 (card_bij (diso_v j)).
+Qed.
+
+(** Only the isomorphism type of the host matters either. *)
+Lemma induced_free_host_diso (G G' H : sgraph) :
+  diso G G' -> induced_free G H -> induced_free G' H.
+Proof.
+move=> i free S' j; pose k : H ⇀ G :=
+  isubgraph_comp (iso_isubgraph (diso_sym j))
+    (isubgraph_comp (induced_isubgraph S') (iso_isubgraph (diso_sym i))).
+exact: free _ (diso_sym (isubgraph_induced k)).
+Qed.
+
 (** ** Complete bipartite graphs *)
 
 (** [G] is complete bipartite with parts [A] and [~: A]: two vertices are
@@ -469,6 +493,34 @@ Proof.
 split; rewrite del_edge_set1 ?eqxx ?andbF //=.
 by apply/eqP => /setP/(_ (@Ordinal 3 1 isT)); rewrite !inE.
 Qed.
+
+(** *** Single-edge deletion [del_edge_set G [set e]] *)
+
+(** A real edge is removed. *)
+Lemma del_edge_set1_edge (G : sgraph) (x y : G) :
+  ~~ @edge_rel (del_edge_set G [set [set x; y]]) x y.
+Proof. by rewrite del_edge_set1 eqxx andbF. Qed.
+
+(** Every other pair keeps its adjacency. *)
+Lemma del_edge_set1_other (G : sgraph) (e : {set G}) (x y : G) :
+  [set x; y] != e -> @edge_rel (del_edge_set G [set e]) x y = x -- y.
+Proof. by move=> xye; rewrite del_edge_set1 xye andbT. Qed.
+
+(** Corner case: a pair [e] that is not a two-element set (empty, a singleton,
+    or three or more vertices) deletes nothing. *)
+Lemma del_edge_set1_invalid (G : sgraph) (e : {set G}) :
+  #|e| != 2 -> @edge_rel (del_edge_set G [set e]) =2 @edge_rel G.
+Proof.
+move=> e2 x y; rewrite del_edge_set1.
+case xy: (@edge_rel G x y) => //=; apply: contra e2 => /eqP <-.
+by rewrite cards2 (sg_edgeNeq xy).
+Qed.
+
+(** Deleting the same pair twice is deleting it once. *)
+Lemma del_edge_set1_twice (G : sgraph) (e : {set G}) :
+  @edge_rel (del_edge_set (del_edge_set G [set e]) [set e]) =2
+  @edge_rel (del_edge_set G [set e]).
+Proof. by move=> x y; rewrite !del_edge_set1 -andbA andbb. Qed.
 
 (** Consistency: 1-edge-connected = at least two vertices and connected. *)
 Lemma connected_del_edge_set0 (G : sgraph) (A : {set G}) :

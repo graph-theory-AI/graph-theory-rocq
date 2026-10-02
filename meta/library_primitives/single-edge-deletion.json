@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "family": "single-edge-deletion",
+  "primitive": {
+    "canonical_name": "GTBase.common.del_edge_set",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": ["delete_edge_rel", "delete_edge_graph"],
+    "source_definitions": [
+      "Chromatic.conjectures.X64.x64_delete_edge_graph",
+      "Chromatic.conjectures.X64.x64_delete_edge_rel",
+      "Extremal.conjectures.X60.x60_delete_edge_graph",
+      "Extremal.conjectures.X60.x60_delete_edge_rel"
+    ],
+    "consumers_remaining": 6,
+    "relation": "Pointwise equality of adjacency with del_es_rel G [set e] for every vertex set e, valid edge or not (GTBase.common.del_edge_set1); the deleted graphs are related by the identity isomorphism. Specialization of the edge-set-deletion family at F = [set e].",
+    "specialization_of": "edge-set-deletion",
+    "semantic_classes": {
+      "single-pair-deletion": {
+        "count": 4,
+        "verdict": "equivalent",
+        "certificate": "GTBase.common.del_edge_set1"
+      }
+    },
+    "retained_proof_lemmas": {
+      "note": "x64_delete_edge_sym/_irrefl and x60_delete_edge_sym/_irrefl keep their names and statements and are re-proved from del_es_sym/del_es_irrefl. They are frozen verbatim as each Legacy graph's opaque proof scaffolding; *_delete_edge_proofs_compat relates the SGraph built from the frozen proofs to the one built from the live lemmas (an isomorphism of constructions, not an equality of proof terms)."
+    },
+    "historical_snapshots": {
+      "Chromatic.migration.simple_edges.X64Legacy.bridgeless": "M1 froze only the edge set; this copy still calls the live x64_delete_edge_graph. Kept unchanged; the fully frozen row is Chromatic.migration.delete_edge.X64Original.",
+      "Extremal.migration.induced_free.X61Legacy.induced_saturated": "A1 froze the induced-free chain; this copy still calls the live x60_delete_edge_graph. Kept unchanged; the A3 per-row chain is Extremal.migration.delete_edge.X61Legacy.",
+      "Extremal.migration.induced_free.X61Original.induced_saturated": "A1's pre-M1/pre-A1 copy still calls the live x60_delete_edge_graph. Kept unchanged; the fully frozen row is Extremal.migration.delete_edge.X61Original."
+    },
+    "deferred_variants": {
+      "Reconstruction.conjectures.U11.sde_rel": "Same concept, deferred by consumer scope: Section G/e with sde_sym/sde_irrefl, reaching Kelly and deck bridges, edge_reconstruction_statement and external_whitney_line_inversion_statement.",
+      "Reconstruction.conjectures.U11.sdel_edge": "Same concept, deferred with sde_rel."
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.delete_edge.x64_delete_edge_rel_compat",
+      "Chromatic.migration.delete_edge.x64_delete_edge_graph_compat",
+      "Chromatic.migration.delete_edge.x64_delete_edge_diso",
+      "Chromatic.migration.delete_edge.x64_delete_edge_proofs_compat",
+      "Chromatic.migration.delete_edge.x64_bridgeless_compat",
+      "Chromatic.migration.delete_edge.finite_bridgeless_cubic_two_homogeneous_exceptions_statement_compat",
+      "Chromatic.migration.delete_edge.x64_bridgeless_original_compat",
+      "Chromatic.migration.delete_edge.finite_bridgeless_cubic_two_homogeneous_exceptions_statement_original_compat",
+      "Extremal.migration.delete_edge.x60_delete_edge_rel_compat",
+      "Extremal.migration.delete_edge.x60_delete_edge_graph_compat",
+      "Extremal.migration.delete_edge.x60_delete_edge_diso",
+      "Extremal.migration.delete_edge.x60_delete_edge_proofs_compat",
+      "Extremal.migration.delete_edge.x60_has_induced_cycle_diso",
+      "Extremal.migration.delete_edge.induced_saturation_even_cycle_polynomial_size_statement_compat",
+      "Extremal.migration.delete_edge.induced_saturation_even_cycle_polynomial_size_statement_original_compat",
+      "Extremal.migration.delete_edge.x61_induced_free_delete_edge_compat",
+      "Extremal.migration.delete_edge.x61_induced_saturated_compat",
+      "Extremal.migration.delete_edge.infinite_family_without_finite_induced_saturation_statement_compat",
+      "Extremal.migration.delete_edge.x61_induced_saturated_original_compat",
+      "Extremal.migration.delete_edge.infinite_family_without_finite_induced_saturation_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.common.del_edge_set1",
+      "GTBase.common.del_edge_set1_edge",
+      "GTBase.common.del_edge_set1_other",
+      "GTBase.common.del_edge_set1_invalid",
+      "GTBase.common.del_edge_set1_twice",
+      "GTBase.common.induced_free_host_diso",
+      "GTBase.common.induced_copy_host_diso"
+    ],
+    "public_client": "base/theories/examples/del_edge.v",
+    "legacy_baseline": "dbee364e6be7ac2e9a8e7edecbb1ff5f0878c8c0",
+    "migration_report": "meta/migration_reports/delete_edge.md",
+    "migration_spec": "meta/migration_reports/delete_edge.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A3.md",
+    "upstream_audit": {
+      "searched_modules": ["GraphTheory.sgraph", "GraphTheory.digraph", "GTBase.common"],
+      "result": "adapted-in-base",
+      "candidate": "GTBase.common.del_edge_set",
+      "note": "Upstream sgraph.del_edges e deletes every edge inside the vertex set e. It agrees with single-pair deletion only when #|e| <= 2, and deletes more for larger e, so it is not the canonical. del_edge_set G [set e] removes exactly the pair e and is a no-op for invalid e (empty, singleton, three or more vertices: del_edge_set1_invalid). Host-side isomorphism invariance of induced copies and of induced_free (induced_copy_host_diso, induced_free_host_diso) composes upstream isubgraph_comp, induced_isubgraph and isubgraph_induced.",
+      "audited_at": "2026-10-02"
+    },
+    "reviewed_by": "marcol",
+    "reviewed_commit": "dde0199033f6e3299360ed5ae1a7c1eb7e0cda02",
+    "independent_review": "meta/migration_reviews/delete_edge.md"
+  }
+}
