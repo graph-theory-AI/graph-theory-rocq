@@ -14,8 +14,7 @@ Definition x10_rainbow_cycle
   uniq (map col (map (fun p : G * G => [set p.1; p.2]) (zip c (rot 1 c)))).
 
 Definition x10_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x10_colour_classes_large
     (G : sgraph) (n k : nat) (col : {set G} -> 'I_n) : Prop :=

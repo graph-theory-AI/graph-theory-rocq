@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X9 vocabulary *************************************************)
 
 Definition x9_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x9_cycle_edges (G : sgraph) (c : seq G) : seq {set G} :=
   map (fun p : G * G => [set p.1; p.2]) (zip c (rot 1 c)).

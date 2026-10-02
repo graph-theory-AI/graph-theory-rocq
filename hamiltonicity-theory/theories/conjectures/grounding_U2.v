@@ -120,7 +120,7 @@ Proof. by rewrite /edge_rel /= /cayley_rel !in_setT orbT andbT. Qed.
     'K_1 has no edges; 'K_2 has exactly one edge, the whole vertex set. *)
 Lemma edge_set_K1 : edge_set 'K_1 = set0.
 Proof.
-apply/setP => e; rewrite !inE; apply/negbTE.
+apply/setP => e; rewrite /edge_set sg_edge_setE !inE; apply/negbTE.
 rewrite negb_exists; apply/forallP => x; rewrite negb_exists; apply/forallP => y.
 rewrite negb_and; apply/orP; left.
 by rewrite /edge_rel /= /complete_rel /= negbK [x]ord1 [y]ord1.
@@ -128,7 +128,7 @@ Qed.
 
 Lemma edge_set_K2 : edge_set 'K_2 = [set [set: 'K_2]].
 Proof.
-apply/setP => e; rewrite !inE; apply/existsP/eqP.
+apply/setP => e; rewrite /edge_set sg_edge_setE !inE; apply/existsP/eqP.
 - move=> [x] /existsP[y] /andP[xy /eqP->].
   have xy' : x != y by move: xy; rewrite /edge_rel /= /complete_rel /=.
   by apply/eqP; rewrite eqEcard subsetT cardsT card_ord cards2 xy'.

@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X84 vocabulary ************************************************)
 
 Definition x84_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x84_edge_rel (G : sgraph) (F : {set {set G}}) : rel G :=
   fun x y => [set x; y] \in F.

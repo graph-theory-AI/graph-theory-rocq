@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X14 vocabulary ************************************************)
 
 Definition x14_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x14_matching (G : sgraph) (M : {set {set G}}) : Prop :=
   M \subset x14_edge_set G /\

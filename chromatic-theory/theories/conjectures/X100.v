@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X100 vocabulary ***********************************************)
 
 Definition x100_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} | (#|e| == 2) && cliqueb e].
+  sg_edge_set G.
 
 Definition x100_col_deg
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (v : G) (c : 'I_q) : nat :=

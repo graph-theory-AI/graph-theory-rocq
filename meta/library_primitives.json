@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "notes": "Registry for conjecture-local helper families being audited and migrated to reusable APIs. source_definitions is checked against the generated inventory.",
+  "primitives": {
+    "simple-graph-edge-set": {
+      "canonical_name": "GraphTheory.sgraph.sg_edge_set",
+      "owner": "upstream",
+      "status": "deprecated",
+      "fidelity": "FAITHFUL",
+      "normalized_names": ["edge_set"],
+      "source_definitions": [
+        "Chromatic.conjectures.X100.x100_edge_set",
+        "Chromatic.conjectures.X142.x142_edge_set",
+        "Chromatic.conjectures.X33.x33_edge_set",
+        "Chromatic.conjectures.X34.x34_edge_set",
+        "Chromatic.conjectures.X35.x35_edge_set",
+        "Chromatic.conjectures.X43.x43_edge_set",
+        "Chromatic.conjectures.X64.x64_edge_set",
+        "Chromatic.conjectures.XE1.xe1_edge_set",
+        "Cycle.conjectures.X10.x10_edge_set",
+        "Cycle.conjectures.X24.x24_edge_set",
+        "Cycle.conjectures.X9.x9_edge_set",
+        "Cycle.conjectures.XE1.xe1_edge_set",
+        "Extremal.conjectures.X36.x36_edge_set",
+        "Extremal.conjectures.X4.x4_edge_set",
+        "Extremal.conjectures.X60.x60_edge_set",
+        "Extremal.conjectures.X76.x76_edge_set",
+        "Extremal.conjectures.X78.x78_edge_set",
+        "Extremal.conjectures.X84.x84_edge_set",
+        "GTMisc.conjectures.X102.x102_edge_set",
+        "GTMisc.conjectures.X14.x14_edge_set",
+        "GTMisc.conjectures.X20.x20_edge_set",
+        "GTMisc.conjectures.X37.x37_edge_set",
+        "GTMisc.conjectures.X38.x38_edge_set",
+        "GTMisc.conjectures.X77.x77_edge_set",
+        "Hamilton.conjectures.U2.edge_set",
+        "Packing.conjectures.X15.x15_edge_set",
+        "Packing.conjectures.X15alone.x15_edge_set",
+        "Packing.conjectures.X25.x25_edge_set",
+        "Packing.conjectures.X47.x47_edge_set",
+        "Packing.conjectures.X5.x5_edge_set",
+        "Packing.conjectures.XE1.xe1_edge_set",
+        "Topological.conjectures.X158.x158_edge_set"
+      ],
+      "consumers_remaining": 53,
+      "relation": "extensional-equality",
+      "semantic_classes": {
+        "exists-endpoints": {
+          "count": 30,
+          "verdict": "equivalent",
+          "certificate": "GTBase.common.sg_edge_setE"
+        },
+        "cardinality-and-clique": {
+          "count": 2,
+          "verdict": "equivalent",
+          "certificate": "GTBase.common.sg_edge_set_cliqueE"
+        }
+      },
+      "compatibility_theorems": [
+        "Chromatic.migration.simple_edges.x33_edge_set_compat",
+        "Chromatic.migration.simple_edges.x34_edge_set_compat",
+        "Chromatic.migration.simple_edges.x35_edge_set_compat",
+        "Chromatic.migration.simple_edges.x43_edge_set_compat",
+        "Chromatic.migration.simple_edges.x64_edge_set_compat",
+        "Chromatic.migration.simple_edges.x100_edge_set_compat",
+        "Chromatic.migration.simple_edges.x100_statement_compat",
+        "Chromatic.migration.simple_edges.x142_edge_set_compat",
+        "Chromatic.migration.simple_edges.x142_statement_compat",
+        "Chromatic.migration.simple_edges.xe1_edge_set_compat",
+        "Cycle.migration.simple_edges.x9_edge_set_compat",
+        "Cycle.migration.simple_edges.x10_edge_set_compat",
+        "Cycle.migration.simple_edges.x24_edge_set_compat",
+        "Cycle.migration.simple_edges.xe1_edge_set_compat",
+        "Extremal.migration.simple_edges.x4_edge_set_compat",
+        "Extremal.migration.simple_edges.x36_edge_set_compat",
+        "Extremal.migration.simple_edges.x60_edge_set_compat",
+        "Extremal.migration.simple_edges.x76_edge_set_compat",
+        "Extremal.migration.simple_edges.x78_edge_set_compat",
+        "Extremal.migration.simple_edges.x84_edge_set_compat",
+        "GTMisc.migration.simple_edges.x14_edge_set_compat",
+        "GTMisc.migration.simple_edges.x20_edge_set_compat",
+        "GTMisc.migration.simple_edges.x37_edge_set_compat",
+        "GTMisc.migration.simple_edges.x38_edge_set_compat",
+        "GTMisc.migration.simple_edges.x77_edge_set_compat",
+        "GTMisc.migration.simple_edges.x102_edge_set_compat",
+        "GTMisc.migration.simple_edges.x102_statement_compat",
+        "Hamilton.migration.simple_edges.edge_set_compat",
+        "Packing.migration.simple_edges.x5_edge_set_compat",
+        "Packing.migration.simple_edges.x15_edge_set_compat",
+        "Packing.migration.simple_edges.x25_edge_set_compat",
+        "Packing.migration.simple_edges.x25_statement_compat",
+        "Packing.migration.simple_edges.x47_edge_set_compat",
+        "Packing.migration.simple_edges.xe1_edge_set_compat",
+        "Topological.migration.simple_edges.x158_edge_set_compat"
+      ],
+      "api_theorems": [
+        "GTBase.common.sg_edge_setE",
+        "GTBase.common.in_sg_edge_set",
+        "GTBase.common.sg_edge_set_cliqueE"
+      ],
+      "upstream_audit": {
+        "searched_modules": ["GraphTheory.sgraph", "GTBase.common"],
+        "result": "migrated-to-upstream",
+        "candidate": "GraphTheory.sgraph.sg_edge_set",
+        "note": "All 31 local edge-set definitions of the statement waves now unfold to upstream sg_edge_set (E(G)); their names remain as transparent aliases for one compatibility cycle. The two presentations are certified in GTBase.common (sg_edge_setE for the adjacent-endpoint comprehension, sg_edge_set_cliqueE for two-element cliques), following the WP4b rule that shared vocabulary lives there. Packing.conjectures.X15alone.x15_edge_set is a deliberately self-contained copy behind the fair-matching proof; it is not part of the package build (absent from _CoqProject), so it is registered but neither retargeted nor certified.",
+        "audited_at": "2026-10-02"
+      },
+      "reviewed_by": null
+    },
+    "path-vertices": {
+      "canonical_name": "GraphTheory.digraph.nodes",
+      "owner": "upstream-adapter",
+      "status": "auditing",
+      "fidelity": "PENDING",
+      "normalized_names": ["path_vertices"],
+      "source_definitions": [
+        "Chromatic.conjectures.X3.x3_path_vertices",
+        "Digraph.conjectures.X2.x2_path_vertices",
+        "GTMisc.conjectures.X113.x113_path_vertices",
+        "GTMisc.conjectures.X116.x116_path_vertices",
+        "GTMisc.conjectures.X146.x146_path_vertices",
+        "GTMisc.conjectures.X39.x39_path_vertices",
+        "Minor.conjectures.X11.x11_path_vertices",
+        "Minor.conjectures.X67.x67_path_vertices",
+        "Packing.conjectures.X26.x26_path_vertices"
+      ],
+      "consumers_remaining": 15,
+      "compatibility_theorems": [],
+      "upstream_audit": {
+        "searched_modules": ["GraphTheory.digraph", "GraphTheory.sgraph"],
+        "result": "candidate-found",
+        "candidate": "GraphTheory.digraph.nodes",
+        "note": "The upstream Path record exposes nodes and interior. Local helpers often use raw vertex sequences, so M3 must compare endpoint and repetition conventions before choosing an adapter.",
+        "audited_at": "2026-07-22"
+      }
+    },
+    "induced-free": {
+      "canonical_name": null,
+      "owner": "base",
+      "status": "proposed",
+      "fidelity": "PENDING",
+      "normalized_names": ["induced_free"],
+      "source_definitions": [
+        "Chromatic.conjectures.X43.x43_induced_free",
+        "Extremal.conjectures.X118.x118_induced_free",
+        "Extremal.conjectures.X120.x120_induced_free",
+        "Extremal.conjectures.X56.x56_induced_free",
+        "Extremal.conjectures.X57.x57_induced_free",
+        "Extremal.conjectures.X58.x58_induced_free",
+        "Extremal.conjectures.X61.x61_induced_free",
+        "GTMisc.conjectures.X102.x102_induced_free",
+        "Minor.conjectures.X42.x42_induced_free"
+      ],
+      "consumers_remaining": 9,
+      "compatibility_theorems": [],
+      "upstream_audit": {
+        "searched_modules": ["GraphTheory.sgraph", "GraphTheory.coloring"],
+        "result": "building-blocks-only",
+        "candidate": "GTBase.common.induced_free",
+        "note": "Upstream provides induced subgraphs and isomorphisms but no single induced-free class predicate matching all local quantifier conventions. GTBase.common.induced_free (2026-09-24) is now the shared candidate; fidelity against the local quantifier conventions remains to be certified.",
+        "audited_at": "2026-07-22"
+      }
+    },
+    "stable-set": {
+      "canonical_name": "GraphTheory.dom.stable",
+      "owner": "upstream-adapter",
+      "status": "auditing",
+      "fidelity": "PENDING",
+      "normalized_names": ["stable_set"],
+      "source_definitions": [
+        "Chromatic.conjectures.X3.x3_stable_set",
+        "Chromatic.conjectures.XE1.xe1_stable_set",
+        "Digraph.conjectures.X166.x166_stable_set",
+        "Extremal.conjectures.X56.x56_stable_set",
+        "Extremal.conjectures.X97.x97_stable_set",
+        "Extremal.conjectures.XE1.xe1_stable_set",
+        "GTMisc.conjectures.X169.x169_stable_set",
+        "GTMisc.conjectures.X208.x208_stable_set",
+        "GTMisc.conjectures.X29.x29_stable_set",
+        "Packing.conjectures.XE1.xe1_stable_set"
+      ],
+      "consumers_remaining": 10,
+      "compatibility_theorems": [],
+      "upstream_audit": {
+        "searched_modules": ["GraphTheory.dom", "GraphTheory.coloring"],
+        "result": "candidate-found",
+        "candidate": "GraphTheory.dom.stable",
+        "note": "Upstream stable is a boolean predicate with stableP and standard closure lemmas. Directed and undirected local variants must be separated before migration.",
+        "audited_at": "2026-07-22"
+      }
+    },
+    "minimum-degree-at-least": {
+      "canonical_name": null,
+      "owner": "base",
+      "status": "proposed",
+      "fidelity": "PENDING",
+      "normalized_names": ["min_degree_at_least"],
+      "source_definitions": [
+        "Chromatic.conjectures.X203.x203_min_degree_at_least",
+        "Cycle.conjectures.XE2.xe2_min_degree_at_least",
+        "Extremal.conjectures.X13.x13_min_degree_at_least",
+        "Extremal.conjectures.X30.x30_min_degree_at_least",
+        "Extremal.conjectures.XE1.xe1_min_degree_at_least",
+        "GTMisc.conjectures.X38.x38_min_degree_at_least",
+        "GTMisc.conjectures.X74.x74_min_degree_at_least",
+        "Hom.conjectures.X135.x135_min_degree_at_least",
+        "Packing.conjectures.X47.x47_min_degree_at_least"
+      ],
+      "consumers_remaining": 10,
+      "compatibility_theorems": [],
+      "upstream_audit": {
+        "searched_modules": ["GraphTheory.sgraph", "GraphTheory.connectivity"],
+        "result": "no-direct-candidate",
+        "note": "No reusable minimum-degree-at-least declaration was found. A GTBase boolean predicate and reflection lemma are the likely M2 target after checking all local empty-graph conventions.",
+        "audited_at": "2026-07-22"
+      }
+    },
+    "uniform-hypergraph": {
+      "canonical_name": null,
+      "owner": "hypergraph-theory",
+      "status": "proposed",
+      "fidelity": "PENDING",
+      "normalized_names": ["uniform"],
+      "source_definitions": [
+        "Hypergraph.conjectures.X104.x104_uniform",
+        "Hypergraph.conjectures.X108.x108_uniform",
+        "Hypergraph.conjectures.X119.x119_uniform",
+        "Hypergraph.conjectures.X137.x137_uniform",
+        "Hypergraph.conjectures.X209.x209_uniform",
+        "Hypergraph.conjectures.X6.x6_uniform"
+      ],
+      "consumers_remaining": 8,
+      "compatibility_theorems": [],
+      "upstream_audit": {
+        "searched_modules": ["GraphTheory core modules"],
+        "result": "no-direct-candidate",
+        "note": "The installed GraphTheory library has no common finite hypergraph API matching the set-of-sets encodings used by these rows. This belongs in a hypergraph area foundation first.",
+        "audited_at": "2026-07-22"
+      }
+    },
+    "tree-decomposition": {
+      "canonical_name": "GraphTheory.treewidth.sdecomp",
+      "owner": "upstream-adapter",
+      "status": "auditing",
+      "fidelity": "PENDING",
+      "normalized_names": ["tree_decomposition"],
+      "source_definitions": [
+        "Chromatic.conjectures.X126.x126_tree_decomposition",
+        "Chromatic.conjectures.X189.x189_tree_decomposition",
+        "GTMisc.conjectures.X169.x169_tree_decomposition",
+        "Minor.conjectures.X27.x27_tree_decomposition"
+      ],
+      "consumers_remaining": 5,
+      "compatibility_theorems": [],
+      "upstream_audit": {
+        "searched_modules": ["GraphTheory.treewidth", "GraphTheory.sgraph"],
+        "result": "candidate-found",
+        "candidate": "GraphTheory.treewidth.sdecomp",
+        "note": "Upstream sdecomp includes vertex coverage, edge coverage, and connected bags over a forest. Local index-graph and width conventions require conditional comparison in M3.",
+        "audited_at": "2026-07-22"
+      }
+    },
+    "proper-colouring": {
+      "canonical_name": null,
+      "owner": "chromatic-theory",
+      "status": "proposed",
+      "fidelity": "PENDING",
+      "normalized_names": ["proper_colouring"],
+      "source_definitions": [
+        "Chromatic.conjectures.X109.x109_proper_colouring",
+        "Chromatic.conjectures.X162.x162_proper_colouring",
+        "Chromatic.conjectures.X3.x3_proper_colouring",
+        "Chromatic.conjectures.X63.x63_proper_colouring"
+      ],
+      "consumers_remaining": 6,
+      "compatibility_theorems": [],
+      "upstream_audit": {
+        "searched_modules": ["GraphTheory.coloring", "GraphTheory.sgraph"],
+        "result": "representation-mismatch",
+        "candidate": "GraphTheory.coloring.coloring",
+        "note": "Upstream coloring is a partition into stable sets, while these helpers mostly use functions into finite palettes. An area adapter should relate the representations instead of replacing either blindly.",
+        "audited_at": "2026-07-22"
+      }
+    },
+    "matching": {
+      "canonical_name": "GraphTheory.connectivity.matching",
+      "owner": "split-by-representation",
+      "status": "auditing",
+      "fidelity": "PENDING",
+      "normalized_names": ["matching"],
+      "source_definitions": [
+        "Digraph.conjectures.path_fas.matching",
+        "Extremal.conjectures.X180.x180_matching",
+        "GTMisc.conjectures.X14.x14_matching",
+        "Hypergraph.conjectures.X6.x6_matching",
+        "Packing.conjectures.X15.x15_matching",
+        "Packing.conjectures.X15alone.x15_matching"
+      ],
+      "consumers_remaining": 13,
+      "compatibility_theorems": [],
+      "upstream_audit": {
+        "searched_modules": ["GraphTheory.connectivity", "GraphTheory.sgraph"],
+        "result": "candidate-found-with-splits",
+        "candidate": "GraphTheory.connectivity.matching",
+        "note": "Upstream matching covers simple-graph edge sets. The same suffix also names directed, hypergraph, and bipartite relation matchings, so this registry family must split before migration.",
+        "audited_at": "2026-07-22"
+      }
+    }
+  }
+}

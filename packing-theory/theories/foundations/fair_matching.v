@@ -479,13 +479,7 @@ Unset Printing Implicit Defensive.
 (** ** Bridging the X15 vocabulary with coq-graph-theory *********************)
 
 Lemma x15_edge_setE (G : sgraph) : x15_edge_set G = E(G).
-Proof.
-apply/setP => e; apply/idP/idP.
-- rewrite in_set => /existsP [x /existsP [y /andP [xy /eqP ->]]].
-  by rewrite in_edges.
-- case/edgesP => x [y [-> xy]]; rewrite in_set.
-  by apply/existsP; exists x; apply/existsP; exists y; rewrite xy eqxx.
-Qed.
+Proof. by []. Qed.
 
 Lemma matching_x15 (G : sgraph) (M : {set {set G}}) :
   matching M -> x15_matching M.

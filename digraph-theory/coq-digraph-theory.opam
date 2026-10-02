@@ -4,9 +4,9 @@ version: "dev"
 maintainer: "Marc Lelarge <marc.lelarge@gmail.com>"
 authors: [ "Marc Lelarge" ]
 license: "Apache-2.0"
-homepage: "https://github.com/LLM4Rocq/digraph-theory"
-bug-reports: "https://github.com/LLM4Rocq/digraph-theory/issues"
-dev-repo: "git+https://github.com/LLM4Rocq/digraph-theory.git"
+homepage: "https://github.com/LLM4Rocq/graph-theory-rocq"
+bug-reports: "https://github.com/LLM4Rocq/graph-theory-rocq/issues"
+dev-repo: "git+https://github.com/LLM4Rocq/graph-theory-rocq.git"
 
 synopsis: "Directed graphs and tournaments for MathComp (compatibility wrapper)"
 description: """
@@ -26,6 +26,7 @@ depends: [
   "coq-mathcomp-classical"    { >= "1.16.0" }
   "coq-hierarchy-builder"     { >= "1.5.0" }
   "coq-graph-theory"          { >= "0.9.7" }
+  "coq-graph-theory-base"
 ]
 
 tags: [

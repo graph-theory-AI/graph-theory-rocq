@@ -12,8 +12,7 @@ Fixpoint x60_poly_eval (p : seq nat) (x : nat) : nat :=
   if p is a :: q then a + x * x60_poly_eval q x else 0.
 
 Definition x60_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x60_delete_edge_rel (G : sgraph) (e : {set G}) : rel G :=
   fun x y => (x -- y) && ([set x; y] != e).

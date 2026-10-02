@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X77 vocabulary ************************************************)
 
 Definition x77_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x77_separates_edges
     (G : sgraph) (pos : G -> nat) (e f : {set G}) : Prop :=

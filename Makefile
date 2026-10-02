@@ -22,10 +22,12 @@ gate:
 	python3 meta/check_edges.py --assumptions --registry
 	python3 meta/sync_edge_legs.py --check
 	python3 meta/report_corpus_status.py --check --edge-legs
+	python3 meta/library_inventory.py --check
 	python3 meta/check_statement_docs.py
 	@set -e; set -- $(LANDED); while [ $$# -ge 2 ]; do python3 meta/check_milestone.py $$1 $$2; shift 2; done
 	python3 meta/formal_resolutions.py
 	python3 meta/check_gap_repairs.py
+	python3 meta/check_library_migration.py
 
 # Toolchain-free status audit (no Coq build, no external OPG source) — backs the
 # "statement-complete" claim in CI. Only VERIFIES the committed manifest/overlay/report/edge-graph
@@ -41,12 +43,14 @@ audit:
 	python3 meta/sync_edge_legs.py --check
 	python3 meta/report_corpus_status.py --check --edge-legs
 	python3 meta/check_statement_docs.py
+	python3 meta/library_inventory.py --check
 
 mutation:
 	python3 meta/test_formal_resolutions.py
 	python3 meta/test_statement_docs.py
 	python3 meta/test_check_edges.py
 	python3 meta/faithfulness_mutation.py --timeout 900
+	python3 meta/library_inventory.py --validate
 
 # Active vacuity/refutability probe: try to close each `_statement` and its negation with a
 # bounded automation ladder + curated witnesses (meta/probe_hints/). Any statement that is

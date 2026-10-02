@@ -21,8 +21,7 @@ Definition x20_burning_cover (G : sgraph) (t : nat) : Prop :=
       v \in x20_ball (t.-1 - val i) (c i).
 
 Definition x20_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x20_colour_rel
     (G : sgraph) (k : nat) (col : {set G} -> 'I_k) (i : 'I_k) : rel G :=

@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X47 vocabulary ************************************************)
 
 Definition x47_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x47_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
   forall v : G, d <= #|N(v)|.

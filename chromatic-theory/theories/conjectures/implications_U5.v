@@ -272,7 +272,8 @@ Proof. by case/existsP => -[] /eqP <-; rewrite !inE eqxx ?orbT. Qed.
 Lemma bz_ends_in (lo : loopless G) (e : edge G) :
   [set source e; target e] \in x33_edge_set (usimple G).
 Proof.
-rewrite inE; apply/existsP; exists (source e); apply/existsP; exists (target e).
+rewrite /x33_edge_set sg_edge_setE inE; apply/existsP; exists (source e).
+apply/existsP; exists (target e).
 rewrite eqxx andbT; change (madj (source e) (target e)); rewrite /madj (lo e) /=.
 apply/existsP; exists e; apply/andP; split; apply/existsP; [exists false | exists true] => //.
 Qed.
