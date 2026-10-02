@@ -13,6 +13,8 @@ Verifies, against the live opam switch `digraph`:
      source-verification tuple (locator + hash + second-reader identity + date).
   7. no forbidden exact-type faithfulness signatures are committed:
      unconditional refutations of non-disproved rows, or direct proofs of undecided rows.
+  8. prospective v2 waves (X211+) pass hard faithfulness lint and every done row carries
+     independently-audited grounding metadata naming Qed certificates in grounding_<phase>.v.
 Exit 0 iff all pass. Run only inside (or with) the `digraph` switch on PATH.
 """
 import json, os, re, sys, subprocess, glob
@@ -143,6 +145,87 @@ implications = os.path.join(pkg, "theories", "conjectures", f"implications_{phas
 chk(ns, "package known", package if ns else f"unknown package {package}")
 chk(os.path.exists(stmt), "statement file exists", stmt)
 
+# 8) Prospective acceptance policy. Legacy X1-X210 rows remain auditable backlog; X211+
+# cannot reach statement=done without hard lint, an independent wave verdict, and named
+# grounding certificates for inhabited hypotheses / non-triviality / helper sanity.
+policy = json.load(open(os.path.join(META, "faithfulness_policy.json")))
+phase_number = re.fullmatch(r"X(\d+)", phase)
+prospective = CORPUS == "v2" and phase_number \
+    and int(phase_number.group(1)) >= int(policy["prospective_v2_wave_min"])
+grounding_certificates = []
+grounding_type_checks = []
+prospective_errors = []
+if prospective:
+    ownership = subprocess.run(
+        [sys.executable, os.path.join(META, "library_inventory.py"),
+         "--check", "--wave", phase],
+        cwd=MONO, capture_output=True, text=True,
+    )
+    chk(ownership.returncode == 0, "prospective helper ownership",
+        "" if ownership.returncode == 0 else (ownership.stdout + ownership.stderr)[-1000:])
+
+    lint = subprocess.run(
+        [sys.executable, os.path.join(META, "faithfulness_lint.py"),
+         "--files", os.path.relpath(stmt, MONO), "--check"],
+        cwd=MONO, capture_output=True, text=True,
+    )
+    chk(lint.returncode == 0, "prospective hard faithfulness lint",
+        "" if lint.returncode == 0 else (lint.stdout + lint.stderr)[-1000:])
+
+    wave_data = json.load(open(os.path.join(META, "v2_statement_waves.json"))).get("waves", {})
+    matching_waves = [w for w in wave_data.values()
+                      if w.get("phase") == phase and w.get("repo") == package]
+    if len(matching_waves) != 1:
+        prospective_errors.append(f"expected one wave metadata record, found {len(matching_waves)}")
+        wave = {"rows": {}}
+    else:
+        wave = matching_waves[0]
+        reader = wave.get("faithfulness_verified_by")
+        if not reader or not wave.get("faithfulness_result"):
+            prospective_errors.append("wave lacks faithfulness_verified_by/faithfulness_result")
+        if reader and reader == wave.get("implemented_by"):
+            prospective_errors.append("faithfulness_verified_by equals implemented_by")
+
+    manifest_by_slug = {r["slug"]: r for r in REG.load_manifest(CORPUS)["rows"]}
+    statement_rel = os.path.relpath(stmt, MONO).replace(os.sep, "/")
+    try:
+        helper_inventory = json.load(open(os.path.join(META, "library_helper_inventory.json")))
+    except (OSError, json.JSONDecodeError) as exc:
+        prospective_errors.append(f"cannot load helper inventory: {exc}")
+        helper_inventory = {"helpers": []}
+    local_helpers = sorted(
+        helper["name"] for helper in helper_inventory.get("helpers", [])
+        if helper.get("path") == statement_rel
+    )
+    required_fields = policy["grounding"]["required_fields"]
+    required_states = set(policy["grounding"]["required_statement_states"])
+    grounding_src = strip_comments(open(grounding).read()) if os.path.exists(grounding) else ""
+    for slug in slugs:
+        row = manifest_by_slug[slug]
+        state = row.get("legs", {}).get("statement", "todo")
+        if state not in required_states:
+            continue
+        row_wave = wave.get("rows", {}).get(slug, {})
+        spec = row_wave.get("grounding")
+        if not isinstance(spec, dict):
+            prospective_errors.append(f"{slug}: missing grounding metadata object")
+            continue
+        missing_fields = [field for field in required_fields if field not in spec]
+        if missing_fields:
+            prospective_errors.append(f"{slug}: grounding metadata misses {missing_fields}")
+            continue
+        checks, certificate_errors = CONTRACTS.validate_grounding_contract(
+            slug, row["formal_name"], local_helpers, spec, grounding_src
+        )
+        prospective_errors.extend(certificate_errors)
+        grounding_type_checks.extend(checks)
+        grounding_certificates.extend(theorem for theorem, _claim in checks)
+
+    if not os.path.exists(grounding):
+        prospective_errors.append(f"prospective done rows require {os.path.basename(grounding)}")
+    chk(not prospective_errors, "prospective audit + grounding contract",
+        "; ".join(prospective_errors[:8]) if prospective_errors else "")
+
 # 1) every expected formal_name is Defined — search ALL conjecture files, not just
 #    <phase>.v: some milestones (e.g. the absorbed Digraph P9) define "already-formalized"
 #    rows in sibling files (classic_core.v / packing.v / sad.v) re-exported by <phase>.v.
@@ -170,17 +253,60 @@ chk(os.path.exists(cqp) and not notlisted, "files in _CoqProject", f"not listed:
 
 # 3) build sibling dependencies referenced in _CoqProject (e.g. -Q ../base/theories GTBase), then compile
 deps = re.findall(r"-[QR]\s+\.\./([\w.-]+)/theories\s+\S+", cqp_txt)
+# Mutation canaries may request a milestone-scoped build. Their current target
+# files all import GTBase directly and do not import the package-wide optional
+# siblings; normal acceptance never sets this variable.
+scoped_build = os.environ.get("CHECK_MILESTONE_SCOPED_BUILD") == phase
 dep_fail = []
 for dep in deps:
+    if scoped_build and dep != "base":
+        continue
     dpath = os.path.join(MONO, dep)
     if os.path.isfile(os.path.join(dpath, "_CoqProject")):
         dm = run(["bash", "-c", "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"], cwd=dpath)
         if dm.returncode != 0:
             dep_fail.append(dep)
 chk(not dep_fail, f"dependencies build ({', '.join(deps) or 'none'})", f"failed: {dep_fail}" if dep_fail else "")
-mk = run(["bash", "-c", "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"])
-compiles = mk.returncode == 0
-chk(compiles, "package compiles", "" if compiles else (mk.stdout + mk.stderr)[-500:])
+# Mutation canaries exercise this same acceptance logic in isolated workspaces.
+# They request a milestone-scoped build so a canary does not spend its timeout
+# compiling hundreds of unrelated conjecture files. Normal acceptance always
+# builds the full package.
+if scoped_build:
+    scoped_sources = [
+        p for p in (stmt, grounding, implications)
+        if os.path.exists(p)
+    ]
+    # The assumption and faithfulness probes below `Require` every module that defines
+    # an expected name and every module holding a candidate theorem about the
+    # milestone's statements (cross-wave implication files included), so the scoped
+    # build must compile those modules as well, not only the milestone's own files.
+    probe_rels = {
+        os.path.join("theories", "conjectures", defined_in[n] + ".v")
+        for n in expected if n in defined_in
+    }
+    for cands in faithfulness_candidates(
+            pkg, ns, cqp_txt, [n for n in expected if n in defined_in]).values():
+        probe_rels.update(rel for _qname, rel, _decl in cands)
+    scoped_targets = sorted({
+        os.path.relpath(p, pkg)[:-2] + ".vo"
+        for p in scoped_sources
+    } | {rel[:-2] + ".vo" for rel in probe_rels if os.path.exists(os.path.join(pkg, rel))})
+    build_command = (
+        "rocq makefile -f _CoqProject -o Makefile.coq && "
+        "make -f Makefile.coq " + " ".join(scoped_targets)
+    )
+else:
+    build_command = "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"
+mk = run(["bash", "-c", build_command])
+# A package built against a dependency whose own build just failed may only be
+# loading that dependency's stale objects (the mutation canaries hit exactly this
+# after their baseline build), so a failed dependency build voids this check too.
+compiles = mk.returncode == 0 and not dep_fail
+compile_label = "milestone closure compiles" if scoped_build else "package compiles"
+chk(compiles, compile_label,
+    "" if compiles else
+    (f"dependency build failed: {dep_fail}" if dep_fail and mk.returncode == 0
+     else (mk.stdout + mk.stderr)[-500:]))
 
 # 5) no top-level axioms/admits (outside comments)
 axiom_re = re.compile(r"^\s*(Axiom|Parameter|Admitted|Conjecture|Hypothesis|admit)\b", re.M)
@@ -198,8 +324,13 @@ if compiles and ns:
     # import EVERY conjecture module that defines an expected name (not just <phase>.v):
     # milestones like Digraph P9 spread "already-formalized" rows across sibling files.
     mods = sorted({defined_in[n] for n in expected if n in defined_in} | {phase})
-    body = f"From {ns}.conjectures Require Import {' '.join(mods)}.\n" + \
-           "".join(f"Print Assumptions {n}.\n" for n in expected)
+    if grounding_certificates:
+        mods.append(f"grounding_{phase}")
+    assumption_names = expected + grounding_certificates
+    body = f"From {ns}.conjectures Require Import {' '.join(sorted(set(mods)))}.\n" + \
+           "".join(f"Check ({theorem} : {claim}).\nCheck ({claim} : Prop).\n"
+                   for theorem, claim in grounding_type_checks) + \
+           "".join(f"Print Assumptions {n}.\n" for n in assumption_names)
     open(probe, "w").write(body)
     # build coqc include flags as an argv LIST (no shell string interpolation of _CoqProject paths)
     incl_flags = incl_flags_from_cqp(cqp_txt)
@@ -209,13 +340,16 @@ if compiles and ns:
     out = pr.stdout + pr.stderr
     closed = out.count("Closed under the global context")
     has_axioms = "Axioms:" in out
-    assum_ok = (pr.returncode == 0) and (not has_axioms) and (closed == len(expected))
-    assum_detail = "" if assum_ok else f"closed={closed}/{len(expected)} has_axioms={has_axioms}; {out[-300:]}"
+    assum_ok = (pr.returncode == 0) and (not has_axioms) and (closed == len(assumption_names))
+    assum_detail = "" if assum_ok else \
+        f"closed={closed}/{len(assumption_names)} has_axioms={has_axioms}; {out[-300:]}"
     for f in glob.glob(os.path.join(pkg, "theories", "conjectures", f"_assum_{phase}*")) + \
              glob.glob(os.path.join(pkg, "theories", "conjectures", f"._assum_{phase}*")):
         os.remove(f)
-n_axfree = closed if (compiles and ns) else 0
-chk(assum_ok, f"Print Assumptions clean ({n_axfree}/{len(expected)} statements)", assum_detail)
+n_axfree = min(closed, len(expected)) if (compiles and ns) else 0
+chk(assum_ok, f"Print Assumptions clean ({n_axfree}/{len(expected)} statements"
+    + (f" + {len(grounding_certificates)} grounding certificates" if grounding_certificates else "")
+    + ")", assum_detail)
 
 # 7) Exact-type faithfulness probes:
 #    - no unconditional refutation of a non-disproved row;

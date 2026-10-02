@@ -45,6 +45,19 @@ green release) is the standing reminder of why this matters.
   source — with distinct lenses (oracle-attack / mathematician / Rocq-semantics) and a synthesizer.
   These caught the Track-B vacuity, the crossing-number `euler_genus` proxy, and forced several
   over-claimed `done`s down to `partial`. Recorded in each package's `docs/*_AUDIT_NOTES.md`.
+- **Prospective X211 policy**: hard suspicion lint, an independent wave verdict, and typed
+  grounding certificates are acceptance requirements. Each certificate names a `Prop` claim,
+  a distinct proof theorem of exactly that claim, and its row/helper references; Rocq checks the
+  types and assumptions. The same lint is warning-only on the
+  X1-X210 legacy baseline so old risk stays visible without falsifying its historical gate.
+- **Foundation fidelity registry**: explicitly enrolled primitives carry
+  FAITHFUL/LIGHTWEIGHT/BROKEN verdicts; a module default never auto-enrols a later declaration.
+  Statement lint follows local helper definitions and flags use of risky primitives.
+- **Reusable-helper ownership gate**: `meta/library_inventory.py` commits a deterministic inventory
+  of non-statement declarations in conjecture files and reports legacy duplicate families. X211+
+  waves are rejected unless every local helper has a justified `paper_specific` or registered
+  `compatibility_alias` entry in wave metadata. This prevents statement expansion from adding
+  untracked library debt while legacy vocabulary is migrated.
 
 ## Baseline mechanical sweep (current state)
 
@@ -82,7 +95,11 @@ Implement it as a **declaration scanner + Rocq `Check` probe, not a raw regex.**
 `Check (lemma_name : ~ <name>_statement).` and fail **only if Rocq accepts that exact (hypothesis-free)
 type** — and skip the `disproved` row. This decides "is this an *unconditional* refutation of the row?"
 at the type level, immune to the syntactic false positives. The implemented gate also rejects direct
-proofs of manifest `open`/`partial` rows by the same exact-type `Fail Check` mechanism. (The sweep
+proofs of manifest `open`/`partial` rows by the same exact-type `Fail Check` mechanism. Its candidate
+closure follows transparent `Definition`/`Let` aliases and simple identifier `Notation` aliases
+before asking Rocq for the exact type, so renaming the proposition cannot hide a proof. Candidate
+constants include proof declarations, `Definition`, `Let`, and `Instance`; Rocq remains the final
+type authority. (The sweep
 above was the one-shot form; the baseline is clean, and the invariant is now locked into `make gate`.)
 
 ### 2. Settled-case proof applications *(strongest forcing function — follow-up issue #4)*
@@ -120,8 +137,10 @@ definitions:
 - `wagner_planar` weakened to `True`;
 - `has_girth` weakened by dropping the witnessed cycle of length `g`;
 - `strongly_colorable` weakened from "all partitions" to "some partition".
+- X138's class-uniform clustering constant moved inside `forall G`;
+- X125's ratio-to-one `fg_whp` replaced by a fixed 9/10 event threshold.
 
-Current baseline: **7/7 mutants killed**. This is now a standing mutation smoke test for the checks
+Current baseline: **9/9 mutants killed**. This is now a standing mutation smoke test for the checks
 themselves. It is not an exhaustive mutation campaign; add a targeted mutant whenever a new
 load-bearing definition, guard, inequality, or quantifier choice becomes part of a faithfulness claim.
 

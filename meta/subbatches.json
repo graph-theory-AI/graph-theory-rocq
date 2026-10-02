@@ -10,6 +10,9 @@
     "D4doa": "doable infinite-graph rows: finite hex-torus thermodynamic limit + countable K_omega exact-colourings",
     "D6emb": "Wave 1: D6 rows unblocked by the embedding foundation (grunbaum dual / circular embedding / positive curvature)",
     "D3geo": "metric-geometry: small universal point sets (finite geometry over an abstract ordered field)"
+    ,"D3legacy": "remaining blocked D3 rows, gate wrapper over D3D6_unblocked"
+    ,"D4legacy": "remaining blocked/partial D4 rows, including explicit Hamilton double-ray proxies"
+    ,"D6legacy": "remaining blocked D6 non-orientable-embedding row"
   },
   "D2chr": {
     "phase": "D2",
@@ -150,6 +153,33 @@
     "repo": "infinite-graph-theory",
     "slugs": [
       "coloring_the_odd_distance_graph"
+    ]
+  },
+  "D3legacy": {
+    "phase": "D3",
+    "repo": "topological-graph-theory",
+    "slugs": [
+      "3_colourability_of_arrangements_of_great_circles",
+      "drawing_disconnected_graphs_on_surfaces",
+      "obstacle_number_of_planar_graphs",
+      "are_different_notions_of_the_crossing_number_the_same"
+    ]
+  },
+  "D4legacy": {
+    "phase": "D4",
+    "repo": "infinite-graph-theory",
+    "slugs": [
+      "characterizing_aleph_0_aleph_1_graphs",
+      "highly_arc_transitive_two_ended_digraphs",
+      "hamiltonian_cycles_in_line_graphs_of_infinite_graphs",
+      "hamiltonian_cycles_in_powers_of_infinite_graphs"
+    ]
+  },
+  "D6legacy": {
+    "phase": "D6",
+    "repo": "topological-graph-theory",
+    "slugs": [
+      "consecutive_non_orientable_embedding_obstructions"
     ]
   }
 }

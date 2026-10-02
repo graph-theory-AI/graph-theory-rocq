@@ -32,11 +32,13 @@ Flags:
                 report-drift comparison is skipped, the manifest-consistency checks are not
 """
 import json, os, re, sys
+from collections import Counter
 
 META = os.path.dirname(os.path.abspath(__file__))
 MONO = os.path.dirname(META)
 sys.path.insert(0, META)
 import corpus_registry as REG
+import foundation_fidelity as FF
 OUT = os.path.join(META, "CORPUS_STATUS.md")
 
 NS = REG.NS
@@ -66,6 +68,9 @@ base_src = open(os.path.join(MONO, "base", "theories", "base.v")).read()
 surfaces = re.findall(r"^(?:Definition|Notation)\s+([A-Za-z_][A-Za-z0-9_']*)", base_src, re.M)
 surfaces = [s for s in surfaces if not s.startswith(("box_", "tensor_", "line_", "total_", "pow_",
             "sub_", "reach_", "cyc_", "madj", "lo", "hi", "loopless", "share_", "oedge", "SubVert"))]
+
+fidelity_entries, fidelity_errors = FF.expand_registry()
+fidelity_counts = Counter(e["verdict"] for e in fidelity_entries)
 
 def reasons(state):
     out = []
@@ -109,6 +114,21 @@ for r in rows:
 for ph in sorted(by_phase):
     c = count(by_phase[ph])
     w(f"| {ph} | {c['done']} | {c['partial']} | {c['blocked']} | {len(by_phase[ph])} |")
+w("")
+
+# audited shared-foundation trust surface
+w("## Foundation fidelity registry\n")
+w(f"- **{len(fidelity_entries)} audited primitives**: "
+  f"{fidelity_counts['FAITHFUL']} faithful · {fidelity_counts['LIGHTWEIGHT']} lightweight · "
+  f"{fidelity_counts['BROKEN']} broken.")
+w("- Registry: `meta/foundation_fidelity.json`; validate declarations and evidence names with "
+  "`python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is "
+  "never inferred from compilation.\n")
+w("| verdict | primitive | misuse watch |")
+w("|---|---|---|")
+for entry in fidelity_entries:
+    if entry["verdict"] != "FAITHFUL":
+        w(f"| {entry['verdict']} | `{entry['qualified_name']}` | {entry['note']} |")
 w("")
 
 # partial / blocked reasons
@@ -212,9 +232,9 @@ w("## Verifying this claim\n")
 w("Release: **`opg-v1.0.1-227-attempted`** (supersedes `opg-v1.0-227-attempted`, which had a since-fixed "
   "U4 encoding blocker + P9 gate-coverage gap). The git tag pins the exact commit; run the gate at that tag.\n")
 w("CI (toolchain-free — no Coq build, no external OPG clone needed):\n")
-w("```sh\nmake audit   # build_edge_graph.py --check + report_corpus_status.py --check (invariants + no drift)\n```\n")
+w("```sh\nmake audit   # routing fixtures + edge/v2 drift + foundation/inventory/lint/status invariants\n```\n")
 w("Full acceptance (dev environment: Rocq/MathComp toolchain + the OpenProblemGarden clone):\n")
-w("```sh\nmake gate    # regenerates the manifest, then check_milestone for EVERY LANDED milestone:\n"
+w("```sh\nmake gate    # verifies pinned OPG/v2 inputs, then checks every LANDED milestone:\n"
   "             #   compiles, axiom-free, Print Assumptions clean, overlay leg-state justified\n```\n")
 w("Per-row provenance (the commit + package that landed each leg) lives in `meta/opg_legs_state.json`; "
   "routing/source-text provenance in `meta/opg_corpus_manifest.json`.\n")
@@ -306,6 +326,7 @@ GATE_STATUSES = {"open", "partial", "solved", "disproved"}  # exact-type-gate vo
 
 if "--check" in sys.argv:
     errs = []
+    errs.extend(f"foundation fidelity: {error}" for error in fidelity_errors)
     # ── OPG (frozen v1) invariants ──
     FROZEN = REG.CORPORA["opg"]["frozen_total"]
     if total != FROZEN:
@@ -446,6 +467,58 @@ if "--check" in sys.argv:
             errs.append(f"{len(stale_legs)} rows are endpoints of a VERIFIED edge but keep "
                         f"edges=todo (run `python3 meta/sync_edge_legs.py --write`): "
                         f"{stale_legs[:6]}")
+
+        # Keep the public README headline tied to the same canonical counters.
+        readme = re.sub(r"\s+", " ", open(os.path.join(MONO, "README.md")).read())
+        # The headline reads "**D statements done · P partial · B blocked · T todo** over the
+        # N non-alias rows"; both the four leg counts and the non-alias total must match.
+        expected_readme_counts = (
+            f"**{v2_stmt['done']:,} statements done · {v2_stmt['partial']:,} partial · "
+            f"{v2_stmt['blocked']:,} blocked · {v2_stmt['todo']:,} todo**"
+        )
+        expected_readme_total = f"{len(v2_live):,} non-alias"
+        if expected_readme_counts not in readme or expected_readme_total not in readme:
+            errs.append(
+                "README.md v2 headline is stale; expected canonical counts: "
+                f"{expected_readme_counts} over the {expected_readme_total} rows"
+            )
+
+    # Makefile LANDED is the executable acceptance inventory. Every v2 wave cell and every
+    # manifest row must be covered either directly or through an OPG subbatch tag.
+    makefile = open(os.path.join(MONO, "Makefile")).read()
+    landed_match = re.search(r"^LANDED\s*:=\s*(.*)$", makefile, re.M)
+    landed_tokens = landed_match.group(1).split() if landed_match else []
+    if not landed_match or len(landed_tokens) % 2:
+        errs.append("Makefile LANDED is missing or has an odd number of phase/package tokens")
+        landed = set()
+    else:
+        landed = set(zip(landed_tokens[::2], landed_tokens[1::2]))
+
+    waves_path = os.path.join(META, "v2_statement_waves.json")
+    waves = json.load(open(waves_path)).get("waves", {}) if os.path.exists(waves_path) else {}
+    missing_waves = sorted({(w.get("phase"), w.get("repo")) for w in waves.values()} - landed)
+    if missing_waves:
+        errs.append(f"Makefile LANDED misses {len(missing_waves)} v2 wave cells: {missing_waves[:6]}")
+
+    missing_v2_cells = sorted({(r.get("phase"), r.get("repo")) for r in v2rows
+                               if not r.get("alias_of") and r.get("phase") and r.get("repo")} - landed)
+    if missing_v2_cells:
+        errs.append(f"Makefile LANDED misses {len(missing_v2_cells)} v2 manifest cells: "
+                    f"{missing_v2_cells[:6]}")
+
+    subbatch_path = REG.subbatches_path("opg")
+    subbatches = json.load(open(subbatch_path)) if os.path.exists(subbatch_path) else {}
+    covered_subbatch_rows = set()
+    for tag, spec in subbatches.items():
+        if tag.startswith("_") or (tag, spec.get("repo")) not in landed:
+            continue
+        covered_subbatch_rows.update(spec.get("slugs", []))
+    uncovered_opg = [r["slug"] for r in rows
+                     if (r.get("phase"), r.get("repo")) not in landed
+                     and r["slug"] not in covered_subbatch_rows]
+    if uncovered_opg:
+        errs.append(f"Makefile LANDED/subbatches leave {len(uncovered_opg)} OPG rows ungated: "
+                    f"{uncovered_opg[:6]}")
     drift_checked = "--relations" not in sys.argv     # a candidate relations file != the report's input
     if drift_checked:
         committed = open(OUT).read() if os.path.exists(OUT) else ""

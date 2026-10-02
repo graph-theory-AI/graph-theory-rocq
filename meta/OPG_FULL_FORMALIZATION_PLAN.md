@@ -677,11 +677,12 @@ gates pass — and individual `requires_planarity` rows stay `blocked` until G2.
   per-row `phase`/`repo`/`formal_name`/`tier`/`status`+`status_semantics`/completion `legs` +
   full provenance (`canonical_url`, verbatim `source_text`, exact `source_propositions`, source
   commits). Counts reconcile (142 core / 85 deferred / 227). Re-route by editing `phase`/`repo`.
-- **`scripts/build_opg_manifest.py`** — the deterministic generator/gate: reads
-  `docs/opg_full_classification.json` (+ the `graph-conjectures` corpus for provenance), writes
-  `docs/opg_corpus_manifest.json` **byte-identically**, and asserts every invariant (227 unique
+- **`meta/build_opg_manifest.py`** — the deterministic generator/gate: reads
+  `meta/opg_full_classification.json` plus the commit- and hash-validated `graph-conjectures`
+  corpus, checks or writes `meta/opg_corpus_manifest.json` **byte-identically**, and asserts every invariant (227 unique
   valid Rocq identifiers, 142/85 reconciliation, no empty propositions, exact non-open semantics,
-  no unresolved routing). Run `python3 scripts/build_opg_manifest.py` to re-verify; wire into CI.
+  no unresolved routing). Run `python3 meta/build_opg_manifest.py --check` to re-verify or pass
+  `--write` explicitly to refresh; CI checks the pinned upstream snapshot without writing.
 - **`docs/opg_full_classification.json`** — the raw 16-classifier output the manifest is built
   from (bucket, reuse/new-primitive tags, Rocq idiom). Superseded as worklist by the manifest.
 - **`docs/area_milestone_pipeline.workflow.js`** — the per-milestone QA driver (§7.1, v3;

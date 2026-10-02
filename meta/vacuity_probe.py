@@ -7,7 +7,7 @@ for a trivial proof of each statement.  This probe closes that gap: for every `_
 tries to close both `<stmt>` and `~ <stmt>` and flags any statement a bounded automation budget
 (or a curated witness) can settle — a formalized open conjecture should be settleable by neither.
 
-Two complementary layers:
+Three complementary layers:
 
   1. AUTO tripwire (fully generic, zero per-statement input): a ssreflect/`eauto`/`firstorder`
      tactic ladder.  High precision, but low recall on statements whose refutation needs a bespoke
@@ -17,6 +17,11 @@ Two complementary layers:
      proof.  If it compiles, the statement is settleable ⇒ FLAG.  These capture the bespoke
      counterexamples the auto layer cannot find, and double as fix-verification: once a statement
      is corrected, its witness must STOP compiling (the probe reports `hint-stale-FIX-OK`).
+
+  3. INSTANTIATION / small-model probes: specialize leading nat and sgraph quantifiers at
+     0, 1, the empty graph, and complete labelled graphs K_1..K_6, then rerun the tactic ladder
+     with `vm_compute`. This mechanizes the degenerate-parameter and K_6-style checks without
+     pretending to be a complete finite-model finder.
 
 Usage:
   python3 meta/vacuity_probe.py --names foo_statement,bar_statement   # probe specific statements
@@ -28,7 +33,7 @@ Runs with the coqc on PATH, or through `opam exec --switch $ROCQ_OPAM_SWITCH` wh
 Exit code 0 iff nothing was FLAGGED (suitable for `make probe`).
 """
 from __future__ import annotations
-import argparse, json, os, re, subprocess, sys, tempfile
+import argparse, concurrent.futures, itertools, json, os, re, subprocess, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -53,11 +58,53 @@ STMT_RE = re.compile(r"^Definition\s+([A-Za-z0-9_']+_statement)\b", re.M)
 LADDER = r"""
 Ltac __probe :=
   solve
-    [ done | by [] | trivial | now firstorder | typeclasses eauto
+    [ done | by [] | trivial | now firstorder | typeclasses eauto | now vm_compute
     | now eauto 6
     | (do 12 (try eexists)); now eauto 6
     | (hnf; intros; solve [ done | by [] | now firstorder | now eauto 6 ]) ].
 """.strip()
+
+# Specialization is repeated over several concrete parameters, so its ladder must stay
+# sharply bounded. Bespoke pigeonhole/counting arguments belong in probe_hints instead.
+SMALL_LADDER = r"""
+Ltac __small_probe :=
+  solve [ done | by [] | trivial | congruence | now vm_compute ].
+""".strip()
+
+
+def strip_comments(src: str) -> str:
+    out: list[str] = []
+    i = depth = 0
+    while i < len(src):
+        if src.startswith("(*", i):
+            depth += 1; out.extend("  "); i += 2
+        elif depth and src.startswith("*)", i):
+            depth -= 1; out.extend("  "); i += 2
+        elif depth:
+            out.append("\n" if src[i] == "\n" else " "); i += 1
+        else:
+            out.append(src[i]); i += 1
+    return "".join(out)
+
+
+def sentence_end(src: str, start: int) -> int:
+    i = start
+    while True:
+        j = src.find(".", i)
+        if j < 0:
+            return len(src)
+        if not src[j + 1:j + 2] or src[j + 1:j + 2].isspace():
+            return j + 1
+        i = j + 1
+
+
+def statement_bodies(src: str) -> dict[str, str]:
+    clean = strip_comments(src)
+    out = {}
+    for match in STMT_RE.finditer(clean):
+        command = clean[match.start():sentence_end(clean, match.start())]
+        out[match.group(1)] = command.split(":=", 1)[1] if ":=" in command else ""
+    return out
 
 
 def sh(args, timeout):
@@ -84,9 +131,9 @@ def area_flags(area: str) -> list[str]:
     return flags
 
 
-def build_index() -> dict[str, tuple[str, str, str]]:
-    """statement_name -> (area, module_stem, namespace)."""
-    idx: dict[str, tuple[str, str, str]] = {}
+def build_index() -> dict[str, tuple[str, str, str, str]]:
+    """statement_name -> (area, module_stem, namespace, unfolded source body)."""
+    idx: dict[str, tuple[str, str, str, str]] = {}
     for vf in ROOT.glob("*/theories/conjectures/*.v"):
         area = vf.relative_to(ROOT).parts[0]
         ns = REG.NS.get(area)
@@ -96,8 +143,8 @@ def build_index() -> dict[str, tuple[str, str, str]]:
             text = vf.read_text()
         except Exception:
             continue
-        for name in STMT_RE.findall(text):
-            idx[name] = (area, vf.stem, ns)
+        for name, body in statement_bodies(text).items():
+            idx[name] = (area, vf.stem, ns, body)
     return idx
 
 
@@ -125,10 +172,83 @@ def compile_hint(area: str, hint: Path, timeout: int) -> bool:
         return rc == 0
 
 
+def leading_binder_types(body: str, limit: int = 2) -> list[str]:
+    """Parse the simple leading forall syntax used by conjecture statements."""
+    rest = body.strip()
+    types: list[str] = []
+    while len(types) < limit and rest.startswith("forall"):
+        rest = rest[len("forall"):].lstrip()
+        groups = []
+        while rest.startswith("("):
+            end = rest.find(")")
+            if end < 0:
+                return types
+            groups.append(rest[1:end])
+            rest = rest[end + 1:].lstrip()
+        if groups:
+            if not rest.startswith(","):
+                return types
+            rest = rest[1:].lstrip()
+            for group in groups:
+                if ":" not in group:
+                    return types
+                names, typ = group.split(":", 1)
+                types.extend([typ.strip()] * len(names.split()))
+                if len(types) >= limit:
+                    return types[:limit]
+            continue
+        match = re.match(
+            r"([A-Za-z_][A-Za-z0-9_']*(?:\s+[A-Za-z_][A-Za-z0-9_']*)*)\s*:\s*([^,]+),",
+            rest,
+        )
+        if not match:
+            return types
+        types.extend([match.group(2).strip()] * len(match.group(1).split()))
+        rest = rest[match.end():].lstrip()
+    return types[:limit]
+
+
+def small_terms(typ: str) -> list[str]:
+    compact = re.sub(r"\s+", "", typ)
+    if compact == "nat":
+        return ["0", "1"]
+    if compact == "sgraph":
+        return [
+            f"(@fg_mk_sgraph 'I_{n} (fun x y : 'I_{n} => x != y))"
+            for n in range(7)
+        ]
+    if compact == "finType":
+        return ["'I_0", "'I_1"]
+    if compact == "bool":
+        return ["false", "true"]
+    return []
+
+
+def compile_instantiations(area: str, ns: str, stem: str, name: str, body: str,
+                           timeout: int) -> tuple[bool, str]:
+    binder_types = leading_binder_types(body)
+    term_sets = [small_terms(typ) for typ in binder_types]
+    if not term_sets or any(not terms for terms in term_sets):
+        return False, "<no-supported-leading-binders>"
+    combinations = list(itertools.product(*term_sets))[:16]
+    commands = ["From GTBase Require Import finite_graph.", SMALL_LADDER]
+    for i, terms in enumerate(combinations):
+        specialize = " ".join(f"specialize (H {term});" for term in terms)
+        commands.append(
+            f"Fail Definition __probe_inst_{i} : ~ ({name}) := "
+            f"ltac:(move=> H; rewrite /{name} in H; {specialize} __small_probe)."
+        )
+    ok, log = compile_snippet(area, ns, stem, "\n".join(commands), timeout)
+    # All attempted definitions are expected to fail. If one unexpectedly succeeds, Rocq
+    # rejects its `Fail` wrapper with this diagnostic: that specialization settled the row.
+    settled = (not ok) and "The command has not failed" in log
+    return settled, log
+
+
 def probe_statement(name: str, idx, timeout: int) -> dict:
     if name not in idx:
         return {"name": name, "status": "NOT-FOUND", "flag": False}
-    area, stem, ns = idx[name]
+    area, stem, ns, body = idx[name]
     # Layer 1: auto tripwire, both polarities.
     ok_true, _ = compile_snippet(area, ns, stem, f"{LADDER}\nLemma __pt : {name}. Proof. __probe. Qed.", timeout)
     ok_false, _ = compile_snippet(area, ns, stem, f"{LADDER}\nLemma __pf : ~ ({name}). Proof. __probe. Qed.", timeout)
@@ -137,10 +257,12 @@ def probe_statement(name: str, idx, timeout: int) -> dict:
     hint_state = "none"
     if hint.exists():
         hint_state = "settles" if compile_hint(area, hint, timeout) else "stale-FIX-OK"
-    flag = ok_true or ok_false or hint_state == "settles"
+    instantiation, _ = compile_instantiations(area, ns, stem, name, body, timeout)
+    flag = ok_true or ok_false or hint_state == "settles" or instantiation
     return {
         "name": name, "area": area, "flag": flag,
-        "auto_true": ok_true, "auto_false": ok_false, "hint": hint_state,
+        "auto_true": ok_true, "auto_false": ok_false, "instantiation": instantiation,
+        "hint": hint_state,
         "status": "FLAGGED" if flag else "ok",
     }
 
@@ -160,17 +282,23 @@ def names_from_files(files: list[str]) -> list[str]:
 
 def report(rows: list[dict]) -> int:
     flagged = [r for r in rows if r.get("flag")]
-    print(f"\n{'statement':52s} {'auto=T':6s} {'auto=F':6s} {'hint':14s} verdict")
-    print("-" * 92)
+    print(f"\n{'statement':52s} {'auto=T':6s} {'auto=F':6s} {'small':6s} {'hint':14s} verdict")
+    print("-" * 100)
     for r in sorted(rows, key=lambda r: (not r.get("flag"), r["name"])):
         if r.get("status") == "NOT-FOUND":
-            print(f"{r['name']:52s} {'-':6s} {'-':6s} {'-':14s} NOT-FOUND")
+            print(f"{r['name']:52s} {'-':6s} {'-':6s} {'-':6s} {'-':14s} NOT-FOUND")
             continue
         print(f"{r['name']:52s} {str(r['auto_true']):6s} {str(r['auto_false']):6s} "
+              f"{str(r['instantiation']):6s} "
               f"{r['hint']:14s} {'*** FLAGGED ***' if r['flag'] else 'ok'}")
-    print("-" * 92)
+    print("-" * 100)
     print(f"{len(rows)} probed · {len(flagged)} FLAGGED")
     return 1 if flagged else 0
+
+
+def probe_many(names: list[str], idx, timeout: int, jobs: int) -> list[dict]:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, jobs)) as pool:
+        return list(pool.map(lambda name: probe_statement(name, idx, timeout), names))
 
 
 # --- self-test: two independent guards + a false-positive control ---
@@ -198,7 +326,7 @@ def recall_flags(idx, timeout: int) -> bool:
     ctx = next((idx[n] for n in HISTORICAL_FIXES if n in idx), None) or next(iter(idx.values()), None)
     if ctx is None:
         return False
-    area, stem, ns = ctx
+    area, stem, ns, _body = ctx
     body = (f"{LADDER}\n"
             f"Definition __probe_selftest_vacuous_statement : Prop := True.\n"
             f"Lemma __pt : __probe_selftest_vacuous_statement. Proof. __probe. Qed.")
@@ -206,7 +334,23 @@ def recall_flags(idx, timeout: int) -> bool:
     return ok
 
 
-def validate(idx, timeout: int) -> int:
+def recall_instantiations(idx, timeout: int) -> bool:
+    """The specialized small-model path must refute `forall n, 0 < n` at n=0."""
+    ctx = next(iter(idx.values()), None)
+    if ctx is None:
+        return False
+    area, stem, ns, _body = ctx
+    fixture = (f"{LADDER}\n"
+               "Definition __probe_inst_fixture_statement : Prop := forall n : nat, 0 < n.\n"
+               "Definition __probe_inst_fixture_refutation : "
+               "~ __probe_inst_fixture_statement := "
+               "ltac:(move=> H; rewrite /__probe_inst_fixture_statement in H; "
+               "specialize (H 0); __probe).")
+    ok, _ = compile_snippet(area, ns, stem, fixture, timeout)
+    return ok
+
+
+def validate(idx, timeout: int, jobs: int) -> int:
     """Self-test.  Exits 0 in a healthy tree; exits 1 if EITHER a historical fix is reverted
     (regression) OR the recall fixture stops flagging OR a control produces a false positive.
 
@@ -217,7 +361,7 @@ def validate(idx, timeout: int) -> int:
       (c) CONTROL — known-good statements must stay ok (no false positives).
     """
     print("== REGRESSION: historical fixes — hints must be stale-FIX-OK (NOT flagged) ==")
-    b = [probe_statement(n, idx, timeout) for n in HISTORICAL_FIXES]
+    b = probe_many(HISTORICAL_FIXES, idx, timeout, jobs)
     report(b)
     reverted = [r for r in b if r.get("flag") or r.get("hint") != "stale-FIX-OK"]
     for r in reverted:
@@ -229,17 +373,22 @@ def validate(idx, timeout: int) -> int:
     print(f"synthetic trivially-true statement flagged by AUTO tripwire: {recall_ok}   (want True)")
     if not recall_ok:
         print("!! RECALL: the flagging path did not fire on a trivially-true statement")
+    instantiation_ok = recall_instantiations(idx, timeout)
+    print(f"synthetic forall-n statement refuted at n=0:             {instantiation_ok}   (want True)")
+    if not instantiation_ok:
+        print("!! RECALL: the instantiation/small-model path did not fire")
 
     print("\n== CONTROL: known-good — should stay ok ==")
-    g = [probe_statement(n, idx, timeout) for n in CONTROL_GOOD]
+    g = probe_many(CONTROL_GOOD, idx, timeout, jobs)
     report(g)
     fp = sum(r["flag"] for r in g)
 
     print("\n== summary ==")
     print(f"regression (historical fixes stale-FIX-OK): {'PASS' if not reverted else 'FAIL'}")
     print(f"recall (synthetic vacuous flagged):         {'PASS' if recall_ok else 'FAIL'}")
+    print(f"recall (small-model specialization):        {'PASS' if instantiation_ok else 'FAIL'}")
     print(f"control false-positives:                    {fp}/{len(g)}   (want 0)")
-    return 0 if (not reverted and recall_ok and fp == 0) else 1
+    return 0 if (not reverted and recall_ok and instantiation_ok and fp == 0) else 1
 
 
 def main():
@@ -248,10 +397,11 @@ def main():
     ap.add_argument("--wave"); ap.add_argument("--all", action="store_true")
     ap.add_argument("--validate", action="store_true")
     ap.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT)
+    ap.add_argument("--jobs", type=int, default=4)
     a = ap.parse_args()
     idx = build_index()
     if a.validate:
-        sys.exit(validate(idx, a.timeout))
+        sys.exit(validate(idx, a.timeout, a.jobs))
     if a.names:
         names = a.names.split(",")
     elif a.files:
@@ -262,7 +412,7 @@ def main():
         names = sorted(idx)
     else:
         ap.error("one of --names/--files/--wave/--all/--validate required")
-    sys.exit(report([probe_statement(n.strip(), idx, a.timeout) for n in names]))
+    sys.exit(report(probe_many([n.strip() for n in names], idx, a.timeout, a.jobs)))
 
 
 if __name__ == "__main__":

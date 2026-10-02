@@ -1,11 +1,11 @@
 {
   "counts": {
-    "files": 318,
-    "helpers": 2528,
+    "files": 321,
+    "helpers": 2537,
     "repeated_body_shapes": 131,
     "repeated_normalized_names": 205,
-    "repeated_signature_shapes": 296,
-    "statements_excluded": 698,
+    "repeated_signature_shapes": 297,
+    "statements_excluded": 700,
     "x_wave_helpers": 1395
   },
   "groups": {
@@ -884,6 +884,8 @@
         "Infinite.conjectures.D4doa.hadj_sym",
         "Infinite.conjectures.D4inf5.odd_dist_irr",
         "Infinite.conjectures.D4inf5.odd_dist_sym",
+        "Infinite.conjectures.D4legacy.iline_adj_irr",
+        "Infinite.conjectures.D4legacy.iline_adj_sym",
         "Minor.conjectures.X220.x220_wall_irrefl",
         "Minor.conjectures.X220.x220_wall_sym",
         "Minor.conjectures.X42.x42_diamond_irrefl",
@@ -2617,6 +2619,10 @@
         "Cycle.conjectures.X9.x9_cycle_chord_count",
         "Extremal.conjectures.XE2.xe2_cycle_diagonal_count"
       ],
+      "40b979a5b8f4eb580c82fc97d27396ad03f43288ac94369c0aacbac48d2d3c10": [
+        "Infinite.conjectures.D4legacy.i_edge_connected_at_least",
+        "Infinite.conjectures.D4legacy.i_vertex_connected_at_least"
+      ],
       "41fab84d37ac3b011db046859423b1294bbc8ec0fff945e3540b3b4f194af77c": [
         "Minor.conjectures.U7.apex",
         "Topological.conjectures.U13.union_of_two_planar"
@@ -2922,7 +2928,9 @@
         "Infinite.conjectures.D4inf2.proper_self_minor",
         "Infinite.conjectures.D4inf3.locally_finite",
         "Infinite.conjectures.D4inf3.one_ended",
-        "Infinite.conjectures.D4inf3.uniquely_hamiltonian"
+        "Infinite.conjectures.D4inf3.uniquely_hamiltonian",
+        "Infinite.conjectures.D4legacy.i_connected",
+        "Infinite.conjectures.D4legacy.i_hamilton_circle_proxy"
       ],
       "7a50000e84e0ac09403c0cc318047e591b6ab93e490ab9f8b5d13add45415dbb": [
         "Chromatic.conjectures.X124.x124_poly_eval",
@@ -48143,6 +48151,194 @@
       "qualified_name": "Infinite.conjectures.D4inf5.n_colorable",
       "signature": "(S : seq oddpt) (n : nat) : Prop",
       "signature_shape_hash": "52784e8dd7a50476042b1a3944da4d6a0177cd162c187000a2cc6ad984b679a1"
+    },
+    {
+      "body_hash": "a73cc3dd7dad86f37c30b247a30db2b9ce08c525cc9bb0b8c6d2b418d822ddb7",
+      "body_shape_hash": "a73cc3dd7dad86f37c30b247a30db2b9ce08c525cc9bb0b8c6d2b418d822ddb7",
+      "declaration_hash": "7bd66bd8d1190f5b0c58728b00952981468e1335bba16e2718afa8fc6bd3b9f1",
+      "direct_consumers": [
+        "Infinite.conjectures.D4legacy.iline_adj"
+      ],
+      "kind": "Record",
+      "line": 16,
+      "local_dependencies": [],
+      "name": "iedge_vertex",
+      "normalized_name": "iedge_vertex",
+      "package": "infinite-graph-theory",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "phase": null,
+      "qualified_name": "Infinite.conjectures.D4legacy.iedge_vertex",
+      "signature": "(G : iGraph)",
+      "signature_shape_hash": "5f406c9ceea93a29933219ad8c27b4ffe4bc0cd59941f57daec69fc0d79a88d2"
+    },
+    {
+      "body_hash": "399b4a45e186f656e06828d0d9d0da7a1ca5d45cde626d6d016af29b9d7617c8",
+      "body_shape_hash": "399b4a45e186f656e06828d0d9d0da7a1ca5d45cde626d6d016af29b9d7617c8",
+      "declaration_hash": "09053804668875751ed6b86aeed1d001bc7b7e2ea2db347e448cdbf40a3ab437",
+      "direct_consumers": [
+        "Infinite.conjectures.D4legacy.iline_adj_irr",
+        "Infinite.conjectures.D4legacy.iline_adj_sym"
+      ],
+      "kind": "Definition",
+      "line": 22,
+      "local_dependencies": [
+        "iedge_vertex"
+      ],
+      "name": "iline_adj",
+      "normalized_name": "iline_adj",
+      "package": "infinite-graph-theory",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "phase": null,
+      "qualified_name": "Infinite.conjectures.D4legacy.iline_adj",
+      "signature": "(G : iGraph) (e f : iedge_vertex G) : Prop",
+      "signature_shape_hash": "d51de14207d06c55ad04ca539f100376fe88e9d36fd258dad994287b0d40f9e6"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "08654f26be5d6667682e20dc15daf03d40d57e4da093873e2d936096dd27b1e4",
+      "direct_consumers": [
+        "Infinite.conjectures.D4legacy.iline_graph"
+      ],
+      "kind": "Lemma",
+      "line": 27,
+      "local_dependencies": [
+        "iline_adj"
+      ],
+      "name": "iline_adj_sym",
+      "normalized_name": "iline_adj_sym",
+      "package": "infinite-graph-theory",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "phase": null,
+      "qualified_name": "Infinite.conjectures.D4legacy.iline_adj_sym",
+      "signature": "(G : iGraph) : irel_sym (@iline_adj G)",
+      "signature_shape_hash": "c2d1226a387a3e52ab61e47b2920518fe51f7a3d4212c1b1596e81f3a29d462f"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "1cdee8d8e54565b4069790a7b7a3a1bca5b8a1fbd6d64febcc3bea0a3d4cf676",
+      "direct_consumers": [
+        "Infinite.conjectures.D4legacy.iline_graph"
+      ],
+      "kind": "Lemma",
+      "line": 38,
+      "local_dependencies": [
+        "iline_adj"
+      ],
+      "name": "iline_adj_irr",
+      "normalized_name": "iline_adj_irr",
+      "package": "infinite-graph-theory",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "phase": null,
+      "qualified_name": "Infinite.conjectures.D4legacy.iline_adj_irr",
+      "signature": "(G : iGraph) : irel_irr (@iline_adj G)",
+      "signature_shape_hash": "89ccce885211b64da240f57a73c3d8cfa61392af87e5889995584e6fdd61957a"
+    },
+    {
+      "body_hash": "39f5a77f1e632f8f8d733215acb2f2b40b5e53c676f9fdd934f346ee3c8fa254",
+      "body_shape_hash": "39f5a77f1e632f8f8d733215acb2f2b40b5e53c676f9fdd934f346ee3c8fa254",
+      "declaration_hash": "87a1ec737ae9fc732c4ba52371c8ea2b911b0189420d1d393a5698ad678e1d83",
+      "direct_consumers": [
+        "Infinite.conjectures.D4legacy.hamiltonian_cycles_in_line_graphs_of_infinite_graphs_statement",
+        "Infinite.conjectures.D4legacy.i_edge_connected_at_least"
+      ],
+      "kind": "Definition",
+      "line": 41,
+      "local_dependencies": [
+        "iline_adj_irr",
+        "iline_adj_sym"
+      ],
+      "name": "iline_graph",
+      "normalized_name": "iline_graph",
+      "package": "infinite-graph-theory",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "phase": null,
+      "qualified_name": "Infinite.conjectures.D4legacy.iline_graph",
+      "signature": "(G : iGraph) : iGraph",
+      "signature_shape_hash": "04489eb206cf7b3402e6bb34f9ee9a86383c1625661d40fa8b288b7b80ad42ae"
+    },
+    {
+      "body_hash": "2e4aac03d7e5bf71b59893170b0b52c1370b1c5cf25d06bb59d40a11abdfd32e",
+      "body_shape_hash": "2e4aac03d7e5bf71b59893170b0b52c1370b1c5cf25d06bb59d40a11abdfd32e",
+      "declaration_hash": "43aaf8a02ef888b5c344d4f4a562e1398f5b5803c035bfcc5e22f0d47d30f911",
+      "direct_consumers": [
+        "Infinite.conjectures.D4legacy.hamiltonian_cycles_in_powers_of_infinite_graphs_statement"
+      ],
+      "kind": "Definition",
+      "line": 44,
+      "local_dependencies": [],
+      "name": "i_connected",
+      "normalized_name": "i_connected",
+      "package": "infinite-graph-theory",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "phase": null,
+      "qualified_name": "Infinite.conjectures.D4legacy.i_connected",
+      "signature": "(G : iGraph) : Prop",
+      "signature_shape_hash": "78dbca59ee3fa7cae14ae7662336d2b29d7b737fb6152620f7dd662b304c6c9a"
+    },
+    {
+      "body_hash": "06a2bf6601696b596687ff2ade57730bb17856067882435c71778de4c244fd1b",
+      "body_shape_hash": "06a2bf6601696b596687ff2ade57730bb17856067882435c71778de4c244fd1b",
+      "declaration_hash": "ee0c6f695b4e33a7d5a2b1a3cf0b627114ee18a83290870ca97a330ec05e3817",
+      "direct_consumers": [
+        "Infinite.conjectures.D4legacy.hamiltonian_cycles_in_line_graphs_of_infinite_graphs_statement",
+        "Infinite.conjectures.D4legacy.hamiltonian_cycles_in_powers_of_infinite_graphs_statement",
+        "Infinite.conjectures.D4legacy.i_edge_connected_at_least"
+      ],
+      "kind": "Definition",
+      "line": 47,
+      "local_dependencies": [],
+      "name": "i_vertex_connected_at_least",
+      "normalized_name": "i_vertex_connected_at_least",
+      "package": "infinite-graph-theory",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "phase": null,
+      "qualified_name": "Infinite.conjectures.D4legacy.i_vertex_connected_at_least",
+      "signature": "(k : nat) (G : iGraph) : Prop",
+      "signature_shape_hash": "40b979a5b8f4eb580c82fc97d27396ad03f43288ac94369c0aacbac48d2d3c10"
+    },
+    {
+      "body_hash": "0fa19b7d9fbde70bc6844e3f59c196ab946f5db876dd3ab661f31707f3f9a8ae",
+      "body_shape_hash": "0fa19b7d9fbde70bc6844e3f59c196ab946f5db876dd3ab661f31707f3f9a8ae",
+      "declaration_hash": "d9c4fc2dc1d3d3a9bd5aefcad55eeba8f9ec3ef0ae96e98d4c477776b1427cc1",
+      "direct_consumers": [
+        "Infinite.conjectures.D4legacy.hamiltonian_cycles_in_line_graphs_of_infinite_graphs_statement"
+      ],
+      "kind": "Definition",
+      "line": 52,
+      "local_dependencies": [
+        "i_vertex_connected_at_least",
+        "iline_graph"
+      ],
+      "name": "i_edge_connected_at_least",
+      "normalized_name": "i_edge_connected_at_least",
+      "package": "infinite-graph-theory",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "phase": null,
+      "qualified_name": "Infinite.conjectures.D4legacy.i_edge_connected_at_least",
+      "signature": "(k : nat) (G : iGraph) : Prop",
+      "signature_shape_hash": "40b979a5b8f4eb580c82fc97d27396ad03f43288ac94369c0aacbac48d2d3c10"
+    },
+    {
+      "body_hash": "55d07f25300f6806ceebf40a2e3308167d3335a36d6a0643b60bd887b82b9891",
+      "body_shape_hash": "55d07f25300f6806ceebf40a2e3308167d3335a36d6a0643b60bd887b82b9891",
+      "declaration_hash": "f0663f3d1cb0fb91db84944060b7b3606eb2932872c1b9f451e16b5721833e1b",
+      "direct_consumers": [
+        "Infinite.conjectures.D4legacy.hamiltonian_cycles_in_line_graphs_of_infinite_graphs_statement",
+        "Infinite.conjectures.D4legacy.hamiltonian_cycles_in_powers_of_infinite_graphs_statement"
+      ],
+      "kind": "Definition",
+      "line": 55,
+      "local_dependencies": [],
+      "name": "i_hamilton_circle_proxy",
+      "normalized_name": "i_hamilton_circle_proxy",
+      "package": "infinite-graph-theory",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "phase": null,
+      "qualified_name": "Infinite.conjectures.D4legacy.i_hamilton_circle_proxy",
+      "signature": "(G : iGraph) : Prop",
+      "signature_shape_hash": "78dbca59ee3fa7cae14ae7662336d2b29d7b737fb6152620f7dd662b304c6c9a"
     },
     {
       "body_hash": "38890918e1cd1841d6c0bd34795880f72e17d6a3d20f21af18e718a47ed3595b",

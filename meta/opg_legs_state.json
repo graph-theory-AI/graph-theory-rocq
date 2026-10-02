@@ -1803,7 +1803,7 @@
     },
     "3_colourability_of_arrangements_of_great_circles": {
       "statement": "blocked",
-      "grounding": "done",
+      "grounding": "blocked",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
@@ -1813,7 +1813,7 @@
     },
     "are_different_notions_of_the_crossing_number_the_same": {
       "statement": "blocked",
-      "grounding": "done",
+      "grounding": "blocked",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
@@ -1833,7 +1833,7 @@
     },
     "drawing_disconnected_graphs_on_surfaces": {
       "statement": "blocked",
-      "grounding": "done",
+      "grounding": "blocked",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
@@ -1843,7 +1843,7 @@
     },
     "obstacle_number_of_planar_graphs": {
       "statement": "blocked",
-      "grounding": "done",
+      "grounding": "blocked",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
@@ -1863,7 +1863,7 @@
     },
     "consecutive_non_orientable_embedding_obstructions": {
       "statement": "blocked",
-      "grounding": "done",
+      "grounding": "blocked",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
@@ -1939,7 +1939,7 @@
       "audit_page": "todo",
       "commit": "b300860",
       "package": "infinite-graph-theory",
-      "note": "iGraph carrier suffices; needs infinite Hamiltonicity (topological double-ray cycles)"
+      "note": "PARTIAL proxy, explicit statement in Infinite.conjectures.D4legacy: Hamilton circle rendered by the D4inf3 spanning double-ray proxy; edge-connectivity rendered as kappa(L(G))>=4. infinite_graph guard added by audit 2026-07-22 (load-bearing: finite carriers refute the unguarded double-ray proxy while the source holds there via finite Hamilton cycles). Needs the topological circle layer to return to done."
     },
     "hamiltonian_cycles_in_powers_of_infinite_graphs": {
       "statement": "partial",
@@ -1949,7 +1949,7 @@
       "audit_page": "todo",
       "commit": "b300860",
       "package": "infinite-graph-theory",
-      "note": "iGraph carrier suffices; needs infinite Hamiltonicity"
+      "note": "PARTIAL proxy, explicit statement in Infinite.conjectures.D4legacy: cube/square Hamilton circles via the spanning double-ray proxy. infinite_graph guard added by audit 2026-07-22 (unguarded form was machine-refuted axiom-free at K_1). Needs the topological circle layer to return to done."
     },
     "infinite_uniquely_hamiltonian_graphs": {
       "statement": "partial",
@@ -1993,7 +1993,7 @@
     },
     "characterizing_aleph_0_aleph_1_graphs": {
       "statement": "blocked",
-      "grounding": "done",
+      "grounding": "blocked",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
@@ -2013,7 +2013,7 @@
     },
     "highly_arc_transitive_two_ended_digraphs": {
       "statement": "blocked",
-      "grounding": "done",
+      "grounding": "blocked",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import re
+import sys
 from collections.abc import Iterable
 
 
@@ -183,3 +184,156 @@ def namespace_from_cqp(cqp_txt: str) -> str | None:
     """The package's own logical namespace: the ``-R theories <NS>`` binding."""
     m = re.search(r"^\s*-R\s+theories\s+(\S+)", cqp_txt, re.M)
     return m.group(1) if m else None
+
+
+def validate_grounding_contract(
+    slug: str,
+    formal_name: str,
+    helpers: list[str],
+    grounding: object,
+    grounding_src: str,
+) -> tuple[list[tuple[str, str]], list[str]]:
+    """Validate certificate metadata and return exact ``(theorem, claim)`` checks.
+
+    Each certificate names a proposition-valued claim and a proof theorem.  Its
+    explicit references must anchor that claim to the row or to a classified
+    helper.  ``check_milestone.py`` asks Rocq to verify both ``claim : Prop`` and
+    ``theorem : claim`` and then runs ``Print Assumptions theorem``.
+    """
+    prefix = f"{slug}: grounding"
+    errors: list[str] = []
+    checks: list[tuple[str, str]] = []
+    if not isinstance(grounding, dict):
+        return [], [f"{slug}: missing grounding metadata object"]
+
+    clean = strip_comments(grounding_src)
+    proofs = declaration_commands(clean, PROOF_DECL_RE)
+    claims = declaration_commands(clean, DEFINITION_DECL_RE)
+    allowed_references = {formal_name, *helpers}
+    covered_helpers: set[str] = set()
+
+    def validate_one(label: str, value: object, *, helper_certificate: bool) -> None:
+        nonlocal covered_helpers
+        item_prefix = f"{prefix}.{label}"
+        if not isinstance(value, dict):
+            errors.append(f"{item_prefix} must be a certificate object")
+            return
+        missing = [field for field in ("theorem", "claim", "references") if field not in value]
+        if missing:
+            errors.append(f"{item_prefix} misses {missing}")
+            return
+        theorem, claim, references = (
+            value.get("theorem"), value.get("claim"), value.get("references")
+        )
+        if not isinstance(theorem, str) or not IDENT_RE.fullmatch(theorem):
+            errors.append(f"{item_prefix}.theorem must be one unqualified Rocq identifier")
+            return
+        if not isinstance(claim, str) or not IDENT_RE.fullmatch(claim):
+            errors.append(f"{item_prefix}.claim must be one unqualified Rocq identifier")
+            return
+        if theorem == claim:
+            errors.append(f"{item_prefix}: theorem and claim must be distinct declarations")
+        if not isinstance(references, list) or not references or not all(
+            isinstance(ref, str) and IDENT_RE.fullmatch(ref) for ref in references
+        ):
+            errors.append(f"{item_prefix}.references must be a nonempty identifier list")
+            return
+        refs = set(references)
+        unknown = sorted(refs - allowed_references)
+        if unknown:
+            errors.append(f"{item_prefix}: unknown references {unknown}")
+        helper_refs = refs & set(helpers)
+        if helper_certificate:
+            if not helper_refs:
+                errors.append(f"{item_prefix} must reference at least one classified helper")
+            covered_helpers.update(helper_refs)
+        elif formal_name not in refs:
+            errors.append(f"{item_prefix} must reference row statement {formal_name}")
+
+        if theorem not in proofs:
+            errors.append(f"{item_prefix}: theorem is not a proof declaration: {theorem}")
+        if claim not in claims:
+            errors.append(f"{item_prefix}: claim is not a Definition/Let declaration: {claim}")
+        else:
+            absent = sorted(ref for ref in refs if not mentions(claims[claim], ref))
+            if absent:
+                errors.append(f"{item_prefix}: claim {claim} does not mention {absent}")
+        if theorem in proofs and claim in claims and not mentions(proofs[theorem], claim):
+            errors.append(f"{item_prefix}: theorem declaration does not name claim {claim}")
+        checks.append((theorem, claim))
+
+    validate_one("hyp_inhabited", grounding.get("hyp_inhabited"), helper_certificate=False)
+    validate_one("not_trivially_true", grounding.get("not_trivially_true"), helper_certificate=False)
+    helper_specs = grounding.get("helper_sanity")
+    if not isinstance(helper_specs, list):
+        errors.append(f"{prefix}.helper_sanity must be a list of certificate objects")
+    else:
+        for index, spec in enumerate(helper_specs):
+            validate_one(f"helper_sanity[{index}]", spec, helper_certificate=True)
+    missing_helpers = sorted(set(helpers) - covered_helpers)
+    if missing_helpers:
+        errors.append(f"{prefix}: helpers lack sanity certificates {missing_helpers}")
+    if not helpers and helper_specs:
+        errors.append(f"{prefix}.helper_sanity must be empty when the wave has no helpers")
+    return checks, errors
+
+
+def validate_self_test() -> int:
+    alias_source = """
+Definition open_statement : Prop := True.
+Definition statement_alias : Prop := open_statement.
+Definition second_alias : Prop := statement_alias.
+Lemma hidden_proof : second_alias. Proof. exact I. Qed.
+Definition hidden_definition : second_alias := I.
+Notation hidden_type := second_alias.
+Lemma hidden_notation_proof : hidden_type. Proof. exact I. Qed.
+"""
+    candidates = faithfulness_candidate_records(
+        [("Fixture", "fixture.v", alias_source)], ["open_statement"]
+    )
+    candidate_names = {record[2] for record in candidates["open_statement"]}
+    alias_ok = {
+        "hidden_proof", "hidden_definition", "hidden_notation_proof"
+    } <= candidate_names
+
+    grounding_source = """
+Definition row_hyp_claim : Prop := row_statement -> row_statement.
+Lemma row_hyp_proof : row_hyp_claim. Proof. firstorder. Qed.
+Definition row_nontrivial_claim : Prop := row_statement -> row_statement.
+Lemma row_nontrivial_proof : row_nontrivial_claim. Proof. firstorder. Qed.
+Definition helper_claim : Prop := helper_pred = helper_pred.
+Lemma helper_proof : helper_claim. Proof. reflexivity. Qed.
+Definition unrelated_number : nat := 0.
+"""
+    good = {
+        "hyp_inhabited": {"theorem": "row_hyp_proof", "claim": "row_hyp_claim",
+                           "references": ["row_statement"]},
+        "not_trivially_true": {"theorem": "row_nontrivial_proof",
+                                "claim": "row_nontrivial_claim",
+                                "references": ["row_statement"]},
+        "helper_sanity": [{"theorem": "helper_proof", "claim": "helper_claim",
+                            "references": ["helper_pred"]}],
+    }
+    checks, good_errors = validate_grounding_contract(
+        "fixture", "row_statement", ["helper_pred"], good, grounding_source
+    )
+    bad = dict(good)
+    bad["hyp_inhabited"] = {
+        "theorem": "unrelated_number", "claim": "row_hyp_claim",
+        "references": ["row_statement"],
+    }
+    _bad_checks, bad_errors = validate_grounding_contract(
+        "fixture", "row_statement", ["helper_pred"], bad, grounding_source
+    )
+    grounding_ok = len(checks) == 3 and not good_errors \
+        and any("not a proof declaration" in error for error in bad_errors)
+    ok = alias_ok and grounding_ok
+    print(f"gate-contract self-test {'OK' if ok else 'FAILED'}")
+    if not ok:
+        print(f"  alias_ok={alias_ok} good_errors={good_errors} bad_errors={bad_errors}",
+              file=sys.stderr)
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(validate_self_test())

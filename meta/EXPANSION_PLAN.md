@@ -51,10 +51,10 @@ conjecture-implication graph (3 Qed-verified edges).
 4. **Coverage is lopsided**: chromatic (73 files) and digraph (77) are heavy; reconstruction (4),
    hamiltonicity (4), homomorphism (5), spectral (5) are starved; infinite-graph-theory received
    **no** v2 wave at all.
-5. **Infra debt**: CI runs only `make audit` (no Coq build, no probes); `build_v2_manifest --check`
-   ungated; hand-maintained `LANDED` list with no completeness assertion; vacuity probe auto-ladder
-   has near-zero recall without curated hints (only 5 exist); mutation canaries cover OPG only;
-   `make gate` needs an external sibling checkout (not reproducible from the repo alone).
+5. **Remaining infra debt**: changed-path CI now builds Rocq reverse dependencies, checks complete
+   `LANDED` coverage, runs mutation/migration controls, and validates the pinned OPG input. A full
+   v2 regeneration still needs the separately pinned upstream checkout, and the vacuity probe
+   remains dependent on a small curated-hint set.
 
 ---
 
@@ -138,12 +138,10 @@ criticality, recolouring graphs).
 
 ### Track E — Infrastructure & CI hardening
 
-1. **CI**: extend `.github/workflows` beyond `make audit` — build the opam switch in CI (or a
-   container image), run `make gate` on changed milestones, run the vacuity probe + mutation
-   canaries on changed waves. Vendor or pin the external `graph-conjectures` inputs for BOTH
-   `build_opg_manifest.py` and `build_v2_manifest.py` (each reads the sibling checkout; unpinned,
-   v2 manifest drift vs upstream stays possible) so both regenerations are reproducible from the
-   repo alone.
+1. **CI**: the container job builds changed packages and reverse dependencies, runs milestone
+   gates, mutation canaries, migration assumptions checks, and prospective vacuity probes. The OPG
+   source checkout is pinned and content-validated; the growing v2 source still requires its
+   separately pinned upstream checkout for a full regeneration.
 2. **Close the LANDED gap**: assert `Makefile LANDED` ⊇ every wave in `v2_statement_waves.json`
    and every `(phase, repo)` manifest cell (a 20-line check in `report_corpus_status --check`).
 3. **Wire `build_v2_manifest --check` into `make audit`** (v2 drift is currently ungated).
@@ -242,6 +240,10 @@ a wave's `check_milestone` acceptance additionally requires, per statement, a gr
    classes 2 and 7 at authoring time;
 3. helper-sanity lemmas pinning each `xN_` definition to a textbook characterization on a small
    instance (e.g. `x115_odd_induced_cycle` ↔ the 5-cycle of C₅).
+Wave metadata records each obligation as `{theorem, claim, references}`. The claim must be an
+explicit `Prop` definition anchored to the row/classified helpers, while the theorem must have
+exactly that claim as its type and be closed under `Print Assumptions`; a declaration name alone is
+not a certificate.
 Cost: ~30–60 lines of Qed per row (measured from the D-milestone grounding files). This converts
 the two highest-frequency defect classes from "found by audit" to "impossible to author".
 
@@ -262,13 +264,14 @@ faithfulness verdict from a reader distinct from the author**, recorded in the w
   per-row audit before merge — the 2026-07-16 event (74% defect) is the standing counterexample.
 
 ### 4.6 Foundation fidelity registry
-Every GTBase/area foundation module carries an audited fidelity verdict per primitive
+Every GTBase/area foundation module explicitly enrols each audited primitive and carries its verdict
 (FAITHFUL / LIGHTWEIGHT / BROKEN + misuse watch-list), stored as
 `meta/foundation_fidelity.json` and printed into `CORPUS_STATUS.md`. Rows inherit trust from the
 primitives they use; the lint (§4.2) flags any `_statement` using a LIGHTWEIGHT/BROKEN primitive.
 New foundations ship with machine-checked non-vacuity lemmas in-file
 (`no_zero_cost_program`-style) before any row may import them. The 2026-07-17 audit's verdicts
-seed this registry.
+seed this registry. Module defaults are shorthand only for the committed `audited_primitives` list;
+new declarations remain unaudited until explicitly enrolled.
 
 ### 4.7 Dual encodings & mutation testing
 - For high-stakes rows (famous conjectures), author **two independent encodings** (different
@@ -293,7 +296,7 @@ available; even a low response rate catches wrong-object defects nothing else ca
 | Phase | Contents | Exit criterion |
 |---|---|---|
 | **P0 — stabilize** | ✅ COMPLETE 2026-07-18. Honest reclassification + X131–X210 waves committed (`8800958`); fresh-rows audit done (20 rows: 16 faithful, 2 defects fixed, 1 re-blocked, 1 partial); the 4 self-verified repairs adversarially re-verified (X138 confirmed; X194/X198 guard-fixed; X125 re-blocked). Remaining hygiene: purge scratch artifacts (folded into P1/Track E). | ✅ every done leg has an independent audit verdict |
-| **P1 — harden the loop (1–2 weeks)** | §4.2 lint, §4.3 probe extensions, §4.4 grounding gate for new waves, §4.6 registry seeded, CI running gate+probe on changed waves, LANDED/drift asserts (Track E) | mutation suite green incl. new v2 mutants |
+| **P1 — harden the loop (1–2 weeks)** | **IN PROGRESS 2026-07-18:** first implementation tranche in `meta/P1_HARDENING.md` (prospective X211 policy, lint, small-model probes, grounding contract, seeded registry, changed-wave CI, LANDED/v2 drift assertions, first v2 mutants). Remaining: broaden mutation coverage and exercise the first real X211 grounding wave. | mutation suite green incl. new v2 mutants |
 | **P2 — repair + foundations round 1** | Track A repair backlog (44 rows) in foundation-family batches; B1 sparsity + B2 probability-level-2 (unblocks ~8 rows honestly) | v2 blocked count reduced with audit verdicts, not reclassification |
 | **P3 — coverage engine** | Resume std/axv/erdős waves at ~20 rows/batch under the hardened loop; REC stage for the 102 recovery rows; themed waves for starved areas (Track D) | +200 done rows, all with grounding certificates |
 | **P4 — depth** | C1 grounding backfill for existing X-rows; C2 edge-graph growth (audit-mined implications → Qed edges); B3 drawing/crossing layer | OPG crossing rows honestly done; ≥150 edges |
