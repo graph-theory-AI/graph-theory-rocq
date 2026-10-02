@@ -39,7 +39,8 @@ Definition x138_clustered_two_colourable_with_clustering
       [x138_clustered_two_colourable] - a wrapper for [clustered_chromatic_at_most G 2], not
       used by the statement (this file); [girth_geq G 4] - every genuine cycle has length at
       least 4 (base/theories/base.v); [Delta G] - maximum degree (base/theories/base.v).
-    Notes: (1) The quantifier order is load-bearing and was fixed by the 2026-07-17
+    Notes: PROXY ENCODING, corpus leg partial since 2026-10-02: only orientable surfaces
+      are covered, see (3). (1) The quantifier order is load-bearing and was fixed by the 2026-07-17
       faithfulness re-encoding: "the CLASS has clustered chromatic number at most two"
       requires one constant c uniform over the class, so [exists c] must precede
       [forall G], not follow it.  (2) Triangle-freeness is written as girth at least 4, which
