@@ -16,11 +16,19 @@
     [triangles_plus_hamilton_cycle] uses the XE1 helper negated and positively).
     The copies drop the wave prefix and refer to the frozen helpers as
     [Legacy.<name>]; definitions that do not reach a helper are the live ones.
-    Source hashes, the exact substitutions and the per-row theorem names are
-    recorded in meta/migration_reports/consecutive_in_cycle.md. *)
+    History follow-up: the rainbow-hole row also reaches family
+    proper-colouring's (C5) helper [x3_proper_colouring].  [X3Legacy] keeps that
+    live, C5-migrated helper by design, and C5's snapshot
+    [Chromatic.migration.proper_colouring.X3Legacy] keeps the live
+    [x3_rainbow_hole_run]; both stay verbatim.  [X3Original], at the end of this
+    file, freezes the row end to end over C5's frozen colouring predicate and this
+    family's frozen hole chain.  Source hashes, the exact substitutions and the
+    per-row theorem names are recorded in
+    meta/migration_reports/consecutive_in_cycle.md. *)
 
 From GTBase Require Import base.
 From Chromatic.conjectures Require Import U8 X3 X160 XE1 XE2.
+From Chromatic.migration Require proper_colouring.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -230,3 +238,26 @@ Proof. exact: iff_refl. Qed.
 
 Lemma erdos_842_statement_compat : XE2Legacy.erdos_842_statement <-> erdos_842_statement.
 Proof. exact: iff_refl. Qed.
+
+(** ** X3's rainbow-hole row before the B4 and C5 migrations *)
+
+Module X3Original.
+
+Definition rainbow_consecutive_vertices_in_hole_statement : Prop :=
+  forall s kappa : nat, exists n : nat,
+    forall (G : sgraph) (C : finType) (col : G -> C),
+      ω([set: G]) <= kappa ->
+      n <= χ([set: G]) ->
+      proper_colouring.Legacy.x3_proper_colouring col ->
+      X3Legacy.rainbow_hole_run col s.
+
+End X3Original.
+
+Lemma rainbow_consecutive_vertices_in_hole_statement_original_compat :
+  X3Original.rainbow_consecutive_vertices_in_hole_statement <->
+  rainbow_consecutive_vertices_in_hole_statement.
+Proof.
+split=> st s kappa; have [n hn] := st s kappa; exists n => G C col om chi pc.
+- by apply: hn => //; apply/proper_colouring.x3_proper_colouring_compat.
+- by apply: hn => //; apply/proper_colouring.x3_proper_colouring_compat.
+Qed.

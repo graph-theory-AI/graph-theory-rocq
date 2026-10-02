@@ -21,7 +21,8 @@
     "graph-theory-misc/theories/migration/consecutive_in_cycle.v",
     "minor-theory/theories/migration/consecutive_in_cycle.v",
     "graph-theory-misc/theories/migration/consecutive_in_path.v",
-    "minor-theory/theories/migration/induced_free.v"
+    "minor-theory/theories/migration/induced_free.v",
+    "chromatic-theory/theories/migration/proper_colouring.v"
   ],
   "extra_certificates": [
     "GTBase.walks_paths.seq_cyclic_consecutiveP",
@@ -61,6 +62,8 @@
     "Eighteen statements are affected: X3 (four rows) and cross-module X160 (chromatic), chromatic XE2 erdos:1091/erdos:842 through XE1's helper, X9, X4, extremal XE1 erdos:567 and XE2 erdos:767 through X4's helper, D2str's OPG geodesic-cycle row, X91, X27, and cross-module X42 and X220 (three rows). Every chain is frozen in one certificate per area, higher hole and cycle predicates with their own length guards (`3 < size c` in X3/X27, `3 <= size c` in X91) frozen as chains, not consolidated. D2str's `geodesic_cycle` is frozen inside a verbatim copy of its weighted Section; its unprefixed names are frozen as `d2str_*` copies. The helpers' proof consumers (`Minor.foundations.hole_containments`, D2str's grounding) only needed the extra unfold of the canonical; X220/X42 grounding and implications rebuild unchanged.",
     "",
     "Historical snapshots: A1's `Minor.migration.induced_free.X42Legacy.statement` and B3's `GTMisc.migration.consecutive_in_path.X91Legacy.avoidable_path` call the live `x27_even_hole_free` and `x91_induced_cycle`; they are kept verbatim and documented below. `X42Original` (A1 + B4) and `X91Original` (B3 + B4) freeze those rows end to end over the earlier families' frozen objects (listed as `a1-frozen`/`b3-frozen` with their own certificates) and this family's chains. This family's own X42 and X91 snapshots keep the live A1/B3 helpers by design and are documented in the A1 and B3 specs as later-family snapshots.",
+    "",
+    "History follow-up (private B4 + C5 baseline 45ab506): X3's rainbow-hole row also reaches family proper-colouring's (C5) `x3_proper_colouring`. This family's `X3Legacy` snapshot keeps that live, C5-migrated helper and C5's `X3Legacy` snapshot keeps the live `x3_rainbow_hole_run`; both stay verbatim and are documented. `X3Original.rainbow_consecutive_vertices_in_hole_statement` freezes the row end to end over C5's frozen `x3_proper_colouring` (listed as `c5-frozen`, with C5's certificate) and this family's frozen hole chain.",
     "",
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of the eighteen frozen statements and the two originals contains no live helper or chain declaration of this family and neither canonical, while each live statement reaches the canonical and its alias (/srv/graph-theory-rocq/coordination/evidence/B4-consecutive_in_cycle/print_all_dependencies_summary.txt, with the probe and the full output beside it); the Section scaffolding of D2str's frozen copy is checked verbatim beside it.",
     "",
@@ -204,7 +207,8 @@
         "x3_rainbow_hole_run": "rainbow_hole_run"
       },
       "certificate": "Chromatic.migration.consecutive_in_cycle.rainbow_consecutive_vertices_in_hole_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "original_certificate": "Chromatic.migration.consecutive_in_cycle.rainbow_consecutive_vertices_in_hole_statement_original_compat"
     },
     {
       "kind": "statement",
@@ -795,11 +799,38 @@
       "substitutions": {},
       "certificate": "Minor.migration.induced_free.x42_induced_free_compat",
       "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.rainbow_consecutive_vertices_in_hole_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "rainbow_consecutive_vertices_in_hole_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X3Original.rainbow_consecutive_vertices_in_hole_statement",
+      "substitutions": {
+        "x3_proper_colouring": "proper_colouring.Legacy.x3_proper_colouring",
+        "x3_rainbow_hole_run": "X3Legacy.rainbow_hole_run"
+      },
+      "certificate": "Chromatic.migration.consecutive_in_cycle.rainbow_consecutive_vertices_in_hole_statement_original_compat"
+    },
+    {
+      "kind": "c5-frozen",
+      "qualified": "Chromatic.conjectures.X3.x3_proper_colouring",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_proper_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.x3_proper_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.proper_colouring.x3_proper_colouring_compat",
+      "source_declaration_sha256": "da466ba4e37830cb8230b9988af60a2c554e94dd901495ad95f3f22021922f80",
+      "source_body_sha256": "46289919c1b6f0e9bc813cac1ffd655bc9a3dce19dd6320f60a983edaec5e31f",
+      "commit": "a6db537386d7092db506526fbcfd2dbe9760ed5e"
     }
   ],
   "known_stale_snapshots": {
     "minor-theory/theories/migration/induced_free.v#X42Legacy.statement": "A1 snapshot limitation: family induced-free (A1) froze only its induced-free chain of X42, so this copy still resolves through the live x27_even_hole_free; after B4 its body reaches the canonical seq_cyclic_consecutiveb and is no longer the pre-A1 statement. A1's x42_statement_compat stays true but now certifies only the induced-free step. The fully frozen pre-migration statement is Minor.migration.consecutive_in_cycle.X42Original.even_hole_k4_diamond_free_bounded_treewidth_statement, related to the live one by even_hole_k4_diamond_free_bounded_treewidth_statement_original_compat.",
-    "graph-theory-misc/theories/migration/consecutive_in_path.v#X91Legacy.avoidable_path": "B3 per-row snapshot: family consecutive-in-path (B3) froze only its induced-path chain of X91, so this copy still resolves through the live x91_induced_cycle; after B4 it reaches the canonical seq_cyclic_consecutive. B3's x91_avoidable_path_compat and avoidable_path_or_pk_free_statement_compat stay true (conversions) but now certify only the path step. The fully frozen row is GTMisc.migration.consecutive_in_cycle.X91Original (avoidable_path and avoidable_path_or_pk_free_statement), certified by avoidable_path_or_pk_free_statement_original_compat."
+    "graph-theory-misc/theories/migration/consecutive_in_path.v#X91Legacy.avoidable_path": "B3 per-row snapshot: family consecutive-in-path (B3) froze only its induced-path chain of X91, so this copy still resolves through the live x91_induced_cycle; after B4 it reaches the canonical seq_cyclic_consecutive. B3's x91_avoidable_path_compat and avoidable_path_or_pk_free_statement_compat stay true (conversions) but now certify only the path step. The fully frozen row is GTMisc.migration.consecutive_in_cycle.X91Original (avoidable_path and avoidable_path_or_pk_free_statement), certified by avoidable_path_or_pk_free_statement_original_compat.",
+    "chromatic-theory/theories/migration/proper_colouring.v#X3Legacy.rainbow_consecutive_vertices_in_hole_statement": "C5 per-row snapshot: family proper-colouring (C5) froze only its colouring chain of the X3 rainbow-hole row, so this copy still resolves through the live x3_rainbow_hole_run, which after B4 reaches the canonical seq_cyclic_consecutive through x3_hole. C5's rainbow_consecutive_vertices_in_hole_statement_compat stays true but certifies only the colouring step. The fully frozen row is Chromatic.migration.consecutive_in_cycle.X3Original.rainbow_consecutive_vertices_in_hole_statement, certified by rainbow_consecutive_vertices_in_hole_statement_original_compat."
   },
   "cross_module_consumers": [
     {
