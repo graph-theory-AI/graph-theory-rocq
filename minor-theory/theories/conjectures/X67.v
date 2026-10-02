@@ -1,7 +1,6 @@
 (** * Minor.conjectures.X67 -- v2 theta-triangle bounded-treewidth row *)
 
 From GTBase Require Export base.
-From GTBase Require Import walks_paths.
 From Minor.conjectures Require Import X27.
 
 Set Implicit Arguments.

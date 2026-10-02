@@ -7,7 +7,6 @@
     intentionally deferred. *)
 
 From Chromatic.conjectures Require Import U8.
-From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

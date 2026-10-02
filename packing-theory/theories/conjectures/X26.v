@@ -1,7 +1,6 @@
 (** * Packing.conjectures.X26 -- v2 distant induced-Menger row *)
 
 From GTBase Require Export base.
-From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

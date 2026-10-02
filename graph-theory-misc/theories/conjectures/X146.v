@@ -1,7 +1,6 @@
 (** * GTMisc.conjectures.X146 -- v2 Geelen coarse Gallai row *)
 
 From GTBase Require Export base.
-From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

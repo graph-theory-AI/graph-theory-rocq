@@ -2,7 +2,6 @@
 
 From GraphTheory Require Import minor.
 From GTBase Require Export base.
-From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

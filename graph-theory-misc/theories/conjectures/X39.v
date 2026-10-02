@@ -1,7 +1,6 @@
 (** * GTMisc.conjectures.X39 -- v2 coarse Menger row *)
 
 From GTBase Require Export base.
-From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

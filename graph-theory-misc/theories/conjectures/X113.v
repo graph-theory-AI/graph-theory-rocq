@@ -1,7 +1,6 @@
 (** * GTMisc.conjectures.X113 -- v2 coarse Erdos-Posa (cycles/forest) row *)
 
 From GTBase Require Export base.
-From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
