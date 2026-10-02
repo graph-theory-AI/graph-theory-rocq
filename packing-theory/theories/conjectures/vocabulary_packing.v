@@ -44,19 +44,19 @@ Lemma edge_setGE (G : sgraph) : edge_setG G = E(G).
 Proof. by rewrite sg_edge_setE. Qed.
 
 Lemma x5_edge_setE (G : sgraph) : x5_edge_set G = E(G).
-Proof. by rewrite sg_edge_setE. Qed.
+Proof. by []. Qed.
 
 Lemma x15_edge_setE (G : sgraph) : x15_edge_set G = E(G).
-Proof. by rewrite sg_edge_setE. Qed.
+Proof. by []. Qed.
 
 Lemma x25_edge_setE (G : sgraph) : x25_edge_set G = E(G).
-Proof. by rewrite sg_edge_setE. Qed.
+Proof. by []. Qed.
 
 Lemma x47_edge_setE (G : sgraph) : x47_edge_set G = E(G).
-Proof. by rewrite sg_edge_setE. Qed.
+Proof. by []. Qed.
 
 Lemma xe1_edge_setE (G : sgraph) : xe1_edge_set G = E(G).
-Proof. by rewrite sg_edge_setE. Qed.
+Proof. by []. Qed.
 
 (** ** Hamilton cycles: [U9.hamiltonian_cycleG] is [common.hamiltonian_cycle] *)
 

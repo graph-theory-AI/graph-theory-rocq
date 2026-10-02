@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X36 vocabulary ************************************************)
 
 Definition x36_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x36_degree_in_edge_set
     (G : sgraph) (F : {set {set G}}) (v : G) : nat :=

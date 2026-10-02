@@ -30,6 +30,6 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Lemma x158_edge_setE (G : sgraph) : x158_edge_set G = E(G).
-Proof. by rewrite sg_edge_setE. Qed.
+Proof. by []. Qed.
 
 Print Assumptions x158_edge_setE.

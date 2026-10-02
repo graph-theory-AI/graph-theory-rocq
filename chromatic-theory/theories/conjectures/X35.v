@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X35 vocabulary ************************************************)
 
 Definition x35_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 (** A GENUINE cut/separator (arXiv:2510.01791, Conjecture 1.3): deleting [X]
     disconnects [G], i.e. the subgraph induced on [V(G) \ X] (= [~: X]) is

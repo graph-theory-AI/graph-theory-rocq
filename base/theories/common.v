@@ -57,6 +57,25 @@ Lemma in_sg_edge_set (G : sgraph) (e : {set G}) :
   (e \in E(G)) = [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]].
 Proof. by rewrite sg_edge_setE inE. Qed.
 
+(** The two-element-clique presentation of [E(G)] used by two local copies
+    (X100, X102): an edge is exactly a two-element clique. *)
+Lemma sg_edge_set_cliqueE (G : sgraph) :
+  E(G) = [set e : {set G} | (#|e| == 2) && cliqueb e].
+Proof.
+apply/setP=> e; rewrite in_sg_edge_set inE.
+apply/existsP/andP.
+- move=> [x]; move/existsP=> [y]; move/andP=> [xy /eqP ->].
+  split; first by rewrite cards2 (sg_edgeNeq xy).
+  apply/cliqueP=> u v /set2P[]-> /set2P[]-> //;
+    rewrite ?eqxx // => _; by rewrite sgP.
+- move=> [/cards2P [x [y [xDy ->]]] /cliqueP clique_xy].
+  exists x; apply/existsP; exists y; apply/andP; split.
+  + have x_in : x \in [set x; y] by rewrite !inE eqxx.
+    have y_in : y \in [set x; y] by rewrite !inE eqxx orbT.
+    exact: clique_xy x_in y_in xDy.
+  + by rewrite eqxx.
+Qed.
+
 (** Two edge sets are edge-disjoint when they share no edge. *)
 Definition edge_disjoint (G : sgraph) (A B : {set {set G}}) : bool := [disjoint A & B].
 

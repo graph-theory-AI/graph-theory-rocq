@@ -256,7 +256,7 @@ Definition uniquely_hamiltonian_graphs_statement : Prop :=
     graph (no Hamilton content), a base candidate like [cartesian_product] /
     [line_graph] / [bipartite]. *)
 Definition edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} | [exists x, exists y, (x -- y) && (e == [set x; y])]].
+  sg_edge_set G.
 
 Definition hamilton_decomposition_into_two (G : sgraph) : Prop :=
   exists c1 c2 : seq G,

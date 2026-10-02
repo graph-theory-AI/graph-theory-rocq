@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X76 vocabulary ************************************************)
 
 Definition x76_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x76_edge_count (G : sgraph) : nat := #|x76_edge_set G|.
 

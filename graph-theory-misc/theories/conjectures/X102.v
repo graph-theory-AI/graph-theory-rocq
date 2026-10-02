@@ -30,7 +30,7 @@ Definition x102_complete_bipartite_graph (G : sgraph) : Prop :=
   exists a b : nat, inhabited (G ≃ KB a b).
 
 Definition x102_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} | (#|e| == 2) && cliqueb e].
+  sg_edge_set G.
 
 Definition x102_subdivided_multiclaw (G : sgraph) : Prop :=
   is_forest [set: G] /\

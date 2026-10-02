@@ -7,8 +7,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Definition xe1_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition xe1_cycle_edges (G : sgraph) (c : seq G) : {set {set G}} :=
   [set e : {set G} |

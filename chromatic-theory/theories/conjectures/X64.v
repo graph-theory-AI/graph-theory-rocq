@@ -10,8 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X64 vocabulary ************************************************)
 
 Definition x64_edge_set (G : sgraph) : {set {set G}} :=
-  [set e : {set G} |
-      [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
+  sg_edge_set G.
 
 Definition x64_delete_edge_rel (G : sgraph) (e : {set G}) : rel G :=
   fun x y => (x -- y) && ([set x; y] != e).

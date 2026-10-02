@@ -2,7 +2,11 @@ opam-version: "2.0"
 synopsis: "Shared base for the graph-theory-rocq federation (cross-area primitives + interop)"
 description: "Owns the cross-area graph-theory primitives (Delta, common_nbr, regular, girth_geq, ceil_div) and re-exports the coq-graph-theory undirected vocabulary. Namespace GTBase."
 maintainer: "Marc Lelarge <marc.lelarge@gmail.com>"
+authors: [ "Marc Lelarge" ]
 license: "Apache-2.0"
+homepage: "https://github.com/LLM4Rocq/graph-theory-rocq"
+bug-reports: "https://github.com/LLM4Rocq/graph-theory-rocq/issues"
+dev-repo: "git+https://github.com/LLM4Rocq/graph-theory-rocq.git"
 depends: [ "coq-mathcomp-ssreflect" {>= "2.5.0"} "coq-graph-theory" {>= "0.9.7"} ]
 build: [ [ "rocq" "makefile" "-f" "_CoqProject" "-o" "Makefile.coq" ] [ make "-f" "Makefile.coq" "-j" "%{jobs}%" ] ]
 install: [ make "-f" "Makefile.coq" "install" ]
