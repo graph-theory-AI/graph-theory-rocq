@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "family": "edge-family",
+  "modules": {
+    "Packing.foundations.edge_families": {
+      "path": "packing-theory/theories/foundations/edge_families.v",
+      "overrides": {
+        "edge_family": {
+          "verdict": "FAITHFUL",
+          "note": "Each ordinal-indexed member is a subset of E(G); overlap, repeated/empty members and zero indices remain valid. No coverage/disjointness restriction is added."
+        }
+      },
+      "machine_evidence": [
+        "edge_family_powersetP",
+        "edge_family_member",
+        "edge_family_subfamily",
+        "edge_family_reindex",
+        "edge_family_unionP",
+        "not_edge_family_non_edge",
+        "edge_family0",
+        "edge_family_empty",
+        "edge_family_full",
+        "edge_family_K2_repeated",
+        "K2_repeated_members_overlap",
+        "not_edge_family_loop",
+        "not_edge_family_empty_edge"
+      ]
+    }
+  }
+}

@@ -2471,7 +2471,7 @@ move=> [f fP] dpos famE.
 have D_deg (v : G) : #|N(v)| <= Delta G by exact: leq_bigmax.
 have [col [col_lt col_match]] := line_colouring_E fP D_deg.
 have subE (i : 'I_m) : E i \subset E(G).
-  by move: (famE i); rewrite x15_edge_setE.
+  exact: famE i.
 have [C [mC hsz hcl]] := approx_fair_rounds fP subE dpos col_lt col_match.
 by exists C; split; [exact: matching_x15 | split].
 Qed.

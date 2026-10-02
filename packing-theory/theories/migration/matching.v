@@ -45,7 +45,7 @@
     Axiom-free: no Axiom/Parameter/Admitted; Print Assumptions at the end. *)
 
 From GTBase Require Import base common.
-From Packing.foundations Require Import matching edge_partitions.
+From Packing.foundations Require Import matching edge_partitions edge_families.
 From Packing.conjectures Require Import X15 X18.
 
 Set Implicit Arguments.
@@ -179,7 +179,8 @@ Lemma x15_edge_family_compat
     (G : sgraph) (m : nat) (E : 'I_m -> {set {set G}}) :
   X15Legacy.edge_family E <-> x15_edge_family E.
 Proof.
-by rewrite /X15Legacy.edge_family /x15_edge_family x15_edge_set_compat.
+by rewrite /X15Legacy.edge_family /x15_edge_family
+  /edge_families.edge_family x15_edge_set_compat.
 Qed.
 
 (** arxiv:1611.03196#02 (REFUTED, unchanged). *)
