@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py path_vertices --details /tmp/mi
 
 - Canonical: `GTBase.walks_paths.seq_vertices`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 9 helpers, 14 statements, 52 frozen objects, 125 recorded references.
-- Source checks: 428/428 pass; consistent.
+- Scope: 9 helpers, 14 statements, 52 frozen objects, 134 recorded references.
+- Source checks: 430/430 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -31,3 +31,5 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
 Excluded distinct variants: `Chromatic.conjectures.XE1.xe1_vertices_of_seq`, `Cycle.conjectures.X5.x5_vertices_of_seq`, `Cycle.conjectures.X10.x10_cycle_vertices`, `Cycle.conjectures.X212.x212_cycle_vertices`, `Chromatic.conjectures.X153.x153_cycle_vertices`, `Digraph.conjectures.X19.x19_cycle_vertices`.
+
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/consecutive_in_path.v#X3Legacy.statement`, `minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta`.

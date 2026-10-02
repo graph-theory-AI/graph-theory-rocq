@@ -10,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X67 vocabulary ************************************************)
 
 Definition x67_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
-  (u, v) \in zip p (behead p) \/ (v, u) \in zip p (behead p).
+  seq_consecutive p u v.
 
 Definition x67_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.

@@ -20,7 +20,7 @@ Definition x3_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : Prop :=
   ((u, v) \in zip c (rot 1 c)) \/ ((v, u) \in zip c (rot 1 c)).
 
 Definition x3_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
-  ((u, v) \in zip p (behead p)) \/ ((v, u) \in zip p (behead p)).
+  seq_consecutive p u v.
 
 (** A hole is an induced cycle of length at least four.  [ucycle] supplies the
     closed walk and vertex uniqueness; the final clause rules out chords. *)

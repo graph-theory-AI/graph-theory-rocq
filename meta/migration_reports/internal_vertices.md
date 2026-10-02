@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py internal_vertices --details /tm
 
 - Canonical: `GTBase.walks_paths.seq_interior`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 6 helpers, 10 statements, 32 frozen objects, 82 recorded references.
-- Source checks: 286/286 pass; consistent.
+- Scope: 6 helpers, 10 statements, 32 frozen objects, 88 recorded references.
+- Source checks: 287/287 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -27,3 +27,5 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
 Excluded distinct variants: `Digraph.conjectures.X166.x166_internals`, `GTMisc.conjectures.X216.x216_internal`, `Extremal.conjectures.X98.x98_internal`, `GTMisc.conjectures.X114.x114_internal`.
+
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta`.
