@@ -217,6 +217,23 @@ class ReportTests(unittest.TestCase):
         self.spec["frozen"][1]["non_corpus"] = True
         self.assertIn("test_statement: explicitly non-corpus statement has no manifest row", self.failures())
 
+    def test_corpus_selector_must_name_a_supported_corpus(self):
+        for selector in ("", None, False, 0, [], {}, "other"):
+            with self.subTest(selector=selector):
+                self.spec["frozen"][1]["corpus"] = selector
+                self.assertIn("test_statement: corpus selection is valid", self.failures())
+        self.spec["frozen"][1]["corpus"] = "v2"
+        self.assertEqual(self.failures(), [])
+
+    def test_non_corpus_cannot_also_select_a_corpus(self):
+        self.write_manifests(None)
+        self.rebaseline()
+        self.spec["frozen"][1]["non_corpus"] = True
+        for selector in (None, "", "v2", "opg"):
+            with self.subTest(selector=selector):
+                self.spec["frozen"][1]["corpus"] = selector
+                self.assertIn("test_statement: corpus selection is valid", self.failures())
+
     def test_missing_history_is_fatal(self):
         self.spec["baseline_commit"] = "0" * 40
         with self.assertRaises(subprocess.CalledProcessError):
@@ -230,6 +247,30 @@ class ReportTests(unittest.TestCase):
             self.assertEqual(REPORT.main(["--all", "--check"]), 0)
             self.write("meta/migration_reports/test_family.md", "stale\n")
             self.assertEqual(REPORT.main(["--all", "--check"]), 1)
+
+    def test_only_write_bootstraps_a_registered_report(self):
+        spec_path = "meta/migration_reports/test_family.spec.json"
+        report_path = "meta/migration_reports/test_family.md"
+        self.write_json(spec_path, self.spec)
+        entry = self.registry["primitives"]["test-family"]
+        entry.update(migration_spec=spec_path, migration_report=report_path)
+        self.write_json("meta/library_primitives/test-family.json", {
+            "schema_version": 1, "family": "test-family", "primitive": entry,
+        })
+        report = self.root / report_path
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            for selector in ("test_family", "--all"):
+                with self.subTest(selector=selector):
+                    for mode in ([], ["--check"], ["--details", str(self.root / "details")]):
+                        self.assertEqual(REPORT.main([selector, *mode]), 1)
+                        self.assertFalse(report.exists())
+                    self.assertEqual(REPORT.main([selector, "--write"]), 0)
+                    self.assertTrue(report.is_file())
+                    self.assertEqual(REPORT.main([selector, "--check"]), 0)
+                    report.unlink()
+            (self.root / spec_path).unlink()
+            self.assertEqual(REPORT.main(["test_family", "--write"]), 1)
+            self.assertFalse(report.exists())
 
     def test_details_are_deterministic_and_independent_of_compact_check(self):
         self.write_json("meta/migration_reports/test_family.spec.json", self.spec)

@@ -199,7 +199,7 @@ def rows_for_object(rows: dict, obj: dict) -> list[dict]:
     package = obj["path"].split("/", 1)[0]
     return [row for row in rows.get(obj["name"], [])
             if row.get("repo") == package
-            and (not obj.get("corpus") or row["_corpus"] == obj["corpus"])]
+            and ("corpus" not in obj or row["_corpus"] == obj["corpus"])]
 
 
 def module_for_path(path: str, namespaces: dict | None = None) -> str:
@@ -342,14 +342,14 @@ def local_closure(decls: dict[str, dict], name: str) -> set[str]:
     return seen
 
 
-def build_report(spec: dict) -> dict:
+def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     base = spec["baseline_commit"]
     checks: list[dict] = []
 
     def check(ok: bool, what: str, detail: str = "") -> None:
         checks.append({"ok": bool(ok), "check": what, "detail": detail})
 
-    registry = load_library_registry(ROOT)["primitives"]
+    registry = load_library_registry(ROOT, allow_missing_reports=allow_missing_reports)["primitives"]
     entry = registry.get(spec["family"], {})
     expected_sources = migrated_registry_sources(entry)
     actual_sources = {obj["qualified"] for obj in spec["frozen"] if obj["kind"] == "source"}
@@ -476,7 +476,9 @@ def build_report(spec: dict) -> dict:
         formal = obj["name"]
         base_rows, now_rows = rows_for_object(rows_base, obj), rows_for_object(rows_now, obj)
         non_corpus = obj.get("non_corpus", False)
-        check(isinstance(non_corpus, bool) and not (non_corpus and obj.get("corpus")),
+        check(isinstance(non_corpus, bool)
+              and ("corpus" not in obj or obj["corpus"] in ("opg", "v2"))
+              and not (non_corpus and "corpus" in obj),
               f"{formal}: corpus selection is valid")
         if non_corpus:
             check(not rows_base.get(formal) and not rows_now.get(formal),
@@ -777,7 +779,7 @@ def main(argv: list[str]) -> int:
         parser.error("no migration report specs found")
     if args.all:
         try:
-            registry = load_library_registry(ROOT)["primitives"]
+            registry = load_library_registry(ROOT, allow_missing_reports=args.write)["primitives"]
         except RegistryError as exc:
             print(f"migration registry: ERROR: {exc}", file=sys.stderr)
             return 1
@@ -800,7 +802,7 @@ def main(argv: list[str]) -> int:
 def process_family(family: str, args: argparse.Namespace) -> bool:
     spec = json.loads((REPORTS / f"{family}.spec.json").read_text())
     spec["report_name"] = family
-    report = build_report(spec)
+    report = build_report(spec, allow_missing_reports=args.write)
     rendered_md = render_markdown(report, spec)
     md_path = REPORTS / f"{family}.md"
     if args.write:
