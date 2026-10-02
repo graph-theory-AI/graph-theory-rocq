@@ -2,7 +2,8 @@
 
 > Status: M0 implemented 2026-07-22; M1 edge-vocabulary implementation completed
 > 2026-07-23 and reworked 2026-10-02 onto upstream `E(G)` and `GTBase.common`,
-> with transparent compatibility aliases retained for one cycle
+> with transparent compatibility aliases retained for one cycle. Since 2026-10-02
+> the migration has priority: statement waves X230+ wait until section 15 is done.
 >
 > Scope: migrate reusable vocabulary out of conjecture files without changing
 > the meaning, status, provenance, or accepted assumptions of any conjecture.
@@ -456,16 +457,110 @@ Raw helper-count reduction is a secondary metric. The primary metric is that
 each remaining local helper is deliberately local and each shared concept has
 one audited, reusable API.
 
-## 15. Immediate Next Batch
+## 15. Execution Order to Completion (updated 2026-10-02)
 
-Before authoring X211:
+Statement waves X230 and later are paused until the batches below are done; the
+goal is a usable Rocq graph library with one audited definition per concept.
+M0 and M1 are complete: the 31 edge-set definitions unfold to upstream `E(G)`
+(#12), with their aliases kept until batch E.
 
-1. Implement the M0 inventory and X211+ ownership gate.
-2. Seed the migration registry with the edge family and the other top repeated
-   suffixes.
-3. Complete the X25/X64/X142 edge pilot with old/new equivalence theorems.
-4. Review the pilot API as a downstream MathComp user would.
-5. Run the full gate and record the migration report.
+Live scope, regenerated at every integration:
 
-After the pilot passes, X211 work may resume under the no-new-unclassified-helper
-rule while M1 continues across the remaining edge-set consumers.
+```sh
+python3 meta/library_inventory.py --check --max-groups 400
+```
+
+Baseline on 2026-10-02 (main 5fa5b1d): 185 definition families repeat by name
+(533 definitions) and 43 further groups share a body under different names
+(127 definitions). Name-based families are a discovery signal only; the
+comparison step of section 9 decides each pair. Duplicates are concentrated in
+`conjectures/`: the library layers (`base/`, area `foundations/`, `atlas/`)
+repeat only a few proof-internal names.
+
+### Batch A - M2 cross-area predicates (home: GTBase)
+
+| Families (normalized names) | Home |
+|---|---|
+| `induced_free`, `induced_H_free`, `H_free` | `GTBase.common.induced_free` |
+| `delete_edges`, `delete_edges_rel`, `delete_edge_graph`, `delete_edge_rel` | `GTBase.common.del_edge_set` |
+| `subgraph_of` | `GTBase.common.has_subgraph` |
+| `complement_rel`, `complement_graph`, `complement` | new `GTBase` complement primitive |
+| `edge_count`, `edges_between`, `cut_size`, `degree_in`, `subgraph_degree` | `GTBase.common`, over `E(G)` |
+| `min_degree_at_least`, `min_degree_geq`, `min_degree`, `cubic`, `subcubic` | `GTBase.base`, next to `Delta` and `regular` |
+| `triangle_free`, `clique_count`, `omega`, `maximal_clique`, `is_triangle`, `tri_edges` | `GTBase.base.triangle_free` and `GTBase.common` |
+| `stable_set`, `anticomplete`, `anticomplete_between`, `complete_between` | upstream `GraphTheory.dom.stable` if faithful, else `GTBase` |
+| `ball`, `set_ball`, `radius_at_most` | `GTBase.base.ball` |
+| `hypercube`, `petersen`, `line_graph`, `cayley_graph`, `path_graph`, `complete_multipartite`, `disjoint_union`, `disjoint_union_rel`, `diamond`, `diamond_rel`, `theta` | `GTBase.base` (`line_graph`, `cycle_graph` exist) or a new constructions module |
+| `poly_eval`, `weight`, `vertices_of_seq` | a small `GTBase` utility module |
+
+### Batch B - M3 paths and cycles (home: new `base/theories/walks_paths.v`)
+
+`path_vertices`, `path_internal`, `consecutive_in_path`, `consecutive_in_cycle`,
+`xy_path`, `genuine_path`, `is_path`, `path_edges`, `path_edge_set`, `path_rel`,
+`path_index_graph`/`path_tree`, `cycle`/`genuine_cycle`/`is_cycle`,
+`cycle_edges`, `cycle_vertices`, `cycle_edge_seq`, `longest_cycle`,
+`has_cycle_length`, `no_cycle_length_between`, `eulerian`, `spanning_tree`,
+`tree`, `induced_path`, `induced_path_between`, `induced_cycle`,
+`has_induced_cycle`, `hole`, `chordal`, `separates_xy`,
+`pairwise_distant_paths`, `has_k_distant_xy_paths`, `walk_uses`.
+
+Adapt upstream `Path`/`upath`/`ucycle` where faithful. Repeated vertices, empty
+and one-vertex sequences, path length and inducedness are where compatibility
+becomes conditional; the M3 rules apply.
+
+### Batch C - M3 matchings, colourings, decompositions and minors (home: area foundations)
+
+| Families | Home |
+|---|---|
+| `matching` (split by representation), `perfect_matching`, `edge_partition`, `edge_family` | packing foundations; `GTBase.common.perfect_matching` |
+| `proper_colouring`, `proper_3_colouring`, `proper_three_colouring`, `proper_edge_colouring`, `bipartition`, `monochromatic`, `chi_bounded` | chromatic foundations |
+| `hereditary_class`, `iso_closed`, `proper_minor_closed_class`, `perfect_graph` | `GTBase` (classes used across areas) |
+| `tree_decomposition`, `pathwidth_at_most` | minor foundations (`width_params`), reconciled with `atlas` tree decompositions |
+| `minor_model`, `shallow_minor_model`, `model_vertex`, `induced_subdivision`, `induced_subdivision_model`, `contains_induced_long_subdivision`, `unavoidable`, `grad_at_most` | minor foundations |
+
+A primitive moves from an area foundation to `GTBase` only when a second area needs it.
+
+### Batch D - M4 remaining area vocabulary
+
+| Area | Families |
+|---|---|
+| chromatic | `colour_graph`, `edge_colour_rel`, `linear_forest_colour`, `kempe_step`, `star_edge_colouring`, `strong_edge_colourable`, `bfold_colouring`, `orientation_of`, `proper_orientation`, `proper_orientation_bound`, `output_colour` |
+| hypergraph | `uniform`, `uniform_hypergraph`, `r_partite_uniform`, `image_edge`, `monochromatic_copy`, `forces_mono`, `edge`, `regular` |
+| extremal | `ramsey_number`, `arrows`, `hom_count`, `degree_class_size`, `palette_on` |
+| topological | surface wrappers (`embeddable_*`, `embedded_*`) onto `GTBase.surface`; `faces`; `linear_arboricity`, `linear_arboricity_at_most` |
+| misc / cops | `cop_move`, `cop_position`, `cop_number_at_most`, `cops_win_in`, `robber_move`, `captured` onto graph-theory-misc `foundations/cops` |
+| digraph | `indeg`, `loopless`, `oriented*`, `is_tournament`, `transitive_tournament` (vs `GTBase.common`), `weakly_connected`, `out_cut`/`outcut`, `dijoin`, `urel`, `underlying`, `no_sources` |
+| complexity | `in_np`, `np_complete`, `problem`, `instance`, `enc_instance` onto `GTBase.complexity` |
+| reconstruction, spectral | `same_deck`, `switching_reconstructible`, `strongly_regular` |
+
+### Batch E - M5 release surface
+
+1. Remove deprecated aliases whose repository-wide usage is zero, starting with the
+   31 edge-set aliases; frozen `Legacy` bodies stay in `migration/` certificates.
+2. Generate an API index: module, declaration, fidelity verdict, principal lemmas.
+3. Add `examples/` files that import only public modules, compiled by the gate.
+4. Document the supported import surface and the semantic-versioning policy.
+5. Provide opam metadata for `GTBase` and every area foundation layer, so a
+   downstream project can install the library without the corpus.
+
+### Conventions for parallel work
+
+- One family per change, following section 9 end to end.
+- Certificates live in `<area>/theories/migration/<family>.v`, one file per family
+  per area, so parallel families never edit the same certificate file.
+- Each family gets its entry in `meta/library_primitives.json` with the standard
+  fields; `meta/check_library_migration.py` must pass.
+- Generated files (`meta/library_helper_inventory.json`, `meta/CORPUS_STATUS.md`,
+  `meta/dependency_graph.json`) are regenerated by the integrator after each merge,
+  never merged by hand.
+- Step 10 (independent review) is done by someone other than the implementer,
+  before integration.
+- A legacy encoding found defective is re-audited as a statement change, with its
+  own record; it is never repaired silently inside a migration.
+
+### Definition of done
+
+The section 14 measures and the M5 exit criteria hold, and
+`meta/library_inventory.py` reports no repeated reusable family without a registry
+entry: every remaining local helper is classified paper-specific or compatibility
+alias. Statement waves then resume under the no-new-unclassified-helper rule.
