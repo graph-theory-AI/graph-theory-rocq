@@ -212,11 +212,6 @@
         "Extremal.conjectures.XE1.xe1_tree",
         "Packing.conjectures.XE1.xe1_tree"
       ],
-      "513c12836a99a48eeefa063285c030ce777f56712a715347006bcf98a52220ef": [
-        "Chromatic.conjectures.X7.x7_delete_edges_rel",
-        "Chromatic.conjectures.XE1.xe1_delete_edges_rel",
-        "Extremal.conjectures.XE1.xe1_delete_edges_rel"
-      ],
       "57f3e7fe035c3c808ffafa1077a50aa3b0967c0ec78e6f42081dc56d8bef5319": [
         "Chromatic.conjectures.X43.x43_diamond",
         "Minor.conjectures.X42.x42_diamond"
@@ -400,11 +395,6 @@
         "Chromatic.conjectures.X170.x170_p4_edge",
         "Hom.conjectures.U3.pth_rel"
       ],
-      "9d21d6a369eb1a93a3cd3c918f35fa29ccee21b2375942747fbc98e6a633d31a": [
-        "Chromatic.conjectures.X7.x7_delete_edges",
-        "Chromatic.conjectures.XE1.xe1_delete_edges",
-        "Extremal.conjectures.XE1.xe1_delete_edges"
-      ],
       "9dac43bbc18bc29b8f44f0fe5dc19c26a984486845286a1fb8d52195a4b0e6d8": [
         "Digraph.conjectures.chi_bounded.underlying",
         "Digraph.conjectures.heroes_dichotomy.underlying"
@@ -522,6 +512,11 @@
         "Chromatic.conjectures.X34.x34_colour_graph",
         "Cycle.conjectures.X212.x212_colour_graph",
         "Topological.conjectures.X23.x23_colour_graph"
+      ],
+      "d551a89d7dd0a1e227ab75c81ef1095bd9a56d0fc5bde5bdd535e971c9f39867": [
+        "Chromatic.conjectures.X7.x7_delete_edges_rel",
+        "Chromatic.conjectures.XE1.xe1_delete_edges_rel",
+        "Extremal.conjectures.XE1.xe1_delete_edges_rel"
       ],
       "d6e0b68e38c39040bd6f779254d19d13a6ccc841707759033ae50209efe4c192": [
         "GTMisc.conjectures.X197.x197_cop_position",
@@ -998,6 +993,11 @@
         "Chromatic.conjectures.XE1.xe1_edge_count",
         "Extremal.conjectures.X76.x76_edge_count",
         "Extremal.conjectures.X78.x78_edge_count"
+      ],
+      "f3bd33e7267a1f5060b520d423ff9884099bee1ded325504c207d91fccc52fb4": [
+        "Chromatic.conjectures.X7.x7_delete_edges",
+        "Chromatic.conjectures.XE1.xe1_delete_edges",
+        "Extremal.conjectures.XE1.xe1_delete_edges"
       ],
       "f50cf34ff898856f3aeaa92044d1fe13a401d2e406d352236e4de9e7f4c9d230": [
         "Digraph.conjectures.X45.x45_same_colour_outneighbours",
@@ -10499,9 +10499,9 @@
       "signature_shape_hash": "6c03c20bf4432115aae8c723d802f498bd04e76879cb88dab96ddf777060a7c0"
     },
     {
-      "body_hash": "513c12836a99a48eeefa063285c030ce777f56712a715347006bcf98a52220ef",
-      "body_shape_hash": "513c12836a99a48eeefa063285c030ce777f56712a715347006bcf98a52220ef",
-      "declaration_hash": "a335612deabc6e6490d8f6ef745cc0f3bd19b66f42294fb43ccddf9c50341bf2",
+      "body_hash": "d551a89d7dd0a1e227ab75c81ef1095bd9a56d0fc5bde5bdd535e971c9f39867",
+      "body_shape_hash": "d551a89d7dd0a1e227ab75c81ef1095bd9a56d0fc5bde5bdd535e971c9f39867",
+      "declaration_hash": "b65e6e77da951c310e57e27d515a8d73dec92b13cc8d2d984c820cc9c0c4a1c8",
       "direct_consumers": [
         "Chromatic.conjectures.X7.x7_delete_edges_irrefl",
         "Chromatic.conjectures.X7.x7_delete_edges_sym"
@@ -10522,9 +10522,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "10c20bbae161e4c5cab34ab72baaa8873bf33d521629129fa702fe50214e7b46",
-      "direct_consumers": [
-        "Chromatic.conjectures.X7.x7_delete_edges"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 18,
       "local_dependencies": [
@@ -10543,11 +10541,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "b3e6e62cb794c7f2a0456ee3180fe3f01750d47963ebe86b98efad7c1dbefaaf",
-      "direct_consumers": [
-        "Chromatic.conjectures.X7.x7_delete_edges"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 26,
+      "line": 22,
       "local_dependencies": [
         "x7_delete_edges_rel"
       ],
@@ -10561,19 +10557,16 @@
       "signature_shape_hash": "bc8ea20061205abe9e5d3a250879dfd116751bbca48ea9452090e1f98ce500b6"
     },
     {
-      "body_hash": "fcb6eebcc2f39b9b8f0ad1689d493ce87616cfe4882d28599b471dbec1413b8d",
-      "body_shape_hash": "9d21d6a369eb1a93a3cd3c918f35fa29ccee21b2375942747fbc98e6a633d31a",
-      "declaration_hash": "3cd6737b855d71d0a4052ee4bc867f32522e55cf02b454cacd729c39034c9768",
+      "body_hash": "f3bd33e7267a1f5060b520d423ff9884099bee1ded325504c207d91fccc52fb4",
+      "body_shape_hash": "f3bd33e7267a1f5060b520d423ff9884099bee1ded325504c207d91fccc52fb4",
+      "declaration_hash": "72a51a6b9e064385afb89959d8776f19a1482b31e749eab3665e909b0e014b04",
       "direct_consumers": [
         "Chromatic.conjectures.X7.x7_edge_deletion_preserves_chromatic",
         "Chromatic.conjectures.X7.x7_no_critical_edge"
       ],
       "kind": "Definition",
-      "line": 30,
-      "local_dependencies": [
-        "x7_delete_edges_irrefl",
-        "x7_delete_edges_sym"
-      ],
+      "line": 26,
+      "local_dependencies": [],
       "name": "x7_delete_edges",
       "normalized_name": "delete_edges",
       "package": "chromatic-theory",
@@ -10591,7 +10584,7 @@
         "Chromatic.conjectures.X7.x7_four_one_graph"
       ],
       "kind": "Definition",
-      "line": 33,
+      "line": 29,
       "local_dependencies": [
         "x7_delete_edges"
       ],
@@ -10612,7 +10605,7 @@
         "Chromatic.conjectures.X7.fixed_k_vertex_critical_edge_robust_statement"
       ],
       "kind": "Definition",
-      "line": 38,
+      "line": 34,
       "local_dependencies": [
         "x7_delete_edges"
       ],
@@ -10633,7 +10626,7 @@
         "Chromatic.conjectures.X7.six_regular_four_one_graph_statement"
       ],
       "kind": "Definition",
-      "line": 45,
+      "line": 41,
       "local_dependencies": [
         "x7_no_critical_edge"
       ],
@@ -11033,9 +11026,9 @@
       "signature_shape_hash": "51e5e2c036c88019bdb1871d59a02410d2cda6dadaf85bb2044a1bd65d7df74b"
     },
     {
-      "body_hash": "513c12836a99a48eeefa063285c030ce777f56712a715347006bcf98a52220ef",
-      "body_shape_hash": "513c12836a99a48eeefa063285c030ce777f56712a715347006bcf98a52220ef",
-      "declaration_hash": "635ec1359d575a269a59b9b4ea6c387f44308f631619fff32b305576311d478f",
+      "body_hash": "d551a89d7dd0a1e227ab75c81ef1095bd9a56d0fc5bde5bdd535e971c9f39867",
+      "body_shape_hash": "d551a89d7dd0a1e227ab75c81ef1095bd9a56d0fc5bde5bdd535e971c9f39867",
+      "declaration_hash": "6dd2f63568b9b3a5db1d58a3a04c6bce608d39f9d4ed9fec199b1d9ac707ee03",
       "direct_consumers": [
         "Chromatic.conjectures.XE1.xe1_delete_edges_irrefl",
         "Chromatic.conjectures.XE1.xe1_delete_edges_sym"
@@ -11056,9 +11049,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "1eef42799cd89c4ba1e7bd15c50cc52ed6bf0140c067d306727bac0ccb9b39a7",
-      "direct_consumers": [
-        "Chromatic.conjectures.XE1.xe1_delete_edges"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 48,
       "local_dependencies": [
@@ -11077,11 +11068,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "f76ada6927a5be24d5f515e2e6793af92222686e8584d5331d1e72e83b6b0af0",
-      "direct_consumers": [
-        "Chromatic.conjectures.XE1.xe1_delete_edges"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 56,
+      "line": 52,
       "local_dependencies": [
         "xe1_delete_edges_rel"
       ],
@@ -11095,18 +11084,15 @@
       "signature_shape_hash": "bc8ea20061205abe9e5d3a250879dfd116751bbca48ea9452090e1f98ce500b6"
     },
     {
-      "body_hash": "552706555774a6440f3525f9cfd2cdd3da506a237be2385ce836513577672c0d",
-      "body_shape_hash": "9d21d6a369eb1a93a3cd3c918f35fa29ccee21b2375942747fbc98e6a633d31a",
-      "declaration_hash": "25db5d4eeeeabf9d62e73b4f94a74d948d9c22e57c70a19409fc55f8ac560cc0",
+      "body_hash": "f3bd33e7267a1f5060b520d423ff9884099bee1ded325504c207d91fccc52fb4",
+      "body_shape_hash": "f3bd33e7267a1f5060b520d423ff9884099bee1ded325504c207d91fccc52fb4",
+      "declaration_hash": "8be65fb3ee41f84664e0c5d23ff6dc33c571da3eff15091713bfba20c8b11fa6",
       "direct_consumers": [
         "Chromatic.conjectures.XE1.xe1_edge_critical_set"
       ],
       "kind": "Definition",
-      "line": 60,
-      "local_dependencies": [
-        "xe1_delete_edges_irrefl",
-        "xe1_delete_edges_sym"
-      ],
+      "line": 56,
+      "local_dependencies": [],
       "name": "xe1_delete_edges",
       "normalized_name": "delete_edges",
       "package": "chromatic-theory",
@@ -11124,7 +11110,7 @@
         "Chromatic.conjectures.XE1.erdos_944_statement"
       ],
       "kind": "Definition",
-      "line": 63,
+      "line": 59,
       "local_dependencies": [],
       "name": "xe1_vertex_critical",
       "normalized_name": "vertex_critical",
@@ -11143,7 +11129,7 @@
         "Chromatic.conjectures.XE1.xe1_all_edge_critical_sets_large"
       ],
       "kind": "Definition",
-      "line": 66,
+      "line": 62,
       "local_dependencies": [
         "xe1_delete_edges",
         "xe1_edge_set"
@@ -11165,7 +11151,7 @@
         "Chromatic.conjectures.XE1.erdos_944_statement"
       ],
       "kind": "Definition",
-      "line": 69,
+      "line": 65,
       "local_dependencies": [
         "xe1_edge_critical_set"
       ],
@@ -11186,7 +11172,7 @@
         "Chromatic.conjectures.XE1.xe1_strong_edge_colouring"
       ],
       "kind": "Definition",
-      "line": 72,
+      "line": 68,
       "local_dependencies": [
         "xe1_edge_set"
       ],
@@ -11207,7 +11193,7 @@
         "Chromatic.conjectures.XE1.xe1_strong_chromatic_index"
       ],
       "kind": "Definition",
-      "line": 78,
+      "line": 74,
       "local_dependencies": [
         "xe1_edge_set",
         "xe1_strongly_independent_edges"
@@ -11229,7 +11215,7 @@
         "Chromatic.conjectures.XE1.erdos_149_statement"
       ],
       "kind": "Definition",
-      "line": 84,
+      "line": 80,
       "local_dependencies": [
         "xe1_strong_edge_colouring"
       ],
@@ -32084,9 +32070,9 @@
       "signature_shape_hash": "894f3bbd366a8d88593e53b666a5fbe36fb0d5348964d6ef4c60a3d8b5451acd"
     },
     {
-      "body_hash": "99fd134521218f7f53a1a151cef4aced90dc07bceb96ad962afe76b105ad865e",
-      "body_shape_hash": "99fd134521218f7f53a1a151cef4aced90dc07bceb96ad962afe76b105ad865e",
-      "declaration_hash": "a6c08b2b100c8ef4aed197ab680c494a75cf691af927402d792d717735323ef5",
+      "body_hash": "f9cc9b6cdcd539bf54ac4bd4bf0070771ce4310cec29e3ce1ba2e4a765bc70aa",
+      "body_shape_hash": "f9cc9b6cdcd539bf54ac4bd4bf0070771ce4310cec29e3ce1ba2e4a765bc70aa",
+      "declaration_hash": "0ae7e087b61d60dfbc7aaf50d7ff5ef20c083a5b2cebd90e8fc6bf9356596892",
       "direct_consumers": [
         "Extremal.conjectures.X191.x191_subquadratic_deletion_to_partite"
       ],
@@ -35101,9 +35087,9 @@
       "signature_shape_hash": "31ba293e18c5b2270f5755ab339a2cdaa31bd9b8c668a27cceea56de3375d59f"
     },
     {
-      "body_hash": "513c12836a99a48eeefa063285c030ce777f56712a715347006bcf98a52220ef",
-      "body_shape_hash": "513c12836a99a48eeefa063285c030ce777f56712a715347006bcf98a52220ef",
-      "declaration_hash": "635ec1359d575a269a59b9b4ea6c387f44308f631619fff32b305576311d478f",
+      "body_hash": "d551a89d7dd0a1e227ab75c81ef1095bd9a56d0fc5bde5bdd535e971c9f39867",
+      "body_shape_hash": "d551a89d7dd0a1e227ab75c81ef1095bd9a56d0fc5bde5bdd535e971c9f39867",
+      "declaration_hash": "6dd2f63568b9b3a5db1d58a3a04c6bce608d39f9d4ed9fec199b1d9ac707ee03",
       "direct_consumers": [
         "Extremal.conjectures.XE1.xe1_delete_edges_irrefl",
         "Extremal.conjectures.XE1.xe1_delete_edges_sym"
@@ -35124,9 +35110,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "1eef42799cd89c4ba1e7bd15c50cc52ed6bf0140c067d306727bac0ccb9b39a7",
-      "direct_consumers": [
-        "Extremal.conjectures.XE1.xe1_delete_edges"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 58,
       "local_dependencies": [
@@ -35145,9 +35129,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "f76ada6927a5be24d5f515e2e6793af92222686e8584d5331d1e72e83b6b0af0",
-      "direct_consumers": [
-        "Extremal.conjectures.XE1.xe1_delete_edges"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 62,
       "local_dependencies": [
@@ -35163,19 +35145,16 @@
       "signature_shape_hash": "bc8ea20061205abe9e5d3a250879dfd116751bbca48ea9452090e1f98ce500b6"
     },
     {
-      "body_hash": "552706555774a6440f3525f9cfd2cdd3da506a237be2385ce836513577672c0d",
-      "body_shape_hash": "9d21d6a369eb1a93a3cd3c918f35fa29ccee21b2375942747fbc98e6a633d31a",
-      "declaration_hash": "25db5d4eeeeabf9d62e73b4f94a74d948d9c22e57c70a19409fc55f8ac560cc0",
+      "body_hash": "f3bd33e7267a1f5060b520d423ff9884099bee1ded325504c207d91fccc52fb4",
+      "body_shape_hash": "f3bd33e7267a1f5060b520d423ff9884099bee1ded325504c207d91fccc52fb4",
+      "declaration_hash": "8be65fb3ee41f84664e0c5d23ff6dc33c571da3eff15091713bfba20c8b11fa6",
       "direct_consumers": [
         "Extremal.conjectures.XE1.erdos_23_statement",
         "Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_edges"
       ],
       "kind": "Definition",
       "line": 66,
-      "local_dependencies": [
-        "xe1_delete_edges_irrefl",
-        "xe1_delete_edges_sym"
-      ],
+      "local_dependencies": [],
       "name": "xe1_delete_edges",
       "normalized_name": "delete_edges",
       "package": "extremal-graph-theory",

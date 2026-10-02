@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "family": "edge-set-deletion",
+  "primitive": {
+    "canonical_name": "GTBase.common.del_edge_set",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "delete_edges",
+      "delete_edges_rel"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X7.x7_delete_edges",
+      "Chromatic.conjectures.X7.x7_delete_edges_rel",
+      "Chromatic.conjectures.XE1.xe1_delete_edges",
+      "Chromatic.conjectures.XE1.xe1_delete_edges_rel",
+      "Extremal.conjectures.X191.x191_delete_edges",
+      "Extremal.conjectures.XE1.xe1_delete_edges",
+      "Extremal.conjectures.XE1.xe1_delete_edges_rel"
+    ],
+    "consumers_remaining": 12,
+    "relation": "Relations: definitional equality with GTBase.common.del_es_rel. SGraph wrappers: same vertex type and convertible adjacency, related by the identity isomorphism. X191's fg_mk_sgraph form: extensional equality (the symmetric closure of an already symmetric, irreflexive relation), again related by the identity isomorphism.",
+    "semantic_classes": {
+      "convertible-adjacency": {
+        "count": 6,
+        "verdict": "equivalent",
+        "certificate": "GTBase.common.del_edge_set_eq_diso"
+      },
+      "fg-srel-closure": {
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Extremal.migration.delete_edges.x191_delete_edges_compat"
+      }
+    },
+    "retained_proof_lemmas": {
+      "note": "The six *_delete_edges_sym / *_delete_edges_irrefl lemmas of X7, chromatic XE1 and extremal XE1 keep their names and statements (equal up to conversion) and are re-proved from del_es_sym / del_es_irrefl. They are frozen verbatim as the opaque proof dependencies of each Legacy graph, and their normalized names are not claimed by this entry."
+    },
+    "deferred_variants": {
+      "Chromatic.conjectures.X64.x64_delete_edge_rel": "Single-edge deletion ([set x; y] != e), pointwise equal to del_es_rel [set e] (GTBase.common.del_edge_set1). Deferred to the single-edge family; M1's X64Legacy snapshot resolves through it.",
+      "Chromatic.conjectures.X64.x64_delete_edge_graph": "Single-edge deletion graph. Deferred with x64_delete_edge_rel.",
+      "Extremal.conjectures.X60.x60_delete_edge_rel": "Single-edge deletion ([set x; y] != e). Deferred; A1's X61Legacy/X61Original snapshots resolve through x60_delete_edge_graph.",
+      "Extremal.conjectures.X60.x60_delete_edge_graph": "Single-edge deletion graph. Deferred with x60_delete_edge_rel.",
+      "Reconstruction.conjectures.U11.sdel_edge": "Cross-name single-edge deletion (sde_rel), consumed by reconstruction foundations/kelly.v. Deferred with the single-edge family."
+    },
+    "known_consumer_issues": {
+      "Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_edges": "Dead and buggy (meta/STATEMENT_IMPROVEMENTS.md:1891): it deletes set0 instead of adding completion edges, and no statement uses it. Its meaning is unchanged by the alias redirect; not repaired here."
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.delete_edges.x7_delete_edges_rel_compat",
+      "Chromatic.migration.delete_edges.x7_delete_edges_compat",
+      "Chromatic.migration.delete_edges.x7_delete_edges_diso",
+      "Chromatic.migration.delete_edges.x7_delete_edges_proofs_compat",
+      "Chromatic.migration.delete_edges.xe1_delete_edges_rel_compat",
+      "Chromatic.migration.delete_edges.xe1_delete_edges_compat",
+      "Chromatic.migration.delete_edges.xe1_delete_edges_diso",
+      "Chromatic.migration.delete_edges.xe1_delete_edges_proofs_compat",
+      "Chromatic.migration.delete_edges.x7_no_critical_edge_compat",
+      "Chromatic.migration.delete_edges.x7_edge_deletion_preserves_chromatic_compat",
+      "Chromatic.migration.delete_edges.x7_four_one_graph_compat",
+      "Chromatic.migration.delete_edges.fixed_k_vertex_critical_edge_robust_statement_compat",
+      "Chromatic.migration.delete_edges.six_regular_four_one_graph_statement_compat",
+      "Chromatic.migration.delete_edges.xe1_edge_critical_set_compat",
+      "Chromatic.migration.delete_edges.xe1_all_edge_critical_sets_large_compat",
+      "Chromatic.migration.delete_edges.erdos_944_statement_compat",
+      "Extremal.migration.delete_edges.bipartite_diso",
+      "Extremal.migration.delete_edges.ball_diso",
+      "Extremal.migration.delete_edges.xe1_diameter_at_most_diso",
+      "Extremal.migration.delete_edges.xe1_delete_edges_rel_compat",
+      "Extremal.migration.delete_edges.xe1_delete_edges_compat",
+      "Extremal.migration.delete_edges.xe1_delete_edges_diso",
+      "Extremal.migration.delete_edges.xe1_delete_edges_proofs_compat",
+      "Extremal.migration.delete_edges.x191_delete_edges_compat",
+      "Extremal.migration.delete_edges.x191_delete_edges_diso",
+      "Extremal.migration.delete_edges.erdos_23_statement_compat",
+      "Extremal.migration.delete_edges.xe2_bipartite_plus_bounded_degree_compat",
+      "Extremal.migration.delete_edges.xe2_diameter_critical_two_compat",
+      "Extremal.migration.delete_edges.erdos_613_statement_compat",
+      "Extremal.migration.delete_edges.erdos_742_statement_compat",
+      "Extremal.migration.delete_edges.x191_subquadratic_deletion_to_partite_compat",
+      "Extremal.migration.delete_edges.dense_H_free_clique_blowup_subquadratic_error_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.common.del_edge_setE",
+      "GTBase.common.del_edge_set1",
+      "GTBase.common.edges_del_edge_set",
+      "GTBase.common.del_edge_set_nonedges",
+      "GTBase.common.del_edge_set_eq_diso",
+      "GTBase.common.chi_diso",
+      "GTBase.common.card_del_edge_set",
+      "GTBase.common.del_edge_setT",
+      "GTBase.common.del_edge_set_K3",
+      "GTBase.common.del_edge_set0"
+    ],
+    "public_client": "base/theories/examples/del_edge_set.v",
+    "legacy_baseline": "03742d181456af2cae63288593d5b6277687895c",
+    "migration_report": "meta/migration_reports/delete_edges.md",
+    "migration_spec": "meta/migration_reports/delete_edges.spec.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.sgraph",
+        "GraphTheory.coloring",
+        "GraphTheory.digraph",
+        "GTBase.common",
+        "GTBase.finite_graph"
+      ],
+      "result": "adapted-in-base",
+      "candidate": "GTBase.common.del_edge_set",
+      "note": "coq-graph-theory 0.9.7 has no edge-family deletion. sgraph.del_edges A deletes the edges inside a vertex set A, a different operation, which agrees with single-edge deletion only when #|e| <= 2. Upstream also provides eq_diso and iso_connected, but leaves coloring.diso_chi unproved; GTBase.common.chi_diso proves the chromatic-number invariance from chi_isubgraph. GTBase.common.del_edge_set, already used by X214, X223 and X229, is the canonical with an unchanged body.",
+      "audited_at": "2026-10-02"
+    },
+    "reviewed_by": "marcol",
+    "foundation_fidelity": "meta/foundation_fidelity/edge-set-deletion.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A2.md",
+    "reviewed_commit": "dbee364e6be7ac2e9a8e7edecbb1ff5f0878c8c0",
+    "independent_review": "meta/migration_reviews/delete_edges.md"
+  }
+}
