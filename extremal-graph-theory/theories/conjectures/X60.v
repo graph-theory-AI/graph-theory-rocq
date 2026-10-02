@@ -15,18 +15,18 @@ Definition x60_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
 Definition x60_delete_edge_rel (G : sgraph) (e : {set G}) : rel G :=
-  fun x y => (x -- y) && ([set x; y] != e).
+  @del_es_rel G [set e].
 
 Lemma x60_delete_edge_sym (G : sgraph) (e : {set G}) :
   symmetric (@x60_delete_edge_rel G e).
-Proof. by move=> x y; rewrite /x60_delete_edge_rel sgP setUC. Qed.
+Proof. exact: del_es_sym. Qed.
 
 Lemma x60_delete_edge_irrefl (G : sgraph) (e : {set G}) :
   irreflexive (@x60_delete_edge_rel G e).
-Proof. by move=> x; rewrite /x60_delete_edge_rel sg_irrefl. Qed.
+Proof. exact: del_es_irrefl. Qed.
 
 Definition x60_delete_edge_graph (G : sgraph) (e : {set G}) : sgraph :=
-  SGraph (@x60_delete_edge_sym G e) (@x60_delete_edge_irrefl G e).
+  del_edge_set G [set e].
 
 Definition x60_has_induced_cycle (G : sgraph) (n : nat) : Prop :=
   exists S : {set G}, #|S| = n /\ inhabited (induced S ≃ cycle_graph n).

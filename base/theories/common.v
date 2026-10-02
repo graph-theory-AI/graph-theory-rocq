@@ -28,6 +28,8 @@ From GraphTheory Require Export digraph sgraph connectivity.
 (* [preliminaries] is IMPORTED, not exported: [common.v] only needs its [restrict]
    notation and [bij]'s [card_bij] in proofs; downstream packages keep the vocabulary of [base.v]. *)
 From GraphTheory Require Import preliminaries bij.
+(* [coloring] is IMPORTED only to state [chi_diso]; [base.v] exports it. *)
+From GraphTheory Require Import coloring.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -170,10 +172,71 @@ Proof. by move=> x y; rewrite /del_es_rel /= sg_sym setUC. Qed.
 Lemma del_es_irrefl : irreflexive del_es_rel.
 Proof. by move=> x; rewrite /del_es_rel /= sg_irrefl. Qed.
 
-(** [del_edge_set G F]: [G] with the edges of [F] removed (vertices unchanged). *)
+(** [del_edge_set G F]: [G] with the edges of [F] removed (vertices unchanged).
+
+    Contract: the vertex type is that of [G], and [x -- y] holds exactly when
+    [x -- y] holds in [G] and the pair [[set x; y]] is not in [F]
+    ([del_edge_setE]).  [F] is an arbitrary family of vertex sets.  Members
+    that are not edges of [G] (non-adjacent pairs, singletons, sets of three or
+    more vertices) have no effect ([del_edge_set_nonedges]), and the edge set
+    of the result is exactly [E(G) :\: F] ([edges_del_edge_set]).  Corner
+    cases: [F = set0] deletes nothing ([del_edge_set0]), [F = E(G)] deletes
+    every edge ([del_edge_setT]), and [F = [set e]] deletes the single pair [e]
+    ([del_edge_set1]).  A simple graph on the same vertex type whose adjacency
+    agrees pointwise with [del_es_rel F] is isomorphic to [del_edge_set G F]
+    through the identity ([del_edge_set_eq_diso]); properties then transfer
+    along that isomorphism, the chromatic number by [chi_diso]. *)
 Definition del_edge_set : sgraph := SGraph del_es_sym del_es_irrefl.
 End DelEdgeSet.
 Arguments del_edge_set : clear implicits.
+
+(** Adjacency in [del_edge_set G F], in the form the local copies used. *)
+Lemma del_edge_setE (G : sgraph) (F : {set {set G}}) (x y : G) :
+  @edge_rel (del_edge_set G F) x y = (x -- y) && ([set x; y] \notin F).
+Proof. by []. Qed.
+
+(** Deleting the one-element family [[set e]] removes exactly the pair [e]. *)
+Lemma del_edge_set1 (G : sgraph) (e : {set G}) (x y : G) :
+  @edge_rel (del_edge_set G [set e]) x y = (x -- y) && ([set x; y] != e).
+Proof. by rewrite del_edge_setE inE. Qed.
+
+(** The edges of [del_edge_set G F] are exactly the edges of [G] outside [F]. *)
+Lemma edges_del_edge_set (G : sgraph) (F : {set {set G}}) :
+  E(del_edge_set G F) = E(G) :\: F.
+Proof.
+apply/setP=> e; rewrite inE; apply/edgesP/andP.
+- case=> x [y] [-> /andP[xy xyF]]; split=> //.
+  by rewrite in_edges.
+- case=> eF /edgesP[x [y [exy xy]]]; exists x, y; split=> //.
+  by rewrite del_edge_setE xy -exy eF.
+Qed.
+
+(** Members of [F] that are not edges of [G] have no effect. *)
+Lemma del_edge_set_nonedges (G : sgraph) (F : {set {set G}}) :
+  [disjoint F & E(G)] -> @edge_rel (del_edge_set G F) =2 @edge_rel G.
+Proof.
+move=> dis x y; rewrite del_edge_setE.
+case xy: (@edge_rel G x y) => //=; apply/negP => xyF.
+move: dis; rewrite disjoints_subset => /subsetP/(_ _ xyF).
+by rewrite inE in_edges xy.
+Qed.
+
+(** Same-carrier transport: a simple graph on [G] with the adjacency of
+    [del_edge_set G F] is isomorphic to it through the identity. *)
+Lemma del_edge_set_eq_diso (G : sgraph) (F : {set {set G}}) (r : rel G)
+    (r_sym : symmetric r) (r_irrefl : irreflexive r) :
+  r =2 del_es_rel F -> diso (SGraph r_sym r_irrefl) (del_edge_set G F).
+Proof. by move=> rE; apply: eq_diso. Qed.
+
+(** The chromatic number is invariant under isomorphism (upstream states this
+    as [coloring.diso_chi] but leaves it unproved). *)
+Lemma chi_diso (F G : sgraph) : diso F G -> χ([set: F]) = χ([set: G]).
+Proof.
+move=> i; rewrite (chi_isubgraph (iso_isubgraph i)).
+suff -> : [set iso_isubgraph i x | x in [set: F]] = [set: G] by [].
+apply/setP=> y; rewrite inE; apply/imsetP; exists (i^-1 y) => //=.
+by rewrite bijK'.
+Qed.
 
 (** k-edge-connectivity: at least two vertices, and deleting fewer than [k]
     edges always leaves the graph connected (the edge analogue of base's
@@ -219,6 +282,30 @@ Qed.
 Lemma induced_free_diso (G H H' : sgraph) :
   diso H H' -> induced_free G H -> induced_free G H'.
 Proof. by move=> i free S j; apply: (free S); exact: diso_comp j (diso_sym i). Qed.
+
+(** An isomorphism of hosts carries induced copies, with their size: an induced
+    copy of [H] on [S] in [G] gives one on a vertex set of the same size in [G']. *)
+Lemma induced_copy_host_diso (G G' H : sgraph) (i : diso G G') (S : {set G}) :
+  diso (induced S) H -> exists S' : {set G'}, #|S'| = #|S| /\ inhabited (induced S' ≃ H).
+Proof.
+move=> j; pose k : H ⇀ G' :=
+  isubgraph_comp (iso_isubgraph (diso_sym j)) (isubgraph_comp (induced_isubgraph S) (iso_isubgraph i)).
+exists [set x in codom k]; split; last by split; exact: diso_sym (isubgraph_induced k).
+have kinj : injective k by exact: isubgraph_inj.
+have e1 : #|[set x in codom k]| = #|H| by rewrite cardsE card_codom.
+have e2 : #|induced S| = #|S| by rewrite card_sig; apply: eq_card => x; rewrite !inE.
+by rewrite e1 -e2 (card_bij (diso_v j)).
+Qed.
+
+(** Only the isomorphism type of the host matters either. *)
+Lemma induced_free_host_diso (G G' H : sgraph) :
+  diso G G' -> induced_free G H -> induced_free G' H.
+Proof.
+move=> i free S' j; pose k : H ⇀ G :=
+  isubgraph_comp (iso_isubgraph (diso_sym j))
+    (isubgraph_comp (induced_isubgraph S') (iso_isubgraph (diso_sym i))).
+exact: free _ (diso_sym (isubgraph_induced k)).
+Qed.
 
 (** ** Complete bipartite graphs *)
 
@@ -386,6 +473,54 @@ Proof. by case/set0Pn => e eA; apply/pred0Pn; exists e; rewrite /= eA. Qed.
 (** Deleting no edge changes nothing. *)
 Lemma del_edge_set0 (G : sgraph) : @edge_rel (del_edge_set G set0) =2 @edge_rel G.
 Proof. by move=> x y; rewrite /edge_rel /= /del_es_rel /= inE andbT. Qed.
+
+(** Deleting edges never changes the vertex type, hence the vertex count. *)
+Lemma card_del_edge_set (G : sgraph) (F : {set {set G}}) :
+  #|del_edge_set G F| = #|G|.
+Proof. by []. Qed.
+
+(** Deleting every edge leaves no edge (guard has teeth). *)
+Lemma del_edge_setT (G : sgraph) (x y : G) :
+  ~~ @edge_rel (del_edge_set G E(G)) x y.
+Proof. by rewrite del_edge_setE in_edges; case: (x -- y). Qed.
+
+(** Grounding on the triangle: deleting the pair [{0, 2}] removes exactly that
+    edge, the edge [{0, 1}] survives. *)
+Lemma del_edge_set_K3 :
+  let T := del_edge_set 'K_3 [set [set ord0; ord_max]] in
+  ~~ @edge_rel T ord0 ord_max /\ @edge_rel T ord0 (@Ordinal 3 1 isT).
+Proof.
+split; rewrite del_edge_set1 ?eqxx ?andbF //=.
+by apply/eqP => /setP/(_ (@Ordinal 3 1 isT)); rewrite !inE.
+Qed.
+
+(** *** Single-edge deletion [del_edge_set G [set e]] *)
+
+(** A real edge is removed. *)
+Lemma del_edge_set1_edge (G : sgraph) (x y : G) :
+  ~~ @edge_rel (del_edge_set G [set [set x; y]]) x y.
+Proof. by rewrite del_edge_set1 eqxx andbF. Qed.
+
+(** Every other pair keeps its adjacency. *)
+Lemma del_edge_set1_other (G : sgraph) (e : {set G}) (x y : G) :
+  [set x; y] != e -> @edge_rel (del_edge_set G [set e]) x y = x -- y.
+Proof. by move=> xye; rewrite del_edge_set1 xye andbT. Qed.
+
+(** Corner case: a pair [e] that is not a two-element set (empty, a singleton,
+    or three or more vertices) deletes nothing. *)
+Lemma del_edge_set1_invalid (G : sgraph) (e : {set G}) :
+  #|e| != 2 -> @edge_rel (del_edge_set G [set e]) =2 @edge_rel G.
+Proof.
+move=> e2 x y; rewrite del_edge_set1.
+case xy: (@edge_rel G x y) => //=; apply: contra e2 => /eqP <-.
+by rewrite cards2 (sg_edgeNeq xy).
+Qed.
+
+(** Deleting the same pair twice is deleting it once. *)
+Lemma del_edge_set1_twice (G : sgraph) (e : {set G}) :
+  @edge_rel (del_edge_set (del_edge_set G [set e]) [set e]) =2
+  @edge_rel (del_edge_set G [set e]).
+Proof. by move=> x y; rewrite !del_edge_set1 -andbA andbb. Qed.
 
 (** Consistency: 1-edge-connected = at least two vertices and connected. *)
 Lemma connected_del_edge_set0 (G : sgraph) (A : {set G}) :
@@ -579,7 +714,10 @@ Proof. by move=> ac x; apply/negP => xx; move: (ac x x xx); rewrite connect0. Qe
     [not_perfect_matching_loop], [card_perfect_matching], [not_perfect_matching_odd],
     [not_perfect_matching_K3], [hamiltonian_K3], [not_hamiltonian_K1],
     [traceable_K1], [hamiltonian_cycle_size], [hamiltonian_K2], [edge_disjointC], [edge_disjoint0],
-    [not_edge_disjoint_self], [del_edge_set0], [connected_del_edge_set0],
+    [not_edge_disjoint_self], [del_edge_setE], [del_edge_set1],
+    [edges_del_edge_set], [del_edge_set_nonedges], [del_edge_set_eq_diso],
+    [chi_diso], [card_del_edge_set], [del_edge_setT], [del_edge_set_K3],
+    [del_edge_set0], [connected_del_edge_set0],
     [k_edge_connected1], [connected_K2], [k_edge_connected_K2],
     [not_k_edge_connected_K1], [has_subgraph_refl], [has_subgraph_Kn],
     [induced_free_inhabited], [induced_free_diso], [induced_free_card],

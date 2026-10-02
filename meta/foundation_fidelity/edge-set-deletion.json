@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "family": "edge-set-deletion",
+  "modules": {
+    "GTBase.common": {
+      "path": "base/theories/common.v",
+      "overrides": {
+        "del_edge_set": {
+          "verdict": "FAITHFUL",
+          "note": "Edge-family deletion: same vertex type, and x -- y exactly when x -- y in G and [set x; y] is not in F. Members of F that are not edges have no effect; the edge set is E(G) :\\: F; F = set0 deletes nothing, F = E(G) deletes every edge, F = [set e] deletes the single pair e."
+        },
+        "del_es_rel": {
+          "verdict": "FAITHFUL",
+          "note": "The adjacency of del_edge_set G F: (x -- y) && ([set x; y] \\notin F), symmetric and irreflexive."
+        }
+      },
+      "machine_evidence": [
+        "del_edge_setE",
+        "del_edge_set1",
+        "edges_del_edge_set",
+        "del_edge_set_nonedges",
+        "del_edge_set_eq_diso",
+        "chi_diso",
+        "card_del_edge_set",
+        "del_edge_setT",
+        "del_edge_set_K3",
+        "del_edge_set0"
+      ]
+    }
+  }
+}

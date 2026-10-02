@@ -54,18 +54,18 @@ Definition xe1_size_ramsey_number (H K : sgraph) (m : nat) : Prop :=
   forall m' : nat, xe1_size_ramsey H K m' -> m <= m'.
 
 Definition xe1_delete_edges_rel (G : sgraph) (F : {set {set G}}) : rel G :=
-  fun x y => (x -- y) && ([set x; y] \notin F).
+  @del_es_rel G F.
 
 Lemma xe1_delete_edges_sym (G : sgraph) (F : {set {set G}}) :
   symmetric (@xe1_delete_edges_rel G F).
-Proof. by move=> x y; rewrite /xe1_delete_edges_rel sgP setUC. Qed.
+Proof. exact: del_es_sym. Qed.
 
 Lemma xe1_delete_edges_irrefl (G : sgraph) (F : {set {set G}}) :
   irreflexive (@xe1_delete_edges_rel G F).
-Proof. by move=> x; rewrite /xe1_delete_edges_rel sg_irrefl. Qed.
+Proof. exact: del_es_irrefl. Qed.
 
 Definition xe1_delete_edges (G : sgraph) (F : {set {set G}}) : sgraph :=
-  SGraph (@xe1_delete_edges_sym G F) (@xe1_delete_edges_irrefl G F).
+  del_edge_set G F.
 
 Fixpoint xe1_hypercube (d : nat) : sgraph :=
   match d with

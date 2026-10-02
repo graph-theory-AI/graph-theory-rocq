@@ -44,22 +44,18 @@ Definition xe1_unbounded (f : nat -> nat) : Prop :=
   forall M : nat, exists n : nat, M <= f n.
 
 Definition xe1_delete_edges_rel (G : sgraph) (F : {set {set G}}) : rel G :=
-  fun x y => (x -- y) && ([set x; y] \notin F).
+  @del_es_rel G F.
 
 Lemma xe1_delete_edges_sym (G : sgraph) (F : {set {set G}}) :
   symmetric (@xe1_delete_edges_rel G F).
-Proof.
-move=> x y; rewrite /xe1_delete_edges_rel.
-rewrite sgP.
-by rewrite setUC.
-Qed.
+Proof. exact: del_es_sym. Qed.
 
 Lemma xe1_delete_edges_irrefl (G : sgraph) (F : {set {set G}}) :
   irreflexive (@xe1_delete_edges_rel G F).
-Proof. by move=> x; rewrite /xe1_delete_edges_rel sg_irrefl. Qed.
+Proof. exact: del_es_irrefl. Qed.
 
 Definition xe1_delete_edges (G : sgraph) (F : {set {set G}}) : sgraph :=
-  SGraph (@xe1_delete_edges_sym G F) (@xe1_delete_edges_irrefl G F).
+  del_edge_set G F.
 
 Definition xe1_vertex_critical (G : sgraph) (k : nat) : Prop :=
   forall v : G, χ([set: induced (~: [set v])]) < k.
