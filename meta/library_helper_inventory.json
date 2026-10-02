@@ -94,6 +94,11 @@
         "GTMisc.conjectures.X167.x167_spanning_tree_polytope_xc",
         "GTMisc.conjectures.X168.x168_spanning_tree_polytope_xc"
       ],
+      "237e45dbc629be4bba94653df71f58c7c98dc7d731bc83c806b9a71c49b16be1": [
+        "Cycle.conjectures.X24.x24_perfect_matching",
+        "Packing.conjectures.X18.x18_perfect_matching",
+        "Packing.conjectures.X25.x25_perfect_matching"
+      ],
       "24b08eacade464bf472dcfcbb2c2bbc3c183edcb5b1bf9ce2b8508a0a1c843a9": [
         "Extremal.conjectures.X98.x98_consecutive_in_path",
         "GTMisc.conjectures.X114.x114_consecutive_in_path",
@@ -1011,10 +1016,6 @@
         "GTMisc.conjectures.X39.x39_xy_path",
         "Minor.conjectures.X11.x11_xy_path",
         "Packing.conjectures.X26.x26_xy_path"
-      ],
-      "f89cf128ae1fa1ebf4e76620ff80e66addf6af382c4097f0d36a6684c5d890b5": [
-        "Cycle.conjectures.X24.x24_perfect_matching",
-        "Packing.conjectures.X25.x25_perfect_matching"
       ],
       "fa764d43c3b1434089898939e937e70eb615b809e4484d7ddb0651a30b22b5a7": [
         "Extremal.conjectures.X98.x98_internal",
@@ -14241,8 +14242,7 @@
       "body_shape_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
       "declaration_hash": "fabb97ecf2bcd77d02056b4e7f9bc72ecdfee8db6fe5b7a08ec70f613f6d1df7",
       "direct_consumers": [
-        "Cycle.conjectures.X24.x24_one_factorization",
-        "Cycle.conjectures.X24.x24_perfect_matching"
+        "Cycle.conjectures.X24.x24_one_factorization"
       ],
       "kind": "Definition",
       "line": 8,
@@ -14257,17 +14257,15 @@
       "signature_shape_hash": "4efb584da06ad8a83a527b97108d055474beb96dccc05ca26ea26b6c254ef1e4"
     },
     {
-      "body_hash": "07a9e84e4132dba5af71ac49d75194a7142239f8ef6fc351da09b24c48c2a510",
-      "body_shape_hash": "f89cf128ae1fa1ebf4e76620ff80e66addf6af382c4097f0d36a6684c5d890b5",
-      "declaration_hash": "bbd548c8d071c710cdedffae4165c13bb235bc408430ae5e23d960e3d4540e5e",
+      "body_hash": "237e45dbc629be4bba94653df71f58c7c98dc7d731bc83c806b9a71c49b16be1",
+      "body_shape_hash": "237e45dbc629be4bba94653df71f58c7c98dc7d731bc83c806b9a71c49b16be1",
+      "declaration_hash": "2947b488432a854d5ffb058bdef61df4d64815039b6f4a12115e0a3532da68bf",
       "direct_consumers": [
         "Cycle.conjectures.X24.x24_one_factorization"
       ],
       "kind": "Definition",
       "line": 13,
-      "local_dependencies": [
-        "x24_edge_set"
-      ],
+      "local_dependencies": [],
       "name": "x24_perfect_matching",
       "normalized_name": "perfect_matching",
       "package": "cycle-theory",
@@ -14285,7 +14283,7 @@
         "Cycle.conjectures.X24.one_factorization_long_rainbow_cycle_statement"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 19,
       "local_dependencies": [
         "x24_edge_set",
         "x24_perfect_matching"
@@ -14307,7 +14305,7 @@
         "Cycle.conjectures.X24.x24_rainbow_cycle"
       ],
       "kind": "Definition",
-      "line": 22,
+      "line": 24,
       "local_dependencies": [],
       "name": "x24_cycle_edge_seq",
       "normalized_name": "cycle_edge_seq",
@@ -14326,7 +14324,7 @@
         "Cycle.conjectures.X24.one_factorization_long_rainbow_cycle_statement"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 27,
       "local_dependencies": [
         "x24_cycle_edge_seq"
       ],
@@ -52125,9 +52123,9 @@
       "signature_shape_hash": "b349edbd8727460c5c27fae24985aaf8e8bf31eebc8916f711a74ad4c152d099"
     },
     {
-      "body_hash": "2d7da5cdc6bea83708102aed820bf5483acdcdc58b1e1f6e93aa32bba6792082",
-      "body_shape_hash": "e6d3d29eb712f248bd2c2a92895fa937c2c0037990edae9f5210cbf871213b73",
-      "declaration_hash": "08c9b80515a04dd33fda7624fcffd35dfeeafe50f9d0cb402793ea5a20147632",
+      "body_hash": "237e45dbc629be4bba94653df71f58c7c98dc7d731bc83c806b9a71c49b16be1",
+      "body_shape_hash": "237e45dbc629be4bba94653df71f58c7c98dc7d731bc83c806b9a71c49b16be1",
+      "declaration_hash": "014184e14a47614318f77ff2224f462cb0a0ba540d1c74b2b39345d7a425c257",
       "direct_consumers": [
         "Packing.conjectures.X18.knn_fair_perfect_matching_statement"
       ],
@@ -52547,7 +52545,6 @@
       "body_shape_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
       "declaration_hash": "d56e426d4ab316e9264961c0c6e77d6e30fa9413d34291ea4d57249e82db1f05",
       "direct_consumers": [
-        "Packing.conjectures.X25.x25_perfect_matching",
         "Packing.conjectures.X25.x25_perfect_one_factorization"
       ],
       "kind": "Definition",
@@ -52563,17 +52560,15 @@
       "signature_shape_hash": "4efb584da06ad8a83a527b97108d055474beb96dccc05ca26ea26b6c254ef1e4"
     },
     {
-      "body_hash": "06417e195d834b98a6b3032b5a62d8a9d261a665cf36986654effa72bdd1e1e2",
-      "body_shape_hash": "f89cf128ae1fa1ebf4e76620ff80e66addf6af382c4097f0d36a6684c5d890b5",
-      "declaration_hash": "2dc8bc8bc6ba14b0f39a64628b8f1e20a63fb56aca250d1dbe4ba96ce8283b61",
+      "body_hash": "237e45dbc629be4bba94653df71f58c7c98dc7d731bc83c806b9a71c49b16be1",
+      "body_shape_hash": "237e45dbc629be4bba94653df71f58c7c98dc7d731bc83c806b9a71c49b16be1",
+      "declaration_hash": "08db36259d7758bab318bdc1c1988b845724610b03fd7df033b12b275d4d8d39",
       "direct_consumers": [
         "Packing.conjectures.X25.x25_perfect_one_factorization"
       ],
       "kind": "Definition",
       "line": 13,
-      "local_dependencies": [
-        "x25_edge_set"
-      ],
+      "local_dependencies": [],
       "name": "x25_perfect_matching",
       "normalized_name": "perfect_matching",
       "package": "packing-theory",
@@ -52591,7 +52586,7 @@
         "Packing.conjectures.X25.x25_hamiltonian_edge_set"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 19,
       "local_dependencies": [],
       "name": "x25_cycle_edge_seq",
       "normalized_name": "cycle_edge_seq",
@@ -52610,7 +52605,7 @@
         "Packing.conjectures.X25.x25_perfect_one_factorization"
       ],
       "kind": "Definition",
-      "line": 20,
+      "line": 22,
       "local_dependencies": [
         "x25_cycle_edge_seq"
       ],
@@ -52631,7 +52626,7 @@
         "Packing.conjectures.X25.kotzig_perfect_one_factorization_statement"
       ],
       "kind": "Definition",
-      "line": 26,
+      "line": 28,
       "local_dependencies": [
         "x25_edge_set",
         "x25_hamiltonian_edge_set",

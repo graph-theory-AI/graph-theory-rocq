@@ -103,19 +103,17 @@ Proof. by []. Qed.
 
 (** ** Perfect matchings: [X18] and [X25] declare the same notion *********
 
-    [x18_perfect_matching] asks for an [x15_matching] saturating every vertex;
-    [x25_perfect_matching] asks for a set of edges saturating every vertex.  The
-    "at most one" clause of [x15_matching] is implied by saturation, so the two
-    agree. *)
+    Since the C2 library migration (2026-10-02) both [x18_perfect_matching] and
+    [x25_perfect_matching] ARE transparent aliases of
+    [GTBase.common.perfect_matching], so the bridge holds by reflexivity.  The
+    original bodies ([x15_matching] saturating every vertex; a set of edges
+    saturating every vertex) are frozen and certified in
+    theories/migration/matching.v (C1) and theories/migration/simple_edges.v (M1). *)
 
 Lemma x18_perfect_matching_equiv_x25_perfect_matching
     (G : sgraph) (M : {set {set G}}) :
   x18_perfect_matching M <-> x25_perfect_matching M.
-Proof.
-rewrite /x18_perfect_matching /x15_matching /x25_perfect_matching x25_edge_setE.
-split=> [[/matching_subset MS M1]|[MS M1]]; first by split.
-by split=> //; apply/matching_at_most_oneP; split=> // v; rewrite (M1 v).
-Qed.
+Proof. by []. Qed.
 
 Print Assumptions x15_edge_setE.
 Print Assumptions hamiltonian_cycleGE.
