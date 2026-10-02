@@ -2,7 +2,9 @@
 """Generate and check the migration report of one library-migration family.
 
 Usage:
-    python3 meta/migration_report.py FAMILY [--write | --check]
+    python3 meta/migration_report.py FAMILY [--write | --check] [--kernel]
+    python3 meta/migration_report.py --all --check [--kernel]
+    python3 meta/migration_report.py FAMILY --details /tmp/migration-details
     python3 meta/migration_report.py --validate
 
 FAMILY names a spec file meta/migration_reports/FAMILY.spec.json.  The spec lists
@@ -11,8 +13,14 @@ name and the commit it is frozen from), the frozen copy (certificate path, modul
 and name), the identifier substitutions that turn the original text into the
 frozen one, and the certificate theorem relating the frozen body to the live one.
 
-The generator is toolchain-free (it reads sources and git history, it never runs
-Rocq; the certificates themselves are checked by check_library_migration.py).
+The default checks are toolchain-free. --kernel additionally checks the exact
+types and assumptions of closed statement certificates, using already-built
+modules; check_library_migration.py checks the registered helper/API assumptions.
+Lexical reference discovery is conservative, not Rocq name resolution. In
+particular it does not certify Section scaffolding or compiled dependency closure;
+family-specific Section and kernel dependency evidence remains required.
+Statement objects may select corpus "opg" or "v2", or explicitly set
+"non_corpus": true. Unmarked statements must resolve uniquely in the manifests.
 It verifies that
 
   * each frozen copy equals its original declaration, after comment stripping,
@@ -28,10 +36,10 @@ It verifies that
     since the baseline, and the listed distinct name matches are untouched;
   * every certificate theorem is declared in its certificate file.
 
-It also lists every repository-wide reference to the family's helpers, chains and
-statements, and every direct user of the canonical definition.  --write refreshes
-meta/migration_reports/FAMILY.{json,md}; --check fails on any failed verification
-or drift of those files.
+--write refreshes only the compact committed meta/migration_reports/FAMILY.md;
+--check verifies its contents and all source checks. --details DIR writes the
+full deterministic JSON and Markdown evidence to DIR, independently of the
+compact output. Full reports are generated on demand, not committed artifacts.
 """
 
 from __future__ import annotations
@@ -40,11 +48,17 @@ import argparse
 import hashlib
 import json
 import re
+import shlex
 import subprocess
 import sys
+import tempfile
+from collections import defaultdict
 from pathlib import Path
 
 import library_inventory as INV
+import corpus_registry as REG
+import rocq_toolchain as ROCQ
+from family_registry import RegistryError, load_library_registry
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,6 +75,7 @@ DECL_RE = re.compile(
 )
 MODULE_RE = re.compile(rf"^\s*Module\s+({IDENT})\s*\.", re.M)
 SKIP_PREFIXES = ("_assum_", "_faith_", "scratch_", "gcheck")
+QUALIFIED_IDENT_RE = re.compile(rf"(?<![A-Za-z0-9_'.]){IDENT}(?:\.{IDENT})*(?![A-Za-z0-9_'])")
 
 
 def sha256(text: str) -> str:
@@ -85,7 +100,18 @@ def blob_at(commit: str, path: str) -> str:
 
 
 def ref_re(name: str) -> re.Pattern[str]:
-    return re.compile(rf"(?<![A-Za-z0-9_'.]){re.escape(name)}(?![A-Za-z0-9_'])")
+    # Match from the beginning of a qualified name; callers can distinguish a
+    # live module reference from Legacy.foo without losing either reference.
+    return re.compile(rf"(?<![A-Za-z0-9_'.])(?:{IDENT}\.)*{re.escape(name)}(?![A-Za-z0-9_'])")
+
+
+def frozen_reference(name: str, modules: set[str] = frozenset()) -> bool:
+    return any(part in modules or part == "Legacy" or part.endswith(("Legacy", "Original"))
+               for part in name.split(".")[:-1])
+
+
+def live_reference(text: str, name: str, modules: set[str] = frozenset()) -> bool:
+    return any(not frozen_reference(m.group(), modules) for m in ref_re(name).finditer(text))
 
 
 def module_spans(clean: str) -> list[tuple[str, int, int]]:
@@ -157,13 +183,138 @@ def doc_block(src: str, name: str) -> str | None:
 
 
 def manifest_rows(commit: str | None) -> tuple[dict, dict]:
-    manifest = json.loads(source_at(commit, "meta/v2_corpus_manifest.json"))
-    legs = json.loads(source_at(commit, "meta/v2_legs_state.json"))
     rows: dict[str, list[dict]] = {}
-    for row in manifest["rows"]:
-        if row.get("formal_name"):
-            rows.setdefault(row["formal_name"], []).append(row)
-    return rows, legs.get("entries", {})
+    overlays = {}
+    for corpus, paths in REG.CORPORA.items():
+        manifest = json.loads(source_at(commit, "meta/" + paths["manifest"]))
+        legs = json.loads(source_at(commit, "meta/" + paths["overlay"]))
+        overlays[corpus] = legs.get("entries", {})
+        for row in manifest["rows"]:
+            if row.get("formal_name"):
+                rows.setdefault(row["formal_name"], []).append({"_corpus": corpus, **row})
+    return rows, overlays
+
+
+def rows_for_object(rows: dict, obj: dict) -> list[dict]:
+    package = obj["path"].split("/", 1)[0]
+    return [row for row in rows.get(obj["name"], [])
+            if row.get("repo") == package
+            and (not obj.get("corpus") or row["_corpus"] == obj["corpus"])]
+
+
+def module_for_path(path: str, namespaces: dict | None = None) -> str:
+    package, relative = path.split("/theories/", 1)
+    namespaces = {"base": "GTBase", "atlas": "Atlas", **REG.NS, **(namespaces or {})}
+    return namespaces[package] + "." + relative[:-2].replace("/", ".")
+
+
+def affected_statements(base: str, sources: set[str], rows: dict) -> set[str]:
+    """Discover baseline statement consumers independently of the frozen list.
+
+    Read only build-listed conjecture declarations, resolve same-file names first,
+    then qualified suffixes / unambiguous short names. Ambiguous imported short
+    names conservatively add all candidates. This can request extra review for
+    ambiguous explicit references. Notation and constructor resolution still
+    require the separate kernel dependency checks and independent review.
+    """
+    paths = git("ls-tree", "-r", "--name-only", base).splitlines()
+    projects, nodes, node_packages, short_names = {}, {}, {}, defaultdict(set)
+    for path in paths:
+        if "/theories/conjectures/" not in path or not path.endswith(".v"):
+            continue
+        if Path(path).name.startswith(SKIP_PREFIXES):
+            continue
+        package = path.split("/", 1)[0]
+        if package not in projects:
+            projects[package] = {
+                line.split("#", 1)[0].strip()
+                for line in source_at(base, package + "/_CoqProject").splitlines()
+            }
+        if path.split("/", 1)[1] not in projects[package]:
+            continue
+        module = module_for_path(path)
+        for decl in declarations(source_at(base, path)):
+            if decl["module"] is None:
+                qualified = module + "." + decl["name"]
+                nodes[qualified] = (module, decl)
+                node_packages[qualified] = package
+                short_names[decl["name"]].add(qualified)
+    reverse = defaultdict(set)
+    for qualified, (module, decl) in nodes.items():
+        for token in QUALIFIED_IDENT_RE.findall(body_after_name(decl)):
+            if "." in token:
+                candidates = {name for name in short_names[token.rsplit(".", 1)[-1]]
+                              if name == token or name.endswith("." + token)}
+            elif module + "." + token in nodes:
+                candidates = {module + "." + token}
+            else:
+                candidates = short_names[token]
+            for dependency in candidates:
+                reverse[dependency].add(qualified)
+    reached, pending = set(sources), list(sources)
+    while pending:
+        for consumer in reverse[pending.pop()] - reached:
+            reached.add(consumer)
+            pending.append(consumer)
+    return {name for name in reached if name in nodes and
+            (name.rsplit(".", 1)[-1].endswith("_statement") or
+             any(row.get("repo") == node_packages[name]
+                 for row in rows.get(name.rsplit(".", 1)[-1], [])))}
+
+
+def migrated_registry_sources(entry: dict) -> set[str]:
+    classes = list(entry.get("semantic_classes", {}).values())
+    migrated = [group for group in classes if group.get("state", "").startswith("migrated")]
+    return ({name for group in migrated for name in group.get("members", [])}
+            if migrated else set(entry.get("source_definitions", [])))
+
+
+def certificate_endpoints(declaration: str, obj: dict, frozen_module: str) -> bool:
+    """A textual cross-check only: exact statement types are checked by --kernel."""
+    frozen = frozen_module + "." + obj["frozen"]
+    live = obj["qualified"]
+    tokens = set(QUALIFIED_IDENT_RE.findall(declaration))
+    return any(token == frozen or token == obj["frozen"] for token in tokens) and any(
+        token == live or token == obj["name"] for token in tokens)
+
+
+def check_kernel(spec: dict) -> list[str]:
+    """Check statement exact types and all named assumptions; never build packages."""
+    groups = defaultdict(list)
+    certificates = defaultdict(set)
+    packages = {namespace: package for package, namespace in spec["namespaces"].items()}
+    theorem_names = {obj["certificate"] for obj in spec["frozen"] if obj.get("certificate")}
+    theorem_names.update(spec.get("extra_certificates", []))
+    for name in theorem_names:
+        certificates[packages[name.split(".", 1)[0]]].add(name)
+    for obj in spec["frozen"]:
+        if obj["kind"] in {"statement", "original-statement"}:
+            groups[obj["frozen_path"].split("/", 1)[0]].append(obj)
+    errors = []
+    for package in sorted(certificates):
+        objects = groups[package]
+        tokens = shlex.split((ROOT / package / "_CoqProject").read_text(), comments=True)
+        flags = []
+        for index, token in enumerate(tokens[:-2]):
+            if token in {"-R", "-Q"}:
+                flags.extend(tokens[index:index + 3])
+        imports = sorted({module_for_path(obj["frozen_path"], spec["namespaces"])
+                          for obj in objects} | {name.rsplit(".", 1)[0]
+                                                for name in certificates[package]})
+        body = ["Require " + module + "." for module in imports]
+        for obj in objects:
+            frozen = module_for_path(obj["frozen_path"], spec["namespaces"]) + "." + obj["frozen"]
+            body.append(f"Check ({obj['certificate']} : {frozen} <-> {obj['qualified']}).")
+        body.extend(f"Print Assumptions {name}." for name in sorted(certificates[package]))
+        with tempfile.TemporaryDirectory(prefix="migration-exact-type-") as tmp:
+            probe = Path(tmp) / "migration_exact_type.v"
+            probe.write_text("\n".join(body) + "\n")
+            proc = subprocess.run(["coqc", *flags, str(probe)], cwd=ROOT / package,
+                                  env=ROCQ.environment(), text=True, capture_output=True)
+        output = proc.stdout + proc.stderr
+        if proc.returncode or "Axioms:" in output or output.count("Closed under the global context") != len(certificates[package]):
+            errors.append(f"{package}: statement exact-type/assumptions probe failed: {output[-1600:]}")
+    return errors
 
 
 def body_after_name(decl: dict) -> str:
@@ -198,8 +349,19 @@ def build_report(spec: dict) -> dict:
     def check(ok: bool, what: str, detail: str = "") -> None:
         checks.append({"ok": bool(ok), "check": what, "detail": detail})
 
+    registry = load_library_registry(ROOT)["primitives"]
+    entry = registry.get(spec["family"], {})
+    expected_sources = migrated_registry_sources(entry)
+    actual_sources = {obj["qualified"] for obj in spec["frozen"] if obj["kind"] == "source"}
+    check(bool(entry) and actual_sources == expected_sources,
+          "migrated source coverage matches the registry",
+          f"missing={sorted(expected_sources - actual_sources)}; extra={sorted(actual_sources - expected_sources)}")
+    check(spec["canonical_name"] == entry.get("canonical_name"), "canonical name matches the registry")
+    frozen_modules = {obj["frozen"].split(".", 1)[0] for obj in spec["frozen"] if "." in obj["frozen"]}
     frozen_rows = []
     for obj in spec["frozen"]:
+        check(obj["qualified"] == module_for_path(obj["path"], spec["namespaces"]) + "." + obj["name"],
+              f"{obj['qualified']}: source identity matches its path and declaration")
         commit = obj.get("commit", base)
         src = source_at(commit, obj["path"])
         try:
@@ -261,6 +423,22 @@ def build_report(spec: dict) -> dict:
     for name in theorem_names:
         check(name in cert_decls, f"certificate theorem {name} is declared",
               "" if name in cert_decls else "missing")
+    registered = {name for primitive in registry.values()
+                  for name in primitive.get("api_theorems", []) + primitive.get("compatibility_theorems", [])}
+    family_certificates = set(entry.get("compatibility_theorems", []))
+    for obj in spec["frozen"]:
+        name = obj.get("certificate")
+        # Older-family snapshots must remain registered with their original
+        # family; primary source/statement bridges belong to this family.
+        allowed = family_certificates if obj["kind"] in {"source", "statement"} else registered
+        if obj["kind"] != "m1-frozen":
+            check(bool(name) and name in allowed, f"{obj['qualified']}: certificate is registered",
+                  str(name))
+        if name in cert_decls:
+            check(certificate_endpoints(cert_decls[name], obj,
+                                        module_for_path(obj["frozen_path"], spec["namespaces"])),
+                  f"{obj['qualified']}: certificate text names its frozen and live endpoints",
+                  "textual correspondence only; use --kernel for closed statement exact types")
 
     # The frozen chain of each statement covers every same-file declaration
     # through which the statement reaches a source helper.
@@ -271,6 +449,11 @@ def build_report(spec: dict) -> dict:
     computed_chain: set[str] = set()
     rows_base, legs_base = manifest_rows(base)
     rows_now, legs_now = manifest_rows(None)
+    expected_statements = affected_statements(base, expected_sources, rows_base)
+    supplied_statements = {obj["qualified"] for obj in spec["frozen"] if obj["kind"] == "statement"}
+    check(expected_statements == supplied_statements,
+          "affected statement coverage matches baseline dependencies",
+          f"missing={sorted(expected_statements - supplied_statements)}; extra={sorted(supplied_statements - expected_statements)}")
     for obj in (o for o in spec["frozen"] if o["kind"] == "statement"):
         base_src, live_src = source_at(base, obj["path"]), source_at(None, obj["path"])
         decls = {d["name"]: d for d in declarations(base_src) if d["module"] is None}
@@ -291,17 +474,29 @@ def build_report(spec: dict) -> dict:
         check(doc_same and doc_block(live_src, obj["name"]) is not None,
               f"{obj['qualified']}: doc block unchanged since baseline")
         formal = obj["name"]
-        base_rows, now_rows = rows_base.get(formal, []), rows_now.get(formal, [])
-        check(len(now_rows) == 1 and base_rows == now_rows,
-              f"{formal}: manifest row unchanged since baseline",
-              f"{len(base_rows)} baseline / {len(now_rows)} current rows")
+        base_rows, now_rows = rows_for_object(rows_base, obj), rows_for_object(rows_now, obj)
+        non_corpus = obj.get("non_corpus", False)
+        check(isinstance(non_corpus, bool) and not (non_corpus and obj.get("corpus")),
+              f"{formal}: corpus selection is valid")
+        if non_corpus:
+            check(not rows_base.get(formal) and not rows_now.get(formal),
+                  f"{formal}: explicitly non-corpus statement has no manifest row")
+        else:
+            check(len(now_rows) == 1 and base_rows == now_rows,
+                  f"{formal}: manifest row unchanged since baseline",
+                  f"{len(base_rows)} baseline / {len(now_rows)} current rows")
         row_now = now_rows[0] if now_rows else {}
         slug = row_now.get("slug")
-        check(slug in legs_base and legs_base.get(slug) == legs_now.get(slug),
-              f"{formal}: leg-state entry unchanged since baseline")
+        corpus = row_now.get("_corpus")
+        if not non_corpus:
+            before_legs, now_legs = legs_base.get(corpus, {}), legs_now.get(corpus, {})
+            check(slug in before_legs and before_legs.get(slug) == now_legs.get(slug),
+                  f"{formal}: leg-state entry unchanged since baseline")
         statements.append({
             "qualified": obj["qualified"],
-            "row_id": row_now.get("row_id"),
+            "row_id": row_now.get("row_id") or (f"opg:{slug}" if corpus == "opg" else "no corpus row"),
+            "corpus": corpus,
+            "non_corpus": non_corpus,
             "slug": slug,
             "phase": row_now.get("phase"),
             "status": row_now.get("status"),
@@ -325,7 +520,7 @@ def build_report(spec: dict) -> dict:
         for decl in declarations(path.read_text()):
             if decl["module"] is None:
                 continue
-            hits = sorted(n for n in live_names if ref_re(n).search(body_after_name(decl)))
+            hits = sorted(n for n in live_names if live_reference(body_after_name(decl), n, frozen_modules))
             if hits:
                 stale.append({"frozen": f"{rel}#{decl['module']}.{decl['name']}",
                               "resolves_through_live": hits,
@@ -341,7 +536,7 @@ def build_report(spec: dict) -> dict:
                                                    if o["kind"] == "statement"})
     patterns = {name: ref_re(name) for name in tracked}
     canonical = spec["canonical_short_name"]
-    canonical_re = re.compile(rf"(?<![A-Za-z0-9_'.]){re.escape(canonical)}(?![A-Za-z0-9_'])")
+    canonical_re = ref_re(canonical)
     consumers, canonical_users = [], []
     for path in theory_files():
         rel = path.relative_to(ROOT).as_posix()
@@ -353,6 +548,8 @@ def build_report(spec: dict) -> dict:
         decls = declarations(src)
         for name, pattern in patterns.items():
             for match in pattern.finditer(clean):
+                if frozen_reference(match.group(), frozen_modules):
+                    continue
                 line = clean.count("\n", 0, match.start()) + 1
                 owner = next((d for d in reversed(decls) if d["line"] <= line), None)
                 owner_name = (f"{owner['module']}.{owner['name']}" if owner and owner["module"]
@@ -404,15 +601,60 @@ def build_report(spec: dict) -> dict:
         "distinct_variants": spec.get("distinct_variants", []),
         "checks": checks,
         "ok": all(c["ok"] for c in checks),
+        "validation_limits": [
+            "Default checks compare source text, registry coverage and conservative lexical dependencies; they do not prove theorem types.",
+            "--kernel checks exact closed statement equivalences and assumptions of every named certificate/API theorem, using already-built modules.",
+            "Dependency discovery scans build-listed conjecture declarations, including Inductive and Record bodies; it does not resolve notation, constructor names, module aliases or Section context like Rocq.",
+            "Helper exact types, Section scaffolding and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.",
+        ],
     }
 
 
 def render_markdown(report: dict, spec: dict) -> str:
+    """The only committed output: short summary plus per-row bridge index."""
+    family = spec["report_name"]
+    sources = [row for row in report["frozen"] if row["kind"] == "source"]
+    lines = [
+        f"# Migration report: {report['family']}", "",
+        f"Inputs: `meta/migration_reports/{family}.spec.json` and "
+        f"`meta/library_primitives/{report['family']}.json`.",
+        f"Regenerate: `python3 meta/migration_report.py {family} --write`.",
+        f"Full evidence: `python3 meta/migration_report.py {family} --details /tmp/migration-details`.", "",
+        f"- Canonical: `{report['canonical_name']}`.",
+        f"- Baseline: `{report['baseline_commit']}`.",
+        f"- Scope: {len(sources)} helpers, {len(report['statements'])} statements, "
+        f"{len(report['frozen'])} frozen objects, {len(report['consumers'])} recorded references.",
+        f"- Source checks: {sum(c['ok'] for c in report['checks'])}/{len(report['checks'])} pass; "
+        f"{'consistent' if report['ok'] else 'FAILED'}.", "",
+        "| Statement / corpus row | Compatibility theorem |", "|---|---|",
+    ]
+    for statement in report["statements"]:
+        lines.append(f"| `{statement['qualified']}` / {statement['row_id']} "
+                     f"| `{statement['certificate']}` |")
+    lines += ["", "Source checks compare frozen text, registry and statement coverage, "
+              "bridge endpoints, and unchanged statement metadata. They do not prove theorem types.",
+              f"`python3 meta/migration_report.py {family} --check --kernel` checks exact closed "
+              "statement equivalences and all named theorem assumptions in already-built modules.",
+              "Helper types, Section context, notation/constructor resolution and compiled dependency "
+              "closure still require independent review and family-specific Section and kernel dependency evidence."]
+    if report["distinct_variants"]:
+        lines += ["", "Excluded distinct variants: " + ", ".join(
+            f"`{item['qualified']}`" for item in report["distinct_variants"]) + "."]
+    if report["known_stale_snapshots"]:
+        lines += ["", "Prior snapshot limitations (explanations and replacement certificates in the inputs): "
+                  + ", ".join(f"`{name}`" for name in report["known_stale_snapshots"]) + "."]
+    for check in report["checks"]:
+        if not check["ok"]:
+            lines.append(f"- FAILED: {check['check']}: {check['detail']}")
+    return "\n".join(lines) + "\n"
+
+
+def render_details(report: dict, spec: dict) -> str:
     lines = [
         f"# Migration report: {report['family']}",
         "",
         "> Generated by `python3 meta/migration_report.py "
-        f"{spec['report_name']} --write` from "
+        f"{spec['report_name']} --details DIRECTORY` from "
         f"`meta/migration_reports/{spec['report_name']}.spec.json`; do not edit by hand.",
         "",
         f"- Canonical definition: `{report['canonical_name']}`",
@@ -423,6 +665,8 @@ def render_markdown(report: dict, spec: dict) -> str:
         "",
     ]
     lines += spec.get("summary", [])
+    lines += ["", "## What these checks establish", ""]
+    lines += ["- " + limitation for limitation in report["validation_limits"]]
     lines += ["", "## Source definitions", "",
               "| Source definition | Original (path:line) | Original declaration sha256 | "
               "Git blob at baseline | Frozen copy | Live body | Compatibility theorem |",
@@ -490,7 +734,7 @@ def render_markdown(report: dict, spec: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def self_test() -> int:
+def self_test(kernel: bool = False) -> int:
     src = ("(* c *)\nModule Legacy.\nDefinition f (G : sgraph) : Prop :=\n  g G. (* x. *)\n"
            "End Legacy.\nDefinition g (G : sgraph) : Prop := True.\n"
            "Lemma f_compat (G : sgraph) : Legacy.f G <-> g G.\nProof. by []. Qed.\n")
@@ -502,45 +746,91 @@ def self_test() -> int:
     ok = ok and substitute("h (g x) Legacy.g g'", {"g": "Legacy.g"}) == \
         "h (Legacy.g x) Legacy.g g'"
     ok = ok and substitute("a b", {"a": "b", "b": "c"}) == "b c"
-    print(f"migration-report self-test {'OK' if ok else 'FAILED'}")
-    return 0 if ok else 1
+    if not ok:
+        print("migration-report parser self-test FAILED")
+        return 1
+    command = [sys.executable, str(ROOT / "meta/test_migration_report.py")]
+    if kernel:
+        command.append("--kernel")
+    return subprocess.run(command, cwd=ROOT).returncode
 
 
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("family", nargs="?")
+    parser.add_argument("--all", action="store_true", help="process all *.spec.json family specs")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--write", action="store_true")
     mode.add_argument("--check", action="store_true")
     parser.add_argument("--validate", action="store_true")
+    parser.add_argument("--kernel", action="store_true", help="check exact statement types and assumptions in already-built modules")
+    parser.add_argument("--details", type=Path, help="write full JSON and Markdown evidence here, outside the compact report")
     args = parser.parse_args(argv)
     if args.validate:
-        return self_test()
-    if not args.family:
-        parser.error("FAMILY is required")
-    spec = json.loads((REPORTS / f"{args.family}.spec.json").read_text())
-    spec["report_name"] = args.family
+        return self_test(args.kernel)
+    if bool(args.family) == bool(args.all):
+        parser.error("choose FAMILY or --all")
+    families = ([path.name.removesuffix(".spec.json") for path in sorted(REPORTS.glob("*.spec.json"))]
+                if args.all else [args.family])
+    if not families:
+        parser.error("no migration report specs found")
+    if args.all:
+        try:
+            registry = load_library_registry(ROOT)["primitives"]
+        except RegistryError as exc:
+            print(f"migration registry: ERROR: {exc}", file=sys.stderr)
+            return 1
+        expected = {Path(entry["migration_report"]).stem for entry in registry.values()
+                    if entry.get("migration_report", "").startswith("meta/migration_reports/")}
+        missing = expected - set(families)
+        if missing:
+            print(f"migration report specs missing for registered reports: {sorted(missing)}", file=sys.stderr)
+            return 1
+    failed = False
+    for family in families:
+        try:
+            failed = process_family(family, args) or failed
+        except (KeyError, OSError, ValueError, RegistryError, subprocess.CalledProcessError) as exc:
+            print(f"migration report {family}: ERROR: {exc}", file=sys.stderr)
+            failed = True
+    return int(failed)
+
+
+def process_family(family: str, args: argparse.Namespace) -> bool:
+    spec = json.loads((REPORTS / f"{family}.spec.json").read_text())
+    spec["report_name"] = family
     report = build_report(spec)
-    rendered_json = json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
     rendered_md = render_markdown(report, spec)
-    json_path, md_path = REPORTS / f"{args.family}.json", REPORTS / f"{args.family}.md"
+    md_path = REPORTS / f"{family}.md"
     if args.write:
-        json_path.write_text(rendered_json)
         md_path.write_text(rendered_md)
+    if args.details:
+        if args.details.resolve() == REPORTS.resolve():
+            raise ValueError("--details must use a separate directory; committed reports stay compact")
+        args.details.mkdir(parents=True, exist_ok=True)
+        (args.details / f"{family}.json").write_text(
+            json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
+        (args.details / f"{family}.md").write_text(render_details(report, spec))
     failed = [c for c in report["checks"] if not c["ok"]]
     for c in failed:
         print(f"  FAILED: {c['check']} {c['detail']}".rstrip(), file=sys.stderr)
     if args.check:
-        for path, rendered in ((json_path, rendered_json), (md_path, rendered_md)):
+        for path, rendered in ((md_path, rendered_md),):
             if not path.exists() or path.read_text() != rendered:
                 print(f"  ERROR: {path.relative_to(ROOT)} has drifted; run "
-                      f"python3 meta/migration_report.py {args.family} --write", file=sys.stderr)
+                      f"python3 meta/migration_report.py {family} --write", file=sys.stderr)
                 failed.append({"check": "drift"})
-    print(f"migration report {args.family}: {len(report['checks']) - len(failed)} of "
+    if args.kernel:
+        for error in check_kernel(spec):
+            print(f"  ERROR: {error}", file=sys.stderr)
+            failed.append({"check": "kernel"})
+    passed = sum(check["ok"] for check in report["checks"])
+    print(f"migration report {family}: {passed} of "
           f"{len(report['checks'])} checks pass; {len(report['frozen'])} frozen objects, "
-          f"{len(report['statements'])} statements, {len(report['consumers'])} references")
-    return 1 if failed else 0
+          f"{len(report['statements'])} statements, {len(report['consumers'])} references; "
+          f"{'FAILED' if failed else 'OK'}")
+    return bool(failed)
 
 
 if __name__ == "__main__":
