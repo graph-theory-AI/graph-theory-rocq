@@ -36,7 +36,7 @@ Definition x191_dense_H_free_clique_blowup_extremal
       x191_copy_count (x191_clique_blowup m t) F).
 
 Definition x191_delete_edges (F : sgraph) (X : {set {set F}}) : sgraph :=
-  @fg_mk_sgraph F (fun x y => (x -- y) && ([set x; y] \notin X)).
+  del_edge_set F X.
 
 Definition x191_subquadratic_deletion_to_partite
     (F : sgraph) (parts delta_num delta_den : nat) : Prop :=

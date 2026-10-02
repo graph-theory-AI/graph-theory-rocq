@@ -14,22 +14,18 @@ Unset Printing Implicit Defensive.
 (** ** Local X7 vocabulary *************************************************)
 
 Definition x7_delete_edges_rel (G : sgraph) (F : {set {set G}}) : rel G :=
-  fun x y => (x -- y) && ([set x; y] \notin F).
+  @del_es_rel G F.
 
 Lemma x7_delete_edges_sym (G : sgraph) (F : {set {set G}}) :
   symmetric (@x7_delete_edges_rel G F).
-Proof.
-move=> x y; rewrite /x7_delete_edges_rel.
-rewrite sgP.
-by rewrite setUC.
-Qed.
+Proof. exact: del_es_sym. Qed.
 
 Lemma x7_delete_edges_irrefl (G : sgraph) (F : {set {set G}}) :
   irreflexive (@x7_delete_edges_rel G F).
-Proof. by move=> x; rewrite /x7_delete_edges_rel sg_irrefl. Qed.
+Proof. exact: del_es_irrefl. Qed.
 
 Definition x7_delete_edges (G : sgraph) (F : {set {set G}}) : sgraph :=
-  SGraph (@x7_delete_edges_sym G F) (@x7_delete_edges_irrefl G F).
+  del_edge_set G F.
 
 Definition x7_no_critical_edge (G : sgraph) (k : nat) : Prop :=
   forall F : {set G},
