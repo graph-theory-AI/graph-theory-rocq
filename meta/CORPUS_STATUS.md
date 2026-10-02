@@ -125,7 +125,7 @@ Area-local foundations (each area builds these on top of `base`):
 | hypergraph-theory | `hypergraph` |
 | infinite-graph-theory | `igraph` |
 | minor-theory | `containment`, `hole_containments`, `minor_dec`, `ramsey_small`, `width_params` |
-| packing-theory | `fair_matching`, `tree_leaves` |
+| packing-theory | `fair_matching`, `matching`, `tree_leaves` |
 | reconstruction-theory | `kelly` |
 | spectral-graph-theory | `spectral` |
 | topological-graph-theory | `crossing`, `crossing_genus`, `embedding`, `geometry`, `girth`, `signed_embedding` |

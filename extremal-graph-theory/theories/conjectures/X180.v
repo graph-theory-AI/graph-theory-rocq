@@ -8,9 +8,15 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X180 vocabulary ***********************************************)
 
+(** Since the C1 library migration (2026-10-02) a transparent alias of the
+    coq-graph-theory [matching] (connectivity.v).  The original body, "M is a
+    set of members of [fg_edges G] whose distinct members have an empty
+    intersection", is frozen and certified equivalent in
+    theories/migration/matching.v ([x180_matching_compat]); the helpers and
+    the statement below, including the quantifier defect recorded in the
+    BLOCKED note, are unchanged. *)
 Definition x180_matching (G : sgraph) (M : {set {set G}}) : Prop :=
-  M \subset fg_edges G /\
-  forall e f : {set G}, e \in M -> f \in M -> e != f -> e :&: f = set0.
+  matching M.
 
 Definition x180_induced_matching (G : sgraph) (M : {set {set G}}) : Prop :=
   x180_matching M /\

@@ -60,20 +60,16 @@ Lemma x113_is_cycle_equiv_xe1_rel_cycle (G : sgraph) (c : seq G) :
   x113_is_cycle c <-> xe1_rel_cycle (--) c.
 Proof. by split=> H; exact: H. Qed.
 
-(** ** Matchings: [X14]'s pairwise-disjoint form is [connectivity.matching] *)
+(** ** Matchings: [X14]'s pairwise-disjoint form is [connectivity.matching]
+
+    Since the C1 library migration (2026-10-02) [x14_matching] IS a transparent
+    alias of [matching], so the bridge holds by reflexivity.  The original
+    pairwise-disjoint body is frozen and certified in
+    theories/migration/matching.v ([x14_matching_compat]). *)
 
 Lemma x14_matching_equiv_matching (G : sgraph) (M : {set {set G}}) :
   x14_matching M <-> matching M.
-Proof.
-split=> [[MS M1]|[MS M1]]; split.
-- by move=> e eM; rewrite -x14_edge_setE; exact: (subsetP MS).
-- move=> e f eM fM x xe xf; apply/eqP; apply/negPn/negP => ef.
-  by move: (M1 e f eM fM ef) => /disjointFr /(_ xe); rewrite xf.
-- by apply/subsetP => e eM; rewrite x14_edge_setE; exact: MS.
-- move=> e f eM fM ef; rewrite -setI_eq0; apply/eqP/setP => x; rewrite !inE.
-  apply/negbTE/negP => /andP[xe xf].
-  by move: ef; rewrite (M1 _ _ eM fM x xe xf) eqxx.
-Qed.
+Proof. by []. Qed.
 
 Print Assumptions x14_edge_setE.
 Print Assumptions x102_edge_setE.

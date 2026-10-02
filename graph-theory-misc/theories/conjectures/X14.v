@@ -11,10 +11,13 @@ Unset Printing Implicit Defensive.
 Definition x14_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
+(** Since the C1 library migration (2026-10-02) a transparent alias of the
+    coq-graph-theory [matching] (connectivity.v).  The original body, "M is a
+    set of edges of G whose distinct members are pairwise disjoint", is frozen
+    and certified equivalent in theories/migration/matching.v
+    ([x14_matching_compat]); the statement below is unchanged. *)
 Definition x14_matching (G : sgraph) (M : {set {set G}}) : Prop :=
-  M \subset x14_edge_set G /\
-  forall e f : {set G},
-    e \in M -> f \in M -> e != f -> [disjoint e & f].
+  matching M.
 
 Definition x14_subcubic (G : sgraph) : Prop :=
   forall v : G, #|N(v)| <= 3.
