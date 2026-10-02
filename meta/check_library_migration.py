@@ -11,6 +11,7 @@ unowned sources and external prerequisites outside the selected toolchain.
 
 from __future__ import annotations
 
+import os
 import re
 import shlex
 import subprocess
@@ -246,6 +247,21 @@ def source_build_plan(roots: set[Path], env: dict[str, str]) -> list[tuple[str, 
     visiting: set[Path] = set()
     visited: set[Path] = set()
 
+    def concrete_path(directory: Path, name: str) -> Path:
+        declared = Path(os.path.abspath(directory / name))
+        resolved = (directory / name).resolve()
+        if declared.is_relative_to(root):
+            # A stale local object may alias an installed object with the right
+            # logical name. Resolving it first would hide its owned source from
+            # the closure. This also rejects symlinked containing directories.
+            if declared.suffix == ".vo" and declared != resolved:
+                raise BuildError(f"local object alias is not supported: {declared}")
+        elif not declared.is_relative_to(pinned_libraries):
+            # An external alias into the pinned installation is not itself a
+            # pinned dependency; validate its declared origin before resolving.
+            raise BuildError(f"non-pinned external dependency: {declared}")
+        return resolved
+
     def visit(source: Path) -> None:
         source = source.resolve()
         if source in visiting:
@@ -263,10 +279,10 @@ def source_build_plan(roots: set[Path], env: dict[str, str]) -> list[tuple[str, 
                                     env, reject_warnings=True)
             graph = {}
             for target, dependencies in dependency_rules(output).items():
-                target_source = (directory / target).resolve().with_suffix(".v")
+                target_source = concrete_path(directory, target).with_suffix(".v")
                 if target_source in graph:
                     raise BuildError(f"ambiguous normalized dependency target: {target}")
-                graph[target_source] = {(directory / dep).resolve() for dep in dependencies}
+                graph[target_source] = {concrete_path(directory, dep) for dep in dependencies}
             graphs[package] = graph
         dependencies = graphs[package].get(source)
         if dependencies is None or source not in dependencies:

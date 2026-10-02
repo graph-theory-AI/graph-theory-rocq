@@ -198,6 +198,55 @@ class MigrationBuildTests(unittest.TestCase):
                     "../leaf/theories", str(external / "theories")))
             self.assert_gate_fails("non-pinned external dependency")
 
+    def test_local_object_alias_into_pinned_library_cannot_hide_invalid_source(self):
+        library = Path(M.run_build_tool(["rocq", "compile", "-where"], self.root,
+                                       self.env).strip())
+        installed = library / "theories/Init/Logic.vo"
+        self.assertTrue(installed.is_file())
+        source = self.write("localcore/theories/Logic.v",
+                            "Lemma invalid : False. Proof. exact I. Qed.\n")
+        self.write("localcore/_CoqProject", "-Q theories Corelib.Init\ntheories/Logic.v\n")
+        source.with_suffix(".vo").symlink_to(installed)
+        self.write("fixture/_CoqProject", "-Q theories Fixture\n"
+                   "-Q ../localcore/theories Corelib.Init\ntheories/cert.v\n")
+        self.write("fixture/theories/cert.v", "From Corelib.Init Require Import Logic.\n"
+                   "Theorem closed : True. Proof. exact I. Qed.\n")
+        self.assert_gate_fails("local object alias")
+
+    def test_registered_object_alias_cannot_relocate_its_dependency_rule(self):
+        self.assert_gate_passes()
+        cert = self.root / "fixture/theories/cert.v"
+        alias = self.root / "saved.vo"
+        cert.with_suffix(".vo").rename(alias)
+        cert.with_suffix(".vo").symlink_to(alias)
+        self.preserved_mtime_edit(cert, "From Fixture Require Import helper.\n"
+                                 "Theorem closed : claim. Proof. exact I. Qed.\n")
+        self.assert_gate_fails("local object alias")
+
+    def test_external_object_alias_cannot_claim_pinned_ownership(self):
+        library = Path(M.run_build_tool(["rocq", "compile", "-where"], self.root,
+                                       self.env).strip())
+        with tempfile.TemporaryDirectory(prefix="unowned-alias-") as temporary:
+            external = Path(temporary)
+            (external / "Logic.v").write_text("Lemma invalid : False. Proof. exact I. Qed.\n")
+            (external / "Logic.vo").symlink_to(library / "theories/Init/Logic.vo")
+            self.write("fixture/_CoqProject", "-Q theories Fixture\n"
+                       f"-Q {external} Corelib.Init\ntheories/cert.v\n")
+            self.write("fixture/theories/cert.v", "From Corelib.Init Require Import Logic.\n"
+                       "Theorem closed : True. Proof. exact I. Qed.\n")
+            self.assert_gate_fails("non-pinned external dependency")
+
+    def test_local_object_directory_alias_into_pinned_library_is_rejected(self):
+        library = Path(M.run_build_tool(["rocq", "compile", "-where"], self.root,
+                                       self.env).strip())
+        (self.root / "fixture/pinned-alias").symlink_to(library / "theories/Init",
+                                                      target_is_directory=True)
+        self.write("fixture/_CoqProject", "-Q theories Fixture\n"
+                   "-Q pinned-alias Corelib.Init\ntheories/cert.v\n")
+        self.write("fixture/theories/cert.v", "From Corelib.Init Require Import Logic.\n"
+                   "Theorem closed : True. Proof. exact I. Qed.\n")
+        self.assert_gate_fails("local object alias")
+
     def test_all_roots_and_diamond_compile_each_local_source_once(self):
         for name in ("left", "right"):
             self.append_source("fixture", name, "From Support Require Export middle.\n"
