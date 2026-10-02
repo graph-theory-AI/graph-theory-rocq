@@ -1,0 +1,195 @@
+{
+  "family": "edge-partition",
+  "canonical_name": "Packing.foundations.edge_partitions.edge_partition",
+  "canonical_short_name": "edge_partition",
+  "relation": "Unconditional equivalence of the frozen pre-M1 edge-comprehension partition and the public indexed E(G) partition; the live source is a transparent alias.",
+  "baseline_commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+  "namespaces": {
+    "packing-theory": "Packing",
+    "cycle-theory": "Cycle"
+  },
+  "certificate_files": [
+    "packing-theory/theories/foundations/edge_partitions.v",
+    "packing-theory/theories/migration/edge_partitions.v",
+    "packing-theory/theories/migration/matching.v"
+  ],
+  "extra_certificates": [
+    "Packing.foundations.edge_partitions.edge_partition_cover",
+    "Packing.foundations.edge_partitions.edge_partition_sub",
+    "Packing.foundations.edge_partitions.edge_partition_disjoint",
+    "Packing.foundations.edge_partitions.edge_partition_uniqP",
+    "Packing.foundations.edge_partitions.edge_partition_inj_nonempty",
+    "Packing.foundations.edge_partitions.card_edge_partition",
+    "Packing.foundations.edge_partitions.not_edge_partition_non_edge",
+    "Packing.foundations.edge_partitions.edge_partition0",
+    "Packing.foundations.edge_partitions.edge_partition_K1_0",
+    "Packing.foundations.edge_partitions.not_edge_partition_K2_0",
+    "Packing.foundations.edge_partitions.edge_partition_single_part",
+    "Packing.foundations.edge_partitions.edge_partition_K2_empty_part",
+    "Packing.foundations.edge_partitions.K2_repeated_empty_parts",
+    "Packing.foundations.edge_partitions.not_edge_partition_K2_duplicate",
+    "Packing.foundations.edge_partitions.not_edge_partition_K2_loop"
+  ],
+  "downstream_client": "packing-theory/theories/examples/edge_partitions.v",
+  "summary": [
+    "C3 migrates the compiled X15 indexed simple-edge partition only. Every edge lies in some part, every part contains only edges, and distinct indices carry disjoint parts. Empty parts, repeated empty parts and zero indices remain allowed. The public count presentation and cardinal sum preserve index multiplicity.",
+    "C1 already froze the source and all three affected statements over the pre-M1 edge set and original matching/perfect-matching bodies. C2 preserved those snapshots. C3 reuses them verbatim, adapts only C1’s partition bridge, and adds a small per-family entry point with three exact statement equivalences.",
+    "X15alone remains excluded from the build. The four matching-underrepresentation variants and edge_family are unchanged. Multigraph list partitions, clique partitions and vertex partitions remain separate.",
+    "Grounding covers zero parts iff edgeless, a nonempty K2 edge set with two repeated empty parts, rejection of duplicate nonempty parts and rejection of a loop member. The client imports public foundation modules only."
+  ],
+  "frozen": [
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X15.x15_matching",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_matching",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x15_matching",
+      "substitutions": {},
+      "certificate": "Packing.migration.matching.x15_matching_compat",
+      "source_declaration_sha256": "e6463b96c81bb01d2d1a378f3a28cd1961ea0c76834ceabfcce06d16135f250b",
+      "source_body_sha256": "57564193048b7e342c1f78a3396f2725ae6bda85632d31927a7e4c3eabdbeeba"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X15.x15_edge_set",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x15_edge_set",
+      "substitutions": {},
+      "certificate": "Packing.migration.matching.x15_edge_set_compat",
+      "source_declaration_sha256": "145fb0fe7de64e6da68f822e906d5abdb1b65c3d18ba4627ae4dca52d4cc7af2",
+      "source_body_sha256": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
+      "note": "the comprehension body x15_edge_set had before M1 (M1 froze the same text as Packing.migration.simple_edges.Legacy.edge_set); the live name is the M1 alias sg_edge_set G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X15.x15_edge_partition",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_edge_partition",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.edge_partition",
+      "substitutions": {
+        "x15_edge_partition": "edge_partition",
+        "x15_edge_set": "Legacy.x15_edge_set"
+      },
+      "certificate": "Packing.migration.edge_partitions.x15_edge_partition_compat",
+      "source_declaration_sha256": "80fa2108dfaa31e76974f0889dd148b7523c3a437a2166f72bf21d8f454c36d3",
+      "source_body_sha256": "f4fd3a98caa49e352f85d809e7268893d5c23b77f9192a129d42745ef730577d",
+      "live_unfolds_to": "edge_partitions.edge_partition E"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X18.x18_perfect_matching",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_perfect_matching",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X18Legacy.perfect_matching",
+      "substitutions": {
+        "x18_perfect_matching": "perfect_matching",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.matching.x18_perfect_matching_compat",
+      "source_declaration_sha256": "08c9b80515a04dd33fda7624fcffd35dfeeafe50f9d0cb402793ea5a20147632",
+      "source_body_sha256": "2d7da5cdc6bea83708102aed820bf5483acdcdc58b1e1f6e93aa32bba6792082",
+      "note": "cross-file chain: X18's helper reaches X15's migrated helper"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.fair_matching_edge_partition_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "fair_matching_edge_partition_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.fair_matching_edge_partition_statement",
+      "substitutions": {
+        "x15_edge_partition": "edge_partition",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.edge_partitions.fair_matching_edge_partition_statement_compat",
+      "source_declaration_sha256": "e5cdd741111fa42969c82d1e349dc4b4f596b1ac0efa936eeb6c5b1d572bba37",
+      "source_body_sha256": "1aad2aa791ec05f836cb5f2455bc091ef624b56ae9739c117d6152bdfaa8b64c",
+      "corpus": "v2",
+      "row": "arxiv:1611.03196#02",
+      "documented_status": "REFUTED (branch fair-matching-edge-part of this repository); unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X18.knn_fair_perfect_matching_statement",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "knn_fair_perfect_matching_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X18Legacy.knn_fair_perfect_matching_statement",
+      "substitutions": {
+        "x15_edge_partition": "X15Legacy.edge_partition",
+        "x18_perfect_matching": "perfect_matching"
+      },
+      "certificate": "Packing.migration.edge_partitions.knn_fair_perfect_matching_statement_compat",
+      "source_declaration_sha256": "8c796d2465926081a3d63673093b92f60897b2f9a12c3ccdf1602796fa7e4c74",
+      "source_body_sha256": "6235cef68dad11ea65fd87bf2f0220eeb53e4befde204fdf7558ece4c7a2e5a8",
+      "corpus": "v2",
+      "row": "arxiv:1611.03196#01",
+      "documented_status": "partial row (m = 2, 3 in the source); unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X18.brualdi_stein_partial_transversal_statement",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "brualdi_stein_partial_transversal_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X18Legacy.brualdi_stein_partial_transversal_statement",
+      "substitutions": {
+        "x15_edge_partition": "X15Legacy.edge_partition",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.edge_partitions.brualdi_stein_partial_transversal_statement_compat",
+      "source_declaration_sha256": "6e88ac3a9098dbf2498311423c14e4d66e9a7b06e2255d9615aa9070f9ade0d3",
+      "source_body_sha256": "a65579a9d447a6763468513a0820de0d136671f45341c735f6e38602e584d249",
+      "corpus": "v2",
+      "row": "studies:std_brualdi_stein_conjecture",
+      "documented_status": "open; unchanged"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "distinct_variants": [
+    {
+      "qualified": "Packing.conjectures.X15alone.x15_edge_partition",
+      "path": "packing-theory/theories/conjectures/X15alone.v",
+      "name": "x15_edge_partition",
+      "note": "Identical source body, but this deliberately self-contained variant is not build-listed and has a distinct stronger statement. Classify unchanged; no migration claim."
+    },
+    {
+      "qualified": "Cycle.conjectures.U6.edge_partitionT",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "edge_partitionT",
+      "note": "A list of sets of multigraph edge identities; different carrier and representation."
+    },
+    {
+      "qualified": "Cycle.conjectures.U6.edge_partition_of",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "edge_partition_of",
+      "note": "The multigraph list-partition predicate, not an ordinal-indexed family of simple vertex pairs."
+    },
+    {
+      "qualified": "Packing.conjectures.XE1.xe1_clique_edge_partition",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_clique_edge_partition",
+      "note": "Clique blocks impose additional requirements; this separate representation is unchanged."
+    },
+    {
+      "qualified": "Packing.conjectures.X18.x18_vertex_partition",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_vertex_partition",
+      "note": "A partition of vertices rather than simple edges; unchanged."
+    }
+  ],
+  "kernel_evidence": "Fresh exact statement-type, named-assumption and frozen/live dependency probes are retained outside the repository under coordination/evidence/C3-edge_partition/.",
+  "cross_module_consumers": [
+    {
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x15_edge_partition",
+      "note": "Both knn_fair_perfect_matching_statement and brualdi_stein_partial_transversal_statement import the X15 helper; both frozen full chains and exact row certificates are included."
+    }
+  ]
+}

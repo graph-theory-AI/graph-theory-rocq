@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2542,
-    "repeated_body_shapes": 132,
+    "repeated_body_shapes": 131,
     "repeated_normalized_names": 205,
     "repeated_signature_shapes": 297,
     "statements_excluded": 700,
@@ -126,10 +126,6 @@
         "GTMisc.conjectures.X146.x146_set_ball",
         "GTMisc.conjectures.X39.x39_set_ball",
         "Packing.conjectures.X26.x26_set_ball"
-      ],
-      "28e5f4de1a50985a9c2cd67b2b28d73304f1cb5d18630fa0b806a70a30ed67c5": [
-        "Packing.conjectures.X15.x15_edge_partition",
-        "Packing.conjectures.X15alone.x15_edge_partition"
       ],
       "29381e58e4adda9737a99a56385a07057e86056112ef58f147b8d9f3aa843888": [
         "Chromatic.conjectures.X3.x3_stable_set",
@@ -51337,11 +51333,10 @@
       "direct_consumers": [
         "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm_statement",
         "Packing.conjectures.X15.bipartite_matching_underrepresentation_statement",
-        "Packing.conjectures.X15.x15_edge_family",
-        "Packing.conjectures.X15.x15_edge_partition"
+        "Packing.conjectures.X15.x15_edge_family"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x15_edge_set",
       "normalized_name": "edge_set",
@@ -51364,7 +51359,7 @@
         "Packing.conjectures.X15.fair_matching_edge_partition_statement"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [],
       "name": "x15_matching",
       "normalized_name": "matching",
@@ -51376,17 +51371,15 @@
       "signature_shape_hash": "1e7b7313f547a746846002552b03cae91575ee2869388a66ceab454dc3074917"
     },
     {
-      "body_hash": "f4fd3a98caa49e352f85d809e7268893d5c23b77f9192a129d42745ef730577d",
-      "body_shape_hash": "28e5f4de1a50985a9c2cd67b2b28d73304f1cb5d18630fa0b806a70a30ed67c5",
-      "declaration_hash": "80fa2108dfaa31e76974f0889dd148b7523c3a437a2166f72bf21d8f454c36d3",
+      "body_hash": "19c6b366ac22c1a4a5b46696c14c935e9ee527f2caeb05c2b743b2ccd1ce95d1",
+      "body_shape_hash": "19c6b366ac22c1a4a5b46696c14c935e9ee527f2caeb05c2b743b2ccd1ce95d1",
+      "declaration_hash": "63fe2bbcfc16fe9e05d9a7ab218e7ce2bc4fb62f20a14f9af7015e946b3d5123",
       "direct_consumers": [
         "Packing.conjectures.X15.fair_matching_edge_partition_statement"
       ],
       "kind": "Definition",
-      "line": 21,
-      "local_dependencies": [
-        "x15_edge_set"
-      ],
+      "line": 22,
+      "local_dependencies": [],
       "name": "x15_edge_partition",
       "normalized_name": "edge_partition",
       "package": "packing-theory",
@@ -51407,7 +51400,7 @@
         "Packing.conjectures.X15.bipartite_matching_underrepresentation_statement"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 30,
       "local_dependencies": [
         "x15_edge_set"
       ],
@@ -51426,7 +51419,7 @@
       "declaration_hash": "309b00d3bbd387a186081e571324001efbd2af907385287c96dfa084cc7b864f",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 91,
+      "line": 94,
       "local_dependencies": [
         "x15_edge_family",
         "x15_edge_set",
@@ -51447,7 +51440,7 @@
       "declaration_hash": "9d932ece2ebd4d720926e1c71b83db344325b6bd0485536b76b3f8cd18260bbb",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 105,
+      "line": 108,
       "local_dependencies": [
         "x15_edge_family",
         "x15_matching"
@@ -51467,7 +51460,7 @@
       "declaration_hash": "0071b6157c3884b3ee9229db71ddf2b88223146f24440b32829d37b01f176f88",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 122,
+      "line": 125,
       "local_dependencies": [
         "x15_edge_family",
         "x15_matching"
