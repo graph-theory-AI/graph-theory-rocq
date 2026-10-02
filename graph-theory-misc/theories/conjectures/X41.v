@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X41 vocabulary ************************************************)
 
 Definition x41_induced_H_free (H G : sgraph) : Prop :=
-  forall S : {set G}, ~ inhabited (induced S ≃ H).
+  induced_free G H.
 
 Definition x41_complete_between (G : sgraph) (A B : {set G}) : Prop :=
   forall a b : G, a \in A -> b \in B -> a -- b.

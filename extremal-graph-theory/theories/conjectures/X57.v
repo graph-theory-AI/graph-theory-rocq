@@ -13,7 +13,7 @@ Definition x57_anticomplete (G : sgraph) (A B : {set G}) : Prop :=
   forall a b : G, a \in A -> b \in B -> a -- b -> False.
 
 Definition x57_induced_free (G H : sgraph) : Prop :=
-  forall S : {set G}, ~ inhabited (induced S ≃ H).
+  induced_free G H.
 
 Definition x57_sparse_strong_eh_property (H : sgraph) : Prop :=
   exists eps_num eps_den : nat,

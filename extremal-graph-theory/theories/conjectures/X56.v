@@ -27,7 +27,7 @@ Definition x56_complement (G : sgraph) : sgraph :=
   SGraph (@x56_complement_sym G) (@x56_complement_irrefl G).
 
 Definition x56_induced_free (G H : sgraph) : Prop :=
-  forall S : {set G}, ~ inhabited (induced S ≃ H).
+  induced_free G H.
 
 (** Corpus row: arxiv:2102.04994#00
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2102.04994__00/

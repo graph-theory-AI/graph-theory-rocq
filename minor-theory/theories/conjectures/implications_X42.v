@@ -85,7 +85,7 @@ Proof. by split; [exact: tw_le_x27|exact: x27_tw_le]. Qed.
 Lemma induced_free_no_copy (G H : sgraph) :
   x42_induced_free G H -> ~ has_induced_copy G H.
 Proof.
-move=> hf [i]; apply: (hf [set x in codom i]); split.
+move=> hf [i]; apply: (hf [set x in codom i]).
 exact: diso_sym (isubgraph_induced i).
 Qed.
 
@@ -111,7 +111,7 @@ exists N => G eh k4 dia.
 have [T [D [dec ab]]] := src G eh (induced_free_no_copy dia).
 have cl4 : forall (t : T) (S : {set G}), S \subset D t -> clique S -> #|S| != 4.
   move=> t S _ cS; apply/negP => /eqP c4.
-  exact: (k4 S (clique4_K4 cS c4)).
+  exact: (induced_free_inhabited G 'K_4).1 k4 S (clique4_K4 cS c4).
 apply: tw_le_x27; exists T, D; split; first exact: dec.
 rewrite /width; apply/bigmax_leqP => t _.
 by apply: leq_trans (HN G (D t) (ab t) (cl4 t)) (leqnSn N).
@@ -185,7 +185,7 @@ Lemma K4_free_clique_free (G : sgraph) :
 Proof.
 move=> k4 S cS; rewrite ltnNge; apply/negP => h4.
 have [B sub cardB] := sub_card_exact h4.
-exact: (k4 B (clique4_K4 (clique_sub cS sub) cardB)).
+exact: (induced_free_inhabited G 'K_4).1 k4 B (clique4_K4 (clique_sub cS sub) cardB).
 Qed.
 
 (** *** The edge, modulo the one missing containment *)

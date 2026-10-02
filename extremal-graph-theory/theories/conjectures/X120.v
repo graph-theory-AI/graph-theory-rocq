@@ -11,7 +11,7 @@ Unset Printing Implicit Defensive.
 (** Erdos--Hajnal convention: [H]-free means no *induced* copy of [H].
     (Kept local so this file is self-contained and does not import X118.) *)
 Definition x120_induced_free (G H : sgraph) : Prop :=
-  forall S : {set G}, ~ inhabited (induced S ≃ H).
+  induced_free G H.
 
 (** Cross edges between disjoint [A] and [B] in [G]: ordered pairs [(a, b)]
     with [a \in A], [b \in B], [a -- b] (each counted once as [A], [B] are
