@@ -56,7 +56,7 @@
 
 ## Foundation fidelity registry
 
-- **102 audited primitives**: 88 faithful · 12 lightweight · 2 broken.
+- **103 audited primitives**: 89 faithful · 12 lightweight · 2 broken.
 - Registry: `meta/foundation_fidelity.json`; validate declarations and evidence names with `python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is never inferred from compilation.
 
 | verdict | primitive | misuse watch |

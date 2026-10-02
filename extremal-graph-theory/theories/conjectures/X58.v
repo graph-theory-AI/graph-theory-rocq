@@ -13,7 +13,7 @@ Definition x58_anticomplete (G : sgraph) (A B : {set G}) : Prop :=
   forall a b : G, a \in A -> b \in B -> a -- b -> False.
 
 Definition x58_induced_free (G H : sgraph) : Prop :=
-  forall S : {set G}, ~ inhabited (induced S ≃ H).
+  induced_free G H.
 
 Definition x58_epsilon_bounded
     (G : sgraph) (eps_num eps_den : nat) : Prop :=

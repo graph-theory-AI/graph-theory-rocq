@@ -135,11 +135,11 @@
       }
     },
     "induced-free": {
-      "canonical_name": null,
+      "canonical_name": "GTBase.common.induced_free",
       "owner": "base",
-      "status": "proposed",
-      "fidelity": "PENDING",
-      "normalized_names": ["induced_free"],
+      "status": "deprecated",
+      "fidelity": "FAITHFUL",
+      "normalized_names": ["induced_free", "induced_H_free"],
       "source_definitions": [
         "Chromatic.conjectures.X43.x43_induced_free",
         "Extremal.conjectures.X118.x118_induced_free",
@@ -149,17 +149,78 @@
         "Extremal.conjectures.X58.x58_induced_free",
         "Extremal.conjectures.X61.x61_induced_free",
         "GTMisc.conjectures.X102.x102_induced_free",
+        "GTMisc.conjectures.X41.x41_induced_H_free",
         "Minor.conjectures.X42.x42_induced_free"
       ],
-      "consumers_remaining": 9,
-      "compatibility_theorems": [],
+      "consumers_remaining": 10,
+      "relation": "logical-equivalence",
+      "semantic_classes": {
+        "inhabited-negation": {
+          "count": 10,
+          "verdict": "equivalent",
+          "certificate": "GTBase.common.induced_free_inhabited"
+        }
+      },
+      "argument_order": {
+        "GTMisc.conjectures.X41.x41_induced_H_free": "Arguments (H G) are preserved; the alias unfolds to induced_free G H, checked by GTMisc.migration.induced_free.x41_induced_H_free_order."
+      },
+      "distinct_variants": {
+        "Extremal.conjectures.X207.x207_H_free": "Name match only: minor exclusion (~ minor G H, arguments H G), not induced-subgraph exclusion. Its documented source discrepancy is preserved. Not claimed, not redirected.",
+        "GTMisc.conjectures.X94.x94_H_free": "Name match only: induced-copy exclusion between bigraphs that preserves the two sides. Not an sgraph induced_free. Not claimed, not redirected."
+      },
+      "compatibility_theorems": [
+        "Chromatic.migration.induced_free.x43_induced_free_compat",
+        "Chromatic.migration.induced_free.x43_statement_compat",
+        "Extremal.migration.induced_free.x56_induced_free_compat",
+        "Extremal.migration.induced_free.x56_statement_compat",
+        "Extremal.migration.induced_free.x57_induced_free_compat",
+        "Extremal.migration.induced_free.x57_sparse_strong_eh_property_compat",
+        "Extremal.migration.induced_free.x57_statement_compat",
+        "Extremal.migration.induced_free.x58_induced_free_compat",
+        "Extremal.migration.induced_free.x58_statement_compat",
+        "Extremal.migration.induced_free.x61_induced_free_compat",
+        "Extremal.migration.induced_free.x61_induced_saturated_compat",
+        "Extremal.migration.induced_free.x61_statement_compat",
+        "Extremal.migration.induced_free.x61_induced_saturated_original_compat",
+        "Extremal.migration.induced_free.x61_statement_original_compat",
+        "Extremal.migration.induced_free.x118_induced_free_compat",
+        "Extremal.migration.induced_free.x118_statement_compat",
+        "Extremal.migration.induced_free.x120_induced_free_compat",
+        "Extremal.migration.induced_free.x120_statement_compat",
+        "GTMisc.migration.induced_free.x41_induced_H_free_compat",
+        "GTMisc.migration.induced_free.x41_induced_H_free_order",
+        "GTMisc.migration.induced_free.x41_statement_compat",
+        "GTMisc.migration.induced_free.x102_induced_free_compat",
+        "GTMisc.migration.induced_free.x102_free_class_tree_alpha_bounded_compat",
+        "GTMisc.migration.induced_free.x102_statement_compat",
+        "GTMisc.migration.induced_free.x102_statement_original_compat",
+        "Minor.migration.induced_free.x42_induced_free_compat",
+        "Minor.migration.induced_free.x42_statement_compat"
+      ],
+      "api_theorems": [
+        "GTBase.common.induced_free_inhabited",
+        "GTBase.common.induced_free_diso",
+        "GTBase.common.induced_free_card",
+        "GTBase.common.induced_free_host0",
+        "GTBase.common.induced_free_K1",
+        "GTBase.common.induced_free_Kn",
+        "GTBase.common.induced_free_K4_claw",
+        "GTBase.common.not_induced_free_pattern0",
+        "GTBase.common.not_induced_free_self",
+        "GTBase.common.not_induced_free_clique",
+        "GTBase.common.not_induced_free_K3_K2"
+      ],
+      "legacy_baseline": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "migration_report": "meta/migration_reports/induced_free.md",
+      "independent_review": "meta/migration_reviews/induced_free.md",
       "upstream_audit": {
-        "searched_modules": ["GraphTheory.sgraph", "GraphTheory.coloring"],
-        "result": "building-blocks-only",
+        "searched_modules": ["GraphTheory.sgraph", "GraphTheory.digraph", "GraphTheory.coloring", "GTBase.common"],
+        "result": "adapted-in-base",
         "candidate": "GTBase.common.induced_free",
-        "note": "Upstream provides induced subgraphs and isomorphisms but no single induced-free class predicate matching all local quantifier conventions. GTBase.common.induced_free (2026-09-24) is now the shared candidate; fidelity against the local quantifier conventions remains to be certified.",
-        "audited_at": "2026-07-22"
-      }
+        "note": "coq-graph-theory 0.9.7 provides induced (sgraph.v), diso and its notation (digraph.v), isubgraph and diso_Kn, but no induced-free class predicate. GTBase.common.induced_free (host first, pattern second) is the canonical, already used directly by X211, X223 and X226. The ten local copies negate inhabited (induced S ≃ H) while induced_free negates diso directly, so they are logically equivalent (GTBase.common.induced_free_inhabited), not convertible. Minor.foundations.containment.has_induced_copy, inhabited (H ⇀ G), is the positive form (related through isubgraph_induced) and stays outside this family.",
+        "audited_at": "2026-10-02"
+      },
+      "reviewed_by": "coordinator (2026-10-02; implementation 19a10c8)"
     },
     "stable-set": {
       "canonical_name": "GraphTheory.dom.stable",

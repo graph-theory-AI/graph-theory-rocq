@@ -122,7 +122,7 @@ move=> EH.
 have [p [d [p0 [pd Hcore]]]] := EH 'K_3.
 exists p, d; split => // G G1 Hfree Heps.
 have G0 : 0 < #|G| by apply: leq_trans G1.
-have Hfree58 : x58_induced_free G 'K_3 by move=> S [iso]; exact: (Hfree S iso).
+have Hfree58 : x58_induced_free G 'K_3 by exact: Hfree.
 have Heps58 : x58_epsilon_bounded G p d.
   exact: x223_eps_bounded_implies_x58_epsilon_bounded G0 Heps.
 have [A [B [Hac [HA HB]]]] := Hcore G G1 Hfree58 Heps58.

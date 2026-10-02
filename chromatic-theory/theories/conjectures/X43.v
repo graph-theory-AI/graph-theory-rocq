@@ -61,7 +61,7 @@ Proof. by move=> [a|]. Qed.
 Definition x43_claw : sgraph := SGraph x43_claw_sym x43_claw_irrefl.
 
 Definition x43_induced_free (G H : sgraph) : Prop :=
-  forall S : {set G}, ~ inhabited (induced S ≃ H).
+  induced_free G H.
 
 (** ** X43 statements ******************************************************)
 

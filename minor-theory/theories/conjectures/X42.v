@@ -26,7 +26,7 @@ Proof. by move=> [a|a] //=; rewrite eqxx. Qed.
 Definition x42_diamond : sgraph := SGraph x42_diamond_sym x42_diamond_irrefl.
 
 Definition x42_induced_free (G H : sgraph) : Prop :=
-  forall S : {set G}, ~ inhabited (induced S ≃ H).
+  induced_free G H.
 
 (** ** X42 statements ******************************************************)
 

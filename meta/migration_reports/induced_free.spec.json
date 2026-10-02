@@ -1,0 +1,506 @@
+{
+  "family": "induced-free",
+  "canonical_name": "GTBase.common.induced_free",
+  "canonical_short_name": "induced_free",
+  "relation": "logical equivalence, not convertibility: the local copies negate inhabited (induced S ≃ H), the canonical negates diso (induced S) H; certified by GTBase.common.induced_free_inhabited",
+  "baseline_commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/common.v",
+    "chromatic-theory/theories/migration/induced_free.v",
+    "extremal-graph-theory/theories/migration/induced_free.v",
+    "graph-theory-misc/theories/migration/induced_free.v",
+    "minor-theory/theories/migration/induced_free.v",
+    "extremal-graph-theory/theories/migration/simple_edges.v",
+    "graph-theory-misc/theories/migration/simple_edges.v"
+  ],
+  "extra_certificates": [
+    "GTBase.common.induced_free_inhabited",
+    "GTBase.common.induced_free_diso",
+    "GTBase.common.induced_free_card",
+    "GTBase.common.induced_free_host0",
+    "GTBase.common.induced_free_K1",
+    "GTBase.common.induced_free_Kn",
+    "GTBase.common.induced_free_K4_claw",
+    "GTBase.common.not_induced_free_pattern0",
+    "GTBase.common.not_induced_free_self",
+    "GTBase.common.not_induced_free_clique",
+    "GTBase.common.not_induced_free_K3_K2",
+    "GTMisc.migration.induced_free.x41_induced_H_free_order",
+    "GTMisc.migration.simple_edges.x102_statement_rhs_compat"
+  ],
+  "summary": [
+    "Batch A, family A1 (`induced_free`). Ten conjecture-local helpers, all `forall S : {set G}, ~ inhabited (induced S ≃ H)` (X41 as `x41_induced_H_free H G`), now unfold to `GTBase.common.induced_free G H`; the X41 alias keeps its `(H G)` argument order. Every frozen body below is checked against the source text at its commit, and every certificate theorem is kernel-checked by `meta/check_library_migration.py` (Print Assumptions clean).",
+    "",
+    "Ten statements are affected (X41, X42, X43, X56, X57, X58, X61, X102, X118, X120), three of them through an intermediate helper (`x57_sparse_strong_eh_property`, `x61_induced_saturated`, `x102_free_class_tree_alpha_bounded`). Each frozen statement resolves through frozen copies along the whole affected chain. Declarations outside the chain resolve through their live definitions, which this migration does not change. Three of those were redirected earlier by M1: `x43_edge_set`, `x60_edge_set` and `x102_edge_set`. For X61 and X102 an end-to-end certificate also freezes M1's edge-set presentation, so it relates the pre-M1, pre-A1 statement body to the live one. For X43, M1 left only the alias-level certificate `Chromatic.migration.simple_edges.x43_edge_set_compat`: the dependent transport through `x43_line_graph` is not certified at statement level, by M1 or here.",
+    "",
+    "No statement text, doc block, manifest row or leg state changes (checked below). The documented discrepancies and restrictions of the affected rows therefore stay verbatim: X41 and X58 bound the A side only near-linearly, weaker than the source; X42 encodes only the treewidth half (row partial); X43 omits the T(G) phrasing; X56 allows only reciprocal-integer exponents; X61 reads an infinite family as members of unbounded size; X102 approximates subdivided multiclaws.",
+    "",
+    "The two discovery-only name matches stay distinct and untouched. `x207_H_free` is minor exclusion and is documented in X207.v as the WRONG OBJECT for that source (the row is BLOCKED). Repairing it is a separate re-audit, not part of this migration."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X43.x43_induced_free",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_induced_free",
+      "frozen_path": "chromatic-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x43_induced_free",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.induced_free.x43_induced_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X56.x56_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_induced_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x56_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x56_induced_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X57.x57_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X57.v",
+      "name": "x57_induced_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x57_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x57_induced_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X58.x58_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X58.v",
+      "name": "x58_induced_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x58_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x58_induced_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X61.x61_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "x61_induced_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x61_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x61_induced_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X118.x118_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X118.v",
+      "name": "x118_induced_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x118_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x118_induced_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X120.x120_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X120.v",
+      "name": "x120_induced_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x120_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x120_induced_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X41.x41_induced_H_free",
+      "path": "graph-theory-misc/theories/conjectures/X41.v",
+      "name": "x41_induced_H_free",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "Legacy.x41_induced_H_free",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_free.x41_induced_H_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X102.x102_induced_free",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_induced_free",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "Legacy.x102_induced_free",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_free.x102_induced_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X42.x42_induced_free",
+      "path": "minor-theory/theories/conjectures/X42.v",
+      "name": "x42_induced_free",
+      "frozen_path": "minor-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x42_induced_free",
+      "substitutions": {},
+      "certificate": "Minor.migration.induced_free.x42_induced_free_compat",
+      "live_unfolds_to": "induced_free G H"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X57.x57_sparse_strong_eh_property",
+      "path": "extremal-graph-theory/theories/conjectures/X57.v",
+      "name": "x57_sparse_strong_eh_property",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X57Legacy.sparse_strong_eh_property",
+      "substitutions": {
+        "x57_sparse_strong_eh_property": "sparse_strong_eh_property",
+        "x57_induced_free": "Legacy.x57_induced_free"
+      },
+      "certificate": "Extremal.migration.induced_free.x57_sparse_strong_eh_property_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X61.x61_induced_saturated",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "x61_induced_saturated",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X61Legacy.induced_saturated",
+      "substitutions": {
+        "x61_induced_saturated": "induced_saturated",
+        "x61_induced_free": "Legacy.x61_induced_free"
+      },
+      "certificate": "Extremal.migration.induced_free.x61_induced_saturated_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X102.x102_free_class_tree_alpha_bounded",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_free_class_tree_alpha_bounded",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "X102Legacy.free_class_tree_alpha_bounded",
+      "substitutions": {
+        "x102_free_class_tree_alpha_bounded": "free_class_tree_alpha_bounded",
+        "x102_induced_free": "Legacy.x102_induced_free"
+      },
+      "certificate": "GTMisc.migration.induced_free.x102_free_class_tree_alpha_bounded_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X43.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "diamond_free_claw_free_cubic_strong_six_edge_colourable_statement",
+      "frozen_path": "chromatic-theory/theories/migration/induced_free.v",
+      "frozen": "X43Legacy.statement",
+      "substitutions": {
+        "diamond_free_claw_free_cubic_strong_six_edge_colourable_statement": "statement",
+        "x43_induced_free": "Legacy.x43_induced_free"
+      },
+      "certificate": "Chromatic.migration.induced_free.x43_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X56.c8_complement_c8_erdos_hajnal_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "c8_complement_c8_erdos_hajnal_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X56Legacy.statement",
+      "substitutions": {
+        "c8_complement_c8_erdos_hajnal_statement": "statement",
+        "x56_induced_free": "Legacy.x56_induced_free"
+      },
+      "certificate": "Extremal.migration.induced_free.x56_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X57.sparse_strong_eh_iff_forest_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X57.v",
+      "name": "sparse_strong_eh_iff_forest_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X57Legacy.statement",
+      "substitutions": {
+        "sparse_strong_eh_iff_forest_statement": "statement",
+        "x57_sparse_strong_eh_property": "sparse_strong_eh_property"
+      },
+      "certificate": "Extremal.migration.induced_free.x57_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X58.epsilon_bounded_h_free_anticomplete_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X58.v",
+      "name": "epsilon_bounded_h_free_anticomplete_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X58Legacy.statement",
+      "substitutions": {
+        "epsilon_bounded_h_free_anticomplete_pair_statement": "statement",
+        "x58_induced_free": "Legacy.x58_induced_free"
+      },
+      "certificate": "Extremal.migration.induced_free.x58_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X61.infinite_family_without_finite_induced_saturation_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "infinite_family_without_finite_induced_saturation_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X61Legacy.statement",
+      "substitutions": {
+        "infinite_family_without_finite_induced_saturation_statement": "statement",
+        "x61_induced_saturated": "induced_saturated"
+      },
+      "certificate": "Extremal.migration.induced_free.x61_statement_compat",
+      "original_certificate": "Extremal.migration.induced_free.x61_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X118.conlon_fox_sudakov_dense_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X118.v",
+      "name": "conlon_fox_sudakov_dense_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X118Legacy.statement",
+      "substitutions": {
+        "conlon_fox_sudakov_dense_pair_statement": "statement",
+        "x118_induced_free": "Legacy.x118_induced_free"
+      },
+      "certificate": "Extremal.migration.induced_free.x118_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X120.conlon_fox_sudakov_sparse_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X120.v",
+      "name": "conlon_fox_sudakov_sparse_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X120Legacy.statement",
+      "substitutions": {
+        "conlon_fox_sudakov_sparse_pair_statement": "statement",
+        "x120_induced_free": "Legacy.x120_induced_free"
+      },
+      "certificate": "Extremal.migration.induced_free.x120_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X41.sparse_linear_pure_pair_statement",
+      "path": "graph-theory-misc/theories/conjectures/X41.v",
+      "name": "sparse_linear_pure_pair_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "X41Legacy.statement",
+      "substitutions": {
+        "sparse_linear_pure_pair_statement": "statement",
+        "x41_induced_H_free": "Legacy.x41_induced_H_free"
+      },
+      "certificate": "GTMisc.migration.induced_free.x41_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X102.bounded_tree_independence_forbidden_family_statement",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "bounded_tree_independence_forbidden_family_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "X102Legacy.statement",
+      "substitutions": {
+        "bounded_tree_independence_forbidden_family_statement": "statement",
+        "x102_free_class_tree_alpha_bounded": "free_class_tree_alpha_bounded"
+      },
+      "certificate": "GTMisc.migration.induced_free.x102_statement_compat",
+      "original_certificate": "GTMisc.migration.induced_free.x102_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X42.v",
+      "name": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/induced_free.v",
+      "frozen": "X42Legacy.statement",
+      "substitutions": {
+        "even_hole_k4_diamond_free_bounded_treewidth_statement": "statement",
+        "x42_induced_free": "Legacy.x42_induced_free"
+      },
+      "certificate": "Minor.migration.induced_free.x42_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X61.x61_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "x61_induced_free",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x61_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x61_induced_free_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X61.x61_induced_saturated",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "x61_induced_saturated",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X61Original.induced_saturated",
+      "substitutions": {
+        "x61_induced_saturated": "induced_saturated",
+        "x61_induced_free": "Legacy.x61_induced_free",
+        "x60_edge_set": "simple_edges.Legacy.edge_set"
+      },
+      "certificate": "Extremal.migration.induced_free.x61_induced_saturated_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X61.infinite_family_without_finite_induced_saturation_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "infinite_family_without_finite_induced_saturation_statement",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "X61Original.statement",
+      "substitutions": {
+        "infinite_family_without_finite_induced_saturation_statement": "statement",
+        "x61_induced_saturated": "induced_saturated"
+      },
+      "certificate": "Extremal.migration.induced_free.x61_statement_original_compat"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "Extremal.conjectures.X60.x60_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "x60_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "extremal-graph-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x60_edge_set": "edge_set"
+      },
+      "certificate": "Extremal.migration.simple_edges.x60_edge_set_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X102.x102_induced_free",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_induced_free",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "Legacy.x102_induced_free",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_free.x102_induced_free_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X102.x102_free_class_tree_alpha_bounded",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_free_class_tree_alpha_bounded",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "X102Legacy.free_class_tree_alpha_bounded",
+      "substitutions": {
+        "x102_free_class_tree_alpha_bounded": "free_class_tree_alpha_bounded",
+        "x102_induced_free": "Legacy.x102_induced_free"
+      },
+      "certificate": "GTMisc.migration.induced_free.x102_free_class_tree_alpha_bounded_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X102.bounded_tree_independence_forbidden_family_statement",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "bounded_tree_independence_forbidden_family_statement",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "X102Original.statement",
+      "substitutions": {
+        "bounded_tree_independence_forbidden_family_statement": "statement",
+        "x102_free_class_tree_alpha_bounded": "X102Legacy.free_class_tree_alpha_bounded",
+        "x102_line_graph_of_subdivided_multiclaw": "simple_edges.X102Legacy.line_graph_of_subdivided_multiclaw"
+      },
+      "certificate": "GTMisc.migration.induced_free.x102_statement_original_compat"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "GTMisc.conjectures.X102.x102_edge_set",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_edges.v",
+      "frozen": "Legacy.clique_edge_set",
+      "substitutions": {
+        "x102_edge_set": "clique_edge_set"
+      },
+      "certificate": "GTMisc.migration.simple_edges.x102_edge_set_compat"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "GTMisc.conjectures.X102.x102_line_graph_of",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_line_graph_of",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_edges.v",
+      "frozen": "X102Legacy.line_graph_of",
+      "substitutions": {
+        "x102_line_graph_of": "line_graph_of",
+        "x102_edge_set": "Legacy.clique_edge_set"
+      },
+      "certificate": "GTMisc.migration.simple_edges.x102_line_graph_of_compat"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "GTMisc.conjectures.X102.x102_line_graph_of_subdivided_multiclaw",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_line_graph_of_subdivided_multiclaw",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_edges.v",
+      "frozen": "X102Legacy.line_graph_of_subdivided_multiclaw",
+      "substitutions": {
+        "x102_line_graph_of_subdivided_multiclaw": "line_graph_of_subdivided_multiclaw",
+        "x102_line_graph_of": "line_graph_of"
+      },
+      "certificate": "GTMisc.migration.simple_edges.x102_line_graph_of_subdivided_multiclaw_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.statement": "M1 snapshot limitation: M1 froze only the edge-set chain of X102, so this copy still resolves through the live x102_free_class_tree_alpha_bounded; after A1 its body uses the canonical induced_free and is no longer the pre-M1 statement. M1's x102_statement_compat stays true but now certifies only the edge-set step. The fully frozen pre-migration statement is GTMisc.migration.induced_free.X102Original.statement, related to the live statement by x102_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "x42_induced_free",
+      "note": "induced_free_no_copy, K4_free_clique_free and e051_modulo_even_wheel keep their statements. Proof-only edits where a proof opened the old inhabited wrapper (induced_free_no_copy; the cl4 step of e050; K4_free_clique_free), now through GTBase.common.induced_free_inhabited."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "note": "Target of e050 (verified) and of the conditional theorem e051_modulo_even_wheel. Statements unchanged; the target is related to its frozen body by Minor.migration.induced_free.x42_statement_compat."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X223.v",
+      "name": "x58_induced_free",
+      "note": "e076: the instantiation step now passes the canonical hypothesis directly (exact: Hfree) instead of opening inhabited. Statement unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X223.v",
+      "name": "epsilon_bounded_h_free_anticomplete_pair_statement",
+      "note": "Source of e076 (verified). Statement unchanged; related to its frozen body by Extremal.migration.induced_free.x58_statement_compat."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Extremal.conjectures.X207.x207_H_free",
+      "path": "extremal-graph-theory/theories/conjectures/X207.v",
+      "name": "x207_H_free",
+      "note": "name match only: minor exclusion (~ minor G H), not induced-subgraph exclusion. X207.v documents it as the WRONG OBJECT for its source and the row is BLOCKED; kept verbatim, any repair is a separate re-audit"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X94.x94_H_free",
+      "path": "graph-theory-misc/theories/conjectures/X94.v",
+      "name": "x94_H_free",
+      "note": "name match only: induced-copy exclusion between bigraphs preserving the two sides; not an sgraph induced_free"
+    }
+  ]
+}

@@ -135,9 +135,38 @@ Definition k_edge_connected (G : sgraph) (k : nat) : Prop :=
 (** [G] contains [H] as a (not necessarily induced) subgraph. *)
 Definition has_subgraph (G H : sgraph) : Prop := subgraph H G.
 
-(** [G] has no INDUCED subgraph isomorphic to [H] ("[H]-free"). *)
+(** [G] has no INDUCED subgraph isomorphic to [H] ("[H]-free").
+
+    Contract, host [G] first and pattern [H] second: no vertex set [S] of [G]
+    induces a graph isomorphic to [H].  [S] ranges over ALL vertex sets, the
+    empty set and [[set: G]] included, and isomorphism is the library's [diso]
+    (written [≃]): a bijection that preserves and reflects adjacency.  [diso]
+    lands in [Type], so the definition negates it directly; the
+    [~ inhabited (induced S ≃ H)] form used by the local copies is
+    [induced_free_inhabited], and only the isomorphism type of [H] matters
+    ([induced_free_diso]).  Degenerate cases:
+    - an empty pattern is induced by [S = set0], so NO graph, the empty one
+      included, is free of it ([not_induced_free_pattern0]);
+    - the empty host is free of exactly the nonempty patterns
+      ([induced_free_host0]); in particular [K_1]-free means empty
+      ([induced_free_K1]);
+    - a pattern with more vertices than the host is always excluded
+      ([induced_free_card]), and no graph is free of itself
+      ([not_induced_free_self]). *)
 Definition induced_free (G H : sgraph) : Prop :=
   forall S : {set G}, diso (induced S) H -> False.
+
+(** The presentation used by the local copies, which negate [inhabited]. *)
+Lemma induced_free_inhabited (G H : sgraph) :
+  induced_free G H <-> forall S : {set G}, ~ inhabited (induced S ≃ H).
+Proof.
+by split=> free S; [case; exact: free S | move=> i; exact: free S (inhabits i)].
+Qed.
+
+(** Only the isomorphism type of the pattern matters. *)
+Lemma induced_free_diso (G H H' : sgraph) :
+  diso H H' -> induced_free G H -> induced_free G H'.
+Proof. by move=> i free S j; apply: (free S); exact: diso_comp j (diso_sym i). Qed.
 
 (** ** Complete bipartite graphs *)
 
@@ -316,6 +345,72 @@ rewrite card_sig => eqS; move: ltGH; rewrite -eqS.
 by rewrite ltnNge => /negP; apply; rewrite -cardsT subset_leq_card ?subsetT.
 Qed.
 
+(** No graph is free of itself (guard has teeth). *)
+Lemma not_induced_free_self (G : sgraph) : ~ induced_free G G.
+Proof.
+move=> free; have i : G ⇀ G := iso_isubgraph diso_id.
+exact: free _ (diso_sym (isubgraph_induced i)).
+Qed.
+
+(** Degenerate case: the empty pattern is induced by [S = set0], so no graph,
+    not even the empty one, is free of it. *)
+Lemma not_induced_free_pattern0 (G H : sgraph) : #|H| = 0 -> ~ induced_free G H.
+Proof.
+move=> H0 free; apply: (free set0).
+have e0 : #|induced (set0 : {set G})| = 0 by rewrite card_sig; apply: eq_card0 => x; rewrite !inE.
+have i0 : diso (induced (set0 : {set G})) 'K_0.
+  by rewrite -[X in 'K_X]e0; apply: diso_Kn => x; have := valP x; rewrite inE.
+have iH : diso H 'K_0.
+  by rewrite -[X in 'K_X]H0; apply: diso_Kn => x; move: (card0_eq H0 x); rewrite !inE.
+exact: diso_comp i0 (diso_sym iH).
+Qed.
+
+(** Degenerate case: the empty host is free of exactly the nonempty patterns. *)
+Lemma induced_free_host0 (G H : sgraph) :
+  #|G| = 0 -> induced_free G H <-> 0 < #|H|.
+Proof.
+move=> G0; split=> [free|H0]; last by apply: induced_free_card; rewrite G0.
+by rewrite lt0n; apply/negP => /eqP H0; exact: not_induced_free_pattern0 H0 free.
+Qed.
+
+(** Every clique on [n] vertices induces a copy of ['K_n] (negative family). *)
+Lemma not_induced_free_clique (G : sgraph) (S : {set G}) :
+  clique S -> ~ induced_free G 'K_#|S|.
+Proof.
+move=> cS free; apply: (free S).
+have eS : #|induced S| = #|S| by rewrite card_sig; apply: eq_card => x; rewrite !inE.
+rewrite -[X in 'K_X]eS; apply: diso_Kn => x y xy.
+by apply: cS (valP x) (valP y) _; rewrite (inj_eq val_inj).
+Qed.
+
+(** [K_1]-free means empty. *)
+Lemma induced_free_K1 (G : sgraph) : induced_free G 'K_1 <-> #|G| = 0.
+Proof.
+split=> [free|G0]; last by apply: induced_free_card; rewrite G0 card_ord.
+apply/eqP; rewrite -leqn0 leqNgt; apply/negP => /card_gt0P[x _].
+have := @not_induced_free_clique G [set x]; rewrite cards1; apply; last exact: free.
+by move=> u v /set1P-> /set1P->; rewrite eqxx.
+Qed.
+
+(** Complete graphs are free of every pattern with a non-edge (positive family). *)
+Lemma induced_free_Kn (n : nat) (H : sgraph) (x y : H) :
+  x != y -> ~~ (x -- y) -> induced_free 'K_n H.
+Proof.
+move=> xy /negP nxy S i; apply: nxy; rewrite -(edge_diso' i) induced_edge.
+by rewrite /edge_rel /= (inj_eq val_inj) (inj_eq (can_inj (bijK' i))).
+Qed.
+
+(** Positive example that cardinality does not decide: [K_4] is claw-free. *)
+Lemma induced_free_K4_claw : induced_free 'K_4 'K_1,3.
+Proof. by apply: (@induced_free_Kn 4 'K_1,3 (inr ord0) (inr (@Ordinal 3 1 isT))). Qed.
+
+(** Negative example: an edge of the triangle is an induced [K_2]. *)
+Lemma not_induced_free_K3_K2 : ~ induced_free 'K_3 'K_2.
+Proof.
+have := @not_induced_free_clique 'K_3 [set ord0; @Ordinal 3 1 isT].
+by rewrite cards2; apply => u v _ _.
+Qed.
+
 (** *** complete_bipartite *)
 
 (** ['K_n,m] is complete bipartite with the left part as one side (non-vacuity). *)
@@ -393,6 +488,10 @@ Proof. by move=> ac x; apply/negP => xx; move: (ac x x xx); rewrite connect0. Qe
     [not_edge_disjoint_self], [del_edge_set0], [connected_del_edge_set0],
     [k_edge_connected1], [connected_K2], [k_edge_connected_K2],
     [not_k_edge_connected_K1], [has_subgraph_refl], [has_subgraph_Kn],
-    [induced_free_card], [complete_bipartite_KB], [not_complete_bipartite_K3],
+    [induced_free_inhabited], [induced_free_diso], [induced_free_card],
+    [not_induced_free_self], [not_induced_free_pattern0], [induced_free_host0],
+    [not_induced_free_clique], [induced_free_K1], [induced_free_Kn],
+    [induced_free_K4_claw], [not_induced_free_K3_K2],
+    [complete_bipartite_KB], [not_complete_bipartite_K3],
     [tournament_C3_di], [tournament_oriented], [oriented_C3_di], [not_acyclic_C3_di],
     [acyclic_triv], [acyclic_irrefl]. *)
