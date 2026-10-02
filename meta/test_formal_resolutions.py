@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -87,6 +88,47 @@ class ResolutionCanaries(unittest.TestCase):
         self.assertTrue((self.root / "support/theories/base.vo").is_file())
         self.assertFalse((self.root / "fixture/theories/unrelated.vo").exists())
 
+    def test_verification_preserves_prebuilt_dependents_with_project_flags(self):
+        (self.root / "support/theories").mkdir(parents=True)
+        (self.root / "support/_CoqProject").write_text("-Q theories Support\ntheories/base.v\n")
+        (self.root / "support/theories/base.v").write_text(
+            "Theorem base_fact : 2 = 2. Proof. reflexivity. Qed.\n")
+        # rocq makefile groups -Q before -R, unlike their order in this project.
+        (self.root / "fixture/_CoqProject").write_text(
+            "-R theories Fixture\n-Q ../support/theories Support\n"
+            "-arg -w -arg -notation-overridden,-ambiguous-paths\n"
+            "theories/statement.v\ntheories/proof.v\ntheories/dependent.v\n")
+        # MathComp plus a universe-bearing declaration exposes the inconsistent
+        # objects produced when verification omits the package's compiler options.
+        claim = "Definition claim : Prop := forall T : Type, T = T.\n"
+        self.statement.write_text("From mathcomp Require Import all_boot.\n" + claim)
+        self.entry["statement_sha256"] = R.declaration_hash(claim)
+        self.write_metadata()
+        self.proof.write_text("Require Import Fixture.statement Support.base.\n"
+                              "Theorem resolved : claim. Proof. intros T; reflexivity. Qed.\n")
+        dependent = self.root / "fixture/theories/dependent.v"
+        dependent.write_text("Require Import Fixture.statement Fixture.proof.\n"
+                             "Theorem derived : claim. Proof. exact resolved. Qed.\n")
+        env = R.ROCQ.environment()
+        for package in ("support", "fixture"):
+            directory = self.root / package
+            R.run(["rocq", "makefile", "-f", "_CoqProject", "-o", "Makefile.coq"], directory, env)
+            R.run(["make", "-f", "Makefile.coq"], directory, env)
+        products = [source.with_suffix(".vo") for source in (self.statement, self.proof)]
+        digests = [hashlib.sha256(product.read_bytes()).hexdigest() for product in products]
+        dependent_mtime = dependent.with_suffix(".vo").stat().st_mtime_ns
+
+        self.assertEqual(len(R.verify_resolutions(self.root, build=False)), 1)
+
+        # Verification must not invalidate dependents already built by the caller.
+        probe = self.root / "DependentProbe.v"
+        probe.write_text("Require Import Fixture.dependent.\nCheck derived.\n")
+        flags, _files = R.project(self.root, "fixture")
+        R.run(["rocq", "compile", *flags, str(probe)], self.root / "fixture", env)
+        self.assertEqual(dependent.with_suffix(".vo").stat().st_mtime_ns, dependent_mtime)
+        self.assertEqual([hashlib.sha256(product.read_bytes()).hexdigest() for product in products],
+                         digests)
+
     def test_wrong_type_closed_theorem_is_rejected(self):
         self.proof.write_text("Require Import Fixture.statement.\n"
                               "Theorem resolved : True. Proof. exact I. Qed.\n")
@@ -111,8 +153,10 @@ class ResolutionCanaries(unittest.TestCase):
 
     def test_stale_compiled_proof_cannot_hide_changed_source(self):
         R.verify_resolutions(self.root)
+        original_stat = self.proof.stat()
         self.proof.write_text("Require Import Fixture.statement.\n"
                               "Theorem resolved : claim. Proof. exact I. Qed.\n")
+        os.utime(self.proof, ns=(original_stat.st_atime_ns, original_stat.st_mtime_ns))
         with self.assertRaisesRegex(R.ResolutionError, "failed"):
             R.verify_resolutions(self.root, build=False)
 

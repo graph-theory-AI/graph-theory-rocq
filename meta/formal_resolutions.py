@@ -244,13 +244,16 @@ def verify_entry(root: Path, entry: dict, *, build: bool = True) -> VerifiedReso
     env = ROCQ.environment()
     if build:
         build_dependencies(root, entry["package"], env, set())
-        run(["rocq", "makefile", "-f", "_CoqProject", "-o", "Makefile.coq"], package, env)
-        targets = [str(source.relative_to(package).with_suffix(".vo")) for source in sources]
-        run(["make", "-f", "Makefile.coq", *targets], package, env)
     # Recompile the actual registered sources even when the caller already built
     # the package. A fresh exact-type probe alone could otherwise trust a stale .vo.
-    for source in sources:
-        run(["rocq", "compile", *flags, str(source.relative_to(package))], package, env)
+    # Use the package's compiler options and load-path ordering: compiling with
+    # only the raw project load paths can invalidate already-built dependents.
+    run(["rocq", "makefile", "-f", "_CoqProject", "-o", "Makefile.coq"], package, env)
+    relative_sources = [source.relative_to(package) for source in sources]
+    targets = [str(source.with_suffix(".vo")) for source in relative_sources]
+    # Force recompilation even if a source edit preserved its original timestamp.
+    force_sources = [arg for source in relative_sources for arg in ("-W", str(source))]
+    run(["make", "-f", "Makefile.coq", *force_sources, *targets], package, env)
     statement, theorem = entry["statement"], entry["theorem"]
     target = f"~ {statement}" if entry["direction"] == "disprove" else statement
     modules = sorted({name.rsplit(".", 1)[0] for name in (statement, theorem)})
