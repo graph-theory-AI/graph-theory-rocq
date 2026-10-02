@@ -7,14 +7,15 @@
 > Registry status: `migrating`, because only the compiled simple-graph subgroup of
 > the six name-matched definitions is migrated; the three historical names remain
 > as transparent compatibility aliases for one migration cycle (the M1 convention).
-> `reviewed_by` stays unset until the step-10 review is recorded.
+> Arthur approved exact commit `23ee661548f0f31878e31de20add0ede2bc0e076`
+> at protocol step 10; see `meta/migration_reviews/matching.md`.
 
-The generated report `meta/migration_reports/matching.md` (from
+The compact generated report `meta/migration_reports/matching.md` (from
 `meta/migration_reports/matching.spec.json`, via `meta/migration_report.py`)
-holds the per-definition declaration hashes and git blobs, the per-row theorem
-names, the repository-wide consumer list and the machine checks; the spec also
-records the inventory body hash of every frozen declaration. This record explains
-the decisions.
+records the scope and check result. The spec records the per-definition
+declaration and inventory body hashes, per-row theorem names and repository-wide
+consumers; `--details` emits the full evidence outside the compact report.
+This record explains the decisions.
 
 ## Scope
 
@@ -51,9 +52,9 @@ dependencies of the affected rows.
    family is a matching of every graph, the empty graph included; a loop `[set x]` or
    `set0` is never a member; closed under subfamilies.
 4. **Audit upstream.** coq-graph-theory 0.9.7 defines `connectivity.matching` with
-   exactly this meaning and `perfect_matching_K2`; `GTBase.common` re-exports it and
-   bridges `E(G)` (`sg_edge_setE`, `in_sg_edge_set`). The upstream definition is the
-   canonical; no adapter is introduced.
+   exactly this meaning. `GTBase.common` re-exports it, defines
+   `perfect_matching_K2`, and bridges `E(G)` (`sg_edge_setE`, `in_sg_edge_set`).
+   The upstream definition is the canonical; no adapter is introduced.
 5. **Implement.** `Packing.foundations.matching` holds the API: `matching_subset`,
    `matching_card_edge`, `matching_sub`, and the three presentation lemmas
    `matching_at_most_oneP`, `matching_pairwise_disjointP`, `matching_setI_eq0P`.
@@ -85,8 +86,10 @@ dependencies of the affected rows.
    reflexivity), `vocabulary_packing.v` (`x15_matching_equiv_matching` by
    reflexivity, `x18_perfect_matching_equiv_x25_perfect_matching` through the API),
    `vocabulary_misc.v` (`x14_matching_equiv_matching` by reflexivity).
-10. **Independently review.** Pending: arthur (cross-review), coordinator (final
-    statement-level theorem check).
+10. **Independently review.** Arthur approved exact commit `23ee661` on
+    2026-10-02; the coordinator approved the final statement-level theorem check.
+    The record is `meta/migration_reviews/matching.md`. Integration gates remain
+    a separate obligation.
 11. **Gate.** See the board announcements for the gate results of each commit.
 12. **Deprecate.** The aliases stay. `consumers_remaining` counts their 13 same-file
     direct consumers; the cross-module consumers are listed in the report.
@@ -136,10 +139,9 @@ statement reaches `connectivity.matching`.
 
 ## Tooling
 
-C1 uses the generic `meta/migration_report.py` (compact output, `--details DIR` for
-the full evidence, `--check --kernel` against built modules). The spec adds, as
-recorded fields, the inventory body hash of every frozen declaration, the hashes of
-the three unchanged live helpers and `corpus`/`non_corpus` marks on the statement
-objects (the three X15 LLM-proof variants are `non_corpus`). The family document is
-`meta/library_primitives/matching.json` (per-family registry); no fidelity fragment is
-owned, since the canonical is upstream.
+C1 uses the generic `meta/migration_report.py`. The spec records the inventory
+body hash of every frozen declaration, the hashes of the three unchanged live
+helpers and `corpus`/`non_corpus` marks on the statement objects. The three
+explicit `non_corpus` variants retain all source, documentation, closure and
+certificate checks; only the inapplicable manifest-row and leg-state checks are
+skipped. The matching registry is `meta/library_primitives/matching.json`.

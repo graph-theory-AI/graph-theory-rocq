@@ -457,11 +457,13 @@
       "note": "Upstream matching M := {subset M <= E(G)} /\\ {in M &, forall e1 e2 x, x \\in e1 -> x \\in e2 -> e1 = e2} is the corpus notion for X14, X15 and X180 (X180's fg_edges G equals E(G): Extremal.migration.matching.fg_edgesE). The API and grounding (empty set, single edge, K_2, K_3, adjacent edges rejected, closure under subsets, members are 2-sets) are in Packing.foundations.matching; the presentation lemmas should move to GTBase.common when the misc/extremal certificates are simplified (second-area rule). The hypergraph and whole-graph representations stay split.",
       "audited_at": "2026-10-02"
     },
-    "reviewed_by": null,
+    "reviewed_by": "arthur",
     "legacy_baseline": "9e030727db115917ae077ac07a8fc6aa68661f73",
     "migration_report": "meta/migration_reports/matching.md",
     "migration_spec": "meta/migration_reports/matching.spec.json",
     "migration_record": "meta/LIBRARY_MIGRATION_C1.md",
-    "downstream_client": "packing-theory/theories/examples/matching.v"
+    "downstream_client": "packing-theory/theories/examples/matching.v",
+    "reviewed_commit": "23ee661548f0f31878e31de20add0ede2bc0e076",
+    "independent_review": "meta/migration_reviews/matching.md"
   }
 }
