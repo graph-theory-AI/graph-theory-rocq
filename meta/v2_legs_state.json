@@ -11100,14 +11100,14 @@
    "audit_page": "todo"
   },
   "std_esperet_joret_question_on_clustered_colouring_of": {
-   "statement": "done",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "faithful-reencoding-wave1",
    "package": "topological-graph-theory",
-   "note": "Authored in X138.v:esperet_joret_surface_triangle_free_clustered_two_colouring_statement. Faithful re-encoding 2026-07-17: moves the clustering bound outside the graph quantifier, asserting a surface/Delta-uniform constant c with clustered_colouring G 2 c."
+   "note": "PARTIAL (proxy) — The surface parameter bounds the ORIENTABLE genus (surface_embeddable is defined through base's surface_euler_genus, which computes the orientable genus), so only orientable surfaces are covered, whereas the source quantifies over every surface, non-orientable ones included. Projective-planar graphs can have arbitrarily large orientable genus, so the encoding is strictly weaker than the source. The connectivity guard added on 2026-10-02 is equivalent for this question and is not a source of partiality; the quantifier order (exists c between the surface and degree bounds and f"
   },
   "std_esperet_labourel_ochem_problem_on_induced_univer": {
    "statement": "todo",
