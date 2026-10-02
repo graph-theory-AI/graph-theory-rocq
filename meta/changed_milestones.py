@@ -37,6 +37,8 @@ REVERSE_DEPENDENCIES = {
 }
 
 MUTATION_GATE_PATHS = {
+    "meta/check_library_migration.py",
+    "meta/test_check_library_migration.py",
     "meta/check_milestone.py",
     "meta/faithfulness_mutation.py",
     "meta/faithfulness_policy.json",
@@ -54,6 +56,7 @@ MUTATION_GATE_PATHS = {
 
 MIGRATION_GATE_PATHS = {
     "meta/check_library_migration.py",
+    "meta/test_check_library_migration.py",
     "meta/library_inventory.py",
     "meta/library_helper_inventory.json",
     "meta/library_primitives.json",
