@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2542,
-    "repeated_body_shapes": 131,
+    "repeated_body_shapes": 132,
     "repeated_normalized_names": 205,
     "repeated_signature_shapes": 297,
     "statements_excluded": 700,
@@ -988,6 +988,10 @@
       "f05102e69d58d48fa0adf5965e3b37f614fee389121d11e52598bef194652cf9": [
         "Digraph.conjectures.XE2.xe2_directed_cycle",
         "GTMisc.conjectures.XE1.xe1_rel_cycle"
+      ],
+      "f2b0ce0bbdce3e9a118c4cb04124bff42ba9f0e1e643cc7bdbc67d5e1c3db1fc": [
+        "Chromatic.conjectures.X157.x157_path_internal",
+        "Extremal.conjectures.XE2.xe2_internal_path_vertices"
       ],
       "f2cb0f8c19ee0f447cec66f64ca3f4390cd9db39c554a0809ac47dc1ba24e344": [
         "Chromatic.conjectures.XE1.xe1_edge_count",
@@ -6257,9 +6261,9 @@
       "signature_shape_hash": "bc0c7617ec6dc8d50d83f469ddab4c085e49ea4423536a2d6dde90e70d47b78d"
     },
     {
-      "body_hash": "410f58a899edcefa2628fe88259822b7ac76712cef90c2ece208a17b731af560",
-      "body_shape_hash": "410f58a899edcefa2628fe88259822b7ac76712cef90c2ece208a17b731af560",
-      "declaration_hash": "67b1e2d8c44f07d91882c6dbb3c003a01b10275bed0809389e333b07967cc09f",
+      "body_hash": "f2b0ce0bbdce3e9a118c4cb04124bff42ba9f0e1e643cc7bdbc67d5e1c3db1fc",
+      "body_shape_hash": "f2b0ce0bbdce3e9a118c4cb04124bff42ba9f0e1e643cc7bdbc67d5e1c3db1fc",
+      "declaration_hash": "e6b4af990651cca620bb8a1640d2546f15fd63200c6c4f22c9145d3f868c4a74",
       "direct_consumers": [
         "Chromatic.conjectures.X157.x157_internally_disjoint_xy_paths"
       ],
@@ -16376,9 +16380,7 @@
       "body_hash": "5f8d4cb78b2fc7c58bb01371cebcc400fe4c01d9db6a5339668338edd24fd6b0",
       "body_shape_hash": "5f8d4cb78b2fc7c58bb01371cebcc400fe4c01d9db6a5339668338edd24fd6b0",
       "declaration_hash": "84f78ae65acd9c4da41d04b7dd835d1327ff84156940f64ec33c713217bfff04",
-      "direct_consumers": [
-        "Digraph.conjectures.X2.x2_path_internal"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 29,
       "local_dependencies": [],
@@ -16411,17 +16413,15 @@
       "signature_shape_hash": "564fac7f521c172188749532d299fb3a07780c982f3f888ac8e0f30264f85ac9"
     },
     {
-      "body_hash": "c7b207c5282452a9aade7452c2b0ce2bf5c749e477f7ac3588498678af645a6f",
-      "body_shape_hash": "d7cee0a0901f6d27f742c59f27dc90a507e44731456420efa5aa78c92f9828fb",
-      "declaration_hash": "282d0e1427bfa649ca971a21d9d93e10ae8469b1cfe8637e13ffef1a9c6f086f",
+      "body_hash": "e87cdeda28b62d83acd8a17cd493fbdf5d9d8b679c6ce13ee32e5c681068ca5c",
+      "body_shape_hash": "e87cdeda28b62d83acd8a17cd493fbdf5d9d8b679c6ce13ee32e5c681068ca5c",
+      "declaration_hash": "e2e05dd5d61ca7b0892396a188f061df212d17bb10b5605c032ba730c721902e",
       "direct_consumers": [
         "Digraph.conjectures.X2.contains_subdivision"
       ],
       "kind": "Definition",
       "line": 35,
-      "local_dependencies": [
-        "x2_path_vertices"
-      ],
+      "local_dependencies": [],
       "name": "x2_path_internal",
       "normalized_name": "path_internal",
       "package": "digraph-theory",
@@ -36254,9 +36254,9 @@
       "signature_shape_hash": "95a007c9d519b72f8fb475ca97c57765066f6bcf3f922de6c61277fb50ff7f4f"
     },
     {
-      "body_hash": "3a16a9b9baf3032608abd29687064f65fcc9724b3941cc7c14f022ace5efa92a",
-      "body_shape_hash": "3a16a9b9baf3032608abd29687064f65fcc9724b3941cc7c14f022ace5efa92a",
-      "declaration_hash": "26d3cbe238fde633b695db16509c65ca2414e278f34afd5f6e53d56f12ed7603",
+      "body_hash": "f2b0ce0bbdce3e9a118c4cb04124bff42ba9f0e1e643cc7bdbc67d5e1c3db1fc",
+      "body_shape_hash": "f2b0ce0bbdce3e9a118c4cb04124bff42ba9f0e1e643cc7bdbc67d5e1c3db1fc",
+      "declaration_hash": "e198f29522cc2cb4fee1aeb18c0ac3ee6861fc2631cc99e4eabaa59045af78ee",
       "direct_consumers": [
         "Extremal.conjectures.XE2.xe2_paths_internally_disjoint"
       ],
@@ -40095,9 +40095,9 @@
       "signature_shape_hash": "69e726a109968d9bb5ba84211023ad0801cae13b37b2a904f2d045e6cd3549d5"
     },
     {
-      "body_hash": "9e46c3da46adb6744862be8b8386259a067a1675a1f0d9097c3d1722621d5d30",
-      "body_shape_hash": "9e46c3da46adb6744862be8b8386259a067a1675a1f0d9097c3d1722621d5d30",
-      "declaration_hash": "3bc613a54f8c7b785bae6d1996234389d526346cc94b68b2c03d836134429674",
+      "body_hash": "0a17afc5dcbadc096fe053da246860956d419b8dc29792bf77950ef802e9f5a3",
+      "body_shape_hash": "0a17afc5dcbadc096fe053da246860956d419b8dc29792bf77950ef802e9f5a3",
+      "declaration_hash": "1e0b05c0d5210a3456d06558cb69d02a3cb9fbbf163f4f7766756ba0e7729dd9",
       "direct_consumers": [
         "GTMisc.conjectures.X172.x172_one_bridge_replacement"
       ],
@@ -48964,9 +48964,9 @@
       "signature_shape_hash": "0596fb401e0ad5525f64c30a46df4b74ef3b429bb464e52445ea6a2244565dd3"
     },
     {
-      "body_hash": "3f3fbb855bb983887f86f1d97a618c3de6444808799a36eef3458015080e7ec3",
-      "body_shape_hash": "3f3fbb855bb983887f86f1d97a618c3de6444808799a36eef3458015080e7ec3",
-      "declaration_hash": "d997dbd2949ae9fb8ca6e176ae26a0f0491a3e672583419bb808b008ba4e1900",
+      "body_hash": "45a3116d89c5eeb0dd7586d5e286083dbcd507c558fff3e2195e9eb23bbdd578",
+      "body_shape_hash": "45a3116d89c5eeb0dd7586d5e286083dbcd507c558fff3e2195e9eb23bbdd578",
+      "declaration_hash": "0aad859d75b05295e099dc1692801a0f7428e24e3fd732f39b08c2e82bc1d892",
       "direct_consumers": [
         "Minor.conjectures.X175.x175_Kt_subdivision"
       ],
@@ -50339,9 +50339,7 @@
       "body_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "body_shape_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "declaration_hash": "54ade8a077b40b6358fd0fdeb9f8ff359688bb7c00b3a9a7aaae6d3a7248b7ef",
-      "direct_consumers": [
-        "Minor.conjectures.X67.x67_internal_vertices"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 14,
       "local_dependencies": [],
@@ -50355,18 +50353,16 @@
       "signature_shape_hash": "062de5203b352869c06306491d64bad14c0ac749216504b1478aa3c3f2187246"
     },
     {
-      "body_hash": "39ef77ad3ad37e542e783eab9e75e589967b76b16d4289c1ead88a524fee049e",
-      "body_shape_hash": "882a656fbe5491d05a6e99ee6de876d11986347d6436ea53d5fcb7f72a6d26e3",
-      "declaration_hash": "82758a794365e0cd0e9cdf0c266d931a6d7962386281c14c45976e74ad1745d2",
+      "body_hash": "7e0728190b5007fc7992a32f2e020ad4d1a7e28f7c2594d5058addb4767f2195",
+      "body_shape_hash": "7e0728190b5007fc7992a32f2e020ad4d1a7e28f7c2594d5058addb4767f2195",
+      "declaration_hash": "dee05f6a97acaf977809b624d49ffc50a3d4b54462b680b2149134c1673a6cee",
       "direct_consumers": [
         "Minor.conjectures.X67.x67_no_cross_edges",
         "Minor.conjectures.X67.x67_theta"
       ],
       "kind": "Definition",
       "line": 17,
-      "local_dependencies": [
-        "x67_path_vertices"
-      ],
+      "local_dependencies": [],
       "name": "x67_internal_vertices",
       "normalized_name": "internal_vertices",
       "package": "minor-theory",

@@ -34,7 +34,7 @@ Definition x2_branch_set : {set D} :=
   [set y | [exists x : F, branch x == y]].
 
 Definition x2_path_internal (u v : F) (s : seq D) : {set D} :=
-  x2_path_vertices (branch u) s :\: [set branch u; branch v].
+  seq_interior (branch u) (branch v) (branch u :: s).
 
 End SubdivisionModel.
 

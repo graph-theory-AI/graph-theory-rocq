@@ -2,9 +2,12 @@
 
     Batch B of the library migration (meta/LIBRARY_MIGRATION_PLAN.md, section 15)
     gathers the reusable finite path and cycle vocabulary of the corpus in this
-    module, one concept family per reviewed change.  The first family is the
-    vertex set of a raw vertex sequence, [seq_vertices] (registry entry
-    [path-vertices] in meta/library_primitives.json).
+    module, one concept family per reviewed change: the vertex set of a raw
+    vertex sequence, [seq_vertices] (registry
+    meta/library_primitives/path-vertices.json), and the internal vertices of a
+    sequence, [seq_interior] and [seq_inner] (registry
+    meta/library_primitives/internal-vertices.json, section "Internal vertices"
+    below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -221,3 +224,180 @@ Lemma seq_vertices_ground_head_tail_nil : seq_vertices (o2 :: [::]) = [set o2].
 Proof. exact: seq_vertices_seq1. Qed.
 
 End Grounding.
+
+(** ** Internal vertices of a sequence
+
+    [seq_interior x y s] is the set of the vertices of [s] other than [x] and
+    [y]: the raw-sequence counterpart of coq-graph-theory's [interior p], which
+    for a packaged [p : Path x y] is [[set z in p] :\: [set x; y]]
+    ([seq_interior_nodes]).  The two endpoints are given, not read off [s], and
+    there is no walk, uniqueness or nonemptiness premise.  [seq_inner s] instead
+    removes the first and the last entry of a nonempty [s], and is [set0] on the
+    empty sequence; on a packaged path it is again [interior p]
+    ([seq_inner_nodes]).
+
+    Specification, every clause proved below:
+    - membership: [(z \in seq_interior x y s) = [&& z \in s, z != x & z != y]]
+      and [(z \in seq_inner s) = [&& z \in s, z != head z s & z != last z s]];
+    - degenerate inputs: no internal vertex in [[::]]; [[:: v]] keeps [v] in
+      [seq_interior x y] unless [v] is an endpoint, and [seq_inner [:: v]] is
+      [set0];
+    - repeated vertices count once and the order of [s] is irrelevant for
+      [seq_interior]; equal endpoints remove one value; absent endpoints remove
+      nothing; the head-plus-tail sequence [x :: s] has the same internal
+      vertices as [s];
+    - endpoints are removed as VALUES: an endpoint value that occurs again
+      inside [s] is not internal.  A positional notion (dropping the first and
+      the last position) differs exactly there. *)
+
+Section SeqInterior.
+Variable T : finType.
+Implicit Types (s : seq T) (a v x y z : T).
+
+(** The vertices of [s] other than the endpoints [x] and [y]. *)
+Definition seq_interior x y s : {set T} := seq_vertices s :\: [set x; y].
+
+(** The vertices of [s] other than its first and its last entry. *)
+Definition seq_inner s : {set T} :=
+  if s is a :: t then seq_interior a (last a t) s else set0.
+
+Lemma in_seq_interior x y s z :
+  (z \in seq_interior x y s) = [&& z \in s, z != x & z != y].
+Proof. by rewrite !inE negb_or andbC andbA. Qed.
+
+Lemma seq_interior_sub x y s : seq_interior x y s \subset seq_vertices s.
+Proof. exact: subsetDl. Qed.
+
+Lemma seq_interiorC x y s : seq_interior x y s = seq_interior y x s.
+Proof. by rewrite /seq_interior setUC. Qed.
+
+Lemma seq_interior_nil x y : seq_interior x y [::] = set0.
+Proof. by rewrite /seq_interior seq_vertices_nil set0D. Qed.
+
+Lemma seq_interior_seq1 x y v :
+  seq_interior x y [:: v] = if (v == x) || (v == y) then set0 else [set v].
+Proof.
+apply/setP => z; rewrite in_seq_interior mem_seq1.
+case: ifP => [|/norP[vx vy]]; last by rewrite inE; case: (z =P v) => [->|] //=; rewrite vx vy.
+by case/orP=> /eqP <-; rewrite inE; case: (z =P _) => [->|] //=; rewrite ?eqxx ?andbF.
+Qed.
+
+(** The head-plus-tail convention [x :: s] does not change the interior. *)
+Lemma seq_interior_head x y s : seq_interior x y (x :: s) = seq_interior x y s.
+Proof.
+apply/setP => z; rewrite !in_seq_interior inE.
+by case: (altP (z =P x)) => [->|]; rewrite ?eqxx ?andbF.
+Qed.
+
+Lemma seq_interior_rcons x y s : seq_interior x y (rcons s y) = seq_interior x y s.
+Proof.
+apply/setP => z; rewrite !in_seq_interior mem_rcons inE.
+by case: (altP (z =P y)) => [->|]; rewrite ?eqxx ?andbF.
+Qed.
+
+Lemma eq_seq_interior x y s1 s2 :
+  s1 =i s2 -> seq_interior x y s1 = seq_interior x y s2.
+Proof. by move/eq_seq_vertices => e; rewrite /seq_interior e. Qed.
+
+Lemma seq_interior_undup x y s : seq_interior x y (undup s) = seq_interior x y s.
+Proof. exact/eq_seq_interior/mem_undup. Qed.
+
+(** Equal endpoints remove one value; absent endpoints remove nothing. *)
+Lemma seq_interior_xx x s : seq_interior x x s = seq_vertices s :\ x.
+Proof. by rewrite /seq_interior setUid. Qed.
+
+Lemma seq_interior_absent x y s :
+  x \notin s -> y \notin s -> seq_interior x y s = seq_vertices s.
+Proof.
+move=> xs ys; apply/setP => z; rewrite in_seq_interior in_seq_vertices.
+by case: (boolP (z \in s)) => //= zs; rewrite (memPn xs) ?(memPn ys).
+Qed.
+
+Lemma in_seq_inner s z :
+  (z \in seq_inner s) = [&& z \in s, z != head z s & z != last z s].
+Proof.
+case: s => [|a t]; first by rewrite /seq_inner inE.
+by rewrite /seq_inner in_seq_interior.
+Qed.
+
+Lemma seq_inner_nil : seq_inner [::] = set0.
+Proof. by []. Qed.
+
+Lemma seq_inner_seq1 v : seq_inner [:: v] = set0.
+Proof. by rewrite /= seq_interior_seq1 eqxx. Qed.
+
+Lemma seq_inner_cons a t : seq_inner (a :: t) = seq_interior a (last a t) (a :: t).
+Proof. by []. Qed.
+
+Lemma seq_inner_sub s : seq_inner s \subset seq_vertices s.
+Proof. by case: s => [|a t] /=; [rewrite sub0set | exact: seq_interior_sub]. Qed.
+
+End SeqInterior.
+
+(** Correspondence with the interior of the library's packaged paths. *)
+Section UpstreamInterior.
+Variables (G : relType) (x y : G).
+
+Lemma seq_interior_nodes (p : Path x y) : seq_interior x y (nodes p) = interior p.
+Proof. by rewrite /seq_interior seq_vertices_nodes. Qed.
+
+Lemma seq_interior_val (p : Path x y) : seq_interior x y (x :: val p) = interior p.
+Proof. by rewrite -nodesE seq_interior_nodes. Qed.
+
+Lemma seq_inner_nodes (p : Path x y) : seq_inner (nodes p) = interior p.
+Proof. by rewrite nodesE /= path_last -nodesE seq_interior_nodes. Qed.
+
+End UpstreamInterior.
+
+(** *** Grounding of the internal vertices
+
+    The same three vertices [o0], [o1], [o2] of ['I_3]: the empty sequence, an
+    endpoint and a non-endpoint singleton, a path, an endpoint value repeated
+    inside the sequence, equal endpoints, absent endpoints, and the head-plus-tail
+    form; then [seq_inner] on the empty, singleton, path and closed-walk
+    sequences. *)
+
+Section InteriorGrounding.
+Local Notation o0 := (@Ordinal 3 0 isT).
+Local Notation o1 := (@Ordinal 3 1 isT).
+Local Notation o2 := (@Ordinal 3 2 isT).
+
+Lemma seq_interior_ground_nil : seq_interior o0 o1 [::] = set0.
+Proof. exact: seq_interior_nil. Qed.
+
+Lemma seq_interior_ground_seq1_endpoint : seq_interior o0 o1 [:: o0] = set0.
+Proof. by rewrite seq_interior_seq1. Qed.
+
+Lemma seq_interior_ground_seq1_inner : seq_interior o0 o1 [:: o2] = [set o2].
+Proof. by rewrite seq_interior_seq1. Qed.
+
+Lemma seq_interior_ground_path : seq_interior o0 o2 [:: o0; o1; o2] = [set o1].
+Proof. by apply/setP => z; rewrite in_seq_interior !inE; case: z => [[|[|[|]]] ?]. Qed.
+
+(** An endpoint value repeated inside the sequence is not internal: removing the
+    first and the last position of [[:: o0; o0; o1]] would keep [o0]. *)
+Lemma seq_interior_ground_repeated_endpoint : seq_interior o0 o1 [:: o0; o0; o1] = set0.
+Proof. by apply/setP => z; rewrite in_seq_interior !inE; case: z => [[|[|[|]]] ?]. Qed.
+
+Lemma seq_interior_ground_equal_endpoints : seq_interior o0 o0 [:: o0; o1; o0] = [set o1].
+Proof. by apply/setP => z; rewrite in_seq_interior !inE; case: z => [[|[|[|]]] ?]. Qed.
+
+Lemma seq_interior_ground_absent_endpoints : seq_interior o0 o0 [:: o1; o2] = [set o1; o2].
+Proof. by rewrite seq_interior_absent // seq_vertices_cons seq_vertices_seq1. Qed.
+
+Lemma seq_interior_ground_head_tail : seq_interior o0 o2 (o0 :: [:: o1; o2]) = [set o1].
+Proof. by rewrite seq_interior_head; apply/setP => z; rewrite in_seq_interior !inE; case: z => [[|[|[|]]] ?]. Qed.
+
+Lemma seq_inner_ground_nil : seq_inner ([::] : seq 'I_3) = set0.
+Proof. exact: seq_inner_nil. Qed.
+
+Lemma seq_inner_ground_seq1 : seq_inner [:: o1] = set0.
+Proof. exact: seq_inner_seq1. Qed.
+
+Lemma seq_inner_ground_path : seq_inner [:: o0; o1; o2] = [set o1].
+Proof. exact: seq_interior_ground_path. Qed.
+
+Lemma seq_inner_ground_closed_walk : seq_inner [:: o0; o1; o0] = [set o1].
+Proof. exact: seq_interior_ground_equal_endpoints. Qed.
+
+End InteriorGrounding.

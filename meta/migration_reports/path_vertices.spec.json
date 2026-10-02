@@ -66,7 +66,7 @@
     "",
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of the 14 frozen statements contains no live helper, no live chain declaration and not `seq_vertices`, while each of the 14 live statements contains `seq_vertices` and its alias (/srv/graph-theory-rocq/coordination/evidence/B1-path_vertices/print_all_dependencies_summary.txt, with the probe script and the full output beside it). The Section scaffolding lines of the frozen X2 copies are checked verbatim against the baseline in /srv/graph-theory-rocq/coordination/evidence/B1-path_vertices/section_scaffolding.txt.",
     "",
-    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented discrepancies of the affected rows stay verbatim: the wave-E4 nonemptiness guards of the X2 Mader bounds and of X52, the LEAST clause of X2's Mader row and its candidate edge e173, the solved status of X52 and X67, the partial status of X40, X26's d = 0 degeneration, X11's k = 0 behaviour, and the affirmative reading of the X3 question row. The same-body helpers of later families (`vertices_of_seq`, `cycle_vertices`, the `path_internal` family) are untouched distinct variants below."
+    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented discrepancies of the affected rows stay verbatim: the wave-E4 nonemptiness guards of the X2 Mader bounds and of X52, the LEAST clause of X2's Mader row and its candidate edge e173, the solved status of X52 and X67, the partial status of X40, X26's d = 0 degeneration, X11's k = 0 behaviour, and the affirmative reading of the X3 question row. The same-body helpers of later families (`vertices_of_seq`, `cycle_vertices`) are untouched distinct variants below; the `path_internal` companions are migrated by family internal-vertices (B2)."
   ],
   "frozen": [
     {
@@ -888,18 +888,6 @@
       "path": "digraph-theory/theories/conjectures/X19.v",
       "name": "x19_cycle_vertices",
       "note": "same comprehension body on a digraph; batch-B cycle_vertices family; untouched here"
-    },
-    {
-      "qualified": "Chromatic.conjectures.X157.x157_path_internal",
-      "path": "chromatic-theory/theories/conjectures/X157.v",
-      "name": "x157_path_internal",
-      "note": "support minus the two end vertices; batch-B path_internal family, not the plain support; untouched here"
-    },
-    {
-      "qualified": "Extremal.conjectures.XE2.xe2_internal_path_vertices",
-      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
-      "name": "xe2_internal_path_vertices",
-      "note": "vertices of a path other than x and y; path_internal family, name match only; untouched here"
     }
   ]
 }
