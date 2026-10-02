@@ -185,6 +185,8 @@ SOURCE_INPUTS = [
     os.path.join(GC, "data", "intersection.json"),
     os.path.join(GC, "data", "arxiv_opg_matches.json"),
     os.path.join(GC, "ARXIV_OPEN_DIFFICULTY_RANKING.md"),
+    os.path.join(GC, "data", "bondy_murty_conjectures.json"),
+    os.path.join(GC, "data", "others_conjectures.json"),
 ]
 if not all(os.path.isfile(path) for path in SOURCE_INPUTS):
     if "--check" in sys.argv and "--require-upstream" not in sys.argv:

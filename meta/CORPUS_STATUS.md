@@ -266,13 +266,13 @@ Release: **`opg-v1.0.1-227-attempted`** (supersedes `opg-v1.0-227-attempted`, wh
 CI (toolchain-free — no Coq build, no external OPG clone needed):
 
 ```sh
-make audit   # edge/v2 drift + foundation registry + warning lint + status/LANDED invariants
+make audit   # routing fixtures + edge/v2 drift + foundation/inventory/lint/status invariants
 ```
 
 Full acceptance (dev environment: Rocq/MathComp toolchain + the OpenProblemGarden clone):
 
 ```sh
-make gate    # regenerates OPG, fully checks v2 against its pinned upstream, then every LANDED milestone:
+make gate    # verifies pinned OPG/v2 inputs, then checks every LANDED milestone:
              #   compiles, axiom-free, Print Assumptions clean, overlay leg-state justified
 ```
 

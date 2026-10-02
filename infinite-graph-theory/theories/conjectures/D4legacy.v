@@ -56,17 +56,33 @@ Definition i_edge_connected_at_least (k : nat) (G : iGraph) : Prop :=
 Definition i_hamilton_circle_proxy (G : iGraph) : Prop :=
   exists d : int -> iV G, spanning_dray (G := G) d.
 
-(** Partial double-ray rendering of the two OPG line-graph clauses.
-
-    The [infinite_graph G] guard is LOAD-BEARING (audit fix 2026-07-22): the
-    double-ray proxy demands an INJECTIVE [int]-indexed ray, so any finite
-    carrier refutes an unguarded clause (machine-checked at K_1 for the powers
-    row), while the source conjectures hold on finite graphs via ordinary
-    Hamilton cycles — the honest proxy domain is the infinite case, which is
-    also where the conjectures live.  Second documented proxy axis: the
-    edge-connectivity hypothesis is rendered as vertex-connectivity of the line
-    graph (kappa(L(G)) >= 4), classically implied by lambda(G) >= 4; a genuine
-    edge-deletion connectivity notion is part of the deferred layer. *)
+(** Corpus row: opg:hamiltonian_cycles_in_line_graphs_of_infinite_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/hamiltonian_cycles_in_line_graphs_of_infinite_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/hamiltonian_cycles_in_line_graphs_of_infinite_graphs.json
+    English statement: (Open Problem Garden, "Hamiltonian cycles in line graphs of
+      infinite graphs") Two clauses: (1) if G is a 4-edge-connected locally finite
+      graph, then its line graph is hamiltonian; (2) if the line graph L(G) of a
+      locally finite graph G is 4-connected, then L(G) is hamiltonian.
+    Definitions: [iGraph] - a possibly infinite simple graph (foundations/igraph.v);
+      [infinite_graph G] - the vertex carrier is infinite (foundations/igraph.v);
+      [locally_finite G] - every vertex has finitely many neighbours (D4inf3.v);
+      [iline_graph G] - the line graph (this file); [i_vertex_connected_at_least k H]
+      - H has at least k vertices and stays connected after deleting fewer than k
+      vertices (this file); [i_edge_connected_at_least k G] - rendered as
+      [i_vertex_connected_at_least k (iline_graph G)] (this file);
+      [i_hamilton_circle_proxy H] - the double-ray proxy for a Hamilton circle, a
+      spanning double ray [spanning_dray]: an injective [int]-indexed two-way infinite
+      path of adjacent vertices covering every vertex (this file).
+    Notes: Partial double-ray rendering of the two OPG line-graph clauses. The
+      [infinite_graph G] guard is LOAD-BEARING (audit fix 2026-07-22): the double-ray
+      proxy demands an INJECTIVE [int]-indexed ray, so any finite carrier refutes an
+      unguarded clause (machine-checked at K_1 for the powers row), while the source
+      conjectures hold on finite graphs via ordinary Hamilton cycles — the honest
+      proxy domain is the infinite case, which is also where the conjectures live.
+      Second documented proxy axis: the edge-connectivity hypothesis is rendered as
+      vertex-connectivity of the line graph (kappa(L(G)) >= 4), classically implied by
+      lambda(G) >= 4; a genuine edge-deletion connectivity notion is part of the
+      deferred layer. *)
 Definition hamiltonian_cycles_in_line_graphs_of_infinite_graphs_statement : Prop :=
   (forall G : iGraph,
       infinite_graph G ->
@@ -79,9 +95,24 @@ Definition hamiltonian_cycles_in_line_graphs_of_infinite_graphs_statement : Prop
       i_vertex_connected_at_least 4 (iline_graph G) ->
       i_hamilton_circle_proxy (iline_graph G)).
 
-(** Partial double-ray rendering of the countable cube/square clauses (same
-    load-bearing [infinite_graph] guard as above; without it K_1 refutes the
-    cube clause axiom-free). *)
+(** Corpus row: opg:hamiltonian_cycles_in_powers_of_infinite_graphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/hamiltonian_cycles_in_powers_of_infinite_graphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/hamiltonian_cycles_in_powers_of_infinite_graphs.json
+    English statement: (Open Problem Garden, "Hamiltonian cycles in powers of infinite
+      graphs") Two clauses: (1) if G is a countable connected graph then its third
+      power is hamiltonian; (2) if G is a 2-connected countable graph then its square
+      is hamiltonian.
+    Definitions: [iGraph] - a possibly infinite simple graph (foundations/igraph.v);
+      [infinite_graph G] / [countable_graph G] - the vertex carrier is infinite /
+      countable (foundations/igraph.v); [ipow k G] - the k-th power of G, joining
+      vertices at distance at most k (grounding_D4inf3.v); [i_connected G] -
+      connectedness of the whole vertex set (this file); [i_vertex_connected_at_least
+      2 G] - the 2-connectedness rendering (this file); [i_hamilton_circle_proxy H] -
+      the double-ray proxy for a Hamilton circle (this file, see the line-graph row
+      above).
+    Notes: Partial double-ray rendering of the countable cube/square clauses (same
+      load-bearing [infinite_graph] guard as above; without it K_1 refutes the cube
+      clause axiom-free). *)
 Definition hamiltonian_cycles_in_powers_of_infinite_graphs_statement : Prop :=
   (forall G : iGraph,
       infinite_graph G ->

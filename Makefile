@@ -14,7 +14,7 @@ graph-theory-misc: topological-graph-theory minor-theory   # X80/X102 reuse embe
 # CI gate (G1 + acceptance): manifest reproduces, edge-graph has no drift, every landed
 # milestone passes check_milestone (compiles, axiom-free, Print-Assumptions-clean, legs justified).
 gate:
-	python3 meta/build_opg_manifest.py
+	python3 meta/build_opg_manifest.py --check
 	python3 meta/build_v2_manifest.py --check --require-upstream
 	python3 meta/build_corpus_relations.py --check
 	$(MAKE) atlas
@@ -24,7 +24,7 @@ gate:
 	python3 meta/check_edges.py --assumptions --registry
 	python3 meta/sync_edge_legs.py --check
 	python3 meta/report_corpus_status.py --check --edge-legs
-	python3 meta/library_inventory.py --check
+	python3 meta/library_inventory.py --check --new-waves
 	python3 meta/check_statement_docs.py
 	@set -e; set -- $(LANDED); while [ $$# -ge 2 ]; do python3 meta/check_milestone.py $$1 $$2; shift 2; done
 	python3 meta/formal_resolutions.py
@@ -42,6 +42,7 @@ gate:
 # pinned-snapshot replay otherwise (CI); OPG source regeneration remains in `gate`.
 audit:
 	python3 meta/formal_resolutions.py --metadata-only
+	python3 meta/changed_milestones.py --validate
 	python3 meta/build_edge_graph.py --check
 	python3 meta/build_v2_manifest.py --check
 	python3 meta/foundation_fidelity.py --check

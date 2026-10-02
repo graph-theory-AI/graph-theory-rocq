@@ -1,6 +1,6 @@
 {
- "schema_version": 1,
- "prospective_v2_wave_min": 211,
+ "schema_version": 2,
+ "prospective_v2_wave_min": 230,
  "grounding": {
   "required_statement_states": [
    "done"
@@ -9,7 +9,35 @@
    "hyp_inhabited",
    "not_trivially_true",
    "helper_sanity"
-  ]
+  ],
+  "certificate_schema": {
+   "required_fields": [
+    "theorem",
+    "claim",
+    "references"
+   ],
+   "theorem_declarations": [
+    "Lemma",
+    "Theorem",
+    "Corollary",
+    "Proposition",
+    "Fact",
+    "Remark",
+    "Example"
+   ],
+   "claim_declarations": [
+    "Definition",
+    "Let"
+   ],
+   "notes": "The claim must have type Prop, explicitly mention every declared row/helper reference, and the theorem must have exactly that claim as its type. The gate checks both facts in Rocq and prints the theorem's assumptions."
+  }
  },
- "notes": "X1-X210 are the audited legacy baseline. X211 and later must pass hard lint and carry grounding-certificate metadata before a done statement leg is accepted."
+ "library_helpers": {
+  "required_classifications": [
+   "paper_specific",
+   "compatibility_alias"
+  ],
+  "metadata_field": "helper_ownership"
+ },
+ "notes": "X1-X210 are the audited legacy baseline. X211 and later must pass hard lint, classify every local helper, and carry grounding-certificate metadata before a done statement leg is accepted."
 }

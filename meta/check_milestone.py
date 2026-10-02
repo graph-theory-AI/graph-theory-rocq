@@ -153,8 +153,17 @@ phase_number = re.fullmatch(r"X(\d+)", phase)
 prospective = CORPUS == "v2" and phase_number \
     and int(phase_number.group(1)) >= int(policy["prospective_v2_wave_min"])
 grounding_certificates = []
+grounding_type_checks = []
 prospective_errors = []
 if prospective:
+    ownership = subprocess.run(
+        [sys.executable, os.path.join(META, "library_inventory.py"),
+         "--check", "--wave", phase],
+        cwd=MONO, capture_output=True, text=True,
+    )
+    chk(ownership.returncode == 0, "prospective helper ownership",
+        "" if ownership.returncode == 0 else (ownership.stdout + ownership.stderr)[-1000:])
+
     lint = subprocess.run(
         [sys.executable, os.path.join(META, "faithfulness_lint.py"),
          "--files", os.path.relpath(stmt, MONO), "--check"],
@@ -178,13 +187,19 @@ if prospective:
             prospective_errors.append("faithfulness_verified_by equals implemented_by")
 
     manifest_by_slug = {r["slug"]: r for r in REG.load_manifest(CORPUS)["rows"]}
-    statement_src = strip_comments(open(stmt).read()) if os.path.exists(stmt) else ""
-    helper_prefix = f"x{phase_number.group(1)}_"
-    local_helpers = [name for name in re.findall(
-        r"^\s*Definition\s+([A-Za-z0-9_']+)", statement_src, re.M)
-                     if name.startswith(helper_prefix) and not name.endswith("_statement")]
+    statement_rel = os.path.relpath(stmt, MONO).replace(os.sep, "/")
+    try:
+        helper_inventory = json.load(open(os.path.join(META, "library_helper_inventory.json")))
+    except (OSError, json.JSONDecodeError) as exc:
+        prospective_errors.append(f"cannot load helper inventory: {exc}")
+        helper_inventory = {"helpers": []}
+    local_helpers = sorted(
+        helper["name"] for helper in helper_inventory.get("helpers", [])
+        if helper.get("path") == statement_rel
+    )
     required_fields = policy["grounding"]["required_fields"]
     required_states = set(policy["grounding"]["required_statement_states"])
+    grounding_src = strip_comments(open(grounding).read()) if os.path.exists(grounding) else ""
     for slug in slugs:
         row = manifest_by_slug[slug]
         state = row.get("legs", {}).get("statement", "todo")
@@ -199,31 +214,15 @@ if prospective:
         if missing_fields:
             prospective_errors.append(f"{slug}: grounding metadata misses {missing_fields}")
             continue
-        for field in ("hyp_inhabited", "not_trivially_true"):
-            if not isinstance(spec[field], str) or not spec[field]:
-                prospective_errors.append(f"{slug}: grounding.{field} must name one certificate")
-            else:
-                grounding_certificates.append(spec[field])
-        helpers = spec["helper_sanity"]
-        if not isinstance(helpers, list) or not all(isinstance(x, str) and x for x in helpers):
-            prospective_errors.append(f"{slug}: grounding.helper_sanity must be a list of names")
-        else:
-            grounding_certificates.extend(helpers)
-            if local_helpers and not helpers:
-                prospective_errors.append(
-                    f"{slug}: local helpers {local_helpers[:5]} require helper_sanity certificates")
+        checks, certificate_errors = CONTRACTS.validate_grounding_contract(
+            slug, row["formal_name"], local_helpers, spec, grounding_src
+        )
+        prospective_errors.extend(certificate_errors)
+        grounding_type_checks.extend(checks)
+        grounding_certificates.extend(theorem for theorem, _claim in checks)
 
     if not os.path.exists(grounding):
         prospective_errors.append(f"prospective done rows require {os.path.basename(grounding)}")
-    else:
-        grounding_src = strip_comments(open(grounding).read())
-        proof_decl_re = re.compile(
-            r"^\s*(?:Lemma|Theorem|Corollary|Proposition|Fact|Remark|Definition)\s+"
-            r"([A-Za-z0-9_']+)\b", re.M)
-        declared_certs = set(proof_decl_re.findall(grounding_src))
-        missing_certs = sorted(set(grounding_certificates) - declared_certs)
-        if missing_certs:
-            prospective_errors.append(f"grounding file misses named certificates {missing_certs}")
     chk(not prospective_errors, "prospective audit + grounding contract",
         "; ".join(prospective_errors[:8]) if prospective_errors else "")
 
@@ -254,17 +253,60 @@ chk(os.path.exists(cqp) and not notlisted, "files in _CoqProject", f"not listed:
 
 # 3) build sibling dependencies referenced in _CoqProject (e.g. -Q ../base/theories GTBase), then compile
 deps = re.findall(r"-[QR]\s+\.\./([\w.-]+)/theories\s+\S+", cqp_txt)
+# Mutation canaries may request a milestone-scoped build. Their current target
+# files all import GTBase directly and do not import the package-wide optional
+# siblings; normal acceptance never sets this variable.
+scoped_build = os.environ.get("CHECK_MILESTONE_SCOPED_BUILD") == phase
 dep_fail = []
 for dep in deps:
+    if scoped_build and dep != "base":
+        continue
     dpath = os.path.join(MONO, dep)
     if os.path.isfile(os.path.join(dpath, "_CoqProject")):
         dm = run(["bash", "-c", "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"], cwd=dpath)
         if dm.returncode != 0:
             dep_fail.append(dep)
 chk(not dep_fail, f"dependencies build ({', '.join(deps) or 'none'})", f"failed: {dep_fail}" if dep_fail else "")
-mk = run(["bash", "-c", "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"])
-compiles = mk.returncode == 0
-chk(compiles, "package compiles", "" if compiles else (mk.stdout + mk.stderr)[-500:])
+# Mutation canaries exercise this same acceptance logic in isolated workspaces.
+# They request a milestone-scoped build so a canary does not spend its timeout
+# compiling hundreds of unrelated conjecture files. Normal acceptance always
+# builds the full package.
+if scoped_build:
+    scoped_sources = [
+        p for p in (stmt, grounding, implications)
+        if os.path.exists(p)
+    ]
+    # The assumption and faithfulness probes below `Require` every module that defines
+    # an expected name and every module holding a candidate theorem about the
+    # milestone's statements (cross-wave implication files included), so the scoped
+    # build must compile those modules as well, not only the milestone's own files.
+    probe_rels = {
+        os.path.join("theories", "conjectures", defined_in[n] + ".v")
+        for n in expected if n in defined_in
+    }
+    for cands in faithfulness_candidates(
+            pkg, ns, cqp_txt, [n for n in expected if n in defined_in]).values():
+        probe_rels.update(rel for _qname, rel, _decl in cands)
+    scoped_targets = sorted({
+        os.path.relpath(p, pkg)[:-2] + ".vo"
+        for p in scoped_sources
+    } | {rel[:-2] + ".vo" for rel in probe_rels if os.path.exists(os.path.join(pkg, rel))})
+    build_command = (
+        "rocq makefile -f _CoqProject -o Makefile.coq && "
+        "make -f Makefile.coq " + " ".join(scoped_targets)
+    )
+else:
+    build_command = "rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq"
+mk = run(["bash", "-c", build_command])
+# A package built against a dependency whose own build just failed may only be
+# loading that dependency's stale objects (the mutation canaries hit exactly this
+# after their baseline build), so a failed dependency build voids this check too.
+compiles = mk.returncode == 0 and not dep_fail
+compile_label = "milestone closure compiles" if scoped_build else "package compiles"
+chk(compiles, compile_label,
+    "" if compiles else
+    (f"dependency build failed: {dep_fail}" if dep_fail and mk.returncode == 0
+     else (mk.stdout + mk.stderr)[-500:]))
 
 # 5) no top-level axioms/admits (outside comments)
 axiom_re = re.compile(r"^\s*(Axiom|Parameter|Admitted|Conjecture|Hypothesis|admit)\b", re.M)
@@ -286,6 +328,8 @@ if compiles and ns:
         mods.append(f"grounding_{phase}")
     assumption_names = expected + grounding_certificates
     body = f"From {ns}.conjectures Require Import {' '.join(sorted(set(mods)))}.\n" + \
+           "".join(f"Check ({theorem} : {claim}).\nCheck ({claim} : Prop).\n"
+                   for theorem, claim in grounding_type_checks) + \
            "".join(f"Print Assumptions {n}.\n" for n in assumption_names)
     open(probe, "w").write(body)
     # build coqc include flags as an argv LIST (no shell string interpolation of _CoqProject paths)
