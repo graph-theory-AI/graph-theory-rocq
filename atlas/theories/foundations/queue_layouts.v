@@ -40,7 +40,7 @@ Qed.
 Lemma x158_edge_ends (G : sgraph) (e : {set G}) (a d : G) :
   e \in x158_edge_set G -> a \in e -> d \in e -> a != d -> e = [set a; d] /\ a -- d.
 Proof.
-rewrite inE => /existsP [x /existsP [y /andP [xy /eqP ->]]].
+rewrite in_sg_edge_set => /existsP [x /existsP [y /andP [xy /eqP ->]]].
 rewrite !inE => /orP [] /eqP -> /orP [] /eqP ->; rewrite ?eqxx //= => _.
 by split; [rewrite setUC | rewrite sg_sym].
 Qed.

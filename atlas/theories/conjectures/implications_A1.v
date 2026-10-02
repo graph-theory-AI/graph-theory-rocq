@@ -198,7 +198,6 @@ case: (ltnP 1 #|T|) => T1.
   + exact: tree_has_edge.
   + move=> S S0 ST; apply: leq_trans (k_edge_connected_cut kc S0 ST); exact: leq_maxl.
   + move=> v; apply: leq_trans (k_edge_connected_deg v kc); exact: leq_maxr.
-  + by rewrite !x47_edge_setE.
 - apply: trivial_tree_decomposition.
   have ET : #|E(T)| = 0.
     apply/eqP; rewrite cards_eq0; apply/eqP/setP => e; rewrite inE.
@@ -219,7 +218,6 @@ case: (ltnP 1 #|T|) => T1.
   + exact: tree_has_edge.
   + move=> S S0 ST; apply: leq_trans (k_edge_connected_cut kc S0 ST); exact: leq_maxl.
   + move=> v; apply: leq_trans (k_edge_connected_deg v kc); exact: leq_maxr.
-  + by rewrite !x47_edge_setE.
 - apply: trivial_tree_decomposition.
   have ET : #|E(T)| = 0.
     apply/eqP; rewrite cards_eq0; apply/eqP/setP => e; rewrite inE.
