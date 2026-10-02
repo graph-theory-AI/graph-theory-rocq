@@ -1,0 +1,896 @@
+{
+  "family": "path-vertices",
+  "canonical_name": "GTBase.walks_paths.seq_vertices",
+  "canonical_short_name": "seq_vertices",
+  "relation": "definitional equality (convertible): every local body is the comprehension of the sequence support, [set v | v \\in p] (X67: [set x : G | x \\in p]; X2 head-plus-tail: [set y | y \\in x :: s]), and seq_vertices s is MathComp's [set:: s]; certified by GTBase.walks_paths.seq_verticesE",
+  "baseline_commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "digraph-theory": "Digraph",
+    "graph-theory-misc": "GTMisc",
+    "minor-theory": "Minor",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "chromatic-theory/theories/migration/path_vertices.v",
+    "digraph-theory/theories/migration/path_vertices.v",
+    "graph-theory-misc/theories/migration/path_vertices.v",
+    "minor-theory/theories/migration/path_vertices.v",
+    "packing-theory/theories/migration/path_vertices.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.seq_verticesE",
+    "GTBase.walks_paths.in_seq_vertices",
+    "GTBase.walks_paths.seq_vertices_nil",
+    "GTBase.walks_paths.seq_vertices_seq1",
+    "GTBase.walks_paths.seq_vertices_cons",
+    "GTBase.walks_paths.seq_vertices_rcons",
+    "GTBase.walks_paths.seq_vertices_cat",
+    "GTBase.walks_paths.eq_seq_vertices",
+    "GTBase.walks_paths.seq_vertices_eqP",
+    "GTBase.walks_paths.perm_seq_vertices",
+    "GTBase.walks_paths.seq_vertices_rev",
+    "GTBase.walks_paths.seq_vertices_rot",
+    "GTBase.walks_paths.seq_vertices_undup",
+    "GTBase.walks_paths.seq_vertices_eq0",
+    "GTBase.walks_paths.card_seq_vertices",
+    "GTBase.walks_paths.card_seq_vertices_le",
+    "GTBase.walks_paths.card_seq_verticesP",
+    "GTBase.walks_paths.sub_seq_vertices",
+    "GTBase.walks_paths.seq_vertices_subsetP",
+    "GTBase.walks_paths.seq_vertices_disjointP",
+    "GTBase.walks_paths.seq_vertices_head",
+    "GTBase.walks_paths.seq_vertices_last",
+    "GTBase.walks_paths.seq_vertices_map",
+    "GTBase.walks_paths.seq_vertices_nodes",
+    "GTBase.walks_paths.seq_vertices_val",
+    "GTBase.walks_paths.seq_vertices_idp",
+    "GTBase.walks_paths.seq_vertices_edgep",
+    "GTBase.walks_paths.seq_vertices_ground_nil",
+    "GTBase.walks_paths.seq_vertices_ground_seq1",
+    "GTBase.walks_paths.seq_vertices_ground_repeat",
+    "GTBase.walks_paths.seq_vertices_ground_repeat_card",
+    "GTBase.walks_paths.seq_vertices_ground_repeat_not_uniq",
+    "GTBase.walks_paths.seq_vertices_ground_perm",
+    "GTBase.walks_paths.seq_vertices_ground_absent",
+    "GTBase.walks_paths.seq_vertices_ground_nil_neq",
+    "GTBase.walks_paths.seq_vertices_ground_compute",
+    "GTBase.walks_paths.seq_vertices_ground_head_tail_nil"
+  ],
+  "summary": [
+    "Batch B, family B1 (`path_vertices`). Nine conjecture-local helpers now unfold to `GTBase.walks_paths.seq_vertices`, MathComp's support `[set:: s]` of a raw vertex sequence: eight are the comprehension `[set v | v \\in p]` (X67 writes `[set x : G | x \\in p]`), and Digraph X2's `x2_path_vertices x s`, the support of the head-plus-tail sequence `x :: s`, keeps its signature as `seq_vertices (x :: s)`. The canonical has no walk, uniqueness or nonemptiness premise; `seq_vertices_nodes` and `seq_vertices_val` state its exact correspondence with coq-graph-theory's packaged `Path`, whose `nodes` is the head-plus-tail list. Every helper is convertible to the canonical, so each certificate is a kernel-checked conversion, the helper ones going through `seq_verticesE`; `meta/check_library_migration.py` checks Print Assumptions.",
+    "",
+    "Fourteen statements are affected: X3, X2 (three rows), X39, X113, X116, X146, X11, X67 and X26 in the helpers' own files, and the cross-module rows X40 (through X39's `x39_has_k_distant_xy_paths` and `x39_separates_xy`), X52 and X90 (through X2's `contains_subdivision`). Each frozen statement resolves through frozen copies along its whole affected chain: the helpers in `Legacy`, prefix-dropped chain copies in per-row `XnnLegacy` modules, and X2's unprefixed chain in dependency-ordered modules (`X2Legacy`, `X2BoundsLegacy`, `X2MaderianLegacy`, then one statement module per X2 row), so that every reference to a frozen declaration is renamed or module-qualified. `x2_path_vertices` and `x2_path_internal` are frozen inside verbatim copies of their `Section SubdivisionModel` scaffolding, so their discharged arguments are unchanged. Declarations outside the chains resolve through their live definitions, which this migration does not change.",
+    "",
+    "Kernel evidence, independent of this textual report: `Print All Dependencies` of the 14 frozen statements contains no live helper, no live chain declaration and not `seq_vertices`, while each of the 14 live statements contains `seq_vertices` and its alias (/srv/graph-theory-rocq/coordination/evidence/B1-path_vertices/print_all_dependencies_summary.txt, with the probe script and the full output beside it). The Section scaffolding lines of the frozen X2 copies are checked verbatim against the baseline in /srv/graph-theory-rocq/coordination/evidence/B1-path_vertices/section_scaffolding.txt.",
+    "",
+    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented discrepancies of the affected rows stay verbatim: the wave-E4 nonemptiness guards of the X2 Mader bounds and of X52, the LEAST clause of X2's Mader row and its candidate edge e173, the solved status of X52 and X67, the partial status of X40, X26's d = 0 degeneration, X11's k = 0 behaviour, and the affirmative reading of the X3 question row. The same-body helpers of later families (`vertices_of_seq`, `cycle_vertices`) are untouched distinct variants below; the `path_internal` companions are migrated by family internal-vertices (B2)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_path_vertices",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_path_vertices",
+      "frozen_path": "chromatic-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x3_path_vertices",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.path_vertices.x3_path_vertices_compat",
+      "live_unfolds_to": "seq_vertices p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_uniquely_covers_path_vertex",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_uniquely_covers_path_vertex",
+      "frozen_path": "chromatic-theory/theories/migration/path_vertices.v",
+      "frozen": "X3Legacy.uniquely_covers_path_vertex",
+      "substitutions": {
+        "x3_path_vertices": "Legacy.x3_path_vertices",
+        "x3_uniquely_covers_path_vertex": "uniquely_covers_path_vertex"
+      },
+      "certificate": "Chromatic.migration.path_vertices.x3_uniquely_covers_path_vertex_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.stable_cover_unique_induced_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "stable_cover_unique_induced_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/path_vertices.v",
+      "frozen": "X3Legacy.statement",
+      "substitutions": {
+        "stable_cover_unique_induced_path_statement": "statement",
+        "x3_uniquely_covers_path_vertex": "uniquely_covers_path_vertex"
+      },
+      "certificate": "Chromatic.migration.path_vertices.stable_cover_unique_induced_path_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X2.x2_path_vertices",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_path_vertices",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x2_path_vertices",
+      "substitutions": {},
+      "certificate": "Digraph.migration.path_vertices.x2_path_vertices_compat",
+      "live_unfolds_to": "seq_vertices (x :: s)"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.x2_path_internal",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_path_internal",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2Legacy.path_internal",
+      "substitutions": {
+        "x2_path_internal": "path_internal",
+        "x2_path_vertices": "Legacy.x2_path_vertices"
+      },
+      "certificate": "Digraph.migration.path_vertices.x2_path_internal_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.contains_subdivision",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "contains_subdivision",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2Legacy.contains_subdivision",
+      "substitutions": {
+        "x2_path_internal": "path_internal"
+      },
+      "certificate": "Digraph.migration.path_vertices.contains_subdivision_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.mader_delta_plus_bound",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta_plus_bound",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2BoundsLegacy.mader_delta_plus_bound",
+      "substitutions": {
+        "contains_subdivision": "X2Legacy.contains_subdivision"
+      },
+      "certificate": "Digraph.migration.path_vertices.mader_delta_plus_bound_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.mader_delta_zero_bound",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta_zero_bound",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2BoundsLegacy.mader_delta_zero_bound",
+      "substitutions": {
+        "contains_subdivision": "X2Legacy.contains_subdivision"
+      },
+      "certificate": "Digraph.migration.path_vertices.mader_delta_zero_bound_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.delta_plus_maderian",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "delta_plus_maderian",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2MaderianLegacy.delta_plus_maderian",
+      "substitutions": {
+        "mader_delta_plus_bound": "X2BoundsLegacy.mader_delta_plus_bound"
+      },
+      "certificate": "Digraph.migration.path_vertices.delta_plus_maderian_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.least_mader_delta_zero",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "least_mader_delta_zero",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2MaderianLegacy.least_mader_delta_zero",
+      "substitutions": {
+        "mader_delta_zero_bound": "X2BoundsLegacy.mader_delta_zero_bound"
+      },
+      "certificate": "Digraph.migration.path_vertices.least_mader_delta_zero_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.mader_delta0_transitive_tournament_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta0_transitive_tournament_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2MaderDelta0Legacy.statement",
+      "substitutions": {
+        "least_mader_delta_zero": "X2MaderianLegacy.least_mader_delta_zero",
+        "mader_delta0_transitive_tournament_statement": "statement"
+      },
+      "certificate": "Digraph.migration.path_vertices.mader_delta0_transitive_tournament_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.oriented_trees_delta_plus_maderian_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "oriented_trees_delta_plus_maderian_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2TreesLegacy.statement",
+      "substitutions": {
+        "delta_plus_maderian": "X2MaderianLegacy.delta_plus_maderian",
+        "oriented_trees_delta_plus_maderian_statement": "statement"
+      },
+      "certificate": "Digraph.migration.path_vertices.oriented_trees_delta_plus_maderian_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.delta_plus_maderian_disjoint_union_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "delta_plus_maderian_disjoint_union_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2UnionLegacy.statement",
+      "substitutions": {
+        "delta_plus_maderian": "X2MaderianLegacy.delta_plus_maderian",
+        "delta_plus_maderian_disjoint_union_statement": "statement"
+      },
+      "certificate": "Digraph.migration.path_vertices.delta_plus_maderian_disjoint_union_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X52.x52_mader_chi_bound",
+      "path": "digraph-theory/theories/conjectures/X52.v",
+      "name": "x52_mader_chi_bound",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X52Legacy.mader_chi_bound",
+      "substitutions": {
+        "contains_subdivision": "X2Legacy.contains_subdivision",
+        "x52_mader_chi_bound": "mader_chi_bound"
+      },
+      "certificate": "Digraph.migration.path_vertices.x52_mader_chi_bound_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X52.oriented_tree_mader_chi_linear_bound_statement",
+      "path": "digraph-theory/theories/conjectures/X52.v",
+      "name": "oriented_tree_mader_chi_linear_bound_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X52Legacy.statement",
+      "substitutions": {
+        "oriented_tree_mader_chi_linear_bound_statement": "statement",
+        "x52_mader_chi_bound": "mader_chi_bound"
+      },
+      "certificate": "Digraph.migration.path_vertices.oriented_tree_mader_chi_linear_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X90.x90_f_subdivision_problem",
+      "path": "digraph-theory/theories/conjectures/X90.v",
+      "name": "x90_f_subdivision_problem",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X90Legacy.f_subdivision_problem",
+      "substitutions": {
+        "contains_subdivision": "X2Legacy.contains_subdivision",
+        "x90_f_subdivision_problem": "f_subdivision_problem"
+      },
+      "certificate": "Digraph.migration.path_vertices.x90_f_subdivision_problem_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X90.f_subdivision_complexity_dichotomy_statement",
+      "path": "digraph-theory/theories/conjectures/X90.v",
+      "name": "f_subdivision_complexity_dichotomy_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X90Legacy.statement",
+      "substitutions": {
+        "f_subdivision_complexity_dichotomy_statement": "statement",
+        "x90_f_subdivision_problem": "f_subdivision_problem"
+      },
+      "certificate": "Digraph.migration.path_vertices.f_subdivision_complexity_dichotomy_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X39.x39_path_vertices",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_path_vertices",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x39_path_vertices",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.path_vertices.x39_path_vertices_compat",
+      "live_unfolds_to": "seq_vertices p"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X113.x113_path_vertices",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "x113_path_vertices",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x113_path_vertices",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.path_vertices.x113_path_vertices_compat",
+      "live_unfolds_to": "seq_vertices p"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X116.x116_path_vertices",
+      "path": "graph-theory-misc/theories/conjectures/X116.v",
+      "name": "x116_path_vertices",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x116_path_vertices",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.path_vertices.x116_path_vertices_compat",
+      "live_unfolds_to": "seq_vertices p"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X146.x146_path_vertices",
+      "path": "graph-theory-misc/theories/conjectures/X146.v",
+      "name": "x146_path_vertices",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x146_path_vertices",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.path_vertices.x146_path_vertices_compat",
+      "live_unfolds_to": "seq_vertices p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X39.x39_pairwise_distant_paths",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_pairwise_distant_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X39Legacy.pairwise_distant_paths",
+      "substitutions": {
+        "x39_pairwise_distant_paths": "pairwise_distant_paths",
+        "x39_path_vertices": "Legacy.x39_path_vertices"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x39_pairwise_distant_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_has_k_distant_xy_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X39Legacy.has_k_distant_xy_paths",
+      "substitutions": {
+        "x39_has_k_distant_xy_paths": "has_k_distant_xy_paths",
+        "x39_pairwise_distant_paths": "pairwise_distant_paths"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x39_has_k_distant_xy_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X39.x39_separates_xy",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_separates_xy",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X39Legacy.separates_xy",
+      "substitutions": {
+        "x39_path_vertices": "Legacy.x39_path_vertices",
+        "x39_separates_xy": "separates_xy"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x39_separates_xy_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "coarse_menger_ball_separator_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X39Legacy.statement",
+      "substitutions": {
+        "coarse_menger_ball_separator_statement": "statement",
+        "x39_has_k_distant_xy_paths": "has_k_distant_xy_paths",
+        "x39_separates_xy": "separates_xy"
+      },
+      "certificate": "GTMisc.migration.path_vertices.coarse_menger_ball_separator_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X40.coarse_menger_distance_two_separator_statement",
+      "path": "graph-theory-misc/theories/conjectures/X40.v",
+      "name": "coarse_menger_distance_two_separator_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X40Legacy.statement",
+      "substitutions": {
+        "coarse_menger_distance_two_separator_statement": "statement",
+        "x39_has_k_distant_xy_paths": "X39Legacy.has_k_distant_xy_paths",
+        "x39_separates_xy": "X39Legacy.separates_xy"
+      },
+      "certificate": "GTMisc.migration.path_vertices.coarse_menger_distance_two_separator_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X113.x113_pairwise_distant_cycles",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "x113_pairwise_distant_cycles",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X113Legacy.pairwise_distant_cycles",
+      "substitutions": {
+        "x113_pairwise_distant_cycles": "pairwise_distant_cycles",
+        "x113_path_vertices": "Legacy.x113_path_vertices"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x113_pairwise_distant_cycles_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X113.x113_has_k_distant_cycles",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "x113_has_k_distant_cycles",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X113Legacy.has_k_distant_cycles",
+      "substitutions": {
+        "x113_has_k_distant_cycles": "has_k_distant_cycles",
+        "x113_pairwise_distant_cycles": "pairwise_distant_cycles"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x113_has_k_distant_cycles_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X113.x113_is_forest_after",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "x113_is_forest_after",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X113Legacy.is_forest_after",
+      "substitutions": {
+        "x113_is_forest_after": "is_forest_after",
+        "x113_path_vertices": "Legacy.x113_path_vertices"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x113_is_forest_after_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X113.coarse_erdos_posa_cycles_forest_statement",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "coarse_erdos_posa_cycles_forest_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X113Legacy.statement",
+      "substitutions": {
+        "coarse_erdos_posa_cycles_forest_statement": "statement",
+        "x113_has_k_distant_cycles": "has_k_distant_cycles",
+        "x113_is_forest_after": "is_forest_after"
+      },
+      "certificate": "GTMisc.migration.path_vertices.coarse_erdos_posa_cycles_forest_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X116.x116_pairwise_distant_paths",
+      "path": "graph-theory-misc/theories/conjectures/X116.v",
+      "name": "x116_pairwise_distant_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X116Legacy.pairwise_distant_paths",
+      "substitutions": {
+        "x116_pairwise_distant_paths": "pairwise_distant_paths",
+        "x116_path_vertices": "Legacy.x116_path_vertices"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x116_pairwise_distant_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X116.x116_has_k_distant_ST_paths",
+      "path": "graph-theory-misc/theories/conjectures/X116.v",
+      "name": "x116_has_k_distant_ST_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X116Legacy.has_k_distant_ST_paths",
+      "substitutions": {
+        "x116_has_k_distant_ST_paths": "has_k_distant_ST_paths",
+        "x116_pairwise_distant_paths": "pairwise_distant_paths"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x116_has_k_distant_ST_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement",
+      "path": "graph-theory-misc/theories/conjectures/X116.v",
+      "name": "coarse_menger_paths_bounded_separator_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X116Legacy.statement",
+      "substitutions": {
+        "coarse_menger_paths_bounded_separator_statement": "statement",
+        "x116_has_k_distant_ST_paths": "has_k_distant_ST_paths",
+        "x116_path_vertices": "Legacy.x116_path_vertices"
+      },
+      "certificate": "GTMisc.migration.path_vertices.coarse_menger_paths_bounded_separator_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X146.x146_pairwise_distant_A_paths",
+      "path": "graph-theory-misc/theories/conjectures/X146.v",
+      "name": "x146_pairwise_distant_A_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X146Legacy.pairwise_distant_A_paths",
+      "substitutions": {
+        "x146_pairwise_distant_A_paths": "pairwise_distant_A_paths",
+        "x146_path_vertices": "Legacy.x146_path_vertices"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x146_pairwise_distant_A_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X146.x146_has_k_distant_A_paths",
+      "path": "graph-theory-misc/theories/conjectures/X146.v",
+      "name": "x146_has_k_distant_A_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X146Legacy.has_k_distant_A_paths",
+      "substitutions": {
+        "x146_has_k_distant_A_paths": "has_k_distant_A_paths",
+        "x146_pairwise_distant_A_paths": "pairwise_distant_A_paths"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x146_has_k_distant_A_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X146.x146_every_A_path_hits_ball",
+      "path": "graph-theory-misc/theories/conjectures/X146.v",
+      "name": "x146_every_A_path_hits_ball",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X146Legacy.every_A_path_hits_ball",
+      "substitutions": {
+        "x146_every_A_path_hits_ball": "every_A_path_hits_ball",
+        "x146_path_vertices": "Legacy.x146_path_vertices"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x146_every_A_path_hits_ball_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X146.geelen_coarse_gallai_A_paths_statement",
+      "path": "graph-theory-misc/theories/conjectures/X146.v",
+      "name": "geelen_coarse_gallai_A_paths_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X146Legacy.statement",
+      "substitutions": {
+        "geelen_coarse_gallai_A_paths_statement": "statement",
+        "x146_every_A_path_hits_ball": "every_A_path_hits_ball",
+        "x146_has_k_distant_A_paths": "has_k_distant_A_paths"
+      },
+      "certificate": "GTMisc.migration.path_vertices.geelen_coarse_gallai_A_paths_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X11.x11_path_vertices",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_path_vertices",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x11_path_vertices",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_vertices.x11_path_vertices_compat",
+      "live_unfolds_to": "seq_vertices p"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X67.x67_path_vertices",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_path_vertices",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x67_path_vertices",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_vertices.x67_path_vertices_compat",
+      "live_unfolds_to": "seq_vertices p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X11.x11_pairwise_anticomplete_paths",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_pairwise_anticomplete_paths",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X11Legacy.pairwise_anticomplete_paths",
+      "substitutions": {
+        "x11_pairwise_anticomplete_paths": "pairwise_anticomplete_paths",
+        "x11_path_vertices": "Legacy.x11_path_vertices"
+      },
+      "certificate": "Minor.migration.path_vertices.x11_pairwise_anticomplete_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X11.x11_has_k_anticomplete_xy_paths",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_has_k_anticomplete_xy_paths",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X11Legacy.has_k_anticomplete_xy_paths",
+      "substitutions": {
+        "x11_has_k_anticomplete_xy_paths": "has_k_anticomplete_xy_paths",
+        "x11_pairwise_anticomplete_paths": "pairwise_anticomplete_paths"
+      },
+      "certificate": "Minor.migration.path_vertices.x11_has_k_anticomplete_xy_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X11.x11_no_xy_path_after_closed_neighbourhood",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_no_xy_path_after_closed_neighbourhood",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X11Legacy.no_xy_path_after_closed_neighbourhood",
+      "substitutions": {
+        "x11_no_xy_path_after_closed_neighbourhood": "no_xy_path_after_closed_neighbourhood",
+        "x11_path_vertices": "Legacy.x11_path_vertices"
+      },
+      "certificate": "Minor.migration.path_vertices.x11_no_xy_path_after_closed_neighbourhood_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X11.induced_menger_anticomplete_paths_statement",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "induced_menger_anticomplete_paths_statement",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X11Legacy.statement",
+      "substitutions": {
+        "induced_menger_anticomplete_paths_statement": "statement",
+        "x11_has_k_anticomplete_xy_paths": "has_k_anticomplete_xy_paths",
+        "x11_no_xy_path_after_closed_neighbourhood": "no_xy_path_after_closed_neighbourhood"
+      },
+      "certificate": "Minor.migration.path_vertices.induced_menger_anticomplete_paths_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X67.x67_internal_vertices",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_internal_vertices",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.internal_vertices",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_path_vertices": "Legacy.x67_path_vertices"
+      },
+      "certificate": "Minor.migration.path_vertices.x67_internal_vertices_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X67.x67_no_cross_edges",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_no_cross_edges",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.no_cross_edges",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_no_cross_edges": "no_cross_edges"
+      },
+      "certificate": "Minor.migration.path_vertices.x67_no_cross_edges_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X67.x67_theta",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_theta",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.theta",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_no_cross_edges": "no_cross_edges",
+        "x67_theta": "theta"
+      },
+      "certificate": "Minor.migration.path_vertices.x67_theta_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "theta_triangle_free_bounded_degree_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.statement",
+      "substitutions": {
+        "theta_triangle_free_bounded_degree_treewidth_statement": "statement",
+        "x67_theta": "theta"
+      },
+      "certificate": "Minor.migration.path_vertices.theta_triangle_free_bounded_degree_treewidth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X26.x26_path_vertices",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_path_vertices",
+      "frozen_path": "packing-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x26_path_vertices",
+      "substitutions": {},
+      "certificate": "Packing.migration.path_vertices.x26_path_vertices_compat",
+      "live_unfolds_to": "seq_vertices p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X26.x26_pairwise_distant_paths",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_pairwise_distant_paths",
+      "frozen_path": "packing-theory/theories/migration/path_vertices.v",
+      "frozen": "X26Legacy.pairwise_distant_paths",
+      "substitutions": {
+        "x26_pairwise_distant_paths": "pairwise_distant_paths",
+        "x26_path_vertices": "Legacy.x26_path_vertices"
+      },
+      "certificate": "Packing.migration.path_vertices.x26_pairwise_distant_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X26.x26_has_k_distant_xy_paths",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_has_k_distant_xy_paths",
+      "frozen_path": "packing-theory/theories/migration/path_vertices.v",
+      "frozen": "X26Legacy.has_k_distant_xy_paths",
+      "substitutions": {
+        "x26_has_k_distant_xy_paths": "has_k_distant_xy_paths",
+        "x26_pairwise_distant_paths": "pairwise_distant_paths"
+      },
+      "certificate": "Packing.migration.path_vertices.x26_has_k_distant_xy_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X26.x26_separates_xy",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_separates_xy",
+      "frozen_path": "packing-theory/theories/migration/path_vertices.v",
+      "frozen": "X26Legacy.separates_xy",
+      "substitutions": {
+        "x26_path_vertices": "Legacy.x26_path_vertices",
+        "x26_separates_xy": "separates_xy"
+      },
+      "certificate": "Packing.migration.path_vertices.x26_separates_xy_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "bounded_degree_distant_induced_menger_statement",
+      "frozen_path": "packing-theory/theories/migration/path_vertices.v",
+      "frozen": "X26Legacy.statement",
+      "substitutions": {
+        "bounded_degree_distant_induced_menger_statement": "statement",
+        "x26_has_k_distant_xy_paths": "has_k_distant_xy_paths",
+        "x26_separates_xy": "separates_xy"
+      },
+      "certificate": "Packing.migration.path_vertices.bounded_degree_distant_induced_menger_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/consecutive_in_path.v#X3Legacy.statement": "Later-family snapshot (B3, consecutive-in-path): B3 froze only its induced-path chain at its baseline ceadac8, where x3_uniquely_covers_path_vertex had already been migrated by this family, so this copy calls that live (migrated) helper by design. The end-to-end pre-migration statement, over the frozen chains of B1 and B3, is Chromatic.migration.consecutive_in_path.X3Original.statement, related to the live statement by stable_cover_unique_induced_path_statement_original_compat.",
+    "minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta": "Later-family snapshot (B3, consecutive-in-path): B3 froze only its induced-path chain at its baseline ceadac8, where x67_internal_vertices and x67_no_cross_edges had already been migrated (families path-vertices and internal-vertices), so this copy calls those live (migrated) helpers by design. The end-to-end pre-migration theta and statement, over the frozen chains of B1 and B3, are Minor.migration.consecutive_in_path.X67Original.theta and X67Original.statement, related to the live ones by x67_theta_original_compat and theta_triangle_free_bounded_degree_treewidth_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "digraph-theory/theories/conjectures/X52.v",
+      "name": "contains_subdivision",
+      "note": "Cross-module row X52: x52_mader_chi_bound uses X2's contains_subdivision. Frozen as X52Legacy.mader_chi_bound over X2Legacy.contains_subdivision; statement text unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X90.v",
+      "name": "contains_subdivision",
+      "note": "Cross-module row X90: x90_f_subdivision_problem uses X2's contains_subdivision. Frozen as X90Legacy.f_subdivision_problem over X2Legacy.contains_subdivision; statement text unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X2.v",
+      "name": "contains_subdivision",
+      "note": "Grounding lemmas no_subdiv_emptyD, x2_delta0_unguarded_false and x2_delta_plus_unguarded_false (teeth of the wave-E4 guards) keep their statements and compile unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X52.v",
+      "name": "contains_subdivision",
+      "note": "Grounding lemmas x52_unguarded_false and x52_k1_holds keep their statements and compile unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "x2_path_internal",
+      "note": "mem_x2_internal unfolds x2_path_internal and x2_path_vertices and rewrites with inE; the unchanged script still closes it."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "x2_path_vertices",
+      "note": "Same proof step as the x2_path_internal reference (mem_x2_internal); unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "contains_subdivision",
+      "note": "subdivides_contains_subdivision and contains_subdivision_sub, the P9-to-X2 bridge of edges e074 and e173, keep their statements and compile unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "oriented_trees_delta_plus_maderian_statement",
+      "note": "Target of the verified edge e074; theorem statement unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "mader_delta_zero_bound",
+      "note": "subdivision_TT_gives_delta0_bound, the proved hypothesis-class half of the candidate edge e173 (LEAST clause still open); unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "name": "oriented_tree_mader_chi_linear_bound_statement",
+      "note": "Endpoint check and target of the verified edge e019; theorem statement unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "name": "contains_subdivision",
+      "note": "subdig_contains_subdivision keeps its statement and compiles unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "name": "x2_path_internal",
+      "note": "subdig_contains_subdivision unfolds x2_path_internal and x2_path_vertices and rewrites with inE; the unchanged script still closes it."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "name": "x2_path_vertices",
+      "note": "Same proof step as the x2_path_internal reference (subdig_contains_subdivision); unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X40.v",
+      "name": "x39_has_k_distant_xy_paths",
+      "note": "Cross-module row X40 reuses the X39 vocabulary. Frozen as X40Legacy.statement over X39Legacy.has_k_distant_xy_paths; statement text unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X40.v",
+      "name": "x39_separates_xy",
+      "note": "Cross-module row X40, frozen over X39Legacy.separates_xy; statement text unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.XE1.xe1_vertices_of_seq",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_vertices_of_seq",
+      "note": "same comprehension body; batch-A vertices_of_seq family, a later alias candidate of seq_vertices; untouched here"
+    },
+    {
+      "qualified": "Cycle.conjectures.X5.x5_vertices_of_seq",
+      "path": "cycle-theory/theories/conjectures/X5.v",
+      "name": "x5_vertices_of_seq",
+      "note": "same comprehension body; batch-A vertices_of_seq family; untouched here"
+    },
+    {
+      "qualified": "Cycle.conjectures.X10.x10_cycle_vertices",
+      "path": "cycle-theory/theories/conjectures/X10.v",
+      "name": "x10_cycle_vertices",
+      "note": "same comprehension body over a cycle's vertex list; batch-B cycle_vertices family; untouched here"
+    },
+    {
+      "qualified": "Cycle.conjectures.X212.x212_cycle_vertices",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cycle_vertices",
+      "note": "same comprehension body; batch-B cycle_vertices family; untouched here"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X153.x153_cycle_vertices",
+      "path": "chromatic-theory/theories/conjectures/X153.v",
+      "name": "x153_cycle_vertices",
+      "note": "same comprehension body; batch-B cycle_vertices family; untouched here"
+    },
+    {
+      "qualified": "Digraph.conjectures.X19.x19_cycle_vertices",
+      "path": "digraph-theory/theories/conjectures/X19.v",
+      "name": "x19_cycle_vertices",
+      "note": "same comprehension body on a digraph; batch-B cycle_vertices family; untouched here"
+    }
+  ]
+}

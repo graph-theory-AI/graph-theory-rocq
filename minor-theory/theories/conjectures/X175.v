@@ -12,7 +12,7 @@ Definition x175_clique_count (G : sgraph) : nat :=
   #|[set S : {set G} | cliqueb S && (S != set0)]|.
 
 Definition x175_path_internal {G : sgraph} (x y : G) (p : seq G) : {set G} :=
-  [set z : G | (z \in x :: p) && (z != x) && (z != y)].
+  seq_interior x y (x :: p).
 
 Definition x175_simple_path_between {G : sgraph} (x y : G) (p : seq G) : Prop :=
   [/\ uniq (x :: p), path (--) x p & last x p = y].

@@ -109,8 +109,10 @@
       "note": "coq-graph-theory 0.9.7 has no edge-family deletion. sgraph.del_edges A deletes the edges inside a vertex set A, a different operation, which agrees with single-edge deletion only when #|e| <= 2. Upstream also provides eq_diso and iso_connected, but leaves coloring.diso_chi unproved; GTBase.common.chi_diso proves the chromatic-number invariance from chi_isubgraph. GTBase.common.del_edge_set, already used by X214, X223 and X229, is the canonical with an unchanged body.",
       "audited_at": "2026-10-02"
     },
-    "reviewed_by": null,
+    "reviewed_by": "marcol",
     "foundation_fidelity": "meta/foundation_fidelity/edge-set-deletion.json",
-    "migration_record": "meta/LIBRARY_MIGRATION_A2.md"
+    "migration_record": "meta/LIBRARY_MIGRATION_A2.md",
+    "reviewed_commit": "dbee364e6be7ac2e9a8e7edecbb1ff5f0878c8c0",
+    "independent_review": "meta/migration_reviews/delete_edges.md"
   }
 }

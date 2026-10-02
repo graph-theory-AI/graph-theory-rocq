@@ -1,0 +1,32 @@
+{
+ "schema_version": 1,
+ "family": "consecutive-in-path",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_consecutive": {
+     "verdict": "FAITHFUL",
+     "note": "seq_consecutive s u v holds when u and v are adjacent entries of the raw sequence s, in either order: (u, v) or (v, u) occurs in zip s (behead s), equivalently [:: u; v] or [:: v; u] occurs contiguously in s. Prop codomain, symmetric, with no edge, path, uniqueness or distinct-endpoint premise: [::] and one-entry sequences relate nothing, [:: x; y] relates exactly x and y, a repeated adjacent entry relates a value to itself, the closing pair of a cyclic sequence is not consecutive unless also adjacent, and it is invariant under rev; consecutive entries of a MathComp path or of a packaged coq-graph-theory Path are related by its relation."
+    }
+   },
+   "machine_evidence": [
+    "mem_zip_behead",
+    "seq_consecutiveP",
+    "seq_consecutive_sym",
+    "seq_consecutive_cons2",
+    "seq_consecutive_rev",
+    "seq_consecutive_path",
+    "seq_consecutive_nodes",
+    "seq_consecutive_ground_nil",
+    "seq_consecutive_ground_seq1",
+    "seq_consecutive_ground_pair",
+    "seq_consecutive_ground_path",
+    "seq_consecutive_ground_not_adjacent",
+    "seq_consecutive_ground_not_cyclic",
+    "seq_consecutive_ground_repeated",
+    "seq_consecutive_ground_repeated_apart"
+   ]
+  }
+ }
+}

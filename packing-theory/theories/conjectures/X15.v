@@ -11,9 +11,13 @@ Unset Printing Implicit Defensive.
 Definition x15_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
+(** Since the C1 library migration (2026-10-02) a transparent alias of the
+    coq-graph-theory [matching] (connectivity.v).  The original body, "M is a
+    set of edges of G in which every vertex lies in at most one member", is
+    frozen and certified equivalent in theories/migration/matching.v
+    ([x15_matching_compat]); the statements below are unchanged. *)
 Definition x15_matching (G : sgraph) (M : {set {set G}}) : Prop :=
-  M \subset x15_edge_set G /\
-  forall v : G, #|[set e in M | v \in e]| <= 1.
+  matching M.
 
 Definition x15_edge_partition
     (G : sgraph) (m : nat) (E : 'I_m -> {set {set G}}) : Prop :=

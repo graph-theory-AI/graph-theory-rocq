@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X157 vocabulary ***********************************************)
 
 Definition x157_path_internal (G : sgraph) (x y : G) (p : seq G) : {set G} :=
-  [set z : G | z \in p] :\: [set x; y].
+  seq_interior x y p.
 
 Definition x157_simple_xy_path (G : sgraph) (x y : G) (p : seq G) : Prop :=
   path (--) x p /\ last x p = y /\ uniq (x :: p).

@@ -1,0 +1,478 @@
+{
+  "family": "matching",
+  "canonical_name": "GraphTheory.connectivity.matching",
+  "canonical_short_name": "matching",
+  "relation": "logical equivalence, not convertibility: the frozen helpers spell the second clause as at most one member through each vertex (X15), pairwise-disjoint distinct members (X14) or empty pairwise intersections (X180), the canonical says that two members sharing a vertex are equal; certified by Packing.foundations.matching.matching_at_most_oneP, matching_pairwise_disjointP and matching_setI_eq0P (X180's edge set fg_edges G is E(G) by Extremal.migration.matching.fg_edgesE)",
+  "baseline_commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+  "pre_m1_commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+  "namespaces": {
+    "packing-theory": "Packing",
+    "graph-theory-misc": "GTMisc",
+    "extremal-graph-theory": "Extremal"
+  },
+  "certificate_files": [
+    "packing-theory/theories/foundations/matching.v",
+    "packing-theory/theories/migration/matching.v",
+    "graph-theory-misc/theories/migration/matching.v",
+    "extremal-graph-theory/theories/migration/matching.v"
+  ],
+  "extra_certificates": [
+    "Packing.foundations.matching.matching_subset",
+    "Packing.foundations.matching.matching_card_edge",
+    "Packing.foundations.matching.matching_sub",
+    "Packing.foundations.matching.matching_at_most_oneP",
+    "Packing.foundations.matching.matching_pairwise_disjointP",
+    "Packing.foundations.matching.matching_setI_eq0P",
+    "Packing.foundations.matching.matching0",
+    "Packing.foundations.matching.not_matching_loop",
+    "Packing.foundations.matching.not_matching_set0_member",
+    "Packing.foundations.matching.matching_edge1",
+    "Packing.foundations.matching.matching_K2",
+    "Packing.foundations.matching.matching_K3_edge",
+    "Packing.foundations.matching.not_matching_K3_adjacent",
+    "Extremal.migration.matching.fg_edgesE"
+  ],
+  "downstream_client": "packing-theory/theories/examples/matching.v",
+  "summary": [
+    "Batch C, family C1 (`matching`). Six name-matched definitions were compared (table below); only the compiled simple-graph edge-family subgroup is migrated: `x15_matching` (packing, with the X18 chain), `x14_matching` (misc) and `x180_matching` (extremal) now unfold to upstream `GraphTheory.connectivity.matching M`, keeping their names as transparent aliases for one migration cycle. Statement texts, doc blocks, manifest rows, leg states and documented discrepancies are unchanged (checked below).",
+    "",
+    "| Qualified definition | Representation | Treatment |",
+    "|---|---|---|",
+    "| `Packing.conjectures.X15.x15_matching` | simple-graph edge family; at most one member through each vertex | migrated: alias of `matching`; `Packing.migration.matching.x15_matching_compat` |",
+    "| `GTMisc.conjectures.X14.x14_matching` | simple-graph edge family; pairwise-disjoint distinct members | migrated: alias of `matching`; `GTMisc.migration.matching.x14_matching_compat` |",
+    "| `Extremal.conjectures.X180.x180_matching` | simple-graph edge family over `fg_edges G` (= `E(G)`, `fg_edgesE`); empty pairwise intersections | migrated: alias of `matching`; `Extremal.migration.matching.x180_matching_compat` |",
+    "| `Packing.conjectures.X15alone.x15_matching` | the X15 body, declaration for declaration (sha256 `e6463b96…`), in a self-contained file absent from `_CoqProject` | deferred, excluded: not built, not retargeted, not repaired; its documented stronger constant (c <= 32 (m+1)^3 under the corpus name) is preserved |",
+    "| `Hypergraph.conjectures.X6.x6_matching` | arbitrary hyperedge family on a finType (`M E : {set {set T}}`); identical body to `U12.hg_matching` (body sha256 `78f1f021…`) | deferred to the hypergraph foundation (batch D), together with `hg_matching` |",
+    "| `Digraph.conjectures.path_fas.matching` | predicate on a whole graph: a forest with every degree at most one | deferred, distinct representation: the bridge `matching G <-> connectivity.matching E(G)` needs its own comparison and a digraph build |",
+    "",
+    "Nine statements are affected: five in X15 (corpus rows #02 and #03 and the three LLM-proof variants, which have no manifest row and are marked `non_corpus`), two in X18 (through `x18_perfect_matching`, a cross-file chain helper that reaches `x15_matching`), one in X14 and one in X180 (through `x180_induced_matching`, `x180_multitasker_capacity_at_least` and `x180_multitasker_capacity_positive`). Each frozen statement resolves only through frozen copies along its whole affected chain: every reference to a frozen name is `Legacy.`-qualified or prefix-stripped, so no frozen text contains a live name of the family. The per-row theorem `<formal_name>_compat : XnnLegacy.<formal_name> <-> <formal_name>` is kernel-checked by `meta/check_library_migration.py`.",
+    "",
+    "Interaction with M1: the X15 and X14 chains reach the M1 aliases `x15_edge_set` and `x14_edge_set`. Their pre-M1 comprehension bodies are re-frozen as `Legacy.x15_edge_set` and `Legacy.x14_edge_set`, checked against 061154c (the same text M1 froze as `simple_edges.Legacy.edge_set` and `simple_edges.Legacy.exists_edge_set`), so every per-row certificate of X15, X18 and X14 is end-to-end over both migrations. X180 uses `GTBase.finite_graph.fg_edges`, which no migration redirected; `fg_edgesE` relates it to `E(G)`. The live helpers `x14_subcubic`, `x14_degree_two_count` and `x180_average_degree_logarithmic` reach no migrated name and are used as they are (`unchanged_live_helpers` records their hashes).",
+    "",
+    "Preserved as documented: X15's REFUTED row #02 and PROVED row #03 (`foundations/fair_matching.v`), X18's partial row #01 (m = 2, 3 in the source) and X180's BLOCKED row (per-graph quantification of the capacity ratio and the degree constants, 2026-07-17 audit): the X180 certificate proves the frozen and the live statement equivalent, so that defect is neither repaired nor worsened. Perfect matchings, edge partitions and edge families stay separate families; they are frozen here only as chain dependencies.",
+    "",
+    "Fidelity of the upstream-owned canonical: `meta/foundation_fidelity.json` enrols repository-declared primitives only, so the verdict is recorded in the registry (`matching.fidelity = FAITHFUL`, contract in `upstream_audit`) with the thirteen API and grounding theorems of `Packing.foundations.matching` as machine evidence (`Print Assumptions` clean, compiled by `check_library_migration.py`), and `packing-theory/theories/examples/matching.v` is the public downstream client (plan section 11). `digraph-theory/theories/conjectures/path_fas.v` appears among the canonical users below only because its deferred whole-graph predicate shares the short name `matching`. Kernel closure evidence (`Print All Dependencies` of every frozen and live statement) is kept separately under `coordination/evidence/C1-matching/`."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X15.x15_matching",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_matching",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x15_matching",
+      "substitutions": {},
+      "certificate": "Packing.migration.matching.x15_matching_compat",
+      "live_unfolds_to": "matching M",
+      "source_declaration_sha256": "e6463b96c81bb01d2d1a378f3a28cd1961ea0c76834ceabfcce06d16135f250b",
+      "source_body_sha256": "57564193048b7e342c1f78a3396f2725ae6bda85632d31927a7e4c3eabdbeeba"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X14.x14_matching",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_matching",
+      "frozen_path": "graph-theory-misc/theories/migration/matching.v",
+      "frozen": "Legacy.x14_matching",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.matching.x14_matching_compat",
+      "live_unfolds_to": "matching M",
+      "source_declaration_sha256": "901dff42a6ad1eef4523320af6cdbda7b3ec10a47789a87e5acfd266f5b32fd3",
+      "source_body_sha256": "ccfc5f6f1f9daf23cd363d4842e850de0ce4fa129dcefa7d62f5f336dfa491f8"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X180.x180_matching",
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "x180_matching",
+      "frozen_path": "extremal-graph-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x180_matching",
+      "substitutions": {},
+      "certificate": "Extremal.migration.matching.x180_matching_compat",
+      "live_unfolds_to": "matching M",
+      "source_declaration_sha256": "058f3a3b8bd0af6b943345b1d6f7573975e14c52335580d8e24a4795cad6c684",
+      "source_body_sha256": "a423732e1c82b3b8901e1cf57c2e0639f1031bbf821605fbb03a956640d83cd0"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X15.x15_edge_set",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x15_edge_set",
+      "substitutions": {},
+      "certificate": "Packing.migration.matching.x15_edge_set_compat",
+      "source_declaration_sha256": "145fb0fe7de64e6da68f822e906d5abdb1b65c3d18ba4627ae4dca52d4cc7af2",
+      "source_body_sha256": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
+      "note": "the comprehension body x15_edge_set had before M1 (M1 froze the same text as Packing.migration.simple_edges.Legacy.edge_set); the live name is the M1 alias sg_edge_set G"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X14.x14_edge_set",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/matching.v",
+      "frozen": "Legacy.x14_edge_set",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.matching.x14_edge_set_compat",
+      "source_declaration_sha256": "2d158cc982eb88ee86eb38303aa6de6ef7c796fc990b585b3a272cf7121a1280",
+      "source_body_sha256": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
+      "note": "the comprehension body x14_edge_set had before M1 (M1 froze the same text as GTMisc.migration.simple_edges.Legacy.exists_edge_set); the live name is the M1 alias sg_edge_set G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X15.x15_edge_partition",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_edge_partition",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.edge_partition",
+      "substitutions": {
+        "x15_edge_partition": "edge_partition",
+        "x15_edge_set": "Legacy.x15_edge_set"
+      },
+      "certificate": "Packing.migration.matching.x15_edge_partition_compat",
+      "source_declaration_sha256": "80fa2108dfaa31e76974f0889dd148b7523c3a437a2166f72bf21d8f454c36d3",
+      "source_body_sha256": "f4fd3a98caa49e352f85d809e7268893d5c23b77f9192a129d42745ef730577d"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X15.x15_edge_family",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_edge_family",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.edge_family",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_edge_set": "Legacy.x15_edge_set"
+      },
+      "certificate": "Packing.migration.matching.x15_edge_family_compat",
+      "source_declaration_sha256": "68541f1ce1822849adb2e988545e2c99da999279cd7cbf957ab1b14371cd2425",
+      "source_body_sha256": "f4b73237281f4b286028fa5a2bd86f2bc529917940264dba7b25c00670b69c23"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X18.x18_perfect_matching",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_perfect_matching",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X18Legacy.perfect_matching",
+      "substitutions": {
+        "x18_perfect_matching": "perfect_matching",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.matching.x18_perfect_matching_compat",
+      "source_declaration_sha256": "08c9b80515a04dd33fda7624fcffd35dfeeafe50f9d0cb402793ea5a20147632",
+      "source_body_sha256": "2d7da5cdc6bea83708102aed820bf5483acdcdc58b1e1f6e93aa32bba6792082",
+      "note": "cross-file chain: X18's helper reaches X15's migrated helper"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X180.x180_induced_matching",
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "x180_induced_matching",
+      "frozen_path": "extremal-graph-theory/theories/migration/matching.v",
+      "frozen": "X180Legacy.induced_matching",
+      "substitutions": {
+        "x180_induced_matching": "induced_matching",
+        "x180_matching": "Legacy.x180_matching"
+      },
+      "certificate": "Extremal.migration.matching.x180_induced_matching_compat",
+      "source_declaration_sha256": "64bc084f2cfd2cf31258cb44f1822549164a25445ebe8f3a151b9c8430b8862d",
+      "source_body_sha256": "e8b213acba7d065e5f69a6393b65be9b92bc96b63c4eae6304424f84f67508cb"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X180.x180_multitasker_capacity_at_least",
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "x180_multitasker_capacity_at_least",
+      "frozen_path": "extremal-graph-theory/theories/migration/matching.v",
+      "frozen": "X180Legacy.multitasker_capacity_at_least",
+      "substitutions": {
+        "x180_multitasker_capacity_at_least": "multitasker_capacity_at_least",
+        "x180_matching": "Legacy.x180_matching",
+        "x180_induced_matching": "induced_matching"
+      },
+      "certificate": "Extremal.migration.matching.x180_multitasker_capacity_at_least_compat",
+      "source_declaration_sha256": "bd87c498fe35d94432e3210d3a646b0f10bbd230ac2ed3896a073b111f7ecdba",
+      "source_body_sha256": "b422a004c095e4177c2999976d2c58067625f3962fc707207b79111457fdc39c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X180.x180_multitasker_capacity_positive",
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "x180_multitasker_capacity_positive",
+      "frozen_path": "extremal-graph-theory/theories/migration/matching.v",
+      "frozen": "X180Legacy.multitasker_capacity_positive",
+      "substitutions": {
+        "x180_multitasker_capacity_positive": "multitasker_capacity_positive",
+        "x180_multitasker_capacity_at_least": "multitasker_capacity_at_least"
+      },
+      "certificate": "Extremal.migration.matching.x180_multitasker_capacity_positive_compat",
+      "source_declaration_sha256": "f903b3f20b403b8067bcbd73badfe5b8f1358de77e77e3a4baedca323d8983dc",
+      "source_body_sha256": "508137a1eeadad87606e8fef97621e4072e90942508352e3690ffdde475466fc"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.fair_matching_edge_partition_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "fair_matching_edge_partition_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.fair_matching_edge_partition_statement",
+      "substitutions": {
+        "x15_edge_partition": "edge_partition",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.matching.fair_matching_edge_partition_statement_compat",
+      "source_declaration_sha256": "e5cdd741111fa42969c82d1e349dc4b4f596b1ac0efa936eeb6c5b1d572bba37",
+      "source_body_sha256": "1aad2aa791ec05f836cb5f2455bc091ef624b56ae9739c117d6152bdfaa8b64c",
+      "corpus": "v2",
+      "row": "arxiv:1611.03196#02",
+      "documented_status": "REFUTED (branch fair-matching-edge-part of this repository); unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.bipartite_matching_underrepresentation_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "bipartite_matching_underrepresentation_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.bipartite_matching_underrepresentation_statement",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_matching": "Legacy.x15_matching",
+        "x15_edge_set": "Legacy.x15_edge_set"
+      },
+      "certificate": "Packing.migration.matching.bipartite_matching_underrepresentation_statement_compat",
+      "source_declaration_sha256": "c5ebb4f3fc2471ea9dc879e96848f457fb020dad1a00f6fb0891bd6b1cb0d6c5",
+      "source_body_sha256": "eb0864e92be49bf91c8e3259470d9116aa3c73322d1dc0b6effd442e27b9a653",
+      "corpus": "v2",
+      "row": "arxiv:1611.03196#03",
+      "documented_status": "PROVED in foundations/fair_matching.v (formal resolution); unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "bipartite_matching_underrepresentation_llm_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.bipartite_matching_underrepresentation_llm_statement",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_matching": "Legacy.x15_matching",
+        "x15_edge_set": "Legacy.x15_edge_set"
+      },
+      "certificate": "Packing.migration.matching.bipartite_matching_underrepresentation_llm_statement_compat",
+      "source_declaration_sha256": "309b00d3bbd387a186081e571324001efbd2af907385287c96dfa084cc7b864f",
+      "source_body_sha256": "e7bc716d829d56e18ecb83fd497df541172bc6fd7b1c099c85af40d921f1b806",
+      "non_corpus": true,
+      "row": null,
+      "documented_status": "LLM-proof variant of row #03 with the explicit bound 32 (m+1)^3, proved in foundations/fair_matching.v; no corpus row; unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm2_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "bipartite_matching_underrepresentation_llm2_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.bipartite_matching_underrepresentation_llm2_statement",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.matching.bipartite_matching_underrepresentation_llm2_statement_compat",
+      "source_declaration_sha256": "9d932ece2ebd4d720926e1c71b83db344325b6bd0485536b76b3f8cd18260bbb",
+      "source_body_sha256": "6b7f20c03a7a9f7118f783ca5e10809b4038c82f90a8850a6a1b0f07ccb45751",
+      "non_corpus": true,
+      "row": null,
+      "documented_status": "LLM-proof variant of row #03 with the bound (m+1)^2 (16m+29), proved in foundations/fair_matching.v; no corpus row; unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm3_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "bipartite_matching_underrepresentation_llm3_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.bipartite_matching_underrepresentation_llm3_statement",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.matching.bipartite_matching_underrepresentation_llm3_statement_compat",
+      "source_declaration_sha256": "0071b6157c3884b3ee9229db71ddf2b88223146f24440b32829d37b01f176f88",
+      "source_body_sha256": "2e980ea0a266326a030179d35e63dd9f78cf597befda3e7f0757e963ce811887",
+      "non_corpus": true,
+      "row": null,
+      "documented_status": "LLM-proof variant of row #03 with the bound 12m+14, proved in foundations/fair_matching.v; no corpus row; unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X18.knn_fair_perfect_matching_statement",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "knn_fair_perfect_matching_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X18Legacy.knn_fair_perfect_matching_statement",
+      "substitutions": {
+        "x15_edge_partition": "X15Legacy.edge_partition",
+        "x18_perfect_matching": "perfect_matching"
+      },
+      "certificate": "Packing.migration.matching.knn_fair_perfect_matching_statement_compat",
+      "source_declaration_sha256": "8c796d2465926081a3d63673093b92f60897b2f9a12c3ccdf1602796fa7e4c74",
+      "source_body_sha256": "6235cef68dad11ea65fd87bf2f0220eeb53e4befde204fdf7558ece4c7a2e5a8",
+      "corpus": "v2",
+      "row": "arxiv:1611.03196#01",
+      "documented_status": "partial row (m = 2, 3 in the source); unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X18.brualdi_stein_partial_transversal_statement",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "brualdi_stein_partial_transversal_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X18Legacy.brualdi_stein_partial_transversal_statement",
+      "substitutions": {
+        "x15_edge_partition": "X15Legacy.edge_partition",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.matching.brualdi_stein_partial_transversal_statement_compat",
+      "source_declaration_sha256": "6e88ac3a9098dbf2498311423c14e4d66e9a7b06e2255d9615aa9070f9ade0d3",
+      "source_body_sha256": "a65579a9d447a6763468513a0820de0d136671f45341c735f6e38602e584d249",
+      "corpus": "v2",
+      "row": "studies:std_brualdi_stein_conjecture",
+      "documented_status": "open; unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X14.subcubic_matching_lower_bound_statement",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "subcubic_matching_lower_bound_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/matching.v",
+      "frozen": "X14Legacy.subcubic_matching_lower_bound_statement",
+      "substitutions": {
+        "x14_matching": "Legacy.x14_matching"
+      },
+      "certificate": "GTMisc.migration.matching.subcubic_matching_lower_bound_statement_compat",
+      "source_declaration_sha256": "13a18e3f818abb665805e07ed3e950c6d10d4212aa93f39e31794718bf4d7131",
+      "source_body_sha256": "6333786878fb310e38e00f95ef8e7f7a0615bb756c81ce2566a82a2209c3f716",
+      "corpus": "v2",
+      "row": "studies:std_biedl_demaine_duncan_fleischer_kobourov_subcubic",
+      "documented_status": "open; unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X180.log_degree_multitasker_exists_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "log_degree_multitasker_exists_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/matching.v",
+      "frozen": "X180Legacy.log_degree_multitasker_exists_statement",
+      "substitutions": {
+        "x180_multitasker_capacity_positive": "multitasker_capacity_positive"
+      },
+      "certificate": "Extremal.migration.matching.log_degree_multitasker_exists_statement_compat",
+      "source_declaration_sha256": "270e68290af518ff0ec232be240ef0970bdad771d3f7a4323b4f1a2ea26b0f89",
+      "source_body_sha256": "4ec9a5e7a45fbed01bb7e32683c8d7aa9cee5ab7f902f7bbf3a1246ab1d92283",
+      "corpus": "v2",
+      "row": "arxiv:1611.02400#01",
+      "documented_status": "BLOCKED (per-graph quantification of the capacity ratio and the degree constants, 2026-07-17 audit); preserved exactly"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x15_matching",
+      "note": "x18_perfect_matching is built on x15_matching (frozen as X18Legacy.perfect_matching) and brualdi_stein_partial_transversal_statement asks for an x15_matching directly; both X18 statements are rows of this family with per-row certificates in Packing.migration.matching. Texts unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x15_edge_partition",
+      "note": "both X18 statements quantify over an x15_edge_partition; frozen as X15Legacy.edge_partition for the X18 rows. Texts unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "x15_matching",
+      "note": "wave-V bridge x15_matching_equiv_matching now holds by reflexivity, and x18_perfect_matching_equiv_x25_perfect_matching is reproved through the API (matching_subset, matching_at_most_oneP). Lemma statements unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "x18_perfect_matching",
+      "note": "x18_perfect_matching_equiv_x25_perfect_matching, reproved through the API; statement unchanged."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "x15_matching",
+      "note": "matching_x15 (canonical to local alias) now holds by reflexivity; the X15 proofs use the alias unchanged otherwise. The theorems proving row #03 and its three LLM variants keep their statements."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "x15_edge_family",
+      "note": "hypothesis of the main fair-matching theorem; unchanged."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "bipartite_matching_underrepresentation_statement",
+      "note": "proved there (formal resolution of row #03); the theorem's statement is unchanged and relates to the frozen body by bipartite_matching_underrepresentation_statement_compat."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "bipartite_matching_underrepresentation_llm_statement",
+      "note": "x15_llm_proof; statement unchanged (non_corpus variant, per-row certificate bipartite_matching_underrepresentation_llm_statement_compat)."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "bipartite_matching_underrepresentation_llm2_statement",
+      "note": "x15_llm2_proof; statement unchanged (non_corpus variant, per-row certificate bipartite_matching_underrepresentation_llm2_statement_compat)."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "bipartite_matching_underrepresentation_llm3_statement",
+      "note": "x15_llm3_proof; statement unchanged (non_corpus variant, per-row certificate bipartite_matching_underrepresentation_llm3_statement_compat)."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/vocabulary_misc.v",
+      "name": "x14_matching",
+      "note": "wave-V bridge x14_matching_equiv_matching now holds by reflexivity; its former direct proof moved to GTMisc.migration.matching.x14_matching_compat. Lemma statement unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Packing.conjectures.X15alone.x15_matching",
+      "path": "packing-theory/theories/conjectures/X15alone.v",
+      "name": "x15_matching",
+      "representation": "simple-graph edge family, excluded from the build",
+      "note": "the X15 body declaration for declaration, in a self-contained scratch file that packing-theory/_CoqProject does not list; it carries a documented stronger statement constant (c <= 32 (m+1)^3 under the corpus name). Neither added to the build, retargeted nor repaired"
+    },
+    {
+      "qualified": "Hypergraph.conjectures.X6.x6_matching",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_matching",
+      "representation": "hypergraph edge family",
+      "note": "subfamily of an arbitrary hyperedge family on a finType (M E : {set {set T}}), identical body to Hypergraph.conjectures.U12.hg_matching (body sha256 78f1f021…); deferred to the hypergraph foundation (batch D) together with hg_matching"
+    },
+    {
+      "qualified": "Digraph.conjectures.path_fas.matching",
+      "path": "digraph-theory/theories/conjectures/path_fas.v",
+      "name": "matching",
+      "representation": "whole-graph predicate",
+      "note": "a predicate on a graph G (is_forest [set: G] and every sdeg at most one), not on an edge family; the natural bridge matching G <-> connectivity.matching E(G) needs its own comparison and a digraph-theory build; deferred"
+    }
+  ],
+  "unchanged_live_helpers": [
+    {
+      "source": "GTMisc.conjectures.X14.x14_subcubic",
+      "declaration_hash": "653445615b27518be5f6b3d065b03217140f42dcc0b6c24f972261a4d6cba328",
+      "body_hash": "adc2a230aa3aaead80bce8e8e3bf86835e5357e9e60958eaf80028479ac030a2"
+    },
+    {
+      "source": "GTMisc.conjectures.X14.x14_degree_two_count",
+      "declaration_hash": "40caacd36e04e4f886a582962bcae496311d6f1e9304d2e40feff4416b309f61",
+      "body_hash": "4c34ac2c969b3aa0555716864ce1ff43a1dcf11e0d21813d0cb84b8ef713313b"
+    },
+    {
+      "source": "Extremal.conjectures.X180.x180_average_degree_logarithmic",
+      "declaration_hash": "2848e1119ce1d9dd2374243cf6896074fc1c313d73c8b97f908f7ed8f595f2b2",
+      "body_hash": "f24ff3215cef2b5880b490d06ed1d6fc69b28d91320bb122c1cb79b674979630"
+    }
+  ],
+  "kernel_evidence": "Print All Dependencies of every frozen and live statement and Print Assumptions of every certificate, run through the pinned image after the re-layout; files under /srv/graph-theory-rocq/coordination/evidence/C1-matching/ (outside the repository)"
+}

@@ -16,7 +16,7 @@ Definition x146_set_ball (G : sgraph) (r : nat) (S : {set G}) : {set G} :=
   \bigcup_(x in S) x146_ball r x.
 
 Definition x146_path_vertices (G : sgraph) (p : seq G) : {set G} :=
-  [set v | v \in p].
+  seq_vertices p.
 
 Definition x146_A_path (G : sgraph) (A : {set G}) (p : seq G) : Prop :=
   match p with

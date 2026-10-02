@@ -13,6 +13,7 @@ import family_registry as R
 import foundation_fidelity as F
 import library_inventory as I
 import check_library_migration as M
+import faithfulness_mutation as MUTATION
 
 
 class FamilyRegistries(unittest.TestCase):
@@ -218,6 +219,37 @@ class FamilyRegistries(unittest.TestCase):
             entries, errors = F.expand_registry()
         self.assertEqual(entries, [])
         self.assertTrue(errors)
+
+    def test_mutation_workspace_keeps_a_new_fidelity_owner_package(self):
+        fragment = self.write_fragment()
+        module = fragment['modules'].pop('GTBase.common')
+        module['path'] = 'spectral-graph-theory/theories/extra.v'
+        fragment['modules']['Spectral.extra'] = module
+        self.write_json('meta/foundation_fidelity/fixture.json', fragment)
+        source = self.root / module['path']
+        source.parent.mkdir(parents=True)
+        source.write_text('Definition added : Prop := True.\n'
+                          'Lemma evidence : True. Proof. exact I. Qed.\n')
+        source.with_suffix('.vo').write_text('A build artifact must not be copied.\n')
+        for package in ('packing-theory', 'graph-theory-misc'):
+            (self.root / package).mkdir()
+        # The owner is neither the mutant target nor a sibling dependency.
+        (self.root / 'packing-theory/_CoqProject').write_text('-Q theories Packing\n')
+        mutant = MUTATION.Mutant('fixture', 'X0', 'packing-theory', (), (), '', '')
+        with patch.object(F, 'ROOT', self.root):
+            expected_entries, errors = F.expand_registry()
+        self.assertEqual(errors, [])
+        with tempfile.TemporaryDirectory(prefix='family-registry-copy-') as temporary:
+            destination = Path(temporary)
+            with patch.object(MUTATION, 'ROOT', self.root), patch.object(F, 'ROOT', self.root):
+                MUTATION.copy_workspace(mutant, destination)
+            copied_source = destination / module['path']
+            self.assertEqual(copied_source.read_bytes(), source.read_bytes())
+            self.assertFalse(copied_source.with_suffix('.vo').exists())
+            with patch.object(F, 'ROOT', destination):
+                entries, errors = F.expand_registry()
+            self.assertEqual(errors, [])
+            self.assertEqual(entries, expected_entries)
 
 
 if __name__ == '__main__':

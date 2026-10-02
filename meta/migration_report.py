@@ -39,7 +39,9 @@ It verifies that
 --write refreshes only the compact committed meta/migration_reports/FAMILY.md;
 --check verifies its contents and all source checks. --details DIR writes the
 full deterministic JSON and Markdown evidence to DIR, independently of the
-compact output. Full reports are generated on demand, not committed artifacts.
+compact output. DIR must be outside the committed report directory and its
+descendants. --all --check rejects non-specification JSON anywhere in that
+directory. Full reports are generated on demand, not committed artifacts.
 """
 
 from __future__ import annotations
@@ -777,6 +779,14 @@ def main(argv: list[str]) -> int:
                 if args.all else [args.family])
     if not families:
         parser.error("no migration report specs found")
+    if args.all and args.check:
+        verbose_json = sorted(path.relative_to(REPORTS).as_posix()
+                              for path in REPORTS.rglob("*.json")
+                              if not path.name.endswith(".spec.json"))
+        if verbose_json:
+            print("migration reports: unexpected non-specification JSON in compact report "
+                  f"directory: {verbose_json}; keep --details output outside it", file=sys.stderr)
+            return 1
     if args.all:
         try:
             registry = load_library_registry(ROOT, allow_missing_reports=args.write)["primitives"]
@@ -800,6 +810,9 @@ def main(argv: list[str]) -> int:
 
 
 def process_family(family: str, args: argparse.Namespace) -> bool:
+    if args.details and args.details.resolve().is_relative_to(REPORTS.resolve()):
+        raise ValueError("--details must be outside the report directory and its descendants; "
+                         "committed reports stay compact")
     spec = json.loads((REPORTS / f"{family}.spec.json").read_text())
     spec["report_name"] = family
     report = build_report(spec, allow_missing_reports=args.write)
@@ -808,8 +821,6 @@ def process_family(family: str, args: argparse.Namespace) -> bool:
     if args.write:
         md_path.write_text(rendered_md)
     if args.details:
-        if args.details.resolve() == REPORTS.resolve():
-            raise ValueError("--details must use a separate directory; committed reports stay compact")
         args.details.mkdir(parents=True, exist_ok=True)
         (args.details / f"{family}.json").write_text(
             json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
