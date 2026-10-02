@@ -2,30 +2,102 @@
   "schema_version": 1,
   "family": "proper-colouring",
   "primitive": {
-    "canonical_name": null,
-    "owner": "chromatic-theory",
-    "status": "proposed",
-    "fidelity": "PENDING",
+    "canonical_name": "GTBase.colourings.proper_colouring",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
     "normalized_names": [
-      "proper_colouring"
+      "proper_colouring",
+      "proper_3_colouring",
+      "proper_three_colouring",
+      "proper_colb",
+      "is_proper3"
     ],
     "source_definitions": [
+      "Chromatic.conjectures.X3.x3_proper_colouring",
+      "Chromatic.conjectures.X63.x63_proper_colouring",
+      "Chromatic.conjectures.X68.x68_proper_three_colouring",
       "Chromatic.conjectures.X109.x109_proper_colouring",
       "Chromatic.conjectures.X162.x162_proper_colouring",
-      "Chromatic.conjectures.X3.x3_proper_colouring",
-      "Chromatic.conjectures.X63.x63_proper_colouring"
+      "Chromatic.conjectures.X187.x187_proper_3_colouring",
+      "Spectral.conjectures.D5.proper_colb",
+      "Infinite.conjectures.D4doa.is_proper3"
     ],
-    "consumers_remaining": 6,
-    "compatibility_theorems": [],
+    "consumers_remaining": 10,
+    "relation": "boolean-equality-and-logical-equivalence",
+    "semantic_classes": {
+      "supplied-finite-colour-map": {
+        "members": [
+          "Chromatic.conjectures.X3.x3_proper_colouring",
+          "Chromatic.conjectures.X63.x63_proper_colouring",
+          "Chromatic.conjectures.X68.x68_proper_three_colouring",
+          "Chromatic.conjectures.X109.x109_proper_colouring",
+          "Chromatic.conjectures.X162.x162_proper_colouring",
+          "Chromatic.conjectures.X187.x187_proper_3_colouring",
+          "Spectral.conjectures.D5.proper_colb",
+          "Infinite.conjectures.D4doa.is_proper3"
+        ],
+        "state": "migrated-alias",
+        "verdict": "unconditionally equivalent on each unchanged carrier",
+        "count": 8
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.proper_colouring.x3_proper_colouring_compat",
+      "Chromatic.migration.proper_colouring.x63_proper_colouring_compat",
+      "Chromatic.migration.proper_colouring.x68_proper_three_colouring_compat",
+      "Chromatic.migration.proper_colouring.x109_proper_colouring_compat",
+      "Chromatic.migration.proper_colouring.x162_proper_colouring_compat",
+      "Chromatic.migration.proper_colouring.x187_proper_3_colouring_compat",
+      "Chromatic.migration.proper_colouring.rainbow_consecutive_vertices_in_hole_statement_compat",
+      "Chromatic.migration.proper_colouring.x63_k_homogeneous_colouring_compat",
+      "Chromatic.migration.proper_colouring.x63_k_homogeneous_with_compat",
+      "Chromatic.migration.proper_colouring.cubic_two_homogeneous_four_colour_statement_compat",
+      "Chromatic.migration.proper_colouring.finite_bridgeless_cubic_two_homogeneous_exceptions_statement_compat",
+      "Chromatic.migration.proper_colouring.triangle_free_planar_distant_precolouring_extension_statement_compat",
+      "Chromatic.migration.proper_colouring.aravind_rainbow_induced_chromatic_path_statement_compat",
+      "Chromatic.migration.proper_colouring.x109_recolour_walk_compat",
+      "Chromatic.migration.proper_colouring.x109_recolour_diameter_at_most_compat",
+      "Chromatic.migration.proper_colouring.cereceda_degenerate_recolouring_quadratic_diameter_statement_compat",
+      "Chromatic.migration.proper_colouring.x162_kempe_class_for_q_compat",
+      "Chromatic.migration.proper_colouring.wsk_triangular_lattice_q5_kempe_class_statement_compat",
+      "Chromatic.migration.proper_colouring.planar_triangle_free_request_graph_fraction_statement_compat",
+      "Spectral.migration.proper_colouring.proper_colb_compat",
+      "Spectral.migration.proper_colouring.csf_coeff_compat",
+      "Spectral.migration.proper_colouring.same_csf_compat",
+      "Spectral.migration.proper_colouring.does_the_symmetric_chromatic_function_distinguish_tr_statement_compat",
+      "Infinite.migration.proper_colouring.is_proper3_compat",
+      "Infinite.migration.proper_colouring.n3colorings_compat",
+      "Infinite.migration.proper_colouring.counting_3_colorings_of_the_hex_lattice_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.colourings.proper_colouringP",
+      "GTBase.colourings.proper_colouringE",
+      "GTBase.colourings.proper_colouring_upstream",
+      "GTBase.colourings.proper_colouring_injective",
+      "GTBase.colourings.proper_colouring_relabel",
+      "GTBase.colourings.proper_colouring_ext",
+      "GTBase.colourings.proper_colouring_K0",
+      "GTBase.colourings.proper_colouring_K1",
+      "GTBase.colourings.not_proper_colouring_constant",
+      "GTBase.colourings.proper_colouring_chi"
+    ],
+    "migration_report": "meta/migration_reports/proper_colouring.md",
+    "migration_spec": "meta/migration_reports/proper_colouring.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C5.md",
+    "downstream_client": "base/theories/examples/proper_colouring.v",
+    "foundation_fidelity": "meta/foundation_fidelity/proper-colouring.json",
     "upstream_audit": {
       "searched_modules": [
-        "GraphTheory.coloring",
-        "GraphTheory.sgraph"
+        "GraphTheory.core.coloring",
+        "GraphTheory.core.sgraph",
+        "mathcomp.boot.finset"
       ],
-      "result": "representation-mismatch",
-      "candidate": "GraphTheory.coloring.coloring",
-      "note": "Upstream coloring is a partition into stable sets, while these helpers mostly use functions into finite palettes. An area adapter should relate the representations instead of replacing either blindly.",
-      "audited_at": "2026-07-22"
-    }
+      "candidate": "GraphTheory.coloring.coloring (preim_partition col setT) setT",
+      "result": "faithful-supplied-map-adapter",
+      "note": "Properness is upstream coloring of the inhabited fibres of the supplied map. Reflection proves the pointwise interface without surjectivity/nonempty-palette guards. Supplied maps and labelled counts are retained; hom_s into a complete graph is too weak because it permits collapsed edges.",
+      "audited_at": "2026-10-02"
+    },
+    "reviewed_by": null
   }
 }

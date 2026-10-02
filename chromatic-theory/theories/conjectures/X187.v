@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X187 -- v2 planar request-graph colouring row *)
 
 From GTBase Require Export base.
+From GTBase Require Import colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -11,7 +12,7 @@ Unset Printing Implicit Defensive.
 Definition x187_triangle_free (G : sgraph) : Prop := girth_geq G 4.
 
 Definition x187_proper_3_colouring (G : sgraph) (col : G -> 'I_3) : Prop :=
-  forall x y : G, x -- y -> col x != col y.
+  colourings.proper_colouring col.
 
 Definition x187_request_pair (G : sgraph) (r x y : G) : bool :=
   (x != y) && (N(r) == [set x; y]).

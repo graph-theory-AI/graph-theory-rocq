@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X162 -- v2 WSK triangular-lattice Kempe row *)
 
 From GTBase Require Export base.
+From GTBase Require Import colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -19,7 +20,7 @@ Definition x162_periodic_triangular_lattice (m n : nat) : sgraph :=
   @fg_mk_sgraph ('I_m * 'I_n)%type (@x162_tri_rel m n).
 
 Definition x162_proper_colouring (G : sgraph) (q : nat) (col : G -> 'I_q) : Prop :=
-  forall x y : G, x -- y -> col x != col y.
+  colourings.proper_colouring col.
 
 Definition x162_uses_only_two_colours
     (G : sgraph) (q : nat) (col : G -> 'I_q) (a b : 'I_q) (S : {set G}) : Prop :=

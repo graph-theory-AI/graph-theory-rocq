@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X63 -- v2 two-homogeneous colouring row *)
 
 From GTBase Require Export base.
+From GTBase Require Import colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,7 +11,7 @@ Unset Printing Implicit Defensive.
 
 Definition x63_proper_colouring
     (G : sgraph) (C : finType) (col : G -> C) : Prop :=
-  forall x y : G, x -- y -> col x != col y.
+  colourings.proper_colouring col.
 
 Definition x63_neighbour_colours
     (G : sgraph) (C : finType) (col : G -> C) (v : G) : {set C} :=
