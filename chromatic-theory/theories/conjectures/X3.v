@@ -49,7 +49,7 @@ Definition x3_stable_set (G : sgraph) (S : {set G}) : Prop :=
   forall u v : G, u \in S -> v \in S -> u -- v -> False.
 
 Definition x3_path_vertices (G : sgraph) (p : seq G) : {set G} :=
-  [set v | v \in p].
+  seq_vertices p.
 
 Definition x3_induced_path (G : sgraph) (p : seq G) : Prop :=
   [/\ uniq p,
