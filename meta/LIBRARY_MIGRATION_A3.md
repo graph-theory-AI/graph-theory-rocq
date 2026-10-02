@@ -80,6 +80,20 @@ stay true and certify their own families' steps. The fully frozen rows are A3's
 `X64Original` and `X61Original`. The report lists the three snapshots under known
 limitations.
 
+## Effects on the A1 and A2 reports
+
+Two checks of earlier families' reports see A3. The specs of both families are
+updated in the A3 follow-up commit; no Rocq file changes.
+- A2 (`delete_edges.spec.json`) listed the four X60/X64 single-edge helpers as
+  untouched distinct variants. A3 migrates them, so they leave that list; the A2
+  summary records the hand-over. U11's `sdel_edge` stays listed for A4.
+- A1 (`induced_free.spec.json`) flags every migration-layer copy of its chain that
+  resolves through a live A1 helper. A3's per-row `X61Legacy.induced_saturated`
+  freezes only A3's chain and keeps the live `x61_induced_free`, by design. It is
+  now a documented A1 snapshot limitation that points to the fully frozen
+  `X61Original` row.
+Both compact reports were regenerated: A2 217/217, A1 265/265.
+
 ## Canonical API additions (GTBase.common)
 
 - `induced_copy_host_diso`: an isomorphism of hosts maps an induced copy on `S` to one
