@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "family": "path-vertices",
+  "base_commit": "9e03072",
+  "canonical": "GTBase.walks_paths.seq_vertices",
+  "canonical_source": "base/theories/walks_paths.v",
+  "import_line": "From GTBase Require Import walks_paths.",
+  "helpers": [
+    {
+      "name": "Chromatic.conjectures.X3.x3_path_vertices",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "convention": "support of the sequence p",
+      "live_body": "seq_vertices p"
+    },
+    {
+      "name": "Digraph.conjectures.X2.x2_path_vertices",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "convention": "head-plus-tail: support of x :: s (signature x s kept)",
+      "live_body": "seq_vertices (x :: s)"
+    },
+    {
+      "name": "GTMisc.conjectures.X113.x113_path_vertices",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "convention": "support of the sequence p",
+      "live_body": "seq_vertices p"
+    },
+    {
+      "name": "GTMisc.conjectures.X116.x116_path_vertices",
+      "path": "graph-theory-misc/theories/conjectures/X116.v",
+      "convention": "support of the sequence p",
+      "live_body": "seq_vertices p"
+    },
+    {
+      "name": "GTMisc.conjectures.X146.x146_path_vertices",
+      "path": "graph-theory-misc/theories/conjectures/X146.v",
+      "convention": "support of the sequence p",
+      "live_body": "seq_vertices p"
+    },
+    {
+      "name": "GTMisc.conjectures.X39.x39_path_vertices",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "convention": "support of the sequence p",
+      "live_body": "seq_vertices p"
+    },
+    {
+      "name": "Minor.conjectures.X11.x11_path_vertices",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "convention": "support of the sequence p",
+      "live_body": "seq_vertices p"
+    },
+    {
+      "name": "Minor.conjectures.X67.x67_path_vertices",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "convention": "support of the sequence p (typed binder x : G)",
+      "live_body": "seq_vertices p"
+    },
+    {
+      "name": "Packing.conjectures.X26.x26_path_vertices",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "convention": "support of the sequence p",
+      "live_body": "seq_vertices p"
+    }
+  ],
+  "certificates": [
+    {
+      "module": "Chromatic.migration.path_vertices",
+      "path": "chromatic-theory/theories/migration/path_vertices.v",
+      "package": "chromatic-theory",
+      "legacy_sources": {"X3Legacy": "chromatic-theory/theories/conjectures/X3.v"},
+      "live_modules": {"X3Legacy": "Chromatic.conjectures.X3"}
+    },
+    {
+      "module": "Digraph.migration.path_vertices",
+      "path": "digraph-theory/theories/migration/path_vertices.v",
+      "package": "digraph-theory",
+      "legacy_sources": {
+        "X2Legacy": "digraph-theory/theories/conjectures/X2.v",
+        "X52Legacy": "digraph-theory/theories/conjectures/X52.v",
+        "X90Legacy": "digraph-theory/theories/conjectures/X90.v"
+      },
+      "live_modules": {
+        "X2Legacy": "Digraph.conjectures.X2",
+        "X52Legacy": "Digraph.conjectures.X52",
+        "X90Legacy": "Digraph.conjectures.X90"
+      }
+    },
+    {
+      "module": "GTMisc.migration.path_vertices",
+      "path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "package": "graph-theory-misc",
+      "legacy_sources": {
+        "X39Legacy": "graph-theory-misc/theories/conjectures/X39.v",
+        "X40Legacy": "graph-theory-misc/theories/conjectures/X40.v",
+        "X113Legacy": "graph-theory-misc/theories/conjectures/X113.v",
+        "X116Legacy": "graph-theory-misc/theories/conjectures/X116.v",
+        "X146Legacy": "graph-theory-misc/theories/conjectures/X146.v"
+      },
+      "live_modules": {
+        "X39Legacy": "GTMisc.conjectures.X39",
+        "X40Legacy": "GTMisc.conjectures.X40",
+        "X113Legacy": "GTMisc.conjectures.X113",
+        "X116Legacy": "GTMisc.conjectures.X116",
+        "X146Legacy": "GTMisc.conjectures.X146"
+      }
+    },
+    {
+      "module": "Minor.migration.path_vertices",
+      "path": "minor-theory/theories/migration/path_vertices.v",
+      "package": "minor-theory",
+      "legacy_sources": {
+        "X11Legacy": "minor-theory/theories/conjectures/X11.v",
+        "X67Legacy": "minor-theory/theories/conjectures/X67.v"
+      },
+      "live_modules": {
+        "X11Legacy": "Minor.conjectures.X11",
+        "X67Legacy": "Minor.conjectures.X67"
+      }
+    },
+    {
+      "module": "Packing.migration.path_vertices",
+      "path": "packing-theory/theories/migration/path_vertices.v",
+      "package": "packing-theory",
+      "legacy_sources": {"X26Legacy": "packing-theory/theories/conjectures/X26.v"},
+      "live_modules": {"X26Legacy": "Packing.conjectures.X26"}
+    }
+  ],
+  "proof_consumers": [
+    {
+      "declaration": "Digraph.conjectures.implications_X2.mem_x2_internal",
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "use": "unfolds x2_path_internal and x2_path_vertices and rewrites with inE; the unchanged script still closes it, since inE reduces membership in seq_vertices (x :: s)"
+    },
+    {
+      "declaration": "Digraph.conjectures.implications_X2.subdivides_contains_subdivision",
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "use": "P9 subdivides -> X2 contains_subdivision bridge (edges e074, e173); unchanged"
+    },
+    {
+      "declaration": "Digraph.conjectures.implications_X2.contains_subdivision_sub",
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "use": "monotonicity of contains_subdivision under subdigraphs; unchanged"
+    },
+    {
+      "declaration": "Digraph.conjectures.implications_X2.subdivision_TT_gives_delta0_bound",
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "use": "hypothesis-class half of the candidate edge e173 (mader_delta_zero_bound); unchanged"
+    },
+    {
+      "declaration": "Digraph.conjectures.implications_X2.subdivision_of_a_transitive_tournament_in_digraphs_w_implies_oriented_trees_delta_plus_maderian",
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "use": "verified edge e074 into oriented_trees_delta_plus_maderian_statement; unchanged"
+    },
+    {
+      "declaration": "Digraph.conjectures.implications_X52.subdig_contains_subdivision",
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "use": "unfolds x2_path_internal and x2_path_vertices and rewrites with inE; the unchanged script still closes it"
+    },
+    {
+      "declaration": "Digraph.conjectures.implications_X52.oriented_trees_in_n_chromatic_digraphs_implies_oriented_tree_mader_chi_linear_bound",
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "use": "verified edge e019 into oriented_tree_mader_chi_linear_bound_statement; unchanged"
+    },
+    {
+      "declaration": "Digraph.conjectures.grounding_X2.no_subdiv_emptyD",
+      "path": "digraph-theory/theories/conjectures/grounding_X2.v",
+      "use": "grounding of contains_subdivision on the empty digraph; unchanged"
+    },
+    {
+      "declaration": "Digraph.conjectures.grounding_X2.x2_delta0_unguarded_false",
+      "path": "digraph-theory/theories/conjectures/grounding_X2.v",
+      "use": "teeth of the wave-E4 nonemptiness guard (semidegree row); unchanged"
+    },
+    {
+      "declaration": "Digraph.conjectures.grounding_X2.x2_delta_plus_unguarded_false",
+      "path": "digraph-theory/theories/conjectures/grounding_X2.v",
+      "use": "teeth of the wave-E4 nonemptiness guard (out-degree row); unchanged"
+    },
+    {
+      "declaration": "Digraph.conjectures.grounding_X52.x52_unguarded_false",
+      "path": "digraph-theory/theories/conjectures/grounding_X52.v",
+      "use": "teeth of the X52 nonemptiness guard; unchanged"
+    },
+    {
+      "declaration": "Digraph.conjectures.grounding_X52.x52_k1_holds",
+      "path": "digraph-theory/theories/conjectures/grounding_X52.v",
+      "use": "k = 1 case of the guarded X52 row; unchanged"
+    }
+  ],
+  "documented_discrepancies": [
+    {
+      "rows": ["mader_delta0_transitive_tournament_statement", "oriented_trees_delta_plus_maderian_statement", "delta_plus_maderian_disjoint_union_statement"],
+      "note": "wave-E4 GUARD REPAIR (0 < #|D| in mader_delta_plus_bound and mader_delta_zero_bound) frozen verbatim; the LEAST clause of least_mader_delta_zero and the candidate (unproved) edge e173 are untouched; the disjoint-union row still inherits the guard through delta_plus_maderian."
+    },
+    {
+      "rows": ["oriented_tree_mader_chi_linear_bound_statement"],
+      "note": "wave-E4 GUARD REPAIR (0 < #|D| in x52_mader_chi_bound) and the truncated 2 * k - 2 frozen verbatim; corpus status solved and verified edge e019 unchanged."
+    },
+    {
+      "rows": ["f_subdivision_complexity_dichotomy_statement"],
+      "note": "faithful only relative to the shared cost-coupled interpreter of GTBase complexity.v; the complexity vocabulary is not part of this family and stays live."
+    },
+    {
+      "rows": ["coarse_menger_distance_two_separator_statement"],
+      "note": "corpus status partial (the c = 2 case is open for general graphs) unchanged; the row keeps reusing the X39 vocabulary, now through the frozen X39 chain in its certificate."
+    },
+    {
+      "rows": ["bounded_degree_distant_induced_menger_statement"],
+      "note": "documented d = 0 degeneration, distinct-but-not-disjoint path lists and an unrestricted separator Z are preserved verbatim."
+    },
+    {
+      "rows": ["theta_triangle_free_bounded_degree_treewidth_statement"],
+      "note": "corpus status solved (Abrishami et al., arXiv:2108.01162) and the induced-theta reading are unchanged; x67_internal_vertices (a path_internal-family helper) is frozen here only because it reaches x67_path_vertices."
+    },
+    {
+      "rows": ["induced_menger_anticomplete_paths_statement"],
+      "note": "the k = 0 behaviour (|Z| <= k.-1 with the empty list) is unchanged."
+    },
+    {
+      "rows": ["coarse_erdos_posa_cycles_forest_statement", "coarse_menger_paths_bounded_separator_statement", "geelen_coarse_gallai_A_paths_statement", "coarse_menger_ball_separator_statement"],
+      "note": "the distance encodings through closed (d-1)- or d-balls of a vertex set and the hitting/separation forms are unchanged; only the vertex-set helper is shared."
+    },
+    {
+      "rows": ["stable_cover_unique_induced_path_statement"],
+      "note": "QUESTION row with its affirmative reading and the exactly-s-vertices path are unchanged."
+    }
+  ],
+  "deferred": [
+    "`x2_path_internal`, `x67_internal_vertices`, `x157_path_internal` and `xe2_internal_path_vertices` (batch-B `path_internal` family): definitions unchanged; the first two are frozen here only as links of affected chains.",
+    "`vertices_of_seq` (Chromatic XE1, Cycle X5; batch A) and `cycle_vertices` (Cycle X10, X212, Digraph X19, Chromatic X153; batch B) have the same comprehension body and are natural later aliases of `seq_vertices`; they are not touched by this change.",
+    "`GTBase.base` does not re-export `walks_paths` yet (plan section 12: re-export after review); the nine conjecture files import `GTBase.walks_paths` explicitly.",
+    "The nine `*_path_vertices` names stay as transparent compatibility aliases (registry status deprecated, 15 direct consumers) until a later alias-removal change (plan section 9, step 12; batch E)."
+  ]
+}

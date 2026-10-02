@@ -227,6 +227,33 @@
     "epsilon_flexible_params"
    ]
   },
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "default": {
+    "verdict": "FAITHFUL",
+    "note": "seq_vertices s is the set of the vertices occurring in the raw sequence s (MathComp [set:: s]), with no walk, uniqueness or nonemptiness premise: [::] gives set0, [:: v] gives [set v], repeated vertices count once and order is irrelevant, so #|seq_vertices s| = size (undup s); the head-plus-tail sequence x :: s of GraphTheory.digraph.nodes is never empty."
+   },
+   "audited_primitives": [
+    "seq_vertices"
+   ],
+   "overrides": {},
+   "machine_evidence": [
+    "seq_vertices_ground_nil",
+    "seq_vertices_ground_seq1",
+    "seq_vertices_ground_repeat",
+    "seq_vertices_ground_repeat_card",
+    "seq_vertices_ground_repeat_not_uniq",
+    "seq_vertices_ground_perm",
+    "seq_vertices_ground_absent",
+    "seq_vertices_ground_nil_neq",
+    "seq_vertices_ground_compute",
+    "seq_vertices_ground_head_tail_nil",
+    "seq_vertices_eq0",
+    "card_seq_vertices",
+    "seq_vertices_nodes",
+    "seq_vertices_val"
+   ]
+  },
   "GTBase.posets": {
    "path": "base/theories/posets.v",
    "default": {

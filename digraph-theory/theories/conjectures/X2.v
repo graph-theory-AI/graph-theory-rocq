@@ -10,6 +10,7 @@ From mathcomp Require Import all_boot.
 From Digraph Require Import prelude interop_graph_theory digraph oriented dipath tournament.
 From Digraph Require Import automorphism domination strong.
 From Digraph Require Import classic_core heroes chi_bounded dichromatic.
+From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -27,7 +28,7 @@ Section SubdivisionModel.
 Variables (F D : diGraphType) (branch : F -> D).
 
 Definition x2_path_vertices (x : D) (s : seq D) : {set D} :=
-  [set y | y \in x :: s].
+  seq_vertices (x :: s).
 
 Definition x2_branch_set : {set D} :=
   [set y | [exists x : F, branch x == y]].

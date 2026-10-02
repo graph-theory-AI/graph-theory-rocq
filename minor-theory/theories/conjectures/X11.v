@@ -2,6 +2,7 @@
 
 From GraphTheory Require Import minor.
 From GTBase Require Export base.
+From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,7 +11,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X11 vocabulary ************************************************)
 
 Definition x11_path_vertices (G : sgraph) (p : seq G) : {set G} :=
-  [set v | v \in p].
+  seq_vertices p.
 
 Definition x11_xy_path (G : sgraph) (X Y : {set G}) (p : seq G) : Prop :=
   match p with

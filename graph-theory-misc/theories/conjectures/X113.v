@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X113 -- v2 coarse Erdos-Posa (cycles/forest) row *)
 
 From GTBase Require Export base.
+From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -25,7 +26,7 @@ Definition x113_set_ball (G : sgraph) (r : nat) (S : {set G}) : {set G} :=
   \bigcup_(x in S) x113_ball r x.
 
 Definition x113_path_vertices (G : sgraph) (p : seq G) : {set G} :=
-  [set v | v \in p].
+  seq_vertices p.
 
 (** A genuine cycle: a uniform closed adjacency-walk on at least 3 vertices. *)
 Definition x113_is_cycle (G : sgraph) (c : seq G) : Prop :=

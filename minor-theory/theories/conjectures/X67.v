@@ -1,6 +1,7 @@
 (** * Minor.conjectures.X67 -- v2 theta-triangle bounded-treewidth row *)
 
 From GTBase Require Export base.
+From GTBase Require Import walks_paths.
 From Minor.conjectures Require Import X27.
 
 Set Implicit Arguments.
@@ -13,7 +14,7 @@ Definition x67_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
   (u, v) \in zip p (behead p) \/ (v, u) \in zip p (behead p).
 
 Definition x67_path_vertices (G : sgraph) (p : seq G) : {set G} :=
-  [set x : G | x \in p].
+  seq_vertices p.
 
 Definition x67_internal_vertices (G : sgraph) (a b : G) (p : seq G) : {set G} :=
   x67_path_vertices p :\: [set a; b].

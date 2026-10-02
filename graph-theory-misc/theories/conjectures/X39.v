@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X39 -- v2 coarse Menger row *)
 
 From GTBase Require Export base.
+From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -16,7 +17,7 @@ Definition x39_set_ball (G : sgraph) (r : nat) (S : {set G}) : {set G} :=
   \bigcup_(x in S) x39_ball r x.
 
 Definition x39_path_vertices (G : sgraph) (p : seq G) : {set G} :=
-  [set v | v \in p].
+  seq_vertices p.
 
 Definition x39_xy_path (G : sgraph) (X Y : {set G}) (p : seq G) : Prop :=
   match p with
