@@ -37,11 +37,11 @@
       "note": "The six *_delete_edges_sym / *_delete_edges_irrefl lemmas of X7, chromatic XE1 and extremal XE1 keep their names and statements (equal up to conversion) and are re-proved from del_es_sym / del_es_irrefl. They are frozen verbatim as the opaque proof dependencies of each Legacy graph, and their normalized names are not claimed by this entry."
     },
     "deferred_variants": {
-      "Chromatic.conjectures.X64.x64_delete_edge_rel": "Single-edge deletion ([set x; y] != e), pointwise equal to del_es_rel [set e] (GTBase.common.del_edge_set1). Deferred to the single-edge family; M1's X64Legacy snapshot resolves through it.",
-      "Chromatic.conjectures.X64.x64_delete_edge_graph": "Single-edge deletion graph. Deferred with x64_delete_edge_rel.",
-      "Extremal.conjectures.X60.x60_delete_edge_rel": "Single-edge deletion ([set x; y] != e). Deferred; A1's X61Legacy/X61Original snapshots resolve through x60_delete_edge_graph.",
-      "Extremal.conjectures.X60.x60_delete_edge_graph": "Single-edge deletion graph. Deferred with x60_delete_edge_rel.",
-      "Reconstruction.conjectures.U11.sdel_edge": "Cross-name single-edge deletion (sde_rel), consumed by reconstruction foundations/kelly.v. Deferred with the single-edge family."
+      "Chromatic.conjectures.X64.x64_delete_edge_rel": "Single-edge deletion ([set x; y] != e), pointwise equal to del_es_rel [set e] (GTBase.common.del_edge_set1). Deferred to the single-edge family and migrated by A3 (single-edge-deletion); M1's X64Legacy snapshot resolves through it.",
+      "Chromatic.conjectures.X64.x64_delete_edge_graph": "Single-edge deletion graph. Deferred with x64_delete_edge_rel; migrated by A3.",
+      "Extremal.conjectures.X60.x60_delete_edge_rel": "Single-edge deletion ([set x; y] != e). Deferred and migrated by A3; A1's X61Legacy/X61Original snapshots resolve through x60_delete_edge_graph.",
+      "Extremal.conjectures.X60.x60_delete_edge_graph": "Single-edge deletion graph. Deferred with x60_delete_edge_rel; migrated by A3.",
+      "Reconstruction.conjectures.U11.sdel_edge": "Cross-name single-edge deletion (sde_rel), consumed by reconstruction foundations/kelly.v. Deferred with the single-edge family; migrated by A4 (single-edge-deletion-u11)."
     },
     "known_consumer_issues": {
       "Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_edges": "Dead and buggy (meta/STATEMENT_IMPROVEMENTS.md:1891): it deletes set0 instead of adding completion edges, and no statement uses it. Its meaning is unchanged by the alias redirect; not repaired here."

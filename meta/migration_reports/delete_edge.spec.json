@@ -32,7 +32,7 @@
     "Extremal.migration.delete_edge.x61_induced_free_delete_edge_compat"
   ],
   "summary": [
-    "Batch A, family A3 (single-edge deletion). The four helpers of X64 and X60 now unfold to `del_es_rel G [set e]` and `del_edge_set G [set e]`. Their adjacency equals the old one pointwise for every vertex set e, valid edge or not, so the deleted graphs are related by the identity isomorphism. Each frozen graph freezes its symmetry and irreflexivity proofs, which `*_delete_edge_proofs_compat` relates to the retained live lemmas as a graph-construction certificate. Three rows: X64 (through `x64_bridgeless`, connectivity), X60 (induced cycles of the deleted graph), and X61 across modules (through `x61_induced_saturated`, `induced_free` of the deleted HOST). Each row also has an end-to-end certificate from its pre-M1 body (X64 and X60 over M1+A3, X61 over M1+A1+A3). The older M1 X64 and A1 X61 snapshots, which call the live deletion helpers, are kept unchanged and documented. U11's `sde_rel`/`sdel_edge` are deferred."
+    "Batch A, family A3 (single-edge deletion). The four helpers of X64 and X60 now unfold to `del_es_rel G [set e]` and `del_edge_set G [set e]`. Their adjacency equals the old one pointwise for every vertex set e, valid edge or not, so the deleted graphs are related by the identity isomorphism. Each frozen graph freezes its symmetry and irreflexivity proofs, which `*_delete_edge_proofs_compat` relates to the retained live lemmas as a graph-construction certificate. Three rows: X64 (through `x64_bridgeless`, connectivity), X60 (induced cycles of the deleted graph), and X61 across modules (through `x61_induced_saturated`, `induced_free` of the deleted HOST). Each row also has an end-to-end certificate from its pre-M1 body (X64 and X60 over M1+A3, X61 over M1+A1+A3). The older M1 X64 and A1 X61 snapshots, which call the live deletion helpers, are kept unchanged and documented. U11's `sde_rel`/`sdel_edge` were deferred here and migrated by A4 (family single-edge-deletion-u11, report `sdel_edge`)."
   ],
   "frozen": [
     {
@@ -319,18 +319,5 @@
       "note": "x61_induced_saturated (and through it infinite_family_without_finite_induced_saturation_statement) uses X60's deleted graph as the HOST of x61_induced_free. X61.v is unchanged; its chain is frozen in Extremal.migration.delete_edge.X61Legacy and X61Original."
     }
   ],
-  "distinct_variants": [
-    {
-      "qualified": "Reconstruction.conjectures.U11.sde_rel",
-      "path": "reconstruction-theory/theories/conjectures/U11.v",
-      "name": "sde_rel",
-      "note": "same concept, deferred by consumer scope (Section G/e; Kelly/deck bridges; edge_reconstruction_statement, external_whitney_line_inversion_statement)"
-    },
-    {
-      "qualified": "Reconstruction.conjectures.U11.sdel_edge",
-      "path": "reconstruction-theory/theories/conjectures/U11.v",
-      "name": "sdel_edge",
-      "note": "same concept, deferred with sde_rel"
-    }
-  ]
+  "distinct_variants": []
 }
