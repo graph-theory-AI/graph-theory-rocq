@@ -4,22 +4,27 @@
     representation; extremal row of X180.  Canonical primitive: upstream
     [GraphTheory.connectivity.matching]; API and grounding in
     packing-theory/theories/foundations/matching.v (not importable from this
-    package, so the presentation proof is restated here); record
-    meta/LIBRARY_MIGRATION_MATCHING.md (generated, with the source hashes
-    of every frozen declaration).
+    package, so the presentation proof is restated here); generated report
+    meta/migration_reports/matching.md (from matching.spec.json, with the
+    source hash and git blob of every frozen declaration); record
+    meta/LIBRARY_MIGRATION_C1.md.
 
     ** Frozen source
 
-    [Legacy] copies verbatim, from work/coordinator 9e03072, the whole
-    affected dependency chain of the X180 statement:
-    - X180.v lines 11-13: [x180_matching] (the migrated helper; its edge set
-      is [GTBase.finite_graph.fg_edges], an audited FAITHFUL primitive that no
-      migration has redirected, so it is used as it is);
-    - lines 15-18, 20-25, 27-28: [x180_induced_matching],
-      [x180_multitasker_capacity_at_least], [x180_multitasker_capacity_positive]
-      (not migrated; frozen because they reach [x180_matching]);
-    - lines 60-65: the statement.  [x180_average_degree_logarithmic] reaches
-      no migrated name and is used as it is.
+    [Legacy] freezes the migrated helper [x180_matching] verbatim as it stood
+    at 9e03072 (its edge set is [GTBase.finite_graph.fg_edges], an audited
+    FAITHFUL primitive that no migration has redirected, so it is used as it
+    is).  [X180Legacy] freezes the whole affected dependency chain of the
+    statement, the statement included, with every reference to a frozen
+    name replaced by its frozen copy and the [x180_] prefix of the chain
+    names dropped: [x180_induced_matching],
+    [x180_multitasker_capacity_at_least], [x180_multitasker_capacity_positive]
+    (not migrated; frozen because they reach [x180_matching]) become
+    [X180Legacy.induced_matching], [X180Legacy.multitasker_capacity_at_least],
+    [X180Legacy.multitasker_capacity_positive].  [x180_average_degree_logarithmic]
+    reaches no migrated name and is used as it is.  The report checks every
+    frozen copy against the source text at 9e03072 modulo exactly these
+    identifier substitutions.
 
     ** Certificates
 
@@ -47,33 +52,10 @@ Unset Printing Implicit Defensive.
 
 Module Legacy.
 
-(** X180.v lines 11-13, 15-18, 20-25 and 27-28 at 9e03072, verbatim. *)
+(** X180.v lines 11-13 at 9e03072, verbatim. *)
 Definition x180_matching (G : sgraph) (M : {set {set G}}) : Prop :=
   M \subset fg_edges G /\
   forall e f : {set G}, e \in M -> f \in M -> e != f -> e :&: f = set0.
-
-Definition x180_induced_matching (G : sgraph) (M : {set {set G}}) : Prop :=
-  x180_matching M /\
-  forall e f : {set G}, e \in M -> f \in M -> e != f ->
-    forall x y : G, x \in e -> y \in f -> ~~ (x -- y).
-
-Definition x180_multitasker_capacity_at_least (G : sgraph) (a b : nat) : Prop :=
-  0 < b /\
-  forall M : {set {set G}},
-    x180_matching M ->
-    exists I : {set {set G}},
-      I \subset M /\ x180_induced_matching I /\ b * #|I| >= a * #|M|.
-
-Definition x180_multitasker_capacity_positive (G : sgraph) : Prop :=
-  exists a b : nat, 0 < a /\ x180_multitasker_capacity_at_least G a b.
-
-(** X180.v lines 60-65 at 9e03072, verbatim. *)
-Definition log_degree_multitasker_exists_statement : Prop :=
-  forall n0 : nat,
-    exists G : sgraph,
-      n0 <= #|G| /\
-      x180_average_degree_logarithmic G /\
-      x180_multitasker_capacity_positive G.
 
 End Legacy.
 
@@ -88,7 +70,7 @@ apply/existsP/existsP => -[x /existsP[y H]]; exists x; apply/existsP; exists y;
 - by case/andP=> xy /eqP->; rewrite xy eqxx (sg_edgeNeq xy).
 Qed.
 
-(** ** Helper and chain certificates *)
+(** ** Helper certificate *)
 
 (** The migrated helper: the frozen "empty intersection" body is the upstream
     matching predicate. *)
@@ -106,18 +88,50 @@ split=> [[MS M1]|[MS M1]]; split.
   by move: ef; rewrite (M1 _ _ eM fM x xe xf) eqxx.
 Qed.
 
+(** ** X180: the chain and the statement *)
+
+Module X180Legacy.
+
+(** X180.v lines 15-18, 20-25 and 27-28 at 9e03072 with [x180_matching] ->
+    [Legacy.x180_matching] and the [x180_] prefix of the chain names dropped. *)
+Definition induced_matching (G : sgraph) (M : {set {set G}}) : Prop :=
+  Legacy.x180_matching M /\
+  forall e f : {set G}, e \in M -> f \in M -> e != f ->
+    forall x y : G, x \in e -> y \in f -> ~~ (x -- y).
+
+Definition multitasker_capacity_at_least (G : sgraph) (a b : nat) : Prop :=
+  0 < b /\
+  forall M : {set {set G}},
+    Legacy.x180_matching M ->
+    exists I : {set {set G}},
+      I \subset M /\ induced_matching I /\ b * #|I| >= a * #|M|.
+
+Definition multitasker_capacity_positive (G : sgraph) : Prop :=
+  exists a b : nat, 0 < a /\ multitasker_capacity_at_least G a b.
+
+(** X180.v lines 60-65 at 9e03072 with [x180_multitasker_capacity_positive]
+    -> [multitasker_capacity_positive]. *)
+Definition log_degree_multitasker_exists_statement : Prop :=
+  forall n0 : nat,
+    exists G : sgraph,
+      n0 <= #|G| /\
+      x180_average_degree_logarithmic G /\
+      multitasker_capacity_positive G.
+
+End X180Legacy.
+
 Lemma x180_induced_matching_compat (G : sgraph) (M : {set {set G}}) :
-  Legacy.x180_induced_matching M <-> x180_induced_matching M.
+  X180Legacy.induced_matching M <-> x180_induced_matching M.
 Proof.
-rewrite /Legacy.x180_induced_matching /x180_induced_matching.
+rewrite /X180Legacy.induced_matching /x180_induced_matching.
 by split=> -[mM ind]; split=> //; apply/x180_matching_compat.
 Qed.
 
 Lemma x180_multitasker_capacity_at_least_compat (G : sgraph) (a b : nat) :
-  Legacy.x180_multitasker_capacity_at_least G a b <->
+  X180Legacy.multitasker_capacity_at_least G a b <->
   x180_multitasker_capacity_at_least G a b.
 Proof.
-rewrite /Legacy.x180_multitasker_capacity_at_least
+rewrite /X180Legacy.multitasker_capacity_at_least
   /x180_multitasker_capacity_at_least.
 split=> -[bpos H]; split=> // M mM.
 - have [I [IM [indI ratio]]] := H M ((x180_matching_compat M).2 mM).
@@ -127,20 +141,18 @@ split=> -[bpos H]; split=> // M mM.
 Qed.
 
 Lemma x180_multitasker_capacity_positive_compat (G : sgraph) :
-  Legacy.x180_multitasker_capacity_positive G <->
+  X180Legacy.multitasker_capacity_positive G <->
   x180_multitasker_capacity_positive G.
 Proof.
-rewrite /Legacy.x180_multitasker_capacity_positive
+rewrite /X180Legacy.multitasker_capacity_positive
   /x180_multitasker_capacity_positive.
 by split=> -[a [b [apos cap]]]; exists a, b; split=> //;
   apply/x180_multitasker_capacity_at_least_compat.
 Qed.
 
-(** ** Statement certificate *)
-
 (** arxiv:1611.02400#01 (BLOCKED, unchanged). *)
 Lemma log_degree_multitasker_exists_statement_compat :
-  Legacy.log_degree_multitasker_exists_statement <->
+  X180Legacy.log_degree_multitasker_exists_statement <->
   log_degree_multitasker_exists_statement.
 Proof.
 by split=> H n0; have [G [nG [avg cap]]] := H n0; exists G; split=> //; split=> //;
