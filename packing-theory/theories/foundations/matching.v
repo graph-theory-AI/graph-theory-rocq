@@ -2,7 +2,9 @@
 
     Library migration, batch C family "matching" (meta/LIBRARY_MIGRATION_PLAN.md
     section 15; registry entry [matching] in meta/library_primitives.json;
-    record meta/LIBRARY_MIGRATION_MATCHING.md).
+    generated report meta/migration_reports/matching.md from
+    matching.spec.json; record meta/LIBRARY_MIGRATION_C1.md; public client
+    theories/examples/matching.v).
 
     ** Canonical primitive
 

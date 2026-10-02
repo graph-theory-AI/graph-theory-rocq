@@ -4,29 +4,33 @@
     representation; misc row of X14.  Canonical primitive: upstream
     [GraphTheory.connectivity.matching]; API and grounding in
     packing-theory/theories/foundations/matching.v (not importable from this
-    package, so the presentation proof is restated here); record
-    meta/LIBRARY_MIGRATION_MATCHING.md (generated, with the source hashes
-    of every frozen declaration).
+    package, so the presentation proof is restated here); generated report
+    meta/migration_reports/matching.md (from matching.spec.json, with the
+    source hash and git blob of every frozen declaration); record
+    meta/LIBRARY_MIGRATION_C1.md.
 
     ** Frozen source
 
-    [Legacy] copies verbatim, from work/coordinator 9e03072, the affected
-    dependency chain of the X14 statement, so that the frozen statement
-    resolves through no live helper that any migration (M1 edge sets, C1
-    matchings) has redirected:
-    - [x14_edge_set] with its pre-M1 comprehension body (the body frozen as
-      [GTMisc.migration.simple_edges.Legacy.exists_edge_set] on 2026-07-23;
-      the live name has been the transparent alias [sg_edge_set G] since M1);
-    - X14.v lines 14-17: [x14_matching] (the migrated helper);
-    - X14.v lines 65-71: the statement.  [x14_subcubic] and
-      [x14_degree_two_count] are untouched live helpers that reach no
-      migrated name, so they are used as they are.
+    [Legacy] freezes the migrated helper [x14_matching] verbatim as it stood
+    at 9e03072, together with the pre-M1 comprehension body of
+    [x14_edge_set] (X14.v at 061154c; M1 froze the same text as
+    [GTMisc.migration.simple_edges.Legacy.exists_edge_set] and the live name
+    has been the transparent alias [sg_edge_set G] since), so that the frozen
+    helper resolves through no alias of any migration.
+
+    [X14Legacy] freezes the statement with its reference to the helper
+    replaced by the frozen copy ([x14_matching] -> [Legacy.x14_matching]).
+    [x14_subcubic] and [x14_degree_two_count] are untouched live helpers that
+    reach no migrated name, so they are used as they are.  The report checks
+    the frozen copies against the source text at their commits modulo exactly
+    these identifier substitutions.
 
     ** Certificates
 
     [x14_matching_compat] is the helper certificate (frozen pairwise-disjoint
-    body <-> live alias = upstream [matching]);
-    [subcubic_matching_lower_bound_statement_compat] is the row certificate.
+    body <-> live alias = upstream [matching]); [x14_edge_set_compat] is the
+    chain certificate; [subcubic_matching_lower_bound_statement_compat] is
+    the row certificate.
 
     Axiom-free: no Axiom/Parameter/Admitted; Print Assumptions at the end. *)
 
@@ -39,29 +43,22 @@ Unset Printing Implicit Defensive.
 
 Module Legacy.
 
-(** [x14_edge_set] before M1 (GTMisc.migration.simple_edges.Legacy.exists_edge_set). *)
+(** [x14_edge_set] before M1: X14.v lines 11-13 at 061154c, verbatim
+    (the text of GTMisc.migration.simple_edges.Legacy.exists_edge_set). *)
 Definition x14_edge_set (G : sgraph) : {set {set G}} :=
   [set e : {set G} |
       [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]]].
 
-(** X14.v lines 14-17 at 9e03072, verbatim. *)
+(** X14.v lines 14-17 at 9e03072, verbatim; [x14_edge_set] is the frozen
+    comprehension above. *)
 Definition x14_matching (G : sgraph) (M : {set {set G}}) : Prop :=
   M \subset x14_edge_set G /\
   forall e f : {set G},
     e \in M -> f \in M -> e != f -> [disjoint e & f].
 
-(** X14.v lines 65-71 at 9e03072, verbatim. *)
-Definition subcubic_matching_lower_bound_statement : Prop :=
-  forall G : sgraph,
-    0 < #|G| ->
-    x14_subcubic G ->
-    exists M : {set {set G}},
-      @x14_matching G M /\
-      9 * #|M| >= 3 * #|G| + x14_degree_two_count G.
-
 End Legacy.
 
-(** ** Helper certificate *)
+(** ** Helper certificates *)
 
 (** The pre-M1 edge set is the live alias (restates
     GTMisc.migration.simple_edges.x14_edge_set_compat so that this certificate
@@ -87,11 +84,24 @@ split=> [[MS M1]|[MS M1]]; split.
   by move: ef; rewrite (M1 _ _ eM fM x xe xf) eqxx.
 Qed.
 
-(** ** Statement certificate *)
+(** ** X14: the statement *)
+
+Module X14Legacy.
+
+(** X14.v lines 65-71 at 9e03072 with [x14_matching] -> [Legacy.x14_matching]. *)
+Definition subcubic_matching_lower_bound_statement : Prop :=
+  forall G : sgraph,
+    0 < #|G| ->
+    x14_subcubic G ->
+    exists M : {set {set G}},
+      @Legacy.x14_matching G M /\
+      9 * #|M| >= 3 * #|G| + x14_degree_two_count G.
+
+End X14Legacy.
 
 (** studies:std_biedl_demaine_duncan_fleischer_kobourov_subcubic (unchanged). *)
 Lemma subcubic_matching_lower_bound_statement_compat :
-  Legacy.subcubic_matching_lower_bound_statement <->
+  X14Legacy.subcubic_matching_lower_bound_statement <->
   subcubic_matching_lower_bound_statement.
 Proof.
 split=> H G Gpos sub; have [M [mM bound]] := H G Gpos sub; exists M; split=> //.

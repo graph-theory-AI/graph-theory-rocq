@@ -361,7 +361,7 @@
       ],
       "consumers_remaining": 13,
       "relation": "logical-equivalence (frozen local body <-> upstream matching), per statement",
-      "migration_notes": "C1 (2026-10-02, lancelot): of the six name-matched definitions only the compiled simple-graph edge-family subgroup X14 (misc), X15 (packing, with its X18 chain consumer) and X180 (extremal) is migrated: each local helper is now the transparent alias `matching M` of upstream GraphTheory.connectivity.matching, the statement texts are unchanged, and every affected statement has its own frozen-chain certificate. The three other sources are classified and deferred, not migrated: X15alone (excluded from the build, identical body to X15), X6 (hypergraph subfamily, identical body to U12.hg_matching, belongs to the hypergraph foundation) and digraph path_fas.matching (a predicate on a whole graph). Perfect matchings, edge partitions and edge families are separate families (frozen here only as chain dependencies).",
+      "migration_notes": "C1 (2026-10-02, lancelot): of the six name-matched definitions only the compiled simple-graph edge-family subgroup X14 (misc), X15 (packing, with its X18 chain consumer) and X180 (extremal) is migrated: each local helper is now the transparent alias `matching M` of upstream GraphTheory.connectivity.matching, the statement texts are unchanged, and every affected statement has its own frozen-chain certificate. The three other sources are classified and deferred, not migrated: X15alone (excluded from the build, identical body to X15), X6 (hypergraph subfamily, identical body to U12.hg_matching, belongs to the hypergraph foundation) and digraph path_fas.matching (a predicate on a whole graph). Perfect matchings, edge partitions and edge families are separate families (frozen here only as chain dependencies). Follow-up (after the A1 merge 03742d1): certificates re-laid out in A1's convention (Legacy for the migrated helpers and the pre-M1 edge sets, one XnnLegacy module per phase with Legacy.-qualified references and prefix-stripped chain names), report converged onto the generic meta/migration_report.py spec, public downstream client added; theorem names, statement texts and statuses unchanged.",
       "semantic_classes": {
         "simple-graph-edge-family": {
           "members": [
@@ -429,15 +429,15 @@
       ],
       "legacy_snapshots": [
         {
-          "source": "Packing.migration.simple_edges.Legacy.edge_set",
-          "source_path": "packing-theory/theories/migration/simple_edges.v",
-          "source_lines": "12-14",
+          "source": "Packing.conjectures.X15.x15_edge_set",
+          "source_path": "packing-theory/theories/conjectures/X15.v",
+          "source_lines": "11-13",
           "legacy": "Packing.migration.matching.Legacy.x15_edge_set",
-          "declaration_hash": "3fa9a54b757819a76350716a71eda8f7a21fdae416f144c4a676b7ea8bb355dd",
+          "declaration_hash": "145fb0fe7de64e6da68f822e906d5abdb1b65c3d18ba4627ae4dca52d4cc7af2",
           "body_hash": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
-          "base_rev": "9e03072",
-          "verbatim_of": "Packing.migration.simple_edges.Legacy.edge_set",
-          "note": "pre-M1 body of Packing.conjectures.X15.x15_edge_set, re-frozen under the local name so that the frozen chain resolves through no M1 alias"
+          "base_rev": "061154c",
+          "same_text_as": "Packing.migration.simple_edges.Legacy.edge_set",
+          "note": "pre-M1 comprehension body of the edge set (the live name is the M1 alias sg_edge_set G since 7e12a0f), re-frozen so that the frozen chain resolves through no M1 alias"
         },
         {
           "source": "Packing.conjectures.X15.x15_matching",
@@ -452,7 +452,7 @@
           "source": "Packing.conjectures.X15.x15_edge_partition",
           "source_path": "packing-theory/theories/conjectures/X15.v",
           "source_lines": "18-22",
-          "legacy": "Packing.migration.matching.Legacy.x15_edge_partition",
+          "legacy": "Packing.migration.matching.X15Legacy.edge_partition",
           "declaration_hash": "80fa2108dfaa31e76974f0889dd148b7523c3a437a2166f72bf21d8f454c36d3",
           "body_hash": "f4fd3a98caa49e352f85d809e7268893d5c23b77f9192a129d42745ef730577d",
           "base_rev": "9e03072"
@@ -461,7 +461,7 @@
           "source": "Packing.conjectures.X15.x15_edge_family",
           "source_path": "packing-theory/theories/conjectures/X15.v",
           "source_lines": "24-26",
-          "legacy": "Packing.migration.matching.Legacy.x15_edge_family",
+          "legacy": "Packing.migration.matching.X15Legacy.edge_family",
           "declaration_hash": "68541f1ce1822849adb2e988545e2c99da999279cd7cbf957ab1b14371cd2425",
           "body_hash": "f4b73237281f4b286028fa5a2bd86f2bc529917940264dba7b25c00670b69c23",
           "base_rev": "9e03072"
@@ -470,7 +470,7 @@
           "source": "Packing.conjectures.X15.fair_matching_edge_partition_statement",
           "source_path": "packing-theory/theories/conjectures/X15.v",
           "source_lines": "49-55",
-          "legacy": "Packing.migration.matching.Legacy.fair_matching_edge_partition_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.fair_matching_edge_partition_statement",
           "declaration_hash": "e5cdd741111fa42969c82d1e349dc4b4f596b1ac0efa936eeb6c5b1d572bba37",
           "body_hash": "1aad2aa791ec05f836cb5f2455bc091ef624b56ae9739c117d6152bdfaa8b64c",
           "base_rev": "9e03072"
@@ -479,7 +479,7 @@
           "source": "Packing.conjectures.X15.bipartite_matching_underrepresentation_statement",
           "source_path": "packing-theory/theories/conjectures/X15.v",
           "source_lines": "76-86",
-          "legacy": "Packing.migration.matching.Legacy.bipartite_matching_underrepresentation_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.bipartite_matching_underrepresentation_statement",
           "declaration_hash": "c5ebb4f3fc2471ea9dc879e96848f457fb020dad1a00f6fb0891bd6b1cb0d6c5",
           "body_hash": "eb0864e92be49bf91c8e3259470d9116aa3c73322d1dc0b6effd442e27b9a653",
           "base_rev": "9e03072"
@@ -488,7 +488,7 @@
           "source": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm_statement",
           "source_path": "packing-theory/theories/conjectures/X15.v",
           "source_lines": "89-100",
-          "legacy": "Packing.migration.matching.Legacy.bipartite_matching_underrepresentation_llm_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.bipartite_matching_underrepresentation_llm_statement",
           "declaration_hash": "309b00d3bbd387a186081e571324001efbd2af907385287c96dfa084cc7b864f",
           "body_hash": "e7bc716d829d56e18ecb83fd497df541172bc6fd7b1c099c85af40d921f1b806",
           "base_rev": "9e03072"
@@ -497,7 +497,7 @@
           "source": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm2_statement",
           "source_path": "packing-theory/theories/conjectures/X15.v",
           "source_lines": "106-117",
-          "legacy": "Packing.migration.matching.Legacy.bipartite_matching_underrepresentation_llm2_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.bipartite_matching_underrepresentation_llm2_statement",
           "declaration_hash": "9d932ece2ebd4d720926e1c71b83db344325b6bd0485536b76b3f8cd18260bbb",
           "body_hash": "6b7f20c03a7a9f7118f783ca5e10809b4038c82f90a8850a6a1b0f07ccb45751",
           "base_rev": "9e03072"
@@ -506,7 +506,7 @@
           "source": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm3_statement",
           "source_path": "packing-theory/theories/conjectures/X15.v",
           "source_lines": "124-135",
-          "legacy": "Packing.migration.matching.Legacy.bipartite_matching_underrepresentation_llm3_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.bipartite_matching_underrepresentation_llm3_statement",
           "declaration_hash": "0071b6157c3884b3ee9229db71ddf2b88223146f24440b32829d37b01f176f88",
           "body_hash": "2e980ea0a266326a030179d35e63dd9f78cf597befda3e7f0757e963ce811887",
           "base_rev": "9e03072"
@@ -515,7 +515,7 @@
           "source": "Packing.conjectures.X18.x18_perfect_matching",
           "source_path": "packing-theory/theories/conjectures/X18.v",
           "source_lines": "34-36",
-          "legacy": "Packing.migration.matching.Legacy.x18_perfect_matching",
+          "legacy": "Packing.migration.matching.X18Legacy.perfect_matching",
           "declaration_hash": "08c9b80515a04dd33fda7624fcffd35dfeeafe50f9d0cb402793ea5a20147632",
           "body_hash": "2d7da5cdc6bea83708102aed820bf5483acdcdc58b1e1f6e93aa32bba6792082",
           "base_rev": "9e03072"
@@ -524,7 +524,7 @@
           "source": "Packing.conjectures.X18.knn_fair_perfect_matching_statement",
           "source_path": "packing-theory/theories/conjectures/X18.v",
           "source_lines": "86-93",
-          "legacy": "Packing.migration.matching.Legacy.knn_fair_perfect_matching_statement",
+          "legacy": "Packing.migration.matching.X18Legacy.knn_fair_perfect_matching_statement",
           "declaration_hash": "8c796d2465926081a3d63673093b92f60897b2f9a12c3ccdf1602796fa7e4c74",
           "body_hash": "6235cef68dad11ea65fd87bf2f0220eeb53e4befde204fdf7558ece4c7a2e5a8",
           "base_rev": "9e03072"
@@ -533,21 +533,21 @@
           "source": "Packing.conjectures.X18.brualdi_stein_partial_transversal_statement",
           "source_path": "packing-theory/theories/conjectures/X18.v",
           "source_lines": "108-116",
-          "legacy": "Packing.migration.matching.Legacy.brualdi_stein_partial_transversal_statement",
+          "legacy": "Packing.migration.matching.X18Legacy.brualdi_stein_partial_transversal_statement",
           "declaration_hash": "6e88ac3a9098dbf2498311423c14e4d66e9a7b06e2255d9615aa9070f9ade0d3",
           "body_hash": "a65579a9d447a6763468513a0820de0d136671f45341c735f6e38602e584d249",
           "base_rev": "9e03072"
         },
         {
-          "source": "GTMisc.migration.simple_edges.Legacy.exists_edge_set",
-          "source_path": "graph-theory-misc/theories/migration/simple_edges.v",
-          "source_lines": "12-14",
+          "source": "GTMisc.conjectures.X14.x14_edge_set",
+          "source_path": "graph-theory-misc/theories/conjectures/X14.v",
+          "source_lines": "11-13",
           "legacy": "GTMisc.migration.matching.Legacy.x14_edge_set",
-          "declaration_hash": "47fe23d49451f27431683cbc98c48412374fbace2b00333b0f324e470a1bec7c",
+          "declaration_hash": "2d158cc982eb88ee86eb38303aa6de6ef7c796fc990b585b3a272cf7121a1280",
           "body_hash": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
-          "base_rev": "9e03072",
-          "verbatim_of": "GTMisc.migration.simple_edges.Legacy.exists_edge_set",
-          "note": "pre-M1 body of GTMisc.conjectures.X14.x14_edge_set, re-frozen under the local name"
+          "base_rev": "061154c",
+          "same_text_as": "GTMisc.migration.simple_edges.Legacy.exists_edge_set",
+          "note": "pre-M1 comprehension body of the edge set (the live name is the M1 alias sg_edge_set G since 7e12a0f), re-frozen so that the frozen chain resolves through no M1 alias"
         },
         {
           "source": "GTMisc.conjectures.X14.x14_matching",
@@ -562,7 +562,7 @@
           "source": "GTMisc.conjectures.X14.subcubic_matching_lower_bound_statement",
           "source_path": "graph-theory-misc/theories/conjectures/X14.v",
           "source_lines": "65-71",
-          "legacy": "GTMisc.migration.matching.Legacy.subcubic_matching_lower_bound_statement",
+          "legacy": "GTMisc.migration.matching.X14Legacy.subcubic_matching_lower_bound_statement",
           "declaration_hash": "13a18e3f818abb665805e07ed3e950c6d10d4212aa93f39e31794718bf4d7131",
           "body_hash": "6333786878fb310e38e00f95ef8e7f7a0615bb756c81ce2566a82a2209c3f716",
           "base_rev": "9e03072"
@@ -580,7 +580,7 @@
           "source": "Extremal.conjectures.X180.x180_induced_matching",
           "source_path": "extremal-graph-theory/theories/conjectures/X180.v",
           "source_lines": "15-18",
-          "legacy": "Extremal.migration.matching.Legacy.x180_induced_matching",
+          "legacy": "Extremal.migration.matching.X180Legacy.induced_matching",
           "declaration_hash": "64bc084f2cfd2cf31258cb44f1822549164a25445ebe8f3a151b9c8430b8862d",
           "body_hash": "e8b213acba7d065e5f69a6393b65be9b92bc96b63c4eae6304424f84f67508cb",
           "base_rev": "9e03072"
@@ -589,7 +589,7 @@
           "source": "Extremal.conjectures.X180.x180_multitasker_capacity_at_least",
           "source_path": "extremal-graph-theory/theories/conjectures/X180.v",
           "source_lines": "20-25",
-          "legacy": "Extremal.migration.matching.Legacy.x180_multitasker_capacity_at_least",
+          "legacy": "Extremal.migration.matching.X180Legacy.multitasker_capacity_at_least",
           "declaration_hash": "bd87c498fe35d94432e3210d3a646b0f10bbd230ac2ed3896a073b111f7ecdba",
           "body_hash": "b422a004c095e4177c2999976d2c58067625f3962fc707207b79111457fdc39c",
           "base_rev": "9e03072"
@@ -598,7 +598,7 @@
           "source": "Extremal.conjectures.X180.x180_multitasker_capacity_positive",
           "source_path": "extremal-graph-theory/theories/conjectures/X180.v",
           "source_lines": "27-28",
-          "legacy": "Extremal.migration.matching.Legacy.x180_multitasker_capacity_positive",
+          "legacy": "Extremal.migration.matching.X180Legacy.multitasker_capacity_positive",
           "declaration_hash": "f903b3f20b403b8067bcbd73badfe5b8f1358de77e77e3a4baedca323d8983dc",
           "body_hash": "508137a1eeadad87606e8fef97621e4072e90942508352e3690ffdde475466fc",
           "base_rev": "9e03072"
@@ -607,7 +607,7 @@
           "source": "Extremal.conjectures.X180.log_degree_multitasker_exists_statement",
           "source_path": "extremal-graph-theory/theories/conjectures/X180.v",
           "source_lines": "60-65",
-          "legacy": "Extremal.migration.matching.Legacy.log_degree_multitasker_exists_statement",
+          "legacy": "Extremal.migration.matching.X180Legacy.log_degree_multitasker_exists_statement",
           "declaration_hash": "270e68290af518ff0ec232be240ef0970bdad771d3f7a4323b4f1a2ea26b0f89",
           "body_hash": "4ec9a5e7a45fbed01bb7e32683c8d7aa9cee5ab7f902f7bbf3a1246ab1d92283",
           "base_rev": "9e03072"
@@ -640,19 +640,19 @@
         },
         {
           "source": "Packing.conjectures.X15.x15_edge_partition",
-          "legacy": "Packing.migration.matching.Legacy.x15_edge_partition",
+          "legacy": "Packing.migration.matching.X15Legacy.edge_partition",
           "theorem": "Packing.migration.matching.x15_edge_partition_compat",
           "kind": "chain"
         },
         {
           "source": "Packing.conjectures.X15.x15_edge_family",
-          "legacy": "Packing.migration.matching.Legacy.x15_edge_family",
+          "legacy": "Packing.migration.matching.X15Legacy.edge_family",
           "theorem": "Packing.migration.matching.x15_edge_family_compat",
           "kind": "chain"
         },
         {
           "source": "Packing.conjectures.X18.x18_perfect_matching",
-          "legacy": "Packing.migration.matching.Legacy.x18_perfect_matching",
+          "legacy": "Packing.migration.matching.X18Legacy.perfect_matching",
           "theorem": "Packing.migration.matching.x18_perfect_matching_compat",
           "kind": "chain"
         },
@@ -664,19 +664,19 @@
         },
         {
           "source": "Extremal.conjectures.X180.x180_induced_matching",
-          "legacy": "Extremal.migration.matching.Legacy.x180_induced_matching",
+          "legacy": "Extremal.migration.matching.X180Legacy.induced_matching",
           "theorem": "Extremal.migration.matching.x180_induced_matching_compat",
           "kind": "chain"
         },
         {
           "source": "Extremal.conjectures.X180.x180_multitasker_capacity_at_least",
-          "legacy": "Extremal.migration.matching.Legacy.x180_multitasker_capacity_at_least",
+          "legacy": "Extremal.migration.matching.X180Legacy.multitasker_capacity_at_least",
           "theorem": "Extremal.migration.matching.x180_multitasker_capacity_at_least_compat",
           "kind": "chain"
         },
         {
           "source": "Extremal.conjectures.X180.x180_multitasker_capacity_positive",
-          "legacy": "Extremal.migration.matching.Legacy.x180_multitasker_capacity_positive",
+          "legacy": "Extremal.migration.matching.X180Legacy.multitasker_capacity_positive",
           "theorem": "Extremal.migration.matching.x180_multitasker_capacity_positive_compat",
           "kind": "chain"
         }
@@ -684,63 +684,66 @@
       "statement_certificates": [
         {
           "statement": "Packing.conjectures.X15.fair_matching_edge_partition_statement",
-          "legacy": "Packing.migration.matching.Legacy.fair_matching_edge_partition_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.fair_matching_edge_partition_statement",
           "theorem": "Packing.migration.matching.fair_matching_edge_partition_statement_compat",
           "row": "arxiv:1611.03196#02",
           "status": "REFUTED note (branch fair-matching-edge-part); unchanged"
         },
         {
           "statement": "Packing.conjectures.X15.bipartite_matching_underrepresentation_statement",
-          "legacy": "Packing.migration.matching.Legacy.bipartite_matching_underrepresentation_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.bipartite_matching_underrepresentation_statement",
           "theorem": "Packing.migration.matching.bipartite_matching_underrepresentation_statement_compat",
           "row": "arxiv:1611.03196#03",
           "status": "PROVED (foundations/fair_matching.v, formal_resolutions); unchanged"
         },
         {
           "statement": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm_statement",
-          "legacy": "Packing.migration.matching.Legacy.bipartite_matching_underrepresentation_llm_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.bipartite_matching_underrepresentation_llm_statement",
           "theorem": "Packing.migration.matching.bipartite_matching_underrepresentation_llm_statement_compat",
           "row": "no corpus row",
-          "status": "LLM-proof variant, proved; unchanged"
+          "status": "LLM-proof variant, proved; unchanged",
+          "non_corpus": true
         },
         {
           "statement": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm2_statement",
-          "legacy": "Packing.migration.matching.Legacy.bipartite_matching_underrepresentation_llm2_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.bipartite_matching_underrepresentation_llm2_statement",
           "theorem": "Packing.migration.matching.bipartite_matching_underrepresentation_llm2_statement_compat",
           "row": "no corpus row",
-          "status": "LLM-proof variant, proved; unchanged"
+          "status": "LLM-proof variant, proved; unchanged",
+          "non_corpus": true
         },
         {
           "statement": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm3_statement",
-          "legacy": "Packing.migration.matching.Legacy.bipartite_matching_underrepresentation_llm3_statement",
+          "legacy": "Packing.migration.matching.X15Legacy.bipartite_matching_underrepresentation_llm3_statement",
           "theorem": "Packing.migration.matching.bipartite_matching_underrepresentation_llm3_statement_compat",
           "row": "no corpus row",
-          "status": "LLM-proof variant, proved; unchanged"
+          "status": "LLM-proof variant, proved; unchanged",
+          "non_corpus": true
         },
         {
           "statement": "Packing.conjectures.X18.knn_fair_perfect_matching_statement",
-          "legacy": "Packing.migration.matching.Legacy.knn_fair_perfect_matching_statement",
+          "legacy": "Packing.migration.matching.X18Legacy.knn_fair_perfect_matching_statement",
           "theorem": "Packing.migration.matching.knn_fair_perfect_matching_statement_compat",
           "row": "arxiv:1611.03196#01",
           "status": "partial row (m = 2, 3 in the source); unchanged"
         },
         {
           "statement": "Packing.conjectures.X18.brualdi_stein_partial_transversal_statement",
-          "legacy": "Packing.migration.matching.Legacy.brualdi_stein_partial_transversal_statement",
+          "legacy": "Packing.migration.matching.X18Legacy.brualdi_stein_partial_transversal_statement",
           "theorem": "Packing.migration.matching.brualdi_stein_partial_transversal_statement_compat",
           "row": "studies:std_brualdi_stein_conjecture",
           "status": "open; unchanged"
         },
         {
           "statement": "GTMisc.conjectures.X14.subcubic_matching_lower_bound_statement",
-          "legacy": "GTMisc.migration.matching.Legacy.subcubic_matching_lower_bound_statement",
+          "legacy": "GTMisc.migration.matching.X14Legacy.subcubic_matching_lower_bound_statement",
           "theorem": "GTMisc.migration.matching.subcubic_matching_lower_bound_statement_compat",
           "row": "studies:std_biedl_demaine_duncan_fleischer_kobourov_subcubic",
           "status": "open; unchanged"
         },
         {
           "statement": "Extremal.conjectures.X180.log_degree_multitasker_exists_statement",
-          "legacy": "Extremal.migration.matching.Legacy.log_degree_multitasker_exists_statement",
+          "legacy": "Extremal.migration.matching.X180Legacy.log_degree_multitasker_exists_statement",
           "theorem": "Extremal.migration.matching.log_degree_multitasker_exists_statement_compat",
           "row": "arxiv:1611.02400#01",
           "status": "BLOCKED (per-graph quantification of the capacity ratio and degree constants, 2026-07-17 audit); preserved exactly"
@@ -796,7 +799,12 @@
         "note": "Upstream matching M := {subset M <= E(G)} /\\ {in M &, forall e1 e2 x, x \\in e1 -> x \\in e2 -> e1 = e2} is the corpus notion for X14, X15 and X180 (X180's fg_edges G equals E(G): Extremal.migration.matching.fg_edgesE). The API and grounding (empty set, single edge, K_2, K_3, adjacent edges rejected, closure under subsets, members are 2-sets) are in Packing.foundations.matching; the presentation lemmas should move to GTBase.common when the misc/extremal certificates are simplified (second-area rule). The hypergraph and whole-graph representations stay split.",
         "audited_at": "2026-10-02"
       },
-      "reviewed_by": null
+      "reviewed_by": null,
+      "legacy_baseline": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "migration_report": "meta/migration_reports/matching.md",
+      "migration_spec": "meta/migration_reports/matching.spec.json",
+      "migration_record": "meta/LIBRARY_MIGRATION_C1.md",
+      "downstream_client": "packing-theory/theories/examples/matching.v"
     }
   }
 }
