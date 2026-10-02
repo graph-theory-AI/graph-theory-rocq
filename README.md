@@ -85,10 +85,11 @@ make all -j4              # base + classical-lemmas + the 13 area packages
 make digraph-theory -j4   # the absorbed Digraph package
 ```
 
-`make all` is 356 files, ~3.5 min; `digraph-theory` is 118 files, ~2.5 min (4 cores, warm
-switch — roughly double that on CI-class hardware). `digraph-theory` is kept out of `all`
-because its proofs are the heaviest in the repo; its P9 milestone is still covered by
-`make gate`.
+`make all` is 356 files, ~3.5 min (4 cores, warm switch — roughly double that on CI-class
+hardware). `digraph-theory` is 1,393 files, 1,262 of them the committed Cheng–Keevash
+certificate modules (see the note below), and dominates the build time: use `-j` and budget
+a long first build. It is kept out of `all` because its proofs are the heaviest in the repo;
+its P9 milestone is still covered by `make gate`.
 
 Build one package on its own with `make chromatic-theory`, and start over with `make clean`.
 Each package target is just `rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq`
@@ -169,10 +170,12 @@ two orchestrating Claude sessions, which are not metered.
 
 ### Note on `digraph-theory/theories/applications/ck_path`
 
-Those DRUP certificate files are **generated, not committed** — `scripts/generate_ckpath_certificates.py`
-writes them and `.gitignore` excludes them. A fresh clone builds the 118 tracked `Digraph` files in
-~2.5 min; if you have generated the certificates locally, the same command builds ~1,400 files
-instead and takes considerably longer.
+The 1,262 certificate modules (`ckpath_cert_*`, about 97 MB of sources) are **committed**, so a
+fresh clone proves the δ = 4, 5, 6 cases of the Cheng–Keevash path conjecture with no SAT solver.
+`scripts/generate_ckpath_certificates.py` plus an external SAT solver produced them; they are
+untrusted data that the transparent hinted-RUP/DRUP checker replays inside Rocq, and regenerating
+them is only needed when a certificate family changes. The six unfinished k = 7 cover drafts
+are not committed. See `digraph-theory/theories/applications/ck_path/README.md`.
 
 ## Checked formal resolutions
 
