@@ -16,7 +16,7 @@ Definition x67_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.
 
 Definition x67_internal_vertices (G : sgraph) (a b : G) (p : seq G) : {set G} :=
-  x67_path_vertices p :\: [set a; b].
+  seq_interior a b p.
 
 Definition x67_induced_path_between (G : sgraph) (a b : G) (p : seq G) : Prop :=
   match p with
