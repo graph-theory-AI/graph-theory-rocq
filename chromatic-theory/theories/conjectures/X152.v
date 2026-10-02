@@ -13,7 +13,7 @@ Definition x152_embeddable_in_fixed_surface (surface : nat) (G : sgraph) : Prop 
 
 Definition x152_polytime_decides_four_colourability (surface : nat) : Prop :=
   polytime_decides_graph_on
-    (fun G : sgraph => x152_embeddable_in_fixed_surface surface G)
+    (fun G : sgraph => connected [set: G] /\ x152_embeddable_in_fixed_surface surface G)
     (fun G : sgraph => χ([set: G]) <= 4).
 
 (** ** X152 statements *****************************************************)
@@ -41,7 +41,11 @@ Definition x152_polytime_decides_four_colourability (surface : nat) : Prop :=
       QUESTION; the Rocq body asserts the affirmative answer.
       V counts every vertex including isolated ones (base fix 2026-09-23): the old count saw
       only the vertices carrying a dart, so the Euler count overstated the genus of every
-      graph with an isolated vertex and this hypothesis admitted fewer graphs than intended. *)
+      graph with an isolated vertex and this hypothesis admitted fewer graphs than intended.
+      Connectivity guard (2026-10-02): the class is restricted to connected graphs because base's
+      genus count understates the genus of a disconnected graph, so padding any graph with
+      isolated vertices would put it in the class. The restriction is equivalent for the decision
+      problem: an algorithm for connected members decides every member component by component. *)
 Definition fixed_surface_four_colourability_polytime_statement : Prop :=
   forall surface : nat,
     0 < surface -> x152_polytime_decides_four_colourability surface.

@@ -51,12 +51,18 @@ Definition x138_clustered_two_colourable_with_clustering
       base notions; see the ledger.
       V counts every vertex including isolated ones (base fix 2026-09-23): the old count saw
       only the vertices carrying a dart, so the Euler count overstated the genus of every
-      graph with an isolated vertex and this hypothesis admitted fewer graphs than intended. *)
+      graph with an isolated vertex and this hypothesis admitted fewer graphs than intended.
+      (5) Connectivity guard (2026-10-02): base's genus count understates the genus of a
+      disconnected graph by its number of components minus one, so without [connected [set: G]]
+      a graph padded with isolated vertices passes any genus bound. The guard is equivalent for
+      this question: a monochromatic component lies inside one component of G, and every
+      component of a graph drawn on the surface is drawn on it. *)
 Definition esperet_joret_surface_triangle_free_clustered_two_colouring_statement : Prop :=
   forall surface Delta0 : nat,
     exists c : nat,
       forall G : sgraph,
         girth_geq G 4 ->
         Delta G <= Delta0 ->
+        connected [set: G] ->
         x138_embeddable_on_surface surface G ->
         x138_clustered_two_colourable_with_clustering c G.

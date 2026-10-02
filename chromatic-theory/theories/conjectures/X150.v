@@ -13,7 +13,8 @@ Definition x150_embeddable_in_fixed_surface (surface : nat) (G : sgraph) : Prop 
 
 Definition x150_polytime_decides_3_colourability_on_surface (surface : nat) : Prop :=
   polytime_decides_graph_on
-    (fun G : sgraph => x150_embeddable_in_fixed_surface surface G /\ girth_geq G 4)
+    (fun G : sgraph =>
+       connected [set: G] /\ x150_embeddable_in_fixed_surface surface G /\ girth_geq G 4)
     (fun G : sgraph => χ([set: G]) <= 3).
 
 (** ** X150 statements *****************************************************)
@@ -41,6 +42,11 @@ Definition x150_polytime_decides_3_colourability_on_surface (surface : nat) : Pr
       is expressed as girth at least 4. The body is left untouched here, WP4 changes comments only.
       V counts every vertex including isolated ones (base fix 2026-09-23): the old count saw
       only the vertices carrying a dart, so the Euler count overstated the genus of every
-      graph with an isolated vertex and this hypothesis admitted fewer graphs than intended. *)
+      graph with an isolated vertex and this hypothesis admitted fewer graphs than intended.
+      Connectivity guard (2026-10-02): the class is restricted to connected graphs because base's
+      genus count understates the genus of a disconnected graph, so padding any triangle-free
+      graph with isolated vertices would put it in the class. The restriction is equivalent for
+      the decision problem: an algorithm for connected members decides every member component by
+      component. *)
 Definition gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement : Prop :=
   forall surface : nat, x150_polytime_decides_3_colourability_on_surface surface.
