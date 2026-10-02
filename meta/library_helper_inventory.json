@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2542,
-    "repeated_body_shapes": 131,
+    "repeated_body_shapes": 130,
     "repeated_normalized_names": 205,
     "repeated_signature_shapes": 297,
     "statements_excluded": 700,
@@ -416,10 +416,6 @@
       "a3fa0d9c7888e1c938addcad4b7fa092f6fccfdef5d1a268de8341b1959dad46": [
         "Hamilton.conjectures.U2.hamiltonian_cycle",
         "Packing.conjectures.U9.hamiltonian_cycleG"
-      ],
-      "a527df8eaf7b8af044b05296e21e9b35d00a95b3a786b6292b907bced0182305": [
-        "Packing.conjectures.X15.x15_edge_family",
-        "Packing.conjectures.X15alone.x15_edge_family"
       ],
       "a5a0bcac8a03894a527aa321009280c8b91e83d42ed1d85810db9dab0ee97376": [
         "Hamilton.conjectures.U2.cycle_edges",
@@ -51332,8 +51328,7 @@
       "declaration_hash": "92451a3716034dbea62915a24e5ef4455a9f2197adb2f749451831c1230905f0",
       "direct_consumers": [
         "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm_statement",
-        "Packing.conjectures.X15.bipartite_matching_underrepresentation_statement",
-        "Packing.conjectures.X15.x15_edge_family"
+        "Packing.conjectures.X15.bipartite_matching_underrepresentation_statement"
       ],
       "kind": "Definition",
       "line": 9,
@@ -51390,9 +51385,9 @@
       "signature_shape_hash": "cc95217c14ea854ddab503d9372c59e603475835cfc1e5f2a06dbd23f3dfbd44"
     },
     {
-      "body_hash": "f4b73237281f4b286028fa5a2bd86f2bc529917940264dba7b25c00670b69c23",
-      "body_shape_hash": "a527df8eaf7b8af044b05296e21e9b35d00a95b3a786b6292b907bced0182305",
-      "declaration_hash": "68541f1ce1822849adb2e988545e2c99da999279cd7cbf957ab1b14371cd2425",
+      "body_hash": "2692ac2d6d8ef753ea37206b1b3baae5dadff75580973550f2c7fc000d4a35f7",
+      "body_shape_hash": "2692ac2d6d8ef753ea37206b1b3baae5dadff75580973550f2c7fc000d4a35f7",
+      "declaration_hash": "ea3636fe1785145d06ad66c420fca1a42e61875a6cbd9817426f8fed277a6763",
       "direct_consumers": [
         "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm2_statement",
         "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm3_statement",
@@ -51401,9 +51396,7 @@
       ],
       "kind": "Definition",
       "line": 30,
-      "local_dependencies": [
-        "x15_edge_set"
-      ],
+      "local_dependencies": [],
       "name": "x15_edge_family",
       "normalized_name": "edge_family",
       "package": "packing-theory",
@@ -51419,7 +51412,7 @@
       "declaration_hash": "309b00d3bbd387a186081e571324001efbd2af907385287c96dfa084cc7b864f",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 94,
+      "line": 97,
       "local_dependencies": [
         "x15_edge_family",
         "x15_edge_set",
@@ -51440,7 +51433,7 @@
       "declaration_hash": "9d932ece2ebd4d720926e1c71b83db344325b6bd0485536b76b3f8cd18260bbb",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 108,
+      "line": 111,
       "local_dependencies": [
         "x15_edge_family",
         "x15_matching"
@@ -51460,7 +51453,7 @@
       "declaration_hash": "0071b6157c3884b3ee9229db71ddf2b88223146f24440b32829d37b01f176f88",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 125,
+      "line": 128,
       "local_dependencies": [
         "x15_edge_family",
         "x15_matching"

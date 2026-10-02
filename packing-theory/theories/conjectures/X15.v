@@ -1,7 +1,7 @@
 (** * Packing.conjectures.X15 -- v2 fair matching representation rows *)
 
 From GTBase Require Export base.
-From Packing.foundations Require Import edge_partitions.
+From Packing.foundations Require Import edge_partitions edge_families.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -28,9 +28,12 @@ Definition x15_edge_partition
     (G : sgraph) (m : nat) (E : 'I_m -> {set {set G}}) : Prop :=
   edge_partitions.edge_partition E.
 
+(** C4 compatibility alias: members may overlap or repeat, and zero indices
+    remain valid on every graph. C1's original source and all four statements
+    stay frozen in migration/matching.v; see migration/edge_families.v. *)
 Definition x15_edge_family
     (G : sgraph) (m : nat) (E : 'I_m -> {set {set G}}) : Prop :=
-  forall i : 'I_m, E i \subset x15_edge_set G.
+  edge_families.edge_family E.
 
 (** ** X15 statements ******************************************************)
 
