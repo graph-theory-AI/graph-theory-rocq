@@ -17,11 +17,11 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from family_registry import load_library_registry
 
 ROOT = Path(__file__).resolve().parents[1]
 META = ROOT / "meta"
 INVENTORY = META / "library_helper_inventory.json"
-REGISTRY = META / "library_primitives.json"
 POLICY = META / "faithfulness_policy.json"
 WAVES = META / "v2_statement_waves.json"
 
@@ -280,14 +280,14 @@ def load_json(path: Path) -> dict:
 def validate_registry(inventory: dict) -> tuple[dict[str, dict], list[str]]:
     errors: list[str] = []
     try:
-        data = load_json(REGISTRY)
+        data = load_library_registry(ROOT)
     except ValueError as exc:
         return {}, [str(exc)]
     if data.get("schema_version") != 1:
-        errors.append("library_primitives.json: schema_version must be 1")
+        errors.append("library_primitives/: schema_version must be 1")
     entries = data.get("primitives")
     if not isinstance(entries, dict):
-        return {}, errors + ["library_primitives.json: primitives must be an object"]
+        return {}, errors + ["library_primitives/: primitives must be an object"]
 
     helpers = {h["qualified_name"]: h for h in inventory["helpers"]}
     namespaces = package_namespaces()
@@ -295,7 +295,7 @@ def validate_registry(inventory: dict) -> tuple[dict[str, dict], list[str]]:
     repository_declarations = repository_declaration_names(namespaces)
     claimed: dict[str, str] = {}
     for primitive_id, spec in sorted(entries.items()):
-        prefix = f"library_primitives.json:{primitive_id}"
+        prefix = f"library_primitives/{primitive_id}.json"
         if not re.fullmatch(r"[a-z][a-z0-9-]*", primitive_id):
             errors.append(f"{prefix}: invalid primitive id")
         if spec.get("status") not in ALLOWED_STATUSES:

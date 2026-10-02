@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "family": "uniform-hypergraph",
+  "primitive": {
+    "canonical_name": null,
+    "owner": "hypergraph-theory",
+    "status": "proposed",
+    "fidelity": "PENDING",
+    "normalized_names": [
+      "uniform"
+    ],
+    "source_definitions": [
+      "Hypergraph.conjectures.X104.x104_uniform",
+      "Hypergraph.conjectures.X108.x108_uniform",
+      "Hypergraph.conjectures.X119.x119_uniform",
+      "Hypergraph.conjectures.X137.x137_uniform",
+      "Hypergraph.conjectures.X209.x209_uniform",
+      "Hypergraph.conjectures.X6.x6_uniform"
+    ],
+    "consumers_remaining": 8,
+    "compatibility_theorems": [],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core modules"
+      ],
+      "result": "no-direct-candidate",
+      "note": "The installed GraphTheory library has no common finite hypergraph API matching the set-of-sets encodings used by these rows. This belongs in a hypergraph area foundation first.",
+      "audited_at": "2026-07-22"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "family": "tree-decomposition",
+  "primitive": {
+    "canonical_name": "GraphTheory.treewidth.sdecomp",
+    "owner": "upstream-adapter",
+    "status": "auditing",
+    "fidelity": "PENDING",
+    "normalized_names": [
+      "tree_decomposition"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X126.x126_tree_decomposition",
+      "Chromatic.conjectures.X189.x189_tree_decomposition",
+      "GTMisc.conjectures.X169.x169_tree_decomposition",
+      "Minor.conjectures.X27.x27_tree_decomposition"
+    ],
+    "consumers_remaining": 5,
+    "compatibility_theorems": [],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.treewidth",
+        "GraphTheory.sgraph"
+      ],
+      "result": "candidate-found",
+      "candidate": "GraphTheory.treewidth.sdecomp",
+      "note": "Upstream sdecomp includes vertex coverage, edge coverage, and connected bags over a forest. Local index-graph and width conventions require conditional comparison in M3.",
+      "audited_at": "2026-07-22"
+    }
+  }
+}

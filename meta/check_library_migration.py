@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import json
 import re
 import shlex
 import subprocess
@@ -13,10 +12,10 @@ from collections import defaultdict
 from pathlib import Path
 
 import rocq_toolchain as ROCQ
+from family_registry import RegistryError, load_library_registry
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REGISTRY = ROOT / "meta" / "library_primitives.json"
 
 NAMESPACE_PACKAGES = {
     "GTBase": "base",
@@ -100,7 +99,11 @@ def dependency_order(packages: set[str]) -> tuple[list[str], set[str]]:
 
 
 def main() -> int:
-    data = json.loads(REGISTRY.read_text())
+    try:
+        data = load_library_registry(ROOT)
+    except RegistryError as exc:
+        print(f"  ERROR: {exc}", file=sys.stderr)
+        return 1
     by_module: dict[str, list[str]] = defaultdict(list)
     for spec in data["primitives"].values():
         if spec.get("status") not in {"canonical", "migrating", "deprecated", "complete"}:

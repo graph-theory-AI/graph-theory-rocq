@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "family": "minimum-degree-at-least",
+  "primitive": {
+    "canonical_name": null,
+    "owner": "base",
+    "status": "proposed",
+    "fidelity": "PENDING",
+    "normalized_names": [
+      "min_degree_at_least"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X203.x203_min_degree_at_least",
+      "Cycle.conjectures.XE2.xe2_min_degree_at_least",
+      "Extremal.conjectures.X13.x13_min_degree_at_least",
+      "Extremal.conjectures.X30.x30_min_degree_at_least",
+      "Extremal.conjectures.XE1.xe1_min_degree_at_least",
+      "GTMisc.conjectures.X38.x38_min_degree_at_least",
+      "GTMisc.conjectures.X74.x74_min_degree_at_least",
+      "Hom.conjectures.X135.x135_min_degree_at_least",
+      "Packing.conjectures.X47.x47_min_degree_at_least"
+    ],
+    "consumers_remaining": 10,
+    "compatibility_theorems": [],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.sgraph",
+        "GraphTheory.connectivity"
+      ],
+      "result": "no-direct-candidate",
+      "note": "No reusable minimum-degree-at-least declaration was found. A GTBase boolean predicate and reflection lemma are the likely M2 target after checking all local empty-graph conventions.",
+      "audited_at": "2026-07-22"
+    }
+  }
+}
