@@ -12,8 +12,10 @@
     entries" below), the cyclically consecutive entries of a sequence,
     [seq_cyclic_consecutive] and [seq_cyclic_consecutiveb] (registry
     meta/library_primitives/consecutive-in-cycle.json, section "Cyclically
-    consecutive entries" below), and set-to-set simple paths, [seq_set_path]
+    consecutive entries" below), set-to-set simple paths, [seq_set_path]
     (registry meta/library_primitives/set-path.json, section "Set-to-set simple
+    paths" below), and nonempty simple paths, [seq_simple_path] (registry
+    meta/library_primitives/simple-path.json, section "Simple whole-sequence
     paths" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
@@ -952,3 +954,116 @@ rewrite revE; apply/seq_set_path_cons; split; rewrite ?lastE //.
 Qed.
 
 End SeqSetPath.
+
+(** ** Simple whole-sequence paths
+
+    [seq_simple_path p] states that the raw sequence [p] is a simple path: it is
+    nonempty, its entries are pairwise distinct, and consecutive entries are
+    adjacent.  There is no endpoint condition, and chords (adjacent entries that
+    are not consecutive) are allowed: it is not an induced path.
+
+    Upstream audit (2026-10-03; MathComp 2.5.0, coq-graph-theory 0.9.7).
+    MathComp's [sorted e s] is [path e x s'] on [x :: s'] and [true] on [[::]], so
+    [seq_simple_path p] is [p != [::]], [uniq p] and [sorted (--) p]
+    ([seq_simple_pathE]).  coq-graph-theory's [upath x y q] is the simple path on
+    a TAIL [q] from a named vertex [x] to a named vertex [y]; a nonempty whole
+    sequence [x :: q] is a simple path exactly when [upath x (last x q) q]
+    ([seq_simple_path_upath]): a translation that names the endpoints, not an
+    equality at equal arguments.  It is the set-to-set path of
+    [seq_set_path] with both endpoint sets the whole vertex set
+    ([seq_simple_path_setT]), and the vertex list of an irredundant packaged path
+    is one ([seq_simple_path_nodes]); a bare [Path] may repeat vertices.
+
+    Specification, every clause proved below:
+    - the empty sequence is not a path and every one-entry sequence is;
+    - a two-entry sequence is a path exactly when its entries are distinct and
+      adjacent; repeated entries are excluded;
+    - consecutive entries are adjacent, and a path with [n] entries has [n - 1]
+      consecutive pairs; nonconsecutive entries may also be adjacent;
+    - reversal needs a symmetric relation, and a map keeps paths only if it is
+      injective and preserves adjacency. *)
+
+Section SeqSimplePath.
+Variable G : relType.
+Implicit Types (X Y : {set G}) (p q : seq G) (x y u v : G).
+
+(** [p] is a nonempty simple path. *)
+Definition seq_simple_path p : Prop :=
+  match p with
+  | [::] => False
+  | x :: q => uniq p /\ path (--) x q
+  end.
+
+Lemma seq_simple_path_nil : ~ seq_simple_path [::].
+Proof. by []. Qed.
+
+Lemma seq_simple_path_seq1 x : seq_simple_path [:: x].
+Proof. by []. Qed.
+
+Lemma seq_simple_pathE p :
+  seq_simple_path p <-> (p != [::]) /\ uniq p /\ sorted (--) p.
+Proof.
+case: p => [|x q] /=; first by split=> // -[].
+by split=> [[u pq]|[_ [u pq]]]; do !split.
+Qed.
+
+Lemma seq_simple_path_upath x q :
+  seq_simple_path (x :: q) <-> upath x (last x q) q.
+Proof.
+rewrite /upath /pathp eqxx andbT.
+by split=> [[-> ->]|/andP[u pq]].
+Qed.
+
+Lemma seq_simple_path_setT p :
+  seq_simple_path p <-> seq_set_path [set: G] [set: G] p.
+Proof. by case: p => [|x q] //=; rewrite !inE; split=> [[u pq]|[_ [_ [u pq]]]]. Qed.
+
+Lemma seq_set_path_simple X Y p : seq_set_path X Y p -> seq_simple_path p.
+Proof. by case: p => [|x q] // [_ [_ []]]. Qed.
+
+(** The vertex list of an irredundant packaged path. *)
+Lemma seq_simple_path_nodes x y (p : Path x y) : irred p -> seq_simple_path (nodes p).
+Proof.
+move=> ip; apply/seq_simple_path_setT; apply: seq_set_path_nodes => //.
+all: by rewrite inE.
+Qed.
+
+Lemma seq_simple_path_uniq p : seq_simple_path p -> uniq p.
+Proof. by case: p => [|x q] // []. Qed.
+
+(** Repeated entries are excluded. *)
+Lemma seq_simple_path_repeat p : ~~ uniq p -> ~ seq_simple_path p.
+Proof. by move=> /negP np /seq_simple_path_uniq. Qed.
+
+Lemma seq_simple_path_pair x y : seq_simple_path [:: x; y] <-> x != y /\ x -- y.
+Proof. by rewrite /= !inE !andbT; split=> [[xy e]|[xy e]]. Qed.
+
+(** Consecutive entries of a path are adjacent, one way or the other. *)
+Lemma seq_simple_path_consecutive p u v :
+  seq_simple_path p -> seq_consecutive p u v -> (u -- v) || (v -- u).
+Proof. by case: p => [|x q] // [_ pq]; apply: seq_consecutive_path. Qed.
+
+(** A path with [n] entries has [n - 1] consecutive pairs (its edges). *)
+Lemma seq_simple_path_size p :
+  seq_simple_path p -> size (zip p (behead p)) = (size p).-1.
+Proof. by case: p => [|x q] // _; rewrite size2_zip /= ?leqnSn. Qed.
+
+Lemma seq_simple_path_rev p :
+  symmetric (@edge_rel G) -> seq_simple_path p -> seq_simple_path (rev p).
+Proof.
+move=> esym /seq_simple_path_setT/(seq_set_path_rev esym) rp.
+exact/seq_simple_path_setT.
+Qed.
+
+End SeqSimplePath.
+
+(** An injective map preserving adjacency keeps simple paths. *)
+Lemma seq_simple_path_map (G G' : relType) (f : G -> G') (p : seq G) :
+  injective f -> {homo f : x y / x -- y} ->
+  seq_simple_path p -> seq_simple_path (map f p).
+Proof.
+move=> finj fhom; case: p => [|x q] // [u pq].
+have hu : uniq (map f (x :: q)) by rewrite (map_inj_uniq finj).
+have hp : path (--) (f x) (map f q) by rewrite path_map; apply: sub_path pq => a b /fhom.
+by split.
+Qed.

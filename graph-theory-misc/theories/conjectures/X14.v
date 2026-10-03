@@ -29,10 +29,7 @@ Definition x14_path_edges (G : sgraph) (p : seq G) : seq {set G} :=
   map (fun e : G * G => [set e.1; e.2]) (zip p (behead p)).
 
 Definition x14_genuine_path (G : sgraph) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q => uniq p /\ path (--) x q
-  end.
+  seq_simple_path p.
 
 Definition x14_proper_edge_colouring
     (G : sgraph) (C : finType) (col : {set G} -> C) : Prop :=

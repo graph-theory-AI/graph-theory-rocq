@@ -1,0 +1,287 @@
+{
+  "family": "simple-path",
+  "canonical_name": "GTBase.walks_paths.seq_simple_path",
+  "canonical_short_name": "seq_simple_path",
+  "relation": "definitional equality for X126, X14 and X23; extensional equality for X178 (nonempty, uniq and sorted) by seq_simple_pathE",
+  "baseline_commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "cycle-theory": "Cycle",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "homomorphism-theory": "Hom",
+    "packing-theory": "Packing",
+    "topological-graph-theory": "Topological"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "chromatic-theory/theories/migration/simple_path.v",
+    "graph-theory-misc/theories/migration/simple_path.v",
+    "topological-graph-theory/theories/migration/simple_path.v",
+    "packing-theory/theories/migration/simple_path.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.seq_simple_path_nil",
+    "GTBase.walks_paths.seq_simple_path_seq1",
+    "GTBase.walks_paths.seq_simple_pathE",
+    "GTBase.walks_paths.seq_simple_path_upath",
+    "GTBase.walks_paths.seq_simple_path_setT",
+    "GTBase.walks_paths.seq_set_path_simple",
+    "GTBase.walks_paths.seq_simple_path_nodes",
+    "GTBase.walks_paths.seq_simple_path_uniq",
+    "GTBase.walks_paths.seq_simple_path_repeat",
+    "GTBase.walks_paths.seq_simple_path_pair",
+    "GTBase.walks_paths.seq_simple_path_consecutive",
+    "GTBase.walks_paths.seq_simple_path_size",
+    "GTBase.walks_paths.seq_simple_path_rev",
+    "GTBase.walks_paths.seq_simple_path_map"
+  ],
+  "summary": [
+    "Batch B, family B6 (`simple_path`). Four conjecture-local helpers now unfold to `GTBase.walks_paths.seq_simple_path p`: `p` is a nonempty vertex sequence without repeated entries whose consecutive entries are adjacent. The three `genuine_path` helpers (X126, X14, X23) have exactly that match and are convertible; X178's `path_seq` (`(p != [::]) /\\ uniq p /\\ sorted (--) p`) is equivalent by `seq_simple_pathE`, so its certificates transport the path condition. Upstream, `seq_simple_path_upath` is coq-graph-theory's `upath x (last x q) q` on the tail of `x :: q` (a translation naming the endpoints), `seq_simple_path_setT` reuses family B5's set-to-set path with both sets `[set: G]`, and irredundant packaged paths give one. Empty is false, every singleton true, repeats forbidden and chords allowed; no endpoint, length or connectedness guard is added.",
+    "",
+    "Five statements are affected through seven chain helpers: X126 (nonrepetitive colouring on `2 * h` vertices with `0 < h`, its list version, Thue choosability and the least Thue choice number, an exported helper with no row of its own), X14 (rainbow path; Andersen's exactly `n.-1` vertices, a singleton when `n = 2`), cross-module X62 (an edge cover by rainbow paths, not a disjoint decomposition), X23 (nonrepetitive colouring) and X178 (an indexed edge-disjoint path decomposition with at most `#|G| %/ 2` paths, connectedness and the odd-semiclique exclusion). The edge representations `x14_path_edges`, `x62_edges_covered_by_paths`, `x178_path_edge_set` and U9's `consec` are unchanged.",
+    "",
+    "History: at the B5 baseline no frozen migration declaration reaches this family (no B1 path-vertex chain, no B3/B4/B5 snapshot), so no historical original is owed. Family C6 (proper edge colourings) overlaps the X14/X62 rows and will compose this family's frozen chains if it integrates later.",
+    "",
+    "Kernel evidence, independent of this textual report: `Print All Dependencies` of the five frozen statements contains no live helper or chain declaration of this family and not `seq_simple_path`, while each live statement reaches it and its alias (/srv/graph-theory-rocq/coordination/evidence/B6-simple_path/print_all_dependencies_summary.txt, with the probe and the full output beside it).",
+    "",
+    "No statement text, doc block, manifest row or leg state changes (checked below); X178's partial source status and all list, least-bound and odd-semiclique guards stay verbatim."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X126.x126_genuine_path",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_genuine_path",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "Legacy.x126_genuine_path",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.simple_path.x126_genuine_path_compat",
+      "live_unfolds_to": "seq_simple_path p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X126.x126_nonrepetitive",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_nonrepetitive",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.nonrepetitive",
+      "substitutions": {
+        "x126_genuine_path": "Legacy.x126_genuine_path",
+        "x126_nonrepetitive": "nonrepetitive"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_nonrepetitive_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X126.x126_nonrepetitive_list_colouring",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_nonrepetitive_list_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.nonrepetitive_list_colouring",
+      "substitutions": {
+        "x126_nonrepetitive": "nonrepetitive",
+        "x126_nonrepetitive_list_colouring": "nonrepetitive_list_colouring"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_nonrepetitive_list_colouring_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X126.x126_thue_choosable",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_thue_choosable",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.thue_choosable",
+      "substitutions": {
+        "x126_nonrepetitive_list_colouring": "nonrepetitive_list_colouring",
+        "x126_thue_choosable": "thue_choosable"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_thue_choosable_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X126.x126_is_thue_choice_number",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_is_thue_choice_number",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.is_thue_choice_number",
+      "substitutions": {
+        "x126_is_thue_choice_number": "is_thue_choice_number",
+        "x126_thue_choosable": "thue_choosable"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_is_thue_choice_number_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "dujmovic_thue_choice_number_pathwidth_statement",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.dujmovic_thue_choice_number_pathwidth_statement",
+      "substitutions": {
+        "x126_thue_choosable": "thue_choosable"
+      },
+      "certificate": "Chromatic.migration.simple_path.dujmovic_thue_choice_number_pathwidth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X14.x14_genuine_path",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_genuine_path",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_path.v",
+      "frozen": "Legacy.x14_genuine_path",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.simple_path.x14_genuine_path_compat",
+      "live_unfolds_to": "seq_simple_path p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X14.x14_rainbow_path",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_rainbow_path",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_path.v",
+      "frozen": "X14Legacy.rainbow_path",
+      "substitutions": {
+        "x14_genuine_path": "Legacy.x14_genuine_path",
+        "x14_rainbow_path": "rainbow_path"
+      },
+      "certificate": "GTMisc.migration.simple_path.x14_rainbow_path_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X14.andersen_rainbow_path_statement",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "andersen_rainbow_path_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_path.v",
+      "frozen": "X14Legacy.andersen_rainbow_path_statement",
+      "substitutions": {
+        "x14_rainbow_path": "rainbow_path"
+      },
+      "certificate": "GTMisc.migration.simple_path.andersen_rainbow_path_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X62.rainbow_paths_linear_edge_cover_statement",
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "rainbow_paths_linear_edge_cover_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_path.v",
+      "frozen": "X62Legacy.rainbow_paths_linear_edge_cover_statement",
+      "substitutions": {
+        "x14_rainbow_path": "X14Legacy.rainbow_path"
+      },
+      "certificate": "GTMisc.migration.simple_path.rainbow_paths_linear_edge_cover_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Topological.conjectures.X23.x23_genuine_path",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_genuine_path",
+      "frozen_path": "topological-graph-theory/theories/migration/simple_path.v",
+      "frozen": "Legacy.x23_genuine_path",
+      "substitutions": {},
+      "certificate": "Topological.migration.simple_path.x23_genuine_path_compat",
+      "live_unfolds_to": "seq_simple_path p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Topological.conjectures.X23.x23_nonrepetitive_colouring",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_nonrepetitive_colouring",
+      "frozen_path": "topological-graph-theory/theories/migration/simple_path.v",
+      "frozen": "X23Legacy.nonrepetitive_colouring",
+      "substitutions": {
+        "x23_genuine_path": "Legacy.x23_genuine_path",
+        "x23_nonrepetitive_colouring": "nonrepetitive_colouring"
+      },
+      "certificate": "Topological.migration.simple_path.x23_nonrepetitive_colouring_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Topological.conjectures.X23.planar_bounded_nonrepetitive_chromatic_statement",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "planar_bounded_nonrepetitive_chromatic_statement",
+      "frozen_path": "topological-graph-theory/theories/migration/simple_path.v",
+      "frozen": "X23Legacy.planar_bounded_nonrepetitive_chromatic_statement",
+      "substitutions": {
+        "x23_nonrepetitive_colouring": "nonrepetitive_colouring"
+      },
+      "certificate": "Topological.migration.simple_path.planar_bounded_nonrepetitive_chromatic_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X178.x178_path_seq",
+      "path": "packing-theory/theories/conjectures/X178.v",
+      "name": "x178_path_seq",
+      "frozen_path": "packing-theory/theories/migration/simple_path.v",
+      "frozen": "Legacy.x178_path_seq",
+      "substitutions": {},
+      "certificate": "Packing.migration.simple_path.x178_path_seq_compat",
+      "live_unfolds_to": "seq_simple_path p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X178.x178_path_decomposition_at_most",
+      "path": "packing-theory/theories/conjectures/X178.v",
+      "name": "x178_path_decomposition_at_most",
+      "frozen_path": "packing-theory/theories/migration/simple_path.v",
+      "frozen": "X178Legacy.path_decomposition_at_most",
+      "substitutions": {
+        "x178_path_decomposition_at_most": "path_decomposition_at_most",
+        "x178_path_seq": "Legacy.x178_path_seq"
+      },
+      "certificate": "Packing.migration.simple_path.x178_path_decomposition_at_most_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X178.gallai_odd_semiclique_path_decomposition_statement",
+      "path": "packing-theory/theories/conjectures/X178.v",
+      "name": "gallai_odd_semiclique_path_decomposition_statement",
+      "frozen_path": "packing-theory/theories/migration/simple_path.v",
+      "frozen": "X178Legacy.gallai_odd_semiclique_path_decomposition_statement",
+      "substitutions": {
+        "x178_path_decomposition_at_most": "path_decomposition_at_most"
+      },
+      "certificate": "Packing.migration.simple_path.gallai_odd_semiclique_path_decomposition_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "x14_rainbow_path",
+      "note": "Cross-module X62 row (an edge cover by rainbow paths) uses X14's x14_rainbow_path. Frozen as X62Legacy over X14Legacy.rainbow_path; statement text unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Hom.conjectures.U3.is_path",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "is_path",
+      "note": "boolean simple sequence path with the EMPTY sequence accepted; a different contract, untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.U6.is_path",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "is_path",
+      "note": "a multigraph EDGE SET that is a path; not a vertex-sequence contract, untouched"
+    },
+    {
+      "qualified": "Packing.conjectures.U9.spath",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "spath",
+      "note": "nonempty whole sequence with prescribed endpoints and adjacency but NO uniqueness guard; preserved, not repaired"
+    },
+    {
+      "qualified": "Extremal.conjectures.XE2.xe2_path_in_graph",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_path_in_graph",
+      "note": "empty-allowed whole-sequence walk without uniqueness (MathComp sorted as a proposition); untouched"
+    }
+  ]
+}

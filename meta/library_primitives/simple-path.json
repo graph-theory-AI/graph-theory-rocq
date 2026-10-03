@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "family": "simple-path",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_simple_path",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "genuine_path",
+      "path_seq"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X126.x126_genuine_path",
+      "GTMisc.conjectures.X14.x14_genuine_path",
+      "Packing.conjectures.X178.x178_path_seq",
+      "Topological.conjectures.X23.x23_genuine_path"
+    ],
+    "consumers_remaining": 4,
+    "relation": "definitional equality for X126, X14 and X23 (match p with [::] => False | x :: q => uniq p /\\ path (--) x q end, the body of seq_simple_path p); extensional equality for X178 ((p != [::]) /\\ uniq p /\\ sorted (--) p) by seq_simple_pathE",
+    "semantic_classes": {
+      "match-form": {
+        "count": 3,
+        "verdict": "equivalent",
+        "certificate": "GTBase.walks_paths.seq_simple_path_upath",
+        "note": "X126, X14 and X23 genuine_path: the literal body of seq_simple_path, convertible."
+      },
+      "sorted-form": {
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTBase.walks_paths.seq_simple_pathE",
+        "note": "X178 path_seq: nonempty, uniq and MathComp sorted (--); equivalent to seq_simple_path by the empty/cons split, not convertible."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.simple_path.dujmovic_thue_choice_number_pathwidth_statement_compat",
+      "Chromatic.migration.simple_path.x126_genuine_path_compat",
+      "Chromatic.migration.simple_path.x126_is_thue_choice_number_compat",
+      "Chromatic.migration.simple_path.x126_nonrepetitive_compat",
+      "Chromatic.migration.simple_path.x126_nonrepetitive_list_colouring_compat",
+      "Chromatic.migration.simple_path.x126_thue_choosable_compat",
+      "GTMisc.migration.simple_path.andersen_rainbow_path_statement_compat",
+      "GTMisc.migration.simple_path.rainbow_paths_linear_edge_cover_statement_compat",
+      "GTMisc.migration.simple_path.x14_genuine_path_compat",
+      "GTMisc.migration.simple_path.x14_rainbow_path_compat",
+      "Packing.migration.simple_path.gallai_odd_semiclique_path_decomposition_statement_compat",
+      "Packing.migration.simple_path.x178_path_decomposition_at_most_compat",
+      "Packing.migration.simple_path.x178_path_seq_compat",
+      "Topological.migration.simple_path.planar_bounded_nonrepetitive_chromatic_statement_compat",
+      "Topological.migration.simple_path.x23_genuine_path_compat",
+      "Topological.migration.simple_path.x23_nonrepetitive_colouring_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.seq_simple_path_nil",
+      "GTBase.walks_paths.seq_simple_path_seq1",
+      "GTBase.walks_paths.seq_simple_pathE",
+      "GTBase.walks_paths.seq_simple_path_upath",
+      "GTBase.walks_paths.seq_simple_path_setT",
+      "GTBase.walks_paths.seq_set_path_simple",
+      "GTBase.walks_paths.seq_simple_path_nodes",
+      "GTBase.walks_paths.seq_simple_path_uniq",
+      "GTBase.walks_paths.seq_simple_path_repeat",
+      "GTBase.walks_paths.seq_simple_path_pair",
+      "GTBase.walks_paths.seq_simple_path_consecutive",
+      "GTBase.walks_paths.seq_simple_path_size",
+      "GTBase.walks_paths.seq_simple_path_rev",
+      "GTBase.walks_paths.seq_simple_path_map"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.path"
+      ],
+      "result": "thin-adapter",
+      "candidate": "GraphTheory.digraph.upath",
+      "note": "coq-graph-theory's upath x y q := uniq (x :: q) && pathp x y q is the simple path on a tail from a named vertex to a named vertex; a nonempty whole sequence x :: q is a simple path exactly when upath x (last x q) q (seq_simple_path_upath), a translation naming the endpoints. MathComp's sorted (--) is the empty-true whole-sequence walk, so seq_simple_path p is p != [::], uniq p and sorted (--) p (seq_simple_pathE). It is the set-to-set path of family set-path with both endpoint sets [set: G] (seq_simple_path_setT), and irredundant packaged paths give one (seq_simple_path_nodes). Hom U3 is_path (empty true), Cycle U6 is_path (multigraph edge set), the endpoint-tail paths, U9 spath (no uniqueness, not repaired) and the induced, Hamiltonian and monochromatic predicates are separate contracts. Legacy bodies and per-row certificates: meta/migration_reports/simple_path.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/simple_path.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/simple_path.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/simple-path.json"
+  }
+}
