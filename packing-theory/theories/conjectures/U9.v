@@ -179,7 +179,7 @@ Definition hamiltonian_cycleG (G : sgraph) (c : seq G) : bool :=
 Arguments hamiltonian_cycleG : clear implicits.
 
 Definition cycle_edgesG (G : sgraph) (c : seq G) : {set {set G}} :=
-  [set [set x; next c x] | x in [set z | z \in c]].
+  seq_next_edge_set c.
 Arguments cycle_edgesG : clear implicits.
 
 (** A set of edges that is a matching: each element is a genuine edge, and every

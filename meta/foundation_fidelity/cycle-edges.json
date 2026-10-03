@@ -1,0 +1,89 @@
+{
+ "schema_version": 1,
+ "family": "cycle-edges",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_cycle_edge_list": {
+     "verdict": "FAITHFUL",
+     "note": "seq_cycle_edge_list c: the ordered list of the unordered pairs [set c_i; c_(i+1)] of cyclically successive entries, one per position, the closing pair (last, first) included; repetitions and order kept; no adjacency, uniqueness or length premise."
+    },
+    "seq_cycle_edge_set": {
+     "verdict": "FAITHFUL",
+     "note": "seq_cycle_edge_set c: the finite support of seq_cycle_edge_list c, i.e. the pairs [set u; v] of cyclically consecutive entries; keeps non-edges and one-vertex sets; invariant under rotation and reversal."
+    },
+    "seq_cycle_graph_edge_set": {
+     "verdict": "FAITHFUL",
+     "note": "seq_cycle_graph_edge_set c: the actual edges [set x; y] (x -- y) between cyclically consecutive entries of c; equal to seq_cycle_edge_set c :&: E(G) for every c."
+    },
+    "seq_next_edge_set": {
+     "verdict": "FAITHFUL",
+     "note": "seq_next_edge_set c: the sets [set x; next c x] for x in c, next reading the first occurrence; contained in the support, equal to it when c is duplicate-free (uniq c), different on repeated entries."
+    }
+   },
+   "machine_evidence": [
+    "seq_next_nth_rot",
+    "seq_next_in_zip",
+    "seq_zip_nextE",
+    "in_seq_cycle_edge_set",
+    "seq_cycle_edge_listP",
+    "seq_cycle_edge_setP",
+    "seq_cycle_edge_set_consecutive",
+    "size_seq_cycle_edge_list",
+    "seq_cycle_edge_list_closed",
+    "seq_cycle_edge_list_rcons",
+    "seq_cycle_edge_list_nil",
+    "seq_cycle_edge_list_seq1",
+    "seq_cycle_edge_list_pair",
+    "seq_cycle_edge_list_rot",
+    "seq_cycle_edge_list_rotr",
+    "seq_cycle_edge_list_rev",
+    "perm_seq_cycle_edge_list_rot",
+    "perm_seq_cycle_edge_list_rev",
+    "seq_cycle_edge_set_closed",
+    "seq_cycle_edge_set_rcons",
+    "seq_cycle_edge_set_last",
+    "seq_cycle_edge_set_open",
+    "seq_cycle_edge_set_nil",
+    "seq_cycle_edge_set_seq1",
+    "seq_cycle_edge_set_pair",
+    "card_seq_cycle_edge_set",
+    "seq_cycle_edge_set_sub",
+    "seq_cycle_edge_set_rot",
+    "seq_cycle_edge_set_rotr",
+    "seq_cycle_edge_set_rev",
+    "seq_next_edge_setP",
+    "seq_next_edge_set_vertices",
+    "seq_next_edge_set_sub",
+    "seq_next_edge_set_uniq",
+    "seq_next_edge_set_nil",
+    "seq_next_edge_set_seq1",
+    "seq_next_edge_set_pair",
+    "seq_next_edge_set_rot",
+    "seq_next_edge_set_rev",
+    "seq_cycle_graph_edge_setP",
+    "seq_cycle_graph_edge_setE",
+    "seq_cycle_graph_edge_set_sub",
+    "seq_cycle_graph_edge_set_support",
+    "seq_cycle_edge_set_cycle",
+    "seq_cycle_graph_edge_set_cycle",
+    "seq_next_edge_set_ucycle",
+    "seq_cycle_graph_edge_set_nil",
+    "seq_cycle_graph_edge_set_seq1",
+    "seq_cycle_graph_edge_set_pair",
+    "seq_cycle_graph_edge_set_nonedge",
+    "seq_cycle_graph_edge_set_rot",
+    "seq_cycle_graph_edge_set_rev",
+    "seq_cycle_edges_ground_nil",
+    "seq_cycle_edges_ground_seq1",
+    "seq_cycle_edges_ground_pair",
+    "seq_cycle_edges_ground_nonedge",
+    "seq_cycle_edges_ground_closing",
+    "seq_cycle_edges_ground_repeat_walk",
+    "seq_cycle_edges_ground_repeat_next",
+    "seq_cycle_edges_ground_repeat_rot"
+   ]
+  }
+ }
+}

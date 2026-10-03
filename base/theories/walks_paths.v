@@ -21,9 +21,12 @@
     "Simple walks of a sequence" below), and the edges traversed by a sequence,
     [seq_edge_list], [seq_edge_set] and [seq_index_edge_set] (registry
     meta/library_primitives/path-edges.json, section "Edges traversed by a
-    sequence" below), and genuine cycles of a relation, [seq_cycle] and
+    sequence" below), genuine cycles of a relation, [seq_cycle] and
     [seq_cycleb] (registry meta/library_primitives/genuine-cycle.json, section
-    "Genuine cycles of a sequence" below).
+    "Genuine cycles of a sequence" below), and the edges of a cyclic sequence,
+    [seq_cycle_edge_list], [seq_cycle_edge_set], [seq_cycle_graph_edge_set] and
+    [seq_next_edge_set] (registry meta/library_primitives/cycle-edges.json, section
+    "Edges of a cyclic sequence" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -1643,3 +1646,483 @@ Lemma seq_cycle_ground_directed_rev : ~ seq_cycle succ3 (rev [:: o0; o1; o2]).
 Proof. by move/seq_cycleP. Qed.
 
 End CycleGrounding.
+
+(** ** Edges of a cyclic sequence
+
+    Four edge extractors of a cyclic vertex sequence [c], kept as separate contracts
+    (registry meta/library_primitives/cycle-edges.json):
+    - [seq_cycle_edge_list c] is the ORDERED list of the unordered pairs of cyclically
+      successive entries, read from [zip c (rot 1 c)]: [[set c_i; c_(i+1)]] for every
+      position [i], the closing pair [[set c_last; c_0]] included, so repetitions and
+      order are kept;
+    - [seq_cycle_edge_set c] is its finite support;
+    - [seq_cycle_graph_edge_set c] (simple graphs) keeps the ACTUAL edges of the graph
+      among these pairs: the sets [[set x; y]] with [x -- y], [x] and [y] in [c] and
+      cyclically consecutive ([seq_cyclic_consecutiveb]); it is
+      [seq_cycle_edge_set c :&: E(G)] for EVERY sequence;
+    - [seq_next_edge_set c] is the image of the entries [x] of [c] under
+      [x |-> [set x; next c x]]; MathComp's [next] reads the FIRST occurrence of [x],
+      so on a sequence with repetitions the image can miss pairs of the support.
+    Apart from the adjacency filter of the third one, none of them checks adjacency,
+    uniqueness or length: the empty sequence gives nothing, a one-entry sequence
+    [[:: x]] gives the one-vertex set [[set x]] (dropped by the adjacency filter), a
+    two-entry sequence lists its pair twice while the sets have it once, a
+    non-adjacent pair is kept by the list, the support and the image, and the list and
+    the support always contain the closing pair.
+
+    Upstream audit (2026-10-03; MathComp 2.5.0, coq-graph-theory 0.9.7).  MathComp
+    [path.v] owns [next] ([next_nth], [mem_next], [next_cycle]); its clean properties
+    ([prev_next], [next_prev], [next_rot], [next_rotr], [next_rev]) assume a
+    duplicate-free cycle.  coq-graph-theory writes the edge set of a simple graph as
+    [E(G)] ([in_edges]) and packages typed paths, but neither library names the cyclic
+    edge list, its support or the successor image of a RAW sequence, so these are new.
+    The open [seq_edge_list] / [seq_edge_set] above lack the closing pair: they are
+    building blocks here ([seq_cycle_edge_list_closed]), not replacements.
+
+    Specification, every clause proved below:
+    - succession: [(x, next c x)] is a pair of [zip c (rot 1 c)] for every entry [x]
+      ([seq_next_in_zip]), and on a duplicate-free [c] the pairs are exactly these
+      ([seq_zip_nextE]);
+    - list: [size c] entries; on [x :: s] it is the open list of [x :: rcons s x], that
+      is the open list of [x :: s] followed by [[set last x s; x]]; [[::]], [[:: x]] and
+      [[:: x; y]] give [[::]], [[:: [set x]]] and [[:: [set x; y]; [set x; y]]];
+      rotating the sequence rotates the list and reversing it reverses the list up to
+      a rotation by one, so the list is invariant only up to permutation ([perm_eq]);
+    - support: its members are the pairs [[set u; v]] of cyclically consecutive entries
+      ([seq_cyclic_consecutive]); it contains the open support and the closing pair, has
+      at most [size c] members, each a subset of [seq_vertices c], and is invariant under
+      [rot], [rotr] and [rev] with no premise;
+    - actual edges: [seq_cycle_edge_set c :&: E(G)] for every [c], hence equal to the
+      support on a closed walk ([cycle (--) c]; no uniqueness needed); empty on [[::]]
+      and [[:: x]], [[set [set x; y]]] on an adjacent pair, empty on a non-adjacent
+      pair; invariant under [rot] and [rev];
+    - successor image: contained in the support for every [c] and equal to it under the
+      sufficient guard [uniq c], hence equal to the actual edges on a [ucycle (--)];
+      rotation and reversal keep it under [uniq c]; [[::]], [[:: x]] and [[:: x; y]]
+      give [set0], [[set [set x]]] and [[set [set x; y]]] (also when [x = y]).  Without
+      [uniq] it is a different set: on the closed walk [[:: 0; 1; 0; 2; 3]] of ['K_4]
+      the support and the actual edges have [{0, 2}] while the image does not, and a
+      rotation or the reversal of that sequence changes the image (grounding below). *)
+
+(** The pairs of [zip c (rot 1 c)] are the cyclic successions of [c]; [next] reads
+    the successor of the FIRST occurrence. *)
+Section SeqNextZip.
+Variable T : eqType.
+Implicit Types (c : seq T) (x y : T).
+
+Lemma seq_next_nth_rot c x : x \in c -> next c x = nth x (rot 1 c) (index x c).
+Proof.
+case: c => [//|y s] xc; rewrite next_nth xc rot1_cons nth_rcons.
+have : index x (y :: s) <= size s by rewrite -ltnS index_mem.
+rewrite leq_eqVlt => /orP[/eqP->|lt]; first by rewrite ltnn eqxx nth_default.
+by rewrite lt; apply: set_nth_default.
+Qed.
+
+(** Every entry is followed by its [next], whatever the repetitions ... *)
+Lemma seq_next_in_zip c x : x \in c -> (x, next c x) \in zip c (rot 1 c).
+Proof.
+move=> xc; have sc : size c = size (rot 1 c) by rewrite size_rot.
+apply/(nthP (x, x)); exists (index x c); first by rewrite size_zip -sc minnn index_mem.
+by rewrite nth_zip // nth_index // -seq_next_nth_rot.
+Qed.
+
+(** ... and on a duplicate-free sequence the successions are exactly the pairs
+    [(x, next c x)]. *)
+Lemma seq_zip_nextE c x y :
+  uniq c -> ((x, y) \in zip c (rot 1 c)) = (x \in c) && (next c x == y).
+Proof.
+move=> uc; apply/idP/andP => [|[xc /eqP <-]]; last exact: seq_next_in_zip.
+have sc : size c = size (rot 1 c) by rewrite size_rot.
+case/(nthP (x, x)) => i; rewrite size_zip -sc minnn => ic.
+rewrite nth_zip // => -[xi yi].
+have xc : x \in c by rewrite -xi mem_nth.
+have idx : index x c = i by rewrite -xi index_uniq.
+by split=> //; rewrite seq_next_nth_rot // idx yi.
+Qed.
+
+End SeqNextZip.
+
+Section SeqCycleEdges.
+Variable T : finType.
+Implicit Types (c s : seq T) (e : {set T}) (u v x y : T).
+
+(** The ordered list of the unordered pairs of cyclically successive entries, the
+    closing pair (last entry, first entry) included. *)
+Definition seq_cycle_edge_list c : seq {set T} :=
+  map (fun p : T * T => [set p.1; p.2]) (zip c (rot 1 c)).
+
+(** Its finite support. *)
+Definition seq_cycle_edge_set c : {set {set T}} := [set e in seq_cycle_edge_list c].
+
+(** The pairs [[set x; next c x]], [x] ranging over the entries of [c] ([next]
+    reads the first occurrence). *)
+Definition seq_next_edge_set c : {set {set T}} :=
+  [set [set x; next c x] | x in [set z | z \in c]].
+
+Lemma in_seq_cycle_edge_set c e : (e \in seq_cycle_edge_set c) = (e \in seq_cycle_edge_list c).
+Proof. by rewrite /seq_cycle_edge_set inE. Qed.
+
+Lemma seq_cycle_edge_listP c e :
+  reflect (exists u v, (u, v) \in zip c (rot 1 c) /\ e = [set u; v])
+          (e \in seq_cycle_edge_list c).
+Proof.
+apply: (iffP mapP) => [[[u v] uv ->]|[u [v [uv ->]]]]; first by exists u, v.
+by exists (u, v).
+Qed.
+
+Lemma seq_cycle_edge_setP c e :
+  reflect (exists u v, seq_cyclic_consecutive c u v /\ e = [set u; v])
+          (e \in seq_cycle_edge_set c).
+Proof.
+rewrite in_seq_cycle_edge_set.
+apply: (iffP (seq_cycle_edge_listP c e)) => [[u [v [uv ->]]]|[u [v [[uv|vu] ->]]]].
+- by exists u, v; split => //; left.
+- by exists u, v.
+- by exists v, u; rewrite setUC.
+Qed.
+
+Lemma seq_cycle_edge_set_consecutive c u v :
+  seq_cyclic_consecutive c u v -> [set u; v] \in seq_cycle_edge_set c.
+Proof. by move=> cuv; apply/seq_cycle_edge_setP; exists u, v. Qed.
+
+Lemma size_seq_cycle_edge_list c : size (seq_cycle_edge_list c) = size c.
+Proof. by rewrite size_map size1_zip ?size_rot. Qed.
+
+(** Closing the sequence: the cyclic list of [x :: s] is the open list of
+    [x :: rcons s x], that is the open list of [x :: s] followed by the closing pair. *)
+Lemma seq_cycle_edge_list_closed x s :
+  seq_cycle_edge_list (x :: s) = seq_edge_list (x :: rcons s x).
+Proof.
+rewrite /seq_cycle_edge_list /seq_edge_list rot1_cons /=.
+by rewrite -[x :: rcons s x]/(rcons (x :: s) x) zip_rcons_l // size_rcons.
+Qed.
+
+Lemma seq_cycle_edge_list_rcons x s :
+  seq_cycle_edge_list (x :: s) = rcons (seq_edge_list (x :: s)) [set last x s; x].
+Proof.
+by rewrite seq_cycle_edge_list_closed -[x :: rcons s x]/(rcons (x :: s) x) seq_edge_list_rcons.
+Qed.
+
+Lemma seq_cycle_edge_list_nil : seq_cycle_edge_list [::] = [::].
+Proof. by []. Qed.
+
+(** A one-entry sequence lists its one-vertex set once ... *)
+Lemma seq_cycle_edge_list_seq1 x : seq_cycle_edge_list [:: x] = [:: [set x]].
+Proof. by rewrite /seq_cycle_edge_list /= setUid. Qed.
+
+(** ... and a two-entry sequence lists its pair twice, once per direction. *)
+Lemma seq_cycle_edge_list_pair x y : seq_cycle_edge_list [:: x; y] = [:: [set x; y]; [set x; y]].
+Proof. by rewrite /seq_cycle_edge_list /= [[set y; x]]setUC. Qed.
+
+(** Rotating the sequence rotates the list; reversing it reverses the list up to a
+    rotation by one.  The list itself is not invariant: only its multiset is. *)
+Lemma seq_cycle_edge_list_rot n c :
+  seq_cycle_edge_list (rot n c) = rot n (seq_cycle_edge_list c).
+Proof. by rewrite /seq_cycle_edge_list rot_rot zip_rot ?size_rot // map_rot. Qed.
+
+Lemma seq_cycle_edge_list_rotr n c :
+  seq_cycle_edge_list (rotr n c) = rotr n (seq_cycle_edge_list c).
+Proof. by rewrite /rotr size_seq_cycle_edge_list seq_cycle_edge_list_rot. Qed.
+
+Lemma seq_cycle_edge_list_rev c :
+  seq_cycle_edge_list (rev c) = rot 1 (rev (seq_cycle_edge_list c)).
+Proof.
+case: c => [|x s] //; rewrite rev_cons -rot1_cons seq_cycle_edge_list_rot.
+rewrite !seq_cycle_edge_list_closed; congr (rot 1 _).
+have -> : x :: rcons (rev s) x = rev (x :: rcons s x) by rewrite rev_cons rev_rcons.
+exact: seq_edge_list_rev.
+Qed.
+
+Lemma perm_seq_cycle_edge_list_rot n c :
+  perm_eq (seq_cycle_edge_list (rot n c)) (seq_cycle_edge_list c).
+Proof. by rewrite seq_cycle_edge_list_rot perm_rot. Qed.
+
+Lemma perm_seq_cycle_edge_list_rev c :
+  perm_eq (seq_cycle_edge_list (rev c)) (seq_cycle_edge_list c).
+Proof. by rewrite seq_cycle_edge_list_rev perm_rot perm_rev. Qed.
+
+Lemma seq_cycle_edge_set_closed x s :
+  seq_cycle_edge_set (x :: s) = seq_edge_set (x :: rcons s x).
+Proof. by apply/setP => e; rewrite in_seq_cycle_edge_set in_seq_edge_set seq_cycle_edge_list_closed. Qed.
+
+Lemma seq_cycle_edge_set_rcons x s :
+  seq_cycle_edge_set (x :: s) = [set last x s; x] |: seq_edge_set (x :: s).
+Proof.
+apply/setP => e.
+by rewrite in_setU1 in_seq_cycle_edge_set in_seq_edge_set seq_cycle_edge_list_rcons mem_rcons in_cons.
+Qed.
+
+(** The closing pair is always an edge of the support ... *)
+Lemma seq_cycle_edge_set_last x s : [set last x s; x] \in seq_cycle_edge_set (x :: s).
+Proof. exact/seq_cycle_edge_set_consecutive/seq_cyclic_consecutive_last. Qed.
+
+(** ... and so is every pair of the open sequence. *)
+Lemma seq_cycle_edge_set_open c : seq_edge_set c \subset seq_cycle_edge_set c.
+Proof.
+apply/subsetP => e /seq_edge_set_consecutiveP[u [v [uv ->]]].
+exact/seq_cycle_edge_set_consecutive/seq_consecutive_cyclic.
+Qed.
+
+Lemma seq_cycle_edge_set_nil : seq_cycle_edge_set [::] = set0.
+Proof. by apply/setP => e; rewrite /seq_cycle_edge_set !inE. Qed.
+
+Lemma seq_cycle_edge_set_seq1 x : seq_cycle_edge_set [:: x] = [set [set x]].
+Proof. by apply/setP => e; rewrite in_seq_cycle_edge_set seq_cycle_edge_list_seq1 !inE. Qed.
+
+Lemma seq_cycle_edge_set_pair x y : seq_cycle_edge_set [:: x; y] = [set [set x; y]].
+Proof.
+apply/setP => e.
+by rewrite in_seq_cycle_edge_set seq_cycle_edge_list_pair !inE orbb.
+Qed.
+
+Lemma card_seq_cycle_edge_set c : #|seq_cycle_edge_set c| <= size c.
+Proof. by rewrite /seq_cycle_edge_set cardsE -size_seq_cycle_edge_list card_size. Qed.
+
+(** Every pair joins entries of [c]. *)
+Lemma seq_cycle_edge_set_sub c e : e \in seq_cycle_edge_set c -> e \subset seq_vertices c.
+Proof.
+case/seq_cycle_edge_setP => u [v [/seq_cyclic_consecutive_mem[uc vc] ->]].
+by apply/subsetP => z; rewrite in_seq_vertices !inE => /orP[]/eqP->.
+Qed.
+
+(** The support is invariant under rotation and reversal, with no premise. *)
+Lemma seq_cycle_edge_set_rot n c : seq_cycle_edge_set (rot n c) = seq_cycle_edge_set c.
+Proof. by apply/setP => e; rewrite !in_seq_cycle_edge_set seq_cycle_edge_list_rot mem_rot. Qed.
+
+Lemma seq_cycle_edge_set_rotr n c : seq_cycle_edge_set (rotr n c) = seq_cycle_edge_set c.
+Proof. exact: seq_cycle_edge_set_rot. Qed.
+
+Lemma seq_cycle_edge_set_rev c : seq_cycle_edge_set (rev c) = seq_cycle_edge_set c.
+Proof.
+by apply/setP => e; rewrite !in_seq_cycle_edge_set seq_cycle_edge_list_rev mem_rot mem_rev.
+Qed.
+
+(** The successor image. *)
+Lemma seq_next_edge_setP c e :
+  reflect (exists2 x, x \in c & e = [set x; next c x]) (e \in seq_next_edge_set c).
+Proof.
+apply: (iffP imsetP) => -[x xc ->]; exists x => //; first by move: xc; rewrite inE.
+by rewrite inE.
+Qed.
+
+Lemma seq_next_edge_set_vertices c :
+  seq_next_edge_set c = [set [set x; next c x] | x in seq_vertices c].
+Proof. by rewrite seq_verticesE. Qed.
+
+(** It is contained in the support, whatever the repetitions ... *)
+Lemma seq_next_edge_set_sub c : seq_next_edge_set c \subset seq_cycle_edge_set c.
+Proof.
+apply/subsetP => e /seq_next_edge_setP[x xc ->].
+by apply/seq_cycle_edge_setP; exists x, (next c x); split=> //; left; apply: seq_next_in_zip.
+Qed.
+
+(** ... and equal to it on a duplicate-free sequence. *)
+Lemma seq_next_edge_set_uniq c : uniq c -> seq_next_edge_set c = seq_cycle_edge_set c.
+Proof.
+move=> uc; apply/eqP; rewrite eqEsubset seq_next_edge_set_sub /=.
+apply/subsetP => e; rewrite in_seq_cycle_edge_set => /seq_cycle_edge_listP[u [v [uv ->]]].
+move: uv; rewrite seq_zip_nextE // => /andP[uc' /eqP <-].
+by apply/seq_next_edge_setP; exists u.
+Qed.
+
+Lemma seq_next_edge_set_nil : seq_next_edge_set [::] = set0.
+Proof. by rewrite seq_next_edge_set_uniq // seq_cycle_edge_set_nil. Qed.
+
+Lemma seq_next_edge_set_seq1 x : seq_next_edge_set [:: x] = [set [set x]].
+Proof. by rewrite seq_next_edge_set_uniq // seq_cycle_edge_set_seq1. Qed.
+
+(** A two-entry sequence gives its pair, also when its entries are equal. *)
+Lemma seq_next_edge_set_pair x y : seq_next_edge_set [:: x; y] = [set [set x; y]].
+Proof.
+have [<-|xy] := eqVneq x y; last first.
+  by rewrite seq_next_edge_set_uniq ?seq_cycle_edge_set_pair //= inE xy.
+apply/setP => e; rewrite in_set1; apply/seq_next_edge_setP/eqP => [[z]|->].
+  by rewrite !inE orbb => /eqP-> ->; rewrite /= eqxx.
+by exists x; rewrite ?inE ?eqxx //= eqxx.
+Qed.
+
+(** Under the sufficient guard [uniq c], rotation and reversal keep the image. *)
+Lemma seq_next_edge_set_rot n c : uniq c -> seq_next_edge_set (rot n c) = seq_next_edge_set c.
+Proof. by move=> uc; rewrite !seq_next_edge_set_uniq ?rot_uniq // seq_cycle_edge_set_rot. Qed.
+
+Lemma seq_next_edge_set_rev c : uniq c -> seq_next_edge_set (rev c) = seq_next_edge_set c.
+Proof. by move=> uc; rewrite !seq_next_edge_set_uniq ?rev_uniq // seq_cycle_edge_set_rev. Qed.
+
+End SeqCycleEdges.
+
+Section SeqCycleGraphEdges.
+Variable G : sgraph.
+Implicit Types (c : seq G) (e : {set G}) (u v x y : G).
+
+(** The actual edges of [G] between cyclically successive entries of [c]. *)
+Definition seq_cycle_graph_edge_set c : {set {set G}} :=
+  [set e : {set G} |
+     [exists p : G * G,
+        [&& p.1 \in c, p.2 \in c, p.1 -- p.2, e == [set p.1; p.2] &
+            seq_cyclic_consecutiveb c p.1 p.2]]].
+
+Lemma seq_cycle_graph_edge_setP c e :
+  reflect (exists u v, [/\ u -- v, seq_cyclic_consecutive c u v & e = [set u; v]])
+          (e \in seq_cycle_graph_edge_set c).
+Proof.
+rewrite inE; apply: (iffP existsP) => [[[u v] /and5P[_ _ /= uv /eqP-> /seq_cyclic_consecutiveP cuv]]|].
+  by exists u, v.
+case=> u [v [uv cuv ->]]; have [uc vc] := seq_cyclic_consecutive_mem cuv.
+by exists (u, v); rewrite /= uc vc uv eqxx; apply/seq_cyclic_consecutiveP.
+Qed.
+
+(** For every sequence: the support restricted to the edges of [G]. *)
+Lemma seq_cycle_graph_edge_setE c : seq_cycle_graph_edge_set c = seq_cycle_edge_set c :&: E(G).
+Proof.
+apply/setP => e; rewrite in_setI.
+apply/seq_cycle_graph_edge_setP/andP => [[u [v [uv cuv ->]]]|[/seq_cycle_edge_setP[u [v [cuv ->]]] ev]].
+  by rewrite seq_cycle_edge_set_consecutive // in_edges.
+by exists u, v; split=> //; rewrite -in_edges.
+Qed.
+
+Lemma seq_cycle_graph_edge_set_sub c : seq_cycle_graph_edge_set c \subset E(G).
+Proof. by rewrite seq_cycle_graph_edge_setE subsetIr. Qed.
+
+Lemma seq_cycle_graph_edge_set_support c : seq_cycle_graph_edge_set c \subset seq_cycle_edge_set c.
+Proof. by rewrite seq_cycle_graph_edge_setE subsetIl. Qed.
+
+(** On a closed walk ([cycle (--) c], no uniqueness needed) every pair is an edge. *)
+Lemma seq_cycle_edge_set_cycle c : cycle (--) c -> seq_cycle_edge_set c \subset E(G).
+Proof.
+move=> cc; apply/subsetP => e /seq_cycle_edge_setP[u [v [cuv ->]]].
+by rewrite in_edges; case/orP: (seq_cyclic_consecutive_cycle cc cuv) => //; rewrite sg_sym.
+Qed.
+
+Lemma seq_cycle_graph_edge_set_cycle c :
+  cycle (--) c -> seq_cycle_graph_edge_set c = seq_cycle_edge_set c.
+Proof. by move=> cc; rewrite seq_cycle_graph_edge_setE; apply/setIidPl/seq_cycle_edge_set_cycle. Qed.
+
+(** On a duplicate-free closed walk the four representations have the same members. *)
+Lemma seq_next_edge_set_ucycle c :
+  ucycle (--) c -> seq_next_edge_set c = seq_cycle_graph_edge_set c.
+Proof.
+by case/andP=> cc uc; rewrite seq_next_edge_set_uniq // seq_cycle_graph_edge_set_cycle.
+Qed.
+
+Lemma seq_cycle_graph_edge_set_nil : seq_cycle_graph_edge_set [::] = set0.
+Proof. by rewrite seq_cycle_graph_edge_setE seq_cycle_edge_set_nil set0I. Qed.
+
+(** A one-entry sequence has no actual edge: the loop [[set x]] is not an edge. *)
+Lemma seq_cycle_graph_edge_set_seq1 x : seq_cycle_graph_edge_set [:: x] = set0.
+Proof.
+apply/setP => e; rewrite seq_cycle_graph_edge_setE seq_cycle_edge_set_seq1 !inE.
+by case: eqP => // ->; rewrite -[[set x]]setUid in_edges sg_irrefl.
+Qed.
+
+Lemma seq_cycle_graph_edge_set_pair x y :
+  x -- y -> seq_cycle_graph_edge_set [:: x; y] = [set [set x; y]].
+Proof.
+move=> xy; rewrite seq_cycle_graph_edge_set_cycle ?seq_cycle_edge_set_pair //=.
+by rewrite xy sg_sym xy.
+Qed.
+
+(** Unlike the support and the image, a non-adjacent pair contributes nothing. *)
+Lemma seq_cycle_graph_edge_set_nonedge x y :
+  ~~ x -- y -> seq_cycle_graph_edge_set [:: x; y] = set0.
+Proof.
+move=> nxy; apply/setP => e.
+rewrite seq_cycle_graph_edge_setE seq_cycle_edge_set_pair !inE.
+by case: eqP => // ->; rewrite in_edges (negbTE nxy).
+Qed.
+
+Lemma seq_cycle_graph_edge_set_rot n c :
+  seq_cycle_graph_edge_set (rot n c) = seq_cycle_graph_edge_set c.
+Proof. by rewrite !seq_cycle_graph_edge_setE seq_cycle_edge_set_rot. Qed.
+
+Lemma seq_cycle_graph_edge_set_rev c : seq_cycle_graph_edge_set (rev c) = seq_cycle_graph_edge_set c.
+Proof. by rewrite !seq_cycle_graph_edge_setE seq_cycle_edge_set_rev. Qed.
+
+End SeqCycleGraphEdges.
+
+(** ** Grounding *)
+Section CycleEdgesGrounding.
+Local Notation o0 := (@Ordinal 3 0 isT).
+Local Notation o1 := (@Ordinal 3 1 isT).
+Local Notation o2 := (@Ordinal 3 2 isT).
+Local Notation q0 := (@Ordinal 4 0 isT).
+Local Notation q1 := (@Ordinal 4 1 isT).
+Local Notation q2 := (@Ordinal 4 2 isT).
+Local Notation q3 := (@Ordinal 4 3 isT).
+Local Notation rep := [:: q0; q1; q0; q2; q3].
+
+(** Empty representations. *)
+Lemma seq_cycle_edges_ground_nil :
+  [/\ seq_cycle_edge_list ([::] : seq 'I_3) = [::], seq_cycle_edge_set ([::] : seq 'I_3) = set0,
+      seq_cycle_graph_edge_set (G := 'K_3) [::] = set0 & seq_next_edge_set ([::] : seq 'I_3) = set0].
+Proof.
+by split; rewrite ?seq_cycle_edge_set_nil ?seq_cycle_graph_edge_set_nil ?seq_next_edge_set_nil.
+Qed.
+
+(** One entry: the one-vertex set in the list, the support and the image, nothing
+    among the actual edges of a simple graph. *)
+Lemma seq_cycle_edges_ground_seq1 :
+  [/\ seq_cycle_edge_list [:: o1] = [:: [set o1]], seq_cycle_edge_set [:: o1] = [set [set o1]],
+      seq_next_edge_set [:: o1] = [set [set o1]] & seq_cycle_graph_edge_set (G := 'K_3) [:: o1] = set0].
+Proof.
+split; rewrite ?seq_cycle_edge_list_seq1 ?seq_cycle_edge_set_seq1 ?seq_next_edge_set_seq1 //.
+exact: seq_cycle_graph_edge_set_seq1.
+Qed.
+
+(** Two entries: the list repeats the pair, the sets have it once (a Hamilton digon). *)
+Lemma seq_cycle_edges_ground_pair :
+  [/\ seq_cycle_edge_list [:: o0; o1] = [:: [set o0; o1]; [set o0; o1]],
+      seq_cycle_edge_set [:: o0; o1] = [set [set o0; o1]],
+      seq_next_edge_set [:: o0; o1] = [set [set o0; o1]] &
+      seq_cycle_graph_edge_set (G := 'K_3) [:: o0; o1] = [set [set o0; o1]]].
+Proof.
+split; rewrite ?seq_cycle_edge_list_pair ?seq_cycle_edge_set_pair ?seq_next_edge_set_pair //.
+exact: seq_cycle_graph_edge_set_pair.
+Qed.
+
+(** A non-adjacent pair of ['K_1,2] (the two vertices of the larger side): kept by
+    the support and the image, dropped by the actual-edge filter. *)
+Lemma seq_cycle_edges_ground_nonedge :
+  let a : 'K_1,2 := inr ord0 in let b : 'K_1,2 := inr ord_max in
+  [/\ ~~ a -- b, seq_cycle_edge_set [:: a; b] = [set [set a; b]],
+      seq_next_edge_set [:: a; b] = [set [set a; b]] & seq_cycle_graph_edge_set [:: a; b] = set0].
+Proof.
+move=> a b; have ab : ~~ a -- b by [].
+split; rewrite ?seq_cycle_edge_set_pair ?seq_next_edge_set_pair //.
+exact: seq_cycle_graph_edge_set_nonedge.
+Qed.
+
+(** The closing pair is in the cyclic support, not in the open one. *)
+Lemma seq_cycle_edges_ground_closing :
+  [set o2; o0] \in seq_cycle_edge_set [:: o0; o1; o2] /\
+  [set o2; o0] \notin seq_edge_set [:: o0; o1; o2].
+Proof.
+split; first exact: (seq_cycle_edge_set_last o0 [:: o1; o2]).
+apply/seq_edge_setP => -[u [v [uv E]]]; move: uv.
+by case/doubleton_eq_iff: E => -[<- <-]; vm_compute.
+Qed.
+
+(** Positions versus first occurrences: [rep] is a closed walk of ['K_4] whose
+    third and fourth entries give the edge [{q0, q2}] ... *)
+Lemma seq_cycle_edges_ground_repeat_walk :
+  cycle (@edge_rel 'K_4) rep /\ [set q0; q2] \in seq_cycle_graph_edge_set (G := 'K_4) rep.
+Proof.
+have cc : cycle (@edge_rel 'K_4) rep by [].
+split=> //; rewrite seq_cycle_graph_edge_set_cycle //.
+by apply: seq_cycle_edge_set_consecutive; left.
+Qed.
+
+(** ... which the successor image misses: [next] reads the first [q0], followed by [q1]. *)
+Lemma seq_cycle_edges_ground_repeat_next : [set q0; q2] \notin seq_next_edge_set rep.
+Proof.
+apply/seq_next_edge_setP => -[x _ /doubleton_eq_iff[[xe e]|[e xe]]]; subst x;
+  by move/eqP: e; vm_compute.
+Qed.
+
+(** Without [uniq], rotation and reversal change the image. *)
+Lemma seq_cycle_edges_ground_repeat_rot :
+  [set q0; q2] \in seq_next_edge_set (rot 2 rep) /\ [set q0; q2] \in seq_next_edge_set (rev rep).
+Proof.
+by split; apply/seq_next_edge_setP; [exists q0 | exists q2; rewrite // setUC].
+Qed.
+
+End CycleEdgesGrounding.
