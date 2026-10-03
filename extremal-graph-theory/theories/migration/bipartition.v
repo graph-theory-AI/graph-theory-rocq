@@ -96,3 +96,21 @@ Proof. exact: subgraph_of.erdos_1080_statement_compat. Qed.
 Lemma erdos_549_statement_original_compat :
   XE2Original.erdos_549_statement <-> erdos_549_statement.
 Proof. exact: subgraph_of.erdos_549_statement_compat. Qed.
+
+(** Complete pre-A5/pre-A6/pre-C7 #549. Load A6 without importing its
+    identically named Legacy modules; all earlier C7 bindings stay unchanged. *)
+From Extremal.migration Require complement.
+
+Module XE2ComplementOriginal.
+
+Definition erdos_549_statement : Prop :=
+  forall (k R : nat) (T : sgraph),
+    xe1_tree T -> XE2Legacy.xe2_bipartition_sizes T k (2 * k) ->
+    Extremal.migration.complement.XE1Original.diagonal_ramsey_number T R ->
+    R = 4 * k - 1.
+
+End XE2ComplementOriginal.
+
+Lemma erdos_549_statement_complement_original_compat :
+  XE2ComplementOriginal.erdos_549_statement <-> erdos_549_statement.
+Proof. exact: Extremal.migration.complement.erdos_549_statement_original_compat. Qed.

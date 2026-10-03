@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py bipartition --details /tmp/migr
 
 - Canonical: `GraphTheory.connectivity.bipartition`.
 - Baseline: `2e0fb67f54a33409311c2a36cdf1e1d5240e3577`.
-- Scope: 7 helpers, 8 statements, 21 frozen objects, 42 recorded references.
-- Source checks: 201/201 pass; consistent.
+- Scope: 7 helpers, 8 statements, 29 frozen objects, 47 recorded references.
+- Source checks: 242/242 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -26,4 +26,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Packing.conjectures.X15alone.bipartite`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_1080_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_549_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_1080_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_549_statement`, `extremal-graph-theory/theories/migration/complement.v#XE2Legacy.erdos_549_statement`, `extremal-graph-theory/theories/migration/complement.v#XE2Original.erdos_549_statement`.
