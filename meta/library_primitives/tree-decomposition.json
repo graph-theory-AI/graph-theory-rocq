@@ -2,10 +2,10 @@
   "schema_version": 1,
   "family": "tree-decomposition",
   "primitive": {
-    "canonical_name": "GraphTheory.treewidth.sdecomp",
-    "owner": "upstream-adapter",
-    "status": "auditing",
-    "fidelity": "PENDING",
+    "canonical_name": "GTBase.bag_decompositions.bag_decomposition",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
     "normalized_names": [
       "tree_decomposition"
     ],
@@ -16,16 +16,122 @@
       "Minor.conjectures.X27.x27_tree_decomposition"
     ],
     "consumers_remaining": 5,
-    "compatibility_theorems": [],
+    "compatibility_theorems": [
+      "Chromatic.migration.bag_decompositions.dujmovic_thue_choice_number_pathwidth_statement_compat",
+      "Chromatic.migration.bag_decompositions.x126_pathwidth_at_most_compat",
+      "Chromatic.migration.bag_decompositions.x126_tree_decomposition_compat",
+      "Chromatic.migration.bag_decompositions.spaghetti_tree_path_decomposition_chi_bound_statement_compat",
+      "Chromatic.migration.bag_decompositions.x189_spaghetti_path_decompositions_width_compat",
+      "Chromatic.migration.bag_decompositions.x189_spaghetti_tree_decomposition_compat",
+      "Chromatic.migration.bag_decompositions.x189_tree_decomposition_compat",
+      "GTMisc.migration.bag_decompositions.bounded_tree_independence_forbidden_family_statement_compat",
+      "GTMisc.migration.bag_decompositions.x102_free_class_tree_alpha_bounded_compat",
+      "GTMisc.migration.bag_decompositions.x102_tree_alpha_at_most_compat",
+      "GTMisc.migration.bag_decompositions.token_sliding_chordal_clique_tree_degree_polytime_statement_compat",
+      "GTMisc.migration.bag_decompositions.x169_chordal_compat",
+      "GTMisc.migration.bag_decompositions.x169_clique_tree_compat",
+      "GTMisc.migration.bag_decompositions.x169_clique_tree_degree_at_most_compat",
+      "GTMisc.migration.bag_decompositions.x169_polytime_decides_TS_connectivity_compat",
+      "GTMisc.migration.bag_decompositions.x169_tree_decomposition_compat",
+      "Minor.migration.bag_decompositions.dallard_milanic_storgel_tw_omega_tree_alpha_statement_compat",
+      "Minor.migration.bag_decompositions.x121_tree_alpha_le_compat",
+      "Minor.migration.bag_decompositions.dujmovic_joret_morin_norin_wood_two_tree_width_chi_statement_compat",
+      "Minor.migration.bag_decompositions.x127_two_tree_width_le_compat",
+      "Minor.migration.bag_decompositions.treewidth_vertex_disjoint_subgraphs_log_bound_statement_compat",
+      "Minor.migration.bag_decompositions.x201_k_disjoint_large_treewidth_subgraphs_compat",
+      "Minor.migration.bag_decompositions.x201_treewidth_at_least_compat",
+      "Minor.migration.bag_decompositions.bounded_degree_even_hole_free_bounded_treewidth_statement_compat",
+      "Minor.migration.bag_decompositions.x27_tree_decomposition_compat",
+      "Minor.migration.bag_decompositions.x27_treewidth_at_most_compat",
+      "Minor.migration.bag_decompositions.even_hole_k4_diamond_free_bounded_treewidth_statement_compat",
+      "Minor.migration.bag_decompositions.theta_triangle_free_bounded_degree_treewidth_statement_compat",
+      "Minor.migration.bag_decompositions.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_compat",
+      "Minor.migration.bag_decompositions.x95_pathwidth_at_most_compat",
+      "Minor.migration.bag_decompositions.x95_subgraph_indexed_tree_decomposition_width_at_most_compat",
+      "Chromatic.migration.bag_decompositions.x126_pathwidth_at_most_original_compat",
+      "Chromatic.migration.bag_decompositions.dujmovic_thue_choice_number_pathwidth_statement_original_compat",
+      "Chromatic.migration.bag_decompositions.x189_spaghetti_path_decompositions_width_original_compat",
+      "Chromatic.migration.bag_decompositions.spaghetti_tree_path_decomposition_chi_bound_statement_original_compat",
+      "Minor.migration.bag_decompositions.bounded_degree_even_hole_free_bounded_treewidth_statement_original_compat",
+      "Minor.migration.bag_decompositions.even_hole_k4_diamond_free_bounded_treewidth_statement_original_compat",
+      "Minor.migration.bag_decompositions.theta_triangle_free_bounded_degree_treewidth_statement_original_compat",
+      "Minor.migration.bag_decompositions.x95_pathwidth_at_most_original_compat",
+      "Minor.migration.bag_decompositions.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_original_compat",
+      "GTMisc.migration.bag_decompositions.x102_free_class_tree_alpha_bounded_original_compat",
+      "GTMisc.migration.bag_decompositions.bounded_tree_independence_forbidden_family_statement_original_compat"
+    ],
     "upstream_audit": {
       "searched_modules": [
         "GraphTheory.treewidth",
-        "GraphTheory.sgraph"
+        "GraphTheory.sgraph",
+        "GraphTheory.digraph",
+        "Minor.foundations.width_params"
       ],
-      "result": "candidate-found",
+      "result": "adapted-in-base",
       "candidate": "GraphTheory.treewidth.sdecomp",
-      "note": "Upstream sdecomp includes vertex coverage, edge coverage, and connected bags over a forest. Local index-graph and width conventions require conditional comparison in M3.",
-      "audited_at": "2026-07-22"
-    }
+      "note": "Exact three clauses on a supplied forest; raw arbitrary index preserved outside that explicitly guarded bridge. Width and forest-to-tree construction are separate and unchanged.",
+      "audited_at": "2026-10-03"
+    },
+    "relation": "Same supplied G, T and bags: two convertible Boolean contracts, one unconditionally equivalent Prop contract, and one explicit tree-guarded Prop contract. Upstream sdecomp bridge on the same supplied forest.",
+    "api_theorems": [
+      "GTBase.bag_decompositions.bag_decomposition_cover",
+      "GTBase.bag_decompositions.bag_decomposition_edge",
+      "GTBase.bag_decompositions.bag_decomposition_fibre",
+      "GTBase.bag_decompositions.bag_decompositionP",
+      "GTBase.bag_decompositions.tree_bag_decompositionP",
+      "GTBase.bag_decompositions.restrict_bag",
+      "GTBase.bag_decompositions.bag_decomposition_sdecompP",
+      "GTBase.bag_decompositions.bag_decomposition_forest_sdecompP",
+      "GTBase.bag_decompositions.bag_decomposition_K0",
+      "GTBase.bag_decompositions.bag_decomposition_K1_one_bag",
+      "GTBase.bag_decompositions.bag_decomposition_K2_one_bag",
+      "GTBase.bag_decompositions.not_bag_decomposition_K1_empty_bag",
+      "GTBase.bag_decompositions.not_bag_decomposition_K2_singleton_bags",
+      "GTBase.bag_decompositions.not_bag_decomposition_two_isolated",
+      "GTBase.bag_decompositions.bag_decomposition_K3_index",
+      "GTBase.bag_decompositions.not_tree_bag_decomposition_K3_index",
+      "GTBase.bag_decompositions.bag_decomposition_unused_empty_bag",
+      "GTBase.bag_decompositions.bag_decomposition_nonempty_index",
+      "GTBase.bag_decompositions.tree_bag_decomposition_K0"
+    ],
+    "migration_report": "meta/migration_reports/tree_decomposition.md",
+    "migration_spec": "meta/migration_reports/tree_decomposition.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/tree-decomposition.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C13.md",
+    "downstream_client": "base/theories/examples/bag_decompositions.v",
+    "semantic_classes": {
+      "raw-boolean": {
+        "members": [
+          "Chromatic.conjectures.X126.x126_tree_decomposition",
+          "Minor.conjectures.X27.x27_tree_decomposition"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Minor.migration.bag_decompositions.x27_tree_decomposition_compat"
+      },
+      "raw-prop": {
+        "members": [
+          "Chromatic.conjectures.X189.x189_tree_decomposition"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.bag_decompositions.x189_tree_decomposition_compat"
+      },
+      "explicit-tree-guard": {
+        "members": [
+          "GTMisc.conjectures.X169.x169_tree_decomposition"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "GTMisc.migration.bag_decompositions.x169_tree_decomposition_compat",
+        "note": "Aliases the explicitly stronger tree_bag_decomposition, not the raw contract."
+      }
+    },
+    "reviewed_by": "coordinator helper path_review",
+    "reviewed_commit": "cdb9e10161e6566b9a812b0931488acb6338be9f",
+    "independent_review": "meta/migration_reviews/tree_decomposition.md"
   }
 }
