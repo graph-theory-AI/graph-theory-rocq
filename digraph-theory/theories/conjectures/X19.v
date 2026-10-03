@@ -4,6 +4,7 @@ From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude digraph oriented dipath.
 From Digraph.conjectures Require Import classic_core.
+From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -18,7 +19,7 @@ Definition x19_directed_girth_at_least (D : diGraphType) (g : nat) : Prop :=
   forall c : seq D, dicycle c -> g <= size c.
 
 Definition x19_cycle_vertices (D : diGraphType) (c : seq D) : {set D} :=
-  [set v | v \in c].
+  seq_vertices c.
 
 Definition x19_vertex_disjoint_dicycles
     (D : diGraphType) (cs : seq (seq D)) : Prop :=

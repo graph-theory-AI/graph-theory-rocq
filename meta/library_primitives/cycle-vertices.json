@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "family": "cycle-vertices",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_vertices",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "cycle_vertices",
+      "vertices_of_seq"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X153.x153_cycle_vertices",
+      "Chromatic.conjectures.XE1.xe1_vertices_of_seq",
+      "Cycle.conjectures.X10.x10_cycle_vertices",
+      "Cycle.conjectures.X212.x212_cycle_vertices",
+      "Cycle.conjectures.X5.x5_vertices_of_seq",
+      "Digraph.conjectures.X19.x19_cycle_vertices"
+    ],
+    "consumers_remaining": 7,
+    "relation": "definitional: the six helpers are the comprehension [set v | v \\in c] (X5 and XE1 with the explicit carrier annotation [set v : G | v \\in c], X19 over a diGraphType carrier), which is GTBase.walks_paths.seq_vertices c = [set:: c] by conversion (seq_verticesE). The family reuses B1's canonical (registry path-vertices, which keeps its fidelity record) and adds no primitive, fidelity owner or validity guard.",
+    "semantic_classes": {
+      "raw-sequence-support": {
+        "members": [
+          "Chromatic.conjectures.X153.x153_cycle_vertices",
+          "Chromatic.conjectures.XE1.xe1_vertices_of_seq",
+          "Cycle.conjectures.X10.x10_cycle_vertices",
+          "Cycle.conjectures.X212.x212_cycle_vertices",
+          "Cycle.conjectures.X5.x5_vertices_of_seq",
+          "Digraph.conjectures.X19.x19_cycle_vertices"
+        ],
+        "count": 6,
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.cycle_vertices.x153_cycle_vertices_compat",
+          "Chromatic.migration.cycle_vertices.xe1_vertices_of_seq_compat",
+          "Cycle.migration.cycle_vertices.x10_cycle_vertices_compat",
+          "Cycle.migration.cycle_vertices.x212_cycle_vertices_compat",
+          "Cycle.migration.cycle_vertices.x5_vertices_of_seq_compat",
+          "Digraph.migration.cycle_vertices.x19_cycle_vertices_compat"
+        ],
+        "note": "The support of an arbitrary raw sequence: no cycle, uniqueness, adjacency, length or nonemptiness premise; the empty sequence gives set0, repeats count once, order, rotation, reversal and undup do not matter, and the cardinality equals the length exactly under uniq. The four cycle_vertices helpers (X153, X10, X212, X19) and the two cross-name vertices_of_seq helpers (X5, XE1, the latter used by no row) all convert to seq_vertices c."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.cycle_vertices.planar_girth5_two_cycles_list_critical_subgraph_statement_compat",
+      "Chromatic.migration.cycle_vertices.x153_cycle_precoloured_lists_compat",
+      "Chromatic.migration.cycle_vertices.x153_cycle_vertices_compat",
+      "Chromatic.migration.cycle_vertices.xe1_vertices_of_seq_compat",
+      "Cycle.migration.cycle_vertices.cycle_with_external_three_neighbours_statement_compat",
+      "Cycle.migration.cycle_vertices.cycle_with_external_three_neighbours_statement_original_compat",
+      "Cycle.migration.cycle_vertices.min_degree_half_disjoint_four_cycles_statement_compat",
+      "Cycle.migration.cycle_vertices.smith_longest_cycles_r_connected_statement_compat",
+      "Cycle.migration.cycle_vertices.smith_two_longest_cycles_statement_compat",
+      "Cycle.migration.cycle_vertices.smith_two_longest_cycles_statement_original_compat",
+      "Cycle.migration.cycle_vertices.x10_cycle_vertices_compat",
+      "Cycle.migration.cycle_vertices.x212_cycle_vertices_compat",
+      "Cycle.migration.cycle_vertices.x5_cycle_family_disjoint_compat",
+      "Cycle.migration.cycle_vertices.x5_vertices_of_seq_compat",
+      "Digraph.migration.cycle_vertices.lichiardopol_distinct_length_dicycle_packing_statement_compat",
+      "Digraph.migration.cycle_vertices.x19_cycle_vertices_compat",
+      "Digraph.migration.cycle_vertices.x19_vertex_disjoint_dicycles_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.seq_verticesE",
+      "GTBase.walks_paths.in_seq_vertices",
+      "GTBase.walks_paths.seq_vertices_nil",
+      "GTBase.walks_paths.seq_vertices_seq1",
+      "GTBase.walks_paths.seq_vertices_cons",
+      "GTBase.walks_paths.seq_vertices_rot",
+      "GTBase.walks_paths.seq_vertices_rev",
+      "GTBase.walks_paths.seq_vertices_undup",
+      "GTBase.walks_paths.perm_seq_vertices",
+      "GTBase.walks_paths.card_seq_vertices",
+      "GTBase.walks_paths.card_seq_verticesP",
+      "GTBase.walks_paths.seq_vertices_subsetP",
+      "GTBase.walks_paths.seq_vertices_disjointP",
+      "GTBase.walks_paths.seq_vertices_ground_repeat"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.preliminaries",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.finset",
+        "mathcomp.boot.seq"
+      ],
+      "result": "thin-adapter",
+      "candidate": "mathcomp finset [set:: s]",
+      "note": "Reuses B1's audit (registry path-vertices): MathComp's [set:: s] is the support of an arbitrary sequence and GTBase.walks_paths.seq_vertices names it; GraphTheory's Path/nodes require a valid head-plus-tail walk and cannot replace a raw sequence. The cycle supports of this family take raw sequences, so seq_vertices is the faithful canonical; no new API lemma, primitive or fidelity record is added. Endpoint- or adjacency-filtered internal sets (internal-vertices), edge sets (path-edges, cycle-edges) and enriched walk records stay separate. Legacy bodies and per-row certificates: meta/migration_reports/cycle_vertices.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/cycle_vertices.md",
+    "reviewed_by": "matching_scope",
+    "migration_spec": "meta/migration_reports/cycle_vertices.spec.json",
+    "reviewed_commit": "03c25dab9173e148f3c33a20bb1ad9414a7acfc5",
+    "independent_review": "meta/migration_reviews/cycle_vertices.md"
+  }
+}
