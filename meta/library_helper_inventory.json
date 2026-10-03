@@ -188,6 +188,15 @@
         "Cycle.conjectures.D1.rconservative",
         "Cycle.conjectures.D1.vconservative"
       ],
+      "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab": [
+        "Chromatic.conjectures.X31.x31_subgraph_of",
+        "Chromatic.conjectures.XE1.xe1_subgraph_of",
+        "Extremal.conjectures.X59.x59_subgraph_of",
+        "Extremal.conjectures.X78.x78_subgraph_of",
+        "Extremal.conjectures.XE1.xe1_subgraph_of",
+        "GTMisc.conjectures.U13.subgraph_of",
+        "GTMisc.conjectures.XE2.xe2_subgraph_of"
+      ],
       "4917d62bcfac14e9258c1c58a5ab66ac3f517e46a029577da30c809386731b79": [
         "GTMisc.conjectures.X144.x144_complete_between",
         "GTMisc.conjectures.X41.x41_complete_between"
@@ -329,14 +338,6 @@
         "Extremal.conjectures.X180.x180_matching",
         "GTMisc.conjectures.X14.x14_matching",
         "Packing.conjectures.X15.x15_matching"
-      ],
-      "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685": [
-        "Chromatic.conjectures.X31.x31_subgraph_of",
-        "Chromatic.conjectures.XE1.xe1_subgraph_of",
-        "Extremal.conjectures.X59.x59_subgraph_of",
-        "Extremal.conjectures.X78.x78_subgraph_of",
-        "Extremal.conjectures.XE1.xe1_subgraph_of",
-        "GTMisc.conjectures.XE2.xe2_subgraph_of"
       ],
       "85572fc27fb6749f9f4d12a5e203c2535d82bf0340bd05573284f3fc351825ce": [
         "Chromatic.conjectures.X124.x124_poly_eval",
@@ -9372,9 +9373,9 @@
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
-      "body_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "body_shape_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "declaration_hash": "5aba182b293a97ef38902b1473db91da68429ec3a3c563dffeab619628d6fdda",
+      "body_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "body_shape_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "declaration_hash": "de4045084fe8776199ec8ddbfabe033e109892aec13f094d220ea02bf285679a",
       "direct_consumers": [
         "Chromatic.conjectures.X31.chromatic_girth_average_degree_subgraph_statement"
       ],
@@ -10858,9 +10859,9 @@
       "signature_shape_hash": "0596fb401e0ad5525f64c30a46df4b74ef3b429bb464e52445ea6a2244565dd3"
     },
     {
-      "body_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "body_shape_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "declaration_hash": "a8a9171e32d6aad269f2ebd9619f374b98c0d9b80e9fe75dda71195ab80aeeb3",
+      "body_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "body_shape_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "declaration_hash": "4fd198c318a63b56dc437178c22705e1ed3932a27a6b42d0f3f0ca347f7ef46c",
       "direct_consumers": [
         "Chromatic.conjectures.XE1.erdos_108_statement",
         "Chromatic.conjectures.XE1.erdos_628_statement"
@@ -33668,9 +33669,9 @@
       "signature_shape_hash": "7a50000e84e0ac09403c0cc318047e591b6ab93e490ab9f8b5d13add45415dbb"
     },
     {
-      "body_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "body_shape_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "declaration_hash": "652345675e0fc57b5545fbc97cc214e95089476ba7f6d3654f78c9da2d0e3d05",
+      "body_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "body_shape_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "declaration_hash": "c620a37d16af0719120f31e10af98564f2679475930c07c23c55c1a009820e40",
       "direct_consumers": [
         "Extremal.conjectures.X59.c4_free_subgraph_polynomial_average_degree_statement"
       ],
@@ -33694,7 +33695,7 @@
         "Extremal.conjectures.X59.c4_free_subgraph_polynomial_average_degree_statement"
       ],
       "kind": "Definition",
-      "line": 18,
+      "line": 16,
       "local_dependencies": [],
       "name": "x59_has_cycle_length",
       "normalized_name": "has_cycle_length",
@@ -34080,9 +34081,9 @@
       "signature_shape_hash": "5483169f56ffe1a6f47fcdd89dc91258440656ce2b61c9fc1411932606e2cd51"
     },
     {
-      "body_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "body_shape_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "declaration_hash": "6e693650fa7c624427bbdc5fd97cbd63bb6d60f4fe76561a679d43a69b88cc18",
+      "body_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "body_shape_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "declaration_hash": "7ba22f85f0fd26202f41cce9a862d0c31e56275d73e701f3deff9c49bbaab551",
       "direct_consumers": [
         "Extremal.conjectures.X78.h_free_max_cut_three_fourths_surplus_statement"
       ],
@@ -34106,7 +34107,7 @@
         "Extremal.conjectures.X78.h_free_max_cut_three_fourths_surplus_statement"
       ],
       "kind": "Definition",
-      "line": 23,
+      "line": 21,
       "local_dependencies": [],
       "name": "x78_three_fourths_surplus",
       "normalized_name": "three_fourths_surplus",
@@ -34791,9 +34792,9 @@
       "signature_shape_hash": "d9e433c0e5e7887f115d64a173aa547ab11ef3669531ec7da39ea70950601092"
     },
     {
-      "body_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "body_shape_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "declaration_hash": "a8a9171e32d6aad269f2ebd9619f374b98c0d9b80e9fe75dda71195ab80aeeb3",
+      "body_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "body_shape_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "declaration_hash": "4fd198c318a63b56dc437178c22705e1ed3932a27a6b42d0f3f0ca347f7ef46c",
       "direct_consumers": [
         "Extremal.conjectures.XE1.erdos_1035_statement",
         "Extremal.conjectures.XE1.erdos_548_statement",
@@ -37319,9 +37320,9 @@
       "signature_shape_hash": "6c03c20bf4432115aae8c723d802f498bd04e76879cb88dab96ddf777060a7c0"
     },
     {
-      "body_hash": "a6f103d326c61968afbd7b00839c29229665c4089cca69a4224ae129bebdfbea",
-      "body_shape_hash": "a6f103d326c61968afbd7b00839c29229665c4089cca69a4224ae129bebdfbea",
-      "declaration_hash": "0390fe3f59ebd806323b0a364280d28f91db997c3ae5f7d12100bca83a20ea75",
+      "body_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "body_shape_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "declaration_hash": "c6ba7e355359cb222ed5dca313226fb8fbe69802b980d8577153aa436672f70f",
       "direct_consumers": [
         "GTMisc.conjectures.U13.subgraph_of_large_average_degree_and_large_average_d_statement"
       ],
@@ -43248,9 +43249,9 @@
       "signature_shape_hash": "0329a9b381096fbeeacfd7395f9af4f744a417be4d1984d2caa934085adb3cb9"
     },
     {
-      "body_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "body_shape_hash": "8428b300f8d213fd7486f68da6d25c5cf3aef989782fa6e913ac4fb0762b1685",
-      "declaration_hash": "7ada3d09d59b218861c3a321029da0b8140659e6091aea10691cba609909ae58",
+      "body_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "body_shape_hash": "4665bde969407aeddb0a9c1874c1283a55148984a17f970e9b3b3642f26009ab",
+      "declaration_hash": "bc4194d1e2295d9a2fde5f2adf4f859e9806b04a9c782ce04676883daaf2958b",
       "direct_consumers": [
         "GTMisc.conjectures.XE2.erdos_715_statement"
       ],

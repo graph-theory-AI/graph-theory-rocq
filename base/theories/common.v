@@ -247,8 +247,34 @@ Definition k_edge_connected (G : sgraph) (k : nat) : Prop :=
 
 (** ** Subgraph containment *)
 
-(** [G] contains [H] as a (not necessarily induced) subgraph. *)
+(** [G] contains [H] as a (not necessarily induced) subgraph.
+
+    Contract: the HOST [G] comes first and the PATTERN [H] second (the corpus-local
+    [subgraph_of H G] copies take them the other way round).  [has_subgraph G H]
+    holds iff some injective map [H -> G] sends every edge of [H] to an edge of [G]
+    ([has_subgraphP]); non-edges of [H] may land on edges of [G].  So this is
+    ordinary containment: it is neither an induced copy ([induced_free], upstream
+    [isubgraph]), which also preserves non-edges ([has_subgraph_not_induced]), nor a
+    minor.  Upstream [subgraph] asks only for [hom_s], which constrains edges with
+    distinct images; injectivity and irreflexivity make that premise automatic, so
+    the characterization needs no guard.  Degenerate cases: every host contains the
+    empty pattern ([has_subgraph0], [has_subgraph_K0]); the empty host contains
+    exactly the empty patterns ([has_subgraph_K0_host]); a pattern never has more
+    vertices than its host ([has_subgraph_card]). *)
 Definition has_subgraph (G H : sgraph) : Prop := subgraph H G.
+
+(** The witness presentation of the corpus-local copies: an injective map that
+    preserves adjacency.  Unconditional. *)
+Lemma has_subgraphP (G H : sgraph) :
+  has_subgraph G H <->
+  exists f : H -> G, injective f /\ forall x y : H, x -- y -> f x -- f y.
+Proof.
+split=> [[f inj_f hom_f]|[f [inj_f hom_f]]].
+- exists f; split=> // x y xy.
+  have fxy : f x != f y by rewrite (inj_eq inj_f) (sg_edgeNeq xy).
+  exact: hom_f xy fxy.
+- by exists f => // x y xy _; exact: hom_f.
+Qed.
 
 (** [G] has no INDUCED subgraph isomorphic to [H] ("[H]-free").
 
@@ -564,6 +590,66 @@ Proof. by exists id. Qed.
 Lemma has_subgraph_Kn n (G : sgraph) : #|G| <= n -> has_subgraph 'K_n G.
 Proof. exact: sub_Kn. Qed.
 
+(** Containment is transitive. *)
+Lemma has_subgraph_trans (G H K : sgraph) :
+  has_subgraph G H -> has_subgraph H K -> has_subgraph G K.
+Proof.
+move=> /has_subgraphP[f [inj_f hom_f]] /has_subgraphP[g [inj_g hom_g]].
+apply/has_subgraphP; exists (f \o g); split; first exact: inj_comp.
+by move=> x y xy; apply: hom_f; exact: hom_g.
+Qed.
+
+(** A pattern never has more vertices than its host. *)
+Lemma has_subgraph_card (G H : sgraph) : has_subgraph G H -> #|H| <= #|G|.
+Proof. by case=> f inj_f _; exact: leq_card inj_f. Qed.
+
+(** Every host contains every empty pattern. *)
+Lemma has_subgraph0 (G H : sgraph) : #|H| = 0 -> has_subgraph G H.
+Proof.
+move=> H0; have no (x : H) : False.
+  by move/eqP: H0; rewrite -leqn0 leqNgt => /negP; apply; apply/card_gt0P; exists x.
+apply/has_subgraphP; exists (fun x => match no x with end).
+by split=> [x|x]; case: (no x).
+Qed.
+
+Lemma has_subgraph_K0 (G : sgraph) : has_subgraph G 'K_0.
+Proof. by apply: has_subgraph0; rewrite card_ord. Qed.
+
+(** The empty host contains exactly the empty patterns. *)
+Lemma has_subgraph_K0_host (H : sgraph) : has_subgraph 'K_0 H <-> #|H| = 0.
+Proof.
+split=> [/has_subgraph_card|/has_subgraph0 //].
+by rewrite card_ord leqn0 => /eqP.
+Qed.
+
+(** Deleting edges leaves a subgraph of the host (the identity embedding). *)
+Lemma has_subgraph_del_edge_set (G : sgraph) (F : {set {set G}}) :
+  has_subgraph G (del_edge_set G F).
+Proof.
+apply/has_subgraphP; exists (fun x : del_edge_set G F => x : G); split=> // x y.
+by rewrite del_edge_setE => /andP[].
+Qed.
+
+(** Ordinary containment is not induced containment: the two-vertex graph without
+    edges is a subgraph of [K_2], but no induced subgraph of [K_2] is isomorphic to
+    it, since the only two-vertex induced subgraph of [K_2] keeps its edge. *)
+Lemma has_subgraph_not_induced :
+  has_subgraph 'K_2 (del_edge_set 'K_2 [set [set: 'K_2]]) /\
+  induced_free 'K_2 (del_edge_set 'K_2 [set [set: 'K_2]]).
+Proof.
+split; first exact: has_subgraph_del_edge_set.
+have noE (x y : 'K_2) : ~~ @edge_rel (del_edge_set 'K_2 [set [set: 'K_2]]) x y.
+  rewrite del_edge_set1; have [->|xy] := eqVneq x y; first by rewrite sg_irrefl.
+  by rewrite eqEcard subsetT cards2 xy cardsT card_ord andbF.
+move=> S h.
+have cS : #|S| = 2 by rewrite -card_sig (card_bij (diso_v h)) card_ord.
+have ST : S = setT by apply/eqP; rewrite eqEcard subsetT cS cardsT card_ord.
+have a0 : (ord0 : 'K_2) \in S by rewrite ST inE.
+have a1 : (ord_max : 'K_2) \in S by rewrite ST inE.
+have := edge_diso h (Sub ord0 a0) (Sub ord_max a1).
+by rewrite (negbTE (noE _ _)).
+Qed.
+
 (** A graph has no induced copy of a strictly bigger graph (guard has teeth). *)
 Lemma induced_free_card (G H : sgraph) : #|G| < #|H| -> induced_free G H.
 Proof.
@@ -720,6 +806,9 @@ Proof. by move=> ac x; apply/negP => xx; move: (ac x x xx); rewrite connect0. Qe
     [del_edge_set0], [connected_del_edge_set0],
     [k_edge_connected1], [connected_K2], [k_edge_connected_K2],
     [not_k_edge_connected_K1], [has_subgraph_refl], [has_subgraph_Kn],
+    [has_subgraphP], [has_subgraph_trans], [has_subgraph_card], [has_subgraph0],
+    [has_subgraph_K0], [has_subgraph_K0_host], [has_subgraph_del_edge_set],
+    [has_subgraph_not_induced],
     [induced_free_inhabited], [induced_free_diso], [induced_free_card],
     [not_induced_free_self], [not_induced_free_pattern0], [induced_free_host0],
     [not_induced_free_clique], [induced_free_K1], [induced_free_Kn],
