@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X167 -- v2 spanning-tree polytope fixed-surface row *)
 
 From GTBase Require Export base.
+From GTBase Require Import spanning_trees.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -11,9 +12,7 @@ Unset Printing Implicit Defensive.
 Definition x167_embedded_in_fixed_surface (surface : nat) (G : sgraph) : Prop :=
   surface_embeddable surface G.
 
-Definition x167_spanning_tree (G : sgraph) (T : {set {set G}}) : Prop :=
-  T \subset fg_edges G /\
-  is_tree [set: fg_labelled_sgraph T].
+Definition x167_spanning_tree (G : sgraph) (T : {set {set G}}) : Prop := fg_spanning_tree T.
 
 Record x167_extension_system (G : sgraph) (facets : nat) := {
   x167_aux_dim : nat;

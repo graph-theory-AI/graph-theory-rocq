@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "family": "spanning-tree",
+  "primitive": {
+    "canonical_name": "GTBase.spanning_trees.fg_spanning_tree",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "spanning_tree"
+    ],
+    "source_definitions": [
+      "Cycle.conjectures.U6.spanning_tree",
+      "GTMisc.conjectures.X167.x167_spanning_tree",
+      "GTMisc.conjectures.X168.x168_spanning_tree"
+    ],
+    "consumers_remaining": 3,
+    "relation": "one contract for labelled simple graphs, by conversion: X167.x167_spanning_tree and X168.x168_spanning_tree (T \\subset fg_edges G /\\ is_tree [set: fg_labelled_sgraph T]: a set of valid edges of G whose labelled graph on the WHOLE vertex carrier of G, isolated vertices included, is an upstream tree) are GTBase.spanning_trees.fg_spanning_tree T. The subset guard stays part of the contract (the labelled-graph constructor retains every two-element member, including host nonedges, and ignores members that are not pairs; the subset guard rejects host nonedges), connectivity of the host follows, and the conventions are derived from upstream is_tree: the empty edge set spans 'K_0 (vacuously) and 'K_1, the single edge spans 'K_2, the triangle's full edge set, any disconnected host, and any host with at least two vertices and an isolated vertex are rejected. Deferred, distinct: Cycle.U6.spanning_tree (a multigraph EDGE carrier that is spanning-connected and acyclic; separate future family). Not sources of this family: the whole-graph tree wrappers of XE1 (definitionally is_tree), D2tur.tree_on / shortest_tree_on, U9.tree_contains_T, the directed trees of P9 / X2 and B9's path_tree.",
+    "semantic_classes": {
+      "labelled-edge-spanning-tree": {
+        "members": [
+          "GTMisc.conjectures.X167.x167_spanning_tree",
+          "GTMisc.conjectures.X168.x168_spanning_tree"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.spanning_trees.x167_spanning_tree_compat",
+          "GTMisc.migration.spanning_trees.x168_spanning_tree_compat"
+        ],
+        "note": "T \\subset fg_edges G /\\ is_tree [set: fg_labelled_sgraph T]: the body of fg_spanning_tree T, convertible. Their chains are frozen complete: the five-field Records x167/x168_extension_system (auxiliary dimension, inequality index, its cardinality bound, and the two linking fields concluding True, the documented defect of both BLOCKED rows, kept literal) with explicit witness transports in both directions, the existence wrappers, the two rows with every guard in order, and the complete C11+B18 X168 Original over C11's frozen minor-class body."
+      },
+      "multigraph-edge-carrier": {
+        "members": [
+          "Cycle.conjectures.U6.spanning_tree"
+        ],
+        "count": 1,
+        "verdict": "distinct representation",
+        "state": "deferred",
+        "certificates": [],
+        "note": "Cycle U6's spanning_tree T := spanning_connected T /\\ acyclic T on an mgraph edge set: an edge CARRIER of an undirected multigraph (connectivity of all vertices through uwalk-walks inside T, no circuit); loops and parallel edges are circuits there. A different representation from the labelled simple-graph contract; deferred to a separate future family (reuse Cycle.foundations.path_subgraphs.acyclic_edge_set)."
+      }
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.spanning_trees.fixed_surface_spanning_tree_polytope_linear_xc_statement_compat",
+      "GTMisc.migration.spanning_trees.minor_closed_spanning_tree_polytope_linear_xc_statement_compat",
+      "GTMisc.migration.spanning_trees.minor_closed_spanning_tree_polytope_linear_xc_statement_original_compat",
+      "GTMisc.migration.spanning_trees.x167_extension_system_compat",
+      "GTMisc.migration.spanning_trees.x167_spanning_tree_compat",
+      "GTMisc.migration.spanning_trees.x167_spanning_tree_polytope_xc_compat",
+      "GTMisc.migration.spanning_trees.x168_extension_system_compat",
+      "GTMisc.migration.spanning_trees.x168_spanning_tree_compat",
+      "GTMisc.migration.spanning_trees.x168_spanning_tree_polytope_xc_compat"
+    ],
+    "api_theorems": [
+      "GTBase.spanning_trees.fg_spanning_treeP",
+      "GTBase.spanning_trees.fg_spanning_treeI",
+      "GTBase.spanning_trees.fg_spanning_tree_sub",
+      "GTBase.spanning_trees.fg_spanning_tree_tree",
+      "GTBase.spanning_trees.fg_spanning_tree_forest",
+      "GTBase.spanning_trees.fg_spanning_tree_connected",
+      "GTBase.spanning_trees.fg_spanning_treeE",
+      "GTBase.spanning_trees.fg_edges_edge",
+      "GTBase.spanning_trees.fg_spanning_tree_valid",
+      "GTBase.spanning_trees.fg_spanning_tree_edge",
+      "GTBase.spanning_trees.fg_spanning_tree_cover",
+      "GTBase.spanning_trees.fg_spanning_tree_connectedG",
+      "GTBase.spanning_trees.fg_edges_Kn",
+      "GTBase.spanning_trees.fg_spanning_tree_K0",
+      "GTBase.spanning_trees.fg_spanning_tree_K1",
+      "GTBase.spanning_trees.fg_spanning_tree_K2",
+      "GTBase.spanning_trees.not_fg_spanning_tree_K3",
+      "GTBase.spanning_trees.not_fg_spanning_tree_K3_edge",
+      "GTBase.spanning_trees.not_fg_spanning_tree_two_isolated",
+      "GTBase.spanning_trees.not_fg_spanning_tree_singleton"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.treewidth",
+        "GraphTheory.core.checkpoint",
+        "GraphTheory.core.minor",
+        "GTBase.finite_graph",
+        "GTBase.path_trees",
+        "mathcomp.boot.finset",
+        "mathcomp.boot.fingraph"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "GraphTheory.core.sgraph.is_tree",
+      "note": "coq-graph-theory has is_forest, is_tree, is_forestb, connectedb, forestI, forest3 and connected_card_gt1 over a vertex set of an sgraph, and the complete graphs 'K_n, but no spanning-tree predicate for a labelled edge set; GTBase.finite_graph owns fg_edges, fg_labelled_sgraph and the bridge fg_edgesE : fg_edges G = E(G). The new public GTBase.spanning_trees is the focused adapter: fg_spanning_tree with its Boolean form and reflection, the subset / tree / forest / connectivity projections and introduction, the E(G) form, edge validity (every member is a pair of adjacent vertices), whole-carrier covering, host connectivity, and the groundings on 'K_0, 'K_1, 'K_2, the triangle, a missing vertex, two isolated vertices and a singleton member. Not re-exported by GTBase.base; X167 and X168 import it explicitly. No forest or graph constructor is added.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/spanning_trees.md",
+    "reviewed_by": "matching_scope",
+    "migration_spec": "meta/migration_reports/spanning_trees.spec.json",
+    "downstream_client": "base/theories/examples/spanning_trees.v",
+    "foundation_fidelity": "meta/foundation_fidelity/spanning-tree.json",
+    "reviewed_commit": "51f12006c0fb19943cd83a2d3de4b41444c18911",
+    "independent_review": "meta/migration_reviews/spanning_trees.md"
+  }
+}
