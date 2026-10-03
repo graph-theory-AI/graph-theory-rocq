@@ -143,19 +143,6 @@
       "note": "Edge from the live X227 row to its degeneracy-bounded part; proof and type unchanged."
     }
   ],
-  "distinct_variants": [
-    {
-      "qualified": "GTMisc.conjectures.X14.x14_subcubic",
-      "path": "graph-theory-misc/theories/conjectures/X14.v",
-      "name": "x14_subcubic",
-      "note": "pointwise upper bound <= 3, not an attained minimum"
-    },
-    {
-      "qualified": "GTMisc.conjectures.X114.x114_subcubic",
-      "path": "graph-theory-misc/theories/conjectures/X114.v",
-      "name": "x114_subcubic",
-      "note": "Delta <= 3, an upper bound"
-    }
-  ],
+  "distinct_variants": [],
   "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types of the frozen and live minima, strict dependency closures of the frozen rows and the complete #803 row, and the forced X227 proof consumers, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A12-min_degree/ (outside the repository)"
 }

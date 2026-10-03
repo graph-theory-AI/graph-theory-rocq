@@ -377,7 +377,8 @@
     }
   ],
   "known_stale_snapshots": {
-    "extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement": "A7 snapshot: A7 froze this row over its own frozen average-degree chain (and frozen public count fg_edge_count) but kept the live x180_multitasker_capacity_positive of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat, which composes this family's frozen X180Legacy.multitasker_capacity_positive."
+    "extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement": "A7 snapshot: A7 froze this row over its own frozen average-degree chain (and frozen public count fg_edge_count) but kept the live x180_multitasker_capacity_positive of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat, which composes this family's frozen X180Legacy.multitasker_capacity_positive.",
+    "graph-theory-misc/theories/migration/subcubic.v#X14Legacy.subcubic_matching_lower_bound_statement": "A14 snapshot: A14 froze this row over its own frozen pointwise subcubic bound but kept the live x14_matching of this family. Kept unchanged; the complete row is GTMisc.migration.subcubic.X14Original.subcubic_matching_lower_bound_statement, certified by subcubic_matching_lower_bound_statement_original_compat, which composes this family's frozen Legacy.x14_matching (over Legacy.x14_edge_set) and reuses its certificate."
   },
   "cross_module_consumers": [
     {

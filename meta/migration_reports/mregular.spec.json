@@ -310,18 +310,6 @@
       "path": "base/theories/base.v",
       "name": "regular",
       "note": "simple-graph regularity over N(v); not a multigraph incidence count"
-    },
-    {
-      "qualified": "GTMisc.conjectures.X14.x14_subcubic",
-      "path": "graph-theory-misc/theories/conjectures/X14.v",
-      "name": "x14_subcubic",
-      "note": "simple-graph pointwise upper bound <= 3"
-    },
-    {
-      "qualified": "GTMisc.conjectures.X114.x114_subcubic",
-      "path": "graph-theory-misc/theories/conjectures/X114.v",
-      "name": "x114_subcubic",
-      "note": "simple-graph Delta <= 3"
     }
   ],
   "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types of the frozen and live contracts, strict dependency closures of the frozen chains and declarations, and the theorem types of the forced proof consumers, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A13-mregular/ (outside the repository)"
