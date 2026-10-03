@@ -56,6 +56,7 @@
 
 From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
+From GTBase Require Import triangles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -72,12 +73,12 @@ Definition is_P3 (G : sgraph) (S : {set G}) : Prop :=
 
 (** A triangle: a 3-clique. *)
 Definition is_triangle (G : sgraph) (T : {set G}) : Prop :=
-  clique T /\ #|T| = 3.
+  triangle T.
 
 (** The (unordered) edge set of a vertex set [T]: its 2-element subsets.  For a
     clique these are exactly the edges spanned by [T]. *)
 Definition tri_edges (G : sgraph) (T : {set G}) : {set {set G}} :=
-  [set e : {set G} | (e \subset T) && (#|e| == 2)].
+  raw_pairs T.
 
 (** The whole-graph edge set (each unordered adjacent pair). *)
 Definition edge_setG (G : sgraph) : {set {set G}} :=

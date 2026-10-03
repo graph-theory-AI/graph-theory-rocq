@@ -9,6 +9,7 @@ From mathcomp Require Import all_boot.
 From GraphTheory Require Import sgraph minor.
 From GTBase Require Import base.
 From GTBase Require Import clique_counts.
+From GTBase Require Import triangles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -105,7 +106,7 @@ Definition x4_degree_sum (G : sgraph) (S : {set G}) : nat :=
   \sum_(v in S) #|N(v)|.
 
 Definition x4_triangle_set (G : sgraph) (T : {set G}) : bool :=
-  (#|T| == 3) && cliqueb T.
+  triangle_set T.
 
 Definition x4_triangle_count (G : sgraph) : nat :=
   clique_count_size G 3.
