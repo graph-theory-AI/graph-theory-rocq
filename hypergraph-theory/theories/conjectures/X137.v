@@ -1,6 +1,7 @@
 (** * Hypergraph.conjectures.X137 -- v2 Erdos-Rado sunflower row *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypergraph_uniformity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X137 vocabulary ***********************************************)
 
 Definition x137_uniform (T : finType) (F : {set {set T}}) (r : nat) : Prop :=
-  forall A : {set T}, A \in F -> #|A| = r.
+  uniform_family F r.
 
 Definition x137_sunflower (T : finType) (petals : seq {set T}) : Prop :=
   exists core : {set T},

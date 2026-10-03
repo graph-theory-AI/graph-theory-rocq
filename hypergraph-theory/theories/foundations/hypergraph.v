@@ -45,6 +45,7 @@
     Every lemma below is [Qed]-closed and axiom-free. *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypergraph_uniformity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -57,9 +58,9 @@ Implicit Types (E : {set {set T}}) (e S : {set T}) (v : T).
 (** ** Shape ************************************************************** *)
 
 (** [k]-uniformity: every hyperedge has exactly [k] vertices. *)
-Definition hg_uniform E (k : nat) : Prop := forall e, e \in E -> #|e| = k.
+Definition hg_uniform E (k : nat) : Prop := uniform_family E k.
 
-Definition hg_uniformb E (k : nat) : bool := [forall e in E, #|e| == k].
+Definition hg_uniformb E (k : nat) : bool := uniform_familyb E k.
 
 Lemma hg_uniformP E k : reflect (hg_uniform E k) (hg_uniformb E k).
 Proof.

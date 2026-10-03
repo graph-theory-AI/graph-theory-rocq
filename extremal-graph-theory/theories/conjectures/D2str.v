@@ -55,6 +55,7 @@
         party near-complete powers — see the Row 5 comment). *)
 
 From GTBase Require Import base induced_cycles.
+From GTBase Require Import hypergraph_uniformity.
 From mathcomp Require Import all_algebra.
 
 Import GRing.Theory Num.Theory.
@@ -346,7 +347,7 @@ Definition nearly_spanning_regular_subgraphs_statement : Prop :=
       [b·r^r·rainbow_i + a·r^r·m_i ≥ b·r!·m_i]. *)
 
 Definition uniform_hypergraph (T : finType) (E : {set {set T}}) (r : nat) : Prop :=
-  forall e : {set T}, e \in E -> #|e| = r.
+  uniform_family E r.
 
 (** A hyperedge meets every one of the [r] parts (a rainbow / transversal edge). *)
 Definition rainbow (T : finType) (r : nat) (part : T -> 'I_r) (e : {set T}) : bool :=
