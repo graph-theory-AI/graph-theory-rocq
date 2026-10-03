@@ -27,8 +27,12 @@
         ],
         "count": 3,
         "verdict": "equivalent",
-        "certificate": "GTBase.common.edges_between",
-        "note": "#|[set p : G * G | [&& p.1 \\in A, p.2 \\in B & p.1 -- p.2]]| (X223: ((p.1 \\in A) && (p.2 \\in B)) && (p.1 -- p.2), equal by andbA); arbitrary, possibly overlapping A and B"
+        "note": "#|[set p : G * G | [&& p.1 \\in A, p.2 \\in B & p.1 -- p.2]]| (X223: ((p.1 \\in A) && (p.2 \\in B)) && (p.1 -- p.2), equal by andbA); arbitrary, possibly overlapping A and B; canonical GTBase.common.edges_between",
+        "certificates": [
+          "Extremal.migration.edges_between.x118_edges_between_compat",
+          "Extremal.migration.edges_between.x120_edges_between_compat",
+          "Extremal.migration.edges_between.x223_edges_between_compat"
+        ]
       },
       "ordered-nonedge-pairs": {
         "members": [
@@ -36,8 +40,8 @@
         ],
         "count": 1,
         "verdict": "equivalent",
-        "certificate": "GTBase.common.nonedges_between",
-        "note": "#|[set p : G * G | [&& p.1 \\in A, p.2 \\in B & ~~ (p.1 -- p.2)]]|, diagonal pairs of A :&: B included; agrees with the complement-edge count on disjoint sets (nonedges_between_compl)"
+        "certificate": "Extremal.migration.edges_between.x120_nonedges_between_compat",
+        "note": "#|[set p : G * G | [&& p.1 \\in A, p.2 \\in B & ~~ (p.1 -- p.2)]]|, diagonal pairs of A :&: B included; agrees with the complement-edge count on disjoint sets (nonedges_between_compl); canonical GTBase.common.nonedges_between"
       }
     },
     "distinct_variants": {
