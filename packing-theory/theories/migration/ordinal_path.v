@@ -16,7 +16,7 @@
     ([GTBase.common.induced_free_diso]).  Every guard, quantifier order, bound and natural-number
     inequality of the rows is kept exactly; no statement, doc block, manifest row or status changes. *)
 
-From GTBase Require Import base path_graphs.
+From GTBase Require Import stable_sets base path_graphs.
 From Packing.conjectures Require Import X15 X18 X226.
 
 Set Implicit Arguments.
@@ -114,7 +114,9 @@ Proof.
 have E (u v : Legacy.x18_path_graph n) :
   (u -- v) = ((u : x18_path_graph n) -- (v : x18_path_graph n)).
   exact: x18_path_rel_compat.
-by split=> ind u v uS vS uv; apply: (ind u v uS vS); move: uv; rewrite E.
+rewrite /x18_independent_set.
+by split=> /stable_noedgeP ind; apply/stable_noedgeP => u v uS vS uv;
+  apply: (ind u v uS vS); move: uv; rewrite E.
 Qed.
 
 Lemma path_partition_independent_set_balance_statement_compat :

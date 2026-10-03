@@ -60,7 +60,8 @@
     "",
     "Kernel evidence, independent of this textual report, from `Print All Dependencies`: no frozen object reaches a live helper of the family or the canonical constants; the X170 Original reaches C9's frozen `X170Legacy.x170_chi_bounded` and the frozen P_4 relation and no live `x170_chi_bounded`; each live row reaches its live helpers and the canonical. Section-parameter probes check the frozen and live Hom declarations at type forall n : nat, 'I_n -> 'I_n -> bool and nat -> sgraph. Summary: /srv/graph-theory-rocq/coordination/evidence/B21-ordinal_path/print_all_dependencies_summary.txt.",
     "",
-    "Baseline 9921abb is the announced B20 pin (unmerged stack 4b63976 > 2981122 > cc78377 > 7848021 > 51f1200 > d2a23f1 > 6de6ce3 > 9921abb); the eight context files (four sources, two groundings, implications_X226 and C9's certificate) are byte-identical to 6de6ce3 there, so no private union is needed. No statement text, doc block, manifest row, leg state or status changes (checked below)."
+    "Baseline 9921abb is the announced B20 pin (unmerged stack 4b63976 > 2981122 > cc78377 > 7848021 > 51f1200 > d2a23f1 > 6de6ce3 > 9921abb); the eight context files (four sources, two groundings, implications_X226 and C9's certificate) are byte-identical to 6de6ce3 there, so no private union is needed. No statement text, doc block, manifest row, leg state or status changes (checked below).",
+    "Combined A20 history: the initial/private-baseline completeness claims above are relative to this family. The new A20 X18Original closes both raw graph construction and raw independence, preserving all earlier frozen bodies."
   ],
   "frozen": [
     {
@@ -314,7 +315,8 @@
     }
   ],
   "known_stale_snapshots": {
-    "chromatic-theory/theories/migration/chi_bounded_classes.v#X170StatementsLegacy.oriented_P4_forb_chi_bounded_statement": "C9 (chi-bounded) per-row snapshot: that family froze only its chi-boundedness in this row, so this copy still calls the live x170_forb_oriented_P4_family, whose P_4 relation B21 migrates (the live chain is the frozen chain by conversion). Kept byte-exact; C9's certificate stays true. The complete pre-C9/B21 row is Chromatic.migration.ordinal_path.X170Original.oriented_P4_forb_chi_bounded_statement (frozen P_4 chain over C9's frozen X170Legacy.x170_chi_bounded), certified end to end by oriented_P4_forb_chi_bounded_statement_original_compat."
+    "chromatic-theory/theories/migration/chi_bounded_classes.v#X170StatementsLegacy.oriented_P4_forb_chi_bounded_statement": "C9 (chi-bounded) per-row snapshot: that family froze only its chi-boundedness in this row, so this copy still calls the live x170_forb_oriented_P4_family, whose P_4 relation B21 migrates (the live chain is the frozen chain by conversion). Kept byte-exact; C9's certificate stays true. The complete pre-C9/B21 row is Chromatic.migration.ordinal_path.X170Original.oriented_P4_forb_chi_bounded_statement (frozen P_4 chain over C9's frozen X170Legacy.x170_chi_bounded), certified end to end by oriented_P4_forb_chi_bounded_statement_original_compat.",
+    "packing-theory/theories/migration/stable_sets.v#X18Legacy.path_partition_independent_set_balance_statement": "A20's initial per-row snapshot freezes independence but intentionally retains the live ordinal graph. Its body is preserved. The complete Packing.migration.stable_sets.X18Original.path_partition_independent_set_balance_statement combines B21 raw graph/scaffolding and A20 raw independence, with the same ordinal carrier/partition/set/budgets. B21's earlier partial snapshot remains unchanged; only its independence transport proof uses the public stable_noedgeP view after A20."
   },
   "cross_module_consumers": [
     {

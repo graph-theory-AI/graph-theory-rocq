@@ -21,7 +21,7 @@ Definition x29_complement (G : sgraph) : sgraph :=
   compl G.
 
 Definition x29_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> ~~ (x -- y).
+  stable S.
 
 Definition x29_clique_cover (G : sgraph) (C : seq {set G}) : Prop :=
   (forall K : {set G}, K \in C -> clique K) /\

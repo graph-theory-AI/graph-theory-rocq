@@ -47,7 +47,7 @@ Definition x3_rainbow_hole_run
     x3_hole c /\ s <= size c /\ uniq (map col (take s (rot r c))).
 
 Definition x3_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall u v : G, u \in S -> v \in S -> u -- v -> False.
+  stable S.
 
 Definition x3_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.

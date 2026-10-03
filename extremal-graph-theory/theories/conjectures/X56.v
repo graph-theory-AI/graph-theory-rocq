@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X56 vocabulary ************************************************)
 
 Definition x56_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x -- y -> False.
+  stable S.
 
 Definition x56_homogeneous_set (G : sgraph) (S : {set G}) : Prop :=
   clique S \/ x56_stable_set S.

@@ -7,7 +7,7 @@
     that four and seven colors, respectively, are optimal. *)
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import digraph sgraph coloring dom.
-From GTBase Require Import base.
+From GTBase Require Import base stable_sets.
 From Chromatic.conjectures Require Import XE1 XE2 X7.
 From Chromatic.applications.cochromatic_gap Require Import mycielski_gap seed_certificates fiber.
 Set Implicit Arguments.
@@ -55,7 +55,7 @@ Lemma seed_co_independent_check : all (fun x => all (fun y =>
 Proof. vm_compute. reflexivity. Qed.
 Lemma seed_co_independent : independent_color seed_co_color seed_independent_index.
 Proof.
-move=> x y; rewrite !inE /seed_co_color /seed_independent_index -!val_eqE /= => hx hy hxy.
+apply/stable_noedgeP => x y; rewrite !inE /seed_co_color /seed_independent_index -!val_eqE /= => hx hy hxy.
 have h := implyP (seed_pairs seed_co_independent_check x y).
 have ha : (seed_co_nat (val x) == 3) && (seed_co_nat (val y) == 3) by rewrite hx hy.
 exact: (negP (h ha) hxy).
@@ -86,7 +86,7 @@ Proof.
 case=> hA; first exact: seed_cliques_bounded.
 have hs : stable A.
   apply/stableP=> x y hx hy; apply/negP=> hxy.
-  exact: hA x y hx hy hxy.
+  exact: (elimT (stable_noedgeP A) hA) x y hx hy hxy.
 have hh := seed_stable_bounded hs.
 apply: leq_trans hh _; by [].
 Qed.
