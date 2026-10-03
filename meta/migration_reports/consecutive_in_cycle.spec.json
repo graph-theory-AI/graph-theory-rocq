@@ -67,7 +67,9 @@
     "",
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of the eighteen frozen statements and the two originals contains no live helper or chain declaration of this family and neither canonical, while each live statement reaches the canonical and its alias (/srv/graph-theory-rocq/coordination/evidence/B4-consecutive_in_cycle/print_all_dependencies_summary.txt, with the probe and the full output beside it); the Section scaffolding of D2str's frozen copy is checked verbatim beside it.",
     "",
-    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented limitations stay verbatim, including erdos:1091's unbounded function, X4's five-tuple count, XE1's negative and positive chord clauses, XE2's strict bounds and truncated subtraction, X27/X42/X220 quantifier order and uniformity gaps, and the solved/open statuses."
+    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented limitations stay verbatim, including erdos:1091's unbounded function, X4's five-tuple count, XE1's negative and positive chord clauses, XE2's strict bounds and truncated subtraction, X27/X42/X220 quantifier order and uniformity gaps, and the solved/open statuses.",
+    "",
+    "Later migration: Cycle XE1 `xe1_cycle_edges`, listed here as a separate contract (a set of edges), was migrated by B11 (family cycle-edges) onto `GTBase.walks_paths.seq_cycle_graph_edge_set`, which reads its cyclic adjacency through this family's `seq_cyclic_consecutiveb`; it is no longer an untouched distinct variant."
   ],
   "frozen": [
     {
@@ -1001,12 +1003,6 @@
       "path": "packing-theory/theories/conjectures/XE1.v",
       "name": "xe1_induced_cycle",
       "note": "higher predicate embedding a cyclic-adjacency test in an induced-cycle definition; not a standalone alias; separate later review, untouched"
-    },
-    {
-      "qualified": "Cycle.conjectures.XE1.xe1_cycle_edges",
-      "path": "cycle-theory/theories/conjectures/XE1.v",
-      "name": "xe1_cycle_edges",
-      "note": "set-of-edges constructor of a cycle; a different representation, untouched"
     },
     {
       "qualified": "Cycle.conjectures.U6.cyc_pairs",

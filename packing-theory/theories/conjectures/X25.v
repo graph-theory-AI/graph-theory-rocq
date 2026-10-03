@@ -18,7 +18,7 @@ Definition x25_perfect_matching (G : sgraph) (M : {set {set G}}) : Prop :=
   perfect_matching M.
 
 Definition x25_cycle_edge_seq (G : sgraph) (c : seq G) : seq {set G} :=
-  map (fun p : G * G => [set p.1; p.2]) (zip c (rot 1 c)).
+  seq_cycle_edge_list c.
 
 Definition x25_hamiltonian_edge_set (G : sgraph) (F : {set {set G}}) : Prop :=
   exists c : seq G,

@@ -68,11 +68,6 @@
         "Chromatic.conjectures.X187.x187_triangle_free",
         "Chromatic.conjectures.X192.x192_triangle_free"
       ],
-      "123180971543b2488699564751e31753114798021bed6270d2967aa62f7b259a": [
-        "Cycle.conjectures.X24.x24_cycle_edge_seq",
-        "Cycle.conjectures.X9.x9_cycle_edges",
-        "Packing.conjectures.X25.x25_cycle_edge_seq"
-      ],
       "142e18fdfb184f57531f08c7bb5eb8c998f444ba5483d032c5ee5e7950f9be97": [
         "Digraph.conjectures.X2.x2_arc_stable",
         "Digraph.conjectures.classic_core.stable"
@@ -268,6 +263,11 @@
         "Chromatic.conjectures.X81.x81_orientation_of",
         "GTMisc.conjectures.X82.x82_orientation_of"
       ],
+      "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f": [
+        "Cycle.conjectures.X24.x24_cycle_edge_seq",
+        "Cycle.conjectures.X9.x9_cycle_edges",
+        "Packing.conjectures.X25.x25_cycle_edge_seq"
+      ],
       "6743df6930d375b3130d033d4f36b1d88dba52ee5c52d107b4440baa0d4c832e": [
         "Chromatic.conjectures.XE2.xe2_sqrt_lower",
         "Extremal.conjectures.XE1.xe1_sqrt_floor"
@@ -411,14 +411,14 @@
         "Cycle.conjectures.X212.x212_linear_forest_colour",
         "Topological.conjectures.X23.x23_linear_forest_colour"
       ],
-      "a3fa0d9c7888e1c938addcad4b7fa092f6fccfdef5d1a268de8341b1959dad46": [
-        "Hamilton.conjectures.U2.hamiltonian_cycle",
-        "Packing.conjectures.U9.hamiltonian_cycleG"
-      ],
-      "a5a0bcac8a03894a527aa321009280c8b91e83d42ed1d85810db9dab0ee97376": [
+      "a3c49a1cade5ef66d3da853c577f0329734bd757e37f4ec46fa5db33e999ece1": [
         "Hamilton.conjectures.U2.cycle_edges",
         "Hamilton.conjectures.X211.x211_cycle_edges",
         "Packing.conjectures.U9.cycle_edgesG"
+      ],
+      "a3fa0d9c7888e1c938addcad4b7fa092f6fccfdef5d1a268de8341b1959dad46": [
+        "Hamilton.conjectures.U2.hamiltonian_cycle",
+        "Packing.conjectures.U9.hamiltonian_cycleG"
       ],
       "a66f999dfd11a06c589e43582d3da7902d0d6121d92de23becbfdc43eb5d6f55": [
         "Extremal.conjectures.XE1.xe1_hypercube",
@@ -14271,9 +14271,9 @@
       "signature_shape_hash": "09910b24dbbb849a6748d7e5afdcd2ea56e4e35c6bdc5ea764dbfcd21cf17310"
     },
     {
-      "body_hash": "123180971543b2488699564751e31753114798021bed6270d2967aa62f7b259a",
-      "body_shape_hash": "123180971543b2488699564751e31753114798021bed6270d2967aa62f7b259a",
-      "declaration_hash": "cde5e34a20b9f82ada12971d3e49884d03118cfb244204e067bccc6f2f06b278",
+      "body_hash": "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f",
+      "body_shape_hash": "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f",
+      "declaration_hash": "068980e71ff6e21b75120290e3d1cd4f659cfa7e6e2b04d2ec87665bcbe69641",
       "direct_consumers": [
         "Cycle.conjectures.X24.x24_rainbow_cycle"
       ],
@@ -14390,9 +14390,9 @@
       "signature_shape_hash": "4efb584da06ad8a83a527b97108d055474beb96dccc05ca26ea26b6c254ef1e4"
     },
     {
-      "body_hash": "123180971543b2488699564751e31753114798021bed6270d2967aa62f7b259a",
-      "body_shape_hash": "123180971543b2488699564751e31753114798021bed6270d2967aa62f7b259a",
-      "declaration_hash": "c69f98734944136ab38e6798371ff5435ee4260dd37c244de4a61446d550acd2",
+      "body_hash": "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f",
+      "body_shape_hash": "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f",
+      "declaration_hash": "032b8c715ed6f2663fb58c3517dc90fb1b6c1d4c3b01add158a8338df4a03dd5",
       "direct_consumers": [
         "Cycle.conjectures.X9.x9_cycle_incident_edges_properly_coloured"
       ],
@@ -14531,9 +14531,9 @@
       "signature_shape_hash": "4efb584da06ad8a83a527b97108d055474beb96dccc05ca26ea26b6c254ef1e4"
     },
     {
-      "body_hash": "b5eeaf6bfcbbb0f355af1a0b9100965472ce5ef2cff17e5743aa40ffe633c52c",
-      "body_shape_hash": "b5eeaf6bfcbbb0f355af1a0b9100965472ce5ef2cff17e5743aa40ffe633c52c",
-      "declaration_hash": "079d1d364c788d7581be21a1986ba4872b801685ff3199a7d5a849934423b940",
+      "body_hash": "c94e39b3e645cacf7041369901834d83e31531de9fd884b0afa55dc50be2bf2f",
+      "body_shape_hash": "c94e39b3e645cacf7041369901834d83e31531de9fd884b0afa55dc50be2bf2f",
+      "declaration_hash": "b6b7d4eb170c3068ebeffb8998457f150e93a34e45b90b413b73ff7beff6d896",
       "direct_consumers": [
         "Cycle.conjectures.XE1.xe1_cycle_or_edge_piece"
       ],
@@ -14557,7 +14557,7 @@
         "Cycle.conjectures.XE1.xe1_cycle_or_edge_piece"
       ],
       "kind": "Definition",
-      "line": 19,
+      "line": 14,
       "local_dependencies": [],
       "name": "xe1_cycle",
       "normalized_name": "cycle",
@@ -14576,7 +14576,7 @@
         "Cycle.conjectures.XE1.erdos_184_statement"
       ],
       "kind": "Definition",
-      "line": 22,
+      "line": 17,
       "local_dependencies": [
         "xe1_cycle",
         "xe1_cycle_edges",
@@ -14599,7 +14599,7 @@
         "Cycle.conjectures.XE1.erdos_184_statement"
       ],
       "kind": "Definition",
-      "line": 26,
+      "line": 21,
       "local_dependencies": [],
       "name": "xe1_pairwise_edge_disjoint",
       "normalized_name": "pairwise_edge_disjoint",
@@ -14618,7 +14618,7 @@
         "Cycle.conjectures.XE1.erdos_184_statement"
       ],
       "kind": "Definition",
-      "line": 30,
+      "line": 25,
       "local_dependencies": [
         "xe1_edge_set"
       ],
@@ -40596,9 +40596,9 @@
       "signature_shape_hash": "96ccf4e41e7654fa43da13d3b044e6d3d75975a8210a8bff5e4396940d45fc54"
     },
     {
-      "body_hash": "61a3afcc97ce82d01948b2b956d8a08d914cae1603a4b7f0d94200e2b423a205",
-      "body_shape_hash": "61a3afcc97ce82d01948b2b956d8a08d914cae1603a4b7f0d94200e2b423a205",
-      "declaration_hash": "c78ec7abead4c6f9f5cdaae3dc965c0f83c82b52c8223528bdc2d30b118c0c62",
+      "body_hash": "31bbe1b7c3e332e48fdc42181f7b769f01dce4909532122db1b3ffc057655fba",
+      "body_shape_hash": "31bbe1b7c3e332e48fdc42181f7b769f01dce4909532122db1b3ffc057655fba",
+      "declaration_hash": "6dfb83482ac9819b4452d52835e577ea1699830fcd4aa08d7e7e7671bf41554b",
       "direct_consumers": [
         "GTMisc.conjectures.X216.x216_second_hamilton_output"
       ],
@@ -43478,9 +43478,9 @@
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
-      "body_hash": "a5a0bcac8a03894a527aa321009280c8b91e83d42ed1d85810db9dab0ee97376",
-      "body_shape_hash": "a5a0bcac8a03894a527aa321009280c8b91e83d42ed1d85810db9dab0ee97376",
-      "declaration_hash": "0f0a952e1d40911b2aa38659ee86731a588baa109002a8b25f6f534ccfab0461",
+      "body_hash": "a3c49a1cade5ef66d3da853c577f0329734bd757e37f4ec46fa5db33e999ece1",
+      "body_shape_hash": "a3c49a1cade5ef66d3da853c577f0329734bd757e37f4ec46fa5db33e999ece1",
+      "declaration_hash": "28dc6e2ae1b4f1d0f2290ef00790a7e560b58a80942f69c0e22cca716716449f",
       "direct_consumers": [
         "Hamilton.conjectures.U2.four_connected_graphs_are_not_uniquely_hamiltonian_statement",
         "Hamilton.conjectures.U2.hamilton_decomposition_into_two",
@@ -43906,9 +43906,9 @@
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
-      "body_hash": "a5a0bcac8a03894a527aa321009280c8b91e83d42ed1d85810db9dab0ee97376",
-      "body_shape_hash": "a5a0bcac8a03894a527aa321009280c8b91e83d42ed1d85810db9dab0ee97376",
-      "declaration_hash": "2796a6886d6c8a42a6805890384e0f5b6963612a8ea1c86d8127e88b0d178831",
+      "body_hash": "a3c49a1cade5ef66d3da853c577f0329734bd757e37f4ec46fa5db33e999ece1",
+      "body_shape_hash": "a3c49a1cade5ef66d3da853c577f0329734bd757e37f4ec46fa5db33e999ece1",
+      "declaration_hash": "22d23cb68f6f28a11f633c344e704dfb092c41ab623c5ecf110cc53e045470a2",
       "direct_consumers": [
         "Hamilton.conjectures.X211.x211_hamilton_cycle_edge_sets"
       ],
@@ -50841,9 +50841,9 @@
       "signature_shape_hash": "ebc792f58eb61b1c7502cdd3b5bf7abb8eb31fa2fa0fd2ebc673224f09fd2c39"
     },
     {
-      "body_hash": "a5a0bcac8a03894a527aa321009280c8b91e83d42ed1d85810db9dab0ee97376",
-      "body_shape_hash": "a5a0bcac8a03894a527aa321009280c8b91e83d42ed1d85810db9dab0ee97376",
-      "declaration_hash": "bd7342096c5e8dc4ea37a96ed7187a298f475cef306f223f6f697fcd6ea8f65c",
+      "body_hash": "a3c49a1cade5ef66d3da853c577f0329734bd757e37f4ec46fa5db33e999ece1",
+      "body_shape_hash": "a3c49a1cade5ef66d3da853c577f0329734bd757e37f4ec46fa5db33e999ece1",
+      "declaration_hash": "a5f08cc496bca475c9a182550ea872e29f41ed99c466f3332bdd55474b8affc7",
       "direct_consumers": [
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
@@ -52510,9 +52510,9 @@
       "signature_shape_hash": "1e7b7313f547a746846002552b03cae91575ee2869388a66ceab454dc3074917"
     },
     {
-      "body_hash": "123180971543b2488699564751e31753114798021bed6270d2967aa62f7b259a",
-      "body_shape_hash": "123180971543b2488699564751e31753114798021bed6270d2967aa62f7b259a",
-      "declaration_hash": "17ec5b339c0c3d650105c5af3102b75bf2b7458b5785f270a5195f5a317e25a4",
+      "body_hash": "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f",
+      "body_shape_hash": "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f",
+      "declaration_hash": "2d20fd668f5e6ff4c2808d1a435d2a95a1815d7058c55c43533b09b0e4962025",
       "direct_consumers": [
         "Packing.conjectures.X25.x25_hamiltonian_edge_set"
       ],
