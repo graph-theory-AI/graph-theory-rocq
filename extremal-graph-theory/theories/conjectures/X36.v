@@ -13,7 +13,7 @@ Definition x36_edge_set (G : sgraph) : {set {set G}} :=
 
 Definition x36_degree_in_edge_set
     (G : sgraph) (F : {set {set G}}) (v : G) : nat :=
-  #|[set e in F | v \in e]|.
+  incidence_degree F v.
 
 Definition x36_nonempty_k_divisible_subgraph (G : sgraph) (k : nat) : Prop :=
   exists F : {set {set G}},

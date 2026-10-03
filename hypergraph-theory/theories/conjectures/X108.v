@@ -13,7 +13,7 @@ Definition x108_uniform (T : finType) (E : {set {set T}}) (r : nat) : Prop :=
 
 Definition x108_degree_in
     (T : finType) (E : {set {set T}}) (W : {set T}) (v : T) : nat :=
-  #|[set e in E | (v \in e) && (e \subset W)]|.
+  incidence_degree [set e in E | e \subset W] v.
 
 Definition x108_d_degenerate (T : finType) (E : {set {set T}}) (d : nat) : Prop :=
   forall W : {set T},

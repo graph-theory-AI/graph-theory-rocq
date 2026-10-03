@@ -1,0 +1,204 @@
+{
+  "family": "triangle-free",
+  "canonical_name": "GTBase.base.triangle_free",
+  "canonical_short_name": "triangle_free",
+  "relation": "simple-graph triangle-freeness: Chromatic X132/X187/X192 xNNN_triangle_free G := girth_geq G 4 equals GTBase.base.triangle_free G (no three mutually adjacent vertices) by the unconditional bridge GTBase.base.girth_geq4_equiv_triangle_free, not a conversion; the 2 < size c guard of girth_geq is what makes it hold. The bridge and its two support lemmas moved with their proofs from Topological.foundations.girth, which keeps them under their qualified names.",
+  "baseline_commit": "f52251a96beabaef4c9005e8dd9a9a29c4cca17c",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "topological-graph-theory": "Topological"
+  },
+  "certificate_files": [
+    "base/theories/base.v",
+    "chromatic-theory/theories/migration/triangle_free.v",
+    "chromatic-theory/theories/migration/proper_colouring.v",
+    "chromatic-theory/theories/migration/minor_classes.v",
+    "topological-graph-theory/theories/foundations/girth.v"
+  ],
+  "extra_certificates": [
+    "GTBase.base.triangle_ucycle",
+    "GTBase.base.ucycle3_triangle",
+    "GTBase.base.girth_geq4_equiv_triangle_free",
+    "Topological.foundations.girth.triangle_ucycle",
+    "Topological.foundations.girth.ucycle3_triangle",
+    "Topological.foundations.girth.girth_geq4_equiv_triangle_free"
+  ],
+  "summary": [
+    "Batch A, family A15 (simple-graph triangle-freeness), on the fixed A14 pin f52251a. The existing canonical GTBase.base.triangle_free G := forall x y z : G, x -- y -> y -- z -> z -- x -> False is unchanged; no predicate is added. Chromatic X132/X187/X192 each wrote triangle-freeness as girth_geq G 4; the three helpers now unfold to triangle_free G. The equivalence is the existing proof of Topological.foundations.girth.girth_geq4_equiv_triangle_free (with triangle_ucycle and ucycle3_triangle), moved unchanged into GTBase.base after triangle_free; the Topological lemmas keep their qualified names and statements and delegate to base (no file imports that module). The independent bridges Chromatic.grounding_U8.triangle_free_girth and Extremal.implications_X13.girth_geq4_triangle_free (e063/e075) keep their own proofs and types. The genuine-cycle guard 2 < size c of girth_geq is untouched and is exactly what the bridge needs; the empty, one- and two-vertex and disconnected cases need no guard. Statements that already say girth_geq G 4 or quantify triples inline (X138/X150/X173/X219, U8) are statement text and stay.",
+    "",
+    "Frozen verbatim at f52251a: the three helpers, X192's chain x192_polytime_additive_chromatic_approx and the whole rows X132 dvorak_norin_postle_planar_list_flexibility_statement (one p/q with 0 < p <= q for the 5/4/3 list cases, girth_geq G 5 kept), X187 planar_triangle_free_request_graph_fraction_statement (disproved; planarity, disjoint degree-two positive-weight request sets, exact cross-multiplied fraction; empty request sets and zero totals stay possible) and X192 triangle_free_minor_closed_chromatic_additive_approx_statement (alpha before the class, excluded-minor witness only). X192's chain bridge reuses the same program and polynomial-cost proof in both directions and converts only the triangle-free domain conjunct; both decoded-output bounds are untouched and no extensionality is used. Complete rows: X187 (text at C5's baseline a6db537) over this family's frozen helper and C5's frozen proper 3-colouring; X192 (text at C11's baseline 6e1a1c4) over C11's frozen excluded-minor class and this family's frozen chain. Each complete bridge converts the A15 pieces and reuses the earlier certificate.",
+    "",
+    "History: C5's X187Legacy row and C11's Legacy X192 row keep the live names byte-for-byte and are documented below; A15's per-row copies keep C5's live proper colouring and C11's live class and are documented reciprocally in those specs. Statement doc blocks are unchanged. The arbitrary-relation XE2 predicate and the three Digraph triangle variants stay distinct."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X132.x132_triangle_free",
+      "path": "chromatic-theory/theories/conjectures/X132.v",
+      "name": "x132_triangle_free",
+      "frozen_path": "chromatic-theory/theories/migration/triangle_free.v",
+      "frozen": "Legacy.x132_triangle_free",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.triangle_free.x132_triangle_free_compat",
+      "live_unfolds_to": "triangle_free G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X187.x187_triangle_free",
+      "path": "chromatic-theory/theories/conjectures/X187.v",
+      "name": "x187_triangle_free",
+      "frozen_path": "chromatic-theory/theories/migration/triangle_free.v",
+      "frozen": "Legacy.x187_triangle_free",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.triangle_free.x187_triangle_free_compat",
+      "live_unfolds_to": "triangle_free G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X192.x192_triangle_free",
+      "path": "chromatic-theory/theories/conjectures/X192.v",
+      "name": "x192_triangle_free",
+      "frozen_path": "chromatic-theory/theories/migration/triangle_free.v",
+      "frozen": "Legacy.x192_triangle_free",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.triangle_free.x192_triangle_free_compat",
+      "live_unfolds_to": "triangle_free G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X132.dvorak_norin_postle_planar_list_flexibility_statement",
+      "path": "chromatic-theory/theories/conjectures/X132.v",
+      "name": "dvorak_norin_postle_planar_list_flexibility_statement",
+      "frozen_path": "chromatic-theory/theories/migration/triangle_free.v",
+      "frozen": "X132Legacy.dvorak_norin_postle_planar_list_flexibility_statement",
+      "substitutions": {
+        "x132_triangle_free": "Legacy.x132_triangle_free"
+      },
+      "certificate": "Chromatic.migration.triangle_free.dvorak_norin_postle_planar_list_flexibility_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X187.planar_triangle_free_request_graph_fraction_statement",
+      "path": "chromatic-theory/theories/conjectures/X187.v",
+      "name": "planar_triangle_free_request_graph_fraction_statement",
+      "frozen_path": "chromatic-theory/theories/migration/triangle_free.v",
+      "frozen": "X187Legacy.planar_triangle_free_request_graph_fraction_statement",
+      "substitutions": {
+        "x187_triangle_free": "Legacy.x187_triangle_free"
+      },
+      "certificate": "Chromatic.migration.triangle_free.planar_triangle_free_request_graph_fraction_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X192.x192_polytime_additive_chromatic_approx",
+      "path": "chromatic-theory/theories/conjectures/X192.v",
+      "name": "x192_polytime_additive_chromatic_approx",
+      "frozen_path": "chromatic-theory/theories/migration/triangle_free.v",
+      "frozen": "X192Legacy.x192_polytime_additive_chromatic_approx",
+      "substitutions": {
+        "x192_triangle_free": "Legacy.x192_triangle_free"
+      },
+      "certificate": "Chromatic.migration.triangle_free.x192_polytime_additive_chromatic_approx_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X192.triangle_free_minor_closed_chromatic_additive_approx_statement",
+      "path": "chromatic-theory/theories/conjectures/X192.v",
+      "name": "triangle_free_minor_closed_chromatic_additive_approx_statement",
+      "frozen_path": "chromatic-theory/theories/migration/triangle_free.v",
+      "frozen": "X192Legacy.triangle_free_minor_closed_chromatic_additive_approx_statement",
+      "substitutions": {
+        "x192_polytime_additive_chromatic_approx": "X192Legacy.x192_polytime_additive_chromatic_approx"
+      },
+      "certificate": "Chromatic.migration.triangle_free.triangle_free_minor_closed_chromatic_additive_approx_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X187.planar_triangle_free_request_graph_fraction_statement",
+      "path": "chromatic-theory/theories/conjectures/X187.v",
+      "name": "planar_triangle_free_request_graph_fraction_statement",
+      "frozen_path": "chromatic-theory/theories/migration/triangle_free.v",
+      "frozen": "X187Original.planar_triangle_free_request_graph_fraction_statement",
+      "substitutions": {
+        "x187_triangle_free": "Legacy.x187_triangle_free",
+        "x187_proper_3_colouring": "C5.Legacy.x187_proper_3_colouring"
+      },
+      "certificate": "Chromatic.migration.triangle_free.planar_triangle_free_request_graph_fraction_statement_original_compat",
+      "commit": "a6db537386d7092db506526fbcfd2dbe9760ed5e",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X192.triangle_free_minor_closed_chromatic_additive_approx_statement",
+      "path": "chromatic-theory/theories/conjectures/X192.v",
+      "name": "triangle_free_minor_closed_chromatic_additive_approx_statement",
+      "frozen_path": "chromatic-theory/theories/migration/triangle_free.v",
+      "frozen": "X192Original.triangle_free_minor_closed_chromatic_additive_approx_statement",
+      "substitutions": {
+        "x192_proper_minor_closed_class": "C11.Legacy.x192_proper_minor_closed_class",
+        "x192_polytime_additive_chromatic_approx": "X192Legacy.x192_polytime_additive_chromatic_approx"
+      },
+      "certificate": "Chromatic.migration.triangle_free.triangle_free_minor_closed_chromatic_additive_approx_statement_original_compat",
+      "commit": "6e1a1c4c719d42f6bea311812f06f61d9e49e9d3",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X187.x187_proper_3_colouring",
+      "path": "chromatic-theory/theories/conjectures/X187.v",
+      "name": "x187_proper_3_colouring",
+      "commit": "a6db537386d7092db506526fbcfd2dbe9760ed5e",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.x187_proper_3_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.proper_colouring.x187_proper_3_colouring_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X192.x192_proper_minor_closed_class",
+      "path": "chromatic-theory/theories/conjectures/X192.v",
+      "name": "x192_proper_minor_closed_class",
+      "commit": "6e1a1c4c719d42f6bea311812f06f61d9e49e9d3",
+      "frozen_path": "chromatic-theory/theories/migration/minor_classes.v",
+      "frozen": "Legacy.x192_proper_minor_closed_class",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.minor_classes.x192_proper_minor_closed_class_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/proper_colouring.v#X187Legacy.planar_triangle_free_request_graph_fraction_statement": "C5 per-row snapshot: C5 froze this row over its own frozen proper 3-colouring but kept the live x187_triangle_free (after A15 GTBase.base.triangle_free G, equal to the old girth_geq G 4 by girth_geq4_equiv_triangle_free). Kept unchanged; the complete row is Chromatic.migration.triangle_free.X187Original.planar_triangle_free_request_graph_fraction_statement, certified by planar_triangle_free_request_graph_fraction_statement_original_compat, which converts the triangle-free hypothesis and reuses this certificate.",
+    "chromatic-theory/theories/migration/minor_classes.v#Legacy.triangle_free_minor_closed_chromatic_additive_approx_statement": "C11 per-row snapshot: C11 froze this row over its own frozen excluded-minor class but kept the live x192_polytime_additive_chromatic_approx (after A15 over GTBase.base.triangle_free through x192_triangle_free). Kept unchanged; the complete row is Chromatic.migration.triangle_free.X192Original.triangle_free_minor_closed_chromatic_additive_approx_statement, certified by triangle_free_minor_closed_chromatic_additive_approx_statement_original_compat, which converts the frozen chain and reuses this certificate."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.XE2.xe2_triangle_free_rel",
+      "path": "graph-theory-misc/theories/conjectures/XE2.v",
+      "name": "xe2_triangle_free_rel",
+      "note": "the same triple prohibition over an arbitrary finite relation, not a supplied sgraph; its erdos_895 row assumes symmetry/irreflexivity separately"
+    },
+    {
+      "qualified": "Digraph.conjectures.chi_bounded.underlying_triangle_free",
+      "path": "digraph-theory/theories/conjectures/chi_bounded.v",
+      "name": "underlying_triangle_free",
+      "note": "no 3-clique in the underlying graph of a digraph (explicit x != y, symmetrized arcs); a digraph carrier, not a simple graph"
+    },
+    {
+      "qualified": "Digraph.conjectures.X221.x221_oriented_triangle_free",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "x221_oriented_triangle_free",
+      "note": "orientedness guard plus no triple under x221_uadj; stronger than an unguarded underlying triangle predicate"
+    },
+    {
+      "qualified": "Digraph.conjectures.X193.x193_directed_triangle_free",
+      "path": "digraph-theory/theories/conjectures/X193.v",
+      "name": "x193_directed_triangle_free",
+      "note": "no directed 3-cycle; a transitively oriented K3 qualifies although its underlying graph is a triangle"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem (base and the preserved Topological lemmas), exact types of the frozen and live helpers, chain and rows, strict dependency closures of the frozen chain and rows (per-row and complete), and the types of every declaration in the reverse dependency closure of X132/X187/X192 and Topological.foundations.girth at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A15-triangle-free/ (outside the repository)"
+}

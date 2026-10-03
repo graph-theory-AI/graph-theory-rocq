@@ -1,0 +1,138 @@
+{
+  "family": "branch-paths",
+  "canonical_name": "Chromatic.foundations.branch_paths.branch_paths_at_least",
+  "canonical_short_name": "branch_paths_at_least",
+  "relation": "Weak injective branch map with one existential tail path per oriented pattern edge: adjacency path, prescribed endpoint, lower bound on edge length size p, uniq(branch x::p), and internal branch avoidance. No inducedness, inter-path disjointness, reversal coherence or simultaneous supplied path map. Host/pattern order G,H is preserved. X177/X185 are the exact same body; X186 is the unconditional zero-bound view. All three blocked statement readings and the X185 line_graph target remain unchanged.",
+  "baseline_commit": "311fdcb89dc12a78c62cb0ee6d2477896cbce9a7",
+  "namespaces": {
+    "chromatic-theory": "Chromatic"
+  },
+  "certificate_files": [
+    "chromatic-theory/theories/foundations/branch_paths.v",
+    "chromatic-theory/theories/migration/branch_paths.v"
+  ],
+  "extra_certificates": [
+    "Chromatic.foundations.branch_paths.branch_paths_at_leastW",
+    "Chromatic.foundations.branch_paths.branch_paths_zeroE",
+    "Chromatic.foundations.branch_paths.branch_paths_card",
+    "Chromatic.foundations.branch_paths.branch_paths_empty_pattern",
+    "Chromatic.foundations.branch_paths.not_branch_paths_empty_host",
+    "Chromatic.foundations.branch_paths.branch_paths_edgelessE",
+    "Chromatic.foundations.branch_paths.branch_paths_of_embedding",
+    "Chromatic.foundations.branch_paths.branch_paths_refl"
+  ],
+  "downstream_client": "chromatic-theory/theories/examples/branch_paths.v",
+  "summary": [
+    "Exactly three weak branch-path helpers, one widespread chain and three complete blocked statements. X177/X185 preserve the exact canonical body; X186 removes/adds only the tautological zero lower bound, by unconditional iff. The public API does not assert induced-subdivision containment.",
+    "Preserve G/H order, existential injection then independent existential paths for oriented edges, size p as EDGE length, uniqueness and branch avoidance. No inducedness, disjointness, reversal or simultaneous path-map guard is added. The X177 antecedent defects, X185 line_graph target and X186 chi2 stay verbatim; all blocked row legs are unchanged.",
+    "No old frozen snapshot or direct proof-header client reaches the family at the immutable baseline. Public-only evidence covers empty/edgeless patterns, nonempty pattern in empty host, monotonicity, the zero view and a four-cycle branch pattern in a complete host with extra diagonal edges."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X177.x177_contains_induced_long_subdivision",
+      "path": "chromatic-theory/theories/conjectures/X177.v",
+      "name": "x177_contains_induced_long_subdivision",
+      "frozen_path": "chromatic-theory/theories/migration/branch_paths.v",
+      "frozen": "X177Legacy.x177_contains_induced_long_subdivision",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.branch_paths.x177_contains_induced_long_subdivision_compat",
+      "live_unfolds_to": "branch_paths_at_least G H ell"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X177.forest_of_lanterns_pervasive_statement",
+      "path": "chromatic-theory/theories/conjectures/X177.v",
+      "name": "forest_of_lanterns_pervasive_statement",
+      "frozen_path": "chromatic-theory/theories/migration/branch_paths.v",
+      "frozen": "X177Legacy.forest_of_lanterns_pervasive_statement",
+      "substitutions": {
+        "x177_contains_induced_long_subdivision": "X177Legacy.x177_contains_induced_long_subdivision"
+      },
+      "certificate": "Chromatic.migration.branch_paths.forest_of_lanterns_pervasive_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X185.x185_contains_induced_long_subdivision",
+      "path": "chromatic-theory/theories/conjectures/X185.v",
+      "name": "x185_contains_induced_long_subdivision",
+      "frozen_path": "chromatic-theory/theories/migration/branch_paths.v",
+      "frozen": "X185Legacy.x185_contains_induced_long_subdivision",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.branch_paths.x185_contains_induced_long_subdivision_compat",
+      "live_unfolds_to": "branch_paths_at_least G H ell"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X185.x185_widespread",
+      "path": "chromatic-theory/theories/conjectures/X185.v",
+      "name": "x185_widespread",
+      "frozen_path": "chromatic-theory/theories/migration/branch_paths.v",
+      "frozen": "X185Legacy.x185_widespread",
+      "substitutions": {
+        "x185_contains_induced_long_subdivision": "X185Legacy.x185_contains_induced_long_subdivision"
+      },
+      "certificate": "Chromatic.migration.branch_paths.x185_widespread_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X185.every_multigraph_widespread_statement",
+      "path": "chromatic-theory/theories/conjectures/X185.v",
+      "name": "every_multigraph_widespread_statement",
+      "frozen_path": "chromatic-theory/theories/migration/branch_paths.v",
+      "frozen": "X185Legacy.every_multigraph_widespread_statement",
+      "substitutions": {
+        "x185_widespread": "X185Legacy.x185_widespread"
+      },
+      "certificate": "Chromatic.migration.branch_paths.every_multigraph_widespread_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X186.x186_contains_induced_subdivision",
+      "path": "chromatic-theory/theories/conjectures/X186.v",
+      "name": "x186_contains_induced_subdivision",
+      "frozen_path": "chromatic-theory/theories/migration/branch_paths.v",
+      "frozen": "X186Legacy.x186_contains_induced_subdivision",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.branch_paths.x186_contains_induced_subdivision_compat",
+      "live_unfolds_to": "branch_paths_at_least G J 0"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X186.subdivision_or_local_chi_two_statement",
+      "path": "chromatic-theory/theories/conjectures/X186.v",
+      "name": "subdivision_or_local_chi_two_statement",
+      "frozen_path": "chromatic-theory/theories/migration/branch_paths.v",
+      "frozen": "X186Legacy.subdivision_or_local_chi_two_statement",
+      "substitutions": {
+        "x186_contains_induced_subdivision": "X186Legacy.x186_contains_induced_subdivision"
+      },
+      "certificate": "Chromatic.migration.branch_paths.subdivision_or_local_chi_two_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision",
+      "reason": "Inhabitation of the full induced subdivision Record, with additional disjointness and global inducedness; distinct stronger contract."
+    },
+    {
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision",
+      "reason": "Same stronger full induced subdivision Record presentation, not the weak branch-path contract."
+    },
+    {
+      "qualified": "Minor.foundations.containment.has_subdivision",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "has_subdivision",
+      "reason": "An injective model with interior paths, reversal coherence and internal disjointness; distinct supplied-data structure."
+    }
+  ]
+}

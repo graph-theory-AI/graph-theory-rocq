@@ -142,7 +142,7 @@ split.
 - by rewrite size_map.
 - (* every pullback member is a perfect matching of G *)
   move=> M /mapP[S HS ->] v.
-  have Hd3 : #|edges_at v| = 3 by rewrite -(mdeg_loopless v Hll); exact: (Hreg v).
+  have Hd3 : #|edges_at v| = 3 by exact: (Hreg v).
   have [e1 [e2 [e3 [n12 n13 n23 Heq]]]] := set3 Hd3.
   have inc : forall e : edge G, e \in edges_at v -> incident v e.
     by move=> e; rewrite inE.
@@ -194,6 +194,7 @@ Theorem the_berge_fulkerson_implies_intersecting_two_perfect_matchings :
 Proof.
 move=> HBF G Hn Hcb.
 have [[Hll Hreg] Hbl] := Hcb.
+have Hmdeg : forall v : G, mdeg v = 3 by move=> v; rewrite (mdeg_loopless v Hll); exact: (Hreg v).
 have [L [Hsize Hpm Htwice]] := HBF G Hn Hcb.
 have gen : forall (T : Type) (s : seq T), size s = 6 ->
     exists a b c s', s = [:: a, b, c & s'].
@@ -206,7 +207,7 @@ have pm3 : is_perfect_matching M3 by apply: Hpm; rewrite HL !inE eqxx !orbT.
 exists M1, M2; split; [exact: pm1 | exact: pm2 |].
 move=> [T [Tsub [S [Tcut _ Todd]]]].
 have oc : odd #|cut S| by rewrite -Tcut.
-have /set0Pn [e] := @pm_meets_odd_cut G M3 S Hreg pm3 oc.
+have /set0Pn [e] := @pm_meets_odd_cut G M3 S Hmdeg pm3 oc.
 rewrite inE => /andP[e3 ec].
 have eT : e \in T by rewrite Tcut.
 have e12 := subsetP Tsub _ eT.

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "family": "multigraph-regularity",
+  "modules": {
+    "GTBase.base": {
+      "path": "base/theories/base.v",
+      "overrides": {
+        "mregular": {
+          "verdict": "FAITHFUL",
+          "note": "Every vertex lies on exactly r edges, counted by incidence (#|edges_at v|): a loop once, parallel edges separately. Vacuous without vertices; with a vertex the degree is unique and equals mDelta; invariant under incidence-preserving bijections."
+        },
+        "mcubic": {
+          "verdict": "FAITHFUL",
+          "note": "mregular G 3, with no loopless guard: three loops at one vertex qualify."
+        },
+        "loopless_cubic": {
+          "verdict": "FAITHFUL",
+          "note": "loopless G /\\ mcubic G: the guarded cubic contract, equal to arc-end cubicity (Cycle mdeg) under the guard."
+        }
+      },
+      "machine_evidence": [
+        "mregular_void",
+        "mregular_uniq",
+        "mregular_mDelta",
+        "loopless_cubic_mcubic",
+        "mregular_bij"
+      ]
+    }
+  }
+}

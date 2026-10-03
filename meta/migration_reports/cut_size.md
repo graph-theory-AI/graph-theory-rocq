@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py cut_size --details /tmp/migrati
 
 - Canonical: `GTBase.common.cut_size`.
 - Baseline: `9de20ca72a0d7c8279ff8861033bfd80ce12a84a`.
-- Scope: 4 helpers, 3 statements, 19 frozen objects, 30 recorded references.
-- Source checks: 140/140 pass; consistent.
+- Scope: 4 helpers, 3 statements, 19 frozen objects, 33 recorded references.
+- Source checks: 141/141 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -21,4 +21,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Hypergraph.conjectures.X209.x209_uniform`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X76Original.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X78Original.h_free_max_cut_three_fourths_surplus_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X76Original.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X78Original.h_free_max_cut_three_fourths_surplus_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement`, `extremal-graph-theory/theories/migration/cycle_lengths.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement`.

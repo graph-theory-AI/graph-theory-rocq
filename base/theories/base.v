@@ -9,7 +9,8 @@
       re-exported:  [sgraph], [x -- y], [N(x)] (open_neigh), [χ(A)]=[chi_mem],
                     [ω(A)]=[omega_mem], [α], [clique]/[cliques], [connected],
                     ['K_n]=[complete n], [F ≃ G]=[diso], [ucycle]/[ucycleb];
-      owned here:   [Delta] (Δ), [common_nbr], [regular], [girth_geq], [ceil_div].
+      owned here:   [Delta] (Δ), [common_nbr], [regular], [min_degree_at_least], [min_degree], [subcubic],
+                    [girth_geq], [ceil_div].
 
     Planarity is NOT here yet: the [coq-graph-theory-planar] / [coq-fourcolor]
     layer (plan gate G2) is added only once that spike passes.
@@ -52,13 +53,13 @@
     [traceable], [del_edge_set], [k_edge_connected], [has_subgraph],
     [induced_free], [complete_bipartite], [oriented], [tournament], [acyclic].
 
-    Owned by this file: [Delta] (Δ), [ceil_div], [common_nbr], [regular],
+    Owned by this file: [Delta] (Δ), [ceil_div], [common_nbr], [regular], [min_degree_at_least], [min_degree], [subcubic],
     [girth_geq], [has_girth], [bipartite], [triangle_free], [cycle_graph],
     [k_connected] (Whitney form, with [k_connected1]; the library's Menger-form
     [kconnected] is also available), [k_degenerate]/[k_degenerate_on], [average_degree_geq],
     [is_hom]/[homs_to]/[is_core], [cartesian_product], [tensor_product],
     [graph_power], [subdivision], [frac_power], [wagner_planar], [minor_card],
-    [mgraph] notation, [loopless], [line_graph], [total_graph],
+    [mgraph] notation, [loopless], [mregular]/[mcubic]/[loopless_cubic], [line_graph], [total_graph],
     [chromatic_index] (χ'), [total_chromatic_number] (χ''), [edge_colourable],
     [total_colourable], [mDelta], [uwalk], [list_colourable]/[list_colourable_on],
     [choosable], [is_choice_number].
@@ -66,7 +67,8 @@
     [complexity], [finite_graph], [graph_metric] (distances), [list_flexibility],
     [posets], [surface], [bipartitions] (supplied and existential finite
     bipartitions, relation colourings, and edge-deletion adapters), [walks_paths] (vertex sequences: [seq_vertices], the
-    support of a raw sequence, with its correspondence to the library [Path]). *)
+    support of a raw sequence, with its correspondence to the library [Path]), [incidence]
+    ([incidence_degree]: the number of members of a supplied finite family containing a vertex). *)
 
 From mathcomp Require Export all_boot.
 (* WP4b: the core undirected vocabulary of coq-graph-theory is exported from ONE place.
@@ -102,6 +104,7 @@ From GTBase Require Export graph_metric.
 From GTBase Require Export list_flexibility.
 From GTBase Require Export posets.
 From GTBase Require Export monochromatic.
+From GTBase Require Export incidence.
 From GTBase Require Export surface.
 From GTBase Require Export walks_paths.
 
@@ -123,6 +126,203 @@ Definition common_nbr (G : sgraph) (u v : G) : {set G} := N(u) :&: N(v).
 
 (** [d]-regularity: every vertex has degree exactly [d]. *)
 Definition regular (G : sgraph) (d : nat) : Prop := forall v : G, #|N(v)| = d.
+
+(** Minimum-degree LOWER BOUND: every vertex has at least [d] neighbours, the universal form
+    [forall v, d <= #|N(v)|].  It is not an attained minimum: the empty graph ['K_0] satisfies
+    every bound ([min_degree_at_least_K0]) and no nonemptiness is built in, so comparisons with
+    [Delta] or [#|G|] take a vertex ([min_degree_at_least_Delta], [min_degree_at_least_lt_card]).
+    On an induced subgraph the bound is [min_degree_at_least (induced S) d]; it is not inherited
+    from [G].  "No isolated vertices" is the bound 1 ([min_degree_at_least1P]).  Upstream degree
+    facts give the complete, complete bipartite and k-connected cases.
+    Registry: meta/library_primitives/minimum-degree-at-least.json (A11). *)
+Definition min_degree_at_least (G : sgraph) (d : nat) : Prop := forall v : G, d <= #|N(v)|.
+
+Lemma min_degree_at_least0 (G : sgraph) : min_degree_at_least G 0.
+Proof. by []. Qed.
+
+(** Antitone in the bound. *)
+Lemma min_degree_at_least_le (G : sgraph) (d d' : nat) :
+  d' <= d -> min_degree_at_least G d -> min_degree_at_least G d'.
+Proof. by move=> dd' h v; apply: leq_trans (h v). Qed.
+
+Lemma regular_min_degree_at_least (G : sgraph) (d : nat) :
+  regular G d -> min_degree_at_least G d.
+Proof. by move=> h v; rewrite h. Qed.
+
+(** The bound 1: no isolated vertex. *)
+Lemma min_degree_at_least1P (G : sgraph) :
+  min_degree_at_least G 1 <-> forall v : G, exists w : G, v -- w.
+Proof.
+split=> h v; last by have [w vw] := h v; apply/card_gt0P; exists w; rewrite in_opn.
+by have /card_gt0P[w] := h v; rewrite in_opn => vw; exists w.
+Qed.
+
+(** The empty graph satisfies every bound. *)
+Lemma min_degree_at_least_K0 (d : nat) : min_degree_at_least 'K_0 d.
+Proof. by case. Qed.
+
+Lemma min_degree_at_least_Kn (n : nat) : min_degree_at_least 'K_n.+1 n.
+Proof. by move=> v; exact: deg_Kn. Qed.
+
+Lemma min_degree_at_least_Knm (n m : nat) : min_degree_at_least 'K_n,m (minn n m).
+Proof. by move=> v; exact: deg_Knm. Qed.
+
+Lemma min_degree_at_least_kconnected (G : sgraph) (k : nat) :
+  k.-connected G -> min_degree_at_least G k.
+Proof. by move=> h v; exact: kconnected_degree. Qed.
+
+(** Isomorphisms preserve the bound: they map the neighbours of [x] onto those of its image.
+    ([bij] is imported locally, for its coercion to functions.) *)
+Section DisoDegree.
+Import bij.
+
+Lemma min_degree_at_least_diso (G H : sgraph) (i : G ≃ H) (d : nat) :
+  min_degree_at_least G d -> min_degree_at_least H d.
+Proof.
+have deg (x : G) : #|N(i x)| = #|N(x)|.
+  rewrite -(card_imset (mem N(x)) (@bij_injective _ _ i)); apply: eq_card => w.
+  apply/idP/imsetP => [|[z zx ->]]; last by rewrite in_opn edge_diso -in_opn.
+  by rewrite in_opn -{1}[w](bijK' i) edge_diso -in_opn => xw; exists (i^-1 w); rewrite ?bijK'.
+by move=> h y; rewrite -[y](bijK' i) deg.
+Qed.
+
+End DisoDegree.
+
+(** With a vertex, the bound is at most the maximum degree and below the order. *)
+Lemma min_degree_at_least_Delta (G : sgraph) (d : nat) (v : G) :
+  min_degree_at_least G d -> d <= Delta G.
+Proof. by move=> h; apply: leq_trans (h v) _; exact: leq_bigmax. Qed.
+
+Lemma min_degree_at_least_lt_card (G : sgraph) (d : nat) (v : G) :
+  min_degree_at_least G d -> d < #|G|.
+Proof.
+move=> h; apply: leq_ltn_trans (h v) _; rewrite -cardsT; apply: proper_card.
+by apply/properP; split; [exact: subsetT | exists v; rewrite ?inE ?in_opn ?sg_irrefl].
+Qed.
+
+(** Exact (attained) minimum degree: the lower bound [min_degree_at_least G d] together with a vertex of
+    degree exactly [d].  The attaining vertex makes the graph nonempty: ['K_0] has no minimum degree
+    ([min_degree_K0]).  The value is unique ([min_degree_uniq]), exists as soon as [G] has a vertex
+    ([min_degree_exists]) and is the greatest lower bound ([min_degree_at_leastE]); there is no numeric
+    minimum with a default value.  [min_degree_attained_firstE] gives the presentation with the attaining
+    vertex first.  Registry: meta/library_primitives/minimum-degree.json (A12). *)
+Definition min_degree (G : sgraph) (d : nat) : Prop :=
+  min_degree_at_least G d /\ exists v : G, #|N(v)| = d.
+
+Lemma min_degree_lower (G : sgraph) (d : nat) : min_degree G d -> min_degree_at_least G d.
+Proof. by case. Qed.
+
+Lemma min_degree_attained (G : sgraph) (d : nat) : min_degree G d -> exists v : G, #|N(v)| = d.
+Proof. by case. Qed.
+
+Lemma min_degree_attained_firstE (G : sgraph) (d : nat) :
+  min_degree G d <-> (exists v : G, #|N(v)| = d) /\ min_degree_at_least G d.
+Proof. by split; case=> h1 h2; split. Qed.
+
+Lemma min_degree_uniq (G : sgraph) (d d' : nat) : min_degree G d -> min_degree G d' -> d = d'.
+Proof.
+case=> hd [v vd] [hd' [w wd']]; apply/eqP; rewrite eqn_leq.
+have h1 := hd w; have h2 := hd' v; rewrite wd' in h1; rewrite vd in h2.
+by rewrite h1 h2.
+Qed.
+
+(** A graph with a vertex has a minimum degree: the degree of a vertex of least degree. *)
+Lemma min_degree_exists (G : sgraph) (v : G) : exists d, min_degree G d.
+Proof.
+have [x _ hx] := @arg_minnP G v predT (fun x : G => #|N(x)|) isT.
+by exists #|N(x)|; split; [move=> w; exact: hx | exists x].
+Qed.
+
+Lemma min_degree_exists_card (G : sgraph) : 0 < #|G| -> exists d, min_degree G d.
+Proof. by case/card_gt0P=> v _; exact: (min_degree_exists v). Qed.
+
+(** The empty graph has no minimum degree. *)
+Lemma min_degree_K0 (d : nat) : ~ min_degree 'K_0 d.
+Proof. by case=> _ [[]]. Qed.
+
+(** A [d]-regular graph with a vertex has minimum degree [d]. *)
+Lemma regular_min_degree (G : sgraph) (d : nat) (v : G) : regular G d -> min_degree G d.
+Proof. by move=> h; split; [exact: regular_min_degree_at_least | exists v; exact: h]. Qed.
+
+(** The minimum degree is the greatest lower bound. *)
+Lemma min_degree_at_leastE (G : sgraph) (d d' : nat) :
+  min_degree G d -> min_degree_at_least G d' <-> d' <= d.
+Proof.
+case=> hd [v vd]; split=> [h|le]; first by rewrite -vd; exact: h.
+exact: min_degree_at_least_le le hd.
+Qed.
+
+Lemma min_degree_Delta (G : sgraph) (d : nat) : min_degree G d -> d <= Delta G.
+Proof. by case=> hd [v _]; exact: (min_degree_at_least_Delta v hd). Qed.
+
+Lemma min_degree_lt_card (G : sgraph) (d : nat) : min_degree G d -> d < #|G|.
+Proof. by case=> hd [v _]; exact: (min_degree_at_least_lt_card v hd). Qed.
+
+Lemma min_degree_Kn (n : nat) : min_degree 'K_n.+1 n.
+Proof.
+split; first exact: min_degree_at_least_Kn.
+have lt : #|N(ord0 : 'K_n.+1)| < #|'K_n.+1|.
+  rewrite -cardsT; apply: proper_card; apply/properP; split; first exact: subsetT.
+  by exists ord0; rewrite ?inE ?in_opn ?sg_irrefl.
+by exists ord0; apply/eqP; rewrite eqn_leq deg_Kn andbT -ltnS; move: lt; rewrite card_ord.
+Qed.
+
+(** Isomorphisms preserve degrees, hence the minimum degree.  ([bij] is imported locally.) *)
+Section DisoMinDegree.
+Import bij.
+
+Lemma diso_degree (G H : sgraph) (i : G ≃ H) (x : G) : #|N(i x)| = #|N(x)|.
+Proof.
+rewrite -(card_imset (mem N(x)) (@bij_injective _ _ i)); apply: eq_card => w.
+apply/idP/imsetP => [|[z zx ->]]; last by rewrite in_opn edge_diso -in_opn.
+by rewrite in_opn -{1}[w](bijK' i) edge_diso -in_opn => xw; exists (i^-1 w); rewrite ?bijK'.
+Qed.
+
+Lemma min_degree_diso (G H : sgraph) (i : G ≃ H) (d : nat) : min_degree G d -> min_degree H d.
+Proof.
+case=> hd [v vd]; split; first exact: min_degree_at_least_diso hd.
+by exists (i v); rewrite diso_degree.
+Qed.
+
+End DisoMinDegree.
+
+(** Subcubic simple graphs: every vertex has at most three neighbours, the pointwise upper bound
+    [forall v, #|N(v)| <= 3].  It is equivalent, unconditionally, to [Delta G <= 3] ([subcubicP]); the empty
+    graph is subcubic (its [Delta] is 0).  This simple-graph bound is distinct from the multigraph incidence
+    contracts [mcubic]/[loopless_cubic] and from the exact minimum [min_degree].
+    Registry: meta/library_primitives/subcubic.json (A14). *)
+Definition subcubic (G : sgraph) : Prop := forall v : G, #|N(v)| <= 3.
+
+(** The finite-maximum bridge. *)
+Lemma subcubicP (G : sgraph) : subcubic G <-> Delta G <= 3.
+Proof. by split=> [h|/bigmax_leqP h v]; [apply/bigmax_leqP => v _; exact: h | exact: h]. Qed.
+
+Lemma subcubic_K0 : subcubic 'K_0.
+Proof. by case. Qed.
+
+Lemma regular_subcubic (G : sgraph) (d : nat) : regular G d -> d <= 3 -> subcubic G.
+Proof. by move=> h d3 v; rewrite h. Qed.
+
+(** Complete graphs on at most four vertices are subcubic; [K_5] is not. *)
+Lemma subcubic_Kn (n : nat) : n <= 3 -> subcubic 'K_n.+1.
+Proof.
+move=> n3 v; apply: leq_trans n3.
+have lt : #|N(v)| < #|'K_n.+1|.
+  rewrite -cardsT; apply: proper_card; apply/properP; split; first exact: subsetT.
+  by exists v; rewrite ?inE ?in_opn ?sg_irrefl.
+by move: lt; rewrite card_ord ltnS.
+Qed.
+
+Lemma not_subcubic_K5 : ~ subcubic 'K_5.
+Proof. by move/(_ ord0); move: (@deg_Kn 4 ord0); case: #|_| => [|[|[|[|]]]]. Qed.
+
+Section DisoSubcubic.
+Import bij.
+
+Lemma subcubic_diso (G H : sgraph) (i : G ≃ H) : subcubic G -> subcubic H.
+Proof. by move=> h y; rewrite -[y](bijK' i) diso_degree. Qed.
+
+End DisoSubcubic.
 
 (** Girth ≥ [g]: every GENUINE cycle (size > 2; in a simple graph every cycle has
     size ≥ 3) has length ≥ [g].  The [2 < size c] guard is load-bearing — without
@@ -297,6 +497,50 @@ Definition total_colourable (G : mgraph) (k : nat) : Prop := total_chromatic_num
     Promoted from chromatic-theory U4 ∩ U5. *)
 Definition mDelta (G : mgraph) : nat := \max_(v : G) #|edges_at v|.
 
+(** Multigraph INCIDENCE regularity: every vertex lies on exactly [r] edges, counted by incidence
+    ([#|edges_at v|]), so a loop at [v] counts once and parallel edges count separately.  [mcubic G] is
+    the case [r = 3] and carries no loopless guard: three loops at one vertex form an [mcubic] graph.
+    [loopless_cubic G] adds the guard.  Under it, incidence degree equals the arc-end degree that counts a
+    loop twice (Cycle's [mdeg], via [Cycle.foundations.connectivity.mdeg_loopless]); that is how the guarded
+    Cycle contract is bridged, without a Cycle import here.  A multigraph without vertices is regular for
+    every [r] ([mregular_void]).  Registry: meta/library_primitives/multigraph-regularity.json (A13). *)
+Definition mregular (G : mgraph) (r : nat) : Prop := forall v : G, #|edges_at v| = r.
+
+Definition mcubic (G : mgraph) : Prop := mregular G 3.
+
+Definition loopless_cubic (G : mgraph) : Prop := loopless G /\ mcubic G.
+
+Lemma mregular_void (G : mgraph) (r : nat) : #|G| = 0 -> mregular G r.
+Proof. by move=> h v; move: (card0_eq h v); rewrite !inE. Qed.
+
+(** With a vertex, the degree of a regular multigraph is unique and is its maximum degree. *)
+Lemma mregular_uniq (G : mgraph) (r r' : nat) (v : G) : mregular G r -> mregular G r' -> r = r'.
+Proof. by move=> h h'; rewrite -(h v) (h' v). Qed.
+
+Lemma mregular_mDelta (G : mgraph) (r : nat) (v : G) : mregular G r -> mDelta G = r.
+Proof.
+move=> h; apply/eqP; rewrite eqn_leq; apply/andP; split.
+  by apply/bigmax_leqP => x _; rewrite h.
+by rewrite -(h v); exact: leq_bigmax.
+Qed.
+
+Lemma loopless_cubic_mcubic (G : mgraph) : loopless_cubic G -> mcubic G.
+Proof. by case. Qed.
+
+(** Incidence regularity is invariant under any vertex bijection and edge bijection that preserve
+    incidence (in particular under multigraph isomorphisms; upstream [mgraph.iso] needs edge labels with
+    an [elabelType] structure, which the [unit] labels of [mgraph] lack). *)
+Lemma mregular_bij (F G : mgraph) (f : F -> G) (g : edge F -> edge G) (r : nat) :
+  bijective f -> bijective g -> (forall (x : F) (e : edge F), incident (f x) (g e) = incident x e) ->
+  mregular F r -> mregular G r.
+Proof.
+case=> f' ff' f'f [g' gg' g'g] inc hF y; rewrite -(f'f y).
+have -> : edges_at (f (f' y)) = [set g e | e in edges_at (f' y)].
+  apply/setP => e; apply/idP/imsetP => [he|[e0 he0 ->]]; last by move: he0; rewrite !inE inc.
+  by exists (g' e); [move: he; rewrite !inE -{1}(g'g e) inc | rewrite g'g].
+by rewrite card_imset ?hF //; exact: (can_inj gg').
+Qed.
+
 (** ** Connectivity & structural predicates (promoted across areas)
 
     [k_connected] (Whitney form, from U2/U3/U9), [triangle_free] (from U3/U9), and [uwalk] —
@@ -321,6 +565,40 @@ Qed.
 (** Triangle-free: no three mutually adjacent vertices. *)
 Definition triangle_free (G : sgraph) : Prop :=
   forall x y z : G, x -- y -> y -- z -> z -- x -> False.
+
+(** Triangle-freeness is girth at least four: a triangle is exactly a [ucycle] of size 3, the only genuine
+    cycle that the [2 < size c] guard of [girth_geq] leaves below size 4.  The equivalence holds on every
+    simple graph (irreflexivity makes the three vertices distinct) but is not a conversion.  The three
+    lemmas moved here, with their proofs, from Topological.foundations.girth, which keeps them under their
+    qualified names.  Registry: meta/library_primitives/triangle-free.json (A15). *)
+
+(** A triangle of [G] is a [ucycle] of size 3. *)
+Lemma triangle_ucycle (G : sgraph) (x y z : G) :
+  x -- y -> y -- z -> z -- x -> ucycle (--) [:: x; y; z].
+Proof.
+move=> xy yz zx; rewrite /ucycle /= xy yz zx !inE !andbT /=.
+by rewrite (sg_edgeNeq xy) (sg_edgeNeq yz) eq_sym (sg_edgeNeq zx).
+Qed.
+
+(** Conversely a [ucycle] of size 3 is a triangle. *)
+Lemma ucycle3_triangle (G : sgraph) (c : seq G) :
+  ucycle (--) c -> size c = 3 ->
+  exists x y z : G, [/\ c = [:: x; y; z], x -- y, y -- z & z -- x].
+Proof.
+case: c => [|x [|y [|z [|w s]]]] // /andP[] /=.
+by rewrite !andbT => /andP[xy /andP[yz zx]] _ _; exists x, y, z; split.
+Qed.
+
+(** Girth at least 4 is exactly triangle-freeness. *)
+Lemma girth_geq4_equiv_triangle_free (G : sgraph) :
+  girth_geq G 4 <-> triangle_free G.
+Proof.
+split=> [g4 x y z xy yz zx|tf c uc c2].
+  by move: (g4 [:: x; y; z] (triangle_ucycle xy yz zx) (isT : 2 < 3)).
+have {}c2 : 3 <= size c by exact: c2.
+rewrite ltn_neqAle c2 andbT eq_sym; apply/eqP => c3.
+by have [x [y [z [_ xy yz zx]]]] := ucycle3_triangle uc c3; exact: (tf _ _ _ xy yz zx).
+Qed.
 
 (** Undirected walk in a loopless multigraph: each edge traversed in EITHER direction. *)
 Fixpoint uwalk (G : mgraph) (x y : G) (w : seq (edge G)) {struct w} : bool :=

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "family": "minor-model",
+  "primitive": {
+    "canonical_name": "GraphTheory.core.minor.minor_rmap",
+    "owner": "upstream",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "minor_model",
+      "sg_minor_rmap"
+    ],
+    "source_definitions": [
+      "Minor.conjectures.X200.x200_minor_model",
+      "Digraph.conjectures.two_extremal.sg_minor_rmap",
+      "Infinite.conjectures.D4inf2.minor_model"
+    ],
+    "consumers_remaining": 4,
+    "relation": "Unconditional iff on the SAME supplied H -> {set G} map to upstream GraphTheory.core.minor.minor_rmap, preserving host G / pattern H order. Nonempty connected disjoint branches realize H-edges in G; nested/and4, empty-intersection/disjointness and two-witness/pair-witness/neighbor presentations are equivalent. No inducedness, coverage, radius or global nonemptiness guard.",
+    "semantic_classes": {
+      "finite-supplied-branch-sets": {
+        "members": [
+          "Minor.conjectures.X200.x200_minor_model",
+          "Digraph.conjectures.two_extremal.sg_minor_rmap"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Minor.migration.minor_models.x200_minor_model_compat",
+          "Digraph.migration.minor_models.sg_minor_rmap_compat"
+        ],
+        "state": "migrated-alias"
+      },
+      "infinite-prop-subsets": {
+        "members": [
+          "Infinite.conjectures.D4inf2.minor_model"
+        ],
+        "count": 1,
+        "verdict": "distinct representation",
+        "state": "deferred",
+        "certificates": [],
+        "note": "Arbitrary iGraph carriers and Prop subsets with internal reachability; left byte-for-byte unchanged. Registry inclusion classifies the normalized namesake; it is not a migrated finite source."
+      }
+    },
+    "compatibility_theorems": [
+      "Minor.migration.minor_models.x200_minor_model_compat",
+      "Minor.migration.minor_models.x200_k_disjoint_H_models_compat",
+      "Minor.migration.minor_models.x200_H_model_hitting_set_compat",
+      "Minor.migration.minor_models.x200_H_model_erdos_posa_oklogk_compat",
+      "Minor.migration.minor_models.planar_H_model_erdos_posa_oklogk_statement_compat",
+      "Digraph.migration.minor_models.sg_minor_rmap_compat",
+      "Digraph.migration.minor_models.sg_minor_compat",
+      "Digraph.migration.minor_models.planar_sg_compat",
+      "Digraph.migration.minor_models.conjecture_P_compat",
+      "Digraph.migration.minor_models.large_acyclic_induced_subdigraph_in_a_planar_oriente_statement_compat",
+      "Digraph.migration.minor_models.oriented_chromatic_number_of_planar_graphs_statement_compat",
+      "Digraph.migration.minor_models.partitioning_planar_digraphs_statement_compat",
+      "Digraph.migration.minor_models.oriented_chromatic_planar_bounded_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.minor_models.minor_rmap_nestedE",
+      "GTBase.minor_models.minor_rmap_pairE",
+      "GTBase.minor_models.minor_rmap_existsE",
+      "GTBase.minor_models.minor_rmap_singletons",
+      "GTBase.minor_models.minor_rmap_empty_pattern",
+      "GTBase.minor_models.minor_rmap_host_nonempty",
+      "GTBase.minor_models.not_minor_rmap_empty_host",
+      "GTBase.minor_models.minor_rmap_card",
+      "GTBase.minor_models.minor_rmap_compose"
+    ],
+    "public_client": "base/theories/examples/minor_models.v",
+    "legacy_baseline": "35b6b165295fb373d864d646d74284c4751dae65",
+    "migration_report": "meta/migration_reports/minor_models.md",
+    "migration_spec": "meta/migration_reports/minor_models.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C15.md",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.minor",
+        "GraphTheory.core.sgraph",
+        "Minor.foundations.minor_dec"
+      ],
+      "result": "adapt-upstream",
+      "candidate": "GraphTheory.core.minor.minor_rmap",
+      "note": "Already exposed by GTBase.base; reused as the sole canonical predicate. Public GTBase.minor_models contains lemmas only, not a duplicate primitive. minor_rmapb is a distinct supplied-ffun Boolean decision presentation. Infinite Prop-set models, shallow radii and subdivision models remain separate. Upstream faithfulness is documented here with registered adapter/kernel evidence; no repository primitive override is invented.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "lancelot",
+    "reviewed_commit": "7e2381e69fefc2b3a1af1007ec5917ff091cb7d1",
+    "independent_review": "meta/migration_reviews/minor_models.md"
+  }
+}

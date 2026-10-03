@@ -78,6 +78,7 @@
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import preliminaries digraph sgraph connectivity.
 From ClassicalLemmas Require Import konig.paths2.
+From GTBase Require Import incidence.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -86,7 +87,7 @@ Unset Printing Implicit Defensive.
 (** ** Edges at a vertex, and the graph with a prescribed edge set *)
 
 Definition edeg (G : sgraph) (F : {set {set G}}) (v : G) : nat :=
-  #|[set e in F | v \in e]|.
+  incidence_degree F v.
 
 Lemma set2C (T : finType) (x y : T) : [set x; y] = [set y; x].
 Proof. by apply/setP => z; rewrite !inE orbC. Qed.
@@ -336,7 +337,7 @@ Qed.
 Lemma edeg_setD (G : sgraph) (F M : {set {set G}}) (v : G) :
   M \subset F -> edeg (F :\: M) v = edeg F v - edeg M v.
 Proof.
-move=> hs; rewrite /edeg.
+move=> hs; rewrite /edeg /incidence_degree.
 have hEq : [set e in F :\: M | v \in e] =
            [set e in F | v \in e] :\: [set e in M | v \in e].
   apply/setP => e; rewrite !inE.

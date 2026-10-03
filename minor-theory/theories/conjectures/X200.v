@@ -1,6 +1,7 @@
 (** * Minor.conjectures.X200 -- v2 Erdos-Posa planar model bound row *)
 
 From GTBase Require Export base.
+From GTBase Require Import minor_models.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -8,12 +9,7 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X200 vocabulary ***********************************************)
 
-Definition x200_minor_model (G H : sgraph) (branch : H -> {set G}) : Prop :=
-  (forall h : H, branch h != set0) /\
-  (forall h : H, connected (branch h)) /\
-  (forall h1 h2 : H, h1 != h2 -> branch h1 :&: branch h2 = set0) /\
-  (forall h1 h2 : H, h1 -- h2 ->
-    exists x y : G, [/\ x \in branch h1, y \in branch h2 & x -- y]).
+Definition x200_minor_model (G H : sgraph) (branch : H -> {set G}) : Prop := @GraphTheory.core.minor.minor_rmap G H branch.
 
 Definition x200_model_vertices (G H : sgraph) (branch : H -> {set G}) : {set G} :=
   \bigcup_(h : H) branch h.

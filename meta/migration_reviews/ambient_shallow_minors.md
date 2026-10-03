@@ -1,0 +1,9 @@
+# Ambient shallow minors: independent review
+
+Implementer family_scope; independent reviewer path_review. Exact source `311fdcb89dc12a78c62cb0ee6d2477896cbce9a7`, baseline `15e2250`. Coordinator separately read and approved all five mathematical files, four complete current/Original iff proofs and full metadata, then bound the fixed source hashes.
+
+Four X128/X139 helpers retain ambient host distance, its finite cutoff, centre membership and the same supplied branch map. The upstream minor_rmap bridge preserves nonempty, connected, disjoint branches and edge realization. Ambient radius is distinct from branch-internal radius, as the public path6-in-fan7 client proves. X128 keeps natural weights and positive t; X139 retains its documented blocked backward-ball defect. Complete A7+C16 Originals freeze radius/model/grad/expansion and reuse the exact frozen public edge count; older snapshots remain unchanged.
+
+Independent validation passed: 21 fresh sources in two packages, 67 closed assumptions, 49 exact types/conversions including four whole iff and two expected nonconversions, 32 strict closures, family kernel 130 and all 39 source reports. Protected 2,668 files, 121 older certificate modules and 38 frozen arrays were exact. Implementer normal unscoped X128/X139 checks separately passed 11/11 each. Evidence: `coordination/evidence/C16-review-by-path-review.md`, `C16-coordinator-final/` and `C16-ambient-shallow-by-family-scope/normal-gates.log`.
+
+Preparation preserves all reviewed mathematical, specification, fidelity and authored-record bytes. Only ordered project additions, actual review metadata, two reciprocal A7 notes, removal of the four now-migrated C15 distinct-variant freezes, and generated outputs change. No proof build or artifact reuse occurs during preparation; coordinator cumulative acceptance remains separate.

@@ -32,6 +32,7 @@
     problems/two_extremal_digraphs/docs/{planarity_of_2extremal,three_connected_wheel,
     no_full_cover_lemma,conditional_l_literature}.md for the verbatim definitions. *)
 
+From GTBase Require Import minor_models.
 From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude interop_graph_theory digraph oriented tournament.
@@ -159,12 +160,7 @@ Definition two_extremal (D : diGraphType) (llD : loopless D) : Prop :=
     vertex of [H] a non-empty connected vertex set of [G], pairwise disjoint, with a
     [G]-edge between the branch sets of every [H]-edge. *)
 
-Definition sg_minor_rmap (G H : sgraph) (phi : H -> {set G}) : Prop :=
-  [/\ (forall x : H, phi x != set0),
-      (forall x : H, connected (phi x)),
-      (forall x y : H, x != y -> [disjoint phi x & phi y])
-    & (forall x y : H, x -- y ->
-         exists p : G * G, [/\ p.1 \in phi x, p.2 \in phi y & p.1 -- p.2])].
+Definition sg_minor_rmap (G H : sgraph) (phi : H -> {set G}) : Prop := @GraphTheory.core.minor.minor_rmap G H phi.
 
 Definition sg_minor (G H : sgraph) : Prop := exists phi, @sg_minor_rmap G H phi.
 

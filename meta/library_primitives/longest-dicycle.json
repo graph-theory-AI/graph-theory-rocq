@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "family": "longest-dicycle",
+  "primitive": {
+    "canonical_name": "Digraph.foundations.longest_cycles.longest_dicycle",
+    "owner": "digraph-theory",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "longest_dicycle"
+    ],
+    "source_definitions": [
+      "Digraph.conjectures.X2.longest_dicycle"
+    ],
+    "consumers_remaining": 1,
+    "relation": "definitional: X2's longest_dicycle (dicycle c /\\ forall c', dicycle c' -> size c' <= size c) is the body of Digraph.foundations.longest_cycles.longest_dicycle c, convertible; Digraph.core.dipath.dicycle is reused unchanged (loops and digons admitted, empty and repeated sequences rejected); no orientation, looplessness, connectivity, symmetry, inhabitance or minimum-length premise is added",
+    "semantic_classes": {
+      "directed-cycle-maximum": {
+        "members": [
+          "Digraph.conjectures.X2.longest_dicycle"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Digraph.migration.longest_dicycle.longest_dicycle_compat",
+        "note": "A directed cycle (Digraph.core.dipath.dicycle: nonempty, duplicate-free, consecutive entries and the closing pair joined by arcs) no directed cycle of the WHOLE digraph exceeds in length; a singleton with a loop and a digon can be longest, a digraph without directed cycles has no witness, and ties all qualify. Distinct from B13's undirected seq_longest_cycle, whose genuine cycles have more than two entries."
+      }
+    },
+    "compatibility_theorems": [
+      "Digraph.migration.longest_dicycle.longest_dicycle_compat",
+      "Digraph.migration.longest_dicycle.vertex_transitive_longest_dicycles_intersect_statement_compat"
+    ],
+    "api_theorems": [
+      "Digraph.foundations.longest_cycles.longest_dicycle_dicycle",
+      "Digraph.foundations.longest_cycles.longest_dicycle_uniq",
+      "Digraph.foundations.longest_cycles.longest_dicycle_size",
+      "Digraph.foundations.longest_cycles.longest_dicycle_max",
+      "Digraph.foundations.longest_cycles.longest_dicycle_nil",
+      "Digraph.foundations.longest_cycles.dicycle_seq1",
+      "Digraph.foundations.longest_cycles.longest_dicycle_card",
+      "Digraph.foundations.longest_cycles.longest_dicycle_size_eq",
+      "Digraph.foundations.longest_cycles.longest_dicycle_tie",
+      "Digraph.foundations.longest_cycles.longest_dicycle_shorter",
+      "Digraph.foundations.longest_cycles.longest_dicycle_hamiltonian",
+      "Digraph.foundations.longest_cycles.longest_dicycle_rot",
+      "Digraph.foundations.longest_cycles.longest_dicycle_rotr",
+      "Digraph.foundations.longest_cycles.longest_dicycle_none",
+      "Digraph.foundations.longest_cycles.longest_dicycle_exists",
+      "Digraph.foundations.longest_cycles.longest_dicycle_existsP",
+      "Digraph.foundations.longest_cycles.dicycle_rev_converse",
+      "Digraph.foundations.longest_cycles.longest_dicycle_rev_converse",
+      "Digraph.foundations.longest_cycles.dicycle_rev",
+      "Digraph.foundations.longest_cycles.longest_dicycle_rev",
+      "Digraph.foundations.longest_cycles.longest_dicycle_ground_arcless",
+      "Digraph.foundations.longest_cycles.longest_dicycle_ground_loop",
+      "Digraph.foundations.longest_cycles.longest_dicycle_ground_digon",
+      "Digraph.foundations.longest_cycles.longest_dicycle_ground_shorter",
+      "Digraph.foundations.longest_cycles.longest_dicycle_ground_triangle"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "Digraph.core.digraph",
+        "Digraph.core.dipath",
+        "GraphTheory.digraph",
+        "mathcomp.boot.fintype",
+        "mathcomp.boot.path",
+        "mathcomp.boot.seq"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "Digraph.core.dipath.dicycle",
+      "note": "Neither MathComp nor coq-graph-theory names a longest directed cycle of a raw sequence. The Digraph core supplies dicycle (dicycle_rot) and the converse digraph (converse_arcE); MathComp supplies rev_cycle, rev_uniq, card_uniqP / max_card and ex_maxnP. The new public module Digraph.foundations.longest_cycles owns the selection predicate and a bounded API; dicycle and the core dipath module are unchanged. B13's undirected genuine-cycle maximum (length greater than two) and the threshold-existence pattern grounding_unvd_sad.has_long_dicycle stay separate; no generic maximization abstraction is introduced. Legacy bodies and per-row certificates: meta/migration_reports/longest_dicycle.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/longest_dicycle.md",
+    "reviewed_by": "matching_scope",
+    "migration_spec": "meta/migration_reports/longest_dicycle.spec.json",
+    "downstream_client": "digraph-theory/theories/examples/longest_dicycle.v",
+    "foundation_fidelity": "meta/foundation_fidelity/longest-dicycle.json",
+    "reviewed_commit": "ed08916ff19c9c35095358d1eb835b23a484dbb5",
+    "independent_review": "meta/migration_reviews/longest_dicycle.md"
+  }
+}

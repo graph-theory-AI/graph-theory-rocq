@@ -1,0 +1,11 @@
+# A14 subcubic review
+
+Reviewed worker commit: `f52251a96beabaef4c9005e8dd9a9a29c4cca17c`, on private prerequisite union `ba8b7be309af5926081ba760ba0d5ab8e94215f7` (A13 and C13). Independent reviewer: path_review. Coordinator: root. Both approved the complete source and all six current/Original statement equivalences; exact evidence is archived in `coordination/evidence/A14-review-by-path-review/` and `A14-coordinator-final/`.
+
+The two simple-graph helpers move to pointwise `GTBase.base.subcubic`. The maximum-degree bridge is unconditional, including K0; it introduces no nonempty or multigraph guard. Three whole rows preserve the matching lower bound, full induced-subdivision NP-completeness predicate, and complete tree-independence biconditional. Complete Originals compose the reviewed C1/B3/A1/M1/C13 histories. All older snapshots, weak/defective encodings, statement documentation and statuses remain unchanged.
+
+Independent validation passed: 63 fresh sources, 37 closed assumptions, 76 type/conversion checks, 19 strict dependency closures, the expected X114 nonconversion, and 161/161 source/kernel checks. Earlier 35 frozen arrays, 117 migration modules and 107 prerequisite-union mathematical files were preserved. Implementer broad/normal gates are recorded separately; preparation does not claim a cumulative gate pass.
+
+Preparation preserves all five reviewed mathematical files, the complete own spec/fidelity/authored record and every prior proof/frozen/review field. It adds the two ordered project entries, unions four reciprocal notes, removes only the two migrated variants from A11/A12/A13 metadata, and regenerates reports/inventory/status. The latest-parent historical scan and exact preservation results are in `coordination/evidence/A14-integration/`; no new historical obligation was found. Root owns final prepared-source binding and cumulative gates.
+
+Contracts and regeneration: `base/theories/base.v`, `base/theories/examples/subcubic.v`, `meta/library_primitives/subcubic.json`, `meta/migration_reports/subcubic.spec.json`; run `python3 meta/migration_report.py subcubic --write` to regenerate the compact report, and use `--details` outside the committed reports directory for expanded output.

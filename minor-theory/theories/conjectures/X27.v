@@ -1,6 +1,7 @@
 (** * Minor.conjectures.X27 -- v2 bounded treewidth row *)
 
 From GTBase Require Export base.
+From GTBase Require Import bag_decompositions.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,9 +11,7 @@ Unset Printing Implicit Defensive.
 
 Definition x27_tree_decomposition
     (G T : sgraph) (bag : T -> {set G}) : Prop :=
-  (forall v : G, [exists t : T, v \in bag t]) /\
-  (forall x y : G, x -- y -> [exists t : T, (x \in bag t) && (y \in bag t)]) /\
-  forall v : G, connected [set t : T | v \in bag t].
+  bag_decomposition bag.
 
 Definition x27_treewidth_at_most (G : sgraph) (k : nat) : Prop :=
   exists (T : sgraph) (bag : T -> {set G}),

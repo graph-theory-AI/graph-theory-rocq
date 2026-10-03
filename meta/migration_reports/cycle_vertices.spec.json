@@ -1,0 +1,316 @@
+{
+  "family": "cycle-vertices",
+  "canonical_name": "GTBase.walks_paths.seq_vertices",
+  "canonical_short_name": "seq_vertices",
+  "relation": "definitional: the six helpers are the comprehension [set v | v \\in c] (X5 and XE1 with the explicit carrier annotation [set v : G | v \\in c], X19 over a diGraphType carrier), which is GTBase.walks_paths.seq_vertices c = [set:: c] by conversion (seq_verticesE). The family reuses B1's canonical (registry path-vertices, which keeps its fidelity record) and adds no primitive, fidelity owner or validity guard.",
+  "baseline_commit": "13c00aa204725a73e12d05f57c51f5f970d89c15",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "cycle-theory": "Cycle",
+    "digraph-theory": "Digraph"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "chromatic-theory/theories/migration/cycle_vertices.v",
+    "cycle-theory/theories/migration/cycle_vertices.v",
+    "digraph-theory/theories/migration/cycle_vertices.v",
+    "cycle-theory/theories/migration/edge_count.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.seq_verticesE",
+    "GTBase.walks_paths.in_seq_vertices",
+    "GTBase.walks_paths.seq_vertices_nil",
+    "GTBase.walks_paths.seq_vertices_seq1",
+    "GTBase.walks_paths.seq_vertices_cons",
+    "GTBase.walks_paths.seq_vertices_rot",
+    "GTBase.walks_paths.seq_vertices_rev",
+    "GTBase.walks_paths.seq_vertices_undup",
+    "GTBase.walks_paths.perm_seq_vertices",
+    "GTBase.walks_paths.card_seq_vertices",
+    "GTBase.walks_paths.card_seq_verticesP",
+    "GTBase.walks_paths.seq_vertices_subsetP",
+    "GTBase.walks_paths.seq_vertices_disjointP",
+    "GTBase.walks_paths.seq_vertices_ground_repeat"
+  ],
+  "summary": [
+    "Batch B, family B12 (cycle vertex supports): six helpers now unfold to `GTBase.walks_paths.seq_vertices c`, B1's canonical, by conversion. Four have the body `[set v | v \\in c]`: Chromatic X153 `x153_cycle_vertices`, Cycle X10 `x10_cycle_vertices`, Cycle X212 `x212_cycle_vertices`, and Digraph X19 `x19_cycle_vertices` over a `diGraphType` carrier. The cross-name Chromatic XE1 `xe1_vertices_of_seq` and Cycle X5 `x5_vertices_of_seq` have `[set v : G | v \\in c]`. The family reuses B1's canonical, API and fidelity record (registry path-vertices). It adds no primitive, fidelity owner, API lemma or validity guard: no cycle, uniqueness, adjacency or nonemptiness premise. X19.v imports only the small `GTBase.walks_paths`, as B1's X2 does. Public client base/theories/examples/cycle_vertices.v: empty and one-entry sequences; rotation, reversal and repeats; membership and cardinality under uniq; disjoint supports; the size of a genuine cycle's support; a repeated corner.",
+    "",
+    "Six rows and three intermediates are frozen with this family's helpers only:",
+    "- Chromatic X153: the list-critical subgraph of planar girth-5 graphs, with the precoloured-lists chain;",
+    "- Cycle X10 and X212: the two Smith rows;",
+    "- Cycle X5: #577 (vertex-disjoint four-cycles, with the disjoint-family chain) and #916 (a cycle with an external vertex that has three neighbours on it);",
+    "- Digraph X19: Lichiardopol's distinct-length dicycle packing, with the vertex-disjoint dicycles chain, whose disjointness still ranges over distinct list members.",
+    "XE1's helper is used by no row, so it has a helper certificate only and no row is invented. Every guard, quantifier order, constant, status and documented note is unchanged. The proof consumers Cycle implications_X212 (the X10/X212 Smith equivalence) and grounding_X212 compile unchanged.",
+    "",
+    "History. `X212Original` is the complete B10+B12 Smith row of X212, by conversion. It uses B10's frozen longest-cycle chain (`Cycle.migration.genuine_cycle.X212Legacy.longest_cycle`, itself over B10's frozen Boolean cycle) and this family's frozen support. Two per-row snapshots are documented reciprocally: B10's X212 Smith copy still calls the live support, and this family's X212 copy still calls B10's live longest-cycle chain. #916 keeps the live `x5_edge_count`. A7 (edge counts, under review at 842ff4d) is not integrated at this baseline, so whichever of A7 and B12 integrates second owes the complete A7+B12 #916 Original (A7's raw rank count with this family's raw support). Both initial snapshots stay. The unrelated A7, B4 and B10 histories of Chromatic XE1 are untouched.",
+    "",
+    "Kernel evidence, independent of this textual report, from `Print All Dependencies`:",
+    "- no frozen row or Original reaches a live helper or chain of this family;",
+    "- every per-row copy reaches no live constant outside its live row's closure;",
+    "- the X212 Original also reaches no live B10 helper, chain or canonical;",
+    "- each live row reaches `seq_vertices` and its alias.",
+    "Summary: /srv/graph-theory-rocq/coordination/evidence/B12-cycle_vertices/print_all_dependencies_summary.txt.",
+    "",
+    "Baseline 13c00aa is the announced B11 pin (B10 prose 0a0203e plus B11), not yet integrated; B12 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). The B1 (path_vertices) and B10 (genuine_cycle) specs listed these helpers as untouched distinct variants; they now record that B12 migrated them.",
+    "",
+    "#916 history follow-up, on the private B12+A7 stack e683a2a (B12 c528254 + A7 b9c491a, not for integration; intended integration order B11, A7, A8, A9, B12). `X5Original` is the complete whole 9e03072 #916 row. It uses A7's frozen raw rank count `Cycle.migration.edge_count.Legacy.x5_edge_count` (adjacent ordered pairs selected by `enum_rank p.1 < enum_rank p.2`; module alias A7, without Import) and this family's frozen raw support. It is certified through A7's `x5_edge_count_compat` (edge_count_rank) and conversion. B12's X5Legacy #916, which keeps the live count, and A7's X5Legacy #916, which keeps the live support, are both preserved unchanged and documented reciprocally in the cycle_vertices and edge_count specs."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X153.x153_cycle_vertices",
+      "path": "chromatic-theory/theories/conjectures/X153.v",
+      "name": "x153_cycle_vertices",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_vertices.v",
+      "frozen": "Legacy.x153_cycle_vertices",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.cycle_vertices.x153_cycle_vertices_compat",
+      "live_unfolds_to": "seq_vertices c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.XE1.xe1_vertices_of_seq",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_vertices_of_seq",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_vertices.v",
+      "frozen": "Legacy.xe1_vertices_of_seq",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.cycle_vertices.xe1_vertices_of_seq_compat",
+      "live_unfolds_to": "seq_vertices c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X153.x153_cycle_precoloured_lists",
+      "path": "chromatic-theory/theories/conjectures/X153.v",
+      "name": "x153_cycle_precoloured_lists",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X153Legacy.cycle_precoloured_lists",
+      "substitutions": {
+        "x153_cycle_precoloured_lists": "cycle_precoloured_lists",
+        "x153_cycle_vertices": "Legacy.x153_cycle_vertices"
+      },
+      "certificate": "Chromatic.migration.cycle_vertices.x153_cycle_precoloured_lists_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X153.planar_girth5_two_cycles_list_critical_subgraph_statement",
+      "path": "chromatic-theory/theories/conjectures/X153.v",
+      "name": "planar_girth5_two_cycles_list_critical_subgraph_statement",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X153Legacy.planar_girth5_two_cycles_list_critical_subgraph_statement",
+      "substitutions": {
+        "x153_cycle_precoloured_lists": "cycle_precoloured_lists",
+        "x153_cycle_vertices": "Legacy.x153_cycle_vertices"
+      },
+      "certificate": "Chromatic.migration.cycle_vertices.planar_girth5_two_cycles_list_critical_subgraph_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X10.x10_cycle_vertices",
+      "path": "cycle-theory/theories/conjectures/X10.v",
+      "name": "x10_cycle_vertices",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "Legacy.x10_cycle_vertices",
+      "substitutions": {},
+      "certificate": "Cycle.migration.cycle_vertices.x10_cycle_vertices_compat",
+      "live_unfolds_to": "seq_vertices c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X212.x212_cycle_vertices",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cycle_vertices",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "Legacy.x212_cycle_vertices",
+      "substitutions": {},
+      "certificate": "Cycle.migration.cycle_vertices.x212_cycle_vertices_compat",
+      "live_unfolds_to": "seq_vertices c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X5.x5_vertices_of_seq",
+      "path": "cycle-theory/theories/conjectures/X5.v",
+      "name": "x5_vertices_of_seq",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "Legacy.x5_vertices_of_seq",
+      "substitutions": {},
+      "certificate": "Cycle.migration.cycle_vertices.x5_vertices_of_seq_compat",
+      "live_unfolds_to": "seq_vertices c"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X10.smith_longest_cycles_r_connected_statement",
+      "path": "cycle-theory/theories/conjectures/X10.v",
+      "name": "smith_longest_cycles_r_connected_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X10Legacy.smith_longest_cycles_r_connected_statement",
+      "substitutions": {
+        "x10_cycle_vertices": "Legacy.x10_cycle_vertices"
+      },
+      "certificate": "Cycle.migration.cycle_vertices.smith_longest_cycles_r_connected_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X212.smith_two_longest_cycles_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X212Legacy.smith_two_longest_cycles_statement",
+      "substitutions": {
+        "x212_cycle_vertices": "Legacy.x212_cycle_vertices"
+      },
+      "certificate": "Cycle.migration.cycle_vertices.smith_two_longest_cycles_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.cycle_vertices.smith_two_longest_cycles_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.X212.smith_two_longest_cycles_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X212Original.smith_two_longest_cycles_statement",
+      "substitutions": {
+        "x212_cycle_vertices": "Legacy.x212_cycle_vertices",
+        "x212_longest_cycle": "B10.X212Legacy.longest_cycle"
+      },
+      "certificate": "Cycle.migration.cycle_vertices.smith_two_longest_cycles_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X5.x5_cycle_family_disjoint",
+      "path": "cycle-theory/theories/conjectures/X5.v",
+      "name": "x5_cycle_family_disjoint",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X5Legacy.cycle_family_disjoint",
+      "substitutions": {
+        "x5_cycle_family_disjoint": "cycle_family_disjoint",
+        "x5_vertices_of_seq": "Legacy.x5_vertices_of_seq"
+      },
+      "certificate": "Cycle.migration.cycle_vertices.x5_cycle_family_disjoint_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X5.min_degree_half_disjoint_four_cycles_statement",
+      "path": "cycle-theory/theories/conjectures/X5.v",
+      "name": "min_degree_half_disjoint_four_cycles_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X5Legacy.min_degree_half_disjoint_four_cycles_statement",
+      "substitutions": {
+        "x5_cycle_family_disjoint": "cycle_family_disjoint"
+      },
+      "certificate": "Cycle.migration.cycle_vertices.min_degree_half_disjoint_four_cycles_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X5.cycle_with_external_three_neighbours_statement",
+      "path": "cycle-theory/theories/conjectures/X5.v",
+      "name": "cycle_with_external_three_neighbours_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X5Legacy.cycle_with_external_three_neighbours_statement",
+      "substitutions": {
+        "x5_vertices_of_seq": "Legacy.x5_vertices_of_seq"
+      },
+      "certificate": "Cycle.migration.cycle_vertices.cycle_with_external_three_neighbours_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.cycle_vertices.cycle_with_external_three_neighbours_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X19.x19_cycle_vertices",
+      "path": "digraph-theory/theories/conjectures/X19.v",
+      "name": "x19_cycle_vertices",
+      "frozen_path": "digraph-theory/theories/migration/cycle_vertices.v",
+      "frozen": "Legacy.x19_cycle_vertices",
+      "substitutions": {},
+      "certificate": "Digraph.migration.cycle_vertices.x19_cycle_vertices_compat",
+      "live_unfolds_to": "seq_vertices c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X19.x19_vertex_disjoint_dicycles",
+      "path": "digraph-theory/theories/conjectures/X19.v",
+      "name": "x19_vertex_disjoint_dicycles",
+      "frozen_path": "digraph-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X19Legacy.vertex_disjoint_dicycles",
+      "substitutions": {
+        "x19_cycle_vertices": "Legacy.x19_cycle_vertices",
+        "x19_vertex_disjoint_dicycles": "vertex_disjoint_dicycles"
+      },
+      "certificate": "Digraph.migration.cycle_vertices.x19_vertex_disjoint_dicycles_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X19.lichiardopol_distinct_length_dicycle_packing_statement",
+      "path": "digraph-theory/theories/conjectures/X19.v",
+      "name": "lichiardopol_distinct_length_dicycle_packing_statement",
+      "frozen_path": "digraph-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X19Legacy.lichiardopol_distinct_length_dicycle_packing_statement",
+      "substitutions": {
+        "x19_vertex_disjoint_dicycles": "vertex_disjoint_dicycles"
+      },
+      "certificate": "Digraph.migration.cycle_vertices.lichiardopol_distinct_length_dicycle_packing_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.X5.x5_edge_count",
+      "path": "cycle-theory/theories/conjectures/X5.v",
+      "name": "x5_edge_count",
+      "frozen_path": "cycle-theory/theories/migration/edge_count.v",
+      "frozen": "Legacy.x5_edge_count",
+      "substitutions": {},
+      "certificate": "Cycle.migration.edge_count.x5_edge_count_compat",
+      "note": "A7 (edge-count) frozen raw rank count (adjacent ordered pairs with enum_rank p.1 < enum_rank p.2), reused unchanged by X5Original.cycle_with_external_three_neighbours_statement"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.X5.cycle_with_external_three_neighbours_statement",
+      "path": "cycle-theory/theories/conjectures/X5.v",
+      "name": "cycle_with_external_three_neighbours_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X5Original.cycle_with_external_three_neighbours_statement",
+      "substitutions": {
+        "x5_edge_count": "A7.Legacy.x5_edge_count",
+        "x5_vertices_of_seq": "Legacy.x5_vertices_of_seq"
+      },
+      "certificate": "Cycle.migration.cycle_vertices.cycle_with_external_three_neighbours_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    }
+  ],
+  "known_stale_snapshots": {
+    "cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.smith_two_longest_cycles_statement": "B10 per-row snapshot: family genuine-cycle (B10) froze its longest-cycle chain in X212's Smith row but kept the live x212_cycle_vertices, which after B12 unfolds to seq_vertices. Kept unchanged; B10's smith_two_longest_cycles_statement_compat stays true. The complete pre-B10, pre-B12 row is Cycle.migration.cycle_vertices.X212Original.smith_two_longest_cycles_statement, certified by smith_two_longest_cycles_statement_original_compat.",
+    "cycle-theory/theories/migration/edge_count.v#X5Legacy.cycle_with_external_three_neighbours_statement": "A7 per-row snapshot: family edge-count (A7) froze only its raw rank count in #916, so this copy still calls the live x5_vertices_of_seq, which after B12 unfolds to seq_vertices. Kept unchanged; A7's cycle_with_external_three_neighbours_statement_compat stays true. The complete pre-A7, pre-B12 row is Cycle.migration.cycle_vertices.X5Original.cycle_with_external_three_neighbours_statement, certified by cycle_with_external_three_neighbours_statement_original_compat.",
+    "cycle-theory/theories/migration/longest_cycle.v#X10Legacy.smith_longest_cycles_r_connected_statement": "B13 per-row snapshot: family longest-cycle (B13) froze only its own longest-cycle body in X10's Smith row, so this copy still calls the live x10_cycle_vertices, which after B12 unfolds to seq_vertices. Kept as B13's per-row row; the complete pre-B12, pre-B13 row is Cycle.migration.longest_cycle.X10Original.smith_longest_cycles_r_connected_statement over this family's frozen support (Legacy.x10_cycle_vertices).",
+    "cycle-theory/theories/migration/longest_cycle.v#X212Legacy.smith_two_longest_cycles_statement": "B13 per-row snapshot: family longest-cycle (B13) froze only its own longest-cycle body in X212's Smith row, so this copy still calls the live x212_cycle_vertices, which after B12 unfolds to seq_vertices. Kept as B13's per-row row; the complete row is this family's own X212Original (B10+B12), reused by B13."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "note": "Axiom audit (Print Assumptions) of the X212 Smith row; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_X212.v",
+      "name": "smith_longest_cycles_r_connected_statement",
+      "note": "Verified equivalence edge smith_two_longest_cycles_equiv_smith_longest_cycles_r_connected (X212 <-> X10 Smith rows). Its proof relies on the X212 and X10 supports being convertible; both now unfold to seq_vertices c. Theorem type and edge metadata are unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "note": "Same verified equivalence edge (X212 side); type and edge metadata unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Cycle.conjectures.XE2.xe2_same_vertex_set",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_same_vertex_set",
+      "note": "a predicate comparing two inline supports of sequences, not a support helper; untouched"
+    }
+  ]
+}

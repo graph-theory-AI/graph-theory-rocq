@@ -159,7 +159,7 @@ Lemma mdeg_Gt (v : Gt) : mdeg v = 3.
 Proof. by rewrite (mdeg_loopless _ loopless_Gt) edges_at_Gt cardsT card_edge_Gt. Qed.
 
 Lemma cubic_Gt : cubic Gt.
-Proof. by split; [exact: loopless_Gt | exact: mdeg_Gt]. Qed.
+Proof. by split=> [|v]; [exact: loopless_Gt | rewrite -(mdeg_loopless v loopless_Gt); exact: mdeg_Gt]. Qed.
 
 Lemma bridgeless_Gt : bridgeless Gt.
 Proof.

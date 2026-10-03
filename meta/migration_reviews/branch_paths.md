@@ -1,0 +1,9 @@
+# Weak branch paths: independent review
+
+Implementer family_scope; independent reviewer path_review. Exact source `63ead522584142948c94ef4e37d7b92c1950b127`, baseline `311fdcb`. Coordinator separately read the entire API/client, seven compatibility proofs and three complete statement iff, preserving the fixed source hashes.
+
+The contract keeps an injective branch map followed by a separate existential tail path for each oriented pattern edge. Tail size counts edges; uniqueness and internal branch avoidance remain exact. No inducedness, path disjointness, reversal coherence or simultaneous path-map condition is added. X186 uses the unconditional zero-bound iff, not conversion. All three blocked readings, X177 antecedent defects, X185 line-graph target and X186 local chromatic number remain unchanged.
+
+Independent validation passed: 19 fresh sources in two packages, 43 exact types/conversions, 26 closed assumptions, 14 strict closures and a direct negative-conversion probe; family source/kernel 73/73. All 2,679 predecessor files, 39 older frozen specs and 122 migration modules were preserved. Implementer all-40-report audit and normal unscoped X177/X185/X186 milestones separately passed, each normal milestone 11/11 with one closed statement. Evidence: `coordination/evidence/C17-review-by-path-review.md`, `C17-coordinator-final/` and `C17-branch-paths-by-family-scope/normal-gates.log`.
+
+Preparation on cumulative A13 `889f68b` preserves every reviewed mathematical/specification/fidelity/authored byte and all earlier frozen/review metadata. Only ordered project additions, actual review fields, the compact review record and regenerated outputs change. A fresh scan of 2,085 historical declarations, including 156 newer declarations than the worker baseline, found no additional obligation. No proof build or artifact transfer runs during preparation; coordinator cumulative acceptance remains separate.

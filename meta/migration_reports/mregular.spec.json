@@ -1,0 +1,316 @@
+{
+  "family": "multigraph-regularity",
+  "canonical_name": "GTBase.base.mregular",
+  "canonical_short_name": "mregular",
+  "relation": "multigraph incidence regularity: U5 regular_m G r := forall v, #|edges_at v| = r converts to GTBase.base.mregular G r and U5 cubic to GTBase.base.mcubic G (no loopless guard; a loop counts once). U6 cubic := loopless G /\\ forall v, mdeg v = 3 (arc-end degree, a loop twice) equals GTBase.base.loopless_cubic G := loopless G /\\ mcubic G by an unconditional iff through Cycle.foundations.connectivity.mdeg_loopless under the guard it carries. The two contracts stay distinct.",
+  "baseline_commit": "58f2862aa45b932cebb4cc59401a6b16f5d0c82a",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "cycle-theory": "Cycle"
+  },
+  "certificate_files": [
+    "base/theories/base.v",
+    "chromatic-theory/theories/migration/mregular.v",
+    "cycle-theory/theories/migration/mregular.v"
+  ],
+  "extra_certificates": [
+    "GTBase.base.mregular_void",
+    "GTBase.base.mregular_uniq",
+    "GTBase.base.mregular_mDelta",
+    "GTBase.base.loopless_cubic_mcubic",
+    "GTBase.base.mregular_bij"
+  ],
+  "summary": [
+    "Batch A, family A13 (multigraph incidence regularity and guarded cubicity). GTBase.base.mregular G r := forall v : G, #|edges_at v| = r counts incident edges (a loop once, parallel edges separately); mcubic G := mregular G 3 has no loopless guard; loopless_cubic G := loopless G /\\ mcubic G adds it. Chromatic U5 regular_m and cubic convert to mregular and mcubic; U5's three-edge-colouring conclusion keeps its unguarded cubic H exactly. Cycle U6 cubic (loopless G /\\ forall v, mdeg v = 3, arc-end degrees) equals loopless_cubic by an unconditional iff through mdeg_loopless under the guard it carries; base imports no Cycle module and no arc-end degree is duplicated. Upstream mgraph.iso does not apply to the unit-labelled mgraph (no elabelType structure on unit), so transport is stated along incidence-preserving vertex/edge bijections (mregular_bij).",
+    "",
+    "Eleven whole declarations are frozen verbatim at 58f2862 with the two reached chains U5.is_universal_sts and U10.cubic_bridgeless: U5 three-edge-colouring and universal Steiner triple systems (outer STS witness and validity), U6 predefined 2-regular CDC, three-decomposition, odd cycles/low oddness and strong 5-CDC, U10 intersecting perfect matchings, Petersen colouring and Berge-Fulkerson, and the two explicit external reductions of implications_U6 (non-corpus). All nonempty-vertex/edge, connectivity, bridgeless, fixed-S/circuit, multiplicity-two, size five/six and oddness conditions are kept. Seven proof-only adaptations in grounding_U6/U10 and implications_U6/U10 go through mdeg_loopless/subdeg_loopless with unchanged theorem types. No earlier frozen copy touches these names on this baseline or on bc52cc3."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.U5.regular_m",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "regular_m",
+      "frozen_path": "chromatic-theory/theories/migration/mregular.v",
+      "frozen": "Legacy.regular_m",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.mregular.regular_m_compat",
+      "live_unfolds_to": "mregular G r"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.U5.cubic",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "cubic",
+      "frozen_path": "chromatic-theory/theories/migration/mregular.v",
+      "frozen": "Legacy.cubic",
+      "substitutions": {
+        "regular_m": "Legacy.regular_m"
+      },
+      "certificate": "Chromatic.migration.mregular.cubic_compat",
+      "live_unfolds_to": "mcubic G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.U5.is_universal_sts",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "is_universal_sts",
+      "frozen_path": "chromatic-theory/theories/migration/mregular.v",
+      "frozen": "U5Legacy.is_universal_sts",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Chromatic.migration.mregular.is_universal_sts_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.U5.three_edge_coloring_statement",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "three_edge_coloring_statement",
+      "frozen_path": "chromatic-theory/theories/migration/mregular.v",
+      "frozen": "U5Legacy.three_edge_coloring_statement",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Chromatic.migration.mregular.three_edge_coloring_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.U5.universal_steiner_triple_systems_statement",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "universal_steiner_triple_systems_statement",
+      "frozen_path": "chromatic-theory/theories/migration/mregular.v",
+      "frozen": "U5Legacy.universal_steiner_triple_systems_statement",
+      "substitutions": {
+        "is_universal_sts": "U5Legacy.is_universal_sts"
+      },
+      "certificate": "Chromatic.migration.mregular.universal_steiner_triple_systems_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.U6.cubic",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "cubic",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "Legacy.cubic",
+      "substitutions": {},
+      "certificate": "Cycle.migration.mregular.cubic_compat",
+      "live_unfolds_to": "loopless_cubic G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U6.cycle_double_covers_containing_predefined_2_regular_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "cycle_double_covers_containing_predefined_2_regular_statement",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "U6Legacy.cycle_double_covers_containing_predefined_2_regular_statement",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Cycle.migration.mregular.cycle_double_covers_containing_predefined_2_regular_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U6.three_decomposition_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "three_decomposition_statement",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "U6Legacy.three_decomposition_statement",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Cycle.migration.mregular.three_decomposition_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U6.odd_cycles_and_low_oddness_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "odd_cycles_and_low_oddness_statement",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "U6Legacy.odd_cycles_and_low_oddness_statement",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Cycle.migration.mregular.odd_cycles_and_low_oddness_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U6.strong_5_cycle_double_cover_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "strong_5_cycle_double_cover_statement",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "U6Legacy.strong_5_cycle_double_cover_statement",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Cycle.migration.mregular.strong_5_cycle_double_cover_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.U10.cubic_bridgeless",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "cubic_bridgeless",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "U10Legacy.cubic_bridgeless",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Cycle.migration.mregular.cubic_bridgeless_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U10.intersecting_two_perfect_matchings_statement",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "intersecting_two_perfect_matchings_statement",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "U10Legacy.intersecting_two_perfect_matchings_statement",
+      "substitutions": {
+        "cubic_bridgeless": "U10Legacy.cubic_bridgeless"
+      },
+      "certificate": "Cycle.migration.mregular.intersecting_two_perfect_matchings_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U10.petersen_coloring_statement",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "petersen_coloring_statement",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "U10Legacy.petersen_coloring_statement",
+      "substitutions": {
+        "cubic_bridgeless": "U10Legacy.cubic_bridgeless"
+      },
+      "certificate": "Cycle.migration.mregular.petersen_coloring_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U10.the_berge_fulkerson_statement",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "the_berge_fulkerson_statement",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "U10Legacy.the_berge_fulkerson_statement",
+      "substitutions": {
+        "cubic_bridgeless": "U10Legacy.cubic_bridgeless"
+      },
+      "certificate": "Cycle.migration.mregular.the_berge_fulkerson_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.implications_U6.external_cdc_cubic_2connected_reduction_statement",
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "external_cdc_cubic_2connected_reduction_statement",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "ImplicationsU6Legacy.external_cdc_cubic_2connected_reduction_statement",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Cycle.migration.mregular.external_cdc_cubic_2connected_reduction_statement_compat",
+      "non_corpus": true
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.implications_U6.external_five_even_cover_cubic_reduction_statement",
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "external_five_even_cover_cubic_reduction_statement",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "ImplicationsU6Legacy.external_five_even_cover_cubic_reduction_statement",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Cycle.migration.mregular.external_five_even_cover_cubic_reduction_statement_compat",
+      "non_corpus": true
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "cubic",
+      "note": "U5 groundings of the live incidence-cubic contract; unchanged scripts and types."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "regular_m",
+      "note": "U5 groundings of the live incidence regularity; unchanged scripts and types."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "is_universal_sts",
+      "note": "Groundings of the live universal-STS chain; unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "three_edge_coloring_statement",
+      "note": "Print Assumptions of the live row; unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "universal_steiner_triple_systems_statement",
+      "note": "Print Assumptions of the live row; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "cubic",
+      "note": "U10's cubic_bridgeless reaches U6's cubic across files; frozen as U10Legacy.cubic_bridgeless over Legacy.cubic."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U10.v",
+      "name": "cubic",
+      "note": "cubic_Gt (triple-edge dipole): proof-only adaptation through mdeg_loopless; theorem type unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U10.v",
+      "name": "cubic_bridgeless",
+      "note": "Witness and projections of the live chain; unchanged types."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U6.v",
+      "name": "cubic",
+      "note": "cubic_loopless, cubic_mdeg and cubic_G3p: proof-only adaptations through mdeg_loopless; theorem types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U10.v",
+      "name": "petersen_coloring_statement",
+      "note": "Petersen pullback implications between live rows; Berge-Fulkerson proof adapted (incidence degree read directly, arc-end form for pm_meets_odd_cut via mdeg_loopless); types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U10.v",
+      "name": "the_berge_fulkerson_statement",
+      "note": "Implications between live rows; types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U10.v",
+      "name": "intersecting_two_perfect_matchings_statement",
+      "note": "Implication between live rows; types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "cubic",
+      "note": "cubic_has_circuit, cubic_edges_at, ppull_even, Petersen implications and the external reductions use the live guarded contract; two proofs adapted through subdeg_loopless; types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "strong_5_cycle_double_cover_statement",
+      "note": "Implications from the live row; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "petersen_coloring_statement",
+      "note": "Petersen colouring to five even covers between live rows; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "cycle_double_covers_containing_predefined_2_regular_statement",
+      "note": "Implication from the live row; unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTBase.base.regular",
+      "path": "base/theories/base.v",
+      "name": "regular",
+      "note": "simple-graph regularity over N(v); not a multigraph incidence count"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types of the frozen and live contracts, strict dependency closures of the frozen chains and declarations, and the theorem types of the forced proof consumers, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A13-mregular/ (outside the repository)"
+}

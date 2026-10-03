@@ -1,4 +1,5 @@
 -R theories ClassicalLemmas
+-Q ../base/theories GTBase
 -arg -w -arg -notation-overridden
 -arg -w -arg -ambiguous-paths
 
@@ -19,3 +20,4 @@ theories/caratheodory/caratheodory.v
 
 theories/konig/paths2.v
 theories/konig/line_colouring.v
+theories/migration/incidence_degree.v

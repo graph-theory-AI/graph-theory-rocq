@@ -185,9 +185,9 @@ Lemma cubic_has_circuit (G : mgraph) :
   (0 < #|edge G|)%N -> cubic G ->
   exists D : {set edge G}, is_circuit D.
 Proof.
-move=> He [_ Hreg].
+move=> He [Hll Hreg].
 have Cdeg : forall v : G, subdeg [set: edge G] v != 1.
-  move=> v; have e3 : subdeg [set: edge G] v = 3 by exact: Hreg v.
+  move=> v; have e3 : subdeg [set: edge G] v = 3 by rewrite (subdeg_loopless _ _ Hll) setIT; exact: Hreg v.
   by rewrite e3.
 have Tn0 : [set: edge G] != set0 by rewrite -card_gt0 cardsT.
 by have [D [_ Dcirc]] := has_circuit Tn0 Cdeg; exists D.
@@ -605,7 +605,7 @@ Lemma cubic_edges_at (G : mgraph) (Gcubic : cubic G) (v : G) :
 Proof.
 case: Gcubic => hll hdeg.
 have h3 : #|edges_at v| = 3.
-  by rewrite -(hdeg v) /mdeg (subdeg_loopless _ _ hll) setIT.
+  exact: (hdeg v).
 have /card_gt0P[e1 he1] : (0 < #|edges_at v|)%N by rewrite h3.
 have /cards2P[e2 [e3 [h23 h]]] : #|edges_at v :\ e1| == 2.
   by move: h3; rewrite (cardsD1 e1) he1 add1n => /eqP h; exact: h.

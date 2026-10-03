@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "family": "multigraph-regularity",
+  "primitive": {
+    "canonical_name": "GTBase.base.mregular",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "regular_m",
+      "cubic"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.U5.cubic",
+      "Chromatic.conjectures.U5.regular_m",
+      "Cycle.conjectures.U6.cubic"
+    ],
+    "consumers_remaining": 6,
+    "relation": "multigraph incidence regularity: U5 regular_m G r := forall v, #|edges_at v| = r converts to GTBase.base.mregular G r and U5 cubic to GTBase.base.mcubic G (no loopless guard; a loop counts once). U6 cubic := loopless G /\\ forall v, mdeg v = 3 (arc-end degree, a loop twice) equals GTBase.base.loopless_cubic G := loopless G /\\ mcubic G by an unconditional iff through Cycle.foundations.connectivity.mdeg_loopless under the guard it carries. The two contracts stay distinct.",
+    "semantic_classes": {
+      "incidence-regularity": {
+        "members": [
+          "Chromatic.conjectures.U5.regular_m"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Chromatic.migration.mregular.regular_m_compat",
+        "note": "forall v, #|edges_at v| = r; conversion; canonical GTBase.base.mregular"
+      },
+      "incidence-cubic-unguarded": {
+        "members": [
+          "Chromatic.conjectures.U5.cubic"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Chromatic.migration.mregular.cubic_compat",
+        "note": "regular_m G 3 without a loopless guard (three loops at one vertex qualify); conversion; canonical GTBase.base.mcubic"
+      },
+      "loopless-arc-end-cubic": {
+        "members": [
+          "Cycle.conjectures.U6.cubic"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Cycle.migration.mregular.cubic_compat",
+        "note": "loopless G /\\ forall v, mdeg v = 3 with arc-end degrees; an unconditional iff with GTBase.base.loopless_cubic through mdeg_loopless under the guard; not a conversion"
+      }
+    },
+    "distinct_variants": {
+      "GTBase.base.regular": "simple-graph regularity over N(v); not a multigraph incidence count"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.mregular.regular_m_compat",
+      "Chromatic.migration.mregular.cubic_compat",
+      "Chromatic.migration.mregular.is_universal_sts_compat",
+      "Chromatic.migration.mregular.three_edge_coloring_statement_compat",
+      "Chromatic.migration.mregular.universal_steiner_triple_systems_statement_compat",
+      "Cycle.migration.mregular.cubic_compat",
+      "Cycle.migration.mregular.cycle_double_covers_containing_predefined_2_regular_statement_compat",
+      "Cycle.migration.mregular.three_decomposition_statement_compat",
+      "Cycle.migration.mregular.odd_cycles_and_low_oddness_statement_compat",
+      "Cycle.migration.mregular.strong_5_cycle_double_cover_statement_compat",
+      "Cycle.migration.mregular.cubic_bridgeless_compat",
+      "Cycle.migration.mregular.intersecting_two_perfect_matchings_statement_compat",
+      "Cycle.migration.mregular.petersen_coloring_statement_compat",
+      "Cycle.migration.mregular.the_berge_fulkerson_statement_compat",
+      "Cycle.migration.mregular.external_cdc_cubic_2connected_reduction_statement_compat",
+      "Cycle.migration.mregular.external_five_even_cover_cubic_reduction_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.base.mregular_void",
+      "GTBase.base.mregular_uniq",
+      "GTBase.base.mregular_mDelta",
+      "GTBase.base.loopless_cubic_mcubic",
+      "GTBase.base.mregular_bij"
+    ],
+    "public_client": "base/theories/examples/mregular.v",
+    "legacy_baseline": "58f2862aa45b932cebb4cc59401a6b16f5d0c82a",
+    "migration_report": "meta/migration_reports/mregular.md",
+    "migration_spec": "meta/migration_reports/mregular.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A13.md",
+    "foundation_fidelity": "meta/foundation_fidelity/multigraph-regularity.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.mgraph (edges_at, incident, iso, edges_at_iso)",
+        "GraphTheory.structures",
+        "GTBase.base (loopless, mDelta)",
+        "Cycle.foundations.connectivity (mdeg, mdeg_loopless)"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.base.mregular/mcubic/loopless_cubic over upstream edges_at",
+      "note": "Pinned GraphTheory has edges_at and edges_at_iso but no regular/cubic primitive; its iso needs an elabelType edge-label structure, which unit lacks (only flat A has one), so iso transport is replaced by mregular_bij over incidence-preserving bijections. Arc-end degree stays Cycle's mdeg; base does not import Cycle. Evidence: coordination/evidence/A13-multigraph-regularity-discovery/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "path_review",
+    "reviewed_commit": "004cf63fa31a4d7f1128ad04a8e555ec945dd943",
+    "independent_review": "meta/migration_reviews/mregular.md"
+  }
+}

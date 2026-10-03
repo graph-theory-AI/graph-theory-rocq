@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "family": "triangle-free",
+  "primitive": {
+    "canonical_name": "GTBase.base.triangle_free",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "triangle_free"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X132.x132_triangle_free",
+      "Chromatic.conjectures.X187.x187_triangle_free",
+      "Chromatic.conjectures.X192.x192_triangle_free"
+    ],
+    "consumers_remaining": 3,
+    "relation": "simple-graph triangle-freeness: Chromatic X132/X187/X192 xNNN_triangle_free G := girth_geq G 4 equals GTBase.base.triangle_free G (no three mutually adjacent vertices) by the unconditional bridge GTBase.base.girth_geq4_equiv_triangle_free, not a conversion; the 2 < size c guard of girth_geq is what makes it hold. The bridge and its two support lemmas moved with their proofs from Topological.foundations.girth, which keeps them under their qualified names.",
+    "semantic_classes": {
+      "girth-at-least-four": {
+        "members": [
+          "Chromatic.conjectures.X132.x132_triangle_free",
+          "Chromatic.conjectures.X187.x187_triangle_free",
+          "Chromatic.conjectures.X192.x192_triangle_free"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "note": "girth_geq G 4 (genuine cycles, 2 < size c); an unconditional iff with GTBase.base.triangle_free through girth_geq4_equiv_triangle_free; not a conversion",
+        "certificates": [
+          "Chromatic.migration.triangle_free.x132_triangle_free_compat",
+          "Chromatic.migration.triangle_free.x187_triangle_free_compat",
+          "Chromatic.migration.triangle_free.x192_triangle_free_compat"
+        ]
+      }
+    },
+    "distinct_variants": {
+      "GTMisc.conjectures.XE2.xe2_triangle_free_rel": "the same triple prohibition over an arbitrary finite relation, not a supplied sgraph; its erdos_895 row assumes symmetry/irreflexivity separately",
+      "Digraph.conjectures.chi_bounded.underlying_triangle_free": "no 3-clique in the underlying graph of a digraph (explicit x != y, symmetrized arcs); a digraph carrier, not a simple graph",
+      "Digraph.conjectures.X221.x221_oriented_triangle_free": "orientedness guard plus no triple under x221_uadj; stronger than an unguarded underlying triangle predicate",
+      "Digraph.conjectures.X193.x193_directed_triangle_free": "no directed 3-cycle; a transitively oriented K3 qualifies although its underlying graph is a triangle"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.triangle_free.x132_triangle_free_compat",
+      "Chromatic.migration.triangle_free.x187_triangle_free_compat",
+      "Chromatic.migration.triangle_free.x192_triangle_free_compat",
+      "Chromatic.migration.triangle_free.dvorak_norin_postle_planar_list_flexibility_statement_compat",
+      "Chromatic.migration.triangle_free.planar_triangle_free_request_graph_fraction_statement_compat",
+      "Chromatic.migration.triangle_free.x192_polytime_additive_chromatic_approx_compat",
+      "Chromatic.migration.triangle_free.triangle_free_minor_closed_chromatic_additive_approx_statement_compat",
+      "Chromatic.migration.triangle_free.planar_triangle_free_request_graph_fraction_statement_original_compat",
+      "Chromatic.migration.triangle_free.triangle_free_minor_closed_chromatic_additive_approx_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.base.triangle_ucycle",
+      "GTBase.base.ucycle3_triangle",
+      "GTBase.base.girth_geq4_equiv_triangle_free"
+    ],
+    "public_client": "base/theories/examples/triangle_free.v",
+    "legacy_baseline": "f52251a96beabaef4c9005e8dd9a9a29c4cca17c",
+    "migration_report": "meta/migration_reports/triangle_free.md",
+    "migration_spec": "meta/migration_reports/triangle_free.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A15.md",
+    "foundation_fidelity": "meta/foundation_fidelity/triangle-free.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory (all core modules: only checkpoint triangle inequalities match triangle/girth)",
+        "mathcomp.ssreflect.path (ucycle, cycle, uniq)",
+        "GTBase.base (triangle_free, girth_geq)",
+        "Topological.foundations.girth (the existing bridge)",
+        "Chromatic.conjectures.grounding_U8 and Extremal.conjectures.implications_X13 (independent bridges)"
+      ],
+      "result": "existing-local-canonical",
+      "candidate": "GTBase.base.triangle_free with the moved bridge GTBase.base.girth_geq4_equiv_triangle_free",
+      "note": "No upstream triangle or girth primitive; GTBase already owns triangle_free and girth_geq. The existing Topological bridge is the public proof; it moves into base so that base-level clients need no area import. Evidence: coordination/evidence/A15-triangle-free-discovery/ and coordination/evidence/A15-triangle-free/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "path_review (independent coordinator helper)",
+    "reviewed_commit": "76122100ec110f03f4b406d6b98c848a09aedf99",
+    "independent_review": "meta/migration_reviews/triangle_free.md"
+  }
+}

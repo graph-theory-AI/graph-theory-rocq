@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "family": "triangle-free",
+  "modules": {
+    "GTBase.base": {
+      "path": "base/theories/base.v",
+      "overrides": {
+        "triangle_free": {
+          "verdict": "FAITHFUL",
+          "note": "No three mutually adjacent vertices (pairwise distinct by irreflexivity). Equal to girth_geq G 4 on every simple graph (girth_geq4_equiv_triangle_free); K_0, K_1, K_2 and the 4-cycle qualify, K_3 does not."
+        }
+      },
+      "machine_evidence": [
+        "triangle_ucycle",
+        "ucycle3_triangle",
+        "girth_geq4_equiv_triangle_free"
+      ]
+    }
+  }
+}
