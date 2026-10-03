@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 META = ROOT / "meta"
-PACKAGE_DIRS = {"base"} | {
+PACKAGE_DIRS = {"base", "classical-lemmas"} | {
     path.name
     for path in ROOT.iterdir()
     if path.is_dir() and path.name.endswith("-theory")
@@ -28,6 +28,7 @@ MILESTONE_RE = re.compile(
 # dependency.  A changed package is rebuilt together with every reverse
 # dependency in this closure.
 REVERSE_DEPENDENCIES = {
+    "classical-lemmas": {"packing-theory"},
     "minor-theory": {"graph-theory-misc"},
     "topological-graph-theory": {
         "hamiltonicity-theory",
@@ -37,6 +38,7 @@ REVERSE_DEPENDENCIES = {
 }
 
 MUTATION_GATE_PATHS = {
+    "meta/changed_milestones.py",
     "meta/check_library_migration.py",
     "meta/test_check_library_migration.py",
     "meta/check_milestone.py",
@@ -55,6 +57,7 @@ MUTATION_GATE_PATHS = {
 }
 
 MIGRATION_GATE_PATHS = {
+    "meta/changed_milestones.py",
     "meta/check_library_migration.py",
     "meta/test_check_library_migration.py",
     "meta/library_inventory.py",
@@ -185,6 +188,10 @@ def validate_routing_fixtures() -> None:
             raise SystemExit(f"migration report routing fixture failed: {path}")
     fixtures = {
         "base/_CoqProject": "base",
+        "classical-lemmas/_CoqProject": "classical-lemmas",
+        "classical-lemmas/theories/konig/line_colouring.v": "classical-lemmas",
+        "classical-lemmas/theories/migration/incidence.v": "classical-lemmas",
+        "classical-lemmas-other/theories/konig/line_colouring.v": None,
         "chromatic-theory/theories/migration/simple_edges.v": "chromatic-theory",
         "digraph-theory/rocq-digraph-theory.opam": "digraph-theory",
         "meta/check_milestone.py": None,
@@ -202,6 +209,8 @@ def validate_routing_fixtures() -> None:
     actual_closure = reverse_dependency_closure({"topological-graph-theory"})
     if actual_closure != expected_closure:
         raise SystemExit(f"reverse-dependency fixture failed: {actual_closure!r}")
+    if reverse_dependency_closure({"classical-lemmas"}) != {"classical-lemmas", "packing-theory"}:
+        raise SystemExit("classical-lemmas reverse-dependency fixture failed")
     print("changed-path routing fixtures OK")
 
 
@@ -255,7 +264,7 @@ def main(argv: list[str]) -> int:
     if mutation_changed:
         run(["make", "mutation"])
 
-    migration_changed = base_changed or any(
+    migration_changed = base_changed or "classical-lemmas" in changed_packages or any(
         path in MIGRATION_GATE_PATHS or family_registry_change(path)
         or "/theories/migration/" in path or migration_report_change(path)
         for path in paths

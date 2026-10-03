@@ -65,7 +65,7 @@ from pathlib import Path
 import library_inventory as INV
 import corpus_registry as REG
 import rocq_toolchain as ROCQ
-from family_registry import RegistryError, load_library_registry
+from family_registry import RegistryError, load_library_registry, public_repository_path
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -231,22 +231,25 @@ def statement_dependencies(base: str, sources: set[str], rows: dict, *,
     ambiguous explicit references. Notation and constructor resolution still
     require the separate kernel dependency checks and independent review.
 
-    Explicit public sources also need public intermediary nodes. This indexes
+    Explicit public sources also need public intermediary nodes, including
+    build-listed ClassicalLemmas siblings outside conjecture directories. This indexes
     declaration bodies, not proof terms or every internal module, and does not
     enroll those nodes as sources or add them to the helper debt inventory.
     """
     paths = git("ls-tree", "-r", "--name-only", base).splitlines()
     projects, nodes, node_packages, short_names = {}, {}, {}, defaultdict(set)
     for path in paths:
-        public = (path.startswith("base/theories/") and len(Path(path).parts) == 3
-                  or "/theories/foundations/" in path)
+        public = public_repository_path(path)
         if not path.endswith(".v") or not ("/theories/conjectures/" in path or include_public and public):
             continue
         if Path(path).name.startswith(SKIP_PREFIXES):
             continue
         package = path.split("/", 1)[0]
         if package not in projects:
-            projects[package] = INV.project_sources(source_at(base, package + "/_CoqProject"))[0]
+            project_path = package + "/_CoqProject"
+            project = (INV.regular_source_blob(ROOT, base, project_path)[1]
+                       if include_public and public else source_at(base, project_path))
+            projects[package] = INV.project_sources(project)[0]
         if path.split("/", 1)[1] not in projects[package]:
             continue
         if public and include_public:
