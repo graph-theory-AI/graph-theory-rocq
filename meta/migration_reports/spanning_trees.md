@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py spanning_trees --details /tmp/m
 - Canonical: `GTBase.spanning_trees.fg_spanning_tree`.
 - Baseline: `7848021c00cb71576fbe9b94693567ec01420b48`.
 - Scope: 3 helpers, 3 statements, 14 frozen objects, 28 recorded references.
-- Source checks: 147/147 pass; consistent.
+- Source checks: 146/146 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -19,6 +19,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py spanning_trees --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Extremal.conjectures.XE1.xe1_tree`, `Extremal.conjectures.D2tur.tree_on`, `Digraph.conjectures.X2.oriented_tree`.
+Excluded distinct variants: `Extremal.conjectures.D2tur.tree_on`, `Digraph.conjectures.X2.oriented_tree`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/minor_classes.v#Legacy.minor_closed_spanning_tree_polytope_linear_xc_statement`, `cycle-theory/theories/migration/mregular.v#U6Legacy.three_decomposition_statement`.
