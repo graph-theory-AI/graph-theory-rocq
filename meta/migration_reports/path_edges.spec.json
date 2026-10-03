@@ -1,0 +1,582 @@
+{
+  "family": "path-edges",
+  "canonical_name": "GTBase.walks_paths.seq_edge_set",
+  "canonical_short_name": "seq_edge_set",
+  "relation": "three separate representations: X14 x14_path_edges is seq_edge_list p (ordered list, conversion); X172 x172_path_edges and U7 path_edges are seq_edge_set s (finite support, conversion) and XE2 xe2_path_edge_set equals seq_edge_set p for every p (seq_edge_set_image); X178 x178_path_edge_set is seq_index_edge_set p (actual edges between first occurrences, conversion), equal to the support only on duplicate-free walks",
+  "baseline_commit": "048c768adce0cfcbf5b5a5763d71fc8daf483db8",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "minor-theory": "Minor",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "graph-theory-misc/theories/migration/path_edges.v",
+    "minor-theory/theories/migration/path_edges.v",
+    "extremal-graph-theory/theories/migration/path_edges.v",
+    "packing-theory/theories/migration/path_edges.v",
+    "graph-theory-misc/theories/migration/edge_colourings.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.in_seq_edge_set",
+    "GTBase.walks_paths.seq_edge_listP",
+    "GTBase.walks_paths.seq_edge_setP",
+    "GTBase.walks_paths.seq_edge_set_image",
+    "GTBase.walks_paths.seq_edge_set_consecutive",
+    "GTBase.walks_paths.seq_edge_set_consecutiveP",
+    "GTBase.walks_paths.seq_edge_list_nil",
+    "GTBase.walks_paths.seq_edge_list_seq1",
+    "GTBase.walks_paths.seq_edge_list_cons2",
+    "GTBase.walks_paths.seq_edge_list_pair",
+    "GTBase.walks_paths.seq_edge_list_loop",
+    "GTBase.walks_paths.seq_edge_list_back",
+    "GTBase.walks_paths.seq_edge_set_nil",
+    "GTBase.walks_paths.seq_edge_set_seq1",
+    "GTBase.walks_paths.seq_edge_set_cons2",
+    "GTBase.walks_paths.seq_edge_set_pair",
+    "GTBase.walks_paths.seq_edge_set_back",
+    "GTBase.walks_paths.size_seq_edge_list",
+    "GTBase.walks_paths.card_seq_edge_set",
+    "GTBase.walks_paths.seq_edge_set_sub",
+    "GTBase.walks_paths.seq_edge_list_rcons",
+    "GTBase.walks_paths.seq_edge_list_rev",
+    "GTBase.walks_paths.seq_edge_set_rev",
+    "GTBase.walks_paths.seq_edge_set_path",
+    "GTBase.walks_paths.seq_edge_set_sorted",
+    "GTBase.walks_paths.seq_edge_list_sorted",
+    "GTBase.walks_paths.seq_edge_set_nodes",
+    "GTBase.walks_paths.seq_edge_list_edgep",
+    "GTBase.walks_paths.seq_index_consecutive_sym",
+    "GTBase.walks_paths.index_succ_zip",
+    "GTBase.walks_paths.seq_index_consecutiveE",
+    "GTBase.walks_paths.seq_index_consecutiveP",
+    "GTBase.walks_paths.seq_index_consecutive_absent",
+    "GTBase.walks_paths.seq_index_edge_setP",
+    "GTBase.walks_paths.seq_index_edge_set_sub",
+    "GTBase.walks_paths.seq_index_edge_set_nil",
+    "GTBase.walks_paths.seq_index_edge_set_seq1",
+    "GTBase.walks_paths.seq_index_edge_set_uniq",
+    "GTBase.walks_paths.seq_index_edge_set_walk",
+    "GTBase.walks_paths.seq_index_edge_set_simple_path",
+    "GTBase.walks_paths.seq_index_edge_set_edge",
+    "GTBase.walks_paths.seq_index_edge_set_nonedge",
+    "GTBase.walks_paths.seq_edge_list_ground_back",
+    "GTBase.walks_paths.seq_edge_set_ground_back",
+    "GTBase.walks_paths.seq_edge_list_ground_loop",
+    "GTBase.walks_paths.seq_edge_set_ground_repeat",
+    "GTBase.walks_paths.seq_index_edge_set_ground_repeat",
+    "GTBase.walks_paths.seq_index_edge_set_ground_rev"
+  ],
+  "summary": [
+    "Batch B, family B8 (`path_edges` / `path_edge_set`): all five helpers of the two normalized names, in three representation classes kept apart in registry and certificates. RAW ORDERED LIST: X14's `x14_path_edges p` (`map (fun e => [set e.1; e.2]) (zip p (behead p))`) now unfolds to `GTBase.walks_paths.seq_edge_list p`, convertible: order and multiplicity are kept, a repeated vertex gives a one-vertex set and a non-adjacent pair is listed. FINITE SUPPORT: X172's `x172_path_edges` and U7's `path_edges` (byte-identical bodies) now unfold to `seq_edge_set s` (`[set e in seq_edge_list s]`), convertible; XE2's `xe2_path_edge_set`, the existential image of the same pairs, now unfolds to `seq_edge_set p` too, equal for every sequence but not convertible (`seq_edge_set_image`; `xe2_path_edge_set_compat` is a proved equality and the #915 chain rewrites with it). FIRST-INDEX ACTUAL EDGES: X178's `x178_path_edge_set` (edges `x -- y` with both ends in `p` and adjacent FIRST indices, `U9.consec`) now unfolds to `seq_index_edge_set p`, convertible (`seq_index_consecutive` has `U9.consec`'s body; `U9.consec` itself is unchanged). It is a separate contract: it equals `seq_edge_set p :&: E(G)` on duplicate-free `p` and `seq_edge_set p` on duplicate-free walks (`seq_index_edge_set_uniq`, `seq_index_edge_set_walk`, `seq_index_edge_set_simple_path`), but not in general and not under reversal: in `K_3` the sequence `[:: 0; 1; 0; 2]` has the raw edge `{0, 2}` that its first-index set misses, while the reversed `[:: 2; 0; 1; 0]` has it (grounded in walks_paths.v and the public client). No uniqueness, adjacency, nonemptiness or loop guard is added to any raw contract.",
+    "",
+    "Seven rows, eight intermediate declarations, all frozen with this family's helpers only: X14 `x14_rainbow_path` and Andersen's row; X62's cross-file `x62_edges_covered_by_paths` and its cover row; X172's bridge replacement, its complete `Inductive` closure (both constructors, renamed `generated_refl` / `generated_step`) and the finitely-generated row; U7's `immersion` (renamed `u7_immersion`: U7 names carry no wave prefix) and the colouring row; X174's negated immersion and its row with both halves (universal upper bound and existential attainment), the documented natural-subtraction caveat `(n - t) + 3` verbatim; XE2's edge-disjointness and #915; X178's decomposition predicate and the Gallai row. The four U7 grounding theorems keep their statements and proofs.",
+    "",
+    "History. The complete X14 / X62 rows before every migration are family C6's `X14Original` / `X62Original` (GTMisc.migration.edge_colourings, C6 history 7b04105): they already freeze the raw path-edge list and the cover predicate with C6's properness over pre-M1 edges and B6's genuine path; their certificates hold unchanged by conversion and are reused here (C6's two complete rows as `original-statement` objects with C6's certificates, its frozen list, rainbow path and cover predicate as `historical` objects), not copied. New complete originals: `X172Original` (B2's frozen `x172_path_internal` with this family's frozen edge set, chain, closure and row), `XE2Original.erdos_915_statement` (B2's frozen internal disjointness with this family's frozen edge disjointness) and `X178Original` (B6's frozen `x178_path_seq` with this family's frozen edge set). Earlier partial snapshots (B2 X172 / #915, B6 X14 / X62 / X178, C6 X14 / X62) are unchanged; their reliance on this family's live helpers is listed below, and this family's per-row copies are listed in their reports. U7 and X174 had no earlier snapshot.",
+    "",
+    "Kernel evidence, independent of this textual report: `Print All Dependencies` of every frozen statement and original contains no live helper or chain declaration of this family and none of `seq_edge_list`, `seq_edge_set`, `seq_index_edge_set`, while each live statement reaches its canonical and its alias (/srv/graph-theory-rocq/coordination/evidence/B8-path_edges/print_all_dependencies_summary.txt).",
+    "",
+    "Baseline 048c768 is a private, not-for-integration merge of the B7 series fa3f5f4 with the C6 history 7b04105 (union of _CoqProject lines and of one simple_path summary sentence; no .v file differs from both parents). No statement text, doc block, manifest row or leg state changes (checked below)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X14.x14_path_edges",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_path_edges",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "Legacy.x14_path_edges",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.path_edges.x14_path_edges_compat",
+      "live_unfolds_to": "seq_edge_list p"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X172.x172_path_edges",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "x172_path_edges",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "Legacy.x172_path_edges",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.path_edges.x172_path_edges_compat",
+      "live_unfolds_to": "seq_edge_set s"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X14.x14_rainbow_path",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_rainbow_path",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X14Legacy.rainbow_path",
+      "substitutions": {
+        "x14_path_edges": "Legacy.x14_path_edges",
+        "x14_rainbow_path": "rainbow_path"
+      },
+      "certificate": "GTMisc.migration.path_edges.x14_rainbow_path_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X14.andersen_rainbow_path_statement",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "andersen_rainbow_path_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X14Legacy.andersen_rainbow_path_statement",
+      "substitutions": {
+        "x14_rainbow_path": "rainbow_path"
+      },
+      "certificate": "GTMisc.migration.path_edges.andersen_rainbow_path_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "GTMisc.migration.edge_colourings.andersen_rainbow_path_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X62.x62_edges_covered_by_paths",
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "x62_edges_covered_by_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X62Legacy.edges_covered_by_paths",
+      "substitutions": {
+        "x14_path_edges": "Legacy.x14_path_edges",
+        "x62_edges_covered_by_paths": "edges_covered_by_paths"
+      },
+      "certificate": "GTMisc.migration.path_edges.x62_edges_covered_by_paths_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X62.rainbow_paths_linear_edge_cover_statement",
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "rainbow_paths_linear_edge_cover_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X62Legacy.rainbow_paths_linear_edge_cover_statement",
+      "substitutions": {
+        "x14_rainbow_path": "X14Legacy.rainbow_path",
+        "x62_edges_covered_by_paths": "edges_covered_by_paths"
+      },
+      "certificate": "GTMisc.migration.path_edges.rainbow_paths_linear_edge_cover_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "GTMisc.migration.edge_colourings.rainbow_paths_linear_edge_cover_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X172.x172_one_bridge_replacement",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "x172_one_bridge_replacement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X172Legacy.one_bridge_replacement",
+      "substitutions": {
+        "x172_one_bridge_replacement": "one_bridge_replacement",
+        "x172_path_edges": "Legacy.x172_path_edges"
+      },
+      "certificate": "GTMisc.migration.path_edges.x172_one_bridge_replacement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X172.x172_generated_by_bridge_replacement",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "x172_generated_by_bridge_replacement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X172Legacy.generated_by_bridge_replacement",
+      "substitutions": {
+        "x172_generated_by_bridge_replacement": "generated_by_bridge_replacement",
+        "x172_generated_refl": "generated_refl",
+        "x172_generated_step": "generated_step",
+        "x172_one_bridge_replacement": "one_bridge_replacement"
+      },
+      "certificate": "GTMisc.migration.path_edges.x172_generated_by_bridge_replacement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X172.metric_lines_bridges_counterexamples_finitely_generated_statement",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "metric_lines_bridges_counterexamples_finitely_generated_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X172Legacy.metric_lines_bridges_counterexamples_finitely_generated_statement",
+      "substitutions": {
+        "x172_generated_by_bridge_replacement": "generated_by_bridge_replacement"
+      },
+      "certificate": "GTMisc.migration.path_edges.metric_lines_bridges_counterexamples_finitely_generated_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "GTMisc.migration.path_edges.metric_lines_bridges_counterexamples_finitely_generated_statement_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X172.x172_one_bridge_replacement",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "x172_one_bridge_replacement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X172Original.one_bridge_replacement",
+      "substitutions": {
+        "x172_one_bridge_replacement": "one_bridge_replacement",
+        "x172_path_edges": "Legacy.x172_path_edges",
+        "x172_path_internal": "GTMisc.migration.internal_vertices.Legacy.x172_path_internal"
+      },
+      "certificate": "GTMisc.migration.path_edges.x172_one_bridge_replacement_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X172.x172_generated_by_bridge_replacement",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "x172_generated_by_bridge_replacement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X172Original.generated_by_bridge_replacement",
+      "substitutions": {
+        "x172_generated_by_bridge_replacement": "generated_by_bridge_replacement",
+        "x172_generated_refl": "generated_refl",
+        "x172_generated_step": "generated_step",
+        "x172_one_bridge_replacement": "one_bridge_replacement"
+      },
+      "certificate": "GTMisc.migration.path_edges.x172_generated_by_bridge_replacement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X172.metric_lines_bridges_counterexamples_finitely_generated_statement",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "metric_lines_bridges_counterexamples_finitely_generated_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/path_edges.v",
+      "frozen": "X172Original.metric_lines_bridges_counterexamples_finitely_generated_statement",
+      "substitutions": {
+        "x172_generated_by_bridge_replacement": "generated_by_bridge_replacement"
+      },
+      "certificate": "GTMisc.migration.path_edges.metric_lines_bridges_counterexamples_finitely_generated_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.U7.path_edges",
+      "path": "minor-theory/theories/conjectures/U7.v",
+      "name": "path_edges",
+      "frozen_path": "minor-theory/theories/migration/path_edges.v",
+      "frozen": "Legacy.path_edges",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_edges.path_edges_compat",
+      "live_unfolds_to": "seq_edge_set s"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.U7.immersion",
+      "path": "minor-theory/theories/conjectures/U7.v",
+      "name": "immersion",
+      "frozen_path": "minor-theory/theories/migration/path_edges.v",
+      "frozen": "U7Legacy.u7_immersion",
+      "substitutions": {
+        "immersion": "u7_immersion",
+        "path_edges": "Legacy.path_edges"
+      },
+      "certificate": "Minor.migration.path_edges.immersion_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.U7.coloring_and_immersion_statement",
+      "path": "minor-theory/theories/conjectures/U7.v",
+      "name": "coloring_and_immersion_statement",
+      "frozen_path": "minor-theory/theories/migration/path_edges.v",
+      "frozen": "U7Legacy.coloring_and_immersion_statement",
+      "substitutions": {
+        "immersion": "u7_immersion"
+      },
+      "certificate": "Minor.migration.path_edges.coloring_and_immersion_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X174.x174_no_Kt_immersion",
+      "path": "minor-theory/theories/conjectures/X174.v",
+      "name": "x174_no_Kt_immersion",
+      "frozen_path": "minor-theory/theories/migration/path_edges.v",
+      "frozen": "X174Legacy.no_Kt_immersion",
+      "substitutions": {
+        "immersion": "U7Legacy.u7_immersion",
+        "x174_no_Kt_immersion": "no_Kt_immersion"
+      },
+      "certificate": "Minor.migration.path_edges.x174_no_Kt_immersion_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement",
+      "path": "minor-theory/theories/conjectures/X174.v",
+      "name": "kt_immersion_clique_count_extremal_statement",
+      "frozen_path": "minor-theory/theories/migration/path_edges.v",
+      "frozen": "X174Legacy.kt_immersion_clique_count_extremal_statement",
+      "substitutions": {
+        "x174_no_Kt_immersion": "no_Kt_immersion"
+      },
+      "certificate": "Minor.migration.path_edges.kt_immersion_clique_count_extremal_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE2.xe2_path_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_path_edge_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/path_edges.v",
+      "frozen": "Legacy.xe2_path_edge_set",
+      "substitutions": {},
+      "certificate": "Extremal.migration.path_edges.xe2_path_edge_set_compat",
+      "live_unfolds_to": "seq_edge_set p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_paths_edge_disjoint",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_paths_edge_disjoint",
+      "frozen_path": "extremal-graph-theory/theories/migration/path_edges.v",
+      "frozen": "XE2Legacy.paths_edge_disjoint",
+      "substitutions": {
+        "xe2_path_edge_set": "Legacy.xe2_path_edge_set",
+        "xe2_paths_edge_disjoint": "paths_edge_disjoint"
+      },
+      "certificate": "Extremal.migration.path_edges.xe2_paths_edge_disjoint_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_915_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_915_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/path_edges.v",
+      "frozen": "XE2Legacy.erdos_915_statement",
+      "substitutions": {
+        "xe2_paths_edge_disjoint": "paths_edge_disjoint"
+      },
+      "certificate": "Extremal.migration.path_edges.erdos_915_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Extremal.migration.path_edges.erdos_915_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_915_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_915_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/path_edges.v",
+      "frozen": "XE2Original.erdos_915_statement",
+      "substitutions": {
+        "xe2_paths_edge_disjoint": "XE2Legacy.paths_edge_disjoint",
+        "xe2_paths_internally_disjoint": "Extremal.migration.internal_vertices.XE2Legacy.paths_internally_disjoint"
+      },
+      "certificate": "Extremal.migration.path_edges.erdos_915_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X178.x178_path_edge_set",
+      "path": "packing-theory/theories/conjectures/X178.v",
+      "name": "x178_path_edge_set",
+      "frozen_path": "packing-theory/theories/migration/path_edges.v",
+      "frozen": "Legacy.x178_path_edge_set",
+      "substitutions": {},
+      "certificate": "Packing.migration.path_edges.x178_path_edge_set_compat",
+      "live_unfolds_to": "seq_index_edge_set p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X178.x178_path_decomposition_at_most",
+      "path": "packing-theory/theories/conjectures/X178.v",
+      "name": "x178_path_decomposition_at_most",
+      "frozen_path": "packing-theory/theories/migration/path_edges.v",
+      "frozen": "X178Legacy.path_decomposition_at_most",
+      "substitutions": {
+        "x178_path_decomposition_at_most": "path_decomposition_at_most",
+        "x178_path_edge_set": "Legacy.x178_path_edge_set"
+      },
+      "certificate": "Packing.migration.path_edges.x178_path_decomposition_at_most_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X178.gallai_odd_semiclique_path_decomposition_statement",
+      "path": "packing-theory/theories/conjectures/X178.v",
+      "name": "gallai_odd_semiclique_path_decomposition_statement",
+      "frozen_path": "packing-theory/theories/migration/path_edges.v",
+      "frozen": "X178Legacy.gallai_odd_semiclique_path_decomposition_statement",
+      "substitutions": {
+        "x178_path_decomposition_at_most": "path_decomposition_at_most"
+      },
+      "certificate": "Packing.migration.path_edges.gallai_odd_semiclique_path_decomposition_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Packing.migration.path_edges.gallai_odd_semiclique_path_decomposition_statement_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X178.x178_path_decomposition_at_most",
+      "path": "packing-theory/theories/conjectures/X178.v",
+      "name": "x178_path_decomposition_at_most",
+      "frozen_path": "packing-theory/theories/migration/path_edges.v",
+      "frozen": "X178Original.path_decomposition_at_most",
+      "substitutions": {
+        "x178_path_decomposition_at_most": "path_decomposition_at_most",
+        "x178_path_edge_set": "Legacy.x178_path_edge_set",
+        "x178_path_seq": "Packing.migration.simple_path.Legacy.x178_path_seq"
+      },
+      "certificate": "Packing.migration.path_edges.x178_path_decomposition_at_most_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.X178.gallai_odd_semiclique_path_decomposition_statement",
+      "path": "packing-theory/theories/conjectures/X178.v",
+      "name": "gallai_odd_semiclique_path_decomposition_statement",
+      "frozen_path": "packing-theory/theories/migration/path_edges.v",
+      "frozen": "X178Original.gallai_odd_semiclique_path_decomposition_statement",
+      "substitutions": {
+        "x178_path_decomposition_at_most": "path_decomposition_at_most"
+      },
+      "certificate": "Packing.migration.path_edges.gallai_odd_semiclique_path_decomposition_statement_original_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X14.x14_path_edges",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_path_edges",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X14Original.path_edges",
+      "substitutions": {
+        "x14_path_edges": "path_edges"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.x14_path_edges_original_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X14.x14_rainbow_path",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_rainbow_path",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X14Original.rainbow_path",
+      "substitutions": {
+        "x14_genuine_path": "GTMisc.migration.simple_path.Legacy.x14_genuine_path",
+        "x14_path_edges": "X14Original.path_edges",
+        "x14_rainbow_path": "rainbow_path"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.x14_rainbow_path_original_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X62.x62_edges_covered_by_paths",
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "x62_edges_covered_by_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X62Original.edges_covered_by_paths",
+      "substitutions": {
+        "x14_edge_set": "Legacy.x14_edge_set",
+        "x14_path_edges": "X14Original.path_edges",
+        "x62_edges_covered_by_paths": "edges_covered_by_paths"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.x62_edges_covered_by_paths_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X14.andersen_rainbow_path_statement",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "andersen_rainbow_path_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X14Original.andersen_rainbow_path_statement",
+      "substitutions": {
+        "x14_proper_edge_colouring": "Legacy.x14_proper_edge_colouring",
+        "x14_rainbow_path": "X14Original.rainbow_path"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.andersen_rainbow_path_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X62.rainbow_paths_linear_edge_cover_statement",
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "rainbow_paths_linear_edge_cover_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X62Original.rainbow_paths_linear_edge_cover_statement",
+      "substitutions": {
+        "x14_proper_edge_colouring": "Legacy.x14_proper_edge_colouring",
+        "x14_rainbow_path": "X14Original.rainbow_path",
+        "x62_edges_covered_by_paths": "X62Original.edges_covered_by_paths"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.rainbow_paths_linear_edge_cover_statement_original_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/internal_vertices.v#XE2Legacy.statement": "B2 per-row snapshot: family internal-vertices (B2) froze only its internal-disjointness chain of #915, so this copy still calls the live xe2_paths_edge_disjoint, which after B8 reads seq_edge_set. Kept unchanged; B2's erdos_915_statement_compat stays true. The complete pre-B2, pre-B8 row is Extremal.migration.path_edges.XE2Original.erdos_915_statement, certified by erdos_915_statement_original_compat.",
+    "graph-theory-misc/theories/migration/edge_colourings.v#X14Legacy.andersen_rainbow_path_statement": "C6 per-row snapshot: family proper-edge-colouring (C6) froze only its properness helper in Andersen's row, so this copy still calls the live x14_rainbow_path, which after B8 reads seq_edge_list. Kept unchanged; the complete row is C6's own X14Original.andersen_rainbow_path_statement (raw path-edge list, B6 genuine path and C6 properness over pre-M1 edges all frozen), certified by C6's andersen_rainbow_path_statement_original_compat and reused by this family.",
+    "graph-theory-misc/theories/migration/edge_colourings.v#X62Legacy.rainbow_paths_linear_edge_cover_statement": "C6 per-row snapshot: C6 froze only its properness helper in X62's row, so this copy still calls the live x14_rainbow_path and x62_edges_covered_by_paths, which after B8 read seq_edge_list. Kept unchanged; the complete row is C6's X62Original.rainbow_paths_linear_edge_cover_statement (cover predicate and raw path-edge list frozen), certified by C6's rainbow_paths_linear_edge_cover_statement_original_compat and reused by this family.",
+    "graph-theory-misc/theories/migration/internal_vertices.v#X172Legacy.one_bridge_replacement": "B2 per-row snapshot: B2 froze only its internal-vertices helper in X172's bridge replacement, so this copy still calls the live x172_path_edges, which after B8 unfolds to seq_edge_set. Kept unchanged; B2's x172_one_bridge_replacement_compat and row certificate stay true. The complete pre-B2, pre-B8 chain, closure and row are GTMisc.migration.path_edges.X172Original, certified by the three *_original_compat theorems.",
+    "graph-theory-misc/theories/migration/simple_path.v#X14Legacy.rainbow_path": "B6 per-row snapshot: family simple-path (B6) froze only its genuine-path helper in X14's rainbow path, so this copy still calls the live x14_path_edges, which after B8 unfolds to seq_edge_list. Kept unchanged; the complete X14 row is C6's X14Original (reused by this family), which also freezes B6's genuine path.",
+    "graph-theory-misc/theories/migration/simple_path.v#X62Legacy.rainbow_paths_linear_edge_cover_statement": "B6 per-row snapshot: B6 froze X62's row over its frozen rainbow path but kept the live x62_edges_covered_by_paths, which after B8 reads seq_edge_list. Kept unchanged; the complete X62 row is C6's X62Original (reused by this family).",
+    "packing-theory/theories/migration/simple_path.v#X178Legacy.path_decomposition_at_most": "B6 per-row snapshot: B6 froze only its path predicate in X178's decomposition, so this copy still calls the live x178_path_edge_set, which after B8 unfolds to seq_index_edge_set (convertible to the old first-index body). Kept unchanged; the complete pre-B6, pre-B8 chain and row are Packing.migration.path_edges.X178Original, certified by x178_path_decomposition_at_most_original_compat and gallai_odd_semiclique_path_decomposition_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "x14_path_edges",
+      "note": "Cross-file chain: X62's x62_edges_covered_by_paths reads X14's helper; frozen here as X62Legacy.edges_covered_by_paths over Legacy.x14_path_edges."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "x14_rainbow_path",
+      "note": "Cross-file chain: X62's row uses X14's rainbow path; its frozen row calls X14Legacy.rainbow_path."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X174.v",
+      "name": "immersion",
+      "note": "Cross-file chain: X174's negated immersion; frozen as X174Legacy.no_Kt_immersion over U7Legacy.u7_immersion, both halves of the row frozen."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_U7.v",
+      "name": "path_edges",
+      "note": "Proof consumer: grounding lemmas path_edges_nil and path_edges_pair; statements and proofs unchanged, rebuilt (seq_edge_set is convertible to the old body)."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_U7.v",
+      "name": "immersion",
+      "note": "Proof consumer: grounding lemmas immersion_K0 and immersion_refl; statements and proofs unchanged, rebuilt."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Cycle.conjectures.X9.x9_cycle_edges",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "x9_cycle_edges",
+      "note": "cyclic edge list over zip c (rot 1 c), including the closing pair; untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.X24.x24_cycle_edge_seq",
+      "path": "cycle-theory/theories/conjectures/X24.v",
+      "name": "x24_cycle_edge_seq",
+      "note": "cyclic edge list over zip c (rot 1 c); untouched"
+    },
+    {
+      "qualified": "Packing.conjectures.X25.x25_cycle_edge_seq",
+      "path": "packing-theory/theories/conjectures/X25.v",
+      "name": "x25_cycle_edge_seq",
+      "note": "cyclic edge list over zip c (rot 1 c); untouched"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X216.x216_cycle_edges",
+      "path": "graph-theory-misc/theories/conjectures/X216.v",
+      "name": "x216_cycle_edges",
+      "note": "finite support of the cyclic pairs; untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.XE1.xe1_cycle_edges",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "xe1_cycle_edges",
+      "note": "cyclic adjacency combined with an actual-edge filter; untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.U5.edge_colour_seq",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "edge_colour_seq",
+      "note": "colours of the cyclic pairs (closing pair included); untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.X10.x10_rainbow_cycle",
+      "path": "cycle-theory/theories/conjectures/X10.v",
+      "name": "x10_rainbow_cycle",
+      "note": "rainbow cycle over the cyclic pairs; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.P9.dipath_arcs",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "dipath_arcs",
+      "note": "ORDERED arc support of a head-plus-tail dipath, zip (x :: s) s; untouched"
+    },
+    {
+      "qualified": "Extremal.conjectures.D2tur.ham_path_edges",
+      "path": "extremal-graph-theory/theories/conjectures/D2tur.v",
+      "name": "ham_path_edges",
+      "note": "existential Hamiltonian-path predicate on a given edge relation; untouched"
+    }
+  ]
+}

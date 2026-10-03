@@ -27,7 +27,7 @@ Definition x14_degree_two_count (G : sgraph) : nat :=
   #|[set v : G | #|N(v)| == 2]|.
 
 Definition x14_path_edges (G : sgraph) (p : seq G) : seq {set G} :=
-  map (fun e : G * G => [set e.1; e.2]) (zip p (behead p)).
+  seq_edge_list p.
 
 Definition x14_genuine_path (G : sgraph) (p : seq G) : Prop :=
   seq_simple_path p.
