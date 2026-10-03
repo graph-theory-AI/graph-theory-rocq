@@ -116,6 +116,28 @@ Qed.
 (** Two edge sets are edge-disjoint when they share no edge. *)
 Definition edge_disjoint (G : sgraph) (A B : {set {set G}}) : bool := [disjoint A & B].
 
+(** ** Ordered pairs between two vertex sets
+
+    [edges_between A B] is the number of ORDERED pairs [(a, b)] with [a \in A], [b \in B] and
+    [a -- b]; [nonedges_between A B] counts those with [~~ (a -- b)].  [A] and [B] are arbitrary:
+    they may be empty or overlap.  A vertex [x] of [A :&: B] gives the diagonal pair [(x, x)],
+    which is a NON-edge (adjacency is irreflexive), and an edge inside [A :&: B] is counted in
+    both orientations.  The two counts partition [A x B] ([edges_nonedges_between]), and swapping
+    [A] and [B] keeps each of them ([edges_between_sym], [nonedges_between_sym]).  On DISJOINT
+    [A] and [B] the counts agree with the number of edges of [E(G)] meeting both sets
+    ([edges_between_cross]) and with the number of edges of the complement between the sets
+    ([nonedges_between_compl]).  With overlap these readings can fail (a shared vertex is a
+    non-edge pair but no complement edge: [nonedges_between_compl_overlap]), although they may
+    still agree, for instance when every count is zero.
+    Grounding: empty sets, a singleton ([edges_between_set1], [nonedges_between_set1]) and
+    complete graphs, where exactly the diagonal pairs are non-edges ([nonedges_between_Kn],
+    [edges_between_Kn], [edges_between_K2]). *)
+Definition edges_between (G : sgraph) (A B : {set G}) : nat :=
+  #|[set p : G * G | [&& p.1 \in A, p.2 \in B & p.1 -- p.2]]|.
+
+Definition nonedges_between (G : sgraph) (A B : {set G}) : nat :=
+  #|[set p : G * G | [&& p.1 \in A, p.2 \in B & ~~ (p.1 -- p.2)]]|.
+
 (** ** Matchings *)
 
 (** A PERFECT matching: a [connectivity.matching] covering every vertex.
@@ -667,6 +689,140 @@ Proof. by rewrite compl_adjE /= andbN. Qed.
 Lemma compl_compl_diso (G : sgraph) : compl (compl G) ≃ G.
 Proof. exact: diso_compl. Qed.
 
+(** *** ordered pairs between two vertex sets *)
+
+Lemma edges_between_sym (G : sgraph) (A B : {set G}) : edges_between A B = edges_between B A.
+Proof.
+rewrite /edges_between -(card_imset _ (can_inj (@swap_pairK G G))); apply: eq_card => -[x y].
+rewrite [in RHS]inE; apply/imsetP/and3P => [[[a b]]|[/= xB yA xy]].
+- by rewrite inE /= => /and3P[aA bB ab] [-> ->]; split; rewrite //= sg_sym.
+- by exists (y, x); rewrite // inE /= yA xB sg_sym.
+Qed.
+
+Lemma nonedges_between_sym (G : sgraph) (A B : {set G}) :
+  nonedges_between A B = nonedges_between B A.
+Proof.
+rewrite /nonedges_between -(card_imset _ (can_inj (@swap_pairK G G))); apply: eq_card => -[x y].
+rewrite [in RHS]inE; apply/imsetP/and3P => [[[a b]]|[/= xB yA xy]].
+- by rewrite inE /= => /and3P[aA bB ab] [-> ->]; split; rewrite //= sg_sym.
+- by exists (y, x); rewrite // inE /= yA xB sg_sym.
+Qed.
+
+(** Each pair of [A x B] is an edge or a non-edge. *)
+Lemma edges_nonedges_between (G : sgraph) (A B : {set G}) :
+  edges_between A B + nonedges_between A B = #|A| * #|B|.
+Proof.
+rewrite -cardsX -(cardsID [set p : G * G | p.1 -- p.2] (setX A B)) /edges_between /nonedges_between.
+by congr (_ + _); apply: eq_card => p; rewrite !inE;
+  case: (p.1 \in A); case: (p.2 \in B); case: (p.1 -- p.2).
+Qed.
+
+Lemma edges_between_set0 (G : sgraph) (B : {set G}) : edges_between set0 B = 0.
+Proof. by apply/eqP; rewrite cards_eq0; apply/eqP/setP => p; rewrite !inE. Qed.
+
+Lemma edges_between0 (G : sgraph) (A : {set G}) : edges_between A set0 = 0.
+Proof. by apply/eqP; rewrite cards_eq0; apply/eqP/setP => p; rewrite !inE andbF. Qed.
+
+Lemma nonedges_between_set0 (G : sgraph) (B : {set G}) : nonedges_between set0 B = 0.
+Proof. by apply/eqP; rewrite cards_eq0; apply/eqP/setP => p; rewrite !inE. Qed.
+
+Lemma nonedges_between0 (G : sgraph) (A : {set G}) : nonedges_between A set0 = 0.
+Proof. by apply/eqP; rewrite cards_eq0; apply/eqP/setP => p; rewrite !inE andbF. Qed.
+
+(** A vertex of [A :&: B] gives the diagonal pair: one non-edge, no edge. *)
+Lemma edges_between_set1 (G : sgraph) (x : G) : edges_between [set x] [set x] = 0.
+Proof.
+apply/eqP; rewrite cards_eq0; apply/eqP/setP => -[a b]; rewrite !inE /=.
+by apply/negbTE; apply/and3P => -[/eqP-> /eqP->]; rewrite sg_irrefl.
+Qed.
+
+Lemma nonedges_between_set1 (G : sgraph) (x : G) : nonedges_between [set x] [set x] = 1.
+Proof.
+apply: (@eq_card1 _ (x, x)) => -[a b]; rewrite !inE /= xpair_eqE.
+by apply/and3P/andP => [[/eqP-> /eqP-> _]|[/eqP-> /eqP->]]; rewrite ?sg_irrefl ?eqxx.
+Qed.
+
+(** In a complete graph exactly the diagonal pairs are non-edges. *)
+Lemma nonedges_between_Kn (n : nat) (A B : {set 'K_n}) : nonedges_between A B = #|A :&: B|.
+Proof.
+have inj : injective (fun x : 'K_n => (x, x)) by move=> x y [].
+rewrite -(card_imset _ inj) /nonedges_between; apply: eq_card => -[x y].
+rewrite [in LHS]inE /=; apply/and3P/imsetP => [[xA yB]|[z]].
+- rewrite negbK => /eqP exy; exists x; last by rewrite exy.
+  by rewrite inE xA /= exy.
+- rewrite inE => /andP[zA zB] [-> ->]; split=> //.
+  by rewrite /= negbK eqxx.
+Qed.
+
+Lemma edges_between_Kn (n : nat) (A B : {set 'K_n}) :
+  edges_between A B = #|A| * #|B| - #|A :&: B|.
+Proof. by rewrite -nonedges_between_Kn -edges_nonedges_between addnK. Qed.
+
+(** Two ordered edges in [K_2] taken whole. *)
+Lemma edges_between_K2 : edges_between [set: 'K_2] [set: 'K_2] = 2.
+Proof. by rewrite edges_between_Kn setIid cardsT card_ord. Qed.
+
+(** On DISJOINT sets: the edges of [E(G)] meeting both sets. *)
+Lemma edges_between_cross (G : sgraph) (A B : {set G}) : [disjoint A & B] ->
+  edges_between A B = #|[set e in E(G) | (e :&: A != set0) && (e :&: B != set0)]|.
+Proof.
+move=> dAB.
+have Dne (x y : G) : x \in A -> y \in B -> x != y.
+  move=> xA yB; apply/eqP => exy.
+  by move: (disjointFr dAB xA); rewrite exy yB.
+have key : [set e in E(G) | (e :&: A != set0) && (e :&: B != set0)]
+         = (fun p : G * G => [set p.1; p.2])
+             @: [set p : G * G | [&& p.1 \in A, p.2 \in B & p.1 -- p.2]].
+  apply/setP => e; rewrite !inE; apply/idP/imsetP => [|[p]].
+  - case/andP => eE /andP[/set0Pn[a]]; rewrite inE => /andP[ae aA].
+    case/set0Pn => b; rewrite inE => /andP[be bB].
+    have ab : a != b by exact: Dne.
+    move: eE => /edgesP[x [y] [exy xy]].
+    rewrite exy !inE in ae be.
+    case/orP: ae => /eqP ax; case/orP: be => /eqP bxy.
+    + by rewrite ax bxy eqxx in ab.
+    + exists (a, b); last by rewrite /= exy ax bxy.
+      by rewrite inE /= aA bB ax bxy.
+    + exists (a, b); last by rewrite /= exy ax bxy setUC.
+      by rewrite inE /= aA bB ax bxy sg_sym.
+    + by rewrite ax bxy eqxx in ab.
+  - rewrite inE => /and3P[p1 p2 p12] ->.
+    apply/andP; split.
+      by rewrite in_sg_edge_set; apply/existsP; exists p.1;
+         apply/existsP; exists p.2; rewrite p12 eqxx.
+    apply/andP; split; apply/set0Pn.
+    + by exists p.1; rewrite !inE eqxx p1.
+    + by exists p.2; rewrite !inE eqxx orbT p2.
+rewrite /edges_between key card_in_imset //.
+move=> p q; rewrite !inE => /and3P[p1 p2 _] /and3P[q1 q2 _] eqpq.
+have H1 : p.1 = q.1.
+  move: eqpq => /setP /(_ p.1); rewrite !inE eqxx => /esym/orP[/eqP//|/eqP pq2].
+  by move: (Dne _ _ p1 q2); rewrite pq2 eqxx.
+have H2 : p.2 = q.2.
+  move: eqpq => /setP /(_ q.2); rewrite !inE eqxx orbT => /orP[/eqP q2p1|/eqP //].
+  by move: (Dne _ _ p1 q2); rewrite -q2p1 eqxx.
+clear eqpq p1 p2 q1 q2; case: p H1 H2 => a b /= -> ->; by case: q.
+Qed.
+
+(** On DISJOINT sets: the edges of the complement between the sets. *)
+Lemma nonedges_between_compl (G : sgraph) (A B : {set G}) : [disjoint A & B] ->
+  nonedges_between A B = @edges_between (compl G) A B.
+Proof.
+move=> dAB; apply: eq_card => -[x y]; rewrite !inE /= compl_adjE.
+case xA: (x \in A); case yB: (y \in B) => //=.
+suff -> : x != y by [].
+by apply/eqP => exy; move: (disjointFr dAB xA); rewrite exy yB.
+Qed.
+
+(** The guard has teeth: a shared vertex is a non-edge pair but no complement edge. *)
+Lemma nonedges_between_compl_overlap (G : sgraph) (x : G) :
+  nonedges_between [set x] [set x] = 1 /\ @edges_between (compl G) [set x] [set x] = 0.
+Proof.
+split; first exact: nonedges_between_set1.
+apply/eqP; rewrite cards_eq0; apply/eqP/setP => -[a b]; rewrite !inE /=.
+by apply/negbTE; apply/and3P => -[/eqP-> /eqP->]; rewrite ?compl_adjE eqxx.
+Qed.
+
 (** *** subgraph containment *)
 
 (** Every graph contains itself (non-vacuity). *)
@@ -908,7 +1064,11 @@ Proof. by move=> ac x; apply/negP => xx; move: (ac x x xx); rewrite connect0. Qe
     [has_subgraph_not_induced], [has_subgraph_host_diso], [compl_adjE], [compl_eq_diso],
     [compl_adj_offdiag], [compl_noloop], [compl_Kn_edgeless], [compl_compl_diso],
     [edge_count_rank], [edge_count_Kn], [edge_count_K0_K1], [edge_count_K2], [edge_count_K3],
-    [edge_count_diso],
+    [edge_count_diso], [edges_between_sym], [nonedges_between_sym], [edges_nonedges_between],
+    [edges_between_set0], [edges_between0], [nonedges_between_set0], [nonedges_between0],
+    [edges_between_set1], [nonedges_between_set1], [nonedges_between_Kn], [edges_between_Kn],
+    [edges_between_K2], [edges_between_cross], [nonedges_between_compl],
+    [nonedges_between_compl_overlap],
     [induced_free_inhabited], [induced_free_diso], [induced_free_card],
     [not_induced_free_self], [not_induced_free_pattern0], [induced_free_host0],
     [not_induced_free_clique], [induced_free_K1], [induced_free_Kn],

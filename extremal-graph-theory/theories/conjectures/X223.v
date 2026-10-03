@@ -36,7 +36,7 @@ Definition x223_anticomplete (G : sgraph) (A B : {set G}) : Prop :=
     |E(A,B)|; for general A and B it is the convention used by the (c,t)-sparse
     definition of arXiv:2405.05902. *)
 Definition x223_edges_between (G : sgraph) (A B : {set G}) : nat :=
-  #|[set uv : G * G | (uv.1 \in A) && (uv.2 \in B) && (uv.1 -- uv.2)]|.
+  edges_between A B.
 
 (** [(A,B)] is a c-sparse pair for c = a/b: disjoint, with at most c|A||B|
     edges between them. *)

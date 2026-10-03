@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "family": "edges-between",
+  "primitive": {
+    "canonical_name": "GTBase.common.edges_between",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "edges_between",
+      "nonedges_between"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.X118.x118_edges_between",
+      "Extremal.conjectures.X120.x120_edges_between",
+      "Extremal.conjectures.X120.x120_nonedges_between",
+      "Extremal.conjectures.X223.x223_edges_between"
+    ],
+    "consumers_remaining": 4,
+    "relation": "nat equality: the X118/X120 edge counts and X120's non-edge count already had the bodies of edges_between / nonedges_between (conversion); X223 associates && the other way (eq_card and andbA). Ordered pairs over arbitrary, possibly overlapping sets: no disjointness is added. The cross-edge and complement readings are separate lemmas guarded by disjointness.",
+    "semantic_classes": {
+      "ordered-edge-pairs": {
+        "members": [
+          "Extremal.conjectures.X118.x118_edges_between",
+          "Extremal.conjectures.X120.x120_edges_between",
+          "Extremal.conjectures.X223.x223_edges_between"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "certificate": "GTBase.common.edges_between",
+        "note": "#|[set p : G * G | [&& p.1 \\in A, p.2 \\in B & p.1 -- p.2]]| (X223: ((p.1 \\in A) && (p.2 \\in B)) && (p.1 -- p.2), equal by andbA); arbitrary, possibly overlapping A and B"
+      },
+      "ordered-nonedge-pairs": {
+        "members": [
+          "Extremal.conjectures.X120.x120_nonedges_between"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTBase.common.nonedges_between",
+        "note": "#|[set p : G * G | [&& p.1 \\in A, p.2 \\in B & ~~ (p.1 -- p.2)]]|, diagonal pairs of A :&: B included; agrees with the complement-edge count on disjoint sets (nonedges_between_compl)"
+      }
+    },
+    "distinct_variants": {
+      "Extremal.conjectures.X223.x223_anticomplete": "a Prop (disjoint sets with no edge between them), not a count",
+      "Extremal.conjectures.X76.x76_cut_size": "edges of E(G) leaving one set (a cut), unordered; a different quantity",
+      "Extremal.conjectures.X78.x78_cut_size": "edges of E(G) leaving one set (a cut), unordered; a different quantity"
+    },
+    "historical_snapshots": {
+      "induced_free.v#X118Legacy.statement": "A1 snapshot: A1 froze the X118 row over its frozen induced-free helper but kept the live x118_edges_between, which after A8 unfolds to GTBase.common.edges_between (a conversion). Kept unchanged; the complete pre-A1, pre-A8 row is Extremal.migration.edges_between.X118Original.conlon_fox_sudakov_dense_pair_statement, certified by conlon_fox_sudakov_dense_pair_statement_original_compat.",
+      "induced_free.v#X120Legacy.statement": "A1 snapshot: A1 froze the X120 row over its frozen induced-free helper but kept the live x120_edges_between and x120_nonedges_between, which after A8 unfold to GTBase.common.edges_between / nonedges_between (conversions). Kept unchanged; the complete pre-A1, pre-A8 row is Extremal.migration.edges_between.X120Original.conlon_fox_sudakov_sparse_pair_statement, certified by conlon_fox_sudakov_sparse_pair_statement_original_compat."
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.edges_between.x118_edges_between_compat",
+      "Extremal.migration.edges_between.x120_edges_between_compat",
+      "Extremal.migration.edges_between.x120_nonedges_between_compat",
+      "Extremal.migration.edges_between.x223_edges_between_compat",
+      "Extremal.migration.edges_between.conlon_fox_sudakov_dense_pair_statement_compat",
+      "Extremal.migration.edges_between.conlon_fox_sudakov_sparse_pair_statement_compat",
+      "Extremal.migration.edges_between.sparse_pair_compat",
+      "Extremal.migration.edges_between.ct_sparse_compat",
+      "Extremal.migration.edges_between.h_free_eps_bounded_sparse_pair_statement_compat",
+      "Extremal.migration.edges_between.induced_turan_even_cycle_sparse_statement_compat",
+      "Extremal.migration.edges_between.conlon_fox_sudakov_dense_pair_statement_original_compat",
+      "Extremal.migration.edges_between.conlon_fox_sudakov_sparse_pair_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.common.edges_between_sym",
+      "GTBase.common.nonedges_between_sym",
+      "GTBase.common.edges_nonedges_between",
+      "GTBase.common.edges_between_set0",
+      "GTBase.common.edges_between0",
+      "GTBase.common.nonedges_between_set0",
+      "GTBase.common.nonedges_between0",
+      "GTBase.common.edges_between_set1",
+      "GTBase.common.nonedges_between_set1",
+      "GTBase.common.nonedges_between_Kn",
+      "GTBase.common.edges_between_Kn",
+      "GTBase.common.edges_between_K2",
+      "GTBase.common.edges_between_cross",
+      "GTBase.common.nonedges_between_compl",
+      "GTBase.common.nonedges_between_compl_overlap"
+    ],
+    "public_client": "base/theories/examples/edges_between.v",
+    "legacy_baseline": "842ff4d456f543db4030b424a3c53d5c22fd70c9",
+    "migration_report": "meta/migration_reports/edges_between.md",
+    "migration_spec": "meta/migration_reports/edges_between.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A8.md",
+    "foundation_fidelity": "meta/foundation_fidelity/edges-between.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.sgraph",
+        "GraphTheory.connectivity",
+        "GTBase.common",
+        "GTBase.base"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.common.edges_between / nonedges_between (MathComp finite product cardinality)",
+      "note": "coq-graph-theory has E(G) and edge sets but no count of ordered pairs between two vertex sets; the pinned-source search of the A8 discovery found no match. The plan (section 15 table) places edges_between in GTBase.common. The disjointness-guarded readings as cross edges of E(G) (edges_between_cross, adapted from implications_X223) and as complement edges (nonedges_between_compl) are separate lemmas.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}
