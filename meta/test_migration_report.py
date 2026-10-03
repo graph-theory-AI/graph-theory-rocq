@@ -12,6 +12,8 @@ import contextlib
 import copy
 import io
 import json
+import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -155,6 +157,64 @@ class ReportTests(unittest.TestCase):
 
     def test_complete_family_passes(self):
         self.assertEqual(self.failures(), [])
+
+    def distinct_variant_fixture(self):
+        declaration = "\nDefinition distinct_helper : nat := 7.\n"
+        self.original += declaration
+        self.live += declaration
+        self.rebaseline()
+        self.spec["distinct_variants"] = [{
+            "qualified": "GTBase.conjectures.X0.distinct_helper",
+            "path": self.source, "name": "distinct_helper",
+        }]
+
+    def test_details_distinct_variant_without_optional_note(self):
+        self.distinct_variant_fixture()
+        report = self.report()
+        self.assertTrue(report["ok"])
+        before = copy.deepcopy(report)
+        item = report["distinct_variants"][0]
+        expected = (f"- `{item['qualified']}` "
+                    f"(sha256 `{item['declaration_sha256'][:16]}…`, unchanged)")
+        self.assertIn(expected + "\n", REPORT.render_details(report, self.spec))
+        self.assertEqual(report, before)
+
+    def test_details_preserves_present_note_including_empty(self):
+        self.distinct_variant_fixture()
+        for note in ("Different contract; retained unchanged.", ""):
+            with self.subTest(note=note):
+                self.spec["distinct_variants"][0]["note"] = note
+                report = self.report()
+                self.assertTrue(report["ok"])
+                item = report["distinct_variants"][0]
+                expected = (f"- `{item['qualified']}` "
+                            f"(sha256 `{item['declaration_sha256'][:16]}…`, "
+                            f"unchanged): {note}\n")
+                self.assertIn(expected, REPORT.render_details(report, self.spec))
+
+    def test_optional_note_does_not_make_required_identity_optional(self):
+        self.distinct_variant_fixture()
+        original = copy.deepcopy(self.spec["distinct_variants"][0])
+        for key in ("qualified", "path", "name"):
+            with self.subTest(key=key):
+                self.spec["distinct_variants"][0] = copy.deepcopy(original)
+                del self.spec["distinct_variants"][0][key]
+                with self.assertRaises(KeyError):
+                    self.report()
+        self.spec["distinct_variants"][0] = original
+        report = self.report()
+        del report["distinct_variants"][0]["declaration_sha256"]
+        with self.assertRaises(KeyError):
+            REPORT.render_details(report, self.spec)
+
+    def test_noteless_distinct_variant_still_requires_unchanged_source(self):
+        self.distinct_variant_fixture()
+        self.write(self.source, self.live.replace(
+            "Definition distinct_helper : nat := 7.",
+            "Definition distinct_helper : nat := 8."))
+        self.assertIn("distinct variant GTBase.conjectures.X0.distinct_helper unchanged",
+                      self.failures())
+
 
     def test_omitted_statement_is_rejected(self):
         self.spec["frozen"] = self.spec["frozen"][:1]
@@ -1465,6 +1525,217 @@ class ClassicalSourceTests(unittest.TestCase):
                                         env=env, text=True, capture_output=True)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+
+class SourceCacheTests(unittest.TestCase):
+    """Warm caches must preserve fresh report/provenance checks and errors."""
+
+    setUp = ReportTests.setUp
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    commit = ReportTests.commit
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+
+    caches = ("_full_commit", "_historical_source", "_historical_blob",
+              "_inventory_index", "_declarations")
+
+    @contextlib.contextmanager
+    def uncached(self):
+        with contextlib.ExitStack() as stack:
+            for name in self.caches:
+                stack.enter_context(patch.object(REPORT, name, getattr(REPORT, name).__wrapped__))
+            yield
+
+    def test_report_bytes_and_duplicate_read_reduction(self):
+        for name in self.caches:
+            getattr(REPORT, name).cache_clear()
+        with patch.object(REPORT, "_git_at", wraps=REPORT._git_at) as reads:
+            cold = self.report()
+            cold_calls = reads.call_count
+            reads.reset_mock()
+            warm = self.report()
+            warm_calls = reads.call_count
+            reads.reset_mock()
+            with self.uncached():
+                original = self.report()
+            uncached_calls = reads.call_count
+        self.assertEqual(self.failures(), [])
+        self.assertEqual(cold, warm)
+        self.assertEqual(warm, original)
+        self.assertLess(warm_calls, cold_calls)
+        self.assertLess(cold_calls, uncached_calls)
+        self.assertEqual(json.dumps(warm, sort_keys=True), json.dumps(original, sort_keys=True))
+        for renderer in (REPORT.render_markdown, REPORT.render_details):
+            self.assertEqual(renderer(warm, self.spec), renderer(original, self.spec))
+        warm["checks"].clear()
+        self.assertEqual(self.report(), original)
+
+    def test_live_edits_with_restored_mtime_remain_fresh(self):
+        self.assertEqual(self.failures(), [])
+        path = self.root / self.certificate
+        old = path.stat()
+        path.write_text(self.cert_source.replace(":= n = n.", ":= n = 0."))
+        os.utime(path, ns=(old.st_atime_ns, old.st_mtime_ns))
+        self.assertTrue(self.failures())
+        self.write(self.certificate, self.cert_source)
+        self.assertEqual(self.failures(), [])
+        self.write(self.source, self.live.replace("canonical n", "canonical 0"))
+        self.assertTrue(self.failures())
+
+    def test_current_registry_and_manifest_remain_fresh(self):
+        self.assertEqual(self.failures(), [])
+        self.row["status"] = "changed"
+        self.write_manifests("v2")
+        self.assertTrue(self.failures())
+        self.row["status"] = "open"
+        self.write_manifests("v2")
+        self.assertEqual(self.failures(), [])
+        path = self.root / "meta/library_primitives/test-family.json"
+        registry = json.loads(path.read_text())
+        registry["primitive"]["source_definitions"] = []
+        path.write_text(json.dumps(registry))
+        self.assertTrue(self.failures())
+
+    def test_parser_returns_fresh_containers_and_keys_by_text(self):
+        expected = REPORT.declarations(self.original)
+        result = REPORT.declarations(self.original)
+        result[0]["name"] = "corrupted"
+        result.clear()
+        self.assertEqual(REPORT.declarations(self.original), expected)
+        changed = self.original.replace("n = n", "n = 0")
+        self.assertNotEqual(REPORT.declarations(changed), expected)
+        with patch.object(REPORT.INV, "strip_comments", wraps=REPORT.INV.strip_comments) as parse:
+            REPORT.declarations(self.original)
+            REPORT.declarations(self.original)
+            self.assertEqual(parse.call_count, 0)
+
+    def test_moving_refs_and_different_commits(self):
+        self.command("git", "tag", "moving")
+        for ref in ("HEAD", "moving", self.baseline):
+            self.assertEqual(REPORT.source_at(ref, self.source), self.original)
+        changed = self.original.replace("n = n", "n = 0")
+        self.write(self.source, changed)
+        current = self.commit()
+        self.command("git", "tag", "-f", "moving")
+        for ref in ("HEAD", "moving", current):
+            self.assertEqual(REPORT.source_at(ref, self.source), changed)
+        self.assertEqual(REPORT.source_at(self.baseline, self.source), self.original)
+        self.assertNotEqual(REPORT.blob_at(current, self.source),
+                            REPORT.blob_at(self.baseline, self.source))
+
+    def test_cross_root_missing_objects_do_not_hit_other_repository(self):
+        REPORT.source_at(self.baseline, self.source)
+        other = self.root / "other"
+        other.mkdir()
+        self.command("git", "-C", str(other), "init", "-q")
+        with patch.object(REPORT, "ROOT", other):
+            with self.assertRaises(subprocess.CalledProcessError):
+                REPORT.source_at(self.baseline, self.source)
+
+    def test_tree_expression_retains_original_git_semantics(self):
+        tree = self.command("git", "rev-parse", self.baseline + "^{tree}")
+        self.assertEqual(REPORT.source_at(tree, self.source), self.original)
+        self.assertEqual(REPORT.blob_at(tree, self.source),
+                         REPORT.git("rev-parse", tree + ":" + self.source).strip())
+        self.assertEqual(REPORT.inventory_hash(tree, self.helper),
+                         REPORT.inventory_hash(self.baseline, self.helper))
+
+    def test_alternate_object_store_changes_retain_git_errors(self):
+        other = self.root / "alternate"
+        self.command("git", "clone", "--shared", "-q", str(self.root), str(other))
+        with patch.object(REPORT, "ROOT", other):
+            self.assertEqual(REPORT.source_at(self.baseline, self.source), self.original)
+            (other / ".git/objects/info/alternates").write_text("/missing-object-store\n")
+            with self.assertRaises(subprocess.CalledProcessError):
+                REPORT.source_at(self.baseline, self.source)
+
+    def test_git_indirection_retargeting_and_replacement_refs(self):
+        other = self.root / "other"
+        self.command("git", "clone", "-q", str(self.root), str(other))
+        self.write(self.source, self.original.replace("n = n", "n = 0"))
+        changed = self.commit()
+        self.command("git", "-C", str(other), "fetch", "-q", str(self.root), changed)
+        self.command("git", "-C", str(other), "replace", self.baseline, changed)
+        alias = self.root / "alias"
+        alias.mkdir()
+        pointer = alias / ".git"
+        pointer.write_text("gitdir: " + str(self.root / ".git") + "\n")
+        with patch.object(REPORT, "ROOT", alias):
+            self.assertEqual(REPORT.source_at(self.baseline, self.source), self.original)
+            pointer.write_text("gitdir: " + str(other / ".git") + "\n")
+            self.assertEqual(REPORT.source_at(self.baseline, self.source),
+                             REPORT.git("show", f"{self.baseline}:{self.source}"))
+            self.assertNotEqual(REPORT.source_at(self.baseline, self.source), self.original)
+
+    def test_object_directory_override_and_failed_reads_are_not_cached(self):
+        REPORT.source_at(self.baseline, self.source)
+        empty = self.root / "empty-objects"
+        empty.mkdir()
+        with patch.dict(os.environ, {"GIT_OBJECT_DIRECTORY": str(empty)}):
+            with self.assertRaises(subprocess.CalledProcessError):
+                REPORT.source_at(self.baseline, self.source)
+            with self.assertRaises(subprocess.CalledProcessError):
+                REPORT.blob_at(self.baseline, self.source)
+        missing = "new-ref"
+        with self.assertRaises(subprocess.CalledProcessError):
+            REPORT.source_at(missing, self.source)
+        self.command("git", "branch", missing, self.baseline)
+        self.assertEqual(REPORT.source_at(missing, self.source), self.original)
+        with patch.object(REPORT, "_git_at", wraps=REPORT._git_at) as reads:
+            for _ in range(2):
+                with self.assertRaises(subprocess.CalledProcessError):
+                    REPORT.source_at(self.baseline, "absent.v")
+            self.assertEqual(reads.call_count, 2)
+
+    def test_loose_and_packed_replacements_bypass_warm_caches(self):
+        old_hash = REPORT.inventory_hash(self.baseline, self.helper)
+        old_blob = REPORT.blob_at(self.baseline, self.source)
+        REPORT.source_at(self.baseline, self.source)
+        changed = self.original.replace("n = n", "n = 0")
+        self.write(self.source, changed)
+        self.write_json("meta/library_helper_inventory.json", {"helpers": [{
+            "qualified_name": self.helper, "declaration_hash": "changed"}]})
+        replacement = self.commit()
+        self.command("git", "replace", self.baseline, replacement)
+        for packed in (False, True):
+            if packed:
+                self.command("git", "pack-refs", "--all", "--prune")
+                shutil.rmtree(self.root / ".git/refs/replace")
+            self.assertEqual(REPORT.source_at(self.baseline, self.source), changed)
+            self.assertEqual(REPORT.inventory_hash(self.baseline, self.helper), "changed")
+            self.assertNotEqual(REPORT.blob_at(self.baseline, self.source), old_blob)
+        self.command("git", "replace", "-d", self.baseline)
+        self.assertEqual(REPORT.inventory_hash(self.baseline, self.helper), old_hash)
+        self.assertEqual(REPORT.source_at(self.baseline, self.source), self.original)
+
+    def test_inventory_first_match_and_original_error_order(self):
+        path = "meta/library_helper_inventory.json"
+        good = {"qualified_name": self.helper, "declaration_hash": "first"}
+        cases = ([good, dict(good, declaration_hash="second")], [good, None],
+                 [None, good], [{"qualified_name": self.helper}],
+                 [{"qualified_name": "other"}, good])
+        for helpers in cases:
+            with self.subTest(helpers=helpers):
+                self.write_json(path, {"helpers": helpers})
+                pin = self.commit()
+                try:
+                    with self.uncached():
+                        expected = REPORT.inventory_hash(pin, self.helper)
+                except (TypeError, KeyError) as error:
+                    for _ in range(2):
+                        with self.assertRaises(type(error)):
+                            REPORT.inventory_hash(pin, self.helper)
+                else:
+                    self.assertEqual(REPORT.inventory_hash(pin, self.helper), expected)
+                    self.assertEqual(REPORT.inventory_hash(pin, self.helper), expected)
+        self.write(path, "invalid json")
+        pin = self.commit()
+        for _ in range(2):
+            with self.assertRaises(json.JSONDecodeError):
+                REPORT.inventory_hash(pin, self.helper)
 
 
 if __name__ == "__main__":

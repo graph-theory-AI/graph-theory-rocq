@@ -58,12 +58,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import shlex
 import subprocess
 import sys
 import tempfile
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 
 import library_inventory as INV
@@ -99,21 +101,99 @@ def sha256(text: str) -> str:
     return hashlib.sha256(text.encode()).hexdigest()
 
 
-def git(*args: str) -> str:
+def _git_at(root: str | Path, *args: str) -> str:
     return subprocess.run(
-        ["git", *args], cwd=ROOT, check=True, capture_output=True, text=True
+        ["git", *args], cwd=root, check=True, capture_output=True, text=True
     ).stdout
+
+
+def git(*args: str) -> str:
+    return _git_at(ROOT, *args)
+
+
+def _resolve_commit(root: str, identity: tuple, commit: str) -> str:
+    return _git_at(root, "rev-parse", "--verify", commit + "^{commit}").strip()
+
+
+_full_commit = lru_cache(maxsize=256)(_resolve_commit)
+
+
+def _historical_key(repository: tuple, commit: str) -> tuple | None:
+    # Only full object names are immutable. Resolve HEAD, branches and tags
+    # afresh even if a prior call successfully resolved the same spelling.
+    resolve = (_full_commit if re.fullmatch(r"[0-9a-f]{40}", commit)
+               else _resolve_commit)
+    try:
+        return (*repository, resolve(*repository, commit))
+    except subprocess.CalledProcessError:
+        # Git also accepts tree expressions here. Unsupported cache keys and
+        # missing references must retain the original operation/error behavior.
+        return None
+
+
+def _history_repository() -> tuple | None:
+    # Replacement refs can change a full object's effective contents. Read
+    # their presence afresh, including packed refs, and use original Git reads
+    # for custom repository/ref environments or unsupported ref storage.
+    if any(name.startswith("GIT_") for name in os.environ):
+        return None
+    root = ROOT.resolve()
+    try:
+        dotgit = root / ".git"
+        if dotgit.is_dir():
+            gitdir = dotgit.resolve()
+        else:
+            pointer = dotgit.read_text().strip()
+            if not pointer.startswith("gitdir: "):
+                return None
+            gitdir = (root / pointer[8:]).resolve()
+        common_file = gitdir / "commondir"
+        common = ((gitdir / common_file.read_text().strip()).resolve()
+                  if common_file.exists() else gitdir)
+        # Bind repository indirection afresh without a subprocess on each hit.
+        # Reused checkout paths and replaced object directories are distinct.
+        identity = tuple((str(path), path.stat().st_dev, path.stat().st_ino)
+                         for path in (gitdir, common, common / "objects"))
+        if any(path.exists() for path in (
+                common / "refs/replace", common / "reftable",
+                common / "objects/info/alternates")):
+            return None
+        packed = common / "packed-refs"
+        if packed.exists() and "refs/replace/" in packed.read_text():
+            return None
+        return str(root), identity
+    except (OSError, UnicodeError):
+        # Unsupported/missing repository metadata retains Git's own errors.
+        return None
+
+
+@lru_cache(maxsize=2048)
+def _historical_source(root: str, identity: tuple, commit: str, path: str) -> str:
+    return _git_at(root, "show", f"{commit}:{path}")
+
+
+@lru_cache(maxsize=2048)
+def _historical_blob(root: str, identity: tuple, commit: str, path: str) -> str:
+    return _git_at(root, "rev-parse", f"{commit}:{path}").strip()
 
 
 def source_at(commit: str | None, path: str) -> str:
     """File text at a commit, or in the working tree when commit is None."""
     if commit is None:
         return (ROOT / path).read_text()
-    return git("show", f"{commit}:{path}")
+    repository = _history_repository()
+    key = _historical_key(repository, commit) if repository is not None else None
+    if key is None:
+        return git("show", f"{commit}:{path}")
+    return _historical_source(*key, path)
 
 
 def blob_at(commit: str, path: str) -> str:
-    return git("rev-parse", f"{commit}:{path}").strip()
+    repository = _history_repository()
+    key = _historical_key(repository, commit) if repository is not None else None
+    if key is None:
+        return git("rev-parse", f"{commit}:{path}").strip()
+    return _historical_blob(*key, path)
 
 
 def ref_re(name: str) -> re.Pattern[str]:
@@ -144,6 +224,13 @@ def module_spans(clean: str) -> list[tuple[str, int, int]]:
 
 def declarations(src: str) -> list[dict]:
     """Every declaration of a file: name, enclosing module, normalized text, line."""
+    # Callers may modify their result; cached data contains immutable scalars.
+    return [dict(zip(("name", "module", "text", "line"), row))
+            for row in _declarations(src)]
+
+
+@lru_cache(maxsize=2048)
+def _declarations(src: str) -> tuple[tuple, ...]:
     clean = INV.strip_comments(src)
     spans = module_spans(clean)
     out = []
@@ -151,13 +238,9 @@ def declarations(src: str) -> list[dict]:
         start = clean.rfind("\n", 0, match.start(1)) + 1
         module = next((n for n, s, e in spans if s <= match.start() < e), None)
         text = INV.normalize_space(clean[start:INV.sentence_end(clean, start)])
-        out.append({
-            "name": match.group(1),
-            "module": module,
-            "text": text,
-            "line": clean.count("\n", 0, match.start(1)) + 1,
-        })
-    return out
+        out.append((match.group(1), module, text,
+                    clean.count("\n", 0, match.start(1)) + 1))
+    return tuple(out)
 
 
 def find_decl(src: str, name: str, module: str | None = None) -> dict:
@@ -180,7 +263,29 @@ def substitute(text: str, substitutions: dict[str, str]) -> str:
     return pattern.sub(lambda m: substitutions[m.group(1)], text)
 
 
+@lru_cache(maxsize=128)
+def _inventory_index(root: str, identity: tuple, commit: str) -> dict[str, str] | None:
+    data = json.loads(_historical_source(root, identity, commit, "meta/library_helper_inventory.json"))
+    helpers = data.get("helpers", []) if isinstance(data, dict) else None
+    # Malformed shapes use the original ordered lookup below: an error after
+    # a matching entry must not make a formerly successful lookup fail early.
+    if not isinstance(helpers, list) or any(
+            not isinstance(h, dict) or not isinstance(h.get("qualified_name"), str)
+            or not isinstance(h.get("declaration_hash"), str) for h in helpers):
+        return None
+    index = {}
+    for helper in helpers:
+        index.setdefault(helper["qualified_name"], helper["declaration_hash"])
+    return index
+
+
 def inventory_hash(commit: str, qualified: str) -> str | None:
+    repository = _history_repository()
+    key = _historical_key(repository, commit) if repository is not None else None
+    if key is not None:
+        index = _inventory_index(*key)
+        if index is not None:
+            return index.get(qualified)
     data = json.loads(source_at(commit, "meta/library_helper_inventory.json"))
     for helper in data.get("helpers", []):
         if helper["qualified_name"] == qualified:
@@ -1021,7 +1126,7 @@ def render_details(report: dict, spec: dict) -> str:
     lines += ["", "## Distinct name matches (not claimed, not redirected)", ""]
     for item in report["distinct_variants"]:
         lines.append(f"- `{item['qualified']}` (sha256 `{item['declaration_sha256'][:16]}…`, "
-                     f"unchanged): {item['note']}")
+                     "unchanged)" + (f": {item['note']}" if "note" in item else ""))
     lines += ["", "## Checks", ""]
     lines += [f"- [{'x' if c['ok'] else ' '}] {c['check']}" + (f" ({c['detail']})" if c["detail"]
                                                               and not c["ok"] else "")
