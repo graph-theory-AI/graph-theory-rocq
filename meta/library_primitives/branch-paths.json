@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "family": "branch-paths",
+  "primitive": {
+    "canonical_name": "Chromatic.foundations.branch_paths.branch_paths_at_least",
+    "owner": "chromatic-theory",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "contains_induced_long_subdivision",
+      "contains_induced_subdivision"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X177.x177_contains_induced_long_subdivision",
+      "Chromatic.conjectures.X185.x185_contains_induced_long_subdivision",
+      "Chromatic.conjectures.X186.x186_contains_induced_subdivision"
+    ],
+    "consumers_remaining": 3,
+    "relation": "Weak injective branch map with one existential tail path per oriented pattern edge: adjacency path, prescribed endpoint, lower bound on edge length size p, uniq(branch x::p), and internal branch avoidance. No inducedness, inter-path disjointness, reversal coherence or simultaneous supplied path map. Host/pattern order G,H is preserved. X177/X185 are the exact same body; X186 is the unconditional zero-bound view. All three blocked statement readings and the X185 line_graph target remain unchanged.",
+    "semantic_classes": {
+      "length-bounded-tail-paths": {
+        "members": [
+          "Chromatic.conjectures.X177.x177_contains_induced_long_subdivision",
+          "Chromatic.conjectures.X185.x185_contains_induced_long_subdivision"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.branch_paths.x177_contains_induced_long_subdivision_compat",
+          "Chromatic.migration.branch_paths.x185_contains_induced_long_subdivision_compat"
+        ]
+      },
+      "zero-bound-tail-paths": {
+        "members": [
+          "Chromatic.conjectures.X186.x186_contains_induced_subdivision"
+        ],
+        "count": 1,
+        "verdict": "equivalent zero-bound adapter",
+        "certificates": [
+          "Chromatic.migration.branch_paths.x186_contains_induced_subdivision_compat"
+        ]
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.branch_paths.x177_contains_induced_long_subdivision_compat",
+      "Chromatic.migration.branch_paths.forest_of_lanterns_pervasive_statement_compat",
+      "Chromatic.migration.branch_paths.x185_contains_induced_long_subdivision_compat",
+      "Chromatic.migration.branch_paths.x185_widespread_compat",
+      "Chromatic.migration.branch_paths.every_multigraph_widespread_statement_compat",
+      "Chromatic.migration.branch_paths.x186_contains_induced_subdivision_compat",
+      "Chromatic.migration.branch_paths.subdivision_or_local_chi_two_statement_compat"
+    ],
+    "api_theorems": [
+      "Chromatic.foundations.branch_paths.branch_paths_at_leastW",
+      "Chromatic.foundations.branch_paths.branch_paths_zeroE",
+      "Chromatic.foundations.branch_paths.branch_paths_card",
+      "Chromatic.foundations.branch_paths.branch_paths_empty_pattern",
+      "Chromatic.foundations.branch_paths.not_branch_paths_empty_host",
+      "Chromatic.foundations.branch_paths.branch_paths_edgelessE",
+      "Chromatic.foundations.branch_paths.branch_paths_of_embedding",
+      "Chromatic.foundations.branch_paths.branch_paths_refl"
+    ],
+    "public_client": "chromatic-theory/theories/examples/branch_paths.v",
+    "legacy_baseline": "311fdcb89dc12a78c62cb0ee6d2477896cbce9a7",
+    "migration_report": "meta/migration_reports/branch_paths.md",
+    "migration_spec": "meta/migration_reports/branch_paths.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C17.md",
+    "foundation_fidelity": "meta/foundation_fidelity/branch-paths.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.path",
+        "GraphTheory.core.minor",
+        "mathcomp.boot.path",
+        "Minor.foundations.containment",
+        "Extremal.conjectures.X98",
+        "GTMisc.conjectures.X114"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "MathComp path and uniq",
+      "note": "The installed GraphTheory source has no matching weak branch-path/subdivision predicate. Reuse path/uniq and preserve the existing tail representation. Minor.subdiv_model adds internally disjoint reversible paths; X98/X114 add induced paths/global inducedness. None is identified with this weaker contract. Only Chromatic currently consumes it, so keep the public home in this area.",
+      "audited_at": "2026-10-03"
+    }
+  }
+}
