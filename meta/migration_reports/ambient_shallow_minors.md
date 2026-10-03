@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py ambient_shallow_minors --detail
 
 - Canonical: `GTMisc.foundations.ambient_shallow_minors.ambient_shallow_minor`.
 - Baseline: `15e22500d394e76949607525a6bcafb9469b1287`.
-- Scope: 4 helpers, 2 statements, 17 frozen objects, 30 recorded references.
-- Source checks: 129/129 pass; consistent.
+- Scope: 4 helpers, 2 statements, 17 frozen objects, 36 recorded references.
+- Source checks: 131/131 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,4 +20,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Infinite.conjectures.D4inf2.minor_model`, `Minor.conjectures.X200.x200_minor_model`, `Digraph.conjectures.two_extremal.sg_minor_rmap`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/edge_count.v#X128Legacy.grad_at_most`, `graph-theory-misc/theories/migration/edge_count.v#X139Legacy.grad_at_most`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/edge_count.v#X128Legacy.grad_at_most`, `graph-theory-misc/theories/migration/edge_count.v#X139Legacy.grad_at_most`, `graph-theory-misc/theories/migration/ambient_grad.v#X128Legacy.x128_grad_at_most`, `graph-theory-misc/theories/migration/ambient_grad.v#X139Legacy.x139_grad_at_most`.

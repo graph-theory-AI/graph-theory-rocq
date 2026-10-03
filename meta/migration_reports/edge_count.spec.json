@@ -1576,7 +1576,9 @@
     "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE1Legacy.erdos_567_statement": "A11 snapshot: A11 froze this row over its own frozen minimum-degree bound but kept the live x4_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count.",
     "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE1Legacy.erdos_568_statement": "A11 snapshot: A11 froze this row over its own frozen minimum-degree bound but kept the live x4_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_568_statement, certified by erdos_568_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count.",
     "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE2Legacy.erdos_570_statement": "A11 snapshot: A11 froze this row over its own frozen minimum-degree bound but kept the live x4_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE2Original.erdos_570_statement, certified by erdos_570_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count.",
-    "extremal-graph-theory/theories/migration/min_degree.v#XE2Legacy.erdos_803_statement": "A12 snapshot: A12 froze this row over its own frozen attained minimum but kept the live x4_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.min_degree.XE2Original.erdos_803_statement, certified by erdos_803_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count."
+    "extremal-graph-theory/theories/migration/min_degree.v#XE2Legacy.erdos_803_statement": "A12 snapshot: A12 froze this row over its own frozen attained minimum but kept the live x4_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.min_degree.XE2Original.erdos_803_statement, certified by erdos_803_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count.",
+    "graph-theory-misc/theories/migration/ambient_grad.v#X128Legacy.x128_grad_at_most": "C23 current snapshot: the X128 grad source frozen verbatim at 30459e9 keeps the live public count fg_edge_count (and the live C16 model alias). It stays byte-exact; the complete A7+C16 history is GTMisc.migration.ambient_shallow_minors.X128Original, whose whole-row iff dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat the ambient_grad report rechecks.",
+    "graph-theory-misc/theories/migration/ambient_grad.v#X139Legacy.x139_grad_at_most": "C23 current snapshot: the X139 grad source frozen verbatim at 30459e9 keeps the live public count fg_edge_count (and the live C16 model alias). It stays byte-exact; the complete A7+C16 history is GTMisc.migration.ambient_shallow_minors.X139Original, whose whole-row iff esperet_raymond_polynomial_expansion_scol_statement_original_compat the ambient_grad report rechecks."
   },
   "cross_module_consumers": [
     {
@@ -1708,6 +1710,21 @@
       "path": "base/theories/examples/cut_size.v",
       "name": "edge_count",
       "note": "A9 public-only client: cut_size_le_edge_count bounds a cut by the canonical GTBase.common.edge_count (lexical match with the D2ram/D2tur source names)."
+    },
+    {
+      "path": "graph-theory-misc/theories/foundations/ambient_shallow_minors.v",
+      "name": "fg_edge_count",
+      "note": "C23 canonical ambient_grad_at_most and its API state the bound with the public count, unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/examples/ambient_grad.v",
+      "name": "fg_edge_count",
+      "note": "C23 public client: grad examples state and compute the public count."
+    },
+    {
+      "path": "graph-theory-misc/theories/examples/ambient_grad.v",
+      "name": "edge_count",
+      "note": "C23 public client unfolds fg_edge_count to GTBase.common.edge_count and uses edge_count_K0_K1 and edge_count_K2."
     }
   ],
   "distinct_variants": [

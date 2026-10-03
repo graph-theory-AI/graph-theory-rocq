@@ -9,7 +9,11 @@
     [ambient_shallow_minor G H r] supplies H-branches in G with this radius and
     upstream [minor_rmap] on the SAME map. Nonempty connected disjoint branches
     and realization of every pattern edge are retained. Empty H is allowed;
-    there is no global inhabitance, covering-host or inducedness condition. *)
+    there is no global inhabitance, covering-host or inducedness condition.
+
+    [ambient_grad_at_most G r d] bounds every such pattern H by the natural
+    twice-density inequality [2 * fg_edge_count H <= d * #|H|] (public edge count);
+    the empty pattern is included and no guard is added. *)
 From GTBase Require Import base minor_models.
 From GraphTheory Require Import minor.
 
@@ -140,3 +144,45 @@ Proof.
 exists (fun x => [set x]); split; first exact: minor_rmap_singletons.
 move=> x; exact: (ambient_radius_at_mostW (leq0n r) (ambient_radius_singleton x)).
 Qed.
+
+(** ** Ambient grad bounds
+
+    [ambient_grad_at_most G r d]: every pattern H with an ambient shallow minor model of
+    radius r in the host G satisfies the natural twice-density bound
+    [2 * fg_edge_count H <= d * #|H|], with the public edge count. The empty pattern is
+    quantified (it gives 0 <= 0); there is no nonempty, positive, connected, induced or
+    covering guard, no division or rational density and no maximum. The radius is the host
+    [graph_dist] of [ambient_shallow_minor], not a branch-internal radius. *)
+Definition ambient_grad_at_most (G : sgraph) (r d : nat) : Prop :=
+  forall H : sgraph,
+    ambient_shallow_minor G H r -> 2 * fg_edge_count H <= d * #|H|.
+
+Lemma ambient_grad_at_mostE (G : sgraph) (r d : nat) :
+  ambient_grad_at_most G r d <->
+  forall H : sgraph, ambient_shallow_minor G H r -> 2 * fg_edge_count H <= d * #|H|.
+Proof. exact: iff_refl. Qed.
+
+Lemma ambient_grad_at_most_bound (G H : sgraph) (r d : nat) :
+  ambient_grad_at_most G r d -> ambient_shallow_minor G H r ->
+  2 * fg_edge_count H <= d * #|H|.
+Proof. by move=> grad; exact: grad. Qed.
+
+(** A larger density constant is weaker. *)
+Lemma ambient_grad_at_mostW (G : sgraph) (r d e : nat) :
+  d <= e -> ambient_grad_at_most G r d -> ambient_grad_at_most G r e.
+Proof.
+move=> de grad H model; apply: leq_trans (grad H model) _.
+exact: leq_mul de (leqnn _).
+Qed.
+Arguments ambient_grad_at_mostW [G r d e] _ _.
+
+(** A bound at radius s restricts to every smaller radius r. *)
+Lemma ambient_grad_at_most_radiusW (G : sgraph) (r s d : nat) :
+  r <= s -> ambient_grad_at_most G s d -> ambient_grad_at_most G r d.
+Proof. by move=> rs grad H model; apply: grad; exact: ambient_shallow_minorW rs model. Qed.
+Arguments ambient_grad_at_most_radiusW [G r s d] _ _.
+
+(** The host itself is a shallow minor at every radius, so it obeys the bound. *)
+Lemma ambient_grad_at_most_host (G : sgraph) (r d : nat) :
+  ambient_grad_at_most G r d -> 2 * fg_edge_count G <= d * #|G|.
+Proof. by move=> grad; exact: grad G (ambient_shallow_minor_refl G r). Qed.

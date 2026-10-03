@@ -17,10 +17,7 @@ Definition x128_radius_at_most (G : sgraph) (S : {set G}) (r : nat) : Prop := am
 
 Definition x128_shallow_minor_model (G H : sgraph) (r : nat) : Prop := ambient_shallow_minor G H r.
 
-Definition x128_grad_at_most (G : sgraph) (r d : nat) : Prop :=
-  forall H : sgraph,
-    x128_shallow_minor_model G H r ->
-    2 * fg_edge_count H <= d * #|H|.
+Definition x128_grad_at_most (G : sgraph) (r d : nat) : Prop := ambient_grad_at_most G r d.
 
 Definition x128_expansion_bounded (G : sgraph) (p : seq nat) : Prop :=
   forall r : nat, x128_grad_at_most G r (x128_poly_eval p r).
