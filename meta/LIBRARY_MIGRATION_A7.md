@@ -187,3 +187,13 @@ is the complete `9e03072` row, over C1's frozen `X180Legacy.multitasker_capacity
 this family's frozen average-degree chain, certified structurally. The two snapshots are documented reciprocally,
 and C1's compact summary is regenerated. The family's direct consumer count stays 11: the public source has no
 remaining same-file consumer.
+
+## B10 history for #767 (follow-up commit)
+
+B10 (genuine cycles, `e0338c4`, integrated before A7) froze #767's incident-chord chain over its frozen raw cycle but
+kept the live `x4_edge_count`; A7's per-row chain keeps B10's live `xe2_no_cycle_with_incident_chords`. On a private
+baseline merging `842ff4d` with `e0338c4` (not for integration), `XE2CycleOriginal` is the complete pre-A7/B4/B10 chain
+and row: the `9e03072` texts over this family's frozen `Legacy.x4_edge_count` and B10's complete
+`XE2Original.no_cycle_with_incident_chords` (aliased `B10`). They are certified by
+`incident_chord_extremal_cycle_original_compat` and `erdos_767_statement_cycle_original_compat`, and reach no M1
+alias. The three snapshots get reciprocal notes; no earlier frozen body or signature changes.

@@ -1146,3 +1146,51 @@ split=> h n0; have [G [nG [avg cap]]] := h n0; exists G; split=> //; split.
 - exact/x180_average_degree_logarithmic_compat.
 - exact/C1.x180_multitasker_capacity_positive_compat.
 Qed.
+
+(** ** Complete pre-A7/B4/B10 #767 (B10 history follow-up)
+
+    B10 (genuine cycles, integrated before A7) froze #767's incident-chord chain over its frozen
+    raw cycle but kept the live [x4_edge_count]; this file's [XE2Legacy]/[XE2Original] copies keep
+    the live [xe2_no_cycle_with_incident_chords] or B4's partial snapshot.  The complete chain and row
+    compose this family's frozen count with B10's complete pre-B4/B10 chain
+    ([B10.XE2Original.no_cycle_with_incident_chords], over B4's frozen consecutive-in-cycle and B10's
+    frozen raw cycle).  B10's module is loaded without Import; every earlier binding of this file
+    is unchanged. *)
+From Extremal.migration Require genuine_cycle.
+Module B10 := Extremal.migration.genuine_cycle.
+
+Module XE2CycleOriginal.
+
+Definition incident_chord_extremal (k n m : nat) : Prop :=
+  (exists G : sgraph,
+      #|G| = n /\ Legacy.x4_edge_count G = m /\
+      B10.XE2Original.no_cycle_with_incident_chords G k) /\
+  forall m' : nat,
+    (exists G : sgraph,
+      #|G| = n /\ Legacy.x4_edge_count G = m' /\
+      B10.XE2Original.no_cycle_with_incident_chords G k) ->
+    m' <= m.
+
+Definition erdos_767_statement : Prop :=
+  forall k : nat, exists N : nat,
+    forall (n m : nat),
+      N <= n ->
+      XE2CycleOriginal.incident_chord_extremal k n m ->
+      m = (k + 1) * n - (k + 1) ^ 2.
+
+End XE2CycleOriginal.
+
+Lemma incident_chord_extremal_cycle_original_compat (k n m : nat) :
+  @XE2CycleOriginal.incident_chord_extremal k n m <-> @xe2_incident_chord_extremal k n m.
+Proof.
+rewrite /XE2CycleOriginal.incident_chord_extremal /xe2_incident_chord_extremal.
+setoid_rewrite x4_edge_count_compat; setoid_rewrite B10.xe2_no_cycle_with_incident_chords_original_compat.
+reflexivity.
+Qed.
+
+Lemma erdos_767_statement_cycle_original_compat :
+  XE2CycleOriginal.erdos_767_statement <-> erdos_767_statement.
+Proof.
+rewrite /XE2CycleOriginal.erdos_767_statement /erdos_767_statement.
+setoid_rewrite incident_chord_extremal_cycle_original_compat; reflexivity.
+Qed.
