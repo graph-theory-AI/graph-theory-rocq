@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "family": "perfect-graph",
+  "primitive": {
+    "canonical_name": "GTBase.perfect_graphs.is_perfect_graph",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "perfect_graph"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.D2ram.perfect_graph",
+      "GTMisc.conjectures.X144.x144_perfect_graph"
+    ],
+    "consumers_remaining": 2,
+    "relation": "equivalent Prop encodings of upstream full-carrier perfection: direct subset chi=omega or induced-carrier chi=omega; not definitionally identical",
+    "semantic_classes": {
+      "subset-relative": {
+        "members": [
+          "Extremal.conjectures.D2ram.perfect_graph"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Extremal.migration.perfect_graphs.perfect_graph_compat",
+        "note": "For every vertex subset, chi(A)=omega(A); equivalent to the upstream Boolean predicate by finite reflection."
+      },
+      "induced-carrier": {
+        "members": [
+          "GTMisc.conjectures.X144.x144_perfect_graph"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "GTMisc.migration.perfect_graphs.x144_perfect_graph_compat",
+        "note": "For every induced carrier, whole chi equals whole omega; equivalent through upstream induced invariant identities, including set0."
+      }
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.perfect_graphs.perfect_graph_compat",
+      "Extremal.migration.perfect_graphs.complete_bipartite_subgraphs_of_perfect_graphs_statement_compat",
+      "GTMisc.migration.perfect_graphs.x144_perfect_graph_compat",
+      "GTMisc.migration.perfect_graphs.fox_pure_pair_perfect_graphs_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.perfect_graphs.is_perfect_graphP",
+      "GTBase.perfect_graphs.is_perfect_graph_subsets",
+      "GTBase.perfect_graphs.is_perfect_graph_induced_subsets",
+      "GTBase.perfect_graphs.is_perfect_graph_whole",
+      "GTBase.perfect_graphs.is_perfect_graph_induced",
+      "GTBase.perfect_graphs.is_perfect_graph_diso",
+      "GTBase.perfect_graphs.is_perfect_graph_isubgraph",
+      "GTBase.perfect_graphs.is_perfect_graph_complement",
+      "GTBase.perfect_graphs.is_perfect_graph_complete",
+      "GTBase.perfect_graphs.is_perfect_graph_empty",
+      "GTBase.perfect_graphs.is_perfect_graph_complement_complete",
+      "GTBase.perfect_graphs.is_perfect_graph_hajnal"
+    ],
+    "distinct_variants": {
+      "Chromatic.conjectures.X3.x3_chi_omega_plus_bound": "A supplied additive slack for every graph in a class, not perfection of one graph on every subset.",
+      "Chromatic.conjectures.X3.x3_alpha_omega_large_class": "A class-level alpha/omega condition with an extra +1, not upstream perfection or its exact Hajnal characterization."
+    },
+    "migration_report": "meta/migration_reports/perfect_graph.md",
+    "migration_spec": "meta/migration_reports/perfect_graph.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/perfect-graph.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C12.md",
+    "downstream_client": "base/theories/examples/perfect_graphs.v",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.wpgt",
+        "GraphTheory.core.coloring",
+        "GraphTheory.core.sgraph",
+        "GTBase.base"
+      ],
+      "result": "reused-upstream",
+      "candidate": "GraphTheory.wpgt.perfect_mem",
+      "note": "The upstream predicate is the owner, used directly via a full-carrier Prop adapter. Reflection, induced/isomorphism transport, weak_perfect and Hajnal are reused with actual installed signatures; chi_induced/omega_induced bridge X144. No independent perfection body replaces the upstream one.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}
