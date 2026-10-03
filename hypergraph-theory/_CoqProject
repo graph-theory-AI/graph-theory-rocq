@@ -3,6 +3,7 @@
 -arg -w -arg -notation-overridden
 
 theories/foundations/hypergraph.v
+theories/examples/supplied_partitions.v
 
 theories/conjectures/U12.v
 theories/conjectures/grounding_U12.v
@@ -30,3 +31,4 @@ theories/conjectures/vocabulary_hypergraph.v
 theories/migration/cut_size.v
 theories/migration/incidence_degree.v
 theories/migration/uniform_hypergraph.v
+theories/migration/partite_uniform.v

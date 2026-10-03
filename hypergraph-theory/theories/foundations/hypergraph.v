@@ -13,7 +13,7 @@
     Contents:
       - basic shape: [hg_uniform] / [hg_uniformb], [hg_loopless], [hg_degree],
         [hg_restrict] (the subhypergraph spanned by a vertex set),
-        [hg_partite_uniform];
+        [hg_partite_uniform] with its supplied-partition API;
       - connectivity: [hg_link] (two vertices share a hyperedge), [hg_move]
         (link or stay), [hg_connected], [hg_connected_on];
       - colouring: [hg_proper_colouring] (no monochromatic hyperedge),
@@ -83,6 +83,67 @@ Definition hg_restrict E S : {set {set T}} := [set e in E | e \subset S].
     every hyperedge meets each class exactly once. *)
 Definition hg_partite_uniform (k : nat) (part : T -> 'I_k) E : Prop :=
   forall e, e \in E -> forall j : 'I_k, #|[set v in e | part v == j]| = 1.
+
+(** Supplied-partition API (D2).  [part] and [E] are supplied as they are: no positive rank,
+    nonempty family, global balance, surjectivity or isolated-vertex condition is assumed. *)
+
+(** The empty family is [k]-partite for every supplied map. *)
+Lemma hg_partite_uniform0 (k : nat) (part : T -> 'I_k) : hg_partite_uniform part set0.
+Proof. by move=> e; rewrite inE. Qed.
+
+(** Subfamilies stay partite. *)
+Lemma hg_partite_uniformS (k : nat) (part : T -> 'I_k) E (F : {set {set T}}) :
+  F \subset E -> hg_partite_uniform part E -> hg_partite_uniform part F.
+Proof. by move=> /subsetP FE pE e /FE; exact: pE. Qed.
+
+(** Vertex deletion keeps exactly the hyperedges avoiding [X], whole. *)
+Lemma hg_partite_uniform_delete (k : nat) (part : T -> 'I_k) E (X : {set T}) :
+  hg_partite_uniform part E -> hg_partite_uniform part [set e in E | [disjoint e & X]].
+Proof. by apply: hg_partite_uniformS; apply/subsetP => e; rewrite inE => /andP[]. Qed.
+
+(** A member meets each of the [k] classes once, so it has exactly [k] vertices (also at
+    [k = 0]); the proof is the one of grounding_U12.r_partite_card. *)
+Lemma hg_partite_uniform_card (k : nat) (part : T -> 'I_k) E e :
+  hg_partite_uniform part E -> e \in E -> #|e| = k.
+Proof.
+move=> pE eE.
+rewrite -sum1_card (partition_big part predT) //=.
+rewrite -[RHS](card_ord k) -sum1_card.
+apply: eq_bigr => j _.
+rewrite sum1dep_card -(pE e eE j).
+by apply: eq_card => v; rewrite !inE.
+Qed.
+
+(** Hence the family is [k]-uniform (D1's [uniform_family], i.e. [hg_uniform]); the converse
+    fails for a supplied map. *)
+Lemma hg_partite_uniform_uniform (k : nat) (part : T -> 'I_k) E :
+  hg_partite_uniform part E -> uniform_family E k.
+Proof. by move=> pE e eE; exact: hg_partite_uniform_card pE eE. Qed.
+
+(** A member supplies one vertex of each class ... *)
+Lemma hg_partite_uniform_part (k : nat) (part : T -> 'I_k) E e (j : 'I_k) :
+  hg_partite_uniform part E -> e \in E -> exists2 v, v \in e & part v = j.
+Proof.
+move=> pE eE; have /card_gt0P[v] : 0 < #|[set v in e | part v == j]| by rewrite (pE e eE j).
+by rewrite inE => /andP[ve /eqP pv]; exists v.
+Qed.
+
+(** ... so, under a member premise only, [part] is onto and [k <= #|T|]. *)
+Lemma hg_partite_uniform_onto (k : nat) (part : T -> 'I_k) E e :
+  hg_partite_uniform part E -> e \in E -> forall j : 'I_k, exists v, part v = j.
+Proof. by move=> pE eE j; have [v _ pv] := hg_partite_uniform_part j pE eE; exists v. Qed.
+
+Lemma hg_partite_uniform_rank_le (k : nat) (part : T -> 'I_k) E e :
+  hg_partite_uniform part E -> e \in E -> k <= #|T|.
+Proof. by move=> pE eE; rewrite -(hg_partite_uniform_card pE eE) max_card. Qed.
+
+(** Rank [0]: a map into ['I_0] forces an empty carrier, and every family on it is partite,
+    the empty family and the singleton empty edge included. *)
+Lemma hg_partite_rank0_card (part : T -> 'I_0) : #|T| = 0.
+Proof. by apply: eq_card0 => v; case: (part v). Qed.
+
+Lemma hg_partite_uniform_rank0 (part : T -> 'I_0) E : hg_partite_uniform part E.
+Proof. by move=> e _ []. Qed.
 
 Lemma hg_degree_le E S v : hg_degree (hg_restrict E S) v <= #|E|.
 Proof.
@@ -295,7 +356,17 @@ apply/orP; right; apply/existsP; exists [ffun _ => r]; apply/andP; split.
 by apply/orP; left; apply/existsP; exists ord0; rewrite ffunE.
 Qed.
 
+
 End Hypergraph.
+
+(** The full ordinal edge with the identity partition is [k]-partite, at every rank. *)
+Lemma hg_partite_uniform_ord (k : nat) :
+  hg_partite_uniform (fun v : 'I_k => v) [set [set: 'I_k]].
+Proof.
+move=> e; rewrite inE => /eqP-> j.
+have -> : [set v in [set: 'I_k] | v == j] = [set j] by apply/setP => v; rewrite !inE.
+by rewrite cards1.
+Qed.
 
 (** ** Extremal numbers *************************************************** *)
 

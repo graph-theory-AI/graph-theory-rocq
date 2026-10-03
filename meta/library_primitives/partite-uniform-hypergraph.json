@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "family": "partite-uniform-hypergraph",
+  "primitive": {
+    "canonical_name": "Hypergraph.foundations.hypergraph.hg_partite_uniform",
+    "owner": "hypergraph-theory",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "r_partite_uniform"
+    ],
+    "source_definitions": [
+      "Hypergraph.conjectures.U12.r_partite_uniform",
+      "Hypergraph.conjectures.X6.x6_r_partite_uniform",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform"
+    ],
+    "repository_sources": {
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform": {
+        "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+        "commit": "e53098e84635d8612e34e5d239fd13fe5afa9fb8",
+        "blob": "a83b5ff349c0c5a0a8c2e4a66be31d8fd062a94e",
+        "declaration_hash": "e1c0f0f4620a4ef5b13687055d68c36bae8b2c417d1de097b3b65ccb20729c11"
+      }
+    },
+    "consumers_remaining": 13,
+    "relation": "Supplied-partition uniformity: for a supplied map part : T -> 'I_k on an arbitrary finite vertex type T and a family E : {set {set T}}, every member e of E meets each class j in exactly one vertex, #|[set v in e | part v == j]| = 1. The map and family stay supplied: no existential partition, positive rank, nonempty family, global balance, surjectivity or no-isolated-vertex condition. At rank 0 the map forces an empty carrier and every family qualifies. Members then have exactly k vertices, so the family is uniform (D1); the converse fails for a supplied map. X73 balanced fibres, graph multipartite, bipartite and edit-to-partite namesakes are separate contracts.",
+    "semantic_classes": {
+      "supplied-partition-alias": {
+        "members": [
+          "Hypergraph.conjectures.U12.r_partite_uniform",
+          "Hypergraph.conjectures.X6.x6_r_partite_uniform"
+        ],
+        "count": 2,
+        "verdict": "equivalent (same body)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.partite_uniform.r_partite_uniform_compat",
+          "Hypergraph.migration.partite_uniform.x6_r_partite_uniform_compat"
+        ],
+        "note": "U12 and X6 keep their names, binders T r part E and implicit arguments; they unfold to the public predicate through a qualified Require, so U12 keeps its own Berge hg_connected."
+      },
+      "public-canonical": {
+        "members": [
+          "Hypergraph.foundations.hypergraph.hg_partite_uniform"
+        ],
+        "count": 1,
+        "verdict": "canonical (definition, Section discharge and Arguments unchanged)",
+        "state": "migrated-canonical (definition unchanged)",
+        "certificates": [
+          "Hypergraph.migration.partite_uniform.hg_partite_uniform_compat"
+        ],
+        "note": "Frozen verbatim for the complete Originals; the public API sits next to it."
+      }
+    },
+    "compatibility_theorems": [
+      "Hypergraph.migration.partite_uniform.r_partite_uniform_compat",
+      "Hypergraph.migration.partite_uniform.x6_r_partite_uniform_compat",
+      "Hypergraph.migration.partite_uniform.hg_partite_uniform_compat",
+      "Hypergraph.migration.partite_uniform.rysers_statement_compat",
+      "Hypergraph.migration.partite_uniform.lovasz_r_partite_matching_deletion_statement_compat",
+      "Hypergraph.migration.partite_uniform.r_partite_matching_deletion_tradeoff_statement_compat",
+      "Hypergraph.migration.partite_uniform.ryser_intersecting_partite_cover_gap_statement_compat",
+      "Hypergraph.migration.partite_uniform.regular_tripartite_hypergraph_matching_lower_bound_statement_compat",
+      "Hypergraph.migration.partite_uniform.kpartite_hypergraph_turan_exponent_dmax_statement_compat",
+      "Hypergraph.migration.partite_uniform.regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat",
+      "Hypergraph.migration.partite_uniform.kpartite_hypergraph_turan_exponent_dmax_statement_original_compat"
+    ],
+    "api_theorems": [
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform0",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniformS",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform_delete",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform_card",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform_uniform",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform_part",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform_onto",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform_rank_le",
+      "Hypergraph.foundations.hypergraph.hg_partite_rank0_card",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform_rank0",
+      "Hypergraph.foundations.hypergraph.hg_partite_uniform_ord"
+    ],
+    "public_client": "hypergraph-theory/theories/examples/supplied_partitions.v",
+    "legacy_baseline": "e53098e84635d8612e34e5d239fd13fe5afa9fb8",
+    "migration_report": "meta/migration_reports/partite_uniform.md",
+    "migration_spec": "meta/migration_reports/partite_uniform.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D2.md",
+    "foundation_fidelity": "meta/foundation_fidelity/partite-uniform-hypergraph.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core modules",
+        "mathcomp.boot.fintype",
+        "mathcomp.boot.finset",
+        "mathcomp.boot.bigop",
+        "Hypergraph.foundations.hypergraph"
+      ],
+      "result": "existing-area-canonical",
+      "candidate": "Hypergraph.foundations.hypergraph.hg_partite_uniform",
+      "note": "Pinned GraphTheory 0.9.7 has no supplied-partition hypergraph primitive; graph bipartitions, set partitions and card_uniform_partition are different contracts. The existing public definition is the canonical; its API reuses MathComp partition_big, sum1_card and sum1dep_card. Hypergraph is the only consumer area, so no GTBase copy is added.",
+      "audited_at": "2026-10-03"
+    }
+  }
+}

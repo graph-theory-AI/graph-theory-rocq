@@ -41,6 +41,7 @@
 
 From GTBase Require Export base.
 From GTBase Require Import hypergraph_uniformity.
+Require Hypergraph.foundations.hypergraph.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -257,8 +258,7 @@ Definition are_critical_k_forests_tight_statement : Prop :=
 (** r-uniform r-partite: every hyperedge has exactly one vertex in each part [j]. *)
 Definition r_partite_uniform (T : finType) (r : nat) (part : T -> 'I_r)
   (E : {set {set T}}) : Prop :=
-  forall e : {set T}, e \in E ->
-    forall j : 'I_r, #|[set v in e | part v == j]| = 1.
+  Hypergraph.foundations.hypergraph.hg_partite_uniform part E.
 
 (** A matching: a subfamily of pairwise-disjoint hyperedges. *)
 Definition hg_matching (T : finType) (M E : {set {set T}}) : Prop :=
