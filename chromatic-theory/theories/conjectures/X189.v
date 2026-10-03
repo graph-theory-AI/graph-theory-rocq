@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X189 -- v2 spaghetti/path decomposition chi-bound row *)
 
 From GTBase Require Export base.
+From GTBase Require Import path_trees.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -15,7 +16,7 @@ Definition x189_tree_decomposition
   (forall v : G, connected [set t : T | v \in bag t]).
 
 Definition x189_path_index_graph (T : sgraph) : Prop :=
-  is_tree [set: T] /\ Delta T <= 2.
+  path_tree T.
 
 Definition x189_rooted_spaghetti_index
     (T : sgraph) (root : T) (bag : T -> {set T}) : Prop :=
