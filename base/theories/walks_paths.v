@@ -21,7 +21,9 @@
     "Simple walks of a sequence" below), and the edges traversed by a sequence,
     [seq_edge_list], [seq_edge_set] and [seq_index_edge_set] (registry
     meta/library_primitives/path-edges.json, section "Edges traversed by a
-    sequence" below).
+    sequence" below), and genuine cycles of a relation, [seq_cycle] and
+    [seq_cycleb] (registry meta/library_primitives/genuine-cycle.json, section
+    "Genuine cycles of a sequence" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -1501,3 +1503,142 @@ Lemma seq_index_edge_set_ground_rev :
 Proof. by apply/seq_index_edge_setP; exists o2, o0. Qed.
 
 End EdgesGrounding.
+
+(** ** Genuine cycles of a sequence
+
+    [seq_cycle r c] (a proposition) and [seq_cycleb r c] (a boolean) state that the
+    sequence [c] is a cycle of the relation [r] with at least three entries: MathComp's
+    [ucycle r c] / [ucycleb r c], i.e. [cycle r c && uniq c] (consecutive entries and
+    the closing pair (last entry, first entry) are related, and the entries are
+    pairwise distinct), together with [2 < size c] (registry
+    meta/library_primitives/genuine-cycle.json).  The relation is ARBITRARY: no
+    symmetry, irreflexivity or graph premise is part of the definition, so the same
+    predicate serves undirected adjacency [(--)] and supplied or directed relations.
+
+    Upstream audit (2026-10-03; MathComp 2.5.0, coq-graph-theory 0.9.7).  MathComp
+    [path.v] owns [cycle], [ucycleb] and [ucycle] with [rot_ucycle], [rotr_ucycle],
+    [rev_cycle] and [eq_cycle]; without the size guard the empty sequence, a single
+    [r]-loop and a two-way pair would all be [ucycle]s.  coq-graph-theory has no
+    predicate for a genuine cycle of a raw sequence.  Hamiltonian cycles, cycles of a
+    prescribed length, longest, induced, rainbow or chorded cycles, existential
+    "has a cycle" conditions, multigraph circuits and the raw cycle-edge interfaces
+    are different contracts and stay separate.
+
+    Specification, every clause proved below:
+    - the two forms reflect each other ([seq_cycleP]); a genuine cycle is a [ucycle],
+      a [cycle], duplicate-free and of size at least three;
+    - degenerate sequences are excluded whatever [r]: [[::]], [[:: x]] (even when
+      [r x x]) and the digon [[:: x; y]] (even when [r x y] and [r y x]);
+    - a triangle [[:: x; y; z]] is one exactly when its entries are distinct and
+      [r x y], [r y z], [r z x] hold; repeated entries are excluded;
+    - invariance under [rot] and [rotr]; every cyclically consecutive pair is related
+      one way or the other;
+    - reversal gives a cycle of the CONVERSE relation, hence of [r] itself only when
+      [r] is symmetric (a directed 3-cycle is grounded not to reverse). *)
+
+Section SeqCycle.
+Variables (T : eqType) (r : rel T).
+Implicit Types (c : seq T) (u v x y z : T).
+
+(** [c] is a cycle of [r] with at least three entries, as a boolean ... *)
+Definition seq_cycleb c : bool := ucycleb r c && (2 < size c).
+
+(** ... and as a proposition. *)
+Definition seq_cycle c : Prop := ucycle r c /\ 2 < size c.
+
+Lemma seq_cycleP c : reflect (seq_cycle c) (seq_cycleb c).
+Proof. exact: andP. Qed.
+
+Lemma seq_cycleE c : seq_cycle c <-> [/\ cycle r c, uniq c & 2 < size c].
+Proof. by split=> [[/andP[-> ->] ->]|[cc uc sc]]; split=> //; apply/andP. Qed.
+
+Lemma seq_cycle_ucycle c : seq_cycle c -> ucycle r c.
+Proof. by case. Qed.
+
+Lemma seq_cycle_cycle c : seq_cycle c -> cycle r c.
+Proof. by case/seq_cycleE. Qed.
+
+Lemma seq_cycle_uniq c : seq_cycle c -> uniq c.
+Proof. by case/seq_cycleE. Qed.
+
+Lemma seq_cycle_size c : seq_cycle c -> 2 < size c.
+Proof. by case. Qed.
+
+(** Degenerate sequences are never cycles, whatever [r]: the empty sequence, a
+    single entry (even with [r x x]) and a digon (even with [r x y] and [r y x]). *)
+Lemma seq_cycle_nil : ~ seq_cycle [::].
+Proof. by case. Qed.
+
+Lemma seq_cycle_seq1 x : ~ seq_cycle [:: x].
+Proof. by case. Qed.
+
+Lemma seq_cycle_pair x y : ~ seq_cycle [:: x; y].
+Proof. by case. Qed.
+
+(** A triangle is a cycle exactly when its three entries are distinct and related
+    around the closing pair. *)
+Lemma seq_cycle_triangle x y z :
+  seq_cycle [:: x; y; z] <-> [/\ uniq [:: x; y; z], r x y, r y z & r z x].
+Proof.
+rewrite seq_cycleE /= andbT.
+by split=> [[/and3P[xy yz zx] u _]|[u xy yz zx]]; split=> //; apply/and3P.
+Qed.
+
+(** Repeated entries are excluded. *)
+Lemma seq_cycle_repeat c : ~~ uniq c -> ~ seq_cycle c.
+Proof. by move=> /negP nu /seq_cycle_uniq. Qed.
+
+(** Rotation invariance. *)
+Lemma seq_cycle_rot n c : seq_cycle (rot n c) <-> seq_cycle c.
+Proof. by rewrite /seq_cycle rot_ucycle size_rot. Qed.
+
+Lemma seq_cycle_rotr n c : seq_cycle (rotr n c) <-> seq_cycle c.
+Proof. by rewrite /seq_cycle rotr_ucycle size_rotr. Qed.
+
+(** Every cyclically consecutive pair is related, one way or the other. *)
+Lemma seq_cycle_consecutive c u v :
+  seq_cycle c -> seq_cyclic_consecutive c u v -> r u v || r v u.
+Proof. by move/seq_cycle_cycle; apply: seq_cyclic_consecutive_cycle. Qed.
+
+End SeqCycle.
+
+(** Reversal: the reversed sequence is a cycle of the CONVERSE relation; for a
+    symmetric relation (an undirected adjacency) it is a cycle of the same one. *)
+Lemma seq_cycle_rev_converse (T : eqType) (r : rel T) (c : seq T) :
+  seq_cycle r (rev c) <-> seq_cycle (fun x y => r y x) c.
+Proof. by rewrite /seq_cycle /ucycle rev_cycle rev_uniq size_rev. Qed.
+
+Lemma seq_cycle_rev (T : eqType) (r : rel T) (c : seq T) :
+  symmetric r -> seq_cycle r (rev c) <-> seq_cycle r c.
+Proof.
+move=> rsym; rewrite seq_cycle_rev_converse /seq_cycle /ucycle.
+by rewrite (@eq_cycle _ (fun x y => r y x) r) // => x y; rewrite rsym.
+Qed.
+
+(** ** Grounding: the triangle of [K_3], a digon of [K_2], and a directed
+    relation on ['I_3] *)
+Section CycleGrounding.
+Local Notation o0 := (@Ordinal 3 0 isT).
+Local Notation o1 := (@Ordinal 3 1 isT).
+Local Notation o2 := (@Ordinal 3 2 isT).
+
+Lemma seq_cycle_ground_K3 : seq_cycle (@edge_rel 'K_3) [:: o0; o1; o2].
+Proof. by apply/seq_cycleP. Qed.
+
+Lemma seq_cycle_ground_digon : ~ seq_cycle (@edge_rel 'K_2) [:: ord0; ord_max].
+Proof. exact: seq_cycle_pair. Qed.
+
+Lemma seq_cycle_ground_repeat : ~ seq_cycle (@edge_rel 'K_3) [:: o0; o1; o0; o2].
+Proof. by apply: seq_cycle_repeat. Qed.
+
+(** A directed 3-cycle of the successor relation mod 3: a cycle in one
+    direction, not in the reverse one (the relation is not symmetric). *)
+Let succ3 : rel 'I_3 := fun x y => (y == x.+1 %% 3 :> nat).
+
+Lemma seq_cycle_ground_directed : seq_cycle succ3 [:: o0; o1; o2].
+Proof. by apply/seq_cycleP. Qed.
+
+Lemma seq_cycle_ground_directed_rev : ~ seq_cycle succ3 (rev [:: o0; o1; o2]).
+Proof. by move/seq_cycleP. Qed.
+
+End CycleGrounding.
