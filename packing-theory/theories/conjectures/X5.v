@@ -1,6 +1,7 @@
 (** * Packing.conjectures.X5 -- v2 milestone X5, clean packing rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import triangles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,10 +10,10 @@ Unset Printing Implicit Defensive.
 (** ** Local packing vocabulary ********************************************)
 
 Definition x5_is_triangle (G : sgraph) (T : {set G}) : Prop :=
-  clique T /\ #|T| = 3.
+  triangle T.
 
 Definition x5_tri_edges (G : sgraph) (T : {set G}) : {set {set G}} :=
-  [set e : {set G} | (e \subset T) && (#|e| == 2)].
+  raw_pairs T.
 
 Definition x5_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.

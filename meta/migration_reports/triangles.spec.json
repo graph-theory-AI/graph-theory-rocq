@@ -1,0 +1,575 @@
+{
+  "family": "triangle-set",
+  "canonical_name": "GTBase.triangles.triangle",
+  "canonical_short_name": "triangle",
+  "relation": "triangle vertex sets and raw two-element subsets: Packing U9 is_triangle and X5 x5_is_triangle (clique T /\\ #|T| = 3) convert to GTBase.triangles.triangle T; Chromatic X69 x69_triangle (#|T| = 3 /\\ clique T) equals it by triangle_card_firstE (an iff, the conjunction order differs); Extremal X4 x4_triangle_set ((#|T| == 3) && cliqueb T) converts to triangle_set T, reflected by triangleP; Packing U9 tri_edges, X5 x5_tri_edges and Extremal XE2 xe2_tri_edges ([set e | (e \\subset T) && (#|e| == 2)], every two-subset, adjacent or not) convert to raw_pairs T. Raw pairs are graph edges only under an explicit clique guard (raw_pairs_cliqueE); a triangle set is not the graph-level triangle_free.",
+  "baseline_commit": "748b76ad48b537fef8e5cf78400423d661f869ee",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/triangles.v",
+    "chromatic-theory/theories/migration/triangles.v",
+    "extremal-graph-theory/theories/migration/triangles.v",
+    "packing-theory/theories/migration/triangles.v",
+    "extremal-graph-theory/theories/migration/simple_edges.v",
+    "packing-theory/theories/migration/simple_edges.v",
+    "extremal-graph-theory/theories/migration/edge_count.v"
+  ],
+  "extra_certificates": [
+    "GTBase.triangles.triangleP",
+    "GTBase.triangles.triangle_card_firstE",
+    "GTBase.triangles.in_raw_pairs",
+    "GTBase.triangles.card_raw_pairs",
+    "GTBase.triangles.raw_pairs_small",
+    "GTBase.triangles.raw_pairs_cliqueE",
+    "GTBase.triangles.triangle_raw_pairs",
+    "GTBase.triangles.triangle_vertices"
+  ],
+  "summary": [
+    "Batch A, family A19 (triangle vertex sets and raw pairs), on the fixed A18 pin 748b76a (no private union). New GTBase.triangles names thin presentations over upstream clique/cliqueb and MathComp sets: triangle_set (Boolean, cardinality first), triangle (Prop, clique first) and raw_pairs (every two-subset of a supplied set). No clique predicate or packing/transversal abstraction is added. API: reflection, the cardinality-first order, raw-pair membership and count 'C(#|T|,2), empty raw support below two vertices, raw pairs = edges under a clique guard, a triangle's three pairs and three distinct adjacent vertices. Six sources convert; X69's cardinality-first Prop is an iff. The public client: K_3 is a triangle and its raw pairs are its edges, K_4 is not, small sets have no raw pair, a nonadjacent pair still has one, and three edgeless vertices have three raw pairs but no triangle.",
+    "",
+    "Frozen verbatim at 748b76a: the seven sources, eleven chains (X69 distance; X4 at-most-one-edge, hits-every, attained alpha1 and tau1; XE1 seven-set, clique property and greatest guarantee; XE2 and X5 edge-disjoint packings; X5 genuine-edge transversal) and seven rows (X69 Havel, X4 #621, XE1 #128 and #813, XE2 #1009, U9 with its unrestricted transversal S, X5 #167). Bounds, attained extrema, quantifier orders, natural subtraction/division, small-order vacuity and leg states are unchanged. Complete rows: X4 #621 and X5 #167 at the pre-M1 061154c over M1's frozen edge sets (X5 reusing the frozen packing chain), XE1 #128 and XE2 #1009 at A7's ae0e605 over A7's frozen edge count (XE2 reusing the frozen packing chain): eleven whole-row iffs in all. The complete bridges reuse M1's and A7's certificates.",
+    "",
+    "History: A7's XE1Legacy #128 and XE2Legacy #1009 keep the live triangle family byte-for-byte and are documented below; A19's per-row #128/#1009 copies keep A7's live edge count and are documented reciprocally in A7's spec; per-row X4/X5 copies keep M1's live edge aliases (M1 has no spec). A17's frozen Legacy.x4_triangle_set and its x4_triangle_set_compat consumer are unchanged (still a conversion). The five grounding_U9 lemmas, the vocabulary_packing bridges and A7's two row certificates keep their types. Doc blocks are unchanged."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X69.x69_triangle",
+      "path": "chromatic-theory/theories/conjectures/X69.v",
+      "name": "x69_triangle",
+      "frozen_path": "chromatic-theory/theories/migration/triangles.v",
+      "frozen": "Legacy.x69_triangle",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.triangles.x69_triangle_compat",
+      "live_unfolds_to": "triangle T"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X69.x69_triangles_distance_at_least",
+      "path": "chromatic-theory/theories/conjectures/X69.v",
+      "name": "x69_triangles_distance_at_least",
+      "frozen_path": "chromatic-theory/theories/migration/triangles.v",
+      "frozen": "X69Legacy.x69_triangles_distance_at_least",
+      "substitutions": {
+        "x69_triangle": "Legacy.x69_triangle"
+      },
+      "certificate": "Chromatic.migration.triangles.x69_triangles_distance_at_least_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X69.havel_distant_triangles_three_colourable_statement",
+      "path": "chromatic-theory/theories/conjectures/X69.v",
+      "name": "havel_distant_triangles_three_colourable_statement",
+      "frozen_path": "chromatic-theory/theories/migration/triangles.v",
+      "frozen": "X69Legacy.havel_distant_triangles_three_colourable_statement",
+      "substitutions": {
+        "x69_triangles_distance_at_least": "X69Legacy.x69_triangles_distance_at_least"
+      },
+      "certificate": "Chromatic.migration.triangles.havel_distant_triangles_three_colourable_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X4.x4_triangle_set",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_triangle_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "Legacy.x4_triangle_set",
+      "substitutions": {},
+      "certificate": "Extremal.migration.triangles.x4_triangle_set_compat",
+      "live_unfolds_to": "triangle_set T"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE2.xe2_tri_edges",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_tri_edges",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "Legacy.xe2_tri_edges",
+      "substitutions": {},
+      "certificate": "Extremal.migration.triangles.xe2_tri_edges_compat",
+      "live_unfolds_to": "raw_pairs T"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X4.x4_at_most_one_triangle_edge",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_at_most_one_triangle_edge",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Legacy.x4_at_most_one_triangle_edge",
+      "substitutions": {
+        "x4_triangle_set": "Legacy.x4_triangle_set"
+      },
+      "certificate": "Extremal.migration.triangles.x4_at_most_one_triangle_edge_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X4.x4_hits_every_triangle",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_hits_every_triangle",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Legacy.x4_hits_every_triangle",
+      "substitutions": {
+        "x4_triangle_set": "Legacy.x4_triangle_set"
+      },
+      "certificate": "Extremal.migration.triangles.x4_hits_every_triangle_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X4.x4_alpha1",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_alpha1",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Legacy.x4_alpha1",
+      "substitutions": {
+        "x4_at_most_one_triangle_edge": "X4Legacy.x4_at_most_one_triangle_edge"
+      },
+      "certificate": "Extremal.migration.triangles.x4_alpha1_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X4.x4_tau1",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_tau1",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Legacy.x4_tau1",
+      "substitutions": {
+        "x4_hits_every_triangle": "X4Legacy.x4_hits_every_triangle"
+      },
+      "certificate": "Extremal.migration.triangles.x4_tau1_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X4.triangle_alpha_tau_bound_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "triangle_alpha_tau_bound_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Legacy.triangle_alpha_tau_bound_statement",
+      "substitutions": {
+        "x4_alpha1": "X4Legacy.x4_alpha1",
+        "x4_tau1": "X4Legacy.x4_tau1"
+      },
+      "certificate": "Extremal.migration.triangles.triangle_alpha_tau_bound_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_every_7_set_has_triangle",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_every_7_set_has_triangle",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "XE1Legacy.xe1_every_7_set_has_triangle",
+      "substitutions": {
+        "x4_triangle_set": "Legacy.x4_triangle_set"
+      },
+      "certificate": "Extremal.migration.triangles.xe1_every_7_set_has_triangle_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_seven_triangle_clique_property",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_seven_triangle_clique_property",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "XE1Legacy.xe1_seven_triangle_clique_property",
+      "substitutions": {
+        "xe1_every_7_set_has_triangle": "XE1Legacy.xe1_every_7_set_has_triangle"
+      },
+      "certificate": "Extremal.migration.triangles.xe1_seven_triangle_clique_property_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_seven_triangle_clique_guarantee",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_seven_triangle_clique_guarantee",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "XE1Legacy.xe1_seven_triangle_clique_guarantee",
+      "substitutions": {
+        "xe1_seven_triangle_clique_property": "XE1Legacy.xe1_seven_triangle_clique_property"
+      },
+      "certificate": "Extremal.migration.triangles.xe1_seven_triangle_clique_guarantee_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_128_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_128_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "XE1Legacy.erdos_128_statement",
+      "substitutions": {
+        "x4_triangle_set": "Legacy.x4_triangle_set"
+      },
+      "certificate": "Extremal.migration.triangles.erdos_128_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_813_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_813_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "XE1Legacy.erdos_813_statement",
+      "substitutions": {
+        "xe1_seven_triangle_clique_guarantee": "XE1Legacy.xe1_seven_triangle_clique_guarantee"
+      },
+      "certificate": "Extremal.migration.triangles.erdos_813_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_edge_disjoint_triangles",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_edge_disjoint_triangles",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "XE2Legacy.xe2_edge_disjoint_triangles",
+      "substitutions": {
+        "x4_triangle_set": "Legacy.x4_triangle_set",
+        "xe2_tri_edges": "Legacy.xe2_tri_edges"
+      },
+      "certificate": "Extremal.migration.triangles.xe2_edge_disjoint_triangles_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_1009_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_1009_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "XE2Legacy.erdos_1009_statement",
+      "substitutions": {
+        "xe2_edge_disjoint_triangles": "XE2Legacy.xe2_edge_disjoint_triangles"
+      },
+      "certificate": "Extremal.migration.triangles.erdos_1009_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X4.x4_at_most_one_triangle_edge",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_at_most_one_triangle_edge",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Original.x4_at_most_one_triangle_edge",
+      "substitutions": {
+        "x4_edge_set": "M1E.Legacy.edge_set",
+        "x4_triangle_set": "Legacy.x4_triangle_set"
+      },
+      "certificate": "Extremal.migration.triangles.x4_at_most_one_triangle_edge_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X4.x4_hits_every_triangle",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_hits_every_triangle",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Original.x4_hits_every_triangle",
+      "substitutions": {
+        "x4_edge_set": "M1E.Legacy.edge_set",
+        "x4_triangle_set": "Legacy.x4_triangle_set"
+      },
+      "certificate": "Extremal.migration.triangles.x4_hits_every_triangle_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X4.x4_alpha1",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_alpha1",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Original.x4_alpha1",
+      "substitutions": {
+        "x4_at_most_one_triangle_edge": "X4Original.x4_at_most_one_triangle_edge"
+      },
+      "certificate": "Extremal.migration.triangles.x4_alpha1_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X4.x4_tau1",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_tau1",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Original.x4_tau1",
+      "substitutions": {
+        "x4_hits_every_triangle": "X4Original.x4_hits_every_triangle"
+      },
+      "certificate": "Extremal.migration.triangles.x4_tau1_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X4.triangle_alpha_tau_bound_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "triangle_alpha_tau_bound_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "X4Original.triangle_alpha_tau_bound_statement",
+      "substitutions": {
+        "x4_alpha1": "X4Original.x4_alpha1",
+        "x4_tau1": "X4Original.x4_tau1"
+      },
+      "certificate": "Extremal.migration.triangles.triangle_alpha_tau_bound_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_128_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_128_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "XE1Original.erdos_128_statement",
+      "substitutions": {
+        "x4_triangle_set": "Legacy.x4_triangle_set",
+        "x4_edge_count": "A7.Legacy.x4_edge_count"
+      },
+      "certificate": "Extremal.migration.triangles.erdos_128_statement_original_compat",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_1009_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_1009_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/triangles.v",
+      "frozen": "XE2Original.erdos_1009_statement",
+      "substitutions": {
+        "xe2_edge_disjoint_triangles": "XE2Legacy.xe2_edge_disjoint_triangles",
+        "x4_edge_count": "A7.Legacy.x4_edge_count"
+      },
+      "certificate": "Extremal.migration.triangles.erdos_1009_statement_original_compat",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.U9.is_triangle",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "is_triangle",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "Legacy.is_triangle",
+      "substitutions": {},
+      "certificate": "Packing.migration.triangles.is_triangle_compat",
+      "live_unfolds_to": "triangle T"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.U9.tri_edges",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "tri_edges",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "Legacy.tri_edges",
+      "substitutions": {},
+      "certificate": "Packing.migration.triangles.tri_edges_compat",
+      "live_unfolds_to": "raw_pairs T"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X5.x5_is_triangle",
+      "path": "packing-theory/theories/conjectures/X5.v",
+      "name": "x5_is_triangle",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "Legacy.x5_is_triangle",
+      "substitutions": {},
+      "certificate": "Packing.migration.triangles.x5_is_triangle_compat",
+      "live_unfolds_to": "triangle T"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X5.x5_tri_edges",
+      "path": "packing-theory/theories/conjectures/X5.v",
+      "name": "x5_tri_edges",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "Legacy.x5_tri_edges",
+      "substitutions": {},
+      "certificate": "Packing.migration.triangles.x5_tri_edges_compat",
+      "live_unfolds_to": "raw_pairs T"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.U9.triangle_packing_vs_triangle_edge_transversal_statement",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "triangle_packing_vs_triangle_edge_transversal_statement",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "U9Legacy.triangle_packing_vs_triangle_edge_transversal_statement",
+      "substitutions": {
+        "is_triangle": "Legacy.is_triangle",
+        "tri_edges": "Legacy.tri_edges"
+      },
+      "certificate": "Packing.migration.triangles.triangle_packing_vs_triangle_edge_transversal_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X5.x5_edge_disjoint_triangles",
+      "path": "packing-theory/theories/conjectures/X5.v",
+      "name": "x5_edge_disjoint_triangles",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "X5Legacy.x5_edge_disjoint_triangles",
+      "substitutions": {
+        "x5_is_triangle": "Legacy.x5_is_triangle",
+        "x5_tri_edges": "Legacy.x5_tri_edges"
+      },
+      "certificate": "Packing.migration.triangles.x5_edge_disjoint_triangles_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X5.x5_triangle_edge_transversal",
+      "path": "packing-theory/theories/conjectures/X5.v",
+      "name": "x5_triangle_edge_transversal",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "X5Legacy.x5_triangle_edge_transversal",
+      "substitutions": {
+        "x5_is_triangle": "Legacy.x5_is_triangle",
+        "x5_tri_edges": "Legacy.x5_tri_edges"
+      },
+      "certificate": "Packing.migration.triangles.x5_triangle_edge_transversal_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X5.triangle_packing_transversal_statement",
+      "path": "packing-theory/theories/conjectures/X5.v",
+      "name": "triangle_packing_transversal_statement",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "X5Legacy.triangle_packing_transversal_statement",
+      "substitutions": {
+        "x5_edge_disjoint_triangles": "X5Legacy.x5_edge_disjoint_triangles",
+        "x5_triangle_edge_transversal": "X5Legacy.x5_triangle_edge_transversal"
+      },
+      "certificate": "Packing.migration.triangles.triangle_packing_transversal_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X5.x5_triangle_edge_transversal",
+      "path": "packing-theory/theories/conjectures/X5.v",
+      "name": "x5_triangle_edge_transversal",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "X5Original.x5_triangle_edge_transversal",
+      "substitutions": {
+        "x5_edge_set": "M1P.Legacy.edge_set",
+        "x5_is_triangle": "Legacy.x5_is_triangle",
+        "x5_tri_edges": "Legacy.x5_tri_edges"
+      },
+      "certificate": "Packing.migration.triangles.x5_triangle_edge_transversal_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.X5.triangle_packing_transversal_statement",
+      "path": "packing-theory/theories/conjectures/X5.v",
+      "name": "triangle_packing_transversal_statement",
+      "frozen_path": "packing-theory/theories/migration/triangles.v",
+      "frozen": "X5Original.triangle_packing_transversal_statement",
+      "substitutions": {
+        "x5_edge_disjoint_triangles": "X5Legacy.x5_edge_disjoint_triangles",
+        "x5_triangle_edge_transversal": "X5Original.x5_triangle_edge_transversal"
+      },
+      "certificate": "Packing.migration.triangles.triangle_packing_transversal_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X4.x4_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "extremal-graph-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x4_edge_set": "edge_set"
+      },
+      "certificate": "Extremal.migration.simple_edges.x4_edge_set_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X5.x5_edge_set",
+      "path": "packing-theory/theories/conjectures/X5.v",
+      "name": "x5_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x5_edge_set": "edge_set"
+      },
+      "certificate": "Packing.migration.simple_edges.x5_edge_set_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X4.x4_edge_count",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_edge_count",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "Legacy.x4_edge_count",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_count.x4_edge_count_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_128_statement": "A7 per-row snapshot: A7 froze this row over its own frozen edge count but kept the live x4_triangle_set (after A19 GTBase.triangles.triangle_set T, a conversion of the same Boolean body). Kept unchanged; the complete row is Extremal.migration.triangles.XE1Original.erdos_128_statement, certified by erdos_128_statement_original_compat, which reuses this certificate.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_1009_statement": "A7 per-row snapshot: A7 froze this row over its own frozen edge count but kept the live xe2_edge_disjoint_triangles (after A19 over triangle_set and raw_pairs, conversions). Kept unchanged; the complete row is Extremal.migration.triangles.XE2Original.erdos_1009_statement, certified by erdos_1009_statement_original_compat, which reuses this certificate."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "x4_triangle_set",
+      "note": "XE1's seven-set chain and #128 row use X4's triangle set across files; frozen as XE1Legacy/XE1Original over Legacy.x4_triangle_set."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "x4_triangle_set",
+      "note": "XE2's edge-disjoint packing chain uses X4's triangle set across files; frozen as XE2Legacy.xe2_edge_disjoint_triangles over Legacy.x4_triangle_set."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "is_triangle",
+      "note": "is_triangle_witness and is_triangle_card: unchanged proofs (is_triangle converts to triangle); theorem types unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "tri_edges",
+      "note": "tri_edges_card, tri_edges_sub and tri_edges_mem: unchanged proofs (tri_edges converts to raw_pairs); theorem types unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "is_triangle",
+      "note": "x5_is_triangle_equiv_is_triangle: both sides now unfold to triangle; proof and type unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "x5_is_triangle",
+      "note": "x5_is_triangle_equiv_is_triangle: proof and type unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "tri_edges",
+      "note": "x5_tri_edgesE: both sides now unfold to raw_pairs; proof (by []) and type unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "x5_tri_edges",
+      "note": "x5_tri_edgesE: proof and type unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Packing.conjectures.XE1.xe1_clique_edge_set",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_clique_edge_set",
+      "note": "E(G)-filtered two-subsets of an arbitrary K: graph edges, not raw pairs"
+    },
+    {
+      "qualified": "Hamilton.conjectures.X211.x211_has_triangle",
+      "path": "hamiltonicity-theory/theories/conjectures/X211.v",
+      "name": "x211_has_triangle",
+      "note": "graph-level existential triple containment, not a vertex-set predicate"
+    },
+    {
+      "qualified": "Chromatic.conjectures.XE2.xe2_triangles_plus_hamilton_cycle",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_triangles_plus_hamilton_cycle",
+      "note": "a full partition/cycle structure with inline triangle conditions; not rewritten here"
+    },
+    {
+      "qualified": "GTBase.base.triangle_free",
+      "path": "base/theories/base.v",
+      "name": "triangle_free",
+      "note": "whole-graph absence of triangles (A15 canonical), not a vertex-set predicate"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and GTBase.triangles API theorem, exact types of the frozen and live helpers, chains and rows, strict dependency closures of the frozen chains and rows (current and complete), and the types of every declaration in the reverse dependency closure of X69/X4/XE1/XE2/U9/X5 at the baseline (37 files, 470 old theorem headers), through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A19-triangles/ (outside the repository)"
+}

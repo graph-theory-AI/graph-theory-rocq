@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "family": "triangle-set",
+  "modules": {
+    "GTBase.triangles": {
+      "path": "base/theories/triangles.v",
+      "overrides": {
+        "triangle_set": {
+          "verdict": "FAITHFUL",
+          "note": "Boolean: the supplied vertex set has exactly three vertices and is a clique (cardinality first). K_3 qualifies; K_4 and three edgeless vertices do not."
+        },
+        "triangle": {
+          "verdict": "FAITHFUL",
+          "note": "Prop: clique T /\\ #|T| = 3 (clique first), reflected by triangleP; the cardinality-first order is triangle_card_firstE."
+        },
+        "raw_pairs": {
+          "verdict": "FAITHFUL",
+          "note": "Every two-element subset of the supplied set, adjacent or not: C(#|T|,2) pairs, none below two vertices; graph edges only under a clique guard (raw_pairs_cliqueE)."
+        }
+      },
+      "machine_evidence": [
+        "triangleP",
+        "triangle_card_firstE",
+        "in_raw_pairs",
+        "card_raw_pairs",
+        "raw_pairs_small",
+        "raw_pairs_cliqueE",
+        "triangle_raw_pairs",
+        "triangle_vertices"
+      ]
+    }
+  }
+}

@@ -310,10 +310,6 @@
         "Digraph.conjectures.X2.subdigraph_embed",
         "Digraph.conjectures.unvd.contains_subdigraph"
       ],
-      "7711f39437e9e9f7918f01407f910449223fc65c38393a6cb47b00114ccc672e": [
-        "Packing.conjectures.U9.is_triangle",
-        "Packing.conjectures.X5.x5_is_triangle"
-      ],
       "789db669612215483e2d60090f99f8423521eb660236d0c73539fd075035e72d": [
         "Extremal.conjectures.X98.X98Model",
         "GTMisc.conjectures.X114.X114Model"
@@ -380,11 +376,6 @@
         "GTMisc.conjectures.X74.x74_min_degree_at_least",
         "Hamilton.conjectures.X211.x211_min_degree_geq",
         "Packing.conjectures.X47.x47_min_degree_at_least"
-      ],
-      "874decee0c7b871ec6a418b391f5c4436f4e7372d8dc04909db1124cf57eeddd": [
-        "Extremal.conjectures.XE2.xe2_tri_edges",
-        "Packing.conjectures.U9.tri_edges",
-        "Packing.conjectures.X5.x5_tri_edges"
       ],
       "87f30e060f3fe9f03c894c4b35bdf4088bee8c994a15eeb2f9bd131e459d18e1": [
         "GTMisc.conjectures.X197.x197_robber_move",
@@ -518,6 +509,11 @@
         "Digraph.conjectures.X166.x166_enc_digraph",
         "Digraph.conjectures.X90.x90_enc_digraph"
       ],
+      "cb57d17d489c9048dc9c1bd2e43f530b0658165eb654f510e44c225b0eea2cfe": [
+        "Chromatic.conjectures.X69.x69_triangle",
+        "Packing.conjectures.U9.is_triangle",
+        "Packing.conjectures.X5.x5_is_triangle"
+      ],
       "cc9c55de4708312c73b26f5df6696b1f8be2199040c143c55ccca1a9c3db4faa": [
         "Extremal.conjectures.X98.x98_induced_subdivision",
         "GTMisc.conjectures.X114.x114_induced_subdivision"
@@ -545,6 +541,11 @@
       "d133ac7662a0215d618e337299cda73f528e930f8c1adf8965d890d6f524f616": [
         "GTMisc.conjectures.X128.x128_radius_at_most",
         "GTMisc.conjectures.X139.x139_radius_at_most"
+      ],
+      "d2eec961bf4c3dbfbf26dd5cdc69403550aea09ad7b7e9642e92bf0e35f786cc": [
+        "Extremal.conjectures.XE2.xe2_tri_edges",
+        "Packing.conjectures.U9.tri_edges",
+        "Packing.conjectures.X5.x5_tri_edges"
       ],
       "d43f4b789339db023177c24baf250efeea46d63678a30b19a88387633319b34d": [
         "Chromatic.conjectures.X34.x34_colour_graph",
@@ -10546,14 +10547,14 @@
       "signature_shape_hash": "e4f38c33d2a215ade641d957a71e05392e85db566b1f264940f074d6a2a3eca2"
     },
     {
-      "body_hash": "f2d24124abe8e7a75bb16c1d265c8d56bc5d1543149f80f202a43dd6ad87ca57",
-      "body_shape_hash": "f2d24124abe8e7a75bb16c1d265c8d56bc5d1543149f80f202a43dd6ad87ca57",
-      "declaration_hash": "bb1e9cab860a896fbd509ceccc12b66e586e41ded9e69b9f1ba69d18c6e836e7",
+      "body_hash": "cb57d17d489c9048dc9c1bd2e43f530b0658165eb654f510e44c225b0eea2cfe",
+      "body_shape_hash": "cb57d17d489c9048dc9c1bd2e43f530b0658165eb654f510e44c225b0eea2cfe",
+      "declaration_hash": "52b1aae9a4ba605270ef5cc7aa513166dd613635f4d75ad8fa6427a81ebef6c9",
       "direct_consumers": [
         "Chromatic.conjectures.X69.x69_triangles_distance_at_least"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x69_triangle",
       "normalized_name": "triangle",
@@ -10572,7 +10573,7 @@
         "Chromatic.conjectures.X69.havel_distant_triangles_three_colourable_statement"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [
         "x69_triangle"
       ],
@@ -32794,7 +32795,7 @@
         "Extremal.conjectures.X4.x4_turan_number"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 17,
       "local_dependencies": [],
       "name": "x4_edge_count",
       "normalized_name": "edge_count",
@@ -32813,7 +32814,7 @@
         "Extremal.conjectures.X4.x4_complete_arrow"
       ],
       "kind": "Definition",
-      "line": 21,
+      "line": 22,
       "local_dependencies": [],
       "name": "x4_mono_complete_copy",
       "normalized_name": "mono_complete_copy",
@@ -32833,7 +32834,7 @@
         "Extremal.conjectures.X4.three_colour_cycle_ramsey_bound_statement"
       ],
       "kind": "Definition",
-      "line": 26,
+      "line": 27,
       "local_dependencies": [
         "x4_mono_complete_copy"
       ],
@@ -32854,7 +32855,7 @@
         "Extremal.conjectures.X4.x4_two_colour_arrow"
       ],
       "kind": "Definition",
-      "line": 31,
+      "line": 32,
       "local_dependencies": [],
       "name": "x4_red_blue_copy",
       "normalized_name": "red_blue_copy",
@@ -32873,7 +32874,7 @@
         "Extremal.conjectures.X4.x4_ramsey_two"
       ],
       "kind": "Definition",
-      "line": 38,
+      "line": 39,
       "local_dependencies": [
         "x4_red_blue_copy"
       ],
@@ -32894,7 +32895,7 @@
         "Extremal.conjectures.X4.cycle_clique_ramsey_formula_statement"
       ],
       "kind": "Definition",
-      "line": 41,
+      "line": 42,
       "local_dependencies": [
         "x4_two_colour_arrow"
       ],
@@ -32915,7 +32916,7 @@
         "Extremal.conjectures.X4.x4_graph_arrow"
       ],
       "kind": "Definition",
-      "line": 45,
+      "line": 46,
       "local_dependencies": [],
       "name": "x4_mono_subgraph_copy",
       "normalized_name": "mono_subgraph_copy",
@@ -32935,7 +32936,7 @@
         "Extremal.conjectures.X4.folkman_k4_free_triangle_arrow_statement"
       ],
       "kind": "Definition",
-      "line": 51,
+      "line": 52,
       "local_dependencies": [
         "x4_mono_subgraph_copy"
       ],
@@ -32956,7 +32957,7 @@
         "Extremal.conjectures.X4.missing_colour_complete_edge_colouring_statement"
       ],
       "kind": "Definition",
-      "line": 56,
+      "line": 57,
       "local_dependencies": [],
       "name": "x4_palette_on",
       "normalized_name": "palette_on",
@@ -32975,7 +32976,7 @@
         "Extremal.conjectures.X4.x4_edges_not_in_mono_triangle"
       ],
       "kind": "Definition",
-      "line": 61,
+      "line": 62,
       "local_dependencies": [],
       "name": "x4_edge_in_mono_triangle",
       "normalized_name": "edge_in_mono_triangle",
@@ -32994,7 +32995,7 @@
         "Extremal.conjectures.X4.monochromatic_triangle_edge_bound_statement"
       ],
       "kind": "Definition",
-      "line": 66,
+      "line": 67,
       "local_dependencies": [
         "x4_edge_in_mono_triangle"
       ],
@@ -33016,7 +33017,7 @@
         "Extremal.conjectures.X4.x4_book_rel_sym"
       ],
       "kind": "Definition",
-      "line": 73,
+      "line": 74,
       "local_dependencies": [],
       "name": "x4_book_rel",
       "normalized_name": "book_rel",
@@ -33035,7 +33036,7 @@
         "Extremal.conjectures.X4.x4_book_graph"
       ],
       "kind": "Lemma",
-      "line": 82,
+      "line": 83,
       "local_dependencies": [
         "x4_book_rel"
       ],
@@ -33056,7 +33057,7 @@
         "Extremal.conjectures.X4.x4_book_graph"
       ],
       "kind": "Lemma",
-      "line": 85,
+      "line": 86,
       "local_dependencies": [
         "x4_book_rel"
       ],
@@ -33077,7 +33078,7 @@
         "Extremal.conjectures.X4.thomason_book_ramsey_bound_statement"
       ],
       "kind": "Definition",
-      "line": 88,
+      "line": 89,
       "local_dependencies": [
         "x4_book_rel_irrefl",
         "x4_book_rel_sym"
@@ -33101,7 +33102,7 @@
         "Extremal.conjectures.X4.x4_turan_number"
       ],
       "kind": "Definition",
-      "line": 93,
+      "line": 94,
       "local_dependencies": [],
       "name": "x4_K_free",
       "normalized_name": "K_free",
@@ -33120,7 +33121,7 @@
         "Extremal.conjectures.X4.turan_degree_sum_clique_statement"
       ],
       "kind": "Definition",
-      "line": 95,
+      "line": 96,
       "local_dependencies": [
         "x4_K_free",
         "x4_edge_count"
@@ -33142,7 +33143,7 @@
         "Extremal.conjectures.X4.turan_degree_sum_clique_statement"
       ],
       "kind": "Definition",
-      "line": 103,
+      "line": 104,
       "local_dependencies": [],
       "name": "x4_degree_sum",
       "normalized_name": "degree_sum",
@@ -33154,15 +33155,15 @@
       "signature_shape_hash": "04a5a47cd83d2c8b993cc4ca76d5140ec8ebcc7c8e9f5be5394f5bd902be8baf"
     },
     {
-      "body_hash": "484a2c3be79f68130bd34afd7471a224d0eda79b58513518b86c65b68bf41250",
-      "body_shape_hash": "484a2c3be79f68130bd34afd7471a224d0eda79b58513518b86c65b68bf41250",
-      "declaration_hash": "f73a8c123b929c487717c0af79ff12dc295c634d47f4acd440a730e7bdd11203",
+      "body_hash": "c12c6a494e43a3e7046c11e0f8a8fcb442a4636baf1b0c6a8d1fa4bc056faf74",
+      "body_shape_hash": "c12c6a494e43a3e7046c11e0f8a8fcb442a4636baf1b0c6a8d1fa4bc056faf74",
+      "declaration_hash": "b9adfc54b1c39a792a789790cec12ae67c87f5d163012e353dc66c2ec368b08f",
       "direct_consumers": [
         "Extremal.conjectures.X4.x4_at_most_one_triangle_edge",
         "Extremal.conjectures.X4.x4_hits_every_triangle"
       ],
       "kind": "Definition",
-      "line": 106,
+      "line": 107,
       "local_dependencies": [],
       "name": "x4_triangle_set",
       "normalized_name": "triangle_set",
@@ -33181,7 +33182,7 @@
         "Extremal.conjectures.X4.triangle_supersaturation_statement"
       ],
       "kind": "Definition",
-      "line": 109,
+      "line": 110,
       "local_dependencies": [],
       "name": "x4_triangle_count",
       "normalized_name": "triangle_count",
@@ -33200,7 +33201,7 @@
         "Extremal.conjectures.X4.x4_edge_in_c5"
       ],
       "kind": "Definition",
-      "line": 112,
+      "line": 113,
       "local_dependencies": [],
       "name": "x4_consecutive_in_cycle",
       "normalized_name": "consecutive_in_cycle",
@@ -33219,7 +33220,7 @@
         "Extremal.conjectures.X4.x4_c5_edge_count"
       ],
       "kind": "Definition",
-      "line": 115,
+      "line": 116,
       "local_dependencies": [
         "x4_consecutive_in_cycle"
       ],
@@ -33240,7 +33241,7 @@
         "Extremal.conjectures.X4.c5_edge_count_above_turan_statement"
       ],
       "kind": "Definition",
-      "line": 120,
+      "line": 121,
       "local_dependencies": [
         "x4_edge_in_c5"
       ],
@@ -33262,7 +33263,7 @@
         "Extremal.conjectures.X4.x4_hits_every_triangle"
       ],
       "kind": "Definition",
-      "line": 125,
+      "line": 126,
       "local_dependencies": [],
       "name": "x4_edge_set",
       "normalized_name": "edge_set",
@@ -33281,7 +33282,7 @@
         "Extremal.conjectures.X4.x4_alpha1"
       ],
       "kind": "Definition",
-      "line": 128,
+      "line": 129,
       "local_dependencies": [
         "x4_edge_set",
         "x4_triangle_set"
@@ -33303,7 +33304,7 @@
         "Extremal.conjectures.X4.x4_tau1"
       ],
       "kind": "Definition",
-      "line": 133,
+      "line": 134,
       "local_dependencies": [
         "x4_edge_set",
         "x4_triangle_set"
@@ -33325,7 +33326,7 @@
         "Extremal.conjectures.X4.triangle_alpha_tau_bound_statement"
       ],
       "kind": "Definition",
-      "line": 138,
+      "line": 139,
       "local_dependencies": [
         "x4_at_most_one_triangle_edge"
       ],
@@ -33346,7 +33347,7 @@
         "Extremal.conjectures.X4.triangle_alpha_tau_bound_statement"
       ],
       "kind": "Definition",
-      "line": 144,
+      "line": 145,
       "local_dependencies": [
         "x4_hits_every_triangle"
       ],
@@ -36125,14 +36126,14 @@
       "signature_shape_hash": "0601b26d136d1be6212f9d611090bd2020c7db314c761c860b508e206d0762a0"
     },
     {
-      "body_hash": "874decee0c7b871ec6a418b391f5c4436f4e7372d8dc04909db1124cf57eeddd",
-      "body_shape_hash": "874decee0c7b871ec6a418b391f5c4436f4e7372d8dc04909db1124cf57eeddd",
-      "declaration_hash": "3a49406e8c3fafdc7ba7afdae598da62d7aacc4011907398800ffbf9295f6ff0",
+      "body_hash": "d2eec961bf4c3dbfbf26dd5cdc69403550aea09ad7b7e9642e92bf0e35f786cc",
+      "body_shape_hash": "d2eec961bf4c3dbfbf26dd5cdc69403550aea09ad7b7e9642e92bf0e35f786cc",
+      "declaration_hash": "d0df6151f0f9d59b69b1ec0b3f60420426d8f9d4bee0ffcef01b51ca13b39e33",
       "direct_consumers": [
         "Extremal.conjectures.XE2.xe2_edge_disjoint_triangles"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "xe2_tri_edges",
       "normalized_name": "tri_edges",
@@ -36151,7 +36152,7 @@
         "Extremal.conjectures.XE2.erdos_1009_statement"
       ],
       "kind": "Definition",
-      "line": 12,
+      "line": 13,
       "local_dependencies": [
         "xe2_tri_edges"
       ],
@@ -36172,7 +36173,7 @@
         "Extremal.conjectures.XE2.erdos_1018_statement"
       ],
       "kind": "Definition",
-      "line": 18,
+      "line": 19,
       "local_dependencies": [],
       "name": "xe2_superlinear_edge_threshold",
       "normalized_name": "superlinear_edge_threshold",
@@ -36191,7 +36192,7 @@
         "Extremal.conjectures.XE2.erdos_1019_statement"
       ],
       "kind": "Definition",
-      "line": 22,
+      "line": 23,
       "local_dependencies": [],
       "name": "xe2_saturated_planar",
       "normalized_name": "saturated_planar",
@@ -36210,7 +36211,7 @@
         "Extremal.conjectures.XE2.erdos_518_statement"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 26,
       "local_dependencies": [],
       "name": "xe2_paths_cover_vertices",
       "normalized_name": "paths_cover_vertices",
@@ -36227,7 +36228,7 @@
       "declaration_hash": "40950c45f73e0dadddcdf3a312e19f9622c570e18e4400428cbf752bc463c547",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 28,
+      "line": 29,
       "local_dependencies": [],
       "name": "xe2_path_in_graph",
       "normalized_name": "path_in_graph",
@@ -36246,7 +36247,7 @@
         "Extremal.conjectures.XE2.erdos_518_statement"
       ],
       "kind": "Definition",
-      "line": 31,
+      "line": 32,
       "local_dependencies": [],
       "name": "xe2_monochromatic_path",
       "normalized_name": "monochromatic_path",
@@ -36265,7 +36266,7 @@
         "Extremal.conjectures.XE2.erdos_565_statement"
       ],
       "kind": "Definition",
-      "line": 39,
+      "line": 40,
       "local_dependencies": [],
       "name": "xe2_induced_ramsey_number",
       "normalized_name": "induced_ramsey_number",
@@ -36284,7 +36285,7 @@
         "Extremal.conjectures.XE2.erdos_613_statement"
       ],
       "kind": "Definition",
-      "line": 56,
+      "line": 57,
       "local_dependencies": [],
       "name": "xe2_bipartite_plus_bounded_degree",
       "normalized_name": "bipartite_plus_bounded_degree",
@@ -36303,7 +36304,7 @@
         "Extremal.conjectures.XE2.erdos_742_statement"
       ],
       "kind": "Definition",
-      "line": 62,
+      "line": 63,
       "local_dependencies": [],
       "name": "xe2_diameter_critical_two",
       "normalized_name": "diameter_critical_two",
@@ -36322,7 +36323,7 @@
         "Extremal.conjectures.XE2.erdos_816_statement"
       ],
       "kind": "Definition",
-      "line": 68,
+      "line": 69,
       "local_dependencies": [],
       "name": "xe2_path_length3",
       "normalized_name": "path_length3",
@@ -36342,7 +36343,7 @@
         "Extremal.conjectures.XE2.erdos_549_statement"
       ],
       "kind": "Definition",
-      "line": 71,
+      "line": 72,
       "local_dependencies": [],
       "name": "xe2_bipartition_sizes",
       "normalized_name": "bipartition_sizes",
@@ -36361,7 +36362,7 @@
         "Extremal.conjectures.XE2.erdos_1080_statement"
       ],
       "kind": "Definition",
-      "line": 75,
+      "line": 76,
       "local_dependencies": [],
       "name": "xe2_cube_square_floor",
       "normalized_name": "cube_square_floor",
@@ -36380,7 +36381,7 @@
         "Extremal.conjectures.XE2.erdos_803_statement"
       ],
       "kind": "Definition",
-      "line": 78,
+      "line": 79,
       "local_dependencies": [],
       "name": "xe2_min_degree",
       "normalized_name": "min_degree",
@@ -36399,7 +36400,7 @@
         "Extremal.conjectures.XE2.xe2_no_cycle_with_incident_chords"
       ],
       "kind": "Definition",
-      "line": 81,
+      "line": 82,
       "local_dependencies": [],
       "name": "xe2_cycle",
       "normalized_name": "cycle",
@@ -36416,7 +36417,7 @@
       "declaration_hash": "2e958f6351a1988efb0b14bf72a52a462981d6c0020d509ab79893915c4bbc94",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 84,
+      "line": 85,
       "local_dependencies": [],
       "name": "xe2_cycle_diagonal_count",
       "normalized_name": "cycle_diagonal_count",
@@ -36435,7 +36436,7 @@
         "Extremal.conjectures.XE2.xe2_no_cycle_with_incident_chords"
       ],
       "kind": "Definition",
-      "line": 89,
+      "line": 90,
       "local_dependencies": [],
       "name": "xe2_incident_cycle_chord_count",
       "normalized_name": "incident_cycle_chord_count",
@@ -36454,7 +36455,7 @@
         "Extremal.conjectures.XE2.xe2_incident_chord_extremal"
       ],
       "kind": "Definition",
-      "line": 94,
+      "line": 95,
       "local_dependencies": [
         "xe2_cycle",
         "xe2_incident_cycle_chord_count"
@@ -36476,7 +36477,7 @@
         "Extremal.conjectures.XE2.erdos_767_statement"
       ],
       "kind": "Definition",
-      "line": 98,
+      "line": 99,
       "local_dependencies": [
         "xe2_no_cycle_with_incident_chords"
       ],
@@ -36497,7 +36498,7 @@
         "Extremal.conjectures.XE2.xe2_paths_internally_disjoint"
       ],
       "kind": "Definition",
-      "line": 108,
+      "line": 109,
       "local_dependencies": [],
       "name": "xe2_internal_path_vertices",
       "normalized_name": "internal_path_vertices",
@@ -36516,7 +36517,7 @@
         "Extremal.conjectures.XE2.erdos_915_statement"
       ],
       "kind": "Definition",
-      "line": 111,
+      "line": 112,
       "local_dependencies": [
         "xe2_internal_path_vertices"
       ],
@@ -36537,7 +36538,7 @@
         "Extremal.conjectures.XE2.xe2_paths_edge_disjoint"
       ],
       "kind": "Definition",
-      "line": 117,
+      "line": 118,
       "local_dependencies": [],
       "name": "xe2_path_edge_set",
       "normalized_name": "path_edge_set",
@@ -36556,7 +36557,7 @@
         "Extremal.conjectures.XE2.erdos_915_statement"
       ],
       "kind": "Definition",
-      "line": 120,
+      "line": 121,
       "local_dependencies": [
         "xe2_path_edge_set"
       ],
@@ -50944,7 +50945,7 @@
         "Packing.conjectures.U9.partition_of_a_cubic_3_connected_graphs_into_paths_o_statement"
       ],
       "kind": "Definition",
-      "line": 63,
+      "line": 64,
       "local_dependencies": [],
       "name": "is_P3",
       "normalized_name": "is_P3",
@@ -50956,14 +50957,14 @@
       "signature_shape_hash": "b349edbd8727460c5c27fae24985aaf8e8bf31eebc8916f711a74ad4c152d099"
     },
     {
-      "body_hash": "7711f39437e9e9f7918f01407f910449223fc65c38393a6cb47b00114ccc672e",
-      "body_shape_hash": "7711f39437e9e9f7918f01407f910449223fc65c38393a6cb47b00114ccc672e",
-      "declaration_hash": "7809ba20222e3aa6ae59483089733877b8638ebb686c885fcb88a074a9991b40",
+      "body_hash": "cb57d17d489c9048dc9c1bd2e43f530b0658165eb654f510e44c225b0eea2cfe",
+      "body_shape_hash": "cb57d17d489c9048dc9c1bd2e43f530b0658165eb654f510e44c225b0eea2cfe",
+      "declaration_hash": "bee3c6874bd2872eeddfe8e6952a8eff5ef2ed6b1adbfc35a61281691bcd4622",
       "direct_consumers": [
         "Packing.conjectures.U9.triangle_packing_vs_triangle_edge_transversal_statement"
       ],
       "kind": "Definition",
-      "line": 72,
+      "line": 73,
       "local_dependencies": [],
       "name": "is_triangle",
       "normalized_name": "is_triangle",
@@ -50975,14 +50976,14 @@
       "signature_shape_hash": "42f481237ba92f8abc7e245069c2166bf861affe081c3c0a08e1876f796a8640"
     },
     {
-      "body_hash": "874decee0c7b871ec6a418b391f5c4436f4e7372d8dc04909db1124cf57eeddd",
-      "body_shape_hash": "874decee0c7b871ec6a418b391f5c4436f4e7372d8dc04909db1124cf57eeddd",
-      "declaration_hash": "8ab829af63a1eb728d451a33d0332a35a0803bacf4c5709b41a159c63385967a",
+      "body_hash": "d2eec961bf4c3dbfbf26dd5cdc69403550aea09ad7b7e9642e92bf0e35f786cc",
+      "body_shape_hash": "d2eec961bf4c3dbfbf26dd5cdc69403550aea09ad7b7e9642e92bf0e35f786cc",
+      "declaration_hash": "aa97a0e8ce11c9e7d9d711cbf89e4f13a855aaa3368d956358a78d336b2584cf",
       "direct_consumers": [
         "Packing.conjectures.U9.triangle_packing_vs_triangle_edge_transversal_statement"
       ],
       "kind": "Definition",
-      "line": 76,
+      "line": 77,
       "local_dependencies": [],
       "name": "tri_edges",
       "normalized_name": "tri_edges",
@@ -51001,7 +51002,7 @@
         "Packing.conjectures.U9.odd_cycle_transversal_in_triangle_free_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 81,
+      "line": 82,
       "local_dependencies": [],
       "name": "edge_setG",
       "normalized_name": "edge_setG",
@@ -51020,7 +51021,7 @@
         "Packing.conjectures.U9.odd_cycle_transversal_in_triangle_free_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 85,
+      "line": 86,
       "local_dependencies": [],
       "name": "del_bipartite",
       "normalized_name": "del_bipartite",
@@ -51039,7 +51040,7 @@
         "Packing.conjectures.U9.lovasz_path_removal_statement"
       ],
       "kind": "Definition",
-      "line": 92,
+      "line": 93,
       "local_dependencies": [],
       "name": "k_connected_on",
       "normalized_name": "k_connected_on",
@@ -51058,7 +51059,7 @@
         "Packing.conjectures.U9.is_induced_path"
       ],
       "kind": "Definition",
-      "line": 103,
+      "line": 104,
       "local_dependencies": [],
       "name": "consec",
       "normalized_name": "consec",
@@ -51077,7 +51078,7 @@
         "Packing.conjectures.U9.is_induced_path"
       ],
       "kind": "Definition",
-      "line": 107,
+      "line": 108,
       "local_dependencies": [],
       "name": "spath",
       "normalized_name": "spath",
@@ -51096,7 +51097,7 @@
         "Packing.conjectures.U9.lovasz_path_removal_statement"
       ],
       "kind": "Definition",
-      "line": 112,
+      "line": 113,
       "local_dependencies": [
         "consec",
         "spath"
@@ -51118,7 +51119,7 @@
         "Packing.conjectures.U9.friendly_partitions_statement"
       ],
       "kind": "Definition",
-      "line": 118,
+      "line": 119,
       "local_dependencies": [],
       "name": "friendly_partition",
       "normalized_name": "friendly_partition",
@@ -51137,7 +51138,7 @@
         "Packing.conjectures.U9.friendly_partitions_statement"
       ],
       "kind": "Definition",
-      "line": 126,
+      "line": 127,
       "local_dependencies": [],
       "name": "all_but_finitely_many_regular",
       "normalized_name": "all_but_finitely_many_regular",
@@ -51156,7 +51157,7 @@
         "Packing.conjectures.U9.the_bollobas_eldridge_catlin_conjecture_on_graph_pac_statement"
       ],
       "kind": "Definition",
-      "line": 132,
+      "line": 133,
       "local_dependencies": [],
       "name": "pack",
       "normalized_name": "pack",
@@ -51175,7 +51176,7 @@
         "Packing.conjectures.U9.matching_cut_and_girth_statement"
       ],
       "kind": "Definition",
-      "line": 138,
+      "line": 139,
       "local_dependencies": [],
       "name": "matching_cut",
       "normalized_name": "matching_cut",
@@ -51194,7 +51195,7 @@
         "Packing.conjectures.U9.matching_cut_and_girth_statement"
       ],
       "kind": "Definition",
-      "line": 147,
+      "line": 148,
       "local_dependencies": [],
       "name": "avg_deg_lt",
       "normalized_name": "avg_deg_lt",
@@ -51213,7 +51214,7 @@
         "Packing.conjectures.U9.is_min_fvs"
       ],
       "kind": "Definition",
-      "line": 151,
+      "line": 152,
       "local_dependencies": [],
       "name": "hits_all_cycles",
       "normalized_name": "hits_all_cycles",
@@ -51232,7 +51233,7 @@
         "Packing.conjectures.U9.jones_statement"
       ],
       "kind": "Definition",
-      "line": 157,
+      "line": 158,
       "local_dependencies": [
         "hits_all_cycles"
       ],
@@ -51253,7 +51254,7 @@
         "Packing.conjectures.U9.is_max_cycle_packing"
       ],
       "kind": "Definition",
-      "line": 162,
+      "line": 163,
       "local_dependencies": [],
       "name": "cycle_packing",
       "normalized_name": "cycle_packing",
@@ -51272,7 +51273,7 @@
         "Packing.conjectures.U9.jones_statement"
       ],
       "kind": "Definition",
-      "line": 168,
+      "line": 169,
       "local_dependencies": [
         "cycle_packing"
       ],
@@ -51293,7 +51294,7 @@
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
       "kind": "Definition",
-      "line": 173,
+      "line": 174,
       "local_dependencies": [],
       "name": "hamiltonian_cycleG",
       "normalized_name": "hamiltonian_cycleG",
@@ -51312,7 +51313,7 @@
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
       "kind": "Definition",
-      "line": 180,
+      "line": 181,
       "local_dependencies": [],
       "name": "cycle_edgesG",
       "normalized_name": "cycle_edgesG",
@@ -51331,7 +51332,7 @@
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
       "kind": "Definition",
-      "line": 184,
+      "line": 185,
       "local_dependencies": [],
       "name": "is_matching_edges",
       "normalized_name": "is_matching_edges",
@@ -51351,7 +51352,7 @@
         "Packing.conjectures.U9.hc_sym"
       ],
       "kind": "Definition",
-      "line": 194,
+      "line": 195,
       "local_dependencies": [],
       "name": "hc_rel",
       "normalized_name": "hc_rel",
@@ -51370,7 +51371,7 @@
         "Packing.conjectures.U9.hypercube"
       ],
       "kind": "Lemma",
-      "line": 196,
+      "line": 197,
       "local_dependencies": [
         "hc_rel"
       ],
@@ -51391,7 +51392,7 @@
         "Packing.conjectures.U9.hypercube"
       ],
       "kind": "Lemma",
-      "line": 204,
+      "line": 205,
       "local_dependencies": [
         "hc_rel"
       ],
@@ -51413,7 +51414,7 @@
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
       "kind": "Definition",
-      "line": 211,
+      "line": 212,
       "local_dependencies": [
         "hc_irrefl",
         "hc_sym"
@@ -51435,7 +51436,7 @@
         "Packing.conjectures.U9.weakly_saturates"
       ],
       "kind": "Definition",
-      "line": 213,
+      "line": 214,
       "local_dependencies": [
         "hypercube"
       ],
@@ -51456,7 +51457,7 @@
         "Packing.conjectures.U9.is_wsat"
       ],
       "kind": "Definition",
-      "line": 227,
+      "line": 228,
       "local_dependencies": [
         "copy_Q3_through"
       ],
@@ -51477,7 +51478,7 @@
         "Packing.conjectures.U9.weak_saturation_of_the_cube_in_the_clique_statement"
       ],
       "kind": "Definition",
-      "line": 238,
+      "line": 239,
       "local_dependencies": [
         "weakly_saturates"
       ],
@@ -51498,7 +51499,7 @@
         "Packing.conjectures.U9.edge_conn_subset"
       ],
       "kind": "Definition",
-      "line": 244,
+      "line": 245,
       "local_dependencies": [],
       "name": "edge_conn_via",
       "normalized_name": "edge_conn_via",
@@ -51517,7 +51518,7 @@
         "Packing.conjectures.U9.partitioning_edge_connectivity_statement"
       ],
       "kind": "Definition",
-      "line": 259,
+      "line": 260,
       "local_dependencies": [
         "edge_conn_via"
       ],
@@ -51538,7 +51539,7 @@
         "Packing.conjectures.U9.tree_contains_T"
       ],
       "kind": "Definition",
-      "line": 264,
+      "line": 265,
       "local_dependencies": [],
       "name": "acyclic_mg",
       "normalized_name": "acyclic_mg",
@@ -51557,7 +51558,7 @@
         "Packing.conjectures.U9.kriesells_statement"
       ],
       "kind": "Definition",
-      "line": 270,
+      "line": 271,
       "local_dependencies": [],
       "name": "edge_disjoint_uv_paths",
       "normalized_name": "edge_disjoint_uv_paths",
@@ -51576,7 +51577,7 @@
         "Packing.conjectures.U9.kriesells_statement"
       ],
       "kind": "Definition",
-      "line": 277,
+      "line": 278,
       "local_dependencies": [
         "acyclic_mg"
       ],
@@ -51597,7 +51598,7 @@
         "Packing.conjectures.U9.packing_t_joins_statement"
       ],
       "kind": "Definition",
-      "line": 284,
+      "line": 285,
       "local_dependencies": [],
       "name": "cut_mg",
       "normalized_name": "cut_mg",
@@ -51616,7 +51617,7 @@
         "Packing.conjectures.U9.packing_t_joins_statement"
       ],
       "kind": "Definition",
-      "line": 288,
+      "line": 289,
       "local_dependencies": [],
       "name": "is_tjoin",
       "normalized_name": "is_tjoin",
@@ -53311,15 +53312,15 @@
       "signature_shape_hash": "a0ba29655f3f278c086f5d80ed981f12ab493129aaaf6b1336b635b5840274ce"
     },
     {
-      "body_hash": "7711f39437e9e9f7918f01407f910449223fc65c38393a6cb47b00114ccc672e",
-      "body_shape_hash": "7711f39437e9e9f7918f01407f910449223fc65c38393a6cb47b00114ccc672e",
-      "declaration_hash": "d360931e828b852f885352a087543c3e4e81e9784ff2143189818789ebcf764b",
+      "body_hash": "cb57d17d489c9048dc9c1bd2e43f530b0658165eb654f510e44c225b0eea2cfe",
+      "body_shape_hash": "cb57d17d489c9048dc9c1bd2e43f530b0658165eb654f510e44c225b0eea2cfe",
+      "declaration_hash": "bf03028f6e92f06d48179710281ae17570d110213503869fc96fe8038ddc39d3",
       "direct_consumers": [
         "Packing.conjectures.X5.x5_edge_disjoint_triangles",
         "Packing.conjectures.X5.x5_triangle_edge_transversal"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x5_is_triangle",
       "normalized_name": "is_triangle",
@@ -53331,15 +53332,15 @@
       "signature_shape_hash": "42f481237ba92f8abc7e245069c2166bf861affe081c3c0a08e1876f796a8640"
     },
     {
-      "body_hash": "874decee0c7b871ec6a418b391f5c4436f4e7372d8dc04909db1124cf57eeddd",
-      "body_shape_hash": "874decee0c7b871ec6a418b391f5c4436f4e7372d8dc04909db1124cf57eeddd",
-      "declaration_hash": "291741f269002bc4fa172d58c648f92703bac3b623ca413dca16ba2902552af1",
+      "body_hash": "d2eec961bf4c3dbfbf26dd5cdc69403550aea09ad7b7e9642e92bf0e35f786cc",
+      "body_shape_hash": "d2eec961bf4c3dbfbf26dd5cdc69403550aea09ad7b7e9642e92bf0e35f786cc",
+      "declaration_hash": "0eaacec84037ab522138be19378e78938d50ba01eae289b0f04f644bc5e4ccf1",
       "direct_consumers": [
         "Packing.conjectures.X5.x5_edge_disjoint_triangles",
         "Packing.conjectures.X5.x5_triangle_edge_transversal"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [],
       "name": "x5_tri_edges",
       "normalized_name": "tri_edges",
@@ -53358,7 +53359,7 @@
         "Packing.conjectures.X5.x5_triangle_edge_transversal"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 17,
       "local_dependencies": [],
       "name": "x5_edge_set",
       "normalized_name": "edge_set",
@@ -53377,7 +53378,7 @@
         "Packing.conjectures.X5.triangle_packing_transversal_statement"
       ],
       "kind": "Definition",
-      "line": 19,
+      "line": 20,
       "local_dependencies": [
         "x5_is_triangle",
         "x5_tri_edges"
@@ -53399,7 +53400,7 @@
         "Packing.conjectures.X5.triangle_packing_transversal_statement"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 26,
       "local_dependencies": [
         "x5_edge_set",
         "x5_is_triangle",
@@ -53422,7 +53423,7 @@
         "Packing.conjectures.X5.clique_factor_min_degree_statement"
       ],
       "kind": "Definition",
-      "line": 31,
+      "line": 32,
       "local_dependencies": [],
       "name": "x5_pairwise_disjoint_sets",
       "normalized_name": "pairwise_disjoint_sets",

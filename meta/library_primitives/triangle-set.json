@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "family": "triangle-set",
+  "primitive": {
+    "canonical_name": "GTBase.triangles.triangle",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "is_triangle",
+      "triangle",
+      "triangle_set",
+      "tri_edges"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X69.x69_triangle",
+      "Extremal.conjectures.X4.x4_triangle_set",
+      "Extremal.conjectures.XE2.xe2_tri_edges",
+      "Packing.conjectures.U9.is_triangle",
+      "Packing.conjectures.U9.tri_edges",
+      "Packing.conjectures.X5.x5_is_triangle",
+      "Packing.conjectures.X5.x5_tri_edges"
+    ],
+    "consumers_remaining": 7,
+    "relation": "triangle vertex sets and raw two-element subsets: Packing U9 is_triangle and X5 x5_is_triangle (clique T /\\ #|T| = 3) convert to GTBase.triangles.triangle T; Chromatic X69 x69_triangle (#|T| = 3 /\\ clique T) equals it by triangle_card_firstE (an iff, the conjunction order differs); Extremal X4 x4_triangle_set ((#|T| == 3) && cliqueb T) converts to triangle_set T, reflected by triangleP; Packing U9 tri_edges, X5 x5_tri_edges and Extremal XE2 xe2_tri_edges ([set e | (e \\subset T) && (#|e| == 2)], every two-subset, adjacent or not) convert to raw_pairs T. Raw pairs are graph edges only under an explicit clique guard (raw_pairs_cliqueE); a triangle set is not the graph-level triangle_free.",
+    "semantic_classes": {
+      "clique-first-prop": {
+        "members": [
+          "Packing.conjectures.U9.is_triangle",
+          "Packing.conjectures.X5.x5_is_triangle"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Packing.migration.triangles.is_triangle_compat",
+          "Packing.migration.triangles.x5_is_triangle_compat"
+        ],
+        "note": "clique T /\\ #|T| = 3; conversion to GTBase.triangles.triangle"
+      },
+      "cardinality-first-prop": {
+        "members": [
+          "Chromatic.conjectures.X69.x69_triangle"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Chromatic.migration.triangles.x69_triangle_compat",
+        "note": "#|T| = 3 /\\ clique T; iff with triangle by triangle_card_firstE (conjunction order), not a conversion"
+      },
+      "boolean": {
+        "members": [
+          "Extremal.conjectures.X4.x4_triangle_set"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Extremal.migration.triangles.x4_triangle_set_compat",
+        "note": "(#|T| == 3) && cliqueb T; conversion to triangle_set, reflected by triangleP"
+      },
+      "raw-two-subsets": {
+        "members": [
+          "Extremal.conjectures.XE2.xe2_tri_edges",
+          "Packing.conjectures.U9.tri_edges",
+          "Packing.conjectures.X5.x5_tri_edges"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.triangles.xe2_tri_edges_compat",
+          "Packing.migration.triangles.tri_edges_compat",
+          "Packing.migration.triangles.x5_tri_edges_compat"
+        ],
+        "note": "[set e | (e \\subset T) && (#|e| == 2)] for every T; conversion to raw_pairs; graph edges only under a clique guard"
+      }
+    },
+    "distinct_variants": {
+      "Packing.conjectures.XE1.xe1_clique_edge_set": "E(G)-filtered two-subsets of an arbitrary K: graph edges, not raw pairs",
+      "Hamilton.conjectures.X211.x211_has_triangle": "graph-level existential triple containment, not a vertex-set predicate",
+      "Chromatic.conjectures.XE2.xe2_triangles_plus_hamilton_cycle": "a full partition/cycle structure with inline triangle conditions; not rewritten here",
+      "GTBase.base.triangle_free": "whole-graph absence of triangles (A15 canonical), not a vertex-set predicate"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.triangles.x69_triangle_compat",
+      "Chromatic.migration.triangles.x69_triangles_distance_at_least_compat",
+      "Chromatic.migration.triangles.havel_distant_triangles_three_colourable_statement_compat",
+      "Extremal.migration.triangles.x4_triangle_set_compat",
+      "Extremal.migration.triangles.xe2_tri_edges_compat",
+      "Extremal.migration.triangles.x4_at_most_one_triangle_edge_compat",
+      "Extremal.migration.triangles.x4_hits_every_triangle_compat",
+      "Extremal.migration.triangles.x4_alpha1_compat",
+      "Extremal.migration.triangles.x4_tau1_compat",
+      "Extremal.migration.triangles.triangle_alpha_tau_bound_statement_compat",
+      "Extremal.migration.triangles.xe1_every_7_set_has_triangle_compat",
+      "Extremal.migration.triangles.xe1_seven_triangle_clique_property_compat",
+      "Extremal.migration.triangles.xe1_seven_triangle_clique_guarantee_compat",
+      "Extremal.migration.triangles.erdos_128_statement_compat",
+      "Extremal.migration.triangles.erdos_813_statement_compat",
+      "Extremal.migration.triangles.xe2_edge_disjoint_triangles_compat",
+      "Extremal.migration.triangles.erdos_1009_statement_compat",
+      "Extremal.migration.triangles.x4_at_most_one_triangle_edge_original_compat",
+      "Extremal.migration.triangles.x4_hits_every_triangle_original_compat",
+      "Extremal.migration.triangles.x4_alpha1_original_compat",
+      "Extremal.migration.triangles.x4_tau1_original_compat",
+      "Extremal.migration.triangles.triangle_alpha_tau_bound_statement_original_compat",
+      "Extremal.migration.triangles.erdos_128_statement_original_compat",
+      "Extremal.migration.triangles.erdos_1009_statement_original_compat",
+      "Packing.migration.triangles.is_triangle_compat",
+      "Packing.migration.triangles.tri_edges_compat",
+      "Packing.migration.triangles.x5_is_triangle_compat",
+      "Packing.migration.triangles.x5_tri_edges_compat",
+      "Packing.migration.triangles.triangle_packing_vs_triangle_edge_transversal_statement_compat",
+      "Packing.migration.triangles.x5_edge_disjoint_triangles_compat",
+      "Packing.migration.triangles.x5_triangle_edge_transversal_compat",
+      "Packing.migration.triangles.triangle_packing_transversal_statement_compat",
+      "Packing.migration.triangles.x5_triangle_edge_transversal_original_compat",
+      "Packing.migration.triangles.triangle_packing_transversal_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.triangles.triangleP",
+      "GTBase.triangles.triangle_card_firstE",
+      "GTBase.triangles.in_raw_pairs",
+      "GTBase.triangles.card_raw_pairs",
+      "GTBase.triangles.raw_pairs_small",
+      "GTBase.triangles.raw_pairs_cliqueE",
+      "GTBase.triangles.triangle_raw_pairs",
+      "GTBase.triangles.triangle_vertices"
+    ],
+    "public_client": "base/theories/examples/triangles.v",
+    "legacy_baseline": "748b76ad48b537fef8e5cf78400423d661f869ee",
+    "migration_report": "meta/migration_reports/triangles.md",
+    "migration_spec": "meta/migration_reports/triangles.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A19.md",
+    "foundation_fidelity": "meta/foundation_fidelity/triangle-set.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph (clique, cliqueb, cliqueP, sg_edge_set)",
+        "mathcomp finset (cards2P, card_gt2P, powersetE, cards_draws)",
+        "GTBase.common (sg_edge_set_cliqueE)",
+        "GTBase.base (triangle_free)"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.triangles (triangle_set, triangle, raw_pairs)",
+      "note": "No installed named triangle-set or raw two-subset primitive; cards_draws is a cardinality lemma, not a constructor. GTBase names the three presentations over upstream cliques and finite sets. Evidence: coordination/evidence/A19-triangles-discovery-by-path-review/ (upstream-search.txt) and coordination/evidence/A19-triangles/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "path_review",
+    "reviewed_commit": "96be00e5259f813eed101893330ee162b63f69e2",
+    "independent_review": "meta/migration_reviews/triangles.md"
+  }
+}
