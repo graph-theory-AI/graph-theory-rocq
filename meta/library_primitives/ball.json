@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "family": "ball",
+  "primitive": {
+    "canonical_name": "GTBase.base.ball",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "ball",
+      "set_ball"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.X113.x113_ball",
+      "GTMisc.conjectures.X113.x113_set_ball",
+      "GTMisc.conjectures.X116.x116_ball",
+      "GTMisc.conjectures.X116.x116_set_ball",
+      "GTMisc.conjectures.X146.x146_ball",
+      "GTMisc.conjectures.X146.x146_set_ball",
+      "GTMisc.conjectures.X20.x20_ball",
+      "GTMisc.conjectures.X39.x39_ball",
+      "GTMisc.conjectures.X39.x39_set_ball",
+      "Packing.conjectures.X111.x111_ball",
+      "Packing.conjectures.X26.x26_ball",
+      "Packing.conjectures.X26.x26_set_ball"
+    ],
+    "consumers_remaining": 12,
+    "relation": "closed vertex balls and seed-set balls of a simple graph: the seven local Fixpoints X20/X39/X113/X116/X146/X26/X111 x*_ball (radius 0 the centre, each step adding the neighbours of the previous ball) equal the existing GTBase.base.ball r x pointwise, by induction on the radius (not a conversion: distinct fixpoints); the five local x*_set_ball (\\bigcup_(x in S) x*_ball r x) equal GTBase.balls.set_ball r S. Set equalities, with no connectedness, nonempty-host, positive-radius or small-radius guard. ball r x = rel_ball (--) r x exactly (ball_rel_ballE); balls never leave the centre's component, so they differ from the truncated graph_dist sublevel sets once r >= #|G| on a disconnected graph, and no unconditional distance bridge is stated.",
+    "semantic_classes": {
+      "vertex-ball": {
+        "members": [
+          "GTMisc.conjectures.X113.x113_ball",
+          "GTMisc.conjectures.X116.x116_ball",
+          "GTMisc.conjectures.X146.x146_ball",
+          "GTMisc.conjectures.X20.x20_ball",
+          "GTMisc.conjectures.X39.x39_ball",
+          "Packing.conjectures.X111.x111_ball",
+          "Packing.conjectures.X26.x26_ball"
+        ],
+        "count": 7,
+        "verdict": "equivalent",
+        "certificates": [
+          "GTMisc.migration.balls.x113_ball_compat",
+          "GTMisc.migration.balls.x116_ball_compat",
+          "GTMisc.migration.balls.x146_ball_compat",
+          "GTMisc.migration.balls.x20_ball_compat",
+          "GTMisc.migration.balls.x39_ball_compat",
+          "Packing.migration.balls.x111_ball_compat",
+          "Packing.migration.balls.x26_ball_compat"
+        ],
+        "note": "Fixpoint: [set x] at 0, previous ball plus its neighbours at r.+1; equal to GTBase.base.ball r x by radius induction (distinct fixpoints, not a conversion)"
+      },
+      "seed-set-ball": {
+        "members": [
+          "GTMisc.conjectures.X113.x113_set_ball",
+          "GTMisc.conjectures.X116.x116_set_ball",
+          "GTMisc.conjectures.X146.x146_set_ball",
+          "GTMisc.conjectures.X39.x39_set_ball",
+          "Packing.conjectures.X26.x26_set_ball"
+        ],
+        "count": 5,
+        "verdict": "equivalent",
+        "certificates": [
+          "GTMisc.migration.balls.x113_set_ball_compat",
+          "GTMisc.migration.balls.x116_set_ball_compat",
+          "GTMisc.migration.balls.x146_set_ball_compat",
+          "GTMisc.migration.balls.x39_set_ball_compat",
+          "Packing.migration.balls.x26_set_ball_compat"
+        ],
+        "note": "\\bigcup_(x in S) x*_ball r x; equal to GTBase.balls.set_ball r S ball by ball (eq_bigr)"
+      }
+    },
+    "distinct_variants": {
+      "GTBase.graph_metric.rel_ball": "ball for an arbitrary finite relation (directed or looped included); its sgraph specialization is ball (ball_rel_ballE)",
+      "GTMisc.conjectures.X128.x128_radius_at_most": "ambient radius with a centre in S and the truncated graph_dist; owned by the ambient shallow-minor family (C16/C23)",
+      "GTMisc.conjectures.X139.x139_radius_at_most": "ambient radius with a centre in S and the truncated graph_dist; its blocked defect is unchanged; C16/C23",
+      "Minor.conjectures.X220.x220_ball_in": "a walk from a supplied centre staying wholly inside B (internal ball, C18); not the ambient closed ball",
+      "Chromatic.conjectures.X161.x161_local_chromatic_radius_two": "a scalar chromatic invariant of radius-2 balls, not a ball primitive"
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.balls.x20_ball_compat",
+      "GTMisc.migration.balls.x39_ball_compat",
+      "GTMisc.migration.balls.x39_set_ball_compat",
+      "GTMisc.migration.balls.x113_ball_compat",
+      "GTMisc.migration.balls.x113_set_ball_compat",
+      "GTMisc.migration.balls.x116_ball_compat",
+      "GTMisc.migration.balls.x116_set_ball_compat",
+      "GTMisc.migration.balls.x146_ball_compat",
+      "GTMisc.migration.balls.x146_set_ball_compat",
+      "GTMisc.migration.balls.x20_burning_cover_compat",
+      "GTMisc.migration.balls.burning_number_conjecture_statement_compat",
+      "GTMisc.migration.balls.x39_pairwise_distant_paths_compat",
+      "GTMisc.migration.balls.x39_has_k_distant_xy_paths_compat",
+      "GTMisc.migration.balls.coarse_menger_ball_separator_statement_compat",
+      "GTMisc.migration.balls.coarse_menger_distance_two_separator_statement_compat",
+      "GTMisc.migration.balls.x113_pairwise_distant_cycles_compat",
+      "GTMisc.migration.balls.x113_has_k_distant_cycles_compat",
+      "GTMisc.migration.balls.coarse_erdos_posa_cycles_forest_statement_compat",
+      "GTMisc.migration.balls.x116_pairwise_distant_paths_compat",
+      "GTMisc.migration.balls.x116_has_k_distant_ST_paths_compat",
+      "GTMisc.migration.balls.coarse_menger_paths_bounded_separator_statement_compat",
+      "GTMisc.migration.balls.x146_pairwise_distant_A_paths_compat",
+      "GTMisc.migration.balls.x146_has_k_distant_A_paths_compat",
+      "GTMisc.migration.balls.x146_every_A_path_hits_ball_compat",
+      "GTMisc.migration.balls.geelen_coarse_gallai_A_paths_statement_compat",
+      "GTMisc.migration.balls.x39_pairwise_distant_paths_original_compat",
+      "GTMisc.migration.balls.x39_has_k_distant_xy_paths_original_compat",
+      "GTMisc.migration.balls.coarse_menger_ball_separator_statement_original_compat",
+      "GTMisc.migration.balls.coarse_menger_distance_two_separator_statement_original_compat",
+      "GTMisc.migration.balls.x113_pairwise_distant_cycles_original_compat",
+      "GTMisc.migration.balls.x113_has_k_distant_cycles_original_compat",
+      "GTMisc.migration.balls.coarse_erdos_posa_cycles_forest_statement_original_compat",
+      "GTMisc.migration.balls.x116_pairwise_distant_paths_original_compat",
+      "GTMisc.migration.balls.x116_has_k_distant_ST_paths_original_compat",
+      "GTMisc.migration.balls.coarse_menger_paths_bounded_separator_statement_original_compat",
+      "GTMisc.migration.balls.x146_pairwise_distant_A_paths_original_compat",
+      "GTMisc.migration.balls.x146_has_k_distant_A_paths_original_compat",
+      "GTMisc.migration.balls.x146_every_A_path_hits_ball_original_compat",
+      "GTMisc.migration.balls.geelen_coarse_gallai_A_paths_statement_original_compat",
+      "Packing.migration.balls.x26_ball_compat",
+      "Packing.migration.balls.x26_set_ball_compat",
+      "Packing.migration.balls.x111_ball_compat",
+      "Packing.migration.balls.x26_pairwise_distant_paths_compat",
+      "Packing.migration.balls.x26_has_k_distant_xy_paths_compat",
+      "Packing.migration.balls.bounded_degree_distant_induced_menger_statement_compat",
+      "Packing.migration.balls.x111_is_transversal_compat",
+      "Packing.migration.balls.x111_is_packing_compat",
+      "Packing.migration.balls.x111_tau_compat",
+      "Packing.migration.balls.x111_nu_compat",
+      "Packing.migration.balls.chepoi_estellon_vaxes_ball_hypergraph_transversal_statement_compat",
+      "Packing.migration.balls.x26_pairwise_distant_paths_original_compat",
+      "Packing.migration.balls.x26_has_k_distant_xy_paths_original_compat",
+      "Packing.migration.balls.bounded_degree_distant_induced_menger_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.base.ball0",
+      "GTBase.base.ballS",
+      "GTBase.base.ball_center",
+      "GTBase.balls.ball_succ_sub",
+      "GTBase.balls.ball_mono",
+      "GTBase.balls.ball_rel_ballE",
+      "GTBase.balls.in_set_ball",
+      "GTBase.balls.set_ball0",
+      "GTBase.balls.set_ball_set0",
+      "GTBase.balls.set_ball1",
+      "GTBase.balls.set_ballU",
+      "GTBase.balls.set_ball_sub",
+      "GTBase.balls.set_ball_subset",
+      "GTBase.balls.set_ball_mono"
+    ],
+    "public_client": "base/theories/examples/balls.v",
+    "legacy_baseline": "1b8126b20a10dcf1cf6c6f95c25104acb818c1cb",
+    "migration_report": "meta/migration_reports/balls.md",
+    "migration_spec": "meta/migration_reports/balls.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A22.md",
+    "foundation_fidelity": "meta/foundation_fidelity/ball.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core (no ball, radius or distance declaration found)",
+        "GTBase.base (ball, graph_power)",
+        "GTBase.graph_metric (rel_ball, graph_dist)"
+      ],
+      "result": "existing-local-canonical",
+      "candidate": "GTBase.base.ball (vertex) and GTBase.balls.set_ball (seed set)",
+      "note": "No installed upstream ball; GTBase.base.ball already serves graph_power and stays byte-exact. GTBase.balls adds the seed-set union and the API; graph_metric.rel_ball is its relation-generic form. Evidence: coordination/evidence/A22-balls-discovery/ (upstream.txt, upstream-balls-only.txt) and coordination/evidence/A22-balls/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}
