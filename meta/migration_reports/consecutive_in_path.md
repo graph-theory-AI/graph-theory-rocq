@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py consecutive_in_path --details /
 
 - Canonical: `GTBase.walks_paths.seq_consecutive`.
 - Baseline: `ceadac8a097e951709afd63b65546f1a2513e0a5`.
-- Scope: 5 helpers, 6 statements, 33 frozen objects, 72 recorded references.
-- Source checks: 246/246 pass; consistent.
+- Scope: 5 helpers, 6 statements, 33 frozen objects, 75 recorded references.
+- Source checks: 247/247 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -22,4 +22,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py consecutive_in_path --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/path_vertices.v#X3Legacy.statement`, `minor-theory/theories/migration/path_vertices.v#X67Legacy.theta`, `graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path`, `graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path_or_pk_free_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/path_vertices.v#X3Legacy.statement`, `minor-theory/theories/migration/path_vertices.v#X67Legacy.theta`, `graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path`, `graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path_or_pk_free_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement`, `minor-theory/theories/migration/bag_decompositions.v#Legacy.theta_triangle_free_bounded_degree_treewidth_statement`.
