@@ -69,14 +69,9 @@ Definition xe2_diameter_critical_two (G : sgraph) : Prop :=
 Definition xe2_path_length3 (G : sgraph) (x y : G) : Prop :=
   exists a b : G, uniq [:: x; a; b; y] /\ x -- a /\ a -- b /\ b -- y.
 
+(** Deprecated compatibility alias; public API: [GTBase.bipartitions]. *)
 Definition xe2_bipartition_sizes (G : sgraph) (a b : nat) : Prop :=
-  exists A B : {set G},
-    [disjoint A & B] /\
-    A :|: B = [set: G] /\
-    #|A| = a /\
-    #|B| = b /\
-    forall x y : G, x -- y ->
-      (x \in A /\ y \in B) \/ (x \in B /\ y \in A).
+  bipartition_sizes G a b.
 
 Definition xe2_cube_square_floor (n a : nat) : Prop :=
   a ^ 3 <= n ^ 2 /\ forall b : nat, b ^ 3 <= n ^ 2 -> b <= a.

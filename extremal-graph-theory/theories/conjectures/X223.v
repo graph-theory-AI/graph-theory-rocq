@@ -52,8 +52,9 @@ Definition x223_hom_to_arc (B : diGraph) : Prop :=
   exists f : B -> bool, forall x y : B, x -- y -> f x = false /\ f y = true.
 
 (** The underlying undirected graph of [B] is bipartite. *)
+(** Deprecated compatibility alias; public API: [GTBase.bipartitions]. *)
 Definition x223_bipartite_dg (B : diGraph) : Prop :=
-  exists f : B -> bool, forall x y : B, x -- y -> f x != f y.
+  bipartite_relation (@edge_rel B).
 
 (** The underlying undirected graph of an ORIENTED digraph contains a cycle:
     some non-empty vertex set spans at least as many arcs as it has vertices
