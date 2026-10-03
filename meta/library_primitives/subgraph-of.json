@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "family": "subgraph-of",
+  "primitive": {
+    "canonical_name": "GTBase.common.has_subgraph",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "subgraph_of"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X31.x31_subgraph_of",
+      "Chromatic.conjectures.XE1.xe1_subgraph_of",
+      "Extremal.conjectures.X59.x59_subgraph_of",
+      "Extremal.conjectures.X78.x78_subgraph_of",
+      "Extremal.conjectures.XE1.xe1_subgraph_of",
+      "GTMisc.conjectures.U13.subgraph_of",
+      "GTMisc.conjectures.XE2.xe2_subgraph_of"
+    ],
+    "consumers_remaining": 13,
+    "relation": "logical-equivalence: the local subgraph_of H G (pattern first) is has_subgraph G H (host first) through GTBase.common.has_subgraphP, unconditionally; not convertible (upstream subgraph uses hom_s with an image-distinctness premise that injectivity and irreflexivity discharge).",
+    "semantic_classes": {
+      "injective-adjacency-preserving": {
+        "members": [
+          "Chromatic.conjectures.X31.x31_subgraph_of",
+          "Chromatic.conjectures.XE1.xe1_subgraph_of",
+          "Extremal.conjectures.X59.x59_subgraph_of",
+          "Extremal.conjectures.X78.x78_subgraph_of",
+          "Extremal.conjectures.XE1.xe1_subgraph_of",
+          "GTMisc.conjectures.XE2.xe2_subgraph_of"
+        ],
+        "count": 6,
+        "verdict": "equivalent",
+        "certificate": "GTBase.common.has_subgraphP",
+        "note": "exists f : H -> G, injective f /\\ forall x y, x -- y -> f x -- f y"
+      },
+      "injective-is-hom": {
+        "members": [
+          "GTMisc.conjectures.U13.subgraph_of"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTBase.common.has_subgraphP",
+        "note": "exists f : H -> G, injective f /\\ is_hom f; is_hom unfolds to the same clause"
+      }
+    },
+    "distinct_variants": {
+      "isubgraph / induced_free": "Induced containment preserves non-edges too; it is a different family (A1's induced_free), kept apart by has_subgraph_not_induced.",
+      "minor": "Minor containment (GraphTheory minor) is a different relation and is not touched."
+    },
+    "historical_snapshots": {
+      "Extremal.migration.consecutive_in_path.X98Legacy.statement": "B3 (49ddc03) froze X98's Record and statement; that copy still calls the live x59_subgraph_of. Kept unchanged; the combined pre-B3, pre-A5 row is Extremal.migration.subgraph_of.X98Original."
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.subgraph_of.x31_subgraph_of_compat",
+      "Chromatic.migration.subgraph_of.xe1_subgraph_of_compat",
+      "Chromatic.migration.subgraph_of.chromatic_girth_average_degree_subgraph_statement_compat",
+      "Chromatic.migration.subgraph_of.erdos_108_statement_compat",
+      "Chromatic.migration.subgraph_of.erdos_628_statement_compat",
+      "Chromatic.migration.subgraph_of.erdos_1091_statement_compat",
+      "Chromatic.migration.subgraph_of.erdos_58_statement_compat",
+      "Chromatic.migration.subgraph_of.erdos_762_statement_compat",
+      "Chromatic.migration.subgraph_of.erdos_923_statement_compat",
+      "Extremal.migration.subgraph_of.x59_subgraph_of_compat",
+      "Extremal.migration.subgraph_of.x78_subgraph_of_compat",
+      "Extremal.migration.subgraph_of.xe1_subgraph_of_compat",
+      "Extremal.migration.subgraph_of.graph_ramsey_compat",
+      "Extremal.migration.subgraph_of.graph_ramsey_number_compat",
+      "Extremal.migration.subgraph_of.diagonal_ramsey_number_compat",
+      "Extremal.migration.subgraph_of.c4_forcing_min_degree_compat",
+      "Extremal.migration.subgraph_of.turan_number_for_graph_compat",
+      "Extremal.migration.subgraph_of.min_turan_over_size_edges_compat",
+      "Extremal.migration.subgraph_of.erdos_1035_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_545_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_548_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_550_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_552_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_566_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_567_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_568_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_766_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_802_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_812_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_85_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_87_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_1018_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_1019_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_1080_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_22_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_547_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_549_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_570_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_800_statement_compat",
+      "Extremal.migration.subgraph_of.erdos_803_statement_compat",
+      "Extremal.migration.subgraph_of.c4_free_subgraph_polynomial_average_degree_statement_compat",
+      "Extremal.migration.subgraph_of.h_free_max_cut_three_fourths_surplus_statement_compat",
+      "Extremal.migration.subgraph_of.bollobas_erdos_large_c4_free_subgraph_statement_compat",
+      "Extremal.migration.subgraph_of.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "Extremal.migration.subgraph_of.polynomial_kuhn_osthus_induced_subdivision_statement_original_compat",
+      "GTMisc.migration.subgraph_of.subgraph_of_compat",
+      "GTMisc.migration.subgraph_of.xe2_subgraph_of_compat",
+      "GTMisc.migration.subgraph_of.subgraph_of_large_average_degree_and_large_average_d_statement_compat",
+      "GTMisc.migration.subgraph_of.erdos_715_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.common.has_subgraphP",
+      "GTBase.common.has_subgraph_trans",
+      "GTBase.common.has_subgraph_card",
+      "GTBase.common.has_subgraph0",
+      "GTBase.common.has_subgraph_K0",
+      "GTBase.common.has_subgraph_K0_host",
+      "GTBase.common.has_subgraph_del_edge_set",
+      "GTBase.common.has_subgraph_not_induced",
+      "GTBase.common.has_subgraph_refl",
+      "GTBase.common.has_subgraph_Kn"
+    ],
+    "public_client": "base/theories/examples/has_subgraph.v",
+    "legacy_baseline": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+    "migration_report": "meta/migration_reports/subgraph_of.md",
+    "migration_spec": "meta/migration_reports/subgraph_of.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A5.md",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.sgraph",
+        "GraphTheory.minor",
+        "GTBase.common",
+        "GTBase.base"
+      ],
+      "result": "existing-canonical-in-base",
+      "candidate": "GTBase.common.has_subgraph (upstream sgraph.subgraph)",
+      "note": "Upstream subgraph S G := exists2 h, injective h & hom_s h, with hom_s asking adjacency only for edges whose images differ; injectivity and irreflexivity make that premise automatic (has_subgraphP). isubgraph (induced) and minor are different relations. GTBase.base.is_hom is defined after common.v, so the characterization states the adjacency clause explicitly instead of referring to it (no import cycle).",
+      "audited_at": "2026-10-02"
+    },
+    "reviewed_by": null,
+    "foundation_fidelity": "meta/foundation_fidelity/subgraph-of.json"
+  }
+}

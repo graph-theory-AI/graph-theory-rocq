@@ -8,7 +8,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Definition xe1_subgraph_of (H G : sgraph) : Prop :=
-  exists f : H -> G, injective f /\ forall x y : H, x -- y -> f x -- f y.
+  has_subgraph G H.
 
 Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
   forall x y : G, x \in S -> y \in S -> x -- y -> False.

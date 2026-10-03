@@ -12,9 +12,7 @@ Fixpoint x59_poly_eval (p : seq nat) (x : nat) : nat :=
   if p is a :: q then a + x * x59_poly_eval q x else 0.
 
 Definition x59_subgraph_of (H G : sgraph) : Prop :=
-  exists f : H -> G,
-    injective f /\
-    forall x y : H, x -- y -> f x -- f y.
+  has_subgraph G H.
 
 Definition x59_has_cycle_length (G : sgraph) (n : nat) : Prop :=
   exists c : seq G, ucycle (--) c /\ size c = n.

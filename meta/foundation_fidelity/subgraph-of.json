@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "family": "subgraph-of",
+  "modules": {
+    "GTBase.common": {
+      "path": "base/theories/common.v",
+      "overrides": {
+        "has_subgraph": {
+          "verdict": "FAITHFUL",
+          "note": "Ordinary (not induced) containment, host first: some injective map from the pattern to the host sends edges to edges (has_subgraphP), unconditionally. Every host contains the empty pattern, the empty host contains only empty patterns, patterns are never larger than hosts, containment is transitive, deleting edges gives a subgraph, and an ordinary subgraph need not be induced (has_subgraph_not_induced)."
+        }
+      },
+      "machine_evidence": [
+        "has_subgraphP",
+        "has_subgraph_trans",
+        "has_subgraph_card",
+        "has_subgraph0",
+        "has_subgraph_K0",
+        "has_subgraph_K0_host",
+        "has_subgraph_del_edge_set",
+        "has_subgraph_not_induced",
+        "has_subgraph_refl",
+        "has_subgraph_Kn"
+      ]
+    }
+  }
+}

@@ -152,9 +152,9 @@ have avH : avgdeg_geq H d.
   rewrite /avgdeg_geq /average_degree_geq mul1n mulnC.
   apply: (@leq_trans (\sum_(x in H) d)); first by rewrite sum_nat_const.
   by apply: leq_sum => x _; exact: ltnW.
-have [K [nK [f [finj fhom]] avK girK]] := Hd H nH avH.
+have [K [nK /has_subgraphP[f [finj fhom]] avK girK]] := Hd H nH avH.
 exists K; split; last split.
-- exists (val \o f); split; first exact: inj_comp val_inj finj.
+- apply/has_subgraphP; exists (val \o f); split; first exact: inj_comp val_inj finj.
   by move=> x y xy; exact: (fhom x y xy).
 - by move=> c cc c2; apply: ltnW; exact: girK.
 - exact: avK.

@@ -9,9 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X31 vocabulary ************************************************)
 
 Definition x31_subgraph_of (H G : sgraph) : Prop :=
-  exists f : H -> G,
-    injective f /\
-    forall x y : H, x -- y -> f x -- f y.
+  has_subgraph G H.
 
 (** ** X31 statements ******************************************************)
 
