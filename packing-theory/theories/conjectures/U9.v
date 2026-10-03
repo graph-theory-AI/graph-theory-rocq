@@ -188,10 +188,11 @@ Definition cycle_edgesG (G : sgraph) (c : seq G) : {set {set G}} :=
 Arguments cycle_edgesG : clear implicits.
 
 (** A set of edges that is a matching: each element is a genuine edge, and every
-    vertex lies in at most one of them. *)
+    vertex lies in at most one of them.  This is the upstream [matching M] of the supplied
+    family (library migration C25; [Packing.foundations.matching.matching_at_most_oneP] and
+    [edgesP] give back the edge-witness and incidence reading). *)
 Definition is_matching_edges (G : sgraph) (M : {set {set G}}) : Prop :=
-  (forall e : {set G}, e \in M -> exists x y : G, x -- y /\ e = [set x; y]) /\
-  (forall v : G, #|[set e in M | v \in e]| <= 1).
+  matching M.
 
 (** ** The hypercube graph Q_d (Hamming graph on d-bit strings) *)
 Section Hypercube.

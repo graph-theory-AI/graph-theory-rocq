@@ -347,6 +347,7 @@
       "827f06d388f6d61a8d55f696c7e362a21a583dca590beb65fbdb566222bb0ec5": [
         "Extremal.conjectures.X180.x180_matching",
         "GTMisc.conjectures.X14.x14_matching",
+        "Packing.conjectures.U9.is_matching_edges",
         "Packing.conjectures.X15.x15_matching"
       ],
       "82c2097f6febee7dc954181c0a2ead0dc00c48becc11e19f18d940b7aa1a4c7b": [
@@ -51305,9 +51306,9 @@
       "signature_shape_hash": "c4fb2e05e0c81e48e6c3daa76bdd83be8f474df1e4925534ced69981deda285a"
     },
     {
-      "body_hash": "d00b85e12004c82ba7969866b05f6fb96cf1ff230b759b7400814cd41649794e",
-      "body_shape_hash": "d00b85e12004c82ba7969866b05f6fb96cf1ff230b759b7400814cd41649794e",
-      "declaration_hash": "4609557a189eb48f7fe037d3e9d396b7362dee509c427c57af9eaf66c4a426dc",
+      "body_hash": "827f06d388f6d61a8d55f696c7e362a21a583dca590beb65fbdb566222bb0ec5",
+      "body_shape_hash": "827f06d388f6d61a8d55f696c7e362a21a583dca590beb65fbdb566222bb0ec5",
+      "declaration_hash": "9a25384be248d89779f4ee287f7bbfd544f02b5f83c9d30e83c1811025190614",
       "direct_consumers": [
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
@@ -51332,7 +51333,7 @@
         "Packing.conjectures.U9.hc_sym"
       ],
       "kind": "Definition",
-      "line": 199,
+      "line": 200,
       "local_dependencies": [],
       "name": "hc_rel",
       "normalized_name": "hc_rel",
@@ -51351,7 +51352,7 @@
         "Packing.conjectures.U9.hypercube"
       ],
       "kind": "Lemma",
-      "line": 201,
+      "line": 202,
       "local_dependencies": [
         "hc_rel"
       ],
@@ -51372,7 +51373,7 @@
         "Packing.conjectures.U9.hypercube"
       ],
       "kind": "Lemma",
-      "line": 209,
+      "line": 210,
       "local_dependencies": [
         "hc_rel"
       ],
@@ -51394,7 +51395,7 @@
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
       "kind": "Definition",
-      "line": 216,
+      "line": 217,
       "local_dependencies": [
         "hc_irrefl",
         "hc_sym"
@@ -51416,7 +51417,7 @@
         "Packing.conjectures.U9.weakly_saturates"
       ],
       "kind": "Definition",
-      "line": 218,
+      "line": 219,
       "local_dependencies": [
         "hypercube"
       ],
@@ -51437,7 +51438,7 @@
         "Packing.conjectures.U9.is_wsat"
       ],
       "kind": "Definition",
-      "line": 232,
+      "line": 233,
       "local_dependencies": [
         "copy_Q3_through"
       ],
@@ -51458,7 +51459,7 @@
         "Packing.conjectures.U9.weak_saturation_of_the_cube_in_the_clique_statement"
       ],
       "kind": "Definition",
-      "line": 243,
+      "line": 244,
       "local_dependencies": [
         "weakly_saturates"
       ],
@@ -51479,7 +51480,7 @@
         "Packing.conjectures.U9.edge_conn_subset"
       ],
       "kind": "Definition",
-      "line": 249,
+      "line": 250,
       "local_dependencies": [],
       "name": "edge_conn_via",
       "normalized_name": "edge_conn_via",
@@ -51498,7 +51499,7 @@
         "Packing.conjectures.U9.partitioning_edge_connectivity_statement"
       ],
       "kind": "Definition",
-      "line": 264,
+      "line": 265,
       "local_dependencies": [
         "edge_conn_via"
       ],
@@ -51519,7 +51520,7 @@
         "Packing.conjectures.U9.tree_contains_T"
       ],
       "kind": "Definition",
-      "line": 269,
+      "line": 270,
       "local_dependencies": [],
       "name": "acyclic_mg",
       "normalized_name": "acyclic_mg",
@@ -51538,7 +51539,7 @@
         "Packing.conjectures.U9.kriesells_statement"
       ],
       "kind": "Definition",
-      "line": 275,
+      "line": 276,
       "local_dependencies": [],
       "name": "edge_disjoint_uv_paths",
       "normalized_name": "edge_disjoint_uv_paths",
@@ -51557,7 +51558,7 @@
         "Packing.conjectures.U9.kriesells_statement"
       ],
       "kind": "Definition",
-      "line": 282,
+      "line": 283,
       "local_dependencies": [
         "acyclic_mg"
       ],
@@ -51578,7 +51579,7 @@
         "Packing.conjectures.U9.packing_t_joins_statement"
       ],
       "kind": "Definition",
-      "line": 289,
+      "line": 290,
       "local_dependencies": [],
       "name": "cut_mg",
       "normalized_name": "cut_mg",
@@ -51597,7 +51598,7 @@
         "Packing.conjectures.U9.packing_t_joins_statement"
       ],
       "kind": "Definition",
-      "line": 293,
+      "line": 294,
       "local_dependencies": [],
       "name": "is_tjoin",
       "normalized_name": "is_tjoin",
