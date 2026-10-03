@@ -124,3 +124,21 @@ regenerated, and no older frozen body is edited.
   reported to the coordinator for a later re-audit.
 - XE2 #915's stronger conjunction (internal and edge disjointness) and X88's formal name (which
   mentions a clique count while the statement compares edit distance) are unchanged.
+
+## B8 history (follow-up commit)
+
+B8 (`e377dcb`, path edges) and A7 each froze XE2 #915 while keeping the other family's live helper:
+- B8's `XE2Legacy`/`XE2Original.erdos_915_statement` call the live `x4_edge_count`;
+- A7's `XE2Legacy`/`XE2Original.erdos_915_statement` call the live `xe2_paths_edge_disjoint`.
+
+The follow-up commit sits on a private baseline that merges A7 `526ad18` with B8 `e377dcb` (not for
+integration). It adds `Extremal.migration.edge_count.XE2PathEdgesOriginal.erdos_915_statement`. This is
+the `9e03072` row over this family's frozen `Legacy.x4_edge_count`, B2's frozen
+`XE2Legacy.paths_internally_disjoint` and B8's frozen `XE2Legacy.paths_edge_disjoint` (aliased `B8`, not
+imported), so it is complete before B2, A7 and B8. `erdos_915_statement_path_edges_original_compat` proves it
+structurally:
+- the count hypothesis is transported by its equation;
+- B2's and B8's conjuncts are transported by their certificates.
+
+The four partial snapshots are documented reciprocally: B8's two in this spec, A7's two in B8's. No earlier
+frozen body or theorem signature changes. B8's frozen predicate is a `historical` object in the spec.

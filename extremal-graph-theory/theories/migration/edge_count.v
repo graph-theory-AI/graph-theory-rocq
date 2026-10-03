@@ -970,3 +970,41 @@ Qed.
 Lemma erdos_767_statement_original_compat :
   XE2Original.erdos_767_statement <-> erdos_767_statement.
 Proof. rewrite /XE2Original.erdos_767_statement /erdos_767_statement; try setoid_rewrite incident_chord_extremal_original_compat; reflexivity. Qed.
+
+(** ** Complete pre-B2/A7/B8 #915 (B8 history follow-up)
+
+    B8 (path edges, e377dcb) froze #915's edge disjointness but kept the live [x4_edge_count]; this
+    file's [XE2Legacy]/[XE2Original] copies keep the live [xe2_paths_edge_disjoint].  The complete row
+    composes B2's frozen internal disjointness, B8's frozen edge disjointness and this family's frozen
+    count.  B8's module is loaded without Import (its [Legacy] module names coincide with this
+    file's); every earlier binding of this file is unchanged. *)
+From Extremal.migration Require path_edges.
+Module B8 := Extremal.migration.path_edges.
+
+Module XE2PathEdgesOriginal.
+
+Definition erdos_915_statement : Prop :=
+  forall (n m : nat) (G : sgraph),
+    #|G| = 1 + n * (m - 1) ->
+    Legacy.x4_edge_count G = 1 + n * 'C(m, 2) ->
+    exists x y : G, exists P : 'I_m -> seq G,
+      x != y /\
+      (forall i : 'I_m,
+        if P i is z :: p then z = x /\ last z p = y /\ path (--) z p else False) /\
+      B2.XE2Legacy.paths_internally_disjoint x y P /\
+      B8.XE2Legacy.paths_edge_disjoint P.
+
+End XE2PathEdgesOriginal.
+
+Lemma erdos_915_statement_path_edges_original_compat :
+  XE2PathEdgesOriginal.erdos_915_statement <-> erdos_915_statement.
+Proof.
+rewrite /XE2PathEdgesOriginal.erdos_915_statement /erdos_915_statement.
+split=> h n m G cardG edges.
+- have [x [y [P [xy [ends [dis edis]]]]]] := h n m G cardG (etrans (x4_edge_count_compat G) edges).
+  by exists x, y, P; do !split=> //;
+    [apply/B2.xe2_paths_internally_disjoint_compat | apply/B8.xe2_paths_edge_disjoint_compat].
+- have [x [y [P [xy [ends [dis edis]]]]]] := h n m G cardG (etrans (esym (x4_edge_count_compat G)) edges).
+  by exists x, y, P; do !split=> //;
+    [apply/B2.xe2_paths_internally_disjoint_compat | apply/B8.xe2_paths_edge_disjoint_compat].
+Qed.
