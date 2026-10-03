@@ -16330,7 +16330,7 @@
         "Digraph.conjectures.X2.semidegree_oriented_paths_statement"
       ],
       "kind": "Definition",
-      "line": 18,
+      "line": 19,
       "local_dependencies": [],
       "name": "subdigraph_embed",
       "normalized_name": "subdigraph_embed",
@@ -16347,7 +16347,7 @@
       "declaration_hash": "84f78ae65acd9c4da41d04b7dd835d1327ff84156940f64ec33c713217bfff04",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 29,
+      "line": 30,
       "local_dependencies": [],
       "name": "x2_path_vertices",
       "normalized_name": "path_vertices",
@@ -16366,7 +16366,7 @@
         "Digraph.conjectures.X2.contains_subdivision"
       ],
       "kind": "Definition",
-      "line": 32,
+      "line": 33,
       "local_dependencies": [],
       "name": "x2_branch_set",
       "normalized_name": "branch_set",
@@ -16385,7 +16385,7 @@
         "Digraph.conjectures.X2.contains_subdivision"
       ],
       "kind": "Definition",
-      "line": 35,
+      "line": 36,
       "local_dependencies": [],
       "name": "x2_path_internal",
       "normalized_name": "path_internal",
@@ -16405,7 +16405,7 @@
         "Digraph.conjectures.X2.mader_delta_zero_bound"
       ],
       "kind": "Definition",
-      "line": 40,
+      "line": 41,
       "local_dependencies": [
         "x2_branch_set",
         "x2_path_internal"
@@ -16427,7 +16427,7 @@
         "Digraph.conjectures.X2.mader_delta_plus_bound"
       ],
       "kind": "Definition",
-      "line": 59,
+      "line": 60,
       "local_dependencies": [],
       "name": "min_outdegree_at_least",
       "normalized_name": "min_outdegree_at_least",
@@ -16446,7 +16446,7 @@
         "Digraph.conjectures.X2.mader_delta_zero_bound"
       ],
       "kind": "Definition",
-      "line": 62,
+      "line": 63,
       "local_dependencies": [],
       "name": "min_semidegree_at_least",
       "normalized_name": "min_semidegree_at_least",
@@ -16465,7 +16465,7 @@
         "Digraph.conjectures.X2.delta_plus_maderian"
       ],
       "kind": "Definition",
-      "line": 65,
+      "line": 66,
       "local_dependencies": [
         "contains_subdivision",
         "min_outdegree_at_least"
@@ -16487,7 +16487,7 @@
         "Digraph.conjectures.X2.least_mader_delta_zero"
       ],
       "kind": "Definition",
-      "line": 73,
+      "line": 74,
       "local_dependencies": [
         "contains_subdivision",
         "min_semidegree_at_least"
@@ -16510,7 +16510,7 @@
         "Digraph.conjectures.X2.oriented_trees_delta_plus_maderian_statement"
       ],
       "kind": "Definition",
-      "line": 77,
+      "line": 78,
       "local_dependencies": [
         "mader_delta_plus_bound"
       ],
@@ -16531,7 +16531,7 @@
         "Digraph.conjectures.X2.mader_delta0_transitive_tournament_statement"
       ],
       "kind": "Definition",
-      "line": 80,
+      "line": 81,
       "local_dependencies": [
         "mader_delta_zero_bound"
       ],
@@ -16552,7 +16552,7 @@
         "Digraph.conjectures.X2.oriented_trees_delta_plus_maderian_statement"
       ],
       "kind": "Definition",
-      "line": 117,
+      "line": 118,
       "local_dependencies": [],
       "name": "oriented_tree",
       "normalized_name": "oriented_tree",
@@ -16571,7 +16571,7 @@
         "Digraph.conjectures.X2.delta_plus_maderian_disjoint_union_statement"
       ],
       "kind": "Definition",
-      "line": 157,
+      "line": 158,
       "local_dependencies": [],
       "name": "x2_disjoint_union",
       "normalized_name": "disjoint_union",
@@ -16588,7 +16588,7 @@
       "declaration_hash": "8609c16f604bc9a0ded8f17ea9a2d3b18f66dd5fde4ad4c4526f890aff2aaa10",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 160,
+      "line": 161,
       "local_dependencies": [],
       "name": "x2_disjoint_union_rel",
       "normalized_name": "disjoint_union_rel",
@@ -16607,7 +16607,7 @@
         "Digraph.conjectures.X2.contains_Si"
       ],
       "kind": "Fixpoint",
-      "line": 191,
+      "line": 192,
       "local_dependencies": [],
       "name": "Si_tournament",
       "normalized_name": "Si_tournament",
@@ -16626,7 +16626,7 @@
         "Digraph.conjectures.X2.large_domination_contains_Si_statement"
       ],
       "kind": "Definition",
-      "line": 204,
+      "line": 205,
       "local_dependencies": [
         "Si_tournament"
       ],
@@ -16648,7 +16648,7 @@
         "Digraph.conjectures.X2.kneser_digraph"
       ],
       "kind": "Definition",
-      "line": 248,
+      "line": 249,
       "local_dependencies": [],
       "name": "bsubset",
       "normalized_name": "bsubset",
@@ -16668,7 +16668,7 @@
         "Digraph.conjectures.X2.directed_kneser_property"
       ],
       "kind": "Definition",
-      "line": 255,
+      "line": 256,
       "local_dependencies": [
         "bsubset"
       ],
@@ -16689,7 +16689,7 @@
         "Digraph.conjectures.X2.directed_kneser_property"
       ],
       "kind": "Definition",
-      "line": 259,
+      "line": 260,
       "local_dependencies": [
         "kneser_digraph"
       ],
@@ -16710,7 +16710,7 @@
         "Digraph.conjectures.X2.directed_kneser_existence_statement"
       ],
       "kind": "Definition",
-      "line": 262,
+      "line": 263,
       "local_dependencies": [
         "common_intersection_nonempty",
         "kneser_digraph"
@@ -16733,7 +16733,7 @@
         "Digraph.conjectures.X2.tournament_outneighborhood_degeneracy_statement"
       ],
       "kind": "Definition",
-      "line": 288,
+      "line": 289,
       "local_dependencies": [],
       "name": "x2_sgraph",
       "normalized_name": "sgraph",
@@ -16753,7 +16753,7 @@
         "Digraph.conjectures.X2.x2_induced_sym"
       ],
       "kind": "Definition",
-      "line": 298,
+      "line": 299,
       "local_dependencies": [],
       "name": "x2_induced_rel",
       "normalized_name": "induced_rel",
@@ -16772,7 +16772,7 @@
         "Digraph.conjectures.X2.x2_induced_sgraph"
       ],
       "kind": "Lemma",
-      "line": 301,
+      "line": 302,
       "local_dependencies": [
         "x2_induced_rel"
       ],
@@ -16793,7 +16793,7 @@
         "Digraph.conjectures.X2.x2_induced_sgraph"
       ],
       "kind": "Lemma",
-      "line": 304,
+      "line": 305,
       "local_dependencies": [
         "x2_induced_rel"
       ],
@@ -16815,7 +16815,7 @@
         "Digraph.conjectures.X2.tournament_outneighborhood_degeneracy_statement"
       ],
       "kind": "Definition",
-      "line": 307,
+      "line": 308,
       "local_dependencies": [
         "x2_induced_irrefl",
         "x2_induced_sym"
@@ -16837,7 +16837,7 @@
         "Digraph.conjectures.X2.tournament_outneighborhood_degeneracy_statement"
       ],
       "kind": "Definition",
-      "line": 312,
+      "line": 313,
       "local_dependencies": [],
       "name": "sg_degeneracy_at_least",
       "normalized_name": "sg_degeneracy_at_least",
@@ -16856,7 +16856,7 @@
         "Digraph.conjectures.X2.tournament_outneighborhood_cycle_statement"
       ],
       "kind": "Definition",
-      "line": 316,
+      "line": 317,
       "local_dependencies": [],
       "name": "sg_has_cycle",
       "normalized_name": "sg_has_cycle",
@@ -16876,7 +16876,7 @@
         "Digraph.conjectures.X2.two_kernel"
       ],
       "kind": "Definition",
-      "line": 368,
+      "line": 369,
       "local_dependencies": [],
       "name": "x2_arc_stable",
       "normalized_name": "arc_stable",
@@ -16895,7 +16895,7 @@
         "Digraph.conjectures.X2.split_partition"
       ],
       "kind": "Definition",
-      "line": 373,
+      "line": 374,
       "local_dependencies": [],
       "name": "x2_tournament_on",
       "normalized_name": "tournament_on",
@@ -16914,7 +16914,7 @@
         "Digraph.conjectures.X2.split_digraph_strong_two_kernel_statement"
       ],
       "kind": "Definition",
-      "line": 376,
+      "line": 377,
       "local_dependencies": [
         "x2_arc_stable",
         "x2_tournament_on"
@@ -16936,7 +16936,7 @@
         "Digraph.conjectures.X2.split_digraph_strong_two_kernel_statement"
       ],
       "kind": "Definition",
-      "line": 379,
+      "line": 380,
       "local_dependencies": [],
       "name": "x2_oriented",
       "normalized_name": "oriented",
@@ -16955,7 +16955,7 @@
         "Digraph.conjectures.X2.split_digraph_strong_two_kernel_statement"
       ],
       "kind": "Definition",
-      "line": 390,
+      "line": 391,
       "local_dependencies": [],
       "name": "no_sources",
       "normalized_name": "no_sources",
@@ -16975,7 +16975,7 @@
         "Digraph.conjectures.X2.x2_covers2"
       ],
       "kind": "Definition",
-      "line": 396,
+      "line": 397,
       "local_dependencies": [],
       "name": "x2_covers1",
       "normalized_name": "covers1",
@@ -16994,7 +16994,7 @@
         "Digraph.conjectures.X2.two_kernel"
       ],
       "kind": "Definition",
-      "line": 399,
+      "line": 400,
       "local_dependencies": [
         "x2_covers1"
       ],
@@ -17015,7 +17015,7 @@
         "Digraph.conjectures.X2.strong_two_kernel"
       ],
       "kind": "Definition",
-      "line": 402,
+      "line": 403,
       "local_dependencies": [
         "x2_arc_stable",
         "x2_covers2"
@@ -17037,7 +17037,7 @@
         "Digraph.conjectures.X2.split_digraph_strong_two_kernel_statement"
       ],
       "kind": "Definition",
-      "line": 405,
+      "line": 406,
       "local_dependencies": [
         "two_kernel",
         "x2_covers1"
@@ -17059,7 +17059,7 @@
         "Digraph.conjectures.X2.listed_path_underlying"
       ],
       "kind": "Definition",
-      "line": 441,
+      "line": 442,
       "local_dependencies": [],
       "name": "consecutive_in",
       "normalized_name": "consecutive_in",
@@ -17078,7 +17078,7 @@
         "Digraph.conjectures.X2.oriented_path"
       ],
       "kind": "Definition",
-      "line": 449,
+      "line": 450,
       "local_dependencies": [
         "consecutive_in"
       ],
@@ -17099,7 +17099,7 @@
         "Digraph.conjectures.X2.semidegree_oriented_paths_statement"
       ],
       "kind": "Definition",
-      "line": 456,
+      "line": 457,
       "local_dependencies": [
         "listed_path_underlying"
       ],
@@ -17120,7 +17120,7 @@
         "Digraph.conjectures.X2.semidegree_oriented_paths_statement"
       ],
       "kind": "Definition",
-      "line": 459,
+      "line": 460,
       "local_dependencies": [],
       "name": "antidirected_path",
       "normalized_name": "antidirected_path",
@@ -17139,7 +17139,7 @@
         "Digraph.conjectures.X2.semidegree_oriented_paths_statement"
       ],
       "kind": "Definition",
-      "line": 462,
+      "line": 463,
       "local_dependencies": [],
       "name": "min_semidegree_half",
       "normalized_name": "min_semidegree_half",
@@ -17158,7 +17158,7 @@
         "Digraph.conjectures.X2.vertex_transitive_longest_dicycles_intersect_statement"
       ],
       "kind": "Definition",
-      "line": 488,
+      "line": 489,
       "local_dependencies": [],
       "name": "weakly_connected",
       "normalized_name": "weakly_connected",
@@ -17170,14 +17170,14 @@
       "signature_shape_hash": "1df638342453dfeab4177ffe20578994bca0d7dc155ec596c82c0b58fc45aa39"
     },
     {
-      "body_hash": "3309d1c1df927c77fb07158c5dbf9cfdf99e0df601ad9f60930387e2d60be749",
-      "body_shape_hash": "3309d1c1df927c77fb07158c5dbf9cfdf99e0df601ad9f60930387e2d60be749",
-      "declaration_hash": "d6ea513b1d8f49a755f70c662b77f716b1e74c141022394e9d8a06e8f9602e25",
+      "body_hash": "25ec28f943290f62f57646686b6d3740f3612d2b797f2fcdbe85a700221681d0",
+      "body_shape_hash": "25ec28f943290f62f57646686b6d3740f3612d2b797f2fcdbe85a700221681d0",
+      "declaration_hash": "811f8d6e17b40b0ed7c39cfb71c3559427be7c9317c91de321087038c17dc7ae",
       "direct_consumers": [
         "Digraph.conjectures.X2.vertex_transitive_longest_dicycles_intersect_statement"
       ],
       "kind": "Definition",
-      "line": 493,
+      "line": 494,
       "local_dependencies": [],
       "name": "longest_dicycle",
       "normalized_name": "longest_dicycle",

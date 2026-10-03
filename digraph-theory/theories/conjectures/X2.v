@@ -11,6 +11,7 @@ From Digraph Require Import prelude interop_graph_theory digraph oriented dipath
 From Digraph Require Import automorphism domination strong.
 From Digraph Require Import classic_core heroes chi_bounded dichromatic.
 From GTBase Require Import walks_paths.
+From Digraph Require longest_cycles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -492,7 +493,7 @@ Definition weakly_connected (D : diGraphType) : Prop :=
   forall u v : D, connect (@chi_bounded.urel D) u v.
 
 Definition longest_dicycle (D : diGraphType) (c : seq D) : Prop :=
-  dicycle c /\ forall c' : seq D, dicycle c' -> (size c' <= size c)%N.
+  longest_cycles.longest_dicycle c.
 
 (** Corpus row: arxiv:2602.16333#02
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2602.16333__02/

@@ -1,0 +1,101 @@
+{
+  "family": "longest-dicycle",
+  "canonical_name": "Digraph.foundations.longest_cycles.longest_dicycle",
+  "canonical_short_name": "longest_dicycle",
+  "relation": "definitional: X2's longest_dicycle (dicycle c /\\ forall c', dicycle c' -> size c' <= size c) is the body of Digraph.foundations.longest_cycles.longest_dicycle c, convertible; Digraph.core.dipath.dicycle is reused unchanged (loops and digons admitted, empty and repeated sequences rejected); no orientation, looplessness, connectivity, symmetry, inhabitance or minimum-length premise is added",
+  "baseline_commit": "0646ae36e10c28c712ccfc84370daf9ff9ebba43",
+  "namespaces": {
+    "digraph-theory": "Digraph"
+  },
+  "certificate_files": [
+    "digraph-theory/theories/foundations/longest_cycles.v",
+    "digraph-theory/theories/migration/longest_dicycle.v"
+  ],
+  "extra_certificates": [
+    "Digraph.foundations.longest_cycles.longest_dicycle_dicycle",
+    "Digraph.foundations.longest_cycles.longest_dicycle_uniq",
+    "Digraph.foundations.longest_cycles.longest_dicycle_size",
+    "Digraph.foundations.longest_cycles.longest_dicycle_max",
+    "Digraph.foundations.longest_cycles.longest_dicycle_nil",
+    "Digraph.foundations.longest_cycles.dicycle_seq1",
+    "Digraph.foundations.longest_cycles.longest_dicycle_card",
+    "Digraph.foundations.longest_cycles.longest_dicycle_size_eq",
+    "Digraph.foundations.longest_cycles.longest_dicycle_tie",
+    "Digraph.foundations.longest_cycles.longest_dicycle_shorter",
+    "Digraph.foundations.longest_cycles.longest_dicycle_hamiltonian",
+    "Digraph.foundations.longest_cycles.longest_dicycle_rot",
+    "Digraph.foundations.longest_cycles.longest_dicycle_rotr",
+    "Digraph.foundations.longest_cycles.longest_dicycle_none",
+    "Digraph.foundations.longest_cycles.longest_dicycle_exists",
+    "Digraph.foundations.longest_cycles.longest_dicycle_existsP",
+    "Digraph.foundations.longest_cycles.dicycle_rev_converse",
+    "Digraph.foundations.longest_cycles.longest_dicycle_rev_converse",
+    "Digraph.foundations.longest_cycles.dicycle_rev",
+    "Digraph.foundations.longest_cycles.longest_dicycle_rev",
+    "Digraph.foundations.longest_cycles.longest_dicycle_ground_arcless",
+    "Digraph.foundations.longest_cycles.longest_dicycle_ground_loop",
+    "Digraph.foundations.longest_cycles.longest_dicycle_ground_digon",
+    "Digraph.foundations.longest_cycles.longest_dicycle_ground_shorter",
+    "Digraph.foundations.longest_cycles.longest_dicycle_ground_triangle"
+  ],
+  "summary": [
+    "Family B14 (longest directed cycles): Digraph X2 `longest_dicycle` (`dicycle c /\\ forall c', dicycle c' -> size c' <= size c`) now unfolds to the new public `Digraph.foundations.longest_cycles.longest_dicycle c`, by conversion. X2 requires the module without Import and keeps its signature as a qualified compatibility alias. `Digraph.core.dipath.dicycle` is reused unchanged: a singleton with a loop and a digon (both arcs) are directed cycles and can be longest, while the empty sequence and repeated entries are rejected. The maximum ranges over the whole digraph. No orientation, looplessness, connectivity, symmetry, inhabited-carrier or minimum-length premise is added: B13's undirected genuine-cycle maximum (length greater than two) is a different contract.",
+    "API: projections (directed cycle, duplicate-free, nonempty, maximum bound); `dicycle_seq1` (a singleton is a directed cycle exactly with a loop); the length bound `#|D|`; equal-length ties and same-length transfer; ruling out by a strictly longer cycle; Hamiltonian sufficiency; rotation; converse reversal (`longest_dicycle_rev_converse`) and same-digraph reversal under the sufficient hypothesis of symmetric arcs; existence exactly when a directed cycle exists (`ex_maxnP`). Groundings: an arcless singleton has no longest cycle, a loop singleton is longest, a digon is longest with two vertices, a digon is a shorter non-longest directed cycle with three vertices, and a directed triangle is longest while its reversal is only a longest cycle of the converse. Public-only client digraph-theory/theories/examples/longest_dicycle.v, which also covers the empty digraph.",
+    "",
+    "One row and no intermediate: X2 `vertex_transitive_longest_dicycles_intersect_statement` (arxiv:2602.16333#02). Weak connectivity, vertex transitivity, both longest premises and the raw-membership common vertex are unchanged; no strong-connectivity guard and no inequality between the cycles. Its docs, status and legs are unchanged. X2's twelve import consumers (grounding_X2, implications_X2, X52 and its grounding and implications, X90, X16, X17, X107, the directed Kneser application, and B1/B2's path_vertices and internal_vertices certificates) compile unchanged; none uses the helper.",
+    "",
+    "History: no migration snapshot contains the helper or its row. B1/B2's X2 support, interior, subdivision and Mader chains do not reach it, so no combined Original is invented. B13's spec, which listed this helper as an untouched distinct variant, now records that B14 migrated it.",
+    "",
+    "Kernel evidence, independent of this textual report, from `Print All Dependencies`: the frozen row reaches no live `longest_dicycle` (neither X2's alias nor the public canonical), and the live row reaches both. Summary: /srv/graph-theory-rocq/coordination/evidence/B14-longest_dicycle/print_all_dependencies_summary.txt.",
+    "",
+    "Baseline 0646ae3 is the announced B13 pin, not yet integrated; B14 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). The normal unscoped Digraph X2 milestone remains required, through the coordinator's shared heavy build."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X2.longest_dicycle",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "longest_dicycle",
+      "frozen_path": "digraph-theory/theories/migration/longest_dicycle.v",
+      "frozen": "Legacy.longest_dicycle",
+      "substitutions": {},
+      "certificate": "Digraph.migration.longest_dicycle.longest_dicycle_compat",
+      "live_unfolds_to": "longest_cycles.longest_dicycle c"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.vertex_transitive_longest_dicycles_intersect_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "vertex_transitive_longest_dicycles_intersect_statement",
+      "frozen_path": "digraph-theory/theories/migration/longest_dicycle.v",
+      "frozen": "X2Legacy.vertex_transitive_longest_dicycles_intersect_statement",
+      "substitutions": {
+        "longest_dicycle": "Legacy.longest_dicycle"
+      },
+      "certificate": "Digraph.migration.longest_dicycle.vertex_transitive_longest_dicycles_intersect_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "digraph-theory/theories/examples/longest_dicycle.v",
+      "name": "longest_dicycle",
+      "note": "The public-only client of the canonical Digraph.foundations.longest_cycles.longest_dicycle (it imports no conjecture module). The canonical shares its short name with X2's compatibility alias, so this is a textual match of that name, not a use of the legacy helper."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.conjectures.grounding_unvd_sad.has_long_dicycle",
+      "path": "digraph-theory/theories/conjectures/grounding_unvd_sad.v",
+      "name": "has_long_dicycle",
+      "note": "existence of a directed cycle above a length threshold (a bounded Boolean search), not a longest-cycle selector; untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.X212.x212_longest_cycle",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_longest_cycle",
+      "note": "undirected genuine-cycle maximum (B13, length greater than two); untouched here"
+    }
+  ]
+}
