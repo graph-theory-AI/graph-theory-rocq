@@ -40,7 +40,7 @@ Definition x227_hat_guessing_le (G : sgraph) (m : nat) : Prop :=
 
 (** The minimum degree of [G] is exactly [d] (this forces [G] to be nonempty). *)
 Definition x227_min_degree (G : sgraph) (d : nat) : Prop :=
-  (forall v : G, (d <= #|N(v)|)%N) /\ (exists v : G, #|N(v)| = d).
+  min_degree G d.
 
 (** *** Independent sets in a uniformly random vertex subset
 

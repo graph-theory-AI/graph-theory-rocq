@@ -9,7 +9,7 @@
       re-exported:  [sgraph], [x -- y], [N(x)] (open_neigh), [χ(A)]=[chi_mem],
                     [ω(A)]=[omega_mem], [α], [clique]/[cliques], [connected],
                     ['K_n]=[complete n], [F ≃ G]=[diso], [ucycle]/[ucycleb];
-      owned here:   [Delta] (Δ), [common_nbr], [regular], [min_degree_at_least],
+      owned here:   [Delta] (Δ), [common_nbr], [regular], [min_degree_at_least], [min_degree],
                     [girth_geq], [ceil_div].
 
     Planarity is NOT here yet: the [coq-graph-theory-planar] / [coq-fourcolor]
@@ -53,7 +53,7 @@
     [traceable], [del_edge_set], [k_edge_connected], [has_subgraph],
     [induced_free], [complete_bipartite], [oriented], [tournament], [acyclic].
 
-    Owned by this file: [Delta] (Δ), [ceil_div], [common_nbr], [regular], [min_degree_at_least],
+    Owned by this file: [Delta] (Δ), [ceil_div], [common_nbr], [regular], [min_degree_at_least], [min_degree],
     [girth_geq], [has_girth], [bipartite], [triangle_free], [cycle_graph],
     [k_connected] (Whitney form, with [k_connected1]; the library's Menger-form
     [kconnected] is also available), [k_degenerate]/[k_degenerate_on], [average_degree_geq],
@@ -199,6 +199,92 @@ Proof.
 move=> h; apply: leq_ltn_trans (h v) _; rewrite -cardsT; apply: proper_card.
 by apply/properP; split; [exact: subsetT | exists v; rewrite ?inE ?in_opn ?sg_irrefl].
 Qed.
+
+(** Exact (attained) minimum degree: the lower bound [min_degree_at_least G d] together with a vertex of
+    degree exactly [d].  The attaining vertex makes the graph nonempty: ['K_0] has no minimum degree
+    ([min_degree_K0]).  The value is unique ([min_degree_uniq]), exists as soon as [G] has a vertex
+    ([min_degree_exists]) and is the greatest lower bound ([min_degree_at_leastE]); there is no numeric
+    minimum with a default value.  [min_degree_attained_firstE] gives the presentation with the attaining
+    vertex first.  Registry: meta/library_primitives/minimum-degree.json (A12). *)
+Definition min_degree (G : sgraph) (d : nat) : Prop :=
+  min_degree_at_least G d /\ exists v : G, #|N(v)| = d.
+
+Lemma min_degree_lower (G : sgraph) (d : nat) : min_degree G d -> min_degree_at_least G d.
+Proof. by case. Qed.
+
+Lemma min_degree_attained (G : sgraph) (d : nat) : min_degree G d -> exists v : G, #|N(v)| = d.
+Proof. by case. Qed.
+
+Lemma min_degree_attained_firstE (G : sgraph) (d : nat) :
+  min_degree G d <-> (exists v : G, #|N(v)| = d) /\ min_degree_at_least G d.
+Proof. by split; case=> h1 h2; split. Qed.
+
+Lemma min_degree_uniq (G : sgraph) (d d' : nat) : min_degree G d -> min_degree G d' -> d = d'.
+Proof.
+case=> hd [v vd] [hd' [w wd']]; apply/eqP; rewrite eqn_leq.
+have h1 := hd w; have h2 := hd' v; rewrite wd' in h1; rewrite vd in h2.
+by rewrite h1 h2.
+Qed.
+
+(** A graph with a vertex has a minimum degree: the degree of a vertex of least degree. *)
+Lemma min_degree_exists (G : sgraph) (v : G) : exists d, min_degree G d.
+Proof.
+have [x _ hx] := @arg_minnP G v predT (fun x : G => #|N(x)|) isT.
+by exists #|N(x)|; split; [move=> w; exact: hx | exists x].
+Qed.
+
+Lemma min_degree_exists_card (G : sgraph) : 0 < #|G| -> exists d, min_degree G d.
+Proof. by case/card_gt0P=> v _; exact: (min_degree_exists v). Qed.
+
+(** The empty graph has no minimum degree. *)
+Lemma min_degree_K0 (d : nat) : ~ min_degree 'K_0 d.
+Proof. by case=> _ [[]]. Qed.
+
+(** A [d]-regular graph with a vertex has minimum degree [d]. *)
+Lemma regular_min_degree (G : sgraph) (d : nat) (v : G) : regular G d -> min_degree G d.
+Proof. by move=> h; split; [exact: regular_min_degree_at_least | exists v; exact: h]. Qed.
+
+(** The minimum degree is the greatest lower bound. *)
+Lemma min_degree_at_leastE (G : sgraph) (d d' : nat) :
+  min_degree G d -> min_degree_at_least G d' <-> d' <= d.
+Proof.
+case=> hd [v vd]; split=> [h|le]; first by rewrite -vd; exact: h.
+exact: min_degree_at_least_le le hd.
+Qed.
+
+Lemma min_degree_Delta (G : sgraph) (d : nat) : min_degree G d -> d <= Delta G.
+Proof. by case=> hd [v _]; exact: (min_degree_at_least_Delta v hd). Qed.
+
+Lemma min_degree_lt_card (G : sgraph) (d : nat) : min_degree G d -> d < #|G|.
+Proof. by case=> hd [v _]; exact: (min_degree_at_least_lt_card v hd). Qed.
+
+Lemma min_degree_Kn (n : nat) : min_degree 'K_n.+1 n.
+Proof.
+split; first exact: min_degree_at_least_Kn.
+have lt : #|N(ord0 : 'K_n.+1)| < #|'K_n.+1|.
+  rewrite -cardsT; apply: proper_card; apply/properP; split; first exact: subsetT.
+  by exists ord0; rewrite ?inE ?in_opn ?sg_irrefl.
+by exists ord0; apply/eqP; rewrite eqn_leq deg_Kn andbT -ltnS; move: lt; rewrite card_ord.
+Qed.
+
+(** Isomorphisms preserve degrees, hence the minimum degree.  ([bij] is imported locally.) *)
+Section DisoMinDegree.
+Import bij.
+
+Lemma diso_degree (G H : sgraph) (i : G ≃ H) (x : G) : #|N(i x)| = #|N(x)|.
+Proof.
+rewrite -(card_imset (mem N(x)) (@bij_injective _ _ i)); apply: eq_card => w.
+apply/idP/imsetP => [|[z zx ->]]; last by rewrite in_opn edge_diso -in_opn.
+by rewrite in_opn -{1}[w](bijK' i) edge_diso -in_opn => xw; exists (i^-1 w); rewrite ?bijK'.
+Qed.
+
+Lemma min_degree_diso (G H : sgraph) (i : G ≃ H) (d : nat) : min_degree G d -> min_degree H d.
+Proof.
+case=> hd [v vd]; split; first exact: min_degree_at_least_diso hd.
+by exists (i v); rewrite diso_degree.
+Qed.
+
+End DisoMinDegree.
 
 (** Girth ≥ [g]: every GENUINE cycle (size > 2; in a simple graph every cycle has
     size ≥ 3) has length ≥ [g].  The [2 < size c] guard is load-bearing — without

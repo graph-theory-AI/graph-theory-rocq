@@ -1,0 +1,173 @@
+{
+  "family": "minimum-degree",
+  "canonical_name": "GTBase.base.min_degree",
+  "canonical_short_name": "min_degree",
+  "relation": "exact attained minimum: GTBase.base.min_degree G d := min_degree_at_least G d /\\ exists v : G, #|N(v)| = d. X227 x227_min_degree (bound first) converts; Extremal XE2 xe2_min_degree (attaining vertex first) equals it by the unconditional conjunct exchange min_degree_attained_firstE. The attaining vertex excludes K0 at every d; no numeric minimum with a default is introduced.",
+  "baseline_commit": "623a89ef8a3194f06f96ae7076d8cad00a8c3ece",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "base/theories/base.v",
+    "extremal-graph-theory/theories/migration/min_degree.v",
+    "graph-theory-misc/theories/migration/min_degree.v",
+    "extremal-graph-theory/theories/migration/subgraph_of.v",
+    "extremal-graph-theory/theories/migration/edge_count.v"
+  ],
+  "extra_certificates": [
+    "GTBase.base.min_degree_lower",
+    "GTBase.base.min_degree_attained",
+    "GTBase.base.min_degree_attained_firstE",
+    "GTBase.base.min_degree_uniq",
+    "GTBase.base.min_degree_exists",
+    "GTBase.base.min_degree_exists_card",
+    "GTBase.base.min_degree_K0",
+    "GTBase.base.regular_min_degree",
+    "GTBase.base.min_degree_at_leastE",
+    "GTBase.base.min_degree_Delta",
+    "GTBase.base.min_degree_lt_card",
+    "GTBase.base.min_degree_Kn",
+    "GTBase.base.diso_degree",
+    "GTBase.base.min_degree_diso"
+  ],
+  "summary": [
+    "Batch A, family A12 (exact attained minimum degree). GTBase.base.min_degree G d := min_degree_at_least G d /\\ exists v : G, #|N(v)| = d, beside A11's lower bound. X227's x227_min_degree (bound first) converts; Extremal XE2's xe2_min_degree states the attaining vertex first and equals the canonical by the proved, unconditional conjunct exchange min_degree_attained_firstE. The attaining vertex excludes the empty graph: K0 has no minimum degree at any d, although it satisfies every lower bound.",
+    "",
+    "Two rows are frozen verbatim at 623a89e: Extremal XE2 erdos_803_statement (exists D C before the positive-m guard and its threshold N, graph order and density, embedding, exact H order, existential exact minimum with Delta H <= D * d, scaled rank-count lower bound with truncated logarithms; no positivity of D/C is added) and GTMisc X227 hat_guessing_degree_degeneracy_bounds_statement (all three conjuncts, including the eventual growth of the third function). The complete #803 row composes A12's frozen raw minimum with A5's frozen embedding and A7's frozen raw rank count; its bridge rewrites the minimum and reuses A7's complete certificate. A5's and A7's three #803 snapshots stay immutable and are documented here; A12's per-row copy is documented reciprocally in their specs. Cubic, subcubic, multigraph and directed degree contracts stay distinct."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE2.xe2_min_degree",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_min_degree",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree.v",
+      "frozen": "Legacy.xe2_min_degree",
+      "substitutions": {},
+      "certificate": "Extremal.migration.min_degree.xe2_min_degree_compat",
+      "live_unfolds_to": "min_degree G d"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_803_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_803_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree.v",
+      "frozen": "XE2Legacy.erdos_803_statement",
+      "substitutions": {
+        "xe2_min_degree": "Legacy.xe2_min_degree"
+      },
+      "certificate": "Extremal.migration.min_degree.erdos_803_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_803_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_803_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree.v",
+      "frozen": "XE2Original.erdos_803_statement",
+      "substitutions": {
+        "xe2_min_degree": "Legacy.xe2_min_degree",
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of",
+        "x4_edge_count": "A7.Legacy.x4_edge_count"
+      },
+      "certificate": "Extremal.migration.min_degree.erdos_803_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X227.x227_min_degree",
+      "path": "graph-theory-misc/theories/conjectures/X227.v",
+      "name": "x227_min_degree",
+      "frozen_path": "graph-theory-misc/theories/migration/min_degree.v",
+      "frozen": "Legacy.x227_min_degree",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.min_degree.x227_min_degree_compat",
+      "live_unfolds_to": "min_degree G d"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X227.hat_guessing_degree_degeneracy_bounds_statement",
+      "path": "graph-theory-misc/theories/conjectures/X227.v",
+      "name": "hat_guessing_degree_degeneracy_bounds_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/min_degree.v",
+      "frozen": "X227Legacy.hat_guessing_degree_degeneracy_bounds_statement",
+      "substitutions": {
+        "x227_min_degree": "Legacy.x227_min_degree"
+      },
+      "certificate": "GTMisc.migration.min_degree.hat_guessing_degree_degeneracy_bounds_statement_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_subgraph_of",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_subgraph_of",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "Legacy.xe1_subgraph_of",
+      "substitutions": {},
+      "certificate": "Extremal.migration.subgraph_of.xe1_subgraph_of_compat",
+      "live_unfolds_to": "has_subgraph G H",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "A5 (subgraph containment) frozen embedding, reused unchanged by XE2Original.erdos_803_statement"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X4.x4_edge_count",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_edge_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "Legacy.x4_edge_count",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_count.x4_edge_count_compat",
+      "live_unfolds_to": "edge_count G",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+      "note": "A7 (edge count) frozen raw rank count, reused unchanged by XE2Original.erdos_803_statement"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_803_statement": "A5 snapshot: A5 froze this row over its own frozen containment but kept the live xe2_min_degree (after A12 GTBase.base.min_degree G d, equal to the old witness-first body by the conjunct exchange min_degree_attained_firstE). Kept unchanged; the complete row is Extremal.migration.min_degree.XE2Original.erdos_803_statement, certified by erdos_803_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_803_statement": "A7 snapshot: A7 froze this row over its own frozen rank count but kept the live xe2_min_degree (after A12 GTBase.base.min_degree G d, equal by the conjunct exchange). Kept unchanged; the complete row is Extremal.migration.min_degree.XE2Original.erdos_803_statement, certified by erdos_803_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Original.erdos_803_statement": "A7 snapshot: A7 composed this row over A5's frozen containment and its own frozen rank count but kept the live xe2_min_degree (after A12 GTBase.base.min_degree G d, equal by the conjunct exchange). Kept unchanged; the complete row is Extremal.migration.min_degree.XE2Original.erdos_803_statement, certified by erdos_803_statement_original_compat, which reuses this certificate after rewriting the minimum."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_X227.v",
+      "name": "x227_min_degree",
+      "note": "x227_min_degree_K3: K3 has minimum degree exactly 2 (the antecedent of part (iii) is satisfiable); script and type unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/implications_X227.v",
+      "name": "hat_guessing_degree_degeneracy_bounds_statement",
+      "note": "Edge from the live X227 row to its degeneracy-bounded part; proof and type unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.X14.x14_subcubic",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_subcubic",
+      "note": "pointwise upper bound <= 3, not an attained minimum"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X114.x114_subcubic",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_subcubic",
+      "note": "Delta <= 3, an upper bound"
+    },
+    {
+      "qualified": "Chromatic.conjectures.U5.cubic",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "cubic",
+      "note": "multigraph regularity counting incident edges (no loopless guard); a later family"
+    },
+    {
+      "qualified": "Cycle.conjectures.U6.cubic",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "cubic",
+      "note": "loopless multigraph regularity counting arc ends; a later family"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types of the frozen and live minima, strict dependency closures of the frozen rows and the complete #803 row, and the forced X227 proof consumers, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A12-min_degree/ (outside the repository)"
+}
