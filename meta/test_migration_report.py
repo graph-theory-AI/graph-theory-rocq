@@ -805,6 +805,33 @@ class AdditionalStatementTests(unittest.TestCase):
         self.write(self.extra_path, self.extra_text)
         self.assert_invalid("source-splicing Load")
 
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_real_non_ascii_and_prime_scopes_cannot_escape_at_either_pin(self):
+        for source in ("common", "conjectures/X0", "conjectures/X1"):
+            proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/" + source + ".v"],
+                                  cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                  text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        for kind, label in (("Section", "é"), ("Module", "é"), ("Section", "Sπ"),
+                            ("Module", "S'é"), ("Section", "S'")):
+            with self.subTest(kind=kind, label=label):
+                scoped = self.extra_text.replace("(**", f"{kind} {label}.\n(**") + f"End {label}.\n"
+                self.write(self.extra_path, scoped)
+                proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/conjectures/X2.v"],
+                                      cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                      text=True, capture_output=True)
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+                self.assert_invalid("Module/Section")
+                self.rebaseline()
+                self.write(self.extra_path, self.extra_text)
+                self.assert_invalid("Module/Section")
+                self.rebaseline()
+        self.write(self.extra_path, self.extra_text.replace("(**", "Section S'.\nEnd S'.\n(**"))
+        self.rebaseline()
+        self.assertEqual(self.failures(), [])
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+
     def test_unreached_baseline_or_current_whole_prop_is_rejected(self):
         for baseline in (False, True):
             with self.subTest(baseline=baseline):

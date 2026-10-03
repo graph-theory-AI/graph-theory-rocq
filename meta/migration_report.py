@@ -334,9 +334,13 @@ def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) 
             # Reserved scope keywords may follow Time/Timeout/Redirect or another
             # command on the same line. Scan conservatively: ambiguous command
             # text must fail closed rather than hide an opener behind a wrapper.
-            scopes = re.compile(rf"\b(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})\b")
+            scope_keywords = re.compile(r"\b(?:Module|Section|End)\b")
+            scopes = re.compile(rf"(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})(?![\w'])")
             command_start = 0
-            for scope in scopes.finditer(prefix):
+            for keyword in scope_keywords.finditer(prefix):
+                scope = scopes.match(prefix, keyword.start())
+                if scope is None:
+                    raise ValueError(f"{qualified}: unsupported Module/Section identifier syntax")
                 while INV.sentence_end(prefix, command_start) <= scope.start():
                     command_start = INV.sentence_end(prefix, command_start)
                 if prefix[command_start:scope.start()].strip():
