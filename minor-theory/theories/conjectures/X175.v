@@ -1,6 +1,7 @@
 (** * Minor.conjectures.X175 -- v2 clique count without K_t subdivision row *)
 
 From GTBase Require Export base.
+From GTBase Require Import clique_counts.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X175 vocabulary ***********************************************)
 
 Definition x175_clique_count (G : sgraph) : nat :=
-  #|[set S : {set G} | cliqueb S && (S != set0)]|.
+  nonempty_clique_count G.
 
 Definition x175_path_internal {G : sgraph} (x y : G) (p : seq G) : {set G} :=
   seq_interior x y (x :: p).
