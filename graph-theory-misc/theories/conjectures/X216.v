@@ -19,7 +19,7 @@ Definition x216_cycle_instance : Type := {G : sgraph & seq G}.
     Hamilton cycle with a different edge set (not merely a different vertex sequence:
     rotations and the reversal of a cycle are different sequences). *)
 Definition x216_cycle_edges (G : sgraph) (c : seq G) : {set {set G}} :=
-  [set e : {set G} | e \in [seq [set p.1; p.2] | p <- zip c (rot 1 c)]].
+  seq_cycle_edge_set c.
 
 (** The vertices of a sequence, read as indices of the vertex enumeration. *)
 Definition x216_enc_seq (G : sgraph) (c : seq G) : data :=

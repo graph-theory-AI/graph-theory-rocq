@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "family": "genuine-cycle",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_cycle",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "cycle",
+      "genuine_cycle",
+      "is_cycle",
+      "rel_cycle",
+      "directed_cycle"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.XE1.xe1_cycle",
+      "Cycle.conjectures.X212.x212_cycle",
+      "Cycle.conjectures.X9.x9_genuine_cycle",
+      "Cycle.conjectures.XE1.xe1_cycle",
+      "Digraph.conjectures.XE2.xe2_directed_cycle",
+      "Extremal.conjectures.XE2.xe2_cycle",
+      "GTMisc.conjectures.X113.x113_is_cycle",
+      "GTMisc.conjectures.XE1.xe1_rel_cycle"
+    ],
+    "consumers_remaining": 13,
+    "relation": "definitional: the seven Prop helpers are ucycle r c /\\ 2 < size c, the body of GTBase.walks_paths.seq_cycle r c (r = (--) for the five sgraph helpers, the supplied relation for xe1_rel_cycle and xe2_directed_cycle); X212's Boolean x212_cycle is ucycleb (--) c && (2 < size c), the body of seq_cycleb (--) c; all convertible",
+    "semantic_classes": {
+      "sgraph-adjacency-prop": {
+        "members": [
+          "Chromatic.conjectures.XE1.xe1_cycle",
+          "Cycle.conjectures.X9.x9_genuine_cycle",
+          "Cycle.conjectures.XE1.xe1_cycle",
+          "Extremal.conjectures.XE2.xe2_cycle",
+          "GTMisc.conjectures.X113.x113_is_cycle"
+        ],
+        "count": 5,
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.genuine_cycle.xe1_cycle_compat",
+          "Cycle.migration.genuine_cycle.x9_genuine_cycle_compat",
+          "Cycle.migration.genuine_cycle.xe1_cycle_compat",
+          "Extremal.migration.genuine_cycle.xe2_cycle_compat",
+          "GTMisc.migration.genuine_cycle.x113_is_cycle_compat"
+        ],
+        "note": "ucycle (--) c /\\ 2 < size c on a simple graph: the body of seq_cycle (--) c, convertible; the empty, one-entry and two-entry sequences are excluded by the size guard, repeats by uniq."
+      },
+      "supplied-relation-prop": {
+        "members": [
+          "Digraph.conjectures.XE2.xe2_directed_cycle",
+          "GTMisc.conjectures.XE1.xe1_rel_cycle"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Digraph.migration.genuine_cycle.xe2_directed_cycle_compat",
+          "GTMisc.migration.genuine_cycle.xe1_rel_cycle_compat"
+        ],
+        "note": "ucycle r c /\\ 2 < size c for an ARBITRARY relation r on a finite carrier (coprime adjacency in GTMisc XE1, an orientation in Digraph XE2): the body of seq_cycle r c, convertible; no symmetry or irreflexivity is assumed, so directed cycles stay directed and reversal stays a cycle of r under the hypothesis symmetric r, a sufficient condition."
+      },
+      "sgraph-adjacency-bool": {
+        "members": [
+          "Cycle.conjectures.X212.x212_cycle"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Cycle.migration.genuine_cycle.x212_cycle_compat",
+        "note": "X212's Boolean ucycleb (--) c && (2 < size c): the body of seq_cycleb (--) c, convertible; seq_cycleP reflects it to the Prop form."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.genuine_cycle.erdos_1091_statement_compat",
+      "Chromatic.migration.genuine_cycle.erdos_1091_statement_original_compat",
+      "Chromatic.migration.genuine_cycle.erdos_58_statement_compat",
+      "Chromatic.migration.genuine_cycle.erdos_58_statement_original_compat",
+      "Chromatic.migration.genuine_cycle.erdos_751_statement_compat",
+      "Chromatic.migration.genuine_cycle.xe1_cycle_compat",
+      "Chromatic.migration.genuine_cycle.xe1_odd_cycle_with_diagonals_compat",
+      "Chromatic.migration.genuine_cycle.xe1_odd_cycle_with_diagonals_original_compat",
+      "Chromatic.migration.genuine_cycle.xe2_cycle_lengths_separated_compat",
+      "Chromatic.migration.genuine_cycle.xe2_odd_cycle_lengths_bounded_compat",
+      "Cycle.migration.genuine_cycle.birmele_long_cycle_transversal_statement_compat",
+      "Cycle.migration.genuine_cycle.bondy_linear_cycle_cubic_statement_compat",
+      "Cycle.migration.genuine_cycle.erdos_184_statement_compat",
+      "Cycle.migration.genuine_cycle.erdos_641_statement_compat",
+      "Cycle.migration.genuine_cycle.erdos_71_statement_compat",
+      "Cycle.migration.genuine_cycle.erdos_752_statement_compat",
+      "Cycle.migration.genuine_cycle.erdos_815_statement_compat",
+      "Cycle.migration.genuine_cycle.min_degree_three_linearly_many_chords_cycle_statement_compat",
+      "Cycle.migration.genuine_cycle.min_degree_three_linearly_many_chords_cycle_statement_original_compat",
+      "Cycle.migration.genuine_cycle.proper_edge_coloured_short_cycle_statement_compat",
+      "Cycle.migration.genuine_cycle.smith_two_longest_cycles_statement_compat",
+      "Cycle.migration.genuine_cycle.x212_cycle_compat",
+      "Cycle.migration.genuine_cycle.x212_cycle_within_compat",
+      "Cycle.migration.genuine_cycle.x212_cyclically_edge_connected_compat",
+      "Cycle.migration.genuine_cycle.x212_longest_cycle_compat",
+      "Cycle.migration.genuine_cycle.x9_genuine_cycle_compat",
+      "Cycle.migration.genuine_cycle.xe1_cycle_compat",
+      "Cycle.migration.genuine_cycle.xe1_cycle_or_edge_piece_compat",
+      "Cycle.migration.genuine_cycle.xe2_all_cycle_lengths_in_compat",
+      "Cycle.migration.genuine_cycle.xe2_cycle_lengths_compat",
+      "Digraph.migration.genuine_cycle.erdos_1006_statement_compat",
+      "Digraph.migration.genuine_cycle.xe2_acyclic_rel_compat",
+      "Digraph.migration.genuine_cycle.xe2_directed_cycle_compat",
+      "Digraph.migration.genuine_cycle.xe2_orientation_stays_acyclic_after_one_reversal_compat",
+      "Extremal.migration.genuine_cycle.erdos_767_statement_compat",
+      "Extremal.migration.genuine_cycle.erdos_767_statement_original_compat",
+      "Extremal.migration.genuine_cycle.xe2_cycle_compat",
+      "Extremal.migration.genuine_cycle.xe2_incident_chord_extremal_compat",
+      "Extremal.migration.genuine_cycle.xe2_incident_chord_extremal_original_compat",
+      "Extremal.migration.genuine_cycle.xe2_no_cycle_with_incident_chords_compat",
+      "Extremal.migration.genuine_cycle.xe2_no_cycle_with_incident_chords_original_compat",
+      "GTMisc.migration.genuine_cycle.coarse_erdos_posa_cycles_forest_statement_compat",
+      "GTMisc.migration.genuine_cycle.coarse_erdos_posa_cycles_forest_statement_original_compat",
+      "GTMisc.migration.genuine_cycle.erdos_883_statement_compat",
+      "GTMisc.migration.genuine_cycle.x113_has_k_distant_cycles_compat",
+      "GTMisc.migration.genuine_cycle.x113_has_k_distant_cycles_original_compat",
+      "GTMisc.migration.genuine_cycle.x113_is_cycle_compat",
+      "GTMisc.migration.genuine_cycle.x113_is_forest_after_compat",
+      "GTMisc.migration.genuine_cycle.x113_is_forest_after_original_compat",
+      "GTMisc.migration.genuine_cycle.xe1_all_small_odd_coprime_cycles_compat",
+      "GTMisc.migration.genuine_cycle.xe1_rel_cycle_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.seq_cycleP",
+      "GTBase.walks_paths.seq_cycleE",
+      "GTBase.walks_paths.seq_cycle_ucycle",
+      "GTBase.walks_paths.seq_cycle_cycle",
+      "GTBase.walks_paths.seq_cycle_uniq",
+      "GTBase.walks_paths.seq_cycle_size",
+      "GTBase.walks_paths.seq_cycle_nil",
+      "GTBase.walks_paths.seq_cycle_seq1",
+      "GTBase.walks_paths.seq_cycle_pair",
+      "GTBase.walks_paths.seq_cycle_triangle",
+      "GTBase.walks_paths.seq_cycle_repeat",
+      "GTBase.walks_paths.seq_cycle_rot",
+      "GTBase.walks_paths.seq_cycle_rotr",
+      "GTBase.walks_paths.seq_cycle_consecutive",
+      "GTBase.walks_paths.seq_cycle_rev_converse",
+      "GTBase.walks_paths.seq_cycle_rev",
+      "GTBase.walks_paths.seq_cycle_ground_K3",
+      "GTBase.walks_paths.seq_cycle_ground_digon",
+      "GTBase.walks_paths.seq_cycle_ground_repeat",
+      "GTBase.walks_paths.seq_cycle_ground_directed",
+      "GTBase.walks_paths.seq_cycle_ground_directed_rev"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "mathcomp.boot.path",
+        "mathcomp.boot.seq",
+        "GraphTheory.digraph",
+        "GraphTheory.sgraph",
+        "GraphTheory.mgraph"
+      ],
+      "result": "upstream-adapter",
+      "candidate": "mathcomp.boot.path.ucycle",
+      "note": "MathComp path.v owns cycle, ucycleb and ucycle (cycle r c && uniq c) with rot_ucycle, rotr_ucycle, rev_cycle and eq_cycle; the corpus adds the size guard 2 < size c, which removes the empty sequence, single loops and two-way pairs. GTBase.walks_paths.seq_cycle / seq_cycleb reuse ucycle / ucycleb with that guard over an arbitrary relation. Hamiltonian, fixed-length, longest, induced, geodesic, rainbow, chorded and packing cycles, existential has-cycle conditions, girth (GTBase.has_girth unchanged), multigraph circuits, digraph dicycles and raw cycle-edge/support interfaces stay separate. Legacy bodies and per-row certificates: meta/migration_reports/genuine_cycle.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/genuine_cycle.md",
+    "reviewed_by": "coordinator helper path_review",
+    "migration_spec": "meta/migration_reports/genuine_cycle.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/genuine-cycle.json",
+    "reviewed_commit": "0a0203ee4e1ff00605e4cbfa89108dcbea0e812f",
+    "independent_review": "meta/migration_reviews/genuine_cycle.md"
+  }
+}

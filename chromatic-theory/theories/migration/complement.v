@@ -126,7 +126,8 @@ Lemma gyarfas_complementation_chi_bounded_statement_compat :
   X3Legacy.gyarfas_complementation_chi_bounded_statement <->
   gyarfas_complementation_chi_bounded_statement.
 Proof.
-rewrite /X3Legacy.gyarfas_complementation_chi_bounded_statement /gyarfas_complementation_chi_bounded_statement /chi_bounded.
+rewrite /X3Legacy.gyarfas_complementation_chi_bounded_statement /gyarfas_complementation_chi_bounded_statement /chi_bounded
+  /GTBase.chi_bounding.chi_bounded_class /GTBase.chi_bounding.chi_bounded_via.
 setoid_rewrite x3_complement_image_compat; reflexivity.
 Qed.
 

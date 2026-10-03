@@ -10,15 +10,10 @@ Definition xe1_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
 Definition xe1_cycle_edges (G : sgraph) (c : seq G) : {set {set G}} :=
-  [set e : {set G} |
-      [exists p : G * G,
-        [&& p.1 \in c, p.2 \in c, p.1 -- p.2,
-            e == [set p.1; p.2] &
-            (((p.1, p.2) \in zip c (rot 1 c)) ||
-             ((p.2, p.1) \in zip c (rot 1 c)))]]].
+  seq_cycle_graph_edge_set c.
 
 Definition xe1_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\ 2 < size c.
+  seq_cycle (--) c.
 
 Definition xe1_cycle_or_edge_piece (G : sgraph) (P : {set {set G}}) : Prop :=
   (exists c : seq G, xe1_cycle c /\ P = xe1_cycle_edges c) \/

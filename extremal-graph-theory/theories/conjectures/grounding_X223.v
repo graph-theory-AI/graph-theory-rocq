@@ -129,7 +129,7 @@ Proof. by split; [rewrite disjoints_subset sub0set | move=> a b; rewrite inE]. Q
 Lemma x223_edges_between0 (G : sgraph) (B : {set G}) :
   x223_edges_between set0 B = 0.
 Proof.
-apply/eqP; rewrite cards_eq0; apply/eqP; apply/setP => uv.
+apply/eqP; rewrite /x223_edges_between /edges_between cards_eq0; apply/eqP; apply/setP => uv.
 by rewrite !inE.
 Qed.
 
@@ -146,7 +146,7 @@ Qed.
 Lemma edges_between_K2_gt0 :
   0 < x223_edges_between (G := 'K_2) [set ord0] [set (Ordinal (isT : 1 < 2))].
 Proof.
-rewrite /x223_edges_between; apply/card_gt0P.
+rewrite /x223_edges_between /edges_between; apply/card_gt0P.
 by exists (ord0, Ordinal (isT : 1 < 2)); rewrite !inE.
 Qed.
 
@@ -178,10 +178,10 @@ Qed.
 (** NON-VACUITY: the edgeless graph on two vertices is (1,1)-sparse. *)
 Lemma ct_sparse_compl_K2 : x223_ct_sparse (compl 'K_2) 1 1 1.
 Proof.
-move=> A B _ _; rewrite /x223_edges_between.
+move=> A B _ _; rewrite /x223_edges_between /edges_between.
 have -> : [set uv : compl 'K_2 * compl 'K_2 |
-             (uv.1 \in A) && (uv.2 \in B) && (uv.1 -- uv.2)] = set0.
-  by apply/setP => uv; rewrite !inE compl_K2_edgeless andbF.
+             [&& uv.1 \in A, uv.2 \in B & uv.1 -- uv.2]] = set0.
+  by apply/setP => uv; rewrite !inE compl_K2_edgeless !andbF.
 by rewrite cards0.
 Qed.
 
@@ -191,7 +191,7 @@ Proof.
 move=> /(_ [set: 'K_2] [set: 'K_2]).
 rewrite cardsT card_ord => /(_ isT isT); rewrite mul1n subnn mul0n leqn0 => /eqP E.
 have : 0 < x223_edges_between (G := 'K_2) [set: 'K_2] [set: 'K_2].
-  rewrite /x223_edges_between; apply/card_gt0P.
+  rewrite /x223_edges_between /edges_between; apply/card_gt0P.
   by exists (ord0, Ordinal (isT : 1 < 2)); rewrite !inE.
 by rewrite E.
 Qed.

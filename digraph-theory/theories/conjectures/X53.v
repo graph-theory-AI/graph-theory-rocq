@@ -3,6 +3,7 @@
 From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude digraph oriented dipath.
+From GTBase Require Import bipartitions.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,12 +11,9 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X53 vocabulary ************************************************)
 
+(** Deprecated compatibility alias; public API: [GTBase.bipartitions]. *)
 Definition x53_bipartition (D : diGraphType) (A B : {set D}) : Prop :=
-  [disjoint A & B] /\
-  A :|: B = [set: D] /\
-  forall u v : D,
-    u --> v ->
-    ((u \in A) && (v \in B)) || ((u \in B) && (v \in A)).
+  bipartition_parts (G := to_GT D) A B.
 
 Definition x53_out_to (D : diGraphType) (S : {set D}) (v : D) : nat :=
   #|[set w in S | v --> w]|.

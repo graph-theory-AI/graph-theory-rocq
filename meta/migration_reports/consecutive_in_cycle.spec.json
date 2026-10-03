@@ -67,7 +67,9 @@
     "",
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of the eighteen frozen statements and the two originals contains no live helper or chain declaration of this family and neither canonical, while each live statement reaches the canonical and its alias (/srv/graph-theory-rocq/coordination/evidence/B4-consecutive_in_cycle/print_all_dependencies_summary.txt, with the probe and the full output beside it); the Section scaffolding of D2str's frozen copy is checked verbatim beside it.",
     "",
-    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented limitations stay verbatim, including erdos:1091's unbounded function, X4's five-tuple count, XE1's negative and positive chord clauses, XE2's strict bounds and truncated subtraction, X27/X42/X220 quantifier order and uniformity gaps, and the solved/open statuses."
+    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented limitations stay verbatim, including erdos:1091's unbounded function, X4's five-tuple count, XE1's negative and positive chord clauses, XE2's strict bounds and truncated subtraction, X27/X42/X220 quantifier order and uniformity gaps, and the solved/open statuses.",
+    "",
+    "Later migration: Cycle XE1 `xe1_cycle_edges`, listed here as a separate contract (a set of edges), was migrated by B11 (family cycle-edges) onto `GTBase.walks_paths.seq_cycle_graph_edge_set`, which reads its cyclic adjacency through this family's `seq_cyclic_consecutiveb`; it is no longer an untouched distinct variant."
   ],
   "frozen": [
     {
@@ -833,7 +835,13 @@
     "chromatic-theory/theories/migration/proper_colouring.v#X3Legacy.rainbow_consecutive_vertices_in_hole_statement": "C5 per-row snapshot: family proper-colouring (C5) froze only its colouring chain of the X3 rainbow-hole row, so this copy still resolves through the live x3_rainbow_hole_run, which after B4 reaches the canonical seq_cyclic_consecutive through x3_hole. C5's rainbow_consecutive_vertices_in_hole_statement_compat stays true but certifies only the colouring step. The fully frozen row is Chromatic.migration.consecutive_in_cycle.X3Original.rainbow_consecutive_vertices_in_hole_statement, certified by rainbow_consecutive_vertices_in_hole_statement_original_compat.",
     "chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_1091_statement": "A5 per-row snapshot: A5 (ordinary subgraph containment) froze only its own helper in erdos_1091 (xe1_subgraph_of -> Legacy.xe1_subgraph_of), so this copy still resolves through the live xe1_odd_cycle_with_diagonals, which after B4 reaches seq_cyclic_consecutiveb. Kept as A5's per-row chain; the combined pre-A5, pre-B4 row is Chromatic.migration.subgraph_of.XE2Original.erdos_1091_statement.",
     "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_567_statement": "A5 per-row snapshot: A5 froze only its own Ramsey-number chain in erdos_567, so this copy still resolves through the live xe1_h5_graph, which after B4 reaches seq_cyclic_consecutiveb. Kept as A5's per-row chain; the combined pre-A5, pre-B4 row is Extremal.migration.subgraph_of.XE1Original.erdos_567_statement.",
-    "extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_567_statement": "A6 per-row snapshot: A6 froze only its own complement chain in erdos_567, so this copy still resolves through the live xe1_h5_graph, which after B4 reaches seq_cyclic_consecutiveb. Kept as A6's per-row chain; the combined pre-A5, pre-A6, pre-B4 row is Extremal.migration.complement.XE1Original.erdos_567_statement."
+    "extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_567_statement": "A6 per-row snapshot: A6 froze only its own complement chain in erdos_567, so this copy still resolves through the live xe1_h5_graph, which after B4 reaches seq_cyclic_consecutiveb. Kept as A6's per-row chain; the combined pre-A5, pre-A6, pre-B4 row is Extremal.migration.complement.XE1Original.erdos_567_statement.",
+    "chromatic-theory/theories/migration/genuine_cycle.v#XE1Legacy.odd_cycle_with_diagonals": "B10 per-row snapshot: family genuine-cycle (B10) froze only its own cycle helper in XE1's odd-cycle-with-diagonals chain, so this copy still calls the live xe1_cycle_diagonal_count, which after B4 reads seq_cyclic_consecutiveb. Kept as B10's per-row chain; the complete chain before B4 and B10 is Chromatic.migration.genuine_cycle.XE1Original.odd_cycle_with_diagonals over this family's frozen diagonal count.",
+    "cycle-theory/theories/migration/genuine_cycle.v#X9Legacy.min_degree_three_linearly_many_chords_cycle_statement": "B10 per-row snapshot: family genuine-cycle (B10) froze only its own cycle helper in X9's chord row, so this copy still calls the live x9_cycle_chord_count, which after B4 reads seq_cyclic_consecutiveb. Kept as B10's per-row row; the complete pre-B4, pre-B10 row is Cycle.migration.genuine_cycle.X9Original.min_degree_three_linearly_many_chords_cycle_statement over this family's frozen chord count.",
+    "extremal-graph-theory/theories/migration/genuine_cycle.v#XE2Legacy.no_cycle_with_incident_chords": "B10 per-row snapshot: family genuine-cycle (B10) froze only its own cycle helper in #767's incident-chord chain, so this copy still calls the live xe2_incident_cycle_chord_count, which after B4 reads seq_cyclic_consecutiveb. Kept as B10's per-row chain; the complete pre-B4, pre-B10 chain and row are Extremal.migration.genuine_cycle.XE2Original over this family's frozen incident chord count.",
+    "extremal-graph-theory/theories/migration/edge_count.v#X4Legacy.c5_edge_count_above_turan_statement": "A7 snapshot: A7 froze this row over its own frozen edge count but kept the live x4_c5_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.X4Original.c5_edge_count_above_turan_statement, certified by c5_edge_count_above_turan_statement_original_compat, which composes this family's frozen copy.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_567_statement": "A7 snapshot: A7 froze this row over its own frozen edge count but kept the live xe1_h5_graph of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which composes this family's frozen copy.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.incident_chord_extremal": "A7 snapshot: A7 froze this chain over its own frozen edge count but kept the live xe2_no_cycle_with_incident_chords of this family. Kept unchanged; the complete chain is Extremal.migration.edge_count.XE2Original.incident_chord_extremal, certified by incident_chord_extremal_original_compat, which composes this family's frozen copy."
   },
   "cross_module_consumers": [
     {
@@ -998,12 +1006,6 @@
       "path": "packing-theory/theories/conjectures/XE1.v",
       "name": "xe1_induced_cycle",
       "note": "higher predicate embedding a cyclic-adjacency test in an induced-cycle definition; not a standalone alias; separate later review, untouched"
-    },
-    {
-      "qualified": "Cycle.conjectures.XE1.xe1_cycle_edges",
-      "path": "cycle-theory/theories/conjectures/XE1.v",
-      "name": "xe1_cycle_edges",
-      "note": "set-of-edges constructor of a cycle; a different representation, untouched"
     },
     {
       "qualified": "Cycle.conjectures.U6.cyc_pairs",

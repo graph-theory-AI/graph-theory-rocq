@@ -23,7 +23,7 @@ Definition x24_one_factorization
     x24_perfect_matching [set e in x24_edge_set 'K_n | col e == i].
 
 Definition x24_cycle_edge_seq (G : sgraph) (c : seq G) : seq {set G} :=
-  map (fun p : G * G => [set p.1; p.2]) (zip c (rot 1 c)).
+  seq_cycle_edge_list c.
 
 Definition x24_rainbow_cycle
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (c : seq G) : Prop :=

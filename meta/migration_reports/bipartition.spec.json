@@ -1,0 +1,508 @@
+{
+  "family": "bipartition",
+  "canonical_name": "GraphTheory.connectivity.bipartition",
+  "canonical_short_name": "bipartition",
+  "relation": "Unconditional logical equivalence for upstream supplied-side and deletion interfaces; definitional equality for Boolean-colouring, two-part and cardinality adapters. All guards, witnesses, empty cases and statement types are retained.",
+  "baseline_commit": "2e0fb67f54a33409311c2a36cdf1e1d5240e3577",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "digraph-theory": "Digraph",
+    "extremal-graph-theory": "Extremal",
+    "homomorphism-theory": "Hom",
+    "packing-theory": "Packing",
+    "atlas": "Atlas"
+  },
+  "certificate_files": [
+    "base/theories/bipartitions.v",
+    "base/theories/base.v",
+    "chromatic-theory/theories/migration/bipartition.v",
+    "digraph-theory/theories/migration/bipartition.v",
+    "extremal-graph-theory/theories/migration/bipartition.v",
+    "homomorphism-theory/theories/migration/bipartition.v",
+    "packing-theory/theories/migration/bipartition.v",
+    "extremal-graph-theory/theories/migration/subgraph_of.v",
+    "extremal-graph-theory/theories/migration/complement.v"
+  ],
+  "extra_certificates": [
+    "GTBase.bipartitions.bipartition_neq",
+    "GTBase.bipartitions.bipartition_complement",
+    "GTBase.bipartitions.disjoint_cover_complement",
+    "GTBase.bipartitions.bipartition_partsP",
+    "GTBase.bipartitions.bipartition_parts_swap",
+    "GTBase.bipartitions.balanced_bipartitionP",
+    "GTBase.bipartitions.bipartition_sizesP",
+    "GTBase.bipartitions.bipartite_relationP",
+    "GTBase.bipartitions.bipartite_relation_sub",
+    "GTBase.bipartitions.bipartite_relation0",
+    "GTBase.bipartitions.bipartite_relation_loop",
+    "GTBase.bipartitions.bipartite_after_deletionP",
+    "GTBase.bipartitions.bipartite_after_deletion_full",
+    "GTBase.bipartitions.bipartite_after_deletion_nonedges",
+    "GTBase.base.bipartite_relationE"
+  ],
+  "summary": [
+    "C7 preserves seven compiled helpers in six distinct representation interfaces and freezes their eight complete corpus statements. Supplied-side bipartitions use the upstream diGraph predicate. Local diGraphType inputs pass through to_GT without changing their carrier or arc relation.",
+    "Two supplied parts retain disjointness, cover, Boolean crossings and, where present, equal exact sizes. Existential prescribed-size parts retain their Prop crossing witnesses. An arbitrary-relation Boolean colouring adapter remains convertible to the unchanged GTBase.base.bipartite, preserving Hom.bipartite_relE as exact Prop equality without propositional extensionality. Deletion uses del_edge_set with arbitrary deletion families; off-edge members have no effect. Empty graphs, empty sides, n=0 and arbitrary directed relations remain allowed.",
+    "X219 retains all three repaired list-colouring conjuncts, thresholds, positive palette guards and quantifier order. The remaining complete rows preserve their degree/girth, Sidorenko, cube/density, tree/Ramsey, five-colour and deletion-size conditions. Atlas e025 and Digraph e102 proof consumers are included.",
+    "X15alone is deliberately uncompiled and unchanged, classified deferred-excluded; its stronger scratch statement is not claimed as a ninth corpus row. Infinite partitions, complete bipartite graphs, homomorphism to one oriented arc, and local bag colourings remain distinct.",
+    "History: A5 XE2 #1080/#549 snapshots remain byte-for-byte intact. Two complete Originals freeze the C7 exact-size bipartition and reuse A5 frozen containment, graph Ramsey, its least-bound clause and diagonal specialization, against 49ddc033. Reciprocal notes distinguish the retained per-step snapshots. The complement and edge-count vocabularies remain at that baseline; later A6/A7 composition is separate.",
+    "Additive A6 history composition: exact prerequisite 6b0bc780e56385d0509f9959d98ec0fa69050f90. The initial C7 and A6 frozen arrays/bodies remain unchanged. A third complete Original, XE2ComplementOriginal.erdos_549_statement, combines C7 exact-size parts with A6 frozen complement proof scaffolding and complete A5+A6 Ramsey minimality. Reused constructor bridges prove graph-construction isomorphism rather than equality of opaque proof terms. The new Require does not Import A6, preserving earlier C7 Legacy namespace bindings. Reciprocal notes distinguish both older A6 rows and both older C7 #549 snapshots."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X219.x219_bipartition",
+      "path": "chromatic-theory/theories/conjectures/X219.v",
+      "name": "x219_bipartition",
+      "frozen_path": "chromatic-theory/theories/migration/bipartition.v",
+      "frozen": "X219Legacy.x219_bipartition",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.bipartition.x219_bipartition_compat",
+      "live_unfolds_to": "bipartition A"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X219.asymmetric_bipartite_list_colouring_statement",
+      "path": "chromatic-theory/theories/conjectures/X219.v",
+      "name": "asymmetric_bipartite_list_colouring_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bipartition.v",
+      "frozen": "X219Legacy.asymmetric_bipartite_list_colouring_statement",
+      "substitutions": {
+        "x219_bipartition": "X219Legacy.x219_bipartition"
+      },
+      "certificate": "Chromatic.migration.bipartition.asymmetric_bipartite_list_colouring_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X46.x46_bipartition",
+      "path": "digraph-theory/theories/conjectures/X46.v",
+      "name": "x46_bipartition",
+      "frozen_path": "digraph-theory/theories/migration/bipartition.v",
+      "frozen": "X46Legacy.x46_bipartition",
+      "substitutions": {},
+      "certificate": "Digraph.migration.bipartition.x46_bipartition_compat",
+      "live_unfolds_to": "balanced_bipartition (G := to_GT D) A B n"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X46.bipartite_digraph_outdegree_girth_statement",
+      "path": "digraph-theory/theories/conjectures/X46.v",
+      "name": "bipartite_digraph_outdegree_girth_statement",
+      "frozen_path": "digraph-theory/theories/migration/bipartition.v",
+      "frozen": "X46Legacy.bipartite_digraph_outdegree_girth_statement",
+      "substitutions": {
+        "x46_bipartition": "X46Legacy.x46_bipartition"
+      },
+      "certificate": "Digraph.migration.bipartition.bipartite_digraph_outdegree_girth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X53.x53_bipartition",
+      "path": "digraph-theory/theories/conjectures/X53.v",
+      "name": "x53_bipartition",
+      "frozen_path": "digraph-theory/theories/migration/bipartition.v",
+      "frozen": "X53Legacy.x53_bipartition",
+      "substitutions": {},
+      "certificate": "Digraph.migration.bipartition.x53_bipartition_compat",
+      "live_unfolds_to": "bipartition_parts (G := to_GT D) A B"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X53.bipartite_digraph_asymmetric_outdegree_girth_statement",
+      "path": "digraph-theory/theories/conjectures/X53.v",
+      "name": "bipartite_digraph_asymmetric_outdegree_girth_statement",
+      "frozen_path": "digraph-theory/theories/migration/bipartition.v",
+      "frozen": "X53Legacy.bipartite_digraph_asymmetric_outdegree_girth_statement",
+      "substitutions": {
+        "x53_bipartition": "X53Legacy.x53_bipartition"
+      },
+      "certificate": "Digraph.migration.bipartition.bipartite_digraph_asymmetric_outdegree_girth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X223.x223_bipartite_dg",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "x223_bipartite_dg",
+      "frozen_path": "extremal-graph-theory/theories/migration/bipartition.v",
+      "frozen": "X223Legacy.x223_bipartite_dg",
+      "substitutions": {},
+      "certificate": "Extremal.migration.bipartition.x223_bipartite_dg_compat",
+      "live_unfolds_to": "bipartite_relation (@edge_rel B)"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X223.directed_sidorenko_bipartite_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "directed_sidorenko_bipartite_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/bipartition.v",
+      "frozen": "X223Legacy.directed_sidorenko_bipartite_statement",
+      "substitutions": {
+        "x223_bipartite_dg": "X223Legacy.x223_bipartite_dg"
+      },
+      "certificate": "Extremal.migration.bipartition.directed_sidorenko_bipartite_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE2.xe2_bipartition_sizes",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_bipartition_sizes",
+      "frozen_path": "extremal-graph-theory/theories/migration/bipartition.v",
+      "frozen": "XE2Legacy.xe2_bipartition_sizes",
+      "substitutions": {},
+      "certificate": "Extremal.migration.bipartition.xe2_bipartition_sizes_compat",
+      "live_unfolds_to": "bipartition_sizes G a b"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_1080_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_1080_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/bipartition.v",
+      "frozen": "XE2Legacy.erdos_1080_statement",
+      "substitutions": {
+        "xe2_bipartition_sizes": "XE2Legacy.xe2_bipartition_sizes"
+      },
+      "certificate": "Extremal.migration.bipartition.erdos_1080_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_549_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_549_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/bipartition.v",
+      "frozen": "XE2Legacy.erdos_549_statement",
+      "substitutions": {
+        "xe2_bipartition_sizes": "XE2Legacy.xe2_bipartition_sizes"
+      },
+      "certificate": "Extremal.migration.bipartition.erdos_549_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hom.conjectures.U3.bipartite_rel",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "bipartite_rel",
+      "frozen_path": "homomorphism-theory/theories/migration/bipartition.v",
+      "frozen": "U3Legacy.bipartite_rel",
+      "substitutions": {},
+      "certificate": "Hom.migration.bipartition.bipartite_rel_compat",
+      "live_unfolds_to": "bipartite_relation r"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hom.conjectures.U3.weak_pentagon_statement",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "weak_pentagon_statement",
+      "frozen_path": "homomorphism-theory/theories/migration/bipartition.v",
+      "frozen": "U3Legacy.weak_pentagon_statement",
+      "substitutions": {
+        "bipartite_rel": "U3Legacy.bipartite_rel"
+      },
+      "certificate": "Hom.migration.bipartition.weak_pentagon_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.U9.del_bipartite",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "del_bipartite",
+      "frozen_path": "packing-theory/theories/migration/bipartition.v",
+      "frozen": "U9Legacy.del_bipartite",
+      "substitutions": {},
+      "certificate": "Packing.migration.bipartition.del_bipartite_compat",
+      "live_unfolds_to": "bipartite_after_deletion S"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.U9.odd_cycle_transversal_in_triangle_free_graphs_statement",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "odd_cycle_transversal_in_triangle_free_graphs_statement",
+      "frozen_path": "packing-theory/theories/migration/bipartition.v",
+      "frozen": "U9Legacy.odd_cycle_transversal_in_triangle_free_graphs_statement",
+      "substitutions": {
+        "del_bipartite": "U9Legacy.del_bipartite"
+      },
+      "certificate": "Packing.migration.bipartition.odd_cycle_transversal_in_triangle_free_graphs_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_1080_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_1080_statement",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "extremal-graph-theory/theories/migration/bipartition.v",
+      "frozen": "XE2Original.erdos_1080_statement",
+      "substitutions": {
+        "xe2_bipartition_sizes": "XE2Legacy.xe2_bipartition_sizes",
+        "xe1_subgraph_of": "Legacy.xe1_subgraph_of"
+      },
+      "certificate": "Extremal.migration.bipartition.erdos_1080_statement_original_compat",
+      "corpus": "v2",
+      "note": "Complete pre-A5/pre-C7 row, composed from C7 frozen exact-size parts and A5 frozen containment/Ramsey chains; no older snapshot is rewritten."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_549_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_549_statement",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "extremal-graph-theory/theories/migration/bipartition.v",
+      "frozen": "XE2Original.erdos_549_statement",
+      "substitutions": {
+        "xe2_bipartition_sizes": "XE2Legacy.xe2_bipartition_sizes",
+        "xe1_diagonal_ramsey_number": "XE1Legacy.diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.bipartition.erdos_549_statement_original_compat",
+      "corpus": "v2",
+      "note": "Complete pre-A5/pre-C7 row, composed from C7 frozen exact-size parts and A5 frozen containment/Ramsey chains; no older snapshot is rewritten."
+    },
+    {
+      "kind": "a5-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_subgraph_of",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_subgraph_of",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "Legacy.xe1_subgraph_of",
+      "substitutions": {},
+      "certificate": "Extremal.migration.subgraph_of.xe1_subgraph_of_compat",
+      "live_unfolds_to": "has_subgraph G H",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A5 source/chain for complete C7 XE2 originals."
+    },
+    {
+      "kind": "a5-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "XE1Legacy.graph_ramsey",
+      "substitutions": {
+        "xe1_subgraph_of": "Legacy.xe1_subgraph_of",
+        "xe1_graph_ramsey": "graph_ramsey"
+      },
+      "certificate": "Extremal.migration.subgraph_of.graph_ramsey_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A5 source/chain for complete C7 XE2 originals."
+    },
+    {
+      "kind": "a5-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey_number",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "XE1Legacy.graph_ramsey_number",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_graph_ramsey": "graph_ramsey"
+      },
+      "certificate": "Extremal.migration.subgraph_of.graph_ramsey_number_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A5 source/chain for complete C7 XE2 originals."
+    },
+    {
+      "kind": "a5-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_diagonal_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_diagonal_ramsey_number",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "XE1Legacy.diagonal_ramsey_number",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_diagonal_ramsey_number": "diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.subgraph_of.diagonal_ramsey_number_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A5 source/chain for complete C7 XE2 originals."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_549_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_549_statement",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "extremal-graph-theory/theories/migration/bipartition.v",
+      "frozen": "XE2ComplementOriginal.erdos_549_statement",
+      "substitutions": {
+        "xe2_bipartition_sizes": "XE2Legacy.xe2_bipartition_sizes",
+        "xe1_diagonal_ramsey_number": "Extremal.migration.complement.XE1Original.diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.bipartition.erdos_549_statement_complement_original_compat",
+      "corpus": "v2",
+      "note": "Complete A5+A6+C7 row: A5 frozen containment, A6 frozen complement construction and Ramsey minimality, C7 frozen exact-size parts. Initial C7 snapshots remain unchanged."
+    },
+    {
+      "kind": "a6-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_complement_rel",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_complement_rel",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe1_complement_rel",
+      "substitutions": {},
+      "certificate": "Extremal.migration.complement.xe1_complement_rel_compat",
+      "live_unfolds_to": "@compl_rel G",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A6 frozen complement/construction or complete A5+A6 Ramsey chain. Proof-field certificates claim graph-construction isomorphism, not opaque proof identity."
+    },
+    {
+      "kind": "a6-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_complement_sym",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_complement_sym",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe1_complement_sym",
+      "substitutions": {
+        "xe1_complement_rel": "Legacy.xe1_complement_rel"
+      },
+      "certificate": "Extremal.migration.complement.xe1_complement_proofs_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A6 frozen complement/construction or complete A5+A6 Ramsey chain. Proof-field certificates claim graph-construction isomorphism, not opaque proof identity."
+    },
+    {
+      "kind": "a6-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_complement_irrefl",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_complement_irrefl",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe1_complement_irrefl",
+      "substitutions": {
+        "xe1_complement_rel": "Legacy.xe1_complement_rel"
+      },
+      "certificate": "Extremal.migration.complement.xe1_complement_proofs_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A6 frozen complement/construction or complete A5+A6 Ramsey chain. Proof-field certificates claim graph-construction isomorphism, not opaque proof identity."
+    },
+    {
+      "kind": "a6-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_complement_graph",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_complement_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe1_complement_graph",
+      "substitutions": {
+        "xe1_complement_sym": "Legacy.xe1_complement_sym",
+        "xe1_complement_irrefl": "Legacy.xe1_complement_irrefl"
+      },
+      "certificate": "Extremal.migration.complement.xe1_complement_graph_compat",
+      "live_unfolds_to": "compl G",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A6 frozen complement/construction or complete A5+A6 Ramsey chain. Proof-field certificates claim graph-construction isomorphism, not opaque proof identity."
+    },
+    {
+      "kind": "a6-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.graph_ramsey",
+      "substitutions": {
+        "xe1_graph_ramsey": "graph_ramsey",
+        "xe1_complement_graph": "Legacy.xe1_complement_graph",
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of"
+      },
+      "certificate": "Extremal.migration.complement.graph_ramsey_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A6 frozen complement/construction or complete A5+A6 Ramsey chain. Proof-field certificates claim graph-construction isomorphism, not opaque proof identity."
+    },
+    {
+      "kind": "a6-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey_number",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.graph_ramsey_number",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_graph_ramsey": "graph_ramsey"
+      },
+      "certificate": "Extremal.migration.complement.graph_ramsey_number_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A6 frozen complement/construction or complete A5+A6 Ramsey chain. Proof-field certificates claim graph-construction isomorphism, not opaque proof identity."
+    },
+    {
+      "kind": "a6-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_diagonal_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_diagonal_ramsey_number",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.diagonal_ramsey_number",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "diagonal_ramsey_number",
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.diagonal_ramsey_number_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "Reused unchanged A6 frozen complement/construction or complete A5+A6 Ramsey chain. Proof-field certificates claim graph-construction isomorphism, not opaque proof identity."
+    }
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "asymmetric_bipartite_list_colouring_statement",
+      "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X219.v",
+      "name": "asymmetric_bipartite_list_colouring_statement",
+      "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X219.v",
+      "name": "x219_bipartition",
+      "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X46.v",
+      "name": "bipartite_digraph_asymmetric_outdegree_girth_statement",
+      "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X46.v",
+      "name": "bipartite_digraph_outdegree_girth_statement",
+      "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X223.v",
+      "name": "x223_bipartite_dg",
+      "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    },
+    {
+      "path": "homomorphism-theory/theories/conjectures/grounding_U3.v",
+      "name": "bipartite_rel",
+      "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    },
+    {
+      "path": "homomorphism-theory/theories/conjectures/implications_U3.v",
+      "name": "bipartite_rel",
+      "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "del_bipartite",
+      "note": "Consumer statement types remain unchanged; affected proof bodies use the public equivalence API where required."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Packing.conjectures.X15alone.bipartite",
+      "path": "packing-theory/theories/conjectures/X15alone.v",
+      "name": "bipartite",
+      "representation": "excluded standalone Boolean-colouring copy",
+      "note": "Unchanged and uncompiled; stronger scratch statement variant is preserved and not enrolled as a corpus row."
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_1080_statement": "A5 froze containment/Ramsey but kept live xe2_bipartition_sizes. Preserve this A5 step unchanged; the combined pre-A5/pre-C7 row is bipartition.XE2Original.erdos_1080_statement with erdos_1080_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_549_statement": "A5 froze containment/Ramsey but kept live xe2_bipartition_sizes. Preserve this A5 step unchanged; the combined pre-A5/pre-C7 row is bipartition.XE2Original.erdos_549_statement with erdos_549_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE2Legacy.erdos_549_statement": "A6 retained live xe2_bipartition_sizes in its #549 snapshots. Preserve both A6 bodies; the full A5+A6+C7 row is bipartition.XE2ComplementOriginal.erdos_549_statement, certified by erdos_549_statement_complement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE2Original.erdos_549_statement": "A6 retained live xe2_bipartition_sizes in its #549 snapshots. Preserve both A6 bodies; the full A5+A6+C7 row is bipartition.XE2ComplementOriginal.erdos_549_statement, certified by erdos_549_statement_complement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_1080_statement": "A7 snapshot: A7 froze this row over its own frozen edge count but kept the live xe2_bipartition_sizes of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.XE2Original.erdos_1080_statement, certified by erdos_1080_statement_original_compat, which composes this family's frozen copy."
+  },
+  "kernel_evidence": "Pinned-image implementation probes in /srv/graph-theory-rocq/coordination/evidence/C7-bipartition/: closed assumptions, exact complete iff types, strict frozen/live dependency closures, public client and explicit Atlas e025/Digraph e102 builds. Independent review and coordinator final theorem review follow the stable commit."
+}

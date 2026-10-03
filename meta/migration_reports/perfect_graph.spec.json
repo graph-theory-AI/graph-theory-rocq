@@ -1,0 +1,120 @@
+{
+  "family": "perfect-graph",
+  "canonical_name": "GTBase.perfect_graphs.is_perfect_graph",
+  "canonical_short_name": "perfect_graph",
+  "relation": "equivalent Prop encodings of upstream full-carrier perfection: direct subset chi=omega or induced-carrier chi=omega; not definitionally identical",
+  "baseline_commit": "de78ea9701c5dae818ee4c897a6ea2956ff01c9a",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "base/theories/perfect_graphs.v",
+    "extremal-graph-theory/theories/migration/perfect_graphs.v",
+    "graph-theory-misc/theories/migration/perfect_graphs.v"
+  ],
+  "extra_certificates": [
+    "GTBase.perfect_graphs.is_perfect_graphP",
+    "GTBase.perfect_graphs.is_perfect_graph_subsets",
+    "GTBase.perfect_graphs.is_perfect_graph_induced_subsets",
+    "GTBase.perfect_graphs.is_perfect_graph_whole",
+    "GTBase.perfect_graphs.is_perfect_graph_induced",
+    "GTBase.perfect_graphs.is_perfect_graph_diso",
+    "GTBase.perfect_graphs.is_perfect_graph_isubgraph",
+    "GTBase.perfect_graphs.is_perfect_graph_complement",
+    "GTBase.perfect_graphs.is_perfect_graph_complete",
+    "GTBase.perfect_graphs.is_perfect_graph_empty",
+    "GTBase.perfect_graphs.is_perfect_graph_complement_complete",
+    "GTBase.perfect_graphs.is_perfect_graph_hajnal"
+  ],
+  "downstream_client": "base/theories/examples/perfect_graphs.v",
+  "summary": [
+    "C12 reuses GraphTheory.wpgt.perfect_mem as canonical mathematical owner. GTBase.perfect_graphs.is_perfect_graph is its full-carrier Boolean predicate viewed as Prop. The public API proves reflection and both forall-subset and forall-induced-carrier characterizations without propositional extensionality.",
+    "Both legacy Prop signatures remain unchanged. D2ram quantifies directly over subsets; X144 uses all induced carriers. Upstream chiT/omegaT and chi_induced/omega_induced reconcile them, including the empty subset. No nonempty graph/set, connectivity or size guard is introduced.",
+    "Both exact source bodies and both complete rows are frozen. Preserve D2ram uniform threshold N, graph-then-size order, and the entire G/complement biclique disjunction with both power bounds. Preserve X144 size-then-graph order, its two explicit nonempty pure-pair guards and complete-or-anticomplete disjunction. These output predicates are not identified or rewritten.",
+    "D2ram perfect_graph_complete and perfect_graph_whole retain exact theorem types and now use the corresponding public API lemmas; every other grounding/implication proof remains unchanged, including the D2ram_nodes_in_scope whole-row equality. No earlier frozen row reaches this family and no historical Original is owed. D2ram edge_count is a separate A7 hunk and must remain preserved at integration.",
+    "Public-only examples include K0/K1/K2/Kn, edgeless complements, the empty induced subset, isomorphism/induced transport, and an actual cycle_graph5 negative. The latter proves alpha<=2 and omega<=2 by five membership cases and applies upstream Hajnal, avoiding chromatic-number partition enumeration. All existing docs/statuses remain unchanged; exact kernel types/closures and independent step-10/root final review are required."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2ram.perfect_graph",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "perfect_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/perfect_graphs.v",
+      "frozen": "Legacy.perfect_graph",
+      "substitutions": {},
+      "certificate": "Extremal.migration.perfect_graphs.perfect_graph_compat",
+      "source_declaration_sha256": "22cf5c92e66d6c8e0ea2bcfeeffd7809262425bf211a7f969ce8149e259ca8ef",
+      "source_body_sha256": "f3c41442dfef1135f4bcd0e5f77fcdeb7dd576f50f9cbe2ab6d67b714e04154f",
+      "live_unfolds_to": "GTBase.perfect_graphs.is_perfect_graph G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2ram.complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/perfect_graphs.v",
+      "frozen": "Legacy.complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "substitutions": {
+        "perfect_graph": "Legacy.perfect_graph"
+      },
+      "certificate": "Extremal.migration.perfect_graphs.complete_bipartite_subgraphs_of_perfect_graphs_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X144.x144_perfect_graph",
+      "path": "graph-theory-misc/theories/conjectures/X144.v",
+      "name": "x144_perfect_graph",
+      "frozen_path": "graph-theory-misc/theories/migration/perfect_graphs.v",
+      "frozen": "Legacy.x144_perfect_graph",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.perfect_graphs.x144_perfect_graph_compat",
+      "source_declaration_sha256": "8daed9b401f790d67ad283ebb371a28ff8f0370c5249ad22c32d17374b02ab49",
+      "source_body_sha256": "bc39ebd235594e59ebbd787ab2e7379d433d4f6c12fd7ef462170d7abbbf4f66",
+      "live_unfolds_to": "GTBase.perfect_graphs.is_perfect_graph G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X144.fox_pure_pair_perfect_graphs_statement",
+      "path": "graph-theory-misc/theories/conjectures/X144.v",
+      "name": "fox_pure_pair_perfect_graphs_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/perfect_graphs.v",
+      "frozen": "Legacy.fox_pure_pair_perfect_graphs_statement",
+      "substitutions": {
+        "x144_perfect_graph": "Legacy.x144_perfect_graph"
+      },
+      "certificate": "GTMisc.migration.perfect_graphs.fox_pure_pair_perfect_graphs_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2ram.v",
+      "name": "perfect_graph",
+      "note": "Two exact existing theorem types retained; proof-only adaptation uses the public complete/whole API."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_D2ram.v",
+      "name": "complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "note": "D2ram_nodes_in_scope retains its exact whole-row Prop equality conjunction and proof."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.X3.x3_chi_omega_plus_bound",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_chi_omega_plus_bound",
+      "note": "A supplied additive slack for every graph in a class, not perfection of one graph on every subset."
+    },
+    {
+      "qualified": "Chromatic.conjectures.X3.x3_alpha_omega_large_class",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_alpha_omega_large_class",
+      "note": "A class-level alpha/omega condition with an extra +1, not upstream perfection or its exact Hajnal characterization."
+    }
+  ]
+}

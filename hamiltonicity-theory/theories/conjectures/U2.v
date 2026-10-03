@@ -59,7 +59,7 @@ Definition is_hamiltonian (G : sgraph) : Prop :=
     so "a second Hamilton cycle" / "uniquely Hamiltonian" are stated on edge sets,
     not on raw seqs. *)
 Definition cycle_edges (G : sgraph) (c : seq G) : {set {set G}} :=
-  [set [set x; next c x] | x in [set z | z \in c]].
+  seq_next_edge_set c.
 Arguments cycle_edges : clear implicits.
 
 (** [k_connected] (Whitney k-connectivity) is now in graph-theory-base — promoted from

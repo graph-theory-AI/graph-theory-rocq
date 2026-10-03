@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X170 -- v2 oriented-P4 chi-boundedness row *)
 
 From GTBase Require Export base.
+From GTBase Require Import chi_bounding.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -42,9 +43,7 @@ Definition x170_forb_oriented_P4_family
     Q \in P -> ~ x170_induced_oriented_P4 O Q.
 
 Definition x170_chi_bounded (C : x170_oriented_graph -> Prop) : Prop :=
-  exists f : nat -> nat,
-    forall O : x170_oriented_graph,
-      C O -> χ([set: x170_underlying O]) <= f (ω([set: x170_underlying O])).
+  chi_bounded_via x170_underlying C.
 
 (** ** X170 statements *****************************************************)
 

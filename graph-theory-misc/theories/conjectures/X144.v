@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X144 -- v2 pure pairs in perfect graphs row *)
 
 From GTBase Require Export base.
+From GTBase Require Import perfect_graphs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X144 vocabulary ***********************************************)
 
 Definition x144_perfect_graph (G : sgraph) : Prop :=
-  forall S : {set G}, χ([set: induced S]) = ω([set: induced S]).
+  GTBase.perfect_graphs.is_perfect_graph G.
 
 Definition x144_complete_between (G : sgraph) (A B : {set G}) : Prop :=
   forall a b : G, a \in A -> b \in B -> a -- b.

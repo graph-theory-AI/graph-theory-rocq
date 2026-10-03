@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "family": "perfect-graph",
+  "modules": {
+    "GTBase.perfect_graphs": {
+      "path": "base/theories/perfect_graphs.v",
+      "overrides": {
+        "is_perfect_graph": {
+          "verdict": "FAITHFUL",
+          "note": "Exactly upstream wpgt.perfect_mem on the full carrier, viewed as Prop; finite reflection and both original subset/induced characterizations proved, with no added guard."
+        }
+      },
+      "machine_evidence": [
+        "is_perfect_graphP",
+        "is_perfect_graph_subsets",
+        "is_perfect_graph_induced_subsets",
+        "is_perfect_graph_whole",
+        "is_perfect_graph_induced",
+        "is_perfect_graph_diso",
+        "is_perfect_graph_isubgraph",
+        "is_perfect_graph_complement",
+        "is_perfect_graph_complete",
+        "is_perfect_graph_empty",
+        "is_perfect_graph_complement_complete",
+        "is_perfect_graph_hajnal"
+      ]
+    }
+  }
+}

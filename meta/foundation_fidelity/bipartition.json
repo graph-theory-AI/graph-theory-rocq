@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "family": "bipartition",
+  "modules": {
+    "GTBase.bipartitions": {
+      "path": "base/theories/bipartitions.v",
+      "overrides": {
+        "bipartite_relation": {
+          "verdict": "FAITHFUL",
+          "note": "There exists a Boolean vertex map separating every pair related by the arbitrary finite relation. No symmetry, irreflexivity, inhabited-carrier or palette-surjectivity premise. Convertible to the existing simple-graph bipartite predicate."
+        },
+        "bipartition_parts": {
+          "verdict": "FAITHFUL",
+          "note": "Two supplied disjoint sets cover every vertex and each directed arc crosses between them. Empty parts are permitted; equivalent to the supplied upstream bipartition under the disjoint-cover conditions."
+        },
+        "balanced_bipartition": {
+          "verdict": "FAITHFUL",
+          "note": "Two supplied disjoint covering parts both have exactly n vertices, and every arc crosses. n=0 is permitted; positivity stays at callers."
+        },
+        "bipartition_sizes": {
+          "verdict": "FAITHFUL",
+          "note": "Two existential disjoint covering parts have exact independently prescribed cardinalities a and b, and every arc has one end in each via Prop disjunction. Empty parts and the empty graph are permitted."
+        },
+        "bipartite_after_deletion": {
+          "verdict": "FAITHFUL",
+          "note": "The graph del_edge_set G S has an upstream supplied-side witness. S is an arbitrary family of vertex sets; only actual two-vertex edges are removed. No edge-subset premise is added."
+        }
+      },
+      "machine_evidence": [
+        "bipartition_neq",
+        "bipartition_complement",
+        "disjoint_cover_complement",
+        "bipartition_partsP",
+        "bipartition_parts_swap",
+        "balanced_bipartitionP",
+        "bipartition_sizesP",
+        "bipartite_relationP",
+        "bipartite_relation_sub",
+        "bipartite_relation0",
+        "bipartite_relation_loop",
+        "bipartite_after_deletionP",
+        "bipartite_after_deletion_full",
+        "bipartite_after_deletion_nonedges"
+      ]
+    }
+  }
+}

@@ -205,7 +205,9 @@
       "documented_status": "open; frozen by M1, restated by this family's entry point"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "cycle-theory/theories/migration/cycle_edges.v#X24Legacy.one_factorization_long_rainbow_cycle_statement": "B11 per-row snapshot: family cycle-edges (B11) froze only its own rainbow-cycle chain in X24's row, so this copy still calls the live x24_one_factorization, which after C2 reaches the canonical perfect_matching. Kept as B11's per-row row; the complete pre-C2, pre-B11 row is Cycle.migration.cycle_edges.X24Original.one_factorization_long_rainbow_cycle_statement over this family's frozen one-factorization chain (X24Legacy.one_factorization)."
+  },
   "cross_module_consumers": [
     {
       "path": "packing-theory/theories/conjectures/vocabulary_packing.v",

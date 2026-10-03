@@ -28,6 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 NAMESPACE_PACKAGES = {
     "GTBase": "base",
+    "ClassicalLemmas": "classical-lemmas",
     "Chromatic": "chromatic-theory",
     "Hamilton": "hamiltonicity-theory",
     "Hom": "homomorphism-theory",

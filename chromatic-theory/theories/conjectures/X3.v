@@ -7,7 +7,7 @@
     intentionally deferred. *)
 
 From Chromatic.conjectures Require Import U8.
-From GTBase Require Import colourings.
+From GTBase Require Import colourings graph_classes.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -82,10 +82,10 @@ Definition x3_two_forbidden_class (F1 F2 G : sgraph) : Prop :=
 Definition x3_iso (G H : sgraph) : Prop := inhabited (G ≃ H).
 
 Definition x3_iso_closed (F : sgraph -> Prop) : Prop :=
-  forall G H : sgraph, x3_iso G H -> F G -> F H.
+  GTBase.graph_classes.iso_closed F.
 
 Definition x3_hereditary_class (F : sgraph -> Prop) : Prop :=
-  x3_iso_closed F /\ forall (G : sgraph) (S : {set G}), F G -> F (induced S).
+  GTBase.graph_classes.hereditary_class F.
 
 Fixpoint x3_poly_eval (p : seq nat) (x : nat) : nat :=
   if p is a :: q then a + x * x3_poly_eval q x else 0.
