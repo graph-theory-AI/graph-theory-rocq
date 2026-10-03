@@ -56,7 +56,7 @@
           "Digraph.migration.genuine_cycle.xe2_directed_cycle_compat",
           "GTMisc.migration.genuine_cycle.xe1_rel_cycle_compat"
         ],
-        "note": "ucycle r c /\\ 2 < size c for an ARBITRARY relation r on a finite carrier (coprime adjacency in GTMisc XE1, an orientation in Digraph XE2): the body of seq_cycle r c, convertible; no symmetry or irreflexivity is assumed, so directed cycles stay directed and reversal needs a symmetric relation."
+        "note": "ucycle r c /\\ 2 < size c for an ARBITRARY relation r on a finite carrier (coprime adjacency in GTMisc XE1, an orientation in Digraph XE2): the body of seq_cycle r c, convertible; no symmetry or irreflexivity is assumed, so directed cycles stay directed and reversal stays a cycle of r under the hypothesis symmetric r, a sufficient condition."
       },
       "sgraph-adjacency-bool": {
         "members": [

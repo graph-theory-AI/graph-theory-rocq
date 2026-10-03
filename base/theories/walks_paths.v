@@ -1533,8 +1533,9 @@ End EdgesGrounding.
       [r x y], [r y z], [r z x] hold; repeated entries are excluded;
     - invariance under [rot] and [rotr]; every cyclically consecutive pair is related
       one way or the other;
-    - reversal gives a cycle of the CONVERSE relation, hence of [r] itself only when
-      [r] is symmetric (a directed 3-cycle is grounded not to reverse). *)
+    - reversal gives a cycle of the CONVERSE relation, hence a cycle of [r] itself
+      under the hypothesis [symmetric r], a sufficient condition (a directed 3-cycle
+      is grounded not to reverse). *)
 
 Section SeqCycle.
 Variables (T : eqType) (r : rel T).

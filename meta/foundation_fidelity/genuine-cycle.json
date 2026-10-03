@@ -7,7 +7,7 @@
    "overrides": {
     "seq_cycle": {
      "verdict": "FAITHFUL",
-     "note": "seq_cycle r c: c is a cycle of r (consecutive entries and the closing pair related, MathComp cycle) with pairwise distinct entries (uniq) and at least three entries; no symmetry or irreflexivity premise on r; empty, one-entry and digon sequences excluded, invariant under rotation, reversal only for symmetric r."
+     "note": "seq_cycle r c: c is a cycle of r (consecutive entries and the closing pair related, MathComp cycle) with pairwise distinct entries (uniq) and at least three entries; no symmetry or irreflexivity premise on r; empty, one-entry and digon sequences excluded, invariant under rotation, and under reversal given the hypothesis symmetric r (sufficient)."
     },
     "seq_cycleb": {
      "verdict": "FAITHFUL",
