@@ -60,19 +60,13 @@ Qed.
 (** [perfect_graph] is satisfiable: complete graphs are perfect (every induced subgraph
     is a clique, so χ = |·| = ω there). *)
 Lemma perfect_graph_complete (n : nat) : perfect_graph (complete n).
-Proof.
-move=> A.
-have cA : clique A by apply: sub_clique; [exact: subsetT|exact: Kn_clique].
-rewrite (chi_clique cA); apply/esym/eqP; rewrite eqn_leq; apply/andP; split.
-- by rewrite -(chi_clique cA) omega_leq_chi.
-- by apply: clique_bound; rewrite inE subxx /=; apply/cliqueP.
-Qed.
+Proof. exact: GTBase.perfect_graphs.is_perfect_graph_complete. Qed.
 
 (** Textbook identity: a perfect graph satisfies χ = ω on the whole vertex set
     (the [A = setT] instance, i.e. the surface "weak perfect" equality). *)
 Lemma perfect_graph_whole (G : sgraph) :
   perfect_graph G -> χ([set: G]) = ω([set: G]).
-Proof. by move=> H; exact: H. Qed.
+Proof. exact: GTBase.perfect_graphs.is_perfect_graph_whole. Qed.
 
 (** [complete_bipartite_sub] is satisfiable: the empty parts give a (vacuous) biclique. *)
 Lemma complete_bipartite_sub0 (G : sgraph) :

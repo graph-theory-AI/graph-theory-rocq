@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2542,
-    "repeated_body_shapes": 132,
+    "repeated_body_shapes": 133,
     "repeated_normalized_names": 205,
     "repeated_signature_shapes": 297,
     "statements_excluded": 700,
@@ -10,6 +10,10 @@
   },
   "groups": {
     "body_shape_hash": {
+      "01672b20b1cc8344c545724ad777a74cb13c3b24ee5676579f88085210187648": [
+        "Extremal.conjectures.D2ram.perfect_graph",
+        "GTMisc.conjectures.X144.x144_perfect_graph"
+      ],
       "06eb377de3ddaf72196e412ffb2ec5c4eedede7f73ee8d7e54e7bd127f8cc99e": [
         "Extremal.conjectures.D2str.uniform_hypergraph",
         "Hypergraph.conjectures.X104.x104_uniform",
@@ -30030,9 +30034,9 @@
       "signature_shape_hash": "5f5ec994252d3f37ce82eb9c11b81e69bb489401829af9fadffb0de012e8ebe3"
     },
     {
-      "body_hash": "f3c41442dfef1135f4bcd0e5f77fcdeb7dd576f50f9cbe2ab6d67b714e04154f",
-      "body_shape_hash": "f3c41442dfef1135f4bcd0e5f77fcdeb7dd576f50f9cbe2ab6d67b714e04154f",
-      "declaration_hash": "22cf5c92e66d6c8e0ea2bcfeeffd7809262425bf211a7f969ce8149e259ca8ef",
+      "body_hash": "01672b20b1cc8344c545724ad777a74cb13c3b24ee5676579f88085210187648",
+      "body_shape_hash": "01672b20b1cc8344c545724ad777a74cb13c3b24ee5676579f88085210187648",
+      "declaration_hash": "a943efd231c752eba7c58a2c52616935fcf4378a478d4f143ae12924361a57c9",
       "direct_consumers": [
         "Extremal.conjectures.D2ram.complete_bipartite_subgraphs_of_perfect_graphs_statement"
       ],
@@ -30056,7 +30060,7 @@
         "Extremal.conjectures.D2ram.complete_bipartite_subgraphs_of_perfect_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 168,
+      "line": 169,
       "local_dependencies": [],
       "name": "complete_bipartite_sub",
       "normalized_name": "complete_bipartite_sub",
@@ -30075,7 +30079,7 @@
         "Extremal.conjectures.D2ram.common_graph"
       ],
       "kind": "Definition",
-      "line": 198,
+      "line": 199,
       "local_dependencies": [],
       "name": "mono_copies",
       "normalized_name": "mono_copies",
@@ -30094,7 +30098,7 @@
         "Extremal.conjectures.D2ram.chromatic_number_of_common_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 230,
+      "line": 231,
       "local_dependencies": [
         "edge_count",
         "mono_copies"
@@ -30117,7 +30121,7 @@
         "Extremal.conjectures.D2ram.cayley_adj_sym"
       ],
       "kind": "Definition",
-      "line": 281,
+      "line": 282,
       "local_dependencies": [],
       "name": "cayley_adj",
       "normalized_name": "cayley_adj",
@@ -30136,7 +30140,7 @@
         "Extremal.conjectures.D2ram.cayley_graph"
       ],
       "kind": "Lemma",
-      "line": 285,
+      "line": 286,
       "local_dependencies": [
         "cayley_adj"
       ],
@@ -30157,7 +30161,7 @@
         "Extremal.conjectures.D2ram.cayley_graph"
       ],
       "kind": "Lemma",
-      "line": 288,
+      "line": 289,
       "local_dependencies": [
         "cayley_adj"
       ],
@@ -30178,7 +30182,7 @@
         "Extremal.conjectures.D2ram.ramsey_properties_of_cayley_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 291,
+      "line": 292,
       "local_dependencies": [
         "cayley_adj_irrefl",
         "cayley_adj_sym"
@@ -30200,7 +30204,7 @@
         "Extremal.conjectures.D2ram.the_erdos_hajnal_statement"
       ],
       "kind": "Definition",
-      "line": 319,
+      "line": 320,
       "local_dependencies": [],
       "name": "has_induced_copy",
       "normalized_name": "has_induced_copy",
@@ -39087,14 +39091,14 @@
       "signature_shape_hash": "a324b6eaf136150c7c210a6c823755ae5b2098462f3e5bb4418674af977ae1f2"
     },
     {
-      "body_hash": "bc39ebd235594e59ebbd787ab2e7379d433d4f6c12fd7ef462170d7abbbf4f66",
-      "body_shape_hash": "bc39ebd235594e59ebbd787ab2e7379d433d4f6c12fd7ef462170d7abbbf4f66",
-      "declaration_hash": "8daed9b401f790d67ad283ebb371a28ff8f0370c5249ad22c32d17374b02ab49",
+      "body_hash": "01672b20b1cc8344c545724ad777a74cb13c3b24ee5676579f88085210187648",
+      "body_shape_hash": "01672b20b1cc8344c545724ad777a74cb13c3b24ee5676579f88085210187648",
+      "declaration_hash": "73d8ae9160c3092d6122e2bf714885e4bb1b95a74fc9e9302bb329e6c7c517be",
       "direct_consumers": [
         "GTMisc.conjectures.X144.fox_pure_pair_perfect_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x144_perfect_graph",
       "normalized_name": "perfect_graph",
@@ -39113,7 +39117,7 @@
         "GTMisc.conjectures.X144.x144_pure_pair"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [],
       "name": "x144_complete_between",
       "normalized_name": "complete_between",
@@ -39132,7 +39136,7 @@
         "GTMisc.conjectures.X144.x144_pure_pair"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 17,
       "local_dependencies": [],
       "name": "x144_anticomplete_between",
       "normalized_name": "anticomplete_between",
@@ -39151,7 +39155,7 @@
         "GTMisc.conjectures.X144.fox_pure_pair_perfect_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 19,
+      "line": 20,
       "local_dependencies": [
         "x144_anticomplete_between",
         "x144_complete_between"
