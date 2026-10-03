@@ -18,7 +18,7 @@ Definition x84_support (G : sgraph) (F : {set {set G}}) : {set G} :=
   [set v : G | [exists e in F, v \in e]].
 
 Definition x84_degree_in (G : sgraph) (F : {set {set G}}) (v : G) : nat :=
-  #|[set e in F | v \in e]|.
+  incidence_degree F v.
 
 Definition x84_connected_support (G : sgraph) (F : {set {set G}}) : bool :=
   [forall x in x84_support F,
