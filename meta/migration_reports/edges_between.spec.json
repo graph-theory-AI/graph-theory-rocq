@@ -1,0 +1,271 @@
+{
+  "family": "edges-between",
+  "canonical_name": "GTBase.common.edges_between",
+  "canonical_short_name": "edges_between",
+  "relation": "nat equality: the X118/X120 edge counts and X120's non-edge count already had the bodies of edges_between / nonedges_between (conversion); X223 associates && the other way (eq_card and andbA). Ordered pairs over arbitrary, possibly overlapping sets: no disjointness is added. The cross-edge and complement readings are separate lemmas guarded by disjointness.",
+  "baseline_commit": "842ff4d456f543db4030b424a3c53d5c22fd70c9",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal"
+  },
+  "certificate_files": [
+    "base/theories/common.v",
+    "extremal-graph-theory/theories/migration/edges_between.v",
+    "extremal-graph-theory/theories/migration/induced_free.v"
+  ],
+  "extra_certificates": [
+    "GTBase.common.edges_between_sym",
+    "GTBase.common.nonedges_between_sym",
+    "GTBase.common.edges_nonedges_between",
+    "GTBase.common.edges_between_set0",
+    "GTBase.common.edges_between0",
+    "GTBase.common.nonedges_between_set0",
+    "GTBase.common.nonedges_between0",
+    "GTBase.common.edges_between_set1",
+    "GTBase.common.nonedges_between_set1",
+    "GTBase.common.nonedges_between_Kn",
+    "GTBase.common.edges_between_Kn",
+    "GTBase.common.edges_between_K2",
+    "GTBase.common.edges_between_cross",
+    "GTBase.common.nonedges_between_compl",
+    "GTBase.common.nonedges_between_compl_overlap"
+  ],
+  "summary": [
+    "Batch A, family A8 (ordered edge and non-edge counts between two vertex sets). Four helpers now unfold to `GTBase.common.edges_between A B` / `nonedges_between A B`, the numbers of ORDERED pairs of `A x B` that are edges / non-edges. X118's and X120's edge counts and X120's non-edge count convert; X223's edge count associates the Boolean conjunction the other way and equals the canonical by `eq_card` and `andbA`. The sets are arbitrary: overlap is allowed, a shared vertex is a diagonal non-edge pair, and an edge inside the overlap is counted in both orientations, so no disjointness is added. The X118/X120 rows keep their own `[disjoint A & B]` conjunct, and X223's `x223_ct_sparse` keeps arbitrary, possibly overlapping sets. Four statements are affected (X118, X120 and two X223 rows) through two X223 intermediate predicates (`x223_sparse_pair`, `x223_ct_sparse`).",
+    "",
+    "History: A1's X118/X120 row snapshots still call the live counts and are documented below. X118Original and X120Original are the 9e03072 rows over A1's frozen induced-free helpers and this family's frozen counts. `implications_X223.x223_edges_between_card_cross` keeps its type and is now `edges_between_cross`; `x118_edges_betweenE` and `x120_edges_betweenE` keep their types and proofs. No statement text, guard, doc block, manifest row, leg state or status changes."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X118.x118_edges_between",
+      "path": "extremal-graph-theory/theories/conjectures/X118.v",
+      "name": "x118_edges_between",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "Legacy.x118_edges_between",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edges_between.x118_edges_between_compat",
+      "live_unfolds_to": "edges_between A B"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X120.x120_edges_between",
+      "path": "extremal-graph-theory/theories/conjectures/X120.v",
+      "name": "x120_edges_between",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "Legacy.x120_edges_between",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edges_between.x120_edges_between_compat",
+      "live_unfolds_to": "edges_between A B"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X120.x120_nonedges_between",
+      "path": "extremal-graph-theory/theories/conjectures/X120.v",
+      "name": "x120_nonedges_between",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "Legacy.x120_nonedges_between",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edges_between.x120_nonedges_between_compat",
+      "live_unfolds_to": "nonedges_between A B"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X223.x223_edges_between",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "x223_edges_between",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "Legacy.x223_edges_between",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edges_between.x223_edges_between_compat",
+      "live_unfolds_to": "edges_between A B"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X118.conlon_fox_sudakov_dense_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X118.v",
+      "name": "conlon_fox_sudakov_dense_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "X118Legacy.conlon_fox_sudakov_dense_pair_statement",
+      "substitutions": {
+        "x118_edges_between": "Legacy.x118_edges_between"
+      },
+      "certificate": "Extremal.migration.edges_between.conlon_fox_sudakov_dense_pair_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X120.conlon_fox_sudakov_sparse_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X120.v",
+      "name": "conlon_fox_sudakov_sparse_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "X120Legacy.conlon_fox_sudakov_sparse_pair_statement",
+      "substitutions": {
+        "x120_edges_between": "Legacy.x120_edges_between",
+        "x120_nonedges_between": "Legacy.x120_nonedges_between"
+      },
+      "certificate": "Extremal.migration.edges_between.conlon_fox_sudakov_sparse_pair_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X223.x223_sparse_pair",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "x223_sparse_pair",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "X223Legacy.sparse_pair",
+      "substitutions": {
+        "x223_edges_between": "Legacy.x223_edges_between",
+        "x223_sparse_pair": "sparse_pair"
+      },
+      "certificate": "Extremal.migration.edges_between.sparse_pair_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X223.x223_ct_sparse",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "x223_ct_sparse",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "X223Legacy.ct_sparse",
+      "substitutions": {
+        "x223_edges_between": "Legacy.x223_edges_between",
+        "x223_ct_sparse": "ct_sparse"
+      },
+      "certificate": "Extremal.migration.edges_between.ct_sparse_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X223.h_free_eps_bounded_sparse_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "h_free_eps_bounded_sparse_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "X223Legacy.h_free_eps_bounded_sparse_pair_statement",
+      "substitutions": {
+        "x223_sparse_pair": "sparse_pair"
+      },
+      "certificate": "Extremal.migration.edges_between.h_free_eps_bounded_sparse_pair_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X223.induced_turan_even_cycle_sparse_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "induced_turan_even_cycle_sparse_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "X223Legacy.induced_turan_even_cycle_sparse_statement",
+      "substitutions": {
+        "x223_ct_sparse": "ct_sparse"
+      },
+      "certificate": "Extremal.migration.edges_between.induced_turan_even_cycle_sparse_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X118.conlon_fox_sudakov_dense_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X118.v",
+      "name": "conlon_fox_sudakov_dense_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "X118Original.conlon_fox_sudakov_dense_pair_statement",
+      "substitutions": {
+        "x118_induced_free": "A1.Legacy.x118_induced_free",
+        "x118_edges_between": "Legacy.x118_edges_between"
+      },
+      "certificate": "Extremal.migration.edges_between.conlon_fox_sudakov_dense_pair_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X120.conlon_fox_sudakov_sparse_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X120.v",
+      "name": "conlon_fox_sudakov_sparse_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edges_between.v",
+      "frozen": "X120Original.conlon_fox_sudakov_sparse_pair_statement",
+      "substitutions": {
+        "x120_induced_free": "A1.Legacy.x120_induced_free",
+        "x120_edges_between": "Legacy.x120_edges_between",
+        "x120_nonedges_between": "Legacy.x120_nonedges_between"
+      },
+      "certificate": "Extremal.migration.edges_between.conlon_fox_sudakov_sparse_pair_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X118.x118_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X118.v",
+      "name": "x118_induced_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x118_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x118_induced_free_compat",
+      "live_unfolds_to": "induced_free G H",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "note": "A1 (induced-free) frozen copy, reused unchanged by X118Original"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X120.x120_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X120.v",
+      "name": "x120_induced_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x120_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x120_induced_free_compat",
+      "live_unfolds_to": "induced_free G H",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "note": "A1 (induced-free) frozen copy, reused unchanged by X120Original"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/induced_free.v#X118Legacy.statement": "A1 snapshot: A1 froze the X118 row over its frozen induced-free helper but kept the live x118_edges_between, which after A8 unfolds to GTBase.common.edges_between (a conversion). Kept unchanged; the complete pre-A1, pre-A8 row is Extremal.migration.edges_between.X118Original.conlon_fox_sudakov_dense_pair_statement, certified by conlon_fox_sudakov_dense_pair_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/induced_free.v#X120Legacy.statement": "A1 snapshot: A1 froze the X120 row over its frozen induced-free helper but kept the live x120_edges_between and x120_nonedges_between, which after A8 unfold to GTBase.common.edges_between / nonedges_between (conversions). Kept unchanged; the complete pre-A1, pre-A8 row is Extremal.migration.edges_between.X120Original.conlon_fox_sudakov_sparse_pair_statement, certified by conlon_fox_sudakov_sparse_pair_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X223.v",
+      "name": "x223_edges_between",
+      "note": "Groundings x223_edges_between0, edges_between_K2_gt0, ct_sparse_compl_K2 and not_ct_sparse_K2: statements unchanged; their proofs now unfold through GTBase.common.edges_between."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X223.v",
+      "name": "x223_sparse_pair",
+      "note": "Groundings sparse_pair_set0 (non-vacuity) and not_sparse_pair_K2 (the guard has teeth): unchanged; the chain is certified by sparse_pair_compat."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X223.v",
+      "name": "x223_ct_sparse",
+      "note": "Groundings ct_sparse_compl_K2 (non-vacuity) and not_ct_sparse_K2 (the guard has teeth): statements unchanged; the chain is certified by ct_sparse_compat."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X223.v",
+      "name": "x118_edges_between",
+      "note": "x118_edges_betweenE: type and proof unchanged; both sides now unfold to GTBase.common.edges_between."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X223.v",
+      "name": "x120_edges_between",
+      "note": "x120_edges_betweenE: type and proof unchanged; both sides now unfold to GTBase.common.edges_between."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X223.v",
+      "name": "x223_edges_between",
+      "note": "Right-hand sides of x118/x120_edges_betweenE, and x223_edges_between_card_cross: types unchanged; the latter is now GTBase.common.edges_between_cross, with the same disjointness premise."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Extremal.conjectures.X223.x223_anticomplete",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "x223_anticomplete",
+      "note": "a Prop (disjoint sets with no edge between them), not a count"
+    },
+    {
+      "qualified": "Extremal.conjectures.X76.x76_cut_size",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "x76_cut_size",
+      "note": "edges of E(G) leaving one set (a cut), unordered; a different quantity"
+    },
+    {
+      "qualified": "Extremal.conjectures.X78.x78_cut_size",
+      "path": "extremal-graph-theory/theories/conjectures/X78.v",
+      "name": "x78_cut_size",
+      "note": "edges of E(G) leaving one set (a cut), unordered; a different quantity"
+    }
+  ],
+  "kernel_evidence": "Print All Dependencies of frozen/live statements and Print Assumptions of every certificate, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A8-edges_between/ (outside the repository)"
+}
