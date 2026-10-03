@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "family": "model-support",
+  "modules": {
+    "GTBase.model_support": {
+      "path": "base/theories/model_support.v",
+      "overrides": {
+        "model_support": {
+          "verdict": "FAITHFUL",
+          "note": "Exact raw support of supplied data, pattern before host: a branch image br h, or a member of the supplied list ep u v of a genuine pattern edge u -- v (either orientation). Non-edge lists are ignored, the empty pattern supports nothing, an edgeless pattern supports exactly the image of br. No model validity, injectivity, path, inducedness, reversal or disjointness condition."
+        }
+      },
+      "machine_evidence": [
+        "model_support_branch",
+        "model_support_edge",
+        "model_support_edge_rev",
+        "model_support_eq_on_edges",
+        "model_support_sub",
+        "model_support_nil",
+        "model_support_edgeless",
+        "model_support_card0",
+        "model_support_K0"
+      ]
+    }
+  }
+}

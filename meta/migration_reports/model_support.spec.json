@@ -1,0 +1,425 @@
+{
+  "family": "model-support",
+  "canonical_name": "GTBase.model_support.model_support",
+  "canonical_short_name": "model_support",
+  "relation": "Exact RAW support on SUPPLIED data, pattern before host: x is model-supported by br : H -> G and ep : H -> H -> seq G when x = br h for some pattern vertex h, or x occurs in ep u v for some genuine pattern edge u -- v. Both orientations contribute; lists on non-edges are ignored; the empty pattern supports nothing; an edgeless pattern supports exactly the image of br. No injectivity, path, simplicity, inducedness, reversal or disjointness condition. X98/X114 read it on full edge paths and Minor sdm_covers on subdivision interiors (discharged Section arguments K H m kept); the surrounding Records are not identified.",
+  "baseline_commit": "bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/model_support.v",
+    "extremal-graph-theory/theories/migration/model_support.v",
+    "graph-theory-misc/theories/migration/model_support.v",
+    "minor-theory/theories/migration/model_support.v"
+  ],
+  "extra_certificates": [
+    "GTBase.model_support.model_support_branch",
+    "GTBase.model_support.model_support_edge",
+    "GTBase.model_support.model_support_edge_rev",
+    "GTBase.model_support.model_support_eq_on_edges",
+    "GTBase.model_support.model_support_sub",
+    "GTBase.model_support.model_support_nil",
+    "GTBase.model_support.model_support_edgeless",
+    "GTBase.model_support.model_support_card0",
+    "GTBase.model_support.model_support_K0"
+  ],
+  "downstream_client": "base/theories/examples/model_support.v",
+  "summary": [
+    "C19 migrates exactly three raw-support sources onto GTBase.model_support.model_support: X98 and X114 model_vertex and the public Minor sdm_covers, whose discharged Section arguments K H m are kept. The canonical is a raw disjunction on supplied data, pattern before host: a branch image, or a member of a supplied list on a genuine pattern edge, in either orientation. It asks for no injectivity, path, inducedness, reversal or disjointness.",
+    "Sixteen current objects (3 sources, 9 chains including two seven-field Records and the X114 decision problem, 4 complete rows) carry whole iff or two-way transport certificates. Three complete Originals compose earlier frozen histories: X98 with B3 path helpers and A5 x59_subgraph_of, X114 with B3 path helpers and A14 x114_subcubic, X220 theta/prism with B4 even-wheel chain. Every older body stays verbatim; five older snapshots that keep this family live names are documented.",
+    "The public-only client covers branch images, genuine edge lists in both orientations, a constant branch map with a non-path list, the empty pattern, an edgeless pattern, ignored non-edge lists and empty lists. Interior-list subdivision models and full-path induced Records are not identified."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X98.x98_model_vertex",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_model_vertex",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "Legacy.x98_model_vertex",
+      "substitutions": {},
+      "certificate": "Extremal.migration.model_support.x98_model_vertex_compat",
+      "live_unfolds_to": "model_support br ep x"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X114.x114_model_vertex",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_model_vertex",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "Legacy.x114_model_vertex",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.model_support.x114_model_vertex_compat",
+      "live_unfolds_to": "model_support br ep x"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.foundations.containment.sdm_covers",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "sdm_covers",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "Legacy.sdm_covers",
+      "substitutions": {},
+      "certificate": "Minor.migration.model_support.sdm_covers_compat",
+      "live_unfolds_to": "model_support (sdm_branch m) (sdm_path m) x"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision_model",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision_model",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Legacy.x98_induced_subdivision_model",
+      "substitutions": {
+        "x98_model_vertex": "Legacy.x98_model_vertex"
+      },
+      "certificate": "Extremal.migration.model_support.x98_induced_subdivision_model_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Legacy.x98_induced_subdivision",
+      "substitutions": {
+        "x98_induced_subdivision_model": "X98Legacy.x98_induced_subdivision_model"
+      },
+      "certificate": "Extremal.migration.model_support.x98_induced_subdivision_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision_model",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision_model",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Legacy.x114_induced_subdivision_model",
+      "substitutions": {
+        "x114_model_vertex": "Legacy.x114_model_vertex"
+      },
+      "certificate": "GTMisc.migration.model_support.x114_induced_subdivision_model_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Legacy.x114_induced_subdivision",
+      "substitutions": {
+        "x114_induced_subdivision_model": "X114Legacy.x114_induced_subdivision_model"
+      },
+      "certificate": "GTMisc.migration.model_support.x114_induced_subdivision_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_hisc_problem",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_hisc_problem",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Legacy.x114_hisc_problem",
+      "substitutions": {
+        "x114_induced_subdivision": "X114Legacy.x114_induced_subdivision"
+      },
+      "certificate": "GTMisc.migration.model_support.x114_hisc_problem_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.foundations.containment.subdiv_rep",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "subdiv_rep",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "Legacy.subdiv_rep",
+      "substitutions": {
+        "sdm_covers": "(@Legacy.sdm_covers K H m)",
+        "sdm_realises": "(@sdm_realises K H m)"
+      },
+      "certificate": "Minor.migration.model_support.subdiv_rep_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.foundations.containment.is_subdivision_of",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "is_subdivision_of",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "Legacy.is_subdivision_of",
+      "substitutions": {
+        "subdiv_rep": "Legacy.subdiv_rep"
+      },
+      "certificate": "Minor.migration.model_support.is_subdivision_of_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X220.x220_theta",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_theta",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "X220Legacy.x220_theta",
+      "substitutions": {
+        "is_subdivision_of": "Legacy.is_subdivision_of"
+      },
+      "certificate": "Minor.migration.model_support.x220_theta_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X220.x220_prism",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_prism",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "X220Legacy.x220_prism",
+      "substitutions": {
+        "subdiv_rep": "Legacy.subdiv_rep"
+      },
+      "certificate": "Minor.migration.model_support.x220_prism_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "polynomial_kuhn_osthus_induced_subdivision_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "substitutions": {
+        "x98_induced_subdivision": "X98Legacy.x98_induced_subdivision"
+      },
+      "certificate": "Extremal.migration.model_support.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "subcubic_induced_subdivision_np_complete_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Legacy.subcubic_induced_subdivision_np_complete_statement",
+      "substitutions": {
+        "x114_hisc_problem": "X114Legacy.x114_hisc_problem"
+      },
+      "certificate": "GTMisc.migration.model_support.subcubic_induced_subdivision_np_complete_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.four_family_free_logarithmic_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "four_family_free_logarithmic_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "X220Legacy.four_family_free_logarithmic_treewidth_statement",
+      "substitutions": {
+        "is_subdivision_of": "Legacy.is_subdivision_of"
+      },
+      "certificate": "Minor.migration.model_support.four_family_free_logarithmic_treewidth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x220_theta": "X220Legacy.x220_theta",
+        "x220_prism": "X220Legacy.x220_prism"
+      },
+      "certificate": "Minor.migration.model_support.theta_prism_even_wheel_free_bounded_treewidth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision_model",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision_model",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Original.x98_induced_subdivision_model",
+      "substitutions": {
+        "x98_induced_path_between": "B3.X98Legacy.induced_path_between",
+        "x98_model_vertex": "Legacy.x98_model_vertex",
+        "x98_consecutive_in_path": "B3.Legacy.x98_consecutive_in_path"
+      },
+      "certificate": "Extremal.migration.model_support.x98_induced_subdivision_model_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Original.x98_induced_subdivision",
+      "substitutions": {
+        "x98_induced_subdivision_model": "X98Original.x98_induced_subdivision_model"
+      },
+      "certificate": "Extremal.migration.model_support.x98_induced_subdivision_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "polynomial_kuhn_osthus_induced_subdivision_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Original.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "substitutions": {
+        "x59_subgraph_of": "A5.Legacy.x59_subgraph_of",
+        "x98_induced_subdivision": "X98Original.x98_induced_subdivision"
+      },
+      "certificate": "Extremal.migration.model_support.polynomial_kuhn_osthus_induced_subdivision_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision_model",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision_model",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Original.x114_induced_subdivision_model",
+      "substitutions": {
+        "x114_induced_path_between": "B3.X114Legacy.induced_path_between",
+        "x114_model_vertex": "Legacy.x114_model_vertex",
+        "x114_consecutive_in_path": "B3.Legacy.x114_consecutive_in_path"
+      },
+      "certificate": "GTMisc.migration.model_support.x114_induced_subdivision_model_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Original.x114_induced_subdivision",
+      "substitutions": {
+        "x114_induced_subdivision_model": "X114Original.x114_induced_subdivision_model"
+      },
+      "certificate": "GTMisc.migration.model_support.x114_induced_subdivision_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X114.x114_hisc_problem",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_hisc_problem",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Original.x114_hisc_problem",
+      "substitutions": {
+        "x114_induced_subdivision": "X114Original.x114_induced_subdivision"
+      },
+      "certificate": "GTMisc.migration.model_support.x114_hisc_problem_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "subcubic_induced_subdivision_np_complete_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Original.subcubic_induced_subdivision_np_complete_statement",
+      "substitutions": {
+        "x114_subcubic": "A14.Legacy.x114_subcubic",
+        "x114_hisc_problem": "X114Original.x114_hisc_problem"
+      },
+      "certificate": "GTMisc.migration.model_support.subcubic_induced_subdivision_np_complete_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "X220Original.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x220_theta": "X220Legacy.x220_theta",
+        "x220_prism": "X220Legacy.x220_prism",
+        "x220_even_wheel_free": "B4.X220Legacy.even_wheel_free"
+      },
+      "certificate": "Minor.migration.model_support.theta_prism_even_wheel_free_bounded_treewidth_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/consecutive_in_path.v#X98Legacy.induced_subdivision_model": "B3 snapshot: B3 froze the X98 Record over its own frozen path helpers but kept the live x98_model_vertex (global_induced field), which now unfolds to GTBase.model_support.model_support with the same disjunction. Kept unchanged; the complete Record is Extremal.migration.model_support.X98Original.x98_induced_subdivision_model, certified by x98_induced_subdivision_model_original_compat.",
+    "graph-theory-misc/theories/migration/consecutive_in_path.v#X114Legacy.induced_subdivision_model": "B3 snapshot: B3 froze the X114 Record over its own frozen path helpers but kept the live x114_model_vertex (global_induced field), which now unfolds to GTBase.model_support.model_support with the same disjunction. Kept unchanged; the complete Record is GTMisc.migration.model_support.X114Original.x114_induced_subdivision_model, certified by x114_induced_subdivision_model_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement": "A5 snapshot: A5 froze this row over its own frozen x59_subgraph_of but kept the live x98_induced_subdivision of this family. Kept unchanged; the complete B3+A5+C19 row is Extremal.migration.model_support.X98Original.polynomial_kuhn_osthus_induced_subdivision_statement, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.",
+    "graph-theory-misc/theories/migration/subcubic.v#X114Legacy.subcubic_induced_subdivision_np_complete_statement": "A14 snapshot: A14 froze this row over its own frozen x114_subcubic but kept the live x114_hisc_problem of this family. Kept unchanged; the complete B3+A14+C19 row is GTMisc.migration.model_support.X114Original.subcubic_induced_subdivision_np_complete_statement, certified by subcubic_induced_subdivision_np_complete_statement_original_compat.",
+    "minor-theory/theories/migration/consecutive_in_cycle.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement": "B4 snapshot: B4 froze this row over its own frozen even-wheel chain but kept the live x220_theta and x220_prism of this family. Kept unchanged; the complete B4+C19 row is Minor.migration.model_support.X220Original.theta_prism_even_wheel_free_bounded_treewidth_statement, certified by theta_prism_even_wheel_free_bounded_treewidth_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "is_subdivision_of",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "subdiv_rep",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "four_family_free_logarithmic_treewidth_statement",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "is_subdivision_of",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_prism",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_theta",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "four_family_free_logarithmic_treewidth_statement",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "is_subdivision_of",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "x220_prism",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "x220_theta",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/foundations/hole_containments.v",
+      "name": "is_subdivision_of",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/foundations/hole_containments.v",
+      "name": "subdiv_rep",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    },
+    {
+      "path": "minor-theory/theories/foundations/hole_containments.v",
+      "name": "x220_prism",
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+    }
+  ],
+  "distinct_variants": []
+}

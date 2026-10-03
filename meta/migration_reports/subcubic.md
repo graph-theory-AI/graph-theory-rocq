@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py subcubic --details /tmp/migrati
 
 - Canonical: `GTBase.base.subcubic`.
 - Baseline: `ba8b7be309af5926081ba760ba0d5ab8e94215f7`.
-- Scope: 2 helpers, 3 statements, 24 frozen objects, 38 recorded references.
-- Source checks: 161/161 pass; consistent.
+- Scope: 2 helpers, 3 statements, 24 frozen objects, 41 recorded references.
+- Source checks: 162/162 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -21,4 +21,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `GTBase.base.mcubic`, `GTBase.base.loopless_cubic`, `GTBase.base.regular`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/matching.v#X14Legacy.subcubic_matching_lower_bound_statement`, `graph-theory-misc/theories/migration/consecutive_in_path.v#X114Legacy.statement`, `graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.line_graph_of_subdivided_multiclaw`, `graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.statement`, `graph-theory-misc/theories/migration/induced_free.v#X102Legacy.statement`, `graph-theory-misc/theories/migration/induced_free.v#X102Original.statement`, `graph-theory-misc/theories/migration/bag_decompositions.v#Legacy.bounded_tree_independence_forbidden_family_statement`, `graph-theory-misc/theories/migration/bag_decompositions.v#X102Original.bounded_tree_independence_forbidden_family_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/matching.v#X14Legacy.subcubic_matching_lower_bound_statement`, `graph-theory-misc/theories/migration/consecutive_in_path.v#X114Legacy.statement`, `graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.line_graph_of_subdivided_multiclaw`, `graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.statement`, `graph-theory-misc/theories/migration/induced_free.v#X102Legacy.statement`, `graph-theory-misc/theories/migration/induced_free.v#X102Original.statement`, `graph-theory-misc/theories/migration/bag_decompositions.v#Legacy.bounded_tree_independence_forbidden_family_statement`, `graph-theory-misc/theories/migration/bag_decompositions.v#X102Original.bounded_tree_independence_forbidden_family_statement`, `graph-theory-misc/theories/migration/model_support.v#X114Legacy.subcubic_induced_subdivision_np_complete_statement`.
