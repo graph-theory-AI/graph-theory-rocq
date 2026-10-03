@@ -55,6 +55,7 @@
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import digraph sgraph minor.
 From GTBase Require Import base.
+From GTBase Require Import clique_counts.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -343,7 +344,7 @@ Definition sidorenkos_statement : Prop :=
 
 (** [@MOVE-to-base] *)
 Definition clique_count (G : sgraph) : nat :=
-  #|[set S : {set G} | cliqueb S && (S != set0)]|.
+  nonempty_clique_count G.
 
 Definition Kt_minor_free (G : sgraph) (t : nat) : Prop := ~ minor G 'K_t.
 

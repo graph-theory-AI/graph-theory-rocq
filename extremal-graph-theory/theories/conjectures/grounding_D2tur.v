@@ -240,6 +240,7 @@ Qed.
 (** ** [clique_count] — witness: a graph with a vertex has at least one (singleton) clique. *)
 Lemma clique_count_gt0 (G : sgraph) : 0 < #|G| -> 0 < clique_count G.
 Proof.
+rewrite /clique_count GTBase.clique_counts.nonempty_clique_countE.
 move=> /card_gt0P[x _]; apply/card_gt0P; exists [set x]; rewrite inE.
 apply/andP; split; first by apply/cliqueP; exact: clique1.
 by rewrite -cards_eq0 cards1.
@@ -248,6 +249,7 @@ Qed.
 (** Boundary identity: the vertexless graph has no nonempty clique. *)
 Lemma clique_count_K0 : clique_count 'K_0 = 0.
 Proof.
+rewrite /clique_count GTBase.clique_counts.nonempty_clique_countE.
 apply: eq_card0 => S; rewrite !inE.
 have -> : S = set0 by apply/setP => -[x]; case: x.
 by rewrite eqxx andbF.

@@ -335,6 +335,10 @@
         "Minor.conjectures.X190.x190_weight",
         "Minor.conjectures.X199.x199_weight"
       ],
+      "7a6fae670678525169e2cf7888eed654693a9e3e363070c0a5823c13eeae92d1": [
+        "Extremal.conjectures.D2tur.clique_count",
+        "Minor.conjectures.X175.x175_clique_count"
+      ],
       "7c48724ea1fbb3254143156751553c51379319c5ffebed34d87ad3a2868fb21f": [
         "Extremal.conjectures.X118.x118_edges_between",
         "Extremal.conjectures.X120.x120_edges_between",
@@ -394,10 +398,6 @@
       "8eba68ff7387cdf8968482f50a39716b38b8f019d13d52b616f211ee2eaf0c67": [
         "GTMisc.conjectures.X38.x38_min_degree_at_least",
         "Hom.conjectures.X135.x135_min_degree_at_least"
-      ],
-      "907c59ff9bd62baf0b89388432b41090ff7544edc7c6f8fbf23b482603fc1692": [
-        "Extremal.conjectures.D2tur.clique_count",
-        "Minor.conjectures.X175.x175_clique_count"
       ],
       "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c": [
         "Chromatic.conjectures.X3.x3_complement_graph",
@@ -30830,7 +30830,7 @@
         "Extremal.conjectures.D2tur.sidorenkos_statement"
       ],
       "kind": "Definition",
-      "line": 62,
+      "line": 63,
       "local_dependencies": [],
       "name": "oedges",
       "normalized_name": "oedges",
@@ -30850,7 +30850,7 @@
         "Extremal.conjectures.D2tur.sidorenkos_statement"
       ],
       "kind": "Definition",
-      "line": 74,
+      "line": 75,
       "local_dependencies": [],
       "name": "edge_count",
       "normalized_name": "edge_count",
@@ -30869,7 +30869,7 @@
         "Extremal.conjectures.D2tur.greedy_decomp"
       ],
       "kind": "Definition",
-      "line": 110,
+      "line": 111,
       "local_dependencies": [],
       "name": "all_pairs",
       "normalized_name": "all_pairs",
@@ -30888,7 +30888,7 @@
         "Extremal.conjectures.D2tur.shortest_tree_on"
       ],
       "kind": "Definition",
-      "line": 112,
+      "line": 113,
       "local_dependencies": [],
       "name": "tree_on",
       "normalized_name": "tree_on",
@@ -30907,7 +30907,7 @@
         "Extremal.conjectures.D2tur.shortest_tree_on"
       ],
       "kind": "Definition",
-      "line": 119,
+      "line": 120,
       "local_dependencies": [],
       "name": "tree_weight",
       "normalized_name": "tree_weight",
@@ -30926,7 +30926,7 @@
         "Extremal.conjectures.D2tur.greedy_decomp"
       ],
       "kind": "Definition",
-      "line": 122,
+      "line": 123,
       "local_dependencies": [
         "tree_on",
         "tree_weight"
@@ -30948,7 +30948,7 @@
         "Extremal.conjectures.D2tur.what_is_the_smallest_number_of_disjoint_spanning_tre_statement"
       ],
       "kind": "Definition",
-      "line": 125,
+      "line": 126,
       "local_dependencies": [
         "all_pairs",
         "shortest_tree_on"
@@ -30970,7 +30970,7 @@
         "Extremal.conjectures.D2tur.what_is_the_smallest_number_of_disjoint_spanning_tre_statement"
       ],
       "kind": "Definition",
-      "line": 129,
+      "line": 130,
       "local_dependencies": [],
       "name": "ham_path_edges",
       "normalized_name": "ham_path_edges",
@@ -30989,7 +30989,7 @@
         "Extremal.conjectures.D2tur.is_turan_number"
       ],
       "kind": "Definition",
-      "line": 168,
+      "line": 169,
       "local_dependencies": [],
       "name": "family_free",
       "normalized_name": "family_free",
@@ -31008,7 +31008,7 @@
         "Extremal.conjectures.D2tur.turan_number_of_a_finite_family_statement"
       ],
       "kind": "Definition",
-      "line": 187,
+      "line": 188,
       "local_dependencies": [
         "edge_count",
         "family_free"
@@ -31030,7 +31030,7 @@
         "Extremal.conjectures.D2tur.good_edge_labeling"
       ],
       "kind": "Definition",
-      "line": 218,
+      "line": 219,
       "local_dependencies": [],
       "name": "incr_path",
       "normalized_name": "incr_path",
@@ -31049,7 +31049,7 @@
         "Extremal.conjectures.D2tur.gel_critical"
       ],
       "kind": "Definition",
-      "line": 241,
+      "line": 242,
       "local_dependencies": [
         "incr_path"
       ],
@@ -31070,7 +31070,7 @@
         "Extremal.conjectures.D2tur.gel_critical"
       ],
       "kind": "Definition",
-      "line": 250,
+      "line": 251,
       "local_dependencies": [],
       "name": "proper_subgraph",
       "normalized_name": "proper_subgraph",
@@ -31089,7 +31089,7 @@
         "Extremal.conjectures.D2tur.good_edge_labelings_statement"
       ],
       "kind": "Definition",
-      "line": 252,
+      "line": 253,
       "local_dependencies": [
         "good_edge_labeling",
         "proper_subgraph"
@@ -31111,7 +31111,7 @@
         "Extremal.conjectures.D2tur.sidorenkos_statement"
       ],
       "kind": "Definition",
-      "line": 283,
+      "line": 284,
       "local_dependencies": [],
       "name": "hom_count",
       "normalized_name": "hom_count",
@@ -31123,14 +31123,14 @@
       "signature_shape_hash": "1887d5261105eb8798693829b8f6d58ab5cc98bfabcd99f05b2f242a459b665a"
     },
     {
-      "body_hash": "907c59ff9bd62baf0b89388432b41090ff7544edc7c6f8fbf23b482603fc1692",
-      "body_shape_hash": "907c59ff9bd62baf0b89388432b41090ff7544edc7c6f8fbf23b482603fc1692",
-      "declaration_hash": "dfef123004a55e9960bf3576d4d26da68551806b41b849e77027c581124cba6d",
+      "body_hash": "7a6fae670678525169e2cf7888eed654693a9e3e363070c0a5823c13eeae92d1",
+      "body_shape_hash": "7a6fae670678525169e2cf7888eed654693a9e3e363070c0a5823c13eeae92d1",
+      "declaration_hash": "b53f8743a140e7ff7870eb74b8110298c8abb43125f04e10242f96844d99ac21",
       "direct_consumers": [
         "Extremal.conjectures.D2tur.number_of_cliques_in_minor_closed_classes_statement"
       ],
       "kind": "Definition",
-      "line": 329,
+      "line": 330,
       "local_dependencies": [],
       "name": "clique_count",
       "normalized_name": "clique_count",
@@ -31149,7 +31149,7 @@
         "Extremal.conjectures.D2tur.number_of_cliques_in_minor_closed_classes_statement"
       ],
       "kind": "Definition",
-      "line": 347,
+      "line": 348,
       "local_dependencies": [],
       "name": "Kt_minor_free",
       "normalized_name": "Kt_minor_free",
@@ -31168,7 +31168,7 @@
         "Extremal.conjectures.D2tur.is_alpha"
       ],
       "kind": "Definition",
-      "line": 365,
+      "line": 366,
       "local_dependencies": [],
       "name": "spanning_tree_count",
       "normalized_name": "spanning_tree_count",
@@ -31187,7 +31187,7 @@
         "Extremal.conjectures.D2tur.minimal_graphs_with_a_prescribed_number_of_spanning_statement"
       ],
       "kind": "Definition",
-      "line": 389,
+      "line": 390,
       "local_dependencies": [
         "spanning_tree_count"
       ],
@@ -32777,7 +32777,7 @@
         "Extremal.conjectures.X4.x4_turan_number"
       ],
       "kind": "Definition",
-      "line": 15,
+      "line": 16,
       "local_dependencies": [],
       "name": "x4_edge_count",
       "normalized_name": "edge_count",
@@ -32796,7 +32796,7 @@
         "Extremal.conjectures.X4.x4_complete_arrow"
       ],
       "kind": "Definition",
-      "line": 20,
+      "line": 21,
       "local_dependencies": [],
       "name": "x4_mono_complete_copy",
       "normalized_name": "mono_complete_copy",
@@ -32816,7 +32816,7 @@
         "Extremal.conjectures.X4.three_colour_cycle_ramsey_bound_statement"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 26,
       "local_dependencies": [
         "x4_mono_complete_copy"
       ],
@@ -32837,7 +32837,7 @@
         "Extremal.conjectures.X4.x4_two_colour_arrow"
       ],
       "kind": "Definition",
-      "line": 30,
+      "line": 31,
       "local_dependencies": [],
       "name": "x4_red_blue_copy",
       "normalized_name": "red_blue_copy",
@@ -32856,7 +32856,7 @@
         "Extremal.conjectures.X4.x4_ramsey_two"
       ],
       "kind": "Definition",
-      "line": 37,
+      "line": 38,
       "local_dependencies": [
         "x4_red_blue_copy"
       ],
@@ -32877,7 +32877,7 @@
         "Extremal.conjectures.X4.cycle_clique_ramsey_formula_statement"
       ],
       "kind": "Definition",
-      "line": 40,
+      "line": 41,
       "local_dependencies": [
         "x4_two_colour_arrow"
       ],
@@ -32898,7 +32898,7 @@
         "Extremal.conjectures.X4.x4_graph_arrow"
       ],
       "kind": "Definition",
-      "line": 44,
+      "line": 45,
       "local_dependencies": [],
       "name": "x4_mono_subgraph_copy",
       "normalized_name": "mono_subgraph_copy",
@@ -32918,7 +32918,7 @@
         "Extremal.conjectures.X4.folkman_k4_free_triangle_arrow_statement"
       ],
       "kind": "Definition",
-      "line": 50,
+      "line": 51,
       "local_dependencies": [
         "x4_mono_subgraph_copy"
       ],
@@ -32939,7 +32939,7 @@
         "Extremal.conjectures.X4.missing_colour_complete_edge_colouring_statement"
       ],
       "kind": "Definition",
-      "line": 55,
+      "line": 56,
       "local_dependencies": [],
       "name": "x4_palette_on",
       "normalized_name": "palette_on",
@@ -32958,7 +32958,7 @@
         "Extremal.conjectures.X4.x4_edges_not_in_mono_triangle"
       ],
       "kind": "Definition",
-      "line": 60,
+      "line": 61,
       "local_dependencies": [],
       "name": "x4_edge_in_mono_triangle",
       "normalized_name": "edge_in_mono_triangle",
@@ -32977,7 +32977,7 @@
         "Extremal.conjectures.X4.monochromatic_triangle_edge_bound_statement"
       ],
       "kind": "Definition",
-      "line": 65,
+      "line": 66,
       "local_dependencies": [
         "x4_edge_in_mono_triangle"
       ],
@@ -32999,7 +32999,7 @@
         "Extremal.conjectures.X4.x4_book_rel_sym"
       ],
       "kind": "Definition",
-      "line": 72,
+      "line": 73,
       "local_dependencies": [],
       "name": "x4_book_rel",
       "normalized_name": "book_rel",
@@ -33018,7 +33018,7 @@
         "Extremal.conjectures.X4.x4_book_graph"
       ],
       "kind": "Lemma",
-      "line": 81,
+      "line": 82,
       "local_dependencies": [
         "x4_book_rel"
       ],
@@ -33039,7 +33039,7 @@
         "Extremal.conjectures.X4.x4_book_graph"
       ],
       "kind": "Lemma",
-      "line": 84,
+      "line": 85,
       "local_dependencies": [
         "x4_book_rel"
       ],
@@ -33060,7 +33060,7 @@
         "Extremal.conjectures.X4.thomason_book_ramsey_bound_statement"
       ],
       "kind": "Definition",
-      "line": 87,
+      "line": 88,
       "local_dependencies": [
         "x4_book_rel_irrefl",
         "x4_book_rel_sym"
@@ -33084,7 +33084,7 @@
         "Extremal.conjectures.X4.x4_turan_number"
       ],
       "kind": "Definition",
-      "line": 92,
+      "line": 93,
       "local_dependencies": [],
       "name": "x4_K_free",
       "normalized_name": "K_free",
@@ -33103,7 +33103,7 @@
         "Extremal.conjectures.X4.turan_degree_sum_clique_statement"
       ],
       "kind": "Definition",
-      "line": 94,
+      "line": 95,
       "local_dependencies": [
         "x4_K_free",
         "x4_edge_count"
@@ -33125,7 +33125,7 @@
         "Extremal.conjectures.X4.turan_degree_sum_clique_statement"
       ],
       "kind": "Definition",
-      "line": 102,
+      "line": 103,
       "local_dependencies": [],
       "name": "x4_degree_sum",
       "normalized_name": "degree_sum",
@@ -33142,11 +33142,10 @@
       "declaration_hash": "f73a8c123b929c487717c0af79ff12dc295c634d47f4acd440a730e7bdd11203",
       "direct_consumers": [
         "Extremal.conjectures.X4.x4_at_most_one_triangle_edge",
-        "Extremal.conjectures.X4.x4_hits_every_triangle",
-        "Extremal.conjectures.X4.x4_triangle_count"
+        "Extremal.conjectures.X4.x4_hits_every_triangle"
       ],
       "kind": "Definition",
-      "line": 105,
+      "line": 106,
       "local_dependencies": [],
       "name": "x4_triangle_set",
       "normalized_name": "triangle_set",
@@ -33158,17 +33157,15 @@
       "signature_shape_hash": "7c0f6511dd5da5468ee28cc40b788545c345a9916f4e4c8a77ec48049d8502e1"
     },
     {
-      "body_hash": "b6e967e3910cd89cea6fbc19ccf58015a6e271f6484972a5c4f7f61dc887e5ab",
-      "body_shape_hash": "998b349431d03afb3fc2424fc0fff0a42076e4265c0c3069e440ee247d7eac3d",
-      "declaration_hash": "6751a542e59a6b9edcf6185dc9cb8e62cc8e0fb61230202bb01df02277502d62",
+      "body_hash": "b24a0b1d3b30cdbf9c2b3358f96d442dd6d2c60335fd3bb58e1e7869c57b3524",
+      "body_shape_hash": "b24a0b1d3b30cdbf9c2b3358f96d442dd6d2c60335fd3bb58e1e7869c57b3524",
+      "declaration_hash": "ef3b1eb9b97a0c42f0a35c7eb6e9288a3087d9344889e393ed440465a2b92a5d",
       "direct_consumers": [
         "Extremal.conjectures.X4.triangle_supersaturation_statement"
       ],
       "kind": "Definition",
-      "line": 108,
-      "local_dependencies": [
-        "x4_triangle_set"
-      ],
+      "line": 109,
+      "local_dependencies": [],
       "name": "x4_triangle_count",
       "normalized_name": "triangle_count",
       "package": "extremal-graph-theory",
@@ -33186,7 +33183,7 @@
         "Extremal.conjectures.X4.x4_edge_in_c5"
       ],
       "kind": "Definition",
-      "line": 111,
+      "line": 112,
       "local_dependencies": [],
       "name": "x4_consecutive_in_cycle",
       "normalized_name": "consecutive_in_cycle",
@@ -33205,7 +33202,7 @@
         "Extremal.conjectures.X4.x4_c5_edge_count"
       ],
       "kind": "Definition",
-      "line": 114,
+      "line": 115,
       "local_dependencies": [
         "x4_consecutive_in_cycle"
       ],
@@ -33226,7 +33223,7 @@
         "Extremal.conjectures.X4.c5_edge_count_above_turan_statement"
       ],
       "kind": "Definition",
-      "line": 119,
+      "line": 120,
       "local_dependencies": [
         "x4_edge_in_c5"
       ],
@@ -33248,7 +33245,7 @@
         "Extremal.conjectures.X4.x4_hits_every_triangle"
       ],
       "kind": "Definition",
-      "line": 124,
+      "line": 125,
       "local_dependencies": [],
       "name": "x4_edge_set",
       "normalized_name": "edge_set",
@@ -33267,7 +33264,7 @@
         "Extremal.conjectures.X4.x4_alpha1"
       ],
       "kind": "Definition",
-      "line": 127,
+      "line": 128,
       "local_dependencies": [
         "x4_edge_set",
         "x4_triangle_set"
@@ -33289,7 +33286,7 @@
         "Extremal.conjectures.X4.x4_tau1"
       ],
       "kind": "Definition",
-      "line": 132,
+      "line": 133,
       "local_dependencies": [
         "x4_edge_set",
         "x4_triangle_set"
@@ -33311,7 +33308,7 @@
         "Extremal.conjectures.X4.triangle_alpha_tau_bound_statement"
       ],
       "kind": "Definition",
-      "line": 137,
+      "line": 138,
       "local_dependencies": [
         "x4_at_most_one_triangle_edge"
       ],
@@ -33332,7 +33329,7 @@
         "Extremal.conjectures.X4.triangle_alpha_tau_bound_statement"
       ],
       "kind": "Definition",
-      "line": 143,
+      "line": 144,
       "local_dependencies": [
         "x4_hits_every_triangle"
       ],
@@ -34468,12 +34465,12 @@
       "signature_shape_hash": "bbc03463809315839650ce731b292b1be8c254849cfbf2ee3da7e22f1bbec0c7"
     },
     {
-      "body_hash": "9fdbbf036cbafa8d947a4acde444c2bafb0212d7e4f224852c6c5c410bc642cc",
-      "body_shape_hash": "9fdbbf036cbafa8d947a4acde444c2bafb0212d7e4f224852c6c5c410bc642cc",
-      "declaration_hash": "a41cb620455c82d5691d18e85a611312ffa327b40eee762658607cfbbf2932ab",
+      "body_hash": "e62a245d52a12bdddac5a34f8775eb0cd36a9a31371445fcd021b0c2c76ff139",
+      "body_shape_hash": "e62a245d52a12bdddac5a34f8775eb0cd36a9a31371445fcd021b0c2c76ff139",
+      "declaration_hash": "bdf016dc7ff5001f744527602ff42784456dcc72c4c49045eb5eaafeb4ad2a05",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x88_clique_count",
       "normalized_name": "clique_count",
@@ -34492,7 +34489,7 @@
         "Extremal.conjectures.X88.x88_pentagonal_part_adj"
       ],
       "kind": "Definition",
-      "line": 14,
+      "line": 15,
       "local_dependencies": [],
       "name": "x88_c5_part_adj",
       "normalized_name": "c5_part_adj",
@@ -34511,7 +34508,7 @@
         "Extremal.conjectures.X88.x88_pentagonal_turan_graph"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 18,
       "local_dependencies": [
         "x88_c5_part_adj"
       ],
@@ -34532,7 +34529,7 @@
         "Extremal.conjectures.X88.pentagonal_turan_stability_dominates_clique_count_statement"
       ],
       "kind": "Definition",
-      "line": 20,
+      "line": 21,
       "local_dependencies": [
         "x88_pentagonal_part_adj"
       ],
@@ -34553,7 +34550,7 @@
         "Extremal.conjectures.X88.x88_edit_to_r_partite"
       ],
       "kind": "Definition",
-      "line": 28,
+      "line": 29,
       "local_dependencies": [],
       "name": "x88_within_part_edges",
       "normalized_name": "within_part_edges",
@@ -34572,7 +34569,7 @@
         "Extremal.conjectures.X88.pentagonal_turan_stability_dominates_clique_count_statement"
       ],
       "kind": "Definition",
-      "line": 38,
+      "line": 39,
       "local_dependencies": [
         "x88_within_part_edges"
       ],
@@ -49285,14 +49282,14 @@
       "signature_shape_hash": "40efc9d7cddcbcfa85722cdb7edab7f4c43621d3c31d00f660861b83d6ee4935"
     },
     {
-      "body_hash": "e368dc89e521a132c9f092f298f055fcf5a7d9aca241d2bbf6fec670adc6bb7a",
-      "body_shape_hash": "e368dc89e521a132c9f092f298f055fcf5a7d9aca241d2bbf6fec670adc6bb7a",
-      "declaration_hash": "16abc48ec94f2c2dba60402d3dd785c78287cdc31edc42de72c674b4abd3ef6d",
+      "body_hash": "47b5538f4f50c638b1d2122df33e6b37158cbb74e075ca979dda9002a4ccc6d1",
+      "body_shape_hash": "47b5538f4f50c638b1d2122df33e6b37158cbb74e075ca979dda9002a4ccc6d1",
+      "declaration_hash": "2d6de8d5d3d9b43bc293d51b24a124ce490514650636d33baa22144432311426",
       "direct_consumers": [
         "Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x174_clique_count",
       "normalized_name": "clique_count",
@@ -49311,7 +49308,7 @@
         "Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement"
       ],
       "kind": "Definition",
-      "line": 14,
+      "line": 15,
       "local_dependencies": [],
       "name": "x174_no_Kt_immersion",
       "normalized_name": "no_Kt_immersion",
@@ -49330,7 +49327,7 @@
         "Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 18,
       "local_dependencies": [],
       "name": "x174_extremal_bound",
       "normalized_name": "extremal_bound",
@@ -49342,14 +49339,14 @@
       "signature_shape_hash": "9960de4710e65dd156148579081015d284a98205c4545a15088463aa68afb874"
     },
     {
-      "body_hash": "907c59ff9bd62baf0b89388432b41090ff7544edc7c6f8fbf23b482603fc1692",
-      "body_shape_hash": "907c59ff9bd62baf0b89388432b41090ff7544edc7c6f8fbf23b482603fc1692",
-      "declaration_hash": "e0887058e0290d8e1f624f753786055080352c243d2389eeb37f2853663312e3",
+      "body_hash": "7a6fae670678525169e2cf7888eed654693a9e3e363070c0a5823c13eeae92d1",
+      "body_shape_hash": "7a6fae670678525169e2cf7888eed654693a9e3e363070c0a5823c13eeae92d1",
+      "declaration_hash": "bea6fa92fd7e4ab995f2733a4ba9c5f81be99a7009171849e37d55317a8d7d6d",
       "direct_consumers": [
         "Minor.conjectures.X175.kt_subdivision_clique_count_asymptotic_statement"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x175_clique_count",
       "normalized_name": "clique_count",
@@ -49368,7 +49365,7 @@
         "Minor.conjectures.X175.x175_Kt_subdivision"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [],
       "name": "x175_path_internal",
       "normalized_name": "path_internal",
@@ -49387,7 +49384,7 @@
         "Minor.conjectures.X175.x175_Kt_subdivision"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 17,
       "local_dependencies": [],
       "name": "x175_simple_path_between",
       "normalized_name": "simple_path_between",
@@ -49406,7 +49403,7 @@
         "Minor.conjectures.X175.kt_subdivision_clique_count_asymptotic_statement"
       ],
       "kind": "Definition",
-      "line": 19,
+      "line": 20,
       "local_dependencies": [
         "x175_path_internal",
         "x175_simple_path_between"
@@ -49428,7 +49425,7 @@
         "Minor.conjectures.X175.kt_subdivision_clique_count_asymptotic_statement"
       ],
       "kind": "Definition",
-      "line": 35,
+      "line": 36,
       "local_dependencies": [],
       "name": "x175_subdivision_clique_asymptotic_bound",
       "normalized_name": "subdivision_clique_asymptotic_bound",

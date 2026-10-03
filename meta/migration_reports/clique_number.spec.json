@@ -2,7 +2,7 @@
   "family": "clique-number",
   "canonical_name": "GraphTheory.core.coloring.omega_mem",
   "canonical_short_name": "omega_mem",
-  "relation": "whole-graph clique number: Chromatic X112 x112_omega and Minor X121 x121_omega := ω([set: G]) already are the upstream expression (conversions); Chromatic X124 x124_omega := \\max_(S : {set G} | cliqueb S) #|S| equals ω([set: G]) by GTBase.base.omega_setT_maxE, unconditionally (the cliques subset filter always holds on the full vertex set; K_0 gives 0). Exact natural-number equalities; no nonempty guard and no duplicate clique-number primitive.",
+  "relation": "whole-graph clique number: Chromatic X112 x112_omega and Minor X121 x121_omega := \u03c9([set: G]) already are the upstream expression (conversions); Chromatic X124 x124_omega := \\max_(S : {set G} | cliqueb S) #|S| equals \u03c9([set: G]) by GTBase.base.omega_setT_maxE, unconditionally (the cliques subset filter always holds on the full vertex set; K_0 gives 0). Exact natural-number equalities; no nonempty guard and no duplicate clique-number primitive.",
   "baseline_commit": "76122100ec110f03f4b406d6b98c848a09aedf99",
   "namespaces": {
     "base": "GTBase",
@@ -20,7 +20,7 @@
     "GTBase.base.omega_setT_maxE"
   ],
   "summary": [
-    "Batch A, family A16 (whole-graph clique number), on the fixed A15 pin 7612210 (no private union). The canonical is upstream GraphTheory.core.coloring.omega_mem (notation ω): ω([set: G]) = \\max_(B in cliques [set x in [set: G]]) #|B|. X112's and X121's helpers already are ω([set: G]) and stay as conversions; X124's bigmax over all cliques equals it by the new base adapter omega_setT_maxE, proved without any nonempty guard. No clique-number primitive is added. The public client shows K_0 = 0, K_1 = 1, K_n = n, a nonempty edgeless graph = 1 and the order bound, as exact natural numbers.",
+    "Batch A, family A16 (whole-graph clique number), on the fixed A15 pin 7612210 (no private union). The canonical is upstream GraphTheory.core.coloring.omega_mem (notation \u03c9): \u03c9([set: G]) = \\max_(B in cliques [set x in [set: G]]) #|B|. X112's and X121's helpers already are \u03c9([set: G]) and stay as conversions; X124's bigmax over all cliques equals it by the new base adapter omega_setT_maxE, proved without any nonempty guard. No clique-number primitive is added. The public client shows K_0 = 0, K_1 = 1, K_n = n, a nonempty edgeless graph = 1 and the order bound, as exact natural numbers.",
     "",
     "Frozen at 7612210: the three helpers, X124's chain x124_poly_chi_bounded and the current rows X124 dreier_torunczyk_merge_width_poly_chi_bounded_statement (blocked: its merge-width antecedent defect, coefficient-list witness and class-uniform polynomial are kept verbatim; X124 has no older history, so this row is also complete) and X121 dallard_milanic_storgel_tw_omega_tree_alpha_statement (full biconditional, class-uniform f and k, unguarded class; the missing hereditary premise is recorded, not repaired). X112's helper reaches no current row since C9 moved its chi-bound to the public predicate, so its whole corpus row is enrolled as an original-statement: X112Original copies C9's pre-C9 chi-bound helper with the frozen clique number and the whole closure row from C9's baseline 0659592 (both class bounds and the closure kept). X121Original composes the frozen helper with C13's frozen treewidth, decomposition and tree-alpha bodies (text at 58d6d60). Four whole-row iffs: X124, X121, X112Original, X121Original. X124's chain bridge keeps the same coefficient list.",
     "",
@@ -36,7 +36,7 @@
       "frozen": "Legacy.x112_omega",
       "substitutions": {},
       "certificate": "Chromatic.migration.clique_number.x112_omega_compat",
-      "live_unfolds_to": "ω([set: G])"
+      "live_unfolds_to": "\u03c9([set: G])"
     },
     {
       "kind": "source",
@@ -47,7 +47,7 @@
       "frozen": "Legacy.x124_omega",
       "substitutions": {},
       "certificate": "Chromatic.migration.clique_number.x124_omega_compat",
-      "live_unfolds_to": "ω([set: G])"
+      "live_unfolds_to": "\u03c9([set: G])"
     },
     {
       "kind": "chain",
@@ -110,7 +110,7 @@
       "frozen": "Legacy.x121_omega",
       "substitutions": {},
       "certificate": "Minor.migration.clique_number.x121_omega_compat",
-      "live_unfolds_to": "ω([set: G])"
+      "live_unfolds_to": "\u03c9([set: G])"
     },
     {
       "kind": "statement",
@@ -180,8 +180,8 @@
     }
   ],
   "known_stale_snapshots": {
-    "chromatic-theory/theories/migration/chi_bounded_classes.v#X112Legacy.x112_chi_bounded": "C9 snapshot: C9 froze X112's pre-C9 chi-bound but kept the live x112_omega (unchanged by A16: already ω([set: G]), a conversion). Kept unchanged; the complete chain and row are Chromatic.migration.clique_number.X112Original.x112_chi_bounded and Chromatic.migration.clique_number.X112Original.chi_bounded_closure_substitution_gluing_statement, certified by x112_chi_bounded_original_compat and chi_bounded_closure_substitution_gluing_statement_original_compat, which reuse C9's certificates.",
-    "minor-theory/theories/migration/bag_decompositions.v#Legacy.dallard_milanic_storgel_tw_omega_tree_alpha_statement": "C13 per-row snapshot: C13 froze this row over its own frozen treewidth and tree-alpha bodies but kept the live x121_omega (unchanged by A16: already ω([set: G]), a conversion). Kept unchanged; the complete row is Minor.migration.clique_number.X121Original.dallard_milanic_storgel_tw_omega_tree_alpha_statement, certified by dallard_milanic_storgel_tw_omega_tree_alpha_statement_original_compat, which reuses this certificate."
+    "chromatic-theory/theories/migration/chi_bounded_classes.v#X112Legacy.x112_chi_bounded": "C9 snapshot: C9 froze X112's pre-C9 chi-bound but kept the live x112_omega (unchanged by A16: already \u03c9([set: G]), a conversion). Kept unchanged; the complete chain and row are Chromatic.migration.clique_number.X112Original.x112_chi_bounded and Chromatic.migration.clique_number.X112Original.chi_bounded_closure_substitution_gluing_statement, certified by x112_chi_bounded_original_compat and chi_bounded_closure_substitution_gluing_statement_original_compat, which reuse C9's certificates.",
+    "minor-theory/theories/migration/bag_decompositions.v#Legacy.dallard_milanic_storgel_tw_omega_tree_alpha_statement": "C13 per-row snapshot: C13 froze this row over its own frozen treewidth and tree-alpha bodies but kept the live x121_omega (unchanged by A16: already \u03c9([set: G]), a conversion). Kept unchanged; the complete row is Minor.migration.clique_number.X121Original.dallard_milanic_storgel_tw_omega_tree_alpha_statement, certified by dallard_milanic_storgel_tw_omega_tree_alpha_statement_original_compat, which reuses this certificate."
   },
   "cross_module_consumers": [],
   "distinct_variants": [
@@ -202,12 +202,6 @@
       "path": "packing-theory/theories/conjectures/XE1.v",
       "name": "xe1_maximal_clique",
       "note": "inclusion-maximal clique predicate (empty and singleton allowed); not maximum cardinality"
-    },
-    {
-      "qualified": "Minor.conjectures.X174.x174_clique_count",
-      "path": "minor-theory/theories/conjectures/X174.v",
-      "name": "x174_clique_count",
-      "note": "number of cliques (the empty one included), not the largest clique size"
     }
   ],
   "kernel_evidence": "Print Assumptions of every certificate and of the base adapter, exact types of the frozen and live helpers, chain and rows, strict dependency closures of the frozen chain and rows (current and complete), and the types of every declaration in the reverse dependency closure of X112/X124/X121 at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A16-clique-number/ (outside the repository)"
