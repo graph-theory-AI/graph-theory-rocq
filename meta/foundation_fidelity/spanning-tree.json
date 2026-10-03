@@ -36,6 +36,41 @@
     "not_fg_spanning_tree_two_isolated",
     "not_fg_spanning_tree_singleton"
    ]
+  },
+  "Cycle.foundations.spanning_trees": {
+   "path": "cycle-theory/theories/foundations/spanning_trees.v",
+   "overrides": {
+    "spanning_connected_edge_set": {
+     "verdict": "FAITHFUL",
+     "note": "spanning_connected_edge_set G T: every two HOST vertices are joined by an undirected uwalk using only edges of T (reference orientation immaterial); an isolated host vertex excludes it; no nonempty or loopless premise."
+    },
+    "spanning_tree_edge_set": {
+     "verdict": "FAITHFUL",
+     "note": "spanning_tree_edge_set G T: spanning-connected and without circuits inside T (acyclic_edge_set); a selected loop or two selected parallel edges are circuits; edges outside T are unconstrained."
+    }
+   },
+   "machine_evidence": [
+    "spanning_tree_edge_setI",
+    "spanning_tree_edge_set_connected",
+    "spanning_tree_edge_set_acyclic",
+    "spanning_connected_edge_setP",
+    "spanning_connected_edge_set_mconnected",
+    "spanning_tree_edge_set_mconnected",
+    "spanning_connected_edge_set_sub",
+    "spanning_tree_edge_set_noloop",
+    "spanning_tree_edge_set_noparallel",
+    "spanning_tree_edge_set_empty",
+    "spanning_tree_edge_set_one_vertex",
+    "not_spanning_tree_edge_set_loop",
+    "spanning_tree_edge_set_one_edge",
+    "spanning_tree_edge_set_one_edge_rev",
+    "subgraph_connected_one_edge_and_vertex",
+    "uwalk_one_edge_and_vertex",
+    "not_spanning_connected_one_edge_and_vertex",
+    "not_spanning_tree_edge_set_one_edge_and_vertex",
+    "not_spanning_tree_edge_set_parallel_pair",
+    "not_spanning_tree_edge_set_digon"
+   ]
   }
  }
 }

@@ -221,7 +221,9 @@
       "non_corpus": true
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "cycle-theory/theories/migration/spanning_trees.v#U6Legacy.three_decomposition_statement": "B19 per-row snapshot: family spanning-tree (B19) froze only its multigraph tree contract (spanning_tree with its two unchanged supports) in U6's three-decomposition row, so this copy still calls the live cubic, which after A13 unfolds to GTBase.base.loopless_cubic (incidence degrees under the loopless guard). Kept as B19's per-row row; the complete pre-A13, pre-B19 row is Cycle.migration.spanning_trees.U6Original.three_decomposition_statement over this family's frozen Legacy.cubic (bound there as Module A13), certified by three_decomposition_statement_original_compat through cubic_compat."
+  },
   "cross_module_consumers": [
     {
       "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
