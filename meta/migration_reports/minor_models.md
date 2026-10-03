@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py minor_models --details /tmp/mig
 - Canonical: `GraphTheory.core.minor.minor_rmap`.
 - Baseline: `35b6b165295fb373d864d646d74284c4751dae65`.
 - Scope: 2 helpers, 6 statements, 13 frozen objects, 35 recorded references.
-- Source checks: 137/137 pass; consistent.
+- Source checks: 133/133 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -22,4 +22,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py minor_models --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Infinite.conjectures.D4inf2.minor_model`, `GTMisc.conjectures.X128.x128_shallow_minor_model`, `GTMisc.conjectures.X139.x139_shallow_minor_model`, `GTMisc.conjectures.X128.x128_radius_at_most`, `GTMisc.conjectures.X139.x139_radius_at_most`, `Extremal.conjectures.X98.x98_model_vertex`, `GTMisc.conjectures.X114.x114_model_vertex`, `Minor.foundations.containment.sdm_covers`, `Minor.conjectures.X220.x220_shallow_minor`.
+Excluded distinct variants: `Infinite.conjectures.D4inf2.minor_model`, `Extremal.conjectures.X98.x98_model_vertex`, `GTMisc.conjectures.X114.x114_model_vertex`, `Minor.foundations.containment.sdm_covers`, `Minor.conjectures.X220.x220_shallow_minor`.
