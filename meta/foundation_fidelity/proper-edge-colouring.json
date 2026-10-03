@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "family": "proper-edge-colouring",
+  "modules": {
+    "GTBase.edge_colourings": {
+      "path": "base/theories/edge_colourings.v",
+      "overrides": {
+        "proper_edge_colouring": {
+          "verdict": "FAITHFUL",
+          "note": "Supplied set map {set G} -> C over an eqType palette, read on the doubletons of actual edges: two distinct edges at a common endpoint get different colours (endpoint form), equivalent to the two corpus edge-pair forms (nonempty intersection / not disjoint). Values off E(G) are irrelevant; labels are kept, injective relabelling preserves and reflects properness; the domain is inhabited for every graph, so no map into an empty palette exists."
+        },
+        "proper_pair_edge_colouring": {
+          "verdict": "FAITHFUL",
+          "note": "Supplied ordered-pair map G -> G -> C over an eqType palette, symmetric on ALL pairs (adjacent or not), with different colours on two distinct neighbours of a vertex. The empty graph admits every pair map, the one into an empty palette included; a nonempty edgeless graph admits no map into an empty palette (K_1 needs one colour); constant maps are proper on K_2 and improper on K_3."
+        }
+      },
+      "machine_evidence": [
+        "edges_meet_endpoint",
+        "proper_edge_colouring_edgesP",
+        "proper_edge_colouring_meetP",
+        "eq_proper_edge_colouring",
+        "proper_edge_colouring_comp",
+        "proper_edge_colouring_relabel",
+        "no_set_map_into_empty_palette",
+        "proper_pair_edge_colouring_sym",
+        "proper_pair_edge_colouring_neighbours",
+        "proper_pair_edge_colouring_comp",
+        "proper_pair_edge_colouring_relabel",
+        "proper_edge_colouring_pairP",
+        "proper_edge_colouring_K2",
+        "proper_pair_edge_colouring_K2",
+        "not_proper_edge_colouring_K3",
+        "not_proper_pair_edge_colouring_K3",
+        "proper_pair_edge_colouring_K0",
+        "no_pair_map_into_empty_palette",
+        "proper_pair_edge_colouring_K1"
+      ]
+    },
+    "Extremal.foundations.edge_colourings": {
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "overrides": {
+        "proper_ecolouring": {
+          "verdict": "FAITHFUL",
+          "note": "Public adapter kept under its old name: a transparent alias of GTBase.edge_colourings.proper_edge_colouring with the same eqType palette generality (proper_ecolouringE)."
+        }
+      },
+      "machine_evidence": [
+        "proper_ecolouringE"
+      ]
+    }
+  }
+}

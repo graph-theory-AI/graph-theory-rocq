@@ -1,0 +1,57 @@
+{
+ "schema_version": 1,
+ "family": "is-path",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_simple_walk": {
+     "verdict": "FAITHFUL",
+     "note": "seq_simple_walk s = uniq s && sorted (--) s: pairwise distinct entries, consecutive entries adjacent; the empty sequence and every one-entry sequence are simple walks, a two-entry sequence is one exactly at an edge between distinct vertices, repeats are excluded; a nonempty simple walk is exactly a simple path, and on x :: q it is upath x (last x q) q."
+    }
+   },
+   "machine_evidence": [
+    "seq_simple_walk_nil",
+    "seq_simple_walk_seq1",
+    "seq_simple_walk_uniq",
+    "seq_simple_walk_sorted",
+    "seq_simple_walk_repeat",
+    "seq_simple_walk_pair",
+    "seq_simple_path_walk",
+    "seq_simple_walk_path",
+    "seq_simple_walk_upath"
+   ]
+  },
+  "Cycle.foundations.path_subgraphs": {
+   "path": "cycle-theory/theories/foundations/path_subgraphs.v",
+   "overrides": {
+    "acyclic_edge_set": {
+     "verdict": "FAITHFUL",
+     "note": "acyclic_edge_set H: no subset of the edge set H is a circuit (nonempty, connected, 2-regular in arc ends); the empty set is acyclic and acyclicity passes to subsets."
+    },
+    "path_subgraph": {
+     "verdict": "FAITHFUL",
+     "note": "path_subgraph P: P is a nonempty, connected, acyclic edge set in which every vertex has at most two arc ends (a loop counts twice). The empty edge set is not a path; a loop is a circuit, so no path contains one; a single non-loop edge is a path; two distinct parallel edges form a circuit, so no path contains both; no looplessness or simplicity premise."
+    }
+   },
+   "machine_evidence": [
+    "path_subgraph_neq0",
+    "path_subgraph_set0",
+    "path_subgraph_connected",
+    "path_subgraph_acyclic",
+    "path_subgraph_subdeg",
+    "acyclic_edge_set0",
+    "acyclic_edge_set_sub",
+    "card_ends_at1",
+    "subdeg_set1",
+    "subdeg_set2",
+    "incident_set1",
+    "is_circuit_loop",
+    "path_subgraph_noloop",
+    "path_subgraph_edge",
+    "is_circuit_parallel",
+    "path_subgraph_noparallel"
+   ]
+  }
+ }
+}

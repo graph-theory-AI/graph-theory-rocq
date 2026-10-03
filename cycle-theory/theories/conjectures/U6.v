@@ -37,6 +37,7 @@
 From GraphTheory Require Import mgraph.
 From GTBase Require Import base.
 From Cycle.foundations Require Export connectivity.
+From Cycle.foundations Require Import path_subgraphs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -87,7 +88,7 @@ Definition acyclic (G : mgraph) (H : {set edge G}) : Prop :=
 (** A path subgraph: nonempty, connected, acyclic, max degree ≤ 2 (arc ends,
     so a loop already saturates the bound at its vertex). *)
 Definition is_path (G : mgraph) (P : {set edge G}) : Prop :=
-  [/\ P != set0, subgraph_connected P, acyclic P & forall v : G, (subdeg P v <= 2)%N].
+  path_subgraph P.
 
 (** A matching: every vertex meets at most one matching edge.  Since [subdeg]
     counts arc ends, a LOOP can never belong to a matching -- it gives its

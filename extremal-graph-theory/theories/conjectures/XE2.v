@@ -117,8 +117,7 @@ Definition xe2_paths_internally_disjoint
             & xe2_internal_path_vertices x y (P j)].
 
 Definition xe2_path_edge_set (G : sgraph) (p : seq G) : {set {set G}} :=
-  [set e : {set G} |
-      [exists xy : G * G, (xy \in zip p (behead p)) && (e == [set xy.1; xy.2])]].
+  seq_edge_set p.
 
 Definition xe2_paths_edge_disjoint
     (G : sgraph) (m : nat) (P : 'I_m -> seq G) : Prop :=

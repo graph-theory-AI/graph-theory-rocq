@@ -1,0 +1,169 @@
+{
+  "family": "is-path",
+  "canonical_name": "GTBase.walks_paths.seq_simple_walk",
+  "canonical_short_name": "seq_simple_walk",
+  "relation": "two separate representations, each definitional: Hom U3 is_path is seq_simple_walk s; Cycle U6 is_path is Cycle.foundations.path_subgraphs.path_subgraph P",
+  "baseline_commit": "632e0b124089c15c11fc2e801435479a9c741c5c",
+  "namespaces": {
+    "base": "GTBase",
+    "cycle-theory": "Cycle",
+    "extremal-graph-theory": "Extremal",
+    "homomorphism-theory": "Hom",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "cycle-theory/theories/foundations/path_subgraphs.v",
+    "homomorphism-theory/theories/migration/is_path.v",
+    "cycle-theory/theories/migration/is_path.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.seq_simple_walk_nil",
+    "GTBase.walks_paths.seq_simple_walk_seq1",
+    "GTBase.walks_paths.seq_simple_walk_uniq",
+    "GTBase.walks_paths.seq_simple_walk_sorted",
+    "GTBase.walks_paths.seq_simple_walk_repeat",
+    "GTBase.walks_paths.seq_simple_walk_pair",
+    "GTBase.walks_paths.seq_simple_path_walk",
+    "GTBase.walks_paths.seq_simple_walk_path",
+    "GTBase.walks_paths.seq_simple_walk_upath",
+    "Cycle.foundations.path_subgraphs.path_subgraph_neq0",
+    "Cycle.foundations.path_subgraphs.path_subgraph_set0",
+    "Cycle.foundations.path_subgraphs.path_subgraph_connected",
+    "Cycle.foundations.path_subgraphs.path_subgraph_acyclic",
+    "Cycle.foundations.path_subgraphs.path_subgraph_subdeg",
+    "Cycle.foundations.path_subgraphs.acyclic_edge_set0",
+    "Cycle.foundations.path_subgraphs.acyclic_edge_set_sub",
+    "Cycle.foundations.path_subgraphs.card_ends_at1",
+    "Cycle.foundations.path_subgraphs.subdeg_set1",
+    "Cycle.foundations.path_subgraphs.subdeg_set2",
+    "Cycle.foundations.path_subgraphs.incident_set1",
+    "Cycle.foundations.path_subgraphs.is_circuit_loop",
+    "Cycle.foundations.path_subgraphs.path_subgraph_noloop",
+    "Cycle.foundations.path_subgraphs.path_subgraph_edge",
+    "Cycle.foundations.path_subgraphs.is_circuit_parallel",
+    "Cycle.foundations.path_subgraphs.path_subgraph_noparallel"
+  ],
+  "summary": [
+    "Batch B, family B7 (`is_path`): the two remaining helpers named `is_path`, two separate representation classes kept apart in registry and certificates. SEQUENCE class: Hom U3's boolean `is_path s := uniq s && (if s is x :: p then path (--) x p else true)` now unfolds to `GTBase.walks_paths.seq_simple_walk s` (`uniq s && sorted (--) s`), convertible; the empty sequence is accepted, which is exactly where it differs from family simple-path's nonempty `seq_simple_path` (`seq_simple_path_walk`, `seq_simple_walk_path`), and on `x :: q` it is coq-graph-theory's `upath x (last x q) q`. MULTIGRAPH class: Cycle U6's edge-set `is_path P` (nonempty, connected, acyclic, arc-end degree at most two) now unfolds to `Cycle.foundations.path_subgraphs.path_subgraph P`, convertible: the new foundations module imports only `Cycle.foundations.connectivity`, and its `acyclic_edge_set` has U6's `acyclic` body verbatim (U6's own `acyclic`, also used by `spanning_tree`, is unchanged). Loops and parallel edges keep their behaviour: a loop is a circuit and is never in a path, two distinct parallel edges form a circuit, a single non-loop edge is a path (proved generically and grounded on concrete multigraphs in the public client).",
+    "",
+    "Two rows are affected: U3's three-longest-paths OPG row through `longest_path` (nonempty connected graph, three longest sequences, a common vertex) and U6's path-decomposition OPG row through `path_decomposition` (positive vertices and edges, simple and connected multigraph, an edge partition into paths, at most `(n + 1) %/ 2` of them). Both chains and rows are frozen (U3/U6 names carry no wave prefix, so the frozen chain copies are named `u3_longest_path` and `u6_path_decomposition`). The grounding files of U3 and U6 rebuild unchanged. No migration declaration reaches either source at the B6 baseline, so no historical original is owed.",
+    "",
+    "Kernel evidence, independent of this textual report: `Print All Dependencies` of the two frozen statements contains no live helper or chain declaration of this family and neither canonical, while each live statement reaches its canonical (/srv/graph-theory-rocq/coordination/evidence/B7-is_path/print_all_dependencies_summary.txt).",
+    "",
+    "No statement text, doc block, manifest row or leg state changes (checked below). B6's `seq_simple_path`, U9's `spath` (no uniqueness) and XE2's walk stay distinct contracts."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Hom.conjectures.U3.is_path",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "is_path",
+      "frozen_path": "homomorphism-theory/theories/migration/is_path.v",
+      "frozen": "Legacy.is_path",
+      "substitutions": {},
+      "certificate": "Hom.migration.is_path.u3_is_path_compat",
+      "live_unfolds_to": "seq_simple_walk s"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hom.conjectures.U3.longest_path",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "longest_path",
+      "frozen_path": "homomorphism-theory/theories/migration/is_path.v",
+      "frozen": "U3Legacy.u3_longest_path",
+      "substitutions": {
+        "is_path": "Legacy.is_path",
+        "longest_path": "u3_longest_path"
+      },
+      "certificate": "Hom.migration.is_path.u3_longest_path_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hom.conjectures.U3.do_any_three_longest_paths_in_a_connected_graph_have_statement",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "do_any_three_longest_paths_in_a_connected_graph_have_statement",
+      "frozen_path": "homomorphism-theory/theories/migration/is_path.v",
+      "frozen": "U3Legacy.do_any_three_longest_paths_in_a_connected_graph_have_statement",
+      "substitutions": {
+        "longest_path": "u3_longest_path"
+      },
+      "certificate": "Hom.migration.is_path.do_any_three_longest_paths_in_a_connected_graph_have_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.U6.is_path",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "is_path",
+      "frozen_path": "cycle-theory/theories/migration/is_path.v",
+      "frozen": "Legacy.is_path",
+      "substitutions": {},
+      "certificate": "Cycle.migration.is_path.u6_is_path_compat",
+      "live_unfolds_to": "path_subgraph P"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.U6.path_decomposition",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "path_decomposition",
+      "frozen_path": "cycle-theory/theories/migration/is_path.v",
+      "frozen": "U6Legacy.u6_path_decomposition",
+      "substitutions": {
+        "is_path": "Legacy.is_path",
+        "path_decomposition": "u6_path_decomposition"
+      },
+      "certificate": "Cycle.migration.is_path.u6_path_decomposition_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U6.decomposing_a_connected_graph_into_paths_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "decomposing_a_connected_graph_into_paths_statement",
+      "frozen_path": "cycle-theory/theories/migration/is_path.v",
+      "frozen": "U6Legacy.decomposing_a_connected_graph_into_paths_statement",
+      "substitutions": {
+        "path_decomposition": "u6_path_decomposition"
+      },
+      "certificate": "Cycle.migration.is_path.decomposing_a_connected_graph_into_paths_statement_compat",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "homomorphism-theory/theories/conjectures/grounding_U3.v",
+      "name": "is_path",
+      "note": "Proof consumer: U3 grounding lemmas is_path_nil, is_path1, is_path_uniq and the longest_path lemmas; rebuilt unchanged (seq_simple_walk is convertible to the old body)."
+    },
+    {
+      "path": "homomorphism-theory/theories/conjectures/grounding_U3.v",
+      "name": "longest_path",
+      "note": "Proof consumer: U3 grounding lemmas longest_path_is_path, longest_path_max and longest_path_K1; rebuilt unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U6.v",
+      "name": "is_path",
+      "note": "Proof consumer: U6 grounding lemma is_path_neq0; rebuilt unchanged (path_subgraph is convertible to the old body)."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U6.v",
+      "name": "path_decomposition",
+      "note": "Proof consumer: U6 grounding lemma path_decomposition_unit; rebuilt unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Packing.conjectures.U9.spath",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "spath",
+      "note": "nonempty whole sequence with prescribed endpoints and adjacency but no uniqueness guard; preserved, not repaired"
+    },
+    {
+      "qualified": "Extremal.conjectures.XE2.xe2_path_in_graph",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_path_in_graph",
+      "note": "empty-allowed whole-sequence walk WITHOUT uniqueness (MathComp sorted as a proposition); untouched"
+    }
+  ]
+}

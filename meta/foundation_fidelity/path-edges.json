@@ -1,0 +1,77 @@
+{
+ "schema_version": 1,
+ "family": "path-edges",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_edge_list": {
+     "verdict": "FAITHFUL",
+     "note": "seq_edge_list s: the ordered list of the sets [set s_i; s_(i+1)] of consecutive entries, one per adjacent pair, (size s).-1 entries; repetitions and order are kept, [:: x; x] gives [set x], a non-adjacent pair is listed, reversal reverses the list."
+    },
+    "seq_edge_set": {
+     "verdict": "FAITHFUL",
+     "note": "seq_edge_set s: the finite support of seq_edge_list s, equal to the existential image of the consecutive pairs; empty on [::] and one-entry sequences, at most (size s).-1 elements, invariant under reversal; inside E(G) on walks."
+    },
+    "seq_index_consecutive": {
+     "verdict": "FAITHFUL",
+     "note": "seq_index_consecutive p x y: the first occurrences of x and y in p are adjacent positions; on duplicate-free p with x, y in p it is adjacency of entries; an absent vertex has index size p, so the relation alone does not imply membership."
+    },
+    "seq_index_edge_set": {
+     "verdict": "FAITHFUL",
+     "note": "seq_index_edge_set p: the actual edges [set x; y] (x -- y) with x, y in p first-index adjacent; always inside E(G), empty on [::], one-entry sequences and non-adjacent pairs, equal to seq_edge_set p :&: E(G) on duplicate-free p and to seq_edge_set p on duplicate-free walks; not reversal-invariant in general."
+    }
+   },
+   "machine_evidence": [
+    "in_seq_edge_set",
+    "seq_edge_listP",
+    "seq_edge_setP",
+    "seq_edge_set_image",
+    "seq_edge_set_consecutive",
+    "seq_edge_set_consecutiveP",
+    "seq_edge_list_nil",
+    "seq_edge_list_seq1",
+    "seq_edge_list_cons2",
+    "seq_edge_list_pair",
+    "seq_edge_list_loop",
+    "seq_edge_list_back",
+    "seq_edge_set_nil",
+    "seq_edge_set_seq1",
+    "seq_edge_set_cons2",
+    "seq_edge_set_pair",
+    "seq_edge_set_back",
+    "size_seq_edge_list",
+    "card_seq_edge_set",
+    "seq_edge_set_sub",
+    "seq_edge_list_rcons",
+    "seq_edge_list_rev",
+    "seq_edge_set_rev",
+    "seq_edge_set_path",
+    "seq_edge_set_sorted",
+    "seq_edge_list_sorted",
+    "seq_edge_set_nodes",
+    "seq_edge_list_edgep",
+    "seq_index_consecutive_sym",
+    "index_succ_zip",
+    "seq_index_consecutiveE",
+    "seq_index_consecutiveP",
+    "seq_index_consecutive_absent",
+    "seq_index_edge_setP",
+    "seq_index_edge_set_sub",
+    "seq_index_edge_set_nil",
+    "seq_index_edge_set_seq1",
+    "seq_index_edge_set_uniq",
+    "seq_index_edge_set_walk",
+    "seq_index_edge_set_simple_path",
+    "seq_index_edge_set_edge",
+    "seq_index_edge_set_nonedge",
+    "seq_edge_list_ground_back",
+    "seq_edge_set_ground_back",
+    "seq_edge_list_ground_loop",
+    "seq_edge_set_ground_repeat",
+    "seq_index_edge_set_ground_repeat",
+    "seq_index_edge_set_ground_rev"
+   ]
+  }
+ }
+}
