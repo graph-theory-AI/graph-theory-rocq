@@ -206,13 +206,13 @@ Theorem unvd_relation_inhabited : exists (D : diGraphType) (N : nat), unvd D N.
 Proof.
 exists K1, 1%N; split.
 - (* 1-unavoidable *)
-  move=> T _ cardT.
+  apply/unavoidableP => T _ cardT.
   have [t _] : { t : T | t \in T } by apply/sigW/card_gt0P; rewrite cardT.
   exists (fun _ => t); split.
   + by move=> a b _; apply: K1_uniq'.
   + by move=> u v uv; rewrite (negbTE (K1_no_arc' u v)) in uv.
 - (* minimal: 0 is not unavoidable (empty tournament has no K1) *)
-  move=> M; rewrite ltnS leqn0 => /eqP -> /(_ (TT 0) (is_tournament_TT' 0) (card_ord 0)).
+  move=> M; rewrite ltnS leqn0 => /eqP -> /unavoidableP/(_ (TT 0) (is_tournament_TT' 0) (card_ord 0)).
   case=> f [inj_f _].
   by apply: (no_inj_into_smaller' inj_f); rewrite card_ord card_TT.
 Qed.

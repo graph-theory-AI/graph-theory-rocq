@@ -1,7 +1,7 @@
 {
   "counts": {
     "files": 321,
-    "helpers": 2558,
+    "helpers": 2559,
     "repeated_body_shapes": 143,
     "repeated_normalized_names": 212,
     "repeated_signature_shapes": 305,
@@ -862,6 +862,7 @@
         "Digraph.conjectures.two_extremal_hajos.pt_edges_split",
         "Digraph.conjectures.two_extremal_hajos.ptree_ind",
         "Digraph.conjectures.two_extremal_hajos.size_pt_leafBpar",
+        "Digraph.conjectures.unvd.unavoidableP",
         "Extremal.conjectures.D2pr.srel_irr",
         "Extremal.conjectures.D2pr.srel_sym",
         "Extremal.conjectures.D2ram.cayley_adj_irrefl",
@@ -17345,7 +17346,7 @@
         "Digraph.conjectures.X221.delta122_hero_oriented_complete_multipartite_statement"
       ],
       "kind": "Definition",
-      "line": 14,
+      "line": 15,
       "local_dependencies": [],
       "name": "x221_Delta122",
       "normalized_name": "Delta122",
@@ -17364,7 +17365,7 @@
         "Digraph.conjectures.X221.x221_oriented_complete_multipartite"
       ],
       "kind": "Definition",
-      "line": 45,
+      "line": 46,
       "local_dependencies": [],
       "name": "x221_nonadj",
       "normalized_name": "nonadj",
@@ -17383,7 +17384,7 @@
         "Digraph.conjectures.X221.delta122_hero_oriented_complete_multipartite_statement"
       ],
       "kind": "Definition",
-      "line": 55,
+      "line": 56,
       "local_dependencies": [
         "x221_nonadj"
       ],
@@ -17404,7 +17405,7 @@
         "Digraph.conjectures.X221.x221_oriented_triangle_free"
       ],
       "kind": "Definition",
-      "line": 59,
+      "line": 60,
       "local_dependencies": [],
       "name": "x221_uadj",
       "normalized_name": "uadj",
@@ -17424,7 +17425,7 @@
         "Digraph.conjectures.X221.x221_tbar"
       ],
       "kind": "Definition",
-      "line": 64,
+      "line": 65,
       "local_dependencies": [
         "x221_uadj"
       ],
@@ -17445,7 +17446,7 @@
         "Digraph.conjectures.X221.x221_abar"
       ],
       "kind": "Definition",
-      "line": 69,
+      "line": 70,
       "local_dependencies": [],
       "name": "x221_alphavec",
       "normalized_name": "alphavec",
@@ -17464,7 +17465,7 @@
         "Digraph.conjectures.X221.x221_tbar"
       ],
       "kind": "Definition",
-      "line": 80,
+      "line": 81,
       "local_dependencies": [],
       "name": "x221_dichro",
       "normalized_name": "dichro",
@@ -17483,7 +17484,7 @@
         "Digraph.conjectures.X221.oriented_triangle_free_acyclic_number_theta_statement"
       ],
       "kind": "Definition",
-      "line": 83,
+      "line": 84,
       "local_dependencies": [
         "x221_alphavec",
         "x221_oriented_triangle_free"
@@ -17505,7 +17506,7 @@
         "Digraph.conjectures.X221.oriented_triangle_free_dichromatic_theta_statement"
       ],
       "kind": "Definition",
-      "line": 96,
+      "line": 97,
       "local_dependencies": [
         "x221_dichro",
         "x221_oriented_triangle_free"
@@ -17527,7 +17528,7 @@
         "Digraph.conjectures.X221.ordered_twinwidth_clique_and_tww_bound_statement"
       ],
       "kind": "Definition",
-      "line": 102,
+      "line": 103,
       "local_dependencies": [],
       "name": "x221_tww_eq",
       "normalized_name": "tww_eq",
@@ -17539,14 +17540,14 @@
       "signature_shape_hash": "fd8b4437f9968465a3b0fe84e903af45ac657e75252cd9daaae41caec5a22164"
     },
     {
-      "body_hash": "c38440125b173eec1ff4aaf0368a0ffe7a3abc32b492e81eca29dd09fd057c33",
-      "body_shape_hash": "c38440125b173eec1ff4aaf0368a0ffe7a3abc32b492e81eca29dd09fd057c33",
-      "declaration_hash": "023876db75258372361ec3b1780d5075c12517e61ecf34eef48bc5401aaa2c20",
+      "body_hash": "821dfe9b34bdf0f289bc6e9b5d318c787578527cc478a38e6eed6237a71e1d7e",
+      "body_shape_hash": "821dfe9b34bdf0f289bc6e9b5d318c787578527cc478a38e6eed6237a71e1d7e",
+      "declaration_hash": "9714d79f0a6fe4b96326e87ccad2de341074d84a3b53030b399465b9af5e8643",
       "direct_consumers": [
         "Digraph.conjectures.X221.kextension_linear_unavoidability_statement"
       ],
       "kind": "Definition",
-      "line": 110,
+      "line": 111,
       "local_dependencies": [],
       "name": "x221_linearly_unavoidable",
       "normalized_name": "linearly_unavoidable",
@@ -28807,10 +28808,10 @@
       "body_shape_hash": "76e5a6841934eab591158c05f111c81b3c462ace8efb0d41b051da403ca5b487",
       "declaration_hash": "01628671b744441b299d1aa36f68e2d0f18d467f641191efcdf5d76df00d1d2f",
       "direct_consumers": [
-        "Digraph.conjectures.unvd.unavoidable"
+        "Digraph.conjectures.unvd.unavoidableP"
       ],
       "kind": "Definition",
-      "line": 35,
+      "line": 36,
       "local_dependencies": [],
       "name": "contains_subdigraph",
       "normalized_name": "contains_subdigraph",
@@ -28822,17 +28823,15 @@
       "signature_shape_hash": "b0041b967aff5861d1ebe152fe54bcef090d205104c8b9ba7ba63acc3c5cc958"
     },
     {
-      "body_hash": "11b3a766e04312f606616239051426a92d6437863a6c7b026c41121ff3c4a587",
-      "body_shape_hash": "11b3a766e04312f606616239051426a92d6437863a6c7b026c41121ff3c4a587",
-      "declaration_hash": "b8c0f2af8ef7a45712aafe602ce400cad74cf4f9af437cafe817a06bed2bac99",
+      "body_hash": "094e925d395209883e64f0f1d0726a4ba0b3e0ce5c0799e24e4c3ff1deda5b74",
+      "body_shape_hash": "094e925d395209883e64f0f1d0726a4ba0b3e0ce5c0799e24e4c3ff1deda5b74",
+      "declaration_hash": "f742821d6523d5fbe4b087d3bd11330e2f2cecf3539784e3f986b72f979bd64c",
       "direct_consumers": [
-        "Digraph.conjectures.unvd.unvd"
+        "Digraph.conjectures.unvd.unavoidableP"
       ],
       "kind": "Definition",
-      "line": 46,
-      "local_dependencies": [
-        "contains_subdigraph"
-      ],
+      "line": 47,
+      "local_dependencies": [],
       "name": "unavoidable",
       "normalized_name": "unavoidable",
       "package": "digraph-theory",
@@ -28843,18 +28842,36 @@
       "signature_shape_hash": "cc9bf5a49e1b8e1b5d39a48d3cfb34764b50382824168642124fe8e1abdf7b45"
     },
     {
-      "body_hash": "dc9d602bc6512cf44bc6d5489bcd7666c24937e81dfda06343b2d6b090b95d55",
-      "body_shape_hash": "dc9d602bc6512cf44bc6d5489bcd7666c24937e81dfda06343b2d6b090b95d55",
-      "declaration_hash": "127f51434d8cc3031f88ef99be685175cda0c2c8092b81c2d80c9f9dbf4f5b8b",
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "8f9fd967edc307cc64bf3a3b0813d7f3027e31d5abd44f809015422f790a2481",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 56,
+      "local_dependencies": [
+        "contains_subdigraph",
+        "unavoidable"
+      ],
+      "name": "unavoidableP",
+      "normalized_name": "unavoidableP",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/unvd.v",
+      "phase": null,
+      "qualified_name": "Digraph.conjectures.unvd.unavoidableP",
+      "signature": "(D : diGraphType) (N : nat) : unavoidable D N <-> forall T : diGraphType, is_tournament T -> #|T| = N -> contains_subdigraph D T",
+      "signature_shape_hash": "b5644aaa980244d41b9cff5ee3136978e1b498259d3f25d7ea38ff0f101f3464"
+    },
+    {
+      "body_hash": "375ca33b4216d452b7661479b3ca76335557edb0db0f0516806e1b81a478f756",
+      "body_shape_hash": "375ca33b4216d452b7661479b3ca76335557edb0db0f0516806e1b81a478f756",
+      "declaration_hash": "b55d79ecef07d338e235cb6501f2f6e346ee475804001cd628aedb9c466fe2d1",
       "direct_consumers": [
         "Digraph.conjectures.unvd.conj_9",
         "Digraph.conjectures.unvd.prob_6"
       ],
       "kind": "Definition",
-      "line": 52,
-      "local_dependencies": [
-        "unavoidable"
-      ],
+      "line": 66,
+      "local_dependencies": [],
       "name": "unvd",
       "normalized_name": "unvd",
       "package": "digraph-theory",
@@ -28872,7 +28889,7 @@
         "Digraph.conjectures.unvd.density"
       ],
       "kind": "Definition",
-      "line": 73,
+      "line": 88,
       "local_dependencies": [],
       "name": "narcs_in",
       "normalized_name": "narcs_in",
@@ -28891,7 +28908,7 @@
         "Digraph.conjectures.unvd.mad"
       ],
       "kind": "Definition",
-      "line": 76,
+      "line": 91,
       "local_dependencies": [
         "narcs_in"
       ],
@@ -28912,7 +28929,7 @@
         "Digraph.conjectures.unvd.prob_6"
       ],
       "kind": "Definition",
-      "line": 80,
+      "line": 95,
       "local_dependencies": [
         "density"
       ],

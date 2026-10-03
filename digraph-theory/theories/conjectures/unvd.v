@@ -28,6 +28,7 @@ From mathcomp Require Import all_boot.
 From mathcomp Require Import all_algebra.
 From Digraph Require Import prelude digraph oriented tournament.
 From Digraph Require Import dichromatic heroes.
+From Digraph.foundations Require Import tournament_unavoidability.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -46,23 +47,37 @@ Definition contains_subdigraph (H D : diGraphType) : Prop :=
 
 (** ** The unavoidability number (as a relation)
 
-    [D] is [N]-unavoidable: every tournament on [N] vertices contains [D]. *)
-Definition unavoidable (D : diGraphType) (N : nat) : Prop :=
+    [D] is [N]-unavoidable: every tournament on [N] vertices contains [D].  The public
+    contract is [Digraph.foundations.tournament_unavoidability.tournament_unavoidable],
+    stated over bundled tournaments with an injective upstream [is_dhom];
+    [unavoidableP] below is the bridge back to the unbundled reading with
+    [is_tournament] and [contains_subdigraph]. *)
+Definition unavoidable (D : diGraphType) (N : nat) : Prop := tournament_unavoidable D N.
+
+Lemma unavoidableP (D : diGraphType) (N : nat) :
+  unavoidable D N <->
   forall T : diGraphType, is_tournament T -> #|T| = N -> contains_subdigraph D T.
+Proof.
+split=> [/tournament_unavoidable_unbundledE un T [irr semi asym] cardT|un].
+- exact: un T irr semi asym cardT.
+- apply/tournament_unavoidable_unbundledE => T irr semi asym cardT.
+  exact: un T (And3 irr semi asym) cardT.
+Qed.
 
 (** Monotone fact recorded for faithfulness of the "least" framing below: being
-    [N]-unavoidable is intended to be upward closed in [N] (larger tournaments still
-    contain [D]); we do not assume it here but state [unvd] as least via an explicit
-    not-[(N-1)]-unavoidable clause so the value is pinned down regardless. *)
+    [N]-unavoidable is upward closed in [N] (larger tournaments still contain [D]; proved
+    as [tournament_unavoidable_monotone] in the foundation, never assumed by a
+    definition); [unvd] is stated as least via an explicit clause excluding EVERY smaller
+    value, so the value is pinned down regardless. *)
 
 (** [unvd D N] : the unavoidability number of [D] equals [N] — the least [N] for which
     [D] is [N]-unavoidable. Stated as the relation [D is N-unavoidable AND no value
-    below N is unavoidable]. We GUARD the degenerate empty digraph: for [#|D| = 0] the
-    invariant is uninteresting (every tournament, even the empty one, contains it), so
-    callers pass [(0 < #|D|)%N]; the relation itself stays meaningful for all [N ≥ 1]
-    via the "[N] minimal" clause. *)
-Definition unvd (D : diGraphType) (N : nat) : Prop :=
-  unavoidable D N /\ (forall M : nat, M < N -> ~ unavoidable D M).
+    below N is unavoidable], the public
+    [Digraph.foundations.tournament_unavoidability.unavoidability_number]. Every smaller
+    value M is excluded, not only N-1, and nothing restricts N: the empty digraph is
+    contained in every tournament and has value 0.  Statements that need a nonempty
+    digraph state that guard themselves (e.g. [(0 < #|D|)%N]). *)
+Definition unvd (D : diGraphType) (N : nat) : Prop := unavoidability_number D N.
 
 (** ** Maximum average degree mad(D) (rational-valued)
 
