@@ -266,6 +266,10 @@
         "GTMisc.conjectures.X167.x167_embedded_in_fixed_surface",
         "Topological.conjectures.X138.x138_embeddable_on_surface"
       ],
+      "708b6857a25a49da0d519f542a2affa839a688e351b72c7682c7fda5f0a751da": [
+        "GTMisc.conjectures.X167.x167_spanning_tree",
+        "GTMisc.conjectures.X168.x168_spanning_tree"
+      ],
       "71ad35656ff65cd04a5234facfcec314ff97ee15049d153feeb971c60b27b4f2": [
         "Digraph.conjectures.glue_eul_subtype.realises_E",
         "Digraph.conjectures.two_extremal_glue.realises_W"
@@ -317,10 +321,6 @@
         "Chromatic.conjectures.X189.x189_path_index_graph",
         "Extremal.conjectures.X105.x105_path_tree",
         "Minor.conjectures.X95.x95_path_index_graph"
-      ],
-      "7efa502ff8112bbd997d56487d1b8af90e4b9b6d422f6101734e6d70d5bf82a9": [
-        "GTMisc.conjectures.X167.x167_spanning_tree",
-        "GTMisc.conjectures.X168.x168_spanning_tree"
       ],
       "7ff835011ab2aa8cae0ca7731c94b54544784ba2de107d9b9f8756d008b19136": [
         "Extremal.conjectures.X76.x76_cut_size",
@@ -39633,7 +39633,7 @@
         "GTMisc.conjectures.X167.fixed_surface_spanning_tree_polytope_linear_xc_statement"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x167_embedded_in_fixed_surface",
       "normalized_name": "embedded_in_fixed_surface",
@@ -39645,14 +39645,14 @@
       "signature_shape_hash": "5f190995738fe87014f30b9f1deb9a6f226a4d1ea8cf2f0b234c4c1e8b4df7f4"
     },
     {
-      "body_hash": "7efa502ff8112bbd997d56487d1b8af90e4b9b6d422f6101734e6d70d5bf82a9",
-      "body_shape_hash": "7efa502ff8112bbd997d56487d1b8af90e4b9b6d422f6101734e6d70d5bf82a9",
-      "declaration_hash": "85794c8c90448defd04590dc85ad338e500473183200f1cd374acaf1eef3cd9d",
+      "body_hash": "708b6857a25a49da0d519f542a2affa839a688e351b72c7682c7fda5f0a751da",
+      "body_shape_hash": "708b6857a25a49da0d519f542a2affa839a688e351b72c7682c7fda5f0a751da",
+      "declaration_hash": "af9bb3e041b797b96a398d30eff3850013bc56f36185210276017bc72be2d384",
       "direct_consumers": [
         "GTMisc.conjectures.X167.x167_extension_system"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [],
       "name": "x167_spanning_tree",
       "normalized_name": "spanning_tree",
@@ -39671,7 +39671,7 @@
         "GTMisc.conjectures.X167.x167_spanning_tree_polytope_xc"
       ],
       "kind": "Record",
-      "line": 17,
+      "line": 16,
       "local_dependencies": [
         "x167_spanning_tree"
       ],
@@ -39692,7 +39692,7 @@
         "GTMisc.conjectures.X167.fixed_surface_spanning_tree_polytope_linear_xc_statement"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 24,
       "local_dependencies": [
         "x167_extension_system"
       ],
@@ -39725,9 +39725,9 @@
       "signature_shape_hash": "f0a8107f27fab631567a7c998294eb48cb9927e8f537ee34f52efa87aebac1c2"
     },
     {
-      "body_hash": "7efa502ff8112bbd997d56487d1b8af90e4b9b6d422f6101734e6d70d5bf82a9",
-      "body_shape_hash": "7efa502ff8112bbd997d56487d1b8af90e4b9b6d422f6101734e6d70d5bf82a9",
-      "declaration_hash": "021efe351f2c25bde6867207622c7c92a18c872c589c1402e73bcc14b2cc322a",
+      "body_hash": "708b6857a25a49da0d519f542a2affa839a688e351b72c7682c7fda5f0a751da",
+      "body_shape_hash": "708b6857a25a49da0d519f542a2affa839a688e351b72c7682c7fda5f0a751da",
+      "declaration_hash": "52dd44e34894bb7fdae8add8f5f402f46399ffe1a41f198d61377291e701d171",
       "direct_consumers": [
         "GTMisc.conjectures.X168.x168_extension_system"
       ],
@@ -39751,7 +39751,7 @@
         "GTMisc.conjectures.X168.x168_spanning_tree_polytope_xc"
       ],
       "kind": "Record",
-      "line": 19,
+      "line": 17,
       "local_dependencies": [
         "x168_spanning_tree"
       ],
@@ -39772,7 +39772,7 @@
         "GTMisc.conjectures.X168.minor_closed_spanning_tree_polytope_linear_xc_statement"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 25,
       "local_dependencies": [
         "x168_extension_system"
       ],
