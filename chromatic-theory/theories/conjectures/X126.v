@@ -10,10 +10,7 @@ Unset Printing Implicit Defensive.
 
 (** A genuine (non-empty, simple) path: distinct vertices forming a walk. *)
 Definition x126_genuine_path (G : sgraph) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q => uniq p /\ path (--) x q
-  end.
+  seq_simple_path p.
 
 (** [col] is a nonrepetitive colouring: on every path of even length [2h] the
     colour sequence of the first half differs from that of the second half (no

@@ -9,10 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X23 vocabulary ************************************************)
 
 Definition x23_genuine_path (G : sgraph) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q => uniq p /\ path (--) x q
-  end.
+  seq_simple_path p.
 
 Definition x23_nonrepetitive_colouring
     (G : sgraph) (k : nat) (col : G -> 'I_k) : Prop :=

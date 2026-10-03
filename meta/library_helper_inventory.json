@@ -69,11 +69,6 @@
         "Cycle.conjectures.X9.x9_cycle_edges",
         "Packing.conjectures.X25.x25_cycle_edge_seq"
       ],
-      "128d0f117e3d989da88dc8243b6f9d84d633fbe4ddba6f7871d99b4e59a36713": [
-        "Chromatic.conjectures.X126.x126_genuine_path",
-        "GTMisc.conjectures.X14.x14_genuine_path",
-        "Topological.conjectures.X23.x23_genuine_path"
-      ],
       "142e18fdfb184f57531f08c7bb5eb8c998f444ba5483d032c5ee5e7950f9be97": [
         "Digraph.conjectures.X2.x2_arc_stable",
         "Digraph.conjectures.classic_core.stable"
@@ -138,6 +133,12 @@
       "2da3ef4ff389999aa86ccaa9de1d11a776478f4da668b3855c295abd0c919f4a": [
         "Extremal.conjectures.D2pr.srel",
         "GTMisc.conjectures.U13.relAdj"
+      ],
+      "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c": [
+        "Chromatic.conjectures.X126.x126_genuine_path",
+        "GTMisc.conjectures.X14.x14_genuine_path",
+        "Packing.conjectures.X178.x178_path_seq",
+        "Topological.conjectures.X23.x23_genuine_path"
       ],
       "325d87a0792f78e32736dfcb33181c9fc5917fd425f0822c2899b343c61a1330": [
         "GTMisc.conjectures.X144.x144_pure_pair",
@@ -5697,9 +5698,9 @@
       "signature_shape_hash": "f0a8107f27fab631567a7c998294eb48cb9927e8f537ee34f52efa87aebac1c2"
     },
     {
-      "body_hash": "128d0f117e3d989da88dc8243b6f9d84d633fbe4ddba6f7871d99b4e59a36713",
-      "body_shape_hash": "128d0f117e3d989da88dc8243b6f9d84d633fbe4ddba6f7871d99b4e59a36713",
-      "declaration_hash": "72c79e4b1693f89d64fd390500ad8fdd95c2e6a1157b27ec2b335ae26b50659c",
+      "body_hash": "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c",
+      "body_shape_hash": "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c",
+      "declaration_hash": "d039cf6458b045f36b34eb734f5bd1bb15c6b607bfe33479ba5601e023341fd9",
       "direct_consumers": [
         "Chromatic.conjectures.X126.x126_nonrepetitive"
       ],
@@ -5723,7 +5724,7 @@
         "Chromatic.conjectures.X126.x126_nonrepetitive_list_colouring"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 14,
       "local_dependencies": [
         "x126_genuine_path"
       ],
@@ -5744,7 +5745,7 @@
         "Chromatic.conjectures.X126.x126_thue_choosable"
       ],
       "kind": "Definition",
-      "line": 28,
+      "line": 25,
       "local_dependencies": [
         "x126_nonrepetitive"
       ],
@@ -5766,7 +5767,7 @@
         "Chromatic.conjectures.X126.x126_is_thue_choice_number"
       ],
       "kind": "Definition",
-      "line": 35,
+      "line": 32,
       "local_dependencies": [
         "x126_nonrepetitive_list_colouring"
       ],
@@ -5785,7 +5786,7 @@
       "declaration_hash": "3f82408534e7b9a45b34c07cb4d069b1af1ad6d14ed581ad1776d274f96133c0",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 43,
+      "line": 40,
       "local_dependencies": [
         "x126_thue_choosable"
       ],
@@ -5806,7 +5807,7 @@
         "Chromatic.conjectures.X126.x126_pathwidth_at_most"
       ],
       "kind": "Definition",
-      "line": 50,
+      "line": 47,
       "local_dependencies": [],
       "name": "x126_tree_decomposition",
       "normalized_name": "tree_decomposition",
@@ -5825,7 +5826,7 @@
         "Chromatic.conjectures.X126.x126_pathwidth_at_most"
       ],
       "kind": "Definition",
-      "line": 60,
+      "line": 57,
       "local_dependencies": [],
       "name": "x126_path_index_graph",
       "normalized_name": "path_index_graph",
@@ -5844,7 +5845,7 @@
         "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement"
       ],
       "kind": "Definition",
-      "line": 63,
+      "line": 60,
       "local_dependencies": [
         "x126_path_index_graph",
         "x126_tree_decomposition"
@@ -38984,9 +38985,9 @@
       "signature_shape_hash": "c88b0fcec99f0dc441a92deab5bb1de1142732a700adf1815aaa4bb2e2ecf657"
     },
     {
-      "body_hash": "128d0f117e3d989da88dc8243b6f9d84d633fbe4ddba6f7871d99b4e59a36713",
-      "body_shape_hash": "128d0f117e3d989da88dc8243b6f9d84d633fbe4ddba6f7871d99b4e59a36713",
-      "declaration_hash": "5f4a88716404704868ebdd33d8389def91f236ef1b8750e2ce4302629f153918",
+      "body_hash": "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c",
+      "body_shape_hash": "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c",
+      "declaration_hash": "2a7bc69a37b1a36fc65e17efa7de0b416d79bc3bd3dac3d66176b886bad941a2",
       "direct_consumers": [
         "GTMisc.conjectures.X14.x14_rainbow_path"
       ],
@@ -39010,7 +39011,7 @@
         "GTMisc.conjectures.X14.andersen_rainbow_path_statement"
       ],
       "kind": "Definition",
-      "line": 36,
+      "line": 33,
       "local_dependencies": [
         "x14_edge_set"
       ],
@@ -39031,7 +39032,7 @@
         "GTMisc.conjectures.X14.andersen_rainbow_path_statement"
       ],
       "kind": "Definition",
-      "line": 45,
+      "line": 42,
       "local_dependencies": [
         "x14_genuine_path",
         "x14_path_edges"
@@ -51881,9 +51882,9 @@
       "signature_shape_hash": "a4b7dea2007adc75a28b3bd7c87102b273fdb9eea970ce1b2a59245ac47bb34f"
     },
     {
-      "body_hash": "616effa9f27fd26f7b9f0489bfc6b05db7c1f1773d36a0c3bc105722bf703fd6",
-      "body_shape_hash": "616effa9f27fd26f7b9f0489bfc6b05db7c1f1773d36a0c3bc105722bf703fd6",
-      "declaration_hash": "e705131e034b75ece855cc4b725b5a4ea5079d96eae6a124a8e08b114eb4a77b",
+      "body_hash": "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c",
+      "body_shape_hash": "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c",
+      "declaration_hash": "a33d91b87841e546d2f9e812ab122e792838395963832944d5a464128f602c9c",
       "direct_consumers": [
         "Packing.conjectures.X178.x178_path_decomposition_at_most"
       ],
@@ -55540,9 +55541,9 @@
       "signature_shape_hash": "c71f1e9749b13543557d87424f80ff2487bc5df8217e4ce0084a78cb5ba18005"
     },
     {
-      "body_hash": "128d0f117e3d989da88dc8243b6f9d84d633fbe4ddba6f7871d99b4e59a36713",
-      "body_shape_hash": "128d0f117e3d989da88dc8243b6f9d84d633fbe4ddba6f7871d99b4e59a36713",
-      "declaration_hash": "c9481d9bb43c6c3b59b83a2aaea35dc48543f198c820d958a4b344c74b85def9",
+      "body_hash": "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c",
+      "body_shape_hash": "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c",
+      "declaration_hash": "e0bbac741215562c08a533740e30c91f1b5d4571f7d3afbf51ece010eb5bb682",
       "direct_consumers": [
         "Topological.conjectures.X23.x23_nonrepetitive_colouring"
       ],
@@ -55566,7 +55567,7 @@
         "Topological.conjectures.X23.planar_bounded_nonrepetitive_chromatic_statement"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 13,
       "local_dependencies": [
         "x23_genuine_path"
       ],
@@ -55588,7 +55589,7 @@
         "Topological.conjectures.X23.x23_edge_colour_sym"
       ],
       "kind": "Definition",
-      "line": 24,
+      "line": 21,
       "local_dependencies": [],
       "name": "x23_edge_colour_rel",
       "normalized_name": "edge_colour_rel",
@@ -55607,7 +55608,7 @@
         "Topological.conjectures.X23.x23_colour_graph"
       ],
       "kind": "Lemma",
-      "line": 28,
+      "line": 25,
       "local_dependencies": [
         "x23_edge_colour_rel"
       ],
@@ -55628,7 +55629,7 @@
         "Topological.conjectures.X23.x23_colour_graph"
       ],
       "kind": "Lemma",
-      "line": 35,
+      "line": 32,
       "local_dependencies": [
         "x23_edge_colour_rel"
       ],
@@ -55649,7 +55650,7 @@
         "Topological.conjectures.X23.x23_linear_forest_colour"
       ],
       "kind": "Definition",
-      "line": 40,
+      "line": 37,
       "local_dependencies": [
         "x23_edge_colour_irrefl",
         "x23_edge_colour_sym"
@@ -55671,7 +55672,7 @@
         "Topological.conjectures.X23.x23_linear_arboricity_at_most"
       ],
       "kind": "Definition",
-      "line": 44,
+      "line": 41,
       "local_dependencies": [
         "x23_colour_graph"
       ],
@@ -55692,7 +55693,7 @@
         "Topological.conjectures.X23.x23_linear_arboricity"
       ],
       "kind": "Definition",
-      "line": 49,
+      "line": 46,
       "local_dependencies": [
         "x23_linear_forest_colour"
       ],
@@ -55713,7 +55714,7 @@
         "Topological.conjectures.X23.planar_linear_arboricity_statement"
       ],
       "kind": "Definition",
-      "line": 53,
+      "line": 50,
       "local_dependencies": [
         "x23_linear_arboricity_at_most"
       ],
@@ -55732,7 +55733,7 @@
       "declaration_hash": "219f6b7f94b18512fb96d96b176eebd98d02379a344e462fffe4525b790beff8",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 31,
+      "line": 33,
       "local_dependencies": [],
       "name": "x158_edge_setE",
       "normalized_name": "edge_setE",
