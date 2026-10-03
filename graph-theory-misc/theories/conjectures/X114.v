@@ -1,7 +1,7 @@
 (** * GTMisc.conjectures.X114 -- v2 subcubic induced-subdivision NP-completeness row *)
 
 From GTBase Require Export base.
-From GTBase Require Import model_support.
+From GTBase Require Import model_support induced_subdivisions.
 From GTMisc.conjectures Require Import D7.
 
 Set Implicit Arguments.
@@ -39,36 +39,90 @@ Definition x114_internal (G : sgraph) (p : seq G) (a b x : G) : Prop :=
 Definition x114_model_vertex (H G : sgraph)
     (br : H -> G) (ep : H -> H -> seq G) (x : G) : Prop := model_support br ep x.
 
-Record x114_induced_subdivision_model (H G : sgraph) := X114Model {
-  x114_branch : H -> G;
-  x114_branch_injective : injective x114_branch;
-  x114_edge_path : H -> H -> seq G;
-  x114_edge_path_valid :
+(** The strong induced-subdivision model is the canonical
+    [GTBase.induced_subdivisions.induced_subdivision_model] (pattern before host).  The
+    definitions below keep the local constructor and projection names with their exact
+    types and implicit arguments; every field formula is convertible to the canonical one. *)
+Definition x114_induced_subdivision_model (H G : sgraph) : Type := induced_subdivision_model H G.
+
+Definition X114Model (H G : sgraph) (x114_branch : H -> G) (x114_branch_injective : injective x114_branch)
+    (x114_edge_path : H -> H -> seq G)
+    (x114_edge_path_valid :
+       forall u v : H,
+         u -- v ->
+         x114_induced_path_between
+           (x114_branch u) (x114_branch v) (x114_edge_path u v))
+    (x114_internal_avoids_branch :
+       forall (u v w : H) (x : G),
+         u -- v ->
+         x114_internal (x114_edge_path u v) (x114_branch u) (x114_branch v) x ->
+         x != x114_branch w)
+    (x114_paths_internally_disjoint :
+       forall (u v u' v' : H) (x : G),
+         u -- v -> u' -- v' ->
+         x114_internal (x114_edge_path u v) (x114_branch u) (x114_branch v) x ->
+         x114_internal (x114_edge_path u' v') (x114_branch u') (x114_branch v') x ->
+         (u = u' /\ v = v') \/ (u = v' /\ v = u'))
+    (x114_global_induced :
+       forall x y : G,
+         x114_model_vertex x114_branch x114_edge_path x ->
+         x114_model_vertex x114_branch x114_edge_path y ->
+         x -- y ->
+         exists u v : H, u -- v /\ x114_consecutive_in_path (x114_edge_path u v) x y) :
+    x114_induced_subdivision_model H G :=
+  @InducedSubdivisionModel H G x114_branch x114_branch_injective x114_edge_path x114_edge_path_valid
+    x114_internal_avoids_branch x114_paths_internally_disjoint x114_global_induced.
+
+Definition x114_branch (H G : sgraph) (x0 : x114_induced_subdivision_model H G) : H -> G :=
+  isd_branch x0.
+
+Definition x114_branch_injective (H G : sgraph) (x0 : x114_induced_subdivision_model H G) :
+    injective (x114_branch x0) :=
+  @isd_branch_injective H G x0.
+
+Definition x114_edge_path (H G : sgraph) (x0 : x114_induced_subdivision_model H G) : H -> H -> seq G :=
+  isd_edge_path x0.
+
+Definition x114_edge_path_valid (H G : sgraph) (x0 : x114_induced_subdivision_model H G) :
     forall u v : H,
       u -- v ->
-      x114_induced_path_between
-        (x114_branch u) (x114_branch v) (x114_edge_path u v);
-  x114_internal_avoids_branch :
+      x114_induced_path_between (x114_branch x0 u) (x114_branch x0 v) (x114_edge_path x0 u v) :=
+  @isd_edge_path_valid H G x0.
+
+Definition x114_internal_avoids_branch (H G : sgraph) (x0 : x114_induced_subdivision_model H G) :
     forall (u v w : H) (x : G),
       u -- v ->
-      x114_internal (x114_edge_path u v) (x114_branch u) (x114_branch v) x ->
-      x != x114_branch w;
-  x114_paths_internally_disjoint :
+      x114_internal (x114_edge_path x0 u v) (x114_branch x0 u) (x114_branch x0 v) x ->
+      x != x114_branch x0 w :=
+  @isd_internal_avoids_branch H G x0.
+
+Definition x114_paths_internally_disjoint (H G : sgraph) (x0 : x114_induced_subdivision_model H G) :
     forall (u v u' v' : H) (x : G),
       u -- v -> u' -- v' ->
-      x114_internal (x114_edge_path u v) (x114_branch u) (x114_branch v) x ->
-      x114_internal (x114_edge_path u' v') (x114_branch u') (x114_branch v') x ->
-      (u = u' /\ v = v') \/ (u = v' /\ v = u');
-  x114_global_induced :
-    forall x y : G,
-      x114_model_vertex x114_branch x114_edge_path x ->
-      x114_model_vertex x114_branch x114_edge_path y ->
-      x -- y ->
-      exists u v : H, u -- v /\ x114_consecutive_in_path (x114_edge_path u v) x y
-}.
+      x114_internal (x114_edge_path x0 u v) (x114_branch x0 u) (x114_branch x0 v) x ->
+      x114_internal (x114_edge_path x0 u' v') (x114_branch x0 u') (x114_branch x0 v') x ->
+      (u = u' /\ v = v') \/ (u = v' /\ v = u') :=
+  @isd_paths_internally_disjoint H G x0.
 
-Definition x114_induced_subdivision (H G : sgraph) : Prop :=
-  inhabited (x114_induced_subdivision_model H G).
+Definition x114_global_induced (H G : sgraph) (x0 : x114_induced_subdivision_model H G) :
+    forall x y : G,
+      x114_model_vertex (x114_branch x0) (x114_edge_path x0) x ->
+      x114_model_vertex (x114_branch x0) (x114_edge_path x0) y ->
+      x -- y ->
+      exists u v : H, u -- v /\ x114_consecutive_in_path (x114_edge_path x0 u v) x y :=
+  @isd_global_induced H G x0.
+
+Arguments X114Model [H G] [x114_branch] x114_branch_injective [x114_edge_path]
+  x114_edge_path_valid x114_internal_avoids_branch x114_paths_internally_disjoint x114_global_induced.
+Arguments x114_branch [H G] x0 _.
+Arguments x114_branch_injective [H G x0 x1 x2] _.
+Arguments x114_edge_path [H G] x0 _ _.
+Arguments x114_edge_path_valid [H G] x0 [u v] _.
+Arguments x114_internal_avoids_branch [H G x0 u v] w [x] _ _.
+Arguments x114_paths_internally_disjoint [H G x0 u v u' v' x] _ _ _ _.
+Arguments x114_global_induced [H G x0 x y] _ _ _.
+
+Definition x114_induced_subdivision (H G : sgraph) : Prop := induced_subdivision H G.
 
 (** The H-INDUCED-SUBDIVISION-CONTAINMENT decision problem ([H]-ISC), packaged
     as a [D7.problem]: input a graph G (size = #|G|), YES iff G contains an

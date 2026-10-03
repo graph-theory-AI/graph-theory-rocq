@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py branch_paths --details /tmp/mig
 - Canonical: `Chromatic.foundations.branch_paths.branch_paths_at_least`.
 - Baseline: `311fdcb89dc12a78c62cb0ee6d2477896cbce9a7`.
 - Scope: 3 helpers, 3 statements, 7 frozen objects, 11 recorded references.
-- Source checks: 73/73 pass; consistent.
+- Source checks: 71/71 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -19,4 +19,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py branch_paths --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Extremal.conjectures.X98.x98_induced_subdivision`, `GTMisc.conjectures.X114.x114_induced_subdivision`, `Minor.foundations.containment.has_subdivision`.
+Excluded distinct variants: `Minor.foundations.containment.has_subdivision`.
