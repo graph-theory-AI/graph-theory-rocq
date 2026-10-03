@@ -221,7 +221,7 @@ Qed.
 (** A matching is a linear forest (degree ≤ 1 ⟹ degree ≤ 2, same acyclicity). *)
 Lemma matching_linear_forest (G : sgraph) : matching G -> linear_forest G.
 Proof.
-case=> Gf Gd; split=> // x.
+move=> /matchingP [Gf Gd]; split=> // x.
 by apply: leq_trans (Gd x) _.
 Qed.
 

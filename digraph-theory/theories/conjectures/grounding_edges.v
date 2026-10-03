@@ -482,7 +482,7 @@ Proof. exact: has_LFO_Delta_star_le2 (has_LFO_TT n). Qed.
     FAS => path-FAS edge SOURCE non-vacuity is downstream of [has_pathFAS] being
     inhabited.  We record the bridge (the easy inclusion). *)
 Lemma matching_linear_forest' (G : sgraph) : matching G -> linear_forest G.
-Proof. by case=> Gf Gd; split=> // x; apply: leq_trans (Gd x) _. Qed.
+Proof. by move=> /matchingP [Gf Gd]; split=> // x; apply: leq_trans (Gd x) _. Qed.
 
 (** TARGET non-triviality: Δ* ≤ 2 is NOT automatic — there exist tournaments with
     Δ* ≥ 3 (the open Path-FAS NO-certificates).  We cannot exhibit one cheaply,
