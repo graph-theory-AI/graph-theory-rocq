@@ -1,0 +1,602 @@
+{
+  "family": "cycle-edges",
+  "canonical_name": "GTBase.walks_paths.seq_cycle_edge_set",
+  "canonical_short_name": "seq_cycle_edge_set",
+  "relation": "four separate representations of the edges of a cyclic vertex sequence, all by conversion: X9 x9_cycle_edges, X24 x24_cycle_edge_seq and X25 x25_cycle_edge_seq are GTBase.walks_paths.seq_cycle_edge_list c (ordered list of the pairs of zip c (rot 1 c), closing pair included); X216 x216_cycle_edges is seq_cycle_edge_set c (its finite support); Cycle XE1 xe1_cycle_edges is seq_cycle_graph_edge_set c (the actual edges among those pairs, equal to seq_cycle_edge_set c :&: E(G) for every c); U2 cycle_edges, X211 x211_cycle_edges and U9 cycle_edgesG are seq_next_edge_set c (the first-occurrence successor image, contained in the support and equal to it under uniq c)",
+  "baseline_commit": "0a0203ee4e1ff00605e4cbfa89108dcbea0e812f",
+  "namespaces": {
+    "base": "GTBase",
+    "cycle-theory": "Cycle",
+    "graph-theory-misc": "GTMisc",
+    "hamiltonicity-theory": "Hamilton",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "cycle-theory/theories/migration/cycle_edges.v",
+    "packing-theory/theories/migration/cycle_edges.v",
+    "graph-theory-misc/theories/migration/cycle_edges.v",
+    "hamiltonicity-theory/theories/migration/cycle_edges.v",
+    "packing-theory/theories/migration/simple_edges.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.seq_next_nth_rot",
+    "GTBase.walks_paths.seq_next_in_zip",
+    "GTBase.walks_paths.seq_zip_nextE",
+    "GTBase.walks_paths.in_seq_cycle_edge_set",
+    "GTBase.walks_paths.seq_cycle_edge_listP",
+    "GTBase.walks_paths.seq_cycle_edge_setP",
+    "GTBase.walks_paths.seq_cycle_edge_set_consecutive",
+    "GTBase.walks_paths.size_seq_cycle_edge_list",
+    "GTBase.walks_paths.seq_cycle_edge_list_closed",
+    "GTBase.walks_paths.seq_cycle_edge_list_rcons",
+    "GTBase.walks_paths.seq_cycle_edge_list_nil",
+    "GTBase.walks_paths.seq_cycle_edge_list_seq1",
+    "GTBase.walks_paths.seq_cycle_edge_list_pair",
+    "GTBase.walks_paths.seq_cycle_edge_list_rot",
+    "GTBase.walks_paths.seq_cycle_edge_list_rotr",
+    "GTBase.walks_paths.seq_cycle_edge_list_rev",
+    "GTBase.walks_paths.perm_seq_cycle_edge_list_rot",
+    "GTBase.walks_paths.perm_seq_cycle_edge_list_rev",
+    "GTBase.walks_paths.seq_cycle_edge_set_closed",
+    "GTBase.walks_paths.seq_cycle_edge_set_rcons",
+    "GTBase.walks_paths.seq_cycle_edge_set_last",
+    "GTBase.walks_paths.seq_cycle_edge_set_open",
+    "GTBase.walks_paths.seq_cycle_edge_set_nil",
+    "GTBase.walks_paths.seq_cycle_edge_set_seq1",
+    "GTBase.walks_paths.seq_cycle_edge_set_pair",
+    "GTBase.walks_paths.card_seq_cycle_edge_set",
+    "GTBase.walks_paths.seq_cycle_edge_set_sub",
+    "GTBase.walks_paths.seq_cycle_edge_set_rot",
+    "GTBase.walks_paths.seq_cycle_edge_set_rotr",
+    "GTBase.walks_paths.seq_cycle_edge_set_rev",
+    "GTBase.walks_paths.seq_next_edge_setP",
+    "GTBase.walks_paths.seq_next_edge_set_vertices",
+    "GTBase.walks_paths.seq_next_edge_set_sub",
+    "GTBase.walks_paths.seq_next_edge_set_uniq",
+    "GTBase.walks_paths.seq_next_edge_set_nil",
+    "GTBase.walks_paths.seq_next_edge_set_seq1",
+    "GTBase.walks_paths.seq_next_edge_set_pair",
+    "GTBase.walks_paths.seq_next_edge_set_rot",
+    "GTBase.walks_paths.seq_next_edge_set_rev",
+    "GTBase.walks_paths.seq_cycle_graph_edge_setP",
+    "GTBase.walks_paths.seq_cycle_graph_edge_setE",
+    "GTBase.walks_paths.seq_cycle_graph_edge_set_sub",
+    "GTBase.walks_paths.seq_cycle_graph_edge_set_support",
+    "GTBase.walks_paths.seq_cycle_edge_set_cycle",
+    "GTBase.walks_paths.seq_cycle_graph_edge_set_cycle",
+    "GTBase.walks_paths.seq_next_edge_set_ucycle",
+    "GTBase.walks_paths.seq_cycle_graph_edge_set_nil",
+    "GTBase.walks_paths.seq_cycle_graph_edge_set_seq1",
+    "GTBase.walks_paths.seq_cycle_graph_edge_set_pair",
+    "GTBase.walks_paths.seq_cycle_graph_edge_set_nonedge",
+    "GTBase.walks_paths.seq_cycle_graph_edge_set_rot",
+    "GTBase.walks_paths.seq_cycle_graph_edge_set_rev",
+    "GTBase.walks_paths.seq_cycle_edges_ground_nil",
+    "GTBase.walks_paths.seq_cycle_edges_ground_seq1",
+    "GTBase.walks_paths.seq_cycle_edges_ground_pair",
+    "GTBase.walks_paths.seq_cycle_edges_ground_nonedge",
+    "GTBase.walks_paths.seq_cycle_edges_ground_closing",
+    "GTBase.walks_paths.seq_cycle_edges_ground_repeat_walk",
+    "GTBase.walks_paths.seq_cycle_edges_ground_repeat_next",
+    "GTBase.walks_paths.seq_cycle_edges_ground_repeat_rot"
+  ],
+  "summary": [
+    "Batch B, family B11 (edges of a cyclic sequence): the eight helpers that extract the edges of a cyclic vertex sequence through `zip c (rot 1 c)` or MathComp's `next`, kept as FOUR representations, each convertible to its `GTBase.walks_paths` canonical. The raw ordered list `map (fun p => [set p.1; p.2]) (zip c (rot 1 c))` (Cycle X9 `x9_cycle_edges`, Cycle X24 `x24_cycle_edge_seq`, Packing X25 `x25_cycle_edge_seq`) is `seq_cycle_edge_list c`; its raw finite support (GTMisc X216 `x216_cycle_edges`) is `seq_cycle_edge_set c`; Cycle XE1's actual-edge filter `xe1_cycle_edges` (adjacent endpoints whose pair occurs in either order) is `seq_cycle_graph_edge_set c`; the first-occurrence successor image `[set [set x; next c x] | x in [set z | z \\in c]]` (Hamilton U2 `cycle_edges`, Hamilton X211 `x211_cycle_edges` and the cross-name Packing U9 `cycle_edgesG`) is `seq_next_edge_set c`. Signatures and the explicit `Arguments` of U2, X211 and U9 are unchanged, and no adjacency, uniqueness or length guard is added to any helper. API: the succession bridges `seq_next_in_zip` (every sequence) and `seq_zip_nextE` (under `uniq c`); list size, closing pair, rotation and reversal (up to `perm_eq`); support membership through `seq_cyclic_consecutive`, closing pair, open support and rotation/reversal invariance; the filter equals support :&: E(G) for every sequence and the support under the sufficient guard `cycle (--) c`; the image is contained in the support for every sequence and equal to it under the sufficient guard `uniq c`, so all four agree on a `ucycle`; degenerate cases; groundings (one-entry loop, digon, a non-edge of K_1,2, the closing pair, and the closed walk [0; 1; 0; 2; 3] of K_4, on which the image misses {0, 2} and changes under rotation and reversal).",
+    "",
+    "Eleven rows and ten intermediates, frozen with this family's helpers only: Cycle X9 (proper edge-coloured short cycle; incident-edge colouring chain), Cycle X24 (long rainbow cycle; rainbow cycle chain), Cycle XE1 #184 (cycle-or-edge pieces), Cycle XE2 #641 (cross-file edge-disjoint cycles), Packing X25 (Kotzig; Hamiltonian edge-set and perfect one-factorization chains), Packing U9 (matchings extend to Hamilton cycles of hypercubes), GTMisc X216 (second Hamilton cycle, BLOCKED; output specification), Hamilton U2 (4-connected graphs are not uniquely Hamiltonian; r-regular graphs are not uniquely Hamiltonian, with the uniquely-Hamiltonian chain; prism decomposition, with the two-cycle decomposition chain) and Hamilton X211 (Cantoni; Hamilton-cycle edge sets). Every guard, quantifier, constant, status and documented defect is unchanged, including X216's blocked complexity defect and the Hamilton digon convention and empty-carrier behaviour. The proof consumers (Hamilton grounding_U2, grounding_X211 and implications_U2, GTMisc grounding_X216) compile unchanged.",
+    "",
+    "History (complete rows; every earlier frozen body, array, type, status and document unchanged): Packing X25 reuses M1's complete snapshot `Packing.migration.simple_edges.X25Legacy` (raw list, Hamiltonian edge-set chain, pre-M1 edge set, pre-C2 perfect matching; kept by C2) as this family's frozen copy, with the certificates restated in Packing.migration.cycle_edges. `X24Original` composes C2's frozen one-factorization chain with this family's frozen rainbow cycle (C2+B11), certified through C2's certificate. `X9Original`, `XE1Original` (#184) and `XE2Original` (#641, cross-file) compose B10's frozen cycle helpers with this family's frozen chains (B10+B11), by conversion. The B10 per-row X9, #184 and #641 snapshots and C2's X24 row still call live chains of this family and are documented reciprocally. M1's edge-set aliases `x9_edge_set` and `xe1_edge_set` stay live in the X9 and #184 rows and Originals: M1 froze only its helpers there.",
+    "",
+    "Kernel evidence, independent of this textual report: `Print All Dependencies` of every frozen row, chain and Original contains no live helper or chain of this family and none of the four canonicals; the Originals also reach no live B10 or C2 helper or canonical; every per-row copy reaches no live constant outside its live row's closure (so U2's own `hamiltonian_cycle` / `edge_set` and X211's GTBase.common `hamiltonian_cycle` resolve as in the sources); each live row reaches its canonical and its alias (/srv/graph-theory-rocq/coordination/evidence/B11-cycle_edges/print_all_dependencies_summary.txt).",
+    "",
+    "Baseline 0a0203e is the announced B10 prose pin (B10 e1dc8dd plus its wording follow-up), not yet integrated; B11 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). The B4, B8 and B10 specs, which listed some of these helpers as untouched distinct variants, now record that B11 migrated them."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X9.x9_cycle_edges",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "x9_cycle_edges",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "Legacy.x9_cycle_edges",
+      "substitutions": {},
+      "certificate": "Cycle.migration.cycle_edges.x9_cycle_edges_compat",
+      "live_unfolds_to": "seq_cycle_edge_list c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X24.x24_cycle_edge_seq",
+      "path": "cycle-theory/theories/conjectures/X24.v",
+      "name": "x24_cycle_edge_seq",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "Legacy.x24_cycle_edge_seq",
+      "substitutions": {},
+      "certificate": "Cycle.migration.cycle_edges.x24_cycle_edge_seq_compat",
+      "live_unfolds_to": "seq_cycle_edge_list c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.XE1.xe1_cycle_edges",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "xe1_cycle_edges",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "Legacy.xe1_cycle_edges",
+      "substitutions": {},
+      "certificate": "Cycle.migration.cycle_edges.xe1_cycle_edges_compat",
+      "live_unfolds_to": "seq_cycle_graph_edge_set c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X9.x9_cycle_incident_edges_properly_coloured",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "x9_cycle_incident_edges_properly_coloured",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "X9Legacy.cycle_incident_edges_properly_coloured",
+      "substitutions": {
+        "x9_cycle_edges": "Legacy.x9_cycle_edges",
+        "x9_cycle_incident_edges_properly_coloured": "cycle_incident_edges_properly_coloured"
+      },
+      "certificate": "Cycle.migration.cycle_edges.x9_cycle_incident_edges_properly_coloured_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X9.proper_edge_coloured_short_cycle_statement",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "proper_edge_coloured_short_cycle_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "X9Legacy.proper_edge_coloured_short_cycle_statement",
+      "substitutions": {
+        "x9_cycle_incident_edges_properly_coloured": "cycle_incident_edges_properly_coloured"
+      },
+      "certificate": "Cycle.migration.cycle_edges.proper_edge_coloured_short_cycle_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.cycle_edges.proper_edge_coloured_short_cycle_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.X9.proper_edge_coloured_short_cycle_statement",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "proper_edge_coloured_short_cycle_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "X9Original.proper_edge_coloured_short_cycle_statement",
+      "substitutions": {
+        "x9_cycle_incident_edges_properly_coloured": "X9Legacy.cycle_incident_edges_properly_coloured",
+        "x9_genuine_cycle": "B10.Legacy.x9_genuine_cycle"
+      },
+      "certificate": "Cycle.migration.cycle_edges.proper_edge_coloured_short_cycle_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X24.x24_rainbow_cycle",
+      "path": "cycle-theory/theories/conjectures/X24.v",
+      "name": "x24_rainbow_cycle",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "X24Legacy.rainbow_cycle",
+      "substitutions": {
+        "x24_cycle_edge_seq": "Legacy.x24_cycle_edge_seq",
+        "x24_rainbow_cycle": "rainbow_cycle"
+      },
+      "certificate": "Cycle.migration.cycle_edges.x24_rainbow_cycle_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X24.one_factorization_long_rainbow_cycle_statement",
+      "path": "cycle-theory/theories/conjectures/X24.v",
+      "name": "one_factorization_long_rainbow_cycle_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "X24Legacy.one_factorization_long_rainbow_cycle_statement",
+      "substitutions": {
+        "x24_rainbow_cycle": "rainbow_cycle"
+      },
+      "certificate": "Cycle.migration.cycle_edges.one_factorization_long_rainbow_cycle_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.cycle_edges.one_factorization_long_rainbow_cycle_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.X24.one_factorization_long_rainbow_cycle_statement",
+      "path": "cycle-theory/theories/conjectures/X24.v",
+      "name": "one_factorization_long_rainbow_cycle_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "X24Original.one_factorization_long_rainbow_cycle_statement",
+      "substitutions": {
+        "x24_one_factorization": "C2.X24Legacy.one_factorization",
+        "x24_rainbow_cycle": "X24Legacy.rainbow_cycle"
+      },
+      "certificate": "Cycle.migration.cycle_edges.one_factorization_long_rainbow_cycle_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.XE1.xe1_cycle_or_edge_piece",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "xe1_cycle_or_edge_piece",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "XE1Legacy.cycle_or_edge_piece",
+      "substitutions": {
+        "xe1_cycle_edges": "Legacy.xe1_cycle_edges",
+        "xe1_cycle_or_edge_piece": "cycle_or_edge_piece"
+      },
+      "certificate": "Cycle.migration.cycle_edges.xe1_cycle_or_edge_piece_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.XE1.erdos_184_statement",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "erdos_184_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "XE1Legacy.erdos_184_statement",
+      "substitutions": {
+        "xe1_cycle_or_edge_piece": "cycle_or_edge_piece"
+      },
+      "certificate": "Cycle.migration.cycle_edges.erdos_184_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.cycle_edges.erdos_184_statement_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Cycle.conjectures.XE1.xe1_cycle_or_edge_piece",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "xe1_cycle_or_edge_piece",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "XE1Original.cycle_or_edge_piece",
+      "substitutions": {
+        "xe1_cycle": "B10.Legacy.xe1_cycle",
+        "xe1_cycle_edges": "Legacy.xe1_cycle_edges",
+        "xe1_cycle_or_edge_piece": "cycle_or_edge_piece"
+      },
+      "certificate": "Cycle.migration.cycle_edges.xe1_cycle_or_edge_piece_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.XE1.erdos_184_statement",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "erdos_184_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "XE1Original.erdos_184_statement",
+      "substitutions": {
+        "xe1_cycle_or_edge_piece": "cycle_or_edge_piece"
+      },
+      "certificate": "Cycle.migration.cycle_edges.erdos_184_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.XE2.xe2_edge_disjoint_cycles",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_edge_disjoint_cycles",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "XE2Legacy.edge_disjoint_cycles",
+      "substitutions": {
+        "xe1_cycle_edges": "Legacy.xe1_cycle_edges",
+        "xe2_edge_disjoint_cycles": "edge_disjoint_cycles"
+      },
+      "certificate": "Cycle.migration.cycle_edges.xe2_edge_disjoint_cycles_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.XE2.erdos_641_statement",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "erdos_641_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "XE2Legacy.erdos_641_statement",
+      "substitutions": {
+        "xe2_edge_disjoint_cycles": "edge_disjoint_cycles"
+      },
+      "certificate": "Cycle.migration.cycle_edges.erdos_641_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.cycle_edges.erdos_641_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.XE2.erdos_641_statement",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "erdos_641_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_edges.v",
+      "frozen": "XE2Original.erdos_641_statement",
+      "substitutions": {
+        "xe1_cycle": "B10.Legacy.xe1_cycle",
+        "xe2_edge_disjoint_cycles": "XE2Legacy.edge_disjoint_cycles"
+      },
+      "certificate": "Cycle.migration.cycle_edges.erdos_641_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X25.x25_cycle_edge_seq",
+      "path": "packing-theory/theories/conjectures/X25.v",
+      "name": "x25_cycle_edge_seq",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "X25Legacy.cycle_edge_seq",
+      "substitutions": {
+        "x25_cycle_edge_seq": "cycle_edge_seq"
+      },
+      "certificate": "Packing.migration.cycle_edges.x25_cycle_edge_seq_compat",
+      "live_unfolds_to": "seq_cycle_edge_list c",
+      "note": "M1/C2 snapshot reused unchanged (Packing.migration.simple_edges.X25Legacy, frozen at 061154c and kept by C2): the raw cycle list, the Hamiltonian edge-set chain, the pre-M1 edge set and the pre-C2 perfect matching are all frozen there, so the row reaches no live helper of M1, C2 or B11; B11 restates its certificates in Packing.migration.cycle_edges"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X25.x25_hamiltonian_edge_set",
+      "path": "packing-theory/theories/conjectures/X25.v",
+      "name": "x25_hamiltonian_edge_set",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "X25Legacy.hamiltonian_edge_set",
+      "substitutions": {
+        "x25_cycle_edge_seq": "cycle_edge_seq",
+        "x25_hamiltonian_edge_set": "hamiltonian_edge_set"
+      },
+      "certificate": "Packing.migration.cycle_edges.x25_hamiltonian_edge_set_compat",
+      "note": "M1/C2 snapshot reused unchanged (Packing.migration.simple_edges.X25Legacy, frozen at 061154c and kept by C2): the raw cycle list, the Hamiltonian edge-set chain, the pre-M1 edge set and the pre-C2 perfect matching are all frozen there, so the row reaches no live helper of M1, C2 or B11; B11 restates its certificates in Packing.migration.cycle_edges"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X25.x25_perfect_one_factorization",
+      "path": "packing-theory/theories/conjectures/X25.v",
+      "name": "x25_perfect_one_factorization",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "X25Legacy.perfect_one_factorization",
+      "substitutions": {
+        "x25_edge_set": "Legacy.edge_set",
+        "x25_hamiltonian_edge_set": "hamiltonian_edge_set",
+        "x25_perfect_matching": "perfect_matching",
+        "x25_perfect_one_factorization": "perfect_one_factorization"
+      },
+      "certificate": "Packing.migration.cycle_edges.x25_perfect_one_factorization_compat",
+      "note": "M1/C2 snapshot reused unchanged (Packing.migration.simple_edges.X25Legacy, frozen at 061154c and kept by C2): the raw cycle list, the Hamiltonian edge-set chain, the pre-M1 edge set and the pre-C2 perfect matching are all frozen there, so the row reaches no live helper of M1, C2 or B11; B11 restates its certificates in Packing.migration.cycle_edges"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X25.kotzig_perfect_one_factorization_statement",
+      "path": "packing-theory/theories/conjectures/X25.v",
+      "name": "kotzig_perfect_one_factorization_statement",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "X25Legacy.statement",
+      "substitutions": {
+        "kotzig_perfect_one_factorization_statement": "statement",
+        "x25_perfect_one_factorization": "perfect_one_factorization"
+      },
+      "certificate": "Packing.migration.cycle_edges.kotzig_perfect_one_factorization_statement_compat",
+      "note": "M1/C2 snapshot reused unchanged (Packing.migration.simple_edges.X25Legacy, frozen at 061154c and kept by C2): the raw cycle list, the Hamiltonian edge-set chain, the pre-M1 edge set and the pre-C2 perfect matching are all frozen there, so the row reaches no live helper of M1, C2 or B11; B11 restates its certificates in Packing.migration.cycle_edges",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.U9.cycle_edgesG",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "cycle_edgesG",
+      "frozen_path": "packing-theory/theories/migration/cycle_edges.v",
+      "frozen": "Legacy.cycle_edgesG",
+      "substitutions": {},
+      "certificate": "Packing.migration.cycle_edges.cycle_edgesG_compat",
+      "live_unfolds_to": "seq_next_edge_set c"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "frozen_path": "packing-theory/theories/migration/cycle_edges.v",
+      "frozen": "U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "substitutions": {
+        "cycle_edgesG": "Legacy.cycle_edgesG"
+      },
+      "certificate": "Packing.migration.cycle_edges.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X216.x216_cycle_edges",
+      "path": "graph-theory-misc/theories/conjectures/X216.v",
+      "name": "x216_cycle_edges",
+      "frozen_path": "graph-theory-misc/theories/migration/cycle_edges.v",
+      "frozen": "Legacy.x216_cycle_edges",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.cycle_edges.x216_cycle_edges_compat",
+      "live_unfolds_to": "seq_cycle_edge_set c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X216.x216_second_hamilton_output",
+      "path": "graph-theory-misc/theories/conjectures/X216.v",
+      "name": "x216_second_hamilton_output",
+      "frozen_path": "graph-theory-misc/theories/migration/cycle_edges.v",
+      "frozen": "X216Legacy.second_hamilton_output",
+      "substitutions": {
+        "x216_cycle_edges": "Legacy.x216_cycle_edges",
+        "x216_second_hamilton_output": "second_hamilton_output"
+      },
+      "certificate": "GTMisc.migration.cycle_edges.x216_second_hamilton_output_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X216.second_hamilton_cycle_cubic_polytime_statement",
+      "path": "graph-theory-misc/theories/conjectures/X216.v",
+      "name": "second_hamilton_cycle_cubic_polytime_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/cycle_edges.v",
+      "frozen": "X216Legacy.second_hamilton_cycle_cubic_polytime_statement",
+      "substitutions": {
+        "x216_second_hamilton_output": "second_hamilton_output"
+      },
+      "certificate": "GTMisc.migration.cycle_edges.second_hamilton_cycle_cubic_polytime_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hamilton.conjectures.U2.cycle_edges",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "cycle_edges",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cycle_edges.v",
+      "frozen": "Legacy.cycle_edges",
+      "substitutions": {},
+      "certificate": "Hamilton.migration.cycle_edges.cycle_edges_compat",
+      "live_unfolds_to": "seq_next_edge_set c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hamilton.conjectures.X211.x211_cycle_edges",
+      "path": "hamiltonicity-theory/theories/conjectures/X211.v",
+      "name": "x211_cycle_edges",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cycle_edges.v",
+      "frozen": "Legacy.x211_cycle_edges",
+      "substitutions": {},
+      "certificate": "Hamilton.migration.cycle_edges.x211_cycle_edges_compat",
+      "live_unfolds_to": "seq_next_edge_set c"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hamilton.conjectures.U2.four_connected_graphs_are_not_uniquely_hamiltonian_statement",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "four_connected_graphs_are_not_uniquely_hamiltonian_statement",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cycle_edges.v",
+      "frozen": "U2Legacy.four_connected_graphs_are_not_uniquely_hamiltonian_statement",
+      "substitutions": {
+        "cycle_edges": "Legacy.cycle_edges"
+      },
+      "certificate": "Hamilton.migration.cycle_edges.four_connected_graphs_are_not_uniquely_hamiltonian_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hamilton.conjectures.U2.uniquely_hamiltonian",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "uniquely_hamiltonian",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cycle_edges.v",
+      "frozen": "U2Legacy.uniquely_hamiltonian",
+      "substitutions": {
+        "cycle_edges": "Legacy.cycle_edges"
+      },
+      "certificate": "Hamilton.migration.cycle_edges.uniquely_hamiltonian_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hamilton.conjectures.U2.uniquely_hamiltonian_graphs_statement",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "uniquely_hamiltonian_graphs_statement",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cycle_edges.v",
+      "frozen": "U2Legacy.uniquely_hamiltonian_graphs_statement",
+      "substitutions": {
+        "uniquely_hamiltonian": "U2Legacy.uniquely_hamiltonian"
+      },
+      "certificate": "Hamilton.migration.cycle_edges.uniquely_hamiltonian_graphs_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hamilton.conjectures.U2.hamilton_decomposition_into_two",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "hamilton_decomposition_into_two",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cycle_edges.v",
+      "frozen": "U2Legacy.hamilton_decomposition_into_two",
+      "substitutions": {
+        "cycle_edges": "Legacy.cycle_edges"
+      },
+      "certificate": "Hamilton.migration.cycle_edges.hamilton_decomposition_into_two_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hamilton.conjectures.U2.decomposing_the_prism_of_a_3_connected_cubic_planar_statement",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "decomposing_the_prism_of_a_3_connected_cubic_planar_statement",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cycle_edges.v",
+      "frozen": "U2Legacy.decomposing_the_prism_of_a_3_connected_cubic_planar_statement",
+      "substitutions": {
+        "hamilton_decomposition_into_two": "U2Legacy.hamilton_decomposition_into_two"
+      },
+      "certificate": "Hamilton.migration.cycle_edges.decomposing_the_prism_of_a_3_connected_cubic_planar_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hamilton.conjectures.X211.x211_hamilton_cycle_edge_sets",
+      "path": "hamiltonicity-theory/theories/conjectures/X211.v",
+      "name": "x211_hamilton_cycle_edge_sets",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cycle_edges.v",
+      "frozen": "X211Legacy.hamilton_cycle_edge_sets",
+      "substitutions": {
+        "x211_cycle_edges": "Legacy.x211_cycle_edges",
+        "x211_hamilton_cycle_edge_sets": "hamilton_cycle_edge_sets"
+      },
+      "certificate": "Hamilton.migration.cycle_edges.x211_hamilton_cycle_edge_sets_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hamilton.conjectures.X211.cantoni_planar_cubic_three_hamilton_cycles_statement",
+      "path": "hamiltonicity-theory/theories/conjectures/X211.v",
+      "name": "cantoni_planar_cubic_three_hamilton_cycles_statement",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cycle_edges.v",
+      "frozen": "X211Legacy.cantoni_planar_cubic_three_hamilton_cycles_statement",
+      "substitutions": {
+        "x211_hamilton_cycle_edge_sets": "hamilton_cycle_edge_sets"
+      },
+      "certificate": "Hamilton.migration.cycle_edges.cantoni_planar_cubic_three_hamilton_cycles_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "cycle-theory/theories/migration/genuine_cycle.v#X9Legacy.proper_edge_coloured_short_cycle_statement": "B10 per-row snapshot: family genuine-cycle (B10) froze only its cycle helper in X9's proper-edge-coloured row, so this copy still calls the live x9_cycle_incident_edges_properly_coloured, which after B11 reads x9_cycle_edges = seq_cycle_edge_list. Kept unchanged; B10's proper_edge_coloured_short_cycle_statement_compat stays true. The complete pre-B10, pre-B11 row is Cycle.migration.cycle_edges.X9Original.proper_edge_coloured_short_cycle_statement, certified by proper_edge_coloured_short_cycle_statement_original_compat.",
+    "cycle-theory/theories/migration/genuine_cycle.v#XE1Legacy.cycle_or_edge_piece": "B10 per-row snapshot: B10 froze only its cycle helper in #184's cycle-or-edge pieces, so this copy, and B10's XE1Legacy.erdos_184_statement through it, still calls the live xe1_cycle_edges, which after B11 unfolds to seq_cycle_graph_edge_set. Kept unchanged; B10's certificates stay true. The complete pre-B10, pre-B11 chain and row are Cycle.migration.cycle_edges.XE1Original.cycle_or_edge_piece and erdos_184_statement, certified by xe1_cycle_or_edge_piece_original_compat and erdos_184_statement_original_compat.",
+    "cycle-theory/theories/migration/genuine_cycle.v#XE2Legacy.erdos_641_statement": "B10 per-row snapshot: B10 froze only its cycle helper in #641, so this copy still calls the live cross-file xe2_edge_disjoint_cycles, which after B11 reads xe1_cycle_edges = seq_cycle_graph_edge_set. Kept unchanged; B10's erdos_641_statement_compat stays true. The complete pre-B10, pre-B11 row is Cycle.migration.cycle_edges.XE2Original.erdos_641_statement, certified by erdos_641_statement_original_compat.",
+    "cycle-theory/theories/migration/perfect_matching.v#X24Legacy.one_factorization_long_rainbow_cycle_statement": "C2 per-row snapshot: family perfect-matching (C2) froze its one-factorization chain but kept the live x24_rainbow_cycle, which after B11 reads x24_cycle_edge_seq = seq_cycle_edge_list. Kept unchanged; C2's one_factorization_long_rainbow_cycle_statement_compat stays true. The complete pre-C2, pre-B11 row is Cycle.migration.cycle_edges.X24Original.one_factorization_long_rainbow_cycle_statement, certified by one_factorization_long_rainbow_cycle_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe1_cycle_edges",
+      "note": "Cross-file chain of #641: xe2_edge_disjoint_cycles reads XE1's edge filter; frozen as XE2Legacy.edge_disjoint_cycles over Legacy.xe1_cycle_edges (per-row) and reused by the complete XE2Original.erdos_641_statement."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_X216.v",
+      "name": "x216_second_hamilton_output",
+      "note": "Proof consumer x216_output_not_nat (a numeral is never a correct output); compiles unchanged and its statement is unchanged."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_U2.v",
+      "name": "cycle_edges",
+      "note": "Proof consumers cycle_edges_nil and ham_edges_K2 (the K_2 digon realises one edge); both compile unchanged through the alias, statements unchanged."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_U2.v",
+      "name": "uniquely_hamiltonian",
+      "note": "Proof consumers not_uniquely_hamiltonian_K1 and uniquely_hamiltonian_K2 (the K_2 digon is uniquely Hamiltonian, K_1 is not); compile unchanged, statements unchanged."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_U2.v",
+      "name": "hamilton_decomposition_into_two",
+      "note": "Proof consumer not_hamilton_decomp_K1; compiles unchanged, statement unchanged."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_X211.v",
+      "name": "x211_hamilton_cycle_edge_sets",
+      "note": "Proof consumers ham_cycle_sets_K4_nonempty and hamilton_cycle_edge_sets_K1 (the Hamilton-cycle counter is not vacuous and has teeth); compile unchanged, statements unchanged."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_X211.v",
+      "name": "x211_cycle_edges",
+      "note": "Witness of ham_cycle_sets_K4_nonempty (the edge set of a Hamilton cycle of K_4); compiles unchanged through the alias."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/implications_U2.v",
+      "name": "hamilton_decomposition_into_two",
+      "note": "Proof consumer decomp_into_two_is_hamiltonian; compiles unchanged, statement unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Extremal.conjectures.X84.x84_cycle_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_cycle_edge_set",
+      "note": "a predicate on an edge set (connectivity, degree and cardinality constraints), not an extractor; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.P9.cyc_arcs",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "cyc_arcs",
+      "note": "ordered successor ARCS of a directed cycle; untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.U6.cyc_pairs",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "cyc_pairs",
+      "note": "zip of multigraph EDGE objects, not endpoint sets; untouched"
+    }
+  ]
+}

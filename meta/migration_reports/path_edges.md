@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py path_edges --details /tmp/migra
 - Canonical: `GTBase.walks_paths.seq_edge_set`.
 - Baseline: `048c768adce0cfcbf5b5a5763d71fc8daf483db8`.
 - Scope: 5 helpers, 7 statements, 31 frozen objects, 71 recorded references.
-- Source checks: 281/281 pass; consistent.
+- Source checks: 276/276 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -23,6 +23,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py path_edges --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Cycle.conjectures.X9.x9_cycle_edges`, `Cycle.conjectures.X24.x24_cycle_edge_seq`, `Packing.conjectures.X25.x25_cycle_edge_seq`, `GTMisc.conjectures.X216.x216_cycle_edges`, `Cycle.conjectures.XE1.xe1_cycle_edges`, `Chromatic.conjectures.U5.edge_colour_seq`, `Cycle.conjectures.X10.x10_rainbow_cycle`, `Digraph.conjectures.P9.dipath_arcs`, `Extremal.conjectures.D2tur.ham_path_edges`.
+Excluded distinct variants: `Chromatic.conjectures.U5.edge_colour_seq`, `Cycle.conjectures.X10.x10_rainbow_cycle`, `Digraph.conjectures.P9.dipath_arcs`, `Extremal.conjectures.D2tur.ham_path_edges`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/internal_vertices.v#XE2Legacy.statement`, `graph-theory-misc/theories/migration/edge_colourings.v#X14Legacy.andersen_rainbow_path_statement`, `graph-theory-misc/theories/migration/edge_colourings.v#X62Legacy.rainbow_paths_linear_edge_cover_statement`, `graph-theory-misc/theories/migration/internal_vertices.v#X172Legacy.one_bridge_replacement`, `graph-theory-misc/theories/migration/simple_path.v#X14Legacy.rainbow_path`, `graph-theory-misc/theories/migration/simple_path.v#X62Legacy.rainbow_paths_linear_edge_cover_statement`, `packing-theory/theories/migration/simple_path.v#X178Legacy.path_decomposition_at_most`.

@@ -78,7 +78,9 @@
     "",
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of every frozen statement and original contains no live helper or chain declaration of this family and none of `seq_edge_list`, `seq_edge_set`, `seq_index_edge_set`, while each live statement reaches its canonical and its alias (/srv/graph-theory-rocq/coordination/evidence/B8-path_edges/print_all_dependencies_summary.txt).",
     "",
-    "Baseline 048c768 is a private, not-for-integration merge of the B7 series fa3f5f4 with the C6 history 7b04105 (union of _CoqProject lines and of one simple_path summary sentence; no .v file differs from both parents). No statement text, doc block, manifest row or leg state changes (checked below)."
+    "Baseline 048c768 is a private, not-for-integration merge of the B7 series fa3f5f4 with the C6 history 7b04105 (union of _CoqProject lines and of one simple_path summary sentence; no .v file differs from both parents). No statement text, doc block, manifest row or leg state changes (checked below).",
+    "",
+    "Later migration: the cyclic extractors listed here as separate contracts (Cycle X9 `x9_cycle_edges`, Cycle X24 `x24_cycle_edge_seq`, Packing X25 `x25_cycle_edge_seq`, GTMisc X216 `x216_cycle_edges` and Cycle XE1 `xe1_cycle_edges`) were migrated by B11 (family cycle-edges) onto `GTBase.walks_paths.seq_cycle_edge_list`, `seq_cycle_edge_set` and `seq_cycle_graph_edge_set`, which keep the closing pair that this family's open `seq_edge_list` lacks; they are no longer untouched distinct variants."
   ],
   "frozen": [
     {
@@ -524,36 +526,6 @@
     }
   ],
   "distinct_variants": [
-    {
-      "qualified": "Cycle.conjectures.X9.x9_cycle_edges",
-      "path": "cycle-theory/theories/conjectures/X9.v",
-      "name": "x9_cycle_edges",
-      "note": "cyclic edge list over zip c (rot 1 c), including the closing pair; untouched"
-    },
-    {
-      "qualified": "Cycle.conjectures.X24.x24_cycle_edge_seq",
-      "path": "cycle-theory/theories/conjectures/X24.v",
-      "name": "x24_cycle_edge_seq",
-      "note": "cyclic edge list over zip c (rot 1 c); untouched"
-    },
-    {
-      "qualified": "Packing.conjectures.X25.x25_cycle_edge_seq",
-      "path": "packing-theory/theories/conjectures/X25.v",
-      "name": "x25_cycle_edge_seq",
-      "note": "cyclic edge list over zip c (rot 1 c); untouched"
-    },
-    {
-      "qualified": "GTMisc.conjectures.X216.x216_cycle_edges",
-      "path": "graph-theory-misc/theories/conjectures/X216.v",
-      "name": "x216_cycle_edges",
-      "note": "finite support of the cyclic pairs; untouched"
-    },
-    {
-      "qualified": "Cycle.conjectures.XE1.xe1_cycle_edges",
-      "path": "cycle-theory/theories/conjectures/XE1.v",
-      "name": "xe1_cycle_edges",
-      "note": "cyclic adjacency combined with an actual-edge filter; untouched"
-    },
     {
       "qualified": "Chromatic.conjectures.U5.edge_colour_seq",
       "path": "chromatic-theory/theories/conjectures/U5.v",

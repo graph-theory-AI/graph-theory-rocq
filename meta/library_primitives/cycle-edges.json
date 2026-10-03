@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "family": "cycle-edges",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_cycle_edge_set",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "cycle_edge_seq",
+      "cycle_edges",
+      "cycle_edgesG"
+    ],
+    "source_definitions": [
+      "Cycle.conjectures.X24.x24_cycle_edge_seq",
+      "Cycle.conjectures.X9.x9_cycle_edges",
+      "Cycle.conjectures.XE1.xe1_cycle_edges",
+      "GTMisc.conjectures.X216.x216_cycle_edges",
+      "Hamilton.conjectures.U2.cycle_edges",
+      "Hamilton.conjectures.X211.x211_cycle_edges",
+      "Packing.conjectures.U9.cycle_edgesG",
+      "Packing.conjectures.X25.x25_cycle_edge_seq"
+    ],
+    "consumers_remaining": 10,
+    "relation": "four separate representations of the edges of a cyclic vertex sequence, all by conversion: X9 x9_cycle_edges, X24 x24_cycle_edge_seq and X25 x25_cycle_edge_seq are GTBase.walks_paths.seq_cycle_edge_list c (ordered list of the pairs of zip c (rot 1 c), closing pair included); X216 x216_cycle_edges is seq_cycle_edge_set c (its finite support); Cycle XE1 xe1_cycle_edges is seq_cycle_graph_edge_set c (the actual edges among those pairs, equal to seq_cycle_edge_set c :&: E(G) for every c); U2 cycle_edges, X211 x211_cycle_edges and U9 cycle_edgesG are seq_next_edge_set c (the first-occurrence successor image, contained in the support and equal to it under uniq c)",
+    "semantic_classes": {
+      "raw-ordered-list": {
+        "members": [
+          "Cycle.conjectures.X24.x24_cycle_edge_seq",
+          "Cycle.conjectures.X9.x9_cycle_edges",
+          "Packing.conjectures.X25.x25_cycle_edge_seq"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "certificates": [
+          "Cycle.migration.cycle_edges.x24_cycle_edge_seq_compat",
+          "Cycle.migration.cycle_edges.x9_cycle_edges_compat",
+          "Packing.migration.cycle_edges.x25_cycle_edge_seq_compat"
+        ],
+        "note": "map (fun p => [set p.1; p.2]) (zip c (rot 1 c)), the body of seq_cycle_edge_list c, convertible: one entry per position of c, the closing pair (last, first) included; order and multiplicity are kept (a two-entry sequence lists its pair twice, a one-entry sequence lists [set x]); no adjacency, uniqueness or length check. Rotation rotates the list and reversal reverses it up to a rotation by one, so it is invariant only up to perm_eq. X25's helper keeps its M1/C2 frozen copy (Packing.migration.simple_edges.X25Legacy)."
+      },
+      "raw-finite-support": {
+        "members": [
+          "GTMisc.conjectures.X216.x216_cycle_edges"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTMisc.migration.cycle_edges.x216_cycle_edges_compat",
+        "note": "X216's [set e | e \\in [seq [set p.1; p.2] | p <- zip c (rot 1 c)]], the body of seq_cycle_edge_set c, convertible: membership in the raw list, so multiplicity is dropped while non-adjacent pairs and one-vertex sets [set x] are kept; it is not E(G). Invariant under rot, rotr and rev with no premise. X216's BLOCKED complexity row and its documented defect are unchanged."
+      },
+      "actual-edge-filter": {
+        "members": [
+          "Cycle.conjectures.XE1.xe1_cycle_edges"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Cycle.migration.cycle_edges.xe1_cycle_edges_compat",
+        "note": "Cycle XE1's actual edges [set p.1; p.2] with p.1, p.2 in c, p.1 -- p.2 and (p.1, p.2) or (p.2, p.1) in zip c (rot 1 c): the body of seq_cycle_graph_edge_set c with seq_cyclic_consecutiveb's body, convertible. It equals seq_cycle_edge_set c :&: E(G) for every c (seq_cycle_graph_edge_setE) and the raw support under the sufficient guard cycle (--) c, without uniqueness (seq_cycle_graph_edge_set_cycle); a loop [:: x] or a non-adjacent pair contributes nothing."
+      },
+      "first-occurrence-next-image": {
+        "members": [
+          "Hamilton.conjectures.U2.cycle_edges",
+          "Hamilton.conjectures.X211.x211_cycle_edges",
+          "Packing.conjectures.U9.cycle_edgesG"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "certificates": [
+          "Hamilton.migration.cycle_edges.cycle_edges_compat",
+          "Hamilton.migration.cycle_edges.x211_cycle_edges_compat",
+          "Packing.migration.cycle_edges.cycle_edgesG_compat"
+        ],
+        "note": "[set [set x; next c x] | x in [set z | z \\in c]] (byte-identical in U2, X211 and U9), the body of seq_next_edge_set c, convertible; the explicit Arguments of the three helpers are kept. MathComp's next reads the FIRST occurrence: the image is contained in the raw support for every c and equal to it under the sufficient guard uniq c (seq_next_edge_set_uniq), hence equal to the actual edges on a ucycle; on the closed walk [:: 0; 1; 0; 2; 3] of K_4 it misses the edge {0, 2}, and rotating or reversing that sequence changes it. The Hamilton digon convention and empty-carrier behaviour are untouched: no length guard is added."
+      }
+    },
+    "compatibility_theorems": [
+      "Cycle.migration.cycle_edges.erdos_184_statement_compat",
+      "Cycle.migration.cycle_edges.erdos_184_statement_original_compat",
+      "Cycle.migration.cycle_edges.erdos_641_statement_compat",
+      "Cycle.migration.cycle_edges.erdos_641_statement_original_compat",
+      "Cycle.migration.cycle_edges.one_factorization_long_rainbow_cycle_statement_compat",
+      "Cycle.migration.cycle_edges.one_factorization_long_rainbow_cycle_statement_original_compat",
+      "Cycle.migration.cycle_edges.proper_edge_coloured_short_cycle_statement_compat",
+      "Cycle.migration.cycle_edges.proper_edge_coloured_short_cycle_statement_original_compat",
+      "Cycle.migration.cycle_edges.x24_cycle_edge_seq_compat",
+      "Cycle.migration.cycle_edges.x24_rainbow_cycle_compat",
+      "Cycle.migration.cycle_edges.x9_cycle_edges_compat",
+      "Cycle.migration.cycle_edges.x9_cycle_incident_edges_properly_coloured_compat",
+      "Cycle.migration.cycle_edges.xe1_cycle_edges_compat",
+      "Cycle.migration.cycle_edges.xe1_cycle_or_edge_piece_compat",
+      "Cycle.migration.cycle_edges.xe1_cycle_or_edge_piece_original_compat",
+      "Cycle.migration.cycle_edges.xe2_edge_disjoint_cycles_compat",
+      "GTMisc.migration.cycle_edges.second_hamilton_cycle_cubic_polytime_statement_compat",
+      "GTMisc.migration.cycle_edges.x216_cycle_edges_compat",
+      "GTMisc.migration.cycle_edges.x216_second_hamilton_output_compat",
+      "Hamilton.migration.cycle_edges.cantoni_planar_cubic_three_hamilton_cycles_statement_compat",
+      "Hamilton.migration.cycle_edges.cycle_edges_compat",
+      "Hamilton.migration.cycle_edges.decomposing_the_prism_of_a_3_connected_cubic_planar_statement_compat",
+      "Hamilton.migration.cycle_edges.four_connected_graphs_are_not_uniquely_hamiltonian_statement_compat",
+      "Hamilton.migration.cycle_edges.hamilton_decomposition_into_two_compat",
+      "Hamilton.migration.cycle_edges.uniquely_hamiltonian_compat",
+      "Hamilton.migration.cycle_edges.uniquely_hamiltonian_graphs_statement_compat",
+      "Hamilton.migration.cycle_edges.x211_cycle_edges_compat",
+      "Hamilton.migration.cycle_edges.x211_hamilton_cycle_edge_sets_compat",
+      "Packing.migration.cycle_edges.cycle_edgesG_compat",
+      "Packing.migration.cycle_edges.kotzig_perfect_one_factorization_statement_compat",
+      "Packing.migration.cycle_edges.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat",
+      "Packing.migration.cycle_edges.x25_cycle_edge_seq_compat",
+      "Packing.migration.cycle_edges.x25_hamiltonian_edge_set_compat",
+      "Packing.migration.cycle_edges.x25_perfect_one_factorization_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.seq_next_nth_rot",
+      "GTBase.walks_paths.seq_next_in_zip",
+      "GTBase.walks_paths.seq_zip_nextE",
+      "GTBase.walks_paths.in_seq_cycle_edge_set",
+      "GTBase.walks_paths.seq_cycle_edge_listP",
+      "GTBase.walks_paths.seq_cycle_edge_setP",
+      "GTBase.walks_paths.seq_cycle_edge_set_consecutive",
+      "GTBase.walks_paths.size_seq_cycle_edge_list",
+      "GTBase.walks_paths.seq_cycle_edge_list_closed",
+      "GTBase.walks_paths.seq_cycle_edge_list_rcons",
+      "GTBase.walks_paths.seq_cycle_edge_list_nil",
+      "GTBase.walks_paths.seq_cycle_edge_list_seq1",
+      "GTBase.walks_paths.seq_cycle_edge_list_pair",
+      "GTBase.walks_paths.seq_cycle_edge_list_rot",
+      "GTBase.walks_paths.seq_cycle_edge_list_rotr",
+      "GTBase.walks_paths.seq_cycle_edge_list_rev",
+      "GTBase.walks_paths.perm_seq_cycle_edge_list_rot",
+      "GTBase.walks_paths.perm_seq_cycle_edge_list_rev",
+      "GTBase.walks_paths.seq_cycle_edge_set_closed",
+      "GTBase.walks_paths.seq_cycle_edge_set_rcons",
+      "GTBase.walks_paths.seq_cycle_edge_set_last",
+      "GTBase.walks_paths.seq_cycle_edge_set_open",
+      "GTBase.walks_paths.seq_cycle_edge_set_nil",
+      "GTBase.walks_paths.seq_cycle_edge_set_seq1",
+      "GTBase.walks_paths.seq_cycle_edge_set_pair",
+      "GTBase.walks_paths.card_seq_cycle_edge_set",
+      "GTBase.walks_paths.seq_cycle_edge_set_sub",
+      "GTBase.walks_paths.seq_cycle_edge_set_rot",
+      "GTBase.walks_paths.seq_cycle_edge_set_rotr",
+      "GTBase.walks_paths.seq_cycle_edge_set_rev",
+      "GTBase.walks_paths.seq_next_edge_setP",
+      "GTBase.walks_paths.seq_next_edge_set_vertices",
+      "GTBase.walks_paths.seq_next_edge_set_sub",
+      "GTBase.walks_paths.seq_next_edge_set_uniq",
+      "GTBase.walks_paths.seq_next_edge_set_nil",
+      "GTBase.walks_paths.seq_next_edge_set_seq1",
+      "GTBase.walks_paths.seq_next_edge_set_pair",
+      "GTBase.walks_paths.seq_next_edge_set_rot",
+      "GTBase.walks_paths.seq_next_edge_set_rev",
+      "GTBase.walks_paths.seq_cycle_graph_edge_setP",
+      "GTBase.walks_paths.seq_cycle_graph_edge_setE",
+      "GTBase.walks_paths.seq_cycle_graph_edge_set_sub",
+      "GTBase.walks_paths.seq_cycle_graph_edge_set_support",
+      "GTBase.walks_paths.seq_cycle_edge_set_cycle",
+      "GTBase.walks_paths.seq_cycle_graph_edge_set_cycle",
+      "GTBase.walks_paths.seq_next_edge_set_ucycle",
+      "GTBase.walks_paths.seq_cycle_graph_edge_set_nil",
+      "GTBase.walks_paths.seq_cycle_graph_edge_set_seq1",
+      "GTBase.walks_paths.seq_cycle_graph_edge_set_pair",
+      "GTBase.walks_paths.seq_cycle_graph_edge_set_nonedge",
+      "GTBase.walks_paths.seq_cycle_graph_edge_set_rot",
+      "GTBase.walks_paths.seq_cycle_graph_edge_set_rev",
+      "GTBase.walks_paths.seq_cycle_edges_ground_nil",
+      "GTBase.walks_paths.seq_cycle_edges_ground_seq1",
+      "GTBase.walks_paths.seq_cycle_edges_ground_pair",
+      "GTBase.walks_paths.seq_cycle_edges_ground_nonedge",
+      "GTBase.walks_paths.seq_cycle_edges_ground_closing",
+      "GTBase.walks_paths.seq_cycle_edges_ground_repeat_walk",
+      "GTBase.walks_paths.seq_cycle_edges_ground_repeat_next",
+      "GTBase.walks_paths.seq_cycle_edges_ground_repeat_rot"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.mgraph",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.finset",
+        "mathcomp.boot.path",
+        "mathcomp.boot.seq"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "mathcomp.boot.path.next",
+      "note": "MathComp path.v owns next (next_nth, mem_next, next_cycle) with prev_next, next_prev, next_rot, next_rotr and next_rev under a duplicate-free cycle; coq-graph-theory writes the edge set of a simple graph as E(G) (in_edges) and packages typed paths. Neither library names the cyclic edge list of a raw sequence, its support, its actual-edge filter or the first-occurrence successor image, so GTBase.walks_paths owns seq_cycle_edge_list, seq_cycle_edge_set, seq_cycle_graph_edge_set and seq_next_edge_set, with the public succession bridges seq_next_in_zip and seq_zip_nextE proved from next_nth (the Hom.conjectures.grounding_U3 lemmas were a design reference only, not imported). The open seq_edge_list / seq_edge_set (family path-edges) lack the closing pair and stay separate. Digraph P9 cyc_arcs (ordered successor arcs), Cycle U6 cyc_pairs (multigraph edge objects), Extremal X84 x84_cycle_edge_set (a predicate on an edge set), rainbow/colour sequences (Cycle X10, Chromatic U5), Digraph path_fas hits_cycle and Hom U3 chords stay separate; cycle vertex sets (Chromatic X153, Cycle X10/X212, Digraph X19) are a later path-vertices extension. Legacy bodies and per-row certificates: meta/migration_reports/cycle_edges.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/cycle_edges.md",
+    "reviewed_by": "path_review",
+    "migration_spec": "meta/migration_reports/cycle_edges.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/cycle-edges.json",
+    "reviewed_commit": "13c00aa204725a73e12d05f57c51f5f970d89c15",
+    "independent_review": "meta/migration_reviews/cycle_edges.md"
+  }
+}
