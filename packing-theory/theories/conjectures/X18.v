@@ -1,6 +1,7 @@
 (** * Packing.conjectures.X18 -- v2 fair representation continuation rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import path_graphs.
 From Packing.conjectures Require Import X15.
 
 Set Implicit Arguments.
@@ -9,19 +10,20 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X18 vocabulary ************************************************)
 
-Definition x18_path_rel (n : nat) : rel 'I_n :=
-  fun i j => (i != j) && (((val i).+1 == val j) || ((val j).+1 == val i)).
+(** Since the B21 library migration (2026-10-03) transparent aliases of
+    [GTBase.path_graphs.ordinal_path_rel] / [ordinal_path], the path graph P_n on 'I_n: the
+    original guarded body "[(i != j) && consecutive]" (pointwise equal, the guard being redundant)
+    and its symmetry/irreflexivity proofs are frozen and certified in
+    theories/migration/ordinal_path.v. *)
+Definition x18_path_rel (n : nat) : rel 'I_n := @ordinal_path_rel n.
 
 Lemma x18_path_sym (n : nat) : symmetric (@x18_path_rel n).
-Proof.
-by move=> i j; rewrite /x18_path_rel eq_sym orbC.
-Qed.
+Proof. exact: ordinal_path_rel_sym. Qed.
 
 Lemma x18_path_irrefl (n : nat) : irreflexive (@x18_path_rel n).
-Proof. by move=> i; rewrite /x18_path_rel eqxx. Qed.
+Proof. exact: ordinal_path_rel_irrefl. Qed.
 
-Definition x18_path_graph (n : nat) : sgraph :=
-  SGraph (@x18_path_sym n) (@x18_path_irrefl n).
+Definition x18_path_graph (n : nat) : sgraph := ordinal_path n.
 
 Definition x18_vertex_partition
     (G : sgraph) (m : nat) (V : 'I_m -> {set G}) : Prop :=

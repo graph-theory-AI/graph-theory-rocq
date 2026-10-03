@@ -1,7 +1,7 @@
 (** * Chromatic.conjectures.X170 -- v2 oriented-P4 chi-boundedness row *)
 
 From GTBase Require Export base.
-From GTBase Require Import chi_bounding.
+From GTBase Require Import chi_bounding path_graphs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -22,8 +22,10 @@ Record x170_oriented_graph := X170OrientedGraph {
     forall u v : x170_underlying, u -- v -> x170_arc u v = ~~ x170_arc v u
 }.
 
-Definition x170_p4_edge (i j : 'I_4) : bool :=
-  ((val i).+1 == val j) || ((val j).+1 == val i).
+(** Since the B21 library migration (2026-10-03) a transparent alias of
+    [GTBase.path_graphs.ordinal_path_rel] at n = 4 (the same raw relation, by conversion); the
+    original body is frozen and certified in theories/migration/ordinal_path.v. *)
+Definition x170_p4_edge (i j : 'I_4) : bool := ordinal_path_rel i j.
 
 Definition x170_code_forward (P : x170_oriented_P4_code) (i : 'I_3) : bool :=
   odd (val P %/ (2 ^ val i)).

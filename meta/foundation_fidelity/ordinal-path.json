@@ -1,0 +1,54 @@
+{
+ "schema_version": 1,
+ "family": "ordinal-path",
+ "modules": {
+  "GTBase.path_graphs": {
+   "path": "base/theories/path_graphs.v",
+   "overrides": {
+    "ordinal_path_rel": {
+     "verdict": "FAITHFUL",
+     "note": "ordinal_path_rel i j: the indices are consecutive in either order, ((val i).+1 == val j) || ((val j).+1 == val i); no guard (irreflexive by itself: ordinal_path_rel_irrefl) and no modular wrap (ordinal_path_ends)."
+    },
+    "ordinal_path": {
+     "verdict": "FAITHFUL",
+     "note": "ordinal_path n: upstream SGraph on 'I_n from ordinal_path_rel with its symmetry and irreflexivity proofs; n vertices (card_ordinal_path), the empty graph for n = 0, no edge for n = 1, one edge for n = 2; a tree of maximum degree at most two (ordinal_path_path_tree)."
+    },
+    "ordinal_path_lt_set": {
+     "verdict": "FAITHFUL",
+     "note": "ordinal_path_lt_set A B: every vertex of A has a smaller index than every vertex of B; an auxiliary order on vertex sets used only to prove that P_n has no K_3 minor (ordinal_path_K3_free), not a migrated contract."
+    }
+   },
+   "machine_evidence": [
+    "ordinal_path_rel_sym",
+    "ordinal_path_rel_irrefl",
+    "ordinal_path_edgeE",
+    "ordinal_path_relP",
+    "ordinal_path_rel_guardedE",
+    "ordinal_path_edge_guardedE",
+    "card_ordinal_path",
+    "ordinal_path_no_loop",
+    "ordinal_path_degree",
+    "ordinal_path_Delta",
+    "ordinal_path0_empty",
+    "ordinal_path1_edgeless",
+    "ordinal_path2_edge",
+    "ordinal_path_ends",
+    "ordinal_path3_no_wrap",
+    "ordinal_path4_edgeE",
+    "eq_ordinal_path_diso",
+    "guarded_ordinal_path_diso",
+    "ordinal_path_connect_add",
+    "ordinal_path_connected",
+    "ordinal_path_disj_mem",
+    "ordinal_path_between",
+    "ordinal_path_interval",
+    "ordinal_path_sep",
+    "ordinal_path_lt_total",
+    "ordinal_path_K3_free",
+    "ordinal_path_is_forest",
+    "ordinal_path_is_tree",
+    "ordinal_path_path_tree"
+   ]
+  }
+ }
+}
