@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "family": "clique-number",
+  "primitive": {
+    "canonical_name": "GraphTheory.core.coloring.omega_mem",
+    "owner": "upstream",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "omega"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X112.x112_omega",
+      "Chromatic.conjectures.X124.x124_omega",
+      "Minor.conjectures.X121.x121_omega"
+    ],
+    "consumers_remaining": 2,
+    "relation": "whole-graph clique number: Chromatic X112 x112_omega and Minor X121 x121_omega := \u03c9([set: G]) already are the upstream expression (conversions); Chromatic X124 x124_omega := \\max_(S : {set G} | cliqueb S) #|S| equals \u03c9([set: G]) by GTBase.base.omega_setT_maxE, unconditionally (the cliques subset filter always holds on the full vertex set; K_0 gives 0). Exact natural-number equalities; no nonempty guard and no duplicate clique-number primitive.",
+    "semantic_classes": {
+      "upstream-expression": {
+        "members": [
+          "Chromatic.conjectures.X112.x112_omega",
+          "Minor.conjectures.X121.x121_omega"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "note": "\u03c9([set: G]) verbatim; conversion",
+        "certificates": [
+          "Chromatic.migration.clique_number.x112_omega_compat",
+          "Minor.migration.clique_number.x121_omega_compat"
+        ]
+      },
+      "bigmax-presentation": {
+        "members": [
+          "Chromatic.conjectures.X124.x124_omega"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Chromatic.migration.clique_number.x124_omega_compat",
+        "note": "\\max_(S : {set G} | cliqueb S) #|S|; equal to \u03c9([set: G]) by GTBase.base.omega_setT_maxE for every graph, K_0 included; not a conversion"
+      }
+    },
+    "distinct_variants": {
+      "GTMisc.conjectures.U13.is_max_clique": "a predicate on vertex sets (a clique of size omega), not the number; a separate adapter family",
+      "Chromatic.conjectures.X181.x181_maximal_clique": "inclusion-maximal Boolean clique with 1 < #|S|; not maximum cardinality",
+      "Packing.conjectures.XE1.xe1_maximal_clique": "inclusion-maximal clique predicate (empty and singleton allowed); not maximum cardinality",
+      "Minor.conjectures.X174.x174_clique_count": "number of cliques (the empty one included), not the largest clique size"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.clique_number.x112_omega_compat",
+      "Chromatic.migration.clique_number.x124_omega_compat",
+      "Chromatic.migration.clique_number.x124_poly_chi_bounded_compat",
+      "Chromatic.migration.clique_number.dreier_torunczyk_merge_width_poly_chi_bounded_statement_compat",
+      "Chromatic.migration.clique_number.x112_chi_bounded_original_compat",
+      "Chromatic.migration.clique_number.chi_bounded_closure_substitution_gluing_statement_original_compat",
+      "Minor.migration.clique_number.x121_omega_compat",
+      "Minor.migration.clique_number.dallard_milanic_storgel_tw_omega_tree_alpha_statement_compat",
+      "Minor.migration.clique_number.dallard_milanic_storgel_tw_omega_tree_alpha_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.base.omega_setT_maxE"
+    ],
+    "public_client": "base/theories/examples/clique_number.v",
+    "legacy_baseline": "76122100ec110f03f4b406d6b98c848a09aedf99",
+    "migration_report": "meta/migration_reports/clique_number.md",
+    "migration_spec": "meta/migration_reports/clique_number.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A16.md",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.coloring (cliques, omega_mem, maxcliques, omegaP, clique_bound, card_maxclique, omega0, omega_eq0, sub_omega, omegaT, omega_isubgraph, diso_omega, omega_induced)",
+        "GTBase.base (re-exports \u03c9)",
+        "GTBase.chi_bounding (uses \u03c9([set: G]))"
+      ],
+      "result": "upstream-canonical",
+      "candidate": "GraphTheory.core.coloring.omega_mem at the full vertex set, \u03c9([set: G])",
+      "note": "Upstream already defines the clique number as the bigmax over cliques [set x in A]; two helpers use it verbatim and the third is its full-set bigmax presentation, related by GTBase.base.omega_setT_maxE. Upstream maxcliques are maximum-cardinality cliques, unrelated to the inclusion-maximal helpers listed as distinct. Evidence: coordination/evidence/A16-clique-triangle-discovery/ (upstream-coloring.txt) and coordination/evidence/A16-clique-number/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "path_review",
+    "reviewed_commit": "16d5a05dea232c0b2e3321675e31e8279c3f2350",
+    "independent_review": "meta/migration_reviews/clique_number.md"
+  }
+}

@@ -600,6 +600,17 @@ rewrite ltn_neqAle c2 andbT eq_sym; apply/eqP => c3.
 by have [x [y [z [_ xy yz zx]]]] := ucycle3_triangle uc c3; exact: (tf _ _ _ xy yz zx).
 Qed.
 
+(** Clique number of the whole graph: upstream [ω([set: G])] ([omega_mem], re-exported above) is the largest
+    size of a clique.  [omega_setT_maxE] is its bigmax presentation over all cliques: on the full vertex set
+    the subset filter of [cliques] always holds, so the equality is unconditional ([K_0] gives 0 on both
+    sides).  No separate clique-number primitive is defined.
+    Registry: meta/library_primitives/clique-number.json (A16). *)
+Lemma omega_setT_maxE (G : sgraph) : ω([set: G]) = \max_(S : {set G} | cliqueb S) #|S|.
+Proof.
+apply: eq_bigl => S; rewrite inE; case: (cliqueb S); rewrite ?andbT ?andbF //.
+by apply/subsetP => x _; rewrite !inE.
+Qed.
+
 (** Undirected walk in a loopless multigraph: each edge traversed in EITHER direction. *)
 Fixpoint uwalk (G : mgraph) (x y : G) (w : seq (edge G)) {struct w} : bool :=
   match w with

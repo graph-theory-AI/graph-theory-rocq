@@ -6,7 +6,7 @@ Full evidence: `python3 meta/migration_report.py chi_bounded --details /tmp/migr
 
 - Canonical: `GTBase.chi_bounding.chi_bounded_via`.
 - Baseline: `0659592d2a379b1f2564601e8b61689e05eac416`.
-- Scope: 5 helpers, 10 statements, 16 frozen objects, 115 recorded references.
+- Scope: 5 helpers, 10 statements, 16 frozen objects, 117 recorded references.
 - Source checks: 249/249 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
