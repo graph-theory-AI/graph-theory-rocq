@@ -1,0 +1,42 @@
+{
+ "schema_version": 1,
+ "family": "degree-balance",
+ "modules": {
+  "Digraph.foundations.degree_balance": {
+   "path": "digraph-theory/theories/foundations/degree_balance.v",
+   "overrides": {
+    "indeg": {
+     "verdict": "FAITHFUL",
+     "note": "indeg v: the number of in-neighbours #|[set u | u --> v]|, the companion of outdeg; a loop counts once; swaps with outdeg on the converse digraph."
+    },
+    "balanced": {
+     "verdict": "FAITHFUL",
+     "note": "balanced D: every vertex has equal in- and out-degree; no connectivity, looplessness, inhabitance or tour premise; invariant under converse; holds on the empty, arcless and loop digraphs and on disconnected unions of balanced digraphs."
+    },
+    "balancedb": {
+     "verdict": "FAITHFUL",
+     "note": "balancedb D: the Boolean [forall v, indeg v == outdeg v], reflected to balanced by balancedP."
+    }
+   },
+   "machine_evidence": [
+    "balancedP",
+    "balanced_revE",
+    "balanced_vertex",
+    "indeg_sumE",
+    "outdeg_sumE",
+    "sum_indeg_outdeg",
+    "balanced_arcless",
+    "indeg_converse",
+    "outdeg_converse",
+    "balanced_converse",
+    "balanced_ground_empty",
+    "balanced_ground_arcless",
+    "balanced_ground_loop",
+    "balanced_ground_disconnected",
+    "balanced_ground_digon",
+    "balanced_ground_C3",
+    "not_balanced_ground_TT2"
+   ]
+  }
+ }
+}

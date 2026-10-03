@@ -215,7 +215,7 @@ Qed.
 
 Lemma di_cycle_Eulerian n : (0 < n)%N -> Eulerian (di_cycle n).
 Proof.
-move=> n0 x; rewrite /indeg /outdeg /Nin.
+move=> n0 x; rewrite /degree_balance.indeg /outdeg.
 have out1 : #|[set w | x --> w]| = 1.
   rewrite (_ : [set w | x --> w] = [set succI n0 x]) ?cards1 //.
   by apply/setP => w; rewrite !inE di_arc_succ.

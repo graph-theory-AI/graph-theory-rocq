@@ -145,7 +145,7 @@ Qed.
 
 Lemma gwheel_Eulerian n : (2 <= n)%N -> Eulerian (gwheel n).
 Proof.
-move=> n2 v; rewrite /indeg /outdeg /Nin /Nout.
+move=> n2 v; rewrite /degree_balance.indeg /outdeg.
 have n1 : (1 <= n)%N by apply: leq_trans n2.
 have n0 : (0 < n)%N by [].
 case: (altP (val v =P 0)) => [v0|vn0].
