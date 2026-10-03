@@ -1,0 +1,76 @@
+{
+  "family": "poset-unavoidability",
+  "canonical_name": "Minor.foundations.poset_unavoidability.poset_unavoidable",
+  "canonical_short_name": "poset_unavoidable",
+  "relation": "Exact finite-poset cover-minor unavoidability: one natural threshold d chosen before all finite posets, and every poset whose dimension is not at most d (GTBase.posets, realizers may be empty) has H as a minor of its cover graph, host before pattern (upstream minor). d = 0, empty carriers and empty graphs allowed; no planarity or width condition on H; not induced minors, subdivisions or the exact-order tournament unavoidability of Digraph.conjectures.unvd.unavoidable, which stays a deferred distinct contract.",
+  "baseline_commit": "97605ddae838bc6e84b0602240148246e9d065f2",
+  "namespaces": {
+    "base": "GTBase",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "minor-theory/theories/foundations/poset_unavoidability.v",
+    "minor-theory/theories/migration/poset_unavoidability.v"
+  ],
+  "extra_certificates": [
+    "Minor.foundations.poset_unavoidability.poset_dimension_at_mostW",
+    "Minor.foundations.poset_unavoidability.poset_unavoidableI",
+    "Minor.foundations.poset_unavoidability.poset_unavoidable_threshold",
+    "Minor.foundations.poset_unavoidability.poset_unavoidable_large",
+    "Minor.foundations.poset_unavoidability.poset_unavoidable_minor",
+    "Minor.foundations.poset_unavoidability.poset_unavoidable_K0"
+  ],
+  "downstream_client": "minor-theory/theories/examples/poset_unavoidability.v",
+  "summary": [
+    "C21 migrates exactly Minor.conjectures.X228.x228_unavoidable onto Minor.foundations.poset_unavoidability.poset_unavoidable with the identical body: one threshold d before all finite posets, the negated GTBase dimension bound as the only guard, and an upstream minor of the cover graph with host before pattern. d = 0 and empty posets stay allowed; GTBase.posets and upstream minor are unchanged.",
+    "The helper and the whole BLOCKED row unavoidable_minor_kelly_construction_statement are frozen verbatim with an unconditional helper iff and a complete row iff. The row keeps its Kelly-construction placeholder implication to planarity and treewidth at most three; no converse, construction or status change. There is no earlier frozen history; all eleven grounding theorem types and the sibling queue-number row are unchanged.",
+    "The public-only client covers the empty graph, raising thresholds, minor downward closure and the unit poset: it has dimension at most 0, so the guard never tests it, and its cover graph has no K2 minor. This shows the guard has teeth; it is not a claim that K2 is avoidable."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X228.x228_unavoidable",
+      "path": "minor-theory/theories/conjectures/X228.v",
+      "name": "x228_unavoidable",
+      "frozen_path": "minor-theory/theories/migration/poset_unavoidability.v",
+      "frozen": "Legacy.x228_unavoidable",
+      "substitutions": {},
+      "certificate": "Minor.migration.poset_unavoidability.x228_unavoidable_compat",
+      "live_unfolds_to": "poset_unavoidable H"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X228.unavoidable_minor_kelly_construction_statement",
+      "path": "minor-theory/theories/conjectures/X228.v",
+      "name": "unavoidable_minor_kelly_construction_statement",
+      "frozen_path": "minor-theory/theories/migration/poset_unavoidability.v",
+      "frozen": "X228Legacy.unavoidable_minor_kelly_construction_statement",
+      "substitutions": {
+        "x228_unavoidable": "Legacy.x228_unavoidable"
+      },
+      "certificate": "Minor.migration.poset_unavoidability.unavoidable_minor_kelly_construction_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X228.v",
+      "name": "x228_unavoidable",
+      "note": "X228_unavoidable_K0 and X228_kelly_nonvacuous keep their exact types and unchanged proofs; the alias is transparent."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X228.v",
+      "name": "unavoidable_minor_kelly_construction_statement",
+      "note": "Print Assumptions vernacular on the unchanged BLOCKED row; no proof depends on it."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.conjectures.unvd.unavoidable",
+      "path": "digraph-theory/theories/conjectures/unvd.v",
+      "name": "unavoidable",
+      "reason": "Exact-order tournament unavoidability (every tournament on exactly N vertices contains D as an injective arc-preserving subdigraph); a distinct directed contract deferred to its own family."
+    }
+  ]
+}
