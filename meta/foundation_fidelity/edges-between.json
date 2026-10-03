@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "family": "edges-between",
+  "modules": {
+    "GTBase.common": {
+      "path": "base/theories/common.v",
+      "overrides": {
+        "edges_between": {
+          "verdict": "FAITHFUL",
+          "note": "The number of ORDERED pairs (a, b) with a in A, b in B and a -- b, for arbitrary, possibly overlapping A and B: an edge inside A :&: B is counted in both orientations. Symmetric in A and B; with the non-edge count it partitions A x B; on disjoint sets it is the number of edges of E(G) meeting both sets (edges_between_cross). K_n: |A||B| - |A :&: B|; K_2 taken whole: 2."
+        },
+        "nonedges_between": {
+          "verdict": "FAITHFUL",
+          "note": "The number of ORDERED pairs (a, b) with a in A, b in B and ~~ (a -- b), including the diagonal pair (x, x) of each x in A :&: B; on disjoint sets it agrees with the number of complement edges between them (nonedges_between_compl); with overlap that reading can fail (nonedges_between_compl_overlap). K_n: |A :&: B|."
+        }
+      },
+      "machine_evidence": [
+        "edges_between_sym",
+        "nonedges_between_sym",
+        "edges_nonedges_between",
+        "edges_between_set0",
+        "edges_between0",
+        "nonedges_between_set0",
+        "nonedges_between0",
+        "edges_between_set1",
+        "nonedges_between_set1",
+        "nonedges_between_Kn",
+        "edges_between_Kn",
+        "edges_between_K2",
+        "edges_between_cross",
+        "nonedges_between_compl",
+        "nonedges_between_compl_overlap"
+      ]
+    }
+  }
+}
