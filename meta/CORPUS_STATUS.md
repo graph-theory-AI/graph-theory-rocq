@@ -56,7 +56,7 @@
 
 ## Foundation fidelity registry
 
-- **155 audited primitives**: 141 faithful · 12 lightweight · 2 broken.
+- **194 audited primitives**: 180 faithful · 12 lightweight · 2 broken.
 - Registry: module contracts in `meta/foundation_fidelity.json` and family verdicts in `meta/foundation_fidelity/`; validate declarations and evidence names with `python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is never inferred from compilation.
 
 | verdict | primitive | misuse watch |
@@ -109,7 +109,7 @@
 
 Cross-area primitives every area may reuse (promoted only when ≥2 areas need them):
 
-`minor`, `strict_minor`, `minor_map`, `minor_rmap`, `mgraph`, `Delta`, `ceil_div`, `common_nbr`, `regular`, `girth_geq`, `is_hom`, `homs_to`, `is_core`, `cartesian_product`, `graph_power`, `subdivision`, `frac_power`, `list_colourable`, `list_colourable_on`, `choosable`, `is_choice_number`, `chromatic_index`, `edge_colourable`, `mDelta`, `k_connected`, `triangle_free`, `k_degenerate_on`, `k_degenerate`, `average_degree_geq`, `has_girth`, `wagner_planar`, `bipartite`, `cycle_graph`
+`minor`, `strict_minor`, `minor_map`, `minor_rmap`, `mgraph`, `Delta`, `ceil_div`, `common_nbr`, `regular`, `min_degree_at_least`, `min_degree`, `subcubic`, `girth_geq`, `is_hom`, `homs_to`, `is_core`, `cartesian_product`, `graph_power`, `subdivision`, `frac_power`, `list_colourable`, `list_colourable_on`, `choosable`, `is_choice_number`, `chromatic_index`, `edge_colourable`, `mDelta`, `mregular`, `mcubic`, `k_connected`, `triangle_free`, `k_degenerate_on`, `k_degenerate`, `average_degree_geq`, `has_girth`, `wagner_planar`, `bipartite`, `cycle_graph`
 
 ## Per-area foundation modules
 
@@ -118,13 +118,13 @@ Area-local foundations (each area builds these on top of `base`):
 | area | foundation modules |
 |---|---|
 | chromatic-theory | `alon_tarsi`, `chi_bounding`, `choice_number`, `critical`, `edge_colourings`, `forest_paths`, `partial_lists`, `poly_forms` |
-| cycle-theory | `comp_reduce`, `connectivity`, `cycle_space`, `matchings_cuts`, `path_subgraphs` |
-| digraph-theory | `cycles`, `interop_graph_theory`, `prelude`, `subdivision` |
+| cycle-theory | `comp_reduce`, `connectivity`, `cycle_space`, `eulerian`, `matchings_cuts`, `path_subgraphs`, `spanning_trees` |
+| digraph-theory | `cycles`, `degree_balance`, `interop_graph_theory`, `longest_cycles`, `prelude`, `subdivision` |
 | extremal-graph-theory | `circular_colouring`, `degree_bounds`, `edge_colourings`, `list_ramsey`, `lp_rational`, `ramsey`, `vc` |
-| graph-theory-misc | `complexity`, `cops` |
+| graph-theory-misc | `ambient_shallow_minors`, `complexity`, `cops` |
 | hypergraph-theory | `hypergraph` |
 | infinite-graph-theory | `igraph` |
-| minor-theory | `containment`, `hole_containments`, `minor_dec`, `ramsey_small`, `width_params` |
+| minor-theory | `containment`, `hole_containments`, `minor_dec`, `ramsey_small`, `shallow_minors`, `width_params` |
 | packing-theory | `edge_families`, `edge_partitions`, `fair_matching`, `matching`, `tree_leaves` |
 | reconstruction-theory | `kelly` |
 | spectral-graph-theory | `spectral` |

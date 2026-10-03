@@ -1,0 +1,970 @@
+{
+  "family": "tree-decomposition",
+  "canonical_name": "GTBase.bag_decompositions.bag_decomposition",
+  "canonical_short_name": "bag_decomposition",
+  "relation": "Same supplied G, T and bags: two convertible Boolean contracts, one unconditionally equivalent Prop contract, and one explicit tree-guarded Prop contract. Upstream sdecomp bridge on the same supplied forest.",
+  "baseline_commit": "58d6d6090cfe12c200bc4ab64f86858074098294",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "minor-theory": "Minor",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "base/theories/bag_decompositions.v",
+    "chromatic-theory/theories/migration/bag_decompositions.v",
+    "minor-theory/theories/migration/bag_decompositions.v",
+    "graph-theory-misc/theories/migration/bag_decompositions.v",
+    "chromatic-theory/theories/migration/path_tree.v",
+    "chromatic-theory/theories/migration/simple_path.v",
+    "graph-theory-misc/theories/migration/induced_free.v",
+    "graph-theory-misc/theories/migration/simple_edges.v",
+    "minor-theory/theories/migration/consecutive_in_cycle.v",
+    "minor-theory/theories/migration/consecutive_in_path.v",
+    "minor-theory/theories/migration/induced_free.v",
+    "minor-theory/theories/migration/path_tree.v",
+    "minor-theory/theories/migration/path_vertices.v"
+  ],
+  "extra_certificates": [
+    "GTBase.bag_decompositions.bag_decomposition_cover",
+    "GTBase.bag_decompositions.bag_decomposition_edge",
+    "GTBase.bag_decompositions.bag_decomposition_fibre",
+    "GTBase.bag_decompositions.bag_decompositionP",
+    "GTBase.bag_decompositions.tree_bag_decompositionP",
+    "GTBase.bag_decompositions.restrict_bag",
+    "GTBase.bag_decompositions.bag_decomposition_sdecompP",
+    "GTBase.bag_decompositions.bag_decomposition_forest_sdecompP",
+    "GTBase.bag_decompositions.bag_decomposition_K0",
+    "GTBase.bag_decompositions.bag_decomposition_K1_one_bag",
+    "GTBase.bag_decompositions.bag_decomposition_K2_one_bag",
+    "GTBase.bag_decompositions.not_bag_decomposition_K1_empty_bag",
+    "GTBase.bag_decompositions.not_bag_decomposition_K2_singleton_bags",
+    "GTBase.bag_decompositions.not_bag_decomposition_two_isolated",
+    "GTBase.bag_decompositions.bag_decomposition_K3_index",
+    "GTBase.bag_decompositions.not_tree_bag_decomposition_K3_index",
+    "GTBase.bag_decompositions.bag_decomposition_unused_empty_bag",
+    "GTBase.bag_decompositions.bag_decomposition_nonempty_index",
+    "GTBase.bag_decompositions.tree_bag_decomposition_K0"
+  ],
+  "downstream_client": "base/theories/examples/bag_decompositions.v",
+  "summary": [
+    "C13 migrates exactly four pointwise supplied-index bag contracts. X126/X27 are Boolean-witness aliases; X189 uses Prop witnesses and no extra guard; X169 retains its explicit is_tree conjunct. Arbitrary, empty, cyclic and unused indices remain possible for the raw contract.",
+    "Upstream GraphTheory.treewidth.sdecomp is equivalent on the same supplied forest; the public restriction bridge transports its predicate connectivity to finite-set connectivity. No forest or inhabitance guard enters the three unguarded aliases. Existing width_params and forest-to-tree proof remain unchanged; Minor restrict_bag now delegates to the public exact-type bridge.",
+    "Freeze all 16 intermediate definitions and 11 complete rows. Preserve natural k.+1 bag bounds, X189 explicit root/pairwise <=k and blocked spaghetti defect, X169 token-path defect/blocked status, class quantifiers, exact logarithm grouping and all guards/statuses.",
+    "Seven complete Originals combine X126 B6/B9, X189 B9, X95 B9, X27 B4, X42 A1/B4, X67 B1/B3 (including frozen internal-vertex chain), and X102 M1/A1. Every older frozen body remains unchanged; imported historical helper closures are pinned explicitly and reciprocal notes describe partial older snapshots.",
+    "Public-only examples distinguish empty graph/index, empty tree guard, one-bag K1/K2, missing vertex/edge/fibre, cyclic raw index versus tree guard, unused empty bag and same-forest transport. Exact 18 whole-iff kernel probes, all assumptions, strict frozen/live dependency closures and independent step10/root final review are required."
+  ],
+  "frozen": [
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "dujmovic_thue_choice_number_pathwidth_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X126Legacy.dujmovic_thue_choice_number_pathwidth_statement",
+      "substitutions": {
+        "x126_pathwidth_at_most": "pathwidth_at_most"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.dujmovic_thue_choice_number_pathwidth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X126.x126_pathwidth_at_most",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_pathwidth_at_most",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X126Legacy.pathwidth_at_most",
+      "substitutions": {
+        "x126_pathwidth_at_most": "pathwidth_at_most",
+        "x126_tree_decomposition": "Legacy.x126_tree_decomposition"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.x126_pathwidth_at_most_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X126.x126_tree_decomposition",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_tree_decomposition",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x126_tree_decomposition",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.bag_decompositions.x126_tree_decomposition_compat",
+      "live_unfolds_to": "bag_decomposition bag"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X189.spaghetti_tree_path_decomposition_chi_bound_statement",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "spaghetti_tree_path_decomposition_chi_bound_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X189Legacy.spaghetti_tree_path_decomposition_chi_bound_statement",
+      "substitutions": {
+        "x189_spaghetti_path_decompositions_width": "spaghetti_path_decompositions_width"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.spaghetti_tree_path_decomposition_chi_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X189.x189_spaghetti_path_decompositions_width",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "x189_spaghetti_path_decompositions_width",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X189Legacy.spaghetti_path_decompositions_width",
+      "substitutions": {
+        "x189_spaghetti_tree_decomposition": "spaghetti_tree_decomposition",
+        "x189_spaghetti_path_decompositions_width": "spaghetti_path_decompositions_width",
+        "x189_tree_decomposition": "Legacy.x189_tree_decomposition"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.x189_spaghetti_path_decompositions_width_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X189.x189_spaghetti_tree_decomposition",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "x189_spaghetti_tree_decomposition",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X189Legacy.spaghetti_tree_decomposition",
+      "substitutions": {
+        "x189_spaghetti_tree_decomposition": "spaghetti_tree_decomposition",
+        "x189_tree_decomposition": "Legacy.x189_tree_decomposition"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.x189_spaghetti_tree_decomposition_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X189.x189_tree_decomposition",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "x189_tree_decomposition",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x189_tree_decomposition",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.bag_decompositions.x189_tree_decomposition_compat",
+      "live_unfolds_to": "bag_decomposition bag"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X102.bounded_tree_independence_forbidden_family_statement",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "bounded_tree_independence_forbidden_family_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.bounded_tree_independence_forbidden_family_statement",
+      "substitutions": {
+        "x102_free_class_tree_alpha_bounded": "Legacy.x102_free_class_tree_alpha_bounded"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.bounded_tree_independence_forbidden_family_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X102.x102_free_class_tree_alpha_bounded",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_free_class_tree_alpha_bounded",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x102_free_class_tree_alpha_bounded",
+      "substitutions": {
+        "x102_tree_alpha_at_most": "Legacy.x102_tree_alpha_at_most"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x102_free_class_tree_alpha_bounded_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X102.x102_tree_alpha_at_most",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_tree_alpha_at_most",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x102_tree_alpha_at_most",
+      "substitutions": {
+        "x27_tree_decomposition": "Minor.migration.bag_decompositions.Legacy.x27_tree_decomposition"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x102_tree_alpha_at_most_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X169.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "substitutions": {
+        "x169_polytime_decides_TS_connectivity": "Legacy.x169_polytime_decides_TS_connectivity"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.token_sliding_chordal_clique_tree_degree_polytime_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X169.x169_chordal",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_chordal",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_chordal",
+      "substitutions": {
+        "x169_clique_tree": "Legacy.x169_clique_tree"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_chordal_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X169.x169_clique_tree",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_clique_tree",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_clique_tree",
+      "substitutions": {
+        "x169_tree_decomposition": "Legacy.x169_tree_decomposition"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_clique_tree_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X169.x169_clique_tree_degree_at_most",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_clique_tree_degree_at_most",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_clique_tree_degree_at_most",
+      "substitutions": {
+        "x169_clique_tree": "Legacy.x169_clique_tree"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_clique_tree_degree_at_most_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_polytime_decides_TS_connectivity",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_polytime_decides_TS_connectivity",
+      "substitutions": {
+        "x169_chordal": "Legacy.x169_chordal",
+        "x169_clique_tree_degree_at_most": "Legacy.x169_clique_tree_degree_at_most"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_polytime_decides_TS_connectivity_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X169.x169_tree_decomposition",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_tree_decomposition",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_tree_decomposition",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.bag_decompositions.x169_tree_decomposition_compat",
+      "live_unfolds_to": "tree_bag_decomposition bag"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X121.dallard_milanic_storgel_tw_omega_tree_alpha_statement",
+      "path": "minor-theory/theories/conjectures/X121.v",
+      "name": "dallard_milanic_storgel_tw_omega_tree_alpha_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.dallard_milanic_storgel_tw_omega_tree_alpha_statement",
+      "substitutions": {
+        "x121_tree_alpha_le": "Legacy.x121_tree_alpha_le",
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most"
+      },
+      "certificate": "Minor.migration.bag_decompositions.dallard_milanic_storgel_tw_omega_tree_alpha_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X121.x121_tree_alpha_le",
+      "path": "minor-theory/theories/conjectures/X121.v",
+      "name": "x121_tree_alpha_le",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x121_tree_alpha_le",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x121_tree_alpha_le_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X127.dujmovic_joret_morin_norin_wood_two_tree_width_chi_statement",
+      "path": "minor-theory/theories/conjectures/X127.v",
+      "name": "dujmovic_joret_morin_norin_wood_two_tree_width_chi_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.dujmovic_joret_morin_norin_wood_two_tree_width_chi_statement",
+      "substitutions": {
+        "x127_two_tree_width_le": "Legacy.x127_two_tree_width_le"
+      },
+      "certificate": "Minor.migration.bag_decompositions.dujmovic_joret_morin_norin_wood_two_tree_width_chi_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X127.x127_two_tree_width_le",
+      "path": "minor-theory/theories/conjectures/X127.v",
+      "name": "x127_two_tree_width_le",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x127_two_tree_width_le",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x127_two_tree_width_le_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X201.treewidth_vertex_disjoint_subgraphs_log_bound_statement",
+      "path": "minor-theory/theories/conjectures/X201.v",
+      "name": "treewidth_vertex_disjoint_subgraphs_log_bound_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.treewidth_vertex_disjoint_subgraphs_log_bound_statement",
+      "substitutions": {
+        "x201_k_disjoint_large_treewidth_subgraphs": "Legacy.x201_k_disjoint_large_treewidth_subgraphs",
+        "x201_treewidth_at_least": "Legacy.x201_treewidth_at_least"
+      },
+      "certificate": "Minor.migration.bag_decompositions.treewidth_vertex_disjoint_subgraphs_log_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X201.x201_k_disjoint_large_treewidth_subgraphs",
+      "path": "minor-theory/theories/conjectures/X201.v",
+      "name": "x201_k_disjoint_large_treewidth_subgraphs",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x201_k_disjoint_large_treewidth_subgraphs",
+      "substitutions": {
+        "x201_treewidth_at_least": "Legacy.x201_treewidth_at_least"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x201_k_disjoint_large_treewidth_subgraphs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X201.x201_treewidth_at_least",
+      "path": "minor-theory/theories/conjectures/X201.v",
+      "name": "x201_treewidth_at_least",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x201_treewidth_at_least",
+      "substitutions": {
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x201_treewidth_at_least_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X27.bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most"
+      },
+      "certificate": "Minor.migration.bag_decompositions.bounded_degree_even_hole_free_bounded_treewidth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X27.x27_tree_decomposition",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_tree_decomposition",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x27_tree_decomposition",
+      "substitutions": {},
+      "certificate": "Minor.migration.bag_decompositions.x27_tree_decomposition_compat",
+      "live_unfolds_to": "bag_decomposition bag"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X27.x27_treewidth_at_most",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_treewidth_at_most",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x27_treewidth_at_most",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x27_treewidth_at_most_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X42.v",
+      "name": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most"
+      },
+      "certificate": "Minor.migration.bag_decompositions.even_hole_k4_diamond_free_bounded_treewidth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "theta_triangle_free_bounded_degree_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.theta_triangle_free_bounded_degree_treewidth_statement",
+      "substitutions": {
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most"
+      },
+      "certificate": "Minor.migration.bag_decompositions.theta_triangle_free_bounded_degree_treewidth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X95.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "substitutions": {
+        "x95_pathwidth_at_most": "Legacy.x95_pathwidth_at_most",
+        "x95_subgraph_indexed_tree_decomposition_width_at_most": "Legacy.x95_subgraph_indexed_tree_decomposition_width_at_most"
+      },
+      "certificate": "Minor.migration.bag_decompositions.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X95.x95_pathwidth_at_most",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_pathwidth_at_most",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x95_pathwidth_at_most",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x95_pathwidth_at_most_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X95.x95_subgraph_indexed_tree_decomposition_width_at_most",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_subgraph_indexed_tree_decomposition_width_at_most",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x95_subgraph_indexed_tree_decomposition_width_at_most",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x95_subgraph_indexed_tree_decomposition_width_at_most_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X126.x126_pathwidth_at_most",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_pathwidth_at_most",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X126Original.pathwidth_at_most",
+      "substitutions": {
+        "x126_pathwidth_at_most": "pathwidth_at_most",
+        "x126_path_index_graph": "Chromatic.migration.path_tree.Legacy.x126_path_index_graph",
+        "x126_tree_decomposition": "Legacy.x126_tree_decomposition"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.x126_pathwidth_at_most_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "dujmovic_thue_choice_number_pathwidth_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X126Original.dujmovic_thue_choice_number_pathwidth_statement",
+      "substitutions": {
+        "x126_pathwidth_at_most": "pathwidth_at_most",
+        "x126_thue_choosable": "Chromatic.migration.simple_path.X126Legacy.thue_choosable"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.dujmovic_thue_choice_number_pathwidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X189.x189_spaghetti_path_decompositions_width",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "x189_spaghetti_path_decompositions_width",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X189Original.spaghetti_path_decompositions_width",
+      "substitutions": {
+        "x189_spaghetti_path_decompositions_width": "spaghetti_path_decompositions_width",
+        "x189_spaghetti_tree_decomposition": "X189Legacy.spaghetti_tree_decomposition",
+        "x189_path_index_graph": "Chromatic.migration.path_tree.Legacy.x189_path_index_graph",
+        "x189_tree_decomposition": "Legacy.x189_tree_decomposition"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.x189_spaghetti_path_decompositions_width_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X189.spaghetti_tree_path_decomposition_chi_bound_statement",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "spaghetti_tree_path_decomposition_chi_bound_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X189Original.spaghetti_tree_path_decomposition_chi_bound_statement",
+      "substitutions": {
+        "x189_spaghetti_path_decompositions_width": "spaghetti_path_decompositions_width"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.spaghetti_tree_path_decomposition_chi_bound_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X27.bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X27Original.bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most",
+        "x27_even_hole_free": "Minor.migration.consecutive_in_cycle.X27Legacy.even_hole_free"
+      },
+      "certificate": "Minor.migration.bag_decompositions.bounded_degree_even_hole_free_bounded_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X42.v",
+      "name": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X42Original.even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most",
+        "x27_even_hole_free": "Minor.migration.consecutive_in_cycle.X27Legacy.even_hole_free",
+        "x42_induced_free": "Minor.migration.induced_free.Legacy.x42_induced_free"
+      },
+      "certificate": "Minor.migration.bag_decompositions.even_hole_k4_diamond_free_bounded_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "theta_triangle_free_bounded_degree_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X67Original.theta_triangle_free_bounded_degree_treewidth_statement",
+      "substitutions": {
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most",
+        "x67_theta": "Minor.migration.consecutive_in_path.X67Original.theta"
+      },
+      "certificate": "Minor.migration.bag_decompositions.theta_triangle_free_bounded_degree_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Minor.conjectures.X95.x95_pathwidth_at_most",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_pathwidth_at_most",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X95Original.x95_pathwidth_at_most",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition",
+        "x95_path_index_graph": "Minor.migration.path_tree.Legacy.x95_path_index_graph"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x95_pathwidth_at_most_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X95.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X95Original.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "substitutions": {
+        "x95_pathwidth_at_most": "X95Original.x95_pathwidth_at_most",
+        "x95_subgraph_indexed_tree_decomposition_width_at_most": "Legacy.x95_subgraph_indexed_tree_decomposition_width_at_most"
+      },
+      "certificate": "Minor.migration.bag_decompositions.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X102.x102_free_class_tree_alpha_bounded",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_free_class_tree_alpha_bounded",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "X102Original.x102_free_class_tree_alpha_bounded",
+      "substitutions": {
+        "x102_induced_free": "GTMisc.migration.induced_free.Legacy.x102_induced_free",
+        "x102_tree_alpha_at_most": "Legacy.x102_tree_alpha_at_most"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x102_free_class_tree_alpha_bounded_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X102.bounded_tree_independence_forbidden_family_statement",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "bounded_tree_independence_forbidden_family_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "X102Original.bounded_tree_independence_forbidden_family_statement",
+      "substitutions": {
+        "x102_free_class_tree_alpha_bounded": "X102Original.x102_free_class_tree_alpha_bounded",
+        "x102_line_graph_of_subdivided_multiclaw": "GTMisc.migration.simple_edges.X102Legacy.line_graph_of_subdivided_multiclaw"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.bounded_tree_independence_forbidden_family_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_genuine_path",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_genuine_path",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "Legacy.x126_genuine_path",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.simple_path.x126_genuine_path_compat",
+      "commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_nonrepetitive",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_nonrepetitive",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.nonrepetitive",
+      "substitutions": {
+        "x126_genuine_path": "Legacy.x126_genuine_path",
+        "x126_nonrepetitive": "nonrepetitive"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_nonrepetitive_compat",
+      "commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_nonrepetitive_list_colouring",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_nonrepetitive_list_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.nonrepetitive_list_colouring",
+      "substitutions": {
+        "x126_nonrepetitive": "nonrepetitive",
+        "x126_nonrepetitive_list_colouring": "nonrepetitive_list_colouring"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_nonrepetitive_list_colouring_compat",
+      "commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_thue_choosable",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_thue_choosable",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.thue_choosable",
+      "substitutions": {
+        "x126_nonrepetitive_list_colouring": "nonrepetitive_list_colouring",
+        "x126_thue_choosable": "thue_choosable"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_thue_choosable_compat",
+      "commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_path_index_graph",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_path_index_graph",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "Legacy.x126_path_index_graph",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.path_tree.x126_path_index_graph_compat",
+      "commit": "e377dcbcf549c044b7b2a4321831792c1c78f375"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X189.x189_path_index_graph",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "x189_path_index_graph",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "Legacy.x189_path_index_graph",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.path_tree.x189_path_index_graph_compat",
+      "commit": "e377dcbcf549c044b7b2a4321831792c1c78f375"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X95.x95_path_index_graph",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_path_index_graph",
+      "frozen_path": "minor-theory/theories/migration/path_tree.v",
+      "frozen": "Legacy.x95_path_index_graph",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_tree.x95_path_index_graph_compat",
+      "commit": "e377dcbcf549c044b7b2a4321831792c1c78f375"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X27.x27_consecutive_in_cycle",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_consecutive_in_cycle",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "Legacy.x27_consecutive_in_cycle",
+      "substitutions": {},
+      "certificate": "Minor.migration.consecutive_in_cycle.x27_consecutive_in_cycle_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X27.x27_hole",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_hole",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X27Legacy.hole",
+      "substitutions": {
+        "x27_consecutive_in_cycle": "Legacy.x27_consecutive_in_cycle",
+        "x27_hole": "hole"
+      },
+      "certificate": "Minor.migration.consecutive_in_cycle.x27_hole_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X27.x27_even_hole_free",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_even_hole_free",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X27Legacy.even_hole_free",
+      "substitutions": {
+        "x27_even_hole_free": "even_hole_free",
+        "x27_hole": "hole"
+      },
+      "certificate": "Minor.migration.consecutive_in_cycle.x27_even_hole_free_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X67.x67_consecutive_in_path",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_consecutive_in_path",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "Legacy.x67_consecutive_in_path",
+      "substitutions": {},
+      "certificate": "Minor.migration.consecutive_in_path.x67_consecutive_in_path_compat",
+      "commit": "ceadac8a097e951709afd63b65546f1a2513e0a5"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X67.x67_induced_path_between",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_induced_path_between",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X67Legacy.induced_path_between",
+      "substitutions": {
+        "x67_induced_path_between": "induced_path_between",
+        "x67_consecutive_in_path": "Legacy.x67_consecutive_in_path"
+      },
+      "certificate": "Minor.migration.consecutive_in_path.x67_induced_path_between_compat",
+      "commit": "ceadac8a097e951709afd63b65546f1a2513e0a5"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X67.x67_theta",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_theta",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X67Original.theta",
+      "substitutions": {
+        "x67_theta": "theta",
+        "x67_induced_path_between": "X67Legacy.induced_path_between",
+        "x67_internal_vertices": "path_vertices.X67Legacy.internal_vertices",
+        "x67_no_cross_edges": "path_vertices.X67Legacy.no_cross_edges"
+      },
+      "certificate": "Minor.migration.consecutive_in_path.x67_theta_original_compat",
+      "commit": "ceadac8a097e951709afd63b65546f1a2513e0a5"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X67.x67_path_vertices",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_path_vertices",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x67_path_vertices",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_vertices.x67_path_vertices_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X67.x67_internal_vertices",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_internal_vertices",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.internal_vertices",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_path_vertices": "Legacy.x67_path_vertices"
+      },
+      "certificate": "Minor.migration.path_vertices.x67_internal_vertices_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X67.x67_no_cross_edges",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_no_cross_edges",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.no_cross_edges",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_no_cross_edges": "no_cross_edges"
+      },
+      "certificate": "Minor.migration.path_vertices.x67_no_cross_edges_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X102.x102_induced_free",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_induced_free",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "Legacy.x102_induced_free",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_free.x102_induced_free_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X42.x42_induced_free",
+      "path": "minor-theory/theories/conjectures/X42.v",
+      "name": "x42_induced_free",
+      "frozen_path": "minor-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x42_induced_free",
+      "substitutions": {},
+      "certificate": "Minor.migration.induced_free.x42_induced_free_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X102.x102_induced_free",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_induced_free",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "Legacy.x102_induced_free",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_free.x102_induced_free_compat"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "GTMisc.conjectures.X102.x102_edge_set",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_edges.v",
+      "frozen": "Legacy.clique_edge_set",
+      "substitutions": {
+        "x102_edge_set": "clique_edge_set"
+      },
+      "certificate": "GTMisc.migration.simple_edges.x102_edge_set_compat"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "GTMisc.conjectures.X102.x102_line_graph_of",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_line_graph_of",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_edges.v",
+      "frozen": "X102Legacy.line_graph_of",
+      "substitutions": {
+        "x102_line_graph_of": "line_graph_of",
+        "x102_edge_set": "Legacy.clique_edge_set"
+      },
+      "certificate": "GTMisc.migration.simple_edges.x102_line_graph_of_compat"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "GTMisc.conjectures.X102.x102_line_graph_of_subdivided_multiclaw",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_line_graph_of_subdivided_multiclaw",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_edges.v",
+      "frozen": "X102Legacy.line_graph_of_subdivided_multiclaw",
+      "substitutions": {
+        "x102_line_graph_of_subdivided_multiclaw": "line_graph_of_subdivided_multiclaw",
+        "x102_line_graph_of": "line_graph_of"
+      },
+      "certificate": "GTMisc.migration.simple_edges.x102_line_graph_of_subdivided_multiclaw_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/path_tree.v#X126Legacy.pathwidth_at_most": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "chromatic-theory/theories/migration/path_tree.v#X189Legacy.spaghetti_path_decompositions_width": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "chromatic-theory/theories/migration/simple_path.v#X126Legacy.dujmovic_thue_choice_number_pathwidth_statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "graph-theory-misc/theories/migration/induced_free.v#X102Legacy.free_class_tree_alpha_bounded": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "minor-theory/theories/migration/consecutive_in_cycle.v#X27Legacy.bounded_degree_even_hole_free_bounded_treewidth_statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "minor-theory/theories/migration/consecutive_in_cycle.v#X42Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "minor-theory/theories/migration/consecutive_in_cycle.v#X42Original.even_hole_k4_diamond_free_bounded_treewidth_statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "minor-theory/theories/migration/consecutive_in_path.v#X67Original.statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "minor-theory/theories/migration/induced_free.v#X42Legacy.statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "minor-theory/theories/migration/path_tree.v#X95Legacy.pathwidth_at_most": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "minor-theory/theories/migration/path_tree.v#X95Legacy.subgraph_indexed_tree_decomposition_pathwidth_bound_statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "minor-theory/theories/migration/path_vertices.v#X67Legacy.statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
+    "chromatic-theory/theories/migration/pathwidth.v#Legacy.x126_pathwidth_at_most": "C14 immediate snapshot retains the live C13 bag alias. The reused complete C13 X126Original freezes B6/B9/C13 as well.",
+    "minor-theory/theories/migration/pathwidth.v#Legacy.x95_pathwidth_at_most": "C14 immediate snapshot retains the live C13 bag alias. The reused complete C13 X95Original freezes B9/C13 as well.",
+    "minor-theory/theories/migration/pathwidth.v#Legacy.subgraph_indexed_tree_decomposition_pathwidth_bound_statement": "C14 immediate row retains the live embedded-index conclusion. The reused complete C13 X95Original freezes that entire conclusion.",
+    "graph-theory-misc/theories/migration/subcubic.v#X102Legacy.bounded_tree_independence_forbidden_family_statement": "A14 snapshot: A14 froze this row over its own frozen multiclaw and line-graph chains but kept the live x102_free_class_tree_alpha_bounded of this family. Kept unchanged; the complete row is GTMisc.migration.subcubic.X102Original.bounded_tree_independence_forbidden_family_statement, certified by bounded_tree_independence_forbidden_family_statement_original_compat, which composes this family's complete X102Original.x102_free_class_tree_alpha_bounded and reuses its complete certificate."
+  },
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.X189.x189_rooted_spaghetti_index",
+      "reason": "Unused index-only contract, with no graph vertex/edge coverage; not a supplied bag decomposition.",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "x189_rooted_spaghetti_index"
+    }
+  ],
+  "proof_consumers": [
+    "Minor.conjectures.implications_X42.restrict_bag",
+    "Minor.conjectures.implications_X42.tw_le_x27",
+    "Minor.conjectures.implications_X42.x27_tw_le",
+    "Minor.conjectures.implications_X42.tw_le_iff_x27",
+    "Minor.conjectures.implications_X27.x27_tw_le_iff"
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x27_tree_decomposition",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X121.v",
+      "name": "x27_tree_decomposition",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X121.v",
+      "name": "x27_treewidth_at_most",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X127.v",
+      "name": "x27_tree_decomposition",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X201.v",
+      "name": "x27_treewidth_at_most",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X42.v",
+      "name": "x27_treewidth_at_most",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x27_treewidth_at_most",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x27_tree_decomposition",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X27.v",
+      "name": "x27_treewidth_at_most",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "x27_treewidth_at_most",
+      "note": "Current quantitative chain or actual proof consumer; complete row/type retained and source closure rebuilt with C13."
+    }
+  ]
+}

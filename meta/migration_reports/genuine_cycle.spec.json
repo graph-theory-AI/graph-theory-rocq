@@ -53,11 +53,8 @@
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of every frozen statement and Original contains no live helper or chain of this family and neither `seq_cycle` nor `seq_cycleb`; the Originals also reach no live B1/B4/A5 helper or canonical; each live statement reaches the canonical and its alias (/srv/graph-theory-rocq/coordination/evidence/B10-genuine_cycle/print_all_dependencies_summary.txt).",
     "",
     "Baseline 00d6bb3 is a private, not-for-integration merge of B9 299dc71 with main 0659592 (A5, A6, B7, C6), conflicts only in _CoqProject lines (de-duplicated union) and simple_path.md (regenerated); no .v file differs from both parents. No statement text, doc block, manifest row or leg state changes (checked below).",
-    "",
     "Later migration: Cycle X9 `x9_cycle_edges`, listed here as a separate raw cyclic edge list, was migrated by B11 (family cycle-edges) onto `GTBase.walks_paths.seq_cycle_edge_list`; it is no longer an untouched distinct variant.",
-    "",
     "Later migration: Cycle X212 `x212_cycle_vertices`, listed here as a separate raw cycle vertex set, was migrated by B12 (family cycle-vertices) onto B1's `GTBase.walks_paths.seq_vertices`; it is no longer an untouched distinct variant.",
-    "",
     "Later migration: Hom U3 `longest_cycle`, listed here as a separate enriched contract, was migrated by B13 (family longest-cycle) onto `GTBase.walks_paths.seq_longest_cycle`, a longest genuine cycle built on this family's `seq_cycleb`, through its all-ucycle and3 view; it is no longer an untouched distinct variant."
   ],
   "frozen": [

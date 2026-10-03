@@ -150,6 +150,8 @@
       "note": "Pinned coq-graph-theory 0.9.7 has neighbourhoods N(x) of simple graphs and incident/edges_at for multigraph edge objects (mgraph, open_confluence), but no count of the members of a supplied set family containing a vertex; MathComp has none either. The repository already had two public same-body copies (Hypergraph hg_degree, ClassicalLemmas edeg), which now name the new MathComp-only GTBase module; ClassicalLemmas gains the GTBase load path and the root classical-lemmas: base prerequisite. Evidence: coordination/evidence/A10-incidence_degree/upstream-audit.txt.",
       "audited_at": "2026-10-03"
     },
-    "reviewed_by": null
+    "reviewed_by": "family_scope",
+    "reviewed_commit": "9abf440da80115caeffd299077976b48f4e07d74",
+    "independent_review": "meta/migration_reviews/incidence_degree.md"
   }
 }

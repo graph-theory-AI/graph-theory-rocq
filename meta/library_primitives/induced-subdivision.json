@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "family": "induced-subdivision",
+  "primitive": {
+    "canonical_name": "GTBase.induced_subdivisions.induced_subdivision_model",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "induced_subdivision_model",
+      "induced_subdivision"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.X98.x98_induced_subdivision_model",
+      "Extremal.conjectures.X98.x98_induced_subdivision",
+      "GTMisc.conjectures.X114.x114_induced_subdivision_model",
+      "GTMisc.conjectures.X114.x114_induced_subdivision"
+    ],
+    "consumers_remaining": 18,
+    "relation": "Exact strong induced-subdivision contract, pattern before host: a seven-field Record with injective branch vertices, a full vertex sequence for every ordered pattern pair, endpoint-inclusive induced paths on pattern edges (nonempty, from branch u to branch v, duplicate-free, along host edges, chords only between consecutive entries), internal vertices avoiding all branch vertices, shared internal vertices forcing the same undirected pattern edge, and global inducedness over the raw model support (C19). Field formulas are convertible with the X98/X114 copies; the local constructor and projections are kept as exact-type wrappers. No reversal coherence, off-edge, nonempty-graph or positive-length condition; not the interior-list Minor subdiv_model.",
+    "semantic_classes": {
+      "strong-model-record": {
+        "members": [
+          "Extremal.conjectures.X98.x98_induced_subdivision_model",
+          "GTMisc.conjectures.X114.x114_induced_subdivision_model"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.induced_subdivisions.x98_induced_subdivision_model_compat",
+          "GTMisc.migration.induced_subdivisions.x114_induced_subdivision_model_compat"
+        ],
+        "note": "Two-way field-by-field transports between each frozen Record and the live alias, cancelling in both directions; the field formulas are convertible."
+      },
+      "strong-model-inhabited": {
+        "members": [
+          "Extremal.conjectures.X98.x98_induced_subdivision",
+          "GTMisc.conjectures.X114.x114_induced_subdivision"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.induced_subdivisions.x98_induced_subdivision_compat",
+          "GTMisc.migration.induced_subdivisions.x114_induced_subdivision_compat"
+        ]
+      }
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.induced_subdivisions.x98_induced_subdivision_model_compat",
+      "Extremal.migration.induced_subdivisions.x98_induced_subdivision_compat",
+      "Extremal.migration.induced_subdivisions.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "GTMisc.migration.induced_subdivisions.x114_induced_subdivision_model_compat",
+      "GTMisc.migration.induced_subdivisions.x114_induced_subdivision_compat",
+      "GTMisc.migration.induced_subdivisions.x114_hisc_problem_compat",
+      "GTMisc.migration.induced_subdivisions.subcubic_induced_subdivision_np_complete_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.induced_subdivisions.isd_edge_path_ends",
+      "GTBase.induced_subdivisions.isd_edge_path_nil",
+      "GTBase.induced_subdivisions.isd_branch_supported",
+      "GTBase.induced_subdivisions.isd_edge_path_supported",
+      "GTBase.induced_subdivisions.isd_off_edge_free",
+      "GTBase.induced_subdivisions.induced_subdivision_card",
+      "GTBase.induced_subdivisions.pair_seq_internal",
+      "GTBase.induced_subdivisions.pair_seq_consecutive",
+      "GTBase.induced_subdivisions.pair_seq_consecutive_rev",
+      "GTBase.induced_subdivisions.induced_subdivision_refl",
+      "GTBase.induced_subdivisions.induced_subdivision_K0",
+      "GTBase.induced_subdivisions.not_induced_subdivision_empty_host",
+      "GTBase.induced_subdivisions.induced_subdivision_K1"
+    ],
+    "public_client": "base/theories/examples/induced_subdivisions.v",
+    "legacy_baseline": "952a89bdecf65bed9be3a1393eabc91ca091d26c",
+    "migration_report": "meta/migration_reports/induced_subdivisions.md",
+    "migration_spec": "meta/migration_reports/induced_subdivisions.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C20.md",
+    "foundation_fidelity": "meta/foundation_fidelity/induced-subdivision.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.minor",
+        "GraphTheory.core.sgraph",
+        "GTBase.walks_paths",
+        "GTBase.model_support",
+        "Minor.foundations.containment"
+      ],
+      "result": "new-base-primitive",
+      "candidate": null,
+      "note": "No installed upstream primitive and no GTBase predicate is a strong induced-subdivision model (pinned whole-source search by matching_scope). Upstream minor/minor_rmap are branch-set minors; Minor subdiv_model stores interiors, requires reversal coherence, has no inducedness and puts the host first in has_subdivision. Two areas use the identical full-path Record, so the canonical lives in a focused GTBase module, imported explicitly, reusing seq_consecutive and the C19 raw model support.",
+      "audited_at": "2026-10-03"
+    }
+  }
+}

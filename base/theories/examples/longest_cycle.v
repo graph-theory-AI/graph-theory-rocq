@@ -45,7 +45,7 @@ Proof. exact: seq_longest_cycle_none. Qed.
 
 End AnyRelation.
 
-(** Same-relation reversal needs a symmetric relation, such as the adjacency of a simple graph. *)
+(** For a symmetric relation, reversal stays in the same relation, as for simple-graph adjacency. *)
 Example undirected_reversal (G : sgraph) (c : seq G) :
   seq_longest_cycle (@edge_rel G) (rev c) <-> seq_longest_cycle (@edge_rel G) c.
 Proof. by apply: seq_longest_cycle_rev; exact: sg_sym. Qed.

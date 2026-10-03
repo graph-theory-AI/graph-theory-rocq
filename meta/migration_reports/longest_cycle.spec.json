@@ -64,7 +64,7 @@
     "Kernel evidence, independent of this textual report, from `Print All Dependencies`:",
     "- no frozen row or Original reaches a live helper of this family or `seq_longest_cycle`;",
     "- the Originals also reach no live B10 or B12 helper or canonical;",
-    "- every per-row copy reaches no live constant outside its live row's closure;",
+    "- current per-row frozen copies intentionally retain baseline dependencies bypassed by the new live aliases: upstream path.ucycle for X10/Hom and X212.x212_cycle for X212. They exclude live B13 helpers and seq_longest_cycle; the complete Originals additionally exclude live B10/B12 helpers and canonicals;",
     "- each live row reaches `seq_longest_cycle` and its alias.",
     "Summary: /srv/graph-theory-rocq/coordination/evidence/B13-longest_cycle/print_all_dependencies_summary.txt.",
     "",

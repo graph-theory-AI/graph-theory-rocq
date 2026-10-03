@@ -1,0 +1,276 @@
+{
+  "family": "pathwidth",
+  "canonical_name": "GTBase.pathwidth.pathwidth_at_most",
+  "canonical_short_name": "pathwidth_at_most",
+  "relation": "Unconditional conversion of the same existential supplied-index pathwidth bound: T:sgraph, bag:T->{set G}, path_tree T, bag_decomposition bag, and every bag cardinality <= k.+1. No nonempty index, ordinal representation or attained minimum.",
+  "baseline_commit": "cdb9e10161e6566b9a812b0931488acb6338be9f",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/pathwidth.v",
+    "chromatic-theory/theories/migration/pathwidth.v",
+    "minor-theory/theories/migration/pathwidth.v",
+    "chromatic-theory/theories/migration/bag_decompositions.v",
+    "chromatic-theory/theories/migration/path_tree.v",
+    "chromatic-theory/theories/migration/simple_path.v",
+    "minor-theory/theories/migration/bag_decompositions.v",
+    "minor-theory/theories/migration/path_tree.v"
+  ],
+  "extra_certificates": [
+    "GTBase.pathwidth.pathwidth_at_mostI",
+    "GTBase.pathwidth.pathwidth_at_most_witness",
+    "GTBase.pathwidth.pathwidth_at_mostW",
+    "GTBase.pathwidth.pathwidth_at_most_card",
+    "GTBase.pathwidth.pathwidth_at_most0_edgeless",
+    "GTBase.pathwidth.pathwidth_at_most_K0",
+    "GTBase.pathwidth.pathwidth_at_most_K1",
+    "GTBase.pathwidth.pathwidth_at_most_K2",
+    "GTBase.pathwidth.not_pathwidth_at_most_K2_0"
+  ],
+  "summary": [
+    "C14 migrates exactly X126 and X95 supplied-index pathwidth bounds, by conversion. Existential T/bag order, path-tree and raw bag clauses, successor bounds and empty/unused bags remain unchanged.",
+    "Two whole current rows and two complete Originals are certified. Complete C13 X126Original and X95Original bodies are reused byte-for-byte, with all B6/B9/C13 dependencies explicit. X126 retains a uniform f before p/G; X95 retains connected G and its separate embedded-index conclusion."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X126.x126_pathwidth_at_most",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_pathwidth_at_most",
+      "frozen_path": "chromatic-theory/theories/migration/pathwidth.v",
+      "frozen": "Legacy.x126_pathwidth_at_most",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.pathwidth.x126_pathwidth_at_most_compat",
+      "live_unfolds_to": "pathwidth_at_most G k"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "dujmovic_thue_choice_number_pathwidth_statement",
+      "frozen_path": "chromatic-theory/theories/migration/pathwidth.v",
+      "frozen": "Legacy.dujmovic_thue_choice_number_pathwidth_statement",
+      "substitutions": {
+        "x126_pathwidth_at_most": "Legacy.x126_pathwidth_at_most"
+      },
+      "certificate": "Chromatic.migration.pathwidth.dujmovic_thue_choice_number_pathwidth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X95.x95_pathwidth_at_most",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_pathwidth_at_most",
+      "frozen_path": "minor-theory/theories/migration/pathwidth.v",
+      "frozen": "Legacy.x95_pathwidth_at_most",
+      "substitutions": {},
+      "certificate": "Minor.migration.pathwidth.x95_pathwidth_at_most_compat",
+      "live_unfolds_to": "pathwidth_at_most G k"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X95.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "frozen_path": "minor-theory/theories/migration/pathwidth.v",
+      "frozen": "Legacy.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "substitutions": {
+        "x95_pathwidth_at_most": "Legacy.x95_pathwidth_at_most"
+      },
+      "certificate": "Minor.migration.pathwidth.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_tree_decomposition",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_tree_decomposition",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x126_tree_decomposition",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.bag_decompositions.x126_tree_decomposition_compat",
+      "live_unfolds_to": "bag_decomposition bag",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "dujmovic_thue_choice_number_pathwidth_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X126Original.dujmovic_thue_choice_number_pathwidth_statement",
+      "substitutions": {
+        "x126_pathwidth_at_most": "pathwidth_at_most",
+        "x126_thue_choosable": "Chromatic.migration.simple_path.X126Legacy.thue_choosable"
+      },
+      "certificate": "Chromatic.migration.pathwidth.dujmovic_thue_choice_number_pathwidth_statement_original_compat",
+      "corpus": "v2",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_pathwidth_at_most",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_pathwidth_at_most",
+      "frozen_path": "chromatic-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X126Original.pathwidth_at_most",
+      "substitutions": {
+        "x126_pathwidth_at_most": "pathwidth_at_most",
+        "x126_path_index_graph": "Chromatic.migration.path_tree.Legacy.x126_path_index_graph",
+        "x126_tree_decomposition": "Legacy.x126_tree_decomposition"
+      },
+      "certificate": "Chromatic.migration.bag_decompositions.x126_pathwidth_at_most_original_compat",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_path_index_graph",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_path_index_graph",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "Legacy.x126_path_index_graph",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.path_tree.x126_path_index_graph_compat",
+      "commit": "e377dcbcf549c044b7b2a4321831792c1c78f375"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_genuine_path",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_genuine_path",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "Legacy.x126_genuine_path",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.simple_path.x126_genuine_path_compat",
+      "commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_nonrepetitive",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_nonrepetitive",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.nonrepetitive",
+      "substitutions": {
+        "x126_genuine_path": "Legacy.x126_genuine_path",
+        "x126_nonrepetitive": "nonrepetitive"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_nonrepetitive_compat",
+      "commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_nonrepetitive_list_colouring",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_nonrepetitive_list_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.nonrepetitive_list_colouring",
+      "substitutions": {
+        "x126_nonrepetitive": "nonrepetitive",
+        "x126_nonrepetitive_list_colouring": "nonrepetitive_list_colouring"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_nonrepetitive_list_colouring_compat",
+      "commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X126.x126_thue_choosable",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_thue_choosable",
+      "frozen_path": "chromatic-theory/theories/migration/simple_path.v",
+      "frozen": "X126Legacy.thue_choosable",
+      "substitutions": {
+        "x126_nonrepetitive_list_colouring": "nonrepetitive_list_colouring",
+        "x126_thue_choosable": "thue_choosable"
+      },
+      "certificate": "Chromatic.migration.simple_path.x126_thue_choosable_compat",
+      "commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X27.x27_tree_decomposition",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_tree_decomposition",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x27_tree_decomposition",
+      "substitutions": {},
+      "certificate": "Minor.migration.bag_decompositions.x27_tree_decomposition_compat",
+      "live_unfolds_to": "bag_decomposition bag",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X95.x95_subgraph_indexed_tree_decomposition_width_at_most",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_subgraph_indexed_tree_decomposition_width_at_most",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x95_subgraph_indexed_tree_decomposition_width_at_most",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x95_subgraph_indexed_tree_decomposition_width_at_most_compat",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X95.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X95Original.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "substitutions": {
+        "x95_pathwidth_at_most": "X95Original.x95_pathwidth_at_most",
+        "x95_subgraph_indexed_tree_decomposition_width_at_most": "Legacy.x95_subgraph_indexed_tree_decomposition_width_at_most"
+      },
+      "certificate": "Minor.migration.pathwidth.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_original_compat",
+      "corpus": "v2",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X95.x95_pathwidth_at_most",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_pathwidth_at_most",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X95Original.x95_pathwidth_at_most",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition",
+        "x95_path_index_graph": "Minor.migration.path_tree.Legacy.x95_path_index_graph"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x95_pathwidth_at_most_original_compat",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X95.x95_path_index_graph",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_path_index_graph",
+      "frozen_path": "minor-theory/theories/migration/path_tree.v",
+      "frozen": "Legacy.x95_path_index_graph",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_tree.x95_path_index_graph_compat",
+      "commit": "e377dcbcf549c044b7b2a4321831792c1c78f375"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/simple_path.v#X126Legacy.dujmovic_thue_choice_number_pathwidth_statement": "Earlier B6 snapshot retains live pathwidth. C14 reuses the complete C13 X126Original, which freezes B6/B9/C13 and remains independent of canonical pathwidth."
+  },
+  "distinct_variants": [
+    {
+      "qualified": "Minor.conjectures.X95.x95_subgraph_indexed_tree_decomposition_width_at_most",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_subgraph_indexed_tree_decomposition_width_at_most",
+      "reason": "Conclusion additionally asks for an injective edge-preserving embedding of a general tree index into G; not pathwidth."
+    },
+    {
+      "qualified": "Minor.foundations.width_params.tw_le",
+      "path": "minor-theory/theories/foundations/width_params.v",
+      "name": "tw_le",
+      "reason": "Treewidth with an arbitrary forest index and upstream sdecomp; distinct from the path index restriction."
+    }
+  ],
+  "cross_module_consumers": []
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "family": "induced-subdivision",
+  "modules": {
+    "GTBase.induced_subdivisions": {
+      "path": "base/theories/induced_subdivisions.v",
+      "overrides": {
+        "induced_subdivision_model": {
+          "verdict": "FAITHFUL",
+          "note": "Exact strong full-path model of the X98/X114 Records, pattern before host: injective branches, full sequences for all ordered pairs, endpoint-inclusive induced paths on pattern edges, internal avoidance of branch vertices, internal disjointness up to the undirected edge, and global inducedness over the raw support. Field formulas are convertible with the local copies; no reversal, off-edge, nonempty-graph or positive-length condition."
+        },
+        "induced_subdivision": {
+          "verdict": "FAITHFUL",
+          "note": "Inhabitation of the strong Record, exactly as the local [inhabited] wrappers."
+        }
+      },
+      "machine_evidence": [
+        "isd_edge_path_ends",
+        "isd_edge_path_nil",
+        "isd_branch_supported",
+        "isd_edge_path_supported",
+        "isd_off_edge_free",
+        "induced_subdivision_card",
+        "pair_seq_internal",
+        "pair_seq_consecutive",
+        "pair_seq_consecutive_rev",
+        "induced_subdivision_refl",
+        "induced_subdivision_K0",
+        "not_induced_subdivision_empty_host",
+        "induced_subdivision_K1"
+      ]
+    }
+  }
+}

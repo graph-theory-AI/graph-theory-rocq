@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py path_vertices --details /tmp/mi
 
 - Canonical: `GTBase.walks_paths.seq_vertices`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 9 helpers, 14 statements, 52 frozen objects, 174 recorded references.
-- Source checks: 434/434 pass; consistent.
+- Scope: 9 helpers, 14 statements, 52 frozen objects, 177 recorded references.
+- Source checks: 435/435 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -30,4 +30,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py path_vertices --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/consecutive_in_path.v#X3Legacy.statement`, `minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta`, `graph-theory-misc/theories/migration/set_path.v#X39Legacy.has_k_distant_xy_paths`, `graph-theory-misc/theories/migration/set_path.v#X39Legacy.separates_xy`, `graph-theory-misc/theories/migration/set_path.v#X116Legacy.has_k_distant_ST_paths`, `graph-theory-misc/theories/migration/set_path.v#X116Legacy.coarse_menger_paths_bounded_separator_statement`, `minor-theory/theories/migration/set_path.v#X11Legacy.has_k_anticomplete_xy_paths`, `minor-theory/theories/migration/set_path.v#X11Legacy.no_xy_path_after_closed_neighbourhood`, `packing-theory/theories/migration/set_path.v#X26Legacy.has_k_distant_xy_paths`, `packing-theory/theories/migration/set_path.v#X26Legacy.separates_xy`, `graph-theory-misc/theories/migration/genuine_cycle.v#X113Legacy.has_k_distant_cycles`, `graph-theory-misc/theories/migration/genuine_cycle.v#X113Legacy.is_forest_after`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/consecutive_in_path.v#X3Legacy.statement`, `minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta`, `graph-theory-misc/theories/migration/set_path.v#X39Legacy.has_k_distant_xy_paths`, `graph-theory-misc/theories/migration/set_path.v#X39Legacy.separates_xy`, `graph-theory-misc/theories/migration/set_path.v#X116Legacy.has_k_distant_ST_paths`, `graph-theory-misc/theories/migration/set_path.v#X116Legacy.coarse_menger_paths_bounded_separator_statement`, `minor-theory/theories/migration/set_path.v#X11Legacy.has_k_anticomplete_xy_paths`, `minor-theory/theories/migration/set_path.v#X11Legacy.no_xy_path_after_closed_neighbourhood`, `packing-theory/theories/migration/set_path.v#X26Legacy.has_k_distant_xy_paths`, `packing-theory/theories/migration/set_path.v#X26Legacy.separates_xy`, `graph-theory-misc/theories/migration/genuine_cycle.v#X113Legacy.has_k_distant_cycles`, `graph-theory-misc/theories/migration/genuine_cycle.v#X113Legacy.is_forest_after`, `minor-theory/theories/migration/bag_decompositions.v#Legacy.theta_triangle_free_bounded_degree_treewidth_statement`.

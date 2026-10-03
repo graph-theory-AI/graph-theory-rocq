@@ -6,8 +6,8 @@
     fidelity owner or validity guard.  [Legacy] freezes, verbatim as they stood at the B12 baseline
     13c00aa, X10's and X212's [[set v | v \in c]] and X5's [[set v : G | v \in c]].  The live helpers
     now unfold to [seq_vertices c], MathComp's [[set:: c]], which is the same comprehension, so every
-    certificate is a kernel-checked conversion; the helper certificates go through [seq_verticesE], as
-    in B1.  [X10Legacy] and [X212Legacy] freeze the two Smith rows.  [X5Legacy] freezes the
+    original B12 support certificate is a kernel-checked conversion; the helper certificates go through
+    [seq_verticesE], as in B1.  The added #916 whole Original transports A7's proved rank-count equality.  [X10Legacy] and [X212Legacy] freeze the two Smith rows.  [X5Legacy] freezes the
     disjoint-family chain, #577 and #916.  All of them use this family's helpers only.
 
     History.  [X212Original] (B10+B12) is the complete Smith row of X212.  It uses B10's frozen

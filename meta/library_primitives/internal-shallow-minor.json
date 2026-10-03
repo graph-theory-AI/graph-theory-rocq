@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "family": "internal-shallow-minor",
+  "primitive": {
+    "canonical_name": "Minor.foundations.shallow_minors.internal_shallow_minor",
+    "owner": "minor-theory",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "ball_in",
+      "shallow_minor"
+    ],
+    "source_definitions": [
+      "Minor.conjectures.X220.x220_ball_in",
+      "Minor.conjectures.X220.x220_shallow_minor"
+    ],
+    "consumers_remaining": 1,
+    "relation": "Exact internal-radius contract on SUPPLIED maps: B : H -> {set G} satisfies upstream minor_rmap on the same map, a supplied centre map ctr : H -> G has ctr x in B x as a separate clause, and every vertex of B x is reached from ctr x by a walk of at most r edges (size p) whose listed vertices all lie inside B x. Standalone internal_ball_in is vacuous on an empty set and does not assert centre membership. Same-map adapter: minor_rmap plus centres and balls <-> centres, balls, pairwise disjointness and edge realization. Host/pattern/radius order unchanged; no graph_dist, truncation, ambient radius, inducedness or covering condition.",
+    "semantic_classes": {
+      "internal-ball": {
+        "members": [
+          "Minor.conjectures.X220.x220_ball_in"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificates": [
+          "Minor.migration.shallow_minors.x220_ball_in_compat"
+        ]
+      },
+      "internal-shallow-model": {
+        "members": [
+          "Minor.conjectures.X220.x220_shallow_minor"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificates": [
+          "Minor.migration.shallow_minors.x220_shallow_minor_compat"
+        ]
+      }
+    },
+    "compatibility_theorems": [
+      "Minor.migration.shallow_minors.x220_ball_in_compat",
+      "Minor.migration.shallow_minors.x220_shallow_minor_compat",
+      "Minor.migration.shallow_minors.x220_polynomial_expansion_compat",
+      "Minor.migration.shallow_minors.polynomial_expansion_bounded_twin_width_statement_compat"
+    ],
+    "api_theorems": [
+      "Minor.foundations.shallow_minors.internal_ball_in_set0",
+      "Minor.foundations.shallow_minors.internal_ball_in_centre",
+      "Minor.foundations.shallow_minors.internal_ball_inW",
+      "Minor.foundations.shallow_minors.internal_ball_in_set1",
+      "Minor.foundations.shallow_minors.internal_ball_in0",
+      "Minor.foundations.shallow_minors.internal_ball_in_connect",
+      "Minor.foundations.shallow_minors.internal_ball_in_connected",
+      "Minor.foundations.shallow_minors.connected_internal_ball_in",
+      "Minor.foundations.shallow_minors.internal_ball_in_connectedE",
+      "Minor.foundations.shallow_minors.not_internal_ball_in_disconnected",
+      "Minor.foundations.shallow_minors.internal_shallow_suppliedE",
+      "Minor.foundations.shallow_minors.internal_shallow_minorE",
+      "Minor.foundations.shallow_minors.internal_shallow_minor_minor",
+      "Minor.foundations.shallow_minors.internal_shallow_minor_card",
+      "Minor.foundations.shallow_minors.internal_shallow_minorW",
+      "Minor.foundations.shallow_minors.internal_shallow_minor_empty_pattern",
+      "Minor.foundations.shallow_minors.not_internal_shallow_minor_empty_host",
+      "Minor.foundations.shallow_minors.internal_shallow_minor_refl",
+      "Minor.foundations.shallow_minors.internal_shallow_minor0E"
+    ],
+    "public_client": "minor-theory/theories/examples/shallow_minors.v",
+    "legacy_baseline": "311fdcb89dc12a78c62cb0ee6d2477896cbce9a7",
+    "migration_report": "meta/migration_reports/shallow_minors.md",
+    "migration_spec": "meta/migration_reports/shallow_minors.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C18.md",
+    "foundation_fidelity": "meta/foundation_fidelity/internal-shallow-minor.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.minor",
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.preliminaries",
+        "GTBase.minor_models",
+        "GTBase.common",
+        "GTBase.graph_metric",
+        "GTMisc.foundations.ambient_shallow_minors",
+        "Minor.conjectures.X220"
+      ],
+      "result": "adapt-upstream-area-contract",
+      "candidate": "GraphTheory.core.minor.minor_rmap",
+      "note": "Pinned installed GraphTheory has no shallow/radius/ball primitive (grep rc=1; core/minor.v sha256 fe61bccf...a29). Reuse upstream minor_rmap on the same supplied map through the proved supplied-map adapter, upstream connected/connect_restrictP/shortenP for internal walks, and GTBase has_subgraph for radius zero. The C16 ambient graph_dist radius is a distinct contract: no ambient/internal identification and no graph_dist reading.",
+      "audited_at": "2026-10-03"
+    }
+  }
+}

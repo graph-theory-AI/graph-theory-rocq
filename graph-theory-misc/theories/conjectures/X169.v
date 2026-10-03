@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X169 -- v2 token-sliding chordal algorithm row *)
 
 From GTBase Require Export base.
+From GTBase Require Import bag_decompositions.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,10 +11,7 @@ Unset Printing Implicit Defensive.
 
 Definition x169_tree_decomposition
     (G T : sgraph) (bag : T -> {set G}) : Prop :=
-  is_tree [set: T] /\
-  (forall v : G, exists t : T, v \in bag t) /\
-  (forall x y : G, x -- y -> exists t : T, x \in bag t /\ y \in bag t) /\
-  (forall v : G, connected [set t : T | v \in bag t]).
+  tree_bag_decomposition bag.
 
 Definition x169_clique_tree (G T : sgraph) (bag : T -> {set G}) : Prop :=
   x169_tree_decomposition bag /\ forall t : T, cliqueb (bag t).

@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "family": "model-support",
+  "primitive": {
+    "canonical_name": "GTBase.model_support.model_support",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "model_vertex",
+      "sdm_covers"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.X98.x98_model_vertex",
+      "GTMisc.conjectures.X114.x114_model_vertex",
+      "Minor.foundations.containment.sdm_covers"
+    ],
+    "repository_sources": {
+      "Minor.foundations.containment.sdm_covers": {
+        "path": "minor-theory/theories/foundations/containment.v",
+        "commit": "bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8",
+        "blob": "f5ba89042158276b3229956ac99cac2443ab3210",
+        "declaration_hash": "fff9f0106852979c9aaeaefeb6605af738d1a0fab245660b49a8ef532b7dd528"
+      }
+    },
+    "consumers_remaining": 5,
+    "relation": "Exact RAW support on SUPPLIED data, pattern before host: x is model-supported by br : H -> G and ep : H -> H -> seq G when x = br h for some pattern vertex h, or x occurs in ep u v for some genuine pattern edge u -- v. Both orientations contribute; lists on non-edges are ignored; the empty pattern supports nothing; an edgeless pattern supports exactly the image of br. No injectivity, path, simplicity, inducedness, reversal or disjointness condition. X98/X114 read it on full edge paths and Minor sdm_covers on subdivision interiors (discharged Section arguments K H m kept); the surrounding Records are not identified.",
+    "semantic_classes": {
+      "raw-support": {
+        "members": [
+          "Extremal.conjectures.X98.x98_model_vertex",
+          "GTMisc.conjectures.X114.x114_model_vertex",
+          "Minor.foundations.containment.sdm_covers"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.model_support.x98_model_vertex_compat",
+          "GTMisc.migration.model_support.x114_model_vertex_compat",
+          "Minor.migration.model_support.sdm_covers_compat"
+        ],
+        "note": "Same raw predicate on the supplied lists; X98/X114 lists are full edge paths and Minor lists are subdivision interiors, so the Records around them stay distinct."
+      }
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.model_support.x98_model_vertex_compat",
+      "Extremal.migration.model_support.x98_induced_subdivision_model_compat",
+      "Extremal.migration.model_support.x98_induced_subdivision_compat",
+      "Extremal.migration.model_support.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "Extremal.migration.model_support.x98_induced_subdivision_model_original_compat",
+      "Extremal.migration.model_support.x98_induced_subdivision_original_compat",
+      "Extremal.migration.model_support.polynomial_kuhn_osthus_induced_subdivision_statement_original_compat",
+      "GTMisc.migration.model_support.x114_model_vertex_compat",
+      "GTMisc.migration.model_support.x114_induced_subdivision_model_compat",
+      "GTMisc.migration.model_support.x114_induced_subdivision_compat",
+      "GTMisc.migration.model_support.x114_hisc_problem_compat",
+      "GTMisc.migration.model_support.subcubic_induced_subdivision_np_complete_statement_compat",
+      "GTMisc.migration.model_support.x114_induced_subdivision_model_original_compat",
+      "GTMisc.migration.model_support.x114_induced_subdivision_original_compat",
+      "GTMisc.migration.model_support.x114_hisc_problem_original_compat",
+      "GTMisc.migration.model_support.subcubic_induced_subdivision_np_complete_statement_original_compat",
+      "Minor.migration.model_support.sdm_covers_compat",
+      "Minor.migration.model_support.subdiv_rep_compat",
+      "Minor.migration.model_support.is_subdivision_of_compat",
+      "Minor.migration.model_support.x220_theta_compat",
+      "Minor.migration.model_support.x220_prism_compat",
+      "Minor.migration.model_support.four_family_free_logarithmic_treewidth_statement_compat",
+      "Minor.migration.model_support.theta_prism_even_wheel_free_bounded_treewidth_statement_compat",
+      "Minor.migration.model_support.theta_prism_even_wheel_free_bounded_treewidth_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.model_support.model_support_branch",
+      "GTBase.model_support.model_support_edge",
+      "GTBase.model_support.model_support_edge_rev",
+      "GTBase.model_support.model_support_eq_on_edges",
+      "GTBase.model_support.model_support_sub",
+      "GTBase.model_support.model_support_nil",
+      "GTBase.model_support.model_support_edgeless",
+      "GTBase.model_support.model_support_card0",
+      "GTBase.model_support.model_support_K0"
+    ],
+    "public_client": "base/theories/examples/model_support.v",
+    "legacy_baseline": "bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8",
+    "migration_report": "meta/migration_reports/model_support.md",
+    "migration_spec": "meta/migration_reports/model_support.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C19.md",
+    "foundation_fidelity": "meta/foundation_fidelity/model-support.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.minor",
+        "GraphTheory.core.sgraph",
+        "GTBase.minor_models",
+        "GTBase.walks_paths",
+        "Minor.foundations.containment"
+      ],
+      "result": "new-base-primitive",
+      "candidate": null,
+      "note": "No upstream or GTBase predicate states raw support of a supplied branch map and supplied edge lists; upstream minor_rmap and Minor subdiv_model are validity contracts, not aliases. Three areas use the identical raw disjunction, so the canonical lives in a focused GTBase module, imported explicitly. Its constituents are MathComp sequence membership and the sgraph adjacency.",
+      "audited_at": "2026-10-03"
+    }
+  }
+}

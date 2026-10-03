@@ -1,0 +1,303 @@
+{
+  "family": "minor-model",
+  "canonical_name": "GraphTheory.core.minor.minor_rmap",
+  "canonical_short_name": "minor_rmap",
+  "relation": "Unconditional iff on the SAME supplied H -> {set G} map to upstream GraphTheory.core.minor.minor_rmap, preserving host G / pattern H order. Nonempty connected disjoint branches realize H-edges in G; nested/and4, empty-intersection/disjointness and two-witness/pair-witness/neighbor presentations are equivalent. No inducedness, coverage, radius or global nonemptiness guard.",
+  "baseline_commit": "35b6b165295fb373d864d646d74284c4751dae65",
+  "namespaces": {
+    "base": "GTBase",
+    "minor-theory": "Minor",
+    "digraph-theory": "Digraph"
+  },
+  "certificate_files": [
+    "base/theories/minor_models.v",
+    "minor-theory/theories/migration/minor_models.v",
+    "digraph-theory/theories/migration/minor_models.v"
+  ],
+  "extra_certificates": [
+    "GTBase.minor_models.minor_rmap_nestedE",
+    "GTBase.minor_models.minor_rmap_pairE",
+    "GTBase.minor_models.minor_rmap_existsE",
+    "GTBase.minor_models.minor_rmap_singletons",
+    "GTBase.minor_models.minor_rmap_empty_pattern",
+    "GTBase.minor_models.minor_rmap_host_nonempty",
+    "GTBase.minor_models.not_minor_rmap_empty_host",
+    "GTBase.minor_models.minor_rmap_card",
+    "GTBase.minor_models.minor_rmap_compose"
+  ],
+  "downstream_client": "base/theories/examples/minor_models.v",
+  "summary": [
+    "C15 migrates two finite supplied branch-set interfaces to upstream minor_rmap on the same map, without a duplicate canonical definition. Nine public adapter/consequence lemmas and a public-only client cover empty-pattern/empty-host, singleton identity, empty/disconnected/overlapping branches, extra edges, unused vertices and composition.",
+    "Thirteen frozen objects cover two sources, five dependent definitions and six complete statements (five corpus plus the explicit non-corpus colouring_variants boundedness declaration). All whole iff certificates preserve host/pattern order, loopless/asymmetric guards where originally present, the uniform maximum and M.-1 sharpness, the 3|D|<=5|S| conclusion and the positive-k logarithmic Erdos-Posa envelope.",
+    "No previous frozen snapshot reaches this family at the baseline. All earlier bodies and frozen arrays remain unchanged. Infinite/shallow/subdivision/odd/fat/fractional/multigraph contracts remain separate. The upstream-owned fidelity verdict and machine evidence are in the registry; no artificial repository primitive override is added."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X200.x200_minor_model",
+      "path": "minor-theory/theories/conjectures/X200.v",
+      "name": "x200_minor_model",
+      "frozen_path": "minor-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.x200_minor_model",
+      "substitutions": {},
+      "certificate": "Minor.migration.minor_models.x200_minor_model_compat",
+      "source_declaration_sha256": "6d4f94a7866badbe3763a992cb1b94367852db3c6a06a99bb80e27f253a0989a",
+      "source_body_sha256": "a201e9e8fe4e5a3197942ae1f67a5abc4f2d26e4e572527d047837b19719a051",
+      "live_unfolds_to": "@GraphTheory.core.minor.minor_rmap G H branch"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X200.x200_k_disjoint_H_models",
+      "path": "minor-theory/theories/conjectures/X200.v",
+      "name": "x200_k_disjoint_H_models",
+      "frozen_path": "minor-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.x200_k_disjoint_H_models",
+      "substitutions": {
+        "x200_minor_model": "Legacy.x200_minor_model"
+      },
+      "certificate": "Minor.migration.minor_models.x200_k_disjoint_H_models_compat",
+      "source_declaration_sha256": "a432323900dfde637852792d739903c7303113d3f9aa659b13d6d205247a4afa",
+      "source_body_sha256": "36e281a151854ba29e3aa04c71eb44cda0f770f2341e17d3ada3b64c9f0e063c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X200.x200_H_model_hitting_set",
+      "path": "minor-theory/theories/conjectures/X200.v",
+      "name": "x200_H_model_hitting_set",
+      "frozen_path": "minor-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.x200_H_model_hitting_set",
+      "substitutions": {
+        "x200_minor_model": "Legacy.x200_minor_model"
+      },
+      "certificate": "Minor.migration.minor_models.x200_H_model_hitting_set_compat",
+      "source_declaration_sha256": "6f7b2fe5c8ff0a5e586db3c5094d0935ff17eefe3e8b13ba8d421435602d4911",
+      "source_body_sha256": "d70f35ebc4cdae9369f68bf239595fc80e42ca2e1289bf90e6df679a7473e017"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X200.x200_H_model_erdos_posa_oklogk",
+      "path": "minor-theory/theories/conjectures/X200.v",
+      "name": "x200_H_model_erdos_posa_oklogk",
+      "frozen_path": "minor-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.x200_H_model_erdos_posa_oklogk",
+      "substitutions": {
+        "x200_k_disjoint_H_models": "Legacy.x200_k_disjoint_H_models",
+        "x200_H_model_hitting_set": "Legacy.x200_H_model_hitting_set"
+      },
+      "certificate": "Minor.migration.minor_models.x200_H_model_erdos_posa_oklogk_compat",
+      "source_declaration_sha256": "519dfeaa16f52944fcb1af058cb8060c6abf8ecc626e06e9f4213c841a3784a8",
+      "source_body_sha256": "90a6975f9cb49f7eb6a9646cc24214b2cd7449cd2d06dae292e85846fbb2a1e4"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X200.planar_H_model_erdos_posa_oklogk_statement",
+      "path": "minor-theory/theories/conjectures/X200.v",
+      "name": "planar_H_model_erdos_posa_oklogk_statement",
+      "frozen_path": "minor-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.planar_H_model_erdos_posa_oklogk_statement",
+      "substitutions": {
+        "x200_H_model_erdos_posa_oklogk": "Legacy.x200_H_model_erdos_posa_oklogk"
+      },
+      "certificate": "Minor.migration.minor_models.planar_H_model_erdos_posa_oklogk_statement_compat",
+      "source_declaration_sha256": "151ad8e03d976966b49dbeae1fa34fccca9141b9d6b3e2541c4efc5e7ca9a2d0",
+      "source_body_sha256": "6202b9df74a00b7912f9fe64ee6522cd90fc7f2ca948c07026ce221f8e6f6417",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.two_extremal.sg_minor_rmap",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "sg_minor_rmap",
+      "frozen_path": "digraph-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.sg_minor_rmap",
+      "substitutions": {},
+      "certificate": "Digraph.migration.minor_models.sg_minor_rmap_compat",
+      "source_declaration_sha256": "b1c5eea5ebff0ae6de3f891ec1769213256b22c5856d45af8e2b4d3c9192d1ef",
+      "source_body_sha256": "abed9653b84534cddbf95acb7789ab07128b357e7f615513ed0f24775dbb98c2",
+      "live_unfolds_to": "@GraphTheory.core.minor.minor_rmap G H phi"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.two_extremal.sg_minor",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "sg_minor",
+      "frozen_path": "digraph-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.sg_minor",
+      "substitutions": {
+        "sg_minor_rmap": "Legacy.sg_minor_rmap"
+      },
+      "certificate": "Digraph.migration.minor_models.sg_minor_compat",
+      "source_declaration_sha256": "451d382cc344ff1b1fad51577a3444150bc3e9b1d044c9b220046a6e2580b7c2",
+      "source_body_sha256": "b4ae26591c5dc84d5fb8a47b5a51fa5d00bce7e56d2650985575aa446cfdd1bb"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.two_extremal.planar_sg",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "planar_sg",
+      "frozen_path": "digraph-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.planar_sg",
+      "substitutions": {
+        "sg_minor": "Legacy.sg_minor"
+      },
+      "certificate": "Digraph.migration.minor_models.planar_sg_compat",
+      "source_declaration_sha256": "579612cbee463df8e1943257d72593f15bb3c00456c66e3a4e5ee524419ef252",
+      "source_body_sha256": "d2346f3c978c8dd1b1697e7b973ab06e61cc5b3f07fb47354b3cd9fd83da7638"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.two_extremal.conjecture_P",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "conjecture_P",
+      "frozen_path": "digraph-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.conjecture_P",
+      "substitutions": {
+        "planar_sg": "Legacy.planar_sg"
+      },
+      "certificate": "Digraph.migration.minor_models.conjecture_P_compat",
+      "source_declaration_sha256": "4eeb773e5c2cb77b366b6f46c39e0b59b057b9168365cf773b2147f048e05654",
+      "source_body_sha256": "26ddcc57d87821968c9f4290184019853e15a90728fdb50cd3554d40acbc0e01",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.P9.large_acyclic_induced_subdigraph_in_a_planar_oriente_statement",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "large_acyclic_induced_subdigraph_in_a_planar_oriente_statement",
+      "frozen_path": "digraph-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.large_acyclic_induced_subdigraph_in_a_planar_oriente_statement",
+      "substitutions": {
+        "planar_sg": "Legacy.planar_sg"
+      },
+      "certificate": "Digraph.migration.minor_models.large_acyclic_induced_subdigraph_in_a_planar_oriente_statement_compat",
+      "source_declaration_sha256": "3ca9183c9b24a7759c494fdb04a3f7d23a52d403d48f2097537300804aa678db",
+      "source_body_sha256": "a1744e0186e5a40d5450b407e03514c90ae259722eaa4a63e9578dfc7a34da66",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.P9.oriented_chromatic_number_of_planar_graphs_statement",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "oriented_chromatic_number_of_planar_graphs_statement",
+      "frozen_path": "digraph-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.oriented_chromatic_number_of_planar_graphs_statement",
+      "substitutions": {
+        "planar_sg": "Legacy.planar_sg"
+      },
+      "certificate": "Digraph.migration.minor_models.oriented_chromatic_number_of_planar_graphs_statement_compat",
+      "source_declaration_sha256": "8591aa09d9eead4fc5d89f5ec5bc404e37f310fc8028ef05af3a054612649766",
+      "source_body_sha256": "6d854322d5c49bbc3c21031d1a231898130c4b1dff8638a90ce2f3d652c5e90d",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.P9.partitioning_planar_digraphs_statement",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "partitioning_planar_digraphs_statement",
+      "frozen_path": "digraph-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.partitioning_planar_digraphs_statement",
+      "substitutions": {
+        "planar_sg": "Legacy.planar_sg"
+      },
+      "certificate": "Digraph.migration.minor_models.partitioning_planar_digraphs_statement_compat",
+      "source_declaration_sha256": "c76986c848a916c6028ebf2827da0cbe6148d7d427eadc2e4c35fe5882e02fea",
+      "source_body_sha256": "3be49e11307b15397627f0cde250cb75254ca8848f587deecaebe1cec55c3784",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.colouring_variants.oriented_chromatic_planar_bounded_statement",
+      "path": "digraph-theory/theories/conjectures/colouring_variants.v",
+      "name": "oriented_chromatic_planar_bounded_statement",
+      "frozen_path": "digraph-theory/theories/migration/minor_models.v",
+      "frozen": "Legacy.oriented_chromatic_planar_bounded_statement",
+      "substitutions": {
+        "planar_sg": "Legacy.planar_sg"
+      },
+      "certificate": "Digraph.migration.minor_models.oriented_chromatic_planar_bounded_statement_compat",
+      "source_declaration_sha256": "c033fb3ff0fb4a7c9919926da40cd69f0c720a9172e8790abe102e747351c2e8",
+      "source_body_sha256": "8d19a4fcdd943b0dbc87d25805b89cc5c7e7c190a59b35b8535ceaef238df6be",
+      "non_corpus": true,
+      "documented_status": "Explicit non-corpus boundedness variant in colouring_variants; no asymmetric-arc premise; unchanged."
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "planar_sg",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/colouring_variants.v",
+      "name": "planar_sg",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "conjecture_P",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "planar_sg",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_P9.v",
+      "name": "large_acyclic_induced_subdigraph_in_a_planar_oriente_statement",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_P9.v",
+      "name": "partitioning_planar_digraphs_statement",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "conjecture_P",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "planar_sg",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_hajos.v",
+      "name": "conjecture_P",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_hajos.v",
+      "name": "planar_sg",
+      "note": "Existing cross-file statement or proof consumer; complete type and proof body retained and focused source closure rebuilt."
+    }
+  ],
+  "proof_consumers": [
+    {
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "conj_9_2_glued_e_implies_conjecture_P"
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "conj_9_2_implies_conjecture_P"
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "conj_9_2_glued_implies_conjecture_P"
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_hajos.v",
+      "name": "conj_9_2_concrete_implies_conjecture_P"
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Infinite.conjectures.D4inf2.minor_model",
+      "path": "infinite-graph-theory/theories/conjectures/D4inf2.v",
+      "name": "minor_model",
+      "reason": "Infinite carrier and Prop subsets with internal reachability; no finite same-carrier equivalence asserted."
+    }
+  ]
+}
