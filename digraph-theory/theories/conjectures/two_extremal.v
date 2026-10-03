@@ -36,6 +36,7 @@ From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude interop_graph_theory digraph oriented tournament.
 From Digraph Require Import dipath strong dichromatic classic_core.
+From Digraph.foundations Require degree_balance.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -250,8 +251,7 @@ Definition three_connected_digonG_connected : Prop :=
     λ(D) = 2, Eulerian digraph whose digon graph is DISCONNECTED is 2-dicolourable
     (χ⃗ ≤ 2).  [Eulerian] here = in-degree equals out-degree at every vertex (the
     single-arc subdigraph is balanced).  Guarded by looplessness and [0 < #|D|]. *)
-Definition Eulerian (D : diGraphType) : Prop :=
-  forall v : D, indeg v = outdeg v.
+Definition Eulerian (D : diGraphType) : Prop := degree_balance.balanced D.
 
 (** Corpus row: derived:drv_twoext_h6
     Site: none

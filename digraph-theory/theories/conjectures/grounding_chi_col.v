@@ -376,34 +376,12 @@ Proof. exact: m3_landmark_refutes_2bound. Qed.
 
 (** C3 is Eulerian: every vertex has in-degree = out-degree = 1. *)
 Lemma eulerian_C3 : eulerian C3.
-Proof.
-apply/forallP => v.
-rewrite c3_outdeg1 /indeg.
-have -> : [set u | u --> v] = [set (v - 1)%R].
-  apply/setP => u; rewrite !inE arcC3E.
-  apply/idP/idP => /eqP H; apply/eqP.
-  - by rewrite H addrK.
-  - by rewrite H subrK.
-by rewrite cards1.
-Qed.
+Proof. by apply/degree_balance.balancedP; exact: degree_balance.balanced_ground_C3. Qed.
 
 (** RED-FLAG teeth: the single arc TT 2 (0 -> 1) is NOT Eulerian — vertex 0 has
     out-degree 1 but in-degree 0. *)
 Lemma not_eulerian_TT2 : ~~ eulerian (TT 2).
-Proof.
-apply/forallPn; exists (ord0 : TT 2).
-have Ho : outdeg (ord0 : TT 2) = 1%N.
-  rewrite /outdeg.
-  have -> : [set w | (ord0 : TT 2) --> w] = [set ord_max].
-    by apply/setP => w; rewrite !inE arcTTE; case: w => -[|[|]].
-  by rewrite cards1.
-have Hi : indeg (ord0 : TT 2) = 0%N.
-  rewrite /indeg.
-  have -> : [set u | u --> (ord0 : TT 2)] = set0.
-    by apply/setP => u; rewrite !inE arcTTE; case: u => -[|[|]].
-  by rewrite cards0.
-by rewrite Ho Hi.
-Qed.
+Proof. by apply/negP => /degree_balance.balancedP; exact: degree_balance.not_balanced_ground_TT2. Qed.
 
 (** ==================================================================== *)
 (** ** I. [acyclic_number_ge] teeth (chi_bounded.v, avec_core "attained" clause).

@@ -36,6 +36,7 @@ From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude digraph oriented tournament dipath.
 From Digraph Require Import dichromatic two_extremal classic_core.
+From Digraph.foundations Require degree_balance.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -117,7 +118,7 @@ Definition majority_3col_tournament_statement : Prop :=
 (** A digraph is EULERIAN when in-degree equals out-degree at every vertex. *)
 Definition indeg (D : diGraphType) (v : D) : nat := #|[set u | u --> v]|.
 Definition eulerian (D : diGraphType) : bool :=
-  [forall v : D, indeg v == outdeg v].
+  degree_balance.balancedb D.
 
 (** Corpus row: arxiv:1608.03040#04
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__04/

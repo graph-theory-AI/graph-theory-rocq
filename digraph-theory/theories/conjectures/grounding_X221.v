@@ -358,24 +358,12 @@ Qed.
 (** NON-VACUITY for [orientation_C4_eulerian_avoidable_statement]: the Eulerian
     hypothesis is satisfiable with positive minimum out-degree. *)
 Lemma x221_C3_eulerian : x221_eulerian (tournament.C3 : diGraphType).
-Proof.
-move=> v; rewrite /outdeg /indeg /Nin x221_C3_Nout x221_C3_Nin.
-by rewrite !cards1.
-Qed.
+Proof. exact: degree_balance.balanced_ground_C3. Qed.
 
 (** TEETH: being Eulerian is a real restriction — transitive tournaments are
     not Eulerian. *)
 Lemma x221_TT2_not_eulerian : ~ x221_eulerian (TT 2 : diGraphType).
-Proof.
-move=> h.
-have i0 : indeg (ord0 : (TT 2 : diGraphType)) = 0%N.
-  apply/eqP; rewrite /indeg /Nin cards_eq0; apply/eqP/setP => u.
-  by rewrite !inE arcTTE ltn0.
-have o0 : (0 < outdeg (ord0 : (TT 2 : diGraphType)))%N.
-  rewrite /outdeg; apply/card_gt0P; exists (Ordinal (isT : (1 < 2)%N)).
-  by rewrite inE arcTTE.
-by move: o0; rewrite (h ord0) i0.
-Qed.
+Proof. exact: degree_balance.not_balanced_ground_TT2. Qed.
 
 (** ** Print Assumptions audit *)
 

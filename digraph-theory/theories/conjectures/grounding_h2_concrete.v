@@ -104,7 +104,7 @@ Proof. by apply: gwheel_is_generalised_wheel. Qed.
     hence in-degree = out-degree: [sym_cycle 3] is EULERIAN. *)
 Lemma symcyc3_Eulerian : Eulerian (sym_cycle 3).
 Proof.
-move=> v; rewrite /indeg /outdeg /Nin.
+move=> v; rewrite /degree_balance.indeg /outdeg.
 (* the out-set and in-set coincide because adjacency is SYMMETRIC *)
 rewrite (_ : [set u : sym_cycle 3 | u --> v] = [set w : sym_cycle 3 | v --> w]) //.
 apply/setP => w; rewrite !inE /arc/= /symcyc_rel.
