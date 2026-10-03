@@ -97,6 +97,10 @@
         "GTMisc.conjectures.X39.x39_set_ball",
         "Packing.conjectures.X26.x26_set_ball"
       ],
+      "289c7b960de9665c726957fe8ec69ae2598644d7c4c6932854f893d4964ff6c1": [
+        "Extremal.conjectures.X98.x98_model_vertex",
+        "GTMisc.conjectures.X114.x114_model_vertex"
+      ],
       "29381e58e4adda9737a99a56385a07057e86056112ef58f147b8d9f3aa843888": [
         "Chromatic.conjectures.X3.x3_stable_set",
         "Packing.conjectures.X18.x18_independent_set"
@@ -545,10 +549,6 @@
         "Digraph.conjectures.X2.x2_disjoint_union",
         "Digraph.conjectures.heroes.djoin",
         "Digraph.conjectures.two_extremal_glue.vsum"
-      ],
-      "dc52b2f8f5c3993ebffab3e8abd137c99e5a5cb6f5912e01f1ba199f82fb10b2": [
-        "Extremal.conjectures.X98.x98_model_vertex",
-        "GTMisc.conjectures.X114.x114_model_vertex"
       ],
       "deef9ab0594ccad88b1de5f9a59494a1ed641c961ecce90099dfdc15135e5b17": [
         "GTMisc.conjectures.X197.x197_cop_move",
@@ -34616,7 +34616,7 @@
         "Extremal.conjectures.X98.x98_induced_subdivision_model"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x98_consecutive_in_path",
       "normalized_name": "consecutive_in_path",
@@ -34635,7 +34635,7 @@
         "Extremal.conjectures.X98.x98_induced_subdivision_model"
       ],
       "kind": "Definition",
-      "line": 14,
+      "line": 15,
       "local_dependencies": [
         "x98_consecutive_in_path"
       ],
@@ -34656,7 +34656,7 @@
         "Extremal.conjectures.X98.x98_induced_subdivision_model"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 28,
       "local_dependencies": [],
       "name": "x98_internal",
       "normalized_name": "internal",
@@ -34668,14 +34668,14 @@
       "signature_shape_hash": "6f2a017b11058d2e3283ee0ddecee97c555d415b2e384963976b7072e60e59ce"
     },
     {
-      "body_hash": "dc52b2f8f5c3993ebffab3e8abd137c99e5a5cb6f5912e01f1ba199f82fb10b2",
-      "body_shape_hash": "dc52b2f8f5c3993ebffab3e8abd137c99e5a5cb6f5912e01f1ba199f82fb10b2",
-      "declaration_hash": "ef20a80bde770421c00f4da1ba09951e3897d45cb15cf2f0315a5a664bd27aa7",
+      "body_hash": "289c7b960de9665c726957fe8ec69ae2598644d7c4c6932854f893d4964ff6c1",
+      "body_shape_hash": "289c7b960de9665c726957fe8ec69ae2598644d7c4c6932854f893d4964ff6c1",
+      "declaration_hash": "26ad5f64fd1bc2032df6a07e4bf28b2d99fe43e97bc65da5b8af06d9640dc792",
       "direct_consumers": [
         "Extremal.conjectures.X98.x98_induced_subdivision_model"
       ],
       "kind": "Definition",
-      "line": 32,
+      "line": 33,
       "local_dependencies": [],
       "name": "x98_model_vertex",
       "normalized_name": "model_vertex",
@@ -38219,7 +38219,7 @@
         "GTMisc.conjectures.X114.x114_induced_subdivision_model"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x114_consecutive_in_path",
       "normalized_name": "consecutive_in_path",
@@ -38238,7 +38238,7 @@
         "GTMisc.conjectures.X114.x114_induced_subdivision_model"
       ],
       "kind": "Definition",
-      "line": 21,
+      "line": 22,
       "local_dependencies": [
         "x114_consecutive_in_path"
       ],
@@ -38259,7 +38259,7 @@
         "GTMisc.conjectures.X114.x114_induced_subdivision_model"
       ],
       "kind": "Definition",
-      "line": 34,
+      "line": 35,
       "local_dependencies": [],
       "name": "x114_internal",
       "normalized_name": "internal",
@@ -38271,14 +38271,14 @@
       "signature_shape_hash": "6f2a017b11058d2e3283ee0ddecee97c555d415b2e384963976b7072e60e59ce"
     },
     {
-      "body_hash": "dc52b2f8f5c3993ebffab3e8abd137c99e5a5cb6f5912e01f1ba199f82fb10b2",
-      "body_shape_hash": "dc52b2f8f5c3993ebffab3e8abd137c99e5a5cb6f5912e01f1ba199f82fb10b2",
-      "declaration_hash": "5de4511a23eb627e3d3d4f7199dde3f8c25489c1f6804a506ff9ecf9c626a1f4",
+      "body_hash": "289c7b960de9665c726957fe8ec69ae2598644d7c4c6932854f893d4964ff6c1",
+      "body_shape_hash": "289c7b960de9665c726957fe8ec69ae2598644d7c4c6932854f893d4964ff6c1",
+      "declaration_hash": "571033b105ccb345920958f5a1bea3568ef4052453c3ac2d5c9c0d2b3c6d209f",
       "direct_consumers": [
         "GTMisc.conjectures.X114.x114_induced_subdivision_model"
       ],
       "kind": "Definition",
-      "line": 37,
+      "line": 38,
       "local_dependencies": [],
       "name": "x114_model_vertex",
       "normalized_name": "model_vertex",
