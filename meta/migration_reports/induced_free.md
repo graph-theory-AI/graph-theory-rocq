@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py induced_free --details /tmp/mig
 
 - Canonical: `GTBase.common.induced_free`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 10 helpers, 10 statements, 33 frozen objects, 58 recorded references.
-- Source checks: 266/266 pass; consistent.
+- Scope: 10 helpers, 10 statements, 33 frozen objects, 61 recorded references.
+- Source checks: 267/267 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -28,4 +28,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Extremal.conjectures.X207.x207_H_free`, `GTMisc.conjectures.X94.x94_H_free`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.statement`, `minor-theory/theories/migration/consecutive_in_cycle.v#X42Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement`, `extremal-graph-theory/theories/migration/delete_edge.v#X61Legacy.induced_saturated`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.statement`, `minor-theory/theories/migration/consecutive_in_cycle.v#X42Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement`, `extremal-graph-theory/theories/migration/delete_edge.v#X61Legacy.induced_saturated`, `extremal-graph-theory/theories/migration/complement.v#X56Legacy.c8_complement_c8_erdos_hajnal_statement`.

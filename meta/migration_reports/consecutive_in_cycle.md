@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py consecutive_in_cycle --details 
 
 - Canonical: `GTBase.walks_paths.seq_cyclic_consecutiveb`.
 - Baseline: `49ddc033ec6be3372ba6813f044fd26922fad16d`.
-- Scope: 7 helpers, 18 statements, 57 frozen objects, 156 recorded references.
-- Source checks: 503/503 pass; consistent.
+- Scope: 7 helpers, 18 statements, 57 frozen objects, 159 recorded references.
+- Source checks: 504/504 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -36,4 +36,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Packing.conjectures.XE1.xe1_induced_cycle`, `Cycle.conjectures.XE1.xe1_cycle_edges`, `Cycle.conjectures.U6.cyc_pairs`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `minor-theory/theories/migration/induced_free.v#X42Legacy.statement`, `graph-theory-misc/theories/migration/consecutive_in_path.v#X91Legacy.avoidable_path`, `chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_1091_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_567_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `minor-theory/theories/migration/induced_free.v#X42Legacy.statement`, `graph-theory-misc/theories/migration/consecutive_in_path.v#X91Legacy.avoidable_path`, `chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_1091_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_567_statement`, `extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_567_statement`.

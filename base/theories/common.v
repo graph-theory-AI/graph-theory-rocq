@@ -488,6 +488,41 @@ Proof. by apply/k_edge_connected1; split; [rewrite card_ord|exact: connected_K2]
 Lemma not_k_edge_connected_K1 : ~ k_edge_connected 'K_1 1.
 Proof. by case; rewrite card_ord. Qed.
 
+(** *** graph complement
+
+    The canonical complement is upstream [GraphTheory.sgraph.compl G], with relation
+    [compl_rel]: same vertices, two DISTINCT vertices are adjacent iff they are not
+    adjacent in [G], and there are no loops ([compl_adjE]).  Empty and one-vertex graphs
+    are valid inputs.  Upstream [diso_compl] gives [compl (compl G) ≃ G]; a graph built
+    with [SGraph] from a relation pointwise equal to [compl_rel] is related to [compl G]
+    by the identity isomorphism ([compl_eq_diso]), which does not equate the opaque
+    symmetry/irreflexivity proofs. *)
+
+Lemma compl_adjE (G : sgraph) (x y : G) :
+  @edge_rel (compl G) x y = (x != y) && ~~ (x -- y).
+Proof. by []. Qed.
+
+Lemma compl_eq_diso (G : sgraph) (r : rel G) (r_sym : symmetric r) (r_irrefl : irreflexive r) :
+  r =2 @compl_rel G -> diso (SGraph r_sym r_irrefl) (compl G).
+Proof. by move=> rE; apply: eq_diso => x y; rewrite rE. Qed.
+
+(** Off the diagonal, the complement negates adjacency. *)
+Lemma compl_adj_offdiag (G : sgraph) (x y : G) :
+  x != y -> @edge_rel (compl G) x y = ~~ (x -- y).
+Proof. by move=> xy; rewrite compl_adjE xy. Qed.
+
+(** No loops, even though [x -- x] is false in [G]. *)
+Lemma compl_noloop (G : sgraph) (x : G) : ~~ @edge_rel (compl G) x x.
+Proof. by rewrite compl_adjE eqxx. Qed.
+
+(** The complement of a complete graph has no edges (in particular [K_0] and [K_1]). *)
+Lemma compl_Kn_edgeless (n : nat) (x y : 'K_n) : ~~ @edge_rel (compl 'K_n) x y.
+Proof. by rewrite compl_adjE /= andbN. Qed.
+
+(** Double complement, up to isomorphism (upstream). *)
+Lemma compl_compl_diso (G : sgraph) : compl (compl G) ≃ G.
+Proof. exact: diso_compl. Qed.
+
 (** *** subgraph containment *)
 
 (** Every graph contains itself (non-vacuity). *)
@@ -536,6 +571,16 @@ Lemma has_subgraph_del_edge_set (G : sgraph) (F : {set {set G}}) :
 Proof.
 apply/has_subgraphP; exists (fun x : del_edge_set G F => x : G); split=> // x y.
 by rewrite del_edge_setE => /andP[].
+Qed.
+
+(** An isomorphism of hosts carries a contained pattern. *)
+Lemma has_subgraph_host_diso (G G' H : sgraph) :
+  diso G G' -> has_subgraph G H -> has_subgraph G' H.
+Proof.
+move=> i /has_subgraphP[f [inj_f hom_f]]; apply/has_subgraphP.
+exists (fun x => i (f x)); split.
+- by move=> x y /(@bij_injective _ _ (diso_v i)) /inj_f.
+- by move=> x y xy; rewrite edge_diso; exact: hom_f.
 Qed.
 
 (** Ordinary containment is not induced containment: the two-vertex graph without
@@ -714,7 +759,8 @@ Proof. by move=> ac x; apply/negP => xx; move: (ac x x xx); rewrite connect0. Qe
     [not_k_edge_connected_K1], [has_subgraph_refl], [has_subgraph_Kn],
     [has_subgraphP], [has_subgraph_trans], [has_subgraph_card], [has_subgraph0],
     [has_subgraph_K0], [has_subgraph_K0_host], [has_subgraph_del_edge_set],
-    [has_subgraph_not_induced],
+    [has_subgraph_not_induced], [has_subgraph_host_diso], [compl_adjE], [compl_eq_diso],
+    [compl_adj_offdiag], [compl_noloop], [compl_Kn_edgeless], [compl_compl_diso],
     [induced_free_inhabited], [induced_free_diso], [induced_free_card],
     [not_induced_free_self], [not_induced_free_pattern0], [induced_free_host0],
     [not_induced_free_clique], [induced_free_K1], [induced_free_Kn],
