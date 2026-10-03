@@ -1,6 +1,7 @@
 (** * Minor.conjectures.X220 -- width-parameter rows (wave X220, 2026-09-23) *)
 
 From GTBase Require Export base.
+From GTBase Require Import graph_classes.
 From GraphTheory Require Import minor.
 From Minor.foundations Require Import containment width_params.
 From Minor.conjectures Require Import X27 X42.
@@ -136,10 +137,10 @@ Definition x220_twin_width_le (G : sgraph) (d : nat) : Prop :=
     needing the class to be decidable. *)
 
 Definition x220_iso_closed (C : sgraph -> Prop) : Prop :=
-  forall G H : sgraph, C G -> diso G H -> C H.
+  GTBase.graph_classes.iso_closed C.
 
 Definition x220_hereditary_class (C : sgraph -> Prop) : Prop :=
-  x220_iso_closed C /\ forall (G : sgraph) (S : {set G}), C G -> C (induced S).
+  GTBase.graph_classes.hereditary_class C.
 
 Definition x220_represents (n : nat) (f : {ffun 'I_n * 'I_n -> bool}) (G : sgraph) : Prop :=
   exists h : 'I_n -> G, bijective h /\ forall x y : 'I_n, f (x, y) = (h x -- h y).

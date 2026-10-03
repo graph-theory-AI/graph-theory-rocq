@@ -338,7 +338,7 @@ Proof. by exists (fun _ => 0)%N => G []. Qed.
 Lemma chi_bounded_bounded_order (N : nat) :
   chi_bounded_under (fun G => (#|G| <= N)%N).
 Proof.
-exists (fun _ => N) => G leGN _.
+exists (fun _ => N) => G [leGN _].
 apply: (leq_trans (leq_chi _)).
 (* #|[set: underlying G]| = #|underlying G| = #|G| <= N (same carrier finType) *)
 by rewrite cardsT.

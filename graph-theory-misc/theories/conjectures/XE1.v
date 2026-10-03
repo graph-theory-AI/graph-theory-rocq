@@ -10,7 +10,7 @@ Definition xe1_coprime_adj (n : nat) (x y : 'I_n) : bool :=
   (x != y) && coprime (val x).+1 (val y).+1.
 
 Definition xe1_rel_cycle (V : finType) (r : rel V) (c : seq V) : Prop :=
-  ucycle r c /\ 2 < size c.
+  seq_cycle r c.
 
 Definition xe1_all_small_odd_coprime_cycles (n : nat) (A : {set 'I_n}) : Prop :=
   forall ell : nat,

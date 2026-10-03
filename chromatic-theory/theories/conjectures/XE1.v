@@ -26,7 +26,7 @@ Definition xe1_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : bool :=
   seq_cyclic_consecutiveb c u v.
 
 Definition xe1_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\ 2 < size c.
+  seq_cycle (--) c.
 
 Definition xe1_cycle_diagonal_count (G : sgraph) (c : seq G) : nat :=
   #|[set p : G * G |

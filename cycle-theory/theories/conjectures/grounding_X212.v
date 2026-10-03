@@ -533,7 +533,7 @@ Definition x212_c3 : seq 'K_3 :=
 
 (** NON-VACUITY: the triangle is a cycle, and a longest one. *)
 Lemma x212_cycle_c3 : x212_cycle x212_c3.
-Proof. by rewrite /x212_cycle /x212_c3 /ucycleb /=. Qed.
+Proof. by rewrite /x212_cycle /seq_cycleb /x212_c3 /ucycleb /=. Qed.
 
 Lemma x212_longest_cycle_c3 : x212_longest_cycle x212_c3.
 Proof.
@@ -545,7 +545,7 @@ Qed.
 (** GUARD HAS TEETH: a two-element [ucycle] — an edge traversed back and forth —
     is not a cycle, which is the [n >= 3] convention of [GTBase.common]. *)
 Lemma x212_cycle_not2 (G : sgraph) (x y : G) : ~~ x212_cycle [:: x; y].
-Proof. by rewrite /x212_cycle andbF. Qed.
+Proof. by rewrite /x212_cycle /seq_cycleb andbF. Qed.
 
 (** ** bm-065 — Bondy's linear-length cycle conjecture *)
 
