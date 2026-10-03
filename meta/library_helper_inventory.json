@@ -530,6 +530,11 @@
         "GTMisc.conjectures.X197.x197_cop_move",
         "Topological.conjectures.X202.x202_cop_move"
       ],
+      "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21": [
+        "GTMisc.conjectures.X39.x39_xy_path",
+        "Minor.conjectures.X11.x11_xy_path",
+        "Packing.conjectures.X26.x26_xy_path"
+      ],
       "e393c32c342211e897b811d928e0e478f4feda39a50c323e2879a6ecff3ca9b2": [
         "Chromatic.conjectures.X157.x157_data_nth_nat",
         "Chromatic.conjectures.X164.x164_data_nth_nat"
@@ -1011,11 +1016,6 @@
       "f50cf34ff898856f3aeaa92044d1fe13a401d2e406d352236e4de9e7f4c9d230": [
         "Digraph.conjectures.X45.x45_same_colour_outneighbours",
         "Digraph.conjectures.X51.x51_same_colour_outneighbours"
-      ],
-      "f6fb65e63e4dcccd21d5bb803f708c1cbb295c1b8fc9b2ada44140cdca27442e": [
-        "GTMisc.conjectures.X39.x39_xy_path",
-        "Minor.conjectures.X11.x11_xy_path",
-        "Packing.conjectures.X26.x26_xy_path"
       ],
       "f8e8c6ebae2ae7785af163d174e6bcd21bdbfa542038d17153e188bc84ff8613": [
         "Chromatic.conjectures.XE1.xe1_consecutive_in_cycle",
@@ -38520,9 +38520,9 @@
       "signature_shape_hash": "062de5203b352869c06306491d64bad14c0ac749216504b1478aa3c3f2187246"
     },
     {
-      "body_hash": "d7477dd483974293e234f26d09a23a94a5210a5fa982f7b59ca7078effa27c0a",
-      "body_shape_hash": "d7477dd483974293e234f26d09a23a94a5210a5fa982f7b59ca7078effa27c0a",
-      "declaration_hash": "a58c1bb6aa73d5eaea6d82d14f36b2e39d2680b95de450c76aaf0a0ac5ed10e5",
+      "body_hash": "7938e3ce6ae5fcc07d25819e7f66fe6b85bfd8b75490ed3c6afe2e02e9ecd77e",
+      "body_shape_hash": "7938e3ce6ae5fcc07d25819e7f66fe6b85bfd8b75490ed3c6afe2e02e9ecd77e",
+      "declaration_hash": "fbd154209d0921186686be469f4d5ccedee5d3be966075b38f75c9c0d085fac3",
       "direct_consumers": [
         "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement",
         "GTMisc.conjectures.X116.x116_has_k_distant_ST_paths"
@@ -38547,7 +38547,7 @@
         "GTMisc.conjectures.X116.x116_has_k_distant_ST_paths"
       ],
       "kind": "Definition",
-      "line": 32,
+      "line": 29,
       "local_dependencies": [
         "x116_path_vertices",
         "x116_set_ball"
@@ -38569,7 +38569,7 @@
         "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement"
       ],
       "kind": "Definition",
-      "line": 42,
+      "line": 39,
       "local_dependencies": [
         "x116_ST_path",
         "x116_pairwise_distant_paths"
@@ -41560,9 +41560,9 @@
       "signature_shape_hash": "062de5203b352869c06306491d64bad14c0ac749216504b1478aa3c3f2187246"
     },
     {
-      "body_hash": "f6fb65e63e4dcccd21d5bb803f708c1cbb295c1b8fc9b2ada44140cdca27442e",
-      "body_shape_hash": "f6fb65e63e4dcccd21d5bb803f708c1cbb295c1b8fc9b2ada44140cdca27442e",
-      "declaration_hash": "79c70cf7f58642496fe4a529d2e3a94b908f5df26dcc732207c3ee4018160ccd",
+      "body_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
+      "body_shape_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
+      "declaration_hash": "994ef210f00cb5112ec695171fb3d15997f699b749a59c5921516fd350652a82",
       "direct_consumers": [
         "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
         "GTMisc.conjectures.X39.x39_separates_xy"
@@ -41587,7 +41587,7 @@
         "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths"
       ],
       "kind": "Definition",
-      "line": 26,
+      "line": 23,
       "local_dependencies": [
         "x39_path_vertices",
         "x39_set_ball"
@@ -41609,7 +41609,7 @@
         "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement"
       ],
       "kind": "Definition",
-      "line": 33,
+      "line": 30,
       "local_dependencies": [
         "x39_pairwise_distant_paths",
         "x39_xy_path"
@@ -41631,7 +41631,7 @@
         "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement"
       ],
       "kind": "Definition",
-      "line": 41,
+      "line": 38,
       "local_dependencies": [
         "x39_path_vertices",
         "x39_xy_path"
@@ -48633,9 +48633,9 @@
       "signature_shape_hash": "062de5203b352869c06306491d64bad14c0ac749216504b1478aa3c3f2187246"
     },
     {
-      "body_hash": "f6fb65e63e4dcccd21d5bb803f708c1cbb295c1b8fc9b2ada44140cdca27442e",
-      "body_shape_hash": "f6fb65e63e4dcccd21d5bb803f708c1cbb295c1b8fc9b2ada44140cdca27442e",
-      "declaration_hash": "f5b36b0a0366770a985e4eef28fa0930ad5011e223991027b182732c6230c854",
+      "body_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
+      "body_shape_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
+      "declaration_hash": "4428fb67790651edb954d069dc611c6911a5fb0b583b34f63601b10f9574a1af",
       "direct_consumers": [
         "Minor.conjectures.X11.x11_has_k_anticomplete_xy_paths",
         "Minor.conjectures.X11.x11_no_xy_path_after_closed_neighbourhood"
@@ -48660,7 +48660,7 @@
         "Minor.conjectures.X11.x11_no_xy_path_after_closed_neighbourhood"
       ],
       "kind": "Definition",
-      "line": 21,
+      "line": 17,
       "local_dependencies": [],
       "name": "x11_closed_neighbourhood",
       "normalized_name": "closed_neighbourhood",
@@ -48679,7 +48679,7 @@
         "Minor.conjectures.X11.x11_pairwise_anticomplete_paths"
       ],
       "kind": "Definition",
-      "line": 24,
+      "line": 20,
       "local_dependencies": [],
       "name": "x11_anticomplete_sets",
       "normalized_name": "anticomplete_sets",
@@ -48698,7 +48698,7 @@
         "Minor.conjectures.X11.x11_has_k_anticomplete_xy_paths"
       ],
       "kind": "Definition",
-      "line": 28,
+      "line": 24,
       "local_dependencies": [
         "x11_anticomplete_sets",
         "x11_path_vertices"
@@ -48720,7 +48720,7 @@
         "Minor.conjectures.X11.induced_menger_anticomplete_paths_statement"
       ],
       "kind": "Definition",
-      "line": 34,
+      "line": 30,
       "local_dependencies": [
         "x11_pairwise_anticomplete_paths",
         "x11_xy_path"
@@ -48742,7 +48742,7 @@
         "Minor.conjectures.X11.induced_menger_anticomplete_paths_statement"
       ],
       "kind": "Definition",
-      "line": 42,
+      "line": 38,
       "local_dependencies": [
         "x11_closed_neighbourhood",
         "x11_path_vertices",
@@ -52682,9 +52682,9 @@
       "signature_shape_hash": "062de5203b352869c06306491d64bad14c0ac749216504b1478aa3c3f2187246"
     },
     {
-      "body_hash": "f6fb65e63e4dcccd21d5bb803f708c1cbb295c1b8fc9b2ada44140cdca27442e",
-      "body_shape_hash": "f6fb65e63e4dcccd21d5bb803f708c1cbb295c1b8fc9b2ada44140cdca27442e",
-      "declaration_hash": "b4f6ae7a50aa26676cfe14907fb43804093e814b5e2c7e79fced3db5753e5a02",
+      "body_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
+      "body_shape_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
+      "declaration_hash": "e7c146bf69054d20d2559856e51e44735e1465ce843b51e38b117c12c2985c08",
       "direct_consumers": [
         "Packing.conjectures.X26.x26_has_k_distant_xy_paths",
         "Packing.conjectures.X26.x26_separates_xy"
@@ -52709,7 +52709,7 @@
         "Packing.conjectures.X26.x26_has_k_distant_xy_paths"
       ],
       "kind": "Definition",
-      "line": 26,
+      "line": 23,
       "local_dependencies": [
         "x26_path_vertices",
         "x26_set_ball"
@@ -52731,7 +52731,7 @@
         "Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement"
       ],
       "kind": "Definition",
-      "line": 32,
+      "line": 29,
       "local_dependencies": [
         "x26_pairwise_distant_paths",
         "x26_xy_path"
@@ -52753,7 +52753,7 @@
         "Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement"
       ],
       "kind": "Definition",
-      "line": 40,
+      "line": 37,
       "local_dependencies": [
         "x26_path_vertices",
         "x26_xy_path"

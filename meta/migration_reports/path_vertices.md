@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py path_vertices --details /tmp/mi
 
 - Canonical: `GTBase.walks_paths.seq_vertices`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 9 helpers, 14 statements, 52 frozen objects, 134 recorded references.
-- Source checks: 430/430 pass; consistent.
+- Scope: 9 helpers, 14 statements, 52 frozen objects, 166 recorded references.
+- Source checks: 438/438 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -32,4 +32,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Chromatic.conjectures.XE1.xe1_vertices_of_seq`, `Cycle.conjectures.X5.x5_vertices_of_seq`, `Cycle.conjectures.X10.x10_cycle_vertices`, `Cycle.conjectures.X212.x212_cycle_vertices`, `Chromatic.conjectures.X153.x153_cycle_vertices`, `Digraph.conjectures.X19.x19_cycle_vertices`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/consecutive_in_path.v#X3Legacy.statement`, `minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/consecutive_in_path.v#X3Legacy.statement`, `minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta`, `graph-theory-misc/theories/migration/set_path.v#X39Legacy.has_k_distant_xy_paths`, `graph-theory-misc/theories/migration/set_path.v#X39Legacy.separates_xy`, `graph-theory-misc/theories/migration/set_path.v#X116Legacy.has_k_distant_ST_paths`, `graph-theory-misc/theories/migration/set_path.v#X116Legacy.coarse_menger_paths_bounded_separator_statement`, `minor-theory/theories/migration/set_path.v#X11Legacy.has_k_anticomplete_xy_paths`, `minor-theory/theories/migration/set_path.v#X11Legacy.no_xy_path_after_closed_neighbourhood`, `packing-theory/theories/migration/set_path.v#X26Legacy.has_k_distant_xy_paths`, `packing-theory/theories/migration/set_path.v#X26Legacy.separates_xy`.

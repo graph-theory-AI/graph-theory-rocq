@@ -9,10 +9,12 @@
     meta/library_primitives/internal-vertices.json, section "Internal vertices"
     below), the consecutive entries of a sequence, [seq_consecutive] (registry
     meta/library_primitives/consecutive-in-path.json, section "Consecutive
-    entries" below), and the cyclically consecutive entries of a sequence,
+    entries" below), the cyclically consecutive entries of a sequence,
     [seq_cyclic_consecutive] and [seq_cyclic_consecutiveb] (registry
     meta/library_primitives/consecutive-in-cycle.json, section "Cyclically
-    consecutive entries" below).
+    consecutive entries" below), and set-to-set simple paths, [seq_set_path]
+    (registry meta/library_primitives/set-path.json, section "Set-to-set simple
+    paths" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -841,3 +843,112 @@ Lemma seq_cyclic_consecutive_ground_repeated_apart :
 Proof. by move/seq_cyclic_consecutiveP. Qed.
 
 End CyclicGrounding.
+
+(** ** Set-to-set simple paths
+
+    [seq_set_path X Y p] states that the raw sequence [p] is a simple path from
+    the vertex set [X] to the vertex set [Y]: [p] is nonempty, its first entry
+    lies in [X] and its last entry in [Y], its entries are pairwise distinct, and
+    consecutive entries are adjacent ([path (--)] from the first entry).
+
+    Upstream audit (2026-10-02; coq-graph-theory 0.9.7).  [digraph.v] has, on
+    tails, [pathp x y q := path (--) x q && (last x q == y)] and
+    [upath x y q := uniq (x :: q) && pathp x y q], and packaged paths [Path x y]
+    whose vertex list [nodes p] is [x :: val p], simple when [irred p].  A
+    set-to-set path is that tail form once the head is split off:
+    [seq_set_path X Y (x :: q)] holds exactly when [x \in X], [last x q \in Y] and
+    [upath x (last x q) q] ([seq_set_path_upath]), and the vertex list of an
+    irredundant packaged path from a vertex of [X] to a vertex of [Y] is one
+    ([seq_set_path_nodes]).
+
+    Specification, every clause proved below:
+    - the empty sequence is never a path; a one-entry sequence [[:: x]] is one
+      exactly when [x \in X :&: Y]; if [X] or [Y] is empty there is none;
+    - repeated entries are excluded: a path is [uniq];
+    - nothing else is required: [X] and [Y] may meet, the endpoints coincide for a
+      one-entry path, there is no length guard, internal entries may lie in [X] or
+      [Y], and enlarging [X] or [Y] keeps every path; reversing a path of a
+      symmetric relation exchanges [X] and [Y]. *)
+
+Section SeqSetPath.
+Variable G : relType.
+Implicit Types (X Y : {set G}) (p q : seq G) (x y : G).
+
+(** [p] is a simple path from [X] to [Y]. *)
+Definition seq_set_path X Y p : Prop :=
+  match p with
+  | [::] => False
+  | x :: q => x \in X /\ last x q \in Y /\ uniq p /\ path (--) x q
+  end.
+
+Lemma seq_set_path_nil X Y : ~ seq_set_path X Y [::].
+Proof. by []. Qed.
+
+Lemma seq_set_path_cons X Y x q :
+  seq_set_path X Y (x :: q) <->
+  [/\ x \in X, last x q \in Y, uniq (x :: q) & path (--) x q].
+Proof. by split=> [[xX [qY [u pq]]]|[xX qY u pq]]. Qed.
+
+(** A one-entry path is a vertex of both sets. *)
+Lemma seq_set_path_seq1 X Y x : seq_set_path X Y [:: x] <-> x \in X :&: Y.
+Proof. by rewrite inE; split=> [[-> [-> _]]|/andP[xX xY]]. Qed.
+
+Lemma seq_set_path_upath X Y x q :
+  seq_set_path X Y (x :: q) <-> [/\ x \in X, last x q \in Y & upath x (last x q) q].
+Proof.
+rewrite /upath /pathp eqxx andbT.
+by split=> [[xX [qY [u pq]]]|[xX qY /andP[u pq]]]; [split; rewrite // u pq | ].
+Qed.
+
+(** The vertex list of an irredundant packaged path from [X] to [Y]. *)
+Lemma seq_set_path_nodes X Y x y (p : Path x y) :
+  irred p -> x \in X -> y \in Y -> seq_set_path X Y (nodes p).
+Proof.
+rewrite /irred nodesE => u xX yY /=; rewrite path_last.
+by do !split=> //; case/andP: (valP p).
+Qed.
+
+Lemma seq_set_path_uniq X Y p : seq_set_path X Y p -> uniq p.
+Proof. by case: p => [|x q] // [_ [_ []]]. Qed.
+
+Lemma seq_set_path_set0l Y p : ~ seq_set_path set0 Y p.
+Proof. by case: p => [|x q] //; rewrite /= inE => -[]. Qed.
+
+Lemma seq_set_path_set0r X p : ~ seq_set_path X set0 p.
+Proof. by case: p => [|x q] //= [_ []]; rewrite inE. Qed.
+
+(** Repeated entries are excluded. *)
+Lemma seq_set_path_repeat X Y p : ~~ uniq p -> ~ seq_set_path X Y p.
+Proof. by move=> /negP np /seq_set_path_uniq. Qed.
+
+Lemma seq_set_path_sub X X' Y Y' p :
+  X \subset X' -> Y \subset Y' -> seq_set_path X Y p -> seq_set_path X' Y' p.
+Proof.
+case: p => [|x q] // /subsetP sX /subsetP sY [xX [qY rest]].
+by split; [exact: sX | split; [exact: sY | exact: rest]].
+Qed.
+
+(** Consecutive entries of a path are adjacent, one way or the other. *)
+Lemma seq_set_path_consecutive X Y p u v :
+  seq_set_path X Y p -> seq_consecutive p u v -> (u -- v) || (v -- u).
+Proof. by case: p => [|x q] // [_ [_ [_ pq]]]; apply: seq_consecutive_path. Qed.
+
+(** A path with [n] entries has [n - 1] consecutive pairs (its edges). *)
+Lemma seq_set_path_size X Y p :
+  seq_set_path X Y p -> size (zip p (behead p)) = (size p).-1.
+Proof. by case: p => [|x q] // _; rewrite size2_zip /= ?leqnSn. Qed.
+
+(** Reversing a path of a symmetric relation exchanges the endpoint sets. *)
+Lemma seq_set_path_rev X Y p :
+  symmetric (@edge_rel G) -> seq_set_path X Y p -> seq_set_path Y X (rev p).
+Proof.
+case: p => [|x q] // esym [xX [qY [u pq]]].
+have revE : rev (x :: q) = last x q :: rev (belast x q) by rewrite lastI rev_rcons.
+have lastE : last (last x q) (rev (belast x q)) = x.
+  by case: q {qY u pq revE} => [|y q] //=; rewrite rev_cons last_rcons.
+rewrite revE; apply/seq_set_path_cons; split; rewrite ?lastE //.
+- by rewrite -revE rev_uniq.
+- by rewrite rev_path (eq_path (e' := @edge_rel G)) // => a b; apply: esym.
+Qed.
+
+End SeqSetPath.
