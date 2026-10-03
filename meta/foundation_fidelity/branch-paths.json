@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "family": "branch-paths",
+  "modules": {
+    "Chromatic.foundations.branch_paths": {
+      "path": "chromatic-theory/theories/foundations/branch_paths.v",
+      "overrides": {
+        "branch_paths_at_least": {
+          "verdict": "FAITHFUL",
+          "note": "Weak injective branch map with one existential tail path per oriented pattern edge: adjacency path, prescribed endpoint, lower bound on edge length size p, uniq(branch x::p), and internal branch avoidance. No inducedness, inter-path disjointness, reversal coherence or simultaneous supplied path map. Host/pattern order G,H is preserved. X177/X185 are the exact same body; X186 is the unconditional zero-bound view. All three blocked statement readings and the X185 line_graph target remain unchanged."
+        }
+      },
+      "machine_evidence": [
+        "branch_paths_at_leastW",
+        "branch_paths_zeroE",
+        "branch_paths_card",
+        "branch_paths_empty_pattern",
+        "not_branch_paths_empty_host",
+        "branch_paths_edgelessE",
+        "branch_paths_of_embedding",
+        "branch_paths_refl"
+      ]
+    }
+  }
+}
