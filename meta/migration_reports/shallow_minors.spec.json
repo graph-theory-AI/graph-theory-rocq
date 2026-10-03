@@ -1,0 +1,125 @@
+{
+  "family": "internal-shallow-minor",
+  "canonical_name": "Minor.foundations.shallow_minors.internal_shallow_minor",
+  "canonical_short_name": "internal_shallow_minor",
+  "relation": "Exact internal-radius contract on SUPPLIED maps: B : H -> {set G} satisfies upstream minor_rmap on the same map, a supplied centre map ctr : H -> G has ctr x in B x as a separate clause, and every vertex of B x is reached from ctr x by a walk of at most r edges (size p) whose listed vertices all lie inside B x. Standalone internal_ball_in is vacuous on an empty set and does not assert centre membership. Same-map adapter: minor_rmap plus centres and balls <-> centres, balls, pairwise disjointness and edge realization. Host/pattern/radius order unchanged; no graph_dist, truncation, ambient radius, inducedness or covering condition.",
+  "baseline_commit": "311fdcb89dc12a78c62cb0ee6d2477896cbce9a7",
+  "namespaces": {
+    "base": "GTBase",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "minor-theory/theories/foundations/shallow_minors.v",
+    "minor-theory/theories/migration/shallow_minors.v"
+  ],
+  "extra_certificates": [
+    "Minor.foundations.shallow_minors.internal_ball_in_set0",
+    "Minor.foundations.shallow_minors.internal_ball_in_centre",
+    "Minor.foundations.shallow_minors.internal_ball_inW",
+    "Minor.foundations.shallow_minors.internal_ball_in_set1",
+    "Minor.foundations.shallow_minors.internal_ball_in0",
+    "Minor.foundations.shallow_minors.internal_ball_in_connect",
+    "Minor.foundations.shallow_minors.internal_ball_in_connected",
+    "Minor.foundations.shallow_minors.connected_internal_ball_in",
+    "Minor.foundations.shallow_minors.internal_ball_in_connectedE",
+    "Minor.foundations.shallow_minors.not_internal_ball_in_disconnected",
+    "Minor.foundations.shallow_minors.internal_shallow_suppliedE",
+    "Minor.foundations.shallow_minors.internal_shallow_minorE",
+    "Minor.foundations.shallow_minors.internal_shallow_minor_minor",
+    "Minor.foundations.shallow_minors.internal_shallow_minor_card",
+    "Minor.foundations.shallow_minors.internal_shallow_minorW",
+    "Minor.foundations.shallow_minors.internal_shallow_minor_empty_pattern",
+    "Minor.foundations.shallow_minors.not_internal_shallow_minor_empty_host",
+    "Minor.foundations.shallow_minors.internal_shallow_minor_refl",
+    "Minor.foundations.shallow_minors.internal_shallow_minor0E"
+  ],
+  "downstream_client": "minor-theory/theories/examples/shallow_minors.v",
+  "summary": [
+    "C18 migrates exactly the two X220 internal-radius helpers. The canonical keeps the supplied branch map B and centre map ctr, reuses upstream minor_rmap on the same B, keeps centre membership as a separate clause and keeps the internal ball: walks of at most r edges whose listed vertices stay inside the branch. A proved same-map adapter recovers the legacy clause list, so nonempty and connected branches are derived, not assumed.",
+    "Three current objects and the whole row support four iff certificates. x220_polynomial_expansion keeps one polynomial for the whole class and every depth r; the row keeps the class quantifier and one uniform twin-width bound d. There are no prior frozen mentions, so no Original is needed; the row stays open with its doc block and legs unchanged.",
+    "The public-only client covers empty-set vacuity with a separate centre, zero radius (singleton balls, radius zero exactly the subgraphs, K3 an internal 1-shallow but not 0-shallow minor of KB 2 2), empty pattern, impossible nonempty pattern in the empty host, and a disconnected branch that fails at every radius although the truncated graph_dist of its induced subgraph accepts every pair."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X220.x220_ball_in",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_ball_in",
+      "frozen_path": "minor-theory/theories/migration/shallow_minors.v",
+      "frozen": "Legacy.x220_ball_in",
+      "substitutions": {},
+      "certificate": "Minor.migration.shallow_minors.x220_ball_in_compat",
+      "live_unfolds_to": "internal_ball_in B c r"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X220.x220_shallow_minor",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_shallow_minor",
+      "frozen_path": "minor-theory/theories/migration/shallow_minors.v",
+      "frozen": "Legacy.x220_shallow_minor",
+      "substitutions": {
+        "x220_ball_in": "Legacy.x220_ball_in"
+      },
+      "certificate": "Minor.migration.shallow_minors.x220_shallow_minor_compat",
+      "live_unfolds_to": "internal_shallow_minor G H r"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X220.x220_polynomial_expansion",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_polynomial_expansion",
+      "frozen_path": "minor-theory/theories/migration/shallow_minors.v",
+      "frozen": "Legacy.x220_polynomial_expansion",
+      "substitutions": {
+        "x220_shallow_minor": "Legacy.x220_shallow_minor"
+      },
+      "certificate": "Minor.migration.shallow_minors.x220_polynomial_expansion_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.polynomial_expansion_bounded_twin_width_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "polynomial_expansion_bounded_twin_width_statement",
+      "frozen_path": "minor-theory/theories/migration/shallow_minors.v",
+      "frozen": "Legacy.polynomial_expansion_bounded_twin_width_statement",
+      "substitutions": {
+        "x220_polynomial_expansion": "Legacy.x220_polynomial_expansion"
+      },
+      "certificate": "Minor.migration.shallow_minors.polynomial_expansion_bounded_twin_width_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_polynomial_expansion",
+      "note": "X220_poly_expansion_nonvacuous keeps its exact type; its proof only re-destructures the canonical model (minor_rmap, centre, ball)."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_shallow_minor",
+      "note": "X220_shallow_minor_refl keeps its exact type; its proof is the public internal_shallow_minor_refl."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "polynomial_expansion_bounded_twin_width_statement",
+      "note": "Print Assumptions vernacular on the unchanged row; no proof depends on it."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.X128.x128_shallow_minor_model",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_shallow_minor_model",
+      "reason": "Ambient host graph_dist radius with finite truncation, migrated by C16; no equivalence with internal branch radius is claimed."
+    },
+    {
+      "qualified": "GTMisc.conjectures.X139.x139_shallow_minor_model",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "x139_shallow_minor_model",
+      "reason": "Ambient host graph_dist radius with finite truncation, migrated by C16; no equivalence with internal branch radius is claimed."
+    }
+  ]
+}

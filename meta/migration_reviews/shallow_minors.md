@@ -1,0 +1,9 @@
+# Internal shallow minors: independent review
+
+C18 exact source `15a5a5c2fc5b2294a1151a67141c9074987483c7`, baseline `311fdcb89dc12a78c62cb0ee6d2477896cbce9a7`. Independent step-10 approval: path_review; coordinator final mathematical approval: root. Evidence: VM coordination/evidence/C18-review-by-path-review.md and C18-coordinator-final/README.md.
+
+All four complete iff retain the two helpers, polynomial-expansion chain and whole row. The bridge uses upstream minor_rmap on the same supplied branch map with the same supplied centres, separate centre membership and walks bounded inside each branch. Empty balls remain vacuous; no ambient/truncated-distance, covering or inducedness identification is introduced. Both uniform class bounds, host/pattern order and every row guard remain exact. The two grounding adaptations preserve theorem types.
+
+Independent fresh checks passed: 25 sources, 70 exact type/conversion checks including all four iff, 51 closed assumptions, eight strict dependency closures, a direct model-nonconversion negative and family kernel 57/57. The author's normal Minor X220 milestone separately passed 11/11. Original author inventory/status diagnostics, regeneration and restoration are recorded in C18-by-lancelot/README.md; this record does not misstate them as an initially clean source audit.
+
+Preparation on B18 `18fe98cea977627a24243cc6a08e08aee0055ef2` keeps all five reviewed Rocq files, own spec/fidelity/authored record byte-exact, all previous mathematical/certificate/frozen/review/tooling state and B16/B17/B18 complete histories. Only the exact X220 distinct-variant entry is removed from each C15/C16 spec; no newer frozen dependency requires an Original. Actual review metadata, this compact record and generated metadata are added. No proof build or artifact/cache transfer is performed during preparation; cumulative proof and normal integration acceptance remain coordinator-owned.
