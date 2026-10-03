@@ -20,7 +20,7 @@ Definition x208_Pt_free (G : sgraph) (t : nat) : Prop :=
   ~ x208_induced_path_order G t.
 
 Definition x208_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x != y -> ~~ (x -- y).
+  stable S.
 
 Definition x208_maximum_independent_set_output (G : sgraph) (out : data) : Prop :=
   exists S : {set G},

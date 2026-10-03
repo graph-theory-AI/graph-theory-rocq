@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X97 vocabulary ************************************************)
 
 Definition x97_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x != y -> ~~ (x -- y).
+  stable S.
 
 Definition x97_maximum_independent_set (G : sgraph) (S : {set G}) : Prop :=
   x97_stable_set S /\

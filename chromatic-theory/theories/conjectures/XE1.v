@@ -17,7 +17,7 @@ Definition xe1_subgraph_of (H G : sgraph) : Prop :=
   has_subgraph G H.
 
 Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x -- y -> False.
+  stable S.
 
 Definition xe1_vertices_of_seq (G : sgraph) (c : seq G) : {set G} :=
   seq_vertices c.

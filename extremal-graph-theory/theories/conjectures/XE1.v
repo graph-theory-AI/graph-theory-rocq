@@ -11,7 +11,7 @@ Definition xe1_subgraph_of (H G : sgraph) : Prop :=
   has_subgraph G H.
 
 Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x -- y -> False.
+  stable S.
 
 Definition xe1_has_independent_set (G : sgraph) (k : nat) : Prop :=
   exists S : {set G}, xe1_stable_set S /\ #|S| = k.

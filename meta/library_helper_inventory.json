@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2559,
-    "repeated_body_shapes": 143,
+    "repeated_body_shapes": 141,
     "repeated_normalized_names": 212,
     "repeated_signature_shapes": 305,
     "statements_excluded": 700,
@@ -105,10 +105,6 @@
         "Extremal.conjectures.X98.x98_model_vertex",
         "GTMisc.conjectures.X114.x114_model_vertex"
       ],
-      "29381e58e4adda9737a99a56385a07057e86056112ef58f147b8d9f3aa843888": [
-        "Chromatic.conjectures.X3.x3_stable_set",
-        "Packing.conjectures.X18.x18_independent_set"
-      ],
       "2d519adc4d37014786bee5ea2e133db8e6f21fb9d2985459e5c051bbb1b4a4af": [
         "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
         "Packing.conjectures.X26.x26_has_k_distant_xy_paths"
@@ -202,6 +198,19 @@
         "GTMisc.conjectures.D7.outerplanar_w",
         "GTMisc.conjectures.X82.x82_outerplanar"
       ],
+      "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa": [
+        "Chromatic.conjectures.X3.x3_stable_set",
+        "Chromatic.conjectures.XE1.xe1_stable_set",
+        "Extremal.conjectures.X56.x56_stable_set",
+        "Extremal.conjectures.X97.x97_stable_set",
+        "Extremal.conjectures.XE1.xe1_stable_set",
+        "GTMisc.conjectures.X163.x163_stableb",
+        "GTMisc.conjectures.X169.x169_stable_set",
+        "GTMisc.conjectures.X208.x208_stable_set",
+        "GTMisc.conjectures.X29.x29_stable_set",
+        "Packing.conjectures.X18.x18_independent_set",
+        "Packing.conjectures.XE1.xe1_stable_set"
+      ],
       "54c77ba77ee03349b9a4660756af0331cacf26a9fadff2cbbfd1a2c2ee71be5a": [
         "Chromatic.conjectures.X126.x126_pathwidth_at_most",
         "Minor.conjectures.X95.x95_pathwidth_at_most"
@@ -217,11 +226,6 @@
       "589ddf4441503fa61dd7b4b8358903c2ad3d7ccf18bdb2764884dda9b7bea7d8": [
         "Digraph.conjectures.two_extremal.symcyc",
         "Digraph.conjectures.two_extremal_glue.dicyc"
-      ],
-      "59d0e5f893bd63b66cfcb2eb3254a8d927e2687722ae5d5212c50395003df3f6": [
-        "Extremal.conjectures.X97.x97_stable_set",
-        "GTMisc.conjectures.X169.x169_stable_set",
-        "GTMisc.conjectures.X208.x208_stable_set"
       ],
       "59f108367724bc2f6577bee48af88899b18c3e5492ccf5c65c720a71d7a06755": [
         "Chromatic.conjectures.U4.cmp_rel",
@@ -239,12 +243,6 @@
       "5f103be0814c715ad8258d99d9c741c52ea301274312445ef748c094dbfcba83": [
         "Infinite.conjectures.D4doa.is_proper3",
         "Spectral.conjectures.D5.proper_colb"
-      ],
-      "5f1a39e07c92a5126c283a75b96494e9489a2e9762fa9ab366b55ec3824083ea": [
-        "Chromatic.conjectures.XE1.xe1_stable_set",
-        "Extremal.conjectures.X56.x56_stable_set",
-        "Extremal.conjectures.XE1.xe1_stable_set",
-        "Packing.conjectures.XE1.xe1_stable_set"
       ],
       "5f55dcd49e0fcadd3cebad1d18d33f1bc6ac0bae46b8b04aadc804f19f4cc935": [
         "Hamilton.conjectures.U2.vertex_transitive",
@@ -8934,9 +8932,9 @@
       "signature_shape_hash": "11ef1b40a354c9883afdd68b4393fd0ce2762af383b4f4805bad3ad6244eb44a"
     },
     {
-      "body_hash": "29381e58e4adda9737a99a56385a07057e86056112ef58f147b8d9f3aa843888",
-      "body_shape_hash": "29381e58e4adda9737a99a56385a07057e86056112ef58f147b8d9f3aa843888",
-      "declaration_hash": "b56fd0883fa4fd284ca6aad4ff71e06a20c17a973e440d7a8e3c077c3b7d740f",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "6f4b6a5cbaa560ea7f9125f077b5a8fc585e3eae3fbf3c10efcc56736fa5b018",
       "direct_consumers": [
         "Chromatic.conjectures.X3.stable_cover_unique_induced_path_statement"
       ],
@@ -10960,9 +10958,9 @@
       "signature_shape_hash": "d9e433c0e5e7887f115d64a173aa547ab11ef3669531ec7da39ea70950601092"
     },
     {
-      "body_hash": "5f1a39e07c92a5126c283a75b96494e9489a2e9762fa9ab366b55ec3824083ea",
-      "body_shape_hash": "5f1a39e07c92a5126c283a75b96494e9489a2e9762fa9ab366b55ec3824083ea",
-      "declaration_hash": "0b9e958e9955d5100f361cc7301964eed97f6d94d8369b8ffc9025f7124a4b5a",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "81a361f194e23fa1fe7b5f9c90f59d27b5c22e97a5af9c0b6e0e855299d2baff",
       "direct_consumers": [],
       "kind": "Definition",
       "line": 18,
@@ -33460,9 +33458,9 @@
       "signature_shape_hash": "8132fcc3efd0edfc0a0ee46117d09167c57afed296030284e623c7a2b16bddf0"
     },
     {
-      "body_hash": "5f1a39e07c92a5126c283a75b96494e9489a2e9762fa9ab366b55ec3824083ea",
-      "body_shape_hash": "5f1a39e07c92a5126c283a75b96494e9489a2e9762fa9ab366b55ec3824083ea",
-      "declaration_hash": "a1121ee853292db4b3b8c014d5b36d12e97ae577b69b2a5db0b658296c7da888",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "2a98b4c69d7117df7ff3bcd9e957365c5703cd768e669d096dbdb161306edb6c",
       "direct_consumers": [
         "Extremal.conjectures.X56.x56_homogeneous_set"
       ],
@@ -34635,9 +34633,9 @@
       "signature_shape_hash": "c3279feacbe9310d14a3d1138c531e64d0ea9d043632d6d001502b3f21960784"
     },
     {
-      "body_hash": "59d0e5f893bd63b66cfcb2eb3254a8d927e2687722ae5d5212c50395003df3f6",
-      "body_shape_hash": "59d0e5f893bd63b66cfcb2eb3254a8d927e2687722ae5d5212c50395003df3f6",
-      "declaration_hash": "80c16b886c57c8b63ff3fab132fa55ee339f62241dacc91f133602d94a091581",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "2cb5568a917cc6dd5dc537b1f79a12eccc38eea3f0c65795818c3081f6408d74",
       "direct_consumers": [
         "Extremal.conjectures.X97.x97_maximum_independent_set"
       ],
@@ -35067,9 +35065,9 @@
       "signature_shape_hash": "d9e433c0e5e7887f115d64a173aa547ab11ef3669531ec7da39ea70950601092"
     },
     {
-      "body_hash": "5f1a39e07c92a5126c283a75b96494e9489a2e9762fa9ab366b55ec3824083ea",
-      "body_shape_hash": "5f1a39e07c92a5126c283a75b96494e9489a2e9762fa9ab366b55ec3824083ea",
-      "declaration_hash": "0b9e958e9955d5100f361cc7301964eed97f6d94d8369b8ffc9025f7124a4b5a",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "81a361f194e23fa1fe7b5f9c90f59d27b5c22e97a5af9c0b6e0e855299d2baff",
       "direct_consumers": [
         "Extremal.conjectures.XE1.erdos_802_statement",
         "Extremal.conjectures.XE1.xe1_has_independent_set"
@@ -39944,9 +39942,9 @@
       "signature_shape_hash": "433fd17d4d6ac421ad261e1459e52db139f3d9d5326d96a059d20d1cc2131744"
     },
     {
-      "body_hash": "84acd1ee0063d2062b6288145c0e83c4cc6a5fd8d043f3de2d4d58088100fc08",
-      "body_shape_hash": "84acd1ee0063d2062b6288145c0e83c4cc6a5fd8d043f3de2d4d58088100fc08",
-      "declaration_hash": "470df2d0467c37e1f32e125b962316c9e4713b0af86e8d05d2f802c932de93f0",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "5e7c65546df47d441fe37f25e1a38946610915b59dd10f4399c0bd8eb95bd17e",
       "direct_consumers": [
         "GTMisc.conjectures.X163.x163_normal_graphb"
       ],
@@ -40367,9 +40365,9 @@
       "signature_shape_hash": "710b5f4becb0f0cc4f576a80292f360f118dab2c8fcf02365a968097b0a28cb4"
     },
     {
-      "body_hash": "59d0e5f893bd63b66cfcb2eb3254a8d927e2687722ae5d5212c50395003df3f6",
-      "body_shape_hash": "59d0e5f893bd63b66cfcb2eb3254a8d927e2687722ae5d5212c50395003df3f6",
-      "declaration_hash": "2f012670c3422f0ddd194e8f9bda7c9304153bf6f77228c0250e701a24a266b5",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "5db8d7af4172a98f4c6405499ddf37aa4a82ecb95f2bd9b4d50ca87e2f6516ea",
       "direct_consumers": [
         "GTMisc.conjectures.X169.x169_token_sliding_connected"
       ],
@@ -40980,9 +40978,9 @@
       "signature_shape_hash": "e9307f105f9e88cab7b8bacb0dbbe231e52f3ee2ccd1bc1037d00d4265c394eb"
     },
     {
-      "body_hash": "59d0e5f893bd63b66cfcb2eb3254a8d927e2687722ae5d5212c50395003df3f6",
-      "body_shape_hash": "59d0e5f893bd63b66cfcb2eb3254a8d927e2687722ae5d5212c50395003df3f6",
-      "declaration_hash": "2b54f39523c977e7110609fab07d396a49dba0089791ab293c833de0e05c9419",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "32b447de10c57c68d233eccccbda06d2b60de66fa60be49173eec65f648bdf16",
       "direct_consumers": [
         "GTMisc.conjectures.X208.x208_maximum_independent_set_output"
       ],
@@ -41662,9 +41660,9 @@
       "signature_shape_hash": "ff79ba71bd209a9dc605625aae997a89d17636a93a5e755d1d36f71e35222cb8"
     },
     {
-      "body_hash": "ca11dfab7d45ed580dd6c1d14d30b36b57e4dccf2f741b1e93dcb0c43b127e48",
-      "body_shape_hash": "ca11dfab7d45ed580dd6c1d14d30b36b57e4dccf2f741b1e93dcb0c43b127e48",
-      "declaration_hash": "af7d6c525154b3d3c706359217dc0c6377ac10a3eb4923f78378bf4c48ac9786",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "004f9b50b6ca5da4f18341cc7160d8920eeb6814a2599c881233da11b959a37a",
       "direct_consumers": [
         "GTMisc.conjectures.X29.x29_stable_cover"
       ],
@@ -52460,9 +52458,9 @@
       "signature_shape_hash": "86df39c07a9a27fbd48d371ff2d77e3ac1a95def886890d9fb30195860558b57"
     },
     {
-      "body_hash": "29381e58e4adda9737a99a56385a07057e86056112ef58f147b8d9f3aa843888",
-      "body_shape_hash": "29381e58e4adda9737a99a56385a07057e86056112ef58f147b8d9f3aa843888",
-      "declaration_hash": "b7636649f33d7c63042db8495513479e45ef2cfd208769cddb29376956b0e23d",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "2f77ce1a191cbd439f3cae3feab6af1b1eba257301c7cc72406e391460b25217",
       "direct_consumers": [
         "Packing.conjectures.X18.path_partition_independent_set_balance_statement"
       ],
@@ -53422,9 +53420,9 @@
       "signature_shape_hash": "4efb584da06ad8a83a527b97108d055474beb96dccc05ca26ea26b6c254ef1e4"
     },
     {
-      "body_hash": "5f1a39e07c92a5126c283a75b96494e9489a2e9762fa9ab366b55ec3824083ea",
-      "body_shape_hash": "5f1a39e07c92a5126c283a75b96494e9489a2e9762fa9ab366b55ec3824083ea",
-      "declaration_hash": "0b9e958e9955d5100f361cc7301964eed97f6d94d8369b8ffc9025f7124a4b5a",
+      "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "body_shape_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
+      "declaration_hash": "81a361f194e23fa1fe7b5f9c90f59d27b5c22e97a5af9c0b6e0e855299d2baff",
       "direct_consumers": [
         "Packing.conjectures.XE1.xe1_triangle_free_independence_guarantee"
       ],

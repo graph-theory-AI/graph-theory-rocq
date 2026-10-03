@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X163 vocabulary ***********************************************)
 
 Definition x163_stableb (G : sgraph) (S : {set G}) : bool :=
-  [forall x in S, [forall y in S, (x == y) || ~~ (x -- y)]].
+  stable S.
 
 Definition x163_normal_graphb (G : sgraph) : bool :=
   [exists K : {set {set G}},

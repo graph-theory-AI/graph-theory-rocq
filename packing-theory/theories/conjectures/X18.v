@@ -31,7 +31,7 @@ Definition x18_vertex_partition
   forall i j : 'I_m, i != j -> [disjoint V i & V j].
 
 Definition x18_independent_set (G : sgraph) (S : {set G}) : Prop :=
-  forall u v : G, u \in S -> v \in S -> u -- v -> False.
+  stable S.
 
 (** Since the C2 library migration (2026-10-02) a transparent alias of
     [GTBase.common.perfect_matching]; the original "[x15_matching] saturating every

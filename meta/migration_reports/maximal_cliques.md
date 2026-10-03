@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py maximal_cliques --details /tmp/
 
 - Canonical: `GTBase.maximal_cliques.maximal_clique`.
 - Baseline: `1f4e9c1dd60c2d543b08d5eb1fb18c1f24ff505a`.
-- Scope: 2 helpers, 2 statements, 14 frozen objects, 28 recorded references.
-- Source checks: 101/101 pass; consistent.
+- Scope: 2 helpers, 2 statements, 14 frozen objects, 31 recorded references.
+- Source checks: 102/102 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,4 +20,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `GTMisc.conjectures.U13.is_max_clique`, `Hypergraph.conjectures.XE2.xe2_maximal_hyperclique`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/monochromatic.v#X181Legacy.x181_clique_colourable`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/monochromatic.v#X181Legacy.x181_clique_colourable`, `packing-theory/theories/migration/stable_sets.v#XE1Legacy.erdos_151_statement`.

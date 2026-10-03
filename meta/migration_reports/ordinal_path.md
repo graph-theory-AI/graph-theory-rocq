@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py ordinal_path --details /tmp/mig
 
 - Canonical: `GTBase.path_graphs.ordinal_path`.
 - Baseline: `9921abbaa06205062a2b81d77d06cdd641dcdc97`.
-- Scope: 7 helpers, 4 statements, 20 frozen objects, 47 recorded references.
-- Source checks: 180/180 pass; consistent.
+- Scope: 7 helpers, 4 statements, 20 frozen objects, 50 recorded references.
+- Source checks: 181/181 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -22,4 +22,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `GTBase.base.cyc_rel`, `Minor.conjectures.X198.x198_join_path_rel`, `Digraph.conjectures.two_extremal.symcyc_rel`, `GTMisc.conjectures.U13.induced_cycle`, `Chromatic.applications.gap_repairs.viable_boundary.boundary_rel`, `Chromatic.conjectures.X162.x162_tri_rel`, `Topological.conjectures.D6emb.anti_dir`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/chi_bounded_classes.v#X170StatementsLegacy.oriented_P4_forb_chi_bounded_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/chi_bounded_classes.v#X170StatementsLegacy.oriented_P4_forb_chi_bounded_statement`, `packing-theory/theories/migration/stable_sets.v#X18Legacy.path_partition_independent_set_balance_statement`.
