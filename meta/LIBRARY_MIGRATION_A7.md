@@ -101,14 +101,22 @@ their module names coincide with this file's):
 
 | Original | Composes |
 |---|---|
-| `X76Original` (count and row), `X78Original` (count and row) | **pre-M1**: count bodies at `061154c` over M1's frozen `Legacy.edge_set`; X78 also A5's frozen `x78_subgraph_of` |
+| `X76Original` (count and row), `X78Original` (count and row) | pre-M1 COUNTS: bodies at `061154c` over M1's frozen `Legacy.edge_set`; X78 also A5's frozen `x78_subgraph_of`. The rows are not pre-M1: the unmigrated cut sizes `x76_cut_size`/`x78_cut_size` (the planned A9 family) still count over the live M1 aliases |
 | `X4Original.c5_edge_count_above_turan_statement` | B4's frozen `X4Legacy.c5_edge_count` |
 | `X96Original` | A5's frozen `x59_subgraph_of` |
 | `XE1Original`: `turan_number_for_graph`, `min_turan_over_size_edges`, #545, #548, #566, #567, #568, #766 | A5's frozen `xe1_subgraph_of`, A6's complete `XE1Original.graph_ramsey_number`, B4's frozen `h5_graph` (#567) |
 | `XE2Original`: `incident_chord_extremal`, #570, #1018, #1019, #1080, #22, #803, #613, #742, #915, #767 | A2's frozen bipartite-plus-degree and diameter-critical (#613, #742), B2's frozen internal disjointness (#915), A5's frozen containment, A6's complete Ramsey chain (#570), B4's frozen incident-chord predicate (#767), C7's frozen `xe2_bipartition_sizes` (#1080) |
 
-Except for X76/X78, the Originals are the `9e03072` texts, which reach no M1 helper. Each is certified by
-`<name>_original_compat`, proved from the earlier families' certificates and this family's. The 13
+The Originals are labelled by their actual frozen baseline and the M1 dependencies they keep. A `Print All
+Dependencies` probe at `526ad18` checked this (`evidence/A7-edge_count/dependency_closures_526ad18.out`):
+- the X76/X78 counts are pre-M1 (`061154c`), but the X76/X78 rows reach the live `x76_edge_set`/`x78_edge_set`
+  through the cut sizes;
+- XE1 #567 (the `9e03072` text) reaches the live `x4_edge_set` through B4's frozen `XE1Legacy.h5_graph`;
+- XE2 #613 and #742 (the `9e03072` texts) reach the live `x4_edge_set` through A2's frozen `XE2Legacy` predicates;
+- the other 15 Original rows (`9e03072` texts) and the five Original chains reach no M1 alias.
+
+So no row in the first three cases is claimed to be pre-M1. Each Original is certified by `<name>_original_compat`,
+proved from the earlier families' certificates and this family's. The 13
 reused frozen declarations are recorded as `historical` objects in the spec. C7's #1080 Originals and
 A6's five Ramsey rows thus gain a complete pre-A5/A6/C7/A7 form.
 

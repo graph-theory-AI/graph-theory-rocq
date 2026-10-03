@@ -5,8 +5,11 @@
       ([x76]/[x78] count M1's alias edge sets: post-M1 bodies).
     - [XnnLegacy]: every affected chain and row at the baseline, over this family's frozen helpers;
       other families' helpers stay live there.
-    - [XnnOriginal]: complete rows. X76/X78 are pre-M1 (count bodies at 061154c over M1's frozen
-      comprehension); the others are the 9e03072 texts, which reach no M1 helper. *)
+    - [XnnOriginal]: complete rows over the earlier families' frozen copies.  The X76/X78 counts
+      are pre-M1 (bodies at 061154c over M1's frozen comprehension), but their rows keep the live
+      M1 aliases through the unmigrated cut sizes.  #567 (B4's frozen h5_graph) and #613/#742 (A2's
+      frozen predicates) keep the live x4_edge_set.  The other Original rows, all 9e03072 texts,
+      reach no M1 alias. *)
 From Corelib Require Import Setoid Morphisms.
 From GTBase Require Import base.
 From Extremal.conjectures Require Import D2ram D2tur X4 X59 X76 X78 X88 X96 XE1 XE2.
