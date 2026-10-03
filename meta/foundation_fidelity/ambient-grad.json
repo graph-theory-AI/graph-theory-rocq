@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "family": "ambient-grad",
+  "modules": {
+    "GTMisc.foundations.ambient_shallow_minors": {
+      "path": "graph-theory-misc/theories/foundations/ambient_shallow_minors.v",
+      "overrides": {
+        "ambient_grad_at_most": {
+          "verdict": "FAITHFUL",
+          "note": "Exact X128/X139 grad body: every H with ambient_shallow_minor G H r satisfies 2 * fg_edge_count H <= d * #|H|; host before pattern, natural cross-multiplication, empty pattern included, no guard, division, rational density or internal radius."
+        }
+      },
+      "machine_evidence": [
+        "ambient_grad_at_mostE",
+        "ambient_grad_at_most_bound",
+        "ambient_grad_at_mostW",
+        "ambient_grad_at_most_radiusW",
+        "ambient_grad_at_most_host"
+      ]
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "family": "ambient-grad",
+  "primitive": {
+    "canonical_name": "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_most",
+    "owner": "graph-theory-misc",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "grad_at_most"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.X128.x128_grad_at_most",
+      "GTMisc.conjectures.X139.x139_grad_at_most"
+    ],
+    "consumers_remaining": 2,
+    "relation": "Exact ambient grad bound: for every finite simple pattern H with an ambient shallow minor model of radius r in the host G (C16 ambient_shallow_minor: upstream minor_rmap on the same map, host graph_dist radius with its finite truncation, paths may leave a branch), the natural twice-density bound 2 * fg_edge_count H <= d * #|H| holds with the public A7 edge count. Host before pattern, all r and d, empty patterns included (0 <= 0); no nonempty, positive, connected, induced or covering guard, no division, rational density or maximum, and not the internal-radius expansion of Minor X220.",
+    "semantic_classes": {
+      "ambient-grad": {
+        "members": [
+          "GTMisc.conjectures.X128.x128_grad_at_most",
+          "GTMisc.conjectures.X139.x139_grad_at_most"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.ambient_grad.x128_grad_at_most_compat",
+          "GTMisc.migration.ambient_grad.x139_grad_at_most_compat"
+        ],
+        "note": "Both sources are the canonical body over the unchanged C16 model aliases and the A7 public count; the iff is a conversion. Complete histories reuse the A7+C16 X128Original and X139Original whole rows."
+      }
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.ambient_grad.x128_grad_at_most_compat",
+      "GTMisc.migration.ambient_grad.x128_expansion_bounded_compat",
+      "GTMisc.migration.ambient_grad.dvorak_cheap_balanced_separator_bounded_expansion_statement_compat",
+      "GTMisc.migration.ambient_grad.x139_grad_at_most_compat",
+      "GTMisc.migration.ambient_grad.x139_polynomial_expansion_class_compat",
+      "GTMisc.migration.ambient_grad.esperet_raymond_polynomial_expansion_scol_statement_compat"
+    ],
+    "api_theorems": [
+      "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_mostE",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_most_bound",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_mostW",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_most_radiusW",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_most_host"
+    ],
+    "public_client": "graph-theory-misc/theories/examples/ambient_grad.v",
+    "legacy_baseline": "30459e9b9eeebbdb5451c70c529bd2e5dfb64c99",
+    "migration_report": "meta/migration_reports/ambient_grad.md",
+    "migration_spec": "meta/migration_reports/ambient_grad.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C23.md",
+    "foundation_fidelity": "meta/foundation_fidelity/ambient-grad.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.minor",
+        "GraphTheory.core.sgraph",
+        "GTBase.common",
+        "GTBase.finite_graph",
+        "GTMisc.foundations.ambient_shallow_minors",
+        "Minor.conjectures.X220"
+      ],
+      "result": "new-area-primitive",
+      "candidate": null,
+      "note": "The pinned installed GraphTheory/MathComp search found no grad, expansion or shallow-minor primitive (discovery upstream-search.txt, a successful empty search). The single consuming area keeps the bound beside the C16 ambient model and reuses ambient_shallow_minor, ambient_shallow_minorW/refl and the A7 public fg_edge_count. The internal-radius polynomial expansion of Minor X220 (no factor two) stays separate.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "matching_scope",
+    "reviewed_commit": "a77d0b06239d7a78dd6cc0a209939ad935ac669b",
+    "independent_review": "meta/migration_reviews/ambient_grad.md"
+  }
+}
