@@ -141,7 +141,7 @@ Theorem unvd_K1 : unvd K1 1.
 Proof.
 split.
 - (* 1-unavoidable: every 1-vertex tournament contains K1 *)
-  move=> T _ cardT.
+  apply/unavoidableP => T _ cardT.
   have [t _] : { t : T | t \in T }.
     by apply/sigW; apply/card_gt0P; rewrite cardT.
   exists (fun _ => t); split.
@@ -150,7 +150,7 @@ split.
     by case: a b => -[|//] ? [[|//] ?].
   + by move=> u v uv; rewrite (negbTE (K1_no_arc u v)) in uv.
 - (* minimal: 0 is not unavoidable — TT 0 has no K1 *)
-  move=> M; rewrite ltnS leqn0 => /eqP -> /(_ (TT 0) (is_tournament_TT 0) (card_ord 0)).
+  move=> M; rewrite ltnS leqn0 => /eqP -> /unavoidableP/(_ (TT 0) (is_tournament_TT 0) (card_ord 0)).
   case=> f [inj_f _].
   by apply: (no_inj_into_smaller inj_f); rewrite card_ord card_TT.
 Qed.
@@ -160,7 +160,7 @@ Qed.
     would be broken. *)
 Theorem not_unvd_K1_0 : ~ unvd K1 0.
 Proof.
-case=> /(_ (TT 0) (is_tournament_TT 0) (card_ord 0)) [f [inj_f _]] _.
+case=> /unavoidableP/(_ (TT 0) (is_tournament_TT 0) (card_ord 0)) [f [inj_f _]] _.
 by apply: (no_inj_into_smaller inj_f); rewrite card_ord card_TT.
 Qed.
 
@@ -192,7 +192,7 @@ Theorem unvd_K2 : unvd K2 2.
 Proof.
 split.
 - (* 2-unavoidable: every 2-vertex tournament contains the arc K2 *)
-  move=> T isT cardT.
+  apply/unavoidableP => T isT cardT.
   have /card_gt1P[x [y [_ _ xy_ne]]] : (1 < #|T|)%N by rewrite cardT.
   have [isT_irr isT_sc isT_as] := isT.
   (* pick the arc orientation between x and y *)
@@ -214,9 +214,9 @@ split.
 - (* minimal: neither 0 nor 1 is unavoidable (K2 has 2 vertices) *)
   move=> M; rewrite ltnS leq_eqVlt => /orP[/eqP->|].
   + (* M = 1 : witness TT 1 *)
-    move=> /(_ (TT 1) (is_tournament_TT 1) (card_ord 1)) [f [inj_f _]].
+    move=> /unavoidableP/(_ (TT 1) (is_tournament_TT 1) (card_ord 1)) [f [inj_f _]].
     by apply: (no_inj_into_smaller inj_f); rewrite card_TT card_K2.
   + rewrite ltnS leqn0 => /eqP -> .
-    move=> /(_ (TT 0) (is_tournament_TT 0) (card_ord 0)) [f [inj_f _]].
+    move=> /unavoidableP/(_ (TT 0) (is_tournament_TT 0) (card_ord 0)) [f [inj_f _]].
     by apply: (no_inj_into_smaller inj_f); rewrite card_ord card_K2.
 Qed.
