@@ -251,6 +251,10 @@
         "Cycle.conjectures.X9.x9_cycle_edges",
         "Packing.conjectures.X25.x25_cycle_edge_seq"
       ],
+      "66f9caf3aedbbb3d4e14ab266769f17c9489702918df59f9dcae2230efe6b50f": [
+        "Chromatic.conjectures.X170.x170_p4_edge",
+        "Hom.conjectures.U3.pth_rel"
+      ],
       "6743df6930d375b3130d033d4f36b1d88dba52ee5c52d107b4440baa0d4c832e": [
         "Chromatic.conjectures.XE2.xe2_sqrt_lower",
         "Extremal.conjectures.XE1.xe1_sqrt_floor"
@@ -386,10 +390,6 @@
         "Extremal.conjectures.XE1.xe1_complement_graph",
         "GTMisc.conjectures.X29.x29_complement"
       ],
-      "9ce5e12643bcc0c8287c6955141172983b52c66749218de7d7ae950be13cf842": [
-        "Chromatic.conjectures.X170.x170_p4_edge",
-        "Hom.conjectures.U3.pth_rel"
-      ],
       "9d43fbe99a73e654277934082dbb8bc7e73fef4287b739db225422e2109b3c09": [
         "Chromatic.conjectures.XE1.xe1_edge_count",
         "Cycle.conjectures.X5.x5_edge_count",
@@ -453,10 +453,6 @@
         "Cycle.conjectures.X9.x9_cycle_chord_count",
         "Extremal.conjectures.XE2.xe2_cycle_diagonal_count"
       ],
-      "b08ebcab654a259eea26f2cf62d6fca782a9b248318149654bc19f7b268b9221": [
-        "Packing.conjectures.X18.x18_path_rel",
-        "Packing.conjectures.X226.x226_path_rel"
-      ],
       "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5": [
         "Chromatic.conjectures.X81.x81_indegree",
         "GTMisc.conjectures.X82.x82_indegree"
@@ -477,6 +473,10 @@
         "Digraph.conjectures.X122.x122_oriented",
         "Digraph.conjectures.chi_bounded.oriented_dg",
         "Digraph.conjectures.heroes_dichotomy.oriented_dg"
+      ],
+      "c116921816aeba5536a8236132c6453339b3817b67bbb08014e34649c2c7d5b9": [
+        "Hom.conjectures.U3.path_graph",
+        "Packing.conjectures.X18.x18_path_graph"
       ],
       "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8": [
         "GTMisc.conjectures.X113.x113_ball",
@@ -7091,9 +7091,9 @@
       "signature_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "body_hash": "9ce5e12643bcc0c8287c6955141172983b52c66749218de7d7ae950be13cf842",
-      "body_shape_hash": "9ce5e12643bcc0c8287c6955141172983b52c66749218de7d7ae950be13cf842",
-      "declaration_hash": "d7e2810d16921177fcb99765663514cf851b9bd713f5700de51149631e3e1131",
+      "body_hash": "66f9caf3aedbbb3d4e14ab266769f17c9489702918df59f9dcae2230efe6b50f",
+      "body_shape_hash": "66f9caf3aedbbb3d4e14ab266769f17c9489702918df59f9dcae2230efe6b50f",
+      "declaration_hash": "5254f117b19a27e2631bcfc4f7a4883570f3f639e385dc50bf9169507f9f1919",
       "direct_consumers": [
         "Chromatic.conjectures.X170.x170_induced_oriented_P4"
       ],
@@ -7117,7 +7117,7 @@
         "Chromatic.conjectures.X170.x170_induced_oriented_P4"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 29,
       "local_dependencies": [
         "x170_oriented_P4_code"
       ],
@@ -7138,7 +7138,7 @@
         "Chromatic.conjectures.X170.x170_forb_oriented_P4_family"
       ],
       "kind": "Definition",
-      "line": 30,
+      "line": 32,
       "local_dependencies": [
         "x170_code_forward",
         "x170_oriented_P4_code",
@@ -7162,7 +7162,7 @@
         "Chromatic.conjectures.X170.oriented_P4_forb_chi_bounded_statement"
       ],
       "kind": "Definition",
-      "line": 39,
+      "line": 41,
       "local_dependencies": [
         "x170_induced_oriented_P4",
         "x170_oriented_P4_code",
@@ -7185,7 +7185,7 @@
         "Chromatic.conjectures.X170.oriented_P4_forb_chi_bounded_statement"
       ],
       "kind": "Definition",
-      "line": 44,
+      "line": 46,
       "local_dependencies": [
         "x170_oriented_graph"
       ],
@@ -44067,7 +44067,7 @@
         "Hom.conjectures.U3.pentagon_statement"
       ],
       "kind": "Definition",
-      "line": 39,
+      "line": 40,
       "local_dependencies": [],
       "name": "C5",
       "normalized_name": "C5",
@@ -44079,15 +44079,15 @@
       "signature_shape_hash": "01e1240e4406dc8ba0f954cabf85e146d1f80fd42ebaecdc5c970defb1a97749"
     },
     {
-      "body_hash": "9ce5e12643bcc0c8287c6955141172983b52c66749218de7d7ae950be13cf842",
-      "body_shape_hash": "9ce5e12643bcc0c8287c6955141172983b52c66749218de7d7ae950be13cf842",
-      "declaration_hash": "1af2e2ad5b74cb129530cf3e3c87447e80804548e8f7c96a3d8892baa02e3882",
+      "body_hash": "66f9caf3aedbbb3d4e14ab266769f17c9489702918df59f9dcae2230efe6b50f",
+      "body_shape_hash": "66f9caf3aedbbb3d4e14ab266769f17c9489702918df59f9dcae2230efe6b50f",
+      "declaration_hash": "985756c0ed65391064c0597fbf9b884e6fe76b25e3239efc6a56d603964fd279",
       "direct_consumers": [
         "Hom.conjectures.U3.pth_irrefl",
         "Hom.conjectures.U3.pth_sym"
       ],
       "kind": "Definition",
-      "line": 58,
+      "line": 63,
       "local_dependencies": [],
       "name": "pth_rel",
       "normalized_name": "pth_rel",
@@ -44102,11 +44102,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "673cda4479bb43fb38b14c44e010dafa100c6d8cae759aa43054ca652baf1cfe",
-      "direct_consumers": [
-        "Hom.conjectures.U3.path_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 60,
+      "line": 64,
       "local_dependencies": [
         "pth_rel"
       ],
@@ -44123,11 +44121,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "76559f95b4377e5efbe9b6436837de0539b4d5086bd03f6c49f419ce665f5b96",
-      "direct_consumers": [
-        "Hom.conjectures.U3.path_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 62,
+      "line": 66,
       "local_dependencies": [
         "pth_rel"
       ],
@@ -44141,18 +44137,15 @@
       "signature_shape_hash": "d71b10310ae5cdb3aea26313442b1a1b1f7193c26137a51ae0717df67c0e9536"
     },
     {
-      "body_hash": "55ee162ac62179dd2c56b1700a1f2f970fa192463b15aaccb0b96018365d1b1e",
-      "body_shape_hash": "55ee162ac62179dd2c56b1700a1f2f970fa192463b15aaccb0b96018365d1b1e",
-      "declaration_hash": "2bbb2e5b18bf1820d46a69f540522a76b8552bc2e2c25457e108618c798a5968",
+      "body_hash": "c116921816aeba5536a8236132c6453339b3817b67bbb08014e34649c2c7d5b9",
+      "body_shape_hash": "c116921816aeba5536a8236132c6453339b3817b67bbb08014e34649c2c7d5b9",
+      "declaration_hash": "513952c4d71a18eea9444d0c226c1a0f53dac5516ce494a797fca3fbaeeba35e",
       "direct_consumers": [
         "Hom.conjectures.U3.extremal_problem_on_the_number_of_tree_endomorphism_statement"
       ],
       "kind": "Definition",
-      "line": 64,
-      "local_dependencies": [
-        "pth_irrefl",
-        "pth_sym"
-      ],
+      "line": 68,
+      "local_dependencies": [],
       "name": "path_graph",
       "normalized_name": "path_graph",
       "package": "homomorphism-theory",
@@ -44170,7 +44163,7 @@
         "Hom.conjectures.U3.extremal_problem_on_the_number_of_tree_endomorphism_statement"
       ],
       "kind": "Definition",
-      "line": 66,
+      "line": 70,
       "local_dependencies": [],
       "name": "star_graph",
       "normalized_name": "star_graph",
@@ -44189,7 +44182,7 @@
         "Hom.conjectures.U3.chords_of_longest_cycles_statement"
       ],
       "kind": "Definition",
-      "line": 111,
+      "line": 115,
       "local_dependencies": [],
       "name": "longest_cycle",
       "normalized_name": "longest_cycle",
@@ -44208,7 +44201,7 @@
         "Hom.conjectures.U3.chords_of_longest_cycles_statement"
       ],
       "kind": "Definition",
-      "line": 128,
+      "line": 132,
       "local_dependencies": [],
       "name": "chord",
       "normalized_name": "chord",
@@ -44227,7 +44220,7 @@
         "Hom.conjectures.U3.pconn_set"
       ],
       "kind": "Definition",
-      "line": 178,
+      "line": 182,
       "local_dependencies": [],
       "name": "pone",
       "normalized_name": "pone",
@@ -44246,7 +44239,7 @@
         "Hom.conjectures.U3.pconn_set"
       ],
       "kind": "Definition",
-      "line": 181,
+      "line": 185,
       "local_dependencies": [],
       "name": "pinv",
       "normalized_name": "pinv",
@@ -44265,7 +44258,7 @@
         "Hom.conjectures.U3.pcayley_rel"
       ],
       "kind": "Definition",
-      "line": 182,
+      "line": 186,
       "local_dependencies": [],
       "name": "pdiff",
       "normalized_name": "pdiff",
@@ -44285,7 +44278,7 @@
         "Hom.conjectures.U3.pcayley_sym"
       ],
       "kind": "Definition",
-      "line": 183,
+      "line": 187,
       "local_dependencies": [
         "pdiff"
       ],
@@ -44306,7 +44299,7 @@
         "Hom.conjectures.U3.pcayley"
       ],
       "kind": "Lemma",
-      "line": 186,
+      "line": 190,
       "local_dependencies": [
         "pcayley_rel"
       ],
@@ -44327,7 +44320,7 @@
         "Hom.conjectures.U3.pcayley"
       ],
       "kind": "Lemma",
-      "line": 188,
+      "line": 192,
       "local_dependencies": [
         "pcayley_rel"
       ],
@@ -44348,7 +44341,7 @@
         "Hom.conjectures.U3.cores_of_cayley_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 190,
+      "line": 194,
       "local_dependencies": [
         "pcayley_irrefl",
         "pcayley_sym"
@@ -44370,7 +44363,7 @@
         "Hom.conjectures.U3.cores_of_cayley_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 191,
+      "line": 195,
       "local_dependencies": [
         "pinv",
         "pone"
@@ -44393,7 +44386,7 @@
         "Hom.conjectures.U3.cores_of_strongly_regular_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 196,
+      "line": 200,
       "local_dependencies": [],
       "name": "hom_equiv",
       "normalized_name": "hom_equiv",
@@ -44412,7 +44405,7 @@
         "Hom.conjectures.U3.strongly_regular"
       ],
       "kind": "Definition",
-      "line": 252,
+      "line": 256,
       "local_dependencies": [],
       "name": "srg",
       "normalized_name": "srg",
@@ -44431,7 +44424,7 @@
         "Hom.conjectures.U3.cores_of_strongly_regular_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 268,
+      "line": 272,
       "local_dependencies": [
         "srg"
       ],
@@ -44452,7 +44445,7 @@
         "Hom.conjectures.U3.longest_path"
       ],
       "kind": "Definition",
-      "line": 317,
+      "line": 321,
       "local_dependencies": [],
       "name": "is_path",
       "normalized_name": "is_path",
@@ -44471,7 +44464,7 @@
         "Hom.conjectures.U3.do_any_three_longest_paths_in_a_connected_graph_have_statement"
       ],
       "kind": "Definition",
-      "line": 330,
+      "line": 334,
       "local_dependencies": [
         "is_path"
       ],
@@ -44492,7 +44485,7 @@
         "Hom.conjectures.U3.endo_count"
       ],
       "kind": "Definition",
-      "line": 354,
+      "line": 358,
       "local_dependencies": [],
       "name": "hom_ffun",
       "normalized_name": "hom_ffun",
@@ -44511,7 +44504,7 @@
         "Hom.conjectures.U3.extremal_problem_on_the_number_of_tree_endomorphism_statement"
       ],
       "kind": "Definition",
-      "line": 374,
+      "line": 378,
       "local_dependencies": [
         "hom_ffun"
       ],
@@ -44532,7 +44525,7 @@
         "Hom.conjectures.U3.weak_pentagon_statement"
       ],
       "kind": "Definition",
-      "line": 403,
+      "line": 407,
       "local_dependencies": [],
       "name": "bipartite_rel",
       "normalized_name": "bipartite_rel",
@@ -51882,15 +51875,15 @@
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
-      "body_hash": "b08ebcab654a259eea26f2cf62d6fca782a9b248318149654bc19f7b268b9221",
-      "body_shape_hash": "b08ebcab654a259eea26f2cf62d6fca782a9b248318149654bc19f7b268b9221",
-      "declaration_hash": "69a7a5a4ee7b15d9b0f6bbed7cd07a2cc7c7dbd95772324d398867b5755e2529",
+      "body_hash": "74f62211f5c4e3cd2751eb41bb14fcff645d4d224695376b5a9226da2875c563",
+      "body_shape_hash": "74f62211f5c4e3cd2751eb41bb14fcff645d4d224695376b5a9226da2875c563",
+      "declaration_hash": "5d4c45ef95530af701572ef2efb132e61b357800f81b79ec9030daeb9f23f4c5",
       "direct_consumers": [
         "Packing.conjectures.X18.x18_path_irrefl",
         "Packing.conjectures.X18.x18_path_sym"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x18_path_rel",
       "normalized_name": "path_rel",
@@ -51905,11 +51898,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "df36cecc052e64a8bbb5355fb2bc6691a6a5b48fb376f31b48687b990193833f",
-      "direct_consumers": [
-        "Packing.conjectures.X18.x18_path_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 14,
+      "line": 19,
       "local_dependencies": [
         "x18_path_rel"
       ],
@@ -51926,11 +51917,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "4ddf7aededdae9b1c881d8c923d0b18cbd62a7fccd1d1e5c620a868e7c1f3259",
-      "direct_consumers": [
-        "Packing.conjectures.X18.x18_path_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 19,
+      "line": 22,
       "local_dependencies": [
         "x18_path_rel"
       ],
@@ -51944,18 +51933,15 @@
       "signature_shape_hash": "6c8dd4ae06c40c5e1157b44b16681bd0d53d6ab690135ac6610b220af35009a6"
     },
     {
-      "body_hash": "699d322c4ee6fdabf721894c70f801f35d291b3c9441c61cc639f117896be1ef",
-      "body_shape_hash": "3f0c0efa641e886910212281226e6363b0485eca445386f351f27e0ed2ec9a10",
-      "declaration_hash": "d8056c2dcaf15110c49ceecb1cbc0a3bb7aa0f3818b7b7e7707f7a0144e36a5c",
+      "body_hash": "c116921816aeba5536a8236132c6453339b3817b67bbb08014e34649c2c7d5b9",
+      "body_shape_hash": "c116921816aeba5536a8236132c6453339b3817b67bbb08014e34649c2c7d5b9",
+      "declaration_hash": "2eba101efae49cdc82b5bcab42e6383a7d2210346f7bd37c339d090d1372392b",
       "direct_consumers": [
         "Packing.conjectures.X18.path_partition_independent_set_balance_statement"
       ],
       "kind": "Definition",
-      "line": 22,
-      "local_dependencies": [
-        "x18_path_irrefl",
-        "x18_path_sym"
-      ],
+      "line": 25,
+      "local_dependencies": [],
       "name": "x18_path_graph",
       "normalized_name": "path_graph",
       "package": "packing-theory",
@@ -51973,7 +51959,7 @@
         "Packing.conjectures.X18.path_partition_independent_set_balance_statement"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 27,
       "local_dependencies": [],
       "name": "x18_vertex_partition",
       "normalized_name": "vertex_partition",
@@ -51992,7 +51978,7 @@
         "Packing.conjectures.X18.path_partition_independent_set_balance_statement"
       ],
       "kind": "Definition",
-      "line": 30,
+      "line": 32,
       "local_dependencies": [],
       "name": "x18_independent_set",
       "normalized_name": "independent_set",
@@ -52011,7 +51997,7 @@
         "Packing.conjectures.X18.knn_fair_perfect_matching_statement"
       ],
       "kind": "Definition",
-      "line": 33,
+      "line": 35,
       "local_dependencies": [],
       "name": "x18_perfect_matching",
       "normalized_name": "perfect_matching",
@@ -52030,7 +52016,7 @@
         "Packing.conjectures.X226.x226_eta_le"
       ],
       "kind": "Definition",
-      "line": 12,
+      "line": 13,
       "local_dependencies": [],
       "name": "x226_hitting_set",
       "normalized_name": "hitting_set",
@@ -52049,7 +52035,7 @@
         "Packing.conjectures.X226.x226_eta_bounded"
       ],
       "kind": "Definition",
-      "line": 31,
+      "line": 32,
       "local_dependencies": [
         "x226_hitting_set"
       ],
@@ -52072,7 +52058,7 @@
         "Packing.conjectures.X226.eta_bounded_two_stars_free_classes_statement"
       ],
       "kind": "Definition",
-      "line": 37,
+      "line": 38,
       "local_dependencies": [
         "x226_eta_le"
       ],
@@ -52086,15 +52072,15 @@
       "signature_shape_hash": "f0a8107f27fab631567a7c998294eb48cb9927e8f537ee34f52efa87aebac1c2"
     },
     {
-      "body_hash": "b08ebcab654a259eea26f2cf62d6fca782a9b248318149654bc19f7b268b9221",
-      "body_shape_hash": "b08ebcab654a259eea26f2cf62d6fca782a9b248318149654bc19f7b268b9221",
-      "declaration_hash": "afb432d4dfa0b48ec6527a73068697382e5a907c8b475ab3133904d28622cc66",
+      "body_hash": "a421eb5d1fb6277bd54366beeb1d31d015a328ecb77d3b0261731a762f493491",
+      "body_shape_hash": "a421eb5d1fb6277bd54366beeb1d31d015a328ecb77d3b0261731a762f493491",
+      "declaration_hash": "5cbe9f6654fd5e7ebe40bc27dfe55a418be7680128f5c3fbbbaa5481da2e56c0",
       "direct_consumers": [
         "Packing.conjectures.X226.x226_path_irrefl",
         "Packing.conjectures.X226.x226_path_sym"
       ],
       "kind": "Definition",
-      "line": 43,
+      "line": 44,
       "local_dependencies": [],
       "name": "x226_path_rel",
       "normalized_name": "path_rel",
@@ -52109,11 +52095,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "0b75a7439ffd52e458d00bdbbc1869cde61c3664d19d8cce6a78c1f5c00b74b9",
-      "direct_consumers": [
-        "Packing.conjectures.X226.x226_path_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 49,
+      "line": 53,
       "local_dependencies": [
         "x226_path_rel"
       ],
@@ -52130,11 +52114,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "2092dbed743ba1c6baa374a32b518e01652a12930000ac72666ffb16567f358a",
-      "direct_consumers": [
-        "Packing.conjectures.X226.x226_path_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 52,
+      "line": 56,
       "local_dependencies": [
         "x226_path_rel"
       ],
@@ -52148,18 +52130,15 @@
       "signature_shape_hash": "d55f05e2565528d1f6b4abf4d9ea59187534e098349c9c203525144392e689ab"
     },
     {
-      "body_hash": "31b16782414f2d8e7d5dbfd7777e1cf18cb16aa6709303af4a9e17c2c06dd243",
-      "body_shape_hash": "8dbd638e10480cc1185d7c37b74168b282add17c38c3634433efe5a4191c2674",
-      "declaration_hash": "0598d26868e02f544715e7cc25d4922d6a68f0b437127d9c79490e29c1d187b1",
+      "body_hash": "625465a4b3d6393e9c662d9a0baaabf49d01b6319d23b9b01b62ea05687c7fb0",
+      "body_shape_hash": "625465a4b3d6393e9c662d9a0baaabf49d01b6319d23b9b01b62ea05687c7fb0",
+      "declaration_hash": "ab8115ac9ace2bfe7eb1ba910e107a927d956e7aa5f72facb7e7f807eede470e",
       "direct_consumers": [
         "Packing.conjectures.X226.eta_bounded_path_free_classes_statement"
       ],
       "kind": "Definition",
-      "line": 55,
-      "local_dependencies": [
-        "x226_path_irrefl",
-        "x226_path_sym"
-      ],
+      "line": 59,
+      "local_dependencies": [],
       "name": "x226_path_graph",
       "normalized_name": "path_graph",
       "package": "packing-theory",
@@ -52178,7 +52157,7 @@
         "Packing.conjectures.X226.x226_star_sym"
       ],
       "kind": "Definition",
-      "line": 58,
+      "line": 61,
       "local_dependencies": [],
       "name": "x226_star_rel",
       "normalized_name": "star_rel",
@@ -52197,7 +52176,7 @@
         "Packing.conjectures.X226.x226_star"
       ],
       "kind": "Lemma",
-      "line": 63,
+      "line": 66,
       "local_dependencies": [
         "x226_star_rel"
       ],
@@ -52218,7 +52197,7 @@
         "Packing.conjectures.X226.x226_star"
       ],
       "kind": "Lemma",
-      "line": 66,
+      "line": 69,
       "local_dependencies": [
         "x226_star_rel"
       ],
@@ -52239,7 +52218,7 @@
         "Packing.conjectures.X226.eta_bounded_two_stars_free_classes_statement"
       ],
       "kind": "Definition",
-      "line": 69,
+      "line": 72,
       "local_dependencies": [
         "x226_star_irrefl",
         "x226_star_sym"
@@ -52262,7 +52241,7 @@
         "Packing.conjectures.X226.x226_is_subcube_dim_le"
       ],
       "kind": "Definition",
-      "line": 72,
+      "line": 75,
       "local_dependencies": [],
       "name": "x226_subcube",
       "normalized_name": "subcube",
@@ -52281,7 +52260,7 @@
         "Packing.conjectures.X226.x226_is_subcube_dim_le"
       ],
       "kind": "Definition",
-      "line": 82,
+      "line": 85,
       "local_dependencies": [],
       "name": "x226_subcube_dim",
       "normalized_name": "subcube_dim",
@@ -52300,7 +52279,7 @@
         "Packing.conjectures.X226.x226_subcube_partitions"
       ],
       "kind": "Definition",
-      "line": 85,
+      "line": 88,
       "local_dependencies": [
         "x226_subcube"
       ],
@@ -52321,7 +52300,7 @@
         "Packing.conjectures.X226.x226_subcube_partitions_dim_le"
       ],
       "kind": "Definition",
-      "line": 88,
+      "line": 91,
       "local_dependencies": [
         "x226_subcube",
         "x226_subcube_dim"
@@ -52344,7 +52323,7 @@
         "Packing.conjectures.X226.x226_subcube_partitions_dim_le"
       ],
       "kind": "Definition",
-      "line": 92,
+      "line": 95,
       "local_dependencies": [
         "x226_is_subcube"
       ],
@@ -52365,7 +52344,7 @@
         "Packing.conjectures.X226.x226_f_dim_le2"
       ],
       "kind": "Definition",
-      "line": 97,
+      "line": 100,
       "local_dependencies": [
         "x226_is_subcube_dim_le",
         "x226_subcube_partitions"
@@ -52387,7 +52366,7 @@
         "Packing.conjectures.X226.subcube_partition_count_ratio_subexponential_statement"
       ],
       "kind": "Definition",
-      "line": 102,
+      "line": 105,
       "local_dependencies": [
         "x226_subcube_partitions"
       ],
@@ -52408,7 +52387,7 @@
         "Packing.conjectures.X226.subcube_partition_count_ratio_subexponential_statement"
       ],
       "kind": "Definition",
-      "line": 105,
+      "line": 108,
       "local_dependencies": [
         "x226_subcube_partitions_dim_le"
       ],
