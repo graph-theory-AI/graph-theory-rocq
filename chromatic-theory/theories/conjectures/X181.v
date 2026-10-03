@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X181 -- v2 random clique-colouring constant row *)
 
 From GTBase Require Export base.
+From GTBase Require Import maximal_cliques.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -13,8 +14,7 @@ Definition x181_monochromatic
   monochromatic_on col S.
 
 Definition x181_maximal_clique (G : sgraph) (S : {set G}) : bool :=
-  [&& 1 < #|S|, cliqueb S
-    & [forall T : {set G}, (S \proper T) ==> ~~ cliqueb T]].
+  nontrivial_maximal_clique S.
 
 Definition x181_clique_colourable (G : sgraph) (k : nat) : bool :=
   [exists col : {ffun G -> 'I_k},

@@ -275,7 +275,9 @@
       "corpus": "opg"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/maximal_cliques.v#X181Legacy.x181_clique_colourable": "A18 snapshot: A18 froze this chain over its own frozen nontrivial maximal clique but kept the live x181_monochromatic of this family. Kept unchanged; the complete chain and row are Chromatic.migration.maximal_cliques.X181Original.x181_clique_colourable and Chromatic.migration.maximal_cliques.X181Original.random_graph_clique_chromatic_tight_constant_statement, certified by x181_clique_colourable_original_compat and random_graph_clique_chromatic_tight_constant_statement_original_compat, which compose this family's frozen X181Legacy.x181_monochromatic and reuse its certificate."
+  },
   "cross_module_consumers": [
     {
       "path": "graph-theory-misc/theories/conjectures/grounding_U13.v",

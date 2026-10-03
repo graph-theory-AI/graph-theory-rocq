@@ -190,18 +190,6 @@
       "path": "graph-theory-misc/theories/conjectures/U13.v",
       "name": "is_max_clique",
       "note": "a predicate on vertex sets (a clique of size omega), not the number; a separate adapter family"
-    },
-    {
-      "qualified": "Chromatic.conjectures.X181.x181_maximal_clique",
-      "path": "chromatic-theory/theories/conjectures/X181.v",
-      "name": "x181_maximal_clique",
-      "note": "inclusion-maximal Boolean clique with 1 < #|S|; not maximum cardinality"
-    },
-    {
-      "qualified": "Packing.conjectures.XE1.xe1_maximal_clique",
-      "path": "packing-theory/theories/conjectures/XE1.v",
-      "name": "xe1_maximal_clique",
-      "note": "inclusion-maximal clique predicate (empty and singleton allowed); not maximum cardinality"
     }
   ],
   "kernel_evidence": "Print Assumptions of every certificate and of the base adapter, exact types of the frozen and live helpers, chain and rows, strict dependency closures of the frozen chain and rows (current and complete), and the types of every declaration in the reverse dependency closure of X112/X124/X121 at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A16-clique-number/ (outside the repository)"

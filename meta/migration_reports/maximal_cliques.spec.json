@@ -1,0 +1,227 @@
+{
+  "family": "maximal-clique",
+  "canonical_name": "GTBase.maximal_cliques.maximal_clique",
+  "canonical_short_name": "maximal_clique",
+  "relation": "inclusion-maximal cliques: Chromatic X181 x181_maximal_clique S := [&& 1 < #|S|, cliqueb S & [forall T, (S \\proper T) ==> ~~ cliqueb T]] equals GTBase.maximal_cliques.nontrivial_maximal_clique S := (1 < #|S|) && maxset cliqueb S by the unconditional Boolean equality nontrivial_maximal_cliqueE; Packing XE1 xe1_maximal_clique K := clique K /\\ forall L, K \\proper L -> ~ clique L is reflected by maximal_cliqueP (an iff with maximal_clique K := maxset cliqueb K; no size or nonempty guard). Inclusion-maximal, not maximum cardinality (upstream maxcliques, U13 is_max_clique).",
+  "baseline_commit": "1f4e9c1dd60c2d543b08d5eb1fb18c1f24ff505a",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/maximal_cliques.v",
+    "chromatic-theory/theories/migration/maximal_cliques.v",
+    "packing-theory/theories/migration/maximal_cliques.v",
+    "chromatic-theory/theories/migration/monochromatic.v"
+  ],
+  "extra_certificates": [
+    "GTBase.maximal_cliques.maximal_cliqueP",
+    "GTBase.maximal_cliques.maximal_cliqueE",
+    "GTBase.maximal_cliques.nontrivial_maximal_cliqueE",
+    "GTBase.maximal_cliques.maximal_clique_clique",
+    "GTBase.maximal_cliques.maximal_clique_proper",
+    "GTBase.maximal_cliques.maximal_clique_exists",
+    "GTBase.maximal_cliques.nontrivial_maximal_clique_maximal",
+    "Chromatic.migration.maximal_cliques.x181_event_weight_compat",
+    "Chromatic.migration.maximal_cliques.x181_event_weight_original_compat"
+  ],
+  "summary": [
+    "Batch A, family A18 (inclusion-maximal cliques), on the fixed A17 pin 1f4e9c1 (no private union). New GTBase.maximal_cliques is a thin adapter over MathComp maxset of cliqueb: maximal_clique S := maxset cliqueb S and nontrivial_maximal_clique S := (1 < #|S|) && maximal_clique S, with maximal_cliqueP (through GraphTheory maxset_properP and cliqueP), the Boolean presentations, the clique projection, no proper clique extension and extension to a maximal clique (maxset_exists). No generic maximality infrastructure or clique predicate is added. X181's Boolean helper keeps its size guard (Boolean equality); XE1's unrestricted Prop helper is reflected (iff); no conversion or propositional extensionality is claimed. The public client separates K_0 (empty set maximal, not nontrivial), K_1 (singleton maximal, not nontrivial), K_n, nonempty edgeless graphs (exactly the singletons) and, in the disjoint K_2 + K_3, a nontrivial inclusion-maximal K_2 that is not maximum (upstream maxcliques) next to the maximum K_3.",
+    "",
+    "Frozen verbatim at 1f4e9c1: both helpers, X181's chains x181_clique_colourable (ffun colouring into 'I_k), x181_clique_chromatic_window (ordinal k, floor logarithms, natural subtraction, both window inequalities) and x181_random_graph_clique_chromatic_constant (exact G(n,1/2) weight under the positive-mass fg_whp), XE1's chains xe1_clique_transversal (its 2 <= #|K| guard outside the helper) and xe1_clique_transversal_number (attained and minimal), and the rows X181 random_graph_clique_chromatic_tight_constant_statement (partial: the documented upper-window defect is kept) and XE1 erdos_151_statement (whole greatest-guarantee hypothesis, truncated subtraction). Complete row: X181Original (texts at C8's baseline 47eed16) composes the frozen helper with C8's frozen monochromatic body through all three chains; XE1's row has no older history. Three whole-row iffs.",
+    "",
+    "History: C8's X181Legacy colourability chain keeps the live x181_maximal_clique byte-for-byte and is documented below; A18's per-row X181 colourability copy keeps C8's live x181_monochromatic and is documented reciprocally in C8's spec. A16's and A17's specs and registries drop exactly their two maximal-clique exclusions (U13 stays). The five C8 X181 certificates and every old proof keep their types. Doc blocks are unchanged."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X181.x181_maximal_clique",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_maximal_clique",
+      "frozen_path": "chromatic-theory/theories/migration/maximal_cliques.v",
+      "frozen": "Legacy.x181_maximal_clique",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.maximal_cliques.x181_maximal_clique_compat",
+      "live_unfolds_to": "nontrivial_maximal_clique S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X181.x181_clique_colourable",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_clique_colourable",
+      "frozen_path": "chromatic-theory/theories/migration/maximal_cliques.v",
+      "frozen": "X181Legacy.x181_clique_colourable",
+      "substitutions": {
+        "x181_maximal_clique": "Legacy.x181_maximal_clique"
+      },
+      "certificate": "Chromatic.migration.maximal_cliques.x181_clique_colourable_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X181.x181_clique_chromatic_window",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_clique_chromatic_window",
+      "frozen_path": "chromatic-theory/theories/migration/maximal_cliques.v",
+      "frozen": "X181Legacy.x181_clique_chromatic_window",
+      "substitutions": {
+        "x181_clique_colourable": "X181Legacy.x181_clique_colourable"
+      },
+      "certificate": "Chromatic.migration.maximal_cliques.x181_clique_chromatic_window_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X181.x181_random_graph_clique_chromatic_constant",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_random_graph_clique_chromatic_constant",
+      "frozen_path": "chromatic-theory/theories/migration/maximal_cliques.v",
+      "frozen": "X181Legacy.x181_random_graph_clique_chromatic_constant",
+      "substitutions": {
+        "x181_clique_chromatic_window": "X181Legacy.x181_clique_chromatic_window"
+      },
+      "certificate": "Chromatic.migration.maximal_cliques.x181_random_graph_clique_chromatic_constant_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X181.random_graph_clique_chromatic_tight_constant_statement",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "random_graph_clique_chromatic_tight_constant_statement",
+      "frozen_path": "chromatic-theory/theories/migration/maximal_cliques.v",
+      "frozen": "X181Legacy.random_graph_clique_chromatic_tight_constant_statement",
+      "substitutions": {
+        "x181_random_graph_clique_chromatic_constant": "X181Legacy.x181_random_graph_clique_chromatic_constant"
+      },
+      "certificate": "Chromatic.migration.maximal_cliques.random_graph_clique_chromatic_tight_constant_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X181.x181_clique_colourable",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_clique_colourable",
+      "frozen_path": "chromatic-theory/theories/migration/maximal_cliques.v",
+      "frozen": "X181Original.x181_clique_colourable",
+      "substitutions": {
+        "x181_maximal_clique": "Legacy.x181_maximal_clique",
+        "x181_monochromatic": "C8.X181Legacy.x181_monochromatic"
+      },
+      "certificate": "Chromatic.migration.maximal_cliques.x181_clique_colourable_original_compat",
+      "commit": "47eed16af2f9575575a573f3b8a93860d47e72ca"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X181.x181_clique_chromatic_window",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_clique_chromatic_window",
+      "frozen_path": "chromatic-theory/theories/migration/maximal_cliques.v",
+      "frozen": "X181Original.x181_clique_chromatic_window",
+      "substitutions": {
+        "x181_clique_colourable": "X181Original.x181_clique_colourable"
+      },
+      "certificate": "Chromatic.migration.maximal_cliques.x181_clique_chromatic_window_original_compat",
+      "commit": "47eed16af2f9575575a573f3b8a93860d47e72ca"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X181.x181_random_graph_clique_chromatic_constant",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_random_graph_clique_chromatic_constant",
+      "frozen_path": "chromatic-theory/theories/migration/maximal_cliques.v",
+      "frozen": "X181Original.x181_random_graph_clique_chromatic_constant",
+      "substitutions": {
+        "x181_clique_chromatic_window": "X181Original.x181_clique_chromatic_window"
+      },
+      "certificate": "Chromatic.migration.maximal_cliques.x181_random_graph_clique_chromatic_constant_original_compat",
+      "commit": "47eed16af2f9575575a573f3b8a93860d47e72ca"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X181.random_graph_clique_chromatic_tight_constant_statement",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "random_graph_clique_chromatic_tight_constant_statement",
+      "frozen_path": "chromatic-theory/theories/migration/maximal_cliques.v",
+      "frozen": "X181Original.random_graph_clique_chromatic_tight_constant_statement",
+      "substitutions": {
+        "x181_random_graph_clique_chromatic_constant": "X181Original.x181_random_graph_clique_chromatic_constant"
+      },
+      "certificate": "Chromatic.migration.maximal_cliques.random_graph_clique_chromatic_tight_constant_statement_original_compat",
+      "commit": "47eed16af2f9575575a573f3b8a93860d47e72ca"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.XE1.xe1_maximal_clique",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_maximal_clique",
+      "frozen_path": "packing-theory/theories/migration/maximal_cliques.v",
+      "frozen": "Legacy.xe1_maximal_clique",
+      "substitutions": {},
+      "certificate": "Packing.migration.maximal_cliques.xe1_maximal_clique_compat",
+      "live_unfolds_to": "maximal_clique K"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.XE1.xe1_clique_transversal",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_clique_transversal",
+      "frozen_path": "packing-theory/theories/migration/maximal_cliques.v",
+      "frozen": "XE1Legacy.xe1_clique_transversal",
+      "substitutions": {
+        "xe1_maximal_clique": "Legacy.xe1_maximal_clique"
+      },
+      "certificate": "Packing.migration.maximal_cliques.xe1_clique_transversal_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.XE1.xe1_clique_transversal_number",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_clique_transversal_number",
+      "frozen_path": "packing-theory/theories/migration/maximal_cliques.v",
+      "frozen": "XE1Legacy.xe1_clique_transversal_number",
+      "substitutions": {
+        "xe1_clique_transversal": "XE1Legacy.xe1_clique_transversal"
+      },
+      "certificate": "Packing.migration.maximal_cliques.xe1_clique_transversal_number_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.XE1.erdos_151_statement",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "erdos_151_statement",
+      "frozen_path": "packing-theory/theories/migration/maximal_cliques.v",
+      "frozen": "XE1Legacy.erdos_151_statement",
+      "substitutions": {
+        "xe1_clique_transversal_number": "XE1Legacy.xe1_clique_transversal_number"
+      },
+      "certificate": "Packing.migration.maximal_cliques.erdos_151_statement_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X181.x181_monochromatic",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_monochromatic",
+      "commit": "47eed16af2f9575575a573f3b8a93860d47e72ca",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X181Legacy.x181_monochromatic",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.monochromatic.x181_monochromatic_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/monochromatic.v#X181Legacy.x181_clique_colourable": "C8 per-row snapshot: C8 froze this chain over its own frozen monochromatic body but kept the live x181_maximal_clique (after A18 GTBase.maximal_cliques.nontrivial_maximal_clique S, equal to the old Boolean body by nontrivial_maximal_cliqueE). Kept unchanged, as are C8's window, constant and row copies that reach it through this chain; the complete chain and row are Chromatic.migration.maximal_cliques.X181Original.x181_clique_colourable and Chromatic.migration.maximal_cliques.X181Original.random_graph_clique_chromatic_tight_constant_statement, certified by x181_clique_colourable_original_compat and random_graph_clique_chromatic_tight_constant_statement_original_compat, which reuse C8's colourability certificate."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.U13.is_max_clique",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "is_max_clique",
+      "note": "maximum-cardinality clique (size omega), membership of upstream maxcliques; not inclusion-maximality"
+    },
+    {
+      "qualified": "Hypergraph.conjectures.XE2.xe2_maximal_hyperclique",
+      "path": "hypergraph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_maximal_hyperclique",
+      "note": "maximal sets all of whose triples are hyperedges of a supplied family on a finite type, not adjacency in an sgraph"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and GTBase.maximal_cliques API theorem, exact types of the frozen and live helpers, chains and rows, strict dependency closures of the frozen chains and rows (current and complete), and the types of every declaration in the reverse dependency closure of X181/XE1 at the baseline (including the five C8 X181 certificates), through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A18-maximal-cliques/ (outside the repository)"
+}
