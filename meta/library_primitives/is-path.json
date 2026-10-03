@@ -17,15 +17,21 @@
     "relation": "two separate representations, each definitional: Hom U3 is_path is GTBase.walks_paths.seq_simple_walk s (uniq s && sorted (--) s, empty true); Cycle U6 is_path is Cycle.foundations.path_subgraphs.path_subgraph P (nonempty, connected, acyclic edge set of arc-end degree at most two)",
     "semantic_classes": {
       "sequence-empty-allowed": {
+        "members": [
+          "Hom.conjectures.U3.is_path"
+        ],
         "count": 1,
         "verdict": "equivalent",
-        "certificate": "GTBase.walks_paths.seq_simple_walk_path",
+        "certificate": "Hom.migration.is_path.u3_is_path_compat",
         "note": "Hom U3 is_path: boolean uniq s && (if s is x :: p then path (--) x p else true), the body of seq_simple_walk s (MathComp sorted), convertible; the empty sequence is a simple walk, so it differs from family simple-path's seq_simple_path exactly on [::] (seq_simple_path_walk, seq_simple_walk_path)."
       },
       "multigraph-edge-set": {
+        "members": [
+          "Cycle.conjectures.U6.is_path"
+        ],
         "count": 1,
         "verdict": "equivalent",
-        "certificate": "Cycle.foundations.path_subgraphs.path_subgraph_edge",
+        "certificate": "Cycle.migration.is_path.u6_is_path_compat",
         "note": "Cycle U6 is_path: [/\\ P != set0, subgraph_connected P, acyclic P & forall v, subdeg P v <= 2] on a multigraph edge set, the body of Cycle.foundations.path_subgraphs.path_subgraph P over acyclic_edge_set (U6's acyclic body), convertible; loops and parallel edges keep their behaviour and no looplessness or simplicity premise is added."
       }
     },
