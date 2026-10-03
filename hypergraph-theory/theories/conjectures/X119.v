@@ -2,6 +2,7 @@
 
 From GTBase Require Export base.
 From GTBase Require Import hypergraph_uniformity.
+Require Hypergraph.foundations.hypergraph_copies.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -25,10 +26,7 @@ Definition x119_image_edge
 Definition x119_monochromatic_copy
     (T : finType) (E : {set {set T}}) (N q : nat)
     (col : {set 'I_N} -> 'I_q) : Prop :=
-  exists (colour : 'I_q) (f : T -> 'I_N),
-    injective f /\
-    forall e : {set T},
-      e \in E -> col (x119_image_edge f e) = colour.
+  Hypergraph.foundations.hypergraph_copies.hg_mono_copy E col.
 
 (** [N] vertices force a monochromatic copy under every [q]-colouring of the
     3-subsets of the host. *)

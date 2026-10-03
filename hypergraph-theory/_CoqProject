@@ -3,7 +3,9 @@
 -arg -w -arg -notation-overridden
 
 theories/foundations/hypergraph.v
+theories/foundations/hypergraph_copies.v
 theories/examples/supplied_partitions.v
+theories/examples/monochromatic_copies.v
 
 theories/conjectures/U12.v
 theories/conjectures/grounding_U12.v
@@ -33,3 +35,4 @@ theories/migration/incidence_degree.v
 theories/migration/uniform_hypergraph.v
 theories/migration/partite_uniform.v
 theories/migration/image_edge.v
+theories/migration/monochromatic_copy.v

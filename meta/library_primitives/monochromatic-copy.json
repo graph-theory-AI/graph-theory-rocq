@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "family": "monochromatic-copy",
+  "primitive": {
+    "canonical_name": "Hypergraph.foundations.hypergraph_copies.hg_mono_copy",
+    "owner": "hypergraph-theory",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "monochromatic_copy"
+    ],
+    "source_definitions": [
+      "Hypergraph.conjectures.X108.x108_monochromatic_copy",
+      "Hypergraph.conjectures.X117.x117_monochromatic_copy",
+      "Hypergraph.conjectures.X119.x119_monochromatic_copy"
+    ],
+    "consumers_remaining": 3,
+    "relation": "Monochromatic copy of a supplied pattern: for E : {set {set T}} and a colouring col : {set U} -> C of ALL subsets of a finite host U, some colour c and some injection f : T -> U of the whole pattern carrier (isolated vertices included) give col (f @: e) = c for every member e. For an eqType palette it is containment (hg_containsb) of the pattern in one colour class [set e | col e == c]. No uniformity, rank, nonempty family/carrier, positive palette or no-isolated premise; a colouring into the empty palette I_0 cannot exist (set0), so q = 0 forcing stays vacuous as written. Forcing, Ramsey minimality, C8 constancy on a supplied set and the Extremal graph copies (X4, XE1, edge_colourings.mono_copy) are separate.",
+    "semantic_classes": {
+      "bool-palette": {
+        "members": [
+          "Hypergraph.conjectures.X108.x108_monochromatic_copy",
+          "Hypergraph.conjectures.X117.x117_monochromatic_copy"
+        ],
+        "count": 2,
+        "verdict": "equivalent (same term)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.monochromatic_copy.x108_monochromatic_copy_compat",
+          "Hypergraph.migration.monochromatic_copy.x117_monochromatic_copy_compat"
+        ],
+        "note": "Host I_N, palette bool; both aliases are the same term, so x117_monochromatic_copyE stays a conversion."
+      },
+      "ordinal-palette": {
+        "members": [
+          "Hypergraph.conjectures.X119.x119_monochromatic_copy"
+        ],
+        "count": 1,
+        "verdict": "equivalent (same term)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.monochromatic_copy.x119_monochromatic_copy_compat"
+        ],
+        "note": "Host I_N, palette I_q with the N q argument order."
+      }
+    },
+    "compatibility_theorems": [
+      "Hypergraph.migration.monochromatic_copy.x108_monochromatic_copy_compat",
+      "Hypergraph.migration.monochromatic_copy.x108_two_colour_ramsey_at_most_compat",
+      "Hypergraph.migration.monochromatic_copy.three_uniform_degenerate_hypergraph_ramsey_linear_statement_compat",
+      "Hypergraph.migration.monochromatic_copy.x117_monochromatic_copy_compat",
+      "Hypergraph.migration.monochromatic_copy.x117_forces_mono_compat",
+      "Hypergraph.migration.monochromatic_copy.x117_ramsey_number_compat",
+      "Hypergraph.migration.monochromatic_copy.conlon_fox_rodl_hedgehog_ramsey_statement_compat",
+      "Hypergraph.migration.monochromatic_copy.x119_monochromatic_copy_compat",
+      "Hypergraph.migration.monochromatic_copy.x119_forces_mono_compat",
+      "Hypergraph.migration.monochromatic_copy.x119_ramsey_number_compat",
+      "Hypergraph.migration.monochromatic_copy.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_compat"
+    ],
+    "api_theorems": [
+      "Hypergraph.foundations.hypergraph_copies.hg_mono_copy0",
+      "Hypergraph.foundations.hypergraph_copies.hg_mono_copy_card",
+      "Hypergraph.foundations.hypergraph_copies.hg_mono_copyS",
+      "Hypergraph.foundations.hypergraph_copies.hg_mono_copy_const",
+      "Hypergraph.foundations.hypergraph_copies.hg_mono_copy_map",
+      "Hypergraph.foundations.hypergraph_copies.hg_mono_copy_mapK",
+      "Hypergraph.foundations.hypergraph_copies.hg_mono_copyP"
+    ],
+    "public_client": "hypergraph-theory/theories/examples/monochromatic_copies.v",
+    "legacy_baseline": "598d668fa9225c8271852c856ce3990c7fa7890e",
+    "migration_report": "meta/migration_reports/monochromatic_copy.md",
+    "migration_spec": "meta/migration_reports/monochromatic_copy.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D4.md",
+    "foundation_fidelity": "meta/foundation_fidelity/monochromatic-copy.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core modules",
+        "mathcomp.boot.finset",
+        "mathcomp.boot.finfun",
+        "Hypergraph.foundations.hypergraph",
+        "GTBase.monochromatic",
+        "Extremal.foundations.edge_colourings"
+      ],
+      "result": "new-area-primitive",
+      "candidate": "Hypergraph.foundations.hypergraph.hg_containsb",
+      "note": "No coloured hypergraph copy upstream. The new view is a coloured extension of the existing containment hg_containsb: for an eqType palette it is containment in one colour class (hg_mono_copyP, through finfun/injectivity reflection and eq_imset). The view is kept because the corpus supplies the colouring of all host subsets, chooses the colour existentially and needs the injection as data. Hypergraph is the only consumer area.",
+      "audited_at": "2026-10-03"
+    }
+  }
+}
