@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "family": "pathwidth",
+  "modules": {
+    "GTBase.pathwidth": {
+      "path": "base/theories/pathwidth.v",
+      "overrides": {
+        "pathwidth_at_most": {
+          "verdict": "FAITHFUL",
+          "note": "Unconditional conversion of the same existential supplied-index pathwidth bound: T:sgraph, bag:T->{set G}, path_tree T, bag_decomposition bag, and every bag cardinality <= k.+1. No nonempty index, ordinal representation or attained minimum."
+        }
+      },
+      "machine_evidence": [
+        "pathwidth_at_mostI",
+        "pathwidth_at_most_witness",
+        "pathwidth_at_mostW",
+        "pathwidth_at_most_card",
+        "pathwidth_at_most0_edgeless",
+        "pathwidth_at_most_K0",
+        "pathwidth_at_most_K1",
+        "pathwidth_at_most_K2",
+        "not_pathwidth_at_most_K2_0"
+      ]
+    }
+  }
+}

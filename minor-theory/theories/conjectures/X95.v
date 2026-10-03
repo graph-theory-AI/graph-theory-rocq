@@ -1,6 +1,7 @@
 (** * Minor.conjectures.X95 -- v2 subgraph-indexed tree-decomposition row *)
 
 From GTBase Require Export base.
+From GTBase Require Import pathwidth.
 From GTBase Require Import path_trees.
 From Minor.conjectures Require Import X27.
 
@@ -13,11 +14,7 @@ Unset Printing Implicit Defensive.
 Definition x95_path_index_graph (T : sgraph) : Prop :=
   path_tree T.
 
-Definition x95_pathwidth_at_most (G : sgraph) (k : nat) : Prop :=
-  exists (T : sgraph) (bag : T -> {set G}),
-    x95_path_index_graph T /\
-    x27_tree_decomposition bag /\
-    forall t : T, #|bag t| <= k.+1.
+Definition x95_pathwidth_at_most (G : sgraph) (k : nat) : Prop := pathwidth_at_most G k.
 
 Definition x95_index_tree_subgraph (T G : sgraph) : Prop :=
   exists f : T -> G,

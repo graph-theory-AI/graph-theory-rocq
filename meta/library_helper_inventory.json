@@ -55,10 +55,6 @@
         "Minor.conjectures.X67.x67_path_vertices",
         "Packing.conjectures.X26.x26_path_vertices"
       ],
-      "11552bbba7a2af7a48278674ce65a2d54434516da177ce599d148d006b9dadde": [
-        "Chromatic.conjectures.X126.x126_pathwidth_at_most",
-        "Minor.conjectures.X95.x95_pathwidth_at_most"
-      ],
       "1162fc0caac395632de4b5c300334854d778db72de18543e5ee36c644709e6c2": [
         "Chromatic.conjectures.X132.x132_triangle_free",
         "Chromatic.conjectures.X187.x187_triangle_free",
@@ -194,6 +190,10 @@
       "4fba27e7b834b1c5466f07348f14ff1e2b41bef116808121d3fcd9c6f3afde15": [
         "Extremal.conjectures.XE1.xe1_tree",
         "Packing.conjectures.XE1.xe1_tree"
+      ],
+      "54c77ba77ee03349b9a4660756af0331cacf26a9fadff2cbbfd1a2c2ee71be5a": [
+        "Chromatic.conjectures.X126.x126_pathwidth_at_most",
+        "Minor.conjectures.X95.x95_pathwidth_at_most"
       ],
       "56501c3ad9fa41f9eed4b94da49f11e929de90da6d61fd67360d8c50660c4379": [
         "Chromatic.conjectures.X3.x3_consecutive_in_cycle",
@@ -5718,7 +5718,7 @@
         "Chromatic.conjectures.X126.x126_nonrepetitive"
       ],
       "kind": "Definition",
-      "line": 10,
+      "line": 11,
       "local_dependencies": [],
       "name": "x126_genuine_path",
       "normalized_name": "genuine_path",
@@ -5737,7 +5737,7 @@
         "Chromatic.conjectures.X126.x126_nonrepetitive_list_colouring"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 17,
       "local_dependencies": [
         "x126_genuine_path"
       ],
@@ -5758,7 +5758,7 @@
         "Chromatic.conjectures.X126.x126_thue_choosable"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 28,
       "local_dependencies": [
         "x126_nonrepetitive"
       ],
@@ -5780,7 +5780,7 @@
         "Chromatic.conjectures.X126.x126_is_thue_choice_number"
       ],
       "kind": "Definition",
-      "line": 34,
+      "line": 35,
       "local_dependencies": [
         "x126_nonrepetitive_list_colouring"
       ],
@@ -5799,7 +5799,7 @@
       "declaration_hash": "3f82408534e7b9a45b34c07cb4d069b1af1ad6d14ed581ad1776d274f96133c0",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 42,
+      "line": 43,
       "local_dependencies": [
         "x126_thue_choosable"
       ],
@@ -5816,11 +5816,9 @@
       "body_hash": "d5328a7d4da05c5b7ffa485c30d760130c46ca87a86542742b11eafa341d3a0a",
       "body_shape_hash": "d5328a7d4da05c5b7ffa485c30d760130c46ca87a86542742b11eafa341d3a0a",
       "declaration_hash": "98e435e26195f59ae20d609115cd7c19b90e9053ba1550218c566465fc5acccf",
-      "direct_consumers": [
-        "Chromatic.conjectures.X126.x126_pathwidth_at_most"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 49,
+      "line": 50,
       "local_dependencies": [],
       "name": "x126_tree_decomposition",
       "normalized_name": "tree_decomposition",
@@ -5835,11 +5833,9 @@
       "body_hash": "7e600d6277106887bb199e9ed675d89f84f8f34708225cc936985ae7621eaeb0",
       "body_shape_hash": "7e600d6277106887bb199e9ed675d89f84f8f34708225cc936985ae7621eaeb0",
       "declaration_hash": "6bfb5ebf4df17d115aee4ecd1bf33d899e5e540fa5f18b634b1cad3d87fc51f0",
-      "direct_consumers": [
-        "Chromatic.conjectures.X126.x126_pathwidth_at_most"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 57,
+      "line": 58,
       "local_dependencies": [],
       "name": "x126_path_index_graph",
       "normalized_name": "path_index_graph",
@@ -5851,18 +5847,15 @@
       "signature_shape_hash": "5ac3feec2059466340f9e731e6cc13c1d73f1524b2fb93a7360f73da8518a68f"
     },
     {
-      "body_hash": "d24097e2f222ab7c4883acf902f4f5186e8357eed122076108f82663b3b5b568",
-      "body_shape_hash": "11552bbba7a2af7a48278674ce65a2d54434516da177ce599d148d006b9dadde",
-      "declaration_hash": "6e97562bff5f00ee38d10b8bd092660b889ce0db9a6d348c83dfc07e35f4c9c1",
+      "body_hash": "54c77ba77ee03349b9a4660756af0331cacf26a9fadff2cbbfd1a2c2ee71be5a",
+      "body_shape_hash": "54c77ba77ee03349b9a4660756af0331cacf26a9fadff2cbbfd1a2c2ee71be5a",
+      "declaration_hash": "1830086f4816faa7be2f7491b82954ef7e8ac60b9adc7869939678ac09663f40",
       "direct_consumers": [
         "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement"
       ],
       "kind": "Definition",
-      "line": 60,
-      "local_dependencies": [
-        "x126_path_index_graph",
-        "x126_tree_decomposition"
-      ],
+      "line": 61,
+      "local_dependencies": [],
       "name": "x126_pathwidth_at_most",
       "normalized_name": "pathwidth_at_most",
       "package": "chromatic-theory",
@@ -50359,11 +50352,9 @@
       "body_hash": "7e600d6277106887bb199e9ed675d89f84f8f34708225cc936985ae7621eaeb0",
       "body_shape_hash": "7e600d6277106887bb199e9ed675d89f84f8f34708225cc936985ae7621eaeb0",
       "declaration_hash": "7aee2d6d48e8b830adee39aed4a522d7de4aac5cbd7ec06a53461f94f4127291",
-      "direct_consumers": [
-        "Minor.conjectures.X95.x95_pathwidth_at_most"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 10,
+      "line": 11,
       "local_dependencies": [],
       "name": "x95_path_index_graph",
       "normalized_name": "path_index_graph",
@@ -50375,17 +50366,15 @@
       "signature_shape_hash": "5ac3feec2059466340f9e731e6cc13c1d73f1524b2fb93a7360f73da8518a68f"
     },
     {
-      "body_hash": "2b0dea6766e6f33052653a204cff931b12b7742bf2910dc5b2879197207081b0",
-      "body_shape_hash": "11552bbba7a2af7a48278674ce65a2d54434516da177ce599d148d006b9dadde",
-      "declaration_hash": "abedb82827854fb654bbe907a82db12792c17983f0c639e46d624235e0ebe238",
+      "body_hash": "54c77ba77ee03349b9a4660756af0331cacf26a9fadff2cbbfd1a2c2ee71be5a",
+      "body_shape_hash": "54c77ba77ee03349b9a4660756af0331cacf26a9fadff2cbbfd1a2c2ee71be5a",
+      "declaration_hash": "8d01f843c18d3f133bcacd4bc2d946f6e934fdf2c86ac502e67cf18aafd5781c",
       "direct_consumers": [
         "Minor.conjectures.X95.subgraph_indexed_tree_decomposition_pathwidth_bound_statement"
       ],
       "kind": "Definition",
-      "line": 15,
-      "local_dependencies": [
-        "x95_path_index_graph"
-      ],
+      "line": 16,
+      "local_dependencies": [],
       "name": "x95_pathwidth_at_most",
       "normalized_name": "pathwidth_at_most",
       "package": "minor-theory",
@@ -50403,7 +50392,7 @@
         "Minor.conjectures.X95.x95_subgraph_indexed_tree_decomposition_width_at_most"
       ],
       "kind": "Definition",
-      "line": 21,
+      "line": 18,
       "local_dependencies": [],
       "name": "x95_index_tree_subgraph",
       "normalized_name": "index_tree_subgraph",
@@ -50422,7 +50411,7 @@
         "Minor.conjectures.X95.subgraph_indexed_tree_decomposition_pathwidth_bound_statement"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 22,
       "local_dependencies": [
         "x95_index_tree_subgraph"
       ],
