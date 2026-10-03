@@ -1,0 +1,232 @@
+{
+  "family": "longest-cycle",
+  "canonical_name": "GTBase.walks_paths.seq_longest_cycle",
+  "canonical_short_name": "seq_longest_cycle",
+  "relation": "one contract, three presentations: X212 x212_longest_cycle is GTBase.walks_paths.seq_longest_cycle (--) c (the Boolean genuine-cycle maximum, by conversion); X10 x10_longest_cycle is its nested view with curried competitor premises (seq_longest_cycle_nestedE, a proved iff); Hom U3 longest_cycle is its and3 view over ALL ucycle competitors (seq_longest_cycle_ucycleE, a proved iff through the size split: a competitor with at most two entries is never longer than a genuine cycle). No symmetry, looplessness or inhabitance premise; no propositional extensionality.",
+  "baseline_commit": "c52825404e519998716b02ccb40f73cfc604dc56",
+  "namespaces": {
+    "base": "GTBase",
+    "cycle-theory": "Cycle",
+    "homomorphism-theory": "Hom"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "cycle-theory/theories/migration/longest_cycle.v",
+    "homomorphism-theory/theories/migration/longest_cycle.v",
+    "cycle-theory/theories/migration/cycle_vertices.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.seq_longest_cycleE",
+    "GTBase.walks_paths.seq_longest_cycle_nestedE",
+    "GTBase.walks_paths.seq_longest_cycle_ucycleE",
+    "GTBase.walks_paths.seq_longest_cycle_cycleb",
+    "GTBase.walks_paths.seq_longest_cycle_cycle",
+    "GTBase.walks_paths.seq_longest_cycle_ucycle",
+    "GTBase.walks_paths.seq_longest_cycle_uniq",
+    "GTBase.walks_paths.seq_longest_cycle_size",
+    "GTBase.walks_paths.seq_longest_cycle_max",
+    "GTBase.walks_paths.seq_longest_cycle_max_ucycle",
+    "GTBase.walks_paths.seq_longest_cycle_nil",
+    "GTBase.walks_paths.seq_longest_cycle_seq1",
+    "GTBase.walks_paths.seq_longest_cycle_pair",
+    "GTBase.walks_paths.seq_longest_cycle_none",
+    "GTBase.walks_paths.seq_longest_cycle_size_eq",
+    "GTBase.walks_paths.seq_longest_cycle_tie",
+    "GTBase.walks_paths.seq_longest_cycle_rot",
+    "GTBase.walks_paths.seq_longest_cycle_rotr",
+    "GTBase.walks_paths.seq_longest_cycle_rev_converse",
+    "GTBase.walks_paths.seq_longest_cycle_rev",
+    "GTBase.walks_paths.seq_longest_cycle_card",
+    "GTBase.walks_paths.seq_longest_cycle_exists",
+    "GTBase.walks_paths.seq_longest_cycle_existsP",
+    "GTBase.walks_paths.seq_longest_cycle_ground_K3",
+    "GTBase.walks_paths.seq_longest_cycle_ground_K4_triangle",
+    "GTBase.walks_paths.seq_longest_cycle_ground_K2"
+  ],
+  "summary": [
+    "Batch B, family B13 (longest genuine undirected cycles): three helpers now unfold to `GTBase.walks_paths.seq_longest_cycle (--) c`, a genuine cycle (B10's `seq_cycleb`: more than two pairwise distinct entries, consecutive entries and the closing pair related) that no genuine cycle of the relation exceeds in length. The maximum is taken over the whole graph (length maximality, not inclusion maximality), with no symmetry, looplessness or inhabitance premise.",
+    "- Cycle X212 `x212_longest_cycle` (Boolean cycle and maximality) is the canonical body, by conversion, so B10's frozen X212 certificates and B12's X212 Original still hold by `iff_refl`.",
+    "- Cycle X10 `x10_longest_cycle` (nested `ucycle` / size / curried competitor premises) is its nested view, through `seq_longest_cycle_nestedE`, a proved iff.",
+    "- Hom U3 `longest_cycle` (`and3` over ALL `ucycle` competitors) is its `and3` view, through `seq_longest_cycle_ucycleE`, a proved iff via the size split: a competitor with at most two entries is never longer than a genuine cycle. No propositional extensionality is used.",
+    "API: the Prop, nested and `and3` views; projections and maximum bounds against genuine cycles and every `ucycle`; degenerate rejections and no witness without a genuine cycle; ties; rotation; reversal (converse relation, or the same relation under the hypothesis `symmetric r`); and on finite carriers the length bound and existence exactly when a genuine cycle exists. Groundings: the K3 triangle is longest in both orientations, a K4 triangle is genuine but not longest, and K2 has no longest cycle. Public client base/theories/examples/longest_cycle.v.",
+    "",
+    "Three rows, no intermediate, frozen with this family's helpers only: Cycle X10 and X212 (the two Smith rows; 2 <= k connectivity and the intersection bound unchanged) and Hom U3 `chords_of_longest_cycles_statement` (the 3-connectivity guard and the chord definition unchanged). Statuses, legs and the Smith cross-corpus edge are unchanged. Proof consumers:",
+    "- `implications_X212.x212_longest_cycleE` keeps its type and is now `iff_refl`; the Smith equivalence compiles unchanged;",
+    "- `grounding_X212.x212_longest_cycle_c3` compiles unchanged;",
+    "- Hom `grounding_U3` `longest_cycle_ucycle`, `longest_cycle_size` and `longest_cycle_max` keep their types; their proofs destruct the `and3` view.",
+    "",
+    "History (complete rows; every earlier frozen body, array, type and note unchanged):",
+    "- `X10Original` (B12+B13) composes B12's frozen support with this family's frozen pre-B13 longest body.",
+    "- X212's complete row is B12's `Cycle.migration.cycle_vertices.X212Original` (B10+B12): it freezes B10's pre-B10 cycle and longest body and B12's support, so it reaches no live B10, B12 or B13 helper. It is reused unchanged, with its certificate restated here.",
+    "- The B12 per-row X10 and X212 Smith snapshots still call the live longest helpers and are documented reciprocally.",
+    "- B10's X212 Smith snapshot matches the report's text scan only through the name `longest_cycle`, which there is B10's own frozen copy; the kernel evidence confirms this.",
+    "",
+    "Kernel evidence, independent of this textual report, from `Print All Dependencies`:",
+    "- no frozen row or Original reaches a live helper of this family or `seq_longest_cycle`;",
+    "- the Originals also reach no live B10 or B12 helper or canonical;",
+    "- current per-row frozen copies intentionally retain baseline dependencies bypassed by the new live aliases: upstream path.ucycle for X10/Hom and X212.x212_cycle for X212. They exclude live B13 helpers and seq_longest_cycle; the complete Originals additionally exclude live B10/B12 helpers and canonicals;",
+    "- each live row reaches `seq_longest_cycle` and its alias.",
+    "Summary: /srv/graph-theory-rocq/coordination/evidence/B13-longest_cycle/print_all_dependencies_summary.txt.",
+    "",
+    "Baseline c528254 is the announced B12 pin (over B11 13c00aa), not yet integrated; B13 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). B10's genuine_cycle spec listed Hom's `longest_cycle` as an untouched distinct variant; it now records that B13 migrated it. Digraph X2 `longest_dicycle` stays a distinct candidate."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X10.x10_longest_cycle",
+      "path": "cycle-theory/theories/conjectures/X10.v",
+      "name": "x10_longest_cycle",
+      "frozen_path": "cycle-theory/theories/migration/longest_cycle.v",
+      "frozen": "Legacy.x10_longest_cycle",
+      "substitutions": {},
+      "certificate": "Cycle.migration.longest_cycle.x10_longest_cycle_compat",
+      "live_unfolds_to": "seq_longest_cycle (--) c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X212.x212_longest_cycle",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_longest_cycle",
+      "frozen_path": "cycle-theory/theories/migration/longest_cycle.v",
+      "frozen": "Legacy.x212_longest_cycle",
+      "substitutions": {},
+      "certificate": "Cycle.migration.longest_cycle.x212_longest_cycle_compat",
+      "live_unfolds_to": "seq_longest_cycle (--) c"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X10.smith_longest_cycles_r_connected_statement",
+      "path": "cycle-theory/theories/conjectures/X10.v",
+      "name": "smith_longest_cycles_r_connected_statement",
+      "frozen_path": "cycle-theory/theories/migration/longest_cycle.v",
+      "frozen": "X10Legacy.smith_longest_cycles_r_connected_statement",
+      "substitutions": {
+        "x10_longest_cycle": "Legacy.x10_longest_cycle"
+      },
+      "certificate": "Cycle.migration.longest_cycle.smith_longest_cycles_r_connected_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.longest_cycle.smith_longest_cycles_r_connected_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.X10.smith_longest_cycles_r_connected_statement",
+      "path": "cycle-theory/theories/conjectures/X10.v",
+      "name": "smith_longest_cycles_r_connected_statement",
+      "frozen_path": "cycle-theory/theories/migration/longest_cycle.v",
+      "frozen": "X10Original.smith_longest_cycles_r_connected_statement",
+      "substitutions": {
+        "x10_cycle_vertices": "B12.Legacy.x10_cycle_vertices",
+        "x10_longest_cycle": "Legacy.x10_longest_cycle"
+      },
+      "certificate": "Cycle.migration.longest_cycle.smith_longest_cycles_r_connected_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X212.smith_two_longest_cycles_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "frozen_path": "cycle-theory/theories/migration/longest_cycle.v",
+      "frozen": "X212Legacy.smith_two_longest_cycles_statement",
+      "substitutions": {
+        "x212_longest_cycle": "Legacy.x212_longest_cycle"
+      },
+      "certificate": "Cycle.migration.longest_cycle.smith_two_longest_cycles_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.longest_cycle.smith_two_longest_cycles_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.X212.smith_two_longest_cycles_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X212Original.smith_two_longest_cycles_statement",
+      "substitutions": {
+        "x212_cycle_vertices": "Legacy.x212_cycle_vertices",
+        "x212_longest_cycle": "B10.X212Legacy.longest_cycle"
+      },
+      "certificate": "Cycle.migration.longest_cycle.smith_two_longest_cycles_statement_original_compat",
+      "note": "B12's complete B10+B12 Original (Cycle.migration.cycle_vertices.X212Original), reused unchanged: it freezes the pre-B10 Boolean cycle and longest-cycle body (B10's X212Legacy.longest_cycle) and the pre-B12 raw support, so the row reaches no live B10, B12 or B13 helper; B13 restates its certificate"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hom.conjectures.U3.longest_cycle",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "longest_cycle",
+      "frozen_path": "homomorphism-theory/theories/migration/longest_cycle.v",
+      "frozen": "Legacy.longest_cycle",
+      "substitutions": {},
+      "certificate": "Hom.migration.longest_cycle.longest_cycle_compat",
+      "live_unfolds_to": "seq_longest_cycle (--) c"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hom.conjectures.U3.chords_of_longest_cycles_statement",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "chords_of_longest_cycles_statement",
+      "frozen_path": "homomorphism-theory/theories/migration/longest_cycle.v",
+      "frozen": "U3Legacy.chords_of_longest_cycles_statement",
+      "substitutions": {
+        "longest_cycle": "Legacy.longest_cycle"
+      },
+      "certificate": "Hom.migration.longest_cycle.chords_of_longest_cycles_statement_compat",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {
+    "cycle-theory/theories/migration/cycle_vertices.v#X10Legacy.smith_longest_cycles_r_connected_statement": "B12 per-row snapshot: family cycle-vertices (B12) froze only its support in X10's Smith row, so this copy still calls the live x10_longest_cycle, which after B13 unfolds to seq_longest_cycle (equal to the old nested body by seq_longest_cycle_nestedE). Kept unchanged; B12's smith_longest_cycles_r_connected_statement_compat stays true. The complete pre-B12, pre-B13 row is Cycle.migration.longest_cycle.X10Original.smith_longest_cycles_r_connected_statement, certified by smith_longest_cycles_r_connected_statement_original_compat.",
+    "cycle-theory/theories/migration/cycle_vertices.v#X212Legacy.smith_two_longest_cycles_statement": "B12 per-row snapshot: B12 froze only its support in X212's Smith row, so this copy still calls the live x212_longest_cycle, which after B13 unfolds to seq_longest_cycle (the same Boolean body, convertible). Kept unchanged. The complete row is B12's own Cycle.migration.cycle_vertices.X212Original.smith_two_longest_cycles_statement (B10's frozen pre-B10 cycle and longest body, B12's frozen support), reused by B13 and certified by Cycle.migration.longest_cycle.smith_two_longest_cycles_statement_original_compat.",
+    "cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.smith_two_longest_cycles_statement": "Textual name match only: the bare longest_cycle in this B10 body is B10's own frozen X212Legacy.longest_cycle (same module, the pre-B10 Boolean cycle and maximality), not Hom U3's live longest_cycle, which this cycle-theory module does not import. Its kernel closure reaches no live B13 helper. The row's live x212_cycle_vertices is B12's and is documented in the cycle_vertices spec."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_longest_cycle",
+      "note": "Proof consumer x212_longest_cycle_c3 (the triangle of K_3 is a longest cycle); compiles unchanged through the convertible alias; type unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "note": "Axiom audit (Print Assumptions) of the X212 Smith row; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_X212.v",
+      "name": "x10_longest_cycle",
+      "note": "x212_longest_cycleE (x212_longest_cycle c <-> x10_longest_cycle c): type unchanged; both helpers now unfold to seq_longest_cycle (--) c, so its proof is now iff_refl (proof-only change)."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_X212.v",
+      "name": "x212_longest_cycle",
+      "note": "Same bridge x212_longest_cycleE (X212 side); type unchanged, proof now iff_refl."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_X212.v",
+      "name": "smith_longest_cycles_r_connected_statement",
+      "note": "Verified equivalence edge smith_two_longest_cycles_equiv_smith_longest_cycles_r_connected; compiles unchanged through x212_longest_cycleE; type and edge metadata unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "note": "Same verified equivalence edge (X212 side); type and edge metadata unchanged."
+    },
+    {
+      "path": "homomorphism-theory/theories/conjectures/grounding_U3.v",
+      "name": "longest_cycle",
+      "note": "Proof consumers longest_cycle_ucycle, longest_cycle_size and longest_cycle_max: theorem types unchanged; their proofs now destruct the and3 view seq_longest_cycle_ucycleE instead of the old and3 body (proof-only change)."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.conjectures.X2.longest_dicycle",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "longest_dicycle",
+      "note": "longest DIRECTED cycle over Digraph.core.dipath.dicycle, which admits loops and digons; a distinct admissibility class for a later family; untouched"
+    },
+    {
+      "qualified": "Hom.conjectures.U3.longest_path",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "longest_path",
+      "note": "longest path, not a cycle; untouched"
+    }
+  ]
+}
