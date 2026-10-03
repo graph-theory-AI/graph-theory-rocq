@@ -26181,7 +26181,7 @@
         "Digraph.conjectures.two_extremal.underlyingG"
       ],
       "kind": "Definition",
-      "line": 43,
+      "line": 44,
       "local_dependencies": [],
       "name": "loopless",
       "normalized_name": "loopless",
@@ -26201,7 +26201,7 @@
         "Digraph.conjectures.two_extremal.uADJ_sym"
       ],
       "kind": "Definition",
-      "line": 58,
+      "line": 59,
       "local_dependencies": [],
       "name": "uADJ",
       "normalized_name": "uADJ",
@@ -26220,7 +26220,7 @@
         "Digraph.conjectures.two_extremal.underlyingG"
       ],
       "kind": "Fact",
-      "line": 60,
+      "line": 61,
       "local_dependencies": [
         "uADJ"
       ],
@@ -26241,7 +26241,7 @@
         "Digraph.conjectures.two_extremal.underlyingG"
       ],
       "kind": "Lemma",
-      "line": 62,
+      "line": 63,
       "local_dependencies": [
         "loopless",
         "uADJ"
@@ -26269,7 +26269,7 @@
         "Digraph.conjectures.two_extremal.three_connected_generalised_wheel"
       ],
       "kind": "Definition",
-      "line": 64,
+      "line": 65,
       "local_dependencies": [
         "loopless",
         "uADJ_irr",
@@ -26293,7 +26293,7 @@
         "Digraph.conjectures.two_extremal.digonADJ_sym"
       ],
       "kind": "Definition",
-      "line": 68,
+      "line": 69,
       "local_dependencies": [],
       "name": "digonADJ",
       "normalized_name": "digonADJ",
@@ -26312,7 +26312,7 @@
         "Digraph.conjectures.two_extremal.digonG"
       ],
       "kind": "Fact",
-      "line": 75,
+      "line": 76,
       "local_dependencies": [
         "digonADJ"
       ],
@@ -26333,7 +26333,7 @@
         "Digraph.conjectures.two_extremal.digonG"
       ],
       "kind": "Lemma",
-      "line": 77,
+      "line": 78,
       "local_dependencies": [
         "digonADJ",
         "loopless"
@@ -26357,7 +26357,7 @@
         "Digraph.conjectures.two_extremal.two_extremal_digonG_forest"
       ],
       "kind": "Definition",
-      "line": 79,
+      "line": 80,
       "local_dependencies": [
         "digonADJ_irr",
         "digonADJ_sym",
@@ -26380,7 +26380,7 @@
         "Digraph.conjectures.two_extremal.k_extremal"
       ],
       "kind": "Definition",
-      "line": 84,
+      "line": 85,
       "local_dependencies": [],
       "name": "two_connected_sg",
       "normalized_name": "two_connected_sg",
@@ -26399,7 +26399,7 @@
         "Digraph.conjectures.two_extremal.local_arc_conn"
       ],
       "kind": "Definition",
-      "line": 109,
+      "line": 110,
       "local_dependencies": [],
       "name": "outcut",
       "normalized_name": "outcut",
@@ -26418,7 +26418,7 @@
         "Digraph.conjectures.two_extremal.local_arc_conn"
       ],
       "kind": "Definition",
-      "line": 113,
+      "line": 114,
       "local_dependencies": [],
       "name": "uv_dicut",
       "normalized_name": "uv_dicut",
@@ -26437,7 +26437,7 @@
         "Digraph.conjectures.two_extremal.arc_conn"
       ],
       "kind": "Definition",
-      "line": 116,
+      "line": 117,
       "local_dependencies": [
         "outcut",
         "uv_dicut"
@@ -26460,7 +26460,7 @@
         "Digraph.conjectures.two_extremal.k_extremal"
       ],
       "kind": "Definition",
-      "line": 123,
+      "line": 124,
       "local_dependencies": [
         "local_arc_conn"
       ],
@@ -26481,7 +26481,7 @@
         "Digraph.conjectures.two_extremal.k_extremal"
       ],
       "kind": "Definition",
-      "line": 129,
+      "line": 130,
       "local_dependencies": [],
       "name": "chi_vec_eq",
       "normalized_name": "chi_vec_eq",
@@ -26500,7 +26500,7 @@
         "Digraph.conjectures.two_extremal.two_extremal"
       ],
       "kind": "Definition",
-      "line": 136,
+      "line": 137,
       "local_dependencies": [
         "arc_conn",
         "chi_vec_eq",
@@ -26530,7 +26530,7 @@
         "Digraph.conjectures.two_extremal.two_extremal_digonG_forest"
       ],
       "kind": "Definition",
-      "line": 150,
+      "line": 151,
       "local_dependencies": [
         "k_extremal",
         "loopless"
@@ -26545,14 +26545,14 @@
       "signature_shape_hash": "bed33b60abe078b1f4917e2e14a9aaad3c20c30efe055de50d77ac06d5add336"
     },
     {
-      "body_hash": "9c301772b7190e2910fe53654ab6ca22a530b66afc542b0060c4a2c4f8b4fb19",
-      "body_shape_hash": "9c301772b7190e2910fe53654ab6ca22a530b66afc542b0060c4a2c4f8b4fb19",
-      "declaration_hash": "b1c5eea5ebff0ae6de3f891ec1769213256b22c5856d45af8e2b4d3c9192d1ef",
+      "body_hash": "5992a227290321d8aceb91f0c4475683f72d03a11b63abcea492d2767ca359fc",
+      "body_shape_hash": "5992a227290321d8aceb91f0c4475683f72d03a11b63abcea492d2767ca359fc",
+      "declaration_hash": "49d579d90630d8d9eb4701cdd89ec60234000be04bb2e725b59102151673da15",
       "direct_consumers": [
         "Digraph.conjectures.two_extremal.sg_minor"
       ],
       "kind": "Definition",
-      "line": 154,
+      "line": 155,
       "local_dependencies": [],
       "name": "sg_minor_rmap",
       "normalized_name": "sg_minor_rmap",
@@ -26571,7 +26571,7 @@
         "Digraph.conjectures.two_extremal.planar_sg"
       ],
       "kind": "Definition",
-      "line": 168,
+      "line": 164,
       "local_dependencies": [
         "sg_minor_rmap"
       ],
@@ -26593,7 +26593,7 @@
         "Digraph.conjectures.two_extremal.conjecture_P"
       ],
       "kind": "Definition",
-      "line": 170,
+      "line": 166,
       "local_dependencies": [
         "sg_minor"
       ],
@@ -26617,7 +26617,7 @@
         "Digraph.conjectures.two_extremal.three_connected_generalised_wheel"
       ],
       "kind": "Definition",
-      "line": 204,
+      "line": 200,
       "local_dependencies": [],
       "name": "three_connected_sg",
       "normalized_name": "three_connected_sg",
@@ -26634,7 +26634,7 @@
       "declaration_hash": "50591088eb1ca85bddd54c2ed555d1974c7acac7051faba2dfde018b63ad9889",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 213,
+      "line": 209,
       "local_dependencies": [
         "digonG",
         "loopless",
@@ -26658,7 +26658,7 @@
         "Digraph.conjectures.two_extremal.H6_no_full_cover"
       ],
       "kind": "Definition",
-      "line": 248,
+      "line": 244,
       "local_dependencies": [],
       "name": "Eulerian",
       "normalized_name": "Eulerian",
@@ -26677,7 +26677,7 @@
         "Digraph.conjectures.two_extremal.conj_9_2_implies_three_connected_gw"
       ],
       "kind": "Definition",
-      "line": 296,
+      "line": 292,
       "local_dependencies": [
         "loopless",
         "three_connected_sg",
@@ -26702,7 +26702,7 @@
         "Digraph.conjectures.two_extremal.dhajos"
       ],
       "kind": "Definition",
-      "line": 316,
+      "line": 312,
       "local_dependencies": [],
       "name": "dhcar",
       "normalized_name": "dhcar",
@@ -26719,7 +26719,7 @@
       "declaration_hash": "6d9424996d92c23072bb72a0c9e3760ad073f3eb04d9eaf18d9691d67a4827af",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 319,
+      "line": 315,
       "local_dependencies": [
         "dhcar"
       ],
@@ -26740,7 +26740,7 @@
         "Digraph.conjectures.two_extremal.in_H2_closed_dhajos"
       ],
       "kind": "Definition",
-      "line": 339,
+      "line": 335,
       "local_dependencies": [
         "dhcar"
       ],
@@ -26759,7 +26759,7 @@
       "declaration_hash": "2e6eb0e233be01c8567706c857662ca0b977b9dfceeaa7461b133310cc1b2f3c",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 349,
+      "line": 345,
       "local_dependencies": [],
       "name": "symcyc_rel",
       "normalized_name": "symcyc_rel",
@@ -26778,7 +26778,7 @@
         "Digraph.conjectures.two_extremal.sym_cycle"
       ],
       "kind": "Definition",
-      "line": 353,
+      "line": 349,
       "local_dependencies": [],
       "name": "symcyc",
       "normalized_name": "symcyc",
@@ -26797,7 +26797,7 @@
         "Digraph.conjectures.two_extremal.symmetric_odd_cycle"
       ],
       "kind": "Definition",
-      "line": 356,
+      "line": 352,
       "local_dependencies": [
         "symcyc"
       ],
@@ -26818,7 +26818,7 @@
         "Digraph.conjectures.two_extremal.in_H2_contains_base"
       ],
       "kind": "Definition",
-      "line": 358,
+      "line": 354,
       "local_dependencies": [
         "sym_cycle"
       ],
@@ -26837,7 +26837,7 @@
       "declaration_hash": "59c09ee7dd2b9e77c9201d897640c26e0c5c7bbaa5fe6b587443ce200a7255de",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 377,
+      "line": 373,
       "local_dependencies": [
         "symmetric_odd_cycle"
       ],
@@ -26856,7 +26856,7 @@
       "declaration_hash": "e6ac3783b0441ceb64c209b85efb4437cefc12bf3595d36c58741e569e499452",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 384,
+      "line": 380,
       "local_dependencies": [
         "dhajos"
       ],
@@ -26878,7 +26878,7 @@
         "Digraph.conjectures.two_extremal.conj_9_2_implies_three_connected_gw"
       ],
       "kind": "Definition",
-      "line": 389,
+      "line": 385,
       "local_dependencies": [
         "loopless",
         "two_extremal"
@@ -26898,7 +26898,7 @@
       "declaration_hash": "246d9cc3c226610ff0703518402c1ec3034476162fa82e520c4e635ff5d46731",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 397,
+      "line": 393,
       "local_dependencies": [
         "conj_9_2",
         "conjecture_P",
@@ -26921,7 +26921,7 @@
       "declaration_hash": "aee684ee86ba518ce41b58cb5aef15e97e2ffce610c051cadc6d1b5da24805b2",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 416,
+      "line": 412,
       "local_dependencies": [
         "conj_9_2",
         "loopless",
@@ -26944,7 +26944,7 @@
       "declaration_hash": "0e9506917922ea3080d3ef9cd7d80d28a78190d1d0bc5cb20100adb680a09b98",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 433,
+      "line": 429,
       "local_dependencies": [
         "Eulerian",
         "H6_no_full_cover",
@@ -49200,15 +49200,15 @@
       "signature_shape_hash": "97711399c76fba408d95b4b7625bf1644452ce2a5e6e6cb494aee8c09bee74f0"
     },
     {
-      "body_hash": "f657f993bb23ec4328c00571f4d9a0efdfffebe237a63711ef937dd7b02338b3",
-      "body_shape_hash": "f657f993bb23ec4328c00571f4d9a0efdfffebe237a63711ef937dd7b02338b3",
-      "declaration_hash": "6d4f94a7866badbe3763a992cb1b94367852db3c6a06a99bb80e27f253a0989a",
+      "body_hash": "594d330b17f466ff065da00004f12b87f8feeeca28d50e5cde888b59e1c1ba55",
+      "body_shape_hash": "594d330b17f466ff065da00004f12b87f8feeeca28d50e5cde888b59e1c1ba55",
+      "declaration_hash": "52a95f67da67294d9384de6db30a55621ee68da31a643a99cf920222a719574e",
       "direct_consumers": [
         "Minor.conjectures.X200.x200_H_model_hitting_set",
         "Minor.conjectures.X200.x200_k_disjoint_H_models"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x200_minor_model",
       "normalized_name": "minor_model",
@@ -49228,7 +49228,7 @@
         "Minor.conjectures.X200.x200_k_disjoint_H_models"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 13,
       "local_dependencies": [],
       "name": "x200_model_vertices",
       "normalized_name": "model_vertices",
@@ -49247,7 +49247,7 @@
         "Minor.conjectures.X200.x200_H_model_erdos_posa_oklogk"
       ],
       "kind": "Definition",
-      "line": 20,
+      "line": 16,
       "local_dependencies": [
         "x200_minor_model",
         "x200_model_vertices"
@@ -49269,7 +49269,7 @@
         "Minor.conjectures.X200.x200_H_model_erdos_posa_oklogk"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 23,
       "local_dependencies": [
         "x200_minor_model",
         "x200_model_vertices"
@@ -49291,7 +49291,7 @@
         "Minor.conjectures.X200.planar_H_model_erdos_posa_oklogk_statement"
       ],
       "kind": "Definition",
-      "line": 31,
+      "line": 27,
       "local_dependencies": [
         "x200_H_model_hitting_set",
         "x200_k_disjoint_H_models"
