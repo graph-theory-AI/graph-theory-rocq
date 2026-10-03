@@ -42,6 +42,7 @@
     is-tree is REUSED from base ([is_tree], = is_forest ∧ connected). *)
 
 From GTBase Require Export base.
+From GTBase Require Import chi_bounding.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -55,8 +56,7 @@ Unset Printing Implicit Defensive.
     ========================================================================== *)
 
 Definition chi_bounded (F : sgraph -> Prop) : Prop :=
-  exists f : nat -> nat,
-    forall G : sgraph, F G -> χ([set: G]) <= f (ω([set: G])).
+  GTBase.chi_bounding.chi_bounded_class F.
 
 (** Corpus row: opg:bounding_the_chromatic_number_of_triangle_free_graphs_with_fixed_maximum_degree
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/bounding_the_chromatic_number_of_triangle_free_graphs_with_fixed_maximum_degree/

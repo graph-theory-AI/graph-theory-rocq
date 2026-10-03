@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "family": "chi-bounded",
+  "modules": {
+    "GTBase.chi_bounding": {
+      "path": "base/theories/chi_bounding.v",
+      "overrides": {
+        "chi_bounded_via": {
+          "verdict": "FAITHFUL",
+          "note": "One nat-to-nat bound chosen before all members, measuring ordinary chi and omega of the explicitly supplied simple graph; class membership unchanged."
+        },
+        "chi_bounded_class": {
+          "verdict": "FAITHFUL",
+          "note": "Identity-map specialization, exactly the existing public simple-graph chi-boundedness contract."
+        }
+      },
+      "machine_evidence": [
+        "chi_bounded_via_empty",
+        "chi_bounded_via_sub",
+        "chi_bounded_via_ext",
+        "chi_bounded_via_union",
+        "chi_bounded_via_bounded_order",
+        "chi_bounded_via_image",
+        "not_chi_bounded_via_of_unbounded_at",
+        "chi_bounded_class_empty",
+        "chi_bounded_class_sub",
+        "chi_bounded_class_ext",
+        "chi_bounded_class_union",
+        "chi_bounded_class_bounded_order",
+        "empty_graph_chi_bound"
+      ]
+    }
+  }
+}

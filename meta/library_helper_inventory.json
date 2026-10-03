@@ -5067,15 +5067,15 @@
       "signature_shape_hash": "4ec429a52182585dca2589fc604b48c9b75978c77fc1c7b5d1044046f23a4344"
     },
     {
-      "body_hash": "77adb2fa6797da69ce74f9cbfc79795ca9f860124080e74e1a19dcaf0f843311",
-      "body_shape_hash": "77adb2fa6797da69ce74f9cbfc79795ca9f860124080e74e1a19dcaf0f843311",
-      "declaration_hash": "ea7e0609b736b52e758552cd6e452dd18bc913d308b5a8113e868e4bb3c22660",
+      "body_hash": "9625209d46884e27673fc249ea5afac95a985cfa572d7fa064ef3ed07d3e448b",
+      "body_shape_hash": "9625209d46884e27673fc249ea5afac95a985cfa572d7fa064ef3ed07d3e448b",
+      "declaration_hash": "c3eeefd76d43c3d92e11df52be5d8f74a9e3b8017a169286af0a20c2701c3439",
       "direct_consumers": [
         "Chromatic.conjectures.U8.graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
         "Chromatic.conjectures.U8.vertex_minor_closed_classes_are_chi_bounded_statement"
       ],
       "kind": "Definition",
-      "line": 49,
+      "line": 50,
       "local_dependencies": [],
       "name": "chi_bounded",
       "normalized_name": "chi_bounded",
@@ -5440,11 +5440,9 @@
       "body_hash": "a7b422640a49f4b9a370fcb6db5b473cfbf5f21dd8fc9fb0a864c6bbd373f6bf",
       "body_shape_hash": "a7b422640a49f4b9a370fcb6db5b473cfbf5f21dd8fc9fb0a864c6bbd373f6bf",
       "declaration_hash": "4093acf0b481a50154a6043f996a43e20b0901937b55dc164cb3321ca1c8d436",
-      "direct_consumers": [
-        "Chromatic.conjectures.X112.x112_chi_bounded"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x112_omega",
       "normalized_name": "omega",
@@ -5456,17 +5454,15 @@
       "signature_shape_hash": "0596fb401e0ad5525f64c30a46df4b74ef3b429bb464e52445ea6a2244565dd3"
     },
     {
-      "body_hash": "c1d30d872c63dcfa6999717015ca8e62990567d9d492d4dac7066d575f438079",
-      "body_shape_hash": "384a050079d893baaa3759bb148ddbfe175fdd47ea028735ad027e0f6e58bb08",
-      "declaration_hash": "ec3062e331de2f48558be9008fd54175041ff7919d581765e76645dc23576913",
+      "body_hash": "7934670df7eb40db6899c91841171bf0a1cdb47be905ab0fd46b3e75e067814c",
+      "body_shape_hash": "7934670df7eb40db6899c91841171bf0a1cdb47be905ab0fd46b3e75e067814c",
+      "declaration_hash": "a1e9d50560d5a4b6d7d1d33db9979c10f87440bff6fcfc94dd5433101b8116f8",
       "direct_consumers": [
         "Chromatic.conjectures.X112.chi_bounded_closure_substitution_gluing_statement"
       ],
       "kind": "Definition",
-      "line": 14,
-      "local_dependencies": [
-        "x112_omega"
-      ],
+      "line": 15,
+      "local_dependencies": [],
       "name": "x112_chi_bounded",
       "normalized_name": "chi_bounded",
       "package": "chromatic-theory",
@@ -7036,7 +7032,7 @@
         "Chromatic.conjectures.X170.x170_nonexceptional"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x170_oriented_P4_code",
       "normalized_name": "oriented_P4_code",
@@ -7055,7 +7051,7 @@
         "Chromatic.conjectures.X170.oriented_P4_forb_chi_bounded_statement"
       ],
       "kind": "Definition",
-      "line": 12,
+      "line": 13,
       "local_dependencies": [
         "x170_oriented_P4_code"
       ],
@@ -7078,7 +7074,7 @@
         "Chromatic.conjectures.X170.x170_induced_oriented_P4"
       ],
       "kind": "Record",
-      "line": 15,
+      "line": 16,
       "local_dependencies": [],
       "name": "x170_oriented_graph",
       "normalized_name": "oriented_graph",
@@ -7097,7 +7093,7 @@
         "Chromatic.conjectures.X170.x170_induced_oriented_P4"
       ],
       "kind": "Definition",
-      "line": 23,
+      "line": 24,
       "local_dependencies": [],
       "name": "x170_p4_edge",
       "normalized_name": "p4_edge",
@@ -7116,7 +7112,7 @@
         "Chromatic.conjectures.X170.x170_induced_oriented_P4"
       ],
       "kind": "Definition",
-      "line": 26,
+      "line": 27,
       "local_dependencies": [
         "x170_oriented_P4_code"
       ],
@@ -7137,7 +7133,7 @@
         "Chromatic.conjectures.X170.x170_forb_oriented_P4_family"
       ],
       "kind": "Definition",
-      "line": 29,
+      "line": 30,
       "local_dependencies": [
         "x170_code_forward",
         "x170_oriented_P4_code",
@@ -7161,7 +7157,7 @@
         "Chromatic.conjectures.X170.oriented_P4_forb_chi_bounded_statement"
       ],
       "kind": "Definition",
-      "line": 38,
+      "line": 39,
       "local_dependencies": [
         "x170_induced_oriented_P4",
         "x170_oriented_P4_code",
@@ -7177,14 +7173,14 @@
       "signature_shape_hash": "ec08921e0cdde410f6576ba1f1fd44188ed165641e163bb9b18ed525755d96da"
     },
     {
-      "body_hash": "57acebd7f1cda60495c4c06177d503c4c33d8396e2f4bc75ba27b856e2367564",
-      "body_shape_hash": "d8f0ca4411ab98d05a4449fe6faba1f28cf43e86c1f90d35f8491ff3150b01d0",
-      "declaration_hash": "a22f0568286fd6506b2b5e200f604f279f7ec72710e7fdc471969add3d861335",
+      "body_hash": "c577f77ab42ee6376182d12bb522f621feb0d3410468bd2d56972f906ec0a579",
+      "body_shape_hash": "8b644536a45624511521c9403fe7299f1bf1cf5fdf7d324e4fe3b2344d582b34",
+      "declaration_hash": "54a8e2be658eb19fc17528519dbfd21555568d95aaf10384fe09bd589a8eda28",
       "direct_consumers": [
         "Chromatic.conjectures.X170.oriented_P4_forb_chi_bounded_statement"
       ],
       "kind": "Definition",
-      "line": 43,
+      "line": 44,
       "local_dependencies": [
         "x170_oriented_graph"
       ],
@@ -18479,7 +18475,7 @@
         "Digraph.conjectures.chi_bounded.tvec_core_statement"
       ],
       "kind": "Definition",
-      "line": 36,
+      "line": 37,
       "local_dependencies": [],
       "name": "oriented_dg",
       "normalized_name": "oriented_dg",
@@ -18501,7 +18497,7 @@
         "Digraph.conjectures.chi_bounded.urel_sym"
       ],
       "kind": "Definition",
-      "line": 45,
+      "line": 46,
       "local_dependencies": [],
       "name": "urel",
       "normalized_name": "urel",
@@ -18520,7 +18516,7 @@
         "Digraph.conjectures.chi_bounded.underlying"
       ],
       "kind": "Fact",
-      "line": 47,
+      "line": 48,
       "local_dependencies": [
         "urel"
       ],
@@ -18541,7 +18537,7 @@
         "Digraph.conjectures.chi_bounded.underlying"
       ],
       "kind": "Fact",
-      "line": 49,
+      "line": 50,
       "local_dependencies": [
         "urel"
       ],
@@ -18564,7 +18560,7 @@
         "Digraph.conjectures.chi_bounded.oriented_forest"
       ],
       "kind": "Definition",
-      "line": 51,
+      "line": 52,
       "local_dependencies": [
         "urel_irrefl",
         "urel_sym"
@@ -18586,7 +18582,7 @@
         "Digraph.conjectures.chi_bounded.conj2_1605_statement"
       ],
       "kind": "Definition",
-      "line": 54,
+      "line": 55,
       "local_dependencies": [
         "underlying"
       ],
@@ -18607,7 +18603,7 @@
         "Digraph.conjectures.chi_bounded.underlying_triangle_free"
       ],
       "kind": "Definition",
-      "line": 58,
+      "line": 59,
       "local_dependencies": [
         "underlying"
       ],
@@ -18631,7 +18627,7 @@
         "Digraph.conjectures.chi_bounded.tvec_core_statement"
       ],
       "kind": "Definition",
-      "line": 63,
+      "line": 64,
       "local_dependencies": [
         "no_underlying_Kl"
       ],
@@ -18645,16 +18641,16 @@
       "signature_shape_hash": "1df638342453dfeab4177ffe20578994bca0d7dc155ec596c82c0b58fc45aa39"
     },
     {
-      "body_hash": "db27f294b0d82d35262323f136889115a99808cd29d50c68f7bf3d08440a9b73",
-      "body_shape_hash": "db27f294b0d82d35262323f136889115a99808cd29d50c68f7bf3d08440a9b73",
-      "declaration_hash": "22f7e9ed58cf966c734d28a31c87fcbac76ae132fdcca37111788d994564e75c",
+      "body_hash": "f61bc3020b9fd22173b844e4bd5b7b177a53b4210c14f024e43e9abd63a24c8d",
+      "body_shape_hash": "f61bc3020b9fd22173b844e4bd5b7b177a53b4210c14f024e43e9abd63a24c8d",
+      "declaration_hash": "76dcd7763e104a8c0feb541b0621b189e9d418ea26215579e747a356c6720346",
       "direct_consumers": [
         "Digraph.conjectures.chi_bounded.conj2_1605_statement",
         "Digraph.conjectures.chi_bounded.conj4_1605_statement",
         "Digraph.conjectures.chi_bounded.conj5_1605_statement"
       ],
       "kind": "Definition",
-      "line": 66,
+      "line": 67,
       "local_dependencies": [
         "underlying"
       ],
@@ -18675,7 +18671,7 @@
         "Digraph.conjectures.chi_bounded.conj4_1605_statement"
       ],
       "kind": "Definition",
-      "line": 101,
+      "line": 99,
       "local_dependencies": [
         "oriented_dg",
         "urel"
@@ -18699,7 +18695,7 @@
         "Digraph.conjectures.chi_bounded.is_dirP4"
       ],
       "kind": "Definition",
-      "line": 133,
+      "line": 131,
       "local_dependencies": [
         "oriented_dg",
         "urel"
@@ -18721,7 +18717,7 @@
         "Digraph.conjectures.chi_bounded.conj5_1605_statement"
       ],
       "kind": "Definition",
-      "line": 146,
+      "line": 144,
       "local_dependencies": [
         "P4_underlying"
       ],
@@ -18742,7 +18738,7 @@
         "Digraph.conjectures.chi_bounded.conj5_1605_statement"
       ],
       "kind": "Definition",
-      "line": 158,
+      "line": 156,
       "local_dependencies": [
         "P4_underlying"
       ],
@@ -18761,7 +18757,7 @@
       "declaration_hash": "6fd754ec5ef67403bb0ee812b4c6026c25b144e2acf225433c05c532c0f10f24",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 168,
+      "line": 166,
       "local_dependencies": [
         "P4_underlying",
         "chi_bounded_under",
@@ -18786,7 +18782,7 @@
         "Digraph.conjectures.chi_bounded.chordal_C3"
       ],
       "kind": "Definition",
-      "line": 179,
+      "line": 177,
       "local_dependencies": [],
       "name": "no_induced_TT3",
       "normalized_name": "no_induced_TT3",
@@ -18805,7 +18801,7 @@
         "Digraph.conjectures.chi_bounded.chordal_C3"
       ],
       "kind": "Definition",
-      "line": 188,
+      "line": 186,
       "local_dependencies": [],
       "name": "has_induced_long_dicycle",
       "normalized_name": "has_induced_long_dicycle",
@@ -18824,7 +18820,7 @@
         "Digraph.conjectures.chi_bounded.chordal_not_dichromatic_bounded_statement"
       ],
       "kind": "Definition",
-      "line": 196,
+      "line": 194,
       "local_dependencies": [
         "has_induced_long_dicycle",
         "no_induced_TT3",
@@ -18845,7 +18841,7 @@
       "declaration_hash": "6f903c5591b0d774604b27a089c16f0b3253dd3bcec486569caca0a80f38e771",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 201,
+      "line": 199,
       "local_dependencies": [
         "chordal_C3"
       ],
@@ -18866,7 +18862,7 @@
         "Digraph.conjectures.chi_bounded.acyclic_number_ge"
       ],
       "kind": "Definition",
-      "line": 209,
+      "line": 207,
       "local_dependencies": [],
       "name": "has_acyclic_set",
       "normalized_name": "has_acyclic_set",
@@ -18885,7 +18881,7 @@
         "Digraph.conjectures.chi_bounded.avec_core_statement"
       ],
       "kind": "Definition",
-      "line": 216,
+      "line": 214,
       "local_dependencies": [
         "has_acyclic_set"
       ],
@@ -18904,7 +18900,7 @@
       "declaration_hash": "ac54fc9d6c2840675b2183d3371467afe12f04768d3b9bfc9995ba9339e822c7",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 219,
+      "line": 217,
       "local_dependencies": [
         "acyclic_number_ge",
         "oriented_dg",
@@ -18925,7 +18921,7 @@
       "declaration_hash": "31c8defafef4f4a3921510efd22aaaa040d52840e433ea903fc3d70ee5ab360c",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 237,
+      "line": 235,
       "local_dependencies": [
         "oriented_dg",
         "underlying_triangle_free"
@@ -18947,7 +18943,7 @@
         "Digraph.conjectures.chi_bounded.m3_landmark_refutes_2bound"
       ],
       "kind": "Definition",
-      "line": 256,
+      "line": 254,
       "local_dependencies": [
         "oriented_dg",
         "underlying_triangle_free"
@@ -18967,7 +18963,7 @@
       "declaration_hash": "313ff4d8cb041c7faa73bb89a6079b4e26a8046096702d49469050f1e716bcf4",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 264,
+      "line": 262,
       "local_dependencies": [
         "m3_landmark_statement",
         "oriented_dg",

@@ -10,12 +10,14 @@
 
     Both quantify the bounding data BEFORE the graphs of the class, which is the
     intended reading of "the class is (polynomially) chi-bounded"; a per-graph
-    choice would be vacuous.  Neither notion exists in coq-graph-theory or in
-    GTBase; [U8.v] owns a [chi_bounded] with the same meaning as
-    [chi_bounded_class] (see the note below) and is kept as the citable name of
-    the Gyarfas-Sumner row. *)
+    choice would be vacuous. Ordinary chi-boundedness now uses the canonical
+    [GTBase.chi_bounding.chi_bounded_class]; this module and [U8.chi_bounded]
+    retain their compatibility names, with U8 remaining the citable name of
+    the Gyarfas-Sumner row. The polynomial bound remains a distinct contract
+    owned here; neither contract is provided by coq-graph-theory. *)
 
 From GTBase Require Export base.
+From GTBase Require Import chi_bounding.
 From GTBase Require Import colourings.
 
 Set Implicit Arguments.
@@ -27,8 +29,7 @@ Unset Printing Implicit Defensive.
     shape as [U8.chi_bounded]; that name stays the citable one of the
     Gyarfas-Sumner corpus row, this one is the reusable wrapper.) *)
 Definition chi_bounded_class (F : sgraph -> Prop) : Prop :=
-  exists f : nat -> nat,
-    forall G : sgraph, F G -> χ([set: G]) <= f (ω([set: G])).
+  GTBase.chi_bounding.chi_bounded_class F.
 
 (** A class [F] is POLYNOMIALLY chi-bounded: the bounding function may be taken
     of the form [t |-> c * t ^ d].  Over the naturals this is exactly "bounded by
