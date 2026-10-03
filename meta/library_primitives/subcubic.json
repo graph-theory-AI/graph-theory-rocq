@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "family": "subcubic",
+  "primitive": {
+    "canonical_name": "GTBase.base.subcubic",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "subcubic"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.X114.x114_subcubic",
+      "GTMisc.conjectures.X14.x14_subcubic"
+    ],
+    "consumers_remaining": 2,
+    "relation": "simple-graph subcubicity: X14 x14_subcubic G := forall v, #|N(v)| <= 3 converts to GTBase.base.subcubic G; X114 x114_subcubic H := Delta H <= 3 equals GTBase.base.subcubic H by the unconditional finite-maximum bridge GTBase.base.subcubicP (bigmax_leqP), the empty graph included. An upper bound on simple-graph degrees, distinct from the multigraph incidence contracts mcubic/loopless_cubic (exactly three incident edges) and from exact regularity.",
+    "semantic_classes": {
+      "pointwise-degree-bound": {
+        "members": [
+          "GTMisc.conjectures.X14.x14_subcubic"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTMisc.migration.subcubic.x14_subcubic_compat",
+        "note": "forall v, #|N(v)| <= 3; conversion; canonical GTBase.base.subcubic"
+      },
+      "maximum-degree-bound": {
+        "members": [
+          "GTMisc.conjectures.X114.x114_subcubic"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTMisc.migration.subcubic.x114_subcubic_compat",
+        "note": "Delta H <= 3; an unconditional iff with GTBase.base.subcubic through subcubicP (bigmax_leqP), the empty graph included; not a conversion"
+      }
+    },
+    "distinct_variants": {
+      "GTBase.base.mcubic": "multigraph incidence cubicity (A13): exactly three incident edges per vertex, a loop once; not a simple-graph upper bound",
+      "GTBase.base.loopless_cubic": "guarded multigraph cubicity (A13), loopless G /\\ mcubic G",
+      "GTBase.base.regular": "exact simple-graph regularity; regular G d with d <= 3 implies subcubic G (regular_subcubic), not conversely"
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.subcubic.x14_subcubic_compat",
+      "GTMisc.migration.subcubic.x114_subcubic_compat",
+      "GTMisc.migration.subcubic.subcubic_matching_lower_bound_statement_compat",
+      "GTMisc.migration.subcubic.subcubic_induced_subdivision_np_complete_statement_compat",
+      "GTMisc.migration.subcubic.x102_subdivided_multiclaw_compat",
+      "GTMisc.migration.subcubic.x102_line_graph_of_subdivided_multiclaw_compat",
+      "GTMisc.migration.subcubic.bounded_tree_independence_forbidden_family_statement_compat",
+      "GTMisc.migration.subcubic.subcubic_matching_lower_bound_statement_original_compat",
+      "GTMisc.migration.subcubic.subcubic_induced_subdivision_np_complete_statement_original_compat",
+      "GTMisc.migration.subcubic.x102_subdivided_multiclaw_original_compat",
+      "GTMisc.migration.subcubic.x102_line_graph_of_subdivided_multiclaw_original_compat",
+      "GTMisc.migration.subcubic.bounded_tree_independence_forbidden_family_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.base.subcubicP",
+      "GTBase.base.subcubic_K0",
+      "GTBase.base.regular_subcubic",
+      "GTBase.base.subcubic_Kn",
+      "GTBase.base.not_subcubic_K5",
+      "GTBase.base.subcubic_diso"
+    ],
+    "public_client": "base/theories/examples/subcubic.v",
+    "legacy_baseline": "ba8b7be309af5926081ba760ba0d5ab8e94215f7",
+    "migration_report": "meta/migration_reports/subcubic.md",
+    "migration_spec": "meta/migration_reports/subcubic.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A14.md",
+    "foundation_fidelity": "meta/foundation_fidelity/subcubic.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph (N, deg_Kn, deg_Knm, edges_opn0)",
+        "GraphTheory.core.coloring (clique and stability maxima only)",
+        "mathcomp.ssreflect.bigop (bigmax_leqP)",
+        "GTBase.base (Delta, regular)",
+        "Extremal.foundations.degree_bounds and Packing.foundations.fair_matching (Delta lemmas only)"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.base.subcubic over N(v), with the Delta bridge subcubicP",
+      "note": "Pinned GraphTheory has no maximum-degree or degree-bound predicate (its only cubic matches are mathcomp polynomial lemmas); GTBase owns Delta. The pointwise form is canonical because it needs no finite maximum; subcubicP relates it to Delta for every graph. Evidence: coordination/evidence/A14-subcubic/upstream-audit.txt.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "path_review",
+    "reviewed_commit": "f52251a96beabaef4c9005e8dd9a9a29c4cca17c",
+    "independent_review": "meta/migration_reviews/subcubic.md"
+  }
+}

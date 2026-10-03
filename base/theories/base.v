@@ -9,7 +9,7 @@
       re-exported:  [sgraph], [x -- y], [N(x)] (open_neigh), [χ(A)]=[chi_mem],
                     [ω(A)]=[omega_mem], [α], [clique]/[cliques], [connected],
                     ['K_n]=[complete n], [F ≃ G]=[diso], [ucycle]/[ucycleb];
-      owned here:   [Delta] (Δ), [common_nbr], [regular], [min_degree_at_least], [min_degree],
+      owned here:   [Delta] (Δ), [common_nbr], [regular], [min_degree_at_least], [min_degree], [subcubic],
                     [girth_geq], [ceil_div].
 
     Planarity is NOT here yet: the [coq-graph-theory-planar] / [coq-fourcolor]
@@ -53,7 +53,7 @@
     [traceable], [del_edge_set], [k_edge_connected], [has_subgraph],
     [induced_free], [complete_bipartite], [oriented], [tournament], [acyclic].
 
-    Owned by this file: [Delta] (Δ), [ceil_div], [common_nbr], [regular], [min_degree_at_least], [min_degree],
+    Owned by this file: [Delta] (Δ), [ceil_div], [common_nbr], [regular], [min_degree_at_least], [min_degree], [subcubic],
     [girth_geq], [has_girth], [bipartite], [triangle_free], [cycle_graph],
     [k_connected] (Whitney form, with [k_connected1]; the library's Menger-form
     [kconnected] is also available), [k_degenerate]/[k_degenerate_on], [average_degree_geq],
@@ -285,6 +285,44 @@ by exists (i v); rewrite diso_degree.
 Qed.
 
 End DisoMinDegree.
+
+(** Subcubic simple graphs: every vertex has at most three neighbours, the pointwise upper bound
+    [forall v, #|N(v)| <= 3].  It is equivalent, unconditionally, to [Delta G <= 3] ([subcubicP]); the empty
+    graph is subcubic (its [Delta] is 0).  This simple-graph bound is distinct from the multigraph incidence
+    contracts [mcubic]/[loopless_cubic] and from the exact minimum [min_degree].
+    Registry: meta/library_primitives/subcubic.json (A14). *)
+Definition subcubic (G : sgraph) : Prop := forall v : G, #|N(v)| <= 3.
+
+(** The finite-maximum bridge. *)
+Lemma subcubicP (G : sgraph) : subcubic G <-> Delta G <= 3.
+Proof. by split=> [h|/bigmax_leqP h v]; [apply/bigmax_leqP => v _; exact: h | exact: h]. Qed.
+
+Lemma subcubic_K0 : subcubic 'K_0.
+Proof. by case. Qed.
+
+Lemma regular_subcubic (G : sgraph) (d : nat) : regular G d -> d <= 3 -> subcubic G.
+Proof. by move=> h d3 v; rewrite h. Qed.
+
+(** Complete graphs on at most four vertices are subcubic; [K_5] is not. *)
+Lemma subcubic_Kn (n : nat) : n <= 3 -> subcubic 'K_n.+1.
+Proof.
+move=> n3 v; apply: leq_trans n3.
+have lt : #|N(v)| < #|'K_n.+1|.
+  rewrite -cardsT; apply: proper_card; apply/properP; split; first exact: subsetT.
+  by exists v; rewrite ?inE ?in_opn ?sg_irrefl.
+by move: lt; rewrite card_ord ltnS.
+Qed.
+
+Lemma not_subcubic_K5 : ~ subcubic 'K_5.
+Proof. by move/(_ ord0); move: (@deg_Kn 4 ord0); case: #|_| => [|[|[|[|]]]]. Qed.
+
+Section DisoSubcubic.
+Import bij.
+
+Lemma subcubic_diso (G H : sgraph) (i : G ≃ H) : subcubic G -> subcubic H.
+Proof. by move=> h y; rewrite -[y](bijK' i) diso_degree. Qed.
+
+End DisoSubcubic.
 
 (** Girth ≥ [g]: every GENUINE cycle (size > 2; in a simple graph every cycle has
     size ≥ 3) has length ≥ [g].  The [2 < size c] guard is load-bearing — without

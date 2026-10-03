@@ -82,7 +82,7 @@ Definition x114_hisc_problem (H : sgraph) : problem :=
 Definition x114_np_complete (P : problem) : Prop := in_NP P /\ NP_hard P.
 
 (** Subcubic = maximum degree at most three. *)
-Definition x114_subcubic (H : sgraph) : Prop := Delta H <= 3.
+Definition x114_subcubic (H : sgraph) : Prop := subcubic H.
 
 (** ** X114 statements *****************************************************)
 

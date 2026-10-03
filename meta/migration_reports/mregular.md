@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py mregular --details /tmp/migrati
 - Canonical: `GTBase.base.mregular`.
 - Baseline: `58f2862aa45b932cebb4cc59401a6b16f5d0c82a`.
 - Scope: 3 helpers, 11 statements, 16 frozen objects, 61 recorded references.
-- Source checks: 191/191 pass; consistent.
+- Source checks: 189/189 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -27,4 +27,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py mregular --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `GTBase.base.regular`, `GTMisc.conjectures.X14.x14_subcubic`, `GTMisc.conjectures.X114.x114_subcubic`.
+Excluded distinct variants: `GTBase.base.regular`.
