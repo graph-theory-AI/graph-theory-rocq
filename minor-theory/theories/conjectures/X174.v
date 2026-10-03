@@ -1,6 +1,7 @@
 (** * Minor.conjectures.X174 -- v2 clique count without K_t immersion row *)
 
 From GTBase Require Export base.
+From GTBase Require Import clique_counts.
 From Minor.conjectures Require Import U7.
 
 Set Implicit Arguments.
@@ -10,7 +11,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X174 vocabulary ***********************************************)
 
 Definition x174_clique_count (G : sgraph) : nat :=
-  #|[set S : {set G} | cliqueb S]|.
+  all_clique_count G.
 
 Definition x174_no_Kt_immersion (G : sgraph) (t : nat) : Prop :=
   ~ immersion G 'K_t.

@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.X88 -- v2 pentagonal Turan row *)
 
 From GTBase Require Export base.
+From GTBase Require Import clique_counts.
 From Extremal.conjectures Require Import X4.
 
 Set Implicit Arguments.
@@ -10,7 +11,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X88 vocabulary ************************************************)
 
 Definition x88_clique_count (G : sgraph) (r : nat) : nat :=
-  #|[set S : {set G} | (#|S| == r) && cliqueb S]|.
+  clique_count_size G r.
 
 Definition x88_c5_part_adj (a b : nat) : bool :=
   (a != b) && (((a.+1 %% 5) == b) || ((b.+1 %% 5) == a)).

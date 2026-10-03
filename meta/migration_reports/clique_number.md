@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py clique_number --details /tmp/mi
 - Canonical: `GraphTheory.core.coloring.omega_mem`.
 - Baseline: `76122100ec110f03f4b406d6b98c848a09aedf99`.
 - Scope: 3 helpers, 2 statements, 12 frozen objects, 13 recorded references.
-- Source checks: 88/88 pass; consistent.
+- Source checks: 87/87 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -18,6 +18,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py clique_number --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `GTMisc.conjectures.U13.is_max_clique`, `Chromatic.conjectures.X181.x181_maximal_clique`, `Packing.conjectures.XE1.xe1_maximal_clique`, `Minor.conjectures.X174.x174_clique_count`.
+Excluded distinct variants: `GTMisc.conjectures.U13.is_max_clique`, `Chromatic.conjectures.X181.x181_maximal_clique`, `Packing.conjectures.XE1.xe1_maximal_clique`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/chi_bounded_classes.v#X112Legacy.x112_chi_bounded`, `minor-theory/theories/migration/bag_decompositions.v#Legacy.dallard_milanic_storgel_tw_omega_tree_alpha_statement`.

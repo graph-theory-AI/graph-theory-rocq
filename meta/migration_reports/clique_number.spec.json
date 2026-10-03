@@ -202,12 +202,6 @@
       "path": "packing-theory/theories/conjectures/XE1.v",
       "name": "xe1_maximal_clique",
       "note": "inclusion-maximal clique predicate (empty and singleton allowed); not maximum cardinality"
-    },
-    {
-      "qualified": "Minor.conjectures.X174.x174_clique_count",
-      "path": "minor-theory/theories/conjectures/X174.v",
-      "name": "x174_clique_count",
-      "note": "number of cliques (the empty one included), not the largest clique size"
     }
   ],
   "kernel_evidence": "Print Assumptions of every certificate and of the base adapter, exact types of the frozen and live helpers, chain and rows, strict dependency closures of the frozen chain and rows (current and complete), and the types of every declaration in the reverse dependency closure of X112/X124/X121 at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A16-clique-number/ (outside the repository)"
