@@ -1519,7 +1519,9 @@
     "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Original.erdos_567_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete row is Extremal.migration.edge_count.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
     "extremal-graph-theory/theories/migration/path_edges.v#XE2Legacy.erdos_915_statement": "B8 snapshot: B8 froze this row over its own frozen edge disjointness but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-B2/A7/B8 row is Extremal.migration.edge_count.XE2PathEdgesOriginal.erdos_915_statement, certified by erdos_915_statement_path_edges_original_compat.",
     "extremal-graph-theory/theories/migration/path_edges.v#XE2Original.erdos_915_statement": "B8 snapshot: B8 froze this row over its own frozen edge disjointness but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-B2/A7/B8 row is Extremal.migration.edge_count.XE2PathEdgesOriginal.erdos_915_statement, certified by erdos_915_statement_path_edges_original_compat.",
-    "extremal-graph-theory/theories/migration/matching.v#X180Legacy.log_degree_multitasker_exists_statement": "C1 snapshot: C1 froze the X180 row over its frozen matching helpers but kept the live x180_average_degree_logarithmic, which reaches the public count fg_edge_count (now GTBase.common.edge_count; the former #|fg_edges G| is equal by fg_edgesE). Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat."
+    "extremal-graph-theory/theories/migration/matching.v#X180Legacy.log_degree_multitasker_exists_statement": "C1 snapshot: C1 froze the X180 row over its frozen matching helpers but kept the live x180_average_degree_logarithmic, which reaches the public count fg_edge_count (now GTBase.common.edge_count; the former #|fg_edges G| is equal by fg_edgesE). Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/cut_size.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement": "A9 snapshot: A9 froze this row over its own frozen cut size but kept the live x76_edge_count of this family. Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X76Original.ck_free_max_cut_polynomial_surplus_statement, certified by ck_free_max_cut_polynomial_surplus_statement_original_compat, which composes this family's frozen X76Original.x76_edge_count.",
+    "extremal-graph-theory/theories/migration/cut_size.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement": "A9 snapshot: A9 froze this row over its own frozen cut size but kept the live x78_edge_count of this family. Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat, which composes this family's frozen X78Original.x78_edge_count."
   },
   "cross_module_consumers": [
     {
@@ -1646,6 +1648,11 @@
       "path": "graph-theory-misc/theories/conjectures/X139.v",
       "name": "fg_edge_count",
       "note": "x139_grad_at_most uses the public base count; frozen in X139Legacy over the frozen public count."
+    },
+    {
+      "path": "base/theories/examples/cut_size.v",
+      "name": "edge_count",
+      "note": "A9 public-only client: cut_size_le_edge_count bounds a cut by the canonical GTBase.common.edge_count (lexical match with the D2ram/D2tur source names)."
     }
   ],
   "distinct_variants": [

@@ -14,7 +14,7 @@ Definition x78_edge_set (G : sgraph) : {set {set G}} :=
 Definition x78_edge_count (G : sgraph) : nat := edge_count G.
 
 Definition x78_cut_size (G : sgraph) (A : {set G}) : nat :=
-  #|[set e in x78_edge_set G | ~~ [disjoint e & A] && ~~ (e \subset A)]|.
+  cut_size A.
 
 Definition x78_subgraph_of (H G : sgraph) : Prop :=
   has_subgraph G H.

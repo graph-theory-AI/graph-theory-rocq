@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "family": "cut-size",
+  "primitive": {
+    "canonical_name": "GTBase.common.cut_size",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "cut_size",
+      "cut_edge"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.X76.x76_cut_size",
+      "Extremal.conjectures.X78.x78_cut_size",
+      "Hypergraph.conjectures.X209.x209_cut_edge",
+      "Hypergraph.conjectures.X209.x209_cut_size"
+    ],
+    "consumers_remaining": 3,
+    "relation": "graph cut: X76/X78 convert to GTBase.common.cut_size (post-M1 bodies over M1 aliases of E(G)); coloured family cut: X209 x209_cut_size equals GTBase.monochromatic.non_monochromatic_count and x209_cut_edge equals ~~ monochromatic_on by non_monochromatic_onP, for arbitrary finite families and supplied ordinal colourings.",
+    "semantic_classes": {
+      "graph-edge-cut": {
+        "members": [
+          "Extremal.conjectures.X76.x76_cut_size",
+          "Extremal.conjectures.X78.x78_cut_size"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "note": "#|[set e in xNN_edge_set G | ~~ [disjoint e & A] && ~~ (e \\subset A)]| over the M1 alias of E(G); conversion; canonical GTBase.common.cut_size",
+        "certificates": [
+          "Extremal.migration.cut_size.x76_cut_size_compat",
+          "Extremal.migration.cut_size.x78_cut_size_compat"
+        ]
+      },
+      "coloured-family-cut": {
+        "members": [
+          "Hypergraph.conjectures.X209.x209_cut_size"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Hypergraph.migration.cut_size.x209_cut_size_compat",
+        "note": "#|[set e in E | x209_cut_edge col e]| for an arbitrary finite family E and supplied col : T -> I_r; no uniformity or palette premise; canonical GTBase.monochromatic.non_monochromatic_count"
+      },
+      "coloured-member-test": {
+        "members": [
+          "Hypergraph.conjectures.X209.x209_cut_edge"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Hypergraph.migration.cut_size.x209_cut_edge_compat",
+        "note": "[exists x in e, [exists y in e, col x != col y]] is ~~ monochromatic_on col e (a proved Boolean equality); canonical bridge GTBase.monochromatic.non_monochromatic_onP"
+      }
+    },
+    "distinct_variants": {
+      "Hypergraph.conjectures.X212.edge_cut and set-valued edge cuts": "Set-valued cuts (the edge set itself), not a count.",
+      "multigraph cuts and Digraph dicut_size": "Multigraph and directed out-cuts are different representations."
+    },
+    "historical_snapshots": {
+      "edge_count.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x76_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X76Original.ck_free_max_cut_polynomial_surplus_statement, certified by ck_free_max_cut_polynomial_surplus_statement_original_compat.",
+      "edge_count.v#X76Original.ck_free_max_cut_polynomial_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x76_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X76Original.ck_free_max_cut_polynomial_surplus_statement, certified by ck_free_max_cut_polynomial_surplus_statement_original_compat.",
+      "edge_count.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x78_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat.",
+      "edge_count.v#X78Original.h_free_max_cut_three_fourths_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x78_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat.",
+      "subgraph_of.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live x78_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat."
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.cut_size.x76_cut_size_compat",
+      "Extremal.migration.cut_size.x78_cut_size_compat",
+      "Extremal.migration.cut_size.ck_free_max_cut_polynomial_surplus_statement_compat",
+      "Extremal.migration.cut_size.h_free_max_cut_three_fourths_surplus_statement_compat",
+      "Extremal.migration.cut_size.x76_cut_size_original_compat",
+      "Extremal.migration.cut_size.ck_free_max_cut_polynomial_surplus_statement_original_compat",
+      "Extremal.migration.cut_size.x78_cut_size_original_compat",
+      "Extremal.migration.cut_size.h_free_max_cut_three_fourths_surplus_statement_original_compat",
+      "Hypergraph.migration.cut_size.x209_cut_edge_compat",
+      "Hypergraph.migration.cut_size.x209_cut_size_compat",
+      "Hypergraph.migration.cut_size.x209_is_max_r_cut_compat",
+      "Hypergraph.migration.cut_size.x209_scaled_excess_compat",
+      "Hypergraph.migration.cut_size.x209_is_min_scaled_excess_compat",
+      "Hypergraph.migration.cut_size.hypergraph_cut_excess_theta_sqrt_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.common.cut_sizeC",
+      "GTBase.common.cut_size_set0",
+      "GTBase.common.cut_size_setT",
+      "GTBase.common.cut_size_non_monochromatic",
+      "GTBase.common.cut_size_edges_between",
+      "GTBase.monochromatic.non_monochromatic_count_le",
+      "GTBase.monochromatic.non_monochromatic_count_set0",
+      "GTBase.monochromatic.non_monochromatic_count_const",
+      "GTBase.monochromatic.non_monochromatic_count_small",
+      "GTBase.monochromatic.non_monochromatic_count_pair"
+    ],
+    "public_client": "base/theories/examples/cut_size.v",
+    "legacy_baseline": "9de20ca72a0d7c8279ff8861033bfd80ce12a84a",
+    "migration_report": "meta/migration_reports/cut_size.md",
+    "migration_spec": "meta/migration_reports/cut_size.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A9.md",
+    "foundation_fidelity": "meta/foundation_fidelity/cut-size.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.sgraph",
+        "GraphTheory.connectivity",
+        "GraphTheory.mgraph",
+        "GTBase.common",
+        "GTBase.monochromatic"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.common.cut_size over E(G); GTBase.monochromatic.non_monochromatic_count over C8 monochromatic_on",
+      "note": "Pinned coq-graph-theory 0.9.7 has E(G) and edge sets but no count of the edges leaving a vertex set (mgraph cuts are over multigraph edge objects; digraph out-cuts are directed). C8 supplies monochromatic_on and non_monochromatic_onP for supplied maps on arbitrary finite types; the family count is new and graph-free. cut_size_non_monochromatic relates the two with the Boolean membership map.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}
