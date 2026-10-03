@@ -24,8 +24,9 @@ Definition x219_subgraph_critical_for (P : sgraph -> Prop) (G : sgraph) : Prop :
       forall u v : G, u -- v -> P (del_edges [set u; v])].
 
 (** A 2-colouring of [G] witnessing bipartiteness with [A] as one side. *)
+(** Deprecated compatibility alias; public API: [GTBase.bipartitions]. *)
 Definition x219_bipartition (G : sgraph) (A : {set G}) : Prop :=
-  forall u v : G, u -- v -> (u \in A) != (v \in A).
+  bipartition A.
 
 (** Maximum degree at most [D] on the part [A]. *)
 Definition x219_max_degree_on (G : sgraph) (A : {set G}) (D : nat) : Prop :=

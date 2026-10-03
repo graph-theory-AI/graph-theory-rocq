@@ -130,7 +130,7 @@ Qed.
     edgeless, hence bipartite). *)
 Lemma del_bipartite_full (G : sgraph) : del_bipartite (edge_setG G).
 Proof.
-exists set0 => x y xy; by rewrite (edge_setG_mem xy).
+apply/bipartite_after_deletionP; exists set0 => x y xy; by rewrite (edge_setG_mem xy).
 Qed.
 
 (** identity: a graph with fewer than three vertices is triangle-free. *)
