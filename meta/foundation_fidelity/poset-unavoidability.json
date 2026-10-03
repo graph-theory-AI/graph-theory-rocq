@@ -18,6 +18,35 @@
         "poset_unavoidable_minor",
         "poset_unavoidable_K0"
       ]
+    },
+    "Digraph.foundations.tournament_unavoidability": {
+      "path": "digraph-theory/theories/foundations/tournament_unavoidability.v",
+      "overrides": {
+        "tournament_unavoidable": {
+          "verdict": "FAITHFUL",
+          "note": "Exact unvd.unavoidable: every bundled tournament with exactly N vertices contains an arbitrary finite digraph D through an injective map preserving arcs one way (upstream is_dhom on to_GT); tournament_unavoidable_unbundledE proves it equivalent to the unbundled irreflexive, semicomplete and asymmetric reading via the same-carrier factory. Not induced; loops and digons are allowed in D and then never contained."
+        },
+        "unavoidability_number": {
+          "verdict": "FAITHFUL",
+          "note": "Exact unvd.unvd: N-unavoidable and not M-unavoidable for EVERY smaller natural M. The empty digraph has value 0, values are unique and at least #|D|; no existence or positivity guard."
+        },
+        "linearly_unavoidable": {
+          "verdict": "FAITHFUL",
+          "note": "Exact X221.x221_linearly_unavoidable: one natural C before all digraphs and values, F D -> unavoidability_number D N -> N <= C * #|D|; members without a value impose no bound."
+        }
+      },
+      "machine_evidence": [
+        "tournament_unavoidable_unbundledE",
+        "tournament_unavoidable_card",
+        "tournament_unavoidable_empty",
+        "tournament_unavoidable_succ",
+        "tournament_unavoidable_monotone",
+        "unavoidability_number_empty",
+        "unavoidability_number_card",
+        "unavoidability_number_unique",
+        "not_tournament_unavoidable_loop",
+        "not_tournament_unavoidable_digon"
+      ]
     }
   }
 }

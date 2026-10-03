@@ -279,7 +279,7 @@ Definition x221_void (D : diGraphType) : Prop := forall x : D, False.
 Lemma x221_unavoidable_void (D : diGraphType) :
   x221_void D -> unavoidable D 0.
 Proof.
-move=> dF T _ _; exists (fun x : D => match dF x with end); split.
+move=> dF; apply/unavoidableP => T _ _; exists (fun x : D => match dF x with end); split.
   by move=> x; case: (dF x).
 by move=> u v; case: (dF u).
 Qed.

@@ -4,17 +4,21 @@
   "primitive": {
     "canonical_name": "Minor.foundations.poset_unavoidability.poset_unavoidable",
     "owner": "minor-theory",
-    "status": "migrating",
+    "status": "deprecated",
     "fidelity": "FAITHFUL",
     "normalized_names": [
-      "unavoidable"
+      "unavoidable",
+      "unvd",
+      "linearly_unavoidable"
     ],
     "source_definitions": [
       "Minor.conjectures.X228.x228_unavoidable",
-      "Digraph.conjectures.unvd.unavoidable"
+      "Digraph.conjectures.unvd.unavoidable",
+      "Digraph.conjectures.unvd.unvd",
+      "Digraph.conjectures.X221.x221_linearly_unavoidable"
     ],
-    "consumers_remaining": 2,
-    "relation": "Exact finite-poset cover-minor unavoidability: one natural threshold d chosen before all finite posets, and every poset whose dimension is not at most d (GTBase.posets, realizers may be empty) has H as a minor of its cover graph, host before pattern (upstream minor). d = 0, empty carriers and empty graphs allowed; no planarity or width condition on H; not induced minors, subdivisions or the exact-order tournament unavoidability of Digraph.conjectures.unvd.unavoidable, which stays a deferred distinct contract.",
+    "consumers_remaining": 5,
+    "relation": "Exact finite-poset cover-minor unavoidability: one natural threshold d chosen before all finite posets, and every poset whose dimension is not at most d (GTBase.posets, realizers may be empty) has H as a minor of its cover graph, host before pattern (upstream minor). d = 0, empty carriers and empty graphs allowed; no planarity or width condition on H; not induced minors, subdivisions or the exact-order tournament unavoidability of Digraph.conjectures.unvd.unavoidable, which is the separate tournament-exact-order class with its own Digraph canonical.",
     "semantic_classes": {
       "poset-cover-minor": {
         "members": [
@@ -29,18 +33,63 @@
       },
       "tournament-exact-order": {
         "members": [
-          "Digraph.conjectures.unvd.unavoidable"
+          "Digraph.conjectures.unvd.unavoidable",
+          "Digraph.conjectures.unvd.unvd",
+          "Digraph.conjectures.X221.x221_linearly_unavoidable"
         ],
-        "count": 1,
-        "verdict": "distinct representation",
-        "state": "deferred",
-        "certificates": [],
-        "note": "Every tournament with exactly N vertices contains an injective arc-preserving copy of D; a directed exact-order contract with its own unvd/X221 chain. Left byte-for-byte unchanged for its later directed family; registry inclusion classifies the normalized namesake only."
+        "count": 3,
+        "verdict": "equivalent to its own directed canonical; distinct from poset-cover-minor",
+        "state": "migrated-alias",
+        "canonical_definitions": {
+          "Digraph.conjectures.unvd.unavoidable": "Digraph.foundations.tournament_unavoidability.tournament_unavoidable",
+          "Digraph.conjectures.unvd.unvd": "Digraph.foundations.tournament_unavoidability.unavoidability_number",
+          "Digraph.conjectures.X221.x221_linearly_unavoidable": "Digraph.foundations.tournament_unavoidability.linearly_unavoidable"
+        },
+        "owner": "digraph-theory",
+        "certificates": [
+          "Digraph.migration.tournament_unavoidability.unavoidable_compat",
+          "Digraph.migration.tournament_unavoidability.unvd_compat",
+          "Digraph.migration.tournament_unavoidability.x221_linearly_unavoidable_compat"
+        ],
+        "frozen_supports": {
+          "Digraph.conjectures.heroes.is_tournament": "Digraph.migration.tournament_unavoidability.is_tournament_compat",
+          "Digraph.conjectures.unvd.contains_subdigraph": "Digraph.migration.tournament_unavoidability.contains_subdigraph_compat"
+        },
+        "bridge": "Digraph.conjectures.unvd.unavoidableP (conjecture-local wrapper of Digraph.foundations.tournament_unavoidability.tournament_unavoidable_unbundledE)",
+        "public_client": "digraph-theory/theories/examples/tournament_unavoidability.v",
+        "migration_record": "meta/LIBRARY_MIGRATION_C22.md",
+        "review": "Separate C22 binding: this directed class needs its own independent step-10 review and root whole-statement check; the C21 poset-cover-minor review does not cover it.",
+        "upstream_audit": {
+          "searched_modules": [
+            "GraphTheory.core.digraph",
+            "Digraph.core.digraph",
+            "Digraph.core.tournament",
+            "Digraph.conjectures.X2",
+            "GTMisc.conjectures.D7"
+          ],
+          "result": "new-area-primitive",
+          "note": "Reuses the bundled Digraph.core.tournament structure, its DiGraph_IsTournament factory, TT n and sub-tournaments, and upstream is_dhom through to_GT; upstream isubgraph reflects non-arcs and is a different (induced) contract. X2.subdigraph_embed and GTMisc.D7.is_tournament stay unchanged. No conjecture file is imported by the foundation.",
+          "audited_at": "2026-10-03"
+        },
+        "note": "Every tournament with exactly N vertices contains an injective, one-way arc-preserving (not induced) copy of an arbitrary finite digraph D; unvd adds failure at every smaller M (the empty digraph has value 0) and the linear class bounds every pinned value by one natural C chosen first. A directed exact-order contract, never identified with Minor.foundations.poset_unavoidability.poset_unavoidable.",
+        "reviewed_by": "path_review",
+        "reviewed_commit": "30459e9b9eeebbdb5451c70c529bd2e5dfb64c99",
+        "independent_review": "meta/migration_reviews/tournament_unavoidability.md"
       }
     },
     "compatibility_theorems": [
       "Minor.migration.poset_unavoidability.x228_unavoidable_compat",
-      "Minor.migration.poset_unavoidability.unavoidable_minor_kelly_construction_statement_compat"
+      "Minor.migration.poset_unavoidability.unavoidable_minor_kelly_construction_statement_compat",
+      "Digraph.migration.tournament_unavoidability.is_tournament_compat",
+      "Digraph.migration.tournament_unavoidability.contains_subdigraph_compat",
+      "Digraph.migration.tournament_unavoidability.unavoidable_compat",
+      "Digraph.migration.tournament_unavoidability.unvd_compat",
+      "Digraph.migration.tournament_unavoidability.x221_linearly_unavoidable_compat",
+      "Digraph.migration.tournament_unavoidability.sumner_oriented_tree_unavoidable_statement_compat",
+      "Digraph.migration.tournament_unavoidability.conj_9_compat",
+      "Digraph.migration.tournament_unavoidability.prob_6_compat",
+      "Digraph.migration.tournament_unavoidability.kextension_linear_unavoidability_statement_compat",
+      "Digraph.migration.tournament_unavoidability.prob6_unvd_statement_compat"
     ],
     "api_theorems": [
       "Minor.foundations.poset_unavoidability.poset_dimension_at_mostW",
@@ -48,7 +97,17 @@
       "Minor.foundations.poset_unavoidability.poset_unavoidable_threshold",
       "Minor.foundations.poset_unavoidability.poset_unavoidable_large",
       "Minor.foundations.poset_unavoidability.poset_unavoidable_minor",
-      "Minor.foundations.poset_unavoidability.poset_unavoidable_K0"
+      "Minor.foundations.poset_unavoidability.poset_unavoidable_K0",
+      "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_unbundledE",
+      "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_card",
+      "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_empty",
+      "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_succ",
+      "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_monotone",
+      "Digraph.foundations.tournament_unavoidability.unavoidability_number_empty",
+      "Digraph.foundations.tournament_unavoidability.unavoidability_number_card",
+      "Digraph.foundations.tournament_unavoidability.unavoidability_number_unique",
+      "Digraph.foundations.tournament_unavoidability.not_tournament_unavoidable_loop",
+      "Digraph.foundations.tournament_unavoidability.not_tournament_unavoidable_digon"
     ],
     "public_client": "minor-theory/theories/examples/poset_unavoidability.v",
     "legacy_baseline": "97605ddae838bc6e84b0602240148246e9d065f2",
