@@ -59,6 +59,16 @@ repository root. They do not expand the generated helper inventory or its debt
 counts. Missing conjecture inventory entries never fall back to descriptors.
 `consumers_remaining` retains its existing same-file direct-consumer meaning.
 
+`normalized_names` selects the complete conjecture-inventory family only.
+Explicit public sources are selected independently by their qualified descriptor
+keys; their basenames need not appear in `normalized_names`. The authoritative
+`source_definitions` list must equal the union of all normalized-name conjecture
+matches and all validated public descriptors. Matching conjecture helpers are
+never skipped because another family owns them, and duplicate source ownership
+still fails. This lets a family migrate a public dependency without also claiming
+another family's local aliases that happen to share its basename. Deferred
+conjecture variants remain classified in `source_definitions` as before.
+
 The report uses ordinary `kind: source` objects, whose original commit/path must
 match the descriptor. Frozen text, aliases, certificate registration, exact
 statement iff types, assumptions and corpus status checks remain unchanged.
