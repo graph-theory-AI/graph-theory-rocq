@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "family": "path-tree",
+  "primitive": {
+    "canonical_name": "GTBase.path_trees.path_tree",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "path_index_graph",
+      "path_tree"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X126.x126_path_index_graph",
+      "Chromatic.conjectures.X189.x189_path_index_graph",
+      "Extremal.conjectures.X105.x105_path_tree",
+      "Minor.conjectures.X95.x95_path_index_graph"
+    ],
+    "consumers_remaining": 4,
+    "relation": "definitional: each of the four helpers is is_tree [set: T] /\\ Delta T <= 2, the body of GTBase.path_trees.path_tree T, convertible",
+    "semantic_classes": {
+      "tree-of-maximum-degree-two": {
+        "members": [
+          "Chromatic.conjectures.X126.x126_path_index_graph",
+          "Chromatic.conjectures.X189.x189_path_index_graph",
+          "Extremal.conjectures.X105.x105_path_tree",
+          "Minor.conjectures.X95.x95_path_index_graph"
+        ],
+        "count": 4,
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.path_tree.x126_path_index_graph_compat",
+          "Chromatic.migration.path_tree.x189_path_index_graph_compat",
+          "Extremal.migration.path_tree.x105_path_tree_compat",
+          "Minor.migration.path_tree.x95_path_index_graph_compat"
+        ],
+        "note": "X126, X189 and X95 *_path_index_graph and X105 x105_path_tree all read is_tree [set: T] /\\ Delta T <= 2 (upstream is_tree: unique irredundant paths and connected; GTBase.base Delta: maximum neighbourhood size), the body of path_tree T, convertible. The empty graph satisfies it (is_tree of the empty vertex set holds vacuously, Delta is 0); no nonemptiness or size premise is added."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.path_tree.dujmovic_thue_choice_number_pathwidth_statement_compat",
+      "Chromatic.migration.path_tree.dujmovic_thue_choice_number_pathwidth_statement_original_compat",
+      "Chromatic.migration.path_tree.spaghetti_tree_path_decomposition_chi_bound_statement_compat",
+      "Chromatic.migration.path_tree.x126_path_index_graph_compat",
+      "Chromatic.migration.path_tree.x126_pathwidth_at_most_compat",
+      "Chromatic.migration.path_tree.x189_path_index_graph_compat",
+      "Chromatic.migration.path_tree.x189_spaghetti_path_decompositions_width_compat",
+      "Extremal.migration.path_tree.non_star_non_path_tree_inducibility_bounded_away_statement_compat",
+      "Extremal.migration.path_tree.x105_path_tree_compat",
+      "Minor.migration.path_tree.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_compat",
+      "Minor.migration.path_tree.x95_path_index_graph_compat",
+      "Minor.migration.path_tree.x95_pathwidth_at_most_compat"
+    ],
+    "api_theorems": [
+      "GTBase.path_trees.path_tree_tree",
+      "GTBase.path_trees.path_tree_forest",
+      "GTBase.path_trees.path_tree_connected",
+      "GTBase.path_trees.path_tree_Delta",
+      "GTBase.path_trees.Delta_le2P",
+      "GTBase.path_trees.path_tree_degree",
+      "GTBase.path_trees.path_treeI",
+      "GTBase.path_trees.Delta_le_card",
+      "GTBase.path_trees.path_tree_K0",
+      "GTBase.path_trees.path_tree_K1",
+      "GTBase.path_trees.path_tree_K2",
+      "GTBase.path_trees.not_path_tree_K3",
+      "GTBase.path_trees.not_path_tree_claw"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.sgraph",
+        "GraphTheory.treewidth",
+        "GraphTheory.minor",
+        "GraphTheory.digraph",
+        "mathcomp.boot.bigop"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "GraphTheory.sgraph.is_tree",
+      "note": "coq-graph-theory 0.9.7 has is_forest, is_tree S := is_forest S /\\ connected S, the forest record, sunit, 'K_n and 'K_n,m, but no path-graph or pathwidth predicate; Delta is GTBase.base's maximum degree. GTBase.path_trees imports base (which owns Delta) and is not re-exported, avoiding the base/walks_paths cycle. Concrete ordinal path constructors (Hom U3 path_graph, Packing X18/X226), linear forests (forests, not trees: X212, X34, X23, X74, digraph path_fas), the sequence/multigraph path contracts and the tree-decomposition index trees stay separate. Legacy bodies and per-row certificates: meta/migration_reports/path_tree.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/path_tree.md",
+    "reviewed_by": "coordinator helper path_review",
+    "migration_spec": "meta/migration_reports/path_tree.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/path-tree.json",
+    "reviewed_commit": "299dc71b0999743f91a1931378608078a4ef0df0",
+    "independent_review": "meta/migration_reviews/path_tree.md"
+  }
+}

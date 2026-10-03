@@ -53,9 +53,9 @@
       "note": "The ten *_complement_sym/_irrefl lemmas keep their statements and are re-proved from upstream compl_rel_sym/compl_rel_irrefl; they are frozen verbatim (Legacy-qualified) as scaffolding, and *_proofs_compat relates the SGraph built from them to the live one by the identity isomorphism."
     },
     "historical_snapshots": {
-      "induced_free.v#X56Legacy.statement": "A1 snapshot: A1 froze the induced-free helper of X56 but kept the live x56_complement, which after A6 is upstream compl.",
-      "subgraph_of.v#XE1Legacy.graph_ramsey": "A5 snapshot: A5 froze the Ramsey chain over its frozen subgraph helper but kept the live xe1_complement_graph, which aft",
-      "consecutive_in_cycle.v#XE1Legacy.erdos_567_statement": "B4 snapshot: B4 froze erdos_567's h5_graph but kept the live xe1_graph_ramsey_number, which reaches the complement. Kept"
+      "induced_free.v#X56Legacy.statement": "A1 snapshot: A1 froze the induced-free helper of X56 but kept the live x56_complement, which after A6 is upstream compl. Kept unchanged; the combined pre-A1, pre-A6 row is Extremal.migration.complement.X56Original, certified by c8_complement_c8_erdos_hajnal_statement_original_compat.",
+      "subgraph_of.v#XE1Legacy.graph_ramsey": "A5 snapshot: A5 froze the Ramsey chain over its frozen subgraph helper but kept the live xe1_complement_graph, which after A6 is upstream compl. Kept unchanged; the combined pre-A5, pre-A6 chain is Extremal.migration.complement.XE1Original.graph_ramsey (with its number/diagonal wrappers and all twelve Ramsey rows in XE1Original/XE2Original).",
+      "consecutive_in_cycle.v#XE1Legacy.erdos_567_statement": "B4 snapshot: B4 froze erdos_567's h5_graph but kept the live xe1_graph_ramsey_number, which reaches the complement. Kept unchanged; the combined pre-A5, pre-A6, pre-B4 row is Extremal.migration.complement.XE1Original.erdos_567_statement."
     },
     "compatibility_theorems": [
       "Chromatic.migration.complement.x3_complement_rel_compat",
@@ -135,6 +135,8 @@
       "note": "compl_rel (sgraph.v 1413) is the same relation; compl (1421) packages it with upstream's own opaque proofs, so a local SGraph is related by eq_diso, not by conversion. diso_compl and isubgraph_compl are upstream; coloring's maxstabsets_compl/alpha_compl are aborted upstream and are not used.",
       "audited_at": "2026-10-03"
     },
-    "reviewed_by": null
+    "reviewed_by": "marcol",
+    "reviewed_commit": "6b0bc780e56385d0509f9959d98ec0fa69050f90",
+    "independent_review": "meta/migration_reviews/complement.md"
   }
 }

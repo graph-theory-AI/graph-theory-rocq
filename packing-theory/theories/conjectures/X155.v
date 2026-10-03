@@ -1,6 +1,7 @@
 (** * Packing.conjectures.X155 -- v2 identifying-code VC dichotomy row *)
 
 From GTBase Require Export base.
+From GTBase Require Import graph_classes.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X155 vocabulary ***********************************************)
 
 Definition x155_hereditary_class (C : sgraph -> Prop) : Prop :=
-  forall (G : sgraph) (S : {set G}), C G -> C (induced S).
+  GTBase.graph_classes.induced_closed C.
 
 Definition x155_closed_neighbourhood (G : sgraph) (v : G) : {set G} :=
   [set v] :|: N(v).

@@ -2,7 +2,7 @@
   "family": "path-edges",
   "canonical_name": "GTBase.walks_paths.seq_edge_set",
   "canonical_short_name": "seq_edge_set",
-  "relation": "three separate representations: X14 x14_path_edges is seq_edge_list p (ordered list, conversion); X172 x172_path_edges and U7 path_edges are seq_edge_set s (finite support, conversion) and XE2 xe2_path_edge_set equals seq_edge_set p for every p (seq_edge_set_image); X178 x178_path_edge_set is seq_index_edge_set p (actual edges between first occurrences, conversion), equal to the support only on duplicate-free walks",
+  "relation": "three separate representations: X14 x14_path_edges is seq_edge_list p (ordered list, conversion); X172 x172_path_edges and U7 path_edges are seq_edge_set s (finite support, conversion) and XE2 xe2_path_edge_set equals seq_edge_set p for every p (seq_edge_set_image); X178 x178_path_edge_set is seq_index_edge_set p (actual edges between first occurrences, conversion), equal to the support on duplicate-free walks",
   "baseline_commit": "048c768adce0cfcbf5b5a5763d71fc8daf483db8",
   "namespaces": {
     "base": "GTBase",

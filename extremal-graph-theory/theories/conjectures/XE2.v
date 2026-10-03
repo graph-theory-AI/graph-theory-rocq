@@ -81,7 +81,7 @@ Definition xe2_min_degree (G : sgraph) (d : nat) : Prop :=
   forall v : G, d <= #|N(v)|.
 
 Definition xe2_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\ 2 < size c.
+  seq_cycle (--) c.
 
 Definition xe2_cycle_diagonal_count (G : sgraph) (c : seq G) : nat :=
   #|[set p : G * G |

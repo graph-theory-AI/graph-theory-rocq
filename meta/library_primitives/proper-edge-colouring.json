@@ -152,6 +152,8 @@
       "note": "coq-graph-theory 0.9.7 has no supplied proper-edge-colouring predicate: coloring is a partition into stable sets, mgraph.line_graph is DIRECTED (target e1 == source e2) and GTBase.base.line_graph lives on multigraph edge identities with a count-only edge_colourable, so none is a faithful canonical for the corpus' supplied maps; no line-graph bridge is claimed. The two corpus carriers are kept as two interfaces of one focused GTBase module (three areas need it): set maps {set G} -> C read on the doubletons of actual edges, and pair maps G -> G -> C symmetric on all ordered pairs, both over an eqType palette (the public foundation source already was; C5's finType vertex-colouring wrapper is not used so as not to narrow it). The set-to-pair bridge fun x y => col [set x; y] is explicit; no map on the subtype of actual edges replaces either domain, because that would admit an empty palette for every edgeless graph while the corpus domains do not.",
       "audited_at": "2026-10-03"
     },
-    "reviewed_by": null
+    "reviewed_by": "family_scope",
+    "reviewed_commit": "7b04105d054089bfe937fe5fd6b4fc531f1b5547",
+    "independent_review": "meta/migration_reviews/proper_edge_colouring.md"
   }
 }

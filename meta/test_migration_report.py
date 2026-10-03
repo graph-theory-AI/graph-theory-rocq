@@ -345,6 +345,201 @@ class ReportTests(unittest.TestCase):
         self.assertTrue(REPORT.check_kernel(self.spec))
 
 
+class FrozenRoleTests(unittest.TestCase):
+    """A primary row must not hide a mislabeled additional complete Original."""
+
+    setUp = ReportTests.setUp
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    commit = ReportTests.commit
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+    rebaseline = ReportTests.rebaseline
+    compile_fixture = ReportTests.compile_fixture
+
+    def register(self, name):
+        self.registry["primitives"]["test-family"]["compatibility_theorems"].append(
+            self.module + "." + name)
+        self.write_json("meta/library_primitives/test-family.json", {
+            "schema_version": 1, "family": "test-family",
+            "primitive": self.registry["primitives"]["test-family"],
+        })
+
+    def add_original(self, guarded=False, *, module="X0Original", certificate="original_compat"):
+        obj = copy.deepcopy(self.spec["frozen"][1])
+        obj.update(kind="original-statement", frozen=module + ".statement",
+                   certificate=self.module + "." + certificate)
+        self.spec["frozen"].append(obj)
+        guard = "False -> " if guarded else ""
+        proof = "intros h; destruct h" if guarded else "split; intros h n; apply h"
+        self.cert_source += (
+            f"Module {module}.\n"
+            "Definition statement : Prop := forall n, Legacy.local_helper n.\n"
+            f"End {module}.\n"
+            f"Lemma {certificate} : {guard}({module}.statement <-> test_statement).\n"
+            f"Proof. {proof}. Qed.\n")
+        self.write(self.certificate, self.cert_source)
+        self.register(certificate)
+        return obj
+
+    def assert_role_rejected(self, obj):
+        self.assertTrue(any("complete statement requires" in error for error in self.failures()))
+        objects, errors = REPORT.statement_obligations(self.spec)
+        self.assertIn(obj, objects, "The full Original remains a required obligation")
+        self.assertTrue(errors)
+        with patch.object(REPORT.ROCQ, "environment", side_effect=AssertionError("must reject before Rocq")):
+            self.assertTrue(REPORT.check_kernel(self.spec))
+
+    def test_unknown_missing_and_nonstring_kinds_fail_both_entries(self):
+        obj = self.add_original(guarded=True)
+        for kind in (None, False, 1, [], {}, "original", "future-frozen"):
+            with self.subTest(kind=kind):
+                obj["kind"] = kind
+                with self.assertRaisesRegex(ValueError, "unsupported kind"):
+                    self.report()
+                self.assertIn("unsupported kind", " ".join(REPORT.check_kernel(self.spec)))
+        del obj["kind"]
+        with self.assertRaisesRegex(ValueError, "unsupported kind"):
+            self.report()
+        self.assertIn("unsupported kind", " ".join(REPORT.check_kernel(self.spec)))
+
+    def test_known_nonstatement_roles_cannot_hide_an_original(self):
+        obj = self.add_original(guarded=True)
+        for kind in ("chain", "original-chain", *sorted(REPORT.HISTORICAL_KINDS)):
+            with self.subTest(kind=kind):
+                obj["kind"] = kind
+                self.assert_role_rejected(obj)
+
+    def test_corpus_claims_cannot_hide_the_original_identity(self):
+        obj = self.add_original(guarded=True)
+        obj["kind"] = "historical"
+        for claim in ({"corpus": "opg"}, {"corpus": "other"},
+                      {"corpus": []}, {"non_corpus": True},
+                      {"corpus": "opg", "non_corpus": True}):
+            with self.subTest(claim=claim):
+                obj.pop("corpus", None)
+                obj.pop("non_corpus", None)
+                obj.update(claim)
+                self.assert_role_rejected(obj)
+
+    def test_direct_kernel_also_validates_statement_corpus_selection(self):
+        obj = self.add_original()
+        for claim in ({"corpus": "opg"}, {"corpus": "other"},
+                      {"non_corpus": True}, {"non_corpus": "yes"}):
+            with self.subTest(claim=claim):
+                obj.pop("corpus", None)
+                obj.pop("non_corpus", None)
+                obj.update(claim)
+                self.assertTrue(self.failures())
+                with patch.object(REPORT.ROCQ, "environment", side_effect=AssertionError("metadata rejected")):
+                    self.assertTrue(REPORT.check_kernel(self.spec))
+
+    def test_noncorpus_discovery_does_not_trust_the_original_marker(self):
+        obj = self.add_original(guarded=True)
+        self.write_manifests(None)
+        self.rebaseline()
+        self.spec["frozen"][1]["non_corpus"] = True
+        for kind in ("chain", "original-chain", "historical", "a5-frozen"):
+            for claim in ({}, {"non_corpus": True}, {"non_corpus": False}, {"corpus": "v2"}):
+                with self.subTest(kind=kind, claim=claim):
+                    obj["kind"] = kind
+                    obj.pop("corpus", None)
+                    obj.pop("non_corpus", None)
+                    obj.update(claim)
+                    self.assert_role_rejected(obj)
+
+    def test_parameterized_prop_helpers_accept_all_historical_roles(self):
+        for kind in sorted(REPORT.HISTORICAL_KINDS):
+            with self.subTest(kind=kind):
+                obj = copy.deepcopy(self.spec["frozen"][0])
+                obj["kind"] = kind
+                self.spec["frozen"].append(obj)
+                self.assertEqual(self.failures(), [])
+                objects, errors = REPORT.statement_obligations(self.spec)
+                self.assertEqual(errors, [])
+                self.assertNotIn(obj, objects)
+                self.spec["frozen"].pop()
+
+    def test_m1_frozen_keeps_its_existing_registration_exception(self):
+        obj = copy.deepcopy(self.spec["frozen"][0])
+        obj.update(kind="m1-frozen", certificate=None)
+        self.spec["frozen"].append(obj)
+        self.assertEqual(self.failures(), [])
+        obj["kind"] = "historical"
+        self.assertIn(self.helper + ": certificate is registered", self.failures())
+
+    def add_historical_scaffolding(self):
+        imports = "From mathcomp Require Import all_boot.\nFrom GraphTheory Require Import digraph sgraph.\n"
+        declarations = (
+            "Record Box := Build_Box { value : nat }.\n"
+            "Definition edge0 : rel bool := fun _ _ => false.\n"
+            "Lemma edge0_sym : symmetric edge0. Proof. by []. Qed.\n"
+            "Lemma edge0_irrefl : irreflexive edge0. Proof. by []. Qed.\n")
+        self.original = imports + self.original + declarations
+        self.live = self.original.replace(":= n = n.", ":= canonical n.")
+        self.cert_source = imports + self.cert_source.replace("End Legacy.\n", declarations + "End Legacy.\n")
+        self.cert_source += (
+            "Lemma box_compat : (exists _ : Legacy.Box, True) <-> (exists _ : Box, True).\n"
+            "Proof. split; intros _; [exists (Build_Box 0)|exists (Legacy.Build_Box 0)]; exact I. Qed.\n"
+            "Lemma edge0_compat : Legacy.edge0 = edge0. Proof. by []. Qed.\n"
+            "Lemma graph_compat : SGraph Legacy.edge0_sym Legacy.edge0_irrefl "
+            "≃ SGraph edge0_sym edge0_irrefl.\n"
+            "Proof. by apply: eq_diso => x y. Qed.\n")
+        self.write(self.certificate, self.cert_source)
+        for name, certificate in (("Box", "box_compat"), ("edge0", "edge0_compat"),
+                                  ("edge0_sym", "graph_compat"), ("edge0_irrefl", "graph_compat")):
+            self.spec["frozen"].append({
+                "kind": "historical", "qualified": "GTBase.conjectures.X0." + name,
+                "path": self.source, "name": name, "frozen_path": self.certificate,
+                "frozen": "Legacy." + name, "certificate": self.module + "." + certificate,
+            })
+        for name in ("box_compat", "edge0_compat", "graph_compat"):
+            self.register(name)
+        self.rebaseline()
+
+    def test_record_and_opaque_graph_scaffolding_are_not_statement_objects(self):
+        self.add_historical_scaffolding()
+        self.assertEqual(self.failures(), [])
+        objects, errors = REPORT.statement_obligations(self.spec)
+        self.assertEqual(errors, [])
+        self.assertEqual([obj["kind"] for obj in objects], ["statement"])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_rejects_guarded_original_with_primary_row_present(self):
+        self.add_original()
+        obj = self.add_original(guarded=True, module="SecondOriginal", certificate="second_original_compat")
+        self.assertEqual(self.failures(), [], "Text-only mode must not claim a type proof")
+        self.compile_fixture()
+        self.assertTrue(any("exact-type/assumptions probe failed" in error
+                            for error in REPORT.check_kernel(self.spec)))
+        for kind in ("chain", "original-chain", "historical", "a5-frozen"):
+            obj["kind"] = kind
+            self.assert_role_rejected(obj)
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_accepts_genuine_original_and_explicit_noncorpus_original(self):
+        self.add_original()
+        self.add_original(module="SecondOriginal", certificate="second_original_compat")
+        self.assertEqual(self.failures(), [])
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        self.write_manifests(None)
+        self.rebaseline()
+        for obj in self.spec["frozen"][1:]:
+            obj["non_corpus"] = True
+        self.assertEqual(self.failures(), [])
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_accepts_record_and_opaque_graph_isomorphism(self):
+        self.add_historical_scaffolding()
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+
 class RepositorySourceTests(unittest.TestCase):
     """A real public source -> foundation intermediary -> two corpus rows."""
 
