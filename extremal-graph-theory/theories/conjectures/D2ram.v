@@ -72,6 +72,7 @@
 
 From mathcomp Require Import all_boot all_fingroup.
 From GTBase Require Import base.
+From GTBase Require Import set_pairs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -167,7 +168,7 @@ Definition multicolour_erdos_hajnal_statement : Prop :=
 Definition perfect_graph (G : sgraph) : Prop := forall A : {set G}, χ(A) = ω(A).
 
 Definition complete_bipartite_sub (G : sgraph) (A B : {set G}) : Prop :=
-  [disjoint A & B] /\ (forall a b : G, a \in A -> b \in B -> a -- b).
+  complete_between A B.
 
 (** Corpus row: opg:complete_bipartite_subgraphs_of_perfect_graphs
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/complete_bipartite_subgraphs_of_perfect_graphs/

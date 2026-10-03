@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X41 -- v2 sparse pure-pair row *)
 
 From GTBase Require Export base.
+From GTBase Require Import set_pairs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -12,10 +13,10 @@ Definition x41_induced_H_free (H G : sgraph) : Prop :=
   induced_free G H.
 
 Definition x41_complete_between (G : sgraph) (A B : {set G}) : Prop :=
-  forall a b : G, a \in A -> b \in B -> a -- b.
+  complete_between A B.
 
 Definition x41_anticomplete_between (G : sgraph) (A B : {set G}) : Prop :=
-  forall a b : G, a \in A -> b \in B -> ~~ (a -- b).
+  ~~ neighbor A B.
 
 Definition x41_pure_pair (G : sgraph) (A B : {set G}) : Prop :=
   [disjoint A & B] /\

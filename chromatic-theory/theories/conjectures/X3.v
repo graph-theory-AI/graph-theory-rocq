@@ -8,6 +8,7 @@
 
 From Chromatic.conjectures Require Import U8.
 From GTBase Require Import colourings graph_classes.
+From GTBase Require Import set_pairs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -68,8 +69,7 @@ Definition x3_uniquely_covers_path_vertex
   exists i : I, A i :&: x3_path_vertices p = [set v].
 
 Definition x3_anticomplete (G : sgraph) (A B : {set G}) : Prop :=
-  [disjoint A & B] /\
-  forall a b : G, a \in A -> b \in B -> a -- b -> False.
+  anticomplete A B.
 
 Definition x3_bounded_chromatic (F : sgraph -> Prop) : Prop :=
   exists c : nat, forall G : sgraph, F G -> χ([set: G]) <= c.

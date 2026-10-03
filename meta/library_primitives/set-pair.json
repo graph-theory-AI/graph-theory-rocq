@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "family": "set-pair",
+  "primitive": {
+    "canonical_name": "GTBase.set_pairs.anticomplete",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "anticomplete",
+      "anticomplete_between",
+      "anticomplete_sets",
+      "complete_between",
+      "complete_bipartite_sub"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X3.x3_anticomplete",
+      "Extremal.conjectures.D2ram.complete_bipartite_sub",
+      "Extremal.conjectures.X223.x223_anticomplete",
+      "Extremal.conjectures.X57.x57_anticomplete",
+      "Extremal.conjectures.X58.x58_anticomplete",
+      "GTMisc.conjectures.X144.x144_anticomplete_between",
+      "GTMisc.conjectures.X144.x144_complete_between",
+      "GTMisc.conjectures.X41.x41_anticomplete_between",
+      "GTMisc.conjectures.X41.x41_complete_between",
+      "Minor.conjectures.X11.x11_anticomplete_sets"
+    ],
+    "consumers_remaining": 8,
+    "relation": "pairs of supplied vertex sets of one simple graph, three contracts kept apart: disjoint anticompleteness, raw anticompleteness and cross completeness. Chromatic X3, Extremal X57/X58/X223 x*_anticomplete ([disjoint A & B] /\\ a -- b -> False for cross pairs) and Minor X11 x11_anticomplete_sets (the same with ~~ (x -- y)) are iffs with GTBase.set_pairs.anticomplete A B ([disjoint A & B] && ~~ neighbor A B) by anticompleteP / anticomplete_nonadjP; GTMisc X41/X144 x*_anticomplete_between (~~ (a -- b) for cross pairs, no disjointness) are iffs with upstream ~~ neighbor A B by neighborNP; GTMisc X41/X144 x*_complete_between (a -- b for cross pairs) are iffs with GTBase.set_pairs.complete_between A B by complete_betweenP; Extremal D2ram complete_bipartite_sub ([disjoint A & B] /\\ cross completeness) is an iff with complete_between A B by disjoint_complete_betweenP, cross completeness forcing disjointness on an sgraph (complete_between_disjoint). No nonempty, order or unequal-vertex guard; completeness in compl G equals raw anticompleteness in G only for disjoint parts (complete_between_compl).",
+    "semantic_classes": {
+      "disjoint-anticomplete": {
+        "members": [
+          "Chromatic.conjectures.X3.x3_anticomplete",
+          "Extremal.conjectures.X57.x57_anticomplete",
+          "Extremal.conjectures.X58.x58_anticomplete",
+          "Extremal.conjectures.X223.x223_anticomplete"
+        ],
+        "count": 4,
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.set_pairs.x3_anticomplete_compat",
+          "Extremal.migration.set_pairs.x57_anticomplete_compat",
+          "Extremal.migration.set_pairs.x58_anticomplete_compat",
+          "Extremal.migration.set_pairs.x223_anticomplete_compat"
+        ],
+        "note": "[disjoint A & B] /\\ (forall cross pairs, a -- b -> False); iff with anticomplete A B by anticompleteP"
+      },
+      "disjoint-anticomplete-boolean-negation": {
+        "members": [
+          "Minor.conjectures.X11.x11_anticomplete_sets"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificates": [
+          "Minor.migration.set_pairs.x11_anticomplete_sets_compat"
+        ],
+        "note": "[disjoint A & B] /\\ (forall cross pairs, ~~ (x -- y)); iff with anticomplete A B by anticomplete_nonadjP"
+      },
+      "raw-anticomplete": {
+        "members": [
+          "GTMisc.conjectures.X144.x144_anticomplete_between",
+          "GTMisc.conjectures.X41.x41_anticomplete_between"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "GTMisc.migration.set_pairs.x144_anticomplete_between_compat",
+          "GTMisc.migration.set_pairs.x41_anticomplete_between_compat"
+        ],
+        "note": "forall cross pairs, ~~ (a -- b), with no disjointness; iff with upstream ~~ neighbor A B by neighborNP"
+      },
+      "raw-complete": {
+        "members": [
+          "GTMisc.conjectures.X144.x144_complete_between",
+          "GTMisc.conjectures.X41.x41_complete_between"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "GTMisc.migration.set_pairs.x144_complete_between_compat",
+          "GTMisc.migration.set_pairs.x41_complete_between_compat"
+        ],
+        "note": "forall cross pairs, a -- b; iff with complete_between A B by complete_betweenP"
+      },
+      "disjoint-complete": {
+        "members": [
+          "Extremal.conjectures.D2ram.complete_bipartite_sub"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.set_pairs.complete_bipartite_sub_compat"
+        ],
+        "note": "[disjoint A & B] /\\ (forall cross pairs, a -- b); iff with complete_between A B by disjoint_complete_betweenP (cross completeness forces disjointness on an sgraph)"
+      }
+    },
+    "distinct_variants": {
+      "GTMisc.conjectures.X94.x94_complete_pair": "raw biadjacency between two possibly different finite carriers; no same-set disjointness is well typed; a separate heterogeneous pair contract",
+      "GTMisc.conjectures.X94.x94_anticomplete_pair": "raw non-biadjacency between two possibly different finite carriers; a separate heterogeneous pair contract",
+      "Minor.conjectures.X67.x67_no_cross_edges": "sequence-interior wrapper: endpoints and two lists produce the interior sets before forbidding cross edges; part of the B1/B2/B3/C13 histories, not rewritten here",
+      "GTBase.common.complete_bipartite": "whole-graph bipartition: every edge crosses A and its complement, constraining both interiors and the whole carrier; not a pair of supplied parts"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.set_pairs.x3_anticomplete_compat",
+      "Chromatic.migration.set_pairs.erdos_anticomplete_pairs_statement_compat",
+      "Chromatic.migration.set_pairs.el_zahar_erdos_statement_compat",
+      "Extremal.migration.set_pairs.x57_anticomplete_compat",
+      "Extremal.migration.set_pairs.x58_anticomplete_compat",
+      "Extremal.migration.set_pairs.x223_anticomplete_compat",
+      "Extremal.migration.set_pairs.complete_bipartite_sub_compat",
+      "Extremal.migration.set_pairs.x57_sparse_strong_eh_property_compat",
+      "Extremal.migration.set_pairs.sparse_strong_eh_iff_forest_statement_compat",
+      "Extremal.migration.set_pairs.epsilon_bounded_h_free_anticomplete_pair_statement_compat",
+      "Extremal.migration.set_pairs.triangle_free_eps_bounded_anticomplete_pair_statement_compat",
+      "Extremal.migration.set_pairs.complete_bipartite_subgraphs_of_perfect_graphs_statement_compat",
+      "Extremal.migration.set_pairs.x57_sparse_strong_eh_property_original_compat",
+      "Extremal.migration.set_pairs.sparse_strong_eh_iff_forest_statement_original_compat",
+      "Extremal.migration.set_pairs.epsilon_bounded_h_free_anticomplete_pair_statement_original_compat",
+      "GTMisc.migration.set_pairs.x41_anticomplete_between_compat",
+      "GTMisc.migration.set_pairs.x41_complete_between_compat",
+      "GTMisc.migration.set_pairs.x144_anticomplete_between_compat",
+      "GTMisc.migration.set_pairs.x144_complete_between_compat",
+      "GTMisc.migration.set_pairs.x41_pure_pair_compat",
+      "GTMisc.migration.set_pairs.sparse_linear_pure_pair_statement_compat",
+      "GTMisc.migration.set_pairs.x144_pure_pair_compat",
+      "GTMisc.migration.set_pairs.fox_pure_pair_perfect_graphs_statement_compat",
+      "GTMisc.migration.set_pairs.sparse_linear_pure_pair_statement_original_compat",
+      "Minor.migration.set_pairs.x11_anticomplete_sets_compat",
+      "Minor.migration.set_pairs.x11_pairwise_anticomplete_paths_compat",
+      "Minor.migration.set_pairs.x11_has_k_anticomplete_xy_paths_compat",
+      "Minor.migration.set_pairs.induced_menger_anticomplete_paths_statement_compat",
+      "Minor.migration.set_pairs.x11_pairwise_anticomplete_paths_original_compat",
+      "Minor.migration.set_pairs.x11_has_k_anticomplete_xy_paths_original_compat",
+      "Minor.migration.set_pairs.induced_menger_anticomplete_paths_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.set_pairs.neighborNP",
+      "GTBase.set_pairs.anticompleteP",
+      "GTBase.set_pairs.anticomplete_nonadjP",
+      "GTBase.set_pairs.complete_betweenP",
+      "GTBase.set_pairs.complete_between_disjoint",
+      "GTBase.set_pairs.disjoint_complete_betweenP",
+      "GTBase.set_pairs.anticompleteC",
+      "GTBase.set_pairs.complete_betweenC",
+      "GTBase.set_pairs.anticompleteW",
+      "GTBase.set_pairs.complete_betweenW",
+      "GTBase.set_pairs.complete_between_compl"
+    ],
+    "public_client": "base/theories/examples/set_pairs.v",
+    "legacy_baseline": "229f2959f7726f1c0b1b3c72da4537245cb9919c",
+    "migration_report": "meta/migration_reports/set_pairs.md",
+    "migration_spec": "meta/migration_reports/set_pairs.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A21.md",
+    "foundation_fidelity": "meta/foundation_fidelity/set-pair.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph (neighbor, neighborP, neighbor1P, neighborC, neighborW, neighbor11, compl)",
+        "GraphTheory.core.dom (stable, a one-set contract)",
+        "GTBase.common (complete_bipartite, whole-graph)"
+      ],
+      "result": "adapted-in-base",
+      "candidate": "upstream ~~ neighbor A B (raw anticompleteness); GTBase.set_pairs.anticomplete and complete_between",
+      "note": "Upstream neighbor A B is the Boolean existence of a cross edge, so raw anticompleteness is its negation; there is no upstream disjoint-anticomplete or cross-complete pair. GTBase.set_pairs names those two over upstream neighbor and bounded quantifiers. Evidence: coordination/evidence/A21-set-pairs-discovery-by-path-review/ (upstream-search.txt) and coordination/evidence/A21-set-pairs/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}
