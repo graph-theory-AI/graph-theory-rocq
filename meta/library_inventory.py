@@ -124,6 +124,12 @@ def package_namespaces() -> dict[str, str]:
     return corpus_registry.NS
 
 
+def repository_namespaces() -> dict[str, str]:
+    """Logical owners of repository declarations, beyond corpus packages."""
+    return {"base": "GTBase", "atlas": "Atlas", "classical-lemmas": "ClassicalLemmas",
+            **package_namespaces()}
+
+
 def manifest_statement_names() -> set[str]:
     sys.path.insert(0, str(META))
     import corpus_registry
@@ -284,8 +290,7 @@ def project_sources(project: str) -> tuple[set[str], list[tuple[str, str]]]:
 
 def project_module(path: str, project: str) -> str:
     package, relative = path.split('/', 1)
-    namespaces = {"base": "GTBase", "atlas": "Atlas", "classical-lemmas": "ClassicalLemmas",
-                  **package_namespaces()}
+    namespaces = repository_namespaces()
     if package not in namespaces:
         raise RegistryError(f"{path}: unknown source owner")
     sources, mappings = project_sources(project)
@@ -435,8 +440,8 @@ def validate_registry(inventory: dict) -> tuple[dict[str, dict], list[str]]:
         return {}, errors + ["library_primitives/: primitives must be an object"]
 
     inventory_helpers = {h["qualified_name"]: h for h in inventory["helpers"]}
-    namespaces = package_namespaces()
-    local_namespaces = set(namespaces)
+    namespaces = repository_namespaces()
+    local_namespaces = set(namespaces.values())
     repository_declarations = repository_declaration_names(namespaces)
     claimed: dict[str, str] = {}
     for primitive_id, spec in sorted(entries.items()):
