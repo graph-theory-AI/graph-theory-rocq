@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "family": "degree-balance",
+  "primitive": {
+    "canonical_name": "Digraph.foundations.degree_balance.balanced",
+    "owner": "digraph-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "eulerian",
+      "Eulerian"
+    ],
+    "source_definitions": [
+      "Cycle.conjectures.U6.eulerian",
+      "Digraph.conjectures.X221.x221_eulerian",
+      "Digraph.conjectures.colouring_variants.eulerian",
+      "Digraph.conjectures.reals_growth.eulerian",
+      "Digraph.conjectures.two_extremal.Eulerian"
+    ],
+    "consumers_remaining": 10,
+    "relation": "one contract, degree balance of a finite digraph (every vertex has equal in- and out-degree; no connectivity, looplessness, inhabitance or tour premise). Migrated: two_extremal.Eulerian (forall v, indeg v = outdeg v over classic_core.indeg) is balanced D by conversion; colouring_variants.eulerian ([forall v, indeg v == outdeg v], Boolean, file-local in-degree) is balancedb D by conversion, reflected by balancedP; X221.x221_eulerian (forall v, outdeg v = indeg v, over classic_core.indeg) is the reversed-equation view balanced_revE, a proved iff. All in-degrees are the comprehension #|[set u | u --> v]|, the public indeg. Deferred: reals_growth.eulerian (same body, but its two non-corpus EC-log rows inherit classical-reals axioms through their statements: a legacy-axiom defect, left byte-identical) and Cycle U6's multigraph eulerian (connected, even arc-end degrees), a different contract. Chromatic.foundations.alon_tarsi.at_eulerian (balance of a supplied finite set of ordered pairs) is a distinct representation, not a source of this family.",
+    "semantic_classes": {
+      "legacy-axiom-defect": {
+        "members": [
+          "Digraph.conjectures.reals_growth.eulerian"
+        ],
+        "count": 1,
+        "verdict": "same contract, deferred (legacy-axiom defect)",
+        "state": "deferred",
+        "certificates": [],
+        "note": "reals_growth.eulerian (forall v : D, indeg v = outdeg v over its file-local in-degree) has the body of balanced D, but it is NOT migrated: its two non-corpus EC-log rows (ec_log_statement, ec_log_c6_statement) inherit four classical-reals axioms (ClassicalDedekindReals.sig_not_dec, sig_forall_dec, FunctionalExtensionality.functional_extensionality_dep, Classical_Prop.classic) through their statements, so any certificate of them fails the kernel assumptions audit required by the plan (section 3, invariant 4). reals_growth.v and grounding_reals2.v stay byte-identical to the baseline; the rejected pin 6dba7ed and its evidence record the attempt. Classified as a deferred legacy-axiom defect, not migrated and not accepted; the kernel evidence re-probes that neither EC-log statement reaches a migrated source or the public module."
+      },
+      "prop-degree-balance": {
+        "members": [
+          "Digraph.conjectures.two_extremal.Eulerian"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Digraph.migration.degree_balance.Eulerian_compat",
+        "note": "forall v : D, indeg v = outdeg v with classic_core.indeg = #|Nin v| = #|[set u | u --> v]|: the body of balanced D, convertible. Its corpus row H6_no_full_cover (derived:drv_twoext_h6, phase X1) is frozen complete with every guard in order; its chains realises_Eulerian (Section-parametric in the realisation relation, discharged type explicit), realises_W, realises_E and realises_gw and the two whole non-selected Conjecture 9.2 encodings conj_9_2_glued / conj_9_2_glued_e are frozen over the frozen helper and certified by complete iffs."
+      },
+      "prop-degree-balance-reversed": {
+        "members": [
+          "Digraph.conjectures.X221.x221_eulerian"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Digraph.migration.degree_balance.x221_eulerian_compat",
+        "note": "forall v : D, outdeg v = indeg v with classic_core.indeg = #|Nin v| = #|[set u | u --> v]|: the reversed equation; equivalent to balanced D by balanced_revE (eq_sym pointwise), a proved iff, not a conversion."
+      },
+      "bool-degree-balance": {
+        "members": [
+          "Digraph.conjectures.colouring_variants.eulerian"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Digraph.migration.degree_balance.cv_eulerian_compat",
+        "note": "[forall v : D, indeg v == outdeg v] with colouring_variants' local indeg: the body of balancedb D, convertible; balancedP reflects it into balanced D."
+      },
+      "multigraph-eulerian": {
+        "members": [
+          "Cycle.conjectures.U6.eulerian"
+        ],
+        "count": 1,
+        "verdict": "distinct representation",
+        "state": "deferred",
+        "certificates": [],
+        "note": "Cycle U6's eulerian G := mconnected G /\\ forall v, ~~ odd (mdeg v) on a multigraph: an UNDIRECTED, connected, even-arc-end-degree contract (a loop counts two); not degree balance of a digraph. Deferred to family B17 for the connected/even predicate and its complete reached rows only; U6's supplied is_eulerian_tour (a closed tour using every edge once) remains separate and unchanged."
+      }
+    },
+    "compatibility_theorems": [
+      "Digraph.migration.degree_balance.Eulerian_compat",
+      "Digraph.migration.degree_balance.H6_no_full_cover_compat",
+      "Digraph.migration.degree_balance.conj_9_2_glued_compat",
+      "Digraph.migration.degree_balance.conj_9_2_glued_e_compat",
+      "Digraph.migration.degree_balance.cv_eulerian_compat",
+      "Digraph.migration.degree_balance.majority_3col_eulerian_statement_compat",
+      "Digraph.migration.degree_balance.orientation_C4_eulerian_avoidable_statement_compat",
+      "Digraph.migration.degree_balance.realises_E_compat",
+      "Digraph.migration.degree_balance.realises_Eulerian_compat",
+      "Digraph.migration.degree_balance.realises_W_compat",
+      "Digraph.migration.degree_balance.realises_gw_compat",
+      "Digraph.migration.degree_balance.x221_eulerian_avoidable_compat",
+      "Digraph.migration.degree_balance.x221_eulerian_compat"
+    ],
+    "api_theorems": [
+      "Digraph.foundations.degree_balance.balancedP",
+      "Digraph.foundations.degree_balance.balanced_revE",
+      "Digraph.foundations.degree_balance.balanced_vertex",
+      "Digraph.foundations.degree_balance.indeg_sumE",
+      "Digraph.foundations.degree_balance.outdeg_sumE",
+      "Digraph.foundations.degree_balance.sum_indeg_outdeg",
+      "Digraph.foundations.degree_balance.balanced_arcless",
+      "Digraph.foundations.degree_balance.indeg_converse",
+      "Digraph.foundations.degree_balance.outdeg_converse",
+      "Digraph.foundations.degree_balance.balanced_converse",
+      "Digraph.foundations.degree_balance.balanced_ground_empty",
+      "Digraph.foundations.degree_balance.balanced_ground_arcless",
+      "Digraph.foundations.degree_balance.balanced_ground_loop",
+      "Digraph.foundations.degree_balance.balanced_ground_disconnected",
+      "Digraph.foundations.degree_balance.balanced_ground_digon",
+      "Digraph.foundations.degree_balance.balanced_ground_C3",
+      "Digraph.foundations.degree_balance.not_balanced_ground_TT2"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "Digraph.core.digraph",
+        "Digraph.core.oriented",
+        "Digraph.core.tournament",
+        "GraphTheory.digraph",
+        "Chromatic.foundations.alon_tarsi",
+        "mathcomp.boot.bigop",
+        "mathcomp.boot.finset"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "Digraph.core.oriented.outdeg",
+      "note": "coq-graph-theory has no in/out-degree of a finite digraph. The Digraph core has outdeg (core/oriented.v) but no in-degree outside conjecture files (classic_core.indeg over Nin, and two file-local copies in colouring_variants and reals_growth) and no balance predicate. The new public Digraph.foundations.degree_balance owns indeg, balanced and balancedb with the reflection, the reversed view, the converse swap, the handshake sum and arcless balance; outdeg and the three local in-degrees are unchanged. Chromatic.foundations.alon_tarsi.at_eulerian counts the incoming and outgoing arcs of a supplied finite set of ordered pairs (no digraph, no connectivity): a distinct representation, deferred. Closed Eulerian tours, strong connectivity and the undirected multigraph notion stay separate. Legacy bodies and per-row certificates: meta/migration_reports/degree_balance.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/degree_balance.md",
+    "reviewed_by": "family_scope",
+    "migration_spec": "meta/migration_reports/degree_balance.spec.json",
+    "downstream_client": "digraph-theory/theories/examples/degree_balance.v",
+    "foundation_fidelity": "meta/foundation_fidelity/degree-balance.json",
+    "reviewed_commit": "cc7837731b9992e58733b4c1f05913c97f0d5240",
+    "independent_review": "meta/migration_reviews/degree_balance.md"
+  }
+}

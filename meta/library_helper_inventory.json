@@ -501,10 +501,6 @@
         "GTMisc.conjectures.X172.x172_path_edges",
         "Minor.conjectures.U7.path_edges"
       ],
-      "ce59e564b5ca2f772436f1b5576f2054c27f1f780270b66cd95020622bf821ee": [
-        "Digraph.conjectures.reals_growth.eulerian",
-        "Digraph.conjectures.two_extremal.Eulerian"
-      ],
       "cfba051400e61e6216cc7bc5b4f75dede712a75c979c6ea13b165e5503f9f32a": [
         "Chromatic.conjectures.X109.x109_proper_colouring",
         "Chromatic.conjectures.X162.x162_proper_colouring",
@@ -1061,6 +1057,10 @@
       "fd91119307d03817d27c8e6669932f2a85e1a3d2ad237259329d3cfd3939c4d9": [
         "Chromatic.conjectures.X81.x81_proper_orientation",
         "GTMisc.conjectures.X82.x82_proper_orientation"
+      ],
+      "feb3e84a1bc87cd86889fef44671f7e5757d03fe2303a4fb97e3c42e64f39631": [
+        "Digraph.conjectures.X221.x221_eulerian",
+        "Digraph.conjectures.two_extremal.Eulerian"
       ]
     },
     "normalized_name": {
@@ -17254,7 +17254,7 @@
         "Digraph.conjectures.X221.delta122_hero_oriented_complete_multipartite_statement"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [],
       "name": "x221_Delta122",
       "normalized_name": "Delta122",
@@ -17273,7 +17273,7 @@
         "Digraph.conjectures.X221.x221_oriented_complete_multipartite"
       ],
       "kind": "Definition",
-      "line": 44,
+      "line": 45,
       "local_dependencies": [],
       "name": "x221_nonadj",
       "normalized_name": "nonadj",
@@ -17292,7 +17292,7 @@
         "Digraph.conjectures.X221.delta122_hero_oriented_complete_multipartite_statement"
       ],
       "kind": "Definition",
-      "line": 54,
+      "line": 55,
       "local_dependencies": [
         "x221_nonadj"
       ],
@@ -17313,7 +17313,7 @@
         "Digraph.conjectures.X221.x221_oriented_triangle_free"
       ],
       "kind": "Definition",
-      "line": 58,
+      "line": 59,
       "local_dependencies": [],
       "name": "x221_uadj",
       "normalized_name": "uadj",
@@ -17333,7 +17333,7 @@
         "Digraph.conjectures.X221.x221_tbar"
       ],
       "kind": "Definition",
-      "line": 63,
+      "line": 64,
       "local_dependencies": [
         "x221_uadj"
       ],
@@ -17354,7 +17354,7 @@
         "Digraph.conjectures.X221.x221_abar"
       ],
       "kind": "Definition",
-      "line": 68,
+      "line": 69,
       "local_dependencies": [],
       "name": "x221_alphavec",
       "normalized_name": "alphavec",
@@ -17373,7 +17373,7 @@
         "Digraph.conjectures.X221.x221_tbar"
       ],
       "kind": "Definition",
-      "line": 79,
+      "line": 80,
       "local_dependencies": [],
       "name": "x221_dichro",
       "normalized_name": "dichro",
@@ -17392,7 +17392,7 @@
         "Digraph.conjectures.X221.oriented_triangle_free_acyclic_number_theta_statement"
       ],
       "kind": "Definition",
-      "line": 82,
+      "line": 83,
       "local_dependencies": [
         "x221_alphavec",
         "x221_oriented_triangle_free"
@@ -17414,7 +17414,7 @@
         "Digraph.conjectures.X221.oriented_triangle_free_dichromatic_theta_statement"
       ],
       "kind": "Definition",
-      "line": 95,
+      "line": 96,
       "local_dependencies": [
         "x221_dichro",
         "x221_oriented_triangle_free"
@@ -17436,7 +17436,7 @@
         "Digraph.conjectures.X221.ordered_twinwidth_clique_and_tww_bound_statement"
       ],
       "kind": "Definition",
-      "line": 101,
+      "line": 102,
       "local_dependencies": [],
       "name": "x221_tww_eq",
       "normalized_name": "tww_eq",
@@ -17455,7 +17455,7 @@
         "Digraph.conjectures.X221.kextension_linear_unavoidability_statement"
       ],
       "kind": "Definition",
-      "line": 109,
+      "line": 110,
       "local_dependencies": [],
       "name": "x221_linearly_unavoidable",
       "normalized_name": "linearly_unavoidable",
@@ -17474,7 +17474,7 @@
         "Digraph.conjectures.X221.kextension_linear_unavoidability_statement"
       ],
       "kind": "Definition",
-      "line": 119,
+      "line": 120,
       "local_dependencies": [],
       "name": "x221_kextension",
       "normalized_name": "kextension",
@@ -17486,14 +17486,14 @@
       "signature_shape_hash": "757742fb9bed56c4d3c4f27dda1357f24a945f382015ee0c816ed59decef7d79"
     },
     {
-      "body_hash": "2d9b3f0c82e2e92f12a25ac8a598f6b31449da248c78137ead0eb5087ebf3cf1",
-      "body_shape_hash": "2d9b3f0c82e2e92f12a25ac8a598f6b31449da248c78137ead0eb5087ebf3cf1",
-      "declaration_hash": "63f1b0a623e2db86f50ed0f6463318135c2c2ecf2d59e030623460e807a04ebc",
+      "body_hash": "feb3e84a1bc87cd86889fef44671f7e5757d03fe2303a4fb97e3c42e64f39631",
+      "body_shape_hash": "feb3e84a1bc87cd86889fef44671f7e5757d03fe2303a4fb97e3c42e64f39631",
+      "declaration_hash": "2897a2d4d65a568087783968ec9534d2e88241d7dda6ded07209f5a32547ec9f",
       "direct_consumers": [
         "Digraph.conjectures.X221.x221_eulerian_avoidable"
       ],
       "kind": "Definition",
-      "line": 125,
+      "line": 126,
       "local_dependencies": [],
       "name": "x221_eulerian",
       "normalized_name": "eulerian",
@@ -17512,7 +17512,7 @@
         "Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement"
       ],
       "kind": "Definition",
-      "line": 136,
+      "line": 137,
       "local_dependencies": [
         "x221_eulerian"
       ],
@@ -17533,7 +17533,7 @@
         "Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement"
       ],
       "kind": "Definition",
-      "line": 144,
+      "line": 145,
       "local_dependencies": [],
       "name": "x221_c4or",
       "normalized_name": "c4or",
@@ -19232,7 +19232,7 @@
         "Digraph.conjectures.colouring_variants.majority_col"
       ],
       "kind": "Definition",
-      "line": 43,
+      "line": 44,
       "local_dependencies": [],
       "name": "same_col_outnb",
       "normalized_name": "same_col_outnb",
@@ -19254,7 +19254,7 @@
         "Digraph.conjectures.colouring_variants.majority_3col_tournament_statement"
       ],
       "kind": "Definition",
-      "line": 52,
+      "line": 53,
       "local_dependencies": [
         "same_col_outnb"
       ],
@@ -19276,7 +19276,7 @@
         "Digraph.conjectures.colouring_variants.majority_k1col_statement"
       ],
       "kind": "Definition",
-      "line": 58,
+      "line": 59,
       "local_dependencies": [
         "same_col_outnb"
       ],
@@ -19295,7 +19295,7 @@
       "declaration_hash": "afb065d4fe426e29b19feac762185898e886a56f183d59431153fe868aa25948",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 65,
+      "line": 66,
       "local_dependencies": [
         "kmajority_col",
         "majority_col"
@@ -19313,11 +19313,9 @@
       "body_hash": "03278e5694a59d5072b2b7ae1ec79963488baa447affd75591495f1fef454601",
       "body_shape_hash": "03278e5694a59d5072b2b7ae1ec79963488baa447affd75591495f1fef454601",
       "declaration_hash": "3eef7ce3b483a0ce54fd21af024f7dcd6a2e9c65019b330342dc7f9e9dc47633",
-      "direct_consumers": [
-        "Digraph.conjectures.colouring_variants.eulerian"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 116,
+      "line": 117,
       "local_dependencies": [],
       "name": "indeg",
       "normalized_name": "indeg",
@@ -19329,17 +19327,15 @@
       "signature_shape_hash": "44b29f95448acddbef710ff36cfa92767da11576f35a21280ae4c88713ebf09f"
     },
     {
-      "body_hash": "51f039373d26085bc76e389787d26f5b89d11cbbfe7116dd2f7b53a342c80103",
-      "body_shape_hash": "51f039373d26085bc76e389787d26f5b89d11cbbfe7116dd2f7b53a342c80103",
-      "declaration_hash": "62168fa5ba7f489282111074962fabfba4fe6012ed03942bac783fd5a4895bd2",
+      "body_hash": "98d6259c206744a835cd6be305f3f85c247ef1cc41a55770037ab63a65aed160",
+      "body_shape_hash": "98d6259c206744a835cd6be305f3f85c247ef1cc41a55770037ab63a65aed160",
+      "declaration_hash": "b1d6596bfb1d3ee6420d51e3fccb8407ac0a3bd89ea07ed5c8b8a0497e971602",
       "direct_consumers": [
         "Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement"
       ],
       "kind": "Definition",
-      "line": 119,
-      "local_dependencies": [
-        "indeg"
-      ],
+      "line": 120,
+      "local_dependencies": [],
       "name": "eulerian",
       "normalized_name": "eulerian",
       "package": "digraph-theory",
@@ -19355,7 +19351,7 @@
       "declaration_hash": "5d7b63998841311323200122bfe10fe0a3df85856f82d6ddc58d3243ed6c2e43",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 138,
+      "line": 139,
       "local_dependencies": [
         "majority_3col_statement",
         "majority_k1col_statement"
@@ -19375,7 +19371,7 @@
       "declaration_hash": "c6f4e5631b3c1241e3483816b44277423fc5a6c5924c2d3704a9f830748d9b21",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 149,
+      "line": 150,
       "local_dependencies": [
         "majority_3col_statement",
         "majority_3col_tournament_statement"
@@ -19395,7 +19391,7 @@
       "declaration_hash": "29b8cda27d4b05b819075d58fffa886e02f3fd4b080d9b82523e905abe674494",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 154,
+      "line": 155,
       "local_dependencies": [
         "majority_3col_eulerian_statement",
         "majority_3col_statement"
@@ -19420,7 +19416,7 @@
         "Digraph.conjectures.colouring_variants.oriented_kcolouring"
       ],
       "kind": "Definition",
-      "line": 159,
+      "line": 160,
       "local_dependencies": [],
       "name": "dhom",
       "normalized_name": "dhom",
@@ -19437,7 +19433,7 @@
       "declaration_hash": "0eb09266642c2abec5e8d2dc496c8613cbd2d0c305d8f039af4ab7744dcaf7fb",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 168,
+      "line": 169,
       "local_dependencies": [
         "dhom"
       ],
@@ -19456,7 +19452,7 @@
       "declaration_hash": "9f840a3298970653bfb390adb8c091c3aec078350579cd032d84e882b7e48964",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 171,
+      "line": 172,
       "local_dependencies": [
         "dhom"
       ],
@@ -19478,7 +19474,7 @@
         "Digraph.conjectures.colouring_variants.oriented_chromatic_planar_bounded_statement"
       ],
       "kind": "Definition",
-      "line": 178,
+      "line": 179,
       "local_dependencies": [
         "dhom"
       ],
@@ -19499,7 +19495,7 @@
         "Digraph.conjectures.colouring_variants.ochi_le_dhom"
       ],
       "kind": "Definition",
-      "line": 188,
+      "line": 189,
       "local_dependencies": [
         "oriented_kcolouring"
       ],
@@ -19518,7 +19514,7 @@
       "declaration_hash": "54954a5bab29da262ee3f8c32adc48b9e3acf18f7732b26b8bb3d6154ee6642f",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 193,
+      "line": 194,
       "local_dependencies": [
         "dhom",
         "ochi_le"
@@ -19538,7 +19534,7 @@
       "declaration_hash": "c033fb3ff0fb4a7c9919926da40cd69f0c720a9172e8790abe102e747351c2e8",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 202,
+      "line": 203,
       "local_dependencies": [
         "oriented_kcolouring"
       ],
@@ -19568,7 +19564,7 @@
         "Digraph.conjectures.colouring_variants.setT_is_reach_set"
       ],
       "kind": "Definition",
-      "line": 211,
+      "line": 212,
       "local_dependencies": [],
       "name": "arc_colouring",
       "normalized_name": "arc_colouring",
@@ -19587,7 +19583,7 @@
         "Digraph.conjectures.colouring_variants.mono_reach"
       ],
       "kind": "Definition",
-      "line": 217,
+      "line": 218,
       "local_dependencies": [
         "arc_colouring"
       ],
@@ -19609,7 +19605,7 @@
         "Digraph.conjectures.colouring_variants.mono_reach_refl"
       ],
       "kind": "Definition",
-      "line": 222,
+      "line": 223,
       "local_dependencies": [
         "arc_colouring",
         "mono_rel"
@@ -19634,7 +19630,7 @@
         "Digraph.conjectures.colouring_variants.setT_is_reach_set"
       ],
       "kind": "Definition",
-      "line": 229,
+      "line": 230,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach"
@@ -19654,7 +19650,7 @@
       "declaration_hash": "3360637cf9349155edab6c74096905b49361d0982576b8382050547015f14d26",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 234,
+      "line": 235,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach"
@@ -19677,7 +19673,7 @@
         "Digraph.conjectures.colouring_variants.mono_root_reaches_all"
       ],
       "kind": "Definition",
-      "line": 238,
+      "line": 239,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach_any"
@@ -19699,7 +19695,7 @@
         "Digraph.conjectures.colouring_variants.mono_reach_or_rainbow_statement"
       ],
       "kind": "Definition",
-      "line": 244,
+      "line": 245,
       "local_dependencies": [
         "arc_colouring"
       ],
@@ -19720,7 +19716,7 @@
         "Digraph.conjectures.colouring_variants.sands_sauer_woodrow_statement"
       ],
       "kind": "Definition",
-      "line": 277,
+      "line": 278,
       "local_dependencies": [],
       "name": "union_of_stables",
       "normalized_name": "union_of_stables",
@@ -19737,7 +19733,7 @@
       "declaration_hash": "b3d13d31e06473f206485a311af8100f25c64f8f99f2b0f449f4f988fd16d6f9",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 286,
+      "line": 287,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach_any",
@@ -19758,7 +19754,7 @@
       "declaration_hash": "c83c707933c19bc607ca3dd1c2a672e6b5a90abd66d4ff4c51ea766d8d80c65c",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 299,
+      "line": 300,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach_any"
@@ -19778,7 +19774,7 @@
       "declaration_hash": "b411b480ef1dfe008add8b839242dc84f4861a1ad9b22f30297efabdebb56873",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 314,
+      "line": 315,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach_any",
@@ -21000,7 +20996,7 @@
         "Digraph.conjectures.glue_eul_subtype.glue_tree_e"
       ],
       "kind": "Record",
-      "line": 333,
+      "line": 336,
       "local_dependencies": [],
       "name": "eadigraph",
       "normalized_name": "eadigraph",
@@ -21023,7 +21019,7 @@
         "Digraph.conjectures.glue_eul_subtype.glue_tree_e_leaf"
       ],
       "kind": "Definition",
-      "line": 345,
+      "line": 348,
       "local_dependencies": [
         "eadigraph"
       ],
@@ -21047,7 +21043,7 @@
         "Digraph.conjectures.glue_eul_subtype.glue_tree_e"
       ],
       "kind": "Definition",
-      "line": 348,
+      "line": 351,
       "local_dependencies": [
         "eadigraph",
         "ueglue"
@@ -21078,7 +21074,7 @@
         "Digraph.conjectures.glue_eul_subtype.realises_E_inhabited"
       ],
       "kind": "Fixpoint",
-      "line": 354,
+      "line": 357,
       "local_dependencies": [
         "eadigraph",
         "eglue_one",
@@ -21099,7 +21095,7 @@
       "declaration_hash": "0606f35d4ef038c4253f11041b9e2e4a6ffb860a76dde09a304c886be96bc31a",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 359,
+      "line": 362,
       "local_dependencies": [
         "eleaf_block",
         "glue_tree_e"
@@ -21119,7 +21115,7 @@
       "declaration_hash": "fcc799042aba76e62db8035eb2decb04cb88522ef0c71ddac1de05dcdfe2f6df",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 363,
+      "line": 366,
       "local_dependencies": [
         "eleaf_block"
       ],
@@ -21138,7 +21134,7 @@
       "declaration_hash": "8896da9e52727760f9bec5bfbd22b54d76407321186b4c3d5e53d8ed910289cc",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 367,
+      "line": 370,
       "local_dependencies": [
         "eleaf_block"
       ],
@@ -21157,7 +21153,7 @@
       "declaration_hash": "cde1715d8412889fbb99c6342f93553f164a8a2655681f1a19e7f0d48f5c7afa",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 370,
+      "line": 373,
       "local_dependencies": [
         "eleaf_block"
       ],
@@ -21176,7 +21172,7 @@
       "declaration_hash": "4b04d6376dd3b9fd6b1e3dac7997cdcb553bef04e1795725f1089355000188ef",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 373,
+      "line": 376,
       "local_dependencies": [
         "eadigraph",
         "eglue_one"
@@ -21196,7 +21192,7 @@
       "declaration_hash": "1925e0504ed600648162234988fab9a30b97a0d04fe26b3dbcb2fbdfff8a6bed",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 379,
+      "line": 382,
       "local_dependencies": [
         "eadigraph",
         "eglue_one"
@@ -21216,7 +21212,7 @@
       "declaration_hash": "a4ed0a21ec23c3113a332e235aabb797099e095e7216847cbe45a40837f987bf",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 385,
+      "line": 388,
       "local_dependencies": [
         "eadigraph",
         "eglue_one"
@@ -21236,7 +21232,7 @@
       "declaration_hash": "83d5f74c94bea57593329486e8a7a9f16dc85831d9400de485b316a988b5f213",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 390,
+      "line": 393,
       "local_dependencies": [
         "glue_tree_e"
       ],
@@ -21255,7 +21251,7 @@
       "declaration_hash": "7eb79dd552765a272b343a68c0a98f5d97b31219ceec9afa5cf4a2ac455d56a4",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 400,
+      "line": 403,
       "local_dependencies": [
         "glue_tree_e"
       ],
@@ -21274,7 +21270,7 @@
       "declaration_hash": "29832f9c52df3b1b01a92d929dcc41bf7d0b3951f54c6d796ed0d4bed9cb524f",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 411,
+      "line": 414,
       "local_dependencies": [
         "glue_tree_e"
       ],
@@ -21293,7 +21289,7 @@
       "declaration_hash": "0cd3fa50af50742f05c519473221620e0d3fbb62e9f2fb4dd3ca749c4448993c",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 426,
+      "line": 429,
       "local_dependencies": [
         "glue_tree_e"
       ],
@@ -21312,7 +21308,7 @@
       "declaration_hash": "da31ab079b1dfe5d30434b912e66bb8434f45d52f6ebdbec54d807ac61ebd955",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 433,
+      "line": 436,
       "local_dependencies": [
         "glue_tree_e"
       ],
@@ -21344,7 +21340,7 @@
         "Digraph.conjectures.glue_eul_subtype.realises_E_loopless"
       ],
       "kind": "Definition",
-      "line": 448,
+      "line": 451,
       "local_dependencies": [],
       "name": "realises_E",
       "normalized_name": "realises_E",
@@ -21361,7 +21357,7 @@
       "declaration_hash": "83c0ebd0ef2e5e35d85eaa18e147dc843a238d33f7257a157fbb45860d2617af",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 463,
+      "line": 466,
       "local_dependencies": [
         "realises_E"
       ],
@@ -21380,7 +21376,7 @@
       "declaration_hash": "eb5104193b883b808d1aed0dc4560c747a13496b96f36010448b00d7b582f0ac",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 467,
+      "line": 470,
       "local_dependencies": [
         "realises_E"
       ],
@@ -21399,7 +21395,7 @@
       "declaration_hash": "5f9c052076253386b1c260ec0c0a1f1a19e6774282de544aedeff1561e8b1198",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 471,
+      "line": 474,
       "local_dependencies": [
         "realises_E"
       ],
@@ -21418,7 +21414,7 @@
       "declaration_hash": "af8a551ea7c9685285a44372b8e80decc0f49d86775668ba9dddc85124180200",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 478,
+      "line": 481,
       "local_dependencies": [
         "glue_tree_e",
         "realises_E"
@@ -21438,7 +21434,7 @@
       "declaration_hash": "42720aca8122743c5d8d0ae7f3df00cbed4d0fb4e7ddba20bedbaf5bcfc0531e",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 488,
+      "line": 491,
       "local_dependencies": [
         "glue_tree_e",
         "realises_E"
@@ -21458,7 +21454,7 @@
       "declaration_hash": "3d957e3373a93f5a0ea4d6e53316d69b6f7b036a4721ed2d1b69b0439848f758",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 497,
+      "line": 500,
       "local_dependencies": [
         "glue_tree_e",
         "realises_E"
@@ -21478,7 +21474,7 @@
       "declaration_hash": "96b644004c4f26d7281b0ef45341cf22f325badb92e7ba3447cd1eeebab5f926",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 507,
+      "line": 510,
       "local_dependencies": [
         "glue_tree_e",
         "realises_E"
@@ -21498,7 +21494,7 @@
       "declaration_hash": "ec737783051a9fe7dec0734e5033f7d240114b9c36d2756b44a031f46c0c6e1d",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 512,
+      "line": 515,
       "local_dependencies": [
         "realises_E"
       ],
@@ -21521,7 +21517,7 @@
         "Digraph.conjectures.glue_eul_subtype.conj_9_2_glued_e_implies_three_connected_gw"
       ],
       "kind": "Definition",
-      "line": 522,
+      "line": 525,
       "local_dependencies": [
         "realises_E"
       ],
@@ -21540,7 +21536,7 @@
       "declaration_hash": "c4b32a767988b15c44ab72de180e773838c66ad9b17422eec053b7a2087b452c",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 531,
+      "line": 534,
       "local_dependencies": [
         "conj_9_2_glued_e",
         "realises_E"
@@ -21560,7 +21556,7 @@
       "declaration_hash": "94b1cd5c4aa499e1233ceb7cba9059ee74e5e23db6dafa2f8d57e03b568e992e",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 535,
+      "line": 538,
       "local_dependencies": [
         "conj_9_2_glued_e",
         "realises_E"
@@ -21580,7 +21576,7 @@
       "declaration_hash": "6124d694075f983556ceed5e6b6ff061019c5489a138a0284368cf348d436255",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 542,
+      "line": 545,
       "local_dependencies": [
         "conj_9_2_glued_e",
         "realises_E"
@@ -26181,7 +26177,7 @@
         "Digraph.conjectures.two_extremal.underlyingG"
       ],
       "kind": "Definition",
-      "line": 44,
+      "line": 45,
       "local_dependencies": [],
       "name": "loopless",
       "normalized_name": "loopless",
@@ -26201,7 +26197,7 @@
         "Digraph.conjectures.two_extremal.uADJ_sym"
       ],
       "kind": "Definition",
-      "line": 59,
+      "line": 60,
       "local_dependencies": [],
       "name": "uADJ",
       "normalized_name": "uADJ",
@@ -26220,7 +26216,7 @@
         "Digraph.conjectures.two_extremal.underlyingG"
       ],
       "kind": "Fact",
-      "line": 61,
+      "line": 62,
       "local_dependencies": [
         "uADJ"
       ],
@@ -26241,7 +26237,7 @@
         "Digraph.conjectures.two_extremal.underlyingG"
       ],
       "kind": "Lemma",
-      "line": 63,
+      "line": 64,
       "local_dependencies": [
         "loopless",
         "uADJ"
@@ -26269,7 +26265,7 @@
         "Digraph.conjectures.two_extremal.three_connected_generalised_wheel"
       ],
       "kind": "Definition",
-      "line": 65,
+      "line": 66,
       "local_dependencies": [
         "loopless",
         "uADJ_irr",
@@ -26293,7 +26289,7 @@
         "Digraph.conjectures.two_extremal.digonADJ_sym"
       ],
       "kind": "Definition",
-      "line": 69,
+      "line": 70,
       "local_dependencies": [],
       "name": "digonADJ",
       "normalized_name": "digonADJ",
@@ -26312,7 +26308,7 @@
         "Digraph.conjectures.two_extremal.digonG"
       ],
       "kind": "Fact",
-      "line": 76,
+      "line": 77,
       "local_dependencies": [
         "digonADJ"
       ],
@@ -26333,7 +26329,7 @@
         "Digraph.conjectures.two_extremal.digonG"
       ],
       "kind": "Lemma",
-      "line": 78,
+      "line": 79,
       "local_dependencies": [
         "digonADJ",
         "loopless"
@@ -26357,7 +26353,7 @@
         "Digraph.conjectures.two_extremal.two_extremal_digonG_forest"
       ],
       "kind": "Definition",
-      "line": 80,
+      "line": 81,
       "local_dependencies": [
         "digonADJ_irr",
         "digonADJ_sym",
@@ -26380,7 +26376,7 @@
         "Digraph.conjectures.two_extremal.k_extremal"
       ],
       "kind": "Definition",
-      "line": 85,
+      "line": 86,
       "local_dependencies": [],
       "name": "two_connected_sg",
       "normalized_name": "two_connected_sg",
@@ -26399,7 +26395,7 @@
         "Digraph.conjectures.two_extremal.local_arc_conn"
       ],
       "kind": "Definition",
-      "line": 110,
+      "line": 111,
       "local_dependencies": [],
       "name": "outcut",
       "normalized_name": "outcut",
@@ -26418,7 +26414,7 @@
         "Digraph.conjectures.two_extremal.local_arc_conn"
       ],
       "kind": "Definition",
-      "line": 114,
+      "line": 115,
       "local_dependencies": [],
       "name": "uv_dicut",
       "normalized_name": "uv_dicut",
@@ -26437,7 +26433,7 @@
         "Digraph.conjectures.two_extremal.arc_conn"
       ],
       "kind": "Definition",
-      "line": 117,
+      "line": 118,
       "local_dependencies": [
         "outcut",
         "uv_dicut"
@@ -26460,7 +26456,7 @@
         "Digraph.conjectures.two_extremal.k_extremal"
       ],
       "kind": "Definition",
-      "line": 124,
+      "line": 125,
       "local_dependencies": [
         "local_arc_conn"
       ],
@@ -26481,7 +26477,7 @@
         "Digraph.conjectures.two_extremal.k_extremal"
       ],
       "kind": "Definition",
-      "line": 130,
+      "line": 131,
       "local_dependencies": [],
       "name": "chi_vec_eq",
       "normalized_name": "chi_vec_eq",
@@ -26500,7 +26496,7 @@
         "Digraph.conjectures.two_extremal.two_extremal"
       ],
       "kind": "Definition",
-      "line": 137,
+      "line": 138,
       "local_dependencies": [
         "arc_conn",
         "chi_vec_eq",
@@ -26530,7 +26526,7 @@
         "Digraph.conjectures.two_extremal.two_extremal_digonG_forest"
       ],
       "kind": "Definition",
-      "line": 151,
+      "line": 152,
       "local_dependencies": [
         "k_extremal",
         "loopless"
@@ -26552,7 +26548,7 @@
         "Digraph.conjectures.two_extremal.sg_minor"
       ],
       "kind": "Definition",
-      "line": 155,
+      "line": 156,
       "local_dependencies": [],
       "name": "sg_minor_rmap",
       "normalized_name": "sg_minor_rmap",
@@ -26571,7 +26567,7 @@
         "Digraph.conjectures.two_extremal.planar_sg"
       ],
       "kind": "Definition",
-      "line": 164,
+      "line": 165,
       "local_dependencies": [
         "sg_minor_rmap"
       ],
@@ -26593,7 +26589,7 @@
         "Digraph.conjectures.two_extremal.conjecture_P"
       ],
       "kind": "Definition",
-      "line": 166,
+      "line": 167,
       "local_dependencies": [
         "sg_minor"
       ],
@@ -26617,7 +26613,7 @@
         "Digraph.conjectures.two_extremal.three_connected_generalised_wheel"
       ],
       "kind": "Definition",
-      "line": 200,
+      "line": 201,
       "local_dependencies": [],
       "name": "three_connected_sg",
       "normalized_name": "three_connected_sg",
@@ -26634,7 +26630,7 @@
       "declaration_hash": "50591088eb1ca85bddd54c2ed555d1974c7acac7051faba2dfde018b63ad9889",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 209,
+      "line": 210,
       "local_dependencies": [
         "digonG",
         "loopless",
@@ -26650,15 +26646,15 @@
       "signature_shape_hash": "ed67660129784c837b5ba4a9e21be61bc0fd5c32db42e4be3039ebe804be72f6"
     },
     {
-      "body_hash": "ce59e564b5ca2f772436f1b5576f2054c27f1f780270b66cd95020622bf821ee",
-      "body_shape_hash": "ce59e564b5ca2f772436f1b5576f2054c27f1f780270b66cd95020622bf821ee",
-      "declaration_hash": "01736ef5e93bbc4be9d15b0b7d94969fcd0d03a3fc1b67369ebba17d2e6fa4db",
+      "body_hash": "feb3e84a1bc87cd86889fef44671f7e5757d03fe2303a4fb97e3c42e64f39631",
+      "body_shape_hash": "feb3e84a1bc87cd86889fef44671f7e5757d03fe2303a4fb97e3c42e64f39631",
+      "declaration_hash": "29f3e12844aa008ac9dad94d8664d735db21d41a34e26eb43c7312d3f728c2c5",
       "direct_consumers": [
         "Digraph.conjectures.two_extremal.H6_implies_three_connected_digonG_connected",
         "Digraph.conjectures.two_extremal.H6_no_full_cover"
       ],
       "kind": "Definition",
-      "line": 244,
+      "line": 245,
       "local_dependencies": [],
       "name": "Eulerian",
       "normalized_name": "Eulerian",

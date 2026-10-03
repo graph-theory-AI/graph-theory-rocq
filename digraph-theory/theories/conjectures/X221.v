@@ -5,6 +5,7 @@ From mathcomp Require Import all_boot all_fingroup all_algebra.
 From Digraph Require Import prelude interop_graph_theory digraph oriented tournament.
 From Digraph Require Import dipath order strong classic_core dichromatic omegabar.
 From Digraph Require Import heroes heroes_dichotomy unvd twinwidth twinwidth_ordered.
+From Digraph.foundations Require degree_balance.
 From GTBase Require Import asymptotics.
 
 Set Implicit Arguments.
@@ -132,7 +133,7 @@ Definition x221_kextension (k : nat) (F : diGraphType -> Prop)
     subdigraph is given by an out-neighbourhood selection f through
     [outsel f] (core/oriented.v), whose arcs are the arcs of D lying in f. *)
 Definition x221_eulerian (D : diGraphType) : Prop :=
-  forall v : D, outdeg v = indeg v.
+  degree_balance.balanced D.
 
 Definition x221_eulerian_avoidable (F : diGraphType) : Prop :=
   exists d : nat -> nat,

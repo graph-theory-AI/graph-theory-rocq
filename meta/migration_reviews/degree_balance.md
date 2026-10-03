@@ -1,0 +1,11 @@
+# Directed degree balance: independent review
+
+Source/proof approved: `cc7837731b9992e58733b4c1f05913c97f0d5240` (B16 replacement), parent `298112264b7c31820acf889c6da29b710fd39c9a`. Independent reviewer: family_scope; coordinator final mathematical review: root. Complete evidence: VM coordination/evidence/B16r-review-by-family-scope.md and B16r-coordinator-final/README.md. The rejected6dba7ed sibling is not the integration source.
+
+The three directed helpers retain unrestricted finite carriers, loops, disconnected/empty cases and their Prop/reversed/Boolean presentations. All thirteen compatibility bridges, including five complete statement iff, retain exact guards, binder order, H6's looplessness witness and the arbitrary Section realization relation. Both complete glued Props remain explicit non-corpus statement obligations. Reals_growth and grounding_reals2 stay unchanged and deferred; no axiom exemption is introduced.
+
+Independent fresh validation at the source pin:65 forced sources in2packages;53 exact types/conversions;93 closed assumptions;28 strict dependency closures, including both EC-log exclusions and direct nonconversion evidence. All61 reached declaration headers and353 unchanged declaration headers in adapted files were bound. Eight existing proof scripts use only the reviewed adapter/unfolding changes.
+
+Preparation is on `16598241f2525f99388422a7a3fa601c86533c98` (A15 plus reviewed explicit additional-statement tooling). The former source-pin172/173 coverage failure is historical: both additional whole Props remain enrolled, with acceptance supplied by the separate reviewed tooling. Preserve every predecessor certificate/frozen array/review field, the exact C15 minor-model hunks in two_extremal, and all three parent tooling files. The only authored source-spec/shard prose changes clarify that B17 covers connected/even multigraph helpers and reached rows; the supplied tour predicate remains separate and unchanged.
+
+Prepared validation: inventory, manifest, dependency graph, status and all compact reports are regenerated; make audit and strict preservation must pass before the merge is pinned. Cumulative proof/normal milestone acceptance remains separately owned by the coordinator; this record does not claim those gates passed.

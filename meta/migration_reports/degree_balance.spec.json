@@ -1,0 +1,359 @@
+{
+  "family": "degree-balance",
+  "canonical_name": "Digraph.foundations.degree_balance.balanced",
+  "canonical_short_name": "balanced",
+  "relation": "one contract, degree balance of a finite digraph (every vertex has equal in- and out-degree; no connectivity, looplessness, inhabitance or tour premise). Migrated: two_extremal.Eulerian (forall v, indeg v = outdeg v over classic_core.indeg) is balanced D by conversion; colouring_variants.eulerian ([forall v, indeg v == outdeg v], Boolean, file-local in-degree) is balancedb D by conversion, reflected by balancedP; X221.x221_eulerian (forall v, outdeg v = indeg v, over classic_core.indeg) is the reversed-equation view balanced_revE, a proved iff. All in-degrees are the comprehension #|[set u | u --> v]|, the public indeg. Deferred: reals_growth.eulerian (same body, but its two non-corpus EC-log rows inherit classical-reals axioms through their statements: a legacy-axiom defect, left byte-identical) and Cycle U6's multigraph eulerian (connected, even arc-end degrees), a different contract. Chromatic.foundations.alon_tarsi.at_eulerian (balance of a supplied finite set of ordered pairs) is a distinct representation, not a source of this family.",
+  "baseline_commit": "298112264b7c31820acf889c6da29b710fd39c9a",
+  "namespaces": {
+    "digraph-theory": "Digraph"
+  },
+  "certificate_files": [
+    "digraph-theory/theories/foundations/degree_balance.v",
+    "digraph-theory/theories/migration/degree_balance.v"
+  ],
+  "extra_certificates": [
+    "Digraph.foundations.degree_balance.balancedP",
+    "Digraph.foundations.degree_balance.balanced_revE",
+    "Digraph.foundations.degree_balance.balanced_vertex",
+    "Digraph.foundations.degree_balance.indeg_sumE",
+    "Digraph.foundations.degree_balance.outdeg_sumE",
+    "Digraph.foundations.degree_balance.sum_indeg_outdeg",
+    "Digraph.foundations.degree_balance.balanced_arcless",
+    "Digraph.foundations.degree_balance.indeg_converse",
+    "Digraph.foundations.degree_balance.outdeg_converse",
+    "Digraph.foundations.degree_balance.balanced_converse",
+    "Digraph.foundations.degree_balance.balanced_ground_empty",
+    "Digraph.foundations.degree_balance.balanced_ground_arcless",
+    "Digraph.foundations.degree_balance.balanced_ground_loop",
+    "Digraph.foundations.degree_balance.balanced_ground_disconnected",
+    "Digraph.foundations.degree_balance.balanced_ground_digon",
+    "Digraph.foundations.degree_balance.balanced_ground_C3",
+    "Digraph.foundations.degree_balance.not_balanced_ground_TT2"
+  ],
+  "additional_statements": [
+    "Digraph.conjectures.two_extremal_glue.conj_9_2_glued",
+    "Digraph.conjectures.glue_eul_subtype.conj_9_2_glued_e"
+  ],
+  "summary": [
+    "Family B16 (directed degree balance, the corpus's directed \"Eulerian\" helpers), AXIOM-FREE REPLACEMENT of the rejected pin 6dba7ed (coordinator ruling 2026-10-03: no assumption exemption; plan section 3, invariant 4), a sibling of 6dba7ed on the same parent 2981122. The migrated helpers unfold to the public `Digraph.foundations.degree_balance`, reviewed on the rejected pin and reused byte-for-byte: `two_extremal.Eulerian` (`forall v, indeg v = outdeg v` over `classic_core.indeg`) is `balanced D` by conversion; `colouring_variants.eulerian` (`[forall v, indeg v == outdeg v]`) is `balancedb D` by conversion, reflected by `balancedP`; `X221.x221_eulerian` (`forall v, outdeg v = indeg v`) is the reversed equation, certified by the proved `balanced_revE`. The source in-degrees (`classic_core.indeg` over `Nin`, and colouring_variants' file-local comprehension) unfold to the public `indeg v := #|[set u | u --> v]|` and are unchanged; each frozen helper keeps its own, qualified. The contract is degree balance alone: no connectivity, looplessness, inhabitance or closed-tour premise is added, and `Digraph.core.oriented.outdeg` is unchanged.",
+    "API: `indeg`, `balanced`, `balancedb`, `balancedP`, `balanced_revE`, `balanced_vertex`, the degree sums and the handshake `sum_indeg_outdeg`, arcless balance, and the converse swaps. Groundings: the empty digraph, an arcless vertex, a vertex with a loop (balanced), two disjoint loops (balanced and disconnected), the digon, the directed triangle `C3`, and the single arc `TT 2`, which is not balanced. Public-only client digraph-theory/theories/examples/degree_balance.v.",
+    "",
+    "Rows and chains, frozen with this family's helpers only: X221 `orientation_C4_eulerian_avoidable_statement` (arxiv:2510.11311#04) through the chain `x221_eulerian_avoidable`, with the out-degree thresholds, the out-neighbourhood selection and the subdigraph exclusion unchanged; colouring_variants `majority_3col_eulerian_statement` (arxiv:1608.03040#04, manifest phase X1); two_extremal `H6_no_full_cover` (derived:drv_twoext_h6, phase X1), complete with every guard in its order: the looplessness proof quantified first, then positive order, `strongb`, `Eulerian`, `arc_conn D = 2`, 3-connectivity of the underlying graph and the disconnected digon graph, concluding `dicolorableb D 2`. The uppercase chains are frozen over the frozen helper: `two_extremal_hajos.realises_Eulerian` inside a Section with the same `Variable realises`, so its discharged type takes the arbitrary realisation relation explicitly; `two_extremal_glue.realises_W` (the supplied tree `t` unused, as before); `glue_eul_subtype.realises_E` (same body, separate public name); `generalised_wheel.realises_gw` (loopless, Eulerian and a forest digon graph for every looplessness proof; no digon-free conjunct). `in_H2_concrete` and `conj_9_2_concrete` are unchanged parameterised public helpers and are never instantiated at a live relation inside the frozen copies.",
+    "",
+    "WHOLE-PROP ENROLLMENT (root decision 2026-10-03): the two non-selected Conjecture 9.2 encodings `two_extremal_glue.conj_9_2_glued := conj_9_2_concrete realises_W` and `glue_eul_subtype.conj_9_2_glued_e := conj_9_2_concrete realises_E` are reached whole Props without a manifest row or `_statement` suffix. They are frozen over their frozen relations, certified by the complete iff lemmas `conj_9_2_glued_compat` and `conj_9_2_glued_e_compat`, enrolled honestly as `kind=statement, non_corpus=true` and listed in `additional_statements`. The current migration_report discovers only manifest rows and `_statement` names, so its check `affected statement coverage matches baseline dependencies` FAILS on this spec with exactly extra=[these two names] until the separately reviewed `additional_statements` tooling (matching_scope; design evidence/B16-assumption-diagnosis/additional-statements-design.md) is integrated. This expected pending-tooling failure is recorded here and on BOARD; the pin is not accepted for integration before that. They are not labelled chain or historical, and no temporary spec omits them.",
+    "",
+    "DEFERRED LEGACY-AXIOM DEFECT, recorded as ruled: `reals_growth.eulerian` has the same body (`forall v, indeg v = outdeg v`) but is NOT migrated. Its two non-corpus EC-log rows (`ec_log_statement`, `ec_log_c6_statement`) inherit `ClassicalDedekindReals.sig_not_dec`, `ClassicalDedekindReals.sig_forall_dec`, `FunctionalExtensionality.functional_extensionality_dep` and `Classical_Prop.classic` through their statements' concrete reals (R, INR, log2), so any certificate of them fails the kernel assumptions audit; reals_growth.v and grounding_reals2.v stay byte-identical to the baseline 2981122, the helper is classified deferred in the registry (class legacy-axiom-defect), and the rejected pin 6dba7ed with its evidence records the attempt. It is not removed from any coverage: no migrated source reaches it, and the kernel evidence re-probes at this pin that neither EC-log statement reaches a migrated source or any constant of the public module.",
+    "",
+    "Proof consumers, proof-only edits with unchanged theorem types: grounding_X221 `x221_C3_eulerian` and `x221_TT2_not_eulerian`, grounding_chi_col `eulerian_C3` and `not_eulerian_TT2` now go through the public groundings and `balancedP`; `two_extremal_glue.di_cycle_Eulerian`, `generalised_wheel.gwheel_Eulerian` and `grounding_h2_concrete.symcyc3_Eulerian` unfold the public `indeg` instead of `classic_core.indeg`/`Nin`; `glue_eul_subtype.ueglue_Eulerian` states the goal and its two Eulerian hypotheses over `classic_core.indeg` by conversion before the existing degree-union rewrites. Every other reached declaration (uppercase-complete-reach: 61 declarations in eight modules) compiles unchanged, including `H6_implies_three_connected_digonG_connected` with its explicit standing Eulerian hypothesis. grounding_reals2 is unchanged.",
+    "",
+    "History: no migration snapshot references the migrated helpers, their rows or chains, so the per-row copies are complete and no Original is composed. `Cycle.conjectures.U6.eulerian` (connected multigraph with even arc-end degrees, a loop counting two) shares the normalized name and is classified deferred as a distinct undirected contract (family B17, connected/even predicate and its complete reached rows only); U6's supplied tour predicate `is_eulerian_tour` remains separate and unchanged; `Chromatic.foundations.alon_tarsi.at_eulerian` (balance of a supplied finite set of ordered pairs) is a distinct deferred representation.",
+    "",
+    "Routing: X221 is milestone phase X221; colouring_variants' row and H6 are phase X1 (all Digraph; normal unscoped acceptance stays with the coordinator's shared heavy build). C15's separate two_extremal minor-model hunk is not touched by this family (its hunk is one import line and one definition body).",
+    "",
+    "Kernel evidence, independent of this textual report, from `Print All Dependencies`: no frozen row, chain or whole Prop reaches a live helper of this family or the public `balanced` / `balancedb` / `indeg`; each live row and whole Prop reaches its helper and the canonical of its presentation; both EC-log statements reach none of them. Summary: /srv/graph-theory-rocq/coordination/evidence/B16r-degree_balance/print_all_dependencies_summary.txt.",
+    "",
+    "Baseline 2981122 is the announced B15 pin (over the private prerequisite baseline 4b63976), not yet integrated. No statement text, doc block, manifest row, leg state or status changes (checked below)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X221.x221_eulerian",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "x221_eulerian",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "Legacy.x221_eulerian",
+      "substitutions": {
+        "indeg": "classic_core.indeg"
+      },
+      "certificate": "Digraph.migration.degree_balance.x221_eulerian_compat",
+      "live_unfolds_to": "degree_balance.balanced D"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.colouring_variants.eulerian",
+      "path": "digraph-theory/theories/conjectures/colouring_variants.v",
+      "name": "eulerian",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "Legacy.cv_eulerian",
+      "substitutions": {
+        "eulerian": "cv_eulerian",
+        "indeg": "colouring_variants.indeg"
+      },
+      "certificate": "Digraph.migration.degree_balance.cv_eulerian_compat",
+      "live_unfolds_to": "degree_balance.balancedb D"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.two_extremal.Eulerian",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "Eulerian",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "Legacy.Eulerian",
+      "substitutions": {
+        "indeg": "classic_core.indeg"
+      },
+      "certificate": "Digraph.migration.degree_balance.Eulerian_compat",
+      "live_unfolds_to": "degree_balance.balanced D"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X221.x221_eulerian_avoidable",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "x221_eulerian_avoidable",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "X221Legacy.eulerian_avoidable",
+      "substitutions": {
+        "x221_eulerian": "Legacy.x221_eulerian",
+        "x221_eulerian_avoidable": "eulerian_avoidable"
+      },
+      "certificate": "Digraph.migration.degree_balance.x221_eulerian_avoidable_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "orientation_C4_eulerian_avoidable_statement",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "X221Legacy.orientation_C4_eulerian_avoidable_statement",
+      "substitutions": {
+        "x221_eulerian_avoidable": "eulerian_avoidable"
+      },
+      "certificate": "Digraph.migration.degree_balance.orientation_C4_eulerian_avoidable_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement",
+      "path": "digraph-theory/theories/conjectures/colouring_variants.v",
+      "name": "majority_3col_eulerian_statement",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "ColouringVariantsLegacy.majority_3col_eulerian_statement",
+      "substitutions": {
+        "eulerian": "Legacy.cv_eulerian"
+      },
+      "certificate": "Digraph.migration.degree_balance.majority_3col_eulerian_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.two_extremal.H6_no_full_cover",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "H6_no_full_cover",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "TwoExtremalLegacy.H6_no_full_cover",
+      "substitutions": {
+        "Eulerian": "Legacy.Eulerian"
+      },
+      "certificate": "Digraph.migration.degree_balance.H6_no_full_cover_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.two_extremal_hajos.realises_Eulerian",
+      "path": "digraph-theory/theories/conjectures/two_extremal_hajos.v",
+      "name": "realises_Eulerian",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "TwoExtremalHajosLegacy.realises_Eulerian",
+      "substitutions": {
+        "Eulerian": "Legacy.Eulerian"
+      },
+      "certificate": "Digraph.migration.degree_balance.realises_Eulerian_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.two_extremal_glue.realises_W",
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "realises_W",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "TwoExtremalGlueLegacy.realises_W",
+      "substitutions": {
+        "Eulerian": "Legacy.Eulerian"
+      },
+      "certificate": "Digraph.migration.degree_balance.realises_W_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.two_extremal_glue.conj_9_2_glued",
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "conj_9_2_glued",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "TwoExtremalGlueLegacy.conj_9_2_glued",
+      "substitutions": {
+        "realises_W": "TwoExtremalGlueLegacy.realises_W"
+      },
+      "certificate": "Digraph.migration.degree_balance.conj_9_2_glued_compat",
+      "non_corpus": true
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.glue_eul_subtype.realises_E",
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "realises_E",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "GlueEulSubtypeLegacy.realises_E",
+      "substitutions": {
+        "Eulerian": "Legacy.Eulerian"
+      },
+      "certificate": "Digraph.migration.degree_balance.realises_E_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.glue_eul_subtype.conj_9_2_glued_e",
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "conj_9_2_glued_e",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "GlueEulSubtypeLegacy.conj_9_2_glued_e",
+      "substitutions": {
+        "realises_E": "GlueEulSubtypeLegacy.realises_E"
+      },
+      "certificate": "Digraph.migration.degree_balance.conj_9_2_glued_e_compat",
+      "non_corpus": true
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.generalised_wheel.realises_gw",
+      "path": "digraph-theory/theories/conjectures/generalised_wheel.v",
+      "name": "realises_gw",
+      "frozen_path": "digraph-theory/theories/migration/degree_balance.v",
+      "frozen": "GeneralisedWheelLegacy.realises_gw",
+      "substitutions": {
+        "Eulerian": "Legacy.Eulerian"
+      },
+      "certificate": "Digraph.migration.degree_balance.realises_gw_compat"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U6.v",
+      "name": "eulerian",
+      "note": "Short-name match only: these are uses of Cycle U6's own multigraph eulerian (connected, even arc-end degrees), the distinct deferred contract (family B17), not of this family's directed helpers; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X221.v",
+      "name": "x221_eulerian",
+      "note": "Proof consumers x221_C3_eulerian (C3 is Eulerian) and x221_TT2_not_eulerian (the single arc is not); theorem types unchanged, proofs now use the public groundings balanced_ground_C3 and not_balanced_ground_TT2 instead of unfolding classic_core.indeg."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_chi_col.v",
+      "name": "eulerian",
+      "note": "Proof consumers eulerian_C3 and not_eulerian_TT2 (colouring_variants' Boolean helper); theorem types unchanged, proofs now go through balancedP and the public groundings instead of unfolding the local indeg."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_reals2.v",
+      "name": "eulerian",
+      "note": "Short-name match only: gr_eulerian_TT1 uses reals_growth.eulerian, the DEFERRED legacy-axiom-defect helper that this replacement does not migrate; grounding_reals2.v and reals_growth.v are byte-identical to the baseline 2981122."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X1.v",
+      "name": "majority_3col_eulerian_statement",
+      "note": "Implication module of phase X1 referring to the colouring_variants row; compiles unchanged, no body change."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_hajos.v",
+      "name": "Eulerian",
+      "note": "The Section-parametric constraint realises_Eulerian (frozen here as TwoExtremalHajosLegacy.realises_Eulerian, same Variable realises) requires the realised digraph to be Eulerian; declaration text unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "Eulerian",
+      "note": "di_cycle_Eulerian (the directed cycle is Eulerian; theorem type unchanged, its proof now unfolds the public degree_balance.indeg instead of classic_core.indeg/Nin) and the Eulerian conjunct of realises_W (frozen here as TwoExtremalGlueLegacy.realises_W)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "realises_Eulerian",
+      "note": "realises_W_Eulerian: the concrete relation satisfies the Eulerian constraint; proof and type unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/generalised_wheel.v",
+      "name": "Eulerian",
+      "note": "gwheel_Eulerian (the generalised wheel is Eulerian for n >= 2; type unchanged, proof now unfolds the public degree_balance.indeg instead of classic_core.indeg/Nin), the Eulerian conjunct of realises_gw (frozen here as GeneralisedWheelLegacy.realises_gw) and the packaged gwheel_is_wheel; unchanged otherwise."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/generalised_wheel.v",
+      "name": "realises_Eulerian",
+      "note": "realises_gw_Eulerian: the wheel relation satisfies the Eulerian constraint; proof and type unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/glue_tree.v",
+      "name": "Eulerian",
+      "note": "leaf_Eulerian (the leaf block, a directed 3-cycle, is Eulerian) and the explicit Eulerian (glue_tree t) hypotheses of glue_tree_realises_W, glue_tree_is_treejoin and glue_tree_in_H2 (this assembly is not Eulerian-preserving, so the hypothesis is carried, as before); all unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/glue_tree.v",
+      "name": "realises_W",
+      "note": "glue_tree_realises_W, glue_tree_realises_W_leaf, glue_tree_is_treejoin and glue_tree_in_H2 realise plane trees under the live two_extremal_glue.realises_W (frozen here as TwoExtremalGlueLegacy.realises_W); unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "Eulerian",
+      "note": "ueglue_Eulerian (the degree-unioning amalgam preserves Eulerianness; type unchanged, its proof now states the goal and its two Eulerian hypotheses over classic_core.indeg by conversion before the existing degree-union rewrites), eleaf_Eulerian, eglue_one_Eulerian, glue_tree_e_Eulerian, glue_tree_e_invariants and the Eulerian conjunct of realises_E (frozen here as GlueEulSubtypeLegacy.realises_E); unchanged otherwise."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "realises_Eulerian",
+      "note": "realises_E_Eulerian: the degree-unioning relation satisfies the Eulerian constraint; proof and type unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_h2_concrete.v",
+      "name": "Eulerian",
+      "note": "Groundings gw3_Eulerian, gw3_is_wheel, symcyc3_Eulerian (type unchanged, proof now unfolds the public degree_balance.indeg instead of classic_core.indeg/Nin), dicyc3_Eulerian and eleaf_block_facts; unchanged otherwise."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_h2_concrete.v",
+      "name": "realises_W",
+      "note": "conj_9_2_glued_H2_nonvacuous and faithful_in_H2_nonempty: inhabitation of in_H2_concrete realises_W; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_h2_concrete.v",
+      "name": "realises_E",
+      "note": "conj_9_2_glued_e_H2_nonvacuous: inhabitation of in_H2_concrete realises_E; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_h2_concrete.v",
+      "name": "realises_gw",
+      "note": "gw3_is_wheel and conj_9_2_gw_H2_nonvacuous: inhabitation of in_H2_concrete realises_gw; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_two_extremal.v",
+      "name": "Eulerian",
+      "note": "gwheel3_Eulerian: the wheel W_3 is Eulerian; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_two_extremal.v",
+      "name": "realises_Eulerian",
+      "note": "realises_gw_constraints: the three two_extremal_hajos constraints hold for realises_gw; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_two_extremal.v",
+      "name": "realises_gw",
+      "note": "gwheel3_in_H2, realises_gw_satisfiable, realises_gw_constraints and conj_9_2_both_sides_nonvacuous: satisfiability and inhabitation under the wheel relation; unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Cycle.conjectures.U6.eulerian",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "eulerian",
+      "note": "undirected multigraph Eulerian predicate (connected, even arc-end degrees); a distinct contract, deferred in the registry (family B17); untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.U6.is_eulerian_tour",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "is_eulerian_tour",
+      "note": "a closed walk using every edge exactly once: a tour witness, not a degree condition; untouched"
+    },
+    {
+      "qualified": "Chromatic.foundations.alon_tarsi.at_eulerian",
+      "path": "chromatic-theory/theories/foundations/alon_tarsi.v",
+      "name": "at_eulerian",
+      "note": "balance of a supplied finite set of ordered pairs (incoming and outgoing arcs of the set), no digraph structure or connectivity: a distinct representation, deferred; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.X221.x221_eulerian_avoidable",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "x221_eulerian_avoidable",
+      "note": "the X221 chain over the helper (frozen here as X221Legacy.eulerian_avoidable); listed to record that it is a chain, not a second source"
+    }
+  ]
+}
