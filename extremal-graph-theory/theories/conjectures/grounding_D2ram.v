@@ -14,7 +14,7 @@
     [_ ⇀ _] = isubgraph, [E(_)] = sg_edge_set) are not re-grounded here. *)
 
 From mathcomp Require Import all_boot all_fingroup.
-From GTBase Require Import base.
+From GTBase Require Import base set_pairs.
 From GraphTheory Require Import minor.
 From Extremal.conjectures Require Import D2ram.
 
@@ -72,7 +72,7 @@ Proof. exact: GTBase.perfect_graphs.is_perfect_graph_whole. Qed.
 Lemma complete_bipartite_sub0 (G : sgraph) :
   @complete_bipartite_sub G set0 set0.
 Proof.
-split; first by rewrite -setI_eq0 set0I eqxx.
+apply/disjoint_complete_betweenP; split; first by rewrite -setI_eq0 set0I eqxx.
 by move=> a b; rewrite in_set0.
 Qed.
 
@@ -80,7 +80,7 @@ Qed.
 Lemma complete_bipartite_sub_sym (G : sgraph) (A B : {set G}) :
   complete_bipartite_sub A B -> complete_bipartite_sub B A.
 Proof.
-move=> [dAB adj]; split; first by rewrite disjoint_sym.
+move/disjoint_complete_betweenP=> [dAB adj]; apply/disjoint_complete_betweenP; split; first by rewrite disjoint_sym.
 by move=> a b aB bA; rewrite sgP; apply: adj.
 Qed.
 

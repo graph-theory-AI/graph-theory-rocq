@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.X57 -- v2 sparse strong EH row *)
 
 From GTBase Require Export base.
+From GTBase Require Import set_pairs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,8 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X57 vocabulary ************************************************)
 
 Definition x57_anticomplete (G : sgraph) (A B : {set G}) : Prop :=
-  [disjoint A & B] /\
-  forall a b : G, a \in A -> b \in B -> a -- b -> False.
+  anticomplete A B.
 
 Definition x57_induced_free (G H : sgraph) : Prop :=
   induced_free G H.

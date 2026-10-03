@@ -34,7 +34,8 @@
     "Both legacy Prop signatures remain unchanged. D2ram quantifies directly over subsets; X144 uses all induced carriers. Upstream chiT/omegaT and chi_induced/omega_induced reconcile them, including the empty subset. No nonempty graph/set, connectivity or size guard is introduced.",
     "Both exact source bodies and both complete rows are frozen. Preserve D2ram uniform threshold N, graph-then-size order, and the entire G/complement biclique disjunction with both power bounds. Preserve X144 size-then-graph order, its two explicit nonempty pure-pair guards and complete-or-anticomplete disjunction. These output predicates are not identified or rewritten.",
     "D2ram perfect_graph_complete and perfect_graph_whole retain exact theorem types and now use the corresponding public API lemmas; every other grounding/implication proof remains unchanged, including the D2ram_nodes_in_scope whole-row equality. No earlier frozen row reaches this family and no historical Original is owed. D2ram edge_count is a separate A7 hunk and must remain preserved at integration.",
-    "Public-only examples include K0/K1/K2/Kn, edgeless complements, the empty induced subset, isomorphism/induced transport, and an actual cycle_graph5 negative. The latter proves alpha<=2 and omega<=2 by five membership cases and applies upstream Hajnal, avoiding chromatic-number partition enumeration. All existing docs/statuses remain unchanged; exact kernel types/closures and independent step-10/root final review are required."
+    "Public-only examples include K0/K1/K2/Kn, edgeless complements, the empty induced subset, isomorphism/induced transport, and an actual cycle_graph5 negative. The latter proves alpha<=2 and omega<=2 by five membership cases and applies upstream Hajnal, avoiding chromatic-number partition enumeration. All existing docs/statuses remain unchanged; exact kernel types/closures and independent step-10/root final review are required.",
+    "A21 preserves both existing C12 whole-row snapshots and all frozen perfection bodies. Its appended D2ramOriginal and X144Original whole rows additionally freeze the raw supplied-pair contracts, without changing the graph/complement disjunction, nonemptiness guards, power bounds or quantifier order. Reciprocal snapshot notes identify both complete compositions."
   ],
   "frozen": [
     {
@@ -90,7 +91,10 @@
       "corpus": "v2"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/set_pairs.v#D2ramLegacy.complete_bipartite_subgraphs_of_perfect_graphs_statement": "A21 initial row snapshot remains byte-exact and retains live perfection. The complete C12+A21 row Extremal.migration.set_pairs.D2ramOriginal.complete_bipartite_subgraphs_of_perfect_graphs_statement freezes C12 raw perfection and A21 raw pair predicates, with all guards and quantifiers unchanged; certified by Extremal.migration.set_pairs.complete_bipartite_subgraphs_of_perfect_graphs_statement_original_compat.",
+    "graph-theory-misc/theories/migration/set_pairs.v#X144Legacy.fox_pure_pair_perfect_graphs_statement": "A21 initial row snapshot remains byte-exact and retains live perfection. The complete C12+A21 row GTMisc.migration.set_pairs.X144Original.fox_pure_pair_perfect_graphs_statement freezes C12 raw perfection and A21 raw pair predicates, with all guards and quantifiers unchanged; certified by GTMisc.migration.set_pairs.fox_pure_pair_perfect_graphs_statement_original_compat."
+  },
   "cross_module_consumers": [
     {
       "path": "extremal-graph-theory/theories/conjectures/grounding_D2ram.v",
