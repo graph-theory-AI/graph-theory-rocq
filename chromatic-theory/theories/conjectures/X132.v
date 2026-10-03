@@ -8,8 +8,9 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X132 vocabulary ***********************************************)
 
-(** Triangle-free, for simple graphs, is represented by girth at least four. *)
-Definition x132_triangle_free (G : sgraph) : Prop := girth_geq G 4.
+(** Triangle-free: base's [triangle_free], equal for simple graphs to girth at least four
+    ([girth_geq4_equiv_triangle_free]). *)
+Definition x132_triangle_free (G : sgraph) : Prop := triangle_free G.
 
 (** ** X132 statements *****************************************************)
 

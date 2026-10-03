@@ -13,7 +13,7 @@ Unset Printing Implicit Defensive.
 Definition x192_proper_minor_closed_class (C : sgraph -> Prop) : Prop :=
   GTBase.minor_classes.excludes_a_minor C.
 
-Definition x192_triangle_free (G : sgraph) : Prop := girth_geq G 4.
+Definition x192_triangle_free (G : sgraph) : Prop := triangle_free G.
 
 Definition x192_additive_chromatic_output
     (alpha : nat) (G : sgraph) (out : data) : Prop :=
