@@ -71,7 +71,7 @@
     asymptotic (1+o(1)) factor / graphon formulation; see the note at that row. *)
 
 From mathcomp Require Import all_boot all_fingroup.
-From GTBase Require Import base.
+From GTBase Require Import base perfect_graphs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -82,7 +82,7 @@ Unset Printing Implicit Defensive.
     [edge_count G] = |E(G)|, REUSING coq-graph-theory's [E(_)] = [sg_edge_set] (the set of
     undirected edges [ [set x; y] ] with [x -- y]); it counts each undirected edge once.
     This is the cross-area quantity |E(G)| imported verbatim, not re-derived. *)
-Definition edge_count (G : sgraph) : nat := #|E(G)|.
+Definition edge_count (G : sgraph) : nat := GTBase.common.edge_count G.
 
 (** ============================================================================ *)
 (** ** Row 1 — Multicolour Erdős–Hajnal conjecture (OPEN)
@@ -164,7 +164,8 @@ Definition multicolour_erdos_hajnal_statement : Prop :=
     the eventual bound: for every exponent (b-a)/b < 1 (i.e. a<b), eventually
     [n^(b-a) <= |A|^b] and [n^(b-a) <= |B|^b]. *)
 
-Definition perfect_graph (G : sgraph) : Prop := forall A : {set G}, χ(A) = ω(A).
+Definition perfect_graph (G : sgraph) : Prop :=
+  GTBase.perfect_graphs.is_perfect_graph G.
 
 Definition complete_bipartite_sub (G : sgraph) (A B : {set G}) : Prop :=
   [disjoint A & B] /\ (forall a b : G, a \in A -> b \in B -> a -- b).

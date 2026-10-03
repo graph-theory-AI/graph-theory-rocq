@@ -1,0 +1,7 @@
+# Repository namespace validation review
+
+Reviewed source `5977389deea81b5410a9929e419fe3dbc08915ca`, implementer matching_scope; independent reviewer family_scope and coordinator source check approve. Registry declaration validation now uses the actual repository logical owners, including ClassicalLemmas. Comparing logical namespace values prevents an upstream ownership label from hiding a missing local canonical declaration. Corpus enrollment and all mathematical source remain unchanged.
+
+Independent checks passed all24 registry tests, inventory validation/check, an exact-parent rollback with six expected failures, and read-only validation of the real A10 registry: the parent rejects its ClassicalLemmas certificate, while the fixed implementation accepts it. Evidence: `coordination/evidence/Classical-registry-review-by-family-scope/` and `Classical-registry-namespaces/`. Required immutable mutation on5977389 remains separately tracked; preparation is not a claim that it has finished.
+
+Prepared as a separate merge on A9 `501b89ff93b5bdcfd9269ce3f44b784a61157229`. Both code files are identical to the reviewed source; every predecessor Rocq file, project, family registry/fidelity/specification and review is preserved byte-for-byte. All32 compact reports and shared generated metadata regenerate without drift. Fresh24 registry tests and `make audit` pass. Exact preservation and terminal results: `coordination/evidence/Classical-namespaces-integration/`. No proof build, artifact transfer or main modification is performed by preparation.

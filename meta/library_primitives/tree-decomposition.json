@@ -129,6 +129,9 @@
         "certificate": "GTMisc.migration.bag_decompositions.x169_tree_decomposition_compat",
         "note": "Aliases the explicitly stronger tree_bag_decomposition, not the raw contract."
       }
-    }
+    },
+    "reviewed_by": "coordinator helper path_review",
+    "reviewed_commit": "cdb9e10161e6566b9a812b0931488acb6338be9f",
+    "independent_review": "meta/migration_reviews/tree_decomposition.md"
   }
 }

@@ -86,9 +86,9 @@ Definition edge_setG (G : sgraph) : {set {set G}} :=
 (** Bipartite after deleting the edge set [S]: a 2-colouring with no
     surviving (non-[S]) edge monochromatic.  "Deleting [S] destroys every odd
     cycle" ⟺ the remaining graph is bipartite. *)
+(** Deprecated compatibility alias; public API: [GTBase.bipartitions]. *)
 Definition del_bipartite (G : sgraph) (S : {set {set G}}) : Prop :=
-  exists A : {set G},
-    forall x y : G, x -- y -> [set x; y] \notin S -> (x \in A) != (y \in A).
+  bipartite_after_deletion S.
 
 (** Triangle-free: no 3-clique. *)
 (* [triangle_free] now from graph-theory-base (vertex-triple form, equivalent to ~ is_triangle). *)
@@ -179,7 +179,7 @@ Definition hamiltonian_cycleG (G : sgraph) (c : seq G) : bool :=
 Arguments hamiltonian_cycleG : clear implicits.
 
 Definition cycle_edgesG (G : sgraph) (c : seq G) : {set {set G}} :=
-  [set [set x; next c x] | x in [set z | z \in c]].
+  seq_next_edge_set c.
 Arguments cycle_edgesG : clear implicits.
 
 (** A set of edges that is a matching: each element is a genuine edge, and every

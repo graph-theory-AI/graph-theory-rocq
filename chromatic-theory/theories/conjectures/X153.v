@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X153 vocabulary ***********************************************)
 
 Definition x153_cycle_vertices (G : sgraph) (c : seq G) : {set G} :=
-  [set v | v \in c].
+  seq_vertices c.
 
 Definition x153_short_cycle (G : sgraph) (k : nat) (c : seq G) : Prop :=
   ucycle (--) c /\ 2 < size c /\ size c <= k.

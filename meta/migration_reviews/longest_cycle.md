@@ -1,0 +1,11 @@
+# Longest genuine cycles: independent and final review
+
+Path_review independently approved exact `0646ae36e10c28c712ccfc84370daf9ff9ebba43`; the coordinator separately read and approved all five complete statement equivalences and exact source hashes. Evidence: `coordination/evidence/B13-review-by-path-review.md`, its detailed directory, and `B13-coordinator-final/`.
+
+Three interfaces describe a longest genuine cycle under an arbitrary relation. X212's Boolean view converts; X10's nested view and Hom U3's all-ucycle and3 view use proved equivalences. The latter retains every degenerate competitor, handled by its size bound. No symmetry, looplessness, inhabitance or changed maximality guard enters the contract. Same-relation reversal has a sufficient symmetry hypothesis. All three rows and proof-consumer types are preserved.
+
+X10Original freezes B12 raw support and the old X10 longest body. X212Original reuses B12's complete B10+B12 snapshot, with frozen genuine-cycle/longest/support chains. Earlier partial snapshots stay unchanged. Current per-row copies intentionally retain baseline path.ucycle (X10/Hom) and X212.x212_cycle; full Originals exclude the participating live family vocabulary.
+
+Independent checks passed 30 fresh sources in three packages, 55 closed assumptions, 29 exact type/conversion checks including all five whole iff and two expected nonconversions, 18 strict dependency probes, family source/kernel107 and all25 source reports. Preservation protected2,512 predecessor files,82 prior migration modules and24 frozen arrays. These focused checks do not replace separately tracked cumulative acceptance and normal milestones.
+
+Preparation preserves the reviewed mathematical source, all older frozen bodies/arrays, review fields and the later B12 #916 Original. Hom U3 receives the exact independent C7 bipartite hunk alongside the B13 longest alias. Only two agreed wording corrections alter worker content: the client's sufficient-symmetry description and the report's explicit baseline-dependency qualification. Projects use ordered unions; summaries and shared metadata are regenerated. Exact comparisons and source/audit results are in `coordination/evidence/B13-integration/`. No proof build, cache transfer, main change or active-pin mutation occurs during preparation.

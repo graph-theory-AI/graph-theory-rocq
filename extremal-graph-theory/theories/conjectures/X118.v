@@ -18,7 +18,7 @@ Definition x118_induced_free (G H : sgraph) : Prop :=
     ordered pairs is [#|A| * #|B|]; so the edge-density between [A] and [B] is
     [x118_edges_between A B / (#|A| * #|B|)]. *)
 Definition x118_edges_between (G : sgraph) (A B : {set G}) : nat :=
-  #|[set p : G * G | [&& p.1 \in A, p.2 \in B & p.1 -- p.2]]|.
+  edges_between A B.
 
 (** Corpus row: studies:std_conlon_fox_sudakov_conjecture_dense_pair
     Site: none

@@ -43,7 +43,7 @@ Definition x6_edges_on (T : finType) (E : {set {set T}}) (S : {set T}) : nat :=
   #|[set e in E | e \subset S]|.
 
 Definition x6_hg_degree (T : finType) (E : {set {set T}}) (v : T) : nat :=
-  #|[set e in E | v \in e]|.
+  incidence_degree E v.
 
 Definition x6_proper_coloring
     (T C : finType) (E : {set {set T}}) (col : T -> C) : Prop :=

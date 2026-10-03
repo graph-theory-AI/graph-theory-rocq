@@ -64,8 +64,10 @@
     [choosable], [is_choice_number].
     Owned by the other [GTBase] modules re-exported below: [asymptotics],
     [complexity], [finite_graph], [graph_metric] (distances), [list_flexibility],
-    [posets], [surface], [walks_paths] (vertex sequences: [seq_vertices], the
-    support of a raw sequence, with its correspondence to the library [Path]). *)
+    [posets], [surface], [bipartitions] (supplied and existential finite
+    bipartitions, relation colourings, and edge-deletion adapters), [walks_paths] (vertex sequences: [seq_vertices], the
+    support of a raw sequence, with its correspondence to the library [Path]), [incidence]
+    ([incidence_degree]: the number of members of a supplied finite family containing a vertex). *)
 
 From mathcomp Require Export all_boot.
 (* WP4b: the core undirected vocabulary of coq-graph-theory is exported from ONE place.
@@ -93,6 +95,7 @@ Notation strict_minor := GraphTheory.core.minor.strict_minor.
 Notation minor_map := GraphTheory.core.minor.minor_map.
 Notation minor_rmap := GraphTheory.core.minor.minor_rmap.
 From GTBase Require Export common.
+From GTBase Require Export bipartitions.
 From GTBase Require Export asymptotics.
 From GTBase Require Export complexity.
 From GTBase Require Export finite_graph.
@@ -100,6 +103,7 @@ From GTBase Require Export graph_metric.
 From GTBase Require Export list_flexibility.
 From GTBase Require Export posets.
 From GTBase Require Export monochromatic.
+From GTBase Require Export incidence.
 From GTBase Require Export surface.
 From GTBase Require Export walks_paths.
 
@@ -391,6 +395,10 @@ Qed.
 
 (** Bipartite: a 2-colouring with no monochromatic edge. *)
 Definition bipartite (G : sgraph) : Prop := exists f : G -> bool, forall x y : G, x -- y -> f x != f y.
+
+Lemma bipartite_relationE (G : sgraph) :
+  bipartite_relation (@edge_rel G) = bipartite G.
+Proof. by []. Qed.
 
 (** The cycle C_n on ['I_n] (promoted from homomorphism/U3; reused by extremal D2). *)
 Section CycleGraph.

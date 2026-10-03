@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py perfect_matching --details /tmp
 
 - Canonical: `GTBase.common.perfect_matching`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 3 helpers, 3 statements, 10 frozen objects, 20 recorded references.
-- Source checks: 92/92 pass; consistent.
+- Scope: 3 helpers, 3 statements, 10 frozen objects, 25 recorded references.
+- Source checks: 93/93 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,3 +20,5 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
 Excluded distinct variants: `Cycle.conjectures.U10.is_perfect_matching`, `Cycle.conjectures.U10.perfect_matching_cover`.
+
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `cycle-theory/theories/migration/cycle_edges.v#X24Legacy.one_factorization_long_rainbow_cycle_statement`.

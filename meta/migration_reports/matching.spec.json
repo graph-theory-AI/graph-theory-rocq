@@ -41,8 +41,8 @@
     "| `Packing.conjectures.X15.x15_matching` | simple-graph edge family; at most one member through each vertex | migrated: alias of `matching`; `Packing.migration.matching.x15_matching_compat` |",
     "| `GTMisc.conjectures.X14.x14_matching` | simple-graph edge family; pairwise-disjoint distinct members | migrated: alias of `matching`; `GTMisc.migration.matching.x14_matching_compat` |",
     "| `Extremal.conjectures.X180.x180_matching` | simple-graph edge family over `fg_edges G` (= `E(G)`, `fg_edgesE`); empty pairwise intersections | migrated: alias of `matching`; `Extremal.migration.matching.x180_matching_compat` |",
-    "| `Packing.conjectures.X15alone.x15_matching` | the X15 body, declaration for declaration (sha256 `e6463b96…`), in a self-contained file absent from `_CoqProject` | deferred, excluded: not built, not retargeted, not repaired; its documented stronger constant (c <= 32 (m+1)^3 under the corpus name) is preserved |",
-    "| `Hypergraph.conjectures.X6.x6_matching` | arbitrary hyperedge family on a finType (`M E : {set {set T}}`); identical body to `U12.hg_matching` (body sha256 `78f1f021…`) | deferred to the hypergraph foundation (batch D), together with `hg_matching` |",
+    "| `Packing.conjectures.X15alone.x15_matching` | the X15 body, declaration for declaration (sha256 `e6463b96\u2026`), in a self-contained file absent from `_CoqProject` | deferred, excluded: not built, not retargeted, not repaired; its documented stronger constant (c <= 32 (m+1)^3 under the corpus name) is preserved |",
+    "| `Hypergraph.conjectures.X6.x6_matching` | arbitrary hyperedge family on a finType (`M E : {set {set T}}`); identical body to `U12.hg_matching` (body sha256 `78f1f021\u2026`) | deferred to the hypergraph foundation (batch D), together with `hg_matching` |",
     "| `Digraph.conjectures.path_fas.matching` | predicate on a whole graph: a forest with every degree at most one | deferred, distinct representation: the bridge `matching G <-> connectivity.matching E(G)` needs its own comparison and a digraph build |",
     "",
     "Nine statements are affected: five in X15 (corpus rows #02 and #03 and the three LLM-proof variants, which have no manifest row and are marked `non_corpus`), two in X18 (through `x18_perfect_matching`, a cross-file chain helper that reaches `x15_matching`), one in X14 and one in X180 (through `x180_induced_matching`, `x180_multitasker_capacity_at_least` and `x180_multitasker_capacity_positive`). Each frozen statement resolves only through frozen copies along its whole affected chain: every reference to a frozen name is `Legacy.`-qualified or prefix-stripped, so no frozen text contains a live name of the family. The per-row theorem `<formal_name>_compat : XnnLegacy.<formal_name> <-> <formal_name>` is kernel-checked by `meta/check_library_migration.py`.",
@@ -376,7 +376,9 @@
       "documented_status": "BLOCKED (per-graph quantification of the capacity ratio and the degree constants, 2026-07-17 audit); preserved exactly"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement": "A7 snapshot: A7 froze this row over its own frozen average-degree chain (and frozen public count fg_edge_count) but kept the live x180_multitasker_capacity_positive of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat, which composes this family's frozen X180Legacy.multitasker_capacity_positive."
+  },
   "cross_module_consumers": [
     {
       "path": "packing-theory/theories/conjectures/X18.v",
@@ -447,7 +449,7 @@
       "path": "hypergraph-theory/theories/conjectures/X6.v",
       "name": "x6_matching",
       "representation": "hypergraph edge family",
-      "note": "subfamily of an arbitrary hyperedge family on a finType (M E : {set {set T}}), identical body to Hypergraph.conjectures.U12.hg_matching (body sha256 78f1f021…); deferred to the hypergraph foundation (batch D) together with hg_matching"
+      "note": "subfamily of an arbitrary hyperedge family on a finType (M E : {set {set T}}), identical body to Hypergraph.conjectures.U12.hg_matching (body sha256 78f1f021\u2026); deferred to the hypergraph foundation (batch D) together with hg_matching"
     },
     {
       "qualified": "Digraph.conjectures.path_fas.matching",

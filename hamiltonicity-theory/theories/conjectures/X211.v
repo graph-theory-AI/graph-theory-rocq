@@ -46,7 +46,7 @@ Definition x211_vertex_transitive (G : sgraph) : Prop :=
     reflection = counting these edge sets.  [@MOVE-to-base]: byte-identical to
     [U2.cycle_edges]. *)
 Definition x211_cycle_edges (G : sgraph) (c : seq G) : {set {set G}} :=
-  [set [set x; next c x] | x in [set z | z \in c]].
+  seq_next_edge_set c.
 Arguments x211_cycle_edges : clear implicits.
 
 (** The set of Hamilton cycles of [G], each identified with its edge set.  A

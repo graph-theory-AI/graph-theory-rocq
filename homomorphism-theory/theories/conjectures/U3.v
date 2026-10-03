@@ -124,8 +124,7 @@ Definition pentagon_statement : Prop :=
 (* [k_connected] now from graph-theory-base (uses [set: G] :\: S = ~: S). *)
 
 Definition longest_cycle (G : sgraph) (c : seq G) : Prop :=
-  [/\ ucycle (--) c, 2 < size c &
-      forall c' : seq G, ucycle (--) c' -> size c' <= size c].
+  seq_longest_cycle (--) c.
 
 Definition chord (G : sgraph) (c : seq G) : Prop :=
   exists x y : G,
@@ -415,8 +414,9 @@ Definition extremal_problem_on_the_number_of_tree_endomorphism_statement : Prop 
     2-colouring [G -> bool] separating its edges). *)
 (* [triangle_free] now from graph-theory-base (identical definition). *)
 
+(** Deprecated compatibility alias; public API: [GTBase.bipartitions]. *)
 Definition bipartite_rel (G : sgraph) (r : rel G) : Prop :=
-  exists f : G -> bool, forall x y : G, r x y -> f x != f y.
+  bipartite_relation r.
 
 (** Corpus row: opg:weak_pentagon_problem
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/weak_pentagon_problem/

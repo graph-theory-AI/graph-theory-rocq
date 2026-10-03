@@ -12,7 +12,7 @@ Definition x9_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
 Definition x9_cycle_edges (G : sgraph) (c : seq G) : seq {set G} :=
-  map (fun p : G * G => [set p.1; p.2]) (zip c (rot 1 c)).
+  seq_cycle_edge_list c.
 
 Definition x9_genuine_cycle (G : sgraph) (c : seq G) : Prop :=
   seq_cycle (--) c.

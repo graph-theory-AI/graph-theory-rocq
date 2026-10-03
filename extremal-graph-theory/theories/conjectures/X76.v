@@ -11,10 +11,10 @@ Unset Printing Implicit Defensive.
 Definition x76_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
-Definition x76_edge_count (G : sgraph) : nat := #|x76_edge_set G|.
+Definition x76_edge_count (G : sgraph) : nat := edge_count G.
 
 Definition x76_cut_size (G : sgraph) (A : {set G}) : nat :=
-  #|[set e in x76_edge_set G | ~~ [disjoint e & A] && ~~ (e \subset A)]|.
+  cut_size A.
 
 Definition x76_has_cycle_length (G : sgraph) (k : nat) : Prop :=
   exists c : seq G, ucycle (--) c /\ size c = k.

@@ -17,14 +17,14 @@ Definition x120_induced_free (G H : sgraph) : Prop :=
     with [a \in A], [b \in B], [a -- b] (each counted once as [A], [B] are
     disjoint). *)
 Definition x120_edges_between (G : sgraph) (A B : {set G}) : nat :=
-  #|[set p : G * G | [&& p.1 \in A, p.2 \in B & p.1 -- p.2]]|.
+  edges_between A B.
 
 (** Cross edges between [A] and [B] in the complement [G-bar]: ordered pairs
     [(a, b)], [a \in A], [b \in B], with [a] and [b] *non*-adjacent in [G].
     As [A], [B] are disjoint we have [a <> b], so these are exactly the edges
     of [G-bar] between [A] and [B] (equal to [#|A|*#|B| - e_G(A,B)]). *)
 Definition x120_nonedges_between (G : sgraph) (A B : {set G}) : nat :=
-  #|[set p : G * G | [&& p.1 \in A, p.2 \in B & ~~ (p.1 -- p.2)]]|.
+  nonedges_between A B.
 
 (** Corpus row: studies:std_conlon_fox_sudakov_sparse_pair_conjecture
     Site: none

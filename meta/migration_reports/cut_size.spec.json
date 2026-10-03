@@ -1,0 +1,302 @@
+{
+  "family": "cut-size",
+  "canonical_name": "GTBase.common.cut_size",
+  "canonical_short_name": "cut_size",
+  "relation": "graph cut: X76/X78 convert to GTBase.common.cut_size (post-M1 bodies over M1 aliases of E(G)); coloured family cut: X209 x209_cut_size equals GTBase.monochromatic.non_monochromatic_count and x209_cut_edge equals ~~ monochromatic_on by non_monochromatic_onP, for arbitrary finite families and supplied ordinal colourings.",
+  "baseline_commit": "9de20ca72a0d7c8279ff8861033bfd80ce12a84a",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal",
+    "hypergraph-theory": "Hypergraph"
+  },
+  "certificate_files": [
+    "base/theories/common.v",
+    "base/theories/monochromatic.v",
+    "extremal-graph-theory/theories/migration/cut_size.v",
+    "hypergraph-theory/theories/migration/cut_size.v",
+    "extremal-graph-theory/theories/migration/edge_count.v",
+    "extremal-graph-theory/theories/migration/subgraph_of.v",
+    "extremal-graph-theory/theories/migration/simple_edges.v"
+  ],
+  "extra_certificates": [
+    "GTBase.common.cut_sizeC",
+    "GTBase.common.cut_size_set0",
+    "GTBase.common.cut_size_setT",
+    "GTBase.common.cut_size_non_monochromatic",
+    "GTBase.common.cut_size_edges_between",
+    "GTBase.monochromatic.non_monochromatic_count_le",
+    "GTBase.monochromatic.non_monochromatic_count_set0",
+    "GTBase.monochromatic.non_monochromatic_count_const",
+    "GTBase.monochromatic.non_monochromatic_count_small",
+    "GTBase.monochromatic.non_monochromatic_count_pair"
+  ],
+  "summary": [
+    "Batch A, family A9 (cut sizes). Two representation classes stay explicit. X76's and X78's cut sizes count the edges of the graph with one end in A and the other outside; after M1 their bodies convert to the new GTBase.common.cut_size A := #|[set e in E(G) | ~~ [disjoint e & A] && ~~ (e \\subset A)]|. X209's cut size counts the members of an ARBITRARY supplied family that are not monochromatic under an arbitrary supplied ordinal colouring; it now unfolds to the graph-free GTBase.monochromatic.non_monochromatic_count, and its cut-edge test x209_cut_edge to C8's ~~ monochromatic_on (non_monochromatic_onP, a proved equality). No uniformity, nonemptiness, positivity or palette premise is added. Three statements are affected (X76, X78, X209) through X209's three chains (is_max_r_cut, scaled_excess, is_min_scaled_excess).",
+    "",
+    "X209 defect, preserved: x209_is_min_scaled_excess binds a fresh T' but types E' over the OUTER carrier T, so T' is unused; the frozen chain keeps it verbatim and the row is not repaired. History: A7's X76/X78 per-row copies and Originals and A5's X78 snapshot call the live cut sizes and are documented below. X76Original and X78Original are pre-M1: cut sizes at 061154c over M1's frozen comprehension (bridged by M1's certificates), A7's pre-M1 counts and, for X78, A5's frozen containment. Natural subtraction, expected denominators, quantifier order, the whole excess function, statuses and doc blocks are unchanged."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X76.x76_cut_size",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "x76_cut_size",
+      "frozen_path": "extremal-graph-theory/theories/migration/cut_size.v",
+      "frozen": "Legacy.x76_cut_size",
+      "substitutions": {},
+      "certificate": "Extremal.migration.cut_size.x76_cut_size_compat",
+      "live_unfolds_to": "cut_size A"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X78.x78_cut_size",
+      "path": "extremal-graph-theory/theories/conjectures/X78.v",
+      "name": "x78_cut_size",
+      "frozen_path": "extremal-graph-theory/theories/migration/cut_size.v",
+      "frozen": "Legacy.x78_cut_size",
+      "substitutions": {},
+      "certificate": "Extremal.migration.cut_size.x78_cut_size_compat",
+      "live_unfolds_to": "cut_size A"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X76.ck_free_max_cut_polynomial_surplus_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "ck_free_max_cut_polynomial_surplus_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cut_size.v",
+      "frozen": "X76Legacy.ck_free_max_cut_polynomial_surplus_statement",
+      "substitutions": {
+        "x76_cut_size": "Legacy.x76_cut_size"
+      },
+      "certificate": "Extremal.migration.cut_size.ck_free_max_cut_polynomial_surplus_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X78.h_free_max_cut_three_fourths_surplus_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X78.v",
+      "name": "h_free_max_cut_three_fourths_surplus_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cut_size.v",
+      "frozen": "X78Legacy.h_free_max_cut_three_fourths_surplus_statement",
+      "substitutions": {
+        "x78_cut_size": "Legacy.x78_cut_size"
+      },
+      "certificate": "Extremal.migration.cut_size.h_free_max_cut_three_fourths_surplus_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X76.x76_cut_size",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "x76_cut_size",
+      "frozen_path": "extremal-graph-theory/theories/migration/cut_size.v",
+      "frozen": "X76Original.x76_cut_size",
+      "substitutions": {
+        "x76_edge_set": "M1.Legacy.edge_set"
+      },
+      "certificate": "Extremal.migration.cut_size.x76_cut_size_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X76.ck_free_max_cut_polynomial_surplus_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "ck_free_max_cut_polynomial_surplus_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cut_size.v",
+      "frozen": "X76Original.ck_free_max_cut_polynomial_surplus_statement",
+      "substitutions": {
+        "x76_cut_size": "X76Original.x76_cut_size",
+        "x76_edge_count": "A7.X76Original.x76_edge_count"
+      },
+      "certificate": "Extremal.migration.cut_size.ck_free_max_cut_polynomial_surplus_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X78.x78_cut_size",
+      "path": "extremal-graph-theory/theories/conjectures/X78.v",
+      "name": "x78_cut_size",
+      "frozen_path": "extremal-graph-theory/theories/migration/cut_size.v",
+      "frozen": "X78Original.x78_cut_size",
+      "substitutions": {
+        "x78_edge_set": "M1.Legacy.edge_set"
+      },
+      "certificate": "Extremal.migration.cut_size.x78_cut_size_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X78.h_free_max_cut_three_fourths_surplus_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X78.v",
+      "name": "h_free_max_cut_three_fourths_surplus_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cut_size.v",
+      "frozen": "X78Original.h_free_max_cut_three_fourths_surplus_statement",
+      "substitutions": {
+        "x78_cut_size": "X78Original.x78_cut_size",
+        "x78_edge_count": "A7.X78Original.x78_edge_count",
+        "x78_subgraph_of": "A5.Legacy.x78_subgraph_of"
+      },
+      "certificate": "Extremal.migration.cut_size.h_free_max_cut_three_fourths_surplus_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X209.x209_cut_edge",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "x209_cut_edge",
+      "frozen_path": "hypergraph-theory/theories/migration/cut_size.v",
+      "frozen": "Legacy.x209_cut_edge",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.cut_size.x209_cut_edge_compat",
+      "live_unfolds_to": "~~ monochromatic_on col e"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X209.x209_cut_size",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "x209_cut_size",
+      "frozen_path": "hypergraph-theory/theories/migration/cut_size.v",
+      "frozen": "Legacy.x209_cut_size",
+      "substitutions": {
+        "x209_cut_edge": "Legacy.x209_cut_edge"
+      },
+      "certificate": "Hypergraph.migration.cut_size.x209_cut_size_compat",
+      "live_unfolds_to": "non_monochromatic_count E col"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X209.x209_is_max_r_cut",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "x209_is_max_r_cut",
+      "frozen_path": "hypergraph-theory/theories/migration/cut_size.v",
+      "frozen": "X209Legacy.is_max_r_cut",
+      "substitutions": {
+        "x209_cut_size": "Legacy.x209_cut_size",
+        "x209_is_max_r_cut": "is_max_r_cut"
+      },
+      "certificate": "Hypergraph.migration.cut_size.x209_is_max_r_cut_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X209.x209_scaled_excess",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "x209_scaled_excess",
+      "frozen_path": "hypergraph-theory/theories/migration/cut_size.v",
+      "frozen": "X209Legacy.scaled_excess",
+      "substitutions": {
+        "x209_is_max_r_cut": "is_max_r_cut",
+        "x209_scaled_excess": "scaled_excess"
+      },
+      "certificate": "Hypergraph.migration.cut_size.x209_scaled_excess_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X209.x209_is_min_scaled_excess",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "x209_is_min_scaled_excess",
+      "frozen_path": "hypergraph-theory/theories/migration/cut_size.v",
+      "frozen": "X209Legacy.is_min_scaled_excess",
+      "substitutions": {
+        "x209_scaled_excess": "scaled_excess",
+        "x209_is_min_scaled_excess": "is_min_scaled_excess"
+      },
+      "certificate": "Hypergraph.migration.cut_size.x209_is_min_scaled_excess_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "hypergraph_cut_excess_theta_sqrt_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/cut_size.v",
+      "frozen": "X209Legacy.hypergraph_cut_excess_theta_sqrt_statement",
+      "substitutions": {
+        "x209_is_min_scaled_excess": "is_min_scaled_excess"
+      },
+      "certificate": "Hypergraph.migration.cut_size.hypergraph_cut_excess_theta_sqrt_statement_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X76.x76_edge_count",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "x76_edge_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X76Original.x76_edge_count",
+      "substitutions": {
+        "x76_edge_set": "M1.Legacy.edge_set"
+      },
+      "certificate": "Extremal.migration.edge_count.x76_edge_count_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "note": "A7 (edge count) pre-M1 count, reused unchanged by X76Original"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X78.x78_edge_count",
+      "path": "extremal-graph-theory/theories/conjectures/X78.v",
+      "name": "x78_edge_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X78Original.x78_edge_count",
+      "substitutions": {
+        "x78_edge_set": "M1.Legacy.edge_set"
+      },
+      "certificate": "Extremal.migration.edge_count.x78_edge_count_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "note": "A7 (edge count) pre-M1 count, reused unchanged by X78Original"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X78.x78_subgraph_of",
+      "path": "extremal-graph-theory/theories/conjectures/X78.v",
+      "name": "x78_subgraph_of",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "Legacy.x78_subgraph_of",
+      "substitutions": {},
+      "certificate": "Extremal.migration.subgraph_of.x78_subgraph_of_compat",
+      "live_unfolds_to": "has_subgraph G H",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "A5 (subgraph containment) frozen helper, reused unchanged by X78Original"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X76.x76_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "x76_edge_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x76_edge_set": "edge_set"
+      },
+      "certificate": "Extremal.migration.simple_edges.x76_edge_set_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "note": "M1 (simple edge set) frozen comprehension, reused unchanged by the pre-M1 X76 cut size"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X78.x78_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X78.v",
+      "name": "x78_edge_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x78_edge_set": "edge_set"
+      },
+      "certificate": "Extremal.migration.simple_edges.x78_edge_set_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "note": "M1 (simple edge set) frozen comprehension, reused unchanged by the pre-M1 X78 cut size"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/edge_count.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x76_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X76Original.ck_free_max_cut_polynomial_surplus_statement, certified by ck_free_max_cut_polynomial_surplus_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#X76Original.ck_free_max_cut_polynomial_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x76_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X76Original.ck_free_max_cut_polynomial_surplus_statement, certified by ck_free_max_cut_polynomial_surplus_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x78_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#X78Original.h_free_max_cut_three_fourths_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x78_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live x78_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "Hypergraph.conjectures.X209.x209_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "x209_uniform",
+      "note": "k-uniformity of the family; a premise of the row, not part of the count"
+    }
+  ],
+  "kernel_evidence": "Print All Dependencies of frozen/live statements and Print Assumptions of every certificate, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A9-cut_size/ (outside the repository)"
+}

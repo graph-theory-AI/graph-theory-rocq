@@ -1,0 +1,11 @@
+# Independent review: incidence degree (A10)
+
+Arthur's exact source `9abf440da80115caeffd299077976b48f4e07d74` was reviewed independently by family_scope and personally by the coordinator. Both approve the nine source adapters, fourteen chains, ten complete statement equivalences and thirty-three frozen objects. The integration preserves all reviewed mathematical files, the complete specification and fidelity fragment.
+
+`GTBase.incidence.incidence_degree` counts members of an arbitrary supplied finite family containing a vertex. No edge, uniformity or nonempty premise is added. X108 keeps its explicit inside-W restriction and proved reordered-comprehension bridge. The Classical public adapter retains its graph carrier and gains the MathComp-only GTBase module dependency. Hypergraph retains its Section context, verbatim frozen support proofs and separate opaque existence witness; equality of least naturals uses `eq_ex_minn`, without claiming proof-term equality. Shared restriction/skeleton and unrelated M1 vocabulary intentionally remain live.
+
+Independent evidence: 58 freshly forced source modules in six packages; 82 closed assumptions; 46 exact type checks; two meaningful negative conversion probes; 68 strict frozen/live dependency closures; family kernel273 and all27 source reports passed. Earlier source, declaration/proof and frozen-spec preservation passed. Full details are in `coordination/evidence/A10-review-by-family-scope/` and the coordinator's exact hash binding in `A10-coordinator-final/`.
+
+The worker's immutable run passed its source/theorem gates and twelve normal milestones; original inventory/audit failure was the separately reviewed ClassicalLemmas namespace bug. The integration parent contains that tooling fix. The separate namespace-tooling mutation passed on exact `5977389`: all twelve canaries were killed after accepted baselines, and the final fifty-six report tests passed. The coordinator's combined post-integration gates remain separately required.
+
+Reproduce the compact family report with `python3 meta/migration_report.py incidence_degree --write`; use `--details /tmp/incidence-degree-details` for full generated evidence. The registry, specification, public API comments and `meta/LIBRARY_MIGRATION_A10.md` retain the contracts and provenance.

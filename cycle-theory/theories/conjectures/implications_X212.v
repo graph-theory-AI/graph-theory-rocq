@@ -46,14 +46,7 @@ Unset Printing Implicit Defensive.
 
 Lemma x212_longest_cycleE (G : sgraph) (c : seq G) :
   x212_longest_cycle c <-> x10_longest_cycle c.
-Proof.
-rewrite /x212_longest_cycle /x10_longest_cycle /x212_cycle; split.
-- case=> /andP[uc sc] mx; split; first exact: uc.
-  split; first exact: sc.
-  by move=> c' uc' sc'; apply: mx; apply/andP; split; [exact: uc' | exact: sc'].
-- case=> uc [sc mx]; split; first by apply/andP; split; [exact: uc | exact: sc].
-  by move=> c' /andP[uc' sc']; apply: mx.
-Qed.
+Proof. exact: iff_refl. Qed.
 
 (** ================================================================= *)
 (** ** The scheduled edge *)
