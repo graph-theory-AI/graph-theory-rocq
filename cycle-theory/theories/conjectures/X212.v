@@ -139,7 +139,7 @@ Definition x212_path_len (G : sgraph) (k : nat) (x y : G) (p : seq G) : bool :=
 Definition x212_cycle (G : sgraph) (c : seq G) : bool :=
   seq_cycleb (--) c.
 
-Definition x212_cycle_vertices (G : sgraph) (c : seq G) : {set G} := [set v | v \in c].
+Definition x212_cycle_vertices (G : sgraph) (c : seq G) : {set G} := seq_vertices c.
 
 Definition x212_longest_cycle (G : sgraph) (c : seq G) : Prop :=
   x212_cycle c /\ forall c' : seq G, x212_cycle c' -> size c' <= size c.

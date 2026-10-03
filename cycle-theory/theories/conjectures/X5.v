@@ -12,7 +12,7 @@ Definition x5_edge_count (G : sgraph) : nat :=
   edge_count G.
 
 Definition x5_vertices_of_seq (G : sgraph) (c : seq G) : {set G} :=
-  [set v : G | v \in c].
+  seq_vertices c.
 
 Definition x5_cycle_family_disjoint
     (G : sgraph) (k : nat) (cs : 'I_k -> seq G) : Prop :=

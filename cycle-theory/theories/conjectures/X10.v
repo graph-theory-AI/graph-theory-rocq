@@ -21,7 +21,7 @@ Definition x10_colour_classes_large
   forall i : 'I_n, k <= #|[set e in x10_edge_set G | col e == i]|.
 
 Definition x10_cycle_vertices (G : sgraph) (c : seq G) : {set G} :=
-  [set v | v \in c].
+  seq_vertices c.
 
 Definition x10_longest_cycle (G : sgraph) (c : seq G) : Prop :=
   ucycle (--) c /\ 2 < size c /\

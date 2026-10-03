@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2542,
-    "repeated_body_shapes": 133,
+    "repeated_body_shapes": 132,
     "repeated_normalized_names": 205,
     "repeated_signature_shapes": 297,
     "statements_excluded": 700,
@@ -295,6 +295,14 @@
         "Packing.conjectures.U9.is_triangle",
         "Packing.conjectures.X5.x5_is_triangle"
       ],
+      "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3": [
+        "Chromatic.conjectures.X153.x153_cycle_vertices",
+        "Chromatic.conjectures.XE1.xe1_vertices_of_seq",
+        "Cycle.conjectures.X10.x10_cycle_vertices",
+        "Cycle.conjectures.X212.x212_cycle_vertices",
+        "Cycle.conjectures.X5.x5_vertices_of_seq",
+        "Digraph.conjectures.X19.x19_cycle_vertices"
+      ],
       "78f1f021282a9af37c5b3173ad43876fc5add16cff3c2a1838b5eb37d28b2973": [
         "Hypergraph.conjectures.U12.hg_matching",
         "Hypergraph.conjectures.X6.x6_matching"
@@ -335,12 +343,6 @@
         "Extremal.conjectures.X60.x60_poly_eval",
         "GTMisc.conjectures.X128.x128_poly_eval",
         "GTMisc.conjectures.X139.x139_poly_eval"
-      ],
-      "86a8ca36e9a61fea45d99550c1bea3face632932a38a930d54f7de633a6b1a23": [
-        "Chromatic.conjectures.X153.x153_cycle_vertices",
-        "Cycle.conjectures.X10.x10_cycle_vertices",
-        "Cycle.conjectures.X212.x212_cycle_vertices",
-        "Digraph.conjectures.X19.x19_cycle_vertices"
       ],
       "86b5f426b18a0734588c7f2dbd9914e5c233a84806f0504ebf2c6a5222455b23": [
         "Chromatic.conjectures.X203.x203_min_degree_at_least",
@@ -440,10 +442,6 @@
       "a7b422640a49f4b9a370fcb6db5b473cfbf5f21dd8fc9fb0a864c6bbd373f6bf": [
         "Chromatic.conjectures.X112.x112_omega",
         "Minor.conjectures.X121.x121_omega"
-      ],
-      "acfbdb8cb2d04eb89440c28651b506e12a6c48a29641deeb780aa194db59e3ca": [
-        "Chromatic.conjectures.XE1.xe1_vertices_of_seq",
-        "Cycle.conjectures.X5.x5_vertices_of_seq"
       ],
       "aef26aa96762399f9ef11308f2980db2198ba63ebe0eca5faf22b0e5b7a36f47": [
         "Chromatic.conjectures.XE1.xe1_cycle_diagonal_count",
@@ -6190,9 +6188,9 @@
       "signature_shape_hash": "fb7f903af0e7e5d2ddc2bb342f31d9f144da0a6cd4175ad821c8d66054ab70fc"
     },
     {
-      "body_hash": "86a8ca36e9a61fea45d99550c1bea3face632932a38a930d54f7de633a6b1a23",
-      "body_shape_hash": "86a8ca36e9a61fea45d99550c1bea3face632932a38a930d54f7de633a6b1a23",
-      "declaration_hash": "742810902a6a6de79e7326aa771366945be816c0a5a9f2f6798e51adb1a5b960",
+      "body_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "body_shape_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "declaration_hash": "1d2692e6f4c6b8375dc1bbdd4d0a4256d051b614bf52098f61eeafb47dd40412",
       "direct_consumers": [
         "Chromatic.conjectures.X153.planar_girth5_two_cycles_list_critical_subgraph_statement",
         "Chromatic.conjectures.X153.x153_cycle_precoloured_lists"
@@ -10884,9 +10882,9 @@
       "signature_shape_hash": "b349edbd8727460c5c27fae24985aaf8e8bf31eebc8916f711a74ad4c152d099"
     },
     {
-      "body_hash": "acfbdb8cb2d04eb89440c28651b506e12a6c48a29641deeb780aa194db59e3ca",
-      "body_shape_hash": "acfbdb8cb2d04eb89440c28651b506e12a6c48a29641deeb780aa194db59e3ca",
-      "declaration_hash": "604ba39fdad3a2bce4adc19ad8cbf41f183f2c2a0072358c3a8fe5af5b93dfb3",
+      "body_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "body_shape_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "declaration_hash": "a4c2e8532cae7ca6ab0f86754ad79b096a4338c2eaf420f26dc22e8d8954dcf7",
       "direct_consumers": [],
       "kind": "Definition",
       "line": 21,
@@ -13642,9 +13640,9 @@
       "signature_shape_hash": "500edfd3c2a977c1fbb2eac0378391d74f07100633884181ff5956af14fec130"
     },
     {
-      "body_hash": "86a8ca36e9a61fea45d99550c1bea3face632932a38a930d54f7de633a6b1a23",
-      "body_shape_hash": "86a8ca36e9a61fea45d99550c1bea3face632932a38a930d54f7de633a6b1a23",
-      "declaration_hash": "62a52e08059b244f17f00f512410d494b59f4fd17ca8c2b27483d23cf692b6c7",
+      "body_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "body_shape_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "declaration_hash": "479380d513432f193ca4c4a6dfe1b556172db46c8123e611dc9de7e76e7317d7",
       "direct_consumers": [
         "Cycle.conjectures.X10.smith_longest_cycles_r_connected_statement"
       ],
@@ -14069,9 +14067,9 @@
       "signature_shape_hash": "ebc792f58eb61b1c7502cdd3b5bf7abb8eb31fa2fa0fd2ebc673224f09fd2c39"
     },
     {
-      "body_hash": "86a8ca36e9a61fea45d99550c1bea3face632932a38a930d54f7de633a6b1a23",
-      "body_shape_hash": "86a8ca36e9a61fea45d99550c1bea3face632932a38a930d54f7de633a6b1a23",
-      "declaration_hash": "a1ef66110a2a5afa6c96420b14ab7b86fec631ecea76150b8cef5cad92e84686",
+      "body_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "body_shape_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "declaration_hash": "ba3892e535b3b74b2bcb2d9bbf87e8bd72a6b548f484a299d93af30fe3851727",
       "direct_consumers": [
         "Cycle.conjectures.X212.smith_two_longest_cycles_statement"
       ],
@@ -14330,9 +14328,9 @@
       "signature_shape_hash": "0596fb401e0ad5525f64c30a46df4b74ef3b429bb464e52445ea6a2244565dd3"
     },
     {
-      "body_hash": "acfbdb8cb2d04eb89440c28651b506e12a6c48a29641deeb780aa194db59e3ca",
-      "body_shape_hash": "acfbdb8cb2d04eb89440c28651b506e12a6c48a29641deeb780aa194db59e3ca",
-      "declaration_hash": "b6fdbbb119814c17546aac11e98c423853cdb0a57ae0eb530d76f60577b0fcbe",
+      "body_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "body_shape_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "declaration_hash": "5080bde79733ab888f14415bc8c1175a99459fd4d04d47a6bc579c62d68fb7a7",
       "direct_consumers": [
         "Cycle.conjectures.X5.cycle_with_external_three_neighbours_statement",
         "Cycle.conjectures.X5.x5_cycle_family_disjoint"
@@ -16140,7 +16138,7 @@
         "Digraph.conjectures.X19.lichiardopol_distinct_length_dicycle_packing_statement"
       ],
       "kind": "Definition",
-      "line": 11,
+      "line": 12,
       "local_dependencies": [],
       "name": "x19_loopless",
       "normalized_name": "loopless",
@@ -16159,7 +16157,7 @@
         "Digraph.conjectures.X19.behzad_chartrand_wall_girth_regular_digraph_statement"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 17,
       "local_dependencies": [],
       "name": "x19_directed_girth_at_least",
       "normalized_name": "directed_girth_at_least",
@@ -16171,14 +16169,14 @@
       "signature_shape_hash": "f2d0b9d829503c9a11864bfec942a8d57c764f5d29cf5549f6e6fa476cd14e59"
     },
     {
-      "body_hash": "86a8ca36e9a61fea45d99550c1bea3face632932a38a930d54f7de633a6b1a23",
-      "body_shape_hash": "86a8ca36e9a61fea45d99550c1bea3face632932a38a930d54f7de633a6b1a23",
-      "declaration_hash": "f707934eaf17b439326bb6b1bae7839a462772a4a0b4fa417fc8c62b44ae810c",
+      "body_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "body_shape_hash": "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3",
+      "declaration_hash": "1d8e4786c966cc45794aa552fee02fe458b318dbac5211b34a4cc6329e3021b0",
       "direct_consumers": [
         "Digraph.conjectures.X19.x19_vertex_disjoint_dicycles"
       ],
       "kind": "Definition",
-      "line": 19,
+      "line": 20,
       "local_dependencies": [],
       "name": "x19_cycle_vertices",
       "normalized_name": "cycle_vertices",
@@ -16197,7 +16195,7 @@
         "Digraph.conjectures.X19.lichiardopol_distinct_length_dicycle_packing_statement"
       ],
       "kind": "Definition",
-      "line": 22,
+      "line": 23,
       "local_dependencies": [
         "x19_cycle_vertices"
       ],
@@ -16218,7 +16216,7 @@
         "Digraph.conjectures.X19.lichiardopol_distinct_length_dicycle_packing_statement"
       ],
       "kind": "Definition",
-      "line": 28,
+      "line": 29,
       "local_dependencies": [],
       "name": "x19_distinct_cycle_lengths",
       "normalized_name": "distinct_cycle_lengths",
