@@ -28,6 +28,7 @@ Only A8's obsolete X223 anticomplete exclusion is removed; X76/X78 remain.
 
 Initial source/independent evidence is in `coordination/evidence/A21-set-pairs/` and
 `A21-review-by-matching-scope/`. Combined evidence belongs to `A21-combined-by-path-review/`.
-The two new full-row proofs still require independent and coordinator review; no combined gate
-acceptance is claimed here. Reproduce the family report with `python3 meta/migration_report.py
+Both new full-row proofs are independently approved at mathematical pin b16a8e2; the coordinator
+reviewed all15 whole iff. See meta/migration_reviews/set_pairs.md. Final cumulative/main acceptance
+remains separate. Reproduce the family report with `python3 meta/migration_report.py
 set_pairs --check --kernel`; combined normal routes include Extremal D2ram and GTMisc X144.
