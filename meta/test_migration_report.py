@@ -540,6 +540,381 @@ class FrozenRoleTests(unittest.TestCase):
         self.assertEqual(REPORT.check_kernel(self.spec), [])
 
 
+class AdditionalStatementTests(unittest.TestCase):
+    """A source reaches an unselected whole Prop across a separate intermediary."""
+
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+    rebaseline = ReportTests.rebaseline
+    register = FrozenRoleTests.register
+
+    def commit(self):
+        self.command("git", "add", ".")
+        self.command("git", "commit", "--allow-empty", "-qm", "fixture")
+        return self.command("git", "rev-parse", "HEAD")
+
+    def setUp(self):
+        ReportTests.setUp(self)
+        self.middle_path = "base/theories/conjectures/X1.v"
+        self.extra_path = "base/theories/conjectures/X2.v"
+        self.extra = "GTBase.conjectures.X2.extra_claim"
+        self.middle_text = ("From GTBase.conjectures Require Import X0.\n"
+                            "Definition middle (n : nat) : Prop := local_helper n.\n")
+        self.extra_text = ("From GTBase.conjectures Require Import X1.\n"
+                           "(** An unselected complete conjecture. *)\n"
+                           "Definition extra_claim : Prop := forall n, middle n.\n")
+        self.write(self.middle_path, self.middle_text)
+        self.write(self.extra_path, self.extra_text)
+        project = self.root / "base/_CoqProject"
+        project.write_text(project.read_text() + "theories/conjectures/X1.v\n"
+                           "theories/conjectures/X2.v\n")
+        self.cert_source += (
+            "From GTBase.conjectures Require Import X1 X2.\n"
+            "Module MiddleLegacy.\n"
+            "Definition middle (n : nat) : Prop := Legacy.local_helper n.\n"
+            "End MiddleLegacy.\n"
+            "Module ExtraLegacy.\n"
+            "Definition extra_claim : Prop := forall n, MiddleLegacy.middle n.\n"
+            "End ExtraLegacy.\n"
+            "Lemma middle_compat (n : nat) : MiddleLegacy.middle n <-> middle n.\n"
+            "Proof. split; trivial. Qed.\n"
+            "Lemma extra_compat : ExtraLegacy.extra_claim <-> extra_claim.\n"
+            "Proof. split; trivial. Qed.\n")
+        self.write(self.certificate, self.cert_source)
+        self.spec["additional_statements"] = [self.extra]
+        self.spec["frozen"].extend([
+            {"kind": "chain", "qualified": "GTBase.conjectures.X1.middle",
+             "path": self.middle_path, "name": "middle", "frozen_path": self.certificate,
+             "frozen": "MiddleLegacy.middle", "certificate": self.module + ".middle_compat",
+             "substitutions": {"local_helper": "Legacy.local_helper"}},
+            {"kind": "statement", "qualified": self.extra, "path": self.extra_path,
+             "name": "extra_claim", "frozen_path": self.certificate,
+             "frozen": "ExtraLegacy.extra_claim", "certificate": self.module + ".extra_compat",
+             "non_corpus": True, "substitutions": {"middle": "MiddleLegacy.middle"}},
+        ])
+        self.spec["cross_module_consumers"] = [
+            {"path": self.middle_path, "name": "local_helper", "note": "intermediary"},
+            {"path": self.extra_path, "name": "middle", "note": "whole Prop"},
+        ]
+        self.register("middle_compat")
+        self.register("extra_compat")
+        self.rebaseline()
+
+    def assert_invalid(self, match="additional statement"):
+        with self.assertRaisesRegex(ValueError, match):
+            self.report()
+        # Direct kernel entry must also fail before invoking the compiler.
+        with patch.object(REPORT.ROCQ, "environment", side_effect=AssertionError("metadata rejected")):
+            self.assertTrue(REPORT.check_kernel(self.spec))
+
+    def compile_fixture(self):
+        for source in ("common", "conjectures/X0", "conjectures/X1", "conjectures/X2",
+                       "migration/test_family"):
+            proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/" + source + ".v"],
+                                  cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                  text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+
+    def test_explicit_reached_whole_prop_and_complete_path_pass(self):
+        self.assertEqual(self.failures(), [])
+        rows, _ = REPORT.manifest_rows(self.spec["baseline_commit"])
+        found, path = REPORT.statement_dependencies(self.spec["baseline_commit"], {self.helper}, rows,
+                                                   additional_statements={self.extra})
+        self.assertEqual(found, {self.statement, self.extra})
+        self.assertIn("GTBase.conjectures.X1.middle", path)
+
+    def test_default_discovery_does_not_silently_enroll_other_props(self):
+        del self.spec["additional_statements"]
+        self.assertIn("affected statement coverage matches baseline dependencies", self.failures())
+        self.spec["frozen"] = self.spec["frozen"][:2]
+        without = self.report()
+        self.spec["additional_statements"] = []
+        self.assertEqual(self.report(), without)
+
+    def test_cross_module_intermediary_cannot_be_omitted(self):
+        del self.spec["frozen"][2]
+        self.assertIn("additional statement paths have complete frozen intermediary coverage", self.failures())
+
+    def test_bad_enrollment_list_is_rejected(self):
+        for value in (None, "x", {}, [False], [self.extra, self.extra], ["bare"], ["GTBase.bad-name.x"]):
+            with self.subTest(value=value):
+                self.spec["additional_statements"] = value
+                self.assert_invalid("additional_statements")
+
+    def test_wrong_or_missing_mapping_is_rejected(self):
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        for mutation in ({"kind": "chain"}, {"kind": "original-statement"},
+                         {"non_corpus": False}, {"non_corpus": "true"}, {"corpus": "v2"},
+                         {"path": self.middle_path}, {"name": "middle"}, {"certificate": None},
+                         {"commit": "0" * 40}):
+            with self.subTest(mutation=mutation):
+                self.spec["frozen"][-1] = {**original, **mutation}
+                self.assert_invalid()
+        self.spec["frozen"][-1] = original
+        self.spec["frozen"].append(copy.deepcopy(original))
+        self.assert_invalid()
+        self.spec["frozen"] = self.spec["frozen"][:-2]
+        self.assert_invalid()
+
+    def test_missing_unlisted_or_aliased_current_source_and_project_reject(self):
+        for relative in (self.extra_path, "base/_CoqProject"):
+            file = self.root / relative
+            text = file.read_text()
+            file.unlink()
+            self.assert_invalid("missing or aliased")
+            target = self.root / "copy"
+            target.write_text(text)
+            file.symlink_to(target)
+            self.assert_invalid("missing or aliased")
+            file.unlink()
+            file.write_text(text)
+        project = self.root / "base/_CoqProject"
+        project.write_text(project.read_text().replace("theories/conjectures/X2.v\n", ""))
+        self.assert_invalid("not build-listed")
+
+    def test_original_source_and_ownership_must_be_present(self):
+        project = self.root / "base/_CoqProject"
+        original = project.read_text()
+        for replacement in (original.replace("-Q theories GTBase", "-Q theories Wrong"),
+                            original.replace("theories/conjectures/X2.v\n", "")):
+            with self.subTest(replacement=replacement):
+                project = self.root / "base/_CoqProject"
+                project.write_text(replacement)
+                self.rebaseline()
+                self.assert_invalid("namespace ownership|not build-listed")
+
+    def test_immutable_regular_original_and_current_declaration_are_required(self):
+        target = self.root / self.extra_path
+        target.write_text(self.extra_text.replace("extra_claim", "renamed"))
+        self.assert_invalid("requires a nullary")
+        target.write_text(self.extra_text)
+        duplicate = self.root / "original-copy.v"
+        duplicate.write_text(self.extra_text)
+        target.unlink()
+        target.symlink_to(duplicate.relative_to(target.parent) if duplicate.is_relative_to(target.parent)
+                          else duplicate)
+        self.rebaseline()
+        target.unlink()
+        target.write_text(self.extra_text)
+        self.assert_invalid("expected regular source blob")
+
+    def test_prop_shape_and_scopes_reject_helpers_and_hidden_parameters(self):
+        cases = (
+            "Definition extra_claim (n : nat) : Prop := middle n.\n",
+            "Definition extra_claim := forall n, middle n.\n",
+            "Definition extra_claim : bool := true.\n",
+            "Section S.\nVariable n : nat.\nDefinition extra_claim : Prop := middle n.\nEnd S.\n",
+            "Module Hidden.\nDefinition extra_claim : Prop := forall n, middle n.\nEnd Hidden.\n",
+            "Module Hidden <: Sig.\nDefinition extra_claim : Prop := forall n, middle n.\nEnd Hidden.\n",
+            "Module Hidden (X : Sig).\nDefinition extra_claim : Prop := forall n, middle n.\nEnd Hidden.\n",
+            "Require Import Corelib.Init.Logic. Module Hidden.\nDefinition extra_claim : Prop := forall n, middle n.\nEnd Hidden.\n",
+            "Require Import Corelib.Init.Logic. Section S.\nVariable n : nat.\nDefinition extra_claim : Prop := middle n.\nEnd S.\n",
+            "Time Section S.\nVariable n : nat.\nDefinition extra_claim : Prop := middle n.\nEnd S.\n",
+            "Time Module Hidden.\nDefinition extra_claim : Prop := forall n, middle n.\nEnd Hidden.\n",
+            "Timeout 5 Section S.\nDefinition extra_claim : Prop := forall n, middle n.\nEnd S.\n",
+            "Section S.\nSucceed End S.\nDefinition extra_claim : Prop := forall n, middle n.\nEnd S.\n",
+        )
+        for source in cases:
+            for baseline in (False, True):
+                with self.subTest(source=source, baseline=baseline):
+                    self.write(self.extra_path, source)
+                    if baseline:
+                        self.rebaseline()
+                        self.write(self.extra_path, self.extra_text)
+                    self.assert_invalid()
+                    self.write(self.extra_path, self.extra_text)
+                    self.rebaseline()
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_real_control_prefixed_scopes_are_rejected_at_both_pins(self):
+        for source in ("common", "conjectures/X0", "conjectures/X1"):
+            proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/" + source + ".v"],
+                                  cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                  text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        for opener in ("Time Section S.", "Time Module S.", "Timeout 5 Section S."):
+            with self.subTest(opener=opener):
+                # An unused Section preserves the full Prop and compiles; place
+                # it before the comment so documentation is not the rejection.
+                scoped = self.extra_text.replace("(**", opener + "\n(**") + "End S.\n"
+                self.write(self.extra_path, scoped)
+                proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/conjectures/X2.v"],
+                                      cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                      text=True, capture_output=True)
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+                self.assert_invalid("outside Module/Section")
+                self.rebaseline()
+                self.write(self.extra_path, self.extra_text)
+                self.assert_invalid("outside Module/Section")
+                self.rebaseline()
+
+    def test_ownership_lexer_masks_nested_comments_and_doubled_quote_strings(self):
+        source = ('(* outer " (* inner *) *)\nRedirect "End ""S"" (*" Check nat.\n'
+                  'Section S.\n')
+        masked = REPORT.statement_ownership_text(source)
+        self.assertEqual(len(masked), len(source))
+        self.assertEqual([n for n, c in enumerate(masked) if c == "\n"],
+                         [n for n, c in enumerate(source) if c == "\n"])
+        self.assertIn("Section S.", masked)
+        self.assertNotIn("End", masked)
+        self.assertNotIn("(*", masked)
+        for malformed in ('Redirect "unterminated', '(* unterminated', '*)'):
+            with self.subTest(malformed=malformed), self.assertRaises(ValueError):
+                REPORT.statement_ownership_text(malformed)
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_real_quoted_commands_cannot_hide_or_close_scopes_at_either_pin(self):
+        for source in ("common", "conjectures/X0", "conjectures/X1"):
+            proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/" + source + ".v"],
+                                  cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                  text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        for prefix in ('Section S.\nRedirect "End S" Check nat.\n',
+                       'Section S.\nRedirect "escaped "" End S "" suffix" Check nat.\n',
+                       'Redirect "(*" Check nat.\nSection S.\nRedirect "*)" Check nat.\n'):
+            with self.subTest(prefix=prefix):
+                scoped = self.extra_text.replace("(**", prefix + "(**") + "End S.\n"
+                self.write(self.extra_path, scoped)
+                proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/conjectures/X2.v"],
+                                      cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                      text=True, capture_output=True)
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+                self.assert_invalid("outside Module/Section")
+                self.rebaseline()
+                self.write(self.extra_path, self.extra_text)
+                self.assert_invalid("outside Module/Section")
+                self.rebaseline()
+        self.write(self.extra_path, self.extra_text.replace("(**", 'Redirect "Section S" Check nat.\n(**'))
+        self.rebaseline()
+        self.assertEqual(self.failures(), [])
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_real_loaded_scope_is_rejected_at_both_pins(self):
+        self.write("base/scope_fragment.v", "Section S.\n")
+        scoped = self.extra_text.replace("(**", 'Load "scope_fragment".\n(**') + "End S.\n"
+        self.write(self.extra_path, scoped)
+        self.compile_fixture()
+        self.assert_invalid("source-splicing Load")
+        self.rebaseline()
+        self.write(self.extra_path, self.extra_text)
+        self.assert_invalid("source-splicing Load")
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_real_non_ascii_and_prime_scopes_cannot_escape_at_either_pin(self):
+        for source in ("common", "conjectures/X0", "conjectures/X1"):
+            proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/" + source + ".v"],
+                                  cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                  text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        for kind, label in (("Section", "é"), ("Module", "é"), ("Section", "Sπ"),
+                            ("Module", "S'é"), ("Section", "S'")):
+            with self.subTest(kind=kind, label=label):
+                scoped = self.extra_text.replace("(**", f"{kind} {label}.\n(**") + f"End {label}.\n"
+                self.write(self.extra_path, scoped)
+                proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/conjectures/X2.v"],
+                                      cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                      text=True, capture_output=True)
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+                self.assert_invalid("Module/Section")
+                self.rebaseline()
+                self.write(self.extra_path, self.extra_text)
+                self.assert_invalid("Module/Section")
+                self.rebaseline()
+        self.write(self.extra_path, self.extra_text.replace("(**", "Section S'.\nEnd S'.\n(**"))
+        self.rebaseline()
+        self.assertEqual(self.failures(), [])
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+    def test_unreached_baseline_or_current_whole_prop_is_rejected(self):
+        for baseline in (False, True):
+            with self.subTest(baseline=baseline):
+                self.write(self.middle_path, self.middle_text.replace("local_helper n", "True"))
+                if baseline:
+                    self.rebaseline()
+                    self.write(self.middle_path, self.middle_text)
+                self.assert_invalid("must be reached")
+                self.write(self.middle_path, self.middle_text)
+                self.rebaseline()
+
+    def test_corpus_name_at_either_pin_cannot_be_enrolled(self):
+        manifest = "meta/" + REPORT.REG.CORPORA["v2"]["manifest"]
+        ordinary = json.loads((self.root / manifest).read_text())
+        extra = {**self.row, "formal_name": "extra_claim"}
+        for baseline in (False, True):
+            with self.subTest(baseline=baseline):
+                self.write_json(manifest, {"rows": [self.row, extra]})
+                if baseline:
+                    self.rebaseline()
+                    self.write_json(manifest, ordinary)
+                self.assert_invalid("outside both corpus manifests")
+                self.write_json(manifest, ordinary)
+                self.rebaseline()
+
+    def test_existing_source_cannot_be_enrolled_as_extra_statement(self):
+        self.spec["additional_statements"] = [self.helper]
+        self.assert_invalid()
+        rows, _ = REPORT.manifest_rows(self.spec["baseline_commit"])
+        with self.assertRaisesRegex(ValueError, "cannot be source helpers"):
+            REPORT.statement_dependencies(self.spec["baseline_commit"], {self.helper}, rows,
+                                          additional_statements={self.helper})
+
+    def test_frozen_body_and_whole_certificate_checks_still_apply(self):
+        self.write(self.certificate, self.cert_source.replace(
+            "Definition extra_claim : Prop := forall n, MiddleLegacy.middle n.",
+            "Definition extra_claim : Prop := True."))
+        self.assertTrue(any("frozen copy" in failure for failure in self.failures()))
+        self.write(self.certificate, self.cert_source)
+        self.spec["frozen"][-1]["certificate"] = "GTBase.common.unrelated"
+        self.assertTrue(any("certificate text names its frozen and live endpoints" in f for f in self.failures()))
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_accepts_full_enrolled_prop_and_rejects_guarded_certificate(self):
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        self.write(self.certificate, self.cert_source.replace(
+            "Lemma extra_compat : ExtraLegacy.extra_claim <-> extra_claim.\nProof. split; trivial. Qed.",
+            "Lemma extra_compat : False -> (ExtraLegacy.extra_claim <-> extra_claim).\n"
+            "Proof. intros h; destruct h. Qed."))
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_rejects_inherited_axioms_without_an_exemption(self):
+        self.write(self.certificate, self.cert_source.replace(
+            "Lemma extra_compat : ExtraLegacy.extra_claim <-> extra_claim.\nProof. split; trivial. Qed.",
+            "Axiom extra_axiom : ExtraLegacy.extra_claim <-> extra_claim.\n"
+            "Lemma extra_compat : ExtraLegacy.extra_claim <-> extra_claim.\n"
+            "Proof. exact extra_axiom. Qed."))
+        self.compile_fixture()
+        self.assertEqual(self.failures(), [])
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_checks_unapplied_frozen_prop_even_with_inferable_implicit(self):
+        changed = self.cert_source.replace(
+            "Definition extra_claim : Prop := forall n, MiddleLegacy.middle n.",
+            "Definition extra_claim {n : nat} : Prop := MiddleLegacy.middle n.")
+        changed = changed.replace("Lemma extra_compat : ExtraLegacy.extra_claim <-> extra_claim.",
+                                  "Lemma extra_compat : @ExtraLegacy.extra_claim 0 <-> extra_claim.")
+        # Both propositions are provable; this deliberately malformed frozen
+        # endpoint has an implicit value argument that Check may instantiate.
+        changed = changed.replace(
+            "Lemma extra_compat : @ExtraLegacy.extra_claim 0 <-> extra_claim.\n"
+            "Proof. split; trivial. Qed.",
+            "Lemma extra_compat : @ExtraLegacy.extra_claim 0 <-> extra_claim.\n"
+            "Proof. change (0 = 0 <-> forall n : nat, n = n). split; auto. Qed.")
+        self.write(self.certificate, changed)
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+
 class RepositorySourceTests(unittest.TestCase):
     """A real public source -> foundation intermediary -> two corpus rows."""
 
