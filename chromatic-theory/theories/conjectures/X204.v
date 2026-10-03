@@ -10,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X204 vocabulary ***********************************************)
 
 Definition x204_no_cycle_length (G : sgraph) (n : nat) : Prop :=
-  forall c : seq G, ucycle (--) c -> 2 < size c -> size c != n.
+  no_cycle_length (@edge_rel G) n.
 
 (** ** X204 statements *****************************************************)
 

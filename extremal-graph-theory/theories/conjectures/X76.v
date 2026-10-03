@@ -17,7 +17,7 @@ Definition x76_cut_size (G : sgraph) (A : {set G}) : nat :=
   cut_size A.
 
 Definition x76_has_cycle_length (G : sgraph) (k : nat) : Prop :=
-  exists c : seq G, ucycle (--) c /\ size c = k.
+  has_ucycle_length (@edge_rel G) k.
 
 Definition x76_power_surplus
     (k cnum cden m s : nat) : Prop :=

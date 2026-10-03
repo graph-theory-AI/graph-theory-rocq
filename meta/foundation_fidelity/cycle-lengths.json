@@ -1,0 +1,61 @@
+{
+ "schema_version": 1,
+ "family": "cycle-lengths",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "has_ucycle_length": {
+     "verdict": "FAITHFUL",
+     "note": "has_ucycle_length r n: some MathComp ucycle of r has exactly n entries; RAW, no length guard: 0 always (empty ucycle), 1 exactly with a loop, 2 exactly with a two-way distinct pair (an edge on a simple graph); agrees with has_cycle_length only under 2 < n."
+    },
+    "has_cycle_length": {
+     "verdict": "FAITHFUL",
+     "note": "has_cycle_length r n: some genuine cycle (seq_cycle, more than two entries) has exactly n entries; impossible for n <= 2."
+    },
+    "no_ucycle_length_between": {
+     "verdict": "FAITHFUL",
+     "note": "no_ucycle_length_between r lo hi: no ucycle has between lo and hi entries, inclusive; RAW: an interval containing 0 always fails, one containing 2 excludes two-way pairs, reversed intervals are vacuous; agrees with the genuine exclusion only under 2 < lo."
+    },
+    "no_cycle_length_between": {
+     "verdict": "FAITHFUL",
+     "note": "no_cycle_length_between r lo hi: no ucycle with more than two entries has between lo and hi entries, inclusive; dual to has_cycle_length over the interval; always holds for hi <= 2."
+    },
+    "no_cycle_length": {
+     "verdict": "FAITHFUL",
+     "note": "no_cycle_length r n: every ucycle with more than two entries has size != n (Boolean disequality); the genuine interval [n, n], and the negation of has_cycle_length r n."
+    }
+   },
+   "machine_evidence": [
+    "has_ucycle_length0",
+    "has_ucycle_length1",
+    "has_ucycle_length2",
+    "has_cycle_length_le2",
+    "has_cycle_length_ucycle",
+    "has_ucycle_lengthE",
+    "no_ucycle_length_betweenP",
+    "no_cycle_length_betweenP",
+    "no_cycle_length_betweenE",
+    "no_ucycle_length_between0",
+    "no_ucycle_length_between_pair",
+    "no_ucycle_length_between_rev",
+    "no_cycle_length_between_rev",
+    "no_cycle_length_between_le2",
+    "no_ucycle_length_between_cycle",
+    "no_ucycle_length_betweenE",
+    "no_cycle_lengthE",
+    "no_cycle_lengthP",
+    "no_cycle_length_neq",
+    "no_cycle_length_le2",
+    "ucycle_size_le_card",
+    "has_ucycle_length_card",
+    "has_ucycle_length1_sgraph",
+    "has_ucycle_length2_sgraph",
+    "cycle_lengths_ground_K0",
+    "cycle_lengths_ground_K1",
+    "cycle_lengths_ground_K2",
+    "cycle_lengths_ground_K3"
+   ]
+  }
+ }
+}

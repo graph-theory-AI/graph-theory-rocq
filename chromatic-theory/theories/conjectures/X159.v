@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X159 vocabulary ***********************************************)
 
 Definition x159_no_cycle_length_between (G : sgraph) (lo hi : nat) : Prop :=
-  forall c : seq G, ucycle (--) c -> 2 < size c -> lo <= size c -> size c <= hi -> False.
+  no_cycle_length_between (@edge_rel G) lo hi.
 
 Definition x159_correspondence_assignment
     (G : sgraph) (C : G -> G -> 'I_3 -> 'I_3 -> bool) : Prop :=
