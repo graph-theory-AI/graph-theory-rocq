@@ -566,6 +566,40 @@ Qed.
 Definition triangle_free (G : sgraph) : Prop :=
   forall x y z : G, x -- y -> y -- z -> z -- x -> False.
 
+(** Triangle-freeness is girth at least four: a triangle is exactly a [ucycle] of size 3, the only genuine
+    cycle that the [2 < size c] guard of [girth_geq] leaves below size 4.  The equivalence holds on every
+    simple graph (irreflexivity makes the three vertices distinct) but is not a conversion.  The three
+    lemmas moved here, with their proofs, from Topological.foundations.girth, which keeps them under their
+    qualified names.  Registry: meta/library_primitives/triangle-free.json (A15). *)
+
+(** A triangle of [G] is a [ucycle] of size 3. *)
+Lemma triangle_ucycle (G : sgraph) (x y z : G) :
+  x -- y -> y -- z -> z -- x -> ucycle (--) [:: x; y; z].
+Proof.
+move=> xy yz zx; rewrite /ucycle /= xy yz zx !inE !andbT /=.
+by rewrite (sg_edgeNeq xy) (sg_edgeNeq yz) eq_sym (sg_edgeNeq zx).
+Qed.
+
+(** Conversely a [ucycle] of size 3 is a triangle. *)
+Lemma ucycle3_triangle (G : sgraph) (c : seq G) :
+  ucycle (--) c -> size c = 3 ->
+  exists x y z : G, [/\ c = [:: x; y; z], x -- y, y -- z & z -- x].
+Proof.
+case: c => [|x [|y [|z [|w s]]]] // /andP[] /=.
+by rewrite !andbT => /andP[xy /andP[yz zx]] _ _; exists x, y, z; split.
+Qed.
+
+(** Girth at least 4 is exactly triangle-freeness. *)
+Lemma girth_geq4_equiv_triangle_free (G : sgraph) :
+  girth_geq G 4 <-> triangle_free G.
+Proof.
+split=> [g4 x y z xy yz zx|tf c uc c2].
+  by move: (g4 [:: x; y; z] (triangle_ucycle xy yz zx) (isT : 2 < 3)).
+have {}c2 : 3 <= size c by exact: c2.
+rewrite ltn_neqAle c2 andbT eq_sym; apply/eqP => c3.
+by have [x [y [z [_ xy yz zx]]]] := ucycle3_triangle uc c3; exact: (tf _ _ _ xy yz zx).
+Qed.
+
 (** Undirected walk in a loopless multigraph: each edge traversed in EITHER direction. *)
 Fixpoint uwalk (G : mgraph) (x y : G) (w : seq (edge G)) {struct w} : bool :=
   match w with

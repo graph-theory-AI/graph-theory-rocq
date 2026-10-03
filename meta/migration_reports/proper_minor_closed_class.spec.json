@@ -98,7 +98,9 @@
       "corpus": "v2"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/triangle_free.v#X192Legacy.triangle_free_minor_closed_chromatic_additive_approx_statement": "A15 snapshot: A15 froze this row over its own frozen polynomial-time chain but kept the live x192_proper_minor_closed_class of this family. Kept unchanged; the complete row is Chromatic.migration.triangle_free.X192Original.triangle_free_minor_closed_chromatic_additive_approx_statement, certified by triangle_free_minor_closed_chromatic_additive_approx_statement_original_compat, which composes this family's frozen Legacy.x192_proper_minor_closed_class and reuses its certificate."
+  },
   "cross_module_consumers": [],
   "distinct_variants": [
     {

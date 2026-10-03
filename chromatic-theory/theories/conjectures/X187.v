@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X187 vocabulary ***********************************************)
 
-Definition x187_triangle_free (G : sgraph) : Prop := girth_geq G 4.
+Definition x187_triangle_free (G : sgraph) : Prop := triangle_free G.
 
 Definition x187_proper_3_colouring (G : sgraph) (col : G -> 'I_3) : Prop :=
   colourings.proper_colouring col.
