@@ -1,0 +1,332 @@
+{
+  "family": "whole-tree",
+  "canonical_name": "GraphTheory.core.sgraph.is_tree",
+  "canonical_short_name": "is_tree",
+  "relation": "one contract, by conversion: Extremal.XE1.xe1_tree and Packing.XE1.xe1_tree (is_forest [set: T] /\\ connected [set: T]) are definitionally the upstream GraphTheory.core.sgraph.is_tree [set: T], the whole-carrier tree (unique irredundant paths and connectivity over every vertex); no second predicate and no nonempty guard are introduced, so 'K_0 stays a tree. GTBase.trees is a focused support layer over the upstream canonical: the Boolean is_treeb with is_treeP, the whole-carrier projections/introduction, and groundings ('K_0, 'K_1, 'K_2 and the claw 'K_1,3 are trees; 'K_3 and two isolated vertices are not). A tree on an arbitrary supplied vertex set is upstream's broader API; both migrated wrappers select the whole carrier. Distinct, untouched: B18's labelled fg_spanning_tree (a valid edge subset of a host), B19's multigraph edge-carrier spanning_tree_edge_set, D2tur.tree_on / shortest_tree_on, U9.tree_contains_T, the directed trees of X2 and P9, and B9's degree-bounded path_tree.",
+  "baseline_commit": "6de6ce38ee3424aaffa2ef198285a3dea3e6ce1f",
+  "namespaces": {
+    "extremal-graph-theory": "Extremal",
+    "packing-theory": "Packing",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/trees.v",
+    "extremal-graph-theory/theories/migration/whole_tree.v",
+    "packing-theory/theories/migration/whole_tree.v"
+  ],
+  "extra_certificates": [
+    "GTBase.trees.is_treeP",
+    "GTBase.trees.is_treeT_forest",
+    "GTBase.trees.is_treeT_connected",
+    "GTBase.trees.is_treeTI",
+    "GTBase.trees.is_treeT_connect",
+    "GTBase.trees.is_treeTI_connect",
+    "GTBase.trees.is_treeT_unique",
+    "GTBase.trees.is_tree_K0",
+    "GTBase.trees.is_tree_K1",
+    "GTBase.trees.is_tree_K2",
+    "GTBase.trees.not_is_tree_K3",
+    "GTBase.trees.not_is_tree_two_isolated",
+    "GTBase.trees.claw_centre",
+    "GTBase.trees.claw_adj_cl",
+    "GTBase.trees.claw_adj_lc",
+    "GTBase.trees.claw_adj_cc_false",
+    "GTBase.trees.claw_adj_ll_false",
+    "GTBase.trees.claw_path_cl",
+    "GTBase.trees.claw_path_lc",
+    "GTBase.trees.claw_path_ll",
+    "GTBase.trees.claw_unique",
+    "GTBase.trees.is_tree_claw"
+  ],
+  "summary": [
+    "Family B20 (whole simple-graph trees). The wrappers `Extremal.conjectures.XE1.xe1_tree` and `Packing.conjectures.XE1.xe1_tree` (`is_forest [set: T] /\\ connected [set: T]`) now unfold to the upstream canonical `GraphTheory.core.sgraph.is_tree [set: T]`, the same conjunction, by conversion: the whole-carrier tree, unique irredundant paths and connectivity over every vertex. No second tree predicate and no nonempty guard are introduced (`'K_0` stays a tree); a tree on an arbitrary supplied vertex set is upstream's broader API, both wrappers select the whole carrier. The new public support module `GTBase.trees` (not re-exported by `GTBase.base`) adds the Boolean form `is_treeb` with `is_treeP`, the whole-carrier projections `is_treeT_forest` / `is_treeT_connected` / `is_treeT_connect` / `is_treeT_unique`, the introductions `is_treeTI` / `is_treeTI_connect`, and groundings: `'K_0`, `'K_1`, `'K_2` (B9's path-tree proofs) and the claw `'K_1,3` (a tree that B9's `path_tree` excludes; its irredundant paths are unique because a leaf's only neighbour is the centre) are trees; `'K_3` (`forest3`) and two isolated vertices (`compl 'K_2`) are not. Public-only client base/theories/examples/trees.v.",
+    "",
+    "Seven complete current rows, frozen in extremal-graph-theory/theories/migration/whole_tree.v and packing-theory/theories/migration/whole_tree.v over the frozen wrapper and the LIVE aliases of the other families, every guard, quantifier order and natural subtraction exact: Extremal XE1 `erdos_548_statement` (k.+1 <= n, exact orders, the doubled edge bound `(k - 1) * n + 2`, the subgraph conclusion), `erdos_550_statement` (positive part sizes and the two smallest, N before n/RTB/RTG/T/G, the complete multipartite host and both least-Ramsey witnesses), `erdos_557_statement` (1 <= k, an additive C, the k-colour least-Ramsey relation), `erdos_568_statement` (both existential bounds, the uniform C, no isolated vertices, the exact edge count); Extremal XE2 `erdos_547_statement` (2 <= n, the least diagonal Ramsey number, R <= 2n - 2) and `erdos_549_statement` (no k > 0 guard, bipartition sizes k and 2k, R = 4k - 1; #547 and #549 are solved rows); Packing XE1 `erdos_743_statement` (2 <= n, the dependent family of trees of orders val k + 1, dependent injective embeddings with pairwise disjoint edge images covering every pair of 'K_n). Pre-existing prose issue recorded without repair: #548's doc says k >= 1 follows from its guards, but k = 0 is admitted by the statement; no statement, status or leg changes.",
+    "",
+    "History: 22 earlier frozen declarations across A5 (subgraph_of), A6 (complement), A7 (edge_count), C7 (bipartition) and A11 (min_degree_at_least) still call the live wrapper; all are kept byte-exact, listed in known_stale_snapshots with reciprocal notes in those five specs. Five complete combined Originals are composed from the earlier families' Original templates with the new frozen tree substituted and certified end to end through their own Original certificates: `XE1Original.erdos_548_statement` (A7 edge count, A5 subgraph relation), `XE1Original.erdos_550_statement` (A6 Ramsey number), `XE1Original.erdos_568_statement` (A6 Ramsey number, A7 edge count, A11 no isolated vertices), `XE2Original.erdos_547_statement` (A6 diagonal Ramsey number), `XE2Original.erdos_549_statement` (C7 bipartition sizes, A6 diagonal Ramsey number). #557 and Packing #743 have no earlier snapshot.",
+    "",
+    "Consumers: no proof body outside the three source files uses the wrappers or the row names; Extremal.XE2 imports Extremal.XE1 and Packing's vocabulary_packing facade imports Packing.XE1 (both recompile unchanged); the five earlier certificates are the historical consumers. No grounding or implication module is invented. Routing: normal milestones Extremal XE1, Extremal XE2 and Packing XE1; the family needs no Digraph build.",
+    "",
+    "Distinct, untouched: B18's labelled `fg_spanning_tree`, B19's multigraph `spanning_tree_edge_set`, `D2tur.tree_on` / `shortest_tree_on`, `U9.tree_contains_T`, the directed trees of X2 and P9, B9's `path_tree`, and tree decompositions.",
+    "",
+    "Kernel evidence, independent of this textual report, from `Print All Dependencies`: no frozen row or Original reaches a live wrapper; each Original reaches the earlier families' frozen bodies and never their live aliases; each live row reaches its wrapper and the upstream is_tree. Summary: /srv/graph-theory-rocq/coordination/evidence/B20-whole_tree/print_all_dependencies_summary.txt.",
+    "",
+    "Baseline 6de6ce3 is the announced B19 pin (unmerged stack 4b63976 > 2981122 > cc78377 > 7848021 > 51f1200 > d2a23f1 > 6de6ce3); the three source files and the five earlier certificates are byte-identical to d2a23f1 and 51f1200 there, so no further union is needed. No statement text, doc block, manifest row, leg state or status changes (checked below)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE1.xe1_tree",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_tree",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "Legacy.xe1_tree",
+      "substitutions": {},
+      "certificate": "Extremal.migration.whole_tree.xe1_tree_compat",
+      "live_unfolds_to": "is_tree [set: T]"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.XE1.xe1_tree",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_tree",
+      "frozen_path": "packing-theory/theories/migration/whole_tree.v",
+      "frozen": "Legacy.xe1_tree",
+      "substitutions": {},
+      "certificate": "Packing.migration.whole_tree.xe1_tree_compat",
+      "live_unfolds_to": "is_tree [set: T]"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_548_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_548_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE1Legacy.erdos_548_statement",
+      "substitutions": {
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_548_statement_compat",
+      "original_certificate": "Extremal.migration.whole_tree.erdos_548_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_550_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_550_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE1Legacy.erdos_550_statement",
+      "substitutions": {
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_550_statement_compat",
+      "original_certificate": "Extremal.migration.whole_tree.erdos_550_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_557_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_557_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE1Legacy.erdos_557_statement",
+      "substitutions": {
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_557_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_568_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_568_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE1Legacy.erdos_568_statement",
+      "substitutions": {
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_568_statement_compat",
+      "original_certificate": "Extremal.migration.whole_tree.erdos_568_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_547_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_547_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE2Legacy.erdos_547_statement",
+      "substitutions": {
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_547_statement_compat",
+      "original_certificate": "Extremal.migration.whole_tree.erdos_547_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_549_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_549_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE2Legacy.erdos_549_statement",
+      "substitutions": {
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_549_statement_compat",
+      "original_certificate": "Extremal.migration.whole_tree.erdos_549_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.XE1.erdos_743_statement",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "erdos_743_statement",
+      "frozen_path": "packing-theory/theories/migration/whole_tree.v",
+      "frozen": "XE1Legacy.erdos_743_statement",
+      "substitutions": {
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Packing.migration.whole_tree.erdos_743_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_548_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_548_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE1Original.erdos_548_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of",
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_548_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_550_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_550_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE1Original.erdos_550_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "A6.XE1Original.graph_ramsey_number",
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_550_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_568_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_568_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE1Original.erdos_568_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_graph_ramsey_number": "A6.XE1Original.graph_ramsey_number",
+        "xe1_no_isolated_vertices": "A11.Legacy.xe1_no_isolated_vertices",
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_568_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_547_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_547_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE2Original.erdos_547_statement",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "A6.XE1Original.diagonal_ramsey_number",
+        "xe1_tree": "Legacy.xe1_tree"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_547_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_549_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_549_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/whole_tree.v",
+      "frozen": "XE2Original.erdos_549_statement",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "A6.XE1Original.diagonal_ramsey_number",
+        "xe1_tree": "Legacy.xe1_tree",
+        "xe2_bipartition_sizes": "C7.XE2Legacy.xe2_bipartition_sizes"
+      },
+      "certificate": "Extremal.migration.whole_tree.erdos_549_statement_original_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_548_statement": "A5 (subgraph-of) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_548_statement (A7's template over A7's frozen edge count and A5's frozen subgraph relation), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_550_statement": "A5 (subgraph-of) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_550_statement (A6's template over A6's Original Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_568_statement": "A5 (subgraph-of) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_568_statement (A11's template over A6's Original Ramsey number, A7's frozen edge count and A11's frozen no-isolated-vertices), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_547_statement": "A5 (subgraph-of) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE2Original.erdos_547_statement (A6's template over A6's Original diagonal Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_549_statement": "A5 (subgraph-of) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE2Original.erdos_549_statement (C7's complement template over C7's frozen bipartition sizes and A6's Original diagonal Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_550_statement": "A6 (complement) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_550_statement (A6's template over A6's Original Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_568_statement": "A6 (complement) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_568_statement (A11's template over A6's Original Ramsey number, A7's frozen edge count and A11's frozen no-isolated-vertices), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/complement.v#XE2Legacy.erdos_547_statement": "A6 (complement) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE2Original.erdos_547_statement (A6's template over A6's Original diagonal Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/complement.v#XE2Legacy.erdos_549_statement": "A6 (complement) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE2Original.erdos_549_statement (C7's complement template over C7's frozen bipartition sizes and A6's Original diagonal Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Original.erdos_550_statement": "A6 (complement) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_550_statement (A6's template over A6's Original Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Original.erdos_568_statement": "A6 (complement) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_568_statement (A11's template over A6's Original Ramsey number, A7's frozen edge count and A11's frozen no-isolated-vertices), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/complement.v#XE2Original.erdos_547_statement": "A6 (complement) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE2Original.erdos_547_statement (A6's template over A6's Original diagonal Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/complement.v#XE2Original.erdos_549_statement": "A6 (complement) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE2Original.erdos_549_statement (C7's complement template over C7's frozen bipartition sizes and A6's Original diagonal Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_548_statement": "A7 (edge-count) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_548_statement (A7's template over A7's frozen edge count and A5's frozen subgraph relation), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_568_statement": "A7 (edge-count) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_568_statement (A11's template over A6's Original Ramsey number, A7's frozen edge count and A11's frozen no-isolated-vertices), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Original.erdos_548_statement": "A7 (edge-count) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_548_statement (A7's template over A7's frozen edge count and A5's frozen subgraph relation), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Original.erdos_568_statement": "A7 (edge-count) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_568_statement (A11's template over A6's Original Ramsey number, A7's frozen edge count and A11's frozen no-isolated-vertices), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/bipartition.v#XE2Legacy.erdos_549_statement": "C7 (bipartition) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE2Original.erdos_549_statement (C7's complement template over C7's frozen bipartition sizes and A6's Original diagonal Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/bipartition.v#XE2Original.erdos_549_statement": "C7 (bipartition) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE2Original.erdos_549_statement (C7's complement template over C7's frozen bipartition sizes and A6's Original diagonal Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/bipartition.v#XE2ComplementOriginal.erdos_549_statement": "C7 (bipartition) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE2Original.erdos_549_statement (C7's complement template over C7's frozen bipartition sizes and A6's Original diagonal Ramsey number), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE1Legacy.erdos_568_statement": "A11 (minimum-degree-at-least) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_568_statement (A11's template over A6's Original Ramsey number, A7's frozen edge count and A11's frozen no-isolated-vertices), certified end to end by its _original_compat lemma.",
+    "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE1Original.erdos_568_statement": "A11 (minimum-degree-at-least) snapshot: that family froze only its own helpers in this row, so this copy still calls the live xe1_tree, which after B20 unfolds to the upstream is_tree [set: T] (the same conjunction). Kept byte-exact; its certificate stays true. The complete pre-A5/A6/A7/C7/A11, pre-B20 row is Extremal.migration.whole_tree.XE1Original.erdos_568_statement (A11's template over A6's Original Ramsey number, A7's frozen edge count and A11's frozen no-isolated-vertices), certified end to end by its _original_compat lemma."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe1_tree",
+      "note": "The two Extremal XE2 rows erdos_547_statement and erdos_549_statement use XE1's wrapper through the XE1 import; both rows are frozen complete in this family's certificate (per-row copies and Originals), the file is unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "name": "xe1_tree",
+      "note": "A5's per-row snapshots of the XE1/XE2 rows (#548, #550, #568, #547, #549) froze only the subgraph relation and still call the live wrapper; kept byte-exact, recorded in known_stale_snapshots with the reciprocal note in A5's spec."
+    },
+    {
+      "path": "extremal-graph-theory/theories/migration/complement.v",
+      "name": "xe1_tree",
+      "note": "A6's per-row snapshots and Originals of #550, #568, #547, #549 froze the complement/Ramsey vocabulary and still call the live wrapper; kept byte-exact, recorded in known_stale_snapshots; A6's Original Ramsey numbers are reused by this family's Originals."
+    },
+    {
+      "path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "name": "xe1_tree",
+      "note": "A7's per-row snapshots and Originals of #548 and #568 froze the edge count and still call the live wrapper; kept byte-exact, recorded in known_stale_snapshots; A7's frozen x4_edge_count is reused by this family's Originals."
+    },
+    {
+      "path": "extremal-graph-theory/theories/migration/bipartition.v",
+      "name": "xe1_tree",
+      "note": "C7's snapshots of #549 (per-row, Original and complement Original) froze the bipartition sizes and still call the live wrapper; kept byte-exact, recorded in known_stale_snapshots; C7's complement template is this family's #549 Original."
+    },
+    {
+      "path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "name": "xe1_tree",
+      "note": "A11's per-row snapshot and Original of #568 froze no-isolated-vertices and still call the live wrapper; kept byte-exact, recorded in known_stale_snapshots; A11's template is this family's #568 Original."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTBase.spanning_trees.fg_spanning_tree",
+      "path": "base/theories/spanning_trees.v",
+      "name": "fg_spanning_tree",
+      "note": "B18's labelled spanning tree: a valid edge subset of a host whose labelled graph is a tree; a different representation (supplied carrier), untouched"
+    },
+    {
+      "qualified": "Cycle.foundations.spanning_trees.spanning_tree_edge_set",
+      "path": "cycle-theory/theories/foundations/spanning_trees.v",
+      "name": "spanning_tree_edge_set",
+      "note": "B19's multigraph edge-carrier spanning tree; a different representation, untouched"
+    },
+    {
+      "qualified": "Extremal.conjectures.D2tur.tree_on",
+      "path": "extremal-graph-theory/theories/conjectures/D2tur.v",
+      "name": "tree_on",
+      "note": "ordered-pair Boolean tree relation of the weighted shortest-tree wrapper; a different representation; untouched"
+    },
+    {
+      "qualified": "Packing.conjectures.U9.tree_contains_T",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "tree_contains_T",
+      "note": "terminal tree with its own incidence-parity acyclicity and directed terminal connectivity; a different contract; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.X2.oriented_tree",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "oriented_tree",
+      "note": "oriented tree of a digraph (positive order, orientation and underlying tree); a different notion; untouched"
+    },
+    {
+      "qualified": "GTBase.path_trees.path_tree",
+      "path": "base/theories/path_trees.v",
+      "name": "path_tree",
+      "note": "B9's degree-bounded tree (is_tree [set: T] /\\ Delta T <= 2); a stronger contract that excludes the claw; untouched"
+    }
+  ]
+}

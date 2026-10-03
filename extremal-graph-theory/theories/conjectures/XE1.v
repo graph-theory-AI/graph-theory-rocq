@@ -73,8 +73,7 @@ Fixpoint xe1_hypercube (d : nat) : sgraph :=
   | d'.+1 => cartesian_product 'K_2 (xe1_hypercube d')
   end.
 
-Definition xe1_tree (T : sgraph) : Prop :=
-  is_forest [set: T] /\ connected [set: T].
+Definition xe1_tree (T : sgraph) : Prop := is_tree [set: T].
 
 Definition xe1_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
   min_degree_at_least G d.
