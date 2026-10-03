@@ -501,7 +501,8 @@
     }
   ],
   "known_stale_snapshots": {
-    "minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta": "Later-family snapshot (B3, consecutive-in-path): B3 froze only its induced-path chain at its baseline ceadac8, where x67_internal_vertices and x67_no_cross_edges had already been migrated (families path-vertices and internal-vertices), so this copy calls those live (migrated) helpers by design. The end-to-end pre-migration theta and statement, over the frozen chains of B1 and B3, are Minor.migration.consecutive_in_path.X67Original.theta and X67Original.statement, related to the live ones by x67_theta_original_compat and theta_triangle_free_bounded_degree_treewidth_statement_original_compat."
+    "minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta": "Later-family snapshot (B3, consecutive-in-path): B3 froze only its induced-path chain at its baseline ceadac8, where x67_internal_vertices and x67_no_cross_edges had already been migrated (families path-vertices and internal-vertices), so this copy calls those live (migrated) helpers by design. The end-to-end pre-migration theta and statement, over the frozen chains of B1 and B3, are Minor.migration.consecutive_in_path.X67Original.theta and X67Original.statement, related to the live ones by x67_theta_original_compat and theta_triangle_free_bounded_degree_treewidth_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_915_statement": "A7 snapshot: A7 froze this row over its own frozen edge count but kept the live xe2_paths_internally_disjoint of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.XE2Original.erdos_915_statement, certified by erdos_915_statement_original_compat, which composes this family's frozen copy."
   },
   "cross_module_consumers": [
     {

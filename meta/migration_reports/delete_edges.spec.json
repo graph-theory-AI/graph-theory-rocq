@@ -384,7 +384,10 @@
       "certificate": "Extremal.migration.delete_edges.dense_H_free_clique_blowup_subquadratic_error_statement_compat"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_613_statement": "A7 snapshot: A7 froze this row over its own frozen edge count but kept the live xe2_bipartite_plus_bounded_degree of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.XE2Original.erdos_613_statement, certified by erdos_613_statement_original_compat, which composes this family's frozen copy.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_742_statement": "A7 snapshot: A7 froze this row over its own frozen edge count but kept the live xe2_diameter_critical_two of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.XE2Original.erdos_742_statement, certified by erdos_742_statement_original_compat, which composes this family's frozen copy."
+  },
   "cross_module_consumers": [
     {
       "path": "extremal-graph-theory/theories/conjectures/XE2.v",

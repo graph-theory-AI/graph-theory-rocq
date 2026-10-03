@@ -26,7 +26,7 @@ Unset Printing Implicit Defensive.
 
     [edge_count] reuses [E(_)]; on the edgeless one-vertex graph it is 0. *)
 Lemma edge_count_complete1 : edge_count (complete 1) = 0.
-Proof. by rewrite /edge_count card_edge_Kn. Qed.
+Proof. exact: GTBase.common.edge_count_Kn 1. Qed.
 
 (** ** Row 1 — multicolour Erdős–Hajnal pattern vocabulary *)
 
