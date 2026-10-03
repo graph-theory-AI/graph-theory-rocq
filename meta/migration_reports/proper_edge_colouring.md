@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py proper_edge_colouring --details
 
 - Canonical: `GTBase.edge_colourings.proper_edge_colouring`.
 - Baseline: `3011c280a09f292461a3b1e5a99f7be3febfbbb9`.
-- Scope: 5 helpers, 7 statements, 22 frozen objects, 51 recorded references.
-- Source checks: 210/210 pass; consistent.
+- Scope: 5 helpers, 7 statements, 28 frozen objects, 58 recorded references.
+- Source checks: 242/242 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -24,3 +24,5 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
 Excluded distinct variants: `Chromatic.conjectures.U5.acyclic_edge_colouring`, `Chromatic.conjectures.U5.star_edge_colouring`, `Chromatic.conjectures.X43.x43_strong_edge_colourable`, `Chromatic.conjectures.XE1.xe1_strong_edge_colouring`, `Chromatic.conjectures.X219.x219_edge_choosable`, `Cycle.conjectures.X9.x9_cycle_incident_edges_properly_coloured`, `Chromatic.conjectures.X100.x100_modular_edge_colouring`.
+
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/simple_path.v#X14Legacy.andersen_rainbow_path_statement`, `graph-theory-misc/theories/migration/simple_path.v#X62Legacy.rainbow_paths_linear_edge_cover_statement`.

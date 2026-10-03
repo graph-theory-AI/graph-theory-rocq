@@ -138,3 +138,22 @@ tooling pin `2f15093` (matching_scope), on which this family's private baseline
 `Print All Dependencies` of the seven frozen and seven live statements and `Print
 Assumptions` of every certificate, run through the pinned image, under
 `/srv/graph-theory-rocq/coordination/evidence/C6-proper_edge_colouring/`.
+
+## Additive B6 history composition
+
+The initial C6 pin `e7fd30a` and reviewed B6 pin `632e0b1` retain all their
+previous frozen bodies and certificates. The follow-up appends `X14Original`
+and `X62Original` to `GTMisc.migration.edge_colourings`: it composes C6's frozen
+properness and raw pre-M1 edge set with B6's frozen genuine-path predicate, and
+freezes the unchanged path-edge list, rainbow-path conjunction and edge-cover
+predicate. Neither complete original reaches either family's live aliases.
+Five added certificates relate the three frozen helper chains and the two whole
+statements to their current forms, preserving every guard, witness and quantifier.
+This proves logical equivalence of the full statements; it makes no claim that
+old and new proof terms are identical.
+
+Both family specifications record these originals and reciprocal notes for the
+older partial snapshots. Existing frozen declarations, certificate types, live
+statement text, doc blocks, row statuses and earlier review fields are unchanged.
+Focused exact-type, assumptions and compiled dependency evidence is archived in
+`coordination/evidence/C6-finalization-by-matching-scope/` outside committed meta.

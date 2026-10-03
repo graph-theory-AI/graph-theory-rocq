@@ -28,7 +28,7 @@
     },
     "consumers_remaining": 6,
     "relation": "logical-equivalence-or-conversion-on-the-supplied-map-carriers",
-    "migration_notes": "C6 (2026-10-03, lancelot): two supplied-map interfaces in GTBase.edge_colourings over an eqType palette, both keeping the supplied map and its labels. SET MAPS ({set G} -> C): the public foundation source Extremal.foundations.edge_colourings.proper_ecolouring (endpoint form, eqType palette, kept public under its old name as a transparent adapter), X142 (intersection form, 'I_k) and X14 (not-disjoint form, finType) now unfold to proper_edge_colouring; the two edge-pair forms are certified by proper_edge_colouring_edgesP / proper_edge_colouring_meetP. PAIR MAPS (G -> G -> C, symmetric on ALL ordered pairs): X213 ('I_k) and D2chr.proper_ec (finType) now unfold to proper_pair_edge_colouring, by conversion. Empty-palette behaviour differs by interface and is grounded: no set map into an empty palette exists (the domain {set G} is inhabited), the empty graph admits the unique pair map into an empty palette, a nonempty edgeless graph does not (D2chr's K_1 = 1 convention). X142's numeric labels and incident sums, X213's whole-function Kempe states and used-colour count, D2chr's least star index, X229's full palette split are unchanged; M1's complete frozen X142 chain is reused (its helper certificate proof re-proved through proper_edge_colouring_edgesP) and restated by the chromatic entry point. X213's prose ('only adjacent pairs are constrained') disagrees with its body (symmetry on all pairs): recorded, not repaired.",
+    "migration_notes": "C6 (2026-10-03, lancelot): two supplied-map interfaces in GTBase.edge_colourings over an eqType palette, both keeping the supplied map and its labels. SET MAPS ({set G} -> C): the public foundation source Extremal.foundations.edge_colourings.proper_ecolouring (endpoint form, eqType palette, kept public under its old name as a transparent adapter), X142 (intersection form, 'I_k) and X14 (not-disjoint form, finType) now unfold to proper_edge_colouring; the two edge-pair forms are certified by proper_edge_colouring_edgesP / proper_edge_colouring_meetP. PAIR MAPS (G -> G -> C, symmetric on ALL ordered pairs): X213 ('I_k) and D2chr.proper_ec (finType) now unfold to proper_pair_edge_colouring, by conversion. Empty-palette behaviour differs by interface and is grounded: no set map into an empty palette exists (the domain {set G} is inhabited), the empty graph admits the unique pair map into an empty palette, a nonempty edgeless graph does not (D2chr's K_1 = 1 convention). X142's numeric labels and incident sums, X213's whole-function Kempe states and used-colour count, D2chr's least star index, X229's full palette split are unchanged; M1's complete frozen X142 chain is reused (its helper certificate proof re-proved through proper_edge_colouring_edgesP) and restated by the chromatic entry point. X213's prose ('only adjacent pairs are constrained') disagrees with its body (symmetry on all pairs): recorded, not repaired. Additive B6 history composes the unchanged partial X14/X62 snapshots into complete Originals over both frozen families and raw path-edge/cover declarations; both reports verify the five new helper/statement bridges.",
     "semantic_classes": {
       "set-map-endpoint-form": {
         "members": [
@@ -104,7 +104,12 @@
       "Chromatic.migration.simple_edges.x142_edges_incident_compat",
       "Chromatic.migration.simple_edges.x142_incident_sum_compat",
       "Chromatic.migration.simple_edges.x142_neighbour_sum_distinguishing_compat",
-      "Chromatic.migration.simple_edges.x142_edge_set_compat"
+      "Chromatic.migration.simple_edges.x142_edge_set_compat",
+      "GTMisc.migration.edge_colourings.x14_path_edges_original_compat",
+      "GTMisc.migration.edge_colourings.x14_rainbow_path_original_compat",
+      "GTMisc.migration.edge_colourings.x62_edges_covered_by_paths_original_compat",
+      "GTMisc.migration.edge_colourings.andersen_rainbow_path_statement_original_compat",
+      "GTMisc.migration.edge_colourings.rainbow_paths_linear_edge_cover_statement_original_compat"
     ],
     "api_theorems": [
       "GTBase.edge_colourings.edges_meet_endpoint",

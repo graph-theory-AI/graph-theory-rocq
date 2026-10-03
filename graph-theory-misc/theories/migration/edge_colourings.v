@@ -127,3 +127,96 @@ Print Assumptions x14_edge_set_compat.
 Print Assumptions x14_proper_edge_colouring_compat.
 Print Assumptions andersen_rainbow_path_statement_compat.
 Print Assumptions rainbow_paths_linear_edge_cover_statement_compat.
+
+(** ** Full originals after B6 (simple paths)
+
+    The older X14Legacy/X62Legacy bodies above and B6's partial snapshots in
+    migration/simple_path.v remain verbatim. These additional originals compose
+    C6's frozen properness over pre-M1 edges with B6's frozen genuine-path body.
+    The unchanged raw path-edge list and edge-cover predicate are frozen here
+    too, so neither full original resolves through either family's live aliases.
+    Both statements retain their original witnesses and quantifier order. *)
+
+From GTMisc.migration Require simple_path.
+
+Module X14Original.
+
+Definition path_edges (G : sgraph) (p : seq G) : seq {set G} :=
+  map (fun e : G * G => [set e.1; e.2]) (zip p (behead p)).
+
+Definition rainbow_path
+    (G : sgraph) (C : finType) (col : {set G} -> C) (p : seq G) : Prop :=
+  @GTMisc.migration.simple_path.Legacy.x14_genuine_path G p /\
+  uniq (map col (@X14Original.path_edges G p)).
+
+Definition andersen_rainbow_path_statement : Prop :=
+  forall (n : nat) (C : finType) (col : {set complete n} -> C),
+    2 <= n ->
+    @Legacy.x14_proper_edge_colouring (complete n) C col ->
+    exists p : seq (complete n),
+      @X14Original.rainbow_path (complete n) C col p /\ size p = n.-1.
+
+End X14Original.
+
+Module X62Original.
+
+Definition edges_covered_by_paths
+    (G : sgraph) (paths : seq (seq G)) : Prop :=
+  forall e : {set G},
+    e \in Legacy.x14_edge_set G ->
+    exists p : seq G, p \in paths /\ e \in X14Original.path_edges p.
+
+Definition rainbow_paths_linear_edge_cover_statement : Prop :=
+  exists c : nat,
+    forall (G : sgraph) (C : finType) (col : {set G} -> C),
+      Legacy.x14_proper_edge_colouring col ->
+      exists paths : seq (seq G),
+        size paths <= c * #|G| /\
+        (forall p : seq G, p \in paths -> X14Original.rainbow_path col p) /\
+        X62Original.edges_covered_by_paths paths.
+
+End X62Original.
+
+Lemma x14_path_edges_original_compat (G : sgraph) (p : seq G) :
+  X14Original.path_edges p = x14_path_edges p.
+Proof. by []. Qed.
+
+Lemma x14_rainbow_path_original_compat
+    (G : sgraph) (C : finType) (col : {set G} -> C) (p : seq G) :
+  @X14Original.rainbow_path G C col p <-> @x14_rainbow_path G C col p.
+Proof. exact: iff_refl. Qed.
+
+Lemma x62_edges_covered_by_paths_original_compat
+    (G : sgraph) (paths : seq (seq G)) :
+  X62Original.edges_covered_by_paths paths <-> x62_edges_covered_by_paths paths.
+Proof.
+by rewrite /X62Original.edges_covered_by_paths /x62_edges_covered_by_paths
+  x14_edge_set_compat.
+Qed.
+
+Lemma andersen_rainbow_path_statement_original_compat :
+  X14Original.andersen_rainbow_path_statement <-> andersen_rainbow_path_statement.
+Proof. exact: andersen_rainbow_path_statement_compat. Qed.
+
+Lemma rainbow_paths_linear_edge_cover_statement_original_compat :
+  X62Original.rainbow_paths_linear_edge_cover_statement <->
+  rainbow_paths_linear_edge_cover_statement.
+Proof.
+split=> -[c H]; exists c => G C col prop.
+- have hp : Legacy.x14_proper_edge_colouring col.
+    by apply/x14_proper_edge_colouring_compat.
+  have [paths [bound [rainbow cover]]] := H G C col hp.
+  exists paths; split=> //; split=> //.
+  by apply/x62_edges_covered_by_paths_original_compat.
+- have hp : x14_proper_edge_colouring col.
+    by apply/x14_proper_edge_colouring_compat.
+  have [paths [bound [rainbow cover]]] := H G C col hp.
+  exists paths; split=> //; split=> //.
+  by apply/x62_edges_covered_by_paths_original_compat.
+Qed.
+
+Print Assumptions x14_path_edges_original_compat.
+Print Assumptions x14_rainbow_path_original_compat.
+Print Assumptions x62_edges_covered_by_paths_original_compat.
+Print Assumptions andersen_rainbow_path_statement_original_compat.
+Print Assumptions rainbow_paths_linear_edge_cover_statement_original_compat.
