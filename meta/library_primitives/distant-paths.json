@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "family": "distant-paths",
+  "primitive": {
+    "canonical_name": "GTBase.distant_paths.pairwise_distant_seqs",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "has_k_distant_ST_paths",
+      "has_k_distant_xy_paths",
+      "pairwise_distant_A_paths",
+      "pairwise_distant_paths"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.X116.x116_has_k_distant_ST_paths",
+      "GTMisc.conjectures.X116.x116_pairwise_distant_paths",
+      "GTMisc.conjectures.X146.x146_pairwise_distant_A_paths",
+      "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
+      "GTMisc.conjectures.X39.x39_pairwise_distant_paths",
+      "Packing.conjectures.X26.x26_has_k_distant_xy_paths",
+      "Packing.conjectures.X26.x26_pairwise_distant_paths"
+    ],
+    "consumers_remaining": 4,
+    "relation": "two public contracts of GTBase.distant_paths over a supplied list of vertex sequences. Raw relation: pairwise_distant_seqs d paths, for every two UNEQUAL sequence values of the list the closed d.-1 set_ball (GTBase.balls) around the support (seq_vertices) of one misses the support of the other; equal duplicates are ignored and nothing requires pathhood, uniqueness or nonempty sequences. X26.x26_pairwise_distant_paths is it by conversion; X39 / X116 / X146 also asked for disjoint supports, a redundant conjunct (every seed set lies in its closed ball), equivalent without premises by pairwise_distant_seqsP. Existence: has_k_distant_set_paths d k X Y, some list of exactly k entries, uniq, every entry a seq_set_path X Y (B5) and pairwise_distant_seqs d; X26's wrapper by conversion, X39's and X116's through has_k_distant_set_pathsP. d = 0 and d = 1 both mean disjoint supports; k = 0 always holds; k = 1 is one X-Y path, a one-vertex path when X and Y meet; closed balls never leave a component. Distinct and untouched: X146's A-path existence chain (frozen, guards kept), X113's distant cycles (radius d) and vertex or triangle distance predicates.",
+    "semantic_classes": {
+      "raw-distant-family": {
+        "members": [
+          "GTMisc.conjectures.X116.x116_pairwise_distant_paths",
+          "GTMisc.conjectures.X146.x146_pairwise_distant_A_paths",
+          "GTMisc.conjectures.X39.x39_pairwise_distant_paths",
+          "Packing.conjectures.X26.x26_pairwise_distant_paths"
+        ],
+        "count": 4,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.distant_paths.x116_pairwise_distant_paths_compat",
+          "GTMisc.migration.distant_paths.x146_pairwise_distant_A_paths_compat",
+          "GTMisc.migration.distant_paths.x39_pairwise_distant_paths_compat",
+          "Packing.migration.distant_paths.x26_pairwise_distant_paths_compat"
+        ],
+        "note": "public contract GTBase.distant_paths.pairwise_distant_seqs (unequal sequence values, radius d.-1); X26 by conversion, X39 / X116 / X146 through the unconditional pairwise_distant_seqsP. X146's helper imposes no A-path property; its A-path existence chain is frozen separately."
+      },
+      "k-distant-set-paths": {
+        "members": [
+          "GTMisc.conjectures.X116.x116_has_k_distant_ST_paths",
+          "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
+          "Packing.conjectures.X26.x26_has_k_distant_xy_paths"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.distant_paths.x116_has_k_distant_ST_paths_compat",
+          "GTMisc.migration.distant_paths.x39_has_k_distant_xy_paths_compat",
+          "Packing.migration.distant_paths.x26_has_k_distant_xy_paths_compat"
+        ],
+        "note": "public contract GTBase.distant_paths.has_k_distant_set_paths: exact list size k, uniq, B5 set-to-set paths and the raw relation; ST versus XY only renames the endpoint sets. Five complete current rows are frozen over the family and A22's five complete Originals are reused end to end."
+      }
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.distant_paths.coarse_menger_ball_separator_statement_compat",
+      "GTMisc.migration.distant_paths.coarse_menger_ball_separator_statement_original_compat",
+      "GTMisc.migration.distant_paths.coarse_menger_distance_two_separator_statement_compat",
+      "GTMisc.migration.distant_paths.coarse_menger_distance_two_separator_statement_original_compat",
+      "GTMisc.migration.distant_paths.coarse_menger_paths_bounded_separator_statement_compat",
+      "GTMisc.migration.distant_paths.coarse_menger_paths_bounded_separator_statement_original_compat",
+      "GTMisc.migration.distant_paths.geelen_coarse_gallai_A_paths_statement_compat",
+      "GTMisc.migration.distant_paths.geelen_coarse_gallai_A_paths_statement_original_compat",
+      "GTMisc.migration.distant_paths.x116_has_k_distant_ST_paths_compat",
+      "GTMisc.migration.distant_paths.x116_pairwise_distant_paths_compat",
+      "GTMisc.migration.distant_paths.x146_has_k_distant_A_paths_compat",
+      "GTMisc.migration.distant_paths.x146_pairwise_distant_A_paths_compat",
+      "GTMisc.migration.distant_paths.x39_has_k_distant_xy_paths_compat",
+      "GTMisc.migration.distant_paths.x39_pairwise_distant_paths_compat",
+      "Packing.migration.distant_paths.bounded_degree_distant_induced_menger_statement_compat",
+      "Packing.migration.distant_paths.bounded_degree_distant_induced_menger_statement_original_compat",
+      "Packing.migration.distant_paths.x26_has_k_distant_xy_paths_compat",
+      "Packing.migration.distant_paths.x26_pairwise_distant_paths_compat"
+    ],
+    "api_theorems": [
+      "GTBase.distant_paths.pairwise_distant_seqsP",
+      "GTBase.distant_paths.has_k_distant_set_pathsP",
+      "GTBase.distant_paths.pairwise_distant_seqs0",
+      "GTBase.distant_paths.pairwise_distant_seqs01",
+      "GTBase.distant_paths.pairwise_distant_seqs_mono",
+      "GTBase.distant_paths.pairwise_distant_seqs_sub",
+      "GTBase.distant_paths.pairwise_distant_seqs_nil",
+      "GTBase.distant_paths.pairwise_distant_seqs1",
+      "GTBase.distant_paths.pairwise_distant_seqs_dup",
+      "GTBase.distant_paths.has_k_distant_set_paths0",
+      "GTBase.distant_paths.has_k_distant_set_paths1",
+      "GTBase.distant_paths.has_k_distant_set_paths_uniq"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.connectivity",
+        "mathcomp.boot.path",
+        "GTBase.walks_paths",
+        "GTBase.balls"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "The pinned GraphTheory and MathComp sources have no predicate for supplied families of pairwise distant paths. The canonical composes the existing GTBase supports (seq_vertices), set-to-set paths (seq_set_path) and A22's closed set_ball; upstream paths and separators remain foundations, not replacements. GTBase.distant_paths is not re-exported by GTBase.base.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/distant_paths.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/distant_paths.spec.json",
+    "downstream_client": "base/theories/examples/distant_paths.v",
+    "foundation_fidelity": "meta/foundation_fidelity/distant-paths.json"
+  }
+}

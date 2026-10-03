@@ -1,0 +1,33 @@
+{
+ "schema_version": 1,
+ "family": "distant-paths",
+ "modules": {
+  "GTBase.distant_paths": {
+   "path": "base/theories/distant_paths.v",
+   "overrides": {
+    "pairwise_distant_seqs": {
+     "verdict": "FAITHFUL",
+     "note": "pairwise_distant_seqs d paths: every two unequal sequence values of the supplied list have the closed d.-1 set_ball around the support of one disjoint from the support of the other; duplicates ignored, no path or uniqueness requirement; d = 0 and d = 1 coincide (pairwise_distant_seqs01)."
+    },
+    "has_k_distant_set_paths": {
+     "verdict": "FAITHFUL",
+     "note": "has_k_distant_set_paths d k X Y: a supplied list of exactly k entries, uniq, each a seq_set_path X Y, pairwise_distant_seqs d; k = 0 by the empty list, k = 1 iff some X-Y path exists."
+    }
+   },
+   "machine_evidence": [
+    "pairwise_distant_seqsP",
+    "has_k_distant_set_pathsP",
+    "pairwise_distant_seqs0",
+    "pairwise_distant_seqs01",
+    "pairwise_distant_seqs_mono",
+    "pairwise_distant_seqs_sub",
+    "pairwise_distant_seqs_nil",
+    "pairwise_distant_seqs1",
+    "pairwise_distant_seqs_dup",
+    "has_k_distant_set_paths0",
+    "has_k_distant_set_paths1",
+    "has_k_distant_set_paths_uniq"
+   ]
+  }
+ }
+}
