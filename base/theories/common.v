@@ -127,8 +127,9 @@ Definition edge_disjoint (G : sgraph) (A B : {set {set G}}) : bool := [disjoint 
     [A] and [B] the counts agree with the number of edges of [E(G)] meeting both sets
     ([edges_between_cross]) and with the number of edges of the complement between the sets
     ([nonedges_between_compl]).  With overlap these readings can fail (a shared vertex is a
-    non-edge pair but no complement edge: [nonedges_between_compl_overlap]), although they may
-    still agree, for instance when every count is zero.
+    non-edge pair but no complement edge: [nonedges_between_compl_overlap]).  The edge-count
+    reading may still agree for overlapping sets, for example when G is K1 and A = B is its full
+    vertex set; the ordered non-edge count is then 1 and the complement count 0.
     Grounding: empty sets, a singleton ([edges_between_set1], [nonedges_between_set1]) and
     complete graphs, where exactly the diagonal pairs are non-edges ([nonedges_between_Kn],
     [edges_between_Kn], [edges_between_K2]). *)

@@ -30,8 +30,10 @@ All four count ORDERED pairs of `A x B`. The new canonicals are `GTBase.common.e
 On disjoint sets the non-edge count agrees with the number of complement edges between the sets, and the
 edge count with the number of edges of `E(G)` meeting both sets. With overlap these readings can fail: a
 shared vertex is a non-edge pair but no complement edge, and an edge inside the overlap is counted twice.
-They may still agree, for instance for `A = B = [set: 'K_1]`, where every count is zero. The two readings
-are separate lemmas, both guarded by disjointness, which is sufficient. The X118/X120 rows keep their own `[disjoint A & B]` conjunct, and X223's `x223_ct_sparse`
+The edge-count reading may still agree for overlapping sets: for `A = B = [set: 'K_1]` the ordered edge
+count and the unordered cross-edge count are both 0, while the ordered non-edge count is 1 and the
+complement count 0. The two readings are separate lemmas, both guarded by disjointness, which is
+sufficient. The X118/X120 rows keep their own `[disjoint A & B]` conjunct, and X223's `x223_ct_sparse`
 keeps arbitrary, possibly overlapping sets.
 
 Not touched:
