@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "family": "monochromatic",
+  "primitive": {
+    "canonical_name": "GTBase.monochromatic.monochromatic_on",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "monochromatic",
+      "same_colour_on"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X181.x181_monochromatic",
+      "GTBase.surface.same_colour_on",
+      "GTMisc.conjectures.U13.monochromatic"
+    ],
+    "repository_sources": {
+      "GTBase.surface.same_colour_on": {
+        "path": "base/theories/surface.v",
+        "commit": "2e0fb67f54a33409311c2a36cdf1e1d5240e3577",
+        "blob": "6a4a45cc6fcf6ee750cd0f09090ca757b3ed8ebe",
+        "declaration_hash": "88b8526b83d26292eaf32cd3e17ff48af92895e1d82ff329366148af1daae1f4"
+      }
+    },
+    "consumers_remaining": 3,
+    "relation": "same supplied-map subset constancy; Boolean equality or reflected Prop iff with unchanged domains and guards",
+    "semantic_classes": {
+      "boolean-ordinal-palette": {
+        "members": [
+          "Chromatic.conjectures.X181.x181_monochromatic"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.monochromatic.x181_monochromatic_compat"
+      },
+      "prop-boolean-palette": {
+        "members": [
+          "GTMisc.conjectures.U13.monochromatic"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "GTMisc.migration.monochromatic.monochromatic_compat"
+      },
+      "public-prop-ordinal-palette": {
+        "members": [
+          "GTBase.surface.same_colour_on"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "GTBase.migration.monochromatic.same_colour_on_compat"
+      }
+    },
+    "compatibility_theorems": [
+      "GTBase.migration.monochromatic.same_colour_on_compat",
+      "GTBase.migration.monochromatic.clustered_colouring_compat",
+      "GTBase.migration.monochromatic.clustered_chromatic_at_most_compat",
+      "Chromatic.migration.monochromatic.x181_monochromatic_compat",
+      "Chromatic.migration.monochromatic.x181_clique_colourable_compat",
+      "Chromatic.migration.monochromatic.x181_clique_chromatic_window_compat",
+      "Chromatic.migration.monochromatic.x181_random_graph_clique_chromatic_constant_compat",
+      "Chromatic.migration.monochromatic.random_graph_clique_chromatic_tight_constant_statement_compat",
+      "Chromatic.migration.monochromatic.x194_clustered_chromatic_minor_class_le_compat",
+      "Chromatic.migration.monochromatic.clustered_chromatic_minor_class_treedepth_bound_statement_compat",
+      "Chromatic.migration.monochromatic.x218_clustered_chromatic_class_le_compat",
+      "Chromatic.migration.monochromatic.odd_minor_free_defective_clustered_treedepth_statement_compat",
+      "Topological.migration.monochromatic.x138_clustered_two_colourable_compat",
+      "Topological.migration.monochromatic.x138_clustered_two_colourable_with_clustering_compat",
+      "Topological.migration.monochromatic.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_compat",
+      "GTMisc.migration.monochromatic.monochromatic_compat",
+      "GTMisc.migration.monochromatic.splits_max_cliques_compat",
+      "GTMisc.migration.monochromatic.two_colouring_a_graph_without_a_monochromatic_maximu_statement_compat",
+      "Chromatic.migration.monochromatic.x181_event_weight_compat"
+    ],
+    "api_theorems": [
+      "GTBase.monochromatic.constant_pairwiseP",
+      "GTBase.monochromatic.monochromatic_onP",
+      "GTBase.monochromatic.monochromatic_onE",
+      "GTBase.monochromatic.monochromatic_on_set0",
+      "GTBase.monochromatic.monochromatic_on_set1",
+      "GTBase.monochromatic.monochromatic_on_const",
+      "GTBase.monochromatic.monochromatic_on_pair",
+      "GTBase.monochromatic.monochromatic_on_sub",
+      "GTBase.monochromatic.monochromatic_on_ext",
+      "GTBase.monochromatic.monochromatic_on_relabel",
+      "GTBase.monochromatic.non_monochromatic_onP"
+    ],
+    "distinct_variants": {
+      "GTMisc.conjectures.X20.x20_monochromatic_connected_set": "Nonempty vertex set connected via paths in one fixed EDGE-colour relation; not constancy of a supplied vertex map.",
+      "Extremal.conjectures.XE2.xe2_monochromatic_path": "Nonempty simple path whose traversed edges all carry a specified colour; graph/witness structure retained.",
+      "Hypergraph.conjectures.X108.x108_monochromatic_copy": "Injective hypergraph copy with edge colours, not a supplied-map vertex subset.",
+      "Hypergraph.conjectures.X117.x117_monochromatic_copy": "Same distinct copy contract; its existing X108 bridge is untouched.",
+      "Hypergraph.conjectures.X119.x119_monochromatic_copy": "Finite-palette injective hypergraph copy, not a vertex-set constancy predicate.",
+      "Extremal.conjectures.XE1.xe1_monochromatic_copy_in_complete": "Graph copy and complete-host edge colouring, kept distinct."
+    },
+    "migration_report": "meta/migration_reports/monochromatic.md",
+    "migration_spec": "meta/migration_reports/monochromatic.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/monochromatic.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C8.md",
+    "downstream_client": "base/theories/examples/monochromatic.v",
+    "upstream_audit": {
+      "searched_modules": [
+        "mathcomp.boot.seq",
+        "mathcomp.boot.fintype",
+        "GraphTheory.coloring",
+        "GTBase.surface"
+      ],
+      "result": "adapted-in-base",
+      "candidate": "mathcomp.boot.seq.constant",
+      "note": "constant on the mapped finite enumeration is exactly pairwise equality on the supplied subset. The pairwise reflection avoids constantP's default palette element; image-cardinality formulations would require a finite palette. same_colour_on is an existing public cross-name source and remains public as a Prop adapter. No adjacency, connectivity, colour witness or palette inhabitance is added.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}

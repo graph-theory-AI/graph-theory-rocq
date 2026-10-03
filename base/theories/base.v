@@ -99,6 +99,7 @@ From GTBase Require Export finite_graph.
 From GTBase Require Export graph_metric.
 From GTBase Require Export list_flexibility.
 From GTBase Require Export posets.
+From GTBase Require Export monochromatic.
 From GTBase Require Export surface.
 From GTBase Require Export walks_paths.
 
