@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py hereditary_class --details /tmp
 - Canonical: `GTBase.graph_classes.hereditary_class`.
 - Baseline: `5f8211a10b7260fec67dad1450be6da41efeb1a9`.
 - Scope: 5 helpers, 3 statements, 9 frozen objects, 18 recorded references.
-- Source checks: 99/99 pass; consistent.
+- Source checks: 97/97 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -19,6 +19,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py hereditary_class --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `GTMisc.conjectures.X87.x87_hereditary`, `Chromatic.conjectures.U8.vminor_closed`, `Chromatic.conjectures.X192.x192_proper_minor_closed_class`, `GTMisc.conjectures.X168.x168_proper_minor_closed_class`.
+Excluded distinct variants: `GTMisc.conjectures.X87.x87_hereditary`, `Chromatic.conjectures.U8.vminor_closed`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/chi_bounded_classes.v#X3Legacy.hereditary_chi_bounded_not_polynomial_statement`.

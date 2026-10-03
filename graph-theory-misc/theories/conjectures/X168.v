@@ -2,6 +2,7 @@
 
 From GraphTheory Require Import minor.
 From GTBase Require Export base.
+From GTBase Require Import minor_classes.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,8 +11,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X168 vocabulary ***********************************************)
 
 Definition x168_proper_minor_closed_class (C : sgraph -> Prop) : Prop :=
-  (exists H : sgraph, forall G : sgraph, C G -> ~ minor G H) /\
-  forall G H : sgraph, C G -> minor G H -> C H.
+  GTBase.minor_classes.proper_minor_closed_class C.
 
 Definition x168_spanning_tree (G : sgraph) (T : {set {set G}}) : Prop :=
   T \subset fg_edges G /\
