@@ -124,8 +124,7 @@ Definition pentagon_statement : Prop :=
 (* [k_connected] now from graph-theory-base (uses [set: G] :\: S = ~: S). *)
 
 Definition longest_cycle (G : sgraph) (c : seq G) : Prop :=
-  [/\ ucycle (--) c, 2 < size c &
-      forall c' : seq G, ucycle (--) c' -> size c' <= size c].
+  seq_longest_cycle (--) c.
 
 Definition chord (G : sgraph) (c : seq G) : Prop :=
   exists x y : G,

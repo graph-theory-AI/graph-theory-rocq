@@ -1,0 +1,43 @@
+{
+ "schema_version": 1,
+ "family": "longest-cycle",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_longest_cycle": {
+     "verdict": "FAITHFUL",
+     "note": "seq_longest_cycle r c: c is a genuine cycle of r (seq_cycleb: more than two pairwise distinct entries, consecutive entries and the closing pair related) and no genuine cycle of r is longer; maximum length over the whole carrier, not inclusion maximality; no symmetry or inhabitance premise; equivalent to bounding every ucycle (seq_longest_cycle_ucycleE); exists on a finite carrier exactly when a genuine cycle does."
+    }
+   },
+   "machine_evidence": [
+    "seq_longest_cycleE",
+    "seq_longest_cycle_nestedE",
+    "seq_longest_cycle_ucycleE",
+    "seq_longest_cycle_cycleb",
+    "seq_longest_cycle_cycle",
+    "seq_longest_cycle_ucycle",
+    "seq_longest_cycle_uniq",
+    "seq_longest_cycle_size",
+    "seq_longest_cycle_max",
+    "seq_longest_cycle_max_ucycle",
+    "seq_longest_cycle_nil",
+    "seq_longest_cycle_seq1",
+    "seq_longest_cycle_pair",
+    "seq_longest_cycle_none",
+    "seq_longest_cycle_size_eq",
+    "seq_longest_cycle_tie",
+    "seq_longest_cycle_rot",
+    "seq_longest_cycle_rotr",
+    "seq_longest_cycle_rev_converse",
+    "seq_longest_cycle_rev",
+    "seq_longest_cycle_card",
+    "seq_longest_cycle_exists",
+    "seq_longest_cycle_existsP",
+    "seq_longest_cycle_ground_K3",
+    "seq_longest_cycle_ground_K4_triangle",
+    "seq_longest_cycle_ground_K2"
+   ]
+  }
+ }
+}

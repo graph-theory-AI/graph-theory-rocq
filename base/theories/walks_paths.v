@@ -23,10 +23,12 @@
     meta/library_primitives/path-edges.json, section "Edges traversed by a
     sequence" below), genuine cycles of a relation, [seq_cycle] and
     [seq_cycleb] (registry meta/library_primitives/genuine-cycle.json, section
-    "Genuine cycles of a sequence" below), and the edges of a cyclic sequence,
+    "Genuine cycles of a sequence" below), the edges of a cyclic sequence,
     [seq_cycle_edge_list], [seq_cycle_edge_set], [seq_cycle_graph_edge_set] and
     [seq_next_edge_set] (registry meta/library_primitives/cycle-edges.json, section
-    "Edges of a cyclic sequence" below).
+    "Edges of a cyclic sequence" below), and longest genuine cycles, [seq_longest_cycle]
+    (registry meta/library_primitives/longest-cycle.json, section "Longest genuine
+    cycles" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -2126,3 +2128,222 @@ by split; apply/seq_next_edge_setP; [exists q0 | exists q2; rewrite // setUC].
 Qed.
 
 End CycleEdgesGrounding.
+
+(** ** Longest genuine cycles
+
+    [seq_longest_cycle r c] states that [c] is a genuine cycle of the relation [r] (see
+    [seq_cycle]: at least three pairwise distinct entries, consecutive entries and the
+    closing pair related) at least as long as every genuine cycle of [r].  "Longest" is
+    the maximum LENGTH over the whole carrier, other components included, not inclusion
+    maximality (registry meta/library_primitives/longest-cycle.json).  The body uses the
+    Boolean genuine-cycle predicate [seq_cycleb], so it is convertible with X212's helper;
+    [seq_longest_cycleE] gives the Prop view through [seq_cycle].  The relation is
+    arbitrary: no symmetry, irreflexivity or inhabitance premise.
+
+    Upstream audit (2026-10-03; MathComp 2.5.0, coq-graph-theory 0.9.7).  Neither library
+    names a longest cycle of a raw sequence.  MathComp supplies [ucycle], [size], the
+    cardinality bound of duplicate-free sequences and [ex_maxnP], which the conditional
+    existence below uses.  The directed [Digraph.core.dipath.dicycle] admits loops and
+    digons, a different admissibility class: Digraph X2's [longest_dicycle] stays separate.
+
+    Specification, every clause proved below:
+    - views: the Prop view; X10's nested view with curried competitor premises; the [and3]
+      view over ALL [ucycle] competitors (Hom U3), where a competitor with at most two
+      entries is never longer than a genuine cycle (the size split is proved);
+    - projections: a genuine cycle, a [ucycle], duplicate-free, with more than two entries,
+      and the maximum bound against genuine cycles and against every [ucycle];
+    - degenerate sequences [[::]], [[:: x]] and [[:: x; y]] are never longest cycles, and a
+      relation without genuine cycles has no longest cycle (no default witness);
+    - ties: longest cycles have equal length, and a genuine cycle of that length is longest;
+      invariance under [rot] and [rotr];
+    - reversal: a longest cycle of the converse relation in general, and of [r] itself under
+      the hypothesis [symmetric r], a sufficient condition;
+    - finite carriers: the length is at most [#|T|], and a longest cycle exists exactly when
+      some genuine cycle does ([seq_longest_cycle_existsP]).
+    Grounding: the triangle of [K_3] is longest in both orientations, a triangle of [K_4] is
+    a genuine cycle but not a longest one, and [K_2] has no longest cycle. *)
+Section SeqLongestCycle.
+Variables (T : eqType) (r : rel T).
+Implicit Types (c d : seq T) (x y : T).
+
+(** [c] is a genuine cycle of [r] at least as long as every genuine cycle of [r]
+    (the Boolean genuine-cycle predicate keeps X212's body convertible). *)
+Definition seq_longest_cycle c : Prop :=
+  seq_cycleb r c /\ forall d, seq_cycleb r d -> size d <= size c.
+
+(** The Prop view, through [seq_cycle]. *)
+Lemma seq_longest_cycleE c :
+  seq_longest_cycle c <-> seq_cycle r c /\ forall d, seq_cycle r d -> size d <= size c.
+Proof.
+split=> -[/seq_cycleP cc mx]; split=> // d /seq_cycleP; exact: mx.
+Qed.
+
+(** The nested view with curried competitor premises (X10's body). *)
+Lemma seq_longest_cycle_nestedE c :
+  seq_longest_cycle c <->
+  ucycle r c /\ 2 < size c /\ forall d, ucycle r d -> 2 < size d -> size d <= size c.
+Proof.
+split=> [[/andP[uc sc] mx]|[uc [sc mx]]].
+  by split=> //; split=> // d ud sd; apply: mx; apply/andP; split; [exact: ud | exact: sd].
+by split=> [|d /andP[ud sd]]; [apply/andP; split; [exact: uc | exact: sc] | exact: mx].
+Qed.
+
+(** The view over ALL [ucycle] competitors (Hom U3's [and3] body): a competitor
+    with at most two entries is never longer than a genuine cycle, so bounding
+    every [ucycle] is the same as bounding every genuine cycle. *)
+Lemma seq_longest_cycle_ucycleE c :
+  seq_longest_cycle c <-> [/\ ucycle r c, 2 < size c & forall d, ucycle r d -> size d <= size c].
+Proof.
+split=> [[/andP[uc sc] mx]|[uc sc mx]].
+  split=> // d ud; case: (ltnP 2 (size d)) => sd; first by apply: mx; apply/andP; split; [exact: ud | exact: sd].
+  exact: leq_trans sd (ltnW sc).
+by split=> [|d /andP[ud _]]; [apply/andP; split; [exact: uc | exact: sc] | exact: mx].
+Qed.
+
+Lemma seq_longest_cycle_cycleb c : seq_longest_cycle c -> seq_cycleb r c.
+Proof. by case. Qed.
+
+Lemma seq_longest_cycle_cycle c : seq_longest_cycle c -> seq_cycle r c.
+Proof. by case=> /seq_cycleP. Qed.
+
+Lemma seq_longest_cycle_ucycle c : seq_longest_cycle c -> ucycle r c.
+Proof. by case/seq_longest_cycle_ucycleE. Qed.
+
+Lemma seq_longest_cycle_uniq c : seq_longest_cycle c -> uniq c.
+Proof. by move/seq_longest_cycle_cycle/seq_cycle_uniq. Qed.
+
+Lemma seq_longest_cycle_size c : seq_longest_cycle c -> 2 < size c.
+Proof. by case/seq_longest_cycle_ucycleE. Qed.
+
+(** Maximality, against genuine cycles and against every [ucycle]. *)
+Lemma seq_longest_cycle_max c d : seq_longest_cycle c -> seq_cycle r d -> size d <= size c.
+Proof. by case/seq_longest_cycleE=> _ mx; apply: mx. Qed.
+
+Lemma seq_longest_cycle_max_ucycle c d : seq_longest_cycle c -> ucycle r d -> size d <= size c.
+Proof. by case/seq_longest_cycle_ucycleE=> _ _ mx; apply: mx. Qed.
+
+(** Degenerate sequences are never longest cycles. *)
+Lemma seq_longest_cycle_nil : ~ seq_longest_cycle [::].
+Proof. by move/seq_longest_cycle_cycle/seq_cycle_nil. Qed.
+
+Lemma seq_longest_cycle_seq1 x : ~ seq_longest_cycle [:: x].
+Proof. by move/seq_longest_cycle_cycle/seq_cycle_seq1. Qed.
+
+Lemma seq_longest_cycle_pair x y : ~ seq_longest_cycle [:: x; y].
+Proof. by move/seq_longest_cycle_cycle/seq_cycle_pair. Qed.
+
+(** Without a genuine cycle there is no longest cycle: no default witness. *)
+Lemma seq_longest_cycle_none : (forall d, ~ seq_cycle r d) -> forall c, ~ seq_longest_cycle c.
+Proof. by move=> none c /seq_longest_cycle_cycle/none. Qed.
+
+(** Ties: longest cycles have the same length, and a genuine cycle of that
+    length is longest too ("longest" is maximum length, not inclusion maximality). *)
+Lemma seq_longest_cycle_size_eq c d :
+  seq_longest_cycle c -> seq_longest_cycle d -> size c = size d.
+Proof.
+move=> lc ld; apply/eqP; rewrite eqn_leq.
+by rewrite (seq_longest_cycle_max ld (seq_longest_cycle_cycle lc))
+           (seq_longest_cycle_max lc (seq_longest_cycle_cycle ld)).
+Qed.
+
+Lemma seq_longest_cycle_tie c d :
+  seq_longest_cycle c -> seq_cycle r d -> size d = size c -> seq_longest_cycle d.
+Proof.
+move=> lc cd sd; apply/seq_longest_cycleE; split=> // e ce.
+by rewrite sd; apply: seq_longest_cycle_max lc ce.
+Qed.
+
+(** Rotation. *)
+Lemma seq_longest_cycle_rot n c : seq_longest_cycle (rot n c) <-> seq_longest_cycle c.
+Proof.
+rewrite !seq_longest_cycleE size_rot.
+by split=> -[cc mx]; split=> //; move: cc; rewrite seq_cycle_rot.
+Qed.
+
+Lemma seq_longest_cycle_rotr n c : seq_longest_cycle (rotr n c) <-> seq_longest_cycle c.
+Proof. exact: seq_longest_cycle_rot. Qed.
+
+End SeqLongestCycle.
+
+(** Reversal: a longest cycle of the converse relation in general, of the same
+    relation under the hypothesis [symmetric r], a sufficient condition. *)
+Lemma seq_longest_cycle_rev_converse (T : eqType) (r : rel T) (c : seq T) :
+  seq_longest_cycle r (rev c) <-> seq_longest_cycle (fun x y => r y x) c.
+Proof.
+rewrite !seq_longest_cycleE size_rev seq_cycle_rev_converse.
+by split=> -[cc mx]; split=> // d cd; rewrite -(size_rev d); apply: mx; apply/seq_cycle_rev_converse.
+Qed.
+
+Lemma seq_longest_cycle_rev (T : eqType) (r : rel T) (c : seq T) :
+  symmetric r -> seq_longest_cycle r (rev c) <-> seq_longest_cycle r c.
+Proof.
+move=> rs; rewrite !seq_longest_cycleE size_rev.
+by split=> -[cc mx]; split=> //; move: cc; rewrite seq_cycle_rev.
+Qed.
+
+(** Finite carriers: the length is at most the number of vertices, and a
+    longest cycle exists exactly when some genuine cycle does. *)
+Lemma seq_longest_cycle_card (T : finType) (r : rel T) (c : seq T) :
+  seq_longest_cycle r c -> size c <= #|T|.
+Proof. by move/seq_longest_cycle_uniq/card_uniqP <-; apply: max_card. Qed.
+
+Lemma seq_longest_cycle_exists (T : finType) (r : rel T) :
+  (exists c, seq_cycle r c) -> exists c, seq_longest_cycle r c.
+Proof.
+case=> c0 cc0.
+pose P n := [exists t : n.-tuple T, seq_cycleb r t].
+have bnd : forall n, P n -> n <= #|T|.
+  move=> n /existsP[t /seq_cycleP/seq_cycle_uniq/card_uniqP ut].
+  by rewrite -(size_tuple t) -ut max_card.
+have ex : exists n, P n by exists (size c0); apply/existsP; exists (in_tuple c0); apply/seq_cycleP.
+case: (ex_maxnP ex bnd) => n /existsP[t ct] mx.
+exists t; split=> // d cd; rewrite size_tuple; apply: mx.
+by apply/existsP; exists (in_tuple d).
+Qed.
+
+Lemma seq_longest_cycle_existsP (T : finType) (r : rel T) :
+  (exists c, seq_longest_cycle r c) <-> (exists c, seq_cycle r c).
+Proof.
+split=> -[c h]; last exact: seq_longest_cycle_exists (ex_intro _ c h).
+by exists c; apply: seq_longest_cycle_cycle h.
+Qed.
+
+(** ** Grounding *)
+Section LongestCycleGrounding.
+Local Notation o0 := (@Ordinal 3 0 isT).
+Local Notation o1 := (@Ordinal 3 1 isT).
+Local Notation o2 := (@Ordinal 3 2 isT).
+Local Notation q0 := (@Ordinal 4 0 isT).
+Local Notation q1 := (@Ordinal 4 1 isT).
+Local Notation q2 := (@Ordinal 4 2 isT).
+Local Notation q3 := (@Ordinal 4 3 isT).
+
+(** The triangle of [K_3] is a longest cycle, in both orientations (a tie). *)
+Lemma seq_longest_cycle_ground_K3 :
+  seq_longest_cycle (@edge_rel 'K_3) [:: o0; o1; o2] /\
+  seq_longest_cycle (@edge_rel 'K_3) [:: o2; o1; o0].
+Proof.
+have l : seq_longest_cycle (@edge_rel 'K_3) [:: o0; o1; o2].
+  split=> // d /seq_cycleP/seq_cycle_uniq/card_uniqP <-.
+  by apply: leq_trans (max_card _) _; rewrite card_ord.
+by split=> //; apply/(seq_longest_cycle_rev [:: o0; o1; o2] (@sg_sym _)).
+Qed.
+
+(** A triangle of [K_4] is a genuine cycle but not a longest one: [K_4] has a
+    four-cycle. *)
+Lemma seq_longest_cycle_ground_K4_triangle :
+  seq_cycle (@edge_rel 'K_4) [:: q0; q1; q2] /\
+  ~ seq_longest_cycle (@edge_rel 'K_4) [:: q0; q1; q2].
+Proof.
+split; first by apply/seq_cycleP.
+by case=> _ /(_ [:: q0; q1; q2; q3] isT).
+Qed.
+
+(** A digon of [K_2] is not a longest cycle, and [K_2] has none at all. *)
+Lemma seq_longest_cycle_ground_K2 (c : seq 'K_2) : ~ seq_longest_cycle (@edge_rel 'K_2) c.
+Proof.
+move=> lc; have := seq_longest_cycle_card lc; rewrite card_ord.
+by rewrite leqNgt (seq_longest_cycle_size lc).
+Qed.
+
+End LongestCycleGrounding.
