@@ -66,7 +66,8 @@
     [complexity], [finite_graph], [graph_metric] (distances), [list_flexibility],
     [posets], [surface], [bipartitions] (supplied and existential finite
     bipartitions, relation colourings, and edge-deletion adapters), [walks_paths] (vertex sequences: [seq_vertices], the
-    support of a raw sequence, with its correspondence to the library [Path]). *)
+    support of a raw sequence, with its correspondence to the library [Path]), [incidence]
+    ([incidence_degree]: the number of members of a supplied finite family containing a vertex). *)
 
 From mathcomp Require Export all_boot.
 (* WP4b: the core undirected vocabulary of coq-graph-theory is exported from ONE place.
@@ -102,6 +103,7 @@ From GTBase Require Export graph_metric.
 From GTBase Require Export list_flexibility.
 From GTBase Require Export posets.
 From GTBase Require Export monochromatic.
+From GTBase Require Export incidence.
 From GTBase Require Export surface.
 From GTBase Require Export walks_paths.
 

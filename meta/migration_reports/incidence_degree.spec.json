@@ -1,0 +1,500 @@
+{
+  "family": "incidence-degree",
+  "canonical_name": "GTBase.incidence.incidence_degree",
+  "canonical_short_name": "incidence_degree",
+  "relation": "supplied-family count: X36/X84/X37/X38/X6/X73 and the public Hypergraph hg_degree and ClassicalLemmas edeg convert to GTBase.incidence.incidence_degree F v := #|[set e in F | v \\in e]| for an ARBITRARY finite family on an arbitrary finType (no edge, uniformity, nonemptiness or palette premise); X108 x108_degree_in E W v, the members containing v and inside W, equals the canonical count of the explicitly restricted family [set e in E | e \\subset W] (a proved equality, zero for v outside W).",
+  "baseline_commit": "a54026d37a8b40d53340be71be783ac5d5fe3635",
+  "namespaces": {
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "hypergraph-theory": "Hypergraph",
+    "classical-lemmas": "ClassicalLemmas",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/incidence.v",
+    "base/theories/common.v",
+    "extremal-graph-theory/theories/migration/incidence_degree.v",
+    "graph-theory-misc/theories/migration/incidence_degree.v",
+    "hypergraph-theory/theories/migration/incidence_degree.v",
+    "classical-lemmas/theories/migration/incidence_degree.v"
+  ],
+  "extra_certificates": [
+    "GTBase.incidence.incidence_degree_le",
+    "GTBase.incidence.incidence_degree_set0",
+    "GTBase.incidence.incidence_degree_set1",
+    "GTBase.incidence.incidence_degree_gt0",
+    "GTBase.incidence.incidence_degree_subset",
+    "GTBase.incidence.incidence_degree_setD",
+    "GTBase.incidence.incidence_degree_inside_out",
+    "GTBase.incidence.incidence_degree_insideT",
+    "GTBase.common.incidence_degree_edges"
+  ],
+  "summary": [
+    "Batch A, family A10 (supplied-family incidence degree). GTBase.incidence.incidence_degree F v := #|[set e in F | v \\in e]| counts the members of an ARBITRARY finite family on an arbitrary finType; no edge, uniformity, nonemptiness or palette premise is added. Six corpus copies (X36 x36_degree_in_edge_set, X84 x84_degree_in, X37/X38 xNN_subgraph_degree, X6 x6_hg_degree, X73 x73_hyperdegree) and the two explicitly enrolled public sources (Hypergraph.foundations.hypergraph.hg_degree in its Section context, ClassicalLemmas.konig.line_colouring.edeg) convert to it. X108 x108_degree_in E W v keeps its explicit inside-W restriction: it equals incidence_degree [set e in E | e \\subset W] v (a proved equality, conjunction order), zero for v outside W. GTBase.common.incidence_degree_edges gives #|N(v)| at E(G).",
+    "",
+    "Ten statements are affected through fourteen chains: X36, X84 (cycle edge sets, count, cycle length), X85 (X84's count, across files), X37, X38, X6, XE2 #833 (X6's degree, across files), X73 (regularity), X108 (d-degeneracy) and X225 (the foundation's degeneracy test, opaque witness, least degeneracy, skeletal degeneracy and d_max). FoundationLegacy keeps the original Section context; the witness's two support lemmas hg_degree_le and hg_degenerate_card are copied verbatim, statement and proof, with frozen references, so the witness proof is the original one and closed over the frozen degree; they are proof support, not rows. The two least naturals are compared through eq_ex_minn (they are not convertible); no equality of proofs is claimed. hg_restrict and hg_skeleton stay shared and unchanged. X225 keeps ck before the pattern, K after its three guards, both exponents and the eventual inequality. M1 edge-set aliases and every other helper stay live in the per-row copies (no pre-M1 claim). Packaging: ClassicalLemmas maps GTBase (MathComp-only incidence.v), the root Makefile has classical-lemmas: base, and only edeg_setD's unfolding script changed; all classical, Packing and Hypergraph theorem types are unchanged."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X36.x36_degree_in_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X36.v",
+      "name": "x36_degree_in_edge_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x36_degree_in_edge_set",
+      "substitutions": {},
+      "certificate": "Extremal.migration.incidence_degree.x36_degree_in_edge_set_compat",
+      "live_unfolds_to": "incidence_degree F v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X84.x84_degree_in",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_degree_in",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x84_degree_in",
+      "substitutions": {},
+      "certificate": "Extremal.migration.incidence_degree.x84_degree_in_compat",
+      "live_unfolds_to": "incidence_degree F v"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X37.x37_subgraph_degree",
+      "path": "graph-theory-misc/theories/conjectures/X37.v",
+      "name": "x37_subgraph_degree",
+      "frozen_path": "graph-theory-misc/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x37_subgraph_degree",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.incidence_degree.x37_subgraph_degree_compat",
+      "live_unfolds_to": "incidence_degree F v"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X38.x38_subgraph_degree",
+      "path": "graph-theory-misc/theories/conjectures/X38.v",
+      "name": "x38_subgraph_degree",
+      "frozen_path": "graph-theory-misc/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x38_subgraph_degree",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.incidence_degree.x38_subgraph_degree_compat",
+      "live_unfolds_to": "incidence_degree F v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X6.x6_hg_degree",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_hg_degree",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x6_hg_degree",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.x6_hg_degree_compat",
+      "live_unfolds_to": "incidence_degree E v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X73.x73_hyperdegree",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_hyperdegree",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x73_hyperdegree",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.x73_hyperdegree_compat",
+      "live_unfolds_to": "incidence_degree E v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X108.x108_degree_in",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_degree_in",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x108_degree_in",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.x108_degree_in_compat",
+      "live_unfolds_to": "incidence_degree [set e in E | e \\subset W] v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_degree",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_degree",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.hg_degree",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.hg_degree_compat",
+      "live_unfolds_to": "incidence_degree E v"
+    },
+    {
+      "kind": "source",
+      "qualified": "ClassicalLemmas.konig.line_colouring.edeg",
+      "path": "classical-lemmas/theories/konig/line_colouring.v",
+      "name": "edeg",
+      "frozen_path": "classical-lemmas/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.edeg",
+      "substitutions": {},
+      "certificate": "ClassicalLemmas.migration.incidence_degree.edeg_compat",
+      "live_unfolds_to": "incidence_degree F v"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X36.x36_nonempty_k_divisible_subgraph",
+      "path": "extremal-graph-theory/theories/conjectures/X36.v",
+      "name": "x36_nonempty_k_divisible_subgraph",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X36Legacy.nonempty_k_divisible_subgraph",
+      "substitutions": {
+        "x36_degree_in_edge_set": "Legacy.x36_degree_in_edge_set",
+        "x36_nonempty_k_divisible_subgraph": "nonempty_k_divisible_subgraph"
+      },
+      "certificate": "Extremal.migration.incidence_degree.x36_nonempty_k_divisible_subgraph_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X84.x84_cycle_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_cycle_edge_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X84Legacy.cycle_edge_set",
+      "substitutions": {
+        "x84_degree_in": "Legacy.x84_degree_in",
+        "x84_cycle_edge_set": "cycle_edge_set"
+      },
+      "certificate": "Extremal.migration.incidence_degree.x84_cycle_edge_set_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X84.x84_cycle_count",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_cycle_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X84Legacy.cycle_count",
+      "substitutions": {
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_cycle_count": "cycle_count"
+      },
+      "certificate": "Extremal.migration.incidence_degree.x84_cycle_count_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X84.x84_has_cycle_length",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_has_cycle_length",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X84Legacy.has_cycle_length",
+      "substitutions": {
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_has_cycle_length": "has_cycle_length"
+      },
+      "certificate": "Extremal.migration.incidence_degree.x84_has_cycle_length_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X37.x37_degree_class_size",
+      "path": "graph-theory-misc/theories/conjectures/X37.v",
+      "name": "x37_degree_class_size",
+      "frozen_path": "graph-theory-misc/theories/migration/incidence_degree.v",
+      "frozen": "X37Legacy.degree_class_size",
+      "substitutions": {
+        "x37_subgraph_degree": "Legacy.x37_subgraph_degree",
+        "x37_degree_class_size": "degree_class_size"
+      },
+      "certificate": "GTMisc.migration.incidence_degree.x37_degree_class_size_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X37.x37_close_to_uniform_degree_class",
+      "path": "graph-theory-misc/theories/conjectures/X37.v",
+      "name": "x37_close_to_uniform_degree_class",
+      "frozen_path": "graph-theory-misc/theories/migration/incidence_degree.v",
+      "frozen": "X37Legacy.close_to_uniform_degree_class",
+      "substitutions": {
+        "x37_degree_class_size": "degree_class_size",
+        "x37_close_to_uniform_degree_class": "close_to_uniform_degree_class"
+      },
+      "certificate": "GTMisc.migration.incidence_degree.x37_close_to_uniform_degree_class_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X38.x38_degree_class_size",
+      "path": "graph-theory-misc/theories/conjectures/X38.v",
+      "name": "x38_degree_class_size",
+      "frozen_path": "graph-theory-misc/theories/migration/incidence_degree.v",
+      "frozen": "X38Legacy.degree_class_size",
+      "substitutions": {
+        "x38_subgraph_degree": "Legacy.x38_subgraph_degree",
+        "x38_degree_class_size": "degree_class_size"
+      },
+      "certificate": "GTMisc.migration.incidence_degree.x38_degree_class_size_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X73.x73_regular",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_regular",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X73Legacy.hyperdegree_regular",
+      "substitutions": {
+        "x73_hyperdegree": "Legacy.x73_hyperdegree",
+        "x73_regular": "hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.x73_regular_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X108.x108_d_degenerate",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_d_degenerate",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X108Legacy.d_degenerate",
+      "substitutions": {
+        "x108_degree_in": "Legacy.x108_degree_in",
+        "x108_d_degenerate": "d_degenerate"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.x108_d_degenerate_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_degenerate_leb",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_degenerate_leb",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.degenerate_leb",
+      "substitutions": {
+        "hg_degree": "Legacy.hg_degree",
+        "hg_degenerate_leb": "degenerate_leb"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_degenerate_leb_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_degenerate_ex",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_degenerate_ex",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.degenerate_ex",
+      "substitutions": {
+        "hg_degenerate_leb": "degenerate_leb",
+        "hg_degenerate_ex": "degenerate_ex"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_degenerate_ex_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_degeneracy",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_degeneracy",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.degeneracy",
+      "substitutions": {
+        "hg_degenerate_ex": "degenerate_ex",
+        "hg_degeneracy": "degeneracy"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_degeneracy_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_skel_degeneracy",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_skel_degeneracy",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.skel_degeneracy",
+      "substitutions": {
+        "hg_degeneracy": "degeneracy",
+        "hg_skel_degeneracy": "skel_degeneracy"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_skel_degeneracy_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_dmax",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_dmax",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.dmax",
+      "substitutions": {
+        "hg_skel_degeneracy": "skel_degeneracy",
+        "hg_dmax": "dmax"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_dmax_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X36.alon_friedland_kalai_divisible_subgraph_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X36.v",
+      "name": "alon_friedland_kalai_divisible_subgraph_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X36Legacy.alon_friedland_kalai_divisible_subgraph_statement",
+      "substitutions": {
+        "x36_nonempty_k_divisible_subgraph": "nonempty_k_divisible_subgraph"
+      },
+      "certificate": "Extremal.migration.incidence_degree.alon_friedland_kalai_divisible_subgraph_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "odd_cycle_free_turan2_unique_cycle_extremal_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X84Legacy.odd_cycle_free_turan2_unique_cycle_extremal_statement",
+      "substitutions": {
+        "x84_has_cycle_length": "has_cycle_length",
+        "x84_cycle_count": "cycle_count"
+      },
+      "certificate": "Extremal.migration.incidence_degree.odd_cycle_free_turan2_unique_cycle_extremal_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X85.arman_tsaturian_average_degree_cycle_count_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X85.v",
+      "name": "arman_tsaturian_average_degree_cycle_count_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X85Legacy.arman_tsaturian_average_degree_cycle_count_statement",
+      "substitutions": {
+        "x84_cycle_count": "X84Legacy.cycle_count"
+      },
+      "certificate": "Extremal.migration.incidence_degree.arman_tsaturian_average_degree_cycle_count_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X37.regular_graph_spanning_subgraph_degree_class_balance_statement",
+      "path": "graph-theory-misc/theories/conjectures/X37.v",
+      "name": "regular_graph_spanning_subgraph_degree_class_balance_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/incidence_degree.v",
+      "frozen": "X37Legacy.regular_graph_spanning_subgraph_degree_class_balance_statement",
+      "substitutions": {
+        "x37_close_to_uniform_degree_class": "close_to_uniform_degree_class"
+      },
+      "certificate": "GTMisc.migration.incidence_degree.regular_graph_spanning_subgraph_degree_class_balance_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X38.min_degree_spanning_subgraph_small_degree_multiplicity_statement",
+      "path": "graph-theory-misc/theories/conjectures/X38.v",
+      "name": "min_degree_spanning_subgraph_small_degree_multiplicity_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/incidence_degree.v",
+      "frozen": "X38Legacy.min_degree_spanning_subgraph_small_degree_multiplicity_statement",
+      "substitutions": {
+        "x38_degree_class_size": "degree_class_size"
+      },
+      "certificate": "GTMisc.migration.incidence_degree.min_degree_spanning_subgraph_small_degree_multiplicity_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X6.critical_three_uniform_min_degree_seven_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "critical_three_uniform_min_degree_seven_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X6Legacy.critical_three_uniform_min_degree_seven_statement",
+      "substitutions": {
+        "x6_hg_degree": "Legacy.x6_hg_degree"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.critical_three_uniform_min_degree_seven_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.XE2.erdos_833_statement",
+      "path": "hypergraph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_833_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "XE2Legacy.erdos_833_statement",
+      "substitutions": {
+        "x6_hg_degree": "Legacy.x6_hg_degree"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.erdos_833_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X73Legacy.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "substitutions": {
+        "x73_regular": "hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.regular_tripartite_hypergraph_matching_lower_bound_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X108Legacy.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "substitutions": {
+        "x108_d_degenerate": "d_degenerate"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.three_uniform_degenerate_hypergraph_ramsey_linear_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X225.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "kpartite_hypergraph_turan_exponent_dmax_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X225Legacy.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "substitutions": {
+        "hg_dmax": "FoundationLegacy.dmax"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.kpartite_hypergraph_turan_exponent_dmax_statement_compat"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X85.v",
+      "name": "x84_cycle_count",
+      "note": "Row X85 counts X84's cycle edge sets; frozen as X85Legacy over X84Legacy.cycle_count."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "hg_dmax",
+      "note": "Row X225 (arxiv:2401.00359#01) uses the foundation's d_max; frozen as X225Legacy over FoundationLegacy.dmax."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/XE2.v",
+      "name": "x6_hg_degree",
+      "note": "Row erdos:833 uses X6's degree; frozen as XE2Legacy over Legacy.x6_hg_degree."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X225.v",
+      "name": "hg_dmax",
+      "note": "x225_empty_pattern_guard_has_teeth: the live d_max of the empty pattern (through hg_dmax0); theorem type unchanged, file forced in the build."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X225.v",
+      "name": "kpartite_hypergraph_turan_exponent_dmax_statement",
+      "note": "Print Assumptions of the live row; unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "hg_degree",
+      "note": "x6_hg_degreeE and x73_hyperdegreeE equate the per-file copies with hg_degree by conversion; all three now name incidence_degree, theorem types unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x6_hg_degree",
+      "note": "x6_hg_degreeE and x73_hyperdegree_equiv_x6_hg_degree, by conversion; theorem types unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x73_hyperdegree",
+      "note": "x73_hyperdegreeE and x73_hyperdegree_equiv_x6_hg_degree, by conversion; theorem types unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Hypergraph.foundations.hypergraph.hg_restrict",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_restrict",
+      "note": "the members of E inside S; shared unchanged by the live and the frozen degeneracy chain (it reaches no degree)"
+    },
+    {
+      "qualified": "Hypergraph.foundations.hypergraph.hg_skeleton",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_skeleton",
+      "note": "the (i+1)-sets inside a member; shared unchanged by the live and the frozen skeletal degeneracy (it reaches no degree)"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate, exact types of the frozen and live helpers, Section-discharged types of the classical and foundation consumers, and Print All Dependencies closures of the frozen witness, degeneracy, d_max and rows, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A10-incidence_degree/ (outside the repository)"
+}
