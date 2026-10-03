@@ -77,6 +77,84 @@ class FamilyRegistries(unittest.TestCase):
         self.assertEqual(list(result['primitives']), ['another', 'fixture'])
         self.assertEqual(result['primitives']['fixture'], self.primitive)
 
+    def registry_declaration_fixture(self):
+        # Use the production package map: mocking it hid ClassicalLemmas
+        # certificates from this validation layer during the earlier extension.
+        for relative, body in {
+            'classical-lemmas/theories/konig/incidence.v':
+                'Definition degree : Prop := True.\n'
+                'Lemma degreeE : degree. Proof. exact I. Qed.\n',
+            'classical-lemmas/theories/migration/incidence_degree.v':
+                'Lemma edeg_compat : True. Proof. exact I. Qed.\n',
+        }.items():
+            path = self.root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(body)
+        self.primitive.update({
+            'owner': 'classical-lemmas', 'status': 'deprecated',
+            'fidelity': 'FAITHFUL',
+            'canonical_name': 'ClassicalLemmas.konig.incidence.degree',
+            'api_theorems': ['ClassicalLemmas.konig.incidence.degreeE'],
+            'compatibility_theorems': [
+                'ClassicalLemmas.migration.incidence_degree.edeg_compat'],
+            'upstream_audit': {'searched_modules': ['fixture'], 'result': 'fixture',
+                               'note': 'Namespace validation fixture.',
+                               'audited_at': '2026-10-03'},
+        })
+
+    def declaration_errors(self):
+        self.write_family()
+        with patch.object(I, 'ROOT', self.root):
+            _, errors = I.validate_registry({'helpers': []})
+        return errors
+
+    def test_production_classical_canonical_api_and_compatibility_names(self):
+        self.registry_declaration_fixture()
+        self.assertEqual(self.declaration_errors(), [])
+
+    def test_classical_missing_canonical_api_and_compatibility_are_rejected(self):
+        self.registry_declaration_fixture()
+        original = copy.deepcopy(self.primitive)
+        for field, message in (
+            ('canonical_name', 'canonical declaration does not exist'),
+            ('api_theorems', 'API theorem declarations do not exist'),
+            ('compatibility_theorems', 'compatibility declarations do not exist'),
+        ):
+            value = original[field]
+            name = value if isinstance(value, str) else value[0]
+            for missing in (name + '_missing', name.replace('ClassicalLemmas.',
+                                                           'classical-lemmas.')):
+                with self.subTest(field=field, missing=missing):
+                    self.primitive = copy.deepcopy(original)
+                    self.primitive[field] = missing if isinstance(value, str) else [missing]
+                    errors = self.declaration_errors()
+                    self.assertEqual(len(errors), 1, errors)
+                    self.assertIn(message, errors[0])
+
+    def test_upstream_owner_cannot_hide_missing_repository_canonical(self):
+        self.registry_declaration_fixture()
+        self.primitive['owner'] = 'upstream'
+        # Keep the other fields valid even before the namespace-map fix, so
+        # this regression isolates the keys-versus-logical-values error.
+        self.primitive['api_theorems'] = ['GTBase.common.evidence']
+        self.primitive['compatibility_theorems'] = ['GTBase.common.evidence']
+        for namespace in ('GTBase', 'ClassicalLemmas', 'Atlas', 'Chromatic', 'Digraph'):
+            with self.subTest(namespace=namespace):
+                self.primitive['canonical_name'] = namespace + '.missing.declaration'
+                errors = self.declaration_errors()
+                self.assertEqual(len(errors), 1, errors)
+                self.assertIn('canonical declaration does not exist', errors[0])
+
+    def test_upstream_external_canonical_and_repository_names_keep_their_roles(self):
+        self.registry_declaration_fixture()
+        self.primitive['owner'] = 'upstream'
+        self.primitive['canonical_name'] = 'GraphTheory.coloring.coloring'
+        self.assertEqual(self.declaration_errors(), [])
+        self.primitive['owner'] = 'base'
+        self.assertIn('canonical declaration does not exist', self.declaration_errors()[0])
+        self.primitive['canonical_name'] = 'GTBase.common.original'
+        self.assertEqual(self.declaration_errors(), [])
+
     def repository_source(self):
         name = 'GTBase.common.original'
         self.primitive['source_definitions'] = [name]
