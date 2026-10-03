@@ -16,7 +16,7 @@ Unset Printing Implicit Defensive.
 
 (** The X47 edge comprehension is the library's [E(G)]. *)
 Lemma x47_edge_setE (G : sgraph) : x47_edge_set G = E(G).
-Proof. by rewrite sg_edge_setE. Qed.
+Proof. by []. Qed.
 
 (** A walk leaving [S] uses an edge with one end in [S] and one outside. *)
 Lemma connect_crossing (V : finType) (r : rel V) (S : {set V}) (x y : V) :

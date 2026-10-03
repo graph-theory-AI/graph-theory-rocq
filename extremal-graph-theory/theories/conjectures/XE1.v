@@ -8,7 +8,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Definition xe1_subgraph_of (H G : sgraph) : Prop :=
-  exists f : H -> G, injective f /\ forall x y : H, x -- y -> f x -- f y.
+  has_subgraph G H.
 
 Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
   forall x y : G, x \in S -> y \in S -> x -- y -> False.
@@ -20,16 +20,16 @@ Definition xe1_no_isolated_vertices (G : sgraph) : Prop :=
   forall v : G, 0 < #|N(v)|.
 
 Definition xe1_complement_rel (G : sgraph) : rel G :=
-  fun x y => (x != y) && ~~ (x -- y).
+  @compl_rel G.
 
 Lemma xe1_complement_sym (G : sgraph) : symmetric (@xe1_complement_rel G).
-Proof. by move=> x y; rewrite /xe1_complement_rel eq_sym sgP. Qed.
+Proof. exact: compl_rel_sym. Qed.
 
 Lemma xe1_complement_irrefl (G : sgraph) : irreflexive (@xe1_complement_rel G).
-Proof. by move=> x; rewrite /xe1_complement_rel eqxx. Qed.
+Proof. exact: compl_rel_irrefl. Qed.
 
 Definition xe1_complement_graph (G : sgraph) : sgraph :=
-  SGraph (@xe1_complement_sym G) (@xe1_complement_irrefl G).
+  compl G.
 
 Definition xe1_graph_ramsey (H K : sgraph) (R : nat) : Prop :=
   forall G : sgraph, #|G| = R ->
@@ -54,18 +54,18 @@ Definition xe1_size_ramsey_number (H K : sgraph) (m : nat) : Prop :=
   forall m' : nat, xe1_size_ramsey H K m' -> m <= m'.
 
 Definition xe1_delete_edges_rel (G : sgraph) (F : {set {set G}}) : rel G :=
-  fun x y => (x -- y) && ([set x; y] \notin F).
+  @del_es_rel G F.
 
 Lemma xe1_delete_edges_sym (G : sgraph) (F : {set {set G}}) :
   symmetric (@xe1_delete_edges_rel G F).
-Proof. by move=> x y; rewrite /xe1_delete_edges_rel sgP setUC. Qed.
+Proof. exact: del_es_sym. Qed.
 
 Lemma xe1_delete_edges_irrefl (G : sgraph) (F : {set {set G}}) :
   irreflexive (@xe1_delete_edges_rel G F).
-Proof. by move=> x; rewrite /xe1_delete_edges_rel sg_irrefl. Qed.
+Proof. exact: del_es_irrefl. Qed.
 
 Definition xe1_delete_edges (G : sgraph) (F : {set {set G}}) : sgraph :=
-  SGraph (@xe1_delete_edges_sym G F) (@xe1_delete_edges_irrefl G F).
+  del_edge_set G F.
 
 Fixpoint xe1_hypercube (d : nat) : sgraph :=
   match d with

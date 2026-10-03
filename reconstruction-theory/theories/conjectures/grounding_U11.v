@@ -92,7 +92,7 @@ Qed.
     adjacency of the original graph. *)
 Lemma sdel_edge_sub (G : sgraph) (e : {set G}) (x y : sdel_edge e) :
   x -- y -> @sedge G x y.
-Proof. by rewrite /= /sde_rel => /andP[]. Qed.
+Proof. by move=> /andP[]. Qed.
 
 (** identity: deleting the empty "edge" [set0] changes nothing (a real edge has
     a nonempty endpoint set, so it is never equal to [set0]). *)
@@ -100,14 +100,18 @@ Lemma sdel_edge_set0 (G : sgraph) (x y : G) :
   @sedge (sdel_edge (set0 : {set G})) x y = @sedge G x y.
 Proof.
 have h : [set x; y] != set0 by apply/set0Pn; exists x; rewrite !inE eqxx.
-by rewrite /= /sde_rel h andbT.
+change ((x -- y) && ([set x; y] \notin [set set0]) = x -- y).
+by rewrite inE h andbT.
 Qed.
 
 (** witness: the deleted edge is genuinely gone — its two endpoints are no
     longer adjacent in [sdel_edge G [set x; y]]. *)
 Lemma sdel_edge_removes (G : sgraph) (x y : G) :
   @sedge (sdel_edge [set x; y]) x y = false.
-Proof. by rewrite /= /sde_rel eqxx andbF. Qed.
+Proof.
+change ((x -- y) && ([set x; y] \notin [set [set x; y]]) = false).
+by rewrite inE eqxx andbF.
+Qed.
 
 (** ----------------------------------------------------------------------------
     TECHNIQUE #3 — independent re-encoding of [sdel_edge] via base's [del_edges].
@@ -133,7 +137,7 @@ Proof. by rewrite /= /sde_rel eqxx andbF. Qed.
 Lemma sde_del_edges_rel (G : sgraph) (e : {set G}) :
   e \in E(G) -> sde_rel e =2 del_edges_rel e.
 Proof.
-move=> He x y; rewrite /sde_rel /del_edges_rel /=.
+move=> He x y; rewrite /sde_rel /del_es_rel /del_edges_rel /= inE.
 case: (boolP (x -- y)) => xy; last by [].
 have He2 : [set x; y] \in E(G) by rewrite in_edges.
 apply/idP/idP => [neq | nsub].
@@ -146,7 +150,10 @@ Qed.
 Lemma sde_del_edges_adj (G : sgraph) (e : {set G}) (x y : G) :
   e \in E(G) ->
   (@sedge (sdel_edge e) x y <-> @sedge (del_edges e) x y).
-Proof. by move=> He; rewrite /edge_rel /= (sde_del_edges_rel He). Qed.
+Proof.
+by move=> He; change (sde_rel e x y <-> @sedge (del_edges e) x y);
+  rewrite (sde_del_edges_rel He).
+Qed.
 
 (** Whole-graph faithfulness: on a genuine edge, U11's [sdel_edge e] and base's
     [del_edges e] are the SAME simple graph (isomorphic via the identity vertex

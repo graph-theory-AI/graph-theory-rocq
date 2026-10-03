@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X109 -- v2 Cereceda recolouring row *)
 
 From GTBase Require Export base.
+From GTBase Require Import colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,7 +11,7 @@ Unset Printing Implicit Defensive.
 
 Definition x109_proper_colouring
     (G : sgraph) (q : nat) (col : {ffun G -> 'I_q}) : bool :=
-  [forall x : G, [forall y : G, (x -- y) ==> (col x != col y)]].
+  colourings.proper_colouring col.
 
 Definition x109_recolour_step
     (G : sgraph) (q : nat) (c d : {ffun G -> 'I_q}) : bool :=

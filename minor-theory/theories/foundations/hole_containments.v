@@ -117,7 +117,7 @@ Qed.
 Lemma consec_spairs (G : sgraph) (a : G) (s : seq G) (x y : G) :
   x27_consecutive_in_cycle (a :: s) x y
   = ((x, y) \in spairs (a :: s ++ [:: a])) || ((y, x) \in spairs (a :: s ++ [:: a])).
-Proof. by rewrite /x27_consecutive_in_cycle rot1_cons -cats1 spairs_closeE. Qed.
+Proof. by rewrite /x27_consecutive_in_cycle /seq_cyclic_consecutiveb rot1_cons -cats1 spairs_closeE. Qed.
 
 (** ** Four vertices with the four cycle edges and no diagonal form a hole ***)
 
@@ -135,7 +135,7 @@ split; first by rewrite /ucycle /= ab bc cd da !inE e1 e2 e3 e4 e5 e6.
 split => // x y hx hy xy nxy.
 suff h : ((x, y) \in [:: (a, b); (b, c); (c, d); (d, a)])
       || ((y, x) \in [:: (a, b); (b, c); (c, d); (d, a)]).
-  by rewrite /x27_consecutive_in_cycle /=.
+  by rewrite /x27_consecutive_in_cycle /seq_cyclic_consecutiveb /=.
 have nac' : ~~ (c -- a) by rewrite sgP.
 have nbd' : ~~ (d -- b) by rewrite sgP.
 move: hx hy xy nxy; rewrite !inE -!orbA.
@@ -174,7 +174,7 @@ split.
 split; first by rewrite size_map.
 move=> x y /mapP[u hu ->] /mapP[v hv ->]; rewrite imono => uv.
 rewrite (inj_eq (isubgraph_inj i)) => nuv.
-have := ind u v hu hv uv nuv; rewrite /x27_consecutive_in_cycle -map_rot.
+have := ind u v hu hv uv nuv; rewrite /x27_consecutive_in_cycle /seq_cyclic_consecutiveb -map_rot.
 by case/orP => h; apply/orP; [left|right]; exact: mem_zip_map.
 Qed.
 

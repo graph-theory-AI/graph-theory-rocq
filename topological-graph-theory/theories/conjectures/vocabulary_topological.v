@@ -14,7 +14,9 @@
         [path (--)], while the library's [upath] / [Path] are indexed by their
         two ENDPOINTS; there is no equality or [<->] between them at equal
         arguments, only a translation that has to name the endpoints, so the
-        "duplication" is a re-encoding rather than a copy.
+        "duplication" is a re-encoding rather than a copy.  Since library migration B6
+        [x23_genuine_path] unfolds to [GTBase.walks_paths.seq_simple_path], and that
+        translation is [seq_simple_path_upath].
 
     The [girth_geq G 4 <-> triangle_free G] equivalence asked for by the X138
     entry of the same ledger section lives in

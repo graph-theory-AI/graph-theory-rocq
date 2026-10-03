@@ -121,7 +121,8 @@ w("## Foundation fidelity registry\n")
 w(f"- **{len(fidelity_entries)} audited primitives**: "
   f"{fidelity_counts['FAITHFUL']} faithful · {fidelity_counts['LIGHTWEIGHT']} lightweight · "
   f"{fidelity_counts['BROKEN']} broken.")
-w("- Registry: `meta/foundation_fidelity.json`; validate declarations and evidence names with "
+w("- Registry: module contracts in `meta/foundation_fidelity.json` and family verdicts in "
+  "`meta/foundation_fidelity/`; validate declarations and evidence names with "
   "`python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is "
   "never inferred from compilation.\n")
 w("| verdict | primitive | misuse watch |")

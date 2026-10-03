@@ -10,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X61 vocabulary ************************************************)
 
 Definition x61_induced_free (G H : sgraph) : Prop :=
-  forall S : {set G}, ~ inhabited (induced S ≃ H).
+  induced_free G H.
 
 Definition x61_neither_clique_nor_stable (H : sgraph) : Prop :=
   (exists a b : H, a != b /\ ~~ (a -- b)) /\

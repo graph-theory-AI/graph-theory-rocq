@@ -1,6 +1,7 @@
 (** * Packing.conjectures.X15 -- v2 fair matching representation rows *)
 
 From GTBase Require Export base.
+From Packing.foundations Require Import edge_partitions edge_families.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -11,19 +12,28 @@ Unset Printing Implicit Defensive.
 Definition x15_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
+(** Since the C1 library migration (2026-10-02) a transparent alias of the
+    coq-graph-theory [matching] (connectivity.v).  The original body, "M is a
+    set of edges of G in which every vertex lies in at most one member", is
+    frozen and certified equivalent in theories/migration/matching.v
+    ([x15_matching_compat]); the statements below are unchanged. *)
 Definition x15_matching (G : sgraph) (M : {set {set G}}) : Prop :=
-  M \subset x15_edge_set G /\
-  forall v : G, #|[set e in M | v \in e]| <= 1.
+  matching M.
 
+(** C3 compatibility alias of the public indexed edge partition. Empty and
+    repeated empty parts remain allowed. The original body and all affected
+    statements remain frozen in migration/matching.v; migration/edge_partitions.v
+    supplies this family's entry-point certificates over those same snapshots. *)
 Definition x15_edge_partition
     (G : sgraph) (m : nat) (E : 'I_m -> {set {set G}}) : Prop :=
-  (forall e : {set G},
-      (e \in x15_edge_set G) = [exists i : 'I_m, e \in E i]) /\
-  forall i j : 'I_m, i != j -> [disjoint E i & E j].
+  edge_partitions.edge_partition E.
 
+(** C4 compatibility alias: members may overlap or repeat, and zero indices
+    remain valid on every graph. C1's original source and all four statements
+    stay frozen in migration/matching.v; see migration/edge_families.v. *)
 Definition x15_edge_family
     (G : sgraph) (m : nat) (E : 'I_m -> {set {set G}}) : Prop :=
-  forall i : 'I_m, E i \subset x15_edge_set G.
+  edge_families.edge_family E.
 
 (** ** X15 statements ******************************************************)
 

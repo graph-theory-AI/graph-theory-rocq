@@ -9,10 +9,10 @@ Unset Printing Implicit Defensive.
 (** ** Local X172 vocabulary ***********************************************)
 
 Definition x172_path_edges (G : sgraph) (s : seq G) : {set {set G}} :=
-  [set e in [seq [set p.1; p.2] | p <- zip s (behead s)]].
+  seq_edge_set s.
 
 Definition x172_path_internal (G : sgraph) (s : seq G) : {set G} :=
-  [set x : G | (x \in s) && (x != head x s) && (x != last x s)].
+  seq_inner s.
 
 Definition x172_one_bridge_replacement (G H : sgraph) : Prop :=
   exists (a b : G) (f : G -> H) (p : seq H),

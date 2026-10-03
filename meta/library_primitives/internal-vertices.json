@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "family": "internal-vertices",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_interior",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "internal_path_vertices",
+      "internal_vertices",
+      "path_internal"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X157.x157_path_internal",
+      "Digraph.conjectures.X2.x2_path_internal",
+      "Extremal.conjectures.XE2.xe2_internal_path_vertices",
+      "GTMisc.conjectures.X172.x172_path_internal",
+      "Minor.conjectures.X175.x175_path_internal",
+      "Minor.conjectures.X67.x67_internal_vertices"
+    ],
+    "consumers_remaining": 7,
+    "relation": "definitional equality for X157, X2 and X67; extensional equality by membership for X175 and XE2 (seq_interior) and X172 (seq_inner)",
+    "semantic_classes": {
+      "given-endpoints": {
+        "count": 2,
+        "verdict": "equivalent",
+        "certificate": "GTBase.walks_paths.in_seq_interior",
+        "note": "X157 and X67: support of the sequence minus the two given endpoints, convertible to seq_interior."
+      },
+      "head-plus-tail": {
+        "count": 2,
+        "verdict": "equivalent",
+        "certificate": "GTBase.walks_paths.seq_interior_head",
+        "note": "X2 (convertible) and X175 (boolean comprehension, extensional) keep their head-plus-tail representation as seq_interior x y (x :: s)."
+      },
+      "boolean-comprehension": {
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTBase.walks_paths.in_seq_interior",
+        "note": "XE2: [set v | [&& v \\in p, v != x & v != y]], extensionally equal to seq_interior x y p."
+      },
+      "own-endpoints": {
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTBase.walks_paths.in_seq_inner",
+        "note": "X172 removes its own first and last values and is set0 on the empty sequence: seq_inner."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.internal_vertices.local_connectivity_k_colouring_polytime_statement_compat",
+      "Chromatic.migration.internal_vertices.x157_internally_disjoint_xy_paths_compat",
+      "Chromatic.migration.internal_vertices.x157_max_local_connectivity_at_most_compat",
+      "Chromatic.migration.internal_vertices.x157_path_internal_compat",
+      "Chromatic.migration.internal_vertices.x157_polytime_colouring_or_none_compat",
+      "Digraph.migration.internal_vertices.delta_plus_maderian_disjoint_union_statement_compat",
+      "Digraph.migration.internal_vertices.f_subdivision_complexity_dichotomy_statement_compat",
+      "Digraph.migration.internal_vertices.mader_delta0_transitive_tournament_statement_compat",
+      "Digraph.migration.internal_vertices.oriented_tree_mader_chi_linear_bound_statement_compat",
+      "Digraph.migration.internal_vertices.oriented_trees_delta_plus_maderian_statement_compat",
+      "Digraph.migration.internal_vertices.x2_path_internal_compat",
+      "Extremal.migration.internal_vertices.erdos_915_statement_compat",
+      "Extremal.migration.internal_vertices.xe2_internal_path_vertices_compat",
+      "Extremal.migration.internal_vertices.xe2_paths_internally_disjoint_compat",
+      "GTMisc.migration.internal_vertices.metric_lines_bridges_counterexamples_finitely_generated_statement_compat",
+      "GTMisc.migration.internal_vertices.x172_generated_by_bridge_replacement_compat",
+      "GTMisc.migration.internal_vertices.x172_one_bridge_replacement_compat",
+      "GTMisc.migration.internal_vertices.x172_path_internal_compat",
+      "Minor.migration.internal_vertices.kt_subdivision_clique_count_asymptotic_statement_compat",
+      "Minor.migration.internal_vertices.theta_triangle_free_bounded_degree_treewidth_statement_compat",
+      "Minor.migration.internal_vertices.x175_Kt_subdivision_compat",
+      "Minor.migration.internal_vertices.x175_path_internal_compat",
+      "Minor.migration.internal_vertices.x67_internal_vertices_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.in_seq_interior",
+      "GTBase.walks_paths.seq_interior_sub",
+      "GTBase.walks_paths.seq_interiorC",
+      "GTBase.walks_paths.seq_interior_nil",
+      "GTBase.walks_paths.seq_interior_seq1",
+      "GTBase.walks_paths.seq_interior_head",
+      "GTBase.walks_paths.seq_interior_rcons",
+      "GTBase.walks_paths.eq_seq_interior",
+      "GTBase.walks_paths.seq_interior_undup",
+      "GTBase.walks_paths.seq_interior_xx",
+      "GTBase.walks_paths.seq_interior_absent",
+      "GTBase.walks_paths.in_seq_inner",
+      "GTBase.walks_paths.seq_inner_nil",
+      "GTBase.walks_paths.seq_inner_seq1",
+      "GTBase.walks_paths.seq_inner_cons",
+      "GTBase.walks_paths.seq_inner_sub",
+      "GTBase.walks_paths.seq_interior_nodes",
+      "GTBase.walks_paths.seq_interior_val",
+      "GTBase.walks_paths.seq_inner_nodes",
+      "GTBase.walks_paths.seq_interior_ground_nil",
+      "GTBase.walks_paths.seq_interior_ground_seq1_endpoint",
+      "GTBase.walks_paths.seq_interior_ground_seq1_inner",
+      "GTBase.walks_paths.seq_interior_ground_path",
+      "GTBase.walks_paths.seq_interior_ground_repeated_endpoint",
+      "GTBase.walks_paths.seq_interior_ground_equal_endpoints",
+      "GTBase.walks_paths.seq_interior_ground_absent_endpoints",
+      "GTBase.walks_paths.seq_interior_ground_head_tail",
+      "GTBase.walks_paths.seq_inner_ground_nil",
+      "GTBase.walks_paths.seq_inner_ground_seq1",
+      "GTBase.walks_paths.seq_inner_ground_path",
+      "GTBase.walks_paths.seq_inner_ground_closed_walk"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.finset"
+      ],
+      "result": "thin-adapter",
+      "candidate": "GraphTheory.digraph.interior",
+      "note": "coq-graph-theory's interior p := [set x in p] :\\: [set x; y] is defined only for a packaged Path x y (a pathp-proved walk whose nodes are x :: val p). The local helpers take raw sequences, given endpoints (or, for X172, the sequence's own first and last values) and no walk, uniqueness or nonemptiness premise, so the canonical is GTBase.walks_paths.seq_interior x y s := seq_vertices s :\\: [set x; y], with seq_inner for the own-endpoint form; seq_interior_nodes, seq_interior_val and seq_inner_nodes state the exact correspondence with interior. Later variants x166_internals (target only), x216_internal (positional), x98_internal and x114_internal (Prop membership forms) are classified as distinct and not claimed. Legacy bodies and per-row certificates: meta/migration_reports/internal_vertices.md.",
+      "audited_at": "2026-10-02"
+    },
+    "migration_report": "meta/migration_reports/internal_vertices.md",
+    "reviewed_by": "path_review",
+    "reviewed_commit": "787a996de871fa52a55758e12ec673c8954e76e6",
+    "independent_review": "meta/migration_reviews/internal_vertices.md",
+    "migration_spec": "meta/migration_reports/internal_vertices.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/internal-vertices.json"
+  }
+}

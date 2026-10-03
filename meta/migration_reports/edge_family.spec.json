@@ -1,0 +1,200 @@
+{
+  "family": "edge-family",
+  "canonical_name": "Packing.foundations.edge_families.edge_family",
+  "canonical_short_name": "edge_family",
+  "relation": "Unconditional equivalence of the frozen pre-M1 edge-comprehension family and the public indexed family of subsets of E(G); the live source is a transparent alias.",
+  "baseline_commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+  "namespaces": {
+    "packing-theory": "Packing",
+    "cycle-theory": "Cycle"
+  },
+  "certificate_files": [
+    "packing-theory/theories/foundations/edge_families.v",
+    "packing-theory/theories/migration/edge_families.v",
+    "packing-theory/theories/migration/matching.v"
+  ],
+  "extra_certificates": [
+    "Packing.foundations.edge_families.edge_family_powersetP",
+    "Packing.foundations.edge_families.edge_family_member",
+    "Packing.foundations.edge_families.edge_family_subfamily",
+    "Packing.foundations.edge_families.edge_family_reindex",
+    "Packing.foundations.edge_families.edge_family_unionP",
+    "Packing.foundations.edge_families.not_edge_family_non_edge",
+    "Packing.foundations.edge_families.edge_family0",
+    "Packing.foundations.edge_families.edge_family_empty",
+    "Packing.foundations.edge_families.edge_family_full",
+    "Packing.foundations.edge_families.edge_family_K2_repeated",
+    "Packing.foundations.edge_families.K2_repeated_members_overlap",
+    "Packing.foundations.edge_families.not_edge_family_loop",
+    "Packing.foundations.edge_families.not_edge_family_empty_edge"
+  ],
+  "downstream_client": "packing-theory/theories/examples/edge_families.v",
+  "summary": [
+    "C4 migrates the compiled X15 indexed edge family: every member is a subset of E(G), with no cover, disjointness, nonempty-member or positive-index requirement. Overlap, repetition and empty members remain allowed; zero indices are vacuous on every graph.",
+    "C1 already froze the original helper, pre-M1 edge set, original matching, and all four full statements. The snapshots and all old theorem types are unchanged; only the C1 helper bridge unfolds the public alias. C2/C3 entry points remain unchanged.",
+    "The corpus underrepresentation row and its three explicit-constant LLM variants retain their different bounds, quantifier order, bipartiteness and positive-Delta guard, and natural-number floor/ceiling arithmetic. The existing fair_matching proof consumers and registered formal resolution retain their statements and status.",
+    "The public-only client covers membership, shrinking and arbitrary reindexing, repeated overlapping members on K2, zero indices on K2, empty members, and rejection of singleton-vertex and empty-vertex-set edges. X15alone stays excluded and unchanged."
+  ],
+  "frozen": [
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X15.x15_matching",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_matching",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x15_matching",
+      "substitutions": {},
+      "certificate": "Packing.migration.matching.x15_matching_compat",
+      "source_declaration_sha256": "e6463b96c81bb01d2d1a378f3a28cd1961ea0c76834ceabfcce06d16135f250b",
+      "source_body_sha256": "57564193048b7e342c1f78a3396f2725ae6bda85632d31927a7e4c3eabdbeeba"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X15.x15_edge_set",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x15_edge_set",
+      "substitutions": {},
+      "certificate": "Packing.migration.matching.x15_edge_set_compat",
+      "source_declaration_sha256": "145fb0fe7de64e6da68f822e906d5abdb1b65c3d18ba4627ae4dca52d4cc7af2",
+      "source_body_sha256": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
+      "note": "the comprehension body x15_edge_set had before M1 (M1 froze the same text as Packing.migration.simple_edges.Legacy.edge_set); the live name is the M1 alias sg_edge_set G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X15.x15_edge_family",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "x15_edge_family",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.edge_family",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_edge_set": "Legacy.x15_edge_set"
+      },
+      "certificate": "Packing.migration.edge_families.x15_edge_family_compat",
+      "source_declaration_sha256": "68541f1ce1822849adb2e988545e2c99da999279cd7cbf957ab1b14371cd2425",
+      "source_body_sha256": "f4b73237281f4b286028fa5a2bd86f2bc529917940264dba7b25c00670b69c23",
+      "live_unfolds_to": "edge_families.edge_family E"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.bipartite_matching_underrepresentation_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "bipartite_matching_underrepresentation_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.bipartite_matching_underrepresentation_statement",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_matching": "Legacy.x15_matching",
+        "x15_edge_set": "Legacy.x15_edge_set"
+      },
+      "certificate": "Packing.migration.edge_families.bipartite_matching_underrepresentation_statement_compat",
+      "source_declaration_sha256": "c5ebb4f3fc2471ea9dc879e96848f457fb020dad1a00f6fb0891bd6b1cb0d6c5",
+      "source_body_sha256": "eb0864e92be49bf91c8e3259470d9116aa3c73322d1dc0b6effd442e27b9a653",
+      "corpus": "v2",
+      "row": "arxiv:1611.03196#03",
+      "documented_status": "PROVED in foundations/fair_matching.v (formal resolution); unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "bipartite_matching_underrepresentation_llm_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.bipartite_matching_underrepresentation_llm_statement",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_matching": "Legacy.x15_matching",
+        "x15_edge_set": "Legacy.x15_edge_set"
+      },
+      "certificate": "Packing.migration.edge_families.bipartite_matching_underrepresentation_llm_statement_compat",
+      "source_declaration_sha256": "309b00d3bbd387a186081e571324001efbd2af907385287c96dfa084cc7b864f",
+      "source_body_sha256": "e7bc716d829d56e18ecb83fd497df541172bc6fd7b1c099c85af40d921f1b806",
+      "non_corpus": true,
+      "row": null,
+      "documented_status": "LLM-proof variant of row #03 with the explicit bound 32 (m+1)^3, proved in foundations/fair_matching.v; no corpus row; unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm2_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "bipartite_matching_underrepresentation_llm2_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.bipartite_matching_underrepresentation_llm2_statement",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.edge_families.bipartite_matching_underrepresentation_llm2_statement_compat",
+      "source_declaration_sha256": "9d932ece2ebd4d720926e1c71b83db344325b6bd0485536b76b3f8cd18260bbb",
+      "source_body_sha256": "6b7f20c03a7a9f7118f783ca5e10809b4038c82f90a8850a6a1b0f07ccb45751",
+      "non_corpus": true,
+      "row": null,
+      "documented_status": "LLM-proof variant of row #03 with the bound (m+1)^2 (16m+29), proved in foundations/fair_matching.v; no corpus row; unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X15.bipartite_matching_underrepresentation_llm3_statement",
+      "path": "packing-theory/theories/conjectures/X15.v",
+      "name": "bipartite_matching_underrepresentation_llm3_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "X15Legacy.bipartite_matching_underrepresentation_llm3_statement",
+      "substitutions": {
+        "x15_edge_family": "edge_family",
+        "x15_matching": "Legacy.x15_matching"
+      },
+      "certificate": "Packing.migration.edge_families.bipartite_matching_underrepresentation_llm3_statement_compat",
+      "source_declaration_sha256": "0071b6157c3884b3ee9229db71ddf2b88223146f24440b32829d37b01f176f88",
+      "source_body_sha256": "2e980ea0a266326a030179d35e63dd9f78cf597befda3e7f0757e963ce811887",
+      "non_corpus": true,
+      "row": null,
+      "documented_status": "LLM-proof variant of row #03 with the bound 12m+14, proved in foundations/fair_matching.v; no corpus row; unchanged"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "distinct_variants": [
+    {
+      "qualified": "Packing.conjectures.X15alone.x15_edge_family",
+      "path": "packing-theory/theories/conjectures/X15alone.v",
+      "name": "x15_edge_family",
+      "note": "Identical original helper body in a self-contained file excluded from the package project; preserve unchanged and do not claim its statement."
+    }
+  ],
+  "proof_consumers": [
+    "Packing.foundations.fair_matching.x15_rounds_instance",
+    "Packing.foundations.fair_matching.x15_llm3_proof",
+    "Packing.foundations.fair_matching.x15_llm2_proof",
+    "Packing.foundations.fair_matching.x15_llm_proof",
+    "Packing.foundations.fair_matching.bipartite_matching_underrepresentation"
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "x15_edge_family",
+      "note": "x15_rounds_instance and the four statement-proof corollaries are rebuilt and assumptions-checked; the registered formal resolution is checked at its unchanged exact type."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "bipartite_matching_underrepresentation_statement",
+      "note": "The existing named proof of this exact statement is rebuilt and checked for assumptions; the corpus theorem also passes its registered formal-resolution exact-type gate."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "bipartite_matching_underrepresentation_llm_statement",
+      "note": "The existing named proof of this exact statement is rebuilt and checked for assumptions; the corpus theorem also passes its registered formal-resolution exact-type gate."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "bipartite_matching_underrepresentation_llm2_statement",
+      "note": "The existing named proof of this exact statement is rebuilt and checked for assumptions; the corpus theorem also passes its registered formal-resolution exact-type gate."
+    },
+    {
+      "path": "packing-theory/theories/foundations/fair_matching.v",
+      "name": "bipartite_matching_underrepresentation_llm3_statement",
+      "note": "The existing named proof of this exact statement is rebuilt and checked for assumptions; the corpus theorem also passes its registered formal-resolution exact-type gate."
+    }
+  ],
+  "kernel_evidence": "Fresh exact helper/statement types, named assumptions and frozen/live dependencies are retained under coordination/evidence/C4-edge_family/. The five fair_matching consumers and unchanged registered formal resolution are separately checked."
+}

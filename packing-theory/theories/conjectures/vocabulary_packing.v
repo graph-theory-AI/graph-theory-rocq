@@ -29,6 +29,7 @@
     Axiom-free: no Axiom/Parameter/Admitted. *)
 
 From GTBase Require Import base common.
+From Packing.foundations Require Import matching.
 From Packing.conjectures Require Import U9 X5 X15 X18 X25 X26 X47 X111 XE1.
 
 Set Implicit Arguments.
@@ -89,40 +90,30 @@ Proof. by elim: r => //= r ->. Qed.
 
 (** ** Matchings: [X15]'s edge-set form is [connectivity.matching] ********
 
-    [x15_matching] says "every member is an edge, and every vertex lies in at
-    most one member"; the library's [matching] says "every member is an edge,
-    and two members sharing a vertex are equal".  The two second clauses are
-    [card_le1_eqP] apart. *)
+    Since the C1 library migration (2026-10-02) [x15_matching] IS a transparent
+    alias of [matching], so the bridge holds by reflexivity.  The original
+    body ("every member is an edge, and every vertex lies in at most one
+    member"; [card_le1_eqP] apart from the library clause) is frozen and
+    certified in theories/migration/matching.v; the general presentation lemma
+    is [Packing.foundations.matching.matching_at_most_oneP]. *)
 
 Lemma x15_matching_equiv_matching (G : sgraph) (M : {set {set G}}) :
   x15_matching M <-> matching M.
-Proof.
-split=> [[MS M1]|[MS M1]]; split.
-- by move=> e eM; rewrite -x15_edge_setE; exact: (subsetP MS).
-- move=> e1 e2 e1M e2M x xe1 xe2; symmetry.
-  move/card_le1_eqP: (M1 x) => H; apply: H; rewrite !inE.
-  + by rewrite e1M xe1.
-  + by rewrite e2M xe2.
-- by apply/subsetP => e eM; rewrite x15_edge_setE; exact: MS.
-- move=> v; apply/card_le1_eqP => e1 e2.
-  rewrite !inE => /andP[e1M ve1] /andP[e2M ve2].
-  exact: (M1 _ _ e2M e1M v ve2 ve1).
-Qed.
+Proof. by []. Qed.
 
 (** ** Perfect matchings: [X18] and [X25] declare the same notion *********
 
-    [x18_perfect_matching] asks for an [x15_matching] saturating every vertex;
-    [x25_perfect_matching] asks for a set of edges saturating every vertex.  The
-    "at most one" clause of [x15_matching] is implied by saturation, so the two
-    agree. *)
+    Since the C2 library migration (2026-10-02) both [x18_perfect_matching] and
+    [x25_perfect_matching] ARE transparent aliases of
+    [GTBase.common.perfect_matching], so the bridge holds by reflexivity.  The
+    original bodies ([x15_matching] saturating every vertex; a set of edges
+    saturating every vertex) are frozen and certified in
+    theories/migration/matching.v (C1) and theories/migration/simple_edges.v (M1). *)
 
 Lemma x18_perfect_matching_equiv_x25_perfect_matching
     (G : sgraph) (M : {set {set G}}) :
   x18_perfect_matching M <-> x25_perfect_matching M.
-Proof.
-split=> [[[MS _] M1]|[MS M1]]; first by split.
-by split=> //; split=> // v; rewrite (M1 v).
-Qed.
+Proof. by []. Qed.
 
 Print Assumptions x15_edge_setE.
 Print Assumptions hamiltonian_cycleGE.

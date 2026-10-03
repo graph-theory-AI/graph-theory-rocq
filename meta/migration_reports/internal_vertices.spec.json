@@ -1,0 +1,591 @@
+{
+  "family": "internal-vertices",
+  "canonical_name": "GTBase.walks_paths.seq_interior",
+  "canonical_short_name": "seq_interior",
+  "relation": "definitional equality for X157, X2 and X67 (seq_interior x y s is seq_vertices s :\\: [set x; y]); extensional equality by membership (in_seq_interior, in_seq_inner) for X175, XE2 and X172 (X172 through seq_inner)",
+  "baseline_commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "digraph-theory": "Digraph",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "chromatic-theory/theories/migration/internal_vertices.v",
+    "extremal-graph-theory/theories/migration/internal_vertices.v",
+    "graph-theory-misc/theories/migration/internal_vertices.v",
+    "minor-theory/theories/migration/internal_vertices.v",
+    "digraph-theory/theories/migration/internal_vertices.v",
+    "digraph-theory/theories/migration/path_vertices.v",
+    "minor-theory/theories/migration/path_vertices.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.in_seq_interior",
+    "GTBase.walks_paths.seq_interior_sub",
+    "GTBase.walks_paths.seq_interiorC",
+    "GTBase.walks_paths.seq_interior_nil",
+    "GTBase.walks_paths.seq_interior_seq1",
+    "GTBase.walks_paths.seq_interior_head",
+    "GTBase.walks_paths.seq_interior_rcons",
+    "GTBase.walks_paths.eq_seq_interior",
+    "GTBase.walks_paths.seq_interior_undup",
+    "GTBase.walks_paths.seq_interior_xx",
+    "GTBase.walks_paths.seq_interior_absent",
+    "GTBase.walks_paths.in_seq_inner",
+    "GTBase.walks_paths.seq_inner_nil",
+    "GTBase.walks_paths.seq_inner_seq1",
+    "GTBase.walks_paths.seq_inner_cons",
+    "GTBase.walks_paths.seq_inner_sub",
+    "GTBase.walks_paths.seq_interior_nodes",
+    "GTBase.walks_paths.seq_interior_val",
+    "GTBase.walks_paths.seq_inner_nodes",
+    "GTBase.walks_paths.seq_interior_ground_nil",
+    "GTBase.walks_paths.seq_interior_ground_seq1_endpoint",
+    "GTBase.walks_paths.seq_interior_ground_seq1_inner",
+    "GTBase.walks_paths.seq_interior_ground_path",
+    "GTBase.walks_paths.seq_interior_ground_repeated_endpoint",
+    "GTBase.walks_paths.seq_interior_ground_equal_endpoints",
+    "GTBase.walks_paths.seq_interior_ground_absent_endpoints",
+    "GTBase.walks_paths.seq_interior_ground_head_tail",
+    "GTBase.walks_paths.seq_inner_ground_nil",
+    "GTBase.walks_paths.seq_inner_ground_seq1",
+    "GTBase.walks_paths.seq_inner_ground_path",
+    "GTBase.walks_paths.seq_inner_ground_closed_walk"
+  ],
+  "summary": [
+    "Batch B, family B2 (`internal_vertices`). Six conjecture-local helpers now unfold to `GTBase.walks_paths.seq_interior x y s`, the vertices of a raw sequence `s` other than the given endpoints `x` and `y` (`seq_vertices s :\\: [set x; y]`), the raw-sequence counterpart of coq-graph-theory's `interior` of a packaged path (`seq_interior_nodes`, `seq_interior_val`). X157 (`[set z | z \\in p] :\\: [set x; y]`), X67 and the head-plus-tail X2 (`seq_interior (branch u) (branch v) (branch u :: s)`) are convertible; X175 (head-plus-tail, `seq_interior x y (x :: p)`) and XE2 are boolean comprehensions, extensionally equal through `in_seq_interior`. X172 removes the sequence's own first and last values and gives `set0` on the empty sequence: it unfolds to `GTBase.walks_paths.seq_inner`, equal by `in_seq_inner`. Endpoints are removed as values in every source; positional variants are listed below as distinct.",
+    "",
+    "Ten statements are affected: X157, X172, X175 and XE2 through their own files, X67, the three X2 rows, and X52 and X90 through X2's `contains_subdivision`. The X157, X172, X175 and XE2 chains are frozen here (helpers in `Legacy`, prefix-dropped chain copies and `statement` in per-row modules; X172 freezes its inductive closure `generated_by_bridge_replacement` with both constructors). The X2, X52, X90 and X67 rows reuse family B1's frozen copies, which froze the whole chain from `x2_path_vertices` and `x67_path_vertices` upwards at 9e03072 and so already freeze `x2_path_internal` and `x67_internal_vertices`. They are not copied again: this family's thin entry points `Digraph.migration.internal_vertices` and the X67 section of `Minor.migration.internal_vertices` state its helper and row certificates over those bodies (kernel-checked conversions through `seq_interior`); the intermediate chain objects keep B1's registered certificates, and B1's certificates rebuild unchanged.",
+    "",
+    "Kernel evidence, independent of this textual report: `Print All Dependencies` of the 10 frozen statements contains no live helper or chain declaration of this family and neither `seq_interior` nor `seq_inner`, while each live statement reaches `seq_interior` and its alias (/srv/graph-theory-rocq/coordination/evidence/B2-internal_vertices/print_all_dependencies_summary.txt, with the probe and the full output beside it).",
+    "",
+    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented discrepancies of the affected rows stay verbatim, including the wave-E4 guards of X2 and X52, X2's LEAST clause and candidate edge e173, X157's QUESTION reading with its retargeted specification, and the solved status of X52 and X67. Explicit later variants, untouched: `x166_internals` removes the target only, `x216_internal` removes positions (it differs from `seq_inner` when an endpoint value repeats inside the path), and `x98_internal`/`x114_internal` are pointwise Prop forms of membership in `seq_interior a b p` inside subdivision-model closures."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X157.x157_path_internal",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "x157_path_internal",
+      "frozen_path": "chromatic-theory/theories/migration/internal_vertices.v",
+      "frozen": "Legacy.x157_path_internal",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.internal_vertices.x157_path_internal_compat",
+      "live_unfolds_to": "seq_interior x y p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X157.x157_internally_disjoint_xy_paths",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "x157_internally_disjoint_xy_paths",
+      "frozen_path": "chromatic-theory/theories/migration/internal_vertices.v",
+      "frozen": "X157Legacy.internally_disjoint_xy_paths",
+      "substitutions": {
+        "x157_internally_disjoint_xy_paths": "internally_disjoint_xy_paths",
+        "x157_path_internal": "Legacy.x157_path_internal"
+      },
+      "certificate": "Chromatic.migration.internal_vertices.x157_internally_disjoint_xy_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X157.x157_max_local_connectivity_at_most",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "x157_max_local_connectivity_at_most",
+      "frozen_path": "chromatic-theory/theories/migration/internal_vertices.v",
+      "frozen": "X157Legacy.max_local_connectivity_at_most",
+      "substitutions": {
+        "x157_internally_disjoint_xy_paths": "internally_disjoint_xy_paths",
+        "x157_max_local_connectivity_at_most": "max_local_connectivity_at_most"
+      },
+      "certificate": "Chromatic.migration.internal_vertices.x157_max_local_connectivity_at_most_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X157.x157_polytime_colouring_or_none",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "x157_polytime_colouring_or_none",
+      "frozen_path": "chromatic-theory/theories/migration/internal_vertices.v",
+      "frozen": "X157Legacy.polytime_colouring_or_none",
+      "substitutions": {
+        "x157_max_local_connectivity_at_most": "max_local_connectivity_at_most",
+        "x157_polytime_colouring_or_none": "polytime_colouring_or_none"
+      },
+      "certificate": "Chromatic.migration.internal_vertices.x157_polytime_colouring_or_none_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X157.local_connectivity_k_colouring_polytime_statement",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "local_connectivity_k_colouring_polytime_statement",
+      "frozen_path": "chromatic-theory/theories/migration/internal_vertices.v",
+      "frozen": "X157Legacy.statement",
+      "substitutions": {
+        "local_connectivity_k_colouring_polytime_statement": "statement",
+        "x157_polytime_colouring_or_none": "polytime_colouring_or_none"
+      },
+      "certificate": "Chromatic.migration.internal_vertices.local_connectivity_k_colouring_polytime_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X172.x172_path_internal",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "x172_path_internal",
+      "frozen_path": "graph-theory-misc/theories/migration/internal_vertices.v",
+      "frozen": "Legacy.x172_path_internal",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.internal_vertices.x172_path_internal_compat",
+      "live_unfolds_to": "seq_inner s"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X172.x172_one_bridge_replacement",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "x172_one_bridge_replacement",
+      "frozen_path": "graph-theory-misc/theories/migration/internal_vertices.v",
+      "frozen": "X172Legacy.one_bridge_replacement",
+      "substitutions": {
+        "x172_one_bridge_replacement": "one_bridge_replacement",
+        "x172_path_internal": "Legacy.x172_path_internal"
+      },
+      "certificate": "GTMisc.migration.internal_vertices.x172_one_bridge_replacement_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X172.x172_generated_by_bridge_replacement",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "x172_generated_by_bridge_replacement",
+      "frozen_path": "graph-theory-misc/theories/migration/internal_vertices.v",
+      "frozen": "X172Legacy.generated_by_bridge_replacement",
+      "substitutions": {
+        "x172_generated_by_bridge_replacement": "generated_by_bridge_replacement",
+        "x172_generated_refl": "generated_refl",
+        "x172_generated_step": "generated_step",
+        "x172_one_bridge_replacement": "one_bridge_replacement"
+      },
+      "certificate": "GTMisc.migration.internal_vertices.x172_generated_by_bridge_replacement_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X172.metric_lines_bridges_counterexamples_finitely_generated_statement",
+      "path": "graph-theory-misc/theories/conjectures/X172.v",
+      "name": "metric_lines_bridges_counterexamples_finitely_generated_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/internal_vertices.v",
+      "frozen": "X172Legacy.statement",
+      "substitutions": {
+        "metric_lines_bridges_counterexamples_finitely_generated_statement": "statement",
+        "x172_generated_by_bridge_replacement": "generated_by_bridge_replacement"
+      },
+      "certificate": "GTMisc.migration.internal_vertices.metric_lines_bridges_counterexamples_finitely_generated_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X175.x175_path_internal",
+      "path": "minor-theory/theories/conjectures/X175.v",
+      "name": "x175_path_internal",
+      "frozen_path": "minor-theory/theories/migration/internal_vertices.v",
+      "frozen": "Legacy.x175_path_internal",
+      "substitutions": {},
+      "certificate": "Minor.migration.internal_vertices.x175_path_internal_compat",
+      "live_unfolds_to": "seq_interior x y (x :: p)"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X175.x175_Kt_subdivision",
+      "path": "minor-theory/theories/conjectures/X175.v",
+      "name": "x175_Kt_subdivision",
+      "frozen_path": "minor-theory/theories/migration/internal_vertices.v",
+      "frozen": "X175Legacy.Kt_subdivision",
+      "substitutions": {
+        "x175_Kt_subdivision": "Kt_subdivision",
+        "x175_path_internal": "Legacy.x175_path_internal"
+      },
+      "certificate": "Minor.migration.internal_vertices.x175_Kt_subdivision_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X175.kt_subdivision_clique_count_asymptotic_statement",
+      "path": "minor-theory/theories/conjectures/X175.v",
+      "name": "kt_subdivision_clique_count_asymptotic_statement",
+      "frozen_path": "minor-theory/theories/migration/internal_vertices.v",
+      "frozen": "X175Legacy.statement",
+      "substitutions": {
+        "kt_subdivision_clique_count_asymptotic_statement": "statement",
+        "x175_Kt_subdivision": "Kt_subdivision"
+      },
+      "certificate": "Minor.migration.internal_vertices.kt_subdivision_clique_count_asymptotic_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE2.xe2_internal_path_vertices",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_internal_path_vertices",
+      "frozen_path": "extremal-graph-theory/theories/migration/internal_vertices.v",
+      "frozen": "Legacy.xe2_internal_path_vertices",
+      "substitutions": {},
+      "certificate": "Extremal.migration.internal_vertices.xe2_internal_path_vertices_compat",
+      "live_unfolds_to": "seq_interior x y p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_paths_internally_disjoint",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_paths_internally_disjoint",
+      "frozen_path": "extremal-graph-theory/theories/migration/internal_vertices.v",
+      "frozen": "XE2Legacy.paths_internally_disjoint",
+      "substitutions": {
+        "xe2_internal_path_vertices": "Legacy.xe2_internal_path_vertices",
+        "xe2_paths_internally_disjoint": "paths_internally_disjoint"
+      },
+      "certificate": "Extremal.migration.internal_vertices.xe2_paths_internally_disjoint_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_915_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_915_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/internal_vertices.v",
+      "frozen": "XE2Legacy.statement",
+      "substitutions": {
+        "erdos_915_statement": "statement",
+        "xe2_paths_internally_disjoint": "paths_internally_disjoint"
+      },
+      "certificate": "Extremal.migration.internal_vertices.erdos_915_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X2.x2_path_internal",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_path_internal",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2Legacy.path_internal",
+      "substitutions": {
+        "x2_path_internal": "path_internal",
+        "x2_path_vertices": "Legacy.x2_path_vertices"
+      },
+      "certificate": "Digraph.migration.internal_vertices.x2_path_internal_compat",
+      "live_unfolds_to": "seq_interior (branch u) (branch v) (branch u :: s)"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.contains_subdivision",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "contains_subdivision",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2Legacy.contains_subdivision",
+      "substitutions": {
+        "x2_path_internal": "path_internal"
+      },
+      "certificate": "Digraph.migration.path_vertices.contains_subdivision_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.mader_delta_plus_bound",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta_plus_bound",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2BoundsLegacy.mader_delta_plus_bound",
+      "substitutions": {
+        "contains_subdivision": "X2Legacy.contains_subdivision"
+      },
+      "certificate": "Digraph.migration.path_vertices.mader_delta_plus_bound_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.mader_delta_zero_bound",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta_zero_bound",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2BoundsLegacy.mader_delta_zero_bound",
+      "substitutions": {
+        "contains_subdivision": "X2Legacy.contains_subdivision"
+      },
+      "certificate": "Digraph.migration.path_vertices.mader_delta_zero_bound_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.delta_plus_maderian",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "delta_plus_maderian",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2MaderianLegacy.delta_plus_maderian",
+      "substitutions": {
+        "mader_delta_plus_bound": "X2BoundsLegacy.mader_delta_plus_bound"
+      },
+      "certificate": "Digraph.migration.path_vertices.delta_plus_maderian_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.least_mader_delta_zero",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "least_mader_delta_zero",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2MaderianLegacy.least_mader_delta_zero",
+      "substitutions": {
+        "mader_delta_zero_bound": "X2BoundsLegacy.mader_delta_zero_bound"
+      },
+      "certificate": "Digraph.migration.path_vertices.least_mader_delta_zero_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.mader_delta0_transitive_tournament_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta0_transitive_tournament_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2MaderDelta0Legacy.statement",
+      "substitutions": {
+        "least_mader_delta_zero": "X2MaderianLegacy.least_mader_delta_zero",
+        "mader_delta0_transitive_tournament_statement": "statement"
+      },
+      "certificate": "Digraph.migration.internal_vertices.mader_delta0_transitive_tournament_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.oriented_trees_delta_plus_maderian_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "oriented_trees_delta_plus_maderian_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2TreesLegacy.statement",
+      "substitutions": {
+        "delta_plus_maderian": "X2MaderianLegacy.delta_plus_maderian",
+        "oriented_trees_delta_plus_maderian_statement": "statement"
+      },
+      "certificate": "Digraph.migration.internal_vertices.oriented_trees_delta_plus_maderian_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.delta_plus_maderian_disjoint_union_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "delta_plus_maderian_disjoint_union_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2UnionLegacy.statement",
+      "substitutions": {
+        "delta_plus_maderian": "X2MaderianLegacy.delta_plus_maderian",
+        "delta_plus_maderian_disjoint_union_statement": "statement"
+      },
+      "certificate": "Digraph.migration.internal_vertices.delta_plus_maderian_disjoint_union_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X52.x52_mader_chi_bound",
+      "path": "digraph-theory/theories/conjectures/X52.v",
+      "name": "x52_mader_chi_bound",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X52Legacy.mader_chi_bound",
+      "substitutions": {
+        "contains_subdivision": "X2Legacy.contains_subdivision",
+        "x52_mader_chi_bound": "mader_chi_bound"
+      },
+      "certificate": "Digraph.migration.path_vertices.x52_mader_chi_bound_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X52.oriented_tree_mader_chi_linear_bound_statement",
+      "path": "digraph-theory/theories/conjectures/X52.v",
+      "name": "oriented_tree_mader_chi_linear_bound_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X52Legacy.statement",
+      "substitutions": {
+        "oriented_tree_mader_chi_linear_bound_statement": "statement",
+        "x52_mader_chi_bound": "mader_chi_bound"
+      },
+      "certificate": "Digraph.migration.internal_vertices.oriented_tree_mader_chi_linear_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X90.x90_f_subdivision_problem",
+      "path": "digraph-theory/theories/conjectures/X90.v",
+      "name": "x90_f_subdivision_problem",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X90Legacy.f_subdivision_problem",
+      "substitutions": {
+        "contains_subdivision": "X2Legacy.contains_subdivision",
+        "x90_f_subdivision_problem": "f_subdivision_problem"
+      },
+      "certificate": "Digraph.migration.path_vertices.x90_f_subdivision_problem_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X90.f_subdivision_complexity_dichotomy_statement",
+      "path": "digraph-theory/theories/conjectures/X90.v",
+      "name": "f_subdivision_complexity_dichotomy_statement",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X90Legacy.statement",
+      "substitutions": {
+        "f_subdivision_complexity_dichotomy_statement": "statement",
+        "x90_f_subdivision_problem": "f_subdivision_problem"
+      },
+      "certificate": "Digraph.migration.internal_vertices.f_subdivision_complexity_dichotomy_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X67.x67_internal_vertices",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_internal_vertices",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.internal_vertices",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_path_vertices": "Legacy.x67_path_vertices"
+      },
+      "certificate": "Minor.migration.internal_vertices.x67_internal_vertices_compat",
+      "live_unfolds_to": "seq_interior a b p"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X67.x67_no_cross_edges",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_no_cross_edges",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.no_cross_edges",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_no_cross_edges": "no_cross_edges"
+      },
+      "certificate": "Minor.migration.path_vertices.x67_no_cross_edges_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X67.x67_theta",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_theta",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.theta",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_no_cross_edges": "no_cross_edges",
+        "x67_theta": "theta"
+      },
+      "certificate": "Minor.migration.path_vertices.x67_theta_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "theta_triangle_free_bounded_degree_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.statement",
+      "substitutions": {
+        "theta_triangle_free_bounded_degree_treewidth_statement": "statement",
+        "x67_theta": "theta"
+      },
+      "certificate": "Minor.migration.internal_vertices.theta_triangle_free_bounded_degree_treewidth_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta": "Later-family snapshot (B3, consecutive-in-path): B3 froze only its induced-path chain at its baseline ceadac8, where x67_internal_vertices and x67_no_cross_edges had already been migrated (families path-vertices and internal-vertices), so this copy calls those live (migrated) helpers by design. The end-to-end pre-migration theta and statement, over the frozen chains of B1 and B3, are Minor.migration.consecutive_in_path.X67Original.theta and X67Original.statement, related to the live ones by x67_theta_original_compat and theta_triangle_free_bounded_degree_treewidth_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/path_edges.v#XE2Legacy.erdos_915_statement": "B8 per-row snapshot: family path-edges (B8) froze only its edge-disjointness chain of #915, so this copy still calls the live xe2_paths_internally_disjoint, which after B2 reads seq_interior. Kept as B8's per-row chain; the complete pre-B2, pre-B8 row is Extremal.migration.path_edges.XE2Original.erdos_915_statement, certified by erdos_915_statement_original_compat.",
+    "graph-theory-misc/theories/migration/path_edges.v#X172Legacy.one_bridge_replacement": "B8 per-row snapshot: B8 froze only its path-edge set in X172's bridge replacement, so this copy still calls the live x172_path_internal, which after B2 unfolds to seq_inner. Kept as B8's per-row chain; the complete pre-B2, pre-B8 chain, closure and row are GTMisc.migration.path_edges.X172Original, certified by its three *_original_compat theorems."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "digraph-theory/theories/conjectures/X52.v",
+      "name": "contains_subdivision",
+      "note": "Cross-module row X52: x52_mader_chi_bound uses X2's contains_subdivision. Frozen as X52Legacy.mader_chi_bound over X2Legacy.contains_subdivision; statement text unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X90.v",
+      "name": "contains_subdivision",
+      "note": "Cross-module row X90: x90_f_subdivision_problem uses X2's contains_subdivision. Frozen as X90Legacy.f_subdivision_problem over X2Legacy.contains_subdivision; statement text unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X2.v",
+      "name": "contains_subdivision",
+      "note": "Grounding lemmas no_subdiv_emptyD, x2_delta0_unguarded_false and x2_delta_plus_unguarded_false (teeth of the wave-E4 guards) keep their statements and compile unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X52.v",
+      "name": "contains_subdivision",
+      "note": "Grounding lemmas x52_unguarded_false and x52_k1_holds keep their statements and compile unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "x2_path_internal",
+      "note": "The proof unfolds x2_path_internal and rewrites the membership with inE; it keeps its statement and compiles against x2_path_internal = seq_interior (branch u) (branch v) (branch u :: s) (see the B2 build)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "contains_subdivision",
+      "note": "subdivides_contains_subdivision and contains_subdivision_sub, the P9-to-X2 bridge of edges e074 and e173, keep their statements and compile unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "oriented_trees_delta_plus_maderian_statement",
+      "note": "Target of the verified edge e074; theorem statement unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "mader_delta_zero_bound",
+      "note": "subdivision_TT_gives_delta0_bound, the proved hypothesis-class half of the candidate edge e173 (LEAST clause still open); unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "name": "oriented_tree_mader_chi_linear_bound_statement",
+      "note": "Endpoint check and target of the verified edge e019; theorem statement unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "name": "contains_subdivision",
+      "note": "subdig_contains_subdivision keeps its statement and compiles unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "name": "x2_path_internal",
+      "note": "The proof unfolds x2_path_internal and rewrites the membership with inE; it keeps its statement and compiles against x2_path_internal = seq_interior (branch u) (branch v) (branch u :: s) (see the B2 build)."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.conjectures.X166.x166_internals",
+      "path": "digraph-theory/theories/conjectures/X166.v",
+      "name": "x166_internals",
+      "note": "removes the target t only (the source s is unused): agrees with seq_interior s t p when s is not in p or when s = t, but differs in general; later variant, untouched"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X216.x216_internal",
+      "path": "graph-theory-misc/theories/conjectures/X216.v",
+      "name": "x216_internal",
+      "note": "positional: drops the first and the last position (behead (belast x q)); differs from seq_inner when an endpoint value repeats inside the sequence; later variant, untouched"
+    },
+    {
+      "qualified": "Extremal.conjectures.X98.x98_internal",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_internal",
+      "note": "Prop form x \\in p /\\ x != a /\\ x != b, pointwise membership in seq_interior a b p; its closure contains subdivision records; later variant, untouched"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X114.x114_internal",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_internal",
+      "note": "Prop form x \\in p /\\ x != a /\\ x != b, pointwise membership in seq_interior a b p; its closure contains subdivision-model records; later variant, untouched"
+    }
+  ]
+}

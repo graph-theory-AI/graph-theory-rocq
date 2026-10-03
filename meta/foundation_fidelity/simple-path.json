@@ -1,0 +1,31 @@
+{
+ "schema_version": 1,
+ "family": "simple-path",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_simple_path": {
+     "verdict": "FAITHFUL",
+     "note": "seq_simple_path p: p is a nonempty vertex sequence without repeated entries whose consecutive entries are adjacent. The empty sequence is not a path, every one-entry sequence is, a two-entry sequence is one exactly at an edge between distinct vertices; chords are allowed; no endpoint, length or connectedness condition. Equal to nonempty + uniq + sorted (--), to upath x (last x q) q on x :: q, and to the set-to-set path with both sets [set: G]."
+    }
+   },
+   "machine_evidence": [
+    "seq_simple_path_nil",
+    "seq_simple_path_seq1",
+    "seq_simple_pathE",
+    "seq_simple_path_upath",
+    "seq_simple_path_setT",
+    "seq_set_path_simple",
+    "seq_simple_path_nodes",
+    "seq_simple_path_uniq",
+    "seq_simple_path_repeat",
+    "seq_simple_path_pair",
+    "seq_simple_path_consecutive",
+    "seq_simple_path_size",
+    "seq_simple_path_rev",
+    "seq_simple_path_map"
+   ]
+  }
+ }
+}

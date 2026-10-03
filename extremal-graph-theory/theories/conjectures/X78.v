@@ -17,9 +17,7 @@ Definition x78_cut_size (G : sgraph) (A : {set G}) : nat :=
   #|[set e in x78_edge_set G | ~~ [disjoint e & A] && ~~ (e \subset A)]|.
 
 Definition x78_subgraph_of (H G : sgraph) : Prop :=
-  exists f : H -> G,
-    injective f /\
-    forall x y : H, x -- y -> f x -- f y.
+  has_subgraph G H.
 
 Definition x78_three_fourths_surplus (cnum cden m s : nat) : Prop :=
   (cnum ^ 4) * (m ^ 3) <= (cden ^ 4) * (s ^ 4).

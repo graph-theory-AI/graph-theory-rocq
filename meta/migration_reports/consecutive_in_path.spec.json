@@ -1,0 +1,526 @@
+{
+  "family": "consecutive-in-path",
+  "canonical_name": "GTBase.walks_paths.seq_consecutive",
+  "canonical_short_name": "seq_consecutive",
+  "relation": "definitional equality: every helper body is the body of seq_consecutive p u v, the pair (u, v) or the pair (v, u) occurs in zip p (behead p)",
+  "baseline_commit": "ceadac8a097e951709afd63b65546f1a2513e0a5",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "cycle-theory": "Cycle",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "chromatic-theory/theories/migration/consecutive_in_path.v",
+    "extremal-graph-theory/theories/migration/consecutive_in_path.v",
+    "graph-theory-misc/theories/migration/consecutive_in_path.v",
+    "minor-theory/theories/migration/consecutive_in_path.v",
+    "chromatic-theory/theories/migration/path_vertices.v",
+    "minor-theory/theories/migration/path_vertices.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.mem_zip_behead",
+    "GTBase.walks_paths.seq_consecutiveP",
+    "GTBase.walks_paths.seq_consecutiveE",
+    "GTBase.walks_paths.seq_consecutive_sym",
+    "GTBase.walks_paths.seq_consecutive_nil",
+    "GTBase.walks_paths.seq_consecutive_seq1",
+    "GTBase.walks_paths.seq_consecutive_cons2",
+    "GTBase.walks_paths.seq_consecutive_pair",
+    "GTBase.walks_paths.seq_consecutive_repeat",
+    "GTBase.walks_paths.seq_consecutive_rev",
+    "GTBase.walks_paths.seq_consecutive_mem",
+    "GTBase.walks_paths.seq_consecutive_cat",
+    "GTBase.walks_paths.seq_consecutive_cons",
+    "GTBase.walks_paths.seq_consecutive_rcons",
+    "GTBase.walks_paths.seq_consecutive_path",
+    "GTBase.walks_paths.seq_consecutive_path_sym",
+    "GTBase.walks_paths.seq_consecutive_map",
+    "GTBase.walks_paths.seq_consecutive_nodes",
+    "GTBase.walks_paths.seq_consecutive_ground_nil",
+    "GTBase.walks_paths.seq_consecutive_ground_seq1",
+    "GTBase.walks_paths.seq_consecutive_ground_pair",
+    "GTBase.walks_paths.seq_consecutive_ground_path",
+    "GTBase.walks_paths.seq_consecutive_ground_not_adjacent",
+    "GTBase.walks_paths.seq_consecutive_ground_not_cyclic",
+    "GTBase.walks_paths.seq_consecutive_ground_repeated",
+    "GTBase.walks_paths.seq_consecutive_ground_repeated_apart"
+  ],
+  "summary": [
+    "Batch B, family B3 (`consecutive_in_path`). Five conjecture-local helpers (X3, X67, X91, X98, X114) now unfold to `GTBase.walks_paths.seq_consecutive p u v`: `u` and `v` are adjacent entries of the raw sequence `p`, in either order, i.e. `(u, v)` or `(v, u)` occurs in `zip p (behead p)` (equivalently `[:: u; v]` or `[:: v; u]` is an `infix` of `p`, `seq_consecutiveP`). Every helper had exactly that body with a Prop codomain, so all five are convertible to the canonical. No graph-edge, path, uniqueness or distinct-endpoint premise is added: the empty and one-entry sequences relate nothing and a repeated adjacent entry relates a value to itself (grounded in walks_paths.v and the public client).",
+    "",
+    "Six statements are affected: X3, X67, X91, X98 and X114 through their own files and X83 across modules (through `x83_rainbow_induced_path` and X3's `x3_induced_path`). Every chain is frozen in one certificate per area (helpers in `Legacy`, prefix-dropped chain copies and `statement` in per-row modules). X98 and X114 freeze their whole induced-subdivision record (type, constructor and seven fields, field prefixes dropped) and its `inhabited` wrapper; the frozen and live records are distinct inductive types, related by explicit mutually inverse field-by-field maps (`x98_induced_subdivision_model_compat`, `x114_induced_subdivision_model_compat`), through which the wrappers and statements are proved equivalent. X114 also freezes its decision problem `hisc_problem`; `x114_hisc_problem_compat` proves equivalent memberships and transfers the D7 layer's `in_NP` and `NP_hard`.",
+    "",
+    "Family B1 froze only the path-vertex chains of X3 and X67, so its snapshots `X3Legacy.statement` and `X67Legacy.theta` call the live `x3_induced_path` and `x67_induced_path_between`; they are kept verbatim and documented below as stale snapshots (B1's and B2's certificates over them still hold, as conversions). `X3Original` and `X67Original` freeze those statements end to end, over B1's frozen path-vertex objects (listed below as `b1-frozen`, with B1's certificates) and this family's chains, with `*_original_compat` certificates to the live statements.",
+    "",
+    "Kernel evidence, independent of this textual report: `Print All Dependencies` of the six frozen statements and the two originals contains no live helper or chain declaration of this family and not `seq_consecutive`, the frozen record types are checked by conversion (`Print All Dependencies` lists constants only), and each live statement reaches `seq_consecutive` and its alias (/srv/graph-theory-rocq/coordination/evidence/B3-consecutive_in_path/print_all_dependencies_summary.txt, with the probes and the full output beside it).",
+    "",
+    "No statement text, doc block, manifest row or leg state changes (checked below), so the documented discrepancies of the affected rows stay verbatim, including X114's relational complexity proxy, X98's coefficient-list polynomial, X3's exactly-s-vertex path and X67's solved status. The cyclic variants `consecutive_in_cycle` (X3, X91 and four others, over `zip c (rot 1 c)`) were classified here as the next family and were later migrated by B4 (family consecutive-in-cycle, report `consecutive_in_cycle`), so they are no longer listed as untouched variants."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_consecutive_in_path",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_consecutive_in_path",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "Legacy.x3_consecutive_in_path",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.consecutive_in_path.x3_consecutive_in_path_compat",
+      "live_unfolds_to": "seq_consecutive p u v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X98.x98_consecutive_in_path",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_consecutive_in_path",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "Legacy.x98_consecutive_in_path",
+      "substitutions": {},
+      "certificate": "Extremal.migration.consecutive_in_path.x98_consecutive_in_path_compat",
+      "live_unfolds_to": "seq_consecutive p u v"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X114.x114_consecutive_in_path",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_consecutive_in_path",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "Legacy.x114_consecutive_in_path",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_consecutive_in_path_compat",
+      "live_unfolds_to": "seq_consecutive p u v"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X91.x91_consecutive_in_path",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_consecutive_in_path",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "Legacy.x91_consecutive_in_path",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.consecutive_in_path.x91_consecutive_in_path_compat",
+      "live_unfolds_to": "seq_consecutive p u v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X67.x67_consecutive_in_path",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_consecutive_in_path",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "Legacy.x67_consecutive_in_path",
+      "substitutions": {},
+      "certificate": "Minor.migration.consecutive_in_path.x67_consecutive_in_path_compat",
+      "live_unfolds_to": "seq_consecutive p u v"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_induced_path",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_induced_path",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X3Legacy.induced_path",
+      "substitutions": {
+        "x3_induced_path": "induced_path",
+        "x3_consecutive_in_path": "Legacy.x3_consecutive_in_path"
+      },
+      "certificate": "Chromatic.migration.consecutive_in_path.x3_induced_path_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.stable_cover_unique_induced_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "stable_cover_unique_induced_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X3Legacy.statement",
+      "substitutions": {
+        "stable_cover_unique_induced_path_statement": "statement",
+        "x3_induced_path": "induced_path"
+      },
+      "certificate": "Chromatic.migration.consecutive_in_path.stable_cover_unique_induced_path_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Chromatic.migration.consecutive_in_path.stable_cover_unique_induced_path_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X83.x83_rainbow_induced_path",
+      "path": "chromatic-theory/theories/conjectures/X83.v",
+      "name": "x83_rainbow_induced_path",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X83Legacy.rainbow_induced_path",
+      "substitutions": {
+        "x83_rainbow_induced_path": "rainbow_induced_path",
+        "x3_induced_path": "X3Legacy.induced_path"
+      },
+      "certificate": "Chromatic.migration.consecutive_in_path.x83_rainbow_induced_path_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X83.aravind_rainbow_induced_chromatic_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X83.v",
+      "name": "aravind_rainbow_induced_chromatic_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X83Legacy.statement",
+      "substitutions": {
+        "aravind_rainbow_induced_chromatic_path_statement": "statement",
+        "x83_rainbow_induced_path": "rainbow_induced_path"
+      },
+      "certificate": "Chromatic.migration.consecutive_in_path.aravind_rainbow_induced_chromatic_path_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_path_between",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_path_between",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X98Legacy.induced_path_between",
+      "substitutions": {
+        "x98_induced_path_between": "induced_path_between",
+        "x98_consecutive_in_path": "Legacy.x98_consecutive_in_path"
+      },
+      "certificate": "Extremal.migration.consecutive_in_path.x98_induced_path_between_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision_model",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision_model",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X98Legacy.induced_subdivision_model",
+      "substitutions": {
+        "x98_induced_subdivision_model": "induced_subdivision_model",
+        "x98_induced_path_between": "induced_path_between",
+        "x98_consecutive_in_path": "Legacy.x98_consecutive_in_path",
+        "x98_branch": "branch",
+        "x98_branch_injective": "branch_injective",
+        "x98_edge_path": "edge_path",
+        "x98_edge_path_valid": "edge_path_valid",
+        "x98_internal_avoids_branch": "internal_avoids_branch",
+        "x98_paths_internally_disjoint": "paths_internally_disjoint",
+        "x98_global_induced": "global_induced"
+      },
+      "certificate": "Extremal.migration.consecutive_in_path.x98_induced_subdivision_model_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X98Legacy.induced_subdivision",
+      "substitutions": {
+        "x98_induced_subdivision": "induced_subdivision",
+        "x98_induced_subdivision_model": "induced_subdivision_model"
+      },
+      "certificate": "Extremal.migration.consecutive_in_path.x98_induced_subdivision_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "polynomial_kuhn_osthus_induced_subdivision_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X98Legacy.statement",
+      "substitutions": {
+        "polynomial_kuhn_osthus_induced_subdivision_statement": "statement",
+        "x98_induced_subdivision": "induced_subdivision"
+      },
+      "certificate": "Extremal.migration.consecutive_in_path.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_path_between",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_path_between",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X114Legacy.induced_path_between",
+      "substitutions": {
+        "x114_induced_path_between": "induced_path_between",
+        "x114_consecutive_in_path": "Legacy.x114_consecutive_in_path"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_induced_path_between_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision_model",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision_model",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X114Legacy.induced_subdivision_model",
+      "substitutions": {
+        "x114_induced_subdivision_model": "induced_subdivision_model",
+        "x114_induced_path_between": "induced_path_between",
+        "x114_consecutive_in_path": "Legacy.x114_consecutive_in_path",
+        "x114_branch": "branch",
+        "x114_branch_injective": "branch_injective",
+        "x114_edge_path": "edge_path",
+        "x114_edge_path_valid": "edge_path_valid",
+        "x114_internal_avoids_branch": "internal_avoids_branch",
+        "x114_paths_internally_disjoint": "paths_internally_disjoint",
+        "x114_global_induced": "global_induced"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_induced_subdivision_model_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X114Legacy.induced_subdivision",
+      "substitutions": {
+        "x114_induced_subdivision": "induced_subdivision",
+        "x114_induced_subdivision_model": "induced_subdivision_model"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_induced_subdivision_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_hisc_problem",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_hisc_problem",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X114Legacy.hisc_problem",
+      "substitutions": {
+        "x114_hisc_problem": "hisc_problem",
+        "x114_induced_subdivision": "induced_subdivision"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_hisc_problem_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "subcubic_induced_subdivision_np_complete_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X114Legacy.statement",
+      "substitutions": {
+        "subcubic_induced_subdivision_np_complete_statement": "statement",
+        "x114_hisc_problem": "hisc_problem"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.subcubic_induced_subdivision_np_complete_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X91.x91_induced_path",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_induced_path",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X91Legacy.induced_path",
+      "substitutions": {
+        "x91_induced_path": "induced_path",
+        "x91_consecutive_in_path": "Legacy.x91_consecutive_in_path"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x91_induced_path_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X91.x91_avoidable_path",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_avoidable_path",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X91Legacy.avoidable_path",
+      "substitutions": {
+        "x91_avoidable_path": "avoidable_path",
+        "x91_induced_path": "induced_path"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x91_avoidable_path_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X91.x91_Pk_free",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_Pk_free",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X91Legacy.Pk_free",
+      "substitutions": {
+        "x91_Pk_free": "Pk_free",
+        "x91_induced_path": "induced_path"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x91_Pk_free_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X91.avoidable_path_or_pk_free_statement",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "avoidable_path_or_pk_free_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X91Legacy.statement",
+      "substitutions": {
+        "avoidable_path_or_pk_free_statement": "statement",
+        "x91_Pk_free": "Pk_free",
+        "x91_avoidable_path": "avoidable_path"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.avoidable_path_or_pk_free_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X67.x67_induced_path_between",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_induced_path_between",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X67Legacy.induced_path_between",
+      "substitutions": {
+        "x67_induced_path_between": "induced_path_between",
+        "x67_consecutive_in_path": "Legacy.x67_consecutive_in_path"
+      },
+      "certificate": "Minor.migration.consecutive_in_path.x67_induced_path_between_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X67.x67_theta",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_theta",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X67Legacy.theta",
+      "substitutions": {
+        "x67_theta": "theta",
+        "x67_induced_path_between": "induced_path_between"
+      },
+      "certificate": "Minor.migration.consecutive_in_path.x67_theta_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "theta_triangle_free_bounded_degree_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X67Legacy.statement",
+      "substitutions": {
+        "theta_triangle_free_bounded_degree_treewidth_statement": "statement",
+        "x67_theta": "theta"
+      },
+      "certificate": "Minor.migration.consecutive_in_path.theta_triangle_free_bounded_degree_treewidth_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Minor.migration.consecutive_in_path.theta_triangle_free_bounded_degree_treewidth_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.stable_cover_unique_induced_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "stable_cover_unique_induced_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X3Original.statement",
+      "substitutions": {
+        "stable_cover_unique_induced_path_statement": "statement",
+        "x3_induced_path": "X3Legacy.induced_path",
+        "x3_uniquely_covers_path_vertex": "path_vertices.X3Legacy.uniquely_covers_path_vertex"
+      },
+      "certificate": "Chromatic.migration.consecutive_in_path.stable_cover_unique_induced_path_statement_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Minor.conjectures.X67.x67_theta",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_theta",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X67Original.theta",
+      "substitutions": {
+        "x67_theta": "theta",
+        "x67_induced_path_between": "X67Legacy.induced_path_between",
+        "x67_internal_vertices": "path_vertices.X67Legacy.internal_vertices",
+        "x67_no_cross_edges": "path_vertices.X67Legacy.no_cross_edges"
+      },
+      "certificate": "Minor.migration.consecutive_in_path.x67_theta_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "theta_triangle_free_bounded_degree_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X67Original.statement",
+      "substitutions": {
+        "theta_triangle_free_bounded_degree_treewidth_statement": "statement",
+        "x67_theta": "theta"
+      },
+      "certificate": "Minor.migration.consecutive_in_path.theta_triangle_free_bounded_degree_treewidth_statement_original_compat"
+    },
+    {
+      "kind": "b1-frozen",
+      "qualified": "Chromatic.conjectures.X3.x3_path_vertices",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_path_vertices",
+      "frozen_path": "chromatic-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x3_path_vertices",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.path_vertices.x3_path_vertices_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "b1-frozen",
+      "qualified": "Chromatic.conjectures.X3.x3_uniquely_covers_path_vertex",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_uniquely_covers_path_vertex",
+      "frozen_path": "chromatic-theory/theories/migration/path_vertices.v",
+      "frozen": "X3Legacy.uniquely_covers_path_vertex",
+      "substitutions": {
+        "x3_path_vertices": "Legacy.x3_path_vertices",
+        "x3_uniquely_covers_path_vertex": "uniquely_covers_path_vertex"
+      },
+      "certificate": "Chromatic.migration.path_vertices.x3_uniquely_covers_path_vertex_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "b1-frozen",
+      "qualified": "Minor.conjectures.X67.x67_path_vertices",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_path_vertices",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x67_path_vertices",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_vertices.x67_path_vertices_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "b1-frozen",
+      "qualified": "Minor.conjectures.X67.x67_internal_vertices",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_internal_vertices",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.internal_vertices",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_path_vertices": "Legacy.x67_path_vertices"
+      },
+      "certificate": "Minor.migration.path_vertices.x67_internal_vertices_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "b1-frozen",
+      "qualified": "Minor.conjectures.X67.x67_no_cross_edges",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_no_cross_edges",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "X67Legacy.no_cross_edges",
+      "substitutions": {
+        "x67_internal_vertices": "internal_vertices",
+        "x67_no_cross_edges": "no_cross_edges"
+      },
+      "certificate": "Minor.migration.path_vertices.x67_no_cross_edges_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/path_vertices.v#X3Legacy.statement": "B1 snapshot limitation: family path-vertices (B1) froze only the path-vertex chain of X3, so this copy still resolves through the live x3_induced_path; after B3 its body reaches the canonical seq_consecutive and is no longer the pre-migration statement. B1's stable_cover_unique_induced_path_statement_compat stays true (a conversion) but now certifies only the path-vertex step. The fully frozen pre-migration statement is Chromatic.migration.consecutive_in_path.X3Original.statement, related to the live one by stable_cover_unique_induced_path_statement_original_compat.",
+    "minor-theory/theories/migration/path_vertices.v#X67Legacy.theta": "B1 snapshot limitation: family path-vertices (B1) froze only the path-vertex chain of X67, so this copy still resolves through the live x67_induced_path_between; after B3 its body reaches the canonical seq_consecutive and is no longer the pre-migration theta. B1's X67Legacy.statement is built on it; B1's x67_theta_compat and theta_triangle_free_bounded_degree_treewidth_statement_compat and B2's Minor.migration.internal_vertices certificates over the same bodies stay true (conversions) but now certify only the path-vertex and internal-vertex steps. The fully frozen pre-migration theta is Minor.migration.consecutive_in_path.X67Original.theta (and X67Original.statement), related to the live one by x67_theta_original_compat (and theta_triangle_free_bounded_degree_treewidth_statement_original_compat).",
+    "graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path": "Later-family snapshot (B4, consecutive-in-cycle): B4 froze only its cyclic chain of X91 at its baseline 49ddc03, where x91_induced_path had already been migrated by this family, so this copy calls that live (migrated) helper by design. The end-to-end pre-migration row, over the frozen chains of B3 and B4, is GTMisc.migration.consecutive_in_cycle.X91Original, certified by avoidable_path_or_pk_free_statement_original_compat.",
+    "graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path_or_pk_free_statement": "Later-family snapshot (B4, consecutive-in-cycle): B4 froze only its cyclic chain of X91 at its baseline 49ddc03, where x91_Pk_free had already been migrated by this family, so this copy calls that live (migrated) helper by design. The end-to-end pre-migration row, over the frozen chains of B3 and B4, is GTMisc.migration.consecutive_in_cycle.X91Original, certified by avoidable_path_or_pk_free_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement": "A5 per-row snapshot: A5 (ordinary subgraph containment) froze only its own helper in X98's row (x59_subgraph_of -> Legacy.x59_subgraph_of), so this copy still resolves through the live x98_induced_subdivision, which after B3 wraps the seq_consecutive-based Record. Kept as A5's per-row chain; the combined pre-B3, pre-A5 row is Extremal.migration.subgraph_of.X98Original (B3's frozen X98Legacy.induced_subdivision with A5's frozen helper), certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/X83.v",
+      "name": "x3_induced_path",
+      "note": "Cross-module row X83: x83_rainbow_induced_path uses X3's x3_induced_path. Frozen as X83Legacy.rainbow_induced_path over X3Legacy.induced_path; statement text unchanged."
+    }
+  ],
+  "distinct_variants": []
+}

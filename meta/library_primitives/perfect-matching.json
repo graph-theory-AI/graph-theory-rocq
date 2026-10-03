@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "family": "perfect-matching",
+  "primitive": {
+    "canonical_name": "GTBase.common.perfect_matching",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "perfect_matching"
+    ],
+    "source_definitions": [
+      "Cycle.conjectures.X24.x24_perfect_matching",
+      "Packing.conjectures.X18.x18_perfect_matching",
+      "Packing.conjectures.X25.x25_perfect_matching"
+    ],
+    "consumers_remaining": 3,
+    "relation": "logical-equivalence",
+    "migration_notes": "C2 (2026-10-02, lancelot): the three exact-one-incidence copies now unfold to GTBase.common.perfect_matching M (= matching M /\\ cover M = [set: G]); the names stay as transparent aliases for one migration cycle. X18's and X25's frozen chains were already built by C1 (Packing.migration.matching.X18Legacy) and M1 (Packing.migration.simple_edges.X25Legacy): their frozen bodies and theorem statements are preserved, only x18_perfect_matching_compat and x25_perfect_matching_compat are re-proved through perfect_matching_exactly_oneP, and the per-area entry point Packing.migration.perfect_matching states this family's helper and row certificates over those frozen bodies. X24's chain and pre-M1 edge set are frozen in Cycle.migration.perfect_matching. Edge partitions and edge families are the next family.",
+    "semantic_classes": {
+      "exactly-one-incidence": {
+        "members": [
+          "Cycle.conjectures.X24.x24_perfect_matching",
+          "Packing.conjectures.X18.x18_perfect_matching",
+          "Packing.conjectures.X25.x25_perfect_matching"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "certificate": "GTBase.common.perfect_matching_exactly_oneP",
+        "note": "members are edges (X18 through C1's matching alias) and every vertex lies in exactly one member; equivalent to matching plus cover without any guard"
+      }
+    },
+    "distinct_variants": {
+      "Cycle.conjectures.U10.is_perfect_matching": "Name match only: a set of edges of an mgraph (edge type, subdeg M v = 1), a different carrier. Not claimed, not redirected.",
+      "Cycle.conjectures.U10.perfect_matching_cover": "Name match only: a list of k perfect matchings of an mgraph covering its edges. Not claimed, not redirected."
+    },
+    "compatibility_theorems": [
+      "Cycle.migration.perfect_matching.x24_edge_set_compat",
+      "Cycle.migration.perfect_matching.x24_perfect_matching_compat",
+      "Cycle.migration.perfect_matching.x24_one_factorization_compat",
+      "Cycle.migration.perfect_matching.one_factorization_long_rainbow_cycle_statement_compat",
+      "Packing.migration.perfect_matching.x18_perfect_matching_compat",
+      "Packing.migration.perfect_matching.x25_perfect_matching_compat",
+      "Packing.migration.perfect_matching.knn_fair_perfect_matching_statement_compat",
+      "Packing.migration.perfect_matching.kotzig_perfect_one_factorization_statement_compat",
+      "Packing.migration.simple_edges.x25_perfect_one_factorization_compat"
+    ],
+    "api_theorems": [
+      "GTBase.common.perfect_matching_matching",
+      "GTBase.common.perfect_matching_cover",
+      "GTBase.common.perfect_matching_edge",
+      "GTBase.common.perfect_matching_exactly_oneP",
+      "GTBase.common.perfect_matching_K2",
+      "GTBase.common.not_perfect_matching0",
+      "GTBase.common.perfect_matching0_K0",
+      "GTBase.common.not_perfect_matching_loop",
+      "GTBase.common.card_perfect_matching",
+      "GTBase.common.not_perfect_matching_odd",
+      "GTBase.common.not_perfect_matching_K3"
+    ],
+    "legacy_baseline": "9e030727db115917ae077ac07a8fc6aa68661f73",
+    "migration_report": "meta/migration_reports/perfect_matching.md",
+    "migration_spec": "meta/migration_reports/perfect_matching.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C2.md",
+    "downstream_client": "base/theories/examples/perfect_matching.v",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.connectivity",
+        "GraphTheory.sgraph",
+        "GTBase.common"
+      ],
+      "result": "adapted-in-base",
+      "candidate": "GTBase.common.perfect_matching",
+      "note": "coq-graph-theory 0.9.7 defines connectivity.matching but no perfect-matching predicate; GTBase.common.perfect_matching (matching M /\\ cover M = [set: G], with perfect_matching_K2 and not_perfect_matching0 since WP4b) is the canonical. The corpus copies spell it as exact-one incidence of every vertex; perfect_matching_exactly_oneP proves the two readings equivalent (members are 2-sets, so cover and exactly-one agree), card_perfect_matching gives #|G| = 2 * #|M| and the odd-order and K_3 negatives.",
+      "audited_at": "2026-10-02"
+    },
+    "reviewed_by": "arthur",
+    "reviewed_commit": "99e3132092cb7020c7d09a41ee629c4af067f127",
+    "independent_review": "meta/migration_reviews/perfect_matching.md",
+    "foundation_fidelity": "meta/foundation_fidelity/perfect-matching.json"
+  }
+}

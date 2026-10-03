@@ -37,6 +37,8 @@ REVERSE_DEPENDENCIES = {
 }
 
 MUTATION_GATE_PATHS = {
+    "meta/check_library_migration.py",
+    "meta/test_check_library_migration.py",
     "meta/check_milestone.py",
     "meta/faithfulness_mutation.py",
     "meta/faithfulness_policy.json",
@@ -46,19 +48,33 @@ MUTATION_GATE_PATHS = {
     "meta/library_inventory.py",
     "meta/library_helper_inventory.json",
     "meta/library_primitives.json",
+    "meta/family_registry.py",
+    "meta/test_family_registry.py",
+    "meta/migration_report.py",
+    "meta/test_migration_report.py",
 }
 
 MIGRATION_GATE_PATHS = {
     "meta/check_library_migration.py",
+    "meta/test_check_library_migration.py",
     "meta/library_inventory.py",
     "meta/library_helper_inventory.json",
     "meta/library_primitives.json",
+    "meta/family_registry.py",
+    "meta/test_family_registry.py",
+    "meta/migration_report.py",
+    "meta/test_migration_report.py",
     "base/theories/simple_edges.v",
 }
 
 
 def git(*args: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True)
+
+
+def family_registry_change(path: str) -> bool:
+    """Family documents need the same gates as the former aggregate registries."""
+    return path.startswith(("meta/library_primitives/", "meta/foundation_fidelity/"))
 
 
 def normalize_base(base: str, head: str) -> str:
@@ -117,6 +133,11 @@ def package_source_change(path: str) -> str | None:
     return None
 
 
+def migration_report_change(path: str) -> bool:
+    return (path in {"meta/migration_report.py", "meta/test_migration_report.py"}
+            or path.startswith("meta/migration_reports/"))
+
+
 def reverse_dependency_closure(packages: set[str]) -> set[str]:
     closure = set(packages)
     while True:
@@ -152,6 +173,16 @@ def validate_project_membership(paths: list[str]) -> None:
 
 
 def validate_routing_fixtures() -> None:
+    for path in ("meta/library_primitives/induced-free.json",
+                 "meta/foundation_fidelity/induced-free.json"):
+        if not family_registry_change(path):
+            raise SystemExit(f"family registry routing fixture failed: {path}")
+    if family_registry_change("meta/library_primitives_wrong/other.json"):
+        raise SystemExit("family registry routing accepted an unrelated directory")
+    for path in ("meta/migration_report.py", "meta/test_migration_report.py",
+                 "meta/migration_reports/induced_free.spec.json", "meta/migration_reports/matching.md"):
+        if not migration_report_change(path):
+            raise SystemExit(f"migration report routing fixture failed: {path}")
     fixtures = {
         "base/_CoqProject": "base",
         "chromatic-theory/theories/migration/simple_edges.v": "chromatic-theory",
@@ -217,18 +248,21 @@ def main(argv: list[str]) -> int:
         run(["opam", "lint", *changed_opams])
 
     mutation_changed = any(
-        path in MUTATION_GATE_PATHS or path.startswith("meta/probe_hints/")
+        path in MUTATION_GATE_PATHS or family_registry_change(path)
+        or path.startswith("meta/probe_hints/") or migration_report_change(path)
         for path in paths
     )
     if mutation_changed:
         run(["make", "mutation"])
 
     migration_changed = base_changed or any(
-        path in MIGRATION_GATE_PATHS or "/theories/migration/" in path
+        path in MIGRATION_GATE_PATHS or family_registry_change(path)
+        or "/theories/migration/" in path or migration_report_change(path)
         for path in paths
     )
     if migration_changed:
         run([sys.executable, "meta/check_library_migration.py"])
+        run([sys.executable, "meta/migration_report.py", "--all", "--check", "--kernel"])
     for phase, package in pairs:
         run([sys.executable, "meta/check_milestone.py", phase, package])
         match = re.fullmatch(r"X(\d+)", phase)

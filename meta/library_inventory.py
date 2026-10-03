@@ -13,15 +13,18 @@ import argparse
 import hashlib
 import json
 import re
+import posixpath
+import shlex
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from family_registry import RegistryError, load_library_registry
 
 ROOT = Path(__file__).resolve().parents[1]
 META = ROOT / "meta"
 INVENTORY = META / "library_helper_inventory.json"
-REGISTRY = META / "library_primitives.json"
 POLICY = META / "faithfulness_policy.json"
 WAVES = META / "v2_statement_waves.json"
 
@@ -152,12 +155,18 @@ def repository_declaration_names(namespaces: dict[str, str]) -> set[str]:
 def parse_file(
     path: Path, namespaces: dict[str, str], statement_names: set[str]
 ) -> tuple[list[dict], int]:
-    src = path.read_text()
-    clean = strip_comments(src)
     rel = path.relative_to(ROOT).as_posix()
     package = rel.split("/", 1)[0]
     namespace = namespaces.get(package, package)
     module = f"{namespace}.conjectures.{path.stem}"
+    return parse_source(path.read_text(), rel, module, statement_names)
+
+
+def parse_source(src: str, rel: str, module: str, statement_names: set[str]) -> tuple[list[dict], int]:
+    """Parse named source records without enrolling an entire public module."""
+    clean = strip_comments(src)
+    package = rel.split("/", 1)[0]
+    stem = Path(rel).stem
     matches = list(DECL_RE.finditer(clean))
     local_names = {match.group(2) for match in matches}
     declarations = []
@@ -208,7 +217,7 @@ def parse_file(
             "package": package,
             "path": rel,
             "line": clean.count("\n", 0, match.start()) + 1,
-            "phase": path.stem if re.fullmatch(r"X\d+", path.stem) else None,
+            "phase": stem if re.fullmatch(r"X\d+", stem) else None,
             "signature": signature,
             "signature_shape_hash": sha256(normalized_shape(signature)),
             "body_hash": sha256(body),
@@ -218,6 +227,142 @@ def parse_file(
             "direct_consumers": consumers,
         })
     return helpers, statements
+
+
+def source_git(root: Path, *args: str) -> str:
+    proc = subprocess.run(["git", *args], cwd=root, text=True, capture_output=True)
+    if proc.returncode:
+        raise RegistryError(f"repository source git {' '.join(args)}: {proc.stderr.strip()}")
+    return proc.stdout
+
+
+def regular_source_blob(root: Path, commit: str, path: str) -> tuple[str, str]:
+    """Read an immutable regular blob; Git symlinks/submodules are not sources."""
+    entries = source_git(root, "ls-tree", "-z", commit, "--", path).rstrip('\0').split('\0')
+    if len(entries) != 1 or '\t' not in entries[0]:
+        raise RegistryError(f"{commit}:{path}: missing regular source blob")
+    header, actual = entries[0].split('\t', 1)
+    mode, kind, blob = header.split()
+    if actual != path or kind != "blob" or mode not in {"100644", "100755"}:
+        raise RegistryError(f"{commit}:{path}: expected regular source blob")
+    return blob, source_git(root, "cat-file", "blob", blob)
+
+
+def project_sources(project: str) -> tuple[set[str], list[tuple[str, str]]]:
+    """Read project source membership and load paths, retaining option arguments.
+
+    Only the project's standard load-path/compiler-argument forms are supported;
+    an unknown option must not silently turn its argument into a source filename.
+    """
+    tokens = shlex.split(project, comments=True)
+    sources, mappings = set(), []
+    i = 0
+    while i < len(tokens):
+        token = tokens[i]
+        count = {"-R": 2, "-Q": 2, "-I": 1, "-arg": 1}.get(token)
+        if count is not None:
+            if i + count >= len(tokens):
+                raise RegistryError(f"truncated project option {token}")
+            if token in {"-R", "-Q"}:
+                mappings.append((tokens[i + 1], tokens[i + 2]))
+            if token == "-arg":
+                arguments = shlex.split(tokens[i + 1])
+                overrides = {"-R", "-Q", "-I", "-top", "-topfile", "-coqlib", "-exclude-dir"}
+                if any(argument.split('=', 1)[0] in overrides for argument in arguments):
+                    raise RegistryError(f"unsupported project ownership override {tokens[i + 1]}")
+            i += count + 1
+        elif token.startswith('-'):
+            raise RegistryError(f"unsupported project option {token}")
+        else:
+            if '=' in token:
+                raise RegistryError(f"unsupported project variable assignment {token}")
+            if token.endswith('.v'):
+                sources.add(token)
+            i += 1
+    return sources, mappings
+
+
+def project_module(path: str, project: str) -> str:
+    package, relative = path.split('/', 1)
+    namespaces = {"base": "GTBase", "atlas": "Atlas", "classical-lemmas": "ClassicalLemmas",
+                  **package_namespaces()}
+    if package not in namespaces:
+        raise RegistryError(f"{path}: unknown source owner")
+    sources, mappings = project_sources(project)
+    if relative not in sources:
+        raise RegistryError(f"{path}: source is not build-listed")
+    modules = []
+    for directory, namespace in mappings:
+        if directory.startswith('/'):
+            raise RegistryError(f"{path}: unsupported absolute project load path: {directory}")
+        prefix = posixpath.normpath(package + '/' + directory) + '/'
+        if path.startswith(prefix):
+            suffix = path[len(prefix):-2].replace('/', '.')
+            modules.append(namespace + '.' + suffix)
+    expected = namespaces[package] + '.' + relative.removeprefix('theories/')[:-2].replace('/', '.')
+    if modules != [expected]:
+        raise RegistryError(f"{path}: unknown or ambiguous project namespace ownership: {modules}")
+    return expected
+
+
+def repository_source_records(root: Path, spec: dict) -> dict[str, dict]:
+    """Validate explicit public sources, separately checking original and current.
+
+    This adds no declarations to the conjecture inventory or its debt counts.
+    Callers must pass their actual root, including temporary test repositories.
+    """
+    root = Path(root)
+    records = {}
+    for qualified, pin in spec.get('repository_sources', {}).items():
+        path, commit = pin['path'], pin['commit']
+        if source_git(root, 'cat-file', '-t', commit).strip() != 'commit':
+            raise RegistryError(f"{qualified}: repository source pin is not a commit")
+        blob, original = regular_source_blob(root, commit, path)
+        if blob != pin['blob']:
+            raise RegistryError(f"{qualified}: original source blob differs from pin")
+        project_path = path.split('/')[0] + '/_CoqProject'
+        _, original_project = regular_source_blob(root, commit, project_path)
+        project_file = root / project_path
+        if not project_file.is_file() or project_file.resolve() != root.resolve() / project_path:
+            raise RegistryError(f"{qualified}: current project missing or aliased")
+        current_file = root / path
+        if not current_file.is_file() or current_file.resolve() != root.resolve() / path:
+            raise RegistryError(f"{qualified}: current source missing or aliased")
+        module = project_module(path, original_project)
+        if project_module(path, project_file.read_text()) != module:
+            raise RegistryError(f"{qualified}: current source ownership changed")
+        name = qualified.rsplit('.', 1)[-1]
+        if qualified != module + '.' + name:
+            raise RegistryError(f"{qualified}: declaration does not belong to source path")
+        for label, text in (('original', original), ('current', current_file.read_text())):
+            clean = strip_comments(text)
+            # Explicit enrollment is limited to unambiguous top-level Definitions.
+            # Reject module-scoped names rather than guessing their resolution.
+            matches = [m for m in DECL_RE.finditer(clean) if m.group(2) == name]
+            if (len(matches) != 1 or matches[0].group(1) != 'Definition'
+                    or 'Local' in matches[0].group(0).split()):
+                raise RegistryError(f"{qualified}: {label} source needs one top-level Definition")
+            stack = []
+            prefix = clean[:matches[0].start()]
+            for m in re.finditer(r"^\s*(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|End)\s+([\w']+)\b", prefix, re.M):
+                if m.group(1) == 'End':
+                    if stack and stack[-1] == m.group(2):
+                        stack.pop()
+                elif not prefix[m.end():sentence_end(prefix, m.end())].lstrip().startswith(':='):
+                    # Typed modules and functors open scopes too. Module aliases
+                    # do not, and Sections deliberately leave a public Definition.
+                    stack.append(m.group(2))
+            if stack:
+                raise RegistryError(f"{qualified}: {label} nested-module source is unsupported")
+            parsed, _ = parse_source(text, path, module, set())
+            record = next(record for record in parsed if record['name'] == name)
+            if record['normalized_name'] not in spec['normalized_names']:
+                raise RegistryError(f"{qualified}: normalized name is not enrolled")
+            if label == 'original' and record['declaration_hash'] != pin['declaration_hash']:
+                raise RegistryError(f"{qualified}: original declaration hash differs from pin")
+            if label == 'current':
+                records[qualified] = record
+    return records
 
 
 def grouped(helpers: list[dict], field: str) -> dict[str, list[str]]:
@@ -280,22 +425,31 @@ def load_json(path: Path) -> dict:
 def validate_registry(inventory: dict) -> tuple[dict[str, dict], list[str]]:
     errors: list[str] = []
     try:
-        data = load_json(REGISTRY)
+        data = load_library_registry(ROOT)
     except ValueError as exc:
         return {}, [str(exc)]
     if data.get("schema_version") != 1:
-        errors.append("library_primitives.json: schema_version must be 1")
+        errors.append("library_primitives/: schema_version must be 1")
     entries = data.get("primitives")
     if not isinstance(entries, dict):
-        return {}, errors + ["library_primitives.json: primitives must be an object"]
+        return {}, errors + ["library_primitives/: primitives must be an object"]
 
-    helpers = {h["qualified_name"]: h for h in inventory["helpers"]}
+    inventory_helpers = {h["qualified_name"]: h for h in inventory["helpers"]}
     namespaces = package_namespaces()
     local_namespaces = set(namespaces)
     repository_declarations = repository_declaration_names(namespaces)
     claimed: dict[str, str] = {}
     for primitive_id, spec in sorted(entries.items()):
-        prefix = f"library_primitives.json:{primitive_id}"
+        prefix = f"library_primitives/{primitive_id}.json"
+        helpers = dict(inventory_helpers)
+        try:
+            repository_helpers = repository_source_records(ROOT, spec)
+            overlap = set(repository_helpers) & set(inventory_helpers)
+            if overlap:
+                errors.append(f"{prefix}: repository source is already a conjecture inventory source: {sorted(overlap)}")
+            helpers.update(repository_helpers)
+        except (ValueError, OSError) as exc:
+            errors.append(f"{prefix}: {exc}")
         if not re.fullmatch(r"[a-z][a-z0-9-]*", primitive_id):
             errors.append(f"{prefix}: invalid primitive id")
         if spec.get("status") not in ALLOWED_STATUSES:

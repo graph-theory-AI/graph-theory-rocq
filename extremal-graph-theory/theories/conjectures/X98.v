@@ -10,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X98 vocabulary ************************************************)
 
 Definition x98_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
-  (u, v) \in zip p (behead p) \/ (v, u) \in zip p (behead p).
+  seq_consecutive p u v.
 
 Definition x98_induced_path_between (G : sgraph) (a b : G) (p : seq G) : Prop :=
   match p with

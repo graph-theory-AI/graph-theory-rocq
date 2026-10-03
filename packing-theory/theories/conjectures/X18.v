@@ -31,9 +31,11 @@ Definition x18_vertex_partition
 Definition x18_independent_set (G : sgraph) (S : {set G}) : Prop :=
   forall u v : G, u \in S -> v \in S -> u -- v -> False.
 
+(** Since the C2 library migration (2026-10-02) a transparent alias of
+    [GTBase.common.perfect_matching]; the original "[x15_matching] saturating every
+    vertex" body is frozen (C1) and certified in theories/migration/matching.v. *)
 Definition x18_perfect_matching (G : sgraph) (M : {set {set G}}) : Prop :=
-  x15_matching M /\
-  forall v : G, #|[set e in M | v \in e]| = 1.
+  perfect_matching M.
 
 (** ** X18 statements ******************************************************)
 

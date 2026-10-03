@@ -1,0 +1,323 @@
+{
+  "family": "single-edge-deletion",
+  "canonical_name": "GTBase.common.del_edge_set",
+  "canonical_short_name": "del_edge_set",
+  "relation": "Pointwise equality with del_es_rel G [set e] for every vertex set e (del_edge_set1); identity isomorphism of the deleted graphs.",
+  "baseline_commit": "dbee364e6be7ac2e9a8e7edecbb1ff5f0878c8c0",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal"
+  },
+  "certificate_files": [
+    "base/theories/common.v",
+    "chromatic-theory/theories/migration/delete_edge.v",
+    "extremal-graph-theory/theories/migration/delete_edge.v",
+    "chromatic-theory/theories/migration/simple_edges.v",
+    "extremal-graph-theory/theories/migration/simple_edges.v",
+    "extremal-graph-theory/theories/migration/induced_free.v"
+  ],
+  "extra_certificates": [
+    "GTBase.common.del_edge_set1",
+    "GTBase.common.del_edge_set1_edge",
+    "GTBase.common.del_edge_set1_other",
+    "GTBase.common.del_edge_set1_invalid",
+    "GTBase.common.del_edge_set1_twice",
+    "GTBase.common.induced_free_host_diso",
+    "GTBase.common.induced_copy_host_diso",
+    "GTBase.common.del_edge_set_eq_diso",
+    "Chromatic.migration.delete_edge.x64_delete_edge_diso",
+    "Extremal.migration.delete_edge.x60_delete_edge_diso",
+    "Extremal.migration.delete_edge.x60_has_induced_cycle_diso",
+    "Extremal.migration.delete_edge.x61_induced_free_delete_edge_compat"
+  ],
+  "summary": [
+    "Batch A, family A3 (single-edge deletion). The four helpers of X64 and X60 now unfold to `del_es_rel G [set e]` and `del_edge_set G [set e]`. Their adjacency equals the old one pointwise for every vertex set e, valid edge or not, so the deleted graphs are related by the identity isomorphism. Each frozen graph freezes its symmetry and irreflexivity proofs, which `*_delete_edge_proofs_compat` relates to the retained live lemmas as a graph-construction certificate. Three rows: X64 (through `x64_bridgeless`, connectivity), X60 (induced cycles of the deleted graph), and X61 across modules (through `x61_induced_saturated`, `induced_free` of the deleted HOST). Each row also has an end-to-end certificate from its pre-M1 body (X64 and X60 over M1+A3, X61 over M1+A1+A3). The older M1 X64 and A1 X61 snapshots, which call the live deletion helpers, are kept unchanged and documented. U11's `sde_rel`/`sdel_edge` were deferred here and migrated by A4 (family single-edge-deletion-u11, report `sdel_edge`)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X64.x64_delete_edge_rel",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "x64_delete_edge_rel",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edge.v",
+      "frozen": "Legacy.x64_delete_edge_rel",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.delete_edge.x64_delete_edge_rel_compat",
+      "live_unfolds_to": "@del_es_rel G [set e]"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X64.x64_delete_edge_graph",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "x64_delete_edge_graph",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edge.v",
+      "frozen": "Legacy.x64_delete_edge_graph",
+      "substitutions": {
+        "x64_delete_edge_sym": "Legacy.x64_delete_edge_sym",
+        "x64_delete_edge_irrefl": "Legacy.x64_delete_edge_irrefl"
+      },
+      "certificate": "Chromatic.migration.delete_edge.x64_delete_edge_graph_compat",
+      "live_unfolds_to": "del_edge_set G [set e]"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X60.x60_delete_edge_rel",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "x60_delete_edge_rel",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "Legacy.x60_delete_edge_rel",
+      "substitutions": {},
+      "certificate": "Extremal.migration.delete_edge.x60_delete_edge_rel_compat",
+      "live_unfolds_to": "@del_es_rel G [set e]"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X60.x60_delete_edge_graph",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "x60_delete_edge_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "Legacy.x60_delete_edge_graph",
+      "substitutions": {
+        "x60_delete_edge_sym": "Legacy.x60_delete_edge_sym",
+        "x60_delete_edge_irrefl": "Legacy.x60_delete_edge_irrefl"
+      },
+      "certificate": "Extremal.migration.delete_edge.x60_delete_edge_graph_compat",
+      "live_unfolds_to": "del_edge_set G [set e]"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X64.x64_delete_edge_sym",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "x64_delete_edge_sym",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edge.v",
+      "frozen": "Legacy.x64_delete_edge_sym",
+      "substitutions": {
+        "x64_delete_edge_rel": "Legacy.x64_delete_edge_rel"
+      },
+      "certificate": "Chromatic.migration.delete_edge.x64_delete_edge_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X64.x64_delete_edge_irrefl",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "x64_delete_edge_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edge.v",
+      "frozen": "Legacy.x64_delete_edge_irrefl",
+      "substitutions": {
+        "x64_delete_edge_rel": "Legacy.x64_delete_edge_rel"
+      },
+      "certificate": "Chromatic.migration.delete_edge.x64_delete_edge_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X60.x60_delete_edge_sym",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "x60_delete_edge_sym",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "Legacy.x60_delete_edge_sym",
+      "substitutions": {
+        "x60_delete_edge_rel": "Legacy.x60_delete_edge_rel"
+      },
+      "certificate": "Extremal.migration.delete_edge.x60_delete_edge_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X60.x60_delete_edge_irrefl",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "x60_delete_edge_irrefl",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "Legacy.x60_delete_edge_irrefl",
+      "substitutions": {
+        "x60_delete_edge_rel": "Legacy.x60_delete_edge_rel"
+      },
+      "certificate": "Extremal.migration.delete_edge.x60_delete_edge_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X64.x64_bridgeless",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "x64_bridgeless",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edge.v",
+      "frozen": "X64Legacy.bridgeless",
+      "substitutions": {
+        "x64_bridgeless": "bridgeless",
+        "x64_delete_edge_graph": "Legacy.x64_delete_edge_graph"
+      },
+      "certificate": "Chromatic.migration.delete_edge.x64_bridgeless_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X61.x61_induced_saturated",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "x61_induced_saturated",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "X61Legacy.induced_saturated",
+      "substitutions": {
+        "x61_induced_saturated": "induced_saturated",
+        "x60_delete_edge_graph": "Legacy.x60_delete_edge_graph"
+      },
+      "certificate": "Extremal.migration.delete_edge.x61_induced_saturated_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X64.finite_bridgeless_cubic_two_homogeneous_exceptions_statement",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "finite_bridgeless_cubic_two_homogeneous_exceptions_statement",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edge.v",
+      "frozen": "X64Legacy.finite_bridgeless_cubic_two_homogeneous_exceptions_statement",
+      "substitutions": {
+        "x64_bridgeless": "bridgeless"
+      },
+      "certificate": "Chromatic.migration.delete_edge.finite_bridgeless_cubic_two_homogeneous_exceptions_statement_compat",
+      "original_certificate": "Chromatic.migration.delete_edge.finite_bridgeless_cubic_two_homogeneous_exceptions_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X60.induced_saturation_even_cycle_polynomial_size_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "induced_saturation_even_cycle_polynomial_size_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "X60Legacy.induced_saturation_even_cycle_polynomial_size_statement",
+      "substitutions": {
+        "x60_delete_edge_graph": "Legacy.x60_delete_edge_graph"
+      },
+      "certificate": "Extremal.migration.delete_edge.induced_saturation_even_cycle_polynomial_size_statement_compat",
+      "original_certificate": "Extremal.migration.delete_edge.induced_saturation_even_cycle_polynomial_size_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X61.infinite_family_without_finite_induced_saturation_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "infinite_family_without_finite_induced_saturation_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "X61Legacy.infinite_family_without_finite_induced_saturation_statement",
+      "substitutions": {
+        "x61_induced_saturated": "induced_saturated"
+      },
+      "certificate": "Extremal.migration.delete_edge.infinite_family_without_finite_induced_saturation_statement_compat",
+      "original_certificate": "Extremal.migration.delete_edge.infinite_family_without_finite_induced_saturation_statement_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X64.x64_bridgeless",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "x64_bridgeless",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edge.v",
+      "frozen": "X64Original.bridgeless",
+      "substitutions": {
+        "x64_bridgeless": "bridgeless",
+        "x64_edge_set": "simple_edges.Legacy.exists_edge_set",
+        "x64_delete_edge_graph": "Legacy.x64_delete_edge_graph"
+      },
+      "certificate": "Chromatic.migration.delete_edge.x64_bridgeless_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X64.finite_bridgeless_cubic_two_homogeneous_exceptions_statement",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "finite_bridgeless_cubic_two_homogeneous_exceptions_statement",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edge.v",
+      "frozen": "X64Original.finite_bridgeless_cubic_two_homogeneous_exceptions_statement",
+      "substitutions": {
+        "x64_bridgeless": "bridgeless"
+      },
+      "certificate": "Chromatic.migration.delete_edge.finite_bridgeless_cubic_two_homogeneous_exceptions_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "Chromatic.conjectures.X64.x64_edge_set",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "x64_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.exists_edge_set",
+      "substitutions": {
+        "x64_edge_set": "exists_edge_set"
+      },
+      "certificate": "Chromatic.migration.simple_edges.x64_edge_set_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X60.induced_saturation_even_cycle_polynomial_size_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "induced_saturation_even_cycle_polynomial_size_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "X60Original.induced_saturation_even_cycle_polynomial_size_statement",
+      "substitutions": {
+        "x60_edge_set": "simple_edges.Legacy.edge_set",
+        "x60_delete_edge_graph": "Legacy.x60_delete_edge_graph"
+      },
+      "certificate": "Extremal.migration.delete_edge.induced_saturation_even_cycle_polynomial_size_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "Extremal.conjectures.X60.x60_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "x60_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "extremal-graph-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x60_edge_set": "edge_set"
+      },
+      "certificate": "Extremal.migration.simple_edges.x60_edge_set_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X61.x61_induced_saturated",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "x61_induced_saturated",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "X61Original.induced_saturated",
+      "substitutions": {
+        "x61_induced_saturated": "induced_saturated",
+        "x61_induced_free": "Extremal.migration.induced_free.Legacy.x61_induced_free",
+        "x60_edge_set": "simple_edges.Legacy.edge_set",
+        "x60_delete_edge_graph": "Legacy.x60_delete_edge_graph"
+      },
+      "certificate": "Extremal.migration.delete_edge.x61_induced_saturated_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X61.infinite_family_without_finite_induced_saturation_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "infinite_family_without_finite_induced_saturation_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edge.v",
+      "frozen": "X61Original.infinite_family_without_finite_induced_saturation_statement",
+      "substitutions": {
+        "x61_induced_saturated": "induced_saturated"
+      },
+      "certificate": "Extremal.migration.delete_edge.infinite_family_without_finite_induced_saturation_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "Extremal.conjectures.X61.x61_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "x61_induced_free",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x61_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x61_induced_free_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/simple_edges.v#X64Legacy.bridgeless": "M1 snapshot limitation: M1 froze only X64's edge set, so this copy still calls the live x64_delete_edge_graph, which after A3 is del_edge_set G [set e] (pointwise equal; identity isomorphism). Kept unchanged; the fully frozen row is Chromatic.migration.delete_edge.X64Original (x64_bridgeless_original_compat, finite_bridgeless_cubic_two_homogeneous_exceptions_statement_original_compat).",
+    "extremal-graph-theory/theories/migration/induced_free.v#X61Legacy.induced_saturated": "A1 snapshot limitation: A1 froze the induced-free chain, so this copy still calls the live x60_delete_edge_graph. Kept unchanged; the A3 per-row chain is Extremal.migration.delete_edge.X61Legacy.",
+    "extremal-graph-theory/theories/migration/induced_free.v#X61Original.induced_saturated": "A1 snapshot limitation: A1's pre-M1/pre-A1 copy still calls the live x60_delete_edge_graph. Kept unchanged; the fully frozen row is Extremal.migration.delete_edge.X61Original (M1+A1+A3, infinite_family_without_finite_induced_saturation_statement_original_compat)."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X61.v",
+      "name": "x60_delete_edge_graph",
+      "note": "x61_induced_saturated (and through it infinite_family_without_finite_induced_saturation_statement) uses X60's deleted graph as the HOST of x61_induced_free. X61.v is unchanged; its chain is frozen in Extremal.migration.delete_edge.X61Legacy and X61Original."
+    }
+  ],
+  "distinct_variants": []
+}

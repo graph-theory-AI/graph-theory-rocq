@@ -13,18 +13,18 @@ Definition x64_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
 Definition x64_delete_edge_rel (G : sgraph) (e : {set G}) : rel G :=
-  fun x y => (x -- y) && ([set x; y] != e).
+  @del_es_rel G [set e].
 
 Lemma x64_delete_edge_sym (G : sgraph) (e : {set G}) :
   symmetric (@x64_delete_edge_rel G e).
-Proof. by move=> x y; rewrite /x64_delete_edge_rel sgP setUC. Qed.
+Proof. exact: del_es_sym. Qed.
 
 Lemma x64_delete_edge_irrefl (G : sgraph) (e : {set G}) :
   irreflexive (@x64_delete_edge_rel G e).
-Proof. by move=> x; rewrite /x64_delete_edge_rel sg_irrefl. Qed.
+Proof. exact: del_es_irrefl. Qed.
 
 Definition x64_delete_edge_graph (G : sgraph) (e : {set G}) : sgraph :=
-  SGraph (@x64_delete_edge_sym G e) (@x64_delete_edge_irrefl G e).
+  del_edge_set G [set e].
 
 Definition x64_bridgeless (G : sgraph) : Prop :=
   forall e : {set G},

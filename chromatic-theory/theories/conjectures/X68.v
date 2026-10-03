@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X68 -- v2 distant precolouring extension row *)
 
 From GTBase Require Export base.
+From GTBase Require Import colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X68 vocabulary ************************************************)
 
 Definition x68_proper_three_colouring (G : sgraph) (col : G -> 'I_3) : Prop :=
-  forall x y : G, x -- y -> col x != col y.
+  colourings.proper_colouring col.
 
 Definition x68_pairwise_distance_at_least
     (G : sgraph) (d : nat) (S : {set G}) : Prop :=

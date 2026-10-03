@@ -113,7 +113,7 @@ Definition xe2_incident_chord_extremal (k n m : nat) : Prop :=
     m' <= m.
 
 Definition xe2_internal_path_vertices (G : sgraph) (x y : G) (p : seq G) : {set G} :=
-  [set v : G | [&& v \in p, v != x & v != y]].
+  seq_interior x y p.
 
 Definition xe2_paths_internally_disjoint
     (G : sgraph) (m : nat) (x y : G) (P : 'I_m -> seq G) : Prop :=
@@ -122,8 +122,7 @@ Definition xe2_paths_internally_disjoint
             & xe2_internal_path_vertices x y (P j)].
 
 Definition xe2_path_edge_set (G : sgraph) (p : seq G) : {set {set G}} :=
-  [set e : {set G} |
-      [exists xy : G * G, (xy \in zip p (behead p)) && (e == [set xy.1; xy.2])]].
+  seq_edge_set p.
 
 Definition xe2_paths_edge_disjoint
     (G : sgraph) (m : nat) (P : 'I_m -> seq G) : Prop :=

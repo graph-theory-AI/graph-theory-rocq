@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X14 -- v2 matching and rainbow-path rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import edge_colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -11,10 +12,13 @@ Unset Printing Implicit Defensive.
 Definition x14_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
+(** Since the C1 library migration (2026-10-02) a transparent alias of the
+    coq-graph-theory [matching] (connectivity.v).  The original body, "M is a
+    set of edges of G whose distinct members are pairwise disjoint", is frozen
+    and certified equivalent in theories/migration/matching.v
+    ([x14_matching_compat]); the statement below is unchanged. *)
 Definition x14_matching (G : sgraph) (M : {set {set G}}) : Prop :=
-  M \subset x14_edge_set G /\
-  forall e f : {set G},
-    e \in M -> f \in M -> e != f -> [disjoint e & f].
+  matching M.
 
 Definition x14_subcubic (G : sgraph) : Prop :=
   forall v : G, #|N(v)| <= 3.
@@ -23,22 +27,17 @@ Definition x14_degree_two_count (G : sgraph) : nat :=
   #|[set v : G | #|N(v)| == 2]|.
 
 Definition x14_path_edges (G : sgraph) (p : seq G) : seq {set G} :=
-  map (fun e : G * G => [set e.1; e.2]) (zip p (behead p)).
+  seq_edge_list p.
 
 Definition x14_genuine_path (G : sgraph) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q => uniq p /\ path (--) x q
-  end.
+  seq_simple_path p.
 
+(** Since the C6 library migration (2026-10-03) a transparent alias of
+    [GTBase.edge_colourings.proper_edge_colouring]; the original body is frozen and certified
+    in theories/migration/edge_colourings.v. *)
 Definition x14_proper_edge_colouring
     (G : sgraph) (C : finType) (col : {set G} -> C) : Prop :=
-  forall e f : {set G},
-    e \in x14_edge_set G ->
-    f \in x14_edge_set G ->
-    e != f ->
-    ~~ [disjoint e & f] ->
-    col e != col f.
+  proper_edge_colouring col.
 
 Definition x14_rainbow_path
     (G : sgraph) (C : finType) (col : {set G} -> C) (p : seq G) : Prop :=

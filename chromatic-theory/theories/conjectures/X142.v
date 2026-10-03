@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X142 -- v2 neighbour-sum edge-colouring row *)
 
 From GTBase Require Export base.
+From GTBase Require Import edge_colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -18,14 +19,13 @@ Definition x142_incident_sum
     (G : sgraph) (k : nat) (col : {set G} -> 'I_k) (v : G) : nat :=
   \sum_(e in x142_edges_incident v) (val (col e)).+1.
 
+(** Since the C6 library migration (2026-10-03) a transparent alias of
+    [GTBase.edge_colourings.proper_edge_colouring]; the original body is frozen and certified
+    in theories/migration/simple_edges.v (M1) and
+    theories/migration/edge_colourings.v. *)
 Definition x142_proper_edge_colouring
     (G : sgraph) (k : nat) (col : {set G} -> 'I_k) : Prop :=
-  forall e f : {set G},
-    e \in x142_edge_set G ->
-    f \in x142_edge_set G ->
-    e != f ->
-    e :&: f != set0 ->
-    col e != col f.
+  proper_edge_colouring col.
 
 Definition x142_neighbour_sum_distinguishing
     (G : sgraph) (k : nat) (col : {set G} -> 'I_k) : Prop :=

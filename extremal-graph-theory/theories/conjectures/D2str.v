@@ -209,7 +209,7 @@ Definition linear_hypergraphs_with_dimension_3_statement : Prop :=
 
 (** Cyclic edge relation of a vertex sequence [c]: consecutive (cyclically). *)
 Definition cyc_edge (G : sgraph) (c : seq G) : rel G :=
-  fun x y => ((x, y) \in zip c (rot 1 c)) || ((y, x) \in zip c (rot 1 c)).
+  fun x y => seq_cyclic_consecutiveb c x y.
 
 (** A walk [u :: p] all of whose steps are cycle edges of [c]. *)
 Definition on_cycle_walk (G : sgraph) (c : seq G) (u : G) (p : seq G) : bool :=

@@ -30,6 +30,7 @@ gate:
 	python3 meta/formal_resolutions.py
 	python3 meta/check_gap_repairs.py
 	python3 meta/check_library_migration.py
+	python3 meta/migration_report.py --all --check --kernel
 
 # Toolchain-free status audit (no Coq build, no external OPG source) — backs the
 # "statement-complete" claim in CI. Only VERIFIES the committed manifest/overlay/report/edge-graph
@@ -52,14 +53,18 @@ audit:
 	python3 meta/report_corpus_status.py --check --edge-legs
 	python3 meta/check_statement_docs.py
 	python3 meta/library_inventory.py --check
+	python3 meta/migration_report.py --all --check
 
 mutation:
+	python3 meta/test_family_registry.py
+	python3 meta/test_check_library_migration.py
 	python3 meta/test_formal_resolutions.py
 	python3 meta/test_statement_docs.py
 	python3 meta/test_check_edges.py
 	python3 meta/faithfulness_lint.py --validate
 	python3 meta/faithfulness_mutation.py --timeout 900
 	python3 meta/library_inventory.py --validate
+	python3 meta/migration_report.py --validate --kernel
 
 # Active vacuity/refutability probe: try to close each `_statement` and its negation with a
 # bounded automation ladder + curated witnesses (meta/probe_hints/). Any statement that is

@@ -481,15 +481,11 @@ Unset Printing Implicit Defensive.
 Lemma x15_edge_setE (G : sgraph) : x15_edge_set G = E(G).
 Proof. by []. Qed.
 
+(** [x15_matching] is a transparent alias of [matching] since the C1 library
+    migration (2026-10-02); the lemma is kept for its consumers below. *)
 Lemma matching_x15 (G : sgraph) (M : {set {set G}}) :
   matching M -> x15_matching M.
-Proof.
-case=> M1 M2; split.
-  by apply/subsetP => e /M1; rewrite x15_edge_setE.
-move=> v; apply/card_le1_eqP => e1 e2.
-rewrite !inE => /andP [e1M ve1] /andP [e2M ve2].
-exact: (M2 _ _ e2M e1M v ve2 ve1).
-Qed.
+Proof. by []. Qed.
 
 (** ** A vertex cover bounds the number of edges ****************************)
 
@@ -2475,7 +2471,7 @@ move=> [f fP] dpos famE.
 have D_deg (v : G) : #|N(v)| <= Delta G by exact: leq_bigmax.
 have [col [col_lt col_match]] := line_colouring_E fP D_deg.
 have subE (i : 'I_m) : E i \subset E(G).
-  by move: (famE i); rewrite x15_edge_setE.
+  exact: famE i.
 have [C [mC hsz hcl]] := approx_fair_rounds fP subE dpos col_lt col_match.
 by exists C; split; [exact: matching_x15 | split].
 Qed.

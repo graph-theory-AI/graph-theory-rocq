@@ -74,7 +74,7 @@ Definition is_max_clique (G : sgraph) (Q : {set G}) : Prop :=
   clique Q /\ #|Q| = ω([set: G]).
 
 Definition monochromatic (G : sgraph) (c : G -> bool) (Q : {set G}) : Prop :=
-  {in Q &, forall x y : G, c x = c y}.
+  monochromatic_on c Q.
 
 Definition splits_max_cliques (G : sgraph) (c : G -> bool) : Prop :=
   forall Q : {set G}, is_max_clique Q -> ~ monochromatic c Q.
@@ -182,7 +182,7 @@ Definition book_thickness_of_subdivisions_statement : Prop :=
 Definition avgdeg_geq (G : sgraph) (d : nat) : Prop := average_degree_geq G d 1.
 
 Definition subgraph_of (H G : sgraph) : Prop :=
-  exists f : H -> G, injective f /\ is_hom f.
+  has_subgraph G H.
 
 (** Corpus row: opg:subgraph_of_large_average_degree_and_large_average_degree
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/subgraph_of_large_average_degree_and_large_average_degree/

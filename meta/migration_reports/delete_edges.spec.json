@@ -1,0 +1,403 @@
+{
+  "family": "edge-set-deletion",
+  "canonical_name": "GTBase.common.del_edge_set",
+  "canonical_short_name": "del_edge_set",
+  "relation": "Relations: definitional equality with del_es_rel. SGraph wrappers: same vertex type, convertible adjacency, identity isomorphism. X191 fg_mk_sgraph form: extensional equality, identity isomorphism.",
+  "baseline_commit": "03742d181456af2cae63288593d5b6277687895c",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal"
+  },
+  "certificate_files": [
+    "base/theories/common.v",
+    "chromatic-theory/theories/migration/delete_edges.v",
+    "extremal-graph-theory/theories/migration/delete_edges.v"
+  ],
+  "extra_certificates": [
+    "GTBase.common.del_edge_setE",
+    "GTBase.common.del_edge_set1",
+    "GTBase.common.edges_del_edge_set",
+    "GTBase.common.del_edge_set_nonedges",
+    "GTBase.common.del_edge_set_eq_diso",
+    "GTBase.common.chi_diso",
+    "GTBase.common.card_del_edge_set",
+    "GTBase.common.del_edge_setT",
+    "GTBase.common.del_edge_set_K3",
+    "GTBase.common.del_edge_set0",
+    "Chromatic.migration.delete_edges.x7_delete_edges_diso",
+    "Chromatic.migration.delete_edges.xe1_delete_edges_diso",
+    "Extremal.migration.delete_edges.xe1_delete_edges_diso",
+    "Extremal.migration.delete_edges.x191_delete_edges_diso",
+    "Extremal.migration.delete_edges.bipartite_diso",
+    "Extremal.migration.delete_edges.ball_diso",
+    "Extremal.migration.delete_edges.xe1_diameter_at_most_diso"
+  ],
+  "summary": [
+    "Batch A, family A2 (set-of-edges deletion). Three relations and four graph wrappers now unfold to `GTBase.common.del_es_rel` and `GTBase.common.del_edge_set`: X7, chromatic XE1, extremal XE1, and X191 (`fg_mk_sgraph`). Each frozen copy is checked against the source at 03742d1. Each frozen graph freezes its opaque symmetry and irreflexivity proofs. Each frozen statement goes through frozen copies along its whole affected chain, including XE2, which reaches the extremal XE1 helper across modules. Graph properties move along the identity isomorphism: χ by `chi_diso`, bipartiteness by `bipartite_diso`, balls and diameter by `ball_diso`. X191's blocked row and XE2's solved rows keep their statements. Single-edge deletion (X60, X64, U11) and the dead completion helper were classified and deferred here. The X60 and X64 single-edge helpers were later migrated by A3 (family single-edge-deletion, report `delete_edge`), so they are no longer listed as untouched variants; U11's `sdel_edge` was migrated by A4 (family single-edge-deletion-u11, report `sdel_edge`); the dead completion helper is still listed."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X7.x7_delete_edges_rel",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "x7_delete_edges_rel",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.x7_delete_edges_rel",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.delete_edges.x7_delete_edges_rel_compat",
+      "live_unfolds_to": "@del_es_rel G F"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X7.x7_delete_edges",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "x7_delete_edges",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.x7_delete_edges",
+      "substitutions": {
+        "x7_delete_edges_sym": "Legacy.x7_delete_edges_sym",
+        "x7_delete_edges_irrefl": "Legacy.x7_delete_edges_irrefl"
+      },
+      "certificate": "Chromatic.migration.delete_edges.x7_delete_edges_compat",
+      "live_unfolds_to": "del_edge_set G F"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.XE1.xe1_delete_edges_rel",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_delete_edges_rel",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.xe1_delete_edges_rel",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.delete_edges.xe1_delete_edges_rel_compat",
+      "live_unfolds_to": "@del_es_rel G F"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.XE1.xe1_delete_edges",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_delete_edges",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.xe1_delete_edges",
+      "substitutions": {
+        "xe1_delete_edges_sym": "Legacy.xe1_delete_edges_sym",
+        "xe1_delete_edges_irrefl": "Legacy.xe1_delete_edges_irrefl"
+      },
+      "certificate": "Chromatic.migration.delete_edges.xe1_delete_edges_compat",
+      "live_unfolds_to": "del_edge_set G F"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE1.xe1_delete_edges_rel",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_delete_edges_rel",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.xe1_delete_edges_rel",
+      "substitutions": {},
+      "certificate": "Extremal.migration.delete_edges.xe1_delete_edges_rel_compat",
+      "live_unfolds_to": "@del_es_rel G F"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE1.xe1_delete_edges",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_delete_edges",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.xe1_delete_edges",
+      "substitutions": {
+        "xe1_delete_edges_sym": "Legacy.xe1_delete_edges_sym",
+        "xe1_delete_edges_irrefl": "Legacy.xe1_delete_edges_irrefl"
+      },
+      "certificate": "Extremal.migration.delete_edges.xe1_delete_edges_compat",
+      "live_unfolds_to": "del_edge_set G F"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X191.x191_delete_edges",
+      "path": "extremal-graph-theory/theories/conjectures/X191.v",
+      "name": "x191_delete_edges",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.x191_delete_edges",
+      "substitutions": {},
+      "certificate": "Extremal.migration.delete_edges.x191_delete_edges_compat",
+      "live_unfolds_to": "del_edge_set F X"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X7.x7_delete_edges_sym",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "x7_delete_edges_sym",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.x7_delete_edges_sym",
+      "substitutions": {
+        "x7_delete_edges_rel": "Legacy.x7_delete_edges_rel"
+      },
+      "certificate": "Chromatic.migration.delete_edges.x7_delete_edges_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X7.x7_delete_edges_irrefl",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "x7_delete_edges_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.x7_delete_edges_irrefl",
+      "substitutions": {
+        "x7_delete_edges_rel": "Legacy.x7_delete_edges_rel"
+      },
+      "certificate": "Chromatic.migration.delete_edges.x7_delete_edges_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE1.xe1_delete_edges_sym",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_delete_edges_sym",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.xe1_delete_edges_sym",
+      "substitutions": {
+        "xe1_delete_edges_rel": "Legacy.xe1_delete_edges_rel"
+      },
+      "certificate": "Chromatic.migration.delete_edges.xe1_delete_edges_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE1.xe1_delete_edges_irrefl",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_delete_edges_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.xe1_delete_edges_irrefl",
+      "substitutions": {
+        "xe1_delete_edges_rel": "Legacy.xe1_delete_edges_rel"
+      },
+      "certificate": "Chromatic.migration.delete_edges.xe1_delete_edges_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_delete_edges_sym",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_delete_edges_sym",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.xe1_delete_edges_sym",
+      "substitutions": {
+        "xe1_delete_edges_rel": "Legacy.xe1_delete_edges_rel"
+      },
+      "certificate": "Extremal.migration.delete_edges.xe1_delete_edges_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_delete_edges_irrefl",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_delete_edges_irrefl",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "Legacy.xe1_delete_edges_irrefl",
+      "substitutions": {
+        "xe1_delete_edges_rel": "Legacy.xe1_delete_edges_rel"
+      },
+      "certificate": "Extremal.migration.delete_edges.xe1_delete_edges_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X7.x7_no_critical_edge",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "x7_no_critical_edge",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "X7Legacy.no_critical_edge",
+      "substitutions": {
+        "x7_no_critical_edge": "no_critical_edge",
+        "x7_delete_edges": "Legacy.x7_delete_edges"
+      },
+      "certificate": "Chromatic.migration.delete_edges.x7_no_critical_edge_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X7.x7_edge_deletion_preserves_chromatic",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "x7_edge_deletion_preserves_chromatic",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "X7Legacy.edge_deletion_preserves_chromatic",
+      "substitutions": {
+        "x7_edge_deletion_preserves_chromatic": "edge_deletion_preserves_chromatic",
+        "x7_delete_edges": "Legacy.x7_delete_edges"
+      },
+      "certificate": "Chromatic.migration.delete_edges.x7_edge_deletion_preserves_chromatic_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X7.x7_four_one_graph",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "x7_four_one_graph",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "X7Legacy.four_one_graph",
+      "substitutions": {
+        "x7_four_one_graph": "four_one_graph",
+        "x7_no_critical_edge": "no_critical_edge"
+      },
+      "certificate": "Chromatic.migration.delete_edges.x7_four_one_graph_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE1.xe1_edge_critical_set",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_edge_critical_set",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "XE1Legacy.edge_critical_set",
+      "substitutions": {
+        "xe1_edge_critical_set": "edge_critical_set",
+        "xe1_delete_edges": "Legacy.xe1_delete_edges"
+      },
+      "certificate": "Chromatic.migration.delete_edges.xe1_edge_critical_set_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE1.xe1_all_edge_critical_sets_large",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_all_edge_critical_sets_large",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "XE1Legacy.all_edge_critical_sets_large",
+      "substitutions": {
+        "xe1_all_edge_critical_sets_large": "all_edge_critical_sets_large",
+        "xe1_edge_critical_set": "edge_critical_set"
+      },
+      "certificate": "Chromatic.migration.delete_edges.xe1_all_edge_critical_sets_large_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_bipartite_plus_bounded_degree",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_bipartite_plus_bounded_degree",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "XE2Legacy.bipartite_plus_bounded_degree",
+      "substitutions": {
+        "xe2_bipartite_plus_bounded_degree": "bipartite_plus_bounded_degree",
+        "xe1_delete_edges": "Legacy.xe1_delete_edges"
+      },
+      "certificate": "Extremal.migration.delete_edges.xe2_bipartite_plus_bounded_degree_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_diameter_critical_two",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_diameter_critical_two",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "XE2Legacy.diameter_critical_two",
+      "substitutions": {
+        "xe2_diameter_critical_two": "diameter_critical_two",
+        "xe1_delete_edges": "Legacy.xe1_delete_edges"
+      },
+      "certificate": "Extremal.migration.delete_edges.xe2_diameter_critical_two_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X191.x191_subquadratic_deletion_to_partite",
+      "path": "extremal-graph-theory/theories/conjectures/X191.v",
+      "name": "x191_subquadratic_deletion_to_partite",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "X191Legacy.subquadratic_deletion_to_partite",
+      "substitutions": {
+        "x191_subquadratic_deletion_to_partite": "subquadratic_deletion_to_partite",
+        "x191_delete_edges": "Legacy.x191_delete_edges"
+      },
+      "certificate": "Extremal.migration.delete_edges.x191_subquadratic_deletion_to_partite_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X7.fixed_k_vertex_critical_edge_robust_statement",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "fixed_k_vertex_critical_edge_robust_statement",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "X7Legacy.fixed_k_vertex_critical_edge_robust_statement",
+      "substitutions": {
+        "x7_edge_deletion_preserves_chromatic": "edge_deletion_preserves_chromatic"
+      },
+      "certificate": "Chromatic.migration.delete_edges.fixed_k_vertex_critical_edge_robust_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X7.six_regular_four_one_graph_statement",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "six_regular_four_one_graph_statement",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "X7Legacy.six_regular_four_one_graph_statement",
+      "substitutions": {
+        "x7_four_one_graph": "four_one_graph"
+      },
+      "certificate": "Chromatic.migration.delete_edges.six_regular_four_one_graph_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.XE1.erdos_944_statement",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "erdos_944_statement",
+      "frozen_path": "chromatic-theory/theories/migration/delete_edges.v",
+      "frozen": "XE1Legacy.erdos_944_statement",
+      "substitutions": {
+        "xe1_all_edge_critical_sets_large": "all_edge_critical_sets_large"
+      },
+      "certificate": "Chromatic.migration.delete_edges.erdos_944_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_23_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_23_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "XE1Legacy.erdos_23_statement",
+      "substitutions": {
+        "xe1_delete_edges": "Legacy.xe1_delete_edges"
+      },
+      "certificate": "Extremal.migration.delete_edges.erdos_23_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_613_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_613_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "XE2Legacy.erdos_613_statement",
+      "substitutions": {
+        "xe2_bipartite_plus_bounded_degree": "bipartite_plus_bounded_degree"
+      },
+      "certificate": "Extremal.migration.delete_edges.erdos_613_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_742_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_742_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "XE2Legacy.erdos_742_statement",
+      "substitutions": {
+        "xe2_diameter_critical_two": "diameter_critical_two"
+      },
+      "certificate": "Extremal.migration.delete_edges.erdos_742_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X191.dense_H_free_clique_blowup_subquadratic_error_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X191.v",
+      "name": "dense_H_free_clique_blowup_subquadratic_error_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/delete_edges.v",
+      "frozen": "X191Legacy.dense_H_free_clique_blowup_subquadratic_error_statement",
+      "substitutions": {
+        "x191_subquadratic_deletion_to_partite": "subquadratic_deletion_to_partite"
+      },
+      "certificate": "Extremal.migration.delete_edges.dense_H_free_clique_blowup_subquadratic_error_statement_compat"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe1_delete_edges",
+      "note": "xe2_bipartite_plus_bounded_degree and xe2_diameter_critical_two (and through them erdos_613_statement and erdos_742_statement) use the extremal XE1 helper; XE2.v is unchanged and its chains are frozen in Extremal.migration.delete_edges.XE2Legacy."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_edges",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_triangle_free_diameter_completion_edges",
+      "note": "dead and buggy consumer (STATEMENT_IMPROVEMENTS.md:1891), text unchanged, not repaired"
+    }
+  ]
+}

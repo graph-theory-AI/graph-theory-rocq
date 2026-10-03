@@ -83,8 +83,7 @@ Proof. by case=> k [lam] [mu] [_ _ rk _ _]; exists k. Qed.
 Lemma proper_colb_inj (G : sgraph) k (c : {ffun G -> 'I_k}) :
   injective c -> proper_colb c.
 Proof.
-move=> ci; apply/forallP=> x; apply/forallP=> y; apply/implyP=> xy.
-by apply/negP=> /eqP /ci exy; move: xy; rewrite exy sg_irrefl.
+exact: colourings.proper_colouring_injective.
 Qed.
 
 (** SATISFIABLE WITNESS.  The identity colouring of [K_2] (a [2]-colouring of an edge)
@@ -125,7 +124,7 @@ Lemma csf_coeff_K1 : 0 < csf_coeff ('K_1) (fun _ : 'I_1 => 1).
 Proof.
 rewrite /csf_coeff card_gt0; apply/set0Pn; exists [ffun _ => ord0].
 rewrite inE; apply/andP; split.
-- by apply/forallP=> a; apply/forallP=> b; rewrite (ord1 a) (ord1 b) sg_irrefl.
+- exact: colourings.proper_colouring_K1.
 apply/forallP=> b; rewrite (ord1 b) /=.
 by rewrite (eq_card1 (x := ord0)) // => x; rewrite !inE ffunE eqxx (ord1 x).
 Qed.

@@ -64,7 +64,8 @@
     [choosable], [is_choice_number].
     Owned by the other [GTBase] modules re-exported below: [asymptotics],
     [complexity], [finite_graph], [graph_metric] (distances), [list_flexibility],
-    [posets], [surface]. *)
+    [posets], [surface], [walks_paths] (vertex sequences: [seq_vertices], the
+    support of a raw sequence, with its correspondence to the library [Path]). *)
 
 From mathcomp Require Export all_boot.
 (* WP4b: the core undirected vocabulary of coq-graph-theory is exported from ONE place.
@@ -98,7 +99,9 @@ From GTBase Require Export finite_graph.
 From GTBase Require Export graph_metric.
 From GTBase Require Export list_flexibility.
 From GTBase Require Export posets.
+From GTBase Require Export monochromatic.
 From GTBase Require Export surface.
+From GTBase Require Export walks_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

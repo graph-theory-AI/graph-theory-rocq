@@ -14,7 +14,7 @@ Definition xe1_edge_set (G : sgraph) : {set {set G}} :=
 Definition xe1_edge_count (G : sgraph) : nat := #|xe1_edge_set G|.
 
 Definition xe1_subgraph_of (H G : sgraph) : Prop :=
-  exists f : H -> G, injective f /\ forall x y : H, x -- y -> f x -- f y.
+  has_subgraph G H.
 
 Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
   forall x y : G, x \in S -> y \in S -> x -- y -> False.
@@ -23,7 +23,7 @@ Definition xe1_vertices_of_seq (G : sgraph) (c : seq G) : {set G} :=
   [set v : G | v \in c].
 
 Definition xe1_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : bool :=
-  ((u, v) \in zip c (rot 1 c)) || ((v, u) \in zip c (rot 1 c)).
+  seq_cyclic_consecutiveb c u v.
 
 Definition xe1_cycle (G : sgraph) (c : seq G) : Prop :=
   ucycle (--) c /\ 2 < size c.
@@ -44,22 +44,18 @@ Definition xe1_unbounded (f : nat -> nat) : Prop :=
   forall M : nat, exists n : nat, M <= f n.
 
 Definition xe1_delete_edges_rel (G : sgraph) (F : {set {set G}}) : rel G :=
-  fun x y => (x -- y) && ([set x; y] \notin F).
+  @del_es_rel G F.
 
 Lemma xe1_delete_edges_sym (G : sgraph) (F : {set {set G}}) :
   symmetric (@xe1_delete_edges_rel G F).
-Proof.
-move=> x y; rewrite /xe1_delete_edges_rel.
-rewrite sgP.
-by rewrite setUC.
-Qed.
+Proof. exact: del_es_sym. Qed.
 
 Lemma xe1_delete_edges_irrefl (G : sgraph) (F : {set {set G}}) :
   irreflexive (@xe1_delete_edges_rel G F).
-Proof. by move=> x; rewrite /xe1_delete_edges_rel sg_irrefl. Qed.
+Proof. exact: del_es_irrefl. Qed.
 
 Definition xe1_delete_edges (G : sgraph) (F : {set {set G}}) : sgraph :=
-  SGraph (@xe1_delete_edges_sym G F) (@xe1_delete_edges_irrefl G F).
+  del_edge_set G F.
 
 Definition xe1_vertex_critical (G : sgraph) (k : nat) : Prop :=
   forall v : G, χ([set: induced (~: [set v])]) < k.

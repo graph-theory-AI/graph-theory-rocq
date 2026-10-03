@@ -11,7 +11,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X102 vocabulary ***********************************************)
 
 Definition x102_induced_free (G H : sgraph) : Prop :=
-  forall S : {set G}, ~ inhabited (induced S ≃ H).
+  induced_free G H.
 
 Definition x102_tree_alpha_at_most (G : sgraph) (a : nat) : Prop :=
   exists (T : sgraph) (bag : T -> {set G}),

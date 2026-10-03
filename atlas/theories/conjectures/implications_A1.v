@@ -152,9 +152,9 @@ have avH : avgdeg_geq H d.
   rewrite /avgdeg_geq /average_degree_geq mul1n mulnC.
   apply: (@leq_trans (\sum_(x in H) d)); first by rewrite sum_nat_const.
   by apply: leq_sum => x _; exact: ltnW.
-have [K [nK [f [finj fhom]] avK girK]] := Hd H nH avH.
+have [K [nK /has_subgraphP[f [finj fhom]] avK girK]] := Hd H nH avH.
 exists K; split; last split.
-- exists (val \o f); split; first exact: inj_comp val_inj finj.
+- apply/has_subgraphP; exists (val \o f); split; first exact: inj_comp val_inj finj.
   by move=> x y xy; exact: (fhom x y xy).
 - by move=> c cc c2; apply: ltnW; exact: girK.
 - exact: avK.
@@ -198,7 +198,6 @@ case: (ltnP 1 #|T|) => T1.
   + exact: tree_has_edge.
   + move=> S S0 ST; apply: leq_trans (k_edge_connected_cut kc S0 ST); exact: leq_maxl.
   + move=> v; apply: leq_trans (k_edge_connected_deg v kc); exact: leq_maxr.
-  + by rewrite !x47_edge_setE.
 - apply: trivial_tree_decomposition.
   have ET : #|E(T)| = 0.
     apply/eqP; rewrite cards_eq0; apply/eqP/setP => e; rewrite inE.
@@ -219,7 +218,6 @@ case: (ltnP 1 #|T|) => T1.
   + exact: tree_has_edge.
   + move=> S S0 ST; apply: leq_trans (k_edge_connected_cut kc S0 ST); exact: leq_maxl.
   + move=> v; apply: leq_trans (k_edge_connected_deg v kc); exact: leq_maxr.
-  + by rewrite !x47_edge_setE.
 - apply: trivial_tree_decomposition.
   have ET : #|E(T)| = 0.
     apply/eqP; rewrite cards_eq0; apply/eqP/setP => e; rewrite inE.

@@ -7,6 +7,7 @@
     intentionally deferred. *)
 
 From Chromatic.conjectures Require Import U8.
+From GTBase Require Import colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -17,10 +18,10 @@ Unset Printing Implicit Defensive.
 (** Consecutive vertices on a listed cycle/path, stated without [nth] defaults
     so the definitions also behave over empty carriers. *)
 Definition x3_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : Prop :=
-  ((u, v) \in zip c (rot 1 c)) \/ ((v, u) \in zip c (rot 1 c)).
+  seq_cyclic_consecutive c u v.
 
 Definition x3_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
-  ((u, v) \in zip p (behead p)) \/ ((v, u) \in zip p (behead p)).
+  seq_consecutive p u v.
 
 (** A hole is an induced cycle of length at least four.  [ucycle] supplies the
     closed walk and vertex uniqueness; the final clause rules out chords. *)
@@ -38,7 +39,7 @@ Definition x3_holes_of_consecutive_lengths (G : sgraph) (ell : nat) : Prop :=
     forall i : nat, 1 <= i -> i <= ell -> x3_has_hole_length G (t + i).
 
 Definition x3_proper_colouring (G : sgraph) (C : finType) (col : G -> C) : Prop :=
-  forall u v : G, u -- v -> col u != col v.
+  colourings.proper_colouring col.
 
 Definition x3_rainbow_hole_run
     (G : sgraph) (C : finType) (col : G -> C) (s : nat) : Prop :=
@@ -49,7 +50,7 @@ Definition x3_stable_set (G : sgraph) (S : {set G}) : Prop :=
   forall u v : G, u \in S -> v \in S -> u -- v -> False.
 
 Definition x3_path_vertices (G : sgraph) (p : seq G) : {set G} :=
-  [set v | v \in p].
+  seq_vertices p.
 
 Definition x3_induced_path (G : sgraph) (p : seq G) : Prop :=
   [/\ uniq p,
@@ -113,16 +114,16 @@ Definition x3_constricting (F : nat -> Prop) : Prop :=
   forall k : nat, x3_k_constricting F k.
 
 Definition x3_complement_rel (G : sgraph) : rel G :=
-  fun u v => (u != v) && ~~ (u -- v).
+  @compl_rel G.
 
 Lemma x3_complement_sym (G : sgraph) : symmetric (@x3_complement_rel G).
-Proof. by move=> u v; rewrite /x3_complement_rel eq_sym sgP. Qed.
+Proof. exact: compl_rel_sym. Qed.
 
 Lemma x3_complement_irrefl (G : sgraph) : irreflexive (@x3_complement_rel G).
-Proof. by move=> u; rewrite /x3_complement_rel eqxx. Qed.
+Proof. exact: compl_rel_irrefl. Qed.
 
 Definition x3_complement_graph (G : sgraph) : sgraph :=
-  SGraph (@x3_complement_sym G) (@x3_complement_irrefl G).
+  compl G.
 
 Definition x3_complement_image (C : sgraph -> Prop) (G : sgraph) : Prop :=
   exists H : sgraph, C H /\ x3_iso G (x3_complement_graph H).

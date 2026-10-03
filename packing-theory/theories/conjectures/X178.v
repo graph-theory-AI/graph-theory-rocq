@@ -10,12 +10,10 @@ Unset Printing Implicit Defensive.
 (** ** Local X178 vocabulary ***********************************************)
 
 Definition x178_path_seq (G : sgraph) (p : seq G) : Prop :=
-  (p != [::]) /\ uniq p /\ sorted (--) p.
+  seq_simple_path p.
 
 Definition x178_path_edge_set (G : sgraph) (p : seq G) : {set {set G}} :=
-  [set e : {set G} |
-    [exists x : G, [exists y : G,
-      [&& x -- y, e == [set x; y], x \in p, y \in p & @consec G p x y]]]].
+  seq_index_edge_set p.
 
 Definition x178_path_decomposition_at_most (G : sgraph) (m : nat) : Prop :=
   exists (r : nat) (P : 'I_r -> seq G),

@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X126 -- v2 Thue choice number / pathwidth row *)
 
 From GTBase Require Export base.
+From GTBase Require Import path_trees.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,10 +11,7 @@ Unset Printing Implicit Defensive.
 
 (** A genuine (non-empty, simple) path: distinct vertices forming a walk. *)
 Definition x126_genuine_path (G : sgraph) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q => uniq p /\ path (--) x q
-  end.
+  seq_simple_path p.
 
 (** [col] is a nonrepetitive colouring: on every path of even length [2h] the
     colour sequence of the first half differs from that of the second half (no
@@ -59,7 +57,7 @@ Definition x126_tree_decomposition
   forall v : G, connected [set t : T | v \in bag t].
 
 Definition x126_path_index_graph (T : sgraph) : Prop :=
-  is_tree [set: T] /\ Delta T <= 2.
+  path_tree T.
 
 Definition x126_pathwidth_at_most (G : sgraph) (k : nat) : Prop :=
   exists (T : sgraph) (bag : T -> {set G}),

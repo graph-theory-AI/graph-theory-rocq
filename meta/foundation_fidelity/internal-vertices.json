@@ -1,0 +1,38 @@
+{
+ "schema_version": 1,
+ "family": "internal-vertices",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_interior": {
+     "verdict": "FAITHFUL",
+     "note": "seq_interior x y s is the set of the vertices of the raw sequence s other than the given endpoints x and y (seq_vertices s :\\: [set x; y]), with no walk, uniqueness or nonemptiness premise: [::] has none, [:: v] keeps v unless v is an endpoint, repeated vertices count once, equal endpoints remove one value, absent endpoints remove nothing, the head-plus-tail sequence x :: s gives the same set as s, and endpoints are removed as values (an endpoint value repeated inside s is not internal); on a packaged Path it is coq-graph-theory's interior."
+    },
+    "seq_inner": {
+     "verdict": "FAITHFUL",
+     "note": "seq_inner s removes the first and the last entry of a nonempty s as values and is set0 on [::] and on singletons, i.e. seq_interior of the sequence's own endpoints; on a packaged Path it is coq-graph-theory's interior."
+    }
+   },
+   "machine_evidence": [
+    "in_seq_interior",
+    "in_seq_inner",
+    "seq_interior_head",
+    "seq_interior_nodes",
+    "seq_inner_nodes",
+    "seq_interior_ground_nil",
+    "seq_interior_ground_seq1_endpoint",
+    "seq_interior_ground_seq1_inner",
+    "seq_interior_ground_path",
+    "seq_interior_ground_repeated_endpoint",
+    "seq_interior_ground_equal_endpoints",
+    "seq_interior_ground_absent_endpoints",
+    "seq_interior_ground_head_tail",
+    "seq_inner_ground_nil",
+    "seq_inner_ground_seq1",
+    "seq_inner_ground_path",
+    "seq_inner_ground_closed_walk"
+   ]
+  }
+ }
+}

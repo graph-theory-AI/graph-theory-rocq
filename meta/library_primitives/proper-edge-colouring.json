@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "family": "proper-edge-colouring",
+  "primitive": {
+    "canonical_name": "GTBase.edge_colourings.proper_edge_colouring",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "proper_edge_colouring",
+      "proper_ec",
+      "proper_ecolouring"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X142.x142_proper_edge_colouring",
+      "Chromatic.conjectures.X213.x213_proper_edge_colouring",
+      "Extremal.conjectures.D2chr.proper_ec",
+      "Extremal.foundations.edge_colourings.proper_ecolouring",
+      "GTMisc.conjectures.X14.x14_proper_edge_colouring"
+    ],
+    "repository_sources": {
+      "Extremal.foundations.edge_colourings.proper_ecolouring": {
+        "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+        "commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+        "blob": "f535ef83b0a6d5c11c3823473993eb0c78da6ba4",
+        "declaration_hash": "4a9760f40430e4331520f61d96277e34c48a774ba7df1b80a80346bff82cdf4c"
+      }
+    },
+    "consumers_remaining": 6,
+    "relation": "logical-equivalence-or-conversion-on-the-supplied-map-carriers",
+    "migration_notes": "C6 (2026-10-03, lancelot): two supplied-map interfaces in GTBase.edge_colourings over an eqType palette, both keeping the supplied map and its labels. SET MAPS ({set G} -> C): the public foundation source Extremal.foundations.edge_colourings.proper_ecolouring (endpoint form, eqType palette, kept public under its old name as a transparent adapter), X142 (intersection form, 'I_k) and X14 (not-disjoint form, finType) now unfold to proper_edge_colouring; the two edge-pair forms are certified by proper_edge_colouring_edgesP / proper_edge_colouring_meetP. PAIR MAPS (G -> G -> C, symmetric on ALL ordered pairs): X213 ('I_k) and D2chr.proper_ec (finType) now unfold to proper_pair_edge_colouring, by conversion. Empty-palette behaviour differs by interface and is grounded: no set map into an empty palette exists (the domain {set G} is inhabited), the empty graph admits the unique pair map into an empty palette, a nonempty edgeless graph does not (D2chr's K_1 = 1 convention). X142's numeric labels and incident sums, X213's whole-function Kempe states and used-colour count, D2chr's least star index, X229's full palette split are unchanged; M1's complete frozen X142 chain is reused (its helper certificate proof re-proved through proper_edge_colouring_edgesP) and restated by the chromatic entry point. X213's prose ('only adjacent pairs are constrained') disagrees with its body (symmetry on all pairs): recorded, not repaired. Additive B6 history composes the unchanged partial X14/X62 snapshots into complete Originals over both frozen families and raw path-edge/cover declarations; both reports verify the five new helper/statement bridges.",
+    "semantic_classes": {
+      "set-map-endpoint-form": {
+        "members": [
+          "Extremal.foundations.edge_colourings.proper_ecolouring"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias (public adapter kept)",
+        "certificate": "Extremal.migration.edge_colourings.proper_ecolouring_compat"
+      },
+      "set-map-edge-pair-form": {
+        "members": [
+          "Chromatic.conjectures.X142.x142_proper_edge_colouring",
+          "GTMisc.conjectures.X14.x14_proper_edge_colouring"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "note": "distinct edges with a nonempty intersection (X142), resp. not disjoint (X14), get different colours; both over the M1 edge-set alias of their file",
+        "certificates": [
+          "Chromatic.migration.edge_colourings.x142_proper_edge_colouring_compat",
+          "GTMisc.migration.edge_colourings.x14_proper_edge_colouring_compat"
+        ]
+      },
+      "pair-map-globally-symmetric": {
+        "members": [
+          "Chromatic.conjectures.X213.x213_proper_edge_colouring",
+          "Extremal.conjectures.D2chr.proper_ec"
+        ],
+        "count": 2,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "note": "ordered-pair maps symmetric on every pair, adjacent or not; distinct neighbours of a vertex get different colours",
+        "certificates": [
+          "Chromatic.migration.edge_colourings.x213_proper_edge_colouring_compat",
+          "Extremal.migration.edge_colourings.proper_ec_compat"
+        ]
+      }
+    },
+    "distinct_variants": {
+      "Chromatic.conjectures.U5.acyclic_edge_colouring": "Embeds the pair properness clauses but adds the no-bichromatic-cycle restriction; a whole definition that is not ordinary proper edge colouring. Untouched.",
+      "Chromatic.conjectures.U5.star_edge_colouring": "Embeds the pair properness clauses but adds the star restriction; untouched (D2chr's star_edge_colouring is a chain of this family because it calls proper_ec).",
+      "Chromatic.conjectures.U5.strong_edge_colourable": "Distance-two edge constraint; untouched.",
+      "Chromatic.conjectures.X43.x43_strong_edge_colourable": "Distance-two edge constraint on a local line graph; untouched.",
+      "Chromatic.conjectures.XE1.xe1_strong_edge_colouring": "Distance-two edge constraint; untouched.",
+      "Chromatic.conjectures.X219.x219_edge_choosable": "List assignments with membership requirements; its inlined properness belongs to a later list family. Untouched.",
+      "Cycle.conjectures.X9.x9_cycle_incident_edges_properly_coloured": "Constrains only the edges of a supplied sequence, not E(G). Untouched.",
+      "Chromatic.conjectures.X100.x100_modular_edge_colouring": "Permits repeated incident colours under modular degree restrictions. Untouched."
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.edge_colourings.x142_proper_edge_colouring_compat",
+      "Chromatic.migration.edge_colourings.x142_neighbour_sum_edge_colourable_compat",
+      "Chromatic.migration.edge_colourings.flandrin_neighbour_sum_distinguishing_edge_colouring_statement_compat",
+      "Chromatic.migration.edge_colourings.x213_proper_edge_colouring_compat",
+      "Chromatic.migration.edge_colourings.x213_edge_colourable_compat",
+      "Chromatic.migration.edge_colourings.one_factorization_conjecture_statement_compat",
+      "Chromatic.migration.edge_colourings.vizing_kempe_interchange_statement_compat",
+      "GTMisc.migration.edge_colourings.x14_edge_set_compat",
+      "GTMisc.migration.edge_colourings.x14_proper_edge_colouring_compat",
+      "GTMisc.migration.edge_colourings.andersen_rainbow_path_statement_compat",
+      "GTMisc.migration.edge_colourings.rainbow_paths_linear_edge_cover_statement_compat",
+      "Extremal.migration.edge_colourings.proper_ec_compat",
+      "Extremal.migration.edge_colourings.proper_ecolouring_compat",
+      "Extremal.migration.edge_colourings.star_edge_colouring_compat",
+      "Extremal.migration.edge_colourings.star_edge_k_colourable_compat",
+      "Extremal.migration.edge_colourings.is_star_chromatic_index_compat",
+      "Extremal.migration.edge_colourings.star_chromatic_index_of_complete_graphs_statement_compat",
+      "Extremal.migration.edge_colourings.expander_proper_colouring_two_connected_palettes_statement_compat",
+      "Chromatic.migration.simple_edges.x142_proper_edge_colouring_compat",
+      "Chromatic.migration.simple_edges.x142_neighbour_sum_edge_colourable_compat",
+      "Chromatic.migration.simple_edges.x142_statement_compat",
+      "Extremal.foundations.edge_colourings.proper_ecolouringE",
+      "Chromatic.migration.simple_edges.x142_edges_incident_compat",
+      "Chromatic.migration.simple_edges.x142_incident_sum_compat",
+      "Chromatic.migration.simple_edges.x142_neighbour_sum_distinguishing_compat",
+      "Chromatic.migration.simple_edges.x142_edge_set_compat",
+      "GTMisc.migration.edge_colourings.x14_path_edges_original_compat",
+      "GTMisc.migration.edge_colourings.x14_rainbow_path_original_compat",
+      "GTMisc.migration.edge_colourings.x62_edges_covered_by_paths_original_compat",
+      "GTMisc.migration.edge_colourings.andersen_rainbow_path_statement_original_compat",
+      "GTMisc.migration.edge_colourings.rainbow_paths_linear_edge_cover_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.edge_colourings.edges_meet_endpoint",
+      "GTBase.edge_colourings.proper_edge_colouring_edgesP",
+      "GTBase.edge_colourings.proper_edge_colouring_meetP",
+      "GTBase.edge_colourings.eq_proper_edge_colouring",
+      "GTBase.edge_colourings.proper_edge_colouring_comp",
+      "GTBase.edge_colourings.proper_edge_colouring_relabel",
+      "GTBase.edge_colourings.no_set_map_into_empty_palette",
+      "GTBase.edge_colourings.proper_pair_edge_colouring_sym",
+      "GTBase.edge_colourings.proper_pair_edge_colouring_neighbours",
+      "GTBase.edge_colourings.proper_pair_edge_colouring_comp",
+      "GTBase.edge_colourings.proper_pair_edge_colouring_relabel",
+      "GTBase.edge_colourings.proper_edge_colouring_pairP",
+      "GTBase.edge_colourings.proper_edge_colouring_K2",
+      "GTBase.edge_colourings.proper_pair_edge_colouring_K2",
+      "GTBase.edge_colourings.not_proper_edge_colouring_K3",
+      "GTBase.edge_colourings.not_proper_pair_edge_colouring_K3",
+      "GTBase.edge_colourings.proper_pair_edge_colouring_K0",
+      "GTBase.edge_colourings.no_pair_map_into_empty_palette",
+      "GTBase.edge_colourings.proper_pair_edge_colouring_K1"
+    ],
+    "legacy_baseline": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+    "migration_report": "meta/migration_reports/proper_edge_colouring.md",
+    "migration_spec": "meta/migration_reports/proper_edge_colouring.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/proper-edge-colouring.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C6.md",
+    "downstream_client": "base/theories/examples/edge_colourings.v",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.coloring",
+        "GraphTheory.mgraph",
+        "GraphTheory.sgraph",
+        "GTBase.base",
+        "GTBase.colourings",
+        "Extremal.foundations.edge_colourings"
+      ],
+      "result": "adapted-in-base",
+      "candidate": "GTBase.edge_colourings.proper_edge_colouring",
+      "note": "coq-graph-theory 0.9.7 has no supplied proper-edge-colouring predicate: coloring is a partition into stable sets, mgraph.line_graph is DIRECTED (target e1 == source e2) and GTBase.base.line_graph lives on multigraph edge identities with a count-only edge_colourable, so none is a faithful canonical for the corpus' supplied maps; no line-graph bridge is claimed. The two corpus carriers are kept as two interfaces of one focused GTBase module (three areas need it): set maps {set G} -> C read on the doubletons of actual edges, and pair maps G -> G -> C symmetric on all ordered pairs, both over an eqType palette (the public foundation source already was; C5's finType vertex-colouring wrapper is not used so as not to narrow it). The set-to-pair bridge fun x y => col [set x; y] is explicit; no map on the subtype of actual edges replaces either domain, because that would admit an empty palette for every edgeless graph while the corpus domains do not.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "family_scope",
+    "reviewed_commit": "7b04105d054089bfe937fe5fd6b4fc531f1b5547",
+    "independent_review": "meta/migration_reviews/proper_edge_colouring.md"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "family": "single-edge-deletion-u11",
+  "primitive": {
+    "canonical_name": "GTBase.common.del_edge_set",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "sde_rel",
+      "sdel_edge"
+    ],
+    "source_definitions": [
+      "Reconstruction.conjectures.U11.sde_rel",
+      "Reconstruction.conjectures.U11.sdel_edge"
+    ],
+    "consumers_remaining": 3,
+    "relation": "Pointwise equality of adjacency with del_es_rel G [set e] for every vertex set e, valid edge or not (GTBase.common.del_edge_set1); the cards are related by the identity isomorphism. The cross-name U11 companion of the single-edge-deletion family (A3), deferred there by consumer scope.",
+    "specialization_of": "single-edge-deletion",
+    "semantic_classes": {
+      "single-pair-deletion-section": {
+        "count": 2,
+        "verdict": "equivalent",
+        "certificate": "GTBase.common.del_edge_set1",
+        "note": "U11's Section DelEdge (Variables G e): sde_rel x y = (x -- y) && ([set x; y] != e), sdel_edge = SGraph sde_sym sde_irrefl."
+      }
+    },
+    "retained_proof_lemmas": {
+      "note": "sde_sym and sde_irrefl keep their names and statements and are re-proved from del_es_sym/del_es_irrefl. They are frozen verbatim in the ProofsLegacy Section as the opaque proof scaffolding of GraphLegacy.sdel_edge; sdel_edge_proofs_compat relates the SGraph built from the frozen proofs to the one built from the live lemmas (an isomorphism of constructions, not an equality of proof terms)."
+    },
+    "deck_bridges": {
+      "note": "same_edge_deck_compat keeps the same bijection f of edge indices and composes each card isomorphism with the identity isomorphisms of its two cards (sdel_edge_diso), so every card keeps its multiplicity; no card is replaced by a set equality. The Kelly premise and the external Whitney/Greenwell statement keep the four-edge guard and the same-edge-deck hypothesis; both stay conditional."
+    },
+    "compatibility_theorems": [
+      "Reconstruction.migration.sdel_edge.sde_rel_compat",
+      "Reconstruction.migration.sdel_edge.sdel_edge_compat",
+      "Reconstruction.migration.sdel_edge.sdel_edge_diso",
+      "Reconstruction.migration.sdel_edge.sdel_edge_proofs_compat",
+      "Reconstruction.migration.sdel_edge.same_edge_deck_compat",
+      "Reconstruction.migration.sdel_edge.edge_reconstructible_compat",
+      "Reconstruction.migration.sdel_edge.edge_reconstruction_statement_compat",
+      "Reconstruction.migration.sdel_edge.whitney_line_inversion_premise_compat",
+      "Reconstruction.migration.sdel_edge.external_whitney_line_inversion_statement_compat",
+      "Reconstruction.migration.sdel_edge.legacy_reconstruction_implies_edge_reconstruction"
+    ],
+    "api_theorems": [
+      "GTBase.common.del_edge_set1",
+      "GTBase.common.del_edge_set_eq_diso"
+    ],
+    "public_client": "base/theories/examples/del_edge.v",
+    "legacy_baseline": "9e030727db115917ae077ac07a8fc6aa68661f73",
+    "migration_report": "meta/migration_reports/sdel_edge.md",
+    "migration_spec": "meta/migration_reports/sdel_edge.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A4.md",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.sgraph",
+        "GraphTheory.digraph",
+        "GTBase.common"
+      ],
+      "result": "adapted-in-base",
+      "candidate": "GTBase.common.del_edge_set",
+      "note": "Upstream digraph.del_edge deletes one directed arc of a diGraph (U11's reason for its own name), and sgraph.del_edges e deletes every edge inside the vertex set e, which agrees with sdel_edge only for genuine edges (grounding_U11.sde_del_edges_rel keeps that hypothesis). del_edge_set G [set e], the A2/A3 canonical, is the single-pair deletion for every vertex set e.",
+      "audited_at": "2026-10-02"
+    },
+    "reviewed_by": "matching_scope",
+    "reviewed_commit": "5ec0f334f5b1825e4fba29bb74252333ec41dd5d",
+    "independent_review": "meta/migration_reviews/sdel_edge.md"
+  }
+}

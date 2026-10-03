@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "family": "edge-family",
+  "primitive": {
+    "canonical_name": "Packing.foundations.edge_families.edge_family",
+    "owner": "packing-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "edge_family"
+    ],
+    "source_definitions": [
+      "Packing.conjectures.X15.x15_edge_family",
+      "Packing.conjectures.X15alone.x15_edge_family"
+    ],
+    "consumers_remaining": 5,
+    "relation": "logical-equivalence",
+    "legacy_baseline": "9e030727db115917ae077ac07a8fc6aa68661f73",
+    "semantic_classes": {
+      "indexed-edge-subsets": {
+        "members": [
+          "Packing.conjectures.X15.x15_edge_family"
+        ],
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "count": 1
+      },
+      "excluded-self-contained-variant": {
+        "members": [
+          "Packing.conjectures.X15alone.x15_edge_family"
+        ],
+        "state": "deferred-excluded",
+        "verdict": "identical helper body, excluded statement variant",
+        "count": 1
+      }
+    },
+    "migration_notes": "C4 preserves unrestricted indexed subsets, including overlap/repetition and zero indices. It reuses C1 full snapshots and four exact statement bridges; C2/C3 stay unchanged.",
+    "distinct_variants": {
+      "Packing.conjectures.X15alone.x15_edge_family": "Identical original helper body in a self-contained file excluded from the package project; preserve unchanged and do not claim its statement."
+    },
+    "compatibility_theorems": [
+      "Packing.migration.edge_families.bipartite_matching_underrepresentation_llm2_statement_compat",
+      "Packing.migration.edge_families.bipartite_matching_underrepresentation_llm3_statement_compat",
+      "Packing.migration.edge_families.bipartite_matching_underrepresentation_llm_statement_compat",
+      "Packing.migration.edge_families.bipartite_matching_underrepresentation_statement_compat",
+      "Packing.migration.edge_families.x15_edge_family_compat",
+      "Packing.migration.matching.x15_edge_set_compat",
+      "Packing.migration.matching.x15_matching_compat"
+    ],
+    "api_theorems": [
+      "Packing.foundations.edge_families.edge_family_powersetP",
+      "Packing.foundations.edge_families.edge_family_member",
+      "Packing.foundations.edge_families.edge_family_subfamily",
+      "Packing.foundations.edge_families.edge_family_reindex",
+      "Packing.foundations.edge_families.edge_family_unionP",
+      "Packing.foundations.edge_families.not_edge_family_non_edge",
+      "Packing.foundations.edge_families.edge_family0",
+      "Packing.foundations.edge_families.edge_family_empty",
+      "Packing.foundations.edge_families.edge_family_full",
+      "Packing.foundations.edge_families.edge_family_K2_repeated",
+      "Packing.foundations.edge_families.K2_repeated_members_overlap",
+      "Packing.foundations.edge_families.not_edge_family_loop",
+      "Packing.foundations.edge_families.not_edge_family_empty_edge"
+    ],
+    "migration_report": "meta/migration_reports/edge_family.md",
+    "migration_spec": "meta/migration_reports/edge_family.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C4.md",
+    "downstream_client": "packing-theory/theories/examples/edge_families.v",
+    "foundation_fidelity": "meta/foundation_fidelity/edge-family.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "mathcomp.boot.finset",
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.connectivity"
+      ],
+      "result": "indexed-wrapper-over-upstream-subsets",
+      "candidate": "MathComp subsetP, powerset/powersetE and bigcupP; GraphTheory sg_edge_set",
+      "note": "The installed sources provide E(G) and generic subset/powerset membership. No indexed edge-family primitive was found in these modules. The smallest wrapper preserves the original Prop-valued forall-index interface; edge_family_powersetP and edge_family_unionP relate it to upstream finite-set presentations without adding restrictions.",
+      "audited_at": "2026-10-02"
+    },
+    "reviewed_by": "arthur",
+    "reviewed_commit": "57d6b9fe844e3ba25c2b209a855b8d389290d6d8",
+    "independent_review": "meta/migration_reviews/edge_family.md"
+  }
+}

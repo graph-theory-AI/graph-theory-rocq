@@ -10,14 +10,10 @@ Unset Printing Implicit Defensive.
 (** ** Local X11 vocabulary ************************************************)
 
 Definition x11_path_vertices (G : sgraph) (p : seq G) : {set G} :=
-  [set v | v \in p].
+  seq_vertices p.
 
 Definition x11_xy_path (G : sgraph) (X Y : {set G}) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q =>
-      x \in X /\ last x q \in Y /\ uniq p /\ path (--) x q
-  end.
+  seq_set_path X Y p.
 
 Definition x11_closed_neighbourhood (G : sgraph) (Z : {set G}) : {set G} :=
   Z :|: \bigcup_(z in Z) N(z).
