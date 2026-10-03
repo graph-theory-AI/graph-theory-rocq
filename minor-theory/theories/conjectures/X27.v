@@ -21,7 +21,7 @@ Definition x27_treewidth_at_most (G : sgraph) (k : nat) : Prop :=
     forall t : T, #|bag t| <= k.+1.
 
 Definition x27_consecutive_in_cycle (G : sgraph) (c : seq G) (x y : G) : bool :=
-  ((x, y) \in zip c (rot 1 c)) || ((y, x) \in zip c (rot 1 c)).
+  seq_cyclic_consecutiveb c x y.
 
 Definition x27_hole (G : sgraph) (c : seq G) : Prop :=
   ucycle (--) c /\ 3 < size c /\
