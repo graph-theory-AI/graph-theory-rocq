@@ -1,0 +1,214 @@
+{
+  "family": "clique-number",
+  "canonical_name": "GraphTheory.core.coloring.omega_mem",
+  "canonical_short_name": "omega_mem",
+  "relation": "whole-graph clique number: Chromatic X112 x112_omega and Minor X121 x121_omega := ω([set: G]) already are the upstream expression (conversions); Chromatic X124 x124_omega := \\max_(S : {set G} | cliqueb S) #|S| equals ω([set: G]) by GTBase.base.omega_setT_maxE, unconditionally (the cliques subset filter always holds on the full vertex set; K_0 gives 0). Exact natural-number equalities; no nonempty guard and no duplicate clique-number primitive.",
+  "baseline_commit": "76122100ec110f03f4b406d6b98c848a09aedf99",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/base.v",
+    "chromatic-theory/theories/migration/clique_number.v",
+    "minor-theory/theories/migration/clique_number.v",
+    "chromatic-theory/theories/migration/chi_bounded_classes.v",
+    "minor-theory/theories/migration/bag_decompositions.v"
+  ],
+  "extra_certificates": [
+    "GTBase.base.omega_setT_maxE"
+  ],
+  "summary": [
+    "Batch A, family A16 (whole-graph clique number), on the fixed A15 pin 7612210 (no private union). The canonical is upstream GraphTheory.core.coloring.omega_mem (notation ω): ω([set: G]) = \\max_(B in cliques [set x in [set: G]]) #|B|. X112's and X121's helpers already are ω([set: G]) and stay as conversions; X124's bigmax over all cliques equals it by the new base adapter omega_setT_maxE, proved without any nonempty guard. No clique-number primitive is added. The public client shows K_0 = 0, K_1 = 1, K_n = n, a nonempty edgeless graph = 1 and the order bound, as exact natural numbers.",
+    "",
+    "Frozen at 7612210: the three helpers, X124's chain x124_poly_chi_bounded and the current rows X124 dreier_torunczyk_merge_width_poly_chi_bounded_statement (blocked: its merge-width antecedent defect, coefficient-list witness and class-uniform polynomial are kept verbatim; X124 has no older history, so this row is also complete) and X121 dallard_milanic_storgel_tw_omega_tree_alpha_statement (full biconditional, class-uniform f and k, unguarded class; the missing hereditary premise is recorded, not repaired). X112's helper reaches no current row since C9 moved its chi-bound to the public predicate, so its whole corpus row is enrolled as an original-statement: X112Original copies C9's pre-C9 chi-bound helper with the frozen clique number and the whole closure row from C9's baseline 0659592 (both class bounds and the closure kept). X121Original composes the frozen helper with C13's frozen treewidth, decomposition and tree-alpha bodies (text at 58d6d60). Four whole-row iffs: X124, X121, X112Original, X121Original. X124's chain bridge keeps the same coefficient list.",
+    "",
+    "History: C9's X112Legacy chi-bound and C13's Minor Legacy X121 row keep the live clique numbers byte-for-byte and are documented below; A16's per-row X121 copy keeps C13's live treewidth and tree-alpha helpers and is documented reciprocally in C13's spec. The complete bridges reuse C9's and C13's certificates. Doc blocks are unchanged. Clique counts, inclusion-maximal cliques and the maximum-clique set predicate are different contracts and stay distinct."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X112.x112_omega",
+      "path": "chromatic-theory/theories/conjectures/X112.v",
+      "name": "x112_omega",
+      "frozen_path": "chromatic-theory/theories/migration/clique_number.v",
+      "frozen": "Legacy.x112_omega",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.clique_number.x112_omega_compat",
+      "live_unfolds_to": "ω([set: G])"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X124.x124_omega",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "x124_omega",
+      "frozen_path": "chromatic-theory/theories/migration/clique_number.v",
+      "frozen": "Legacy.x124_omega",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.clique_number.x124_omega_compat",
+      "live_unfolds_to": "ω([set: G])"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X124.x124_poly_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "x124_poly_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/clique_number.v",
+      "frozen": "X124Legacy.x124_poly_chi_bounded",
+      "substitutions": {
+        "x124_omega": "Legacy.x124_omega"
+      },
+      "certificate": "Chromatic.migration.clique_number.x124_poly_chi_bounded_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X124.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/clique_number.v",
+      "frozen": "X124Legacy.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "substitutions": {
+        "x124_poly_chi_bounded": "X124Legacy.x124_poly_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.clique_number.dreier_torunczyk_merge_width_poly_chi_bounded_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X112.x112_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X112.v",
+      "name": "x112_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/clique_number.v",
+      "frozen": "X112Original.x112_chi_bounded",
+      "substitutions": {
+        "x112_omega": "Legacy.x112_omega"
+      },
+      "certificate": "Chromatic.migration.clique_number.x112_chi_bounded_original_compat",
+      "commit": "0659592d2a379b1f2564601e8b61689e05eac416"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X112.chi_bounded_closure_substitution_gluing_statement",
+      "path": "chromatic-theory/theories/conjectures/X112.v",
+      "name": "chi_bounded_closure_substitution_gluing_statement",
+      "frozen_path": "chromatic-theory/theories/migration/clique_number.v",
+      "frozen": "X112Original.chi_bounded_closure_substitution_gluing_statement",
+      "substitutions": {
+        "x112_chi_bounded": "X112Original.x112_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.clique_number.chi_bounded_closure_substitution_gluing_statement_original_compat",
+      "commit": "0659592d2a379b1f2564601e8b61689e05eac416",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X121.x121_omega",
+      "path": "minor-theory/theories/conjectures/X121.v",
+      "name": "x121_omega",
+      "frozen_path": "minor-theory/theories/migration/clique_number.v",
+      "frozen": "Legacy.x121_omega",
+      "substitutions": {},
+      "certificate": "Minor.migration.clique_number.x121_omega_compat",
+      "live_unfolds_to": "ω([set: G])"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X121.dallard_milanic_storgel_tw_omega_tree_alpha_statement",
+      "path": "minor-theory/theories/conjectures/X121.v",
+      "name": "dallard_milanic_storgel_tw_omega_tree_alpha_statement",
+      "frozen_path": "minor-theory/theories/migration/clique_number.v",
+      "frozen": "X121Legacy.dallard_milanic_storgel_tw_omega_tree_alpha_statement",
+      "substitutions": {
+        "x121_omega": "Legacy.x121_omega"
+      },
+      "certificate": "Minor.migration.clique_number.dallard_milanic_storgel_tw_omega_tree_alpha_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X121.dallard_milanic_storgel_tw_omega_tree_alpha_statement",
+      "path": "minor-theory/theories/conjectures/X121.v",
+      "name": "dallard_milanic_storgel_tw_omega_tree_alpha_statement",
+      "frozen_path": "minor-theory/theories/migration/clique_number.v",
+      "frozen": "X121Original.dallard_milanic_storgel_tw_omega_tree_alpha_statement",
+      "substitutions": {
+        "x121_omega": "Legacy.x121_omega",
+        "x27_treewidth_at_most": "C13.Legacy.x27_treewidth_at_most",
+        "x121_tree_alpha_le": "C13.Legacy.x121_tree_alpha_le"
+      },
+      "certificate": "Minor.migration.clique_number.dallard_milanic_storgel_tw_omega_tree_alpha_statement_original_compat",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X27.x27_tree_decomposition",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_tree_decomposition",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x27_tree_decomposition",
+      "substitutions": {},
+      "certificate": "Minor.migration.bag_decompositions.x27_tree_decomposition_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X27.x27_treewidth_at_most",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_treewidth_at_most",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x27_treewidth_at_most",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x27_treewidth_at_most_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X121.x121_tree_alpha_le",
+      "path": "minor-theory/theories/conjectures/X121.v",
+      "name": "x121_tree_alpha_le",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x121_tree_alpha_le",
+      "substitutions": {
+        "x27_tree_decomposition": "Legacy.x27_tree_decomposition"
+      },
+      "certificate": "Minor.migration.bag_decompositions.x121_tree_alpha_le_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/chi_bounded_classes.v#X112Legacy.x112_chi_bounded": "C9 snapshot: C9 froze X112's pre-C9 chi-bound but kept the live x112_omega (unchanged by A16: already ω([set: G]), a conversion). Kept unchanged; the complete chain and row are Chromatic.migration.clique_number.X112Original.x112_chi_bounded and Chromatic.migration.clique_number.X112Original.chi_bounded_closure_substitution_gluing_statement, certified by x112_chi_bounded_original_compat and chi_bounded_closure_substitution_gluing_statement_original_compat, which reuse C9's certificates.",
+    "minor-theory/theories/migration/bag_decompositions.v#Legacy.dallard_milanic_storgel_tw_omega_tree_alpha_statement": "C13 per-row snapshot: C13 froze this row over its own frozen treewidth and tree-alpha bodies but kept the live x121_omega (unchanged by A16: already ω([set: G]), a conversion). Kept unchanged; the complete row is Minor.migration.clique_number.X121Original.dallard_milanic_storgel_tw_omega_tree_alpha_statement, certified by dallard_milanic_storgel_tw_omega_tree_alpha_statement_original_compat, which reuses this certificate."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.U13.is_max_clique",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "is_max_clique",
+      "note": "a predicate on vertex sets (a clique of size omega), not the number; a separate adapter family"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X181.x181_maximal_clique",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_maximal_clique",
+      "note": "inclusion-maximal Boolean clique with 1 < #|S|; not maximum cardinality"
+    },
+    {
+      "qualified": "Packing.conjectures.XE1.xe1_maximal_clique",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_maximal_clique",
+      "note": "inclusion-maximal clique predicate (empty and singleton allowed); not maximum cardinality"
+    },
+    {
+      "qualified": "Minor.conjectures.X174.x174_clique_count",
+      "path": "minor-theory/theories/conjectures/X174.v",
+      "name": "x174_clique_count",
+      "note": "number of cliques (the empty one included), not the largest clique size"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and of the base adapter, exact types of the frozen and live helpers, chain and rows, strict dependency closures of the frozen chain and rows (current and complete), and the types of every declaration in the reverse dependency closure of X112/X124/X121 at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A16-clique-number/ (outside the repository)"
+}
