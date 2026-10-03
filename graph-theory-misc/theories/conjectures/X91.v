@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X91 -- v2 avoidable path row *)
 
 From GTBase Require Export base.
+From GTBase Require Import induced_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -11,16 +12,10 @@ Unset Printing Implicit Defensive.
 Definition x91_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
   seq_consecutive p u v.
 
-Definition x91_induced_path (G : sgraph) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q =>
-      uniq p /\
-      path (--) x q /\
-      forall u v : G,
-        u \in p -> v \in p -> u -- v -> u != v ->
-        x91_consecutive_in_path p u v
-  end.
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.nonempty_induced_path] (the same body by conversion); the original body
+    is frozen and certified in theories/migration/induced_paths.v. *)
+Definition x91_induced_path (G : sgraph) (p : seq G) : Prop := nonempty_induced_path p.
 
 Definition x91_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : Prop :=
   seq_cyclic_consecutive c u v.

@@ -13,7 +13,7 @@
     arbitrary [G : mgraph]) via degenerate ([set0] / vacuous) witnesses. *)
 
 From GraphTheory Require Import mgraph.
-From GTBase Require Import base.
+From GTBase Require Import base induced_paths.
 From Packing.conjectures Require Import U9.
 
 Set Implicit Arguments.
@@ -174,17 +174,15 @@ Proof. by case. Qed.
 
 (** witness: the trivial one-vertex path is an induced path from [x] to [x]. *)
 Lemma is_induced_path_triv (G : sgraph) (x : G) : is_induced_path x x [:: x].
-Proof.
-split.
-- by rewrite /spath /= !eqxx.
-- by [].
-- by move=> a b; rewrite !inE => /eqP-> /eqP->; rewrite sg_irrefl.
-Qed.
+Proof. by apply/induced_path_between_seq1. Qed.
 
 (** identity: an induced path is in particular an [spath] with distinct vertices. *)
 Lemma is_induced_path_spath (G : sgraph) (x y : G) (p : seq G) :
   is_induced_path x y p -> spath x y p /\ uniq p.
-Proof. by case=> sp up _. Qed.
+Proof.
+case: p => [|z q] // [hz [lst [up [srt _]]]]; subst z; split=> //.
+by rewrite /spath /= eqxx lst eqxx srt.
+Qed.
 
 (** ============================================================================
     [friendly_partition] / [all_but_finitely_many_regular].

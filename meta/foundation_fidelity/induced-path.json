@@ -1,0 +1,70 @@
+{
+ "schema_version": 1,
+ "family": "induced-path",
+ "modules": {
+  "GTBase.induced_paths": {
+   "path": "base/theories/induced_paths.v",
+   "overrides": {
+    "chordless": {
+     "verdict": "FAITHFUL",
+     "note": "chordless p: every host edge between two distinct entries of p joins consecutive entries (seq_consecutive); the common core of the views."
+    },
+    "induced_path": {
+     "verdict": "FAITHFUL",
+     "note": "induced_path p: uniq, adjacency path and chordless, the empty sequence allowed (X3's shape)."
+    },
+    "nonempty_induced_path": {
+     "verdict": "FAITHFUL",
+     "note": "nonempty_induced_path p: a nonempty induced path (X91's shape); equivalent to p != [::] /\\ induced_path p."
+    },
+    "induced_path_between": {
+     "verdict": "FAITHFUL",
+     "note": "induced_path_between a b p: a nonempty induced path whose head is a and whose last entry is b (the X98 / X114 formula and the public Record's pattern-edge field); a singleton joins a to b exactly when both are it."
+    },
+    "long_induced_path_between": {
+     "verdict": "FAITHFUL",
+     "note": "long_induced_path_between a b p: induced_path_between with the X67 clause 3 <= size p; equivalent to induced_path_between a b p /\\ 3 <= size p."
+    },
+    "has_induced_path_of_order": {
+     "verdict": "FAITHFUL",
+     "note": "has_induced_path_of_order t: some nonempty induced path has exactly t vertices; false at 0, true at 1 iff the graph has a vertex (X208's contract, index encoding bridged by chordless_nthP)."
+    }
+   },
+   "machine_evidence": [
+    "chordlessE",
+    "induced_pathP",
+    "nonempty_induced_pathP",
+    "induced_path_betweenP",
+    "long_induced_path_betweenP",
+    "induced_path_uniq",
+    "induced_path_sorted",
+    "induced_path_chordless",
+    "nonempty_induced_path_induced",
+    "induced_path_between_nonempty",
+    "induced_path_between_head",
+    "induced_path_between_last",
+    "induced_path_between_mem",
+    "long_induced_path_between_size",
+    "induced_path_nil",
+    "not_nonempty_induced_path_nil",
+    "not_induced_path_between_nil",
+    "nonempty_induced_path_seq1",
+    "induced_path_seq1",
+    "induced_path_between_seq1",
+    "not_induced_path_repeat",
+    "not_induced_path_dup",
+    "has_induced_path_of_order0",
+    "has_induced_path_of_order1",
+    "induced_path_rev",
+    "head_rev_last",
+    "last_rev_head",
+    "induced_path_between_rev",
+    "infix_pair_index",
+    "index_pair_infix",
+    "seq_consecutive_index",
+    "index_relation_non_member",
+    "chordless_nthP"
+   ]
+  }
+ }
+}

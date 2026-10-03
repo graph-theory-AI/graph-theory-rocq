@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "family": "induced-path",
+  "primitive": {
+    "canonical_name": "GTBase.induced_paths.induced_path_between",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "induced_path",
+      "induced_path_between",
+      "induced_path_order",
+      "is_induced_path"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X177.x177_induced_path_between",
+      "Chromatic.conjectures.X3.x3_induced_path",
+      "Extremal.conjectures.X98.x98_induced_path_between",
+      "GTBase.induced_subdivisions.induced_subdivision",
+      "GTMisc.conjectures.X114.x114_induced_path_between",
+      "GTMisc.conjectures.X208.x208_induced_path_order",
+      "GTMisc.conjectures.X91.x91_induced_path",
+      "Minor.conjectures.X67.x67_induced_path_between",
+      "Packing.conjectures.U9.is_induced_path"
+    ],
+    "repository_sources": {
+      "GTBase.induced_subdivisions.induced_subdivision": {
+        "path": "base/theories/induced_subdivisions.v",
+        "commit": "97605ddae838bc6e84b0602240148246e9d065f2",
+        "blob": "68bc34c8a7b08ee3fcad16e1ed4ab3fdbdcbaf0d",
+        "declaration_hash": "d7585c474c7fcd5b3aa3cb3e1c8fd9929d939c030a60b02328ab0619c2bff8a5"
+      }
+    },
+    "consumers_remaining": 16,
+    "relation": "one contract, an induced (chordless) vertex-sequence path: a duplicate-free sequence following host edges in which every host edge between two of its entries joins consecutive entries (seq_consecutive); five views differ only in what they say about the ends and the length. GTBase.induced_paths.induced_path (empty allowed) is Chromatic.X3.x3_induced_path by conversion; nonempty_induced_path is GTMisc.X91.x91_induced_path by conversion; induced_path_between a b p (nonempty, endpoint inclusive, the canonical full-endpoint formula) is Extremal.X98.x98_induced_path_between and GTMisc.X114.x114_induced_path_between by conversion and Packing.U9.is_induced_path (Boolean spath/uniq/index consec) by an explicit iff whose index bridge needs the membership and uniqueness premises; long_induced_path_between adds the X67 clause 3 <= size p in its position and is Minor.X67.x67_induced_path_between by conversion; has_induced_path_of_order t (some nonempty induced path has exactly t vertices) is GTMisc.X208.x208_induced_path_order by an explicit iff through the nth index bridge on the duplicate-free list (false at 0, true at 1 iff the graph has a vertex). The public source GTBase.induced_subdivisions.induced_subdivision (C20, pinned 97605dd) keeps its body inhabited (induced_subdivision_model H G); only the Record's pattern-edge field isd_edge_path_valid is now written through induced_path_between, which unfolds to exactly the former inline match (definitional equality, no proof irrelevance); the complete seven-field C20 Record is frozen with cancelling field-by-field transports and the wrapper iff. Chromatic.X177.x177_induced_path_between shares the normalized name but is a different, defective contract (tail-list simple path with a documented tautological chord clause; its lantern row is blocked): deferred-excluded, unchanged, not redirected. Distinct and untouched: X218's induced run, induced cycles and holes, upstream upath/IPath.",
+    "semantic_classes": {
+      "empty-allowed-bare-list": {
+        "members": [
+          "Chromatic.conjectures.X3.x3_induced_path"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.induced_paths.x3_induced_path_compat"
+        ],
+        "note": "[/\\ uniq p, sorted adjacency & no chord] with the empty sequence allowed; X3's uniquely-covered path row and X83's rainbow row are frozen over it."
+      },
+      "nonempty-bare-list": {
+        "members": [
+          "GTMisc.conjectures.X91.x91_induced_path"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.induced_paths.x91_induced_path_compat"
+        ],
+        "note": "nonempty duplicate-free adjacency path with no chord; X91's Pk-free / avoidable-path row is frozen over it."
+      },
+      "full-endpoint-list": {
+        "members": [
+          "Extremal.conjectures.X98.x98_induced_path_between",
+          "GTMisc.conjectures.X114.x114_induced_path_between",
+          "Packing.conjectures.U9.is_induced_path"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Extremal.migration.induced_paths.x98_induced_path_between_compat",
+          "GTMisc.migration.induced_paths.x114_induced_path_between_compat",
+          "Packing.migration.induced_paths.is_induced_path_compat"
+        ],
+        "note": "nonempty full list from a to b with no chord: X98 and X114 by conversion (the C20 Record field formula), U9's Boolean spath/consec encoding by the explicit iff is_induced_path_compat (index bridge with membership and uniqueness premises; spath and consec stay live)."
+      },
+      "full-endpoint-list-at-least-three": {
+        "members": [
+          "Minor.conjectures.X67.x67_induced_path_between"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Minor.migration.induced_paths.x67_induced_path_between_compat"
+        ],
+        "note": "the full-endpoint view with the 3 <= size p clause kept in X67's position; theta and the solved treewidth row are frozen over it."
+      },
+      "exact-order-existence": {
+        "members": [
+          "GTMisc.conjectures.X208.x208_induced_path_order"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.induced_paths.x208_induced_path_order_compat"
+        ],
+        "note": "some nonempty induced path with exactly t vertices; X208's index encoding (non-consecutive positions not adjacent) is bridged by chordless_nthP on the duplicate-free list; the existential head vertex is the list's head, no hidden default-vertex premise."
+      },
+      "public-model-wrapper": {
+        "members": [
+          "GTBase.induced_subdivisions.induced_subdivision"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-public-source",
+        "certificates": [
+          "GTBase.migration.induced_paths.induced_subdivision_compat",
+          "GTBase.migration.induced_paths.induced_subdivision_model_compat"
+        ],
+        "note": "C20's public inhabited wrapper (pinned 97605dd) over the seven-field Record whose pattern-edge field is now the canonical induced_path_between; the complete Record is frozen verbatim, transported field by field in both directions with cancellation, and the wrapper iff is certified; constructor, projections and Arguments unchanged."
+      },
+      "distinct-defective-tail-path": {
+        "members": [
+          "Chromatic.conjectures.X177.x177_induced_path_between"
+        ],
+        "count": 1,
+        "verdict": "distinct representation: tail-list simple path with a documented tautological chord clause, not chordless-path vocabulary",
+        "state": "deferred-excluded",
+        "note": "Chromatic.X177.x177_induced_path_between keeps its defective body unchanged; the lantern/pervasive row is already blocked; nothing is repaired or redirected here."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.induced_paths.aravind_rainbow_induced_chromatic_path_statement_compat",
+      "Chromatic.migration.induced_paths.aravind_rainbow_induced_chromatic_path_statement_original_compat",
+      "Chromatic.migration.induced_paths.stable_cover_unique_induced_path_statement_compat",
+      "Chromatic.migration.induced_paths.stable_cover_unique_induced_path_statement_original_compat",
+      "Chromatic.migration.induced_paths.x3_induced_path_compat",
+      "Chromatic.migration.induced_paths.x83_rainbow_induced_path_compat",
+      "Extremal.migration.induced_paths.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "Extremal.migration.induced_paths.polynomial_kuhn_osthus_induced_subdivision_statement_original_compat",
+      "Extremal.migration.induced_paths.x98_induced_path_between_compat",
+      "Extremal.migration.induced_paths.x98_induced_subdivision_compat",
+      "GTBase.migration.induced_paths.induced_subdivision_compat",
+      "GTBase.migration.induced_paths.induced_subdivision_model_compat",
+      "GTMisc.migration.induced_paths.Pt_free_maximum_independent_set_polytime_statement_compat",
+      "GTMisc.migration.induced_paths.avoidable_path_or_pk_free_statement_compat",
+      "GTMisc.migration.induced_paths.avoidable_path_or_pk_free_statement_original_compat",
+      "GTMisc.migration.induced_paths.subcubic_induced_subdivision_np_complete_statement_compat",
+      "GTMisc.migration.induced_paths.subcubic_induced_subdivision_np_complete_statement_original_compat",
+      "GTMisc.migration.induced_paths.x114_hisc_problem_compat",
+      "GTMisc.migration.induced_paths.x114_induced_path_between_compat",
+      "GTMisc.migration.induced_paths.x114_induced_subdivision_compat",
+      "GTMisc.migration.induced_paths.x208_Pt_free_compat",
+      "GTMisc.migration.induced_paths.x208_induced_path_order_compat",
+      "GTMisc.migration.induced_paths.x91_Pk_free_compat",
+      "GTMisc.migration.induced_paths.x91_avoidable_path_compat",
+      "GTMisc.migration.induced_paths.x91_induced_path_compat",
+      "Minor.migration.induced_paths.theta_triangle_free_bounded_degree_treewidth_statement_compat",
+      "Minor.migration.induced_paths.theta_triangle_free_bounded_degree_treewidth_statement_original_compat",
+      "Minor.migration.induced_paths.x67_induced_path_between_compat",
+      "Minor.migration.induced_paths.x67_theta_compat",
+      "Packing.migration.induced_paths.is_induced_path_compat",
+      "Packing.migration.induced_paths.lovasz_path_removal_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.induced_paths.chordlessE",
+      "GTBase.induced_paths.induced_pathP",
+      "GTBase.induced_paths.nonempty_induced_pathP",
+      "GTBase.induced_paths.induced_path_betweenP",
+      "GTBase.induced_paths.long_induced_path_betweenP",
+      "GTBase.induced_paths.induced_path_uniq",
+      "GTBase.induced_paths.induced_path_sorted",
+      "GTBase.induced_paths.induced_path_chordless",
+      "GTBase.induced_paths.nonempty_induced_path_induced",
+      "GTBase.induced_paths.induced_path_between_nonempty",
+      "GTBase.induced_paths.induced_path_between_head",
+      "GTBase.induced_paths.induced_path_between_last",
+      "GTBase.induced_paths.induced_path_between_mem",
+      "GTBase.induced_paths.long_induced_path_between_size",
+      "GTBase.induced_paths.induced_path_nil",
+      "GTBase.induced_paths.not_nonempty_induced_path_nil",
+      "GTBase.induced_paths.not_induced_path_between_nil",
+      "GTBase.induced_paths.nonempty_induced_path_seq1",
+      "GTBase.induced_paths.induced_path_seq1",
+      "GTBase.induced_paths.induced_path_between_seq1",
+      "GTBase.induced_paths.not_induced_path_repeat",
+      "GTBase.induced_paths.not_induced_path_dup",
+      "GTBase.induced_paths.has_induced_path_of_order0",
+      "GTBase.induced_paths.has_induced_path_of_order1",
+      "GTBase.induced_paths.induced_path_rev",
+      "GTBase.induced_paths.head_rev_last",
+      "GTBase.induced_paths.last_rev_head",
+      "GTBase.induced_paths.induced_path_between_rev",
+      "GTBase.induced_paths.infix_pair_index",
+      "GTBase.induced_paths.index_pair_infix",
+      "GTBase.induced_paths.seq_consecutive_index",
+      "GTBase.induced_paths.index_relation_non_member",
+      "GTBase.induced_paths.chordless_nthP"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.connectivity",
+        "GraphTheory.core.minor",
+        "GTBase.base",
+        "GTBase.walks_paths",
+        "GTBase.induced_subdivisions"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "coq-graph-theory 0.9.7 has upath / IPath (irredundant walks; chords are allowed) and sgraph.induced_path (a transport lemma for paths of an induced subgraph), no chordless-path predicate; GTBase.walks_paths supplies seq_consecutive with its infix / zip reflections, seq_simple_walk and the path-vertex API. The canonical views are therefore new in GTBase.induced_paths over path, uniq and seq_consecutive, bridged to index encodings by infix_pair_index / index_pair_infix / seq_consecutive_index / chordless_nthP.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/induced_paths.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/induced_paths.spec.json",
+    "downstream_client": "base/theories/examples/induced_paths.v",
+    "foundation_fidelity": "meta/foundation_fidelity/induced-path.json"
+  }
+}

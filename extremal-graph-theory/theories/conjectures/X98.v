@@ -1,7 +1,7 @@
 (** * Extremal.conjectures.X98 -- v2 polynomial Kuhn-Osthus row *)
 
 From GTBase Require Export base.
-From GTBase Require Import model_support induced_subdivisions.
+From GTBase Require Import model_support induced_paths induced_subdivisions.
 From Extremal.conjectures Require Import X59.
 
 Set Implicit Arguments.
@@ -13,18 +13,11 @@ Unset Printing Implicit Defensive.
 Definition x98_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
   seq_consecutive p u v.
 
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.induced_path_between] (the same body by conversion); the original body
+    is frozen and certified in theories/migration/induced_paths.v. *)
 Definition x98_induced_path_between (G : sgraph) (a b : G) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q =>
-      x = a /\
-      last x q = b /\
-      uniq p /\
-      path (--) x q /\
-      forall u v : G,
-        u \in p -> v \in p -> u -- v -> u != v ->
-        x98_consecutive_in_path p u v
-  end.
+  induced_path_between a b p.
 
 (** An internal (non-endpoint) vertex of a candidate edge-path [p] whose
     endpoints are [a] and [b]. *)

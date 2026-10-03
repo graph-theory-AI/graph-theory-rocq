@@ -1,7 +1,7 @@
 (** * GTMisc.conjectures.X114 -- v2 subcubic induced-subdivision NP-completeness row *)
 
 From GTBase Require Export base.
-From GTBase Require Import model_support induced_subdivisions.
+From GTBase Require Import model_support induced_paths induced_subdivisions.
 From GTMisc.conjectures Require Import D7.
 
 Set Implicit Arguments.
@@ -20,18 +20,11 @@ Unset Printing Implicit Defensive.
 Definition x114_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
   seq_consecutive p u v.
 
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.induced_path_between] (the same body by conversion); the original body
+    is frozen and certified in theories/migration/induced_paths.v. *)
 Definition x114_induced_path_between (G : sgraph) (a b : G) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q =>
-      x = a /\
-      last x q = b /\
-      uniq p /\
-      path (--) x q /\
-      forall u v : G,
-        u \in p -> v \in p -> u -- v -> u != v ->
-        x114_consecutive_in_path p u v
-  end.
+  induced_path_between a b p.
 
 Definition x114_internal (G : sgraph) (p : seq G) (a b x : G) : Prop :=
   x \in p /\ x != a /\ x != b.
