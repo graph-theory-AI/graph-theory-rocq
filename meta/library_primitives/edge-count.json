@@ -32,8 +32,13 @@
         ],
         "count": 4,
         "verdict": "equivalent",
-        "certificate": "GTBase.common.edge_count",
-        "note": "#|E(G)|, or #|xNN_edge_set G| over the M1 alias xNN_edge_set G = sg_edge_set G; equal by conversion"
+        "note": "#|E(G)|, or #|xNN_edge_set G| over the M1 alias xNN_edge_set G = sg_edge_set G; equal by conversion; canonical GTBase.common.edge_count",
+        "certificates": [
+          "Chromatic.migration.edge_count.xe1_edge_count_compat",
+          "Extremal.migration.edge_count.d2ram_edge_count_compat",
+          "Extremal.migration.edge_count.x76_edge_count_compat",
+          "Extremal.migration.edge_count.x78_edge_count_compat"
+        ]
       },
       "rank-oriented-pairs": {
         "members": [
@@ -43,8 +48,12 @@
         ],
         "count": 3,
         "verdict": "equivalent",
-        "certificate": "GTBase.common.edge_count_rank",
-        "note": "#|[set p : G * G | (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2)%N]| (D2tur through base oedge); one orientation per edge"
+        "note": "#|[set p : G * G | (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2)%N]| (D2tur through base oedge); one orientation per edge; bridge GTBase.common.edge_count_rank",
+        "certificates": [
+          "Cycle.migration.edge_count.x5_edge_count_compat",
+          "Extremal.migration.edge_count.d2tur_edge_count_compat",
+          "Extremal.migration.edge_count.x4_edge_count_compat"
+        ]
       },
       "public-doubleton-comprehension": {
         "members": [
@@ -52,8 +61,8 @@
         ],
         "count": 1,
         "verdict": "equivalent",
-        "certificate": "GTBase.finite_graph.card_fg_edges",
-        "note": "#|fg_edges G| over [set e | exists x y, (x != y) && (x -- y) && (e == [set x; y])]; the explicit x != y guard is implied by irreflexivity, so fg_edges G = E(G) (fg_edgesE, a proved set equality) and the count is edge_count"
+        "certificate": "GTBase.migration.edge_count.fg_edge_count_compat",
+        "note": "#|fg_edges G| over [set e | exists x y, (x != y) && (x -- y) && (e == [set x; y])]; the explicit x != y guard is implied by irreflexivity, so fg_edges G = E(G) (fg_edgesE, a proved set equality) and the count is edge_count; bridges GTBase.finite_graph.fg_edgesE and card_fg_edges"
       }
     },
     "distinct_variants": {
