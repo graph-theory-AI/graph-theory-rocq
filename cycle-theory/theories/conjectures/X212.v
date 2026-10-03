@@ -137,7 +137,7 @@ Definition x212_path_len (G : sgraph) (k : nat) (x y : G) (p : seq G) : bool :=
     A cycle is a [ucycle] of length more than two -- the genuine cycles of a
     simple graph, cf. the [n >= 3] convention of [GTBase.common]. *)
 Definition x212_cycle (G : sgraph) (c : seq G) : bool :=
-  ucycleb (--) c && (2 < size c).
+  seq_cycleb (--) c.
 
 Definition x212_cycle_vertices (G : sgraph) (c : seq G) : {set G} := [set v | v \in c].
 

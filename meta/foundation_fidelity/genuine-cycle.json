@@ -1,0 +1,42 @@
+{
+ "schema_version": 1,
+ "family": "genuine-cycle",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_cycle": {
+     "verdict": "FAITHFUL",
+     "note": "seq_cycle r c: c is a cycle of r (consecutive entries and the closing pair related, MathComp cycle) with pairwise distinct entries (uniq) and at least three entries; no symmetry or irreflexivity premise on r; empty, one-entry and digon sequences excluded, invariant under rotation, and under reversal given the hypothesis symmetric r (sufficient)."
+    },
+    "seq_cycleb": {
+     "verdict": "FAITHFUL",
+     "note": "seq_cycleb r c: the Boolean form ucycleb r c && (2 < size c), reflected to seq_cycle by seq_cycleP."
+    }
+   },
+   "machine_evidence": [
+    "seq_cycleP",
+    "seq_cycleE",
+    "seq_cycle_ucycle",
+    "seq_cycle_cycle",
+    "seq_cycle_uniq",
+    "seq_cycle_size",
+    "seq_cycle_nil",
+    "seq_cycle_seq1",
+    "seq_cycle_pair",
+    "seq_cycle_triangle",
+    "seq_cycle_repeat",
+    "seq_cycle_rot",
+    "seq_cycle_rotr",
+    "seq_cycle_consecutive",
+    "seq_cycle_rev_converse",
+    "seq_cycle_rev",
+    "seq_cycle_ground_K3",
+    "seq_cycle_ground_digon",
+    "seq_cycle_ground_repeat",
+    "seq_cycle_ground_directed",
+    "seq_cycle_ground_directed_rev"
+   ]
+  }
+ }
+}

@@ -15,7 +15,7 @@ Definition x9_cycle_edges (G : sgraph) (c : seq G) : seq {set G} :=
   map (fun p : G * G => [set p.1; p.2]) (zip c (rot 1 c)).
 
 Definition x9_genuine_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\ 2 < size c.
+  seq_cycle (--) c.
 
 Definition x9_colour_classes_large
     (G : sgraph) (n r : nat) (col : {set G} -> 'I_n) : Prop :=
