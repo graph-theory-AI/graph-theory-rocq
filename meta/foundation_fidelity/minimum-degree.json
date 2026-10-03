@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "family": "minimum-degree",
+  "modules": {
+    "GTBase.base": {
+      "path": "base/theories/base.v",
+      "overrides": {
+        "min_degree": {
+          "verdict": "FAITHFUL",
+          "note": "The exact minimum degree d: every vertex has at least d neighbours and some vertex has exactly d. It requires a vertex, so K0 has none; it is unique, exists for every graph with a vertex, is the greatest lower bound, is at most Delta and below the order, holds for regular graphs with a vertex and for complete graphs K_{n+1} at n, and is preserved by isomorphisms; the witness-first presentation is equivalent."
+        }
+      },
+      "machine_evidence": [
+        "min_degree_lower",
+        "min_degree_attained",
+        "min_degree_attained_firstE",
+        "min_degree_uniq",
+        "min_degree_exists",
+        "min_degree_exists_card",
+        "min_degree_K0",
+        "regular_min_degree",
+        "min_degree_at_leastE",
+        "min_degree_Delta",
+        "min_degree_lt_card",
+        "min_degree_Kn",
+        "diso_degree",
+        "min_degree_diso"
+      ]
+    }
+  }
+}
