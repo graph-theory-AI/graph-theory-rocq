@@ -7,17 +7,19 @@
     "status": "migrating",
     "fidelity": "FAITHFUL",
     "normalized_names": [
-      "matching"
+      "matching",
+      "is_matching_edges"
     ],
     "source_definitions": [
       "Digraph.conjectures.path_fas.matching",
       "Extremal.conjectures.X180.x180_matching",
       "GTMisc.conjectures.X14.x14_matching",
       "Hypergraph.conjectures.X6.x6_matching",
+      "Packing.conjectures.U9.is_matching_edges",
       "Packing.conjectures.X15.x15_matching",
       "Packing.conjectures.X15alone.x15_matching"
     ],
-    "consumers_remaining": 14,
+    "consumers_remaining": 15,
     "relation": "logical-equivalence (frozen local body <-> upstream matching), per statement",
     "migration_notes": "C1 (2026-10-02, lancelot): of the six name-matched definitions only the compiled simple-graph edge-family subgroup X14 (misc), X15 (packing, with its X18 chain consumer) and X180 (extremal) is migrated: each local helper is now the transparent alias `matching M` of upstream GraphTheory.connectivity.matching, the statement texts are unchanged, and every affected statement has its own frozen-chain certificate. The three other sources are classified and deferred, not migrated: X15alone (excluded from the build, identical body to X15), X6 (hypergraph subfamily, identical body to U12.hg_matching, belongs to the hypergraph foundation) and digraph path_fas.matching (a predicate on a whole graph). Perfect matchings, edge partitions and edge families are separate families (frozen here only as chain dependencies). Follow-up (after the A1 merge 03742d1): certificates re-laid out in A1's convention (Legacy for the migrated helpers and the pre-M1 edge sets, one XnnLegacy module per phase with Legacy.-qualified references and prefix-stripped chain names), report converged onto the generic meta/migration_report.py spec, public downstream client added; theorem names, statement texts and statuses unchanged.",
     "semantic_classes": {
@@ -25,17 +27,20 @@
         "members": [
           "GTMisc.conjectures.X14.x14_matching",
           "Packing.conjectures.X15.x15_matching",
-          "Extremal.conjectures.X180.x180_matching"
+          "Extremal.conjectures.X180.x180_matching",
+          "Packing.conjectures.U9.is_matching_edges"
         ],
-        "count": 3,
+        "count": 4,
         "verdict": "equivalent",
         "state": "migrated-alias",
         "note": "a set of edges of a simple graph with the second clause spelled as pairwise-disjoint members (X14), at most one member per vertex (X15), or empty pairwise intersections (X180); all three are the upstream clause (Packing.foundations.matching presentation lemmas)",
         "certificates": [
           "Packing.migration.matching.x15_matching_compat",
           "GTMisc.migration.matching.x14_matching_compat",
-          "Extremal.migration.matching.x180_matching_compat"
-        ]
+          "Extremal.migration.matching.x180_matching_compat",
+          "Packing.migration.matching.is_matching_edges_compat"
+        ],
+        "note_c25": "C25 adds U9.is_matching_edges: genuine-edge witnesses plus at most one member per vertex, the upstream clause via matching_at_most_oneP and edgesP; the edge-validity clause is kept."
       },
       "simple-graph-edge-family-excluded": {
         "members": [
@@ -356,6 +361,12 @@
         "legacy": "Digraph.migration.matching.Legacy.has_matchingFAS",
         "theorem": "Digraph.migration.matching.has_matchingFAS_compat",
         "kind": "chain (C24)"
+      },
+      {
+        "source": "Packing.conjectures.U9.is_matching_edges",
+        "legacy": "Packing.migration.matching.U9MatchingLegacy.is_matching_edges",
+        "theorem": "Packing.migration.matching.is_matching_edges_compat",
+        "kind": "migrated helper (C25 supplied edge family)"
       }
     ],
     "statement_certificates": [
@@ -431,6 +442,20 @@
         "theorem": "Digraph.migration.matching.matchingFAS_iff_dw1_statement_compat",
         "row": "no corpus row (non-corpus known theorem)",
         "status": "non-corpus; unchanged"
+      },
+      {
+        "statement": "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+        "legacy": "Packing.migration.matching.U9MatchingLegacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+        "theorem": "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat",
+        "row": "opg:matchings_extends_to_hamilton_cycles_in_hypercubes",
+        "status": "open; unchanged"
+      },
+      {
+        "statement": "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+        "legacy": "Packing.migration.matching.U9MatchingOriginal.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+        "theorem": "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat",
+        "row": "opg:matchings_extends_to_hamilton_cycles_in_hypercubes",
+        "status": "complete B11+C25 Original (frozen matching and B11 Legacy.cycle_edgesG); open; unchanged"
       }
     ],
     "compatibility_theorems": [
@@ -457,7 +482,10 @@
       "Extremal.migration.matching.log_degree_multitasker_exists_statement_compat",
       "Digraph.migration.matching.matching_compat",
       "Digraph.migration.matching.has_matchingFAS_compat",
-      "Digraph.migration.matching.matchingFAS_iff_dw1_statement_compat"
+      "Digraph.migration.matching.matchingFAS_iff_dw1_statement_compat",
+      "Packing.migration.matching.is_matching_edges_compat",
+      "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat",
+      "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat"
     ],
     "api_theorems": [
       "Packing.foundations.matching.matching_subset",
@@ -505,6 +533,7 @@
     "reviewed_commit": "23ee661548f0f31878e31de20add0ede2bc0e076",
     "independent_review": "meta/migration_reviews/matching.md",
     "foundation_fidelity": "meta/foundation_fidelity/matching.json",
-    "migration_notes_c24": "C24 (2026-10-03, lancelot): the deferred whole-graph-predicate class is completed in this shard. Digraph.conjectures.path_fas.matching now unfolds to the public GTBase.matching_graphs.matching_graph G (upstream matching of E(G)); its raw forest-and-degree body, the has_matchingFAS chain and the non-corpus matchingFAS_iff_dw1_statement are frozen at the C23 pin in Digraph.migration.matching. The C1 baseline, its 20 frozen mappings, 9 statements and review facts are unchanged; the hypergraph and X15alone classes stay deferred/excluded."
+    "migration_notes_c24": "C24 (2026-10-03, lancelot): the deferred whole-graph-predicate class is completed in this shard. Digraph.conjectures.path_fas.matching now unfolds to the public GTBase.matching_graphs.matching_graph G (upstream matching of E(G)); its raw forest-and-degree body, the has_matchingFAS chain and the non-corpus matchingFAS_iff_dw1_statement are frozen at the C23 pin in Digraph.migration.matching. The C1 baseline, its 20 frozen mappings, 9 statements and review facts are unchanged; the hypergraph and X15alone classes stay deferred/excluded.",
+    "migration_notes_c25": "C25 (2026-10-03, lancelot): Packing.conjectures.U9.is_matching_edges now unfolds to the upstream matching M of the supplied family. Its raw body and the whole OPG U9 hypercube row are frozen in Packing.migration.matching (U9MatchingLegacy), and the complete B11+C25 Original (U9MatchingOriginal) combines the frozen matching with B11 Legacy.cycle_edgesG, same M, c and 2 <= d. All earlier C1/C24 entries are unchanged."
   }
 }

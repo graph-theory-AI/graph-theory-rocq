@@ -15,6 +15,7 @@
 From GraphTheory Require Import mgraph.
 From GTBase Require Import base.
 From Packing.conjectures Require Import U9.
+Require Packing.foundations.matching.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -317,16 +318,16 @@ Proof. by rewrite /hamiltonian_cycleG => /andP[_ /eqP]. Qed.
 (** witness: the empty edge set is a matching. *)
 Lemma is_matching_edges_nil (G : sgraph) : is_matching_edges (set0 : {set {set G}}).
 Proof.
-split=> [e|v]; first by rewrite in_set0.
-have ->: [set e in (set0 : {set {set G}}) | v \in e] = set0
-  by apply/setP=> e; rewrite !inE andFb.
-by rewrite cards0.
+exact: Packing.foundations.matching.matching0.
 Qed.
 
 (** identity: every edge of a matching is a genuine edge. *)
 Lemma is_matching_edges_edge (G : sgraph) (M : {set {set G}}) (e : {set G}) :
   is_matching_edges M -> e \in M -> exists x y : G, (x -- y) /\ e = [set x; y].
-Proof. by case=> H _ /H. Qed.
+Proof.
+case/Packing.foundations.matching.matching_at_most_oneP => /subsetP sub _ /sub.
+by case/edgesP=> x [y [-> xy]]; exists x, y.
+Qed.
 
 (** ============================================================================
     [hypercube].
