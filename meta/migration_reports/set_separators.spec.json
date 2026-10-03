@@ -16,7 +16,9 @@
     "graph-theory-misc/theories/migration/path_vertices.v",
     "packing-theory/theories/migration/path_vertices.v",
     "graph-theory-misc/theories/migration/set_path.v",
-    "packing-theory/theories/migration/set_path.v"
+    "packing-theory/theories/migration/set_path.v",
+    "graph-theory-misc/theories/migration/balls.v",
+    "packing-theory/theories/migration/balls.v"
   ],
   "extra_certificates": [
     "GTBase.set_separators.seq_separatorP",
@@ -37,7 +39,9 @@
     "",
     "Rows, frozen exactly and certified by a pointwise separator transport: X39 `coarse_menger_ball_separator_statement`, cross-module X40 `coarse_menger_distance_two_separator_statement` (partial) and X26 `bounded_degree_distant_induced_menger_statement`. B5's complete X39Original, X40Original and X26Original rows (raw B1 support, raw B5 set path and separator; balls still live at this pin) are reused with B5's certificates: six whole iff. Their fourteen frozen pieces are bound as historical objects (B1 9e03072, B5 fbf33a0). The incoming A22 raw-ball Originals are the coordinator's combined-parent obligation; nothing is copied here.",
     "",
-    "The fifteen direct B1 / B5 compatibility theorems keep their statements and every frozen body; their proofs move from conversion to `seq_separatorP` and the same transport, and the B1 / B5 specs record this. The reverse-import closure keeps identical old theorem types (vocabulary_packing's thirteen included). Routes: X39 and X40 (graph-theory-misc), X26 (packing-theory); no Digraph source. Baseline a02e1c2 matches the B26 discovery scope byte for byte."
+    "The fifteen direct B1 / B5 compatibility theorems keep their statements and every frozen body; their proofs move from conversion to `seq_separatorP` and the same transport, and the B1 / B5 specs record this. The reverse-import closure keeps identical old theorem types (vocabulary_packing's thirteen included). Routes: X39 and X40 (graph-theory-misc), X26 (packing-theory); no Digraph source. Baseline a02e1c2 matches the B26 discovery scope byte for byte.",
+    "",
+    "Private reviewed B26+A22 prerequisite: the initial six whole iff and all older snapshots remain unchanged. Eleven exact A22 mappings add the three complete raw-ball X39/X40/X26 Originals (nine whole iff total), reusing the existing GTMisc/Packing migration.balls original_compat certificates. All four B26-adapted B1/B5 certificate files are retained, so these full proofs compose through the genuine upstream separator bridge. Three partial snapshots in each direction are explicitly recorded; no full history is claimed for a partial snapshot."
   ],
   "frozen": [
     {
@@ -333,9 +337,165 @@
       },
       "certificate": "Packing.migration.set_separators.bounded_degree_distant_induced_menger_statement_original_compat",
       "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_ball",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_ball",
+      "frozen_path": "graph-theory-misc/theories/migration/balls.v",
+      "frozen": "Legacy.x39_ball",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.balls.x39_ball_compat",
+      "live_unfolds_to": "ball r x",
+      "commit": "1b8126b20a10dcf1cf6c6f95c25104acb818c1cb"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_set_ball",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_set_ball",
+      "frozen_path": "graph-theory-misc/theories/migration/balls.v",
+      "frozen": "Legacy.x39_set_ball",
+      "substitutions": {
+        "x39_ball": "Legacy.x39_ball"
+      },
+      "certificate": "GTMisc.migration.balls.x39_set_ball_compat",
+      "live_unfolds_to": "set_ball r S",
+      "commit": "1b8126b20a10dcf1cf6c6f95c25104acb818c1cb"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_pairwise_distant_paths",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_pairwise_distant_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/balls.v",
+      "frozen": "X39Original.x39_pairwise_distant_paths",
+      "substitutions": {
+        "x39_set_ball": "Legacy.x39_set_ball",
+        "x39_path_vertices": "B1.Legacy.x39_path_vertices"
+      },
+      "certificate": "GTMisc.migration.balls.x39_pairwise_distant_paths_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_has_k_distant_xy_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/balls.v",
+      "frozen": "X39Original.x39_has_k_distant_xy_paths",
+      "substitutions": {
+        "x39_pairwise_distant_paths": "X39Original.x39_pairwise_distant_paths",
+        "x39_xy_path": "B5.Legacy.x39_xy_path"
+      },
+      "certificate": "GTMisc.migration.balls.x39_has_k_distant_xy_paths_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "coarse_menger_ball_separator_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/balls.v",
+      "frozen": "X39Original.coarse_menger_ball_separator_statement",
+      "substitutions": {
+        "x39_has_k_distant_xy_paths": "X39Original.x39_has_k_distant_xy_paths",
+        "x39_separates_xy": "B5.X39Original.separates_xy",
+        "x39_set_ball": "Legacy.x39_set_ball"
+      },
+      "certificate": "GTMisc.migration.balls.coarse_menger_ball_separator_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X40.coarse_menger_distance_two_separator_statement",
+      "path": "graph-theory-misc/theories/conjectures/X40.v",
+      "name": "coarse_menger_distance_two_separator_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/balls.v",
+      "frozen": "X40Original.coarse_menger_distance_two_separator_statement",
+      "substitutions": {
+        "x39_has_k_distant_xy_paths": "X39Original.x39_has_k_distant_xy_paths",
+        "x39_separates_xy": "B5.X39Original.separates_xy",
+        "x39_set_ball": "Legacy.x39_set_ball"
+      },
+      "certificate": "GTMisc.migration.balls.coarse_menger_distance_two_separator_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_ball",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_ball",
+      "frozen_path": "packing-theory/theories/migration/balls.v",
+      "frozen": "Legacy.x26_ball",
+      "substitutions": {},
+      "certificate": "Packing.migration.balls.x26_ball_compat",
+      "live_unfolds_to": "ball r x",
+      "commit": "1b8126b20a10dcf1cf6c6f95c25104acb818c1cb"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_set_ball",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_set_ball",
+      "frozen_path": "packing-theory/theories/migration/balls.v",
+      "frozen": "Legacy.x26_set_ball",
+      "substitutions": {
+        "x26_ball": "Legacy.x26_ball"
+      },
+      "certificate": "Packing.migration.balls.x26_set_ball_compat",
+      "live_unfolds_to": "set_ball r S",
+      "commit": "1b8126b20a10dcf1cf6c6f95c25104acb818c1cb"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_pairwise_distant_paths",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_pairwise_distant_paths",
+      "frozen_path": "packing-theory/theories/migration/balls.v",
+      "frozen": "X26Original.x26_pairwise_distant_paths",
+      "substitutions": {
+        "x26_set_ball": "Legacy.x26_set_ball",
+        "x26_path_vertices": "B1.Legacy.x26_path_vertices"
+      },
+      "certificate": "Packing.migration.balls.x26_pairwise_distant_paths_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_has_k_distant_xy_paths",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_has_k_distant_xy_paths",
+      "frozen_path": "packing-theory/theories/migration/balls.v",
+      "frozen": "X26Original.x26_has_k_distant_xy_paths",
+      "substitutions": {
+        "x26_pairwise_distant_paths": "X26Original.x26_pairwise_distant_paths",
+        "x26_xy_path": "B5.Legacy.x26_xy_path"
+      },
+      "certificate": "Packing.migration.balls.x26_has_k_distant_xy_paths_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "bounded_degree_distant_induced_menger_statement",
+      "frozen_path": "packing-theory/theories/migration/balls.v",
+      "frozen": "X26Original.bounded_degree_distant_induced_menger_statement",
+      "substitutions": {
+        "x26_has_k_distant_xy_paths": "X26Original.x26_has_k_distant_xy_paths",
+        "x26_separates_xy": "B5.X26Original.separates_xy"
+      },
+      "certificate": "Packing.migration.balls.bounded_degree_distant_induced_menger_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "graph-theory-misc/theories/migration/balls.v#X39Legacy.coarse_menger_ball_separator_statement": "A22 immediate ball-family snapshot is preserved verbatim. It retains the live separator alias now migrated by B26 to upstream separator; the complete combined B1/B5/A22/B26 row is GTMisc.migration.balls.X39Original.coarse_menger_ball_separator_statement, whose raw separator is the unchanged B5 Original and whose actual original_compat proof uses B26's pointwise B5 transport.",
+    "graph-theory-misc/theories/migration/balls.v#X40Legacy.coarse_menger_distance_two_separator_statement": "A22 immediate ball-family snapshot is preserved verbatim. It retains the live separator alias now migrated by B26 to upstream separator; the complete combined B1/B5/A22/B26 row is GTMisc.migration.balls.X40Original.coarse_menger_distance_two_separator_statement, whose raw separator is the unchanged B5 Original and whose actual original_compat proof uses B26's pointwise B5 transport.",
+    "packing-theory/theories/migration/balls.v#X26Legacy.bounded_degree_distant_induced_menger_statement": "A22 immediate ball-family snapshot is preserved verbatim. It retains the live separator alias now migrated by B26 to upstream separator; the complete combined B1/B5/A22/B26 row is Packing.migration.balls.X26Original.bounded_degree_distant_induced_menger_statement, whose raw separator is the unchanged B5 Original and whose actual original_compat proof uses B26's pointwise B5 transport."
+  },
   "cross_module_consumers": [
     {
       "path": "graph-theory-misc/theories/conjectures/X40.v",

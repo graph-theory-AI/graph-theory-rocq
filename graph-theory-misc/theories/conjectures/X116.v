@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X116 -- v2 coarse Menger (bounded-separator) row *)
 
 From GTBase Require Export base.
+From GTBase Require Import balls.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -14,12 +15,11 @@ Unset Printing Implicit Defensive.
     vertex / vertex set; [x116_path_vertices p] is the vertex set of a walk;
     [x116_ST_path S T p] is a simple path from [S] to [T]. *)
 
-Fixpoint x116_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
-  if r is r'.+1 then x116_ball r' x :|: \bigcup_(z in x116_ball r' x) N(z)
-  else [set x].
+Definition x116_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
+  ball r x.
 
 Definition x116_set_ball (G : sgraph) (r : nat) (S : {set G}) : {set G} :=
-  \bigcup_(x in S) x116_ball r x.
+  set_ball r S.
 
 Definition x116_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.

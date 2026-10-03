@@ -13,9 +13,8 @@ Unset Printing Implicit Defensive.
     [x111_ball 0 x = [set x]] and each step adds the neighbourhoods of the
     current ball.  Since [x \in x111_ball r x] for every [r], every ball is
     NONEMPTY. *)
-Fixpoint x111_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
-  if r is r'.+1 then x111_ball r' x :|: \bigcup_(z in x111_ball r' x) N(z)
-  else [set x].
+Definition x111_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
+  ball r x.
 
 (** The r-ball hypergraph of [G] with centre set [U] has hyperedges
     { B(u,r) : u \in U }.  [T] is a TRANSVERSAL of it when [T] meets every

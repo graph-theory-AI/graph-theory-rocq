@@ -8,9 +8,8 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X20 vocabulary ************************************************)
 
-Fixpoint x20_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
-  if r is r'.+1 then x20_ball r' x :|: \bigcup_(z in x20_ball r' x) N(z)
-  else [set x].
+Definition x20_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
+  ball r x.
 
 Definition x20_ceil_sqrt (n t : nat) : Prop :=
   n <= t ^ 2 /\ forall s : nat, n <= s ^ 2 -> t <= s.

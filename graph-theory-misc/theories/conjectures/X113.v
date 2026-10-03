@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X113 -- v2 coarse Erdos-Posa (cycles/forest) row *)
 
 From GTBase Require Export base.
+From GTBase Require Import balls.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -17,12 +18,11 @@ Unset Printing Implicit Defensive.
     encoded exactly as in base's [girth]/[exact_girth] via
     [ucycle (--) c /\ 2 < size c]. *)
 
-Fixpoint x113_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
-  if r is r'.+1 then x113_ball r' x :|: \bigcup_(z in x113_ball r' x) N(z)
-  else [set x].
+Definition x113_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
+  ball r x.
 
 Definition x113_set_ball (G : sgraph) (r : nat) (S : {set G}) : {set G} :=
-  \bigcup_(x in S) x113_ball r x.
+  set_ball r S.
 
 Definition x113_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.

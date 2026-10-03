@@ -80,10 +80,14 @@ Lemma x18_independent_set_equiv_xe1_stable_set (G : sgraph) (S : {set G}) :
   x18_independent_set S <-> xe1_stable_set S.
 Proof. by split=> H; exact: H. Qed.
 
-(** ** Balls: [X26] and [X111] declare the same [Fixpoint] ****************
+(** ** Balls: [X26] and [X111] declare the same ball **********************
 
-    Not convertible (the recursive calls go through two different constants),
-    so the bridge needs an induction on the radius. *)
+    Since the A22 library migration (2026-10-03) [x26_ball] and [x111_ball]
+    ARE transparent aliases of [GTBase.base.ball], so the two sides are
+    convertible and the radius induction below still checks.  The original
+    local [Fixpoint]s (not convertible: their recursive calls went through
+    two different constants) are frozen and certified in
+    theories/migration/balls.v. *)
 
 Lemma x26_ballE (G : sgraph) (r : nat) (x : G) : x26_ball r x = x111_ball r x.
 Proof. by elim: r => //= r ->. Qed.

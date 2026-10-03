@@ -28,7 +28,7 @@
           "GTMisc.migration.set_separators.x39_separates_xy_compat",
           "Packing.migration.set_separators.x26_separates_xy_compat"
         ],
-        "note": "upstream separator G X Y A over packaged paths, endpoint hits allowed and one-vertex paths counted; the frozen sequence bodies are equivalent through the unconditional seq_separatorP. X39's ball row, the cross-module X40 distance-2 row (partial) and X26's bounded-degree row are frozen over it with every guard and quantifier order, and B5's complete X39Original, X40Original and X26Original rows (raw support, set path and separator; balls live at this pin) are reused end to end. The incoming A22 raw-ball Originals are a combined-parent obligation, not claimed here."
+        "note": "upstream separator G X Y A over packaged paths, endpoint hits allowed and one-vertex paths counted; the frozen sequence bodies are equivalent through the unconditional seq_separatorP. X39's ball row, the cross-module X40 distance-2 row (partial) and X26's bounded-degree row are frozen over it with every guard and quantifier order, and B5's complete X39Original, X40Original and X26Original rows (raw support, set path and separator; balls live at this pin) are reused end to end. The incoming A22 raw-ball Originals are a combined-parent obligation, not claimed here. The reviewed private A22 prerequisite now supplies the three genuine complete raw-ball Originals via eleven additional frozen mappings and their actual migration.balls certificates; the original six whole iff and every older frozen body remain independently available."
       }
     },
     "compatibility_theorems": [
@@ -39,7 +39,18 @@
       "GTMisc.migration.set_separators.x39_separates_xy_compat",
       "Packing.migration.set_separators.bounded_degree_distant_induced_menger_statement_compat",
       "Packing.migration.set_separators.bounded_degree_distant_induced_menger_statement_original_compat",
-      "Packing.migration.set_separators.x26_separates_xy_compat"
+      "Packing.migration.set_separators.x26_separates_xy_compat",
+      "GTMisc.migration.balls.x39_ball_compat",
+      "GTMisc.migration.balls.x39_set_ball_compat",
+      "GTMisc.migration.balls.x39_pairwise_distant_paths_original_compat",
+      "GTMisc.migration.balls.x39_has_k_distant_xy_paths_original_compat",
+      "GTMisc.migration.balls.coarse_menger_ball_separator_statement_original_compat",
+      "GTMisc.migration.balls.coarse_menger_distance_two_separator_statement_original_compat",
+      "Packing.migration.balls.x26_ball_compat",
+      "Packing.migration.balls.x26_set_ball_compat",
+      "Packing.migration.balls.x26_pairwise_distant_paths_original_compat",
+      "Packing.migration.balls.x26_has_k_distant_xy_paths_original_compat",
+      "Packing.migration.balls.bounded_degree_distant_induced_menger_statement_original_compat"
     ],
     "api_theorems": [
       "GTBase.set_separators.seq_separatorP",
