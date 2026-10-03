@@ -32,8 +32,7 @@ Definition xe1_triangle_free_independence_guarantee (n h : nat) : Prop :=
       #|G| = n -> triangle_free G ->
       exists A : {set G}, xe1_stable_set A /\ h' <= #|A|) -> h' <= h.
 
-Definition xe1_tree (T : sgraph) : Prop :=
-  is_forest [set: T] /\ connected [set: T].
+Definition xe1_tree (T : sgraph) : Prop := is_tree [set: T].
 
 Definition xe1_image_edges (G T : sgraph) (f : T -> G) : {set {set G}} :=
   [set e : {set G} |

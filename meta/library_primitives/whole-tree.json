@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "family": "whole-tree",
+  "primitive": {
+    "canonical_name": "GraphTheory.core.sgraph.is_tree",
+    "owner": "upstream",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "tree"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.XE1.xe1_tree",
+      "Packing.conjectures.XE1.xe1_tree"
+    ],
+    "consumers_remaining": 5,
+    "relation": "one contract, by conversion: Extremal.XE1.xe1_tree and Packing.XE1.xe1_tree (is_forest [set: T] /\\ connected [set: T]) are definitionally the upstream GraphTheory.core.sgraph.is_tree [set: T], the whole-carrier tree (unique irredundant paths and connectivity over every vertex); no second predicate and no nonempty guard are introduced, so 'K_0 stays a tree. GTBase.trees is a focused support layer over the upstream canonical: the Boolean is_treeb with is_treeP, the whole-carrier projections/introduction, and groundings ('K_0, 'K_1, 'K_2 and the claw 'K_1,3 are trees; 'K_3 and two isolated vertices are not). A tree on an arbitrary supplied vertex set is upstream's broader API; both migrated wrappers select the whole carrier. Distinct, untouched: B18's labelled fg_spanning_tree (a valid edge subset of a host), B19's multigraph edge-carrier spanning_tree_edge_set, D2tur.tree_on / shortest_tree_on, U9.tree_contains_T, the directed trees of X2 and P9, and B9's degree-bounded path_tree.",
+    "semantic_classes": {
+      "whole-graph-tree": {
+        "members": [
+          "Extremal.conjectures.XE1.xe1_tree",
+          "Packing.conjectures.XE1.xe1_tree"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Extremal.migration.whole_tree.xe1_tree_compat",
+          "Packing.migration.whole_tree.xe1_tree_compat"
+        ],
+        "note": "is_forest [set: T] /\\ connected [set: T]: the body of upstream is_tree [set: T], convertible. Seven complete rows are frozen over the frozen wrapper (Extremal XE1 #548/#550/#557/#568, XE2 #547/#549, Packing XE1 #743) with every guard, quantifier order, Ramsey leastness, dependent embedding and natural subtraction exact, plus five complete combined Originals (#548 with A7 and A5, #550 and #547 with A6, #568 with A6/A7/A11, #549 with C7 and A6) over the earlier families' frozen bodies; the 22 earlier snapshots that still call the live wrapper stay byte-exact with reciprocal notes. #548's prose claim that k >= 1 follows from its guards is false (k = 0 is admitted) and is recorded without repair."
+      }
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.whole_tree.erdos_547_statement_compat",
+      "Extremal.migration.whole_tree.erdos_547_statement_original_compat",
+      "Extremal.migration.whole_tree.erdos_548_statement_compat",
+      "Extremal.migration.whole_tree.erdos_548_statement_original_compat",
+      "Extremal.migration.whole_tree.erdos_549_statement_compat",
+      "Extremal.migration.whole_tree.erdos_549_statement_original_compat",
+      "Extremal.migration.whole_tree.erdos_550_statement_compat",
+      "Extremal.migration.whole_tree.erdos_550_statement_original_compat",
+      "Extremal.migration.whole_tree.erdos_557_statement_compat",
+      "Extremal.migration.whole_tree.erdos_568_statement_compat",
+      "Extremal.migration.whole_tree.erdos_568_statement_original_compat",
+      "Extremal.migration.whole_tree.xe1_tree_compat",
+      "Packing.migration.whole_tree.erdos_743_statement_compat",
+      "Packing.migration.whole_tree.xe1_tree_compat"
+    ],
+    "api_theorems": [
+      "GTBase.trees.is_treeP",
+      "GTBase.trees.is_treeT_forest",
+      "GTBase.trees.is_treeT_connected",
+      "GTBase.trees.is_treeTI",
+      "GTBase.trees.is_treeT_connect",
+      "GTBase.trees.is_treeTI_connect",
+      "GTBase.trees.is_treeT_unique",
+      "GTBase.trees.is_tree_K0",
+      "GTBase.trees.is_tree_K1",
+      "GTBase.trees.is_tree_K2",
+      "GTBase.trees.not_is_tree_K3",
+      "GTBase.trees.not_is_tree_two_isolated",
+      "GTBase.trees.claw_centre",
+      "GTBase.trees.claw_adj_cl",
+      "GTBase.trees.claw_adj_lc",
+      "GTBase.trees.claw_adj_cc_false",
+      "GTBase.trees.claw_adj_ll_false",
+      "GTBase.trees.claw_path_cl",
+      "GTBase.trees.claw_path_lc",
+      "GTBase.trees.claw_path_ll",
+      "GTBase.trees.claw_unique",
+      "GTBase.trees.is_tree_claw"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.treewidth",
+        "GraphTheory.core.minor",
+        "GTBase.base",
+        "GTBase.path_trees"
+      ],
+      "result": "exact-upstream-canonical",
+      "candidate": "GraphTheory.core.sgraph.is_tree",
+      "note": "coq-graph-theory's sgraph.v defines is_forest, is_tree S := is_forest S /\\ connected S, is_forestb, connectedb and the reflections is_forestP / connectedP, with forestI, treeI, forest3, unique_forestT and the complete graphs; both migrated wrappers are is_tree at the whole carrier verbatim, so the canonical is upstream and GTBase.trees only adds the whole-carrier support API and groundings (reusing B9's path-tree proofs for 'K_0, 'K_1, 'K_2 and proving the claw directly from splitL / irred_edgeL / irredxx). GTBase.trees is not re-exported by GTBase.base.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/whole_tree.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/whole_tree.spec.json",
+    "downstream_client": "base/theories/examples/trees.v",
+    "foundation_fidelity": "meta/foundation_fidelity/whole-tree.json"
+  }
+}
