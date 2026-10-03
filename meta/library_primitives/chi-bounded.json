@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "family": "chi-bounded",
+  "primitive": {
+    "canonical_name": "GTBase.chi_bounding.chi_bounded_via",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "chi_bounded",
+      "chi_bounded_class",
+      "chi_bounded_under"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.U8.chi_bounded",
+      "Chromatic.conjectures.X112.x112_chi_bounded",
+      "Chromatic.conjectures.X170.x170_chi_bounded",
+      "Chromatic.foundations.chi_bounding.chi_bounded_class",
+      "Digraph.conjectures.chi_bounded.chi_bounded_under"
+    ],
+    "repository_sources": {
+      "Chromatic.foundations.chi_bounding.chi_bounded_class": {
+        "path": "chromatic-theory/theories/foundations/chi_bounding.v",
+        "commit": "0659592d2a379b1f2564601e8b61689e05eac416",
+        "blob": "87c5d2ef20b4ab94dba921dd428675a8825433b0",
+        "declaration_hash": "add559974bf65b356e0de24057b821ef33f19cfef1033bac3e168ac41978b5db"
+      }
+    },
+    "consumers_remaining": 8,
+    "relation": "one uniform arbitrary function bounds ordinary chi by clique number; explicit underlying-map and nonempty-class adapters",
+    "semantic_classes": {
+      "simple-graph-class": {
+        "members": [
+          "Chromatic.conjectures.U8.chi_bounded",
+          "Chromatic.conjectures.X112.x112_chi_bounded",
+          "Chromatic.foundations.chi_bounding.chi_bounded_class"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.chi_bounded_classes.chi_bounded_compat",
+        "note": "Identity underlying-map; X112 omega is convertible. All three retain exactly the uniform simple-graph class contract."
+      },
+      "oriented-record-class": {
+        "members": [
+          "Chromatic.conjectures.X170.x170_chi_bounded"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.chi_bounded_classes.x170_chi_bounded_compat",
+        "note": "The supplied x170_underlying map is retained; no relation or carrier change."
+      },
+      "guarded-digraph-class": {
+        "members": [
+          "Digraph.conjectures.chi_bounded.chi_bounded_under"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Digraph.migration.chi_bounded_classes.chi_bounded_under_compat",
+        "note": "Class membership explicitly conjoined with 0<#|G|; underlying ignores loops and forgets arc direction exactly as before."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.chi_bounded_classes.chi_bounded_compat",
+      "Chromatic.migration.chi_bounded_classes.x112_chi_bounded_compat",
+      "Chromatic.migration.chi_bounded_classes.x170_chi_bounded_compat",
+      "Chromatic.migration.chi_bounded_classes.chi_bounded_class_compat",
+      "Chromatic.migration.chi_bounded_classes.graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement_compat",
+      "Chromatic.migration.chi_bounded_classes.vertex_minor_closed_classes_are_chi_bounded_statement_compat",
+      "Chromatic.migration.chi_bounded_classes.hereditary_chi_bounded_not_polynomial_statement_compat",
+      "Chromatic.migration.chi_bounded_classes.gyarfas_complementation_chi_bounded_statement_compat",
+      "Chromatic.migration.chi_bounded_classes.gyarfas_alpha_omega_chi_bounded_statement_compat",
+      "Chromatic.migration.chi_bounded_classes.chi_bounded_closure_substitution_gluing_statement_compat",
+      "Chromatic.migration.chi_bounded_classes.oriented_P4_forb_chi_bounded_statement_compat",
+      "Chromatic.migration.chi_bounded_classes.gyarfas_complementation_chi_bounded_statement_original_compat",
+      "Digraph.migration.chi_bounded_classes.chi_bounded_under_compat",
+      "Digraph.migration.chi_bounded_classes.conj2_1605_statement_compat",
+      "Digraph.migration.chi_bounded_classes.conj4_1605_statement_compat",
+      "Digraph.migration.chi_bounded_classes.conj5_1605_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.chi_bounding.chi_bounded_via_empty",
+      "GTBase.chi_bounding.chi_bounded_via_sub",
+      "GTBase.chi_bounding.chi_bounded_via_ext",
+      "GTBase.chi_bounding.chi_bounded_via_union",
+      "GTBase.chi_bounding.chi_bounded_via_bounded_order",
+      "GTBase.chi_bounding.chi_bounded_via_image",
+      "GTBase.chi_bounding.not_chi_bounded_via_of_unbounded_at",
+      "GTBase.chi_bounding.chi_bounded_class_empty",
+      "GTBase.chi_bounding.chi_bounded_class_sub",
+      "GTBase.chi_bounding.chi_bounded_class_ext",
+      "GTBase.chi_bounding.chi_bounded_class_union",
+      "GTBase.chi_bounding.chi_bounded_class_bounded_order",
+      "GTBase.chi_bounding.empty_graph_chi_bound"
+    ],
+    "distinct_variants": {
+      "Chromatic.conjectures.X3.x3_polynomially_chi_bounded": "Natural-coefficient polynomial bounding function: strictly more constrained than arbitrary chi-bounding.",
+      "Chromatic.conjectures.X124.x124_poly_chi_bounded": "Natural-coefficient polynomial bound; distinct from arbitrary function.",
+      "Chromatic.foundations.chi_bounding.poly_chi_bounded": "Public monomial c*omega^d bound; existing polynomial conversion proofs remain unchanged.",
+      "Chromatic.conjectures.X3.x3_bounded_chromatic": "One constant bounds the entire class, independent of clique number.",
+      "Digraph.conjectures.dichromatic.dichromatic_bounded": "Bounds the directed/dichromatic colouring invariant, not ordinary underlying chi.",
+      "Digraph.conjectures.X52.x52_mader_chi_bound": "A threshold forcing a directed subdivision, not a chi-boundedness predicate."
+    },
+    "migration_report": "meta/migration_reports/chi_bounded.md",
+    "migration_spec": "meta/migration_reports/chi_bounded.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/chi-bounded.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C9.md",
+    "downstream_client": "base/theories/examples/chi_bounding.v",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.coloring",
+        "GraphTheory.sgraph",
+        "Chromatic.foundations.chi_bounding"
+      ],
+      "result": "adapted-in-base",
+      "candidate": "Chromatic.foundations.chi_bounding.chi_bounded_class",
+      "note": "Reuse the exact existing public simple-graph bound over upstream ordinary chi/omega. No upstream class predicate exists. Supplied-map interface keeps oriented representations and positive-order guard explicit without importing an area package into another. Polynomial/dichromatic bounds remain separate.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}
