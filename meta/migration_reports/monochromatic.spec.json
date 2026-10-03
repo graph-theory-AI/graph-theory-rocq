@@ -331,6 +331,11 @@
       "path": "base/theories/examples/monochromatic.v",
       "name": "monochromatic",
       "note": "Canonical module import/re-export token; not a reference to the same-spelled GTMisc U13 predicate. Kernel closures disambiguate these names."
+    },
+    {
+      "path": "base/theories/common.v",
+      "name": "monochromatic",
+      "note": "Canonical module import token (A9 requires GTBase.monochromatic without Import for cut_size_non_monochromatic); not a reference to the same-spelled GTMisc U13 predicate. Kernel closures disambiguate these names."
     }
   ],
   "distinct_variants": [
