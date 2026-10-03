@@ -11,7 +11,7 @@ Unset Printing Implicit Defensive.
 Definition x78_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
-Definition x78_edge_count (G : sgraph) : nat := #|x78_edge_set G|.
+Definition x78_edge_count (G : sgraph) : nat := edge_count G.
 
 Definition x78_cut_size (G : sgraph) (A : {set G}) : nat :=
   #|[set e in x78_edge_set G | ~~ [disjoint e & A] && ~~ (e \subset A)]|.

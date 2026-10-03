@@ -9,8 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local simple-graph cycle vocabulary *********************************)
 
 Definition x5_edge_count (G : sgraph) : nat :=
-  #|[set p : G * G |
-      (p.1 -- p.2) && ((enum_rank p.1) < (enum_rank p.2))%N]|.
+  edge_count G.
 
 Definition x5_vertices_of_seq (G : sgraph) (c : seq G) : {set G} :=
   [set v : G | v \in c].

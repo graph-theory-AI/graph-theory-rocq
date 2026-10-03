@@ -60,6 +60,8 @@ Proof. move=> H0; apply: eq_card0 => p; rewrite inE; move: (H0); by rewrite (car
 Lemma oedges_double (G : sgraph) : oedges G = 2 * edge_count G.
 Proof.
 rewrite /oedges /edge_count.
+have -> : GTBase.common.edge_count G = #|[set p : G * G | oedge p]|.
+  by rewrite -GTBase.common.edge_count_rank.
 pose sw := fun p : G * G => (p.2, p.1).
 have sw_inj : injective sw by move=> [a b] [c d] [] -> ->.
 have swA : [set p : G * G | p.1 -- p.2] = [set p | oedge p] :|: sw @: [set p | oedge p].
@@ -90,7 +92,7 @@ Lemma oedges_K0 : oedges 'K_0 = 0.
 Proof. by apply: card_emptyG; rewrite card_ord. Qed.
 
 Lemma edge_count_K0 : edge_count 'K_0 = 0.
-Proof. by apply: card_emptyG; rewrite card_ord. Qed.
+Proof. exact: GTBase.common.edge_count_Kn 0. Qed.
 
 (** ** [all_pairs] — irreflexive (no loop) and contains every distinct pair. *)
 Lemma all_pairs_irrefl (V : finType) (x : V) : (x, x) \notin all_pairs V.
@@ -158,7 +160,7 @@ Proof.
 split.
 - exists 'K_0; split; [by rewrite card_ord | exact: edge_count_K0 | exact: family_free_empty].
 - move=> m' [G [Hc Hm _]].
-  by rewrite -Hm /edge_count (@card_emptyG G (@oedge G) Hc).
+  by rewrite -Hm /edge_count -GTBase.common.edge_count_rank (@card_emptyG G (@oedge G) Hc).
 Qed.
 
 (** ** [incr_path] — boundary identity: the empty path is never an increasing path. *)

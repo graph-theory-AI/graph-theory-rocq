@@ -59,6 +59,41 @@ Lemma in_sg_edge_set (G : sgraph) (e : {set G}) :
   (e \in E(G)) = [exists x : G, [exists y : G, (x -- y) && (e == [set x; y])]].
 Proof. by rewrite sg_edge_setE inE. Qed.
 
+(** ** Edge count
+
+    [edge_count G] is the number of edges of the simple graph [G], [#|E(G)|]: unordered pairs of
+    adjacent vertices.  Corpus-local copies also count the adjacent ORDERED pairs [(x, y)] with
+    [enum_rank x < enum_rank y], one orientation per edge; [edge_count_rank] proves that count equal
+    to [edge_count G], unconditionally (adjacent vertices are distinct, and the rank order picks
+    exactly one orientation).  Counting both orientations gives twice as much and is a different
+    quantity.  Grounding: [edge_count_Kn] ([K_0] and [K_1] have none, [K_2] one, [K_3] three) and
+    invariance under isomorphism ([edge_count_diso]). *)
+Definition edge_count (G : sgraph) : nat := #|E(G)|.
+
+Lemma edge_count_rank (G : sgraph) :
+  #|[set p : G * G | (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2)%N]| = edge_count G.
+Proof.
+set S := [set p : G * G | _].
+have inS (p : G * G) : (p \in S) = (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2)%N by rewrite inE.
+have inj : {in S &, injective (fun p : G * G => [set p.1; p.2])}.
+  move=> [a b] [c d]; rewrite !inS => /andP[ab rab] /andP[cd rcd] /= eq.
+  have cE : c \in [set a; b] by rewrite eq !inE eqxx.
+  have dE : d \in [set a; b] by rewrite eq !inE eqxx orbT.
+  move: cE dE; rewrite !inE => /orP[/eqP ca|/eqP cb] /orP[/eqP da|/eqP db].
+  - by move: (sg_edgeNeq cd); rewrite ca da eqxx.
+  - by rewrite ca db.
+  - by move: rcd; rewrite cb da => /(ltn_trans rab); rewrite ltnn.
+  - by move: (sg_edgeNeq cd); rewrite cb db eqxx.
+rewrite /edge_count -(card_in_imset inj); apply: eq_card => e.
+apply/imsetP/edgesP => [[[a b]]|[x [y [-> xy]]]].
+- by rewrite inS => /andP[ab _] ->; exists a, b.
+- have [rxy|ryx|exy] := ltngtP (enum_rank x) (enum_rank y).
+  + by exists (x, y); first by rewrite inS xy rxy.
+  + exists (y, x); first by rewrite inS sgP xy ryx.
+    by rewrite setUC.
+  + by move/val_inj/enum_rank_inj: exy => exy; move: xy; rewrite exy sg_irrefl.
+Qed.
+
 (** The two-element-clique presentation of [E(G)] used by two local copies
     (X100, X102): an edge is exactly a two-element clique. *)
 Lemma sg_edge_set_cliqueE (G : sgraph) :
@@ -580,6 +615,23 @@ Proof. by apply/k_edge_connected1; split; [rewrite card_ord|exact: connected_K2]
 Lemma not_k_edge_connected_K1 : ~ k_edge_connected 'K_1 1.
 Proof. by case; rewrite card_ord. Qed.
 
+(** *** edge count *)
+
+Lemma edge_count_Kn (n : nat) : edge_count 'K_n = 'C(n, 2).
+Proof. exact: card_edge_Kn. Qed.
+
+Lemma edge_count_K0_K1 : edge_count 'K_0 = 0 /\ edge_count 'K_1 = 0.
+Proof. by rewrite !edge_count_Kn. Qed.
+
+Lemma edge_count_K2 : edge_count 'K_2 = 1.
+Proof. by rewrite edge_count_Kn. Qed.
+
+Lemma edge_count_K3 : edge_count 'K_3 = 3.
+Proof. by rewrite edge_count_Kn. Qed.
+
+Lemma edge_count_diso (G H : sgraph) : G ≃ H -> edge_count G = edge_count H.
+Proof. exact: diso_card_edge. Qed.
+
 (** *** graph complement
 
     The canonical complement is upstream [GraphTheory.sgraph.compl G], with relation
@@ -855,6 +907,8 @@ Proof. by move=> ac x; apply/negP => xx; move: (ac x x xx); rewrite connect0. Qe
     [has_subgraph_K0], [has_subgraph_K0_host], [has_subgraph_del_edge_set],
     [has_subgraph_not_induced], [has_subgraph_host_diso], [compl_adjE], [compl_eq_diso],
     [compl_adj_offdiag], [compl_noloop], [compl_Kn_edgeless], [compl_compl_diso],
+    [edge_count_rank], [edge_count_Kn], [edge_count_K0_K1], [edge_count_K2], [edge_count_K3],
+    [edge_count_diso],
     [induced_free_inhabited], [induced_free_diso], [induced_free_card],
     [not_induced_free_self], [not_induced_free_pattern0], [induced_free_host0],
     [not_induced_free_clique], [induced_free_K1], [induced_free_Kn],
