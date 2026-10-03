@@ -22,9 +22,11 @@ Every earlier frozen body stays unchanged. B21's independence transport proof no
 uses public `stable_noedgeP`, with the same theorem header and raw constructor proofs.
 The initial cochromatic proof adaptations and public API are retained exactly.
 Source mappings and reciprocal history notes: `meta/migration_reports/stable_sets.spec.json`.
-Initial author/independent acceptance is separate from the new combined proof review.
+Initial and combined independent reviews are recorded in
+`meta/migration_reviews/stable_sets.md`; coordinator whole-iff review is complete.
 
 Reproduce with the public client, family kernels (`stable_sets`, `ordinal_path`,
 `induced_paths`, `path_vertices`, `consecutive_in_path`), affected normal milestones,
 and regenerated source/audit checks. Combined evidence and exact gate status:
-`coordination/evidence/A20-combined-by-path-review/`; no combined acceptance is claimed here.
+`coordination/evidence/A20-combined-by-path-review/`. Focused proofs, family kernels
+and three combined normal routes passed at4bd6115; root cumulative gates remain separate.
