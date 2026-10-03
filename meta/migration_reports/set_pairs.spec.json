@@ -1,0 +1,628 @@
+{
+  "family": "set-pair",
+  "canonical_name": "GTBase.set_pairs.anticomplete",
+  "canonical_short_name": "anticomplete",
+  "relation": "pairs of supplied vertex sets of one simple graph, three contracts kept apart: disjoint anticompleteness, raw anticompleteness and cross completeness. Chromatic X3, Extremal X57/X58/X223 x*_anticomplete ([disjoint A & B] /\\ a -- b -> False for cross pairs) and Minor X11 x11_anticomplete_sets (the same with ~~ (x -- y)) are iffs with GTBase.set_pairs.anticomplete A B ([disjoint A & B] && ~~ neighbor A B) by anticompleteP / anticomplete_nonadjP; GTMisc X41/X144 x*_anticomplete_between (~~ (a -- b) for cross pairs, no disjointness) are iffs with upstream ~~ neighbor A B by neighborNP; GTMisc X41/X144 x*_complete_between (a -- b for cross pairs) are iffs with GTBase.set_pairs.complete_between A B by complete_betweenP; Extremal D2ram complete_bipartite_sub ([disjoint A & B] /\\ cross completeness) is an iff with complete_between A B by disjoint_complete_betweenP, cross completeness forcing disjointness on an sgraph (complete_between_disjoint). No nonempty, order or unequal-vertex guard; completeness in compl G equals raw anticompleteness in G only for disjoint parts (complete_between_compl).",
+  "baseline_commit": "229f2959f7726f1c0b1b3c72da4537245cb9919c",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/set_pairs.v",
+    "chromatic-theory/theories/migration/set_pairs.v",
+    "extremal-graph-theory/theories/migration/set_pairs.v",
+    "graph-theory-misc/theories/migration/set_pairs.v",
+    "minor-theory/theories/migration/set_pairs.v",
+    "extremal-graph-theory/theories/migration/induced_free.v",
+    "graph-theory-misc/theories/migration/induced_free.v",
+    "minor-theory/theories/migration/path_vertices.v",
+    "minor-theory/theories/migration/set_path.v",
+    "extremal-graph-theory/theories/migration/perfect_graphs.v",
+    "graph-theory-misc/theories/migration/perfect_graphs.v"
+  ],
+  "extra_certificates": [
+    "GTBase.set_pairs.neighborNP",
+    "GTBase.set_pairs.anticompleteP",
+    "GTBase.set_pairs.anticomplete_nonadjP",
+    "GTBase.set_pairs.complete_betweenP",
+    "GTBase.set_pairs.complete_between_disjoint",
+    "GTBase.set_pairs.disjoint_complete_betweenP",
+    "GTBase.set_pairs.anticompleteC",
+    "GTBase.set_pairs.complete_betweenC",
+    "GTBase.set_pairs.anticompleteW",
+    "GTBase.set_pairs.complete_betweenW",
+    "GTBase.set_pairs.complete_between_compl"
+  ],
+  "summary": [
+    "Batch A, family A21 (complete and anticomplete pairs of supplied vertex sets), initially on the fixed A20 pin 229f295; combined on reviewed B23 parent 172629c. Three contracts stay apart: raw anticompleteness is upstream ~~ neighbor A B; the new GTBase.set_pairs names the disjoint anticomplete pair anticomplete A B ([disjoint A & B] && ~~ neighbor A B) and the cross-complete pair complete_between A B. Views: neighborNP, anticompleteP, anticomplete_nonadjP, complete_betweenP and disjoint_complete_betweenP, the last proving D2ram's explicit disjointness from cross completeness (complete_between_disjoint); swaps, restrictions and the complement duality for disjoint parts. The public client: empty parts and K_0, a shared K_1 singleton (raw anticomplete, neither disjoint-anticomplete nor complete), singleton parts of K_2 and of an edgeless graph, swaps and restrictions, a complete pair with a nonclique part in K_1,2, and the complement duality with its disjointness requirement.",
+    "",
+    "Frozen verbatim at 229f295: the ten sources, the five row-reaching chains (X57 sparse strong Erdos-Hajnal property; X41 and X144 pure pairs; X11 pairwise anticomplete paths and k paths) and the nine rows (Chromatic X3 #1111 and X213 El-Zahar-Erdos; Extremal X57, X58, X223 and D2ram; GTMisc X41 and X144; Minor X11). Complete rows at the pre-migration 9e03072: X57 (A1, with its property chain), X58 (A1), X41 (A1) and X11 (B1+B5, with both chains and B5's complete right alternative): 13 initial whole-row iffs; the bridges reuse A1's, B1's and B5's certificates. Quantifier orders, positivity guards, thresholds, asymmetric bounds, X223's closed-neighbourhood predicate, D2ram's G OR compl G branches, X41's documented sublinear side, statuses and leg states are unchanged.",
+    "",
+    "History: A1's X57/X58/X41 rows and B1's/B5's X11 chains keep live set-pair names byte for byte and are documented below, as is B5's X11Original, which reaches the live pair only through B1's frozen pairwise chain; A21's per-row copies keep A1's, B1's and B5's live names, with reciprocal notes in their specs. The two obsolete A8 exclusions of x223_anticomplete are removed; X76/X78 stay. Proof clients: grounding_X213, grounding_D2ram (both lemmas) and grounding_X223 route their raw conjunctions through the views with unchanged types; the verified gc:e076 implication X58 -> X223 is unchanged. The appended C12+A21 D2ram/X144 Originals freeze both raw perfection contracts and the complete raw pair chains. There are 41 frozen objects and 15 whole-row iffs (nine current, six Originals); the two new proofs require separate independent and coordinator review before acceptance."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_anticomplete",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_anticomplete",
+      "frozen_path": "chromatic-theory/theories/migration/set_pairs.v",
+      "frozen": "Legacy.x3_anticomplete",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.set_pairs.x3_anticomplete_compat",
+      "live_unfolds_to": "anticomplete A B"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.erdos_anticomplete_pairs_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "erdos_anticomplete_pairs_statement",
+      "frozen_path": "chromatic-theory/theories/migration/set_pairs.v",
+      "frozen": "X3Legacy.erdos_anticomplete_pairs_statement",
+      "substitutions": {
+        "x3_anticomplete": "Legacy.x3_anticomplete"
+      },
+      "certificate": "Chromatic.migration.set_pairs.erdos_anticomplete_pairs_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X213.el_zahar_erdos_statement",
+      "path": "chromatic-theory/theories/conjectures/X213.v",
+      "name": "el_zahar_erdos_statement",
+      "frozen_path": "chromatic-theory/theories/migration/set_pairs.v",
+      "frozen": "X213Legacy.el_zahar_erdos_statement",
+      "substitutions": {
+        "x3_anticomplete": "Legacy.x3_anticomplete"
+      },
+      "certificate": "Chromatic.migration.set_pairs.el_zahar_erdos_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X57.x57_anticomplete",
+      "path": "extremal-graph-theory/theories/conjectures/X57.v",
+      "name": "x57_anticomplete",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "Legacy.x57_anticomplete",
+      "substitutions": {},
+      "certificate": "Extremal.migration.set_pairs.x57_anticomplete_compat",
+      "live_unfolds_to": "anticomplete A B"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X58.x58_anticomplete",
+      "path": "extremal-graph-theory/theories/conjectures/X58.v",
+      "name": "x58_anticomplete",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "Legacy.x58_anticomplete",
+      "substitutions": {},
+      "certificate": "Extremal.migration.set_pairs.x58_anticomplete_compat",
+      "live_unfolds_to": "anticomplete A B"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X223.x223_anticomplete",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "x223_anticomplete",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "Legacy.x223_anticomplete",
+      "substitutions": {},
+      "certificate": "Extremal.migration.set_pairs.x223_anticomplete_compat",
+      "live_unfolds_to": "anticomplete A B"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2ram.complete_bipartite_sub",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "complete_bipartite_sub",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "Legacy.complete_bipartite_sub",
+      "substitutions": {},
+      "certificate": "Extremal.migration.set_pairs.complete_bipartite_sub_compat",
+      "live_unfolds_to": "complete_between A B"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X57.x57_sparse_strong_eh_property",
+      "path": "extremal-graph-theory/theories/conjectures/X57.v",
+      "name": "x57_sparse_strong_eh_property",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "X57Legacy.x57_sparse_strong_eh_property",
+      "substitutions": {
+        "x57_anticomplete": "Legacy.x57_anticomplete"
+      },
+      "certificate": "Extremal.migration.set_pairs.x57_sparse_strong_eh_property_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X57.sparse_strong_eh_iff_forest_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X57.v",
+      "name": "sparse_strong_eh_iff_forest_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "X57Legacy.sparse_strong_eh_iff_forest_statement",
+      "substitutions": {
+        "x57_sparse_strong_eh_property": "X57Legacy.x57_sparse_strong_eh_property"
+      },
+      "certificate": "Extremal.migration.set_pairs.sparse_strong_eh_iff_forest_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X58.epsilon_bounded_h_free_anticomplete_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X58.v",
+      "name": "epsilon_bounded_h_free_anticomplete_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "X58Legacy.epsilon_bounded_h_free_anticomplete_pair_statement",
+      "substitutions": {
+        "x58_anticomplete": "Legacy.x58_anticomplete"
+      },
+      "certificate": "Extremal.migration.set_pairs.epsilon_bounded_h_free_anticomplete_pair_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X223.triangle_free_eps_bounded_anticomplete_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X223.v",
+      "name": "triangle_free_eps_bounded_anticomplete_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "X223Legacy.triangle_free_eps_bounded_anticomplete_pair_statement",
+      "substitutions": {
+        "x223_anticomplete": "Legacy.x223_anticomplete"
+      },
+      "certificate": "Extremal.migration.set_pairs.triangle_free_eps_bounded_anticomplete_pair_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2ram.complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "D2ramLegacy.complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "substitutions": {
+        "complete_bipartite_sub": "Legacy.complete_bipartite_sub"
+      },
+      "certificate": "Extremal.migration.set_pairs.complete_bipartite_subgraphs_of_perfect_graphs_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X57.x57_sparse_strong_eh_property",
+      "path": "extremal-graph-theory/theories/conjectures/X57.v",
+      "name": "x57_sparse_strong_eh_property",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "X57Original.x57_sparse_strong_eh_property",
+      "substitutions": {
+        "x57_anticomplete": "Legacy.x57_anticomplete",
+        "x57_induced_free": "A1.Legacy.x57_induced_free"
+      },
+      "certificate": "Extremal.migration.set_pairs.x57_sparse_strong_eh_property_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X57.sparse_strong_eh_iff_forest_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X57.v",
+      "name": "sparse_strong_eh_iff_forest_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "X57Original.sparse_strong_eh_iff_forest_statement",
+      "substitutions": {
+        "x57_sparse_strong_eh_property": "X57Original.x57_sparse_strong_eh_property"
+      },
+      "certificate": "Extremal.migration.set_pairs.sparse_strong_eh_iff_forest_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X58.epsilon_bounded_h_free_anticomplete_pair_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X58.v",
+      "name": "epsilon_bounded_h_free_anticomplete_pair_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "X58Original.epsilon_bounded_h_free_anticomplete_pair_statement",
+      "substitutions": {
+        "x58_anticomplete": "Legacy.x58_anticomplete",
+        "x58_induced_free": "A1.Legacy.x58_induced_free"
+      },
+      "certificate": "Extremal.migration.set_pairs.epsilon_bounded_h_free_anticomplete_pair_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X41.x41_anticomplete_between",
+      "path": "graph-theory-misc/theories/conjectures/X41.v",
+      "name": "x41_anticomplete_between",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "Legacy.x41_anticomplete_between",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.set_pairs.x41_anticomplete_between_compat",
+      "live_unfolds_to": "~~ neighbor A B"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X41.x41_complete_between",
+      "path": "graph-theory-misc/theories/conjectures/X41.v",
+      "name": "x41_complete_between",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "Legacy.x41_complete_between",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.set_pairs.x41_complete_between_compat",
+      "live_unfolds_to": "complete_between A B"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X144.x144_anticomplete_between",
+      "path": "graph-theory-misc/theories/conjectures/X144.v",
+      "name": "x144_anticomplete_between",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "Legacy.x144_anticomplete_between",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.set_pairs.x144_anticomplete_between_compat",
+      "live_unfolds_to": "~~ neighbor A B"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X144.x144_complete_between",
+      "path": "graph-theory-misc/theories/conjectures/X144.v",
+      "name": "x144_complete_between",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "Legacy.x144_complete_between",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.set_pairs.x144_complete_between_compat",
+      "live_unfolds_to": "complete_between A B"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X41.x41_pure_pair",
+      "path": "graph-theory-misc/theories/conjectures/X41.v",
+      "name": "x41_pure_pair",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "X41Legacy.x41_pure_pair",
+      "substitutions": {
+        "x41_complete_between": "Legacy.x41_complete_between",
+        "x41_anticomplete_between": "Legacy.x41_anticomplete_between"
+      },
+      "certificate": "GTMisc.migration.set_pairs.x41_pure_pair_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X41.sparse_linear_pure_pair_statement",
+      "path": "graph-theory-misc/theories/conjectures/X41.v",
+      "name": "sparse_linear_pure_pair_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "X41Legacy.sparse_linear_pure_pair_statement",
+      "substitutions": {
+        "x41_pure_pair": "X41Legacy.x41_pure_pair"
+      },
+      "certificate": "GTMisc.migration.set_pairs.sparse_linear_pure_pair_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X144.x144_pure_pair",
+      "path": "graph-theory-misc/theories/conjectures/X144.v",
+      "name": "x144_pure_pair",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "X144Legacy.x144_pure_pair",
+      "substitutions": {
+        "x144_complete_between": "Legacy.x144_complete_between",
+        "x144_anticomplete_between": "Legacy.x144_anticomplete_between"
+      },
+      "certificate": "GTMisc.migration.set_pairs.x144_pure_pair_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X144.fox_pure_pair_perfect_graphs_statement",
+      "path": "graph-theory-misc/theories/conjectures/X144.v",
+      "name": "fox_pure_pair_perfect_graphs_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "X144Legacy.fox_pure_pair_perfect_graphs_statement",
+      "substitutions": {
+        "x144_pure_pair": "X144Legacy.x144_pure_pair"
+      },
+      "certificate": "GTMisc.migration.set_pairs.fox_pure_pair_perfect_graphs_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X41.sparse_linear_pure_pair_statement",
+      "path": "graph-theory-misc/theories/conjectures/X41.v",
+      "name": "sparse_linear_pure_pair_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "X41Original.sparse_linear_pure_pair_statement",
+      "substitutions": {
+        "x41_pure_pair": "X41Legacy.x41_pure_pair",
+        "x41_induced_H_free": "A1.Legacy.x41_induced_H_free"
+      },
+      "certificate": "GTMisc.migration.set_pairs.sparse_linear_pure_pair_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X11.x11_anticomplete_sets",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_anticomplete_sets",
+      "frozen_path": "minor-theory/theories/migration/set_pairs.v",
+      "frozen": "Legacy.x11_anticomplete_sets",
+      "substitutions": {},
+      "certificate": "Minor.migration.set_pairs.x11_anticomplete_sets_compat",
+      "live_unfolds_to": "anticomplete A B"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X11.x11_pairwise_anticomplete_paths",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_pairwise_anticomplete_paths",
+      "frozen_path": "minor-theory/theories/migration/set_pairs.v",
+      "frozen": "X11Legacy.x11_pairwise_anticomplete_paths",
+      "substitutions": {
+        "x11_anticomplete_sets": "Legacy.x11_anticomplete_sets"
+      },
+      "certificate": "Minor.migration.set_pairs.x11_pairwise_anticomplete_paths_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X11.x11_has_k_anticomplete_xy_paths",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_has_k_anticomplete_xy_paths",
+      "frozen_path": "minor-theory/theories/migration/set_pairs.v",
+      "frozen": "X11Legacy.x11_has_k_anticomplete_xy_paths",
+      "substitutions": {
+        "x11_pairwise_anticomplete_paths": "X11Legacy.x11_pairwise_anticomplete_paths"
+      },
+      "certificate": "Minor.migration.set_pairs.x11_has_k_anticomplete_xy_paths_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X11.induced_menger_anticomplete_paths_statement",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "induced_menger_anticomplete_paths_statement",
+      "frozen_path": "minor-theory/theories/migration/set_pairs.v",
+      "frozen": "X11Legacy.induced_menger_anticomplete_paths_statement",
+      "substitutions": {
+        "x11_has_k_anticomplete_xy_paths": "X11Legacy.x11_has_k_anticomplete_xy_paths"
+      },
+      "certificate": "Minor.migration.set_pairs.induced_menger_anticomplete_paths_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Minor.conjectures.X11.x11_pairwise_anticomplete_paths",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_pairwise_anticomplete_paths",
+      "frozen_path": "minor-theory/theories/migration/set_pairs.v",
+      "frozen": "X11Original.x11_pairwise_anticomplete_paths",
+      "substitutions": {
+        "x11_anticomplete_sets": "Legacy.x11_anticomplete_sets",
+        "x11_path_vertices": "B1.Legacy.x11_path_vertices"
+      },
+      "certificate": "Minor.migration.set_pairs.x11_pairwise_anticomplete_paths_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Minor.conjectures.X11.x11_has_k_anticomplete_xy_paths",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_has_k_anticomplete_xy_paths",
+      "frozen_path": "minor-theory/theories/migration/set_pairs.v",
+      "frozen": "X11Original.x11_has_k_anticomplete_xy_paths",
+      "substitutions": {
+        "x11_pairwise_anticomplete_paths": "X11Original.x11_pairwise_anticomplete_paths",
+        "x11_xy_path": "B5.Legacy.x11_xy_path"
+      },
+      "certificate": "Minor.migration.set_pairs.x11_has_k_anticomplete_xy_paths_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X11.induced_menger_anticomplete_paths_statement",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "induced_menger_anticomplete_paths_statement",
+      "frozen_path": "minor-theory/theories/migration/set_pairs.v",
+      "frozen": "X11Original.induced_menger_anticomplete_paths_statement",
+      "substitutions": {
+        "x11_has_k_anticomplete_xy_paths": "X11Original.x11_has_k_anticomplete_xy_paths",
+        "x11_no_xy_path_after_closed_neighbourhood": "B5.X11Original.no_xy_path_after_closed_neighbourhood"
+      },
+      "certificate": "Minor.migration.set_pairs.induced_menger_anticomplete_paths_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X57.x57_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X57.v",
+      "name": "x57_induced_free",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x57_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x57_induced_free_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X58.x58_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X58.v",
+      "name": "x58_induced_free",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x58_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x58_induced_free_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X41.x41_induced_H_free",
+      "path": "graph-theory-misc/theories/conjectures/X41.v",
+      "name": "x41_induced_H_free",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "Legacy.x41_induced_H_free",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_free.x41_induced_H_free_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X11.x11_path_vertices",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_path_vertices",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "minor-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x11_path_vertices",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_vertices.x11_path_vertices_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X11.x11_xy_path",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_xy_path",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f",
+      "frozen_path": "minor-theory/theories/migration/set_path.v",
+      "frozen": "Legacy.x11_xy_path",
+      "substitutions": {},
+      "certificate": "Minor.migration.set_path.x11_xy_path_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X11.x11_no_xy_path_after_closed_neighbourhood",
+      "path": "minor-theory/theories/conjectures/X11.v",
+      "name": "x11_no_xy_path_after_closed_neighbourhood",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f",
+      "frozen_path": "minor-theory/theories/migration/set_path.v",
+      "frozen": "X11Original.no_xy_path_after_closed_neighbourhood",
+      "substitutions": {
+        "x11_no_xy_path_after_closed_neighbourhood": "no_xy_path_after_closed_neighbourhood",
+        "x11_path_vertices": "path_vertices.Legacy.x11_path_vertices",
+        "x11_xy_path": "Legacy.x11_xy_path"
+      },
+      "certificate": "Minor.migration.set_path.x11_no_xy_path_after_closed_neighbourhood_original_compat"
+    },
+    {
+      "kind": "historical",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "Extremal.conjectures.D2ram.perfect_graph",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "perfect_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/perfect_graphs.v",
+      "frozen": "Legacy.perfect_graph",
+      "substitutions": {},
+      "certificate": "Extremal.migration.perfect_graphs.perfect_graph_compat"
+    },
+    {
+      "kind": "historical",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "GTMisc.conjectures.X144.x144_perfect_graph",
+      "path": "graph-theory-misc/theories/conjectures/X144.v",
+      "name": "x144_perfect_graph",
+      "frozen_path": "graph-theory-misc/theories/migration/perfect_graphs.v",
+      "frozen": "Legacy.x144_perfect_graph",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.perfect_graphs.x144_perfect_graph_compat"
+    },
+    {
+      "kind": "original-statement",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "Extremal.conjectures.D2ram.complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/set_pairs.v",
+      "frozen": "D2ramOriginal.complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "substitutions": {
+        "perfect_graph": "C12.Legacy.perfect_graph",
+        "complete_bipartite_sub": "Legacy.complete_bipartite_sub"
+      },
+      "certificate": "Extremal.migration.set_pairs.complete_bipartite_subgraphs_of_perfect_graphs_statement_original_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "original-statement",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "GTMisc.conjectures.X144.fox_pure_pair_perfect_graphs_statement",
+      "path": "graph-theory-misc/theories/conjectures/X144.v",
+      "name": "fox_pure_pair_perfect_graphs_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_pairs.v",
+      "frozen": "X144Original.fox_pure_pair_perfect_graphs_statement",
+      "substitutions": {
+        "x144_perfect_graph": "C12.Legacy.x144_perfect_graph",
+        "x144_pure_pair": "X144Legacy.x144_pure_pair"
+      },
+      "certificate": "GTMisc.migration.set_pairs.fox_pure_pair_perfect_graphs_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/induced_free.v#X57Legacy.sparse_strong_eh_property": "A1 chain snapshot: A1 froze this chain over its own frozen induced-freeness but kept the live x57_anticomplete (after A21 a GTBase.set_pairs pair or upstream ~~ neighbor through its view, an iff). Kept unchanged; the complete chain and row are Extremal.migration.set_pairs.X57Original.x57_sparse_strong_eh_property and X57Original.sparse_strong_eh_iff_forest_statement, certified by x57_sparse_strong_eh_property_original_compat and sparse_strong_eh_iff_forest_statement_original_compat, the chain one reusing this certificate.",
+    "extremal-graph-theory/theories/migration/induced_free.v#X58Legacy.statement": "A1 per-row snapshot: A1 froze this row over its own frozen induced-freeness but kept the live x58_anticomplete (after A21 a GTBase.set_pairs pair or upstream ~~ neighbor through its view, an iff). Kept unchanged; the complete row is Extremal.migration.set_pairs.X58Original.epsilon_bounded_h_free_anticomplete_pair_statement, certified by epsilon_bounded_h_free_anticomplete_pair_statement_original_compat, which reuses this certificate.",
+    "graph-theory-misc/theories/migration/induced_free.v#X41Legacy.statement": "A1 per-row snapshot: A1 froze this row over its own frozen induced-H-freeness but kept the live x41_pure_pair (over x41_complete_between and x41_anticomplete_between) (after A21 a GTBase.set_pairs pair or upstream ~~ neighbor through its view, an iff). Kept unchanged; the complete row is GTMisc.migration.set_pairs.X41Original.sparse_linear_pure_pair_statement, certified by sparse_linear_pure_pair_statement_original_compat, which reuses this certificate.",
+    "minor-theory/theories/migration/path_vertices.v#X11Legacy.pairwise_anticomplete_paths": "B1 chain snapshot: B1 froze this chain over its own frozen path support but kept the live x11_anticomplete_sets (after A21 a GTBase.set_pairs pair or upstream ~~ neighbor through its view, an iff). Kept unchanged; the complete chain is Minor.migration.set_pairs.X11Original.x11_pairwise_anticomplete_paths (row Minor.migration.set_pairs.X11Original.induced_menger_anticomplete_paths_statement), certified by x11_pairwise_anticomplete_paths_original_compat, which reuses this certificate.",
+    "minor-theory/theories/migration/set_path.v#X11Legacy.has_k_anticomplete_xy_paths": "B5 chain snapshot: B5 froze this chain over its own frozen X-Y path but kept the live x11_pairwise_anticomplete_paths (over x11_anticomplete_sets) (after A21 a GTBase.set_pairs pair or upstream ~~ neighbor through its view, an iff). Kept unchanged; the complete chain is Minor.migration.set_pairs.X11Original.x11_has_k_anticomplete_xy_paths (row Minor.migration.set_pairs.X11Original.induced_menger_anticomplete_paths_statement), certified by x11_has_k_anticomplete_xy_paths_original_compat, which reuses this certificate.",
+    "minor-theory/theories/migration/set_path.v#X11Original.has_k_anticomplete_xy_paths": "B5 complete-row chain, documented although not lexically flagged: its body names B1's frozen path_vertices.X11Legacy.pairwise_anticomplete_paths, which itself calls the live x11_anticomplete_sets, so it reaches the live pair indirectly. Kept unchanged beside A21's complete chain Minor.migration.set_pairs.X11Original.x11_has_k_anticomplete_xy_paths, certified by x11_has_k_anticomplete_xy_paths_original_compat.",
+    "minor-theory/theories/migration/set_path.v#X11Original.induced_menger_anticomplete_paths_statement": "B5 complete row, documented although not lexically flagged: it reaches the live x11_anticomplete_sets through B5's X11Original chain and B1's frozen pairwise chain. Kept unchanged beside A21's complete row Minor.migration.set_pairs.X11Original.induced_menger_anticomplete_paths_statement, certified by induced_menger_anticomplete_paths_statement_original_compat, which reuses B5's frozen right alternative and its certificate.",
+    "extremal-graph-theory/theories/migration/perfect_graphs.v#Legacy.complete_bipartite_subgraphs_of_perfect_graphs_statement": "C12 row snapshot remains byte-exact and retains the live pair contract. The complete C12+A21 row Extremal.migration.set_pairs.D2ramOriginal.complete_bipartite_subgraphs_of_perfect_graphs_statement freezes both raw perfection and the full raw pair chain; certified by Extremal.migration.set_pairs.complete_bipartite_subgraphs_of_perfect_graphs_statement_original_compat.",
+    "graph-theory-misc/theories/migration/perfect_graphs.v#Legacy.fox_pure_pair_perfect_graphs_statement": "C12 row snapshot remains byte-exact and retains the live pair contract. The complete C12+A21 row GTMisc.migration.set_pairs.X144Original.fox_pure_pair_perfect_graphs_statement freezes both raw perfection and the full raw pair chain; certified by GTMisc.migration.set_pairs.fox_pure_pair_perfect_graphs_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/X213.v",
+      "name": "x3_anticomplete",
+      "note": "X213's El-Zahar-Erdos row uses X3's pair across files; frozen as X213Legacy over Legacy.x3_anticomplete."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X213.v",
+      "name": "x3_anticomplete",
+      "note": "x213_anticomplete_set0 introduces the pair through anticompleteP; type unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X213.v",
+      "name": "el_zahar_erdos_statement",
+      "note": "Print Assumptions only; unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2ram.v",
+      "name": "complete_bipartite_sub",
+      "note": "complete_bipartite_sub0 and complete_bipartite_sub_sym go through disjoint_complete_betweenP; types unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X223.v",
+      "name": "x223_anticomplete",
+      "note": "anticomplete_set0 introduces the pair through anticompleteP; type unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_D2ram.v",
+      "name": "complete_bipartite_subgraphs_of_perfect_graphs_statement",
+      "note": "D2ram_nodes_in_scope (reflexivity): proof and type unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X223.v",
+      "name": "epsilon_bounded_h_free_anticomplete_pair_statement",
+      "note": "gc:e076 (X58 -> X223), verified: proof and type unchanged; both pairs unfold to anticomplete A B and the closed-neighbourhood-to-Delta step is untouched. Candidate gc:e077 stays unproved."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X223.v",
+      "name": "triangle_free_eps_bounded_anticomplete_pair_statement",
+      "note": "gc:e076 conclusion: proof and type unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.X94.x94_complete_pair",
+      "path": "graph-theory-misc/theories/conjectures/X94.v",
+      "name": "x94_complete_pair",
+      "note": "raw biadjacency between two possibly different finite carriers; no same-set disjointness is well typed; a separate heterogeneous pair contract"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X94.x94_anticomplete_pair",
+      "path": "graph-theory-misc/theories/conjectures/X94.v",
+      "name": "x94_anticomplete_pair",
+      "note": "raw non-biadjacency between two possibly different finite carriers; a separate heterogeneous pair contract"
+    },
+    {
+      "qualified": "Minor.conjectures.X67.x67_no_cross_edges",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_no_cross_edges",
+      "note": "sequence-interior wrapper: endpoints and two lists produce the interior sets before forbidding cross edges; part of the B1/B2/B3/C13 histories, not rewritten here"
+    },
+    {
+      "qualified": "GTBase.common.complete_bipartite",
+      "path": "base/theories/common.v",
+      "name": "complete_bipartite",
+      "note": "whole-graph bipartition: every edge crosses A and its complement, constraining both interiors and the whole carrier; not a pair of supplied parts"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and GTBase.set_pairs theorem, exact types of the frozen and live helpers, chains and rows, strict dependency closures of the frozen chains and rows (current and complete, with closure parity against the baseline for the per-row copies), and the types of every declaration in the reverse dependency closure of the source files at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A21-set-pairs/ (outside the repository)"
+}

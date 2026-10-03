@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.X223 -- Sidorenko / sparse-pair / Erdos-Hajnal / induced-Turan rows (wave X223, 2026-09-23) *)
 
 From GTBase Require Export base.
+From GTBase Require Import set_pairs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -29,7 +30,7 @@ Definition x223_eps_bounded (G : sgraph) (p d : nat) : Prop :=
 
 (** [A] and [B] are disjoint with no edge between them. *)
 Definition x223_anticomplete (G : sgraph) (A B : {set G}) : Prop :=
-  [disjoint A & B] /\ forall a b : G, a \in A -> b \in B -> a -- b -> False.
+  anticomplete A B.
 
 (** The number of edges between [A] and [B], counted as the ordered pairs
     (u,v) in A x B with u adjacent to v.  For DISJOINT A and B this is exactly

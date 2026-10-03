@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "family": "set-pair",
+  "modules": {
+    "GTBase.set_pairs": {
+      "path": "base/theories/set_pairs.v",
+      "overrides": {
+        "anticomplete": {
+          "verdict": "FAITHFUL",
+          "note": "Disjoint supplied parts with no edge between them: [disjoint A & B] && ~~ neighbor A B. Empty parts qualify on every carrier; a shared K_1 singleton does not (it is only raw anticomplete), and distinct singletons of K_2 do not."
+        },
+        "complete_between": {
+          "verdict": "FAITHFUL",
+          "note": "Every vertex of A adjacent to every vertex of B; forces disjoint parts on an sgraph (complete_between_disjoint) and holds for empty parts. Neither part need be a clique or stable (K_1,2); not the whole-graph complete_bipartite."
+        }
+      },
+      "machine_evidence": [
+        "neighborNP",
+        "anticompleteP",
+        "anticomplete_nonadjP",
+        "complete_betweenP",
+        "complete_between_disjoint",
+        "disjoint_complete_betweenP",
+        "anticompleteC",
+        "complete_betweenC",
+        "anticompleteW",
+        "complete_betweenW",
+        "complete_between_compl"
+      ]
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
 From GraphTheory Require Import minor.
 From GTBase Require Export base.
+From GTBase Require Import set_pairs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -19,8 +20,7 @@ Definition x11_closed_neighbourhood (G : sgraph) (Z : {set G}) : {set G} :=
   Z :|: \bigcup_(z in Z) N(z).
 
 Definition x11_anticomplete_sets (G : sgraph) (A B : {set G}) : Prop :=
-  [disjoint A & B] /\
-  forall x y : G, x \in A -> y \in B -> ~~ (x -- y).
+  anticomplete A B.
 
 Definition x11_pairwise_anticomplete_paths
     (G : sgraph) (paths : seq (seq G)) : Prop :=
