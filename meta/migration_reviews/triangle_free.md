@@ -1,0 +1,7 @@
+# A15 triangle-freeness review
+
+Independent step 10: path_review approved exact `76122100ec110f03f4b406d6b98c848a09aedf99` on 2026-10-03; coordinator independently read and approved all nine iff types, including five whole statements. Evidence: `/srv/graph-theory-rocq/coordination/evidence/A15-review-by-path-review.md` and `A15-coordinator-final/`.
+
+The unchanged public triple predicate is equivalent to the old girth-four helpers with the existing `2 < size c` guard. Three Topological proof blocks move literally into base; old qualified theorem types remain exact. X132 keeps shared p/q, X187 keeps its request guards/zero-total behavior and disproved status, and X192 keeps uniform alpha plus the same program/cost witnesses. Complete C5/C11 Originals bind the actual frozen colouring/class modules; old histories remain unchanged with additive notes.
+
+Independent checks: 52 fresh sources in three packages including the public client; fresh dependency analysis confirms all eleven affected files; 58 exact type/binding checks, nine exact iff types, 24 closed assumptions, 16 strict closures, three nonconversion negatives, family source/kernel 94/94. All 141 existing declaration types freshly match the author's archived parent output; that baseline-output provenance is explicit. No broad/Digraph gate was duplicated. Normal and cumulative acceptance is recorded externally by the coordinator, separately from this source preparation.
