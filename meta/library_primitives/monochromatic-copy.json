@@ -14,7 +14,7 @@
       "Hypergraph.conjectures.X117.x117_monochromatic_copy",
       "Hypergraph.conjectures.X119.x119_monochromatic_copy"
     ],
-    "consumers_remaining": 3,
+    "consumers_remaining": 0,
     "relation": "Monochromatic copy of a supplied pattern: for E : {set {set T}} and a colouring col : {set U} -> C of ALL subsets of a finite host U, some colour c and some injection f : T -> U of the whole pattern carrier (isolated vertices included) give col (f @: e) = c for every member e. For an eqType palette it is containment (hg_containsb) of the pattern in one colour class [set e | col e == c]. No uniformity, rank, nonempty family/carrier, positive palette or no-isolated premise; a colouring into the empty palette I_0 cannot exist (set0), so q = 0 forcing stays vacuous as written. Forcing, Ramsey minimality, C8 constancy on a supplied set and the Extremal graph copies (X4, XE1, edge_colourings.mono_copy) are separate.",
     "semantic_classes": {
       "bool-palette": {

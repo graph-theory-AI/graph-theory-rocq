@@ -2,6 +2,7 @@
 
 From GTBase Require Export base.
 Require Hypergraph.foundations.hypergraph_copies.
+Require Hypergraph.foundations.hypergraph_forcing.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -43,7 +44,7 @@ Definition x117_monochromatic_copy
     3-subsets of the host. *)
 Definition x117_forces_mono
     (T : finType) (E : {set {set T}}) (N : nat) : Prop :=
-  forall col : {set 'I_N} -> bool, x117_monochromatic_copy E col.
+  Hypergraph.foundations.hypergraph_forcing.hg_forces_mono E 'I_N bool.
 
 (** [R] is the two-colour Ramsey number [r(H_t;2)]: the least host size that
     forces a monochromatic copy of [H_t]. *)
