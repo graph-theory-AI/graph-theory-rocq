@@ -1,0 +1,480 @@
+{
+  "family": "chi-bounded",
+  "canonical_name": "GTBase.chi_bounding.chi_bounded_via",
+  "canonical_short_name": "chi_bounded_via",
+  "relation": "one uniform arbitrary function bounds ordinary chi by clique number; explicit underlying-map and nonempty-class adapters",
+  "baseline_commit": "0659592d2a379b1f2564601e8b61689e05eac416",
+  "repository_sources": {
+    "Chromatic.foundations.chi_bounding.chi_bounded_class": {
+      "path": "chromatic-theory/theories/foundations/chi_bounding.v",
+      "commit": "0659592d2a379b1f2564601e8b61689e05eac416",
+      "blob": "87c5d2ef20b4ab94dba921dd428675a8825433b0",
+      "declaration_hash": "add559974bf65b356e0de24057b821ef33f19cfef1033bac3e168ac41978b5db"
+    }
+  },
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "digraph-theory": "Digraph"
+  },
+  "certificate_files": [
+    "base/theories/chi_bounding.v",
+    "chromatic-theory/theories/migration/chi_bounded_classes.v",
+    "digraph-theory/theories/migration/chi_bounded_classes.v"
+  ],
+  "extra_certificates": [
+    "GTBase.chi_bounding.chi_bounded_via_empty",
+    "GTBase.chi_bounding.chi_bounded_via_sub",
+    "GTBase.chi_bounding.chi_bounded_via_ext",
+    "GTBase.chi_bounding.chi_bounded_via_union",
+    "GTBase.chi_bounding.chi_bounded_via_bounded_order",
+    "GTBase.chi_bounding.chi_bounded_via_image",
+    "GTBase.chi_bounding.not_chi_bounded_via_of_unbounded_at",
+    "GTBase.chi_bounding.chi_bounded_class_empty",
+    "GTBase.chi_bounding.chi_bounded_class_sub",
+    "GTBase.chi_bounding.chi_bounded_class_ext",
+    "GTBase.chi_bounding.chi_bounded_class_union",
+    "GTBase.chi_bounding.chi_bounded_class_bounded_order",
+    "GTBase.chi_bounding.empty_graph_chi_bound"
+  ],
+  "downstream_client": "base/theories/examples/chi_bounding.v",
+  "summary": [
+    "C9: ordinary chi-boundedness of a whole graph class: one arbitrary nat-to-nat function is chosen BEFORE all members. Sources are U8, X112, X170, Digraph chi_bounded_under and the public Chromatic chi_bounded_class. No hereditary, isomorphism, monotonicity or polynomial requirement is added. GTBase.chi_bounding owns a supplied-underlying-map interface and its simple-graph specialization, reused by two areas.",
+    "Digraph retains its explicit positive-order membership guard through the filtered class; its ordinary underlying chi/omega is not dichromatic. X170 retains its oriented-record carrier and all known-bad exceptional P4 code guards and blocked status. Empty classes and unguarded empty simple graphs retain their behavior.",
+    "Five source definitions and all ten complete reaching statements are frozen (nine corpus rows and genuinely rowless Digraph conj5). No intermediate reaching helper is omitted. All original statement bodies/doc blocks/statuses stay unchanged. Polynomial and constant chi bounds and directed dichromatic bounds are distinct variants.",
+    "A6 X3 complement history is preserved verbatim. A new complete Original combines its existing frozen complement image with C9 frozen chi_bounded. Reciprocal notes distinguish the two older partial snapshots; the full Original has its own row iff. The four verified Chromatic implication proofs, three Digraph groundings, conditional conj2-to-conj4 theorem, two U8 groundings and public polynomial-to-general bridge keep their exact types.",
+    "The public chi_bounded_class is enrolled by immutable regular Git blob and declaration hash at 0659592. Section/domain types, generic map transport, all eleven full iff types, assumptions and strict frozen/live closures require separate kernel checks and independent step-10/coordinator review. No proof-term identity or statement repair is claimed."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.U8.chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/U8.v",
+      "name": "chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "Legacy.chi_bounded",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.chi_bounded_classes.chi_bounded_compat",
+      "source_declaration_sha256": "ea7e0609b736b52e758552cd6e452dd18bc913d308b5a8113e868e4bb3c22660",
+      "source_body_sha256": "77adb2fa6797da69ce74f9cbfc79795ca9f860124080e74e1a19dcaf0f843311",
+      "live_unfolds_to": "GTBase.chi_bounding.chi_bounded_class F"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X112.x112_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X112.v",
+      "name": "x112_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "X112Legacy.x112_chi_bounded",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.chi_bounded_classes.x112_chi_bounded_compat",
+      "source_declaration_sha256": "ec3062e331de2f48558be9008fd54175041ff7919d581765e76645dc23576913",
+      "source_body_sha256": "c1d30d872c63dcfa6999717015ca8e62990567d9d492d4dac7066d575f438079",
+      "live_unfolds_to": "GTBase.chi_bounding.chi_bounded_class D"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X170.x170_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X170.v",
+      "name": "x170_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "X170Legacy.x170_chi_bounded",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.chi_bounded_classes.x170_chi_bounded_compat",
+      "source_declaration_sha256": "a22f0568286fd6506b2b5e200f604f279f7ec72710e7fdc471969add3d861335",
+      "source_body_sha256": "57acebd7f1cda60495c4c06177d503c4c33d8396e2f4bc75ba27b856e2367564",
+      "live_unfolds_to": "chi_bounded_via x170_underlying C"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.foundations.chi_bounding.chi_bounded_class",
+      "path": "chromatic-theory/theories/foundations/chi_bounding.v",
+      "name": "chi_bounded_class",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "FoundationLegacy.chi_bounded_class",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.chi_bounded_classes.chi_bounded_class_compat",
+      "source_declaration_sha256": "add559974bf65b356e0de24057b821ef33f19cfef1033bac3e168ac41978b5db",
+      "source_body_sha256": "77adb2fa6797da69ce74f9cbfc79795ca9f860124080e74e1a19dcaf0f843311",
+      "live_unfolds_to": "GTBase.chi_bounding.chi_bounded_class F",
+      "commit": "0659592d2a379b1f2564601e8b61689e05eac416",
+      "repository_source": true
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.U8.graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/U8.v",
+      "name": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "U8Legacy.graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+      "substitutions": {
+        "chi_bounded": "Legacy.chi_bounded"
+      },
+      "certificate": "Chromatic.migration.chi_bounded_classes.graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.U8.vertex_minor_closed_classes_are_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/U8.v",
+      "name": "vertex_minor_closed_classes_are_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "U8Legacy.vertex_minor_closed_classes_are_chi_bounded_statement",
+      "substitutions": {
+        "chi_bounded": "Legacy.chi_bounded"
+      },
+      "certificate": "Chromatic.migration.chi_bounded_classes.vertex_minor_closed_classes_are_chi_bounded_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.hereditary_chi_bounded_not_polynomial_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "hereditary_chi_bounded_not_polynomial_statement",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "X3Legacy.hereditary_chi_bounded_not_polynomial_statement",
+      "substitutions": {
+        "chi_bounded": "Legacy.chi_bounded"
+      },
+      "certificate": "Chromatic.migration.chi_bounded_classes.hereditary_chi_bounded_not_polynomial_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.gyarfas_complementation_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "gyarfas_complementation_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "X3Legacy.gyarfas_complementation_chi_bounded_statement",
+      "substitutions": {
+        "chi_bounded": "Legacy.chi_bounded"
+      },
+      "certificate": "Chromatic.migration.chi_bounded_classes.gyarfas_complementation_chi_bounded_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.gyarfas_alpha_omega_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "gyarfas_alpha_omega_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "X3Legacy.gyarfas_alpha_omega_chi_bounded_statement",
+      "substitutions": {
+        "chi_bounded": "Legacy.chi_bounded"
+      },
+      "certificate": "Chromatic.migration.chi_bounded_classes.gyarfas_alpha_omega_chi_bounded_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X112.chi_bounded_closure_substitution_gluing_statement",
+      "path": "chromatic-theory/theories/conjectures/X112.v",
+      "name": "chi_bounded_closure_substitution_gluing_statement",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "X112StatementsLegacy.chi_bounded_closure_substitution_gluing_statement",
+      "substitutions": {
+        "x112_chi_bounded": "X112Legacy.x112_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.chi_bounded_classes.chi_bounded_closure_substitution_gluing_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X170.oriented_P4_forb_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X170.v",
+      "name": "oriented_P4_forb_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "X170StatementsLegacy.oriented_P4_forb_chi_bounded_statement",
+      "substitutions": {
+        "x170_chi_bounded": "X170Legacy.x170_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.chi_bounded_classes.oriented_P4_forb_chi_bounded_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.gyarfas_complementation_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "gyarfas_complementation_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "X3Original.gyarfas_complementation_chi_bounded_statement",
+      "substitutions": {
+        "chi_bounded": "Legacy.chi_bounded",
+        "x3_complement_image": "ComplementLegacy.complement_image"
+      },
+      "certificate": "Chromatic.migration.chi_bounded_classes.gyarfas_complementation_chi_bounded_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.chi_bounded.chi_bounded_under",
+      "path": "digraph-theory/theories/conjectures/chi_bounded.v",
+      "name": "chi_bounded_under",
+      "frozen_path": "digraph-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "Legacy.chi_bounded_under",
+      "substitutions": {},
+      "certificate": "Digraph.migration.chi_bounded_classes.chi_bounded_under_compat",
+      "source_declaration_sha256": "22f7e9ed58cf966c734d28a31c87fcbac76ae132fdcca37111788d994564e75c",
+      "source_body_sha256": "db27f294b0d82d35262323f136889115a99808cd29d50c68f7bf3d08440a9b73",
+      "live_unfolds_to": "chi_bounded_via underlying (fun G => C G /\\ (0 < #|G|)%N)"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.chi_bounded.conj2_1605_statement",
+      "path": "digraph-theory/theories/conjectures/chi_bounded.v",
+      "name": "conj2_1605_statement",
+      "frozen_path": "digraph-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "Legacy.conj2_1605_statement",
+      "substitutions": {
+        "chi_bounded_under": "Legacy.chi_bounded_under"
+      },
+      "certificate": "Digraph.migration.chi_bounded_classes.conj2_1605_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.chi_bounded.conj4_1605_statement",
+      "path": "digraph-theory/theories/conjectures/chi_bounded.v",
+      "name": "conj4_1605_statement",
+      "frozen_path": "digraph-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "Legacy.conj4_1605_statement",
+      "substitutions": {
+        "chi_bounded_under": "Legacy.chi_bounded_under"
+      },
+      "certificate": "Digraph.migration.chi_bounded_classes.conj4_1605_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.chi_bounded.conj5_1605_statement",
+      "path": "digraph-theory/theories/conjectures/chi_bounded.v",
+      "name": "conj5_1605_statement",
+      "frozen_path": "digraph-theory/theories/migration/chi_bounded_classes.v",
+      "frozen": "Legacy.conj5_1605_statement",
+      "substitutions": {
+        "chi_bounded_under": "Legacy.chi_bounded_under"
+      },
+      "certificate": "Digraph.migration.chi_bounded_classes.conj5_1605_statement_compat",
+      "non_corpus": true
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/complement.v#X3Legacy.gyarfas_complementation_chi_bounded_statement": "A6 froze the complement image but retained live U8 chi_bounded. Original body unchanged. Complete pre-A6/C9 statement is Chromatic.migration.chi_bounded_classes.X3Original.gyarfas_complementation_chi_bounded_statement, certified by gyarfas_complementation_chi_bounded_statement_original_compat; its closure uses both frozen families.",
+    "digraph-theory/theories/migration/path_vertices.v#X52Legacy.mader_chi_bound": "Lexical module-name collision only: this unchanged B1 body calls chi_bounded.underlying, not the same-spelled U8 chi_bounded predicate. No C9 predicate is retained here; a strict compiled closure probe verifies this distinction. B1 frozen body and certificate are preserved."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "chi_bounded",
+      "note": "Three full X3 rows use U8 chi_bounded, and all are frozen/certified here."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U8.v",
+      "name": "chi_bounded",
+      "note": "The empty/subclass proofs and row Print Assumptions preserve their exact types."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U8.v",
+      "name": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+      "note": "The empty/subclass proofs and row Print Assumptions preserve their exact types."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U8.v",
+      "name": "vertex_minor_closed_classes_are_chi_bounded_statement",
+      "note": "The empty/subclass proofs and row Print Assumptions preserve their exact types."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_U8.v",
+      "name": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+      "note": "Existing verified implication consumers retain all hypotheses and theorem types."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X213.v",
+      "name": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+      "note": "Existing verified implication consumers retain all hypotheses and theorem types."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X218.v",
+      "name": "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
+      "note": "Existing verified implication consumers retain all hypotheses and theorem types."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_chi_col.v",
+      "name": "chi_bounded_under",
+      "note": "Empty and bounded-order class witnesses keep their nonempty-member wrapper."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications2.v",
+      "name": "conj2_1605_statement",
+      "note": "Existing conditional implication retains the explicit star-is-forest premise."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications2.v",
+      "name": "conj4_1605_statement",
+      "note": "Existing conditional implication retains the explicit star-is-forest premise."
+    },
+    {
+      "path": "base/theories/examples/chi_bounding.v",
+      "name": "chi_bounded_class",
+      "note": "Public GTBase canonical simple-graph specialization; same-spelled old Chromatic public adapter is not imported."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/U8.v",
+      "name": "chi_bounded_class",
+      "note": "Explicit GTBase.chi_bounding.chi_bounded_class canonical reference, not the same-spelled old Chromatic public adapter."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X112.v",
+      "name": "chi_bounded_class",
+      "note": "Explicit GTBase.chi_bounding.chi_bounded_class canonical reference, not the same-spelled old Chromatic public adapter."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A2.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X1.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X123.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X52.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X54.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X71.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_P9.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X2.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X52.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_chi_col.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_dichromatic_cycle.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_edges.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_falsification_report.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_reals.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_reals2.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications2.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_P9.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X52.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/reals_growth.v",
+      "name": "chi_bounded",
+      "note": "Lexical module-import/prefix occurrence: Digraph chi_bounded supplies underlying/urel/oriented predicates; this is not a reference to U8.chi_bounded. Those declarations stay unchanged; exact predicate consumers are separately listed."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.X3.x3_polynomially_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_polynomially_chi_bounded",
+      "note": "Natural-coefficient polynomial bounding function: strictly more constrained than arbitrary chi-bounding."
+    },
+    {
+      "qualified": "Chromatic.conjectures.X124.x124_poly_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "x124_poly_chi_bounded",
+      "note": "Natural-coefficient polynomial bound; distinct from arbitrary function."
+    },
+    {
+      "qualified": "Chromatic.foundations.chi_bounding.poly_chi_bounded",
+      "path": "chromatic-theory/theories/foundations/chi_bounding.v",
+      "name": "poly_chi_bounded",
+      "note": "Public monomial c*omega^d bound; existing polynomial conversion proofs remain unchanged."
+    },
+    {
+      "qualified": "Chromatic.conjectures.X3.x3_bounded_chromatic",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_bounded_chromatic",
+      "note": "One constant bounds the entire class, independent of clique number."
+    },
+    {
+      "qualified": "Digraph.conjectures.dichromatic.dichromatic_bounded",
+      "path": "digraph-theory/theories/conjectures/dichromatic.v",
+      "name": "dichromatic_bounded",
+      "note": "Bounds the directed/dichromatic colouring invariant, not ordinary underlying chi."
+    },
+    {
+      "qualified": "Digraph.conjectures.X52.x52_mader_chi_bound",
+      "path": "digraph-theory/theories/conjectures/X52.v",
+      "name": "x52_mader_chi_bound",
+      "note": "A threshold forcing a directed subdivision, not a chi-boundedness predicate."
+    }
+  ]
+}
