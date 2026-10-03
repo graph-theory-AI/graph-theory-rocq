@@ -105,6 +105,32 @@ class FamilyRegistries(unittest.TestCase):
             with self.assertRaises(R.RegistryError):
                 R.load_library_registry(self.root)
 
+    def test_classical_public_paths_are_explicit_and_exclude_nonlibrary_locations(self):
+        _, source = self.repository_source()
+        name = 'ClassicalLemmas.konig.source.original'
+        self.primitive['source_definitions'] = [name]
+        self.primitive['repository_sources'] = {name: source}
+        for relative, accepted in (
+            ('classical-lemmas/theories/konig/source.v', True),
+            ('classical-lemmas/theories/necklace/source.v', True),
+            ('classical-lemmas/theories/conjectures/source.v', False),
+            ('classical-lemmas/theories/migration/source.v', False),
+            ('classical-lemmas/theories/examples/source.v', False),
+            ('classical-lemmas/theories/foundations/examples/source.v', False),
+            ('classical-lemmas/theories/konig/_faith_source.v', False),
+            ('classical-lemmas-other/theories/konig/source.v', False)):
+            with self.subTest(path=relative):
+                target = self.root / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text('Definition original := True.\n')
+                source['path'] = relative
+                self.write_family()
+                if accepted:
+                    self.assertEqual(R.load_library_registry(self.root)['primitives']['fixture'], self.primitive)
+                else:
+                    with self.assertRaises(R.RegistryError):
+                        R.load_library_registry(self.root)
+
     def test_repository_source_paths_cannot_be_conjectures_or_aliases(self):
         name, source = self.repository_source()
         for path in ('base/theories/conjectures/X0.v', 'base/theories/migration/frozen.v',

@@ -61,6 +61,15 @@ def _document(root: Path, relative: object, where: str, *, allow_missing: bool =
     return actual
 
 
+def public_repository_path(path: str) -> bool:
+    """Supported public-library locations, shared with dependency discovery."""
+    parts = PurePosixPath(path).parts
+    if parts[:2] == ('classical-lemmas', 'theories'):
+        return len(parts) >= 3 and not {'conjectures', 'migration', 'examples'}.intersection(parts[2:-1])
+    return ((len(parts) == 3 and parts[:2] == ('base', 'theories'))
+            or (len(parts) >= 4 and parts[1:3] == ('theories', 'foundations')))
+
+
 def load_library_registry(root: Path = ROOT, *, allow_missing_reports: bool = False) -> dict:
     """Read meta/library_primitives/<family>.json; never fall back to an aggregate."""
     root = Path(root)
@@ -121,10 +130,7 @@ def load_library_registry(root: Path = ROOT, *, allow_missing_reports: bool = Fa
                 if not isinstance(source[field], str) or not re.fullmatch(r'[0-9a-f]{' + str(length) + '}', source[field]):
                     raise RegistryError(f"{path}: invalid repository source {field}: {name}")
             actual = _document(root, source['path'], f'{path}:repository_sources:{name}')
-            parts = PurePosixPath(source['path']).parts
-            public = (len(parts) == 3 and parts[:2] == ('base', 'theories')) or (
-                len(parts) >= 4 and parts[1:3] == ('theories', 'foundations'))
-            if (not public or actual.suffix != '.v'
+            if (not public_repository_path(source['path']) or actual.suffix != '.v'
                     or actual.name.startswith(('grounding_', 'implications_', '_assum_', '_faith_', 'scratch_', 'gcheck'))
                     or actual.resolve() != root.resolve() / source['path']):
                 raise RegistryError(f"{path}: repository source must be a regular public source without aliases: {name}")

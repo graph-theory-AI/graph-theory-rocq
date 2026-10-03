@@ -15,6 +15,7 @@ import unittest
 from unittest.mock import patch
 
 import check_library_migration as M
+import changed_milestones as ROUTE
 
 
 class MigrationBuildTests(unittest.TestCase):
@@ -422,6 +423,104 @@ class MigrationBuildTests(unittest.TestCase):
         for text in ("malformed", "a.vo: a.v\na.vo: b.v\n", "a.vo: $(unknown)/b.vo\n"):
             with self.subTest(text=text), self.assertRaises(M.BuildError):
                 M.dependency_rules(text)
+
+
+class ClassicalBuildTests(unittest.TestCase):
+    """Exercise the production ClassicalLemmas owner mapping, not a patched map."""
+
+    write = MigrationBuildTests.write
+    write_registry = MigrationBuildTests.write_registry
+    preserved_mtime_edit = MigrationBuildTests.preserved_mtime_edit
+    gate = MigrationBuildTests.gate
+    assert_gate_passes = MigrationBuildTests.assert_gate_passes
+    assert_gate_fails = MigrationBuildTests.assert_gate_fails
+
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory(prefix="classical-build-")
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        replacement = patch.object(M, "ROOT", self.root)
+        replacement.start()
+        self.addCleanup(replacement.stop)
+        self.write("base/_CoqProject", "-Q theories GTBase\ntheories/common.v\n")
+        self.write("base/theories/common.v", "Definition claim : Prop := 2 = 2.\n"
+                   "Lemma witness : claim. Proof. reflexivity. Qed.\n")
+        self.write("classical-lemmas/_CoqProject", "-R theories ClassicalLemmas\n"
+                   "-Q ../base/theories GTBase\n-arg -w -arg -notation-overridden\n"
+                   "theories/konig/bridge.v\ntheories/migration/incidence.v\n")
+        self.write("classical-lemmas/theories/konig/bridge.v",
+                   "From GTBase Require Export common.\n"
+                   "Lemma bridge : claim. Proof. exact witness. Qed.\n")
+        self.write("classical-lemmas/theories/migration/incidence.v",
+                   "From ClassicalLemmas.konig Require Import bridge.\n"
+                   "Lemma compatibility : claim. Proof. exact bridge. Qed.\n")
+        self.primitive = {
+            "canonical_name": "GTBase.common.claim", "owner": "base", "status": "canonical",
+            "fidelity": "FAITHFUL", "normalized_names": ["fixture"],
+            "source_definitions": [], "consumers_remaining": 0, "upstream_audit": {},
+            "api_theorems": [],
+            "compatibility_theorems": ["ClassicalLemmas.migration.incidence.compatibility"],
+        }
+        self.write_registry()
+
+    def test_real_classical_owner_forces_stale_unregistered_base_proof(self):
+        output = self.assert_gate_passes()
+        self.assertIn("3 local source targets across 2 packages", output)
+        self.assertIn("1 API and compatibility theorems, 1 modules", output)
+        leaf = self.root / "base/theories/common.v"
+        self.assertTrue(leaf.with_suffix(".vo").is_file())
+        self.preserved_mtime_edit(leaf, "Definition claim : Prop := 2 = 2.\n"
+                                 "Lemma witness : claim. Proof. exact I. Qed.\n")
+        self.assert_gate_fails("base: make -B")
+
+    def test_unknown_registered_namespace_remains_rejected(self):
+        self.primitive["api_theorems"] = ["Unknown.fake.untrusted"]
+        self.write_registry()
+        self.assert_gate_fails("Unknown.fake: unknown namespace")
+
+
+class ClassicalRoutingTests(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory(prefix="classical-routing-")
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        replacement = patch.object(ROUTE, "ROOT", self.root)
+        replacement.start()
+        self.addCleanup(replacement.stop)
+
+    def route(self, path):
+        calls = []
+        with patch.object(ROUTE, "normalize_base", return_value="baseline"), \
+                patch.object(ROUTE, "changed_pairs", return_value=([], [path])), \
+                patch.object(ROUTE, "run", side_effect=lambda command: calls.append(command)), \
+                contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ROUTE.main(["--run"]), 0)
+        return calls
+
+    def test_public_source_and_project_changes_build_dependents_and_run_proof_gates(self):
+        for path in ("classical-lemmas/theories/konig/line_colouring.v", "classical-lemmas/_CoqProject"):
+            with self.subTest(path=path):
+                self.assertEqual(ROUTE.package_source_change(path), "classical-lemmas")
+                calls = self.route(path)
+                self.assertIn(["make", "classical-lemmas", "packing-theory"], calls)
+                self.assertIn([ROUTE.sys.executable, "meta/check_library_migration.py"], calls)
+                self.assertIn([ROUTE.sys.executable, "meta/migration_report.py", "--all", "--check", "--kernel"], calls)
+
+    def test_similarly_named_unknown_package_does_not_acquire_ownership(self):
+        path = "classical-lemmas-other/theories/konig/line_colouring.v"
+        self.assertIsNone(ROUTE.package_source_change(path))
+        calls = self.route(path)
+        self.assertEqual([call for call in calls if call[0] == "make"], [["make", "audit"]])
+        self.assertNotIn([ROUTE.sys.executable, "meta/check_library_migration.py"], calls)
+
+    def test_new_classical_source_requires_project_membership(self):
+        path = "classical-lemmas/theories/konig/new.v"
+        source = self.root / path
+        source.parent.mkdir(parents=True)
+        source.write_text("Definition new := True.\n")
+        (self.root / "classical-lemmas/_CoqProject").write_text("-R theories ClassicalLemmas\n")
+        with self.assertRaisesRegex(SystemExit, "missing from classical-lemmas/_CoqProject"):
+            ROUTE.validate_project_membership([path])
 
 
 if __name__ == "__main__":
