@@ -19,7 +19,10 @@
     The Prop fields are stated with exactly the formulas of the X98 and X114
     copies (the endpoint-inclusive induced-path match, the internal-vertex
     conjunction, [seq_consecutive], raw support), so those copies' field types are
-    convertible to these.  There is no nonempty-graph, positive-length, reversal or
+    convertible to these.  Since B22 the pattern-edge field is written through the
+    canonical [GTBase.induced_paths.induced_path_between], which unfolds to exactly
+    that match (definitional equality); the C20 inline formula is frozen in
+    [GTBase.migration.induced_paths].  There is no nonempty-graph, positive-length, reversal or
     off-edge condition.  [induced_subdivision H G] is the inhabitation of the
     Record.
 
@@ -27,7 +30,7 @@
     interior vertices, requires reversal coherence, has no inducedness, and its
     [has_subdivision G H] puts the host first.  Import explicitly; [GTBase.base]
     does not re-export this module. *)
-From GTBase Require Import base model_support.
+From GTBase Require Import base model_support induced_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -40,17 +43,7 @@ Record induced_subdivision_model (H G : sgraph) := InducedSubdivisionModel {
   isd_edge_path_valid :
     forall u v : H,
       u -- v ->
-      match isd_edge_path u v with
-      | [::] => False
-      | x :: q =>
-          x = isd_branch u /\
-          last x q = isd_branch v /\
-          uniq (isd_edge_path u v) /\
-          path (--) x q /\
-          forall a b : G,
-            a \in isd_edge_path u v -> b \in isd_edge_path u v -> a -- b -> a != b ->
-            seq_consecutive (isd_edge_path u v) a b
-      end;
+      induced_path_between (isd_branch u) (isd_branch v) (isd_edge_path u v);
   isd_internal_avoids_branch :
     forall (u v w : H) (x : G),
       u -- v ->

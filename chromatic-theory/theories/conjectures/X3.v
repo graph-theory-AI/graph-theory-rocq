@@ -7,7 +7,7 @@
     intentionally deferred. *)
 
 From Chromatic.conjectures Require Import U8.
-From GTBase Require Import colourings graph_classes.
+From GTBase Require Import colourings graph_classes induced_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -52,12 +52,10 @@ Definition x3_stable_set (G : sgraph) (S : {set G}) : Prop :=
 Definition x3_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.
 
-Definition x3_induced_path (G : sgraph) (p : seq G) : Prop :=
-  [/\ uniq p,
-      (if p is u :: q then path (--) u q else true)
-    & forall u v : G,
-        u \in p -> v \in p -> u != v -> u -- v ->
-        x3_consecutive_in_path p u v].
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.induced_path] (the empty-allowed chordless path; the same body by
+    conversion); the original body is frozen and certified in theories/migration/induced_paths.v. *)
+Definition x3_induced_path (G : sgraph) (p : seq G) : Prop := induced_path p.
 
 Definition x3_family_covers_vertices
     (G : sgraph) (I : finType) (A : I -> {set G}) : Prop :=

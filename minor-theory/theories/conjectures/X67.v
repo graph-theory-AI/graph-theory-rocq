@@ -1,6 +1,7 @@
 (** * Minor.conjectures.X67 -- v2 theta-triangle bounded-treewidth row *)
 
 From GTBase Require Export base.
+From GTBase Require Import induced_paths.
 From Minor.conjectures Require Import X27.
 
 Set Implicit Arguments.
@@ -18,19 +19,11 @@ Definition x67_path_vertices (G : sgraph) (p : seq G) : {set G} :=
 Definition x67_internal_vertices (G : sgraph) (a b : G) (p : seq G) : {set G} :=
   seq_interior a b p.
 
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.long_induced_path_between] (at least three vertices; the same body by
+    conversion); the original body is frozen and certified in theories/migration/induced_paths.v. *)
 Definition x67_induced_path_between (G : sgraph) (a b : G) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q =>
-      x = a /\
-      last x q = b /\
-      3 <= size p /\
-      uniq p /\
-      path (--) x q /\
-      forall u v : G,
-        u \in p -> v \in p -> u -- v -> u != v ->
-        x67_consecutive_in_path p u v
-  end.
+  long_induced_path_between a b p.
 
 Definition x67_no_cross_edges
     (G : sgraph) (a b : G) (p q : seq G) : Prop :=
