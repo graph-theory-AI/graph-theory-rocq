@@ -48,7 +48,7 @@ Unset Printing Implicit Defensive.
     sequence [s], i.e. the 2-element sets of consecutive entries.  Helper for
     [immersion] below.  [@MOVE-to-base] candidate (walk/edge bookkeeping). *)
 Definition path_edges (G : sgraph) (s : seq G) : {set {set G}} :=
-  [set e in [seq [set p.1; p.2] | p <- zip s (behead s)]].
+  seq_edge_set s.
 
 (** [immersion G H] : "G immerses H" (G contains an immersion of H).  There is
     an injection [f] of [V(H)] into [V(G)] and, for every edge [u -- v] of [H],

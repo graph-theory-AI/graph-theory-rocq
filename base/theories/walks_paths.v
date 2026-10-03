@@ -16,9 +16,12 @@
     (registry meta/library_primitives/set-path.json, section "Set-to-set simple
     paths" below), nonempty simple paths, [seq_simple_path] (registry
     meta/library_primitives/simple-path.json, section "Simple whole-sequence
-    paths" below), and simple walks with the empty sequence accepted,
+    paths" below), simple walks with the empty sequence accepted,
     [seq_simple_walk] (registry meta/library_primitives/is-path.json, section
-    "Simple walks of a sequence" below).
+    "Simple walks of a sequence" below), and the edges traversed by a sequence,
+    [seq_edge_list], [seq_edge_set] and [seq_index_edge_set] (registry
+    meta/library_primitives/path-edges.json, section "Edges traversed by a
+    sequence" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -50,7 +53,7 @@
     such conditions belong to the predicates that use it. *)
 
 From mathcomp Require Import all_boot.
-From GraphTheory Require Import digraph.
+From GraphTheory Require Import preliminaries digraph sgraph.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -1133,3 +1136,368 @@ Lemma seq_simple_walk_upath x q : seq_simple_walk (x :: q) = upath x (last x q) 
 Proof. by rewrite /seq_simple_walk /upath /pathp eqxx andbT. Qed.
 
 End SeqSimpleWalk.
+
+(** ** Edges traversed by a sequence
+
+    Three edge extractors of a vertex sequence, kept as separate contracts (registry
+    meta/library_primitives/path-edges.json):
+    - [seq_edge_list s] is the ORDERED list of the unordered consecutive pairs
+      [[set s_i; s_(i+1)]], one entry per adjacent pair of [s]: repeated traversals stay
+      repeated and the order of traversal is kept;
+    - [seq_edge_set s] is its finite support [[set e in seq_edge_list s]], which is also the
+      existential image of the consecutive pairs ([seq_edge_set_image]);
+    - [seq_index_edge_set p] (simple graphs) collects the ACTUAL edges [[set x; y]] of the
+      graph whose ends occur in [p] and whose FIRST occurrences in [p] are adjacent
+      positions ([seq_index_consecutive]).
+    The first two read the sequence alone: there is no adjacency, irreflexivity, uniqueness
+    or nonemptiness filter, so a non-adjacent pair [[:: a; b]] still yields [[set a; b]] and
+    a repetition [[:: a; a]] yields the one-vertex set [[set a]]; only a walk premise puts
+    their members in the edge set [E(G)] ([seq_edge_set_sorted]).  The third filters by
+    adjacency but locates entries through [index], which sees first occurrences only: it is
+    [seq_edge_set p :&: E(G)] on duplicate-free [p] and [seq_edge_set p] on duplicate-free
+    walks, but in general it is neither (grounding: [[:: o0; o1; o0; o2]] in ['K_3]), and it
+    is not invariant under reversal.
+
+    Upstream audit (2026-10-03; MathComp 2.5.0, coq-graph-theory 0.9.7).  coq-graph-theory
+    packages walks as [Path x y] with vertex list [nodes p] ([digraph.v]) and writes the edge
+    set of a simple graph as [E(G)] ([sg_edge_set], the sets [[set x; y]] with [x -- y];
+    [in_edges], [edgesP]; [sgraph.v]); [mgraph.walk] traverses explicit edge objects of a
+    multigraph.  Neither library has the list or the set of the unordered consecutive pairs
+    of a raw vertex sequence, nor a first-index variant, so these are new.  [E(G)] is the
+    target of the walk bridges: the edges of a walk, in particular of the vertex list of a
+    packaged path ([seq_edge_set_nodes]), are edges of [G].
+
+    Specification, every clause proved below:
+    - membership: [e] is listed exactly when [e = [set u; v]] for a pair [(u, v)] of
+      [zip s (behead s)], equivalently for consecutive entries [u], [v] ([seq_consecutive]);
+      the support has the same members;
+    - degenerate sequences: [[::]] and [[:: x]] have no edge; [[:: x; y]] has exactly
+      [[set x; y]], also when [x] and [y] are not adjacent, and [[set x]] when [x = y];
+    - multiplicity and order: the list has [(size s).-1] entries, [[:: x, y & s]] lists
+      [[set x; y]] before the edges of [y :: s], [[:: x; y; x]] lists [[set x; y]] twice
+      while its support has it once, and reversal reverses the list and keeps the support;
+    - the support has at most [(size s).-1] elements, each a subset of [seq_vertices s];
+    - walks: on [sorted (--) s], on [x :: s] with [path (--) x s] and on [nodes p] every
+      edge is in [E(G)];
+    - first-index edges: always in [E(G)]; none on [[::]], on one-entry sequences or on a
+      non-adjacent pair; on duplicate-free [p] exactly [seq_edge_set p :&: E(G)], hence
+      [seq_edge_set p] when [p] is a duplicate-free walk ([seq_simple_walk], so also
+      [seq_simple_path]); the endpoint membership guards are needed, since an absent vertex
+      has index [size p] and is first-index adjacent to a last entry occurring once
+      ([seq_index_consecutive_absent]). *)
+
+Section SeqEdges.
+Variable T : finType.
+Implicit Types (s : seq T) (e : {set T}) (u v x y : T).
+
+(** The ordered list of the unordered consecutive pairs of [s]. *)
+Definition seq_edge_list s : seq {set T} :=
+  map (fun e : T * T => [set e.1; e.2]) (zip s (behead s)).
+
+(** Its finite support. *)
+Definition seq_edge_set s : {set {set T}} := [set e in seq_edge_list s].
+
+Lemma in_seq_edge_set s e : (e \in seq_edge_set s) = (e \in seq_edge_list s).
+Proof. by rewrite /seq_edge_set inE. Qed.
+
+Lemma seq_edge_listP s e :
+  reflect (exists u v, (u, v) \in zip s (behead s) /\ e = [set u; v])
+          (e \in seq_edge_list s).
+Proof.
+apply: (iffP mapP) => [[[u v] uv ->]|[u [v [uv ->]]]]; first by exists u, v.
+by exists (u, v).
+Qed.
+
+Lemma seq_edge_setP s e :
+  reflect (exists u v, (u, v) \in zip s (behead s) /\ e = [set u; v])
+          (e \in seq_edge_set s).
+Proof. by rewrite in_seq_edge_set; apply: seq_edge_listP. Qed.
+
+(** The support is the existential image of the consecutive pairs. *)
+Lemma seq_edge_set_image s :
+  seq_edge_set s =
+  [set e : {set T} |
+     [exists xy : T * T, (xy \in zip s (behead s)) && (e == [set xy.1; xy.2])]].
+Proof.
+apply/setP => e; rewrite in_seq_edge_set inE.
+apply/mapP/existsP => [[xy xyin ->]|[xy /andP[xyin /eqP ->]]]; exists xy => //.
+by rewrite xyin eqxx.
+Qed.
+
+Lemma seq_edge_set_consecutive s u v :
+  seq_consecutive s u v -> [set u; v] \in seq_edge_set s.
+Proof.
+case=> uv; apply/seq_edge_setP.
+- by exists u, v.
+- by exists v, u; rewrite setUC.
+Qed.
+
+Lemma seq_edge_set_consecutiveP s e :
+  reflect (exists u v, seq_consecutive s u v /\ e = [set u; v]) (e \in seq_edge_set s).
+Proof.
+apply: (iffP idP) => [/seq_edge_setP[u [v [uv ->]]]|[u [v [uv ->]]]].
+- by exists u, v; split => //; left.
+- exact: seq_edge_set_consecutive.
+Qed.
+
+Lemma seq_edge_list_nil : seq_edge_list [::] = [::].
+Proof. by []. Qed.
+
+Lemma seq_edge_list_seq1 x : seq_edge_list [:: x] = [::].
+Proof. by []. Qed.
+
+Lemma seq_edge_list_cons2 x y s :
+  seq_edge_list [:: x, y & s] = [set x; y] :: seq_edge_list (y :: s).
+Proof. by []. Qed.
+
+Lemma seq_edge_list_pair x y : seq_edge_list [:: x; y] = [:: [set x; y]].
+Proof. by []. Qed.
+
+(** A repeated entry gives the one-vertex set. *)
+Lemma seq_edge_list_loop x : seq_edge_list [:: x; x] = [:: [set x]].
+Proof. by rewrite seq_edge_list_pair setUid. Qed.
+
+(** Going back and forth lists the same set twice. *)
+Lemma seq_edge_list_back x y : seq_edge_list [:: x; y; x] = [:: [set x; y]; [set x; y]].
+Proof. by rewrite !seq_edge_list_cons2 seq_edge_list_seq1 [[set y; x]]setUC. Qed.
+
+Lemma seq_edge_set_nil : seq_edge_set [::] = set0.
+Proof. by apply/setP => e; rewrite /seq_edge_set !inE. Qed.
+
+Lemma seq_edge_set_seq1 x : seq_edge_set [:: x] = set0.
+Proof. by apply/setP => e; rewrite /seq_edge_set !inE. Qed.
+
+Lemma seq_edge_set_cons2 x y s :
+  seq_edge_set [:: x, y & s] = [set x; y] |: seq_edge_set (y :: s).
+Proof. by apply/setP => e; rewrite in_setU1 !in_seq_edge_set seq_edge_list_cons2 in_cons. Qed.
+
+Lemma seq_edge_set_pair x y : seq_edge_set [:: x; y] = [set [set x; y]].
+Proof. by rewrite seq_edge_set_cons2 seq_edge_set_seq1 setU0. Qed.
+
+(** ... while the support has it once. *)
+Lemma seq_edge_set_back x y : seq_edge_set [:: x; y; x] = [set [set x; y]].
+Proof. by rewrite seq_edge_set_cons2 seq_edge_set_pair [[set y; x]]setUC setUid. Qed.
+
+Lemma size_seq_edge_list s : size (seq_edge_list s) = (size s).-1.
+Proof. by case: s => [|x s] //; rewrite size_map size2_zip /= ?leqnSn. Qed.
+
+Lemma card_seq_edge_set s : #|seq_edge_set s| <= (size s).-1.
+Proof. by rewrite /seq_edge_set cardsE -size_seq_edge_list card_size. Qed.
+
+(** Every edge joins entries of [s]. *)
+Lemma seq_edge_set_sub s e : e \in seq_edge_set s -> e \subset seq_vertices s.
+Proof.
+case/seq_edge_setP => u [v [uv ->]].
+have [us vs] : u \in s /\ v \in s by apply: seq_consecutive_mem; left.
+by apply/subsetP => z; rewrite in_seq_vertices !inE => /orP[]/eqP->.
+Qed.
+
+Lemma seq_edge_list_rcons x s y :
+  seq_edge_list (rcons (x :: s) y) = rcons (seq_edge_list (x :: s)) [set last x s; y].
+Proof. by rewrite /seq_edge_list; elim: s x => [|z s IH] x //=; rewrite IH. Qed.
+
+Lemma seq_edge_list_rev s : seq_edge_list (rev s) = rev (seq_edge_list s).
+Proof.
+elim/last_ind: s => [|t y IH] //; case: t IH => [|x t] IH //.
+rewrite rev_rcons seq_edge_list_rcons rev_rcons -IH (lastI x t) rev_rcons.
+by rewrite seq_edge_list_cons2 setUC.
+Qed.
+
+Lemma seq_edge_set_rev s : seq_edge_set (rev s) = seq_edge_set s.
+Proof. by apply/setP => e; rewrite !in_seq_edge_set seq_edge_list_rev mem_rev. Qed.
+
+End SeqEdges.
+
+Section SeqEdgesWalk.
+Variable G : sgraph.
+Implicit Types (s p : seq G) (e : {set G}) (x y : G).
+
+(** On a walk every listed pair is an edge of [G]. *)
+Lemma seq_edge_set_path x s : path (--) x s -> seq_edge_set (x :: s) \subset E(G).
+Proof.
+move=> ps; apply/subsetP => e /seq_edge_set_consecutiveP[u [v [uv ->]]].
+by rewrite in_edges; apply: seq_consecutive_path_sym uv => //; apply: sg_sym.
+Qed.
+
+Lemma seq_edge_set_sorted s : sorted (--) s -> seq_edge_set s \subset E(G).
+Proof. by case: s => [|x s] ps; [rewrite seq_edge_set_nil sub0set|apply: seq_edge_set_path]. Qed.
+
+Lemma seq_edge_list_sorted s : sorted (--) s -> {subset seq_edge_list s <= E(G)}.
+Proof. by move=> /seq_edge_set_sorted /subsetP sub e es; apply: sub; rewrite in_seq_edge_set. Qed.
+
+(** The vertex list of a packaged path. *)
+Lemma seq_edge_set_nodes x y (p : Path x y) : seq_edge_set (nodes p) \subset E(G).
+Proof. by rewrite nodesE; apply: seq_edge_set_path; case/andP: (valP p). Qed.
+
+Lemma seq_edge_list_edgep x y (xy : x -- y) : seq_edge_list (nodes (edgep xy)) = [:: [set x; y]].
+Proof. by rewrite nodesE. Qed.
+
+End SeqEdgesWalk.
+
+Section SeqIndexConsecutive.
+Variable T : eqType.
+Implicit Types (p : seq T) (x y : T).
+
+(** The FIRST occurrences of [x] and [y] in [p] are adjacent positions. *)
+Definition seq_index_consecutive p x y : bool :=
+  ((index x p).+1 == index y p) || ((index y p).+1 == index x p).
+
+Lemma seq_index_consecutive_sym p x y :
+  seq_index_consecutive p x y = seq_index_consecutive p y x.
+Proof. by rewrite /seq_index_consecutive orbC. Qed.
+
+(** On duplicate-free sequences first indices are positions, so index-adjacency
+    of two entries is adjacency of the entries. *)
+Lemma index_succ_zip p x y : uniq p -> x \in p -> y \in p ->
+  ((index x p).+1 == index y p) = ((x, y) \in zip p (behead p)).
+Proof.
+elim: p => [|a q IH] //; rewrite cons_uniq => /andP[aq uq].
+have ia z : index z (a :: q) = if a == z then 0 else (index z q).+1 by [].
+rewrite !in_cons !ia; clear ia.
+case: q IH aq uq => [|b r] IH aq uq.
+  by move=> /orP[/eqP->|//] /orP[/eqP->|//]; rewrite eqxx.
+have ib z : index z (b :: r) = if b == z then 0 else (index z r).+1 by [].
+have ab : (a == b) = false.
+  by apply/negbTE; apply: contra aq => /eqP->; exact: mem_head.
+have za z : ((a, z) \in zip (b :: r) r) = false.
+  apply/negbTE/negP => az.
+  case: (@seq_consecutive_mem _ (b :: r) a z (or_introl az)) => abr _.
+  by rewrite abr in aq.
+have za' z : ((z, a) \in zip (b :: r) r) = false.
+  apply/negbTE/negP => zaz.
+  case: (@seq_consecutive_mem _ (b :: r) z a (or_introl zaz)) => _ abr.
+  by rewrite abr in aq.
+have -> : zip (a :: b :: r) (behead (a :: b :: r)) = (a, b) :: zip (b :: r) r by [].
+rewrite (in_cons (a, b)) xpair_eqE.
+case: (a =P x) => [<-|/eqP ax] xp; case: (a =P y) => [<-|/eqP ay] yp.
+- by rewrite eqxx ab za.
+- by rewrite eqxx za orbF eqSS ib [y == b]eq_sym; case: (b == y).
+- by rewrite za' ab andbF.
+- rewrite eqSS [x == a]eq_sym (negbTE ax) /= IH //.
+  + by move: xp; rewrite [x == a]eq_sym (negbTE ax).
+  + by move: yp; rewrite [y == a]eq_sym (negbTE ay).
+Qed.
+
+Lemma seq_index_consecutiveE p x y : uniq p -> x \in p -> y \in p ->
+  seq_index_consecutive p x y =
+  ((x, y) \in zip p (behead p)) || ((y, x) \in zip p (behead p)).
+Proof. by move=> up xp yp; rewrite /seq_index_consecutive !index_succ_zip. Qed.
+
+(** On duplicate-free sequences, first-index adjacency is adjacency of entries. *)
+Lemma seq_index_consecutiveP p x y : uniq p -> x \in p -> y \in p ->
+  reflect (seq_consecutive p x y) (seq_index_consecutive p x y).
+Proof. by move=> up xp yp; rewrite seq_index_consecutiveE //; apply: orP. Qed.
+
+(** An absent vertex has index [size p]: it is "index-adjacent" to a last entry
+    occurring once, so membership guards are needed. *)
+Lemma seq_index_consecutive_absent x y : y != x -> seq_index_consecutive [:: x] x y.
+Proof. by move=> yx; rewrite /seq_index_consecutive /= eqxx [x == y]eq_sym (negbTE yx). Qed.
+
+End SeqIndexConsecutive.
+
+Section SeqIndexEdges.
+Variable G : sgraph.
+Implicit Types (p : seq G) (e : {set G}) (x y : G).
+
+(** The actual edges of [G] between entries of [p] whose first indices are adjacent. *)
+Definition seq_index_edge_set p : {set {set G}} :=
+  [set e : {set G} |
+    [exists x : G, [exists y : G,
+      [&& x -- y, e == [set x; y], x \in p, y \in p & seq_index_consecutive p x y]]]].
+
+Lemma seq_index_edge_setP p e :
+  reflect (exists x y,
+             [/\ x -- y, e = [set x; y], x \in p, y \in p & seq_index_consecutive p x y])
+          (e \in seq_index_edge_set p).
+Proof.
+rewrite inE; apply: (iffP existsP) => [[x /existsP[y /and5P[xy /eqP-> xp yp c]]]|].
+  by exists x, y.
+by case=> x [y [xy -> xp yp c]]; exists x; apply/existsP; exists y; rewrite xy eqxx xp yp c.
+Qed.
+
+(** Only actual edges are collected. *)
+Lemma seq_index_edge_set_sub p : seq_index_edge_set p \subset E(G).
+Proof. by apply/subsetP => e /seq_index_edge_setP[x [y [xy -> _ _ _]]]; rewrite in_edges. Qed.
+
+Lemma seq_index_edge_set_nil : seq_index_edge_set [::] = set0.
+Proof. by apply/eqP; rewrite -subset0; apply/subsetP => e /seq_index_edge_setP[x [y []]]. Qed.
+
+Lemma seq_index_edge_set_seq1 v : seq_index_edge_set [:: v] = set0.
+Proof.
+apply/eqP; rewrite -subset0; apply/subsetP => e /seq_index_edge_setP[x [y [xy _]]].
+by rewrite !mem_seq1 => /eqP xv /eqP yv _; move: xy; rewrite xv yv sg_irrefl.
+Qed.
+
+(** On a duplicate-free sequence: the consecutive pairs that are edges. *)
+Lemma seq_index_edge_set_uniq p : uniq p -> seq_index_edge_set p = seq_edge_set p :&: E(G).
+Proof.
+move=> up; apply/setP => e; rewrite in_setI.
+apply/seq_index_edge_setP/andP => [[x [y [xy -> xp yp c]]]|[/seq_edge_setP[u [v [uv ->]]] ev]].
+- split; last by rewrite in_edges.
+  apply/seq_edge_set_consecutiveP; exists x, y; split => //.
+  exact/(seq_index_consecutiveP up xp yp).
+- have [up' vp] := @seq_consecutive_mem _ p u v (or_introl uv).
+  exists u, v; split => //; first by rewrite -in_edges.
+  by rewrite seq_index_consecutiveE // uv.
+Qed.
+
+(** On a duplicate-free walk it is the raw support. *)
+Lemma seq_index_edge_set_walk p : seq_simple_walk p -> seq_index_edge_set p = seq_edge_set p.
+Proof.
+case/andP => up sp; rewrite seq_index_edge_set_uniq //.
+by apply/setIidPl; apply: seq_edge_set_sorted.
+Qed.
+
+Lemma seq_index_edge_set_simple_path p :
+  seq_simple_path p -> seq_index_edge_set p = seq_edge_set p.
+Proof. by case/seq_simple_path_walk => _; apply: seq_index_edge_set_walk. Qed.
+
+Lemma seq_index_edge_set_edge x y : x -- y -> seq_index_edge_set [:: x; y] = [set [set x; y]].
+Proof.
+move=> xy; rewrite seq_index_edge_set_walk ?seq_edge_set_pair //.
+by rewrite seq_simple_walk_pair xy (sg_edgeNeq xy).
+Qed.
+
+(** Unlike the raw support, a non-edge contributes nothing. *)
+Lemma seq_index_edge_set_nonedge x y : ~~ x -- y -> seq_index_edge_set [:: x; y] = set0.
+Proof.
+move=> nxy; apply/eqP; rewrite -subset0; apply/subsetP => e /seq_index_edge_setP[u [v [uv -> up vp _]]].
+move: up vp uv; rewrite !inE => /orP[]/eqP-> /orP[]/eqP->; rewrite ?sg_irrefl //.
+  by rewrite (negbTE nxy).
+by rewrite sg_sym (negbTE nxy).
+Qed.
+
+End SeqIndexEdges.
+
+Section EdgesGrounding.
+Local Notation o0 := (@Ordinal 3 0 isT).
+Local Notation o1 := (@Ordinal 3 1 isT).
+Local Notation o2 := (@Ordinal 3 2 isT).
+
+Lemma seq_edge_list_ground_back : seq_edge_list [:: o0; o1; o0] = [:: [set o0; o1]; [set o0; o1]].
+Proof. exact: seq_edge_list_back. Qed.
+
+Lemma seq_edge_set_ground_back : seq_edge_set [:: o0; o1; o0] = [set [set o0; o1]].
+Proof. exact: seq_edge_set_back. Qed.
+
+Lemma seq_edge_list_ground_loop : seq_edge_list [:: o2; o2] = [:: [set o2]].
+Proof. exact: seq_edge_list_loop. Qed.
+
+(** [o0, o1, o0, o2] in K_3: the raw support has the pair [o0, o2] ... *)
+Lemma seq_edge_set_ground_repeat : [set o0; o2] \in seq_edge_set [:: o0; o1; o0; o2].
+Proof. by apply: seq_edge_set_consecutive; left. Qed.
+
+(** ... but first indices 0 and 3 are not adjacent, so X178's set misses it, *)
+Lemma seq_index_edge_set_ground_repeat :
+  [set o0; o2] \notin seq_index_edge_set (G := 'K_3) [:: o0; o1; o0; o2].
+Proof.
+apply/seq_index_edge_setP => -[x [y [_ /doubleton_eq_iff[[<- <-]|[<- <-]] _ _]]];
+  by vm_compute.
+Qed.
+
+(** while it has [o2, o0] on the reversed sequence. *)
+Lemma seq_index_edge_set_ground_rev :
+  [set o2; o0] \in seq_index_edge_set (G := 'K_3) [:: o2; o0; o1; o0].
+Proof. by apply/seq_index_edge_setP; exists o2, o0. Qed.
+
+End EdgesGrounding.

@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "family": "path-edges",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_edge_set",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "path_edges",
+      "path_edge_set"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.XE2.xe2_path_edge_set",
+      "GTMisc.conjectures.X14.x14_path_edges",
+      "GTMisc.conjectures.X172.x172_path_edges",
+      "Minor.conjectures.U7.path_edges",
+      "Packing.conjectures.X178.x178_path_edge_set"
+    ],
+    "consumers_remaining": 5,
+    "relation": "three separate representations: X14 x14_path_edges is GTBase.walks_paths.seq_edge_list p (ordered list, by conversion); X172 x172_path_edges and U7 path_edges are GTBase.walks_paths.seq_edge_set s (finite support, by conversion) and XE2 xe2_path_edge_set is equal to it for every sequence (seq_edge_set_image, not a conversion); X178 x178_path_edge_set is GTBase.walks_paths.seq_index_edge_set p (actual edges between first occurrences, by conversion), equal to the support on duplicate-free walks",
+    "semantic_classes": {
+      "raw-ordered-list": {
+        "members": [
+          "GTMisc.conjectures.X14.x14_path_edges"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTMisc.migration.path_edges.x14_path_edges_compat",
+        "note": "X14 x14_path_edges: map (fun e => [set e.1; e.2]) (zip p (behead p)), the body of seq_edge_list p, convertible; order and multiplicity are kept: repeated traversals repeat an entry, a repeated vertex gives a one-vertex set, a non-adjacent pair is listed, and no deduplication or adjacency filter is applied."
+      },
+      "finite-support": {
+        "members": [
+          "Extremal.conjectures.XE2.xe2_path_edge_set",
+          "GTMisc.conjectures.X172.x172_path_edges",
+          "Minor.conjectures.U7.path_edges"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.path_edges.xe2_path_edge_set_compat",
+          "GTMisc.migration.path_edges.x172_path_edges_compat",
+          "Minor.migration.path_edges.path_edges_compat"
+        ],
+        "note": "X172 x172_path_edges and U7 path_edges (byte-identical bodies) are [set e in [seq [set p.1; p.2] | p <- zip s (behead s)]], the body of seq_edge_set s, convertible; XE2 xe2_path_edge_set is the existential image of the same pairs, equal to seq_edge_set p for every p by seq_edge_set_image (a proved equality, not a conversion). No adjacency, uniqueness or nonemptiness guard is added."
+      },
+      "first-index-actual-edge-filter": {
+        "members": [
+          "Packing.conjectures.X178.x178_path_edge_set"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Packing.migration.path_edges.x178_path_edge_set_compat",
+        "note": "X178 x178_path_edge_set: the edges [set x; y] with x -- y, x and y in p, and first indices adjacent (U9.consec), the body of seq_index_edge_set p with seq_index_consecutive = U9.consec's body, convertible. A separate contract: equal to seq_edge_set p :&: E(G) on duplicate-free p and to seq_edge_set p on duplicate-free walks (seq_index_edge_set_uniq, seq_index_edge_set_walk), but not in general and not reversal-invariant ([:: 0; 1; 0; 2] in K_3); U9.consec is unchanged."
+      }
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.path_edges.erdos_915_statement_compat",
+      "Extremal.migration.path_edges.erdos_915_statement_original_compat",
+      "Extremal.migration.path_edges.xe2_path_edge_set_compat",
+      "Extremal.migration.path_edges.xe2_paths_edge_disjoint_compat",
+      "GTMisc.migration.path_edges.andersen_rainbow_path_statement_compat",
+      "GTMisc.migration.path_edges.metric_lines_bridges_counterexamples_finitely_generated_statement_compat",
+      "GTMisc.migration.path_edges.metric_lines_bridges_counterexamples_finitely_generated_statement_original_compat",
+      "GTMisc.migration.path_edges.rainbow_paths_linear_edge_cover_statement_compat",
+      "GTMisc.migration.path_edges.x14_path_edges_compat",
+      "GTMisc.migration.path_edges.x14_rainbow_path_compat",
+      "GTMisc.migration.path_edges.x172_generated_by_bridge_replacement_compat",
+      "GTMisc.migration.path_edges.x172_generated_by_bridge_replacement_original_compat",
+      "GTMisc.migration.path_edges.x172_one_bridge_replacement_compat",
+      "GTMisc.migration.path_edges.x172_one_bridge_replacement_original_compat",
+      "GTMisc.migration.path_edges.x172_path_edges_compat",
+      "GTMisc.migration.path_edges.x62_edges_covered_by_paths_compat",
+      "Minor.migration.path_edges.coloring_and_immersion_statement_compat",
+      "Minor.migration.path_edges.immersion_compat",
+      "Minor.migration.path_edges.kt_immersion_clique_count_extremal_statement_compat",
+      "Minor.migration.path_edges.path_edges_compat",
+      "Minor.migration.path_edges.x174_no_Kt_immersion_compat",
+      "Packing.migration.path_edges.gallai_odd_semiclique_path_decomposition_statement_compat",
+      "Packing.migration.path_edges.gallai_odd_semiclique_path_decomposition_statement_original_compat",
+      "Packing.migration.path_edges.x178_path_decomposition_at_most_compat",
+      "Packing.migration.path_edges.x178_path_decomposition_at_most_original_compat",
+      "Packing.migration.path_edges.x178_path_edge_set_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.in_seq_edge_set",
+      "GTBase.walks_paths.seq_edge_listP",
+      "GTBase.walks_paths.seq_edge_setP",
+      "GTBase.walks_paths.seq_edge_set_image",
+      "GTBase.walks_paths.seq_edge_set_consecutive",
+      "GTBase.walks_paths.seq_edge_set_consecutiveP",
+      "GTBase.walks_paths.seq_edge_list_nil",
+      "GTBase.walks_paths.seq_edge_list_seq1",
+      "GTBase.walks_paths.seq_edge_list_cons2",
+      "GTBase.walks_paths.seq_edge_list_pair",
+      "GTBase.walks_paths.seq_edge_list_loop",
+      "GTBase.walks_paths.seq_edge_list_back",
+      "GTBase.walks_paths.seq_edge_set_nil",
+      "GTBase.walks_paths.seq_edge_set_seq1",
+      "GTBase.walks_paths.seq_edge_set_cons2",
+      "GTBase.walks_paths.seq_edge_set_pair",
+      "GTBase.walks_paths.seq_edge_set_back",
+      "GTBase.walks_paths.size_seq_edge_list",
+      "GTBase.walks_paths.card_seq_edge_set",
+      "GTBase.walks_paths.seq_edge_set_sub",
+      "GTBase.walks_paths.seq_edge_list_rcons",
+      "GTBase.walks_paths.seq_edge_list_rev",
+      "GTBase.walks_paths.seq_edge_set_rev",
+      "GTBase.walks_paths.seq_edge_set_path",
+      "GTBase.walks_paths.seq_edge_set_sorted",
+      "GTBase.walks_paths.seq_edge_list_sorted",
+      "GTBase.walks_paths.seq_edge_set_nodes",
+      "GTBase.walks_paths.seq_edge_list_edgep",
+      "GTBase.walks_paths.seq_index_consecutive_sym",
+      "GTBase.walks_paths.index_succ_zip",
+      "GTBase.walks_paths.seq_index_consecutiveE",
+      "GTBase.walks_paths.seq_index_consecutiveP",
+      "GTBase.walks_paths.seq_index_consecutive_absent",
+      "GTBase.walks_paths.seq_index_edge_setP",
+      "GTBase.walks_paths.seq_index_edge_set_sub",
+      "GTBase.walks_paths.seq_index_edge_set_nil",
+      "GTBase.walks_paths.seq_index_edge_set_seq1",
+      "GTBase.walks_paths.seq_index_edge_set_uniq",
+      "GTBase.walks_paths.seq_index_edge_set_walk",
+      "GTBase.walks_paths.seq_index_edge_set_simple_path",
+      "GTBase.walks_paths.seq_index_edge_set_edge",
+      "GTBase.walks_paths.seq_index_edge_set_nonedge",
+      "GTBase.walks_paths.seq_edge_list_ground_back",
+      "GTBase.walks_paths.seq_edge_set_ground_back",
+      "GTBase.walks_paths.seq_edge_list_ground_loop",
+      "GTBase.walks_paths.seq_edge_set_ground_repeat",
+      "GTBase.walks_paths.seq_index_edge_set_ground_repeat",
+      "GTBase.walks_paths.seq_index_edge_set_ground_rev"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.mgraph",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.finset",
+        "mathcomp.boot.path",
+        "mathcomp.boot.seq"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "GraphTheory.sgraph.sg_edge_set",
+      "note": "coq-graph-theory packages walks as Path x y with nodes p and writes the edge set of a simple graph as E(G) = sg_edge_set G (in_edges, edgesP); mgraph.walk traverses explicit multigraph edge objects. Neither library has the list or the set of the unordered consecutive pairs of a raw vertex sequence, nor a first-index variant, so GTBase owns seq_edge_list, seq_edge_set and seq_index_edge_set; E(G) is the target of the walk bridges (seq_edge_set_sorted, seq_edge_set_nodes). Digraph P9 dipath_arcs (ordered arc support), D2tur ham_path_edges, the cyclic rot1 extractors (Cycle X9/X24/XE1, Packing X25, GTMisc X216) and U5/X10 colour sequences stay separate. Legacy bodies and per-row certificates: meta/migration_reports/path_edges.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/path_edges.md",
+    "reviewed_by": "coordinator helper family_scope",
+    "migration_spec": "meta/migration_reports/path_edges.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/path-edges.json",
+    "reviewed_commit": "e377dcbcf549c044b7b2a4321831792c1c78f375",
+    "independent_review": "meta/migration_reviews/path_edges.md"
+  }
+}
