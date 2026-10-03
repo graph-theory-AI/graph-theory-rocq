@@ -14,7 +14,8 @@
     "base/theories/walks_paths.v",
     "chromatic-theory/theories/migration/cycle_vertices.v",
     "cycle-theory/theories/migration/cycle_vertices.v",
-    "digraph-theory/theories/migration/cycle_vertices.v"
+    "digraph-theory/theories/migration/cycle_vertices.v",
+    "cycle-theory/theories/migration/edge_count.v"
   ],
   "extra_certificates": [
     "GTBase.walks_paths.seq_verticesE",
@@ -51,7 +52,9 @@
     "- each live row reaches `seq_vertices` and its alias.",
     "Summary: /srv/graph-theory-rocq/coordination/evidence/B12-cycle_vertices/print_all_dependencies_summary.txt.",
     "",
-    "Baseline 13c00aa is the announced B11 pin (B10 prose 0a0203e plus B11), not yet integrated; B12 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). The B1 (path_vertices) and B10 (genuine_cycle) specs listed these helpers as untouched distinct variants; they now record that B12 migrated them."
+    "Baseline 13c00aa is the announced B11 pin (B10 prose 0a0203e plus B11), not yet integrated; B12 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). The B1 (path_vertices) and B10 (genuine_cycle) specs listed these helpers as untouched distinct variants; they now record that B12 migrated them.",
+    "",
+    "#916 history follow-up, on the private B12+A7 stack e683a2a (B12 c528254 + A7 b9c491a, not for integration; intended integration order B11, A7, A8, A9, B12). `X5Original` is the complete whole 9e03072 #916 row. It uses A7's frozen raw rank count `Cycle.migration.edge_count.Legacy.x5_edge_count` (adjacent ordered pairs selected by `enum_rank p.1 < enum_rank p.2`; module alias A7, without Import) and this family's frozen raw support. It is certified through A7's `x5_edge_count_compat` (edge_count_rank) and conversion. B12's X5Legacy #916, which keeps the live count, and A7's X5Legacy #916, which keeps the live support, are both preserved unchanged and documented reciprocally in the cycle_vertices and edge_count specs."
   ],
   "frozen": [
     {
@@ -213,7 +216,8 @@
         "x5_vertices_of_seq": "Legacy.x5_vertices_of_seq"
       },
       "certificate": "Cycle.migration.cycle_vertices.cycle_with_external_three_neighbours_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.cycle_vertices.cycle_with_external_three_neighbours_statement_original_compat"
     },
     {
       "kind": "source",
@@ -251,10 +255,36 @@
       },
       "certificate": "Digraph.migration.cycle_vertices.lichiardopol_distinct_length_dicycle_packing_statement_compat",
       "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.X5.x5_edge_count",
+      "path": "cycle-theory/theories/conjectures/X5.v",
+      "name": "x5_edge_count",
+      "frozen_path": "cycle-theory/theories/migration/edge_count.v",
+      "frozen": "Legacy.x5_edge_count",
+      "substitutions": {},
+      "certificate": "Cycle.migration.edge_count.x5_edge_count_compat",
+      "note": "A7 (edge-count) frozen raw rank count (adjacent ordered pairs with enum_rank p.1 < enum_rank p.2), reused unchanged by X5Original.cycle_with_external_three_neighbours_statement"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.X5.cycle_with_external_three_neighbours_statement",
+      "path": "cycle-theory/theories/conjectures/X5.v",
+      "name": "cycle_with_external_three_neighbours_statement",
+      "frozen_path": "cycle-theory/theories/migration/cycle_vertices.v",
+      "frozen": "X5Original.cycle_with_external_three_neighbours_statement",
+      "substitutions": {
+        "x5_edge_count": "A7.Legacy.x5_edge_count",
+        "x5_vertices_of_seq": "Legacy.x5_vertices_of_seq"
+      },
+      "certificate": "Cycle.migration.cycle_vertices.cycle_with_external_three_neighbours_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
     }
   ],
   "known_stale_snapshots": {
-    "cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.smith_two_longest_cycles_statement": "B10 per-row snapshot: family genuine-cycle (B10) froze its longest-cycle chain in X212's Smith row but kept the live x212_cycle_vertices, which after B12 unfolds to seq_vertices. Kept unchanged; B10's smith_two_longest_cycles_statement_compat stays true. The complete pre-B10, pre-B12 row is Cycle.migration.cycle_vertices.X212Original.smith_two_longest_cycles_statement, certified by smith_two_longest_cycles_statement_original_compat."
+    "cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.smith_two_longest_cycles_statement": "B10 per-row snapshot: family genuine-cycle (B10) froze its longest-cycle chain in X212's Smith row but kept the live x212_cycle_vertices, which after B12 unfolds to seq_vertices. Kept unchanged; B10's smith_two_longest_cycles_statement_compat stays true. The complete pre-B10, pre-B12 row is Cycle.migration.cycle_vertices.X212Original.smith_two_longest_cycles_statement, certified by smith_two_longest_cycles_statement_original_compat.",
+    "cycle-theory/theories/migration/edge_count.v#X5Legacy.cycle_with_external_three_neighbours_statement": "A7 per-row snapshot: family edge-count (A7) froze only its raw rank count in #916, so this copy still calls the live x5_vertices_of_seq, which after B12 unfolds to seq_vertices. Kept unchanged; A7's cycle_with_external_three_neighbours_statement_compat stays true. The complete pre-A7, pre-B12 row is Cycle.migration.cycle_vertices.X5Original.cycle_with_external_three_neighbours_statement, certified by cycle_with_external_three_neighbours_statement_original_compat."
   },
   "cross_module_consumers": [
     {
