@@ -4,6 +4,7 @@ From GTBase Require Export base.
 From GTBase Require Import graph_classes.
 From GraphTheory Require Import minor.
 From Minor.foundations Require Import containment width_params.
+From Minor.foundations Require Import shallow_minors.
 From Minor.conjectures Require Import X27 X42.
 
 Set Implicit Arguments.
@@ -161,17 +162,9 @@ Definition x220_small_class (C : sgraph -> Prop) : Prop :=
     SUBGRAPH of the contraction.  A class has POLYNOMIAL EXPANSION when one
     polynomial bounds the edge density of all its shallow minors at every depth. *)
 
-Definition x220_ball_in (G : sgraph) (B : {set G}) (c : G) (r : nat) : Prop :=
-  forall v : G, v \in B ->
-    exists p : seq G,
-      [/\ path (--) c p, last c p = v, size p <= r & all (mem B) (c :: p)].
+Definition x220_ball_in (G : sgraph) (B : {set G}) (c : G) (r : nat) : Prop := internal_ball_in B c r.
 
-Definition x220_shallow_minor (G H : sgraph) (r : nat) : Prop :=
-  exists (B : H -> {set G}) (ctr : H -> G),
-    [/\ forall x : H, ctr x \in B x,
-        forall x : H, x220_ball_in (B x) (ctr x) r,
-        forall x y : H, x != y -> [disjoint B x & B y] &
-        forall x y : H, x -- y -> exists u v : G, [/\ u \in B x, v \in B y & u -- v]].
+Definition x220_shallow_minor (G H : sgraph) (r : nat) : Prop := internal_shallow_minor G H r.
 
 Definition x220_poly_eval (p : seq nat) (x : nat) : nat :=
   foldr (fun a acc => a + x * acc) 0 p.
