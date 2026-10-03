@@ -26,7 +26,7 @@
 
 From GTBase Require Import base.
 From Extremal.conjectures Require Import X4 X59 X78 X96 X98 XE1 XE2.
-From Extremal.migration Require consecutive_in_path.
+From Extremal.migration Require consecutive_in_path consecutive_in_cycle.
 From Corelib Require Import Setoid Morphisms.
 
 Set Implicit Arguments.
@@ -367,6 +367,21 @@ Definition polynomial_kuhn_osthus_induced_subdivision_statement : Prop :=
 
 End X98Original.
 
+(** B4 history: erdos_567 before both A5 and B4, with A5's frozen Ramsey-number chain and B4's
+    frozen [h5_graph] (Extremal.migration.consecutive_in_cycle, fbf33a0). *)
+Module XE1Original.
+
+Definition erdos_567_statement : Prop :=
+  forall G : sgraph,
+    (G = xe1_hypercube 3 \/ G = KB 3 3 \/ Extremal.migration.consecutive_in_cycle.XE1Legacy.h5_graph G) ->
+    exists C : nat,
+      forall (H : sgraph) (m R : nat),
+        x4_edge_count H = m -> xe1_no_isolated_vertices H ->
+        XE1Legacy.graph_ramsey_number G H R ->
+        R <= C * m.
+
+End XE1Original.
+
 (** ** Certificates *)
 
 Lemma x59_subgraph_of_compat (H G : sgraph) :
@@ -516,6 +531,13 @@ rewrite /X98Original.polynomial_kuhn_osthus_induced_subdivision_statement /polyn
   setoid_rewrite Extremal.migration.consecutive_in_path.x98_induced_subdivision_compat; reflexivity.
 Qed.
 
+Lemma erdos_567_statement_original_compat :
+  XE1Original.erdos_567_statement <-> erdos_567_statement.
+Proof.
+rewrite /XE1Original.erdos_567_statement /erdos_567_statement; setoid_rewrite graph_ramsey_number_compat;
+  setoid_rewrite Extremal.migration.consecutive_in_cycle.xe1_h5_graph_compat; reflexivity.
+Qed.
+
 Print Assumptions x59_subgraph_of_compat.
 Print Assumptions x78_subgraph_of_compat.
 Print Assumptions xe1_subgraph_of_compat.
@@ -552,3 +574,4 @@ Print Assumptions h_free_max_cut_three_fourths_surplus_statement_compat.
 Print Assumptions bollobas_erdos_large_c4_free_subgraph_statement_compat.
 Print Assumptions polynomial_kuhn_osthus_induced_subdivision_statement_compat.
 Print Assumptions polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.
+Print Assumptions erdos_567_statement_original_compat.

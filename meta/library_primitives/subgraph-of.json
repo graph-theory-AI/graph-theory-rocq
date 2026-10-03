@@ -50,7 +50,9 @@
       "minor": "Minor containment (GraphTheory minor) is a different relation and is not touched."
     },
     "historical_snapshots": {
-      "Extremal.migration.consecutive_in_path.X98Legacy.statement": "B3 (49ddc03) froze X98's Record and statement; that copy still calls the live x59_subgraph_of. Kept unchanged; the combined pre-B3, pre-A5 row is Extremal.migration.subgraph_of.X98Original."
+      "Extremal.migration.consecutive_in_path.X98Legacy.statement": "B3 (49ddc03) froze X98's Record and statement; that copy still calls the live x59_subgraph_of. Kept unchanged; the combined pre-B3, pre-A5 row is Extremal.migration.subgraph_of.X98Original.",
+      "Chromatic.migration.consecutive_in_cycle.XE2Legacy.erdos_1091_statement": "B4 (fbf33a0) froze the cyclic chain; still calls the live xe1_subgraph_of. Combined row: Chromatic.migration.subgraph_of.XE2Original.",
+      "Extremal.migration.consecutive_in_cycle.XE1Legacy.erdos_567_statement": "B4 (fbf33a0) froze h5_graph; still calls the live xe1_graph_ramsey_number. Combined row: Extremal.migration.subgraph_of.XE1Original."
     },
     "compatibility_theorems": [
       "Chromatic.migration.subgraph_of.x31_subgraph_of_compat",
@@ -101,7 +103,9 @@
       "GTMisc.migration.subgraph_of.subgraph_of_compat",
       "GTMisc.migration.subgraph_of.xe2_subgraph_of_compat",
       "GTMisc.migration.subgraph_of.subgraph_of_large_average_degree_and_large_average_d_statement_compat",
-      "GTMisc.migration.subgraph_of.erdos_715_statement_compat"
+      "GTMisc.migration.subgraph_of.erdos_715_statement_compat",
+      "Chromatic.migration.subgraph_of.erdos_1091_statement_original_compat",
+      "Extremal.migration.subgraph_of.erdos_567_statement_original_compat"
     ],
     "api_theorems": [
       "GTBase.common.has_subgraphP",

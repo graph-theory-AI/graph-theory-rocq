@@ -17,6 +17,7 @@
 
 From GTBase Require Import base.
 From Chromatic.conjectures Require Import X31 XE1 XE2.
+From Chromatic.migration Require consecutive_in_cycle.
 From Corelib Require Import Setoid Morphisms.
 
 Set Implicit Arguments.
@@ -120,6 +121,25 @@ Definition erdos_923_statement : Prop :=
 
 End XE2Legacy.
 
+(** B4 history: erdos_1091 before both A5 and B4, with A5's frozen helper and B4's frozen
+    odd-cycle-with-diagonals chain (Chromatic.migration.consecutive_in_cycle, fbf33a0). *)
+Module XE2Original.
+
+Definition erdos_1091_statement : Prop :=
+  (forall G : sgraph,
+    ~ Legacy.xe1_subgraph_of 'K_4 G ->
+    χ([set: G]) = 4 ->
+    Chromatic.migration.consecutive_in_cycle.XE1Legacy.odd_cycle_with_diagonals G 2) /\
+  exists f : nat -> nat,
+    xe1_unbounded f /\
+    forall (r : nat) (G : sgraph),
+      ~ Legacy.xe1_subgraph_of 'K_4 G ->
+      χ([set: G]) = 4 ->
+      xe1_induced_subgraph_chi_le G r 3 ->
+      Chromatic.migration.consecutive_in_cycle.XE1Legacy.odd_cycle_with_diagonals G (f r).
+
+End XE2Original.
+
 (** ** Certificates *)
 
 Lemma x31_subgraph_of_compat (H G : sgraph) :
@@ -158,6 +178,13 @@ Lemma erdos_923_statement_compat :
   XE2Legacy.erdos_923_statement <-> erdos_923_statement.
 Proof. rewrite /XE2Legacy.erdos_923_statement /erdos_923_statement; try setoid_rewrite xe1_subgraph_of_compat; reflexivity. Qed.
 
+Lemma erdos_1091_statement_original_compat :
+  XE2Original.erdos_1091_statement <-> erdos_1091_statement.
+Proof.
+rewrite /XE2Original.erdos_1091_statement /erdos_1091_statement; setoid_rewrite xe1_subgraph_of_compat;
+  setoid_rewrite Chromatic.migration.consecutive_in_cycle.xe1_odd_cycle_with_diagonals_compat; reflexivity.
+Qed.
+
 Print Assumptions x31_subgraph_of_compat.
 Print Assumptions xe1_subgraph_of_compat.
 Print Assumptions chromatic_girth_average_degree_subgraph_statement_compat.
@@ -167,3 +194,4 @@ Print Assumptions erdos_1091_statement_compat.
 Print Assumptions erdos_58_statement_compat.
 Print Assumptions erdos_762_statement_compat.
 Print Assumptions erdos_923_statement_compat.
+Print Assumptions erdos_1091_statement_original_compat.

@@ -97,6 +97,25 @@ The row's other helpers (`average_degree_geq`, `x59_poly_eval`, `KB`) are untouc
 edge/count aliases in other rows (for instance `x4_edge_count` in X96 and the XE1 Turán
 chain) stay live, so no row here is described as a pre-M1 original.
 
+## B4 history (follow-up commit)
+
+B4 (`fbf33a0`, cyclic adjacency) also freezes two of these rows: chromatic `erdos_1091` and extremal
+`erdos_567`. The follow-up commit sits on a second private baseline merging this family's commit with
+B4. Each family's per-row snapshot keeps the other's live helper:
+- B4's `XE2Legacy.erdos_1091_statement` calls `xe1_subgraph_of`;
+- B4's `XE1Legacy.erdos_567_statement` calls `xe1_graph_ramsey_number`;
+- A5's copies call `xe1_odd_cycle_with_diagonals` and `xe1_h5_graph`.
+
+Each snapshot is documented in the other family's spec, and no body is edited. The combined rows are:
+- `Chromatic.migration.subgraph_of.XE2Original.erdos_1091_statement`: A5's frozen helper plus B4's frozen
+  `XE1Legacy.odd_cycle_with_diagonals`, certified by `erdos_1091_statement_original_compat`;
+- `Extremal.migration.subgraph_of.XE1Original.erdos_567_statement`: A5's frozen `XE1Legacy.graph_ramsey_number`
+  plus B4's frozen `XE1Legacy.h5_graph`, certified by `erdos_567_statement_original_compat`.
+
+Both are proved from the two families' existing certificates (`xe1_subgraph_of_compat`,
+`graph_ramsey_number_compat`, B4's `xe1_odd_cycle_with_diagonals_compat` and `xe1_h5_graph_compat`). Other M1
+aliases in these rows (for instance `x4_edge_count`) stay live, so neither row is claimed to be pre-M1.
+
 ## Proof consumers
 
 Statements unchanged:

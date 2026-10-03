@@ -16,7 +16,9 @@
     "chromatic-theory/theories/migration/subgraph_of.v",
     "extremal-graph-theory/theories/migration/subgraph_of.v",
     "graph-theory-misc/theories/migration/subgraph_of.v",
-    "extremal-graph-theory/theories/migration/consecutive_in_path.v"
+    "extremal-graph-theory/theories/migration/consecutive_in_path.v",
+    "chromatic-theory/theories/migration/consecutive_in_cycle.v",
+    "extremal-graph-theory/theories/migration/consecutive_in_cycle.v"
   ],
   "extra_certificates": [
     "GTBase.common.has_subgraphP",
@@ -31,7 +33,8 @@
   "summary": [
     "Batch A, family A5 (ordinary subgraph containment). Seven conjecture-local helpers (X31, chromatic XE1, X59, X78, extremal XE1, U13, misc XE2), all an injective adjacency-preserving map from the pattern into the host (U13 through `is_hom`), now unfold to `GTBase.common.has_subgraph G H`, HOST FIRST, the reverse of their `(H G)` argument order. `has_subgraphP` proves the unconditional witness characterization (upstream `hom_s`'s image-distinctness premise is discharged by injectivity and irreflexivity); the canonical is not convertible to the local conjunction. No inducedness, nonemptiness or degree guard is added. Thirty-five statements are affected; each frozen statement goes through frozen copies along its whole affected chain, including the six extremal XE1 chains (Ramsey, diagonal Ramsey, C4-forcing degree, Turan number, minimal Turan) and the cross-module rows (chromatic and extremal XE2, X96, X98). Certificates transport the helper iff through the unchanged statements by axiom-free setoid rewriting. X98's subdivision Record was frozen by B3; B3's statement snapshot still calls the live helper and is documented below, and `X98Original` combines B3's frozen Record with this family's frozen helper. M1 edge/count aliases in these rows stay live, so no row is claimed to be pre-M1.",
     "",
-    "Proof consumers rebuilt with unchanged statements: GTMisc.grounding_U13.subgraph_of_refl and Atlas e117 (implications_A1), both through `has_subgraphP`. No statement text, doc block, manifest row, leg state or documented discrepancy changes."
+    "Proof consumers rebuilt with unchanged statements: GTMisc.grounding_U13.subgraph_of_refl and Atlas e117 (implications_A1), both through `has_subgraphP`. No statement text, doc block, manifest row, leg state or documented discrepancy changes.",
+    "B4 history (follow-up): B4 (fbf33a0) also freezes chromatic erdos_1091 and extremal erdos_567. Each family's snapshot keeps the other's live helper and is documented in the other's spec; XE2Original.erdos_1091_statement and XE1Original.erdos_567_statement combine both families' frozen chains. No earlier frozen body changes."
   ],
   "frozen": [
     {
@@ -638,10 +641,68 @@
       },
       "certificate": "Extremal.migration.consecutive_in_path.x98_induced_subdivision_compat",
       "note": "B3's frozen inhabited wrapper over its frozen subdivision Record (type, constructor, seven fields); reused unchanged by X98Original"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_1091_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_1091_statement",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "chromatic-theory/theories/migration/subgraph_of.v",
+      "frozen": "XE2Original.erdos_1091_statement",
+      "substitutions": {
+        "xe1_subgraph_of": "Legacy.xe1_subgraph_of",
+        "xe1_odd_cycle_with_diagonals": "Chromatic.migration.consecutive_in_cycle.XE1Legacy.odd_cycle_with_diagonals"
+      },
+      "certificate": "Chromatic.migration.subgraph_of.erdos_1091_statement_original_compat"
+    },
+    {
+      "kind": "b4-frozen",
+      "qualified": "Chromatic.conjectures.XE1.xe1_odd_cycle_with_diagonals",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_odd_cycle_with_diagonals",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "XE1Legacy.odd_cycle_with_diagonals",
+      "substitutions": {
+        "xe1_cycle_diagonal_count": "cycle_diagonal_count",
+        "xe1_odd_cycle_with_diagonals": "odd_cycle_with_diagonals"
+      },
+      "certificate": "Chromatic.migration.consecutive_in_cycle.xe1_odd_cycle_with_diagonals_compat",
+      "note": "B4's frozen chain (fbf33a0), reused unchanged by the combined A5+B4 original"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_567_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_567_statement",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "XE1Original.erdos_567_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "XE1Legacy.graph_ramsey_number",
+        "xe1_h5_graph": "Extremal.migration.consecutive_in_cycle.XE1Legacy.h5_graph"
+      },
+      "certificate": "Extremal.migration.subgraph_of.erdos_567_statement_original_compat"
+    },
+    {
+      "kind": "b4-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_h5_graph",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_h5_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "XE1Legacy.h5_graph",
+      "substitutions": {
+        "x4_consecutive_in_cycle": "Legacy.x4_consecutive_in_cycle",
+        "xe1_h5_graph": "h5_graph"
+      },
+      "certificate": "Extremal.migration.consecutive_in_cycle.xe1_h5_graph_compat",
+      "note": "B4's frozen chain (fbf33a0), reused unchanged by the combined A5+B4 original"
     }
   ],
   "known_stale_snapshots": {
-    "extremal-graph-theory/theories/migration/consecutive_in_path.v#X98Legacy.statement": "B3 snapshot (49ddc03): B3 froze X98's subdivision Record, its inhabited wrapper and the statement, but the statement copy still calls the live x59_subgraph_of, which after A5 unfolds to has_subgraph. B3's polynomial_kuhn_osthus_induced_subdivision_statement_compat stays true and certifies B3's step. Kept unchanged; the combined pre-B3, pre-A5 row is Extremal.migration.subgraph_of.X98Original, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat."
+    "extremal-graph-theory/theories/migration/consecutive_in_path.v#X98Legacy.statement": "B3 snapshot (49ddc03): B3 froze X98's subdivision Record, its inhabited wrapper and the statement, but the statement copy still calls the live x59_subgraph_of, which after A5 unfolds to has_subgraph. B3's polynomial_kuhn_osthus_induced_subdivision_statement_compat stays true and certifies B3's step. Kept unchanged; the combined pre-B3, pre-A5 row is Extremal.migration.subgraph_of.X98Original, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.",
+    "chromatic-theory/theories/migration/consecutive_in_cycle.v#XE2Legacy.erdos_1091_statement": "B4 snapshot (fbf33a0): B4 froze erdos_1091's cyclic chain but kept the live xe1_subgraph_of, which after A5 unfolds to has_subgraph. Kept unchanged; the combined pre-A5, pre-B4 row is Chromatic.migration.subgraph_of.XE2Original.erdos_1091_statement, certified by erdos_1091_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/consecutive_in_cycle.v#XE1Legacy.erdos_567_statement": "B4 snapshot (fbf33a0): B4 froze erdos_567's h5_graph chain but kept the live xe1_graph_ramsey_number, which after A5 reaches has_subgraph. Kept unchanged; the combined pre-A5, pre-B4 row is Extremal.migration.subgraph_of.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat."
   },
   "cross_module_consumers": [
     {
