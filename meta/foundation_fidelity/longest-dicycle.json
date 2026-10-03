@@ -1,0 +1,42 @@
+{
+ "schema_version": 1,
+ "family": "longest-dicycle",
+ "modules": {
+  "Digraph.foundations.longest_cycles": {
+   "path": "digraph-theory/theories/foundations/longest_cycles.v",
+   "overrides": {
+    "longest_dicycle": {
+     "verdict": "FAITHFUL",
+     "note": "longest_dicycle c: c is a directed cycle (dicycle, reused unchanged: loops and digons admitted, empty and repeated sequences rejected) and no directed cycle of the whole digraph is longer; maximum length, not inclusion maximality; no orientation, connectivity, symmetry or inhabitance premise; exists exactly when a directed cycle exists; reversal is longest in the converse digraph, and in the same digraph under symmetric arcs."
+    }
+   },
+   "machine_evidence": [
+    "longest_dicycle_dicycle",
+    "longest_dicycle_uniq",
+    "longest_dicycle_size",
+    "longest_dicycle_max",
+    "longest_dicycle_nil",
+    "dicycle_seq1",
+    "longest_dicycle_card",
+    "longest_dicycle_size_eq",
+    "longest_dicycle_tie",
+    "longest_dicycle_shorter",
+    "longest_dicycle_hamiltonian",
+    "longest_dicycle_rot",
+    "longest_dicycle_rotr",
+    "longest_dicycle_none",
+    "longest_dicycle_exists",
+    "longest_dicycle_existsP",
+    "dicycle_rev_converse",
+    "longest_dicycle_rev_converse",
+    "dicycle_rev",
+    "longest_dicycle_rev",
+    "longest_dicycle_ground_arcless",
+    "longest_dicycle_ground_loop",
+    "longest_dicycle_ground_digon",
+    "longest_dicycle_ground_shorter",
+    "longest_dicycle_ground_triangle"
+   ]
+  }
+ }
+}

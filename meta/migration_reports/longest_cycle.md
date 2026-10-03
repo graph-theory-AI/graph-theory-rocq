@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py longest_cycle --details /tmp/mi
 - Canonical: `GTBase.walks_paths.seq_longest_cycle`.
 - Baseline: `c52825404e519998716b02ccb40f73cfc604dc56`.
 - Scope: 3 helpers, 3 statements, 8 frozen objects, 28 recorded references.
-- Source checks: 107/107 pass; consistent.
+- Source checks: 106/106 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -19,6 +19,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py longest_cycle --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Digraph.conjectures.X2.longest_dicycle`, `Hom.conjectures.U3.longest_path`.
+Excluded distinct variants: `Hom.conjectures.U3.longest_path`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `cycle-theory/theories/migration/cycle_vertices.v#X10Legacy.smith_longest_cycles_r_connected_statement`, `cycle-theory/theories/migration/cycle_vertices.v#X212Legacy.smith_two_longest_cycles_statement`, `cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.smith_two_longest_cycles_statement`.

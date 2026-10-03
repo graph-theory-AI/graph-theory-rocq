@@ -7,6 +7,8 @@
 theories/foundations/prelude.v
 theories/foundations/interop_graph_theory.v
 theories/foundations/cycles.v
+theories/foundations/longest_cycles.v
+theories/examples/longest_dicycle.v
 # depends on theories/core (subdivision models / topological orders of digraphs);
 # `rocq makefile` orders by coqdep, so the listing order here is immaterial.
 theories/foundations/subdivision.v
@@ -1433,3 +1435,4 @@ theories/migration/path_vertices.v
 theories/migration/internal_vertices.v
 theories/migration/genuine_cycle.v
 theories/migration/cycle_vertices.v
+theories/migration/longest_dicycle.v
