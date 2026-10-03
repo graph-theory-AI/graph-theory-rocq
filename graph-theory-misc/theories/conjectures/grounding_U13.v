@@ -191,7 +191,7 @@ Proof. rewrite /avgdeg_geq /average_degree_geq => H le. apply: leq_trans H. by r
 
 (** [subgraph_of] — reflexivity (every graph is a subgraph of itself). *)
 Lemma subgraph_of_refl (G : sgraph) : subgraph_of G G.
-Proof. by exists id; split=> // x y. Qed.
+Proof. by apply/has_subgraphP; exists id; split=> // x y. Qed.
 
 (** ============================================================================
     Row 4 — graph-from-relation, edge-union, degeneracy.

@@ -21,16 +21,16 @@ Definition xe2_ab_choosable (G : sgraph) (a b : nat) : Prop :=
       forall x y : G, x -- y -> [disjoint S x & S y].
 
 Definition xe2_complement_rel (G : sgraph) : rel G :=
-  fun x y => (x != y) && ~~ (x -- y).
+  @compl_rel G.
 
 Lemma xe2_complement_sym (G : sgraph) : symmetric (@xe2_complement_rel G).
-Proof. by move=> x y; rewrite /xe2_complement_rel eq_sym sgP. Qed.
+Proof. exact: compl_rel_sym. Qed.
 
 Lemma xe2_complement_irrefl (G : sgraph) : irreflexive (@xe2_complement_rel G).
-Proof. by move=> x; rewrite /xe2_complement_rel eqxx. Qed.
+Proof. exact: compl_rel_irrefl. Qed.
 
 Definition xe2_complement_graph (G : sgraph) : sgraph :=
-  SGraph (@xe2_complement_sym G) (@xe2_complement_irrefl G).
+  compl G.
 
 Definition xe2_sqrt_lower (n s : nat) : Prop :=
   s ^ 2 <= n /\ forall t : nat, t ^ 2 <= n -> t <= s.

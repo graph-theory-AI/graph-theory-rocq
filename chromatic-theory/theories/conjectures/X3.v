@@ -114,16 +114,16 @@ Definition x3_constricting (F : nat -> Prop) : Prop :=
   forall k : nat, x3_k_constricting F k.
 
 Definition x3_complement_rel (G : sgraph) : rel G :=
-  fun u v => (u != v) && ~~ (u -- v).
+  @compl_rel G.
 
 Lemma x3_complement_sym (G : sgraph) : symmetric (@x3_complement_rel G).
-Proof. by move=> u v; rewrite /x3_complement_rel eq_sym sgP. Qed.
+Proof. exact: compl_rel_sym. Qed.
 
 Lemma x3_complement_irrefl (G : sgraph) : irreflexive (@x3_complement_rel G).
-Proof. by move=> u; rewrite /x3_complement_rel eqxx. Qed.
+Proof. exact: compl_rel_irrefl. Qed.
 
 Definition x3_complement_graph (G : sgraph) : sgraph :=
-  SGraph (@x3_complement_sym G) (@x3_complement_irrefl G).
+  compl G.
 
 Definition x3_complement_image (C : sgraph -> Prop) (G : sgraph) : Prop :=
   exists H : sgraph, C H /\ x3_iso G (x3_complement_graph H).

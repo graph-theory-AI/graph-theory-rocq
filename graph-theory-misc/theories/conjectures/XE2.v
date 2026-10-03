@@ -7,7 +7,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Definition xe2_subgraph_of (H G : sgraph) : Prop :=
-  exists f : H -> G, injective f /\ forall x y : H, x -- y -> f x -- f y.
+  has_subgraph G H.
 
 Definition xe2_triangle_free_rel (V : finType) (r : rel V) : Prop :=
   forall x y z : V, r x y -> r y z -> r z x -> False.
