@@ -1,0 +1,41 @@
+{
+ "schema_version": 1,
+ "family": "spanning-tree",
+ "modules": {
+  "GTBase.spanning_trees": {
+   "path": "base/theories/spanning_trees.v",
+   "overrides": {
+    "fg_spanning_tree": {
+     "verdict": "FAITHFUL",
+     "note": "fg_spanning_tree G T: T is a set of edges of G (2-subsets of the carrier, subset of fg_edges G) whose labelled graph on the whole carrier of G is an upstream tree (unique irredundant paths and connected); isolated vertices of G count, so they exclude any spanning tree when G has two or more vertices; no nonempty guard."
+    },
+    "fg_spanning_treeb": {
+     "verdict": "FAITHFUL",
+     "note": "fg_spanning_treeb G T: the Boolean [T \\subset fg_edges G && is_forestb _ && connectedb _], reflected by fg_spanning_treeP."
+    }
+   },
+   "machine_evidence": [
+    "fg_spanning_treeP",
+    "fg_spanning_treeI",
+    "fg_spanning_tree_sub",
+    "fg_spanning_tree_tree",
+    "fg_spanning_tree_forest",
+    "fg_spanning_tree_connected",
+    "fg_spanning_treeE",
+    "fg_edges_edge",
+    "fg_spanning_tree_valid",
+    "fg_spanning_tree_edge",
+    "fg_spanning_tree_cover",
+    "fg_spanning_tree_connectedG",
+    "fg_edges_Kn",
+    "fg_spanning_tree_K0",
+    "fg_spanning_tree_K1",
+    "fg_spanning_tree_K2",
+    "not_fg_spanning_tree_K3",
+    "not_fg_spanning_tree_K3_edge",
+    "not_fg_spanning_tree_two_isolated",
+    "not_fg_spanning_tree_singleton"
+   ]
+  }
+ }
+}

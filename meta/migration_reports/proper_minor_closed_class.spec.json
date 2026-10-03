@@ -98,7 +98,9 @@
       "corpus": "v2"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "graph-theory-misc/theories/migration/spanning_trees.v#X168Legacy.minor_closed_spanning_tree_polytope_linear_xc_statement": "B18 per-row snapshot: family spanning-tree (B18) froze only its labelled spanning-tree chain (helper, Record, wrapper) in X168's row, so this copy still calls the live x168_proper_minor_closed_class, which after C11 unfolds to GTBase.minor_classes.proper_minor_closed_class (the same conjunction). Kept as B18's per-row row; the complete pre-C11, pre-B18 row is GTMisc.migration.spanning_trees.X168Original.minor_closed_spanning_tree_polytope_linear_xc_statement over this family's frozen Legacy.x168_proper_minor_closed_class (bound there as Module C11), certified by minor_closed_spanning_tree_polytope_linear_xc_statement_original_compat."
+  },
   "cross_module_consumers": [],
   "distinct_variants": [
     {
