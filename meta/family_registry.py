@@ -74,6 +74,7 @@ def load_library_registry(root: Path = ROOT, *, allow_missing_reports: bool = Fa
     if not paths:
         raise RegistryError(f"{directory}: no family registry documents")
     entries = {}
+    source_owners = {}
     for path in paths:
         _document(root, path.relative_to(root).as_posix(), str(path))
         data = read_object(path)
@@ -106,6 +107,31 @@ def load_library_registry(root: Path = ROOT, *, allow_missing_reports: bool = Fa
         _string_list(spec['normalized_names'], f'{path}:normalized_names', nonempty=True)
         for field in ('source_definitions', 'compatibility_theorems', 'api_theorems'):
             _string_list(spec.get(field, []), f'{path}:{field}')
+        sources = spec.get('repository_sources', {})
+        if not isinstance(sources, dict):
+            raise RegistryError(f"{path}: repository_sources must be an object")
+        for name, source in sources.items():
+            if name not in spec['source_definitions']:
+                raise RegistryError(f"{path}: repository source outside source_definitions: {name}")
+            if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)+", name):
+                raise RegistryError(f"{path}: invalid repository source name: {name}")
+            if not isinstance(source, dict) or set(source) != {'path', 'commit', 'blob', 'declaration_hash'}:
+                raise RegistryError(f"{path}: repository source needs path, commit, blob, declaration_hash: {name}")
+            for field, length in (('commit', 40), ('blob', 40), ('declaration_hash', 64)):
+                if not isinstance(source[field], str) or not re.fullmatch(r'[0-9a-f]{' + str(length) + '}', source[field]):
+                    raise RegistryError(f"{path}: invalid repository source {field}: {name}")
+            actual = _document(root, source['path'], f'{path}:repository_sources:{name}')
+            parts = PurePosixPath(source['path']).parts
+            public = (len(parts) == 3 and parts[:2] == ('base', 'theories')) or (
+                len(parts) >= 4 and parts[1:3] == ('theories', 'foundations'))
+            if (not public or actual.suffix != '.v'
+                    or actual.name.startswith(('grounding_', 'implications_', '_assum_', '_faith_', 'scratch_', 'gcheck'))
+                    or actual.resolve() != root.resolve() / source['path']):
+                raise RegistryError(f"{path}: repository source must be a regular public source without aliases: {name}")
+        for name in spec['source_definitions']:
+            if name in source_owners:
+                raise RegistryError(f"{path}: duplicate source ownership: {name} ({source_owners[name]})")
+            source_owners[name] = family
         if not isinstance(spec['upstream_audit'], dict):
             raise RegistryError(f"{path}: upstream_audit must be an object")
         for field in ('migration_report', 'migration_spec', 'independent_review', 'foundation_fidelity'):
