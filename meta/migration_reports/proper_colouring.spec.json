@@ -1,0 +1,472 @@
+{
+  "family": "proper-colouring",
+  "canonical_name": "GTBase.colourings.proper_colouring",
+  "canonical_short_name": "proper_colouring",
+  "relation": "Unconditional Prop equivalences and Boolean equalities on the same supplied function carriers, derived from upstream coloring of preim_partition; exact finite-function counts are preserved.",
+  "baseline_commit": "a6db537386d7092db506526fbcfd2dbe9760ed5e",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "spectral-graph-theory": "Spectral",
+    "infinite-graph-theory": "Infinite"
+  },
+  "certificate_files": [
+    "base/theories/colourings.v",
+    "chromatic-theory/theories/migration/proper_colouring.v",
+    "spectral-graph-theory/theories/migration/proper_colouring.v",
+    "infinite-graph-theory/theories/migration/proper_colouring.v"
+  ],
+  "extra_certificates": [
+    "GTBase.colourings.proper_colouringP",
+    "GTBase.colourings.proper_colouringE",
+    "GTBase.colourings.proper_colouring_upstream",
+    "GTBase.colourings.proper_colouring_injective",
+    "GTBase.colourings.proper_colouring_relabel",
+    "GTBase.colourings.proper_colouring_ext",
+    "GTBase.colourings.proper_colouring_K0",
+    "GTBase.colourings.proper_colouring_K1",
+    "GTBase.colourings.not_proper_colouring_constant",
+    "GTBase.colourings.proper_colouring_chi"
+  ],
+  "downstream_client": "base/theories/examples/proper_colouring.v",
+  "summary": [
+    "Eight helpers and ten rows use one supplied-colour-map predicate over upstream coloring/preim_partition. Five Prop wrappers keep iff; three finite-function Boolean wrappers keep equality. Empty palettes and unused labels require no added guard.",
+    "Eight family-reaching helper chains are frozen. Recolouring states, CSF coefficients and three-colouring counts retain their exact labelled finite-function representations and counts.",
+    "X64Original combines frozen colouring with the pre-M1/A3 deletion chain. X83Original combines frozen colouring with B3 induced paths. Historical snapshot bodies and theorem types are unchanged; their live colouring references are explicit below.",
+    "X162 retains its blocked Kempe defect; D5 its existential affirmative question; D4doa its documented Cauchy-existence reading. Ten statement bodies, docs and statuses are unchanged. Edge-colouring families remain separate."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_proper_colouring",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_proper_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.x3_proper_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.proper_colouring.x3_proper_colouring_compat",
+      "source_declaration_sha256": "da466ba4e37830cb8230b9988af60a2c554e94dd901495ad95f3f22021922f80",
+      "source_body_sha256": "46289919c1b6f0e9bc813cac1ffd655bc9a3dce19dd6320f60a983edaec5e31f",
+      "live_unfolds_to": "colourings.proper_colouring col"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X63.x63_proper_colouring",
+      "path": "chromatic-theory/theories/conjectures/X63.v",
+      "name": "x63_proper_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.x63_proper_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.proper_colouring.x63_proper_colouring_compat",
+      "source_declaration_sha256": "7901f0d32a273d58484d3b497826d2d2e3ed3b847ba6dc5f970313e694d3078e",
+      "source_body_sha256": "c2d7a79b59d3d6f2e26d9f89a3a2ca37c64b5519c2ea669b53534aba85142948",
+      "live_unfolds_to": "colourings.proper_colouring col"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X68.x68_proper_three_colouring",
+      "path": "chromatic-theory/theories/conjectures/X68.v",
+      "name": "x68_proper_three_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.x68_proper_three_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.proper_colouring.x68_proper_three_colouring_compat",
+      "source_declaration_sha256": "5b6f7e8f6e78659d6b4d7fbf61382ac8b9fcd3fa6f8164adff3dfe1dd831b41a",
+      "source_body_sha256": "c2d7a79b59d3d6f2e26d9f89a3a2ca37c64b5519c2ea669b53534aba85142948",
+      "live_unfolds_to": "colourings.proper_colouring col"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X109.x109_proper_colouring",
+      "path": "chromatic-theory/theories/conjectures/X109.v",
+      "name": "x109_proper_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.x109_proper_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.proper_colouring.x109_proper_colouring_compat",
+      "source_declaration_sha256": "fe729619ef17e81d0d50fafb04d1affd71000591eefa6a9180e1be834e7c907c",
+      "source_body_sha256": "bae0d516733a01facf47bbf74321306bbb736a10f1b274cd12921e1cc2aa66a1",
+      "live_unfolds_to": "colourings.proper_colouring col"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X162.x162_proper_colouring",
+      "path": "chromatic-theory/theories/conjectures/X162.v",
+      "name": "x162_proper_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.x162_proper_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.proper_colouring.x162_proper_colouring_compat",
+      "source_declaration_sha256": "119f608d18f526907e92286d48dfbe4d61c7982008b40a1336c739d77094c908",
+      "source_body_sha256": "c2d7a79b59d3d6f2e26d9f89a3a2ca37c64b5519c2ea669b53534aba85142948",
+      "live_unfolds_to": "colourings.proper_colouring col"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X187.x187_proper_3_colouring",
+      "path": "chromatic-theory/theories/conjectures/X187.v",
+      "name": "x187_proper_3_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.x187_proper_3_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.proper_colouring.x187_proper_3_colouring_compat",
+      "source_declaration_sha256": "af03ba5cc69cff6919f424f7b23e745c4f80ce12f071fd99f25cecdd4dd175b4",
+      "source_body_sha256": "c2d7a79b59d3d6f2e26d9f89a3a2ca37c64b5519c2ea669b53534aba85142948",
+      "live_unfolds_to": "colourings.proper_colouring col"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.rainbow_consecutive_vertices_in_hole_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "rainbow_consecutive_vertices_in_hole_statement",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X3Legacy.rainbow_consecutive_vertices_in_hole_statement",
+      "substitutions": {
+        "x3_proper_colouring": "Legacy.x3_proper_colouring"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.rainbow_consecutive_vertices_in_hole_statement_compat",
+      "source_declaration_sha256": "3197c6a423832592b81f54ed5f4ed64bb55a4f1a006454e5bc4f5b2751d648f7",
+      "source_body_sha256": "d9e9aa73bcb45fa8f6d91b405d2a54359955cf8a9694da17c090dbb67ef92742",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X63.x63_k_homogeneous_colouring",
+      "path": "chromatic-theory/theories/conjectures/X63.v",
+      "name": "x63_k_homogeneous_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X63Legacy.x63_k_homogeneous_colouring",
+      "substitutions": {
+        "x63_proper_colouring": "Legacy.x63_proper_colouring"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.x63_k_homogeneous_colouring_compat",
+      "source_declaration_sha256": "0d2108224442bdf47fb9649141373c0b126922491f84950f79a60899b7a081ba",
+      "source_body_sha256": "3d701545d664d193a3f7c6a88338d1b7f6599d3e192f9957225c0c1bc644086b"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X63.x63_k_homogeneous_with",
+      "path": "chromatic-theory/theories/conjectures/X63.v",
+      "name": "x63_k_homogeneous_with",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X63Legacy.x63_k_homogeneous_with",
+      "substitutions": {
+        "x63_proper_colouring": "Legacy.x63_proper_colouring"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.x63_k_homogeneous_with_compat",
+      "source_declaration_sha256": "aa623715d79a150d3d718de857e3d9bf1d9e42212721eebc7d34000b1d27c4e6",
+      "source_body_sha256": "824c2e7e09b0c91c4432a3e78167116b3b99ff4d169c91dd669674abd0adc7b1"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X63.cubic_two_homogeneous_four_colour_statement",
+      "path": "chromatic-theory/theories/conjectures/X63.v",
+      "name": "cubic_two_homogeneous_four_colour_statement",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X63Legacy.cubic_two_homogeneous_four_colour_statement",
+      "substitutions": {
+        "x63_k_homogeneous_colouring": "X63Legacy.x63_k_homogeneous_colouring",
+        "x63_k_homogeneous_with": "X63Legacy.x63_k_homogeneous_with"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.cubic_two_homogeneous_four_colour_statement_compat",
+      "source_declaration_sha256": "e114fd224e7c2fa7f3aa9f69949bc84c49c239a47183a68fa0b24f0752165500",
+      "source_body_sha256": "b52a4c41253b97be879273a00903c8cf7384b79ea22ef702158e1672b54c5b9f",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X64.finite_bridgeless_cubic_two_homogeneous_exceptions_statement",
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "finite_bridgeless_cubic_two_homogeneous_exceptions_statement",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X64Original.finite_bridgeless_cubic_two_homogeneous_exceptions_statement",
+      "substitutions": {
+        "x63_k_homogeneous_colouring": "X63Legacy.x63_k_homogeneous_colouring",
+        "x64_bridgeless": "delete_edge.X64Original.bridgeless"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.finite_bridgeless_cubic_two_homogeneous_exceptions_statement_compat",
+      "source_declaration_sha256": "17b9007c71276ffcc686d093d1485a467cf09fbb9b440ae128ce42c530afc463",
+      "source_body_sha256": "3ca28379bf2870c5535571fab1fe8c115685764ee619e794c3c11145864dc3e4",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X68.triangle_free_planar_distant_precolouring_extension_statement",
+      "path": "chromatic-theory/theories/conjectures/X68.v",
+      "name": "triangle_free_planar_distant_precolouring_extension_statement",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X68Legacy.triangle_free_planar_distant_precolouring_extension_statement",
+      "substitutions": {
+        "x68_proper_three_colouring": "Legacy.x68_proper_three_colouring"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.triangle_free_planar_distant_precolouring_extension_statement_compat",
+      "source_declaration_sha256": "22fd99bfd1ef6fcdec5b938c3932c67a447398b999582f4ea2f13dea3ad3c2f5",
+      "source_body_sha256": "ae9e4860366abf2122e9f16fcbebd5ae2cb0c282171c7ffe15fd9abdfc0fdd71",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X83.aravind_rainbow_induced_chromatic_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X83.v",
+      "name": "aravind_rainbow_induced_chromatic_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X83Original.aravind_rainbow_induced_chromatic_path_statement",
+      "substitutions": {
+        "x3_proper_colouring": "Legacy.x3_proper_colouring",
+        "x83_rainbow_induced_path": "consecutive_in_path.X83Legacy.rainbow_induced_path"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.aravind_rainbow_induced_chromatic_path_statement_compat",
+      "source_declaration_sha256": "172caa46c301b2a8716cc70cd1e75660962b35aedcd4d4a4461f667764af2889",
+      "source_body_sha256": "17e39d66713ee064b394fe044e9090a43017dfc9b2375179a7cec212a63d2f31",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X109.x109_recolour_walk",
+      "path": "chromatic-theory/theories/conjectures/X109.v",
+      "name": "x109_recolour_walk",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X109Legacy.x109_recolour_walk",
+      "substitutions": {
+        "x109_proper_colouring": "Legacy.x109_proper_colouring"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.x109_recolour_walk_compat",
+      "source_declaration_sha256": "ebb51db9cad4e5bba9e45ce272fef98e4603e31f8a7426742bc72145a8e33df1",
+      "source_body_sha256": "f463c802fcfde0f94e213a62501d56e10d7767dd70afcd706d12c6bd4875325a"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X109.x109_recolour_diameter_at_most",
+      "path": "chromatic-theory/theories/conjectures/X109.v",
+      "name": "x109_recolour_diameter_at_most",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X109Legacy.x109_recolour_diameter_at_most",
+      "substitutions": {
+        "x109_proper_colouring": "Legacy.x109_proper_colouring",
+        "x109_recolour_walk": "X109Legacy.x109_recolour_walk"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.x109_recolour_diameter_at_most_compat",
+      "source_declaration_sha256": "63fac52559939efe9ec42e3d113d40f143880ba021c5febeabc5d11b65519d84",
+      "source_body_sha256": "dd3a96290b57d540ec6be1e6d00a225bd1c424c3a70e98e000b7062978effdb3"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X109.cereceda_degenerate_recolouring_quadratic_diameter_statement",
+      "path": "chromatic-theory/theories/conjectures/X109.v",
+      "name": "cereceda_degenerate_recolouring_quadratic_diameter_statement",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X109Legacy.cereceda_degenerate_recolouring_quadratic_diameter_statement",
+      "substitutions": {
+        "x109_recolour_diameter_at_most": "X109Legacy.x109_recolour_diameter_at_most"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.cereceda_degenerate_recolouring_quadratic_diameter_statement_compat",
+      "source_declaration_sha256": "53ac15c86cf6ec169e434eaf2013fbf726319719c02212860176d1a110b06f77",
+      "source_body_sha256": "6309249abcb93a44c50439f0ba2b69b96b23dd555ff2b1308d40e1af38fffee7",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X162.x162_kempe_class_for_q",
+      "path": "chromatic-theory/theories/conjectures/X162.v",
+      "name": "x162_kempe_class_for_q",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X162Legacy.x162_kempe_class_for_q",
+      "substitutions": {
+        "x162_proper_colouring": "Legacy.x162_proper_colouring"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.x162_kempe_class_for_q_compat",
+      "source_declaration_sha256": "0d1a4efff2f710de07d586aba62fbce506fe88fa65e526ac43b28053bbec6c90",
+      "source_body_sha256": "0d31926da26907dc924759df7d24a67557923bec1ef19ec5c8663bd32b0cf649"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X162.wsk_triangular_lattice_q5_kempe_class_statement",
+      "path": "chromatic-theory/theories/conjectures/X162.v",
+      "name": "wsk_triangular_lattice_q5_kempe_class_statement",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X162Legacy.wsk_triangular_lattice_q5_kempe_class_statement",
+      "substitutions": {
+        "x162_kempe_class_for_q": "X162Legacy.x162_kempe_class_for_q"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.wsk_triangular_lattice_q5_kempe_class_statement_compat",
+      "source_declaration_sha256": "836effe9cd9b672cbd59cc1b25ee3415a7bcca0c483e8740ebbf324af3d6d4ca",
+      "source_body_sha256": "3dc3ecbaedcbf529a8a34fe3a16bddbd0a3978cd5811939521fc8a0656bd0c71",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X187.planar_triangle_free_request_graph_fraction_statement",
+      "path": "chromatic-theory/theories/conjectures/X187.v",
+      "name": "planar_triangle_free_request_graph_fraction_statement",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X187Legacy.planar_triangle_free_request_graph_fraction_statement",
+      "substitutions": {
+        "x187_proper_3_colouring": "Legacy.x187_proper_3_colouring"
+      },
+      "certificate": "Chromatic.migration.proper_colouring.planar_triangle_free_request_graph_fraction_statement_compat",
+      "source_declaration_sha256": "85fd92c48298a15b524a9a57b6876ffe4e097832babb339d319780ce1c6c97e2",
+      "source_body_sha256": "8d9fc9aa05db940a278cdc5145865724e94d0ff5032ecdfa8aa8d4ce9dddf839",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Spectral.conjectures.D5.proper_colb",
+      "path": "spectral-graph-theory/theories/conjectures/D5.v",
+      "name": "proper_colb",
+      "frozen_path": "spectral-graph-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.proper_colb",
+      "substitutions": {},
+      "certificate": "Spectral.migration.proper_colouring.proper_colb_compat",
+      "source_declaration_sha256": "b2ac9d38169e5ab1c42fca45ed6298715b05ddf576329eae64dccc9af07341cc",
+      "source_body_sha256": "8636c4fd96da6256ad5f643a090d45340199c401fa06d8d9a878e538e5d497d9",
+      "live_unfolds_to": "colourings.proper_colouring c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Spectral.conjectures.D5.csf_coeff",
+      "path": "spectral-graph-theory/theories/conjectures/D5.v",
+      "name": "csf_coeff",
+      "frozen_path": "spectral-graph-theory/theories/migration/proper_colouring.v",
+      "frozen": "D5Legacy.csf_coeff",
+      "substitutions": {
+        "proper_colb": "Legacy.proper_colb"
+      },
+      "certificate": "Spectral.migration.proper_colouring.csf_coeff_compat",
+      "source_declaration_sha256": "f6d01f7b8aca67229dd0206877fdb84dc418ecfc43df2240888f507ea4f4509c",
+      "source_body_sha256": "aa03472fff59f8d59072f43c7efb3dce5417da67350907dc76b786162398bf06"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Spectral.conjectures.D5.same_csf",
+      "path": "spectral-graph-theory/theories/conjectures/D5.v",
+      "name": "same_csf",
+      "frozen_path": "spectral-graph-theory/theories/migration/proper_colouring.v",
+      "frozen": "D5Legacy.same_csf",
+      "substitutions": {
+        "csf_coeff": "D5Legacy.csf_coeff"
+      },
+      "certificate": "Spectral.migration.proper_colouring.same_csf_compat",
+      "source_declaration_sha256": "d80fb7a7974aabf170da75c212c435a7b5f58f18a6fc91fbdf05f1a76bb07e54",
+      "source_body_sha256": "507bd0d11ce0928b2bae8a41fee8feb429ac3b23756aa7d835c39f147dd667c0"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Spectral.conjectures.D5.does_the_symmetric_chromatic_function_distinguish_tr_statement",
+      "path": "spectral-graph-theory/theories/conjectures/D5.v",
+      "name": "does_the_symmetric_chromatic_function_distinguish_tr_statement",
+      "frozen_path": "spectral-graph-theory/theories/migration/proper_colouring.v",
+      "frozen": "D5Legacy.does_the_symmetric_chromatic_function_distinguish_tr_statement",
+      "substitutions": {
+        "same_csf": "D5Legacy.same_csf"
+      },
+      "certificate": "Spectral.migration.proper_colouring.does_the_symmetric_chromatic_function_distinguish_tr_statement_compat",
+      "source_declaration_sha256": "c104f2b6118a3f4b5fd741eb8546c6f22676edb6bc743cc839e80c9a1a18af69",
+      "source_body_sha256": "090f4565ec57c4d3357f2c3823f52e0d0937d493a7994375d39fa9b24712d950",
+      "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "Infinite.conjectures.D4doa.is_proper3",
+      "path": "infinite-graph-theory/theories/conjectures/D4doa.v",
+      "name": "is_proper3",
+      "frozen_path": "infinite-graph-theory/theories/migration/proper_colouring.v",
+      "frozen": "Legacy.is_proper3",
+      "substitutions": {},
+      "certificate": "Infinite.migration.proper_colouring.is_proper3_compat",
+      "source_declaration_sha256": "4f2a08f75d0c5670e3670af63f88eff01af13335a35726c0492dc911cb0085fb",
+      "source_body_sha256": "8636c4fd96da6256ad5f643a090d45340199c401fa06d8d9a878e538e5d497d9",
+      "live_unfolds_to": "colourings.proper_colouring c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Infinite.conjectures.D4doa.n3colorings",
+      "path": "infinite-graph-theory/theories/conjectures/D4doa.v",
+      "name": "n3colorings",
+      "frozen_path": "infinite-graph-theory/theories/migration/proper_colouring.v",
+      "frozen": "D4doaLegacy.n3colorings",
+      "substitutions": {
+        "is_proper3": "Legacy.is_proper3"
+      },
+      "certificate": "Infinite.migration.proper_colouring.n3colorings_compat",
+      "source_declaration_sha256": "7d0af23761b71a1ee9921b543110ee0af97087f4eb5b62b2d7bfcd263c94784e",
+      "source_body_sha256": "d953f56caa0c24090910a3cdc34e777d4dbbb781f2249cfe255379b9a76c8134"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Infinite.conjectures.D4doa.counting_3_colorings_of_the_hex_lattice_statement",
+      "path": "infinite-graph-theory/theories/conjectures/D4doa.v",
+      "name": "counting_3_colorings_of_the_hex_lattice_statement",
+      "frozen_path": "infinite-graph-theory/theories/migration/proper_colouring.v",
+      "frozen": "D4doaLegacy.counting_3_colorings_of_the_hex_lattice_statement",
+      "substitutions": {
+        "n3colorings": "D4doaLegacy.n3colorings"
+      },
+      "certificate": "Infinite.migration.proper_colouring.counting_3_colorings_of_the_hex_lattice_statement_compat",
+      "source_declaration_sha256": "a598bc303b12fc9d98a2f8372df4285b8e4b045d7e28d1730ca29f20691809b1",
+      "source_body_sha256": "3ccc1650ab9b96eef1dc3e89bce88a2b3008926f2c69140134e496bd16dc4c32",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/simple_edges.v#X64Legacy.statement": "M1 froze edges; its live homogeneous-colouring reference is preserved. C5 X64Original combines pre-M1/A3 bridgeless with the full frozen colouring chain.",
+    "chromatic-theory/theories/migration/delete_edge.v#X64Legacy.finite_bridgeless_cubic_two_homogeneous_exceptions_statement": "A3 froze deletion; its live homogeneous-colouring reference is preserved and covered by C5 X64Original.",
+    "chromatic-theory/theories/migration/delete_edge.v#X64Original.finite_bridgeless_cubic_two_homogeneous_exceptions_statement": "A3 Original combines M1/A3 only; its live colouring reference is preserved and covered by the new combined C5 Original.",
+    "chromatic-theory/theories/migration/consecutive_in_path.v#X83Legacy.statement": "B3 froze the induced-path chain but kept live x3_proper_colouring. C5 X83Original combines that frozen path with frozen colouring."
+  },
+  "distinct_variants": [],
+  "proof_consumers": [
+    "Chromatic.foundations.chi_bounding.chi_le_palette",
+    "Spectral.conjectures.grounding_D5.proper_colb_inj",
+    "Spectral.conjectures.grounding_D5.proper_colb_K2",
+    "Spectral.conjectures.grounding_D5.csf_coeff_eq0",
+    "Spectral.conjectures.grounding_D5.csf_coeff_K1",
+    "Spectral.conjectures.grounding_D5.same_csf_refl",
+    "Spectral.conjectures.grounding_D5.same_csf_sym",
+    "Spectral.conjectures.grounding_D5.same_csf_trans",
+    "Infinite.conjectures.grounding_D4doa.triv_proper3",
+    "Infinite.conjectures.grounding_D4doa.n3colorings_triv"
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "x63_k_homogeneous_colouring",
+      "note": "Preserved exact statement/type; affected consumer rebuilt with the public colouring API."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X83.v",
+      "name": "x3_proper_colouring",
+      "note": "Preserved exact statement/type; affected consumer rebuilt with the public colouring API."
+    },
+    {
+      "path": "spectral-graph-theory/theories/conjectures/grounding_D5.v",
+      "name": "proper_colb",
+      "note": "Preserved exact statement/type; affected consumer rebuilt with the public colouring API."
+    },
+    {
+      "path": "spectral-graph-theory/theories/conjectures/grounding_D5.v",
+      "name": "csf_coeff",
+      "note": "Preserved exact statement/type; affected consumer rebuilt with the public colouring API."
+    },
+    {
+      "path": "spectral-graph-theory/theories/conjectures/grounding_D5.v",
+      "name": "same_csf",
+      "note": "Preserved exact statement/type; affected consumer rebuilt with the public colouring API."
+    },
+    {
+      "path": "spectral-graph-theory/theories/conjectures/implications_D5.v",
+      "name": "does_the_symmetric_chromatic_function_distinguish_tr_statement",
+      "note": "Preserved exact statement/type; affected consumer rebuilt with the public colouring API."
+    },
+    {
+      "path": "infinite-graph-theory/theories/conjectures/grounding_D4doa.v",
+      "name": "is_proper3",
+      "note": "Preserved exact statement/type; affected consumer rebuilt with the public colouring API."
+    },
+    {
+      "path": "infinite-graph-theory/theories/conjectures/grounding_D4doa.v",
+      "name": "n3colorings",
+      "note": "Preserved exact statement/type; affected consumer rebuilt with the public colouring API."
+    }
+  ],
+  "kernel_evidence": "Fresh exact ten-statement, eight-helper, count and chi_le_palette types; named assumptions and frozen/live dependencies; public client and D5/D4doa grounding rebuilds under coordination/evidence/C5-proper_colouring/."
+}

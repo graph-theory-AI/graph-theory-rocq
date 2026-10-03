@@ -59,7 +59,7 @@ Proof. by rewrite !card_prod card_bool !card_ord. Qed.
 
 Lemma triv_proper3 (c : {ffun triv -> 'I_3}) : is_proper3 c.
 Proof.
-apply/forallP => x; apply/forallP => y.
+apply/colourings.proper_colouringP => x y.
 by have -> : (x -- y) = false by [].
 Qed.
 

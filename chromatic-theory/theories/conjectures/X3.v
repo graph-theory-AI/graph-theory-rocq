@@ -7,6 +7,7 @@
     intentionally deferred. *)
 
 From Chromatic.conjectures Require Import U8.
+From GTBase Require Import colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -38,7 +39,7 @@ Definition x3_holes_of_consecutive_lengths (G : sgraph) (ell : nat) : Prop :=
     forall i : nat, 1 <= i -> i <= ell -> x3_has_hole_length G (t + i).
 
 Definition x3_proper_colouring (G : sgraph) (C : finType) (col : G -> C) : Prop :=
-  forall u v : G, u -- v -> col u != col v.
+  colourings.proper_colouring col.
 
 Definition x3_rainbow_hole_run
     (G : sgraph) (C : finType) (col : G -> C) (s : nat) : Prop :=
