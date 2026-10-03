@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py simple_path --details /tmp/migr
 - Canonical: `GTBase.walks_paths.seq_simple_path`.
 - Baseline: `95cba2c0a2a75104de2c8d0c29ee952da419b9c1`.
 - Scope: 4 helpers, 5 statements, 23 frozen objects, 35 recorded references.
-- Source checks: 177/177 pass; consistent.
+- Source checks: 175/175 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -21,6 +21,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py simple_path --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Hom.conjectures.U3.is_path`, `Cycle.conjectures.U6.is_path`, `Packing.conjectures.U9.spath`, `Extremal.conjectures.XE2.xe2_path_in_graph`.
+Excluded distinct variants: `Packing.conjectures.U9.spath`, `Extremal.conjectures.XE2.xe2_path_in_graph`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/edge_colourings.v#X14Legacy.andersen_rainbow_path_statement`, `graph-theory-misc/theories/migration/edge_colourings.v#X62Legacy.rainbow_paths_linear_edge_cover_statement`.
