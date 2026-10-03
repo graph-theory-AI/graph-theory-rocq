@@ -9011,8 +9011,7 @@
       "body_shape_hash": "1ddbe343f80f748764e7784f2c2bc4658f000de3cf91cd25c468483a52bb70a8",
       "declaration_hash": "605624c663539c1d088f5c0c373f715825d541adc21843e257d93aa5e6c6d9be",
       "direct_consumers": [
-        "Chromatic.conjectures.X3.x3_complement_image",
-        "Chromatic.conjectures.X3.x3_iso_closed"
+        "Chromatic.conjectures.X3.x3_complement_image"
       ],
       "kind": "Definition",
       "line": 81,
@@ -9027,17 +9026,13 @@
       "signature_shape_hash": "386157e12d686b4cdea1c7e7e1bddc5b3f28be1b17c3f1036579936afdc0bb30"
     },
     {
-      "body_hash": "cbd6acedefd3e3a5f91ddf745986dcb480a5ddf245e5262b30e64a5593c2115c",
-      "body_shape_hash": "680e9d77dcf932bc1c6fbe5e0cc080cdcfa02e7cfcb49159a0932e1a0eb13043",
-      "declaration_hash": "8769aa240f44a108629f9d7d37270d56d7fe055e7b769a81b1270d30a6d60aed",
-      "direct_consumers": [
-        "Chromatic.conjectures.X3.x3_hereditary_class"
-      ],
+      "body_hash": "7da67a1ae6a89d80e96163aec9edc1be6c7e10552813cac1f8c7d9137ea28bc6",
+      "body_shape_hash": "7da67a1ae6a89d80e96163aec9edc1be6c7e10552813cac1f8c7d9137ea28bc6",
+      "declaration_hash": "0479b6f6ca88ca41610f48c8380795ab844a8bfd051d2e482abb916e9eb2fd68",
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 83,
-      "local_dependencies": [
-        "x3_iso"
-      ],
+      "local_dependencies": [],
       "name": "x3_iso_closed",
       "normalized_name": "iso_closed",
       "package": "chromatic-theory",
@@ -9048,17 +9043,15 @@
       "signature_shape_hash": "d750cc9d66ea7da7a91d634301c0b5615a1530a58affa556151b6e7685b1b035"
     },
     {
-      "body_hash": "35cc5e41f53d2aab408f1f8363c21783f25ab2bdc63e49162300ffeacd8a6ae5",
-      "body_shape_hash": "b0e0b958543308084850d4b835944a7b31309a374d40477d6d1e95cd9ad9296d",
-      "declaration_hash": "7a8fdf0d6bcd2a0c511fdb4f147e54aa6bb40dfc265174ee95f6c059d9957400",
+      "body_hash": "1aba30dbd4d470f3cbf05f9f303e93bcc4110ca424729b77900f42fa16e68c64",
+      "body_shape_hash": "1aba30dbd4d470f3cbf05f9f303e93bcc4110ca424729b77900f42fa16e68c64",
+      "declaration_hash": "93cdd9bec37422b244025ed8615734b0597a4a821abbe359b84f870dd68b479d",
       "direct_consumers": [
         "Chromatic.conjectures.X3.hereditary_chi_bounded_not_polynomial_statement"
       ],
       "kind": "Definition",
       "line": 86,
-      "local_dependencies": [
-        "x3_iso_closed"
-      ],
+      "local_dependencies": [],
       "name": "x3_hereditary_class",
       "normalized_name": "hereditary_class",
       "package": "chromatic-theory",
@@ -49381,7 +49374,7 @@
         "Minor.conjectures.X220.x220_wall_rel"
       ],
       "kind": "Definition",
-      "line": 11,
+      "line": 12,
       "local_dependencies": [],
       "name": "x220_wall_r0",
       "normalized_name": "wall_r0",
@@ -49401,7 +49394,7 @@
         "Minor.conjectures.X220.x220_wall_sym"
       ],
       "kind": "Definition",
-      "line": 33,
+      "line": 34,
       "local_dependencies": [
         "x220_wall_r0"
       ],
@@ -49422,7 +49415,7 @@
         "Minor.conjectures.X220.x220_wall"
       ],
       "kind": "Lemma",
-      "line": 36,
+      "line": 37,
       "local_dependencies": [
         "x220_wall_rel"
       ],
@@ -49443,7 +49436,7 @@
         "Minor.conjectures.X220.x220_wall"
       ],
       "kind": "Lemma",
-      "line": 39,
+      "line": 40,
       "local_dependencies": [
         "x220_wall_rel"
       ],
@@ -49465,7 +49458,7 @@
         "Minor.conjectures.X220.four_family_free_logarithmic_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 45,
+      "line": 46,
       "local_dependencies": [
         "x220_wall_irrefl",
         "x220_wall_sym"
@@ -49487,7 +49480,7 @@
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 47,
+      "line": 48,
       "local_dependencies": [],
       "name": "x220_theta",
       "normalized_name": "theta",
@@ -49506,7 +49499,7 @@
         "Minor.conjectures.X220.x220_prism"
       ],
       "kind": "Definition",
-      "line": 58,
+      "line": 59,
       "local_dependencies": [],
       "name": "x220_prism3",
       "normalized_name": "prism3",
@@ -49525,7 +49518,7 @@
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 61,
+      "line": 62,
       "local_dependencies": [
         "x220_prism3"
       ],
@@ -49546,7 +49539,7 @@
         "Minor.conjectures.X220.x220_even_wheel_free"
       ],
       "kind": "Definition",
-      "line": 67,
+      "line": 68,
       "local_dependencies": [],
       "name": "x220_spokes",
       "normalized_name": "spokes",
@@ -49565,7 +49558,7 @@
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 77,
+      "line": 78,
       "local_dependencies": [
         "x220_spokes"
       ],
@@ -49587,7 +49580,7 @@
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 81,
+      "line": 82,
       "local_dependencies": [],
       "name": "x220_clique_free",
       "normalized_name": "clique_free",
@@ -49606,7 +49599,7 @@
         "Minor.conjectures.X220.triangle_s123_free_bounded_clique_width_statement"
       ],
       "kind": "Definition",
-      "line": 87,
+      "line": 88,
       "local_dependencies": [],
       "name": "x220_S123",
       "normalized_name": "S123",
@@ -49625,7 +49618,7 @@
         "Minor.conjectures.X220.bounded_tree_mu_polynomial_biclique_tree_alpha_statement"
       ],
       "kind": "Definition",
-      "line": 91,
+      "line": 92,
       "local_dependencies": [],
       "name": "x220_ibn",
       "normalized_name": "ibn",
@@ -49644,7 +49637,7 @@
         "Minor.conjectures.X220.x220_red_deg"
       ],
       "kind": "Definition",
-      "line": 99,
+      "line": 100,
       "local_dependencies": [],
       "name": "x220_red_pair",
       "normalized_name": "red_pair",
@@ -49663,7 +49656,7 @@
         "Minor.conjectures.X220.x220_twin_width_le"
       ],
       "kind": "Definition",
-      "line": 111,
+      "line": 112,
       "local_dependencies": [
         "x220_red_pair"
       ],
@@ -49684,7 +49677,7 @@
         "Minor.conjectures.X220.x220_twin_width_le"
       ],
       "kind": "Definition",
-      "line": 114,
+      "line": 115,
       "local_dependencies": [],
       "name": "x220_singletons",
       "normalized_name": "singletons",
@@ -49703,7 +49696,7 @@
         "Minor.conjectures.X220.x220_twin_width_le"
       ],
       "kind": "Definition",
-      "line": 116,
+      "line": 117,
       "local_dependencies": [],
       "name": "x220_merge",
       "normalized_name": "merge",
@@ -49723,7 +49716,7 @@
         "Minor.conjectures.X220.small_hereditary_class_bounded_twin_width_statement"
       ],
       "kind": "Definition",
-      "line": 119,
+      "line": 120,
       "local_dependencies": [
         "x220_merge",
         "x220_red_deg",
@@ -49739,14 +49732,12 @@
       "signature_shape_hash": "6c03c20bf4432115aae8c723d802f498bd04e76879cb88dab96ddf777060a7c0"
     },
     {
-      "body_hash": "101e5f6f5ee42a97c96555690fa08a124811185f8d874ab7723a54d40fbe7028",
-      "body_shape_hash": "101e5f6f5ee42a97c96555690fa08a124811185f8d874ab7723a54d40fbe7028",
-      "declaration_hash": "0fae9cb127ed70ed3866a48888f42394a3e8b5e4fda73fcc93d114971baf87e3",
-      "direct_consumers": [
-        "Minor.conjectures.X220.x220_hereditary_class"
-      ],
+      "body_hash": "73b7fc992b056660b6891a3410e2f4489a3d34dc2f9c021088da47a6b7975bdc",
+      "body_shape_hash": "73b7fc992b056660b6891a3410e2f4489a3d34dc2f9c021088da47a6b7975bdc",
+      "declaration_hash": "4353e2f6ff2bbb274d8ab265cd3735504e7ad7679779cc24ae09a14a8044bc20",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 127,
+      "line": 128,
       "local_dependencies": [],
       "name": "x220_iso_closed",
       "normalized_name": "iso_closed",
@@ -49758,17 +49749,15 @@
       "signature_shape_hash": "f0a8107f27fab631567a7c998294eb48cb9927e8f537ee34f52efa87aebac1c2"
     },
     {
-      "body_hash": "3252d2fdb23dc4325782b7137ce28f0739dd963dd3b42a9ffe4d1e81b978a919",
-      "body_shape_hash": "45a37122fa6626305368d47981378645586dfaee33da40b48a8ba91cab1bcaf5",
-      "declaration_hash": "60b31fbc3d42323487b11f4eab3298531f176633b0d3a7373ad7097b52cbbddf",
+      "body_hash": "6fe08c9e675afe04eb54656ceef9e4dffb91f09f892ae41584f01cbbe8cf755c",
+      "body_shape_hash": "6fe08c9e675afe04eb54656ceef9e4dffb91f09f892ae41584f01cbbe8cf755c",
+      "declaration_hash": "435b34a8ff07a377ecc60c92f939ecc317cde25f85c5d4632c18e5ac719b18a3",
       "direct_consumers": [
         "Minor.conjectures.X220.small_hereditary_class_bounded_twin_width_statement"
       ],
       "kind": "Definition",
-      "line": 140,
-      "local_dependencies": [
-        "x220_iso_closed"
-      ],
+      "line": 141,
+      "local_dependencies": [],
       "name": "x220_hereditary_class",
       "normalized_name": "hereditary_class",
       "package": "minor-theory",
@@ -49786,7 +49775,7 @@
         "Minor.conjectures.X220.x220_small_class"
       ],
       "kind": "Definition",
-      "line": 143,
+      "line": 144,
       "local_dependencies": [],
       "name": "x220_represents",
       "normalized_name": "represents",
@@ -49805,7 +49794,7 @@
         "Minor.conjectures.X220.small_hereditary_class_bounded_twin_width_statement"
       ],
       "kind": "Definition",
-      "line": 146,
+      "line": 147,
       "local_dependencies": [
         "x220_represents"
       ],
@@ -49826,7 +49815,7 @@
         "Minor.conjectures.X220.x220_shallow_minor"
       ],
       "kind": "Definition",
-      "line": 153,
+      "line": 154,
       "local_dependencies": [],
       "name": "x220_ball_in",
       "normalized_name": "ball_in",
@@ -49845,7 +49834,7 @@
         "Minor.conjectures.X220.x220_polynomial_expansion"
       ],
       "kind": "Definition",
-      "line": 167,
+      "line": 168,
       "local_dependencies": [
         "x220_ball_in"
       ],
@@ -49868,7 +49857,7 @@
         "Minor.conjectures.X220.x220_polynomial_expansion"
       ],
       "kind": "Definition",
-      "line": 174,
+      "line": 175,
       "local_dependencies": [],
       "name": "x220_poly_eval",
       "normalized_name": "poly_eval",
@@ -49887,7 +49876,7 @@
         "Minor.conjectures.X220.polynomial_expansion_bounded_twin_width_statement"
       ],
       "kind": "Definition",
-      "line": 177,
+      "line": 178,
       "local_dependencies": [
         "x220_poly_eval",
         "x220_shallow_minor"
@@ -49913,7 +49902,7 @@
         "Minor.conjectures.X220.x220_cw_wf"
       ],
       "kind": "Inductive",
-      "line": 183,
+      "line": 184,
       "local_dependencies": [],
       "name": "x220_cw_expr",
       "normalized_name": "cw_expr",
@@ -49933,7 +49922,7 @@
         "Minor.conjectures.X220.x220_cw_realises"
       ],
       "kind": "Fixpoint",
-      "line": 198,
+      "line": 199,
       "local_dependencies": [
         "x220_cw_expr"
       ],
@@ -49954,7 +49943,7 @@
         "Minor.conjectures.X220.x220_cw_realises"
       ],
       "kind": "Fixpoint",
-      "line": 206,
+      "line": 207,
       "local_dependencies": [
         "x220_cw_expr",
         "x220_cw_labels"
@@ -49976,7 +49965,7 @@
         "Minor.conjectures.X220.x220_clique_width_le"
       ],
       "kind": "Fixpoint",
-      "line": 223,
+      "line": 224,
       "local_dependencies": [
         "x220_cw_expr"
       ],
@@ -49997,7 +49986,7 @@
         "Minor.conjectures.X220.x220_clique_width_le"
       ],
       "kind": "Definition",
-      "line": 231,
+      "line": 232,
       "local_dependencies": [
         "x220_cw_edge",
         "x220_cw_expr",
@@ -50020,7 +50009,7 @@
         "Minor.conjectures.X220.triangle_s123_free_bounded_clique_width_statement"
       ],
       "kind": "Definition",
-      "line": 238,
+      "line": 239,
       "local_dependencies": [
         "x220_cw_expr",
         "x220_cw_realises",
@@ -51420,14 +51409,14 @@
       "signature_shape_hash": "ed67660129784c837b5ba4a9e21be61bc0fd5c32db42e4be3039ebe804be72f6"
     },
     {
-      "body_hash": "d600a03c17a34eb521b2a592117fa1c6a3c74f076915922332c6c94d433b549c",
-      "body_shape_hash": "d600a03c17a34eb521b2a592117fa1c6a3c74f076915922332c6c94d433b549c",
-      "declaration_hash": "40a58469551c7f63114113529e9a9de393fad1bfdee69968f41bc90ecb113fd0",
+      "body_hash": "a4b2304a7634a4cf68a8147cc5ab094be316f260e8f9d76eca7fd9b6c88a32f5",
+      "body_shape_hash": "a4b2304a7634a4cf68a8147cc5ab094be316f260e8f9d76eca7fd9b6c88a32f5",
+      "declaration_hash": "ee95b671509b86f2b08b984068ca69ea23e02fe214da4bc8b672e561cc63d5f5",
       "direct_consumers": [
         "Packing.conjectures.X155.identifying_code_vc_dimension_approximation_dichotomy_statement"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x155_hereditary_class",
       "normalized_name": "hereditary_class",
@@ -51447,7 +51436,7 @@
         "Packing.conjectures.X155.x155_shatters"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [],
       "name": "x155_closed_neighbourhood",
       "normalized_name": "closed_neighbourhood",
@@ -51468,7 +51457,7 @@
         "Packing.conjectures.X155.x155_identifying_code_number_at_most"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 17,
       "local_dependencies": [
         "x155_closed_neighbourhood"
       ],
@@ -51490,7 +51479,7 @@
         "Packing.conjectures.X155.x155_polynomial_lower_bound"
       ],
       "kind": "Definition",
-      "line": 22,
+      "line": 23,
       "local_dependencies": [
         "x155_identifying_code"
       ],
@@ -51511,7 +51500,7 @@
         "Packing.conjectures.X155.x155_constant_factor_approximation_with"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 26,
       "local_dependencies": [
         "x155_identifying_code"
       ],
@@ -51532,7 +51521,7 @@
         "Packing.conjectures.X155.x155_vc_dimension_at_most"
       ],
       "kind": "Definition",
-      "line": 28,
+      "line": 29,
       "local_dependencies": [
         "x155_closed_neighbourhood"
       ],
@@ -51551,7 +51540,7 @@
       "declaration_hash": "afc1325a6749dfb7b0f0248a04cf57e195423442cb5cb58d4195297ae6a1f12c",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 33,
+      "line": 34,
       "local_dependencies": [
         "x155_shatters"
       ],
@@ -51572,7 +51561,7 @@
         "Packing.conjectures.X155.identifying_code_vc_dimension_approximation_dichotomy_statement"
       ],
       "kind": "Definition",
-      "line": 36,
+      "line": 37,
       "local_dependencies": [
         "x155_identifying_code_number_at_least"
       ],
@@ -51593,7 +51582,7 @@
         "Packing.conjectures.X155.identifying_code_vc_dimension_approximation_dichotomy_statement"
       ],
       "kind": "Definition",
-      "line": 41,
+      "line": 42,
       "local_dependencies": [
         "x155_identifying_code_number_at_least"
       ],
@@ -51615,7 +51604,7 @@
         "Packing.conjectures.X155.x155_log_APX_hard"
       ],
       "kind": "Definition",
-      "line": 48,
+      "line": 49,
       "local_dependencies": [
         "x155_identifying_code",
         "x155_identifying_code_number_at_most"
@@ -51637,7 +51626,7 @@
         "Packing.conjectures.X155.identifying_code_vc_dimension_approximation_dichotomy_statement"
       ],
       "kind": "Definition",
-      "line": 58,
+      "line": 59,
       "local_dependencies": [
         "x155_constant_factor_approximation_with"
       ],
@@ -51658,7 +51647,7 @@
         "Packing.conjectures.X155.identifying_code_vc_dimension_approximation_dichotomy_statement"
       ],
       "kind": "Definition",
-      "line": 61,
+      "line": 62,
       "local_dependencies": [
         "x155_constant_factor_approximation_with"
       ],

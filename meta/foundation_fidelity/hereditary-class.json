@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "family": "hereditary-class",
+  "modules": {
+    "GTBase.graph_classes": {
+      "path": "base/theories/graph_classes.v",
+      "overrides": {
+        "iso_closed": {
+          "verdict": "FAITHFUL",
+          "note": "Closure of an arbitrary Prop-valued simple-graph class under upstream diso witnesses."
+        },
+        "induced_closed": {
+          "verdict": "FAITHFUL",
+          "note": "Closure under every literal induced vertex subset, including the empty subset; no isomorphism premise added."
+        },
+        "hereditary_class": {
+          "verdict": "FAITHFUL",
+          "note": "Explicit conjunction of iso_closed and induced_closed; the induced-only legacy variant does not use this stronger interface."
+        }
+      },
+      "machine_evidence": [
+        "iso_closed_transport",
+        "iso_closed_ext",
+        "induced_closed_ext",
+        "hereditary_class_ext",
+        "hereditary_class_iso",
+        "hereditary_class_induced",
+        "hereditary_class_intro",
+        "induced_closed_empty",
+        "hereditary_class_empty",
+        "hereditary_class_all",
+        "hereditary_class_inter",
+        "hereditary_class_union",
+        "hereditary_class_order_le",
+        "not_induced_closed_positive_exact_order"
+      ]
+    }
+  }
+}
