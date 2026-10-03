@@ -21,6 +21,10 @@ particular it does not certify Section scaffolding or compiled dependency closur
 family-specific Section and kernel dependency evidence remains required.
 Statement objects may select corpus "opg" or "v2", or explicitly set
 "non_corpus": true. Unmarked statements must resolve uniquely in the manifests.
+An optional "additional_statements" list explicitly classifies reached, closed
+non-corpus Props whose names are not discovered automatically. Enrollment is
+restricted to unambiguous top-level nullary Definitions, with ordinary frozen
+body, complete-iff and zero-assumption checks still required.
 Every occurrence of a complete row requires a statement role and an exact iff
 probe, independently of its label. New reused nonstatement objects use the
 "historical" role; the existing named historical roles remain supported aliases.
@@ -221,8 +225,143 @@ def module_for_path(path: str, namespaces: dict | None = None) -> str:
     return namespaces[package] + "." + relative[:-2].replace("/", ".")
 
 
-def statement_dependencies(base: str, sources: set[str], rows: dict, *,
-                           include_public: bool = False) -> tuple[set[str], set[str]]:
+def additional_statement_names(spec: dict) -> set[str]:
+    names = spec.get("additional_statements", [])
+    if (not isinstance(names, list)
+            or any(not isinstance(name, str)
+                   or not re.fullmatch(rf"{IDENT}(?:\.{IDENT})+", name) for name in names)
+            or len(names) != len(set(names))):
+        raise ValueError("additional_statements must be a list of unique qualified names")
+    return set(names)
+
+
+def statement_ownership_text(source: str) -> str:
+    """Mask nested comments and Rocq doubled-quote strings without moving offsets.
+
+    This narrow enrollment lexer intentionally does not change ordinary family
+    parsing. Joint scanning matters: comment delimiters inside strings must not
+    hide real scope commands, and scope words in strings must not close scopes.
+    """
+    result = list(source)
+    depth, quoted, index = 0, False, 0
+    while index < len(source):
+        width = 1
+        if depth:
+            if source.startswith("(*", index):
+                depth += 1
+                width = 2
+            elif source.startswith("*)", index):
+                depth -= 1
+                width = 2
+        elif quoted:
+            if source.startswith('""', index):
+                width = 2
+            elif source[index] == '"':
+                quoted = False
+        elif source.startswith("(*", index):
+            depth = 1
+            width = 2
+        elif source[index] == '"':
+            quoted = True
+        elif source.startswith("*)", index):
+            raise ValueError("additional statement has an unmatched comment delimiter")
+        else:
+            index += 1
+            continue
+        for offset in range(index, index + width):
+            if source[offset] != "\n":
+                result[offset] = " "
+        index += width
+    if depth or quoted:
+        raise ValueError("additional statement has an unterminated comment or string")
+    return "".join(result)
+
+
+def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) -> set[str]:
+    """Explicitly reviewed classification, never inferred from a Prop's meaning.
+
+    The initial format deliberately rejects Section/module parameters and
+    inferred signatures. The existing source comparison binds the complete
+    frozen body to this immutable declaration; kernel mode checks @ endpoints.
+    """
+    names = additional_statement_names(spec)
+    if not names:
+        return names
+    base = spec["baseline_commit"]
+    if (not re.fullmatch(r"[0-9a-f]{40}", base)
+            or INV.source_git(ROOT, "cat-file", "-t", base).strip() != "commit"):
+        raise ValueError("additional statements require an immutable full baseline commit")
+    owners = {namespace: package for package, namespace in INV.repository_namespaces().items()}
+    # corpus_registry also retains the historic graph-theory-base alias.
+    owners.update(GTBase="base", Atlas="atlas", ClassicalLemmas="classical-lemmas")
+    for qualified in sorted(names):
+        namespace, *parts, name = qualified.split(".")
+        package = owners.get(namespace)
+        if package is None or not parts or parts[0] != "conjectures":
+            raise ValueError(f"{qualified}: additional statement needs a known conjecture module")
+        path = package + "/theories/" + "/".join(parts) + ".v"
+        project_path = package + "/_CoqProject"
+        if rows_base.get(name) or rows_now.get(name):
+            raise ValueError(f"{qualified}: additional statement must be outside both corpus manifests")
+        objects = [obj for obj in spec["frozen"] if obj.get("qualified") == qualified]
+        if (len(objects) != 1 or objects[0].get("kind") != "statement"
+                or objects[0].get("non_corpus") is not True or "corpus" in objects[0]
+                or objects[0].get("path") != path or objects[0].get("name") != name
+                or objects[0].get("commit", base) != base
+                or not objects[0].get("certificate")):
+            raise ValueError(f"{qualified}: additional statement needs one exact non_corpus statement mapping")
+        for commit in (base, None):
+            if commit is not None:
+                _, source = INV.regular_source_blob(ROOT, commit, path)
+                _, project = INV.regular_source_blob(ROOT, commit, project_path)
+            else:
+                for relative in (path, project_path):
+                    file = ROOT / relative
+                    if not file.is_file() or file.resolve() != ROOT.resolve() / relative:
+                        raise ValueError(f"{qualified}: current source/project missing or aliased")
+                source, project = source_at(None, path), source_at(None, project_path)
+            if INV.project_module(path, project) + "." + name != qualified:
+                raise ValueError(f"{qualified}: additional statement ownership mismatch")
+            clean = statement_ownership_text(source)
+            matches = [match for match in DECL_RE.finditer(clean) if match.group(1) == name]
+            if (len(matches) != 1 or not re.match(
+                    rf"\s*Definition\s+{re.escape(name)}\s*:\s*Prop\s*:=",
+                    clean[matches[0].start():])):
+                raise ValueError(f"{qualified}: additional statement requires a nullary Definition : Prop")
+            prefix, stack = clean[:matches[0].start()], []
+            if re.search(r"\bLoad\b", prefix):
+                raise ValueError(f"{qualified}: additional statement cannot follow source-splicing Load")
+            # Reserved scope keywords may follow Time/Timeout/Redirect or another
+            # command on the same line. Scan conservatively: ambiguous command
+            # text must fail closed rather than hide an opener behind a wrapper.
+            scope_keywords = re.compile(r"\b(?:Module|Section|End)\b")
+            scopes = re.compile(rf"(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})(?![\w'])")
+            command_start = 0
+            for keyword in scope_keywords.finditer(prefix):
+                scope = scopes.match(prefix, keyword.start())
+                if scope is None:
+                    raise ValueError(f"{qualified}: unsupported Module/Section identifier syntax")
+                while INV.sentence_end(prefix, command_start) <= scope.start():
+                    command_start = INV.sentence_end(prefix, command_start)
+                if prefix[command_start:scope.start()].strip():
+                    raise ValueError(f"{qualified}: additional statement must be outside Module/Section scopes; wrapped scope commands are unsupported")
+                kind, label = scope.groups()
+                if kind == "End":
+                    if not stack or stack.pop() != label:
+                        raise ValueError(f"{qualified}: unsupported scope structure")
+                else:
+                    tail = prefix[scope.end():INV.sentence_end(prefix, scope.end())]
+                    if not (kind.startswith("Module") and re.fullmatch(
+                            rf"\s*:=\s*{IDENT}(?:\.{IDENT})*\s*\.\s*", tail)):
+                        stack.append(label)
+            if stack:
+                raise ValueError(f"{qualified}: additional statement must be outside Module/Section scopes")
+    return names
+
+
+def statement_dependencies(base: str | None, sources: set[str], rows: dict, *,
+                           include_public: bool = False,
+                           additional_statements: set[str] = frozenset()) -> tuple[set[str], set[str]]:
     """Discover baseline statement consumers independently of the frozen list.
 
     Read build-listed conjecture declarations, resolve same-file names first,
@@ -236,7 +375,8 @@ def statement_dependencies(base: str, sources: set[str], rows: dict, *,
     declaration bodies, not proof terms or every internal module, and does not
     enroll those nodes as sources or add them to the helper debt inventory.
     """
-    paths = git("ls-tree", "-r", "--name-only", base).splitlines()
+    paths = (git("ls-tree", "-r", "--name-only", base).splitlines() if base is not None
+             else sorted(set(git("ls-files", "--cached", "--others", "--exclude-standard").splitlines())))
     projects, nodes, node_packages, short_names = {}, {}, {}, defaultdict(set)
     for path in paths:
         public = public_repository_path(path)
@@ -248,13 +388,16 @@ def statement_dependencies(base: str, sources: set[str], rows: dict, *,
         if package not in projects:
             project_path = package + "/_CoqProject"
             project = (INV.regular_source_blob(ROOT, base, project_path)[1]
-                       if include_public and public else source_at(base, project_path))
+                       if include_public and public and base is not None else source_at(base, project_path))
             projects[package] = INV.project_sources(project)[0]
         if path.split("/", 1)[1] not in projects[package]:
             continue
         if public and include_public:
-            INV.regular_source_blob(ROOT, base, path)
-            _, project = INV.regular_source_blob(ROOT, base, package + '/_CoqProject')
+            if base is not None:
+                INV.regular_source_blob(ROOT, base, path)
+                _, project = INV.regular_source_blob(ROOT, base, package + '/_CoqProject')
+            else:
+                project = source_at(None, package + '/_CoqProject')
             module = INV.project_module(path, project)
         else:
             module = module_for_path(path)
@@ -284,10 +427,13 @@ def statement_dependencies(base: str, sources: set[str], rows: dict, *,
         for consumer in reverse[pending.pop()] - reached:
             reached.add(consumer)
             pending.append(consumer)
+    if additional_statements & sources or additional_statements - (reached & set(nodes)):
+        raise ValueError("additional statements must be reached from migrated sources and cannot be source helpers")
     statements = {name for name in reached if name in nodes and
             (name.rsplit(".", 1)[-1].endswith("_statement") or
              any(row.get("repo") == node_packages[name]
                  for row in rows.get(name.rsplit(".", 1)[-1], [])))}
+    statements.update(additional_statements)
     ancestors, pending = set(statements), list(statements)
     while pending:
         for dependency in forward[pending.pop()] - ancestors:
@@ -342,11 +488,18 @@ def statement_obligations(spec: dict, *, expected_statements: set[str] | None = 
         rows_base, _ = manifest_rows(base)
     if rows_now is None:
         rows_now, _ = manifest_rows(None)
+    additional = validate_additional_statements(spec, rows_base, rows_now)
     if expected_statements is None:
         entry = load_library_registry(ROOT)["primitives"].get(spec["family"], {})
+        sources = migrated_registry_sources(entry)
         expected_statements, _ = statement_dependencies(
-            base, migrated_registry_sources(entry), rows_base,
-            include_public=bool(entry.get("repository_sources")))
+            base, sources, rows_base,
+            include_public=bool(entry.get("repository_sources")),
+            additional_statements=additional)
+        if additional:
+            statement_dependencies(None, sources, rows_now,
+                                   include_public=bool(entry.get("repository_sources")),
+                                   additional_statements=additional)
     objects, errors = [], []
     for obj in spec["frozen"]:
         identity = module_for_path(obj["path"], spec["namespaces"]) + "." + obj["name"]
@@ -411,6 +564,9 @@ def check_kernel(spec: dict) -> list[str]:
         body = ["Require " + module + "." for module in imports]
         for obj in objects:
             frozen = module_for_path(obj["frozen_path"], spec["namespaces"]) + "." + obj["frozen"]
+            if obj["qualified"] in additional_statement_names(spec):
+                body.append(f"Check (@{frozen} : Prop).")
+                body.append(f"Check (@{obj['qualified']} : Prop).")
             body.append(f"Check ({obj['certificate']} : {frozen} <-> {obj['qualified']}).")
         body.extend(f"Print Assumptions {name}." for name in sorted(certificates[package]))
         with tempfile.TemporaryDirectory(prefix="migration-exact-type-") as tmp:
@@ -459,6 +615,9 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
 
     registry = load_library_registry(ROOT, allow_missing_reports=allow_missing_reports)["primitives"]
     entry = registry.get(spec["family"], {})
+    rows_base, legs_base = manifest_rows(base)
+    rows_now, legs_now = manifest_rows(None)
+    additional = validate_additional_statements(spec, rows_base, rows_now)
     repository_sources = entry.get("repository_sources", {})
     INV.repository_source_records(ROOT, entry)
     expected_sources = migrated_registry_sources(entry)
@@ -565,10 +724,13 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     chain_names = {o["name"] for o in spec["frozen"] if o["kind"] == "chain"}
     statements = []
     computed_chain: set[str] = set()
-    rows_base, legs_base = manifest_rows(base)
-    rows_now, legs_now = manifest_rows(None)
     expected_statements, reaching = statement_dependencies(
-        base, expected_sources, rows_base, include_public=bool(repository_sources))
+        base, expected_sources, rows_base, include_public=bool(repository_sources),
+        additional_statements=additional)
+    if additional:
+        statement_dependencies(None, expected_sources, rows_now,
+                               include_public=bool(repository_sources),
+                               additional_statements=additional)
     _, role_errors = statement_obligations(
         spec, expected_statements=expected_statements, rows_base=rows_base, rows_now=rows_now)
     for error in role_errors:
@@ -577,10 +739,11 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     check(expected_statements == supplied_statements,
           "affected statement coverage matches baseline dependencies",
           f"missing={sorted(expected_statements - supplied_statements)}; extra={sorted(supplied_statements - expected_statements)}")
-    if repository_sources:
+    if repository_sources or additional:
         frozen_chain = {obj['qualified'] for obj in spec['frozen'] if obj['kind'] in {'source', 'chain'}}
         missing_chain = reaching - expected_statements - frozen_chain
-        check(not missing_chain, "public source paths have complete frozen intermediary coverage",
+        label = ("public source paths" if repository_sources else "additional statement paths")
+        check(not missing_chain, label + " have complete frozen intermediary coverage",
               f"missing={sorted(missing_chain)}")
     for obj in (o for o in spec["frozen"] if o["kind"] == "statement"):
         base_src, live_src = source_at(base, obj["path"]), source_at(None, obj["path"])
