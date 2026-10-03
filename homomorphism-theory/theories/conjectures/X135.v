@@ -15,7 +15,7 @@ Definition x135_hom_count (G H : sgraph) : nat :=
       [forall x : G, [forall y : G, (x -- y) ==> (f x -- f y)]]]|.
 
 Definition x135_min_degree_at_least (G : sgraph) (delta : nat) : Prop :=
-  forall v : G, delta <= #|N(v)|.
+  min_degree_at_least G delta.
 
 Definition x135_power_denominator (delta : nat) : nat :=
   2 * delta * delta.+1.
