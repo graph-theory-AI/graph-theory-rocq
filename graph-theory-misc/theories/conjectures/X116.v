@@ -25,10 +25,7 @@ Definition x116_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.
 
 Definition x116_ST_path (G : sgraph) (S T : {set G}) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q => x \in S /\ last x q \in T /\ uniq p /\ path (--) x q
-  end.
+  seq_set_path S T p.
 
 (** Two paths are at distance at least [d] iff, in addition to being
     vertex-disjoint, the closed [d.-1]-ball around one avoids the vertex set of

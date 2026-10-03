@@ -19,10 +19,7 @@ Definition x26_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.
 
 Definition x26_xy_path (G : sgraph) (X Y : {set G}) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q => x \in X /\ last x q \in Y /\ uniq p /\ path (--) x q
-  end.
+  seq_set_path X Y p.
 
 Definition x26_pairwise_distant_paths
     (G : sgraph) (d : nat) (paths : seq (seq G)) : Prop :=

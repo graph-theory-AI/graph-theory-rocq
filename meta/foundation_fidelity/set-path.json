@@ -1,0 +1,30 @@
+{
+ "schema_version": 1,
+ "family": "set-path",
+ "modules": {
+  "GTBase.walks_paths": {
+   "path": "base/theories/walks_paths.v",
+   "overrides": {
+    "seq_set_path": {
+     "verdict": "FAITHFUL",
+     "note": "seq_set_path X Y p: p is a nonempty vertex sequence whose first entry is in X and last entry in Y, without repeated entries, with consecutive entries adjacent. The empty sequence is never a path; [:: x] is one exactly when x \\in X :&: Y; empty endpoint sets admit none; no disjointness of X and Y, distinct-endpoint, length or internal-avoidance premise; on a tail it is upstream upath after splitting off the head, and irredundant packaged paths give one."
+    }
+   },
+   "machine_evidence": [
+    "seq_set_path_nil",
+    "seq_set_path_cons",
+    "seq_set_path_seq1",
+    "seq_set_path_upath",
+    "seq_set_path_nodes",
+    "seq_set_path_uniq",
+    "seq_set_path_set0l",
+    "seq_set_path_set0r",
+    "seq_set_path_repeat",
+    "seq_set_path_sub",
+    "seq_set_path_consecutive",
+    "seq_set_path_size",
+    "seq_set_path_rev"
+   ]
+  }
+ }
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "family": "set-path",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_set_path",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "xy_path",
+      "ST_path"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.X116.x116_ST_path",
+      "GTMisc.conjectures.X39.x39_xy_path",
+      "Minor.conjectures.X11.x11_xy_path",
+      "Packing.conjectures.X26.x26_xy_path"
+    ],
+    "consumers_remaining": 8,
+    "relation": "definitional equality: every helper body is the body of seq_set_path X Y p (X116 with its set parameters named S T): a nonempty sequence whose first entry is in X, last entry in Y, without repetition, consecutive entries adjacent",
+    "semantic_classes": {
+      "nonempty-simple-set-to-set": {
+        "count": 4,
+        "verdict": "equivalent",
+        "certificate": "GTBase.walks_paths.seq_set_path_upath",
+        "note": "X39, X11, X26 (xy_path) and X116 (ST_path, renamed parameters): match p with [::] => False | x :: q => x \\in X /\\ last x q \\in Y /\\ uniq p /\\ path (--) x q end, convertible to seq_set_path; singleton exactly in X :&: Y, no disjointness, distinct-endpoint, length or internal-avoidance guard."
+      }
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.set_path.coarse_menger_ball_separator_statement_compat",
+      "GTMisc.migration.set_path.coarse_menger_ball_separator_statement_original_compat",
+      "GTMisc.migration.set_path.coarse_menger_distance_two_separator_statement_compat",
+      "GTMisc.migration.set_path.coarse_menger_distance_two_separator_statement_original_compat",
+      "GTMisc.migration.set_path.coarse_menger_paths_bounded_separator_statement_compat",
+      "GTMisc.migration.set_path.coarse_menger_paths_bounded_separator_statement_original_compat",
+      "GTMisc.migration.set_path.x116_ST_path_compat",
+      "GTMisc.migration.set_path.x116_has_k_distant_ST_paths_compat",
+      "GTMisc.migration.set_path.x116_has_k_distant_ST_paths_original_compat",
+      "GTMisc.migration.set_path.x39_has_k_distant_xy_paths_compat",
+      "GTMisc.migration.set_path.x39_has_k_distant_xy_paths_original_compat",
+      "GTMisc.migration.set_path.x39_separates_xy_compat",
+      "GTMisc.migration.set_path.x39_separates_xy_original_compat",
+      "GTMisc.migration.set_path.x39_xy_path_compat",
+      "Minor.migration.set_path.induced_menger_anticomplete_paths_statement_compat",
+      "Minor.migration.set_path.induced_menger_anticomplete_paths_statement_original_compat",
+      "Minor.migration.set_path.x11_has_k_anticomplete_xy_paths_compat",
+      "Minor.migration.set_path.x11_has_k_anticomplete_xy_paths_original_compat",
+      "Minor.migration.set_path.x11_no_xy_path_after_closed_neighbourhood_compat",
+      "Minor.migration.set_path.x11_no_xy_path_after_closed_neighbourhood_original_compat",
+      "Minor.migration.set_path.x11_xy_path_compat",
+      "Packing.migration.set_path.bounded_degree_distant_induced_menger_statement_compat",
+      "Packing.migration.set_path.bounded_degree_distant_induced_menger_statement_original_compat",
+      "Packing.migration.set_path.x26_has_k_distant_xy_paths_compat",
+      "Packing.migration.set_path.x26_has_k_distant_xy_paths_original_compat",
+      "Packing.migration.set_path.x26_separates_xy_compat",
+      "Packing.migration.set_path.x26_separates_xy_original_compat",
+      "Packing.migration.set_path.x26_xy_path_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.seq_set_path_nil",
+      "GTBase.walks_paths.seq_set_path_cons",
+      "GTBase.walks_paths.seq_set_path_seq1",
+      "GTBase.walks_paths.seq_set_path_upath",
+      "GTBase.walks_paths.seq_set_path_nodes",
+      "GTBase.walks_paths.seq_set_path_uniq",
+      "GTBase.walks_paths.seq_set_path_set0l",
+      "GTBase.walks_paths.seq_set_path_set0r",
+      "GTBase.walks_paths.seq_set_path_repeat",
+      "GTBase.walks_paths.seq_set_path_sub",
+      "GTBase.walks_paths.seq_set_path_consecutive",
+      "GTBase.walks_paths.seq_set_path_size",
+      "GTBase.walks_paths.seq_set_path_rev"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.path"
+      ],
+      "result": "thin-adapter",
+      "candidate": "GraphTheory.digraph.upath",
+      "note": "coq-graph-theory's upath x y q := uniq (x :: q) && pathp x y q is the simple path on a TAIL q from a given vertex x; packaged Path x y has vertex list nodes p = x :: val p and is simple when irred p. The corpus helpers take a whole nonempty sequence and endpoint SETS, so the canonical is GTBase.walks_paths.seq_set_path X Y p over a relType, with seq_set_path_upath stating seq_set_path X Y (x :: q) <-> [/\\ x \\in X, last x q \\in Y & upath x (last x q) q] and seq_set_path_nodes for irredundant packaged paths. Genuine whole-sequence paths (X126, X14, X23, X178), endpoint-tail simple paths, empty-allowed Hom paths, U9 spath (no uniqueness), multigraph and directed path contracts are separate families and are not claimed. Legacy bodies and per-row certificates: meta/migration_reports/set_path.md.",
+      "audited_at": "2026-10-02"
+    },
+    "migration_report": "meta/migration_reports/set_path.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/set_path.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/set-path.json"
+  }
+}
