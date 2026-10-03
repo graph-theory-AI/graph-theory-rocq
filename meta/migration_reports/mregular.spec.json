@@ -221,7 +221,9 @@
       "non_corpus": true
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "cycle-theory/theories/migration/petersen.v#U10Legacy.petersen_coloring_statement": "A24 snapshot: A24 froze the Petersen-colouring row over its own frozen edge interface (Pedge, Padj) but kept the live cubic_bridgeless of this family. Kept unchanged; the complete row is Cycle.migration.petersen.U10Original.petersen_coloring_statement, certified by petersen_coloring_statement_original_compat, which composes this family's frozen U10Legacy.cubic_bridgeless and reuses its row certificate."
+  },
   "cross_module_consumers": [
     {
       "path": "chromatic-theory/theories/conjectures/grounding_U5.v",

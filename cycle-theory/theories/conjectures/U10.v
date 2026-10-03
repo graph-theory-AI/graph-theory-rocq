@@ -47,6 +47,7 @@
 
 From GraphTheory Require Import mgraph sgraph.
 From GTBase Require Import base.
+From GTBase Require Import petersen.
 From Cycle.foundations Require Import connectivity.
 From Cycle.conjectures Require Import U6.
 
@@ -127,22 +128,24 @@ Definition the_berge_fulkerson_statement : Prop :=
 
 (** *** THE Petersen graph as the Kneser graph KG(5,2). *)
 
+(** Since the A24 library migration [petersenV], [padj] and [petersen] are the
+    Kneser view of [GTBase.petersen] (the same subtype and disjointness); the
+    original definitions and proofs are frozen in [Cycle.migration.petersen].
+    [Pedge], [psupp] and [Padj] below are unchanged. *)
+
 (** Vertices: the 2-element subsets of a 5-element set (exactly 10 of them). *)
-Definition petersenV : finType := {x : {set 'I_5} | #|x| == 2}.
+Definition petersenV : finType := kneser52V.
 
 (** Adjacency: two 2-subsets are adjacent iff they are DISJOINT. *)
-Definition padj (x y : petersenV) : bool := [disjoint val x & val y].
+Definition padj (x y : petersenV) : bool := kneser52_adj x y.
 
 Lemma padj_sym : symmetric padj.
-Proof. by move=> x y; rewrite /padj disjoint_sym. Qed.
+Proof. exact: kneser52_adj_sym. Qed.
 
 Lemma padj_irrefl : irreflexive padj.
-Proof.
-move=> x; apply/negP; rewrite /padj -setI_eq0 setIid => /eqP Hx.
-by move: (valP x); rewrite Hx cards0.
-Qed.
+Proof. exact: kneser52_adj_irrefl. Qed.
 
-Definition petersen : sgraph := SGraph padj_sym padj_irrefl.
+Definition petersen : sgraph := petersen_kneser.
 
 (** *** Edges of the Petersen graph, and edge-adjacency. *)
 

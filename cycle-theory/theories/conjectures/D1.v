@@ -46,6 +46,7 @@
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import mgraph sgraph treewidth.
 From GTBase Require Import base.
+From GTBase Require Import petersen.
 From Cycle.foundations Require Export connectivity.
 From mathcomp Require Import all_algebra all_fingroup.
 
@@ -320,21 +321,21 @@ Definition mg_minor (G : mgraph) (H : sgraph) : Prop :=
            ((source e \in phi y) && (target e \in phi x)))].
 
 (** The Petersen graph on [ 'I_10 ]: outer 5-cycle [0..4], spokes [i ~ i+5],
-    inner pentagram on [5..9]. *)
+    inner pentagram on [5..9].  Since the A24 library migration these are the
+    ordinal view of [GTBase.petersen] (the same literal table and relation); the
+    original definitions and proofs are frozen in [Cycle.migration.petersen]. *)
 Definition pedges : seq (nat * nat) :=
-  [:: (0,1); (1,2); (2,3); (3,4); (4,0);
-      (0,5); (1,6); (2,7); (3,8); (4,9);
-      (5,7); (7,9); (9,6); (6,8); (8,5) ]%N.
-Definition pconn (a b : nat) : bool := ((a, b) \in pedges) || ((b, a) \in pedges).
-Definition padj (x y : 'I_10) : bool := (x != y) && pconn (val x) (val y).
+  petersen_edge_table.
+Definition pconn (a b : nat) : bool := petersen_conn a b.
+Definition padj (x y : 'I_10) : bool := petersen_ord_adj x y.
 
 Lemma padj_sym : symmetric padj.
-Proof. by move=> x y; rewrite /padj /pconn eq_sym orbC. Qed.
+Proof. exact: petersen_ord_adj_sym. Qed.
 
 Lemma padj_irrefl : irreflexive padj.
-Proof. by move=> x; rewrite /padj eqxx. Qed.
+Proof. exact: petersen_ord_adj_irrefl. Qed.
 
-Definition petersen : sgraph := SGraph padj_sym padj_irrefl.
+Definition petersen : sgraph := petersen_ord.
 
 (** ** Row 6 — Tutte's 4-flow conjecture *)
 (** Corpus row: opg:4_flow_conjecture
