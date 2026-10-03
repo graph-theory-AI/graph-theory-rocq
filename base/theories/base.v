@@ -59,7 +59,7 @@
     [kconnected] is also available), [k_degenerate]/[k_degenerate_on], [average_degree_geq],
     [is_hom]/[homs_to]/[is_core], [cartesian_product], [tensor_product],
     [graph_power], [subdivision], [frac_power], [wagner_planar], [minor_card],
-    [mgraph] notation, [loopless], [line_graph], [total_graph],
+    [mgraph] notation, [loopless], [mregular]/[mcubic]/[loopless_cubic], [line_graph], [total_graph],
     [chromatic_index] (χ'), [total_chromatic_number] (χ''), [edge_colourable],
     [total_colourable], [mDelta], [uwalk], [list_colourable]/[list_colourable_on],
     [choosable], [is_choice_number].
@@ -458,6 +458,50 @@ Definition total_colourable (G : mgraph) (k : nat) : Prop := total_chromatic_num
 (** Multigraph maximum degree (parallel edges counted) — distinct from the sgraph [Delta].
     Promoted from chromatic-theory U4 ∩ U5. *)
 Definition mDelta (G : mgraph) : nat := \max_(v : G) #|edges_at v|.
+
+(** Multigraph INCIDENCE regularity: every vertex lies on exactly [r] edges, counted by incidence
+    ([#|edges_at v|]), so a loop at [v] counts once and parallel edges count separately.  [mcubic G] is
+    the case [r = 3] and carries no loopless guard: three loops at one vertex form an [mcubic] graph.
+    [loopless_cubic G] adds the guard.  Under it, incidence degree equals the arc-end degree that counts a
+    loop twice (Cycle's [mdeg], via [Cycle.foundations.connectivity.mdeg_loopless]); that is how the guarded
+    Cycle contract is bridged, without a Cycle import here.  A multigraph without vertices is regular for
+    every [r] ([mregular_void]).  Registry: meta/library_primitives/multigraph-regularity.json (A13). *)
+Definition mregular (G : mgraph) (r : nat) : Prop := forall v : G, #|edges_at v| = r.
+
+Definition mcubic (G : mgraph) : Prop := mregular G 3.
+
+Definition loopless_cubic (G : mgraph) : Prop := loopless G /\ mcubic G.
+
+Lemma mregular_void (G : mgraph) (r : nat) : #|G| = 0 -> mregular G r.
+Proof. by move=> h v; move: (card0_eq h v); rewrite !inE. Qed.
+
+(** With a vertex, the degree of a regular multigraph is unique and is its maximum degree. *)
+Lemma mregular_uniq (G : mgraph) (r r' : nat) (v : G) : mregular G r -> mregular G r' -> r = r'.
+Proof. by move=> h h'; rewrite -(h v) (h' v). Qed.
+
+Lemma mregular_mDelta (G : mgraph) (r : nat) (v : G) : mregular G r -> mDelta G = r.
+Proof.
+move=> h; apply/eqP; rewrite eqn_leq; apply/andP; split.
+  by apply/bigmax_leqP => x _; rewrite h.
+by rewrite -(h v); exact: leq_bigmax.
+Qed.
+
+Lemma loopless_cubic_mcubic (G : mgraph) : loopless_cubic G -> mcubic G.
+Proof. by case. Qed.
+
+(** Incidence regularity is invariant under any vertex bijection and edge bijection that preserve
+    incidence (in particular under multigraph isomorphisms; upstream [mgraph.iso] needs edge labels with
+    an [elabelType] structure, which the [unit] labels of [mgraph] lack). *)
+Lemma mregular_bij (F G : mgraph) (f : F -> G) (g : edge F -> edge G) (r : nat) :
+  bijective f -> bijective g -> (forall (x : F) (e : edge F), incident (f x) (g e) = incident x e) ->
+  mregular F r -> mregular G r.
+Proof.
+case=> f' ff' f'f [g' gg' g'g] inc hF y; rewrite -(f'f y).
+have -> : edges_at (f (f' y)) = [set g e | e in edges_at (f' y)].
+  apply/setP => e; apply/idP/imsetP => [he|[e0 he0 ->]]; last by move: he0; rewrite !inE inc.
+  by exists (g' e); [move: he; rewrite !inE -{1}(g'g e) inc | rewrite g'g].
+by rewrite card_imset ?hF //; exact: (can_inj gg').
+Qed.
 
 (** ** Connectivity & structural predicates (promoted across areas)
 

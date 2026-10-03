@@ -73,8 +73,8 @@ Unset Printing Implicit Defensive.
 (** [r]-regularity / cubicity of a multigraph (degree = #incident edges).
     Same degree-with-parallel-edges family as [mDelta]; promote together.
     [@MOVE-to-base] *)
-Definition regular_m (G : mgraph) (r : nat) : Prop := forall v : G, #|edges_at v| = r.
-Definition cubic (G : mgraph) : Prop := regular_m G 3.
+Definition regular_m (G : mgraph) (r : nat) : Prop := mregular G r.
+Definition cubic (G : mgraph) : Prop := mcubic G.
 
 (** Simple multigraph: loopless and no two distinct edges share an unordered
     endpoint pair (no parallel edges).  [edge_ends e] is the (≤2-element) set of
