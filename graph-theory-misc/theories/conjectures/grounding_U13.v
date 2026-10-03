@@ -112,10 +112,10 @@ Qed.
     vacuous-on-[set0] identity. *)
 Lemma monochromatic_const (G : sgraph) (b : bool) (Q : {set G}) :
   monochromatic (fun _ => b) Q.
-Proof. by move=> x y. Qed.
+Proof. exact: monochromatic_on_const. Qed.
 
 Lemma monochromatic_set0 (G : sgraph) (c : G -> bool) : monochromatic c set0.
-Proof. by move=> x y; rewrite in_set0. Qed.
+Proof. exact: monochromatic_on_set0. Qed.
 
 (** [splits_max_cliques] — a genuine SATISFIABLE witness: on [K2] (ω = 2, the
     unique maximum clique is the whole vertex set {0,1}), the colouring that
@@ -137,6 +137,7 @@ Lemma splits_max_cliques_K2 :
   splits_max_cliques (fun v : K2 => v == ord_max).
 Proof.
 move=> Q [clq cardQ] mono.
+move/monochromatic_onP: mono => mono.
 have QT : Q = [set: K2].
   by apply/eqP; rewrite eqEcard subsetT /= cardT_K2 cardQ omega_K2.
 have m0 : (ord0 : K2) \in [set: K2] by rewrite inE.

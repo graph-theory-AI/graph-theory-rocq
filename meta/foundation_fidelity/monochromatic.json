@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "family": "monochromatic",
+  "modules": {
+    "GTBase.monochromatic": {
+      "path": "base/theories/monochromatic.v",
+      "overrides": {
+        "monochromatic_on": {
+          "verdict": "FAITHFUL",
+          "note": "Supplied-map subset constancy: exactly pairwise colour equality, empty/singleton true, graph edges irrelevant, no inhabited-palette requirement. MathComp constant on enumerated supplied colours."
+        }
+      },
+      "machine_evidence": [
+        "constant_pairwiseP",
+        "monochromatic_onP",
+        "monochromatic_onE",
+        "monochromatic_on_set0",
+        "monochromatic_on_set1",
+        "monochromatic_on_const",
+        "monochromatic_on_pair",
+        "monochromatic_on_sub",
+        "monochromatic_on_ext",
+        "monochromatic_on_relabel",
+        "non_monochromatic_onP"
+      ]
+    }
+  }
+}

@@ -3,6 +3,7 @@
 From mathcomp Require Import all_boot.
 From mathcomp Require Import fingroup perm.
 From GraphTheory Require Import digraph sgraph.
+From GTBase Require Import monochromatic.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -141,7 +142,7 @@ Definition surface_embeddable_with_boundary
 
 Definition same_colour_on (G : sgraph) (k : nat)
     (col : G -> 'I_k) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> col x = col y.
+  monochromatic_on col S.
 
 (** [clustered_colouring G k c] says every connected monochromatic vertex set
     has size at most [c], equivalently every monochromatic component has size at
