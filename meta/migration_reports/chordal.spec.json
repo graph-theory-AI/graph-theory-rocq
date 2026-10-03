@@ -1,0 +1,230 @@
+{
+  "family": "chordal",
+  "canonical_name": "GTBase.chordal.chordal_by_cycles",
+  "canonical_short_name": "chordal_by_cycles",
+  "relation": "two presentations of chordality, kept as two distinct public contracts of GTBase.chordal with no claimed equivalence (no chordal / clique-tree / perfect-elimination characterization exists in the pinned GraphTheory or MathComp sources, and none is assumed). Cycle presentation: GTBase.chordal.chordal_by_cycles G (every chordless genuine cycle, GTBase.induced_cycles.chordless_cycle, has at most three vertices; equivalently no hole, chordal_by_cyclesP) is Packing.XE1.xe1_chordal by conversion (its xe1_induced_cycle is B23's alias of chordless_cycle). Clique-tree presentation: GTBase.chordal.admits_clique_tree G (some supplied index graph T and bag map form a clique_tree_decomposition: tree_bag_decomposition, i.e. is_tree [set: T] with vertex and edge coverage and connected fibres, plus cliqueb bags) is GTMisc.X169.x169_chordal by conversion (x169_clique_tree unfolds to exactly that body and stays X169's local support, like x169_clique_tree_degree_at_most and x169_tree_decomposition). The empty index is a tree, bags may be empty, unused or repeated, the host need not be connected, bags need not be maximal cliques, and a nonempty host forces an inhabited index. No guard enters either source. The directed Digraph.chi_bounded.chordal_C3 (oriented, no transitive triangle, no long directed induced cycle) is a different contract and stays untouched.",
+  "baseline_commit": "63be19754ec48469f01c62cbd684f1a55b640cdf",
+  "namespaces": {
+    "packing-theory": "Packing",
+    "graph-theory-misc": "GTMisc",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/chordal.v",
+    "packing-theory/theories/migration/chordal.v",
+    "graph-theory-misc/theories/migration/chordal.v",
+    "packing-theory/theories/migration/induced_cycles.v",
+    "graph-theory-misc/theories/migration/bag_decompositions.v"
+  ],
+  "extra_certificates": [
+    "GTBase.chordal.chordal_by_cyclesP",
+    "GTBase.chordal.chordless_cycle_size_card",
+    "GTBase.chordal.chordal_by_cycles_small",
+    "GTBase.chordal.admits_clique_treeP",
+    "GTBase.chordal.admits_clique_tree_complete",
+    "GTBase.chordal.clique_tree_decomposition_nonempty_index",
+    "GTBase.chordal.clique_tree_decomposition_sdecompP",
+    "GTBase.chordal.clique_tree_decomposition_clique"
+  ],
+  "summary": [
+    "Family B25 (chordality, two presentations). `Packing.conjectures.XE1.xe1_chordal` now unfolds to `GTBase.chordal.chordal_by_cycles` and `GTMisc.conjectures.X169.x169_chordal` to `GTBase.chordal.admits_clique_tree`, both by conversion. The two public contracts are distinct and no equivalence between them is claimed: the cycle presentation bounds every chordless genuine cycle (B23's `chordless_cycle`) by three vertices, equivalently forbids holes (`chordal_by_cyclesP`); the clique-tree presentation asks for some supplied index graph and bag map forming a `clique_tree_decomposition` (C13's `tree_bag_decomposition` with clique bags). No guard is added to either source; X169's local supports `x169_tree_decomposition`, `x169_clique_tree` and `x169_clique_tree_degree_at_most` are not migrated and keep their interfaces.",
+    "",
+    "Two complete current rows, frozen with every quantifier, witness and status: Packing XE1 `erdos_81_statement` (uniform C before G and n, #|G| = n, a supplied clique edge partition K : 'I_m -> {set G}, 6 * m <= n ^ 2 + C * n; no minimization, no nonempty guard; the M1 clique edge-partition vocabulary stays live) and GTMisc X169 `token_sliding_chordal_clique_tree_degree_polytime_statement` (forall k D, the one forward chain `x169_polytime_decides_TS_connectivity` with the class conjunction 'chordal and clique-tree degree at most D' kept whole, the two existential clique-tree witnesses separate, the program / cost / encoding witnesses exact; the row is disproved and blocked, and the documented defect that intermediate token-sliding states need not be stable is kept, not repaired). Both are certified by conversion.",
+    "",
+    "History: the two complete earlier rows are reused with their owners' certificates, B23's `Packing.migration.induced_cycles.XE1Legacy.erdos_81_statement` (over B23's raw `Legacy.xe1_induced_cycle` and `XE1Legacy.xe1_chordal`) and C13's `GTMisc.migration.bag_decompositions.Legacy.token_sliding_chordal_clique_tree_degree_polytime_statement` (over C13's raw tree decomposition, clique tree, chordality, degree-bounded clique tree and polytime chain); the nine historical objects are bound with their owners' pins (B23 7d8cc47, C13 58d6d609) and certificates. B23's #81 copy keeps the M1 vocabulary live by design; no pre-M1 Original exists. The later A20 complete Original for X169 (stable sets and token sliding) belongs to the coordinator's combined parent and is not claimed here.",
+    "",
+    "Consumers: no direct non-certificate proof uses either predicate or row; the reverse closure (GTMisc X169 and its bag_decompositions, induced_paths, model_support, subcubic certificates; Packing XE1, vocabulary_packing and its cycle_edges, induced_cycles, perfect_matching, simple_edges, whole_tree certificates) recompiles unchanged with identical old theorem types. Routing: normal milestones XE1 (packing-theory) and X169 (graph-theory-misc); no Digraph source. B23's spec drops its X169 chordality exclusion and its prose about an untouched X169 and an unchanged xe1_chordal chain is qualified as historical-at-B23.",
+    "",
+    "Public-only client base/theories/examples/chordal.v: K_0, K_1, K_3 satisfy the cycle presentation and K_3's triangle is accepted, while cycle_graph 4 fails it through its hole; K_0 admits a clique tree on the empty index, K_1 and K_3 one full bag, a nonempty host forces an inhabited index, two isolated vertices admit singleton bags on the tree K_2, and a cyclic index rejects one supplied witness while the host admits another.",
+    "",
+    "Baseline 63be197 is the fixed B24 commit; both sources, the forward chain and both rows are byte-identical there to the fixed-B24 discovery scope."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.XE1.xe1_chordal",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_chordal",
+      "frozen_path": "packing-theory/theories/migration/chordal.v",
+      "frozen": "Legacy.xe1_chordal",
+      "substitutions": {},
+      "certificate": "Packing.migration.chordal.xe1_chordal_compat",
+      "live_unfolds_to": "chordal_by_cycles G"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X169.x169_chordal",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_chordal",
+      "frozen_path": "graph-theory-misc/theories/migration/chordal.v",
+      "frozen": "Legacy.x169_chordal",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.chordal.x169_chordal_compat",
+      "live_unfolds_to": "admits_clique_tree G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_polytime_decides_TS_connectivity",
+      "frozen_path": "graph-theory-misc/theories/migration/chordal.v",
+      "frozen": "X169Legacy.x169_polytime_decides_TS_connectivity",
+      "substitutions": {
+        "x169_chordal": "Legacy.x169_chordal"
+      },
+      "certificate": "GTMisc.migration.chordal.x169_polytime_decides_TS_connectivity_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.XE1.erdos_81_statement",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "erdos_81_statement",
+      "frozen_path": "packing-theory/theories/migration/chordal.v",
+      "frozen": "XE1Legacy.erdos_81_statement",
+      "substitutions": {
+        "xe1_chordal": "Legacy.xe1_chordal"
+      },
+      "certificate": "Packing.migration.chordal.erdos_81_statement_compat",
+      "original_certificate": "Packing.migration.chordal.erdos_81_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X169.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/chordal.v",
+      "frozen": "X169Legacy.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "substitutions": {
+        "x169_polytime_decides_TS_connectivity": "X169Legacy.x169_polytime_decides_TS_connectivity"
+      },
+      "certificate": "GTMisc.migration.chordal.token_sliding_chordal_clique_tree_degree_polytime_statement_compat",
+      "original_certificate": "GTMisc.migration.chordal.token_sliding_chordal_clique_tree_degree_polytime_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.XE1.xe1_induced_cycle",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_induced_cycle",
+      "frozen_path": "packing-theory/theories/migration/induced_cycles.v",
+      "frozen": "Legacy.xe1_induced_cycle",
+      "substitutions": {},
+      "certificate": "Packing.migration.induced_cycles.xe1_induced_cycle_compat",
+      "commit": "7d8cc47829b045a122d6f6421ddc2d928dd9675a"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.XE1.xe1_chordal",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_chordal",
+      "frozen_path": "packing-theory/theories/migration/induced_cycles.v",
+      "frozen": "XE1Legacy.xe1_chordal",
+      "substitutions": {
+        "xe1_induced_cycle": "Legacy.xe1_induced_cycle"
+      },
+      "certificate": "Packing.migration.induced_cycles.xe1_chordal_compat",
+      "commit": "7d8cc47829b045a122d6f6421ddc2d928dd9675a"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.XE1.erdos_81_statement",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "erdos_81_statement",
+      "frozen_path": "packing-theory/theories/migration/induced_cycles.v",
+      "frozen": "XE1Legacy.erdos_81_statement",
+      "substitutions": {
+        "xe1_chordal": "XE1Legacy.xe1_chordal"
+      },
+      "certificate": "Packing.migration.chordal.erdos_81_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X169.x169_tree_decomposition",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_tree_decomposition",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_tree_decomposition",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.bag_decompositions.x169_tree_decomposition_compat",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X169.x169_clique_tree",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_clique_tree",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_clique_tree",
+      "substitutions": {
+        "x169_tree_decomposition": "Legacy.x169_tree_decomposition"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_clique_tree_compat",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X169.x169_chordal",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_chordal",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_chordal",
+      "substitutions": {
+        "x169_clique_tree": "Legacy.x169_clique_tree"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_chordal_compat",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X169.x169_clique_tree_degree_at_most",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_clique_tree_degree_at_most",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_clique_tree_degree_at_most",
+      "substitutions": {
+        "x169_clique_tree": "Legacy.x169_clique_tree"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_clique_tree_degree_at_most_compat",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_polytime_decides_TS_connectivity",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_polytime_decides_TS_connectivity",
+      "substitutions": {
+        "x169_chordal": "Legacy.x169_chordal",
+        "x169_clique_tree_degree_at_most": "Legacy.x169_clique_tree_degree_at_most"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_polytime_decides_TS_connectivity_compat",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X169.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "substitutions": {
+        "x169_polytime_decides_TS_connectivity": "Legacy.x169_polytime_decides_TS_connectivity"
+      },
+      "certificate": "GTMisc.migration.chordal.token_sliding_chordal_clique_tree_degree_polytime_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.conjectures.chi_bounded.chordal_C3",
+      "path": "digraph-theory/theories/conjectures/chi_bounded.v",
+      "name": "chordal_C3",
+      "note": "directed: an oriented graph with no induced transitive triangle and no long induced directed cycle; a different contract with its own non-corpus dichromatic statement and grounding witnesses; untouched"
+    }
+  ]
+}

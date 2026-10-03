@@ -26,8 +26,9 @@
     behaviour): [ord_cycle_rel], [ordinal_induced_cycle] and [has_ordinal_induced_cycle], at the end
     of this file; it is not identified with the sequence views.  Distinct and untouched: the
     induced-isomorphism copies of [cycle_graph n] (X49, X60, X29), X115's vertex-set odd induced cycle
-    counter, X161's bare four-vertex ucycle, chordality through clique trees (X169) and the directed
-    [chordal_C3]. *)
+    counter, X161's bare four-vertex ucycle, chordality through clique trees (X169; untouched at B23,
+    like Packing XE1's [xe1_chordal] chain: both chordality presentations moved to GTBase.chordal in
+    B25) and the directed [chordal_C3]. *)
 
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import preliminaries digraph sgraph.
