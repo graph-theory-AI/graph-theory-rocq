@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "family": "hereditary-class",
+  "primitive": {
+    "canonical_name": "GTBase.graph_classes.hereditary_class",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "hereditary_class",
+      "iso_closed"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X3.x3_iso_closed",
+      "Chromatic.conjectures.X3.x3_hereditary_class",
+      "Minor.conjectures.X220.x220_iso_closed",
+      "Minor.conjectures.X220.x220_hereditary_class",
+      "Packing.conjectures.X155.x155_hereditary_class"
+    ],
+    "consumers_remaining": 3,
+    "relation": "three explicit contracts: iso closure, induced closure, and their strong conjunction; X155 keeps induced-only closure",
+    "semantic_classes": {
+      "isomorphism-closure": {
+        "members": [
+          "Chromatic.conjectures.X3.x3_iso_closed",
+          "Minor.conjectures.X220.x220_iso_closed"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.graph_classes.x3_iso_closed_compat",
+        "note": "Equivalent closure over the same upstream diso: X3 uses inhabited and changed premise order; Minor takes the witness directly."
+      },
+      "strong-hereditary": {
+        "members": [
+          "Chromatic.conjectures.X3.x3_hereditary_class",
+          "Minor.conjectures.X220.x220_hereditary_class"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.graph_classes.x3_hereditary_class_compat",
+        "note": "Both isomorphism closure AND literal induced-subgraph closure; no inhabitance or properness added."
+      },
+      "induced-only": {
+        "members": [
+          "Packing.conjectures.X155.x155_hereditary_class"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Packing.migration.graph_classes.x155_hereditary_class_compat",
+        "note": "Intentional distinct contract, canonical induced_closed only. No equivalence to strong hereditary_class is claimed."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.graph_classes.x3_iso_closed_compat",
+      "Chromatic.migration.graph_classes.x3_hereditary_class_compat",
+      "Chromatic.migration.graph_classes.hereditary_chi_bounded_not_polynomial_statement_compat",
+      "Chromatic.migration.graph_classes.hereditary_chi_bounded_not_polynomial_statement_original_compat",
+      "Minor.migration.graph_classes.x220_iso_closed_compat",
+      "Minor.migration.graph_classes.x220_hereditary_class_compat",
+      "Minor.migration.graph_classes.small_hereditary_class_bounded_twin_width_statement_compat",
+      "Packing.migration.graph_classes.x155_hereditary_class_compat",
+      "Packing.migration.graph_classes.identifying_code_vc_dimension_approximation_dichotomy_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.graph_classes.iso_closed_transport",
+      "GTBase.graph_classes.iso_closed_ext",
+      "GTBase.graph_classes.induced_closed_ext",
+      "GTBase.graph_classes.hereditary_class_ext",
+      "GTBase.graph_classes.hereditary_class_iso",
+      "GTBase.graph_classes.hereditary_class_induced",
+      "GTBase.graph_classes.hereditary_class_intro",
+      "GTBase.graph_classes.induced_closed_empty",
+      "GTBase.graph_classes.hereditary_class_empty",
+      "GTBase.graph_classes.hereditary_class_all",
+      "GTBase.graph_classes.hereditary_class_inter",
+      "GTBase.graph_classes.hereditary_class_union",
+      "GTBase.graph_classes.hereditary_class_order_le",
+      "GTBase.graph_classes.not_induced_closed_positive_exact_order"
+    ],
+    "distinct_variants": {
+      "GTMisc.conjectures.X87.x87_hereditary": "Boolean classes of ordered adjacency tables; closure only along order-preserving injective maps. Distinct carrier/order contract.",
+      "Chromatic.conjectures.U8.vminor_closed": "Vertex-minor closure includes local complementation; it is not induced closure.",
+      "Chromatic.conjectures.X192.x192_proper_minor_closed_class": "Only a uniform excluded-minor witness; do not silently add actual minor or isomorphism closure.",
+      "GTMisc.conjectures.X168.x168_proper_minor_closed_class": "Uniform excluded-minor witness AND closure under minors; distinct from induced closure and from X192."
+    },
+    "migration_report": "meta/migration_reports/hereditary_class.md",
+    "migration_spec": "meta/migration_reports/hereditary_class.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/hereditary-class.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C10.md",
+    "downstream_client": "base/theories/examples/graph_classes.v",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.dom",
+        "Minor.foundations.containment"
+      ],
+      "result": "adapted-in-base",
+      "candidate": "GraphTheory.core.digraph.diso and GraphTheory.core.sgraph.induced",
+      "note": "Reuse upstream witnesses and induced graphs. Upstream dom.hereditary is Boolean subset closure on one fixed finite type, not arbitrary Prop-valued graph-class closure. Local Minor diso_card/card_induced are short convenience lemmas, not a reason to import an area into GTBase.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}

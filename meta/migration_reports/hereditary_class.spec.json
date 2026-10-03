@@ -1,0 +1,208 @@
+{
+  "family": "hereditary-class",
+  "canonical_name": "GTBase.graph_classes.hereditary_class",
+  "canonical_short_name": "hereditary_class",
+  "relation": "three explicit contracts: iso closure, induced closure, and their strong conjunction; X155 keeps induced-only closure",
+  "baseline_commit": "5f8211a10b7260fec67dad1450be6da41efeb1a9",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "minor-theory": "Minor",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/graph_classes.v",
+    "chromatic-theory/theories/migration/graph_classes.v",
+    "minor-theory/theories/migration/graph_classes.v",
+    "packing-theory/theories/migration/graph_classes.v"
+  ],
+  "extra_certificates": [
+    "GTBase.graph_classes.iso_closed_transport",
+    "GTBase.graph_classes.iso_closed_ext",
+    "GTBase.graph_classes.induced_closed_ext",
+    "GTBase.graph_classes.hereditary_class_ext",
+    "GTBase.graph_classes.hereditary_class_iso",
+    "GTBase.graph_classes.hereditary_class_induced",
+    "GTBase.graph_classes.hereditary_class_intro",
+    "GTBase.graph_classes.induced_closed_empty",
+    "GTBase.graph_classes.hereditary_class_empty",
+    "GTBase.graph_classes.hereditary_class_all",
+    "GTBase.graph_classes.hereditary_class_inter",
+    "GTBase.graph_classes.hereditary_class_union",
+    "GTBase.graph_classes.hereditary_class_order_le",
+    "GTBase.graph_classes.not_induced_closed_positive_exact_order"
+  ],
+  "downstream_client": "base/theories/examples/graph_classes.v",
+  "summary": [
+    "C10: five dependency-coupled graph-class closure sources, not five equivalent predicates. Two isomorphism-closure adapters and two strong hereditary adapters share the corresponding explicit canonical interfaces. Packing X155 retains induced closure ONLY. Classes are arbitrary sgraph-to-Prop predicates, with no nonempty/properness/decidability guard.",
+    "Reuse upstream diso (a Type-valued bijection preserving both edge directions) and induced. X3 packs diso in inhabited and orders its premises differently; its iff is constructive. Minor uses the explicit witness directly. Strong hereditary_class is iso_closed AND induced_closed. No converse from induced-only closure is asserted without iso closure.",
+    "All five source bodies and all three whole rows are frozen. Preserve X3 solved/done, X220 disproved/done, and X155 open/BLOCKED states, every complete row body/doc block, the X155 empty-class defect and the refuted-direction e078 annotation. No statement repair or new formal resolution is performed.",
+    "The complete X3 Original composes frozen C10 hereditary closure with existing C9 frozen chi_bounded, retaining the same existential class and polynomial negation. The prior C9 snapshot stays verbatim with reciprocal history notes. x3_iso is unchanged, so A6 complement snapshots and the C9 complementation Original remain outside this closure.",
+    "Public-only examples cover empty/all/order-bounded classes, isomorphism transport, union/intersection, and an iso-closed exact-two-vertex class rejected by induced closure. Exact witness/domain types, all four whole iff types, frozen/live closures and both frozen/live X155 empty-class refutations require pinned-kernel checks and independent step-10/coordinator review."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_iso_closed",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_iso_closed",
+      "frozen_path": "chromatic-theory/theories/migration/graph_classes.v",
+      "frozen": "Legacy.x3_iso_closed",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.graph_classes.x3_iso_closed_compat",
+      "source_declaration_sha256": "8769aa240f44a108629f9d7d37270d56d7fe055e7b769a81b1270d30a6d60aed",
+      "source_body_sha256": "cbd6acedefd3e3a5f91ddf745986dcb480a5ddf245e5262b30e64a5593c2115c",
+      "live_unfolds_to": "GTBase.graph_classes.iso_closed F"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_hereditary_class",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_hereditary_class",
+      "frozen_path": "chromatic-theory/theories/migration/graph_classes.v",
+      "frozen": "Legacy.x3_hereditary_class",
+      "substitutions": {
+        "x3_iso_closed": "Legacy.x3_iso_closed"
+      },
+      "certificate": "Chromatic.migration.graph_classes.x3_hereditary_class_compat",
+      "source_declaration_sha256": "7a8fdf0d6bcd2a0c511fdb4f147e54aa6bb40dfc265174ee95f6c059d9957400",
+      "source_body_sha256": "35cc5e41f53d2aab408f1f8363c21783f25ab2bdc63e49162300ffeacd8a6ae5",
+      "live_unfolds_to": "GTBase.graph_classes.hereditary_class F"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.hereditary_chi_bounded_not_polynomial_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "hereditary_chi_bounded_not_polynomial_statement",
+      "frozen_path": "chromatic-theory/theories/migration/graph_classes.v",
+      "frozen": "Legacy.hereditary_chi_bounded_not_polynomial_statement",
+      "substitutions": {
+        "x3_hereditary_class": "Legacy.x3_hereditary_class"
+      },
+      "certificate": "Chromatic.migration.graph_classes.hereditary_chi_bounded_not_polynomial_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.hereditary_chi_bounded_not_polynomial_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "hereditary_chi_bounded_not_polynomial_statement",
+      "frozen_path": "chromatic-theory/theories/migration/graph_classes.v",
+      "frozen": "X3Original.hereditary_chi_bounded_not_polynomial_statement",
+      "substitutions": {
+        "x3_hereditary_class": "Legacy.x3_hereditary_class",
+        "chi_bounded": "ChiLegacy.chi_bounded"
+      },
+      "certificate": "Chromatic.migration.graph_classes.hereditary_chi_bounded_not_polynomial_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X220.x220_iso_closed",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_iso_closed",
+      "frozen_path": "minor-theory/theories/migration/graph_classes.v",
+      "frozen": "Legacy.x220_iso_closed",
+      "substitutions": {},
+      "certificate": "Minor.migration.graph_classes.x220_iso_closed_compat",
+      "source_declaration_sha256": "0fae9cb127ed70ed3866a48888f42394a3e8b5e4fda73fcc93d114971baf87e3",
+      "source_body_sha256": "101e5f6f5ee42a97c96555690fa08a124811185f8d874ab7723a54d40fbe7028",
+      "live_unfolds_to": "GTBase.graph_classes.iso_closed C"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X220.x220_hereditary_class",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_hereditary_class",
+      "frozen_path": "minor-theory/theories/migration/graph_classes.v",
+      "frozen": "Legacy.x220_hereditary_class",
+      "substitutions": {
+        "x220_iso_closed": "Legacy.x220_iso_closed"
+      },
+      "certificate": "Minor.migration.graph_classes.x220_hereditary_class_compat",
+      "source_declaration_sha256": "60b31fbc3d42323487b11f4eab3298531f176633b0d3a7373ad7097b52cbbddf",
+      "source_body_sha256": "3252d2fdb23dc4325782b7137ce28f0739dd963dd3b42a9ffe4d1e81b978a919",
+      "live_unfolds_to": "GTBase.graph_classes.hereditary_class C"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.small_hereditary_class_bounded_twin_width_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "small_hereditary_class_bounded_twin_width_statement",
+      "frozen_path": "minor-theory/theories/migration/graph_classes.v",
+      "frozen": "Legacy.small_hereditary_class_bounded_twin_width_statement",
+      "substitutions": {
+        "x220_hereditary_class": "Legacy.x220_hereditary_class"
+      },
+      "certificate": "Minor.migration.graph_classes.small_hereditary_class_bounded_twin_width_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X155.x155_hereditary_class",
+      "path": "packing-theory/theories/conjectures/X155.v",
+      "name": "x155_hereditary_class",
+      "frozen_path": "packing-theory/theories/migration/graph_classes.v",
+      "frozen": "Legacy.x155_hereditary_class",
+      "substitutions": {},
+      "certificate": "Packing.migration.graph_classes.x155_hereditary_class_compat",
+      "source_declaration_sha256": "40a58469551c7f63114113529e9a9de393fad1bfdee69968f41bc90ecb113fd0",
+      "source_body_sha256": "d600a03c17a34eb521b2a592117fa1c6a3c74f076915922332c6c94d433b549c",
+      "live_unfolds_to": "GTBase.graph_classes.induced_closed C"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X155.identifying_code_vc_dimension_approximation_dichotomy_statement",
+      "path": "packing-theory/theories/conjectures/X155.v",
+      "name": "identifying_code_vc_dimension_approximation_dichotomy_statement",
+      "frozen_path": "packing-theory/theories/migration/graph_classes.v",
+      "frozen": "Legacy.identifying_code_vc_dimension_approximation_dichotomy_statement",
+      "substitutions": {
+        "x155_hereditary_class": "Legacy.x155_hereditary_class"
+      },
+      "certificate": "Packing.migration.graph_classes.identifying_code_vc_dimension_approximation_dichotomy_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/chi_bounded_classes.v#X3Legacy.hereditary_chi_bounded_not_polynomial_statement": "C9 freezes chi_bounded but retains live x3_hereditary_class. Preserve its body/type; the complete pre-C9/C10 row is Chromatic.migration.graph_classes.X3Original.hereditary_chi_bounded_not_polynomial_statement, certified by hereditary_chi_bounded_not_polynomial_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_hereditary_class",
+      "note": "All three existing grounding theorem types and proofs are retained: zero-order class, Small Conjecture nonvacuity, and exact-two-vertex guard teeth."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "small_hereditary_class_bounded_twin_width_statement",
+      "note": "Existing Print Assumptions command for the unchanged whole Small Conjecture row."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.X87.x87_hereditary",
+      "path": "graph-theory-misc/theories/conjectures/X87.v",
+      "name": "x87_hereditary",
+      "note": "Boolean classes of ordered adjacency tables; closure only along order-preserving injective maps. Distinct carrier/order contract."
+    },
+    {
+      "qualified": "Chromatic.conjectures.U8.vminor_closed",
+      "path": "chromatic-theory/theories/conjectures/U8.v",
+      "name": "vminor_closed",
+      "note": "Vertex-minor closure includes local complementation; it is not induced closure."
+    },
+    {
+      "qualified": "Chromatic.conjectures.X192.x192_proper_minor_closed_class",
+      "path": "chromatic-theory/theories/conjectures/X192.v",
+      "name": "x192_proper_minor_closed_class",
+      "note": "Only a uniform excluded-minor witness; do not silently add actual minor or isomorphism closure."
+    },
+    {
+      "qualified": "GTMisc.conjectures.X168.x168_proper_minor_closed_class",
+      "path": "graph-theory-misc/theories/conjectures/X168.v",
+      "name": "x168_proper_minor_closed_class",
+      "note": "Uniform excluded-minor witness AND closure under minors; distinct from induced closure and from X192."
+    }
+  ]
+}
