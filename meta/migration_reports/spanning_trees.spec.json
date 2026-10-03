@@ -2,15 +2,18 @@
   "family": "spanning-tree",
   "canonical_name": "GTBase.spanning_trees.fg_spanning_tree",
   "canonical_short_name": "fg_spanning_tree",
-  "relation": "one contract for labelled simple graphs, by conversion: X167.x167_spanning_tree and X168.x168_spanning_tree (T \\subset fg_edges G /\\ is_tree [set: fg_labelled_sgraph T]: a set of valid edges of G whose labelled graph on the WHOLE vertex carrier of G, isolated vertices included, is an upstream tree) are GTBase.spanning_trees.fg_spanning_tree T. The subset guard stays part of the contract (the labelled-graph constructor retains every two-element member, including host nonedges, and ignores members that are not pairs; the subset guard rejects host nonedges), connectivity of the host follows, and the conventions are derived from upstream is_tree: the empty edge set spans 'K_0 (vacuously) and 'K_1, the single edge spans 'K_2, the triangle's full edge set, any disconnected host, and any host with at least two vertices and an isolated vertex are rejected. Deferred, distinct: Cycle.U6.spanning_tree (a multigraph EDGE carrier that is spanning-connected and acyclic; separate future family). Not sources of this family: the whole-graph tree wrappers of XE1 (definitionally is_tree), D2tur.tree_on / shortest_tree_on, U9.tree_contains_T, the directed trees of P9 / X2 and B9's path_tree.",
+  "relation": "two contracts under the corpus name \"spanning_tree\", sharing only the name. LABELLED simple graphs (canonical GTBase.spanning_trees.fg_spanning_tree, B18): X167.x167_spanning_tree and X168.x168_spanning_tree (T \\subset fg_edges G /\\ is_tree [set: fg_labelled_sgraph T]: a set of valid edges of G whose labelled graph on the WHOLE vertex carrier of G, isolated vertices included, is an upstream tree) are fg_spanning_tree T by conversion; the subset guard stays part of the contract (the labelled-graph constructor drops only malformed members and keeps every two-element member, so host non-edges are excluded by the guard alone), host connectivity follows, and the conventions are derived from upstream is_tree: the empty edge set spans 'K_0 (vacuously) and 'K_1, the single edge spans 'K_2, the triangle's full edge set, any disconnected host and any host with at least two vertices one of which is isolated are rejected. MULTIGRAPH edge carriers (canonical Cycle.foundations.spanning_trees.spanning_tree_edge_set over Cycle.foundations.connectivity and path_subgraphs, B19): Cycle.U6.spanning_tree (spanning_connected T /\\ acyclic T: an undirected uwalk inside T between every two HOST vertices, and no circuit inside T) is spanning_tree_edge_set T by conversion, the conjunction of the all-host-vertex restricted walk spanning_connected_edge_set and the public acyclic_edge_set; U6's unchanged supports spanning_connected and acyclic are frozen as copies but not migrated. Conventions: the empty host and the empty carrier are accepted vacuously, one vertex with the empty carrier is accepted beside an unselected loop, a single non-loop edge spans its two-vertex host in either reference orientation, a third isolated vertex defeats spanning connectivity although the carrier stays connected on its incident support, and a selected loop, parallel pair or digon is rejected; no loopless, simplicity, nonempty-carrier or nonempty-host guard is added. No equivalence between the two representations is stated. Not sources of this family: the whole-graph tree wrappers of XE1 (definitionally is_tree), D2tur.tree_on / shortest_tree_on, U9.tree_contains_T, the directed trees of P9 / X2 and B9's path_tree.",
   "baseline_commit": "7848021c00cb71576fbe9b94693567ec01420b48",
   "namespaces": {
     "graph-theory-misc": "GTMisc",
-    "base": "GTBase"
+    "base": "GTBase",
+    "cycle-theory": "Cycle"
   },
   "certificate_files": [
     "base/theories/spanning_trees.v",
-    "graph-theory-misc/theories/migration/spanning_trees.v"
+    "graph-theory-misc/theories/migration/spanning_trees.v",
+    "cycle-theory/theories/foundations/spanning_trees.v",
+    "cycle-theory/theories/migration/spanning_trees.v"
   ],
   "extra_certificates": [
     "GTBase.spanning_trees.fg_spanning_treeP",
@@ -36,7 +39,27 @@
     "GTMisc.migration.spanning_trees.x167_extension_system_to_live",
     "GTMisc.migration.spanning_trees.x167_extension_system_of_live",
     "GTMisc.migration.spanning_trees.x168_extension_system_to_live",
-    "GTMisc.migration.spanning_trees.x168_extension_system_of_live"
+    "GTMisc.migration.spanning_trees.x168_extension_system_of_live",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_setI",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_set_connected",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_set_acyclic",
+    "Cycle.foundations.spanning_trees.spanning_connected_edge_setP",
+    "Cycle.foundations.spanning_trees.spanning_connected_edge_set_mconnected",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_set_mconnected",
+    "Cycle.foundations.spanning_trees.spanning_connected_edge_set_sub",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_set_noloop",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_set_noparallel",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_set_empty",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_set_one_vertex",
+    "Cycle.foundations.spanning_trees.not_spanning_tree_edge_set_loop",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_set_one_edge",
+    "Cycle.foundations.spanning_trees.spanning_tree_edge_set_one_edge_rev",
+    "Cycle.foundations.spanning_trees.subgraph_connected_one_edge_and_vertex",
+    "Cycle.foundations.spanning_trees.uwalk_one_edge_and_vertex",
+    "Cycle.foundations.spanning_trees.not_spanning_connected_one_edge_and_vertex",
+    "Cycle.foundations.spanning_trees.not_spanning_tree_edge_set_one_edge_and_vertex",
+    "Cycle.foundations.spanning_trees.not_spanning_tree_edge_set_parallel_pair",
+    "Cycle.foundations.spanning_trees.not_spanning_tree_edge_set_digon"
   ],
   "summary": [
     "Family B18 (labelled spanning trees of finite simple graphs). The helpers `X167.x167_spanning_tree` and `X168.x168_spanning_tree` (`T \\subset fg_edges G /\\ is_tree [set: fg_labelled_sgraph T]`) now unfold to the new public `GTBase.spanning_trees.fg_spanning_tree T`, the same body over `GTBase.finite_graph` and upstream `is_tree`, by conversion. Contract: `T` is a set of valid edges of `G` (the subset guard is kept: the labelled-graph constructor retains every two-element member, including host nonedges, and ignores members that are not pairs; the subset guard rejects host nonedges) whose labelled graph on the WHOLE vertex carrier of `G`, isolated vertices included, is a tree (unique irredundant paths and connected). Conventions derived from upstream `is_tree`, never added as guards: the empty edge set spans `'K_0` (vacuously) and `'K_1`; the single edge spans `'K_2`; the triangle's full edge set, one edge of the triangle (a vertex is missed), two isolated vertices and any set containing a singleton are rejected. No nonempty guard, edge-count characterisation or validity repair is introduced.",
@@ -48,11 +71,15 @@
     "",
     "Consumers: the two helpers, Records and wrappers are used only in their source files; the C11 snapshot is the historical consumer. There are no grounding or implication modules for X167/X168, and none is invented. Routing: normal milestones GTMisc X167 and X168; the family needs no Digraph build.",
     "",
-    "Distinct, untouched: `Cycle.U6.spanning_tree` (multigraph edge carrier, spanning-connected and acyclic; deferred, separate future family), XE1's whole-graph tree wrappers (definitionally `is_tree`), `D2tur.tree_on`, `U9.tree_contains_T`, the directed trees of P9 / X2 and B9's `path_tree`.",
+    "Historical at B18: `Cycle.U6.spanning_tree` (multigraph edge carrier, spanning-connected and acyclic) was deferred; B19 now migrates this distinct multigraph semantic class. Distinct, untouched: XE1's whole-graph tree wrappers (definitionally `is_tree`), `D2tur.tree_on`, `U9.tree_contains_T`, the directed trees of P9 / X2 and B9's `path_tree`.",
     "",
     "Kernel evidence, independent of this textual report, from `Print All Dependencies`: no frozen chain, row or Original reaches a live helper, Record or wrapper of this family or the public `fg_spanning_tree`; each live row reaches its helper and the canonical; the transports reach only the frozen and live Records. Summary: /srv/graph-theory-rocq/coordination/evidence/B18-spanning_trees/print_all_dependencies_summary.txt.",
     "",
-    "Baseline 7848021 is the announced B17 pin (unmerged stack 4b63976 > 2981122 > cc78377 > 7848021); C11 and both source files are byte-identical to cc78377 there, so no private prerequisite union is needed. No statement text, doc block, manifest row, leg state or status changes (checked below)."
+    "Baseline 7848021 is the announced B17 pin (unmerged stack 4b63976 > 2981122 > cc78377 > 7848021); C11 and both source files are byte-identical to cc78377 there, so no private prerequisite union is needed. No statement text, doc block, manifest row, leg state or status changes (checked below).",
+    "",
+    "B19 (second contract of this family, registry override 2026-10-03, per-object commit pins at the recorded prerequisite union d2a23f1 = fixed B18 51f1200 + reviewed A13 004cf63): the MULTIGRAPH edge-carrier helper `Cycle.conjectures.U6.spanning_tree` (`spanning_connected T /\\ acyclic T`: an undirected uwalk inside `T` between every two HOST vertices, isolated host vertices therefore excluded when the host has at least two vertices, and no circuit inside `T`) now unfolds to the new public `Cycle.foundations.spanning_trees.spanning_tree_edge_set`, the conjunction of the all-host-vertex restricted walk `spanning_connected_edge_set` and the public `acyclic_edge_set` of `Cycle.foundations.path_subgraphs`, by conversion. The incident-support connectivity `subgraph_connected` is NOT used: it is connected on a one-edge carrier beside an isolated third vertex, where spanning connectivity fails (grounded). U6's unchanged supports `spanning_connected` and `acyclic` stay live, unmigrated helpers; they are frozen as historical copies so that the frozen tree contract is fully independent. No equivalence with the labelled contract above is stated; the two share only the corpus name. API: the projections, introduction, the `walk_in` form `spanning_connected_edge_setP`, host connectivity, monotonicity, the loop and parallel-pair rejections, and groundings: the empty host with the empty carrier, one vertex beside an unselected loop, one edge in either reference orientation (accepted); a selected loop, the one-edge carrier beside a third isolated vertex, a parallel pair and a digon (rejected). Public-only client cycle-theory/theories/examples/spanning_trees.v. No loopless, simplicity, nonempty-carrier or nonempty-host guard.",
+    "",
+    "B19 row, frozen complete in cycle-theory/theories/migration/spanning_trees.v over the frozen tree with every guard and the T/F/M order: `three_decomposition_statement` (opg:3_decomposition_conjecture: positive vertex count, guarded cubicity, all-vertex connectivity; T a spanning tree, F 2-regular, M a matching, the exact edge partition). History (A13, family multigraph-regularity, baseline 58f2862): its certificate Cycle.migration.mregular froze `Legacy.cubic` (arc-end degrees under the loopless guard) and a per-row snapshot of this row that still calls the live `spanning_tree` (recorded in known_stale_snapshots, kept byte-exact). The complete pre-A13, pre-B19 row is `U6Original.three_decomposition_statement` over A13's frozen cubic (bound as `Module A13`) and this family's frozen tree, certified end to end by `three_decomposition_statement_original_compat` through `A13.cubic_compat` (not a conversion). The reciprocal note is added to A13's spec. No B17 Eulerian or B18 labelled-tree snapshot reaches this row. Proof consumer grounding_U6 `spanning_tree_unit` compiles unchanged (transparent alias); `acyclic_set0` and Cycle.migration.is_path's historical `is_path` use the unchanged live `acyclic`. Routing: normal milestones Cycle U6 and U10 (A13's consumer route) on the union; the family needs no Digraph build."
   ],
   "frozen": [
     {
@@ -165,10 +192,77 @@
       },
       "certificate": "GTMisc.migration.spanning_trees.minor_closed_spanning_tree_polytope_linear_xc_statement_original_compat",
       "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.U6.acyclic",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "acyclic",
+      "frozen_path": "cycle-theory/theories/migration/spanning_trees.v",
+      "frozen": "Legacy.acyclic",
+      "substitutions": {},
+      "certificate": "Cycle.migration.spanning_trees.acyclic_compat",
+      "commit": "d2a23f14fcb960da9d574951b280211d2095df91"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.U6.spanning_connected",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "spanning_connected",
+      "frozen_path": "cycle-theory/theories/migration/spanning_trees.v",
+      "frozen": "Legacy.spanning_connected",
+      "substitutions": {},
+      "certificate": "Cycle.migration.spanning_trees.spanning_connected_compat",
+      "commit": "d2a23f14fcb960da9d574951b280211d2095df91"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.U6.spanning_tree",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "spanning_tree",
+      "frozen_path": "cycle-theory/theories/migration/spanning_trees.v",
+      "frozen": "Legacy.spanning_tree",
+      "substitutions": {
+        "acyclic": "Legacy.acyclic",
+        "spanning_connected": "Legacy.spanning_connected"
+      },
+      "certificate": "Cycle.migration.spanning_trees.spanning_tree_compat",
+      "live_unfolds_to": "spanning_tree_edge_set T"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U6.three_decomposition_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "three_decomposition_statement",
+      "frozen_path": "cycle-theory/theories/migration/spanning_trees.v",
+      "frozen": "U6Legacy.three_decomposition_statement",
+      "substitutions": {
+        "spanning_tree": "Legacy.spanning_tree"
+      },
+      "certificate": "Cycle.migration.spanning_trees.three_decomposition_statement_compat",
+      "commit": "d2a23f14fcb960da9d574951b280211d2095df91",
+      "corpus": "opg",
+      "original_certificate": "Cycle.migration.spanning_trees.three_decomposition_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.U6.three_decomposition_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "three_decomposition_statement",
+      "frozen_path": "cycle-theory/theories/migration/spanning_trees.v",
+      "frozen": "U6Original.three_decomposition_statement",
+      "substitutions": {
+        "cubic": "A13.Legacy.cubic",
+        "spanning_tree": "Legacy.spanning_tree"
+      },
+      "certificate": "Cycle.migration.spanning_trees.three_decomposition_statement_original_compat",
+      "commit": "d2a23f14fcb960da9d574951b280211d2095df91",
+      "corpus": "opg"
     }
   ],
   "known_stale_snapshots": {
-    "graph-theory-misc/theories/migration/minor_classes.v#Legacy.minor_closed_spanning_tree_polytope_linear_xc_statement": "C11 per-row snapshot: family proper-minor-closed-class (C11, baseline 6e1a1c4) froze only its minor-class body in X168's row, so this copy still calls the live x168_spanning_tree_polytope_xc, which after B18 unfolds through the live Record x168_extension_system to fg_spanning_tree (the same body). Kept byte-exact; C11's certificate stays true. The complete pre-C11, pre-B18 row is GTMisc.migration.spanning_trees.X168Original.minor_closed_spanning_tree_polytope_linear_xc_statement over C11's frozen class and this family's frozen wrapper, certified by minor_closed_spanning_tree_polytope_linear_xc_statement_original_compat."
+    "graph-theory-misc/theories/migration/minor_classes.v#Legacy.minor_closed_spanning_tree_polytope_linear_xc_statement": "C11 per-row snapshot: family proper-minor-closed-class (C11, baseline 6e1a1c4) froze only its minor-class body in X168's row, so this copy still calls the live x168_spanning_tree_polytope_xc, which after B18 unfolds through the live Record x168_extension_system to fg_spanning_tree (the same body). Kept byte-exact; C11's certificate stays true. The complete pre-C11, pre-B18 row is GTMisc.migration.spanning_trees.X168Original.minor_closed_spanning_tree_polytope_linear_xc_statement over C11's frozen class and this family's frozen wrapper, certified by minor_closed_spanning_tree_polytope_linear_xc_statement_original_compat.",
+    "cycle-theory/theories/migration/mregular.v#U6Legacy.three_decomposition_statement": "A13 per-row snapshot: family multigraph-regularity (A13, baseline 58f2862) froze only its cubic body in U6's three-decomposition row, so this copy still calls the live spanning_tree, which after B19 unfolds to spanning_tree_edge_set T (the same conjunction over spanning_connected_edge_set and acyclic_edge_set). Kept byte-exact; A13's certificate stays true. The complete pre-A13, pre-B19 row is Cycle.migration.spanning_trees.U6Original.three_decomposition_statement over A13's frozen Legacy.cubic (bound there as Module A13) and this family's frozen tree, certified by three_decomposition_statement_original_compat."
   },
   "cross_module_consumers": [
     {
@@ -177,23 +271,42 @@
       "note": "C11's per-row snapshot Legacy.minor_closed_spanning_tree_polytope_linear_xc_statement (family proper-minor-closed-class) froze only its minor-class body and still calls this live wrapper; kept byte-exact, recorded in known_stale_snapshots; the complete pre-C11, pre-B18 row is X168Original.minor_closed_spanning_tree_polytope_linear_xc_statement in this family's certificate."
     },
     {
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "spanning_tree",
+      "note": "B19 migrates U6's multigraph spanning_tree to spanning_tree_edge_set; its three_decomposition_statement is frozen with a complete A13+B19 Original. The labelled simple-graph contract remains a distinct semantic class."
+    },
+    {
       "path": "cycle-theory/theories/conjectures/grounding_U6.v",
       "name": "spanning_tree",
-      "note": "Short-name match only: spanning_tree_unit uses Cycle U6's multigraph edge-carrier spanning_tree, the distinct deferred contract, not this family's labelled simple-graph helpers; unchanged."
+      "note": "Proof consumer of U6's multigraph helper (B19): spanning_tree_unit (the empty carrier spans the one-vertex host); theorem type and proof unchanged, the alias is transparent."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U6.v",
+      "name": "acyclic",
+      "note": "acyclic_set0 uses U6's unchanged live support acyclic (frozen here as a historical copy, not migrated); unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/migration/mregular.v",
+      "name": "spanning_tree",
+      "note": "A13's per-row snapshot U6Legacy.three_decomposition_statement (family multigraph-regularity) froze only its cubic body and still calls this live helper; kept byte-exact, recorded in known_stale_snapshots; the complete pre-A13, pre-B19 row is U6Original.three_decomposition_statement in this family's certificate."
+    },
+    {
+      "path": "cycle-theory/theories/migration/is_path.v",
+      "name": "acyclic",
+      "note": "Historical is_path copy of the is-path family (B9) references U6's unchanged live support acyclic; it does not reach spanning_tree and is not a row of this family; unchanged."
     },
     {
       "path": "cycle-theory/theories/conjectures/U6.v",
-      "name": "spanning_tree",
-      "note": "Short-name match only: U6's own multigraph spanning_tree and its row three_decomposition_statement, the distinct deferred contract; unchanged."
+      "name": "acyclic",
+      "note": "U6's own unchanged live support (the body of acyclic_edge_set) and its uses in the file; frozen here as a historical copy, not migrated."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "spanning_connected",
+      "note": "U6's own unchanged live support (the body of spanning_connected_edge_set); frozen here as a historical copy, not migrated."
     }
   ],
   "distinct_variants": [
-    {
-      "qualified": "Cycle.conjectures.U6.spanning_tree",
-      "path": "cycle-theory/theories/conjectures/U6.v",
-      "name": "spanning_tree",
-      "note": "multigraph edge carrier: spanning_connected T /\\ acyclic T over an mgraph edge set; a different representation, deferred in the registry (separate future family); untouched"
-    },
     {
       "qualified": "Extremal.conjectures.XE1.xe1_tree",
       "path": "extremal-graph-theory/theories/conjectures/XE1.v",

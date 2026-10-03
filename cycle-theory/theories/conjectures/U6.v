@@ -39,6 +39,7 @@ From GTBase Require Import base.
 From Cycle.foundations Require Export connectivity.
 From Cycle.foundations Require Import path_subgraphs.
 From Cycle.foundations Require eulerian.
+From Cycle.foundations Require Import spanning_trees.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -103,8 +104,7 @@ Definition is_matching (G : mgraph) (M : {set edge G}) : Prop :=
 Definition spanning_connected (G : mgraph) (T : {set edge G}) : Prop :=
   forall x y : G, exists w, uwalk x y w /\ all (fun e => e \in T) w.
 
-Definition spanning_tree (G : mgraph) (T : {set edge G}) : Prop :=
-  spanning_connected T /\ acyclic T.
+Definition spanning_tree (G : mgraph) (T : {set edge G}) : Prop := spanning_tree_edge_set T.
 
 (** ** Bridges, cubic, eulerian *)
 
