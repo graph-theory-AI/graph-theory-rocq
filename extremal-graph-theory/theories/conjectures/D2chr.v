@@ -35,6 +35,7 @@
         the natural representative model of the lines-through-the-origin graph. *)
 
 From GTBase Require Export base.
+From GTBase Require Import edge_colourings.
 From GraphTheory Require Import minor.
 From Extremal.foundations Require Export circular_colouring.
 From mathcomp Require Import all_algebra.
@@ -362,9 +363,11 @@ Definition circular_choosability_of_planar_graphs_statement : Prop :=
     constraints (no bichromatic P4/C4) need the explicit colour FUNCTION [f] on edges,
     so base's χ' cannot express them and a local [proper_ec] is required.  The genuinely
     new star primitives below carry a [@MOVE-to-base] tag for future migration. *)
+(** Since the C6 library migration (2026-10-03) a transparent alias of
+    [GTBase.edge_colourings.proper_pair_edge_colouring]; the original body is frozen and certified
+    in theories/migration/edge_colourings.v. *)
 Definition proper_ec (G : sgraph) (C : finType) (f : G -> G -> C) : Prop :=
-  (forall x y : G, f x y = f y x) /\
-  (forall x y z : G, x -- y -> x -- z -> y != z -> f x y != f x z).
+  proper_pair_edge_colouring f.
 
 Definition no_bichromatic_P4 (G : sgraph) (C : finType) (f : G -> G -> C) : Prop :=
   forall a b c d e : G,

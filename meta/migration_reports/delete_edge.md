@@ -6,7 +6,7 @@ Full evidence: `python3 meta/migration_report.py delete_edge --details /tmp/migr
 
 - Canonical: `GTBase.common.del_edge_set`.
 - Baseline: `dbee364e6be7ac2e9a8e7edecbb1ff5f0878c8c0`.
-- Scope: 4 helpers, 3 statements, 21 frozen objects, 39 recorded references.
+- Scope: 4 helpers, 3 statements, 21 frozen objects, 40 recorded references.
 - Source checks: 145/145 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |

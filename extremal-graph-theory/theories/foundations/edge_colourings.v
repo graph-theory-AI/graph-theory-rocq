@@ -24,6 +24,7 @@
     - [proper_ecolouring]: adjacent edges get distinct colours. *)
 
 From GTBase Require Import base.
+From GTBase Require Import edge_colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -104,9 +105,17 @@ Qed.
 
 (** ** Proper edge colourings *)
 
-(** Two edges sharing a vertex get distinct colours. *)
+(** Two edges sharing a vertex get distinct colours.  Since the C6 library
+    migration (2026-10-03) this public name is a transparent adapter of
+    [GTBase.edge_colourings.proper_edge_colouring], with the same [eqType]
+    palette generality; the original body is frozen and certified in
+    theories/migration/edge_colourings.v. *)
 Definition proper_ecolouring (G : sgraph) (C : eqType) (col : {set G} -> C) : Prop :=
-  forall x y z : G, x -- y -> x -- z -> y != z -> col [set x; y] != col [set x; z].
+  proper_edge_colouring col.
+
+Lemma proper_ecolouringE (G : sgraph) (C : eqType) (col : {set G} -> C) :
+  proper_ecolouring col <-> proper_edge_colouring col.
+Proof. by []. Qed.
 
 (** Specialisation to two colours: the true- and false-classes split [E(G)].
     This is the counting step of the Erdos-Sos => Burr-Erdos Ramsey reduction. *)

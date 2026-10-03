@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X213 -- Bondy-Murty Appendix A colouring rows (wave X213, 2026-09-23) *)
 
 From GTBase Require Export base.
+From GTBase Require Import edge_colourings.
 From Chromatic.conjectures Require Import U8 X3.
 
 Set Implicit Arguments.
@@ -19,10 +20,15 @@ Unset Printing Implicit Defensive.
     and two distinct edges sharing the endpoint [u] get distinct colours.  Only
     the values on adjacent pairs are constrained, so a colouring is exactly a
     proper vertex colouring of the line graph of [G]. *)
+(** Since the C6 library migration (2026-10-03) a transparent alias of
+    [GTBase.edge_colourings.proper_pair_edge_colouring]: the symmetry clause
+    holds on ALL ordered pairs, as the body always required (the paragraph
+    above describes only the adjacent pairs; that prose/body discrepancy is
+    recorded by C6, not repaired).  The original body is frozen and certified
+    in theories/migration/edge_colourings.v. *)
 Definition x213_proper_edge_colouring
     (G : sgraph) (k : nat) (col : G -> G -> 'I_k) : Prop :=
-  (forall u v : G, col u v = col v u) /\
-  (forall u v w : G, u -- v -> u -- w -> v != w -> col u v != col u w).
+  proper_pair_edge_colouring col.
 
 (** [G] is [k]-edge-colourable. *)
 Definition x213_edge_colourable (G : sgraph) (k : nat) : Prop :=

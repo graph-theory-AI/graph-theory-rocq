@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X14 -- v2 matching and rainbow-path rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import edge_colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -34,14 +35,12 @@ Definition x14_genuine_path (G : sgraph) (p : seq G) : Prop :=
   | x :: q => uniq p /\ path (--) x q
   end.
 
+(** Since the C6 library migration (2026-10-03) a transparent alias of
+    [GTBase.edge_colourings.proper_edge_colouring]; the original body is frozen and certified
+    in theories/migration/edge_colourings.v. *)
 Definition x14_proper_edge_colouring
     (G : sgraph) (C : finType) (col : {set G} -> C) : Prop :=
-  forall e f : {set G},
-    e \in x14_edge_set G ->
-    f \in x14_edge_set G ->
-    e != f ->
-    ~~ [disjoint e & f] ->
-    col e != col f.
+  proper_edge_colouring col.
 
 Definition x14_rainbow_path
     (G : sgraph) (C : finType) (col : {set G} -> C) (p : seq G) : Prop :=

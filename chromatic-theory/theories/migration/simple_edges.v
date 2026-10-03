@@ -1,6 +1,7 @@
 (** * Chromatic.migration.simple_edges -- frozen edge-helper certificates *)
 
 From GTBase Require Import base.
+From GTBase Require Import edge_colourings.
 From Chromatic.conjectures Require Import X33 X34 X35 X43 X63 X64 X100 X142 XE1.
 
 Set Implicit Arguments.
@@ -136,8 +137,9 @@ Lemma x142_proper_edge_colouring_compat
     (G : sgraph) (k : nat) (col : {set G} -> 'I_k) :
   X142Legacy.proper_edge_colouring col <-> x142_proper_edge_colouring col.
 Proof.
-by rewrite /X142Legacy.proper_edge_colouring /x142_proper_edge_colouring
-  x142_edge_set_compat.
+rewrite /X142Legacy.proper_edge_colouring x142_edge_set_compat
+  /x142_proper_edge_colouring.
+exact: iff_sym (proper_edge_colouring_edgesP col).
 Qed.
 
 Lemma x142_neighbour_sum_distinguishing_compat
