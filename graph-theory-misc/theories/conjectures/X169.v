@@ -24,7 +24,7 @@ Definition x169_clique_tree_degree_at_most (G : sgraph) (D : nat) : Prop :=
     x169_clique_tree bag /\ forall t : T, #|N(t)| <= D.
 
 Definition x169_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x != y -> ~~ (x -- y).
+  stable S.
 
 Definition x169_ts_step (G : sgraph) (k : nat) : rel {set G} :=
   fun A B =>

@@ -9,7 +9,7 @@
     GraphTheory's chromatic number and XE2's cochromatic number. *)
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import coloring partition dom.
-From GTBase Require Import base.
+From GTBase Require Import base stable_sets.
 From Chromatic.conjectures Require Import X7 XE2 XE1.
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -71,7 +71,7 @@ move=> inj_i edge_i hf c; case: (hf c)=> h; [left|right].
 - move=> x y; rewrite !inE => hx hy hxy.
   rewrite -edge_i; apply: h; rewrite ?inE //.
   by rewrite (inj_eq inj_i).
-- move=> x y; rewrite !inE=> hx hy hxy.
+- move/stable_noedgeP: h => h; apply/stable_noedgeP => x y; rewrite !inE=> hx hy hxy.
   apply: (h (i x) (i y)); rewrite ?inE ?edge_i //.
 Qed.
 
@@ -80,7 +80,8 @@ Lemma homogeneous_injective_colors (G : sgraph) (C D : finType)
   (forall x, embed (g x) = f x) ->
   homogeneous_map f -> homogeneous_map g.
 Proof.
-move=> he hf c; case: (hf (embed c))=> h; [left|right];
+move=> he hf c; case: (hf (embed c))=> h;
+  [left|right; move/stable_noedgeP: h => h; apply/stable_noedgeP];
   move=> x y; rewrite !inE=> /eqP hx /eqP hy hxy;
   apply: (h x y); rewrite ?inE //; apply/eqP;
   by rewrite -he ?hx ?hy.
@@ -105,7 +106,7 @@ case: (hf (f root))=> hr.
   have rr : root \in [set v | f v == f root] by rewrite inE eqxx.
   have ox : old x \in [set v | f v == f root] by rewrite inE hx.
   by have := h rr ox er.
-- apply/negP=> hs.
+- move/stable_noedgeP: hr => hr; apply/negP=> hs.
   apply: (hr root (shadow x)); rewrite ?inE ?eqxx //.
 
 Qed.
@@ -118,7 +119,7 @@ case: (hf (f root))=> hr.
   have rr : root \in [set v | f v == f root] by rewrite inE eqxx.
   have ox : old x \in [set v | f v == f root] by rewrite inE hx.
   by have := hr root (old x) rr ox er.
-- symmetry; apply/negP=> hxy.
+- move/stable_noedgeP: hr => hr; symmetry; apply/negP=> hxy.
   apply: (hr (old x) (old y)); rewrite ?inE ?hx ?hy //.
 Qed.
 Definition reduced_color (x : G) : {c : C | c != f (@root G)} :=
@@ -141,18 +142,18 @@ Definition extended_color (x : mycielski G) : option C :=
   end.
 Lemma extended_independent : independent_color extended_color None.
 Proof.
-move=> [[[] x]|] [[[] y]|]; rewrite /extended_color !inE /= //.
+apply/stable_noedgeP; move=> [[[] x]|] [[[] y]|]; rewrite /extended_color !inE /= //.
 Qed.
 Lemma extended_homogeneous :
   homogeneous_map f -> independent_color f c0 ->
   homogeneous_map extended_color.
 Proof.
-move=> hf hi [c|]; last by right; exact: extended_independent.
+move=> hf /stable_noedgeP hi [c|]; last by right; exact: extended_independent.
 case ec: (c0 == c).
-- right; move/eqP: ec=> <-.
+- right; move/eqP: ec=> <-; apply/stable_noedgeP.
   move=> [[[] x]|] [[[] y]|]; rewrite /extended_color !inE /= //.
   move=> hx hy hxy; apply: (hi x y); rewrite ?inE //.
-- case: (hf c)=> hc; [left|right];
+- case: (hf c)=> hc; [left|right; move/stable_noedgeP: hc => hc; apply/stable_noedgeP];
     move=> [[[] x]|] [[[] y]|]; rewrite /extended_color !inE /= ?(inj_eq Some_inj) ?ec //.
   + move=> hx hy hxy; apply: hc; rewrite ?inE //.
   + move=> hx hy hxy; apply: (hc x y); rewrite ?inE //.
@@ -167,13 +168,13 @@ End MycielskiExtension.
 Lemma proper_homogeneous (G : sgraph) (C : finType) (f : G -> C) :
   proper_map f -> homogeneous_map f.
 Proof.
-move=> hf c; right; move=> x y; rewrite !inE=> /eqP hx /eqP hy hxy.
+move=> hf c; right; apply/stable_noedgeP => x y; rewrite !inE=> /eqP hx /eqP hy hxy.
 by have := hf x y hxy; rewrite hx hy eqxx.
 Qed.
 Lemma proper_independent (G : sgraph) (C : finType) (f : G -> C) (c : C) :
   proper_map f -> independent_color f c.
 Proof.
-move=> hf x y; rewrite !inE=> /eqP hx /eqP hy hxy.
+move=> hf; apply/stable_noedgeP => x y; rewrite !inE=> /eqP hx /eqP hy hxy.
 by have := hf x y hxy; rewrite hx hy eqxx.
 Qed.
 Lemma reduced_proper (G : sgraph) (C : finType) (f : mycielski G -> C)

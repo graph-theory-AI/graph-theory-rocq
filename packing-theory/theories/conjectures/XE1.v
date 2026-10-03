@@ -11,7 +11,7 @@ Definition xe1_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
 Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x -- y -> False.
+  stable S.
 
 Definition xe1_maximal_clique (G : sgraph) (K : {set G}) : Prop :=
   maximal_clique K.
