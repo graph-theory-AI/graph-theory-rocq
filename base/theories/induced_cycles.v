@@ -20,11 +20,14 @@
     [cyclic_chordlessb], [chordless_ucycleb], [chordless_cycleb] and [holeb] quantify over the list
     itself, so they compute on concrete sequences; reflection lemmas connect them.  Rotation,
     reversal and injective adjacency-preserving-and-reflecting images (induced copies) preserve each
-    view.  Not re-exported by GTBase.base; no conjecture module is imported.  Distinct and
-    untouched: GTMisc U13's ordinal-map induced cycle (an injective map ['I_k -> G] whose edges are
-    exactly the modular successor pairs, with its own k = 0, 1, 2 behaviour), the induced-isomorphism
-    copies of [cycle_graph n] (X49, X60, X29), X115's vertex-set odd induced cycle counter, X161's
-    bare four-vertex ucycle, chordality through clique trees (X169) and the directed [chordal_C3]. *)
+    view.  Not re-exported by GTBase.base; no conjecture module is imported.  Since B24 the module
+    also carries a second, ordinal-map interface for GTMisc U13 (an injective map ['I_k -> G] whose
+    images are adjacent exactly for cyclically consecutive positions, with its own k = 0, 1, 2
+    behaviour): [ord_cycle_rel], [ordinal_induced_cycle] and [has_ordinal_induced_cycle], at the end
+    of this file; it is not identified with the sequence views.  Distinct and untouched: the
+    induced-isomorphism copies of [cycle_graph n] (X49, X60, X29), X115's vertex-set odd induced cycle
+    counter, X161's bare four-vertex ucycle, chordality through clique trees (X169) and the directed
+    [chordal_C3]. *)
 
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import preliminaries digraph sgraph.
@@ -354,3 +357,192 @@ move=> finj fE [uc [sz ch]]; split; first exact: ucycle_map.
 split; first by rewrite size_map.
 by apply: (cyclic_chordless_map _ ch) => x y; rewrite fE.
 Qed.
+
+(** ** Ordinal-map induced cycles (library migration B24)
+
+    A second interface, for a cycle given as a map from the [k] cyclic positions ['I_k] rather
+    than as a vertex list.  [ord_cycle_rel k i j] holds when [i] and [j] are consecutive modulo [k]
+    in either order, with no unequal-index premise: at [k = 1] the single position is its own
+    successor.  [ordinal_induced_cycle f] says that [f : 'I_k -> G] is injective and that two
+    positions have adjacent images exactly when they are cyclically consecutive (both directions,
+    equal positions included); [has_ordinal_induced_cycle G k] is its existential closure.  By
+    order: [k = 0] is vacuous ([has_ordinal_induced_cycle G 0] holds in every graph, the empty one
+    included); [k = 1] is impossible in every sgraph (the iff forces a loop); [k = 2] is an
+    injectively enumerated edge, not a cycle of length three; for [k >= 3] it is an injective
+    chordless cyclic enumeration with its closing adjacency.  [GTBase.base.cycle_graph k] drops the
+    diagonal, so its adjacency is [ord_cycle_rel k] exactly when [k != 1]: the induced-embedding
+    bridges [ordinal_induced_cycle_cycP] and [has_ordinal_induced_cycleP] carry that guard, and
+    [cycle_graph1_isubgraph] shows it cannot be dropped.  (GTMisc U13.) *)
+
+Definition ord_cycle_rel (k : nat) : rel 'I_k :=
+  fun i j => (val j == (val i).+1 %% k) || (val i == (val j).+1 %% k).
+
+(** [k] stays explicit: [Set Implicit Arguments] would infer it from the [rel 'I_k] result type. *)
+Arguments ord_cycle_rel : clear implicits.
+
+Lemma ord_cycle_relC k : symmetric (ord_cycle_rel k).
+Proof. by move=> i j; rewrite /ord_cycle_rel orbC. Qed.
+
+(** Away from order one no position is its own neighbour. *)
+Lemma ord_cycle_rel_irr k (i : 'I_k) : k != 1 -> ord_cycle_rel k i i = false.
+Proof.
+move=> k1; rewrite /ord_cycle_rel orbb; apply/negbTE/eqP => e.
+have ik := ltn_ord i.
+have [lt|ge] := ltnP (val i).+1 k.
+  by move: (n_Sn (val i)); rewrite {1}e modn_small // eqxx.
+have ek : (val i).+1 = k by apply/eqP; rewrite eqn_leq ik ge.
+move: e; rewrite ek modnn => e.
+by move: k1; rewrite -ek e.
+Qed.
+
+(** ... and the relation is the adjacency of [cycle_graph k]. *)
+Lemma ord_cycle_rel_cyc k (i j : 'I_k) : k != 1 -> ord_cycle_rel k i j = @cyc_rel k i j.
+Proof.
+move=> k1; have [<-|nij] := eqVneq i j.
+  by rewrite ord_cycle_rel_irr // /cyc_rel eqxx.
+by rewrite /cyc_rel nij /ord_cycle_rel (eq_sym (val j)) (eq_sym (val i)).
+Qed.
+
+(** At order one the relation holds on the single position, where [cycle_graph 1] has no loop. *)
+Lemma ord_cycle_rel1 (i : 'I_1) : ord_cycle_rel 1 i i.
+Proof. by rewrite (fintype.ord1 i) /ord_cycle_rel modn1. Qed.
+
+Section OrdinalCycles.
+Variable G : sgraph.
+
+Definition ordinal_induced_cycle (k : nat) (f : 'I_k -> G) : Prop :=
+  injective f /\ forall i j : 'I_k, (f i -- f j) <-> ord_cycle_rel k i j.
+
+Definition has_ordinal_induced_cycle (k : nat) : Prop :=
+  exists f : 'I_k -> G, ordinal_induced_cycle f.
+
+(** A Boolean mirror quantified over [enum 'I_k]; with [ordinal_induced_cycleP] the predicate is
+    decidable.  ([enum 'I_k] goes through [insub] and does not evaluate under [vm_compute].) *)
+Definition ordinal_induced_cycleb (k : nat) (f : 'I_k -> G) : bool :=
+  injectiveb f &&
+  all (fun i => all (fun j => (f i -- f j) == ord_cycle_rel k i j) (enum 'I_k)) (enum 'I_k).
+
+Lemma ordinal_induced_cycleP k (f : 'I_k -> G) :
+  reflect (ordinal_induced_cycle f) (ordinal_induced_cycleb f).
+Proof.
+apply: (iffP andP) => [[/injectiveP inj /allP h] | [inj h]].
+- split=> // i j.
+  have ei : i \in enum 'I_k by rewrite mem_enum.
+  have ej : j \in enum 'I_k by rewrite mem_enum.
+  by move/allP: (h i ei) => /(_ j ej)/eqP ->.
+- split; first exact/injectiveP.
+  by apply/allP => i _; apply/allP => j _; apply/eqP; apply/idP/idP => /(h i j).
+Qed.
+
+Lemma ordinal_induced_cycle_inj k (f : 'I_k -> G) : ordinal_induced_cycle f -> injective f.
+Proof. by case. Qed.
+
+Lemma ordinal_induced_cycle_adj k (f : 'I_k -> G) :
+  ordinal_induced_cycle f -> forall i j : 'I_k, (f i -- f j) = ord_cycle_rel k i j.
+Proof. by case=> _ h i j; apply/idP/idP => /(h i j). Qed.
+
+(** An induced [k]-cycle has [k] distinct vertices. *)
+Lemma ordinal_induced_cycle_card k (f : 'I_k -> G) : ordinal_induced_cycle f -> k <= #|G|.
+Proof. by case=> inj _; rewrite -[k in k <= _]card_ord; apply: leq_card inj. Qed.
+
+Lemma has_ordinal_induced_cycle_card k : has_ordinal_induced_cycle k -> k <= #|G|.
+Proof. by case=> f /ordinal_induced_cycle_card. Qed.
+
+(** *** Orders zero, one and two *)
+
+(** Order zero is vacuous: every graph, the empty one included, has the empty induced cycle. *)
+Lemma has_ordinal_induced_cycle0 : has_ordinal_induced_cycle 0.
+Proof.
+exists (fun i : 'I_0 => match i with Ordinal m mlt => False_rect G (notF mlt) end).
+by split=> -[m mlt]; exact: (False_rect _ (notF mlt)).
+Qed.
+
+(** Order one forces a loop, which no sgraph has. *)
+Lemma ordinal_induced_cycle1 (f : 'I_1 -> G) : ~ ordinal_induced_cycle f.
+Proof.
+case=> _ /(_ ord0 ord0) [_ h].
+by move: (h (ord_cycle_rel1 ord0)); rewrite sg_irrefl.
+Qed.
+
+Lemma has_ordinal_induced_cycle1 : ~ has_ordinal_induced_cycle 1.
+Proof. by case=> f /ordinal_induced_cycle1. Qed.
+
+(** Order two is an injectively enumerated edge, not a cycle of length three. *)
+Lemma ordinal_induced_cycle2 (f : 'I_2 -> G) : ordinal_induced_cycle f <-> f ord0 -- f ord_max.
+Proof.
+have I2 (i : 'I_2) : i = ord0 \/ i = ord_max.
+  by case: i => -[|[|//]] i2; [left | right]; apply/val_inj.
+split=> [[_ h] | e]; first exact/(h ord0 ord_max).
+have e' : f ord_max -- f ord0 by rewrite sg_sym.
+split.
+- move=> i j; case: (I2 i) => ->; case: (I2 j) => -> // fe.
+  + by rewrite fe sg_irrefl in e.
+  + by rewrite fe sg_irrefl in e'.
+- by move=> i j; case: (I2 i) => ->; case: (I2 j) => ->; rewrite ?sg_irrefl ?e ?e'.
+Qed.
+
+Lemma has_ordinal_induced_cycle2 : has_ordinal_induced_cycle 2 <-> exists x y : G, x -- y.
+Proof.
+split=> [[f /ordinal_induced_cycle2 e] | [x [y xy]]]; first by exists (f ord0), (f ord_max).
+exists (fun i : 'I_2 => if val i == 0 then x else y); exact/ordinal_induced_cycle2.
+Qed.
+
+(** *** Induced copies of [cycle_graph k], for [k != 1] *)
+
+(** The same map: an ordinal induced cycle is an injective map whose adjacency is exactly the
+    adjacency of [cycle_graph k], provided [k != 1]. *)
+Lemma ordinal_induced_cycle_cycP k (f : 'I_k -> G) : k != 1 ->
+  ordinal_induced_cycle f <-> injective f /\ forall i j : 'I_k, (f i -- f j) = @cyc_rel k i j.
+Proof.
+move=> k1; split=> [oc | [inj h]].
+- split; first exact: ordinal_induced_cycle_inj oc.
+  by move=> i j; rewrite (ordinal_induced_cycle_adj oc) ord_cycle_rel_cyc.
+- by split=> // i j; rewrite h -ord_cycle_rel_cyc.
+Qed.
+
+(** The existential form: an induced [k]-cycle exists exactly when [k != 1] and [cycle_graph k] is
+    an induced subgraph. *)
+Lemma has_ordinal_induced_cycleP k :
+  has_ordinal_induced_cycle k <-> (k != 1) /\ inhabited (cycle_graph k ⇀ G).
+Proof.
+split=> [[f oc] | [k1 [i]]].
+- have k1 : k != 1.
+    by apply/eqP => ek; move: f oc; rewrite ek => f /ordinal_induced_cycle1.
+  have [inj h] := (ordinal_induced_cycle_cycP f k1).1 oc.
+  pose g : cycle_graph k -> G := f.
+  have mono : forall a b : cycle_graph k, (g a -- g b) = (a -- b) by move=> a b; exact: h.
+  by split=> //; exact: inhabits (@ISubgraph (cycle_graph k) G g inj mono).
+- exists (fun a : 'I_k => i a); apply/(ordinal_induced_cycle_cycP _ k1); split.
+    by move=> a b /(isubgraph_inj i).
+  by move=> a b; rewrite (isubgraph_mono i).
+Qed.
+
+(** The guard is needed: [cycle_graph 1] (one vertex, no loop) embeds in every nonempty graph,
+    while no graph has an ordinal induced cycle of order one. *)
+Lemma cycle_graph1_isubgraph (x : G) : inhabited (cycle_graph 1 ⇀ G).
+Proof.
+pose g : cycle_graph 1 -> G := fun _ => x.
+have inj : injective g by move=> a b _; rewrite (fintype.ord1 a) (fintype.ord1 b).
+have mono : forall a b : cycle_graph 1, (g a -- g b) = (a -- b).
+  by move=> a b; rewrite /g sg_irrefl (fintype.ord1 a) (fintype.ord1 b) sg_irrefl.
+exact: inhabits (@ISubgraph (cycle_graph 1) G g inj mono).
+Qed.
+
+End OrdinalCycles.
+
+Arguments ordinal_induced_cycle {G k} f.
+Arguments has_ordinal_induced_cycle G k : assert.
+Arguments ordinal_induced_cycleb {G k} f.
+
+(** *** Transport along induced copies *)
+
+Lemma ordinal_induced_cycle_comp (H G : sgraph) (i : H ⇀ G) k (f : 'I_k -> H) :
+  ordinal_induced_cycle f -> ordinal_induced_cycle (i \o f).
+Proof.
+case=> inj h; split; first exact: inj_comp (isubgraph_inj i) inj.
+by move=> a b /=; rewrite (isubgraph_mono i); exact: h.
+Qed.
+
+Lemma has_ordinal_induced_cycle_isubgraph (H G : sgraph) (i : H ⇀ G) k :
+  has_ordinal_induced_cycle H k -> has_ordinal_induced_cycle G k.
+Proof. by case=> f oc; exists (i \o f); exact: ordinal_induced_cycle_comp oc. Qed.

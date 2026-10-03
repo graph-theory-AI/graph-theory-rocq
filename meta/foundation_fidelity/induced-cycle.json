@@ -36,6 +36,22 @@
     "holeb": {
      "verdict": "FAITHFUL",
      "note": "Boolean mirror of hole; reflected by holeP."
+    },
+    "ord_cycle_rel": {
+     "verdict": "FAITHFUL",
+     "note": "ord_cycle_rel k i j: j is the successor of i modulo k or i the successor of j, with no unequal-index premise (U13's relation); at k = 1 it holds on the single position, and for k != 1 it is cycle_graph k's adjacency (ord_cycle_rel_cyc)."
+    },
+    "ordinal_induced_cycle": {
+     "verdict": "FAITHFUL",
+     "note": "ordinal_induced_cycle f: f : 'I_k -> G is injective and f i -- f j exactly when ord_cycle_rel k i j, for all i j (equal indices included); order 0 vacuous, order 1 impossible, order 2 an edge."
+    },
+    "has_ordinal_induced_cycle": {
+     "verdict": "FAITHFUL",
+     "note": "has_ordinal_induced_cycle G k: some f : 'I_k -> G is an ordinal induced cycle; true at k = 0 in every graph, false at k = 1, an edge at k = 2, and for k != 1 equivalent to an induced copy of cycle_graph k (has_ordinal_induced_cycleP)."
+    },
+    "ordinal_induced_cycleb": {
+     "verdict": "FAITHFUL",
+     "note": "Boolean mirror of ordinal_induced_cycle over enum 'I_k; reflected by ordinal_induced_cycleP."
     }
    },
    "machine_evidence": [
@@ -79,7 +95,26 @@
     "ucycle_map",
     "chordless_ucycle_map",
     "chordless_cycle_map",
-    "hole_map"
+    "hole_map",
+    "ord_cycle_relC",
+    "ord_cycle_rel_irr",
+    "ord_cycle_rel_cyc",
+    "ord_cycle_rel1",
+    "ordinal_induced_cycleP",
+    "ordinal_induced_cycle_inj",
+    "ordinal_induced_cycle_adj",
+    "ordinal_induced_cycle_card",
+    "has_ordinal_induced_cycle_card",
+    "has_ordinal_induced_cycle0",
+    "ordinal_induced_cycle1",
+    "has_ordinal_induced_cycle1",
+    "ordinal_induced_cycle2",
+    "has_ordinal_induced_cycle2",
+    "ordinal_induced_cycle_cycP",
+    "has_ordinal_induced_cycleP",
+    "cycle_graph1_isubgraph",
+    "ordinal_induced_cycle_comp",
+    "has_ordinal_induced_cycle_isubgraph"
    ]
   }
  }

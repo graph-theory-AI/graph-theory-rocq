@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py ordinal_path --details /tmp/mig
 - Canonical: `GTBase.path_graphs.ordinal_path`.
 - Baseline: `9921abbaa06205062a2b81d77d06cdd641dcdc97`.
 - Scope: 7 helpers, 4 statements, 20 frozen objects, 47 recorded references.
-- Source checks: 180/180 pass; consistent.
+- Source checks: 179/179 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,6 +20,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py ordinal_path --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `GTBase.base.cyc_rel`, `Minor.conjectures.X198.x198_join_path_rel`, `Digraph.conjectures.two_extremal.symcyc_rel`, `GTMisc.conjectures.U13.induced_cycle`, `Chromatic.applications.gap_repairs.viable_boundary.boundary_rel`, `Chromatic.conjectures.X162.x162_tri_rel`, `Topological.conjectures.D6emb.anti_dir`.
+Excluded distinct variants: `GTBase.base.cyc_rel`, `Minor.conjectures.X198.x198_join_path_rel`, `Digraph.conjectures.two_extremal.symcyc_rel`, `Chromatic.applications.gap_repairs.viable_boundary.boundary_rel`, `Chromatic.conjectures.X162.x162_tri_rel`, `Topological.conjectures.D6emb.anti_dir`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/chi_bounded_classes.v#X170StatementsLegacy.oriented_P4_forb_chi_bounded_statement`.

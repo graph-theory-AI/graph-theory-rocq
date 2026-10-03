@@ -275,7 +275,9 @@
       "corpus": "opg"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "graph-theory-misc/theories/migration/induced_cycles.v#U13RowLegacy.two_colouring_a_graph_without_a_monochromatic_maximu_statement": "B24 per-row snapshot: family induced-cycle (B24 extension) froze only its ordinal-map induced-cycle helpers in this object (two_colouring_a_graph_without_a_monochromatic_maximu_statement), so this copy still calls the live splits_max_cliques, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B24's per-row copy; the complete combined row is B24's C8+B24 Original, certified end to end in the induced-cycle spec through this family's own certificate."
+  },
   "cross_module_consumers": [
     {
       "path": "graph-theory-misc/theories/conjectures/grounding_U13.v",

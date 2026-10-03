@@ -125,3 +125,55 @@ Print Assumptions example_K3_genuine.
 Print Assumptions example_C4_hole.
 Print Assumptions example_C4_rev.
 Print Assumptions example_chorded_not_hole.
+
+(** ** Ordinal-map induced cycles (B24)
+
+    The four orders of behaviour of [ordinal_induced_cycle] / [has_ordinal_induced_cycle]: order
+    zero holds even in the empty graph; order one is impossible although [cycle_graph 1] embeds in
+    every nonempty graph (the [k != 1] guard of the [cycle_graph] bridges); order two is exactly an
+    edge; from order three on, the identity enumerations of [K_3] and [C_5] are induced cycles and
+    the identity enumeration of [K_4] is not (its diagonals are chords). *)
+
+Lemma example_ord0_empty : has_ordinal_induced_cycle 'K_0 0.
+Proof. exact: has_ordinal_induced_cycle0. Qed.
+
+Lemma example_ord1_impossible : ~ has_ordinal_induced_cycle 'K_3 1.
+Proof. exact: has_ordinal_induced_cycle1. Qed.
+
+Lemma example_ord1_guard : inhabited (cycle_graph 1 ⇀ 'K_3) /\ ~ has_ordinal_induced_cycle 'K_3 1.
+Proof. by split; [exact: (@cycle_graph1_isubgraph 'K_3 k3_0) | exact: has_ordinal_induced_cycle1]. Qed.
+
+Lemma example_ord2_edge : has_ordinal_induced_cycle 'K_2 2.
+Proof. by apply/has_ordinal_induced_cycle2; exists k2_0, k2_1. Qed.
+
+Lemma example_ord2_no_edge : ~ has_ordinal_induced_cycle 'K_1 2.
+Proof.
+case/has_ordinal_induced_cycle2 => x [y].
+by rewrite (fintype.ord1 x) (fintype.ord1 y) sg_irrefl.
+Qed.
+
+Lemma example_ord_K3 : ordinal_induced_cycle (fun i : 'I_3 => (i : 'K_3)).
+Proof. by split=> // -[[|[|[|//]]] pi] [[|[|[|//]]] pj]. Qed.
+
+Lemma example_ord_C5 : has_ordinal_induced_cycle (cycle_graph 5) 5.
+Proof.
+exists (fun i : 'I_5 => (i : cycle_graph 5)).
+apply: (proj2 (ordinal_induced_cycle_cycP (fun i : 'I_5 => (i : cycle_graph 5)) isT)).
+by split=> [a b|].
+Qed.
+
+Lemma example_ord_C5_isubgraph : (5 != 1) /\ inhabited (cycle_graph 5 ⇀ cycle_graph 5).
+Proof. exact/has_ordinal_induced_cycleP/example_ord_C5. Qed.
+
+Lemma example_ord_K4_chorded : ~ ordinal_induced_cycle (fun i : 'I_4 => (i : 'K_4)).
+Proof. by case=> _ /(_ (@Ordinal 4 0 isT) (@Ordinal 4 2 isT)) [h _]; move: (h isT). Qed.
+
+Lemma example_ord_card : ~ has_ordinal_induced_cycle 'K_3 4.
+Proof. by move/has_ordinal_induced_cycle_card; rewrite card_ord. Qed.
+
+Print Assumptions example_ord0_empty.
+Print Assumptions example_ord1_guard.
+Print Assumptions example_ord2_edge.
+Print Assumptions example_ord_K3.
+Print Assumptions example_ord_C5_isubgraph.
+Print Assumptions example_ord_K4_chorded.
