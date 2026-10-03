@@ -15,7 +15,7 @@ Definition x59_subgraph_of (H G : sgraph) : Prop :=
   has_subgraph G H.
 
 Definition x59_has_cycle_length (G : sgraph) (n : nat) : Prop :=
-  exists c : seq G, ucycle (--) c /\ size c = n.
+  has_ucycle_length (@edge_rel G) n.
 
 (** Corpus row: arxiv:2307.08361#01
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2307.08361__01/

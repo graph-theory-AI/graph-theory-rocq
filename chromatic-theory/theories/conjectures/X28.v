@@ -9,11 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X28 vocabulary ************************************************)
 
 Definition x28_no_cycle_length_between (G : sgraph) (a b : nat) : Prop :=
-  forall c : seq G,
-    ucycle (--) c ->
-    a <= size c ->
-    size c <= b ->
-    False.
+  no_ucycle_length_between (@edge_rel G) a b.
 
 (** ** X28 statements ******************************************************)
 
