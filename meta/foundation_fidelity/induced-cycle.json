@@ -1,0 +1,86 @@
+{
+ "schema_version": 1,
+ "family": "induced-cycle",
+ "modules": {
+  "GTBase.induced_cycles": {
+   "path": "base/theories/induced_cycles.v",
+   "overrides": {
+    "cyclic_chordless": {
+     "verdict": "FAITHFUL",
+     "note": "cyclic_chordless c: every host edge between two entries of c joins cyclically consecutive entries (seq_cyclic_consecutiveb); no distinctness premise, which sg_edgeNeq makes redundant."
+    },
+    "cyclic_chordlessb": {
+     "verdict": "FAITHFUL",
+     "note": "Boolean mirror of cyclic_chordless quantified over the list; reflected by cyclic_chordlessP."
+    },
+    "chordless_ucycle": {
+     "verdict": "FAITHFUL",
+     "note": "chordless_ucycle c: a chordless ucycle of host adjacency with no length bound (D2str's raw contract); the empty list and the two-vertex cycle of an edge qualify."
+    },
+    "chordless_cycle": {
+     "verdict": "FAITHFUL",
+     "note": "chordless_cycle c: a chordless ucycle with 2 < size c, a genuine induced cycle (X91, XE1); equivalent to seq_cycle (--) c /\\ cyclic_chordless c."
+    },
+    "hole": {
+     "verdict": "FAITHFUL",
+     "note": "hole c: a chordless ucycle with 3 < size c (X3, X27); a triangle is a chordless cycle but not a hole."
+    },
+    "chordless_ucycleb": {
+     "verdict": "FAITHFUL",
+     "note": "Boolean mirror of chordless_ucycle; reflected by chordless_ucycleP."
+    },
+    "chordless_cycleb": {
+     "verdict": "FAITHFUL",
+     "note": "Boolean mirror of chordless_cycle; reflected by chordless_cycleP."
+    },
+    "holeb": {
+     "verdict": "FAITHFUL",
+     "note": "Boolean mirror of hole; reflected by holeP."
+    }
+   },
+   "machine_evidence": [
+    "cyclic_chordlessP",
+    "cyclic_chordless_edge_neq",
+    "cyclic_chordless_neq_edge",
+    "cyclic_chordless_prop",
+    "cyclic_chordless_prop_edge_neq",
+    "cyclic_chordless_prop_neq_edge",
+    "chordless_ucycleP",
+    "chordless_cycleP",
+    "holeP",
+    "chordless_cycleE",
+    "holeE",
+    "chordless_cycle_seq_cycle",
+    "hole_chordless_cycle",
+    "chordless_cycle_chordless_ucycle",
+    "hole_chordless_ucycle",
+    "chordless_ucycle_ucycle",
+    "chordless_ucycle_chordless",
+    "chordless_cycle_size",
+    "hole_size",
+    "chordless_ucycle_nil",
+    "chordless_ucycle_pair",
+    "chordless_cycle_nil",
+    "chordless_cycle_seq1",
+    "chordless_cycle_pair",
+    "hole_small",
+    "chordless_cycle_triangle",
+    "hole_triangle",
+    "cyclic_chordless_rot",
+    "chordless_ucycle_rot",
+    "chordless_cycle_rot",
+    "hole_rot",
+    "ucycle_rev",
+    "cyclic_chordless_rev",
+    "chordless_ucycle_rev",
+    "chordless_cycle_rev",
+    "hole_rev",
+    "cyclic_chordless_map",
+    "ucycle_map",
+    "chordless_ucycle_map",
+    "chordless_cycle_map",
+    "hole_map"
+   ]
+  }
+ }
+}

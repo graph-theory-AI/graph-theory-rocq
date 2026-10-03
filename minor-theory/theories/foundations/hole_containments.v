@@ -29,6 +29,7 @@
       by the parity argument is an induced 4-cycle. *)
 
 From GTBase Require Export base.
+From GTBase Require induced_cycles.
 From Minor.foundations Require Import containment.
 From Minor.conjectures Require Import X27 X220.
 
@@ -132,10 +133,12 @@ have e4 : (a == d) = false by rewrite eq_sym; exact: sg_edgeNeq da.
 have e5 : (a == c) = false by exact/negbTE.
 have e6 : (b == d) = false by exact/negbTE.
 split; first by rewrite /ucycle /= ab bc cd da !inE e1 e2 e3 e4 e5 e6.
-split => // x y hx hy xy nxy.
+(* B23: [x27_hole] is now [GTBase.induced_cycles.hole], whose chord clause has no distinctness
+   premise; [cyclic_chordless_edge_neq] restores it. *)
+split => //; apply/induced_cycles.cyclic_chordless_edge_neq => x y hx hy xy nxy.
 suff h : ((x, y) \in [:: (a, b); (b, c); (c, d); (d, a)])
       || ((y, x) \in [:: (a, b); (b, c); (c, d); (d, a)]).
-  by rewrite /x27_consecutive_in_cycle /seq_cyclic_consecutiveb /=.
+  by rewrite /seq_cyclic_consecutiveb /=.
 have nac' : ~~ (c -- a) by rewrite sgP.
 have nbd' : ~~ (d -- b) by rewrite sgP.
 move: hx hy xy nxy; rewrite !inE -!orbA.
@@ -172,9 +175,9 @@ split.
   apply/andP; split; last by rewrite (map_inj_uniq iinj).
   by rewrite cycle_map (eq_cycle rel_eq).
 split; first by rewrite size_map.
+(* B23: the chord clause of [GTBase.induced_cycles.hole] has no distinctness premise. *)
 move=> x y /mapP[u hu ->] /mapP[v hv ->]; rewrite imono => uv.
-rewrite (inj_eq (isubgraph_inj i)) => nuv.
-have := ind u v hu hv uv nuv; rewrite /x27_consecutive_in_cycle /seq_cyclic_consecutiveb -map_rot.
+have := ind u v hu hv uv; rewrite /seq_cyclic_consecutiveb -map_rot.
 by case/orP => h; apply/orP; [left|right]; exact: mem_zip_map.
 Qed.
 
@@ -536,7 +539,7 @@ Qed.
 Lemma fch_hole : x27_hole fch_cycle.
 Proof.
 split; first by rewrite /ucycle fch_cycleP fch_uniq.
-split; last exact: fch_chordless.
+split; last by apply/induced_cycles.cyclic_chordless_edge_neq; exact: fch_chordless.
 by rewrite fch_size !ltnS.
 Qed.
 

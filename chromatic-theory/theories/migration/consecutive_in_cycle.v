@@ -27,6 +27,7 @@
     meta/migration_reports/consecutive_in_cycle.md. *)
 
 From GTBase Require Import base.
+From GTBase Require induced_cycles.
 From Chromatic.conjectures Require Import U8 X3 X160 XE1 XE2.
 From Chromatic.migration Require proper_colouring.
 
@@ -166,6 +167,11 @@ End XE2Legacy.
 
 (** ** Certificates *)
 
+(** B23 (2026-10-03): the live holes / induced cycles are now aliases of GTBase.induced_cycles, which
+    states chordlessness without a distinctness premise and with the Boolean cyclic consecutiveness.
+    The certificates below that reach them are therefore proved through its bridges instead of by
+    conversion; their statements and every frozen body are unchanged. *)
+
 Lemma x3_consecutive_in_cycle_compat (G : sgraph) (c : seq G) (u v : G) :
   Legacy.x3_consecutive_in_cycle c u v = x3_consecutive_in_cycle c u v.
 Proof. by []. Qed.
@@ -175,51 +181,82 @@ Lemma xe1_consecutive_in_cycle_compat (G : sgraph) (c : seq G) (u v : G) :
 Proof. by []. Qed.
 
 Lemma x3_hole_compat (G : sgraph) (c : seq G) : X3Legacy.hole c <-> x3_hole c.
-Proof. exact: iff_refl. Qed.
+Proof.
+rewrite /x3_hole; split=> [[uc sz ch] | [uc [sz ch]]].
+- split=> //; split=> //; apply/induced_cycles.cyclic_chordless_prop_neq_edge.
+  move=> u v uc' vc' nuv uv; exact: (ch u v uc' vc' nuv uv).
+- split=> // u v uc' vc' nuv uv.
+  exact: (proj2 (induced_cycles.cyclic_chordless_prop_neq_edge c) ch u v uc' vc' nuv uv).
+Qed.
 
 Lemma x3_has_hole_length_compat (G : sgraph) (L : nat) :
   X3Legacy.has_hole_length G L <-> x3_has_hole_length G L.
-Proof. exact: iff_refl. Qed.
+Proof.
+by split=> -[c [h s]]; exists c; split=> //; apply/x3_hole_compat.
+Qed.
 
 Lemma x3_holes_of_consecutive_lengths_compat (G : sgraph) (ell : nat) :
   X3Legacy.holes_of_consecutive_lengths G ell <-> x3_holes_of_consecutive_lengths G ell.
-Proof. exact: iff_refl. Qed.
+Proof.
+by split=> -[t h]; exists t => i i1 il; apply/x3_has_hole_length_compat; apply: h.
+Qed.
 
 Lemma x3_rainbow_hole_run_compat (G : sgraph) (C : finType) (col : G -> C) (s : nat) :
   X3Legacy.rainbow_hole_run col s <-> x3_rainbow_hole_run col s.
-Proof. exact: iff_refl. Qed.
+Proof.
+by split=> -[c [r [h rest]]]; exists c, r; split=> //; apply/x3_hole_compat.
+Qed.
 
 Lemma x3_k_constricting_compat (F : nat -> Prop) (k : nat) :
   X3Legacy.k_constricting F k <-> x3_k_constricting F k.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> -[n h]; exists n => G chi; case: (h G chi) => [om | [L [FL hl]]];
+  first [by left | by right; exists L; split=> //; apply/x3_has_hole_length_compat].
+Qed.
 
 Lemma x3_constricting_compat (F : nat -> Prop) :
   X3Legacy.constricting F <-> x3_constricting F.
-Proof. exact: iff_refl. Qed.
+Proof.
+by split=> h k; apply/x3_k_constricting_compat; apply: h.
+Qed.
 
 Lemma bounded_clique_consecutive_hole_lengths_statement_compat :
   X3Legacy.bounded_clique_consecutive_hole_lengths_statement <->
   bounded_clique_consecutive_hole_lengths_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> h nu k nu0 k3; have [n hn] := h nu k nu0 k3; exists n => G om chi;
+  by apply/x3_holes_of_consecutive_lengths_compat; apply: hn.
+Qed.
 
 Lemma bounded_gaps_sets_are_constricting_statement_compat :
   X3Legacy.bounded_gaps_sets_are_constricting_statement <->
   bounded_gaps_sets_are_constricting_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+by split=> h F p i b; apply/x3_constricting_compat; apply: h.
+Qed.
 
 Lemma rainbow_consecutive_vertices_in_hole_statement_compat :
   X3Legacy.rainbow_consecutive_vertices_in_hole_statement <->
   rainbow_consecutive_vertices_in_hole_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> h s kappa; have [n hn] := h s kappa; exists n => G C col om chi pc;
+  by apply/x3_rainbow_hole_run_compat; apply: hn.
+Qed.
 
 Lemma clique_or_consecutive_holes_statement_compat :
   X3Legacy.clique_or_consecutive_holes_statement <-> clique_or_consecutive_holes_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> h kappa ell; have [c hc] := h kappa ell; exists c => G chi;
+  case: (hc G chi) => [om | ho];
+  first [by left | by right; apply/x3_holes_of_consecutive_lengths_compat].
+Qed.
 
 Lemma density_zero_constricting_set_statement_compat :
   X160Legacy.density_zero_constricting_set_statement <->
   density_zero_constricting_set_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+by split=> -[F [p i c d]]; exists F; split=> //; apply/x3_constricting_compat.
+Qed.
 
 Lemma xe1_cycle_diagonal_count_compat (G : sgraph) (c : seq G) :
   XE1Legacy.cycle_diagonal_count c = xe1_cycle_diagonal_count c.
@@ -257,7 +294,7 @@ Lemma rainbow_consecutive_vertices_in_hole_statement_original_compat :
   X3Original.rainbow_consecutive_vertices_in_hole_statement <->
   rainbow_consecutive_vertices_in_hole_statement.
 Proof.
-split=> st s kappa; have [n hn] := st s kappa; exists n => G C col om chi pc.
-- by apply: hn => //; apply/proper_colouring.x3_proper_colouring_compat.
-- by apply: hn => //; apply/proper_colouring.x3_proper_colouring_compat.
+split=> st s kappa; have [n hn] := st s kappa; exists n => G C col om chi pc;
+  apply/x3_rainbow_hole_run_compat; apply: hn => //;
+  by apply/proper_colouring.x3_proper_colouring_compat.
 Qed.

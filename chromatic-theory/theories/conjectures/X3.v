@@ -7,7 +7,7 @@
     intentionally deferred. *)
 
 From Chromatic.conjectures Require Import U8.
-From GTBase Require Import colourings graph_classes induced_paths.
+From GTBase Require Import colourings graph_classes induced_paths induced_cycles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -24,12 +24,12 @@ Definition x3_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
   seq_consecutive p u v.
 
 (** A hole is an induced cycle of length at least four.  [ucycle] supplies the
-    closed walk and vertex uniqueness; the final clause rules out chords. *)
-Definition x3_hole (G : sgraph) (c : seq G) : Prop :=
-  [/\ ucycle (--) c, 3 < size c &
-      forall u v : G,
-        u \in c -> v \in c -> u != v -> u -- v ->
-        x3_consecutive_in_cycle c u v].
+    closed walk and vertex uniqueness; the final clause rules out chords.  Since the B23 library
+    migration (2026-10-03) a transparent alias of [GTBase.induced_cycles.hole]; the former body (a
+    three-way conjunction whose chord clause took a redundant [u != v] premise before the edge and
+    stated the consecutiveness as a proposition) is frozen and certified equivalent in
+    theories/migration/induced_cycles.v. *)
+Definition x3_hole (G : sgraph) (c : seq G) : Prop := hole c.
 
 Definition x3_has_hole_length (G : sgraph) (L : nat) : Prop :=
   exists c : seq G, x3_hole c /\ size c = L.
