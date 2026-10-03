@@ -1,0 +1,538 @@
+{
+  "family": "induced-path",
+  "canonical_name": "GTBase.induced_paths.induced_path_between",
+  "canonical_short_name": "induced_path_between",
+  "relation": "one contract, an induced (chordless) vertex-sequence path: a duplicate-free sequence following host edges in which every host edge between two of its entries joins consecutive entries (seq_consecutive); five views differ only in what they say about the ends and the length. GTBase.induced_paths.induced_path (empty allowed) is Chromatic.X3.x3_induced_path by conversion; nonempty_induced_path is GTMisc.X91.x91_induced_path by conversion; induced_path_between a b p (nonempty, endpoint inclusive, the canonical full-endpoint formula) is Extremal.X98.x98_induced_path_between and GTMisc.X114.x114_induced_path_between by conversion and Packing.U9.is_induced_path (Boolean spath/uniq/index consec) by an explicit iff whose index bridge needs the membership and uniqueness premises; long_induced_path_between adds the X67 clause 3 <= size p in its position and is Minor.X67.x67_induced_path_between by conversion; has_induced_path_of_order t (some nonempty induced path has exactly t vertices) is GTMisc.X208.x208_induced_path_order by an explicit iff through the nth index bridge on the duplicate-free list (false at 0, true at 1 iff the graph has a vertex). The public source GTBase.induced_subdivisions.induced_subdivision (C20, pinned 97605dd) keeps its body inhabited (induced_subdivision_model H G); only the Record's pattern-edge field isd_edge_path_valid is now written through induced_path_between, which unfolds to exactly the former inline match (definitional equality, no proof irrelevance); the complete seven-field C20 Record is frozen with cancelling field-by-field transports and the wrapper iff. Chromatic.X177.x177_induced_path_between shares the normalized name but is a different, defective contract (tail-list simple path with a documented tautological chord clause; its lantern row is blocked): deferred-excluded, unchanged, not redirected. Distinct and untouched: X218's induced run, induced cycles and holes, upstream upath/IPath.",
+  "baseline_commit": "00e59d190216a0cf26724bb6334d3aceee0f3b68",
+  "namespaces": {
+    "chromatic-theory": "Chromatic",
+    "graph-theory-misc": "GTMisc",
+    "extremal-graph-theory": "Extremal",
+    "minor-theory": "Minor",
+    "packing-theory": "Packing",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/induced_paths.v",
+    "base/theories/migration/induced_paths.v",
+    "chromatic-theory/theories/migration/induced_paths.v",
+    "graph-theory-misc/theories/migration/induced_paths.v",
+    "extremal-graph-theory/theories/migration/induced_paths.v",
+    "minor-theory/theories/migration/induced_paths.v",
+    "packing-theory/theories/migration/induced_paths.v"
+  ],
+  "extra_certificates": [
+    "GTBase.induced_paths.chordlessE",
+    "GTBase.induced_paths.induced_pathP",
+    "GTBase.induced_paths.nonempty_induced_pathP",
+    "GTBase.induced_paths.induced_path_betweenP",
+    "GTBase.induced_paths.long_induced_path_betweenP",
+    "GTBase.induced_paths.induced_path_uniq",
+    "GTBase.induced_paths.induced_path_sorted",
+    "GTBase.induced_paths.induced_path_chordless",
+    "GTBase.induced_paths.nonempty_induced_path_induced",
+    "GTBase.induced_paths.induced_path_between_nonempty",
+    "GTBase.induced_paths.induced_path_between_head",
+    "GTBase.induced_paths.induced_path_between_last",
+    "GTBase.induced_paths.induced_path_between_mem",
+    "GTBase.induced_paths.long_induced_path_between_size",
+    "GTBase.induced_paths.induced_path_nil",
+    "GTBase.induced_paths.not_nonempty_induced_path_nil",
+    "GTBase.induced_paths.not_induced_path_between_nil",
+    "GTBase.induced_paths.nonempty_induced_path_seq1",
+    "GTBase.induced_paths.induced_path_seq1",
+    "GTBase.induced_paths.induced_path_between_seq1",
+    "GTBase.induced_paths.not_induced_path_repeat",
+    "GTBase.induced_paths.not_induced_path_dup",
+    "GTBase.induced_paths.has_induced_path_of_order0",
+    "GTBase.induced_paths.has_induced_path_of_order1",
+    "GTBase.induced_paths.induced_path_rev",
+    "GTBase.induced_paths.head_rev_last",
+    "GTBase.induced_paths.last_rev_head",
+    "GTBase.induced_paths.induced_path_between_rev",
+    "GTBase.induced_paths.infix_pair_index",
+    "GTBase.induced_paths.index_pair_infix",
+    "GTBase.induced_paths.seq_consecutive_index",
+    "GTBase.induced_paths.index_relation_non_member",
+    "GTBase.induced_paths.chordless_nthP"
+  ],
+  "summary": [
+    "Family B22 (induced sequence paths). Seven local helpers and one public source now unfold to the public canonical views of `GTBase.induced_paths` (not re-exported by base): `Chromatic.conjectures.X3.x3_induced_path` to the empty-allowed `induced_path`, `GTMisc.conjectures.X91.x91_induced_path` to `nonempty_induced_path`, `Extremal.conjectures.X98.x98_induced_path_between` and `GTMisc.conjectures.X114.x114_induced_path_between` to the full-endpoint `induced_path_between` (the canonical formula, kept in the exact X98/X114 match/conjunction shape), `Minor.conjectures.X67.x67_induced_path_between` to `long_induced_path_between` (the 3 <= size p clause kept in its position), all five by conversion (their consecutive-pair tests were already B3's aliases of `seq_consecutive`); `Packing.conjectures.U9.is_induced_path` to `induced_path_between` and `GTMisc.conjectures.X208.x208_induced_path_order` to `has_induced_path_of_order` by explicit iff certificates: U9's Boolean `spath`/`uniq`/index `consec` encoding through `seq_consecutive_index`, whose index bridge needs the membership premises that U9's bounded quantifier supplies and the duplicate-freeness of the list (no unconditional index bridge is claimed; `spath` and `consec` stay live), X208's index encoding through `chordless_nthP` (the existential head vertex is the list's head; in-range indices add no hidden default-vertex premise). The public source `GTBase.induced_subdivisions.induced_subdivision` (C20, descriptor pinned to 97605dd) keeps its body `inhabited (induced_subdivision_model H G)`; only the Record's pattern-edge field `isd_edge_path_valid` is now written through `induced_path_between`, which unfolds to exactly the former inline match (definitional equality; no merely equivalent Prop, no proof irrelevance). The complete seven-field C20 Record is frozen verbatim in GTBase.migration.induced_paths with field-by-field transports in both directions, their cancellation (`induced_subdivision_model_compat`) and the wrapper iff; the public constructor, the seven projections, X98's and X114's local constructors, fourteen projections and Arguments, and all sixteen model repackagers (B3, C19, C20) are unchanged and recompiled. `Chromatic.conjectures.X177.x177_induced_path_between` shares the normalized name but stays a distinct, defective, deferred-excluded contract.",
+    "",
+    "Eight complete current rows, frozen over the frozen helpers and chains with every guard, quantifier order, status and defect distinction exact: Chromatic X3 `stable_cover_unique_induced_path_statement` (forall s, exists n before G, arbitrary finite index family, stable cover, exactly s vertices with s = 0 allowed, unique cover intersection), Chromatic X83 `aravind_rainbow_induced_chromatic_path_statement` (nonempty, triangle-free, arbitrary palette, proper colouring, exactly chi(G) rainbow vertices), GTMisc X91 `avoidable_path_or_pk_free_statement` (0 < k; no induced k-vertex path, or one whose every induced two-ended extension lies in an induced cycle), Extremal X98 `polynomial_kuhn_osthus_induced_subdivision_statement` (uniform polynomial after H and before s/G, 1 <= s, forbidden K_{s,s} subgraph, average-degree bound), GTMisc X114 `subcubic_induced_subdivision_np_complete_statement` (existential pattern, subcubic guard, in-NP and NP-hard halves through the D7 problem record; the D7 representation limitation is retained), Minor X67 `theta_triangle_free_bounded_degree_treewidth_statement` (uniform f, 4 <= t, Delta bound, triangle-free, no induced theta with its three paths, interior disjointness and no cross edges; solved status unchanged), Packing U9 `lovasz_path_removal_statement` (uniform f before k/G/x/y, distinct endpoints, f(k)-connectivity, whole induced path plus k-connectivity of the complement including k < |U|), GTMisc X208 `Pt_free_maximum_independent_set_polytime_statement` (forall t, 7 <= t, the complete positive algorithmic assertion with exact program/polynomial cost/encoding and maximum size output; partial status unchanged). No statement text, doc block, manifest row, leg state or status changes.",
+    "",
+    "History: the six complete Originals are reused, not re-composed: B3's `X3Original.statement` (B1 path vertices + B3 induced path over frozen consecutive pairs), C5's `X83Original` (frozen colouring + B3's frozen rainbow path), B4's `X91Original` (B3 frozen path / Pk-free + B4 frozen induced cycle), C13's `X67Original` (B3's frozen theta over B1/B2 frozen interiors + C13 frozen treewidth) and C19's `X98Original` / `X114Original` (B3 path bodies + A5 raw subgraph / A14 frozen subcubic + raw support over fully frozen Records); each is certified here end to end through the owning family's own original certificate, so every reused Original composes a frozen induced path and no live replacement. Every earlier frozen body and array stays byte-exact; the earlier snapshots that keep this family's live names are listed in known_stale_snapshots with reciprocal notes in their specs (C20's current snapshots keep live local path helpers and are preserved as such).",
+    "",
+    "Consumers: the actual Packing grounding (`is_induced_path_triv`, `is_induced_path_spath`: two proof scripts, statements unchanged), the whole C20 public API and client (recompiled unchanged), X98/X114 wrappers and the sixteen repackagers (recompiled unchanged), and the migration certificates of B1/B2/B3/B4/C5/A5/C13/A14/C19/C20 (all recompiled; their compatibility proofs keep holding by conversion). Routing: normal milestones Chromatic X3 and X83, Extremal X98, GTMisc X91, X114 and X208, Minor X67 and Packing U9; no Digraph source.",
+    "",
+    "Public-only client base/theories/examples/induced_paths.v: empty, singleton and repeated sequences; the three-vertex path accepted in B21's P_3 and the same order rejected in K_3; reversal exchanging the endpoints; the X67 length guard on K_2's edge; exact orders 0 and 1 (and K_0); the conditional index bridge (members of a duplicate-free list) with its non-member counterexample.",
+    "",
+    "Kernel evidence, independent of this textual report, combines exact type and Arguments probes, explicit Record-body/projection/cancelling-transport checks, and Print All Dependencies. Frozen objects avoid the new B22 canonical induced-path constants and live B22 helpers; this is not a claim that all canonical vocabulary is absent. The frozen public Record intentionally retains the older GTBase.model_support.model_support and GTBase.walks_paths.seq_consecutive contracts, and reused complete Originals retain their documented earlier-family dependencies. Live rows reach their live helpers and the B22 canonical views. Print All Dependencies alone does not establish Inductive identity or enumerate a Record body. Original evidence: /srv/graph-theory-rocq/coordination/evidence/B22-induced_paths/print_all_dependencies_summary.txt.",
+    "",
+    "Baseline 00e59d1 is the corrected private prerequisite (fixed B21 66279eb merged with reviewed C20 97605dd, plus the one-line genuine_cycle membership correction); the seven source bodies, the eight rows and the public Record/wrapper are byte-identical there to both parents, and the public descriptor is pinned to C20 97605dd."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_induced_path",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_induced_path",
+      "frozen_path": "chromatic-theory/theories/migration/induced_paths.v",
+      "frozen": "Legacy.x3_induced_path",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.induced_paths.x3_induced_path_compat",
+      "live_unfolds_to": "induced_path p"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X91.x91_induced_path",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_induced_path",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "Legacy.x91_induced_path",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_paths.x91_induced_path_compat",
+      "live_unfolds_to": "nonempty_induced_path p"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X98.x98_induced_path_between",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_path_between",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_paths.v",
+      "frozen": "Legacy.x98_induced_path_between",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_paths.x98_induced_path_between_compat",
+      "live_unfolds_to": "induced_path_between a b p"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_path_between",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_path_between",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "Legacy.x114_induced_path_between",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_paths.x114_induced_path_between_compat",
+      "live_unfolds_to": "induced_path_between a b p"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X67.x67_induced_path_between",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_induced_path_between",
+      "frozen_path": "minor-theory/theories/migration/induced_paths.v",
+      "frozen": "Legacy.x67_induced_path_between",
+      "substitutions": {},
+      "certificate": "Minor.migration.induced_paths.x67_induced_path_between_compat",
+      "live_unfolds_to": "long_induced_path_between a b p"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.U9.is_induced_path",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "is_induced_path",
+      "frozen_path": "packing-theory/theories/migration/induced_paths.v",
+      "frozen": "Legacy.is_induced_path",
+      "substitutions": {},
+      "certificate": "Packing.migration.induced_paths.is_induced_path_compat",
+      "live_unfolds_to": "induced_path_between x y p"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X208.x208_induced_path_order",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "x208_induced_path_order",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "Legacy.x208_induced_path_order",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_paths.x208_induced_path_order_compat",
+      "live_unfolds_to": "has_induced_path_of_order G t"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTBase.induced_subdivisions.induced_subdivision",
+      "path": "base/theories/induced_subdivisions.v",
+      "name": "induced_subdivision",
+      "frozen_path": "base/theories/migration/induced_paths.v",
+      "frozen": "Legacy.induced_subdivision",
+      "substitutions": {
+        "induced_subdivision_model": "Legacy.induced_subdivision_model"
+      },
+      "certificate": "GTBase.migration.induced_paths.induced_subdivision_compat",
+      "commit": "97605ddae838bc6e84b0602240148246e9d065f2",
+      "live_unfolds_to": "inhabited (induced_subdivision_model H G)"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTBase.induced_subdivisions.induced_subdivision_model",
+      "path": "base/theories/induced_subdivisions.v",
+      "name": "induced_subdivision_model",
+      "frozen_path": "base/theories/migration/induced_paths.v",
+      "frozen": "Legacy.induced_subdivision_model",
+      "substitutions": {},
+      "certificate": "GTBase.migration.induced_paths.induced_subdivision_model_compat",
+      "commit": "97605ddae838bc6e84b0602240148246e9d065f2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X83.x83_rainbow_induced_path",
+      "path": "chromatic-theory/theories/conjectures/X83.v",
+      "name": "x83_rainbow_induced_path",
+      "frozen_path": "chromatic-theory/theories/migration/induced_paths.v",
+      "frozen": "X83Legacy.x83_rainbow_induced_path",
+      "substitutions": {
+        "x3_induced_path": "Legacy.x3_induced_path"
+      },
+      "certificate": "Chromatic.migration.induced_paths.x83_rainbow_induced_path_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X91.x91_Pk_free",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_Pk_free",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "X91Legacy.x91_Pk_free",
+      "substitutions": {
+        "x91_induced_path": "Legacy.x91_induced_path"
+      },
+      "certificate": "GTMisc.migration.induced_paths.x91_Pk_free_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X91.x91_avoidable_path",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_avoidable_path",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "X91Legacy.x91_avoidable_path",
+      "substitutions": {
+        "x91_induced_path": "Legacy.x91_induced_path"
+      },
+      "certificate": "GTMisc.migration.induced_paths.x91_avoidable_path_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_paths.v",
+      "frozen": "X98Legacy.x98_induced_subdivision",
+      "substitutions": {
+        "induced_subdivision": "B22.Legacy.induced_subdivision"
+      },
+      "certificate": "Extremal.migration.induced_paths.x98_induced_subdivision_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "X114Legacy.x114_induced_subdivision",
+      "substitutions": {
+        "induced_subdivision": "B22.Legacy.induced_subdivision"
+      },
+      "certificate": "GTMisc.migration.induced_paths.x114_induced_subdivision_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_hisc_problem",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_hisc_problem",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "X114Legacy.x114_hisc_problem",
+      "substitutions": {
+        "x114_induced_subdivision": "X114Legacy.x114_induced_subdivision"
+      },
+      "certificate": "GTMisc.migration.induced_paths.x114_hisc_problem_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X67.x67_theta",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "x67_theta",
+      "frozen_path": "minor-theory/theories/migration/induced_paths.v",
+      "frozen": "X67Legacy.x67_theta",
+      "substitutions": {
+        "x67_induced_path_between": "Legacy.x67_induced_path_between"
+      },
+      "certificate": "Minor.migration.induced_paths.x67_theta_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X208.x208_Pt_free",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "x208_Pt_free",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "X208Legacy.x208_Pt_free",
+      "substitutions": {
+        "x208_induced_path_order": "Legacy.x208_induced_path_order"
+      },
+      "certificate": "GTMisc.migration.induced_paths.x208_Pt_free_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.stable_cover_unique_induced_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "stable_cover_unique_induced_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/induced_paths.v",
+      "frozen": "X3Legacy.stable_cover_unique_induced_path_statement",
+      "substitutions": {
+        "x3_induced_path": "Legacy.x3_induced_path"
+      },
+      "certificate": "Chromatic.migration.induced_paths.stable_cover_unique_induced_path_statement_compat",
+      "original_certificate": "Chromatic.migration.induced_paths.stable_cover_unique_induced_path_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X83.aravind_rainbow_induced_chromatic_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X83.v",
+      "name": "aravind_rainbow_induced_chromatic_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/induced_paths.v",
+      "frozen": "X83Legacy.aravind_rainbow_induced_chromatic_path_statement",
+      "substitutions": {
+        "x83_rainbow_induced_path": "X83Legacy.x83_rainbow_induced_path"
+      },
+      "certificate": "Chromatic.migration.induced_paths.aravind_rainbow_induced_chromatic_path_statement_compat",
+      "original_certificate": "Chromatic.migration.induced_paths.aravind_rainbow_induced_chromatic_path_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X91.avoidable_path_or_pk_free_statement",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "avoidable_path_or_pk_free_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "X91Legacy.avoidable_path_or_pk_free_statement",
+      "substitutions": {
+        "x91_Pk_free": "X91Legacy.x91_Pk_free",
+        "x91_avoidable_path": "X91Legacy.x91_avoidable_path"
+      },
+      "certificate": "GTMisc.migration.induced_paths.avoidable_path_or_pk_free_statement_compat",
+      "original_certificate": "GTMisc.migration.induced_paths.avoidable_path_or_pk_free_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "polynomial_kuhn_osthus_induced_subdivision_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_paths.v",
+      "frozen": "X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "substitutions": {
+        "x98_induced_subdivision": "X98Legacy.x98_induced_subdivision"
+      },
+      "certificate": "Extremal.migration.induced_paths.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "original_certificate": "Extremal.migration.induced_paths.polynomial_kuhn_osthus_induced_subdivision_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "subcubic_induced_subdivision_np_complete_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "X114Legacy.subcubic_induced_subdivision_np_complete_statement",
+      "substitutions": {
+        "x114_hisc_problem": "X114Legacy.x114_hisc_problem"
+      },
+      "certificate": "GTMisc.migration.induced_paths.subcubic_induced_subdivision_np_complete_statement_compat",
+      "original_certificate": "GTMisc.migration.induced_paths.subcubic_induced_subdivision_np_complete_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "theta_triangle_free_bounded_degree_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/induced_paths.v",
+      "frozen": "X67Legacy.theta_triangle_free_bounded_degree_treewidth_statement",
+      "substitutions": {
+        "x67_theta": "X67Legacy.x67_theta"
+      },
+      "certificate": "Minor.migration.induced_paths.theta_triangle_free_bounded_degree_treewidth_statement_compat",
+      "original_certificate": "Minor.migration.induced_paths.theta_triangle_free_bounded_degree_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.U9.lovasz_path_removal_statement",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "lovasz_path_removal_statement",
+      "frozen_path": "packing-theory/theories/migration/induced_paths.v",
+      "frozen": "U9Legacy.lovasz_path_removal_statement",
+      "substitutions": {
+        "is_induced_path": "Legacy.is_induced_path"
+      },
+      "certificate": "Packing.migration.induced_paths.lovasz_path_removal_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X208.Pt_free_maximum_independent_set_polytime_statement",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "Pt_free_maximum_independent_set_polytime_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "X208Legacy.Pt_free_maximum_independent_set_polytime_statement",
+      "substitutions": {
+        "x208_Pt_free": "X208Legacy.x208_Pt_free"
+      },
+      "certificate": "GTMisc.migration.induced_paths.Pt_free_maximum_independent_set_polytime_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.stable_cover_unique_induced_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "stable_cover_unique_induced_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X3Original.statement",
+      "substitutions": {
+        "stable_cover_unique_induced_path_statement": "statement",
+        "x3_induced_path": "X3Legacy.induced_path",
+        "x3_uniquely_covers_path_vertex": "path_vertices.X3Legacy.uniquely_covers_path_vertex"
+      },
+      "certificate": "Chromatic.migration.induced_paths.stable_cover_unique_induced_path_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X83.aravind_rainbow_induced_chromatic_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X83.v",
+      "name": "aravind_rainbow_induced_chromatic_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/proper_colouring.v",
+      "frozen": "X83Original.aravind_rainbow_induced_chromatic_path_statement",
+      "substitutions": {
+        "x3_proper_colouring": "Legacy.x3_proper_colouring",
+        "x83_rainbow_induced_path": "consecutive_in_path.X83Legacy.rainbow_induced_path"
+      },
+      "certificate": "Chromatic.migration.induced_paths.aravind_rainbow_induced_chromatic_path_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X91.avoidable_path_or_pk_free_statement",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "avoidable_path_or_pk_free_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X91Original.avoidable_path_or_pk_free_statement",
+      "substitutions": {
+        "x91_Pk_free": "consecutive_in_path.X91Legacy.Pk_free",
+        "x91_avoidable_path": "avoidable_path"
+      },
+      "certificate": "GTMisc.migration.induced_paths.avoidable_path_or_pk_free_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "polynomial_kuhn_osthus_induced_subdivision_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Original.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "substitutions": {
+        "x59_subgraph_of": "A5.Legacy.x59_subgraph_of",
+        "x98_induced_subdivision": "X98Original.x98_induced_subdivision"
+      },
+      "certificate": "Extremal.migration.induced_paths.polynomial_kuhn_osthus_induced_subdivision_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "subcubic_induced_subdivision_np_complete_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Original.subcubic_induced_subdivision_np_complete_statement",
+      "substitutions": {
+        "x114_hisc_problem": "X114Original.x114_hisc_problem",
+        "x114_subcubic": "A14.Legacy.x114_subcubic"
+      },
+      "certificate": "GTMisc.migration.induced_paths.subcubic_induced_subdivision_np_complete_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X67.v",
+      "name": "theta_triangle_free_bounded_degree_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X67Original.theta_triangle_free_bounded_degree_treewidth_statement",
+      "substitutions": {
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most",
+        "x67_theta": "Minor.migration.consecutive_in_path.X67Original.theta"
+      },
+      "certificate": "Minor.migration.induced_paths.theta_triangle_free_bounded_degree_treewidth_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/path_vertices.v#X3Legacy.statement": "B1 (path-vertices) snapshot: that family froze only its own helpers in this object (statement), so this copy still calls the live x3_induced_path, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "extremal-graph-theory/theories/migration/consecutive_in_path.v#X98Legacy.statement": "B3 (consecutive-in-path) snapshot: that family froze only its own helpers in this object (statement), so this copy still calls the live induced_subdivision, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "extremal-graph-theory/theories/migration/induced_subdivisions.v#Legacy.x98_induced_subdivision_model": "C20 (induced-subdivision) snapshot: that family froze only its own helpers in this object (x98_induced_subdivision_model), so this copy still calls the live x98_induced_path_between, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "extremal-graph-theory/theories/migration/model_support.v#X98Legacy.x98_induced_subdivision_model": "C19 (model-support) snapshot: that family froze only its own helpers in this object (x98_induced_subdivision_model), so this copy still calls the live x98_induced_path_between, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement": "A5 (subgraph-of) snapshot: that family froze only its own helpers in this object (polynomial_kuhn_osthus_induced_subdivision_statement), so this copy still calls the live x98_induced_subdivision, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path": "B4 (consecutive-in-cycle) snapshot: that family froze only its own helpers in this object (avoidable_path), so this copy still calls the live x91_induced_path, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "graph-theory-misc/theories/migration/consecutive_in_cycle.v#X91Legacy.avoidable_path_or_pk_free_statement": "B4 (consecutive-in-cycle) snapshot: that family froze only its own helpers in this object (avoidable_path_or_pk_free_statement), so this copy still calls the live x91_Pk_free, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "graph-theory-misc/theories/migration/consecutive_in_path.v#X114Legacy.hisc_problem": "B3 (consecutive-in-path) snapshot: that family froze only its own helpers in this object (hisc_problem), so this copy still calls the live induced_subdivision, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "graph-theory-misc/theories/migration/induced_subdivisions.v#Legacy.x114_induced_subdivision_model": "C20 (induced-subdivision) snapshot: that family froze only its own helpers in this object (x114_induced_subdivision_model), so this copy still calls the live x114_induced_path_between, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "graph-theory-misc/theories/migration/model_support.v#X114Legacy.x114_induced_subdivision_model": "C19 (model-support) snapshot: that family froze only its own helpers in this object (x114_induced_subdivision_model), so this copy still calls the live x114_induced_path_between, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "graph-theory-misc/theories/migration/subcubic.v#X114Legacy.subcubic_induced_subdivision_np_complete_statement": "A14 (subcubic) snapshot: that family froze only its own helpers in this object (subcubic_induced_subdivision_np_complete_statement), so this copy still calls the live x114_hisc_problem, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "minor-theory/theories/migration/bag_decompositions.v#Legacy.theta_triangle_free_bounded_degree_treewidth_statement": "C13 (bag-decomposition) snapshot: that family froze only its own helpers in this object (theta_triangle_free_bounded_degree_treewidth_statement), so this copy still calls the live x67_theta, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "minor-theory/theories/migration/path_vertices.v#X67Legacy.theta": "B1 (path-vertices) snapshot: that family froze only its own helpers in this object (theta), so this copy still calls the live x67_induced_path_between, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "base/theories/examples/induced_subdivisions.v",
+      "name": "induced_subdivision",
+      "note": "C20's public-only client of GTBase.induced_subdivisions: its ten examples recompile unchanged over the public wrapper, whose Record field now goes through the canonical induced_path_between (definitional equality)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X83.v",
+      "name": "x3_induced_path",
+      "note": "X83's chain x83_rainbow_induced_path uses X3's helper through the X3 import; the chain and the X83 row are frozen complete in this family's Chromatic certificate; the file is unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "induced_subdivision",
+      "note": "C20's wrapper alias x98_induced_subdivision := induced_subdivision H G is a chain of this family, frozen over the frozen public wrapper; the local constructor X98Model, its seven projections and Arguments recompile unchanged. Only the x98_induced_path_between alias changed in this file."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "induced_subdivision",
+      "note": "C20's wrapper alias x114_induced_subdivision := induced_subdivision H G and the decision problem x114_hisc_problem are chains of this family, frozen over the frozen public wrapper; the local constructor X114Model, its seven projections and Arguments recompile unchanged. Only the x114_induced_path_between alias changed in this file."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "is_induced_path",
+      "note": "Actual Packing grounding: is_induced_path_triv and is_induced_path_spath keep their statements; their two proof scripts were adapted to the canonical full-endpoint view (the singleton lemma induced_path_between_seq1, and head/last/adjacency read off the destructured list). The other U9 groundings are untouched."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.X177.x177_induced_path_between",
+      "path": "chromatic-theory/theories/conjectures/X177.v",
+      "name": "x177_induced_path_between",
+      "note": "tail-list simple path with a documented tautological chord clause (blocked lantern row); same normalized name, enrolled as a deferred-excluded class, unchanged and not redirected"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X218.x218_induced_run",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "x218_induced_run",
+      "note": "a no-nonconsecutive-edge condition without walk or uniqueness; a weaker contract; untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X218.x218_path_induced_copy",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "x218_path_induced_copy",
+      "note": "quantifies over all rooted-tree paths; a different contract; untouched"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X91.x91_induced_cycle",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_induced_cycle",
+      "note": "induced cycle (B4's family); a different contract; untouched"
+    }
+  ]
+}

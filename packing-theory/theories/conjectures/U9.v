@@ -57,6 +57,7 @@
 From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
 From GTBase Require Import triangles.
+From GTBase Require Import induced_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -113,9 +114,12 @@ Definition spath (G : sgraph) (x y : G) (p : seq G) : bool :=
 
 (** An INDUCED [x]–[y] path: a simple path with no chords (any two of its vertices
     adjacent in [G] are consecutive on the path). *)
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.induced_path_between]: the original Boolean [spath] / [consec] body is
+    frozen and certified (an explicit iff through the index bridge, with the membership and
+    uniqueness premises) in theories/migration/induced_paths.v; [spath] and [consec] stay live. *)
 Definition is_induced_path (G : sgraph) (x y : G) (p : seq G) : Prop :=
-  [/\ spath x y p, uniq p
-    & {in p &, forall a b : G, a -- b -> consec p a b}].
+  induced_path_between x y p.
 
 (** A friendly partition (into [A] and its complement): every vertex has at least
     as many neighbours in its own class as in the other; both classes nonempty. *)

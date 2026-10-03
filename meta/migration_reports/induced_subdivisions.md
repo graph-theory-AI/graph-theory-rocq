@@ -6,7 +6,7 @@ Full evidence: `python3 meta/migration_report.py induced_subdivisions --details 
 
 - Canonical: `GTBase.induced_subdivisions.induced_subdivision_model`.
 - Baseline: `952a89bdecf65bed9be3a1393eabc91ca091d26c`.
-- Scope: 4 helpers, 2 statements, 14 frozen objects, 73 recorded references.
+- Scope: 4 helpers, 2 statements, 14 frozen objects, 81 recorded references.
 - Source checks: 109/109 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
