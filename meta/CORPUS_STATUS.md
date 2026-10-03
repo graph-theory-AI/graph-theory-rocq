@@ -56,7 +56,7 @@
 
 ## Foundation fidelity registry
 
-- **187 audited primitives**: 173 faithful · 12 lightweight · 2 broken.
+- **189 audited primitives**: 175 faithful · 12 lightweight · 2 broken.
 - Registry: module contracts in `meta/foundation_fidelity.json` and family verdicts in `meta/foundation_fidelity/`; validate declarations and evidence names with `python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is never inferred from compilation.
 
 | verdict | primitive | misuse watch |
@@ -118,7 +118,7 @@ Area-local foundations (each area builds these on top of `base`):
 | area | foundation modules |
 |---|---|
 | chromatic-theory | `alon_tarsi`, `branch_paths`, `chi_bounding`, `choice_number`, `critical`, `edge_colourings`, `forest_paths`, `partial_lists`, `poly_forms` |
-| cycle-theory | `comp_reduce`, `connectivity`, `cycle_space`, `eulerian`, `matchings_cuts`, `path_subgraphs` |
+| cycle-theory | `comp_reduce`, `connectivity`, `cycle_space`, `eulerian`, `matchings_cuts`, `path_subgraphs`, `spanning_trees` |
 | digraph-theory | `cycles`, `degree_balance`, `interop_graph_theory`, `longest_cycles`, `prelude`, `subdivision` |
 | extremal-graph-theory | `circular_colouring`, `degree_bounds`, `edge_colourings`, `list_ramsey`, `lp_rational`, `ramsey`, `vc` |
 | graph-theory-misc | `ambient_shallow_minors`, `complexity`, `cops` |

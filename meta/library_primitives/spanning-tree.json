@@ -15,7 +15,7 @@
       "GTMisc.conjectures.X168.x168_spanning_tree"
     ],
     "consumers_remaining": 3,
-    "relation": "one contract for labelled simple graphs, by conversion: X167.x167_spanning_tree and X168.x168_spanning_tree (T \\subset fg_edges G /\\ is_tree [set: fg_labelled_sgraph T]: a set of valid edges of G whose labelled graph on the WHOLE vertex carrier of G, isolated vertices included, is an upstream tree) are GTBase.spanning_trees.fg_spanning_tree T. The subset guard stays part of the contract (the labelled-graph constructor retains every two-element member, including host nonedges, and ignores members that are not pairs; the subset guard rejects host nonedges), connectivity of the host follows, and the conventions are derived from upstream is_tree: the empty edge set spans 'K_0 (vacuously) and 'K_1, the single edge spans 'K_2, the triangle's full edge set, any disconnected host, and any host with at least two vertices and an isolated vertex are rejected. Deferred, distinct: Cycle.U6.spanning_tree (a multigraph EDGE carrier that is spanning-connected and acyclic; separate future family). Not sources of this family: the whole-graph tree wrappers of XE1 (definitionally is_tree), D2tur.tree_on / shortest_tree_on, U9.tree_contains_T, the directed trees of P9 / X2 and B9's path_tree.",
+    "relation": "two contracts under the corpus name \"spanning_tree\", sharing only the name. LABELLED simple graphs (canonical GTBase.spanning_trees.fg_spanning_tree, B18): X167.x167_spanning_tree and X168.x168_spanning_tree (T \\subset fg_edges G /\\ is_tree [set: fg_labelled_sgraph T]: a set of valid edges of G whose labelled graph on the WHOLE vertex carrier of G, isolated vertices included, is an upstream tree) are fg_spanning_tree T by conversion; the subset guard stays part of the contract (the labelled-graph constructor drops only malformed members and keeps every two-element member, so host non-edges are excluded by the guard alone), host connectivity follows, and the conventions are derived from upstream is_tree: the empty edge set spans 'K_0 (vacuously) and 'K_1, the single edge spans 'K_2, the triangle's full edge set, any disconnected host and any host with at least two vertices one of which is isolated are rejected. MULTIGRAPH edge carriers (canonical Cycle.foundations.spanning_trees.spanning_tree_edge_set over Cycle.foundations.connectivity and path_subgraphs, B19): Cycle.U6.spanning_tree (spanning_connected T /\\ acyclic T: an undirected uwalk inside T between every two HOST vertices, and no circuit inside T) is spanning_tree_edge_set T by conversion, the conjunction of the all-host-vertex restricted walk spanning_connected_edge_set and the public acyclic_edge_set; U6's unchanged supports spanning_connected and acyclic are frozen as copies but not migrated. Conventions: the empty host and the empty carrier are accepted vacuously, one vertex with the empty carrier is accepted beside an unselected loop, a single non-loop edge spans its two-vertex host in either reference orientation, a third isolated vertex defeats spanning connectivity although the carrier stays connected on its incident support, and a selected loop, parallel pair or digon is rejected; no loopless, simplicity, nonempty-carrier or nonempty-host guard is added. No equivalence between the two representations is stated. Not sources of this family: the whole-graph tree wrappers of XE1 (definitionally is_tree), D2tur.tree_on / shortest_tree_on, U9.tree_contains_T, the directed trees of P9 / X2 and B9's path_tree.",
     "semantic_classes": {
       "labelled-edge-spanning-tree": {
         "members": [
@@ -36,13 +36,21 @@
           "Cycle.conjectures.U6.spanning_tree"
         ],
         "count": 1,
-        "verdict": "distinct representation",
-        "state": "deferred",
-        "certificates": [],
-        "note": "Cycle U6's spanning_tree T := spanning_connected T /\\ acyclic T on an mgraph edge set: an edge CARRIER of an undirected multigraph (connectivity of all vertices through uwalk-walks inside T, no circuit); loops and parallel edges are circuits there. A different representation from the labelled simple-graph contract; deferred to a separate future family (reuse Cycle.foundations.path_subgraphs.acyclic_edge_set)."
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Cycle.migration.spanning_trees.spanning_tree_compat",
+        "note": "Cycle U6's spanning_tree T := spanning_connected T /\\ acyclic T on an mgraph edge set: an edge CARRIER of an undirected multigraph, every two HOST vertices joined by an undirected uwalk inside T (isolated host vertices therefore excluded when the host has at least two vertices; not the incident-support connectivity subgraph_connected) and no circuit inside T (a selected loop or parallel pair is a circuit). It is the body of the canonical Cycle.foundations.spanning_trees.spanning_tree_edge_set (B19), convertible: spanning_connected_edge_set /\\ acyclic_edge_set (Cycle.foundations.path_subgraphs). A different representation from the labelled simple-graph class, sharing only the corpus name. Its row three_decomposition_statement (opg:3_decomposition_conjecture) is frozen complete with every guard and the T/F/M order, together with the complete A13+B19 Original over A13's frozen arc-end cubic; the unchanged supports spanning_connected and acyclic are frozen as historical copies and stay live, unmigrated helpers.",
+        "reviewed_by": "family_scope",
+        "reviewed_commit": "6de6ce38ee3424aaffa2ef198285a3dea3e6ce1f",
+        "independent_review": "meta/migration_reviews/multigraph_spanning_trees.md"
       }
     },
     "compatibility_theorems": [
+      "Cycle.migration.spanning_trees.acyclic_compat",
+      "Cycle.migration.spanning_trees.spanning_connected_compat",
+      "Cycle.migration.spanning_trees.spanning_tree_compat",
+      "Cycle.migration.spanning_trees.three_decomposition_statement_compat",
+      "Cycle.migration.spanning_trees.three_decomposition_statement_original_compat",
       "GTMisc.migration.spanning_trees.fixed_surface_spanning_tree_polytope_linear_xc_statement_compat",
       "GTMisc.migration.spanning_trees.minor_closed_spanning_tree_polytope_linear_xc_statement_compat",
       "GTMisc.migration.spanning_trees.minor_closed_spanning_tree_polytope_linear_xc_statement_original_compat",
@@ -73,23 +81,47 @@
       "GTBase.spanning_trees.not_fg_spanning_tree_K3",
       "GTBase.spanning_trees.not_fg_spanning_tree_K3_edge",
       "GTBase.spanning_trees.not_fg_spanning_tree_two_isolated",
-      "GTBase.spanning_trees.not_fg_spanning_tree_singleton"
+      "GTBase.spanning_trees.not_fg_spanning_tree_singleton",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_setI",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_set_connected",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_set_acyclic",
+      "Cycle.foundations.spanning_trees.spanning_connected_edge_setP",
+      "Cycle.foundations.spanning_trees.spanning_connected_edge_set_mconnected",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_set_mconnected",
+      "Cycle.foundations.spanning_trees.spanning_connected_edge_set_sub",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_set_noloop",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_set_noparallel",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_set_empty",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_set_one_vertex",
+      "Cycle.foundations.spanning_trees.not_spanning_tree_edge_set_loop",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_set_one_edge",
+      "Cycle.foundations.spanning_trees.spanning_tree_edge_set_one_edge_rev",
+      "Cycle.foundations.spanning_trees.subgraph_connected_one_edge_and_vertex",
+      "Cycle.foundations.spanning_trees.uwalk_one_edge_and_vertex",
+      "Cycle.foundations.spanning_trees.not_spanning_connected_one_edge_and_vertex",
+      "Cycle.foundations.spanning_trees.not_spanning_tree_edge_set_one_edge_and_vertex",
+      "Cycle.foundations.spanning_trees.not_spanning_tree_edge_set_parallel_pair",
+      "Cycle.foundations.spanning_trees.not_spanning_tree_edge_set_digon"
     ],
     "upstream_audit": {
       "searched_modules": [
-        "GraphTheory.core.sgraph",
-        "GraphTheory.core.digraph",
-        "GraphTheory.core.treewidth",
-        "GraphTheory.core.checkpoint",
-        "GraphTheory.core.minor",
+        "Cycle.foundations.connectivity",
+        "Cycle.foundations.path_subgraphs",
+        "GTBase.base",
         "GTBase.finite_graph",
         "GTBase.path_trees",
-        "mathcomp.boot.finset",
-        "mathcomp.boot.fingraph"
+        "GraphTheory.core.checkpoint",
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.mgraph",
+        "GraphTheory.core.minor",
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.treewidth",
+        "mathcomp.boot.fingraph",
+        "mathcomp.boot.finset"
       ],
       "result": "no-direct-candidate",
       "candidate": "GraphTheory.core.sgraph.is_tree",
-      "note": "coq-graph-theory has is_forest, is_tree, is_forestb, connectedb, forestI, forest3 and connected_card_gt1 over a vertex set of an sgraph, and the complete graphs 'K_n, but no spanning-tree predicate for a labelled edge set; GTBase.finite_graph owns fg_edges, fg_labelled_sgraph and the bridge fg_edgesE : fg_edges G = E(G). The new public GTBase.spanning_trees is the focused adapter: fg_spanning_tree with its Boolean form and reflection, the subset / tree / forest / connectivity projections and introduction, the E(G) form, edge validity (every member is a pair of adjacent vertices), whole-carrier covering, host connectivity, and the groundings on 'K_0, 'K_1, 'K_2, the triangle, a missing vertex, two isolated vertices and a singleton member. Not re-exported by GTBase.base; X167 and X168 import it explicitly. No forest or graph constructor is added.",
+      "note": "coq-graph-theory has is_forest, is_tree, is_forestb, connectedb, forestI, forest3 and connected_card_gt1 over a vertex set of an sgraph, and the complete graphs 'K_n, but no spanning-tree predicate for a labelled edge set; GTBase.finite_graph owns fg_edges, fg_labelled_sgraph and the bridge fg_edgesE : fg_edges G = E(G). The new public GTBase.spanning_trees is the focused adapter: fg_spanning_tree with its Boolean form and reflection, the subset / tree / forest / connectivity projections and introduction, the E(G) form, edge validity (every member is a pair of adjacent vertices), whole-carrier covering, host connectivity, and the groundings on 'K_0, 'K_1, 'K_2, the triangle, a missing vertex, two isolated vertices and a singleton member. Not re-exported by GTBase.base; X167 and X168 import it explicitly. No forest or graph constructor is added. B19 (multigraph contract): the pinned coq-graph-theory sources have no spanning-tree predicate over an mgraph edge carrier; base owns uwalk, Cycle.foundations.connectivity owns mconnected, walk_in, is_circuit and subgraph_connected (incident-support connectivity, insufficient for spanning), and Cycle.foundations.path_subgraphs owns acyclic_edge_set, is_circuit_loop and is_circuit_parallel. The new public Cycle.foundations.spanning_trees is the focused adapter: spanning_connected_edge_set (all-host-vertex restricted uwalk, with its walk_in form), spanning_tree_edge_set, projections, introduction, host connectivity, the loop/parallel rejections and the groundings (empty host, one vertex beside a loop, one edge in either orientation, a third isolated vertex, a parallel pair, a digon). GTBase cannot import Cycle, so this canonical stays in cycle-theory beside the GTBase anchor of the labelled contract.",
       "audited_at": "2026-10-03"
     },
     "migration_report": "meta/migration_reports/spanning_trees.md",

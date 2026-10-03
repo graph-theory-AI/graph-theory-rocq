@@ -13101,7 +13101,7 @@
         "Cycle.conjectures.U6.oddness_le"
       ],
       "kind": "Definition",
-      "line": 46,
+      "line": 47,
       "local_dependencies": [],
       "name": "two_factor",
       "normalized_name": "two_factor",
@@ -13121,7 +13121,7 @@
         "Cycle.conjectures.U6.strong_5_cycle_double_cover_statement"
       ],
       "kind": "Definition",
-      "line": 68,
+      "line": 69,
       "local_dependencies": [],
       "name": "even_subgraph",
       "normalized_name": "even_subgraph",
@@ -13136,11 +13136,9 @@
       "body_hash": "741a446707dcaf5c85d4cd024d7e79536211b3e13b6f15ad5bc7a64b58fd2f27",
       "body_shape_hash": "741a446707dcaf5c85d4cd024d7e79536211b3e13b6f15ad5bc7a64b58fd2f27",
       "declaration_hash": "2b4f1a83822d5490f2439151d32a6f451cd96e4c1692123e2e993221fffe46ee",
-      "direct_consumers": [
-        "Cycle.conjectures.U6.spanning_tree"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 75,
+      "line": 76,
       "local_dependencies": [],
       "name": "acyclic",
       "normalized_name": "acyclic",
@@ -13159,7 +13157,7 @@
         "Cycle.conjectures.U6.path_decomposition"
       ],
       "kind": "Definition",
-      "line": 88,
+      "line": 89,
       "local_dependencies": [],
       "name": "is_path",
       "normalized_name": "is_path",
@@ -13178,7 +13176,7 @@
         "Cycle.conjectures.U6.three_decomposition_statement"
       ],
       "kind": "Definition",
-      "line": 93,
+      "line": 94,
       "local_dependencies": [],
       "name": "is_matching",
       "normalized_name": "is_matching",
@@ -13193,11 +13191,9 @@
       "body_hash": "d4b86380ffe73d9a382c0a05407c79b0e1fba31a21899719dbb21881c241f0ed",
       "body_shape_hash": "d4b86380ffe73d9a382c0a05407c79b0e1fba31a21899719dbb21881c241f0ed",
       "declaration_hash": "6a783f6563edc7fcb960f93a120dec62228cf3c1954a38420a80d4377a1f2cbb",
-      "direct_consumers": [
-        "Cycle.conjectures.U6.spanning_tree"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 99,
+      "line": 100,
       "local_dependencies": [],
       "name": "spanning_connected",
       "normalized_name": "spanning_connected",
@@ -13209,18 +13205,15 @@
       "signature_shape_hash": "ed7e6ab2b50398a83b4562307cf49b95ebee70a55fecaa7cdf4d350caed6955c"
     },
     {
-      "body_hash": "bc18f7b66a2993d13dc637a29a861baafa0618bf5d972c485251862d1ebc8d01",
-      "body_shape_hash": "bc18f7b66a2993d13dc637a29a861baafa0618bf5d972c485251862d1ebc8d01",
-      "declaration_hash": "3adda7713bcc152839c94a1008f26e9c8470f48ccbb17ccf0a55d84aaeb60d1b",
+      "body_hash": "e20f49bbceab3a1647f3390ea73ef58591ec077d910ddb42f1531c2634c938eb",
+      "body_shape_hash": "e20f49bbceab3a1647f3390ea73ef58591ec077d910ddb42f1531c2634c938eb",
+      "declaration_hash": "4ef5fd71d2ed6825b5b4e4fdff5a112c81c08f0acd466edc05f207dd3e51c67e",
       "direct_consumers": [
         "Cycle.conjectures.U6.three_decomposition_statement"
       ],
       "kind": "Definition",
-      "line": 105,
-      "local_dependencies": [
-        "acyclic",
-        "spanning_connected"
-      ],
+      "line": 106,
+      "local_dependencies": [],
       "name": "spanning_tree",
       "normalized_name": "spanning_tree",
       "package": "cycle-theory",
