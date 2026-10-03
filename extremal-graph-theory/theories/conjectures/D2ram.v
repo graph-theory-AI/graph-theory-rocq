@@ -82,7 +82,7 @@ Unset Printing Implicit Defensive.
     [edge_count G] = |E(G)|, REUSING coq-graph-theory's [E(_)] = [sg_edge_set] (the set of
     undirected edges [ [set x; y] ] with [x -- y]); it counts each undirected edge once.
     This is the cross-area quantity |E(G)| imported verbatim, not re-derived. *)
-Definition edge_count (G : sgraph) : nat := #|E(G)|.
+Definition edge_count (G : sgraph) : nat := GTBase.common.edge_count G.
 
 (** ============================================================================ *)
 (** ** Row 1 — Multicolour Erdős–Hajnal conjecture (OPEN)

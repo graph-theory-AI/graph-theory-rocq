@@ -3,6 +3,7 @@
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import digraph sgraph.
 From GTBase Require Import asymptotics.
+From GTBase Require common.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -35,7 +36,24 @@ Definition fg_edges (G : sgraph) : {set {set G}} :=
   [set e : {set G} |
       [exists x : G, [exists y : G, (x != y) && (x -- y) && (e == [set x; y])]]].
 
-Definition fg_edge_count (G : sgraph) : nat := #|fg_edges G|.
+(** The number of edges: the canonical [GTBase.common.edge_count] (library migration A7).  It
+    was [#|fg_edges G|]; [fg_edges] is unchanged and equals the upstream edge set [E(G)]
+    ([fg_edgesE]), so the two counts agree ([card_fg_edges]). *)
+Definition fg_edge_count (G : sgraph) : nat := GTBase.common.edge_count G.
+
+(** The labelled-graph edge set is the upstream edge set: the explicit [x != y] guard is implied
+    by irreflexivity.  (The proof is adapted from C1's certificate lemma of the same name.) *)
+Lemma fg_edgesE (G : sgraph) : fg_edges G = E(G).
+Proof.
+apply/setP => e; rewrite GTBase.common.in_sg_edge_set inE.
+apply/existsP/existsP => -[x /existsP[y H]]; exists x; apply/existsP; exists y;
+  move: H.
+- by case/andP=> /andP[_ xy] /eqP->; rewrite xy eqxx.
+- by case/andP=> xy /eqP->; rewrite xy eqxx (sg_edgeNeq xy).
+Qed.
+
+Lemma card_fg_edges (G : sgraph) : #|fg_edges G| = GTBase.common.edge_count G.
+Proof. by rewrite fg_edgesE. Qed.
 
 Definition fg_complete_edge_universe (n : nat) : {set {set 'I_n}} :=
   [set e : {set 'I_n} | #|e| == 2].

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "family": "edge-count",
+  "modules": {
+    "GTBase.common": {
+      "path": "base/theories/common.v",
+      "overrides": {
+        "edge_count": {
+          "verdict": "FAITHFUL",
+          "note": "The number of edges of a simple graph: the cardinality of the upstream edge set E(G) of unordered adjacent pairs. The adjacent ordered pairs taken in one orientation (enum_rank order) have the same count, unconditionally (edge_count_rank); both orientations give twice as much. K_0 and K_1 have no edge, K_2 one, K_3 three, K_n C(n,2) (edge_count_Kn), and the count is an isomorphism invariant (edge_count_diso)."
+        }
+      },
+      "machine_evidence": [
+        "edge_count_rank",
+        "edge_count_Kn",
+        "edge_count_K0_K1",
+        "edge_count_K2",
+        "edge_count_K3",
+        "edge_count_diso"
+      ]
+    }
+  }
+}
