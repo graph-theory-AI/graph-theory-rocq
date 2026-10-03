@@ -80,6 +80,8 @@ and owned by the recorded namespace at the immutable full baseline commit and
 in the current tree. The initial format accepts only top-level
 `Definition NAME : Prop := ...` outside Modules and Sections; parameterized or
 inferred signatures fail closed. Source helpers cannot be enrolled this way.
+Control-prefixed scope commands and source-splicing `Load` are unsupported;
+ownership scanning handles nested comments and doubled-quote strings jointly.
 The complete intermediary path must also be frozen. Kernel checks require the
 unapplied frozen/live constants to have type `Prop`, the exact complete iff,
 and zero assumptions for every certificate. This field grants no axiom

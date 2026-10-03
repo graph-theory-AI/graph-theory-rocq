@@ -716,6 +716,7 @@ class AdditionalStatementTests(unittest.TestCase):
             "Time Section S.\nVariable n : nat.\nDefinition extra_claim : Prop := middle n.\nEnd S.\n",
             "Time Module Hidden.\nDefinition extra_claim : Prop := forall n, middle n.\nEnd Hidden.\n",
             "Timeout 5 Section S.\nDefinition extra_claim : Prop := forall n, middle n.\nEnd S.\n",
+            "Section S.\nSucceed End S.\nDefinition extra_claim : Prop := forall n, middle n.\nEnd S.\n",
         )
         for source in cases:
             for baseline in (False, True):
@@ -750,6 +751,59 @@ class AdditionalStatementTests(unittest.TestCase):
                 self.write(self.extra_path, self.extra_text)
                 self.assert_invalid("outside Module/Section")
                 self.rebaseline()
+
+    def test_ownership_lexer_masks_nested_comments_and_doubled_quote_strings(self):
+        source = ('(* outer " (* inner *) *)\nRedirect "End ""S"" (*" Check nat.\n'
+                  'Section S.\n')
+        masked = REPORT.statement_ownership_text(source)
+        self.assertEqual(len(masked), len(source))
+        self.assertEqual([n for n, c in enumerate(masked) if c == "\n"],
+                         [n for n, c in enumerate(source) if c == "\n"])
+        self.assertIn("Section S.", masked)
+        self.assertNotIn("End", masked)
+        self.assertNotIn("(*", masked)
+        for malformed in ('Redirect "unterminated', '(* unterminated', '*)'):
+            with self.subTest(malformed=malformed), self.assertRaises(ValueError):
+                REPORT.statement_ownership_text(malformed)
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_real_quoted_commands_cannot_hide_or_close_scopes_at_either_pin(self):
+        for source in ("common", "conjectures/X0", "conjectures/X1"):
+            proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/" + source + ".v"],
+                                  cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                  text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        for prefix in ('Section S.\nRedirect "End S" Check nat.\n',
+                       'Section S.\nRedirect "escaped "" End S "" suffix" Check nat.\n',
+                       'Redirect "(*" Check nat.\nSection S.\nRedirect "*)" Check nat.\n'):
+            with self.subTest(prefix=prefix):
+                scoped = self.extra_text.replace("(**", prefix + "(**") + "End S.\n"
+                self.write(self.extra_path, scoped)
+                proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/conjectures/X2.v"],
+                                      cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                      text=True, capture_output=True)
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+                self.assert_invalid("outside Module/Section")
+                self.rebaseline()
+                self.write(self.extra_path, self.extra_text)
+                self.assert_invalid("outside Module/Section")
+                self.rebaseline()
+        self.write(self.extra_path, self.extra_text.replace("(**", 'Redirect "Section S" Check nat.\n(**'))
+        self.rebaseline()
+        self.assertEqual(self.failures(), [])
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_real_loaded_scope_is_rejected_at_both_pins(self):
+        self.write("base/scope_fragment.v", "Section S.\n")
+        scoped = self.extra_text.replace("(**", 'Load "scope_fragment".\n(**') + "End S.\n"
+        self.write(self.extra_path, scoped)
+        self.compile_fixture()
+        self.assert_invalid("source-splicing Load")
+        self.rebaseline()
+        self.write(self.extra_path, self.extra_text)
+        self.assert_invalid("source-splicing Load")
 
     def test_unreached_baseline_or_current_whole_prop_is_rejected(self):
         for baseline in (False, True):

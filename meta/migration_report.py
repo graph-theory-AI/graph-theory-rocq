@@ -235,6 +235,48 @@ def additional_statement_names(spec: dict) -> set[str]:
     return set(names)
 
 
+def statement_ownership_text(source: str) -> str:
+    """Mask nested comments and Rocq doubled-quote strings without moving offsets.
+
+    This narrow enrollment lexer intentionally does not change ordinary family
+    parsing. Joint scanning matters: comment delimiters inside strings must not
+    hide real scope commands, and scope words in strings must not close scopes.
+    """
+    result = list(source)
+    depth, quoted, index = 0, False, 0
+    while index < len(source):
+        width = 1
+        if depth:
+            if source.startswith("(*", index):
+                depth += 1
+                width = 2
+            elif source.startswith("*)", index):
+                depth -= 1
+                width = 2
+        elif quoted:
+            if source.startswith('""', index):
+                width = 2
+            elif source[index] == '"':
+                quoted = False
+        elif source.startswith("(*", index):
+            depth = 1
+            width = 2
+        elif source[index] == '"':
+            quoted = True
+        elif source.startswith("*)", index):
+            raise ValueError("additional statement has an unmatched comment delimiter")
+        else:
+            index += 1
+            continue
+        for offset in range(index, index + width):
+            if source[offset] != "\n":
+                result[offset] = " "
+        index += width
+    if depth or quoted:
+        raise ValueError("additional statement has an unterminated comment or string")
+    return "".join(result)
+
+
 def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) -> set[str]:
     """Explicitly reviewed classification, never inferred from a Prop's meaning.
 
@@ -280,18 +322,25 @@ def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) 
                 source, project = source_at(None, path), source_at(None, project_path)
             if INV.project_module(path, project) + "." + name != qualified:
                 raise ValueError(f"{qualified}: additional statement ownership mismatch")
-            clean = INV.strip_comments(source)
+            clean = statement_ownership_text(source)
             matches = [match for match in DECL_RE.finditer(clean) if match.group(1) == name]
             if (len(matches) != 1 or not re.match(
                     rf"\s*Definition\s+{re.escape(name)}\s*:\s*Prop\s*:=",
                     clean[matches[0].start():])):
                 raise ValueError(f"{qualified}: additional statement requires a nullary Definition : Prop")
             prefix, stack = clean[:matches[0].start()], []
+            if re.search(r"\bLoad\b", prefix):
+                raise ValueError(f"{qualified}: additional statement cannot follow source-splicing Load")
             # Reserved scope keywords may follow Time/Timeout/Redirect or another
             # command on the same line. Scan conservatively: ambiguous command
             # text must fail closed rather than hide an opener behind a wrapper.
             scopes = re.compile(rf"\b(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})\b")
+            command_start = 0
             for scope in scopes.finditer(prefix):
+                while INV.sentence_end(prefix, command_start) <= scope.start():
+                    command_start = INV.sentence_end(prefix, command_start)
+                if prefix[command_start:scope.start()].strip():
+                    raise ValueError(f"{qualified}: additional statement must be outside Module/Section scopes; wrapped scope commands are unsupported")
                 kind, label = scope.groups()
                 if kind == "End":
                     if not stack or stack.pop() != label:
