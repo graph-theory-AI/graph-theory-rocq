@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X114 -- v2 subcubic induced-subdivision NP-completeness row *)
 
 From GTBase Require Export base.
+From GTBase Require Import model_support.
 From GTMisc.conjectures Require Import D7.
 
 Set Implicit Arguments.
@@ -36,8 +37,7 @@ Definition x114_internal (G : sgraph) (p : seq G) (a b x : G) : Prop :=
   x \in p /\ x != a /\ x != b.
 
 Definition x114_model_vertex (H G : sgraph)
-    (br : H -> G) (ep : H -> H -> seq G) (x : G) : Prop :=
-  (exists h : H, br h = x) \/ (exists u v : H, u -- v /\ x \in ep u v).
+    (br : H -> G) (ep : H -> H -> seq G) (x : G) : Prop := model_support br ep x.
 
 Record x114_induced_subdivision_model (H G : sgraph) := X114Model {
   x114_branch : H -> G;

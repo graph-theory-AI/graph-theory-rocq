@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.X98 -- v2 polynomial Kuhn-Osthus row *)
 
 From GTBase Require Export base.
+From GTBase Require Import model_support.
 From Extremal.conjectures Require Import X59.
 
 Set Implicit Arguments.
@@ -33,8 +34,7 @@ Definition x98_internal (G : sgraph) (p : seq G) (a b x : G) : Prop :=
 (** A vertex of the whole subdivision model: a branch vertex, or a vertex
     lying on some edge-path. *)
 Definition x98_model_vertex (H G : sgraph)
-    (br : H -> G) (ep : H -> H -> seq G) (x : G) : Prop :=
-  (exists h : H, br h = x) \/ (exists u v : H, u -- v /\ x \in ep u v).
+    (br : H -> G) (ep : H -> H -> seq G) (x : G) : Prop := model_support br ep x.
 
 Record x98_induced_subdivision_model (H G : sgraph) := X98Model {
   x98_branch : H -> G;
