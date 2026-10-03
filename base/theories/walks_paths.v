@@ -28,7 +28,10 @@
     [seq_next_edge_set] (registry meta/library_primitives/cycle-edges.json, section
     "Edges of a cyclic sequence" below), and longest genuine cycles, [seq_longest_cycle]
     (registry meta/library_primitives/longest-cycle.json, section "Longest genuine
-    cycles" below).
+    cycles" below), and cycle lengths of a sequence relation, [has_ucycle_length],
+    [has_cycle_length], [no_ucycle_length_between], [no_cycle_length_between] and
+    [no_cycle_length] (registry meta/library_primitives/cycle-lengths.json, section
+    "Cycle lengths of a sequence relation" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -2347,3 +2350,261 @@ by rewrite leqNgt (seq_longest_cycle_size lc).
 Qed.
 
 End LongestCycleGrounding.
+
+(** ** Cycle lengths of a sequence relation
+
+    Five cycle-length predicates over a relation [r], kept as two contracts (registry
+    meta/library_primitives/cycle-lengths.json):
+    - RAW, over MathComp [ucycle] with no length guard: [has_ucycle_length r n] (some [ucycle]
+      has exactly [n] entries) and [no_ucycle_length_between r lo hi] (no [ucycle] has between
+      [lo] and [hi] entries, both inclusive);
+    - GENUINE, over cycles with more than two entries ([seq_cycle]): [has_cycle_length r n],
+      [no_cycle_length_between r lo hi] (the explicit premise [2 < size c] before the bounds) and
+      the exact absence [no_cycle_length r n], a Boolean disequality.
+    The raw contracts are kept at EVERY parameter: the empty sequence is a [ucycle], so raw
+    length 0 is always witnessed and a raw interval containing 0 is never excluded; raw length 1
+    needs a loop (impossible on a simple graph); raw length 2 needs a two-way pair of distinct
+    entries (an edge on a simple graph), so a raw interval containing 2 excludes every edge.
+    Genuine lengths 0, 1 and 2 are impossible.  The two contracts agree above two: an explicit
+    [2 < n] bridges the exact lengths and an explicit [2 < lo] the intervals; no unguarded
+    redirection is made.
+
+    Upstream audit (2026-10-03; MathComp 2.5.0, coq-graph-theory 0.9.7).  MathComp [path.v]
+    defines [ucycle e c] as the proposition [cycle e c && uniq c]; neither library names the
+    existence of a cycle of a given length or the exclusion of an interval of lengths for a raw
+    sequence relation.  GTBase's girth contracts ([girth_geq], [has_girth]) assert minimum or
+    exact girth and are different contracts; cycle-length sets and counts stay separate.
+
+    Specification, every clause proved below:
+    - raw exact lengths: 0 always; 1 exactly with a loop; 2 exactly with a two-way distinct pair;
+      genuine lengths at most 2 never; a genuine length is a raw length, and above two the two
+      agree ([has_ucycle_lengthE]);
+    - intervals: duality with the exact lengths at inclusive endpoints (raw and genuine); the
+      genuine exclusion through [seq_cycle]; an interval containing 0 is never raw-excluded; a
+      raw interval containing 2 excludes two-way pairs; reversed intervals are vacuous; genuine
+      intervals within [0, 2] are always excluded; raw exclusion implies genuine exclusion, with
+      the converse under [2 < lo] ([no_ucycle_length_betweenE]);
+    - exact absence: the genuine interval at identical endpoints, the negation of
+      [has_cycle_length], and the Boolean disequality read as a proposition;
+    - finite carriers: a [ucycle] has at most [#|T|] entries; on a simple graph raw length 1 is
+      impossible and raw length 2 means an edge.
+    Grounding on [K_0], [K_1], [K_2] and [K_3]: raw length 0 on the empty graph and no interval
+    through 0 excluded; no raw length 1 on a vertex; the edge of [K_2] as raw length 2, failing
+    the raw exclusion of [2, 2] while the genuine one holds; the triangle, out-of-range lengths 4
+    to 6 and a reversed interval on [K_3]. *)
+
+Section CycleLengths.
+Variables (T : eqType) (r : rel T).
+Implicit Types (c : seq T) (x y : T) (n lo hi : nat).
+
+(** RAW exact length: some MathComp [ucycle] of [r] has exactly [n] entries.  No length guard:
+    the empty sequence is a [ucycle], so length 0 is always witnessed. *)
+Definition has_ucycle_length n : Prop := exists c : seq T, ucycle r c /\ size c = n.
+
+(** GENUINE exact length: some genuine cycle ([seq_cycle]: more than two entries) has [n] entries. *)
+Definition has_cycle_length n : Prop := exists c : seq T, seq_cycle r c /\ size c = n.
+
+(** RAW interval exclusion: no [ucycle] has between [lo] and [hi] entries, both inclusive. *)
+Definition no_ucycle_length_between lo hi : Prop :=
+  forall c : seq T, ucycle r c -> lo <= size c -> size c <= hi -> False.
+
+(** GENUINE interval exclusion: no [ucycle] with more than two entries has between [lo] and [hi]. *)
+Definition no_cycle_length_between lo hi : Prop :=
+  forall c : seq T, ucycle r c -> 2 < size c -> lo <= size c -> size c <= hi -> False.
+
+(** GENUINE exact absence, as a Boolean disequality. *)
+Definition no_cycle_length n : Prop :=
+  forall c : seq T, ucycle r c -> 2 < size c -> size c != n.
+
+(** *** Raw exact lengths *)
+
+Lemma has_ucycle_length0 : has_ucycle_length 0.
+Proof. by exists [::]. Qed.
+
+Lemma has_ucycle_length1 : has_ucycle_length 1 <-> exists x, r x x.
+Proof.
+split=> [[c [uc sc]]|[x rx]]; last by exists [:: x]; rewrite /ucycle /= rx.
+by case: c sc uc => [|x [|y c]] // _ /andP[/=]; rewrite andbT => rx _; exists x.
+Qed.
+
+Lemma has_ucycle_length2 : has_ucycle_length 2 <-> exists x y, [/\ x != y, r x y & r y x].
+Proof.
+split=> [[c [uc sc]]|[x [y [xy rxy ryx]]]]; last by exists [:: x; y]; rewrite /ucycle /= rxy ryx inE xy.
+case: c sc uc => [|x [|y [|z c]]] // _ /andP[/= /andP[rxy /andP[ryx _]]].
+by rewrite inE andbT => xy; exists x, y.
+Qed.
+
+(** Genuine lengths 0, 1 and 2 are impossible ... *)
+Lemma has_cycle_length_le2 n : n <= 2 -> ~ has_cycle_length n.
+Proof. by move=> n2 [c [/seq_cycle_size sc sn]]; move: n2; rewrite -sn leqNgt sc. Qed.
+
+(** ... a genuine cycle is a [ucycle] ... *)
+Lemma has_cycle_length_ucycle n : has_cycle_length n -> has_ucycle_length n.
+Proof. by case=> c [/seq_cycle_ucycle uc sc]; exists c. Qed.
+
+(** ... and above two the raw and the genuine lengths agree (explicit guard [2 < n]). *)
+Lemma has_ucycle_lengthE n : 2 < n -> has_ucycle_length n <-> has_cycle_length n.
+Proof.
+move=> n2; split; last exact: has_cycle_length_ucycle.
+by case=> c [uc sc]; exists c; split=> //; split=> //; rewrite sc.
+Qed.
+
+(** *** Interval exclusions *)
+
+(** Duality with the exact lengths, inclusive endpoints. *)
+Lemma no_ucycle_length_betweenP lo hi :
+  no_ucycle_length_between lo hi <-> forall n, lo <= n -> n <= hi -> ~ has_ucycle_length n.
+Proof.
+split=> [h n lon nhi [c [uc sc]]|h c uc loc chi]; first by apply: (h c uc); rewrite sc.
+by apply: (h (size c) loc chi); exists c.
+Qed.
+
+Lemma no_cycle_length_betweenP lo hi :
+  no_cycle_length_between lo hi <-> forall n, lo <= n -> n <= hi -> ~ has_cycle_length n.
+Proof.
+split=> [h n lon nhi [c [/seq_cycleE[cc uc sc'] sc]]|h c uc sc loc chi].
+  by rewrite -sc in lon nhi; apply: (h c _ sc' lon nhi); apply/andP; split.
+by apply: (h (size c) loc chi); exists c; split=> //; split.
+Qed.
+
+(** The genuine exclusion through [seq_cycle], with the curried bounds. *)
+Lemma no_cycle_length_betweenE lo hi :
+  no_cycle_length_between lo hi <-> forall c, seq_cycle r c -> lo <= size c -> size c <= hi -> False.
+Proof.
+split=> [h c [uc sc]|h c uc sc]; first exact: h.
+by apply: h; split.
+Qed.
+
+(** An interval containing 0 is never raw-excluded: the empty sequence is a [ucycle]. *)
+Lemma no_ucycle_length_between0 hi : ~ no_ucycle_length_between 0 hi.
+Proof. by move/(_ [::] isT isT (leq0n hi)). Qed.
+
+(** A raw interval containing 2 excludes every two-way pair of distinct entries. *)
+Lemma no_ucycle_length_between_pair lo hi x y :
+  lo <= 2 -> 2 <= hi -> x != y -> r x y -> r y x -> ~ no_ucycle_length_between lo hi.
+Proof.
+move=> lo2 hi2 xy rxy ryx h; apply: (h [:: x; y] _ lo2 hi2).
+by rewrite /ucycle /= rxy ryx inE xy.
+Qed.
+
+(** Reversed intervals are vacuous, raw and genuine. *)
+Lemma no_ucycle_length_between_rev lo hi : hi < lo -> no_ucycle_length_between lo hi.
+Proof. by move=> hilo c _ loc chi; move: (leq_trans loc chi); rewrite leqNgt hilo. Qed.
+
+Lemma no_cycle_length_between_rev lo hi : hi < lo -> no_cycle_length_between lo hi.
+Proof. by move=> hilo c _ _ loc chi; move: (leq_trans loc chi); rewrite leqNgt hilo. Qed.
+
+(** Genuine lengths at most two never occur. *)
+Lemma no_cycle_length_between_le2 lo hi : hi <= 2 -> no_cycle_length_between lo hi.
+Proof. by move=> hi2 c _ sc _ chi; move: (leq_trans chi hi2); rewrite leqNgt sc. Qed.
+
+(** Raw exclusion implies genuine exclusion; the converse needs [3 <= lo] ([2 < lo]). *)
+Lemma no_ucycle_length_between_cycle lo hi :
+  no_ucycle_length_between lo hi -> no_cycle_length_between lo hi.
+Proof. by move=> h c uc _; apply: h uc. Qed.
+
+Lemma no_ucycle_length_betweenE lo hi :
+  2 < lo -> no_ucycle_length_between lo hi <-> no_cycle_length_between lo hi.
+Proof.
+move=> lo2; split; first exact: no_ucycle_length_between_cycle.
+by move=> h c uc loc; apply: h uc (leq_trans lo2 loc) loc.
+Qed.
+
+(** *** Genuine exact absence *)
+
+(** Exact absence is the genuine interval at identical endpoints ... *)
+Lemma no_cycle_lengthE n : no_cycle_length n <-> no_cycle_length_between n n.
+Proof.
+split=> [h c uc sc nc cn|h c uc sc]; first by move: (h c uc sc); rewrite eqn_leq nc cn.
+by apply/negP => /eqP cn; apply: (h c uc sc); rewrite cn.
+Qed.
+
+(** ... the absence of a genuine cycle of length [n] ... *)
+Lemma no_cycle_lengthP n : no_cycle_length n <-> ~ has_cycle_length n.
+Proof.
+rewrite no_cycle_lengthE no_cycle_length_betweenP.
+split=> [h hn|h m nm mn]; first exact: (h n).
+by have /eqP-> : m == n by rewrite eqn_leq nm mn.
+Qed.
+
+(** ... and the Boolean disequality read as a proposition. *)
+Lemma no_cycle_length_neq n : no_cycle_length n <-> forall c, seq_cycle r c -> size c <> n.
+Proof.
+split=> [h c [uc sc] /eqP cn|h c uc sc]; first by move: (h c uc sc); rewrite cn.
+by apply/eqP; apply: h; split.
+Qed.
+
+Lemma no_cycle_length_le2 n : n <= 2 -> no_cycle_length n.
+Proof. by move=> n2; apply/no_cycle_lengthP/has_cycle_length_le2. Qed.
+
+End CycleLengths.
+
+(** *** Finite carriers and simple graphs *)
+
+(** A [ucycle] is duplicate-free, so its length is at most the number of elements. *)
+Lemma ucycle_size_le_card (T : finType) (r : rel T) (c : seq T) : ucycle r c -> size c <= #|T|.
+Proof. by case/andP=> _ /card_uniqP <-; apply: max_card. Qed.
+
+Lemma has_ucycle_length_card (T : finType) (r : rel T) n : has_ucycle_length r n -> n <= #|T|.
+Proof. by case=> c [/ucycle_size_le_card sc <-]. Qed.
+
+(** On a simple graph: no raw length 1 (no loops), and raw length 2 exactly when there is an edge. *)
+Lemma has_ucycle_length1_sgraph (G : sgraph) : ~ has_ucycle_length (@edge_rel G) 1.
+Proof. by case/has_ucycle_length1 => x; rewrite sg_irrefl. Qed.
+
+Lemma has_ucycle_length2_sgraph (G : sgraph) :
+  has_ucycle_length (@edge_rel G) 2 <-> exists x y : G, x -- y.
+Proof.
+rewrite has_ucycle_length2; split=> [[x [y [_ xy _]]]|[x [y xy]]]; first by exists x, y.
+by exists x, y; split=> //; [rewrite (sg_edgeNeq xy) | rewrite sg_sym].
+Qed.
+
+(** ** Grounding on [K_0], [K_1], [K_2] and [K_3] *)
+Section CycleLengthsGrounding.
+Local Notation o0 := (@Ordinal 3 0 isT).
+Local Notation o1 := (@Ordinal 3 1 isT).
+Local Notation o2 := (@Ordinal 3 2 isT).
+
+(** [K_0]: raw length 0 only; every genuine interval is excluded, no raw interval through 0 is. *)
+Lemma cycle_lengths_ground_K0 :
+  [/\ has_ucycle_length (@edge_rel 'K_0) 0, ~ has_ucycle_length (@edge_rel 'K_0) 2,
+      ~ no_ucycle_length_between (@edge_rel 'K_0) 0 5 & no_cycle_length_between (@edge_rel 'K_0) 0 5].
+Proof.
+split; [exact: has_ucycle_length0 | | exact: no_ucycle_length_between0 |].
+  by move/has_ucycle_length_card; rewrite card_ord.
+move=> c /ucycle_size_le_card; rewrite card_ord leqn0 => /eqP sc0 lt0.
+by rewrite sc0 ltn0 in lt0.
+Qed.
+
+(** [K_1]: no loop, so no raw length 1. *)
+Lemma cycle_lengths_ground_K1 : ~ has_ucycle_length (@edge_rel 'K_1) 1.
+Proof. exact: has_ucycle_length1_sgraph. Qed.
+
+(** [K_2]: the edge gives raw length 2 and fails the raw exclusion of [2, 2]; no genuine length 2. *)
+Lemma cycle_lengths_ground_K2 :
+  [/\ has_ucycle_length (@edge_rel 'K_2) 2, ~ has_cycle_length (@edge_rel 'K_2) 2,
+      ~ no_ucycle_length_between (@edge_rel 'K_2) 2 2 & no_cycle_length_between (@edge_rel 'K_2) 2 2].
+Proof.
+split; first by apply/has_ucycle_length2_sgraph; exists ord0, ord_max.
+- exact: has_cycle_length_le2.
+- by apply: (@no_ucycle_length_between_pair _ _ _ _ ord0 ord_max).
+- exact: no_cycle_length_between_le2.
+Qed.
+
+(** [K_3]: genuine length 3; lengths 4 to 6 are out of range; reversed intervals are vacuous. *)
+Lemma cycle_lengths_ground_K3 :
+  [/\ has_cycle_length (@edge_rel 'K_3) 3, ~ has_ucycle_length (@edge_rel 'K_3) 4,
+      no_ucycle_length_between (@edge_rel 'K_3) 4 6, no_cycle_length (@edge_rel 'K_3) 5
+    & no_ucycle_length_between (@edge_rel 'K_3) 3 2].
+Proof.
+have k3 : forall n, 3 < n -> ~ has_ucycle_length (@edge_rel 'K_3) n.
+  by move=> n n3 /has_ucycle_length_card; rewrite card_ord leqNgt n3.
+split.
+- by exists [:: o0; o1; o2]; split=> //; apply/seq_cycleP.
+- exact: k3.
+- by apply/no_ucycle_length_betweenP => n n4 _; apply: k3.
+- by apply/no_cycle_lengthP => /has_cycle_length_ucycle; apply: k3.
+- exact: no_ucycle_length_between_rev.
+Qed.
+
+End CycleLengthsGrounding.

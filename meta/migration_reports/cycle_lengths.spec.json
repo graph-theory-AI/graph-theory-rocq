@@ -1,0 +1,302 @@
+{
+  "family": "cycle-lengths",
+  "canonical_name": "GTBase.walks_paths.has_ucycle_length",
+  "canonical_short_name": "has_ucycle_length",
+  "relation": "two contracts over the adjacency relation, five sequence helpers by conversion: X59/X76 has_cycle_length is the RAW existence GTBase.walks_paths.has_ucycle_length (@edge_rel G) n (some MathComp ucycle of exactly n entries, no length guard: 0 always, 1 never on an sgraph, 2 exactly with an edge); X28 no_cycle_length_between is the RAW interval exclusion no_ucycle_length_between (@edge_rel G) a b (inclusive endpoints; an interval containing 0 always fails, one containing 2 excludes edges); X159 no_cycle_length_between is the GENUINE interval exclusion no_cycle_length_between (@edge_rel G) lo hi (explicit 2 < size c); X204 no_cycle_length is the GENUINE exact absence no_cycle_length (@edge_rel G) n (Boolean disequality). Raw and genuine agree only under the explicit guards 2 < n (has_ucycle_lengthE) and 2 < lo (no_ucycle_length_betweenE); no alias is redirected to the other contract. X84's same-named helper quantifies connected two-regular EDGE FAMILIES, not sequences, and is classified deferred without a bridge.",
+  "baseline_commit": "4b63976bad086439fa79f74eaccd270cd1291eb9",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "chromatic-theory/theories/migration/cycle_lengths.v",
+    "extremal-graph-theory/theories/migration/cycle_lengths.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.has_ucycle_length0",
+    "GTBase.walks_paths.has_ucycle_length1",
+    "GTBase.walks_paths.has_ucycle_length2",
+    "GTBase.walks_paths.has_cycle_length_le2",
+    "GTBase.walks_paths.has_cycle_length_ucycle",
+    "GTBase.walks_paths.has_ucycle_lengthE",
+    "GTBase.walks_paths.no_ucycle_length_betweenP",
+    "GTBase.walks_paths.no_cycle_length_betweenP",
+    "GTBase.walks_paths.no_cycle_length_betweenE",
+    "GTBase.walks_paths.no_ucycle_length_between0",
+    "GTBase.walks_paths.no_ucycle_length_between_pair",
+    "GTBase.walks_paths.no_ucycle_length_between_rev",
+    "GTBase.walks_paths.no_cycle_length_between_rev",
+    "GTBase.walks_paths.no_cycle_length_between_le2",
+    "GTBase.walks_paths.no_ucycle_length_between_cycle",
+    "GTBase.walks_paths.no_ucycle_length_betweenE",
+    "GTBase.walks_paths.no_cycle_lengthE",
+    "GTBase.walks_paths.no_cycle_lengthP",
+    "GTBase.walks_paths.no_cycle_length_neq",
+    "GTBase.walks_paths.no_cycle_length_le2",
+    "GTBase.walks_paths.ucycle_size_le_card",
+    "GTBase.walks_paths.has_ucycle_length_card",
+    "GTBase.walks_paths.has_ucycle_length1_sgraph",
+    "GTBase.walks_paths.has_ucycle_length2_sgraph",
+    "GTBase.walks_paths.cycle_lengths_ground_K0",
+    "GTBase.walks_paths.cycle_lengths_ground_K1",
+    "GTBase.walks_paths.cycle_lengths_ground_K2",
+    "GTBase.walks_paths.cycle_lengths_ground_K3"
+  ],
+  "summary": [
+    "Batch B, family B15 (cycle lengths of a sequence relation): five sequence helpers now unfold, by conversion, to two contracts in `GTBase.walks_paths` over the adjacency relation `@edge_rel G`. RAW, over MathComp `ucycle` with no length guard: Extremal X59 and X76 `has_cycle_length` are `has_ucycle_length` (some ucycle of exactly n entries) and Chromatic X28 `no_cycle_length_between` is `no_ucycle_length_between` (no ucycle with between a and b entries, inclusive). GENUINE, with the explicit `2 < size c`: Chromatic X159 `no_cycle_length_between` is `no_cycle_length_between` and Chromatic X204 `no_cycle_length` is the exact absence `no_cycle_length` (a Boolean disequality). The raw contracts are preserved at EVERY parameter: raw length 0 is always witnessed by the empty ucycle, raw length 1 is impossible on a simple graph, raw length 2 is an edge, a raw interval containing 0 always fails and one containing 2 excludes edges; genuine lengths 0, 1 and 2 are impossible; reversed intervals are vacuous. The two contracts are bridged only under the explicit guards `2 < n` (`has_ucycle_lengthE`) and `2 < lo` (`no_ucycle_length_betweenE`); the rows use lengths 4..8 and X76's `3 <= k`, where they agree, but no alias is redirected.",
+    "API: raw lengths 0/1/2, genuine lengths at most 2, the guarded exact bridge; interval duality with the exact lengths (raw and genuine), the genuine exclusion through `seq_cycle`, the 0 and 2 corners, reversed and small intervals, raw-implies-genuine and the guarded converse; exact absence as the interval at identical endpoints, as negated existence and as the disequality read in Prop; on finite carriers the `#|T|` bound, and on simple graphs no raw length 1 and raw length 2 iff an edge. Groundings on K_0, K_1, K_2 and K_3 (raw 0 on the empty graph, no interval through 0 excluded; no raw 1 on a vertex; the K_2 edge as raw 2 failing the raw [2, 2] exclusion while the genuine one holds; the K_3 triangle, out-of-range 4..6 and a reversed interval). Public client base/theories/examples/cycle_lengths.v with explicit negative cases.",
+    "",
+    "Six rows and one chain, frozen with this family's helpers only: Chromatic X28 (planar, no 4..6 cycles, 3-choosable), X159 (planar, no 4..8 cycles, correspondence chromatic number 3) and X204 (planar, no 4- and 5-cycles, fractional chromatic number below 11/3, with the outer uniform p, q, 0 < q and 3 * p < 11 * q); Extremal X59 (polynomial average degree forces a C4-free subgraph), X76 (C_k-free max-cut surplus, with `3 <= k`) and the cross-file X96 (large C4-free subgraph) through the frozen chain `X96Legacy.c4_free := ~ Legacy.x59_has_cycle_length G 4`. Every quantifier, guard, constant, status and document is unchanged. No proof file uses these helpers; the A5, A7 and A9 certificates that mention them recompile unchanged.",
+    "",
+    "History (complete rows, over the earlier families' frozen copies, all by conversion of their own certificates): `X59Original` (A5+B15) over A5's frozen `x59_subgraph_of`; `X76Original` (A7+A9+B15, pre-M1) over A7's frozen pre-M1 count `A7.X76Original.x76_edge_count` and A9's pre-M1 cut size `A9.X76Original.x76_cut_size`, both over M1's frozen edge set; `X96Original` (A5+A7+B15) over A7's frozen raw rank count `A7.Legacy.x4_edge_count`, A5's frozen containment and the frozen chain. The eight A5/A7/A9 snapshots that keep live helpers of this family (A5 X59/X96 rows; A7 X76 and X96 Legacy and Original rows; A9 X76 Legacy and Original rows) are unchanged and documented below, with reciprocal notes for this family's per-row copies in the subgraph_of, edge_count and cut_size specs.",
+    "",
+    "Classification of the same-named `Extremal.conjectures.X84.x84_has_cycle_length`: it quantifies connected two-regular EDGE FAMILIES (`x84_cycle_edge_set`, support size > 2, |F| = |support|, degree 2, connected support) and is impossible at l <= 2 where the raw sequence contract is witnessed. It is registered in the deferred class `edge-family-exact-length` with no bridge claimed; its X85 count consumer and A10's incidence-degree history belong to a separate family. B11's classification of `x84_cycle_edge_set` as a distinct edge-set predicate is unchanged.",
+    "",
+    "Kernel evidence, independent of this textual report, from `Print All Dependencies`: no frozen row, chain or Original reaches a live helper of this family or any of the five canonicals; the Originals also reach no live A5, A7, A9 or M1 helper or canonical; each live row reaches its canonical and its alias. Summary: /srv/graph-theory-rocq/coordination/evidence/B15-cycle_lengths/print_all_dependencies_summary.txt.",
+    "",
+    "Baseline 4b63976 is a private, not-for-integration prerequisite baseline on marcol-b15-base: 8e97ca6 = B14 ed08916 + coordinator work/a9-integration 501b89f (A7, A8, A9 integrated; merge base B11 13c00aa), then 4b63976 = 8e97ca6 + the approved B12 #916 follow-up 03c25da. Conflicts were unions only (five _CoqProject files, genuine_cycle stale notes) and regenerated reports. No statement text, doc block, manifest row or leg state changes (checked below)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X28.x28_no_cycle_length_between",
+      "path": "chromatic-theory/theories/conjectures/X28.v",
+      "name": "x28_no_cycle_length_between",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_lengths.v",
+      "frozen": "Legacy.x28_no_cycle_length_between",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.cycle_lengths.x28_no_cycle_length_between_compat",
+      "live_unfolds_to": "no_ucycle_length_between (@edge_rel G) a b"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X159.x159_no_cycle_length_between",
+      "path": "chromatic-theory/theories/conjectures/X159.v",
+      "name": "x159_no_cycle_length_between",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_lengths.v",
+      "frozen": "Legacy.x159_no_cycle_length_between",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.cycle_lengths.x159_no_cycle_length_between_compat",
+      "live_unfolds_to": "no_cycle_length_between (@edge_rel G) lo hi"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X204.x204_no_cycle_length",
+      "path": "chromatic-theory/theories/conjectures/X204.v",
+      "name": "x204_no_cycle_length",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_lengths.v",
+      "frozen": "Legacy.x204_no_cycle_length",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.cycle_lengths.x204_no_cycle_length_compat",
+      "live_unfolds_to": "no_cycle_length (@edge_rel G) n"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X28.planar_no_4_to_6_cycles_three_choosable_statement",
+      "path": "chromatic-theory/theories/conjectures/X28.v",
+      "name": "planar_no_4_to_6_cycles_three_choosable_statement",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X28Legacy.planar_no_4_to_6_cycles_three_choosable_statement",
+      "substitutions": {
+        "x28_no_cycle_length_between": "Legacy.x28_no_cycle_length_between"
+      },
+      "certificate": "Chromatic.migration.cycle_lengths.planar_no_4_to_6_cycles_three_choosable_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X159.planar_no_cycles_4_to_8_correspondence_chromatic_three_statement",
+      "path": "chromatic-theory/theories/conjectures/X159.v",
+      "name": "planar_no_cycles_4_to_8_correspondence_chromatic_three_statement",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X159Legacy.planar_no_cycles_4_to_8_correspondence_chromatic_three_statement",
+      "substitutions": {
+        "x159_no_cycle_length_between": "Legacy.x159_no_cycle_length_between"
+      },
+      "certificate": "Chromatic.migration.cycle_lengths.planar_no_cycles_4_to_8_correspondence_chromatic_three_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X204.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
+      "path": "chromatic-theory/theories/conjectures/X204.v",
+      "name": "planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
+      "frozen_path": "chromatic-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X204Legacy.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
+      "substitutions": {
+        "x204_no_cycle_length": "Legacy.x204_no_cycle_length"
+      },
+      "certificate": "Chromatic.migration.cycle_lengths.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X59.x59_has_cycle_length",
+      "path": "extremal-graph-theory/theories/conjectures/X59.v",
+      "name": "x59_has_cycle_length",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "Legacy.x59_has_cycle_length",
+      "substitutions": {},
+      "certificate": "Extremal.migration.cycle_lengths.x59_has_cycle_length_compat",
+      "live_unfolds_to": "has_ucycle_length (@edge_rel G) n"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X76.x76_has_cycle_length",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "x76_has_cycle_length",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "Legacy.x76_has_cycle_length",
+      "substitutions": {},
+      "certificate": "Extremal.migration.cycle_lengths.x76_has_cycle_length_compat",
+      "live_unfolds_to": "has_ucycle_length (@edge_rel G) k"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X59.c4_free_subgraph_polynomial_average_degree_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X59.v",
+      "name": "c4_free_subgraph_polynomial_average_degree_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X59Legacy.c4_free_subgraph_polynomial_average_degree_statement",
+      "substitutions": {
+        "x59_has_cycle_length": "Legacy.x59_has_cycle_length"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.c4_free_subgraph_polynomial_average_degree_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Extremal.migration.cycle_lengths.c4_free_subgraph_polynomial_average_degree_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X59.c4_free_subgraph_polynomial_average_degree_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X59.v",
+      "name": "c4_free_subgraph_polynomial_average_degree_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X59Original.c4_free_subgraph_polynomial_average_degree_statement",
+      "substitutions": {
+        "x59_has_cycle_length": "Legacy.x59_has_cycle_length",
+        "x59_subgraph_of": "A5.Legacy.x59_subgraph_of"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.c4_free_subgraph_polynomial_average_degree_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X76.ck_free_max_cut_polynomial_surplus_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "ck_free_max_cut_polynomial_surplus_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X76Legacy.ck_free_max_cut_polynomial_surplus_statement",
+      "substitutions": {
+        "x76_has_cycle_length": "Legacy.x76_has_cycle_length"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.ck_free_max_cut_polynomial_surplus_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Extremal.migration.cycle_lengths.ck_free_max_cut_polynomial_surplus_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X76.ck_free_max_cut_polynomial_surplus_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X76.v",
+      "name": "ck_free_max_cut_polynomial_surplus_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X76Original.ck_free_max_cut_polynomial_surplus_statement",
+      "substitutions": {
+        "x76_cut_size": "A9.X76Original.x76_cut_size",
+        "x76_edge_count": "A7.X76Original.x76_edge_count",
+        "x76_has_cycle_length": "Legacy.x76_has_cycle_length"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.ck_free_max_cut_polynomial_surplus_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X96.x96_c4_free",
+      "path": "extremal-graph-theory/theories/conjectures/X96.v",
+      "name": "x96_c4_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X96Legacy.c4_free",
+      "substitutions": {
+        "x59_has_cycle_length": "Legacy.x59_has_cycle_length",
+        "x96_c4_free": "c4_free"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x96_c4_free_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X96.bollobas_erdos_large_c4_free_subgraph_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X96.v",
+      "name": "bollobas_erdos_large_c4_free_subgraph_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X96Legacy.bollobas_erdos_large_c4_free_subgraph_statement",
+      "substitutions": {
+        "x96_c4_free": "c4_free"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.bollobas_erdos_large_c4_free_subgraph_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Extremal.migration.cycle_lengths.bollobas_erdos_large_c4_free_subgraph_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X96.bollobas_erdos_large_c4_free_subgraph_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X96.v",
+      "name": "bollobas_erdos_large_c4_free_subgraph_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X96Original.bollobas_erdos_large_c4_free_subgraph_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "x59_subgraph_of": "A5.Legacy.x59_subgraph_of",
+        "x96_c4_free": "X96Legacy.c4_free"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.bollobas_erdos_large_c4_free_subgraph_statement_original_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X59Legacy.c4_free_subgraph_polynomial_average_degree_statement": "A5 per-row snapshot: family subgraph-of (A5) froze only its containment in X59's row, so this copy still calls the live x59_has_cycle_length, which after B15 unfolds to has_ucycle_length (@edge_rel G) n (the same raw body). Kept unchanged; A5's certificate stays true. The complete pre-A5, pre-B15 row is Extremal.migration.cycle_lengths.X59Original.c4_free_subgraph_polynomial_average_degree_statement, certified by c4_free_subgraph_polynomial_average_degree_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X96Legacy.bollobas_erdos_large_c4_free_subgraph_statement": "A5 per-row snapshot: A5 froze only its containment in X96's row, so this copy still calls the live x96_c4_free, which after B15 reads x59_has_cycle_length = has_ucycle_length. Kept unchanged. The complete pre-A5, pre-A7, pre-B15 row is Extremal.migration.cycle_lengths.X96Original.bollobas_erdos_large_c4_free_subgraph_statement, certified by bollobas_erdos_large_c4_free_subgraph_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement": "A7 per-row snapshot: family edge-count (A7) froze only its count in X76's row, so this copy still calls the live x76_has_cycle_length, which after B15 unfolds to has_ucycle_length (@edge_rel G) k. Kept unchanged; A7's certificate stays true. The complete pre-M1, pre-A7, pre-A9, pre-B15 row is Extremal.migration.cycle_lengths.X76Original.ck_free_max_cut_polynomial_surplus_statement, certified by ck_free_max_cut_polynomial_surplus_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#X76Original.ck_free_max_cut_polynomial_surplus_statement": "A7 complete-so-far snapshot (pre-M1 count): it keeps the live x76_cut_size (A9) and the live x76_has_cycle_length (B15). Kept unchanged; A7's original certificate stays true. The complete row is Extremal.migration.cycle_lengths.X76Original.ck_free_max_cut_polynomial_surplus_statement over A7's and A9's frozen pre-M1 copies and this family's frozen existence.",
+    "extremal-graph-theory/theories/migration/edge_count.v#X96Legacy.bollobas_erdos_large_c4_free_subgraph_statement": "A7 per-row snapshot: A7 froze only its count in X96's row, so this copy still calls the live x96_c4_free (and A5's live x59_subgraph_of). Kept unchanged. The complete row is Extremal.migration.cycle_lengths.X96Original.bollobas_erdos_large_c4_free_subgraph_statement.",
+    "extremal-graph-theory/theories/migration/edge_count.v#X96Original.bollobas_erdos_large_c4_free_subgraph_statement": "A7 complete-so-far snapshot (A5 containment and A7 raw rank count): it keeps the live x96_c4_free, which after B15 reads has_ucycle_length. Kept unchanged; A7's original certificate stays true and certifies this family's X96Original by conversion. The complete row is Extremal.migration.cycle_lengths.X96Original.bollobas_erdos_large_c4_free_subgraph_statement over the frozen chain X96Legacy.c4_free.",
+    "extremal-graph-theory/theories/migration/cut_size.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement": "A9 per-row snapshot: family cut-size (A9) froze only its cut size in X76's row, so this copy still calls the live x76_has_cycle_length (and A7's live count). Kept unchanged; A9's certificate stays true. The complete row is Extremal.migration.cycle_lengths.X76Original.ck_free_max_cut_polynomial_surplus_statement.",
+    "extremal-graph-theory/theories/migration/cut_size.v#X76Original.ck_free_max_cut_polynomial_surplus_statement": "A9 complete-so-far snapshot (pre-M1 count and cut size): it keeps the live x76_has_cycle_length, which after B15 unfolds to has_ucycle_length. Kept unchanged; A9's original certificate stays true and certifies this family's X76Original by conversion. The complete row is Extremal.migration.cycle_lengths.X76Original.ck_free_max_cut_polynomial_surplus_statement over this family's frozen existence."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X96.v",
+      "name": "x59_has_cycle_length",
+      "note": "Cross-file chain of X96: x96_c4_free G := ~ x59_has_cycle_length G 4 (length 4, where the raw and genuine contracts agree); frozen as X96Legacy.c4_free over Legacy.x59_has_cycle_length, and reused by the complete X96Original."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Extremal.conjectures.X84.x84_has_cycle_length",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_has_cycle_length",
+      "note": "connected two-regular EDGE FAMILY of support size l, not a sequence contract; deferred in the registry with no bridge claimed; untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.XE2.xe2_cycle_lengths",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_cycle_lengths",
+      "note": "the duplicate-free LIST of all genuine cycle lengths; a length-set contract (B10 frozen); untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.XE2.xe2_all_cycle_lengths_in",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_all_cycle_lengths_in",
+      "note": "existence of a genuine cycle whose length satisfies an arbitrary property; untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.XE2.xe2_odd_cycle_lengths_bounded",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_odd_cycle_lengths_bounded",
+      "note": "a bound on odd genuine cycle lengths; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.X19.x19_distinct_cycle_lengths",
+      "path": "digraph-theory/theories/conjectures/X19.v",
+      "name": "x19_distinct_cycle_lengths",
+      "note": "uniqueness of the lengths of a list of directed cycles; untouched"
+    }
+  ]
+}

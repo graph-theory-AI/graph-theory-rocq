@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "family": "cycle-lengths",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.has_ucycle_length",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "has_cycle_length",
+      "no_cycle_length_between",
+      "no_cycle_length"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X159.x159_no_cycle_length_between",
+      "Chromatic.conjectures.X204.x204_no_cycle_length",
+      "Chromatic.conjectures.X28.x28_no_cycle_length_between",
+      "Extremal.conjectures.X59.x59_has_cycle_length",
+      "Extremal.conjectures.X76.x76_has_cycle_length",
+      "Extremal.conjectures.X84.x84_has_cycle_length"
+    ],
+    "consumers_remaining": 6,
+    "relation": "two contracts over the adjacency relation, five sequence helpers by conversion: X59/X76 has_cycle_length is the RAW existence GTBase.walks_paths.has_ucycle_length (@edge_rel G) n (some MathComp ucycle of exactly n entries, no length guard: 0 always, 1 never on an sgraph, 2 exactly with an edge); X28 no_cycle_length_between is the RAW interval exclusion no_ucycle_length_between (@edge_rel G) a b (inclusive endpoints; an interval containing 0 always fails, one containing 2 excludes edges); X159 no_cycle_length_between is the GENUINE interval exclusion no_cycle_length_between (@edge_rel G) lo hi (explicit 2 < size c); X204 no_cycle_length is the GENUINE exact absence no_cycle_length (@edge_rel G) n (Boolean disequality). Raw and genuine agree only under the explicit guards 2 < n (has_ucycle_lengthE) and 2 < lo (no_ucycle_length_betweenE); no alias is redirected to the other contract. X84's same-named helper quantifies connected two-regular EDGE FAMILIES, not sequences, and is classified deferred without a bridge.",
+    "semantic_classes": {
+      "raw-exact-length": {
+        "members": [
+          "Extremal.conjectures.X59.x59_has_cycle_length",
+          "Extremal.conjectures.X76.x76_has_cycle_length"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Extremal.migration.cycle_lengths.x59_has_cycle_length_compat",
+          "Extremal.migration.cycle_lengths.x76_has_cycle_length_compat"
+        ],
+        "note": "exists c, ucycle (--) c /\\ size c = n, the body of has_ucycle_length (@edge_rel G) n, convertible, at EVERY n: raw length 0 is always witnessed (the empty ucycle), 1 is impossible on a simple graph, 2 means an edge. The rows use length 4 (X59, X96's chain) and 3 <= k (X76), where the genuine view agrees (has_ucycle_lengthE), but the helpers keep the raw contract."
+      },
+      "raw-interval-exclusion": {
+        "members": [
+          "Chromatic.conjectures.X28.x28_no_cycle_length_between"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.cycle_lengths.x28_no_cycle_length_between_compat",
+        "note": "forall c, ucycle (--) c -> a <= size c -> size c <= b -> False, the body of no_ucycle_length_between (@edge_rel G) a b, convertible, at EVERY a, b: an interval containing 0 always fails and one containing 2 excludes every edge; reversed intervals are vacuous. The row uses [4, 6], where it agrees with the genuine exclusion (no_ucycle_length_betweenE under 2 < a); no guard is added."
+      },
+      "genuine-interval-exclusion": {
+        "members": [
+          "Chromatic.conjectures.X159.x159_no_cycle_length_between"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.cycle_lengths.x159_no_cycle_length_between_compat",
+        "note": "forall c, ucycle (--) c -> 2 < size c -> lo <= size c -> size c <= hi -> False, the body of no_cycle_length_between (@edge_rel G) lo hi, convertible; the premise order is kept."
+      },
+      "genuine-exact-absence": {
+        "members": [
+          "Chromatic.conjectures.X204.x204_no_cycle_length"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.cycle_lengths.x204_no_cycle_length_compat",
+        "note": "forall c, ucycle (--) c -> 2 < size c -> size c != n, the body of no_cycle_length (@edge_rel G) n, convertible; the Boolean disequality is read as a proposition by no_cycle_length_neq, and no_cycle_lengthE / no_cycle_lengthP give the interval and negated-existence views."
+      },
+      "edge-family-exact-length": {
+        "members": [
+          "Extremal.conjectures.X84.x84_has_cycle_length"
+        ],
+        "count": 1,
+        "verdict": "distinct representation",
+        "state": "deferred",
+        "certificates": [],
+        "note": "exists F : {set {set G}}, x84_cycle_edge_set F /\\ #|x84_support F| = l: a connected two-regular EDGE FAMILY whose support has l vertices (actual edges, support size > 2, |F| = |support|, degree 2 on the support, connected support), not a sequence; impossible at l <= 2 where the raw sequence contract is witnessed. Relating it to the sequence contract needs a proved edge-family / sequence bridge, and its X85 count consumer (x84_cycle_count) and A10's incidence-degree history belong to a separate family. B11 classifies x84_cycle_edge_set as a distinct edge-set predicate; unchanged here."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.cycle_lengths.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement_compat",
+      "Chromatic.migration.cycle_lengths.planar_no_4_to_6_cycles_three_choosable_statement_compat",
+      "Chromatic.migration.cycle_lengths.planar_no_cycles_4_to_8_correspondence_chromatic_three_statement_compat",
+      "Chromatic.migration.cycle_lengths.x159_no_cycle_length_between_compat",
+      "Chromatic.migration.cycle_lengths.x204_no_cycle_length_compat",
+      "Chromatic.migration.cycle_lengths.x28_no_cycle_length_between_compat",
+      "Extremal.migration.cycle_lengths.bollobas_erdos_large_c4_free_subgraph_statement_compat",
+      "Extremal.migration.cycle_lengths.bollobas_erdos_large_c4_free_subgraph_statement_original_compat",
+      "Extremal.migration.cycle_lengths.c4_free_subgraph_polynomial_average_degree_statement_compat",
+      "Extremal.migration.cycle_lengths.c4_free_subgraph_polynomial_average_degree_statement_original_compat",
+      "Extremal.migration.cycle_lengths.ck_free_max_cut_polynomial_surplus_statement_compat",
+      "Extremal.migration.cycle_lengths.ck_free_max_cut_polynomial_surplus_statement_original_compat",
+      "Extremal.migration.cycle_lengths.x59_has_cycle_length_compat",
+      "Extremal.migration.cycle_lengths.x76_has_cycle_length_compat",
+      "Extremal.migration.cycle_lengths.x96_c4_free_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.has_ucycle_length0",
+      "GTBase.walks_paths.has_ucycle_length1",
+      "GTBase.walks_paths.has_ucycle_length2",
+      "GTBase.walks_paths.has_cycle_length_le2",
+      "GTBase.walks_paths.has_cycle_length_ucycle",
+      "GTBase.walks_paths.has_ucycle_lengthE",
+      "GTBase.walks_paths.no_ucycle_length_betweenP",
+      "GTBase.walks_paths.no_cycle_length_betweenP",
+      "GTBase.walks_paths.no_cycle_length_betweenE",
+      "GTBase.walks_paths.no_ucycle_length_between0",
+      "GTBase.walks_paths.no_ucycle_length_between_pair",
+      "GTBase.walks_paths.no_ucycle_length_between_rev",
+      "GTBase.walks_paths.no_cycle_length_between_rev",
+      "GTBase.walks_paths.no_cycle_length_between_le2",
+      "GTBase.walks_paths.no_ucycle_length_between_cycle",
+      "GTBase.walks_paths.no_ucycle_length_betweenE",
+      "GTBase.walks_paths.no_cycle_lengthE",
+      "GTBase.walks_paths.no_cycle_lengthP",
+      "GTBase.walks_paths.no_cycle_length_neq",
+      "GTBase.walks_paths.no_cycle_length_le2",
+      "GTBase.walks_paths.ucycle_size_le_card",
+      "GTBase.walks_paths.has_ucycle_length_card",
+      "GTBase.walks_paths.has_ucycle_length1_sgraph",
+      "GTBase.walks_paths.has_ucycle_length2_sgraph",
+      "GTBase.walks_paths.cycle_lengths_ground_K0",
+      "GTBase.walks_paths.cycle_lengths_ground_K1",
+      "GTBase.walks_paths.cycle_lengths_ground_K2",
+      "GTBase.walks_paths.cycle_lengths_ground_K3"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GTBase.base",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.fintype",
+        "mathcomp.boot.path",
+        "mathcomp.boot.seq"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "mathcomp.boot.path.ucycle",
+      "note": "MathComp path.v defines ucycle e c as the proposition cycle e c && uniq c; neither MathComp nor coq-graph-theory names the existence of a cycle of a given length or the exclusion of an interval of lengths for a raw sequence relation. GTBase.walks_paths owns the five predicates over an arbitrary relation, reusing ucycle and B10's seq_cycle; the raw and genuine contracts are bridged only under explicit guards. GTBase.base's girth_geq / has_girth are minimum or exact girth contracts; Cycle XE2's length sets, counts and arbitrary-property existential, Chromatic XE2's odd-length bound and separation, and Digraph X19's distinct lengths stay separate. Legacy bodies and per-row certificates: meta/migration_reports/cycle_lengths.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/cycle_lengths.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/cycle_lengths.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/cycle-lengths.json"
+  }
+}
