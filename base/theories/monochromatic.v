@@ -123,3 +123,53 @@ apply: (iffP existsP).
   rewrite negb_imply xS /= negb_forall; apply/existsP; exists y.
   by rewrite negb_imply yS /=.
 Qed.
+
+(** ** Non-monochromatic members of a supplied finite family (library migration A9)
+
+    [non_monochromatic_count F col] is the number of members [e] of an ARBITRARY finite family
+    [F : {set {set T}}] that are not monochromatic under the supplied map [col], i.e. that contain two
+    elements of different colours ([non_monochromatic_onP]).  The family need not be uniform; no
+    nonemptiness, positivity or palette inhabitant is assumed.  Empty and one-element members are
+    never counted ([non_monochromatic_count_small]), a constant map counts nothing
+    ([non_monochromatic_count_const]), the count is at most [#|F|], and a two-element member with two
+    colours counts once ([non_monochromatic_count_pair]).  Registry:
+    meta/library_primitives/cut-size.json (A9). *)
+Definition non_monochromatic_count (T : finType) (C : eqType)
+    (F : {set {set T}}) (col : T -> C) : nat :=
+  #|[set e in F | ~~ monochromatic_on col e]|.
+
+Lemma non_monochromatic_count_le (T : finType) (C : eqType) (F : {set {set T}}) (col : T -> C) :
+  non_monochromatic_count F col <= #|F|.
+Proof. by apply: subset_leq_card; apply/subsetP => e; rewrite inE => /andP[]. Qed.
+
+Lemma non_monochromatic_count_set0 (T : finType) (C : eqType) (col : T -> C) :
+  non_monochromatic_count set0 col = 0.
+Proof. by apply/eqP; rewrite cards_eq0; apply/eqP/setP => e; rewrite !inE. Qed.
+
+(** A constant map leaves no member non-monochromatic. *)
+Lemma non_monochromatic_count_const (T : finType) (C : eqType) (F : {set {set T}}) (c : C) :
+  non_monochromatic_count F (fun _ : T => c) = 0.
+Proof.
+apply/eqP; rewrite cards_eq0; apply/eqP/setP => e; rewrite !inE.
+by rewrite monochromatic_on_const andbF.
+Qed.
+
+(** Empty and one-element members are never counted. *)
+Lemma non_monochromatic_count_small (T : finType) (C : eqType) (F : {set {set T}}) (col : T -> C) :
+  {in F, forall e : {set T}, #|e| <= 1} -> non_monochromatic_count F col = 0.
+Proof.
+move=> small; apply/eqP; rewrite cards_eq0; apply/eqP/setP => e; rewrite !inE.
+apply/negbTE/andP => -[eF /non_monochromatic_onP[x [y [xe ye xy]]]].
+have : #|e| <= 1 := small e eF.
+rewrite leqNgt; apply/negP/negPn; apply/card_gt1P; exists x, y; split=> //.
+by apply: contraNneq xy => ->.
+Qed.
+
+(** A two-element member with two colours is counted. *)
+Lemma non_monochromatic_count_pair (T : finType) (C : eqType) (col : T -> C) (x y : T) :
+  col x != col y -> non_monochromatic_count [set [set x; y]] col = 1.
+Proof.
+move=> xy; rewrite /non_monochromatic_count (eq_card1 (x := [set x; y])) // => e.
+rewrite !inE; case: (e =P [set x; y]) => [->|] //=.
+by apply/non_monochromatic_onP; exists x, y; rewrite !inE !eqxx ?orbT.
+Qed.

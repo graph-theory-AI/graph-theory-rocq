@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py edges_between --details /tmp/mi
 - Canonical: `GTBase.common.edges_between`.
 - Baseline: `842ff4d456f543db4030b424a3c53d5c22fd70c9`.
 - Scope: 4 helpers, 4 statements, 14 frozen objects, 37 recorded references.
-- Source checks: 138/138 pass; consistent.
+- Source checks: 136/136 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,6 +20,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py edges_between --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Extremal.conjectures.X223.x223_anticomplete`, `Extremal.conjectures.X76.x76_cut_size`, `Extremal.conjectures.X78.x78_cut_size`.
+Excluded distinct variants: `Extremal.conjectures.X223.x223_anticomplete`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/induced_free.v#X118Legacy.statement`, `extremal-graph-theory/theories/migration/induced_free.v#X120Legacy.statement`.

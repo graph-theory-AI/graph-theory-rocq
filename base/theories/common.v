@@ -30,6 +30,7 @@ From GraphTheory Require Export digraph sgraph connectivity.
 From GraphTheory Require Import preliminaries bij.
 (* [coloring] is IMPORTED only to state [chi_diso]; [base.v] exports it. *)
 From GraphTheory Require Import coloring.
+From GTBase Require monochromatic.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -138,6 +139,20 @@ Definition edges_between (G : sgraph) (A B : {set G}) : nat :=
 
 Definition nonedges_between (G : sgraph) (A B : {set G}) : nat :=
   #|[set p : G * G | [&& p.1 \in A, p.2 \in B & ~~ (p.1 -- p.2)]]|.
+
+(** ** Edge cuts
+
+    [cut_size A] is the number of edges of [G] with one end in [A] and the other outside: the sets
+    [e] of [E(G)] that meet [A] ([~~ [disjoint e & A]]) and are not contained in [A].  [A] is any
+    vertex set; the empty and the full side have no cut edge ([cut_size_set0], [cut_size_setT]) and
+    a side and its complement have the same cut ([cut_sizeC]).  The cut is the number of
+    non-monochromatic edges under membership in [A] ([cut_size_non_monochromatic], with
+    [GTBase.monochromatic.non_monochromatic_count]), and the ordered edge count between the two
+    (disjoint) sides [A] and [~: A] ([cut_size_edges_between]).  Counting the non-monochromatic
+    members of an ARBITRARY supplied family under an arbitrary colour map is the separate,
+    graph-free [GTBase.monochromatic.non_monochromatic_count]. *)
+Definition cut_size (G : sgraph) (A : {set G}) : nat :=
+  #|[set e in E(G) | ~~ [disjoint e & A] && ~~ (e \subset A)]|.
 
 (** ** Matchings *)
 
@@ -824,6 +839,44 @@ apply/eqP; rewrite cards_eq0; apply/eqP/setP => -[a b]; rewrite !inE /=.
 by apply/negbTE; apply/and3P => -[/eqP-> /eqP->]; rewrite ?compl_adjE eqxx.
 Qed.
 
+(** *** edge cuts *)
+
+Lemma cut_sizeC (G : sgraph) (A : {set G}) : cut_size (~: A) = cut_size A.
+Proof.
+apply: eq_card => e; rewrite !inE; congr (_ && _).
+by rewrite andbC [[disjoint e & ~: A]]disjoints_subset setCK -disjoints_subset.
+Qed.
+
+Lemma cut_size_set0 (G : sgraph) : cut_size (set0 : {set G}) = 0.
+Proof. by apply/eqP; rewrite cards_eq0; apply/eqP/setP => e; rewrite !inE disjoints_subset setC0 subsetT /= andbF. Qed.
+
+Lemma cut_size_setT (G : sgraph) : cut_size [set: G] = 0.
+Proof. by apply/eqP; rewrite cards_eq0; apply/eqP/setP => e; rewrite !inE subsetT /= !andbF. Qed.
+
+(** The cut is the count of non-monochromatic edges under membership in [A]. *)
+Lemma cut_size_non_monochromatic (G : sgraph) (A : {set G}) :
+  cut_size A = GTBase.monochromatic.non_monochromatic_count E(G) (fun x : G => x \in A).
+Proof.
+apply: eq_card => e; rewrite !inE; case: (e \in E(G)) => //=.
+rewrite -setI_eq0; apply/andP/GTBase.monochromatic.non_monochromatic_onP.
+  case=> /set0Pn[x /setIP[xe xA]] /subsetPn[y ye yA].
+  by exists x, y; rewrite xA (negbTE yA).
+case=> x [y [xe ye xy]].
+have [xA|xA] := boolP (x \in A); have [yA|yA] := boolP (y \in A).
+- by move: xy; rewrite xA yA.
+- by split; [apply/set0Pn; exists x; rewrite inE xe xA | apply/subsetPn; exists y].
+- by split; [apply/set0Pn; exists y; rewrite inE ye yA | apply/subsetPn; exists x].
+- by move: xy; rewrite (negbTE xA) (negbTE yA).
+Qed.
+
+(** On the two sides [A] and [~: A] (disjoint), the cut is the ordered edge count. *)
+Lemma cut_size_edges_between (G : sgraph) (A : {set G}) : cut_size A = edges_between A (~: A).
+Proof.
+have dA : [disjoint A & ~: A] by rewrite disjoints_subset setCK.
+rewrite edges_between_cross //; apply: eq_card => e; rewrite !inE; congr (_ && _).
+by rewrite !setI_eq0 [[disjoint e & ~: A]]disjoints_subset setCK.
+Qed.
+
 (** *** subgraph containment *)
 
 (** Every graph contains itself (non-vacuity). *)
@@ -1070,6 +1123,8 @@ Proof. by move=> ac x; apply/negP => xx; move: (ac x x xx); rewrite connect0. Qe
     [edges_between_set1], [nonedges_between_set1], [nonedges_between_Kn], [edges_between_Kn],
     [edges_between_K2], [edges_between_cross], [nonedges_between_compl],
     [nonedges_between_compl_overlap],
+    [cut_sizeC], [cut_size_set0], [cut_size_setT], [cut_size_non_monochromatic],
+    [cut_size_edges_between],
     [induced_free_inhabited], [induced_free_diso], [induced_free_card],
     [not_induced_free_self], [not_induced_free_pattern0], [induced_free_host0],
     [not_induced_free_clique], [induced_free_K1], [induced_free_Kn],
