@@ -77,6 +77,67 @@ class FamilyRegistries(unittest.TestCase):
         self.assertEqual(list(result['primitives']), ['another', 'fixture'])
         self.assertEqual(result['primitives']['fixture'], self.primitive)
 
+    def repository_source(self):
+        name = 'GTBase.common.original'
+        self.primitive['source_definitions'] = [name]
+        self.primitive['repository_sources'] = {name: {
+            'path': 'base/theories/common.v', 'commit': 'a' * 40,
+            'blob': 'b' * 40, 'declaration_hash': 'c' * 64,
+        }}
+        return name, self.primitive['repository_sources'][name]
+
+    def test_repository_sources_require_exact_descriptor_and_authoritative_membership(self):
+        name, source = self.repository_source()
+        self.write_family()
+        self.assertEqual(R.load_library_registry(self.root)['primitives']['fixture'], self.primitive)
+        clean = copy.deepcopy(self.primitive)
+        for field, value in (('commit', 'HEAD'), ('commit', 'a' * 39), ('blob', 'B' * 40),
+                             ('declaration_hash', 'c' * 63), ('path', '../base/theories/common.v')):
+            with self.subTest(field=field, value=value):
+                spec = copy.deepcopy(clean)
+                spec['repository_sources'][name][field] = value
+                self.write_family(spec=spec)
+                with self.assertRaises(R.RegistryError):
+                    R.load_library_registry(self.root)
+        for bad in ([], {name: []}, {name: {**source, 'fallback': True}},
+                    {'GTBase.common.unlisted': source}):
+            self.write_family(spec={**clean, 'repository_sources': bad})
+            with self.assertRaises(R.RegistryError):
+                R.load_library_registry(self.root)
+
+    def test_repository_source_paths_cannot_be_conjectures_or_aliases(self):
+        name, source = self.repository_source()
+        for path in ('base/theories/conjectures/X0.v', 'base/theories/migration/frozen.v',
+                     'base/theories/missing.v'):
+            with self.subTest(path=path):
+                if 'missing' not in path:
+                    target = self.root / path
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_text('Definition original := True.\n')
+                source['path'] = path
+                self.write_family()
+                with self.assertRaises(R.RegistryError):
+                    R.load_library_registry(self.root)
+        source['path'] = 'base/theories/alias.v'
+        (self.root / source['path']).symlink_to('common.v')
+        self.write_family()
+        with self.assertRaisesRegex(R.RegistryError, 'without aliases'):
+            R.load_library_registry(self.root)
+        (self.root / 'alternate').symlink_to(self.root / 'base', target_is_directory=True)
+        source['path'] = 'alternate/theories/foundations/alias.v'
+        (self.root / 'base/theories/foundations').mkdir()
+        (self.root / 'base/theories/foundations/alias.v').write_text('Definition original := True.\n')
+        self.write_family()
+        with self.assertRaisesRegex(R.RegistryError, 'without aliases'):
+            R.load_library_registry(self.root)
+
+    def test_duplicate_source_ownership_is_rejected_without_a_shared_index(self):
+        self.repository_source()
+        self.write_family()
+        self.write_family('another')
+        with self.assertRaisesRegex(R.RegistryError, 'duplicate source ownership'):
+            R.load_library_registry(self.root)
+
     def test_missing_or_empty_directory_is_rejected(self):
         (self.root / 'meta/library_primitives/fixture.json').unlink()
         with self.assertRaisesRegex(R.RegistryError, 'no family registry documents'):
@@ -250,6 +311,28 @@ class FamilyRegistries(unittest.TestCase):
                 entries, errors = F.expand_registry()
             self.assertEqual(errors, [])
             self.assertEqual(entries, expected_entries)
+
+    def test_mutation_workspace_keeps_repository_source_without_fidelity_fragment(self):
+        name, source = self.repository_source()
+        source['path'] = 'spectral-graph-theory/theories/foundations/public.v'
+        source_path = self.root / source['path']
+        source_path.parent.mkdir(parents=True)
+        source_path.write_text('Definition original := True.\n')
+        source_path.with_suffix('.vo').write_text('not copied')
+        self.write_family()
+        for package in ('packing-theory', 'graph-theory-misc'):
+            (self.root / package).mkdir()
+        (self.root / 'packing-theory/_CoqProject').write_text('-Q theories Packing\n')
+        mutant = MUTATION.Mutant('fixture', 'X0', 'packing-theory', (), (), '', '')
+        with tempfile.TemporaryDirectory(prefix='public-source-copy-') as temporary:
+            destination = Path(temporary)
+            with patch.object(MUTATION, 'ROOT', self.root), patch.object(F, 'ROOT', self.root):
+                MUTATION.copy_workspace(mutant, destination)
+            actual = R.load_library_registry(destination)['primitives']['fixture']
+            self.assertEqual(actual['repository_sources'][name], source)
+            copied = destination / source['path']
+            self.assertEqual(copied.read_text(), source_path.read_text())
+            self.assertFalse(copied.with_suffix('.vo').exists())
 
 
 if __name__ == '__main__':

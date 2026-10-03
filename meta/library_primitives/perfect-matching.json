@@ -74,7 +74,9 @@
       "note": "coq-graph-theory 0.9.7 defines connectivity.matching but no perfect-matching predicate; GTBase.common.perfect_matching (matching M /\\ cover M = [set: G], with perfect_matching_K2 and not_perfect_matching0 since WP4b) is the canonical. The corpus copies spell it as exact-one incidence of every vertex; perfect_matching_exactly_oneP proves the two readings equivalent (members are 2-sets, so cover and exactly-one agree), card_perfect_matching gives #|G| = 2 * #|M| and the odd-order and K_3 negatives.",
       "audited_at": "2026-10-02"
     },
-    "reviewed_by": null,
+    "reviewed_by": "arthur",
+    "reviewed_commit": "99e3132092cb7020c7d09a41ee629c4af067f127",
+    "independent_review": "meta/migration_reviews/perfect_matching.md",
     "foundation_fidelity": "meta/foundation_fidelity/perfect-matching.json"
   }
 }

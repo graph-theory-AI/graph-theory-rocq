@@ -78,6 +78,8 @@
       "note": "The installed sources provide E(G) and generic subset/powerset membership. No indexed edge-family primitive was found in these modules. The smallest wrapper preserves the original Prop-valued forall-index interface; edge_family_powersetP and edge_family_unionP relate it to upstream finite-set presentations without adding restrictions.",
       "audited_at": "2026-10-02"
     },
-    "reviewed_by": null
+    "reviewed_by": "arthur",
+    "reviewed_commit": "57d6b9fe844e3ba25c2b209a855b8d389290d6d8",
+    "independent_review": "meta/migration_reviews/edge_family.md"
   }
 }

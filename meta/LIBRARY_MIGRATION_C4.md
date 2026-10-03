@@ -37,5 +37,7 @@ substitutions. `--check --kernel` checks the exact four statement equivalences
 and named assumptions; separate helper-type and frozen/live dependency probes
 are retained under `coordination/evidence/C4-edge_family/`.
 
-Arthur performs step 10; the coordinator checks all final statement types and
-integrates one family. BOARD.md records the exact reviewed commit and gates.
+Arthur approved step 10 at exact `57d6b9f`; the coordinator separately approved
+all four final statement equivalences and the proof-only consumer adapter.
+See `meta/migration_reviews/edge_family.md`. Integration regenerates earlier
+compact summary counts; BOARD.md records the exact gate results.

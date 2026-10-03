@@ -84,6 +84,8 @@
       "note": "MathComp partition requires nonempty blocks and its set of blocks forgets duplicate indices, so it cannot replace this predicate unconditionally. partition_disjoint_bigcup applies to the indexed disjoint family and proves the cardinal sum without excluding empty parts. E(G) is the existing upstream simple-edge set.",
       "audited_at": "2026-10-02"
     },
-    "reviewed_by": null
+    "reviewed_by": "arthur",
+    "reviewed_commit": "09510f493ed7ce4310aae55dcf41ac6ebd872c32",
+    "independent_review": "meta/migration_reviews/edge_partition.md"
   }
 }

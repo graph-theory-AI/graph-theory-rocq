@@ -5,7 +5,8 @@
 >
 > Registry status: `deprecated`, because all three historical names remain as
 > transparent compatibility aliases for one migration cycle (the M1 convention).
-> `reviewed_by` stays unset until the step-10 review is recorded.
+> Step-10 review: arthur approved exact `99e3132`; coordinator approved the three
+> final statement equivalences. See `meta/migration_reviews/perfect_matching.md`.
 
 The generated report `meta/migration_reports/perfect_matching.md` (from
 `meta/migration_reports/perfect_matching.spec.json`, via `meta/migration_report.py`)
@@ -79,8 +80,10 @@ Edge partitions (`x15_edge_partition`, X18) and edge families are the next famil
    `Packing.migration.perfect_matching.kotzig_perfect_one_factorization_statement_compat`
    (the last two over C1's and M1's frozen statements, from their unchanged certificates). Proof-only knock-on edit:
    `vocabulary_packing.x18_perfect_matching_equiv_x25_perfect_matching` is reflexive.
-10. **Independently review.** Pending: arthur (cross-review), coordinator (final
-    statement-level theorem check).
+10. **Independently review.** Arthur approved exact `99e3132` after independent
+    builds, frozen/live dependency probes, 36 closed assumptions and exact theorem
+    types. The coordinator separately approved all three statement equivalences.
+    The C1 summary-count drift reported by Arthur is regenerated at integration.
 11. **Gate.** See the board announcement for the gate results of the commit.
 12. **Deprecate.** The aliases stay; `consumers_remaining` counts their 3 same-file
     direct consumers.

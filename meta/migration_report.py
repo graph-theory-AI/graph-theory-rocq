@@ -26,9 +26,11 @@ It verifies that
   * each frozen copy equals its original declaration, after comment stripping,
     whitespace normalization and the listed substitutions, and records the
     original declaration hash (the inventory's declaration_hash) and git blob;
-  * each source helper's recorded hash matches the baseline helper inventory;
+  * each source helper's recorded hash matches the baseline helper inventory,
+    or its explicitly enrolled immutable public repository source;
   * each affected statement's frozen chain covers every same-file declaration
-    through which the statement reaches a source helper;
+    through which the statement reaches a source helper; enrolled public sources
+    also require complete reaching paths through public base/foundation nodes;
   * no frozen body in any migration certificate still resolves through a live
     helper or chain declaration of this family (reported, not hidden, when an
     earlier family's certificate does);
@@ -210,38 +212,49 @@ def module_for_path(path: str, namespaces: dict | None = None) -> str:
     return namespaces[package] + "." + relative[:-2].replace("/", ".")
 
 
-def affected_statements(base: str, sources: set[str], rows: dict) -> set[str]:
+def statement_dependencies(base: str, sources: set[str], rows: dict, *,
+                           include_public: bool = False) -> tuple[set[str], set[str]]:
     """Discover baseline statement consumers independently of the frozen list.
 
-    Read only build-listed conjecture declarations, resolve same-file names first,
+    Read build-listed conjecture declarations, resolve same-file names first,
     then qualified suffixes / unambiguous short names. Ambiguous imported short
     names conservatively add all candidates. This can request extra review for
     ambiguous explicit references. Notation and constructor resolution still
     require the separate kernel dependency checks and independent review.
+
+    Explicit public sources also need public intermediary nodes. This indexes
+    declaration bodies, not proof terms or every internal module, and does not
+    enroll those nodes as sources or add them to the helper debt inventory.
     """
     paths = git("ls-tree", "-r", "--name-only", base).splitlines()
     projects, nodes, node_packages, short_names = {}, {}, {}, defaultdict(set)
     for path in paths:
-        if "/theories/conjectures/" not in path or not path.endswith(".v"):
+        public = (path.startswith("base/theories/") and len(Path(path).parts) == 3
+                  or "/theories/foundations/" in path)
+        if not path.endswith(".v") or not ("/theories/conjectures/" in path or include_public and public):
             continue
         if Path(path).name.startswith(SKIP_PREFIXES):
             continue
         package = path.split("/", 1)[0]
         if package not in projects:
-            projects[package] = {
-                line.split("#", 1)[0].strip()
-                for line in source_at(base, package + "/_CoqProject").splitlines()
-            }
+            projects[package] = INV.project_sources(source_at(base, package + "/_CoqProject"))[0]
         if path.split("/", 1)[1] not in projects[package]:
             continue
-        module = module_for_path(path)
+        if public and include_public:
+            INV.regular_source_blob(ROOT, base, path)
+            _, project = INV.regular_source_blob(ROOT, base, package + '/_CoqProject')
+            module = INV.project_module(path, project)
+        else:
+            module = module_for_path(path)
         for decl in declarations(source_at(base, path)):
             if decl["module"] is None:
                 qualified = module + "." + decl["name"]
                 nodes[qualified] = (module, decl)
                 node_packages[qualified] = package
                 short_names[decl["name"]].add(qualified)
-    reverse = defaultdict(set)
+    if include_public and sources - set(nodes):
+        raise RegistryError(f"source declarations missing from baseline dependency index: {sorted(sources - set(nodes))}")
+    reverse, forward = defaultdict(set), defaultdict(set)
     for qualified, (module, decl) in nodes.items():
         for token in QUALIFIED_IDENT_RE.findall(body_after_name(decl)):
             if "." in token:
@@ -253,15 +266,26 @@ def affected_statements(base: str, sources: set[str], rows: dict) -> set[str]:
                 candidates = short_names[token]
             for dependency in candidates:
                 reverse[dependency].add(qualified)
+                forward[qualified].add(dependency)
     reached, pending = set(sources), list(sources)
     while pending:
         for consumer in reverse[pending.pop()] - reached:
             reached.add(consumer)
             pending.append(consumer)
-    return {name for name in reached if name in nodes and
+    statements = {name for name in reached if name in nodes and
             (name.rsplit(".", 1)[-1].endswith("_statement") or
              any(row.get("repo") == node_packages[name]
                  for row in rows.get(name.rsplit(".", 1)[-1], [])))}
+    ancestors, pending = set(statements), list(statements)
+    while pending:
+        for dependency in forward[pending.pop()] - ancestors:
+            ancestors.add(dependency)
+            pending.append(dependency)
+    return statements, reached & ancestors
+
+
+def affected_statements(base: str, sources: set[str], rows: dict) -> set[str]:
+    return statement_dependencies(base, sources, rows)[0]
 
 
 def migrated_registry_sources(entry: dict) -> set[str]:
@@ -353,6 +377,8 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
 
     registry = load_library_registry(ROOT, allow_missing_reports=allow_missing_reports)["primitives"]
     entry = registry.get(spec["family"], {})
+    repository_sources = entry.get("repository_sources", {})
+    INV.repository_source_records(ROOT, entry)
     expected_sources = migrated_registry_sources(entry)
     actual_sources = {obj["qualified"] for obj in spec["frozen"] if obj["kind"] == "source"}
     check(bool(entry) and actual_sources == expected_sources,
@@ -399,9 +425,17 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
             "row": obj.get("row"),
         }
         if obj["kind"] == "source":
-            recorded = inventory_hash(commit, obj["qualified"])
+            pin = repository_sources.get(obj['qualified'])
+            if pin:
+                check(commit == pin['commit'] and obj['path'] == pin['path'],
+                      f"{obj['qualified']}: repository source baseline agrees with pin")
+                check(inventory_hash(commit, obj['qualified']) is None,
+                      f"{obj['qualified']}: repository source cannot replace an inventory source")
+                recorded = pin['declaration_hash']
+            else:
+                recorded = inventory_hash(commit, obj["qualified"])
             check(recorded == row["declaration_sha256"],
-                  f"{obj['qualified']} hash equals the baseline inventory declaration_hash",
+                  f"{obj['qualified']} hash equals the baseline {'repository source' if pin else 'inventory'} declaration_hash",
                   f"inventory={recorded}")
             live = find_decl(source_at(None, obj["path"]), obj["name"])
             row["live_text"] = live["text"]
@@ -451,11 +485,17 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     computed_chain: set[str] = set()
     rows_base, legs_base = manifest_rows(base)
     rows_now, legs_now = manifest_rows(None)
-    expected_statements = affected_statements(base, expected_sources, rows_base)
+    expected_statements, reaching = statement_dependencies(
+        base, expected_sources, rows_base, include_public=bool(repository_sources))
     supplied_statements = {obj["qualified"] for obj in spec["frozen"] if obj["kind"] == "statement"}
     check(expected_statements == supplied_statements,
           "affected statement coverage matches baseline dependencies",
           f"missing={sorted(expected_statements - supplied_statements)}; extra={sorted(supplied_statements - expected_statements)}")
+    if repository_sources:
+        frozen_chain = {obj['qualified'] for obj in spec['frozen'] if obj['kind'] in {'source', 'chain'}}
+        missing_chain = reaching - expected_statements - frozen_chain
+        check(not missing_chain, "public source paths have complete frozen intermediary coverage",
+              f"missing={sorted(missing_chain)}")
     for obj in (o for o in spec["frozen"] if o["kind"] == "statement"):
         base_src, live_src = source_at(base, obj["path"]), source_at(None, obj["path"])
         decls = {d["name"]: d for d in declarations(base_src) if d["module"] is None}
@@ -608,7 +648,9 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         "validation_limits": [
             "Default checks compare source text, registry coverage and conservative lexical dependencies; they do not prove theorem types.",
             "--kernel checks exact closed statement equivalences and assumptions of every named certificate/API theorem, using already-built modules.",
-            "Dependency discovery scans build-listed conjecture declarations, including Inductive and Record bodies; it does not resolve notation, constructor names, module aliases or Section context like Rocq.",
+            ("Dependency discovery also scans build-listed public base/foundation declarations for explicitly enrolled repository sources; it does not resolve notation, constructor names, module aliases or Section context like Rocq."
+             if repository_sources else
+             "Dependency discovery scans build-listed conjecture declarations, including Inductive and Record bodies; it does not resolve notation, constructor names, module aliases or Section context like Rocq."),
             "Helper exact types, Section scaffolding and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.",
         ],
     }

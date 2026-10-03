@@ -6,7 +6,7 @@ Full evidence: `python3 meta/migration_report.py perfect_matching --details /tmp
 
 - Canonical: `GTBase.common.perfect_matching`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 3 helpers, 3 statements, 10 frozen objects, 19 recorded references.
+- Scope: 3 helpers, 3 statements, 10 frozen objects, 20 recorded references.
 - Source checks: 92/92 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |

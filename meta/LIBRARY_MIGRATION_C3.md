@@ -37,5 +37,6 @@ substitutions, including the M1/C1/C2 history. Source checks are separate from
 `--check --kernel` exact statement-type and assumption probes. Additional
 dependency evidence is kept in `coordination/evidence/C3-edge_partition/`.
 
-Step 10 review is assigned to Arthur, with final statement checks and integration
-by the coordinator. See BOARD.md for the exact reviewed commit and gate results.
+Arthur approved step 10 at exact `09510f4`, and the coordinator approved all
+three final statement equivalences. See `meta/migration_reviews/edge_partition.md`.
+Integration regenerates the C1/C2 compact summary counts identified by the review.
