@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X30 vocabulary ************************************************)
 
 Definition x30_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
-  forall v : G, d <= #|N(v)|.
+  min_degree_at_least G d.
 
 Definition x30_induced_min_degree_log_at_least
     (G : sgraph) (S : {set G}) (cnum cden d : nat) : Prop :=

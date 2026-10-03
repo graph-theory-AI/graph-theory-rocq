@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py incidence_degree --details /tmp
 
 - Canonical: `GTBase.incidence.incidence_degree`.
 - Baseline: `a54026d37a8b40d53340be71be783ac5d5fe3635`.
-- Scope: 9 helpers, 10 statements, 33 frozen objects, 85 recorded references.
-- Source checks: 273/273 pass; consistent.
+- Scope: 9 helpers, 10 statements, 33 frozen objects, 88 recorded references.
+- Source checks: 274/274 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -27,3 +27,5 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
 Excluded distinct variants: `Hypergraph.foundations.hypergraph.hg_restrict`, `Hypergraph.foundations.hypergraph.hg_skeleton`.
+
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/min_degree_at_least.v#X38Legacy.min_degree_spanning_subgraph_small_degree_multiplicity_statement`.

@@ -28,7 +28,7 @@ Definition x211_claw_free (G : sgraph) : Prop := induced_free G 'K_1,3.
 (** Minimum degree at least [d] (the companion of base's maximum degree
     [Delta]).  [@MOVE-to-base]: a [delta] dual to [Delta] belongs in base.v. *)
 Definition x211_min_degree_geq (G : sgraph) (d : nat) : Prop :=
-  forall v : G, d <= #|N(v)|.
+  min_degree_at_least G d.
 
 (** A graph automorphism: an adjacency-preserving bijection.  [@MOVE-to-base]:
     byte-identical to [U2.graph_automorphism] (hamiltonicity-theory/U2.v). *)

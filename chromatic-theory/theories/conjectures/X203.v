@@ -21,7 +21,7 @@ Definition x203_separation_choosability_at_least (G : sgraph) (k : nat) : Prop :
   forall j : nat, j < k -> ~ x203_separation_choosable G j.
 
 Definition x203_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
-  forall v : G, d <= #|N(v)|.
+  min_degree_at_least G d.
 
 (** ** X203 statements *****************************************************)
 

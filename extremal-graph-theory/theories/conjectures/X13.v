@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X13 vocabulary ************************************************)
 
 Definition x13_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
-  forall v : G, d <= #|N(v)|.
+  min_degree_at_least G d.
 
 Definition x13_unbounded (f : nat -> nat) : Prop :=
   forall b : nat, exists d0 : nat, forall d : nat, d0 <= d -> b <= f d.
@@ -19,7 +19,7 @@ Definition x13_complete_subgraph_size_at_least (G : sgraph) (m : nat) : Prop :=
 
 Definition x13_induced_min_degree_at_least
     (G : sgraph) (S : {set G}) (d : nat) : Prop :=
-  forall v : induced S, d <= #|N(v)|.
+  min_degree_at_least (induced S) d.
 
 Definition x13_bipartite_induced_min_degree_at_least
     (G : sgraph) (d : nat) : Prop :=
