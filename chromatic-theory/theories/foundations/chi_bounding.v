@@ -16,6 +16,7 @@
     the Gyarfas-Sumner row. *)
 
 From GTBase Require Export base.
+From GTBase Require Import colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -107,21 +108,8 @@ Qed.
 Lemma chi_le_palette (G : sgraph) (C : finType) (f : G -> C) :
   (forall x y : G, x -- y -> f x != f y) -> χ([set: G]) <= #|C|.
 Proof.
-move=> hf.
-pose P := preim_partition f [set: G].
-have hp : coloring P [set: G].
-  apply/andP; split; first exact: preim_partitionP.
-  apply/forall_inP=> A /imsetP[x _ ->]; apply/stableP.
-  move=> y z; rewrite !inE /= => /eqP hy /eqP hz.
-  by apply/negP=> hyz; have := hf y z hyz; rewrite -hy -hz eqxx.
-apply: leq_trans (color_bound hp) _.
-pose fiber c := [set x : G | c == f x].
-have hsub : P \subset [set fiber c | c in [set: C]].
-  apply/subsetP=> A /imsetP[x _ ->]; apply/imsetP.
-  exists (f x); first by rewrite inE.
-  by apply/setP=> y; rewrite /fiber !inE.
-apply: leq_trans (subset_leq_card hsub) _.
-by have := leq_imset_card fiber [set: C]; rewrite cardsT.
+move=> /colourings.proper_colouringP hf.
+exact: colourings.proper_colouring_chi hf.
 Qed.
 
 (** A [k]-choosable graph is [k]-colourable: run choosability on the CONSTANT

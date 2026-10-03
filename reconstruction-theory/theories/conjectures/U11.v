@@ -113,15 +113,19 @@ Definition switch_vertex (G : sgraph) (v : G) : sgraph := vertex_switch [set v].
     diGraph -> _ -> _ -> diGraph] (a different, unsuitable operation).
 
     [@MOVE-to-base] generic simple-graph edge deletion; migrate to GTBase.base
-    when a 2nd area needs it. *)
+    when a 2nd area needs it.  Done by the A4 library migration (2026-10-02):
+    [sde_rel] and [sdel_edge] are transparent aliases of
+    [GTBase.common.del_es_rel G [set e]] and [del_edge_set G [set e]], which
+    agree with the original pair test for every vertex set [e]; the original
+    Section is frozen and certified in theories/migration/sdel_edge.v. *)
 Section DelEdge.
 Variables (G : sgraph) (e : {set G}).
-Definition sde_rel : rel G := fun x y => (x -- y) && ([set x; y] != e).
+Definition sde_rel : rel G := @del_es_rel G [set e].
 Lemma sde_sym : symmetric sde_rel.
-Proof. by move=> x y; rewrite /sde_rel sg_sym setUC. Qed.
+Proof. exact: del_es_sym. Qed.
 Lemma sde_irrefl : irreflexive sde_rel.
-Proof. by move=> x; rewrite /sde_rel sg_irrefl. Qed.
-Definition sdel_edge : sgraph := SGraph sde_sym sde_irrefl.
+Proof. exact: del_es_irrefl. Qed.
+Definition sdel_edge : sgraph := del_edge_set G [set e].
 End DelEdge.
 
 (** *** Simple-graph line operation [L(G)] (iterable [sgraph -> sgraph]):

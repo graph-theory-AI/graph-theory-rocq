@@ -43,6 +43,7 @@
       "Chromatic.migration.consecutive_in_cycle.erdos_1091_statement_compat",
       "Chromatic.migration.consecutive_in_cycle.erdos_842_statement_compat",
       "Chromatic.migration.consecutive_in_cycle.rainbow_consecutive_vertices_in_hole_statement_compat",
+      "Chromatic.migration.consecutive_in_cycle.rainbow_consecutive_vertices_in_hole_statement_original_compat",
       "Chromatic.migration.consecutive_in_cycle.x3_consecutive_in_cycle_compat",
       "Chromatic.migration.consecutive_in_cycle.x3_constricting_compat",
       "Chromatic.migration.consecutive_in_cycle.x3_has_hole_length_compat",
@@ -135,8 +136,10 @@
       "audited_at": "2026-10-02"
     },
     "migration_report": "meta/migration_reports/consecutive_in_cycle.md",
-    "reviewed_by": null,
+    "reviewed_by": "coordinator helper path_review",
     "migration_spec": "meta/migration_reports/consecutive_in_cycle.spec.json",
-    "foundation_fidelity": "meta/foundation_fidelity/consecutive-in-cycle.json"
+    "foundation_fidelity": "meta/foundation_fidelity/consecutive-in-cycle.json",
+    "reviewed_commit": "ed7d5ed8cb2bb21e2491eae0cd72025f8404e5fd",
+    "independent_review": "meta/migration_reviews/consecutive_in_cycle.md"
   }
 }

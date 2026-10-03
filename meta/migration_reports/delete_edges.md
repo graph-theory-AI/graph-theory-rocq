@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py delete_edges --details /tmp/mig
 - Canonical: `GTBase.common.del_edge_set`.
 - Baseline: `03742d181456af2cae63288593d5b6277687895c`.
 - Scope: 7 helpers, 7 statements, 28 frozen objects, 54 recorded references.
-- Source checks: 221/221 pass; consistent.
+- Source checks: 216/216 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -23,4 +23,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py delete_edges --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Chromatic.conjectures.X64.x64_delete_edge_rel`, `Chromatic.conjectures.X64.x64_delete_edge_graph`, `Extremal.conjectures.X60.x60_delete_edge_rel`, `Extremal.conjectures.X60.x60_delete_edge_graph`, `Reconstruction.conjectures.U11.sdel_edge`, `Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_edges`.
+Excluded distinct variants: `Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_edges`.

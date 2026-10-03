@@ -68,10 +68,14 @@ Definition statement : Prop :=
 
 End X25Legacy.
 
+(** Since C2 (2026-10-02) the live [x25_perfect_matching] is the alias of
+    [GTBase.common.perfect_matching]; the frozen body above is unchanged and the
+    certificate goes through [perfect_matching_exactly_oneP]. *)
 Lemma x25_perfect_matching_compat (G : sgraph) (M : {set {set G}}) :
   X25Legacy.perfect_matching M <-> x25_perfect_matching M.
 Proof.
-by rewrite /X25Legacy.perfect_matching /x25_perfect_matching x25_edge_set_compat.
+rewrite /X25Legacy.perfect_matching /x25_perfect_matching x25_edge_set_compat.
+exact: iff_sym (perfect_matching_exactly_oneP M).
 Qed.
 
 Lemma x25_perfect_one_factorization_compat

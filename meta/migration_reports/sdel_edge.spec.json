@@ -1,0 +1,186 @@
+{
+  "family": "single-edge-deletion-u11",
+  "canonical_name": "GTBase.common.del_edge_set",
+  "canonical_short_name": "del_edge_set",
+  "relation": "Pointwise equality with del_es_rel G [set e] for every vertex set e (del_edge_set1); identity isomorphism of the cards; the same edge-index bijection in every deck bridge.",
+  "baseline_commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+  "namespaces": {
+    "base": "GTBase",
+    "reconstruction-theory": "Reconstruction"
+  },
+  "certificate_files": [
+    "base/theories/common.v",
+    "reconstruction-theory/theories/migration/sdel_edge.v"
+  ],
+  "extra_certificates": [
+    "GTBase.common.del_edge_set1",
+    "GTBase.common.del_edge_set_eq_diso",
+    "Reconstruction.migration.sdel_edge.sdel_edge_diso",
+    "Reconstruction.migration.sdel_edge.legacy_reconstruction_implies_edge_reconstruction"
+  ],
+  "summary": [
+    "Batch A, family A4 (U11's single-edge deletion, the cross-name companion deferred by A3). U11's Section `DelEdge` now defines `sde_rel` as `@del_es_rel G [set e]` and `sdel_edge` as `del_edge_set G [set e]`; `sde_sym`/`sde_irrefl` keep their statements. The adjacency equals the old pair test pointwise for every vertex set e, so each card is related to its frozen copy by the identity isomorphism. The frozen Section keeps its Variables, the full proofs and the SGraph construction, which `sdel_edge_proofs_compat` relates to the live lemmas as a graph-construction certificate. The deck chain `same_edge_deck` -> `edge_reconstructible` -> `edge_reconstruction_statement` is frozen and bridged with the SAME edge-index bijection, composing graph isomorphisms, so card multiplicities are preserved. Kelly's `whitney_line_inversion_premise` and the non-corpus external `external_whitney_line_inversion_statement` keep the four-edge guard and the same-edge-deck hypothesis; the external theorem and Greenwell's implication stay conditional. Eight grounding lemmas, `kelly.sdel_adjE` and the U11 deletion lemmas keep their statements (proofs adapted)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Reconstruction.conjectures.U11.sde_rel",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sde_rel",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "Legacy.sde_rel",
+      "substitutions": {},
+      "certificate": "Reconstruction.migration.sdel_edge.sde_rel_compat",
+      "live_unfolds_to": "@del_es_rel G [set e]"
+    },
+    {
+      "kind": "source",
+      "qualified": "Reconstruction.conjectures.U11.sdel_edge",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sdel_edge",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "GraphLegacy.sdel_edge",
+      "substitutions": {
+        "sde_sym": "(ProofsLegacy.sde_sym e)",
+        "sde_irrefl": "(ProofsLegacy.sde_irrefl e)"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.sdel_edge_compat",
+      "live_unfolds_to": "del_edge_set G [set e]"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Reconstruction.conjectures.U11.sde_sym",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sde_sym",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "ProofsLegacy.sde_sym",
+      "substitutions": {
+        "sde_rel": "(Legacy.sde_rel e)"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.sdel_edge_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Reconstruction.conjectures.U11.sde_irrefl",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sde_irrefl",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "ProofsLegacy.sde_irrefl",
+      "substitutions": {
+        "sde_rel": "(Legacy.sde_rel e)"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.sdel_edge_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Reconstruction.conjectures.U11.same_edge_deck",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "same_edge_deck",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "U11Legacy.same_edge_deck",
+      "substitutions": {
+        "sdel_edge": "GraphLegacy.sdel_edge"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.same_edge_deck_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Reconstruction.conjectures.U11.edge_reconstructible",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "edge_reconstructible",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "U11Legacy.edge_reconstructible",
+      "substitutions": {
+        "same_edge_deck": "U11Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.edge_reconstructible_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Reconstruction.conjectures.U11.edge_reconstruction_statement",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "edge_reconstruction_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "U11Legacy.edge_reconstruction_statement",
+      "substitutions": {
+        "edge_reconstructible": "U11Legacy.edge_reconstructible"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.edge_reconstruction_statement_compat",
+      "corpus": "opg",
+      "row": "opg:edge_reconstruction_conjecture",
+      "documented_status": "open; the four-edge guard is on G only (H inherits it through the edge bijection); unchanged"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Reconstruction.foundations.kelly.whitney_line_inversion_premise",
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "whitney_line_inversion_premise",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "KellyLegacy.whitney_line_inversion_premise",
+      "substitutions": {
+        "same_edge_deck": "U11Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.whitney_line_inversion_premise_compat",
+      "note": "Greenwell's line-graph inversion premise (foundations, not a statement): four-edge guard and same-edge-deck hypothesis kept"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Reconstruction.conjectures.implications_U11.external_whitney_line_inversion_statement",
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "external_whitney_line_inversion_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "ImplicationsU11Legacy.external_whitney_line_inversion_statement",
+      "substitutions": {
+        "same_edge_deck": "U11Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.external_whitney_line_inversion_statement_compat",
+      "non_corpus": true,
+      "documented_status": "non-corpus external theorem (Whitney 1932, Hemminger 1969, Greenwell 1971) registered in meta/external_theorems.json; the implication stays conditional; unchanged"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
+      "name": "sdel_edge",
+      "note": "grounding lemmas sdel_edge_sub, sdel_edge_set0, sdel_edge_removes, sde_del_edges_adj and sdel_edge_diso_del_edges: statements unchanged, proofs adapted to the del_edge_set encoding"
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
+      "name": "sde_rel",
+      "note": "grounding lemma sde_del_edges_rel (genuine-edge comparison with upstream del_edges, hypothesis kept): statement unchanged, proof unfolds del_es_rel"
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
+      "name": "same_edge_deck",
+      "note": "grounding lemmas same_edge_deck_refl and same_edge_deck_card: unchanged"
+    },
+    {
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "sdel_edge",
+      "note": "Kelly deletion and line-card transports (sdel_adjE, in_edge_set_sdel, edge_set_sdel, the LineCard section, vdel_card_sline): statements unchanged; sdel_adjE now follows from del_edge_set1"
+    },
+    {
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "same_edge_deck",
+      "note": "same_edge_deck_line, same_edge_deck_card_edge, same_edge_deck_card_vertex, reconstruction_line_diso and the premise whitney_line_inversion_premise (frozen here as KellyLegacy): unchanged"
+    },
+    {
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "edge_reconstruction_statement",
+      "note": "whitney_reconstruction_edge_reconstruction (conditional on the premise): unchanged"
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "same_edge_deck",
+      "note": "external_whitney_line_inversion_statement (non-corpus, frozen here as ImplicationsU11Legacy): unchanged"
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "edge_reconstruction_statement",
+      "note": "reconstruction_implies_edge_reconstruction (conditional on the external theorem): unchanged"
+    }
+  ],
+  "distinct_variants": [],
+  "kernel_evidence": "/srv/graph-theory-rocq/coordination/evidence/A4-sdel_edge/print_all_dependencies_summary.txt"
+}

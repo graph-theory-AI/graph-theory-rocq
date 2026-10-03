@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "family": "proper-colouring",
+  "modules": {
+    "GTBase.colourings": {
+      "path": "base/theories/colourings.v",
+      "overrides": {
+        "proper_colouring": {
+          "verdict": "FAITHFUL",
+          "note": "The inhabited fibres of the supplied colour map form an upstream coloring of all vertices, iff adjacent endpoints have unequal labels. Arbitrary finite palettes, empty graph/empty palette and unused labels are retained; finite-function counts are not quotiented."
+        }
+      },
+      "machine_evidence": [
+        "proper_colouringP",
+        "proper_colouringE",
+        "proper_colouring_upstream",
+        "proper_colouring_injective",
+        "proper_colouring_relabel",
+        "proper_colouring_ext",
+        "proper_colouring_K0",
+        "proper_colouring_K1",
+        "not_proper_colouring_constant",
+        "proper_colouring_chi"
+      ]
+    }
+  }
+}

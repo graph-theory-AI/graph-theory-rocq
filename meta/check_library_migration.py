@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
-"""Axiom-audit public library APIs and migration compatibility certificates."""
+"""Axiom-audit public library APIs and migration compatibility certificates.
+
+Fresh pinned coqdep output determines the full local source closure of every
+registered module. Every required .vo is rebuilt through its owning project's
+generated Makefile with -B; unrelated source targets are excluded. Load snippets
+remain source inputs of their forced parents. Project/compiler overrides whose
+dependencies or output modes coqdep cannot represent are rejected, as are
+unowned sources and external prerequisites outside the selected toolchain.
+"""
 
 from __future__ import annotations
 
+import os
 import re
 import shlex
 import subprocess
@@ -56,46 +65,293 @@ def source_for_module(package: str, module: str) -> Path:
     return ROOT / package / "theories" / Path(*parts).with_suffix(".v")
 
 
-def project_dependencies(package: str) -> list[str]:
-    project = ROOT / package / "_CoqProject"
-    if not project.is_file():
-        return []
-    tokens = shlex.split(project.read_text(), comments=True)
-    deps: list[str] = []
-    for index, token in enumerate(tokens[:-2]):
-        if token not in {"-R", "-Q"}:
+class BuildError(ValueError):
+    pass
+
+
+def run_build_tool(command: list[str], directory: Path, env: dict[str, str], *,
+                   reject_warnings: bool = False) -> str:
+    try:
+        proc = subprocess.run(command, cwd=directory, env=build_environment(env), text=True,
+                              capture_output=True, check=False)
+    except OSError as exc:
+        raise BuildError(f"cannot execute {command[0]}: {exc}") from exc
+    # Pinned OCaml's verbose-GC exit counters are runtime instrumentation,
+    # not unresolved-import warnings. Preserve them for compile diagnostics.
+    diagnostics = re.sub(
+        r"(?m)^(?:allocated_words|minor_words|promoted_words|major_words|"
+        r"minor_collections|major_collections|forced_major_collections|"
+        r"heap_words|top_heap_words): [0-9]+\r?$", "", proc.stderr)
+    if proc.returncode or (reject_warnings and diagnostics.strip()):
+        detail = re.sub(r"\s+", " ", (proc.stdout + proc.stderr)[-1600:]).strip()
+        raise BuildError(f"{directory.name}: {' '.join(command)} failed; {detail}")
+    return proc.stdout
+
+
+def build_environment(env: dict[str, str]) -> dict[str, str]:
+    """Keep the selected toolchain, never inherited Make/compiler overrides.
+
+    MAKEFLAGS=-n/-t and environment variables such as ROCQ, COQFLAGS or TIMER
+    can leave a stale clean .vo while make returns success. An allowlist also
+    prevents less obvious generated-Makefile variables from doing the same.
+    Keep explicit numeric parallelism; inherited jobserver descriptors are not
+    available to our subprocesses and all other make options are discarded.
+    """
+    permitted = {
+        "PATH", "HOME", "USER", "LOGNAME", "TMPDIR", "TMP", "TEMP", "TZ",
+        "LANG", "LANGUAGE", "TERM", "OPAMROOT", "OPAM_SWITCH_PREFIX",
+        "ROCQ_OPAM_SWITCH", "CAML_LD_LIBRARY_PATH", "OCAMLPATH", "OCAMLFIND_CONF",
+        "LD_LIBRARY_PATH", "OCAMLRUNPARAM", "OCAML_GC_STATS",
+    }
+    clean = {key: value for key, value in env.items()
+             if key in permitted or key.startswith("LC_")}
+    try:
+        options = shlex.split(env.get("MAKEFLAGS", ""))
+    except ValueError:
+        options = []
+    jobs = None
+    for i, option in enumerate(options):
+        if re.fullmatch(r"-j[1-9][0-9]*|--jobs=[1-9][0-9]*", option):
+            jobs = option.removeprefix("-j").removeprefix("--jobs=")
+        elif option in {"-j", "--jobs"} and i + 1 < len(options):
+            if re.fullmatch(r"[1-9][0-9]*", options[i + 1]):
+                jobs = options[i + 1]
+    if jobs:
+        clean["MAKEFLAGS"] = f"-j{jobs}"
+    return clean
+
+
+def make_words(text: str) -> list[str]:
+    """Decode coqdep's escaped Make filenames, not shell-quoted strings."""
+    words, word = [], []
+    i = 0
+    while i < len(text):
+        char = text[i]
+        if char == "\\":
+            i += 1
+            if i == len(text):
+                raise BuildError("trailing escape in dependency output")
+            word.append(text[i])
+        elif char == "$":
+            if text[i:i + 2] != "$$":
+                raise BuildError("unsupported Make variable in dependency output")
+            word.append("$")
+            i += 1
+        elif char.isspace():
+            if word:
+                words.append("".join(word))
+                word = []
+        else:
+            word.append(char)
+        i += 1
+    if word:
+        words.append("".join(word))
+    return words
+
+
+def dependency_rules(output: str) -> dict[str, set[str]]:
+    """Read fresh multi-target coqdep rules, including Load .v prerequisites."""
+    rules = {}
+    for line in re.sub(r"\\\r?\n", " ", output).splitlines():
+        if not line.strip():
             continue
-        path = Path(tokens[index + 1])
-        parts = path.parts
-        if len(parts) == 3 and parts[0] == ".." and parts[2] == "theories":
-            dep = parts[1]
-            if (ROOT / dep / "_CoqProject").is_file() and dep not in deps:
-                deps.append(dep)
-    return deps
+        separator = None
+        i = 0
+        while i < len(line):
+            if line[i] == "\\":
+                i += 2
+                continue
+            if line[i] == ":":
+                separator = i
+                break
+            i += 1
+        if separator is None:
+            raise BuildError(f"malformed dependency rule: {line}")
+        targets = make_words(line[:separator])
+        prerequisites = set(make_words(line[separator + 1:]))
+        for target in targets:
+            if target.endswith(".vo"):
+                if target in rules:
+                    raise BuildError(f"duplicate dependency target: {target}")
+                rules[target] = prerequisites
+    return rules
 
 
-def dependency_order(packages: set[str]) -> tuple[list[str], set[str]]:
-    order: list[str] = []
-    visiting: set[str] = set()
-    visited: set[str] = set()
-    dependency_packages: set[str] = set()
+def validate_project_options(project: Path) -> None:
+    """Reject hidden imports/resolution or output modes that coqdep cannot model."""
+    unsupported = {
+        "-load-vernac-source", "-l", "-load-vernac-source-verbose", "-lv",
+        "-require", "-require-import", "-ri", "-require-export", "-re",
+        "-require-from", "-rfrom", "-require-import-from", "-rifrom",
+        "-require-export-from", "-refrom", "-load-vernac-object", "-compat-from",
+        "-init-file", "-compat", "-R", "-Q", "-I", "-include", "-coqlib", "-exclude-dir",
+        "-boot", "-noinit", "-nois", "-vos", "-vok", "-o", "-top", "-topfile",
+        "-where", "-config", "--config", "-v", "--version", "-print-version",
+        "-list-tags", "-h", "-help", "--help",
+    }
+    tokens = shlex.split(project.read_text(), comments=True)
+    i = 0
+    while i < len(tokens):
+        token = tokens[i]
+        if token == "-arg":
+            if i + 1 == len(tokens):
+                raise BuildError(f"{project}: missing -arg value")
+            for flag in shlex.split(tokens[i + 1]):
+                if flag in unsupported:
+                    raise BuildError(f"{project}: unsupported compiler flag {flag} for source-closure builds")
+            i += 2
+        elif token in {"-R", "-Q"}:
+            i += 3
+        elif token in {"-I", "-docroot", "-generate-meta-for-package"}:
+            i += 2
+        elif token in {"-f", "-coqlib"} or "=" in token:
+            # Nested/custom Make configuration needs an explicit dependency
+            # model before it can override the project parsed by this gate.
+            raise BuildError(f"{project}: unsupported project override {token}")
+        else:
+            i += 1
 
-    def visit(package: str) -> None:
-        if package in visited:
+
+def source_build_plan(roots: set[Path], env: dict[str, str]) -> list[tuple[str, set[Path]]]:
+    """Fresh concrete source closure; neither stale .d files nor mtimes are inputs."""
+    root = ROOT.resolve()
+    library = run_build_tool(["rocq", "compile", "-where"], root, env,
+                             reject_warnings=True).strip()
+    if not library or not Path(library).is_dir():
+        raise BuildError("cannot locate the pinned Rocq library directory")
+    pinned_libraries = Path(library).resolve().parent
+    projects = {path.parent.name: path.parent for path in sorted(root.glob("*/_CoqProject"))}
+    owners: dict[Path, str] = {}
+    for package, directory in projects.items():
+        validate_project_options(directory / "_CoqProject")
+        for custom in ("Makefile.coq.local", "Makefile.coq.local-late"):
+            if (directory / custom).exists():
+                raise BuildError(f"{package}: custom {custom} is not supported by source-closure builds")
+        # Ask the same project parser as the generated Makefile; -arg values
+        # must never be mistaken for project source filenames.
+        sources = run_build_tool(["rocq", "makefile", "-sources-of", "-f", "_CoqProject"],
+                                 directory, env, reject_warnings=True)
+        for name in shlex.split(sources):
+            if not name.endswith(".v"):
+                continue
+            source = (directory / name).resolve()
+            if not source.is_relative_to(directory) or not source.is_file():
+                raise BuildError(f"{package}: missing or non-owned project source: {name}")
+            if source in owners:
+                raise BuildError(f"ambiguous project ownership: {source}")
+            owners[source] = package
+
+    graphs: dict[str, dict[Path, set[Path]]] = {}
+    required: dict[str, set[Path]] = defaultdict(set)
+    package_dependencies: dict[str, set[str]] = defaultdict(set)
+    visiting: set[Path] = set()
+    visited: set[Path] = set()
+
+    def concrete_path(directory: Path, name: str) -> Path:
+        declared = Path(os.path.abspath(directory / name))
+        resolved = (directory / name).resolve()
+        if declared.is_relative_to(root):
+            # A stale local object may alias an installed object with the right
+            # logical name. Resolving it first would hide its owned source from
+            # the closure. This also rejects symlinked containing directories.
+            if declared.suffix == ".vo" and declared != resolved:
+                raise BuildError(f"local object alias is not supported: {declared}")
+        elif not declared.is_relative_to(pinned_libraries):
+            # An external alias into the pinned installation is not itself a
+            # pinned dependency; validate its declared origin before resolving.
+            raise BuildError(f"non-pinned external dependency: {declared}")
+        return resolved
+
+    def visit(source: Path) -> None:
+        source = source.resolve()
+        if source in visiting:
+            raise BuildError(f"source dependency cycle: {source}")
+        if source in visited:
             return
-        if package in visiting:
-            raise ValueError(f"package dependency cycle at {package}")
-        visiting.add(package)
-        for dep in project_dependencies(package):
-            dependency_packages.add(dep)
-            visit(dep)
-        visiting.remove(package)
-        visited.add(package)
-        order.append(package)
+        package = owners.get(source)
+        if package is None:
+            raise BuildError(f"required source is missing or absent from its _CoqProject: {source}")
+        directory = projects[package]
+        if package not in graphs:
+            # Full project load paths and parsing order match make's coqdep.
+            # A missing module can be only a warning with rc=0: fail closed.
+            output = run_build_tool(["rocq", "dep", "-f", "_CoqProject"], directory,
+                                    env, reject_warnings=True)
+            graph = {}
+            for target, dependencies in dependency_rules(output).items():
+                target_source = concrete_path(directory, target).with_suffix(".v")
+                if target_source in graph:
+                    raise BuildError(f"ambiguous normalized dependency target: {target}")
+                graph[target_source] = {concrete_path(directory, dep) for dep in dependencies}
+            graphs[package] = graph
+        dependencies = graphs[package].get(source)
+        if dependencies is None or source not in dependencies:
+            raise BuildError(f"missing source dependency rule: {source}")
+        visiting.add(source)
+        required[package].add(source)
+        for dependency in sorted(dependencies):
+            if dependency == source:
+                continue
+            local = dependency.is_relative_to(root)
+            if dependency.suffix == ".vo" and local:
+                dep_source = dependency.with_suffix(".v")
+                visit(dep_source)
+                dep_owner = owners[dep_source]
+                if dep_owner != package:
+                    package_dependencies[package].add(dep_owner)
+            elif dependency.suffix == ".v" and local:
+                # Load snippets need not be standalone project targets. coqdep
+                # adds their Require edges to the parent rule; the forced
+                # parent rereads the snippet, even with a preserved timestamp.
+                relative = dependency.relative_to(root)
+                if (not dependency.is_file() or not relative.parts
+                        or relative.parts[0] not in projects):
+                    raise BuildError(f"missing or non-owned Load source: {dependency}")
+            elif local or not dependency.is_file():
+                raise BuildError(f"unsupported or missing dependency: {dependency}")
+            elif not dependency.is_relative_to(pinned_libraries):
+                raise BuildError(f"non-pinned external dependency: {dependency}")
+            # Only the selected toolchain's installed libraries/runtime are
+            # external; mutable sibling checkouts must never lend stale objects.
+        visiting.remove(source)
+        visited.add(source)
 
-    for package in sorted(packages):
-        visit(package)
-    return order, dependency_packages
+    for source in sorted(roots):
+        visit(source)
+
+    order, active, done = [], set(), set()
+
+    def order_package(package: str) -> None:
+        if package in active:
+            raise BuildError(f"package dependency cycle: {package}")
+        if package in done:
+            return
+        active.add(package)
+        for dependency in sorted(package_dependencies[package]):
+            order_package(dependency)
+        active.remove(package)
+        done.add(package)
+        order.append((package, required[package]))
+
+    for package in sorted(required):
+        order_package(package)
+    return order
+
+
+def build_registry_sources(roots: set[Path], env: dict[str, str]) -> list[tuple[str, set[Path]]]:
+    plan = source_build_plan(roots, env)
+    for package, sources in plan:
+        directory = ROOT / package
+        targets = sorted(source.relative_to(directory).with_suffix(".vo").as_posix()
+                         for source in sources)
+        if not targets:
+            raise BuildError(f"{package}: refusing an empty-target build")
+        run_build_tool(["rocq", "makefile", "-f", "_CoqProject", "-o", "Makefile.coq"],
+                       directory, env)
+        # Force EVERY local transitive source, including unregistered helpers.
+        # Generated project rules preserve compiler flags and refresh .d files.
+        run_build_tool(["make", "-B", "-f", "Makefile.coq", *targets], directory, env)
+    return plan
 
 
 def main() -> int:
@@ -114,7 +370,7 @@ def main() -> int:
 
     errors: list[str] = []
     checked = 0
-    env = ROCQ.environment()
+    env = build_environment(ROCQ.environment())
     sources_by_package: dict[str, set[Path]] = defaultdict(set)
     for module in by_module:
         namespace = module.split(".", 1)[0]
@@ -122,54 +378,19 @@ def main() -> int:
         if package is not None:
             sources_by_package[package].add(source_for_module(package, module))
 
-    # Compile the exact registry-owned modules through each package project.
-    # Forcing these targets prevents an old, clean .vo from masking a changed
-    # source theorem during a standalone assumptions audit.
-    failed_packages: set[str] = set()
     try:
-        package_order, dependency_packages = dependency_order(set(sources_by_package))
-    except ValueError as exc:
+        plan = build_registry_sources(set().union(*sources_by_package.values()), env)
+    except (BuildError, OSError, ValueError) as exc:
         print(f"  ERROR: {exc}", file=sys.stderr)
         return 1
-    for package in package_order:
-        project_dir = ROOT / package
-        project = project_dir / "_CoqProject"
-        if not project.is_file():
-            errors.append(f"{package}: missing _CoqProject")
-            failed_packages.add(package)
-            continue
-        generate = subprocess.run(
-            ["rocq", "makefile", "-f", "_CoqProject", "-o", "Makefile.coq"],
-            cwd=project_dir, env=env, text=True, capture_output=True, check=False,
-        )
-        if generate.returncode != 0:
-            detail = re.sub(r"\s+", " ", (generate.stdout + generate.stderr)[-800:]).strip()
-            errors.append(f"{package}: cannot generate Makefile.coq; {detail}")
-            failed_packages.add(package)
-            continue
-        registry_targets = sorted(
-            source.relative_to(project_dir).with_suffix(".vo").as_posix()
-            for source in sources_by_package.get(package, set())
-        )
-        # A package imported by another audited package must refresh its public
-        # closure, not just a registry target that may omit the imported module.
-        targets = [] if package in dependency_packages else registry_targets
-        build = subprocess.run(
-            ["make", "-B", "-f", "Makefile.coq", *targets],
-            cwd=project_dir, env=env, text=True, capture_output=True, check=False,
-        )
-        if build.returncode != 0:
-            detail = re.sub(r"\s+", " ", (build.stdout + build.stderr)[-800:]).strip()
-            errors.append(f"{package}: registry module build failed; {detail}")
-            failed_packages.add(package)
+    print(f"library-migration build: {sum(len(sources) for _, sources in plan)} "
+          f"local source targets across {len(plan)} packages")
 
     for module, names in sorted(by_module.items()):
         namespace = module.split(".", 1)[0]
         package = NAMESPACE_PACKAGES.get(namespace)
         if package is None:
             errors.append(f"{module}: unknown namespace")
-            continue
-        if package in failed_packages:
             continue
         source = source_for_module(package, module)
         if not source.exists():

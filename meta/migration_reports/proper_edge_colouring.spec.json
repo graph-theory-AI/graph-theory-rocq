@@ -1,0 +1,622 @@
+{
+  "family": "proper-edge-colouring",
+  "canonical_name": "GTBase.edge_colourings.proper_edge_colouring",
+  "canonical_short_name": "proper_edge_colouring",
+  "secondary_canonical_name": "GTBase.edge_colourings.proper_pair_edge_colouring",
+  "relation": "two supplied-map interfaces over an eqType palette: set maps {set G} -> C in the endpoint form (the foundation source converts; X142's intersection and X14's not-disjoint forms are logically equivalent through proper_edge_colouring_edgesP / proper_edge_colouring_meetP) and ordered-pair maps G -> G -> C symmetric on all pairs (X213 and D2chr.proper_ec convert); the supplied maps and labels are unchanged",
+  "baseline_commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+  "pre_m1_commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+  "repository_sources": {
+    "Extremal.foundations.edge_colourings.proper_ecolouring": {
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+      "blob": "f535ef83b0a6d5c11c3823473993eb0c78da6ba4",
+      "declaration_hash": "4a9760f40430e4331520f61d96277e34c48a774ba7df1b80a80346bff82cdf4c"
+    }
+  },
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "graph-theory-misc": "GTMisc",
+    "extremal-graph-theory": "Extremal"
+  },
+  "certificate_files": [
+    "base/theories/edge_colourings.v",
+    "extremal-graph-theory/theories/foundations/edge_colourings.v",
+    "chromatic-theory/theories/migration/edge_colourings.v",
+    "chromatic-theory/theories/migration/simple_edges.v",
+    "graph-theory-misc/theories/migration/edge_colourings.v",
+    "extremal-graph-theory/theories/migration/edge_colourings.v",
+    "graph-theory-misc/theories/migration/simple_path.v"
+  ],
+  "extra_certificates": [
+    "GTBase.edge_colourings.edges_meet_endpoint",
+    "GTBase.edge_colourings.proper_edge_colouring_edgesP",
+    "GTBase.edge_colourings.proper_edge_colouring_meetP",
+    "GTBase.edge_colourings.eq_proper_edge_colouring",
+    "GTBase.edge_colourings.proper_edge_colouring_comp",
+    "GTBase.edge_colourings.proper_edge_colouring_relabel",
+    "GTBase.edge_colourings.no_set_map_into_empty_palette",
+    "GTBase.edge_colourings.proper_pair_edge_colouring_sym",
+    "GTBase.edge_colourings.proper_pair_edge_colouring_neighbours",
+    "GTBase.edge_colourings.proper_pair_edge_colouring_comp",
+    "GTBase.edge_colourings.proper_pair_edge_colouring_relabel",
+    "GTBase.edge_colourings.proper_edge_colouring_pairP",
+    "GTBase.edge_colourings.proper_edge_colouring_K2",
+    "GTBase.edge_colourings.proper_pair_edge_colouring_K2",
+    "GTBase.edge_colourings.not_proper_edge_colouring_K3",
+    "GTBase.edge_colourings.not_proper_pair_edge_colouring_K3",
+    "GTBase.edge_colourings.proper_pair_edge_colouring_K0",
+    "GTBase.edge_colourings.no_pair_map_into_empty_palette",
+    "GTBase.edge_colourings.proper_pair_edge_colouring_K1",
+    "Extremal.foundations.edge_colourings.proper_ecolouringE",
+    "Chromatic.migration.simple_edges.x142_proper_edge_colouring_compat",
+    "Chromatic.migration.simple_edges.x142_neighbour_sum_edge_colourable_compat",
+    "Chromatic.migration.simple_edges.x142_statement_compat"
+  ],
+  "downstream_client": "base/theories/examples/edge_colourings.v",
+  "summary": [
+    "Batch C, family C6 (`proper_edge_colouring`). Five standalone sources in three areas, kept as TWO supplied-map interfaces of the focused `GTBase.edge_colourings` over an `eqType` palette: set maps `{set G} -> C` read on the doubletons of actual edges (`proper_edge_colouring`, the endpoint form of the public foundation source `Extremal.foundations.edge_colourings.proper_ecolouring`, which stays public under its old name as a transparent adapter; X142's intersection form and X14's not-disjoint form are logically equivalent to it through `proper_edge_colouring_edgesP` / `proper_edge_colouring_meetP`) and ordered-pair maps `G -> G -> C` symmetric on ALL pairs (`proper_pair_edge_colouring`; X213 and D2chr's `proper_ec` convert). The explicit bridge `proper_edge_colouring_pairP` relates a set map to `fun x y => col [set x; y]`; no map on the subtype of actual edges replaces either domain and no line graph is used (upstream `mgraph.line_graph` is directed, `GTBase.base.line_graph` lives on multigraph edge identities). Every live name is now an alias; statement texts, doc blocks, manifest rows, leg states and documented discrepancies are unchanged (checked below).",
+    "",
+    "| Qualified source | Supplied map | Treatment |",
+    "|---|---|---|",
+    "| `Chromatic.conjectures.X142.x142_proper_edge_colouring` | set map into `'I_k`, distinct intersecting edges | alias of `proper_edge_colouring`; M1's frozen chain reused |",
+    "| `Chromatic.conjectures.X213.x213_proper_edge_colouring` | pair map into `'I_k`, symmetric on all pairs | alias of `proper_pair_edge_colouring` (conversion) |",
+    "| `GTMisc.conjectures.X14.x14_proper_edge_colouring` | set map into a `finType`, distinct non-disjoint edges | alias of `proper_edge_colouring` |",
+    "| `Extremal.conjectures.D2chr.proper_ec` | pair map into a `finType`, symmetric on all pairs | alias of `proper_pair_edge_colouring` (conversion) |",
+    "| `Extremal.foundations.edge_colourings.proper_ecolouring` | set map into an `eqType`, endpoint form | public adapter of `proper_edge_colouring` (conversion); registered through `repository_sources` |",
+    "",
+    "Seven rows are affected: X142 (through `x142_neighbour_sum_edge_colourable`; M1's complete frozen chain over the pre-M1 edge comprehension is reused verbatim, its helper certificate re-proved through `proper_edge_colouring_edgesP`, and `Chromatic.migration.edge_colourings` restates this family's helper, chain and row certificates over those bodies), X213's two rows (through `x213_edge_colourable`; `x213_kempe_reach` and `x213_used_colours` stay live, so the whole-function Kempe states and used-colour count are untouched), X14 (Andersen, `n.-1` vertices) and X62 (through `x14_proper_edge_colouring`, with the raw-path vocabulary live), D2chr (through `star_edge_colouring`, `star_edge_k_colourable`, `is_star_chromatic_index`, whose unprefixed names are frozen as `d2chr_*`; the least-index clause and the `K_1 = 1` convention of the pair domain are preserved) and X229 (through the public foundation source; the robust-expander hypotheses and the full palette split are unchanged).",
+    "",
+    "Empty-palette behaviour differs by interface and is grounded rather than unified: no set map into an empty palette exists for any graph (`no_set_map_into_empty_palette`, the domain `{set G}` is inhabited), the empty graph admits every pair map including the one into an empty palette (`proper_pair_edge_colouring_K0`), and a nonempty edgeless graph admits none (`no_pair_map_into_empty_palette`, `proper_pair_edge_colouring_K1`). Constant maps are proper on `K_2` and improper on `K_3` in both interfaces; injective relabelling preserves and reflects properness with the supplied labels kept; set-map values off `E(G)` are irrelevant. The X213.v prose (only adjacent pairs are constrained) disagrees with its body (symmetry on all pairs): C6 records this and changes neither; the X213 one-factorization row stays partial and the Vizing row solved.",
+    "",
+    "Tooling: the public foundation source is absent from the conjecture-only helper inventory, so the `repository_sources` descriptor of the family document (path, pinned commit 3011c28, blob and declaration hash) registers it as an ordinary `kind: source`, as supported by the repository-sources tooling pin 2f15093 on which this family's private baseline is built; X229 is an ordinary corpus row discovered through that source, never `non_corpus`.",
+    "",
+    "Subsequent B6/C6 composition: earlier partial X14Legacy/X62Legacy bodies in both families stay verbatim. GTMisc.migration.edge_colourings.X14Original and X62Original add the complete Andersen/rainbow-cover rows, combining C6 frozen properness over raw pre-M1 edges with B6 frozen genuine_path, plus frozen raw path_edges and edges_covered_by_paths. Both closed original-to-live iff theorems are registered by C6 and checked by both reports. No live properness/path/edge-list/cover alias or either family canonical predicate occurs in these full original bodies; the old partial snapshots retain explicit reciprocal ownership notes. No proof-term identity is claimed."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X142.x142_proper_edge_colouring",
+      "path": "chromatic-theory/theories/conjectures/X142.v",
+      "name": "x142_proper_edge_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "X142Legacy.proper_edge_colouring",
+      "substitutions": {
+        "x142_proper_edge_colouring": "proper_edge_colouring",
+        "x142_edge_set": "Legacy.exists_edge_set"
+      },
+      "certificate": "Chromatic.migration.edge_colourings.x142_proper_edge_colouring_compat",
+      "source_declaration_sha256": "0f20c7c3d1e928864789f4a37bf0a04627bcc861c53caca4ffa7051ef09b776a",
+      "source_body_sha256": "7d16b5eea060aa02e2ec9f36d4adc01300230bb83131d56a27ee636072bf9614",
+      "live_unfolds_to": "proper_edge_colouring col",
+      "note": "frozen by M1 inside its complete X142 chain over the pre-M1 edge comprehension; the snapshot is reused, M1's helper certificate was re-proved through proper_edge_colouring_edgesP and the chromatic entry point restates it over the same frozen body"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X213.x213_proper_edge_colouring",
+      "path": "chromatic-theory/theories/conjectures/X213.v",
+      "name": "x213_proper_edge_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colourings.v",
+      "frozen": "Legacy.x213_proper_edge_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.edge_colourings.x213_proper_edge_colouring_compat",
+      "source_declaration_sha256": "31f4b8fe5ab16d6d7c2242c557ba4f347311e1d9eca0bd879f8f5f1a80603799",
+      "source_body_sha256": "98a70133eb5d0f769e7209f471a06cd349ce0e2bb7add1cd0208ad09c823b77c",
+      "live_unfolds_to": "proper_pair_edge_colouring col"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X14.x14_proper_edge_colouring",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_proper_edge_colouring",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "Legacy.x14_proper_edge_colouring",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.edge_colourings.x14_proper_edge_colouring_compat",
+      "source_declaration_sha256": "7fa947b9a62d5b70a38a1d9f75e9d5e92f5c1d2c6cad5c12d2be88ce2a8edadc",
+      "source_body_sha256": "468a575cba36f75e5b78802e6cfcfcd31d3092dd58fc2dc8dbc90688c32d237b",
+      "live_unfolds_to": "proper_edge_colouring col"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2chr.proper_ec",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "proper_ec",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colourings.v",
+      "frozen": "Legacy.proper_ec",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_colourings.proper_ec_compat",
+      "source_declaration_sha256": "f6d57791f651b0692a00969d6aaf560432fd3d9228435ffd57b05932eaf941bd",
+      "source_body_sha256": "5e2682c4c2203b49a422c0cbc9753019f7d7e6cf265a639baa91d9e6b9a1e318",
+      "live_unfolds_to": "proper_pair_edge_colouring f"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.foundations.edge_colourings.proper_ecolouring",
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "name": "proper_ecolouring",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colourings.v",
+      "frozen": "Legacy.proper_ecolouring",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_colourings.proper_ecolouring_compat",
+      "source_declaration_sha256": "4a9760f40430e4331520f61d96277e34c48a774ba7df1b80a80346bff82cdf4c",
+      "source_body_sha256": "a6678cb542d7a121a989bbe0d28f4b92a465118f1b0af4bd55f41d2a5351c063",
+      "live_unfolds_to": "proper_edge_colouring col",
+      "repository_source": true,
+      "note": "public foundation source, absent from the conjecture-only inventory; registered through the repository_sources descriptor of the family document (commit/blob/declaration hash)"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X14.x14_edge_set",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "Legacy.x14_edge_set",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.edge_colourings.x14_edge_set_compat",
+      "source_declaration_sha256": "2d158cc982eb88ee86eb38303aa6de6ef7c796fc990b585b3a272cf7121a1280",
+      "source_body_sha256": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
+      "note": "the comprehension body x14_edge_set had before M1 (M1 froze the same text as GTMisc.migration.simple_edges.Legacy.exists_edge_set, C1 as GTMisc.migration.matching.Legacy.x14_edge_set); the live name is the M1 alias sg_edge_set G"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X142.x142_edge_set",
+      "path": "chromatic-theory/theories/conjectures/X142.v",
+      "name": "x142_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.exists_edge_set",
+      "substitutions": {
+        "x142_edge_set": "exists_edge_set"
+      },
+      "certificate": "Chromatic.migration.simple_edges.x142_edge_set_compat",
+      "source_declaration_sha256": "fbd28d63f12c4b0401f2ad365d78280eadc93477697e911e0924cfa4fd06462d",
+      "source_body_sha256": "833ca86df0b1ae7d4a31de26a6cffd6be5ca195e586553d6a0a81eb62e23402e",
+      "note": "M1's frozen pre-M1 edge comprehension of the chromatic copies, checked here against X142.v at 061154c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X142.x142_edges_incident",
+      "path": "chromatic-theory/theories/conjectures/X142.v",
+      "name": "x142_edges_incident",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "X142Legacy.edges_incident",
+      "substitutions": {
+        "x142_edges_incident": "edges_incident",
+        "x142_edge_set": "Legacy.exists_edge_set"
+      },
+      "certificate": "Chromatic.migration.simple_edges.x142_edges_incident_compat",
+      "source_declaration_sha256": "bfcf8ec2ed2f2ae39f26362b8768d06b9be9c70c0b6792e0f861f2d58a347c56",
+      "source_body_sha256": "4eb8c7087ba9214cc27f56c48969cd05f9db3657f945943f16adea32ff95a2db",
+      "note": "M1 chain copy (reaches no helper of this family; frozen by M1 for the X142 chain)"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X142.x142_incident_sum",
+      "path": "chromatic-theory/theories/conjectures/X142.v",
+      "name": "x142_incident_sum",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "X142Legacy.incident_sum",
+      "substitutions": {
+        "x142_incident_sum": "incident_sum",
+        "x142_edges_incident": "edges_incident"
+      },
+      "certificate": "Chromatic.migration.simple_edges.x142_incident_sum_compat",
+      "source_declaration_sha256": "c11b9f61dcce546753a136d682cf428649e1eacac75a9f98dfc134daee9452cb",
+      "source_body_sha256": "79a217fe362aa9d495b1cb9bd995dbd5eb182a01f465919f043850e51bae69b4",
+      "note": "M1 chain copy; the val(col e)+1 labelled sums are preserved"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X142.x142_neighbour_sum_distinguishing",
+      "path": "chromatic-theory/theories/conjectures/X142.v",
+      "name": "x142_neighbour_sum_distinguishing",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "X142Legacy.neighbour_sum_distinguishing",
+      "substitutions": {
+        "x142_neighbour_sum_distinguishing": "neighbour_sum_distinguishing",
+        "x142_incident_sum": "incident_sum"
+      },
+      "certificate": "Chromatic.migration.simple_edges.x142_neighbour_sum_distinguishing_compat",
+      "source_declaration_sha256": "26f372b5dc88aaea6ebeb73876e1463338839e5a1dee5df6c27e754e35267791",
+      "source_body_sha256": "2bd4e4b37bbeacb6bdfbca08febb5131a798e5e192422683fb457ebc027c0dea",
+      "note": "M1 chain copy"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X142.x142_neighbour_sum_edge_colourable",
+      "path": "chromatic-theory/theories/conjectures/X142.v",
+      "name": "x142_neighbour_sum_edge_colourable",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "X142Legacy.neighbour_sum_edge_colourable",
+      "substitutions": {
+        "x142_neighbour_sum_edge_colourable": "neighbour_sum_edge_colourable",
+        "x142_proper_edge_colouring": "proper_edge_colouring",
+        "x142_neighbour_sum_distinguishing": "neighbour_sum_distinguishing"
+      },
+      "certificate": "Chromatic.migration.edge_colourings.x142_neighbour_sum_edge_colourable_compat",
+      "source_declaration_sha256": "b4ccc1da8632caf8ca7457984a9f023010d0c7f24066f791903618551c034a0c",
+      "source_body_sha256": "f24ea625e3e83fb7bab8b37f24e8eae3af66dbe5d15cec370314b93b3e5ad17e"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X213.x213_edge_colourable",
+      "path": "chromatic-theory/theories/conjectures/X213.v",
+      "name": "x213_edge_colourable",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colourings.v",
+      "frozen": "X213Legacy.edge_colourable",
+      "substitutions": {
+        "x213_edge_colourable": "edge_colourable",
+        "x213_proper_edge_colouring": "Legacy.x213_proper_edge_colouring"
+      },
+      "certificate": "Chromatic.migration.edge_colourings.x213_edge_colourable_compat",
+      "source_declaration_sha256": "e2432b1bc903591bdf8a38042f3af7ea3a7ab657547c4c065fa44ecc82f3d7f3",
+      "source_body_sha256": "f00ea25d722d1ece6eb3cbc37ab9ea0add6532c9db6e5c6d12eb4876511c70cb"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.D2chr.star_edge_colouring",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "star_edge_colouring",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colourings.v",
+      "frozen": "D2chrLegacy.d2chr_star_edge_colouring",
+      "substitutions": {
+        "star_edge_colouring": "d2chr_star_edge_colouring",
+        "proper_ec": "Legacy.proper_ec"
+      },
+      "certificate": "Extremal.migration.edge_colourings.star_edge_colouring_compat",
+      "source_declaration_sha256": "5078cdb0d18daab090ca7e4a1931551d53ba2649264d8905ec4eda5a9c30300f",
+      "source_body_sha256": "309bb2b91b1c43b897fb6cde789182f2110a768c6fa01919c78873826e8cb87d"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.D2chr.star_edge_k_colourable",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "star_edge_k_colourable",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colourings.v",
+      "frozen": "D2chrLegacy.d2chr_star_edge_k_colourable",
+      "substitutions": {
+        "star_edge_k_colourable": "d2chr_star_edge_k_colourable",
+        "star_edge_colouring": "d2chr_star_edge_colouring"
+      },
+      "certificate": "Extremal.migration.edge_colourings.star_edge_k_colourable_compat",
+      "source_declaration_sha256": "ddb6620f48287961d33119b8d39aebace7bf7dbd29159a68cead03b907aae314",
+      "source_body_sha256": "f3302d2cbce2321b890dee3d3e486fe0b014237a8b601737c639bd89ea870669"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.D2chr.is_star_chromatic_index",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "is_star_chromatic_index",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colourings.v",
+      "frozen": "D2chrLegacy.d2chr_is_star_chromatic_index",
+      "substitutions": {
+        "is_star_chromatic_index": "d2chr_is_star_chromatic_index",
+        "star_edge_k_colourable": "d2chr_star_edge_k_colourable"
+      },
+      "certificate": "Extremal.migration.edge_colourings.is_star_chromatic_index_compat",
+      "source_declaration_sha256": "281be3f80f2db4ed49329eacf2cefe196f0658af2899eb3b86cd31a03ccd2d1d",
+      "source_body_sha256": "5a799b930e0ff58a77b3866872d78854a5e0d2ba7da194a50c2cf096c1ac9933"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X142.flandrin_neighbour_sum_distinguishing_edge_colouring_statement",
+      "path": "chromatic-theory/theories/conjectures/X142.v",
+      "name": "flandrin_neighbour_sum_distinguishing_edge_colouring_statement",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "X142Legacy.statement",
+      "substitutions": {
+        "flandrin_neighbour_sum_distinguishing_edge_colouring_statement": "statement",
+        "x142_neighbour_sum_edge_colourable": "neighbour_sum_edge_colourable"
+      },
+      "certificate": "Chromatic.migration.edge_colourings.flandrin_neighbour_sum_distinguishing_edge_colouring_statement_compat",
+      "source_declaration_sha256": "62f577c1bdca718e6952535421789edb73752cb309e7d3eb0f49932824710a21",
+      "source_body_sha256": "55ba0b6a0241c9313d572ac72200f2ba05759f61341cc8945817f1214e1da01c",
+      "corpus": "v2",
+      "row": "studies:std_flandrin_et_al_conjecture_neighbour_sum_distingu",
+      "documented_status": "open; connected/at-least-three/not-C5 guards and the shifted colour labels unchanged; frozen by M1, restated by the chromatic entry point"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X213.one_factorization_conjecture_statement",
+      "path": "chromatic-theory/theories/conjectures/X213.v",
+      "name": "one_factorization_conjecture_statement",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colourings.v",
+      "frozen": "X213Legacy.one_factorization_conjecture_statement",
+      "substitutions": {
+        "x213_edge_colourable": "edge_colourable"
+      },
+      "certificate": "Chromatic.migration.edge_colourings.one_factorization_conjecture_statement_compat",
+      "source_declaration_sha256": "86a7863013c064d8fd19466345c417a0caa4302b19e0a9e5b1241d5c82891c32",
+      "source_body_sha256": "f79f99c61ae61de06abf1756a32482820ff591aa1af6b2686cbddd396a37f48e",
+      "corpus": "v2",
+      "row": "bm:bm-057",
+      "documented_status": "partial; positive even order, regularity and n <= 2d guards unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X213.vizing_kempe_interchange_statement",
+      "path": "chromatic-theory/theories/conjectures/X213.v",
+      "name": "vizing_kempe_interchange_statement",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colourings.v",
+      "frozen": "X213Legacy.vizing_kempe_interchange_statement",
+      "substitutions": {
+        "x213_proper_edge_colouring": "Legacy.x213_proper_edge_colouring",
+        "x213_edge_colourable": "edge_colourable"
+      },
+      "certificate": "Chromatic.migration.edge_colourings.vizing_kempe_interchange_statement_compat",
+      "source_declaration_sha256": "d10f9e0838ae326109dc425fb5473671dcaaa5a023bb9ea72775002e5ba499fb",
+      "source_body_sha256": "6d952264837a47cd77c0ae362bfc9a32eab003e0d4d334bfb583396d5ca07d1d",
+      "corpus": "v2",
+      "row": "bm:bm-060",
+      "documented_status": "solved (Narboni 2023); m <= k, the exact Kempe reach and the used-colour conclusion unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X14.andersen_rainbow_path_statement",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "andersen_rainbow_path_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X14Legacy.andersen_rainbow_path_statement",
+      "substitutions": {
+        "x14_proper_edge_colouring": "Legacy.x14_proper_edge_colouring"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.andersen_rainbow_path_statement_compat",
+      "source_declaration_sha256": "3f83817f24fe1cb512fedce22cfb1215597ccb1c4fe6d8f26b459d2e5caa3218",
+      "source_body_sha256": "20d8b131de36bc4276eb52bf65f55096165836f15c05096aa57dc7a8db10c405",
+      "corpus": "v2",
+      "row": "studies:std_andersen_s_conjecture",
+      "documented_status": "open; 2 <= n and the n-1 VERTICES conclusion unchanged",
+      "original_certificate": "GTMisc.migration.edge_colourings.andersen_rainbow_path_statement_original_compat",
+      "original_frozen": "GTMisc.migration.edge_colourings.X14Original.andersen_rainbow_path_statement"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X62.rainbow_paths_linear_edge_cover_statement",
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "rainbow_paths_linear_edge_cover_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X62Legacy.rainbow_paths_linear_edge_cover_statement",
+      "substitutions": {
+        "x14_proper_edge_colouring": "Legacy.x14_proper_edge_colouring"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.rainbow_paths_linear_edge_cover_statement_compat",
+      "source_declaration_sha256": "1a836a9fdacb85b65a7586422d86d98947350c11fbf6c3160add4af851eced29",
+      "source_body_sha256": "1856bf77230d9fa7c17983c5a03c78a50e2afc8e9a80edbf76d300d9e6a44fbb",
+      "corpus": "v2",
+      "row": "arxiv:2301.08707#01",
+      "documented_status": "open; the uniform outer constant unchanged",
+      "original_certificate": "GTMisc.migration.edge_colourings.rainbow_paths_linear_edge_cover_statement_original_compat",
+      "original_frozen": "GTMisc.migration.edge_colourings.X62Original.rainbow_paths_linear_edge_cover_statement"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2chr.star_chromatic_index_of_complete_graphs_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "star_chromatic_index_of_complete_graphs_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colourings.v",
+      "frozen": "D2chrLegacy.star_chromatic_index_of_complete_graphs_statement",
+      "substitutions": {
+        "is_star_chromatic_index": "d2chr_is_star_chromatic_index"
+      },
+      "certificate": "Extremal.migration.edge_colourings.star_chromatic_index_of_complete_graphs_statement_compat",
+      "source_declaration_sha256": "aff73ba43104fa9510c3c7b1d4e74a003f2ff4d3ec6c3f47697b2fd4fd6fe59a",
+      "source_body_sha256": "07f5c23652f10c687b5c13e774471dcc05781bcfbd22b63d2ce4632f9477d7b5",
+      "corpus": "opg",
+      "row": "opg:star_chromatic_index_of_complete_graphs",
+      "documented_status": "open; the least-index clause and the eventual bound unchanged"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X229.expander_proper_colouring_two_connected_palettes_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X229.v",
+      "name": "expander_proper_colouring_two_connected_palettes_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colourings.v",
+      "frozen": "X229Legacy.expander_proper_colouring_two_connected_palettes_statement",
+      "substitutions": {
+        "proper_ecolouring": "Legacy.proper_ecolouring"
+      },
+      "certificate": "Extremal.migration.edge_colourings.expander_proper_colouring_two_connected_palettes_statement_compat",
+      "source_declaration_sha256": "7a006f73d5163b959315b53f7be0cb9cc8dba625f62360f2c1c618295f6dc330",
+      "source_body_sha256": "80df0e97ddc33a708f64a6d113ad6c125f0718906c7aaf83820911a7a9aa2a8c",
+      "corpus": "v2",
+      "row": "arxiv:2309.04460#01",
+      "documented_status": "open; robust-expander and average-degree hypotheses and the full palette split unchanged (row reached through the public foundation source)"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X14.x14_genuine_path",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_genuine_path",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_path.v",
+      "frozen": "Legacy.x14_genuine_path",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.simple_path.x14_genuine_path_compat",
+      "commit": "95cba2c0a2a75104de2c8d0c29ee952da419b9c1"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X14.x14_path_edges",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_path_edges",
+      "commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X14Original.path_edges",
+      "substitutions": {
+        "x14_path_edges": "path_edges"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.x14_path_edges_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X14.x14_rainbow_path",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_rainbow_path",
+      "commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X14Original.rainbow_path",
+      "substitutions": {
+        "x14_rainbow_path": "rainbow_path",
+        "x14_genuine_path": "GTMisc.migration.simple_path.Legacy.x14_genuine_path",
+        "x14_path_edges": "X14Original.path_edges"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.x14_rainbow_path_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X62.x62_edges_covered_by_paths",
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "x62_edges_covered_by_paths",
+      "commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X62Original.edges_covered_by_paths",
+      "substitutions": {
+        "x62_edges_covered_by_paths": "edges_covered_by_paths",
+        "x14_edge_set": "Legacy.x14_edge_set",
+        "x14_path_edges": "X14Original.path_edges"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.x62_edges_covered_by_paths_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X14.andersen_rainbow_path_statement",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "andersen_rainbow_path_statement",
+      "commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X14Original.andersen_rainbow_path_statement",
+      "substitutions": {
+        "x14_proper_edge_colouring": "Legacy.x14_proper_edge_colouring",
+        "x14_rainbow_path": "X14Original.rainbow_path"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.andersen_rainbow_path_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X62.rainbow_paths_linear_edge_cover_statement",
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "rainbow_paths_linear_edge_cover_statement",
+      "commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_colourings.v",
+      "frozen": "X62Original.rainbow_paths_linear_edge_cover_statement",
+      "substitutions": {
+        "x14_proper_edge_colouring": "Legacy.x14_proper_edge_colouring",
+        "x14_rainbow_path": "X14Original.rainbow_path",
+        "x62_edges_covered_by_paths": "X62Original.edges_covered_by_paths"
+      },
+      "certificate": "GTMisc.migration.edge_colourings.rainbow_paths_linear_edge_cover_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "graph-theory-misc/theories/migration/simple_path.v#X14Legacy.andersen_rainbow_path_statement": "Earlier B6 partial frozen row is preserved verbatim and still uses live proper-colouring vocabulary. The additive GTMisc.migration.edge_colourings.X14Original.andersen_rainbow_path_statement freezes both families and the raw path-edge/cover chain; its registered andersen_rainbow_path_statement_original_compat is checked here and by B6.",
+    "graph-theory-misc/theories/migration/simple_path.v#X62Legacy.rainbow_paths_linear_edge_cover_statement": "Earlier B6 partial frozen row is preserved verbatim and still uses live proper-colouring vocabulary. The additive GTMisc.migration.edge_colourings.X62Original.rainbow_paths_linear_edge_cover_statement freezes both families and the raw path-edge/cover chain; its registered rainbow_paths_linear_edge_cover_statement_original_compat is checked here and by B6."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/X62.v",
+      "name": "x14_proper_edge_colouring",
+      "note": "cross-module row X62 (rainbow paths cover edges) asks for an x14_proper_edge_colouring; frozen as X62Legacy over Legacy.x14_proper_edge_colouring; statement text unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X229.v",
+      "name": "proper_ecolouring",
+      "note": "cross-module row X229 asks for a proper_ecolouring of a set map into a finType; frozen as X229Legacy over Legacy.proper_ecolouring; statement text unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X213.v",
+      "name": "x213_edge_colourable",
+      "note": "grounding lemmas x213_edge_colourable_K2, x213_one_factorization_hypotheses_K2 and x213_not_edge_colourable_K3_1 keep their statements; their scripts compile unchanged over the converted alias."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X213.v",
+      "name": "one_factorization_conjecture_statement",
+      "note": "Print Assumptions of the affected statement; unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X213.v",
+      "name": "vizing_kempe_interchange_statement",
+      "note": "Print Assumptions of the affected statement; unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
+      "name": "star_edge_k_colourable",
+      "note": "star_edge_colourable_complete1 keeps its statement; the script opens the converted alias unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
+      "name": "is_star_chromatic_index",
+      "note": "is_star_chromatic_index_complete1 (the K_1 = 1 convention) keeps its statement and script."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X229.v",
+      "name": "proper_ecolouring",
+      "note": "proper_ecolouring_id and not_proper_ecolouring_const_K3 keep their statements; scripts compile unchanged over the adapter."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "star_edge_colouring",
+      "note": "NAME COLLISION, not a consumer of this family: grounding_U5 refers to Chromatic.conjectures.U5.star_edge_colouring (a distinct variant with the star restriction), not to D2chr's chain declaration of the same short name; unchanged."
+    }
+  ],
+  "proof_consumers": [
+    "Chromatic.conjectures.grounding_X213.x213_edge_colourable_K2",
+    "Chromatic.conjectures.grounding_X213.x213_one_factorization_hypotheses_K2",
+    "Chromatic.conjectures.grounding_X213.x213_not_edge_colourable_K3_1",
+    "Extremal.conjectures.grounding_D2chr.star_edge_colourable_complete1",
+    "Extremal.conjectures.grounding_D2chr.is_star_chromatic_index_complete1",
+    "Extremal.conjectures.grounding_X229.proper_ecolouring_id",
+    "Extremal.conjectures.grounding_X229.not_proper_ecolouring_const_K3",
+    "Chromatic.migration.simple_edges.x142_proper_edge_colouring_compat",
+    "Chromatic.migration.simple_edges.x142_neighbour_sum_edge_colourable_compat",
+    "Chromatic.migration.simple_edges.x142_statement_compat"
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.U5.acyclic_edge_colouring",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "acyclic_edge_colouring",
+      "note": "embeds the pair properness clauses but adds the acyclicity restriction; not ordinary proper edge colouring; untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.U5.star_edge_colouring",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "star_edge_colouring",
+      "note": "embeds the pair properness clauses but adds the star restriction; untouched (D2chr's star_edge_colouring is a chain of this family because it calls proper_ec)"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X43.x43_strong_edge_colourable",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_strong_edge_colourable",
+      "note": "distance-two edge constraint on a local line graph; untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.XE1.xe1_strong_edge_colouring",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_strong_edge_colouring",
+      "note": "distance-two edge constraint; untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X219.x219_edge_choosable",
+      "path": "chromatic-theory/theories/conjectures/X219.v",
+      "name": "x219_edge_choosable",
+      "note": "list assignments with membership requirements; the inlined properness belongs to a later list family; untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.X9.x9_cycle_incident_edges_properly_coloured",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "x9_cycle_incident_edges_properly_coloured",
+      "note": "constrains only the edges of a supplied sequence, not E(G); untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X100.x100_modular_edge_colouring",
+      "path": "chromatic-theory/theories/conjectures/X100.v",
+      "name": "x100_modular_edge_colouring",
+      "note": "permits repeated incident colours under modular degree restrictions; untouched"
+    }
+  ],
+  "kernel_evidence": "Print All Dependencies of the seven frozen and seven live statements and Print Assumptions of every certificate, run through the pinned image; files under /srv/graph-theory-rocq/coordination/evidence/C6-proper_edge_colouring/ (outside the repository)"
+}

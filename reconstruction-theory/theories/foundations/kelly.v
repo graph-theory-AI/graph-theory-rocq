@@ -110,7 +110,7 @@ Unset Printing Implicit Defensive.
     vertices). *)
 Lemma sdel_adjE (G : sgraph) (e : {set G}) (x y : G) :
   @edge_rel (@sdel_edge G e) x y = (x -- y) && ([set x; y] != e).
-Proof. by []. Qed.
+Proof. exact: del_edge_set1. Qed.
 
 (** Adjacency in [sline_graph G]: distinct edges whose endpoint sets meet. *)
 Lemma sline_adjE (G : sgraph) (a b : sline_graph G) :
