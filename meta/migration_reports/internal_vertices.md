@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py internal_vertices --details /tm
 
 - Canonical: `GTBase.walks_paths.seq_interior`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 6 helpers, 10 statements, 32 frozen objects, 102 recorded references.
-- Source checks: 290/290 pass; consistent.
+- Scope: 6 helpers, 10 statements, 32 frozen objects, 105 recorded references.
+- Source checks: 291/291 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -28,4 +28,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Digraph.conjectures.X166.x166_internals`, `GTMisc.conjectures.X216.x216_internal`, `Extremal.conjectures.X98.x98_internal`, `GTMisc.conjectures.X114.x114_internal`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta`, `extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_915_statement`, `extremal-graph-theory/theories/migration/path_edges.v#XE2Legacy.erdos_915_statement`, `graph-theory-misc/theories/migration/path_edges.v#X172Legacy.one_bridge_replacement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `minor-theory/theories/migration/consecutive_in_path.v#X67Legacy.theta`, `extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_915_statement`, `extremal-graph-theory/theories/migration/path_edges.v#XE2Legacy.erdos_915_statement`, `graph-theory-misc/theories/migration/path_edges.v#X172Legacy.one_bridge_replacement`, `minor-theory/theories/migration/bag_decompositions.v#Legacy.theta_triangle_free_bounded_degree_treewidth_statement`.

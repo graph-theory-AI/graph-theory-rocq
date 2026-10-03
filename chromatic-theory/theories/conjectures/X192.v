@@ -2,6 +2,7 @@
 
 From GraphTheory Require Import minor.
 From GTBase Require Export base.
+From GTBase Require Import minor_classes.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,7 +11,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X192 vocabulary ***********************************************)
 
 Definition x192_proper_minor_closed_class (C : sgraph -> Prop) : Prop :=
-  exists H : sgraph, forall G : sgraph, C G -> ~ minor G H.
+  GTBase.minor_classes.excludes_a_minor C.
 
 Definition x192_triangle_free (G : sgraph) : Prop := girth_geq G 4.
 
