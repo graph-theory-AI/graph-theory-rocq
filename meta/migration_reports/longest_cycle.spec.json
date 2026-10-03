@@ -68,7 +68,9 @@
     "- each live row reaches `seq_longest_cycle` and its alias.",
     "Summary: /srv/graph-theory-rocq/coordination/evidence/B13-longest_cycle/print_all_dependencies_summary.txt.",
     "",
-    "Baseline c528254 is the announced B12 pin (over B11 13c00aa), not yet integrated; B13 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). B10's genuine_cycle spec listed Hom's `longest_cycle` as an untouched distinct variant; it now records that B13 migrated it. Digraph X2 `longest_dicycle` stays a distinct candidate."
+    "Baseline c528254 is the announced B12 pin (over B11 13c00aa), not yet integrated; B13 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). B10's genuine_cycle spec listed Hom's `longest_cycle` as an untouched distinct variant; it now records that B13 migrated it. Digraph X2 `longest_dicycle` stays a distinct candidate.",
+    "",
+    "Later migration: Digraph X2 `longest_dicycle`, listed here as a distinct directed admissibility class, was migrated by B14 (family longest-dicycle) onto `Digraph.foundations.longest_cycles.longest_dicycle` over the unchanged `dicycle`; it is no longer an untouched distinct variant."
   ],
   "frozen": [
     {
@@ -216,12 +218,6 @@
     }
   ],
   "distinct_variants": [
-    {
-      "qualified": "Digraph.conjectures.X2.longest_dicycle",
-      "path": "digraph-theory/theories/conjectures/X2.v",
-      "name": "longest_dicycle",
-      "note": "longest DIRECTED cycle over Digraph.core.dipath.dicycle, which admits loops and digons; a distinct admissibility class for a later family; untouched"
-    },
     {
       "qualified": "Hom.conjectures.U3.longest_path",
       "path": "homomorphism-theory/theories/conjectures/U3.v",
