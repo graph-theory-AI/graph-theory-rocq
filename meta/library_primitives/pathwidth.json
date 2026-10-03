@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "family": "pathwidth",
+  "primitive": {
+    "canonical_name": "GTBase.pathwidth.pathwidth_at_most",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "pathwidth_at_most"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X126.x126_pathwidth_at_most",
+      "Minor.conjectures.X95.x95_pathwidth_at_most"
+    ],
+    "consumers_remaining": 2,
+    "relation": "Unconditional conversion of the same existential supplied-index pathwidth bound: T:sgraph, bag:T->{set G}, path_tree T, bag_decomposition bag, and every bag cardinality <= k.+1. No nonempty index, ordinal representation or attained minimum.",
+    "semantic_classes": {
+      "supplied-index-successor-bound": {
+        "members": [
+          "Chromatic.conjectures.X126.x126_pathwidth_at_most",
+          "Minor.conjectures.X95.x95_pathwidth_at_most"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.pathwidth.x126_pathwidth_at_most_compat",
+          "Minor.migration.pathwidth.x95_pathwidth_at_most_compat"
+        ]
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.pathwidth.x126_pathwidth_at_most_compat",
+      "Chromatic.migration.pathwidth.dujmovic_thue_choice_number_pathwidth_statement_compat",
+      "Chromatic.migration.pathwidth.dujmovic_thue_choice_number_pathwidth_statement_original_compat",
+      "Minor.migration.pathwidth.x95_pathwidth_at_most_compat",
+      "Minor.migration.pathwidth.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_compat",
+      "Minor.migration.pathwidth.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.pathwidth.pathwidth_at_mostI",
+      "GTBase.pathwidth.pathwidth_at_most_witness",
+      "GTBase.pathwidth.pathwidth_at_mostW",
+      "GTBase.pathwidth.pathwidth_at_most_card",
+      "GTBase.pathwidth.pathwidth_at_most0_edgeless",
+      "GTBase.pathwidth.pathwidth_at_most_K0",
+      "GTBase.pathwidth.pathwidth_at_most_K1",
+      "GTBase.pathwidth.pathwidth_at_most_K2",
+      "GTBase.pathwidth.not_pathwidth_at_most_K2_0"
+    ],
+    "public_client": "base/theories/examples/pathwidth.v",
+    "legacy_baseline": "cdb9e10161e6566b9a812b0931488acb6338be9f",
+    "migration_report": "meta/migration_reports/pathwidth.md",
+    "migration_spec": "meta/migration_reports/pathwidth.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C14.md",
+    "foundation_fidelity": "meta/foundation_fidelity/pathwidth.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.treewidth",
+        "GTBase.path_trees",
+        "GTBase.bag_decompositions",
+        "Minor.foundations.width_params"
+      ],
+      "result": "new-local-generic",
+      "note": "Pinned GraphTheory has sdecomp over a forest and width as maximum bag cardinality, with no pathwidth predicate. Reuse B9 path_tree and C13 bag_decomposition exactly; the successor bound and arbitrary supplied index are retained. Minor tw_le permits general forests and remains a separate quantitative contract; its forest-to-tree proof is neither needed nor copied.",
+      "audited_at": "2026-10-03"
+    }
+  }
+}

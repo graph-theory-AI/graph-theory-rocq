@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X126 -- v2 Thue choice number / pathwidth row *)
 
 From GTBase Require Export base.
+From GTBase Require Import pathwidth.
 From GTBase Require Import bag_decompositions.
 From GTBase Require Import path_trees.
 
@@ -58,11 +59,7 @@ Definition x126_tree_decomposition
 Definition x126_path_index_graph (T : sgraph) : Prop :=
   path_tree T.
 
-Definition x126_pathwidth_at_most (G : sgraph) (k : nat) : Prop :=
-  exists (T : sgraph) (bag : T -> {set G}),
-    x126_path_index_graph T /\
-    x126_tree_decomposition bag /\
-    forall t : T, #|bag t| <= k.+1.
+Definition x126_pathwidth_at_most (G : sgraph) (k : nat) : Prop := pathwidth_at_most G k.
 
 (** ** X126 statements *****************************************************)
 
