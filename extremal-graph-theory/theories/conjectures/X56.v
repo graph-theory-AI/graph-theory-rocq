@@ -15,16 +15,16 @@ Definition x56_homogeneous_set (G : sgraph) (S : {set G}) : Prop :=
   clique S \/ x56_stable_set S.
 
 Definition x56_complement_rel (G : sgraph) : rel G :=
-  fun x y => (x != y) && ~~ (x -- y).
+  @compl_rel G.
 
 Lemma x56_complement_sym (G : sgraph) : symmetric (@x56_complement_rel G).
-Proof. by move=> x y; rewrite /x56_complement_rel eq_sym sgP. Qed.
+Proof. exact: compl_rel_sym. Qed.
 
 Lemma x56_complement_irrefl (G : sgraph) : irreflexive (@x56_complement_rel G).
-Proof. by move=> x; rewrite /x56_complement_rel eqxx. Qed.
+Proof. exact: compl_rel_irrefl. Qed.
 
 Definition x56_complement (G : sgraph) : sgraph :=
-  SGraph (@x56_complement_sym G) (@x56_complement_irrefl G).
+  compl G.
 
 Definition x56_induced_free (G H : sgraph) : Prop :=
   induced_free G H.

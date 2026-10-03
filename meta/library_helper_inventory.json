@@ -94,13 +94,6 @@
         "Packing.conjectures.X18.x18_perfect_matching",
         "Packing.conjectures.X25.x25_perfect_matching"
       ],
-      "2568a8db4ba1685bad2b7306e5d813a6699fff0a9cdca9181d4cd5fbc02d1e79": [
-        "Chromatic.conjectures.X3.x3_complement_graph",
-        "Chromatic.conjectures.XE2.xe2_complement_graph",
-        "Extremal.conjectures.X56.x56_complement",
-        "Extremal.conjectures.XE1.xe1_complement_graph",
-        "GTMisc.conjectures.X29.x29_complement"
-      ],
       "2671940f95ae8c5c15341681c15f90951b0a4ae89bf82b57687a9896d64058ad": [
         "Chromatic.conjectures.X161.x161_local_chromatic_radius_two",
         "Chromatic.conjectures.X186.x186_chi2"
@@ -163,12 +156,6 @@
       "3d53eda4a31303941dc9e85ee12f092d658301a9337790e534755e12558d10ea": [
         "Hypergraph.conjectures.X108.x108_two_colour_ramsey_at_most",
         "Hypergraph.conjectures.X117.x117_forces_mono"
-      ],
-      "3d7cd455f03fabd58fb991e4b5b6b033674329da15b86d58830f9c072e1e2269": [
-        "Chromatic.conjectures.XE2.xe2_complement_rel",
-        "Extremal.conjectures.X56.x56_complement_rel",
-        "Extremal.conjectures.XE1.xe1_complement_rel",
-        "GTMisc.conjectures.X29.x29_complement_rel"
       ],
       "3f39d5c348e5b79d06e842c114e6cc571583bbf44e4b0ebfda1a01ec05745d43": [
         "Digraph.conjectures.P9.remove_arcs",
@@ -383,6 +370,13 @@
       "907c59ff9bd62baf0b89388432b41090ff7544edc7c6f8fbf23b482603fc1692": [
         "Extremal.conjectures.D2tur.clique_count",
         "Minor.conjectures.X175.x175_clique_count"
+      ],
+      "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c": [
+        "Chromatic.conjectures.X3.x3_complement_graph",
+        "Chromatic.conjectures.XE2.xe2_complement_graph",
+        "Extremal.conjectures.X56.x56_complement",
+        "Extremal.conjectures.XE1.xe1_complement_graph",
+        "GTMisc.conjectures.X29.x29_complement"
       ],
       "9767488001d69f6e08bedfbc28301b71be902b5f2e74159a2715d8310cccf4cf": [
         "Chromatic.conjectures.X177.x177_contains_induced_long_subdivision",
@@ -1035,6 +1029,13 @@
       "fada0e894810937f15bc721b29a88bf579e6e902493cdfc40febe56ccefa8256": [
         "Chromatic.conjectures.X126.x126_tree_decomposition",
         "Minor.conjectures.X27.x27_tree_decomposition"
+      ],
+      "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a": [
+        "Chromatic.conjectures.X3.x3_complement_rel",
+        "Chromatic.conjectures.XE2.xe2_complement_rel",
+        "Extremal.conjectures.X56.x56_complement_rel",
+        "Extremal.conjectures.XE1.xe1_complement_rel",
+        "GTMisc.conjectures.X29.x29_complement_rel"
       ],
       "fc1c9b9027ceef7dff79f112ac98b937428b6b19af2cbc49114f1c8d1586c7ff": [
         "Chromatic.conjectures.X3.x3_anticomplete",
@@ -9211,9 +9212,9 @@
       "signature_shape_hash": "b8c8f8c6648dfa10d34dbf8af79362fe63d0c7883b8643c9081b6b207447c2dc"
     },
     {
-      "body_hash": "679b9facccb8a8aab0374089cb4df44222d26fcee5785084d440aa20d0cddf00",
-      "body_shape_hash": "679b9facccb8a8aab0374089cb4df44222d26fcee5785084d440aa20d0cddf00",
-      "declaration_hash": "3ad4703a26da226efc33413315403550caed0a968fae30809edf37275b5de921",
+      "body_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "body_shape_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "declaration_hash": "126be3eca14549db385b3ae470a1f647ae932baf64f081382cf513dc1bd8c57b",
       "direct_consumers": [
         "Chromatic.conjectures.X3.x3_complement_irrefl",
         "Chromatic.conjectures.X3.x3_complement_sym"
@@ -9234,9 +9235,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "16cb15be1febba396143a4fe442e754e237de933f3798ef9230532717c5a95ee",
-      "direct_consumers": [
-        "Chromatic.conjectures.X3.x3_complement_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 118,
       "local_dependencies": [
@@ -9255,9 +9254,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "3fc44c6321a305ac3605ceb4a31a1b37928f222e8956b00ab6cd5a9b65c9aea1",
-      "direct_consumers": [
-        "Chromatic.conjectures.X3.x3_complement_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 121,
       "local_dependencies": [
@@ -9273,18 +9270,15 @@
       "signature_shape_hash": "f86e30ec81c0402eedc3a0eb0b7b3d79c422bb0197a6237be9a40df4afc9e6a8"
     },
     {
-      "body_hash": "8f9874fee85603b984d29d4798a3fdf82906bf996ae344a827a0435b111fad25",
-      "body_shape_hash": "2568a8db4ba1685bad2b7306e5d813a6699fff0a9cdca9181d4cd5fbc02d1e79",
-      "declaration_hash": "bc8a5198f79158c58326619027122a29b413958a15570755cbd300be2eb04a3b",
+      "body_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "body_shape_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "declaration_hash": "1a32610367ae1be548aa96733a0debc86cd4482dd071445d0cbe84fedf45f932",
       "direct_consumers": [
         "Chromatic.conjectures.X3.x3_complement_image"
       ],
       "kind": "Definition",
       "line": 124,
-      "local_dependencies": [
-        "x3_complement_irrefl",
-        "x3_complement_sym"
-      ],
+      "local_dependencies": [],
       "name": "x3_complement_graph",
       "normalized_name": "complement_graph",
       "package": "chromatic-theory",
@@ -11268,9 +11262,9 @@
       "signature_shape_hash": "2d2ba99afb6352521678a4783f8f4e2987abd9b45e353d95d0c92302b5da996d"
     },
     {
-      "body_hash": "3d7cd455f03fabd58fb991e4b5b6b033674329da15b86d58830f9c072e1e2269",
-      "body_shape_hash": "3d7cd455f03fabd58fb991e4b5b6b033674329da15b86d58830f9c072e1e2269",
-      "declaration_hash": "c8a68cafbd4563b221152e8caf71c72d7193f93f90c10abd700c17f4f06ce690",
+      "body_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "body_shape_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "declaration_hash": "9dade33c2bb5351d419a86e214c30e74318f7f5c82355ed038b061fa6f39ba35",
       "direct_consumers": [
         "Chromatic.conjectures.XE2.xe2_complement_irrefl",
         "Chromatic.conjectures.XE2.xe2_complement_sym"
@@ -11291,9 +11285,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "07f1efcb9b168556375d359a68dc9a094d8e061b014349615388dd26d1f554e5",
-      "direct_consumers": [
-        "Chromatic.conjectures.XE2.xe2_complement_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 25,
       "local_dependencies": [
@@ -11312,9 +11304,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "13c8cc316f6a5b7fff12ea12a44cbc514ae2ac459462cdb9d0b78f46b3f2f2e1",
-      "direct_consumers": [
-        "Chromatic.conjectures.XE2.xe2_complement_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 28,
       "local_dependencies": [
@@ -11330,18 +11320,15 @@
       "signature_shape_hash": "f86e30ec81c0402eedc3a0eb0b7b3d79c422bb0197a6237be9a40df4afc9e6a8"
     },
     {
-      "body_hash": "4c37d6cb36b22d44a2f4de1c0fe7174a3f2699eac736480f75eb44b71be4ab77",
-      "body_shape_hash": "2568a8db4ba1685bad2b7306e5d813a6699fff0a9cdca9181d4cd5fbc02d1e79",
-      "declaration_hash": "37cfda9760e7fdf70b8134bc12f206a2ac9c160d012d3e173b2ad86b72de8f4a",
+      "body_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "body_shape_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "declaration_hash": "8b1ea1e92aae6a0167da126bb8a100e132cb512640bd124e81a68dd0cef1b3be",
       "direct_consumers": [
         "Chromatic.conjectures.XE2.erdos_753_statement"
       ],
       "kind": "Definition",
       "line": 31,
-      "local_dependencies": [
-        "xe2_complement_irrefl",
-        "xe2_complement_sym"
-      ],
+      "local_dependencies": [],
       "name": "xe2_complement_graph",
       "normalized_name": "complement_graph",
       "package": "chromatic-theory",
@@ -33428,9 +33415,9 @@
       "signature_shape_hash": "b349edbd8727460c5c27fae24985aaf8e8bf31eebc8916f711a74ad4c152d099"
     },
     {
-      "body_hash": "3d7cd455f03fabd58fb991e4b5b6b033674329da15b86d58830f9c072e1e2269",
-      "body_shape_hash": "3d7cd455f03fabd58fb991e4b5b6b033674329da15b86d58830f9c072e1e2269",
-      "declaration_hash": "3cb5a5e0687702f0565a8045de6eae467e8efd19b15bff9eecbc0da3a3aa1168",
+      "body_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "body_shape_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "declaration_hash": "dbd5996aa34c88eb1324d22af2c299ffd28b43ef4e1181d3351cd10b4c683141",
       "direct_consumers": [
         "Extremal.conjectures.X56.x56_complement_irrefl",
         "Extremal.conjectures.X56.x56_complement_sym"
@@ -33451,9 +33438,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "fed556ddd0be8c59ccd840134e07052485771438775bbf78426a7b49fe2b322f",
-      "direct_consumers": [
-        "Extremal.conjectures.X56.x56_complement"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 19,
       "local_dependencies": [
@@ -33472,9 +33457,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "096b23041580e98df8eca13124746917465edf6fb4876e3ec98d4812aa118dc6",
-      "direct_consumers": [
-        "Extremal.conjectures.X56.x56_complement"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 22,
       "local_dependencies": [
@@ -33490,18 +33473,15 @@
       "signature_shape_hash": "f86e30ec81c0402eedc3a0eb0b7b3d79c422bb0197a6237be9a40df4afc9e6a8"
     },
     {
-      "body_hash": "5dbed1771a5a4e676b81ce9729f891e4e4d324fc36fa00d4ac20257d6e6354e4",
-      "body_shape_hash": "2568a8db4ba1685bad2b7306e5d813a6699fff0a9cdca9181d4cd5fbc02d1e79",
-      "declaration_hash": "c771be207814aef827816db52a5c6c76f67a437161169661b1e947d6750491c4",
+      "body_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "body_shape_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "declaration_hash": "10a847aaf0bc69512fc4de2af218fef1ee8388c6a2c250519d16fb787866dab5",
       "direct_consumers": [
         "Extremal.conjectures.X56.c8_complement_c8_erdos_hajnal_statement"
       ],
       "kind": "Definition",
       "line": 25,
-      "local_dependencies": [
-        "x56_complement_irrefl",
-        "x56_complement_sym"
-      ],
+      "local_dependencies": [],
       "name": "x56_complement",
       "normalized_name": "complement",
       "package": "extremal-graph-theory",
@@ -34875,9 +34855,9 @@
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
-      "body_hash": "3d7cd455f03fabd58fb991e4b5b6b033674329da15b86d58830f9c072e1e2269",
-      "body_shape_hash": "3d7cd455f03fabd58fb991e4b5b6b033674329da15b86d58830f9c072e1e2269",
-      "declaration_hash": "0a8109c21f1590312bf42372cd06d62782285b96c5bbee1c99881d8676272393",
+      "body_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "body_shape_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "declaration_hash": "cd1eebf3d538e7677a2a870db9191f3151899671d23517e0b257c04b30302c88",
       "direct_consumers": [
         "Extremal.conjectures.XE1.xe1_complement_irrefl",
         "Extremal.conjectures.XE1.xe1_complement_sym"
@@ -34898,9 +34878,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "fbce5302badd93288c85c87d784ef12faa8e8b3592d001dc8096de4e1bfa46fd",
-      "direct_consumers": [
-        "Extremal.conjectures.XE1.xe1_complement_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 24,
       "local_dependencies": [
@@ -34919,9 +34897,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "9b634f753bf7a526a812572d2762558bb132b4b1180191af28a72f8003c86971",
-      "direct_consumers": [
-        "Extremal.conjectures.XE1.xe1_complement_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 27,
       "local_dependencies": [
@@ -34937,18 +34913,15 @@
       "signature_shape_hash": "f86e30ec81c0402eedc3a0eb0b7b3d79c422bb0197a6237be9a40df4afc9e6a8"
     },
     {
-      "body_hash": "10332567b38ec33236078a814fe9029a01fbdf8bd713959ffab51cbf7f1c263d",
-      "body_shape_hash": "2568a8db4ba1685bad2b7306e5d813a6699fff0a9cdca9181d4cd5fbc02d1e79",
-      "declaration_hash": "b427b9ae297d9be0dd3350ec0798d8384acdaeb26ce66ab20c59a615784141b8",
+      "body_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "body_shape_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "declaration_hash": "729dccab446bedc0fbc50c9a6f76eeb51057ce9d3f3cf9fa5ef655229ddb65d8",
       "direct_consumers": [
         "Extremal.conjectures.XE1.xe1_graph_ramsey"
       ],
       "kind": "Definition",
       "line": 30,
-      "local_dependencies": [
-        "xe1_complement_irrefl",
-        "xe1_complement_sym"
-      ],
+      "local_dependencies": [],
       "name": "xe1_complement_graph",
       "normalized_name": "complement_graph",
       "package": "extremal-graph-theory",
@@ -41153,9 +41126,9 @@
       "signature_shape_hash": "f268d2c1c0d24d76b4c88fd57b268d570d0e3e9a02a02cd94bda5f3475eae948"
     },
     {
-      "body_hash": "3d7cd455f03fabd58fb991e4b5b6b033674329da15b86d58830f9c072e1e2269",
-      "body_shape_hash": "3d7cd455f03fabd58fb991e4b5b6b033674329da15b86d58830f9c072e1e2269",
-      "declaration_hash": "9134fd4db3e4b02d533121a5cdf17c7e5045b7791d99bd30aa60326065531e1d",
+      "body_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "body_shape_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
+      "declaration_hash": "2b28d8ab9e0f40bb0b8da997e77261ae912db066e4a2012a65524858ec9369f5",
       "direct_consumers": [
         "GTMisc.conjectures.X29.x29_complement_irrefl",
         "GTMisc.conjectures.X29.x29_complement_sym"
@@ -41176,9 +41149,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "eb3beb4a3f4b9d5200854c19761912313bed5e6381bb06c9031005794eb6538e",
-      "direct_consumers": [
-        "GTMisc.conjectures.X29.x29_complement"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 13,
       "local_dependencies": [
@@ -41197,9 +41168,7 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "ef1e37c4565f3f137397dbbf80a031b29646e35d0bc9b7107c881bc3cfe73309",
-      "direct_consumers": [
-        "GTMisc.conjectures.X29.x29_complement"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
       "line": 16,
       "local_dependencies": [
@@ -41215,18 +41184,15 @@
       "signature_shape_hash": "f86e30ec81c0402eedc3a0eb0b7b3d79c422bb0197a6237be9a40df4afc9e6a8"
     },
     {
-      "body_hash": "a4ee406ef2834d0826d90dc1a6d5848834f1a7203233473b53db6a536c5727b9",
-      "body_shape_hash": "2568a8db4ba1685bad2b7306e5d813a6699fff0a9cdca9181d4cd5fbc02d1e79",
-      "declaration_hash": "16b8af1d5785bafa27f71f964c58ad9e9369732823899d4477188de6dc4ed4f3",
+      "body_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "body_shape_hash": "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c",
+      "declaration_hash": "06e60f1538e53d067b984a605753e707f2e1ebbfc09cfe70a27859427031347f",
       "direct_consumers": [
         "GTMisc.conjectures.X29.no_c5_c7_complement_c7_normal_graph_statement"
       ],
       "kind": "Definition",
       "line": 19,
-      "local_dependencies": [
-        "x29_complement_irrefl",
-        "x29_complement_sym"
-      ],
+      "local_dependencies": [],
       "name": "x29_complement",
       "normalized_name": "complement",
       "package": "graph-theory-misc",

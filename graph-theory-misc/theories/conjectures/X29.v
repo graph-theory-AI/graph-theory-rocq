@@ -9,16 +9,16 @@ Unset Printing Implicit Defensive.
 (** ** Local X29 vocabulary ************************************************)
 
 Definition x29_complement_rel (G : sgraph) : rel G :=
-  fun x y => (x != y) && ~~ (x -- y).
+  @compl_rel G.
 
 Lemma x29_complement_sym (G : sgraph) : symmetric (@x29_complement_rel G).
-Proof. by move=> x y; rewrite /x29_complement_rel eq_sym sg_sym. Qed.
+Proof. exact: compl_rel_sym. Qed.
 
 Lemma x29_complement_irrefl (G : sgraph) : irreflexive (@x29_complement_rel G).
-Proof. by move=> x; rewrite /x29_complement_rel eqxx. Qed.
+Proof. exact: compl_rel_irrefl. Qed.
 
 Definition x29_complement (G : sgraph) : sgraph :=
-  SGraph (@x29_complement_sym G) (@x29_complement_irrefl G).
+  compl G.
 
 Definition x29_stable_set (G : sgraph) (S : {set G}) : Prop :=
   forall x y : G, x \in S -> y \in S -> ~~ (x -- y).

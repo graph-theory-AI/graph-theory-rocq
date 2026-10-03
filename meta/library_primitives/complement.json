@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "family": "complement",
+  "primitive": {
+    "canonical_name": "GraphTheory.core.sgraph.compl",
+    "owner": "upstream",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "complement_rel",
+      "complement_graph",
+      "complement"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X3.x3_complement_graph",
+      "Chromatic.conjectures.X3.x3_complement_rel",
+      "Chromatic.conjectures.XE2.xe2_complement_graph",
+      "Chromatic.conjectures.XE2.xe2_complement_rel",
+      "Extremal.conjectures.X56.x56_complement",
+      "Extremal.conjectures.X56.x56_complement_rel",
+      "Extremal.conjectures.XE1.xe1_complement_graph",
+      "Extremal.conjectures.XE1.xe1_complement_rel",
+      "GTMisc.conjectures.X29.x29_complement",
+      "GTMisc.conjectures.X29.x29_complement_rel"
+    ],
+    "consumers_remaining": 15,
+    "relation": "conversion for the relations (compl_rel); identity isomorphism for the graphs (compl_eq_diso)",
+    "semantic_classes": {
+      "ordinary-complement": {
+        "members": [
+          "Chromatic.conjectures.X3.x3_complement_graph",
+          "Chromatic.conjectures.X3.x3_complement_rel",
+          "Chromatic.conjectures.XE2.xe2_complement_graph",
+          "Chromatic.conjectures.XE2.xe2_complement_rel",
+          "Extremal.conjectures.X56.x56_complement",
+          "Extremal.conjectures.X56.x56_complement_rel",
+          "Extremal.conjectures.XE1.xe1_complement_graph",
+          "Extremal.conjectures.XE1.xe1_complement_rel",
+          "GTMisc.conjectures.X29.x29_complement",
+          "GTMisc.conjectures.X29.x29_complement_rel"
+        ],
+        "count": 10,
+        "verdict": "equivalent",
+        "certificate": "GTBase.common.compl_eq_diso",
+        "note": "(x != y) && ~~ (x -- y) on the same carrier, SGraph of local sym/irrefl proofs; X29's symmetry proof uses sg_sym, the others sgP (frozen verbatim)"
+      }
+    },
+    "distinct_variants": {
+      "Chromatic.conjectures.U8.local_complement": "local complement at a vertex",
+      "GTMisc.conjectures.X94.x94_bicomplement": "bipartite complement"
+    },
+    "retained_proof_lemmas": {
+      "note": "The ten *_complement_sym/_irrefl lemmas keep their statements and are re-proved from upstream compl_rel_sym/compl_rel_irrefl; they are frozen verbatim (Legacy-qualified) as scaffolding, and *_proofs_compat relates the SGraph built from them to the live one by the identity isomorphism."
+    },
+    "historical_snapshots": {
+      "induced_free.v#X56Legacy.statement": "A1 snapshot: A1 froze the induced-free helper of X56 but kept the live x56_complement, which after A6 is upstream compl. Kept unchanged; the combined pre-A1, pre-A6 row is Extremal.migration.complement.X56Original, certified by c8_complement_c8_erdos_hajnal_statement_original_compat.",
+      "subgraph_of.v#XE1Legacy.graph_ramsey": "A5 snapshot: A5 froze the Ramsey chain over its frozen subgraph helper but kept the live xe1_complement_graph, which after A6 is upstream compl. Kept unchanged; the combined pre-A5, pre-A6 chain is Extremal.migration.complement.XE1Original.graph_ramsey (with its number/diagonal wrappers and all twelve Ramsey rows in XE1Original/XE2Original).",
+      "consecutive_in_cycle.v#XE1Legacy.erdos_567_statement": "B4 snapshot: B4 froze erdos_567's h5_graph but kept the live xe1_graph_ramsey_number, which reaches the complement. Kept unchanged; the combined pre-A5, pre-A6, pre-B4 row is Extremal.migration.complement.XE1Original.erdos_567_statement."
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.complement.x3_complement_rel_compat",
+      "Chromatic.migration.complement.x3_complement_proofs_compat",
+      "Chromatic.migration.complement.x3_complement_graph_compat",
+      "Chromatic.migration.complement.xe2_complement_rel_compat",
+      "Chromatic.migration.complement.xe2_complement_proofs_compat",
+      "Chromatic.migration.complement.xe2_complement_graph_compat",
+      "Chromatic.migration.complement.x3_complement_image_compat",
+      "Chromatic.migration.complement.gyarfas_complementation_chi_bounded_statement_compat",
+      "Chromatic.migration.complement.erdos_753_statement_compat",
+      "Extremal.migration.complement.x56_complement_rel_compat",
+      "Extremal.migration.complement.x56_complement_proofs_compat",
+      "Extremal.migration.complement.x56_complement_compat",
+      "Extremal.migration.complement.xe1_complement_rel_compat",
+      "Extremal.migration.complement.xe1_complement_proofs_compat",
+      "Extremal.migration.complement.xe1_complement_graph_compat",
+      "Extremal.migration.complement.c8_complement_c8_erdos_hajnal_statement_compat",
+      "Extremal.migration.complement.c8_complement_c8_erdos_hajnal_statement_original_compat",
+      "Extremal.migration.complement.graph_ramsey_compat",
+      "Extremal.migration.complement.graph_ramsey_number_compat",
+      "Extremal.migration.complement.diagonal_ramsey_number_compat",
+      "Extremal.migration.complement.erdos_545_statement_compat",
+      "Extremal.migration.complement.erdos_550_statement_compat",
+      "Extremal.migration.complement.erdos_552_statement_compat",
+      "Extremal.migration.complement.erdos_566_statement_compat",
+      "Extremal.migration.complement.erdos_567_statement_compat",
+      "Extremal.migration.complement.erdos_568_statement_compat",
+      "Extremal.migration.complement.erdos_812_statement_compat",
+      "Extremal.migration.complement.erdos_87_statement_compat",
+      "Extremal.migration.complement.erdos_547_statement_compat",
+      "Extremal.migration.complement.erdos_549_statement_compat",
+      "Extremal.migration.complement.erdos_570_statement_compat",
+      "Extremal.migration.complement.erdos_800_statement_compat",
+      "Extremal.migration.complement.graph_ramsey_original_compat",
+      "Extremal.migration.complement.graph_ramsey_number_original_compat",
+      "Extremal.migration.complement.diagonal_ramsey_number_original_compat",
+      "Extremal.migration.complement.erdos_545_statement_original_compat",
+      "Extremal.migration.complement.erdos_550_statement_original_compat",
+      "Extremal.migration.complement.erdos_552_statement_original_compat",
+      "Extremal.migration.complement.erdos_566_statement_original_compat",
+      "Extremal.migration.complement.erdos_567_statement_original_compat",
+      "Extremal.migration.complement.erdos_568_statement_original_compat",
+      "Extremal.migration.complement.erdos_812_statement_original_compat",
+      "Extremal.migration.complement.erdos_87_statement_original_compat",
+      "Extremal.migration.complement.erdos_547_statement_original_compat",
+      "Extremal.migration.complement.erdos_549_statement_original_compat",
+      "Extremal.migration.complement.erdos_570_statement_original_compat",
+      "Extremal.migration.complement.erdos_800_statement_original_compat",
+      "GTMisc.migration.complement.x29_complement_rel_compat",
+      "GTMisc.migration.complement.x29_complement_proofs_compat",
+      "GTMisc.migration.complement.x29_complement_compat",
+      "GTMisc.migration.complement.no_c5_c7_complement_c7_normal_graph_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.common.compl_adjE",
+      "GTBase.common.compl_eq_diso",
+      "GTBase.common.compl_adj_offdiag",
+      "GTBase.common.compl_noloop",
+      "GTBase.common.compl_Kn_edgeless",
+      "GTBase.common.compl_compl_diso",
+      "GTBase.common.has_subgraph_host_diso"
+    ],
+    "public_client": "base/theories/examples/complement.v",
+    "legacy_baseline": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+    "migration_report": "meta/migration_reports/complement.md",
+    "migration_spec": "meta/migration_reports/complement.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A6.md",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.coloring",
+        "GTBase.common"
+      ],
+      "result": "upstream-canonical",
+      "candidate": "GraphTheory.core.sgraph.compl / compl_rel",
+      "note": "compl_rel (sgraph.v 1413) is the same relation; compl (1421) packages it with upstream's own opaque proofs, so a local SGraph is related by eq_diso, not by conversion. diso_compl and isubgraph_compl are upstream; coloring's maxstabsets_compl/alpha_compl are aborted upstream and are not used.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "marcol",
+    "reviewed_commit": "6b0bc780e56385d0509f9959d98ec0fa69050f90",
+    "independent_review": "meta/migration_reviews/complement.md"
+  }
+}
