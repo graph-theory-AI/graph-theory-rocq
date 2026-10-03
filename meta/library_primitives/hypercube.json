@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "family": "hypercube",
+  "primitive": {
+    "canonical_name": "GTBase.hypercubes.product_hypercube",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "hypercube"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.XE1.xe1_hypercube",
+      "Packing.conjectures.U9.hypercube",
+      "Topological.conjectures.D3cr.hypercube"
+    ],
+    "consumers_remaining": 5,
+    "relation": "the d-dimensional hypercube in two named views kept on their own carriers: Extremal XE1 xe1_hypercube and Topological D3cr hypercube (local Fixpoints Q_0 = 'K_1, Q_(d+1) = cartesian_product 'K_2 Q_d on the nested ordinal/product carrier) equal GTBase.hypercubes.product_hypercube d as graph records, by induction on d; Packing U9 hypercube (SGraph over d.-tuple bool, adjacent iff exactly one coordinate differs, with its own hc_rel/hc_sym/hc_irrefl) has the carrier and the pointwise adjacency of GTBase.hypercubes.tuple_hypercube d and the identity isomorphism to it, not an equation between opaque proof fields. The views are related for every d by the explicit isomorphism product_tuple_hypercube_diso (inverse coordinate maps); isomorphism is not graph equality, so #567's literal G = Q_3 and X226's tnth coordinates keep their carriers. No positive-dimension guard.",
+    "semantic_classes": {
+      "product-view": {
+        "members": [
+          "Extremal.conjectures.XE1.xe1_hypercube",
+          "Topological.conjectures.D3cr.hypercube"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.hypercubes.xe1_hypercube_compat",
+          "Topological.migration.hypercubes.hypercube_compat"
+        ],
+        "note": "Fixpoint Q_0 = 'K_1, Q_(d+1) = cartesian_product 'K_2 Q_d on the nested ordinal/product carrier; equal to GTBase.hypercubes.product_hypercube d as a graph record, by induction on d"
+      },
+      "tuple-view": {
+        "members": [
+          "Packing.conjectures.U9.hypercube"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificates": [
+          "Packing.migration.hypercubes.hypercube_compat"
+        ],
+        "note": "SGraph over d.-tuple bool with exactly one differing coordinate; the same carrier and pointwise adjacency as GTBase.hypercubes.tuple_hypercube d and the identity isomorphism (hypercube_diso), not an equation between opaque proof fields"
+      }
+    },
+    "distinct_variants": {
+      "GTBase.base.graph_power": "the distance power of a graph on its own carrier (vertices within m steps adjacent), not a cartesian power",
+      "Extremal.conjectures.XE2.xe2_cube_square_floor": "a natural-number bound (cube/square floor), not a graph construction",
+      "Packing.conjectures.X226.x226_subcube_dim": "the number of free coordinates of an option assignment; reads no cube vertex, unchanged and still used live"
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.hypercubes.xe1_hypercube_compat",
+      "Extremal.migration.hypercubes.erdos_1035_statement_compat",
+      "Extremal.migration.hypercubes.erdos_567_statement_compat",
+      "Extremal.migration.hypercubes.erdos_1035_statement_original_compat",
+      "Extremal.migration.hypercubes.erdos_567_statement_original_compat",
+      "Topological.migration.hypercubes.hypercube_compat",
+      "Topological.migration.hypercubes.the_crossing_number_of_the_hypercube_statement_compat",
+      "Packing.migration.hypercubes.hypercube_compat",
+      "Packing.migration.hypercubes.copy_Q3_through_compat",
+      "Packing.migration.hypercubes.weakly_saturates_compat",
+      "Packing.migration.hypercubes.is_wsat_compat",
+      "Packing.migration.hypercubes.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat",
+      "Packing.migration.hypercubes.weak_saturation_of_the_cube_in_the_clique_statement_compat",
+      "Packing.migration.hypercubes.x226_subcube_compat",
+      "Packing.migration.hypercubes.x226_is_subcube_compat",
+      "Packing.migration.hypercubes.x226_is_subcube_dim_le_compat",
+      "Packing.migration.hypercubes.x226_subcube_partitions_compat",
+      "Packing.migration.hypercubes.x226_subcube_partitions_dim_le_compat",
+      "Packing.migration.hypercubes.x226_f_compat",
+      "Packing.migration.hypercubes.x226_f_dim_le2_compat",
+      "Packing.migration.hypercubes.subcube_partition_count_ratio_subexponential_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.hypercubes.product_hypercube0",
+      "GTBase.hypercubes.product_hypercubeS",
+      "GTBase.hypercubes.card_product_hypercube",
+      "GTBase.hypercubes.product_hypercube0_edge",
+      "GTBase.hypercubes.tuple_hypercube_sym",
+      "GTBase.hypercubes.tuple_hypercube_irrefl",
+      "GTBase.hypercubes.tuple_hypercube_edgeE",
+      "GTBase.hypercubes.card_tuple_hypercube",
+      "GTBase.hypercubes.tuple_hypercube_edgeP",
+      "GTBase.hypercubes.tuple_hypercube0_edge",
+      "GTBase.hypercubes.tuple_hypercube_diff_cons",
+      "GTBase.hypercubes.tuple_hypercube_diff_eq0",
+      "GTBase.hypercubes.tuple_hypercube_edge_cons",
+      "GTBase.hypercubes.K2_bitK",
+      "GTBase.hypercubes.bit_K2K",
+      "GTBase.hypercubes.product_to_tupleK",
+      "GTBase.hypercubes.tuple_to_productK",
+      "GTBase.hypercubes.product_to_tuple_edge",
+      "GTBase.hypercubes.product_tuple_hypercube_diso",
+      "GTBase.hypercubes.product_hypercube1_diso",
+      "Packing.migration.hypercubes.hypercube_diso"
+    ],
+    "public_client": "base/theories/examples/hypercubes.v",
+    "legacy_baseline": "f5d2d3a0652fe3858fa8a22d9edd0d297bac8a2a",
+    "migration_report": "meta/migration_reports/hypercubes.md",
+    "migration_spec": "meta/migration_reports/hypercubes.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A23.md",
+    "foundation_fidelity": "meta/foundation_fidelity/hypercube.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core (no hypercube, Hamming or cartesian-power declaration)",
+        "GTBase.base (cartesian_product reused; graph_power is a distance power)",
+        "MathComp tuple/fintype (tuple0, tuple_eta, tnth0, tnthS, card_tuple, card_bool)"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.hypercubes.product_hypercube and GTBase.hypercubes.tuple_hypercube",
+      "note": "No installed upstream hypercube; the product view reuses base.cartesian_product and the tuple view MathComp tuples, with upstream Diso'/eq_diso for the isomorphisms. Evidence: coordination/evidence/A23-hypercube-discovery/ (upstream.txt) and coordination/evidence/A23-hypercubes/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}
