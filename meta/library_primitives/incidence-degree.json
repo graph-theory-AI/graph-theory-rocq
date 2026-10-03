@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "family": "incidence-degree",
+  "primitive": {
+    "canonical_name": "GTBase.incidence.incidence_degree",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "degree_in_edge_set",
+      "degree_in",
+      "subgraph_degree",
+      "hg_degree",
+      "hyperdegree",
+      "edeg"
+    ],
+    "source_definitions": [
+      "ClassicalLemmas.konig.line_colouring.edeg",
+      "Extremal.conjectures.X36.x36_degree_in_edge_set",
+      "Extremal.conjectures.X84.x84_degree_in",
+      "GTMisc.conjectures.X37.x37_subgraph_degree",
+      "GTMisc.conjectures.X38.x38_subgraph_degree",
+      "Hypergraph.conjectures.X108.x108_degree_in",
+      "Hypergraph.conjectures.X6.x6_hg_degree",
+      "Hypergraph.conjectures.X73.x73_hyperdegree",
+      "Hypergraph.foundations.hypergraph.hg_degree"
+    ],
+    "repository_sources": {
+      "Hypergraph.foundations.hypergraph.hg_degree": {
+        "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+        "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635",
+        "blob": "884dff89926ae3d059038db335a311a93919ea99",
+        "declaration_hash": "7d4725e170d7dbe3aca90507cd4e37f27c8662fad9fe055d249529528c70ed5e"
+      },
+      "ClassicalLemmas.konig.line_colouring.edeg": {
+        "path": "classical-lemmas/theories/konig/line_colouring.v",
+        "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635",
+        "blob": "bff9f13943eff8beb98f939daaec72d3bb718fc3",
+        "declaration_hash": "b500b65fea3a7f0041ed34e5753607b1077b00d6fa9a99769146898165c3c859"
+      }
+    },
+    "consumers_remaining": 17,
+    "relation": "supplied-family count: X36/X84/X37/X38/X6/X73 and the public Hypergraph hg_degree and ClassicalLemmas edeg convert to GTBase.incidence.incidence_degree F v := #|[set e in F | v \\in e]| for an ARBITRARY finite family on an arbitrary finType (no edge, uniformity, nonemptiness or palette premise); X108 x108_degree_in E W v, the members containing v and inside W, equals the canonical count of the explicitly restricted family [set e in E | e \\subset W] (a proved equality, zero for v outside W).",
+    "semantic_classes": {
+      "supplied-family-count": {
+        "members": [
+          "ClassicalLemmas.konig.line_colouring.edeg",
+          "Extremal.conjectures.X36.x36_degree_in_edge_set",
+          "Extremal.conjectures.X84.x84_degree_in",
+          "GTMisc.conjectures.X37.x37_subgraph_degree",
+          "GTMisc.conjectures.X38.x38_subgraph_degree",
+          "Hypergraph.conjectures.X6.x6_hg_degree",
+          "Hypergraph.conjectures.X73.x73_hyperdegree",
+          "Hypergraph.foundations.hypergraph.hg_degree"
+        ],
+        "count": 8,
+        "verdict": "equivalent",
+        "note": "#|[set e in F | v \\in e]| for an arbitrary finite family F on an arbitrary finType (a graph carrier for X36/X84/X37/X38/edeg); no edge, uniformity, nonemptiness or palette premise; conversion; canonical GTBase.incidence.incidence_degree",
+        "certificates": [
+          "ClassicalLemmas.migration.incidence_degree.edeg_compat",
+          "Extremal.migration.incidence_degree.x36_degree_in_edge_set_compat",
+          "Extremal.migration.incidence_degree.x84_degree_in_compat",
+          "GTMisc.migration.incidence_degree.x37_subgraph_degree_compat",
+          "GTMisc.migration.incidence_degree.x38_subgraph_degree_compat",
+          "Hypergraph.migration.incidence_degree.hg_degree_compat",
+          "Hypergraph.migration.incidence_degree.x6_hg_degree_compat",
+          "Hypergraph.migration.incidence_degree.x73_hyperdegree_compat"
+        ]
+      },
+      "inside-W-restricted-count": {
+        "members": [
+          "Hypergraph.conjectures.X108.x108_degree_in"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Hypergraph.migration.incidence_degree.x108_degree_in_compat",
+        "note": "#|[set e in E | (v \\in e) && (e \\subset W)]| is incidence_degree [set e in E | e \\subset W] v, a proved equality (conjunction order); the restriction to W stays explicit in the adapter, zero for v outside W (GTBase.incidence.incidence_degree_inside_out)"
+      }
+    },
+    "distinct_variants": {
+      "Digraph.core.oriented.outdeg_in and directed degree counts": "Directional adjacency inside a vertex set, not membership in a supplied family.",
+      "multigraph incidence (GraphTheory.mgraph.incident, edges_at)": "Edge objects with endpoints, loops and multiplicities: a different representation.",
+      "inline incidence counts in matching, perfect_matching and degree-bound predicates": "Unnamed raw counts inside other definitions; their contracts and proofs are left alone."
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.incidence_degree.x36_degree_in_edge_set_compat",
+      "Extremal.migration.incidence_degree.x84_degree_in_compat",
+      "GTMisc.migration.incidence_degree.x37_subgraph_degree_compat",
+      "GTMisc.migration.incidence_degree.x38_subgraph_degree_compat",
+      "Hypergraph.migration.incidence_degree.x6_hg_degree_compat",
+      "Hypergraph.migration.incidence_degree.x73_hyperdegree_compat",
+      "Hypergraph.migration.incidence_degree.x108_degree_in_compat",
+      "Hypergraph.migration.incidence_degree.hg_degree_compat",
+      "ClassicalLemmas.migration.incidence_degree.edeg_compat",
+      "Extremal.migration.incidence_degree.x36_nonempty_k_divisible_subgraph_compat",
+      "Extremal.migration.incidence_degree.x84_cycle_edge_set_compat",
+      "Extremal.migration.incidence_degree.x84_cycle_count_compat",
+      "Extremal.migration.incidence_degree.x84_has_cycle_length_compat",
+      "GTMisc.migration.incidence_degree.x37_degree_class_size_compat",
+      "GTMisc.migration.incidence_degree.x37_close_to_uniform_degree_class_compat",
+      "GTMisc.migration.incidence_degree.x38_degree_class_size_compat",
+      "Hypergraph.migration.incidence_degree.x73_regular_compat",
+      "Hypergraph.migration.incidence_degree.x108_d_degenerate_compat",
+      "Hypergraph.migration.incidence_degree.hg_degenerate_leb_compat",
+      "Hypergraph.migration.incidence_degree.hg_degenerate_ex_compat",
+      "Hypergraph.migration.incidence_degree.hg_degeneracy_compat",
+      "Hypergraph.migration.incidence_degree.hg_skel_degeneracy_compat",
+      "Hypergraph.migration.incidence_degree.hg_dmax_compat",
+      "Extremal.migration.incidence_degree.alon_friedland_kalai_divisible_subgraph_statement_compat",
+      "Extremal.migration.incidence_degree.odd_cycle_free_turan2_unique_cycle_extremal_statement_compat",
+      "Extremal.migration.incidence_degree.arman_tsaturian_average_degree_cycle_count_statement_compat",
+      "GTMisc.migration.incidence_degree.regular_graph_spanning_subgraph_degree_class_balance_statement_compat",
+      "GTMisc.migration.incidence_degree.min_degree_spanning_subgraph_small_degree_multiplicity_statement_compat",
+      "Hypergraph.migration.incidence_degree.critical_three_uniform_min_degree_seven_statement_compat",
+      "Hypergraph.migration.incidence_degree.erdos_833_statement_compat",
+      "Hypergraph.migration.incidence_degree.regular_tripartite_hypergraph_matching_lower_bound_statement_compat",
+      "Hypergraph.migration.incidence_degree.three_uniform_degenerate_hypergraph_ramsey_linear_statement_compat",
+      "Hypergraph.migration.incidence_degree.kpartite_hypergraph_turan_exponent_dmax_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.incidence.incidence_degree_le",
+      "GTBase.incidence.incidence_degree_set0",
+      "GTBase.incidence.incidence_degree_set1",
+      "GTBase.incidence.incidence_degree_gt0",
+      "GTBase.incidence.incidence_degree_subset",
+      "GTBase.incidence.incidence_degree_setD",
+      "GTBase.incidence.incidence_degree_inside_out",
+      "GTBase.incidence.incidence_degree_insideT",
+      "GTBase.common.incidence_degree_edges"
+    ],
+    "public_client": "base/theories/examples/incidence_degree.v",
+    "legacy_baseline": "a54026d37a8b40d53340be71be783ac5d5fe3635",
+    "migration_report": "meta/migration_reports/incidence_degree.md",
+    "migration_spec": "meta/migration_reports/incidence_degree.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A10.md",
+    "foundation_fidelity": "meta/foundation_fidelity/incidence-degree.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.sgraph",
+        "GraphTheory.mgraph",
+        "GraphTheory.open_confluence",
+        "GraphTheory.connectivity",
+        "mathcomp finset/fintype/bigop",
+        "GTBase.common",
+        "Hypergraph.foundations.hypergraph",
+        "ClassicalLemmas.konig.line_colouring"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.incidence.incidence_degree over an arbitrary finType family; GTBase.common.incidence_degree_edges relates it to N(v) at E(G)",
+      "note": "Pinned coq-graph-theory 0.9.7 has neighbourhoods N(x) of simple graphs and incident/edges_at for multigraph edge objects (mgraph, open_confluence), but no count of the members of a supplied set family containing a vertex; MathComp has none either. The repository already had two public same-body copies (Hypergraph hg_degree, ClassicalLemmas edeg), which now name the new MathComp-only GTBase module; ClassicalLemmas gains the GTBase load path and the root classical-lemmas: base prerequisite. Evidence: coordination/evidence/A10-incidence_degree/upstream-audit.txt.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}

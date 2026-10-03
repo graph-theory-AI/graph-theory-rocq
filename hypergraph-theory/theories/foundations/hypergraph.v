@@ -73,7 +73,7 @@ Qed.
 Definition hg_loopless E : Prop := forall e, e \in E -> 2 <= #|e|.
 
 (** Number of hyperedges through a vertex. *)
-Definition hg_degree E v : nat := #|[set e in E | v \in e]|.
+Definition hg_degree E v : nat := incidence_degree E v.
 
 (** The subhypergraph spanned by a vertex set: the hyperedges inside it. *)
 Definition hg_restrict E S : {set {set T}} := [set e in E | e \subset S].

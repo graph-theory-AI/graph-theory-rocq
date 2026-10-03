@@ -14,7 +14,7 @@ Definition x73_balanced_tripartite
   forall i : 'I_3, #|[set v : T | part v == i]| = n.
 
 Definition x73_hyperdegree (T : finType) (E : {set {set T}}) (v : T) : nat :=
-  #|[set e in E | v \in e]|.
+  incidence_degree E v.
 
 Definition x73_regular (T : finType) (E : {set {set T}}) (d : nat) : Prop :=
   forall v : T, x73_hyperdegree E v = d.

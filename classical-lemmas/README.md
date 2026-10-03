@@ -3,9 +3,12 @@
 Rocq formalizations of **classical mathematical theorems**, proved from the
 literature and stated so that they can be reused anywhere.
 
-Everything here is proved from scratch on top of MathComp and coq-graph-theory
-only: the package has no dependency on any other package of this repository, and
-nothing depends on the graph conjectures for which the lemmas were first needed.
+Everything here is proved from scratch on top of MathComp and coq-graph-theory.
+The one prerequisite inside this repository is the MathComp-only module
+`GTBase.incidence` of `base` (see Building): `konig/line_colouring.v`'s edge
+count `edeg F v` is its `incidence_degree F v`, the number of members of `F`
+containing `v`.  Nothing depends on the graph conjectures for which the lemmas
+were first needed.
 Every file is axiom-free — `Print Assumptions` answers *Closed under the global
 context* for every result — and contains no `Axiom`, `Parameter`, `Conjecture`,
 `admit` or `Admitted`.
@@ -138,8 +141,9 @@ Matematico di Palermo **32** (1911) 193–217.
 rocq makefile -f _CoqProject -o Makefile.coq && make -f Makefile.coq
 ```
 
-or, from the repository root, `make classical-lemmas`.  Rocq 9.1.1 with MathComp
-2.5.0 and coq-graph-theory 0.9.7.
+after building `base` (`_CoqProject` maps `../base/theories` as `GTBase`), or,
+from the repository root, `make classical-lemmas`, which builds `base` first.
+Rocq 9.1.1 with MathComp 2.5.0 and coq-graph-theory 0.9.7.
 
 ## Who uses this
 
