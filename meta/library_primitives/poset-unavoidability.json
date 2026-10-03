@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "family": "poset-unavoidability",
+  "primitive": {
+    "canonical_name": "Minor.foundations.poset_unavoidability.poset_unavoidable",
+    "owner": "minor-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "unavoidable"
+    ],
+    "source_definitions": [
+      "Minor.conjectures.X228.x228_unavoidable",
+      "Digraph.conjectures.unvd.unavoidable"
+    ],
+    "consumers_remaining": 2,
+    "relation": "Exact finite-poset cover-minor unavoidability: one natural threshold d chosen before all finite posets, and every poset whose dimension is not at most d (GTBase.posets, realizers may be empty) has H as a minor of its cover graph, host before pattern (upstream minor). d = 0, empty carriers and empty graphs allowed; no planarity or width condition on H; not induced minors, subdivisions or the exact-order tournament unavoidability of Digraph.conjectures.unvd.unavoidable, which stays a deferred distinct contract.",
+    "semantic_classes": {
+      "poset-cover-minor": {
+        "members": [
+          "Minor.conjectures.X228.x228_unavoidable"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Minor.migration.poset_unavoidability.x228_unavoidable_compat"
+        ]
+      },
+      "tournament-exact-order": {
+        "members": [
+          "Digraph.conjectures.unvd.unavoidable"
+        ],
+        "count": 1,
+        "verdict": "distinct representation",
+        "state": "deferred",
+        "certificates": [],
+        "note": "Every tournament with exactly N vertices contains an injective arc-preserving copy of D; a directed exact-order contract with its own unvd/X221 chain. Left byte-for-byte unchanged for its later directed family; registry inclusion classifies the normalized namesake only."
+      }
+    },
+    "compatibility_theorems": [
+      "Minor.migration.poset_unavoidability.x228_unavoidable_compat",
+      "Minor.migration.poset_unavoidability.unavoidable_minor_kelly_construction_statement_compat"
+    ],
+    "api_theorems": [
+      "Minor.foundations.poset_unavoidability.poset_dimension_at_mostW",
+      "Minor.foundations.poset_unavoidability.poset_unavoidableI",
+      "Minor.foundations.poset_unavoidability.poset_unavoidable_threshold",
+      "Minor.foundations.poset_unavoidability.poset_unavoidable_large",
+      "Minor.foundations.poset_unavoidability.poset_unavoidable_minor",
+      "Minor.foundations.poset_unavoidability.poset_unavoidable_K0"
+    ],
+    "public_client": "minor-theory/theories/examples/poset_unavoidability.v",
+    "legacy_baseline": "97605ddae838bc6e84b0602240148246e9d065f2",
+    "migration_report": "meta/migration_reports/poset_unavoidability.md",
+    "migration_spec": "meta/migration_reports/poset_unavoidability.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C21.md",
+    "foundation_fidelity": "meta/foundation_fidelity/poset-unavoidability.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.minor",
+        "GTBase.posets",
+        "GTBase.minor_models",
+        "Digraph.conjectures.unvd"
+      ],
+      "result": "new-area-primitive",
+      "candidate": null,
+      "note": "No installed upstream or GTBase poset-unavoidability primitive (path_review installed-source search). The single consuming area keeps it in Minor foundations; GTBase.posets (finite_poset, poset_cover_graph, poset_dimension_at_most) and upstream minor/minor_trans are reused unchanged, and no generic unavoidability abstraction or realizer convention change is introduced.",
+      "audited_at": "2026-10-03"
+    }
+  }
+}

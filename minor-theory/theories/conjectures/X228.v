@@ -3,6 +3,7 @@
 From GTBase Require Export base.
 From GraphTheory Require Import minor.
 From Minor.foundations Require Import containment width_params.
+From Minor.foundations Require Import poset_unavoidability.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -19,10 +20,7 @@ Unset Printing Implicit Defensive.
     large enough dimension contains [H] as a minor: some threshold [d] is such
     that every poset whose dimension is NOT at most [d] has [H] as a minor of its
     cover graph. *)
-Definition x228_unavoidable (H : sgraph) : Prop :=
-  exists d : nat,
-    forall P : finite_poset,
-      ~ poset_dimension_at_most P d -> minor (poset_cover_graph P) H.
+Definition x228_unavoidable (H : sgraph) : Prop := poset_unavoidable H.
 
 (** ** X228 statements *****************************************************)
 
