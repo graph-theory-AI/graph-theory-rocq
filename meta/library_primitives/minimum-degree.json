@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "family": "minimum-degree",
+  "primitive": {
+    "canonical_name": "GTBase.base.min_degree",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "min_degree"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.XE2.xe2_min_degree",
+      "GTMisc.conjectures.X227.x227_min_degree"
+    ],
+    "consumers_remaining": 2,
+    "relation": "exact attained minimum: GTBase.base.min_degree G d := min_degree_at_least G d /\\ exists v : G, #|N(v)| = d. X227 x227_min_degree (bound first) converts; Extremal XE2 xe2_min_degree (attaining vertex first) equals it by the unconditional conjunct exchange min_degree_attained_firstE. The attaining vertex excludes K0 at every d; no numeric minimum with a default is introduced.",
+    "semantic_classes": {
+      "attained-minimum-bound-first": {
+        "members": [
+          "GTMisc.conjectures.X227.x227_min_degree"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTMisc.migration.min_degree.x227_min_degree_compat",
+        "note": "(forall v, d <= #|N(v)|) /\\ (exists v, #|N(v)| = d); conversion; canonical GTBase.base.min_degree"
+      },
+      "attained-minimum-witness-first": {
+        "members": [
+          "Extremal.conjectures.XE2.xe2_min_degree"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Extremal.migration.min_degree.xe2_min_degree_compat",
+        "note": "(exists v, #|N(v)| = d) /\\ (forall v, d <= #|N(v)|); the unconditional conjunct exchange min_degree_attained_firstE, not a conversion"
+      }
+    },
+    "distinct_variants": {
+      "GTMisc.conjectures.X14.x14_subcubic": "pointwise upper bound <= 3, not an attained minimum",
+      "GTMisc.conjectures.X114.x114_subcubic": "Delta <= 3, an upper bound",
+      "Chromatic.conjectures.U5.cubic": "multigraph regularity counting incident edges (no loopless guard); a later family",
+      "Cycle.conjectures.U6.cubic": "loopless multigraph regularity counting arc ends; a later family"
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.min_degree.xe2_min_degree_compat",
+      "Extremal.migration.min_degree.erdos_803_statement_compat",
+      "Extremal.migration.min_degree.erdos_803_statement_original_compat",
+      "GTMisc.migration.min_degree.x227_min_degree_compat",
+      "GTMisc.migration.min_degree.hat_guessing_degree_degeneracy_bounds_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.base.min_degree_lower",
+      "GTBase.base.min_degree_attained",
+      "GTBase.base.min_degree_attained_firstE",
+      "GTBase.base.min_degree_uniq",
+      "GTBase.base.min_degree_exists",
+      "GTBase.base.min_degree_exists_card",
+      "GTBase.base.min_degree_K0",
+      "GTBase.base.regular_min_degree",
+      "GTBase.base.min_degree_at_leastE",
+      "GTBase.base.min_degree_Delta",
+      "GTBase.base.min_degree_lt_card",
+      "GTBase.base.min_degree_Kn",
+      "GTBase.base.diso_degree",
+      "GTBase.base.min_degree_diso"
+    ],
+    "public_client": "base/theories/examples/min_degree.v",
+    "legacy_baseline": "623a89ef8a3194f06f96ae7076d8cad00a8c3ece",
+    "migration_report": "meta/migration_reports/min_degree.md",
+    "migration_spec": "meta/migration_reports/min_degree.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A12.md",
+    "foundation_fidelity": "meta/foundation_fidelity/minimum-degree.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core (source search)",
+        "mathcomp fintype/bigop (arg_minnP, ex_minnP)",
+        "GTBase.base"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.base.min_degree, relational, over A11 min_degree_at_least plus an attaining vertex",
+      "note": "Pinned GraphTheory has no min_degree/minimum_degree/mindeg declaration; MathComp arg_minnP gives existence of a vertex of least degree, used by min_degree_exists. A numeric minimum with a default value would accept K0 and is not introduced. Evidence: coordination/evidence/A12-exact-minimum-discovery/upstream-source-search.txt.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}
