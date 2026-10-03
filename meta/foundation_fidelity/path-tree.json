@@ -1,0 +1,30 @@
+{
+ "schema_version": 1,
+ "family": "path-tree",
+ "modules": {
+  "GTBase.path_trees": {
+   "path": "base/theories/path_trees.v",
+   "overrides": {
+    "path_tree": {
+     "verdict": "FAITHFUL",
+     "note": "path_tree T: T is a tree in coq-graph-theory's sense (is_tree [set: T]: unique irredundant paths, connected) and every vertex has at most two neighbours (Delta T <= 2), i.e. a path; the empty graph, K1 and K2 qualify, the triangle (not a forest) and the claw (degree 3) do not."
+    }
+   },
+   "machine_evidence": [
+    "path_tree_tree",
+    "path_tree_forest",
+    "path_tree_connected",
+    "path_tree_Delta",
+    "Delta_le2P",
+    "path_tree_degree",
+    "path_treeI",
+    "Delta_le_card",
+    "path_tree_K0",
+    "path_tree_K1",
+    "path_tree_K2",
+    "not_path_tree_K3",
+    "not_path_tree_claw"
+   ]
+  }
+ }
+}

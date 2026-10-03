@@ -10,7 +10,7 @@ Unset Printing Implicit Defensive.
 
 Definition x181_monochromatic
     (G : sgraph) (k : nat) (col : G -> 'I_k) (S : {set G}) : bool :=
-  [forall x in S, [forall y in S, col x == col y]].
+  monochromatic_on col S.
 
 Definition x181_maximal_clique (G : sgraph) (S : {set G}) : bool :=
   [&& 1 < #|S|, cliqueb S

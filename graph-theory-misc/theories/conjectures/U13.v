@@ -74,7 +74,7 @@ Definition is_max_clique (G : sgraph) (Q : {set G}) : Prop :=
   clique Q /\ #|Q| = ω([set: G]).
 
 Definition monochromatic (G : sgraph) (c : G -> bool) (Q : {set G}) : Prop :=
-  {in Q &, forall x y : G, c x = c y}.
+  monochromatic_on c Q.
 
 Definition splits_max_cliques (G : sgraph) (c : G -> bool) : Prop :=
   forall Q : {set G}, is_max_clique Q -> ~ monochromatic c Q.

@@ -1,0 +1,256 @@
+{
+  "family": "path-tree",
+  "canonical_name": "GTBase.path_trees.path_tree",
+  "canonical_short_name": "path_tree",
+  "relation": "definitional: each helper is is_tree [set: T] /\\ Delta T <= 2, the body of GTBase.path_trees.path_tree T, convertible",
+  "baseline_commit": "e377dcbcf549c044b7b2a4321831792c1c78f375",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/path_trees.v",
+    "chromatic-theory/theories/migration/path_tree.v",
+    "extremal-graph-theory/theories/migration/path_tree.v",
+    "minor-theory/theories/migration/path_tree.v"
+  ],
+  "extra_certificates": [
+    "GTBase.path_trees.path_tree_tree",
+    "GTBase.path_trees.path_tree_forest",
+    "GTBase.path_trees.path_tree_connected",
+    "GTBase.path_trees.path_tree_Delta",
+    "GTBase.path_trees.Delta_le2P",
+    "GTBase.path_trees.path_tree_degree",
+    "GTBase.path_trees.path_treeI",
+    "GTBase.path_trees.Delta_le_card",
+    "GTBase.path_trees.path_tree_K0",
+    "GTBase.path_trees.path_tree_K1",
+    "GTBase.path_trees.path_tree_K2",
+    "GTBase.path_trees.not_path_tree_K3",
+    "GTBase.path_trees.not_path_tree_claw"
+  ],
+  "summary": [
+    "Batch B, family B9 (`path_index_graph` / `path_tree`): the four helpers whose body is `is_tree [set: T] /\\ Delta T <= 2` (X126, X189 and X95 `*_path_index_graph`, X105 `x105_path_tree`) now unfold to `GTBase.path_trees.path_tree T`, convertible. The canonical lives in the new focused module base/theories/path_trees.v, which imports GTBase.base (the owner of `Delta`) and is not re-exported, so no base/walks_paths cycle arises; each of the four conjecture files gains one `From GTBase Require Import path_trees.` line. Under the actual upstream definitions (`is_tree S := is_forest S /\\ connected S`) the EMPTY graph `'K_0` is a path tree, as are `'K_1` and `'K_2`; the triangle `'K_3` is not (not a forest) and the claw `'K_1,3` is not (a vertex of degree 3), all proved in path_trees.v and used by the public client. No nonemptiness or size premise is added.",
+    "",
+    "Four rows, three intermediates, all frozen with this family's helpers only: X126's pathwidth predicate and Dujmovic et al.'s Thue-choosability row; X189's spaghetti/path decomposition width and its row, the documented KNOWN-UNFAITHFUL encoding (blocked leg), kept verbatim; X105's tree inducibility row, which uses the helper negatively; X95's pathwidth predicate (over X27's unchanged tree decompositions) and its row. Tree-decomposition axioms, bag sizes, widths, colouring, inducibility and connectivity guards are unchanged.",
+    "",
+    "History. The only earlier snapshot reaching these rows is B6's `Chromatic.migration.simple_path.X126Legacy.dujmovic_thue_choice_number_pathwidth_statement`, which froze the Thue chain and still calls the live `x126_pathwidth_at_most`; it is unchanged. `X126Original` composes B6's frozen `thue_choosable` with this family's frozen pathwidth, the complete pre-B6, pre-B9 row (`original-statement`). This family's per-row X126 copy is listed in B6's report.",
+    "",
+    "Kernel evidence, independent of this textual report: `Print All Dependencies` of every frozen statement and of X126Original contains no live helper or chain of this family and not `path_tree`; X126Original reaches no live B6 helper and not `seq_simple_path`; each live statement reaches `path_tree` and its alias (/srv/graph-theory-rocq/coordination/evidence/B9-path_tree/print_all_dependencies_summary.txt).",
+    "",
+    "No statement text, doc block, manifest row or leg state changes (checked below)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X126.x126_path_index_graph",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_path_index_graph",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "Legacy.x126_path_index_graph",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.path_tree.x126_path_index_graph_compat",
+      "live_unfolds_to": "path_tree T"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X189.x189_path_index_graph",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "x189_path_index_graph",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "Legacy.x189_path_index_graph",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.path_tree.x189_path_index_graph_compat",
+      "live_unfolds_to": "path_tree T"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X126.x126_pathwidth_at_most",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "x126_pathwidth_at_most",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "X126Legacy.pathwidth_at_most",
+      "substitutions": {
+        "x126_path_index_graph": "Legacy.x126_path_index_graph",
+        "x126_pathwidth_at_most": "pathwidth_at_most"
+      },
+      "certificate": "Chromatic.migration.path_tree.x126_pathwidth_at_most_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "dujmovic_thue_choice_number_pathwidth_statement",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "X126Legacy.dujmovic_thue_choice_number_pathwidth_statement",
+      "substitutions": {
+        "x126_pathwidth_at_most": "pathwidth_at_most"
+      },
+      "certificate": "Chromatic.migration.path_tree.dujmovic_thue_choice_number_pathwidth_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Chromatic.migration.path_tree.dujmovic_thue_choice_number_pathwidth_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement",
+      "path": "chromatic-theory/theories/conjectures/X126.v",
+      "name": "dujmovic_thue_choice_number_pathwidth_statement",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "X126Original.dujmovic_thue_choice_number_pathwidth_statement",
+      "substitutions": {
+        "x126_pathwidth_at_most": "X126Legacy.pathwidth_at_most",
+        "x126_thue_choosable": "Chromatic.migration.simple_path.X126Legacy.thue_choosable"
+      },
+      "certificate": "Chromatic.migration.path_tree.dujmovic_thue_choice_number_pathwidth_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X189.x189_spaghetti_path_decompositions_width",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "x189_spaghetti_path_decompositions_width",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "X189Legacy.spaghetti_path_decompositions_width",
+      "substitutions": {
+        "x189_path_index_graph": "Legacy.x189_path_index_graph",
+        "x189_spaghetti_path_decompositions_width": "spaghetti_path_decompositions_width"
+      },
+      "certificate": "Chromatic.migration.path_tree.x189_spaghetti_path_decompositions_width_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X189.spaghetti_tree_path_decomposition_chi_bound_statement",
+      "path": "chromatic-theory/theories/conjectures/X189.v",
+      "name": "spaghetti_tree_path_decomposition_chi_bound_statement",
+      "frozen_path": "chromatic-theory/theories/migration/path_tree.v",
+      "frozen": "X189Legacy.spaghetti_tree_path_decomposition_chi_bound_statement",
+      "substitutions": {
+        "x189_spaghetti_path_decompositions_width": "spaghetti_path_decompositions_width"
+      },
+      "certificate": "Chromatic.migration.path_tree.spaghetti_tree_path_decomposition_chi_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X105.x105_path_tree",
+      "path": "extremal-graph-theory/theories/conjectures/X105.v",
+      "name": "x105_path_tree",
+      "frozen_path": "extremal-graph-theory/theories/migration/path_tree.v",
+      "frozen": "Legacy.x105_path_tree",
+      "substitutions": {},
+      "certificate": "Extremal.migration.path_tree.x105_path_tree_compat",
+      "live_unfolds_to": "path_tree T"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X105.non_star_non_path_tree_inducibility_bounded_away_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X105.v",
+      "name": "non_star_non_path_tree_inducibility_bounded_away_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/path_tree.v",
+      "frozen": "X105Legacy.non_star_non_path_tree_inducibility_bounded_away_statement",
+      "substitutions": {
+        "x105_path_tree": "Legacy.x105_path_tree"
+      },
+      "certificate": "Extremal.migration.path_tree.non_star_non_path_tree_inducibility_bounded_away_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X95.x95_path_index_graph",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_path_index_graph",
+      "frozen_path": "minor-theory/theories/migration/path_tree.v",
+      "frozen": "Legacy.x95_path_index_graph",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_tree.x95_path_index_graph_compat",
+      "live_unfolds_to": "path_tree T"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X95.x95_pathwidth_at_most",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "x95_pathwidth_at_most",
+      "frozen_path": "minor-theory/theories/migration/path_tree.v",
+      "frozen": "X95Legacy.pathwidth_at_most",
+      "substitutions": {
+        "x95_path_index_graph": "Legacy.x95_path_index_graph",
+        "x95_pathwidth_at_most": "pathwidth_at_most"
+      },
+      "certificate": "Minor.migration.path_tree.x95_pathwidth_at_most_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X95.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "path": "minor-theory/theories/conjectures/X95.v",
+      "name": "subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "frozen_path": "minor-theory/theories/migration/path_tree.v",
+      "frozen": "X95Legacy.subgraph_indexed_tree_decomposition_pathwidth_bound_statement",
+      "substitutions": {
+        "x95_pathwidth_at_most": "pathwidth_at_most"
+      },
+      "certificate": "Minor.migration.path_tree.subgraph_indexed_tree_decomposition_pathwidth_bound_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/simple_path.v#X126Legacy.dujmovic_thue_choice_number_pathwidth_statement": "B6 per-row snapshot: family simple-path (B6) froze X126's Thue-choosability chain over its frozen genuine path but kept the live x126_pathwidth_at_most, which after B9 reads path_tree. Kept unchanged; B6's dujmovic_thue_choice_number_pathwidth_statement_compat stays true. The complete pre-B6, pre-B9 row is Chromatic.migration.path_tree.X126Original.dujmovic_thue_choice_number_pathwidth_statement, certified by dujmovic_thue_choice_number_pathwidth_statement_original_compat."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "Hom.conjectures.U3.path_graph",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "path_graph",
+      "note": "concrete path graph on ordinals; a construction, not a predicate; untouched"
+    },
+    {
+      "qualified": "Packing.conjectures.X18.x18_path_graph",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_path_graph",
+      "note": "concrete path graph constructor; untouched"
+    },
+    {
+      "qualified": "Packing.conjectures.X226.x226_path_graph",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_path_graph",
+      "note": "concrete path graph constructor; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.path_fas.linear_forest",
+      "path": "digraph-theory/theories/conjectures/path_fas.v",
+      "name": "linear_forest",
+      "note": "linear forest (a forest, not a tree); untouched"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X74.x74_induced_linear_forest",
+      "path": "graph-theory-misc/theories/conjectures/X74.v",
+      "name": "x74_induced_linear_forest",
+      "note": "induced linear forest on a vertex set; untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.X212.x212_linear_forest_colour",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_linear_forest_colour",
+      "note": "colour classes are forests of maximum degree two; untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X34.x34_linear_forest_colour",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_linear_forest_colour",
+      "note": "colour classes of maximum degree two; untouched"
+    },
+    {
+      "qualified": "Topological.conjectures.X23.x23_linear_forest_colour",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_linear_forest_colour",
+      "note": "colour classes of maximum degree two; untouched"
+    },
+    {
+      "qualified": "Extremal.conjectures.X105.x105_star_tree",
+      "path": "extremal-graph-theory/theories/conjectures/X105.v",
+      "name": "x105_star_tree",
+      "note": "star tree, the other excluded shape of the same row; untouched"
+    }
+  ]
+}

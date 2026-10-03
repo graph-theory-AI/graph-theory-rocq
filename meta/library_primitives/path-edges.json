@@ -18,7 +18,7 @@
       "Packing.conjectures.X178.x178_path_edge_set"
     ],
     "consumers_remaining": 5,
-    "relation": "three separate representations: X14 x14_path_edges is GTBase.walks_paths.seq_edge_list p (ordered list, by conversion); X172 x172_path_edges and U7 path_edges are GTBase.walks_paths.seq_edge_set s (finite support, by conversion) and XE2 xe2_path_edge_set is equal to it for every sequence (seq_edge_set_image, not a conversion); X178 x178_path_edge_set is GTBase.walks_paths.seq_index_edge_set p (actual edges between first occurrences, by conversion), equal to the support only on duplicate-free walks",
+    "relation": "three separate representations: X14 x14_path_edges is GTBase.walks_paths.seq_edge_list p (ordered list, by conversion); X172 x172_path_edges and U7 path_edges are GTBase.walks_paths.seq_edge_set s (finite support, by conversion) and XE2 xe2_path_edge_set is equal to it for every sequence (seq_edge_set_image, not a conversion); X178 x178_path_edge_set is GTBase.walks_paths.seq_index_edge_set p (actual edges between first occurrences, by conversion), equal to the support on duplicate-free walks",
     "semantic_classes": {
       "raw-ordered-list": {
         "members": [
@@ -147,8 +147,10 @@
       "audited_at": "2026-10-03"
     },
     "migration_report": "meta/migration_reports/path_edges.md",
-    "reviewed_by": null,
+    "reviewed_by": "coordinator helper family_scope",
     "migration_spec": "meta/migration_reports/path_edges.spec.json",
-    "foundation_fidelity": "meta/foundation_fidelity/path-edges.json"
+    "foundation_fidelity": "meta/foundation_fidelity/path-edges.json",
+    "reviewed_commit": "e377dcbcf549c044b7b2a4321831792c1c78f375",
+    "independent_review": "meta/migration_reviews/path_edges.md"
   }
 }
