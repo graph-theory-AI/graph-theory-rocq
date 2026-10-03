@@ -29,7 +29,7 @@ Definition x113_path_vertices (G : sgraph) (p : seq G) : {set G} :=
 
 (** A genuine cycle: a uniform closed adjacency-walk on at least 3 vertices. *)
 Definition x113_is_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\ 2 < size c.
+  seq_cycle (--) c.
 
 (** Cycles [p], [q] are at distance greater than [d] iff the closed [d]-ball
     around one avoids the vertex set of the other.  For [d >= 1] this already

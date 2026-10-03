@@ -1,0 +1,854 @@
+{
+  "family": "genuine-cycle",
+  "canonical_name": "GTBase.walks_paths.seq_cycle",
+  "canonical_short_name": "seq_cycle",
+  "relation": "definitional: the seven Prop helpers ucycle r c /\\ 2 < size c are seq_cycle r c (five sgraph helpers with r = (--), the generic xe1_rel_cycle and xe2_directed_cycle with their supplied relation); X212's Boolean ucycleb (--) c && (2 < size c) is seq_cycleb (--) c; all convertible",
+  "baseline_commit": "00d6bb3a80759b365fffab282d47603510bf839e",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "cycle-theory": "Cycle",
+    "digraph-theory": "Digraph",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "base/theories/walks_paths.v",
+    "chromatic-theory/theories/migration/genuine_cycle.v",
+    "cycle-theory/theories/migration/genuine_cycle.v",
+    "extremal-graph-theory/theories/migration/genuine_cycle.v",
+    "graph-theory-misc/theories/migration/genuine_cycle.v",
+    "digraph-theory/theories/migration/genuine_cycle.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walks_paths.seq_cycleP",
+    "GTBase.walks_paths.seq_cycleE",
+    "GTBase.walks_paths.seq_cycle_ucycle",
+    "GTBase.walks_paths.seq_cycle_cycle",
+    "GTBase.walks_paths.seq_cycle_uniq",
+    "GTBase.walks_paths.seq_cycle_size",
+    "GTBase.walks_paths.seq_cycle_nil",
+    "GTBase.walks_paths.seq_cycle_seq1",
+    "GTBase.walks_paths.seq_cycle_pair",
+    "GTBase.walks_paths.seq_cycle_triangle",
+    "GTBase.walks_paths.seq_cycle_repeat",
+    "GTBase.walks_paths.seq_cycle_rot",
+    "GTBase.walks_paths.seq_cycle_rotr",
+    "GTBase.walks_paths.seq_cycle_consecutive",
+    "GTBase.walks_paths.seq_cycle_rev_converse",
+    "GTBase.walks_paths.seq_cycle_rev",
+    "GTBase.walks_paths.seq_cycle_ground_K3",
+    "GTBase.walks_paths.seq_cycle_ground_digon",
+    "GTBase.walks_paths.seq_cycle_ground_repeat",
+    "GTBase.walks_paths.seq_cycle_ground_directed",
+    "GTBase.walks_paths.seq_cycle_ground_directed_rev"
+  ],
+  "summary": [
+    "Batch B, family B10 (genuine sequence cycles): the eight helpers whose body is MathComp's `ucycle r c` / `ucycleb r c` with the length guard `2 < size c`: SEVEN Prop helpers and ONE Boolean. Five Prop helpers read `ucycle (--) c /\\ 2 < size c` on simple graphs (Chromatic XE1 `xe1_cycle`, Cycle X9 `x9_genuine_cycle`, Cycle XE1 `xe1_cycle`, Extremal XE2 `xe2_cycle`, GTMisc X113 `x113_is_cycle`); two read the generic `ucycle r c /\\ 2 < size c` over an ARBITRARY supplied relation on a finite carrier (GTMisc XE1 `xe1_rel_cycle`, and the eighth source Digraph XE2 `xe2_directed_cycle`, an orientation, accepted into scope by the coordinator); X212's `x212_cycle` is the Boolean `ucycleb (--) c && (2 < size c)`. They now unfold to `GTBase.walks_paths.seq_cycle r c` / `seq_cycleb r c`, convertible, with the Prop/Boolean signatures unchanged; the generic interface adds no symmetry or looplessness. API: reflect adapter, projections, degenerate rejections (empty, singleton even with a loop, digon even with both directions), the triangle characterisation, repeats, rotation, cyclic consecutiveness, and reversal: a cycle of the converse relation in general, and of the same relation under the hypothesis `symmetric r`, a sufficient condition (a directed 3-cycle is grounded not to reverse).",
+    "",
+    "Seventeen rows and sixteen intermediates, frozen with this family's helpers only: Chromatic XE2 #58, #751, #1091 (odd cycles with diagonals, odd/separated cycle lengths); Cycle X212 Smith, Bondy (cyclic edge connectivity) and Birmele; Cycle X9 (two rows); Cycle XE1 #184; Cycle XE2 #641, #71, #752, #815 (cycle lengths); Extremal XE2 #767 (incident chords); GTMisc X113 (coarse Erdos-Posa); GTMisc XE1 #883 (coprime graph); Digraph XE2 #1006 (orientations). Every guard, constant, status and documented defect is unchanged. `xe2_distinct_cycle_lengths_at_least` (Cycle XE2) reaches the family but no row; it stays live and converts.",
+    "",
+    "History (complete `original-statement` rows; earlier partial snapshots unchanged): B1's X113 chain -> `X113Original` (B1 frozen pairwise distance and vertex set with this family's frozen cycle); B4's chromatic diagonal chain and A5's erdos_1091 / erdos_58 rows -> `XE2Original` erdos_1091 (A5 frozen subgraph helper, B4 frozen diagonal count, this family's frozen cycle) and erdos_58 (A5 frozen subgraph helper, this family's frozen odd cycle lengths); B4's X9 chord chain -> `X9Original`; B4's extremal incident-chord chain -> `XE2Original` #767. The Originals are certified through the earlier families' own certificates by conversion. Family A7 (edge counts) is not integrated: whichever of A7 / B10 integrates second composes the shared rows (#767).",
+    "",
+    "Kernel evidence, independent of this textual report: `Print All Dependencies` of every frozen statement and Original contains no live helper or chain of this family and neither `seq_cycle` nor `seq_cycleb`; the Originals also reach no live B1/B4/A5 helper or canonical; each live statement reaches the canonical and its alias (/srv/graph-theory-rocq/coordination/evidence/B10-genuine_cycle/print_all_dependencies_summary.txt).",
+    "",
+    "Baseline 00d6bb3 is a private, not-for-integration merge of B9 299dc71 with main 0659592 (A5, A6, B7, C6), conflicts only in _CoqProject lines (de-duplicated union) and simple_path.md (regenerated); no .v file differs from both parents. No statement text, doc block, manifest row or leg state changes (checked below)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.XE1.xe1_cycle",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_cycle",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.xe1_cycle",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.genuine_cycle.xe1_cycle_compat",
+      "live_unfolds_to": "seq_cycle (--) c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE1.xe1_odd_cycle_with_diagonals",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_odd_cycle_with_diagonals",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE1Legacy.odd_cycle_with_diagonals",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe1_odd_cycle_with_diagonals": "odd_cycle_with_diagonals"
+      },
+      "certificate": "Chromatic.migration.genuine_cycle.xe1_odd_cycle_with_diagonals_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE2.xe2_odd_cycle_lengths_bounded",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_odd_cycle_lengths_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.odd_cycle_lengths_bounded",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_odd_cycle_lengths_bounded": "odd_cycle_lengths_bounded"
+      },
+      "certificate": "Chromatic.migration.genuine_cycle.xe2_odd_cycle_lengths_bounded_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE2.xe2_cycle_lengths_separated",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_cycle_lengths_separated",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.cycle_lengths_separated",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_cycle_lengths_separated": "cycle_lengths_separated"
+      },
+      "certificate": "Chromatic.migration.genuine_cycle.xe2_cycle_lengths_separated_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_58_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_58_statement",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.erdos_58_statement",
+      "substitutions": {
+        "xe2_odd_cycle_lengths_bounded": "odd_cycle_lengths_bounded"
+      },
+      "certificate": "Chromatic.migration.genuine_cycle.erdos_58_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Chromatic.migration.genuine_cycle.erdos_58_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_751_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_751_statement",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.erdos_751_statement",
+      "substitutions": {
+        "xe2_cycle_lengths_separated": "cycle_lengths_separated"
+      },
+      "certificate": "Chromatic.migration.genuine_cycle.erdos_751_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_1091_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_1091_statement",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.erdos_1091_statement",
+      "substitutions": {
+        "xe1_odd_cycle_with_diagonals": "XE1Legacy.odd_cycle_with_diagonals"
+      },
+      "certificate": "Chromatic.migration.genuine_cycle.erdos_1091_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Chromatic.migration.genuine_cycle.erdos_1091_statement_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.XE1.xe1_odd_cycle_with_diagonals",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_odd_cycle_with_diagonals",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE1Original.odd_cycle_with_diagonals",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe1_cycle_diagonal_count": "Chromatic.migration.consecutive_in_cycle.XE1Legacy.cycle_diagonal_count",
+        "xe1_odd_cycle_with_diagonals": "odd_cycle_with_diagonals"
+      },
+      "certificate": "Chromatic.migration.genuine_cycle.xe1_odd_cycle_with_diagonals_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_1091_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_1091_statement",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Original.erdos_1091_statement",
+      "substitutions": {
+        "xe1_odd_cycle_with_diagonals": "XE1Original.odd_cycle_with_diagonals",
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of"
+      },
+      "certificate": "Chromatic.migration.genuine_cycle.erdos_1091_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_58_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_58_statement",
+      "frozen_path": "chromatic-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Original.erdos_58_statement",
+      "substitutions": {
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of",
+        "xe2_odd_cycle_lengths_bounded": "XE2Legacy.odd_cycle_lengths_bounded"
+      },
+      "certificate": "Chromatic.migration.genuine_cycle.erdos_58_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X212.x212_cycle",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cycle",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.x212_cycle",
+      "substitutions": {},
+      "certificate": "Cycle.migration.genuine_cycle.x212_cycle_compat",
+      "live_unfolds_to": "seq_cycleb (--) c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X9.x9_genuine_cycle",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "x9_genuine_cycle",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.x9_genuine_cycle",
+      "substitutions": {},
+      "certificate": "Cycle.migration.genuine_cycle.x9_genuine_cycle_compat",
+      "live_unfolds_to": "seq_cycle (--) c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.XE1.xe1_cycle",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "xe1_cycle",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.xe1_cycle",
+      "substitutions": {},
+      "certificate": "Cycle.migration.genuine_cycle.xe1_cycle_compat",
+      "live_unfolds_to": "seq_cycle (--) c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X212.x212_longest_cycle",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_longest_cycle",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X212Legacy.longest_cycle",
+      "substitutions": {
+        "x212_cycle": "Legacy.x212_cycle",
+        "x212_longest_cycle": "longest_cycle"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.x212_longest_cycle_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X212.x212_cycle_within",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cycle_within",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X212Legacy.cycle_within",
+      "substitutions": {
+        "x212_cycle": "Legacy.x212_cycle",
+        "x212_cycle_within": "cycle_within"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.x212_cycle_within_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X212.x212_cyclically_edge_connected",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cyclically_edge_connected",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X212Legacy.cyclically_edge_connected",
+      "substitutions": {
+        "x212_cycle_within": "cycle_within",
+        "x212_cyclically_edge_connected": "cyclically_edge_connected"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.x212_cyclically_edge_connected_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X212.smith_two_longest_cycles_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X212Legacy.smith_two_longest_cycles_statement",
+      "substitutions": {
+        "x212_longest_cycle": "longest_cycle"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.smith_two_longest_cycles_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X212.bondy_linear_cycle_cubic_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "bondy_linear_cycle_cubic_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X212Legacy.bondy_linear_cycle_cubic_statement",
+      "substitutions": {
+        "x212_cycle": "Legacy.x212_cycle",
+        "x212_cyclically_edge_connected": "cyclically_edge_connected"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.bondy_linear_cycle_cubic_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X212.birmele_long_cycle_transversal_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "birmele_long_cycle_transversal_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X212Legacy.birmele_long_cycle_transversal_statement",
+      "substitutions": {
+        "x212_cycle": "Legacy.x212_cycle"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.birmele_long_cycle_transversal_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X9.proper_edge_coloured_short_cycle_statement",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "proper_edge_coloured_short_cycle_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X9Legacy.proper_edge_coloured_short_cycle_statement",
+      "substitutions": {
+        "x9_genuine_cycle": "Legacy.x9_genuine_cycle"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.proper_edge_coloured_short_cycle_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X9.min_degree_three_linearly_many_chords_cycle_statement",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "min_degree_three_linearly_many_chords_cycle_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X9Legacy.min_degree_three_linearly_many_chords_cycle_statement",
+      "substitutions": {
+        "x9_genuine_cycle": "Legacy.x9_genuine_cycle"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.min_degree_three_linearly_many_chords_cycle_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Cycle.migration.genuine_cycle.min_degree_three_linearly_many_chords_cycle_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.X9.min_degree_three_linearly_many_chords_cycle_statement",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "min_degree_three_linearly_many_chords_cycle_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X9Original.min_degree_three_linearly_many_chords_cycle_statement",
+      "substitutions": {
+        "x9_cycle_chord_count": "Cycle.migration.consecutive_in_cycle.X9Legacy.cycle_chord_count",
+        "x9_genuine_cycle": "Legacy.x9_genuine_cycle"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.min_degree_three_linearly_many_chords_cycle_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.XE1.xe1_cycle_or_edge_piece",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "xe1_cycle_or_edge_piece",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE1Legacy.cycle_or_edge_piece",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe1_cycle_or_edge_piece": "cycle_or_edge_piece"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.xe1_cycle_or_edge_piece_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.XE1.erdos_184_statement",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "erdos_184_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE1Legacy.erdos_184_statement",
+      "substitutions": {
+        "xe1_cycle_or_edge_piece": "cycle_or_edge_piece"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.erdos_184_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.XE2.xe2_cycle_lengths",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_cycle_lengths",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.cycle_lengths",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_cycle_lengths": "cycle_lengths"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.xe2_cycle_lengths_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.XE2.xe2_all_cycle_lengths_in",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_all_cycle_lengths_in",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.all_cycle_lengths_in",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_all_cycle_lengths_in": "all_cycle_lengths_in"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.xe2_all_cycle_lengths_in_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.XE2.erdos_641_statement",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "erdos_641_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.erdos_641_statement",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_all_cycle_lengths_in": "all_cycle_lengths_in",
+        "xe2_cycle_lengths": "cycle_lengths"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.erdos_641_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.XE2.erdos_71_statement",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "erdos_71_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.erdos_71_statement",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_all_cycle_lengths_in": "all_cycle_lengths_in",
+        "xe2_cycle_lengths": "cycle_lengths"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.erdos_71_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.XE2.erdos_752_statement",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "erdos_752_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.erdos_752_statement",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_all_cycle_lengths_in": "all_cycle_lengths_in",
+        "xe2_cycle_lengths": "cycle_lengths"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.erdos_752_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.XE2.erdos_815_statement",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "erdos_815_statement",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.erdos_815_statement",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_all_cycle_lengths_in": "all_cycle_lengths_in",
+        "xe2_cycle_lengths": "cycle_lengths"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.erdos_815_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE2.xe2_cycle",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_cycle",
+      "frozen_path": "extremal-graph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.xe2_cycle",
+      "substitutions": {},
+      "certificate": "Extremal.migration.genuine_cycle.xe2_cycle_compat",
+      "live_unfolds_to": "seq_cycle (--) c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_no_cycle_with_incident_chords",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_no_cycle_with_incident_chords",
+      "frozen_path": "extremal-graph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.no_cycle_with_incident_chords",
+      "substitutions": {
+        "xe2_cycle": "Legacy.xe2_cycle",
+        "xe2_no_cycle_with_incident_chords": "no_cycle_with_incident_chords"
+      },
+      "certificate": "Extremal.migration.genuine_cycle.xe2_no_cycle_with_incident_chords_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_incident_chord_extremal",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_incident_chord_extremal",
+      "frozen_path": "extremal-graph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.incident_chord_extremal",
+      "substitutions": {
+        "xe2_incident_chord_extremal": "incident_chord_extremal",
+        "xe2_no_cycle_with_incident_chords": "no_cycle_with_incident_chords"
+      },
+      "certificate": "Extremal.migration.genuine_cycle.xe2_incident_chord_extremal_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_767_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_767_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.erdos_767_statement",
+      "substitutions": {
+        "xe2_incident_chord_extremal": "incident_chord_extremal"
+      },
+      "certificate": "Extremal.migration.genuine_cycle.erdos_767_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "Extremal.migration.genuine_cycle.erdos_767_statement_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_no_cycle_with_incident_chords",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_no_cycle_with_incident_chords",
+      "frozen_path": "extremal-graph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Original.no_cycle_with_incident_chords",
+      "substitutions": {
+        "xe2_cycle": "Legacy.xe2_cycle",
+        "xe2_incident_cycle_chord_count": "Extremal.migration.consecutive_in_cycle.XE2Legacy.incident_cycle_chord_count",
+        "xe2_no_cycle_with_incident_chords": "no_cycle_with_incident_chords"
+      },
+      "certificate": "Extremal.migration.genuine_cycle.xe2_no_cycle_with_incident_chords_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_incident_chord_extremal",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_incident_chord_extremal",
+      "frozen_path": "extremal-graph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Original.incident_chord_extremal",
+      "substitutions": {
+        "xe2_incident_chord_extremal": "incident_chord_extremal",
+        "xe2_no_cycle_with_incident_chords": "no_cycle_with_incident_chords"
+      },
+      "certificate": "Extremal.migration.genuine_cycle.xe2_incident_chord_extremal_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_767_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_767_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Original.erdos_767_statement",
+      "substitutions": {
+        "xe2_incident_chord_extremal": "incident_chord_extremal"
+      },
+      "certificate": "Extremal.migration.genuine_cycle.erdos_767_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X113.x113_is_cycle",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "x113_is_cycle",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.x113_is_cycle",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.genuine_cycle.x113_is_cycle_compat",
+      "live_unfolds_to": "seq_cycle (--) c"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.XE1.xe1_rel_cycle",
+      "path": "graph-theory-misc/theories/conjectures/XE1.v",
+      "name": "xe1_rel_cycle",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.xe1_rel_cycle",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.genuine_cycle.xe1_rel_cycle_compat",
+      "live_unfolds_to": "seq_cycle r c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X113.x113_has_k_distant_cycles",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "x113_has_k_distant_cycles",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "X113Legacy.has_k_distant_cycles",
+      "substitutions": {
+        "x113_has_k_distant_cycles": "has_k_distant_cycles",
+        "x113_is_cycle": "Legacy.x113_is_cycle"
+      },
+      "certificate": "GTMisc.migration.genuine_cycle.x113_has_k_distant_cycles_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X113.x113_is_forest_after",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "x113_is_forest_after",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "X113Legacy.is_forest_after",
+      "substitutions": {
+        "x113_is_cycle": "Legacy.x113_is_cycle",
+        "x113_is_forest_after": "is_forest_after"
+      },
+      "certificate": "GTMisc.migration.genuine_cycle.x113_is_forest_after_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X113.coarse_erdos_posa_cycles_forest_statement",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "coarse_erdos_posa_cycles_forest_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "X113Legacy.coarse_erdos_posa_cycles_forest_statement",
+      "substitutions": {
+        "x113_has_k_distant_cycles": "has_k_distant_cycles",
+        "x113_is_forest_after": "is_forest_after"
+      },
+      "certificate": "GTMisc.migration.genuine_cycle.coarse_erdos_posa_cycles_forest_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "GTMisc.migration.genuine_cycle.coarse_erdos_posa_cycles_forest_statement_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X113.x113_has_k_distant_cycles",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "x113_has_k_distant_cycles",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "X113Original.has_k_distant_cycles",
+      "substitutions": {
+        "x113_has_k_distant_cycles": "has_k_distant_cycles",
+        "x113_is_cycle": "Legacy.x113_is_cycle",
+        "x113_pairwise_distant_cycles": "GTMisc.migration.path_vertices.X113Legacy.pairwise_distant_cycles"
+      },
+      "certificate": "GTMisc.migration.genuine_cycle.x113_has_k_distant_cycles_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X113.x113_is_forest_after",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "x113_is_forest_after",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "X113Original.is_forest_after",
+      "substitutions": {
+        "x113_is_cycle": "Legacy.x113_is_cycle",
+        "x113_is_forest_after": "is_forest_after",
+        "x113_path_vertices": "GTMisc.migration.path_vertices.Legacy.x113_path_vertices"
+      },
+      "certificate": "GTMisc.migration.genuine_cycle.x113_is_forest_after_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X113.coarse_erdos_posa_cycles_forest_statement",
+      "path": "graph-theory-misc/theories/conjectures/X113.v",
+      "name": "coarse_erdos_posa_cycles_forest_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "X113Original.coarse_erdos_posa_cycles_forest_statement",
+      "substitutions": {
+        "x113_has_k_distant_cycles": "has_k_distant_cycles",
+        "x113_is_forest_after": "is_forest_after"
+      },
+      "certificate": "GTMisc.migration.genuine_cycle.coarse_erdos_posa_cycles_forest_statement_original_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.XE1.xe1_all_small_odd_coprime_cycles",
+      "path": "graph-theory-misc/theories/conjectures/XE1.v",
+      "name": "xe1_all_small_odd_coprime_cycles",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "XE1Legacy.all_small_odd_coprime_cycles",
+      "substitutions": {
+        "xe1_all_small_odd_coprime_cycles": "all_small_odd_coprime_cycles",
+        "xe1_rel_cycle": "Legacy.xe1_rel_cycle"
+      },
+      "certificate": "GTMisc.migration.genuine_cycle.xe1_all_small_odd_coprime_cycles_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.XE1.erdos_883_statement",
+      "path": "graph-theory-misc/theories/conjectures/XE1.v",
+      "name": "erdos_883_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/genuine_cycle.v",
+      "frozen": "XE1Legacy.erdos_883_statement",
+      "substitutions": {
+        "xe1_all_small_odd_coprime_cycles": "all_small_odd_coprime_cycles"
+      },
+      "certificate": "GTMisc.migration.genuine_cycle.erdos_883_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.XE2.xe2_directed_cycle",
+      "path": "digraph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_directed_cycle",
+      "frozen_path": "digraph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.xe2_directed_cycle",
+      "substitutions": {},
+      "certificate": "Digraph.migration.genuine_cycle.xe2_directed_cycle_compat",
+      "live_unfolds_to": "seq_cycle r c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.XE2.xe2_acyclic_rel",
+      "path": "digraph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_acyclic_rel",
+      "frozen_path": "digraph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.acyclic_rel",
+      "substitutions": {
+        "xe2_acyclic_rel": "acyclic_rel",
+        "xe2_directed_cycle": "Legacy.xe2_directed_cycle"
+      },
+      "certificate": "Digraph.migration.genuine_cycle.xe2_acyclic_rel_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.XE2.xe2_orientation_stays_acyclic_after_one_reversal",
+      "path": "digraph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_orientation_stays_acyclic_after_one_reversal",
+      "frozen_path": "digraph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.orientation_stays_acyclic_after_one_reversal",
+      "substitutions": {
+        "xe2_acyclic_rel": "acyclic_rel",
+        "xe2_orientation_stays_acyclic_after_one_reversal": "orientation_stays_acyclic_after_one_reversal"
+      },
+      "certificate": "Digraph.migration.genuine_cycle.xe2_orientation_stays_acyclic_after_one_reversal_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.XE2.erdos_1006_statement",
+      "path": "digraph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_1006_statement",
+      "frozen_path": "digraph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.erdos_1006_statement",
+      "substitutions": {
+        "xe2_orientation_stays_acyclic_after_one_reversal": "orientation_stays_acyclic_after_one_reversal"
+      },
+      "certificate": "Digraph.migration.genuine_cycle.erdos_1006_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/consecutive_in_cycle.v#XE1Legacy.odd_cycle_with_diagonals": "B4 per-row snapshot: family consecutive-in-cycle (B4) froze its diagonal count but kept the live xe1_cycle, which after B10 unfolds to seq_cycle. Kept unchanged; B4's xe1_odd_cycle_with_diagonals_compat stays true. The complete chain before B4 and B10 is Chromatic.migration.genuine_cycle.XE1Original.odd_cycle_with_diagonals, certified by xe1_odd_cycle_with_diagonals_original_compat.",
+    "chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_1091_statement": "A5 per-row snapshot: family subgraph-of (A5) froze only its subgraph helper in #1091, so this copy still calls the live xe1_odd_cycle_with_diagonals, which after B10 reaches seq_cycle. Kept unchanged; A5's own XE2Original.erdos_1091 also still reaches the live xe1_cycle through B4's diagonal copy. The complete pre-A5, pre-B4, pre-B10 row is Chromatic.migration.genuine_cycle.XE2Original.erdos_1091_statement, certified by erdos_1091_statement_original_compat.",
+    "chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_58_statement": "A5 per-row snapshot: A5 froze only its subgraph helper in #58, so this copy still calls the live xe2_odd_cycle_lengths_bounded, which after B10 reaches seq_cycle. Kept unchanged; the complete pre-A5, pre-B10 row is Chromatic.migration.genuine_cycle.XE2Original.erdos_58_statement, certified by erdos_58_statement_original_compat.",
+    "cycle-theory/theories/migration/consecutive_in_cycle.v#X9Legacy.min_degree_three_linearly_many_chords_cycle_statement": "B4 per-row snapshot: B4 froze X9's chord count but kept the live x9_genuine_cycle, which after B10 unfolds to seq_cycle. Kept unchanged; the complete pre-B4, pre-B10 row is Cycle.migration.genuine_cycle.X9Original.min_degree_three_linearly_many_chords_cycle_statement, certified by min_degree_three_linearly_many_chords_cycle_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/consecutive_in_cycle.v#XE2Legacy.no_cycle_with_incident_chords": "B4 per-row snapshot: B4 froze #767's incident chord count but kept the live xe2_cycle, which after B10 unfolds to seq_cycle. Kept unchanged; the complete pre-B4, pre-B10 chain and row are Extremal.migration.genuine_cycle.XE2Original, certified by the three *_original_compat theorems. x4_edge_count stays live there: the A7/B10 composition of #767 belongs to whichever family integrates second.",
+    "graph-theory-misc/theories/migration/path_vertices.v#X113Legacy.has_k_distant_cycles": "B1 per-row snapshot: family path-vertices (B1) froze X113's vertex set and pairwise distance but kept the live x113_is_cycle, which after B10 unfolds to seq_cycle. Kept unchanged; the complete pre-B1, pre-B10 chain is GTMisc.migration.genuine_cycle.X113Original.has_k_distant_cycles, certified by x113_has_k_distant_cycles_original_compat.",
+    "graph-theory-misc/theories/migration/path_vertices.v#X113Legacy.is_forest_after": "B1 per-row snapshot: B1 froze X113's vertex set but kept the live x113_is_cycle, which after B10 unfolds to seq_cycle. Kept unchanged; the complete pre-B1, pre-B10 chain is GTMisc.migration.genuine_cycle.X113Original.is_forest_after, certified by x113_is_forest_after_original_compat; the complete row is X113Original.coarse_erdos_posa_cycles_forest_statement."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe1_cycle",
+      "note": "Cross-file chains: XE2's odd cycle length and separated cycle length predicates read XE1's cycle; frozen as XE2Legacy.odd_cycle_lengths_bounded / cycle_lengths_separated over Legacy.xe1_cycle."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe1_odd_cycle_with_diagonals",
+      "note": "Cross-file chain of #1091; frozen as XE1Legacy.odd_cycle_with_diagonals (per-row) and XE1Original.odd_cycle_with_diagonals (complete history)."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe1_cycle",
+      "note": "Cross-file chains of #641, #71, #752, #815 (cycle lengths); frozen as XE2Legacy.cycle_lengths / all_cycle_lengths_in over Legacy.xe1_cycle. The unused xe2_distinct_cycle_lengths_at_least stays live and converts."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_cycle",
+      "note": "Proof consumer: X212 grounding lemmas; theorem types unchanged, two proofs gain an unfold of seq_cycleb (x212_cycle_c3, x212_cycle_not2)."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_longest_cycle",
+      "note": "Proof consumer: x212_longest_cycle_c3; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_cycle_within",
+      "note": "Proof consumer: x212_no_cycle_within_K1; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_cyclically_edge_connected",
+      "note": "Proof consumer: cyclic edge connectivity grounding; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "note": "Proof consumer: X212 row grounding; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "bondy_linear_cycle_cubic_statement",
+      "note": "Proof consumer: X212 row grounding; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "birmele_long_cycle_transversal_statement",
+      "note": "Proof consumer: X212 row grounding; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_X212.v",
+      "name": "x212_cycle",
+      "note": "Proof consumer: x212_longest_cycle_equiv_x10 unfolds x212_cycle; proof unchanged (andP views see through seq_cycleb)."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_X212.v",
+      "name": "x212_longest_cycle",
+      "note": "Proof consumer: the X212/X10 longest-cycle bridge; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_X212.v",
+      "name": "smith_two_longest_cycles_statement",
+      "note": "Proof consumer: implication edge from Smith's row; unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/vocabulary_misc.v",
+      "name": "x113_is_cycle",
+      "note": "Proof consumer: x113_is_cycleE and x113_is_cycle_equiv_xe1_rel_cycle keep their statements; both hold by conversion."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/vocabulary_misc.v",
+      "name": "xe1_rel_cycle",
+      "note": "Proof consumer: x113_is_cycle_equiv_xe1_rel_cycle; unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTBase.common.hamiltonian_cycle",
+      "path": "base/theories/common.v",
+      "name": "hamiltonian_cycle",
+      "note": "Hamiltonian cycle: ucycleb with size = #|G|, no 2 < size guard; untouched"
+    },
+    {
+      "qualified": "Hamilton.conjectures.U2.hamiltonian_cycle",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "hamiltonian_cycle",
+      "note": "Hamiltonian cycle; untouched"
+    },
+    {
+      "qualified": "Hom.conjectures.U3.longest_cycle",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "longest_cycle",
+      "note": "longest cycle (enriched); untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.X10.x10_rainbow_cycle",
+      "path": "cycle-theory/theories/conjectures/X10.v",
+      "name": "x10_rainbow_cycle",
+      "note": "rainbow cycle (enriched); untouched"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X91.x91_induced_cycle",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_induced_cycle",
+      "note": "induced cycle (enriched); untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.X9.x9_cycle_edges",
+      "path": "cycle-theory/theories/conjectures/X9.v",
+      "name": "x9_cycle_edges",
+      "note": "raw cyclic edge list; untouched"
+    },
+    {
+      "qualified": "Cycle.conjectures.X212.x212_cycle_vertices",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cycle_vertices",
+      "note": "raw cycle vertex set; untouched"
+    }
+  ]
+}

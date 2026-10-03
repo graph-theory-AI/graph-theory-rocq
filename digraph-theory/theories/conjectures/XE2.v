@@ -13,7 +13,7 @@ Definition xe2_uses_only_edges (G : sgraph) (r : rel G) : Prop :=
   forall x y : G, r x y -> x -- y.
 
 Definition xe2_directed_cycle (V : finType) (r : rel V) (c : seq V) : Prop :=
-  ucycle r c /\ 2 < size c.
+  seq_cycle r c.
 
 Definition xe2_acyclic_rel (V : finType) (r : rel V) : Prop :=
   forall c : seq V, ~ xe2_directed_cycle r c.

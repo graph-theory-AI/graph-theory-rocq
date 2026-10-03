@@ -18,7 +18,7 @@ Definition xe1_cycle_edges (G : sgraph) (c : seq G) : {set {set G}} :=
              ((p.2, p.1) \in zip c (rot 1 c)))]]].
 
 Definition xe1_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\ 2 < size c.
+  seq_cycle (--) c.
 
 Definition xe1_cycle_or_edge_piece (G : sgraph) (P : {set {set G}}) : Prop :=
   (exists c : seq G, xe1_cycle c /\ P = xe1_cycle_edges c) \/
