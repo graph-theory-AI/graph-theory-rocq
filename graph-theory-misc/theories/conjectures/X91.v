@@ -1,7 +1,7 @@
 (** * GTMisc.conjectures.X91 -- v2 avoidable path row *)
 
 From GTBase Require Export base.
-From GTBase Require Import induced_paths.
+From GTBase Require Import induced_paths induced_cycles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -20,12 +20,11 @@ Definition x91_induced_path (G : sgraph) (p : seq G) : Prop := nonempty_induced_
 Definition x91_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : Prop :=
   seq_cyclic_consecutive c u v.
 
-Definition x91_induced_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\
-  3 <= size c /\
-  forall u v : G,
-    u \in c -> v \in c -> u -- v -> u != v ->
-    x91_consecutive_in_cycle c u v.
+(** Since the B23 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_cycles.chordless_cycle] (its [2 < size c] is the same term as [3 <= size c]);
+    the former body (a redundant [u != v] premise after the edge, the consecutiveness as a
+    proposition) is frozen and certified equivalent in theories/migration/induced_cycles.v. *)
+Definition x91_induced_cycle (G : sgraph) (c : seq G) : Prop := chordless_cycle c.
 
 Definition x91_sequence_contained (G : sgraph) (p c : seq G) : Prop :=
   forall v : G, v \in p -> v \in c.

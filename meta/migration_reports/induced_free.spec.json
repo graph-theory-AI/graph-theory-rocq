@@ -2,7 +2,7 @@
   "family": "induced-free",
   "canonical_name": "GTBase.common.induced_free",
   "canonical_short_name": "induced_free",
-  "relation": "logical equivalence, not convertibility: the local copies negate inhabited (induced S ≃ H), the canonical negates diso (induced S) H; certified by GTBase.common.induced_free_inhabited",
+  "relation": "logical equivalence, not convertibility: the local copies negate inhabited (induced S \u2243 H), the canonical negates diso (induced S) H; certified by GTBase.common.induced_free_inhabited",
   "baseline_commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
   "namespaces": {
     "base": "GTBase",
@@ -36,7 +36,7 @@
     "GTMisc.migration.simple_edges.x102_statement_rhs_compat"
   ],
   "summary": [
-    "Batch A, family A1 (`induced_free`). Ten conjecture-local helpers, all `forall S : {set G}, ~ inhabited (induced S ≃ H)` (X41 as `x41_induced_H_free H G`), now unfold to `GTBase.common.induced_free G H`; the X41 alias keeps its `(H G)` argument order. Every frozen body below is checked against the source text at its commit, and every certificate theorem is kernel-checked by `meta/check_library_migration.py` (Print Assumptions clean).",
+    "Batch A, family A1 (`induced_free`). Ten conjecture-local helpers, all `forall S : {set G}, ~ inhabited (induced S \u2243 H)` (X41 as `x41_induced_H_free H G`), now unfold to `GTBase.common.induced_free G H`; the X41 alias keeps its `(H G)` argument order. Every frozen body below is checked against the source text at its commit, and every certificate theorem is kernel-checked by `meta/check_library_migration.py` (Print Assumptions clean).",
     "",
     "Ten statements are affected (X41, X42, X43, X56, X57, X58, X61, X102, X118, X120), three of them through an intermediate helper (`x57_sparse_strong_eh_property`, `x61_induced_saturated`, `x102_free_class_tree_alpha_bounded`). Each frozen statement resolves through frozen copies along the whole affected chain. Declarations outside the chain resolve through their live definitions, which this migration does not change. Three of those were redirected earlier by M1: `x43_edge_set`, `x60_edge_set` and `x102_edge_set`. For X61 and X102 an end-to-end certificate also freezes M1's edge-set presentation, so it relates the pre-M1, pre-A1 statement body to the live one. For X43, M1 left only the alias-level certificate `Chromatic.migration.simple_edges.x43_edge_set_compat`: the dependent transport through `x43_line_graph` is not certified at statement level, by M1 or here.",
     "",
@@ -474,7 +474,8 @@
     "minor-theory/theories/migration/bag_decompositions.v#Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement": "C13 immediate bag-family snapshot intentionally retains this earlier family vocabulary; C13 supplies the complete combined Original separately. The earlier certificate bodies and frozen arrays are unchanged.",
     "graph-theory-misc/theories/migration/bag_decompositions.v#Legacy.x102_free_class_tree_alpha_bounded": "C13 immediate bag-family snapshot intentionally retains this earlier family vocabulary; C13 supplies the complete combined Original separately. The earlier certificate bodies and frozen arrays are unchanged.",
     "graph-theory-misc/theories/migration/subcubic.v#X102Legacy.bounded_tree_independence_forbidden_family_statement": "A14 snapshot: A14 froze this row over its own frozen multiclaw and line-graph chains but kept the live x102_free_class_tree_alpha_bounded (which reaches x102_induced_free) of this family. Kept unchanged; the complete row is GTMisc.migration.subcubic.X102Original.bounded_tree_independence_forbidden_family_statement, certified by bounded_tree_independence_forbidden_family_statement_original_compat, which composes C13's complete tree-alpha class over this family's frozen Legacy.x102_induced_free.",
-    "extremal-graph-theory/theories/migration/stable_sets.v#X56Legacy.c8_complement_c8_erdos_hajnal_statement": "A20 snapshot: A20 froze this row over its own frozen homogeneous set but kept the live x56_induced_free of this family (and A6's live complement). Kept unchanged; the complete row is Extremal.migration.stable_sets.X56Original.c8_complement_c8_erdos_hajnal_statement, certified by c8_complement_c8_erdos_hajnal_statement_original_compat, which composes this family's frozen Legacy.x56_induced_free (through A6's complete-row certificate)."
+    "extremal-graph-theory/theories/migration/stable_sets.v#X56Legacy.c8_complement_c8_erdos_hajnal_statement": "A20 snapshot: A20 froze this row over its own frozen homogeneous set but kept the live x56_induced_free of this family (and A6's live complement). Kept unchanged; the complete row is Extremal.migration.stable_sets.X56Original.c8_complement_c8_erdos_hajnal_statement, certified by c8_complement_c8_erdos_hajnal_statement_original_compat, which composes this family's frozen Legacy.x56_induced_free (through A6's complete-row certificate).",
+    "minor-theory/theories/migration/induced_cycles.v#X42Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement": "B23 per-row snapshot: family induced-cycle (B23) froze only its induced-cycle / hole helpers and chains in this object (even_hole_k4_diamond_free_bounded_treewidth_statement), so this copy still calls the live x42_induced_free, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B23's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B23's spec."
   },
   "cross_module_consumers": [
     {

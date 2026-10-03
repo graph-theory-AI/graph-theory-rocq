@@ -23,6 +23,7 @@
     meta/migration_reports/consecutive_in_cycle.md. *)
 
 From GTBase Require Import base.
+From GTBase Require induced_cycles.
 From GTMisc.conjectures Require Import X91.
 From GTMisc.migration Require consecutive_in_path.
 
@@ -86,26 +87,49 @@ End X91Original.
 
 (** ** Certificates *)
 
+(** B23 (2026-10-03): the live holes / induced cycles are now aliases of GTBase.induced_cycles, which
+    states chordlessness without a distinctness premise and with the Boolean cyclic consecutiveness.
+    The certificates below that reach them are therefore proved through its bridges instead of by
+    conversion; their statements and every frozen body are unchanged. *)
+
 Lemma x91_consecutive_in_cycle_compat (G : sgraph) (c : seq G) (u v : G) :
   Legacy.x91_consecutive_in_cycle c u v = x91_consecutive_in_cycle c u v.
 Proof. by []. Qed.
 
 Lemma x91_induced_cycle_compat (G : sgraph) (c : seq G) :
   X91CycleLegacy.induced_cycle c <-> x91_induced_cycle c.
-Proof. exact: iff_refl. Qed.
+Proof.
+rewrite /x91_induced_cycle; split=> -[uc [sz ch]].
+- split=> //; split=> //; apply/induced_cycles.cyclic_chordless_prop_edge_neq.
+  move=> u v uc' vc' uv nuv; exact: (ch u v uc' vc' uv nuv).
+- split=> //; split=> // u v uc' vc' uv nuv.
+  exact: (proj2 (induced_cycles.cyclic_chordless_prop_edge_neq c) ch u v uc' vc' uv nuv).
+Qed.
 
 Lemma x91_avoidable_path_compat (G : sgraph) (p : seq G) :
   X91Legacy.avoidable_path p <-> x91_avoidable_path p.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> -[ip h]; split=> // u v ip'; have [c [hc sc]] := h u v ip'; exists c; split=> //;
+  by apply/x91_induced_cycle_compat.
+Qed.
 
 Lemma avoidable_path_or_pk_free_statement_compat :
   X91Legacy.avoidable_path_or_pk_free_statement <-> avoidable_path_or_pk_free_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> h k k0 G; case: (h k k0 G) => [pk | [p [sp ap]]];
+  first [by left | by right; exists p; split=> //; apply/x91_avoidable_path_compat].
+Qed.
 
 Lemma x91_avoidable_path_original_compat (G : sgraph) (p : seq G) :
   X91Original.avoidable_path p <-> x91_avoidable_path p.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> -[ip h]; split=> // u v ip'; have [c [hc sc]] := h u v ip'; exists c; split=> //;
+  by apply/x91_induced_cycle_compat.
+Qed.
 
 Lemma avoidable_path_or_pk_free_statement_original_compat :
   X91Original.avoidable_path_or_pk_free_statement <-> avoidable_path_or_pk_free_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> h k k0 G; case: (h k k0 G) => [pk | [p [sp ap]]];
+  first [by left | by right; exists p; split=> //; apply/x91_avoidable_path_original_compat].
+Qed.

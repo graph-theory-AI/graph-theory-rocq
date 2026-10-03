@@ -1,7 +1,7 @@
 (** * Minor.conjectures.X27 -- v2 bounded treewidth row *)
 
 From GTBase Require Export base.
-From GTBase Require Import bag_decompositions.
+From GTBase Require Import bag_decompositions induced_cycles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -22,11 +22,10 @@ Definition x27_treewidth_at_most (G : sgraph) (k : nat) : Prop :=
 Definition x27_consecutive_in_cycle (G : sgraph) (c : seq G) (x y : G) : bool :=
   seq_cyclic_consecutiveb c x y.
 
-Definition x27_hole (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\ 3 < size c /\
-  forall x y : G,
-    x \in c -> y \in c -> x -- y -> x != y ->
-    x27_consecutive_in_cycle c x y.
+(** Since the B23 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_cycles.hole]; the former body (a redundant [x != y] premise after the edge) is
+    frozen and certified equivalent in theories/migration/induced_cycles.v. *)
+Definition x27_hole (G : sgraph) (c : seq G) : Prop := hole c.
 
 Definition x27_even_hole_free (G : sgraph) : Prop :=
   forall c : seq G,
