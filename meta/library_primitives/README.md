@@ -70,6 +70,23 @@ Record intermediate objects as `kind: chain`, using registered earlier-family
 certificates when reusing an existing freeze. Never refresh a pin to silence a
 failure or label an existing corpus row `non_corpus`.
 
+An explicitly reviewed complete non-corpus proposition whose name lacks
+`_statement` can be listed in its report specification's optional
+`additional_statements` array of qualified names. Each must be reached from the
+migrated sources at both baseline and current source, outside both manifests,
+and have exactly one `kind: statement`, `non_corpus: true` frozen mapping and a
+complete iff certificate. Its source and project must be regular, build-listed
+and owned by the recorded namespace at the immutable full baseline commit and
+in the current tree. The initial format accepts only top-level
+`Definition NAME : Prop := ...` outside Modules and Sections; parameterized or
+inferred signatures fail closed. Source helpers cannot be enrolled this way.
+The complete intermediary path must also be frozen. Kernel checks require the
+unapplied frozen/live constants to have type `Prop`, the exact complete iff,
+and zero assumptions for every certificate. This field grants no axiom
+exception and cannot remove an ordinarily discovered statement. Independent
+review supplies the semantic classification as a statement; a nullary `Prop`
+type alone cannot distinguish a statement from a proposition used as a helper.
+
 The registered theorem gate recognizes `ClassicalLemmas` as owned by
 `classical-lemmas`; it forces the same fresh local source closure as other
 packages. Classical source/project changes rebuild that package and its Packing
