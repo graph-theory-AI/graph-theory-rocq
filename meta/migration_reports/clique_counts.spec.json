@@ -300,18 +300,6 @@
       "path": "graph-theory-misc/theories/conjectures/U13.v",
       "name": "is_max_clique",
       "note": "a predicate on vertex sets (a clique of size omega), not a count"
-    },
-    {
-      "qualified": "Chromatic.conjectures.X181.x181_maximal_clique",
-      "path": "chromatic-theory/theories/conjectures/X181.v",
-      "name": "x181_maximal_clique",
-      "note": "inclusion-maximal Boolean clique predicate with 1 < #|S|, not a count"
-    },
-    {
-      "qualified": "Packing.conjectures.XE1.xe1_maximal_clique",
-      "path": "packing-theory/theories/conjectures/XE1.v",
-      "name": "xe1_maximal_clique",
-      "note": "inclusion-maximal clique predicate, not a count"
     }
   ],
   "kernel_evidence": "Print Assumptions of every certificate and GTBase.clique_counts API theorem, exact types of the frozen and live counts and rows, strict dependency closures of the frozen rows (current and complete), and the types of every declaration in the reverse dependency closure of D2tur/X4/X88/X174/X175 at the baseline (including the adapted grounding_D2tur), through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A17-clique-counts/ (outside the repository)"

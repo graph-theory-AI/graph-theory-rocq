@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "family": "maximal-clique",
+  "modules": {
+    "GTBase.maximal_cliques": {
+      "path": "base/theories/maximal_cliques.v",
+      "overrides": {
+        "maximal_clique": {
+          "verdict": "FAITHFUL",
+          "note": "Inclusion-maximal clique: S is a clique and no proper superset is a clique (maxset cliqueb). Not maximum cardinality; the empty set qualifies only in K_0, and singletons are maximal exactly at isolated vertices."
+        },
+        "nontrivial_maximal_clique": {
+          "verdict": "FAITHFUL",
+          "note": "Inclusion-maximal clique with at least two vertices (1 < #|S|); in the disjoint K_2 + K_3 both sides qualify while only K_3 is maximum."
+        }
+      },
+      "machine_evidence": [
+        "maximal_cliqueP",
+        "maximal_cliqueE",
+        "nontrivial_maximal_cliqueE",
+        "maximal_clique_clique",
+        "maximal_clique_proper",
+        "maximal_clique_exists",
+        "nontrivial_maximal_clique_maximal"
+      ]
+    }
+  }
+}
