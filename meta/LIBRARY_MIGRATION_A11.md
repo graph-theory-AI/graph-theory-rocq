@@ -19,8 +19,9 @@ comments.
 - **Complete rows.** #85 composes the frozen bound with A5's frozen containment. #545/#566/#567/#568/#570
   compose the frozen no-isolated bound with A7's frozen count and sparse-set chain, A6's frozen Ramsey number
   and B4's frozen h5. X38 composes A10's frozen raw incidence count and degree classes with the frozen bound,
-  M1 alias live as in A10 (no pre-M1 claim). Each converts to the earlier family's certificate. Earlier
-  snapshots are documented reciprocally; no older frozen body changes.
+  M1 alias live as in A10 (no pre-M1 claim). Cycle #752 (follow-up on a union with reviewed B10 `e0338c4`)
+  composes the frozen bound with B10's frozen cycle lengths. Each converts to the earlier family's certificate.
+  Earlier snapshots are documented reciprocally; no older frozen body changes.
 - **Distinct.** Exact attained minima (Extremal XE2, X227), subcubic and cubic contracts, scaled bounds
   (X30 logarithmic, D7), directed degeneracy, hypergraph coverage and restricted-set upper bounds stay distinct.
 - **Reproduction.** Build the packages, the Digraph targets `chi_bounded`/`classic_core` and the atlas. Run

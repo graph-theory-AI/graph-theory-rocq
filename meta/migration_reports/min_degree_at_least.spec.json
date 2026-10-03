@@ -27,7 +27,8 @@
     "extremal-graph-theory/theories/migration/complement.v",
     "extremal-graph-theory/theories/migration/edge_count.v",
     "extremal-graph-theory/theories/migration/consecutive_in_cycle.v",
-    "graph-theory-misc/theories/migration/incidence_degree.v"
+    "graph-theory-misc/theories/migration/incidence_degree.v",
+    "cycle-theory/theories/migration/genuine_cycle.v"
   ],
   "extra_certificates": [
     "GTBase.base.min_degree_at_least0",
@@ -45,7 +46,7 @@
   "summary": [
     "Batch A, family A11 (minimum-degree lower bounds). GTBase.base.min_degree_at_least G d := forall v : G, d <= #|N(v)| is the universal lower bound beside Delta/regular, not an attained minimum: K0 and an empty induced subgraph satisfy every bound and no nonemptiness is added. Ten local copies (X203, Cycle XE2, X13, X30, XE1, X38, X74, X211 min_degree_geq, X135, X47) convert to it; X13's induced adapter is min_degree_at_least (induced S) d on the supplied S (subtype kept); XE1's no-isolated-vertices forall v, 0 < #|N(v)| is the bound 1 (min_degree_at_least1P).",
     "",
-    "Seventeen rows are frozen verbatim at 9abf440 with two chains (X13 bipartite induced bound, XE1 C4-forcing minimum degree); whole quantifiers, natural subtraction, Ramsey witnesses, growth hypotheses and exact arithmetic bounds are unchanged, and X203's empty-graph defect and blocked status are kept. Seven complete Originals: #85 (frozen bound with A5's frozen containment, through a new original chain), #545/#566/#567/#568/#570 (frozen no-isolated bound with A7's frozen count and #566 sparse-set chain, A6's frozen Ramsey number and B4's frozen h5) and X38 (A10's frozen raw incidence count and degree classes with the frozen bound; the M1 alias stays live as in A10, no pre-M1 claim). Each complete row converts to the earlier family's complete or per-row certificate, whose bridge it reuses. Earlier A5, A6, A7, B4 and A10 snapshots that keep a live A11 bound are documented here, and A11's per-row copies are documented reciprocally in their specs. Exact minima, subcubic/cubic, scaled, directed and hypergraph contracts stay distinct."
+    "Seventeen rows are frozen verbatim at 9abf440 with two chains (X13 bipartite induced bound, XE1 C4-forcing minimum degree); whole quantifiers, natural subtraction, Ramsey witnesses, growth hypotheses and exact arithmetic bounds are unchanged, and X203's empty-graph defect and blocked status are kept. Eight complete Originals: #85 (frozen bound with A5's frozen containment, through a new original chain), #545/#566/#567/#568/#570 (frozen no-isolated bound with A7's frozen count and #566 sparse-set chain, A6's frozen Ramsey number and B4's frozen h5) Cycle #752 (frozen bound with B10's frozen cycle lengths over its frozen genuine cycles; follow-up on the B10 union) and X38 (A10's frozen raw incidence count and degree classes with the frozen bound; the M1 alias stays live as in A10, no pre-M1 claim). Each complete row converts to the earlier family's complete or per-row certificate, whose bridge it reuses. Earlier A5, A6, A7, B4 and A10 snapshots that keep a live A11 bound are documented here, and A11's per-row copies are documented reciprocally in their specs. Exact minima, subcubic/cubic, scaled, directed and hypergraph contracts stay distinct."
   ],
   "frozen": [
     {
@@ -93,6 +94,20 @@
         "xe2_min_degree_at_least": "Legacy.xe2_min_degree_at_least"
       },
       "certificate": "Cycle.migration.min_degree_at_least.erdos_752_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.XE2.erdos_752_statement",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "erdos_752_statement",
+      "frozen_path": "cycle-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE2Original.erdos_752_statement",
+      "substitutions": {
+        "xe2_min_degree_at_least": "Legacy.xe2_min_degree_at_least",
+        "xe2_cycle_lengths": "B10.XE2Legacy.cycle_lengths"
+      },
+      "certificate": "Cycle.migration.min_degree_at_least.erdos_752_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
     },
     {
       "kind": "source",
@@ -629,6 +644,34 @@
       "certificate": "GTMisc.migration.incidence_degree.x38_degree_class_size_compat",
       "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635",
       "note": "A10 (incidence degree) frozen degree classes, reused unchanged by X38Original"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.XE1.xe1_cycle",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "xe1_cycle",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.xe1_cycle",
+      "substitutions": {},
+      "certificate": "Cycle.migration.genuine_cycle.xe1_cycle_compat",
+      "live_unfolds_to": "seq_cycle (--) c",
+      "commit": "00d6bb3a80759b365fffab282d47603510bf839e",
+      "note": "B10 (genuine cycles) frozen copy, reached by XE2Original.erdos_752_statement through B10.XE2Legacy.cycle_lengths"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.XE2.xe2_cycle_lengths",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_cycle_lengths",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.cycle_lengths",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_cycle_lengths": "cycle_lengths"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.xe2_cycle_lengths_compat",
+      "commit": "00d6bb3a80759b365fffab282d47603510bf839e",
+      "note": "B10 (genuine cycles) frozen cycle lengths, reused unchanged by XE2Original.erdos_752_statement"
     }
   ],
   "known_stale_snapshots": {
@@ -660,7 +703,8 @@
     "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_568_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_568_statement, certified by erdos_568_statement_original_compat.",
     "extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_570_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE2Original.erdos_570_statement, certified by erdos_570_statement_original_compat.",
     "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Original.erdos_567_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
-    "graph-theory-misc/theories/migration/incidence_degree.v#X38Legacy.min_degree_spanning_subgraph_small_degree_multiplicity_statement": "A10 snapshot: A10 froze this row over its own frozen helpers but kept the live x38_min_degree_at_least (after A11 GTBase.base.min_degree_at_least G delta, a conversion of the same universal bound). Kept unchanged; the complete row is GTMisc.migration.min_degree_at_least.X38Original.min_degree_spanning_subgraph_small_degree_multiplicity_statement, certified by min_degree_spanning_subgraph_small_degree_multiplicity_statement_original_compat."
+    "graph-theory-misc/theories/migration/incidence_degree.v#X38Legacy.min_degree_spanning_subgraph_small_degree_multiplicity_statement": "A10 snapshot: A10 froze this row over its own frozen helpers but kept the live x38_min_degree_at_least (after A11 GTBase.base.min_degree_at_least G delta, a conversion of the same universal bound). Kept unchanged; the complete row is GTMisc.migration.min_degree_at_least.X38Original.min_degree_spanning_subgraph_small_degree_multiplicity_statement, certified by min_degree_spanning_subgraph_small_degree_multiplicity_statement_original_compat.",
+    "cycle-theory/theories/migration/genuine_cycle.v#XE2Legacy.erdos_752_statement": "B10 snapshot: B10 froze this row over its own frozen cycle lengths but kept the live xe2_min_degree_at_least (after A11 GTBase.base.min_degree_at_least G k, a conversion of the same universal bound). Kept unchanged; the complete row is Cycle.migration.min_degree_at_least.XE2Original.erdos_752_statement, certified by erdos_752_statement_original_compat."
   },
   "cross_module_consumers": [
     {

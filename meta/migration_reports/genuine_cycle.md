@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py genuine_cycle --details /tmp/mi
 
 - Canonical: `GTBase.walks_paths.seq_cycle`.
 - Baseline: `00d6bb3a80759b365fffab282d47603510bf839e`.
-- Scope: 8 helpers, 17 statements, 51 frozen objects, 130 recorded references.
-- Source checks: 436/436 pass; consistent.
+- Scope: 8 helpers, 17 statements, 51 frozen objects, 133 recorded references.
+- Source checks: 437/437 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -35,4 +35,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `GTBase.common.hamiltonian_cycle`, `Hamilton.conjectures.U2.hamiltonian_cycle`, `Hom.conjectures.U3.longest_cycle`, `Cycle.conjectures.X10.x10_rainbow_cycle`, `GTMisc.conjectures.X91.x91_induced_cycle`, `Cycle.conjectures.X9.x9_cycle_edges`, `Cycle.conjectures.X212.x212_cycle_vertices`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/consecutive_in_cycle.v#XE1Legacy.odd_cycle_with_diagonals`, `chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_1091_statement`, `chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_58_statement`, `cycle-theory/theories/migration/consecutive_in_cycle.v#X9Legacy.min_degree_three_linearly_many_chords_cycle_statement`, `extremal-graph-theory/theories/migration/consecutive_in_cycle.v#XE2Legacy.no_cycle_with_incident_chords`, `graph-theory-misc/theories/migration/path_vertices.v#X113Legacy.has_k_distant_cycles`, `graph-theory-misc/theories/migration/path_vertices.v#X113Legacy.is_forest_after`, `extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.incident_chord_extremal`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/consecutive_in_cycle.v#XE1Legacy.odd_cycle_with_diagonals`, `chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_1091_statement`, `chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_58_statement`, `cycle-theory/theories/migration/consecutive_in_cycle.v#X9Legacy.min_degree_three_linearly_many_chords_cycle_statement`, `extremal-graph-theory/theories/migration/consecutive_in_cycle.v#XE2Legacy.no_cycle_with_incident_chords`, `graph-theory-misc/theories/migration/path_vertices.v#X113Legacy.has_k_distant_cycles`, `graph-theory-misc/theories/migration/path_vertices.v#X113Legacy.is_forest_after`, `extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.incident_chord_extremal`, `cycle-theory/theories/migration/min_degree_at_least.v#XE2Legacy.erdos_752_statement`.
