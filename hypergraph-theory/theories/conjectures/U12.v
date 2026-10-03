@@ -40,6 +40,7 @@
     mathcomp vocabulary. *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypergraph_uniformity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -50,7 +51,7 @@ Unset Printing Implicit Defensive.
 
 (** A [k]-uniform hyperedge family: every hyperedge has exactly [k] vertices. *)
 Definition k_uniform (T : finType) (E : {set {set T}}) (k : nat) : Prop :=
-  forall e : {set T}, e \in E -> #|e| = k.
+  uniform_family E k.
 
 (** ================================================================= *)
 (** ** Row 1 — Frankl's union-closed sets conjecture  (OPEN)

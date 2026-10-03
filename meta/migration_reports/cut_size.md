@@ -6,7 +6,7 @@ Full evidence: `python3 meta/migration_report.py cut_size --details /tmp/migrati
 
 - Canonical: `GTBase.common.cut_size`.
 - Baseline: `9de20ca72a0d7c8279ff8861033bfd80ce12a84a`.
-- Scope: 4 helpers, 3 statements, 19 frozen objects, 30 recorded references.
+- Scope: 4 helpers, 3 statements, 19 frozen objects, 35 recorded references.
 - Source checks: 140/140 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
@@ -19,6 +19,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py cut_size --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Hypergraph.conjectures.X209.x209_uniform`.
-
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X76Original.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X78Original.h_free_max_cut_three_fourths_surplus_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X76Original.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X78Original.h_free_max_cut_three_fourths_surplus_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement`, `hypergraph-theory/theories/migration/uniform_hypergraph.v#X209UniformLegacy.x209_is_min_scaled_excess`.

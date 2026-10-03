@@ -1,0 +1,758 @@
+{
+  "family": "uniform-hypergraph",
+  "canonical_name": "GTBase.hypergraph_uniformity.uniform_family",
+  "canonical_short_name": "uniform_family",
+  "relation": "Exact set-family uniformity: over an arbitrary finite vertex type T, every member e of E : {set {set T}} has #|e| = k (Prop), with the Boolean view [forall e in E, #|e| == k] reflected by uniform_familyP; the indexed adapter uniform_incidence inc k := forall i, #|inc i| = k equals uniformity of the image family without injectivity. No nonempty-family, positive-rank, loopless, no-isolated-vertex, carrier-inhabitance or partiteness guard; partite uniformity, complete-uniform/containment predicates and degree regularity are separate contracts.",
+  "baseline_commit": "3be65eed7084abfae36dee74f7117b598325bc4c",
+  "namespaces": {
+    "base": "GTBase",
+    "hypergraph-theory": "Hypergraph",
+    "extremal-graph-theory": "Extremal",
+    "chromatic-theory": "Chromatic"
+  },
+  "certificate_files": [
+    "base/theories/hypergraph_uniformity.v",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+    "extremal-graph-theory/theories/migration/uniform_hypergraph.v",
+    "chromatic-theory/theories/migration/uniform_hypergraph.v"
+  ],
+  "extra_certificates": [
+    "GTBase.hypergraph_uniformity.uniform_familyP",
+    "GTBase.hypergraph_uniformity.uniform_family0",
+    "GTBase.hypergraph_uniformity.uniform_family_set0",
+    "GTBase.hypergraph_uniformity.uniform_family1",
+    "GTBase.hypergraph_uniformity.uniform_familyS",
+    "GTBase.hypergraph_uniformity.uniform_family_rank",
+    "GTBase.hypergraph_uniformity.uniform_family_rank_le",
+    "GTBase.hypergraph_uniformity.uniform_incidence_imageE"
+  ],
+  "downstream_client": "base/theories/examples/hypergraph_uniformity.v",
+  "summary": [
+    "D1 migrates nine conjecture-local uniformity helpers and the public hg_uniform/hg_uniformb onto GTBase.hypergraph_uniformity: uniform_family (Prop), uniform_familyb (Boolean) and the same-body indexed uniform_incidence for U5. Arbitrary finite carriers; no added guard; partite uniformity stays separate.",
+    "Frozen at the C25 baseline: 11 sources, 7 chains (U12 forests/trees, X6 and XE1 extremal wrappers, X209 minimum excess, the natural-valued public hg_turan) and 20 complete current rows, each in a module importing only its own conjecture file. Five complete A9/A10 + D1 Originals (X209, X6 #834, XE2 #833, X108, X225 #01) reuse the frozen cut/degree/dmax modules by aliases: 25 whole-statement iff.",
+    "Statuses, legs, docs, the X209 unused-T' defect, U12 edge connectivity and the opaque X225 dmax witness are unchanged. Public client: base/theories/examples/hypergraph_uniformity.v."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.U12.k_uniform",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "k_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.k_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.k_uniform_compat",
+      "live_unfolds_to": "uniform_family E k"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X104.x104_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X104.v",
+      "name": "x104_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x104_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x104_uniform_compat",
+      "live_unfolds_to": "uniform_family E r"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X108.x108_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x108_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x108_uniform_compat",
+      "live_unfolds_to": "uniform_family E r"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X119.x119_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x119_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x119_uniform_compat",
+      "live_unfolds_to": "uniform_family E r"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X137.x137_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X137.v",
+      "name": "x137_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x137_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x137_uniform_compat",
+      "live_unfolds_to": "uniform_family F r"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X209.x209_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "x209_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x209_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x209_uniform_compat",
+      "live_unfolds_to": "uniform_family E k"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X6.x6_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x6_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x6_uniform_compat",
+      "live_unfolds_to": "uniform_family E r"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_uniform",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.hg_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.hg_uniform_compat",
+      "live_unfolds_to": "uniform_family E k"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_uniformb",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_uniformb",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.hg_uniformb",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.hg_uniformb_compat",
+      "live_unfolds_to": "uniform_familyb E k"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_turan",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_turan",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.hg_turan",
+      "substitutions": {
+        "hg_uniformb": "UniformLegacy.hg_uniformb"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.hg_turan_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.U12.k_forest",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "k_forest",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "U12UniformLegacy.k_forest",
+      "substitutions": {
+        "k_uniform": "UniformLegacy.k_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.k_forest_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.U12.k_tree",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "k_tree",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "U12UniformLegacy.k_tree",
+      "substitutions": {
+        "k_forest": "U12UniformLegacy.k_forest"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.k_tree_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.U12.critical_k_forest",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "critical_k_forest",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "U12UniformLegacy.critical_k_forest",
+      "substitutions": {
+        "k_forest": "U12UniformLegacy.k_forest"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.critical_k_forest_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.U12.are_critical_k_forests_tight_statement",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "are_critical_k_forests_tight_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "U12UniformLegacy.are_critical_k_forests_tight_statement",
+      "substitutions": {
+        "critical_k_forest": "U12UniformLegacy.critical_k_forest",
+        "k_tree": "U12UniformLegacy.k_tree"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.are_critical_k_forests_tight_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "turans_problem_for_hypergraphs_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "U12UniformLegacy.turans_problem_for_hypergraphs_statement",
+      "substitutions": {
+        "k_uniform": "UniformLegacy.k_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.turans_problem_for_hypergraphs_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X104.brown_erdos_sos_three_uniform_statement",
+      "path": "hypergraph-theory/theories/conjectures/X104.v",
+      "name": "brown_erdos_sos_three_uniform_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X104UniformLegacy.brown_erdos_sos_three_uniform_statement",
+      "substitutions": {
+        "x104_uniform": "UniformLegacy.x104_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.brown_erdos_sos_three_uniform_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X108UniformLegacy.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "substitutions": {
+        "x108_uniform": "UniformLegacy.x108_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.three_uniform_degenerate_hypergraph_ramsey_linear_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X119UniformLegacy.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "substitutions": {
+        "x119_uniform": "UniformLegacy.x119_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X137.erdos_rado_sunflower_statement",
+      "path": "hypergraph-theory/theories/conjectures/X137.v",
+      "name": "erdos_rado_sunflower_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X137UniformLegacy.erdos_rado_sunflower_statement",
+      "substitutions": {
+        "x137_uniform": "UniformLegacy.x137_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.erdos_rado_sunflower_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X209.x209_is_min_scaled_excess",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "x209_is_min_scaled_excess",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X209UniformLegacy.x209_is_min_scaled_excess",
+      "substitutions": {
+        "x209_uniform": "UniformLegacy.x209_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x209_is_min_scaled_excess_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "hypergraph_cut_excess_theta_sqrt_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X209UniformLegacy.hypergraph_cut_excess_theta_sqrt_statement",
+      "substitutions": {
+        "x209_is_min_scaled_excess": "X209UniformLegacy.x209_is_min_scaled_excess"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.hypergraph_cut_excess_theta_sqrt_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X217.hypergraph_cop_number_sqrt_n_over_k_statement",
+      "path": "hypergraph-theory/theories/conjectures/X217.v",
+      "name": "hypergraph_cop_number_sqrt_n_over_k_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X217UniformLegacy.hypergraph_cop_number_sqrt_n_over_k_statement",
+      "substitutions": {
+        "hg_uniform": "UniformLegacy.hg_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.hypergraph_cop_number_sqrt_n_over_k_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X225.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "kpartite_hypergraph_turan_exponent_dmax_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X225UniformLegacy.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "substitutions": {
+        "hg_uniform": "UniformLegacy.hg_uniform",
+        "hg_turan": "UniformLegacy.hg_turan"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.kpartite_hypergraph_turan_exponent_dmax_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X225.latin_square_hypergraph_turan_exponent_statement",
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "latin_square_hypergraph_turan_exponent_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X225UniformLegacy.latin_square_hypergraph_turan_exponent_statement",
+      "substitutions": {
+        "hg_turan": "UniformLegacy.hg_turan"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.latin_square_hypergraph_turan_exponent_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X6.x6_extremal_no_k_matching",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_extremal_no_k_matching",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X6UniformLegacy.x6_extremal_no_k_matching",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x6_extremal_no_k_matching_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X6.critical_three_uniform_min_degree_seven_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "critical_three_uniform_min_degree_seven_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X6UniformLegacy.critical_three_uniform_min_degree_seven_statement",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.critical_three_uniform_min_degree_seven_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X6.erdos_matching_extremal_formula_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "erdos_matching_extremal_formula_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X6UniformLegacy.erdos_matching_extremal_formula_statement",
+      "substitutions": {
+        "x6_extremal_no_k_matching": "X6UniformLegacy.x6_extremal_no_k_matching"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.erdos_matching_extremal_formula_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X6.three_uniform_hypergraph_dense_small_configuration_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "three_uniform_hypergraph_dense_small_configuration_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X6UniformLegacy.three_uniform_hypergraph_dense_small_configuration_statement",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.three_uniform_hypergraph_dense_small_configuration_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.XE1.xe1_extremal_no_complete_uniform",
+      "path": "hypergraph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_extremal_no_complete_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "XE1UniformLegacy.xe1_extremal_no_complete_uniform",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.xe1_extremal_no_complete_uniform_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.XE1.erdos_719_statement",
+      "path": "hypergraph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_719_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "XE1UniformLegacy.erdos_719_statement",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform",
+        "xe1_extremal_no_complete_uniform": "XE1UniformLegacy.xe1_extremal_no_complete_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.erdos_719_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.XE1.erdos_836_statement",
+      "path": "hypergraph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_836_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "XE1UniformLegacy.erdos_836_statement",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.erdos_836_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.XE2.erdos_775_statement",
+      "path": "hypergraph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_775_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "XE2UniformLegacy.erdos_775_statement",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.erdos_775_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.XE2.erdos_832_statement",
+      "path": "hypergraph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_832_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "XE2UniformLegacy.erdos_832_statement",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.erdos_832_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.XE2.erdos_833_statement",
+      "path": "hypergraph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_833_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "XE2UniformLegacy.erdos_833_statement",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.erdos_833_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Hypergraph.conjectures.X209.x209_is_min_scaled_excess",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "x209_is_min_scaled_excess",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X209UniformOriginal.x209_is_min_scaled_excess",
+      "substitutions": {
+        "x209_uniform": "UniformLegacy.x209_uniform",
+        "x209_scaled_excess": "CS.X209Legacy.scaled_excess"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x209_is_min_scaled_excess_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "name": "hypergraph_cut_excess_theta_sqrt_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X209UniformOriginal.hypergraph_cut_excess_theta_sqrt_statement",
+      "substitutions": {
+        "x209_is_min_scaled_excess": "X209UniformOriginal.x209_is_min_scaled_excess"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.hypergraph_cut_excess_theta_sqrt_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X6.critical_three_uniform_min_degree_seven_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "critical_three_uniform_min_degree_seven_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X6UniformOriginal.critical_three_uniform_min_degree_seven_statement",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform",
+        "x6_hg_degree": "ID.Legacy.x6_hg_degree"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.critical_three_uniform_min_degree_seven_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.XE2.erdos_833_statement",
+      "path": "hypergraph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_833_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "XE2UniformOriginal.erdos_833_statement",
+      "substitutions": {
+        "x6_uniform": "UniformLegacy.x6_uniform",
+        "x6_hg_degree": "ID.Legacy.x6_hg_degree"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.erdos_833_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X108UniformOriginal.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "substitutions": {
+        "x108_uniform": "UniformLegacy.x108_uniform",
+        "x108_d_degenerate": "ID.X108Legacy.d_degenerate"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.three_uniform_degenerate_hypergraph_ramsey_linear_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X225.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "kpartite_hypergraph_turan_exponent_dmax_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "X225UniformOriginal.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "substitutions": {
+        "hg_uniform": "UniformLegacy.hg_uniform",
+        "hg_turan": "UniformLegacy.hg_turan",
+        "hg_dmax": "ID.FoundationLegacy.dmax"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.kpartite_hypergraph_turan_exponent_dmax_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2str.uniform_hypergraph",
+      "path": "extremal-graph-theory/theories/conjectures/D2str.v",
+      "name": "uniform_hypergraph",
+      "frozen_path": "extremal-graph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "Legacy.uniform_hypergraph",
+      "substitutions": {},
+      "certificate": "Extremal.migration.uniform_hypergraph.uniform_hypergraph_compat",
+      "live_unfolds_to": "uniform_family E r"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2str.simultaneous_partition_of_hypergraphs_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2str.v",
+      "name": "simultaneous_partition_of_hypergraphs_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "D2strUniformLegacy.simultaneous_partition_of_hypergraphs_statement",
+      "substitutions": {
+        "uniform_hypergraph": "Legacy.uniform_hypergraph"
+      },
+      "certificate": "Extremal.migration.uniform_hypergraph.simultaneous_partition_of_hypergraphs_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.U5.uniform_hg",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "uniform_hg",
+      "frozen_path": "chromatic-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "Legacy.uniform_hg",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.uniform_hypergraph.uniform_hg_compat",
+      "live_unfolds_to": "uniform_incidence (@hinc H) d"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.U5.a_generalization_of_vizings_theorem_statement",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "a_generalization_of_vizings_theorem_statement",
+      "frozen_path": "chromatic-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "U5UniformLegacy.a_generalization_of_vizings_theorem_statement",
+      "substitutions": {
+        "uniform_hg": "Legacy.uniform_hg"
+      },
+      "certificate": "Chromatic.migration.uniform_hypergraph.a_generalization_of_vizings_theorem_statement_compat",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {
+    "hypergraph-theory/theories/migration/cut_size.v#X209Legacy.is_min_scaled_excess": "A9 partial snapshot: it froze the cut/excess chain but keeps the live x209_uniform, now an alias of the D1 canonical. It stays byte-exact; the complete row is Hypergraph.migration.uniform_hypergraph.X209UniformOriginal.x209_is_min_scaled_excess, certified by x209_is_min_scaled_excess_original_compat (row: hypergraph_cut_excess_theta_sqrt_statement_original_compat).",
+    "hypergraph-theory/theories/migration/incidence_degree.v#X6Legacy.critical_three_uniform_min_degree_seven_statement": "A10 partial snapshot: it froze the degree but keeps the live x6_uniform, now an alias of the D1 canonical. It stays byte-exact; the complete row is Hypergraph.migration.uniform_hypergraph.X6UniformOriginal.critical_three_uniform_min_degree_seven_statement, certified by critical_three_uniform_min_degree_seven_statement_original_compat.",
+    "hypergraph-theory/theories/migration/incidence_degree.v#XE2Legacy.erdos_833_statement": "A10 partial snapshot: it froze the degree but keeps the live x6_uniform, now an alias of the D1 canonical. It stays byte-exact; the complete row is Hypergraph.migration.uniform_hypergraph.XE2UniformOriginal.erdos_833_statement, certified by erdos_833_statement_original_compat.",
+    "hypergraph-theory/theories/migration/incidence_degree.v#X108Legacy.three_uniform_degenerate_hypergraph_ramsey_linear_statement": "A10 partial snapshot: it froze the restricted degree and d_degenerate but keeps the live x108_uniform, now an alias of the D1 canonical. It stays byte-exact; the complete row is Hypergraph.migration.uniform_hypergraph.X108UniformOriginal.three_uniform_degenerate_hypergraph_ramsey_linear_statement, certified by three_uniform_degenerate_hypergraph_ramsey_linear_statement_original_compat.",
+    "hypergraph-theory/theories/migration/incidence_degree.v#X225Legacy.kpartite_hypergraph_turan_exponent_dmax_statement": "A10 partial snapshot: it froze the degree/degeneracy/dmax chain but keeps the live hg_uniform and hg_turan, now an alias of the D1 canonical. It stays byte-exact; the complete row is Hypergraph.migration.uniform_hypergraph.X225UniformOriginal.kpartite_hypergraph_turan_exponent_dmax_statement, certified by kpartite_hypergraph_turan_exponent_dmax_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "hg_uniform",
+      "note": "hypergraph_cop_number_sqrt_n_over_k_implies_meyniel_cop_number_sqrt keeps its exact type; its proof builds rank-2 uniformity of E(G) from edgesP, unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "hypergraph_cop_number_sqrt_n_over_k_statement",
+      "note": "hypergraph_cop_number_sqrt_n_over_k_implies_meyniel_cop_number_sqrt keeps its exact type; its proof builds rank-2 uniformity of E(G) from edgesP, unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "uniform_hg",
+      "note": "uniform_hg_one and the U5 grounding keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "a_generalization_of_vizings_theorem_statement",
+      "note": "uniform_hg_one and the U5 grounding keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2str.v",
+      "name": "uniform_hypergraph",
+      "note": "uniform_hypergraph0 and uniform_hypergraph_sub keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_D2str.v",
+      "name": "simultaneous_partition_of_hypergraphs_statement",
+      "note": "Implication declarations over the unchanged D2str row."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X217.v",
+      "name": "hg_uniform",
+      "note": "The X217 row itself, frozen with an exact iff; text, docs and row unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "hg_turan",
+      "note": "The two X225 rows themselves, frozen with exact iff (and the complete A10 Original for #01)."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "hg_uniform",
+      "note": "The two X225 rows themselves, frozen with exact iff (and the complete A10 Original for #01)."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/XE1.v",
+      "name": "x6_uniform",
+      "note": "XE1 extremal chain and rows over X6 x6_uniform, frozen per row with exact iff."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/XE2.v",
+      "name": "x6_uniform",
+      "note": "XE2 rows over X6 x6_uniform, frozen per row with exact iff (and the complete A10 Original for #833)."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_U12.v",
+      "name": "critical_k_forest",
+      "note": "The eight U12 grounding witnesses keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_U12.v",
+      "name": "k_forest",
+      "note": "The eight U12 grounding witnesses keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_U12.v",
+      "name": "k_tree",
+      "note": "The eight U12 grounding witnesses keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_U12.v",
+      "name": "k_uniform",
+      "note": "The eight U12 grounding witnesses keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X217.v",
+      "name": "hg_uniform",
+      "note": "The five X217 grounding lemmas keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X217.v",
+      "name": "hypergraph_cop_number_sqrt_n_over_k_statement",
+      "note": "The five X217 grounding lemmas keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X225.v",
+      "name": "hg_turan",
+      "note": "The five X225 grounding lemmas keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X225.v",
+      "name": "hg_uniform",
+      "note": "The five X225 grounding lemmas keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X225.v",
+      "name": "kpartite_hypergraph_turan_exponent_dmax_statement",
+      "note": "The five X225 grounding lemmas keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X225.v",
+      "name": "latin_square_hypergraph_turan_exponent_statement",
+      "note": "The five X225 grounding lemmas keep exact types and unchanged proofs; the names are transparent aliases of the canonical."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "are_critical_k_forests_tight_statement",
+      "note": "Implication declarations over the unchanged U12 rows."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "turans_problem_for_hypergraphs_statement",
+      "note": "Implication declarations over the unchanged U12 rows."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_X217.v",
+      "name": "hypergraph_cop_number_sqrt_n_over_k_statement",
+      "note": "Implication declarations over the unchanged X217 row."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "hg_uniform",
+      "note": "The seven *_equiv_hg_uniform bridges keep exact types; both sides now unfold to uniform_family, proofs unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "k_uniform",
+      "note": "The seven *_equiv_hg_uniform bridges keep exact types; both sides now unfold to uniform_family, proofs unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x104_uniform",
+      "note": "The seven *_equiv_hg_uniform bridges keep exact types; both sides now unfold to uniform_family, proofs unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x108_uniform",
+      "note": "The seven *_equiv_hg_uniform bridges keep exact types; both sides now unfold to uniform_family, proofs unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x119_uniform",
+      "note": "The seven *_equiv_hg_uniform bridges keep exact types; both sides now unfold to uniform_family, proofs unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x137_uniform",
+      "note": "The seven *_equiv_hg_uniform bridges keep exact types; both sides now unfold to uniform_family, proofs unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x209_uniform",
+      "note": "The seven *_equiv_hg_uniform bridges keep exact types; both sides now unfold to uniform_family, proofs unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x6_uniform",
+      "note": "The seven *_equiv_hg_uniform bridges keep exact types; both sides now unfold to uniform_family, proofs unchanged."
+    }
+  ],
+  "distinct_variants": []
+}

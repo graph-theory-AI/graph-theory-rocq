@@ -1,6 +1,7 @@
 (** * Hypergraph.conjectures.X108 -- v2 3-uniform Burr-Erdos row *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypergraph_uniformity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X108 vocabulary ***********************************************)
 
 Definition x108_uniform (T : finType) (E : {set {set T}}) (r : nat) : Prop :=
-  forall e : {set T}, e \in E -> #|e| = r.
+  uniform_family E r.
 
 Definition x108_degree_in
     (T : finType) (E : {set {set T}}) (W : {set T}) (v : T) : nat :=

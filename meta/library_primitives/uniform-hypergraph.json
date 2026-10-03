@@ -2,30 +2,171 @@
   "schema_version": 1,
   "family": "uniform-hypergraph",
   "primitive": {
-    "canonical_name": null,
-    "owner": "hypergraph-theory",
-    "status": "proposed",
-    "fidelity": "PENDING",
+    "canonical_name": "GTBase.hypergraph_uniformity.uniform_family",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
     "normalized_names": [
-      "uniform"
+      "uniform",
+      "uniform_hypergraph",
+      "k_uniform",
+      "uniform_hg"
     ],
     "source_definitions": [
+      "Chromatic.conjectures.U5.uniform_hg",
+      "Extremal.conjectures.D2str.uniform_hypergraph",
+      "Hypergraph.conjectures.U12.k_uniform",
       "Hypergraph.conjectures.X104.x104_uniform",
       "Hypergraph.conjectures.X108.x108_uniform",
       "Hypergraph.conjectures.X119.x119_uniform",
       "Hypergraph.conjectures.X137.x137_uniform",
       "Hypergraph.conjectures.X209.x209_uniform",
-      "Hypergraph.conjectures.X6.x6_uniform"
+      "Hypergraph.conjectures.X6.x6_uniform",
+      "Hypergraph.foundations.hypergraph.hg_uniform",
+      "Hypergraph.foundations.hypergraph.hg_uniformb"
     ],
-    "consumers_remaining": 8,
-    "compatibility_theorems": [],
+    "repository_sources": {
+      "Hypergraph.foundations.hypergraph.hg_uniform": {
+        "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+        "commit": "3be65eed7084abfae36dee74f7117b598325bc4c",
+        "blob": "6d91437a8d415102d2404e2e28e8e77556c42c7f",
+        "declaration_hash": "eced99b78c9c351c70043570a4d870896a23d4b4c2a5a89be59d47237be54dc3"
+      },
+      "Hypergraph.foundations.hypergraph.hg_uniformb": {
+        "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+        "commit": "3be65eed7084abfae36dee74f7117b598325bc4c",
+        "blob": "6d91437a8d415102d2404e2e28e8e77556c42c7f",
+        "declaration_hash": "0d7878a6a0501aad7aebd3952ad6426b98bace810ab7c6f29674aa5c061cf243"
+      }
+    },
+    "consumers_remaining": 14,
+    "relation": "Exact set-family uniformity: over an arbitrary finite vertex type T, every member e of E : {set {set T}} has #|e| = k (Prop), with the Boolean view [forall e in E, #|e| == k] reflected by uniform_familyP; the indexed adapter uniform_incidence inc k := forall i, #|inc i| = k equals uniformity of the image family without injectivity. No nonempty-family, positive-rank, loopless, no-isolated-vertex, carrier-inhabitance or partiteness guard; partite uniformity, complete-uniform/containment predicates and degree regularity are separate contracts.",
+    "semantic_classes": {
+      "set-family-prop": {
+        "members": [
+          "Extremal.conjectures.D2str.uniform_hypergraph",
+          "Hypergraph.conjectures.U12.k_uniform",
+          "Hypergraph.conjectures.X104.x104_uniform",
+          "Hypergraph.conjectures.X108.x108_uniform",
+          "Hypergraph.conjectures.X119.x119_uniform",
+          "Hypergraph.conjectures.X137.x137_uniform",
+          "Hypergraph.conjectures.X209.x209_uniform",
+          "Hypergraph.conjectures.X6.x6_uniform",
+          "Hypergraph.foundations.hypergraph.hg_uniform"
+        ],
+        "count": 9,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Extremal.migration.uniform_hypergraph.uniform_hypergraph_compat",
+          "Hypergraph.migration.uniform_hypergraph.k_uniform_compat",
+          "Hypergraph.migration.uniform_hypergraph.x104_uniform_compat",
+          "Hypergraph.migration.uniform_hypergraph.x108_uniform_compat",
+          "Hypergraph.migration.uniform_hypergraph.x119_uniform_compat",
+          "Hypergraph.migration.uniform_hypergraph.x137_uniform_compat",
+          "Hypergraph.migration.uniform_hypergraph.x209_uniform_compat",
+          "Hypergraph.migration.uniform_hypergraph.x6_uniform_compat",
+          "Hypergraph.migration.uniform_hypergraph.hg_uniform_compat"
+        ],
+        "note": "Same body as uniform_family over the supplied finite type; the public hg_uniform keeps its Section-discharged argument order."
+      },
+      "set-family-boolean": {
+        "members": [
+          "Hypergraph.foundations.hypergraph.hg_uniformb"
+        ],
+        "count": 1,
+        "verdict": "equivalent (Boolean view uniform_familyb, reflected by uniform_familyP)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.uniform_hypergraph.hg_uniformb_compat"
+        ]
+      },
+      "indexed-incidence": {
+        "members": [
+          "Chromatic.conjectures.U5.uniform_hg"
+        ],
+        "count": 1,
+        "verdict": "equivalent (same-body indexed adapter uniform_incidence; image bridge uniform_incidence_imageE)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.uniform_hypergraph.uniform_hg_compat"
+        ],
+        "note": "U5 keeps its hypergraph Record, finite labels he, hinc, codegree, simple_hg and edge-label colouring; repeated labels stay distinct."
+      }
+    },
+    "compatibility_theorems": [
+      "Hypergraph.migration.uniform_hypergraph.k_uniform_compat",
+      "Hypergraph.migration.uniform_hypergraph.x104_uniform_compat",
+      "Hypergraph.migration.uniform_hypergraph.x108_uniform_compat",
+      "Hypergraph.migration.uniform_hypergraph.x119_uniform_compat",
+      "Hypergraph.migration.uniform_hypergraph.x137_uniform_compat",
+      "Hypergraph.migration.uniform_hypergraph.x209_uniform_compat",
+      "Hypergraph.migration.uniform_hypergraph.x6_uniform_compat",
+      "Hypergraph.migration.uniform_hypergraph.hg_uniform_compat",
+      "Hypergraph.migration.uniform_hypergraph.hg_uniformb_compat",
+      "Hypergraph.migration.uniform_hypergraph.hg_turan_compat",
+      "Hypergraph.migration.uniform_hypergraph.k_forest_compat",
+      "Hypergraph.migration.uniform_hypergraph.k_tree_compat",
+      "Hypergraph.migration.uniform_hypergraph.critical_k_forest_compat",
+      "Hypergraph.migration.uniform_hypergraph.are_critical_k_forests_tight_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.turans_problem_for_hypergraphs_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.brown_erdos_sos_three_uniform_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.three_uniform_degenerate_hypergraph_ramsey_linear_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.erdos_rado_sunflower_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.x209_is_min_scaled_excess_compat",
+      "Hypergraph.migration.uniform_hypergraph.hypergraph_cut_excess_theta_sqrt_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.hypergraph_cop_number_sqrt_n_over_k_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.kpartite_hypergraph_turan_exponent_dmax_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.latin_square_hypergraph_turan_exponent_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.x6_extremal_no_k_matching_compat",
+      "Hypergraph.migration.uniform_hypergraph.critical_three_uniform_min_degree_seven_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.erdos_matching_extremal_formula_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.three_uniform_hypergraph_dense_small_configuration_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.xe1_extremal_no_complete_uniform_compat",
+      "Hypergraph.migration.uniform_hypergraph.erdos_719_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.erdos_836_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.erdos_775_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.erdos_832_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.erdos_833_statement_compat",
+      "Hypergraph.migration.uniform_hypergraph.x209_is_min_scaled_excess_original_compat",
+      "Hypergraph.migration.uniform_hypergraph.hypergraph_cut_excess_theta_sqrt_statement_original_compat",
+      "Hypergraph.migration.uniform_hypergraph.critical_three_uniform_min_degree_seven_statement_original_compat",
+      "Hypergraph.migration.uniform_hypergraph.erdos_833_statement_original_compat",
+      "Hypergraph.migration.uniform_hypergraph.three_uniform_degenerate_hypergraph_ramsey_linear_statement_original_compat",
+      "Hypergraph.migration.uniform_hypergraph.kpartite_hypergraph_turan_exponent_dmax_statement_original_compat",
+      "Extremal.migration.uniform_hypergraph.uniform_hypergraph_compat",
+      "Extremal.migration.uniform_hypergraph.simultaneous_partition_of_hypergraphs_statement_compat",
+      "Chromatic.migration.uniform_hypergraph.uniform_hg_compat",
+      "Chromatic.migration.uniform_hypergraph.a_generalization_of_vizings_theorem_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.hypergraph_uniformity.uniform_familyP",
+      "GTBase.hypergraph_uniformity.uniform_family0",
+      "GTBase.hypergraph_uniformity.uniform_family_set0",
+      "GTBase.hypergraph_uniformity.uniform_family1",
+      "GTBase.hypergraph_uniformity.uniform_familyS",
+      "GTBase.hypergraph_uniformity.uniform_family_rank",
+      "GTBase.hypergraph_uniformity.uniform_family_rank_le",
+      "GTBase.hypergraph_uniformity.uniform_incidence_imageE"
+    ],
+    "public_client": "base/theories/examples/hypergraph_uniformity.v",
+    "legacy_baseline": "3be65eed7084abfae36dee74f7117b598325bc4c",
+    "migration_report": "meta/migration_reports/uniform_hypergraph.md",
+    "migration_spec": "meta/migration_reports/uniform_hypergraph.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D1.md",
+    "foundation_fidelity": "meta/foundation_fidelity/uniform-hypergraph.json",
     "upstream_audit": {
       "searched_modules": [
-        "GraphTheory core modules"
+        "GraphTheory core modules",
+        "mathcomp.boot.fintype",
+        "mathcomp.boot.finset",
+        "Hypergraph.foundations.hypergraph"
       ],
-      "result": "no-direct-candidate",
-      "note": "The installed GraphTheory library has no common finite hypergraph API matching the set-of-sets encodings used by these rows. This belongs in a hypergraph area foundation first.",
-      "audited_at": "2026-07-22"
+      "result": "new-base-primitive",
+      "candidate": null,
+      "note": "Pinned GraphTheory 0.9.7 has no uniform-hypergraph owner; MathComp supplies forall_inP and imsetP reasoning, and card_uniform_partition is a stronger partition consequence, not this primitive. Hypergraph, Extremal and Chromatic all use it, so it lives in a focused GTBase module, imported explicitly, with the public Hypergraph names kept as transparent aliases.",
+      "audited_at": "2026-10-03"
     }
   }
 }
