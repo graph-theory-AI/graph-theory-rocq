@@ -16,8 +16,7 @@ Unset Printing Implicit Defensive.
 (** ** Local extremal vocabulary *******************************************)
 
 Definition x4_edge_count (G : sgraph) : nat :=
-  #|[set p : G * G |
-      (p.1 -- p.2) && ((enum_rank p.1) < (enum_rank p.2))%N]|.
+  edge_count G.
 
 Definition x4_mono_complete_copy
     (m q : nat) (H : sgraph) (col : 'I_m -> 'I_m -> 'I_q) : Prop :=

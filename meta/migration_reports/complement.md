@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py complement --details /tmp/migra
 
 - Canonical: `GraphTheory.core.sgraph.compl`.
 - Baseline: `49ddc033ec6be3372ba6813f044fd26922fad16d`.
-- Scope: 10 helpers, 16 statements, 59 frozen objects, 114 recorded references.
-- Source checks: 432/432 pass; consistent.
+- Scope: 10 helpers, 16 statements, 59 frozen objects, 136 recorded references.
+- Source checks: 439/439 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -34,4 +34,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Chromatic.conjectures.U8.local_complement`, `GTMisc.conjectures.X94.x94_bicomplement`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/induced_free.v#X56Legacy.statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.graph_ramsey`, `extremal-graph-theory/theories/migration/consecutive_in_cycle.v#XE1Legacy.erdos_567_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/induced_free.v#X56Legacy.statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.graph_ramsey`, `extremal-graph-theory/theories/migration/consecutive_in_cycle.v#XE1Legacy.erdos_567_statement`, `extremal-graph-theory/theories/migration/bipartition.v#XE2Legacy.erdos_549_statement`, `extremal-graph-theory/theories/migration/bipartition.v#XE2Original.erdos_549_statement`, `extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_545_statement`, `extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_566_statement`, `extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_567_statement`, `extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_568_statement`, `extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_570_statement`, `chromatic-theory/theories/migration/chi_bounded_classes.v#X3Legacy.gyarfas_complementation_chi_bounded_statement`.

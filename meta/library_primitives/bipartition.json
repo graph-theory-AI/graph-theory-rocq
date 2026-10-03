@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "family": "bipartition",
+  "primitive": {
+    "canonical_name": "GraphTheory.connectivity.bipartition",
+    "owner": "upstream",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "bipartition",
+      "bipartition_sizes",
+      "bipartite_rel",
+      "bipartite_dg",
+      "del_bipartite",
+      "bipartite"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X219.x219_bipartition",
+      "Digraph.conjectures.X46.x46_bipartition",
+      "Digraph.conjectures.X53.x53_bipartition",
+      "Extremal.conjectures.X223.x223_bipartite_dg",
+      "Extremal.conjectures.XE2.xe2_bipartition_sizes",
+      "Hom.conjectures.U3.bipartite_rel",
+      "Packing.conjectures.U9.del_bipartite",
+      "Packing.conjectures.X15alone.bipartite"
+    ],
+    "consumers_remaining": 9,
+    "relation": "Unconditional logical equivalence for upstream supplied-side and deletion interfaces; definitional equality for Boolean-colouring, two-part and cardinality adapters. All guards, witnesses, empty cases and statement types are retained.",
+    "semantic_classes": {
+      "supplied-side": {
+        "members": [
+          "Chromatic.conjectures.X219.x219_bipartition"
+        ],
+        "count": 1,
+        "state": "migrated-alias",
+        "verdict": "equivalent"
+      },
+      "balanced-parts": {
+        "members": [
+          "Digraph.conjectures.X46.x46_bipartition"
+        ],
+        "count": 1,
+        "state": "migrated-alias",
+        "verdict": "equivalent"
+      },
+      "two-parts": {
+        "members": [
+          "Digraph.conjectures.X53.x53_bipartition"
+        ],
+        "count": 1,
+        "state": "migrated-alias",
+        "verdict": "equivalent"
+      },
+      "boolean-colouring": {
+        "members": [
+          "Extremal.conjectures.X223.x223_bipartite_dg",
+          "Hom.conjectures.U3.bipartite_rel"
+        ],
+        "count": 2,
+        "state": "migrated-alias",
+        "verdict": "equivalent"
+      },
+      "prescribed-size-existential-parts": {
+        "members": [
+          "Extremal.conjectures.XE2.xe2_bipartition_sizes"
+        ],
+        "count": 1,
+        "state": "migrated-alias",
+        "verdict": "equivalent"
+      },
+      "after-edge-deletion": {
+        "members": [
+          "Packing.conjectures.U9.del_bipartite"
+        ],
+        "count": 1,
+        "state": "migrated-alias",
+        "verdict": "equivalent"
+      },
+      "excluded-standalone": {
+        "members": [
+          "Packing.conjectures.X15alone.bipartite"
+        ],
+        "count": 1,
+        "state": "deferred-excluded",
+        "verdict": "identical Boolean-colouring contract, deliberately excluded statement variant"
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.bipartition.x219_bipartition_compat",
+      "Chromatic.migration.bipartition.asymmetric_bipartite_list_colouring_statement_compat",
+      "Digraph.migration.bipartition.x46_bipartition_compat",
+      "Digraph.migration.bipartition.bipartite_digraph_outdegree_girth_statement_compat",
+      "Digraph.migration.bipartition.x53_bipartition_compat",
+      "Digraph.migration.bipartition.bipartite_digraph_asymmetric_outdegree_girth_statement_compat",
+      "Extremal.migration.bipartition.x223_bipartite_dg_compat",
+      "Extremal.migration.bipartition.directed_sidorenko_bipartite_statement_compat",
+      "Extremal.migration.bipartition.xe2_bipartition_sizes_compat",
+      "Extremal.migration.bipartition.erdos_1080_statement_compat",
+      "Extremal.migration.bipartition.erdos_549_statement_compat",
+      "Hom.migration.bipartition.bipartite_rel_compat",
+      "Hom.migration.bipartition.weak_pentagon_statement_compat",
+      "Packing.migration.bipartition.del_bipartite_compat",
+      "Packing.migration.bipartition.odd_cycle_transversal_in_triangle_free_graphs_statement_compat",
+      "Extremal.migration.bipartition.erdos_1080_statement_original_compat",
+      "Extremal.migration.bipartition.erdos_549_statement_original_compat",
+      "Extremal.migration.subgraph_of.xe1_subgraph_of_compat",
+      "Extremal.migration.subgraph_of.graph_ramsey_compat",
+      "Extremal.migration.subgraph_of.graph_ramsey_number_compat",
+      "Extremal.migration.subgraph_of.diagonal_ramsey_number_compat",
+      "Extremal.migration.bipartition.erdos_549_statement_complement_original_compat",
+      "Extremal.migration.complement.xe1_complement_rel_compat",
+      "Extremal.migration.complement.xe1_complement_proofs_compat",
+      "Extremal.migration.complement.xe1_complement_graph_compat",
+      "Extremal.migration.complement.graph_ramsey_original_compat",
+      "Extremal.migration.complement.graph_ramsey_number_original_compat",
+      "Extremal.migration.complement.diagonal_ramsey_number_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.bipartitions.bipartition_neq",
+      "GTBase.bipartitions.bipartition_complement",
+      "GTBase.bipartitions.disjoint_cover_complement",
+      "GTBase.bipartitions.bipartition_partsP",
+      "GTBase.bipartitions.bipartition_parts_swap",
+      "GTBase.bipartitions.balanced_bipartitionP",
+      "GTBase.bipartitions.bipartition_sizesP",
+      "GTBase.bipartitions.bipartite_relationP",
+      "GTBase.bipartitions.bipartite_relation_sub",
+      "GTBase.bipartitions.bipartite_relation0",
+      "GTBase.bipartitions.bipartite_relation_loop",
+      "GTBase.bipartitions.bipartite_after_deletionP",
+      "GTBase.bipartitions.bipartite_after_deletion_full",
+      "GTBase.bipartitions.bipartite_after_deletion_nonedges",
+      "GTBase.base.bipartite_relationE"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.connectivity",
+        "GraphTheory.digraph",
+        "GTBase.base",
+        "GTBase.colourings",
+        "Digraph.core.digraph"
+      ],
+      "result": "upstream predicate with faithful representation adapters",
+      "candidate": "GraphTheory.connectivity.bipartition",
+      "note": "Pinned 0.9.7 connectivity defines supplied A by unequal endpoint membership expressed as x-in-A = y-notin-A, without positivity or symmetry assumptions. Its path/cycle parity lemmas apply directly. Supplied two-part/cardinality and existential Boolean-colouring interfaces remain distinct; the relation adapter preserves Hom exact Prop equality by conversion. to_GT preserves the local diGraphType carrier and arcs. Existing GTBase.base.bipartite remains unchanged.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/bipartition.md",
+    "migration_spec": "meta/migration_reports/bipartition.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/bipartition.json",
+    "downstream_client": "base/theories/examples/bipartition.v"
+  }
+}

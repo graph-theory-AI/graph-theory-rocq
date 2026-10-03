@@ -67,13 +67,13 @@ Qed.
 Lemma x219_bipartition_KB n m :
   x219_bipartition [set x : KB n m | is_inl x].
 Proof.
-by move=> [a|a] [b|b]; rewrite /edge_rel /= !inE.
+apply/bipartition_neq; by move=> [a|a] [b|b]; rewrite /edge_rel /= !inE.
 Qed.
 
 (** Guard has teeth: the triangle admits NO bipartition. *)
 Lemma x219_not_bipartition_K3 (A : {set 'K_3}) : ~ x219_bipartition A.
 Proof.
-move=> H.
+move/bipartition_neq=> H.
 pose a : 'K_3 := @Ordinal 3 0 isT.
 pose b : 'K_3 := @Ordinal 3 1 isT.
 pose c : 'K_3 := @Ordinal 3 2 isT.
@@ -239,7 +239,7 @@ have deg : forall x : complete 2, #|N(x)| <= 1.
     by apply/setP => y; rewrite !inE /edge_rel /= eq_sym.
   by rewrite cardsC1 card_ord.
 have bip : x219_bipartition [set (ord0 : complete 2)].
-  move=> u v; rewrite /edge_rel /= !inE.
+  apply/bipartition_neq=> u v; rewrite /edge_rel /= !inE.
   by case: u => -[|[|u]] hu //=; case: v => -[|[|v]] hv //=.
 have H := Hii (complete 2) [set (ord0 : complete 2)] 1 1 1 1 bip
             (fun v _ => deg v) (fun v _ => deg v) isT isT.

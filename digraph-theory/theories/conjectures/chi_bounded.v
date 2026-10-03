@@ -25,6 +25,7 @@
     forest predicate follow the [is_forest [set: underlying _]] idiom of heroes_dichotomy.
     See docs/CONJECTURES_FORMALIZATION_PLAN.md §4. *)
 
+From GTBase Require Import chi_bounding.
 From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude interop_graph_theory digraph oriented tournament dipath.
@@ -70,10 +71,7 @@ Definition underlying_triangle_free (D : diGraphType) : Prop := no_underlying_Kl
     the ordinary undirected chromatic number χ(underlying G) by f(ω(underlying G)) for
     every member. (Guarded by [0 < #|G|] so the empty graph is not load-bearing.) *)
 Definition chi_bounded_under (C : diGraphType -> Prop) : Prop :=
-  exists f : nat -> nat,
-    forall G : diGraphType,
-      C G -> (0 < #|G|)%N ->
-      (χ([set: underlying G]) <= f (ω([set: underlying G])))%N.
+  chi_bounded_via underlying (fun G => C G /\ (0 < #|G|)%N).
 
 (** Corpus row: arxiv:1605.07411#00
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1605.07411__00/

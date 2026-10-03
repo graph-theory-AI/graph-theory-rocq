@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X112 -- v2 chi-bounded closure (substitution + gluing) row *)
 
 From GTBase Require Export base.
+From GTBase Require Import chi_bounding.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -15,8 +16,7 @@ Definition x112_omega (G : sgraph) : nat := ω([set: G]).
 (** A class [D] is chi-bounded: a single [f : nat -> nat] bounds [χ(G)] by
     [f(ω(G))] uniformly over every [G] in the class (∃ f BEFORE ∀ G). *)
 Definition x112_chi_bounded (D : sgraph -> Prop) : Prop :=
-  exists f : nat -> nat,
-    forall G : sgraph, D G -> χ([set: G]) <= f (x112_omega G).
+  GTBase.chi_bounding.chi_bounded_class D.
 
 (** [x112_is_substitution G G1 H]: [G] is obtained from [G1] by substituting
     the graph [H] for a single vertex [v] (blow-up of [v] into a copy of [H]).
