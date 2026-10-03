@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X177 -- v2 forests of lanterns pervasive row *)
 
 From GTBase Require Export base.
+From Chromatic.foundations Require Import branch_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -34,17 +35,7 @@ Definition x177_forest_of_lanterns (H : sgraph) : Prop :=
 
 Definition x177_contains_induced_long_subdivision
     (G H : sgraph) (ell : nat) : Prop :=
-  exists branch : H -> G,
-    injective branch /\
-    forall x y : H,
-      x -- y ->
-      exists p : seq G,
-        [/\ path (--) (branch x) p,
-            last (branch x) p = branch y,
-            ell <= size p,
-            uniq (branch x :: p) &
-            forall z : G,
-              z \in p -> z != branch y -> forall u : H, z != branch u].
+  branch_paths_at_least G H ell.
 
 (** ** X177 statements *****************************************************)
 
