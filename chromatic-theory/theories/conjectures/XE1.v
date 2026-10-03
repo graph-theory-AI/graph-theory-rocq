@@ -20,7 +20,7 @@ Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
   forall x y : G, x \in S -> y \in S -> x -- y -> False.
 
 Definition xe1_vertices_of_seq (G : sgraph) (c : seq G) : {set G} :=
-  [set v : G | v \in c].
+  seq_vertices c.
 
 Definition xe1_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : bool :=
   seq_cyclic_consecutiveb c u v.

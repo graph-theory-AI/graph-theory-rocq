@@ -54,7 +54,9 @@
     "",
     "Baseline 00d6bb3 is a private, not-for-integration merge of B9 299dc71 with main 0659592 (A5, A6, B7, C6), conflicts only in _CoqProject lines (de-duplicated union) and simple_path.md (regenerated); no .v file differs from both parents. No statement text, doc block, manifest row or leg state changes (checked below).",
     "",
-    "Later migration: Cycle X9 `x9_cycle_edges`, listed here as a separate raw cyclic edge list, was migrated by B11 (family cycle-edges) onto `GTBase.walks_paths.seq_cycle_edge_list`; it is no longer an untouched distinct variant."
+    "Later migration: Cycle X9 `x9_cycle_edges`, listed here as a separate raw cyclic edge list, was migrated by B11 (family cycle-edges) onto `GTBase.walks_paths.seq_cycle_edge_list`; it is no longer an untouched distinct variant.",
+    "",
+    "Later migration: Cycle X212 `x212_cycle_vertices`, listed here as a separate raw cycle vertex set, was migrated by B12 (family cycle-vertices) onto B1's `GTBase.walks_paths.seq_vertices`; it is no longer an untouched distinct variant."
   ],
   "frozen": [
     {
@@ -733,7 +735,8 @@
     "graph-theory-misc/theories/migration/path_vertices.v#X113Legacy.is_forest_after": "B1 per-row snapshot: B1 froze X113's vertex set but kept the live x113_is_cycle, which after B10 unfolds to seq_cycle. Kept unchanged; the complete pre-B1, pre-B10 chain is GTMisc.migration.genuine_cycle.X113Original.is_forest_after, certified by x113_is_forest_after_original_compat; the complete row is X113Original.coarse_erdos_posa_cycles_forest_statement.",
     "cycle-theory/theories/migration/cycle_edges.v#X9Legacy.proper_edge_coloured_short_cycle_statement": "B11 per-row snapshot: family cycle-edges (B11) froze only its own colouring chain in X9's proper-edge-coloured row, so this copy still calls the live x9_genuine_cycle, which after B10 unfolds to seq_cycle. Kept as B11's per-row row; the complete pre-B10, pre-B11 row is Cycle.migration.cycle_edges.X9Original.proper_edge_coloured_short_cycle_statement over this family's frozen cycle (Legacy.x9_genuine_cycle).",
     "cycle-theory/theories/migration/cycle_edges.v#XE1Legacy.cycle_or_edge_piece": "B11 per-row snapshot: family cycle-edges (B11) froze only its own edge filter in #184's cycle-or-edge pieces, so this copy still calls the live xe1_cycle, which after B10 unfolds to seq_cycle. Kept as B11's per-row chain; the complete pre-B10, pre-B11 chain and row are Cycle.migration.cycle_edges.XE1Original over this family's frozen cycle (Legacy.xe1_cycle).",
-    "cycle-theory/theories/migration/cycle_edges.v#XE2Legacy.erdos_641_statement": "B11 per-row snapshot: family cycle-edges (B11) froze only its own edge-disjoint cycles in #641, so this copy still calls the live xe1_cycle, which after B10 unfolds to seq_cycle. Kept as B11's per-row row; the complete pre-B10, pre-B11 row is Cycle.migration.cycle_edges.XE2Original.erdos_641_statement over this family's frozen cycle (Legacy.xe1_cycle)."
+    "cycle-theory/theories/migration/cycle_edges.v#XE2Legacy.erdos_641_statement": "B11 per-row snapshot: family cycle-edges (B11) froze only its own edge-disjoint cycles in #641, so this copy still calls the live xe1_cycle, which after B10 unfolds to seq_cycle. Kept as B11's per-row row; the complete pre-B10, pre-B11 row is Cycle.migration.cycle_edges.XE2Original.erdos_641_statement over this family's frozen cycle (Legacy.xe1_cycle).",
+    "cycle-theory/theories/migration/cycle_vertices.v#X212Legacy.smith_two_longest_cycles_statement": "B12 per-row snapshot: family cycle-vertices (B12) froze only its own support in X212's Smith row, so this copy still calls the live x212_longest_cycle, which reaches x212_cycle = seq_cycleb after B10. Kept as B12's per-row row; the complete pre-B10, pre-B12 row is Cycle.migration.cycle_vertices.X212Original.smith_two_longest_cycles_statement over this family's frozen longest-cycle chain (X212Legacy.longest_cycle)."
   },
   "cross_module_consumers": [
     {
@@ -842,12 +845,6 @@
       "path": "graph-theory-misc/theories/conjectures/X91.v",
       "name": "x91_induced_cycle",
       "note": "induced cycle (enriched); untouched"
-    },
-    {
-      "qualified": "Cycle.conjectures.X212.x212_cycle_vertices",
-      "path": "cycle-theory/theories/conjectures/X212.v",
-      "name": "x212_cycle_vertices",
-      "note": "raw cycle vertex set; untouched"
     }
   ]
 }
