@@ -1,0 +1,117 @@
+{
+  "family": "proper-minor-closed-class",
+  "canonical_name": "GTBase.minor_classes.proper_minor_closed_class",
+  "canonical_short_name": "proper_minor_closed_class",
+  "relation": "two distinct contracts: uniform excluded-minor witness alone (X192), or witness AND ordinary minor closure (X168)",
+  "baseline_commit": "6e1a1c4c719d42f6bea311812f06f61d9e49e9d3",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "base/theories/minor_classes.v",
+    "chromatic-theory/theories/migration/minor_classes.v",
+    "graph-theory-misc/theories/migration/minor_classes.v"
+  ],
+  "extra_certificates": [
+    "GTBase.minor_classes.minor_self",
+    "GTBase.minor_classes.excludes_a_minor_ext",
+    "GTBase.minor_classes.minor_closed_ext",
+    "GTBase.minor_classes.proper_minor_closed_class_ext",
+    "GTBase.minor_classes.proper_minor_closed_class_excludes",
+    "GTBase.minor_classes.proper_minor_closed_class_closed",
+    "GTBase.minor_classes.proper_minor_closed_class_intro",
+    "GTBase.minor_classes.minor_closed_induced",
+    "GTBase.minor_classes.minor_closed_iso",
+    "GTBase.minor_classes.minor_closed_hereditary",
+    "GTBase.minor_classes.proper_minor_closed_class_empty",
+    "GTBase.minor_classes.minor_closed_all",
+    "GTBase.minor_classes.not_excludes_a_minor_all",
+    "GTBase.minor_classes.excludes_a_minor_order_le",
+    "GTBase.minor_classes.excludes_a_minor_exact_order",
+    "GTBase.minor_classes.not_minor_closed_positive_exact_order",
+    "GTBase.minor_classes.excluded_minor_class_closed",
+    "GTBase.minor_classes.excluded_minor_class_proper",
+    "GTBase.minor_classes.minor_closed_omits_iff",
+    "GTBase.minor_classes.excludes_a_minor_subclass"
+  ],
+  "downstream_client": "base/theories/examples/minor_classes.v",
+  "summary": [
+    "C11 preserves two intentional representation contracts under one dependency-coupled family. X192 aliases excludes_a_minor ONLY. X168 aliases the explicit conjunction proper_minor_closed_class. Classes are arbitrary sgraph-to-Prop predicates, including the empty class, and the witness is any finite simple graph.",
+    "Reuse upstream minor with HOST FIRST, minor_trans, strict_is_minor, iso_strict_minor, induced_minor and small_K_free. minor_self is derived from the identity isomorphism; no nonexistent upstream reflexivity lemma is assumed. Actual minor closure implies C10 iso/induced/strong hereditary closure, but the witness-only interface gains no closure premise.",
+    "Freeze both exact helpers and both complete rows. X192 preserves alpha before the class, the triangle-free algorithm domain, output bounds and open/done status. X168 preserves class-uniform K, connected guard and K*(|V|+1), partial/BLOCKED status and the documented extension-complexity vacuity. Blocked edge e161 and all statement documentation remain unchanged.",
+    "No pre-existing proof consumer or frozen snapshot reaches either helper. No historical Original is needed. Only the two now-migrated distinct-variant entries are removed from C10 metadata; every earlier frozen body/review field stays unchanged. X198 inline closure without properness, U8 vertex-minor/proper_class and quantitative fixed-H class bounds remain outside scope.",
+    "Public-only examples include empty/universal/zero-order classes, a supplied excluded minor, ordinary closure implying strong hereditary closure, and a positive exact-order class that excludes a minor but is not closed under minors. Exact kernel types, all four compatibility iff declarations, strict frozen/live closures and independent step-10/root final review are required."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X192.x192_proper_minor_closed_class",
+      "path": "chromatic-theory/theories/conjectures/X192.v",
+      "name": "x192_proper_minor_closed_class",
+      "frozen_path": "chromatic-theory/theories/migration/minor_classes.v",
+      "frozen": "Legacy.x192_proper_minor_closed_class",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.minor_classes.x192_proper_minor_closed_class_compat",
+      "source_declaration_sha256": "69ef4ab97ea08028edb4333a22fc30b5fd300df8792d62f3f26182819061d9e1",
+      "source_body_sha256": "b0be8e2370679bbc11b04a18855df3d78f8c17886760a5423db3ff8b8c1db66f",
+      "live_unfolds_to": "GTBase.minor_classes.excludes_a_minor C"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X192.triangle_free_minor_closed_chromatic_additive_approx_statement",
+      "path": "chromatic-theory/theories/conjectures/X192.v",
+      "name": "triangle_free_minor_closed_chromatic_additive_approx_statement",
+      "frozen_path": "chromatic-theory/theories/migration/minor_classes.v",
+      "frozen": "Legacy.triangle_free_minor_closed_chromatic_additive_approx_statement",
+      "substitutions": {
+        "x192_proper_minor_closed_class": "Legacy.x192_proper_minor_closed_class"
+      },
+      "certificate": "Chromatic.migration.minor_classes.triangle_free_minor_closed_chromatic_additive_approx_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X168.x168_proper_minor_closed_class",
+      "path": "graph-theory-misc/theories/conjectures/X168.v",
+      "name": "x168_proper_minor_closed_class",
+      "frozen_path": "graph-theory-misc/theories/migration/minor_classes.v",
+      "frozen": "Legacy.x168_proper_minor_closed_class",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.minor_classes.x168_proper_minor_closed_class_compat",
+      "source_declaration_sha256": "7448400f55e05c2d7db324037271e81817e362c55f145c135eaca453e5ac55ad",
+      "source_body_sha256": "668f82b0ff34432356daad5675c3fa171f627a93d444a85ca3a40c5e76362619",
+      "live_unfolds_to": "GTBase.minor_classes.proper_minor_closed_class C"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X168.minor_closed_spanning_tree_polytope_linear_xc_statement",
+      "path": "graph-theory-misc/theories/conjectures/X168.v",
+      "name": "minor_closed_spanning_tree_polytope_linear_xc_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/minor_classes.v",
+      "frozen": "Legacy.minor_closed_spanning_tree_polytope_linear_xc_statement",
+      "substitutions": {
+        "x168_proper_minor_closed_class": "Legacy.x168_proper_minor_closed_class"
+      },
+      "certificate": "GTMisc.migration.minor_classes.minor_closed_spanning_tree_polytope_linear_xc_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.U8.vminor_closed",
+      "path": "chromatic-theory/theories/conjectures/U8.v",
+      "name": "vminor_closed",
+      "note": "Vertex-minor closure includes local complementation; distinct from ordinary minor closure."
+    },
+    {
+      "qualified": "Chromatic.conjectures.U8.proper_class",
+      "path": "chromatic-theory/theories/conjectures/U8.v",
+      "name": "proper_class",
+      "note": "Under ordinary minor closure, omission is equivalent to an excluded-minor witness; no unconditional equivalence is asserted."
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "family": "proper-minor-closed-class",
+  "primitive": {
+    "canonical_name": "GTBase.minor_classes.proper_minor_closed_class",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "proper_minor_closed_class"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X192.x192_proper_minor_closed_class",
+      "GTMisc.conjectures.X168.x168_proper_minor_closed_class"
+    ],
+    "consumers_remaining": 2,
+    "relation": "two distinct contracts: uniform excluded-minor witness alone (X192), or witness AND ordinary minor closure (X168)",
+    "semantic_classes": {
+      "excluded-witness-only": {
+        "members": [
+          "Chromatic.conjectures.X192.x192_proper_minor_closed_class"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "Chromatic.migration.minor_classes.x192_proper_minor_closed_class_compat",
+        "note": "X192 does NOT require closure. Exact alias to excludes_a_minor, no new guard."
+      },
+      "excluded-witness-and-closure": {
+        "members": [
+          "GTMisc.conjectures.X168.x168_proper_minor_closed_class"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificate": "GTMisc.migration.minor_classes.x168_proper_minor_closed_class_compat",
+        "note": "X168 requires the same witness AND ordinary minor closure. No equivalence to X192 is claimed."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.minor_classes.x192_proper_minor_closed_class_compat",
+      "Chromatic.migration.minor_classes.triangle_free_minor_closed_chromatic_additive_approx_statement_compat",
+      "GTMisc.migration.minor_classes.x168_proper_minor_closed_class_compat",
+      "GTMisc.migration.minor_classes.minor_closed_spanning_tree_polytope_linear_xc_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.minor_classes.minor_self",
+      "GTBase.minor_classes.excludes_a_minor_ext",
+      "GTBase.minor_classes.minor_closed_ext",
+      "GTBase.minor_classes.proper_minor_closed_class_ext",
+      "GTBase.minor_classes.proper_minor_closed_class_excludes",
+      "GTBase.minor_classes.proper_minor_closed_class_closed",
+      "GTBase.minor_classes.proper_minor_closed_class_intro",
+      "GTBase.minor_classes.minor_closed_induced",
+      "GTBase.minor_classes.minor_closed_iso",
+      "GTBase.minor_classes.minor_closed_hereditary",
+      "GTBase.minor_classes.proper_minor_closed_class_empty",
+      "GTBase.minor_classes.minor_closed_all",
+      "GTBase.minor_classes.not_excludes_a_minor_all",
+      "GTBase.minor_classes.excludes_a_minor_order_le",
+      "GTBase.minor_classes.excludes_a_minor_exact_order",
+      "GTBase.minor_classes.not_minor_closed_positive_exact_order",
+      "GTBase.minor_classes.excluded_minor_class_closed",
+      "GTBase.minor_classes.excluded_minor_class_proper",
+      "GTBase.minor_classes.minor_closed_omits_iff",
+      "GTBase.minor_classes.excludes_a_minor_subclass"
+    ],
+    "distinct_variants": {
+      "Chromatic.conjectures.U8.vminor_closed": "Vertex-minor closure includes local complementation; distinct from ordinary minor closure.",
+      "Chromatic.conjectures.U8.proper_class": "Under ordinary minor closure, omission is equivalent to an excluded-minor witness; no unconditional equivalence is asserted."
+    },
+    "migration_report": "meta/migration_reports/proper_minor_closed_class.md",
+    "migration_spec": "meta/migration_reports/proper_minor_closed_class.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/proper-minor-closed-class.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C11.md",
+    "downstream_client": "base/theories/examples/minor_classes.v",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.minor",
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.digraph",
+        "GTBase.graph_classes"
+      ],
+      "result": "adapted-in-base",
+      "candidate": "GraphTheory.core.minor.minor",
+      "note": "Reuse graph-level minor and its transitivity/induced/iso/cardinality laws with their exact orientations. No upstream generic graph-class wrapper was found. Exclusion alone and actual closure remain separate, while the explicit conjunction matches X168.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
+  }
+}
