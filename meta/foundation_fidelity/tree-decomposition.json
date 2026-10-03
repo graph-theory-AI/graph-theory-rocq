@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "family": "tree-decomposition",
+  "modules": {
+    "GTBase.bag_decompositions": {
+      "path": "base/theories/bag_decompositions.v",
+      "overrides": {
+        "bag_decomposition": {
+          "verdict": "FAITHFUL",
+          "note": "Exactly vertex coverage, edge coverage and connected fibres for supplied G,T,bag, with arbitrary index and no extra guard. Same-forest upstream sdecomp equivalence is explicit."
+        },
+        "tree_bag_decomposition": {
+          "verdict": "FAITHFUL",
+          "note": "Explicit conjunction is_tree [set:T] and raw bag contract; is_tree itself allows empty index. Matches X169 without repairing its unrelated token-path defect."
+        },
+        "two_isolated": {
+          "verdict": "FAITHFUL",
+          "note": "Two-vertex edgeless index used to exhibit failure of fibre connectivity independently of coverage."
+        }
+      },
+      "machine_evidence": [
+        "bag_decomposition_cover",
+        "bag_decomposition_edge",
+        "bag_decomposition_fibre",
+        "bag_decompositionP",
+        "tree_bag_decompositionP",
+        "restrict_bag",
+        "bag_decomposition_sdecompP",
+        "bag_decomposition_forest_sdecompP",
+        "bag_decomposition_K0",
+        "bag_decomposition_K1_one_bag",
+        "bag_decomposition_K2_one_bag",
+        "not_bag_decomposition_K1_empty_bag",
+        "not_bag_decomposition_K2_singleton_bags",
+        "not_bag_decomposition_two_isolated",
+        "bag_decomposition_K3_index",
+        "not_tree_bag_decomposition_K3_index",
+        "bag_decomposition_unused_empty_bag",
+        "bag_decomposition_nonempty_index",
+        "tree_bag_decomposition_K0"
+      ]
+    }
+  }
+}

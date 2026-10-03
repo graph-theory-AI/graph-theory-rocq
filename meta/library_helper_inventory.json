@@ -527,6 +527,11 @@
         "Cycle.conjectures.X212.x212_colour_graph",
         "Topological.conjectures.X23.x23_colour_graph"
       ],
+      "d5328a7d4da05c5b7ffa485c30d760130c46ca87a86542742b11eafa341d3a0a": [
+        "Chromatic.conjectures.X126.x126_tree_decomposition",
+        "Chromatic.conjectures.X189.x189_tree_decomposition",
+        "Minor.conjectures.X27.x27_tree_decomposition"
+      ],
       "d551a89d7dd0a1e227ab75c81ef1095bd9a56d0fc5bde5bdd535e971c9f39867": [
         "Chromatic.conjectures.X7.x7_delete_edges_rel",
         "Chromatic.conjectures.XE1.xe1_delete_edges_rel",
@@ -1035,10 +1040,6 @@
       "fa764d43c3b1434089898939e937e70eb615b809e4484d7ddb0651a30b22b5a7": [
         "Extremal.conjectures.X98.x98_internal",
         "GTMisc.conjectures.X114.x114_internal"
-      ],
-      "fada0e894810937f15bc721b29a88bf579e6e902493cdfc40febe56ccefa8256": [
-        "Chromatic.conjectures.X126.x126_tree_decomposition",
-        "Minor.conjectures.X27.x27_tree_decomposition"
       ],
       "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a": [
         "Chromatic.conjectures.X3.x3_complement_rel",
@@ -5717,7 +5718,7 @@
         "Chromatic.conjectures.X126.x126_nonrepetitive"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x126_genuine_path",
       "normalized_name": "genuine_path",
@@ -5736,7 +5737,7 @@
         "Chromatic.conjectures.X126.x126_nonrepetitive_list_colouring"
       ],
       "kind": "Definition",
-      "line": 15,
+      "line": 16,
       "local_dependencies": [
         "x126_genuine_path"
       ],
@@ -5757,7 +5758,7 @@
         "Chromatic.conjectures.X126.x126_thue_choosable"
       ],
       "kind": "Definition",
-      "line": 26,
+      "line": 27,
       "local_dependencies": [
         "x126_nonrepetitive"
       ],
@@ -5779,7 +5780,7 @@
         "Chromatic.conjectures.X126.x126_is_thue_choice_number"
       ],
       "kind": "Definition",
-      "line": 33,
+      "line": 34,
       "local_dependencies": [
         "x126_nonrepetitive_list_colouring"
       ],
@@ -5798,7 +5799,7 @@
       "declaration_hash": "3f82408534e7b9a45b34c07cb4d069b1af1ad6d14ed581ad1776d274f96133c0",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 41,
+      "line": 42,
       "local_dependencies": [
         "x126_thue_choosable"
       ],
@@ -5812,14 +5813,14 @@
       "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
     },
     {
-      "body_hash": "fada0e894810937f15bc721b29a88bf579e6e902493cdfc40febe56ccefa8256",
-      "body_shape_hash": "fada0e894810937f15bc721b29a88bf579e6e902493cdfc40febe56ccefa8256",
-      "declaration_hash": "7454fd24fffdfcc54064a72e44ac1ecef8eecbc95ba400cca74a46112650a557",
+      "body_hash": "d5328a7d4da05c5b7ffa485c30d760130c46ca87a86542742b11eafa341d3a0a",
+      "body_shape_hash": "d5328a7d4da05c5b7ffa485c30d760130c46ca87a86542742b11eafa341d3a0a",
+      "declaration_hash": "98e435e26195f59ae20d609115cd7c19b90e9053ba1550218c566465fc5acccf",
       "direct_consumers": [
         "Chromatic.conjectures.X126.x126_pathwidth_at_most"
       ],
       "kind": "Definition",
-      "line": 48,
+      "line": 49,
       "local_dependencies": [],
       "name": "x126_tree_decomposition",
       "normalized_name": "tree_decomposition",
@@ -5838,7 +5839,7 @@
         "Chromatic.conjectures.X126.x126_pathwidth_at_most"
       ],
       "kind": "Definition",
-      "line": 58,
+      "line": 57,
       "local_dependencies": [],
       "name": "x126_path_index_graph",
       "normalized_name": "path_index_graph",
@@ -5857,7 +5858,7 @@
         "Chromatic.conjectures.X126.dujmovic_thue_choice_number_pathwidth_statement"
       ],
       "kind": "Definition",
-      "line": 61,
+      "line": 60,
       "local_dependencies": [
         "x126_path_index_graph",
         "x126_tree_decomposition"
@@ -7808,15 +7809,15 @@
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
-      "body_hash": "7b93cc0f3222403eb234634329043c8f6f0e56e25c737682289b085d461b9e72",
-      "body_shape_hash": "7b93cc0f3222403eb234634329043c8f6f0e56e25c737682289b085d461b9e72",
-      "declaration_hash": "bf03ae7827c2d75e7601856fb195d04bae9fd6cc78c024cf847653a7adad2909",
+      "body_hash": "d5328a7d4da05c5b7ffa485c30d760130c46ca87a86542742b11eafa341d3a0a",
+      "body_shape_hash": "d5328a7d4da05c5b7ffa485c30d760130c46ca87a86542742b11eafa341d3a0a",
+      "declaration_hash": "e077b9014f7f88b119804245d4e9303df86144bf2e9c587562cf2354cddfef52",
       "direct_consumers": [
         "Chromatic.conjectures.X189.x189_spaghetti_path_decompositions_width",
         "Chromatic.conjectures.X189.x189_spaghetti_tree_decomposition"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x189_tree_decomposition",
       "normalized_name": "tree_decomposition",
@@ -7835,7 +7836,7 @@
         "Chromatic.conjectures.X189.x189_spaghetti_path_decompositions_width"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 16,
       "local_dependencies": [],
       "name": "x189_path_index_graph",
       "normalized_name": "path_index_graph",
@@ -7852,7 +7853,7 @@
       "declaration_hash": "e7c5f1ab35e76736f16e70e79056dd284956c25f58d82efa3dfd53b3d5334592",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 20,
+      "line": 19,
       "local_dependencies": [],
       "name": "x189_rooted_spaghetti_index",
       "normalized_name": "rooted_spaghetti_index",
@@ -7871,7 +7872,7 @@
         "Chromatic.conjectures.X189.x189_spaghetti_path_decompositions_width"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 24,
       "local_dependencies": [
         "x189_tree_decomposition"
       ],
@@ -7892,7 +7893,7 @@
         "Chromatic.conjectures.X189.spaghetti_tree_path_decomposition_chi_bound_statement"
       ],
       "kind": "Definition",
-      "line": 33,
+      "line": 32,
       "local_dependencies": [
         "x189_path_index_graph",
         "x189_spaghetti_tree_decomposition",
@@ -39804,14 +39805,14 @@
       "signature_shape_hash": "aff2342e451712697ef239689632f5b6968cdf4a349d6ca1d9af9c0186a04d9a"
     },
     {
-      "body_hash": "fda862e5892e5aebe67a4291b01a60ccccdeed3ac55d54a44c47ebae00872108",
-      "body_shape_hash": "fda862e5892e5aebe67a4291b01a60ccccdeed3ac55d54a44c47ebae00872108",
-      "declaration_hash": "c4b65dada66468b4bc28e8215722db4ebb2ebb17452bfb7f004a2b398083a792",
+      "body_hash": "1f90b5e82fdd219eceac0f1e0d6d0295b75407233084d5d829f43d125f74473f",
+      "body_shape_hash": "1f90b5e82fdd219eceac0f1e0d6d0295b75407233084d5d829f43d125f74473f",
+      "declaration_hash": "eeecbbfa595a94de265ff80609a69be3ab792eb2a4db88ad727fde366b28d4b4",
       "direct_consumers": [
         "GTMisc.conjectures.X169.x169_clique_tree"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x169_tree_decomposition",
       "normalized_name": "tree_decomposition",
@@ -39831,7 +39832,7 @@
         "GTMisc.conjectures.X169.x169_clique_tree_degree_at_most"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 15,
       "local_dependencies": [
         "x169_tree_decomposition"
       ],
@@ -39852,7 +39853,7 @@
         "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity"
       ],
       "kind": "Definition",
-      "line": 20,
+      "line": 18,
       "local_dependencies": [
         "x169_clique_tree"
       ],
@@ -39873,7 +39874,7 @@
         "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity"
       ],
       "kind": "Definition",
-      "line": 23,
+      "line": 21,
       "local_dependencies": [
         "x169_clique_tree"
       ],
@@ -39894,7 +39895,7 @@
         "GTMisc.conjectures.X169.x169_token_sliding_connected"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 25,
       "local_dependencies": [],
       "name": "x169_stable_set",
       "normalized_name": "stable_set",
@@ -39913,7 +39914,7 @@
         "GTMisc.conjectures.X169.x169_token_sliding_connected"
       ],
       "kind": "Definition",
-      "line": 30,
+      "line": 28,
       "local_dependencies": [],
       "name": "x169_ts_step",
       "normalized_name": "ts_step",
@@ -39932,7 +39933,7 @@
         "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity"
       ],
       "kind": "Definition",
-      "line": 37,
+      "line": 35,
       "local_dependencies": [
         "x169_stable_set",
         "x169_ts_step"
@@ -39954,7 +39955,7 @@
         "GTMisc.conjectures.X169.token_sliding_chordal_clique_tree_degree_polytime_statement"
       ],
       "kind": "Definition",
-      "line": 43,
+      "line": 41,
       "local_dependencies": [
         "x169_chordal",
         "x169_clique_tree_degree_at_most",
@@ -50030,14 +50031,14 @@
       "signature_shape_hash": "ea123d14a47d3c8fecd3f855c427512e33b52cbaad7f5d5d8ade3431e24f4c1f"
     },
     {
-      "body_hash": "fada0e894810937f15bc721b29a88bf579e6e902493cdfc40febe56ccefa8256",
-      "body_shape_hash": "fada0e894810937f15bc721b29a88bf579e6e902493cdfc40febe56ccefa8256",
-      "declaration_hash": "7848faf754610801438a2ba65552380a07c61369aaf19fd3a490ac5da4fb10b5",
+      "body_hash": "d5328a7d4da05c5b7ffa485c30d760130c46ca87a86542742b11eafa341d3a0a",
+      "body_shape_hash": "d5328a7d4da05c5b7ffa485c30d760130c46ca87a86542742b11eafa341d3a0a",
+      "declaration_hash": "a494d90b27a42a16813c341e70b756c15f050f7e7dff2bc0ea5a91df7ca57965",
       "direct_consumers": [
         "Minor.conjectures.X27.x27_treewidth_at_most"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x27_tree_decomposition",
       "normalized_name": "tree_decomposition",
@@ -50056,7 +50057,7 @@
         "Minor.conjectures.X27.bounded_degree_even_hole_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 15,
       "local_dependencies": [
         "x27_tree_decomposition"
       ],
@@ -50077,7 +50078,7 @@
         "Minor.conjectures.X27.x27_hole"
       ],
       "kind": "Definition",
-      "line": 22,
+      "line": 21,
       "local_dependencies": [],
       "name": "x27_consecutive_in_cycle",
       "normalized_name": "consecutive_in_cycle",
@@ -50096,7 +50097,7 @@
         "Minor.conjectures.X27.x27_even_hole_free"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 24,
       "local_dependencies": [
         "x27_consecutive_in_cycle"
       ],
@@ -50117,7 +50118,7 @@
         "Minor.conjectures.X27.bounded_degree_even_hole_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 31,
+      "line": 30,
       "local_dependencies": [
         "x27_hole"
       ],

@@ -43,7 +43,7 @@ Unset Printing Implicit Defensive.
 Lemma restrict_bag (G T : sgraph) (D : T -> {set G}) (v : G) :
   restrict [pred t : T | v \in D t] (@sedge T)
     =2 restrict [set t : T | v \in D t] (@sedge T).
-Proof. by move=> a b; rewrite /restrict_mem /= !inE. Qed.
+Proof. exact: GTBase.bag_decompositions.restrict_bag. Qed.
 
 Lemma tw_le_x27 (G : sgraph) (k : nat) : tw_le G k -> x27_treewidth_at_most G k.
 Proof.
