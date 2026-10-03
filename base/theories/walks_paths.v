@@ -14,9 +14,11 @@
     meta/library_primitives/consecutive-in-cycle.json, section "Cyclically
     consecutive entries" below), set-to-set simple paths, [seq_set_path]
     (registry meta/library_primitives/set-path.json, section "Set-to-set simple
-    paths" below), and nonempty simple paths, [seq_simple_path] (registry
+    paths" below), nonempty simple paths, [seq_simple_path] (registry
     meta/library_primitives/simple-path.json, section "Simple whole-sequence
-    paths" below).
+    paths" below), and simple walks with the empty sequence accepted,
+    [seq_simple_walk] (registry meta/library_primitives/is-path.json, section
+    "Simple walks of a sequence" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -1067,3 +1069,67 @@ have hu : uniq (map f (x :: q)) by rewrite (map_inj_uniq finj).
 have hp : path (--) (f x) (map f q) by rewrite path_map; apply: sub_path pq => a b /fhom.
 by split.
 Qed.
+
+(** ** Simple walks of a sequence (empty allowed)
+
+    [seq_simple_walk s] is the boolean [uniq s && sorted (--) s]: the entries of
+    [s] are pairwise distinct and consecutive entries are adjacent.  Unlike the
+    path predicate [seq_simple_path] above, the EMPTY sequence is accepted: the
+    two differ exactly there ([seq_simple_path_walk]).
+
+    Upstream audit (2026-10-03; MathComp 2.5.0, coq-graph-theory 0.9.7).
+    MathComp's [sorted e s] is [path e x s'] on [x :: s'] and [true] on [[::]];
+    with [uniq] it is the whole-sequence form of coq-graph-theory's tail
+    predicate [upath x y q]: on [x :: q] it is [upath x (last x q) q]
+    ([seq_simple_walk_upath]).
+
+    Specification, every clause proved below:
+    - the empty sequence and every one-entry sequence are simple walks;
+    - a two-entry sequence is one exactly when its entries are distinct and
+      adjacent; repeated entries are excluded;
+    - a nonempty simple walk is a simple path, and conversely. *)
+
+Section SeqSimpleWalk.
+Variable G : relType.
+Implicit Types (p q s : seq G) (x y : G).
+
+(** [s] is a duplicate-free walk; the empty sequence is one. *)
+Definition seq_simple_walk s : bool := uniq s && sorted (--) s.
+
+Lemma seq_simple_walk_nil : seq_simple_walk [::].
+Proof. by []. Qed.
+
+Lemma seq_simple_walk_seq1 x : seq_simple_walk [:: x].
+Proof. by []. Qed.
+
+Lemma seq_simple_walk_uniq s : seq_simple_walk s -> uniq s.
+Proof. by case/andP. Qed.
+
+Lemma seq_simple_walk_sorted s : seq_simple_walk s -> sorted (--) s.
+Proof. by case/andP. Qed.
+
+(** Repeated entries are excluded. *)
+Lemma seq_simple_walk_repeat s : ~~ uniq s -> ~~ seq_simple_walk s.
+Proof. by apply: contra => /seq_simple_walk_uniq. Qed.
+
+Lemma seq_simple_walk_pair x y : seq_simple_walk [:: x; y] = (x != y) && (x -- y).
+Proof. by rewrite /seq_simple_walk /= !inE !andbT. Qed.
+
+(** The nonempty distinction with [seq_simple_path]. *)
+Lemma seq_simple_path_walk s : seq_simple_path s <-> s != [::] /\ seq_simple_walk s.
+Proof.
+rewrite seq_simple_pathE /seq_simple_walk.
+by split=> [[-> [-> ->]]|[-> /andP[-> ->]]].
+Qed.
+
+Lemma seq_simple_walk_path s : seq_simple_walk s <-> s = [::] \/ seq_simple_path s.
+Proof.
+case: s => [|x q]; first by split=> // _; left.
+split=> [w|[//|/seq_simple_path_walk[_ //]]].
+by right; apply/seq_simple_path_walk.
+Qed.
+
+Lemma seq_simple_walk_upath x q : seq_simple_walk (x :: q) = upath x (last x q) q.
+Proof. by rewrite /seq_simple_walk /upath /pathp eqxx andbT. Qed.
+
+End SeqSimpleWalk.

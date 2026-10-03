@@ -46,7 +46,7 @@
     "",
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of the five frozen statements contains no live helper or chain declaration of this family and not `seq_simple_path`, while each live statement reaches it and its alias (/srv/graph-theory-rocq/coordination/evidence/B6-simple_path/print_all_dependencies_summary.txt, with the probe and the full output beside it).",
     "",
-    "No statement text, doc block, manifest row or leg state changes (checked below); X178's partial source status and all list, least-bound and odd-semiclique guards stay verbatim."
+    "No statement text, doc block, manifest row or leg state changes (checked below); X178's partial source status and all list, least-bound and odd-semiclique guards stay verbatim. Hom U3 `is_path` and Cycle U6 `is_path`, classified here as separate contracts, were later migrated by B7 (family is-path, report `is_path`) into their own representation classes, so they are no longer listed as untouched variants; U9's `spath` and XE2's walk still are."
   ],
   "frozen": [
     {
@@ -259,18 +259,6 @@
     }
   ],
   "distinct_variants": [
-    {
-      "qualified": "Hom.conjectures.U3.is_path",
-      "path": "homomorphism-theory/theories/conjectures/U3.v",
-      "name": "is_path",
-      "note": "boolean simple sequence path with the EMPTY sequence accepted; a different contract, untouched"
-    },
-    {
-      "qualified": "Cycle.conjectures.U6.is_path",
-      "path": "cycle-theory/theories/conjectures/U6.v",
-      "name": "is_path",
-      "note": "a multigraph EDGE SET that is a path; not a vertex-sequence contract, untouched"
-    },
     {
       "qualified": "Packing.conjectures.U9.spath",
       "path": "packing-theory/theories/conjectures/U9.v",

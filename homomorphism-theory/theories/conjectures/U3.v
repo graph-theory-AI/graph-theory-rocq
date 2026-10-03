@@ -327,7 +327,7 @@ Definition mapping_planar_graphs_to_odd_cycles_statement : Prop :=
     guard rules out the empty graph (whose only path is [[::]], for which "a
     common vertex" is vacuously impossible). *)
 Definition is_path (G : sgraph) (s : seq G) : bool :=
-  uniq s && (if s is x :: p then path (--) x p else true).
+  seq_simple_walk s.
 
 Definition longest_path (G : sgraph) (s : seq G) : Prop :=
   is_path s /\ forall t : seq G, is_path t -> size t <= size s.

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "family": "is-path",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_simple_walk",
+    "owner": "base (sequence class); cycle-theory foundations (multigraph class)",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "is_path"
+    ],
+    "source_definitions": [
+      "Cycle.conjectures.U6.is_path",
+      "Hom.conjectures.U3.is_path"
+    ],
+    "consumers_remaining": 2,
+    "relation": "two separate representations, each definitional: Hom U3 is_path is GTBase.walks_paths.seq_simple_walk s (uniq s && sorted (--) s, empty true); Cycle U6 is_path is Cycle.foundations.path_subgraphs.path_subgraph P (nonempty, connected, acyclic edge set of arc-end degree at most two)",
+    "semantic_classes": {
+      "sequence-empty-allowed": {
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTBase.walks_paths.seq_simple_walk_path",
+        "note": "Hom U3 is_path: boolean uniq s && (if s is x :: p then path (--) x p else true), the body of seq_simple_walk s (MathComp sorted), convertible; the empty sequence is a simple walk, so it differs from family simple-path's seq_simple_path exactly on [::] (seq_simple_path_walk, seq_simple_walk_path)."
+      },
+      "multigraph-edge-set": {
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Cycle.foundations.path_subgraphs.path_subgraph_edge",
+        "note": "Cycle U6 is_path: [/\\ P != set0, subgraph_connected P, acyclic P & forall v, subdeg P v <= 2] on a multigraph edge set, the body of Cycle.foundations.path_subgraphs.path_subgraph P over acyclic_edge_set (U6's acyclic body), convertible; loops and parallel edges keep their behaviour and no looplessness or simplicity premise is added."
+      }
+    },
+    "compatibility_theorems": [
+      "Cycle.migration.is_path.decomposing_a_connected_graph_into_paths_statement_compat",
+      "Cycle.migration.is_path.u6_is_path_compat",
+      "Cycle.migration.is_path.u6_path_decomposition_compat",
+      "Hom.migration.is_path.do_any_three_longest_paths_in_a_connected_graph_have_statement_compat",
+      "Hom.migration.is_path.u3_is_path_compat",
+      "Hom.migration.is_path.u3_longest_path_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.seq_simple_walk_nil",
+      "GTBase.walks_paths.seq_simple_walk_seq1",
+      "GTBase.walks_paths.seq_simple_walk_uniq",
+      "GTBase.walks_paths.seq_simple_walk_sorted",
+      "GTBase.walks_paths.seq_simple_walk_repeat",
+      "GTBase.walks_paths.seq_simple_walk_pair",
+      "GTBase.walks_paths.seq_simple_path_walk",
+      "GTBase.walks_paths.seq_simple_walk_path",
+      "GTBase.walks_paths.seq_simple_walk_upath",
+      "Cycle.foundations.path_subgraphs.path_subgraph_neq0",
+      "Cycle.foundations.path_subgraphs.path_subgraph_set0",
+      "Cycle.foundations.path_subgraphs.path_subgraph_connected",
+      "Cycle.foundations.path_subgraphs.path_subgraph_acyclic",
+      "Cycle.foundations.path_subgraphs.path_subgraph_subdeg",
+      "Cycle.foundations.path_subgraphs.acyclic_edge_set0",
+      "Cycle.foundations.path_subgraphs.acyclic_edge_set_sub",
+      "Cycle.foundations.path_subgraphs.card_ends_at1",
+      "Cycle.foundations.path_subgraphs.subdeg_set1",
+      "Cycle.foundations.path_subgraphs.subdeg_set2",
+      "Cycle.foundations.path_subgraphs.incident_set1",
+      "Cycle.foundations.path_subgraphs.is_circuit_loop",
+      "Cycle.foundations.path_subgraphs.path_subgraph_noloop",
+      "Cycle.foundations.path_subgraphs.path_subgraph_edge",
+      "Cycle.foundations.path_subgraphs.is_circuit_parallel",
+      "Cycle.foundations.path_subgraphs.path_subgraph_noparallel"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.mgraph",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.path",
+        "mathcomp.boot.seq"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "mathcomp.boot.path.sorted",
+      "note": "Sequence class: U3's body is MathComp uniq && sorted (--), the whole-sequence form of coq-graph-theory's tail predicate upath (seq_simple_walk_upath on x :: q), with the empty sequence accepted; kept separate from the nonempty seq_simple_path of family simple-path. Multigraph class: coq-graph-theory's mgraph has edges, endpoints, incident and edges_at but no path-subgraph predicate; Cycle.foundations.connectivity owns subgraph_connected, is_circuit and arc-end subdeg, and Cycle.foundations.path_subgraphs adds acyclic_edge_set and path_subgraph over them without importing any conjecture. U6's own acyclic (also used by spanning_tree) is not a source of this family and is unchanged. U9 spath (no uniqueness) and XE2 xe2_path_in_graph (walk with repeats) stay separate. Legacy bodies and per-row certificates: meta/migration_reports/is_path.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/is_path.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/is_path.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/is-path.json"
+  }
+}
