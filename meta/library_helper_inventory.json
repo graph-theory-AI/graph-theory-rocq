@@ -37374,7 +37374,7 @@
         "GTMisc.conjectures.U13.seq_M_G"
       ],
       "kind": "Definition",
-      "line": 35,
+      "line": 36,
       "local_dependencies": [],
       "name": "oedges",
       "normalized_name": "oedges",
@@ -37394,7 +37394,7 @@
         "GTMisc.conjectures.U13.is_tree_card"
       ],
       "kind": "Definition",
-      "line": 45,
+      "line": 46,
       "local_dependencies": [
         "oedges"
       ],
@@ -37408,14 +37408,12 @@
       "signature_shape_hash": "0596fb401e0ad5525f64c30a46df4b74ef3b429bb464e52445ea6a2244565dd3"
     },
     {
-      "body_hash": "9f4c282b1a6393ea6f9c90a12204c46915a9f6d76a7502dbff8f0a103a7c8b52",
-      "body_shape_hash": "9f4c282b1a6393ea6f9c90a12204c46915a9f6d76a7502dbff8f0a103a7c8b52",
-      "declaration_hash": "32c7b266ab38bb5d934e4f9cc675f018320e78c5fd989612f556ec5dbc34da77",
-      "direct_consumers": [
-        "GTMisc.conjectures.U13.has_induced_cycle"
-      ],
+      "body_hash": "cdc2ed74ca87696176b57261f7c6d2b153dc595dd80acea6a8f85ede822f456c",
+      "body_shape_hash": "cdc2ed74ca87696176b57261f7c6d2b153dc595dd80acea6a8f85ede822f456c",
+      "declaration_hash": "b70a9bfbfac4e85f6164f1b3a0a95ce02ecb4f933219c25344898f69021fd831",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 47,
+      "line": 48,
       "local_dependencies": [],
       "name": "induced_cycle",
       "normalized_name": "induced_cycle",
@@ -37427,17 +37425,15 @@
       "signature_shape_hash": "8310b44d1bee1450bc805a975f996700285b374beebedda03fc197c9ab8b0720"
     },
     {
-      "body_hash": "fdd7724c5a2a0439341f0286a039ab5fa76845c79ff4d95a558c59da35428e8d",
-      "body_shape_hash": "fdd7724c5a2a0439341f0286a039ab5fa76845c79ff4d95a558c59da35428e8d",
-      "declaration_hash": "fb3bb326e047c4cb8ee00484510ecfe20e1c2dd9ba7190853fa9f613892449ad",
+      "body_hash": "9c55d651323a1dd9019789b9644c7c82901ce4f93eec6fb48084da4a09400342",
+      "body_shape_hash": "9c55d651323a1dd9019789b9644c7c82901ce4f93eec6fb48084da4a09400342",
+      "declaration_hash": "7296c2bcd7889d9b97ec204d004ef76a3483acebfd17712712a0cf39494cbc91",
       "direct_consumers": [
         "GTMisc.conjectures.U13.two_colouring_a_graph_without_a_monochromatic_maximu_statement"
       ],
       "kind": "Definition",
-      "line": 69,
-      "local_dependencies": [
-        "induced_cycle"
-      ],
+      "line": 73,
+      "local_dependencies": [],
       "name": "has_induced_cycle",
       "normalized_name": "has_induced_cycle",
       "package": "graph-theory-misc",
@@ -37455,7 +37451,7 @@
         "GTMisc.conjectures.U13.splits_max_cliques"
       ],
       "kind": "Definition",
-      "line": 72,
+      "line": 76,
       "local_dependencies": [],
       "name": "is_max_clique",
       "normalized_name": "is_max_clique",
@@ -37474,7 +37470,7 @@
         "GTMisc.conjectures.U13.splits_max_cliques"
       ],
       "kind": "Definition",
-      "line": 75,
+      "line": 79,
       "local_dependencies": [],
       "name": "monochromatic",
       "normalized_name": "monochromatic",
@@ -37493,7 +37489,7 @@
         "GTMisc.conjectures.U13.two_colouring_a_graph_without_a_monochromatic_maximu_statement"
       ],
       "kind": "Definition",
-      "line": 78,
+      "line": 82,
       "local_dependencies": [
         "is_max_clique",
         "monochromatic"
@@ -37515,7 +37511,7 @@
         "GTMisc.conjectures.U13.is_book_thickness"
       ],
       "kind": "Definition",
-      "line": 106,
+      "line": 110,
       "local_dependencies": [],
       "name": "book_embedding",
       "normalized_name": "book_embedding",
@@ -37534,7 +37530,7 @@
         "GTMisc.conjectures.U13.book_thickness_of_subdivisions_statement"
       ],
       "kind": "Definition",
-      "line": 134,
+      "line": 138,
       "local_dependencies": [
         "book_embedding"
       ],
@@ -37555,7 +37551,7 @@
         "GTMisc.conjectures.U13.book_thickness_of_subdivisions_statement"
       ],
       "kind": "Definition",
-      "line": 137,
+      "line": 141,
       "local_dependencies": [],
       "name": "subdivide1",
       "normalized_name": "subdivide1",
@@ -37574,7 +37570,7 @@
         "GTMisc.conjectures.U13.subgraph_of_large_average_degree_and_large_average_d_statement"
       ],
       "kind": "Definition",
-      "line": 164,
+      "line": 168,
       "local_dependencies": [],
       "name": "avgdeg_geq",
       "normalized_name": "avgdeg_geq",
@@ -37593,7 +37589,7 @@
         "GTMisc.conjectures.U13.subgraph_of_large_average_degree_and_large_average_d_statement"
       ],
       "kind": "Definition",
-      "line": 183,
+      "line": 187,
       "local_dependencies": [],
       "name": "subgraph_of",
       "normalized_name": "subgraph_of",
@@ -37613,7 +37609,7 @@
         "GTMisc.conjectures.U13.relAdj_sym"
       ],
       "kind": "Definition",
-      "line": 234,
+      "line": 238,
       "local_dependencies": [],
       "name": "relAdj",
       "normalized_name": "relAdj",
@@ -37632,7 +37628,7 @@
         "GTMisc.conjectures.U13.mk_sgraph"
       ],
       "kind": "Lemma",
-      "line": 237,
+      "line": 241,
       "local_dependencies": [
         "relAdj"
       ],
@@ -37653,7 +37649,7 @@
         "GTMisc.conjectures.U13.mk_sgraph"
       ],
       "kind": "Lemma",
-      "line": 239,
+      "line": 243,
       "local_dependencies": [
         "relAdj"
       ],
@@ -37675,7 +37671,7 @@
         "GTMisc.conjectures.U13.edge_union"
       ],
       "kind": "Definition",
-      "line": 241,
+      "line": 245,
       "local_dependencies": [
         "relAdj_irrefl",
         "relAdj_sym"
@@ -37697,7 +37693,7 @@
         "GTMisc.conjectures.U13.coloring_the_union_of_degenerate_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 242,
+      "line": 246,
       "local_dependencies": [
         "mk_sgraph"
       ],
@@ -37718,7 +37714,7 @@
         "GTMisc.conjectures.U13.bene_conjecture_graph_theoretic_form_0_statement"
       ],
       "kind": "Definition",
-      "line": 269,
+      "line": 273,
       "local_dependencies": [],
       "name": "stage_regular",
       "normalized_name": "stage_regular",
@@ -37737,7 +37733,7 @@
         "GTMisc.conjectures.U13.externally_connected"
       ],
       "kind": "Definition",
-      "line": 293,
+      "line": 297,
       "local_dependencies": [],
       "name": "stage_reachable",
       "normalized_name": "stage_reachable",
@@ -37756,7 +37752,7 @@
         "GTMisc.conjectures.U13.bene_conjecture_graph_theoretic_form_0_statement"
       ],
       "kind": "Definition",
-      "line": 296,
+      "line": 300,
       "local_dependencies": [
         "stage_reachable"
       ],
@@ -37777,7 +37773,7 @@
         "GTMisc.conjectures.U13.rearrangeable"
       ],
       "kind": "Definition",
-      "line": 299,
+      "line": 303,
       "local_dependencies": [],
       "name": "multistage_route",
       "normalized_name": "multistage_route",
@@ -37797,7 +37793,7 @@
         "GTMisc.conjectures.U13.shuffle_exchange_conjecture_statement"
       ],
       "kind": "Definition",
-      "line": 306,
+      "line": 310,
       "local_dependencies": [
         "multistage_route"
       ],
@@ -37818,7 +37814,7 @@
         "GTMisc.conjectures.U13.shuffle_exchange_conjecture_statement"
       ],
       "kind": "Definition",
-      "line": 310,
+      "line": 314,
       "local_dependencies": [],
       "name": "se_adj",
       "normalized_name": "se_adj",
@@ -37837,7 +37833,7 @@
         "GTMisc.conjectures.U13.reaches"
       ],
       "kind": "Definition",
-      "line": 359,
+      "line": 363,
       "local_dependencies": [],
       "name": "pebble_move",
       "normalized_name": "pebble_move",
@@ -37856,7 +37852,7 @@
         "GTMisc.conjectures.U13.solvable"
       ],
       "kind": "Inductive",
-      "line": 377,
+      "line": 381,
       "local_dependencies": [
         "pebble_move"
       ],
@@ -37877,7 +37873,7 @@
         "GTMisc.conjectures.U13.is_pebbling_number"
       ],
       "kind": "Definition",
-      "line": 382,
+      "line": 386,
       "local_dependencies": [
         "reaches"
       ],
@@ -37898,7 +37894,7 @@
         "GTMisc.conjectures.U13.pebbling_a_cartesian_product_statement"
       ],
       "kind": "Definition",
-      "line": 385,
+      "line": 389,
       "local_dependencies": [
         "solvable"
       ],
@@ -37919,7 +37915,7 @@
         "GTMisc.conjectures.U13.fiftyseven_regular_moore_graph_statement"
       ],
       "kind": "Definition",
-      "line": 414,
+      "line": 418,
       "local_dependencies": [],
       "name": "has_diameter",
       "normalized_name": "has_diameter",
@@ -37939,7 +37935,7 @@
         "GTMisc.conjectures.U13.graceful_tree_statement"
       ],
       "kind": "Definition",
-      "line": 445,
+      "line": 449,
       "local_dependencies": [
         "n_edges"
       ],
@@ -37960,7 +37956,7 @@
         "GTMisc.conjectures.U13.graceful_labeling"
       ],
       "kind": "Definition",
-      "line": 463,
+      "line": 467,
       "local_dependencies": [],
       "name": "edge_label",
       "normalized_name": "edge_label",
@@ -37979,7 +37975,7 @@
         "GTMisc.conjectures.U13.graceful_tree_statement"
       ],
       "kind": "Definition",
-      "line": 466,
+      "line": 470,
       "local_dependencies": [
         "edge_label",
         "n_edges",
@@ -38002,7 +37998,7 @@
         "GTMisc.conjectures.U13.imb"
       ],
       "kind": "Definition",
-      "line": 495,
+      "line": 499,
       "local_dependencies": [],
       "name": "vdeg",
       "normalized_name": "vdeg",
@@ -38022,7 +38018,7 @@
         "GTMisc.conjectures.U13.seq_M_G"
       ],
       "kind": "Definition",
-      "line": 510,
+      "line": 514,
       "local_dependencies": [
         "vdeg"
       ],
@@ -38043,7 +38039,7 @@
         "GTMisc.conjectures.U13.imbalance_statement"
       ],
       "kind": "Definition",
-      "line": 513,
+      "line": 517,
       "local_dependencies": [
         "imb",
         "oedges"
@@ -38065,7 +38061,7 @@
         "GTMisc.conjectures.U13.imbalance_statement"
       ],
       "kind": "Definition",
-      "line": 515,
+      "line": 519,
       "local_dependencies": [],
       "name": "graphic",
       "normalized_name": "graphic",
@@ -38084,7 +38080,7 @@
         "GTMisc.conjectures.U13.leaf_game_solution"
       ],
       "kind": "Definition",
-      "line": 540,
+      "line": 544,
       "local_dependencies": [],
       "name": "is_leaf",
       "normalized_name": "is_leaf",
@@ -38103,7 +38099,7 @@
         "GTMisc.conjectures.U13.leaf_game_solution"
       ],
       "kind": "Definition",
-      "line": 563,
+      "line": 567,
       "local_dependencies": [],
       "name": "gold_total",
       "normalized_name": "gold_total",
@@ -38122,7 +38118,7 @@
         "GTMisc.conjectures.U13.a_gold_grabbing_game_statement"
       ],
       "kind": "Definition",
-      "line": 566,
+      "line": 570,
       "local_dependencies": [
         "gold_total",
         "is_leaf"
@@ -38144,7 +38140,7 @@
         "GTMisc.conjectures.U13.hexagonal"
       ],
       "kind": "Definition",
-      "line": 634,
+      "line": 638,
       "local_dependencies": [],
       "name": "tri_adj",
       "normalized_name": "tri_adj",
@@ -38163,7 +38159,7 @@
         "GTMisc.conjectures.U13.weighted_colouring_of_hexagonal_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 660,
+      "line": 664,
       "local_dependencies": [
         "tri_adj"
       ],
@@ -38184,7 +38180,7 @@
         "GTMisc.conjectures.U13.weighted_colouring_of_hexagonal_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 665,
+      "line": 669,
       "local_dependencies": [],
       "name": "weighted_clique_number",
       "normalized_name": "weighted_clique_number",
@@ -38203,7 +38199,7 @@
         "GTMisc.conjectures.U13.weighted_chromatic_number"
       ],
       "kind": "Definition",
-      "line": 669,
+      "line": 673,
       "local_dependencies": [],
       "name": "weighted_colourable",
       "normalized_name": "weighted_colourable",
@@ -38222,7 +38218,7 @@
         "GTMisc.conjectures.U13.weighted_colouring_of_hexagonal_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 674,
+      "line": 678,
       "local_dependencies": [
         "weighted_colourable"
       ],

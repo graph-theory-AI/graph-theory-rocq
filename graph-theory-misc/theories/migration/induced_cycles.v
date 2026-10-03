@@ -19,14 +19,15 @@
     reused with B4's certificate; no duplicate Original is added. *)
 
 From GTBase Require Import base induced_paths induced_cycles.
-From GTMisc.conjectures Require Import X91.
-From GTMisc.migration Require consecutive_in_cycle.
+From GTMisc.conjectures Require Import X91 U13.
+From GTMisc.migration Require consecutive_in_cycle monochromatic.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Module B4 := GTMisc.migration.consecutive_in_cycle.
+Module C8 := GTMisc.migration.monochromatic.
 
 Module Legacy.
 
@@ -90,7 +91,84 @@ Lemma avoidable_path_or_pk_free_statement_original_compat :
   avoidable_path_or_pk_free_statement.
 Proof. exact: B4.avoidable_path_or_pk_free_statement_original_compat. Qed.
 
+(** ** B24: U13's ordinal-map induced cycle and the maximum-clique colouring row
+
+    Frozen verbatim at the fixed B23 baseline (byte-identical at B22 7d8cc47): U13's ordinal-map
+    induced cycle [induced_cycle] (an injective map ['I_k -> G] whose images are adjacent exactly
+    for cyclically consecutive positions, equal positions included: order 0 vacuous, order 1
+    impossible, order 2 an edge), its existential wrapper [has_induced_cycle], and the complete
+    current row [two_colouring_a_graph_without_a_monochromatic_maximu_statement] (a nonempty
+    graph, every odd length at least 5 excluded, a Boolean colouring under which no
+    MAXIMUM-cardinality clique is monochromatic).  Since B24 the two sources are transparent
+    aliases of [GTBase.induced_cycles.ordinal_induced_cycle] and [has_ordinal_induced_cycle], the
+    same bodies by conversion, so their certificates and the current row's are kernel-checked
+    conversions.  The row copy keeps C8's live [splits_max_cliques] (with the live
+    [is_max_clique], [monochromatic] and the upstream clique number).  [U13Original] freezes the row
+    end to end over B24's frozen map and wrapper and C8's frozen [splits_max_cliques] /
+    [monochromatic] chain; its certificate composes C8's [splits_max_cliques_compat].  C8's own
+    snapshot [GTMisc.migration.monochromatic.U13Legacy] keeps the live [has_induced_cycle] and stays
+    unchanged.  The recorded C8 readback concern (the [0 < #|G|] guard admits [K_1]) is not
+    repaired here. *)
+
+Module U13CycleLegacy.
+
+Definition induced_cycle (G : sgraph) (k : nat) (f : 'I_k -> G) : Prop :=
+  injective f /\
+  forall i j : 'I_k,
+    (f i -- f j) <-> ((val j == (val i).+1 %% k) || (val i == (val j).+1 %% k)).
+
+Definition has_induced_cycle (G : sgraph) (k : nat) : Prop :=
+  exists f : 'I_k -> G, U13CycleLegacy.induced_cycle f.
+
+End U13CycleLegacy.
+
+Module U13RowLegacy.
+
+Definition two_colouring_a_graph_without_a_monochromatic_maximu_statement : Prop :=
+  forall G : sgraph,
+    0 < #|G| ->
+    (forall k : nat, odd k -> 5 <= k -> ~ U13CycleLegacy.has_induced_cycle G k) ->
+    exists c : G -> bool, splits_max_cliques c.
+
+End U13RowLegacy.
+
+Module U13Original.
+
+Definition two_colouring_a_graph_without_a_monochromatic_maximu_statement : Prop :=
+  forall G : sgraph,
+    0 < #|G| ->
+    (forall k : nat, odd k -> 5 <= k -> ~ U13CycleLegacy.has_induced_cycle G k) ->
+    exists c : G -> bool, C8.U13Legacy.splits_max_cliques c.
+
+End U13Original.
+
+Lemma induced_cycle_compat (G : sgraph) (k : nat) (f : 'I_k -> G) :
+  U13CycleLegacy.induced_cycle f <-> induced_cycle f.
+Proof. exact: iff_refl. Qed.
+
+Lemma has_induced_cycle_compat (G : sgraph) (k : nat) :
+  U13CycleLegacy.has_induced_cycle G k <-> has_induced_cycle G k.
+Proof. exact: iff_refl. Qed.
+
+Lemma two_colouring_a_graph_without_a_monochromatic_maximu_statement_compat :
+  U13RowLegacy.two_colouring_a_graph_without_a_monochromatic_maximu_statement <->
+  two_colouring_a_graph_without_a_monochromatic_maximu_statement.
+Proof. exact: iff_refl. Qed.
+
+Lemma two_colouring_a_graph_without_a_monochromatic_maximu_statement_original_compat :
+  U13Original.two_colouring_a_graph_without_a_monochromatic_maximu_statement <->
+  two_colouring_a_graph_without_a_monochromatic_maximu_statement.
+Proof.
+split=> h G ne odd_cycles; have [c hc] := h G ne odd_cycles; exists c.
+- by apply/C8.splits_max_cliques_compat.
+- by apply/C8.splits_max_cliques_compat.
+Qed.
+
 Print Assumptions x91_induced_cycle_compat.
 Print Assumptions x91_avoidable_path_compat.
 Print Assumptions avoidable_path_or_pk_free_statement_compat.
 Print Assumptions avoidable_path_or_pk_free_statement_original_compat.
+Print Assumptions induced_cycle_compat.
+Print Assumptions has_induced_cycle_compat.
+Print Assumptions two_colouring_a_graph_without_a_monochromatic_maximu_statement_compat.
+Print Assumptions two_colouring_a_graph_without_a_monochromatic_maximu_statement_original_compat.
