@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "family": "ambient-shallow-minor",
+  "primitive": {
+    "canonical_name": "GTMisc.foundations.ambient_shallow_minors.ambient_shallow_minor",
+    "owner": "graph-theory-misc",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "radius_at_most",
+      "shallow_minor_model"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.X128.x128_radius_at_most",
+      "GTMisc.conjectures.X128.x128_shallow_minor_model",
+      "GTMisc.conjectures.X139.x139_radius_at_most",
+      "GTMisc.conjectures.X139.x139_shallow_minor_model"
+    ],
+    "consumers_remaining": 2,
+    "relation": "Exact ambient-radius contract: a centre lies in the branch; host graph_dist bounds may use vertices outside it and retain the finite-cardinality truncation for disconnected pairs. The existential H->{set G} map satisfies upstream minor_rmap plus all ambient radius bounds. Host/pattern/radius order and all nonempty/connected/disjoint/edge-realization clauses are unchanged; this is not internal branch radius.",
+    "semantic_classes": {
+      "ambient-radius": {
+        "members": [
+          "GTMisc.conjectures.X128.x128_radius_at_most",
+          "GTMisc.conjectures.X139.x139_radius_at_most"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "GTMisc.migration.ambient_shallow_minors.x128_radius_at_most_compat",
+          "GTMisc.migration.ambient_shallow_minors.x139_radius_at_most_compat"
+        ]
+      },
+      "ambient-shallow-model": {
+        "members": [
+          "GTMisc.conjectures.X128.x128_shallow_minor_model",
+          "GTMisc.conjectures.X139.x139_shallow_minor_model"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "GTMisc.migration.ambient_shallow_minors.x128_shallow_minor_model_compat",
+          "GTMisc.migration.ambient_shallow_minors.x139_shallow_minor_model_compat"
+        ]
+      }
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.ambient_shallow_minors.x128_radius_at_most_compat",
+      "GTMisc.migration.ambient_shallow_minors.x128_shallow_minor_model_compat",
+      "GTMisc.migration.ambient_shallow_minors.x128_grad_at_most_compat",
+      "GTMisc.migration.ambient_shallow_minors.x128_expansion_bounded_compat",
+      "GTMisc.migration.ambient_shallow_minors.dvorak_cheap_balanced_separator_bounded_expansion_statement_compat",
+      "GTMisc.migration.ambient_shallow_minors.x128_grad_at_most_original_compat",
+      "GTMisc.migration.ambient_shallow_minors.x128_expansion_bounded_original_compat",
+      "GTMisc.migration.ambient_shallow_minors.dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat",
+      "GTMisc.migration.ambient_shallow_minors.x139_radius_at_most_compat",
+      "GTMisc.migration.ambient_shallow_minors.x139_shallow_minor_model_compat",
+      "GTMisc.migration.ambient_shallow_minors.x139_grad_at_most_compat",
+      "GTMisc.migration.ambient_shallow_minors.x139_polynomial_expansion_class_compat",
+      "GTMisc.migration.ambient_shallow_minors.esperet_raymond_polynomial_expansion_scol_statement_compat",
+      "GTMisc.migration.ambient_shallow_minors.x139_grad_at_most_original_compat",
+      "GTMisc.migration.ambient_shallow_minors.x139_polynomial_expansion_class_original_compat",
+      "GTMisc.migration.ambient_shallow_minors.esperet_raymond_polynomial_expansion_scol_statement_original_compat",
+      "GTBase.migration.edge_count.fg_edge_count_compat"
+    ],
+    "api_theorems": [
+      "GTMisc.foundations.ambient_shallow_minors.ambient_rel_ball_mono",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_graph_dist_ball",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_graph_dist_smallE",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_graph_dist_card",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_graph_distxx",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_radius_at_mostW",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_radius_nonempty",
+      "GTMisc.foundations.ambient_shallow_minors.not_ambient_radius_set0",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_radius_singleton",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_radius_card",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_shallow_minor_nestedE",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_shallow_minor_minor",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_shallow_minorW",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_shallow_minor_empty_pattern",
+      "GTMisc.foundations.ambient_shallow_minors.not_ambient_shallow_minor_empty_host",
+      "GTMisc.foundations.ambient_shallow_minors.ambient_shallow_minor_refl"
+    ],
+    "public_client": "graph-theory-misc/theories/examples/ambient_shallow_minors.v",
+    "legacy_baseline": "15e22500d394e76949607525a6bcafb9469b1287",
+    "migration_report": "meta/migration_reports/ambient_shallow_minors.md",
+    "migration_spec": "meta/migration_reports/ambient_shallow_minors.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_C16.md",
+    "foundation_fidelity": "meta/foundation_fidelity/ambient-shallow-minor.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.minor",
+        "GraphTheory.core.sgraph",
+        "GTBase.graph_metric",
+        "GTBase.minor_models",
+        "Minor.conjectures.X220"
+      ],
+      "result": "adapt-upstream-area-contract",
+      "candidate": "GraphTheory.core.minor.minor_rmap",
+      "note": "No installed upstream shallow/radius predicate found. Reuse upstream minor_rmap on the same supplied map with C15 nested adapter; explicitly name the existing host-distance/truncation contract in the only consuming area. Minor X220 uses branch-internal paths and is distinct; no radius or strong-colouring-number repair is claimed.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "path_review",
+    "reviewed_commit": "311fdcb89dc12a78c62cb0ee6d2477896cbce9a7",
+    "independent_review": "meta/migration_reviews/ambient_shallow_minors.md"
+  }
+}

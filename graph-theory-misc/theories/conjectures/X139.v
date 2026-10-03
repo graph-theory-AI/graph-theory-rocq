@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X139 -- v2 polynomial-expansion/scol row *)
 
 From GTBase Require Export base.
+From GTMisc.foundations Require Import ambient_shallow_minors.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -11,18 +12,9 @@ Unset Printing Implicit Defensive.
 Fixpoint x139_poly_eval (p : seq nat) (x : nat) : nat :=
   if p is a :: q then a + x * x139_poly_eval q x else 0.
 
-Definition x139_radius_at_most (G : sgraph) (S : {set G}) (r : nat) : Prop :=
-  exists c : G,
-    c \in S /\ forall x : G, x \in S -> @graph_dist G c x <= r.
+Definition x139_radius_at_most (G : sgraph) (S : {set G}) (r : nat) : Prop := ambient_radius_at_most S r.
 
-Definition x139_shallow_minor_model (G H : sgraph) (r : nat) : Prop :=
-  exists branch : H -> {set G},
-    (forall h : H, branch h != set0) /\
-    (forall h : H, connected (branch h)) /\
-    (forall h : H, x139_radius_at_most (branch h) r) /\
-    (forall h1 h2 : H, h1 != h2 -> branch h1 :&: branch h2 = set0) /\
-    (forall h1 h2 : H, h1 -- h2 ->
-      exists x y : G, [/\ x \in branch h1, y \in branch h2 & x -- y]).
+Definition x139_shallow_minor_model (G H : sgraph) (r : nat) : Prop := ambient_shallow_minor G H r.
 
 Definition x139_grad_at_most (G : sgraph) (r d : nat) : Prop :=
   forall H : sgraph,

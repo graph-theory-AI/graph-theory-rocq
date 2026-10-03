@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "family": "ambient-shallow-minor",
+  "modules": {
+    "GTMisc.foundations.ambient_shallow_minors": {
+      "path": "graph-theory-misc/theories/foundations/ambient_shallow_minors.v",
+      "overrides": {
+        "ambient_radius_at_most": {
+          "verdict": "FAITHFUL",
+          "note": "Exact explicitly named ambient graph_dist contract, including centre membership and finite truncation for disconnected pairs; no claim of branch-internal radius."
+        },
+        "ambient_shallow_minor": {
+          "verdict": "FAITHFUL",
+          "note": "Exact ambient-radius contract: a centre lies in the branch; host graph_dist bounds may use vertices outside it and retain the finite-cardinality truncation for disconnected pairs. The existential H->{set G} map satisfies upstream minor_rmap plus all ambient radius bounds. Host/pattern/radius order and all nonempty/connected/disjoint/edge-realization clauses are unchanged; this is not internal branch radius."
+        }
+      },
+      "machine_evidence": [
+        "ambient_rel_ball_mono",
+        "ambient_graph_dist_ball",
+        "ambient_graph_dist_smallE",
+        "ambient_graph_dist_card",
+        "ambient_graph_distxx",
+        "ambient_radius_at_mostW",
+        "ambient_radius_nonempty",
+        "not_ambient_radius_set0",
+        "ambient_radius_singleton",
+        "ambient_radius_card",
+        "ambient_shallow_minor_nestedE",
+        "ambient_shallow_minor_minor",
+        "ambient_shallow_minorW",
+        "ambient_shallow_minor_empty_pattern",
+        "not_ambient_shallow_minor_empty_host",
+        "ambient_shallow_minor_refl"
+      ]
+    }
+  }
+}
