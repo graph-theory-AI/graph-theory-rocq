@@ -1,0 +1,233 @@
+{
+  "family": "induced-subdivision",
+  "canonical_name": "GTBase.induced_subdivisions.induced_subdivision_model",
+  "canonical_short_name": "induced_subdivision_model",
+  "relation": "Exact strong induced-subdivision contract, pattern before host: a seven-field Record with injective branch vertices, a full vertex sequence for every ordered pattern pair, endpoint-inclusive induced paths on pattern edges (nonempty, from branch u to branch v, duplicate-free, along host edges, chords only between consecutive entries), internal vertices avoiding all branch vertices, shared internal vertices forcing the same undirected pattern edge, and global inducedness over the raw model support (C19). Field formulas are convertible with the X98/X114 copies; the local constructor and projections are kept as exact-type wrappers. No reversal coherence, off-edge, nonempty-graph or positive-length condition; not the interior-list Minor subdiv_model.",
+  "baseline_commit": "952a89bdecf65bed9be3a1393eabc91ca091d26c",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "base/theories/induced_subdivisions.v",
+    "extremal-graph-theory/theories/migration/induced_subdivisions.v",
+    "graph-theory-misc/theories/migration/induced_subdivisions.v",
+    "extremal-graph-theory/theories/migration/model_support.v",
+    "graph-theory-misc/theories/migration/model_support.v"
+  ],
+  "extra_certificates": [
+    "GTBase.induced_subdivisions.isd_edge_path_ends",
+    "GTBase.induced_subdivisions.isd_edge_path_nil",
+    "GTBase.induced_subdivisions.isd_branch_supported",
+    "GTBase.induced_subdivisions.isd_edge_path_supported",
+    "GTBase.induced_subdivisions.isd_off_edge_free",
+    "GTBase.induced_subdivisions.induced_subdivision_card",
+    "GTBase.induced_subdivisions.pair_seq_internal",
+    "GTBase.induced_subdivisions.pair_seq_consecutive",
+    "GTBase.induced_subdivisions.pair_seq_consecutive_rev",
+    "GTBase.induced_subdivisions.induced_subdivision_refl",
+    "GTBase.induced_subdivisions.induced_subdivision_K0",
+    "GTBase.induced_subdivisions.not_induced_subdivision_empty_host",
+    "GTBase.induced_subdivisions.induced_subdivision_K1"
+  ],
+  "downstream_client": "base/theories/examples/induced_subdivisions.v",
+  "summary": [
+    "C20 migrates exactly the X98 and X114 strong induced-subdivision Records and their inhabited wrappers onto GTBase.induced_subdivisions.induced_subdivision_model and induced_subdivision. The canonical keeps pattern before host, all seven fields, full sequences for every ordered pair and Prop field formulas convertible with the local copies (endpoint-inclusive induced-path match, internal-vertex conjunction, seq_consecutive, C19 raw support). The local constructor and projections remain as wrappers with identical types and implicit arguments.",
+    "Seven current objects (two Records, two wrappers, the X114 decision problem, two complete rows) carry two-way cancelling transports, whole iffs and full in-NP/NP-hard witness transports. The complete rows reuse C19 X98Original (B3 path helpers, A5 subgraph relation, raw support) and X114Original (B3 path helpers, A14 maximum degree, raw support), whose certificates compile unchanged through the wrappers; all older bodies stay verbatim.",
+    "The public-only client covers the empty pattern, a single pattern vertex, the identity model, a nonempty pattern against the empty host, a host edge leaving the model support and arbitrary sequences on non-edges. No reversal, off-edge, nonempty or positive-length guard is added and the interior-list Minor subdiv_model is not identified."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision_model",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision_model",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_subdivisions.v",
+      "frozen": "Legacy.x98_induced_subdivision_model",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_subdivisions.x98_induced_subdivision_model_compat",
+      "live_unfolds_to": "induced_subdivision_model H G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_subdivisions.v",
+      "frozen": "Legacy.x98_induced_subdivision",
+      "substitutions": {
+        "x98_induced_subdivision_model": "Legacy.x98_induced_subdivision_model"
+      },
+      "certificate": "Extremal.migration.induced_subdivisions.x98_induced_subdivision_compat",
+      "live_unfolds_to": "induced_subdivision H G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "polynomial_kuhn_osthus_induced_subdivision_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_subdivisions.v",
+      "frozen": "X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "substitutions": {
+        "x98_induced_subdivision": "Legacy.x98_induced_subdivision"
+      },
+      "certificate": "Extremal.migration.induced_subdivisions.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision_model",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision_model",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_subdivisions.v",
+      "frozen": "Legacy.x114_induced_subdivision_model",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_subdivisions.x114_induced_subdivision_model_compat",
+      "live_unfolds_to": "induced_subdivision_model H G"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_subdivisions.v",
+      "frozen": "Legacy.x114_induced_subdivision",
+      "substitutions": {
+        "x114_induced_subdivision_model": "Legacy.x114_induced_subdivision_model"
+      },
+      "certificate": "GTMisc.migration.induced_subdivisions.x114_induced_subdivision_compat",
+      "live_unfolds_to": "induced_subdivision H G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X114.x114_hisc_problem",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_hisc_problem",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_subdivisions.v",
+      "frozen": "Legacy.x114_hisc_problem",
+      "substitutions": {
+        "x114_induced_subdivision": "Legacy.x114_induced_subdivision"
+      },
+      "certificate": "GTMisc.migration.induced_subdivisions.x114_hisc_problem_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "subcubic_induced_subdivision_np_complete_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_subdivisions.v",
+      "frozen": "X114Legacy.subcubic_induced_subdivision_np_complete_statement",
+      "substitutions": {
+        "x114_hisc_problem": "Legacy.x114_hisc_problem"
+      },
+      "certificate": "GTMisc.migration.induced_subdivisions.subcubic_induced_subdivision_np_complete_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision_model",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision_model",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Original.x98_induced_subdivision_model",
+      "substitutions": {
+        "x98_induced_path_between": "B3.X98Legacy.induced_path_between",
+        "x98_model_vertex": "Legacy.x98_model_vertex",
+        "x98_consecutive_in_path": "B3.Legacy.x98_consecutive_in_path"
+      },
+      "certificate": "Extremal.migration.model_support.x98_induced_subdivision_model_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.X98.x98_induced_subdivision",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x98_induced_subdivision",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Original.x98_induced_subdivision",
+      "substitutions": {
+        "x98_induced_subdivision_model": "X98Original.x98_induced_subdivision_model"
+      },
+      "certificate": "Extremal.migration.model_support.x98_induced_subdivision_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "polynomial_kuhn_osthus_induced_subdivision_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/model_support.v",
+      "frozen": "X98Original.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "substitutions": {
+        "x59_subgraph_of": "A5.Legacy.x59_subgraph_of",
+        "x98_induced_subdivision": "X98Original.x98_induced_subdivision"
+      },
+      "certificate": "Extremal.migration.model_support.polynomial_kuhn_osthus_induced_subdivision_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision_model",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision_model",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Original.x114_induced_subdivision_model",
+      "substitutions": {
+        "x114_induced_path_between": "B3.X114Legacy.induced_path_between",
+        "x114_model_vertex": "Legacy.x114_model_vertex",
+        "x114_consecutive_in_path": "B3.Legacy.x114_consecutive_in_path"
+      },
+      "certificate": "GTMisc.migration.model_support.x114_induced_subdivision_model_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Original.x114_induced_subdivision",
+      "substitutions": {
+        "x114_induced_subdivision_model": "X114Original.x114_induced_subdivision_model"
+      },
+      "certificate": "GTMisc.migration.model_support.x114_induced_subdivision_original_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X114.x114_hisc_problem",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_hisc_problem",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Original.x114_hisc_problem",
+      "substitutions": {
+        "x114_induced_subdivision": "X114Original.x114_induced_subdivision"
+      },
+      "certificate": "GTMisc.migration.model_support.x114_hisc_problem_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "subcubic_induced_subdivision_np_complete_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/model_support.v",
+      "frozen": "X114Original.subcubic_induced_subdivision_np_complete_statement",
+      "substitutions": {
+        "x114_subcubic": "A14.Legacy.x114_subcubic",
+        "x114_hisc_problem": "X114Original.x114_hisc_problem"
+      },
+      "certificate": "GTMisc.migration.model_support.subcubic_induced_subdivision_np_complete_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement": "A5 snapshot: A5 froze this row over its own frozen x59_subgraph_of but kept the live x98_induced_subdivision of this family, which now unfolds to GTBase.induced_subdivisions.induced_subdivision. Kept unchanged; the complete B3+A5+C19 row is Extremal.migration.model_support.X98Original.polynomial_kuhn_osthus_induced_subdivision_statement, whose Record is fully frozen; its certificate polynomial_kuhn_osthus_induced_subdivision_statement_original_compat compiles unchanged through this family wrappers.",
+    "graph-theory-misc/theories/migration/subcubic.v#X114Legacy.subcubic_induced_subdivision_np_complete_statement": "A14 snapshot: A14 froze this row over its own frozen x114_subcubic but kept the live x114_hisc_problem of this family, whose membership now unfolds to GTBase.induced_subdivisions.induced_subdivision. Kept unchanged; the complete B3+A14+C19 row is GTMisc.migration.model_support.X114Original.subcubic_induced_subdivision_np_complete_statement, whose Record and problem are fully frozen; its certificate subcubic_induced_subdivision_np_complete_statement_original_compat compiles unchanged through this family wrappers."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "Minor.foundations.containment.subdiv_model",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "subdiv_model",
+      "reason": "Ordinary subdivision model: interior lists with reversal coherence, no inducedness, host first in has_subdivision; not identified with the strong full-path Record."
+    }
+  ]
+}

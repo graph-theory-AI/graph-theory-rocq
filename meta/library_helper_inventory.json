@@ -1,12 +1,12 @@
 {
   "counts": {
     "files": 321,
-    "helpers": 2542,
-    "repeated_body_shapes": 134,
-    "repeated_normalized_names": 205,
-    "repeated_signature_shapes": 297,
+    "helpers": 2558,
+    "repeated_body_shapes": 143,
+    "repeated_normalized_names": 212,
+    "repeated_signature_shapes": 305,
     "statements_excluded": 700,
-    "x_wave_helpers": 1395
+    "x_wave_helpers": 1409
   },
   "groups": {
     "body_shape_hash": {
@@ -58,6 +58,10 @@
         "Minor.conjectures.X11.x11_path_vertices",
         "Minor.conjectures.X67.x67_path_vertices",
         "Packing.conjectures.X26.x26_path_vertices"
+      ],
+      "133fdf1d92735ff6b1e5ad4cf3526fe42ebd52b9b55c83e0a6fd9b71d6e91464": [
+        "Extremal.conjectures.X98.x98_global_induced",
+        "GTMisc.conjectures.X114.x114_global_induced"
       ],
       "142e18fdfb184f57531f08c7bb5eb8c998f444ba5483d032c5ee5e7950f9be97": [
         "Digraph.conjectures.X2.x2_arc_stable",
@@ -134,6 +138,10 @@
       "3a0410cdba7e07ffb1040cf5f12c55bb7383316540d03fbee74e3951ee48e241": [
         "Digraph.conjectures.XE2.xe2_directed_cycle",
         "GTMisc.conjectures.XE1.xe1_rel_cycle"
+      ],
+      "3b292dcb610289fb181c69580c08c9b93ddafe9879a8b455ac73dbeb1206cd87": [
+        "Extremal.conjectures.X98.x98_induced_subdivision_model",
+        "GTMisc.conjectures.X114.x114_induced_subdivision_model"
       ],
       "3c3980ab048cbce1bc06cc70c1ba63c5296cb9da1f0a9c4fc029a82422218578": [
         "Digraph.conjectures.X16.x16_no_sources",
@@ -274,6 +282,10 @@
         "GTMisc.conjectures.X167.x167_embedded_in_fixed_surface",
         "Topological.conjectures.X138.x138_embeddable_on_surface"
       ],
+      "6fa0cd9de112522b7a573f1f6c518ac6d8fff081d26cff5dcf6bb6bdf7e6814f": [
+        "Extremal.conjectures.X98.x98_paths_internally_disjoint",
+        "GTMisc.conjectures.X114.x114_paths_internally_disjoint"
+      ],
       "708b6857a25a49da0d519f542a2affa839a688e351b72c7682c7fda5f0a751da": [
         "GTMisc.conjectures.X167.x167_spanning_tree",
         "GTMisc.conjectures.X168.x168_spanning_tree"
@@ -301,6 +313,10 @@
       "7711f39437e9e9f7918f01407f910449223fc65c38393a6cb47b00114ccc672e": [
         "Packing.conjectures.U9.is_triangle",
         "Packing.conjectures.X5.x5_is_triangle"
+      ],
+      "789db669612215483e2d60090f99f8423521eb660236d0c73539fd075035e72d": [
+        "Extremal.conjectures.X98.X98Model",
+        "GTMisc.conjectures.X114.X114Model"
       ],
       "789e92c47687837a2f100ba4106bea4f4a7e89c64d8cd78743da97fb8b372ed3": [
         "Chromatic.conjectures.X153.x153_cycle_vertices",
@@ -465,10 +481,6 @@
         "Chromatic.conjectures.X126.x126_nonrepetitive",
         "Topological.conjectures.X23.x23_nonrepetitive_colouring"
       ],
-      "be19afdd240f8fcd2fee717099c00c5a44393ac2709cf5429547741d708b2766": [
-        "Extremal.conjectures.X98.x98_induced_subdivision",
-        "GTMisc.conjectures.X114.x114_induced_subdivision"
-      ],
       "bfdcfb57272124c2c7c97428bfc1d55bee16ff2c2c791eb9a697950acd4a07fb": [
         "Digraph.conjectures.X122.x122_oriented",
         "Digraph.conjectures.chi_bounded.oriented_dg",
@@ -477,6 +489,10 @@
       "c116921816aeba5536a8236132c6453339b3817b67bbb08014e34649c2c7d5b9": [
         "Hom.conjectures.U3.path_graph",
         "Packing.conjectures.X18.x18_path_graph"
+      ],
+      "c22aa7aab61a7d9136de256a3235a72d208d1469b913ce57b10a2b507f269538": [
+        "Extremal.conjectures.X98.x98_branch",
+        "GTMisc.conjectures.X114.x114_branch"
       ],
       "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8": [
         "GTMisc.conjectures.X113.x113_ball",
@@ -502,9 +518,17 @@
         "Digraph.conjectures.X166.x166_enc_digraph",
         "Digraph.conjectures.X90.x90_enc_digraph"
       ],
+      "cc9c55de4708312c73b26f5df6696b1f8be2199040c143c55ccca1a9c3db4faa": [
+        "Extremal.conjectures.X98.x98_induced_subdivision",
+        "GTMisc.conjectures.X114.x114_induced_subdivision"
+      ],
       "ccc10804b0c73d304d1c69664baf3f78babca30835d8440fbe8bcba23165481f": [
         "GTMisc.conjectures.X172.x172_path_edges",
         "Minor.conjectures.U7.path_edges"
+      ],
+      "cf001d3d1b4976c48bda200ae1ef30b5fbca0abafb4bd9e996621d2def34a45a": [
+        "Extremal.conjectures.X98.x98_edge_path",
+        "GTMisc.conjectures.X114.x114_edge_path"
       ],
       "cfba051400e61e6216cc7bc5b4f75dede712a75c979c6ea13b165e5503f9f32a": [
         "Chromatic.conjectures.X109.x109_proper_colouring",
@@ -998,6 +1022,10 @@
         "GTMisc.conjectures.X37.x37_degree_class_size",
         "GTMisc.conjectures.X38.x38_degree_class_size"
       ],
+      "e705009d1df62db8250b42f4951b4864000756f4f408dc3fee3d26f03a749024": [
+        "Extremal.conjectures.X98.x98_edge_path_valid",
+        "GTMisc.conjectures.X114.x114_edge_path_valid"
+      ],
       "e75c2c96a8fae51060a00d90d74fd9c6eeacd757abd36073609f83b0c68abab4": [
         "Extremal.conjectures.D2pr.edge2",
         "Packing.conjectures.U9.edge_setG"
@@ -1029,6 +1057,10 @@
         "Chromatic.conjectures.XE1.xe1_delete_edges",
         "Extremal.conjectures.XE1.xe1_delete_edges"
       ],
+      "f455dc7fd1836fefb10d350a32ab7a8446c7236a6dcd217632eda4a34260148c": [
+        "Extremal.conjectures.X98.x98_branch_injective",
+        "GTMisc.conjectures.X114.x114_branch_injective"
+      ],
       "f50cf34ff898856f3aeaa92044d1fe13a401d2e406d352236e4de9e7f4c9d230": [
         "Digraph.conjectures.X45.x45_same_colour_outneighbours",
         "Digraph.conjectures.X51.x51_same_colour_outneighbours"
@@ -1041,6 +1073,10 @@
       "fa764d43c3b1434089898939e937e70eb615b809e4484d7ddb0651a30b22b5a7": [
         "Extremal.conjectures.X98.x98_internal",
         "GTMisc.conjectures.X114.x114_internal"
+      ],
+      "fb00ecf40611faef2ce76a668eebcda1686c11e53e31206882c115037548364c": [
+        "Extremal.conjectures.X98.x98_internal_avoids_branch",
+        "GTMisc.conjectures.X114.x114_internal_avoids_branch"
       ],
       "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a": [
         "Chromatic.conjectures.X3.x3_complement_rel",
@@ -1104,6 +1140,14 @@
         "Chromatic.conjectures.X219.x219_bipartition",
         "Digraph.conjectures.X46.x46_bipartition",
         "Digraph.conjectures.X53.x53_bipartition"
+      ],
+      "branch": [
+        "Extremal.conjectures.X98.x98_branch",
+        "GTMisc.conjectures.X114.x114_branch"
+      ],
+      "branch_injective": [
+        "Extremal.conjectures.X98.x98_branch_injective",
+        "GTMisc.conjectures.X114.x114_branch_injective"
       ],
       "captured": [
         "GTMisc.conjectures.X197.x197_captured",
@@ -1376,6 +1420,14 @@
         "Packing.conjectures.X15.x15_edge_partition",
         "Packing.conjectures.X15alone.x15_edge_partition"
       ],
+      "edge_path": [
+        "Extremal.conjectures.X98.x98_edge_path",
+        "GTMisc.conjectures.X114.x114_edge_path"
+      ],
+      "edge_path_valid": [
+        "Extremal.conjectures.X98.x98_edge_path_valid",
+        "GTMisc.conjectures.X114.x114_edge_path_valid"
+      ],
       "edge_set": [
         "Chromatic.conjectures.X100.x100_edge_set",
         "Chromatic.conjectures.X142.x142_edge_set",
@@ -1467,6 +1519,10 @@
         "Chromatic.conjectures.X126.x126_genuine_path",
         "GTMisc.conjectures.X14.x14_genuine_path",
         "Topological.conjectures.X23.x23_genuine_path"
+      ],
+      "global_induced": [
+        "Extremal.conjectures.X98.x98_global_induced",
+        "GTMisc.conjectures.X114.x114_global_induced"
       ],
       "grad_at_most": [
         "GTMisc.conjectures.X128.x128_grad_at_most",
@@ -1587,6 +1643,10 @@
         "Extremal.conjectures.X98.x98_internal",
         "GTMisc.conjectures.X114.x114_internal",
         "GTMisc.conjectures.X216.x216_internal"
+      ],
+      "internal_avoids_branch": [
+        "Extremal.conjectures.X98.x98_internal_avoids_branch",
+        "GTMisc.conjectures.X114.x114_internal_avoids_branch"
       ],
       "is_path": [
         "Cycle.conjectures.U6.is_path",
@@ -1804,6 +1864,11 @@
         "Minor.conjectures.X11.x11_path_vertices",
         "Minor.conjectures.X67.x67_path_vertices",
         "Packing.conjectures.X26.x26_path_vertices"
+      ],
+      "paths_internally_disjoint": [
+        "Extremal.conjectures.X98.x98_paths_internally_disjoint",
+        "Extremal.conjectures.XE2.xe2_paths_internally_disjoint",
+        "GTMisc.conjectures.X114.x114_paths_internally_disjoint"
       ],
       "pathwidth_at_most": [
         "Chromatic.conjectures.X126.x126_pathwidth_at_most",
@@ -2118,6 +2183,10 @@
         "GTMisc.conjectures.X169.x169_tree_decomposition",
         "Minor.conjectures.X27.x27_tree_decomposition"
       ],
+      "04dde886dfefb60d432b233503d6af9624e8f1c03ead625036f07ec4a2c255d0": [
+        "Extremal.conjectures.X98.x98_global_induced",
+        "GTMisc.conjectures.X114.x114_global_induced"
+      ],
       "0596fb401e0ad5525f64c30a46df4b74ef3b429bb464e52445ea6a2244565dd3": [
         "Chromatic.conjectures.U1.valency_variety",
         "Chromatic.conjectures.X112.x112_omega",
@@ -2211,6 +2280,10 @@
         "GTMisc.conjectures.X128.x128_shallow_minor_model",
         "GTMisc.conjectures.X139.x139_shallow_minor_model",
         "Minor.conjectures.X220.x220_shallow_minor"
+      ],
+      "0f34acd126e7f3671a57dc9f3749d0791d309baf29a711bf70472d153f2d8278": [
+        "Extremal.conjectures.X98.x98_branch",
+        "GTMisc.conjectures.X114.x114_branch"
       ],
       "0f81902c238513ac863e644d556425cc158b75f2374ea2a88687577c37df687b": [
         "Digraph.conjectures.two_extremal_hajos.pt_edges",
@@ -2577,6 +2650,10 @@
         "Minor.conjectures.X220.x220_wall_r0",
         "Minor.conjectures.X220.x220_wall_rel"
       ],
+      "35f778df9dfce9bb1b8fb4e65b55084dd9b89940c1d38870be918e0eda8a3e25": [
+        "Extremal.conjectures.X98.x98_induced_subdivision_model",
+        "GTMisc.conjectures.X114.x114_induced_subdivision_model"
+      ],
       "35fbe930c38474879a9b1ac974b5a76ff137e5a9aa6df6f4c473d7dcad9389bc": [
         "Cycle.conjectures.D1.int_bounded",
         "Cycle.conjectures.X228.x228_kflow"
@@ -2924,6 +3001,10 @@
         "Packing.conjectures.U9.avg_deg_lt",
         "Packing.conjectures.X47.x47_min_degree_at_least"
       ],
+      "6c4b4a4b87782f94eeedee8922d059a85c67a67eafd8abd932221779b36075d0": [
+        "Extremal.conjectures.X98.x98_edge_path_valid",
+        "GTMisc.conjectures.X114.x114_edge_path_valid"
+      ],
       "6df3a32c416bc777eae93e2f9140f64d05c6e4a32106e942ccc6005af290bb0b": [
         "Chromatic.conjectures.U8.has_induced",
         "Minor.conjectures.X95.x95_index_tree_subgraph"
@@ -3032,6 +3113,10 @@
         "GTMisc.conjectures.X29.x29_has_induced_cycle",
         "Topological.conjectures.D3D6_unblocked.pair_crossing_number"
       ],
+      "825ee201d2ca8495540b545a29ea887d9efaf40448cdfe3173b59d918b7b1248": [
+        "Extremal.conjectures.X98.x98_paths_internally_disjoint",
+        "GTMisc.conjectures.X114.x114_paths_internally_disjoint"
+      ],
       "82ac859fe32537c2848a2214ea54047f0bc216693aea305a8c1f721323c02054": [
         "Packing.conjectures.X226.x226_f",
         "Packing.conjectures.X226.x226_f_dim_le2"
@@ -3074,9 +3159,9 @@
         "Chromatic.conjectures.X3.x3_holes_of_consecutive_lengths",
         "Reconstruction.conjectures.X21.x21_l_reconstructible"
       ],
-      "8c9cd82f8112280661712886c329c1320ab11cb6a26de52856bdd5c67c74e090": [
-        "Extremal.conjectures.X98.x98_induced_subdivision_model",
-        "GTMisc.conjectures.X114.x114_induced_subdivision_model"
+      "8a915258c0a40caac56e0c4171950290b64d332423be7df8d4f951371c760433": [
+        "Extremal.conjectures.X98.x98_edge_path",
+        "GTMisc.conjectures.X114.x114_edge_path"
       ],
       "8ca0ad6fa5fab865695abd2247b697368d3a07896e5c4c726763d274bf9d35b7": [
         "Digraph.conjectures.X2.antidirected_path",
@@ -3161,6 +3246,10 @@
         "Packing.conjectures.vocabulary_packing.xe1_edge_setE",
         "Topological.conjectures.vocabulary_topological.x158_edge_setE"
       ],
+      "987a0dee548ea0e3b58b816c515b3c3bd8b34b654513e022426df69603ee20e6": [
+        "Extremal.conjectures.X98.X98Model",
+        "GTMisc.conjectures.X114.X114Model"
+      ],
       "98f98d51180bd5e970974c0c777ae5b78f61031617799cfd509e97973fd02aeb": [
         "Extremal.conjectures.X4.x4_edge_in_c5",
         "GTMisc.conjectures.X80.x80_legal_move"
@@ -3182,6 +3271,10 @@
       "9cb5e5a08b0a2887259e6fc6ea3c5d291484174be0ce74b3cd80473b3c4f6391": [
         "Chromatic.conjectures.X187.x187_proper_3_colouring",
         "Chromatic.conjectures.X68.x68_proper_three_colouring"
+      ],
+      "9d3108ddb332eada674db8e59e049c011f0ee1c3726e0e4d7fc4a8cb5b9230eb": [
+        "Extremal.conjectures.X98.x98_internal_avoids_branch",
+        "GTMisc.conjectures.X114.x114_internal_avoids_branch"
       ],
       "9dcc6f9c40f58ca4492d1ff6121980acf516ed5dce0fb771f8cd0383d0c6971d": [
         "Digraph.conjectures.X2.contains_subdivision",
@@ -3282,6 +3375,10 @@
       "ad8c0ed241d7a60c13b97ef1130f634eba9ee21485e90d68437b1f00888843bf": [
         "Digraph.conjectures.P9.arccut",
         "Digraph.conjectures.packing.dicut_size"
+      ],
+      "ae6fe2712388cac6fa78981d16094543781b0e3e59146731fc42a54beffc02d1": [
+        "Extremal.conjectures.X98.x98_branch_injective",
+        "GTMisc.conjectures.X114.x114_branch_injective"
       ],
       "aff2342e451712697ef239689632f5b6968cdf4a349d6ca1d9af9c0186a04d9a": [
         "GTMisc.conjectures.X167.x167_spanning_tree_polytope_xc",
@@ -34613,8 +34710,9 @@
       "body_shape_hash": "a2570f291eccb78297c66f6945c5067a9b6cabfcf0ab65b804a771d500e29281",
       "declaration_hash": "a73f6fffa82a9ed3781d0016c4bde0f28b8e49880121f28dc774ea160ba1cf6d",
       "direct_consumers": [
-        "Extremal.conjectures.X98.x98_induced_path_between",
-        "Extremal.conjectures.X98.x98_induced_subdivision_model"
+        "Extremal.conjectures.X98.X98Model",
+        "Extremal.conjectures.X98.x98_global_induced",
+        "Extremal.conjectures.X98.x98_induced_path_between"
       ],
       "kind": "Definition",
       "line": 10,
@@ -34633,7 +34731,8 @@
       "body_shape_hash": "1c1eb40ef043503ff86efa901048dcbbb4e25de6cf6fcbc88b430862dad6ba49",
       "declaration_hash": "0ff78c05a2aba78982ac7e3278b61fdfb74a59dbbef02bb42fc789cbf6d14973",
       "direct_consumers": [
-        "Extremal.conjectures.X98.x98_induced_subdivision_model"
+        "Extremal.conjectures.X98.X98Model",
+        "Extremal.conjectures.X98.x98_edge_path_valid"
       ],
       "kind": "Definition",
       "line": 15,
@@ -34654,7 +34753,9 @@
       "body_shape_hash": "fa764d43c3b1434089898939e937e70eb615b809e4484d7ddb0651a30b22b5a7",
       "declaration_hash": "0d0da0d5f11d50e5ba45e4229cd42ecf96b174763b8d01cd0fd2390c78730143",
       "direct_consumers": [
-        "Extremal.conjectures.X98.x98_induced_subdivision_model"
+        "Extremal.conjectures.X98.X98Model",
+        "Extremal.conjectures.X98.x98_internal_avoids_branch",
+        "Extremal.conjectures.X98.x98_paths_internally_disjoint"
       ],
       "kind": "Definition",
       "line": 28,
@@ -34673,7 +34774,8 @@
       "body_shape_hash": "289c7b960de9665c726957fe8ec69ae2598644d7c4c6932854f893d4964ff6c1",
       "declaration_hash": "26ad5f64fd1bc2032df6a07e4bf28b2d99fe43e97bc65da5b8af06d9640dc792",
       "direct_consumers": [
-        "Extremal.conjectures.X98.x98_induced_subdivision_model"
+        "Extremal.conjectures.X98.X98Model",
+        "Extremal.conjectures.X98.x98_global_induced"
       ],
       "kind": "Definition",
       "line": 33,
@@ -34688,41 +34790,241 @@
       "signature_shape_hash": "84565ca2fb40a4e6a2d49d4dc91982b4edb987ef99a1f0ffc88f088fbe052064"
     },
     {
-      "body_hash": "f33528978fc33edd7b22154b4260733980bcf999ef425b9bbb1dc9d6e14a55cf",
-      "body_shape_hash": "2c37756ab6a5f606a3ba72f3bf6448538bb508e7a927aa2a78b83152fda72e0a",
-      "declaration_hash": "fa106035e6f18e1fcaa5b383d54567876e98104fc5b5b9478ffd132dab34dc81",
+      "body_hash": "3b292dcb610289fb181c69580c08c9b93ddafe9879a8b455ac73dbeb1206cd87",
+      "body_shape_hash": "3b292dcb610289fb181c69580c08c9b93ddafe9879a8b455ac73dbeb1206cd87",
+      "declaration_hash": "f394ff213c463176eaa16a40e0c94880649cc9961299ba47bcde5500786c6fd3",
       "direct_consumers": [
-        "Extremal.conjectures.X98.x98_induced_subdivision"
+        "Extremal.conjectures.X98.X98Model",
+        "Extremal.conjectures.X98.x98_branch",
+        "Extremal.conjectures.X98.x98_branch_injective",
+        "Extremal.conjectures.X98.x98_edge_path",
+        "Extremal.conjectures.X98.x98_edge_path_valid",
+        "Extremal.conjectures.X98.x98_global_induced",
+        "Extremal.conjectures.X98.x98_internal_avoids_branch",
+        "Extremal.conjectures.X98.x98_paths_internally_disjoint"
       ],
-      "kind": "Record",
+      "kind": "Definition",
       "line": 38,
-      "local_dependencies": [
-        "x98_consecutive_in_path",
-        "x98_induced_path_between",
-        "x98_internal",
-        "x98_model_vertex"
-      ],
+      "local_dependencies": [],
       "name": "x98_induced_subdivision_model",
       "normalized_name": "induced_subdivision_model",
       "package": "extremal-graph-theory",
       "path": "extremal-graph-theory/theories/conjectures/X98.v",
       "phase": "X98",
       "qualified_name": "Extremal.conjectures.X98.x98_induced_subdivision_model",
-      "signature": "(H G : sgraph)",
-      "signature_shape_hash": "8c9cd82f8112280661712886c329c1320ab11cb6a26de52856bdd5c67c74e090"
+      "signature": "(H G : sgraph) : Type",
+      "signature_shape_hash": "35f778df9dfce9bb1b8fb4e65b55084dd9b89940c1d38870be918e0eda8a3e25"
     },
     {
-      "body_hash": "4f3fb893bda7fdbe1803706d4f3c8d3d61901148b14ace9e4004621be27a7459",
-      "body_shape_hash": "be19afdd240f8fcd2fee717099c00c5a44393ac2709cf5429547741d708b2766",
-      "declaration_hash": "d365829cb45b58b67de06be05fff9fc8aaa820ce040c9a4d78ce740ceb21cc70",
+      "body_hash": "212333720b08a762606455972abdc1e86e14067e243999386557ef2a255b0bd8",
+      "body_shape_hash": "789db669612215483e2d60090f99f8423521eb660236d0c73539fd075035e72d",
+      "declaration_hash": "a0b524d3e33a45494d473e497e5cb5c059ebc28c0f80b0deedf7ea307fb04d7d",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 44,
+      "local_dependencies": [
+        "x98_branch",
+        "x98_branch_injective",
+        "x98_consecutive_in_path",
+        "x98_edge_path",
+        "x98_edge_path_valid",
+        "x98_global_induced",
+        "x98_induced_path_between",
+        "x98_induced_subdivision_model",
+        "x98_internal",
+        "x98_internal_avoids_branch",
+        "x98_model_vertex",
+        "x98_paths_internally_disjoint"
+      ],
+      "name": "X98Model",
+      "normalized_name": "X98Model",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "phase": "X98",
+      "qualified_name": "Extremal.conjectures.X98.X98Model",
+      "signature": "(H G : sgraph) (x98_branch : H -> G) (x98_branch_injective : injective x98_branch) (x98_edge_path : H -> H -> seq G) (x98_edge_path_valid : forall u v : H, u -- v -> x98_induced_path_between (x98_branch u) (x98_branch v) (x98_edge_path u v)) (x98_internal_avoids_branch : forall (u v w : H) (x : G), u -- v -> x98_internal (x98_edge_path u v) (x98_branch u) (x98_branch v) x -> x != x98_branch w) (x98_paths_internally_disjoint : forall (u v u' v' : H) (x : G), u -- v -> u' -- v' -> x98_internal (x98_edge_path u v) (x98_branch u) (x98_branch v) x -> x98_internal (x98_edge_path u' v') (x98_branch u') (x98_branch v') x -> (u = u' /\\ v = v') \\/ (u = v' /\\ v = u')) (x98_global_induced : forall x y : G, x98_model_vertex x98_branch x98_edge_path x -> x98_model_vertex x98_branch x98_edge_path y -> x -- y -> exists u v : H, u -- v /\\ x98_consecutive_in_path (x98_edge_path u v) x y) : x98_induced_subdivision_model H G",
+      "signature_shape_hash": "987a0dee548ea0e3b58b816c515b3c3bd8b34b654513e022426df69603ee20e6"
+    },
+    {
+      "body_hash": "c22aa7aab61a7d9136de256a3235a72d208d1469b913ce57b10a2b507f269538",
+      "body_shape_hash": "c22aa7aab61a7d9136de256a3235a72d208d1469b913ce57b10a2b507f269538",
+      "declaration_hash": "b3d525529b4daea1644d7da006682283c2d1e22e9554cf7ae8937b49690964f7",
+      "direct_consumers": [
+        "Extremal.conjectures.X98.X98Model",
+        "Extremal.conjectures.X98.x98_branch_injective",
+        "Extremal.conjectures.X98.x98_edge_path_valid",
+        "Extremal.conjectures.X98.x98_global_induced",
+        "Extremal.conjectures.X98.x98_internal_avoids_branch",
+        "Extremal.conjectures.X98.x98_paths_internally_disjoint"
+      ],
+      "kind": "Definition",
+      "line": 72,
+      "local_dependencies": [
+        "x98_induced_subdivision_model"
+      ],
+      "name": "x98_branch",
+      "normalized_name": "branch",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "phase": "X98",
+      "qualified_name": "Extremal.conjectures.X98.x98_branch",
+      "signature": "(H G : sgraph) (x0 : x98_induced_subdivision_model H G) : H -> G",
+      "signature_shape_hash": "0f34acd126e7f3671a57dc9f3749d0791d309baf29a711bf70472d153f2d8278"
+    },
+    {
+      "body_hash": "f455dc7fd1836fefb10d350a32ab7a8446c7236a6dcd217632eda4a34260148c",
+      "body_shape_hash": "f455dc7fd1836fefb10d350a32ab7a8446c7236a6dcd217632eda4a34260148c",
+      "declaration_hash": "a8e5b09ac615fd9ae1cea792bd6ffdfc7c87d143ecf120e9974706466901482e",
+      "direct_consumers": [
+        "Extremal.conjectures.X98.X98Model"
+      ],
+      "kind": "Definition",
+      "line": 75,
+      "local_dependencies": [
+        "x98_branch",
+        "x98_induced_subdivision_model"
+      ],
+      "name": "x98_branch_injective",
+      "normalized_name": "branch_injective",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "phase": "X98",
+      "qualified_name": "Extremal.conjectures.X98.x98_branch_injective",
+      "signature": "(H G : sgraph) (x0 : x98_induced_subdivision_model H G) : injective (x98_branch x0)",
+      "signature_shape_hash": "ae6fe2712388cac6fa78981d16094543781b0e3e59146731fc42a54beffc02d1"
+    },
+    {
+      "body_hash": "cf001d3d1b4976c48bda200ae1ef30b5fbca0abafb4bd9e996621d2def34a45a",
+      "body_shape_hash": "cf001d3d1b4976c48bda200ae1ef30b5fbca0abafb4bd9e996621d2def34a45a",
+      "declaration_hash": "965cc0f3c557fd88c5d53a28a0eeade2e056290056456e76e39408b360a078e3",
+      "direct_consumers": [
+        "Extremal.conjectures.X98.X98Model",
+        "Extremal.conjectures.X98.x98_edge_path_valid",
+        "Extremal.conjectures.X98.x98_global_induced",
+        "Extremal.conjectures.X98.x98_internal_avoids_branch",
+        "Extremal.conjectures.X98.x98_paths_internally_disjoint"
+      ],
+      "kind": "Definition",
+      "line": 79,
+      "local_dependencies": [
+        "x98_induced_subdivision_model"
+      ],
+      "name": "x98_edge_path",
+      "normalized_name": "edge_path",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "phase": "X98",
+      "qualified_name": "Extremal.conjectures.X98.x98_edge_path",
+      "signature": "(H G : sgraph) (x0 : x98_induced_subdivision_model H G) : H -> H -> seq G",
+      "signature_shape_hash": "8a915258c0a40caac56e0c4171950290b64d332423be7df8d4f951371c760433"
+    },
+    {
+      "body_hash": "e705009d1df62db8250b42f4951b4864000756f4f408dc3fee3d26f03a749024",
+      "body_shape_hash": "e705009d1df62db8250b42f4951b4864000756f4f408dc3fee3d26f03a749024",
+      "declaration_hash": "762aa6b9004f40acb32a839040a5e953142f3d9a830ad1a502ba917d8a901838",
+      "direct_consumers": [
+        "Extremal.conjectures.X98.X98Model"
+      ],
+      "kind": "Definition",
+      "line": 82,
+      "local_dependencies": [
+        "x98_branch",
+        "x98_edge_path",
+        "x98_induced_path_between",
+        "x98_induced_subdivision_model"
+      ],
+      "name": "x98_edge_path_valid",
+      "normalized_name": "edge_path_valid",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "phase": "X98",
+      "qualified_name": "Extremal.conjectures.X98.x98_edge_path_valid",
+      "signature": "(H G : sgraph) (x0 : x98_induced_subdivision_model H G) : forall u v : H, u -- v -> x98_induced_path_between (x98_branch x0 u) (x98_branch x0 v) (x98_edge_path x0 u v)",
+      "signature_shape_hash": "6c4b4a4b87782f94eeedee8922d059a85c67a67eafd8abd932221779b36075d0"
+    },
+    {
+      "body_hash": "fb00ecf40611faef2ce76a668eebcda1686c11e53e31206882c115037548364c",
+      "body_shape_hash": "fb00ecf40611faef2ce76a668eebcda1686c11e53e31206882c115037548364c",
+      "declaration_hash": "8ccb395d5b66b9aa44c55522fa1eb58340f77bc5b960b4862febf6a60d2256a6",
+      "direct_consumers": [
+        "Extremal.conjectures.X98.X98Model"
+      ],
+      "kind": "Definition",
+      "line": 88,
+      "local_dependencies": [
+        "x98_branch",
+        "x98_edge_path",
+        "x98_induced_subdivision_model",
+        "x98_internal"
+      ],
+      "name": "x98_internal_avoids_branch",
+      "normalized_name": "internal_avoids_branch",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "phase": "X98",
+      "qualified_name": "Extremal.conjectures.X98.x98_internal_avoids_branch",
+      "signature": "(H G : sgraph) (x0 : x98_induced_subdivision_model H G) : forall (u v w : H) (x : G), u -- v -> x98_internal (x98_edge_path x0 u v) (x98_branch x0 u) (x98_branch x0 v) x -> x != x98_branch x0 w",
+      "signature_shape_hash": "9d3108ddb332eada674db8e59e049c011f0ee1c3726e0e4d7fc4a8cb5b9230eb"
+    },
+    {
+      "body_hash": "6fa0cd9de112522b7a573f1f6c518ac6d8fff081d26cff5dcf6bb6bdf7e6814f",
+      "body_shape_hash": "6fa0cd9de112522b7a573f1f6c518ac6d8fff081d26cff5dcf6bb6bdf7e6814f",
+      "declaration_hash": "67d006af4597294e4b04d1615b269d5d5bb7de94bb1821eb39b07ec455f6a06a",
+      "direct_consumers": [
+        "Extremal.conjectures.X98.X98Model"
+      ],
+      "kind": "Definition",
+      "line": 95,
+      "local_dependencies": [
+        "x98_branch",
+        "x98_edge_path",
+        "x98_induced_subdivision_model",
+        "x98_internal"
+      ],
+      "name": "x98_paths_internally_disjoint",
+      "normalized_name": "paths_internally_disjoint",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "phase": "X98",
+      "qualified_name": "Extremal.conjectures.X98.x98_paths_internally_disjoint",
+      "signature": "(H G : sgraph) (x0 : x98_induced_subdivision_model H G) : forall (u v u' v' : H) (x : G), u -- v -> u' -- v' -> x98_internal (x98_edge_path x0 u v) (x98_branch x0 u) (x98_branch x0 v) x -> x98_internal (x98_edge_path x0 u' v') (x98_branch x0 u') (x98_branch x0 v') x -> (u = u' /\\ v = v') \\/ (u = v' /\\ v = u')",
+      "signature_shape_hash": "825ee201d2ca8495540b545a29ea887d9efaf40448cdfe3173b59d918b7b1248"
+    },
+    {
+      "body_hash": "133fdf1d92735ff6b1e5ad4cf3526fe42ebd52b9b55c83e0a6fd9b71d6e91464",
+      "body_shape_hash": "133fdf1d92735ff6b1e5ad4cf3526fe42ebd52b9b55c83e0a6fd9b71d6e91464",
+      "declaration_hash": "69271c782cd82a792f6d8de099a9154cd70ed1686fe463cc73fc97d7c4fdfe73",
+      "direct_consumers": [
+        "Extremal.conjectures.X98.X98Model"
+      ],
+      "kind": "Definition",
+      "line": 103,
+      "local_dependencies": [
+        "x98_branch",
+        "x98_consecutive_in_path",
+        "x98_edge_path",
+        "x98_induced_subdivision_model",
+        "x98_model_vertex"
+      ],
+      "name": "x98_global_induced",
+      "normalized_name": "global_induced",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "phase": "X98",
+      "qualified_name": "Extremal.conjectures.X98.x98_global_induced",
+      "signature": "(H G : sgraph) (x0 : x98_induced_subdivision_model H G) : forall x y : G, x98_model_vertex (x98_branch x0) (x98_edge_path x0) x -> x98_model_vertex (x98_branch x0) (x98_edge_path x0) y -> x -- y -> exists u v : H, u -- v /\\ x98_consecutive_in_path (x98_edge_path x0 u v) x y",
+      "signature_shape_hash": "04dde886dfefb60d432b233503d6af9624e8f1c03ead625036f07ec4a2c255d0"
+    },
+    {
+      "body_hash": "cc9c55de4708312c73b26f5df6696b1f8be2199040c143c55ccca1a9c3db4faa",
+      "body_shape_hash": "cc9c55de4708312c73b26f5df6696b1f8be2199040c143c55ccca1a9c3db4faa",
+      "declaration_hash": "813f195a1efab5ca0035968b0684817ca600a3d31f080229720ed88dcac02af1",
       "direct_consumers": [
         "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement"
       ],
       "kind": "Definition",
-      "line": 71,
-      "local_dependencies": [
-        "x98_induced_subdivision_model"
-      ],
+      "line": 121,
+      "local_dependencies": [],
       "name": "x98_induced_subdivision",
       "normalized_name": "induced_subdivision",
       "package": "extremal-graph-theory",
@@ -38216,8 +38518,9 @@
       "body_shape_hash": "a2570f291eccb78297c66f6945c5067a9b6cabfcf0ab65b804a771d500e29281",
       "declaration_hash": "ec827dc447361cf0b79abfb4b6b5a0b3a8998ca1953e4686dd5605fc09043929",
       "direct_consumers": [
-        "GTMisc.conjectures.X114.x114_induced_path_between",
-        "GTMisc.conjectures.X114.x114_induced_subdivision_model"
+        "GTMisc.conjectures.X114.X114Model",
+        "GTMisc.conjectures.X114.x114_global_induced",
+        "GTMisc.conjectures.X114.x114_induced_path_between"
       ],
       "kind": "Definition",
       "line": 10,
@@ -38236,7 +38539,8 @@
       "body_shape_hash": "1c1eb40ef043503ff86efa901048dcbbb4e25de6cf6fcbc88b430862dad6ba49",
       "declaration_hash": "c7778916d26b8e850586582d0ba707d7cae3aafd06bd1f877c76d4fb8bbe562b",
       "direct_consumers": [
-        "GTMisc.conjectures.X114.x114_induced_subdivision_model"
+        "GTMisc.conjectures.X114.X114Model",
+        "GTMisc.conjectures.X114.x114_edge_path_valid"
       ],
       "kind": "Definition",
       "line": 22,
@@ -38257,7 +38561,9 @@
       "body_shape_hash": "fa764d43c3b1434089898939e937e70eb615b809e4484d7ddb0651a30b22b5a7",
       "declaration_hash": "204a3c3e3e50e091258dbb452c0e681efdcd92fab718d5983adec308b9b67833",
       "direct_consumers": [
-        "GTMisc.conjectures.X114.x114_induced_subdivision_model"
+        "GTMisc.conjectures.X114.X114Model",
+        "GTMisc.conjectures.X114.x114_internal_avoids_branch",
+        "GTMisc.conjectures.X114.x114_paths_internally_disjoint"
       ],
       "kind": "Definition",
       "line": 35,
@@ -38276,7 +38582,8 @@
       "body_shape_hash": "289c7b960de9665c726957fe8ec69ae2598644d7c4c6932854f893d4964ff6c1",
       "declaration_hash": "571033b105ccb345920958f5a1bea3568ef4052453c3ac2d5c9c0d2b3c6d209f",
       "direct_consumers": [
-        "GTMisc.conjectures.X114.x114_induced_subdivision_model"
+        "GTMisc.conjectures.X114.X114Model",
+        "GTMisc.conjectures.X114.x114_global_induced"
       ],
       "kind": "Definition",
       "line": 38,
@@ -38291,41 +38598,241 @@
       "signature_shape_hash": "84565ca2fb40a4e6a2d49d4dc91982b4edb987ef99a1f0ffc88f088fbe052064"
     },
     {
-      "body_hash": "15596b5143ca19c0ee79cad8336b81a8e48e476a96e8a7bf653671d15bba27f0",
-      "body_shape_hash": "dceef8423e1bd8b881e37e45cd543e2937e24bdc8b739984ae0ab2ef01b6cda5",
-      "declaration_hash": "baf2ea7577a45156ee8ab0431ea7d9a0f16b784428d21412fc1afeda42816a84",
+      "body_hash": "3b292dcb610289fb181c69580c08c9b93ddafe9879a8b455ac73dbeb1206cd87",
+      "body_shape_hash": "3b292dcb610289fb181c69580c08c9b93ddafe9879a8b455ac73dbeb1206cd87",
+      "declaration_hash": "a11a8bfc557bb5fc299ce401335a121e4ecedd738d4f0238e8ae62c41b8331fa",
       "direct_consumers": [
-        "GTMisc.conjectures.X114.x114_induced_subdivision"
+        "GTMisc.conjectures.X114.X114Model",
+        "GTMisc.conjectures.X114.x114_branch",
+        "GTMisc.conjectures.X114.x114_branch_injective",
+        "GTMisc.conjectures.X114.x114_edge_path",
+        "GTMisc.conjectures.X114.x114_edge_path_valid",
+        "GTMisc.conjectures.X114.x114_global_induced",
+        "GTMisc.conjectures.X114.x114_internal_avoids_branch",
+        "GTMisc.conjectures.X114.x114_paths_internally_disjoint"
       ],
-      "kind": "Record",
+      "kind": "Definition",
       "line": 41,
-      "local_dependencies": [
-        "x114_consecutive_in_path",
-        "x114_induced_path_between",
-        "x114_internal",
-        "x114_model_vertex"
-      ],
+      "local_dependencies": [],
       "name": "x114_induced_subdivision_model",
       "normalized_name": "induced_subdivision_model",
       "package": "graph-theory-misc",
       "path": "graph-theory-misc/theories/conjectures/X114.v",
       "phase": "X114",
       "qualified_name": "GTMisc.conjectures.X114.x114_induced_subdivision_model",
-      "signature": "(H G : sgraph)",
-      "signature_shape_hash": "8c9cd82f8112280661712886c329c1320ab11cb6a26de52856bdd5c67c74e090"
+      "signature": "(H G : sgraph) : Type",
+      "signature_shape_hash": "35f778df9dfce9bb1b8fb4e65b55084dd9b89940c1d38870be918e0eda8a3e25"
     },
     {
-      "body_hash": "222d29cd4570cf035c55d881db1f4223add02fc07efa7c515187b4dd0110b082",
-      "body_shape_hash": "be19afdd240f8fcd2fee717099c00c5a44393ac2709cf5429547741d708b2766",
-      "declaration_hash": "14a2c4da4e1d4d1bc13579939eb78d91d2ad8ce361551ff76c807422db3bc34a",
+      "body_hash": "be26cc7174339cc2eb3bf5d5029c8d9c8dce81ce01e77f09cac4b722d67dcba7",
+      "body_shape_hash": "789db669612215483e2d60090f99f8423521eb660236d0c73539fd075035e72d",
+      "declaration_hash": "c9ff78481403017c87fd5d6748689ce3ad3fdf0f4eee94477aace2d16021a53a",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 47,
+      "local_dependencies": [
+        "x114_branch",
+        "x114_branch_injective",
+        "x114_consecutive_in_path",
+        "x114_edge_path",
+        "x114_edge_path_valid",
+        "x114_global_induced",
+        "x114_induced_path_between",
+        "x114_induced_subdivision_model",
+        "x114_internal",
+        "x114_internal_avoids_branch",
+        "x114_model_vertex",
+        "x114_paths_internally_disjoint"
+      ],
+      "name": "X114Model",
+      "normalized_name": "X114Model",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "phase": "X114",
+      "qualified_name": "GTMisc.conjectures.X114.X114Model",
+      "signature": "(H G : sgraph) (x114_branch : H -> G) (x114_branch_injective : injective x114_branch) (x114_edge_path : H -> H -> seq G) (x114_edge_path_valid : forall u v : H, u -- v -> x114_induced_path_between (x114_branch u) (x114_branch v) (x114_edge_path u v)) (x114_internal_avoids_branch : forall (u v w : H) (x : G), u -- v -> x114_internal (x114_edge_path u v) (x114_branch u) (x114_branch v) x -> x != x114_branch w) (x114_paths_internally_disjoint : forall (u v u' v' : H) (x : G), u -- v -> u' -- v' -> x114_internal (x114_edge_path u v) (x114_branch u) (x114_branch v) x -> x114_internal (x114_edge_path u' v') (x114_branch u') (x114_branch v') x -> (u = u' /\\ v = v') \\/ (u = v' /\\ v = u')) (x114_global_induced : forall x y : G, x114_model_vertex x114_branch x114_edge_path x -> x114_model_vertex x114_branch x114_edge_path y -> x -- y -> exists u v : H, u -- v /\\ x114_consecutive_in_path (x114_edge_path u v) x y) : x114_induced_subdivision_model H G",
+      "signature_shape_hash": "987a0dee548ea0e3b58b816c515b3c3bd8b34b654513e022426df69603ee20e6"
+    },
+    {
+      "body_hash": "c22aa7aab61a7d9136de256a3235a72d208d1469b913ce57b10a2b507f269538",
+      "body_shape_hash": "c22aa7aab61a7d9136de256a3235a72d208d1469b913ce57b10a2b507f269538",
+      "declaration_hash": "3f639cb52c9ace2619d10b190191621d5843ff5a197ac7c4866d5156e0334927",
+      "direct_consumers": [
+        "GTMisc.conjectures.X114.X114Model",
+        "GTMisc.conjectures.X114.x114_branch_injective",
+        "GTMisc.conjectures.X114.x114_edge_path_valid",
+        "GTMisc.conjectures.X114.x114_global_induced",
+        "GTMisc.conjectures.X114.x114_internal_avoids_branch",
+        "GTMisc.conjectures.X114.x114_paths_internally_disjoint"
+      ],
+      "kind": "Definition",
+      "line": 75,
+      "local_dependencies": [
+        "x114_induced_subdivision_model"
+      ],
+      "name": "x114_branch",
+      "normalized_name": "branch",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "phase": "X114",
+      "qualified_name": "GTMisc.conjectures.X114.x114_branch",
+      "signature": "(H G : sgraph) (x0 : x114_induced_subdivision_model H G) : H -> G",
+      "signature_shape_hash": "0f34acd126e7f3671a57dc9f3749d0791d309baf29a711bf70472d153f2d8278"
+    },
+    {
+      "body_hash": "f455dc7fd1836fefb10d350a32ab7a8446c7236a6dcd217632eda4a34260148c",
+      "body_shape_hash": "f455dc7fd1836fefb10d350a32ab7a8446c7236a6dcd217632eda4a34260148c",
+      "declaration_hash": "fd60a5a77af2f880481d57d3d423120a9a52c6fccdd2eb6bebcb2ef3cfdc0025",
+      "direct_consumers": [
+        "GTMisc.conjectures.X114.X114Model"
+      ],
+      "kind": "Definition",
+      "line": 78,
+      "local_dependencies": [
+        "x114_branch",
+        "x114_induced_subdivision_model"
+      ],
+      "name": "x114_branch_injective",
+      "normalized_name": "branch_injective",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "phase": "X114",
+      "qualified_name": "GTMisc.conjectures.X114.x114_branch_injective",
+      "signature": "(H G : sgraph) (x0 : x114_induced_subdivision_model H G) : injective (x114_branch x0)",
+      "signature_shape_hash": "ae6fe2712388cac6fa78981d16094543781b0e3e59146731fc42a54beffc02d1"
+    },
+    {
+      "body_hash": "cf001d3d1b4976c48bda200ae1ef30b5fbca0abafb4bd9e996621d2def34a45a",
+      "body_shape_hash": "cf001d3d1b4976c48bda200ae1ef30b5fbca0abafb4bd9e996621d2def34a45a",
+      "declaration_hash": "3f8de92e7f1a95dd3859881b0877069a18c58cbe1f5116f9fcf7937ac2ef4247",
+      "direct_consumers": [
+        "GTMisc.conjectures.X114.X114Model",
+        "GTMisc.conjectures.X114.x114_edge_path_valid",
+        "GTMisc.conjectures.X114.x114_global_induced",
+        "GTMisc.conjectures.X114.x114_internal_avoids_branch",
+        "GTMisc.conjectures.X114.x114_paths_internally_disjoint"
+      ],
+      "kind": "Definition",
+      "line": 82,
+      "local_dependencies": [
+        "x114_induced_subdivision_model"
+      ],
+      "name": "x114_edge_path",
+      "normalized_name": "edge_path",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "phase": "X114",
+      "qualified_name": "GTMisc.conjectures.X114.x114_edge_path",
+      "signature": "(H G : sgraph) (x0 : x114_induced_subdivision_model H G) : H -> H -> seq G",
+      "signature_shape_hash": "8a915258c0a40caac56e0c4171950290b64d332423be7df8d4f951371c760433"
+    },
+    {
+      "body_hash": "e705009d1df62db8250b42f4951b4864000756f4f408dc3fee3d26f03a749024",
+      "body_shape_hash": "e705009d1df62db8250b42f4951b4864000756f4f408dc3fee3d26f03a749024",
+      "declaration_hash": "603ce1e241d344bacf8e6801737867980c7c21655f13038e1aea296627b06c39",
+      "direct_consumers": [
+        "GTMisc.conjectures.X114.X114Model"
+      ],
+      "kind": "Definition",
+      "line": 85,
+      "local_dependencies": [
+        "x114_branch",
+        "x114_edge_path",
+        "x114_induced_path_between",
+        "x114_induced_subdivision_model"
+      ],
+      "name": "x114_edge_path_valid",
+      "normalized_name": "edge_path_valid",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "phase": "X114",
+      "qualified_name": "GTMisc.conjectures.X114.x114_edge_path_valid",
+      "signature": "(H G : sgraph) (x0 : x114_induced_subdivision_model H G) : forall u v : H, u -- v -> x114_induced_path_between (x114_branch x0 u) (x114_branch x0 v) (x114_edge_path x0 u v)",
+      "signature_shape_hash": "6c4b4a4b87782f94eeedee8922d059a85c67a67eafd8abd932221779b36075d0"
+    },
+    {
+      "body_hash": "fb00ecf40611faef2ce76a668eebcda1686c11e53e31206882c115037548364c",
+      "body_shape_hash": "fb00ecf40611faef2ce76a668eebcda1686c11e53e31206882c115037548364c",
+      "declaration_hash": "0d439fc2e748443a03c69c9eeaf246801cd10ab621e1e89ed9294ff3f8264cb8",
+      "direct_consumers": [
+        "GTMisc.conjectures.X114.X114Model"
+      ],
+      "kind": "Definition",
+      "line": 91,
+      "local_dependencies": [
+        "x114_branch",
+        "x114_edge_path",
+        "x114_induced_subdivision_model",
+        "x114_internal"
+      ],
+      "name": "x114_internal_avoids_branch",
+      "normalized_name": "internal_avoids_branch",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "phase": "X114",
+      "qualified_name": "GTMisc.conjectures.X114.x114_internal_avoids_branch",
+      "signature": "(H G : sgraph) (x0 : x114_induced_subdivision_model H G) : forall (u v w : H) (x : G), u -- v -> x114_internal (x114_edge_path x0 u v) (x114_branch x0 u) (x114_branch x0 v) x -> x != x114_branch x0 w",
+      "signature_shape_hash": "9d3108ddb332eada674db8e59e049c011f0ee1c3726e0e4d7fc4a8cb5b9230eb"
+    },
+    {
+      "body_hash": "6fa0cd9de112522b7a573f1f6c518ac6d8fff081d26cff5dcf6bb6bdf7e6814f",
+      "body_shape_hash": "6fa0cd9de112522b7a573f1f6c518ac6d8fff081d26cff5dcf6bb6bdf7e6814f",
+      "declaration_hash": "98dabd34c0d5576b3afd57e585dafde488fc0bea869e4ac474352cb73051c297",
+      "direct_consumers": [
+        "GTMisc.conjectures.X114.X114Model"
+      ],
+      "kind": "Definition",
+      "line": 98,
+      "local_dependencies": [
+        "x114_branch",
+        "x114_edge_path",
+        "x114_induced_subdivision_model",
+        "x114_internal"
+      ],
+      "name": "x114_paths_internally_disjoint",
+      "normalized_name": "paths_internally_disjoint",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "phase": "X114",
+      "qualified_name": "GTMisc.conjectures.X114.x114_paths_internally_disjoint",
+      "signature": "(H G : sgraph) (x0 : x114_induced_subdivision_model H G) : forall (u v u' v' : H) (x : G), u -- v -> u' -- v' -> x114_internal (x114_edge_path x0 u v) (x114_branch x0 u) (x114_branch x0 v) x -> x114_internal (x114_edge_path x0 u' v') (x114_branch x0 u') (x114_branch x0 v') x -> (u = u' /\\ v = v') \\/ (u = v' /\\ v = u')",
+      "signature_shape_hash": "825ee201d2ca8495540b545a29ea887d9efaf40448cdfe3173b59d918b7b1248"
+    },
+    {
+      "body_hash": "133fdf1d92735ff6b1e5ad4cf3526fe42ebd52b9b55c83e0a6fd9b71d6e91464",
+      "body_shape_hash": "133fdf1d92735ff6b1e5ad4cf3526fe42ebd52b9b55c83e0a6fd9b71d6e91464",
+      "declaration_hash": "cc90e408be6c59155f6b6413da17522be2357e42f8e6726cf0fce37e0975cd02",
+      "direct_consumers": [
+        "GTMisc.conjectures.X114.X114Model"
+      ],
+      "kind": "Definition",
+      "line": 106,
+      "local_dependencies": [
+        "x114_branch",
+        "x114_consecutive_in_path",
+        "x114_edge_path",
+        "x114_induced_subdivision_model",
+        "x114_model_vertex"
+      ],
+      "name": "x114_global_induced",
+      "normalized_name": "global_induced",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "phase": "X114",
+      "qualified_name": "GTMisc.conjectures.X114.x114_global_induced",
+      "signature": "(H G : sgraph) (x0 : x114_induced_subdivision_model H G) : forall x y : G, x114_model_vertex (x114_branch x0) (x114_edge_path x0) x -> x114_model_vertex (x114_branch x0) (x114_edge_path x0) y -> x -- y -> exists u v : H, u -- v /\\ x114_consecutive_in_path (x114_edge_path x0 u v) x y",
+      "signature_shape_hash": "04dde886dfefb60d432b233503d6af9624e8f1c03ead625036f07ec4a2c255d0"
+    },
+    {
+      "body_hash": "cc9c55de4708312c73b26f5df6696b1f8be2199040c143c55ccca1a9c3db4faa",
+      "body_shape_hash": "cc9c55de4708312c73b26f5df6696b1f8be2199040c143c55ccca1a9c3db4faa",
+      "declaration_hash": "2d6a787fb17953dfce0d65bd2666b7dc871275bb20dad29a1f4c930c4e43b04e",
       "direct_consumers": [
         "GTMisc.conjectures.X114.x114_hisc_problem"
       ],
       "kind": "Definition",
-      "line": 69,
-      "local_dependencies": [
-        "x114_induced_subdivision_model"
-      ],
+      "line": 124,
+      "local_dependencies": [],
       "name": "x114_induced_subdivision",
       "normalized_name": "induced_subdivision",
       "package": "graph-theory-misc",
@@ -38343,7 +38850,7 @@
         "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement"
       ],
       "kind": "Definition",
-      "line": 72,
+      "line": 126,
       "local_dependencies": [
         "x114_induced_subdivision"
       ],
@@ -38364,7 +38871,7 @@
         "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement"
       ],
       "kind": "Definition",
-      "line": 80,
+      "line": 134,
       "local_dependencies": [],
       "name": "x114_np_complete",
       "normalized_name": "np_complete",
@@ -38383,7 +38890,7 @@
         "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement"
       ],
       "kind": "Definition",
-      "line": 83,
+      "line": 137,
       "local_dependencies": [],
       "name": "x114_subcubic",
       "normalized_name": "subcubic",

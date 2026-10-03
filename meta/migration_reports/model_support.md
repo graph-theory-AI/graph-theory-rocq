@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py model_support --details /tmp/mi
 
 - Canonical: `GTBase.model_support.model_support`.
 - Baseline: `bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8`.
-- Scope: 3 helpers, 4 statements, 24 frozen objects, 91 recorded references.
-- Source checks: 190/190 pass; consistent.
+- Scope: 3 helpers, 4 statements, 24 frozen objects, 121 recorded references.
+- Source checks: 192/192 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,4 +20,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py model_support --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/consecutive_in_path.v#X98Legacy.induced_subdivision_model`, `graph-theory-misc/theories/migration/consecutive_in_path.v#X114Legacy.induced_subdivision_model`, `extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement`, `graph-theory-misc/theories/migration/subcubic.v#X114Legacy.subcubic_induced_subdivision_np_complete_statement`, `minor-theory/theories/migration/consecutive_in_cycle.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/consecutive_in_path.v#X98Legacy.induced_subdivision_model`, `graph-theory-misc/theories/migration/consecutive_in_path.v#X114Legacy.induced_subdivision_model`, `extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement`, `graph-theory-misc/theories/migration/subcubic.v#X114Legacy.subcubic_induced_subdivision_np_complete_statement`, `minor-theory/theories/migration/consecutive_in_cycle.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement`, `extremal-graph-theory/theories/migration/induced_subdivisions.v#Legacy.x98_induced_subdivision_model`, `graph-theory-misc/theories/migration/induced_subdivisions.v#Legacy.x114_induced_subdivision_model`.
