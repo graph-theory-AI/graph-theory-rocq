@@ -112,16 +112,16 @@ Proof. by case. Qed.
 
 Lemma longest_cycle_ucycle (G : sgraph) (c : seq G) :
   longest_cycle c -> ucycle (--) c.
-Proof. by case. Qed.
+Proof. by case/seq_longest_cycle_ucycleE. Qed.
 
 Lemma longest_cycle_size (G : sgraph) (c : seq G) :
   longest_cycle c -> 2 < size c.
-Proof. by case. Qed.
+Proof. by case/seq_longest_cycle_ucycleE. Qed.
 
 (** Maximality: no cycle is longer than a longest cycle. *)
 Lemma longest_cycle_max (G : sgraph) (c c' : seq G) :
   longest_cycle c -> ucycle (--) c' -> size c' <= size c.
-Proof. by case=> _ _ H; apply: H. Qed.
+Proof. by case/seq_longest_cycle_ucycleE=> _ _ H; apply: H. Qed.
 
 (** ** [chord] — projection identity. *)
 

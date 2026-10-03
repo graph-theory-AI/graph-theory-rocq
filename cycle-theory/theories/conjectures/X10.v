@@ -24,8 +24,7 @@ Definition x10_cycle_vertices (G : sgraph) (c : seq G) : {set G} :=
   seq_vertices c.
 
 Definition x10_longest_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\ 2 < size c /\
-  forall c' : seq G, ucycle (--) c' -> 2 < size c' -> size c' <= size c.
+  seq_longest_cycle (--) c.
 
 (** ** X10 statements ******************************************************)
 

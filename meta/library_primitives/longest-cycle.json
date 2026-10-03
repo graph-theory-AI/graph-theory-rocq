@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "family": "longest-cycle",
+  "primitive": {
+    "canonical_name": "GTBase.walks_paths.seq_longest_cycle",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "longest_cycle"
+    ],
+    "source_definitions": [
+      "Cycle.conjectures.X10.x10_longest_cycle",
+      "Cycle.conjectures.X212.x212_longest_cycle",
+      "Hom.conjectures.U3.longest_cycle"
+    ],
+    "consumers_remaining": 3,
+    "relation": "one contract, three presentations: X212 x212_longest_cycle is GTBase.walks_paths.seq_longest_cycle (--) c (the Boolean genuine-cycle maximum, by conversion); X10 x10_longest_cycle is its nested view with curried competitor premises (seq_longest_cycle_nestedE, a proved iff); Hom U3 longest_cycle is its and3 view over ALL ucycle competitors (seq_longest_cycle_ucycleE, a proved iff through the size split: a competitor with at most two entries is never longer than a genuine cycle). No symmetry, looplessness or inhabitance premise; no propositional extensionality.",
+    "semantic_classes": {
+      "boolean-genuine-cycle-maximum": {
+        "members": [
+          "Cycle.conjectures.X212.x212_longest_cycle"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Cycle.migration.longest_cycle.x212_longest_cycle_compat",
+        "note": "X212's x212_cycle c /\\ forall c', x212_cycle c' -> size c' <= size c, with x212_cycle the Boolean seq_cycleb (--) after B10: the body of seq_longest_cycle (--) c, convertible, so B10's frozen X212 longest-cycle certificates still hold by iff_refl."
+      },
+      "nested-genuine-cycle-maximum": {
+        "members": [
+          "Cycle.conjectures.X10.x10_longest_cycle"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Cycle.migration.longest_cycle.x10_longest_cycle_compat",
+        "note": "X10's ucycle (--) c /\\ 2 < size c /\\ forall c', ucycle (--) c' -> 2 < size c' -> size c' <= size c: the nested view of seq_longest_cycle (--) c (seq_longest_cycle_nestedE), a proved iff rather than a conversion; competitors are exactly the genuine cycles."
+      },
+      "all-ucycle-and3-maximum": {
+        "members": [
+          "Hom.conjectures.U3.longest_cycle"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Hom.migration.longest_cycle.longest_cycle_compat",
+        "note": "Hom U3's [/\\ ucycle (--) c, 2 < size c & forall c', ucycle (--) c' -> size c' <= size c] bounds ALL ucycle competitors, degenerate ones included: the and3 view of seq_longest_cycle (--) c (seq_longest_cycle_ucycleE), equivalent because the witness has more than two entries, so a competitor with at most two entries is never longer. The and3 adapter keeps grounding_U3's projections with unchanged types."
+      }
+    },
+    "compatibility_theorems": [
+      "Cycle.migration.longest_cycle.smith_longest_cycles_r_connected_statement_compat",
+      "Cycle.migration.longest_cycle.smith_longest_cycles_r_connected_statement_original_compat",
+      "Cycle.migration.longest_cycle.smith_two_longest_cycles_statement_compat",
+      "Cycle.migration.longest_cycle.smith_two_longest_cycles_statement_original_compat",
+      "Cycle.migration.longest_cycle.x10_longest_cycle_compat",
+      "Cycle.migration.longest_cycle.x212_longest_cycle_compat",
+      "Hom.migration.longest_cycle.chords_of_longest_cycles_statement_compat",
+      "Hom.migration.longest_cycle.longest_cycle_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walks_paths.seq_longest_cycleE",
+      "GTBase.walks_paths.seq_longest_cycle_nestedE",
+      "GTBase.walks_paths.seq_longest_cycle_ucycleE",
+      "GTBase.walks_paths.seq_longest_cycle_cycleb",
+      "GTBase.walks_paths.seq_longest_cycle_cycle",
+      "GTBase.walks_paths.seq_longest_cycle_ucycle",
+      "GTBase.walks_paths.seq_longest_cycle_uniq",
+      "GTBase.walks_paths.seq_longest_cycle_size",
+      "GTBase.walks_paths.seq_longest_cycle_max",
+      "GTBase.walks_paths.seq_longest_cycle_max_ucycle",
+      "GTBase.walks_paths.seq_longest_cycle_nil",
+      "GTBase.walks_paths.seq_longest_cycle_seq1",
+      "GTBase.walks_paths.seq_longest_cycle_pair",
+      "GTBase.walks_paths.seq_longest_cycle_none",
+      "GTBase.walks_paths.seq_longest_cycle_size_eq",
+      "GTBase.walks_paths.seq_longest_cycle_tie",
+      "GTBase.walks_paths.seq_longest_cycle_rot",
+      "GTBase.walks_paths.seq_longest_cycle_rotr",
+      "GTBase.walks_paths.seq_longest_cycle_rev_converse",
+      "GTBase.walks_paths.seq_longest_cycle_rev",
+      "GTBase.walks_paths.seq_longest_cycle_card",
+      "GTBase.walks_paths.seq_longest_cycle_exists",
+      "GTBase.walks_paths.seq_longest_cycle_existsP",
+      "GTBase.walks_paths.seq_longest_cycle_ground_K3",
+      "GTBase.walks_paths.seq_longest_cycle_ground_K4_triangle",
+      "GTBase.walks_paths.seq_longest_cycle_ground_K2"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.digraph",
+        "GraphTheory.sgraph",
+        "mathcomp.boot.fintype",
+        "mathcomp.boot.path",
+        "mathcomp.boot.seq",
+        "mathcomp.boot.ssrnat"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "mathcomp.boot.path.ucycle",
+      "note": "Neither MathComp nor coq-graph-theory names a longest cycle of a raw sequence. MathComp supplies ucycle, size, the cardinality bound of duplicate-free sequences (card_uniqP, max_card) and ex_maxnP, used for the conditional existence over a finite carrier. GTBase.walks_paths.seq_longest_cycle reuses B10's seq_cycle / seq_cycleb (genuine cycles: more than two pairwise distinct entries) over an arbitrary relation, with the maximum taken over the whole carrier (length maximality, not inclusion maximality). Digraph X2 longest_dicycle (Digraph.core.dipath.dicycle admits loops and digons) is a distinct admissibility class for a later family; Hom U3 longest_path and fixed-length, Hamiltonian or induced cycles stay separate. Legacy bodies and per-row certificates: meta/migration_reports/longest_cycle.md.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/longest_cycle.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/longest_cycle.spec.json",
+    "foundation_fidelity": "meta/foundation_fidelity/longest-cycle.json"
+  }
+}

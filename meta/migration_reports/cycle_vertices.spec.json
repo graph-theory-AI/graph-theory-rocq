@@ -254,7 +254,9 @@
     }
   ],
   "known_stale_snapshots": {
-    "cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.smith_two_longest_cycles_statement": "B10 per-row snapshot: family genuine-cycle (B10) froze its longest-cycle chain in X212's Smith row but kept the live x212_cycle_vertices, which after B12 unfolds to seq_vertices. Kept unchanged; B10's smith_two_longest_cycles_statement_compat stays true. The complete pre-B10, pre-B12 row is Cycle.migration.cycle_vertices.X212Original.smith_two_longest_cycles_statement, certified by smith_two_longest_cycles_statement_original_compat."
+    "cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.smith_two_longest_cycles_statement": "B10 per-row snapshot: family genuine-cycle (B10) froze its longest-cycle chain in X212's Smith row but kept the live x212_cycle_vertices, which after B12 unfolds to seq_vertices. Kept unchanged; B10's smith_two_longest_cycles_statement_compat stays true. The complete pre-B10, pre-B12 row is Cycle.migration.cycle_vertices.X212Original.smith_two_longest_cycles_statement, certified by smith_two_longest_cycles_statement_original_compat.",
+    "cycle-theory/theories/migration/longest_cycle.v#X10Legacy.smith_longest_cycles_r_connected_statement": "B13 per-row snapshot: family longest-cycle (B13) froze only its own longest-cycle body in X10's Smith row, so this copy still calls the live x10_cycle_vertices, which after B12 unfolds to seq_vertices. Kept as B13's per-row row; the complete pre-B12, pre-B13 row is Cycle.migration.longest_cycle.X10Original.smith_longest_cycles_r_connected_statement over this family's frozen support (Legacy.x10_cycle_vertices).",
+    "cycle-theory/theories/migration/longest_cycle.v#X212Legacy.smith_two_longest_cycles_statement": "B13 per-row snapshot: family longest-cycle (B13) froze only its own longest-cycle body in X212's Smith row, so this copy still calls the live x212_cycle_vertices, which after B12 unfolds to seq_vertices. Kept as B13's per-row row; the complete row is this family's own X212Original (B10+B12), reused by B13."
   },
   "cross_module_consumers": [
     {
