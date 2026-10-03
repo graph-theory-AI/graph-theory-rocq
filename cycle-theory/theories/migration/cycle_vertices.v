@@ -13,20 +13,24 @@
     History.  [X212Original] (B10+B12) is the complete Smith row of X212.  It uses B10's frozen
     longest-cycle chain [Cycle.migration.genuine_cycle.X212Legacy.longest_cycle], over B10's frozen
     Boolean cycle, and this family's frozen support.  B10's X212Legacy row is unchanged; it still calls
-    the live support and is documented in both specs.  #916 keeps the live [x5_edge_count]: A7 (edge
-    counts) is not integrated at this baseline, so whichever of A7 and B12 integrates second owes the
-    complete A7+B12 #916 Original.  Hashes and substitutions: meta/migration_reports/cycle_vertices.md. *)
+    the live support and is documented in both specs.  [X5Original] (A7+B12, history follow-up on the
+    private B12+A7 stack) is the complete 9e03072 #916 row.  It uses A7's frozen raw rank count
+    [Cycle.migration.edge_count.Legacy.x5_edge_count] (aliased [A7], without Import) and this family's
+    frozen raw support.  B12's [X5Legacy] #916 row, which keeps the live count, and A7's [X5Legacy] #916
+    row, which keeps the live support, are both unchanged and documented in both specs.  Hashes and
+    substitutions: meta/migration_reports/cycle_vertices.md. *)
 
 From GTBase Require Import base.
 From Cycle.conjectures Require Import X10 X212 X5.
-From Cycle.migration Require genuine_cycle.
+From Cycle.migration Require genuine_cycle edge_count.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
-(** B10's frozen copies, without Import. *)
+(** B10's and A7's frozen copies, without Import. *)
 Module B10 := Cycle.migration.genuine_cycle.
+Module A7 := Cycle.migration.edge_count.
 
 Module Legacy.
 
@@ -147,3 +151,33 @@ Print Assumptions smith_two_longest_cycles_statement_compat.
 Print Assumptions smith_two_longest_cycles_statement_original_compat.
 Print Assumptions min_degree_half_disjoint_four_cycles_statement_compat.
 Print Assumptions cycle_with_external_three_neighbours_statement_compat.
+
+(** ** #916 before A7 and B12 (history follow-up)
+
+    The whole 9e03072 row, with A7's frozen raw rank count (adjacent ordered pairs counted once through
+    [enum_rank p.1 < enum_rank p.2]) and this family's frozen raw support. *)
+Module X5Original.
+
+Definition cycle_with_external_three_neighbours_statement : Prop :=
+  forall (n : nat) (G : sgraph),
+    2 <= n ->
+    #|G| = n ->
+    A7.Legacy.x5_edge_count G = 2 * n - 2 ->
+    exists (c : seq G) (v : G),
+      ucycle (--) c /\
+      2 < size c /\
+      v \notin c /\
+      3 <= #|N(v) :&: Legacy.x5_vertices_of_seq c|.
+
+End X5Original.
+
+(** Before A7 and B12: A7's count certificate ([edge_count_rank]) and the support conversion. *)
+Lemma cycle_with_external_three_neighbours_statement_original_compat :
+  X5Original.cycle_with_external_three_neighbours_statement <-> cycle_with_external_three_neighbours_statement.
+Proof.
+split=> H n G n2 cG eG.
+  by apply: (H n G n2 cG); rewrite A7.x5_edge_count_compat.
+by apply: (H n G n2 cG); rewrite -A7.x5_edge_count_compat.
+Qed.
+
+Print Assumptions cycle_with_external_three_neighbours_statement_original_compat.

@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py cycle_vertices --details /tmp/m
 
 - Canonical: `GTBase.walks_paths.seq_vertices`.
 - Baseline: `13c00aa204725a73e12d05f57c51f5f970d89c15`.
-- Scope: 6 helpers, 6 statements, 16 frozen objects, 37 recorded references.
-- Source checks: 152/152 pass; consistent.
+- Scope: 6 helpers, 6 statements, 18 frozen objects, 40 recorded references.
+- Source checks: 163/163 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -24,4 +24,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Cycle.conjectures.XE2.xe2_same_vertex_set`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.smith_two_longest_cycles_statement`, `cycle-theory/theories/migration/longest_cycle.v#X10Legacy.smith_longest_cycles_r_connected_statement`, `cycle-theory/theories/migration/longest_cycle.v#X212Legacy.smith_two_longest_cycles_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.smith_two_longest_cycles_statement`, `cycle-theory/theories/migration/longest_cycle.v#X10Legacy.smith_longest_cycles_r_connected_statement`, `cycle-theory/theories/migration/longest_cycle.v#X212Legacy.smith_two_longest_cycles_statement`, `cycle-theory/theories/migration/edge_count.v#X5Legacy.cycle_with_external_three_neighbours_statement`.
