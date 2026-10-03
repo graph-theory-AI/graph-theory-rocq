@@ -56,7 +56,7 @@
 
 ## Foundation fidelity registry
 
-- **175 audited primitives**: 161 faithful · 12 lightweight · 2 broken.
+- **176 audited primitives**: 162 faithful · 12 lightweight · 2 broken.
 - Registry: module contracts in `meta/foundation_fidelity.json` and family verdicts in `meta/foundation_fidelity/`; validate declarations and evidence names with `python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is never inferred from compilation.
 
 | verdict | primitive | misuse watch |
@@ -109,7 +109,7 @@
 
 Cross-area primitives every area may reuse (promoted only when ≥2 areas need them):
 
-`minor`, `strict_minor`, `minor_map`, `minor_rmap`, `mgraph`, `Delta`, `ceil_div`, `common_nbr`, `regular`, `min_degree_at_least`, `min_degree`, `girth_geq`, `is_hom`, `homs_to`, `is_core`, `cartesian_product`, `graph_power`, `subdivision`, `frac_power`, `list_colourable`, `list_colourable_on`, `choosable`, `is_choice_number`, `chromatic_index`, `edge_colourable`, `mDelta`, `mregular`, `mcubic`, `k_connected`, `triangle_free`, `k_degenerate_on`, `k_degenerate`, `average_degree_geq`, `has_girth`, `wagner_planar`, `bipartite`, `cycle_graph`
+`minor`, `strict_minor`, `minor_map`, `minor_rmap`, `mgraph`, `Delta`, `ceil_div`, `common_nbr`, `regular`, `min_degree_at_least`, `min_degree`, `subcubic`, `girth_geq`, `is_hom`, `homs_to`, `is_core`, `cartesian_product`, `graph_power`, `subdivision`, `frac_power`, `list_colourable`, `list_colourable_on`, `choosable`, `is_choice_number`, `chromatic_index`, `edge_colourable`, `mDelta`, `mregular`, `mcubic`, `k_connected`, `triangle_free`, `k_degenerate_on`, `k_degenerate`, `average_degree_geq`, `has_girth`, `wagner_planar`, `bipartite`, `cycle_graph`
 
 ## Per-area foundation modules
 

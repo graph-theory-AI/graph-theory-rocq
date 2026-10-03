@@ -21,7 +21,7 @@ Definition x14_matching (G : sgraph) (M : {set {set G}}) : Prop :=
   matching M.
 
 Definition x14_subcubic (G : sgraph) : Prop :=
-  forall v : G, #|N(v)| <= 3.
+  subcubic G.
 
 Definition x14_degree_two_count (G : sgraph) : nat :=
   #|[set v : G | #|N(v)| == 2]|.

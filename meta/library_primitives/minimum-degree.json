@@ -35,10 +35,7 @@
         "note": "(exists v, #|N(v)| = d) /\\ (forall v, d <= #|N(v)|); the unconditional conjunct exchange min_degree_attained_firstE, not a conversion"
       }
     },
-    "distinct_variants": {
-      "GTMisc.conjectures.X14.x14_subcubic": "pointwise upper bound <= 3, not an attained minimum",
-      "GTMisc.conjectures.X114.x114_subcubic": "Delta <= 3, an upper bound"
-    },
+    "distinct_variants": {},
     "compatibility_theorems": [
       "Extremal.migration.min_degree.xe2_min_degree_compat",
       "Extremal.migration.min_degree.erdos_803_statement_compat",

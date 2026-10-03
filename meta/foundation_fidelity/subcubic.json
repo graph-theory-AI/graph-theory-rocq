@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "family": "subcubic",
+  "modules": {
+    "GTBase.base": {
+      "path": "base/theories/base.v",
+      "overrides": {
+        "subcubic": {
+          "verdict": "FAITHFUL",
+          "note": "Every vertex has at most three neighbours (#|N(v)| <= 3): an upper bound, not an exact degree. Equal to Delta G <= 3 for every graph (subcubicP); the empty graph qualifies; K_1..K_4 qualify and K_5 does not; invariant under isomorphisms."
+        }
+      },
+      "machine_evidence": [
+        "subcubicP",
+        "subcubic_K0",
+        "regular_subcubic",
+        "subcubic_Kn",
+        "not_subcubic_K5",
+        "subcubic_diso"
+      ]
+    }
+  }
+}
