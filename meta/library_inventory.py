@@ -313,7 +313,9 @@ def project_module(path: str, project: str) -> str:
 def repository_source_records(root: Path, spec: dict) -> dict[str, dict]:
     """Validate explicit public sources, separately checking original and current.
 
-    This adds no declarations to the conjecture inventory or its debt counts.
+    Exact pinned names select these sources independently of normalized_names,
+    which governs complete conjecture-inventory discovery. This adds no
+    declarations to that inventory or its debt counts.
     Callers must pass their actual root, including temporary test repositories.
     """
     root = Path(root)
@@ -361,8 +363,6 @@ def repository_source_records(root: Path, spec: dict) -> dict[str, dict]:
                 raise RegistryError(f"{qualified}: {label} nested-module source is unsupported")
             parsed, _ = parse_source(text, path, module, set())
             record = next(record for record in parsed if record['name'] == name)
-            if record['normalized_name'] not in spec['normalized_names']:
-                raise RegistryError(f"{qualified}: normalized name is not enrolled")
             if label == 'original' and record['declaration_hash'] != pin['declaration_hash']:
                 raise RegistryError(f"{qualified}: original declaration hash differs from pin")
             if label == 'current':
@@ -447,6 +447,7 @@ def validate_registry(inventory: dict) -> tuple[dict[str, dict], list[str]]:
     for primitive_id, spec in sorted(entries.items()):
         prefix = f"library_primitives/{primitive_id}.json"
         helpers = dict(inventory_helpers)
+        repository_helpers = {}
         try:
             repository_helpers = repository_source_records(ROOT, spec)
             overlap = set(repository_helpers) & set(inventory_helpers)
@@ -492,10 +493,13 @@ def validate_registry(inventory: dict) -> tuple[dict[str, dict], list[str]]:
         missing = sorted(set(sources) - set(helpers))
         if missing:
             errors.append(f"{prefix}: source definitions missing from inventory: {missing[:5]}")
-        matched = sorted(
-            qname for qname, helper in helpers.items()
+        # Conjecture discovery stays complete even when another family claims
+        # a matching name. Public sources are selected only by validated exact
+        # descriptors; their basenames must not enroll unrelated conjectures.
+        matched = sorted({
+            qname for qname, helper in inventory_helpers.items()
             if helper["normalized_name"] in normalized_names
-        )
+        } | set(repository_helpers))
         if sorted(sources) != matched:
             errors.append(
                 f"{prefix}: source_definitions drift (registered={len(sources)}, "

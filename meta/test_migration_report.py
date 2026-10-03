@@ -663,6 +663,123 @@ class RepositorySourceTests(unittest.TestCase):
     def records(self):
         return REPORT.INV.repository_source_records(self.root, self.primitive)
 
+    def select_public_independently(self):
+        # A path family consumes a public model definition whose basename is
+        # already the conjecture-discovery name of another family (B22/C20).
+        self.primitive['normalized_names'] = ['path_view']
+        self.write_registry()
+
+    def conjecture_helper(self, name):
+        path = 'chromatic-theory/theories/conjectures/X2.v'
+        text = f'Definition {name} (n : nat) : Prop := n = n.\n'
+        self.write(path, text)
+        records, _ = REPORT.INV.parse_source(
+            text, path, 'Chromatic.conjectures.X2', set())
+        self.assertEqual(len(records), 1)
+        return records[0]
+
+    def write_other_family(self, helper):
+        other = copy.deepcopy(self.primitive)
+        other.update(canonical_name=None, status='auditing', fidelity='PENDING',
+                     normalized_names=[helper['normalized_name']],
+                     source_definitions=[helper['qualified_name']],
+                     compatibility_theorems=[])
+        other.pop('repository_sources')
+        self.write_json('meta/library_primitives/other-family.json', {
+            'schema_version': 1, 'family': 'other-family', 'primitive': other})
+
+    def test_public_descriptor_does_not_claim_same_named_conjectures(self):
+        self.select_public_independently()
+        helper = self.conjecture_helper('x2_local_helper')
+        self.write_other_family(helper)
+        registry, errors = REPORT.INV.validate_registry({'helpers': [helper]})
+        self.assertEqual(errors, [])
+        self.assertEqual(registry['test-family']['source_definitions'], [self.helper])
+        self.assertEqual(registry['other-family']['source_definitions'],
+                         [helper['qualified_name']])
+        self.assertEqual(set(self.records()), {self.helper})
+        # The same explicit source still brings its public intermediary and
+        # both whole statements into the report, without changing inventory.
+        self.assertEqual(self.failures(), [])
+        self.assertEqual(json.loads((self.root / 'meta/library_helper_inventory.json').read_text()),
+                         {'helpers': []})
+
+    def test_conjecture_completeness_never_skips_unowned_or_other_owned_names(self):
+        self.select_public_independently()
+        helper = self.conjecture_helper('x2_path_view')
+        for other_owned in (False, True):
+            with self.subTest(other_owned=other_owned):
+                if other_owned:
+                    self.write_other_family(helper)
+                _, errors = REPORT.INV.validate_registry({'helpers': [helper]})
+                self.assertTrue(any('test-family.json: source_definitions drift'
+                                    in error for error in errors), errors)
+
+    def test_independent_public_enrollment_preserves_deferred_source_accounting(self):
+        self.select_public_independently()
+        helper = self.conjecture_helper('x2_path_view')
+        name = helper['qualified_name']
+        self.primitive['source_definitions'].append(name)
+        self.primitive['semantic_classes'] = {
+            'public': {'members': [self.helper], 'state': 'migrated-public-source'},
+            'different-contract': {'members': [name], 'state': 'deferred-excluded'},
+        }
+        self.write_registry()
+        _, errors = REPORT.INV.validate_registry({'helpers': [helper]})
+        self.assertEqual(errors, [])
+        self.assertEqual(set(self.primitive['source_definitions']), {self.helper, name})
+        self.assertEqual(REPORT.migrated_registry_sources(self.primitive), {self.helper})
+        self.assertEqual(self.failures(), [])
+
+    def test_duplicate_independent_public_ownership_is_rejected(self):
+        self.select_public_independently()
+        self.write_json('meta/library_primitives/other-family.json', {
+            'schema_version': 1, 'family': 'other-family', 'primitive': self.primitive})
+        _, errors = REPORT.INV.validate_registry({'helpers': []})
+        self.assertTrue(any('duplicate source ownership' in error for error in errors), errors)
+
+    def test_independent_public_enrollment_still_requires_exact_pin(self):
+        self.select_public_independently()
+        original = copy.deepcopy(self.primitive)
+        for defect, message in (('missing-descriptor', 'missing from inventory'),
+                                ('missing-commit', 'needs path, commit, blob'),
+                                ('wrong-blob', 'differs from pin'),
+                                ('wrong-declaration', 'differs from pin')):
+            with self.subTest(defect=defect):
+                self.primitive = copy.deepcopy(original)
+                if defect == 'missing-descriptor':
+                    self.primitive.pop('repository_sources')
+                elif defect == 'missing-commit':
+                    self.primitive['repository_sources'][self.helper].pop('commit')
+                else:
+                    field = 'blob' if defect == 'wrong-blob' else 'declaration_hash'
+                    self.primitive['repository_sources'][self.helper][field] = (
+                        '0' * len(self.pin[field]))
+                self.write_registry()
+                _, errors = REPORT.INV.validate_registry({'helpers': []})
+                self.assertTrue(any(message in error for error in errors), errors)
+
+    def test_independent_public_enrollment_rejects_unsupported_source_kind(self):
+        self.select_public_independently()
+        live = (self.root / self.source).read_text()
+        for text in ('Record local_helper := MkHelper { value : nat }.\n',
+                     'Lemma local_helper : True. Proof. exact I. Qed.\n'):
+            for original in (False, True):
+                with self.subTest(text=text, original=original):
+                    self.write(self.source, text)
+                    if original:
+                        self.pin['commit'] = self.commit()
+                        self.pin['blob'] = self.command(
+                            'git', 'rev-parse', self.pin['commit'] + ':' + self.source)
+                        self.write(self.source, live)
+                    with self.assertRaisesRegex(REPORT.RegistryError,
+                                                'needs one top-level Definition'):
+                        self.records()
+                    self.pin['commit'] = self.baseline
+                    self.pin['blob'] = self.command(
+                        'git', 'rev-parse', self.baseline + ':' + self.source)
+                    self.write(self.source, live)
+
     def test_public_source_accepts_changed_live_alias_without_inventory_enrollment(self):
         self.assertEqual(self.failures(), [])
         records = self.records()
@@ -823,6 +940,7 @@ class RepositorySourceTests(unittest.TestCase):
 
     @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
     def test_kernel_checks_public_source_and_both_transitive_rows(self):
+        self.select_public_independently()
         self.compile_fixture()
         self.assertEqual(REPORT.check_kernel(self.spec), [])
 
