@@ -21,7 +21,7 @@ Definition xe2_cycle_lengths (G : sgraph) (L : seq nat) : Prop :=
     exists c : seq G, xe1_cycle c /\ size c = ell.
 
 Definition xe2_min_degree_at_least (G : sgraph) (k : nat) : Prop :=
-  forall v : G, k <= #|N(v)|.
+  min_degree_at_least G k.
 
 Definition xe2_distinct_cycle_lengths_at_least (G : sgraph) (q : nat) : Prop :=
   exists L : seq nat, xe2_cycle_lengths G L /\ q <= size L.

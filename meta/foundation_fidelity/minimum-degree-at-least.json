@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "family": "minimum-degree-at-least",
+  "modules": {
+    "GTBase.base": {
+      "path": "base/theories/base.v",
+      "overrides": {
+        "min_degree_at_least": {
+          "verdict": "FAITHFUL",
+          "note": "Every vertex has at least d neighbours, forall v, d <= #|N(v)|: a universal lower bound, not an attained minimum. K0 and an empty induced subgraph satisfy every bound; the bound 0 always holds, the bound is antitone, regular graphs, complete and complete bipartite graphs and k-connected graphs satisfy their degree bounds, isomorphisms preserve it, and with a vertex it is at most Delta and below the order. Bound 1 is no isolated vertices."
+        }
+      },
+      "machine_evidence": [
+        "min_degree_at_least0",
+        "min_degree_at_least_le",
+        "regular_min_degree_at_least",
+        "min_degree_at_least1P",
+        "min_degree_at_least_K0",
+        "min_degree_at_least_Kn",
+        "min_degree_at_least_Knm",
+        "min_degree_at_least_kconnected",
+        "min_degree_at_least_diso",
+        "min_degree_at_least_Delta",
+        "min_degree_at_least_lt_card"
+      ]
+    }
+  }
+}

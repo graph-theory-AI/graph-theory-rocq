@@ -9,7 +9,8 @@
       re-exported:  [sgraph], [x -- y], [N(x)] (open_neigh), [χ(A)]=[chi_mem],
                     [ω(A)]=[omega_mem], [α], [clique]/[cliques], [connected],
                     ['K_n]=[complete n], [F ≃ G]=[diso], [ucycle]/[ucycleb];
-      owned here:   [Delta] (Δ), [common_nbr], [regular], [girth_geq], [ceil_div].
+      owned here:   [Delta] (Δ), [common_nbr], [regular], [min_degree_at_least],
+                    [girth_geq], [ceil_div].
 
     Planarity is NOT here yet: the [coq-graph-theory-planar] / [coq-fourcolor]
     layer (plan gate G2) is added only once that spike passes.
@@ -52,7 +53,7 @@
     [traceable], [del_edge_set], [k_edge_connected], [has_subgraph],
     [induced_free], [complete_bipartite], [oriented], [tournament], [acyclic].
 
-    Owned by this file: [Delta] (Δ), [ceil_div], [common_nbr], [regular],
+    Owned by this file: [Delta] (Δ), [ceil_div], [common_nbr], [regular], [min_degree_at_least],
     [girth_geq], [has_girth], [bipartite], [triangle_free], [cycle_graph],
     [k_connected] (Whitney form, with [k_connected1]; the library's Menger-form
     [kconnected] is also available), [k_degenerate]/[k_degenerate_on], [average_degree_geq],
@@ -125,6 +126,79 @@ Definition common_nbr (G : sgraph) (u v : G) : {set G} := N(u) :&: N(v).
 
 (** [d]-regularity: every vertex has degree exactly [d]. *)
 Definition regular (G : sgraph) (d : nat) : Prop := forall v : G, #|N(v)| = d.
+
+(** Minimum-degree LOWER BOUND: every vertex has at least [d] neighbours, the universal form
+    [forall v, d <= #|N(v)|].  It is not an attained minimum: the empty graph ['K_0] satisfies
+    every bound ([min_degree_at_least_K0]) and no nonemptiness is built in, so comparisons with
+    [Delta] or [#|G|] take a vertex ([min_degree_at_least_Delta], [min_degree_at_least_lt_card]).
+    On an induced subgraph the bound is [min_degree_at_least (induced S) d]; it is not inherited
+    from [G].  "No isolated vertices" is the bound 1 ([min_degree_at_least1P]).  Upstream degree
+    facts give the complete, complete bipartite and k-connected cases.
+    Registry: meta/library_primitives/minimum-degree-at-least.json (A11). *)
+Definition min_degree_at_least (G : sgraph) (d : nat) : Prop := forall v : G, d <= #|N(v)|.
+
+Lemma min_degree_at_least0 (G : sgraph) : min_degree_at_least G 0.
+Proof. by []. Qed.
+
+(** Antitone in the bound. *)
+Lemma min_degree_at_least_le (G : sgraph) (d d' : nat) :
+  d' <= d -> min_degree_at_least G d -> min_degree_at_least G d'.
+Proof. by move=> dd' h v; apply: leq_trans (h v). Qed.
+
+Lemma regular_min_degree_at_least (G : sgraph) (d : nat) :
+  regular G d -> min_degree_at_least G d.
+Proof. by move=> h v; rewrite h. Qed.
+
+(** The bound 1: no isolated vertex. *)
+Lemma min_degree_at_least1P (G : sgraph) :
+  min_degree_at_least G 1 <-> forall v : G, exists w : G, v -- w.
+Proof.
+split=> h v; last by have [w vw] := h v; apply/card_gt0P; exists w; rewrite in_opn.
+by have /card_gt0P[w] := h v; rewrite in_opn => vw; exists w.
+Qed.
+
+(** The empty graph satisfies every bound. *)
+Lemma min_degree_at_least_K0 (d : nat) : min_degree_at_least 'K_0 d.
+Proof. by case. Qed.
+
+Lemma min_degree_at_least_Kn (n : nat) : min_degree_at_least 'K_n.+1 n.
+Proof. by move=> v; exact: deg_Kn. Qed.
+
+Lemma min_degree_at_least_Knm (n m : nat) : min_degree_at_least 'K_n,m (minn n m).
+Proof. by move=> v; exact: deg_Knm. Qed.
+
+Lemma min_degree_at_least_kconnected (G : sgraph) (k : nat) :
+  k.-connected G -> min_degree_at_least G k.
+Proof. by move=> h v; exact: kconnected_degree. Qed.
+
+(** Isomorphisms preserve the bound: they map the neighbours of [x] onto those of its image.
+    ([bij] is imported locally, for its coercion to functions.) *)
+Section DisoDegree.
+Import bij.
+
+Lemma min_degree_at_least_diso (G H : sgraph) (i : G ≃ H) (d : nat) :
+  min_degree_at_least G d -> min_degree_at_least H d.
+Proof.
+have deg (x : G) : #|N(i x)| = #|N(x)|.
+  rewrite -(card_imset (mem N(x)) (@bij_injective _ _ i)); apply: eq_card => w.
+  apply/idP/imsetP => [|[z zx ->]]; last by rewrite in_opn edge_diso -in_opn.
+  by rewrite in_opn -{1}[w](bijK' i) edge_diso -in_opn => xw; exists (i^-1 w); rewrite ?bijK'.
+by move=> h y; rewrite -[y](bijK' i) deg.
+Qed.
+
+End DisoDegree.
+
+(** With a vertex, the bound is at most the maximum degree and below the order. *)
+Lemma min_degree_at_least_Delta (G : sgraph) (d : nat) (v : G) :
+  min_degree_at_least G d -> d <= Delta G.
+Proof. by move=> h; apply: leq_trans (h v) _; exact: leq_bigmax. Qed.
+
+Lemma min_degree_at_least_lt_card (G : sgraph) (d : nat) (v : G) :
+  min_degree_at_least G d -> d < #|G|.
+Proof.
+move=> h; apply: leq_ltn_trans (h v) _; rewrite -cardsT; apply: proper_card.
+by apply/properP; split; [exact: subsetT | exists v; rewrite ?inE ?in_opn ?sg_irrefl].
+Qed.
 
 (** Girth ≥ [g]: every GENUINE cycle (size > 2; in a simple graph every cycle has
     size ≥ 3) has length ≥ [g].  The [2 < size c] guard is load-bearing — without

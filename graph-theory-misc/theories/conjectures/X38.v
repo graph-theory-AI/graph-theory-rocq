@@ -20,7 +20,7 @@ Definition x38_degree_class_size
   #|[set v : G | x38_subgraph_degree F v == k]|.
 
 Definition x38_min_degree_at_least (G : sgraph) (delta : nat) : Prop :=
-  forall v : G, delta <= #|N(v)|.
+  min_degree_at_least G delta.
 
 (** ** X38 statements ******************************************************)
 
