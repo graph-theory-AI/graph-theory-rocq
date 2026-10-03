@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "family": "image-edge",
+  "primitive": {
+    "canonical_name": "mathcomp.boot.finset.imset",
+    "owner": "upstream",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "image_edge"
+    ],
+    "source_definitions": [
+      "Hypergraph.conjectures.X108.x108_image_edge",
+      "Hypergraph.conjectures.X117.x117_image_edge",
+      "Hypergraph.conjectures.X119.x119_image_edge"
+    ],
+    "consumers_remaining": 3,
+    "relation": "Image of a supplied finite set: for f : T -> U between finite types and e : {set T}, the set of f x for x in e, MathComp's f @: e (imset, the HB-locked imset.body). The corpus bounded-existential body [set y | [exists x, (x \\in e) && (y == f x)]] equals it by a proved set equality (GTBase.set_images.imset_existsE), not by conversion. X117/X119 are its ordinal-codomain instances. No injectivity, nonempty set or carrier, positive host order or no-isolated guard; the copy predicates keep their own injection guard, and the cardinality equality needs injectivity. Packing XE1 xe1_image_edges (a whole host edge family) and the necklace image_set are separate representations; copy/forcing/Ramsey ownership is not migrated here.",
+    "semantic_classes": {
+      "finite-codomain": {
+        "members": [
+          "Hypergraph.conjectures.X108.x108_image_edge"
+        ],
+        "count": 1,
+        "verdict": "equal sets (imset_existsE)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.image_edge.x108_image_edge_compat"
+        ],
+        "note": "Arbitrary finite codomain U; the alias is f @: e."
+      },
+      "ordinal-codomain": {
+        "members": [
+          "Hypergraph.conjectures.X117.x117_image_edge",
+          "Hypergraph.conjectures.X119.x119_image_edge"
+        ],
+        "count": 2,
+        "verdict": "equal sets (imset_existsE), ordinal-codomain instances",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.image_edge.x117_image_edge_compat",
+          "Hypergraph.migration.image_edge.x119_image_edge_compat"
+        ],
+        "note": "Codomain I_N with the supplied map; all three aliases are the same f @: e, so the vocabulary_hypergraph equalities stay conversions."
+      }
+    },
+    "compatibility_theorems": [
+      "Hypergraph.migration.image_edge.x108_image_edge_compat",
+      "Hypergraph.migration.image_edge.x117_image_edge_compat",
+      "Hypergraph.migration.image_edge.x119_image_edge_compat",
+      "Hypergraph.migration.image_edge.x108_monochromatic_copy_compat",
+      "Hypergraph.migration.image_edge.x108_two_colour_ramsey_at_most_compat",
+      "Hypergraph.migration.image_edge.three_uniform_degenerate_hypergraph_ramsey_linear_statement_compat",
+      "Hypergraph.migration.image_edge.x117_monochromatic_copy_compat",
+      "Hypergraph.migration.image_edge.x117_forces_mono_compat",
+      "Hypergraph.migration.image_edge.x117_ramsey_number_compat",
+      "Hypergraph.migration.image_edge.conlon_fox_rodl_hedgehog_ramsey_statement_compat",
+      "Hypergraph.migration.image_edge.x119_monochromatic_copy_compat",
+      "Hypergraph.migration.image_edge.x119_forces_mono_compat",
+      "Hypergraph.migration.image_edge.x119_ramsey_number_compat",
+      "Hypergraph.migration.image_edge.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_compat",
+      "Hypergraph.migration.image_edge.three_uniform_degenerate_hypergraph_ramsey_linear_statement_original_compat",
+      "Hypergraph.migration.image_edge.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.set_images.imset_existsE"
+    ],
+    "public_client": "base/theories/examples/set_images.v",
+    "legacy_baseline": "aa1f6f38d309d50725f98b5e1b42dff6414af30b",
+    "migration_report": "meta/migration_reports/image_edge.md",
+    "migration_spec": "meta/migration_reports/image_edge.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D3.md",
+    "upstream_audit": {
+      "searched_modules": [
+        "mathcomp.boot.finset",
+        "mathcomp.boot.fintype",
+        "GraphTheory core modules",
+        "GTBase"
+      ],
+      "result": "upstream-canonical",
+      "candidate": "mathcomp.boot.finset.imset",
+      "note": "imset (notation for the HB-locked imset.body, finset.v) is the image of a supplied set; imsetP, imset0, imset_set1, imsetU, imset_comp, imset_id, leq_imset_card and card_imset (injective) are reused unchanged. GTBase.set_images adds only the bounded-existential presentation, proved through imsetP because the lock blocks conversion.",
+      "audited_at": "2026-10-03"
+    }
+  }
+}
