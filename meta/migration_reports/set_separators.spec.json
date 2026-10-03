@@ -1,0 +1,354 @@
+{
+  "family": "set-separator",
+  "canonical_name": "GraphTheory.core.connectivity.separator",
+  "canonical_short_name": "separator",
+  "relation": "one contract, upstream: GTMisc.X39.x39_separates_xy X Y A and Packing.X26.x26_separates_xy X Y Z (no simple sequence path from X to Y, B5's seq_set_path, has its vertex set, B1's seq_vertices, disjoint from the separator) are transparent aliases of GraphTheory.core.connectivity.separator G X Y A (every packaged Path from a vertex of X to a vertex of Y meets A), with argument order G, X, Y, separator and G implicit as before. GTBase.set_separators.seq_separatorP proves the frozen sequence bodies equivalent without any premise: upstream separatorI reduces arbitrary packaged paths to irredundant ones, whose node lists are set-to-set simple paths (seq_set_path_nodes, seq_vertices_nodes), and every such sequence packages as a Path with the same vertices (Path_of_path, mem_path, nodesE). Nothing restricts X, Y or the separator: endpoints may lie in it, one-vertex paths count, so every common vertex of X and Y lies in it (separator_seq1, upstream separator_cap), and empty endpoint sets are separated by anything. No second predicate, guard or base re-export is introduced. Distinct and untouched: upstream separates x y U, which also requires both endpoints outside U (separator_not_separates), Cycle's multigraph edge separator ueseparates, global vertex cutsets and balanced separators, Digraph dicuts, disjoint path collections and X116's inline hitting clause.",
+  "baseline_commit": "a02e1c2108db331363787c099f8fcb99aa4e6b41",
+  "namespaces": {
+    "graph-theory-misc": "GTMisc",
+    "packing-theory": "Packing",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/set_separators.v",
+    "graph-theory-misc/theories/migration/set_separators.v",
+    "packing-theory/theories/migration/set_separators.v",
+    "graph-theory-misc/theories/migration/path_vertices.v",
+    "packing-theory/theories/migration/path_vertices.v",
+    "graph-theory-misc/theories/migration/set_path.v",
+    "packing-theory/theories/migration/set_path.v"
+  ],
+  "extra_certificates": [
+    "GTBase.set_separators.seq_separatorP",
+    "GTBase.set_separators.separator_set0l",
+    "GTBase.set_separators.separator_set0r",
+    "GTBase.set_separators.separator_setT",
+    "GTBase.set_separators.separator_endpointL",
+    "GTBase.set_separators.separator_endpointR",
+    "GTBase.set_separators.separator_seq1",
+    "GTBase.set_separators.separator_mono",
+    "GTBase.set_separators.separator_sym",
+    "GTBase.set_separators.separator_not_separates"
+  ],
+  "summary": [
+    "B26 set-separator. GTMisc X39 `x39_separates_xy` and Packing X26 `x26_separates_xy` (no simple sequence X-Y path, `seq_set_path`, has its vertex set, `seq_vertices`, disjoint from the separator) are now aliases of upstream `GraphTheory.core.connectivity.separator G X Y A`; argument order and implicit G are unchanged and no guard is added. `GTBase.set_separators.seq_separatorP` proves the frozen bodies equivalent without premises (upstream `separatorI`, `Path_of_path`); the module defines no predicate and is imported explicitly.",
+    "",
+    "Corners, in the module and the public-only client base/theories/examples/set_separators.v: X, Y and the separator are unrestricted; endpoint hits are allowed; one-vertex paths count (`separator_seq1`); empty endpoint sets and K_0 are separated by anything, the whole carrier separates anything, two edgeless vertices are separated by the empty set, K_2 is cut by either endpoint but not by the empty set; separators are monotone and, in sgraphs, symmetric. Upstream `separates` also requires both endpoints outside U (`separator_not_separates`).",
+    "",
+    "Rows, frozen exactly and certified by a pointwise separator transport: X39 `coarse_menger_ball_separator_statement`, cross-module X40 `coarse_menger_distance_two_separator_statement` (partial) and X26 `bounded_degree_distant_induced_menger_statement`. B5's complete X39Original, X40Original and X26Original rows (raw B1 support, raw B5 set path and separator; balls still live at this pin) are reused with B5's certificates: six whole iff. Their fourteen frozen pieces are bound as historical objects (B1 9e03072, B5 fbf33a0). The incoming A22 raw-ball Originals are the coordinator's combined-parent obligation; nothing is copied here.",
+    "",
+    "The fifteen direct B1 / B5 compatibility theorems keep their statements and every frozen body; their proofs move from conversion to `seq_separatorP` and the same transport, and the B1 / B5 specs record this. The reverse-import closure keeps identical old theorem types (vocabulary_packing's thirteen included). Routes: X39 and X40 (graph-theory-misc), X26 (packing-theory); no Digraph source. Baseline a02e1c2 matches the B26 discovery scope byte for byte."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X39.x39_separates_xy",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_separates_xy",
+      "frozen_path": "graph-theory-misc/theories/migration/set_separators.v",
+      "frozen": "Legacy.x39_separates_xy",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.set_separators.x39_separates_xy_compat",
+      "live_unfolds_to": "separator G X Y A"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X26.x26_separates_xy",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_separates_xy",
+      "frozen_path": "packing-theory/theories/migration/set_separators.v",
+      "frozen": "Legacy.x26_separates_xy",
+      "substitutions": {},
+      "certificate": "Packing.migration.set_separators.x26_separates_xy_compat",
+      "live_unfolds_to": "separator G X Y Z"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "coarse_menger_ball_separator_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_separators.v",
+      "frozen": "X39Legacy.coarse_menger_ball_separator_statement",
+      "substitutions": {
+        "x39_separates_xy": "Legacy.x39_separates_xy"
+      },
+      "certificate": "GTMisc.migration.set_separators.coarse_menger_ball_separator_statement_compat",
+      "original_certificate": "GTMisc.migration.set_separators.coarse_menger_ball_separator_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X40.coarse_menger_distance_two_separator_statement",
+      "path": "graph-theory-misc/theories/conjectures/X40.v",
+      "name": "coarse_menger_distance_two_separator_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_separators.v",
+      "frozen": "X40Legacy.coarse_menger_distance_two_separator_statement",
+      "substitutions": {
+        "x39_separates_xy": "Legacy.x39_separates_xy"
+      },
+      "certificate": "GTMisc.migration.set_separators.coarse_menger_distance_two_separator_statement_compat",
+      "original_certificate": "GTMisc.migration.set_separators.coarse_menger_distance_two_separator_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "bounded_degree_distant_induced_menger_statement",
+      "frozen_path": "packing-theory/theories/migration/set_separators.v",
+      "frozen": "X26Legacy.bounded_degree_distant_induced_menger_statement",
+      "substitutions": {
+        "x26_separates_xy": "Legacy.x26_separates_xy"
+      },
+      "certificate": "Packing.migration.set_separators.bounded_degree_distant_induced_menger_statement_compat",
+      "original_certificate": "Packing.migration.set_separators.bounded_degree_distant_induced_menger_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_path_vertices",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_path_vertices",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x39_path_vertices",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.path_vertices.x39_path_vertices_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_pairwise_distant_paths",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_pairwise_distant_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X39Legacy.pairwise_distant_paths",
+      "substitutions": {
+        "x39_pairwise_distant_paths": "pairwise_distant_paths",
+        "x39_path_vertices": "Legacy.x39_path_vertices"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x39_pairwise_distant_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_separates_xy",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_separates_xy",
+      "frozen_path": "graph-theory-misc/theories/migration/path_vertices.v",
+      "frozen": "X39Legacy.separates_xy",
+      "substitutions": {
+        "x39_path_vertices": "Legacy.x39_path_vertices",
+        "x39_separates_xy": "separates_xy"
+      },
+      "certificate": "GTMisc.migration.path_vertices.x39_separates_xy_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_xy_path",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_xy_path",
+      "frozen_path": "graph-theory-misc/theories/migration/set_path.v",
+      "frozen": "Legacy.x39_xy_path",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.set_path.x39_xy_path_compat",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_separates_xy",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_separates_xy",
+      "frozen_path": "graph-theory-misc/theories/migration/set_path.v",
+      "frozen": "X39Legacy.separates_xy",
+      "substitutions": {
+        "x39_separates_xy": "separates_xy",
+        "x39_xy_path": "Legacy.x39_xy_path"
+      },
+      "certificate": "GTMisc.migration.set_path.x39_separates_xy_compat",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_has_k_distant_xy_paths",
+      "frozen_path": "graph-theory-misc/theories/migration/set_path.v",
+      "frozen": "X39Original.has_k_distant_xy_paths",
+      "substitutions": {
+        "x39_has_k_distant_xy_paths": "has_k_distant_xy_paths",
+        "x39_pairwise_distant_paths": "path_vertices.X39Legacy.pairwise_distant_paths",
+        "x39_xy_path": "Legacy.x39_xy_path"
+      },
+      "certificate": "GTMisc.migration.set_path.x39_has_k_distant_xy_paths_original_compat",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X39.x39_separates_xy",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "x39_separates_xy",
+      "frozen_path": "graph-theory-misc/theories/migration/set_path.v",
+      "frozen": "X39Original.separates_xy",
+      "substitutions": {
+        "x39_path_vertices": "path_vertices.Legacy.x39_path_vertices",
+        "x39_separates_xy": "separates_xy",
+        "x39_xy_path": "Legacy.x39_xy_path"
+      },
+      "certificate": "GTMisc.migration.set_path.x39_separates_xy_original_compat",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement",
+      "path": "graph-theory-misc/theories/conjectures/X39.v",
+      "name": "coarse_menger_ball_separator_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_path.v",
+      "frozen": "X39Original.coarse_menger_ball_separator_statement",
+      "substitutions": {
+        "x39_has_k_distant_xy_paths": "has_k_distant_xy_paths",
+        "x39_separates_xy": "separates_xy"
+      },
+      "certificate": "GTMisc.migration.set_separators.coarse_menger_ball_separator_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X40.coarse_menger_distance_two_separator_statement",
+      "path": "graph-theory-misc/theories/conjectures/X40.v",
+      "name": "coarse_menger_distance_two_separator_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_path.v",
+      "frozen": "X40Original.coarse_menger_distance_two_separator_statement",
+      "substitutions": {
+        "x39_has_k_distant_xy_paths": "X39Original.has_k_distant_xy_paths",
+        "x39_separates_xy": "X39Original.separates_xy"
+      },
+      "certificate": "GTMisc.migration.set_separators.coarse_menger_distance_two_separator_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_path_vertices",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_path_vertices",
+      "frozen_path": "packing-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x26_path_vertices",
+      "substitutions": {},
+      "certificate": "Packing.migration.path_vertices.x26_path_vertices_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_pairwise_distant_paths",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_pairwise_distant_paths",
+      "frozen_path": "packing-theory/theories/migration/path_vertices.v",
+      "frozen": "X26Legacy.pairwise_distant_paths",
+      "substitutions": {
+        "x26_pairwise_distant_paths": "pairwise_distant_paths",
+        "x26_path_vertices": "Legacy.x26_path_vertices"
+      },
+      "certificate": "Packing.migration.path_vertices.x26_pairwise_distant_paths_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_separates_xy",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_separates_xy",
+      "frozen_path": "packing-theory/theories/migration/path_vertices.v",
+      "frozen": "X26Legacy.separates_xy",
+      "substitutions": {
+        "x26_path_vertices": "Legacy.x26_path_vertices",
+        "x26_separates_xy": "separates_xy"
+      },
+      "certificate": "Packing.migration.path_vertices.x26_separates_xy_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_xy_path",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_xy_path",
+      "frozen_path": "packing-theory/theories/migration/set_path.v",
+      "frozen": "Legacy.x26_xy_path",
+      "substitutions": {},
+      "certificate": "Packing.migration.set_path.x26_xy_path_compat",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_separates_xy",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_separates_xy",
+      "frozen_path": "packing-theory/theories/migration/set_path.v",
+      "frozen": "X26Legacy.separates_xy",
+      "substitutions": {
+        "x26_separates_xy": "separates_xy",
+        "x26_xy_path": "Legacy.x26_xy_path"
+      },
+      "certificate": "Packing.migration.set_path.x26_separates_xy_compat",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_has_k_distant_xy_paths",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_has_k_distant_xy_paths",
+      "frozen_path": "packing-theory/theories/migration/set_path.v",
+      "frozen": "X26Original.has_k_distant_xy_paths",
+      "substitutions": {
+        "x26_has_k_distant_xy_paths": "has_k_distant_xy_paths",
+        "x26_pairwise_distant_paths": "path_vertices.X26Legacy.pairwise_distant_paths",
+        "x26_xy_path": "Legacy.x26_xy_path"
+      },
+      "certificate": "Packing.migration.set_path.x26_has_k_distant_xy_paths_original_compat",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X26.x26_separates_xy",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "x26_separates_xy",
+      "frozen_path": "packing-theory/theories/migration/set_path.v",
+      "frozen": "X26Original.separates_xy",
+      "substitutions": {
+        "x26_path_vertices": "path_vertices.Legacy.x26_path_vertices",
+        "x26_separates_xy": "separates_xy",
+        "x26_xy_path": "Legacy.x26_xy_path"
+      },
+      "certificate": "Packing.migration.set_path.x26_separates_xy_original_compat",
+      "commit": "fbf33a001157c4b734e98ddd3968d4e13d54602f"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement",
+      "path": "packing-theory/theories/conjectures/X26.v",
+      "name": "bounded_degree_distant_induced_menger_statement",
+      "frozen_path": "packing-theory/theories/migration/set_path.v",
+      "frozen": "X26Original.bounded_degree_distant_induced_menger_statement",
+      "substitutions": {
+        "x26_has_k_distant_xy_paths": "has_k_distant_xy_paths",
+        "x26_separates_xy": "separates_xy"
+      },
+      "certificate": "Packing.migration.set_separators.bounded_degree_distant_induced_menger_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/X40.v",
+      "name": "x39_separates_xy",
+      "note": "Cross-module row X40, frozen as X40Legacy over Legacy.x39_separates_xy in GTMisc.migration.set_separators and reused end to end as B5's X40Original; statement text unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Cycle.foundations.connectivity.ueseparates",
+      "path": "cycle-theory/theories/foundations/connectivity.v",
+      "name": "ueseparates",
+      "note": "undirected multigraph edge separator between two vertices over edge walks; a different contract, untouched"
+    }
+  ]
+}
