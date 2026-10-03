@@ -1,0 +1,821 @@
+{
+  "family": "complement",
+  "canonical_name": "GraphTheory.core.sgraph.compl",
+  "canonical_short_name": "compl",
+  "relation": "relation: conversion to upstream compl_rel; graph: identity isomorphism to upstream compl (compl_eq_diso), no equality of opaque proof fields.",
+  "baseline_commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "base/theories/common.v",
+    "chromatic-theory/theories/migration/complement.v",
+    "extremal-graph-theory/theories/migration/complement.v",
+    "graph-theory-misc/theories/migration/complement.v",
+    "extremal-graph-theory/theories/migration/induced_free.v",
+    "extremal-graph-theory/theories/migration/subgraph_of.v",
+    "extremal-graph-theory/theories/migration/consecutive_in_cycle.v"
+  ],
+  "extra_certificates": [
+    "GTBase.common.compl_adjE",
+    "GTBase.common.compl_eq_diso",
+    "GTBase.common.compl_adj_offdiag",
+    "GTBase.common.compl_noloop",
+    "GTBase.common.compl_Kn_edgeless",
+    "GTBase.common.compl_compl_diso",
+    "GTBase.common.has_subgraph_host_diso",
+    "Chromatic.migration.complement.x3_complement_diso",
+    "Chromatic.migration.complement.xe2_complement_diso",
+    "Extremal.migration.complement.x56_complement_diso",
+    "Extremal.migration.complement.xe1_complement_diso",
+    "Extremal.migration.complement.xe1_complement_subgraph_compat",
+    "GTMisc.migration.complement.x29_complement_diso",
+    "GTMisc.migration.complement.x29_has_induced_cycle_diso"
+  ],
+  "summary": [
+    "Batch A, family A6 (ordinary graph complement). Five relation/constructor pairs (X3, chromatic XE2, X56, extremal XE1, X29), all `(x != y) && ~~ (x -- y)` with an SGraph built from their own symmetry and irreflexivity proofs, now unfold to upstream `compl_rel` and `compl`. The relations agree by conversion; the graphs are related by the identity isomorphism (`compl_eq_diso`), not by equality of the opaque proof fields, which are frozen verbatim as scaffolding. Sixteen statements are affected (X3, chromatic XE2, X56, X29, eight extremal XE1 and four extremal XE2 Ramsey rows) through four intermediate predicates (`x3_complement_image` and the XE1 Ramsey, Ramsey-number and diagonal chain). Transports move along the identity isomorphism: X3 keeps the same class witness, X56's complement is the forbidden pattern of `induced_free`, X29's is the host of an induced cycle, the Ramsey chain's is the host of an ordinary subgraph, and the choice number of X3/XE2 complements converts.",
+    "",
+    "History: A1's X56 snapshot and A5's Ramsey chain (and B4's erdos_567 snapshot) still call live complement names and are documented below. X56Original combines A1's frozen induced-free helper with the frozen complement; XE1Original and XE2Original combine A5's frozen subgraph helper with the frozen complement for all twelve Ramsey rows, and erdos_567 also with B4's frozen h5_graph. Other live helpers in these rows (for instance x4_edge_count) are not migrated, so no row is claimed to be a pre-M1 original. No statement text, doc block, manifest row, leg state or discrepancy changes."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_complement_rel",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_complement_rel",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "Legacy.x3_complement_rel",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.complement.x3_complement_rel_compat",
+      "live_unfolds_to": "@compl_rel G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_complement_sym",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_complement_sym",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "Legacy.x3_complement_sym",
+      "substitutions": {
+        "x3_complement_rel": "Legacy.x3_complement_rel"
+      },
+      "certificate": "Chromatic.migration.complement.x3_complement_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_complement_irrefl",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_complement_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "Legacy.x3_complement_irrefl",
+      "substitutions": {
+        "x3_complement_rel": "Legacy.x3_complement_rel"
+      },
+      "certificate": "Chromatic.migration.complement.x3_complement_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_complement_graph",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_complement_graph",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "Legacy.x3_complement_graph",
+      "substitutions": {
+        "x3_complement_sym": "Legacy.x3_complement_sym",
+        "x3_complement_irrefl": "Legacy.x3_complement_irrefl"
+      },
+      "certificate": "Chromatic.migration.complement.x3_complement_graph_compat",
+      "live_unfolds_to": "compl G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.XE2.xe2_complement_rel",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_complement_rel",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe2_complement_rel",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.complement.xe2_complement_rel_compat",
+      "live_unfolds_to": "@compl_rel G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE2.xe2_complement_sym",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_complement_sym",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe2_complement_sym",
+      "substitutions": {
+        "xe2_complement_rel": "Legacy.xe2_complement_rel"
+      },
+      "certificate": "Chromatic.migration.complement.xe2_complement_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE2.xe2_complement_irrefl",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_complement_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe2_complement_irrefl",
+      "substitutions": {
+        "xe2_complement_rel": "Legacy.xe2_complement_rel"
+      },
+      "certificate": "Chromatic.migration.complement.xe2_complement_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.XE2.xe2_complement_graph",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_complement_graph",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe2_complement_graph",
+      "substitutions": {
+        "xe2_complement_sym": "Legacy.xe2_complement_sym",
+        "xe2_complement_irrefl": "Legacy.xe2_complement_irrefl"
+      },
+      "certificate": "Chromatic.migration.complement.xe2_complement_graph_compat",
+      "live_unfolds_to": "compl G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_complement_image",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_complement_image",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "X3Legacy.complement_image",
+      "substitutions": {
+        "x3_complement_image": "complement_image",
+        "x3_complement_graph": "Legacy.x3_complement_graph"
+      },
+      "certificate": "Chromatic.migration.complement.x3_complement_image_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.gyarfas_complementation_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "gyarfas_complementation_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "X3Legacy.gyarfas_complementation_chi_bounded_statement",
+      "substitutions": {
+        "x3_complement_image": "complement_image"
+      },
+      "certificate": "Chromatic.migration.complement.gyarfas_complementation_chi_bounded_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_753_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_753_statement",
+      "frozen_path": "chromatic-theory/theories/migration/complement.v",
+      "frozen": "XE2Legacy.erdos_753_statement",
+      "substitutions": {
+        "xe2_complement_graph": "Legacy.xe2_complement_graph"
+      },
+      "certificate": "Chromatic.migration.complement.erdos_753_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X56.x56_complement_rel",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_complement_rel",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.x56_complement_rel",
+      "substitutions": {},
+      "certificate": "Extremal.migration.complement.x56_complement_rel_compat",
+      "live_unfolds_to": "@compl_rel G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X56.x56_complement_sym",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_complement_sym",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.x56_complement_sym",
+      "substitutions": {
+        "x56_complement_rel": "Legacy.x56_complement_rel"
+      },
+      "certificate": "Extremal.migration.complement.x56_complement_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X56.x56_complement_irrefl",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_complement_irrefl",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.x56_complement_irrefl",
+      "substitutions": {
+        "x56_complement_rel": "Legacy.x56_complement_rel"
+      },
+      "certificate": "Extremal.migration.complement.x56_complement_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X56.x56_complement",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_complement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.x56_complement",
+      "substitutions": {
+        "x56_complement_sym": "Legacy.x56_complement_sym",
+        "x56_complement_irrefl": "Legacy.x56_complement_irrefl"
+      },
+      "certificate": "Extremal.migration.complement.x56_complement_compat",
+      "live_unfolds_to": "compl G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE1.xe1_complement_rel",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_complement_rel",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe1_complement_rel",
+      "substitutions": {},
+      "certificate": "Extremal.migration.complement.xe1_complement_rel_compat",
+      "live_unfolds_to": "@compl_rel G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_complement_sym",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_complement_sym",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe1_complement_sym",
+      "substitutions": {
+        "xe1_complement_rel": "Legacy.xe1_complement_rel"
+      },
+      "certificate": "Extremal.migration.complement.xe1_complement_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_complement_irrefl",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_complement_irrefl",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe1_complement_irrefl",
+      "substitutions": {
+        "xe1_complement_rel": "Legacy.xe1_complement_rel"
+      },
+      "certificate": "Extremal.migration.complement.xe1_complement_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE1.xe1_complement_graph",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_complement_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.xe1_complement_graph",
+      "substitutions": {
+        "xe1_complement_sym": "Legacy.xe1_complement_sym",
+        "xe1_complement_irrefl": "Legacy.xe1_complement_irrefl"
+      },
+      "certificate": "Extremal.migration.complement.xe1_complement_graph_compat",
+      "live_unfolds_to": "compl G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X56.c8_complement_c8_erdos_hajnal_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "c8_complement_c8_erdos_hajnal_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "X56Legacy.c8_complement_c8_erdos_hajnal_statement",
+      "substitutions": {
+        "x56_complement": "Legacy.x56_complement"
+      },
+      "certificate": "Extremal.migration.complement.c8_complement_c8_erdos_hajnal_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X56.c8_complement_c8_erdos_hajnal_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "c8_complement_c8_erdos_hajnal_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "X56Original.c8_complement_c8_erdos_hajnal_statement",
+      "substitutions": {
+        "x56_complement": "Legacy.x56_complement",
+        "x56_induced_free": "Extremal.migration.induced_free.Legacy.x56_induced_free"
+      },
+      "certificate": "Extremal.migration.complement.c8_complement_c8_erdos_hajnal_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.graph_ramsey",
+      "substitutions": {
+        "xe1_graph_ramsey": "graph_ramsey",
+        "xe1_complement_graph": "Legacy.xe1_complement_graph"
+      },
+      "certificate": "Extremal.migration.complement.graph_ramsey_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey_number",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.graph_ramsey_number",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_graph_ramsey": "graph_ramsey"
+      },
+      "certificate": "Extremal.migration.complement.graph_ramsey_number_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_diagonal_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_diagonal_ramsey_number",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.diagonal_ramsey_number",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "diagonal_ramsey_number",
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.diagonal_ramsey_number_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_545_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_545_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.erdos_545_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_545_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_550_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_550_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.erdos_550_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_550_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_552_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_552_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.erdos_552_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_552_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_566_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_566_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.erdos_566_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_566_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_567_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_567_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.erdos_567_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_567_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_568_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_568_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.erdos_568_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_568_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_812_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_812_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.erdos_812_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_812_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_87_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_87_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Legacy.erdos_87_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_diagonal_ramsey_number": "diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_87_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_547_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_547_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE2Legacy.erdos_547_statement",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "XE1Legacy.diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_547_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_549_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_549_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE2Legacy.erdos_549_statement",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "XE1Legacy.diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_549_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_570_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_570_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE2Legacy.erdos_570_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "XE1Legacy.graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_570_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_800_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_800_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE2Legacy.erdos_800_statement",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "XE1Legacy.diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_800_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.graph_ramsey",
+      "substitutions": {
+        "xe1_graph_ramsey": "graph_ramsey",
+        "xe1_complement_graph": "Legacy.xe1_complement_graph",
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of"
+      },
+      "certificate": "Extremal.migration.complement.graph_ramsey_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey_number",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.graph_ramsey_number",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_graph_ramsey": "graph_ramsey"
+      },
+      "certificate": "Extremal.migration.complement.graph_ramsey_number_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_diagonal_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_diagonal_ramsey_number",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.diagonal_ramsey_number",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "diagonal_ramsey_number",
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.diagonal_ramsey_number_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_545_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_545_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.erdos_545_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_545_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_550_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_550_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.erdos_550_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_550_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_552_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_552_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.erdos_552_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_552_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_566_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_566_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.erdos_566_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_566_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_567_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_567_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.erdos_567_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_h5_graph": "Extremal.migration.consecutive_in_cycle.XE1Legacy.h5_graph"
+      },
+      "certificate": "Extremal.migration.complement.erdos_567_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_568_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_568_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.erdos_568_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_568_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_812_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_812_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.erdos_812_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_812_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_87_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_87_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.erdos_87_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_diagonal_ramsey_number": "diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_87_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_547_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_547_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE2Original.erdos_547_statement",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "XE1Original.diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_547_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_549_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_549_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE2Original.erdos_549_statement",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "XE1Original.diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_549_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_570_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_570_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE2Original.erdos_570_statement",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "XE1Original.graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_570_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_800_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_800_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE2Original.erdos_800_statement",
+      "substitutions": {
+        "xe1_diagonal_ramsey_number": "XE1Original.diagonal_ramsey_number"
+      },
+      "certificate": "Extremal.migration.complement.erdos_800_statement_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X29.x29_complement_rel",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "x29_complement_rel",
+      "frozen_path": "graph-theory-misc/theories/migration/complement.v",
+      "frozen": "Legacy.x29_complement_rel",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.complement.x29_complement_rel_compat",
+      "live_unfolds_to": "@compl_rel G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X29.x29_complement_sym",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "x29_complement_sym",
+      "frozen_path": "graph-theory-misc/theories/migration/complement.v",
+      "frozen": "Legacy.x29_complement_sym",
+      "substitutions": {
+        "x29_complement_rel": "Legacy.x29_complement_rel"
+      },
+      "certificate": "GTMisc.migration.complement.x29_complement_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X29.x29_complement_irrefl",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "x29_complement_irrefl",
+      "frozen_path": "graph-theory-misc/theories/migration/complement.v",
+      "frozen": "Legacy.x29_complement_irrefl",
+      "substitutions": {
+        "x29_complement_rel": "Legacy.x29_complement_rel"
+      },
+      "certificate": "GTMisc.migration.complement.x29_complement_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X29.x29_complement",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "x29_complement",
+      "frozen_path": "graph-theory-misc/theories/migration/complement.v",
+      "frozen": "Legacy.x29_complement",
+      "substitutions": {
+        "x29_complement_sym": "Legacy.x29_complement_sym",
+        "x29_complement_irrefl": "Legacy.x29_complement_irrefl"
+      },
+      "certificate": "GTMisc.migration.complement.x29_complement_compat",
+      "live_unfolds_to": "compl G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X29.no_c5_c7_complement_c7_normal_graph_statement",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "no_c5_c7_complement_c7_normal_graph_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/complement.v",
+      "frozen": "X29Legacy.no_c5_c7_complement_c7_normal_graph_statement",
+      "substitutions": {
+        "x29_complement": "Legacy.x29_complement"
+      },
+      "certificate": "GTMisc.migration.complement.no_c5_c7_complement_c7_normal_graph_statement_compat"
+    },
+    {
+      "kind": "a1-frozen",
+      "qualified": "Extremal.conjectures.X56.x56_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_induced_free",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x56_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x56_induced_free_compat",
+      "live_unfolds_to": "induced_free G H",
+      "note": "A1's frozen induced-free helper (pre-A1), reused unchanged by X56Original",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "a5-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_subgraph_of",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_subgraph_of",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "Legacy.xe1_subgraph_of",
+      "substitutions": {},
+      "certificate": "Extremal.migration.subgraph_of.xe1_subgraph_of_compat",
+      "live_unfolds_to": "has_subgraph G H",
+      "note": "A5's frozen subgraph helper, reused unchanged by the XE1/XE2 Ramsey originals"
+    },
+    {
+      "kind": "b4-frozen",
+      "qualified": "Extremal.conjectures.XE1.xe1_h5_graph",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_h5_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "XE1Legacy.h5_graph",
+      "substitutions": {
+        "x4_consecutive_in_cycle": "Legacy.x4_consecutive_in_cycle",
+        "xe1_h5_graph": "h5_graph"
+      },
+      "certificate": "Extremal.migration.consecutive_in_cycle.xe1_h5_graph_compat",
+      "note": "B4's frozen h5_graph, reused unchanged by XE1Original.erdos_567_statement"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/induced_free.v#X56Legacy.statement": "A1 snapshot: A1 froze the induced-free helper of X56 but kept the live x56_complement, which after A6 is upstream compl. Kept unchanged; the combined pre-A1, pre-A6 row is Extremal.migration.complement.X56Original, certified by c8_complement_c8_erdos_hajnal_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.graph_ramsey": "A5 snapshot: A5 froze the Ramsey chain over its frozen subgraph helper but kept the live xe1_complement_graph, which after A6 is upstream compl. Kept unchanged; the combined pre-A5, pre-A6 chain is Extremal.migration.complement.XE1Original.graph_ramsey (with its number/diagonal wrappers and all twelve Ramsey rows in XE1Original/XE2Original).",
+    "extremal-graph-theory/theories/migration/consecutive_in_cycle.v#XE1Legacy.erdos_567_statement": "B4 snapshot: B4 froze erdos_567's h5_graph but kept the live xe1_graph_ramsey_number, which reaches the complement. Kept unchanged; the combined pre-A5, pre-A6, pre-B4 row is Extremal.migration.complement.XE1Original.erdos_567_statement."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe1_diagonal_ramsey_number",
+      "note": "erdos_547/549/800 use the XE1 diagonal Ramsey chain across modules; frozen in XE2Legacy (per row) and XE2Original (with A5's frozen subgraph helper)."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe1_graph_ramsey_number",
+      "note": "erdos_570 uses the XE1 Ramsey-number chain across modules; frozen in XE2Legacy and XE2Original."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.U8.local_complement",
+      "path": "chromatic-theory/theories/conjectures/U8.v",
+      "name": "local_complement",
+      "note": "local complement: toggles edges between neighbours of a distinguished vertex; a different operation"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X94.x94_bicomplement",
+      "path": "graph-theory-misc/theories/conjectures/X94.v",
+      "name": "x94_bicomplement",
+      "note": "bipartite complement: negates only cross edges and keeps the two sides; not the ordinary complement"
+    }
+  ],
+  "kernel_evidence": "Print All Dependencies of frozen/live statements and Print Assumptions of every certificate, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A6-complement/ (outside the repository)"
+}
