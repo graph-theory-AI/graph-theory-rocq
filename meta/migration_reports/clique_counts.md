@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py clique_counts --details /tmp/mi
 - Canonical: `GTBase.clique_counts.all_clique_count`.
 - Baseline: `16d5a05dea232c0b2e3321675e31e8279c3f2350`.
 - Scope: 5 helpers, 4 statements, 19 frozen objects, 25 recorded references.
-- Source checks: 150/150 pass; consistent.
+- Source checks: 148/148 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,6 +20,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py clique_counts --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `GTMisc.conjectures.U13.is_max_clique`, `Chromatic.conjectures.X181.x181_maximal_clique`, `Packing.conjectures.XE1.xe1_maximal_clique`.
+Excluded distinct variants: `GTMisc.conjectures.U13.is_max_clique`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#X4Legacy.triangle_supersaturation_statement`, `minor-theory/theories/migration/path_edges.v#X174Legacy.kt_immersion_clique_count_extremal_statement`, `minor-theory/theories/migration/internal_vertices.v#X175Legacy.statement`.

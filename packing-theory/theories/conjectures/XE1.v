@@ -1,6 +1,7 @@
 (** * Packing.conjectures.XE1 -- Erdos open clean/bounded rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import maximal_cliques.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -13,8 +14,7 @@ Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
   forall x y : G, x \in S -> y \in S -> x -- y -> False.
 
 Definition xe1_maximal_clique (G : sgraph) (K : {set G}) : Prop :=
-  clique K /\
-  forall L : {set G}, K \proper L -> ~ clique L.
+  maximal_clique K.
 
 Definition xe1_clique_transversal (G : sgraph) (X : {set G}) : Prop :=
   forall K : {set G}, xe1_maximal_clique K -> 2 <= #|K| -> X :&: K != set0.
