@@ -59,7 +59,7 @@ Example nonedge x y :
   ~~ x -- y -> seq_edge_set [:: x; y] = [set [set x; y]] /\ seq_index_edge_set [:: x; y] = set0.
 Proof. by move=> nxy; split; [exact: seq_edge_set_pair | exact: seq_index_edge_set_nonedge]. Qed.
 
-(** The first-index set always consists of edges, and it is the raw support exactly
+(** The first-index set always consists of edges, and it is the raw support
     on duplicate-free walks, in particular on simple paths. *)
 Example first_index_edges p : seq_index_edge_set p \subset E(G).
 Proof. exact: seq_index_edge_set_sub. Qed.

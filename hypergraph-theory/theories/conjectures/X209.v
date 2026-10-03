@@ -13,11 +13,11 @@ Definition x209_uniform (T : finType) (E : {set {set T}}) (k : nat) : Prop :=
 
 Definition x209_cut_edge
     (T : finType) (r : nat) (col : T -> 'I_r) (e : {set T}) : bool :=
-  [exists x in e, [exists y in e, col x != col y]].
+  ~~ monochromatic_on col e.
 
 Definition x209_cut_size
     (T : finType) (E : {set {set T}}) (r : nat) (col : T -> 'I_r) : nat :=
-  #|[set e in E | x209_cut_edge col e]|.
+  non_monochromatic_count E col.
 
 Definition x209_is_max_r_cut
     (T : finType) (E : {set {set T}}) (r c : nat) : Prop :=

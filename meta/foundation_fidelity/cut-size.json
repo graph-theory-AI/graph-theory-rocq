@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "family": "cut-size",
+  "modules": {
+    "GTBase.common": {
+      "path": "base/theories/common.v",
+      "overrides": {
+        "cut_size": {
+          "verdict": "FAITHFUL",
+          "note": "The number of edges of E(G) with one end in A and the other outside; zero for the empty and the full side, invariant under complementing the side, equal to the ordered edge count between A and its complement and to the number of non-monochromatic edges under membership in A."
+        }
+      },
+      "machine_evidence": [
+        "cut_sizeC",
+        "cut_size_set0",
+        "cut_size_setT",
+        "cut_size_non_monochromatic",
+        "cut_size_edges_between"
+      ]
+    },
+    "GTBase.monochromatic": {
+      "path": "base/theories/monochromatic.v",
+      "overrides": {
+        "non_monochromatic_count": {
+          "verdict": "FAITHFUL",
+          "note": "The number of members of an arbitrary finite family that are not monochromatic under a supplied colour map; no uniformity, nonemptiness or palette premise. Empty and one-element members and constant maps count nothing; a two-colour pair counts once."
+        }
+      },
+      "machine_evidence": [
+        "non_monochromatic_count_le",
+        "non_monochromatic_count_set0",
+        "non_monochromatic_count_const",
+        "non_monochromatic_count_small",
+        "non_monochromatic_count_pair"
+      ]
+    }
+  }
+}

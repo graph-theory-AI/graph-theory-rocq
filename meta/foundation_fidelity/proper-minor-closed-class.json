@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "family": "proper-minor-closed-class",
+  "modules": {
+    "GTBase.minor_classes": {
+      "path": "base/theories/minor_classes.v",
+      "overrides": {
+        "excludes_a_minor": {
+          "verdict": "FAITHFUL",
+          "note": "One uniform excluded graph H for the whole arbitrary class; no closure or inhabitance requirement."
+        },
+        "minor_closed": {
+          "verdict": "FAITHFUL",
+          "note": "Closure under upstream minor G H, with G the host and H its minor."
+        },
+        "proper_minor_closed_class": {
+          "verdict": "FAITHFUL",
+          "note": "Explicit conjunction of uniform exclusion and minor closure. The X192 witness-only legacy adapter does not use this stronger contract."
+        }
+      },
+      "machine_evidence": [
+        "minor_self",
+        "excludes_a_minor_ext",
+        "minor_closed_ext",
+        "proper_minor_closed_class_ext",
+        "proper_minor_closed_class_excludes",
+        "proper_minor_closed_class_closed",
+        "proper_minor_closed_class_intro",
+        "minor_closed_induced",
+        "minor_closed_iso",
+        "minor_closed_hereditary",
+        "proper_minor_closed_class_empty",
+        "minor_closed_all",
+        "not_excludes_a_minor_all",
+        "excludes_a_minor_order_le",
+        "excludes_a_minor_exact_order",
+        "not_minor_closed_positive_exact_order",
+        "excluded_minor_class_closed",
+        "excluded_minor_class_proper",
+        "minor_closed_omits_iff",
+        "excludes_a_minor_subclass"
+      ]
+    }
+  }
+}

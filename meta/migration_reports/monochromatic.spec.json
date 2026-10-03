@@ -1,0 +1,379 @@
+{
+  "family": "monochromatic",
+  "canonical_name": "GTBase.monochromatic.monochromatic_on",
+  "canonical_short_name": "monochromatic_on",
+  "relation": "same supplied-map subset constancy; Boolean equality or reflected Prop iff with unchanged domains and guards",
+  "baseline_commit": "47eed16af2f9575575a573f3b8a93860d47e72ca",
+  "repository_sources": {
+    "GTBase.surface.same_colour_on": {
+      "path": "base/theories/surface.v",
+      "commit": "2e0fb67f54a33409311c2a36cdf1e1d5240e3577",
+      "blob": "6a4a45cc6fcf6ee750cd0f09090ca757b3ed8ebe",
+      "declaration_hash": "88b8526b83d26292eaf32cd3e17ff48af92895e1d82ff329366148af1daae1f4"
+    }
+  },
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "topological-graph-theory": "Topological",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "base/theories/monochromatic.v",
+    "base/theories/migration/monochromatic.v",
+    "chromatic-theory/theories/migration/monochromatic.v",
+    "topological-graph-theory/theories/migration/monochromatic.v",
+    "graph-theory-misc/theories/migration/monochromatic.v"
+  ],
+  "extra_certificates": [
+    "GTBase.monochromatic.constant_pairwiseP",
+    "GTBase.monochromatic.monochromatic_onP",
+    "GTBase.monochromatic.monochromatic_onE",
+    "GTBase.monochromatic.monochromatic_on_set0",
+    "GTBase.monochromatic.monochromatic_on_set1",
+    "GTBase.monochromatic.monochromatic_on_const",
+    "GTBase.monochromatic.monochromatic_on_pair",
+    "GTBase.monochromatic.monochromatic_on_sub",
+    "GTBase.monochromatic.monochromatic_on_ext",
+    "GTBase.monochromatic.monochromatic_on_relabel",
+    "GTBase.monochromatic.non_monochromatic_onP",
+    "Chromatic.migration.monochromatic.x181_event_weight_compat"
+  ],
+  "downstream_client": "base/theories/examples/monochromatic.v",
+  "summary": [
+    "C8: three sources of one supplied-map subset-constancy contract, across Boolean ordinal-palette, Prop Boolean-palette, and public Prop ordinal-palette interfaces. GTBase.monochromatic.monochromatic_on is exactly MathComp constant of the enumerated colour sequence over any finite domain and eqType palette. Pairwise reflection avoids a default palette inhabitant, so empty sets and empty palettes keep their original behaviour. No graph adjacency or proper-colouring condition is introduced.",
+    "The public GTBase.surface.same_colour_on is an explicit pinned repository source, not an inventory omission or non-corpus workaround. All sixteen statement-reaching declarations are frozen: three sources, eight chains, five rows. Two further non-row public/alias contracts (clustered_chromatic_at_most and X138 clustered_two_colourable) are frozen too; the graph-local existential and its existing fidelity warning are unchanged.",
+    "Complete rows: X181 keeps maximal cliques of size at least two, the full Boolean finite-function/window/whp chain and its upper-half-only partial proxy; U13 keeps maximum cliques, supplied Boolean colours, positivity and induced odd-cycle exclusion; X194 keeps k>=2 and one uniform c before all graphs; X218 keeps the entire defective-and-clustered conjunction and all blocked placeholders; X138 keeps its uniform bound, girth/degree, connectedness and orientable-only partial surface scope. No row body, doc block, status, or guard is changed.",
+    "No earlier committed migration snapshot reaches these sources at the baseline. The unrelated A5 U13 subgraph row and all earlier family histories stay unchanged. U13 has a separately recorded unproved K1 concern (its positive-vertex guard may permit an unsplittable singleton maximum clique); C8 preserves this exact legacy encoding and does not repair it.",
+    "Proof checks are separate from textual discovery: exact Section/API types, all five closed row iff types, strict frozen/live compiled closures and public-only positive/negative/empty-palette clients are required. See the external C8 evidence directory and subsequent independent step-10/coordinator review."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "GTBase.surface.same_colour_on",
+      "path": "base/theories/surface.v",
+      "name": "same_colour_on",
+      "frozen_path": "base/theories/migration/monochromatic.v",
+      "frozen": "Legacy.same_colour_on",
+      "substitutions": {},
+      "certificate": "GTBase.migration.monochromatic.same_colour_on_compat",
+      "source_declaration_sha256": "88b8526b83d26292eaf32cd3e17ff48af92895e1d82ff329366148af1daae1f4",
+      "source_body_sha256": "d739104660af76d4ec7379e7ab886cb696114ac74946bde63654bae48aea578c",
+      "live_unfolds_to": "monochromatic_on col S",
+      "commit": "2e0fb67f54a33409311c2a36cdf1e1d5240e3577",
+      "repository_source": true
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTBase.surface.clustered_colouring",
+      "path": "base/theories/surface.v",
+      "name": "clustered_colouring",
+      "frozen_path": "base/theories/migration/monochromatic.v",
+      "frozen": "Legacy.clustered_colouring",
+      "substitutions": {
+        "same_colour_on": "Legacy.same_colour_on"
+      },
+      "certificate": "GTBase.migration.monochromatic.clustered_colouring_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTBase.surface.clustered_chromatic_at_most",
+      "path": "base/theories/surface.v",
+      "name": "clustered_chromatic_at_most",
+      "frozen_path": "base/theories/migration/monochromatic.v",
+      "frozen": "Legacy.clustered_chromatic_at_most",
+      "substitutions": {
+        "clustered_colouring": "Legacy.clustered_colouring"
+      },
+      "certificate": "GTBase.migration.monochromatic.clustered_chromatic_at_most_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X181.x181_monochromatic",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_monochromatic",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X181Legacy.x181_monochromatic",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.monochromatic.x181_monochromatic_compat",
+      "source_declaration_sha256": "75497a83e601f53940a9158fc2fc64f3b671cd4e54852c41aec685ba026aeba6",
+      "source_body_sha256": "25d33e15e6a2820e267fa8eb4f4c9583f5fd74e36d133d93c7ee205e9a80cb87",
+      "live_unfolds_to": "monochromatic_on col S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X181.x181_clique_colourable",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_clique_colourable",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X181Legacy.x181_clique_colourable",
+      "substitutions": {
+        "x181_monochromatic": "X181Legacy.x181_monochromatic"
+      },
+      "certificate": "Chromatic.migration.monochromatic.x181_clique_colourable_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X181.x181_clique_chromatic_window",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_clique_chromatic_window",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X181Legacy.x181_clique_chromatic_window",
+      "substitutions": {
+        "x181_clique_colourable": "X181Legacy.x181_clique_colourable"
+      },
+      "certificate": "Chromatic.migration.monochromatic.x181_clique_chromatic_window_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X181.x181_random_graph_clique_chromatic_constant",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "x181_random_graph_clique_chromatic_constant",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X181Legacy.x181_random_graph_clique_chromatic_constant",
+      "substitutions": {
+        "x181_clique_chromatic_window": "X181Legacy.x181_clique_chromatic_window"
+      },
+      "certificate": "Chromatic.migration.monochromatic.x181_random_graph_clique_chromatic_constant_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X181.random_graph_clique_chromatic_tight_constant_statement",
+      "path": "chromatic-theory/theories/conjectures/X181.v",
+      "name": "random_graph_clique_chromatic_tight_constant_statement",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X181Legacy.random_graph_clique_chromatic_tight_constant_statement",
+      "substitutions": {
+        "x181_random_graph_clique_chromatic_constant": "X181Legacy.x181_random_graph_clique_chromatic_constant"
+      },
+      "certificate": "Chromatic.migration.monochromatic.random_graph_clique_chromatic_tight_constant_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X194.x194_clustered_chromatic_minor_class_le",
+      "path": "chromatic-theory/theories/conjectures/X194.v",
+      "name": "x194_clustered_chromatic_minor_class_le",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X194Legacy.x194_clustered_chromatic_minor_class_le",
+      "substitutions": {
+        "clustered_colouring": "BaseLegacy.clustered_colouring"
+      },
+      "certificate": "Chromatic.migration.monochromatic.x194_clustered_chromatic_minor_class_le_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X194.clustered_chromatic_minor_class_treedepth_bound_statement",
+      "path": "chromatic-theory/theories/conjectures/X194.v",
+      "name": "clustered_chromatic_minor_class_treedepth_bound_statement",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X194Legacy.clustered_chromatic_minor_class_treedepth_bound_statement",
+      "substitutions": {
+        "x194_clustered_chromatic_minor_class_le": "X194Legacy.x194_clustered_chromatic_minor_class_le"
+      },
+      "certificate": "Chromatic.migration.monochromatic.clustered_chromatic_minor_class_treedepth_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X218.x218_clustered_chromatic_class_le",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "x218_clustered_chromatic_class_le",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X218Legacy.x218_clustered_chromatic_class_le",
+      "substitutions": {
+        "clustered_colouring": "BaseLegacy.clustered_colouring"
+      },
+      "certificate": "Chromatic.migration.monochromatic.x218_clustered_chromatic_class_le_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "odd_minor_free_defective_clustered_treedepth_statement",
+      "frozen_path": "chromatic-theory/theories/migration/monochromatic.v",
+      "frozen": "X218Legacy.odd_minor_free_defective_clustered_treedepth_statement",
+      "substitutions": {
+        "x218_clustered_chromatic_class_le": "X218Legacy.x218_clustered_chromatic_class_le"
+      },
+      "certificate": "Chromatic.migration.monochromatic.odd_minor_free_defective_clustered_treedepth_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Topological.conjectures.X138.x138_clustered_two_colourable",
+      "path": "topological-graph-theory/theories/conjectures/X138.v",
+      "name": "x138_clustered_two_colourable",
+      "frozen_path": "topological-graph-theory/theories/migration/monochromatic.v",
+      "frozen": "X138Legacy.x138_clustered_two_colourable",
+      "substitutions": {
+        "clustered_chromatic_at_most": "BaseLegacy.clustered_chromatic_at_most"
+      },
+      "certificate": "Topological.migration.monochromatic.x138_clustered_two_colourable_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Topological.conjectures.X138.x138_clustered_two_colourable_with_clustering",
+      "path": "topological-graph-theory/theories/conjectures/X138.v",
+      "name": "x138_clustered_two_colourable_with_clustering",
+      "frozen_path": "topological-graph-theory/theories/migration/monochromatic.v",
+      "frozen": "X138Legacy.x138_clustered_two_colourable_with_clustering",
+      "substitutions": {
+        "clustered_colouring": "BaseLegacy.clustered_colouring"
+      },
+      "certificate": "Topological.migration.monochromatic.x138_clustered_two_colourable_with_clustering_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Topological.conjectures.X138.esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+      "path": "topological-graph-theory/theories/conjectures/X138.v",
+      "name": "esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+      "frozen_path": "topological-graph-theory/theories/migration/monochromatic.v",
+      "frozen": "X138Legacy.esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+      "substitutions": {
+        "x138_clustered_two_colourable_with_clustering": "X138Legacy.x138_clustered_two_colourable_with_clustering"
+      },
+      "certificate": "Topological.migration.monochromatic.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.U13.monochromatic",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "monochromatic",
+      "frozen_path": "graph-theory-misc/theories/migration/monochromatic.v",
+      "frozen": "U13Legacy.monochromatic",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.monochromatic.monochromatic_compat",
+      "source_declaration_sha256": "669db1e7ffb8b396704cd1d1201947f7f28adef7fdc2a37e7d8e70882a11be00",
+      "source_body_sha256": "7828f684d1a0e14e1bc9f151a5452d2498ea157174edeb0cc68371b7eb570ea5",
+      "live_unfolds_to": "monochromatic_on c Q"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.U13.splits_max_cliques",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "splits_max_cliques",
+      "frozen_path": "graph-theory-misc/theories/migration/monochromatic.v",
+      "frozen": "U13Legacy.splits_max_cliques",
+      "substitutions": {
+        "monochromatic": "U13Legacy.monochromatic"
+      },
+      "certificate": "GTMisc.migration.monochromatic.splits_max_cliques_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.U13.two_colouring_a_graph_without_a_monochromatic_maximu_statement",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "two_colouring_a_graph_without_a_monochromatic_maximu_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/monochromatic.v",
+      "frozen": "U13Legacy.two_colouring_a_graph_without_a_monochromatic_maximu_statement",
+      "substitutions": {
+        "splits_max_cliques": "U13Legacy.splits_max_cliques"
+      },
+      "certificate": "GTMisc.migration.monochromatic.two_colouring_a_graph_without_a_monochromatic_maximu_statement_compat",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_U13.v",
+      "name": "monochromatic",
+      "note": "Four grounding consumers retain exact theorem types; only their proofs adapt to the reflected Boolean API."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_U13.v",
+      "name": "splits_max_cliques",
+      "note": "Four grounding consumers retain exact theorem types; only their proofs adapt to the reflected Boolean API."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X218.v",
+      "name": "x218_clustered_chromatic_class_le",
+      "note": "Empty-class and zero-colour impossibility proofs keep their original types and scripts."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X194.v",
+      "name": "clustered_colouring",
+      "note": "Public foundation reaching path to the complete X194 row, frozen in this report."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "clustered_colouring",
+      "note": "Public foundation reaching path to the complete blocked X218 conjunction, frozen in this report."
+    },
+    {
+      "path": "topological-graph-theory/theories/conjectures/X138.v",
+      "name": "clustered_colouring",
+      "note": "Both public wrappers preserved; the class-uniform one reaches the row, the graph-local alias remains unused."
+    },
+    {
+      "path": "topological-graph-theory/theories/conjectures/X138.v",
+      "name": "clustered_chromatic_at_most",
+      "note": "Both public wrappers preserved; the class-uniform one reaches the row, the graph-local alias remains unused."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X218.v",
+      "name": "odd_minor_free_defective_clustered_treedepth_statement",
+      "note": "Existing Print Assumptions of the complete blocked row; declaration and status unchanged."
+    },
+    {
+      "path": "base/theories/base.v",
+      "name": "monochromatic",
+      "note": "Canonical module import/re-export token; not a reference to the same-spelled GTMisc U13 predicate. Kernel closures disambiguate these names."
+    },
+    {
+      "path": "base/theories/surface.v",
+      "name": "monochromatic",
+      "note": "Canonical module import/re-export token; not a reference to the same-spelled GTMisc U13 predicate. Kernel closures disambiguate these names."
+    },
+    {
+      "path": "base/theories/examples/monochromatic.v",
+      "name": "monochromatic",
+      "note": "Canonical module import/re-export token; not a reference to the same-spelled GTMisc U13 predicate. Kernel closures disambiguate these names."
+    },
+    {
+      "path": "base/theories/common.v",
+      "name": "monochromatic",
+      "note": "Canonical module import token (A9 requires GTBase.monochromatic without Import for cut_size_non_monochromatic); not a reference to the same-spelled GTMisc U13 predicate. Kernel closures disambiguate these names."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.X20.x20_monochromatic_connected_set",
+      "path": "graph-theory-misc/theories/conjectures/X20.v",
+      "name": "x20_monochromatic_connected_set",
+      "note": "Nonempty vertex set connected via paths in one fixed EDGE-colour relation; not constancy of a supplied vertex map."
+    },
+    {
+      "qualified": "Extremal.conjectures.XE2.xe2_monochromatic_path",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_monochromatic_path",
+      "note": "Nonempty simple path whose traversed edges all carry a specified colour; graph/witness structure retained."
+    },
+    {
+      "qualified": "Hypergraph.conjectures.X108.x108_monochromatic_copy",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_monochromatic_copy",
+      "note": "Injective hypergraph copy with edge colours, not a supplied-map vertex subset."
+    },
+    {
+      "qualified": "Hypergraph.conjectures.X117.x117_monochromatic_copy",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_monochromatic_copy",
+      "note": "Same distinct copy contract; its existing X108 bridge is untouched."
+    },
+    {
+      "qualified": "Hypergraph.conjectures.X119.x119_monochromatic_copy",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_monochromatic_copy",
+      "note": "Finite-palette injective hypergraph copy, not a vertex-set constancy predicate."
+    },
+    {
+      "qualified": "Extremal.conjectures.XE1.xe1_monochromatic_copy_in_complete",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_monochromatic_copy_in_complete",
+      "note": "Graph copy and complete-host edge colouring, kept distinct."
+    }
+  ]
+}

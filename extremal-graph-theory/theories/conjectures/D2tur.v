@@ -64,14 +64,14 @@ Unset Printing Implicit Defensive.
 
     [oedges G] = number of ORDERED adjacent pairs = 2|E(G)| (adjacency is symmetric and
     irreflexive, so this is exactly twice the undirected edge count).  [edge_count G] =
-    |E(G)|, defined by REUSING base's [oedge] selector (the ordered pair (x,y) with
-    [x -- y] and [enum_rank x < enum_rank y]), so it counts each undirected edge once and
-    avoids the [%/ 2] round-trip; [oedges G = 2 * edge_count G] (see grounding).  Used by
-    the Turán-number and Sidorenko rows.  Both are new cross-area primitives. *)
+    |E(G)| is the canonical [GTBase.common.edge_count] (library migration A7).  It was
+    defined by counting base's [oedge] selector (the ordered pair (x,y) with [x -- y] and
+    [enum_rank x < enum_rank y]), which counts each undirected edge once
+    ([GTBase.common.edge_count_rank]); [oedges G = 2 * edge_count G] (see grounding).
+    Used by the Turán-number and Sidorenko rows. *)
 (** [@MOVE-to-base] *)
 Definition oedges (G : sgraph) : nat := #|[set p : G * G | p.1 -- p.2]|.
-(** [@MOVE-to-base] *)
-Definition edge_count (G : sgraph) : nat := #|[set p : G * G | oedge p]|.
+Definition edge_count (G : sgraph) : nat := GTBase.common.edge_count G.
 
 (** ============================================================================ *)
 (** ** Row 1 — Smallest number of disjoint shortest spanning trees → Hamiltonian path

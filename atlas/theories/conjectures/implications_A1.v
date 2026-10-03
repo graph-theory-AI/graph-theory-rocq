@@ -247,7 +247,7 @@ have chk : choosable G k.
   move=> P L HL.
   pose A := [set v : G | f v].
   apply: (HC G A D D k k) => //.
-  - by move=> u v uv; rewrite !inE; exact: Hf.
+  - by apply/bipartition_neq=> u v uv; rewrite !inE; exact: Hf.
   - by move=> v _; rewrite (leq_trans (deg_le_Delta v)) // leq_maxl.
   - by move=> v _; rewrite (leq_trans (deg_le_Delta v)) // leq_maxl.
 have mk : m <= k by exact: Hmin.

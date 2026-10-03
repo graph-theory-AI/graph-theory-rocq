@@ -414,8 +414,9 @@ Definition extremal_problem_on_the_number_of_tree_endomorphism_statement : Prop 
     2-colouring [G -> bool] separating its edges). *)
 (* [triangle_free] now from graph-theory-base (identical definition). *)
 
+(** Deprecated compatibility alias; public API: [GTBase.bipartitions]. *)
 Definition bipartite_rel (G : sgraph) (r : rel G) : Prop :=
-  exists f : G -> bool, forall x y : G, r x y -> f x != f y.
+  bipartite_relation r.
 
 (** Corpus row: opg:weak_pentagon_problem
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/weak_pentagon_problem/

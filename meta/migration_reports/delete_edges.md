@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py delete_edges --details /tmp/mig
 
 - Canonical: `GTBase.common.del_edge_set`.
 - Baseline: `03742d181456af2cae63288593d5b6277687895c`.
-- Scope: 7 helpers, 7 statements, 28 frozen objects, 54 recorded references.
-- Source checks: 216/216 pass; consistent.
+- Scope: 7 helpers, 7 statements, 28 frozen objects, 60 recorded references.
+- Source checks: 218/218 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -24,3 +24,5 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
 Excluded distinct variants: `Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_edges`.
+
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_613_statement`, `extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_742_statement`.

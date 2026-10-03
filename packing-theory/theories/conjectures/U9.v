@@ -86,9 +86,9 @@ Definition edge_setG (G : sgraph) : {set {set G}} :=
 (** Bipartite after deleting the edge set [S]: a 2-colouring with no
     surviving (non-[S]) edge monochromatic.  "Deleting [S] destroys every odd
     cycle" ⟺ the remaining graph is bipartite. *)
+(** Deprecated compatibility alias; public API: [GTBase.bipartitions]. *)
 Definition del_bipartite (G : sgraph) (S : {set {set G}}) : Prop :=
-  exists A : {set G},
-    forall x y : G, x -- y -> [set x; y] \notin S -> (x \in A) != (y \in A).
+  bipartite_after_deletion S.
 
 (** Triangle-free: no 3-clique. *)
 (* [triangle_free] now from graph-theory-base (vertex-triple form, equivalent to ~ is_triangle). *)

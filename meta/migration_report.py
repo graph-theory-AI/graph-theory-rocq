@@ -21,6 +21,9 @@ particular it does not certify Section scaffolding or compiled dependency closur
 family-specific Section and kernel dependency evidence remains required.
 Statement objects may select corpus "opg" or "v2", or explicitly set
 "non_corpus": true. Unmarked statements must resolve uniquely in the manifests.
+Every occurrence of a complete row requires a statement role and an exact iff
+probe, independently of its label. New reused nonstatement objects use the
+"historical" role; the existing named historical roles remain supported aliases.
 It verifies that
 
   * each frozen copy equals its original declaration, after comment stripping,
@@ -62,7 +65,7 @@ from pathlib import Path
 import library_inventory as INV
 import corpus_registry as REG
 import rocq_toolchain as ROCQ
-from family_registry import RegistryError, load_library_registry
+from family_registry import RegistryError, load_library_registry, public_repository_path
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -80,6 +83,12 @@ DECL_RE = re.compile(
 MODULE_RE = re.compile(rf"^\s*Module\s+({IDENT})\s*\.", re.M)
 SKIP_PREFIXES = ("_assum_", "_faith_", "scratch_", "gcheck")
 QUALIFIED_IDENT_RE = re.compile(rf"(?<![A-Za-z0-9_'.]){IDENT}(?:\.{IDENT})*(?![A-Za-z0-9_'])")
+STATEMENT_KINDS = frozenset({"statement", "original-statement"})
+HISTORICAL_KINDS = frozenset({
+    "historical", "a1-frozen", "a5-frozen", "a6-frozen", "b1-frozen",
+    "b3-frozen", "b4-frozen", "c5-frozen", "m1-frozen",
+})
+FROZEN_KINDS = STATEMENT_KINDS | HISTORICAL_KINDS | {"source", "chain", "original-chain"}
 
 
 def sha256(text: str) -> str:
@@ -222,22 +231,25 @@ def statement_dependencies(base: str, sources: set[str], rows: dict, *,
     ambiguous explicit references. Notation and constructor resolution still
     require the separate kernel dependency checks and independent review.
 
-    Explicit public sources also need public intermediary nodes. This indexes
+    Explicit public sources also need public intermediary nodes, including
+    build-listed ClassicalLemmas siblings outside conjecture directories. This indexes
     declaration bodies, not proof terms or every internal module, and does not
     enroll those nodes as sources or add them to the helper debt inventory.
     """
     paths = git("ls-tree", "-r", "--name-only", base).splitlines()
     projects, nodes, node_packages, short_names = {}, {}, {}, defaultdict(set)
     for path in paths:
-        public = (path.startswith("base/theories/") and len(Path(path).parts) == 3
-                  or "/theories/foundations/" in path)
+        public = public_repository_path(path)
         if not path.endswith(".v") or not ("/theories/conjectures/" in path or include_public and public):
             continue
         if Path(path).name.startswith(SKIP_PREFIXES):
             continue
         package = path.split("/", 1)[0]
         if package not in projects:
-            projects[package] = INV.project_sources(source_at(base, package + "/_CoqProject"))[0]
+            project_path = package + "/_CoqProject"
+            project = (INV.regular_source_blob(ROOT, base, project_path)[1]
+                       if include_public and public else source_at(base, project_path))
+            projects[package] = INV.project_sources(project)[0]
         if path.split("/", 1)[1] not in projects[package]:
             continue
         if public and include_public:
@@ -304,8 +316,78 @@ def certificate_endpoints(declaration: str, obj: dict, frozen_module: str) -> bo
         token == live or token == obj["name"] for token in tokens)
 
 
+def validate_frozen_kinds(spec: dict) -> None:
+    for index, obj in enumerate(spec["frozen"]):
+        kind = obj.get("kind")
+        if not isinstance(kind, str) or kind not in FROZEN_KINDS:
+            raise ValueError(f"frozen[{index}]: unsupported kind {kind!r}; "
+                             "use a statement role for complete rows and historical "
+                             "for reused nonstatement objects")
+
+
+def statement_obligations(spec: dict, *, expected_statements: set[str] | None = None,
+                          rows_base: dict | None = None,
+                          rows_now: dict | None = None) -> tuple[list[dict], list[str]]:
+    """Validate roles and identify every complete frozen row, not just its first copy.
+
+    Discovery uses the real baseline declarations and registry sources. Manifest
+    matching uses declaration name/package, not phase=filename (e.g. D2chr), and
+    deliberately ignores the object's corpus selection when identifying a row.
+    Non-corpus consumers are also found by the independent dependency discovery.
+    A Prop-valued helper, Record or proof lemma is not thereby a complete row.
+    """
+    validate_frozen_kinds(spec)
+    base = spec["baseline_commit"]
+    if rows_base is None:
+        rows_base, _ = manifest_rows(base)
+    if rows_now is None:
+        rows_now, _ = manifest_rows(None)
+    if expected_statements is None:
+        entry = load_library_registry(ROOT)["primitives"].get(spec["family"], {})
+        expected_statements, _ = statement_dependencies(
+            base, migrated_registry_sources(entry), rows_base,
+            include_public=bool(entry.get("repository_sources")))
+    objects, errors = [], []
+    for obj in spec["frozen"]:
+        identity = module_for_path(obj["path"], spec["namespaces"]) + "." + obj["name"]
+        if identity != obj["qualified"]:
+            errors.append(f"{obj['qualified']}: source identity matches its path and declaration")
+        unselected = {key: value for key, value in obj.items() if key != "corpus"}
+        base_matches = rows_for_object(rows_base, unselected)
+        live_matches = rows_for_object(rows_now, unselected)
+        is_row = identity in expected_statements or bool(base_matches or live_matches)
+        is_statement = obj["kind"] in STATEMENT_KINDS
+        if is_row and not is_statement:
+            errors.append(f"{identity}: complete statement requires statement or original-statement "
+                          f"kind, not {obj['kind']}")
+        if not (is_row or is_statement):
+            # A nonstatement role cannot hide a claimed non-corpus statement.
+            if "non_corpus" in obj:
+                errors.append(f"{identity}: non_corpus is only valid on statement objects")
+            continue
+        objects.append(obj)
+        non_corpus = obj.get("non_corpus", False)
+        if (not isinstance(non_corpus, bool)
+                or ("corpus" in obj and obj["corpus"] not in ("opg", "v2"))
+                or (non_corpus and "corpus" in obj)):
+            errors.append(f"{obj['name']}: corpus selection is valid")
+        if non_corpus:
+            if rows_base.get(obj["name"]) or rows_now.get(obj["name"]):
+                errors.append(f"{obj['name']}: explicitly non-corpus statement has no manifest row")
+        elif (len(rows_for_object(rows_base, obj)) != 1
+              or len(rows_for_object(rows_now, obj)) != 1):
+            errors.append(f"{obj['name']}: complete statement must select one baseline and current corpus row")
+    return objects, errors
+
+
 def check_kernel(spec: dict) -> list[str]:
     """Check statement exact types and all named assumptions; never build packages."""
+    try:
+        statements, errors = statement_obligations(spec)
+    except ValueError as exc:
+        return [str(exc)]
+    if errors:
+        return errors
     groups = defaultdict(list)
     certificates = defaultdict(set)
     packages = {namespace: package for package, namespace in spec["namespaces"].items()}
@@ -313,9 +395,8 @@ def check_kernel(spec: dict) -> list[str]:
     theorem_names.update(spec.get("extra_certificates", []))
     for name in theorem_names:
         certificates[packages[name.split(".", 1)[0]]].add(name)
-    for obj in spec["frozen"]:
-        if obj["kind"] in {"statement", "original-statement"}:
-            groups[obj["frozen_path"].split("/", 1)[0]].append(obj)
+    for obj in statements:
+        groups[obj["frozen_path"].split("/", 1)[0]].append(obj)
     errors = []
     for package in sorted(certificates):
         objects = groups[package]
@@ -369,6 +450,7 @@ def local_closure(decls: dict[str, dict], name: str) -> set[str]:
 
 
 def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
+    validate_frozen_kinds(spec)
     base = spec["baseline_commit"]
     checks: list[dict] = []
 
@@ -487,6 +569,10 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     rows_now, legs_now = manifest_rows(None)
     expected_statements, reaching = statement_dependencies(
         base, expected_sources, rows_base, include_public=bool(repository_sources))
+    _, role_errors = statement_obligations(
+        spec, expected_statements=expected_statements, rows_base=rows_base, rows_now=rows_now)
+    for error in role_errors:
+        check(False, error)
     supplied_statements = {obj["qualified"] for obj in spec["frozen"] if obj["kind"] == "statement"}
     check(expected_statements == supplied_statements,
           "affected statement coverage matches baseline dependencies",

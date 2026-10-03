@@ -45,9 +45,10 @@ Proof. exact: Delta_lt_of_cln_lt. Qed.
 (** The converse fails: [Delta G < |N[v]|] for a vertex of maximum degree, so
     the Delta form is strictly weaker and only the direction above is available. *)
 
-(** (2) [x118_edges_between] (X118) and [x120_edges_between] (X120) are the same
-    definition as [x223_edges_between] up to the associativity of [&&]: all
-    three count the ORDERED pairs [(a,b)] of [A x B] with [a -- b]. *)
+(** (2) [x118_edges_between] (X118), [x120_edges_between] (X120) and
+    [x223_edges_between] all count the ORDERED pairs [(a,b)] of [A x B] with
+    [a -- b]: since library migration A8 all three are [GTBase.common.edges_between]
+    (their former bodies differed only by the associativity of [&&]). *)
 
 Lemma x118_edges_betweenE (G : sgraph) (A B : {set G}) :
   x118_edges_between A B = x223_edges_between A B.
@@ -67,44 +68,7 @@ Lemma x223_edges_between_card_cross (G : sgraph) (A B : {set G}) :
   [disjoint A & B] ->
   x223_edges_between A B
     = #|[set e in E(G) | (e :&: A != set0) && (e :&: B != set0)]|.
-Proof.
-move=> dAB.
-have Dne (x y : G) : x \in A -> y \in B -> x != y.
-  move=> xA yB; apply/eqP => exy.
-  by move: (disjointFr dAB xA); rewrite exy yB.
-have key : [set e in E(G) | (e :&: A != set0) && (e :&: B != set0)]
-         = (fun p : G * G => [set p.1; p.2])
-             @: [set uv : G * G | (uv.1 \in A) && (uv.2 \in B) && (uv.1 -- uv.2)].
-  apply/setP => e; rewrite !inE; apply/idP/imsetP => [|[p]].
-  - case/andP => eE /andP[/set0Pn[a]]; rewrite inE => /andP[ae aA].
-    case/set0Pn => b; rewrite inE => /andP[be bB].
-    have ab : a != b by exact: Dne.
-    move: eE => /edgesP[x [y] [exy xy]].
-    rewrite exy !inE in ae be.
-    case/orP: ae => /eqP ax; case/orP: be => /eqP bxy.
-    + by rewrite ax bxy eqxx in ab.
-    + exists (a, b); last by rewrite /= exy ax bxy.
-      by rewrite inE /= aA bB ax bxy.
-    + exists (a, b); last by rewrite /= exy ax bxy setUC.
-      by rewrite inE /= aA bB ax bxy sg_sym.
-    + by rewrite ax bxy eqxx in ab.
-  - rewrite inE => /andP[/andP[p1 p2] p12] ->.
-    apply/andP; split.
-      by rewrite in_sg_edge_set; apply/existsP; exists p.1;
-         apply/existsP; exists p.2; rewrite p12 eqxx.
-    apply/andP; split; apply/set0Pn.
-    + by exists p.1; rewrite !inE eqxx p1.
-    + by exists p.2; rewrite !inE eqxx orbT p2.
-rewrite /x223_edges_between key card_in_imset //.
-move=> p q; rewrite !inE => /andP[/andP[p1 p2] _] /andP[/andP[q1 q2] _] eqpq.
-have H1 : p.1 = q.1.
-  move: eqpq => /setP /(_ p.1); rewrite !inE eqxx => /esym/orP[/eqP//|/eqP pq2].
-  by move: (Dne _ _ p1 q2); rewrite pq2 eqxx.
-have H2 : p.2 = q.2.
-  move: eqpq => /setP /(_ q.2); rewrite !inE eqxx orbT => /orP[/eqP q2p1|/eqP //].
-  by move: (Dne _ _ p1 q2); rewrite -q2p1 eqxx.
-clear eqpq p1 p2 q1 q2; case: p H1 H2 => a b /= -> ->; by case: q.
-Qed.
+Proof. exact: edges_between_cross. Qed.
 
 (** ** e076 -- Conjecture 1.4 for all H implies its open case H = K_3.
 

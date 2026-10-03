@@ -8,7 +8,7 @@
     body is that comprehension with [U9.consec]'s body as
     [seq_index_consecutive], so the certificates are kernel-checked conversions.  It
     is NOT the raw support of the consecutive pairs: the two agree on duplicate-free
-    walks only ([seq_index_edge_set_walk]); [U9.consec] itself is unchanged.
+    walks ([seq_index_edge_set_walk]); [U9.consec] itself is unchanged.
     [X178Legacy] freezes the decomposition predicate and the row with B6's live
     [x178_path_seq]; [X178Original] composes B6's frozen [x178_path_seq]
     (Packing.migration.simple_path.Legacy) with this family's frozen edge set, the
