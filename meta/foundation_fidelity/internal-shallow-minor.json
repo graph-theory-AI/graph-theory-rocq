@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "family": "internal-shallow-minor",
+  "modules": {
+    "Minor.foundations.shallow_minors": {
+      "path": "minor-theory/theories/foundations/shallow_minors.v",
+      "overrides": {
+        "internal_ball_in": {
+          "verdict": "FAITHFUL",
+          "note": "Exact X220 internal ball: every vertex of the supplied set is reached from the supplied vertex by a walk of at most r edges (size p) whose listed vertices all lie in the set. Vacuous on the empty set; it does not assert centre membership, which nonemptiness forces. No graph_dist, truncation or host distance."
+        },
+        "internal_shallow_minor": {
+          "verdict": "FAITHFUL",
+          "note": "Exact X220 internal-radius model: supplied B : H -> {set G} and ctr : H -> G with upstream minor_rmap on the same B, ctr x in B x as a separate clause, and internal balls of radius r. Proved equivalent on the same maps to centre membership, internal balls, pairwise disjointness and edge realization. Empty pattern allowed; no inducedness, covering or ambient-radius condition."
+        }
+      },
+      "machine_evidence": [
+        "internal_ball_in_set0",
+        "internal_ball_in_centre",
+        "internal_ball_inW",
+        "internal_ball_in_set1",
+        "internal_ball_in0",
+        "internal_ball_in_connect",
+        "internal_ball_in_connected",
+        "connected_internal_ball_in",
+        "internal_ball_in_connectedE",
+        "not_internal_ball_in_disconnected",
+        "internal_shallow_suppliedE",
+        "internal_shallow_minorE",
+        "internal_shallow_minor_minor",
+        "internal_shallow_minor_card",
+        "internal_shallow_minorW",
+        "internal_shallow_minor_empty_pattern",
+        "not_internal_shallow_minor_empty_host",
+        "internal_shallow_minor_refl",
+        "internal_shallow_minor0E"
+      ]
+    }
+  }
+}

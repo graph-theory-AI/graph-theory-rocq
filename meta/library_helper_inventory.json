@@ -49342,7 +49342,7 @@
         "Minor.conjectures.X220.x220_wall_rel"
       ],
       "kind": "Definition",
-      "line": 12,
+      "line": 13,
       "local_dependencies": [],
       "name": "x220_wall_r0",
       "normalized_name": "wall_r0",
@@ -49362,7 +49362,7 @@
         "Minor.conjectures.X220.x220_wall_sym"
       ],
       "kind": "Definition",
-      "line": 34,
+      "line": 35,
       "local_dependencies": [
         "x220_wall_r0"
       ],
@@ -49383,7 +49383,7 @@
         "Minor.conjectures.X220.x220_wall"
       ],
       "kind": "Lemma",
-      "line": 37,
+      "line": 38,
       "local_dependencies": [
         "x220_wall_rel"
       ],
@@ -49404,7 +49404,7 @@
         "Minor.conjectures.X220.x220_wall"
       ],
       "kind": "Lemma",
-      "line": 40,
+      "line": 41,
       "local_dependencies": [
         "x220_wall_rel"
       ],
@@ -49426,7 +49426,7 @@
         "Minor.conjectures.X220.four_family_free_logarithmic_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 46,
+      "line": 47,
       "local_dependencies": [
         "x220_wall_irrefl",
         "x220_wall_sym"
@@ -49448,7 +49448,7 @@
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 48,
+      "line": 49,
       "local_dependencies": [],
       "name": "x220_theta",
       "normalized_name": "theta",
@@ -49467,7 +49467,7 @@
         "Minor.conjectures.X220.x220_prism"
       ],
       "kind": "Definition",
-      "line": 59,
+      "line": 60,
       "local_dependencies": [],
       "name": "x220_prism3",
       "normalized_name": "prism3",
@@ -49486,7 +49486,7 @@
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 62,
+      "line": 63,
       "local_dependencies": [
         "x220_prism3"
       ],
@@ -49507,7 +49507,7 @@
         "Minor.conjectures.X220.x220_even_wheel_free"
       ],
       "kind": "Definition",
-      "line": 68,
+      "line": 69,
       "local_dependencies": [],
       "name": "x220_spokes",
       "normalized_name": "spokes",
@@ -49526,7 +49526,7 @@
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 78,
+      "line": 79,
       "local_dependencies": [
         "x220_spokes"
       ],
@@ -49548,7 +49548,7 @@
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 82,
+      "line": 83,
       "local_dependencies": [],
       "name": "x220_clique_free",
       "normalized_name": "clique_free",
@@ -49567,7 +49567,7 @@
         "Minor.conjectures.X220.triangle_s123_free_bounded_clique_width_statement"
       ],
       "kind": "Definition",
-      "line": 88,
+      "line": 89,
       "local_dependencies": [],
       "name": "x220_S123",
       "normalized_name": "S123",
@@ -49586,7 +49586,7 @@
         "Minor.conjectures.X220.bounded_tree_mu_polynomial_biclique_tree_alpha_statement"
       ],
       "kind": "Definition",
-      "line": 92,
+      "line": 93,
       "local_dependencies": [],
       "name": "x220_ibn",
       "normalized_name": "ibn",
@@ -49605,7 +49605,7 @@
         "Minor.conjectures.X220.x220_red_deg"
       ],
       "kind": "Definition",
-      "line": 100,
+      "line": 101,
       "local_dependencies": [],
       "name": "x220_red_pair",
       "normalized_name": "red_pair",
@@ -49624,7 +49624,7 @@
         "Minor.conjectures.X220.x220_twin_width_le"
       ],
       "kind": "Definition",
-      "line": 112,
+      "line": 113,
       "local_dependencies": [
         "x220_red_pair"
       ],
@@ -49645,7 +49645,7 @@
         "Minor.conjectures.X220.x220_twin_width_le"
       ],
       "kind": "Definition",
-      "line": 115,
+      "line": 116,
       "local_dependencies": [],
       "name": "x220_singletons",
       "normalized_name": "singletons",
@@ -49664,7 +49664,7 @@
         "Minor.conjectures.X220.x220_twin_width_le"
       ],
       "kind": "Definition",
-      "line": 117,
+      "line": 118,
       "local_dependencies": [],
       "name": "x220_merge",
       "normalized_name": "merge",
@@ -49684,7 +49684,7 @@
         "Minor.conjectures.X220.small_hereditary_class_bounded_twin_width_statement"
       ],
       "kind": "Definition",
-      "line": 120,
+      "line": 121,
       "local_dependencies": [
         "x220_merge",
         "x220_red_deg",
@@ -49705,7 +49705,7 @@
       "declaration_hash": "4353e2f6ff2bbb274d8ab265cd3735504e7ad7679779cc24ae09a14a8044bc20",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 128,
+      "line": 129,
       "local_dependencies": [],
       "name": "x220_iso_closed",
       "normalized_name": "iso_closed",
@@ -49724,7 +49724,7 @@
         "Minor.conjectures.X220.small_hereditary_class_bounded_twin_width_statement"
       ],
       "kind": "Definition",
-      "line": 141,
+      "line": 142,
       "local_dependencies": [],
       "name": "x220_hereditary_class",
       "normalized_name": "hereditary_class",
@@ -49743,7 +49743,7 @@
         "Minor.conjectures.X220.x220_small_class"
       ],
       "kind": "Definition",
-      "line": 144,
+      "line": 145,
       "local_dependencies": [],
       "name": "x220_represents",
       "normalized_name": "represents",
@@ -49762,7 +49762,7 @@
         "Minor.conjectures.X220.small_hereditary_class_bounded_twin_width_statement"
       ],
       "kind": "Definition",
-      "line": 147,
+      "line": 148,
       "local_dependencies": [
         "x220_represents"
       ],
@@ -49776,14 +49776,12 @@
       "signature_shape_hash": "f0a8107f27fab631567a7c998294eb48cb9927e8f537ee34f52efa87aebac1c2"
     },
     {
-      "body_hash": "4239d073ba054c1b123132887002cdbb1d698e7ed3be324fa0fcd8464afed5f9",
-      "body_shape_hash": "4239d073ba054c1b123132887002cdbb1d698e7ed3be324fa0fcd8464afed5f9",
-      "declaration_hash": "7fe9007b1dec8ff68b8916533c7b81546f8aa706f14a90267f78922b153aaf5f",
-      "direct_consumers": [
-        "Minor.conjectures.X220.x220_shallow_minor"
-      ],
+      "body_hash": "65c225a443c3b2c8c14dff517e695e3c2fe28bdf3c0f0f78365c5fb57db49d25",
+      "body_shape_hash": "65c225a443c3b2c8c14dff517e695e3c2fe28bdf3c0f0f78365c5fb57db49d25",
+      "declaration_hash": "816fcda425ede59ef04b105c35c3b04727971ec7a6e24680b78304041f5c7390",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 154,
+      "line": 155,
       "local_dependencies": [],
       "name": "x220_ball_in",
       "normalized_name": "ball_in",
@@ -49795,17 +49793,15 @@
       "signature_shape_hash": "7f25f94df106dfbedc8928ccca7207bb5e4fd4531dd9f4178d411072ddb1113b"
     },
     {
-      "body_hash": "bc46f05315ed0cd45163e5f92f4a3d825629263379b1e8ca0c33b2ef1e4b59a1",
-      "body_shape_hash": "899e375cf84b870ded7eb524856a322ce37aea52bd72177b847d5e0061d1ffe3",
-      "declaration_hash": "da554d4925631f5b8930045824ede691d430201b7f45d72e62003755d5d9933b",
+      "body_hash": "976ca94f3d6d40f71977e5c598959b10e8e29f9c39993a97250e766f0a05992a",
+      "body_shape_hash": "976ca94f3d6d40f71977e5c598959b10e8e29f9c39993a97250e766f0a05992a",
+      "declaration_hash": "5a9a10ea6ec59a061aebfdec4886368d6cbea16a389fb4c2fbbde8401544d3a1",
       "direct_consumers": [
         "Minor.conjectures.X220.x220_polynomial_expansion"
       ],
       "kind": "Definition",
-      "line": 168,
-      "local_dependencies": [
-        "x220_ball_in"
-      ],
+      "line": 166,
+      "local_dependencies": [],
       "name": "x220_shallow_minor",
       "normalized_name": "shallow_minor",
       "package": "minor-theory",
@@ -49825,7 +49821,7 @@
         "Minor.conjectures.X220.x220_polynomial_expansion"
       ],
       "kind": "Definition",
-      "line": 175,
+      "line": 168,
       "local_dependencies": [],
       "name": "x220_poly_eval",
       "normalized_name": "poly_eval",
@@ -49844,7 +49840,7 @@
         "Minor.conjectures.X220.polynomial_expansion_bounded_twin_width_statement"
       ],
       "kind": "Definition",
-      "line": 178,
+      "line": 171,
       "local_dependencies": [
         "x220_poly_eval",
         "x220_shallow_minor"
@@ -49870,7 +49866,7 @@
         "Minor.conjectures.X220.x220_cw_wf"
       ],
       "kind": "Inductive",
-      "line": 184,
+      "line": 177,
       "local_dependencies": [],
       "name": "x220_cw_expr",
       "normalized_name": "cw_expr",
@@ -49890,7 +49886,7 @@
         "Minor.conjectures.X220.x220_cw_realises"
       ],
       "kind": "Fixpoint",
-      "line": 199,
+      "line": 192,
       "local_dependencies": [
         "x220_cw_expr"
       ],
@@ -49911,7 +49907,7 @@
         "Minor.conjectures.X220.x220_cw_realises"
       ],
       "kind": "Fixpoint",
-      "line": 207,
+      "line": 200,
       "local_dependencies": [
         "x220_cw_expr",
         "x220_cw_labels"
@@ -49933,7 +49929,7 @@
         "Minor.conjectures.X220.x220_clique_width_le"
       ],
       "kind": "Fixpoint",
-      "line": 224,
+      "line": 217,
       "local_dependencies": [
         "x220_cw_expr"
       ],
@@ -49954,7 +49950,7 @@
         "Minor.conjectures.X220.x220_clique_width_le"
       ],
       "kind": "Definition",
-      "line": 232,
+      "line": 225,
       "local_dependencies": [
         "x220_cw_edge",
         "x220_cw_expr",
@@ -49977,7 +49973,7 @@
         "Minor.conjectures.X220.triangle_s123_free_bounded_clique_width_statement"
       ],
       "kind": "Definition",
-      "line": 239,
+      "line": 232,
       "local_dependencies": [
         "x220_cw_expr",
         "x220_cw_realises",
