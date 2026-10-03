@@ -31,7 +31,7 @@ Definition x9_cycle_incident_edges_properly_coloured
     col e != col f.
 
 Definition x9_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : bool :=
-  ((u, v) \in zip c (rot 1 c)) || ((v, u) \in zip c (rot 1 c)).
+  seq_cyclic_consecutiveb c u v.
 
 Definition x9_cycle_chord_count (G : sgraph) (c : seq G) : nat :=
   #|[set p : G * G |

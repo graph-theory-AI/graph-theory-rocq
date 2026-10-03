@@ -7,9 +7,12 @@
     meta/library_primitives/path-vertices.json), the internal vertices of a
     sequence, [seq_interior] and [seq_inner] (registry
     meta/library_primitives/internal-vertices.json, section "Internal vertices"
-    below), and the consecutive entries of a sequence, [seq_consecutive]
-    (registry meta/library_primitives/consecutive-in-path.json, section
-    "Consecutive entries" below).
+    below), the consecutive entries of a sequence, [seq_consecutive] (registry
+    meta/library_primitives/consecutive-in-path.json, section "Consecutive
+    entries" below), and the cyclically consecutive entries of a sequence,
+    [seq_cyclic_consecutive] and [seq_cyclic_consecutiveb] (registry
+    meta/library_primitives/consecutive-in-cycle.json, section "Cyclically
+    consecutive entries" below).
 
     Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
     - MathComp [finset.v] writes the set spanned by an arbitrary sequence [s] as
@@ -606,3 +609,235 @@ Lemma seq_consecutive_ground_repeated_apart : ~ seq_consecutive [:: o0; o1; o0] 
 Proof. by move/seq_consecutiveP. Qed.
 
 End ConsecutiveGrounding.
+
+(** ** Cyclically consecutive entries of a sequence
+
+    [seq_cyclic_consecutive c u v] (a Prop) and [seq_cyclic_consecutiveb c u v]
+    (a boolean) state that [u] and [v] are adjacent in the cyclic order of the raw
+    sequence [c], in either order: the pair [(u, v)] or the pair [(v, u)] occurs
+    in [zip c (rot 1 c)], the adjacent pairs of [c] together with the closing pair
+    (last entry, first entry).  The two forms have the same disjuncts, joined by
+    [\/] and by [||]; [seq_cyclic_consecutiveP] reflects one into the other, so
+    both corpus interfaces are kept.
+
+    Upstream audit (2026-10-02; MathComp 2.5.0, coq-graph-theory 0.9.7).
+    MathComp's [cycle e (a :: p)] is [path e a (rcons p a)], i.e. it constrains the
+    adjacent pairs of the closed sequence [a :: rcons p a]; [next] and [prev]
+    describe neighbours only on duplicate-free cycles.  Neither library names the
+    relation "u and v are cyclically adjacent entries of a raw sequence".  It is
+    the path relation [seq_consecutive] of the closed sequence
+    ([seq_cyclic_consecutive_closed]), and every MathComp [cycle] relates its
+    cyclically consecutive entries ([seq_cyclic_consecutive_cycle]).
+
+    Specification, every clause proved below:
+    - closing: on [a :: p] it is [seq_consecutive (a :: rcons p a)], so the closing
+      pair [(last a p, a)] is consecutive ([seq_cyclic_consecutive_last]) and every
+      consecutive pair of the open sequence is ([seq_consecutive_cyclic]);
+    - degenerate sequences: the empty sequence relates nothing, the one-entry
+      sequence [[:: a]] relates [a] to itself (unlike [seq_consecutive]), and
+      [[:: a; b]] relates exactly [a] and [b];
+    - symmetry, invariance under [rot], [rotr] and [rev], preservation by [map],
+      and both values occur in [c];
+    - no path, graph-edge, uniqueness, size or distinctness premise: a repeated
+      value may be cyclically consecutive to itself, and length guards belong to
+      the hole and cycle predicates that use it. *)
+
+Section SeqCyclicConsecutive.
+Variable T : eqType.
+Implicit Types (c p : seq T) (a b u v : T).
+
+(** [u] and [v] are adjacent in the cyclic order of [c], as a boolean. *)
+Definition seq_cyclic_consecutiveb c u v : bool :=
+  ((u, v) \in zip c (rot 1 c)) || ((v, u) \in zip c (rot 1 c)).
+
+(** The same relation as a proposition. *)
+Definition seq_cyclic_consecutive c u v : Prop :=
+  ((u, v) \in zip c (rot 1 c)) \/ ((v, u) \in zip c (rot 1 c)).
+
+Lemma seq_cyclic_consecutiveP c u v :
+  reflect (seq_cyclic_consecutive c u v) (seq_cyclic_consecutiveb c u v).
+Proof. exact: orP. Qed.
+
+Lemma zip_rcons_l (S : Type) (s : seq T) (t : seq S) (x : T) :
+  size s = size t -> zip (rcons s x) t = zip s t.
+Proof. by elim: s t => [|y s IH] [|z t] //= [/IH->]. Qed.
+
+Lemma zip_nil_l (S : Type) (t : seq S) : zip ([::] : seq T) t = [::].
+Proof. by case: t. Qed.
+
+Lemma zip_nil_r (S : Type) (s : seq T) : zip s ([::] : seq S) = [::].
+Proof. by case: s. Qed.
+
+Lemma take_zip (S : Type) (s : seq T) (t : seq S) n :
+  take n (zip s t) = zip (take n s) (take n t).
+Proof. by elim: s t n => [|x s IH] [|y t] [|n] //=; rewrite IH. Qed.
+
+Lemma drop_zip (S : Type) (s : seq T) (t : seq S) n :
+  drop n (zip s t) = zip (drop n s) (drop n t).
+Proof.
+elim: s t n => [|x s IH] [|y t] [|n] //=; rewrite ?zip_nil_l ?zip_nil_r //.
+by case: (drop n s).
+Qed.
+
+Lemma zip_rot (S : eqType) n (s : seq T) (t : seq S) :
+  size s = size t -> zip (rot n s) (rot n t) = rot n (zip s t).
+Proof.
+move=> st; rewrite /rot zip_cat ?size_drop ?st //.
+by rewrite take_zip drop_zip.
+Qed.
+
+(** Closing the sequence: cyclic adjacency on [a :: p] is the path adjacency of
+    the closed sequence [a :: rcons p a]. *)
+Lemma seq_cyclic_consecutive_closed a p u v :
+  seq_cyclic_consecutive (a :: p) u v <-> seq_consecutive (a :: rcons p a) u v.
+Proof.
+rewrite /seq_cyclic_consecutive /seq_consecutive rot1_cons /=.
+by rewrite -[a :: rcons p a]/(rcons (a :: p) a) zip_rcons_l // size_rcons.
+Qed.
+
+Lemma seq_cyclic_consecutive_sym c u v :
+  seq_cyclic_consecutive c u v <-> seq_cyclic_consecutive c v u.
+Proof. by split=> -[]; [right | left | right | left]. Qed.
+
+Lemma seq_cyclic_consecutiveb_sym c u v :
+  seq_cyclic_consecutiveb c u v = seq_cyclic_consecutiveb c v u.
+Proof. exact: orbC. Qed.
+
+Lemma seq_cyclic_consecutive_nil u v : ~ seq_cyclic_consecutive [::] u v.
+Proof. by case. Qed.
+
+(** A one-entry sequence relates its entry to itself. *)
+Lemma seq_cyclic_consecutive_seq1 a u v :
+  seq_cyclic_consecutive [:: a] u v <-> u = a /\ v = a.
+Proof.
+apply: (iff_trans (seq_cyclic_consecutive_closed _ _ _ _)) => /=.
+apply: (iff_trans (seq_consecutive_pair _ _ _ _)).
+by split; [case | left].
+Qed.
+
+Lemma seq_cyclic_consecutive_pair a b u v :
+  seq_cyclic_consecutive [:: a; b] u v <-> (u = a /\ v = b) \/ (u = b /\ v = a).
+Proof.
+apply: (iff_trans (seq_cyclic_consecutive_closed _ _ _ _)) => /=.
+apply: (iff_trans (seq_consecutive_cons2 _ _ _ _ _)).
+by split=> [[?|?|/seq_consecutive_pair[?|?]]|[?|?]];
+  [left | right | right | left | constructor 1 | constructor 2].
+Qed.
+
+Lemma seq_cyclic_consecutive_rot n c u v :
+  seq_cyclic_consecutive (rot n c) u v <-> seq_cyclic_consecutive c u v.
+Proof.
+rewrite /seq_cyclic_consecutive rot_rot zip_rot ?size_rot //.
+by rewrite !mem_rot.
+Qed.
+
+Lemma seq_cyclic_consecutiveb_rot n c u v :
+  seq_cyclic_consecutiveb (rot n c) u v = seq_cyclic_consecutiveb c u v.
+Proof. by rewrite /seq_cyclic_consecutiveb rot_rot zip_rot ?size_rot // !mem_rot. Qed.
+
+Lemma seq_cyclic_consecutive_rotr n c u v :
+  seq_cyclic_consecutive (rotr n c) u v <-> seq_cyclic_consecutive c u v.
+Proof. exact: seq_cyclic_consecutive_rot. Qed.
+
+Lemma seq_cyclic_consecutive_rev c u v :
+  seq_cyclic_consecutive (rev c) u v <-> seq_cyclic_consecutive c u v.
+Proof.
+case: c => [|a p]; first by [].
+rewrite rev_cons -rot1_cons.
+apply: iff_trans (seq_cyclic_consecutive_rot _ _ _ _) _.
+apply: iff_trans (seq_cyclic_consecutive_closed _ _ _ _) _.
+apply: iff_trans _ (iff_sym (seq_cyclic_consecutive_closed _ _ _ _)).
+have -> : a :: rcons (rev p) a = rev (a :: rcons p a) by rewrite rev_cons rev_rcons.
+exact: seq_consecutive_rev.
+Qed.
+
+Lemma seq_cyclic_consecutive_mem c u v :
+  seq_cyclic_consecutive c u v -> u \in c /\ v \in c.
+Proof.
+case: c => [|a p]; first by case.
+move/seq_cyclic_consecutive_closed/seq_consecutive_mem.
+by rewrite -[a :: rcons p a]/(rcons (a :: p) a) !mem_rcons !inE !orbA !orbb.
+Qed.
+
+(** Consecutive entries of the open sequence are cyclically consecutive. *)
+Lemma seq_consecutive_cyclic c u v :
+  seq_consecutive c u v -> seq_cyclic_consecutive c u v.
+Proof.
+case: c => [|a p]; first by case.
+move=> uv; apply/seq_cyclic_consecutive_closed.
+by rewrite -[a :: rcons p a]/(rcons (a :: p) a); apply: seq_consecutive_rcons.
+Qed.
+
+(** The closing pair: the last entry is cyclically consecutive to the first. *)
+Lemma seq_cyclic_consecutive_last a p : seq_cyclic_consecutive (a :: p) (last a p) a.
+Proof.
+apply/seq_cyclic_consecutive_closed/seq_consecutiveE; left; apply/infixP.
+exists (belast a p), [::].
+by rewrite cats0 -[a :: rcons p a]/(rcons (a :: p) a) lastI -!cats1 -catA.
+Qed.
+
+(** On a MathComp cycle, cyclically consecutive entries are related one way or
+    the other. *)
+Lemma seq_cyclic_consecutive_cycle (e : rel T) c u v :
+  cycle e c -> seq_cyclic_consecutive c u v -> e u v || e v u.
+Proof.
+case: c => [|a p]; first by move=> _ [].
+by move=> ce /seq_cyclic_consecutive_closed; apply: seq_consecutive_path.
+Qed.
+
+End SeqCyclicConsecutive.
+
+(** Cyclically consecutive entries are preserved by a map of the values. *)
+Lemma seq_cyclic_consecutive_map (T T' : eqType) (f : T -> T') (c : seq T) (u v : T) :
+  seq_cyclic_consecutive c u v -> seq_cyclic_consecutive (map f c) (f u) (f v).
+Proof.
+case: c => [|a p]; first by case.
+move/seq_cyclic_consecutive_closed/(seq_consecutive_map f) => fuv.
+by apply/seq_cyclic_consecutive_closed; rewrite -map_rcons.
+Qed.
+
+(** *** Grounding of the cyclically consecutive entries
+
+    Vertices of ['I_3] and ['I_4], types with no edges: the empty sequence, the
+    one-entry sequence relating its entry to itself, both orders of a two-entry
+    sequence, the closing pair of a three-entry sequence (in both interfaces), a
+    non-adjacent pair of a four-entry sequence, a value made consecutive to itself
+    by the closing pair, and a repeated value that is not. *)
+
+Section CyclicGrounding.
+Local Notation o0 := (@Ordinal 3 0 isT).
+Local Notation o1 := (@Ordinal 3 1 isT).
+Local Notation o2 := (@Ordinal 3 2 isT).
+Local Notation q0 := (@Ordinal 4 0 isT).
+Local Notation q1 := (@Ordinal 4 1 isT).
+Local Notation q2 := (@Ordinal 4 2 isT).
+Local Notation q3 := (@Ordinal 4 3 isT).
+
+Lemma seq_cyclic_consecutive_ground_nil : ~ seq_cyclic_consecutive ([::] : seq 'I_3) o0 o0.
+Proof. exact: seq_cyclic_consecutive_nil. Qed.
+
+Lemma seq_cyclic_consecutive_ground_seq1 : seq_cyclic_consecutive [:: o0] o0 o0.
+Proof. exact/seq_cyclic_consecutive_seq1. Qed.
+
+Lemma seq_cyclic_consecutive_ground_pair :
+  seq_cyclic_consecutive [:: o0; o1] o0 o1 /\ seq_cyclic_consecutive [:: o0; o1] o1 o0.
+Proof. by split; apply/seq_cyclic_consecutive_pair; [left | right]. Qed.
+
+Lemma seq_cyclic_consecutive_ground_closing : seq_cyclic_consecutive [:: o0; o1; o2] o2 o0.
+Proof. exact: (seq_cyclic_consecutive_last o0 [:: o1; o2]). Qed.
+
+Lemma seq_cyclic_consecutiveb_ground_closing : seq_cyclic_consecutiveb [:: o0; o1; o2] o2 o0.
+Proof. by []. Qed.
+
+Lemma seq_cyclic_consecutive_ground_not_adjacent :
+  ~ seq_cyclic_consecutive [:: q0; q1; q2; q3] q0 q2.
+Proof. by move/seq_cyclic_consecutiveP. Qed.
+
+Lemma seq_cyclic_consecutive_ground_repeated : seq_cyclic_consecutive [:: o0; o1; o0] o0 o0.
+Proof. by apply/seq_cyclic_consecutiveP. Qed.
+
+Lemma seq_cyclic_consecutive_ground_repeated_apart :
+  ~ seq_cyclic_consecutive [:: q0; q1; q0; q2] q0 q0.
+Proof. by move/seq_cyclic_consecutiveP. Qed.
+
+End CyclicGrounding.

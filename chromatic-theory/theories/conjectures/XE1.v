@@ -23,7 +23,7 @@ Definition xe1_vertices_of_seq (G : sgraph) (c : seq G) : {set G} :=
   [set v : G | v \in c].
 
 Definition xe1_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : bool :=
-  ((u, v) \in zip c (rot 1 c)) || ((v, u) \in zip c (rot 1 c)).
+  seq_cyclic_consecutiveb c u v.
 
 Definition xe1_cycle (G : sgraph) (c : seq G) : Prop :=
   ucycle (--) c /\ 2 < size c.

@@ -111,7 +111,7 @@ Definition x4_triangle_count (G : sgraph) : nat :=
   #|[set T : {set G} | x4_triangle_set T]|.
 
 Definition x4_consecutive_in_cycle (G : sgraph) (c : seq G) (u v : G) : bool :=
-  ((u, v) \in zip c (rot 1 c)) || ((v, u) \in zip c (rot 1 c)).
+  seq_cyclic_consecutiveb c u v.
 
 Definition x4_edge_in_c5 (G : sgraph) (x y : G) : bool :=
   [exists c : 5.-tuple G,

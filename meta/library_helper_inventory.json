@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2542,
-    "repeated_body_shapes": 130,
+    "repeated_body_shapes": 131,
     "repeated_normalized_names": 205,
     "repeated_signature_shapes": 297,
     "statements_excluded": 700,
@@ -206,6 +206,10 @@
       "4fba27e7b834b1c5466f07348f14ff1e2b41bef116808121d3fcd9c6f3afde15": [
         "Extremal.conjectures.XE1.xe1_tree",
         "Packing.conjectures.XE1.xe1_tree"
+      ],
+      "56501c3ad9fa41f9eed4b94da49f11e929de90da6d61fd67360d8c50660c4379": [
+        "Chromatic.conjectures.X3.x3_consecutive_in_cycle",
+        "GTMisc.conjectures.X91.x91_consecutive_in_cycle"
       ],
       "57f3e7fe035c3c808ffafa1077a50aa3b0967c0ec78e6f42081dc56d8bef5319": [
         "Chromatic.conjectures.X43.x43_diamond",
@@ -1013,6 +1017,11 @@
         "Minor.conjectures.X11.x11_xy_path",
         "Packing.conjectures.X26.x26_xy_path"
       ],
+      "f8e8c6ebae2ae7785af163d174e6bcd21bdbfa542038d17153e188bc84ff8613": [
+        "Chromatic.conjectures.XE1.xe1_consecutive_in_cycle",
+        "Cycle.conjectures.X9.x9_consecutive_in_cycle",
+        "Extremal.conjectures.X4.x4_consecutive_in_cycle"
+      ],
       "fa764d43c3b1434089898939e937e70eb615b809e4484d7ddb0651a30b22b5a7": [
         "Extremal.conjectures.X98.x98_internal",
         "GTMisc.conjectures.X114.x114_internal"
@@ -1026,11 +1035,6 @@
         "Extremal.conjectures.X223.x223_anticomplete",
         "Extremal.conjectures.X57.x57_anticomplete",
         "Extremal.conjectures.X58.x58_anticomplete"
-      ],
-      "fcabc4820a0e34e7f44694ce846dcdab7d4865df899c63ce25b672972977aa39": [
-        "Chromatic.conjectures.XE1.xe1_consecutive_in_cycle",
-        "Cycle.conjectures.X9.x9_consecutive_in_cycle",
-        "Extremal.conjectures.X4.x4_consecutive_in_cycle"
       ],
       "fd91119307d03817d27c8e6669932f2a85e1a3d2ad237259329d3cfd3939c4d9": [
         "Chromatic.conjectures.X81.x81_proper_orientation",
@@ -8684,9 +8688,9 @@
       "signature_shape_hash": "2d2ba99afb6352521678a4783f8f4e2987abd9b45e353d95d0c92302b5da996d"
     },
     {
-      "body_hash": "bc0e33512a54d735698a350567ea749f69fa4b1c8e5d48ed8b8fc0ce40df4b7c",
-      "body_shape_hash": "bc0e33512a54d735698a350567ea749f69fa4b1c8e5d48ed8b8fc0ce40df4b7c",
-      "declaration_hash": "8c22db49b1da041afa59856e36e6f1ba78fdfb67d3b5dbeeae5bb4d25d18d008",
+      "body_hash": "56501c3ad9fa41f9eed4b94da49f11e929de90da6d61fd67360d8c50660c4379",
+      "body_shape_hash": "56501c3ad9fa41f9eed4b94da49f11e929de90da6d61fd67360d8c50660c4379",
+      "declaration_hash": "c6195788ad9e7986cd5108dd954daec5cfd531450d37fed007099b2c81b5a681",
       "direct_consumers": [
         "Chromatic.conjectures.X3.x3_hole"
       ],
@@ -10907,9 +10911,9 @@
       "signature_shape_hash": "3d6f3ddac90f751c8cedef183f72e4a843faf84484463f234e45723ef88874c5"
     },
     {
-      "body_hash": "fcabc4820a0e34e7f44694ce846dcdab7d4865df899c63ce25b672972977aa39",
-      "body_shape_hash": "fcabc4820a0e34e7f44694ce846dcdab7d4865df899c63ce25b672972977aa39",
-      "declaration_hash": "185390db19e6566f0596c3617d0460c743b304edc421b830762661ecab315395",
+      "body_hash": "f8e8c6ebae2ae7785af163d174e6bcd21bdbfa542038d17153e188bc84ff8613",
+      "body_shape_hash": "f8e8c6ebae2ae7785af163d174e6bcd21bdbfa542038d17153e188bc84ff8613",
+      "declaration_hash": "e31653d804315f6c1c7690a8a9b876c04a17ec832fb51d4d8f9bb328bbd78b13",
       "direct_consumers": [
         "Chromatic.conjectures.XE1.xe1_cycle_diagonal_count"
       ],
@@ -14487,9 +14491,9 @@
       "signature_shape_hash": "1c56f29b08c2567f020750d8d165663dab96df44176eeaf9137e9c2ef0ef3466"
     },
     {
-      "body_hash": "fcabc4820a0e34e7f44694ce846dcdab7d4865df899c63ce25b672972977aa39",
-      "body_shape_hash": "fcabc4820a0e34e7f44694ce846dcdab7d4865df899c63ce25b672972977aa39",
-      "declaration_hash": "39233c046a87d19b0844c8336372de8a9927fe2ac6e8a27fbbc2f97d2c795485",
+      "body_hash": "f8e8c6ebae2ae7785af163d174e6bcd21bdbfa542038d17153e188bc84ff8613",
+      "body_shape_hash": "f8e8c6ebae2ae7785af163d174e6bcd21bdbfa542038d17153e188bc84ff8613",
+      "declaration_hash": "19cbd9b3b92174f1a5a728d75b788007a0f37bdf92f7421f93a9e83bebe7332d",
       "direct_consumers": [
         "Cycle.conjectures.X9.x9_cycle_chord_count"
       ],
@@ -30476,9 +30480,9 @@
       "signature_shape_hash": "85a46a03dc862887327221167a005ca0f18584e7add292f4d271b2677bad9c34"
     },
     {
-      "body_hash": "d1664b7a4e5653f0ef15237eba337021b83642a1cbbe136d930d7463f401e390",
-      "body_shape_hash": "d1664b7a4e5653f0ef15237eba337021b83642a1cbbe136d930d7463f401e390",
-      "declaration_hash": "94dee55ad4a34fef5c438ea7cc795adaf169434edf01e129e7108548daf959cd",
+      "body_hash": "34de745c92976d2c15a9e91d43ca561e4aee1212fee6e0f9e173e13cfa7b0f03",
+      "body_shape_hash": "34de745c92976d2c15a9e91d43ca561e4aee1212fee6e0f9e173e13cfa7b0f03",
+      "declaration_hash": "2bedabac6f0cf29969fcab76f3042e893b6a319a813897500cade58e015ef163",
       "direct_consumers": [
         "Extremal.conjectures.D2str.induced_cycle",
         "Extremal.conjectures.D2str.on_cycle_walk"
@@ -33114,9 +33118,9 @@
       "signature_shape_hash": "0596fb401e0ad5525f64c30a46df4b74ef3b429bb464e52445ea6a2244565dd3"
     },
     {
-      "body_hash": "fcabc4820a0e34e7f44694ce846dcdab7d4865df899c63ce25b672972977aa39",
-      "body_shape_hash": "fcabc4820a0e34e7f44694ce846dcdab7d4865df899c63ce25b672972977aa39",
-      "declaration_hash": "e41414c69bfbe6225069521fb6a2c86529b7ecb0db08c1bdf39b3342dddd0df0",
+      "body_hash": "f8e8c6ebae2ae7785af163d174e6bcd21bdbfa542038d17153e188bc84ff8613",
+      "body_shape_hash": "f8e8c6ebae2ae7785af163d174e6bcd21bdbfa542038d17153e188bc84ff8613",
+      "declaration_hash": "9003423baee37fe551a7456e2a1de3259bf45f11139fb7f121ce0ba6b84fca7d",
       "direct_consumers": [
         "Extremal.conjectures.X4.x4_edge_in_c5"
       ],
@@ -42662,9 +42666,9 @@
       "signature_shape_hash": "d59338f6705256e6b45914b66260afab2fd1b931ea22b600f08054b97256217b"
     },
     {
-      "body_hash": "a2f7db54cb97c07c2ea3b79115c2f5a3cecd0a941ef03c4cf9b191db176ef25e",
-      "body_shape_hash": "a2f7db54cb97c07c2ea3b79115c2f5a3cecd0a941ef03c4cf9b191db176ef25e",
-      "declaration_hash": "d3981bf0a53a6915a8566507d596be2f97598a18756b018f746f10d5aa073db8",
+      "body_hash": "56501c3ad9fa41f9eed4b94da49f11e929de90da6d61fd67360d8c50660c4379",
+      "body_shape_hash": "56501c3ad9fa41f9eed4b94da49f11e929de90da6d61fd67360d8c50660c4379",
+      "declaration_hash": "41d2b84334c5ce412823717f2c9361184ef1aef9d4704614e908e831d638e8be",
       "direct_consumers": [
         "GTMisc.conjectures.X91.x91_induced_cycle"
       ],
@@ -50133,9 +50137,9 @@
       "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
     },
     {
-      "body_hash": "53012381ec8235348bc3bb3a0859bea629f969428afd937154df306e6515f0ac",
-      "body_shape_hash": "53012381ec8235348bc3bb3a0859bea629f969428afd937154df306e6515f0ac",
-      "declaration_hash": "394a113c6014e1e7016e2b881317eaed603f631a32202769c5beb22af1d339d5",
+      "body_hash": "ad4ff1a5a20451b46917dbc69c45ff19bd0617711c3a8bf57b04eb7fb25331a3",
+      "body_shape_hash": "ad4ff1a5a20451b46917dbc69c45ff19bd0617711c3a8bf57b04eb7fb25331a3",
+      "declaration_hash": "c4ffd2f846b790edbc3a8d1a69eac55454186a3ca3775763886be21bfb07bb33",
       "direct_consumers": [
         "Minor.conjectures.X27.x27_hole"
       ],
