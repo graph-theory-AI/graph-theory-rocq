@@ -135,4 +135,9 @@ Proof. exact: iff_refl. Qed.
 Lemma theta_prism_even_wheel_free_bounded_treewidth_statement_original_compat :
   X220Original.theta_prism_even_wheel_free_bounded_treewidth_statement <->
   theta_prism_even_wheel_free_bounded_treewidth_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+(* B23 (2026-10-03): the live hole is now GTBase.induced_cycles.hole, so B4's frozen even-wheel
+   chain is related to the live one through B4's certificate instead of by conversion. *)
+split=> h t; have [c hc] := h t; exists c => G c4 dia th pr ew cf;
+  by apply: (hc G c4 dia th pr _ cf); apply/B4.x220_even_wheel_free_compat.
+Qed.

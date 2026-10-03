@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "family": "induced-cycle",
+  "primitive": {
+    "canonical_name": "GTBase.induced_cycles.chordless_cycle",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "hole",
+      "induced_cycle"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X3.x3_hole",
+      "Extremal.conjectures.D2str.induced_cycle",
+      "GTMisc.conjectures.U13.induced_cycle",
+      "GTMisc.conjectures.X91.x91_induced_cycle",
+      "Minor.conjectures.X27.x27_hole",
+      "Packing.conjectures.XE1.xe1_induced_cycle"
+    ],
+    "consumers_remaining": 7,
+    "relation": "one contract, a chordless vertex-sequence cycle: a MathComp ucycle of host adjacency in which every host edge between two of its vertices joins cyclically consecutive entries (cyclic_chordless, over seq_cyclic_consecutiveb, no distinctness premise); three views differ only in the length bound. GTBase.induced_cycles.chordless_ucycle (no bound: the empty list and the two-vertex cycle of an edge qualify) is Extremal.D2str.induced_cycle by conversion (cyc_edge is seq_cyclic_consecutiveb); chordless_cycle (2 < size c, the same term as 3 <= size c) is GTMisc.X91.x91_induced_cycle (redundant u != v after the edge, Prop consecutiveness) and Packing.XE1.xe1_induced_cycle (redundant x != y before the edge, inline Boolean pair test) by explicit iffs; hole (3 < size c) is Chromatic.X3.x3_hole (three-way conjunction, u != v before the edge, Prop consecutiveness) and Minor.X27.x27_hole (x != y after the edge) by explicit iffs. The distinctness premises are proved redundant from sgraph irreflexivity (sg_edgeNeq), never added; no size, nonempty or uniqueness premise beyond each original is added, so D2str's sizes 0 and 2 stay raw-only. GTMisc.U13.induced_cycle shares the normalized name but is a different contract (an injective map 'I_k -> G whose edges are exactly the modular successor pairs, with its own k = 0, 1, 2 behaviour): deferred-excluded, unchanged, not redirected. Distinct and untouched: U13.has_induced_cycle, the induced-isomorphism copies of cycle_graph n (X49, X60, X29), X115's vertex-set odd induced cycles, X161's bare four-vertex ucycle, X169's clique-tree chordality and the directed chordal_C3; Packing.XE1.xe1_chordal is an unchanged chain here.",
+    "semantic_classes": {
+      "raw-unbounded": {
+        "members": [
+          "Extremal.conjectures.D2str.induced_cycle"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Extremal.migration.induced_cycles.induced_cycle_compat"
+        ],
+        "note": "ucycle /\\ every host edge between cycle vertices is a cycle edge, no length guard (sizes 0 and 2 included); D2str's peripheral cycle and the geodesic-cycle OPG row are frozen over it."
+      },
+      "genuine-at-least-three": {
+        "members": [
+          "GTMisc.conjectures.X91.x91_induced_cycle",
+          "Packing.conjectures.XE1.xe1_induced_cycle"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.induced_cycles.x91_induced_cycle_compat",
+          "Packing.migration.induced_cycles.xe1_induced_cycle_compat"
+        ],
+        "note": "ucycle, 2 < size c (X91 writes 3 <= size c, the same term) and no chord; the redundant distinctness premise (after the edge in X91, before it in XE1) and X91's Prop consecutiveness are bridged by cyclic_chordless_prop_edge_neq / cyclic_chordless_neq_edge. X91's avoidable-path row and Erdos #81 (through the unchanged chain xe1_chordal) are frozen over them."
+      },
+      "hole-at-least-four": {
+        "members": [
+          "Chromatic.conjectures.X3.x3_hole",
+          "Minor.conjectures.X27.x27_hole"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.induced_cycles.x3_hole_compat",
+          "Minor.migration.induced_cycles.x27_hole_compat"
+        ],
+        "note": "ucycle, 3 < size c and no chord; X3's three-way conjunction with u != v before the edge and Prop consecutiveness (cyclic_chordless_prop_neq_edge) and X27's x != y after the edge (cyclic_chordless_edge_neq). The X3 / X160 hole-length, constricting and rainbow rows and the X27 / X42 / X220 even-hole rows are frozen over them."
+      },
+      "ordinal-map-modular-successor": {
+        "members": [
+          "GTMisc.conjectures.U13.induced_cycle"
+        ],
+        "count": 1,
+        "verdict": "distinct representation: an injective ordinal map whose edges are exactly the modular successor pairs, not a vertex sequence",
+        "state": "deferred-excluded",
+        "note": "GTMisc.U13.induced_cycle keeps its body unchanged (k = 0 vacuous, k = 1 a loop impossible in a simple graph, k = 2 an edge); its has_induced_cycle wrapper, grounding lemmas, the C8 whole-row snapshot and the separately recorded U13 issue are untouched; a later task may relate it to the sequence views."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.induced_cycles.bounded_clique_consecutive_hole_lengths_statement_compat",
+      "Chromatic.migration.induced_cycles.bounded_clique_consecutive_hole_lengths_statement_original_compat",
+      "Chromatic.migration.induced_cycles.bounded_gaps_sets_are_constricting_statement_compat",
+      "Chromatic.migration.induced_cycles.bounded_gaps_sets_are_constricting_statement_original_compat",
+      "Chromatic.migration.induced_cycles.clique_or_consecutive_holes_statement_compat",
+      "Chromatic.migration.induced_cycles.clique_or_consecutive_holes_statement_original_compat",
+      "Chromatic.migration.induced_cycles.density_zero_constricting_set_statement_compat",
+      "Chromatic.migration.induced_cycles.density_zero_constricting_set_statement_original_compat",
+      "Chromatic.migration.induced_cycles.rainbow_consecutive_vertices_in_hole_statement_compat",
+      "Chromatic.migration.induced_cycles.rainbow_consecutive_vertices_in_hole_statement_original_compat",
+      "Chromatic.migration.induced_cycles.x3_constricting_compat",
+      "Chromatic.migration.induced_cycles.x3_has_hole_length_compat",
+      "Chromatic.migration.induced_cycles.x3_hole_compat",
+      "Chromatic.migration.induced_cycles.x3_holes_of_consecutive_lengths_compat",
+      "Chromatic.migration.induced_cycles.x3_k_constricting_compat",
+      "Chromatic.migration.induced_cycles.x3_rainbow_hole_run_compat",
+      "Extremal.migration.induced_cycles.geodesic_cycles_and_tuttes_theorem_statement_compat",
+      "Extremal.migration.induced_cycles.geodesic_cycles_and_tuttes_theorem_statement_original_compat",
+      "Extremal.migration.induced_cycles.induced_cycle_compat",
+      "Extremal.migration.induced_cycles.peripheral_cycle_compat",
+      "GTMisc.migration.induced_cycles.avoidable_path_or_pk_free_statement_compat",
+      "GTMisc.migration.induced_cycles.avoidable_path_or_pk_free_statement_original_compat",
+      "GTMisc.migration.induced_cycles.x91_avoidable_path_compat",
+      "GTMisc.migration.induced_cycles.x91_induced_cycle_compat",
+      "Minor.migration.induced_cycles.bounded_degree_even_hole_free_bounded_treewidth_statement_compat",
+      "Minor.migration.induced_cycles.bounded_degree_even_hole_free_bounded_treewidth_statement_original_compat",
+      "Minor.migration.induced_cycles.even_hole_diamond_free_bounded_tree_alpha_statement_compat",
+      "Minor.migration.induced_cycles.even_hole_diamond_free_bounded_tree_alpha_statement_original_compat",
+      "Minor.migration.induced_cycles.even_hole_k4_diamond_free_bounded_treewidth_statement_compat",
+      "Minor.migration.induced_cycles.even_hole_k4_diamond_free_bounded_treewidth_statement_original_compat",
+      "Minor.migration.induced_cycles.even_hole_kt_free_logarithmic_treewidth_statement_compat",
+      "Minor.migration.induced_cycles.even_hole_kt_free_logarithmic_treewidth_statement_original_compat",
+      "Minor.migration.induced_cycles.theta_prism_even_wheel_free_bounded_treewidth_statement_compat",
+      "Minor.migration.induced_cycles.theta_prism_even_wheel_free_bounded_treewidth_statement_original_compat",
+      "Minor.migration.induced_cycles.x220_even_wheel_free_compat",
+      "Minor.migration.induced_cycles.x27_even_hole_free_compat",
+      "Minor.migration.induced_cycles.x27_hole_compat",
+      "Packing.migration.induced_cycles.erdos_81_statement_compat",
+      "Packing.migration.induced_cycles.xe1_chordal_compat",
+      "Packing.migration.induced_cycles.xe1_induced_cycle_compat"
+    ],
+    "api_theorems": [
+      "GTBase.induced_cycles.cyclic_chordlessP",
+      "GTBase.induced_cycles.cyclic_chordless_edge_neq",
+      "GTBase.induced_cycles.cyclic_chordless_neq_edge",
+      "GTBase.induced_cycles.cyclic_chordless_prop",
+      "GTBase.induced_cycles.cyclic_chordless_prop_edge_neq",
+      "GTBase.induced_cycles.cyclic_chordless_prop_neq_edge",
+      "GTBase.induced_cycles.chordless_ucycleP",
+      "GTBase.induced_cycles.chordless_cycleP",
+      "GTBase.induced_cycles.holeP",
+      "GTBase.induced_cycles.chordless_cycleE",
+      "GTBase.induced_cycles.holeE",
+      "GTBase.induced_cycles.chordless_cycle_seq_cycle",
+      "GTBase.induced_cycles.hole_chordless_cycle",
+      "GTBase.induced_cycles.chordless_cycle_chordless_ucycle",
+      "GTBase.induced_cycles.hole_chordless_ucycle",
+      "GTBase.induced_cycles.chordless_ucycle_ucycle",
+      "GTBase.induced_cycles.chordless_ucycle_chordless",
+      "GTBase.induced_cycles.chordless_cycle_size",
+      "GTBase.induced_cycles.hole_size",
+      "GTBase.induced_cycles.chordless_ucycle_nil",
+      "GTBase.induced_cycles.chordless_ucycle_pair",
+      "GTBase.induced_cycles.chordless_cycle_nil",
+      "GTBase.induced_cycles.chordless_cycle_seq1",
+      "GTBase.induced_cycles.chordless_cycle_pair",
+      "GTBase.induced_cycles.hole_small",
+      "GTBase.induced_cycles.chordless_cycle_triangle",
+      "GTBase.induced_cycles.hole_triangle",
+      "GTBase.induced_cycles.cyclic_chordless_rot",
+      "GTBase.induced_cycles.chordless_ucycle_rot",
+      "GTBase.induced_cycles.chordless_cycle_rot",
+      "GTBase.induced_cycles.hole_rot",
+      "GTBase.induced_cycles.ucycle_rev",
+      "GTBase.induced_cycles.cyclic_chordless_rev",
+      "GTBase.induced_cycles.chordless_ucycle_rev",
+      "GTBase.induced_cycles.chordless_cycle_rev",
+      "GTBase.induced_cycles.hole_rev",
+      "GTBase.induced_cycles.cyclic_chordless_map",
+      "GTBase.induced_cycles.ucycle_map",
+      "GTBase.induced_cycles.chordless_ucycle_map",
+      "GTBase.induced_cycles.chordless_cycle_map",
+      "GTBase.induced_cycles.hole_map"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "mathcomp.boot.path",
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.digraph",
+        "GTBase.base",
+        "GTBase.walks_paths"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "MathComp path.v supplies ucycle (cycle && uniq, no lower bound) with rot_ucycle / rev_cycle / cycle_map; coq-graph-theory 0.9.7 has sgraph.ucycle_induced (a ucycle of an induced subgraph is a ucycle of the host) and the induced-subgraph / isomorphism machinery, but no chordless-cycle or hole predicate; GTBase.walks_paths supplies seq_cyclic_consecutive(b) with its reflection, rotation and reversal lemmas and the genuine seq_cycle. The three views are therefore new in GTBase.induced_cycles over ucycle and seq_cyclic_consecutiveb, related to seq_cycle by chordless_cycle_seq_cycle.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/induced_cycles.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/induced_cycles.spec.json",
+    "downstream_client": "base/theories/examples/induced_cycles.v",
+    "foundation_fidelity": "meta/foundation_fidelity/induced-cycle.json"
+  }
+}

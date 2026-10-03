@@ -480,7 +480,9 @@
     "graph-theory-misc/theories/migration/model_support.v#X114Legacy.x114_induced_subdivision_model": "C19 (model-support) snapshot: that family froze only its own helpers in this object (x114_induced_subdivision_model), so this copy still calls the live x114_induced_path_between, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
     "graph-theory-misc/theories/migration/subcubic.v#X114Legacy.subcubic_induced_subdivision_np_complete_statement": "A14 (subcubic) snapshot: that family froze only its own helpers in this object (subcubic_induced_subdivision_np_complete_statement), so this copy still calls the live x114_hisc_problem, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
     "minor-theory/theories/migration/bag_decompositions.v#Legacy.theta_triangle_free_bounded_degree_treewidth_statement": "C13 (bag-decomposition) snapshot: that family froze only its own helpers in this object (theta_triangle_free_bounded_degree_treewidth_statement), so this copy still calls the live x67_theta, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
-    "minor-theory/theories/migration/path_vertices.v#X67Legacy.theta": "B1 (path-vertices) snapshot: that family froze only its own helpers in this object (theta), so this copy still calls the live x67_induced_path_between, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies."
+    "minor-theory/theories/migration/path_vertices.v#X67Legacy.theta": "B1 (path-vertices) snapshot: that family froze only its own helpers in this object (theta), so this copy still calls the live x67_induced_path_between, which B22 redirects to GTBase.induced_paths (a conversion for X3/X91/X98/X114/X67 and the public Record field, an explicit iff for U9 and X208). Kept byte-exact; its certificate stays true. The complete rows are the reused Originals listed in this spec and B22's per-row copies.",
+    "graph-theory-misc/theories/migration/induced_cycles.v#X91Legacy.x91_avoidable_path": "B23 per-row snapshot: family induced-cycle (B23) froze only its induced-cycle / hole helpers and chains in this object (x91_avoidable_path), so this copy still calls the live x91_induced_path, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B23's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B23's spec.",
+    "graph-theory-misc/theories/migration/induced_cycles.v#X91Legacy.avoidable_path_or_pk_free_statement": "B23 per-row snapshot: family induced-cycle (B23) froze only its induced-cycle / hole helpers and chains in this object (avoidable_path_or_pk_free_statement), so this copy still calls the live x91_Pk_free, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B23's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B23's spec."
   },
   "cross_module_consumers": [
     {
@@ -527,12 +529,6 @@
       "path": "chromatic-theory/theories/conjectures/X218.v",
       "name": "x218_path_induced_copy",
       "note": "quantifies over all rooted-tree paths; a different contract; untouched"
-    },
-    {
-      "qualified": "GTMisc.conjectures.X91.x91_induced_cycle",
-      "path": "graph-theory-misc/theories/conjectures/X91.v",
-      "name": "x91_induced_cycle",
-      "note": "induced cycle (B4's family); a different contract; untouched"
     }
   ]
 }

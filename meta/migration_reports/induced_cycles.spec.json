@@ -1,0 +1,779 @@
+{
+  "family": "induced-cycle",
+  "canonical_name": "GTBase.induced_cycles.chordless_cycle",
+  "canonical_short_name": "chordless_cycle",
+  "relation": "one contract, a chordless vertex-sequence cycle: a MathComp ucycle of host adjacency in which every host edge between two of its vertices joins cyclically consecutive entries (cyclic_chordless, over seq_cyclic_consecutiveb, no distinctness premise); three views differ only in the length bound. GTBase.induced_cycles.chordless_ucycle (no bound: the empty list and the two-vertex cycle of an edge qualify) is Extremal.D2str.induced_cycle by conversion (cyc_edge is seq_cyclic_consecutiveb); chordless_cycle (2 < size c, the same term as 3 <= size c) is GTMisc.X91.x91_induced_cycle (redundant u != v after the edge, Prop consecutiveness) and Packing.XE1.xe1_induced_cycle (redundant x != y before the edge, inline Boolean pair test) by explicit iffs; hole (3 < size c) is Chromatic.X3.x3_hole (three-way conjunction, u != v before the edge, Prop consecutiveness) and Minor.X27.x27_hole (x != y after the edge) by explicit iffs. The distinctness premises are proved redundant from sgraph irreflexivity (sg_edgeNeq), never added; no size, nonempty or uniqueness premise beyond each original is added, so D2str's sizes 0 and 2 stay raw-only. GTMisc.U13.induced_cycle shares the normalized name but is a different contract (an injective map 'I_k -> G whose edges are exactly the modular successor pairs, with its own k = 0, 1, 2 behaviour): deferred-excluded, unchanged, not redirected. Distinct and untouched: U13.has_induced_cycle, the induced-isomorphism copies of cycle_graph n (X49, X60, X29), X115's vertex-set odd induced cycles, X161's bare four-vertex ucycle, X169's clique-tree chordality and the directed chordal_C3; Packing.XE1.xe1_chordal is an unchanged chain here.",
+  "baseline_commit": "7d8cc47829b045a122d6f6421ddc2d928dd9675a",
+  "namespaces": {
+    "chromatic-theory": "Chromatic",
+    "graph-theory-misc": "GTMisc",
+    "extremal-graph-theory": "Extremal",
+    "minor-theory": "Minor",
+    "packing-theory": "Packing",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/induced_cycles.v",
+    "chromatic-theory/theories/migration/induced_cycles.v",
+    "extremal-graph-theory/theories/migration/induced_cycles.v",
+    "graph-theory-misc/theories/migration/induced_cycles.v",
+    "minor-theory/theories/migration/induced_cycles.v",
+    "packing-theory/theories/migration/induced_cycles.v"
+  ],
+  "extra_certificates": [
+    "GTBase.induced_cycles.cyclic_chordlessP",
+    "GTBase.induced_cycles.cyclic_chordless_edge_neq",
+    "GTBase.induced_cycles.cyclic_chordless_neq_edge",
+    "GTBase.induced_cycles.cyclic_chordless_prop",
+    "GTBase.induced_cycles.cyclic_chordless_prop_edge_neq",
+    "GTBase.induced_cycles.cyclic_chordless_prop_neq_edge",
+    "GTBase.induced_cycles.chordless_ucycleP",
+    "GTBase.induced_cycles.chordless_cycleP",
+    "GTBase.induced_cycles.holeP",
+    "GTBase.induced_cycles.chordless_cycleE",
+    "GTBase.induced_cycles.holeE",
+    "GTBase.induced_cycles.chordless_cycle_seq_cycle",
+    "GTBase.induced_cycles.hole_chordless_cycle",
+    "GTBase.induced_cycles.chordless_cycle_chordless_ucycle",
+    "GTBase.induced_cycles.hole_chordless_ucycle",
+    "GTBase.induced_cycles.chordless_ucycle_ucycle",
+    "GTBase.induced_cycles.chordless_ucycle_chordless",
+    "GTBase.induced_cycles.chordless_cycle_size",
+    "GTBase.induced_cycles.hole_size",
+    "GTBase.induced_cycles.chordless_ucycle_nil",
+    "GTBase.induced_cycles.chordless_ucycle_pair",
+    "GTBase.induced_cycles.chordless_cycle_nil",
+    "GTBase.induced_cycles.chordless_cycle_seq1",
+    "GTBase.induced_cycles.chordless_cycle_pair",
+    "GTBase.induced_cycles.hole_small",
+    "GTBase.induced_cycles.chordless_cycle_triangle",
+    "GTBase.induced_cycles.hole_triangle",
+    "GTBase.induced_cycles.cyclic_chordless_rot",
+    "GTBase.induced_cycles.chordless_ucycle_rot",
+    "GTBase.induced_cycles.chordless_cycle_rot",
+    "GTBase.induced_cycles.hole_rot",
+    "GTBase.induced_cycles.ucycle_rev",
+    "GTBase.induced_cycles.cyclic_chordless_rev",
+    "GTBase.induced_cycles.chordless_ucycle_rev",
+    "GTBase.induced_cycles.chordless_cycle_rev",
+    "GTBase.induced_cycles.hole_rev",
+    "GTBase.induced_cycles.cyclic_chordless_map",
+    "GTBase.induced_cycles.ucycle_map",
+    "GTBase.induced_cycles.chordless_ucycle_map",
+    "GTBase.induced_cycles.chordless_cycle_map",
+    "GTBase.induced_cycles.hole_map"
+  ],
+  "summary": [
+    "Family B23 (sequence induced cycles and holes). Five local helpers now unfold to the three public views of `GTBase.induced_cycles` (not re-exported by base), which share one chord condition `cyclic_chordless c` (every host edge between two vertices of the list joins cyclically consecutive entries, `seq_cyclic_consecutiveb`, no distinctness premise) and differ only in the length bound: `Extremal.conjectures.D2str.induced_cycle` to the raw `chordless_ucycle` by conversion (no length guard: the empty list and the two-vertex cycle of an edge stay raw induced cycles; its `cyc_edge` is the Boolean `seq_cyclic_consecutiveb`); `GTMisc.conjectures.X91.x91_induced_cycle` and `Packing.conjectures.XE1.xe1_induced_cycle` to the genuine `chordless_cycle` (2 < size c, the same term as X91's 3 <= size c) and `Chromatic.conjectures.X3.x3_hole` and `Minor.conjectures.X27.x27_hole` to the `hole` view (3 < size c), each by an explicit iff: the redundant distinctness premises (after the edge in X91 and X27, before it in X3 and XE1) are proved redundant from sgraph irreflexivity (`sg_edgeNeq`), X3's and X91's Prop consecutiveness goes through `seq_cyclic_consecutiveP`, and X3's three-way conjunction is reshaped. The bridges are the public `cyclic_chordless_edge_neq`, `cyclic_chordless_neq_edge`, `cyclic_chordless_prop_edge_neq` and `cyclic_chordless_prop_neq_edge`. No size, nonempty or duplicate-free premise beyond each original is added. `GTMisc.conjectures.U13.induced_cycle` shares the normalized name but is an injective ordinal map whose edges are exactly the modular successor pairs (its own k = 0, 1, 2 behaviour): deferred-excluded, unchanged, not redirected.",
+    "",
+    "Thirteen complete current rows, frozen over the frozen helpers and the ten frozen chains with every guard, quantifier order and status unchanged: Chromatic X3 `bounded_clique_consecutive_hole_lengths_statement` (0 < nu, 3 <= k, omega < k, n <= chi, nu consecutive hole lengths), `bounded_gaps_sets_are_constricting_statement` (positive, infinite, bounded-gap sets are k-constricting for every k), `rainbow_consecutive_vertices_in_hole_statement` (every proper colouring over an arbitrary palette has a hole with s consecutive rainbow vertices after rotation), `clique_or_consecutive_holes_statement`, Chromatic X160 `density_zero_constricting_set_statement` (Boolean integer set, density zero), Extremal D2str `geodesic_cycles_and_tuttes_theorem_statement` (every real field, 3-connectivity, an existential positive symmetric edge length, every geodesic ucycle peripheral), GTMisc X91 `avoidable_path_or_pk_free_statement` (0 < k, induced-path freeness or an avoidable path whose every induced two-ended extension lies in an induced cycle), Minor X27 `bounded_degree_even_hole_free_bounded_treewidth_statement` (solved), X42 `even_hole_k4_diamond_free_bounded_treewidth_statement` (partial), X220 `theta_prism_even_wheel_free_bounded_treewidth_statement` (wheel spokes at least three, odd), `even_hole_kt_free_logarithmic_treewidth_statement` (solved) and `even_hole_diamond_free_bounded_tree_alpha_statement` (partial), and Packing XE1 `erdos_81_statement` (uniform C before G and n; chordal through the unchanged chain `xe1_chordal`; the M1 clique edge partition stays live). No statement text, doc block, manifest row, leg state or status changes; each frozen chain and row keeps the other families' live vocabulary.",
+    "",
+    "History: twelve complete earlier rows are reused, not re-composed: B4's X3Legacy rows (bounded clique, bounded gaps, clique or consecutive holes), B4's X3Original rainbow row (C5's frozen colouring with B4's frozen hole chain), B4's X160Legacy and D2strLegacy rows, B4's X91Original (B3's frozen paths with B4's frozen cycle), C13's X27Original and X42Original (B4's frozen holes, C13's frozen bags, A1's frozen induced-freeness), C19's X220Original (B4's frozen even-wheel chain with C19's frozen model support) and B4's X220Legacy logarithmic and tree-alpha rows; each keeps the raw pair formula and is certified here end to end through its owner's certificate. Because the live holes and induced cycles are no longer convertible to B4's frozen copies (except D2str), the B4 certificates of Chromatic, GTMisc and Minor that reach them, and C19's X220Original certificate, are re-proved through the public bridges: proof-only changes, every theorem statement and frozen body unchanged. All 44 earlier frozen mappings stay byte-exact; the earlier snapshots that keep this family's live names are listed in known_stale_snapshots with reciprocal notes in their specs (B22's partial X91 path chain and row deliberately keep the live x91_induced_cycle).",
+    "",
+    "Consumers: Extremal grounding_D2str (induced_cycle_nil, induced_cycle_ucycle, peripheral_cycle_C0_nil, peripheral_cycle_induced: unchanged proofs, the raw size-0 witness is preserved), Minor foundations/hole_containments (four_cycle_hole, isubgraph_hole and fch_hole: proof-only adaptations through cyclic_chordless_edge_neq; every theorem type, the subdivision / path lemmas and the C18 / C19 / B22 witness APIs unchanged), Minor grounding_X220, implications_X220 and implications_X42 (recompiled unchanged). Routing: normal milestones Chromatic X3 and X160, Extremal D2, GTMisc X91, Minor X27, X42 and X220, Packing XE1; no Digraph source.",
+    "",
+    "Public-only client base/theories/examples/induced_cycles.v: the empty list and K_2's edge are raw chordless ucycles rejected by the genuine view; K_3's triangle is a genuine chordless cycle but not a hole; the four-cycle of cycle_graph 4 is a hole, kept by rotation and reversal; K_4's four-cycle is a size-four ucycle with a chord, rejected by every view; positive facts are shown through the API and by computation with the Boolean mirrors.",
+    "",
+    "Kernel evidence, independent of this textual report, from `Print All Dependencies` and exact `Check`s: no frozen object reaches a live helper of the family or a canonical view; the live rows reach their live helpers and the canonical views; the consumer theorems keep their exact types. Summary: /srv/graph-theory-rocq/coordination/evidence/B23-induced_cycles/print_all_dependencies_summary.txt.",
+    "",
+    "Baseline 7d8cc47 is the fixed B22 family commit (on the stacked ownership-tool prerequisite 00e59d1); the five source bodies, the ten chains and the thirteen rows are byte-identical there to the fixed-B22 discovery refresh."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_hole",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_hole",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "Legacy.x3_hole",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.induced_cycles.x3_hole_compat",
+      "live_unfolds_to": "hole c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2str.induced_cycle",
+      "path": "extremal-graph-theory/theories/conjectures/D2str.v",
+      "name": "induced_cycle",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_cycles.v",
+      "frozen": "Legacy.induced_cycle",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_cycles.induced_cycle_compat",
+      "live_unfolds_to": "chordless_ucycle c"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X91.x91_induced_cycle",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_induced_cycle",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_cycles.v",
+      "frozen": "Legacy.x91_induced_cycle",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_cycles.x91_induced_cycle_compat",
+      "live_unfolds_to": "chordless_cycle c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X27.x27_hole",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_hole",
+      "frozen_path": "minor-theory/theories/migration/induced_cycles.v",
+      "frozen": "Legacy.x27_hole",
+      "substitutions": {},
+      "certificate": "Minor.migration.induced_cycles.x27_hole_compat",
+      "live_unfolds_to": "hole c"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.XE1.xe1_induced_cycle",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_induced_cycle",
+      "frozen_path": "packing-theory/theories/migration/induced_cycles.v",
+      "frozen": "Legacy.xe1_induced_cycle",
+      "substitutions": {},
+      "certificate": "Packing.migration.induced_cycles.xe1_induced_cycle_compat",
+      "live_unfolds_to": "chordless_cycle c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_has_hole_length",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_has_hole_length",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X3Legacy.x3_has_hole_length",
+      "substitutions": {
+        "x3_hole": "Legacy.x3_hole"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.x3_has_hole_length_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_holes_of_consecutive_lengths",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_holes_of_consecutive_lengths",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X3Legacy.x3_holes_of_consecutive_lengths",
+      "substitutions": {
+        "x3_has_hole_length": "X3Legacy.x3_has_hole_length"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.x3_holes_of_consecutive_lengths_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_rainbow_hole_run",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_rainbow_hole_run",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X3Legacy.x3_rainbow_hole_run",
+      "substitutions": {
+        "x3_hole": "Legacy.x3_hole"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.x3_rainbow_hole_run_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_k_constricting",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_k_constricting",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X3Legacy.x3_k_constricting",
+      "substitutions": {
+        "x3_has_hole_length": "X3Legacy.x3_has_hole_length"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.x3_k_constricting_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_constricting",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_constricting",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X3Legacy.x3_constricting",
+      "substitutions": {
+        "x3_k_constricting": "X3Legacy.x3_k_constricting"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.x3_constricting_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.D2str.peripheral_cycle",
+      "path": "extremal-graph-theory/theories/conjectures/D2str.v",
+      "name": "peripheral_cycle",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_cycles.v",
+      "frozen": "D2strLegacy.peripheral_cycle",
+      "substitutions": {
+        "induced_cycle": "Legacy.induced_cycle"
+      },
+      "certificate": "Extremal.migration.induced_cycles.peripheral_cycle_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X91.x91_avoidable_path",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "x91_avoidable_path",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_cycles.v",
+      "frozen": "X91Legacy.x91_avoidable_path",
+      "substitutions": {
+        "x91_induced_cycle": "Legacy.x91_induced_cycle"
+      },
+      "certificate": "GTMisc.migration.induced_cycles.x91_avoidable_path_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X27.x27_even_hole_free",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_even_hole_free",
+      "frozen_path": "minor-theory/theories/migration/induced_cycles.v",
+      "frozen": "X27Legacy.x27_even_hole_free",
+      "substitutions": {
+        "x27_hole": "Legacy.x27_hole"
+      },
+      "certificate": "Minor.migration.induced_cycles.x27_even_hole_free_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X220.x220_even_wheel_free",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_even_wheel_free",
+      "frozen_path": "minor-theory/theories/migration/induced_cycles.v",
+      "frozen": "X220Legacy.x220_even_wheel_free",
+      "substitutions": {
+        "x27_hole": "Legacy.x27_hole"
+      },
+      "certificate": "Minor.migration.induced_cycles.x220_even_wheel_free_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.XE1.xe1_chordal",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_chordal",
+      "frozen_path": "packing-theory/theories/migration/induced_cycles.v",
+      "frozen": "XE1Legacy.xe1_chordal",
+      "substitutions": {
+        "xe1_induced_cycle": "Legacy.xe1_induced_cycle"
+      },
+      "certificate": "Packing.migration.induced_cycles.xe1_chordal_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.bounded_clique_consecutive_hole_lengths_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "bounded_clique_consecutive_hole_lengths_statement",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X3Legacy.bounded_clique_consecutive_hole_lengths_statement",
+      "substitutions": {
+        "x3_holes_of_consecutive_lengths": "X3Legacy.x3_holes_of_consecutive_lengths"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.bounded_clique_consecutive_hole_lengths_statement_compat",
+      "original_certificate": "Chromatic.migration.induced_cycles.bounded_clique_consecutive_hole_lengths_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.bounded_gaps_sets_are_constricting_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "bounded_gaps_sets_are_constricting_statement",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X3Legacy.bounded_gaps_sets_are_constricting_statement",
+      "substitutions": {
+        "x3_constricting": "X3Legacy.x3_constricting"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.bounded_gaps_sets_are_constricting_statement_compat",
+      "original_certificate": "Chromatic.migration.induced_cycles.bounded_gaps_sets_are_constricting_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.rainbow_consecutive_vertices_in_hole_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "rainbow_consecutive_vertices_in_hole_statement",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X3Legacy.rainbow_consecutive_vertices_in_hole_statement",
+      "substitutions": {
+        "x3_rainbow_hole_run": "X3Legacy.x3_rainbow_hole_run"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.rainbow_consecutive_vertices_in_hole_statement_compat",
+      "original_certificate": "Chromatic.migration.induced_cycles.rainbow_consecutive_vertices_in_hole_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.clique_or_consecutive_holes_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "clique_or_consecutive_holes_statement",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X3Legacy.clique_or_consecutive_holes_statement",
+      "substitutions": {
+        "x3_holes_of_consecutive_lengths": "X3Legacy.x3_holes_of_consecutive_lengths"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.clique_or_consecutive_holes_statement_compat",
+      "original_certificate": "Chromatic.migration.induced_cycles.clique_or_consecutive_holes_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X160.density_zero_constricting_set_statement",
+      "path": "chromatic-theory/theories/conjectures/X160.v",
+      "name": "density_zero_constricting_set_statement",
+      "frozen_path": "chromatic-theory/theories/migration/induced_cycles.v",
+      "frozen": "X160Legacy.density_zero_constricting_set_statement",
+      "substitutions": {
+        "x3_constricting": "X3Legacy.x3_constricting"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.density_zero_constricting_set_statement_compat",
+      "original_certificate": "Chromatic.migration.induced_cycles.density_zero_constricting_set_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2str.geodesic_cycles_and_tuttes_theorem_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2str.v",
+      "name": "geodesic_cycles_and_tuttes_theorem_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_cycles.v",
+      "frozen": "D2strLegacy.geodesic_cycles_and_tuttes_theorem_statement",
+      "substitutions": {
+        "peripheral_cycle": "D2strLegacy.peripheral_cycle"
+      },
+      "certificate": "Extremal.migration.induced_cycles.geodesic_cycles_and_tuttes_theorem_statement_compat",
+      "original_certificate": "Extremal.migration.induced_cycles.geodesic_cycles_and_tuttes_theorem_statement_original_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X91.avoidable_path_or_pk_free_statement",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "avoidable_path_or_pk_free_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_cycles.v",
+      "frozen": "X91Legacy.avoidable_path_or_pk_free_statement",
+      "substitutions": {
+        "x91_avoidable_path": "X91Legacy.x91_avoidable_path"
+      },
+      "certificate": "GTMisc.migration.induced_cycles.avoidable_path_or_pk_free_statement_compat",
+      "original_certificate": "GTMisc.migration.induced_cycles.avoidable_path_or_pk_free_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X27.bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/induced_cycles.v",
+      "frozen": "X27Legacy.bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x27_even_hole_free": "X27Legacy.x27_even_hole_free"
+      },
+      "certificate": "Minor.migration.induced_cycles.bounded_degree_even_hole_free_bounded_treewidth_statement_compat",
+      "original_certificate": "Minor.migration.induced_cycles.bounded_degree_even_hole_free_bounded_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X42.v",
+      "name": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/induced_cycles.v",
+      "frozen": "X42Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x27_even_hole_free": "X27Legacy.x27_even_hole_free"
+      },
+      "certificate": "Minor.migration.induced_cycles.even_hole_k4_diamond_free_bounded_treewidth_statement_compat",
+      "original_certificate": "Minor.migration.induced_cycles.even_hole_k4_diamond_free_bounded_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/induced_cycles.v",
+      "frozen": "X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x220_even_wheel_free": "X220Legacy.x220_even_wheel_free"
+      },
+      "certificate": "Minor.migration.induced_cycles.theta_prism_even_wheel_free_bounded_treewidth_statement_compat",
+      "original_certificate": "Minor.migration.induced_cycles.theta_prism_even_wheel_free_bounded_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.even_hole_kt_free_logarithmic_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "even_hole_kt_free_logarithmic_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/induced_cycles.v",
+      "frozen": "X220Legacy.even_hole_kt_free_logarithmic_treewidth_statement",
+      "substitutions": {
+        "x27_even_hole_free": "X27Legacy.x27_even_hole_free"
+      },
+      "certificate": "Minor.migration.induced_cycles.even_hole_kt_free_logarithmic_treewidth_statement_compat",
+      "original_certificate": "Minor.migration.induced_cycles.even_hole_kt_free_logarithmic_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.even_hole_diamond_free_bounded_tree_alpha_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "even_hole_diamond_free_bounded_tree_alpha_statement",
+      "frozen_path": "minor-theory/theories/migration/induced_cycles.v",
+      "frozen": "X220Legacy.even_hole_diamond_free_bounded_tree_alpha_statement",
+      "substitutions": {
+        "x27_even_hole_free": "X27Legacy.x27_even_hole_free"
+      },
+      "certificate": "Minor.migration.induced_cycles.even_hole_diamond_free_bounded_tree_alpha_statement_compat",
+      "original_certificate": "Minor.migration.induced_cycles.even_hole_diamond_free_bounded_tree_alpha_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.XE1.erdos_81_statement",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "erdos_81_statement",
+      "frozen_path": "packing-theory/theories/migration/induced_cycles.v",
+      "frozen": "XE1Legacy.erdos_81_statement",
+      "substitutions": {
+        "xe1_chordal": "XE1Legacy.xe1_chordal"
+      },
+      "certificate": "Packing.migration.induced_cycles.erdos_81_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.bounded_clique_consecutive_hole_lengths_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "bounded_clique_consecutive_hole_lengths_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X3Legacy.bounded_clique_consecutive_hole_lengths_statement",
+      "substitutions": {
+        "x3_holes_of_consecutive_lengths": "holes_of_consecutive_lengths"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.bounded_clique_consecutive_hole_lengths_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.bounded_gaps_sets_are_constricting_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "bounded_gaps_sets_are_constricting_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X3Legacy.bounded_gaps_sets_are_constricting_statement",
+      "substitutions": {
+        "x3_constricting": "constricting"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.bounded_gaps_sets_are_constricting_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.rainbow_consecutive_vertices_in_hole_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "rainbow_consecutive_vertices_in_hole_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X3Original.rainbow_consecutive_vertices_in_hole_statement",
+      "substitutions": {
+        "x3_proper_colouring": "proper_colouring.Legacy.x3_proper_colouring",
+        "x3_rainbow_hole_run": "X3Legacy.rainbow_hole_run"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.rainbow_consecutive_vertices_in_hole_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.clique_or_consecutive_holes_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "clique_or_consecutive_holes_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X3Legacy.clique_or_consecutive_holes_statement",
+      "substitutions": {
+        "x3_holes_of_consecutive_lengths": "holes_of_consecutive_lengths"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.clique_or_consecutive_holes_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X160.density_zero_constricting_set_statement",
+      "path": "chromatic-theory/theories/conjectures/X160.v",
+      "name": "density_zero_constricting_set_statement",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X160Legacy.density_zero_constricting_set_statement",
+      "substitutions": {
+        "x3_constricting": "X3Legacy.constricting"
+      },
+      "certificate": "Chromatic.migration.induced_cycles.density_zero_constricting_set_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.D2str.geodesic_cycles_and_tuttes_theorem_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2str.v",
+      "name": "geodesic_cycles_and_tuttes_theorem_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "D2strLegacy.geodesic_cycles_and_tuttes_theorem_statement",
+      "substitutions": {
+        "geodesic_cycle": "d2str_geodesic_cycle",
+        "peripheral_cycle": "d2str_peripheral_cycle"
+      },
+      "certificate": "Extremal.migration.induced_cycles.geodesic_cycles_and_tuttes_theorem_statement_original_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X91.avoidable_path_or_pk_free_statement",
+      "path": "graph-theory-misc/theories/conjectures/X91.v",
+      "name": "avoidable_path_or_pk_free_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X91Original.avoidable_path_or_pk_free_statement",
+      "substitutions": {
+        "x91_Pk_free": "consecutive_in_path.X91Legacy.Pk_free",
+        "x91_avoidable_path": "avoidable_path"
+      },
+      "certificate": "GTMisc.migration.induced_cycles.avoidable_path_or_pk_free_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X27.bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X27Original.bounded_degree_even_hole_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x27_even_hole_free": "Minor.migration.consecutive_in_cycle.X27Legacy.even_hole_free",
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most"
+      },
+      "certificate": "Minor.migration.induced_cycles.bounded_degree_even_hole_free_bounded_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X42.even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X42.v",
+      "name": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/bag_decompositions.v",
+      "frozen": "X42Original.even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x27_even_hole_free": "Minor.migration.consecutive_in_cycle.X27Legacy.even_hole_free",
+        "x27_treewidth_at_most": "Legacy.x27_treewidth_at_most",
+        "x42_induced_free": "Minor.migration.induced_free.Legacy.x42_induced_free"
+      },
+      "certificate": "Minor.migration.induced_cycles.even_hole_k4_diamond_free_bounded_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "X220Original.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x220_even_wheel_free": "B4.X220Legacy.even_wheel_free",
+        "x220_prism": "X220Legacy.x220_prism",
+        "x220_theta": "X220Legacy.x220_theta"
+      },
+      "certificate": "Minor.migration.induced_cycles.theta_prism_even_wheel_free_bounded_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X220.even_hole_kt_free_logarithmic_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "even_hole_kt_free_logarithmic_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X220Legacy.even_hole_kt_free_logarithmic_treewidth_statement",
+      "substitutions": {
+        "x27_even_hole_free": "X27Legacy.even_hole_free"
+      },
+      "certificate": "Minor.migration.induced_cycles.even_hole_kt_free_logarithmic_treewidth_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X220.even_hole_diamond_free_bounded_tree_alpha_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "even_hole_diamond_free_bounded_tree_alpha_statement",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X220Legacy.even_hole_diamond_free_bounded_tree_alpha_statement",
+      "substitutions": {
+        "x27_even_hole_free": "X27Legacy.even_hole_free"
+      },
+      "certificate": "Minor.migration.induced_cycles.even_hole_diamond_free_bounded_tree_alpha_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/proper_colouring.v#X3Legacy.rainbow_consecutive_vertices_in_hole_statement": "C5 (proper-colouring) snapshot: that family froze only its own helpers in this object (rainbow_consecutive_vertices_in_hole_statement), so this copy still calls the live x3_rainbow_hole_run, which B23 redirects to GTBase.induced_cycles (a conversion for D2str's raw induced cycle, an explicit iff for X3's and X27's holes and X91's and XE1's genuine induced cycles). Kept byte-exact. Its certificate stays true unchanged: the live name occurs on both of its sides. The complete rows are the reused Originals listed in this spec and B23's per-row copies.",
+    "graph-theory-misc/theories/migration/consecutive_in_path.v#X91Legacy.avoidable_path": "B3 (consecutive-in-path) snapshot: that family froze only its own helpers in this object (avoidable_path), so this copy still calls the live x91_induced_cycle, which B23 redirects to GTBase.induced_cycles (a conversion for D2str's raw induced cycle, an explicit iff for X3's and X27's holes and X91's and XE1's genuine induced cycles). Kept byte-exact. Its certificate stays true unchanged: the live name occurs on both of its sides. The complete rows are the reused Originals listed in this spec and B23's per-row copies.",
+    "graph-theory-misc/theories/migration/induced_paths.v#X91Legacy.x91_avoidable_path": "B22 (induced-path) snapshot: that family froze only its own helpers in this object (x91_avoidable_path), so this copy still calls the live x91_induced_cycle, which B23 redirects to GTBase.induced_cycles (a conversion for D2str's raw induced cycle, an explicit iff for X3's and X27's holes and X91's and XE1's genuine induced cycles). Kept byte-exact. Its certificate stays true unchanged: the live name occurs on both of its sides. B22 deliberately froze only its induced-path helpers and chains; the complete row with both the paths and the cycle frozen is B4's X91Original, reused and certified in this spec. The complete rows are the reused Originals listed in this spec and B23's per-row copies.",
+    "minor-theory/theories/migration/bag_decompositions.v#Legacy.bounded_degree_even_hole_free_bounded_treewidth_statement": "C13 (bag-decomposition) snapshot: that family froze only its own helpers in this object (bounded_degree_even_hole_free_bounded_treewidth_statement), so this copy still calls the live x27_even_hole_free, which B23 redirects to GTBase.induced_cycles (a conversion for D2str's raw induced cycle, an explicit iff for X3's and X27's holes and X91's and XE1's genuine induced cycles). Kept byte-exact. Its certificate stays true unchanged: the live name occurs on both of its sides. The complete rows are the reused Originals listed in this spec and B23's per-row copies.",
+    "minor-theory/theories/migration/bag_decompositions.v#Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement": "C13 (bag-decomposition) snapshot: that family froze only its own helpers in this object (even_hole_k4_diamond_free_bounded_treewidth_statement), so this copy still calls the live x27_even_hole_free, which B23 redirects to GTBase.induced_cycles (a conversion for D2str's raw induced cycle, an explicit iff for X3's and X27's holes and X91's and XE1's genuine induced cycles). Kept byte-exact. Its certificate stays true unchanged: the live name occurs on both of its sides. The complete rows are the reused Originals listed in this spec and B23's per-row copies.",
+    "minor-theory/theories/migration/induced_free.v#X42Legacy.statement": "A1 (induced-free) snapshot: that family froze only its own helpers in this object (statement), so this copy still calls the live x27_even_hole_free, which B23 redirects to GTBase.induced_cycles (a conversion for D2str's raw induced cycle, an explicit iff for X3's and X27's holes and X91's and XE1's genuine induced cycles). Kept byte-exact. Its certificate stays true unchanged: the live name occurs on both of its sides. The complete rows are the reused Originals listed in this spec and B23's per-row copies.",
+    "minor-theory/theories/migration/model_support.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement": "C19 (model-support) snapshot: that family froze only its own helpers in this object (theta_prism_even_wheel_free_bounded_treewidth_statement), so this copy still calls the live x220_even_wheel_free, which B23 redirects to GTBase.induced_cycles (a conversion for D2str's raw induced cycle, an explicit iff for X3's and X27's holes and X91's and XE1's genuine induced cycles). Kept byte-exact. Its certificate stays true unchanged: the live name occurs on both of its sides. The complete rows are the reused Originals listed in this spec and B23's per-row copies."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/X160.v",
+      "name": "x3_constricting",
+      "note": "X160's row density_zero_constricting_set_statement uses X3's chain x3_constricting through the X3 import; the row is frozen complete in this family's Chromatic certificate (X160Legacy, over the frozen X3 chain) and B4's complete X160Legacy row is reused; the file is unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2str.v",
+      "name": "induced_cycle",
+      "note": "D2str's grounding lemmas induced_cycle_nil (the empty list is an induced cycle) and induced_cycle_ucycle use the live alias; the raw chordless_ucycle view keeps sizes 0 and 2, so both recompile with unchanged proofs and theorem types (no size guard is added)."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2str.v",
+      "name": "peripheral_cycle",
+      "note": "D2str's grounding lemmas peripheral_cycle_C0_nil (the empty cycle of cycle_graph 0 is peripheral) and peripheral_cycle_induced recompile unchanged over the live chain, which is frozen in this family's Extremal certificate."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_D2str.v",
+      "name": "geodesic_cycles_and_tuttes_theorem_statement",
+      "note": "D2str's implication file only checks the row's type and records a refuted-direction edge; unchanged and recompiled. The row is frozen complete in this family's Extremal certificate and B4's D2strLegacy row is reused."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_U13.v",
+      "name": "induced_cycle",
+      "note": "Not a consumer of D2str's helper: grounding_U13's induced_cycle_inj and has_induced_cycle_0 concern U13's own ordinal-map induced_cycle (GTMisc.conjectures.U13.induced_cycle), the deferred-excluded member of this family's normalized name. Unchanged and not redirected."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x27_even_hole_free",
+      "note": "X220's rows even_hole_kt_free_logarithmic_treewidth_statement and even_hole_diamond_free_bounded_tree_alpha_statement use X27's chain through the import; both are frozen complete in this family's Minor certificate and B4's X220Legacy rows are reused; the file is unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x27_hole",
+      "note": "X220's chain x220_even_wheel_free (spokes of a vertex outside a hole) uses X27's hole through the import; the chain and the theta/prism row are frozen in this family's Minor certificate and C19's X220Original is reused; the file is unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X42.v",
+      "name": "x27_even_hole_free",
+      "note": "X42's row even_hole_k4_diamond_free_bounded_treewidth_statement uses X27's chain through the X27 import; the row is frozen complete in this family's Minor certificate (X42Legacy) and C13's complete X42Original is reused; the file is unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "even_hole_diamond_free_bounded_tree_alpha_statement",
+      "note": "grounding_X220 only prints the row's assumptions; unchanged. The row is frozen complete in this family's Minor certificate."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "even_hole_kt_free_logarithmic_treewidth_statement",
+      "note": "grounding_X220 only prints the row's assumptions; unchanged. The row is frozen complete in this family's Minor certificate."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "note": "grounding_X220 only prints the row's assumptions; unchanged. The row is frozen complete in this family's Minor certificate."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_even_wheel_free",
+      "note": "grounding_X220's X220_cstar_nonvacuous uses the live even-wheel chain through K0_no_hole; unchanged proof and theorem type, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x27_even_hole_free",
+      "note": "grounding_X220's K0_even_hole_free, X220_even_hole_kt_nonvacuous and X220_tree_alpha_nonvacuous use the live chain through K0_no_hole; unchanged proofs and theorem types, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x27_hole",
+      "note": "grounding_X220's K0_no_hole destructs the live hole (ucycle, size, chord clause), the same nesting as before; it recompiles with an unchanged proof and theorem type."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "even_hole_kt_free_logarithmic_treewidth_statement",
+      "note": "e052_modulo_wall targets the live row (candidate edge, status unchanged); unchanged proof and theorem type, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "x27_even_hole_free",
+      "note": "implications_X220's even_hole_free_no_KB and even_hole_free_no_copy_of take the live chain as hypothesis; unchanged proofs and theorem types, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "x27_hole",
+      "note": "implications_X220's even_hole_free_no_copy_of and e052_modulo_wall (its two wall hypotheses) state even holes with the live x27_hole; they use hole_containments.isubgraph_hole, whose type is unchanged; unchanged proofs and theorem types, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "even_hole_diamond_free_bounded_tree_alpha_statement",
+      "note": "The proved e050 edge (tree-alpha to treewidth, through Ramsey and the F1 bridge) takes the live X220 row as source; unchanged proof and theorem type, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "even_hole_k4_diamond_free_bounded_treewidth_statement",
+      "note": "The proved e050 edge and e051_modulo_even_wheel target the live X42 row (the verified edge and the candidate edge keep their statuses); unchanged proofs and theorem types, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "note": "e051_modulo_even_wheel takes the live row as source (candidate edge, status unchanged); unchanged proof and theorem type, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "x220_even_wheel_free",
+      "note": "e051_modulo_even_wheel keeps its single pinned hypothesis on the live even-wheel chain; unchanged proof and theorem type, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "x27_even_hole_free",
+      "note": "implications_X42's even_hole_free_no_C4, even_hole_free_no_theta, even_hole_free_no_prism and e051_modulo_even_wheel take the live chain as hypothesis and use hole_containments' C4_even_hole, subdiv_KB23_even_hole, prism_even_hole and isubgraph_hole, whose types are unchanged; unchanged proofs and theorem types, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/foundations/hole_containments.v",
+      "name": "x27_hole",
+      "note": "Minor's hole containments state their results with the live x27_hole, now the canonical hole: four_cycle_hole, isubgraph_hole and fch_hole received proof-only adaptations (the canonical chord clause has no distinctness premise; cyclic_chordless_edge_neq restores it, and the unused distinctness step of isubgraph_hole is dropped); KB_even_hole, C4_even_hole, fch_even_hole, subdiv_KB23_even_hole and prism_even_hole, every subdivision / path lemma and the C18 / C19 / B22 witness APIs are unchanged; every theorem type is unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.U13.induced_cycle",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "induced_cycle",
+      "note": "injective ordinal map 'I_k -> G whose edges are exactly the modular successor pairs (k = 0 vacuous, k = 1 impossible, k = 2 an edge); same normalized name, enrolled as a deferred-excluded class, unchanged and not redirected"
+    },
+    {
+      "qualified": "GTMisc.conjectures.U13.has_induced_cycle",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "has_induced_cycle",
+      "note": "existential closure of U13's ordinal-map induced cycle; untouched"
+    },
+    {
+      "qualified": "Extremal.conjectures.X49.x49_has_induced_cycle",
+      "path": "extremal-graph-theory/theories/conjectures/X49.v",
+      "name": "x49_has_induced_cycle",
+      "note": "an n-vertex set inducing a copy of cycle_graph n (induced isomorphism); a different contract; untouched"
+    },
+    {
+      "qualified": "Extremal.conjectures.X60.x60_has_induced_cycle",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "x60_has_induced_cycle",
+      "note": "an n-vertex set inducing a copy of cycle_graph n (induced isomorphism); a different contract; untouched"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X29.x29_has_induced_cycle",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "x29_has_induced_cycle",
+      "note": "an n-vertex set inducing a copy of cycle_graph n (induced isomorphism); a different contract; untouched"
+    },
+    {
+      "qualified": "Extremal.conjectures.X115.x115_odd_induced_cycle",
+      "path": "extremal-graph-theory/theories/conjectures/X115.v",
+      "name": "x115_odd_induced_cycle",
+      "note": "a Boolean vertex-set predicate (at least three, odd, internally two-regular, connected) used for counting; untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X161.x161_has_four_hole",
+      "path": "chromatic-theory/theories/conjectures/X161.v",
+      "name": "x161_has_four_hole",
+      "note": "a bare four-vertex ucycle; chordless only under its row's triangle-free hypothesis; untouched"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X169.x169_chordal",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_chordal",
+      "note": "chordality through a clique-bag tree decomposition; not identified with the absence of long holes; untouched"
+    }
+  ]
+}

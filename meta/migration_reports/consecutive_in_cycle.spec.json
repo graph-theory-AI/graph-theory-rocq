@@ -845,7 +845,12 @@
     "minor-theory/theories/migration/bag_decompositions.v#Legacy.bounded_degree_even_hole_free_bounded_treewidth_statement": "C13 immediate bag-family snapshot intentionally retains this earlier family vocabulary; C13 supplies the complete combined Original separately. The earlier certificate bodies and frozen arrays are unchanged.",
     "minor-theory/theories/migration/bag_decompositions.v#Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement": "C13 immediate bag-family snapshot intentionally retains this earlier family vocabulary; C13 supplies the complete combined Original separately. The earlier certificate bodies and frozen arrays are unchanged.",
     "minor-theory/theories/migration/model_support.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement": "C19 current-baseline snapshot freezes theta and prism over the raw support but retains this family's already-migrated live x220_even_wheel_free. It stays explicit; C19 X220Original.theta_prism_even_wheel_free_bounded_treewidth_statement uses this family's frozen X220Legacy.even_wheel_free, certified by its complete row iff.",
-    "graph-theory-misc/theories/migration/induced_paths.v#X91Legacy.x91_avoidable_path": "B22 per-row snapshot: family induced-path (B22) froze only its induced-path helpers and chains in this object (x91_avoidable_path), so this copy still calls the live x91_induced_cycle, which this family's alias now redirects to its canonical. Kept as B22's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B22's spec."
+    "graph-theory-misc/theories/migration/induced_paths.v#X91Legacy.x91_avoidable_path": "B22 per-row snapshot: family induced-path (B22) froze only its induced-path helpers and chains in this object (x91_avoidable_path), so this copy still calls the live x91_induced_cycle, which this family's alias now redirects to its canonical. Kept as B22's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B22's spec.",
+    "chromatic-theory/theories/migration/induced_cycles.v#Legacy.x3_hole": "B23 per-row snapshot: family induced-cycle (B23) froze only its induced-cycle / hole helpers and chains in this object (x3_hole), so this copy still calls the live x3_consecutive_in_cycle, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B23's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B23's spec.",
+    "extremal-graph-theory/theories/migration/induced_cycles.v#Legacy.induced_cycle": "B23 per-row snapshot: family induced-cycle (B23) froze only its induced-cycle / hole helpers and chains in this object (induced_cycle), so this copy still calls the live cyc_edge, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B23's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B23's spec.",
+    "extremal-graph-theory/theories/migration/induced_cycles.v#D2strLegacy.geodesic_cycles_and_tuttes_theorem_statement": "B23 per-row snapshot: family induced-cycle (B23) froze only its induced-cycle / hole helpers and chains in this object (geodesic_cycles_and_tuttes_theorem_statement), so this copy still calls the live geodesic_cycle, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B23's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B23's spec.",
+    "graph-theory-misc/theories/migration/induced_cycles.v#Legacy.x91_induced_cycle": "B23 per-row snapshot: family induced-cycle (B23) froze only its induced-cycle / hole helpers and chains in this object (x91_induced_cycle), so this copy still calls the live x91_consecutive_in_cycle, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B23's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B23's spec.",
+    "minor-theory/theories/migration/induced_cycles.v#Legacy.x27_hole": "B23 per-row snapshot: family induced-cycle (B23) froze only its induced-cycle / hole helpers and chains in this object (x27_hole), so this copy still calls the live x27_consecutive_in_cycle, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B23's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B23's spec."
   },
   "cross_module_consumers": [
     {
@@ -1005,12 +1010,6 @@
     }
   ],
   "distinct_variants": [
-    {
-      "qualified": "Packing.conjectures.XE1.xe1_induced_cycle",
-      "path": "packing-theory/theories/conjectures/XE1.v",
-      "name": "xe1_induced_cycle",
-      "note": "higher predicate embedding a cyclic-adjacency test in an induced-cycle definition; not a standalone alias; separate later review, untouched"
-    },
     {
       "qualified": "Cycle.conjectures.U6.cyc_pairs",
       "path": "cycle-theory/theories/conjectures/U6.v",
