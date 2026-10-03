@@ -31,6 +31,7 @@ From GraphTheory Require Import preliminaries bij.
 (* [coloring] is IMPORTED only to state [chi_diso]; [base.v] exports it. *)
 From GraphTheory Require Import coloring.
 From GTBase Require monochromatic.
+From GTBase Require incidence.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -153,6 +154,12 @@ Definition nonedges_between (G : sgraph) (A B : {set G}) : nat :=
     graph-free [GTBase.monochromatic.non_monochromatic_count]. *)
 Definition cut_size (G : sgraph) (A : {set G}) : nat :=
   #|[set e in E(G) | ~~ [disjoint e & A] && ~~ (e \subset A)]|.
+
+(** ** Incidence degree
+
+    The number of members of a SUPPLIED finite family containing a vertex is the graph-free
+    [GTBase.incidence.incidence_degree] (exported by [base.v]); the family need not consist of
+    edges.  At the edge set [E(G)] it is the graph degree [#|N(v)|] ([incidence_degree_edges]). *)
 
 (** ** Matchings *)
 
@@ -877,6 +884,26 @@ rewrite edges_between_cross //; apply: eq_card => e; rewrite !inE; congr (_ && _
 by rewrite !setI_eq0 [[disjoint e & ~: A]]disjoints_subset setCK.
 Qed.
 
+(** *** incidence degree *)
+
+(** At the edge set, the incidence degree is the graph degree: the edges at [v] are the
+    [[set v; w]] for the neighbours [w] of [v]. *)
+Lemma incidence_degree_edges (G : sgraph) (v : G) :
+  GTBase.incidence.incidence_degree E(G) v = #|N(v)|.
+Proof.
+have inj : {in N(v) &, injective (fun w : G => [set v; w])}.
+  move=> w1 w2 vw1 _ /= h.
+  have : w1 \in [set v; w2] by rewrite -h set22.
+  rewrite !inE => /orP[/eqP w1v|/eqP //].
+  by move: vw1; rewrite in_opn w1v sg_irrefl.
+rewrite /GTBase.incidence.incidence_degree -(card_in_imset inj); apply: eq_card => e.
+rewrite !inE; apply/andP/imsetP => [[/edgesP[x [y [-> xy]]]]|[w vw ->]].
+- rewrite !inE => /orP[/eqP vx|/eqP vy].
+  + by exists y; rewrite vx // in_opn.
+  + by exists x; [rewrite in_opn vy sgP | rewrite vy setUC].
+- by rewrite in_edges -in_opn vw !inE eqxx.
+Qed.
+
 (** *** subgraph containment *)
 
 (** Every graph contains itself (non-vacuity). *)
@@ -1124,7 +1151,7 @@ Proof. by move=> ac x; apply/negP => xx; move: (ac x x xx); rewrite connect0. Qe
     [edges_between_K2], [edges_between_cross], [nonedges_between_compl],
     [nonedges_between_compl_overlap],
     [cut_sizeC], [cut_size_set0], [cut_size_setT], [cut_size_non_monochromatic],
-    [cut_size_edges_between],
+    [cut_size_edges_between], [incidence_degree_edges],
     [induced_free_inhabited], [induced_free_diso], [induced_free_card],
     [not_induced_free_self], [not_induced_free_pattern0], [induced_free_host0],
     [not_induced_free_clique], [induced_free_K1], [induced_free_Kn],

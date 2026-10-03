@@ -13,14 +13,14 @@ Definition x38_edge_set (G : sgraph) : {set {set G}} :=
 
 Definition x38_subgraph_degree
     (G : sgraph) (F : {set {set G}}) (v : G) : nat :=
-  #|[set e in F | v \in e]|.
+  incidence_degree F v.
 
 Definition x38_degree_class_size
     (G : sgraph) (F : {set {set G}}) (k : nat) : nat :=
   #|[set v : G | x38_subgraph_degree F v == k]|.
 
 Definition x38_min_degree_at_least (G : sgraph) (delta : nat) : Prop :=
-  forall v : G, delta <= #|N(v)|.
+  min_degree_at_least G delta.
 
 (** ** X38 statements ******************************************************)
 

@@ -8,6 +8,7 @@ all: $(PACKAGES)
 chromatic-theory hamiltonicity-theory homomorphism-theory cycle-theory minor-theory packing-theory reconstruction-theory hypergraph-theory topological-graph-theory graph-theory-misc spectral-graph-theory extremal-graph-theory infinite-graph-theory: base   # area packages depend on base (G3-core)
 
 hamiltonicity-theory packing-theory: topological-graph-theory   # Wave-1: use the embedding foundation
+classical-lemmas: base   # A10: konig/line_colouring's edeg is GTBase.incidence.incidence_degree
 packing-theory: classical-lemmas   # X15: Alon's splitting necklace theorem
 graph-theory-misc: topological-graph-theory minor-theory   # X80/X102 reuse embedding + tree-decomposition foundations
 

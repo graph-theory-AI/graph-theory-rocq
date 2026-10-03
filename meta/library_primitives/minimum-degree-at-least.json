@@ -2,34 +2,164 @@
   "schema_version": 1,
   "family": "minimum-degree-at-least",
   "primitive": {
-    "canonical_name": null,
+    "canonical_name": "GTBase.base.min_degree_at_least",
     "owner": "base",
-    "status": "proposed",
-    "fidelity": "PENDING",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
     "normalized_names": [
-      "min_degree_at_least"
+      "min_degree_at_least",
+      "induced_min_degree_at_least",
+      "no_isolated_vertices",
+      "min_degree_geq"
     ],
     "source_definitions": [
       "Chromatic.conjectures.X203.x203_min_degree_at_least",
       "Cycle.conjectures.XE2.xe2_min_degree_at_least",
+      "Extremal.conjectures.X13.x13_induced_min_degree_at_least",
       "Extremal.conjectures.X13.x13_min_degree_at_least",
       "Extremal.conjectures.X30.x30_min_degree_at_least",
       "Extremal.conjectures.XE1.xe1_min_degree_at_least",
+      "Extremal.conjectures.XE1.xe1_no_isolated_vertices",
       "GTMisc.conjectures.X38.x38_min_degree_at_least",
       "GTMisc.conjectures.X74.x74_min_degree_at_least",
+      "Hamilton.conjectures.X211.x211_min_degree_geq",
       "Hom.conjectures.X135.x135_min_degree_at_least",
       "Packing.conjectures.X47.x47_min_degree_at_least"
     ],
-    "consumers_remaining": 10,
-    "compatibility_theorems": [],
+    "consumers_remaining": 16,
+    "relation": "universal lower bound: ten local copies of forall v : G, d <= #|N(v)| convert to GTBase.base.min_degree_at_least G d; X13's induced adapter is min_degree_at_least (induced S) d on the supplied S (subtype kept); XE1's no-isolated-vertices forall v, 0 < #|N(v)| is min_degree_at_least G 1. Not an attained minimum: K0 and empty induced S satisfy every bound; no nonemptiness is added.",
+    "semantic_classes": {
+      "universal-lower-bound": {
+        "members": [
+          "Chromatic.conjectures.X203.x203_min_degree_at_least",
+          "Cycle.conjectures.XE2.xe2_min_degree_at_least",
+          "Extremal.conjectures.X13.x13_min_degree_at_least",
+          "Extremal.conjectures.X30.x30_min_degree_at_least",
+          "Extremal.conjectures.XE1.xe1_min_degree_at_least",
+          "GTMisc.conjectures.X38.x38_min_degree_at_least",
+          "GTMisc.conjectures.X74.x74_min_degree_at_least",
+          "Hamilton.conjectures.X211.x211_min_degree_geq",
+          "Hom.conjectures.X135.x135_min_degree_at_least",
+          "Packing.conjectures.X47.x47_min_degree_at_least"
+        ],
+        "count": 10,
+        "verdict": "equivalent",
+        "note": "forall v : G, d <= #|N(v)| (binder names differ); conversion; canonical GTBase.base.min_degree_at_least",
+        "certificates": [
+          "Chromatic.migration.min_degree_at_least.x203_min_degree_at_least_compat",
+          "Cycle.migration.min_degree_at_least.xe2_min_degree_at_least_compat",
+          "Extremal.migration.min_degree_at_least.x13_min_degree_at_least_compat",
+          "Extremal.migration.min_degree_at_least.x30_min_degree_at_least_compat",
+          "Extremal.migration.min_degree_at_least.xe1_min_degree_at_least_compat",
+          "GTMisc.migration.min_degree_at_least.x38_min_degree_at_least_compat",
+          "GTMisc.migration.min_degree_at_least.x74_min_degree_at_least_compat",
+          "Hamilton.migration.min_degree_at_least.x211_min_degree_geq_compat",
+          "Hom.migration.min_degree_at_least.x135_min_degree_at_least_compat",
+          "Packing.migration.min_degree_at_least.x47_min_degree_at_least_compat"
+        ]
+      },
+      "induced-adapter": {
+        "members": [
+          "Extremal.conjectures.X13.x13_induced_min_degree_at_least"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Extremal.migration.min_degree_at_least.x13_induced_min_degree_at_least_compat",
+        "note": "forall v : induced S, d <= #|N(v)| is min_degree_at_least (induced S) d on the supplied S; conversion; the bound is not inherited from G"
+      },
+      "no-isolated-at-one": {
+        "members": [
+          "Extremal.conjectures.XE1.xe1_no_isolated_vertices"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Extremal.migration.min_degree_at_least.xe1_no_isolated_vertices_compat",
+        "note": "forall v, 0 < #|N(v)| is min_degree_at_least G 1; conversion; GTBase.base.min_degree_at_least1P gives the neighbour form"
+      }
+    },
+    "distinct_variants": {
+      "GTMisc.conjectures.X14.x14_subcubic": "pointwise upper bound <= 3, not a lower bound",
+      "GTMisc.conjectures.X114.x114_subcubic": "Delta <= 3, an upper bound",
+      "GTMisc.conjectures.D7.mindeg_cn": "scaled rational-style bound (the denominator may be zero)",
+      "Extremal.conjectures.X30.x30_induced_min_degree_log_at_least": "scaled logarithmic bound on an induced subgraph (cden may be zero)",
+      "Digraph.conjectures.X2.sg_degeneracy_at_least": "existential nonempty-subgraph degeneracy, not a universal bound",
+      "Hypergraph.conjectures.X119.x119_no_isolated": "hypergraph vertex coverage by a supplied family",
+      "Cycle.conjectures.XE2.xe2_proper_induced_subgraphs_min_degree_le2": "an upper bound on the minimum degree of proper induced subgraphs"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.min_degree_at_least.x203_min_degree_at_least_compat",
+      "Chromatic.migration.min_degree_at_least.separation_choosability_min_degree_unbounded_statement_compat",
+      "Cycle.migration.min_degree_at_least.xe2_min_degree_at_least_compat",
+      "Cycle.migration.min_degree_at_least.erdos_752_statement_compat",
+      "Cycle.migration.min_degree_at_least.erdos_752_statement_original_compat",
+      "Extremal.migration.min_degree_at_least.x13_min_degree_at_least_compat",
+      "Extremal.migration.min_degree_at_least.x13_induced_min_degree_at_least_compat",
+      "Extremal.migration.min_degree_at_least.x30_min_degree_at_least_compat",
+      "Extremal.migration.min_degree_at_least.xe1_min_degree_at_least_compat",
+      "Extremal.migration.min_degree_at_least.xe1_no_isolated_vertices_compat",
+      "Extremal.migration.min_degree_at_least.x13_bipartite_induced_min_degree_at_least_compat",
+      "Extremal.migration.min_degree_at_least.large_girth_min_degree_bipartite_induced_statement_compat",
+      "Extremal.migration.min_degree_at_least.min_degree_forces_large_clique_or_bipartite_induced_statement_compat",
+      "Extremal.migration.min_degree_at_least.triangle_free_min_degree_log_bipartite_induced_statement_compat",
+      "Extremal.migration.min_degree_at_least.xe1_c4_forcing_min_degree_compat",
+      "Extremal.migration.min_degree_at_least.erdos_85_statement_compat",
+      "Extremal.migration.min_degree_at_least.erdos_545_statement_compat",
+      "Extremal.migration.min_degree_at_least.erdos_566_statement_compat",
+      "Extremal.migration.min_degree_at_least.erdos_567_statement_compat",
+      "Extremal.migration.min_degree_at_least.erdos_568_statement_compat",
+      "Extremal.migration.min_degree_at_least.erdos_570_statement_compat",
+      "Extremal.migration.min_degree_at_least.c4_forcing_min_degree_original_compat",
+      "Extremal.migration.min_degree_at_least.erdos_85_statement_original_compat",
+      "Extremal.migration.min_degree_at_least.erdos_545_statement_original_compat",
+      "Extremal.migration.min_degree_at_least.erdos_566_statement_original_compat",
+      "Extremal.migration.min_degree_at_least.erdos_567_statement_original_compat",
+      "Extremal.migration.min_degree_at_least.erdos_568_statement_original_compat",
+      "Extremal.migration.min_degree_at_least.erdos_570_statement_original_compat",
+      "GTMisc.migration.min_degree_at_least.x38_min_degree_at_least_compat",
+      "GTMisc.migration.min_degree_at_least.x74_min_degree_at_least_compat",
+      "GTMisc.migration.min_degree_at_least.min_degree_spanning_subgraph_small_degree_multiplicity_statement_compat",
+      "GTMisc.migration.min_degree_at_least.induced_linear_forest_caro_wei_bound_statement_compat",
+      "GTMisc.migration.min_degree_at_least.min_degree_spanning_subgraph_small_degree_multiplicity_statement_original_compat",
+      "Hamilton.migration.min_degree_at_least.x211_min_degree_geq_compat",
+      "Hamilton.migration.min_degree_at_least.hypohamiltonian_minimum_degree_four_statement_compat",
+      "Hom.migration.min_degree_at_least.x135_min_degree_at_least_compat",
+      "Hom.migration.min_degree_at_least.engbers_homomorphism_count_maximisation_statement_compat",
+      "Packing.migration.min_degree_at_least.x47_min_degree_at_least_compat",
+      "Packing.migration.min_degree_at_least.tree_decomposition_delta_edge_connected_statement_compat",
+      "Packing.migration.min_degree_at_least.tree_decomposition_leaf_edge_connected_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.base.min_degree_at_least0",
+      "GTBase.base.min_degree_at_least_le",
+      "GTBase.base.regular_min_degree_at_least",
+      "GTBase.base.min_degree_at_least1P",
+      "GTBase.base.min_degree_at_least_K0",
+      "GTBase.base.min_degree_at_least_Kn",
+      "GTBase.base.min_degree_at_least_Knm",
+      "GTBase.base.min_degree_at_least_kconnected",
+      "GTBase.base.min_degree_at_least_diso",
+      "GTBase.base.min_degree_at_least_Delta",
+      "GTBase.base.min_degree_at_least_lt_card"
+    ],
+    "public_client": "base/theories/examples/min_degree_at_least.v",
+    "legacy_baseline": "9abf440da80115caeffd299077976b48f4e07d74",
+    "migration_report": "meta/migration_reports/min_degree_at_least.md",
+    "migration_spec": "meta/migration_reports/min_degree_at_least.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A11.md",
+    "foundation_fidelity": "meta/foundation_fidelity/minimum-degree-at-least.json",
     "upstream_audit": {
       "searched_modules": [
         "GraphTheory.sgraph",
-        "GraphTheory.connectivity"
+        "GraphTheory.connectivity",
+        "GraphTheory.digraph",
+        "GTBase.base",
+        "GTBase.common"
       ],
-      "result": "no-direct-candidate",
-      "note": "No reusable minimum-degree-at-least declaration was found. A GTBase boolean predicate and reflection lemma are the likely M2 target after checking all local empty-graph conventions.",
-      "audited_at": "2026-07-22"
-    }
+      "result": "new-local-generic",
+      "candidate": "GTBase.base.min_degree_at_least beside Delta/regular, packaging the upstream open-neighbourhood cardinality #|N(v)|",
+      "note": "Pinned coq-graph-theory 0.9.7 has no universal minimum-degree predicate; it provides deg_Kn, deg_Knm (complete and complete bipartite degrees), kconnected_degree and edge_diso, which the API reuses. Delta is a maximum with value 0 on K0 and regular is pointwise equality; neither is a lower bound. No incidence, arc-end or loopless-multigraph claim is made. Evidence: coordination/evidence/A11-degree-bounds-discovery/upstream-degree-audit.txt and upstream-degree-bridges.txt.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": null
   }
 }

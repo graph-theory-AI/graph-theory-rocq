@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "family": "incidence-degree",
+  "modules": {
+    "GTBase.incidence": {
+      "path": "base/theories/incidence.v",
+      "overrides": {
+        "incidence_degree": {
+          "verdict": "FAITHFUL",
+          "note": "The number of members of an arbitrary finite family F : {set {set T}} containing v, on any finType; no edge, uniformity or nonemptiness premise. The empty family and empty members count nothing, a singleton member counts once at its vertex, the count is at most #|F|, monotone in F and subtractive on subfamilies; restricted to the members inside W it is zero outside W and the full count for W = setT. At E(G) it is #|N(v)| (GTBase.common.incidence_degree_edges)."
+        }
+      },
+      "machine_evidence": [
+        "incidence_degree_le",
+        "incidence_degree_set0",
+        "incidence_degree_set1",
+        "incidence_degree_gt0",
+        "incidence_degree_subset",
+        "incidence_degree_setD",
+        "incidence_degree_inside_out",
+        "incidence_degree_insideT"
+      ]
+    }
+  }
+}

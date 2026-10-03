@@ -77,8 +77,7 @@ Definition xe2_cube_square_floor (n a : nat) : Prop :=
   a ^ 3 <= n ^ 2 /\ forall b : nat, b ^ 3 <= n ^ 2 -> b <= a.
 
 Definition xe2_min_degree (G : sgraph) (d : nat) : Prop :=
-  (exists v : G, #|N(v)| = d) /\
-  forall v : G, d <= #|N(v)|.
+  min_degree G d.
 
 Definition xe2_cycle (G : sgraph) (c : seq G) : Prop :=
   seq_cycle (--) c.

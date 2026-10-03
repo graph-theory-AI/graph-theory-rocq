@@ -114,7 +114,7 @@ Definition spanning_tree (G : mgraph) (T : {set edge G}) : Prop :=
 (** Cubic: loopless and 3-regular ([mdeg] counts arc ends; [loopless] makes
     that agree with the incidence count, [connectivity.subdeg_loopless]). *)
 Definition cubic (G : mgraph) : Prop :=
-  loopless G /\ forall v : G, mdeg v = 3.
+  loopless_cubic G.
 
 (** Simple multigraph: loopless and at most one edge between any pair OF
     VERTICES, counted UNDIRECTEDLY.  [mgraph.edges x y] only counts the arcs

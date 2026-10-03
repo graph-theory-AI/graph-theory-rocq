@@ -9,7 +9,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X74 vocabulary ************************************************)
 
 Definition x74_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
-  forall v : G, d <= #|N(v)|.
+  min_degree_at_least G d.
 
 Definition x74_induced_linear_forest (G : sgraph) (S : {set G}) : Prop :=
   is_forest [set: induced S] /\

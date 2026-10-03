@@ -13,7 +13,7 @@ Definition x37_edge_set (G : sgraph) : {set {set G}} :=
 
 Definition x37_subgraph_degree
     (G : sgraph) (F : {set {set G}}) (v : G) : nat :=
-  #|[set e in F | v \in e]|.
+  incidence_degree F v.
 
 Definition x37_degree_class_size
     (G : sgraph) (F : {set {set G}}) (k : nat) : nat :=
