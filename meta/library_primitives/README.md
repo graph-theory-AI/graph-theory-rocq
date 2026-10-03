@@ -45,8 +45,10 @@ The descriptor pins the original regular Git blob and parsed declaration. The
 current declaration may become a compatibility alias; it must still exist with
 the same name, source path and build-listed project namespace. Both original
 and current ownership are checked independently. Supported public paths are
-flat `base/theories/*.v` and area `theories/foundations/**/*.v`; conjectures,
-migrations, probes and path aliases cannot use this mechanism. Definitions
+flat `base/theories/*.v`, area `theories/foundations/**/*.v`, and build-listed
+`classical-lemmas/theories/**/*.v` library modules. Classical conjecture,
+migration and example directories, probes and path aliases cannot use this
+mechanism. Definitions
 inside Sections are supported; local or nested-module declarations, absolute
 project load paths and hidden ownership overrides fail closed. Every source has
 one family owner.
@@ -60,12 +62,20 @@ counts. Missing conjecture inventory entries never fall back to descriptors.
 The report uses ordinary `kind: source` objects, whose original commit/path must
 match the descriptor. Frozen text, aliases, certificate registration, exact
 statement iff types, assumptions and corpus status checks remain unchanged.
-Independent baseline reachability includes public base/foundation intermediates;
+Independent baseline reachability includes public base/foundation intermediates
+and ClassicalLemmas sibling modules;
 omitting a reached corpus statement or an intermediate on its path fails.
 Lexical discovery still requires the usual independent Section/dependency review.
 Record intermediate objects as `kind: chain`, using registered earlier-family
 certificates when reusing an existing freeze. Never refresh a pin to silence a
 failure or label an existing corpus row `non_corpus`.
+
+The registered theorem gate recognizes `ClassicalLemmas` as owned by
+`classical-lemmas`; it forces the same fresh local source closure as other
+packages. Classical source/project changes rebuild that package and its Packing
+consumer, and run the migration and report gates. Any new cross-package import
+must also be declared in `_CoqProject` and the root build dependencies when the
+family introduces it; source enrollment alone does not establish that dependency.
 
 ## Family fidelity fragments
 
