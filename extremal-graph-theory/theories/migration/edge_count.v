@@ -1011,3 +1011,138 @@ split=> h n m G cardG edges.
   by exists x, y, P; do !split=> //;
     [apply/B2.xe2_paths_internally_disjoint_compat | apply/B8.xe2_paths_edge_disjoint_compat].
 Qed.
+
+(** ** The public count [GTBase.finite_graph.fg_edge_count] (fg_edge_count follow-up)
+
+    The public base count is enrolled as a repository source of this family; its frozen copy is
+    [GTBase.migration.edge_count.Legacy.fg_edge_count] (aliased [FG]).  X143, X180 and X207 reach
+    it; their chains and rows are frozen below over that copy, and the complete X180 row composes
+    C1's frozen capacity predicate (C1's [Extremal.migration.matching], aliased [C1], without
+    Import).  Every earlier binding of this file is unchanged. *)
+From GTBase Require migration.edge_count.
+From Extremal.conjectures Require Import X143 X180 X207.
+From Extremal.migration Require matching.
+Module FG := GTBase.migration.edge_count.
+Module C1 := Extremal.migration.matching.
+
+Module X143Legacy.
+
+Definition edge_density_num (G : sgraph) : nat := 2 * FG.Legacy.fg_edge_count G.
+
+Definition forcing_graph (G : sgraph) : Prop :=
+  forall (Gs : nat -> sgraph) (p q : nat),
+    0 < q ->
+    x143_density_converges edge_density_num x143_edge_density_den p q Gs ->
+    x143_density_converges
+      (fun H => x143_hom_count G H)
+      (fun H => #|H| ^ #|G|)
+      (p ^ FG.Legacy.fg_edge_count G) (q ^ FG.Legacy.fg_edge_count G) Gs ->
+    x143_quasirandom_sequence Gs.
+
+Definition skokan_thoma_forcing_graph_characterisation_statement : Prop :=
+  forall A : sgraph,
+    forcing_graph A <-> bipartite A /\ x143_contains_cycle A.
+
+End X143Legacy.
+
+Module X180Legacy.
+
+Definition average_degree_logarithmic (G : sgraph) : Prop :=
+  exists c C : nat,
+    0 < c /\ 0 < C /\
+    c * #|G| * (trunc_log 2 #|G|).+1 <= 2 * FG.Legacy.fg_edge_count G /\
+    2 * FG.Legacy.fg_edge_count G <= C * #|G| * (trunc_log 2 #|G|).+1.
+
+Definition log_degree_multitasker_exists_statement : Prop :=
+  forall n0 : nat,
+    exists G : sgraph,
+      n0 <= #|G| /\
+      average_degree_logarithmic G /\
+      x180_multitasker_capacity_positive G.
+
+End X180Legacy.
+
+Module X207Legacy.
+
+Definition density_at_least (G : sgraph) (a b : nat) : Prop :=
+  a * #|G| * #|G| <= b * (2 * FG.Legacy.fg_edge_count G).
+
+Definition rodl_delta_works (H : sgraph) (d delta_num delta_den : nat) : Prop :=
+  0 < delta_num /\ delta_num <= delta_den /\
+  forall G : sgraph,
+    x207_H_free H G ->
+    exists S : {set G},
+      #|S| * delta_den >= delta_num * #|G| /\
+      (density_at_least (induced S) d 1 \/
+       density_at_least (induced S) (1 - d) 1).
+
+Definition polynomial_rodl_delta (H : sgraph) : Prop :=
+  exists C e : nat,
+    forall d : nat,
+      0 < d ->
+      exists delta_num delta_den : nat,
+        rodl_delta_works H d delta_num delta_den /\
+        delta_den <= C * d ^ e + C.
+
+Definition polynomial_rodl_dependence_statement : Prop :=
+  forall H : sgraph, polynomial_rodl_delta H.
+
+End X207Legacy.
+
+Module X180Original.
+
+Definition log_degree_multitasker_exists_statement : Prop :=
+  forall n0 : nat,
+    exists G : sgraph,
+      n0 <= #|G| /\
+      X180Legacy.average_degree_logarithmic G /\
+      C1.X180Legacy.multitasker_capacity_positive G.
+
+End X180Original.
+
+Lemma x143_edge_density_num_compat (G : sgraph) :
+  @X143Legacy.edge_density_num G = @x143_edge_density_num G.
+Proof. rewrite /X143Legacy.edge_density_num /x143_edge_density_num; setoid_rewrite FG.fg_edge_count_compat; reflexivity. Qed.
+
+Lemma x143_forcing_graph_compat (G : sgraph) :
+  @X143Legacy.forcing_graph G <-> @x143_forcing_graph G.
+Proof. rewrite /X143Legacy.forcing_graph /x143_forcing_graph /x143_density_converges /eventually; cbv beta; setoid_rewrite FG.fg_edge_count_compat; setoid_rewrite x143_edge_density_num_compat; reflexivity. Qed.
+
+Lemma skokan_thoma_forcing_graph_characterisation_statement_compat :
+  X143Legacy.skokan_thoma_forcing_graph_characterisation_statement <-> skokan_thoma_forcing_graph_characterisation_statement.
+Proof. rewrite /X143Legacy.skokan_thoma_forcing_graph_characterisation_statement /skokan_thoma_forcing_graph_characterisation_statement; setoid_rewrite x143_forcing_graph_compat; reflexivity. Qed.
+
+Lemma x180_average_degree_logarithmic_compat (G : sgraph) :
+  @X180Legacy.average_degree_logarithmic G <-> @x180_average_degree_logarithmic G.
+Proof. rewrite /X180Legacy.average_degree_logarithmic /x180_average_degree_logarithmic; setoid_rewrite FG.fg_edge_count_compat; reflexivity. Qed.
+
+Lemma log_degree_multitasker_exists_statement_compat :
+  X180Legacy.log_degree_multitasker_exists_statement <-> log_degree_multitasker_exists_statement.
+Proof. rewrite /X180Legacy.log_degree_multitasker_exists_statement /log_degree_multitasker_exists_statement; setoid_rewrite x180_average_degree_logarithmic_compat; reflexivity. Qed.
+
+Lemma x207_density_at_least_compat (G : sgraph) (a b : nat) :
+  @X207Legacy.density_at_least G a b <-> @x207_density_at_least G a b.
+Proof. rewrite /X207Legacy.density_at_least /x207_density_at_least; setoid_rewrite FG.fg_edge_count_compat; reflexivity. Qed.
+
+Lemma x207_rodl_delta_works_compat (H : sgraph) (d delta_num delta_den : nat) :
+  @X207Legacy.rodl_delta_works H d delta_num delta_den <-> @x207_rodl_delta_works H d delta_num delta_den.
+Proof. rewrite /X207Legacy.rodl_delta_works /x207_rodl_delta_works; setoid_rewrite x207_density_at_least_compat; reflexivity. Qed.
+
+Lemma x207_polynomial_rodl_delta_compat (H : sgraph) :
+  @X207Legacy.polynomial_rodl_delta H <-> @x207_polynomial_rodl_delta H.
+Proof. rewrite /X207Legacy.polynomial_rodl_delta /x207_polynomial_rodl_delta; setoid_rewrite x207_rodl_delta_works_compat; reflexivity. Qed.
+
+Lemma polynomial_rodl_dependence_statement_compat :
+  X207Legacy.polynomial_rodl_dependence_statement <-> polynomial_rodl_dependence_statement.
+Proof. rewrite /X207Legacy.polynomial_rodl_dependence_statement /polynomial_rodl_dependence_statement; setoid_rewrite x207_polynomial_rodl_delta_compat; reflexivity. Qed.
+
+Lemma log_degree_multitasker_exists_statement_original_compat :
+  X180Original.log_degree_multitasker_exists_statement <-> log_degree_multitasker_exists_statement.
+Proof.
+rewrite /X180Original.log_degree_multitasker_exists_statement /log_degree_multitasker_exists_statement.
+split=> h n0; have [G [nG [avg cap]]] := h n0; exists G; split=> //; split.
+- exact/x180_average_degree_logarithmic_compat.
+- exact/C1.x180_multitasker_capacity_positive_compat.
+- exact/x180_average_degree_logarithmic_compat.
+- exact/C1.x180_multitasker_capacity_positive_compat.
+Qed.

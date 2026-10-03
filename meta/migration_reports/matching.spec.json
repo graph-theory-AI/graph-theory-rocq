@@ -376,7 +376,9 @@
       "documented_status": "BLOCKED (per-graph quantification of the capacity ratio and the degree constants, 2026-07-17 audit); preserved exactly"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement": "A7 snapshot: A7 froze this row over its own frozen average-degree chain (and frozen public count fg_edge_count) but kept the live x180_multitasker_capacity_positive of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat, which composes this family's frozen X180Legacy.multitasker_capacity_positive."
+  },
   "cross_module_consumers": [
     {
       "path": "packing-theory/theories/conjectures/X18.v",

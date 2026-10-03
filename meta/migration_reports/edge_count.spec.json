@@ -8,7 +8,8 @@
     "base": "GTBase",
     "chromatic-theory": "Chromatic",
     "cycle-theory": "Cycle",
-    "extremal-graph-theory": "Extremal"
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc"
   },
   "certificate_files": [
     "base/theories/common.v",
@@ -22,7 +23,11 @@
     "extremal-graph-theory/theories/migration/complement.v",
     "extremal-graph-theory/theories/migration/consecutive_in_cycle.v",
     "extremal-graph-theory/theories/migration/bipartition.v",
-    "extremal-graph-theory/theories/migration/path_edges.v"
+    "extremal-graph-theory/theories/migration/path_edges.v",
+    "base/theories/finite_graph.v",
+    "base/theories/migration/edge_count.v",
+    "graph-theory-misc/theories/migration/edge_count.v",
+    "extremal-graph-theory/theories/migration/matching.v"
   ],
   "extra_certificates": [
     "GTBase.common.edge_count_rank",
@@ -30,14 +35,18 @@
     "GTBase.common.edge_count_K0_K1",
     "GTBase.common.edge_count_K2",
     "GTBase.common.edge_count_K3",
-    "GTBase.common.edge_count_diso"
+    "GTBase.common.edge_count_diso",
+    "GTBase.finite_graph.fg_edgesE",
+    "GTBase.finite_graph.card_fg_edges"
   ],
   "summary": [
     "Batch A, family A7 (undirected edge count). Seven count helpers now unfold to `GTBase.common.edge_count G := #|E(G)|`. Chromatic XE1, X76 and X78 counted M1's alias edge sets and D2ram counted `E(G)`, so they convert; X5, X4 and D2tur (through base `oedge`) counted adjacent ordered pairs with `enum_rank p.1 < enum_rank p.2`, which `edge_count_rank` proves equal to the edge count unconditionally (adjacent vertices are distinct and the rank order selects exactly one orientation). Thirty-five statements are affected (X5, D2ram, two D2tur, four X4, X76, X78, X88, X96, eight extremal XE1 and fifteen extremal XE2 rows) through ten intermediate predicates: D2ram's common-graph and D2tur's Turan-number chains, X4's Turan number, five XE1 chains (size Ramsey and its number, every-k-set sparsity, the Turan number of a graph and its minimum over sizes) and two XE2 chains (saturated planar, incident-chord extremal). Helper certificates are nat equalities; chain and statement certificates transport them by setoid rewriting through the unchanged texts.",
     "",
     "History: 34 earlier frozen declarations (A2 #613/#742, B2 #915, A5's XE1/XE2/X78/X96 rows and Turan chains, A6's five Ramsey rows, B4's c5/#567/incident-chord, C7's #1080) still call live A7 names and are documented below. Complete Originals: X76Original and X78Original have pre-M1 counts (bodies at 061154c over M1's frozen comprehension; X78 also with A5's frozen subgraph helper), but their rows keep the live M1 aliases through the unmigrated cut sizes (the planned A9 family). X4Original (B4), X96Original (A5), XE1Original (two Turan chains and six rows, with A5/A6/B4) and XE2Original (the incident-chord chain and ten rows, with A2/B2/A5/A6/B4/C7) are the 9e03072 texts. #567 keeps the live x4_edge_set through B4's frozen h5_graph, and #613/#742 through A2's frozen predicates. The other 15 Original rows and the five Original chains reach no M1 alias (Print All Dependencies at 526ad18). D2ram's prose/ledger discrepancy (PARTIAL in prose, done in the ledger) is preserved and reported separately. No statement text, guard, doc block, manifest row, leg state or status changes.",
     "",
-    "B8 history (follow-up on the private merge with B8 e377dcb): XE2PathEdgesOriginal.erdos_915_statement is the complete pre-B2/A7/B8 #915 over B2's frozen internal disjointness, B8's frozen edge disjointness and this family's frozen count; the B8 and A7 #915 snapshots are documented reciprocally, and no earlier frozen body changes."
+    "B8 history (follow-up on the private merge with B8 e377dcb): XE2PathEdgesOriginal.erdos_915_statement is the complete pre-B2/A7/B8 #915 over B2's frozen internal disjointness, B8's frozen edge disjointness and this family's frozen count; the B8 and A7 #915 snapshots are documented reciprocally, and no earlier frozen body changes.",
+    "",
+    "Public source (fg_edge_count follow-up): GTBase.finite_graph.fg_edge_count, an sgraph -> nat count equal to the edge count, is enrolled as an immutable repository source pinned at ae0e605. It now unfolds to GTBase.common.edge_count; fg_edges is unchanged and equals E(G) (fg_edgesE, adapted from C1), so the former #|fg_edges G| equals the canonical (card_fg_edges). Its frozen copy is GTBase.migration.edge_count.Legacy.fg_edge_count. The complete closure is five rows (Extremal X143, X180, X207; GTMisc X128, X139) through ten intermediate predicates, all frozen at ae0e605 over that copy, with every density, expansion and arithmetic guard and every quantifier unchanged. X180Original is the 9e03072 row over C1's frozen capacity predicate and the frozen average-degree chain; C1's X180 snapshot is documented reciprocally."
   ],
   "frozen": [
     {
@@ -1236,6 +1245,241 @@
       "certificate": "Extremal.migration.path_edges.xe2_paths_edge_disjoint_compat",
       "commit": "048c768adce0cfcbf5b5a5763d71fc8daf483db8",
       "note": "B8 (path edges) frozen copy, reused unchanged by XE2PathEdgesOriginal.erdos_915_statement"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTBase.finite_graph.fg_edge_count",
+      "path": "base/theories/finite_graph.v",
+      "name": "fg_edge_count",
+      "frozen_path": "base/theories/migration/edge_count.v",
+      "frozen": "Legacy.fg_edge_count",
+      "substitutions": {},
+      "certificate": "GTBase.migration.edge_count.fg_edge_count_compat",
+      "live_unfolds_to": "GTBase.common.edge_count G",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+      "repository_source": true
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X143.x143_edge_density_num",
+      "path": "extremal-graph-theory/theories/conjectures/X143.v",
+      "name": "x143_edge_density_num",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X143Legacy.edge_density_num",
+      "substitutions": {
+        "fg_edge_count": "FG.Legacy.fg_edge_count",
+        "x143_edge_density_num": "edge_density_num"
+      },
+      "certificate": "Extremal.migration.edge_count.x143_edge_density_num_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X143.x143_forcing_graph",
+      "path": "extremal-graph-theory/theories/conjectures/X143.v",
+      "name": "x143_forcing_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X143Legacy.forcing_graph",
+      "substitutions": {
+        "fg_edge_count": "FG.Legacy.fg_edge_count",
+        "x143_edge_density_num": "edge_density_num",
+        "x143_forcing_graph": "forcing_graph"
+      },
+      "certificate": "Extremal.migration.edge_count.x143_forcing_graph_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X143.skokan_thoma_forcing_graph_characterisation_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X143.v",
+      "name": "skokan_thoma_forcing_graph_characterisation_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X143Legacy.skokan_thoma_forcing_graph_characterisation_statement",
+      "substitutions": {
+        "x143_forcing_graph": "forcing_graph"
+      },
+      "certificate": "Extremal.migration.edge_count.skokan_thoma_forcing_graph_characterisation_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X180.x180_average_degree_logarithmic",
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "x180_average_degree_logarithmic",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X180Legacy.average_degree_logarithmic",
+      "substitutions": {
+        "fg_edge_count": "FG.Legacy.fg_edge_count",
+        "x180_average_degree_logarithmic": "average_degree_logarithmic"
+      },
+      "certificate": "Extremal.migration.edge_count.x180_average_degree_logarithmic_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X180.log_degree_multitasker_exists_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "log_degree_multitasker_exists_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X180Legacy.log_degree_multitasker_exists_statement",
+      "substitutions": {
+        "x180_average_degree_logarithmic": "average_degree_logarithmic"
+      },
+      "certificate": "Extremal.migration.edge_count.log_degree_multitasker_exists_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X207.x207_density_at_least",
+      "path": "extremal-graph-theory/theories/conjectures/X207.v",
+      "name": "x207_density_at_least",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X207Legacy.density_at_least",
+      "substitutions": {
+        "fg_edge_count": "FG.Legacy.fg_edge_count",
+        "x207_density_at_least": "density_at_least"
+      },
+      "certificate": "Extremal.migration.edge_count.x207_density_at_least_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X207.x207_rodl_delta_works",
+      "path": "extremal-graph-theory/theories/conjectures/X207.v",
+      "name": "x207_rodl_delta_works",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X207Legacy.rodl_delta_works",
+      "substitutions": {
+        "x207_density_at_least": "density_at_least",
+        "x207_rodl_delta_works": "rodl_delta_works"
+      },
+      "certificate": "Extremal.migration.edge_count.x207_rodl_delta_works_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X207.x207_polynomial_rodl_delta",
+      "path": "extremal-graph-theory/theories/conjectures/X207.v",
+      "name": "x207_polynomial_rodl_delta",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X207Legacy.polynomial_rodl_delta",
+      "substitutions": {
+        "x207_rodl_delta_works": "rodl_delta_works",
+        "x207_polynomial_rodl_delta": "polynomial_rodl_delta"
+      },
+      "certificate": "Extremal.migration.edge_count.x207_polynomial_rodl_delta_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X207.polynomial_rodl_dependence_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X207.v",
+      "name": "polynomial_rodl_dependence_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X207Legacy.polynomial_rodl_dependence_statement",
+      "substitutions": {
+        "x207_polynomial_rodl_delta": "polynomial_rodl_delta"
+      },
+      "certificate": "Extremal.migration.edge_count.polynomial_rodl_dependence_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X128.x128_grad_at_most",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_grad_at_most",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_count.v",
+      "frozen": "X128Legacy.grad_at_most",
+      "substitutions": {
+        "fg_edge_count": "FG.Legacy.fg_edge_count",
+        "x128_grad_at_most": "grad_at_most"
+      },
+      "certificate": "GTMisc.migration.edge_count.x128_grad_at_most_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X128.x128_expansion_bounded",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_expansion_bounded",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_count.v",
+      "frozen": "X128Legacy.expansion_bounded",
+      "substitutions": {
+        "x128_grad_at_most": "grad_at_most",
+        "x128_expansion_bounded": "expansion_bounded"
+      },
+      "certificate": "GTMisc.migration.edge_count.x128_expansion_bounded_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X128.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_count.v",
+      "frozen": "X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "substitutions": {
+        "x128_expansion_bounded": "expansion_bounded"
+      },
+      "certificate": "GTMisc.migration.edge_count.dvorak_cheap_balanced_separator_bounded_expansion_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X139.x139_grad_at_most",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "x139_grad_at_most",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_count.v",
+      "frozen": "X139Legacy.grad_at_most",
+      "substitutions": {
+        "fg_edge_count": "FG.Legacy.fg_edge_count",
+        "x139_grad_at_most": "grad_at_most"
+      },
+      "certificate": "GTMisc.migration.edge_count.x139_grad_at_most_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X139.x139_polynomial_expansion_class",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "x139_polynomial_expansion_class",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_count.v",
+      "frozen": "X139Legacy.polynomial_expansion_class",
+      "substitutions": {
+        "x139_grad_at_most": "grad_at_most",
+        "x139_polynomial_expansion_class": "polynomial_expansion_class"
+      },
+      "certificate": "GTMisc.migration.edge_count.x139_polynomial_expansion_class_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X139.esperet_raymond_polynomial_expansion_scol_statement",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "esperet_raymond_polynomial_expansion_scol_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/edge_count.v",
+      "frozen": "X139Legacy.esperet_raymond_polynomial_expansion_scol_statement",
+      "substitutions": {
+        "x139_polynomial_expansion_class": "polynomial_expansion_class"
+      },
+      "certificate": "GTMisc.migration.edge_count.esperet_raymond_polynomial_expansion_scol_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X180.log_degree_multitasker_exists_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "log_degree_multitasker_exists_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "X180Original.log_degree_multitasker_exists_statement",
+      "substitutions": {
+        "x180_average_degree_logarithmic": "X180Legacy.average_degree_logarithmic",
+        "x180_multitasker_capacity_positive": "C1.X180Legacy.multitasker_capacity_positive"
+      },
+      "certificate": "Extremal.migration.edge_count.log_degree_multitasker_exists_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X180.x180_multitasker_capacity_positive",
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "x180_multitasker_capacity_positive",
+      "frozen_path": "extremal-graph-theory/theories/migration/matching.v",
+      "frozen": "X180Legacy.multitasker_capacity_positive",
+      "substitutions": {
+        "x180_multitasker_capacity_positive": "multitasker_capacity_positive",
+        "x180_multitasker_capacity_at_least": "multitasker_capacity_at_least"
+      },
+      "certificate": "Extremal.migration.matching.x180_multitasker_capacity_positive_compat",
+      "source_declaration_sha256": "f903b3f20b403b8067bcbd73badfe5b8f1358de77e77e3a4baedca323d8983dc",
+      "source_body_sha256": "508137a1eeadad87606e8fef97621e4072e90942508352e3690ffdde475466fc",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "note": "C1 (matching) frozen copy, reused unchanged by X180Original.log_degree_multitasker_exists_statement"
     }
   ],
   "known_stale_snapshots": {
@@ -1274,7 +1518,8 @@
     "extremal-graph-theory/theories/migration/subgraph_of.v#X96Legacy.bollobas_erdos_large_c4_free_subgraph_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete row is Extremal.migration.edge_count.X96Original.bollobas_erdos_large_c4_free_subgraph_statement, certified by bollobas_erdos_large_c4_free_subgraph_statement_original_compat.",
     "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Original.erdos_567_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete row is Extremal.migration.edge_count.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
     "extremal-graph-theory/theories/migration/path_edges.v#XE2Legacy.erdos_915_statement": "B8 snapshot: B8 froze this row over its own frozen edge disjointness but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-B2/A7/B8 row is Extremal.migration.edge_count.XE2PathEdgesOriginal.erdos_915_statement, certified by erdos_915_statement_path_edges_original_compat.",
-    "extremal-graph-theory/theories/migration/path_edges.v#XE2Original.erdos_915_statement": "B8 snapshot: B8 froze this row over its own frozen edge disjointness but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-B2/A7/B8 row is Extremal.migration.edge_count.XE2PathEdgesOriginal.erdos_915_statement, certified by erdos_915_statement_path_edges_original_compat."
+    "extremal-graph-theory/theories/migration/path_edges.v#XE2Original.erdos_915_statement": "B8 snapshot: B8 froze this row over its own frozen edge disjointness but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-B2/A7/B8 row is Extremal.migration.edge_count.XE2PathEdgesOriginal.erdos_915_statement, certified by erdos_915_statement_path_edges_original_compat.",
+    "extremal-graph-theory/theories/migration/matching.v#X180Legacy.log_degree_multitasker_exists_statement": "C1 snapshot: C1 froze the X180 row over its frozen matching helpers but kept the live x180_average_degree_logarithmic, which reaches the public count fg_edge_count (now GTBase.common.edge_count; the former #|fg_edges G| is equal by fg_edgesE). Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat."
   },
   "cross_module_consumers": [
     {
@@ -1371,6 +1616,36 @@
       "path": "extremal-graph-theory/theories/conjectures/implications_D2tur.v",
       "name": "sidorenkos_statement",
       "note": "Implication-file statement-type check; unchanged, consumes the live statement."
+    },
+    {
+      "path": "base/theories/finite_graph.v",
+      "name": "edge_count",
+      "note": "The public fg_edge_count now unfolds to the canonical GTBase.common.edge_count (qualified; finite_graph requires common without Import). Lexical match with the D2ram/D2tur source names."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X143.v",
+      "name": "fg_edge_count",
+      "note": "x143_edge_density_num and x143_forcing_graph use the public base count; frozen in X143Legacy over GTBase.migration.edge_count.Legacy.fg_edge_count."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X180.v",
+      "name": "fg_edge_count",
+      "note": "x180_average_degree_logarithmic uses the public base count; frozen in X180Legacy (and the complete X180Original) over the frozen public count."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X207.v",
+      "name": "fg_edge_count",
+      "note": "x207_density_at_least uses the public base count; frozen in X207Legacy over the frozen public count."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "fg_edge_count",
+      "note": "x128_grad_at_most uses the public base count; frozen in X128Legacy over the frozen public count."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "fg_edge_count",
+      "note": "x139_grad_at_most uses the public base count; frozen in X139Legacy over the frozen public count."
     }
   ],
   "distinct_variants": [

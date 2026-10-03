@@ -150,3 +150,40 @@ structurally:
 
 The four partial snapshots are documented reciprocally: B8's two in this spec, A7's two in B8's. No earlier
 frozen body or theorem signature changes. B8's frozen predicate is a `historical` object in the spec.
+
+## Public count `fg_edge_count` (follow-up commit)
+
+`GTBase.finite_graph.fg_edge_count` (`#|fg_edges G|`) is the same `sgraph -> nat` count. It is now an
+enrolled repository source of this family, pinned at `ae0e605` (path `base/theories/finite_graph.v`, blob
+`b31dd5d`, declaration hash `4bbe5388...`).
+- Public API changes in `finite_graph.v`:
+  - it requires `GTBase.common` without Import (no cycle: `common` imports no GTBase module);
+  - `fg_edge_count` now unfolds to `GTBase.common.edge_count G`;
+  - `fg_edges` is unchanged;
+  - `fg_edgesE : fg_edges G = E(G)` is proved there, adapted from C1's certificate lemma of the same name
+    (the explicit `x != y` guard is implied by irreflexivity), with no migration module imported;
+  - `card_fg_edges : #|fg_edges G| = GTBase.common.edge_count G` is stated without the deprecated alias,
+    so it adds no consumer of it.
+- The frozen copy is `GTBase.migration.edge_count.Legacy.fg_edge_count`, a new base-level certificate
+  file, with `fg_edge_count_compat` (`card_fg_edges`).
+- Fidelity: the existing global `GTBase.finite_graph` verdict (FAITHFUL) stays; the meaning is unchanged.
+
+The report tool's discovery, with public nodes, gives the complete closure: five rows through ten
+intermediate predicates, all frozen at `ae0e605` over the frozen public count.
+
+| Area | Frozen modules | Rows |
+|---|---|---|
+| extremal (`migration/edge_count.v`, additive suffix) | `X143Legacy` (`edge_density_num`, `forcing_graph`), `X180Legacy` (`average_degree_logarithmic`), `X207Legacy` (`density_at_least`, `rodl_delta_works`, `polynomial_rodl_delta`) | X143 forcing-graph characterisation, X180 log-degree multitasker, X207 polynomial Rodl |
+| misc (new `migration/edge_count.v`) | `X128Legacy` (`grad_at_most`, `expansion_bounded`), `X139Legacy` (`grad_at_most`, `polynomial_expansion_class`) | X128 cheap balanced separators, X139 polynomial expansion |
+
+Chain and row certificates rewrite the count by `fg_edge_count_compat` under the binders, with no `try`.
+X143 also unfolds `x143_density_converges` and `eventually`, because the density function is passed as an
+argument. Density, expansion and arithmetic guards, quantifier order, the BLOCKED status of X180 and every
+other status are unchanged.
+
+History: C1 froze the X180 row (`Extremal.migration.matching.X180Legacy`) but kept the live
+`x180_average_degree_logarithmic`, which reaches the public count. `X180Original.log_degree_multitasker_exists_statement`
+is the complete `9e03072` row, over C1's frozen `X180Legacy.multitasker_capacity_positive` (aliased `C1`) and
+this family's frozen average-degree chain, certified structurally. The two snapshots are documented reciprocally,
+and C1's compact summary is regenerated. The family's direct consumer count stays 11: the public source has no
+remaining same-file consumer.

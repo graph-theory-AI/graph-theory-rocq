@@ -7,7 +7,8 @@
     "status": "deprecated",
     "fidelity": "FAITHFUL",
     "normalized_names": [
-      "edge_count"
+      "edge_count",
+      "fg_edge_count"
     ],
     "source_definitions": [
       "Chromatic.conjectures.XE1.xe1_edge_count",
@@ -16,7 +17,8 @@
       "Extremal.conjectures.D2tur.edge_count",
       "Extremal.conjectures.X4.x4_edge_count",
       "Extremal.conjectures.X76.x76_edge_count",
-      "Extremal.conjectures.X78.x78_edge_count"
+      "Extremal.conjectures.X78.x78_edge_count",
+      "GTBase.finite_graph.fg_edge_count"
     ],
     "consumers_remaining": 11,
     "relation": "nat equality: the four unordered counts (chromatic XE1, X76, X78 over M1 aliases of sg_edge_set; D2ram over E(G)) convert to edge_count; the three enum-rank oriented pair selectors (X5, X4, D2tur through base oedge) equal it by GTBase.common.edge_count_rank, unconditionally.",
@@ -43,14 +45,20 @@
         "verdict": "equivalent",
         "certificate": "GTBase.common.edge_count_rank",
         "note": "#|[set p : G * G | (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2)%N]| (D2tur through base oedge); one orientation per edge"
+      },
+      "public-doubleton-comprehension": {
+        "members": [
+          "GTBase.finite_graph.fg_edge_count"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "GTBase.finite_graph.card_fg_edges",
+        "note": "#|fg_edges G| over [set e | exists x y, (x != y) && (x -- y) && (e == [set x; y])]; the explicit x != y guard is implied by irreflexivity, so fg_edges G = E(G) (fg_edgesE, a proved set equality) and the count is edge_count"
       }
     },
     "distinct_variants": {
       "Extremal.conjectures.D2tur.oedges": "Both orientations: twice the edge count (grounding_D2tur.oedges_double).",
       "cut sizes and X88 within-colour counts": "Counts of particular edge subsets; different quantities, not touched."
-    },
-    "out_of_scope_equivalents": {
-      "GTBase.finite_graph.fg_edge_count": "Public base definition #|fg_edges G| over the doubleton comprehension of adjacent distinct pairs: the same count, outside the seven-definition conjecture inventory scope of this family. Unchanged; reported to the coordinator for a possible public-source family."
     },
     "historical_snapshots": {
       "bipartition.v#XE2Legacy.erdos_1080_statement": "C7 snapshot: C7 froze this row over its own frozen helpers but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete row is Extremal.migration.edge_count.XE2Original.erdos_1080_statement, certified by erdos_1080_statement_original_compat.",
@@ -88,7 +96,8 @@
       "subgraph_of.v#X96Legacy.bollobas_erdos_large_c4_free_subgraph_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete row is Extremal.migration.edge_count.X96Original.bollobas_erdos_large_c4_free_subgraph_statement, certified by bollobas_erdos_large_c4_free_subgraph_statement_original_compat.",
       "subgraph_of.v#XE1Original.erdos_567_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete row is Extremal.migration.edge_count.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
       "path_edges.v#XE2Legacy.erdos_915_statement": "B8 snapshot: B8 froze this row over its own frozen edge disjointness but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-B2/A7/B8 row is Extremal.migration.edge_count.XE2PathEdgesOriginal.erdos_915_statement, certified by erdos_915_statement_path_edges_original_compat.",
-      "path_edges.v#XE2Original.erdos_915_statement": "B8 snapshot: B8 froze this row over its own frozen edge disjointness but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-B2/A7/B8 row is Extremal.migration.edge_count.XE2PathEdgesOriginal.erdos_915_statement, certified by erdos_915_statement_path_edges_original_compat."
+      "path_edges.v#XE2Original.erdos_915_statement": "B8 snapshot: B8 froze this row over its own frozen edge disjointness but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-B2/A7/B8 row is Extremal.migration.edge_count.XE2PathEdgesOriginal.erdos_915_statement, certified by erdos_915_statement_path_edges_original_compat.",
+      "matching.v#X180Legacy.log_degree_multitasker_exists_statement": "C1 snapshot: C1 froze the X180 row over its frozen matching helpers but kept the live x180_average_degree_logarithmic, which reaches the public count fg_edge_count (now GTBase.common.edge_count; the former #|fg_edges G| is equal by fg_edgesE). Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat."
     },
     "compatibility_theorems": [
       "Chromatic.migration.edge_count.xe1_edge_count_compat",
@@ -168,7 +177,24 @@
       "Extremal.migration.edge_count.erdos_742_statement_original_compat",
       "Extremal.migration.edge_count.erdos_915_statement_original_compat",
       "Extremal.migration.edge_count.erdos_767_statement_original_compat",
-      "Extremal.migration.edge_count.erdos_915_statement_path_edges_original_compat"
+      "Extremal.migration.edge_count.erdos_915_statement_path_edges_original_compat",
+      "GTBase.migration.edge_count.fg_edge_count_compat",
+      "Extremal.migration.edge_count.x143_edge_density_num_compat",
+      "Extremal.migration.edge_count.x143_forcing_graph_compat",
+      "Extremal.migration.edge_count.skokan_thoma_forcing_graph_characterisation_statement_compat",
+      "Extremal.migration.edge_count.x180_average_degree_logarithmic_compat",
+      "Extremal.migration.edge_count.log_degree_multitasker_exists_statement_compat",
+      "Extremal.migration.edge_count.x207_density_at_least_compat",
+      "Extremal.migration.edge_count.x207_rodl_delta_works_compat",
+      "Extremal.migration.edge_count.x207_polynomial_rodl_delta_compat",
+      "Extremal.migration.edge_count.polynomial_rodl_dependence_statement_compat",
+      "GTMisc.migration.edge_count.x128_grad_at_most_compat",
+      "GTMisc.migration.edge_count.x128_expansion_bounded_compat",
+      "GTMisc.migration.edge_count.dvorak_cheap_balanced_separator_bounded_expansion_statement_compat",
+      "GTMisc.migration.edge_count.x139_grad_at_most_compat",
+      "GTMisc.migration.edge_count.x139_polynomial_expansion_class_compat",
+      "GTMisc.migration.edge_count.esperet_raymond_polynomial_expansion_scol_statement_compat",
+      "Extremal.migration.edge_count.log_degree_multitasker_exists_statement_original_compat"
     ],
     "api_theorems": [
       "GTBase.common.edge_count_rank",
@@ -176,7 +202,9 @@
       "GTBase.common.edge_count_K0_K1",
       "GTBase.common.edge_count_K2",
       "GTBase.common.edge_count_K3",
-      "GTBase.common.edge_count_diso"
+      "GTBase.common.edge_count_diso",
+      "GTBase.finite_graph.fg_edgesE",
+      "GTBase.finite_graph.card_fg_edges"
     ],
     "public_client": "base/theories/examples/edge_count.v",
     "legacy_baseline": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
@@ -193,9 +221,17 @@
       ],
       "result": "existing-upstream-quantity",
       "candidate": "GTBase.common.edge_count := #|E(G)| (upstream sg_edge_set, card_edge_Kn, diso_card_edge)",
-      "note": "Upstream has the edge set E(G) = sg_edge_set with card_edge_Kn and diso_card_edge but no named count; the plan (section 15 table) places edge_count in GTBase.common over E(G). No upstream bridge for the enum-rank oriented selector exists; edge_count_rank is new (finite bijection p |-> [set p.1; p.2]). base.v oedge stays where it is: common.v does not import base.v.",
+      "note": "Upstream has the edge set E(G) = sg_edge_set with card_edge_Kn and diso_card_edge but no named count; the plan (section 15 table) places edge_count in GTBase.common over E(G). No upstream bridge for the enum-rank oriented selector exists; edge_count_rank is new (finite bijection p |-> [set p.1; p.2]). base.v oedge stays where it is: common.v does not import base.v. The public base count GTBase.finite_graph.fg_edge_count is the same quantity; it is an enrolled repository source of this family (fg_edgesE: fg_edges G = E(G)).",
       "audited_at": "2026-10-03"
     },
-    "reviewed_by": null
+    "reviewed_by": null,
+    "repository_sources": {
+      "GTBase.finite_graph.fg_edge_count": {
+        "path": "base/theories/finite_graph.v",
+        "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+        "blob": "b31dd5df8f679f1d22e924348ba86a546012380d",
+        "declaration_hash": "4bbe538815c071fae798fe8c3832d73a362011c470fe20b77cdebd5378651ca0"
+      }
+    }
   }
 }
