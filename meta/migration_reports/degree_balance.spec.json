@@ -2,14 +2,17 @@
   "family": "degree-balance",
   "canonical_name": "Digraph.foundations.degree_balance.balanced",
   "canonical_short_name": "balanced",
-  "relation": "one contract, degree balance of a finite digraph (every vertex has equal in- and out-degree; no connectivity, looplessness, inhabitance or tour premise). Migrated: two_extremal.Eulerian (forall v, indeg v = outdeg v over classic_core.indeg) is balanced D by conversion; colouring_variants.eulerian ([forall v, indeg v == outdeg v], Boolean, file-local in-degree) is balancedb D by conversion, reflected by balancedP; X221.x221_eulerian (forall v, outdeg v = indeg v, over classic_core.indeg) is the reversed-equation view balanced_revE, a proved iff. All in-degrees are the comprehension #|[set u | u --> v]|, the public indeg. Deferred: reals_growth.eulerian (same body, but its two non-corpus EC-log rows inherit classical-reals axioms through their statements: a legacy-axiom defect, left byte-identical) and Cycle U6's multigraph eulerian (connected, even arc-end degrees), a different contract. Chromatic.foundations.alon_tarsi.at_eulerian (balance of a supplied finite set of ordered pairs) is a distinct representation, not a source of this family.",
+  "relation": "two contracts under the corpus name \"eulerian\". DIRECTED degree balance of a finite digraph (every vertex has equal in- and out-degree; canonical Digraph.foundations.degree_balance.balanced): two_extremal.Eulerian (forall v, indeg v = outdeg v over classic_core.indeg) is balanced D by conversion; colouring_variants.eulerian ([forall v, indeg v == outdeg v], Boolean, file-local in-degree) is balancedb D by conversion, reflected by balancedP; X221.x221_eulerian (forall v, outdeg v = indeg v) is the reversed-equation view balanced_revE, a proved iff. UNDIRECTED Eulerian multigraph (connected over all vertices through base's uwalk, every arc-end degree even, a loop counting two; the empty multigraph and an isolated vertex qualify; canonical Cycle.foundations.eulerian.eulerian over Cycle.foundations.connectivity, B17): Cycle.U6.eulerian (mconnected G /\\ forall v : G, ~~ odd (mdeg v)) is that canonical by conversion. The two contracts share only the name: no bridge between them is stated. Deferred: reals_growth.eulerian (same directed body, but its two non-corpus EC-log rows inherit classical-reals axioms through their statements: a legacy-axiom defect, left byte-identical). Distinct and untouched: U6.is_eulerian_tour (a supplied DIRECTED closed walk using every edge once; not migrated, no tour equivalence), U6.even_subgraph (even degrees of a supplied edge set, disconnected allowed) and Chromatic.foundations.alon_tarsi.at_eulerian (balance of a supplied finite set of ordered pairs).",
   "baseline_commit": "298112264b7c31820acf889c6da29b710fd39c9a",
   "namespaces": {
-    "digraph-theory": "Digraph"
+    "digraph-theory": "Digraph",
+    "cycle-theory": "Cycle"
   },
   "certificate_files": [
     "digraph-theory/theories/foundations/degree_balance.v",
-    "digraph-theory/theories/migration/degree_balance.v"
+    "digraph-theory/theories/migration/degree_balance.v",
+    "cycle-theory/theories/foundations/eulerian.v",
+    "cycle-theory/theories/migration/eulerian.v"
   ],
   "extra_certificates": [
     "Digraph.foundations.degree_balance.balancedP",
@@ -28,7 +31,59 @@
     "Digraph.foundations.degree_balance.balanced_ground_disconnected",
     "Digraph.foundations.degree_balance.balanced_ground_digon",
     "Digraph.foundations.degree_balance.balanced_ground_C3",
-    "Digraph.foundations.degree_balance.not_balanced_ground_TT2"
+    "Digraph.foundations.degree_balance.not_balanced_ground_TT2",
+    "Cycle.foundations.eulerian.even_degreesP",
+    "Cycle.foundations.eulerian.eulerianI",
+    "Cycle.foundations.eulerian.eulerian_mconnected",
+    "Cycle.foundations.eulerian.eulerian_even_degrees",
+    "Cycle.foundations.eulerian.eulerian_even",
+    "Cycle.foundations.eulerian.eulerian_even_degreesb",
+    "Cycle.foundations.eulerian.eulerianE",
+    "Cycle.foundations.eulerian.eulerian_empty",
+    "Cycle.foundations.eulerian.edgeT_isolated_vertex",
+    "Cycle.foundations.eulerian.mdeg_isolated_vertex",
+    "Cycle.foundations.eulerian.mconnected_isolated_vertex",
+    "Cycle.foundations.eulerian.eulerian_isolated_vertex",
+    "Cycle.foundations.eulerian.edge_one_loop",
+    "Cycle.foundations.eulerian.edgeT_one_loop",
+    "Cycle.foundations.eulerian.mdeg_one_loop",
+    "Cycle.foundations.eulerian.mconnected_one_loop",
+    "Cycle.foundations.eulerian.eulerian_one_loop",
+    "Cycle.foundations.eulerian.card_edge_two_loops",
+    "Cycle.foundations.eulerian.ends_at_two_loops",
+    "Cycle.foundations.eulerian.mdeg_two_loops",
+    "Cycle.foundations.eulerian.mconnected_two_loops",
+    "Cycle.foundations.eulerian.eulerian_two_loops",
+    "Cycle.foundations.eulerian.card_edge_one_edge",
+    "Cycle.foundations.eulerian.card_edge_parallel_pair",
+    "Cycle.foundations.eulerian.src_one_edge",
+    "Cycle.foundations.eulerian.tgt_one_edge",
+    "Cycle.foundations.eulerian.src_parallel_pair",
+    "Cycle.foundations.eulerian.tgt_parallel_pair",
+    "Cycle.foundations.eulerian.ends_at_parallel_pair_inl_src",
+    "Cycle.foundations.eulerian.ends_at_parallel_pair_inl_tgt",
+    "Cycle.foundations.eulerian.ends_at_parallel_pair_inr_src",
+    "Cycle.foundations.eulerian.ends_at_parallel_pair_inr_tgt",
+    "Cycle.foundations.eulerian.mdeg_parallel_pair",
+    "Cycle.foundations.eulerian.mconnected_parallel_pair",
+    "Cycle.foundations.eulerian.eulerian_parallel_pair",
+    "Cycle.foundations.eulerian.ends_at_one_edge_inl_src",
+    "Cycle.foundations.eulerian.ends_at_one_edge_inl_tgt",
+    "Cycle.foundations.eulerian.mdeg_one_edge_inl",
+    "Cycle.foundations.eulerian.not_eulerian_one_edge",
+    "Cycle.foundations.eulerian.edgeT_two_vertices",
+    "Cycle.foundations.eulerian.mdeg_two_vertices",
+    "Cycle.foundations.eulerian.even_degrees_two_vertices",
+    "Cycle.foundations.eulerian.not_mconnected_two_vertices",
+    "Cycle.foundations.eulerian.not_eulerian_two_vertices",
+    "Cycle.foundations.eulerian.uwalk_loop_and_vertex",
+    "Cycle.foundations.eulerian.not_mconnected_loop_and_vertex",
+    "Cycle.foundations.eulerian.ends_at_loop_and_vertex_inl",
+    "Cycle.foundations.eulerian.ends_at_loop_and_vertex_inr",
+    "Cycle.foundations.eulerian.mdeg_loop_and_vertex_inl",
+    "Cycle.foundations.eulerian.mdeg_loop_and_vertex_inr",
+    "Cycle.foundations.eulerian.even_degrees_loop_and_vertex",
+    "Cycle.foundations.eulerian.not_eulerian_loop_and_vertex"
   ],
   "additional_statements": [
     "Digraph.conjectures.two_extremal_glue.conj_9_2_glued",
@@ -52,7 +107,11 @@
     "",
     "Kernel evidence, independent of this textual report, from `Print All Dependencies`: no frozen row, chain or whole Prop reaches a live helper of this family or the public `balanced` / `balancedb` / `indeg`; each live row and whole Prop reaches its helper and the canonical of its presentation; both EC-log statements reach none of them. Summary: /srv/graph-theory-rocq/coordination/evidence/B16r-degree_balance/print_all_dependencies_summary.txt.",
     "",
-    "Baseline 2981122 is the announced B15 pin (over the private prerequisite baseline 4b63976), not yet integrated. No statement text, doc block, manifest row, leg state or status changes (checked below)."
+    "Baseline 2981122 is the announced B15 pin (over the private prerequisite baseline 4b63976), not yet integrated. No statement text, doc block, manifest row, leg state or status changes (checked below).",
+    "",
+    "B17 (second contract of this family, 2026-10-03): the UNDIRECTED Eulerian multigraph helper `Cycle.conjectures.U6.eulerian` (`mconnected G /\\ forall v : G, ~~ odd (mdeg v)`: connected over all vertices through base's orientation-free `uwalk`, every arc-end degree even so a loop counts two; the empty multigraph and an isolated vertex qualify) now unfolds to the new public `Cycle.foundations.eulerian.eulerian`, the same body over `Cycle.foundations.connectivity`, by conversion. It shares only the corpus name with the directed degree balance above: no bridge between the two contracts is stated, and the registry keeps them as separate semantic classes (the inventory check binds every helper of a normalized name to one family, so the multigraph class lives here rather than in a family of its own). API: `eulerian`, `even_degrees`, `even_degreesb` with `even_degreesP`, the projections `eulerian_mconnected`, `eulerian_even_degrees`, `eulerian_even`, `eulerian_even_degreesb`, the introduction `eulerianI` and `eulerianE`; groundings on the empty multigraph, an isolated vertex, one and two loops, two parallel arcs pointing the same way (all eulerian), a single edge, two isolated vertices and a loop beside an isolated vertex (not eulerian, the last two with even degrees). Public-only client cycle-theory/theories/examples/eulerian.v.",
+    "",
+    "B17 rows, frozen complete in cycle-theory/theories/migration/eulerian.v over the frozen helper with every guard in its order: `decomposing_an_eulerian_graph_into_cycles_statement` (opg, positive vertex and edge counts, `simple_mgraph`, the floor bound `(#|G| - 1) %/ 2`), `decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement` (opg, positive vertex count, minimum arc-end degree 4, the SUPPLIED directed `is_eulerian_tour w`, the cyclic-consecutive exclusion), `decomposing_eulerian_graphs_statement` (opg, positive counts, `edge_connected G 6`, the supplied `transition2_system`, the compatible decomposition). `is_eulerian_tour` (a supplied DIRECTED closed walk from an existential vertex using every edge once) and `even_subgraph` are NOT migrated and no tour equivalence or extra nonempty/loopless guard is stated: the directed-tour limitation documented in row 5 is preserved as is. Proof consumers grounding_U6 `eulerian_unit`, `eulerian_mconnected`, `eulerian_Gd`, `eulerian_G2loop` and `u6_decomposing_eulerian_G2loop` compile unchanged (the alias is transparent). History: no migration snapshot references the helper or the rows; the only lexical mention is this family's own `cv_eulerian_compat` (colouring_variants.eulerian, a short-name match). Routing: normal milestone U6 (cycle-theory); the import consumers U10, grounding_U10, implications_U6/U10 and Atlas.implications_A1 recompile without change."
   ],
   "frozen": [
     {
@@ -220,15 +279,60 @@
         "Eulerian": "Legacy.Eulerian"
       },
       "certificate": "Digraph.migration.degree_balance.realises_gw_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.U6.eulerian",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "eulerian",
+      "frozen_path": "cycle-theory/theories/migration/eulerian.v",
+      "frozen": "Legacy.eulerian",
+      "substitutions": {},
+      "certificate": "Cycle.migration.eulerian.eulerian_compat",
+      "live_unfolds_to": "Cycle.foundations.eulerian.eulerian G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U6.decomposing_an_eulerian_graph_into_cycles_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "decomposing_an_eulerian_graph_into_cycles_statement",
+      "frozen_path": "cycle-theory/theories/migration/eulerian.v",
+      "frozen": "U6Legacy.decomposing_an_eulerian_graph_into_cycles_statement",
+      "substitutions": {
+        "eulerian": "Legacy.eulerian"
+      },
+      "certificate": "Cycle.migration.eulerian.decomposing_an_eulerian_graph_into_cycles_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U6.decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement",
+      "frozen_path": "cycle-theory/theories/migration/eulerian.v",
+      "frozen": "U6Legacy.decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement",
+      "substitutions": {
+        "eulerian": "Legacy.eulerian"
+      },
+      "certificate": "Cycle.migration.eulerian.decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U6.decomposing_eulerian_graphs_statement",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "decomposing_eulerian_graphs_statement",
+      "frozen_path": "cycle-theory/theories/migration/eulerian.v",
+      "frozen": "U6Legacy.decomposing_eulerian_graphs_statement",
+      "substitutions": {
+        "eulerian": "Legacy.eulerian"
+      },
+      "certificate": "Cycle.migration.eulerian.decomposing_eulerian_graphs_statement_compat",
+      "corpus": "opg"
     }
   ],
   "known_stale_snapshots": {},
   "cross_module_consumers": [
-    {
-      "path": "cycle-theory/theories/conjectures/grounding_U6.v",
-      "name": "eulerian",
-      "note": "Short-name match only: these are uses of Cycle U6's own multigraph eulerian (connected, even arc-end degrees), the distinct deferred contract (family B17), not of this family's directed helpers; unchanged."
-    },
     {
       "path": "digraph-theory/theories/conjectures/grounding_X221.v",
       "name": "x221_eulerian",
@@ -328,14 +432,24 @@
       "path": "digraph-theory/theories/conjectures/grounding_two_extremal.v",
       "name": "realises_gw",
       "note": "gwheel3_in_H2, realises_gw_satisfiable, realises_gw_constraints and conj_9_2_both_sides_nonvacuous: satisfiability and inhabitation under the wheel relation; unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/examples/eulerian.v",
+      "name": "eulerian",
+      "note": "Public-only client of the canonical Cycle.foundations.eulerian.eulerian, which shares the short name of U6's helper: these are uses of the canonical (projections, introduction, Boolean even-degree reflection and the recorded corner cases), not of the migrated helper."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U6.v",
+      "name": "eulerian",
+      "note": "Proof consumers of U6's multigraph helper (B17): eulerian_unit (one isolated vertex), eulerian_mconnected (the connectivity projection), eulerian_Gd (the digon), eulerian_G2loop (one vertex with two loops, degree 4) and u6_decomposing_eulerian_G2loop (every hypothesis and the conclusion of row 6 on that carrier); theorem types and proofs unchanged, the alias is transparent."
     }
   ],
   "distinct_variants": [
     {
-      "qualified": "Cycle.conjectures.U6.eulerian",
+      "qualified": "Cycle.conjectures.U6.even_subgraph",
       "path": "cycle-theory/theories/conjectures/U6.v",
-      "name": "eulerian",
-      "note": "undirected multigraph Eulerian predicate (connected, even arc-end degrees); a distinct contract, deferred in the registry (family B17); untouched"
+      "name": "even_subgraph",
+      "note": "even arc-end degrees of a SUPPLIED edge set, disconnected allowed (the binary cycle space); not the connected whole-graph contract; untouched"
     },
     {
       "qualified": "Cycle.conjectures.U6.is_eulerian_tour",
