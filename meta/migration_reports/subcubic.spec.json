@@ -1,0 +1,396 @@
+{
+  "family": "subcubic",
+  "canonical_name": "GTBase.base.subcubic",
+  "canonical_short_name": "subcubic",
+  "relation": "simple-graph subcubicity: X14 x14_subcubic G := forall v, #|N(v)| <= 3 converts to GTBase.base.subcubic G; X114 x114_subcubic H := Delta H <= 3 equals GTBase.base.subcubic H by the unconditional finite-maximum bridge GTBase.base.subcubicP (bigmax_leqP), the empty graph included. An upper bound on simple-graph degrees, distinct from the multigraph incidence contracts mcubic/loopless_cubic (exactly three incident edges) and from exact regularity.",
+  "baseline_commit": "ba8b7be309af5926081ba760ba0d5ab8e94215f7",
+  "namespaces": {
+    "base": "GTBase",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "base/theories/base.v",
+    "graph-theory-misc/theories/migration/subcubic.v",
+    "graph-theory-misc/theories/migration/matching.v",
+    "graph-theory-misc/theories/migration/consecutive_in_path.v",
+    "graph-theory-misc/theories/migration/simple_edges.v",
+    "graph-theory-misc/theories/migration/induced_free.v",
+    "graph-theory-misc/theories/migration/bag_decompositions.v"
+  ],
+  "extra_certificates": [
+    "GTBase.base.subcubicP",
+    "GTBase.base.subcubic_K0",
+    "GTBase.base.regular_subcubic",
+    "GTBase.base.subcubic_Kn",
+    "GTBase.base.not_subcubic_K5",
+    "GTBase.base.subcubic_diso"
+  ],
+  "summary": [
+    "Batch A, family A14 (simple-graph subcubic bound), on the private union ba8b7be (A13 004cf63 + reviewed C13 cdb9e10, with C11). GTBase.base.subcubic G := forall v : G, #|N(v)| <= 3 is the pointwise bound; subcubicP proves it equal to Delta G <= 3 for every graph (K_0 included: subcubic vacuously, with Delta 0). API: subcubic_K0, regular_subcubic, subcubic_Kn (n <= 3), not_subcubic_K5 and subcubic_diso. GTMisc X14.x14_subcubic converts; X114.x114_subcubic is a proved iff, not a conversion. The inline Delta G <= 3 hypotheses of Hamilton X5, Extremal D2chr and Chromatic U5 are statement text, not helpers, and stay unchanged. Multigraph incidence cubicity (A13 mcubic/loopless_cubic) and exact simple-graph regularity stay distinct.",
+    "",
+    "Frozen verbatim at ba8b7be: the two sources, X102's chains x102_subdivided_multiclaw and x102_line_graph_of_subdivided_multiclaw, and the whole rows X14.subcubic_matching_lower_bound_statement, X114.subcubic_induced_subdivision_np_complete_statement and X102.bounded_tree_independence_forbidden_family_statement (forest, subcubic and at-most-one-branch-vertex multiclaw, complete bipartite and line-graph members, full biconditional, all unchanged). Complete rows (texts at 9e03072, identical to the baseline): X14 over C1's frozen pre-M1 matching (Legacy.x14_matching over Legacy.x14_edge_set); X114 over B3's frozen induced-subdivision problem chain; X102 over C13's complete tree-alpha class (A1's frozen induced-freeness, C13's frozen tree-alpha bound and Minor tree decomposition) and M1's frozen raw line graph (over Legacy.clique_edge_set), with freshly frozen multiclaw and line-graph chains. The historical objects below are those earlier GTMisc copies; C13's Minor copy is covered by C13's spec and by the strict kernel closures. Each complete bridge reuses the earlier certificate: X14 and X102 by conversion, X114 after rewriting x114_subcubic_compat under the existential.",
+    "",
+    "History: the earlier frozen copies that still name the live helpers (C1's X14 row, B3's X114 row, M1's X102 line-graph chain and row, A1's and C13's X102 rows) stay byte-for-byte and are documented below. A14's per-row copies keep C1's, B3's, A1's and C13's live helpers and are documented reciprocally in those specs. C1's unchanged_live_helpers hashes for x14_subcubic describe its pre-A14 body, frozen here as Legacy.x14_subcubic. A11, A12 and A13 drop x14_subcubic/x114_subcubic, now migrated, from their unchanged distinct variants (A13 precedent). Statement doc blocks are unchanged; X114's entry describes the frozen Delta form, which x114_subcubic_compat proves equal."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X14.x14_subcubic",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_subcubic",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "Legacy.x14_subcubic",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.subcubic.x14_subcubic_compat",
+      "live_unfolds_to": "subcubic G"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X114.x114_subcubic",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_subcubic",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "Legacy.x114_subcubic",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.subcubic.x114_subcubic_compat",
+      "live_unfolds_to": "subcubic H"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X14.subcubic_matching_lower_bound_statement",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "subcubic_matching_lower_bound_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X14Legacy.subcubic_matching_lower_bound_statement",
+      "substitutions": {
+        "x14_subcubic": "Legacy.x14_subcubic"
+      },
+      "certificate": "GTMisc.migration.subcubic.subcubic_matching_lower_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "subcubic_induced_subdivision_np_complete_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X114Legacy.subcubic_induced_subdivision_np_complete_statement",
+      "substitutions": {
+        "x114_subcubic": "Legacy.x114_subcubic"
+      },
+      "certificate": "GTMisc.migration.subcubic.subcubic_induced_subdivision_np_complete_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X102.x102_subdivided_multiclaw",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_subdivided_multiclaw",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X102Legacy.x102_subdivided_multiclaw",
+      "substitutions": {
+        "x14_subcubic": "Legacy.x14_subcubic"
+      },
+      "certificate": "GTMisc.migration.subcubic.x102_subdivided_multiclaw_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X102.x102_line_graph_of_subdivided_multiclaw",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_line_graph_of_subdivided_multiclaw",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X102Legacy.x102_line_graph_of_subdivided_multiclaw",
+      "substitutions": {
+        "x102_subdivided_multiclaw": "X102Legacy.x102_subdivided_multiclaw"
+      },
+      "certificate": "GTMisc.migration.subcubic.x102_line_graph_of_subdivided_multiclaw_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X102.bounded_tree_independence_forbidden_family_statement",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "bounded_tree_independence_forbidden_family_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X102Legacy.bounded_tree_independence_forbidden_family_statement",
+      "substitutions": {
+        "x102_subdivided_multiclaw": "X102Legacy.x102_subdivided_multiclaw",
+        "x102_line_graph_of_subdivided_multiclaw": "X102Legacy.x102_line_graph_of_subdivided_multiclaw"
+      },
+      "certificate": "GTMisc.migration.subcubic.bounded_tree_independence_forbidden_family_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X14.subcubic_matching_lower_bound_statement",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "subcubic_matching_lower_bound_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X14Original.subcubic_matching_lower_bound_statement",
+      "substitutions": {
+        "x14_matching": "C1.Legacy.x14_matching",
+        "x14_subcubic": "Legacy.x14_subcubic"
+      },
+      "certificate": "GTMisc.migration.subcubic.subcubic_matching_lower_bound_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "subcubic_induced_subdivision_np_complete_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X114Original.subcubic_induced_subdivision_np_complete_statement",
+      "substitutions": {
+        "x114_subcubic": "Legacy.x114_subcubic",
+        "x114_hisc_problem": "B3.X114Legacy.hisc_problem"
+      },
+      "certificate": "GTMisc.migration.subcubic.subcubic_induced_subdivision_np_complete_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X102.x102_subdivided_multiclaw",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_subdivided_multiclaw",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X102Original.x102_subdivided_multiclaw",
+      "substitutions": {
+        "x14_subcubic": "Legacy.x14_subcubic"
+      },
+      "certificate": "GTMisc.migration.subcubic.x102_subdivided_multiclaw_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X102.x102_line_graph_of_subdivided_multiclaw",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_line_graph_of_subdivided_multiclaw",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X102Original.x102_line_graph_of_subdivided_multiclaw",
+      "substitutions": {
+        "x102_subdivided_multiclaw": "X102Original.x102_subdivided_multiclaw",
+        "x102_line_graph_of": "M1.X102Legacy.line_graph_of"
+      },
+      "certificate": "GTMisc.migration.subcubic.x102_line_graph_of_subdivided_multiclaw_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X102.bounded_tree_independence_forbidden_family_statement",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "bounded_tree_independence_forbidden_family_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/subcubic.v",
+      "frozen": "X102Original.bounded_tree_independence_forbidden_family_statement",
+      "substitutions": {
+        "x102_free_class_tree_alpha_bounded": "C13.X102Original.x102_free_class_tree_alpha_bounded",
+        "x102_subdivided_multiclaw": "X102Original.x102_subdivided_multiclaw",
+        "x102_line_graph_of_subdivided_multiclaw": "X102Original.x102_line_graph_of_subdivided_multiclaw"
+      },
+      "certificate": "GTMisc.migration.subcubic.bounded_tree_independence_forbidden_family_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X14.x14_edge_set",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/matching.v",
+      "frozen": "Legacy.x14_edge_set",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.matching.x14_edge_set_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X14.x14_matching",
+      "path": "graph-theory-misc/theories/conjectures/X14.v",
+      "name": "x14_matching",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "graph-theory-misc/theories/migration/matching.v",
+      "frozen": "Legacy.x14_matching",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.matching.x14_matching_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X114.x114_consecutive_in_path",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_consecutive_in_path",
+      "commit": "ceadac8a097e951709afd63b65546f1a2513e0a5",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "Legacy.x114_consecutive_in_path",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_consecutive_in_path_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_path_between",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_path_between",
+      "commit": "ceadac8a097e951709afd63b65546f1a2513e0a5",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X114Legacy.induced_path_between",
+      "substitutions": {
+        "x114_induced_path_between": "induced_path_between",
+        "x114_consecutive_in_path": "Legacy.x114_consecutive_in_path"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_induced_path_between_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision_model",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision_model",
+      "commit": "ceadac8a097e951709afd63b65546f1a2513e0a5",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X114Legacy.induced_subdivision_model",
+      "substitutions": {
+        "x114_induced_subdivision_model": "induced_subdivision_model",
+        "x114_induced_path_between": "induced_path_between",
+        "x114_consecutive_in_path": "Legacy.x114_consecutive_in_path",
+        "x114_branch": "branch",
+        "x114_branch_injective": "branch_injective",
+        "x114_edge_path": "edge_path",
+        "x114_edge_path_valid": "edge_path_valid",
+        "x114_internal_avoids_branch": "internal_avoids_branch",
+        "x114_paths_internally_disjoint": "paths_internally_disjoint",
+        "x114_global_induced": "global_induced"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_induced_subdivision_model_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X114.x114_induced_subdivision",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_induced_subdivision",
+      "commit": "ceadac8a097e951709afd63b65546f1a2513e0a5",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X114Legacy.induced_subdivision",
+      "substitutions": {
+        "x114_induced_subdivision": "induced_subdivision",
+        "x114_induced_subdivision_model": "induced_subdivision_model"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_induced_subdivision_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X114.x114_hisc_problem",
+      "path": "graph-theory-misc/theories/conjectures/X114.v",
+      "name": "x114_hisc_problem",
+      "commit": "ceadac8a097e951709afd63b65546f1a2513e0a5",
+      "frozen_path": "graph-theory-misc/theories/migration/consecutive_in_path.v",
+      "frozen": "X114Legacy.hisc_problem",
+      "substitutions": {
+        "x114_hisc_problem": "hisc_problem",
+        "x114_induced_subdivision": "induced_subdivision"
+      },
+      "certificate": "GTMisc.migration.consecutive_in_path.x114_hisc_problem_compat"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "GTMisc.conjectures.X102.x102_edge_set",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_edges.v",
+      "frozen": "Legacy.clique_edge_set",
+      "substitutions": {
+        "x102_edge_set": "clique_edge_set"
+      },
+      "certificate": "GTMisc.migration.simple_edges.x102_edge_set_compat"
+    },
+    {
+      "kind": "m1-frozen",
+      "qualified": "GTMisc.conjectures.X102.x102_line_graph_of",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_line_graph_of",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "graph-theory-misc/theories/migration/simple_edges.v",
+      "frozen": "X102Legacy.line_graph_of",
+      "substitutions": {
+        "x102_line_graph_of": "line_graph_of",
+        "x102_edge_set": "Legacy.clique_edge_set"
+      },
+      "certificate": "GTMisc.migration.simple_edges.x102_line_graph_of_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X102.x102_induced_free",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_induced_free",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_free.v",
+      "frozen": "Legacy.x102_induced_free",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_free.x102_induced_free_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X102.x102_tree_alpha_at_most",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_tree_alpha_at_most",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x102_tree_alpha_at_most",
+      "substitutions": {
+        "x27_tree_decomposition": "Minor.migration.bag_decompositions.Legacy.x27_tree_decomposition"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x102_tree_alpha_at_most_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X102.x102_free_class_tree_alpha_bounded",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_free_class_tree_alpha_bounded",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "X102Original.x102_free_class_tree_alpha_bounded",
+      "substitutions": {
+        "x102_induced_free": "GTMisc.migration.induced_free.Legacy.x102_induced_free",
+        "x102_tree_alpha_at_most": "Legacy.x102_tree_alpha_at_most"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x102_free_class_tree_alpha_bounded_original_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "graph-theory-misc/theories/migration/matching.v#X14Legacy.subcubic_matching_lower_bound_statement": "C1 per-row snapshot: C1 froze this row over its own frozen pre-M1 matching but kept the live x14_subcubic (after A14 GTBase.base.subcubic G, a conversion of the same pointwise body). Kept unchanged; the complete row is GTMisc.migration.subcubic.X14Original.subcubic_matching_lower_bound_statement, certified by subcubic_matching_lower_bound_statement_original_compat, which reuses this certificate.",
+    "graph-theory-misc/theories/migration/consecutive_in_path.v#X114Legacy.statement": "B3 per-row snapshot: B3 froze this row over its own frozen induced-subdivision problem but kept the live x114_subcubic (after A14 GTBase.base.subcubic H, equal to the old Delta H <= 3 by subcubicP). Kept unchanged; the complete row is GTMisc.migration.subcubic.X114Original.subcubic_induced_subdivision_np_complete_statement, certified by subcubic_induced_subdivision_np_complete_statement_original_compat, which rewrites x114_subcubic_compat and reuses this certificate.",
+    "graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.line_graph_of_subdivided_multiclaw": "M1 snapshot: M1 froze this chain over its own raw line graph but kept the live x102_subdivided_multiclaw (after A14 over GTBase.base.subcubic through x14_subcubic, a conversion of its pointwise bound). Kept unchanged; the complete chain is GTMisc.migration.subcubic.X102Original.x102_line_graph_of_subdivided_multiclaw, certified by x102_line_graph_of_subdivided_multiclaw_original_compat, which reuses M1's certificate.",
+    "graph-theory-misc/theories/migration/simple_edges.v#X102Legacy.statement": "M1 per-row snapshot: M1 kept the live x102_subdivided_multiclaw (after A14 over GTBase.base.subcubic through x14_subcubic, a conversion of its pointwise bound) and the then-live tree-alpha class. Kept unchanged; the complete row is GTMisc.migration.subcubic.X102Original.bounded_tree_independence_forbidden_family_statement, certified by bounded_tree_independence_forbidden_family_statement_original_compat.",
+    "graph-theory-misc/theories/migration/induced_free.v#X102Legacy.statement": "A1 per-row snapshot: A1 froze this row over its own frozen induced-freeness but kept the live x102_subdivided_multiclaw (after A14 over GTBase.base.subcubic through x14_subcubic, a conversion of its pointwise bound) and the live x102_line_graph_of_subdivided_multiclaw. Kept unchanged; the complete row is GTMisc.migration.subcubic.X102Original.bounded_tree_independence_forbidden_family_statement, certified by bounded_tree_independence_forbidden_family_statement_original_compat.",
+    "graph-theory-misc/theories/migration/induced_free.v#X102Original.statement": "A1 complete row at the time, over A1's frozen induced-freeness and M1's frozen line-graph chain, kept the live x102_subdivided_multiclaw (after A14 over GTBase.base.subcubic through x14_subcubic, a conversion of its pointwise bound). Kept unchanged; the complete row is GTMisc.migration.subcubic.X102Original.bounded_tree_independence_forbidden_family_statement, certified by bounded_tree_independence_forbidden_family_statement_original_compat.",
+    "graph-theory-misc/theories/migration/bag_decompositions.v#Legacy.bounded_tree_independence_forbidden_family_statement": "C13 per-row snapshot: C13 froze this row over its own frozen tree-alpha class but kept the live x102_subdivided_multiclaw (after A14 over GTBase.base.subcubic through x14_subcubic, a conversion of its pointwise bound) and the live x102_line_graph_of_subdivided_multiclaw. Kept unchanged; the complete row is GTMisc.migration.subcubic.X102Original.bounded_tree_independence_forbidden_family_statement, certified by bounded_tree_independence_forbidden_family_statement_original_compat.",
+    "graph-theory-misc/theories/migration/bag_decompositions.v#X102Original.bounded_tree_independence_forbidden_family_statement": "C13 complete row at the time, over C13's complete tree-alpha class and M1's frozen line-graph chain, kept the live x102_subdivided_multiclaw (after A14 over GTBase.base.subcubic through x14_subcubic, a conversion of its pointwise bound). Kept unchanged; the complete row is GTMisc.migration.subcubic.X102Original.bounded_tree_independence_forbidden_family_statement, certified by bounded_tree_independence_forbidden_family_statement_original_compat, which reuses this certificate."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x14_subcubic",
+      "note": "X102's x102_subdivided_multiclaw reaches X14's x14_subcubic across files; frozen as X102Legacy.x102_subdivided_multiclaw and X102Original.x102_subdivided_multiclaw over Legacy.x14_subcubic."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTBase.base.mcubic",
+      "path": "base/theories/base.v",
+      "name": "mcubic",
+      "note": "multigraph incidence cubicity (A13): exactly three incident edges per vertex, a loop once; not a simple-graph upper bound"
+    },
+    {
+      "qualified": "GTBase.base.loopless_cubic",
+      "path": "base/theories/base.v",
+      "name": "loopless_cubic",
+      "note": "guarded multigraph cubicity (A13), loopless G /\\ mcubic G"
+    },
+    {
+      "qualified": "GTBase.base.regular",
+      "path": "base/theories/base.v",
+      "name": "regular",
+      "note": "exact simple-graph regularity; regular G d with d <= 3 implies subcubic G (regular_subcubic), not conversely"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types of the frozen and live helpers, chains and rows, strict dependency closures of the frozen chains and rows (per-row and complete), and the types of all 183 declarations in the reverse dependency closure of X14/X114/X102 at the baseline (14 files, computed from the generated build dependencies), through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A14-subcubic/ (outside the repository)"
+}

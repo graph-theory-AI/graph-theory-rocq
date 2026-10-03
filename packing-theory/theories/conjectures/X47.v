@@ -12,7 +12,7 @@ Definition x47_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
 Definition x47_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
-  forall v : G, d <= #|N(v)|.
+  min_degree_at_least G d.
 
 Definition x47_crossing_edges (G : sgraph) (S : {set G}) : {set {set G}} :=
   [set e in x47_edge_set G | (e :&: S != set0) && (e :&: (~: S) != set0)].

@@ -892,7 +892,8 @@
     "minor-theory/theories/migration/path_vertices.v#X67Legacy.statement": "Earlier partial family snapshot retained byte-for-byte; its bag/quantitative reference now reaches C13. The corresponding C13 complete Original combines the frozen participating histories, with a whole-statement iff and strict compiled closure.",
     "chromatic-theory/theories/migration/pathwidth.v#Legacy.x126_pathwidth_at_most": "C14 immediate snapshot retains the live C13 bag alias. The reused complete C13 X126Original freezes B6/B9/C13 as well.",
     "minor-theory/theories/migration/pathwidth.v#Legacy.x95_pathwidth_at_most": "C14 immediate snapshot retains the live C13 bag alias. The reused complete C13 X95Original freezes B9/C13 as well.",
-    "minor-theory/theories/migration/pathwidth.v#Legacy.subgraph_indexed_tree_decomposition_pathwidth_bound_statement": "C14 immediate row retains the live embedded-index conclusion. The reused complete C13 X95Original freezes that entire conclusion."
+    "minor-theory/theories/migration/pathwidth.v#Legacy.subgraph_indexed_tree_decomposition_pathwidth_bound_statement": "C14 immediate row retains the live embedded-index conclusion. The reused complete C13 X95Original freezes that entire conclusion.",
+    "graph-theory-misc/theories/migration/subcubic.v#X102Legacy.bounded_tree_independence_forbidden_family_statement": "A14 snapshot: A14 froze this row over its own frozen multiclaw and line-graph chains but kept the live x102_free_class_tree_alpha_bounded of this family. Kept unchanged; the complete row is GTMisc.migration.subcubic.X102Original.bounded_tree_independence_forbidden_family_statement, certified by bounded_tree_independence_forbidden_family_statement_original_compat, which composes this family's complete X102Original.x102_free_class_tree_alpha_bounded and reuses its complete certificate."
   },
   "distinct_variants": [
     {

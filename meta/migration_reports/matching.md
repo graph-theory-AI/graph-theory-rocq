@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py matching --details /tmp/migrati
 
 - Canonical: `GraphTheory.connectivity.matching`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 3 helpers, 9 statements, 20 frozen objects, 67 recorded references.
-- Source checks: 192/192 pass; consistent.
+- Scope: 3 helpers, 9 statements, 20 frozen objects, 70 recorded references.
+- Source checks: 193/193 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -27,4 +27,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Packing.conjectures.X15alone.x15_matching`, `Hypergraph.conjectures.X6.x6_matching`, `Digraph.conjectures.path_fas.matching`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement`, `graph-theory-misc/theories/migration/subcubic.v#X14Legacy.subcubic_matching_lower_bound_statement`.

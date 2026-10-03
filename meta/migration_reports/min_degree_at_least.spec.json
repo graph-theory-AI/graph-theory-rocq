@@ -1,0 +1,799 @@
+{
+  "family": "minimum-degree-at-least",
+  "canonical_name": "GTBase.base.min_degree_at_least",
+  "canonical_short_name": "min_degree_at_least",
+  "relation": "universal lower bound: ten local copies of forall v : G, d <= #|N(v)| convert to GTBase.base.min_degree_at_least G d; X13's induced adapter is min_degree_at_least (induced S) d on the supplied S (subtype kept); XE1's no-isolated-vertices forall v, 0 < #|N(v)| is min_degree_at_least G 1. Not an attained minimum: K0 and empty induced S satisfy every bound; no nonemptiness is added.",
+  "baseline_commit": "9abf440da80115caeffd299077976b48f4e07d74",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "cycle-theory": "Cycle",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "hamiltonicity-theory": "Hamilton",
+    "homomorphism-theory": "Hom",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/base.v",
+    "chromatic-theory/theories/migration/min_degree_at_least.v",
+    "cycle-theory/theories/migration/min_degree_at_least.v",
+    "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+    "graph-theory-misc/theories/migration/min_degree_at_least.v",
+    "hamiltonicity-theory/theories/migration/min_degree_at_least.v",
+    "homomorphism-theory/theories/migration/min_degree_at_least.v",
+    "packing-theory/theories/migration/min_degree_at_least.v",
+    "extremal-graph-theory/theories/migration/subgraph_of.v",
+    "extremal-graph-theory/theories/migration/complement.v",
+    "extremal-graph-theory/theories/migration/edge_count.v",
+    "extremal-graph-theory/theories/migration/consecutive_in_cycle.v",
+    "graph-theory-misc/theories/migration/incidence_degree.v",
+    "cycle-theory/theories/migration/genuine_cycle.v"
+  ],
+  "extra_certificates": [
+    "GTBase.base.min_degree_at_least0",
+    "GTBase.base.min_degree_at_least_le",
+    "GTBase.base.regular_min_degree_at_least",
+    "GTBase.base.min_degree_at_least1P",
+    "GTBase.base.min_degree_at_least_K0",
+    "GTBase.base.min_degree_at_least_Kn",
+    "GTBase.base.min_degree_at_least_Knm",
+    "GTBase.base.min_degree_at_least_kconnected",
+    "GTBase.base.min_degree_at_least_diso",
+    "GTBase.base.min_degree_at_least_Delta",
+    "GTBase.base.min_degree_at_least_lt_card"
+  ],
+  "summary": [
+    "Batch A, family A11 (minimum-degree lower bounds). GTBase.base.min_degree_at_least G d := forall v : G, d <= #|N(v)| is the universal lower bound beside Delta/regular, not an attained minimum: K0 and an empty induced subgraph satisfy every bound and no nonemptiness is added. Ten local copies (X203, Cycle XE2, X13, X30, XE1, X38, X74, X211 min_degree_geq, X135, X47) convert to it; X13's induced adapter is min_degree_at_least (induced S) d on the supplied S (subtype kept); XE1's no-isolated-vertices forall v, 0 < #|N(v)| is the bound 1 (min_degree_at_least1P).",
+    "",
+    "Seventeen rows are frozen verbatim at 9abf440 with two chains (X13 bipartite induced bound, XE1 C4-forcing minimum degree); whole quantifiers, natural subtraction, Ramsey witnesses, growth hypotheses and exact arithmetic bounds are unchanged, and X203's empty-graph defect and blocked status are kept. Eight complete Originals: #85 (frozen bound with A5's frozen containment, through a new original chain), #545/#566/#567/#568/#570 (frozen no-isolated bound with A7's frozen count and #566 sparse-set chain, A6's frozen Ramsey number and B4's frozen h5) Cycle #752 (frozen bound with B10's frozen cycle lengths over its frozen genuine cycles; follow-up on the B10 union) and X38 (A10's frozen raw incidence count and degree classes with the frozen bound; the M1 alias stays live as in A10, no pre-M1 claim). Each complete row converts to the earlier family's complete or per-row certificate, whose bridge it reuses. Earlier A5, A6, A7, B4 and A10 snapshots that keep a live A11 bound are documented here, and A11's per-row copies are documented reciprocally in their specs. Exact minima, subcubic/cubic, scaled, directed and hypergraph contracts stay distinct."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X203.x203_min_degree_at_least",
+      "path": "chromatic-theory/theories/conjectures/X203.v",
+      "name": "x203_min_degree_at_least",
+      "frozen_path": "chromatic-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x203_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.min_degree_at_least.x203_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G d"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X203.separation_choosability_min_degree_unbounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X203.v",
+      "name": "separation_choosability_min_degree_unbounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "X203Legacy.separation_choosability_min_degree_unbounded_statement",
+      "substitutions": {
+        "x203_min_degree_at_least": "Legacy.x203_min_degree_at_least"
+      },
+      "certificate": "Chromatic.migration.min_degree_at_least.separation_choosability_min_degree_unbounded_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.XE2.xe2_min_degree_at_least",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_min_degree_at_least",
+      "frozen_path": "cycle-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.xe2_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Cycle.migration.min_degree_at_least.xe2_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G k"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.XE2.erdos_752_statement",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "erdos_752_statement",
+      "frozen_path": "cycle-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE2Legacy.erdos_752_statement",
+      "substitutions": {
+        "xe2_min_degree_at_least": "Legacy.xe2_min_degree_at_least"
+      },
+      "certificate": "Cycle.migration.min_degree_at_least.erdos_752_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.XE2.erdos_752_statement",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "erdos_752_statement",
+      "frozen_path": "cycle-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE2Original.erdos_752_statement",
+      "substitutions": {
+        "xe2_min_degree_at_least": "Legacy.xe2_min_degree_at_least",
+        "xe2_cycle_lengths": "B10.XE2Legacy.cycle_lengths"
+      },
+      "certificate": "Cycle.migration.min_degree_at_least.erdos_752_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X13.x13_min_degree_at_least",
+      "path": "extremal-graph-theory/theories/conjectures/X13.v",
+      "name": "x13_min_degree_at_least",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x13_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Extremal.migration.min_degree_at_least.x13_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G d"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X13.x13_induced_min_degree_at_least",
+      "path": "extremal-graph-theory/theories/conjectures/X13.v",
+      "name": "x13_induced_min_degree_at_least",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x13_induced_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Extremal.migration.min_degree_at_least.x13_induced_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least (induced S) d"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X30.x30_min_degree_at_least",
+      "path": "extremal-graph-theory/theories/conjectures/X30.v",
+      "name": "x30_min_degree_at_least",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x30_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Extremal.migration.min_degree_at_least.x30_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G d"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE1.xe1_min_degree_at_least",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_min_degree_at_least",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.xe1_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Extremal.migration.min_degree_at_least.xe1_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G d"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE1.xe1_no_isolated_vertices",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_no_isolated_vertices",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.xe1_no_isolated_vertices",
+      "substitutions": {},
+      "certificate": "Extremal.migration.min_degree_at_least.xe1_no_isolated_vertices_compat",
+      "live_unfolds_to": "min_degree_at_least G 1"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X13.x13_bipartite_induced_min_degree_at_least",
+      "path": "extremal-graph-theory/theories/conjectures/X13.v",
+      "name": "x13_bipartite_induced_min_degree_at_least",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "X13Legacy.bipartite_induced_min_degree_at_least",
+      "substitutions": {
+        "x13_induced_min_degree_at_least": "Legacy.x13_induced_min_degree_at_least",
+        "x13_bipartite_induced_min_degree_at_least": "bipartite_induced_min_degree_at_least"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.x13_bipartite_induced_min_degree_at_least_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X13.large_girth_min_degree_bipartite_induced_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X13.v",
+      "name": "large_girth_min_degree_bipartite_induced_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "X13Legacy.large_girth_min_degree_bipartite_induced_statement",
+      "substitutions": {
+        "x13_min_degree_at_least": "Legacy.x13_min_degree_at_least",
+        "x13_bipartite_induced_min_degree_at_least": "bipartite_induced_min_degree_at_least"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.large_girth_min_degree_bipartite_induced_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X13.min_degree_forces_large_clique_or_bipartite_induced_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X13.v",
+      "name": "min_degree_forces_large_clique_or_bipartite_induced_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "X13Legacy.min_degree_forces_large_clique_or_bipartite_induced_statement",
+      "substitutions": {
+        "x13_min_degree_at_least": "Legacy.x13_min_degree_at_least",
+        "x13_bipartite_induced_min_degree_at_least": "bipartite_induced_min_degree_at_least"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.min_degree_forces_large_clique_or_bipartite_induced_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X30.triangle_free_min_degree_log_bipartite_induced_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X30.v",
+      "name": "triangle_free_min_degree_log_bipartite_induced_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "X30Legacy.triangle_free_min_degree_log_bipartite_induced_statement",
+      "substitutions": {
+        "x30_min_degree_at_least": "Legacy.x30_min_degree_at_least"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.triangle_free_min_degree_log_bipartite_induced_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_c4_forcing_min_degree",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_c4_forcing_min_degree",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Legacy.c4_forcing_min_degree",
+      "substitutions": {
+        "xe1_min_degree_at_least": "Legacy.xe1_min_degree_at_least",
+        "xe1_c4_forcing_min_degree": "c4_forcing_min_degree"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.xe1_c4_forcing_min_degree_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_85_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_85_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Legacy.erdos_85_statement",
+      "substitutions": {
+        "xe1_c4_forcing_min_degree": "c4_forcing_min_degree"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_85_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_545_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_545_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Legacy.erdos_545_statement",
+      "substitutions": {
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_545_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_566_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_566_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Legacy.erdos_566_statement",
+      "substitutions": {
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_566_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_567_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_567_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Legacy.erdos_567_statement",
+      "substitutions": {
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_567_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_568_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_568_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Legacy.erdos_568_statement",
+      "substitutions": {
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_568_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_570_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_570_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE2Legacy.erdos_570_statement",
+      "substitutions": {
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_570_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_c4_forcing_min_degree",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_c4_forcing_min_degree",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Original.c4_forcing_min_degree",
+      "substitutions": {
+        "xe1_min_degree_at_least": "Legacy.xe1_min_degree_at_least",
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of",
+        "xe1_c4_forcing_min_degree": "c4_forcing_min_degree"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.c4_forcing_min_degree_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_85_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_85_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Original.erdos_85_statement",
+      "substitutions": {
+        "xe1_c4_forcing_min_degree": "XE1Original.c4_forcing_min_degree"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_85_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_545_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_545_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Original.erdos_545_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices",
+        "xe1_graph_ramsey_number": "A6.XE1Original.graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_545_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_566_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_566_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Original.erdos_566_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices",
+        "xe1_graph_ramsey_number": "A6.XE1Original.graph_ramsey_number",
+        "xe1_every_k_set_sparse": "A7.XE1Legacy.every_k_set_sparse"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_566_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_567_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_567_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Original.erdos_567_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices",
+        "xe1_graph_ramsey_number": "A6.XE1Original.graph_ramsey_number",
+        "xe1_h5_graph": "B4.XE1Legacy.h5_graph"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_567_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_568_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_568_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE1Original.erdos_568_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices",
+        "xe1_graph_ramsey_number": "A6.XE1Original.graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_568_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_570_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_570_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "XE2Original.erdos_570_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_no_isolated_vertices": "Legacy.xe1_no_isolated_vertices",
+        "xe1_graph_ramsey_number": "A6.XE1Original.graph_ramsey_number"
+      },
+      "certificate": "Extremal.migration.min_degree_at_least.erdos_570_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X38.x38_min_degree_at_least",
+      "path": "graph-theory-misc/theories/conjectures/X38.v",
+      "name": "x38_min_degree_at_least",
+      "frozen_path": "graph-theory-misc/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x38_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.min_degree_at_least.x38_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G delta"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X74.x74_min_degree_at_least",
+      "path": "graph-theory-misc/theories/conjectures/X74.v",
+      "name": "x74_min_degree_at_least",
+      "frozen_path": "graph-theory-misc/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x74_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.min_degree_at_least.x74_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G d"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X38.min_degree_spanning_subgraph_small_degree_multiplicity_statement",
+      "path": "graph-theory-misc/theories/conjectures/X38.v",
+      "name": "min_degree_spanning_subgraph_small_degree_multiplicity_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/min_degree_at_least.v",
+      "frozen": "X38Legacy.min_degree_spanning_subgraph_small_degree_multiplicity_statement",
+      "substitutions": {
+        "x38_min_degree_at_least": "Legacy.x38_min_degree_at_least"
+      },
+      "certificate": "GTMisc.migration.min_degree_at_least.min_degree_spanning_subgraph_small_degree_multiplicity_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X74.induced_linear_forest_caro_wei_bound_statement",
+      "path": "graph-theory-misc/theories/conjectures/X74.v",
+      "name": "induced_linear_forest_caro_wei_bound_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/min_degree_at_least.v",
+      "frozen": "X74Legacy.induced_linear_forest_caro_wei_bound_statement",
+      "substitutions": {
+        "x74_min_degree_at_least": "Legacy.x74_min_degree_at_least"
+      },
+      "certificate": "GTMisc.migration.min_degree_at_least.induced_linear_forest_caro_wei_bound_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X38.min_degree_spanning_subgraph_small_degree_multiplicity_statement",
+      "path": "graph-theory-misc/theories/conjectures/X38.v",
+      "name": "min_degree_spanning_subgraph_small_degree_multiplicity_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/min_degree_at_least.v",
+      "frozen": "X38Original.min_degree_spanning_subgraph_small_degree_multiplicity_statement",
+      "substitutions": {
+        "x38_min_degree_at_least": "Legacy.x38_min_degree_at_least",
+        "x38_degree_class_size": "A10.X38Legacy.degree_class_size"
+      },
+      "certificate": "GTMisc.migration.min_degree_at_least.min_degree_spanning_subgraph_small_degree_multiplicity_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hamilton.conjectures.X211.x211_min_degree_geq",
+      "path": "hamiltonicity-theory/theories/conjectures/X211.v",
+      "name": "x211_min_degree_geq",
+      "frozen_path": "hamiltonicity-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x211_min_degree_geq",
+      "substitutions": {},
+      "certificate": "Hamilton.migration.min_degree_at_least.x211_min_degree_geq_compat",
+      "live_unfolds_to": "min_degree_at_least G d"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hamilton.conjectures.X211.hypohamiltonian_minimum_degree_four_statement",
+      "path": "hamiltonicity-theory/theories/conjectures/X211.v",
+      "name": "hypohamiltonian_minimum_degree_four_statement",
+      "frozen_path": "hamiltonicity-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "X211Legacy.hypohamiltonian_minimum_degree_four_statement",
+      "substitutions": {
+        "x211_min_degree_geq": "Legacy.x211_min_degree_geq"
+      },
+      "certificate": "Hamilton.migration.min_degree_at_least.hypohamiltonian_minimum_degree_four_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hom.conjectures.X135.x135_min_degree_at_least",
+      "path": "homomorphism-theory/theories/conjectures/X135.v",
+      "name": "x135_min_degree_at_least",
+      "frozen_path": "homomorphism-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x135_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Hom.migration.min_degree_at_least.x135_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G delta"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hom.conjectures.X135.engbers_homomorphism_count_maximisation_statement",
+      "path": "homomorphism-theory/theories/conjectures/X135.v",
+      "name": "engbers_homomorphism_count_maximisation_statement",
+      "frozen_path": "homomorphism-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "X135Legacy.engbers_homomorphism_count_maximisation_statement",
+      "substitutions": {
+        "x135_min_degree_at_least": "Legacy.x135_min_degree_at_least"
+      },
+      "certificate": "Hom.migration.min_degree_at_least.engbers_homomorphism_count_maximisation_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X47.x47_min_degree_at_least",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_min_degree_at_least",
+      "frozen_path": "packing-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x47_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Packing.migration.min_degree_at_least.x47_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G d"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X47.tree_decomposition_delta_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "X47Legacy.tree_decomposition_delta_edge_connected_statement",
+      "substitutions": {
+        "x47_min_degree_at_least": "Legacy.x47_min_degree_at_least"
+      },
+      "certificate": "Packing.migration.min_degree_at_least.tree_decomposition_delta_edge_connected_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X48.tree_decomposition_leaf_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X48.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "X48Legacy.tree_decomposition_leaf_edge_connected_statement",
+      "substitutions": {
+        "x47_min_degree_at_least": "Legacy.x47_min_degree_at_least"
+      },
+      "certificate": "Packing.migration.min_degree_at_least.tree_decomposition_leaf_edge_connected_statement_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_subgraph_of",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_subgraph_of",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "Legacy.xe1_subgraph_of",
+      "substitutions": {},
+      "certificate": "Extremal.migration.subgraph_of.xe1_subgraph_of_compat",
+      "live_unfolds_to": "has_subgraph G H",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "A5 (subgraph containment) frozen copy, reused unchanged by XE1Original.c4_forcing_min_degree"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey_number",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.graph_ramsey_number",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_graph_ramsey": "graph_ramsey"
+      },
+      "certificate": "Extremal.migration.complement.graph_ramsey_number_original_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "A6 (complement) frozen copy, reused unchanged by XE1Original.erdos_545/566/567/568_statement and XE2Original.erdos_570_statement"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X4.x4_edge_count",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_edge_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "Legacy.x4_edge_count",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_count.x4_edge_count_compat",
+      "live_unfolds_to": "edge_count G",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+      "note": "A7 (edge count) frozen count, reused unchanged by XE1Original.erdos_545/566/567/568_statement and XE2Original.erdos_570_statement"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_every_k_set_sparse",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_every_k_set_sparse",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "XE1Legacy.every_k_set_sparse",
+      "substitutions": {
+        "x4_edge_count": "Legacy.x4_edge_count",
+        "xe1_every_k_set_sparse": "every_k_set_sparse"
+      },
+      "certificate": "Extremal.migration.edge_count.every_k_set_sparse_compat",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+      "note": "A7 (edge count) frozen sparse-set chain, reused unchanged by XE1Original.erdos_566_statement"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_h5_graph",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_h5_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "XE1Legacy.h5_graph",
+      "substitutions": {
+        "x4_consecutive_in_cycle": "Legacy.x4_consecutive_in_cycle",
+        "xe1_h5_graph": "h5_graph"
+      },
+      "certificate": "Extremal.migration.consecutive_in_cycle.xe1_h5_graph_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "note": "B4 (cyclic adjacency) frozen copy, reused unchanged by XE1Original.erdos_567_statement"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X38.x38_subgraph_degree",
+      "path": "graph-theory-misc/theories/conjectures/X38.v",
+      "name": "x38_subgraph_degree",
+      "frozen_path": "graph-theory-misc/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x38_subgraph_degree",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.incidence_degree.x38_subgraph_degree_compat",
+      "live_unfolds_to": "incidence_degree F v",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635",
+      "note": "A10 (incidence degree) frozen raw count, reached by X38Original through A10.X38Legacy.degree_class_size"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X38.x38_degree_class_size",
+      "path": "graph-theory-misc/theories/conjectures/X38.v",
+      "name": "x38_degree_class_size",
+      "frozen_path": "graph-theory-misc/theories/migration/incidence_degree.v",
+      "frozen": "X38Legacy.degree_class_size",
+      "substitutions": {
+        "x38_subgraph_degree": "Legacy.x38_subgraph_degree",
+        "x38_degree_class_size": "degree_class_size"
+      },
+      "certificate": "GTMisc.migration.incidence_degree.x38_degree_class_size_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635",
+      "note": "A10 (incidence degree) frozen degree classes, reused unchanged by X38Original"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.XE1.xe1_cycle",
+      "path": "cycle-theory/theories/conjectures/XE1.v",
+      "name": "xe1_cycle",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.xe1_cycle",
+      "substitutions": {},
+      "certificate": "Cycle.migration.genuine_cycle.xe1_cycle_compat",
+      "live_unfolds_to": "seq_cycle (--) c",
+      "commit": "00d6bb3a80759b365fffab282d47603510bf839e",
+      "note": "B10 (genuine cycles) frozen copy, reached by XE2Original.erdos_752_statement through B10.XE2Legacy.cycle_lengths"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.XE2.xe2_cycle_lengths",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_cycle_lengths",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Legacy.cycle_lengths",
+      "substitutions": {
+        "xe1_cycle": "Legacy.xe1_cycle",
+        "xe2_cycle_lengths": "cycle_lengths"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.xe2_cycle_lengths_compat",
+      "commit": "00d6bb3a80759b365fffab282d47603510bf839e",
+      "note": "B10 (genuine cycles) frozen cycle lengths, reused unchanged by XE2Original.erdos_752_statement"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_545_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_545_statement, certified by erdos_545_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_566_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_566_statement, certified by erdos_566_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_567_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_568_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_568_statement, certified by erdos_568_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Original.erdos_545_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_545_statement, certified by erdos_545_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Original.erdos_566_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_566_statement, certified by erdos_566_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Original.erdos_567_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Original.erdos_568_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_568_statement, certified by erdos_568_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE2Legacy.erdos_570_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE2Original.erdos_570_statement, certified by erdos_570_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#XE2Original.erdos_570_statement": "A6 snapshot: A6 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE2Original.erdos_570_statement, certified by erdos_570_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_545_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_545_statement, certified by erdos_545_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_566_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_566_statement, certified by erdos_566_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_567_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_568_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_568_statement, certified by erdos_568_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Original.erdos_545_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_545_statement, certified by erdos_545_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Original.erdos_566_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_566_statement, certified by erdos_566_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Original.erdos_567_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Original.erdos_568_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_568_statement, certified by erdos_568_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_570_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE2Original.erdos_570_statement, certified by erdos_570_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Original.erdos_570_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE2Original.erdos_570_statement, certified by erdos_570_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/consecutive_in_cycle.v#XE1Legacy.erdos_567_statement": "B4 snapshot: B4 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.c4_forcing_min_degree": "A5 snapshot: A5 froze this chain over its own frozen helpers but kept the live xe1_min_degree_at_least (after A11 GTBase.base.min_degree_at_least G d, a conversion of the same universal bound). Kept unchanged; the complete chain is Extremal.migration.min_degree_at_least.XE1Original.c4_forcing_min_degree, certified by c4_forcing_min_degree_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_545_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_545_statement, certified by erdos_545_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_566_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_566_statement, certified by erdos_566_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_567_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_568_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_568_statement, certified by erdos_568_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_570_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE2Original.erdos_570_statement, certified by erdos_570_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Original.erdos_567_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live xe1_no_isolated_vertices (after A11 GTBase.base.min_degree_at_least G 1, a conversion of the same universal bound). Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat.",
+    "graph-theory-misc/theories/migration/incidence_degree.v#X38Legacy.min_degree_spanning_subgraph_small_degree_multiplicity_statement": "A10 snapshot: A10 froze this row over its own frozen helpers but kept the live x38_min_degree_at_least (after A11 GTBase.base.min_degree_at_least G delta, a conversion of the same universal bound). Kept unchanged; the complete row is GTMisc.migration.min_degree_at_least.X38Original.min_degree_spanning_subgraph_small_degree_multiplicity_statement, certified by min_degree_spanning_subgraph_small_degree_multiplicity_statement_original_compat.",
+    "cycle-theory/theories/migration/genuine_cycle.v#XE2Legacy.erdos_752_statement": "B10 snapshot: B10 froze this row over its own frozen cycle lengths but kept the live xe2_min_degree_at_least (after A11 GTBase.base.min_degree_at_least G k, a conversion of the same universal bound). Kept unchanged; the complete row is Cycle.migration.min_degree_at_least.XE2Original.erdos_752_statement, certified by erdos_752_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "note": "Atlas edge e208 cites the live X47 row (edge-partition decompositions, distinct from bag decompositions); forced in the atlas build, theorem types unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "note": "Atlas edge e237 cites the live X48 row; forced in the atlas build, theorem types unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe1_no_isolated_vertices",
+      "note": "Row erdos:570 uses XE1's no-isolated bound across files; frozen as XE2Legacy and XE2Original over Legacy.xe1_no_isolated_vertices."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X13.v",
+      "name": "triangle_free_min_degree_log_bipartite_induced_statement",
+      "note": "Edge e063 from the live X30 row; proof unchanged, forced rebuild."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X13.v",
+      "name": "large_girth_min_degree_bipartite_induced_statement",
+      "note": "Edges e063/e075 to the live X13 row; proofs unchanged, forced rebuild."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X13.v",
+      "name": "min_degree_forces_large_clique_or_bipartite_induced_statement",
+      "note": "Edge e075 from the live X13 dichotomy row; proof unchanged, forced rebuild."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_X211.v",
+      "name": "x211_min_degree_geq",
+      "note": "K5 positive and K4 negative witnesses of the live bound; scripts unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/X48.v",
+      "name": "x47_min_degree_at_least",
+      "note": "Row X48 uses X47's bound across files; frozen as X48Legacy over Legacy.x47_min_degree_at_least."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X48.v",
+      "name": "x47_min_degree_at_least",
+      "note": "x47_min_degree_at_least_leq (antitonicity) on the live bound; script unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X48.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "note": "The X47 -> X48 implication between the live rows; unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X48.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "note": "The X47 -> X48 implication between the live rows; unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.D7.mindeg_cn",
+      "path": "graph-theory-misc/theories/conjectures/D7.v",
+      "name": "mindeg_cn",
+      "note": "scaled rational-style bound (the denominator may be zero)"
+    },
+    {
+      "qualified": "Extremal.conjectures.X30.x30_induced_min_degree_log_at_least",
+      "path": "extremal-graph-theory/theories/conjectures/X30.v",
+      "name": "x30_induced_min_degree_log_at_least",
+      "note": "scaled logarithmic bound on an induced subgraph (cden may be zero)"
+    },
+    {
+      "qualified": "Digraph.conjectures.X2.sg_degeneracy_at_least",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "sg_degeneracy_at_least",
+      "note": "existential nonempty-subgraph degeneracy, not a universal bound"
+    },
+    {
+      "qualified": "Hypergraph.conjectures.X119.x119_no_isolated",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_no_isolated",
+      "note": "hypergraph vertex coverage by a supplied family"
+    },
+    {
+      "qualified": "Cycle.conjectures.XE2.xe2_proper_induced_subgraphs_min_degree_le2",
+      "path": "cycle-theory/theories/conjectures/XE2.v",
+      "name": "xe2_proper_induced_subgraphs_min_degree_le2",
+      "note": "an upper bound on the minimum degree of proper induced subgraphs"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types of the frozen and live bounds, strict dependency closures of the frozen rows and the complete Originals, and the forced proof consumers, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A11-min_degree_at_least/ (outside the repository)"
+}

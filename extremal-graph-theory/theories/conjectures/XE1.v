@@ -17,7 +17,7 @@ Definition xe1_has_independent_set (G : sgraph) (k : nat) : Prop :=
   exists S : {set G}, xe1_stable_set S /\ #|S| = k.
 
 Definition xe1_no_isolated_vertices (G : sgraph) : Prop :=
-  forall v : G, 0 < #|N(v)|.
+  min_degree_at_least G 1.
 
 Definition xe1_complement_rel (G : sgraph) : rel G :=
   @compl_rel G.
@@ -77,7 +77,7 @@ Definition xe1_tree (T : sgraph) : Prop :=
   is_forest [set: T] /\ connected [set: T].
 
 Definition xe1_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
-  forall v : G, d <= #|N(v)|.
+  min_degree_at_least G d.
 
 Definition xe1_every_k_set_sparse (G : sgraph) (k : nat) : Prop :=
   forall S : {set G}, #|S| = k -> x4_edge_count (induced S) <= 2 * k - 3.

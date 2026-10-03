@@ -239,12 +239,12 @@ Lemma cubic_loopless (G : mgraph) : cubic G -> loopless G.
 Proof. by case. Qed.
 
 Lemma cubic_mdeg (G : mgraph) : cubic G -> forall v : G, mdeg v = 3.
-Proof. by case. Qed.
+Proof. by case=> ll h v; rewrite (mdeg_loopless v ll); exact: (h v). Qed.
 
 (** Witness: two vertices joined by three parallel non-loop edges are cubic
     ([loopless_G3p] is proved with the other degree lemmas above). *)
 Lemma cubic_G3p : cubic G3p.
-Proof. by split; [exact: loopless_G3p | exact: mdeg_G3p]. Qed.
+Proof. by split=> [|v]; [exact: loopless_G3p | rewrite -(mdeg_loopless v loopless_G3p); exact: mdeg_G3p]. Qed.
 
 (** ** [simple_mgraph] : witness *)
 
