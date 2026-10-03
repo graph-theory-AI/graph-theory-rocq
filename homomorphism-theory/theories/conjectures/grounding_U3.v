@@ -44,14 +44,14 @@ Proof. by rewrite /edge_rel /= /cyc_rel => /andP[_]. Qed.
 Lemma path_graph_has_edge : exists x y : path_graph 2, x -- y.
 Proof.
 exists (@Ordinal 2 0 isT), (@Ordinal 2 1 isT).
-by rewrite /edge_rel /= /pth_rel /=.
+by rewrite /edge_rel /= /path_graphs.ordinal_path_rel /=.
 Qed.
 
 (** Textbook identity: in a path, adjacency forces consecutive indices
     (no modular wrap). *)
 Lemma path_adj_succ n (i j : path_graph n) :
   i -- j -> ((val i).+1 == val j) || ((val j).+1 == val i).
-Proof. by rewrite /edge_rel /= /pth_rel. Qed.
+Proof. by rewrite /edge_rel /= /path_graphs.ordinal_path_rel. Qed.
 
 (** ** [star_graph] — witness + identity. *)
 

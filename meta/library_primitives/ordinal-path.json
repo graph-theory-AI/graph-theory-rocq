@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "family": "ordinal-path",
+  "primitive": {
+    "canonical_name": "GTBase.path_graphs.ordinal_path",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "p4_edge",
+      "path_graph",
+      "path_rel",
+      "pth_rel"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X170.x170_p4_edge",
+      "Hom.conjectures.U3.path_graph",
+      "Hom.conjectures.U3.pth_rel",
+      "Packing.conjectures.X18.x18_path_graph",
+      "Packing.conjectures.X18.x18_path_rel",
+      "Packing.conjectures.X226.x226_path_graph",
+      "Packing.conjectures.X226.x226_path_rel"
+    ],
+    "consumers_remaining": 10,
+    "relation": "one contract: the path graph P_n on the ordinals 'I_n, two indices adjacent exactly when they are consecutive in either order, with n vertices, no loop, no modular wrap and no positivity premise. Relations: Hom.U3.pth_rel (Section parameter n) and Chromatic.X170.x170_p4_edge (n = 4) are the raw relation GTBase.path_graphs.ordinal_path_rel by conversion; Packing.X18.x18_path_rel and Packing.X226.x226_path_rel carry a redundant (i != j) guard and are pointwise equal to it (ordinal_path_rel_guardedE), not convertible. Constructors: Hom.U3.path_graph, Packing.X18.x18_path_graph and Packing.X226.x226_path_graph were SGraph packagings of those relations with their own symmetry/irreflexivity proofs; each is isomorphic to the canonical ordinal_path through upstream eq_diso (the identity on 'I_n), and no proof-term conversion is claimed. GTBase.path_graphs is a focused construction module: the raw relation and the SGraph constructor, the raw and guarded edge equations, order n, no loop, the small cases n = 0, 1, 2, 3, the P_4 instance, and bridges (maximum degree at most two, connected, a forest by K3_free_forest, hence a tree and a B9 path_tree). Distinct, untouched: the cyclic GTBase.base.cyc_rel / cycle_graph, Minor.X198.x198_join_path_rel on a sum carrier, the other cyclic/modular, product and directed relations listed in the spec, sequence paths and path indices, and B9's degree-bounded predicate path_tree.",
+    "semantic_classes": {
+      "ordinal-path-relation": {
+        "members": [
+          "Chromatic.conjectures.X170.x170_p4_edge",
+          "Hom.conjectures.U3.pth_rel",
+          "Packing.conjectures.X18.x18_path_rel",
+          "Packing.conjectures.X226.x226_path_rel"
+        ],
+        "count": 4,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.ordinal_path.x170_p4_edge_compat",
+          "Hom.migration.ordinal_path.pth_rel_compat",
+          "Packing.migration.ordinal_path.x18_path_rel_compat",
+          "Packing.migration.ordinal_path.x226_path_rel_compat"
+        ],
+        "note": "consecutive ordinals in either order: Hom and X170 raw (conversion), Packing guarded by i != j (pointwise equality through ordinal_path_rel_guardedE). The X170 intermediaries x170_induced_oriented_P4 / x170_forb_oriented_P4_family and the blocked row oriented_P4_forb_chi_bounded_statement are frozen over the frozen relation with a complete pre-C9/B21 Original over C9's frozen X170Legacy.x170_chi_bounded; the row's known-unfaithful exceptional set stays blocked and unrepaired."
+      },
+      "ordinal-path-graph": {
+        "members": [
+          "Hom.conjectures.U3.path_graph",
+          "Packing.conjectures.X18.x18_path_graph",
+          "Packing.conjectures.X226.x226_path_graph"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hom.migration.ordinal_path.path_graph_compat",
+          "Packing.migration.ordinal_path.x18_path_graph_compat",
+          "Packing.migration.ordinal_path.x226_path_graph_compat"
+        ],
+        "note": "SGraph packagings of the relations above with their own proof fields, each isomorphic (diso, identity on 'I_n) to GTBase.path_graphs.ordinal_path through upstream eq_diso; the frozen proof lemmas are certified by the *_proofs_compat isomorphisms. Complete rows frozen over the frozen constructors: Packing X18 path_partition_independent_set_balance_statement (independence transports along the pointwise edge equality), Packing X226 eta_bounded_path_free_classes_statement (induced-freeness along the isomorphism), Hom U3 extremal_problem_on_the_number_of_tree_endomorphism_statement (the endomorphism counts agree by conversion)."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.ordinal_path.oriented_P4_forb_chi_bounded_statement_compat",
+      "Chromatic.migration.ordinal_path.oriented_P4_forb_chi_bounded_statement_original_compat",
+      "Chromatic.migration.ordinal_path.x170_forb_oriented_P4_family_compat",
+      "Chromatic.migration.ordinal_path.x170_induced_oriented_P4_compat",
+      "Chromatic.migration.ordinal_path.x170_p4_edge_compat",
+      "Hom.migration.ordinal_path.endo_count_compat",
+      "Hom.migration.ordinal_path.extremal_problem_on_the_number_of_tree_endomorphism_statement_compat",
+      "Hom.migration.ordinal_path.path_graph_compat",
+      "Hom.migration.ordinal_path.pth_proofs_compat",
+      "Hom.migration.ordinal_path.pth_rel_compat",
+      "Packing.migration.ordinal_path.eta_bounded_path_free_classes_statement_compat",
+      "Packing.migration.ordinal_path.path_partition_independent_set_balance_statement_compat",
+      "Packing.migration.ordinal_path.x18_independent_set_compat",
+      "Packing.migration.ordinal_path.x18_path_graph_compat",
+      "Packing.migration.ordinal_path.x18_path_proofs_compat",
+      "Packing.migration.ordinal_path.x18_path_rel_compat",
+      "Packing.migration.ordinal_path.x226_path_graph_compat",
+      "Packing.migration.ordinal_path.x226_path_proofs_compat",
+      "Packing.migration.ordinal_path.x226_path_rel_compat"
+    ],
+    "api_theorems": [
+      "GTBase.path_graphs.ordinal_path_rel_sym",
+      "GTBase.path_graphs.ordinal_path_rel_irrefl",
+      "GTBase.path_graphs.ordinal_path_edgeE",
+      "GTBase.path_graphs.ordinal_path_relP",
+      "GTBase.path_graphs.ordinal_path_rel_guardedE",
+      "GTBase.path_graphs.ordinal_path_edge_guardedE",
+      "GTBase.path_graphs.card_ordinal_path",
+      "GTBase.path_graphs.ordinal_path_no_loop",
+      "GTBase.path_graphs.ordinal_path_degree",
+      "GTBase.path_graphs.ordinal_path_Delta",
+      "GTBase.path_graphs.ordinal_path0_empty",
+      "GTBase.path_graphs.ordinal_path1_edgeless",
+      "GTBase.path_graphs.ordinal_path2_edge",
+      "GTBase.path_graphs.ordinal_path_ends",
+      "GTBase.path_graphs.ordinal_path3_no_wrap",
+      "GTBase.path_graphs.ordinal_path4_edgeE",
+      "GTBase.path_graphs.eq_ordinal_path_diso",
+      "GTBase.path_graphs.guarded_ordinal_path_diso",
+      "GTBase.path_graphs.ordinal_path_connect_add",
+      "GTBase.path_graphs.ordinal_path_connected",
+      "GTBase.path_graphs.ordinal_path_disj_mem",
+      "GTBase.path_graphs.ordinal_path_between",
+      "GTBase.path_graphs.ordinal_path_interval",
+      "GTBase.path_graphs.ordinal_path_sep",
+      "GTBase.path_graphs.ordinal_path_lt_total",
+      "GTBase.path_graphs.ordinal_path_K3_free",
+      "GTBase.path_graphs.ordinal_path_is_forest",
+      "GTBase.path_graphs.ordinal_path_is_tree",
+      "GTBase.path_graphs.ordinal_path_path_tree"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.skeleton",
+        "GraphTheory.core.wpgt",
+        "GraphTheory.core.smerge",
+        "GraphTheory.core.checkpoint",
+        "GraphTheory.core.minor",
+        "GTBase.base",
+        "GTBase.path_trees"
+      ],
+      "result": "no-upstream-constructor",
+      "candidate": null,
+      "note": "coq-graph-theory 0.9.7 has the SGraph constructor, eq_diso (pointwise equal relations give isomorphic graphs), the complete graphs, KB, sjoin, add_node, compl and del_edges, and Path / upath for walks inside a graph, but no concrete path graph on ordinals; GTBase.base has the cyclic cyc_rel / cycle_graph only. The canonical constructor is therefore new in GTBase.path_graphs, built from upstream SGraph, compared with the migrated constructors through eq_diso and bridged to upstream is_forest / is_tree through K3_free_forest and connectedTI, and to B9's path_tree.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/ordinal_path.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/ordinal_path.spec.json",
+    "downstream_client": "base/theories/examples/path_graphs.v",
+    "foundation_fidelity": "meta/foundation_fidelity/ordinal-path.json"
+  }
+}

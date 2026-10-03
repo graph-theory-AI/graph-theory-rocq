@@ -31,6 +31,7 @@
     (tagged [@MOVE-to-base]: base candidates once a 2nd area needs them). *)
 
 From GTBase Require Export base.
+From GTBase Require Import path_graphs.
 From mathcomp Require Import fingroup.
 
 Set Implicit Arguments.
@@ -53,15 +54,18 @@ Definition C5 : sgraph := cycle_graph 5.
 (** The [n]-vertex path graph [P_n] on ['I_n]: [i],[j] adjacent iff their
     indices are consecutive integers (no modular wrap, so it is a path, not a
     cycle). *)
+(** Since the B21 library migration (2026-10-03) transparent aliases of
+    [GTBase.path_graphs.ordinal_path_rel] / [ordinal_path] (the same raw relation, by conversion);
+    the original bodies and proofs, with this Section parameter [n], are frozen and certified in
+    theories/migration/ordinal_path.v. *)
 Section PathGraph.
 Variable n : nat.
-Definition pth_rel (i j : 'I_n) : bool :=
-  ((val i).+1 == val j) || ((val j).+1 == val i).
+Definition pth_rel (i j : 'I_n) : bool := ordinal_path_rel i j.
 Lemma pth_sym : symmetric pth_rel.
-Proof. by move=> i j; rewrite /pth_rel orbC. Qed.
+Proof. exact: ordinal_path_rel_sym. Qed.
 Lemma pth_irrefl : irreflexive pth_rel.
-Proof. by move=> i; rewrite /pth_rel orbb (gtn_eqF (ltnSn _)). Qed.
-Definition path_graph : sgraph := SGraph pth_sym pth_irrefl.
+Proof. exact: ordinal_path_rel_irrefl. Qed.
+Definition path_graph : sgraph := ordinal_path n.
 End PathGraph.
 
 (** The [n]-vertex star graph [K_{1,n-1}] (one centre, [n-1] leaves) — a tree.

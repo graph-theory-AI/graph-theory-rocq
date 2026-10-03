@@ -38,6 +38,9 @@ From GTBase Require Import base.
 (* [minor] is imported (base only re-exports the [minor]/[minor_rmap] abbreviations):
    [minorRE] and [K3_free_forest] live there.  [preliminaries] supplies [restrict]. *)
 From GraphTheory Require Import minor preliminaries.
+(* [path_graphs] supplies the guarded edge equation of the canonical path graph that
+   [x226_path_graph] aliases since B21. *)
+From GTBase Require Import path_graphs.
 From Packing.conjectures Require Import X226.
 
 Set Implicit Arguments.
@@ -54,7 +57,7 @@ Local Notation P := (x226_path_graph t).
 
 Lemma x226_path_edge (i j : P) :
   (i -- j) = (i != j) && (((val i).+1 == val j) || ((val j).+1 == val i)).
-Proof. by []. Qed.
+Proof. exact: ordinal_path_edge_guardedE. Qed.
 
 Lemma x226_disj_mem (A B : {set P}) (u : P) :
   [disjoint A & B] -> u \in A -> u \in B -> False.
@@ -70,12 +73,12 @@ Proof.
 elim: p => [|z p IH] i /=.
   move=> _ iS lik lki.
   by have -> : k = i by apply: val_inj; apply/eqP; rewrite eqn_leq lki lik.
-case/andP => /andP[/andP[_ zS] /andP[_ iz]] pth iS lik lkj.
+case/andP => /andP[/andP[_ zS] iz] pth iS lik lkj.
 have [ki|ki] := eqVneq (val k) (val i).
   by have -> : k = i by apply: val_inj.
 have lik' : val i < val k by rewrite ltn_neqAle eq_sym ki lik.
 apply: (IH z pth zS) => //.
-move: iz => /orP[/eqP ez|/eqP ez].
+move: iz; rewrite x226_path_edge => /andP[_ /orP[/eqP ez|/eqP ez]].
   by rewrite -ez.
 by apply: leq_trans (ltnW lik'); rewrite -ez.
 Qed.

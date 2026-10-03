@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py path_tree --details /tmp/migrat
 - Canonical: `GTBase.path_trees.path_tree`.
 - Baseline: `e377dcbcf549c044b7b2a4321831792c1c78f375`.
 - Scope: 4 helpers, 4 statements, 12 frozen objects, 21 recorded references.
-- Source checks: 118/118 pass; consistent.
+- Source checks: 115/115 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,6 +20,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py path_tree --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Hom.conjectures.U3.path_graph`, `Packing.conjectures.X18.x18_path_graph`, `Packing.conjectures.X226.x226_path_graph`, `Digraph.conjectures.path_fas.linear_forest`, `GTMisc.conjectures.X74.x74_induced_linear_forest`, `Cycle.conjectures.X212.x212_linear_forest_colour`, `Chromatic.conjectures.X34.x34_linear_forest_colour`, `Topological.conjectures.X23.x23_linear_forest_colour`, `Extremal.conjectures.X105.x105_star_tree`.
+Excluded distinct variants: `Digraph.conjectures.path_fas.linear_forest`, `GTMisc.conjectures.X74.x74_induced_linear_forest`, `Cycle.conjectures.X212.x212_linear_forest_colour`, `Chromatic.conjectures.X34.x34_linear_forest_colour`, `Topological.conjectures.X23.x23_linear_forest_colour`, `Extremal.conjectures.X105.x105_star_tree`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/simple_path.v#X126Legacy.dujmovic_thue_choice_number_pathwidth_statement`.

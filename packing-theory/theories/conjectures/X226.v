@@ -1,6 +1,7 @@
 (** * Packing.conjectures.X226 -- eta-boundedness and hypercube-partition rows (wave X226, 2026-09-23) *)
 
 From GTBase Require Export base.
+From GTBase Require Import path_graphs.
 (* [hypercube d] (the d-dimensional cube Q_d) is already owned by this package: it was
    introduced for milestone U9 (row 12 / matchings in hypercubes) and is reused here
    rather than redefined. *)
@@ -43,18 +44,20 @@ Definition x226_eta_bounded (C : sgraph -> Prop) : Prop :=
 
 (** *** Concrete forests: the path P_t and the star S_a *)
 
-(** The path [P_t] on [t] vertices: ['I_t] with consecutive indices adjacent. *)
-Definition x226_path_rel (t : nat) : rel 'I_t :=
-  fun i j => (i != j) && (((val i).+1 == val j) || ((val j).+1 == val i)).
+(** The path [P_t] on [t] vertices: ['I_t] with consecutive indices adjacent.
+    Since the B21 library migration (2026-10-03) transparent aliases of
+    [GTBase.path_graphs.ordinal_path_rel] / [ordinal_path]: the original guarded body
+    "[(i != j) && consecutive]" (pointwise equal, the guard being redundant) and its
+    symmetry/irreflexivity proofs are frozen and certified in theories/migration/ordinal_path.v. *)
+Definition x226_path_rel (t : nat) : rel 'I_t := @ordinal_path_rel t.
 
 Lemma x226_path_sym (t : nat) : symmetric (@x226_path_rel t).
-Proof. by move=> i j; rewrite /x226_path_rel eq_sym orbC. Qed.
+Proof. exact: ordinal_path_rel_sym. Qed.
 
 Lemma x226_path_irrefl (t : nat) : irreflexive (@x226_path_rel t).
-Proof. by move=> i; rewrite /x226_path_rel eqxx. Qed.
+Proof. exact: ordinal_path_rel_irrefl. Qed.
 
-Definition x226_path_graph (t : nat) : sgraph :=
-  SGraph (@x226_path_sym t) (@x226_path_irrefl t).
+Definition x226_path_graph (t : nat) : sgraph := ordinal_path t.
 
 (** The star [S_a] = [K_{1,a}]: the centre is index 0 of ['I_a.+1] and the [a]
     remaining vertices are pairwise non-adjacent leaves joined to it. *)
