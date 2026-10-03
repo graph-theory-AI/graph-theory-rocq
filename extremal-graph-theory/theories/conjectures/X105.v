@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.X105 -- v2 tree inducibility row *)
 
 From GTBase Require Export base.
+From GTBase Require Import path_trees.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -14,7 +15,7 @@ Definition x105_induced_copy_family
     S \in C <-> #|S| = #|H| /\ inhabited (induced S ≃ H).
 
 Definition x105_path_tree (T : sgraph) : Prop :=
-  is_tree [set: T] /\ Delta T <= 2.
+  path_tree T.
 
 Definition x105_star_tree (T : sgraph) : Prop :=
   is_tree [set: T] /\
