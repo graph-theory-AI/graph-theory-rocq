@@ -37,6 +37,77 @@
     "balanced_ground_C3",
     "not_balanced_ground_TT2"
    ]
+  },
+  "Cycle.foundations.eulerian": {
+   "path": "cycle-theory/theories/foundations/eulerian.v",
+   "overrides": {
+    "eulerian": {
+     "verdict": "FAITHFUL",
+     "note": "eulerian G: connected over all vertices (uwalk, orientation-free) with every arc-end degree even (a loop counts two); no nonempty, loopless, simple, minimum-degree or tour premise; the empty multigraph and an isolated vertex qualify, a single edge and any disconnected carrier do not."
+    },
+    "even_degrees": {
+     "verdict": "FAITHFUL",
+     "note": "even_degrees G: every vertex has even multigraph degree mdeg (arc ends)."
+    },
+    "even_degreesb": {
+     "verdict": "FAITHFUL",
+     "note": "even_degreesb G: the Boolean [forall v, ~~ odd (mdeg v)], reflected to even_degrees by even_degreesP; connectivity keeps its Prop form (no Boolean mconnected exists)."
+    }
+   },
+   "machine_evidence": [
+    "even_degreesP",
+    "eulerianI",
+    "eulerian_mconnected",
+    "eulerian_even_degrees",
+    "eulerian_even",
+    "eulerian_even_degreesb",
+    "eulerianE",
+    "eulerian_empty",
+    "edgeT_isolated_vertex",
+    "mdeg_isolated_vertex",
+    "mconnected_isolated_vertex",
+    "eulerian_isolated_vertex",
+    "edge_one_loop",
+    "edgeT_one_loop",
+    "mdeg_one_loop",
+    "mconnected_one_loop",
+    "eulerian_one_loop",
+    "card_edge_two_loops",
+    "ends_at_two_loops",
+    "mdeg_two_loops",
+    "mconnected_two_loops",
+    "eulerian_two_loops",
+    "card_edge_one_edge",
+    "card_edge_parallel_pair",
+    "src_one_edge",
+    "tgt_one_edge",
+    "src_parallel_pair",
+    "tgt_parallel_pair",
+    "ends_at_parallel_pair_inl_src",
+    "ends_at_parallel_pair_inl_tgt",
+    "ends_at_parallel_pair_inr_src",
+    "ends_at_parallel_pair_inr_tgt",
+    "mdeg_parallel_pair",
+    "mconnected_parallel_pair",
+    "eulerian_parallel_pair",
+    "ends_at_one_edge_inl_src",
+    "ends_at_one_edge_inl_tgt",
+    "mdeg_one_edge_inl",
+    "not_eulerian_one_edge",
+    "edgeT_two_vertices",
+    "mdeg_two_vertices",
+    "even_degrees_two_vertices",
+    "not_mconnected_two_vertices",
+    "not_eulerian_two_vertices",
+    "uwalk_loop_and_vertex",
+    "not_mconnected_loop_and_vertex",
+    "ends_at_loop_and_vertex_inl",
+    "ends_at_loop_and_vertex_inr",
+    "mdeg_loop_and_vertex_inl",
+    "mdeg_loop_and_vertex_inr",
+    "even_degrees_loop_and_vertex",
+    "not_eulerian_loop_and_vertex"
+   ]
   }
  }
 }

@@ -13101,7 +13101,7 @@
         "Cycle.conjectures.U6.oddness_le"
       ],
       "kind": "Definition",
-      "line": 45,
+      "line": 46,
       "local_dependencies": [],
       "name": "two_factor",
       "normalized_name": "two_factor",
@@ -13121,7 +13121,7 @@
         "Cycle.conjectures.U6.strong_5_cycle_double_cover_statement"
       ],
       "kind": "Definition",
-      "line": 67,
+      "line": 68,
       "local_dependencies": [],
       "name": "even_subgraph",
       "normalized_name": "even_subgraph",
@@ -13140,7 +13140,7 @@
         "Cycle.conjectures.U6.spanning_tree"
       ],
       "kind": "Definition",
-      "line": 74,
+      "line": 75,
       "local_dependencies": [],
       "name": "acyclic",
       "normalized_name": "acyclic",
@@ -13159,7 +13159,7 @@
         "Cycle.conjectures.U6.path_decomposition"
       ],
       "kind": "Definition",
-      "line": 87,
+      "line": 88,
       "local_dependencies": [],
       "name": "is_path",
       "normalized_name": "is_path",
@@ -13178,7 +13178,7 @@
         "Cycle.conjectures.U6.three_decomposition_statement"
       ],
       "kind": "Definition",
-      "line": 92,
+      "line": 93,
       "local_dependencies": [],
       "name": "is_matching",
       "normalized_name": "is_matching",
@@ -13197,7 +13197,7 @@
         "Cycle.conjectures.U6.spanning_tree"
       ],
       "kind": "Definition",
-      "line": 98,
+      "line": 99,
       "local_dependencies": [],
       "name": "spanning_connected",
       "normalized_name": "spanning_connected",
@@ -13216,7 +13216,7 @@
         "Cycle.conjectures.U6.three_decomposition_statement"
       ],
       "kind": "Definition",
-      "line": 104,
+      "line": 105,
       "local_dependencies": [
         "acyclic",
         "spanning_connected"
@@ -13241,7 +13241,7 @@
         "Cycle.conjectures.U6.three_decomposition_statement"
       ],
       "kind": "Definition",
-      "line": 107,
+      "line": 108,
       "local_dependencies": [],
       "name": "cubic",
       "normalized_name": "cubic",
@@ -13261,7 +13261,7 @@
         "Cycle.conjectures.U6.decomposing_an_eulerian_graph_into_cycles_statement"
       ],
       "kind": "Definition",
-      "line": 117,
+      "line": 118,
       "local_dependencies": [],
       "name": "simple_mgraph",
       "normalized_name": "simple_mgraph",
@@ -13273,16 +13273,16 @@
       "signature_shape_hash": "b14cf0f39677bd91c15ddbac2c09cd8efab2992b68ea34fd94eb5549d405de6b"
     },
     {
-      "body_hash": "9e5a0883d72552d46e96a48868be2845684b7e0c1526034264084b369a3c3d0b",
-      "body_shape_hash": "9e5a0883d72552d46e96a48868be2845684b7e0c1526034264084b369a3c3d0b",
-      "declaration_hash": "56a30c2783e14c691a8380df65e1357dffa027b25b25755944f9488cc80f88b7",
+      "body_hash": "215f0d8a20abfd94989192be24ff52c75766d3a8823775e72c30e35c131eb445",
+      "body_shape_hash": "215f0d8a20abfd94989192be24ff52c75766d3a8823775e72c30e35c131eb445",
+      "declaration_hash": "d04c038cdc50ce4fd4c6b8e248b5b20883cbf1ac251e7c169c50213bc940528c",
       "direct_consumers": [
         "Cycle.conjectures.U6.decomposing_an_eulerian_graph_into_cycles_statement",
         "Cycle.conjectures.U6.decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement",
         "Cycle.conjectures.U6.decomposing_eulerian_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 128,
+      "line": 129,
       "local_dependencies": [],
       "name": "eulerian",
       "normalized_name": "eulerian",
