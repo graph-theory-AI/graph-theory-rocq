@@ -27,7 +27,8 @@
     "base/theories/finite_graph.v",
     "base/theories/migration/edge_count.v",
     "graph-theory-misc/theories/migration/edge_count.v",
-    "extremal-graph-theory/theories/migration/matching.v"
+    "extremal-graph-theory/theories/migration/matching.v",
+    "extremal-graph-theory/theories/migration/genuine_cycle.v"
   ],
   "extra_certificates": [
     "GTBase.common.edge_count_rank",
@@ -46,7 +47,8 @@
     "",
     "B8 history (follow-up on the private merge with B8 e377dcb): XE2PathEdgesOriginal.erdos_915_statement is the complete pre-B2/A7/B8 #915 over B2's frozen internal disjointness, B8's frozen edge disjointness and this family's frozen count; the B8 and A7 #915 snapshots are documented reciprocally, and no earlier frozen body changes.",
     "",
-    "Public source (fg_edge_count follow-up): GTBase.finite_graph.fg_edge_count, an sgraph -> nat count equal to the edge count, is enrolled as an immutable repository source pinned at ae0e605. It now unfolds to GTBase.common.edge_count; fg_edges is unchanged and equals E(G) (fg_edgesE, adapted from C1), so the former #|fg_edges G| equals the canonical (card_fg_edges). Its frozen copy is GTBase.migration.edge_count.Legacy.fg_edge_count. The complete closure is five rows (Extremal X143, X180, X207; GTMisc X128, X139) through ten intermediate predicates, all frozen at ae0e605 over that copy, with every density, expansion and arithmetic guard and every quantifier unchanged. X180Original is the 9e03072 row over C1's frozen capacity predicate and the frozen average-degree chain; C1's X180 snapshot is documented reciprocally."
+    "Public source (fg_edge_count follow-up): GTBase.finite_graph.fg_edge_count, an sgraph -> nat count equal to the edge count, is enrolled as an immutable repository source pinned at ae0e605. It now unfolds to GTBase.common.edge_count; fg_edges is unchanged and equals E(G) (fg_edgesE, adapted from C1), so the former #|fg_edges G| equals the canonical (card_fg_edges). Its frozen copy is GTBase.migration.edge_count.Legacy.fg_edge_count. The complete closure is five rows (Extremal X143, X180, X207; GTMisc X128, X139) through ten intermediate predicates, all frozen at ae0e605 over that copy, with every density, expansion and arithmetic guard and every quantifier unchanged. X180Original is the 9e03072 row over C1's frozen capacity predicate and the frozen average-degree chain; C1's X180 snapshot is documented reciprocally.",
+    "B10 history (follow-up on the private merge with B10's integration e0338c4): XE2CycleOriginal is the complete pre-A7/B4/B10 #767 chain and row over this family's frozen count and B10's complete pre-B4/B10 chain; the B10 and A7 snapshots are documented reciprocally and no earlier frozen body changes."
   ],
   "frozen": [
     {
@@ -1480,6 +1482,50 @@
       "source_body_sha256": "508137a1eeadad87606e8fef97621e4072e90942508352e3690ffdde475466fc",
       "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
       "note": "C1 (matching) frozen copy, reused unchanged by X180Original.log_degree_multitasker_exists_statement"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Extremal.conjectures.XE2.xe2_incident_chord_extremal",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_incident_chord_extremal",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "XE2CycleOriginal.incident_chord_extremal",
+      "substitutions": {
+        "x4_edge_count": "Legacy.x4_edge_count",
+        "xe2_no_cycle_with_incident_chords": "B10.XE2Original.no_cycle_with_incident_chords",
+        "xe2_incident_chord_extremal": "incident_chord_extremal"
+      },
+      "certificate": "Extremal.migration.edge_count.incident_chord_extremal_cycle_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_767_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_767_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "XE2CycleOriginal.erdos_767_statement",
+      "substitutions": {
+        "xe2_incident_chord_extremal": "XE2CycleOriginal.incident_chord_extremal"
+      },
+      "certificate": "Extremal.migration.edge_count.erdos_767_statement_cycle_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE2.xe2_no_cycle_with_incident_chords",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_no_cycle_with_incident_chords",
+      "frozen_path": "extremal-graph-theory/theories/migration/genuine_cycle.v",
+      "frozen": "XE2Original.no_cycle_with_incident_chords",
+      "substitutions": {
+        "xe2_cycle": "Legacy.xe2_cycle",
+        "xe2_incident_cycle_chord_count": "Extremal.migration.consecutive_in_cycle.XE2Legacy.incident_cycle_chord_count",
+        "xe2_no_cycle_with_incident_chords": "no_cycle_with_incident_chords"
+      },
+      "certificate": "Extremal.migration.genuine_cycle.xe2_no_cycle_with_incident_chords_original_compat",
+      "commit": "00d6bb3a80759b365fffab282d47603510bf839e",
+      "note": "B10 (genuine cycles) complete pre-B4/B10 chain, reused unchanged by XE2CycleOriginal"
     }
   ],
   "known_stale_snapshots": {
@@ -1526,7 +1572,9 @@
     "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE1Legacy.erdos_566_statement": "A11 snapshot: A11 froze this row over its own frozen minimum-degree bound but kept the live x4_edge_count and xe1_every_k_set_sparse of this family. Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_566_statement, certified by erdos_566_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count and XE1Legacy.every_k_set_sparse.",
     "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE1Legacy.erdos_567_statement": "A11 snapshot: A11 froze this row over its own frozen minimum-degree bound but kept the live x4_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count.",
     "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE1Legacy.erdos_568_statement": "A11 snapshot: A11 froze this row over its own frozen minimum-degree bound but kept the live x4_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE1Original.erdos_568_statement, certified by erdos_568_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count.",
-    "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE2Legacy.erdos_570_statement": "A11 snapshot: A11 froze this row over its own frozen minimum-degree bound but kept the live x4_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE2Original.erdos_570_statement, certified by erdos_570_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count."
+    "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE2Legacy.erdos_570_statement": "A11 snapshot: A11 froze this row over its own frozen minimum-degree bound but kept the live x4_edge_count of this family. Kept unchanged; the complete row is Extremal.migration.min_degree_at_least.XE2Original.erdos_570_statement, certified by erdos_570_statement_original_compat, which composes this family's frozen Legacy.x4_edge_count.",
+    "extremal-graph-theory/theories/migration/genuine_cycle.v#XE2Legacy.incident_chord_extremal": "B10 snapshot: B10 froze #767's incident-chord chain over its own frozen raw cycle but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-A7/B4/B10 chain and row are Extremal.migration.edge_count.XE2CycleOriginal, certified by incident_chord_extremal_cycle_original_compat and erdos_767_statement_cycle_original_compat.",
+    "extremal-graph-theory/theories/migration/genuine_cycle.v#XE2Original.incident_chord_extremal": "B10 snapshot: B10 froze #767's incident-chord chain over its own frozen raw cycle but kept the live x4_edge_count (now GTBase.common.edge_count, equal to the old enum-rank count by edge_count_rank). Kept unchanged; the complete pre-A7/B4/B10 chain and row are Extremal.migration.edge_count.XE2CycleOriginal, certified by incident_chord_extremal_cycle_original_compat and erdos_767_statement_cycle_original_compat."
   },
   "cross_module_consumers": [
     {
