@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "family": "regularity",
+  "primitive": {
+    "canonical_name": "Hypergraph.foundations.hypergraph_regularity.hg_regular",
+    "owner": "hypergraph-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "regular"
+    ],
+    "source_definitions": [
+      "Hypergraph.conjectures.X73.x73_regular",
+      "Infinite.conjectures.D4inf3.regular"
+    ],
+    "consumers_remaining": 2,
+    "relation": "Finite supplied-family incidence regularity: hg_regular E d holds when every vertex v of the finite carrier lies in exactly d members of the supplied family E : {set {set T}}, counted by A10 incidence_degree E v. Arbitrary carrier and family, E before d, universal equality; no uniformity, positivity, inhabited-carrier, nonempty-edge, covering or attained-degree premise (an empty carrier is regular of every degree; empty members never count). Simple-graph, multigraph, directed and infinite (ordinal neighbour enumeration, D4inf3) regularity are separate.",
+    "semantic_classes": {
+      "finite-incidence-regularity": {
+        "members": [
+          "Hypergraph.conjectures.X73.x73_regular"
+        ],
+        "count": 1,
+        "verdict": "equivalent (same term)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.regularity.x73_regular_compat"
+        ],
+        "canonical": "Hypergraph.foundations.hypergraph_regularity.hg_regular",
+        "note": "x73_regular E d := forall v, x73_hyperdegree E v = d, with x73_hyperdegree the A10 alias of incidence_degree: the alias of hg_regular over the same count, same carrier and argument order."
+      },
+      "infinite-neighbour-enumeration": {
+        "members": [
+          "Infinite.conjectures.D4inf3.regular"
+        ],
+        "count": 1,
+        "verdict": "distinct representation",
+        "state": "deferred",
+        "certificates": [],
+        "note": "regular r G on an iGraph with arbitrary Type vertices and Prop adjacency: at every vertex an injective I_r-indexed enumeration of exactly its neighbours. Not a finite hyperedge-family interface; deferred to a later class of this owner, its source and whole row untouched."
+      }
+    },
+    "compatibility_theorems": [
+      "Hypergraph.migration.regularity.x73_regular_compat",
+      "Hypergraph.migration.regularity.regular_tripartite_hypergraph_matching_lower_bound_statement_compat"
+    ],
+    "api_theorems": [
+      "Hypergraph.foundations.hypergraph_regularity.hg_regularP",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_void",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_uniq",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0E",
+      "Hypergraph.foundations.hypergraph_regularity.incidence_degree_set0U",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0U",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_set1_set0",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_setT"
+    ],
+    "public_client": "hypergraph-theory/theories/examples/regular_hypergraphs.v",
+    "legacy_baseline": "7e030f252c859c5334185673b10b69971cab9402",
+    "migration_report": "meta/migration_reports/regularity.md",
+    "migration_spec": "meta/migration_reports/regularity.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D8.md",
+    "foundation_fidelity": "meta/foundation_fidelity/regularity.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core modules",
+        "mathcomp.boot",
+        "GTBase.incidence",
+        "GTBase.base"
+      ],
+      "result": "new-area-primitive",
+      "candidate": "GTBase.incidence.incidence_degree",
+      "note": "No hypergraph regularity predicate upstream (MathComp regular is algebraic). The reusable piece is A10 incidence_degree with universal equality and the Boolean forall view; GTBase.base.regular (simple graphs), mregular (multigraph incidences) and D2pr regularb (2-edge adjacency) are different contracts. No second-area consumer, so the canonical stays in Hypergraph (no GTBase promotion).",
+      "audited_at": "2026-10-04"
+    }
+  }
+}
