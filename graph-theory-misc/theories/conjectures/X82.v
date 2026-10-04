@@ -2,6 +2,7 @@
 
 From GTBase Require Export base.
 From GraphTheory Require Import minor.
+From GTBase Require Import orientations.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,21 +10,29 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X82 vocabulary ************************************************)
 
+(** Since the D11 library migration (2026-10-04) a transparent alias of
+    [GTBase.orientations.orientation_of], the same body by conversion; the former body is frozen
+    in theories/migration/orientations.v. *)
 Definition x82_orientation_of (G : sgraph) (D : rel G) : Prop :=
-  (forall x y : G, D x y -> x -- y) /\
-  forall x y : G, x -- y -> (D x y) (+) (D y x).
+  orientation_of D.
 
+(** Since the D11 library migration (2026-10-04) a transparent alias of
+    [GTBase.orientations.rel_indegree], the same body by conversion; the former body is frozen
+    in theories/migration/orientations.v. *)
 Definition x82_indegree (G : sgraph) (D : rel G) (v : G) : nat :=
-  #|[set u : G | D u v]|.
+  rel_indegree D v.
 
+(** Since the D11 library migration (2026-10-04) a transparent alias of
+    [GTBase.orientations.proper_indegrees], the same body by conversion; the former body is frozen
+    in theories/migration/orientations.v. *)
 Definition x82_proper_orientation (G : sgraph) (D : rel G) : Prop :=
-  forall x y : G, x -- y -> x82_indegree D x != x82_indegree D y.
+  proper_indegrees D.
 
+(** Since the D11 library migration (2026-10-04) a transparent alias of
+    [GTBase.orientations.proper_orientation_bound], the same body by conversion; the former body is frozen
+    in theories/migration/orientations.v. *)
 Definition x82_proper_orientation_bound (G : sgraph) (k : nat) : Prop :=
-  exists D : rel G,
-    x82_orientation_of D /\
-    x82_proper_orientation D /\
-    forall v : G, x82_indegree D v <= k.
+  proper_orientation_bound G k.
 
 Definition x82_outerplanar (G : sgraph) : Prop :=
   ~ minor G 'K_4 /\ ~ minor G (KB 2 3).
