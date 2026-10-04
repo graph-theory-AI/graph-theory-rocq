@@ -22,6 +22,7 @@
 
 From GTBase Require Import base.
 From GTBase Require set_separators.
+From GTBase Require distant_paths.
 From GTMisc.conjectures Require Import X39 X40 X116.
 From GTMisc.migration Require path_vertices.
 
@@ -230,9 +231,15 @@ Lemma coarse_menger_paths_bounded_separator_statement_compat :
   coarse_menger_paths_bounded_separator_statement.
 Proof. exact: iff_refl. Qed.
 
+(** B27 (2026-10-03): the live X39 / X116 / X146 distant-path relations and wrappers are now aliases of
+    GTBase.distant_paths, which drops their redundant support-disjointness conjunct, so the certificates below
+    that reach them through a frozen copy of that conjunct are proved through [pairwise_distant_seqsP],
+    [has_k_distant_set_pathsP] and pointwise row transports instead of by conversion; their statements and
+    every frozen body are unchanged. *)
+
 Lemma x39_has_k_distant_xy_paths_original_compat (G : sgraph) (d k : nat) (X Y : {set G}) :
   X39Original.has_k_distant_xy_paths d k X Y <-> x39_has_k_distant_xy_paths d k X Y.
-Proof. exact: iff_refl. Qed.
+Proof. exact: distant_paths.has_k_distant_set_pathsP. Qed.
 
 Lemma x39_separates_xy_original_compat (G : sgraph) (X Y A : {set G}) :
   X39Original.separates_xy X Y A <-> x39_separates_xy X Y A.
@@ -243,7 +250,8 @@ Lemma coarse_menger_ball_separator_statement_original_compat :
 Proof.
 split=> h k; have [c hc] := h k; exists c => d G X Y;
   case: (hc d G X Y) => [l | [Z [Zk sep]]];
-  first [by left | by right; exists Z; split=> //; apply/x39_separates_xy_original_compat].
+  first [by left; apply/x39_has_k_distant_xy_paths_original_compat
+        | by right; exists Z; split=> //; apply/x39_separates_xy_original_compat].
 Qed.
 
 Lemma coarse_menger_distance_two_separator_statement_original_compat :
@@ -252,14 +260,19 @@ Lemma coarse_menger_distance_two_separator_statement_original_compat :
 Proof.
 split=> h k k1; have [ell [ell0 he]] := h k k1; exists ell; split=> // G S T;
   case: (he G S T) => [l | [X [Xk sep]]];
-  first [by left | by right; exists X; split=> //; apply/x39_separates_xy_original_compat].
+  first [by left; apply/x39_has_k_distant_xy_paths_original_compat
+        | by right; exists X; split=> //; apply/x39_separates_xy_original_compat].
 Qed.
 
 Lemma x116_has_k_distant_ST_paths_original_compat (G : sgraph) (d k : nat) (S T : {set G}) :
   X116Original.has_k_distant_ST_paths d k S T <-> x116_has_k_distant_ST_paths d k S T.
-Proof. exact: iff_refl. Qed.
+Proof. exact: distant_paths.has_k_distant_set_pathsP. Qed.
 
 Lemma coarse_menger_paths_bounded_separator_statement_original_compat :
   X116Original.coarse_menger_paths_bounded_separator_statement <->
   coarse_menger_paths_bounded_separator_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> h k d k1 d1; have [l [l0 hl]] := h k d k1 d1; exists l; split=> // G S T;
+  case: (hl G S T) => [hk | r];
+  first [by left; apply/x116_has_k_distant_ST_paths_original_compat | by right].
+Qed.

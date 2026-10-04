@@ -1,7 +1,7 @@
 (** * GTMisc.conjectures.X146 -- v2 Geelen coarse Gallai row *)
 
 From GTBase Require Export base.
-From GTBase Require Import balls.
+From GTBase Require Import balls distant_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -30,12 +30,14 @@ Definition x146_A_path (G : sgraph) (A : {set G}) (p : seq G) : Prop :=
       forall v : G, v \in q -> v != last x q -> v \notin A
   end.
 
+(** Since the B27 library migration (2026-10-03) a transparent alias of
+    [GTBase.distant_paths.pairwise_distant_seqs]: for unequal sequence values of the family, the closed
+    [d.-1]-set-ball around one support misses the other (so [d] = 0 and 1 mean disjoint supports).  The former
+    vertex-disjointness conjunct is redundant and dropped ([pairwise_distant_seqsP]).  The former body is
+    frozen and certified equivalent in theories/migration/distant_paths.v. *)
 Definition x146_pairwise_distant_A_paths
     (G : sgraph) (d : nat) (paths : seq (seq G)) : Prop :=
-  forall p q : seq G,
-    p \in paths -> q \in paths -> p != q ->
-    [disjoint x146_path_vertices p & x146_path_vertices q] /\
-    [disjoint x146_set_ball (d.-1) (x146_path_vertices p) & x146_path_vertices q].
+  pairwise_distant_seqs d paths.
 
 Definition x146_has_k_distant_A_paths
     (G : sgraph) (A : {set G}) (d k : nat) : Prop :=

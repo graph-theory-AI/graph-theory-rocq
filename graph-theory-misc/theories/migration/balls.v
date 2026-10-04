@@ -16,6 +16,7 @@
       their frozen pieces convert. *)
 From Corelib Require Import Setoid Morphisms.
 From GTBase Require Import base balls.
+From GTBase Require distant_paths.
 From GTMisc.conjectures Require Import X20 X39 X40 X113 X116 X146.
 From GTMisc.migration Require path_vertices set_path genuine_cycle.
 
@@ -437,12 +438,18 @@ setoid_rewrite x20_burning_cover_compat.
 reflexivity.
 Qed.
 
+(** B27 (2026-10-03): the live X39 / X116 / X146 distant-path relations and wrappers are now aliases of
+    GTBase.distant_paths, which drops their redundant support-disjointness conjunct, so the certificates below
+    that reach them through a frozen copy of that conjunct are proved through [pairwise_distant_seqsP],
+    [has_k_distant_set_pathsP] and pointwise row transports instead of by conversion; their statements and
+    every frozen body are unchanged. *)
+
 Lemma x39_pairwise_distant_paths_compat (G : sgraph) (d : nat) (paths : seq (seq G)) :
   X39Legacy.x39_pairwise_distant_paths d paths <-> x39_pairwise_distant_paths d paths.
 Proof.
 rewrite /X39Legacy.x39_pairwise_distant_paths.
 setoid_rewrite x39_set_ball_compat.
-reflexivity.
+exact: distant_paths.pairwise_distant_seqsP.
 Qed.
 
 Lemma x39_has_k_distant_xy_paths_compat (G : sgraph) (d k : nat) (X Y : {set G}) :
@@ -502,7 +509,7 @@ Lemma x116_pairwise_distant_paths_compat (G : sgraph) (d : nat) (paths : seq (se
 Proof.
 rewrite /X116Legacy.x116_pairwise_distant_paths.
 setoid_rewrite x116_set_ball_compat.
-reflexivity.
+exact: distant_paths.pairwise_distant_seqsP.
 Qed.
 
 Lemma x116_has_k_distant_ST_paths_compat (G : sgraph) (d k : nat) (S T : {set G}) :
@@ -528,7 +535,7 @@ Lemma x146_pairwise_distant_A_paths_compat (G : sgraph) (d : nat) (paths : seq (
 Proof.
 rewrite /X146Legacy.x146_pairwise_distant_A_paths.
 setoid_rewrite x146_set_ball_compat.
-reflexivity.
+exact: distant_paths.pairwise_distant_seqsP.
 Qed.
 
 Lemma x146_has_k_distant_A_paths_compat (G : sgraph) (A : {set G}) (d k : nat) :

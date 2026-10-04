@@ -24,7 +24,7 @@
       "Packing.conjectures.X26.x26_ball",
       "Packing.conjectures.X26.x26_set_ball"
     ],
-    "consumers_remaining": 12,
+    "consumers_remaining": 8,
     "relation": "closed vertex balls and seed-set balls of a simple graph: the seven local Fixpoints X20/X39/X113/X116/X146/X26/X111 x*_ball (radius 0 the centre, each step adding the neighbours of the previous ball) equal the existing GTBase.base.ball r x pointwise, by induction on the radius (not a conversion: distinct fixpoints); the five local x*_set_ball (\\bigcup_(x in S) x*_ball r x) equal GTBase.balls.set_ball r S. Set equalities, with no connectedness, nonempty-host, positive-radius or small-radius guard. ball r x = rel_ball (--) r x exactly (ball_rel_ballE); balls never leave the centre's component, so they differ from the truncated graph_dist sublevel sets once r >= #|G| on a disconnected graph, and no unconditional distance bridge is stated.",
     "semantic_classes": {
       "vertex-ball": {
