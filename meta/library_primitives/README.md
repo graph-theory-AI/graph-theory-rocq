@@ -59,6 +59,16 @@ repository root. They do not expand the generated helper inventory or its debt
 counts. Missing conjecture inventory entries never fall back to descriptors.
 `consumers_remaining` retains its existing same-file direct-consumer meaning.
 
+`normalized_names` selects the complete conjecture-inventory family only.
+Explicit public sources are selected independently by their qualified descriptor
+keys; their basenames need not appear in `normalized_names`. The authoritative
+`source_definitions` list must equal the union of all normalized-name conjecture
+matches and all validated public descriptors. Matching conjecture helpers are
+never skipped because another family owns them, and duplicate source ownership
+still fails. This lets a family migrate a public dependency without also claiming
+another family's local aliases that happen to share its basename. Deferred
+conjecture variants remain classified in `source_definitions` as before.
+
 The report uses ordinary `kind: source` objects, whose original commit/path must
 match the descriptor. Frozen text, aliases, certificate registration, exact
 statement iff types, assumptions and corpus status checks remain unchanged.
@@ -69,6 +79,35 @@ Lexical discovery still requires the usual independent Section/dependency review
 Record intermediate objects as `kind: chain`, using registered earlier-family
 certificates when reusing an existing freeze. Never refresh a pin to silence a
 failure or label an existing corpus row `non_corpus`.
+
+An explicitly reviewed complete non-corpus proposition whose name lacks
+`_statement` can be listed in its report specification's optional
+`additional_statements` array of qualified names. Each must be reached from the
+migrated sources at both baseline and current source, outside both manifests,
+and have exactly one current `kind: statement`, `non_corpus: true` frozen mapping
+at the family baseline and a complete iff certificate. Explicit additional
+`original-statement` snapshots of that same identity are permitted; every snapshot
+must pass the same immutable full-commit, regular source/project, build ownership,
+explicit non-corpus identity and top-level nullary/scope checks at its own effective
+commit, as well as source/body provenance and complete iff checks. No other role may
+hide a whole proposition. Known conjecture modules and the existing supported
+public-library locations (GTBase, area foundations and ClassicalLemmas) are accepted;
+migration/example/private/probe files are not public enrollment locations. An
+explicit public additional Prop enables public intermediary indexing even without
+a public source descriptor; unrelated Props are never enrolled automatically.
+Its source and project must be regular, build-listed
+and owned by the recorded namespace at the immutable full baseline commit and
+in the current tree. The initial format accepts only top-level
+`Definition NAME : Prop := ...` outside Modules and Sections; parameterized or
+inferred signatures fail closed. Source helpers cannot be enrolled this way.
+Control-prefixed scope commands and source-splicing `Load` are unsupported;
+ownership scanning handles nested comments and doubled-quote strings jointly.
+The complete intermediary path must also be frozen. Kernel checks require the
+unapplied frozen/live constants to have type `Prop`, the exact complete iff,
+and zero assumptions for every certificate. This field grants no axiom
+exception and cannot remove an ordinarily discovered statement. Independent
+review supplies the semantic classification as a statement; a nullary `Prop`
+type alone cannot distinguish a statement from a proposition used as a helper.
 
 The registered theorem gate recognizes `ClassicalLemmas` as owned by
 `classical-lemmas`; it forces the same fresh local source closure as other
