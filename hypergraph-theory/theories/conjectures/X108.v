@@ -2,6 +2,7 @@
 
 From GTBase Require Export base.
 From GTBase Require Import hypergraph_uniformity.
+Require Hypergraph.foundations.hypergraph_copies.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -28,10 +29,7 @@ Definition x108_image_edge
 Definition x108_monochromatic_copy
     (T : finType) (E : {set {set T}}) (N : nat)
     (col : {set 'I_N} -> bool) : Prop :=
-  exists (colour : bool) (f : T -> 'I_N),
-    injective f /\
-    forall e : {set T},
-      e \in E -> col (x108_image_edge f e) = colour.
+  Hypergraph.foundations.hypergraph_copies.hg_mono_copy E col.
 
 Definition x108_two_colour_ramsey_at_most
     (T : finType) (E : {set {set T}}) (N : nat) : Prop :=

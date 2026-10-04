@@ -91,9 +91,9 @@
     "distinct_variants": {
       "GTMisc.conjectures.X20.x20_monochromatic_connected_set": "Nonempty vertex set connected via paths in one fixed EDGE-colour relation; not constancy of a supplied vertex map.",
       "Extremal.conjectures.XE2.xe2_monochromatic_path": "Nonempty simple path whose traversed edges all carry a specified colour; graph/witness structure retained.",
-      "Hypergraph.conjectures.X108.x108_monochromatic_copy": "Injective hypergraph copy with edge colours, not a supplied-map vertex subset.",
-      "Hypergraph.conjectures.X117.x117_monochromatic_copy": "Same distinct copy contract; its existing X108 bridge is untouched.",
-      "Hypergraph.conjectures.X119.x119_monochromatic_copy": "Finite-palette injective hypergraph copy, not a vertex-set constancy predicate.",
+      "Hypergraph.conjectures.X108.x108_monochromatic_copy": "Distinct from constancy on a supplied set: an injective hypergraph copy with edge colours, now owned by the monochromatic-copy family (D4, Hypergraph.foundations.hypergraph_copies.hg_mono_copy).",
+      "Hypergraph.conjectures.X117.x117_monochromatic_copy": "Distinct from constancy on a supplied set: an injective hypergraph copy with edge colours, now owned by the monochromatic-copy family (D4, Hypergraph.foundations.hypergraph_copies.hg_mono_copy).",
+      "Hypergraph.conjectures.X119.x119_monochromatic_copy": "Distinct from constancy on a supplied set: an injective hypergraph copy with edge colours, now owned by the monochromatic-copy family (D4, Hypergraph.foundations.hypergraph_copies.hg_mono_copy).",
       "Extremal.conjectures.XE1.xe1_monochromatic_copy_in_complete": "Graph copy and complete-host edge colouring, kept distinct."
     },
     "migration_report": "meta/migration_reports/monochromatic.md",

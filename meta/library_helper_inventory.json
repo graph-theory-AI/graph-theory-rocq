@@ -35,10 +35,6 @@
         "GTMisc.conjectures.X41.x41_induced_H_free",
         "Minor.conjectures.X42.x42_induced_free"
       ],
-      "0871869c54067a3f43ce90ea4b57b304df977aa84e0e1112fde75b2cd61f5909": [
-        "Hypergraph.conjectures.X108.x108_monochromatic_copy",
-        "Hypergraph.conjectures.X117.x117_monochromatic_copy"
-      ],
       "08fdfca8b0a6af2a245e54af2089ce39d3e5dd4c7ba2ab1ff0970007f836bade": [
         "GTMisc.conjectures.X167.x167_extension_system",
         "GTMisc.conjectures.X168.x168_extension_system"
@@ -405,6 +401,11 @@
       "9e1560504c4c010ad25125ec18442c8f658c2b2227b1a9fea6e9a28ac1655a2a": [
         "Digraph.conjectures.X16.x16_loopless",
         "Digraph.conjectures.X19.x19_loopless"
+      ],
+      "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd": [
+        "Hypergraph.conjectures.X108.x108_monochromatic_copy",
+        "Hypergraph.conjectures.X117.x117_monochromatic_copy",
+        "Hypergraph.conjectures.X119.x119_monochromatic_copy"
       ],
       "9f7fb65d7a246f9765cb82c4a4613122b4c90deec0ffd6db7e8717950feda592": [
         "Chromatic.conjectures.X3.x3_anticomplete",
@@ -45583,7 +45584,7 @@
         "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x108_uniform",
       "normalized_name": "uniform",
@@ -45602,7 +45603,7 @@
         "Hypergraph.conjectures.X108.x108_d_degenerate"
       ],
       "kind": "Definition",
-      "line": 14,
+      "line": 15,
       "local_dependencies": [],
       "name": "x108_degree_in",
       "normalized_name": "degree_in",
@@ -45621,7 +45622,7 @@
         "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement"
       ],
       "kind": "Definition",
-      "line": 18,
+      "line": 19,
       "local_dependencies": [
         "x108_degree_in"
       ],
@@ -45638,11 +45639,9 @@
       "body_hash": "cd911585a00e2168369d22b0586cccce11aed597fcb94223c41f6743715c7af5",
       "body_shape_hash": "cd911585a00e2168369d22b0586cccce11aed597fcb94223c41f6743715c7af5",
       "declaration_hash": "0d106cd70dd54a54cd86e1dc4661ef7e7cb4627e62aeb90f3e40c9859931593c",
-      "direct_consumers": [
-        "Hypergraph.conjectures.X108.x108_monochromatic_copy"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 23,
+      "line": 24,
       "local_dependencies": [],
       "name": "x108_image_edge",
       "normalized_name": "image_edge",
@@ -45654,17 +45653,15 @@
       "signature_shape_hash": "5ed96027acc34c816903cfa750bee3c570272eedec432a22e634af287552a113"
     },
     {
-      "body_hash": "8677c82931cbd8d6c28304998dd4f0093a6ae6aa66851989436a24dd6fc60441",
-      "body_shape_hash": "0871869c54067a3f43ce90ea4b57b304df977aa84e0e1112fde75b2cd61f5909",
-      "declaration_hash": "df67532e63eb12b4d10958220c56db3d9097036a44e5ec1bb8930508d315d720",
+      "body_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
+      "body_shape_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
+      "declaration_hash": "038e9bf57c17e29755a0d10e8b23c9bed585902a05733871a33690a0cfe55ca2",
       "direct_consumers": [
         "Hypergraph.conjectures.X108.x108_two_colour_ramsey_at_most"
       ],
       "kind": "Definition",
-      "line": 27,
-      "local_dependencies": [
-        "x108_image_edge"
-      ],
+      "line": 28,
+      "local_dependencies": [],
       "name": "x108_monochromatic_copy",
       "normalized_name": "monochromatic_copy",
       "package": "hypergraph-theory",
@@ -45682,7 +45679,7 @@
         "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement"
       ],
       "kind": "Definition",
-      "line": 35,
+      "line": 33,
       "local_dependencies": [
         "x108_monochromatic_copy"
       ],
@@ -45705,7 +45702,7 @@
         "Hypergraph.conjectures.X117.x117_vertex"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x117_spike",
       "normalized_name": "spike",
@@ -45725,7 +45722,7 @@
         "Hypergraph.conjectures.X117.x117_edges"
       ],
       "kind": "Definition",
-      "line": 21,
+      "line": 22,
       "local_dependencies": [
         "x117_spike"
       ],
@@ -45746,7 +45743,7 @@
         "Hypergraph.conjectures.X117.x117_edges"
       ],
       "kind": "Definition",
-      "line": 23,
+      "line": 24,
       "local_dependencies": [
         "x117_spike",
         "x117_vertex"
@@ -45768,7 +45765,7 @@
         "Hypergraph.conjectures.X117.x117_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 26,
+      "line": 27,
       "local_dependencies": [
         "x117_edge",
         "x117_spike",
@@ -45787,11 +45784,9 @@
       "body_hash": "cd911585a00e2168369d22b0586cccce11aed597fcb94223c41f6743715c7af5",
       "body_shape_hash": "cd911585a00e2168369d22b0586cccce11aed597fcb94223c41f6743715c7af5",
       "declaration_hash": "2437b1ebf37b83ca684f57483951be95d519cd92f1460f16a03bf679706fd283",
-      "direct_consumers": [
-        "Hypergraph.conjectures.X117.x117_monochromatic_copy"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 29,
+      "line": 30,
       "local_dependencies": [],
       "name": "x117_image_edge",
       "normalized_name": "image_edge",
@@ -45803,17 +45798,15 @@
       "signature_shape_hash": "a62c280edb04e6addd8621216d564b5231f4fc2604c693c377baea4bcd8723d2"
     },
     {
-      "body_hash": "d5dccb29dc2ff7d9b8a39b8cebbc8e57b39c39e91a19130ea06d6759654f8204",
-      "body_shape_hash": "0871869c54067a3f43ce90ea4b57b304df977aa84e0e1112fde75b2cd61f5909",
-      "declaration_hash": "a322d85038e63b0499abc4fb755f10dd46f15e600ebe1123758e354b07df18f0",
+      "body_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
+      "body_shape_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
+      "declaration_hash": "13633959be84b96daa785f92200ba79f1aac5dec582b93c9e043932663142534",
       "direct_consumers": [
         "Hypergraph.conjectures.X117.x117_forces_mono"
       ],
       "kind": "Definition",
-      "line": 35,
-      "local_dependencies": [
-        "x117_image_edge"
-      ],
+      "line": 36,
+      "local_dependencies": [],
       "name": "x117_monochromatic_copy",
       "normalized_name": "monochromatic_copy",
       "package": "hypergraph-theory",
@@ -45831,7 +45824,7 @@
         "Hypergraph.conjectures.X117.x117_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 43,
+      "line": 41,
       "local_dependencies": [
         "x117_monochromatic_copy"
       ],
@@ -45852,7 +45845,7 @@
         "Hypergraph.conjectures.X117.conlon_fox_rodl_hedgehog_ramsey_statement"
       ],
       "kind": "Definition",
-      "line": 49,
+      "line": 47,
       "local_dependencies": [
         "x117_edges",
         "x117_forces_mono"
@@ -45874,7 +45867,7 @@
         "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x119_uniform",
       "normalized_name": "uniform",
@@ -45893,7 +45886,7 @@
         "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement"
       ],
       "kind": "Definition",
-      "line": 14,
+      "line": 15,
       "local_dependencies": [],
       "name": "x119_no_isolated",
       "normalized_name": "no_isolated",
@@ -45908,11 +45901,9 @@
       "body_hash": "cd911585a00e2168369d22b0586cccce11aed597fcb94223c41f6743715c7af5",
       "body_shape_hash": "cd911585a00e2168369d22b0586cccce11aed597fcb94223c41f6743715c7af5",
       "declaration_hash": "061206de23c0db69e9d67191459d7dabda47fac7982bf93855df22f37d13ea87",
-      "direct_consumers": [
-        "Hypergraph.conjectures.X119.x119_monochromatic_copy"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 18,
+      "line": 19,
       "local_dependencies": [],
       "name": "x119_image_edge",
       "normalized_name": "image_edge",
@@ -45924,17 +45915,15 @@
       "signature_shape_hash": "a62c280edb04e6addd8621216d564b5231f4fc2604c693c377baea4bcd8723d2"
     },
     {
-      "body_hash": "0301303317ab22d696ef0de376c9bd418ba7988dc1bc06ad761b75a6827120b6",
-      "body_shape_hash": "38d5cc19e132304449acc2cbd4518312ac79cafddc85a1206f41d852c7ca82ac",
-      "declaration_hash": "cf430669f061650a92ec1d2d3d57f5c29a80dc17bda81507c96b85efa0a2c39f",
+      "body_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
+      "body_shape_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
+      "declaration_hash": "87db116f31f524712cc14c04fcee36285e5418748971339fd181fa795fe847c8",
       "direct_consumers": [
         "Hypergraph.conjectures.X119.x119_forces_mono"
       ],
       "kind": "Definition",
-      "line": 24,
-      "local_dependencies": [
-        "x119_image_edge"
-      ],
+      "line": 25,
+      "local_dependencies": [],
       "name": "x119_monochromatic_copy",
       "normalized_name": "monochromatic_copy",
       "package": "hypergraph-theory",
@@ -45952,7 +45941,7 @@
         "Hypergraph.conjectures.X119.x119_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 32,
+      "line": 30,
       "local_dependencies": [
         "x119_monochromatic_copy"
       ],
@@ -45973,7 +45962,7 @@
         "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement"
       ],
       "kind": "Definition",
-      "line": 38,
+      "line": 36,
       "local_dependencies": [
         "x119_forces_mono"
       ],
@@ -45994,7 +45983,7 @@
         "Hypergraph.conjectures.X119.x119_sqrt"
       ],
       "kind": "Lemma",
-      "line": 45,
+      "line": 43,
       "local_dependencies": [],
       "name": "x119_sqrt_ex",
       "normalized_name": "sqrt_ex",
@@ -46013,7 +46002,7 @@
         "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement"
       ],
       "kind": "Definition",
-      "line": 51,
+      "line": 49,
       "local_dependencies": [
         "x119_sqrt_ex"
       ],
