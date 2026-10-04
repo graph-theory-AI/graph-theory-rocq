@@ -557,7 +557,7 @@ reflexivity.
 Qed.
 
 (** Complete rows: the frozen balls are rewritten, then B1's and B5's chain certificates, or conversion of their
-    frozen pieces (B1's, B5's and B10's own certificates are conversions). *)
+    frozen pieces. After B26, B1's and B5's separator and affected row certificates use the unconditional seq_separatorP bridge and pointwise transport; the explicit rewrites below retain their exact types and proofs. *)
 Lemma x39_pairwise_distant_paths_original_compat (G : sgraph) (d : nat) (paths : seq (seq G)) :
   X39Original.x39_pairwise_distant_paths d paths <-> x39_pairwise_distant_paths d paths.
 Proof.

@@ -36,12 +36,14 @@ Definition x39_has_k_distant_xy_paths
     (forall p : seq G, p \in paths -> x39_xy_path X Y p) /\
     x39_pairwise_distant_paths d paths.
 
+(** Since the B26 library migration (2026-10-03) a transparent alias of upstream
+    [GraphTheory.core.connectivity.separator G X Y A]: every packaged path from X to Y meets A, the
+    endpoints may lie in A and one-vertex paths count.  The former sequence body is frozen and
+    certified equivalent, through [GTBase.set_separators.seq_separatorP], in
+    theories/migration/set_separators.v. *)
 Definition x39_separates_xy
     (G : sgraph) (X Y A : {set G}) : Prop :=
-  forall p : seq G,
-    x39_xy_path X Y p ->
-    [disjoint x39_path_vertices p & A] ->
-    False.
+  separator G X Y A.
 
 (** ** X39 statements ******************************************************)
 
