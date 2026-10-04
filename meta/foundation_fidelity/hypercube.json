@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "family": "hypercube",
+  "modules": {
+    "GTBase.hypercubes": {
+      "path": "base/theories/hypercubes.v",
+      "overrides": {
+        "product_hypercube": {
+          "verdict": "FAITHFUL",
+          "note": "Q_0 = 'K_1 (one vertex, no edge, not the empty graph) and Q_(d+1) = 'K_2 □ Q_d on the nested ordinal/product carrier; 2^d vertices; isomorphic to tuple_hypercube d for every d, and Q_1 to K_2."
+        },
+        "tuple_hypercube": {
+          "verdict": "FAITHFUL",
+          "note": "Vertices are the d-bit tuples, two adjacent iff exactly one coordinate differs (tuple_hypercube_edgeP); 2^d vertices; Q_0 has one vertex and no edge; isomorphic to product_hypercube d for every d."
+        }
+      },
+      "machine_evidence": [
+        "product_hypercube0",
+        "product_hypercubeS",
+        "card_product_hypercube",
+        "product_hypercube0_edge",
+        "tuple_hypercube_sym",
+        "tuple_hypercube_irrefl",
+        "tuple_hypercube_edgeE",
+        "card_tuple_hypercube",
+        "tuple_hypercube_edgeP",
+        "tuple_hypercube0_edge",
+        "tuple_hypercube_diff_cons",
+        "tuple_hypercube_diff_eq0",
+        "tuple_hypercube_edge_cons",
+        "K2_bitK",
+        "bit_K2K",
+        "product_to_tupleK",
+        "tuple_to_productK",
+        "product_to_tuple_edge"
+      ]
+    }
+  }
+}

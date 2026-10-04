@@ -58,6 +58,7 @@ From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
 From GTBase Require Import triangles.
 From GTBase Require Import induced_paths.
+From GTBase Require Import hypercubes.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -214,7 +215,10 @@ have -> : [set i : 'I_d | tnth x i != tnth x i] = set0
   by apply/setP=> i; rewrite !inE eqxx.
 by rewrite cards0.
 Qed.
-Definition hypercube : sgraph := SGraph hc_sym hc_irrefl.
+(** Since the A23 library migration [hypercube] is [GTBase.hypercubes.tuple_hypercube d]:
+    the same [d.-tuple bool] carrier and adjacency.  [hc_rel], [hc_sym] and [hc_irrefl] are
+    unchanged; the original construction is frozen in [Packing.migration.hypercubes]. *)
+Definition hypercube : sgraph := tuple_hypercube d.
 End Hypercube.
 
 (** ** Weak saturation of Q_3 in K_n (Row 12)

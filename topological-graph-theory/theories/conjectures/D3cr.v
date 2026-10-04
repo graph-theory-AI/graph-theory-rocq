@@ -39,11 +39,12 @@
     of ['K_2], built on base's [cartesian_product]).
 
     NEW AREA PRIMITIVES: crossing notions live in crossing.v (area-local
-    planarization invariant).  [hypercube] is defined here; it is a generic graph
-    family (not crossing-specific), tagged [@MOVE-to-base] for promotion once a
-    second area needs it. *)
+    planarization invariant).  [hypercube] is a generic graph family (not
+    crossing-specific); since the A23 library migration it is the iterated-product
+    view [GTBase.hypercubes.product_hypercube]. *)
 
 From Topological Require Import foundations.crossing.
+From GTBase Require Import hypercubes.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -51,20 +52,19 @@ Unset Printing Implicit Defensive.
 
 (** The d-dimensional hypercube Q_d: vertices are binary strings of length d, two
     adjacent iff they differ in exactly one coordinate.  Equivalently the d-fold
-    cartesian (box) power of K_2 (Q_0 = K_1, Q_{d+1} = K_2 □ Q_d).  Reuses base's
-    [cartesian_product] (□).  [@MOVE-to-base]: generic graph family.
+    cartesian (box) power of K_2 (Q_0 = K_1, Q_{d+1} = K_2 □ Q_d).  Since the A23
+    library migration it is [GTBase.hypercubes.product_hypercube d], the same
+    recursion over base's [cartesian_product] (□); the original local Fixpoint is
+    frozen in [Topological.migration.hypercubes].
 
     NB. base's [graph_power] is NOT the right primitive here: it is the DISTANCE
     power (same vertex set, vertices adjacent iff joined by a walk of length ≤ m,
-    via [pow_rel]), not the cartesian/box power.  Hence the local fixpoint over
-    [cartesian_product] is the correct construction, not a redefinition of an
-    existing base primitive.  Grounding (witness + textbook identities — base case
-    Q_0 = K_1, recurrence, and #|Q_d| = 2^d) is in [grounding_D3cr]. *)
-Fixpoint hypercube (d : nat) : sgraph :=
-  match d with
-  | 0 => 'K_1
-  | d'.+1 => cartesian_product 'K_2 (hypercube d')
-  end.
+    via [pow_rel]), not the cartesian/box power.  Hence the iterated cartesian
+    product is the correct construction.  Grounding (witness + textbook
+    identities — base case Q_0 = K_1, recurrence, and #|Q_d| = 2^d) is in
+    [grounding_D3cr]. *)
+Definition hypercube (d : nat) : sgraph :=
+  product_hypercube d.
 
 (** Corpus row: opg:the_crossing_number_of_the_complete_bipartite_graph
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/the_crossing_number_of_the_complete_bipartite_graph/

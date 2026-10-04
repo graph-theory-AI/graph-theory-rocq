@@ -438,10 +438,6 @@
         "Hamilton.conjectures.U2.hamiltonian_cycle",
         "Packing.conjectures.U9.hamiltonian_cycleG"
       ],
-      "a66f999dfd11a06c589e43582d3da7902d0d6121d92de23becbfdc43eb5d6f55": [
-        "Extremal.conjectures.XE1.xe1_hypercube",
-        "Topological.conjectures.D3cr.hypercube"
-      ],
       "a6b41db6037249ce4e814e6eb187ca660a90a9c53cfcbc630aa2dca904cae26a": [
         "Extremal.conjectures.X49.x49_has_induced_cycle",
         "Extremal.conjectures.X60.x60_has_induced_cycle",
@@ -1070,6 +1066,10 @@
       "f2b0ce0bbdce3e9a118c4cb04124bff42ba9f0e1e643cc7bdbc67d5e1c3db1fc": [
         "Chromatic.conjectures.X157.x157_path_internal",
         "Extremal.conjectures.XE2.xe2_internal_path_vertices"
+      ],
+      "f32a5d378c906c1dcb03e749b4599ded6886dd7fa41a2b82ed21f0c79cdee9de": [
+        "Extremal.conjectures.XE1.xe1_hypercube",
+        "Topological.conjectures.D3cr.hypercube"
       ],
       "f3bd33e7267a1f5060b520d423ff9884099bee1ded325504c207d91fccc52fb4": [
         "Chromatic.conjectures.X7.x7_delete_edges",
@@ -35078,7 +35078,7 @@
         "Extremal.conjectures.XE1.xe1_turan_number_for_graph"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "xe1_subgraph_of",
       "normalized_name": "subgraph_of",
@@ -35098,7 +35098,7 @@
         "Extremal.conjectures.XE1.xe1_has_independent_set"
       ],
       "kind": "Definition",
-      "line": 12,
+      "line": 13,
       "local_dependencies": [],
       "name": "xe1_stable_set",
       "normalized_name": "stable_set",
@@ -35115,7 +35115,7 @@
       "declaration_hash": "b90e85d0fa845af471068c09b06a9b01af95f14799824273a9cbec494640f530",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 15,
+      "line": 16,
       "local_dependencies": [
         "xe1_stable_set"
       ],
@@ -35139,7 +35139,7 @@
         "Extremal.conjectures.XE1.erdos_568_statement"
       ],
       "kind": "Definition",
-      "line": 18,
+      "line": 19,
       "local_dependencies": [],
       "name": "xe1_no_isolated_vertices",
       "normalized_name": "no_isolated_vertices",
@@ -35159,7 +35159,7 @@
         "Extremal.conjectures.XE1.xe1_complement_sym"
       ],
       "kind": "Definition",
-      "line": 21,
+      "line": 22,
       "local_dependencies": [],
       "name": "xe1_complement_rel",
       "normalized_name": "complement_rel",
@@ -35176,7 +35176,7 @@
       "declaration_hash": "fbce5302badd93288c85c87d784ef12faa8e8b3592d001dc8096de4e1bfa46fd",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 24,
+      "line": 25,
       "local_dependencies": [
         "xe1_complement_rel"
       ],
@@ -35195,7 +35195,7 @@
       "declaration_hash": "9b634f753bf7a526a812572d2762558bb132b4b1180191af28a72f8003c86971",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 27,
+      "line": 28,
       "local_dependencies": [
         "xe1_complement_rel"
       ],
@@ -35216,7 +35216,7 @@
         "Extremal.conjectures.XE1.xe1_graph_ramsey"
       ],
       "kind": "Definition",
-      "line": 30,
+      "line": 31,
       "local_dependencies": [],
       "name": "xe1_complement_graph",
       "normalized_name": "complement_graph",
@@ -35235,7 +35235,7 @@
         "Extremal.conjectures.XE1.xe1_graph_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 33,
+      "line": 34,
       "local_dependencies": [
         "xe1_complement_graph",
         "xe1_subgraph_of"
@@ -35265,7 +35265,7 @@
         "Extremal.conjectures.XE1.xe1_diagonal_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 37,
+      "line": 38,
       "local_dependencies": [
         "xe1_graph_ramsey"
       ],
@@ -35286,7 +35286,7 @@
         "Extremal.conjectures.XE1.erdos_87_statement"
       ],
       "kind": "Definition",
-      "line": 41,
+      "line": 42,
       "local_dependencies": [
         "xe1_graph_ramsey_number"
       ],
@@ -35307,7 +35307,7 @@
         "Extremal.conjectures.XE1.xe1_size_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 44,
+      "line": 45,
       "local_dependencies": [],
       "name": "xe1_size_ramsey",
       "normalized_name": "size_ramsey",
@@ -35326,7 +35326,7 @@
         "Extremal.conjectures.XE1.erdos_561_statement"
       ],
       "kind": "Definition",
-      "line": 51,
+      "line": 52,
       "local_dependencies": [
         "xe1_size_ramsey"
       ],
@@ -35348,7 +35348,7 @@
         "Extremal.conjectures.XE1.xe1_delete_edges_sym"
       ],
       "kind": "Definition",
-      "line": 55,
+      "line": 56,
       "local_dependencies": [],
       "name": "xe1_delete_edges_rel",
       "normalized_name": "delete_edges_rel",
@@ -35365,7 +35365,7 @@
       "declaration_hash": "1eef42799cd89c4ba1e7bd15c50cc52ed6bf0140c067d306727bac0ccb9b39a7",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 58,
+      "line": 59,
       "local_dependencies": [
         "xe1_delete_edges_rel"
       ],
@@ -35384,7 +35384,7 @@
       "declaration_hash": "f76ada6927a5be24d5f515e2e6793af92222686e8584d5331d1e72e83b6b0af0",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 62,
+      "line": 63,
       "local_dependencies": [
         "xe1_delete_edges_rel"
       ],
@@ -35406,7 +35406,7 @@
         "Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_edges"
       ],
       "kind": "Definition",
-      "line": 66,
+      "line": 67,
       "local_dependencies": [],
       "name": "xe1_delete_edges",
       "normalized_name": "delete_edges",
@@ -35418,15 +35418,15 @@
       "signature_shape_hash": "862fb1f66a524d72310ba460666ee3a5e2fe8913625576f03187ebbf8ca25290"
     },
     {
-      "body_hash": "dc689fa981b1675fecfcb4c0f1a6e0cf092ee3527e1ea78f500498efb4c5de3d",
-      "body_shape_hash": "a66f999dfd11a06c589e43582d3da7902d0d6121d92de23becbfdc43eb5d6f55",
-      "declaration_hash": "13910bf460cafa53f6b5b793df0680494a92f235b192218d6a0bc79eeb28c9b8",
+      "body_hash": "f32a5d378c906c1dcb03e749b4599ded6886dd7fa41a2b82ed21f0c79cdee9de",
+      "body_shape_hash": "f32a5d378c906c1dcb03e749b4599ded6886dd7fa41a2b82ed21f0c79cdee9de",
+      "declaration_hash": "a9afa634a24809630016b0bd1af2b79bfbd695cea0147734882e42133d1cb198",
       "direct_consumers": [
         "Extremal.conjectures.XE1.erdos_1035_statement",
         "Extremal.conjectures.XE1.erdos_567_statement"
       ],
-      "kind": "Fixpoint",
-      "line": 69,
+      "kind": "Definition",
+      "line": 70,
       "local_dependencies": [],
       "name": "xe1_hypercube",
       "normalized_name": "hypercube",
@@ -35448,7 +35448,7 @@
         "Extremal.conjectures.XE1.erdos_568_statement"
       ],
       "kind": "Definition",
-      "line": 75,
+      "line": 73,
       "local_dependencies": [],
       "name": "xe1_tree",
       "normalized_name": "tree",
@@ -35467,7 +35467,7 @@
         "Extremal.conjectures.XE1.xe1_c4_forcing_min_degree"
       ],
       "kind": "Definition",
-      "line": 77,
+      "line": 75,
       "local_dependencies": [],
       "name": "xe1_min_degree_at_least",
       "normalized_name": "min_degree_at_least",
@@ -35486,7 +35486,7 @@
         "Extremal.conjectures.XE1.erdos_566_statement"
       ],
       "kind": "Definition",
-      "line": 80,
+      "line": 78,
       "local_dependencies": [],
       "name": "xe1_every_k_set_sparse",
       "normalized_name": "every_k_set_sparse",
@@ -35506,7 +35506,7 @@
         "Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_number"
       ],
       "kind": "Definition",
-      "line": 83,
+      "line": 81,
       "local_dependencies": [],
       "name": "xe1_diameter_at_most",
       "normalized_name": "diameter_at_most",
@@ -35523,7 +35523,7 @@
       "declaration_hash": "bd2a777315ca0f8a4cc15ca377c0cc4c081b723fdf0c4794414bc3d89f68b531",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 86,
+      "line": 84,
       "local_dependencies": [
         "xe1_delete_edges",
         "xe1_diameter_at_most"
@@ -35545,7 +35545,7 @@
         "Extremal.conjectures.XE1.erdos_85_statement"
       ],
       "kind": "Definition",
-      "line": 94,
+      "line": 92,
       "local_dependencies": [
         "xe1_min_degree_at_least",
         "xe1_subgraph_of"
@@ -35567,7 +35567,7 @@
         "Extremal.conjectures.XE1.erdos_552_statement"
       ],
       "kind": "Definition",
-      "line": 100,
+      "line": 98,
       "local_dependencies": [],
       "name": "xe1_sqrt_floor",
       "normalized_name": "sqrt_floor",
@@ -35586,7 +35586,7 @@
         "Extremal.conjectures.XE1.erdos_545_statement"
       ],
       "kind": "Definition",
-      "line": 103,
+      "line": 101,
       "local_dependencies": [],
       "name": "xe1_complete_plus_vertex",
       "normalized_name": "complete_plus_vertex",
@@ -35605,7 +35605,7 @@
         "Extremal.conjectures.XE1.erdos_567_statement"
       ],
       "kind": "Definition",
-      "line": 115,
+      "line": 113,
       "local_dependencies": [],
       "name": "xe1_h5_graph",
       "normalized_name": "h5_graph",
@@ -35624,7 +35624,7 @@
         "Extremal.conjectures.XE1.erdos_129_statement"
       ],
       "kind": "Definition",
-      "line": 132,
+      "line": 130,
       "local_dependencies": [],
       "name": "xe1_sqrt_ceil",
       "normalized_name": "sqrt_ceil",
@@ -35643,7 +35643,7 @@
         "Extremal.conjectures.XE1.xe1_multicolour_missing_clique_ramsey"
       ],
       "kind": "Definition",
-      "line": 135,
+      "line": 133,
       "local_dependencies": [],
       "name": "xe1_colour_k_free_on",
       "normalized_name": "colour_k_free_on",
@@ -35662,7 +35662,7 @@
         "Extremal.conjectures.XE1.xe1_multicolour_missing_clique_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 141,
+      "line": 139,
       "local_dependencies": [
         "xe1_colour_k_free_on"
       ],
@@ -35683,7 +35683,7 @@
         "Extremal.conjectures.XE1.erdos_129_statement"
       ],
       "kind": "Definition",
-      "line": 147,
+      "line": 145,
       "local_dependencies": [
         "xe1_multicolour_missing_clique_ramsey"
       ],
@@ -35704,7 +35704,7 @@
         "Extremal.conjectures.XE1.erdos_550_statement"
       ],
       "kind": "Definition",
-      "line": 152,
+      "line": 150,
       "local_dependencies": [],
       "name": "xe1_complete_multipartite_with_sizes",
       "normalized_name": "complete_multipartite_with_sizes",
@@ -35723,7 +35723,7 @@
         "Extremal.conjectures.XE1.erdos_550_statement"
       ],
       "kind": "Definition",
-      "line": 164,
+      "line": 162,
       "local_dependencies": [],
       "name": "xe1_two_smallest_part_sizes",
       "normalized_name": "two_smallest_part_sizes",
@@ -35742,7 +35742,7 @@
         "Extremal.conjectures.XE1.xe1_multicolour_graph_ramsey"
       ],
       "kind": "Definition",
-      "line": 172,
+      "line": 170,
       "local_dependencies": [],
       "name": "xe1_monochromatic_copy_in_complete",
       "normalized_name": "monochromatic_copy_in_complete",
@@ -35761,7 +35761,7 @@
         "Extremal.conjectures.XE1.xe1_multicolour_graph_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 179,
+      "line": 177,
       "local_dependencies": [
         "xe1_monochromatic_copy_in_complete"
       ],
@@ -35782,7 +35782,7 @@
         "Extremal.conjectures.XE1.erdos_557_statement"
       ],
       "kind": "Definition",
-      "line": 183,
+      "line": 181,
       "local_dependencies": [
         "xe1_multicolour_graph_ramsey"
       ],
@@ -35803,7 +35803,7 @@
         "Extremal.conjectures.XE1.erdos_561_statement"
       ],
       "kind": "Definition",
-      "line": 188,
+      "line": 186,
       "local_dependencies": [],
       "name": "xe1_positive_sequence",
       "normalized_name": "positive_sequence",
@@ -35822,7 +35822,7 @@
         "Extremal.conjectures.XE1.erdos_561_statement"
       ],
       "kind": "Definition",
-      "line": 191,
+      "line": 189,
       "local_dependencies": [],
       "name": "xe1_nonincreasing_sequence",
       "normalized_name": "nonincreasing_sequence",
@@ -35841,7 +35841,7 @@
         "Extremal.conjectures.XE1.xe1_star_forest_with_leaves"
       ],
       "kind": "Definition",
-      "line": 194,
+      "line": 192,
       "local_dependencies": [],
       "name": "xe1_star_on_set",
       "normalized_name": "star_on_set",
@@ -35860,7 +35860,7 @@
         "Extremal.conjectures.XE1.erdos_561_statement"
       ],
       "kind": "Definition",
-      "line": 204,
+      "line": 202,
       "local_dependencies": [
         "xe1_star_on_set"
       ],
@@ -35881,7 +35881,7 @@
         "Extremal.conjectures.XE1.xe1_star_forest_formula"
       ],
       "kind": "Definition",
-      "line": 212,
+      "line": 210,
       "local_dependencies": [],
       "name": "xe1_star_formula_term",
       "normalized_name": "star_formula_term",
@@ -35900,7 +35900,7 @@
         "Extremal.conjectures.XE1.erdos_561_statement"
       ],
       "kind": "Definition",
-      "line": 220,
+      "line": 218,
       "local_dependencies": [
         "xe1_star_formula_term"
       ],
@@ -35922,7 +35922,7 @@
         "Extremal.conjectures.XE1.xe1_add_edges_sym"
       ],
       "kind": "Definition",
-      "line": 226,
+      "line": 224,
       "local_dependencies": [],
       "name": "xe1_add_edges_rel",
       "normalized_name": "add_edges_rel",
@@ -35941,7 +35941,7 @@
         "Extremal.conjectures.XE1.xe1_add_edges"
       ],
       "kind": "Lemma",
-      "line": 229,
+      "line": 227,
       "local_dependencies": [
         "xe1_add_edges_rel"
       ],
@@ -35962,7 +35962,7 @@
         "Extremal.conjectures.XE1.xe1_add_edges"
       ],
       "kind": "Lemma",
-      "line": 233,
+      "line": 231,
       "local_dependencies": [
         "xe1_add_edges_rel"
       ],
@@ -35983,7 +35983,7 @@
         "Extremal.conjectures.XE1.xe1_triangle_free_diameter_completion_number"
       ],
       "kind": "Definition",
-      "line": 237,
+      "line": 235,
       "local_dependencies": [
         "xe1_add_edges_irrefl",
         "xe1_add_edges_sym"
@@ -36005,7 +36005,7 @@
         "Extremal.conjectures.XE1.erdos_619_statement"
       ],
       "kind": "Definition",
-      "line": 240,
+      "line": 238,
       "local_dependencies": [
         "xe1_add_edges",
         "xe1_diameter_at_most"
@@ -36027,7 +36027,7 @@
         "Extremal.conjectures.XE1.xe1_min_turan_over_size_edges"
       ],
       "kind": "Definition",
-      "line": 257,
+      "line": 255,
       "local_dependencies": [
         "xe1_subgraph_of"
       ],
@@ -36048,7 +36048,7 @@
         "Extremal.conjectures.XE1.erdos_766_statement"
       ],
       "kind": "Definition",
-      "line": 263,
+      "line": 261,
       "local_dependencies": [
         "xe1_turan_number_for_graph"
       ],
@@ -36069,7 +36069,7 @@
         "Extremal.conjectures.XE1.xe1_seven_triangle_clique_property"
       ],
       "kind": "Definition",
-      "line": 271,
+      "line": 269,
       "local_dependencies": [],
       "name": "xe1_every_7_set_has_triangle",
       "normalized_name": "every_7_set_has_triangle",
@@ -36088,7 +36088,7 @@
         "Extremal.conjectures.XE1.xe1_seven_triangle_clique_guarantee"
       ],
       "kind": "Definition",
-      "line": 275,
+      "line": 273,
       "local_dependencies": [
         "xe1_every_7_set_has_triangle"
       ],
@@ -36109,7 +36109,7 @@
         "Extremal.conjectures.XE1.erdos_813_statement"
       ],
       "kind": "Definition",
-      "line": 281,
+      "line": 279,
       "local_dependencies": [
         "xe1_seven_triangle_clique_property"
       ],
@@ -36130,7 +36130,7 @@
         "Extremal.conjectures.XE1.erdos_813_statement"
       ],
       "kind": "Definition",
-      "line": 285,
+      "line": 283,
       "local_dependencies": [],
       "name": "xe1_between_rational_power_bounds",
       "normalized_name": "between_rational_power_bounds",
@@ -50906,7 +50906,7 @@
         "Packing.conjectures.U9.partition_of_a_cubic_3_connected_graphs_into_paths_o_statement"
       ],
       "kind": "Definition",
-      "line": 65,
+      "line": 66,
       "local_dependencies": [],
       "name": "is_P3",
       "normalized_name": "is_P3",
@@ -50925,7 +50925,7 @@
         "Packing.conjectures.U9.triangle_packing_vs_triangle_edge_transversal_statement"
       ],
       "kind": "Definition",
-      "line": 74,
+      "line": 75,
       "local_dependencies": [],
       "name": "is_triangle",
       "normalized_name": "is_triangle",
@@ -50944,7 +50944,7 @@
         "Packing.conjectures.U9.triangle_packing_vs_triangle_edge_transversal_statement"
       ],
       "kind": "Definition",
-      "line": 78,
+      "line": 79,
       "local_dependencies": [],
       "name": "tri_edges",
       "normalized_name": "tri_edges",
@@ -50963,7 +50963,7 @@
         "Packing.conjectures.U9.odd_cycle_transversal_in_triangle_free_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 83,
+      "line": 84,
       "local_dependencies": [],
       "name": "edge_setG",
       "normalized_name": "edge_setG",
@@ -50982,7 +50982,7 @@
         "Packing.conjectures.U9.odd_cycle_transversal_in_triangle_free_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 87,
+      "line": 88,
       "local_dependencies": [],
       "name": "del_bipartite",
       "normalized_name": "del_bipartite",
@@ -51001,7 +51001,7 @@
         "Packing.conjectures.U9.lovasz_path_removal_statement"
       ],
       "kind": "Definition",
-      "line": 94,
+      "line": 95,
       "local_dependencies": [],
       "name": "k_connected_on",
       "normalized_name": "k_connected_on",
@@ -51018,7 +51018,7 @@
       "declaration_hash": "ca586b8d07568ebc36e831aaf040d83e00c35f3984c69e57e6dcbebf5e2e0a94",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 105,
+      "line": 106,
       "local_dependencies": [],
       "name": "consec",
       "normalized_name": "consec",
@@ -51035,7 +51035,7 @@
       "declaration_hash": "45cf9b926081fa4da5490e85850919bc0463972aa9048a4965e531951f46564b",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 109,
+      "line": 110,
       "local_dependencies": [],
       "name": "spath",
       "normalized_name": "spath",
@@ -51054,7 +51054,7 @@
         "Packing.conjectures.U9.lovasz_path_removal_statement"
       ],
       "kind": "Definition",
-      "line": 114,
+      "line": 115,
       "local_dependencies": [],
       "name": "is_induced_path",
       "normalized_name": "is_induced_path",
@@ -51073,7 +51073,7 @@
         "Packing.conjectures.U9.friendly_partitions_statement"
       ],
       "kind": "Definition",
-      "line": 123,
+      "line": 124,
       "local_dependencies": [],
       "name": "friendly_partition",
       "normalized_name": "friendly_partition",
@@ -51092,7 +51092,7 @@
         "Packing.conjectures.U9.friendly_partitions_statement"
       ],
       "kind": "Definition",
-      "line": 131,
+      "line": 132,
       "local_dependencies": [],
       "name": "all_but_finitely_many_regular",
       "normalized_name": "all_but_finitely_many_regular",
@@ -51111,7 +51111,7 @@
         "Packing.conjectures.U9.the_bollobas_eldridge_catlin_conjecture_on_graph_pac_statement"
       ],
       "kind": "Definition",
-      "line": 137,
+      "line": 138,
       "local_dependencies": [],
       "name": "pack",
       "normalized_name": "pack",
@@ -51130,7 +51130,7 @@
         "Packing.conjectures.U9.matching_cut_and_girth_statement"
       ],
       "kind": "Definition",
-      "line": 143,
+      "line": 144,
       "local_dependencies": [],
       "name": "matching_cut",
       "normalized_name": "matching_cut",
@@ -51149,7 +51149,7 @@
         "Packing.conjectures.U9.matching_cut_and_girth_statement"
       ],
       "kind": "Definition",
-      "line": 152,
+      "line": 153,
       "local_dependencies": [],
       "name": "avg_deg_lt",
       "normalized_name": "avg_deg_lt",
@@ -51168,7 +51168,7 @@
         "Packing.conjectures.U9.is_min_fvs"
       ],
       "kind": "Definition",
-      "line": 156,
+      "line": 157,
       "local_dependencies": [],
       "name": "hits_all_cycles",
       "normalized_name": "hits_all_cycles",
@@ -51187,7 +51187,7 @@
         "Packing.conjectures.U9.jones_statement"
       ],
       "kind": "Definition",
-      "line": 162,
+      "line": 163,
       "local_dependencies": [
         "hits_all_cycles"
       ],
@@ -51208,7 +51208,7 @@
         "Packing.conjectures.U9.is_max_cycle_packing"
       ],
       "kind": "Definition",
-      "line": 167,
+      "line": 168,
       "local_dependencies": [],
       "name": "cycle_packing",
       "normalized_name": "cycle_packing",
@@ -51227,7 +51227,7 @@
         "Packing.conjectures.U9.jones_statement"
       ],
       "kind": "Definition",
-      "line": 173,
+      "line": 174,
       "local_dependencies": [
         "cycle_packing"
       ],
@@ -51248,7 +51248,7 @@
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
       "kind": "Definition",
-      "line": 178,
+      "line": 179,
       "local_dependencies": [],
       "name": "hamiltonian_cycleG",
       "normalized_name": "hamiltonian_cycleG",
@@ -51267,7 +51267,7 @@
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
       "kind": "Definition",
-      "line": 185,
+      "line": 186,
       "local_dependencies": [],
       "name": "cycle_edgesG",
       "normalized_name": "cycle_edgesG",
@@ -51286,7 +51286,7 @@
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
       "kind": "Definition",
-      "line": 189,
+      "line": 190,
       "local_dependencies": [],
       "name": "is_matching_edges",
       "normalized_name": "is_matching_edges",
@@ -51306,7 +51306,7 @@
         "Packing.conjectures.U9.hc_sym"
       ],
       "kind": "Definition",
-      "line": 200,
+      "line": 201,
       "local_dependencies": [],
       "name": "hc_rel",
       "normalized_name": "hc_rel",
@@ -51321,11 +51321,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "f10f7dc80dd99f537517f23f1e2e816287d18203c43561a8167852bef9d57c23",
-      "direct_consumers": [
-        "Packing.conjectures.U9.hypercube"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 202,
+      "line": 203,
       "local_dependencies": [
         "hc_rel"
       ],
@@ -51342,11 +51340,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "4aefb899284056cb9bf415da1e4a77d6c7a0288027f09817c2f1157206eac1bc",
-      "direct_consumers": [
-        "Packing.conjectures.U9.hypercube"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 210,
+      "line": 211,
       "local_dependencies": [
         "hc_rel"
       ],
@@ -51360,19 +51356,16 @@
       "signature_shape_hash": "e04e7353c54825ae11de3935f4a783b6acea3cc53bda3089b8bda7e595f576f3"
     },
     {
-      "body_hash": "7c637842e1aad8e25fc86cdc8d1f06596d48397d19473448a03fd0db02d91b5e",
-      "body_shape_hash": "7c637842e1aad8e25fc86cdc8d1f06596d48397d19473448a03fd0db02d91b5e",
-      "declaration_hash": "5d2771407b7ca75edd129678ae6794626d136e52f87d74fe2b1c040d6593d14b",
+      "body_hash": "fb6a35df8ad13d0fa56090e2fe3319e7382c1152dcff3bbc7a5ce3e9e3fe3dc0",
+      "body_shape_hash": "fb6a35df8ad13d0fa56090e2fe3319e7382c1152dcff3bbc7a5ce3e9e3fe3dc0",
+      "declaration_hash": "447be001955956d4bf048fddc0f39c7f6a4b657a120759fd8f5a5d879ed4b767",
       "direct_consumers": [
         "Packing.conjectures.U9.copy_Q3_through",
         "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement"
       ],
       "kind": "Definition",
-      "line": 217,
-      "local_dependencies": [
-        "hc_irrefl",
-        "hc_sym"
-      ],
+      "line": 218,
+      "local_dependencies": [],
       "name": "hypercube",
       "normalized_name": "hypercube",
       "package": "packing-theory",
@@ -51390,7 +51383,7 @@
         "Packing.conjectures.U9.weakly_saturates"
       ],
       "kind": "Definition",
-      "line": 219,
+      "line": 223,
       "local_dependencies": [
         "hypercube"
       ],
@@ -51411,7 +51404,7 @@
         "Packing.conjectures.U9.is_wsat"
       ],
       "kind": "Definition",
-      "line": 233,
+      "line": 237,
       "local_dependencies": [
         "copy_Q3_through"
       ],
@@ -51432,7 +51425,7 @@
         "Packing.conjectures.U9.weak_saturation_of_the_cube_in_the_clique_statement"
       ],
       "kind": "Definition",
-      "line": 244,
+      "line": 248,
       "local_dependencies": [
         "weakly_saturates"
       ],
@@ -51453,7 +51446,7 @@
         "Packing.conjectures.U9.edge_conn_subset"
       ],
       "kind": "Definition",
-      "line": 250,
+      "line": 254,
       "local_dependencies": [],
       "name": "edge_conn_via",
       "normalized_name": "edge_conn_via",
@@ -51472,7 +51465,7 @@
         "Packing.conjectures.U9.partitioning_edge_connectivity_statement"
       ],
       "kind": "Definition",
-      "line": 265,
+      "line": 269,
       "local_dependencies": [
         "edge_conn_via"
       ],
@@ -51493,7 +51486,7 @@
         "Packing.conjectures.U9.tree_contains_T"
       ],
       "kind": "Definition",
-      "line": 270,
+      "line": 274,
       "local_dependencies": [],
       "name": "acyclic_mg",
       "normalized_name": "acyclic_mg",
@@ -51512,7 +51505,7 @@
         "Packing.conjectures.U9.kriesells_statement"
       ],
       "kind": "Definition",
-      "line": 276,
+      "line": 280,
       "local_dependencies": [],
       "name": "edge_disjoint_uv_paths",
       "normalized_name": "edge_disjoint_uv_paths",
@@ -51531,7 +51524,7 @@
         "Packing.conjectures.U9.kriesells_statement"
       ],
       "kind": "Definition",
-      "line": 283,
+      "line": 287,
       "local_dependencies": [
         "acyclic_mg"
       ],
@@ -51552,7 +51545,7 @@
         "Packing.conjectures.U9.packing_t_joins_statement"
       ],
       "kind": "Definition",
-      "line": 290,
+      "line": 294,
       "local_dependencies": [],
       "name": "cut_mg",
       "normalized_name": "cut_mg",
@@ -51571,7 +51564,7 @@
         "Packing.conjectures.U9.packing_t_joins_statement"
       ],
       "kind": "Definition",
-      "line": 294,
+      "line": 298,
       "local_dependencies": [],
       "name": "is_tjoin",
       "normalized_name": "is_tjoin",
@@ -54775,14 +54768,14 @@
       "signature_shape_hash": "2bbd936ec5f8b9506ed15f7a34f5708d574f606413f2017c0c8c36f948c94e60"
     },
     {
-      "body_hash": "a66f999dfd11a06c589e43582d3da7902d0d6121d92de23becbfdc43eb5d6f55",
-      "body_shape_hash": "a66f999dfd11a06c589e43582d3da7902d0d6121d92de23becbfdc43eb5d6f55",
-      "declaration_hash": "f2ac2cbe51229763108fd1e689659c818a28c7b46f88a28ef2570783d3bda3b1",
+      "body_hash": "f32a5d378c906c1dcb03e749b4599ded6886dd7fa41a2b82ed21f0c79cdee9de",
+      "body_shape_hash": "f32a5d378c906c1dcb03e749b4599ded6886dd7fa41a2b82ed21f0c79cdee9de",
+      "declaration_hash": "47e46fadaaedddffa9731d95e33a0b21aa20d82b32615ef853166ab0194078d4",
       "direct_consumers": [
         "Topological.conjectures.D3cr.the_crossing_number_of_the_hypercube_statement"
       ],
-      "kind": "Fixpoint",
-      "line": 51,
+      "kind": "Definition",
+      "line": 52,
       "local_dependencies": [],
       "name": "hypercube",
       "normalized_name": "hypercube",

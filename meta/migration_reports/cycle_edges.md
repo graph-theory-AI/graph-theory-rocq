@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py cycle_edges --details /tmp/migr
 
 - Canonical: `GTBase.walks_paths.seq_cycle_edge_set`.
 - Baseline: `0a0203ee4e1ff00605e4cbfa89108dcbea0e812f`.
-- Scope: 8 helpers, 11 statements, 34 frozen objects, 88 recorded references.
-- Source checks: 334/334 pass; consistent.
+- Scope: 8 helpers, 11 statements, 34 frozen objects, 92 recorded references.
+- Source checks: 335/335 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -29,4 +29,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Extremal.conjectures.X84.x84_cycle_edge_set`, `Digraph.conjectures.P9.cyc_arcs`, `Cycle.conjectures.U6.cyc_pairs`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `cycle-theory/theories/migration/genuine_cycle.v#X9Legacy.proper_edge_coloured_short_cycle_statement`, `cycle-theory/theories/migration/genuine_cycle.v#XE1Legacy.cycle_or_edge_piece`, `cycle-theory/theories/migration/genuine_cycle.v#XE2Legacy.erdos_641_statement`, `cycle-theory/theories/migration/perfect_matching.v#X24Legacy.one_factorization_long_rainbow_cycle_statement`, `packing-theory/theories/migration/matching.v#U9MatchingLegacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `cycle-theory/theories/migration/genuine_cycle.v#X9Legacy.proper_edge_coloured_short_cycle_statement`, `cycle-theory/theories/migration/genuine_cycle.v#XE1Legacy.cycle_or_edge_piece`, `cycle-theory/theories/migration/genuine_cycle.v#XE2Legacy.erdos_641_statement`, `cycle-theory/theories/migration/perfect_matching.v#X24Legacy.one_factorization_long_rainbow_cycle_statement`, `packing-theory/theories/migration/matching.v#U9MatchingLegacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement`, `packing-theory/theories/migration/hypercubes.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement`.

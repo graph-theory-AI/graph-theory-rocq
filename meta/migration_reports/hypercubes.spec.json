@@ -1,0 +1,538 @@
+{
+  "family": "hypercube",
+  "canonical_name": "GTBase.hypercubes.product_hypercube",
+  "canonical_short_name": "product_hypercube",
+  "relation": "the d-dimensional hypercube in two named views kept on their own carriers: Extremal XE1 xe1_hypercube and Topological D3cr hypercube (local Fixpoints Q_0 = 'K_1, Q_(d+1) = cartesian_product 'K_2 Q_d on the nested ordinal/product carrier) equal GTBase.hypercubes.product_hypercube d as graph records, by induction on d; Packing U9 hypercube (SGraph over d.-tuple bool, adjacent iff exactly one coordinate differs, with its own hc_rel/hc_sym/hc_irrefl) has the carrier and the pointwise adjacency of GTBase.hypercubes.tuple_hypercube d and the identity isomorphism to it, not an equation between opaque proof fields. The views are related for every d by the explicit isomorphism product_tuple_hypercube_diso (inverse coordinate maps); isomorphism is not graph equality, so #567's literal G = Q_3 and X226's tnth coordinates keep their carriers. No positive-dimension guard.",
+  "baseline_commit": "f5d2d3a0652fe3858fa8a22d9edd0d297bac8a2a",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal",
+    "topological-graph-theory": "Topological",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/hypercubes.v",
+    "extremal-graph-theory/theories/migration/hypercubes.v",
+    "topological-graph-theory/theories/migration/hypercubes.v",
+    "packing-theory/theories/migration/hypercubes.v",
+    "extremal-graph-theory/theories/migration/subgraph_of.v",
+    "extremal-graph-theory/theories/migration/edge_count.v",
+    "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+    "extremal-graph-theory/theories/migration/complement.v",
+    "extremal-graph-theory/theories/migration/consecutive_in_cycle.v",
+    "packing-theory/theories/migration/matching.v",
+    "packing-theory/theories/migration/cycle_edges.v"
+  ],
+  "extra_certificates": [
+    "GTBase.hypercubes.product_hypercube0",
+    "GTBase.hypercubes.product_hypercubeS",
+    "GTBase.hypercubes.card_product_hypercube",
+    "GTBase.hypercubes.product_hypercube0_edge",
+    "GTBase.hypercubes.tuple_hypercube_sym",
+    "GTBase.hypercubes.tuple_hypercube_irrefl",
+    "GTBase.hypercubes.tuple_hypercube_edgeE",
+    "GTBase.hypercubes.card_tuple_hypercube",
+    "GTBase.hypercubes.tuple_hypercube_edgeP",
+    "GTBase.hypercubes.tuple_hypercube0_edge",
+    "GTBase.hypercubes.tuple_hypercube_diff_cons",
+    "GTBase.hypercubes.tuple_hypercube_diff_eq0",
+    "GTBase.hypercubes.tuple_hypercube_edge_cons",
+    "GTBase.hypercubes.K2_bitK",
+    "GTBase.hypercubes.bit_K2K",
+    "GTBase.hypercubes.product_to_tupleK",
+    "GTBase.hypercubes.tuple_to_productK",
+    "GTBase.hypercubes.product_to_tuple_edge",
+    "GTBase.hypercubes.product_tuple_hypercube_diso",
+    "GTBase.hypercubes.product_hypercube1_diso",
+    "Packing.migration.hypercubes.hypercube_diso"
+  ],
+  "summary": [
+    "Batch A, family A23 (hypercubes), on the fixed A22 pin f5d2d3a (no private union). New GTBase.hypercubes names two views: product_hypercube (Q_0 = 'K_1, Q_(d+1) = 'K_2 \u25a1 Q_d over base.cartesian_product) and tuple_hypercube (d.-tuple bool, exactly one differing coordinate), with cardinalities 2^d, tuple adjacency views, Q_0 and Q_1, and the explicit all-d isomorphism product_tuple_hypercube_diso through the inverse maps product_to_tuple/tuple_to_product. XE1's and D3cr's Fixpoints now unfold to product_hypercube d (the same graph record and carrier); U9's hypercube to tuple_hypercube d (its hc_rel/hc_sym/hc_irrefl unchanged). The public client covers Q_0, Q_1 isomorphic to K_2 in both views, the recurrence, the cardinalities, one-coordinate adjacency with a Q_3 check, and the isomorphism with its edge transport.",
+    "",
+    "Frozen verbatim at f5d2d3a: the three sources (U9 with its complete Section and hc_* proofs), the ten chains (U9 copy_Q3_through, weakly_saturates, is_wsat; X226 x226_subcube through x226_f_dim_le2) and the six rows (Extremal #1035 and #567, Packing U9 matching and weak-saturation rows and X226, Topological D3cr). Complete rows at the pre-migration 9e03072: #1035 over A5's frozen subgraph and #567 extending A11's complete row (A7, A11, A6 and B4 pieces): 8 whole-row iffs. #567's literal G = Q_3, X226's tnth partitions and counts, the weak-saturation and crossing proxies, D3cr's partial status and every guard are unchanged.",
+    "",
+    "History: the ten older Extremal snapshots (A5, A6, A7, B4, A11) keep live xe1_hypercube byte for byte; the spec documents them. A23's per-row copies keep those families' live names, with reciprocal notes. The mandatory B11+C25+A23 complete U9 Original (ninth iff) is later, root-owned work, not covered here.",
+    "Combined-parent completion on reviewed D3 0d7c4bc: preserve all 26 worker frozen objects and add two actual historical providers plus the full raw U9Original (29 total; nine complete iff). The row retains 2 <= d, the same M and c witnesses, actual C25 raw matching and B11 raw cycle edges, and A23 frozen tuple construction. The new proof reuses the genuine C25 whole iff by carrier/adjacency conversion, without graph-record equality or proof irrelevance."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE1.xe1_hypercube",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_hypercube",
+      "frozen_path": "extremal-graph-theory/theories/migration/hypercubes.v",
+      "frozen": "Legacy.xe1_hypercube",
+      "substitutions": {},
+      "certificate": "Extremal.migration.hypercubes.xe1_hypercube_compat",
+      "live_unfolds_to": "product_hypercube d"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_1035_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_1035_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/hypercubes.v",
+      "frozen": "XE1Legacy.erdos_1035_statement",
+      "substitutions": {
+        "xe1_hypercube": "Legacy.xe1_hypercube"
+      },
+      "certificate": "Extremal.migration.hypercubes.erdos_1035_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_567_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_567_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/hypercubes.v",
+      "frozen": "XE1Legacy.erdos_567_statement",
+      "substitutions": {
+        "xe1_hypercube": "Legacy.xe1_hypercube"
+      },
+      "certificate": "Extremal.migration.hypercubes.erdos_567_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_1035_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_1035_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/hypercubes.v",
+      "frozen": "XE1Original.erdos_1035_statement",
+      "substitutions": {
+        "xe1_hypercube": "Legacy.xe1_hypercube",
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of"
+      },
+      "certificate": "Extremal.migration.hypercubes.erdos_1035_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_567_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_567_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/hypercubes.v",
+      "frozen": "XE1Original.erdos_567_statement",
+      "substitutions": {
+        "xe1_hypercube": "Legacy.xe1_hypercube",
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_no_isolated_vertices": "A11.Legacy.xe1_no_isolated_vertices",
+        "xe1_graph_ramsey_number": "A6.XE1Original.graph_ramsey_number",
+        "xe1_h5_graph": "B4.XE1Legacy.h5_graph"
+      },
+      "certificate": "Extremal.migration.hypercubes.erdos_567_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "Topological.conjectures.D3cr.hypercube",
+      "path": "topological-graph-theory/theories/conjectures/D3cr.v",
+      "name": "hypercube",
+      "frozen_path": "topological-graph-theory/theories/migration/hypercubes.v",
+      "frozen": "Legacy.hypercube",
+      "substitutions": {},
+      "certificate": "Topological.migration.hypercubes.hypercube_compat",
+      "live_unfolds_to": "product_hypercube d"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Topological.conjectures.D3cr.the_crossing_number_of_the_hypercube_statement",
+      "path": "topological-graph-theory/theories/conjectures/D3cr.v",
+      "name": "the_crossing_number_of_the_hypercube_statement",
+      "frozen_path": "topological-graph-theory/theories/migration/hypercubes.v",
+      "frozen": "D3crLegacy.the_crossing_number_of_the_hypercube_statement",
+      "substitutions": {
+        "hypercube": "Legacy.hypercube"
+      },
+      "certificate": "Topological.migration.hypercubes.the_crossing_number_of_the_hypercube_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.U9.hypercube",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "hypercube",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "Legacy.hypercube",
+      "substitutions": {},
+      "certificate": "Packing.migration.hypercubes.hypercube_compat",
+      "live_unfolds_to": "tuple_hypercube d"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.U9.copy_Q3_through",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "copy_Q3_through",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "U9Legacy.copy_Q3_through",
+      "substitutions": {
+        "hypercube": "Legacy.hypercube"
+      },
+      "certificate": "Packing.migration.hypercubes.copy_Q3_through_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.U9.weakly_saturates",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "weakly_saturates",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "U9Legacy.weakly_saturates",
+      "substitutions": {
+        "copy_Q3_through": "U9Legacy.copy_Q3_through"
+      },
+      "certificate": "Packing.migration.hypercubes.weakly_saturates_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.U9.is_wsat",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "is_wsat",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "U9Legacy.is_wsat",
+      "substitutions": {
+        "weakly_saturates": "U9Legacy.weakly_saturates"
+      },
+      "certificate": "Packing.migration.hypercubes.is_wsat_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "substitutions": {
+        "hypercube": "Legacy.hypercube"
+      },
+      "certificate": "Packing.migration.hypercubes.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.U9.weak_saturation_of_the_cube_in_the_clique_statement",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "weak_saturation_of_the_cube_in_the_clique_statement",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "U9Legacy.weak_saturation_of_the_cube_in_the_clique_statement",
+      "substitutions": {
+        "is_wsat": "U9Legacy.is_wsat"
+      },
+      "certificate": "Packing.migration.hypercubes.weak_saturation_of_the_cube_in_the_clique_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X226.x226_subcube",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_subcube",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "X226Legacy.x226_subcube",
+      "substitutions": {
+        "hypercube": "Legacy.hypercube"
+      },
+      "certificate": "Packing.migration.hypercubes.x226_subcube_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X226.x226_is_subcube",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_is_subcube",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "X226Legacy.x226_is_subcube",
+      "substitutions": {
+        "hypercube": "Legacy.hypercube",
+        "x226_subcube": "X226Legacy.x226_subcube"
+      },
+      "certificate": "Packing.migration.hypercubes.x226_is_subcube_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X226.x226_is_subcube_dim_le",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_is_subcube_dim_le",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "X226Legacy.x226_is_subcube_dim_le",
+      "substitutions": {
+        "hypercube": "Legacy.hypercube",
+        "x226_subcube": "X226Legacy.x226_subcube"
+      },
+      "certificate": "Packing.migration.hypercubes.x226_is_subcube_dim_le_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X226.x226_subcube_partitions",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_subcube_partitions",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "X226Legacy.x226_subcube_partitions",
+      "substitutions": {
+        "hypercube": "Legacy.hypercube",
+        "x226_is_subcube": "X226Legacy.x226_is_subcube"
+      },
+      "certificate": "Packing.migration.hypercubes.x226_subcube_partitions_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X226.x226_subcube_partitions_dim_le",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_subcube_partitions_dim_le",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "X226Legacy.x226_subcube_partitions_dim_le",
+      "substitutions": {
+        "hypercube": "Legacy.hypercube",
+        "x226_subcube_partitions": "X226Legacy.x226_subcube_partitions",
+        "x226_is_subcube_dim_le": "X226Legacy.x226_is_subcube_dim_le"
+      },
+      "certificate": "Packing.migration.hypercubes.x226_subcube_partitions_dim_le_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X226.x226_f",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_f",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "X226Legacy.x226_f",
+      "substitutions": {
+        "x226_subcube_partitions": "X226Legacy.x226_subcube_partitions"
+      },
+      "certificate": "Packing.migration.hypercubes.x226_f_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X226.x226_f_dim_le2",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_f_dim_le2",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "X226Legacy.x226_f_dim_le2",
+      "substitutions": {
+        "x226_subcube_partitions_dim_le": "X226Legacy.x226_subcube_partitions_dim_le"
+      },
+      "certificate": "Packing.migration.hypercubes.x226_f_dim_le2_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X226.subcube_partition_count_ratio_subexponential_statement",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "subcube_partition_count_ratio_subexponential_statement",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "X226Legacy.subcube_partition_count_ratio_subexponential_statement",
+      "substitutions": {
+        "x226_f": "X226Legacy.x226_f",
+        "x226_f_dim_le2": "X226Legacy.x226_f_dim_le2"
+      },
+      "certificate": "Packing.migration.hypercubes.subcube_partition_count_ratio_subexponential_statement_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_subgraph_of",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_subgraph_of",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "Legacy.xe1_subgraph_of",
+      "substitutions": {},
+      "certificate": "Extremal.migration.subgraph_of.xe1_subgraph_of_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X4.x4_edge_count",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_edge_count",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "Legacy.x4_edge_count",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_count.x4_edge_count_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_no_isolated_vertices",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_no_isolated_vertices",
+      "commit": "9abf440da80115caeffd299077976b48f4e07d74",
+      "frozen_path": "extremal-graph-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.xe1_no_isolated_vertices",
+      "substitutions": {},
+      "certificate": "Extremal.migration.min_degree_at_least.xe1_no_isolated_vertices_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_graph_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_graph_ramsey_number",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "XE1Original.graph_ramsey_number",
+      "substitutions": {
+        "xe1_graph_ramsey_number": "graph_ramsey_number",
+        "xe1_graph_ramsey": "graph_ramsey"
+      },
+      "certificate": "Extremal.migration.complement.graph_ramsey_number_original_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_h5_graph",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_h5_graph",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "extremal-graph-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "XE1Legacy.h5_graph",
+      "substitutions": {
+        "x4_consecutive_in_cycle": "Legacy.x4_consecutive_in_cycle",
+        "xe1_h5_graph": "h5_graph"
+      },
+      "certificate": "Extremal.migration.consecutive_in_cycle.xe1_h5_graph_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.U9.is_matching_edges",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "is_matching_edges",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "U9MatchingLegacy.is_matching_edges",
+      "substitutions": {},
+      "certificate": "Packing.migration.matching.is_matching_edges_compat",
+      "frozen_at": "f3d16d8b262d3a8188f76947626d06b92311bfd7",
+      "binding_note": "Frozen at the C24 pin; the U9 source and row texts are byte-identical at the family baseline 9e03072, so the text is bound there.",
+      "live_unfolds_to": "matching M",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.U9.cycle_edgesG",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "cycle_edgesG",
+      "frozen_path": "packing-theory/theories/migration/cycle_edges.v",
+      "frozen": "Legacy.cycle_edgesG",
+      "substitutions": {},
+      "certificate": "Packing.migration.cycle_edges.cycle_edgesG_compat",
+      "live_unfolds_to": "seq_next_edge_set c",
+      "commit": "0a0203ee4e1ff00605e4cbfa89108dcbea0e812f"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "packing-theory/theories/migration/hypercubes.v",
+      "frozen": "U9Original.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "substitutions": {
+        "hypercube": "Legacy.hypercube",
+        "is_matching_edges": "CM.U9MatchingLegacy.is_matching_edges",
+        "cycle_edgesG": "CE.Legacy.cycle_edgesG"
+      },
+      "certificate": "Packing.migration.hypercubes.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/complement.v#XE1Legacy.erdos_567_statement": "A6 per-row snapshot: A6 froze its Ramsey/complement chain in #567 but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged; the complete row is Extremal.migration.hypercubes.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which extends A11's complete row with the frozen cube.",
+    "extremal-graph-theory/theories/migration/complement.v#XE1Original.erdos_567_statement": "A6 complete row: A6 froze the pre-migration #567 over its complete Ramsey/complement chain but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged beside A23's complete row Extremal.migration.hypercubes.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which extends A11's complete row with the frozen cube.",
+    "extremal-graph-theory/theories/migration/consecutive_in_cycle.v#XE1Legacy.erdos_567_statement": "B4 per-row snapshot: B4 froze its H_5 cycle chain in #567 but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged; the complete row is Extremal.migration.hypercubes.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which extends A11's complete row with the frozen cube.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Legacy.erdos_567_statement": "A7 per-row snapshot: A7 froze its edge count in #567 but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged; the complete row is Extremal.migration.hypercubes.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which extends A11's complete row with the frozen cube.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE1Original.erdos_567_statement": "A7 complete row: A7 froze the pre-migration #567 over its edge count and A6's complete chain but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged beside A23's complete row Extremal.migration.hypercubes.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which extends A11's complete row with the frozen cube.",
+    "extremal-graph-theory/theories/migration/hypercubes.v#Legacy.xe1_hypercube": "A23 frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (Legacy.xe1_hypercube itself), not the live Extremal.conjectures.XE1.xe1_hypercube; its kernel dependency closure contains no live cube (coordination/evidence/A23-hypercubes/kernel/closures.json). Certified by xe1_hypercube_compat.",
+    "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE1Legacy.erdos_567_statement": "A11 per-row snapshot: A11 froze its no-isolated bound in #567 but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged; the complete row is Extremal.migration.hypercubes.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which extends A11's complete row with the frozen cube.",
+    "extremal-graph-theory/theories/migration/min_degree_at_least.v#XE1Original.erdos_567_statement": "A11 complete row: A11 froze the pre-migration #567 over A7's edge count, its no-isolated bound, A6's complete Ramsey chain and B4's H_5 cycle but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged beside A23's complete row Extremal.migration.hypercubes.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which extends A11's complete row with the frozen cube.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_1035_statement": "A5 per-row snapshot: A5 froze its subgraph relation in #1035 but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged; the complete row is Extremal.migration.hypercubes.XE1Original.erdos_1035_statement, certified by erdos_1035_statement_original_compat, which reuses A5's row certificate after rewriting the frozen cube.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_567_statement": "A5 per-row snapshot: A5 froze its Ramsey containment in #567 but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged; the complete row is Extremal.migration.hypercubes.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which extends A11's complete row with the frozen cube.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Original.erdos_567_statement": "A5 complete row: A5 froze the pre-migration #567 over its frozen Ramsey containment and B4's H_5 but kept the live xe1_hypercube (after A23 an alias of GTBase.hypercubes.product_hypercube d, the same graph record on the same carrier). Kept unchanged beside A23's complete row Extremal.migration.hypercubes.XE1Original.erdos_567_statement, certified by erdos_567_statement_original_compat, which extends A11's complete row with the frozen cube.",
+    "topological-graph-theory/theories/migration/hypercubes.v#Legacy.hypercube": "A23 frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (Legacy.hypercube itself), not the live Topological.conjectures.D3cr.hypercube; its kernel dependency closure contains no live cube (coordination/evidence/A23-hypercubes/kernel/closures.json). Certified by hypercube_compat.",
+    "packing-theory/theories/migration/cycle_edges.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement": "Earlier cycle_edges snapshot retains the live U9 hypercube; its full body and proof stay unchanged. The combined B11/C25/A23 complete row is Packing.migration.hypercubes.U9Original.matchings_extends_to_hamilton_cycles_in_hypercubes_statement, certified by matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat, over A23 frozen cube construction and the actual C25 matching/B11 cycle-edge providers.",
+    "packing-theory/theories/migration/matching.v#U9MatchingLegacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement": "Earlier matching snapshot retains the live U9 hypercube; its full body and proof stay unchanged. The combined B11/C25/A23 complete row is Packing.migration.hypercubes.U9Original.matchings_extends_to_hamilton_cycles_in_hypercubes_statement, certified by matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat, over A23 frozen cube construction and the actual C25 matching/B11 cycle-edge providers.",
+    "packing-theory/theories/migration/matching.v#U9MatchingOriginal.matchings_extends_to_hamilton_cycles_in_hypercubes_statement": "Earlier matching snapshot retains the live U9 hypercube; its full body and proof stay unchanged. The combined B11/C25/A23 complete row is Packing.migration.hypercubes.U9Original.matchings_extends_to_hamilton_cycles_in_hypercubes_statement, certified by matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat, over A23 frozen cube construction and the actual C25 matching/B11 cycle-edge providers."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "hypercube",
+      "note": "Cross-module X226 chains use U9's hypercube on its d.-tuple bool carrier (tnth coordinates). Frozen as X226Legacy over the frozen U9 construction Legacy.hypercube; statement text unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "copy_Q3_through",
+      "note": "Proof consumers in grounding_U9 (card_hypercube, copy_Q3_through_mem, weakly_saturates_complete, is_wsat_inv): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "hypercube",
+      "note": "Proof consumers in grounding_U9 (card_hypercube, copy_Q3_through_mem, weakly_saturates_complete, is_wsat_inv): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "is_wsat",
+      "note": "Proof consumers in grounding_U9 (card_hypercube, copy_Q3_through_mem, weakly_saturates_complete, is_wsat_inv): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "weakly_saturates",
+      "note": "Proof consumers in grounding_U9 (card_hypercube, copy_Q3_through_mem, weakly_saturates_complete, is_wsat_inv): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_X226.v",
+      "name": "hypercube",
+      "note": "Proof consumers in grounding_X226 (its twelve partition, cardinality, positivity and strict-count lemmas): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_X226.v",
+      "name": "x226_f",
+      "note": "Proof consumers in grounding_X226 (its twelve partition, cardinality, positivity and strict-count lemmas): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_X226.v",
+      "name": "x226_f_dim_le2",
+      "note": "Proof consumers in grounding_X226 (its twelve partition, cardinality, positivity and strict-count lemmas): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_X226.v",
+      "name": "x226_is_subcube",
+      "note": "Proof consumers in grounding_X226 (its twelve partition, cardinality, positivity and strict-count lemmas): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_X226.v",
+      "name": "x226_is_subcube_dim_le",
+      "note": "Proof consumers in grounding_X226 (its twelve partition, cardinality, positivity and strict-count lemmas): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_X226.v",
+      "name": "x226_subcube",
+      "note": "Proof consumers in grounding_X226 (its twelve partition, cardinality, positivity and strict-count lemmas): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_X226.v",
+      "name": "x226_subcube_partitions",
+      "note": "Proof consumers in grounding_X226 (its twelve partition, cardinality, positivity and strict-count lemmas): types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_X226.v",
+      "name": "x226_subcube_partitions_dim_le",
+      "note": "Proof consumers in grounding_X226 (its twelve partition, cardinality, positivity and strict-count lemmas): types and proofs unchanged."
+    },
+    {
+      "path": "topological-graph-theory/theories/conjectures/grounding_D3cr.v",
+      "name": "hypercube",
+      "note": "Proof consumers in grounding_D3cr (hypercube_zero, hypercube_succ, hypercube_card, cr_hypercube0, cr_hypercube1): types and proofs unchanged."
+    },
+    {
+      "path": "topological-graph-theory/theories/conjectures/grounding_D3cr.v",
+      "name": "the_crossing_number_of_the_hypercube_statement",
+      "note": "Print Assumptions only; unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTBase.base.graph_power",
+      "path": "base/theories/base.v",
+      "name": "graph_power",
+      "note": "the distance power of a graph on its own carrier (vertices within m steps adjacent), not a cartesian power"
+    },
+    {
+      "qualified": "Extremal.conjectures.XE2.xe2_cube_square_floor",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_cube_square_floor",
+      "note": "a natural-number bound (cube/square floor), not a graph construction"
+    },
+    {
+      "qualified": "Packing.conjectures.X226.x226_subcube_dim",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_subcube_dim",
+      "note": "the number of free coordinates of an option assignment; reads no cube vertex, unchanged and still used live"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types of the frozen and live helpers, construction support, chains and rows, strict dependency closures of the frozen objects (current and complete, with closure parity against the baseline for the per-row copies), and the types of every declaration in the reverse dependency closure of the three source files at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A23-hypercubes/ (outside the repository)"
+}
