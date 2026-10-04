@@ -15,7 +15,7 @@
       "Hypergraph.conjectures.X117.x117_forces_mono",
       "Hypergraph.conjectures.X119.x119_forces_mono"
     ],
-    "consumers_remaining": 3,
+    "consumers_remaining": 1,
     "relation": "Forcing a monochromatic copy: hg_forces_mono E U C holds when every colouring col : {set U} -> C of all subsets of the finite host U by the palette C : Type has a monochromatic copy hg_mono_copy E col (D4). Host and palette are explicit. No inhabited palette, positive palette size, uniformity, nonempty family or no-isolated condition: an empty palette has no colouring (set0 is a host subset), so forcing is vacuous and X119's q = 0 Ramsey predicate holds exactly at R = 0; a singleton palette forces iff the whole carrier injects; theorems needing a colour take it explicitly. Ramsey numbers (forcing AND minimality, shared with Extremal), D4 copies, D3 images, Extremal graph/list forcing and C8 constancy are separate.",
     "semantic_classes": {
       "bool-palette": {

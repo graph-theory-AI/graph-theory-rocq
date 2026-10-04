@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "family": "ramsey-number",
+  "primitive": {
+    "canonical_name": "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number",
+    "owner": "hypergraph-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "ramsey_number"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.X195.x195_ramsey_number",
+      "Extremal.conjectures.X215.x215_ramsey_number",
+      "Hypergraph.conjectures.X117.x117_ramsey_number",
+      "Hypergraph.conjectures.X119.x119_ramsey_number"
+    ],
+    "consumers_remaining": 4,
+    "relation": "Attained hypergraph Ramsey number: hg_ramsey_number E C R holds when the host I_R forces a monochromatic copy of the pattern E : {set {set T}} under the palette C : Type (D5 hg_forces_mono) and every forcing host size N has R <= N. R is supplied: no existence theorem, choice or minimum extraction; arbitrary carrier, family and palette, no uniformity, nonempty-family, inhabited-palette or positivity guard (empty palette: minimum 0; a colour and the empty family: minimum #|T|). The Extremal graph-arrow Ramsey numbers (X195, X215) are separate interfaces.",
+    "semantic_classes": {
+      "hypergraph-attained-forcing-minimum": {
+        "members": [
+          "Hypergraph.conjectures.X117.x117_ramsey_number",
+          "Hypergraph.conjectures.X119.x119_ramsey_number"
+        ],
+        "count": 2,
+        "verdict": "equivalent (same term)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.ramsey_number.x117_ramsey_number_compat",
+          "Hypergraph.migration.ramsey_number.x119_ramsey_number_compat"
+        ],
+        "canonical": "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number",
+        "note": "x117_ramsey_number t R is hg_ramsey_number (x117_edges t) bool R and x119_ramsey_number E q R is hg_ramsey_number E I_q R: forcing at R and minimality over the D5 forcing view, same carrier, family and palette, headers and implicit arguments unchanged."
+      },
+      "graph-family-arrow-minimum": {
+        "members": [
+          "Extremal.conjectures.X195.x195_ramsey_number"
+        ],
+        "count": 1,
+        "verdict": "distinct representation (deferred)",
+        "state": "deferred",
+        "certificates": [],
+        "note": "x195_ramsey_number k r Fam n: K_n arrows the finite family of simple graphs in k colours and no smaller K_m does. A graph-arrow interface, deferred to a later graph-Ramsey class of this owner; not claimed inequivalent; source, arrows and rows untouched."
+      },
+      "diagonal-clique-arrow-minimum": {
+        "members": [
+          "Extremal.conjectures.X215.x215_ramsey_number"
+        ],
+        "count": 1,
+        "verdict": "distinct representation (deferred)",
+        "state": "deferred",
+        "certificates": [],
+        "note": "x215_ramsey_number k N: the Boolean diagonal clique arrow holds at N and fails below. A graph-arrow interface (with the existing X215/X195 bridge), deferred to a later graph-Ramsey class; the blocked rational-limit row and the source are untouched."
+      }
+    },
+    "compatibility_theorems": [
+      "Hypergraph.migration.ramsey_number.x117_ramsey_number_compat",
+      "Hypergraph.migration.ramsey_number.conlon_fox_rodl_hedgehog_ramsey_statement_compat",
+      "Hypergraph.migration.ramsey_number.x119_ramsey_number_compat",
+      "Hypergraph.migration.ramsey_number.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_compat"
+    ],
+    "api_theorems": [
+      "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_forces",
+      "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_min",
+      "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_uniq",
+      "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_empty_palette",
+      "Hypergraph.foundations.hypergraph_ramsey.hg_forces_mono_set0",
+      "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_set0"
+    ],
+    "public_client": "hypergraph-theory/theories/examples/ramsey_numbers.v",
+    "legacy_baseline": "eae6c3ae123de43cad5ac0675ee25ab3f48c7b10",
+    "migration_report": "meta/migration_reports/ramsey_number.md",
+    "migration_spec": "meta/migration_reports/ramsey_number.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D10.md",
+    "foundation_fidelity": "meta/foundation_fidelity/ramsey-number.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core modules",
+        "mathcomp.boot",
+        "Hypergraph.foundations.hypergraph_forcing"
+      ],
+      "result": "new-area-primitive",
+      "candidate": "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono",
+      "note": "No Ramsey-number contract upstream; MathComp ex_minn extracts a witness from an existence proof and is not this supplied-R Prop. The canonical reuses the D5 forcing view with nat inequalities; no second-area consumer, so it stays in Hypergraph.",
+      "audited_at": "2026-10-04"
+    }
+  }
+}

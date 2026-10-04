@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py hedgehog --details /tmp/migrati
 
 - Canonical: `Hypergraph.foundations.hedgehog.hedgehog_edges`.
 - Baseline: `eaa6564c3788f6e3e2db7a7bddbe9adba157c334`.
-- Scope: 4 helpers, 1 statements, 11 frozen objects, 22 recorded references.
-- Source checks: 84/84 pass; consistent.
+- Scope: 4 helpers, 1 statements, 11 frozen objects, 25 recorded references.
+- Source checks: 85/85 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -19,4 +19,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `GTMisc.conjectures.X87.x87_edge`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `hypergraph-theory/theories/migration/image_edge.v#X117ImageLegacy.x117_ramsey_number`, `hypergraph-theory/theories/migration/image_edge.v#X117ImageLegacy.conlon_fox_rodl_hedgehog_ramsey_statement`, `hypergraph-theory/theories/migration/monochromatic_copy.v#X117CopyLegacy.x117_ramsey_number`, `hypergraph-theory/theories/migration/monochromatic_copy.v#X117CopyLegacy.conlon_fox_rodl_hedgehog_ramsey_statement`, `hypergraph-theory/theories/migration/forces_mono.v#X117ForcingLegacy.x117_ramsey_number`, `hypergraph-theory/theories/migration/forces_mono.v#X117ForcingLegacy.conlon_fox_rodl_hedgehog_ramsey_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `hypergraph-theory/theories/migration/image_edge.v#X117ImageLegacy.x117_ramsey_number`, `hypergraph-theory/theories/migration/image_edge.v#X117ImageLegacy.conlon_fox_rodl_hedgehog_ramsey_statement`, `hypergraph-theory/theories/migration/monochromatic_copy.v#X117CopyLegacy.x117_ramsey_number`, `hypergraph-theory/theories/migration/monochromatic_copy.v#X117CopyLegacy.conlon_fox_rodl_hedgehog_ramsey_statement`, `hypergraph-theory/theories/migration/forces_mono.v#X117ForcingLegacy.x117_ramsey_number`, `hypergraph-theory/theories/migration/forces_mono.v#X117ForcingLegacy.conlon_fox_rodl_hedgehog_ramsey_statement`, `hypergraph-theory/theories/migration/ramsey_number.v#X117RamseyLegacy.x117_ramsey_number`, `hypergraph-theory/theories/migration/ramsey_number.v#X117RamseyLegacy.conlon_fox_rodl_hedgehog_ramsey_statement`.
