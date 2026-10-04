@@ -1,7 +1,7 @@
 (** * GTMisc.conjectures.X169 -- v2 token-sliding chordal algorithm row *)
 
 From GTBase Require Export base.
-From GTBase Require Import bag_decompositions.
+From GTBase Require Import bag_decompositions chordal.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -16,8 +16,11 @@ Definition x169_tree_decomposition
 Definition x169_clique_tree (G T : sgraph) (bag : T -> {set G}) : Prop :=
   x169_tree_decomposition bag /\ forall t : T, cliqueb (bag t).
 
-Definition x169_chordal (G : sgraph) : Prop :=
-  exists (T : sgraph) (bag : T -> {set G}), x169_clique_tree bag.
+(** Since the B25 library migration (2026-10-03) a transparent alias of
+    [GTBase.chordal.admits_clique_tree] (the same body by conversion: [x169_clique_tree] unfolds to
+    [tree_bag_decomposition] plus clique bags, which stays this file's local support); the original
+    body is frozen and certified in theories/migration/chordal.v. *)
+Definition x169_chordal (G : sgraph) : Prop := admits_clique_tree G.
 
 Definition x169_clique_tree_degree_at_most (G : sgraph) (D : nat) : Prop :=
   exists (T : sgraph) (bag : T -> {set G}),

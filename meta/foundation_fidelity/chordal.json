@@ -1,0 +1,33 @@
+{
+ "schema_version": 1,
+ "family": "chordal",
+ "modules": {
+  "GTBase.chordal": {
+   "path": "base/theories/chordal.v",
+   "overrides": {
+    "chordal_by_cycles": {
+     "verdict": "FAITHFUL",
+     "note": "chordal_by_cycles G: every chordless genuine cycle (chordless_cycle: ucycle, 2 < size c, no chord) has at most three vertices; equivalent to the absence of holes (chordal_by_cyclesP); true on graphs with at most three vertices; K_3's triangle is accepted."
+    },
+    "clique_tree_decomposition": {
+     "verdict": "FAITHFUL",
+     "note": "clique_tree_decomposition bag: tree_bag_decomposition bag (is_tree [set: T], vertex and edge coverage, connected fibres) and cliqueb (bag t) for every index t; no maximality, injectivity or nonempty-bag requirement."
+    },
+    "admits_clique_tree": {
+     "verdict": "FAITHFUL",
+     "note": "admits_clique_tree G: some supplied index graph and bag map form a clique_tree_decomposition; K_0 uses the empty index, a complete host one full bag on K_1; not identified with chordal_by_cycles."
+    }
+   },
+   "machine_evidence": [
+    "chordal_by_cyclesP",
+    "chordless_cycle_size_card",
+    "chordal_by_cycles_small",
+    "admits_clique_treeP",
+    "admits_clique_tree_complete",
+    "clique_tree_decomposition_nonempty_index",
+    "clique_tree_decomposition_sdecompP",
+    "clique_tree_decomposition_clique"
+   ]
+  }
+ }
+}
