@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.XE1 -- Erdos open clean/bounded rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypercubes.
 From Extremal.conjectures Require Import X4.
 
 Set Implicit Arguments.
@@ -67,11 +68,8 @@ Proof. exact: del_es_irrefl. Qed.
 Definition xe1_delete_edges (G : sgraph) (F : {set {set G}}) : sgraph :=
   del_edge_set G F.
 
-Fixpoint xe1_hypercube (d : nat) : sgraph :=
-  match d with
-  | 0 => 'K_1
-  | d'.+1 => cartesian_product 'K_2 (xe1_hypercube d')
-  end.
+Definition xe1_hypercube (d : nat) : sgraph :=
+  product_hypercube d.
 
 Definition xe1_tree (T : sgraph) : Prop := is_tree [set: T].
 
