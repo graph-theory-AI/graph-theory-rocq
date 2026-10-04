@@ -67,7 +67,9 @@
     "",
     "Fidelity of the upstream-owned canonical: `meta/foundation_fidelity.json` enrols repository-declared primitives only, so the verdict is recorded in the registry (`matching.fidelity = FAITHFUL`, contract in `upstream_audit`) with the thirteen API and grounding theorems of `Packing.foundations.matching` as machine evidence (`Print Assumptions` clean, compiled by `check_library_migration.py`), and `packing-theory/theories/examples/matching.v` is the public downstream client (plan section 11). `digraph-theory/theories/conjectures/path_fas.v` appears among the canonical users below only because its deferred whole-graph predicate shares the short name `matching`. Kernel closure evidence (`Print All Dependencies` of every frozen and live statement) is kept separately under `coordination/evidence/C1-matching/`.",
     "C24 completes the deferred whole-graph class: Digraph.conjectures.path_fas.matching now unfolds to GTBase.matching_graphs.matching_graph G := GraphTheory.connectivity.matching E(G), the upstream owner specialized to the whole edge set. Public bridges prove it equivalent to \"every vertex has at most one neighbour\" and to the original \"forest of maximum degree at most one\", with no added guard.",
-    "The raw local predicate, the has_matchingFAS chain (same witness F, is_FAS, loop-guarded farc_graph) and the complete non-corpus matchingFAS_iff_dw1_statement (exact Delta_star minimum, bound 1) are frozen at the C23 pin a77d0b0, byte-identical to this family baseline, in digraph-theory/theories/migration/matching.v. Coverage is now 23 frozen mappings and 10 whole statements (9 retained, 1 non-corpus)."
+    "The raw local predicate, the has_matchingFAS chain (same witness F, is_FAS, loop-guarded farc_graph) and the complete non-corpus matchingFAS_iff_dw1_statement (exact Delta_star minimum, bound 1) are frozen at the C23 pin a77d0b0, byte-identical to this family baseline, in digraph-theory/theories/migration/matching.v. Coverage is now 23 frozen mappings and 10 whole statements (9 retained, 1 non-corpus).",
+    "C25 adds Packing.conjectures.U9.is_matching_edges to the migrated supplied-edge class: it now unfolds to the upstream matching M of the supplied family, proved equal to the raw \"genuine edge witnesses and at most one member per vertex\" body via matching_at_most_oneP and edgesP. The edge-validity clause is kept; no whole-graph or other guard.",
+    "The raw source and the whole OPG U9 hypercube row are frozen with iff certificates, and the complete B11+C25 Original combines the frozen matching with B11 Legacy.cycle_edgesG, same supplied M, cycle witness c and guard 2 <= d. B11 U9Legacy partial snapshot is unchanged. Coverage is now 26 mappings and 11 rows."
   ],
   "frozen": [
     {
@@ -432,11 +434,57 @@
       "non_corpus": true,
       "frozen_at": "a77d0b06239d7a78dd6cc0a209939ad935ac669b",
       "binding_note": "Frozen at the C23 pin; the whole path_fas.v blob is byte-identical at the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.U9.is_matching_edges",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "is_matching_edges",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "U9MatchingLegacy.is_matching_edges",
+      "substitutions": {},
+      "certificate": "Packing.migration.matching.is_matching_edges_compat",
+      "frozen_at": "f3d16d8b262d3a8188f76947626d06b92311bfd7",
+      "binding_note": "Frozen at the C24 pin; the U9 source and row texts are byte-identical at the family baseline 9e03072, so the text is bound there.",
+      "live_unfolds_to": "matching M"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "U9MatchingLegacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "substitutions": {
+        "is_matching_edges": "U9MatchingLegacy.is_matching_edges"
+      },
+      "certificate": "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat",
+      "frozen_at": "f3d16d8b262d3a8188f76947626d06b92311bfd7",
+      "binding_note": "Frozen at the C24 pin; the U9 source and row texts are byte-identical at the family baseline 9e03072, so the text is bound there.",
+      "corpus": "opg",
+      "original_certificate": "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "frozen_path": "packing-theory/theories/migration/matching.v",
+      "frozen": "U9MatchingOriginal.matchings_extends_to_hamilton_cycles_in_hypercubes_statement",
+      "substitutions": {
+        "is_matching_edges": "U9MatchingLegacy.is_matching_edges",
+        "cycle_edgesG": "CE.Legacy.cycle_edgesG"
+      },
+      "certificate": "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat",
+      "frozen_at": "f3d16d8b262d3a8188f76947626d06b92311bfd7",
+      "binding_note": "Frozen at the C24 pin; the U9 source and row texts are byte-identical at the family baseline 9e03072, so the text is bound there. CE is the certificate module alias of Packing.migration.cycle_edges, so CE.Legacy.cycle_edgesG is B11 frozen successor-edge image.",
+      "corpus": "opg"
     }
   ],
   "known_stale_snapshots": {
     "extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement": "A7 snapshot: A7 froze this row over its own frozen average-degree chain (and frozen public count fg_edge_count) but kept the live x180_multitasker_capacity_positive of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat, which composes this family's frozen X180Legacy.multitasker_capacity_positive.",
-    "graph-theory-misc/theories/migration/subcubic.v#X14Legacy.subcubic_matching_lower_bound_statement": "A14 snapshot: A14 froze this row over its own frozen pointwise subcubic bound but kept the live x14_matching of this family. Kept unchanged; the complete row is GTMisc.migration.subcubic.X14Original.subcubic_matching_lower_bound_statement, certified by subcubic_matching_lower_bound_statement_original_compat, which composes this family's frozen Legacy.x14_matching (over Legacy.x14_edge_set) and reuses its certificate."
+    "graph-theory-misc/theories/migration/subcubic.v#X14Legacy.subcubic_matching_lower_bound_statement": "A14 snapshot: A14 froze this row over its own frozen pointwise subcubic bound but kept the live x14_matching of this family. Kept unchanged; the complete row is GTMisc.migration.subcubic.X14Original.subcubic_matching_lower_bound_statement, certified by subcubic_matching_lower_bound_statement_original_compat, which composes this family's frozen Legacy.x14_matching (over Legacy.x14_edge_set) and reuses its certificate.",
+    "packing-theory/theories/migration/cycle_edges.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement": "B11 partial snapshot: it froze only cycle_edgesG and keeps the live is_matching_edges (now the upstream matching alias). It stays byte-exact; the complete row is Packing.migration.matching.U9MatchingOriginal.matchings_extends_to_hamilton_cycles_in_hypercubes_statement, certified by matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat."
   },
   "cross_module_consumers": [
     {
@@ -578,6 +626,26 @@
       "path": "digraph-theory/theories/conjectures/implications2.v",
       "name": "matchingFAS_iff_dw1_statement",
       "note": "dw1_implies_pathFAS takes the whole non-corpus iff as a hypothesis; type and proof unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "matching",
+      "note": "C25 alias body is_matching_edges M := matching M, the upstream GraphTheory.connectivity.matching (the C1 owner), a lexical short-name match."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "matching",
+      "note": "Require/qualified uses of the public Packing.foundations.matching API (matching0, matching_at_most_oneP) over the upstream GraphTheory.connectivity.matching (the C1 owner), a lexical short-name match."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_U9.v",
+      "name": "is_matching_edges",
+      "note": "is_matching_edges_nil and is_matching_edges_edge keep exact types; proofs use the public matching API."
+    },
+    {
+      "path": "packing-theory/theories/examples/supplied_matchings.v",
+      "name": "matching",
+      "note": "C25 public-only client of the upstream GraphTheory.connectivity.matching (the C1 owner), a lexical short-name match."
     }
   ],
   "distinct_variants": [
@@ -614,5 +682,6 @@
     }
   ],
   "kernel_evidence": "Print All Dependencies of every frozen and live statement and Print Assumptions of every certificate, run through the pinned image after the re-layout; files under /srv/graph-theory-rocq/coordination/evidence/C1-matching/ (outside the repository)",
-  "whole_graph_downstream_client": "base/theories/examples/matching_graphs.v"
+  "whole_graph_downstream_client": "base/theories/examples/matching_graphs.v",
+  "supplied_family_downstream_client": "packing-theory/theories/examples/supplied_matchings.v"
 }

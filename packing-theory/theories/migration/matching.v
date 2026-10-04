@@ -339,3 +339,83 @@ Print Assumptions bipartite_matching_underrepresentation_llm2_statement_compat.
 Print Assumptions bipartite_matching_underrepresentation_llm3_statement_compat.
 Print Assumptions knn_fair_perfect_matching_statement_compat.
 Print Assumptions brualdi_stein_partial_transversal_statement_compat.
+
+(** * C25: the supplied edge-family matching of [Packing.conjectures.U9]
+
+    Frozen at the fixed C24 pin f3d16d8b262d3a8188f76947626d06b92311bfd7; the U9 source and
+    row texts are those of the C1 baseline 9e030727db115917ae077ac07a8fc6aa68661f73.  Imports
+    are placed here, after every older declaration, so nothing above is re-elaborated.
+    - [U9MatchingLegacy.is_matching_edges]: the raw supplied-family body (genuine edges,
+      at most one member through each vertex); the live helper now unfolds to [matching M].
+    - [U9MatchingLegacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement]: the
+      current whole OPG U9 row over the frozen helper, keeping the live hypercube,
+      [hamiltonian_cycleG] and [cycle_edgesG].
+    - [U9MatchingOriginal.matchings_extends_to_hamilton_cycles_in_hypercubes_statement]: the
+      complete B11+C25 Original over the frozen helper and B11's frozen
+      [Packing.migration.cycle_edges.Legacy.cycle_edgesG] (as [CE.Legacy.cycle_edgesG]); the same
+      supplied M, the same cycle witness c and the guard 2 <= d.  B11's own [U9Legacy]
+      partial snapshot, which keeps the live [is_matching_edges], is unchanged. *)
+From Packing.conjectures Require Import U9.
+Require Packing.migration.cycle_edges.
+Module CE := Packing.migration.cycle_edges.
+
+Module U9MatchingLegacy.
+
+Definition is_matching_edges (G : sgraph) (M : {set {set G}}) : Prop :=
+  (forall e : {set G}, e \in M -> exists x y : G, x -- y /\ e = [set x; y]) /\
+  (forall v : G, #|[set e in M | v \in e]| <= 1).
+
+Definition matchings_extends_to_hamilton_cycles_in_hypercubes_statement : Prop :=
+  forall (d : nat) (M : {set {set hypercube d}}),
+    2 <= d -> U9MatchingLegacy.is_matching_edges M ->
+    exists c : seq (hypercube d),
+      hamiltonian_cycleG (hypercube d) c /\
+      M \subset cycle_edgesG (hypercube d) c.
+
+End U9MatchingLegacy.
+
+Module U9MatchingOriginal.
+
+Definition matchings_extends_to_hamilton_cycles_in_hypercubes_statement : Prop :=
+  forall (d : nat) (M : {set {set hypercube d}}),
+    2 <= d -> U9MatchingLegacy.is_matching_edges M ->
+    exists c : seq (hypercube d),
+      hamiltonian_cycleG (hypercube d) c /\
+      M \subset CE.Legacy.cycle_edgesG (hypercube d) c.
+
+End U9MatchingOriginal.
+
+(** The raw reading is upstream [matching] by [matching_at_most_oneP] and [edgesP]. *)
+Lemma is_matching_edges_compat (G : sgraph) (M : {set {set G}}) :
+  U9MatchingLegacy.is_matching_edges M <-> is_matching_edges M.
+Proof.
+split=> [[Me M1]|/matching_at_most_oneP [/subsetP Ms M1]].
+- apply/matching_at_most_oneP; split=> //.
+  by apply/subsetP => e /Me [x [y [xy ->]]]; rewrite in_edges.
+- split=> // e /Ms /edgesP [x [y [-> xy]]]; by exists x, y.
+Qed.
+
+Lemma matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat :
+  U9MatchingLegacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement <->
+  matchings_extends_to_hamilton_cycles_in_hypercubes_statement.
+Proof.
+split=> st d M d2 m.
+- exact: st d M d2 (proj2 (is_matching_edges_compat M) m).
+- exact: st d M d2 (proj1 (is_matching_edges_compat M) m).
+Qed.
+
+(** The complete Original: B11's cycle-edge conversion and the matching iff, same c. *)
+Lemma matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat :
+  U9MatchingOriginal.matchings_extends_to_hamilton_cycles_in_hypercubes_statement <->
+  matchings_extends_to_hamilton_cycles_in_hypercubes_statement.
+Proof.
+split=> st d M d2 m.
+- have [c [ham sub]] := st d M d2 (proj2 (is_matching_edges_compat M) m).
+  by exists c; split=> //; rewrite -CE.cycle_edgesG_compat.
+- have [c [ham sub]] := st d M d2 (proj1 (is_matching_edges_compat M) m).
+  by exists c; split=> //; rewrite CE.cycle_edgesG_compat.
+Qed.
+
+Print Assumptions is_matching_edges_compat.
+Print Assumptions matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat.
+Print Assumptions matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat.
