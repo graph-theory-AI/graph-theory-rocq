@@ -3,6 +3,7 @@
 From GTBase Require Export base.
 From GTBase Require Import hypergraph_uniformity.
 Require Hypergraph.foundations.hypergraph_copies.
+Require Hypergraph.foundations.hypergraph_forcing.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -32,7 +33,7 @@ Definition x119_monochromatic_copy
     3-subsets of the host. *)
 Definition x119_forces_mono
     (T : finType) (E : {set {set T}}) (q N : nat) : Prop :=
-  forall col : {set 'I_N} -> 'I_q, x119_monochromatic_copy E col.
+  Hypergraph.foundations.hypergraph_forcing.hg_forces_mono E 'I_N 'I_q.
 
 (** [R] is the [q]-colour 3-uniform Ramsey number [r_3(H;q)]: the least host
     size forcing a monochromatic copy of [H = (T,E)]. *)
