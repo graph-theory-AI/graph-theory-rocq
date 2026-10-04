@@ -47,10 +47,6 @@
         "Chromatic.conjectures.X177.x177_contains_induced_long_subdivision",
         "Chromatic.conjectures.X185.x185_contains_induced_long_subdivision"
       ],
-      "10334dd9d6c934fe31f6cd6ad229851d1f2db6ab7ce07c9d5374b747204477e5": [
-        "Hypergraph.conjectures.U12.r_partite_uniform",
-        "Hypergraph.conjectures.X6.x6_r_partite_uniform"
-      ],
       "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114": [
         "Chromatic.conjectures.X3.x3_path_vertices",
         "GTMisc.conjectures.X113.x113_path_vertices",
@@ -484,6 +480,10 @@
       "ba3223db334fb70446e2dac22a967601dd2b2616c91ab491e325703a6861ea0b": [
         "Chromatic.conjectures.X126.x126_nonrepetitive",
         "Topological.conjectures.X23.x23_nonrepetitive_colouring"
+      ],
+      "badc4de2e2416af4009c4a79caa26af6c7e1f905fceceb4e9701db6fb873eb48": [
+        "Hypergraph.conjectures.U12.r_partite_uniform",
+        "Hypergraph.conjectures.X6.x6_r_partite_uniform"
       ],
       "bc087614da69f4815c8db0f291368bff8ed2b6884101b757ade167afc104ac3a": [
         "GTMisc.conjectures.X144.x144_anticomplete_between",
@@ -45219,7 +45219,7 @@
         "Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement"
       ],
       "kind": "Definition",
-      "line": 48,
+      "line": 49,
       "local_dependencies": [],
       "name": "k_uniform",
       "normalized_name": "k_uniform",
@@ -45238,7 +45238,7 @@
         "Hypergraph.conjectures.U12.frankls_union_closed_sets_statement"
       ],
       "kind": "Definition",
-      "line": 55,
+      "line": 56,
       "local_dependencies": [],
       "name": "union_closed",
       "normalized_name": "union_closed",
@@ -45257,7 +45257,7 @@
         "Hypergraph.conjectures.U12.contains_complete"
       ],
       "kind": "Definition",
-      "line": 93,
+      "line": 94,
       "local_dependencies": [],
       "name": "complete_sub",
       "normalized_name": "complete_sub",
@@ -45276,7 +45276,7 @@
         "Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement"
       ],
       "kind": "Definition",
-      "line": 114,
+      "line": 115,
       "local_dependencies": [
         "complete_sub"
       ],
@@ -45298,7 +45298,7 @@
         "Hypergraph.conjectures.U12.critical_k_forest"
       ],
       "kind": "Definition",
-      "line": 145,
+      "line": 146,
       "local_dependencies": [],
       "name": "berge_cycle",
       "normalized_name": "berge_cycle",
@@ -45317,7 +45317,7 @@
         "Hypergraph.conjectures.U12.k_forest"
       ],
       "kind": "Definition",
-      "line": 179,
+      "line": 180,
       "local_dependencies": [
         "berge_cycle"
       ],
@@ -45338,7 +45338,7 @@
         "Hypergraph.conjectures.U12.k_tree"
       ],
       "kind": "Definition",
-      "line": 183,
+      "line": 184,
       "local_dependencies": [],
       "name": "hg_connected",
       "normalized_name": "hg_connected",
@@ -45358,7 +45358,7 @@
         "Hypergraph.conjectures.U12.k_tree"
       ],
       "kind": "Definition",
-      "line": 193,
+      "line": 194,
       "local_dependencies": [
         "berge_acyclic",
         "k_uniform"
@@ -45380,7 +45380,7 @@
         "Hypergraph.conjectures.U12.are_critical_k_forests_tight_statement"
       ],
       "kind": "Definition",
-      "line": 197,
+      "line": 198,
       "local_dependencies": [
         "hg_connected",
         "k_forest"
@@ -45402,7 +45402,7 @@
         "Hypergraph.conjectures.U12.are_critical_k_forests_tight_statement"
       ],
       "kind": "Definition",
-      "line": 201,
+      "line": 202,
       "local_dependencies": [
         "berge_cycle",
         "k_forest"
@@ -45417,14 +45417,14 @@
       "signature_shape_hash": "15f862a55f4fde45f5db137b2beed6eafde49c43f5346c7595a6914a413fb71d"
     },
     {
-      "body_hash": "10334dd9d6c934fe31f6cd6ad229851d1f2db6ab7ce07c9d5374b747204477e5",
-      "body_shape_hash": "10334dd9d6c934fe31f6cd6ad229851d1f2db6ab7ce07c9d5374b747204477e5",
-      "declaration_hash": "25d94ca5ff93377aa3422dea349568630397062875555b3360540e2d6bfd20cc",
+      "body_hash": "badc4de2e2416af4009c4a79caa26af6c7e1f905fceceb4e9701db6fb873eb48",
+      "body_shape_hash": "badc4de2e2416af4009c4a79caa26af6c7e1f905fceceb4e9701db6fb873eb48",
+      "declaration_hash": "2d37ae0a4772c7abbcb54bec95ced6da24dea7b221dfc292944c37bea53d3300",
       "direct_consumers": [
         "Hypergraph.conjectures.U12.rysers_statement"
       ],
       "kind": "Definition",
-      "line": 236,
+      "line": 237,
       "local_dependencies": [],
       "name": "r_partite_uniform",
       "normalized_name": "r_partite_uniform",
@@ -46328,7 +46328,7 @@
         "Hypergraph.conjectures.X6.x6_extremal_no_k_matching"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x6_uniform",
       "normalized_name": "uniform",
@@ -46340,15 +46340,15 @@
       "signature_shape_hash": "f4b861b039eb9e051400804bcb97c8a7d24c1690d33ded288358af3392b1b19d"
     },
     {
-      "body_hash": "10334dd9d6c934fe31f6cd6ad229851d1f2db6ab7ce07c9d5374b747204477e5",
-      "body_shape_hash": "10334dd9d6c934fe31f6cd6ad229851d1f2db6ab7ce07c9d5374b747204477e5",
-      "declaration_hash": "ddad3c16afcc571e284df62b2521fac037e66baa1552688f56fc0571dab23c23",
+      "body_hash": "badc4de2e2416af4009c4a79caa26af6c7e1f905fceceb4e9701db6fb873eb48",
+      "body_shape_hash": "badc4de2e2416af4009c4a79caa26af6c7e1f905fceceb4e9701db6fb873eb48",
+      "declaration_hash": "8a61d8c130c94811044e2a42512fa9721a695fc3987c4eda8cd01fe2db0b3469",
       "direct_consumers": [
         "Hypergraph.conjectures.X6.lovasz_r_partite_matching_deletion_statement",
         "Hypergraph.conjectures.X6.r_partite_matching_deletion_tradeoff_statement"
       ],
       "kind": "Definition",
-      "line": 14,
+      "line": 15,
       "local_dependencies": [],
       "name": "x6_r_partite_uniform",
       "normalized_name": "r_partite_uniform",
