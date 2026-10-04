@@ -73,6 +73,7 @@
 From mathcomp Require Import all_boot all_fingroup.
 From GTBase Require Import base.
 From GTBase Require Import set_pairs.
+From GTBase Require Import cayley_graphs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -280,17 +281,21 @@ Definition chromatic_number_of_common_graphs_statement : Prop :=
 Section CayleyGraph.
 Variables (gT : finGroupType) (S : {set gT}).
 
-(** [@MOVE-to-base] undirected Cayley graph over a finite group. *)
+(** [@MOVE-to-base] undirected Cayley graph over a finite group.  Done by the A26 library
+    migration (2026-10-04): [cayley_adj] and [cayley_graph] are transparent aliases of
+    [GTBase.cayley_graphs.undirected_cayley_rel S] and [undirected_cayley_graph S] (the same
+    group carrier and symmetrised loopless relation, for any [S]); the original Section is
+    frozen and certified in theories/migration/cayley_graphs.v. *)
 Definition cayley_adj : rel gT :=
-  fun x y => (x != y) && (((x^-1 * y)%g \in S) || ((y^-1 * x)%g \in S)).
+  @undirected_cayley_rel gT S.
 
 Lemma cayley_adj_sym : symmetric cayley_adj.
-Proof. by move=> x y; rewrite /cayley_adj eq_sym orbC. Qed.
+Proof. exact: undirected_cayley_sym. Qed.
 
 Lemma cayley_adj_irrefl : irreflexive cayley_adj.
-Proof. by move=> x; rewrite /cayley_adj eqxx. Qed.
+Proof. exact: undirected_cayley_irrefl. Qed.
 
-Definition cayley_graph : sgraph := SGraph cayley_adj_sym cayley_adj_irrefl.
+Definition cayley_graph : sgraph := undirected_cayley_graph S.
 
 End CayleyGraph.
 

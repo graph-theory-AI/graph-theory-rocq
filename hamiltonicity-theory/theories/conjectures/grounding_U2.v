@@ -114,7 +114,7 @@ Proof. by move=> x; rewrite !inE. Qed.
     elements are adjacent iff they differ). *)
 Lemma cayley_full (gT : finGroupType) (x y : gT) :
   @edge_rel (cayley_graph [set: gT]) x y = (x != y).
-Proof. by rewrite /edge_rel /= /cayley_rel !in_setT orbT andbT. Qed.
+Proof. by rewrite /edge_rel /= /cayley_rel /GTBase.cayley_graphs.undirected_cayley_rel !in_setT orbT andbT. Qed.
 
 (** ** [edge_set] — identity (edgeless) + identity (single edge).
     'K_1 has no edges; 'K_2 has exactly one edge, the whole vertex set. *)

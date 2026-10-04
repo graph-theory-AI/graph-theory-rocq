@@ -1,0 +1,273 @@
+{
+  "family": "cayley-graph",
+  "canonical_name": "GTBase.cayley_graphs.undirected_cayley_graph",
+  "canonical_short_name": "undirected_cayley_graph",
+  "relation": "the undirected Cayley graph of a supplied finite group and an arbitrary connection set: Extremal D2ram cayley_adj/cayley_graph and Hamilton U2 cayley_rel/cayley_graph (Sections over gT : finGroupType and S : {set gT}) are GTBase.cayley_graphs.undirected_cayley_rel/undirected_cayley_graph: the carrier gT and the loopless symmetrised relation (x != y) && ((x^-1 * y \\in S) || (y^-1 * x \\in S)) by conversion (U2's group_scope and D2ram's explicit %g elaborate to the same term); each graph agrees pointwise with undirected_cayley_graph and by the identity isomorphism. The four constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. No inverse closure, generation, abelianity or order condition is imposed on the primitive; the row guards stay in the rows.",
+  "baseline_commit": "5832ba9c3026f28df9d8dd9c689d115f644ce3b1",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal",
+    "hamiltonicity-theory": "Hamilton"
+  },
+  "certificate_files": [
+    "base/theories/cayley_graphs.v",
+    "extremal-graph-theory/theories/migration/cayley_graphs.v",
+    "hamiltonicity-theory/theories/migration/cayley_graphs.v"
+  ],
+  "extra_certificates": [
+    "GTBase.cayley_graphs.undirected_cayley_sym",
+    "GTBase.cayley_graphs.undirected_cayley_irrefl",
+    "GTBase.cayley_graphs.undirected_cayley_edgeE",
+    "GTBase.cayley_graphs.card_undirected_cayley_graph",
+    "GTBase.cayley_graphs.undirected_cayley_edge_mul",
+    "GTBase.cayley_graphs.undirected_cayley_edge_inv",
+    "GTBase.cayley_graphs.undirected_cayley_set0",
+    "GTBase.cayley_graphs.undirected_cayley_set1",
+    "GTBase.cayley_graphs.undirected_cayley_setT",
+    "GTBase.cayley_graphs.undirected_cayley_setT_diso",
+    "Extremal.migration.cayley_graphs.cayley_graph_diso",
+    "Hamilton.migration.cayley_graphs.cayley_graph_diso"
+  ],
+  "summary": [
+    "Batch A, family A26 (undirected Cayley graphs), on Arthur's A25 pin 5832ba9. New GTBase.cayley_graphs gives undirected_cayley_graph S : sgraph for any finite group gT and any S : {set gT}, with the loopless symmetrised relation (x != y) && ((x^-1 * y \\in S) || (y^-1 * x \\in S)): its adjacency view and #|gT| vertices, edges along right multiplication by S and by its inverses, the inverse-closed specialisation, and the empty, identity and full connection sets (edgeless, edgeless, complete). D2ram's cayley_adj/cayley_graph and U2's cayley_rel/cayley_graph are now aliases; their four constructor proofs are one-line uses of the public ones. The public client covers carrier and adjacency, the three connection sets, a group of order one, an arbitrary and an inverse-closed S, and a nonsymmetric example in the nonabelian group 'S_3.",
+    "",
+    "Frozen verbatim at 5832ba9: the four sources and the four constructor proofs with their scripts, in dependency-ordered modules with each Section's scaffolding (U2's Local Open Scope group_scope included), U2's hamiltonian_cycle (with its Arguments), is_hamiltonian and symmetric_set, and the two complete rows: D2ram's Ramsey row (one positive c before every finite abelian group of order > 1, one inverse-closed S, both 2^omega and 2^alpha bounds for that graph) and U2's Hamiltonicity row (order > 2, S inverse-closed and generating, a Hamiltonian cycle). Thirteen mappings, two whole iffs; no Original was found on this parent.",
+    "",
+    "Proof consumers: grounding_D2ram's cayley_adj_set0/cayley_adj_setT and grounding_U2's cayley_full add one unfold of the public relation with unchanged headers; implications_D2ram.D2ram_nodes_in_scope and the rest of the closure recompile unchanged. The directed Digraph.constructions.cayley.cayley stays distinct."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2ram.cayley_adj",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "cayley_adj",
+      "frozen_path": "extremal-graph-theory/theories/migration/cayley_graphs.v",
+      "frozen": "Legacy.cayley_adj",
+      "substitutions": {},
+      "certificate": "Extremal.migration.cayley_graphs.cayley_adj_compat",
+      "live_unfolds_to": "@undirected_cayley_rel gT S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.D2ram.cayley_adj_sym",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "cayley_adj_sym",
+      "frozen_path": "extremal-graph-theory/theories/migration/cayley_graphs.v",
+      "frozen": "ProofsLegacy.cayley_adj_sym",
+      "substitutions": {
+        "cayley_adj": "(@Legacy.cayley_adj gT S)"
+      },
+      "certificate": "Extremal.migration.cayley_graphs.cayley_adj_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.D2ram.cayley_adj_irrefl",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "cayley_adj_irrefl",
+      "frozen_path": "extremal-graph-theory/theories/migration/cayley_graphs.v",
+      "frozen": "ProofsLegacy.cayley_adj_irrefl",
+      "substitutions": {
+        "cayley_adj": "(@Legacy.cayley_adj gT S)"
+      },
+      "certificate": "Extremal.migration.cayley_graphs.cayley_adj_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2ram.cayley_graph",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "cayley_graph",
+      "frozen_path": "extremal-graph-theory/theories/migration/cayley_graphs.v",
+      "frozen": "GraphLegacy.cayley_graph",
+      "substitutions": {
+        "cayley_adj_sym": "(@ProofsLegacy.cayley_adj_sym gT S)",
+        "cayley_adj_irrefl": "(@ProofsLegacy.cayley_adj_irrefl gT S)"
+      },
+      "certificate": "Extremal.migration.cayley_graphs.cayley_graph_compat",
+      "live_unfolds_to": "undirected_cayley_graph S"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2ram.ramsey_properties_of_cayley_graphs_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2ram.v",
+      "name": "ramsey_properties_of_cayley_graphs_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cayley_graphs.v",
+      "frozen": "D2ramLegacy.ramsey_properties_of_cayley_graphs_statement",
+      "substitutions": {
+        "cayley_graph": "GraphLegacy.cayley_graph"
+      },
+      "certificate": "Extremal.migration.cayley_graphs.ramsey_properties_of_cayley_graphs_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hamilton.conjectures.U2.cayley_rel",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "cayley_rel",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cayley_graphs.v",
+      "frozen": "Legacy.cayley_rel",
+      "substitutions": {},
+      "certificate": "Hamilton.migration.cayley_graphs.cayley_rel_compat",
+      "live_unfolds_to": "@undirected_cayley_rel gT S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hamilton.conjectures.U2.cayley_sym",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "cayley_sym",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cayley_graphs.v",
+      "frozen": "ProofsLegacy.cayley_sym",
+      "substitutions": {
+        "cayley_rel": "(@Legacy.cayley_rel gT S)"
+      },
+      "certificate": "Hamilton.migration.cayley_graphs.cayley_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hamilton.conjectures.U2.cayley_irrefl",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "cayley_irrefl",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cayley_graphs.v",
+      "frozen": "ProofsLegacy.cayley_irrefl",
+      "substitutions": {
+        "cayley_rel": "(@Legacy.cayley_rel gT S)"
+      },
+      "certificate": "Hamilton.migration.cayley_graphs.cayley_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hamilton.conjectures.U2.cayley_graph",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "cayley_graph",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cayley_graphs.v",
+      "frozen": "GraphLegacy.cayley_graph",
+      "substitutions": {
+        "cayley_sym": "(@ProofsLegacy.cayley_sym gT S)",
+        "cayley_irrefl": "(@ProofsLegacy.cayley_irrefl gT S)"
+      },
+      "certificate": "Hamilton.migration.cayley_graphs.cayley_graph_compat",
+      "live_unfolds_to": "undirected_cayley_graph S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hamilton.conjectures.U2.hamiltonian_cycle",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "hamiltonian_cycle",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cayley_graphs.v",
+      "frozen": "U2Legacy.hamiltonian_cycle",
+      "substitutions": {},
+      "certificate": "Hamilton.migration.cayley_graphs.hamiltonian_cycle_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hamilton.conjectures.U2.is_hamiltonian",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "is_hamiltonian",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cayley_graphs.v",
+      "frozen": "U2Legacy.is_hamiltonian",
+      "substitutions": {
+        "hamiltonian_cycle": "U2Legacy.hamiltonian_cycle"
+      },
+      "certificate": "Hamilton.migration.cayley_graphs.is_hamiltonian_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hamilton.conjectures.U2.symmetric_set",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "symmetric_set",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cayley_graphs.v",
+      "frozen": "U2Legacy.symmetric_set",
+      "substitutions": {},
+      "certificate": "Hamilton.migration.cayley_graphs.symmetric_set_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hamilton.conjectures.U2.hamiltonicity_of_cayley_graphs_statement",
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "hamiltonicity_of_cayley_graphs_statement",
+      "frozen_path": "hamiltonicity-theory/theories/migration/cayley_graphs.v",
+      "frozen": "U2Legacy.hamiltonicity_of_cayley_graphs_statement",
+      "substitutions": {
+        "cayley_graph": "GraphLegacy.cayley_graph",
+        "is_hamiltonian": "U2Legacy.is_hamiltonian",
+        "symmetric_set": "U2Legacy.symmetric_set"
+      },
+      "certificate": "Hamilton.migration.cayley_graphs.hamiltonicity_of_cayley_graphs_statement_compat"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2ram.v",
+      "name": "cayley_adj",
+      "note": "Proof consumers: cayley_adj_set0 and cayley_adj_setT add one unfold of the public relation (/GTBase.cayley_graphs.undirected_cayley_rel); statements unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_D2ram.v",
+      "name": "ramsey_properties_of_cayley_graphs_statement",
+      "note": "Proof consumer: D2ram_nodes_in_scope keeps its complete conjunction, type and proof (reflexivity on each row, the Ramsey row included)."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X216.v",
+      "name": "hamiltonian_cycle",
+      "note": "Lexical match only: this file uses GTBase.common.hamiltonian_cycle (it imports GTBase base, not Hamilton U2); it does not consume U2's frozen hamiltonian_cycle chain, and no history is enrolled."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_X216.v",
+      "name": "hamiltonian_cycle",
+      "note": "Lexical match only: this file uses GTBase.common.hamiltonian_cycle (it imports GTBase base, not Hamilton U2); it does not consume U2's frozen hamiltonian_cycle chain, and no history is enrolled."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/X211.v",
+      "name": "hamiltonian_cycle",
+      "note": "Lexical match only: this file uses GTBase.common.hamiltonian_cycle (it imports GTBase base, not Hamilton U2); it does not consume U2's frozen hamiltonian_cycle chain, and no history is enrolled."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_X211.v",
+      "name": "hamiltonian_cycle",
+      "note": "Lexical match only: this file uses GTBase.common.hamiltonian_cycle (it imports GTBase base, not Hamilton U2); it does not consume U2's frozen hamiltonian_cycle chain, and no history is enrolled."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_U2.v",
+      "name": "cayley_graph",
+      "note": "Grounding consumers: cayley_full adds one unfold of the public relation (/GTBase.cayley_graphs.undirected_cayley_rel); the symmetric_set, Hamiltonian-cycle and is_hamiltonian groundings over U2's unchanged vocabulary keep their types and proofs."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_U2.v",
+      "name": "cayley_rel",
+      "note": "Grounding consumers: cayley_full adds one unfold of the public relation (/GTBase.cayley_graphs.undirected_cayley_rel); the symmetric_set, Hamiltonian-cycle and is_hamiltonian groundings over U2's unchanged vocabulary keep their types and proofs."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_U2.v",
+      "name": "hamiltonian_cycle",
+      "note": "Grounding consumers: cayley_full adds one unfold of the public relation (/GTBase.cayley_graphs.undirected_cayley_rel); the symmetric_set, Hamiltonian-cycle and is_hamiltonian groundings over U2's unchanged vocabulary keep their types and proofs."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_U2.v",
+      "name": "is_hamiltonian",
+      "note": "Grounding consumers: cayley_full adds one unfold of the public relation (/GTBase.cayley_graphs.undirected_cayley_rel); the symmetric_set, Hamiltonian-cycle and is_hamiltonian groundings over U2's unchanged vocabulary keep their types and proofs."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_U2.v",
+      "name": "symmetric_set",
+      "note": "Grounding consumers: cayley_full adds one unfold of the public relation (/GTBase.cayley_graphs.undirected_cayley_rel); the symmetric_set, Hamiltonian-cycle and is_hamiltonian groundings over U2's unchanged vocabulary keep their types and proofs."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/implications_U2.v",
+      "name": "is_hamiltonian",
+      "note": "Implication consumers over U2's unchanged is_hamiltonian: types and proofs unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "hamiltonian_cycle",
+      "note": "Lexical match only: this file uses GTBase.common.hamiltonian_cycle (it imports GTBase base, not Hamilton U2); it does not consume U2's frozen hamiltonian_cycle chain, and no history is enrolled."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.constructions.cayley.cayley",
+      "path": "digraph-theory/theories/constructions/cayley.v",
+      "name": "cayley",
+      "note": "directed Cayley digraph: arc x -> y iff x^-1 * y \\in A, loops kept when 1 \\in A, no symmetrisation of an arbitrary A; a different interface, neither aliased nor migrated here (no Digraph build)"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types and Arguments of the frozen and live objects (sources, Section arguments, constructor proofs, chains, rows), graph-constructor nonconversion probes, elaborated agreement of the two source relations, strict dependency closures of the frozen objects with closure parity against the baseline, and the types of every declaration in the reverse dependency closure of D2ram and U2 at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A26-cayley-graphs/ (outside the repository)"
+}
