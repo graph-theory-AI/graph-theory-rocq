@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "family": "partite-uniform-hypergraph",
+  "modules": {
+    "Hypergraph.foundations.hypergraph": {
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "overrides": {
+        "hg_partite_uniform": {
+          "verdict": "FAITHFUL",
+          "note": "Every member of the supplied family meets each class of the supplied map part : T -> I_k in exactly one vertex; arbitrary finite T, no rank, nonemptiness, balance or surjectivity guard."
+        }
+      },
+      "machine_evidence": [
+        "hg_partite_uniform0",
+        "hg_partite_uniformS",
+        "hg_partite_uniform_delete",
+        "hg_partite_uniform_card",
+        "hg_partite_uniform_uniform",
+        "hg_partite_uniform_part",
+        "hg_partite_uniform_onto",
+        "hg_partite_uniform_rank_le",
+        "hg_partite_rank0_card",
+        "hg_partite_uniform_rank0",
+        "hg_partite_uniform_ord"
+      ]
+    }
+  }
+}
