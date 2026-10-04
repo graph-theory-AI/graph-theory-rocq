@@ -71,7 +71,7 @@ Proof. by rewrite card_prod !card_ord. Qed.
 Lemma x218_multipartite_1_edgeless t (x y : x218_complete_multipartite 1 t) :
   ~~ (x -- y).
 Proof.
-by rewrite /edge_rel /= /x218_multipartite_rel (ord1 x.1) (ord1 y.1) eqxx.
+by rewrite /edge_rel /= /x218_multipartite_rel /GTBase.complete_multipartite_graphs.complete_multipartite_rel (ord1 x.1) (ord1 y.1) eqxx.
 Qed.
 
 (** Structural law: multiboundedness is used at a fixed [d], and then bounds

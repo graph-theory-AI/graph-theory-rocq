@@ -195,7 +195,7 @@ Proof. by rewrite card_prod !card_ord. Qed.
 (** ** [cmp_rel] — identity: vertices in the same part are non-adjacent. *)
 Lemma cmp_same_part k m (i : 'I_k) (a b : 'I_m) :
   ~~ @edge_rel (complete_multipartite k m) (i, a) (i, b).
-Proof. by rewrite /edge_rel /= /cmp_rel /= eqxx. Qed.
+Proof. by rewrite /edge_rel /= /cmp_rel /GTBase.complete_multipartite_graphs.complete_multipartite_rel /= eqxx. Qed.
 
 (** ** [cmp_rel] — identity: vertices in different parts are adjacent. *)
 Lemma cmp_diff_part k m (i j : 'I_k) (a b : 'I_m) :

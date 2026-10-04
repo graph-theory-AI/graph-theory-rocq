@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "family": "complete-multipartite",
+  "modules": {
+    "GTBase.complete_multipartite_graphs": {
+      "path": "base/theories/complete_multipartite_graphs.v",
+      "overrides": {
+        "complete_multipartite_graph": {
+          "verdict": "FAITHFUL",
+          "note": "K_{m*k}: k parts of m vertices on 'I_k * 'I_m, two vertices adjacent iff in different parts; every k and m allowed (k = 0 or m = 0 empty, k = 1 edgeless, m = 1 complete and isomorphic to 'K_k); not the arbitrary-size XE1 partition predicate nor the oriented X221 predicate."
+        }
+      },
+      "machine_evidence": [
+        "complete_multipartite_sym",
+        "complete_multipartite_irrefl",
+        "complete_multipartite_edgeE",
+        "card_complete_multipartite_graph",
+        "complete_multipartite_same_part",
+        "complete_multipartite_diff_part",
+        "card_complete_multipartite_graph0n",
+        "card_complete_multipartite_graphn0",
+        "complete_multipartite_graph1n_edgeless",
+        "complete_multipartite_graphn1_edgeE",
+        "complete_multipartite_graphn1_diso"
+      ]
+    }
+  }
+}

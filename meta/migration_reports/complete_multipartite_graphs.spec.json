@@ -1,0 +1,236 @@
+{
+  "family": "complete-multipartite",
+  "canonical_name": "GTBase.complete_multipartite_graphs.complete_multipartite_graph",
+  "canonical_short_name": "complete_multipartite_graph",
+  "relation": "the complete multipartite graph with k parts of size m on the product carrier 'I_k * 'I_m (parts first): Chromatic U4 cmp_rel/complete_multipartite and X218 x218_multipartite_rel/x218_complete_multipartite are GTBase.complete_multipartite_graphs.complete_multipartite_rel/complete_multipartite_graph, the relation x.1 != y.1 by conversion and each graph pointwise and by the identity isomorphism. The four constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. Every k and m is allowed (k = 0 or m = 0 empty, k = 1 edgeless, m = 1 complete); 'K_k and 'K_n,m live on other carriers and are related by isomorphisms only.",
+  "baseline_commit": "9e3f1efa368ca76a654e4c11c796758f72af3ec9",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic"
+  },
+  "certificate_files": [
+    "base/theories/complete_multipartite_graphs.v",
+    "chromatic-theory/theories/migration/complete_multipartite_graphs.v"
+  ],
+  "extra_certificates": [
+    "GTBase.complete_multipartite_graphs.complete_multipartite_sym",
+    "GTBase.complete_multipartite_graphs.complete_multipartite_irrefl",
+    "GTBase.complete_multipartite_graphs.complete_multipartite_edgeE",
+    "GTBase.complete_multipartite_graphs.card_complete_multipartite_graph",
+    "GTBase.complete_multipartite_graphs.complete_multipartite_same_part",
+    "GTBase.complete_multipartite_graphs.complete_multipartite_diff_part",
+    "GTBase.complete_multipartite_graphs.card_complete_multipartite_graph0n",
+    "GTBase.complete_multipartite_graphs.card_complete_multipartite_graphn0",
+    "GTBase.complete_multipartite_graphs.complete_multipartite_graph1n_edgeless",
+    "GTBase.complete_multipartite_graphs.complete_multipartite_graphn1_edgeE",
+    "GTBase.complete_multipartite_graphs.complete_multipartite_graphn1_diso",
+    "Chromatic.migration.complete_multipartite_graphs.complete_multipartite_diso",
+    "Chromatic.migration.complete_multipartite_graphs.x218_complete_multipartite_diso"
+  ],
+  "summary": [
+    "Batch A, family A27 (complete multipartite graphs with equal parts), on Arthur's A26 pin 9e3f1ef. New GTBase.complete_multipartite_graphs gives complete_multipartite_graph k m : sgraph on 'I_k * 'I_m (parts first, part size second) with complete_multipartite_rel := x.1 != y.1 and the sources' argument status, with no positivity premise: the adjacency view, k * m vertices, same part non-adjacent and different parts adjacent, no vertex for k = 0 or m = 0, no edge for k = 1, and for m = 1 the complete graph (isomorphic to 'K_k). U4's cmp_rel/complete_multipartite and X218's x218_multipartite_rel/x218_complete_multipartite are now aliases; their four constructor proofs are one-line uses of the public ones. The public client covers these cases and a concrete K_3(2).",
+    "",
+    "Frozen verbatim at 9e3f1ef: the four sources, the four constructor proofs with their scripts, X218's x218_multibounding and the two complete rows: U4's choice-number row (chi(G) = k, at most m * k vertices, both relational choice-number assumptions, chG <= chK, zero k and m allowed) and X218's forest row over the Skolemized chain (functions c, e chosen before d >= 1, t >= 1 and G, induced-H and ordinary-subgraph K_d(t) exclusions, chi <= c d * t ^ e d). Eleven mappings, two whole iffs; no Original on this parent.",
+    "",
+    "Proof consumers: grounding_U4.cmp_same_part and grounding_X218.x218_multipartite_1_edgeless add one unfold of the public relation with unchanged headers; implications_X218's unfolding proofs, x218_multibounding_pointwise and the rest of the closure recompile unchanged. The Extremal XE1 arbitrary-size partition predicate and the Digraph X221 oriented predicate stay distinct."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.U4.cmp_rel",
+      "path": "chromatic-theory/theories/conjectures/U4.v",
+      "name": "cmp_rel",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "U4Legacy.cmp_rel",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.cmp_rel_compat",
+      "live_unfolds_to": "@complete_multipartite_rel k m"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.U4.cmp_rel_sym",
+      "path": "chromatic-theory/theories/conjectures/U4.v",
+      "name": "cmp_rel_sym",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "U4Legacy.cmp_rel_sym",
+      "substitutions": {
+        "cmp_rel": "U4Legacy.cmp_rel"
+      },
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.cmp_rel_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.U4.cmp_rel_irrefl",
+      "path": "chromatic-theory/theories/conjectures/U4.v",
+      "name": "cmp_rel_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "U4Legacy.cmp_rel_irrefl",
+      "substitutions": {
+        "cmp_rel": "U4Legacy.cmp_rel"
+      },
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.cmp_rel_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.U4.complete_multipartite",
+      "path": "chromatic-theory/theories/conjectures/U4.v",
+      "name": "complete_multipartite",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "U4Legacy.complete_multipartite",
+      "substitutions": {
+        "cmp_rel_sym": "U4Legacy.cmp_rel_sym",
+        "cmp_rel_irrefl": "U4Legacy.cmp_rel_irrefl"
+      },
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.complete_multipartite_compat",
+      "live_unfolds_to": "complete_multipartite_graph k m"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.U4.choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
+      "path": "chromatic-theory/theories/conjectures/U4.v",
+      "name": "choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "U4Legacy.choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
+      "substitutions": {
+        "complete_multipartite": "U4Legacy.complete_multipartite"
+      },
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.choice_number_of_k_chromatic_graphs_of_bounded_order_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X218.x218_multipartite_rel",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "x218_multipartite_rel",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "X218Legacy.x218_multipartite_rel",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.x218_multipartite_rel_compat",
+      "live_unfolds_to": "@complete_multipartite_rel d t"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X218.x218_multipartite_sym",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "x218_multipartite_sym",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "X218Legacy.x218_multipartite_sym",
+      "substitutions": {
+        "x218_multipartite_rel": "X218Legacy.x218_multipartite_rel"
+      },
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.x218_multipartite_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X218.x218_multipartite_irrefl",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "x218_multipartite_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "X218Legacy.x218_multipartite_irrefl",
+      "substitutions": {
+        "x218_multipartite_rel": "X218Legacy.x218_multipartite_rel"
+      },
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.x218_multipartite_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X218.x218_complete_multipartite",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "x218_complete_multipartite",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "X218Legacy.x218_complete_multipartite",
+      "substitutions": {
+        "x218_multipartite_sym": "X218Legacy.x218_multipartite_sym",
+        "x218_multipartite_irrefl": "X218Legacy.x218_multipartite_irrefl"
+      },
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.x218_complete_multipartite_compat",
+      "live_unfolds_to": "complete_multipartite_graph d t"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X218.x218_multibounding",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "x218_multibounding",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "X218Legacy.x218_multibounding",
+      "substitutions": {
+        "x218_complete_multipartite": "X218Legacy.x218_complete_multipartite"
+      },
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.x218_multibounding_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X218.every_forest_is_multibounding_statement",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "every_forest_is_multibounding_statement",
+      "frozen_path": "chromatic-theory/theories/migration/complete_multipartite_graphs.v",
+      "frozen": "X218Legacy.every_forest_is_multibounding_statement",
+      "substitutions": {
+        "x218_multibounding": "X218Legacy.x218_multibounding"
+      },
+      "certificate": "Chromatic.migration.complete_multipartite_graphs.every_forest_is_multibounding_statement_compat"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U4.v",
+      "name": "cmp_rel",
+      "note": "Grounding consumers: cmp_same_part adds one unfold of the public relation (/GTBase.complete_multipartite_graphs.complete_multipartite_rel); card_complete_multipartite and cmp_diff_part keep their proofs; statements unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U4.v",
+      "name": "complete_multipartite",
+      "note": "Grounding consumers: cmp_same_part adds one unfold of the public relation (/GTBase.complete_multipartite_graphs.complete_multipartite_rel); card_complete_multipartite and cmp_diff_part keep their proofs; statements unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X218.v",
+      "name": "every_forest_is_multibounding_statement",
+      "note": "Grounding consumers: x218_multipartite_1_edgeless adds one unfold of the public relation (/GTBase.complete_multipartite_graphs.complete_multipartite_rel); x218_multipartite_card, x218_multibounding_at, x218_multibounding_pointwise (the pre-2026-09-24 per-d body, a grounding Definition, not a row), x218_multibounding_pointwiseP and x218_multibounding_K1 keep their types and proofs."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X218.v",
+      "name": "x218_complete_multipartite",
+      "note": "Grounding consumers: x218_multipartite_1_edgeless adds one unfold of the public relation (/GTBase.complete_multipartite_graphs.complete_multipartite_rel); x218_multipartite_card, x218_multibounding_at, x218_multibounding_pointwise (the pre-2026-09-24 per-d body, a grounding Definition, not a row), x218_multibounding_pointwiseP and x218_multibounding_K1 keep their types and proofs."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X218.v",
+      "name": "x218_multibounding",
+      "note": "Grounding consumers: x218_multipartite_1_edgeless adds one unfold of the public relation (/GTBase.complete_multipartite_graphs.complete_multipartite_rel); x218_multipartite_card, x218_multibounding_at, x218_multibounding_pointwise (the pre-2026-09-24 per-d body, a grounding Definition, not a row), x218_multibounding_pointwiseP and x218_multibounding_K1 keep their types and proofs."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X218.v",
+      "name": "x218_multipartite_rel",
+      "note": "Grounding consumers: x218_multipartite_1_edgeless adds one unfold of the public relation (/GTBase.complete_multipartite_graphs.complete_multipartite_rel); x218_multipartite_card, x218_multibounding_at, x218_multibounding_pointwise (the pre-2026-09-24 per-d body, a grounding Definition, not a row), x218_multibounding_pointwiseP and x218_multibounding_K1 keep their types and proofs."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X218.v",
+      "name": "every_forest_is_multibounding_statement",
+      "note": "Implication consumers: x218_clique_has_multipartite and x218_multipartite1_edge (their unfold of x218_multipartite_rel), x218_multipartite1_omega and the e035 theorems over x218_multibounding keep their types and proofs unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X218.v",
+      "name": "x218_complete_multipartite",
+      "note": "Implication consumers: x218_clique_has_multipartite and x218_multipartite1_edge (their unfold of x218_multipartite_rel), x218_multipartite1_omega and the e035 theorems over x218_multibounding keep their types and proofs unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X218.v",
+      "name": "x218_multipartite_rel",
+      "note": "Implication consumers: x218_clique_has_multipartite and x218_multipartite1_edge (their unfold of x218_multipartite_rel), x218_multipartite1_omega and the e035 theorems over x218_multibounding keep their types and proofs unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Extremal.conjectures.XE1.xe1_complete_multipartite_with_sizes",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_complete_multipartite_with_sizes",
+      "note": "a predicate on a supplied graph: a partition into k parts of arbitrary, possibly zero, sizes with every edge between parts; not a constructor and not equipartite (consumer erdos_550_statement, frozen by subgraph-of)"
+    },
+    {
+      "qualified": "Digraph.conjectures.X221.x221_oriented_complete_multipartite",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "x221_oriented_complete_multipartite",
+      "note": "a directed predicate: oriented with transitive non-adjacency (any part sizes); a different interface, no Digraph build"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types and Arguments of the frozen and live objects, graph-constructor nonconversion probes, strict dependency closures of the frozen objects with closure parity against the baseline, and the types of every declaration in the reverse dependency closure of U4 and X218 at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A27-complete-multipartite/ (outside the repository)"
+}
