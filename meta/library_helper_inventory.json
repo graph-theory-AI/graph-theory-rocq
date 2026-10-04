@@ -301,10 +301,6 @@
         "Cycle.conjectures.X5.x5_vertices_of_seq",
         "Digraph.conjectures.X19.x19_cycle_vertices"
       ],
-      "78f1f021282a9af37c5b3173ad43876fc5add16cff3c2a1838b5eb37d28b2973": [
-        "Hypergraph.conjectures.U12.hg_matching",
-        "Hypergraph.conjectures.X6.x6_matching"
-      ],
       "795caa9ed6e628d9392cca597932c2db8dceba7eb76a6f582c26e65b13ac3a51": [
         "GTMisc.conjectures.X128.x128_weight",
         "Minor.conjectures.X190.x190_weight",
@@ -419,6 +415,10 @@
       "a04b38db192b6028be6f00d59e1a2d09d518071bd3684dc8ef4956b20337bfcf": [
         "Chromatic.conjectures.X142.x142_proper_edge_colouring",
         "GTMisc.conjectures.X14.x14_proper_edge_colouring"
+      ],
+      "a1ec7e28697be9ad539a6e1acaee4851e0ed24b9025d205a0cf685e2990fb565": [
+        "Hypergraph.conjectures.U12.hg_matching",
+        "Hypergraph.conjectures.X6.x6_matching"
       ],
       "a2570f291eccb78297c66f6945c5067a9b6cabfcf0ab65b804a771d500e29281": [
         "Chromatic.conjectures.X3.x3_consecutive_in_path",
@@ -45167,7 +45167,7 @@
         "Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement"
       ],
       "kind": "Definition",
-      "line": 49,
+      "line": 50,
       "local_dependencies": [],
       "name": "k_uniform",
       "normalized_name": "k_uniform",
@@ -45186,7 +45186,7 @@
         "Hypergraph.conjectures.U12.frankls_union_closed_sets_statement"
       ],
       "kind": "Definition",
-      "line": 56,
+      "line": 57,
       "local_dependencies": [],
       "name": "union_closed",
       "normalized_name": "union_closed",
@@ -45205,7 +45205,7 @@
         "Hypergraph.conjectures.U12.contains_complete"
       ],
       "kind": "Definition",
-      "line": 94,
+      "line": 95,
       "local_dependencies": [],
       "name": "complete_sub",
       "normalized_name": "complete_sub",
@@ -45224,7 +45224,7 @@
         "Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement"
       ],
       "kind": "Definition",
-      "line": 115,
+      "line": 116,
       "local_dependencies": [
         "complete_sub"
       ],
@@ -45246,7 +45246,7 @@
         "Hypergraph.conjectures.U12.critical_k_forest"
       ],
       "kind": "Definition",
-      "line": 146,
+      "line": 147,
       "local_dependencies": [],
       "name": "berge_cycle",
       "normalized_name": "berge_cycle",
@@ -45265,7 +45265,7 @@
         "Hypergraph.conjectures.U12.k_forest"
       ],
       "kind": "Definition",
-      "line": 180,
+      "line": 181,
       "local_dependencies": [
         "berge_cycle"
       ],
@@ -45286,7 +45286,7 @@
         "Hypergraph.conjectures.U12.k_tree"
       ],
       "kind": "Definition",
-      "line": 184,
+      "line": 185,
       "local_dependencies": [],
       "name": "hg_connected",
       "normalized_name": "hg_connected",
@@ -45306,7 +45306,7 @@
         "Hypergraph.conjectures.U12.k_tree"
       ],
       "kind": "Definition",
-      "line": 194,
+      "line": 195,
       "local_dependencies": [
         "berge_acyclic",
         "k_uniform"
@@ -45328,7 +45328,7 @@
         "Hypergraph.conjectures.U12.are_critical_k_forests_tight_statement"
       ],
       "kind": "Definition",
-      "line": 198,
+      "line": 199,
       "local_dependencies": [
         "hg_connected",
         "k_forest"
@@ -45350,7 +45350,7 @@
         "Hypergraph.conjectures.U12.are_critical_k_forests_tight_statement"
       ],
       "kind": "Definition",
-      "line": 202,
+      "line": 203,
       "local_dependencies": [
         "berge_cycle",
         "k_forest"
@@ -45372,7 +45372,7 @@
         "Hypergraph.conjectures.U12.rysers_statement"
       ],
       "kind": "Definition",
-      "line": 237,
+      "line": 238,
       "local_dependencies": [],
       "name": "r_partite_uniform",
       "normalized_name": "r_partite_uniform",
@@ -45384,14 +45384,14 @@
       "signature_shape_hash": "ef9f1d3727bd2c25021d2c114ff14cd15f8c2d82acf6f027c162310b58a6c980"
     },
     {
-      "body_hash": "78f1f021282a9af37c5b3173ad43876fc5add16cff3c2a1838b5eb37d28b2973",
-      "body_shape_hash": "78f1f021282a9af37c5b3173ad43876fc5add16cff3c2a1838b5eb37d28b2973",
-      "declaration_hash": "8c8e5cfee6d49b83ab5973fd320b5b6d96d1fc2ac1f042bd5c88c4fbc88aa435",
+      "body_hash": "a1ec7e28697be9ad539a6e1acaee4851e0ed24b9025d205a0cf685e2990fb565",
+      "body_shape_hash": "a1ec7e28697be9ad539a6e1acaee4851e0ed24b9025d205a0cf685e2990fb565",
+      "declaration_hash": "04db325a2ced43e75c57ebb6773a410cdd4ce61db14619fc4752140fa6ec2a13",
       "direct_consumers": [
         "Hypergraph.conjectures.U12.is_matching_number"
       ],
       "kind": "Definition",
-      "line": 262,
+      "line": 263,
       "local_dependencies": [],
       "name": "hg_matching",
       "normalized_name": "hg_matching",
@@ -46252,7 +46252,7 @@
         "Hypergraph.conjectures.X6.x6_extremal_no_k_matching"
       ],
       "kind": "Definition",
-      "line": 10,
+      "line": 11,
       "local_dependencies": [],
       "name": "x6_uniform",
       "normalized_name": "uniform",
@@ -46272,7 +46272,7 @@
         "Hypergraph.conjectures.X6.r_partite_matching_deletion_tradeoff_statement"
       ],
       "kind": "Definition",
-      "line": 15,
+      "line": 16,
       "local_dependencies": [],
       "name": "x6_r_partite_uniform",
       "normalized_name": "r_partite_uniform",
@@ -46284,15 +46284,15 @@
       "signature_shape_hash": "ef9f1d3727bd2c25021d2c114ff14cd15f8c2d82acf6f027c162310b58a6c980"
     },
     {
-      "body_hash": "78f1f021282a9af37c5b3173ad43876fc5add16cff3c2a1838b5eb37d28b2973",
-      "body_shape_hash": "78f1f021282a9af37c5b3173ad43876fc5add16cff3c2a1838b5eb37d28b2973",
-      "declaration_hash": "61edff7e3ad68159a122ce6c3ca1a1df757cef0325ea53dc9daf74adfc63a5d5",
+      "body_hash": "a1ec7e28697be9ad539a6e1acaee4851e0ed24b9025d205a0cf685e2990fb565",
+      "body_shape_hash": "a1ec7e28697be9ad539a6e1acaee4851e0ed24b9025d205a0cf685e2990fb565",
+      "declaration_hash": "86c27d2c0f05b07a3b72dd52da0fb8b47b4efe21887ae863d7dc1ec2226de243",
       "direct_consumers": [
         "Hypergraph.conjectures.X6.x6_matching_number",
         "Hypergraph.conjectures.X6.x6_no_k_matching"
       ],
       "kind": "Definition",
-      "line": 19,
+      "line": 20,
       "local_dependencies": [],
       "name": "x6_matching",
       "normalized_name": "matching",

@@ -10,7 +10,8 @@
     "graph-theory-misc": "GTMisc",
     "extremal-graph-theory": "Extremal",
     "base": "GTBase",
-    "digraph-theory": "Digraph"
+    "digraph-theory": "Digraph",
+    "hypergraph-theory": "Hypergraph"
   },
   "certificate_files": [
     "packing-theory/theories/foundations/matching.v",
@@ -18,7 +19,12 @@
     "graph-theory-misc/theories/migration/matching.v",
     "extremal-graph-theory/theories/migration/matching.v",
     "base/theories/matching_graphs.v",
-    "digraph-theory/theories/migration/matching.v"
+    "digraph-theory/theories/migration/matching.v",
+    "hypergraph-theory/theories/foundations/hypergraph_matchings.v",
+    "hypergraph-theory/theories/migration/matching.v",
+    "hypergraph-theory/theories/migration/partite_uniform.v",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+    "hypergraph-theory/theories/migration/incidence_degree.v"
   ],
   "extra_certificates": [
     "Packing.foundations.matching.matching_subset",
@@ -44,11 +50,22 @@
     "GTBase.matching_graphs.deg_le1_irred",
     "GTBase.matching_graphs.deg_le1_forest",
     "GTBase.matching_graphs.matching_graph_forest",
-    "GTBase.matching_graphs.matching_graph_forestP"
+    "GTBase.matching_graphs.matching_graph_forestP",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matchingP",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matching_sub",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matching_trivIset",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matching_card",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matching0",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matching_set0E",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matching1",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matchingS",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matching_ambient",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matching_overlap",
+    "Hypergraph.foundations.hypergraph_matchings.hg_matching_set0U"
   ],
   "downstream_client": "packing-theory/theories/examples/matching.v",
   "summary": [
-    "Batch C, family C1 (`matching`). Six name-matched definitions were compared (table below); only the compiled simple-graph edge-family subgroup is migrated: `x15_matching` (packing, with the X18 chain), `x14_matching` (misc) and `x180_matching` (extremal) now unfold to upstream `GraphTheory.connectivity.matching M`, keeping their names as transparent aliases for one migration cycle. Statement texts, doc blocks, manifest rows, leg states and documented discrepancies are unchanged (checked below).",
+    "Historical C1 text (2026-10-02; the later C24, C25 and D6 classes follow at the end): Batch C, family C1 (`matching`). Six name-matched definitions were compared (table below); only the compiled simple-graph edge-family subgroup is migrated: `x15_matching` (packing, with the X18 chain), `x14_matching` (misc) and `x180_matching` (extremal) now unfold to upstream `GraphTheory.connectivity.matching M`, keeping their names as transparent aliases for one migration cycle. Statement texts, doc blocks, manifest rows, leg states and documented discrepancies are unchanged (checked below).",
     "",
     "| Qualified definition | Representation | Treatment |",
     "|---|---|---|",
@@ -56,8 +73,8 @@
     "| `GTMisc.conjectures.X14.x14_matching` | simple-graph edge family; pairwise-disjoint distinct members | migrated: alias of `matching`; `GTMisc.migration.matching.x14_matching_compat` |",
     "| `Extremal.conjectures.X180.x180_matching` | simple-graph edge family over `fg_edges G` (= `E(G)`, `fg_edgesE`); empty pairwise intersections | migrated: alias of `matching`; `Extremal.migration.matching.x180_matching_compat` |",
     "| `Packing.conjectures.X15alone.x15_matching` | the X15 body, declaration for declaration (sha256 `e6463b96\u2026`), in a self-contained file absent from `_CoqProject` | deferred, excluded: not built, not retargeted, not repaired; its documented stronger constant (c <= 32 (m+1)^3 under the corpus name) is preserved |",
-    "| `Hypergraph.conjectures.X6.x6_matching` | arbitrary hyperedge family on a finType (`M E : {set {set T}}`); identical body to `U12.hg_matching` (body sha256 `78f1f021\u2026`) | deferred to the hypergraph foundation (batch D), together with `hg_matching` |",
-    "| `Digraph.conjectures.path_fas.matching` | predicate on a whole graph: a forest with every degree at most one | deferred, distinct representation: the bridge `matching G <-> connectivity.matching E(G)` needs its own comparison and a digraph build |",
+    "| `Hypergraph.conjectures.X6.x6_matching` | arbitrary hyperedge family on a finType (`M E : {set {set T}}`); identical body to `U12.hg_matching` (body sha256 `78f1f021\u2026`) | deferred at C1 to the hypergraph foundation (batch D), together with `hg_matching`; migrated by D6 (below) |",
+    "| `Digraph.conjectures.path_fas.matching` | predicate on a whole graph: a forest with every degree at most one | deferred at C1 (completed by C24, below), distinct representation: the bridge `matching G <-> connectivity.matching E(G)` needs its own comparison and a digraph build |",
     "",
     "Nine statements are affected: five in X15 (corpus rows #02 and #03 and the three LLM-proof variants, which have no manifest row and are marked `non_corpus`), two in X18 (through `x18_perfect_matching`, a cross-file chain helper that reaches `x15_matching`), one in X14 and one in X180 (through `x180_induced_matching`, `x180_multitasker_capacity_at_least` and `x180_multitasker_capacity_positive`). Each frozen statement resolves only through frozen copies along its whole affected chain: every reference to a frozen name is `Legacy.`-qualified or prefix-stripped, so no frozen text contains a live name of the family. The per-row theorem `<formal_name>_compat : XnnLegacy.<formal_name> <-> <formal_name>` is kernel-checked by `meta/check_library_migration.py`.",
     "",
@@ -67,9 +84,12 @@
     "",
     "Fidelity of the upstream-owned canonical: `meta/foundation_fidelity.json` enrols repository-declared primitives only, so the verdict is recorded in the registry (`matching.fidelity = FAITHFUL`, contract in `upstream_audit`) with the thirteen API and grounding theorems of `Packing.foundations.matching` as machine evidence (`Print Assumptions` clean, compiled by `check_library_migration.py`), and `packing-theory/theories/examples/matching.v` is the public downstream client (plan section 11). `digraph-theory/theories/conjectures/path_fas.v` appears among the canonical users below only because its deferred whole-graph predicate shares the short name `matching`. Kernel closure evidence (`Print All Dependencies` of every frozen and live statement) is kept separately under `coordination/evidence/C1-matching/`.",
     "C24 completes the deferred whole-graph class: Digraph.conjectures.path_fas.matching now unfolds to GTBase.matching_graphs.matching_graph G := GraphTheory.connectivity.matching E(G), the upstream owner specialized to the whole edge set. Public bridges prove it equivalent to \"every vertex has at most one neighbour\" and to the original \"forest of maximum degree at most one\", with no added guard.",
-    "The raw local predicate, the has_matchingFAS chain (same witness F, is_FAS, loop-guarded farc_graph) and the complete non-corpus matchingFAS_iff_dw1_statement (exact Delta_star minimum, bound 1) are frozen at the C23 pin a77d0b0, byte-identical to this family baseline, in digraph-theory/theories/migration/matching.v. Coverage is now 23 frozen mappings and 10 whole statements (9 retained, 1 non-corpus).",
+    "The raw local predicate, the has_matchingFAS chain (same witness F, is_FAS, loop-guarded farc_graph) and the complete non-corpus matchingFAS_iff_dw1_statement (exact Delta_star minimum, bound 1) are frozen at the C23 pin a77d0b0, byte-identical to this family baseline, in digraph-theory/theories/migration/matching.v. At C24, coverage was 23 frozen mappings and 10 whole statements (9 retained, 1 non-corpus).",
     "C25 adds Packing.conjectures.U9.is_matching_edges to the migrated supplied-edge class: it now unfolds to the upstream matching M of the supplied family, proved equal to the raw \"genuine edge witnesses and at most one member per vertex\" body via matching_at_most_oneP and edgesP. The edge-validity clause is kept; no whole-graph or other guard.",
-    "The raw source and the whole OPG U9 hypercube row are frozen with iff certificates, and the complete B11+C25 Original combines the frozen matching with B11 Legacy.cycle_edgesG, same supplied M, cycle witness c and guard 2 <= d. B11 U9Legacy partial snapshot is unchanged. Coverage is now 26 mappings and 11 rows."
+    "The raw source and the whole OPG U9 hypercube row are frozen with iff certificates, and the complete B11+C25 Original combines the frozen matching with B11 Legacy.cycle_edgesG, same supplied M, cycle witness c and guard 2 <= d. B11 U9Legacy partial snapshot is unchanged. At C25, coverage was 26 mappings and 11 rows.",
+    "D6 completes the deferred hypergraph-edge-family class, the last compiled class of this registry: Hypergraph.conjectures.U12.hg_matching and Hypergraph.conjectures.X6.x6_matching (identical bodies) now unfold to the public area canonical Hypergraph.foundations.hypergraph_matchings.hg_matching M E, same finite carrier, M before E: M is a subfamily of E whose distinct members are pairwise disjoint, the clause MathComp trivIset reflects (hg_matchingP). No uniformity, positivity, nonempty-edge, covering or maximality guard; the empty hyperedge stays a permitted member.",
+    "Frozen at the D5 pin e14645d in hypergraph-theory/theories/migration/matching.v, every text byte-identical at this family baseline 9e03072 where it is bound: the 2 sources, the 4 matching-number/no-k/extremal chains (kept as chains), the 5 complete current rows (U12 Ryser, X6 Lovasz deletion and its trade-off, X6 #1020, X73), the complete original extremal chain and 5 complete Originals over the actual raw D2 partite, D1 x6_uniform and A10 X73 regularity constants (5 borrowed objects, historical role, through the aliases PU/UH/ID). All 17 bridges are conversions. Coverage is now 48 mappings and 16 rows (22 whole iff).",
+    "No older proof needed adaptation. The eight older partial snapshots (A10 X73Legacy; D2 U12/X6 rows, X73 current and X73 Original; D1 X6 extremal chain and #1020 row) stay byte-exact with notes, and reciprocal D1/D2/A10 notes cover the new current snapshots. The X6 distinct-variant entry is removed; X15alone stays excluded. Public client hypergraph-theory/theories/examples/hyperedge_matchings.v; fidelity module Hypergraph.foundations.hypergraph_matchings."
   ],
   "frozen": [
     {
@@ -479,13 +499,331 @@
       "frozen_at": "f3d16d8b262d3a8188f76947626d06b92311bfd7",
       "binding_note": "Frozen at the C24 pin; the U9 source and row texts are byte-identical at the family baseline 9e03072, so the text is bound there. CE is the certificate module alias of Packing.migration.cycle_edges, so CE.Legacy.cycle_edgesG is B11 frozen successor-edge image.",
       "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.U12.hg_matching",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "hg_matching",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "Legacy.hg_matching",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.matching.hg_matching_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph_matchings.hg_matching M E",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X6.x6_matching",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_matching",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x6_matching",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.matching.x6_matching_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph_matchings.hg_matching M E",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.U12.is_matching_number",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "is_matching_number",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "U12MatchingLegacy.is_matching_number",
+      "substitutions": {
+        "hg_matching": "Legacy.hg_matching"
+      },
+      "certificate": "Hypergraph.migration.matching.is_matching_number_compat",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X6.x6_matching_number",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_matching_number",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingLegacy.x6_matching_number",
+      "substitutions": {
+        "x6_matching": "Legacy.x6_matching"
+      },
+      "certificate": "Hypergraph.migration.matching.x6_matching_number_compat",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X6.x6_no_k_matching",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_no_k_matching",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingLegacy.x6_no_k_matching",
+      "substitutions": {
+        "x6_matching": "Legacy.x6_matching"
+      },
+      "certificate": "Hypergraph.migration.matching.x6_no_k_matching_compat",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X6.x6_extremal_no_k_matching",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_extremal_no_k_matching",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingLegacy.x6_extremal_no_k_matching",
+      "substitutions": {
+        "x6_no_k_matching": "X6MatchingLegacy.x6_no_k_matching"
+      },
+      "certificate": "Hypergraph.migration.matching.x6_extremal_no_k_matching_compat",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.U12.rysers_statement",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "rysers_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "U12MatchingLegacy.rysers_statement",
+      "substitutions": {
+        "is_matching_number": "U12MatchingLegacy.is_matching_number"
+      },
+      "certificate": "Hypergraph.migration.matching.rysers_statement_compat",
+      "corpus": "opg",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X6.lovasz_r_partite_matching_deletion_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "lovasz_r_partite_matching_deletion_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingLegacy.lovasz_r_partite_matching_deletion_statement",
+      "substitutions": {
+        "x6_matching_number": "X6MatchingLegacy.x6_matching_number"
+      },
+      "certificate": "Hypergraph.migration.matching.lovasz_r_partite_matching_deletion_statement_compat",
+      "corpus": "v2",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X6.r_partite_matching_deletion_tradeoff_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "r_partite_matching_deletion_tradeoff_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingLegacy.r_partite_matching_deletion_tradeoff_statement",
+      "substitutions": {
+        "x6_matching_number": "X6MatchingLegacy.x6_matching_number"
+      },
+      "certificate": "Hypergraph.migration.matching.r_partite_matching_deletion_tradeoff_statement_compat",
+      "corpus": "v2",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X6.erdos_matching_extremal_formula_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "erdos_matching_extremal_formula_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingLegacy.erdos_matching_extremal_formula_statement",
+      "substitutions": {
+        "x6_extremal_no_k_matching": "X6MatchingLegacy.x6_extremal_no_k_matching"
+      },
+      "certificate": "Hypergraph.migration.matching.erdos_matching_extremal_formula_statement_compat",
+      "corpus": "v2",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X73MatchingLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "substitutions": {
+        "x6_matching": "Legacy.x6_matching"
+      },
+      "certificate": "Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_compat",
+      "corpus": "v2",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Frozen at the D5 pin e14645d; the text there is byte-identical to the family baseline 9e03072, so the text is bound there."
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Hypergraph.conjectures.X6.x6_extremal_no_k_matching",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_extremal_no_k_matching",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingOriginal.x6_extremal_no_k_matching",
+      "substitutions": {
+        "x6_no_k_matching": "X6MatchingLegacy.x6_no_k_matching",
+        "x6_uniform": "UH.UniformLegacy.x6_uniform"
+      },
+      "certificate": "Hypergraph.migration.matching.x6_extremal_no_k_matching_original_compat",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Complete Original: the 9e03072 text (byte-identical at the D5 pin e14645d), frozen at the D5 pin over the actual raw D2/D1/A10 constants through the certificate module aliases PU = Hypergraph.migration.partite_uniform, UH = Hypergraph.migration.uniform_hypergraph and ID = Hypergraph.migration.incidence_degree; bound at the family baseline 9e03072."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.U12.rysers_statement",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "rysers_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "U12MatchingOriginal.rysers_statement",
+      "substitutions": {
+        "is_matching_number": "U12MatchingLegacy.is_matching_number",
+        "r_partite_uniform": "PU.PartiteLegacy.r_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.matching.rysers_statement_original_compat",
+      "corpus": "opg",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Complete Original: the 9e03072 text (byte-identical at the D5 pin e14645d), frozen at the D5 pin over the actual raw D2/D1/A10 constants through the certificate module aliases PU = Hypergraph.migration.partite_uniform, UH = Hypergraph.migration.uniform_hypergraph and ID = Hypergraph.migration.incidence_degree; bound at the family baseline 9e03072."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X6.lovasz_r_partite_matching_deletion_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "lovasz_r_partite_matching_deletion_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingOriginal.lovasz_r_partite_matching_deletion_statement",
+      "substitutions": {
+        "x6_matching_number": "X6MatchingLegacy.x6_matching_number",
+        "x6_r_partite_uniform": "PU.PartiteLegacy.x6_r_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.matching.lovasz_r_partite_matching_deletion_statement_original_compat",
+      "corpus": "v2",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Complete Original: the 9e03072 text (byte-identical at the D5 pin e14645d), frozen at the D5 pin over the actual raw D2/D1/A10 constants through the certificate module aliases PU = Hypergraph.migration.partite_uniform, UH = Hypergraph.migration.uniform_hypergraph and ID = Hypergraph.migration.incidence_degree; bound at the family baseline 9e03072."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X6.r_partite_matching_deletion_tradeoff_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "r_partite_matching_deletion_tradeoff_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingOriginal.r_partite_matching_deletion_tradeoff_statement",
+      "substitutions": {
+        "x6_matching_number": "X6MatchingLegacy.x6_matching_number",
+        "x6_r_partite_uniform": "PU.PartiteLegacy.x6_r_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.matching.r_partite_matching_deletion_tradeoff_statement_original_compat",
+      "corpus": "v2",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Complete Original: the 9e03072 text (byte-identical at the D5 pin e14645d), frozen at the D5 pin over the actual raw D2/D1/A10 constants through the certificate module aliases PU = Hypergraph.migration.partite_uniform, UH = Hypergraph.migration.uniform_hypergraph and ID = Hypergraph.migration.incidence_degree; bound at the family baseline 9e03072."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X6.erdos_matching_extremal_formula_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "erdos_matching_extremal_formula_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X6MatchingOriginal.erdos_matching_extremal_formula_statement",
+      "substitutions": {
+        "x6_extremal_no_k_matching": "X6MatchingOriginal.x6_extremal_no_k_matching"
+      },
+      "certificate": "Hypergraph.migration.matching.erdos_matching_extremal_formula_statement_original_compat",
+      "corpus": "v2",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Complete Original: the 9e03072 text (byte-identical at the D5 pin e14645d), frozen at the D5 pin over the actual raw D2/D1/A10 constants through the certificate module aliases PU = Hypergraph.migration.partite_uniform, UH = Hypergraph.migration.uniform_hypergraph and ID = Hypergraph.migration.incidence_degree; bound at the family baseline 9e03072."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "substitutions": {
+        "x6_matching": "Legacy.x6_matching",
+        "x6_r_partite_uniform": "PU.PartiteLegacy.x6_r_partite_uniform",
+        "x73_regular": "ID.X73Legacy.hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat",
+      "corpus": "v2",
+      "frozen_at": "e14645d6fb6068c1a89862f60b82e958212f2422",
+      "binding_note": "Complete Original: the 9e03072 text (byte-identical at the D5 pin e14645d), frozen at the D5 pin over the actual raw D2/D1/A10 constants through the certificate module aliases PU = Hypergraph.migration.partite_uniform, UH = Hypergraph.migration.uniform_hypergraph and ID = Hypergraph.migration.incidence_degree; bound at the family baseline 9e03072."
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.U12.r_partite_uniform",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "r_partite_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "PartiteLegacy.r_partite_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.partite_uniform.r_partite_uniform_compat",
+      "commit": "e53098e84635d8612e34e5d239fd13fe5afa9fb8"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X6.x6_r_partite_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_r_partite_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "PartiteLegacy.x6_r_partite_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.partite_uniform.x6_r_partite_uniform_compat",
+      "commit": "e53098e84635d8612e34e5d239fd13fe5afa9fb8"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X6.x6_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x6_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x6_uniform_compat",
+      "commit": "3be65eed7084abfae36dee74f7117b598325bc4c"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X73.x73_hyperdegree",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_hyperdegree",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x73_hyperdegree",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.x73_hyperdegree_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X73.x73_regular",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_regular",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X73Legacy.hyperdegree_regular",
+      "substitutions": {
+        "x73_hyperdegree": "Legacy.x73_hyperdegree",
+        "x73_regular": "hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.x73_regular_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
     }
   ],
   "known_stale_snapshots": {
     "extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement": "A7 snapshot: A7 froze this row over its own frozen average-degree chain (and frozen public count fg_edge_count) but kept the live x180_multitasker_capacity_positive of this family. Kept unchanged; the complete row is Extremal.migration.edge_count.X180Original.log_degree_multitasker_exists_statement, certified by log_degree_multitasker_exists_statement_original_compat, which composes this family's frozen X180Legacy.multitasker_capacity_positive.",
     "graph-theory-misc/theories/migration/subcubic.v#X14Legacy.subcubic_matching_lower_bound_statement": "A14 snapshot: A14 froze this row over its own frozen pointwise subcubic bound but kept the live x14_matching of this family. Kept unchanged; the complete row is GTMisc.migration.subcubic.X14Original.subcubic_matching_lower_bound_statement, certified by subcubic_matching_lower_bound_statement_original_compat, which composes this family's frozen Legacy.x14_matching (over Legacy.x14_edge_set) and reuses its certificate.",
     "packing-theory/theories/migration/cycle_edges.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement": "B11 partial snapshot: it froze only cycle_edgesG and keeps the live is_matching_edges (now the upstream matching alias). It stays byte-exact; the complete row is Packing.migration.matching.U9MatchingOriginal.matchings_extends_to_hamilton_cycles_in_hypercubes_statement, certified by matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat.",
-    "packing-theory/theories/migration/hypercubes.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement": "A23 current-row snapshot freezes its cube construction but retains the live matching and cycle-edge helpers. Keep it unchanged; the complete combined row is Packing.migration.hypercubes.U9Original.matchings_extends_to_hamilton_cycles_in_hypercubes_statement, certified by matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat, over actual C25/B11 frozen helpers and the A23 frozen cube."
+    "packing-theory/theories/migration/hypercubes.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement": "A23 current-row snapshot freezes its cube construction but retains the live matching and cycle-edge helpers. Keep it unchanged; the complete combined row is Packing.migration.hypercubes.U9Original.matchings_extends_to_hamilton_cycles_in_hypercubes_statement, certified by matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat, over actual C25/B11 frozen helpers and the A23 frozen cube.",
+    "hypergraph-theory/theories/migration/partite_uniform.v#X6PartiteLegacy.lovasz_r_partite_matching_deletion_statement": "D2 current snapshot: frozen with the raw D2 partite source, it keeps the live x6_matching_number, which now reaches the D6 hg_matching alias. It stays byte-exact; the complete row is Hypergraph.migration.matching.X6MatchingOriginal.lovasz_r_partite_matching_deletion_statement (certificate lovasz_r_partite_matching_deletion_statement_original_compat).",
+    "hypergraph-theory/theories/migration/incidence_degree.v#X73Legacy.regular_tripartite_hypergraph_matching_lower_bound_statement": "A10 partial snapshot: it froze the degree and regularity but keeps the live x6_matching, now an alias of the D6 hg_matching (and the live D2 x6_r_partite_uniform). It stays byte-exact; the complete row is Hypergraph.migration.matching.X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement (certificate regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat).",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v#X6UniformLegacy.erdos_matching_extremal_formula_statement": "D1 current snapshot: through its frozen chain X6UniformLegacy.x6_extremal_no_k_matching, which keeps the live x6_no_k_matching, it reaches the D6 hg_matching alias. It stays byte-exact; the complete row is Hypergraph.migration.matching.X6MatchingOriginal.erdos_matching_extremal_formula_statement (certificate erdos_matching_extremal_formula_statement_original_compat).",
+    "hypergraph-theory/theories/migration/partite_uniform.v#U12PartiteLegacy.rysers_statement": "D2 current snapshot: frozen with the raw D2 partite source, it keeps the live is_matching_number, which now reaches the D6 hg_matching alias. It stays byte-exact; the complete row is Hypergraph.migration.matching.U12MatchingOriginal.rysers_statement (certificate rysers_statement_original_compat).",
+    "hypergraph-theory/theories/migration/partite_uniform.v#X73PartiteOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement": "D2 complete A10+D2 Original: over the raw partite copy and A10's actual X73Legacy.hyperdegree_regular, it keeps the live x6_matching, now the D6 alias. It stays byte-exact; the complete row is Hypergraph.migration.matching.X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement (certificate regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat), which adds the frozen D6 matching.",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v#X6UniformLegacy.x6_extremal_no_k_matching": "D1 chain snapshot: frozen with D1's raw x6_uniform, it keeps the live x6_no_k_matching, which now reaches the D6 hg_matching alias. It stays byte-exact; the complete chain is Hypergraph.migration.matching.X6MatchingOriginal.x6_extremal_no_k_matching (certificate x6_extremal_no_k_matching_original_compat).",
+    "hypergraph-theory/theories/migration/partite_uniform.v#X73PartiteLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement": "D2 current snapshot: frozen with the raw D2 partite source, it keeps the live x6_matching, now the D6 alias (and the live A10 x73_regular). It stays byte-exact; the complete row is Hypergraph.migration.matching.X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement (certificate regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat).",
+    "hypergraph-theory/theories/migration/partite_uniform.v#X6PartiteLegacy.r_partite_matching_deletion_tradeoff_statement": "D2 current snapshot: frozen with the raw D2 partite source, it keeps the live x6_matching_number, which now reaches the D6 hg_matching alias. It stays byte-exact; the complete row is Hypergraph.migration.matching.X6MatchingOriginal.r_partite_matching_deletion_tradeoff_statement (certificate r_partite_matching_deletion_tradeoff_statement_original_compat)."
   },
   "cross_module_consumers": [
     {
@@ -647,6 +985,61 @@
       "path": "packing-theory/theories/examples/supplied_matchings.v",
       "name": "matching",
       "note": "C25 public-only client of the upstream GraphTheory.connectivity.matching (the C1 owner), a lexical short-name match."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "hg_matching",
+      "note": "x6_matching is the D6 alias of the public Hypergraph.foundations.hypergraph_matchings.hg_matching (qualified Require); text otherwise unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x6_matching",
+      "note": "the X73 row asks for an x6_matching directly (Import of X6); it is a row of this family with current and complete Original certificates in Hypergraph.migration.matching. Text unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_U12.v",
+      "name": "hg_matching",
+      "note": "U12 grounding lemmas (witness/identity for hg_matching and is_matching_number), proofs unchanged; they elaborate through the D6 alias."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_U12.v",
+      "name": "is_matching_number",
+      "note": "U12 grounding lemmas (witness/identity for hg_matching and is_matching_number), proofs unchanged; they elaborate through the D6 alias."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "rysers_statement",
+      "note": "the X6/U12 conversion bridges, is_cover_number0, ryser_by_deletion_aux and the verified edge r_partite_matching_deletion_tradeoff_implies_rysers; proofs unchanged, all through the D6 aliases."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "x6_matching",
+      "note": "the X6/U12 conversion bridges, is_cover_number0, ryser_by_deletion_aux and the verified edge r_partite_matching_deletion_tradeoff_implies_rysers; proofs unchanged, all through the D6 aliases."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "hg_matching",
+      "note": "the X6/U12 conversion bridges, is_cover_number0, ryser_by_deletion_aux and the verified edge r_partite_matching_deletion_tradeoff_implies_rysers; proofs unchanged, all through the D6 aliases."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "x6_matching_number",
+      "note": "the X6/U12 conversion bridges, is_cover_number0, ryser_by_deletion_aux and the verified edge r_partite_matching_deletion_tradeoff_implies_rysers; proofs unchanged, all through the D6 aliases."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "is_matching_number",
+      "note": "the X6/U12 conversion bridges, is_cover_number0, ryser_by_deletion_aux and the verified edge r_partite_matching_deletion_tradeoff_implies_rysers; proofs unchanged, all through the D6 aliases."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "r_partite_matching_deletion_tradeoff_statement",
+      "note": "the X6/U12 conversion bridges, is_cover_number0, ryser_by_deletion_aux and the verified edge r_partite_matching_deletion_tradeoff_implies_rysers; proofs unchanged, all through the D6 aliases."
+    },
+    {
+      "path": "hypergraph-theory/theories/examples/hyperedge_matchings.v",
+      "name": "hg_matching",
+      "note": "public-only D6 client of the canonical, which shares the short name hg_matching with the U12 source."
     }
   ],
   "distinct_variants": [
@@ -656,13 +1049,6 @@
       "name": "x15_matching",
       "representation": "simple-graph edge family, excluded from the build",
       "note": "the X15 body declaration for declaration, in a self-contained scratch file that packing-theory/_CoqProject does not list; it carries a documented stronger statement constant (c <= 32 (m+1)^3 under the corpus name). Neither added to the build, retargeted nor repaired"
-    },
-    {
-      "qualified": "Hypergraph.conjectures.X6.x6_matching",
-      "path": "hypergraph-theory/theories/conjectures/X6.v",
-      "name": "x6_matching",
-      "representation": "hypergraph edge family",
-      "note": "subfamily of an arbitrary hyperedge family on a finType (M E : {set {set T}}), identical body to Hypergraph.conjectures.U12.hg_matching (body sha256 78f1f021\u2026); deferred to the hypergraph foundation (batch D) together with hg_matching"
     }
   ],
   "unchanged_live_helpers": [
@@ -682,7 +1068,8 @@
       "body_hash": "f24ff3215cef2b5880b490d06ed1d6fc69b28d91320bb122c1cb79b674979630"
     }
   ],
-  "kernel_evidence": "Print All Dependencies of every frozen and live statement and Print Assumptions of every certificate, run through the pinned image after the re-layout; files under /srv/graph-theory-rocq/coordination/evidence/C1-matching/ (outside the repository)",
+  "kernel_evidence": "Print All Dependencies of every frozen and live statement and Print Assumptions of every certificate, run through the pinned image after the re-layout; files under /srv/graph-theory-rocq/coordination/evidence/C1-matching/ (outside the repository); D6 (hypergraph-edge-family): exact types, Print Assumptions, About-resolved closures, the 17 actual consumer headers and the D2/D1/A10 borrowed constants under /srv/graph-theory-rocq/coordination/evidence/D6-by-lancelot/ (outside the repository)",
   "whole_graph_downstream_client": "base/theories/examples/matching_graphs.v",
-  "supplied_family_downstream_client": "packing-theory/theories/examples/supplied_matchings.v"
+  "supplied_family_downstream_client": "packing-theory/theories/examples/supplied_matchings.v",
+  "hypergraph_downstream_client": "hypergraph-theory/theories/examples/hyperedge_matchings.v"
 }
