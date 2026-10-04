@@ -58,6 +58,7 @@
    total_graph shadow it. We use mgraph for the raw edge/incident/edges_at/source/target API. *)
 From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
+From Chromatic.foundations Require Import strong_pair_palettes.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -114,17 +115,23 @@ Definition remove_edge (G : mgraph) (e : edge G) : mgraph := remove_edges [set e
     graph distance ≤ 1) — a strong colouring keeps NEAR distinct edges apart.
     ========================================================================== *)
 
+(** Since the D13 library migration (stage 1, 2026-10-04) a transparent alias of
+    [Chromatic.foundations.strong_pair_palettes.distinct_edge_pairs], the same body by conversion; the former body is
+    frozen in theories/migration/strong_pair_palettes.v. *)
 Definition diff_edge (G : sgraph) (x y u v : G) : bool :=
-  ~~ (((x == u) && (y == v)) || ((x == v) && (y == u))).
+  distinct_edge_pairs x y u v.
 
+(** Since the D13 library migration (stage 1, 2026-10-04) a transparent alias of
+    [Chromatic.foundations.strong_pair_palettes.near_edge_pairs], the same body by conversion; the former body is
+    frozen in theories/migration/strong_pair_palettes.v. *)
 Definition near_edge (G : sgraph) (x y u v : G) : bool :=
-  [|| x == u, x == v, y == u, y == v, x -- u, x -- v, y -- u | y -- v].
+  near_edge_pairs x y u v.
 
+(** Since the D13 library migration (stage 1, 2026-10-04) a transparent alias of
+    [Chromatic.foundations.strong_pair_palettes.strong_pair_colourable], the same body by conversion; the former body is
+    frozen in theories/migration/strong_pair_palettes.v. *)
 Definition strong_edge_colourable (G : sgraph) (k : nat) : Prop :=
-  exists col : G -> G -> 'I_k,
-    (forall x y : G, col x y = col y x) /\
-    (forall x y u v : G, x -- y -> u -- v ->
-        diff_edge x y u v -> near_edge x y u v -> col x y != col u v).
+  strong_pair_colourable G k.
 
 (** Corpus row: opg:strong_edge_colouring_conjecture
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/strong_edge_colouring_conjecture/
