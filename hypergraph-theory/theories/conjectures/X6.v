@@ -1,6 +1,7 @@
 (** * Hypergraph.conjectures.X6 -- v2 milestone X6, clean hypergraph rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypergraph_uniformity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local hypergraph vocabulary *****************************************)
 
 Definition x6_uniform (T : finType) (E : {set {set T}}) (r : nat) : Prop :=
-  forall e : {set T}, e \in E -> #|e| = r.
+  uniform_family E r.
 
 Definition x6_r_partite_uniform
     (T : finType) (r : nat) (part : T -> 'I_r) (E : {set {set T}}) : Prop :=

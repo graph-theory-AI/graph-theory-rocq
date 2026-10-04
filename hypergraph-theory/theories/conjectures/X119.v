@@ -1,6 +1,7 @@
 (** * Hypergraph.conjectures.X119 -- v2 3-uniform Ramsey tower row *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypergraph_uniformity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X119 vocabulary ***********************************************)
 
 Definition x119_uniform (T : finType) (E : {set {set T}}) (r : nat) : Prop :=
-  forall e : {set T}, e \in E -> #|e| = r.
+  uniform_family E r.
 
 (** No isolated vertices: every vertex of the ground type lies in some edge. *)
 Definition x119_no_isolated (T : finType) (E : {set {set T}}) : Prop :=

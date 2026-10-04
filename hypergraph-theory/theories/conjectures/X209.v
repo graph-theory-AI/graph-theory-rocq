@@ -1,6 +1,7 @@
 (** * Hypergraph.conjectures.X209 -- v2 hypergraph cut excess row *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypergraph_uniformity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X209 vocabulary ***********************************************)
 
 Definition x209_uniform (T : finType) (E : {set {set T}}) (k : nat) : Prop :=
-  forall e : {set T}, e \in E -> #|e| = k.
+  uniform_family E k.
 
 Definition x209_cut_edge
     (T : finType) (r : nat) (col : T -> 'I_r) (e : {set T}) : bool :=

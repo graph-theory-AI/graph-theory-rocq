@@ -58,6 +58,7 @@
    total_graph shadow it. We use mgraph for the raw edge/incident/edges_at/source/target API. *)
 From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
+From GTBase Require Import hypergraph_uniformity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -303,7 +304,7 @@ Record hypergraph := Hypergraph {
 
 (** [d]-uniformity: every edge has exactly d points. *)
 Definition uniform_hg (H : hypergraph) (d : nat) : Prop :=
-  forall e : he H, #|hinc e| = d.
+  uniform_incidence (@hinc H) d.
 (** Simplicity: distinct edges are distinct point sets. *)
 Definition simple_hg (H : hypergraph) : Prop := injective (@hinc H).
 (** Codegree ≤ r: every (d−1)-set lies in at most r edges. *)
