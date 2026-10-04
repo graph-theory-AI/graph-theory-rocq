@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py incidence_degree --details /tmp
 
 - Canonical: `GTBase.incidence.incidence_degree`.
 - Baseline: `a54026d37a8b40d53340be71be783ac5d5fe3635`.
-- Scope: 9 helpers, 10 statements, 33 frozen objects, 88 recorded references.
-- Source checks: 274/274 pass; consistent.
+- Scope: 9 helpers, 10 statements, 33 frozen objects, 96 recorded references.
+- Source checks: 275/275 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -28,4 +28,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Hypergraph.foundations.hypergraph.hg_restrict`, `Hypergraph.foundations.hypergraph.hg_skeleton`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/min_degree_at_least.v#X38Legacy.min_degree_spanning_subgraph_small_degree_multiplicity_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/min_degree_at_least.v#X38Legacy.min_degree_spanning_subgraph_small_degree_multiplicity_statement`, `extremal-graph-theory/theories/migration/cycle_lengths.v#X84EdgeLegacy.cycle_edge_set`.

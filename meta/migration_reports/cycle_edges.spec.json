@@ -90,7 +90,9 @@
     "",
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of every frozen row, chain and Original contains no live helper or chain of this family and none of the four canonicals; the Originals also reach no live B10 or C2 helper or canonical; every per-row copy reaches no live constant outside its live row's closure (so U2's own `hamiltonian_cycle` / `edge_set` and X211's GTBase.common `hamiltonian_cycle` resolve as in the sources); each live row reaches its canonical and its alias (/srv/graph-theory-rocq/coordination/evidence/B11-cycle_edges/print_all_dependencies_summary.txt).",
     "",
-    "Baseline 0a0203e is the announced B10 prose pin (B10 e1dc8dd plus its wording follow-up), not yet integrated; B11 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). The B4, B8 and B10 specs, which listed some of these helpers as untouched distinct variants, now record that B11 migrated them."
+    "Baseline 0a0203e is the announced B10 prose pin (B10 e1dc8dd plus its wording follow-up), not yet integrated; B11 is stacked on it as assigned. No statement text, doc block, manifest row or leg state changes (checked below). The B4, B8 and B10 specs, which listed some of these helpers as untouched distinct variants, now record that B11 migrated them.",
+    "",
+    "B29 (2026-10-04): the former distinct variant `Extremal.conjectures.X84.x84_cycle_edge_set` (\"a predicate on an edge set (connectivity, degree and cardinality constraints), not an extractor; untouched\") keeps that representation distinction from this family's sequence-to-edge extraction and was untouched by B11; since B29 it is a transparent alias of `Extremal.foundations.edge_cycles.edge_family_cycle`, owned by family cycle-lengths (class edge-family-cycles). This report checks every listed distinct variant against the B11 baseline text, which the alias changes, so the qualified note is kept here, as B11 recorded its own migrations in the B4, B8 and B10 specs."
   ],
   "frozen": [
     {
@@ -580,12 +582,6 @@
     }
   ],
   "distinct_variants": [
-    {
-      "qualified": "Extremal.conjectures.X84.x84_cycle_edge_set",
-      "path": "extremal-graph-theory/theories/conjectures/X84.v",
-      "name": "x84_cycle_edge_set",
-      "note": "a predicate on an edge set (connectivity, degree and cardinality constraints), not an extractor; untouched"
-    },
     {
       "qualified": "Digraph.conjectures.P9.cyc_arcs",
       "path": "digraph-theory/theories/conjectures/P9.v",

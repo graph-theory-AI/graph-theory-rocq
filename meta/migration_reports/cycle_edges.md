@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py cycle_edges --details /tmp/migr
 - Canonical: `GTBase.walks_paths.seq_cycle_edge_set`.
 - Baseline: `0a0203ee4e1ff00605e4cbfa89108dcbea0e812f`.
 - Scope: 8 helpers, 11 statements, 34 frozen objects, 84 recorded references.
-- Source checks: 333/333 pass; consistent.
+- Source checks: 332/332 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -27,6 +27,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py cycle_edges --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Extremal.conjectures.X84.x84_cycle_edge_set`, `Digraph.conjectures.P9.cyc_arcs`, `Cycle.conjectures.U6.cyc_pairs`.
+Excluded distinct variants: `Digraph.conjectures.P9.cyc_arcs`, `Cycle.conjectures.U6.cyc_pairs`.
 
 Prior snapshot limitations (explanations and replacement certificates in the inputs): `cycle-theory/theories/migration/genuine_cycle.v#X9Legacy.proper_edge_coloured_short_cycle_statement`, `cycle-theory/theories/migration/genuine_cycle.v#XE1Legacy.cycle_or_edge_piece`, `cycle-theory/theories/migration/genuine_cycle.v#XE2Legacy.erdos_641_statement`, `cycle-theory/theories/migration/perfect_matching.v#X24Legacy.one_factorization_long_rainbow_cycle_statement`.
