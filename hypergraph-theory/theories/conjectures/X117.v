@@ -31,7 +31,7 @@ Definition x117_edges (t : nat) : {set {set x117_vertex t}} :=
 
 Definition x117_image_edge
     (T : finType) (N : nat) (f : T -> 'I_N) (e : {set T}) : {set 'I_N} :=
-  [set y : 'I_N | [exists x : T, (x \in e) && (y == f x)]].
+  f @: e.
 
 Definition x117_monochromatic_copy
     (T : finType) (E : {set {set T}}) (N : nat)

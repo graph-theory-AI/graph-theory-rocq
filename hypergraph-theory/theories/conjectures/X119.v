@@ -20,7 +20,7 @@ Definition x119_no_isolated (T : finType) (E : {set {set T}}) : Prop :=
 
 Definition x119_image_edge
     (T : finType) (N : nat) (f : T -> 'I_N) (e : {set T}) : {set 'I_N} :=
-  [set y : 'I_N | [exists x : T, (x \in e) && (y == f x)]].
+  f @: e.
 
 Definition x119_monochromatic_copy
     (T : finType) (E : {set {set T}}) (N q : nat)

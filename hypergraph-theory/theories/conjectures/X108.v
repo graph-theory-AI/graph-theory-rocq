@@ -23,7 +23,7 @@ Definition x108_d_degenerate (T : finType) (E : {set {set T}}) (d : nat) : Prop 
 
 Definition x108_image_edge
     (T U : finType) (f : T -> U) (e : {set T}) : {set U} :=
-  [set y : U | [exists x : T, (x \in e) && (y == f x)]].
+  f @: e.
 
 Definition x108_monochromatic_copy
     (T : finType) (E : {set {set T}}) (N : nat)
