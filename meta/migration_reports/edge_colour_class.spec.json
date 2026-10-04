@@ -1,0 +1,428 @@
+{
+  "family": "edge-colour-class",
+  "canonical_name": "GTBase.edge_colourings.edge_colour_class",
+  "canonical_short_name": "edge_colour_class",
+  "relation": "Spanning colour class: GTBase.edge_colourings.edge_colour_class col p keeps the host carrier and exactly the edges whose colour satisfies p, for a total set map col : {set G} -> C (arbitrary eqType palette). The six X34/X212/X23 colour classes are the instances p := pred1 i with col : {set G} -> 'I_q: the adjacency is the same function by conversion, and the graphs (different opaque symmetry/irreflexivity proofs) are related by the identity isomorphism only.",
+  "baseline_commit": "2f37b10a711c81b9bfb6dcb1581ac2c527974baa",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "cycle-theory": "Cycle",
+    "topological-graph-theory": "Topological"
+  },
+  "certificate_files": [
+    "base/theories/edge_colourings.v",
+    "chromatic-theory/theories/migration/edge_colour_class.v",
+    "cycle-theory/theories/migration/edge_colour_class.v",
+    "topological-graph-theory/theories/migration/edge_colour_class.v",
+    "chromatic-theory/theories/migration/simple_edges.v"
+  ],
+  "extra_certificates": [
+    "GTBase.edge_colourings.edge_colour_class_sym",
+    "GTBase.edge_colourings.edge_colour_class_irrefl",
+    "GTBase.edge_colourings.edge_colour_classE",
+    "GTBase.edge_colourings.edges_edge_colour_class",
+    "GTBase.edge_colourings.edge_colour_class_eq_diso",
+    "GTBase.edge_colourings.edge_colour_class_eq_disoE",
+    "GTBase.edge_colourings.eq_edge_colour_class_rel",
+    "GTBase.edge_colourings.eq_edge_colour_class",
+    "GTBase.edge_colourings.card_edges_edge_colour_class_split",
+    "GTBase.edge_colourings.edge_colour_class_predT",
+    "GTBase.edge_colourings.edges_edge_colour_class_pred0",
+    "GTBase.edge_colourings.edges_edge_colour_class1",
+    "GTBase.edge_colourings.edges_edge_colour_class_const",
+    "Chromatic.migration.edge_colour_class.x34_colour_graph_diso",
+    "Chromatic.migration.edge_colour_class.x34_colour_graph_disoE",
+    "Cycle.migration.edge_colour_class.x212_colour_graph_diso",
+    "Cycle.migration.edge_colour_class.x212_colour_graph_disoE",
+    "Topological.migration.edge_colour_class.x23_colour_graph_diso",
+    "Topological.migration.edge_colour_class.x23_colour_graph_disoE"
+  ],
+  "downstream_client": "base/theories/examples/edge_colour_classes.v",
+  "summary": [
+    "D12 (first stage of the colour-class promotion) turns the six X34/X212/X23 helpers edge_colour_rel and colour_graph into aliases of GTBase.edge_colourings.edge_colour_class_rel col (pred1 i) and edge_colour_class col (pred1 i), the Extremal area colour-class contract promoted under distinct names; headers and implicit arguments unchanged, no guard.",
+    "Frozen at the D10 pin in <area>/theories/migration/edge_colour_class.v: the six sources and the six opaque symmetry/irreflexivity lemmas with their original scripts (relation renamed to Legacy), the linear-forest and linear-arboricity chains and the three rows; the six live lemmas keep their headers and are proved by the canonical lemmas. Graph certificates are adjacency equality, the identity isomorphism and its identity carrier map.",
+    "Four whole iff, kernel-checked: the three current rows by conversion (is_forest and Delta read only carrier and adjacency), and the complete X34 Original over M1's frozen raw edge set at 061154c (same colouring for the widened linear-forest colours and the ord_max matching, exact let q, planar / odd / 9 <= Delta guards with the documented 9-vs-7 defect kept). X212 and X23 keep the supplied colouring, attained minimum and universal minimality.",
+    "Extremal.foundations.edge_colourings.colour_class is the same contract; its public adapter, old C6 snapshots and history are the next stage of this family (pending_adapters), so the promotion is not complete."
+  ],
+  "kernel_evidence": "Exact types/implicit status of the six sources and six lemmas, the four whole iff, all old declarations against 2f37b10a, the 323 reverse headers of the 23-file closure, Print Assumptions, About-resolved strict closures (frozen/live/M1) and negatives, through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D12-by-lancelot/ (outside the repository)",
+  "pending_adapters": [
+    {
+      "qualified": "Extremal.foundations.edge_colourings.colour_class",
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "contract": "same contract (cc_rel col p = (x -- y) && p (col [set x; y]), eqType palette, colour predicate)",
+      "note": "Unchanged in this stage; its transparent public adapter, with the old C6 snapshots and its row history, is the next scoped stage of this family under the same owner. Not a distinct canonical."
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_linear_arboricity_at_most",
+      "note": "Proof consumer x212_linear_arboricity_at_most0 (no colouring into 'I_0: the powerset domain is inhabited); its statement and script are unchanged and compile over the aliased colour class, which it never unfolds."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_linear_arboricity",
+      "note": "Proof consumer x212_linear_arboricity_gt0 (the encoded minimum is positive), through x212_linear_arboricity_at_most0; statement and script unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "linear_arboricity_regular_statement",
+      "note": "Axiom audit only (Print Assumptions of the unchanged bm-016 row); no proof depends on the colour class."
+    }
+  ],
+  "distinct_variants": [],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X34.x34_edge_colour_rel",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_edge_colour_rel",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x34_edge_colour_rel",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.edge_colour_class.x34_edge_colour_rel_compat",
+      "live_unfolds_to": "GTBase.edge_colourings.edge_colour_class_rel col (pred1 i)"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X34.x34_colour_graph",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_colour_graph",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x34_colour_graph",
+      "substitutions": {
+        "x34_edge_colour_sym": "Legacy.x34_edge_colour_sym",
+        "x34_edge_colour_irrefl": "Legacy.x34_edge_colour_irrefl"
+      },
+      "certificate": "Chromatic.migration.edge_colour_class.x34_colour_graph_compat",
+      "live_unfolds_to": "GTBase.edge_colourings.edge_colour_class col (pred1 i)"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X34.x34_edge_colour_sym",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_edge_colour_sym",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x34_edge_colour_sym",
+      "substitutions": {
+        "x34_edge_colour_rel": "Legacy.x34_edge_colour_rel"
+      },
+      "certificate": "Chromatic.migration.edge_colour_class.x34_colour_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X34.x34_edge_colour_irrefl",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_edge_colour_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x34_edge_colour_irrefl",
+      "substitutions": {
+        "x34_edge_colour_rel": "Legacy.x34_edge_colour_rel"
+      },
+      "certificate": "Chromatic.migration.edge_colour_class.x34_colour_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X34.x34_linear_forest_colour",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_linear_forest_colour",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X34Legacy.linear_forest_colour",
+      "substitutions": {
+        "x34_linear_forest_colour": "linear_forest_colour",
+        "x34_colour_graph": "Legacy.x34_colour_graph"
+      },
+      "certificate": "Chromatic.migration.edge_colour_class.x34_linear_forest_colour_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X34.x34_linear_forests_and_matching",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_linear_forests_and_matching",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X34Legacy.linear_forests_and_matching",
+      "substitutions": {
+        "x34_linear_forests_and_matching": "linear_forests_and_matching",
+        "x34_linear_forest_colour": "linear_forest_colour"
+      },
+      "certificate": "Chromatic.migration.edge_colour_class.x34_linear_forests_and_matching_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X34.planar_odd_degree_linear_forests_plus_matching_statement",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "planar_odd_degree_linear_forests_plus_matching_statement",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X34Legacy.planar_odd_degree_linear_forests_plus_matching_statement",
+      "substitutions": {
+        "x34_linear_forests_and_matching": "linear_forests_and_matching"
+      },
+      "certificate": "Chromatic.migration.edge_colour_class.planar_odd_degree_linear_forests_plus_matching_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X34.x34_edge_set",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_edge_set",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.exists_edge_set",
+      "substitutions": {
+        "x34_edge_set": "exists_edge_set"
+      },
+      "certificate": "Chromatic.migration.simple_edges.x34_edge_set_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "note": "M1's frozen raw X34 edge set (the X34 text at 061154c, M1's parent), borrowed for the complete X34 Original; M1 froze no X34 row."
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X34.x34_matching_colour",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_matching_colour",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X34Original.matching_colour",
+      "substitutions": {
+        "x34_matching_colour": "matching_colour",
+        "x34_edge_set": "simple_edges.Legacy.exists_edge_set"
+      },
+      "certificate": "Chromatic.migration.edge_colour_class.x34_matching_colour_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "binding_note": "Bound to 061154c, M1's parent: the X34 row before M1 and D12; every other declaration of its closure is unchanged since, so the D12 Legacy colour graph is reused."
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X34.x34_linear_forests_and_matching",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "x34_linear_forests_and_matching",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X34Original.linear_forests_and_matching",
+      "substitutions": {
+        "x34_linear_forests_and_matching": "linear_forests_and_matching",
+        "x34_linear_forest_colour": "X34Legacy.linear_forest_colour",
+        "x34_matching_colour": "matching_colour"
+      },
+      "certificate": "Chromatic.migration.edge_colour_class.x34_linear_forests_and_matching_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "binding_note": "Bound to 061154c, M1's parent: the X34 row before M1 and D12; every other declaration of its closure is unchanged since, so the D12 Legacy colour graph is reused."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X34.planar_odd_degree_linear_forests_plus_matching_statement",
+      "path": "chromatic-theory/theories/conjectures/X34.v",
+      "name": "planar_odd_degree_linear_forests_plus_matching_statement",
+      "frozen_path": "chromatic-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X34Original.planar_odd_degree_linear_forests_plus_matching_statement",
+      "substitutions": {
+        "x34_linear_forests_and_matching": "linear_forests_and_matching"
+      },
+      "certificate": "Chromatic.migration.edge_colour_class.planar_odd_degree_linear_forests_plus_matching_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "corpus": "v2",
+      "binding_note": "Bound to 061154c, M1's parent: the X34 row before M1 and D12; every other declaration of its closure is unchanged since, so the D12 Legacy colour graph is reused."
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X212.x212_edge_colour_rel",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_edge_colour_rel",
+      "frozen_path": "cycle-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x212_edge_colour_rel",
+      "substitutions": {},
+      "certificate": "Cycle.migration.edge_colour_class.x212_edge_colour_rel_compat",
+      "live_unfolds_to": "GTBase.edge_colourings.edge_colour_class_rel col (pred1 i)"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X212.x212_colour_graph",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_colour_graph",
+      "frozen_path": "cycle-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x212_colour_graph",
+      "substitutions": {
+        "x212_edge_colour_sym": "Legacy.x212_edge_colour_sym",
+        "x212_edge_colour_irrefl": "Legacy.x212_edge_colour_irrefl"
+      },
+      "certificate": "Cycle.migration.edge_colour_class.x212_colour_graph_compat",
+      "live_unfolds_to": "GTBase.edge_colourings.edge_colour_class col (pred1 i)"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X212.x212_edge_colour_sym",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_edge_colour_sym",
+      "frozen_path": "cycle-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x212_edge_colour_sym",
+      "substitutions": {
+        "x212_edge_colour_rel": "Legacy.x212_edge_colour_rel"
+      },
+      "certificate": "Cycle.migration.edge_colour_class.x212_colour_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X212.x212_edge_colour_irrefl",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_edge_colour_irrefl",
+      "frozen_path": "cycle-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x212_edge_colour_irrefl",
+      "substitutions": {
+        "x212_edge_colour_rel": "Legacy.x212_edge_colour_rel"
+      },
+      "certificate": "Cycle.migration.edge_colour_class.x212_colour_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X212.x212_linear_forest_colour",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_linear_forest_colour",
+      "frozen_path": "cycle-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X212Legacy.linear_forest_colour",
+      "substitutions": {
+        "x212_linear_forest_colour": "linear_forest_colour",
+        "x212_colour_graph": "Legacy.x212_colour_graph"
+      },
+      "certificate": "Cycle.migration.edge_colour_class.x212_linear_forest_colour_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X212.x212_linear_arboricity_at_most",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_linear_arboricity_at_most",
+      "frozen_path": "cycle-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X212Legacy.linear_arboricity_at_most",
+      "substitutions": {
+        "x212_linear_arboricity_at_most": "linear_arboricity_at_most",
+        "x212_linear_forest_colour": "linear_forest_colour"
+      },
+      "certificate": "Cycle.migration.edge_colour_class.x212_linear_arboricity_at_most_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X212.x212_linear_arboricity",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_linear_arboricity",
+      "frozen_path": "cycle-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X212Legacy.linear_arboricity",
+      "substitutions": {
+        "x212_linear_arboricity": "linear_arboricity",
+        "x212_linear_arboricity_at_most": "linear_arboricity_at_most"
+      },
+      "certificate": "Cycle.migration.edge_colour_class.x212_linear_arboricity_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X212.linear_arboricity_regular_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "linear_arboricity_regular_statement",
+      "frozen_path": "cycle-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X212Legacy.linear_arboricity_regular_statement",
+      "substitutions": {
+        "x212_linear_arboricity": "linear_arboricity"
+      },
+      "certificate": "Cycle.migration.edge_colour_class.linear_arboricity_regular_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Topological.conjectures.X23.x23_edge_colour_rel",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_edge_colour_rel",
+      "frozen_path": "topological-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x23_edge_colour_rel",
+      "substitutions": {},
+      "certificate": "Topological.migration.edge_colour_class.x23_edge_colour_rel_compat",
+      "live_unfolds_to": "GTBase.edge_colourings.edge_colour_class_rel col (pred1 i)"
+    },
+    {
+      "kind": "source",
+      "qualified": "Topological.conjectures.X23.x23_colour_graph",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_colour_graph",
+      "frozen_path": "topological-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x23_colour_graph",
+      "substitutions": {
+        "x23_edge_colour_sym": "Legacy.x23_edge_colour_sym",
+        "x23_edge_colour_irrefl": "Legacy.x23_edge_colour_irrefl"
+      },
+      "certificate": "Topological.migration.edge_colour_class.x23_colour_graph_compat",
+      "live_unfolds_to": "GTBase.edge_colourings.edge_colour_class col (pred1 i)"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Topological.conjectures.X23.x23_edge_colour_sym",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_edge_colour_sym",
+      "frozen_path": "topological-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x23_edge_colour_sym",
+      "substitutions": {
+        "x23_edge_colour_rel": "Legacy.x23_edge_colour_rel"
+      },
+      "certificate": "Topological.migration.edge_colour_class.x23_colour_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Topological.conjectures.X23.x23_edge_colour_irrefl",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_edge_colour_irrefl",
+      "frozen_path": "topological-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.x23_edge_colour_irrefl",
+      "substitutions": {
+        "x23_edge_colour_rel": "Legacy.x23_edge_colour_rel"
+      },
+      "certificate": "Topological.migration.edge_colour_class.x23_colour_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Topological.conjectures.X23.x23_linear_forest_colour",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_linear_forest_colour",
+      "frozen_path": "topological-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X23Legacy.linear_forest_colour",
+      "substitutions": {
+        "x23_linear_forest_colour": "linear_forest_colour",
+        "x23_colour_graph": "Legacy.x23_colour_graph"
+      },
+      "certificate": "Topological.migration.edge_colour_class.x23_linear_forest_colour_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Topological.conjectures.X23.x23_linear_arboricity_at_most",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_linear_arboricity_at_most",
+      "frozen_path": "topological-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X23Legacy.linear_arboricity_at_most",
+      "substitutions": {
+        "x23_linear_arboricity_at_most": "linear_arboricity_at_most",
+        "x23_linear_forest_colour": "linear_forest_colour"
+      },
+      "certificate": "Topological.migration.edge_colour_class.x23_linear_arboricity_at_most_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Topological.conjectures.X23.x23_linear_arboricity",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "x23_linear_arboricity",
+      "frozen_path": "topological-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X23Legacy.linear_arboricity",
+      "substitutions": {
+        "x23_linear_arboricity": "linear_arboricity",
+        "x23_linear_arboricity_at_most": "linear_arboricity_at_most"
+      },
+      "certificate": "Topological.migration.edge_colour_class.x23_linear_arboricity_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Topological.conjectures.X23.planar_linear_arboricity_statement",
+      "path": "topological-graph-theory/theories/conjectures/X23.v",
+      "name": "planar_linear_arboricity_statement",
+      "frozen_path": "topological-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X23Legacy.planar_linear_arboricity_statement",
+      "substitutions": {
+        "x23_linear_arboricity": "linear_arboricity"
+      },
+      "certificate": "Topological.migration.edge_colour_class.planar_linear_arboricity_statement_compat",
+      "corpus": "v2"
+    }
+  ]
+}

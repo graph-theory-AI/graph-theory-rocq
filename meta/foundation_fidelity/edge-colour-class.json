@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "family": "edge-colour-class",
+  "modules": {
+    "GTBase.edge_colourings": {
+      "path": "base/theories/edge_colourings.v",
+      "overrides": {
+        "edge_colour_class": {
+          "verdict": "FAITHFUL",
+          "note": "Spanning subgraph of the host keeping exactly the edges whose colour under a total set map {set G} -> C (arbitrary eqType palette) satisfies a colour predicate; one colour is pred1 c. Vertex type of the host (isolated vertices stay); edge set [set e in E(G) | p (col e)], split by p and predC p; predT gives the host, pred0 no edge; values off E(G) are irrelevant; a same-carrier copy of the adjacency is isomorphic through the identity; no map into an empty palette."
+        },
+        "edge_colour_class_rel": {
+          "verdict": "FAITHFUL",
+          "note": "The adjacency of edge_colour_class: (x -- y) && p (col [set x; y]), symmetric because [set x; y] = [set y; x] and irreflexive because the host is."
+        }
+      },
+      "machine_evidence": [
+        "edge_colour_class_sym",
+        "edge_colour_class_irrefl",
+        "edge_colour_classE",
+        "edges_edge_colour_class",
+        "edge_colour_class_eq_diso",
+        "edge_colour_class_eq_disoE",
+        "eq_edge_colour_class_rel",
+        "eq_edge_colour_class",
+        "card_edges_edge_colour_class_split",
+        "edge_colour_class_predT",
+        "edges_edge_colour_class_pred0",
+        "edges_edge_colour_class1",
+        "edges_edge_colour_class_const"
+      ]
+    }
+  }
+}
