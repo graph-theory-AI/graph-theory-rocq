@@ -345,7 +345,7 @@ Qed.
 Lemma petersen_triangle_free (a b c : petersenV) :
   padj a b -> padj b c -> padj a c -> False.
 Proof.
-rewrite /padj => hab hbc hac.
+rewrite /padj /GTBase.petersen.kneser52_adj => hab hbc hac.
 have ca : #|val a| = 2 by apply/eqP; exact: valP a.
 have cb : #|val b| = 2 by apply/eqP; exact: valP b.
 have cc : #|val c| = 2 by apply/eqP; exact: valP c.

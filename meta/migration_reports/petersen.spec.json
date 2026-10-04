@@ -1,0 +1,426 @@
+{
+  "family": "petersen",
+  "canonical_name": "GTBase.petersen.petersen_ord",
+  "canonical_short_name": "petersen_ord",
+  "relation": "the Petersen graph in two named views kept on their own carriers: Cycle D1 pedges/pconn/padj/petersen (the literal ordered table of fifteen natural pairs, the natural relation, false outside 0..9 and on equal ends, the ordinal relation on 'I_10 and its SGraph) equal GTBase.petersen.petersen_edge_table, petersen_conn and petersen_ord_adj by conversion, and the graph agrees pointwise with petersen_ord with the identity isomorphism; Cycle U10 petersenV/padj/petersen (the exact cardinality-two subtype of {set 'I_5}, disjointness, its SGraph) are kneser52V and kneser52_adj by conversion, the graph agreeing pointwise with petersen_kneser and by the identity isomorphism. The four constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. The views are related by the explicit isomorphism petersen_ord_kneser_diso (the labelling table of grounding_D1, now public); isomorphism is not equality of carriers. U10's Pedge/psupp/Padj stay convertible.",
+  "baseline_commit": "ba3c7488b171091c9121dd8ea0ab2f73c3d294bf",
+  "namespaces": {
+    "base": "GTBase",
+    "cycle-theory": "Cycle"
+  },
+  "certificate_files": [
+    "base/theories/petersen.v",
+    "cycle-theory/theories/migration/petersen.v",
+    "cycle-theory/theories/migration/mregular.v"
+  ],
+  "extra_certificates": [
+    "GTBase.petersen.petersen_ord_adj_sym",
+    "GTBase.petersen.petersen_ord_adj_irrefl",
+    "GTBase.petersen.petersen_ord_edgeE",
+    "GTBase.petersen.petersen_connC",
+    "GTBase.petersen.petersen_conn_out",
+    "GTBase.petersen.petersen_conn_refl",
+    "GTBase.petersen.kneser52_adj_sym",
+    "GTBase.petersen.kneser52_adj_irrefl",
+    "GTBase.petersen.petersen_kneser_edgeE",
+    "GTBase.petersen.card_kneser52V",
+    "GTBase.petersen.petersen_label_card2",
+    "GTBase.petersen.val_petersen_kmap",
+    "GTBase.petersen.disjoint_set2",
+    "GTBase.petersen.petersen_kmap_adj",
+    "GTBase.petersen.petersen_label_inj_bool",
+    "GTBase.petersen.petersen_kmap_inj",
+    "GTBase.petersen.codom_petersen_kmap",
+    "GTBase.petersen.petersen_kmapK",
+    "GTBase.petersen.petersen_kinvK",
+    "GTBase.petersen.petersen_ord_kneser_diso",
+    "Cycle.migration.petersen.d1_petersen_diso",
+    "Cycle.migration.petersen.u10_petersen_diso"
+  ],
+  "summary": [
+    "Batch A, family A24 (Petersen graph), on the fixed A23 pin ba3c748 (no private union). New GTBase.petersen names two views: petersen_ord (D1's literal edge table, natural relation and ordinal graph on 'I_10) and petersen_kneser (the exact two-subset carrier kneser52V of 'I_5 with disjointness), with the explicit isomorphism petersen_ord_kneser_diso built from grounding_D1's labelling table, now public; grounding_D1 keeps every old name and type as a wrapper. D1's four and U10's three sources now unfold to these views; the four constructor proofs are one-line uses of the public ones. The public client covers ten vertices in both views, literal edges and non-edges, the natural relation's range and loop facts, Kneser pairs, the inverse labelling and the isomorphism.",
+    "",
+    "Frozen verbatim at ba3c748: the seven sources, the four constructor proofs with their scripts, U10's Pedge, psupp and Padj, and the three complete current Props (D1 4-flow, U10 Petersen colouring, and the explicitly non-corpus BF-cover hypothesis of implications_U10, which stays an explicit hypothesis). One complete A13+A24 colouring row at A13's 58f2862 over the frozen edge interface and A13's frozen cubic_bridgeless: four whole iffs, twenty mappings. Positive edge/vertex counts, undirected bridgeless, the multigraph minor, flows, Pedge orientations and statuses are unchanged.",
+    "",
+    "Proof consumers: grounding_D1 (one unfold and the isomorphism wrappers), grounding_U10 (three unfolds) and implications_U6 (one unfold) adapt explicitly with unchanged headers; implications_D1/U10, X184, X228 and their clients, mregular and Atlas implications_A1 recompile unchanged."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.D1.pedges",
+      "path": "cycle-theory/theories/conjectures/D1.v",
+      "name": "pedges",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "D1Legacy.pedges",
+      "substitutions": {},
+      "certificate": "Cycle.migration.petersen.pedges_compat",
+      "live_unfolds_to": "petersen_edge_table"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.D1.pconn",
+      "path": "cycle-theory/theories/conjectures/D1.v",
+      "name": "pconn",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "D1Legacy.pconn",
+      "substitutions": {
+        "pedges": "D1Legacy.pedges"
+      },
+      "certificate": "Cycle.migration.petersen.pconn_compat",
+      "live_unfolds_to": "petersen_conn a b"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.D1.padj",
+      "path": "cycle-theory/theories/conjectures/D1.v",
+      "name": "padj",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "D1Legacy.padj",
+      "substitutions": {
+        "pconn": "D1Legacy.pconn"
+      },
+      "certificate": "Cycle.migration.petersen.d1_padj_compat",
+      "live_unfolds_to": "petersen_ord_adj x y"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.D1.padj_sym",
+      "path": "cycle-theory/theories/conjectures/D1.v",
+      "name": "padj_sym",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "D1Legacy.padj_sym",
+      "substitutions": {
+        "padj": "D1Legacy.padj",
+        "pconn": "D1Legacy.pconn"
+      },
+      "certificate": "Cycle.migration.petersen.d1_padj_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.D1.padj_irrefl",
+      "path": "cycle-theory/theories/conjectures/D1.v",
+      "name": "padj_irrefl",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "D1Legacy.padj_irrefl",
+      "substitutions": {
+        "padj": "D1Legacy.padj"
+      },
+      "certificate": "Cycle.migration.petersen.d1_padj_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.D1.petersen",
+      "path": "cycle-theory/theories/conjectures/D1.v",
+      "name": "petersen",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "D1Legacy.petersen",
+      "substitutions": {
+        "padj_sym": "D1Legacy.padj_sym",
+        "padj_irrefl": "D1Legacy.padj_irrefl"
+      },
+      "certificate": "Cycle.migration.petersen.d1_petersen_compat",
+      "live_unfolds_to": "petersen_ord"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.D1.four_flow_statement",
+      "path": "cycle-theory/theories/conjectures/D1.v",
+      "name": "four_flow_statement",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "D1Legacy.four_flow_statement",
+      "substitutions": {
+        "petersen": "D1Legacy.petersen"
+      },
+      "certificate": "Cycle.migration.petersen.four_flow_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.U10.petersenV",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "petersenV",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Legacy.petersenV",
+      "substitutions": {},
+      "certificate": "Cycle.migration.petersen.petersenV_compat",
+      "live_unfolds_to": "kneser52V"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.U10.padj",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "padj",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Legacy.padj",
+      "substitutions": {
+        "petersenV": "U10Legacy.petersenV"
+      },
+      "certificate": "Cycle.migration.petersen.u10_padj_compat",
+      "live_unfolds_to": "kneser52_adj x y"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.U10.padj_sym",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "padj_sym",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Legacy.padj_sym",
+      "substitutions": {
+        "padj": "U10Legacy.padj"
+      },
+      "certificate": "Cycle.migration.petersen.u10_padj_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.U10.padj_irrefl",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "padj_irrefl",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Legacy.padj_irrefl",
+      "substitutions": {
+        "padj": "U10Legacy.padj"
+      },
+      "certificate": "Cycle.migration.petersen.u10_padj_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.U10.petersen",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "petersen",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Legacy.petersen",
+      "substitutions": {
+        "padj_sym": "U10Legacy.padj_sym",
+        "padj_irrefl": "U10Legacy.padj_irrefl"
+      },
+      "certificate": "Cycle.migration.petersen.u10_petersen_compat",
+      "live_unfolds_to": "petersen_kneser"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.U10.Pedge",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "Pedge",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Legacy.Pedge",
+      "substitutions": {
+        "petersenV": "U10Legacy.petersenV",
+        "padj": "U10Legacy.padj"
+      },
+      "certificate": "Cycle.migration.petersen.Pedge_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.U10.psupp",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "psupp",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Legacy.psupp",
+      "substitutions": {
+        "Pedge": "U10Legacy.Pedge",
+        "petersenV": "U10Legacy.petersenV"
+      },
+      "certificate": "Cycle.migration.petersen.psupp_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.U10.Padj",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "Padj",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Legacy.Padj",
+      "substitutions": {
+        "Pedge": "U10Legacy.Pedge",
+        "psupp": "U10Legacy.psupp"
+      },
+      "certificate": "Cycle.migration.petersen.Padj_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.U10.petersen_coloring_statement",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "petersen_coloring_statement",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Legacy.petersen_coloring_statement",
+      "substitutions": {
+        "Pedge": "U10Legacy.Pedge",
+        "Padj": "U10Legacy.Padj"
+      },
+      "certificate": "Cycle.migration.petersen.petersen_coloring_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.implications_U10.external_petersen_BF_cover_statement",
+      "path": "cycle-theory/theories/conjectures/implications_U10.v",
+      "name": "external_petersen_BF_cover_statement",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "ImplicationsU10Legacy.external_petersen_BF_cover_statement",
+      "substitutions": {
+        "Pedge": "U10Legacy.Pedge",
+        "Padj": "U10Legacy.Padj"
+      },
+      "certificate": "Cycle.migration.petersen.external_petersen_BF_cover_statement_compat",
+      "non_corpus": true
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.U10.petersen_coloring_statement",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "petersen_coloring_statement",
+      "frozen_path": "cycle-theory/theories/migration/petersen.v",
+      "frozen": "U10Original.petersen_coloring_statement",
+      "substitutions": {
+        "Pedge": "U10Legacy.Pedge",
+        "Padj": "U10Legacy.Padj",
+        "cubic_bridgeless": "A13.U10Legacy.cubic_bridgeless"
+      },
+      "certificate": "Cycle.migration.petersen.petersen_coloring_statement_original_compat",
+      "commit": "58f2862aa45b932cebb4cc59401a6b16f5d0c82a"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.U6.cubic",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "cubic",
+      "commit": "58f2862aa45b932cebb4cc59401a6b16f5d0c82a",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "Legacy.cubic",
+      "substitutions": {},
+      "certificate": "Cycle.migration.mregular.cubic_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.U10.cubic_bridgeless",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "cubic_bridgeless",
+      "commit": "58f2862aa45b932cebb4cc59401a6b16f5d0c82a",
+      "frozen_path": "cycle-theory/theories/migration/mregular.v",
+      "frozen": "U10Legacy.cubic_bridgeless",
+      "substitutions": {
+        "cubic": "Legacy.cubic"
+      },
+      "certificate": "Cycle.migration.mregular.cubic_bridgeless_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "cycle-theory/theories/migration/mregular.v#U10Legacy.petersen_coloring_statement": "A13 per-row snapshot: A13 froze the colouring row over its own frozen cubic_bridgeless (loopless degree-three cubic) but kept the live Pedge and Padj (after A24 the edge interface over GTBase.petersen's Kneser view, convertible to the frozen one). Kept unchanged; the complete row is Cycle.migration.petersen.U10Original.petersen_coloring_statement, certified by petersen_coloring_statement_original_compat, which reuses this A13 row certificate."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "base/theories/examples/petersen.v",
+      "name": "petersen",
+      "note": "Lexical match only: the Require line names the module GTBase.petersen; the public client uses no corpus declaration."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_D1.v",
+      "name": "padj",
+      "note": "Proof consumer: sedge_petersen_ne adapts one unfold to the public relation (/petersen_ord_adj /petersen_conn); the labelling block (klabel, kmap, kinv, kmap_adj, kmapK, kinvK, petersen_diso and the rest) keeps every name and type as thin wrappers of GTBase.petersen; the Require line names the module GTBase.petersen."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_D1.v",
+      "name": "petersen",
+      "note": "Proof consumer: sedge_petersen_ne adapts one unfold to the public relation (/petersen_ord_adj /petersen_conn); the labelling block (klabel, kmap, kinv, kmap_adj, kmapK, kinvK, petersen_diso and the rest) keeps every name and type as thin wrappers of GTBase.petersen; the Require line names the module GTBase.petersen."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_D1.v",
+      "name": "petersenV",
+      "note": "Proof consumer: sedge_petersen_ne adapts one unfold to the public relation (/petersen_ord_adj /petersen_conn); the labelling block (klabel, kmap, kinv, kmap_adj, kmapK, kinvK, petersen_diso and the rest) keeps every name and type as thin wrappers of GTBase.petersen; the Require line names the module GTBase.petersen."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U10.v",
+      "name": "Padj",
+      "note": "Proof consumers: pj_01_23, pj_01_24 and pj_01_34 add one unfold (/GTBase.petersen.kneser52_adj); the other Kneser, Pedge, psupp and Padj witnesses and identities are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U10.v",
+      "name": "Pedge",
+      "note": "Proof consumers: pj_01_23, pj_01_24 and pj_01_34 add one unfold (/GTBase.petersen.kneser52_adj); the other Kneser, Pedge, psupp and Padj witnesses and identities are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U10.v",
+      "name": "padj",
+      "note": "Proof consumers: pj_01_23, pj_01_24 and pj_01_34 add one unfold (/GTBase.petersen.kneser52_adj); the other Kneser, Pedge, psupp and Padj witnesses and identities are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U10.v",
+      "name": "padj_irrefl",
+      "note": "Proof consumers: pj_01_23, pj_01_24 and pj_01_34 add one unfold (/GTBase.petersen.kneser52_adj); the other Kneser, Pedge, psupp and Padj witnesses and identities are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U10.v",
+      "name": "petersen",
+      "note": "Proof consumers: pj_01_23, pj_01_24 and pj_01_34 add one unfold (/GTBase.petersen.kneser52_adj); the other Kneser, Pedge, psupp and Padj witnesses and identities are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U10.v",
+      "name": "petersenV",
+      "note": "Proof consumers: pj_01_23, pj_01_24 and pj_01_34 add one unfold (/GTBase.petersen.kneser52_adj); the other Kneser, Pedge, psupp and Padj witnesses and identities are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_U10.v",
+      "name": "psupp",
+      "note": "Proof consumers: pj_01_23, pj_01_24 and pj_01_34 add one unfold (/GTBase.petersen.kneser52_adj); the other Kneser, Pedge, psupp and Padj witnesses and identities are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U10.v",
+      "name": "Padj",
+      "note": "External hypothesis and proof consumer: external_petersen_BF_cover_statement (frozen as ImplicationsU10Legacy, explicitly non-corpus) stays an explicit hypothesis; petersen_coloring_implies_berge_fulkerson keeps its type and proof."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U10.v",
+      "name": "Pedge",
+      "note": "External hypothesis and proof consumer: external_petersen_BF_cover_statement (frozen as ImplicationsU10Legacy, explicitly non-corpus) stays an explicit hypothesis; petersen_coloring_implies_berge_fulkerson keeps its type and proof."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U10.v",
+      "name": "petersen_coloring_statement",
+      "note": "External hypothesis and proof consumer: external_petersen_BF_cover_statement (frozen as ImplicationsU10Legacy, explicitly non-corpus) stays an explicit hypothesis; petersen_coloring_implies_berge_fulkerson keeps its type and proof."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "Padj",
+      "note": "Proof consumers: petersen_triangle_free adds one unfold (/GTBase.petersen.kneser52_adj); the claw, finite-code and pull-back proofs and the conditional Petersen to (5,2)-cover to CDC chain are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "Pedge",
+      "note": "Proof consumers: petersen_triangle_free adds one unfold (/GTBase.petersen.kneser52_adj); the claw, finite-code and pull-back proofs and the conditional Petersen to (5,2)-cover to CDC chain are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "padj",
+      "note": "Proof consumers: petersen_triangle_free adds one unfold (/GTBase.petersen.kneser52_adj); the claw, finite-code and pull-back proofs and the conditional Petersen to (5,2)-cover to CDC chain are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "padj_irrefl",
+      "note": "Proof consumers: petersen_triangle_free adds one unfold (/GTBase.petersen.kneser52_adj); the claw, finite-code and pull-back proofs and the conditional Petersen to (5,2)-cover to CDC chain are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "padj_sym",
+      "note": "Proof consumers: petersen_triangle_free adds one unfold (/GTBase.petersen.kneser52_adj); the claw, finite-code and pull-back proofs and the conditional Petersen to (5,2)-cover to CDC chain are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "petersen",
+      "note": "Proof consumers: petersen_triangle_free adds one unfold (/GTBase.petersen.kneser52_adj); the claw, finite-code and pull-back proofs and the conditional Petersen to (5,2)-cover to CDC chain are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "petersenV",
+      "note": "Proof consumers: petersen_triangle_free adds one unfold (/GTBase.petersen.kneser52_adj); the claw, finite-code and pull-back proofs and the conditional Petersen to (5,2)-cover to CDC chain are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "petersen_coloring_statement",
+      "note": "Proof consumers: petersen_triangle_free adds one unfold (/GTBase.petersen.kneser52_adj); the claw, finite-code and pull-back proofs and the conditional Petersen to (5,2)-cover to CDC chain are unchanged; all types unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/implications_U6.v",
+      "name": "psupp",
+      "note": "Proof consumers: petersen_triangle_free adds one unfold (/GTBase.petersen.kneser52_adj); the claw, finite-code and pull-back proofs and the conditional Petersen to (5,2)-cover to CDC chain are unchanged; all types unchanged."
+    }
+  ],
+  "distinct_variants": [],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types of the frozen and live objects (sources, constructor proofs, edge interface, rows), strict dependency closures of the frozen objects with closure parity against the baseline, and the types of every declaration in the reverse dependency closure of D1 and U10 at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A24-petersen/ (outside the repository)"
+}

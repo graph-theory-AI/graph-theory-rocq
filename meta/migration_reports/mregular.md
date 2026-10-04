@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py mregular --details /tmp/migrati
 
 - Canonical: `GTBase.base.mregular`.
 - Baseline: `58f2862aa45b932cebb4cc59401a6b16f5d0c82a`.
-- Scope: 3 helpers, 11 statements, 16 frozen objects, 64 recorded references.
-- Source checks: 190/190 pass; consistent.
+- Scope: 3 helpers, 11 statements, 16 frozen objects, 67 recorded references.
+- Source checks: 191/191 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -29,4 +29,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `GTBase.base.regular`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `cycle-theory/theories/migration/spanning_trees.v#U6Legacy.three_decomposition_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `cycle-theory/theories/migration/spanning_trees.v#U6Legacy.three_decomposition_statement`, `cycle-theory/theories/migration/petersen.v#U10Legacy.petersen_coloring_statement`.
