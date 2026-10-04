@@ -1,7 +1,7 @@
 (** * Packing.conjectures.XE1 -- Erdos open clean/bounded rows *)
 
 From GTBase Require Export base.
-From GTBase Require Import induced_cycles.
+From GTBase Require Import induced_cycles chordal.
 From GTBase Require Import maximal_cliques.
 
 Set Implicit Arguments.
@@ -56,8 +56,11 @@ Definition xe1_edge_disjoint_tree_packing
     equivalent in theories/migration/induced_cycles.v. *)
 Definition xe1_induced_cycle (G : sgraph) (c : seq G) : Prop := chordless_cycle c.
 
-Definition xe1_chordal (G : sgraph) : Prop :=
-  forall c : seq G, xe1_induced_cycle c -> size c <= 3.
+(** Since the B25 library migration (2026-10-03) a transparent alias of
+    [GTBase.chordal.chordal_by_cycles] (the same body by conversion: [xe1_induced_cycle] is B23's
+    alias of [chordless_cycle]); the original body is frozen and certified in
+    theories/migration/chordal.v. *)
+Definition xe1_chordal (G : sgraph) : Prop := chordal_by_cycles G.
 
 Definition xe1_clique_edge_set (G : sgraph) (K : {set G}) : {set {set G}} :=
   [set e in xe1_edge_set G | e \subset K].

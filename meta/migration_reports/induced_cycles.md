@@ -6,7 +6,7 @@ Full evidence: `python3 meta/migration_report.py induced_cycles --details /tmp/m
 
 - Canonical: `GTBase.induced_cycles.chordless_cycle`.
 - Baseline: `7d8cc47829b045a122d6f6421ddc2d928dd9675a`.
-- Scope: 7 helpers, 14 statements, 44 frozen objects, 157 recorded references.
+- Scope: 7 helpers, 14 statements, 44 frozen objects, 160 recorded references.
 - Source checks: 438/438 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
@@ -30,6 +30,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py induced_cycles --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Extremal.conjectures.X49.x49_has_induced_cycle`, `Extremal.conjectures.X60.x60_has_induced_cycle`, `GTMisc.conjectures.X29.x29_has_induced_cycle`, `Extremal.conjectures.X115.x115_odd_induced_cycle`, `Chromatic.conjectures.X161.x161_has_four_hole`, `GTMisc.conjectures.X169.x169_chordal`.
+Excluded distinct variants: `Extremal.conjectures.X49.x49_has_induced_cycle`, `Extremal.conjectures.X60.x60_has_induced_cycle`, `GTMisc.conjectures.X29.x29_has_induced_cycle`, `Extremal.conjectures.X115.x115_odd_induced_cycle`, `Chromatic.conjectures.X161.x161_has_four_hole`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/proper_colouring.v#X3Legacy.rainbow_consecutive_vertices_in_hole_statement`, `graph-theory-misc/theories/migration/consecutive_in_path.v#X91Legacy.avoidable_path`, `graph-theory-misc/theories/migration/induced_paths.v#X91Legacy.x91_avoidable_path`, `minor-theory/theories/migration/bag_decompositions.v#Legacy.bounded_degree_even_hole_free_bounded_treewidth_statement`, `minor-theory/theories/migration/bag_decompositions.v#Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement`, `minor-theory/theories/migration/induced_free.v#X42Legacy.statement`, `minor-theory/theories/migration/model_support.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement`, `graph-theory-misc/theories/migration/monochromatic.v#U13Legacy.two_colouring_a_graph_without_a_monochromatic_maximu_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/proper_colouring.v#X3Legacy.rainbow_consecutive_vertices_in_hole_statement`, `graph-theory-misc/theories/migration/consecutive_in_path.v#X91Legacy.avoidable_path`, `graph-theory-misc/theories/migration/induced_paths.v#X91Legacy.x91_avoidable_path`, `minor-theory/theories/migration/bag_decompositions.v#Legacy.bounded_degree_even_hole_free_bounded_treewidth_statement`, `minor-theory/theories/migration/bag_decompositions.v#Legacy.even_hole_k4_diamond_free_bounded_treewidth_statement`, `minor-theory/theories/migration/induced_free.v#X42Legacy.statement`, `minor-theory/theories/migration/model_support.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement`, `graph-theory-misc/theories/migration/monochromatic.v#U13Legacy.two_colouring_a_graph_without_a_monochromatic_maximu_statement`, `packing-theory/theories/migration/chordal.v#Legacy.xe1_chordal`.

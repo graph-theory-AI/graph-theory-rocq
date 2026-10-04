@@ -40325,7 +40325,6 @@
       "body_shape_hash": "afda09454e7a36608194a26c0c674e5307583118e7deb0a8ae8be9e9e5be82a6",
       "declaration_hash": "a9cb6f477bed7bca09a0e0ee243f67380c2fafdd17a274d995f658a19a8f159b",
       "direct_consumers": [
-        "GTMisc.conjectures.X169.x169_chordal",
         "GTMisc.conjectures.X169.x169_clique_tree_degree_at_most"
       ],
       "kind": "Definition",
@@ -40343,17 +40342,15 @@
       "signature_shape_hash": "0490cac0f9b2e55de55b8a63515bdabd2826dba6eeeb963be9e8b40102b60788"
     },
     {
-      "body_hash": "37d9f2e77c9bb9a1ace19fe0ce406fd98bfbef572186369f5f68a593c264d73f",
-      "body_shape_hash": "c133383c59e1a2bb0394812b878c91a70c6578f57eb1129b30b23a9ef2b0bbb7",
-      "declaration_hash": "dba950de8b94310f66beedc45a3bb0f417834dce07be86ec0a7c0a782c117989",
+      "body_hash": "d6e627b1ba542ed1f3708389baa3b5473667eb699171ae03f86b1a2ff7414a3a",
+      "body_shape_hash": "d6e627b1ba542ed1f3708389baa3b5473667eb699171ae03f86b1a2ff7414a3a",
+      "declaration_hash": "e78690662a93ef9ad8b3591e461f455950e204f1192205c71630d8f572621f64",
       "direct_consumers": [
         "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity"
       ],
       "kind": "Definition",
       "line": 18,
-      "local_dependencies": [
-        "x169_clique_tree"
-      ],
+      "local_dependencies": [],
       "name": "x169_chordal",
       "normalized_name": "chordal",
       "package": "graph-theory-misc",
@@ -40371,7 +40368,7 @@
         "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity"
       ],
       "kind": "Definition",
-      "line": 21,
+      "line": 24,
       "local_dependencies": [
         "x169_clique_tree"
       ],
@@ -40392,7 +40389,7 @@
         "GTMisc.conjectures.X169.x169_token_sliding_connected"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 28,
       "local_dependencies": [],
       "name": "x169_stable_set",
       "normalized_name": "stable_set",
@@ -40411,7 +40408,7 @@
         "GTMisc.conjectures.X169.x169_token_sliding_connected"
       ],
       "kind": "Definition",
-      "line": 28,
+      "line": 31,
       "local_dependencies": [],
       "name": "x169_ts_step",
       "normalized_name": "ts_step",
@@ -40430,7 +40427,7 @@
         "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity"
       ],
       "kind": "Definition",
-      "line": 35,
+      "line": 38,
       "local_dependencies": [
         "x169_stable_set",
         "x169_ts_step"
@@ -40452,7 +40449,7 @@
         "GTMisc.conjectures.X169.token_sliding_chordal_clique_tree_degree_polytime_statement"
       ],
       "kind": "Definition",
-      "line": 41,
+      "line": 44,
       "local_dependencies": [
         "x169_chordal",
         "x169_clique_tree_degree_at_most",
@@ -53595,9 +53592,7 @@
       "body_hash": "abe99d5187ba14c1c70c078dda13a0f7af9be3feb6830adde77d20c8fd741046",
       "body_shape_hash": "abe99d5187ba14c1c70c078dda13a0f7af9be3feb6830adde77d20c8fd741046",
       "declaration_hash": "77a75fe7e67be4db2127c5879aa04719d731b663ffd857073fdda0618dd94ee4",
-      "direct_consumers": [
-        "Packing.conjectures.XE1.xe1_chordal"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 52,
       "local_dependencies": [],
@@ -53611,17 +53606,15 @@
       "signature_shape_hash": "2822852a42f4ef35e23fd0b6ec9b46d7e23cb7a9253f009ad02e6caf850972b9"
     },
     {
-      "body_hash": "9b5305b6d386a8c8371e405cb335830a022c12bd960b6c821322eba025be65ed",
-      "body_shape_hash": "6e2eacfe6fa7299a8cb91d8f92af3d369949112da89973caea4ad3b3caca96dd",
-      "declaration_hash": "9060e34165da5aca75c3affee64070a7fc0e4a40716e0dc9814b6aa37ff2ca43",
+      "body_hash": "a25afa34c72488018466340ac570cc726703495f3055b9d4afe7acb57b26f176",
+      "body_shape_hash": "a25afa34c72488018466340ac570cc726703495f3055b9d4afe7acb57b26f176",
+      "declaration_hash": "b4d2286470b79b7485cf38d793b6dfeeeb80735a7ab182fb5579bc5f0b23f0f3",
       "direct_consumers": [
         "Packing.conjectures.XE1.erdos_81_statement"
       ],
       "kind": "Definition",
       "line": 58,
-      "local_dependencies": [
-        "xe1_induced_cycle"
-      ],
+      "local_dependencies": [],
       "name": "xe1_chordal",
       "normalized_name": "chordal",
       "package": "packing-theory",
@@ -53639,7 +53632,7 @@
         "Packing.conjectures.XE1.xe1_clique_edge_partition"
       ],
       "kind": "Definition",
-      "line": 61,
+      "line": 64,
       "local_dependencies": [
         "xe1_edge_set"
       ],
@@ -53660,7 +53653,7 @@
         "Packing.conjectures.XE1.erdos_81_statement"
       ],
       "kind": "Definition",
-      "line": 64,
+      "line": 67,
       "local_dependencies": [
         "xe1_clique_edge_set",
         "xe1_edge_set"
@@ -53682,7 +53675,7 @@
         "Packing.conjectures.XE1.xe1_unimodal_independent_sequence"
       ],
       "kind": "Definition",
-      "line": 72,
+      "line": 75,
       "local_dependencies": [],
       "name": "xe1_independent_set_count",
       "normalized_name": "independent_set_count",
@@ -53701,7 +53694,7 @@
         "Packing.conjectures.XE1.erdos_993_statement"
       ],
       "kind": "Definition",
-      "line": 75,
+      "line": 78,
       "local_dependencies": [
         "xe1_independent_set_count"
       ],
