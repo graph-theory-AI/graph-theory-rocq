@@ -186,7 +186,7 @@ Lemma x108_monochromatic_copy_compat (T : finType) (E : {set {set T}}) (N : nat)
   @Hypergraph.conjectures.X108.x108_monochromatic_copy T E N col.
 Proof.
 split=> -[c [f [fi H]]]; exists c, f; split=> // e eE.
-  by rewrite -x108_image_edge_compat; exact: H.
+  by move: (H e eE); rewrite x108_image_edge_compat.
 by rewrite x108_image_edge_compat; exact: H.
 Qed.
 
@@ -196,7 +196,7 @@ Lemma x117_monochromatic_copy_compat (T : finType) (E : {set {set T}}) (N : nat)
   @Hypergraph.conjectures.X117.x117_monochromatic_copy T E N col.
 Proof.
 split=> -[c [f [fi H]]]; exists c, f; split=> // e eE.
-  by rewrite -x117_image_edge_compat; exact: H.
+  by move: (H e eE); rewrite x117_image_edge_compat.
 by rewrite x117_image_edge_compat; exact: H.
 Qed.
 
@@ -206,7 +206,7 @@ Lemma x119_monochromatic_copy_compat (T : finType) (E : {set {set T}}) (N q : na
   @Hypergraph.conjectures.X119.x119_monochromatic_copy T E N q col.
 Proof.
 split=> -[c [f [fi H]]]; exists c, f; split=> // e eE.
-  by rewrite -x119_image_edge_compat; exact: H.
+  by move: (H e eE); rewrite x119_image_edge_compat.
 by rewrite x119_image_edge_compat; exact: H.
 Qed.
 

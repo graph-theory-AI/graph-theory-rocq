@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "family": "monochromatic-copy",
+  "modules": {
+    "Hypergraph.foundations.hypergraph_copies": {
+      "path": "hypergraph-theory/theories/foundations/hypergraph_copies.v",
+      "overrides": {
+        "hg_mono_copy": {
+          "verdict": "FAITHFUL",
+          "note": "One colour and one injection of the whole pattern carrier send every member to a host set of that colour, for a colouring of all host subsets; equal to hg_containsb in one colour class (hg_mono_copyP). No uniformity, nonemptiness, palette-size or no-isolated guard."
+        }
+      },
+      "machine_evidence": [
+        "hg_mono_copy0",
+        "hg_mono_copy_card",
+        "hg_mono_copyS",
+        "hg_mono_copy_const",
+        "hg_mono_copy_map",
+        "hg_mono_copy_mapK",
+        "hg_mono_copyP"
+      ]
+    }
+  }
+}

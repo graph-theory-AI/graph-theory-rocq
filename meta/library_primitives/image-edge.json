@@ -14,7 +14,7 @@
       "Hypergraph.conjectures.X117.x117_image_edge",
       "Hypergraph.conjectures.X119.x119_image_edge"
     ],
-    "consumers_remaining": 3,
+    "consumers_remaining": 0,
     "relation": "Image of a supplied finite set: for f : T -> U between finite types and e : {set T}, the set of f x for x in e, MathComp's f @: e (imset, the HB-locked imset.body). The corpus bounded-existential body [set y | [exists x, (x \\in e) && (y == f x)]] equals it by a proved set equality (GTBase.set_images.imset_existsE), not by conversion. X117/X119 are its ordinal-codomain instances. No injectivity, nonempty set or carrier, positive host order or no-isolated guard; the copy predicates keep their own injection guard, and the cardinality equality needs injectivity. Packing XE1 xe1_image_edges (a whole host edge family) and the necklace image_set are separate representations; copy/forcing/Ramsey ownership is not migrated here.",
     "semantic_classes": {
       "finite-codomain": {
