@@ -8,20 +8,22 @@
     "fidelity": "FAITHFUL",
     "normalized_names": [
       "matching",
-      "is_matching_edges"
+      "is_matching_edges",
+      "hg_matching"
     ],
     "source_definitions": [
       "Digraph.conjectures.path_fas.matching",
       "Extremal.conjectures.X180.x180_matching",
       "GTMisc.conjectures.X14.x14_matching",
+      "Hypergraph.conjectures.U12.hg_matching",
       "Hypergraph.conjectures.X6.x6_matching",
       "Packing.conjectures.U9.is_matching_edges",
       "Packing.conjectures.X15.x15_matching",
       "Packing.conjectures.X15alone.x15_matching"
     ],
-    "consumers_remaining": 15,
+    "consumers_remaining": 16,
     "relation": "logical-equivalence (frozen local body <-> upstream matching), per statement",
-    "migration_notes": "C1 (2026-10-02, lancelot): of the six name-matched definitions only the compiled simple-graph edge-family subgroup X14 (misc), X15 (packing, with its X18 chain consumer) and X180 (extremal) is migrated: each local helper is now the transparent alias `matching M` of upstream GraphTheory.connectivity.matching, the statement texts are unchanged, and every affected statement has its own frozen-chain certificate. The three other sources are classified and deferred, not migrated: X15alone (excluded from the build, identical body to X15), X6 (hypergraph subfamily, identical body to U12.hg_matching, belongs to the hypergraph foundation) and digraph path_fas.matching (a predicate on a whole graph). Perfect matchings, edge partitions and edge families are separate families (frozen here only as chain dependencies). Follow-up (after the A1 merge 03742d1): certificates re-laid out in A1's convention (Legacy for the migrated helpers and the pre-M1 edge sets, one XnnLegacy module per phase with Legacy.-qualified references and prefix-stripped chain names), report converged onto the generic meta/migration_report.py spec, public downstream client added; theorem names, statement texts and statuses unchanged.",
+    "migration_notes": "Historical (C1, 2026-10-02; the deferred path_fas class was completed by C24 and the hypergraph X6/U12 class by D6, see migration_notes_c24 and migration_notes_d6): C1 (2026-10-02, lancelot): of the six name-matched definitions only the compiled simple-graph edge-family subgroup X14 (misc), X15 (packing, with its X18 chain consumer) and X180 (extremal) is migrated: each local helper is now the transparent alias `matching M` of upstream GraphTheory.connectivity.matching, the statement texts are unchanged, and every affected statement has its own frozen-chain certificate. The three other sources are classified and deferred, not migrated: X15alone (excluded from the build, identical body to X15), X6 (hypergraph subfamily, identical body to U12.hg_matching, belongs to the hypergraph foundation) and digraph path_fas.matching (a predicate on a whole graph). Perfect matchings, edge partitions and edge families are separate families (frozen here only as chain dependencies). Follow-up (after the A1 merge 03742d1): certificates re-laid out in A1's convention (Legacy for the migrated helpers and the pre-M1 edge sets, one XnnLegacy module per phase with Legacy.-qualified references and prefix-stripped chain names), report converged onto the generic meta/migration_report.py spec, public downstream client added; theorem names, statement texts and statuses unchanged.",
     "semantic_classes": {
       "simple-graph-edge-family": {
         "members": [
@@ -54,13 +56,35 @@
       },
       "hypergraph-edge-family": {
         "members": [
+          "Hypergraph.conjectures.U12.hg_matching",
           "Hypergraph.conjectures.X6.x6_matching"
         ],
-        "count": 1,
-        "verdict": "distinct representation",
-        "state": "deferred",
-        "note": "subfamily of an arbitrary hyperedge family on a finType (M E : {set {set T}}), identical body to Hypergraph.conjectures.U12.hg_matching (body hash 78f1f021…); target: the hypergraph foundation (batch D) together with hg_matching",
-        "certificates": []
+        "count": 2,
+        "verdict": "equivalent (same term) via the public area canonical Hypergraph.foundations.hypergraph_matchings.hg_matching",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.matching.hg_matching_compat",
+          "Hypergraph.migration.matching.x6_matching_compat"
+        ],
+        "canonical": "Hypergraph.foundations.hypergraph_matchings.hg_matching",
+        "canonical_relation": "hg_matching M E := M \\subset E /\\ {in M &, forall e f, e != f -> [disjoint e & f]} for arbitrary hyperedge families on a finType: the unchanged body of both sources. The disjointness clause is exactly MathComp trivIset (hg_matchingP via trivIsetP). Not the upstream simple-graph matching, which needs genuine graph edges E(G), nor MathComp partition, which also forbids set0 and requires a covering.",
+        "public_client": "hypergraph-theory/theories/examples/hyperedge_matchings.v",
+        "migration_record": "meta/LIBRARY_MIGRATION_D6.md",
+        "review": "Separate D6 binding: this class needs its own independent step-10 review (someone other than the implementer, lancelot) and the root whole-statement check of its five current and five complete Original iff; the C1 review facts (arthur, 23ee661) and the C24/C25 class reviews do not cover it.",
+        "upstream_audit": {
+          "searched_modules": [
+            "mathcomp.boot.finset",
+            "GraphTheory.connectivity",
+            "GTBase.common",
+            "Packing.foundations.matching",
+            "Infinite.conjectures.D4inf4"
+          ],
+          "result": "new-area-primitive",
+          "candidate": "mathcomp.boot.finset.trivIset",
+          "note": "No upstream or repository definition of a matching of an arbitrary hyperedge family. MathComp trivIset reflects exactly the disjoint-distinct-members clause and is reused for the Boolean view; partition adds coverage and forbids set0; GraphTheory.connectivity.matching needs genuine simple-graph edges; the Infinite hmatching quantifies Type-labelled incidences. No second-area consumer, so the canonical stays in Hypergraph (not promoted to GTBase).",
+          "audited_at": "2026-10-03"
+        },
+        "note": "Subfamily of an arbitrary hyperedge family on a finType (M E : {set {set T}}) whose distinct members are pairwise disjoint. No uniformity, positivity, nonempty-edge, covering, maximality or simplicity premise: the empty hyperedge may be a member (with an empty carrier [set set0] is a matching of size one of [set set0]); the empty family is a matching of every E and the only one of the empty E."
       },
       "whole-graph-predicate": {
         "members": [
@@ -367,6 +391,48 @@
         "legacy": "Packing.migration.matching.U9MatchingLegacy.is_matching_edges",
         "theorem": "Packing.migration.matching.is_matching_edges_compat",
         "kind": "migrated helper (C25 supplied edge family)"
+      },
+      {
+        "source": "Hypergraph.conjectures.U12.hg_matching",
+        "legacy": "Hypergraph.migration.matching.Legacy.hg_matching",
+        "theorem": "Hypergraph.migration.matching.hg_matching_compat",
+        "kind": "migrated helper (D6 hypergraph edge family)"
+      },
+      {
+        "source": "Hypergraph.conjectures.X6.x6_matching",
+        "legacy": "Hypergraph.migration.matching.Legacy.x6_matching",
+        "theorem": "Hypergraph.migration.matching.x6_matching_compat",
+        "kind": "migrated helper (D6 hypergraph edge family)"
+      },
+      {
+        "source": "Hypergraph.conjectures.U12.is_matching_number",
+        "legacy": "Hypergraph.migration.matching.U12MatchingLegacy.is_matching_number",
+        "theorem": "Hypergraph.migration.matching.is_matching_number_compat",
+        "kind": "chain (D6)"
+      },
+      {
+        "source": "Hypergraph.conjectures.X6.x6_matching_number",
+        "legacy": "Hypergraph.migration.matching.X6MatchingLegacy.x6_matching_number",
+        "theorem": "Hypergraph.migration.matching.x6_matching_number_compat",
+        "kind": "chain (D6)"
+      },
+      {
+        "source": "Hypergraph.conjectures.X6.x6_no_k_matching",
+        "legacy": "Hypergraph.migration.matching.X6MatchingLegacy.x6_no_k_matching",
+        "theorem": "Hypergraph.migration.matching.x6_no_k_matching_compat",
+        "kind": "chain (D6)"
+      },
+      {
+        "source": "Hypergraph.conjectures.X6.x6_extremal_no_k_matching",
+        "legacy": "Hypergraph.migration.matching.X6MatchingLegacy.x6_extremal_no_k_matching",
+        "theorem": "Hypergraph.migration.matching.x6_extremal_no_k_matching_compat",
+        "kind": "chain (D6)"
+      },
+      {
+        "source": "Hypergraph.conjectures.X6.x6_extremal_no_k_matching",
+        "legacy": "Hypergraph.migration.matching.X6MatchingOriginal.x6_extremal_no_k_matching",
+        "theorem": "Hypergraph.migration.matching.x6_extremal_no_k_matching_original_compat",
+        "kind": "complete original chain (D6, D1's raw x6_uniform)"
       }
     ],
     "statement_certificates": [
@@ -456,6 +522,76 @@
         "theorem": "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat",
         "row": "opg:matchings_extends_to_hamilton_cycles_in_hypercubes",
         "status": "complete B11+C25 Original (frozen matching and B11 Legacy.cycle_edgesG); open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.U12.rysers_statement",
+        "legacy": "Hypergraph.migration.matching.U12MatchingLegacy.rysers_statement",
+        "theorem": "Hypergraph.migration.matching.rysers_statement_compat",
+        "row": "opg:rysers_conjecture",
+        "status": "open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.X6.lovasz_r_partite_matching_deletion_statement",
+        "legacy": "Hypergraph.migration.matching.X6MatchingLegacy.lovasz_r_partite_matching_deletion_statement",
+        "theorem": "Hypergraph.migration.matching.lovasz_r_partite_matching_deletion_statement_compat",
+        "row": "studies:std_lov_sz_conjecture_on_r_partite_hypergraph_matchi",
+        "status": "open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.X6.r_partite_matching_deletion_tradeoff_statement",
+        "legacy": "Hypergraph.migration.matching.X6MatchingLegacy.r_partite_matching_deletion_tradeoff_statement",
+        "theorem": "Hypergraph.migration.matching.r_partite_matching_deletion_tradeoff_statement_compat",
+        "row": "arxiv:2505.05339#02",
+        "status": "open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.X6.erdos_matching_extremal_formula_statement",
+        "legacy": "Hypergraph.migration.matching.X6MatchingLegacy.erdos_matching_extremal_formula_statement",
+        "theorem": "Hypergraph.migration.matching.erdos_matching_extremal_formula_statement_compat",
+        "row": "erdos:1020",
+        "status": "open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+        "legacy": "Hypergraph.migration.matching.X73MatchingLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement",
+        "theorem": "Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_compat",
+        "row": "studies:std_aharoni_charbit_howard_conjecture_on_matchings_i",
+        "status": "open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.U12.rysers_statement",
+        "legacy": "Hypergraph.migration.matching.U12MatchingOriginal.rysers_statement",
+        "theorem": "Hypergraph.migration.matching.rysers_statement_original_compat",
+        "row": "opg:rysers_conjecture",
+        "status": "complete D6 Original (D2's raw PartiteLegacy.r_partite_uniform, frozen D6 matching chain); open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.X6.lovasz_r_partite_matching_deletion_statement",
+        "legacy": "Hypergraph.migration.matching.X6MatchingOriginal.lovasz_r_partite_matching_deletion_statement",
+        "theorem": "Hypergraph.migration.matching.lovasz_r_partite_matching_deletion_statement_original_compat",
+        "row": "studies:std_lov_sz_conjecture_on_r_partite_hypergraph_matchi",
+        "status": "complete D6 Original (D2's raw PartiteLegacy.x6_r_partite_uniform, frozen D6 matching chain); open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.X6.r_partite_matching_deletion_tradeoff_statement",
+        "legacy": "Hypergraph.migration.matching.X6MatchingOriginal.r_partite_matching_deletion_tradeoff_statement",
+        "theorem": "Hypergraph.migration.matching.r_partite_matching_deletion_tradeoff_statement_original_compat",
+        "row": "arxiv:2505.05339#02",
+        "status": "complete D6 Original (D2's raw PartiteLegacy.x6_r_partite_uniform, frozen D6 matching chain); open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.X6.erdos_matching_extremal_formula_statement",
+        "legacy": "Hypergraph.migration.matching.X6MatchingOriginal.erdos_matching_extremal_formula_statement",
+        "theorem": "Hypergraph.migration.matching.erdos_matching_extremal_formula_statement_original_compat",
+        "row": "erdos:1020",
+        "status": "complete D6 Original (the original extremal chain over D1's raw UniformLegacy.x6_uniform, frozen D6 matching chain); open; unchanged"
+      },
+      {
+        "statement": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+        "legacy": "Hypergraph.migration.matching.X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement",
+        "theorem": "Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat",
+        "row": "studies:std_aharoni_charbit_howard_conjecture_on_matchings_i",
+        "status": "complete D6 Original (D2's raw PartiteLegacy.x6_r_partite_uniform and A10's actual X73Legacy.hyperdegree_regular, frozen D6 matching chain); open; unchanged"
       }
     ],
     "compatibility_theorems": [
@@ -485,7 +621,24 @@
       "Digraph.migration.matching.matchingFAS_iff_dw1_statement_compat",
       "Packing.migration.matching.is_matching_edges_compat",
       "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat",
-      "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat"
+      "Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_original_compat",
+      "Hypergraph.migration.matching.hg_matching_compat",
+      "Hypergraph.migration.matching.x6_matching_compat",
+      "Hypergraph.migration.matching.is_matching_number_compat",
+      "Hypergraph.migration.matching.x6_matching_number_compat",
+      "Hypergraph.migration.matching.x6_no_k_matching_compat",
+      "Hypergraph.migration.matching.x6_extremal_no_k_matching_compat",
+      "Hypergraph.migration.matching.rysers_statement_compat",
+      "Hypergraph.migration.matching.lovasz_r_partite_matching_deletion_statement_compat",
+      "Hypergraph.migration.matching.r_partite_matching_deletion_tradeoff_statement_compat",
+      "Hypergraph.migration.matching.erdos_matching_extremal_formula_statement_compat",
+      "Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_compat",
+      "Hypergraph.migration.matching.x6_extremal_no_k_matching_original_compat",
+      "Hypergraph.migration.matching.rysers_statement_original_compat",
+      "Hypergraph.migration.matching.lovasz_r_partite_matching_deletion_statement_original_compat",
+      "Hypergraph.migration.matching.r_partite_matching_deletion_tradeoff_statement_original_compat",
+      "Hypergraph.migration.matching.erdos_matching_extremal_formula_statement_original_compat",
+      "Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat"
     ],
     "api_theorems": [
       "Packing.foundations.matching.matching_subset",
@@ -510,7 +663,18 @@
       "GTBase.matching_graphs.deg_le1_irred",
       "GTBase.matching_graphs.deg_le1_forest",
       "GTBase.matching_graphs.matching_graph_forest",
-      "GTBase.matching_graphs.matching_graph_forestP"
+      "GTBase.matching_graphs.matching_graph_forestP",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matchingP",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matching_sub",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matching_trivIset",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matching_card",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matching0",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matching_set0E",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matching1",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matchingS",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matching_ambient",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matching_overlap",
+      "Hypergraph.foundations.hypergraph_matchings.hg_matching_set0U"
     ],
     "upstream_audit": {
       "searched_modules": [
@@ -533,7 +697,8 @@
     "reviewed_commit": "23ee661548f0f31878e31de20add0ede2bc0e076",
     "independent_review": "meta/migration_reviews/matching.md",
     "foundation_fidelity": "meta/foundation_fidelity/matching.json",
-    "migration_notes_c24": "C24 (2026-10-03, lancelot): the deferred whole-graph-predicate class is completed in this shard. Digraph.conjectures.path_fas.matching now unfolds to the public GTBase.matching_graphs.matching_graph G (upstream matching of E(G)); its raw forest-and-degree body, the has_matchingFAS chain and the non-corpus matchingFAS_iff_dw1_statement are frozen at the C23 pin in Digraph.migration.matching. The C1 baseline, its 20 frozen mappings, 9 statements and review facts are unchanged; the hypergraph and X15alone classes stay deferred/excluded.",
-    "migration_notes_c25": "C25 (2026-10-03, lancelot): Packing.conjectures.U9.is_matching_edges now unfolds to the upstream matching M of the supplied family. Its raw body and the whole OPG U9 hypercube row are frozen in Packing.migration.matching (U9MatchingLegacy), and the complete B11+C25 Original (U9MatchingOriginal) combines the frozen matching with B11 Legacy.cycle_edgesG, same M, c and 2 <= d. All earlier C1/C24 entries are unchanged."
+    "migration_notes_c24": "Historical (C24, 2026-10-03; the hypergraph class was later completed by D6): C24 (2026-10-03, lancelot): the deferred whole-graph-predicate class is completed in this shard. Digraph.conjectures.path_fas.matching now unfolds to the public GTBase.matching_graphs.matching_graph G (upstream matching of E(G)); its raw forest-and-degree body, the has_matchingFAS chain and the non-corpus matchingFAS_iff_dw1_statement are frozen at the C23 pin in Digraph.migration.matching. The C1 baseline, its 20 frozen mappings, 9 statements and review facts are unchanged; the hypergraph and X15alone classes stay deferred/excluded.",
+    "migration_notes_c25": "C25 (2026-10-03, lancelot): Packing.conjectures.U9.is_matching_edges now unfolds to the upstream matching M of the supplied family. Its raw body and the whole OPG U9 hypercube row are frozen in Packing.migration.matching (U9MatchingLegacy), and the complete B11+C25 Original (U9MatchingOriginal) combines the frozen matching with B11 Legacy.cycle_edgesG, same M, c and 2 <= d. All earlier C1/C24 entries are unchanged.",
+    "migration_notes_d6": "D6 (2026-10-03, lancelot): the deferred hypergraph-edge-family class is completed in this shard, the last compiled class of this registry. Hypergraph.conjectures.U12.hg_matching (new normalized name hg_matching) and Hypergraph.conjectures.X6.x6_matching (identical bodies) now unfold to the public area canonical Hypergraph.foundations.hypergraph_matchings.hg_matching M E, same finite carrier, M before E. Their raw bodies, the four matching-number/no-k/extremal chains, the five complete current rows, the complete original extremal chain and five complete Originals are frozen at the D5 pin in Hypergraph.migration.matching; the Originals reuse the actual raw D2 partite, D1 x6_uniform and A10 X73 regularity constants. All C1/C24/C25 entries, reviews and arrays are unchanged; X15alone stays excluded. Matching numbers, perfect/induced/multigraph matchings, matching cuts and the Infinite hmatching remain separate families."
   }
 }
