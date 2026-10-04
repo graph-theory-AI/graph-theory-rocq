@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "family": "matching",
+  "modules": {
+    "GTBase.matching_graphs": {
+      "path": "base/theories/matching_graphs.v",
+      "overrides": {
+        "matching_graph": {
+          "verdict": "FAITHFUL",
+          "note": "Upstream GraphTheory.connectivity.matching specialized to the whole edge set E(G): two edges of G sharing a vertex are equal. Proved equivalent to every vertex having at most one neighbour and to a forest of maximum degree at most one; no connectedness, nonemptiness or perfectness guard."
+        }
+      },
+      "machine_evidence": [
+        "matching_graphE",
+        "edge_at_vertex",
+        "matching_graph_uniq_nb",
+        "matching_graph_deg",
+        "deg_matching_graph",
+        "matching_graph_degP",
+        "deg_le1_irred",
+        "deg_le1_forest",
+        "matching_graph_forest",
+        "matching_graph_forestP"
+      ]
+    }
+  }
+}

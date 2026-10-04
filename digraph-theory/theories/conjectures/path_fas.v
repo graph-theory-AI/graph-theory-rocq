@@ -44,6 +44,7 @@ From HB Require Import structures.
 From mathcomp Require Import all_boot all_fingroup all_algebra.
 From Digraph Require Import prelude interop_graph_theory digraph oriented dipath.
 From Digraph Require Import tournament order.
+From GTBase Require Import matching_graphs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -172,9 +173,14 @@ Definition pathFAS_iff_LFO_statement : Prop :=
 (** [has_matchingFAS T]: a feedback arc set whose underlying simple graph is a
     *matching* — a forest of maximum degree ≤ 1 (no two arcs of [F] share a
     vertex).  (A matching is in particular a linear forest, so matching-FAS ⟹
-    path-FAS.) *)
-Definition matching (G : sgraph) : Prop :=
-  is_forest [set: G] /\ (forall x : G, sdeg x <= 1).
+    path-FAS.)  [matching G] is the public whole-graph view
+    [GTBase.matching_graphs.matching_graph G], i.e. the whole edge set E(G) is an upstream
+    [matching]; [matchingP] below reads it back as the forest-and-degree conjunction. *)
+Definition matching (G : sgraph) : Prop := matching_graph G.
+
+Lemma matchingP (G : sgraph) :
+  matching G <-> is_forest [set: G] /\ (forall x : G, sdeg x <= 1).
+Proof. exact: matching_graph_forestP. Qed.
 
 Definition has_matchingFAS (T : tournament) : Prop :=
   exists F : {set T * T}, is_FAS F /\ matching (farc_graph F).

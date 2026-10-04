@@ -17,7 +17,7 @@
       "Packing.conjectures.X15.x15_matching",
       "Packing.conjectures.X15alone.x15_matching"
     ],
-    "consumers_remaining": 13,
+    "consumers_remaining": 14,
     "relation": "logical-equivalence (frozen local body <-> upstream matching), per statement",
     "migration_notes": "C1 (2026-10-02, lancelot): of the six name-matched definitions only the compiled simple-graph edge-family subgroup X14 (misc), X15 (packing, with its X18 chain consumer) and X180 (extremal) is migrated: each local helper is now the transparent alias `matching M` of upstream GraphTheory.connectivity.matching, the statement texts are unchanged, and every affected statement has its own frozen-chain certificate. The three other sources are classified and deferred, not migrated: X15alone (excluded from the build, identical body to X15), X6 (hypergraph subfamily, identical body to U12.hg_matching, belongs to the hypergraph foundation) and digraph path_fas.matching (a predicate on a whole graph). Perfect matchings, edge partitions and edge families are separate families (frozen here only as chain dependencies). Follow-up (after the A1 merge 03742d1): certificates re-laid out in A1's convention (Legacy for the migrated helpers and the pre-M1 edge sets, one XnnLegacy module per phase with Legacy.-qualified references and prefix-stripped chain names), report converged onto the generic meta/migration_report.py spec, public downstream client added; theorem names, statement texts and statuses unchanged.",
     "semantic_classes": {
@@ -42,7 +42,7 @@
           "Packing.conjectures.X15alone.x15_matching"
         ],
         "count": 1,
-        "verdict": "identical body to Packing.conjectures.X15.x15_matching (body hash 57564193…)",
+        "verdict": "identical body to Packing.conjectures.X15.x15_matching (body hash 57564193\u2026)",
         "state": "deferred-excluded",
         "note": "self-contained scratch variant absent from packing-theory/_CoqProject; it carries a documented stronger statement constant (c <= 32 (m+1)^3) under the corpus name; neither added to the build, retargeted, nor repaired",
         "certificates": []
@@ -54,7 +54,7 @@
         "count": 1,
         "verdict": "distinct representation",
         "state": "deferred",
-        "note": "subfamily of an arbitrary hyperedge family on a finType (M E : {set {set T}}), identical body to Hypergraph.conjectures.U12.hg_matching (body hash 78f1f021…); target: the hypergraph foundation (batch D) together with hg_matching",
+        "note": "subfamily of an arbitrary hyperedge family on a finType (M E : {set {set T}}), identical body to Hypergraph.conjectures.U12.hg_matching (body hash 78f1f021\u2026); target: the hypergraph foundation (batch D) together with hg_matching",
         "certificates": []
       },
       "whole-graph-predicate": {
@@ -62,10 +62,20 @@
           "Digraph.conjectures.path_fas.matching"
         ],
         "count": 1,
-        "verdict": "distinct representation",
-        "state": "deferred",
-        "note": "a predicate on a graph G (forest with every degree at most one), not on an edge family; the natural bridge `matching G <-> connectivity.matching E(G)` needs its own comparison and a digraph-theory build",
-        "certificates": []
+        "verdict": "equivalent via the public whole-graph view GTBase.matching_graphs.matching_graph",
+        "state": "migrated-alias",
+        "certificates": [
+          "Digraph.migration.matching.matching_compat"
+        ],
+        "canonical": "GTBase.matching_graphs.matching_graph",
+        "canonical_relation": "matching_graph G := GraphTheory.connectivity.matching E(G): the upstream owner specialized to the whole edge set, not a competing definition",
+        "public_client": "base/theories/examples/matching_graphs.v",
+        "migration_record": "meta/LIBRARY_MIGRATION_C24.md",
+        "review": "Separate C24 binding: this class needs its own independent step-10 review and root whole-statement check; the C1 review facts (arthur, 23ee661) do not cover it.",
+        "note": "A predicate on the ENTIRE finite simple graph (isolated vertices, the empty graph and K1 included): a forest whose vertices have at most one neighbour, equivalently its whole edge set E(G) is an upstream matching. Not an edge-family, multigraph, hypergraph, colouring or matching-cut predicate. path_fas.has_matchingFAS keeps the same FAS witness, is_FAS and the loop-guarded farc_graph; the non-corpus matchingFAS_iff_dw1_statement keeps the exact Delta_star minimum and bound 1.",
+        "reviewed_by": "matching_scope",
+        "reviewed_commit": "f3d16d8b262d3a8188f76947626d06b92311bfd7",
+        "independent_review": "meta/migration_reviews/matching_graphs.md"
       }
     },
     "unchanged_live_helpers": [
@@ -337,6 +347,18 @@
         "legacy": "Extremal.migration.matching.X180Legacy.multitasker_capacity_positive",
         "theorem": "Extremal.migration.matching.x180_multitasker_capacity_positive_compat",
         "kind": "chain"
+      },
+      {
+        "source": "Digraph.conjectures.path_fas.matching",
+        "legacy": "Digraph.migration.matching.Legacy.matching",
+        "theorem": "Digraph.migration.matching.matching_compat",
+        "kind": "migrated helper (C24 whole-graph view)"
+      },
+      {
+        "source": "Digraph.conjectures.path_fas.has_matchingFAS",
+        "legacy": "Digraph.migration.matching.Legacy.has_matchingFAS",
+        "theorem": "Digraph.migration.matching.has_matchingFAS_compat",
+        "kind": "chain (C24)"
       }
     ],
     "statement_certificates": [
@@ -405,6 +427,13 @@
         "theorem": "Extremal.migration.matching.log_degree_multitasker_exists_statement_compat",
         "row": "arxiv:1611.02400#01",
         "status": "BLOCKED (per-graph quantification of the capacity ratio and degree constants, 2026-07-17 audit); preserved exactly"
+      },
+      {
+        "statement": "Digraph.conjectures.path_fas.matchingFAS_iff_dw1_statement",
+        "legacy": "Digraph.migration.matching.Legacy.matchingFAS_iff_dw1_statement",
+        "theorem": "Digraph.migration.matching.matchingFAS_iff_dw1_statement_compat",
+        "row": "no corpus row (non-corpus known theorem)",
+        "status": "non-corpus; unchanged"
       }
     ],
     "compatibility_theorems": [
@@ -428,7 +457,10 @@
       "Packing.migration.matching.knn_fair_perfect_matching_statement_compat",
       "Packing.migration.matching.brualdi_stein_partial_transversal_statement_compat",
       "GTMisc.migration.matching.subcubic_matching_lower_bound_statement_compat",
-      "Extremal.migration.matching.log_degree_multitasker_exists_statement_compat"
+      "Extremal.migration.matching.log_degree_multitasker_exists_statement_compat",
+      "Digraph.migration.matching.matching_compat",
+      "Digraph.migration.matching.has_matchingFAS_compat",
+      "Digraph.migration.matching.matchingFAS_iff_dw1_statement_compat"
     ],
     "api_theorems": [
       "Packing.foundations.matching.matching_subset",
@@ -443,7 +475,17 @@
       "Packing.foundations.matching.matching_edge1",
       "Packing.foundations.matching.matching_K2",
       "Packing.foundations.matching.matching_K3_edge",
-      "Packing.foundations.matching.not_matching_K3_adjacent"
+      "Packing.foundations.matching.not_matching_K3_adjacent",
+      "GTBase.matching_graphs.matching_graphE",
+      "GTBase.matching_graphs.edge_at_vertex",
+      "GTBase.matching_graphs.matching_graph_uniq_nb",
+      "GTBase.matching_graphs.matching_graph_deg",
+      "GTBase.matching_graphs.deg_matching_graph",
+      "GTBase.matching_graphs.matching_graph_degP",
+      "GTBase.matching_graphs.deg_le1_irred",
+      "GTBase.matching_graphs.deg_le1_forest",
+      "GTBase.matching_graphs.matching_graph_forest",
+      "GTBase.matching_graphs.matching_graph_forestP"
     ],
     "upstream_audit": {
       "searched_modules": [
@@ -464,6 +506,8 @@
     "migration_record": "meta/LIBRARY_MIGRATION_C1.md",
     "downstream_client": "packing-theory/theories/examples/matching.v",
     "reviewed_commit": "23ee661548f0f31878e31de20add0ede2bc0e076",
-    "independent_review": "meta/migration_reviews/matching.md"
+    "independent_review": "meta/migration_reviews/matching.md",
+    "foundation_fidelity": "meta/foundation_fidelity/matching.json",
+    "migration_notes_c24": "C24 (2026-10-03, lancelot): the deferred whole-graph-predicate class is completed in this shard. Digraph.conjectures.path_fas.matching now unfolds to the public GTBase.matching_graphs.matching_graph G (upstream matching of E(G)); its raw forest-and-degree body, the has_matchingFAS chain and the non-corpus matchingFAS_iff_dw1_statement are frozen at the C23 pin in Digraph.migration.matching. The C1 baseline, its 20 frozen mappings, 9 statements and review facts are unchanged; the hypergraph and X15alone classes stay deferred/excluded."
   }
 }
