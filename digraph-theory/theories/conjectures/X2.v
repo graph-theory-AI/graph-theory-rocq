@@ -10,6 +10,7 @@ From mathcomp Require Import all_boot.
 From Digraph Require Import prelude interop_graph_theory digraph oriented dipath tournament.
 From Digraph Require Import automorphism domination strong.
 From Digraph Require Import classic_core heroes chi_bounded dichromatic.
+From Digraph Require Import digraph_sum.
 From GTBase Require Import walks_paths.
 
 Set Implicit Arguments.
@@ -152,18 +153,19 @@ Definition oriented_tree (F : orientedDigraph) : Prop :=
 Definition oriented_trees_delta_plus_maderian_statement : Prop :=
   forall F : orientedDigraph, oriented_tree F -> delta_plus_maderian F.
 
+(** Since the A28 library migration [x2_disjoint_union] and [x2_disjoint_union_rel] are
+    transparent aliases of [Digraph.constructions.digraph_sum]'s [digraph_sum] and
+    [digraph_sum_rel] (the same sum carrier and arc relation, loops and asymmetric arcs kept, no
+    arc across), with the same Finite/HasArc packaging; the original Section is frozen and
+    certified in theories/migration/disjoint_union.v. *)
 Section DisjointUnion.
 Variables D1 D2 : diGraphType.
 
-Definition x2_disjoint_union : Type := (D1 + D2)%type.
+Definition x2_disjoint_union : Type := digraph_sum D1 D2.
 HB.instance Definition _ := Finite.on x2_disjoint_union.
 
 Definition x2_disjoint_union_rel (x y : D1 + D2) : bool :=
-  match x, y with
-  | inl a, inl b => a --> b
-  | inr a, inr b => a --> b
-  | _, _ => false
-  end.
+  @digraph_sum_rel D1 D2 x y.
 
 HB.instance Definition _ := HasArc.Build x2_disjoint_union x2_disjoint_union_rel.
 

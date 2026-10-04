@@ -29,6 +29,8 @@ theories/constructions/automorphism.v
 theories/constructions/product.v
 theories/constructions/cayley.v
 theories/constructions/circulant.v
+theories/constructions/digraph_sum.v
+theories/examples/disjoint_sums.v
 
 # --- advanced invariants (the marquee general theorems, M3) ---
 theories/invariants_advanced/transitive.v
@@ -1430,6 +1432,7 @@ theories/applications/directed_kneser_nonexistence.v
 
 # --- library migration certificates (meta/LIBRARY_MIGRATION_PLAN.md, section 15) ---
 theories/migration/path_vertices.v
+theories/migration/disjoint_union.v
 theories/migration/internal_vertices.v
 theories/migration/bipartition.v
 theories/migration/chi_bounded_classes.v
