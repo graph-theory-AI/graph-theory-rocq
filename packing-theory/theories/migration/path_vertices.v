@@ -18,6 +18,7 @@
     meta/migration_reports/path_vertices.md. *)
 
 From GTBase Require Import base.
+From GTBase Require set_separators.
 From Packing.conjectures Require Import X26.
 
 Set Implicit Arguments.
@@ -79,10 +80,19 @@ Lemma x26_has_k_distant_xy_paths_compat (G : sgraph) (d k : nat) (X Y : {set G})
   X26Legacy.has_k_distant_xy_paths d k X Y <-> x26_has_k_distant_xy_paths d k X Y.
 Proof. exact: iff_refl. Qed.
 
+(** B26 (2026-10-03): the live [x26_separates_xy] is now an alias of upstream
+    [GraphTheory.core.connectivity.separator] over packaged paths, so the separator and row certificates
+    below that reach it are proved through [GTBase.set_separators.seq_separatorP] and a pointwise row
+    transport instead of by conversion; their statements and every frozen body are unchanged. *)
+
 Lemma x26_separates_xy_compat (G : sgraph) (X Y Z : {set G}) :
   X26Legacy.separates_xy X Y Z <-> x26_separates_xy X Y Z.
-Proof. exact: iff_refl. Qed.
+Proof. exact: set_separators.seq_separatorP. Qed.
 
 Lemma bounded_degree_distant_induced_menger_statement_compat :
   X26Legacy.statement <-> bounded_degree_distant_induced_menger_statement.
-Proof. exact: iff_refl. Qed.
+Proof.
+split=> h d Dmax; have [C [C0 hC]] := h d Dmax; exists C; split=> // k G X Y DG;
+  case: (hC k G X Y DG) => [l | [Z [Zk sep]]];
+  first [by left | by right; exists Z; split=> //; apply/x26_separates_xy_compat].
+Qed.

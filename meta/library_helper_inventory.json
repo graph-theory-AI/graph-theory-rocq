@@ -41964,8 +41964,7 @@
       "body_shape_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "declaration_hash": "1ab2df48d1bdeb4d39fc18347a74ddb6c34840f2dfe70f339d53b4e976adc5a9",
       "direct_consumers": [
-        "GTMisc.conjectures.X39.x39_pairwise_distant_paths",
-        "GTMisc.conjectures.X39.x39_separates_xy"
+        "GTMisc.conjectures.X39.x39_pairwise_distant_paths"
       ],
       "kind": "Definition",
       "line": 17,
@@ -41984,8 +41983,7 @@
       "body_shape_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
       "declaration_hash": "994ef210f00cb5112ec695171fb3d15997f699b749a59c5921516fd350652a82",
       "direct_consumers": [
-        "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
-        "GTMisc.conjectures.X39.x39_separates_xy"
+        "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths"
       ],
       "kind": "Definition",
       "line": 20,
@@ -42044,18 +42042,15 @@
       "signature_shape_hash": "2cbd2492cd0d1f27285691151834258c0e7e540485f03ed7577878cd1409fc91"
     },
     {
-      "body_hash": "2684cc1dfc0920f033812df968ff58e24b45214e752dddaddc87927ac5d107a6",
-      "body_shape_hash": "2ab41e5288e306813dd4fab93326a32f2ee1ee34c35a500b478e3cd6ca58efe1",
-      "declaration_hash": "b3ceb215d2abe9041098da87436bf7a72d8de67a964e4237ca4a018d64f12962",
+      "body_hash": "858d6edb0c55837caa325ac76995e22f07ffca4dc73cbd36ef691b92a85618c0",
+      "body_shape_hash": "858d6edb0c55837caa325ac76995e22f07ffca4dc73cbd36ef691b92a85618c0",
+      "declaration_hash": "f74028d64d839f58744d440c7770a83ccfa42a328226a25713474ff3de9076e1",
       "direct_consumers": [
         "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement"
       ],
       "kind": "Definition",
       "line": 38,
-      "local_dependencies": [
-        "x39_path_vertices",
-        "x39_xy_path"
-      ],
+      "local_dependencies": [],
       "name": "x39_separates_xy",
       "normalized_name": "separates_xy",
       "package": "graph-theory-misc",
@@ -53022,8 +53017,7 @@
       "body_shape_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "declaration_hash": "2eab39ba0791eab9d37e8de6da1bc1515cc3b07b4caaa99a319d9be483a4fdd8",
       "direct_consumers": [
-        "Packing.conjectures.X26.x26_pairwise_distant_paths",
-        "Packing.conjectures.X26.x26_separates_xy"
+        "Packing.conjectures.X26.x26_pairwise_distant_paths"
       ],
       "kind": "Definition",
       "line": 17,
@@ -53042,8 +53036,7 @@
       "body_shape_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
       "declaration_hash": "e7c146bf69054d20d2559856e51e44735e1465ce843b51e38b117c12c2985c08",
       "direct_consumers": [
-        "Packing.conjectures.X26.x26_has_k_distant_xy_paths",
-        "Packing.conjectures.X26.x26_separates_xy"
+        "Packing.conjectures.X26.x26_has_k_distant_xy_paths"
       ],
       "kind": "Definition",
       "line": 20,
@@ -53102,18 +53095,15 @@
       "signature_shape_hash": "2cbd2492cd0d1f27285691151834258c0e7e540485f03ed7577878cd1409fc91"
     },
     {
-      "body_hash": "93ef046bd5e465433e32223dce4eed86577efa1fff5a71eedc50408374371ab0",
-      "body_shape_hash": "37bb3dcbecf366c365bb9bb3bad8543f3ec6ee4c3aeee13df7e3f1b15b331821",
-      "declaration_hash": "370bd82c6a64aeea395ffecc8dc268380ae360d359b47bbad7f14e60f7e1896c",
+      "body_hash": "f5261570e61b408b1f42084469b0f4b666378e8851b7c262ee6327d390aeefc5",
+      "body_shape_hash": "f5261570e61b408b1f42084469b0f4b666378e8851b7c262ee6327d390aeefc5",
+      "declaration_hash": "510566111d9e6b7f922c8b728ff40f9dd9eee04cfcacf7d123d183a52017f54b",
       "direct_consumers": [
         "Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement"
       ],
       "kind": "Definition",
       "line": 37,
-      "local_dependencies": [
-        "x26_path_vertices",
-        "x26_xy_path"
-      ],
+      "local_dependencies": [],
       "name": "x26_separates_xy",
       "normalized_name": "separates_xy",
       "package": "packing-theory",
