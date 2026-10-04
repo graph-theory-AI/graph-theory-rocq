@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "family": "ball",
+  "modules": {
+    "GTBase.base": {
+      "path": "base/theories/base.v",
+      "overrides": {
+        "ball": {
+          "verdict": "FAITHFUL",
+          "note": "Closed r-ball: [set x] at radius 0, then the previous ball plus all neighbours of its vertices; contains its centre at every radius and never leaves the centre's component (in an edgeless host every ball is its centre). Equal to rel_ball (--) r x; differs from the truncated graph_dist sublevel set once r >= #|G| on a disconnected graph."
+        }
+      },
+      "machine_evidence": [
+        "ball0",
+        "ballS",
+        "ball_center"
+      ]
+    },
+    "GTBase.balls": {
+      "path": "base/theories/balls.v",
+      "overrides": {
+        "set_ball": {
+          "verdict": "FAITHFUL",
+          "note": "Union of the closed r-balls around the supplied seeds: empty for no seeds (and in K_0), the seed set itself at radius 0, ball r x for a singleton, additive over unions and monotone in the radius and the seeds."
+        }
+      },
+      "machine_evidence": [
+        "ball_succ_sub",
+        "ball_mono",
+        "ball_rel_ballE",
+        "in_set_ball",
+        "set_ball0",
+        "set_ball_set0",
+        "set_ball1",
+        "set_ballU",
+        "set_ball_sub",
+        "set_ball_subset",
+        "set_ball_mono"
+      ]
+    }
+  }
+}

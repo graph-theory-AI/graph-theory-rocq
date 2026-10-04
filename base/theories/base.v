@@ -385,6 +385,19 @@ Proof. by move=> x; rewrite /pow_rel eqxx. Qed.
 Definition graph_power : sgraph := SGraph pow_sym pow_irrefl.
 End Power.
 
+(** Closed vertex balls (family [ball], A22): radius 0 is the centre alone, each step adds the neighbours of the
+    previous ball, so the centre always belongs and a ball never leaves the centre's component.  The seed-set union
+    and the remaining API are in [GTBase.balls]. *)
+Lemma ball0 (G : sgraph) (x : G) : ball 0 x = [set x].
+Proof. by []. Qed.
+
+Lemma ballS (G : sgraph) (r : nat) (x : G) :
+  ball r.+1 x = ball r x :|: \bigcup_(z in ball r x) N(z).
+Proof. by []. Qed.
+
+Lemma ball_center (G : sgraph) (r : nat) (x : G) : x \in ball r x.
+Proof. by elim: r => [|r IH]; rewrite ?ball0 ?set11 // ballS in_setU IH. Qed.
+
 Section Subdivision.
 Variables (G : sgraph) (n : nat).
 Definition oedge (p : G * G) : bool := (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2)%N.

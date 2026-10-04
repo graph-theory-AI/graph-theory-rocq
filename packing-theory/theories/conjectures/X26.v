@@ -1,6 +1,7 @@
 (** * Packing.conjectures.X26 -- v2 distant induced-Menger row *)
 
 From GTBase Require Export base.
+From GTBase Require Import balls.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -8,12 +9,11 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X26 vocabulary ************************************************)
 
-Fixpoint x26_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
-  if r is r'.+1 then x26_ball r' x :|: \bigcup_(z in x26_ball r' x) N(z)
-  else [set x].
+Definition x26_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
+  ball r x.
 
 Definition x26_set_ball (G : sgraph) (r : nat) (S : {set G}) : {set G} :=
-  \bigcup_(x in S) x26_ball r x.
+  set_ball r S.
 
 Definition x26_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.

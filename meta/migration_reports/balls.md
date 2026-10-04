@@ -1,0 +1,29 @@
+# Migration report: ball
+
+Inputs: `meta/migration_reports/balls.spec.json` and `meta/library_primitives/ball.json`.
+Regenerate: `python3 meta/migration_report.py balls --write`.
+Full evidence: `python3 meta/migration_report.py balls --details /tmp/migration-details`.
+
+- Canonical: `GTBase.base.ball`.
+- Baseline: `1b8126b20a10dcf1cf6c6f95c25104acb818c1cb`.
+- Scope: 12 helpers, 8 statements, 65 frozen objects, 150 recorded references.
+- Source checks: 449/449 pass; consistent.
+
+| Statement / corpus row | Compatibility theorem |
+|---|---|
+| `GTMisc.conjectures.X20.burning_number_conjecture_statement` / studies:std_burning_number_conjecture | `GTMisc.migration.balls.burning_number_conjecture_statement_compat` |
+| `GTMisc.conjectures.X39.coarse_menger_ball_separator_statement` / studies:std_coarse_menger_conjecture_georgakopoulos_papasogl | `GTMisc.migration.balls.coarse_menger_ball_separator_statement_compat` |
+| `GTMisc.conjectures.X40.coarse_menger_distance_two_separator_statement` / arxiv:2508.14332#00 | `GTMisc.migration.balls.coarse_menger_distance_two_separator_statement_compat` |
+| `GTMisc.conjectures.X113.coarse_erdos_posa_cycles_forest_statement` / studies:std_chudnovsky_seymour_coarse_erd_s_p_sa_conjecture | `GTMisc.migration.balls.coarse_erdos_posa_cycles_forest_statement_compat` |
+| `GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement` / studies:std_coarse_menger_conjecture | `GTMisc.migration.balls.coarse_menger_paths_bounded_separator_statement_compat` |
+| `GTMisc.conjectures.X146.geelen_coarse_gallai_A_paths_statement` / studies:std_geelen_s_coarse_gallai_conjecture | `GTMisc.migration.balls.geelen_coarse_gallai_A_paths_statement_compat` |
+| `Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement` / arxiv:2309.07905#00 | `Packing.migration.balls.bounded_degree_distant_induced_menger_statement_compat` |
+| `Packing.conjectures.X111.chepoi_estellon_vaxes_ball_hypergraph_transversal_statement` / studies:std_chepoi_estellon_vax_s_conjecture | `Packing.migration.balls.chepoi_estellon_vaxes_ball_hypergraph_transversal_statement_compat` |
+
+Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
+`python3 meta/migration_report.py balls --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
+Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
+
+Excluded distinct variants: `GTBase.graph_metric.rel_ball`, `Chromatic.conjectures.X161.x161_local_chromatic_radius_two`.
+
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/balls.v#Legacy.x113_ball`, `graph-theory-misc/theories/migration/balls.v#Legacy.x116_ball`, `graph-theory-misc/theories/migration/balls.v#Legacy.x146_ball`, `graph-theory-misc/theories/migration/balls.v#Legacy.x20_ball`, `graph-theory-misc/theories/migration/balls.v#Legacy.x39_ball`, `graph-theory-misc/theories/migration/genuine_cycle.v#X113Legacy.coarse_erdos_posa_cycles_forest_statement`, `graph-theory-misc/theories/migration/genuine_cycle.v#X113Legacy.has_k_distant_cycles`, `graph-theory-misc/theories/migration/genuine_cycle.v#X113Original.coarse_erdos_posa_cycles_forest_statement`, `graph-theory-misc/theories/migration/genuine_cycle.v#X113Original.has_k_distant_cycles`, `graph-theory-misc/theories/migration/path_vertices.v#X113Legacy.pairwise_distant_cycles`, `graph-theory-misc/theories/migration/path_vertices.v#X113Legacy.statement`, `graph-theory-misc/theories/migration/path_vertices.v#X116Legacy.pairwise_distant_paths`, `graph-theory-misc/theories/migration/path_vertices.v#X116Legacy.statement`, `graph-theory-misc/theories/migration/path_vertices.v#X146Legacy.every_A_path_hits_ball`, `graph-theory-misc/theories/migration/path_vertices.v#X146Legacy.pairwise_distant_A_paths`, `graph-theory-misc/theories/migration/path_vertices.v#X39Legacy.pairwise_distant_paths`, `graph-theory-misc/theories/migration/path_vertices.v#X39Legacy.statement`, `graph-theory-misc/theories/migration/path_vertices.v#X40Legacy.statement`, `graph-theory-misc/theories/migration/set_path.v#X116Legacy.coarse_menger_paths_bounded_separator_statement`, `graph-theory-misc/theories/migration/set_path.v#X116Legacy.has_k_distant_ST_paths`, `graph-theory-misc/theories/migration/set_path.v#X116Original.coarse_menger_paths_bounded_separator_statement`, `graph-theory-misc/theories/migration/set_path.v#X116Original.has_k_distant_ST_paths`, `graph-theory-misc/theories/migration/set_path.v#X39Legacy.coarse_menger_ball_separator_statement`, `graph-theory-misc/theories/migration/set_path.v#X39Legacy.has_k_distant_xy_paths`, `graph-theory-misc/theories/migration/set_path.v#X39Original.coarse_menger_ball_separator_statement`, `graph-theory-misc/theories/migration/set_path.v#X39Original.has_k_distant_xy_paths`, `graph-theory-misc/theories/migration/set_path.v#X40Legacy.coarse_menger_distance_two_separator_statement`, `graph-theory-misc/theories/migration/set_path.v#X40Original.coarse_menger_distance_two_separator_statement`, `packing-theory/theories/migration/balls.v#Legacy.x111_ball`, `packing-theory/theories/migration/balls.v#Legacy.x26_ball`, `packing-theory/theories/migration/path_vertices.v#X26Legacy.pairwise_distant_paths`, `packing-theory/theories/migration/set_path.v#X26Legacy.has_k_distant_xy_paths`, `packing-theory/theories/migration/set_path.v#X26Original.bounded_degree_distant_induced_menger_statement`, `packing-theory/theories/migration/set_path.v#X26Original.has_k_distant_xy_paths`.

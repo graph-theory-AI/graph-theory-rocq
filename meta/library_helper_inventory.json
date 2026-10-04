@@ -14,6 +14,15 @@
         "Extremal.conjectures.D2ram.perfect_graph",
         "GTMisc.conjectures.X144.x144_perfect_graph"
       ],
+      "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4": [
+        "GTMisc.conjectures.X113.x113_ball",
+        "GTMisc.conjectures.X116.x116_ball",
+        "GTMisc.conjectures.X146.x146_ball",
+        "GTMisc.conjectures.X20.x20_ball",
+        "GTMisc.conjectures.X39.x39_ball",
+        "Packing.conjectures.X111.x111_ball",
+        "Packing.conjectures.X26.x26_ball"
+      ],
       "06f30f91326cc8597dfae403fa46c94ec2deb214f979162a610e338e0abb6490": [
         "Chromatic.conjectures.X43.x43_induced_free",
         "Extremal.conjectures.X118.x118_induced_free",
@@ -86,13 +95,6 @@
       "2671940f95ae8c5c15341681c15f90951b0a4ae89bf82b57687a9896d64058ad": [
         "Chromatic.conjectures.X161.x161_local_chromatic_radius_two",
         "Chromatic.conjectures.X186.x186_chi2"
-      ],
-      "275e23517a26c74bc48a9487e9468c9d2b4de606ec133076c8844d3097239b63": [
-        "GTMisc.conjectures.X113.x113_set_ball",
-        "GTMisc.conjectures.X116.x116_set_ball",
-        "GTMisc.conjectures.X146.x146_set_ball",
-        "GTMisc.conjectures.X39.x39_set_ball",
-        "Packing.conjectures.X26.x26_set_ball"
       ],
       "289c7b960de9665c726957fe8ec69ae2598644d7c4c6932854f893d4964ff6c1": [
         "Extremal.conjectures.X98.x98_model_vertex",
@@ -386,6 +388,13 @@
         "Extremal.conjectures.XE1.xe1_complement_graph",
         "GTMisc.conjectures.X29.x29_complement"
       ],
+      "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786": [
+        "GTMisc.conjectures.X113.x113_set_ball",
+        "GTMisc.conjectures.X116.x116_set_ball",
+        "GTMisc.conjectures.X146.x146_set_ball",
+        "GTMisc.conjectures.X39.x39_set_ball",
+        "Packing.conjectures.X26.x26_set_ball"
+      ],
       "9d43fbe99a73e654277934082dbb8bc7e73fef4287b739db225422e2109b3c09": [
         "Chromatic.conjectures.XE1.xe1_edge_count",
         "Cycle.conjectures.X5.x5_edge_count",
@@ -492,15 +501,6 @@
       "c22aa7aab61a7d9136de256a3235a72d208d1469b913ce57b10a2b507f269538": [
         "Extremal.conjectures.X98.x98_branch",
         "GTMisc.conjectures.X114.x114_branch"
-      ],
-      "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8": [
-        "GTMisc.conjectures.X113.x113_ball",
-        "GTMisc.conjectures.X116.x116_ball",
-        "GTMisc.conjectures.X146.x146_ball",
-        "GTMisc.conjectures.X20.x20_ball",
-        "GTMisc.conjectures.X39.x39_ball",
-        "Packing.conjectures.X111.x111_ball",
-        "Packing.conjectures.X26.x26_ball"
       ],
       "c5592b585205d6a97237871d6eeaeda591fd4572c47d0f35b4d5c45d5fc19617": [
         "Cycle.conjectures.X212.x212_linear_arboricity",
@@ -38393,14 +38393,12 @@
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
-      "body_hash": "b6a6ff4ee3f9452e7d9efe5e4a915986b4ab546daddbf51376c67dd2a4dc04f6",
-      "body_shape_hash": "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8",
-      "declaration_hash": "70d4c07a4cf29301b6d49528aa304c9d2efc04517efa7c746747e4b8bd8d7e0b",
-      "direct_consumers": [
-        "GTMisc.conjectures.X113.x113_set_ball"
-      ],
-      "kind": "Fixpoint",
-      "line": 8,
+      "body_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "body_shape_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "declaration_hash": "e7f53b829514cb545fb5f939c1d35e2faa07f12d82416374439f097b9058ce1a",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 9,
       "local_dependencies": [],
       "name": "x113_ball",
       "normalized_name": "ball",
@@ -38412,18 +38410,16 @@
       "signature_shape_hash": "c9165531187b0913f66276bb62a4f560d35517747cda028267419d9205c28e24"
     },
     {
-      "body_hash": "e602e5a026b9ac3de99a75562650186f68d92ba82c29a29a4b13bc3dee41032c",
-      "body_shape_hash": "275e23517a26c74bc48a9487e9468c9d2b4de606ec133076c8844d3097239b63",
-      "declaration_hash": "06ec8586587848ca5b12d1ec16abc28dfa108830be215aa836d3fa5b4e7167c8",
+      "body_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "body_shape_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "declaration_hash": "bc7c29175fc2610295fefe67d66efbf36b6cfa0761c9e5f9ee83803533c0ac41",
       "direct_consumers": [
         "GTMisc.conjectures.X113.coarse_erdos_posa_cycles_forest_statement",
         "GTMisc.conjectures.X113.x113_pairwise_distant_cycles"
       ],
       "kind": "Definition",
       "line": 23,
-      "local_dependencies": [
-        "x113_ball"
-      ],
+      "local_dependencies": [],
       "name": "x113_set_ball",
       "normalized_name": "set_ball",
       "package": "graph-theory-misc",
@@ -38925,14 +38921,12 @@
       "signature_shape_hash": "ea123d14a47d3c8fecd3f855c427512e33b52cbaad7f5d5d8ade3431e24f4c1f"
     },
     {
-      "body_hash": "3a484d7b0a0d34a1300d8a48d9e5b88bf3011a8bd4d3c6387d2389f893805a26",
-      "body_shape_hash": "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8",
-      "declaration_hash": "5044ac6af25dda3c64f002d4116819eb860aacc22edaa5b94939a0e9ea633d7b",
-      "direct_consumers": [
-        "GTMisc.conjectures.X116.x116_set_ball"
-      ],
-      "kind": "Fixpoint",
-      "line": 8,
+      "body_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "body_shape_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "declaration_hash": "38f48e58b590e7f518430b598a2589947ad0aef9b195a760b6275f3915e8628f",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 9,
       "local_dependencies": [],
       "name": "x116_ball",
       "normalized_name": "ball",
@@ -38944,18 +38938,16 @@
       "signature_shape_hash": "c9165531187b0913f66276bb62a4f560d35517747cda028267419d9205c28e24"
     },
     {
-      "body_hash": "e02ea4c3d2bde64a68a2d61bb326956a540039a017ba73c259d6d2b72c570c5b",
-      "body_shape_hash": "275e23517a26c74bc48a9487e9468c9d2b4de606ec133076c8844d3097239b63",
-      "declaration_hash": "ba225f644c3e5e13d96f7c4b1751a7b8d98d6810ee3b83d7660c4ca24fec23d1",
+      "body_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "body_shape_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "declaration_hash": "4a006fee41ed0e0f162e5e3614f0074be95045938b8cb0cb4d6c1bd17f078a6a",
       "direct_consumers": [
         "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement",
         "GTMisc.conjectures.X116.x116_pairwise_distant_paths"
       ],
       "kind": "Definition",
       "line": 20,
-      "local_dependencies": [
-        "x116_ball"
-      ],
+      "local_dependencies": [],
       "name": "x116_set_ball",
       "normalized_name": "set_ball",
       "package": "graph-theory-misc",
@@ -39734,14 +39726,12 @@
       "signature_shape_hash": "75d0bfadcd8adf552e78d362a8f52a1023240afee7dc0a2e043295f16a5a1141"
     },
     {
-      "body_hash": "fc8bc5f3806750b34a3d378b3eacd27bcf1b305e7f87ca50e42639b32b8d5082",
-      "body_shape_hash": "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8",
-      "declaration_hash": "285a207cce9ff79a007408253eeafa0c3311b8fd9576a616a51e338fb9f2f1e4",
-      "direct_consumers": [
-        "GTMisc.conjectures.X146.x146_set_ball"
-      ],
-      "kind": "Fixpoint",
-      "line": 8,
+      "body_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "body_shape_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "declaration_hash": "c9e6887911d1ba3a1e41a64059f24e59f8a2894f9777e419daa98ccebbb4c27e",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 9,
       "local_dependencies": [],
       "name": "x146_ball",
       "normalized_name": "ball",
@@ -39753,18 +39743,16 @@
       "signature_shape_hash": "c9165531187b0913f66276bb62a4f560d35517747cda028267419d9205c28e24"
     },
     {
-      "body_hash": "052c18ea6e945222f4882a210e0856c744cee48fdeaec70a4d575b0c04ca3aed",
-      "body_shape_hash": "275e23517a26c74bc48a9487e9468c9d2b4de606ec133076c8844d3097239b63",
-      "declaration_hash": "c899977782447545319716e3116309f53790257db08910d9ca238c062431f5d8",
+      "body_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "body_shape_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "declaration_hash": "fa936076017ad51fe35bbc63d11020c42f94f96080168084e45d27b2dc61430a",
       "direct_consumers": [
         "GTMisc.conjectures.X146.x146_every_A_path_hits_ball",
         "GTMisc.conjectures.X146.x146_pairwise_distant_A_paths"
       ],
       "kind": "Definition",
       "line": 14,
-      "local_dependencies": [
-        "x146_ball"
-      ],
+      "local_dependencies": [],
       "name": "x146_set_ball",
       "normalized_name": "set_ball",
       "package": "graph-theory-misc",
@@ -40732,13 +40720,13 @@
       "signature_shape_hash": "186499b542f1abce6d595461ab4efad96e70f2a3cb846c2210208c3744d69473"
     },
     {
-      "body_hash": "5301b9b097f7531d7039d67491e4c6bd8a50dc273b953f3618276b160317d49d",
-      "body_shape_hash": "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8",
-      "declaration_hash": "ce552a30f14e49cc9179cc437a32fd1772db4d3486c149ea08da0c2bd494d1a4",
+      "body_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "body_shape_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "declaration_hash": "fcaf8d1f3696c511e8ce61b08759ae34372942cd9deeb4fa1b9486c8e3e96820",
       "direct_consumers": [
         "GTMisc.conjectures.X20.x20_burning_cover"
       ],
-      "kind": "Fixpoint",
+      "kind": "Definition",
       "line": 8,
       "local_dependencies": [],
       "name": "x20_ball",
@@ -40758,7 +40746,7 @@
         "GTMisc.conjectures.X20.burning_number_conjecture_statement"
       ],
       "kind": "Definition",
-      "line": 14,
+      "line": 13,
       "local_dependencies": [],
       "name": "x20_ceil_sqrt",
       "normalized_name": "ceil_sqrt",
@@ -40777,7 +40765,7 @@
         "GTMisc.conjectures.X20.burning_number_conjecture_statement"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 16,
       "local_dependencies": [
         "x20_ball"
       ],
@@ -40796,7 +40784,7 @@
       "declaration_hash": "312500d46927ce190b72767e9325e2b5033384766307564bfe95855d902b1e62",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 22,
+      "line": 21,
       "local_dependencies": [],
       "name": "x20_edge_set",
       "normalized_name": "edge_set",
@@ -40815,7 +40803,7 @@
         "GTMisc.conjectures.X20.x20_monochromatic_connected_set"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 24,
       "local_dependencies": [],
       "name": "x20_colour_rel",
       "normalized_name": "colour_rel",
@@ -40834,7 +40822,7 @@
         "GTMisc.conjectures.X20.gyarfas_sarkozy_monochromatic_component_statement"
       ],
       "kind": "Definition",
-      "line": 29,
+      "line": 28,
       "local_dependencies": [
         "x20_colour_rel"
       ],
@@ -41935,14 +41923,12 @@
       "signature_shape_hash": "8634caa85f05c7e7ea77d1015803a062aeae3d55da48ec4d795d34e73062cedc"
     },
     {
-      "body_hash": "42840ffc345a39aeb3457c2d13b705edf66e82bfb0a8042454e80170d3d04b26",
-      "body_shape_hash": "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8",
-      "declaration_hash": "1688f1427e9ffd3cf62f630c7b86765b2cd77a9bb9375e01aa88fe65bce25427",
-      "direct_consumers": [
-        "GTMisc.conjectures.X39.x39_set_ball"
-      ],
-      "kind": "Fixpoint",
-      "line": 8,
+      "body_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "body_shape_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "declaration_hash": "5ee1d595f30e7c6225a0b5933713baf4f36b6350543cc7d0387210bf49c9363a",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 9,
       "local_dependencies": [],
       "name": "x39_ball",
       "normalized_name": "ball",
@@ -41954,18 +41940,16 @@
       "signature_shape_hash": "c9165531187b0913f66276bb62a4f560d35517747cda028267419d9205c28e24"
     },
     {
-      "body_hash": "5af9a5cb2a794b4b89a1bb8cfe878850926b658388b2601e322d7412a55186c9",
-      "body_shape_hash": "275e23517a26c74bc48a9487e9468c9d2b4de606ec133076c8844d3097239b63",
-      "declaration_hash": "9f570e84644d8e34d9f219f3f502799f35f65e0df1bec035d073fb8a658b354b",
+      "body_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "body_shape_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "declaration_hash": "c2e47907ab333d67367a956b8b5a4ec5a144a9985b98405ec454d9eaa9727680",
       "direct_consumers": [
         "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement",
         "GTMisc.conjectures.X39.x39_pairwise_distant_paths"
       ],
       "kind": "Definition",
       "line": 14,
-      "local_dependencies": [
-        "x39_ball"
-      ],
+      "local_dependencies": [],
       "name": "x39_set_ball",
       "normalized_name": "set_ball",
       "package": "graph-theory-misc",
@@ -51603,14 +51587,14 @@
       "signature_shape_hash": "22dc5ea40cdf2ceea1dd218a87f518097c88dd23e874a2f65790ec76f3ee73a5"
     },
     {
-      "body_hash": "f54f3f20c47ab231fd30bd975648cd18b6bed9974c988ef48ef20a0e72cfc3c1",
-      "body_shape_hash": "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8",
-      "declaration_hash": "333f673650ac20488119d43ed19b3a5fb19e466ce96636f0b46318561e529aba",
+      "body_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "body_shape_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "declaration_hash": "d52e3bceb3e13baa1be8a10a3f8eac27c4b1f3f36bdffcdbbb8238e3a6708fe4",
       "direct_consumers": [
         "Packing.conjectures.X111.x111_is_packing",
         "Packing.conjectures.X111.x111_is_transversal"
       ],
-      "kind": "Fixpoint",
+      "kind": "Definition",
       "line": 8,
       "local_dependencies": [],
       "name": "x111_ball",
@@ -51630,7 +51614,7 @@
         "Packing.conjectures.X111.x111_tau"
       ],
       "kind": "Definition",
-      "line": 19,
+      "line": 18,
       "local_dependencies": [
         "x111_ball"
       ],
@@ -51651,7 +51635,7 @@
         "Packing.conjectures.X111.x111_nu"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 24,
       "local_dependencies": [
         "x111_ball"
       ],
@@ -51672,7 +51656,7 @@
         "Packing.conjectures.X111.chepoi_estellon_vaxes_ball_hypergraph_transversal_statement"
       ],
       "kind": "Definition",
-      "line": 35,
+      "line": 34,
       "local_dependencies": [
         "x111_is_transversal"
       ],
@@ -51693,7 +51677,7 @@
         "Packing.conjectures.X111.chepoi_estellon_vaxes_ball_hypergraph_transversal_statement"
       ],
       "kind": "Definition",
-      "line": 41,
+      "line": 40,
       "local_dependencies": [
         "x111_is_packing"
       ],
@@ -52998,14 +52982,12 @@
       "signature_shape_hash": "09910b24dbbb849a6748d7e5afdcd2ea56e4e35c6bdc5ea764dbfcd21cf17310"
     },
     {
-      "body_hash": "5f16664900597042123b113bdb6544b733ae5fab30b6c688a4658778bdd1048b",
-      "body_shape_hash": "c460f368a6b12c771f8064d9fe4f78a28689163c7dc07bede68d383d22a3b6c8",
-      "declaration_hash": "b0b460bc0dca24f3c1c7633ec5b4f4d9bd8e5b844e70eb8a82a6f5f593c0dbd1",
-      "direct_consumers": [
-        "Packing.conjectures.X26.x26_set_ball"
-      ],
-      "kind": "Fixpoint",
-      "line": 8,
+      "body_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "body_shape_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
+      "declaration_hash": "8ba609a6e9d0e41bea7aee1fa30677b909e6563c5ecfdbb48c7b2822c4c9aab4",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 9,
       "local_dependencies": [],
       "name": "x26_ball",
       "normalized_name": "ball",
@@ -53017,17 +52999,15 @@
       "signature_shape_hash": "c9165531187b0913f66276bb62a4f560d35517747cda028267419d9205c28e24"
     },
     {
-      "body_hash": "3da01712cfd97d1645a3c9662589b24dcb6440be9b3229ae2ca8c7e466dd6979",
-      "body_shape_hash": "275e23517a26c74bc48a9487e9468c9d2b4de606ec133076c8844d3097239b63",
-      "declaration_hash": "bb8e42e539048f2776a03634dc9ff56a816d919af72dde672657b4ed9ff24138",
+      "body_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "body_shape_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
+      "declaration_hash": "697be643ccf7655de6bc1092bb26954a0a0a946024259c85176ba45da8bf5f9e",
       "direct_consumers": [
         "Packing.conjectures.X26.x26_pairwise_distant_paths"
       ],
       "kind": "Definition",
       "line": 14,
-      "local_dependencies": [
-        "x26_ball"
-      ],
+      "local_dependencies": [],
       "name": "x26_set_ball",
       "normalized_name": "set_ball",
       "package": "packing-theory",
@@ -53900,7 +53880,7 @@
       "declaration_hash": "de3808a2f0cd84c9d9e1a2103ee8b6087f72af18d0744060996d0132f5296332",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 90,
+      "line": 94,
       "local_dependencies": [],
       "name": "x15_matching_equiv_matching",
       "normalized_name": "matching_equiv_matching",
@@ -53917,7 +53897,7 @@
       "declaration_hash": "2c6270e9c671d56b07e1af7f36d7950ac0aa3fd7bf4acaa95d57f4ee58b2a1f1",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 103,
+      "line": 107,
       "local_dependencies": [],
       "name": "x18_perfect_matching_equiv_x25_perfect_matching",
       "normalized_name": "perfect_matching_equiv_x25_perfect_matching",

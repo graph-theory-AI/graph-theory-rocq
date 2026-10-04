@@ -1,0 +1,9 @@
+# A22 closed balls: independent and coordinator review
+
+Reviewed exact source f5d2d3a0652fe3858fa8a22d9edd0d297bac8a2a, implemented by Arthur. Independent reviewer family_scope and coordinator read the full public API/client, both certificates and all 14 complete iff. Evidence: coordination/evidence/A22-review-by-family-scope/, A22-coordinator-final/, A22-integration/.
+
+Seven raw recursive vertex balls and five seed-set unions retain supplied graph/centre/set/radius without additional guards. Existing base.ball and graph_power are unchanged; public relation-ball and disconnected-distance examples preserve the distinction from truncated graph_dist. Whole rows retain the exact quantifier orders, partial X40/d0 X26 readings and X111's actual arg-min/default and maximum. Six complete B1/B5/B10 Originals bind actual frozen supports; no old snapshot is redirected.
+
+Independent 92 current/88 parent fresh sources,441 old type texts,104 focused assertions,218 distinct closed declarations,85 qualified strict closures and452 kernel checks passed; all 44 source reports45899actual0. All 65 immutable mappings/136 older certificates/43 arrays were preserved. Author fixed 51 stages and eight full normals passed; its two as-committed generated-drift diagnostics remain recorded, followed by successful regeneration checks. Those results do not replace the later cumulative acceptance.
+
+Preparation retains 13 exact worker mathematical files and all 65 frozen objects/14 whole iff, adds only four ordered project lines/twenty reciprocal notes and truthful review metadata. Three obsolete C16/C18 untouched-alias exclusions are removed with their separate contracts/owners explicitly retained. The authored summary is compacted; the full original is archived. Coordinator owns final cumulative and normal gates and main integration.
