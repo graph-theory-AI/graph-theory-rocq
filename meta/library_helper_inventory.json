@@ -45635,16 +45635,14 @@
       "signature_shape_hash": "db935e86bc56826e39008c88c10f4df68471acb579d8d80b4db73017d1e8422d"
     },
     {
-      "body_hash": "6f44cdaee02e946e00af61e557a69452657b5123865a082530755a19e5d2c50a",
-      "body_shape_hash": "6f44cdaee02e946e00af61e557a69452657b5123865a082530755a19e5d2c50a",
-      "declaration_hash": "fa6d651bbcd65a56543f8c4cffd36e0fe2955ca0d7b828768fe84de1a770e060",
+      "body_hash": "32a668ec4d56662a0f8c4894263ffd0a52d73e0b201200522147ca0e3948b6da",
+      "body_shape_hash": "32a668ec4d56662a0f8c4894263ffd0a52d73e0b201200522147ca0e3948b6da",
+      "declaration_hash": "b90faf43eb469842b40d80dec9be34092a962f8c613b3e41ff32716e9141fdb7",
       "direct_consumers": [
-        "Hypergraph.conjectures.X117.x117_edge",
-        "Hypergraph.conjectures.X117.x117_edges",
-        "Hypergraph.conjectures.X117.x117_vertex"
+        "Hypergraph.conjectures.X117.x117_edge"
       ],
       "kind": "Definition",
-      "line": 10,
+      "line": 11,
       "local_dependencies": [],
       "name": "x117_spike",
       "normalized_name": "spike",
@@ -45656,18 +45654,16 @@
       "signature_shape_hash": "07d1a7fcbf8fbada428187a8dd275b1e56f7db056ad5aaa3288564959b6b4523"
     },
     {
-      "body_hash": "e47dbae5cb699e2f2ae4bacc3b03555b03ac27c9102c0ae53d44652102fbcc89",
-      "body_shape_hash": "c5a2be87e0a8c5dba7768600338358c49d1b5c9f8b4ac071f2d749e48c4caa61",
-      "declaration_hash": "f7a175e0c8362544bd09bd4cc9139b15f1a62d759aa5fae322a8a7612b5689c0",
+      "body_hash": "37d667cfec0be838e651f0b3f33fe01f1532289bdb2f5749ace34fba3f403fec",
+      "body_shape_hash": "37d667cfec0be838e651f0b3f33fe01f1532289bdb2f5749ace34fba3f403fec",
+      "declaration_hash": "1f50e6dbfbcd751c7a48d5f0cb50e234fda2fb707b27dda472a3b040fb3c865d",
       "direct_consumers": [
         "Hypergraph.conjectures.X117.x117_edge",
         "Hypergraph.conjectures.X117.x117_edges"
       ],
       "kind": "Definition",
-      "line": 23,
-      "local_dependencies": [
-        "x117_spike"
-      ],
+      "line": 24,
+      "local_dependencies": [],
       "name": "x117_vertex",
       "normalized_name": "vertex",
       "package": "hypergraph-theory",
@@ -45678,14 +45674,12 @@
       "signature_shape_hash": "07d1a7fcbf8fbada428187a8dd275b1e56f7db056ad5aaa3288564959b6b4523"
     },
     {
-      "body_hash": "bc5048bd91c16658fa804ae051037535f01fc8169cfae561882f93defa4ea8c6",
-      "body_shape_hash": "bc5048bd91c16658fa804ae051037535f01fc8169cfae561882f93defa4ea8c6",
-      "declaration_hash": "dcb2838caf2ebdc1739bbce488d2a568c8f1c389f76e1c52e5ccf82b7aeae330",
-      "direct_consumers": [
-        "Hypergraph.conjectures.X117.x117_edges"
-      ],
+      "body_hash": "56a1165a8b337ea77ab5526dc95f592f594dea12a6efdbe0463303ebe365a711",
+      "body_shape_hash": "56a1165a8b337ea77ab5526dc95f592f594dea12a6efdbe0463303ebe365a711",
+      "declaration_hash": "8faba32c1a79f5c130704aa8a8011b51c2a9a94ee685ca5570b8d22af493bf45",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 25,
+      "line": 26,
       "local_dependencies": [
         "x117_spike",
         "x117_vertex"
@@ -45700,17 +45694,15 @@
       "signature_shape_hash": "6d5646ef0c9b6c7b21e79870f3b91328209c3efe730bf70f66476fcaa4c061af"
     },
     {
-      "body_hash": "7ec9e4ed39d5edf789604e1849b9f5c3f45d4479ca22693aa8ba9c4685266916",
-      "body_shape_hash": "c9ae114c9f1187275cafb47f7126263473574f821245c6444223d4f99d900fae",
-      "declaration_hash": "b208b7cb903d95f6f46da243cb1cb72143ca0f76aee09e09f2876d61fff9ab96",
+      "body_hash": "c7c6e99c6524c7f24a973fbccae9394b8a0f4e2ee125192fb6befcfe0ed56c33",
+      "body_shape_hash": "c7c6e99c6524c7f24a973fbccae9394b8a0f4e2ee125192fb6befcfe0ed56c33",
+      "declaration_hash": "77a2b0318dff790d54d6755e64f1975045169659510e0be0887566460e571fbc",
       "direct_consumers": [
         "Hypergraph.conjectures.X117.x117_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 28,
+      "line": 29,
       "local_dependencies": [
-        "x117_edge",
-        "x117_spike",
         "x117_vertex"
       ],
       "name": "x117_edges",
@@ -45728,7 +45720,7 @@
       "declaration_hash": "2437b1ebf37b83ca684f57483951be95d519cd92f1460f16a03bf679706fd283",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 31,
+      "line": 32,
       "local_dependencies": [],
       "name": "x117_image_edge",
       "normalized_name": "image_edge",
@@ -45745,7 +45737,7 @@
       "declaration_hash": "13633959be84b96daa785f92200ba79f1aac5dec582b93c9e043932663142534",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 37,
+      "line": 38,
       "local_dependencies": [],
       "name": "x117_monochromatic_copy",
       "normalized_name": "monochromatic_copy",
@@ -45764,7 +45756,7 @@
         "Hypergraph.conjectures.X117.x117_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 42,
+      "line": 43,
       "local_dependencies": [],
       "name": "x117_forces_mono",
       "normalized_name": "forces_mono",
@@ -45783,7 +45775,7 @@
         "Hypergraph.conjectures.X117.conlon_fox_rodl_hedgehog_ramsey_statement"
       ],
       "kind": "Definition",
-      "line": 48,
+      "line": 49,
       "local_dependencies": [
         "x117_edges",
         "x117_forces_mono"

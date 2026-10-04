@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "family": "hedgehog",
+  "primitive": {
+    "canonical_name": "Hypergraph.foundations.hedgehog.hedgehog_edges",
+    "owner": "hypergraph-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "spike",
+      "vertex",
+      "edge",
+      "edges"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.X87.x87_edge",
+      "Hypergraph.conjectures.X117.x117_edge",
+      "Hypergraph.conjectures.X117.x117_edges",
+      "Hypergraph.conjectures.X117.x117_spike",
+      "Hypergraph.conjectures.X117.x117_vertex"
+    ],
+    "consumers_remaining": 5,
+    "relation": "The finite hedgehog H_t: hedgehog_spike t is the subtype of ordered pairs (i, j) of I_t with i < j (Boolean strict-order witness), hedgehog_vertex t the sum carrier I_t + hedgehog_spike t, hedgehog_edge s the tagged triple [set inl i; inl j; inr s] of the spike s = (i, j), and hedgehog_edges t the image family of all spikes. Same carriers and MathComp finite subtype/sum/set/image structures as the X117 vocabulary, inferred by unfolding (no new instance); no positivity or rank guard (empty for t = 0, edgeless for t = 1). Ramsey numbers, forcing, copies and images and the GTMisc X87 Boolean ordered-edge lookup are separate.",
+    "semantic_classes": {
+      "hedgehog-construction": {
+        "members": [
+          "Hypergraph.conjectures.X117.x117_spike",
+          "Hypergraph.conjectures.X117.x117_vertex",
+          "Hypergraph.conjectures.X117.x117_edge",
+          "Hypergraph.conjectures.X117.x117_edges"
+        ],
+        "count": 4,
+        "verdict": "equivalent (same term)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.hedgehog.x117_spike_compat",
+          "Hypergraph.migration.hedgehog.x117_vertex_compat",
+          "Hypergraph.migration.hedgehog.x117_edge_compat",
+          "Hypergraph.migration.hedgehog.x117_edges_compat"
+        ],
+        "canonicals": {
+          "Hypergraph.conjectures.X117.x117_spike": "Hypergraph.foundations.hedgehog.hedgehog_spike",
+          "Hypergraph.conjectures.X117.x117_vertex": "Hypergraph.foundations.hedgehog.hedgehog_vertex",
+          "Hypergraph.conjectures.X117.x117_edge": "Hypergraph.foundations.hedgehog.hedgehog_edge",
+          "Hypergraph.conjectures.X117.x117_edges": "Hypergraph.foundations.hedgehog.hedgehog_edges"
+        },
+        "note": "x117_spike/x117_vertex keep their Type-valued signatures (subtype and sum carrier) and x117_edge/x117_edges their dependent set signatures; each is the alias of the public constructor of the same carrier, so the certificates are equalities by conversion."
+      },
+      "ordered-boolean-edge-lookup": {
+        "members": [
+          "GTMisc.conjectures.X87.x87_edge"
+        ],
+        "count": 1,
+        "verdict": "distinct representation",
+        "state": "deferred",
+        "certificates": [],
+        "note": "x87_edge (E : {ffun I_n * I_n -> bool}) i j := E (i, j) looks up an ordered pair in a Boolean adjacency function; it matches only by the normalized name edge. Deferred: the X87 source, its consumers and its row are untouched."
+      }
+    },
+    "compatibility_theorems": [
+      "Hypergraph.migration.hedgehog.x117_spike_compat",
+      "Hypergraph.migration.hedgehog.x117_vertex_compat",
+      "Hypergraph.migration.hedgehog.x117_edge_compat",
+      "Hypergraph.migration.hedgehog.x117_edges_compat",
+      "Hypergraph.migration.hedgehog.x117_ramsey_number_compat",
+      "Hypergraph.migration.hedgehog.conlon_fox_rodl_hedgehog_ramsey_statement_compat",
+      "Hypergraph.migration.hedgehog.x117_ramsey_number_original_compat",
+      "Hypergraph.migration.hedgehog.conlon_fox_rodl_hedgehog_ramsey_statement_original_compat"
+    ],
+    "api_theorems": [
+      "Hypergraph.foundations.hedgehog.hedgehog_spike_neq",
+      "Hypergraph.foundations.hedgehog.hedgehog_edge_spike",
+      "Hypergraph.foundations.hedgehog.hedgehog_edge_inj",
+      "Hypergraph.foundations.hedgehog.card_hedgehog_edge",
+      "Hypergraph.foundations.hedgehog.hedgehog_edgesP",
+      "Hypergraph.foundations.hedgehog.hedgehog_edges_card",
+      "Hypergraph.foundations.hedgehog.card_hedgehog_edges",
+      "Hypergraph.foundations.hedgehog.card_hedgehog_vertex"
+    ],
+    "public_client": "hypergraph-theory/theories/examples/hedgehog_hypergraphs.v",
+    "legacy_baseline": "eaa6564c3788f6e3e2db7a7bddbe9adba157c334",
+    "migration_report": "meta/migration_reports/hedgehog.md",
+    "migration_spec": "meta/migration_reports/hedgehog.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D7.md",
+    "foundation_fidelity": "meta/foundation_fidelity/hedgehog.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core modules",
+        "mathcomp.boot.finset",
+        "mathcomp.boot.fintype",
+        "Hypergraph.foundations.hypergraph"
+      ],
+      "result": "new-area-primitive",
+      "candidate": "mathcomp.boot.fintype (subtype and sum finTypes), mathcomp.boot.finset.imset",
+      "note": "No hedgehog constructor upstream or in the repository. The public constructors reuse MathComp's finite subtype, sum, set and image machinery (card_sum, card_imset, imsetP) with the X117 carriers; no second-area consumer, so they stay in Hypergraph (no GTBase promotion).",
+      "audited_at": "2026-10-04"
+    },
+    "reviewed_by": "family_scope",
+    "reviewed_commit": "7e030f252c859c5334185673b10b69971cab9402",
+    "independent_review": "meta/migration_reviews/hedgehog.md"
+  }
+}
