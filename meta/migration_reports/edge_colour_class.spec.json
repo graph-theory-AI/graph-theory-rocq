@@ -8,14 +8,17 @@
     "base": "GTBase",
     "chromatic-theory": "Chromatic",
     "cycle-theory": "Cycle",
-    "topological-graph-theory": "Topological"
+    "topological-graph-theory": "Topological",
+    "extremal-graph-theory": "Extremal"
   },
   "certificate_files": [
     "base/theories/edge_colourings.v",
     "chromatic-theory/theories/migration/edge_colour_class.v",
     "cycle-theory/theories/migration/edge_colour_class.v",
     "topological-graph-theory/theories/migration/edge_colour_class.v",
-    "chromatic-theory/theories/migration/simple_edges.v"
+    "chromatic-theory/theories/migration/simple_edges.v",
+    "extremal-graph-theory/theories/migration/edge_colour_class.v",
+    "extremal-graph-theory/theories/migration/edge_colourings.v"
   ],
   "extra_certificates": [
     "GTBase.edge_colourings.edge_colour_class_sym",
@@ -36,25 +39,21 @@
     "Cycle.migration.edge_colour_class.x212_colour_graph_diso",
     "Cycle.migration.edge_colour_class.x212_colour_graph_disoE",
     "Topological.migration.edge_colour_class.x23_colour_graph_diso",
-    "Topological.migration.edge_colour_class.x23_colour_graph_disoE"
+    "Topological.migration.edge_colour_class.x23_colour_graph_disoE",
+    "Extremal.migration.edge_colour_class.colour_class_diso",
+    "Extremal.migration.edge_colour_class.colour_class_disoE"
   ],
   "downstream_client": "base/theories/examples/edge_colour_classes.v",
   "summary": [
     "D12 (first stage of the colour-class promotion) turns the six X34/X212/X23 helpers edge_colour_rel and colour_graph into aliases of GTBase.edge_colourings.edge_colour_class_rel col (pred1 i) and edge_colour_class col (pred1 i), the Extremal area colour-class contract promoted under distinct names; headers and implicit arguments unchanged, no guard.",
     "Frozen at the D10 pin in <area>/theories/migration/edge_colour_class.v: the six sources and the six opaque symmetry/irreflexivity lemmas with their original scripts (relation renamed to Legacy), the linear-forest and linear-arboricity chains and the three rows; the six live lemmas keep their headers and are proved by the canonical lemmas. Graph certificates are adjacency equality, the identity isomorphism and its identity carrier map.",
     "Four whole iff, kernel-checked: the three current rows by conversion (is_forest and Delta read only carrier and adjacency), and the complete X34 Original over M1's frozen raw edge set at 061154c (same colouring for the widened linear-forest colours and the ord_max matching, exact let q, planar / odd / 9 <= Delta guards with the documented 9-vs-7 defect kept). X212 and X23 keep the supplied colouring, attained minimum and universal minimality.",
-    "Extremal.foundations.edge_colourings.colour_class is the same contract; its public adapter, old C6 snapshots and history are the next stage of this family (pending_adapters), so the promotion is not complete."
+    "Second stage: Extremal.foundations.edge_colourings.cc_rel and colour_class are now transparent public adapters of the same contract, with the original Section binders, carrier and Arguments; only cc_sym/cc_irrefl changed proofs. The whole original Section is frozen in extremal-graph-theory/theories/migration/edge_colour_class.v, with the X229 row (kernel conversion) and the complete X229Original over C6's raw proper_ecolouring at 3011c28: 7 appended mappings (34 total) and 2 whole iff (6 total). The C6 certificate file and mappings are unchanged."
   ],
-  "kernel_evidence": "Exact types/implicit status of the six sources and six lemmas, the four whole iff, all old declarations against 2f37b10a, the 323 reverse headers of the 23-file closure, Print Assumptions, About-resolved strict closures (frozen/live/M1) and negatives, through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D12-by-lancelot/ (outside the repository)",
-  "pending_adapters": [
-    {
-      "qualified": "Extremal.foundations.edge_colourings.colour_class",
-      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
-      "contract": "same contract (cc_rel col p = (x -- y) && p (col [set x; y]), eqType palette, colour predicate)",
-      "note": "Unchanged in this stage; its transparent public adapter, with the old C6 snapshots and its row history, is the next scoped stage of this family under the same owner. Not a distinct canonical."
-    }
-  ],
-  "known_stale_snapshots": {},
+  "kernel_evidence": "Exact types/implicit status of the six conjecture sources and lemmas and of the two Extremal public sources (first and second stage); all six whole iff; the 23-file discovery reverse closure of the three conjecture roots (323 old proof headers) and, separately, the actual 55-consumer closure of the public GTBase append (2396 old declarations in 130 files byte-identical); the 10-file Extremal reverse closure (49 old proof headers); Print Assumptions, About-resolved strict closures (frozen/live/M1/C6) and negatives, through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D12-by-lancelot/ and D12-stage2-by-lancelot/ (outside the repository)",
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/edge_colourings.v#X229Legacy.expander_proper_colouring_two_connected_palettes_statement": "C6 current snapshot: frozen with C6's raw proper_ecolouring, it keeps the live colour_class, which since D12's second stage is the transparent adapter of GTBase.edge_colourings.edge_colour_class (same carrier and adjacency; identity isomorphism). It stays byte-exact under C6's ownership; the complete row is Extremal.migration.edge_colour_class.X229Original.expander_proper_colouring_two_connected_palettes_statement (certificate expander_proper_colouring_two_connected_palettes_statement_original_compat)."
+  },
   "cross_module_consumers": [
     {
       "path": "cycle-theory/theories/conjectures/grounding_X212.v",
@@ -70,6 +69,16 @@
       "path": "cycle-theory/theories/conjectures/grounding_X212.v",
       "name": "linear_arboricity_regular_statement",
       "note": "Axiom audit only (Print Assumptions of the unchanged bm-016 row); no proof depends on the colour class."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X229.v",
+      "name": "colour_class",
+      "note": "The X229 row uses the public colour class for its two complementary spanning classes; the row text is unchanged and its current and complete Original iff are certified (statement objects of this family)."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_X215.v",
+      "name": "colour_class",
+      "note": "Proof consumer erdos_sos_implies_burr_erdos_tree_ramsey (gc:e239), through majority_colour and mono_copyP on the spanning colour class; its statement and script are unchanged and compile over the adapter."
     }
   ],
   "distinct_variants": [],
@@ -423,6 +432,106 @@
       },
       "certificate": "Topological.migration.edge_colour_class.planar_linear_arboricity_statement_compat",
       "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.foundations.edge_colourings.cc_rel",
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "name": "cc_rel",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "Legacy.cc_rel",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_colour_class.cc_rel_compat",
+      "live_unfolds_to": "GTBase.edge_colourings.edge_colour_class_rel col p",
+      "frozen_at": "7cf3dfc5d1117e061b002c8aa758646713302438",
+      "binding_note": "Frozen on the D12 first-stage pin 7cf3dfc; bound to the family baseline 2f37b10a, where the Extremal foundation and X229 texts are byte-identical (unchanged since 3011c28)."
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.foundations.edge_colourings.colour_class",
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "name": "colour_class",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "GraphLegacy.colour_class",
+      "substitutions": {
+        "cc_sym": "(ProofsLegacy.cc_sym col p)",
+        "cc_irrefl": "(ProofsLegacy.cc_irrefl col p)"
+      },
+      "certificate": "Extremal.migration.edge_colour_class.colour_class_compat",
+      "live_unfolds_to": "GTBase.edge_colourings.edge_colour_class col p",
+      "frozen_at": "7cf3dfc5d1117e061b002c8aa758646713302438",
+      "binding_note": "Frozen on the D12 first-stage pin 7cf3dfc; bound to the family baseline 2f37b10a, where the Extremal foundation and X229 texts are byte-identical (unchanged since 3011c28)."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.foundations.edge_colourings.cc_sym",
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "name": "cc_sym",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "ProofsLegacy.cc_sym",
+      "substitutions": {
+        "cc_rel": "(Legacy.cc_rel col p)"
+      },
+      "certificate": "Extremal.migration.edge_colour_class.cc_proofs_compat",
+      "frozen_at": "7cf3dfc5d1117e061b002c8aa758646713302438",
+      "binding_note": "Frozen on the D12 first-stage pin 7cf3dfc; bound to the family baseline 2f37b10a, where the Extremal foundation and X229 texts are byte-identical (unchanged since 3011c28)."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.foundations.edge_colourings.cc_irrefl",
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "name": "cc_irrefl",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "ProofsLegacy.cc_irrefl",
+      "substitutions": {
+        "cc_rel": "(Legacy.cc_rel col p)"
+      },
+      "certificate": "Extremal.migration.edge_colour_class.cc_proofs_compat",
+      "frozen_at": "7cf3dfc5d1117e061b002c8aa758646713302438",
+      "binding_note": "Frozen on the D12 first-stage pin 7cf3dfc; bound to the family baseline 2f37b10a, where the Extremal foundation and X229 texts are byte-identical (unchanged since 3011c28)."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X229.expander_proper_colouring_two_connected_palettes_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X229.v",
+      "name": "expander_proper_colouring_two_connected_palettes_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X229Legacy.expander_proper_colouring_two_connected_palettes_statement",
+      "substitutions": {
+        "colour_class": "GraphLegacy.colour_class"
+      },
+      "certificate": "Extremal.migration.edge_colour_class.expander_proper_colouring_two_connected_palettes_statement_compat",
+      "corpus": "v2",
+      "frozen_at": "7cf3dfc5d1117e061b002c8aa758646713302438",
+      "binding_note": "Frozen on the D12 first-stage pin 7cf3dfc; bound to the family baseline 2f37b10a, where the Extremal foundation and X229 texts are byte-identical (unchanged since 3011c28)."
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.foundations.edge_colourings.proper_ecolouring",
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "name": "proper_ecolouring",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colourings.v",
+      "frozen": "Legacy.proper_ecolouring",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_colourings.proper_ecolouring_compat",
+      "commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+      "note": "C6's actual frozen raw proper_ecolouring (the foundation text at C6's baseline 3011c28), borrowed for the complete X229 Original; C6 keeps its ownership."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X229.expander_proper_colouring_two_connected_palettes_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X229.v",
+      "name": "expander_proper_colouring_two_connected_palettes_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_colour_class.v",
+      "frozen": "X229Original.expander_proper_colouring_two_connected_palettes_statement",
+      "substitutions": {
+        "colour_class": "GraphLegacy.colour_class",
+        "proper_ecolouring": "Extremal.migration.edge_colourings.Legacy.proper_ecolouring"
+      },
+      "certificate": "Extremal.migration.edge_colour_class.expander_proper_colouring_two_connected_palettes_statement_original_compat",
+      "commit": "3011c280a09f292461a3b1e5a99f7be3febfbbb9",
+      "corpus": "v2",
+      "binding_note": "Bound to 3011c28 (C6's baseline): the X229 row before C6 and D12, with C6's raw properness and the frozen colour classes."
     }
   ]
 }
