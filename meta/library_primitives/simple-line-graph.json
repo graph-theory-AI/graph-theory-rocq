@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "family": "simple-line-graph",
+  "primitive": {
+    "canonical_name": "GTBase.simple_line_graphs.simple_line_graph",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "lg_ends",
+      "lg_oedge",
+      "lg_rel",
+      "line_graph",
+      "line_rel",
+      "line_vertex",
+      "sline_graph",
+      "sline_rel"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X43.x43_line_graph",
+      "Chromatic.conjectures.X43.x43_line_rel",
+      "Chromatic.conjectures.X43.x43_line_vertex",
+      "Hamilton.conjectures.U2.lg_ends",
+      "Hamilton.conjectures.U2.lg_oedge",
+      "Hamilton.conjectures.U2.lg_rel",
+      "Hamilton.conjectures.U2.line_graph",
+      "Minor.foundations.containment.sline_graph",
+      "Minor.foundations.containment.sline_rel",
+      "Reconstruction.conjectures.U11.sline_graph",
+      "Reconstruction.conjectures.U11.sline_rel"
+    ],
+    "repository_sources": {
+      "Minor.foundations.containment.sline_graph": {
+        "path": "minor-theory/theories/foundations/containment.v",
+        "commit": "897a7d30a0137195d30ae803d0482b5df31c3869",
+        "blob": "f5ba89042158276b3229956ac99cac2443ab3210",
+        "declaration_hash": "6d657432350c96ace9b7bf10f5aa81c291d654f9f5a97b6c29c07c535cf2f6be"
+      },
+      "Minor.foundations.containment.sline_rel": {
+        "path": "minor-theory/theories/foundations/containment.v",
+        "commit": "897a7d30a0137195d30ae803d0482b5df31c3869",
+        "blob": "f5ba89042158276b3229956ac99cac2443ab3210",
+        "declaration_hash": "35ddc23b66972686fb3eb952a66d3714dc3423d18a5070bbcc1a03566bd871db"
+      }
+    },
+    "consumers_remaining": 14,
+    "relation": "the finite simple line graph on the edge-set subtype: Chromatic X43 x43_line_vertex/x43_line_rel/x43_line_graph and the Section SLine (Variable G) sline_rel/sline_graph of Reconstruction U11 and Minor containment are GTBase.simple_line_graphs.simple_line_vertex/simple_line_rel/simple_line_graph: the carrier {e : {set G} | e \\in E(G)} (X43's x43_edge_set unfolds to E(G)) and the relation (val e != val f) && (val e :&: val f != set0), in the same order, by conversion; each graph agrees pointwise with simple_line_graph and by the identity isomorphism. The six constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. Functoriality on isomorphisms (simple_line_graph_diso, promoted from Kelly) carries the identity isomorphisms through every iterate, zero included; the square's chromatic number moves along isomorphisms (chi_graph_power_diso). The pre-M1 carrier over the raw edge comprehension is another subtype of the same set, mapped by val. Hamilton U2's enum-ranked oriented-edge line graph is a deferred class of this family.",
+    "semantic_classes": {
+      "edge-set-subtype": {
+        "members": [
+          "Chromatic.conjectures.X43.x43_line_graph",
+          "Chromatic.conjectures.X43.x43_line_rel",
+          "Chromatic.conjectures.X43.x43_line_vertex",
+          "Minor.foundations.containment.sline_graph",
+          "Minor.foundations.containment.sline_rel",
+          "Reconstruction.conjectures.U11.sline_graph",
+          "Reconstruction.conjectures.U11.sline_rel"
+        ],
+        "count": 7,
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.simple_line_graphs.x43_line_graph_compat",
+          "Chromatic.migration.simple_line_graphs.x43_line_rel_compat",
+          "Chromatic.migration.simple_line_graphs.x43_line_vertex_compat",
+          "Minor.migration.simple_line_graphs.sline_graph_compat",
+          "Minor.migration.simple_line_graphs.sline_rel_compat",
+          "Reconstruction.migration.simple_line_graphs.sline_graph_compat",
+          "Reconstruction.migration.simple_line_graphs.sline_rel_compat"
+        ],
+        "note": "the subtype {e : {set G} | e \\in E(G)} (X43 through x43_edge_set, which unfolds to E(G)), the relation (val e != val f) && (val e :&: val f != set0) in the same order, and its SGraph; conversion for the carrier and relation, pointwise adjacency and the identity isomorphism for the graph; Minor containment's pair is enrolled through repository_sources"
+      },
+      "enum-ranked-oriented-edge": {
+        "members": [
+          "Hamilton.conjectures.U2.lg_ends",
+          "Hamilton.conjectures.U2.lg_oedge",
+          "Hamilton.conjectures.U2.lg_rel",
+          "Hamilton.conjectures.U2.line_graph"
+        ],
+        "count": 4,
+        "state": "deferred",
+        "verdict": "distinct representation",
+        "certificates": [],
+        "note": "Hamilton U2's Section LineGraph: the oriented-edge subtype {p : G * G | lg_oedge p} with lg_oedge p := (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2), endpoints lg_ends e := [set (val e).1; (val e).2] and lg_rel := (e != f) && [exists v, (v \\in lg_ends e) && (v \\in lg_ends f)]; abstractly the same simple line graph but not a convertible carrier. The subsequent enum-ranked task of this same owner must give the explicit endpoint-set bijection, cancellation and isomorphism and the complete hamiltonian_cycles_in_line_graphs_statement (4-connected line graphs are Hamiltonian), keeping U2's groundings and implications_X211.line_graph_claw_free (gc:e234). Bodies unchanged; the conservative short-name scan also reports U4/X185/C17 rows that use GTBase.base.line_graph, which are not consumers of this class (binding.json, false_positive_import_evidence)"
+      }
+    },
+    "distinct_variants": {
+      "GTBase.base.line_graph": "multigraph line graph (mgraph -> sgraph): one vertex per labelled edge, parallel edges kept, adjacency by shared incidence of distinct edges; not the edge-set subtype; owner and consumers unchanged",
+      "GTMisc.conjectures.X102.x102_line_graph_of": "known defective distinct contract: relates all x, y by edge-support intersection without x != y, so at x = y a nonempty edge support conflicts with sgraph irreflexivity (empty line-vertex carrier, edgeless original); kept exactly, with its M1/A1/C13/A14 histories and approximation notes, for a separate re-audit",
+      "Infinite.conjectures.D4legacy.iedge_vertex": "infinite class: proof-bearing ordered-edge Record of an arbitrary-Type iGraph; reverse orientations are distinct vertices; a later separate task, partial status unchanged",
+      "Infinite.conjectures.D4legacy.iline_adj": "infinite class: Prop-valued adjacency of ordered-edge records; a later separate task",
+      "Infinite.conjectures.D4legacy.iline_graph": "infinite class: iGraph line graph over ordered-edge records; a later separate task"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.simple_line_graphs.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement_compat",
+      "Chromatic.migration.simple_line_graphs.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement_original_compat",
+      "Chromatic.migration.simple_line_graphs.x43_line_graph_compat",
+      "Chromatic.migration.simple_line_graphs.x43_line_graph_original_diso",
+      "Chromatic.migration.simple_line_graphs.x43_line_rel_compat",
+      "Chromatic.migration.simple_line_graphs.x43_line_rel_original_compat",
+      "Chromatic.migration.simple_line_graphs.x43_line_rel_proofs_compat",
+      "Chromatic.migration.simple_line_graphs.x43_line_rel_proofs_original_compat",
+      "Chromatic.migration.simple_line_graphs.x43_line_vertex_compat",
+      "Chromatic.migration.simple_line_graphs.x43_line_vertex_original_compat",
+      "Chromatic.migration.simple_line_graphs.x43_strong_edge_colourable_compat",
+      "Chromatic.migration.simple_line_graphs.x43_strong_edge_colourable_original_compat",
+      "Minor.migration.simple_line_graphs.bounded_degree_induced_wall_or_line_wall_statement_compat",
+      "Minor.migration.simple_line_graphs.four_family_free_logarithmic_treewidth_statement_compat",
+      "Minor.migration.simple_line_graphs.sline_graph_compat",
+      "Minor.migration.simple_line_graphs.sline_proofs_compat",
+      "Minor.migration.simple_line_graphs.sline_rel_compat",
+      "Reconstruction.migration.simple_line_graphs.external_whitney_line_inversion_statement_compat",
+      "Reconstruction.migration.simple_line_graphs.external_whitney_line_inversion_statement_original_compat",
+      "Reconstruction.migration.simple_line_graphs.grahams_conjecture_on_tree_reconstruction_statement_compat",
+      "Reconstruction.migration.simple_line_graphs.sline_graph_compat",
+      "Reconstruction.migration.simple_line_graphs.sline_proofs_compat",
+      "Reconstruction.migration.simple_line_graphs.sline_rel_compat",
+      "Reconstruction.migration.simple_line_graphs.whitney_line_inversion_premise_compat",
+      "Reconstruction.migration.simple_line_graphs.whitney_line_inversion_premise_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.simple_line_graphs.simple_line_sym",
+      "GTBase.simple_line_graphs.simple_line_irrefl",
+      "GTBase.simple_line_graphs.simple_line_edgeE",
+      "GTBase.simple_line_graphs.card_simple_line_graph",
+      "GTBase.simple_line_graphs.simple_line_edge_diso",
+      "GTBase.simple_line_graphs.simple_line_edge_inv_diso",
+      "GTBase.simple_line_graphs.simple_line_imsetK",
+      "GTBase.simple_line_graphs.simple_line_imset_invK",
+      "GTBase.simple_line_graphs.simple_line_mapK",
+      "GTBase.simple_line_graphs.simple_line_unmapK",
+      "GTBase.simple_line_graphs.simple_line_map_mono",
+      "GTBase.simple_line_graphs.simple_line_graph_diso",
+      "GTBase.simple_line_graphs.simple_line_graph_complete",
+      "GTBase.simple_line_graphs.diso_imset_mem",
+      "GTBase.simple_line_graphs.diso_open_neigh",
+      "GTBase.simple_line_graphs.diso_ball",
+      "GTBase.simple_line_graphs.graph_power_diso",
+      "GTBase.simple_line_graphs.chi_graph_power_diso",
+      "Chromatic.migration.simple_line_graphs.x43_line_graph_diso",
+      "Chromatic.migration.simple_line_graphs.x43_raw_line_mapK",
+      "Chromatic.migration.simple_line_graphs.x43_raw_line_unmapK",
+      "Chromatic.migration.simple_line_graphs.x43_raw_line_map_mono",
+      "Reconstruction.migration.simple_line_graphs.sline_graph_diso",
+      "Reconstruction.migration.simple_line_graphs.iter_sline_graph_diso",
+      "Reconstruction.migration.simple_line_graphs.iter_sline_graph_card_compat",
+      "Minor.migration.simple_line_graphs.sline_graph_diso",
+      "Minor.migration.simple_line_graphs.has_induced_copy_sline_compat"
+    ],
+    "public_client": "base/theories/examples/simple_line_graphs.v",
+    "legacy_baseline": "897a7d30a0137195d30ae803d0482b5df31c3869",
+    "migration_report": "meta/migration_reports/simple_line_graphs.md",
+    "migration_spec": "meta/migration_reports/simple_line_graphs.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A25.md",
+    "foundation_fidelity": "meta/foundation_fidelity/simple-line-graph.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.mgraph (line_graph: the DIRECTED composability digraph target e1 == source e2 on labelled edges, with walk_of_line/line_of_walk; loops can be self-adjacent)",
+        "GraphTheory.core.sgraph/digraph (SGraph, E(G) = sg_edge_set, edgesP, in_edges, eq_diso, Diso', diso_Kn, card_edge_Kn/Knm, isubgraph_comp, iso_isubgraph reused)",
+        "GTBase.base (multigraph line_graph : mgraph -> sgraph, kept distinct; graph_power, ball)",
+        "GTBase.common (chi_diso reused for the square)"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.simple_line_graphs.simple_line_graph",
+      "note": "No installed undirected iterable line graph on simple graphs: upstream mgraph.line_graph is directed on labelled edges and GTBase.base.line_graph is the multigraph one. Evidence: coordination/evidence/A25-line-graphs-discovery-by-path-review/ (upstream.txt) and coordination/evidence/A25-line-graphs/.",
+      "audited_at": "2026-10-04"
+    },
+    "reviewed_by": null
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "family": "simple-line-graph",
+  "modules": {
+    "GTBase.simple_line_graphs": {
+      "path": "base/theories/simple_line_graphs.v",
+      "overrides": {
+        "simple_line_graph": {
+          "verdict": "FAITHFUL",
+          "note": "The line graph of a finite simple graph: one vertex per edge, as the subtype {e : {set G} | e \\in E(G)} of endpoint sets, two edges adjacent iff distinct and sharing an endpoint; isolated vertices disappear, K2 gives one vertex, the triangle and the claw both give K3 (not injective), iterable as sgraph -> sgraph, functorial on isomorphisms. Neither the multigraph GTBase.base.line_graph nor the directed upstream mgraph.line_graph."
+        }
+      },
+      "machine_evidence": [
+        "simple_line_sym",
+        "simple_line_irrefl",
+        "simple_line_edgeE",
+        "card_simple_line_graph",
+        "simple_line_edge_diso",
+        "simple_line_edge_inv_diso",
+        "simple_line_imsetK",
+        "simple_line_imset_invK",
+        "simple_line_mapK",
+        "simple_line_unmapK",
+        "simple_line_map_mono",
+        "simple_line_graph_diso",
+        "simple_line_graph_complete",
+        "diso_imset_mem",
+        "diso_open_neigh",
+        "diso_ball",
+        "graph_power_diso",
+        "chi_graph_power_diso"
+      ]
+    }
+  }
+}

@@ -20,6 +20,7 @@
     carries a [@MOVE-to-base] marker: minor-theory is the second area to need it. *)
 
 From GTBase Require Export base.
+From GTBase Require Import simple_line_graphs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -65,15 +66,19 @@ Proof. by case=> i; exact: (@leq_card _ _ (isubgraph_fun i) (isubgraph_inj i)). 
 
 (** ** Line graph of a simple graph *****************************************)
 
+(** Since the A25 library migration [sline_rel] and [sline_graph] are transparent aliases of
+    [GTBase.simple_line_graphs.simple_line_rel G] and [simple_line_graph G] (the same edge-set subtype
+    and relation); the original Section is frozen and certified in theories/migration/simple_line_graphs.v. *)
+
 Section SLine.
 Variable G : sgraph.
 Definition sline_rel : rel {e : {set G} | e \in E(G)} :=
-  fun e1 e2 => (val e1 != val e2) && (val e1 :&: val e2 != set0).
+  @simple_line_rel G.
 Lemma sline_sym : symmetric sline_rel.
-Proof. by move=> e1 e2; rewrite /sline_rel eq_sym setIC. Qed.
+Proof. exact: simple_line_sym. Qed.
 Lemma sline_irrefl : irreflexive sline_rel.
-Proof. by move=> e; rewrite /sline_rel eqxx. Qed.
-Definition sline_graph : sgraph := SGraph sline_sym sline_irrefl.
+Proof. exact: simple_line_irrefl. Qed.
+Definition sline_graph : sgraph := simple_line_graph G.
 End SLine.
 
 (** ** Subdivision models ***************************************************

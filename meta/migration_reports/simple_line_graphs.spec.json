@@ -1,0 +1,610 @@
+{
+  "family": "simple-line-graph",
+  "canonical_name": "GTBase.simple_line_graphs.simple_line_graph",
+  "canonical_short_name": "simple_line_graph",
+  "relation": "the finite simple line graph on the edge-set subtype: Chromatic X43 x43_line_vertex/x43_line_rel/x43_line_graph and the Section SLine (Variable G) sline_rel/sline_graph of Reconstruction U11 and Minor containment are GTBase.simple_line_graphs.simple_line_vertex/simple_line_rel/simple_line_graph: the carrier {e : {set G} | e \\in E(G)} (X43's x43_edge_set unfolds to E(G)) and the relation (val e != val f) && (val e :&: val f != set0), in the same order, by conversion; each graph agrees pointwise with simple_line_graph and by the identity isomorphism. The six constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. Functoriality on isomorphisms (simple_line_graph_diso, promoted from Kelly) carries the identity isomorphisms through every iterate, zero included; the square's chromatic number moves along isomorphisms (chi_graph_power_diso). The pre-M1 carrier over the raw edge comprehension is another subtype of the same set, mapped by val. Hamilton U2's enum-ranked oriented-edge line graph is a deferred class of this family.",
+  "baseline_commit": "897a7d30a0137195d30ae803d0482b5df31c3869",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "minor-theory": "Minor",
+    "reconstruction-theory": "Reconstruction"
+  },
+  "certificate_files": [
+    "base/theories/simple_line_graphs.v",
+    "chromatic-theory/theories/migration/simple_line_graphs.v",
+    "minor-theory/theories/migration/simple_line_graphs.v",
+    "reconstruction-theory/theories/migration/simple_line_graphs.v",
+    "chromatic-theory/theories/migration/simple_edges.v",
+    "chromatic-theory/theories/migration/induced_free.v",
+    "reconstruction-theory/theories/migration/sdel_edge.v"
+  ],
+  "extra_certificates": [
+    "GTBase.simple_line_graphs.simple_line_sym",
+    "GTBase.simple_line_graphs.simple_line_irrefl",
+    "GTBase.simple_line_graphs.simple_line_edgeE",
+    "GTBase.simple_line_graphs.card_simple_line_graph",
+    "GTBase.simple_line_graphs.simple_line_edge_diso",
+    "GTBase.simple_line_graphs.simple_line_edge_inv_diso",
+    "GTBase.simple_line_graphs.simple_line_imsetK",
+    "GTBase.simple_line_graphs.simple_line_imset_invK",
+    "GTBase.simple_line_graphs.simple_line_mapK",
+    "GTBase.simple_line_graphs.simple_line_unmapK",
+    "GTBase.simple_line_graphs.simple_line_map_mono",
+    "GTBase.simple_line_graphs.simple_line_graph_diso",
+    "GTBase.simple_line_graphs.simple_line_graph_complete",
+    "GTBase.simple_line_graphs.diso_imset_mem",
+    "GTBase.simple_line_graphs.diso_open_neigh",
+    "GTBase.simple_line_graphs.diso_ball",
+    "GTBase.simple_line_graphs.graph_power_diso",
+    "GTBase.simple_line_graphs.chi_graph_power_diso",
+    "Chromatic.migration.simple_line_graphs.x43_line_graph_diso",
+    "Chromatic.migration.simple_line_graphs.x43_raw_line_mapK",
+    "Chromatic.migration.simple_line_graphs.x43_raw_line_unmapK",
+    "Chromatic.migration.simple_line_graphs.x43_raw_line_map_mono",
+    "Reconstruction.migration.simple_line_graphs.sline_graph_diso",
+    "Reconstruction.migration.simple_line_graphs.iter_sline_graph_diso",
+    "Reconstruction.migration.simple_line_graphs.iter_sline_graph_card_compat",
+    "Minor.migration.simple_line_graphs.sline_graph_diso",
+    "Minor.migration.simple_line_graphs.has_induced_copy_sline_compat"
+  ],
+  "summary": [
+    "Batch A, family A25 (simple line graphs on edge-set subtypes), on the private prerequisite 2bec753 (A24 pin 897a7d3 plus four reviewed tool files, unchanged here). New GTBase.simple_line_graphs gives the iterable sgraph -> sgraph line graph on {e : {set G} | e \\in E(G)} with the relation (val e != val f) && (val e :&: val f != set0), its adjacency view and edge count, functoriality on isomorphisms (promoted from Kelly, whose LineDiso block keeps every name and type as thin wrappers), complete line graphs when any two edges meet, and the transport of graph powers and of their chromatic numbers. X43's three sources and the Section SLine of U11 and Minor containment (two each, the containment pair enrolled as public repository sources) are now aliases; the six constructor proofs are one-line uses of the public ones. The public client covers K0, K1 and three isolated vertices, K2, the three-vertex path, the triangle and the claw (non-injectivity), iteration and strong colouring.",
+    "",
+    "Frozen verbatim at 897a7d3: the seven sources, the six constructor proofs with their scripts (U11's and Minor's in dependency-ordered modules with the Section scaffolding), X43's strong edge colouring and six complete current Props (X43, X220's two rows, U11's Graham row, Kelly's Whitney inversion premise enrolled through additional_statements and implications_U11's external statement, both explicitly non-corpus and still conditional). Three complete Originals: X43 at 061154c on M1's raw edge comprehension and A1's raw induced-free, and both Whitney Props at A4's 9e03072 on A4's raw edge deck. Nine whole iffs, 36 mappings (20 current, 16 historical). The combined C19 X220 Original is coordinator-owned and not part of this pin.",
+    "",
+    "Proof consumers: Kelly's LineDiso block becomes wrappers with unchanged headers; Kelly's other proofs, grounding_U11, Minor sline_graph_card_gt0, X220's groundings and implications (e052 keeps both wall hypotheses), A1 and A4 certificates and Atlas implications_A1 recompile unchanged. Hamilton U2's four enum-ranked helpers are a deferred class with their bodies unchanged; GTBase.base's multigraph line_graph, X102's defective x102_line_graph_of and Infinite D4legacy's ordered-edge line graph stay distinct."
+  ],
+  "additional_statements": [
+    "Reconstruction.foundations.kelly.whitney_line_inversion_premise"
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X43.x43_line_vertex",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_vertex",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Legacy.x43_line_vertex",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_vertex_compat",
+      "live_unfolds_to": "simple_line_vertex G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X43.x43_line_rel",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_rel",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Legacy.x43_line_rel",
+      "substitutions": {
+        "x43_line_vertex": "X43Legacy.x43_line_vertex"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_rel_compat",
+      "live_unfolds_to": "@simple_line_rel G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X43.x43_line_rel_sym",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_rel_sym",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Legacy.x43_line_rel_sym",
+      "substitutions": {
+        "x43_line_rel": "X43Legacy.x43_line_rel"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_rel_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X43.x43_line_rel_irrefl",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_rel_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Legacy.x43_line_rel_irrefl",
+      "substitutions": {
+        "x43_line_rel": "X43Legacy.x43_line_rel"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_rel_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X43.x43_line_graph",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_graph",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Legacy.x43_line_graph",
+      "substitutions": {
+        "x43_line_rel_sym": "X43Legacy.x43_line_rel_sym",
+        "x43_line_rel_irrefl": "X43Legacy.x43_line_rel_irrefl"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_graph_compat",
+      "live_unfolds_to": "simple_line_graph G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X43.x43_strong_edge_colourable",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_strong_edge_colourable",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Legacy.x43_strong_edge_colourable",
+      "substitutions": {
+        "x43_line_graph": "X43Legacy.x43_line_graph"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_strong_edge_colourable_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X43.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "diamond_free_claw_free_cubic_strong_six_edge_colourable_statement",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Legacy.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement",
+      "substitutions": {
+        "x43_strong_edge_colourable": "X43Legacy.x43_strong_edge_colourable"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Reconstruction.conjectures.U11.sline_rel",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sline_rel",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "Legacy.sline_rel",
+      "substitutions": {},
+      "certificate": "Reconstruction.migration.simple_line_graphs.sline_rel_compat",
+      "live_unfolds_to": "@simple_line_rel G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Reconstruction.conjectures.U11.sline_sym",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sline_sym",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "ProofsLegacy.sline_sym",
+      "substitutions": {
+        "sline_rel": "(@Legacy.sline_rel G)"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.sline_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Reconstruction.conjectures.U11.sline_irrefl",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sline_irrefl",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "ProofsLegacy.sline_irrefl",
+      "substitutions": {
+        "sline_rel": "(@Legacy.sline_rel G)"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.sline_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Reconstruction.conjectures.U11.sline_graph",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sline_graph",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "GraphLegacy.sline_graph",
+      "substitutions": {
+        "sline_sym": "(@ProofsLegacy.sline_sym G)",
+        "sline_irrefl": "(@ProofsLegacy.sline_irrefl G)"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.sline_graph_compat",
+      "live_unfolds_to": "simple_line_graph G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Reconstruction.conjectures.U11.grahams_conjecture_on_tree_reconstruction_statement",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "grahams_conjecture_on_tree_reconstruction_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "U11Legacy.grahams_conjecture_on_tree_reconstruction_statement",
+      "substitutions": {
+        "sline_graph": "GraphLegacy.sline_graph"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.grahams_conjecture_on_tree_reconstruction_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Reconstruction.foundations.kelly.whitney_line_inversion_premise",
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "whitney_line_inversion_premise",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "KellyLegacy.whitney_line_inversion_premise",
+      "substitutions": {
+        "sline_graph": "GraphLegacy.sline_graph"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.whitney_line_inversion_premise_compat",
+      "non_corpus": true
+    },
+    {
+      "kind": "statement",
+      "qualified": "Reconstruction.conjectures.implications_U11.external_whitney_line_inversion_statement",
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "external_whitney_line_inversion_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "ImplicationsU11Legacy.external_whitney_line_inversion_statement",
+      "substitutions": {
+        "sline_graph": "GraphLegacy.sline_graph"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.external_whitney_line_inversion_statement_compat",
+      "non_corpus": true
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.foundations.containment.sline_rel",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "sline_rel",
+      "frozen_path": "minor-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "Legacy.sline_rel",
+      "substitutions": {},
+      "certificate": "Minor.migration.simple_line_graphs.sline_rel_compat",
+      "live_unfolds_to": "@simple_line_rel G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.foundations.containment.sline_sym",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "sline_sym",
+      "frozen_path": "minor-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "ProofsLegacy.sline_sym",
+      "substitutions": {
+        "sline_rel": "(@Legacy.sline_rel G)"
+      },
+      "certificate": "Minor.migration.simple_line_graphs.sline_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.foundations.containment.sline_irrefl",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "sline_irrefl",
+      "frozen_path": "minor-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "ProofsLegacy.sline_irrefl",
+      "substitutions": {
+        "sline_rel": "(@Legacy.sline_rel G)"
+      },
+      "certificate": "Minor.migration.simple_line_graphs.sline_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.foundations.containment.sline_graph",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "sline_graph",
+      "frozen_path": "minor-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "GraphLegacy.sline_graph",
+      "substitutions": {
+        "sline_sym": "(@ProofsLegacy.sline_sym G)",
+        "sline_irrefl": "(@ProofsLegacy.sline_irrefl G)"
+      },
+      "certificate": "Minor.migration.simple_line_graphs.sline_graph_compat",
+      "live_unfolds_to": "simple_line_graph G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.bounded_degree_induced_wall_or_line_wall_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "bounded_degree_induced_wall_or_line_wall_statement",
+      "frozen_path": "minor-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X220Legacy.bounded_degree_induced_wall_or_line_wall_statement",
+      "substitutions": {
+        "sline_graph": "GraphLegacy.sline_graph"
+      },
+      "certificate": "Minor.migration.simple_line_graphs.bounded_degree_induced_wall_or_line_wall_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.four_family_free_logarithmic_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "four_family_free_logarithmic_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X220Legacy.four_family_free_logarithmic_treewidth_statement",
+      "substitutions": {
+        "sline_graph": "GraphLegacy.sline_graph"
+      },
+      "certificate": "Minor.migration.simple_line_graphs.four_family_free_logarithmic_treewidth_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X43.x43_line_vertex",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_vertex",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Original.x43_line_vertex",
+      "substitutions": {
+        "x43_edge_set": "M1.Legacy.exists_edge_set"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_vertex_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X43.x43_line_rel",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_rel",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Original.x43_line_rel",
+      "substitutions": {
+        "x43_line_vertex": "X43Original.x43_line_vertex"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_rel_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X43.x43_line_rel_sym",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_rel_sym",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Original.x43_line_rel_sym",
+      "substitutions": {
+        "x43_line_rel": "X43Original.x43_line_rel"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_rel_proofs_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X43.x43_line_rel_irrefl",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_rel_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Original.x43_line_rel_irrefl",
+      "substitutions": {
+        "x43_line_rel": "X43Original.x43_line_rel"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_rel_proofs_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X43.x43_line_graph",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_line_graph",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Original.x43_line_graph",
+      "substitutions": {
+        "x43_line_rel_sym": "X43Original.x43_line_rel_sym",
+        "x43_line_rel_irrefl": "X43Original.x43_line_rel_irrefl"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_line_graph_original_diso",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X43.x43_strong_edge_colourable",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_strong_edge_colourable",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Original.x43_strong_edge_colourable",
+      "substitutions": {
+        "x43_line_graph": "X43Original.x43_line_graph"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.x43_strong_edge_colourable_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X43.x43_edge_set",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_edge_set",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "chromatic-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.exists_edge_set",
+      "substitutions": {
+        "x43_edge_set": "exists_edge_set"
+      },
+      "certificate": "Chromatic.migration.simple_edges.x43_edge_set_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X43.x43_induced_free",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_induced_free",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "frozen_path": "chromatic-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x43_induced_free",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.induced_free.x43_induced_free_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X43.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "diamond_free_claw_free_cubic_strong_six_edge_colourable_statement",
+      "frozen_path": "chromatic-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "X43Original.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement",
+      "substitutions": {
+        "x43_strong_edge_colourable": "X43Original.x43_strong_edge_colourable",
+        "x43_induced_free": "A1.Legacy.x43_induced_free"
+      },
+      "certificate": "Chromatic.migration.simple_line_graphs.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sde_rel",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sde_rel",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "Legacy.sde_rel",
+      "substitutions": {},
+      "certificate": "Reconstruction.migration.sdel_edge.sde_rel_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sde_sym",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sde_sym",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "ProofsLegacy.sde_sym",
+      "substitutions": {
+        "sde_rel": "(Legacy.sde_rel e)"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.sdel_edge_proofs_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sde_irrefl",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sde_irrefl",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "ProofsLegacy.sde_irrefl",
+      "substitutions": {
+        "sde_rel": "(Legacy.sde_rel e)"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.sdel_edge_proofs_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sdel_edge",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sdel_edge",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "GraphLegacy.sdel_edge",
+      "substitutions": {
+        "sde_sym": "(ProofsLegacy.sde_sym e)",
+        "sde_irrefl": "(ProofsLegacy.sde_irrefl e)"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.sdel_edge_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.same_edge_deck",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "same_edge_deck",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "U11Legacy.same_edge_deck",
+      "substitutions": {
+        "sdel_edge": "GraphLegacy.sdel_edge"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.same_edge_deck_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Reconstruction.foundations.kelly.whitney_line_inversion_premise",
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "whitney_line_inversion_premise",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "KellyOriginal.whitney_line_inversion_premise",
+      "substitutions": {
+        "sline_graph": "GraphLegacy.sline_graph",
+        "same_edge_deck": "A4.U11Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.whitney_line_inversion_premise_original_compat",
+      "non_corpus": true,
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Reconstruction.conjectures.implications_U11.external_whitney_line_inversion_statement",
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "external_whitney_line_inversion_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "ImplicationsU11Original.external_whitney_line_inversion_statement",
+      "substitutions": {
+        "sline_graph": "GraphLegacy.sline_graph",
+        "same_edge_deck": "A4.U11Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.external_whitney_line_inversion_statement_original_compat",
+      "non_corpus": true,
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/induced_free.v#X43Legacy.statement": "A1 per-row snapshot: A1 froze X43's row over its own raw x43_induced_free but kept the live x43_strong_edge_colourable (after A25 the square of GTBase.simple_line_graphs's line graph, isomorphic to the frozen one). Kept unchanged; the complete pre-M1+A1 row is Chromatic.migration.simple_line_graphs.X43Original.diamond_free_claw_free_cubic_strong_six_edge_colourable_statement, certified by diamond_free_claw_free_cubic_strong_six_edge_colourable_statement_original_compat, which reuses A1's x43_induced_free_compat.",
+    "reconstruction-theory/theories/migration/sdel_edge.v#KellyLegacy.whitney_line_inversion_premise": "A4 snapshot: A4 froze Kelly's Whitney inversion premise over its own raw edge deck but kept the live U11 sline_graph (after A25 GTBase.simple_line_graphs's simple_line_graph, isomorphic to the frozen one). Kept unchanged; the complete premise is Reconstruction.migration.simple_line_graphs.KellyOriginal.whitney_line_inversion_premise, certified by whitney_line_inversion_premise_original_compat, which composes A4's whitney_line_inversion_premise_compat.",
+    "reconstruction-theory/theories/migration/sdel_edge.v#ImplicationsU11Legacy.external_whitney_line_inversion_statement": "A4 snapshot: A4 froze the non-corpus external Whitney statement over its own raw edge deck but kept the live U11 sline_graph (after A25 GTBase.simple_line_graphs's simple_line_graph, isomorphic to the frozen one). Kept unchanged; the complete statement is Reconstruction.migration.simple_line_graphs.ImplicationsU11Original.external_whitney_line_inversion_statement, certified by external_whitney_line_inversion_statement_original_compat, which composes A4's external_whitney_line_inversion_statement_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "sline_graph",
+      "note": "Statement file: the bounded-degree wall or line-wall row and the four-family logarithmic-treewidth row (frozen as X220Legacy with their full quantifiers and exclusions) use sline_graph; texts unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "bounded_degree_induced_wall_or_line_wall_statement",
+      "note": "Grounding consumers: X220_wall_nonvacuous (the line-wall disjunct) and X220_four_family_nonvacuous (the fourth exclusion, through sline_graph_card_gt0) keep their types and proofs; the row references are unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "four_family_free_logarithmic_treewidth_statement",
+      "note": "Grounding consumers: X220_wall_nonvacuous (the line-wall disjunct) and X220_four_family_nonvacuous (the fourth exclusion, through sline_graph_card_gt0) keep their types and proofs; the row references are unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "sline_graph",
+      "note": "Grounding consumers: X220_wall_nonvacuous (the line-wall disjunct) and X220_four_family_nonvacuous (the fourth exclusion, through sline_graph_card_gt0) keep their types and proofs; the row references are unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "four_family_free_logarithmic_treewidth_statement",
+      "note": "Proof consumer: e052_modulo_wall keeps both explicit wall-containment hypotheses (the second over sline_graph W) and its conditional status; type and proof unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "sline_graph",
+      "note": "Proof consumer: e052_modulo_wall keeps both explicit wall-containment hypotheses (the second over sline_graph W) and its conditional status; type and proof unchanged."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
+      "name": "sline_graph",
+      "note": "Grounding consumers: card_sline_graph, card_iter1_sline, sline_adj (its unfold of sline_rel is unchanged) and card_sline_En keep their types and proofs."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
+      "name": "sline_rel",
+      "note": "Grounding consumers: card_sline_graph, card_iter1_sline, sline_adj (its unfold of sline_rel is unchanged) and card_sline_En keep their types and proofs."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "sline_graph",
+      "note": "External hypothesis and proof consumer: external_whitney_line_inversion_statement (frozen as ImplicationsU11Legacy, explicitly non-corpus) stays an explicit conditional premise; reconstruction_implies_edge_reconstruction keeps its type and proof."
+    },
+    {
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "sline_graph",
+      "note": "Foundation consumer: the LineDiso block (diso_imset_edge, diso_imset_edge', imset_bijK, imset_bijK', sldf, sldb, sldfK, sldbK, sldf_mono, sline_diso) becomes thin wrappers of GTBase.simple_line_graphs (the promoted functoriality) with unchanged names and types; sline_adjE, card_sline_graph, the LineCard isomorphism, the deck transport, whitney_line_inversion_premise (enrolled through additional_statements) and the conditional reconstruction theorem keep their types and proofs."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTBase.base.line_graph",
+      "path": "base/theories/base.v",
+      "name": "line_graph",
+      "note": "multigraph line graph (mgraph -> sgraph): one vertex per labelled edge, parallel edges kept, adjacency by shared incidence of distinct edges; not the edge-set subtype; owner and consumers unchanged"
+    },
+    {
+      "qualified": "GTMisc.conjectures.X102.x102_line_graph_of",
+      "path": "graph-theory-misc/theories/conjectures/X102.v",
+      "name": "x102_line_graph_of",
+      "note": "known defective distinct contract: relates all x, y by edge-support intersection without x != y, so at x = y a nonempty edge support conflicts with sgraph irreflexivity (empty line-vertex carrier, edgeless original); kept exactly, with its M1/A1/C13/A14 histories and approximation notes, for a separate re-audit"
+    },
+    {
+      "qualified": "Infinite.conjectures.D4legacy.iedge_vertex",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "name": "iedge_vertex",
+      "note": "infinite class: proof-bearing ordered-edge Record of an arbitrary-Type iGraph; reverse orientations are distinct vertices; a later separate task, partial status unchanged"
+    },
+    {
+      "qualified": "Infinite.conjectures.D4legacy.iline_adj",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "name": "iline_adj",
+      "note": "infinite class: Prop-valued adjacency of ordered-edge records; a later separate task"
+    },
+    {
+      "qualified": "Infinite.conjectures.D4legacy.iline_graph",
+      "path": "infinite-graph-theory/theories/conjectures/D4legacy.v",
+      "name": "iline_graph",
+      "note": "infinite class: iGraph line graph over ordered-edge records; a later separate task"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types of the frozen and live objects (sources, Section arguments, constructor proofs, rows), graph-constructor nonconversion probes, strict dependency closures of the frozen objects with closure parity against the baseline and the identity of the borrowed M1/A1/A4 supports, and the types of every declaration in the reverse dependency closure of X43, U11 and Minor containment at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A25-line-graphs/ (outside the repository)"
+}
