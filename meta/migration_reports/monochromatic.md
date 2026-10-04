@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py monochromatic --details /tmp/mi
 
 - Canonical: `GTBase.monochromatic.monochromatic_on`.
 - Baseline: `47eed16af2f9575575a573f3b8a93860d47e72ca`.
-- Scope: 3 helpers, 5 statements, 18 frozen objects, 66 recorded references.
-- Source checks: 167/167 pass; consistent.
+- Scope: 3 helpers, 5 statements, 18 frozen objects, 70 recorded references.
+- Source checks: 168/168 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -23,4 +23,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `GTMisc.conjectures.X20.x20_monochromatic_connected_set`, `Extremal.conjectures.XE2.xe2_monochromatic_path`, `Hypergraph.conjectures.X108.x108_monochromatic_copy`, `Hypergraph.conjectures.X117.x117_monochromatic_copy`, `Hypergraph.conjectures.X119.x119_monochromatic_copy`, `Extremal.conjectures.XE1.xe1_monochromatic_copy_in_complete`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/maximal_cliques.v#X181Legacy.x181_clique_colourable`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/maximal_cliques.v#X181Legacy.x181_clique_colourable`, `graph-theory-misc/theories/migration/induced_cycles.v#U13RowLegacy.two_colouring_a_graph_without_a_monochromatic_maximu_statement`.
