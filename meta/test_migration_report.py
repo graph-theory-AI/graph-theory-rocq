@@ -975,6 +975,290 @@ class AdditionalStatementTests(unittest.TestCase):
         self.assertTrue(REPORT.check_kernel(self.spec))
 
 
+class PublicAdditionalStatementTests(unittest.TestCase):
+    """An explicitly selected public Prop, including an older complete snapshot."""
+
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+    rebaseline = ReportTests.rebaseline
+    register = FrozenRoleTests.register
+    commit = AdditionalStatementTests.commit
+    assert_invalid = AdditionalStatementTests.assert_invalid
+
+    def setUp(self):
+        AdditionalStatementTests.setUp(self)
+        old_path = self.extra_path
+        self.extra_path = "base/theories/foundations/X2.v"
+        self.extra = "GTBase.foundations.X2.extra_claim"
+        (self.root / old_path).unlink()
+        self.write(self.extra_path, self.extra_text)
+        project = self.root / "base/_CoqProject"
+        project.write_text(project.read_text().replace(
+            "theories/conjectures/X2.v", "theories/foundations/X2.v"))
+        self.cert_source = self.cert_source.replace(
+            "From GTBase.conjectures Require Import X1 X2.",
+            "From GTBase.conjectures Require Import X1.\nFrom GTBase.foundations Require Import X2.")
+        self.spec["additional_statements"] = [self.extra]
+        self.spec["frozen"][-1].update(qualified=self.extra, path=self.extra_path)
+        self.spec["cross_module_consumers"][-1]["path"] = self.extra_path
+        self.write(self.certificate, self.cert_source)
+        self.rebaseline()
+
+    def compile_fixture(self):
+        for source in ("common", "conjectures/X0", "conjectures/X1", "foundations/X2",
+                       "migration/test_family"):
+            proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/" + source + ".v"],
+                                  cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                  text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+
+    def add_original(self):
+        old_text = self.extra_text.replace("forall n, middle n.", "forall n, middle n /\\ True.")
+        self.write(self.extra_path, old_text)
+        old_pin = self.commit()
+        self.write(self.extra_path, self.extra_text)
+        self.rebaseline()
+        self.cert_source += (
+            "Module Original.\n"
+            "Definition extra_claim : Prop := forall n, MiddleLegacy.middle n /\\ True.\n"
+            "End Original.\n"
+            "Lemma original_extra_compat : Original.extra_claim <-> extra_claim.\n"
+            "Proof. split; intros H n; [exact (proj1 (H n)) | split; [apply H | exact I]]. Qed.\n")
+        original = {**copy.deepcopy(self.spec["frozen"][-1]), "kind": "original-statement",
+                    "commit": old_pin, "frozen": "Original.extra_claim",
+                    "certificate": self.module + ".original_extra_compat"}
+        self.spec["frozen"].append(original)
+        self.register("original_extra_compat")
+        self.write(self.certificate, self.cert_source)
+
+    def test_public_prop_without_repository_source_enables_complete_index(self):
+        self.assertNotIn("repository_sources", self.registry["primitives"]["test-family"])
+        self.assertEqual(self.failures(), [])
+        rows, _ = REPORT.manifest_rows(self.spec["baseline_commit"])
+        for pin in (self.spec["baseline_commit"], None):
+            found, closure = REPORT.statement_dependencies(
+                pin, {self.helper}, rows, additional_statements={self.extra})
+            self.assertEqual(found, {self.statement, self.extra})
+            self.assertIn("GTBase.conjectures.X1.middle", closure)
+        # Indexing public files never auto-enrolls other Prop-valued definitions.
+        self.assertNotIn(self.extra, REPORT.statement_dependencies(
+            self.spec["baseline_commit"], {self.helper}, rows, include_public=True)[0])
+        del self.spec["frozen"][2]
+        self.assertIn("additional statement paths have complete frozen intermediary coverage", self.failures())
+
+    def test_public_current_and_original_keep_exact_source_provenance(self):
+        self.add_original()
+        self.assertEqual(self.failures(), [])
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        self.spec["frozen"][-1]["commit"] = self.spec["baseline_commit"]
+        self.assertTrue(any("frozen copy" in failure for failure in self.failures()))
+        self.spec["frozen"][-1] = original
+        self.write(self.certificate, self.cert_source.replace(
+            "forall n, MiddleLegacy.middle n /\\ True.", "True."))
+        self.assertTrue(any("frozen copy" in failure for failure in self.failures()))
+        self.write(self.certificate, self.cert_source)
+        self.spec["frozen"].append(copy.deepcopy(self.spec["frozen"][-2]))
+        self.assert_invalid("one exact non_corpus")
+        self.spec["frozen"].pop()
+        del self.spec["frozen"][-2]
+        self.assert_invalid("one exact non_corpus")
+
+    def test_supported_public_paths_do_not_allow_arbitrary_files(self):
+        for name in ("Reconstruction.foundations.kelly.claim", "GTBase.common.claim",
+                     "ClassicalLemmas.konig.source.claim"):
+            with self.subTest(name=name):
+                self.assertTrue(REPORT.public_repository_path(REPORT.additional_statement_path(name)))
+        for name in ("Unknown.foundations.source.claim", "GTBase.migration.source.claim",
+                     "GTBase.examples.source.claim", "Chromatic.private.source.claim",
+                     "GTBase.foundations._assum_probe.claim", "GTBase.scratch_probe.claim"):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "additional statement"):
+                REPORT.additional_statement_path(name)
+
+    def test_original_identity_and_immutable_commit_guards(self):
+        self.add_original()
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        self.command("git", "branch", "moving-history", original["commit"])
+        for mutation in ({"commit": "moving-history"}, {"commit": None}, {"commit": "0" * 40},
+                         {"commit": original["commit"][:7]}, {"non_corpus": False},
+                         {"corpus": "v2"}, {"path": self.middle_path}, {"name": "middle"},
+                         {"certificate": None}, {"kind": "chain"}):
+            with self.subTest(mutation=mutation):
+                self.spec["frozen"][-1] = {**original, **mutation}
+                self.assert_invalid("additional statement|repository source git")
+        self.spec["frozen"][-1] = original
+        self.assertEqual(self.failures(), [])
+
+    def historical_snapshot(self, source=None, project=None, alias=None):
+        """Create a distinct old commit without changing the valid current files."""
+        targets = (self.extra_path, "base/_CoqProject")
+        current = {p: (self.root / p).read_text() for p in targets}
+        old = self.spec["frozen"][-1]["commit"]
+        self.write(self.extra_path, source if source is not None else
+                   self.command("git", "show", old + ":" + self.extra_path))
+        if project is not None:
+            self.write("base/_CoqProject", project)
+        if alias:
+            file = self.root / alias
+            self.write("snapshot-copy", file.read_text())
+            file.unlink()
+            file.symlink_to(self.root / "snapshot-copy")
+        historical = self.commit()
+        for p, text in current.items():
+            file = self.root / p
+            if file.is_symlink():
+                file.unlink()
+            self.write(p, text)
+        self.spec["frozen"][-1]["commit"] = historical
+
+    def test_original_project_namespace_and_regular_blob_guards(self):
+        self.add_original()
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        project = (self.root / "base/_CoqProject").read_text()
+        for changed in (project.replace("theories/foundations/X2.v\n", ""),
+                        project.replace("-Q theories GTBase", "-Q theories Wrong")):
+            with self.subTest(project=changed):
+                self.spec["frozen"][-1] = copy.deepcopy(original)
+                self.historical_snapshot(project=changed)
+                self.assert_invalid("not build-listed|namespace ownership")
+        for alias in (self.extra_path, "base/_CoqProject"):
+            with self.subTest(alias=alias):
+                self.spec["frozen"][-1] = copy.deepcopy(original)
+                self.historical_snapshot(alias=alias)
+                self.assert_invalid("expected regular source blob")
+
+    def test_original_missing_files_and_corpus_identity_are_rejected(self):
+        self.add_original()
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        for relative in (self.extra_path, "base/_CoqProject"):
+            with self.subTest(missing=relative):
+                file = self.root / relative
+                text = file.read_text()
+                file.unlink()
+                self.spec["frozen"][-1] = {**original, "commit": self.commit()}
+                self.write(relative, text)
+                self.assert_invalid("repository source git|regular source blob")
+        for paths in REPORT.REG.CORPORA.values():
+            relative = "meta/" + paths["manifest"]
+            file = self.root / relative
+            text = file.read_text()
+            manifest = json.loads(text)
+            manifest["rows"].append({"formal_name": "extra_claim"})
+            self.write(relative, json.dumps(manifest))
+            self.spec["frozen"][-1] = {**original, "commit": self.commit()}
+            self.write(relative, text)
+            self.assert_invalid("outside historical corpus manifests")
+        self.spec["frozen"][-1] = original
+        self.assertEqual(self.failures(), [])
+
+    def test_original_nullary_shape_scope_and_load_guards(self):
+        self.add_original()
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        raw = self.command("git", "show", original["commit"] + ":" + self.extra_path)
+        for source in (raw.replace("(**", "Section S.\n(**") + "\nEnd S.\n",
+                       raw.replace("(**", "Module S.\n(**") + "\nEnd S.\n",
+                       raw.replace("(**", "Time Section é.\n(**") + "\nEnd é.\n",
+                       raw.replace("(**", 'Load "scope_fragment".\n(**') + "\nEnd S.\n",
+                       raw.replace("extra_claim : Prop", "extra_claim (n : nat) : Prop"),
+                       raw.replace("extra_claim : Prop", "extra_claim")):
+            with self.subTest(source=source):
+                self.spec["frozen"][-1] = copy.deepcopy(original)
+                self.historical_snapshot(source=source)
+                self.assert_invalid("additional statement|unsupported Module/Section")
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_compiled_unused_original_section_is_rejected(self):
+        self.add_original()
+        self.compile_fixture()
+        raw = self.command("git", "show", self.spec["frozen"][-1]["commit"] + ":" + self.extra_path)
+        scoped = raw.replace("(**", "Section Hidden.\n(**") + "\nEnd Hidden.\n"
+        self.write(self.extra_path, scoped)
+        proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/foundations/X2.v"],
+                              cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                              text=True, capture_output=True)
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        self.write(self.extra_path, self.extra_text)
+        self.historical_snapshot(source=scoped)
+        self.assert_invalid("outside Module/Section")
+
+    def test_public_regular_source_project_and_namespace_guards_stay_fresh(self):
+        self.assertEqual(self.failures(), [])
+        for relative in (self.extra_path, "base/_CoqProject"):
+            file = self.root / relative
+            text = file.read_text()
+            file.unlink()
+            self.assert_invalid("missing or aliased")
+            target = self.root / "copy"
+            target.write_text(text)
+            file.symlink_to(target)
+            self.assert_invalid("missing or aliased")
+            file.unlink()
+            file.write_text(text)
+        project = self.root / "base/_CoqProject"
+        original = project.read_text()
+        project.write_text(original.replace("theories/foundations/X2.v\n", ""))
+        self.assert_invalid("not build-listed")
+        project.write_text(original.replace("-Q theories GTBase", "-Q theories Wrong"))
+        self.assert_invalid("namespace ownership")
+        project.write_text(original)
+        self.write(self.extra_path, self.extra_text.replace("middle n", "False"))
+        self.assert_invalid("must be reached")
+
+    test_public_shape_and_scope_guards = AdditionalStatementTests.test_prop_shape_and_scopes_reject_helpers_and_hidden_parameters
+    test_public_wrong_mapping_guards = AdditionalStatementTests.test_wrong_or_missing_mapping_is_rejected
+    test_public_manifest_exclusion = AdditionalStatementTests.test_corpus_name_at_either_pin_cannot_be_enrolled
+    test_public_frozen_body_and_whole_certificate = AdditionalStatementTests.test_frozen_body_and_whole_certificate_checks_still_apply
+    test_public_kernel_guarded_certificate = AdditionalStatementTests.test_kernel_accepts_full_enrolled_prop_and_rejects_guarded_certificate
+    test_public_kernel_axioms = AdditionalStatementTests.test_kernel_rejects_inherited_axioms_without_an_exemption
+    test_public_kernel_implicit_parameter = AdditionalStatementTests.test_kernel_checks_unapplied_frozen_prop_even_with_inferable_implicit
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_compiled_public_scopes_and_load_reject_at_both_pins(self):
+        self.compile_fixture()
+        self.write("base/scope_fragment.v", "Section S.\n")
+        for prefix, label in (("Time Section S.\n", "S"), ("Section é.\n", "é"),
+                              ('Section S.\nRedirect "escaped "" End S" Check nat.\n', "S"),
+                              ('Load "scope_fragment".\n', "S")):
+            with self.subTest(prefix=prefix):
+                source = self.extra_text.replace("(**", prefix + "(**") + f"End {label}.\n"
+                self.write(self.extra_path, source)
+                proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/foundations/X2.v"],
+                                      cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                      text=True, capture_output=True)
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+                self.assert_invalid("Module/Section|source-splicing Load")
+                self.rebaseline()
+                self.write(self.extra_path, self.extra_text)
+                self.assert_invalid("Module/Section|source-splicing Load")
+                self.rebaseline()
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_public_original_kernel_checks_every_complete_endpoint(self):
+        self.add_original()
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        old_proof = "Proof. split; intros H n; [exact (proj1 (H n)) | split; [apply H | exact I]]. Qed."
+        changed = self.cert_source.replace(
+            "Lemma original_extra_compat : Original.extra_claim <-> extra_claim.",
+            "Lemma original_extra_compat : False -> (Original.extra_claim <-> extra_claim).")
+        self.write(self.certificate, changed.replace(old_proof, "Proof. intros H; destruct H. Qed."))
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+        changed = self.cert_source.replace(
+            "Definition extra_claim : Prop := forall n, MiddleLegacy.middle n /\\ True.",
+            "Definition extra_claim {n : nat} : Prop := MiddleLegacy.middle n /\\ True.")
+        changed = changed.replace("Original.extra_claim <->", "@Original.extra_claim 0 <->")
+        changed = changed.replace(old_proof,
+            "Proof. change ((0 = 0 /\\ True) <-> forall n : nat, n = n). "
+            "split; intros; [reflexivity | split; [reflexivity | exact I]]. Qed.")
+        self.write(self.certificate, changed)
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+
 class RepositorySourceTests(unittest.TestCase):
     """A real public source -> foundation intermediary -> two corpus rows."""
 

@@ -84,8 +84,18 @@ An explicitly reviewed complete non-corpus proposition whose name lacks
 `_statement` can be listed in its report specification's optional
 `additional_statements` array of qualified names. Each must be reached from the
 migrated sources at both baseline and current source, outside both manifests,
-and have exactly one `kind: statement`, `non_corpus: true` frozen mapping and a
-complete iff certificate. Its source and project must be regular, build-listed
+and have exactly one current `kind: statement`, `non_corpus: true` frozen mapping
+at the family baseline and a complete iff certificate. Explicit additional
+`original-statement` snapshots of that same identity are permitted; every snapshot
+must pass the same immutable full-commit, regular source/project, build ownership,
+explicit non-corpus identity and top-level nullary/scope checks at its own effective
+commit, as well as source/body provenance and complete iff checks. No other role may
+hide a whole proposition. Known conjecture modules and the existing supported
+public-library locations (GTBase, area foundations and ClassicalLemmas) are accepted;
+migration/example/private/probe files are not public enrollment locations. An
+explicit public additional Prop enables public intermediary indexing even without
+a public source descriptor; unrelated Props are never enrolled automatically.
+Its source and project must be regular, build-listed
 and owned by the recorded namespace at the immutable full baseline commit and
 in the current tree. The initial format accepts only top-level
 `Definition NAME : Prop := ...` outside Modules and Sections; parameterized or

@@ -382,6 +382,23 @@ def statement_ownership_text(source: str) -> str:
     return "".join(result)
 
 
+def additional_statement_path(qualified: str) -> str:
+    """Resolve only known conjecture or supported public-library locations."""
+    owners = {namespace: package for package, namespace in INV.repository_namespaces().items()}
+    owners.update(GTBase="base", Atlas="atlas", ClassicalLemmas="classical-lemmas")
+    namespace, *parts, name = qualified.split(".")
+    package = owners.get(namespace)
+    if package is None or not parts:
+        raise ValueError(f"{qualified}: additional statement needs a known module")
+    path = package + "/theories/" + "/".join(parts) + ".v"
+    public = public_repository_path(path)
+    if parts[0] != "conjectures" and not public:
+        raise ValueError(f"{qualified}: unsupported additional statement location")
+    if public and Path(path).name.startswith(SKIP_PREFIXES):
+        raise ValueError(f"{qualified}: probe sources cannot own additional statements")
+    return path
+
+
 def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) -> set[str]:
     """Explicitly reviewed classification, never inferred from a Prop's meaning.
 
@@ -396,27 +413,39 @@ def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) 
     if (not re.fullmatch(r"[0-9a-f]{40}", base)
             or INV.source_git(ROOT, "cat-file", "-t", base).strip() != "commit"):
         raise ValueError("additional statements require an immutable full baseline commit")
-    owners = {namespace: package for package, namespace in INV.repository_namespaces().items()}
-    # corpus_registry also retains the historic graph-theory-base alias.
-    owners.update(GTBase="base", Atlas="atlas", ClassicalLemmas="classical-lemmas")
     for qualified in sorted(names):
-        namespace, *parts, name = qualified.split(".")
-        package = owners.get(namespace)
-        if package is None or not parts or parts[0] != "conjectures":
-            raise ValueError(f"{qualified}: additional statement needs a known conjecture module")
-        path = package + "/theories/" + "/".join(parts) + ".v"
+        path = additional_statement_path(qualified)
+        package, name = path.split("/", 1)[0], qualified.rsplit(".", 1)[1]
         project_path = package + "/_CoqProject"
         if rows_base.get(name) or rows_now.get(name):
             raise ValueError(f"{qualified}: additional statement must be outside both corpus manifests")
-        objects = [obj for obj in spec["frozen"] if obj.get("qualified") == qualified]
+        related = [obj for obj in spec["frozen"] if obj.get("qualified") == qualified]
+        objects = [obj for obj in related if obj.get("kind") == "statement"]
+        if any(obj.get("kind") not in {"statement", "original-statement"} for obj in related):
+            raise ValueError(f"{qualified}: additional statements require whole statement roles")
         if (len(objects) != 1 or objects[0].get("kind") != "statement"
                 or objects[0].get("non_corpus") is not True or "corpus" in objects[0]
                 or objects[0].get("path") != path or objects[0].get("name") != name
                 or objects[0].get("commit", base) != base
                 or not objects[0].get("certificate")):
             raise ValueError(f"{qualified}: additional statement needs one exact non_corpus statement mapping")
-        for commit in (base, None):
+        commits = {base}
+        for obj in related:
+            if (obj.get("non_corpus") is not True or "corpus" in obj
+                    or obj.get("path") != path or obj.get("name") != name
+                    or not obj.get("certificate")):
+                raise ValueError(f"{qualified}: additional statement snapshots need exact non_corpus identity")
+            commit = obj.get("commit", base)
+            if (not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit)
+                    or INV.source_git(ROOT, "cat-file", "-t", commit).strip() != "commit"):
+                raise ValueError(f"{qualified}: additional statement snapshots require immutable full commits")
+            commits.add(commit)
+        # A historical Original is enrolled as the same complete Prop: apply
+        # every source/project/shape/scope guard at its own effective commit.
+        for commit in (*sorted(commits), None):
             if commit is not None:
+                if commit != base and manifest_rows(commit)[0].get(name):
+                    raise ValueError(f"{qualified}: additional statement snapshot must be outside historical corpus manifests")
                 _, source = INV.regular_source_blob(ROOT, commit, path)
                 _, project = INV.regular_source_blob(ROOT, commit, project_path)
             else:
@@ -480,6 +509,8 @@ def statement_dependencies(base: str | None, sources: set[str], rows: dict, *,
     declaration bodies, not proof terms or every internal module, and does not
     enroll those nodes as sources or add them to the helper debt inventory.
     """
+    include_public = include_public or any(
+        public_repository_path(additional_statement_path(name)) for name in additional_statements)
     paths = (git("ls-tree", "-r", "--name-only", base).splitlines() if base is not None
              else sorted(set(git("ls-files", "--cached", "--others", "--exclude-standard").splitlines())))
     projects, nodes, node_packages, short_names = {}, {}, {}, defaultdict(set)
