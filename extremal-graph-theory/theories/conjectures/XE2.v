@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.XE2 -- Erdos solved clean/bounded rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import triangles.
 From Extremal.conjectures Require Import X4 XE1.
 
 Set Implicit Arguments.
@@ -8,7 +9,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Definition xe2_tri_edges (G : sgraph) (T : {set G}) : {set {set G}} :=
-  [set e : {set G} | (e \subset T) && (#|e| == 2)].
+  raw_pairs T.
 
 Definition xe2_edge_disjoint_triangles (G : sgraph) (ts : seq {set G}) : Prop :=
   uniq ts /\

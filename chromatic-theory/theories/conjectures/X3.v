@@ -7,7 +7,8 @@
     intentionally deferred. *)
 
 From Chromatic.conjectures Require Import U8.
-From GTBase Require Import colourings graph_classes.
+From GTBase Require Import colourings graph_classes induced_paths induced_cycles.
+From GTBase Require Import set_pairs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -24,12 +25,12 @@ Definition x3_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
   seq_consecutive p u v.
 
 (** A hole is an induced cycle of length at least four.  [ucycle] supplies the
-    closed walk and vertex uniqueness; the final clause rules out chords. *)
-Definition x3_hole (G : sgraph) (c : seq G) : Prop :=
-  [/\ ucycle (--) c, 3 < size c &
-      forall u v : G,
-        u \in c -> v \in c -> u != v -> u -- v ->
-        x3_consecutive_in_cycle c u v].
+    closed walk and vertex uniqueness; the final clause rules out chords.  Since the B23 library
+    migration (2026-10-03) a transparent alias of [GTBase.induced_cycles.hole]; the former body (a
+    three-way conjunction whose chord clause took a redundant [u != v] premise before the edge and
+    stated the consecutiveness as a proposition) is frozen and certified equivalent in
+    theories/migration/induced_cycles.v. *)
+Definition x3_hole (G : sgraph) (c : seq G) : Prop := hole c.
 
 Definition x3_has_hole_length (G : sgraph) (L : nat) : Prop :=
   exists c : seq G, x3_hole c /\ size c = L.
@@ -47,17 +48,15 @@ Definition x3_rainbow_hole_run
     x3_hole c /\ s <= size c /\ uniq (map col (take s (rot r c))).
 
 Definition x3_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall u v : G, u \in S -> v \in S -> u -- v -> False.
+  stable S.
 
 Definition x3_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.
 
-Definition x3_induced_path (G : sgraph) (p : seq G) : Prop :=
-  [/\ uniq p,
-      (if p is u :: q then path (--) u q else true)
-    & forall u v : G,
-        u \in p -> v \in p -> u != v -> u -- v ->
-        x3_consecutive_in_path p u v].
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.induced_path] (the empty-allowed chordless path; the same body by
+    conversion); the original body is frozen and certified in theories/migration/induced_paths.v. *)
+Definition x3_induced_path (G : sgraph) (p : seq G) : Prop := induced_path p.
 
 Definition x3_family_covers_vertices
     (G : sgraph) (I : finType) (A : I -> {set G}) : Prop :=
@@ -68,8 +67,7 @@ Definition x3_uniquely_covers_path_vertex
   exists i : I, A i :&: x3_path_vertices p = [set v].
 
 Definition x3_anticomplete (G : sgraph) (A B : {set G}) : Prop :=
-  [disjoint A & B] /\
-  forall a b : G, a \in A -> b \in B -> a -- b -> False.
+  anticomplete A B.
 
 Definition x3_bounded_chromatic (F : sgraph -> Prop) : Prop :=
   exists c : nat, forall G : sgraph, F G -> χ([set: G]) <= c.

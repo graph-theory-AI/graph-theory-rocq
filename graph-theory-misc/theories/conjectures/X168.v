@@ -2,7 +2,7 @@
 
 From GraphTheory Require Import minor.
 From GTBase Require Export base.
-From GTBase Require Import minor_classes.
+From GTBase Require Import minor_classes spanning_trees.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -13,9 +13,7 @@ Unset Printing Implicit Defensive.
 Definition x168_proper_minor_closed_class (C : sgraph -> Prop) : Prop :=
   GTBase.minor_classes.proper_minor_closed_class C.
 
-Definition x168_spanning_tree (G : sgraph) (T : {set {set G}}) : Prop :=
-  T \subset fg_edges G /\
-  is_tree [set: fg_labelled_sgraph T].
+Definition x168_spanning_tree (G : sgraph) (T : {set {set G}}) : Prop := fg_spanning_tree T.
 
 Record x168_extension_system (G : sgraph) (facets : nat) := {
   x168_aux_dim : nat;

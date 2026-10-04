@@ -1,0 +1,1064 @@
+{
+  "family": "stable-set",
+  "canonical_name": "GraphTheory.core.dom.stable",
+  "canonical_short_name": "stable",
+  "relation": "simple-graph stable sets of a supplied vertex set, with upstream GraphTheory.core.dom.stable S ([disjoint NS(S) & S], Boolean) canonical: Chromatic X3 x3_stable_set, Chromatic/Extremal/Packing XE1 xe1_stable_set, Extremal X56 x56_stable_set and Packing X18 x18_independent_set (x -- y -> False for all supplied pairs) are iffs with it by GTBase.stable_sets.stable_noedgeP; Extremal X97 x97_stable_set and GTMisc X169/X208 x169_stable_set/x208_stable_set (x != y -> ~~ (x -- y)) by stable_distinctP; GTMisc X29 x29_stable_set (~~ (x -- y) for all supplied pairs, the diagonal included) by stable_nonadjP; GTMisc X163 x163_stableb ([forall x in S, [forall y in S, (x == y) || ~~ (x -- y)]]) is EQUAL to stable S by stable_eqbE. The variants agree by sgraph irreflexivity, with no nonempty, cardinality or looplessness guard; directed stable sets (which must also exclude loops) are a separate contract.",
+  "baseline_commit": "96be00e5259f813eed101893330ee162b63f69e2",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "packing-theory": "Packing"
+  },
+  "certificate_files": [
+    "base/theories/stable_sets.v",
+    "chromatic-theory/theories/migration/stable_sets.v",
+    "extremal-graph-theory/theories/migration/stable_sets.v",
+    "graph-theory-misc/theories/migration/stable_sets.v",
+    "packing-theory/theories/migration/stable_sets.v",
+    "chromatic-theory/theories/migration/consecutive_in_path.v",
+    "chromatic-theory/theories/migration/path_vertices.v",
+    "chromatic-theory/theories/migration/subgraph_of.v",
+    "extremal-graph-theory/theories/migration/subgraph_of.v",
+    "extremal-graph-theory/theories/migration/induced_free.v",
+    "extremal-graph-theory/theories/migration/complement.v",
+    "extremal-graph-theory/theories/migration/edge_count.v",
+    "graph-theory-misc/theories/migration/complement.v",
+    "graph-theory-misc/theories/migration/bag_decompositions.v",
+    "packing-theory/theories/migration/maximal_cliques.v",
+    "packing-theory/theories/migration/ordinal_path.v",
+    "graph-theory-misc/theories/migration/induced_paths.v"
+  ],
+  "extra_certificates": [
+    "GTBase.stable_sets.stable_noedgeP",
+    "GTBase.stable_sets.stable_nonadjP",
+    "GTBase.stable_sets.stable_distinctP",
+    "GTBase.stable_sets.stable_eqbE",
+    "GTBase.stable_sets.stable_pair",
+    "GTMisc.migration.stable_sets.x163_event_weight_compat"
+  ],
+  "summary": [
+    "Batch A, family A20 (simple-graph stable sets), initial baseline A19 96be00e, composed on reviewed C23 ed88da8 without changing that baseline. Canonical: upstream GraphTheory.core.dom.stable. The new GTBase.stable_sets proves raw views only, adding no predicate: the reflections stable_noedgeP, stable_nonadjP and stable_distinctP, the Boolean equality stable_eqbE and the two-vertex case stable_pair. The eleven sources now unfold to stable S: ten Prop iffs and X163's Boolean equality. The public client: the empty set and K_0, singletons, the whole edgeless carrier, both K_2 vertices rejected together, hereditary restriction, induced-subgraph transport, the raw views and the bounded Boolean form.",
+    "",
+    "Frozen verbatim at 96be00e: the eleven sources, the fifteen row-reaching chains (XE2 cochromatic colouring, number and maximum on n; X56 homogeneous set; X97 maximum independent set, hitting set and hitting number; X163 Boolean normality; X169 token sliding and polytime decision; X208 maximum-size output and polytime; X29 stable cover and normality; Packing XE1 triangle-free guarantee), Extremal XE1's dormant xe1_has_independent_set, and the seventeen rows. Complete rows at the pre-migration 9e03072: X3 (B1+B3), Chromatic #762 (A5), Extremal X56 (A1+A6), #802 (A5), #22 (A5+A7), #801 (A7), GTMisc X29 (A6), X169 (C13, with its polytime chain) and Packing #151 (A18): initially 26 whole-row iffs; the combined X18 (B21) and X208 (B22) Originals add two, for 28 whole-row iffs in all; the bridges reuse the earlier certificates. Finite palettes, attained extrema, quantifier orders, guards, natural subtraction, trunc_log, X163's Boolean event, X169's blocked encoding and X208's numeric output and witnesses are unchanged.",
+    "",
+    "History: the initial fifteen earlier snapshots and the three newer B21/B22 snapshots retain their exact frozen bodies; the complete A20 Originals close every raw stable-set chain. The 65 initial objects are an exact prefix of 73: four reused B21 graph/scaffolding objects, two B22 path/class objects and two complete pre-migration rows are appended. Packing X18 retains the same ordinal carrier, partition, set and budgets; GTMisc X208 retains the same program, global cost, output and attained maximum witnesses. Chromatic X3's existing A20+B3+B1 Original is unchanged. The only additional old proof adaptation is B21's x18_independent_set_compat through public stable_noedgeP, with its exact header and every frozen graph/proof body preserved; initial Chromatic cochromatic proof adaptations remain as reviewed. Initial author acceptance and the new combined-source review/gates are separate receipts."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_stable_set",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_stable_set",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "Legacy.x3_stable_set",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.stable_sets.x3_stable_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.XE1.xe1_stable_set",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_stable_set",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "Legacy.xe1_stable_set",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.stable_sets.xe1_stable_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE2.xe2_cochromatic_colouring",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_cochromatic_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Legacy.xe2_cochromatic_colouring",
+      "substitutions": {
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Chromatic.migration.stable_sets.xe2_cochromatic_colouring_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE2.xe2_cochromatic_number",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_cochromatic_number",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Legacy.xe2_cochromatic_number",
+      "substitutions": {
+        "xe2_cochromatic_colouring": "XE2Legacy.xe2_cochromatic_colouring"
+      },
+      "certificate": "Chromatic.migration.stable_sets.xe2_cochromatic_number_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.XE2.xe2_max_cochromatic_on_n",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_max_cochromatic_on_n",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Legacy.xe2_max_cochromatic_on_n",
+      "substitutions": {
+        "xe2_cochromatic_number": "XE2Legacy.xe2_cochromatic_number"
+      },
+      "certificate": "Chromatic.migration.stable_sets.xe2_max_cochromatic_on_n_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_758_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_758_statement",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Legacy.erdos_758_statement",
+      "substitutions": {
+        "xe2_max_cochromatic_on_n": "XE2Legacy.xe2_max_cochromatic_on_n"
+      },
+      "certificate": "Chromatic.migration.stable_sets.erdos_758_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_762_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_762_statement",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Legacy.erdos_762_statement",
+      "substitutions": {
+        "xe2_cochromatic_number": "XE2Legacy.xe2_cochromatic_number"
+      },
+      "certificate": "Chromatic.migration.stable_sets.erdos_762_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_922_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_922_statement",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Legacy.erdos_922_statement",
+      "substitutions": {
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Chromatic.migration.stable_sets.erdos_922_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.stable_cover_unique_induced_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "stable_cover_unique_induced_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "X3Legacy.stable_cover_unique_induced_path_statement",
+      "substitutions": {
+        "x3_stable_set": "Legacy.x3_stable_set"
+      },
+      "certificate": "Chromatic.migration.stable_sets.stable_cover_unique_induced_path_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X7.cochromatic_gap_three_statement",
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "cochromatic_gap_three_statement",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "X7Legacy.cochromatic_gap_three_statement",
+      "substitutions": {
+        "xe2_cochromatic_number": "XE2Legacy.xe2_cochromatic_number"
+      },
+      "certificate": "Chromatic.migration.stable_sets.cochromatic_gap_three_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.stable_cover_unique_induced_path_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "stable_cover_unique_induced_path_statement",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "X3Original.stable_cover_unique_induced_path_statement",
+      "substitutions": {
+        "x3_stable_set": "Legacy.x3_stable_set",
+        "x3_induced_path": "B3.X3Legacy.induced_path",
+        "x3_uniquely_covers_path_vertex": "B1.X3Legacy.uniquely_covers_path_vertex"
+      },
+      "certificate": "Chromatic.migration.stable_sets.stable_cover_unique_induced_path_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.XE2.erdos_762_statement",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "erdos_762_statement",
+      "frozen_path": "chromatic-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Original.erdos_762_statement",
+      "substitutions": {
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of",
+        "xe2_cochromatic_number": "XE2Legacy.xe2_cochromatic_number"
+      },
+      "certificate": "Chromatic.migration.stable_sets.erdos_762_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X56.x56_stable_set",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_stable_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "Legacy.x56_stable_set",
+      "substitutions": {},
+      "certificate": "Extremal.migration.stable_sets.x56_stable_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X97.x97_stable_set",
+      "path": "extremal-graph-theory/theories/conjectures/X97.v",
+      "name": "x97_stable_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "Legacy.x97_stable_set",
+      "substitutions": {},
+      "certificate": "Extremal.migration.stable_sets.x97_stable_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.XE1.xe1_stable_set",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_stable_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "Legacy.xe1_stable_set",
+      "substitutions": {},
+      "certificate": "Extremal.migration.stable_sets.xe1_stable_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X56.x56_homogeneous_set",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_homogeneous_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "X56Legacy.x56_homogeneous_set",
+      "substitutions": {
+        "x56_stable_set": "Legacy.x56_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.x56_homogeneous_set_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X56.c8_complement_c8_erdos_hajnal_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "c8_complement_c8_erdos_hajnal_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "X56Legacy.c8_complement_c8_erdos_hajnal_statement",
+      "substitutions": {
+        "x56_homogeneous_set": "X56Legacy.x56_homogeneous_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.c8_complement_c8_erdos_hajnal_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X97.x97_maximum_independent_set",
+      "path": "extremal-graph-theory/theories/conjectures/X97.v",
+      "name": "x97_maximum_independent_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "X97Legacy.x97_maximum_independent_set",
+      "substitutions": {
+        "x97_stable_set": "Legacy.x97_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.x97_maximum_independent_set_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X97.x97_hits_all_maximum_independent_sets",
+      "path": "extremal-graph-theory/theories/conjectures/X97.v",
+      "name": "x97_hits_all_maximum_independent_sets",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "X97Legacy.x97_hits_all_maximum_independent_sets",
+      "substitutions": {
+        "x97_maximum_independent_set": "X97Legacy.x97_maximum_independent_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.x97_hits_all_maximum_independent_sets_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.X97.x97_hitting_number_at_most",
+      "path": "extremal-graph-theory/theories/conjectures/X97.v",
+      "name": "x97_hitting_number_at_most",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "X97Legacy.x97_hitting_number_at_most",
+      "substitutions": {
+        "x97_hits_all_maximum_independent_sets": "X97Legacy.x97_hits_all_maximum_independent_sets"
+      },
+      "certificate": "Extremal.migration.stable_sets.x97_hitting_number_at_most_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X97.bollobas_erdos_tuza_independent_set_hitting_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X97.v",
+      "name": "bollobas_erdos_tuza_independent_set_hitting_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "X97Legacy.bollobas_erdos_tuza_independent_set_hitting_statement",
+      "substitutions": {
+        "x97_hitting_number_at_most": "X97Legacy.x97_hitting_number_at_most"
+      },
+      "certificate": "Extremal.migration.stable_sets.bollobas_erdos_tuza_independent_set_hitting_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.XE1.xe1_has_independent_set",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_has_independent_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "XE1Legacy.xe1_has_independent_set",
+      "substitutions": {
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.xe1_has_independent_set_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_802_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_802_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "XE1Legacy.erdos_802_statement",
+      "substitutions": {
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.erdos_802_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_22_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_22_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Legacy.erdos_22_statement",
+      "substitutions": {
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.erdos_22_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_73_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_73_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Legacy.erdos_73_statement",
+      "substitutions": {
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.erdos_73_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_801_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_801_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Legacy.erdos_801_statement",
+      "substitutions": {
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.erdos_801_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X56.c8_complement_c8_erdos_hajnal_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "c8_complement_c8_erdos_hajnal_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "X56Original.c8_complement_c8_erdos_hajnal_statement",
+      "substitutions": {
+        "x56_homogeneous_set": "X56Legacy.x56_homogeneous_set",
+        "x56_complement": "A6.Legacy.x56_complement",
+        "x56_induced_free": "A1.Legacy.x56_induced_free"
+      },
+      "certificate": "Extremal.migration.stable_sets.c8_complement_c8_erdos_hajnal_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE1.erdos_802_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "erdos_802_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "XE1Original.erdos_802_statement",
+      "substitutions": {
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of",
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.erdos_802_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_22_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_22_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Original.erdos_22_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_subgraph_of": "A5.Legacy.xe1_subgraph_of",
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.erdos_22_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.XE2.erdos_801_statement",
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "erdos_801_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/stable_sets.v",
+      "frozen": "XE2Original.erdos_801_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Extremal.migration.stable_sets.erdos_801_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X163.x163_stableb",
+      "path": "graph-theory-misc/theories/conjectures/X163.v",
+      "name": "x163_stableb",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "Legacy.x163_stableb",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.stable_sets.x163_stableb_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X169.x169_stable_set",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_stable_set",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "Legacy.x169_stable_set",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.stable_sets.x169_stable_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X208.x208_stable_set",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "x208_stable_set",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "Legacy.x208_stable_set",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.stable_sets.x208_stable_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X29.x29_stable_set",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "x29_stable_set",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "Legacy.x29_stable_set",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.stable_sets.x29_stable_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X163.x163_normal_graphb",
+      "path": "graph-theory-misc/theories/conjectures/X163.v",
+      "name": "x163_normal_graphb",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X163Legacy.x163_normal_graphb",
+      "substitutions": {
+        "x163_stableb": "Legacy.x163_stableb"
+      },
+      "certificate": "GTMisc.migration.stable_sets.x163_normal_graphb_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X163.random_graphs_normal_whp_statement",
+      "path": "graph-theory-misc/theories/conjectures/X163.v",
+      "name": "random_graphs_normal_whp_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X163Legacy.random_graphs_normal_whp_statement",
+      "substitutions": {
+        "x163_normal_graphb": "X163Legacy.x163_normal_graphb"
+      },
+      "certificate": "GTMisc.migration.stable_sets.random_graphs_normal_whp_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X169.x169_token_sliding_connected",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_token_sliding_connected",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X169Legacy.x169_token_sliding_connected",
+      "substitutions": {
+        "x169_stable_set": "Legacy.x169_stable_set"
+      },
+      "certificate": "GTMisc.migration.stable_sets.x169_token_sliding_connected_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_polytime_decides_TS_connectivity",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X169Legacy.x169_polytime_decides_TS_connectivity",
+      "substitutions": {
+        "x169_token_sliding_connected": "X169Legacy.x169_token_sliding_connected"
+      },
+      "certificate": "GTMisc.migration.stable_sets.x169_polytime_decides_TS_connectivity_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X169.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X169Legacy.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "substitutions": {
+        "x169_polytime_decides_TS_connectivity": "X169Legacy.x169_polytime_decides_TS_connectivity"
+      },
+      "certificate": "GTMisc.migration.stable_sets.token_sliding_chordal_clique_tree_degree_polytime_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X208.x208_maximum_independent_set_output",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "x208_maximum_independent_set_output",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X208Legacy.x208_maximum_independent_set_output",
+      "substitutions": {
+        "x208_stable_set": "Legacy.x208_stable_set"
+      },
+      "certificate": "GTMisc.migration.stable_sets.x208_maximum_independent_set_output_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X208.x208_polytime_mis_on",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "x208_polytime_mis_on",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X208Legacy.x208_polytime_mis_on",
+      "substitutions": {
+        "x208_maximum_independent_set_output": "X208Legacy.x208_maximum_independent_set_output"
+      },
+      "certificate": "GTMisc.migration.stable_sets.x208_polytime_mis_on_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X208.Pt_free_maximum_independent_set_polytime_statement",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "Pt_free_maximum_independent_set_polytime_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X208Legacy.Pt_free_maximum_independent_set_polytime_statement",
+      "substitutions": {
+        "x208_polytime_mis_on": "X208Legacy.x208_polytime_mis_on"
+      },
+      "certificate": "GTMisc.migration.stable_sets.Pt_free_maximum_independent_set_polytime_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X29.x29_stable_cover",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "x29_stable_cover",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X29Legacy.x29_stable_cover",
+      "substitutions": {
+        "x29_stable_set": "Legacy.x29_stable_set"
+      },
+      "certificate": "GTMisc.migration.stable_sets.x29_stable_cover_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X29.x29_normal_graph",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "x29_normal_graph",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X29Legacy.x29_normal_graph",
+      "substitutions": {
+        "x29_stable_cover": "X29Legacy.x29_stable_cover"
+      },
+      "certificate": "GTMisc.migration.stable_sets.x29_normal_graph_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X29.no_c5_c7_complement_c7_normal_graph_statement",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "no_c5_c7_complement_c7_normal_graph_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X29Legacy.no_c5_c7_complement_c7_normal_graph_statement",
+      "substitutions": {
+        "x29_normal_graph": "X29Legacy.x29_normal_graph"
+      },
+      "certificate": "GTMisc.migration.stable_sets.no_c5_c7_complement_c7_normal_graph_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X169.x169_polytime_decides_TS_connectivity",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_polytime_decides_TS_connectivity",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X169Original.x169_polytime_decides_TS_connectivity",
+      "substitutions": {
+        "x169_chordal": "C13.Legacy.x169_chordal",
+        "x169_clique_tree_degree_at_most": "C13.Legacy.x169_clique_tree_degree_at_most",
+        "x169_token_sliding_connected": "X169Legacy.x169_token_sliding_connected"
+      },
+      "certificate": "GTMisc.migration.stable_sets.x169_polytime_decides_TS_connectivity_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X169.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X169Original.token_sliding_chordal_clique_tree_degree_polytime_statement",
+      "substitutions": {
+        "x169_polytime_decides_TS_connectivity": "X169Original.x169_polytime_decides_TS_connectivity"
+      },
+      "certificate": "GTMisc.migration.stable_sets.token_sliding_chordal_clique_tree_degree_polytime_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X29.no_c5_c7_complement_c7_normal_graph_statement",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "no_c5_c7_complement_c7_normal_graph_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X29Original.no_c5_c7_complement_c7_normal_graph_statement",
+      "substitutions": {
+        "x29_complement": "A6.Legacy.x29_complement",
+        "x29_normal_graph": "X29Legacy.x29_normal_graph"
+      },
+      "certificate": "GTMisc.migration.stable_sets.no_c5_c7_complement_c7_normal_graph_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X18.x18_independent_set",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_independent_set",
+      "frozen_path": "packing-theory/theories/migration/stable_sets.v",
+      "frozen": "Legacy.x18_independent_set",
+      "substitutions": {},
+      "certificate": "Packing.migration.stable_sets.x18_independent_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.XE1.xe1_stable_set",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_stable_set",
+      "frozen_path": "packing-theory/theories/migration/stable_sets.v",
+      "frozen": "Legacy.xe1_stable_set",
+      "substitutions": {},
+      "certificate": "Packing.migration.stable_sets.xe1_stable_set_compat",
+      "live_unfolds_to": "stable S"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X18.path_partition_independent_set_balance_statement",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "path_partition_independent_set_balance_statement",
+      "frozen_path": "packing-theory/theories/migration/stable_sets.v",
+      "frozen": "X18Legacy.path_partition_independent_set_balance_statement",
+      "substitutions": {
+        "x18_independent_set": "Legacy.x18_independent_set"
+      },
+      "certificate": "Packing.migration.stable_sets.path_partition_independent_set_balance_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.XE1.xe1_triangle_free_independence_guarantee",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_triangle_free_independence_guarantee",
+      "frozen_path": "packing-theory/theories/migration/stable_sets.v",
+      "frozen": "XE1Legacy.xe1_triangle_free_independence_guarantee",
+      "substitutions": {
+        "xe1_stable_set": "Legacy.xe1_stable_set"
+      },
+      "certificate": "Packing.migration.stable_sets.xe1_triangle_free_independence_guarantee_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.XE1.erdos_151_statement",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "erdos_151_statement",
+      "frozen_path": "packing-theory/theories/migration/stable_sets.v",
+      "frozen": "XE1Legacy.erdos_151_statement",
+      "substitutions": {
+        "xe1_triangle_free_independence_guarantee": "XE1Legacy.xe1_triangle_free_independence_guarantee"
+      },
+      "certificate": "Packing.migration.stable_sets.erdos_151_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.XE1.erdos_151_statement",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "erdos_151_statement",
+      "frozen_path": "packing-theory/theories/migration/stable_sets.v",
+      "frozen": "XE1Original.erdos_151_statement",
+      "substitutions": {
+        "xe1_triangle_free_independence_guarantee": "XE1Legacy.xe1_triangle_free_independence_guarantee",
+        "xe1_clique_transversal_number": "A18.XE1Legacy.xe1_clique_transversal_number"
+      },
+      "certificate": "Packing.migration.stable_sets.erdos_151_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X3.x3_induced_path",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_induced_path",
+      "commit": "ceadac8a097e951709afd63b65546f1a2513e0a5",
+      "frozen_path": "chromatic-theory/theories/migration/consecutive_in_path.v",
+      "frozen": "X3Legacy.induced_path",
+      "substitutions": {
+        "x3_induced_path": "induced_path",
+        "x3_consecutive_in_path": "Legacy.x3_consecutive_in_path"
+      },
+      "certificate": "Chromatic.migration.consecutive_in_path.x3_induced_path_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.X3.x3_uniquely_covers_path_vertex",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_uniquely_covers_path_vertex",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "chromatic-theory/theories/migration/path_vertices.v",
+      "frozen": "X3Legacy.uniquely_covers_path_vertex",
+      "substitutions": {
+        "x3_path_vertices": "Legacy.x3_path_vertices",
+        "x3_uniquely_covers_path_vertex": "uniquely_covers_path_vertex"
+      },
+      "certificate": "Chromatic.migration.path_vertices.x3_uniquely_covers_path_vertex_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Chromatic.conjectures.XE1.xe1_subgraph_of",
+      "path": "chromatic-theory/theories/conjectures/XE1.v",
+      "name": "xe1_subgraph_of",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "chromatic-theory/theories/migration/subgraph_of.v",
+      "frozen": "Legacy.xe1_subgraph_of",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.subgraph_of.xe1_subgraph_of_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.XE1.xe1_subgraph_of",
+      "path": "extremal-graph-theory/theories/conjectures/XE1.v",
+      "name": "xe1_subgraph_of",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "extremal-graph-theory/theories/migration/subgraph_of.v",
+      "frozen": "Legacy.xe1_subgraph_of",
+      "substitutions": {},
+      "certificate": "Extremal.migration.subgraph_of.xe1_subgraph_of_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X56.x56_induced_free",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_induced_free",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "extremal-graph-theory/theories/migration/induced_free.v",
+      "frozen": "Legacy.x56_induced_free",
+      "substitutions": {},
+      "certificate": "Extremal.migration.induced_free.x56_induced_free_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X56.x56_complement",
+      "path": "extremal-graph-theory/theories/conjectures/X56.v",
+      "name": "x56_complement",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "extremal-graph-theory/theories/migration/complement.v",
+      "frozen": "Legacy.x56_complement",
+      "substitutions": {
+        "x56_complement_sym": "Legacy.x56_complement_sym",
+        "x56_complement_irrefl": "Legacy.x56_complement_irrefl"
+      },
+      "certificate": "Extremal.migration.complement.x56_complement_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X4.x4_edge_count",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_edge_count",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "Legacy.x4_edge_count",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_count.x4_edge_count_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X29.x29_complement",
+      "path": "graph-theory-misc/theories/conjectures/X29.v",
+      "name": "x29_complement",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d",
+      "frozen_path": "graph-theory-misc/theories/migration/complement.v",
+      "frozen": "Legacy.x29_complement",
+      "substitutions": {
+        "x29_complement_sym": "Legacy.x29_complement_sym",
+        "x29_complement_irrefl": "Legacy.x29_complement_irrefl"
+      },
+      "certificate": "GTMisc.migration.complement.x29_complement_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X169.x169_chordal",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_chordal",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_chordal",
+      "substitutions": {
+        "x169_clique_tree": "Legacy.x169_clique_tree"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_chordal_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "GTMisc.conjectures.X169.x169_clique_tree_degree_at_most",
+      "path": "graph-theory-misc/theories/conjectures/X169.v",
+      "name": "x169_clique_tree_degree_at_most",
+      "commit": "58d6d6090cfe12c200bc4ab64f86858074098294",
+      "frozen_path": "graph-theory-misc/theories/migration/bag_decompositions.v",
+      "frozen": "Legacy.x169_clique_tree_degree_at_most",
+      "substitutions": {
+        "x169_clique_tree": "Legacy.x169_clique_tree"
+      },
+      "certificate": "GTMisc.migration.bag_decompositions.x169_clique_tree_degree_at_most_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.XE1.xe1_clique_transversal_number",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_clique_transversal_number",
+      "commit": "1f4e9c1dd60c2d543b08d5eb1fb18c1f24ff505a",
+      "frozen_path": "packing-theory/theories/migration/maximal_cliques.v",
+      "frozen": "XE1Legacy.xe1_clique_transversal_number",
+      "substitutions": {
+        "xe1_clique_transversal": "XE1Legacy.xe1_clique_transversal"
+      },
+      "certificate": "Packing.migration.maximal_cliques.xe1_clique_transversal_number_compat"
+    },
+    {
+      "kind": "historical",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "Packing.conjectures.X18.x18_path_rel",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_path_rel",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x18_path_rel",
+      "substitutions": {},
+      "certificate": "Packing.migration.ordinal_path.x18_path_rel_compat"
+    },
+    {
+      "kind": "historical",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "Packing.conjectures.X18.x18_path_sym",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_path_sym",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x18_path_sym",
+      "substitutions": {
+        "x18_path_rel": "Legacy.x18_path_rel"
+      },
+      "certificate": "Packing.migration.ordinal_path.x18_path_proofs_compat"
+    },
+    {
+      "kind": "historical",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "Packing.conjectures.X18.x18_path_irrefl",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_path_irrefl",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x18_path_irrefl",
+      "substitutions": {
+        "x18_path_rel": "Legacy.x18_path_rel"
+      },
+      "certificate": "Packing.migration.ordinal_path.x18_path_proofs_compat"
+    },
+    {
+      "kind": "historical",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "Packing.conjectures.X18.x18_path_graph",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_path_graph",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x18_path_graph",
+      "substitutions": {
+        "x18_path_irrefl": "Legacy.x18_path_irrefl",
+        "x18_path_sym": "Legacy.x18_path_sym"
+      },
+      "certificate": "Packing.migration.ordinal_path.x18_path_graph_compat"
+    },
+    {
+      "kind": "historical",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "GTMisc.conjectures.X208.x208_induced_path_order",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "x208_induced_path_order",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "Legacy.x208_induced_path_order",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.induced_paths.x208_induced_path_order_compat"
+    },
+    {
+      "kind": "historical",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "GTMisc.conjectures.X208.x208_Pt_free",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "x208_Pt_free",
+      "frozen_path": "graph-theory-misc/theories/migration/induced_paths.v",
+      "frozen": "X208Legacy.x208_Pt_free",
+      "substitutions": {
+        "x208_induced_path_order": "Legacy.x208_induced_path_order"
+      },
+      "certificate": "GTMisc.migration.induced_paths.x208_Pt_free_compat"
+    },
+    {
+      "kind": "original-statement",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "Packing.conjectures.X18.path_partition_independent_set_balance_statement",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "path_partition_independent_set_balance_statement",
+      "frozen_path": "packing-theory/theories/migration/stable_sets.v",
+      "frozen": "X18Original.path_partition_independent_set_balance_statement",
+      "certificate": "Packing.migration.stable_sets.path_partition_independent_set_balance_statement_original_compat",
+      "substitutions": {
+        "x18_path_graph": "B21.Legacy.x18_path_graph",
+        "x18_independent_set": "Legacy.x18_independent_set"
+      }
+    },
+    {
+      "kind": "original-statement",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "qualified": "GTMisc.conjectures.X208.Pt_free_maximum_independent_set_polytime_statement",
+      "path": "graph-theory-misc/theories/conjectures/X208.v",
+      "name": "Pt_free_maximum_independent_set_polytime_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/stable_sets.v",
+      "frozen": "X208Original.Pt_free_maximum_independent_set_polytime_statement",
+      "certificate": "GTMisc.migration.stable_sets.Pt_free_maximum_independent_set_polytime_statement_original_compat",
+      "substitutions": {
+        "x208_polytime_mis_on": "X208Legacy.x208_polytime_mis_on",
+        "x208_Pt_free": "B22.X208Legacy.x208_Pt_free"
+      }
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/consecutive_in_path.v#X3Legacy.statement": "B3 per-row snapshot: B3 froze this row over its own frozen induced path but kept the live x3_stable_set (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Chromatic.migration.stable_sets.X3Original.stable_cover_unique_induced_path_statement, certified by stable_cover_unique_induced_path_statement_original_compat.",
+    "chromatic-theory/theories/migration/consecutive_in_path.v#X3Original.statement": "B3's complete row: B3 composed this row over its own frozen induced path and B1's frozen path support but kept the live x3_stable_set (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Chromatic.migration.stable_sets.X3Original.stable_cover_unique_induced_path_statement, certified by stable_cover_unique_induced_path_statement_original_compat, which reuses this certificate.",
+    "chromatic-theory/theories/migration/path_vertices.v#X3Legacy.statement": "B1 per-row snapshot: B1 froze this row over its own frozen path support but kept the live x3_stable_set (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Chromatic.migration.stable_sets.X3Original.stable_cover_unique_induced_path_statement, certified by stable_cover_unique_induced_path_statement_original_compat.",
+    "chromatic-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_762_statement": "A5 per-row snapshot: A5 froze this row over its own frozen subgraph relation but kept the live xe2_cochromatic_number (over xe1_stable_set) (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Chromatic.migration.stable_sets.XE2Original.erdos_762_statement, certified by erdos_762_statement_original_compat, which reuses this certificate.",
+    "extremal-graph-theory/theories/migration/complement.v#X56Legacy.c8_complement_c8_erdos_hajnal_statement": "A6 per-row snapshot: A6 froze this row over its own frozen complement but kept the live x56_homogeneous_set (over x56_stable_set) (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Extremal.migration.stable_sets.X56Original.c8_complement_c8_erdos_hajnal_statement, certified by c8_complement_c8_erdos_hajnal_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/complement.v#X56Original.c8_complement_c8_erdos_hajnal_statement": "A6's complete row: A6 composed this row over A1's and its own frozen helpers but kept the live x56_homogeneous_set (over x56_stable_set) (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Extremal.migration.stable_sets.X56Original.c8_complement_c8_erdos_hajnal_statement, certified by c8_complement_c8_erdos_hajnal_statement_original_compat, which reuses this certificate.",
+    "extremal-graph-theory/theories/migration/induced_free.v#X56Legacy.statement": "A1 per-row snapshot: A1 froze this row over its own frozen induced-freeness but kept the live x56_homogeneous_set (over x56_stable_set) (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Extremal.migration.stable_sets.X56Original.c8_complement_c8_erdos_hajnal_statement, certified by c8_complement_c8_erdos_hajnal_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_22_statement": "A7 per-row snapshot: A7 froze this row over its own frozen edge count but kept the live xe1_stable_set (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Extremal.migration.stable_sets.XE2Original.erdos_22_statement, certified by erdos_22_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Legacy.erdos_801_statement": "A7 per-row snapshot: A7 froze this row over its own frozen edge count but kept the live xe1_stable_set (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Extremal.migration.stable_sets.XE2Original.erdos_801_statement, certified by erdos_801_statement_original_compat, which reuses this certificate.",
+    "extremal-graph-theory/theories/migration/edge_count.v#XE2Original.erdos_22_statement": "A7's complete row: A7 composed this row over A5's and its own frozen helpers but kept the live xe1_stable_set (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Extremal.migration.stable_sets.XE2Original.erdos_22_statement, certified by erdos_22_statement_original_compat, which reuses this certificate.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE1Legacy.erdos_802_statement": "A5 per-row snapshot: A5 froze this row over its own frozen subgraph relation but kept the live xe1_stable_set (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Extremal.migration.stable_sets.XE1Original.erdos_802_statement, certified by erdos_802_statement_original_compat, which reuses this certificate.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#XE2Legacy.erdos_22_statement": "A5 per-row snapshot: A5 froze this row over its own frozen subgraph relation but kept the live xe1_stable_set (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Extremal.migration.stable_sets.XE2Original.erdos_22_statement, certified by erdos_22_statement_original_compat.",
+    "graph-theory-misc/theories/migration/bag_decompositions.v#Legacy.x169_polytime_decides_TS_connectivity": "C13 chain snapshot: C13 froze this polytime chain over its own frozen chordal and clique-tree classes but kept the live x169_token_sliding_connected (over x169_stable_set) (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is GTMisc.migration.stable_sets.X169Original.token_sliding_chordal_clique_tree_degree_polytime_statement (chain GTMisc.migration.stable_sets.X169Original.x169_polytime_decides_TS_connectivity), certified by token_sliding_chordal_clique_tree_degree_polytime_statement_original_compat (chain x169_polytime_decides_TS_connectivity_original_compat, which reuses this certificate).",
+    "graph-theory-misc/theories/migration/complement.v#X29Legacy.no_c5_c7_complement_c7_normal_graph_statement": "A6 per-row snapshot: A6 froze this row over its own frozen complement but kept the live x29_normal_graph (over x29_stable_set) (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is GTMisc.migration.stable_sets.X29Original.no_c5_c7_complement_c7_normal_graph_statement, certified by no_c5_c7_complement_c7_normal_graph_statement_original_compat, which reuses this certificate.",
+    "packing-theory/theories/migration/maximal_cliques.v#XE1Legacy.erdos_151_statement": "A18 per-row snapshot: A18 froze this row over its own frozen clique-transversal chain but kept the live xe1_triangle_free_independence_guarantee (over xe1_stable_set) (after A20 upstream stable S through its raw view, an iff). Kept unchanged; the complete row is Packing.migration.stable_sets.XE1Original.erdos_151_statement, certified by erdos_151_statement_original_compat, which reuses this certificate.",
+    "packing-theory/theories/migration/ordinal_path.v#X18Legacy.path_partition_independent_set_balance_statement": "B21's per-row snapshot freezes the ordinal graph but intentionally retains live independence. Its body remains unchanged. Packing.migration.stable_sets.X18Original.path_partition_independent_set_balance_statement now freezes both the B21 graph relation/construction and A20 raw independence, certified by path_partition_independent_set_balance_statement_original_compat with the same ordinal carrier, partition, set and budget witnesses.",
+    "graph-theory-misc/theories/migration/induced_paths.v#X208Legacy.Pt_free_maximum_independent_set_polytime_statement": "B22's per-row snapshot freezes the induced-path class but intentionally retains the live stable maximum-output/polytime chain. Its body remains unchanged. GTMisc.migration.stable_sets.X208Original.Pt_free_maximum_independent_set_polytime_statement combines the B22 raw class and A20 raw stable/output/polytime chain, certified by Pt_free_maximum_independent_set_polytime_statement_original_compat with the same program, global encoded-graph cost and output witnesses.",
+    "chromatic-theory/theories/migration/induced_paths.v#X3Legacy.stable_cover_unique_induced_path_statement": "B22's per-row snapshot freezes the induced path but intentionally retains live stability and path support. Its body remains unchanged. Chromatic.migration.stable_sets.X3Original.stable_cover_unique_induced_path_statement already combines A20 raw stability, B3 raw induced path and B1 raw support; its complete certificate is unchanged and rebound on the combined parent. The whole chi dependency already reaches upstream stable; raw stability/path/support subclosures are checked separately.",
+    "graph-theory-misc/theories/migration/chordal.v#X169Legacy.x169_polytime_decides_TS_connectivity": "B25 per-row snapshot freezes chordality but retains the live x169_token_sliding_connected over A20's stable alias. Kept unchanged; its live degree-bounded clique-tree class is also intentional. The complete raw-stability/token-sliding and C13 tree-class row is this family's actual X169Original.token_sliding_chordal_clique_tree_degree_polytime_statement, reused unchanged as a whole iff in the chordal spec.",
+    "graph-theory-misc/theories/migration/chordal.v#X169Legacy.token_sliding_chordal_clique_tree_degree_polytime_statement": "B25 per-row snapshot freezes chordality but retains the live x169_token_sliding_connected over A20's stable alias. Kept unchanged; its live degree-bounded clique-tree class is also intentional. The complete raw-stability/token-sliding and C13 tree-class row is this family's actual X169Original.token_sliding_chordal_clique_tree_degree_polytime_statement, reused unchanged as a whole iff in the chordal spec."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/applications/cochromatic_gap/cochromatic_gap.v",
+      "name": "xe2_cochromatic_number",
+      "note": "gap_graph_parameters: proof and type unchanged (the cochromatic chain is unchanged text)."
+    },
+    {
+      "path": "chromatic-theory/theories/applications/cochromatic_gap/cochromatic_gap.v",
+      "name": "cochromatic_gap_three_statement",
+      "note": "cochromatic_gap_three_proved, the formal resolution of X7: proof and type unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/applications/cochromatic_gap/mycielski_gap.v",
+      "name": "xe1_stable_set",
+      "note": "homogeneous_map and independent_color keep their text; the raw-forall scripts of homogeneous_pullback, homogeneous_injective_colors, selected_avoids, selected_edge, extended_independent, extended_homogeneous, proper_homogeneous and proper_independent go through stable_noedgeP; all theorem types unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/applications/cochromatic_gap/mycielski_gap.v",
+      "name": "xe2_cochromatic_colouring",
+      "note": "palette_cochromatic and mycielski_cochromatic_lower: proofs and types unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/applications/cochromatic_gap/mycielski_gap.v",
+      "name": "xe2_cochromatic_number",
+      "note": "palette_cochromatic_lower, mycielski_cochromatic_lower and cochromatic_certificate_exact: proofs and types unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/applications/cochromatic_gap/seed_colorings.v",
+      "name": "xe1_stable_set",
+      "note": "seed_homogeneous_bounded routes its stable hypothesis through stable_noedgeP and seed_co_independent introduces the raw view by it; types unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "xe2_cochromatic_number",
+      "note": "X7's row uses XE2's cochromatic number across files; frozen as X7Legacy over XE2Legacy.xe2_cochromatic_number."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe1_stable_set",
+      "note": "XE2's cochromatic colouring and #922 use XE1's stable set across files; frozen over Legacy.xe1_stable_set."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/XE2.v",
+      "name": "xe1_stable_set",
+      "note": "XE2's #22, #73 and #801 use XE1's stable set across files; frozen over Legacy.xe1_stable_set."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "x18_independent_set",
+      "note": "x18_independent_set_equiv_xe1_stable_set: both sides now unfold to stable S; proof and type unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
+      "name": "xe1_stable_set",
+      "note": "x18_independent_set_equiv_xe1_stable_set: proof and type unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.conjectures.X166.x166_stable_set",
+      "path": "digraph-theory/theories/conjectures/X166.v",
+      "name": "x166_stable_set",
+      "note": "directed (diGraphType): distinct supplied vertices need both nonarcs and loops are ignored; deferred to a directed family, no conversion through a loop-forgetting simple graph"
+    },
+    {
+      "qualified": "Digraph.conjectures.classic_core.stable",
+      "path": "digraph-theory/theories/conjectures/classic_core.v",
+      "name": "stable",
+      "note": "directed bounded Boolean absence of every arc, loops included; a looped singleton separates it from x166_stable_set"
+    },
+    {
+      "qualified": "Digraph.conjectures.X2.x2_arc_stable",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_arc_stable",
+      "note": "directed bounded Boolean absence of every arc, loops included"
+    },
+    {
+      "qualified": "GTMisc.conjectures.XE2.xe2_independent3",
+      "path": "graph-theory-misc/theories/conjectures/XE2.v",
+      "name": "xe2_independent3",
+      "note": "three distinct supplied vertices of an arbitrary relation with three forward nonedges; not a vertex-set predicate of an sgraph"
+    },
+    {
+      "qualified": "Packing.conjectures.XE1.xe1_independent_set_count",
+      "path": "packing-theory/theories/conjectures/XE1.v",
+      "name": "xe1_independent_set_count",
+      "note": "counting contract: inline bounded no-edge condition with exact cardinality, used by #993; left to a counting family"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and GTBase.stable_sets theorem, exact types of the frozen and live helpers, chains and rows, strict dependency closures of the frozen chains and rows (current and complete, with closure parity against the baseline for the per-row copies), and the types of every declaration in the reverse dependency closure of the eleven source files at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A20-stable-sets/ (outside the repository)"
+}

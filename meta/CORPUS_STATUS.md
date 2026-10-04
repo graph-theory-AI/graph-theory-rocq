@@ -56,7 +56,7 @@
 
 ## Foundation fidelity registry
 
-- **177 audited primitives**: 163 faithful · 12 lightweight · 2 broken.
+- **242 audited primitives**: 228 faithful · 12 lightweight · 2 broken.
 - Registry: module contracts in `meta/foundation_fidelity.json` and family verdicts in `meta/foundation_fidelity/`; validate declarations and evidence names with `python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is never inferred from compilation.
 
 | verdict | primitive | misuse watch |
@@ -118,13 +118,13 @@ Area-local foundations (each area builds these on top of `base`):
 | area | foundation modules |
 |---|---|
 | chromatic-theory | `alon_tarsi`, `branch_paths`, `chi_bounding`, `choice_number`, `critical`, `edge_colourings`, `forest_paths`, `partial_lists`, `poly_forms` |
-| cycle-theory | `comp_reduce`, `connectivity`, `cycle_space`, `matchings_cuts`, `path_subgraphs` |
-| digraph-theory | `cycles`, `interop_graph_theory`, `longest_cycles`, `prelude`, `subdivision` |
+| cycle-theory | `comp_reduce`, `connectivity`, `cycle_space`, `eulerian`, `matchings_cuts`, `path_subgraphs`, `spanning_trees` |
+| digraph-theory | `cycles`, `degree_balance`, `interop_graph_theory`, `longest_cycles`, `prelude`, `subdivision`, `tournament_unavoidability` |
 | extremal-graph-theory | `circular_colouring`, `degree_bounds`, `edge_colourings`, `list_ramsey`, `lp_rational`, `ramsey`, `vc` |
 | graph-theory-misc | `ambient_shallow_minors`, `complexity`, `cops` |
-| hypergraph-theory | `hypergraph` |
+| hypergraph-theory | `hypergraph`, `hypergraph_copies` |
 | infinite-graph-theory | `igraph` |
-| minor-theory | `containment`, `hole_containments`, `minor_dec`, `ramsey_small`, `width_params` |
+| minor-theory | `containment`, `hole_containments`, `minor_dec`, `poset_unavoidability`, `ramsey_small`, `shallow_minors`, `width_params` |
 | packing-theory | `edge_families`, `edge_partitions`, `fair_matching`, `matching`, `tree_leaves` |
 | reconstruction-theory | `kelly` |
 | spectral-graph-theory | `spectral` |

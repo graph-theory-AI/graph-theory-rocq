@@ -56,6 +56,9 @@
 
 From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
+From GTBase Require Import triangles.
+From GTBase Require Import induced_paths.
+From GTBase Require Import hypercubes.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -72,12 +75,12 @@ Definition is_P3 (G : sgraph) (S : {set G}) : Prop :=
 
 (** A triangle: a 3-clique. *)
 Definition is_triangle (G : sgraph) (T : {set G}) : Prop :=
-  clique T /\ #|T| = 3.
+  triangle T.
 
 (** The (unordered) edge set of a vertex set [T]: its 2-element subsets.  For a
     clique these are exactly the edges spanned by [T]. *)
 Definition tri_edges (G : sgraph) (T : {set G}) : {set {set G}} :=
-  [set e : {set G} | (e \subset T) && (#|e| == 2)].
+  raw_pairs T.
 
 (** The whole-graph edge set (each unordered adjacent pair). *)
 Definition edge_setG (G : sgraph) : {set {set G}} :=
@@ -112,9 +115,12 @@ Definition spath (G : sgraph) (x y : G) (p : seq G) : bool :=
 
 (** An INDUCED [x]–[y] path: a simple path with no chords (any two of its vertices
     adjacent in [G] are consecutive on the path). *)
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.induced_path_between]: the original Boolean [spath] / [consec] body is
+    frozen and certified (an explicit iff through the index bridge, with the membership and
+    uniqueness premises) in theories/migration/induced_paths.v; [spath] and [consec] stay live. *)
 Definition is_induced_path (G : sgraph) (x y : G) (p : seq G) : Prop :=
-  [/\ spath x y p, uniq p
-    & {in p &, forall a b : G, a -- b -> consec p a b}].
+  induced_path_between x y p.
 
 (** A friendly partition (into [A] and its complement): every vertex has at least
     as many neighbours in its own class as in the other; both classes nonempty. *)
@@ -183,10 +189,11 @@ Definition cycle_edgesG (G : sgraph) (c : seq G) : {set {set G}} :=
 Arguments cycle_edgesG : clear implicits.
 
 (** A set of edges that is a matching: each element is a genuine edge, and every
-    vertex lies in at most one of them. *)
+    vertex lies in at most one of them.  This is the upstream [matching M] of the supplied
+    family (library migration C25; [Packing.foundations.matching.matching_at_most_oneP] and
+    [edgesP] give back the edge-witness and incidence reading). *)
 Definition is_matching_edges (G : sgraph) (M : {set {set G}}) : Prop :=
-  (forall e : {set G}, e \in M -> exists x y : G, x -- y /\ e = [set x; y]) /\
-  (forall v : G, #|[set e in M | v \in e]| <= 1).
+  matching M.
 
 (** ** The hypercube graph Q_d (Hamming graph on d-bit strings) *)
 Section Hypercube.
@@ -208,7 +215,10 @@ have -> : [set i : 'I_d | tnth x i != tnth x i] = set0
   by apply/setP=> i; rewrite !inE eqxx.
 by rewrite cards0.
 Qed.
-Definition hypercube : sgraph := SGraph hc_sym hc_irrefl.
+(** Since the A23 library migration [hypercube] is [GTBase.hypercubes.tuple_hypercube d]:
+    the same [d.-tuple bool] carrier and adjacency.  [hc_rel], [hc_sym] and [hc_irrefl] are
+    unchanged; the original construction is frozen in [Packing.migration.hypercubes]. *)
+Definition hypercube : sgraph := tuple_hypercube d.
 End Hypercube.
 
 (** ** Weak saturation of Q_3 in K_n (Row 12)

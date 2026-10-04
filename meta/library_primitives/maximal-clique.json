@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "family": "maximal-clique",
+  "primitive": {
+    "canonical_name": "GTBase.maximal_cliques.maximal_clique",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "maximal_clique"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X181.x181_maximal_clique",
+      "Packing.conjectures.XE1.xe1_maximal_clique"
+    ],
+    "consumers_remaining": 2,
+    "relation": "inclusion-maximal cliques: Chromatic X181 x181_maximal_clique S := [&& 1 < #|S|, cliqueb S & [forall T, (S \\proper T) ==> ~~ cliqueb T]] equals GTBase.maximal_cliques.nontrivial_maximal_clique S := (1 < #|S|) && maxset cliqueb S by the unconditional Boolean equality nontrivial_maximal_cliqueE; Packing XE1 xe1_maximal_clique K := clique K /\\ forall L, K \\proper L -> ~ clique L is reflected by maximal_cliqueP (an iff with maximal_clique K := maxset cliqueb K; no size or nonempty guard). Inclusion-maximal, not maximum cardinality (upstream maxcliques, U13 is_max_clique).",
+    "semantic_classes": {
+      "nontrivial-boolean": {
+        "members": [
+          "Chromatic.conjectures.X181.x181_maximal_clique"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Chromatic.migration.maximal_cliques.x181_maximal_clique_compat",
+        "note": "Boolean [&& 1 < #|S|, cliqueb S & no proper clique superset]; Boolean equality with nontrivial_maximal_clique S, the size guard kept"
+      },
+      "unrestricted-prop": {
+        "members": [
+          "Packing.conjectures.XE1.xe1_maximal_clique"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Packing.migration.maximal_cliques.xe1_maximal_clique_compat",
+        "note": "Prop clique K /\\ no proper clique superset; reflected iff with maximal_clique K (maxset cliqueb), no size or nonempty guard"
+      }
+    },
+    "distinct_variants": {
+      "GTMisc.conjectures.U13.is_max_clique": "maximum-cardinality clique (size omega), membership of upstream maxcliques; not inclusion-maximality",
+      "Hypergraph.conjectures.XE2.xe2_maximal_hyperclique": "maximal sets all of whose triples are hyperedges of a supplied family on a finite type, not adjacency in an sgraph"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.maximal_cliques.x181_maximal_clique_compat",
+      "Chromatic.migration.maximal_cliques.x181_clique_colourable_compat",
+      "Chromatic.migration.maximal_cliques.x181_clique_chromatic_window_compat",
+      "Chromatic.migration.maximal_cliques.x181_random_graph_clique_chromatic_constant_compat",
+      "Chromatic.migration.maximal_cliques.random_graph_clique_chromatic_tight_constant_statement_compat",
+      "Chromatic.migration.maximal_cliques.x181_clique_colourable_original_compat",
+      "Chromatic.migration.maximal_cliques.x181_clique_chromatic_window_original_compat",
+      "Chromatic.migration.maximal_cliques.x181_random_graph_clique_chromatic_constant_original_compat",
+      "Chromatic.migration.maximal_cliques.random_graph_clique_chromatic_tight_constant_statement_original_compat",
+      "Packing.migration.maximal_cliques.xe1_maximal_clique_compat",
+      "Packing.migration.maximal_cliques.xe1_clique_transversal_compat",
+      "Packing.migration.maximal_cliques.xe1_clique_transversal_number_compat",
+      "Packing.migration.maximal_cliques.erdos_151_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.maximal_cliques.maximal_cliqueP",
+      "GTBase.maximal_cliques.maximal_cliqueE",
+      "GTBase.maximal_cliques.nontrivial_maximal_cliqueE",
+      "GTBase.maximal_cliques.maximal_clique_clique",
+      "GTBase.maximal_cliques.maximal_clique_proper",
+      "GTBase.maximal_cliques.maximal_clique_exists",
+      "GTBase.maximal_cliques.nontrivial_maximal_clique_maximal"
+    ],
+    "public_client": "base/theories/examples/maximal_cliques.v",
+    "legacy_baseline": "1f4e9c1dd60c2d543b08d5eb1fb18c1f24ff505a",
+    "migration_report": "meta/migration_reports/maximal_cliques.md",
+    "migration_spec": "meta/migration_reports/maximal_cliques.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A18.md",
+    "foundation_fidelity": "meta/foundation_fidelity/maximal-clique.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "mathcomp.boot.finset (maxset, maxsetP, maxsetp, maxset_exists)",
+        "GraphTheory.core.preliminaries (maxset_properP)",
+        "GraphTheory.core.sgraph (clique, cliqueb, cliqueP)",
+        "GraphTheory.core.coloring (maxcliques: maximum cardinality)"
+      ],
+      "result": "upstream-predicate-local-adapter",
+      "candidate": "GTBase.maximal_cliques.maximal_clique := maxset cliqueb, with the nontrivial Boolean adapter",
+      "note": "MathComp maxset is the inclusion-maximality predicate and GraphTheory maxset_properP reflects it in the proper-superset form both helpers use; GTBase only names it for cliques and adds the size-guarded view. Upstream maxcliques are maximum-cardinality cliques and stay distinct. Evidence: coordination/evidence/A18-maximal-cliques-discovery-by-path-review/ (upstream.txt) and coordination/evidence/A18-maximal-cliques/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "path_review",
+    "reviewed_commit": "748b76ad48b537fef8e5cf78400423d661f869ee",
+    "independent_review": "meta/migration_reviews/maximal_cliques.md"
+  }
+}

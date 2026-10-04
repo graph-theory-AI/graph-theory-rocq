@@ -5,7 +5,9 @@ From mathcomp Require Import all_boot all_fingroup all_algebra.
 From Digraph Require Import prelude interop_graph_theory digraph oriented tournament.
 From Digraph Require Import dipath order strong classic_core dichromatic omegabar.
 From Digraph Require Import heroes heroes_dichotomy unvd twinwidth twinwidth_ordered.
+From Digraph.foundations Require degree_balance.
 From GTBase Require Import asymptotics.
+From Digraph.foundations Require Import tournament_unavoidability.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -112,10 +114,9 @@ Definition x221_tww_eq (T : tournament) (t : nat) : Prop :=
     [unvd D N] (conjectures/unvd.v) says N is the unavoidability number of D.
     A family is LINEARLY UNAVOIDABLE when one constant C bounds unvd(D) by
     C*|V(D)| throughout the family. An acyclic digraph D is a K-EXTENSION of A
-    when deleting some k vertices of D leaves a copy of A. *)
-Definition x221_linearly_unavoidable (F : diGraphType -> Prop) : Prop :=
-  exists C : nat,
-    forall (D : diGraphType) (N : nat), F D -> unvd D N -> (N <= C * #|D|)%N.
+    when deleting some k vertices of D leaves a copy of A. The class predicate is the
+    public [Digraph.foundations.tournament_unavoidability.linearly_unavoidable]. *)
+Definition x221_linearly_unavoidable (F : diGraphType -> Prop) : Prop := linearly_unavoidable F.
 
 Definition x221_kextension (k : nat) (F : diGraphType -> Prop)
     (D : diGraphType) : Prop :=
@@ -132,7 +133,7 @@ Definition x221_kextension (k : nat) (F : diGraphType -> Prop)
     subdigraph is given by an out-neighbourhood selection f through
     [outsel f] (core/oriented.v), whose arcs are the arcs of D lying in f. *)
 Definition x221_eulerian (D : diGraphType) : Prop :=
-  forall v : D, outdeg v = indeg v.
+  degree_balance.balanced D.
 
 Definition x221_eulerian_avoidable (F : diGraphType) : Prop :=
   exists d : nat -> nat,

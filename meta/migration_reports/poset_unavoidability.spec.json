@@ -1,0 +1,364 @@
+{
+  "family": "poset-unavoidability",
+  "canonical_name": "Minor.foundations.poset_unavoidability.poset_unavoidable",
+  "canonical_short_name": "poset_unavoidable",
+  "relation": "Exact finite-poset cover-minor unavoidability: one natural threshold d chosen before all finite posets, and every poset whose dimension is not at most d (GTBase.posets, realizers may be empty) has H as a minor of its cover graph, host before pattern (upstream minor). d = 0, empty carriers and empty graphs allowed; no planarity or width condition on H; not induced minors, subdivisions or the exact-order tournament unavoidability of Digraph.conjectures.unvd.unavoidable, which is the separate tournament-exact-order class with its own Digraph canonical.",
+  "baseline_commit": "97605ddae838bc6e84b0602240148246e9d065f2",
+  "namespaces": {
+    "base": "GTBase",
+    "minor-theory": "Minor",
+    "digraph-theory": "Digraph"
+  },
+  "certificate_files": [
+    "minor-theory/theories/foundations/poset_unavoidability.v",
+    "minor-theory/theories/migration/poset_unavoidability.v",
+    "digraph-theory/theories/foundations/tournament_unavoidability.v",
+    "digraph-theory/theories/migration/tournament_unavoidability.v"
+  ],
+  "extra_certificates": [
+    "Minor.foundations.poset_unavoidability.poset_dimension_at_mostW",
+    "Minor.foundations.poset_unavoidability.poset_unavoidableI",
+    "Minor.foundations.poset_unavoidability.poset_unavoidable_threshold",
+    "Minor.foundations.poset_unavoidability.poset_unavoidable_large",
+    "Minor.foundations.poset_unavoidability.poset_unavoidable_minor",
+    "Minor.foundations.poset_unavoidability.poset_unavoidable_K0",
+    "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_unbundledE",
+    "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_card",
+    "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_empty",
+    "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_succ",
+    "Digraph.foundations.tournament_unavoidability.tournament_unavoidable_monotone",
+    "Digraph.foundations.tournament_unavoidability.unavoidability_number_empty",
+    "Digraph.foundations.tournament_unavoidability.unavoidability_number_card",
+    "Digraph.foundations.tournament_unavoidability.unavoidability_number_unique",
+    "Digraph.foundations.tournament_unavoidability.not_tournament_unavoidable_loop",
+    "Digraph.foundations.tournament_unavoidability.not_tournament_unavoidable_digon"
+  ],
+  "downstream_client": "minor-theory/theories/examples/poset_unavoidability.v",
+  "summary": [
+    "C21 migrates exactly Minor.conjectures.X228.x228_unavoidable onto Minor.foundations.poset_unavoidability.poset_unavoidable with the identical body: one threshold d before all finite posets, the negated GTBase dimension bound as the only guard, and an upstream minor of the cover graph with host before pattern. d = 0 and empty posets stay allowed; GTBase.posets and upstream minor are unchanged.",
+    "The helper and the whole BLOCKED row unavoidable_minor_kelly_construction_statement are frozen verbatim with an unconditional helper iff and a complete row iff. The row keeps its Kelly-construction placeholder implication to planarity and treewidth at most three; no converse, construction or status change. There is no earlier frozen history; all eleven grounding theorem types and the sibling queue-number row are unchanged.",
+    "The public-only client covers the empty graph, raising thresholds, minor downward closure and the unit poset: it has dimension at most 0, so the guard never tests it, and its cover graph has no K2 minor. This shows the guard has teeth; it is not a claim that K2 is avoidable.",
+    "C22 adds the distinct tournament-exact-order class. Digraph.conjectures.unvd.unavoidable, unvd.unvd and X221.x221_linearly_unavoidable now unfold to Digraph.foundations.tournament_unavoidability (tournament_unavoidable, unavoidability_number, linearly_unavoidable): bundled Digraph.core tournaments of exactly N vertices, injective upstream is_dhom maps through to_GT (one-way, not induced), every smaller M excluded, one natural C before all digraphs. Arbitrary finite D (loops and digons allowed, then no value), exact N and the empty value 0 are kept; no existence, positivity or acyclicity guard is added, and the class is never identified with the Minor poset contract.",
+    "The supports heroes.is_tournament and unvd.contains_subdigraph are frozen as unchanged chain objects; they stay live, unmigrated and in their own inventory groups. The frozen unavoidable uses both frozen supports, the frozen unvd uses the frozen unavoidable and the frozen linear class uses the frozen unvd. Live proofs reach the unbundled reading through unvd.unavoidableP, a conjecture-local wrapper of the public same-carrier factory bridge tournament_unavoidable_unbundledE.",
+    "Five whole Props have complete iff certificates: X17 Sumner (oriented tree, 1 < n, order n, value 2n - 2), unvd.conj_9 (acyclicb, 1 < #|D|, uniform C under vertex deletion), unvd.prob_6 (nonempty, rational mad bound, uniform a, d, b), the X221 k-extension row, and the non-corpus alias reals_growth.prob6_unvd_statement, whose frozen copy is the frozen prob_6. All four corpus statement legs stay done and gc:e106 stays a candidate. prob6_nat_bound_real_envelope and its existing axioms are unchanged and outside these closures.",
+    "Directed scope: 3 sources, 2 supports and 5 whole Props make 10 new frozen objects (12 with the two C21 objects); there is no earlier directed frozen history. The 14 reverse files keep all 221 theorem headers. Five direct proof consumers use unavoidableP and the other three compile unchanged. Public client: digraph-theory/theories/examples/tournament_unavoidability.v."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X228.x228_unavoidable",
+      "path": "minor-theory/theories/conjectures/X228.v",
+      "name": "x228_unavoidable",
+      "frozen_path": "minor-theory/theories/migration/poset_unavoidability.v",
+      "frozen": "Legacy.x228_unavoidable",
+      "substitutions": {},
+      "certificate": "Minor.migration.poset_unavoidability.x228_unavoidable_compat",
+      "live_unfolds_to": "poset_unavoidable H"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X228.unavoidable_minor_kelly_construction_statement",
+      "path": "minor-theory/theories/conjectures/X228.v",
+      "name": "unavoidable_minor_kelly_construction_statement",
+      "frozen_path": "minor-theory/theories/migration/poset_unavoidability.v",
+      "frozen": "X228Legacy.unavoidable_minor_kelly_construction_statement",
+      "substitutions": {
+        "x228_unavoidable": "Legacy.x228_unavoidable"
+      },
+      "certificate": "Minor.migration.poset_unavoidability.unavoidable_minor_kelly_construction_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.heroes.is_tournament",
+      "path": "digraph-theory/theories/conjectures/heroes.v",
+      "name": "is_tournament",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "Legacy.is_tournament",
+      "substitutions": {},
+      "certificate": "Digraph.migration.tournament_unavoidability.is_tournament_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.unvd.contains_subdigraph",
+      "path": "digraph-theory/theories/conjectures/unvd.v",
+      "name": "contains_subdigraph",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "Legacy.contains_subdigraph",
+      "substitutions": {},
+      "certificate": "Digraph.migration.tournament_unavoidability.contains_subdigraph_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.unvd.unavoidable",
+      "path": "digraph-theory/theories/conjectures/unvd.v",
+      "name": "unavoidable",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "Legacy.unavoidable",
+      "substitutions": {
+        "is_tournament": "Legacy.is_tournament",
+        "contains_subdigraph": "Legacy.contains_subdigraph"
+      },
+      "certificate": "Digraph.migration.tournament_unavoidability.unavoidable_compat",
+      "live_unfolds_to": "tournament_unavoidable D N"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.unvd.unvd",
+      "path": "digraph-theory/theories/conjectures/unvd.v",
+      "name": "unvd",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "Legacy.unvd",
+      "substitutions": {
+        "unavoidable": "Legacy.unavoidable"
+      },
+      "certificate": "Digraph.migration.tournament_unavoidability.unvd_compat",
+      "live_unfolds_to": "unavoidability_number D N"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X221.x221_linearly_unavoidable",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "x221_linearly_unavoidable",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "Legacy.x221_linearly_unavoidable",
+      "substitutions": {
+        "unvd": "Legacy.unvd"
+      },
+      "certificate": "Digraph.migration.tournament_unavoidability.x221_linearly_unavoidable_compat",
+      "live_unfolds_to": "linearly_unavoidable F"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X17.sumner_oriented_tree_unavoidable_statement",
+      "path": "digraph-theory/theories/conjectures/X17.v",
+      "name": "sumner_oriented_tree_unavoidable_statement",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "X17Legacy.sumner_oriented_tree_unavoidable_statement",
+      "substitutions": {
+        "unavoidable": "Legacy.unavoidable"
+      },
+      "certificate": "Digraph.migration.tournament_unavoidability.sumner_oriented_tree_unavoidable_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.unvd.conj_9",
+      "path": "digraph-theory/theories/conjectures/unvd.v",
+      "name": "conj_9",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "UnvdLegacy.conj_9",
+      "substitutions": {
+        "unvd": "Legacy.unvd"
+      },
+      "certificate": "Digraph.migration.tournament_unavoidability.conj_9_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.unvd.prob_6",
+      "path": "digraph-theory/theories/conjectures/unvd.v",
+      "name": "prob_6",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "UnvdLegacy.prob_6",
+      "substitutions": {
+        "unvd": "Legacy.unvd"
+      },
+      "certificate": "Digraph.migration.tournament_unavoidability.prob_6_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X221.kextension_linear_unavoidability_statement",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "kextension_linear_unavoidability_statement",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "X221Legacy.kextension_linear_unavoidability_statement",
+      "substitutions": {
+        "x221_linearly_unavoidable": "Legacy.x221_linearly_unavoidable"
+      },
+      "certificate": "Digraph.migration.tournament_unavoidability.kextension_linear_unavoidability_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.reals_growth.prob6_unvd_statement",
+      "path": "digraph-theory/theories/conjectures/reals_growth.v",
+      "name": "prob6_unvd_statement",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "RealsLegacy.prob6_unvd_statement",
+      "substitutions": {
+        "unvd.prob_6": "UnvdLegacy.prob_6"
+      },
+      "certificate": "Digraph.migration.tournament_unavoidability.prob6_unvd_statement_compat",
+      "non_corpus": true
+    }
+  ],
+  "known_stale_snapshots": {
+    "digraph-theory/theories/migration/degree_balance.v#X221Legacy.eulerian_avoidable": "B16 snapshot kept byte-exact. Its contains_subdigraph support is frozen by C22 for its own chains but remains an unchanged live definition, not a migrated alias; this B16 body reaches no new C22 canonical. No additional Original is required and no B16 proof/body is redirected."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X228.v",
+      "name": "x228_unavoidable",
+      "note": "X228_unavoidable_K0 and X228_kelly_nonvacuous keep their exact types and unchanged proofs; the alias is transparent."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X228.v",
+      "name": "unavoidable_minor_kelly_construction_statement",
+      "note": "Print Assumptions vernacular on the unchanged BLOCKED row; no proof depends on it."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X1.v",
+      "name": "unvd",
+      "note": "Module import line naming unvd (lexical match of the module name only)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X123.v",
+      "name": "is_tournament",
+      "note": "x123_transitive_tournament uses the unchanged live support heroes.is_tournament; untouched."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X17.v",
+      "name": "unavoidable",
+      "note": "The Sumner row itself: frozen statement with an exact iff certificate; text, doc block and row unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X17.v",
+      "name": "unvd",
+      "note": "Module import line naming unvd (lexical match of the module name only)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "contains_subdigraph",
+      "note": "x221_eulerian_avoidable uses the unchanged live support unvd.contains_subdigraph; untouched."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "unvd",
+      "note": "Module import line naming unvd (lexical match of the module name only)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X221.v",
+      "name": "unavoidable",
+      "note": "x221_unavoidable_void keeps its exact type; its proof enters through unavoidableP."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X221.v",
+      "name": "unvd",
+      "note": "Module import line naming unvd (lexical match of the module name only)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X221.v",
+      "name": "x221_linearly_unavoidable",
+      "note": "x221_void_lin_unavoidable keeps its exact type and unchanged proof."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_edges.v",
+      "name": "conj_9",
+      "note": "conj9_weaken_const' keeps its exact type and unchanged proof."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_edges.v",
+      "name": "unvd",
+      "note": "Import line, and conj9_weaken_const' with exact type and proof unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_fas_unvd.v",
+      "name": "contains_subdigraph",
+      "note": "contains_subdigraph_refl uses the unchanged live support unvd.contains_subdigraph; untouched."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_fas_unvd.v",
+      "name": "is_tournament",
+      "note": "is_tournament_TT uses the unchanged live support heroes.is_tournament; untouched."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_fas_unvd.v",
+      "name": "unvd",
+      "note": "Import line; unvd_K1, not_unvd_K1_0 and unvd_K2 keep exact types and enter through unavoidableP."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_heroes.v",
+      "name": "is_tournament",
+      "note": "Five hero groundings (is_tournament_of/_C3/_TT, Edgeless2_ and Digon2_not_tournament) uses the unchanged live support heroes.is_tournament; untouched."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_omegabar_unvd.v",
+      "name": "contains_subdigraph",
+      "note": "gr_contains_refl and gr_contains_trans uses the unchanged live support unvd.contains_subdigraph; untouched."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_omegabar_unvd.v",
+      "name": "unvd",
+      "note": "Module import line naming unvd (lexical match of the module name only)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_reals.v",
+      "name": "unvd",
+      "note": "Module import line naming unvd (lexical match of the module name only)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_reals2.v",
+      "name": "unvd",
+      "note": "Module import line naming unvd (lexical match of the module name only)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_unvd_sad.v",
+      "name": "contains_subdigraph",
+      "note": "contains_subdigraph_C3_bigger uses the unchanged live support unvd.contains_subdigraph; untouched."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_unvd_sad.v",
+      "name": "is_tournament",
+      "note": "is_tournament_djoin_C3_K1 and is_tournament_TT' uses the unchanged live support heroes.is_tournament; untouched."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_unvd_sad.v",
+      "name": "unvd",
+      "note": "Import line; unvd_relation_inhabited keeps its exact type and enters through unavoidableP."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/heroes_dichotomy.v",
+      "name": "is_tournament",
+      "note": "transitive_tournament uses the unchanged live support heroes.is_tournament; untouched."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications2.v",
+      "name": "conj_9",
+      "note": "conj9_weaken_const keeps its exact type and unchanged proof."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications2.v",
+      "name": "unvd",
+      "note": "Import line, and conj9_weaken_const with exact type and proof unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X221.v",
+      "name": "unvd",
+      "note": "Module import line naming unvd (lexical match of the module name only)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/reals_growth.v",
+      "name": "prob_6",
+      "note": "The non-corpus alias prob6_unvd_statement := unvd.prob_6: frozen statement with an exact iff; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/reals_growth.v",
+      "name": "unvd",
+      "note": "Import line, and the module qualifier of unvd.prob_6 in the unchanged alias."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/unvd.v",
+      "name": "is_tournament",
+      "note": "unavoidableP, the conjecture-local bridge from the live unavoidable to the unbundled reading."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_D7.v",
+      "name": "is_tournament",
+      "note": "GTMisc.D7.is_tournament, a distinct raw finType/relation namesake declared in D7.v; unrelated and unchanged."
+    }
+  ],
+  "distinct_variants": [],
+  "directed_downstream_client": "digraph-theory/theories/examples/tournament_unavoidability.v"
+}

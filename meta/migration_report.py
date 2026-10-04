@@ -21,6 +21,10 @@ particular it does not certify Section scaffolding or compiled dependency closur
 family-specific Section and kernel dependency evidence remains required.
 Statement objects may select corpus "opg" or "v2", or explicitly set
 "non_corpus": true. Unmarked statements must resolve uniquely in the manifests.
+An optional "additional_statements" list explicitly classifies reached, closed
+non-corpus Props whose names are not discovered automatically. Enrollment is
+restricted to unambiguous top-level nullary Definitions, with ordinary frozen
+body, complete-iff and zero-assumption checks still required.
 Every occurrence of a complete row requires a statement role and an exact iff
 probe, independently of its label. New reused nonstatement objects use the
 "historical" role; the existing named historical roles remain supported aliases.
@@ -54,12 +58,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import shlex
 import subprocess
 import sys
 import tempfile
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 
 import library_inventory as INV
@@ -95,21 +101,99 @@ def sha256(text: str) -> str:
     return hashlib.sha256(text.encode()).hexdigest()
 
 
-def git(*args: str) -> str:
+def _git_at(root: str | Path, *args: str) -> str:
     return subprocess.run(
-        ["git", *args], cwd=ROOT, check=True, capture_output=True, text=True
+        ["git", *args], cwd=root, check=True, capture_output=True, text=True
     ).stdout
+
+
+def git(*args: str) -> str:
+    return _git_at(ROOT, *args)
+
+
+def _resolve_commit(root: str, identity: tuple, commit: str) -> str:
+    return _git_at(root, "rev-parse", "--verify", commit + "^{commit}").strip()
+
+
+_full_commit = lru_cache(maxsize=256)(_resolve_commit)
+
+
+def _historical_key(repository: tuple, commit: str) -> tuple | None:
+    # Only full object names are immutable. Resolve HEAD, branches and tags
+    # afresh even if a prior call successfully resolved the same spelling.
+    resolve = (_full_commit if re.fullmatch(r"[0-9a-f]{40}", commit)
+               else _resolve_commit)
+    try:
+        return (*repository, resolve(*repository, commit))
+    except subprocess.CalledProcessError:
+        # Git also accepts tree expressions here. Unsupported cache keys and
+        # missing references must retain the original operation/error behavior.
+        return None
+
+
+def _history_repository() -> tuple | None:
+    # Replacement refs can change a full object's effective contents. Read
+    # their presence afresh, including packed refs, and use original Git reads
+    # for custom repository/ref environments or unsupported ref storage.
+    if any(name.startswith("GIT_") for name in os.environ):
+        return None
+    root = ROOT.resolve()
+    try:
+        dotgit = root / ".git"
+        if dotgit.is_dir():
+            gitdir = dotgit.resolve()
+        else:
+            pointer = dotgit.read_text().strip()
+            if not pointer.startswith("gitdir: "):
+                return None
+            gitdir = (root / pointer[8:]).resolve()
+        common_file = gitdir / "commondir"
+        common = ((gitdir / common_file.read_text().strip()).resolve()
+                  if common_file.exists() else gitdir)
+        # Bind repository indirection afresh without a subprocess on each hit.
+        # Reused checkout paths and replaced object directories are distinct.
+        identity = tuple((str(path), path.stat().st_dev, path.stat().st_ino)
+                         for path in (gitdir, common, common / "objects"))
+        if any(path.exists() for path in (
+                common / "refs/replace", common / "reftable",
+                common / "objects/info/alternates")):
+            return None
+        packed = common / "packed-refs"
+        if packed.exists() and "refs/replace/" in packed.read_text():
+            return None
+        return str(root), identity
+    except (OSError, UnicodeError):
+        # Unsupported/missing repository metadata retains Git's own errors.
+        return None
+
+
+@lru_cache(maxsize=2048)
+def _historical_source(root: str, identity: tuple, commit: str, path: str) -> str:
+    return _git_at(root, "show", f"{commit}:{path}")
+
+
+@lru_cache(maxsize=2048)
+def _historical_blob(root: str, identity: tuple, commit: str, path: str) -> str:
+    return _git_at(root, "rev-parse", f"{commit}:{path}").strip()
 
 
 def source_at(commit: str | None, path: str) -> str:
     """File text at a commit, or in the working tree when commit is None."""
     if commit is None:
         return (ROOT / path).read_text()
-    return git("show", f"{commit}:{path}")
+    repository = _history_repository()
+    key = _historical_key(repository, commit) if repository is not None else None
+    if key is None:
+        return git("show", f"{commit}:{path}")
+    return _historical_source(*key, path)
 
 
 def blob_at(commit: str, path: str) -> str:
-    return git("rev-parse", f"{commit}:{path}").strip()
+    repository = _history_repository()
+    key = _historical_key(repository, commit) if repository is not None else None
+    if key is None:
+        return git("rev-parse", f"{commit}:{path}").strip()
+    return _historical_blob(*key, path)
 
 
 def ref_re(name: str) -> re.Pattern[str]:
@@ -140,6 +224,13 @@ def module_spans(clean: str) -> list[tuple[str, int, int]]:
 
 def declarations(src: str) -> list[dict]:
     """Every declaration of a file: name, enclosing module, normalized text, line."""
+    # Callers may modify their result; cached data contains immutable scalars.
+    return [dict(zip(("name", "module", "text", "line"), row))
+            for row in _declarations(src)]
+
+
+@lru_cache(maxsize=2048)
+def _declarations(src: str) -> tuple[tuple, ...]:
     clean = INV.strip_comments(src)
     spans = module_spans(clean)
     out = []
@@ -147,13 +238,9 @@ def declarations(src: str) -> list[dict]:
         start = clean.rfind("\n", 0, match.start(1)) + 1
         module = next((n for n, s, e in spans if s <= match.start() < e), None)
         text = INV.normalize_space(clean[start:INV.sentence_end(clean, start)])
-        out.append({
-            "name": match.group(1),
-            "module": module,
-            "text": text,
-            "line": clean.count("\n", 0, match.start(1)) + 1,
-        })
-    return out
+        out.append((match.group(1), module, text,
+                    clean.count("\n", 0, match.start(1)) + 1))
+    return tuple(out)
 
 
 def find_decl(src: str, name: str, module: str | None = None) -> dict:
@@ -176,7 +263,29 @@ def substitute(text: str, substitutions: dict[str, str]) -> str:
     return pattern.sub(lambda m: substitutions[m.group(1)], text)
 
 
+@lru_cache(maxsize=128)
+def _inventory_index(root: str, identity: tuple, commit: str) -> dict[str, str] | None:
+    data = json.loads(_historical_source(root, identity, commit, "meta/library_helper_inventory.json"))
+    helpers = data.get("helpers", []) if isinstance(data, dict) else None
+    # Malformed shapes use the original ordered lookup below: an error after
+    # a matching entry must not make a formerly successful lookup fail early.
+    if not isinstance(helpers, list) or any(
+            not isinstance(h, dict) or not isinstance(h.get("qualified_name"), str)
+            or not isinstance(h.get("declaration_hash"), str) for h in helpers):
+        return None
+    index = {}
+    for helper in helpers:
+        index.setdefault(helper["qualified_name"], helper["declaration_hash"])
+    return index
+
+
 def inventory_hash(commit: str, qualified: str) -> str | None:
+    repository = _history_repository()
+    key = _historical_key(repository, commit) if repository is not None else None
+    if key is not None:
+        index = _inventory_index(*key)
+        if index is not None:
+            return index.get(qualified)
     data = json.loads(source_at(commit, "meta/library_helper_inventory.json"))
     for helper in data.get("helpers", []):
         if helper["qualified_name"] == qualified:
@@ -221,8 +330,172 @@ def module_for_path(path: str, namespaces: dict | None = None) -> str:
     return namespaces[package] + "." + relative[:-2].replace("/", ".")
 
 
-def statement_dependencies(base: str, sources: set[str], rows: dict, *,
-                           include_public: bool = False) -> tuple[set[str], set[str]]:
+def additional_statement_names(spec: dict) -> set[str]:
+    names = spec.get("additional_statements", [])
+    if (not isinstance(names, list)
+            or any(not isinstance(name, str)
+                   or not re.fullmatch(rf"{IDENT}(?:\.{IDENT})+", name) for name in names)
+            or len(names) != len(set(names))):
+        raise ValueError("additional_statements must be a list of unique qualified names")
+    return set(names)
+
+
+def statement_ownership_text(source: str) -> str:
+    """Mask nested comments and Rocq doubled-quote strings without moving offsets.
+
+    This narrow enrollment lexer intentionally does not change ordinary family
+    parsing. Joint scanning matters: comment delimiters inside strings must not
+    hide real scope commands, and scope words in strings must not close scopes.
+    """
+    result = list(source)
+    depth, quoted, index = 0, False, 0
+    while index < len(source):
+        width = 1
+        if depth:
+            if source.startswith("(*", index):
+                depth += 1
+                width = 2
+            elif source.startswith("*)", index):
+                depth -= 1
+                width = 2
+        elif quoted:
+            if source.startswith('""', index):
+                width = 2
+            elif source[index] == '"':
+                quoted = False
+        elif source.startswith("(*", index):
+            depth = 1
+            width = 2
+        elif source[index] == '"':
+            quoted = True
+        elif source.startswith("*)", index):
+            raise ValueError("additional statement has an unmatched comment delimiter")
+        else:
+            index += 1
+            continue
+        for offset in range(index, index + width):
+            if source[offset] != "\n":
+                result[offset] = " "
+        index += width
+    if depth or quoted:
+        raise ValueError("additional statement has an unterminated comment or string")
+    return "".join(result)
+
+
+def additional_statement_path(qualified: str) -> str:
+    """Resolve only known conjecture or supported public-library locations."""
+    owners = {namespace: package for package, namespace in INV.repository_namespaces().items()}
+    owners.update(GTBase="base", Atlas="atlas", ClassicalLemmas="classical-lemmas")
+    namespace, *parts, name = qualified.split(".")
+    package = owners.get(namespace)
+    if package is None or not parts:
+        raise ValueError(f"{qualified}: additional statement needs a known module")
+    path = package + "/theories/" + "/".join(parts) + ".v"
+    public = public_repository_path(path)
+    if parts[0] != "conjectures" and not public:
+        raise ValueError(f"{qualified}: unsupported additional statement location")
+    if public and Path(path).name.startswith(SKIP_PREFIXES):
+        raise ValueError(f"{qualified}: probe sources cannot own additional statements")
+    return path
+
+
+def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) -> set[str]:
+    """Explicitly reviewed classification, never inferred from a Prop's meaning.
+
+    The initial format deliberately rejects Section/module parameters and
+    inferred signatures. The existing source comparison binds the complete
+    frozen body to this immutable declaration; kernel mode checks @ endpoints.
+    """
+    names = additional_statement_names(spec)
+    if not names:
+        return names
+    base = spec["baseline_commit"]
+    if (not re.fullmatch(r"[0-9a-f]{40}", base)
+            or INV.source_git(ROOT, "cat-file", "-t", base).strip() != "commit"):
+        raise ValueError("additional statements require an immutable full baseline commit")
+    for qualified in sorted(names):
+        path = additional_statement_path(qualified)
+        package, name = path.split("/", 1)[0], qualified.rsplit(".", 1)[1]
+        project_path = package + "/_CoqProject"
+        if rows_base.get(name) or rows_now.get(name):
+            raise ValueError(f"{qualified}: additional statement must be outside both corpus manifests")
+        related = [obj for obj in spec["frozen"] if obj.get("qualified") == qualified]
+        objects = [obj for obj in related if obj.get("kind") == "statement"]
+        if any(obj.get("kind") not in {"statement", "original-statement"} for obj in related):
+            raise ValueError(f"{qualified}: additional statements require whole statement roles")
+        if (len(objects) != 1 or objects[0].get("kind") != "statement"
+                or objects[0].get("non_corpus") is not True or "corpus" in objects[0]
+                or objects[0].get("path") != path or objects[0].get("name") != name
+                or objects[0].get("commit", base) != base
+                or not objects[0].get("certificate")):
+            raise ValueError(f"{qualified}: additional statement needs one exact non_corpus statement mapping")
+        commits = {base}
+        for obj in related:
+            if (obj.get("non_corpus") is not True or "corpus" in obj
+                    or obj.get("path") != path or obj.get("name") != name
+                    or not obj.get("certificate")):
+                raise ValueError(f"{qualified}: additional statement snapshots need exact non_corpus identity")
+            commit = obj.get("commit", base)
+            if (not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit)
+                    or INV.source_git(ROOT, "cat-file", "-t", commit).strip() != "commit"):
+                raise ValueError(f"{qualified}: additional statement snapshots require immutable full commits")
+            commits.add(commit)
+        # A historical Original is enrolled as the same complete Prop: apply
+        # every source/project/shape/scope guard at its own effective commit.
+        for commit in (*sorted(commits), None):
+            if commit is not None:
+                if commit != base and manifest_rows(commit)[0].get(name):
+                    raise ValueError(f"{qualified}: additional statement snapshot must be outside historical corpus manifests")
+                _, source = INV.regular_source_blob(ROOT, commit, path)
+                _, project = INV.regular_source_blob(ROOT, commit, project_path)
+            else:
+                for relative in (path, project_path):
+                    file = ROOT / relative
+                    if not file.is_file() or file.resolve() != ROOT.resolve() / relative:
+                        raise ValueError(f"{qualified}: current source/project missing or aliased")
+                source, project = source_at(None, path), source_at(None, project_path)
+            if INV.project_module(path, project) + "." + name != qualified:
+                raise ValueError(f"{qualified}: additional statement ownership mismatch")
+            clean = statement_ownership_text(source)
+            matches = [match for match in DECL_RE.finditer(clean) if match.group(1) == name]
+            if (len(matches) != 1 or not re.match(
+                    rf"\s*Definition\s+{re.escape(name)}\s*:\s*Prop\s*:=",
+                    clean[matches[0].start():])):
+                raise ValueError(f"{qualified}: additional statement requires a nullary Definition : Prop")
+            prefix, stack = clean[:matches[0].start()], []
+            if re.search(r"\bLoad\b", prefix):
+                raise ValueError(f"{qualified}: additional statement cannot follow source-splicing Load")
+            # Reserved scope keywords may follow Time/Timeout/Redirect or another
+            # command on the same line. Scan conservatively: ambiguous command
+            # text must fail closed rather than hide an opener behind a wrapper.
+            scope_keywords = re.compile(r"\b(?:Module|Section|End)\b")
+            scopes = re.compile(rf"(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})(?![\w'])")
+            command_start = 0
+            for keyword in scope_keywords.finditer(prefix):
+                scope = scopes.match(prefix, keyword.start())
+                if scope is None:
+                    raise ValueError(f"{qualified}: unsupported Module/Section identifier syntax")
+                while INV.sentence_end(prefix, command_start) <= scope.start():
+                    command_start = INV.sentence_end(prefix, command_start)
+                if prefix[command_start:scope.start()].strip():
+                    raise ValueError(f"{qualified}: additional statement must be outside Module/Section scopes; wrapped scope commands are unsupported")
+                kind, label = scope.groups()
+                if kind == "End":
+                    if not stack or stack.pop() != label:
+                        raise ValueError(f"{qualified}: unsupported scope structure")
+                else:
+                    tail = prefix[scope.end():INV.sentence_end(prefix, scope.end())]
+                    if not (kind.startswith("Module") and re.fullmatch(
+                            rf"\s*:=\s*{IDENT}(?:\.{IDENT})*\s*\.\s*", tail)):
+                        stack.append(label)
+            if stack:
+                raise ValueError(f"{qualified}: additional statement must be outside Module/Section scopes")
+    return names
+
+
+def statement_dependencies(base: str | None, sources: set[str], rows: dict, *,
+                           include_public: bool = False,
+                           additional_statements: set[str] = frozenset()) -> tuple[set[str], set[str]]:
     """Discover baseline statement consumers independently of the frozen list.
 
     Read build-listed conjecture declarations, resolve same-file names first,
@@ -236,7 +509,10 @@ def statement_dependencies(base: str, sources: set[str], rows: dict, *,
     declaration bodies, not proof terms or every internal module, and does not
     enroll those nodes as sources or add them to the helper debt inventory.
     """
-    paths = git("ls-tree", "-r", "--name-only", base).splitlines()
+    include_public = include_public or any(
+        public_repository_path(additional_statement_path(name)) for name in additional_statements)
+    paths = (git("ls-tree", "-r", "--name-only", base).splitlines() if base is not None
+             else sorted(set(git("ls-files", "--cached", "--others", "--exclude-standard").splitlines())))
     projects, nodes, node_packages, short_names = {}, {}, {}, defaultdict(set)
     for path in paths:
         public = public_repository_path(path)
@@ -248,13 +524,16 @@ def statement_dependencies(base: str, sources: set[str], rows: dict, *,
         if package not in projects:
             project_path = package + "/_CoqProject"
             project = (INV.regular_source_blob(ROOT, base, project_path)[1]
-                       if include_public and public else source_at(base, project_path))
+                       if include_public and public and base is not None else source_at(base, project_path))
             projects[package] = INV.project_sources(project)[0]
         if path.split("/", 1)[1] not in projects[package]:
             continue
         if public and include_public:
-            INV.regular_source_blob(ROOT, base, path)
-            _, project = INV.regular_source_blob(ROOT, base, package + '/_CoqProject')
+            if base is not None:
+                INV.regular_source_blob(ROOT, base, path)
+                _, project = INV.regular_source_blob(ROOT, base, package + '/_CoqProject')
+            else:
+                project = source_at(None, package + '/_CoqProject')
             module = INV.project_module(path, project)
         else:
             module = module_for_path(path)
@@ -284,10 +563,13 @@ def statement_dependencies(base: str, sources: set[str], rows: dict, *,
         for consumer in reverse[pending.pop()] - reached:
             reached.add(consumer)
             pending.append(consumer)
+    if additional_statements & sources or additional_statements - (reached & set(nodes)):
+        raise ValueError("additional statements must be reached from migrated sources and cannot be source helpers")
     statements = {name for name in reached if name in nodes and
             (name.rsplit(".", 1)[-1].endswith("_statement") or
              any(row.get("repo") == node_packages[name]
                  for row in rows.get(name.rsplit(".", 1)[-1], [])))}
+    statements.update(additional_statements)
     ancestors, pending = set(statements), list(statements)
     while pending:
         for dependency in forward[pending.pop()] - ancestors:
@@ -342,11 +624,18 @@ def statement_obligations(spec: dict, *, expected_statements: set[str] | None = 
         rows_base, _ = manifest_rows(base)
     if rows_now is None:
         rows_now, _ = manifest_rows(None)
+    additional = validate_additional_statements(spec, rows_base, rows_now)
     if expected_statements is None:
         entry = load_library_registry(ROOT)["primitives"].get(spec["family"], {})
+        sources = migrated_registry_sources(entry)
         expected_statements, _ = statement_dependencies(
-            base, migrated_registry_sources(entry), rows_base,
-            include_public=bool(entry.get("repository_sources")))
+            base, sources, rows_base,
+            include_public=bool(entry.get("repository_sources")),
+            additional_statements=additional)
+        if additional:
+            statement_dependencies(None, sources, rows_now,
+                                   include_public=bool(entry.get("repository_sources")),
+                                   additional_statements=additional)
     objects, errors = [], []
     for obj in spec["frozen"]:
         identity = module_for_path(obj["path"], spec["namespaces"]) + "." + obj["name"]
@@ -411,6 +700,9 @@ def check_kernel(spec: dict) -> list[str]:
         body = ["Require " + module + "." for module in imports]
         for obj in objects:
             frozen = module_for_path(obj["frozen_path"], spec["namespaces"]) + "." + obj["frozen"]
+            if obj["qualified"] in additional_statement_names(spec):
+                body.append(f"Check (@{frozen} : Prop).")
+                body.append(f"Check (@{obj['qualified']} : Prop).")
             body.append(f"Check ({obj['certificate']} : {frozen} <-> {obj['qualified']}).")
         body.extend(f"Print Assumptions {name}." for name in sorted(certificates[package]))
         with tempfile.TemporaryDirectory(prefix="migration-exact-type-") as tmp:
@@ -459,6 +751,9 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
 
     registry = load_library_registry(ROOT, allow_missing_reports=allow_missing_reports)["primitives"]
     entry = registry.get(spec["family"], {})
+    rows_base, legs_base = manifest_rows(base)
+    rows_now, legs_now = manifest_rows(None)
+    additional = validate_additional_statements(spec, rows_base, rows_now)
     repository_sources = entry.get("repository_sources", {})
     INV.repository_source_records(ROOT, entry)
     expected_sources = migrated_registry_sources(entry)
@@ -565,10 +860,13 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     chain_names = {o["name"] for o in spec["frozen"] if o["kind"] == "chain"}
     statements = []
     computed_chain: set[str] = set()
-    rows_base, legs_base = manifest_rows(base)
-    rows_now, legs_now = manifest_rows(None)
     expected_statements, reaching = statement_dependencies(
-        base, expected_sources, rows_base, include_public=bool(repository_sources))
+        base, expected_sources, rows_base, include_public=bool(repository_sources),
+        additional_statements=additional)
+    if additional:
+        statement_dependencies(None, expected_sources, rows_now,
+                               include_public=bool(repository_sources),
+                               additional_statements=additional)
     _, role_errors = statement_obligations(
         spec, expected_statements=expected_statements, rows_base=rows_base, rows_now=rows_now)
     for error in role_errors:
@@ -577,10 +875,11 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     check(expected_statements == supplied_statements,
           "affected statement coverage matches baseline dependencies",
           f"missing={sorted(expected_statements - supplied_statements)}; extra={sorted(supplied_statements - expected_statements)}")
-    if repository_sources:
+    if repository_sources or additional:
         frozen_chain = {obj['qualified'] for obj in spec['frozen'] if obj['kind'] in {'source', 'chain'}}
         missing_chain = reaching - expected_statements - frozen_chain
-        check(not missing_chain, "public source paths have complete frozen intermediary coverage",
+        label = ("public source paths" if repository_sources else "additional statement paths")
+        check(not missing_chain, label + " have complete frozen intermediary coverage",
               f"missing={sorted(missing_chain)}")
     for obj in (o for o in spec["frozen"] if o["kind"] == "statement"):
         base_src, live_src = source_at(base, obj["path"]), source_at(None, obj["path"])
@@ -858,7 +1157,7 @@ def render_details(report: dict, spec: dict) -> str:
     lines += ["", "## Distinct name matches (not claimed, not redirected)", ""]
     for item in report["distinct_variants"]:
         lines.append(f"- `{item['qualified']}` (sha256 `{item['declaration_sha256'][:16]}…`, "
-                     f"unchanged): {item['note']}")
+                     "unchanged)" + (f": {item['note']}" if "note" in item else ""))
     lines += ["", "## Checks", ""]
     lines += [f"- [{'x' if c['ok'] else ' '}] {c['check']}" + (f" ({c['detail']})" if c["detail"]
                                                               and not c["ok"] else "")

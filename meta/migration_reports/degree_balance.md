@@ -1,0 +1,27 @@
+# Migration report: degree-balance
+
+Inputs: `meta/migration_reports/degree_balance.spec.json` and `meta/library_primitives/degree-balance.json`.
+Regenerate: `python3 meta/migration_report.py degree_balance --write`.
+Full evidence: `python3 meta/migration_report.py degree_balance --details /tmp/migration-details`.
+
+- Canonical: `Digraph.foundations.degree_balance.balanced`.
+- Baseline: `298112264b7c31820acf889c6da29b710fd39c9a`.
+- Scope: 4 helpers, 8 statements, 17 frozen objects, 142 recorded references.
+- Source checks: 278/278 pass; consistent.
+
+| Statement / corpus row | Compatibility theorem |
+|---|---|
+| `Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement` / arxiv:2510.11311#04 | `Digraph.migration.degree_balance.orientation_C4_eulerian_avoidable_statement_compat` |
+| `Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement` / arxiv:1608.03040#04 | `Digraph.migration.degree_balance.majority_3col_eulerian_statement_compat` |
+| `Digraph.conjectures.two_extremal.H6_no_full_cover` / derived:drv_twoext_h6 | `Digraph.migration.degree_balance.H6_no_full_cover_compat` |
+| `Digraph.conjectures.two_extremal_glue.conj_9_2_glued` / no corpus row | `Digraph.migration.degree_balance.conj_9_2_glued_compat` |
+| `Digraph.conjectures.glue_eul_subtype.conj_9_2_glued_e` / no corpus row | `Digraph.migration.degree_balance.conj_9_2_glued_e_compat` |
+| `Cycle.conjectures.U6.decomposing_an_eulerian_graph_into_cycles_statement` / opg:decomposing_an_eulerian_graph_into_cycles | `Cycle.migration.eulerian.decomposing_an_eulerian_graph_into_cycles_statement_compat` |
+| `Cycle.conjectures.U6.decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement` / opg:decomposing_an_eulerian_graph_into_cycles_with_no_two_consecutives_edges_on_a_prescirbed_eulerian_tour | `Cycle.migration.eulerian.decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement_compat` |
+| `Cycle.conjectures.U6.decomposing_eulerian_graphs_statement` / opg:decomposing_eulerian_graphs | `Cycle.migration.eulerian.decomposing_eulerian_graphs_statement_compat` |
+
+Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
+`python3 meta/migration_report.py degree_balance --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
+Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
+
+Excluded distinct variants: `Cycle.conjectures.U6.even_subgraph`, `Cycle.conjectures.U6.is_eulerian_tour`, `Chromatic.foundations.alon_tarsi.at_eulerian`, `Digraph.conjectures.X221.x221_eulerian_avoidable`.

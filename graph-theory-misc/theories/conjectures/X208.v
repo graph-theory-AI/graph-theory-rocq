@@ -1,6 +1,7 @@
 (** * GTMisc.conjectures.X208 -- v2 MIS on P_t-free graphs row *)
 
 From GTBase Require Export base.
+From GTBase Require Import induced_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -8,20 +9,18 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X208 vocabulary ***********************************************)
 
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.has_induced_path_of_order]: the original index-encoded body is frozen and
+    certified (an explicit iff through the index bridge on the duplicate-free list) in
+    theories/migration/induced_paths.v. *)
 Definition x208_induced_path_order (G : sgraph) (t : nat) : Prop :=
-  exists (x : G) (p : seq G),
-    [/\ size (x :: p) = t,
-        path (--) x p,
-        uniq (x :: p) &
-        forall i j : nat,
-          i.+1 < j -> j < size (x :: p) ->
-          ~~ (nth x (x :: p) i -- nth x (x :: p) j)].
+  has_induced_path_of_order G t.
 
 Definition x208_Pt_free (G : sgraph) (t : nat) : Prop :=
   ~ x208_induced_path_order G t.
 
 Definition x208_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x != y -> ~~ (x -- y).
+  stable S.
 
 Definition x208_maximum_independent_set_output (G : sgraph) (out : data) : Prop :=
   exists S : {set G},

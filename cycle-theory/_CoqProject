@@ -3,6 +3,7 @@
 -arg -w -arg -notation-overridden
 
 theories/foundations/connectivity.v
+theories/foundations/spanning_trees.v
 theories/foundations/cycle_space.v
 theories/foundations/matchings_cuts.v
 theories/foundations/comp_reduce.v
@@ -41,3 +42,8 @@ theories/migration/cycle_vertices.v
 theories/migration/longest_cycle.v
 theories/migration/min_degree_at_least.v
 theories/migration/mregular.v
+theories/foundations/eulerian.v
+theories/examples/eulerian.v
+theories/migration/eulerian.v
+theories/examples/spanning_trees.v
+theories/migration/spanning_trees.v

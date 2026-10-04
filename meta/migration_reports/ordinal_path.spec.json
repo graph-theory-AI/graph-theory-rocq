@@ -1,0 +1,381 @@
+{
+  "family": "ordinal-path",
+  "canonical_name": "GTBase.path_graphs.ordinal_path",
+  "canonical_short_name": "ordinal_path",
+  "relation": "one contract: the path graph P_n on the ordinals 'I_n, two indices adjacent exactly when they are consecutive in either order, with n vertices, no loop, no modular wrap and no positivity premise. Relations: Hom.U3.pth_rel (Section parameter n) and Chromatic.X170.x170_p4_edge (n = 4) are the raw relation GTBase.path_graphs.ordinal_path_rel by conversion; Packing.X18.x18_path_rel and Packing.X226.x226_path_rel carry a redundant (i != j) guard and are pointwise equal to it (ordinal_path_rel_guardedE), not convertible. Constructors: Hom.U3.path_graph, Packing.X18.x18_path_graph and Packing.X226.x226_path_graph were SGraph packagings of those relations with their own symmetry/irreflexivity proofs; each is isomorphic to the canonical ordinal_path through upstream eq_diso (the identity on 'I_n), and no proof-term conversion is claimed. GTBase.path_graphs is a focused construction module: the raw relation and the SGraph constructor, the raw and guarded edge equations, order n, no loop, the small cases n = 0, 1, 2, 3, the P_4 instance, and bridges (maximum degree at most two, connected, a forest by K3_free_forest, hence a tree and a B9 path_tree). Distinct, untouched: the cyclic GTBase.base.cyc_rel / cycle_graph, Minor.X198.x198_join_path_rel on a sum carrier, the other cyclic/modular, product and directed relations listed in the spec, sequence paths and path indices, and B9's degree-bounded predicate path_tree.",
+  "baseline_commit": "9921abbaa06205062a2b81d77d06cdd641dcdc97",
+  "namespaces": {
+    "packing-theory": "Packing",
+    "homomorphism-theory": "Hom",
+    "chromatic-theory": "Chromatic",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/path_graphs.v",
+    "packing-theory/theories/migration/ordinal_path.v",
+    "homomorphism-theory/theories/migration/ordinal_path.v",
+    "chromatic-theory/theories/migration/ordinal_path.v"
+  ],
+  "extra_certificates": [
+    "GTBase.path_graphs.ordinal_path_rel_sym",
+    "GTBase.path_graphs.ordinal_path_rel_irrefl",
+    "GTBase.path_graphs.ordinal_path_edgeE",
+    "GTBase.path_graphs.ordinal_path_relP",
+    "GTBase.path_graphs.ordinal_path_rel_guardedE",
+    "GTBase.path_graphs.ordinal_path_edge_guardedE",
+    "GTBase.path_graphs.card_ordinal_path",
+    "GTBase.path_graphs.ordinal_path_no_loop",
+    "GTBase.path_graphs.ordinal_path_degree",
+    "GTBase.path_graphs.ordinal_path_Delta",
+    "GTBase.path_graphs.ordinal_path0_empty",
+    "GTBase.path_graphs.ordinal_path1_edgeless",
+    "GTBase.path_graphs.ordinal_path2_edge",
+    "GTBase.path_graphs.ordinal_path_ends",
+    "GTBase.path_graphs.ordinal_path3_no_wrap",
+    "GTBase.path_graphs.ordinal_path4_edgeE",
+    "GTBase.path_graphs.eq_ordinal_path_diso",
+    "GTBase.path_graphs.guarded_ordinal_path_diso",
+    "GTBase.path_graphs.ordinal_path_connect_add",
+    "GTBase.path_graphs.ordinal_path_connected",
+    "GTBase.path_graphs.ordinal_path_disj_mem",
+    "GTBase.path_graphs.ordinal_path_between",
+    "GTBase.path_graphs.ordinal_path_interval",
+    "GTBase.path_graphs.ordinal_path_sep",
+    "GTBase.path_graphs.ordinal_path_lt_total",
+    "GTBase.path_graphs.ordinal_path_K3_free",
+    "GTBase.path_graphs.ordinal_path_is_forest",
+    "GTBase.path_graphs.ordinal_path_is_tree",
+    "GTBase.path_graphs.ordinal_path_path_tree"
+  ],
+  "summary": [
+    "Family B21 (finite ordinal path graphs). The relations `Packing.conjectures.X18.x18_path_rel`, `Packing.conjectures.X226.x226_path_rel`, `Hom.conjectures.U3.pth_rel` (Section parameter n) and `Chromatic.conjectures.X170.x170_p4_edge` (n = 4), and the constructors `Packing.conjectures.X18.x18_path_graph`, `Packing.conjectures.X226.x226_path_graph` and `Hom.conjectures.U3.path_graph`, now unfold to the new public canonical `GTBase.path_graphs.ordinal_path_rel` / `ordinal_path`: the path graph P_n on 'I_n, two indices adjacent exactly when they are consecutive in either order, n vertices, no loop, no modular wrap, no positivity premise (P_0 is the empty graph, P_1 has no edge, P_2 one edge). The Hom and X170 relations are the raw relation by conversion; the two Packing relations carried a redundant `i != j` guard and are pointwise equal to it (`ordinal_path_rel_guardedE`), which is the whole content of removing the guard: no conversion is claimed. The constructors were SGraph packagings with their own symmetry/irreflexivity proofs; the frozen constructors are isomorphic to `ordinal_path` through upstream `eq_diso` (identity on 'I_n) and the frozen proof lemmas are certified by the `*_proofs_compat` isomorphisms; no proof-term conversion is claimed anywhere. GTBase.path_graphs (not re-exported by base) is a focused construction module: the relation and constructor, the raw and guarded edge equations, order n, no loop, the small cases n = 0, 1, 2, 3, the P_4 instance, and bridges (maximum degree at most two, connected, a forest through upstream `K3_free_forest`, hence a tree and a B9 `path_tree`). Public-only client base/theories/examples/path_graphs.v.",
+    "",
+    "Four complete current rows, frozen over the frozen constructors / chains with every guard, quantifier order and bound exact: Packing X18 `path_partition_independent_set_balance_statement` (covering and disjoint partition, one common independent set, natural b, every per-part inequality, 2 * sum b <= m and every b i <= 1 simultaneously; no n > 0 or m > 0 guard; independence transports along the pointwise edge equality), Packing X226 `eta_bounded_path_free_classes_statement` (outer forall t, 6 <= t, the class-specific bounding function, the nonempty host condition inside x226_eta_bounded, induced_free G (P_t) order; induced-freeness transports along the isomorphism, GTBase.common.induced_free_diso), Hom U3 `extremal_problem_on_the_number_of_tree_endomorphism_statement` (0 < n, is_tree, #|T| = n, both inequalities, the Boolean hom_ffun cardinal endo_count and star_graph unchanged; the endomorphism counts agree by conversion, so the whole row is a conversion and no general isomorphism-invariance claim is used), and Chromatic X170 `oriented_P4_forb_chi_bounded_statement`, the corpus' BLOCKED known-unfaithful encoding (mis-encoded exceptional set): the oriented-graph Record, injective four-vertex map, all-pairs induced adjacency equality, three orientation bits, universal forbidden-code guard, x170_nonexceptional and the chi-bounding order are frozen exactly through the frozen intermediaries `x170_induced_oriented_P4` and `x170_forb_oriented_P4_family`; nothing is repaired, relabelled or unblocked.",
+    "",
+    "History: exactly one earlier complete row depends on the family, C9's `Chromatic.migration.chi_bounded_classes.X170StatementsLegacy.oriented_P4_forb_chi_bounded_statement`, which intentionally keeps the live `x170_forb_oriented_P4_family`; it is kept byte-exact (known_stale_snapshots, with the reciprocal note in C9's spec) and the complete pre-C9/B21 Original `X170Original.oriented_P4_forb_chi_bounded_statement` combines the frozen P_4 chain with C9's frozen `X170Legacy.x170_chi_bounded` (Module C9), certified end to end through C9's own `x170_chi_bounded_compat`. The six frozen constructor proofs keep their original proof scripts (Hom's with the Section parameter). B9's `path_tree` spec drops its three now-migrated constructor exclusions (the other variants and the C13/C14 notes stay).",
+    "",
+    "Consumers: the actual Hom grounding (`path_graph_has_edge`, `path_adj_succ`: two proof scripts), the actual Packing grounding (`x226_path_free_K1`, unchanged) and the entire Section PathForest of implications_X226 with the verified edge gc:e012 (two proof-only edits, every qualified signature unchanged, gc:e013 retained); C9's certificate recompiles unchanged; no other proof body refers to the helpers or the rows. Routing: normal milestones Chromatic X170 (blocked status respected), Hom U3, Packing X18 and X226; the family needs no Digraph source.",
+    "",
+    "Distinct, untouched: the cyclic `GTBase.base.cyc_rel` / `cycle_graph` (modular successor), `Minor.conjectures.X198.x198_join_path_rel` (join with an independent part on a sum carrier; its right branch is this relation but the constructor is a different contract), the other cyclic/modular, product and directed relations listed below, sequence paths and path indices, and B9's predicate `path_tree`.",
+    "",
+    "Kernel evidence, independent of this textual report, from `Print All Dependencies`: no frozen object reaches a live helper of the family or the canonical constants; the X170 Original reaches C9's frozen `X170Legacy.x170_chi_bounded` and the frozen P_4 relation and no live `x170_chi_bounded`; each live row reaches its live helpers and the canonical. Section-parameter probes check the frozen and live Hom declarations at type forall n : nat, 'I_n -> 'I_n -> bool and nat -> sgraph. Summary: /srv/graph-theory-rocq/coordination/evidence/B21-ordinal_path/print_all_dependencies_summary.txt.",
+    "",
+    "Baseline 9921abb is the announced B20 pin (unmerged stack 4b63976 > 2981122 > cc78377 > 7848021 > 51f1200 > d2a23f1 > 6de6ce3 > 9921abb); the eight context files (four sources, two groundings, implications_X226 and C9's certificate) are byte-identical to 6de6ce3 there, so no private union is needed. No statement text, doc block, manifest row, leg state or status changes (checked below).",
+    "Combined A20 history: the initial/private-baseline completeness claims above are relative to this family. The new A20 X18Original closes both raw graph construction and raw independence, preserving all earlier frozen bodies."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X18.x18_path_rel",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_path_rel",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x18_path_rel",
+      "substitutions": {},
+      "certificate": "Packing.migration.ordinal_path.x18_path_rel_compat",
+      "live_unfolds_to": "@ordinal_path_rel n"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X18.x18_path_sym",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_path_sym",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x18_path_sym",
+      "substitutions": {
+        "x18_path_rel": "Legacy.x18_path_rel"
+      },
+      "certificate": "Packing.migration.ordinal_path.x18_path_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X18.x18_path_irrefl",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_path_irrefl",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x18_path_irrefl",
+      "substitutions": {
+        "x18_path_rel": "Legacy.x18_path_rel"
+      },
+      "certificate": "Packing.migration.ordinal_path.x18_path_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X18.x18_path_graph",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "x18_path_graph",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x18_path_graph",
+      "substitutions": {
+        "x18_path_irrefl": "Legacy.x18_path_irrefl",
+        "x18_path_sym": "Legacy.x18_path_sym"
+      },
+      "certificate": "Packing.migration.ordinal_path.x18_path_graph_compat",
+      "live_unfolds_to": "ordinal_path n"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X18.path_partition_independent_set_balance_statement",
+      "path": "packing-theory/theories/conjectures/X18.v",
+      "name": "path_partition_independent_set_balance_statement",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "X18Legacy.path_partition_independent_set_balance_statement",
+      "substitutions": {
+        "x18_path_graph": "Legacy.x18_path_graph"
+      },
+      "certificate": "Packing.migration.ordinal_path.path_partition_independent_set_balance_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X226.x226_path_rel",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_path_rel",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x226_path_rel",
+      "substitutions": {},
+      "certificate": "Packing.migration.ordinal_path.x226_path_rel_compat",
+      "live_unfolds_to": "@ordinal_path_rel t"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X226.x226_path_sym",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_path_sym",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x226_path_sym",
+      "substitutions": {
+        "x226_path_rel": "Legacy.x226_path_rel"
+      },
+      "certificate": "Packing.migration.ordinal_path.x226_path_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Packing.conjectures.X226.x226_path_irrefl",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_path_irrefl",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x226_path_irrefl",
+      "substitutions": {
+        "x226_path_rel": "Legacy.x226_path_rel"
+      },
+      "certificate": "Packing.migration.ordinal_path.x226_path_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X226.x226_path_graph",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "x226_path_graph",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x226_path_graph",
+      "substitutions": {
+        "x226_path_irrefl": "Legacy.x226_path_irrefl",
+        "x226_path_sym": "Legacy.x226_path_sym"
+      },
+      "certificate": "Packing.migration.ordinal_path.x226_path_graph_compat",
+      "live_unfolds_to": "ordinal_path t"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X226.eta_bounded_path_free_classes_statement",
+      "path": "packing-theory/theories/conjectures/X226.v",
+      "name": "eta_bounded_path_free_classes_statement",
+      "frozen_path": "packing-theory/theories/migration/ordinal_path.v",
+      "frozen": "X226Legacy.eta_bounded_path_free_classes_statement",
+      "substitutions": {
+        "x226_path_graph": "Legacy.x226_path_graph"
+      },
+      "certificate": "Packing.migration.ordinal_path.eta_bounded_path_free_classes_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hom.conjectures.U3.pth_rel",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "pth_rel",
+      "frozen_path": "homomorphism-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.pth_rel",
+      "substitutions": {},
+      "certificate": "Hom.migration.ordinal_path.pth_rel_compat",
+      "live_unfolds_to": "ordinal_path_rel i j"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hom.conjectures.U3.pth_sym",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "pth_sym",
+      "frozen_path": "homomorphism-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.pth_sym",
+      "substitutions": {
+        "pth_rel": "(@Legacy.pth_rel n)"
+      },
+      "certificate": "Hom.migration.ordinal_path.pth_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hom.conjectures.U3.pth_irrefl",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "pth_irrefl",
+      "frozen_path": "homomorphism-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.pth_irrefl",
+      "substitutions": {
+        "pth_rel": "(@Legacy.pth_rel n)"
+      },
+      "certificate": "Hom.migration.ordinal_path.pth_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hom.conjectures.U3.path_graph",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "path_graph",
+      "frozen_path": "homomorphism-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.path_graph",
+      "substitutions": {
+        "pth_irrefl": "(@Legacy.pth_irrefl n)",
+        "pth_sym": "(@Legacy.pth_sym n)"
+      },
+      "certificate": "Hom.migration.ordinal_path.path_graph_compat",
+      "live_unfolds_to": "ordinal_path n"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hom.conjectures.U3.extremal_problem_on_the_number_of_tree_endomorphism_statement",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "extremal_problem_on_the_number_of_tree_endomorphism_statement",
+      "frozen_path": "homomorphism-theory/theories/migration/ordinal_path.v",
+      "frozen": "U3Legacy.extremal_problem_on_the_number_of_tree_endomorphism_statement",
+      "substitutions": {
+        "path_graph": "Legacy.path_graph"
+      },
+      "certificate": "Hom.migration.ordinal_path.extremal_problem_on_the_number_of_tree_endomorphism_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X170.x170_p4_edge",
+      "path": "chromatic-theory/theories/conjectures/X170.v",
+      "name": "x170_p4_edge",
+      "frozen_path": "chromatic-theory/theories/migration/ordinal_path.v",
+      "frozen": "Legacy.x170_p4_edge",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.ordinal_path.x170_p4_edge_compat",
+      "live_unfolds_to": "ordinal_path_rel i j"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X170.x170_induced_oriented_P4",
+      "path": "chromatic-theory/theories/conjectures/X170.v",
+      "name": "x170_induced_oriented_P4",
+      "frozen_path": "chromatic-theory/theories/migration/ordinal_path.v",
+      "frozen": "X170Legacy.x170_induced_oriented_P4",
+      "substitutions": {
+        "x170_p4_edge": "Legacy.x170_p4_edge"
+      },
+      "certificate": "Chromatic.migration.ordinal_path.x170_induced_oriented_P4_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X170.x170_forb_oriented_P4_family",
+      "path": "chromatic-theory/theories/conjectures/X170.v",
+      "name": "x170_forb_oriented_P4_family",
+      "frozen_path": "chromatic-theory/theories/migration/ordinal_path.v",
+      "frozen": "X170Legacy.x170_forb_oriented_P4_family",
+      "substitutions": {
+        "x170_induced_oriented_P4": "X170Legacy.x170_induced_oriented_P4"
+      },
+      "certificate": "Chromatic.migration.ordinal_path.x170_forb_oriented_P4_family_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X170.oriented_P4_forb_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X170.v",
+      "name": "oriented_P4_forb_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/ordinal_path.v",
+      "frozen": "X170Legacy.oriented_P4_forb_chi_bounded_statement",
+      "substitutions": {
+        "x170_forb_oriented_P4_family": "X170Legacy.x170_forb_oriented_P4_family"
+      },
+      "certificate": "Chromatic.migration.ordinal_path.oriented_P4_forb_chi_bounded_statement_compat",
+      "original_certificate": "Chromatic.migration.ordinal_path.oriented_P4_forb_chi_bounded_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X170.oriented_P4_forb_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X170.v",
+      "name": "oriented_P4_forb_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/ordinal_path.v",
+      "frozen": "X170Original.oriented_P4_forb_chi_bounded_statement",
+      "substitutions": {
+        "x170_chi_bounded": "C9.X170Legacy.x170_chi_bounded",
+        "x170_forb_oriented_P4_family": "X170Legacy.x170_forb_oriented_P4_family"
+      },
+      "certificate": "Chromatic.migration.ordinal_path.oriented_P4_forb_chi_bounded_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/chi_bounded_classes.v#X170StatementsLegacy.oriented_P4_forb_chi_bounded_statement": "C9 (chi-bounded) per-row snapshot: that family froze only its chi-boundedness in this row, so this copy still calls the live x170_forb_oriented_P4_family, whose P_4 relation B21 migrates (the live chain is the frozen chain by conversion). Kept byte-exact; C9's certificate stays true. The complete pre-C9/B21 row is Chromatic.migration.ordinal_path.X170Original.oriented_P4_forb_chi_bounded_statement (frozen P_4 chain over C9's frozen X170Legacy.x170_chi_bounded), certified end to end by oriented_P4_forb_chi_bounded_statement_original_compat.",
+    "packing-theory/theories/migration/stable_sets.v#X18Legacy.path_partition_independent_set_balance_statement": "A20's initial per-row snapshot freezes independence but intentionally retains the live ordinal graph. Its body is preserved. The complete Packing.migration.stable_sets.X18Original.path_partition_independent_set_balance_statement combines B21 raw graph/scaffolding and A20 raw independence, with the same ordinal carrier/partition/set/budgets. B21's earlier partial snapshot remains unchanged; only its independence transport proof uses the public stable_noedgeP view after A20."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "homomorphism-theory/theories/conjectures/grounding_U3.v",
+      "name": "path_graph",
+      "note": "Actual Hom grounding: path_graph_has_edge (P_2 has an edge) and path_adj_succ (adjacency forces consecutive indices) keep their qualified statements; only their two proof scripts changed (they unfolded pth_rel, which no longer occurs: the alias unfolds to ordinal_path_rel). The unrelated B7/C7/B13 U3 hunks of the file are untouched."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/grounding_X226.v",
+      "name": "x226_path_graph",
+      "note": "Actual Packing grounding x226_path_free_K1 (the P_t-free class contains K_1 for 1 < t): statement and proof unchanged, recompiled over the alias."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X226.v",
+      "name": "x226_path_graph",
+      "note": "The whole Section PathForest (local notation P := x226_path_graph t): every qualified signature is unchanged; two proof-only edits (x226_path_edge now proves the guarded edge equation from ordinal_path_edge_guardedE instead of by conversion; x226_path_between destructs the raw edge through x226_path_edge). The file imports GTBase.path_graphs for that lemma."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X226.v",
+      "name": "eta_bounded_path_free_classes_statement",
+      "note": "Verified corpus edge gc:e012 eta_bounded_forest_free_classes_implies_eta_bounded_path_free_classes instantiates the forest-free row with x226_path_is_forest; its exact implication type is unchanged (as is the separate two-star edge gc:e013)."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTBase.base.cyc_rel",
+      "path": "base/theories/base.v",
+      "name": "cyc_rel",
+      "note": "cyclic adjacency (successor modulo n, guarded): the cycle graph C_n, a different contract; untouched"
+    },
+    {
+      "qualified": "Minor.conjectures.X198.x198_join_path_rel",
+      "path": "minor-theory/theories/conjectures/X198.v",
+      "name": "x198_join_path_rel",
+      "note": "join of an independent 'I_(t-1) part with an 'I_m path on a sum carrier, all cross edges; its right/right branch is the ordinal path relation but the whole constructor is a different contract (a future adapter candidate); untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.two_extremal.symcyc_rel",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "symcyc_rel",
+      "note": "symmetrised cyclic (modular) adjacency; untouched"
+    },
+    {
+      "qualified": "Chromatic.applications.gap_repairs.viable_boundary.boundary_rel",
+      "path": "chromatic-theory/theories/applications/gap_repairs/viable_boundary.v",
+      "name": "boundary_rel",
+      "note": "cyclic/modular boundary adjacency of an applications module; untouched"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X162.x162_tri_rel",
+      "path": "chromatic-theory/theories/conjectures/X162.v",
+      "name": "x162_tri_rel",
+      "note": "a product construction, not an ordinal path; untouched"
+    },
+    {
+      "qualified": "Topological.conjectures.D6emb.anti_dir",
+      "path": "topological-graph-theory/theories/conjectures/D6emb.v",
+      "name": "anti_dir",
+      "note": "a directed construction, not an ordinal path; untouched"
+    }
+  ]
+}

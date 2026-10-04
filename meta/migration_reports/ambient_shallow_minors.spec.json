@@ -252,16 +252,12 @@
   ],
   "known_stale_snapshots": {
     "graph-theory-misc/theories/migration/edge_count.v#X128Legacy.grad_at_most": "A7 partial snapshot preserves its frozen count but retains the then-live x128_shallow_minor_model. It stays byte-exact; the complete A7+C16 Original is GTMisc.migration.ambient_shallow_minors.X128Original with the frozen radius/model and A7 count, including its whole row iff.",
-    "graph-theory-misc/theories/migration/edge_count.v#X139Legacy.grad_at_most": "A7 partial snapshot preserves its frozen count but retains the then-live x139_shallow_minor_model. It stays byte-exact; the complete A7+C16 Original is GTMisc.migration.ambient_shallow_minors.X139Original with the frozen radius/model and A7 count, including its whole row iff."
+    "graph-theory-misc/theories/migration/edge_count.v#X139Legacy.grad_at_most": "A7 partial snapshot preserves its frozen count but retains the then-live x139_shallow_minor_model. It stays byte-exact; the complete A7+C16 Original is GTMisc.migration.ambient_shallow_minors.X139Original with the frozen radius/model and A7 count, including its whole row iff.",
+    "graph-theory-misc/theories/migration/ambient_grad.v#X128Legacy.x128_grad_at_most": "C23 current snapshot: the X128 grad source frozen verbatim at 30459e9 keeps the live model alias x128_shallow_minor_model (and the live A7 count). It stays byte-exact; the complete history is X128Original in this module, whose whole-row iff dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat the ambient_grad report rechecks.",
+    "graph-theory-misc/theories/migration/ambient_grad.v#X139Legacy.x139_grad_at_most": "C23 current snapshot: the X139 grad source frozen verbatim at 30459e9 keeps the live model alias x139_shallow_minor_model (and the live A7 count). It stays byte-exact; the complete history is X139Original in this module, whose whole-row iff esperet_raymond_polynomial_expansion_scol_statement_original_compat the ambient_grad report rechecks."
   },
   "cross_module_consumers": [],
   "distinct_variants": [
-    {
-      "qualified": "Minor.conjectures.X220.x220_shallow_minor",
-      "path": "minor-theory/theories/conjectures/X220.v",
-      "name": "x220_shallow_minor",
-      "reason": "Branch-internal bounded paths and supplied centres, distinct from ambient host distance."
-    },
     {
       "qualified": "Infinite.conjectures.D4inf2.minor_model",
       "path": "infinite-graph-theory/theories/conjectures/D4inf2.v",

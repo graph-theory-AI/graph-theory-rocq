@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py chi_bounded --details /tmp/migr
 
 - Canonical: `GTBase.chi_bounding.chi_bounded_via`.
 - Baseline: `0659592d2a379b1f2564601e8b61689e05eac416`.
-- Scope: 5 helpers, 10 statements, 16 frozen objects, 114 recorded references.
-- Source checks: 249/249 pass; consistent.
+- Scope: 5 helpers, 10 statements, 16 frozen objects, 120 recorded references.
+- Source checks: 250/250 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -28,4 +28,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Chromatic.conjectures.X3.x3_polynomially_chi_bounded`, `Chromatic.conjectures.X124.x124_poly_chi_bounded`, `Chromatic.foundations.chi_bounding.poly_chi_bounded`, `Chromatic.conjectures.X3.x3_bounded_chromatic`, `Digraph.conjectures.dichromatic.dichromatic_bounded`, `Digraph.conjectures.X52.x52_mader_chi_bound`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/complement.v#X3Legacy.gyarfas_complementation_chi_bounded_statement`, `digraph-theory/theories/migration/path_vertices.v#X52Legacy.mader_chi_bound`, `chromatic-theory/theories/migration/graph_classes.v#Legacy.hereditary_chi_bounded_not_polynomial_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/complement.v#X3Legacy.gyarfas_complementation_chi_bounded_statement`, `digraph-theory/theories/migration/path_vertices.v#X52Legacy.mader_chi_bound`, `chromatic-theory/theories/migration/graph_classes.v#Legacy.hereditary_chi_bounded_not_polynomial_statement`, `chromatic-theory/theories/migration/ordinal_path.v#X170Legacy.oriented_P4_forb_chi_bounded_statement`.

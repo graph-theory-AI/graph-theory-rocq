@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "family": "chordal",
+  "primitive": {
+    "canonical_name": "GTBase.chordal.chordal_by_cycles",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "chordal"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.X169.x169_chordal",
+      "Packing.conjectures.XE1.xe1_chordal"
+    ],
+    "consumers_remaining": 2,
+    "relation": "two presentations of chordality, kept as two distinct public contracts of GTBase.chordal with no claimed equivalence (no chordal / clique-tree / perfect-elimination characterization exists in the pinned GraphTheory or MathComp sources, and none is assumed). Cycle presentation: GTBase.chordal.chordal_by_cycles G (every chordless genuine cycle, GTBase.induced_cycles.chordless_cycle, has at most three vertices; equivalently no hole, chordal_by_cyclesP) is Packing.XE1.xe1_chordal by conversion (its xe1_induced_cycle is B23's alias of chordless_cycle). Clique-tree presentation: GTBase.chordal.admits_clique_tree G (some supplied index graph T and bag map form a clique_tree_decomposition: tree_bag_decomposition, i.e. is_tree [set: T] with vertex and edge coverage and connected fibres, plus cliqueb bags) is GTMisc.X169.x169_chordal by conversion (x169_clique_tree unfolds to exactly that body and stays X169's local support, like x169_clique_tree_degree_at_most and x169_tree_decomposition). The empty index is a tree, bags may be empty, unused or repeated, the host need not be connected, bags need not be maximal cliques, and a nonempty host forces an inhabited index. No guard enters either source. The directed Digraph.chi_bounded.chordal_C3 (oriented, no transitive triangle, no long directed induced cycle) is a different contract and stays untouched.",
+    "semantic_classes": {
+      "chordless-cycle-bound": {
+        "members": [
+          "Packing.conjectures.XE1.xe1_chordal"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Packing.migration.chordal.xe1_chordal_compat"
+        ],
+        "note": "public contract GTBase.chordal.chordal_by_cycles: every chordless genuine cycle (B23's chordless_cycle, 2 < size c) has at most three vertices, equivalently no hole; Erdos #81 is frozen over it, keeping the unrelated M1 clique edge-partition vocabulary live."
+      },
+      "clique-tree-existence": {
+        "members": [
+          "GTMisc.conjectures.X169.x169_chordal"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.chordal.x169_chordal_compat"
+        ],
+        "note": "public contract GTBase.chordal.admits_clique_tree: some supplied tree-indexed bag decomposition (C13's tree_bag_decomposition) has clique bags; not identified with the cycle contract. X169's blocked token-sliding row and its polytime chain are frozen over it; the documented intermediate-stability defect and the disproved status are kept."
+      }
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.chordal.token_sliding_chordal_clique_tree_degree_polytime_statement_compat",
+      "GTMisc.migration.chordal.token_sliding_chordal_clique_tree_degree_polytime_statement_original_compat",
+      "GTMisc.migration.chordal.x169_chordal_compat",
+      "GTMisc.migration.chordal.x169_polytime_decides_TS_connectivity_compat",
+      "Packing.migration.chordal.erdos_81_statement_compat",
+      "Packing.migration.chordal.erdos_81_statement_original_compat",
+      "Packing.migration.chordal.xe1_chordal_compat",
+      "GTMisc.migration.stable_sets.token_sliding_chordal_clique_tree_degree_polytime_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.chordal.chordal_by_cyclesP",
+      "GTBase.chordal.chordless_cycle_size_card",
+      "GTBase.chordal.chordal_by_cycles_small",
+      "GTBase.chordal.admits_clique_treeP",
+      "GTBase.chordal.admits_clique_tree_complete",
+      "GTBase.chordal.clique_tree_decomposition_nonempty_index",
+      "GTBase.chordal.clique_tree_decomposition_sdecompP",
+      "GTBase.chordal.clique_tree_decomposition_clique"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.treewidth",
+        "GraphTheory.core.minor",
+        "mathcomp.boot.path",
+        "GTBase.induced_cycles",
+        "GTBase.bag_decompositions",
+        "GTBase.trees"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "No chordal, clique-tree, perfect-elimination or simplicial-vertex characterization in the pinned GraphTheory / MathComp sources. GraphTheory.treewidth supplies sdecomp on a supplied forest and decomp_clique (a NONEMPTY clique lies in a bag), used through C13's same-forest bridge bag_decomposition_sdecompP with the explicit tree condition kept (clique_tree_decomposition_sdecompP, clique_tree_decomposition_clique); sgraph supplies clique / cliqueb / cliqueP; minor.Kn_clique is used by the client. Neither presentation is derived from the other.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/chordal.md",
+    "reviewed_by": "family_scope (initial source); coordinator (existing combined history)",
+    "migration_spec": "meta/migration_reports/chordal.spec.json",
+    "downstream_client": "base/theories/examples/chordal.v",
+    "foundation_fidelity": "meta/foundation_fidelity/chordal.json",
+    "independent_review": "meta/migration_reviews/chordal.md"
+  }
+}

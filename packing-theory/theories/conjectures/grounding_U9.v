@@ -13,8 +13,9 @@
     arbitrary [G : mgraph]) via degenerate ([set0] / vacuous) witnesses. *)
 
 From GraphTheory Require Import mgraph.
-From GTBase Require Import base.
+From GTBase Require Import base induced_paths.
 From Packing.conjectures Require Import U9.
+Require Packing.foundations.matching.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -174,17 +175,15 @@ Proof. by case. Qed.
 
 (** witness: the trivial one-vertex path is an induced path from [x] to [x]. *)
 Lemma is_induced_path_triv (G : sgraph) (x : G) : is_induced_path x x [:: x].
-Proof.
-split.
-- by rewrite /spath /= !eqxx.
-- by [].
-- by move=> a b; rewrite !inE => /eqP-> /eqP->; rewrite sg_irrefl.
-Qed.
+Proof. by apply/induced_path_between_seq1. Qed.
 
 (** identity: an induced path is in particular an [spath] with distinct vertices. *)
 Lemma is_induced_path_spath (G : sgraph) (x y : G) (p : seq G) :
   is_induced_path x y p -> spath x y p /\ uniq p.
-Proof. by case=> sp up _. Qed.
+Proof.
+case: p => [|z q] // [hz [lst [up [srt _]]]]; subst z; split=> //.
+by rewrite /spath /= eqxx lst eqxx srt.
+Qed.
 
 (** ============================================================================
     [friendly_partition] / [all_but_finitely_many_regular].
@@ -317,16 +316,16 @@ Proof. by rewrite /hamiltonian_cycleG => /andP[_ /eqP]. Qed.
 (** witness: the empty edge set is a matching. *)
 Lemma is_matching_edges_nil (G : sgraph) : is_matching_edges (set0 : {set {set G}}).
 Proof.
-split=> [e|v]; first by rewrite in_set0.
-have ->: [set e in (set0 : {set {set G}}) | v \in e] = set0
-  by apply/setP=> e; rewrite !inE andFb.
-by rewrite cards0.
+exact: Packing.foundations.matching.matching0.
 Qed.
 
 (** identity: every edge of a matching is a genuine edge. *)
 Lemma is_matching_edges_edge (G : sgraph) (M : {set {set G}}) (e : {set G}) :
   is_matching_edges M -> e \in M -> exists x y : G, (x -- y) /\ e = [set x; y].
-Proof. by case=> H _ /H. Qed.
+Proof.
+case/Packing.foundations.matching.matching_at_most_oneP => /subsetP sub _ /sub.
+by case/edgesP=> x [y [-> xy]]; exists x, y.
+Qed.
 
 (** ============================================================================
     [hypercube].

@@ -1,6 +1,7 @@
 (** * Hypergraph.conjectures.X117 -- v2 hedgehog Ramsey row *)
 
 From GTBase Require Export base.
+Require Hypergraph.foundations.hypergraph_copies.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -31,15 +32,12 @@ Definition x117_edges (t : nat) : {set {set x117_vertex t}} :=
 
 Definition x117_image_edge
     (T : finType) (N : nat) (f : T -> 'I_N) (e : {set T}) : {set 'I_N} :=
-  [set y : 'I_N | [exists x : T, (x \in e) && (y == f x)]].
+  f @: e.
 
 Definition x117_monochromatic_copy
     (T : finType) (E : {set {set T}}) (N : nat)
     (col : {set 'I_N} -> bool) : Prop :=
-  exists (colour : bool) (f : T -> 'I_N),
-    injective f /\
-    forall e : {set T},
-      e \in E -> col (x117_image_edge f e) = colour.
+  Hypergraph.foundations.hypergraph_copies.hg_mono_copy E col.
 
 (** [N] vertices force a monochromatic copy under every 2-colouring of the
     3-subsets of the host. *)

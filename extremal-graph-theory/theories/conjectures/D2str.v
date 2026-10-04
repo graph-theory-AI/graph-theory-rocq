@@ -54,7 +54,8 @@
         NOT the bare [2k < n] guard (which is refutable via complete / cocktail-
         party near-complete powers — see the Row 5 comment). *)
 
-From GTBase Require Import base.
+From GTBase Require Import base induced_cycles.
+From GTBase Require Import hypergraph_uniformity.
 From mathcomp Require Import all_algebra.
 
 Import GRing.Theory Num.Theory.
@@ -248,10 +249,12 @@ End Weighted.
     vertex set of size [< k] leaves [[set: G] :\: S] connected); reused verbatim. *)
 
 (** Induced (chordless) cycle: every G-edge between cycle vertices is a cycle
-    edge. *)
-Definition induced_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\
-  forall x y : G, x \in c -> y \in c -> x -- y -> cyc_edge c x y.
+    edge.  No length guard: the empty list and the two-vertex cycle of an edge qualify.  Since the
+    B23 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_cycles.chordless_ucycle] (the same body by conversion: [cyc_edge] is the Boolean
+    [seq_cyclic_consecutiveb]); the former body is frozen and certified in
+    theories/migration/induced_cycles.v. *)
+Definition induced_cycle (G : sgraph) (c : seq G) : Prop := chordless_ucycle c.
 
 (** Peripheral cycle: induced and non-separating (its complement is connected). *)
 Definition peripheral_cycle (G : sgraph) (c : seq G) : Prop :=
@@ -344,7 +347,7 @@ Definition nearly_spanning_regular_subgraphs_statement : Prop :=
       [b·r^r·rainbow_i + a·r^r·m_i ≥ b·r!·m_i]. *)
 
 Definition uniform_hypergraph (T : finType) (E : {set {set T}}) (r : nat) : Prop :=
-  forall e : {set T}, e \in E -> #|e| = r.
+  uniform_family E r.
 
 (** A hyperedge meets every one of the [r] parts (a rainbow / transversal edge). *)
 Definition rainbow (T : finType) (r : nat) (part : T -> 'I_r) (e : {set T}) : bool :=

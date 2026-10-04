@@ -20,6 +20,7 @@
     carries a [@MOVE-to-base] marker: minor-theory is the second area to need it. *)
 
 From GTBase Require Export base.
+From GTBase Require Import model_support.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -143,9 +144,7 @@ Section IsSubdivision.
 Variables (K H : sgraph) (m : subdiv_model K H).
 
 (** [x] is a model vertex: a branch vertex, or interior to one subdivision path. *)
-Definition sdm_covers (x : H) : Prop :=
-  (exists u : K, sdm_branch m u = x) \/
-  (exists u v : K, u -- v /\ x \in sdm_path m u v).
+Definition sdm_covers (x : H) : Prop := model_support (sdm_branch m) (sdm_path m) x.
 
 (** [x -- y] is a model edge: [x] and [y] are consecutive on one subdivision path. *)
 Definition sdm_realises (x y : H) : Prop :=

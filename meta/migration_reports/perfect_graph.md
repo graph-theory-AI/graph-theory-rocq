@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py perfect_graph --details /tmp/mi
 
 - Canonical: `GTBase.perfect_graphs.is_perfect_graph`.
 - Baseline: `de78ea9701c5dae818ee4c897a6ea2956ff01c9a`.
-- Scope: 2 helpers, 2 statements, 4 frozen objects, 9 recorded references.
-- Source checks: 56/56 pass; consistent.
+- Scope: 2 helpers, 2 statements, 4 frozen objects, 15 recorded references.
+- Source checks: 58/58 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -19,3 +19,5 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
 Excluded distinct variants: `Chromatic.conjectures.X3.x3_chi_omega_plus_bound`, `Chromatic.conjectures.X3.x3_alpha_omega_large_class`.
+
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/set_pairs.v#D2ramLegacy.complete_bipartite_subgraphs_of_perfect_graphs_statement`, `graph-theory-misc/theories/migration/set_pairs.v#X144Legacy.fox_pure_pair_perfect_graphs_statement`.

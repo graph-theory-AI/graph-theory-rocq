@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.X58 -- v2 epsilon-bounded pure pair row *)
 
 From GTBase Require Export base.
+From GTBase Require Import set_pairs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,8 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X58 vocabulary ************************************************)
 
 Definition x58_anticomplete (G : sgraph) (A B : {set G}) : Prop :=
-  [disjoint A & B] /\
-  forall a b : G, a \in A -> b \in B -> a -- b -> False.
+  anticomplete A B.
 
 Definition x58_induced_free (G H : sgraph) : Prop :=
   induced_free G H.

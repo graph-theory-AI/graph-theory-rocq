@@ -275,7 +275,10 @@
       "corpus": "opg"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/maximal_cliques.v#X181Legacy.x181_clique_colourable": "A18 snapshot: A18 froze this chain over its own frozen nontrivial maximal clique but kept the live x181_monochromatic of this family. Kept unchanged; the complete chain and row are Chromatic.migration.maximal_cliques.X181Original.x181_clique_colourable and Chromatic.migration.maximal_cliques.X181Original.random_graph_clique_chromatic_tight_constant_statement, certified by x181_clique_colourable_original_compat and random_graph_clique_chromatic_tight_constant_statement_original_compat, which compose this family's frozen X181Legacy.x181_monochromatic and reuse its certificate.",
+    "graph-theory-misc/theories/migration/induced_cycles.v#U13RowLegacy.two_colouring_a_graph_without_a_monochromatic_maximu_statement": "B24 per-row snapshot: family induced-cycle (B24 extension) froze only its ordinal-map induced-cycle helpers in this object (two_colouring_a_graph_without_a_monochromatic_maximu_statement), so this copy still calls the live splits_max_cliques, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B24's per-row copy; the complete combined row is B24's C8+B24 Original, certified end to end in the induced-cycle spec through this family's own certificate."
+  },
   "cross_module_consumers": [
     {
       "path": "graph-theory-misc/theories/conjectures/grounding_U13.v",
@@ -350,24 +353,6 @@
       "path": "extremal-graph-theory/theories/conjectures/XE2.v",
       "name": "xe2_monochromatic_path",
       "note": "Nonempty simple path whose traversed edges all carry a specified colour; graph/witness structure retained."
-    },
-    {
-      "qualified": "Hypergraph.conjectures.X108.x108_monochromatic_copy",
-      "path": "hypergraph-theory/theories/conjectures/X108.v",
-      "name": "x108_monochromatic_copy",
-      "note": "Injective hypergraph copy with edge colours, not a supplied-map vertex subset."
-    },
-    {
-      "qualified": "Hypergraph.conjectures.X117.x117_monochromatic_copy",
-      "path": "hypergraph-theory/theories/conjectures/X117.v",
-      "name": "x117_monochromatic_copy",
-      "note": "Same distinct copy contract; its existing X108 bridge is untouched."
-    },
-    {
-      "qualified": "Hypergraph.conjectures.X119.x119_monochromatic_copy",
-      "path": "hypergraph-theory/theories/conjectures/X119.v",
-      "name": "x119_monochromatic_copy",
-      "note": "Finite-palette injective hypergraph copy, not a vertex-set constancy predicate."
     },
     {
       "qualified": "Extremal.conjectures.XE1.xe1_monochromatic_copy_in_complete",

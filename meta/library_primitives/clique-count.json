@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "family": "clique-count",
+  "primitive": {
+    "canonical_name": "GTBase.clique_counts.all_clique_count",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "clique_count",
+      "triangle_count"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.D2tur.clique_count",
+      "Extremal.conjectures.X4.x4_triangle_count",
+      "Extremal.conjectures.X88.x88_clique_count",
+      "Minor.conjectures.X174.x174_clique_count",
+      "Minor.conjectures.X175.x175_clique_count"
+    ],
+    "consumers_remaining": 4,
+    "relation": "clique counts, three distinct views over upstream cliques at the full vertex set: Minor X174 x174_clique_count (every clique, the empty one included) equals GTBase.clique_counts.all_clique_count; Extremal D2tur clique_count and Minor X175 x175_clique_count (nonempty cliques) equal nonempty_clique_count; Extremal X88 x88_clique_count G r (cliques of size r) equals clique_count_size G r, and Extremal X4 x4_triangle_count equals clique_count_size G 3. Each is an unconditional cardinality equality with the corpus comprehension (in its own conjunction order), not a conversion; no equality between views is used (nonempty_clique_count G .+1 = all_clique_count G is an API fact, not a bridge).",
+    "semantic_classes": {
+      "all-cliques": {
+        "members": [
+          "Minor.conjectures.X174.x174_clique_count"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "certificate": "Minor.migration.clique_counts.x174_clique_count_compat",
+        "note": "#|[set S | cliqueb S]|, the empty clique included; cardinality equality with GTBase.clique_counts.all_clique_count"
+      },
+      "nonempty-cliques": {
+        "members": [
+          "Extremal.conjectures.D2tur.clique_count",
+          "Minor.conjectures.X175.x175_clique_count"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.clique_counts.clique_count_compat",
+          "Minor.migration.clique_counts.x175_clique_count_compat"
+        ],
+        "note": "#|[set S | cliqueb S && (S != set0)]|; cardinality equality with nonempty_clique_count"
+      },
+      "exact-size-cliques": {
+        "members": [
+          "Extremal.conjectures.X88.x88_clique_count",
+          "Extremal.conjectures.X4.x4_triangle_count"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.clique_counts.x88_clique_count_compat",
+          "Extremal.migration.clique_counts.x4_triangle_count_compat"
+        ],
+        "note": "X88 #|[set S | (#|S| == r) && cliqueb S]| for supplied r, and X4 at size 3 through its unchanged x4_triangle_set; cardinality equalities with clique_count_size"
+      }
+    },
+    "distinct_variants": {
+      "GTMisc.conjectures.U13.is_max_clique": "a predicate on vertex sets (a clique of size omega), not a count"
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.clique_counts.clique_count_compat",
+      "Extremal.migration.clique_counts.x88_clique_count_compat",
+      "Extremal.migration.clique_counts.x4_triangle_set_compat",
+      "Extremal.migration.clique_counts.x4_triangle_count_compat",
+      "Extremal.migration.clique_counts.number_of_cliques_in_minor_closed_classes_statement_compat",
+      "Extremal.migration.clique_counts.triangle_supersaturation_statement_compat",
+      "Extremal.migration.clique_counts.triangle_supersaturation_statement_original_compat",
+      "Minor.migration.clique_counts.x174_clique_count_compat",
+      "Minor.migration.clique_counts.x175_clique_count_compat",
+      "Minor.migration.clique_counts.kt_immersion_clique_count_extremal_statement_compat",
+      "Minor.migration.clique_counts.kt_subdivision_clique_count_asymptotic_statement_compat",
+      "Minor.migration.clique_counts.kt_immersion_clique_count_extremal_statement_original_compat",
+      "Minor.migration.clique_counts.kt_subdivision_clique_count_asymptotic_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.clique_counts.in_cliquesT",
+      "GTBase.clique_counts.all_clique_countE",
+      "GTBase.clique_counts.nonempty_clique_countE",
+      "GTBase.clique_counts.clique_count_sizeE",
+      "GTBase.clique_counts.nonempty_clique_countS",
+      "GTBase.clique_counts.clique_count_size0",
+      "GTBase.clique_counts.clique_count_size1",
+      "GTBase.clique_counts.clique_count_size2",
+      "GTBase.clique_counts.clique_count_size_gt"
+    ],
+    "public_client": "base/theories/examples/clique_counts.v",
+    "legacy_baseline": "16d5a05dea232c0b2e3321675e31e8279c3f2350",
+    "migration_report": "meta/migration_reports/clique_counts.md",
+    "migration_spec": "meta/migration_reports/clique_counts.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A17.md",
+    "foundation_fidelity": "meta/foundation_fidelity/clique-count.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.coloring (cliques, cliques_gt0, cliquesW, cliques_subset, maxcliques)",
+        "GraphTheory.core.sgraph (cliqueP, clique1, small_clique)",
+        "mathcomp finset (card_powerset, card_draws)",
+        "GTBase.common (sg_edge_set_cliqueE)"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.clique_counts (all, nonempty, exact-size views over upstream cliques)",
+      "note": "Pinned GraphTheory has the clique set (cliques) but no clique-count API; maxcliques are maximum-cardinality cliques and are not counted here. The three views are thin cardinalities of upstream cliques. Evidence: coordination/evidence/A17-clique-counts-discovery/ (upstream.txt) and coordination/evidence/A17-clique-counts/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "path_review",
+    "reviewed_commit": "1f4e9c1dd60c2d543b08d5eb1fb18c1f24ff505a",
+    "independent_review": "meta/migration_reviews/clique_counts.md"
+  }
+}

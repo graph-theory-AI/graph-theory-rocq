@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.XE1 -- Erdos open clean/bounded rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypercubes.
 From Extremal.conjectures Require Import X4.
 
 Set Implicit Arguments.
@@ -11,7 +12,7 @@ Definition xe1_subgraph_of (H G : sgraph) : Prop :=
   has_subgraph G H.
 
 Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x -- y -> False.
+  stable S.
 
 Definition xe1_has_independent_set (G : sgraph) (k : nat) : Prop :=
   exists S : {set G}, xe1_stable_set S /\ #|S| = k.
@@ -67,14 +68,10 @@ Proof. exact: del_es_irrefl. Qed.
 Definition xe1_delete_edges (G : sgraph) (F : {set {set G}}) : sgraph :=
   del_edge_set G F.
 
-Fixpoint xe1_hypercube (d : nat) : sgraph :=
-  match d with
-  | 0 => 'K_1
-  | d'.+1 => cartesian_product 'K_2 (xe1_hypercube d')
-  end.
+Definition xe1_hypercube (d : nat) : sgraph :=
+  product_hypercube d.
 
-Definition xe1_tree (T : sgraph) : Prop :=
-  is_forest [set: T] /\ connected [set: T].
+Definition xe1_tree (T : sgraph) : Prop := is_tree [set: T].
 
 Definition xe1_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
   min_degree_at_least G d.

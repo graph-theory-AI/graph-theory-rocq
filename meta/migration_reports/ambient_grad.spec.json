@@ -1,0 +1,135 @@
+{
+  "family": "ambient-grad",
+  "canonical_name": "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_most",
+  "canonical_short_name": "ambient_grad_at_most",
+  "relation": "Exact ambient grad bound: for every finite simple pattern H with an ambient shallow minor model of radius r in the host G (C16 ambient_shallow_minor: upstream minor_rmap on the same map, host graph_dist radius with its finite truncation, paths may leave a branch), the natural twice-density bound 2 * fg_edge_count H <= d * #|H| holds with the public A7 edge count. Host before pattern, all r and d, empty patterns included (0 <= 0); no nonempty, positive, connected, induced or covering guard, no division, rational density or maximum, and not the internal-radius expansion of Minor X220.",
+  "baseline_commit": "30459e9b9eeebbdb5451c70c529bd2e5dfb64c99",
+  "namespaces": {
+    "base": "GTBase",
+    "graph-theory-misc": "GTMisc"
+  },
+  "certificate_files": [
+    "graph-theory-misc/theories/foundations/ambient_shallow_minors.v",
+    "graph-theory-misc/theories/migration/ambient_grad.v",
+    "graph-theory-misc/theories/migration/ambient_shallow_minors.v"
+  ],
+  "extra_certificates": [
+    "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_mostE",
+    "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_most_bound",
+    "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_mostW",
+    "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_most_radiusW",
+    "GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_most_host"
+  ],
+  "downstream_client": "graph-theory-misc/theories/examples/ambient_grad.v",
+  "summary": [
+    "C23 migrates exactly GTMisc.conjectures.X128.x128_grad_at_most and X139.x139_grad_at_most onto GTMisc.foundations.ambient_shallow_minors.ambient_grad_at_most, the identical body over C16 ambient_shallow_minor (host graph_dist radius, same-map minor_rmap) and the A7 public fg_edge_count: natural 2 * fg_edge_count H <= d * #|H| for every pattern, empty pattern included, no added guard.",
+    "Both sources, both expansion chains and both whole current rows are frozen verbatim at the C22 pin with complete iff certificates; these per-row copies keep the live C16 model aliases and A7 count. The complete histories are the existing A7+C16 X128Original and X139Original whole rows, reused with their C16 iff certificates rather than copied, so there are four whole-statement iff obligations.",
+    "X128 keeps p before q, the individual-graph hypothesis, 1 <= t and natural costs and stays statement-done. X139 keeps one p for the class and all radii and one conclusion f, and stays blocked: its backward r-ball omits the internal-order condition of strong reachability; not repaired here.",
+    "The 18 earlier grad/expansion/row objects of the A7 and C16 certificates and their 18 theorem headers, plus C16 four radius/model headers, are unchanged; both modules compile with no proof change. Public client: graph-theory-misc/theories/examples/ambient_grad.v."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X128.x128_grad_at_most",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_grad_at_most",
+      "frozen_path": "graph-theory-misc/theories/migration/ambient_grad.v",
+      "frozen": "X128Legacy.x128_grad_at_most",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.ambient_grad.x128_grad_at_most_compat",
+      "live_unfolds_to": "ambient_grad_at_most G r d"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X128.x128_expansion_bounded",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_expansion_bounded",
+      "frozen_path": "graph-theory-misc/theories/migration/ambient_grad.v",
+      "frozen": "X128Legacy.x128_expansion_bounded",
+      "substitutions": {
+        "x128_grad_at_most": "X128Legacy.x128_grad_at_most"
+      },
+      "certificate": "GTMisc.migration.ambient_grad.x128_expansion_bounded_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X128.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/ambient_grad.v",
+      "frozen": "X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "substitutions": {
+        "x128_expansion_bounded": "X128Legacy.x128_expansion_bounded"
+      },
+      "certificate": "GTMisc.migration.ambient_grad.dvorak_cheap_balanced_separator_bounded_expansion_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "GTMisc.migration.ambient_shallow_minors.dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X128.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/ambient_shallow_minors.v",
+      "frozen": "X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "substitutions": {
+        "x128_expansion_bounded": "X128Original.x128_expansion_bounded"
+      },
+      "certificate": "GTMisc.migration.ambient_shallow_minors.dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X139.x139_grad_at_most",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "x139_grad_at_most",
+      "frozen_path": "graph-theory-misc/theories/migration/ambient_grad.v",
+      "frozen": "X139Legacy.x139_grad_at_most",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.ambient_grad.x139_grad_at_most_compat",
+      "live_unfolds_to": "ambient_grad_at_most G r d"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X139.x139_polynomial_expansion_class",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "x139_polynomial_expansion_class",
+      "frozen_path": "graph-theory-misc/theories/migration/ambient_grad.v",
+      "frozen": "X139Legacy.x139_polynomial_expansion_class",
+      "substitutions": {
+        "x139_grad_at_most": "X139Legacy.x139_grad_at_most"
+      },
+      "certificate": "GTMisc.migration.ambient_grad.x139_polynomial_expansion_class_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X139.esperet_raymond_polynomial_expansion_scol_statement",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "esperet_raymond_polynomial_expansion_scol_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/ambient_grad.v",
+      "frozen": "X139Legacy.esperet_raymond_polynomial_expansion_scol_statement",
+      "substitutions": {
+        "x139_polynomial_expansion_class": "X139Legacy.x139_polynomial_expansion_class"
+      },
+      "certificate": "GTMisc.migration.ambient_grad.esperet_raymond_polynomial_expansion_scol_statement_compat",
+      "corpus": "v2",
+      "original_certificate": "GTMisc.migration.ambient_shallow_minors.esperet_raymond_polynomial_expansion_scol_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X139.esperet_raymond_polynomial_expansion_scol_statement",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "esperet_raymond_polynomial_expansion_scol_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/ambient_shallow_minors.v",
+      "frozen": "X139Original.esperet_raymond_polynomial_expansion_scol_statement",
+      "substitutions": {
+        "x139_polynomial_expansion_class": "X139Original.x139_polynomial_expansion_class"
+      },
+      "certificate": "GTMisc.migration.ambient_shallow_minors.esperet_raymond_polynomial_expansion_scol_statement_original_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [],
+  "distinct_variants": []
+}

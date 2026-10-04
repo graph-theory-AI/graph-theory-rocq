@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "family": "uniform-hypergraph",
+  "modules": {
+    "GTBase.hypergraph_uniformity": {
+      "path": "base/theories/hypergraph_uniformity.v",
+      "overrides": {
+        "uniform_family": {
+          "verdict": "FAITHFUL",
+          "note": "Every member of the supplied finite set family has exactly k elements; arbitrary finite T, no guard."
+        },
+        "uniform_familyb": {
+          "verdict": "FAITHFUL",
+          "note": "Boolean [forall e in E, #|e| == k], reflected by uniform_familyP."
+        },
+        "uniform_incidence": {
+          "verdict": "FAITHFUL",
+          "note": "Every label of the supplied finite index type has an incidence set of size k; equal to uniformity of the image family without injectivity."
+        }
+      },
+      "machine_evidence": [
+        "uniform_familyP",
+        "uniform_family0",
+        "uniform_family_set0",
+        "uniform_family1",
+        "uniform_familyS",
+        "uniform_family_rank",
+        "uniform_family_rank_le",
+        "uniform_incidence_imageE"
+      ]
+    }
+  }
+}

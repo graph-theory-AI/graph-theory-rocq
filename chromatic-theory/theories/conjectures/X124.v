@@ -12,7 +12,7 @@ Fixpoint x124_poly_eval (p : seq nat) (x : nat) : nat :=
   if p is a :: q then a + x * x124_poly_eval q x else 0.
 
 (** Clique number omega(G). *)
-Definition x124_omega (G : sgraph) : nat := \max_(S : {set G} | cliqueb S) #|S|.
+Definition x124_omega (G : sgraph) : nat := ω([set: G]).
 
 (** Polynomially chi-bounded class: one polynomial bounds chi in terms of omega
     across every member.  This CONCLUSION is faithful. *)

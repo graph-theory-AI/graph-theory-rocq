@@ -1,0 +1,306 @@
+{
+  "family": "clique-count",
+  "canonical_name": "GTBase.clique_counts.all_clique_count",
+  "canonical_short_name": "all_clique_count",
+  "relation": "clique counts, three distinct views over upstream cliques at the full vertex set: Minor X174 x174_clique_count (every clique, the empty one included) equals GTBase.clique_counts.all_clique_count; Extremal D2tur clique_count and Minor X175 x175_clique_count (nonempty cliques) equal nonempty_clique_count; Extremal X88 x88_clique_count G r (cliques of size r) equals clique_count_size G r, and Extremal X4 x4_triangle_count equals clique_count_size G 3. Each is an unconditional cardinality equality with the corpus comprehension (in its own conjunction order), not a conversion; no equality between views is used (nonempty_clique_count G .+1 = all_clique_count G is an API fact, not a bridge).",
+  "baseline_commit": "16d5a05dea232c0b2e3321675e31e8279c3f2350",
+  "namespaces": {
+    "base": "GTBase",
+    "extremal-graph-theory": "Extremal",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/clique_counts.v",
+    "extremal-graph-theory/theories/migration/clique_counts.v",
+    "minor-theory/theories/migration/clique_counts.v",
+    "extremal-graph-theory/theories/migration/edge_count.v",
+    "minor-theory/theories/migration/path_edges.v",
+    "minor-theory/theories/migration/internal_vertices.v"
+  ],
+  "extra_certificates": [
+    "GTBase.clique_counts.in_cliquesT",
+    "GTBase.clique_counts.all_clique_countE",
+    "GTBase.clique_counts.nonempty_clique_countE",
+    "GTBase.clique_counts.clique_count_sizeE",
+    "GTBase.clique_counts.nonempty_clique_countS",
+    "GTBase.clique_counts.clique_count_size0",
+    "GTBase.clique_counts.clique_count_size1",
+    "GTBase.clique_counts.clique_count_size2",
+    "GTBase.clique_counts.clique_count_size_gt"
+  ],
+  "summary": [
+    "Batch A, family A17 (clique counts), on the fixed A16 pin 16d5a05 (no private union). New GTBase.clique_counts owns three distinct numeric views over upstream cliques [set: G]: all_clique_count (the empty clique included), nonempty_clique_count and clique_count_size G r; no clique predicate is added and no equality between views is used as a bridge. API: the three comprehension equalities, nonempty_clique_countS (the empty clique always exists), sizes 0, 1 and 2 (= #|E(G)|) and size above the order. The public client shows K_0 all 1 / nonempty 0 / size0 1, K_1 all 2 / nonempty 1, K_2 all 4 / nonempty 3 / size2 1, K_3 size3 1, two isolated vertices all 3 / nonempty 2 / size2 0, and the general K_n (2^n, 2^n - 1, binomial) and edgeless formulas.",
+    "",
+    "Frozen verbatim at 16d5a05: the five counts (X4's over the unchanged triangle-set support, frozen as Legacy.x4_triangle_set while the live predicate stays), and the four current rows: D2tur number_of_cliques_in_minor_closed_classes_statement (nat c, strict 0 < t guard; no older history, so also complete), X4 triangle_supersaturation_statement (every nat division, equality and guard), X174 kt_immersion_clique_count_extremal_statement (all-clique count, the blocked natural subtraction n - t + 3 with the admitted n = t-2, t-1 cases, and both the upper-bound and the attainment halves) and X175 kt_subdivision_clique_count_asymptotic_statement (nonempty count, eventual-in-t upper envelope, uniform order kept). X88's count reaches no current or historical row; its misleadingly named row compares edge counts and stays untouched. Complete rows: X4Original over A7's frozen edge count (text at ae0e605), X174Original over B8's frozen immersion chain (048c768) and X175Original over B2's frozen subdivision chain (9e03072): seven whole-row iffs with the four current ones.",
+    "",
+    "History: A7's X4Legacy supersaturation row, B8's X174Legacy row and B2's X175Legacy statement keep the live counts byte-for-byte and are documented below; A17's per-row X4/X174/X175 copies keep A7's, B8's and B2's live helpers and are documented reciprocally in those specs. The two existing proof clients grounding_D2tur.clique_count_gt0 and clique_count_K0 keep their types; each proof gains one rewrite back to the old comprehension. Atlas candidate e054 stays BLOCKED; no implication is added. A16's spec and registry drop only their X174 count exclusion, now migrated here. Doc blocks are unchanged. Maximum and inclusion-maximal clique predicates stay distinct."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2tur.clique_count",
+      "path": "extremal-graph-theory/theories/conjectures/D2tur.v",
+      "name": "clique_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/clique_counts.v",
+      "frozen": "Legacy.clique_count",
+      "substitutions": {},
+      "certificate": "Extremal.migration.clique_counts.clique_count_compat",
+      "live_unfolds_to": "nonempty_clique_count G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X88.x88_clique_count",
+      "path": "extremal-graph-theory/theories/conjectures/X88.v",
+      "name": "x88_clique_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/clique_counts.v",
+      "frozen": "Legacy.x88_clique_count",
+      "substitutions": {},
+      "certificate": "Extremal.migration.clique_counts.x88_clique_count_compat",
+      "live_unfolds_to": "clique_count_size G r"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X4.x4_triangle_set",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_triangle_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/clique_counts.v",
+      "frozen": "Legacy.x4_triangle_set",
+      "substitutions": {},
+      "certificate": "Extremal.migration.clique_counts.x4_triangle_set_compat",
+      "commit": "16d5a05dea232c0b2e3321675e31e8279c3f2350"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X4.x4_triangle_count",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_triangle_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/clique_counts.v",
+      "frozen": "Legacy.x4_triangle_count",
+      "substitutions": {
+        "x4_triangle_set": "Legacy.x4_triangle_set"
+      },
+      "certificate": "Extremal.migration.clique_counts.x4_triangle_count_compat",
+      "live_unfolds_to": "clique_count_size G 3"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2tur.number_of_cliques_in_minor_closed_classes_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2tur.v",
+      "name": "number_of_cliques_in_minor_closed_classes_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/clique_counts.v",
+      "frozen": "D2turLegacy.number_of_cliques_in_minor_closed_classes_statement",
+      "substitutions": {
+        "clique_count": "Legacy.clique_count"
+      },
+      "certificate": "Extremal.migration.clique_counts.number_of_cliques_in_minor_closed_classes_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X4.triangle_supersaturation_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "triangle_supersaturation_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/clique_counts.v",
+      "frozen": "X4Legacy.triangle_supersaturation_statement",
+      "substitutions": {
+        "x4_triangle_count": "Legacy.x4_triangle_count"
+      },
+      "certificate": "Extremal.migration.clique_counts.triangle_supersaturation_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X4.triangle_supersaturation_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "triangle_supersaturation_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/clique_counts.v",
+      "frozen": "X4Original.triangle_supersaturation_statement",
+      "substitutions": {
+        "x4_edge_count": "A7.Legacy.x4_edge_count",
+        "x4_triangle_count": "Legacy.x4_triangle_count"
+      },
+      "certificate": "Extremal.migration.clique_counts.triangle_supersaturation_statement_original_compat",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X174.x174_clique_count",
+      "path": "minor-theory/theories/conjectures/X174.v",
+      "name": "x174_clique_count",
+      "frozen_path": "minor-theory/theories/migration/clique_counts.v",
+      "frozen": "Legacy.x174_clique_count",
+      "substitutions": {},
+      "certificate": "Minor.migration.clique_counts.x174_clique_count_compat",
+      "live_unfolds_to": "all_clique_count G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X175.x175_clique_count",
+      "path": "minor-theory/theories/conjectures/X175.v",
+      "name": "x175_clique_count",
+      "frozen_path": "minor-theory/theories/migration/clique_counts.v",
+      "frozen": "Legacy.x175_clique_count",
+      "substitutions": {},
+      "certificate": "Minor.migration.clique_counts.x175_clique_count_compat",
+      "live_unfolds_to": "nonempty_clique_count G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement",
+      "path": "minor-theory/theories/conjectures/X174.v",
+      "name": "kt_immersion_clique_count_extremal_statement",
+      "frozen_path": "minor-theory/theories/migration/clique_counts.v",
+      "frozen": "X174Legacy.kt_immersion_clique_count_extremal_statement",
+      "substitutions": {
+        "x174_clique_count": "Legacy.x174_clique_count"
+      },
+      "certificate": "Minor.migration.clique_counts.kt_immersion_clique_count_extremal_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X175.kt_subdivision_clique_count_asymptotic_statement",
+      "path": "minor-theory/theories/conjectures/X175.v",
+      "name": "kt_subdivision_clique_count_asymptotic_statement",
+      "frozen_path": "minor-theory/theories/migration/clique_counts.v",
+      "frozen": "X175Legacy.kt_subdivision_clique_count_asymptotic_statement",
+      "substitutions": {
+        "x175_clique_count": "Legacy.x175_clique_count"
+      },
+      "certificate": "Minor.migration.clique_counts.kt_subdivision_clique_count_asymptotic_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement",
+      "path": "minor-theory/theories/conjectures/X174.v",
+      "name": "kt_immersion_clique_count_extremal_statement",
+      "frozen_path": "minor-theory/theories/migration/clique_counts.v",
+      "frozen": "X174Original.kt_immersion_clique_count_extremal_statement",
+      "substitutions": {
+        "x174_clique_count": "Legacy.x174_clique_count",
+        "x174_no_Kt_immersion": "B8.X174Legacy.no_Kt_immersion"
+      },
+      "certificate": "Minor.migration.clique_counts.kt_immersion_clique_count_extremal_statement_original_compat",
+      "commit": "048c768adce0cfcbf5b5a5763d71fc8daf483db8",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X175.kt_subdivision_clique_count_asymptotic_statement",
+      "path": "minor-theory/theories/conjectures/X175.v",
+      "name": "kt_subdivision_clique_count_asymptotic_statement",
+      "frozen_path": "minor-theory/theories/migration/clique_counts.v",
+      "frozen": "X175Original.kt_subdivision_clique_count_asymptotic_statement",
+      "substitutions": {
+        "x175_clique_count": "Legacy.x175_clique_count",
+        "x175_Kt_subdivision": "B2.X175Legacy.Kt_subdivision"
+      },
+      "certificate": "Minor.migration.clique_counts.kt_subdivision_clique_count_asymptotic_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X4.x4_edge_count",
+      "path": "extremal-graph-theory/theories/conjectures/X4.v",
+      "name": "x4_edge_count",
+      "commit": "ae0e6059bcb9ff7cbee3c425e719ad9c7d772656",
+      "frozen_path": "extremal-graph-theory/theories/migration/edge_count.v",
+      "frozen": "Legacy.x4_edge_count",
+      "substitutions": {},
+      "certificate": "Extremal.migration.edge_count.x4_edge_count_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.U7.path_edges",
+      "path": "minor-theory/theories/conjectures/U7.v",
+      "name": "path_edges",
+      "commit": "048c768adce0cfcbf5b5a5763d71fc8daf483db8",
+      "frozen_path": "minor-theory/theories/migration/path_edges.v",
+      "frozen": "Legacy.path_edges",
+      "substitutions": {},
+      "certificate": "Minor.migration.path_edges.path_edges_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.U7.immersion",
+      "path": "minor-theory/theories/conjectures/U7.v",
+      "name": "immersion",
+      "commit": "048c768adce0cfcbf5b5a5763d71fc8daf483db8",
+      "frozen_path": "minor-theory/theories/migration/path_edges.v",
+      "frozen": "U7Legacy.u7_immersion",
+      "substitutions": {
+        "immersion": "u7_immersion",
+        "path_edges": "Legacy.path_edges"
+      },
+      "certificate": "Minor.migration.path_edges.immersion_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X174.x174_no_Kt_immersion",
+      "path": "minor-theory/theories/conjectures/X174.v",
+      "name": "x174_no_Kt_immersion",
+      "commit": "048c768adce0cfcbf5b5a5763d71fc8daf483db8",
+      "frozen_path": "minor-theory/theories/migration/path_edges.v",
+      "frozen": "X174Legacy.no_Kt_immersion",
+      "substitutions": {
+        "immersion": "U7Legacy.u7_immersion",
+        "x174_no_Kt_immersion": "no_Kt_immersion"
+      },
+      "certificate": "Minor.migration.path_edges.x174_no_Kt_immersion_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X175.x175_path_internal",
+      "path": "minor-theory/theories/conjectures/X175.v",
+      "name": "x175_path_internal",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "minor-theory/theories/migration/internal_vertices.v",
+      "frozen": "Legacy.x175_path_internal",
+      "substitutions": {},
+      "certificate": "Minor.migration.internal_vertices.x175_path_internal_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X175.x175_Kt_subdivision",
+      "path": "minor-theory/theories/conjectures/X175.v",
+      "name": "x175_Kt_subdivision",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "minor-theory/theories/migration/internal_vertices.v",
+      "frozen": "X175Legacy.Kt_subdivision",
+      "substitutions": {
+        "x175_Kt_subdivision": "Kt_subdivision",
+        "x175_path_internal": "Legacy.x175_path_internal"
+      },
+      "certificate": "Minor.migration.internal_vertices.x175_Kt_subdivision_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/edge_count.v#X4Legacy.triangle_supersaturation_statement": "A7 per-row snapshot: A7 froze this row over its own frozen edge count but kept the live x4_triangle_count (after A17 GTBase.clique_counts.clique_count_size G 3, equal to the old triangle-set comprehension by clique_count_sizeE). Kept unchanged; the complete row is Extremal.migration.clique_counts.X4Original.triangle_supersaturation_statement, certified by triangle_supersaturation_statement_original_compat, which rewrites the triangle count and reuses this certificate.",
+    "minor-theory/theories/migration/path_edges.v#X174Legacy.kt_immersion_clique_count_extremal_statement": "B8 per-row snapshot: B8 froze this row over its own frozen immersion chain but kept the live x174_clique_count (after A17 all_clique_count G, equal to the old all-clique comprehension by all_clique_countE). Kept unchanged; the complete row is Minor.migration.clique_counts.X174Original.kt_immersion_clique_count_extremal_statement, certified by kt_immersion_clique_count_extremal_statement_original_compat, which rewrites the count and reuses this certificate.",
+    "minor-theory/theories/migration/internal_vertices.v#X175Legacy.statement": "B2 per-row snapshot: B2 froze this row over its own frozen subdivision chain but kept the live x175_clique_count (after A17 nonempty_clique_count G, equal to the old nonempty comprehension by nonempty_clique_countE). Kept unchanged; the complete row is Minor.migration.clique_counts.X175Original.kt_subdivision_clique_count_asymptotic_statement, certified by kt_subdivision_clique_count_asymptotic_statement_original_compat, which rewrites the count and reuses this certificate."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2tur.v",
+      "name": "clique_count",
+      "note": "clique_count_gt0 and clique_count_K0: proof-only adaptations (one rewrite back to the old comprehension by nonempty_clique_countE); theorem types unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/implications_D2tur.v",
+      "name": "number_of_cliques_in_minor_closed_classes_statement",
+      "note": "A sanity Check that the live row is a Prop; no edge is asserted, and the row text is unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.U13.is_max_clique",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "is_max_clique",
+      "note": "a predicate on vertex sets (a clique of size omega), not a count"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and GTBase.clique_counts API theorem, exact types of the frozen and live counts and rows, strict dependency closures of the frozen rows (current and complete), and the types of every declaration in the reverse dependency closure of D2tur/X4/X88/X174/X175 at the baseline (including the adapted grounding_D2tur), through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A17-clique-counts/ (outside the repository)"
+}

@@ -385,6 +385,19 @@ Proof. by move=> x; rewrite /pow_rel eqxx. Qed.
 Definition graph_power : sgraph := SGraph pow_sym pow_irrefl.
 End Power.
 
+(** Closed vertex balls (family [ball], A22): radius 0 is the centre alone, each step adds the neighbours of the
+    previous ball, so the centre always belongs and a ball never leaves the centre's component.  The seed-set union
+    and the remaining API are in [GTBase.balls]. *)
+Lemma ball0 (G : sgraph) (x : G) : ball 0 x = [set x].
+Proof. by []. Qed.
+
+Lemma ballS (G : sgraph) (r : nat) (x : G) :
+  ball r.+1 x = ball r x :|: \bigcup_(z in ball r x) N(z).
+Proof. by []. Qed.
+
+Lemma ball_center (G : sgraph) (r : nat) (x : G) : x \in ball r x.
+Proof. by elim: r => [|r IH]; rewrite ?ball0 ?set11 // ballS in_setU IH. Qed.
+
 Section Subdivision.
 Variables (G : sgraph) (n : nat).
 Definition oedge (p : G * G) : bool := (p.1 -- p.2) && (enum_rank p.1 < enum_rank p.2)%N.
@@ -598,6 +611,17 @@ split=> [g4 x y z xy yz zx|tf c uc c2].
 have {}c2 : 3 <= size c by exact: c2.
 rewrite ltn_neqAle c2 andbT eq_sym; apply/eqP => c3.
 by have [x [y [z [_ xy yz zx]]]] := ucycle3_triangle uc c3; exact: (tf _ _ _ xy yz zx).
+Qed.
+
+(** Clique number of the whole graph: upstream [ω([set: G])] ([omega_mem], re-exported above) is the largest
+    size of a clique.  [omega_setT_maxE] is its bigmax presentation over all cliques: on the full vertex set
+    the subset filter of [cliques] always holds, so the equality is unconditional ([K_0] gives 0 on both
+    sides).  No separate clique-number primitive is defined.
+    Registry: meta/library_primitives/clique-number.json (A16). *)
+Lemma omega_setT_maxE (G : sgraph) : ω([set: G]) = \max_(S : {set G} | cliqueb S) #|S|.
+Proof.
+apply: eq_bigl => S; rewrite inE; case: (cliqueb S); rewrite ?andbT ?andbF //.
+by apply/subsetP => x _; rewrite !inE.
 Qed.
 
 (** Undirected walk in a loopless multigraph: each edge traversed in EITHER direction. *)

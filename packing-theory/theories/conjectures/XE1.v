@@ -1,6 +1,8 @@
 (** * Packing.conjectures.XE1 -- Erdos open clean/bounded rows *)
 
 From GTBase Require Export base.
+From GTBase Require Import induced_cycles chordal.
+From GTBase Require Import maximal_cliques.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -10,11 +12,10 @@ Definition xe1_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
 Definition xe1_stable_set (G : sgraph) (S : {set G}) : Prop :=
-  forall x y : G, x \in S -> y \in S -> x -- y -> False.
+  stable S.
 
 Definition xe1_maximal_clique (G : sgraph) (K : {set G}) : Prop :=
-  clique K /\
-  forall L : {set G}, K \proper L -> ~ clique L.
+  maximal_clique K.
 
 Definition xe1_clique_transversal (G : sgraph) (X : {set G}) : Prop :=
   forall K : {set G}, xe1_maximal_clique K -> 2 <= #|K| -> X :&: K != set0.
@@ -32,8 +33,7 @@ Definition xe1_triangle_free_independence_guarantee (n h : nat) : Prop :=
       #|G| = n -> triangle_free G ->
       exists A : {set G}, xe1_stable_set A /\ h' <= #|A|) -> h' <= h.
 
-Definition xe1_tree (T : sgraph) : Prop :=
-  is_forest [set: T] /\ connected [set: T].
+Definition xe1_tree (T : sgraph) : Prop := is_tree [set: T].
 
 Definition xe1_image_edges (G T : sgraph) (f : T -> G) : {set {set G}} :=
   [set e : {set G} |
@@ -50,13 +50,17 @@ Definition xe1_edge_disjoint_tree_packing
   (forall e : {set 'I_n}, #|e| = 2 ->
       exists k : 'I_n, e \in @xe1_image_edges 'K_n (T k) (emb k)).
 
-Definition xe1_induced_cycle (G : sgraph) (c : seq G) : Prop :=
-  ucycle (--) c /\ 2 < size c /\
-  forall x y : G, x \in c -> y \in c -> x != y -> x -- y ->
-    ((x, y) \in zip c (rot 1 c)) || ((y, x) \in zip c (rot 1 c)).
+(** Since the B23 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_cycles.chordless_cycle]; the former body (a redundant [x != y] premise before
+    the edge, the inline cyclic pair test that is [seq_cyclic_consecutiveb]) is frozen and certified
+    equivalent in theories/migration/induced_cycles.v. *)
+Definition xe1_induced_cycle (G : sgraph) (c : seq G) : Prop := chordless_cycle c.
 
-Definition xe1_chordal (G : sgraph) : Prop :=
-  forall c : seq G, xe1_induced_cycle c -> size c <= 3.
+(** Since the B25 library migration (2026-10-03) a transparent alias of
+    [GTBase.chordal.chordal_by_cycles] (the same body by conversion: [xe1_induced_cycle] is B23's
+    alias of [chordless_cycle]); the original body is frozen and certified in
+    theories/migration/chordal.v. *)
+Definition xe1_chordal (G : sgraph) : Prop := chordal_by_cycles G.
 
 Definition xe1_clique_edge_set (G : sgraph) (K : {set G}) : {set {set G}} :=
   [set e in xe1_edge_set G | e \subset K].

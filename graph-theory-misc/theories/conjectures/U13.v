@@ -28,6 +28,7 @@
 
 From GTBase Require Export base.
 From mathcomp Require Import fingroup perm.
+From GTBase Require Import induced_cycles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -62,13 +63,16 @@ Definition n_edges (G : sgraph) : nat := #|oedges G|.
         (monochromatic-max-clique-partition): a Boolean 2-colouring [c] splits
         the maximum cliques iff no maximum clique (a clique of size ω(G)) is
         monochromatic. *)
+(** Since the B24 library migration (2026-10-03) [induced_cycle] and [has_induced_cycle] are
+    transparent aliases of [GTBase.induced_cycles.ordinal_induced_cycle] and
+    [has_ordinal_induced_cycle], the same bodies by conversion (order 0 vacuous, order 1 impossible,
+    order 2 an edge); the original bodies are frozen and certified in
+    theories/migration/induced_cycles.v. *)
 Definition induced_cycle (G : sgraph) (k : nat) (f : 'I_k -> G) : Prop :=
-  injective f /\
-  forall i j : 'I_k,
-    (f i -- f j) <-> ((val j == (val i).+1 %% k) || (val i == (val j).+1 %% k)).
+  ordinal_induced_cycle f.
 
 Definition has_induced_cycle (G : sgraph) (k : nat) : Prop :=
-  exists f : 'I_k -> G, induced_cycle f.
+  has_ordinal_induced_cycle G k.
 
 Definition is_max_clique (G : sgraph) (Q : {set G}) : Prop :=
   clique Q /\ #|Q| = ω([set: G]).

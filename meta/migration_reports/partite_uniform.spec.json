@@ -1,0 +1,394 @@
+{
+  "family": "partite-uniform-hypergraph",
+  "canonical_name": "Hypergraph.foundations.hypergraph.hg_partite_uniform",
+  "canonical_short_name": "hg_partite_uniform",
+  "relation": "Supplied-partition uniformity: for a supplied map part : T -> 'I_k on an arbitrary finite vertex type T and a family E : {set {set T}}, every member e of E meets each class j in exactly one vertex, #|[set v in e | part v == j]| = 1. The map and family stay supplied: no existential partition, positive rank, nonempty family, global balance, surjectivity or no-isolated-vertex condition. At rank 0 the map forces an empty carrier and every family qualifies. Members then have exactly k vertices, so the family is uniform (D1); the converse fails for a supplied map. X73 balanced fibres, graph multipartite, bipartite and edit-to-partite namesakes are separate contracts.",
+  "baseline_commit": "e53098e84635d8612e34e5d239fd13fe5afa9fb8",
+  "namespaces": {
+    "hypergraph-theory": "Hypergraph"
+  },
+  "certificate_files": [
+    "hypergraph-theory/theories/foundations/hypergraph.v",
+    "hypergraph-theory/theories/migration/partite_uniform.v",
+    "hypergraph-theory/theories/migration/incidence_degree.v",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v"
+  ],
+  "extra_certificates": [
+    "Hypergraph.foundations.hypergraph.hg_partite_uniform0",
+    "Hypergraph.foundations.hypergraph.hg_partite_uniformS",
+    "Hypergraph.foundations.hypergraph.hg_partite_uniform_delete",
+    "Hypergraph.foundations.hypergraph.hg_partite_uniform_card",
+    "Hypergraph.foundations.hypergraph.hg_partite_uniform_uniform",
+    "Hypergraph.foundations.hypergraph.hg_partite_uniform_part",
+    "Hypergraph.foundations.hypergraph.hg_partite_uniform_onto",
+    "Hypergraph.foundations.hypergraph.hg_partite_uniform_rank_le",
+    "Hypergraph.foundations.hypergraph.hg_partite_rank0_card",
+    "Hypergraph.foundations.hypergraph.hg_partite_uniform_rank0",
+    "Hypergraph.foundations.hypergraph.hg_partite_uniform_ord"
+  ],
+  "downstream_client": "hypergraph-theory/theories/examples/supplied_partitions.v",
+  "summary": [
+    "D2 keeps the public Hypergraph.foundations.hypergraph.hg_partite_uniform unchanged as canonical, adds its supplied-partition API next to it, and turns U12.r_partite_uniform and X6.x6_r_partite_uniform into aliases (same supplied map and family, qualified Require, no new GTBase predicate).",
+    "Frozen at the D1 pin: 3 sources and 6 complete current rows (U12 Ryser, X6 Lovasz deletion and trade-off, X72, X73, X225 #01), each in a module importing only its source's conjecture files; 2 complete A10+D1+D2 Originals (X73, X225 #01) over the raw partite copy and the actual A10/D1 frozen objects: 8 whole iff.",
+    "The 11 certified A10/D1 support objects of the Originals are listed in the historical role. A10's FoundationLegacy.degree_le and degenerate_card are reached only inside the reused Qed-opaque degenerate_ex; A10 gave them no certificate and none is invented. The four older partial snapshots stay byte-exact (known_stale_snapshots).",
+    "X225 keeps both its uniformity and partiteness hypotheses; statuses, legs, docs and every guard are unchanged. Public client: hypergraph-theory/theories/examples/supplied_partitions.v."
+  ],
+  "kernel_evidence": "Exact types/implicit status of the three sources, the eight whole iff, the 13 reused support objects (including degree_le/degenerate_card) and the 4 older whole-iff clients; Print Assumptions; About-resolved Print All Dependencies closures of every frozen object and Original; old-declaration preservation against e53098e; through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D2-by-lancelot/ (outside the repository)",
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.U12.r_partite_uniform",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "r_partite_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "PartiteLegacy.r_partite_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.partite_uniform.r_partite_uniform_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph.hg_partite_uniform part E"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X6.x6_r_partite_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_r_partite_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "PartiteLegacy.x6_r_partite_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.partite_uniform.x6_r_partite_uniform_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph.hg_partite_uniform part E"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_partite_uniform",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_partite_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "PartiteLegacy.hg_partite_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.partite_uniform.hg_partite_uniform_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.U12.rysers_statement",
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "rysers_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "U12PartiteLegacy.rysers_statement",
+      "substitutions": {
+        "r_partite_uniform": "PartiteLegacy.r_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.partite_uniform.rysers_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X6.lovasz_r_partite_matching_deletion_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "lovasz_r_partite_matching_deletion_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "X6PartiteLegacy.lovasz_r_partite_matching_deletion_statement",
+      "substitutions": {
+        "x6_r_partite_uniform": "PartiteLegacy.x6_r_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.partite_uniform.lovasz_r_partite_matching_deletion_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X6.r_partite_matching_deletion_tradeoff_statement",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "r_partite_matching_deletion_tradeoff_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "X6PartiteLegacy.r_partite_matching_deletion_tradeoff_statement",
+      "substitutions": {
+        "x6_r_partite_uniform": "PartiteLegacy.x6_r_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.partite_uniform.r_partite_matching_deletion_tradeoff_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X72.ryser_intersecting_partite_cover_gap_statement",
+      "path": "hypergraph-theory/theories/conjectures/X72.v",
+      "name": "ryser_intersecting_partite_cover_gap_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "X72PartiteLegacy.ryser_intersecting_partite_cover_gap_statement",
+      "substitutions": {
+        "x6_r_partite_uniform": "PartiteLegacy.x6_r_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.partite_uniform.ryser_intersecting_partite_cover_gap_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "X73PartiteLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "substitutions": {
+        "x6_r_partite_uniform": "PartiteLegacy.x6_r_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.partite_uniform.regular_tripartite_hypergraph_matching_lower_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X225.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "kpartite_hypergraph_turan_exponent_dmax_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "X225PartiteLegacy.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "substitutions": {
+        "hg_partite_uniform": "PartiteLegacy.hg_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.partite_uniform.kpartite_hypergraph_turan_exponent_dmax_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "X73PartiteOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "substitutions": {
+        "x6_r_partite_uniform": "PartiteLegacy.x6_r_partite_uniform",
+        "x73_regular": "ID.X73Legacy.hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.partite_uniform.regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X225.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "kpartite_hypergraph_turan_exponent_dmax_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "X225PartiteOriginal.kpartite_hypergraph_turan_exponent_dmax_statement",
+      "substitutions": {
+        "hg_uniform": "UH.UniformLegacy.hg_uniform",
+        "hg_turan": "UH.UniformLegacy.hg_turan",
+        "hg_dmax": "ID.FoundationLegacy.dmax",
+        "hg_partite_uniform": "PartiteLegacy.hg_partite_uniform"
+      },
+      "certificate": "Hypergraph.migration.partite_uniform.kpartite_hypergraph_turan_exponent_dmax_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X73.x73_hyperdegree",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_hyperdegree",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x73_hyperdegree",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.x73_hyperdegree_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X73.x73_regular",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_regular",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X73Legacy.hyperdegree_regular",
+      "substitutions": {
+        "x73_hyperdegree": "Legacy.x73_hyperdegree",
+        "x73_regular": "hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.x73_regular_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_degree",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_degree",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.hg_degree",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.hg_degree_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_degenerate_leb",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_degenerate_leb",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.degenerate_leb",
+      "substitutions": {
+        "hg_degree": "Legacy.hg_degree",
+        "hg_degenerate_leb": "degenerate_leb"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_degenerate_leb_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_degenerate_ex",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_degenerate_ex",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.degenerate_ex",
+      "substitutions": {
+        "hg_degenerate_leb": "degenerate_leb",
+        "hg_degenerate_ex": "degenerate_ex"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_degenerate_ex_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_degeneracy",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_degeneracy",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.degeneracy",
+      "substitutions": {
+        "hg_degenerate_ex": "degenerate_ex",
+        "hg_degeneracy": "degeneracy"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_degeneracy_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_skel_degeneracy",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_skel_degeneracy",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.skel_degeneracy",
+      "substitutions": {
+        "hg_degeneracy": "degeneracy",
+        "hg_skel_degeneracy": "skel_degeneracy"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_skel_degeneracy_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_dmax",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_dmax",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "FoundationLegacy.dmax",
+      "substitutions": {
+        "hg_skel_degeneracy": "skel_degeneracy",
+        "hg_dmax": "dmax"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.hg_dmax_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_uniform",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.hg_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.hg_uniform_compat",
+      "commit": "3be65eed7084abfae36dee74f7117b598325bc4c"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_uniformb",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_uniformb",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.hg_uniformb",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.hg_uniformb_compat",
+      "commit": "3be65eed7084abfae36dee74f7117b598325bc4c"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.foundations.hypergraph.hg_turan",
+      "path": "hypergraph-theory/theories/foundations/hypergraph.v",
+      "name": "hg_turan",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.hg_turan",
+      "substitutions": {
+        "hg_uniformb": "UniformLegacy.hg_uniformb"
+      },
+      "certificate": "Hypergraph.migration.uniform_hypergraph.hg_turan_compat",
+      "commit": "3be65eed7084abfae36dee74f7117b598325bc4c"
+    }
+  ],
+  "known_stale_snapshots": {
+    "hypergraph-theory/theories/migration/incidence_degree.v#X73Legacy.regular_tripartite_hypergraph_matching_lower_bound_statement": "A10 partial snapshot: it froze the regularity/degree chain but keeps the live x6_r_partite_uniform, now an alias of the unchanged public hg_partite_uniform. It stays byte-exact; the complete A10+D2 row is Hypergraph.migration.partite_uniform.X73PartiteOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement, certified by regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat.",
+    "hypergraph-theory/theories/migration/incidence_degree.v#X225Legacy.kpartite_hypergraph_turan_exponent_dmax_statement": "A10 partial snapshot: it froze the degree/degeneracy/dmax chain but keeps the live hg_partite_uniform (and D1's live hg_uniform/hg_turan). It stays byte-exact; the complete A10+D1+D2 row is Hypergraph.migration.partite_uniform.X225PartiteOriginal.kpartite_hypergraph_turan_exponent_dmax_statement, certified by kpartite_hypergraph_turan_exponent_dmax_statement_original_compat.",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v#X225UniformLegacy.kpartite_hypergraph_turan_exponent_dmax_statement": "D1 current snapshot: it froze the uniformity and the Turan maximum but keeps the live hg_partite_uniform (and hg_dmax). It stays byte-exact; the complete A10+D1+D2 row is Hypergraph.migration.partite_uniform.X225PartiteOriginal.kpartite_hypergraph_turan_exponent_dmax_statement, certified by kpartite_hypergraph_turan_exponent_dmax_statement_original_compat.",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v#X225UniformOriginal.kpartite_hypergraph_turan_exponent_dmax_statement": "D1 complete A10+D1 Original: it keeps the live hg_partite_uniform, the D2 canonical. It stays byte-exact; the complete A10+D1+D2 row is Hypergraph.migration.partite_uniform.X225PartiteOriginal.kpartite_hypergraph_turan_exponent_dmax_statement, certified by kpartite_hypergraph_turan_exponent_dmax_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "hypergraph-theory/theories/conjectures/U12.v",
+      "name": "hg_partite_uniform",
+      "note": "r_partite_uniform is now Hypergraph.foundations.hypergraph.hg_partite_uniform part E through a qualified Require without Import, so U12 keeps its own Berge hg_connected."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "hg_partite_uniform",
+      "note": "x6_r_partite_uniform is now Hypergraph.foundations.hypergraph.hg_partite_uniform part E through a qualified Require without Import."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X225.v",
+      "name": "hg_partite_uniform",
+      "note": "kpartite_hypergraph_turan_exponent_dmax_statement uses the unchanged public predicate (exported foundation); its text is unchanged and it is frozen as X225PartiteLegacy and X225PartiteOriginal."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X72.v",
+      "name": "x6_r_partite_uniform",
+      "note": "ryser_intersecting_partite_cover_gap_statement (X72 imports X6) is unchanged and frozen as X72PartiteLegacy."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x6_r_partite_uniform",
+      "note": "regular_tripartite_hypergraph_matching_lower_bound_statement (X73 imports X6) is unchanged and frozen as X73PartiteLegacy and X73PartiteOriginal."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_U12.v",
+      "name": "r_partite_uniform",
+      "note": "r_partite_uniform_set0, r_partite_uniform_I1 and r_partite_card keep their exact types and unchanged proofs."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X225.v",
+      "name": "hg_partite_uniform",
+      "note": "x225_pattern2_partite and x225_turan_hypotheses_satisfiable keep their exact types and unchanged proofs."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X225.v",
+      "name": "kpartite_hypergraph_turan_exponent_dmax_statement",
+      "note": "Print Assumptions query on the unchanged row."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "r_partite_uniform",
+      "note": "x6_r_partite_uniform_equiv_r_partite_uniform, r_partite_edge_neq0 (explicit j : I_r) and ryser_by_deletion_aux keep their exact types and unchanged proofs."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "x6_r_partite_uniform",
+      "note": "x6_r_partite_uniform_equiv_r_partite_uniform its exact types and unchanged proofs."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "rysers_statement",
+      "note": "Check anchor and r_partite_matching_deletion_tradeoff_implies_rysers keep their exact types and unchanged proofs."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/implications_U12.v",
+      "name": "r_partite_matching_deletion_tradeoff_statement",
+      "note": "ryser_by_deletion_aux and r_partite_matching_deletion_tradeoff_implies_rysers keep their exact types and unchanged proofs."
+    },
+    {
+      "path": "hypergraph-theory/theories/examples/supplied_partitions.v",
+      "name": "hg_partite_uniform",
+      "note": "Public-only client of the supplied-partition API; imports no conjecture module."
+    }
+  ],
+  "distinct_variants": []
+}

@@ -2,12 +2,14 @@
   "schema_version": 1,
   "family": "stable-set",
   "primitive": {
-    "canonical_name": "GraphTheory.dom.stable",
-    "owner": "upstream-adapter",
-    "status": "auditing",
-    "fidelity": "PENDING",
+    "canonical_name": "GraphTheory.core.dom.stable",
+    "owner": "upstream",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
     "normalized_names": [
-      "stable_set"
+      "stable_set",
+      "stableb",
+      "independent_set"
     ],
     "source_definitions": [
       "Chromatic.conjectures.X3.x3_stable_set",
@@ -16,22 +18,179 @@
       "Extremal.conjectures.X56.x56_stable_set",
       "Extremal.conjectures.X97.x97_stable_set",
       "Extremal.conjectures.XE1.xe1_stable_set",
+      "GTMisc.conjectures.X163.x163_stableb",
       "GTMisc.conjectures.X169.x169_stable_set",
       "GTMisc.conjectures.X208.x208_stable_set",
       "GTMisc.conjectures.X29.x29_stable_set",
+      "Packing.conjectures.X18.x18_independent_set",
       "Packing.conjectures.XE1.xe1_stable_set"
     ],
-    "consumers_remaining": 10,
-    "compatibility_theorems": [],
+    "consumers_remaining": 12,
+    "relation": "simple-graph stable sets of a supplied vertex set, with upstream GraphTheory.core.dom.stable S ([disjoint NS(S) & S], Boolean) canonical: Chromatic X3 x3_stable_set, Chromatic/Extremal/Packing XE1 xe1_stable_set, Extremal X56 x56_stable_set and Packing X18 x18_independent_set (x -- y -> False for all supplied pairs) are iffs with it by GTBase.stable_sets.stable_noedgeP; Extremal X97 x97_stable_set and GTMisc X169/X208 x169_stable_set/x208_stable_set (x != y -> ~~ (x -- y)) by stable_distinctP; GTMisc X29 x29_stable_set (~~ (x -- y) for all supplied pairs, the diagonal included) by stable_nonadjP; GTMisc X163 x163_stableb ([forall x in S, [forall y in S, (x == y) || ~~ (x -- y)]]) is EQUAL to stable S by stable_eqbE. The variants agree by sgraph irreflexivity, with no nonempty, cardinality or looplessness guard; directed stable sets (which must also exclude loops) are a separate contract.",
+    "semantic_classes": {
+      "no-edge-prop": {
+        "members": [
+          "Chromatic.conjectures.X3.x3_stable_set",
+          "Chromatic.conjectures.XE1.xe1_stable_set",
+          "Extremal.conjectures.X56.x56_stable_set",
+          "Extremal.conjectures.XE1.xe1_stable_set",
+          "Packing.conjectures.X18.x18_independent_set",
+          "Packing.conjectures.XE1.xe1_stable_set"
+        ],
+        "count": 6,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.stable_sets.x3_stable_set_compat",
+          "Chromatic.migration.stable_sets.xe1_stable_set_compat",
+          "Extremal.migration.stable_sets.x56_stable_set_compat",
+          "Extremal.migration.stable_sets.xe1_stable_set_compat",
+          "Packing.migration.stable_sets.x18_independent_set_compat",
+          "Packing.migration.stable_sets.xe1_stable_set_compat"
+        ],
+        "note": "forall x y, x \\in S -> y \\in S -> x -- y -> False; iff with stable S by stable_noedgeP, not a conversion"
+      },
+      "distinct-vertex-prop": {
+        "members": [
+          "Extremal.conjectures.X97.x97_stable_set",
+          "GTMisc.conjectures.X169.x169_stable_set",
+          "GTMisc.conjectures.X208.x208_stable_set"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Extremal.migration.stable_sets.x97_stable_set_compat",
+          "GTMisc.migration.stable_sets.x169_stable_set_compat",
+          "GTMisc.migration.stable_sets.x208_stable_set_compat"
+        ],
+        "note": "x != y -> ~~ (x -- y) for supplied x, y; iff with stable S by stable_distinctP (the guard is redundant by irreflexivity)"
+      },
+      "all-pairs-prop": {
+        "members": [
+          "GTMisc.conjectures.X29.x29_stable_set"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.stable_sets.x29_stable_set_compat"
+        ],
+        "note": "~~ (x -- y) for all supplied x, y, the diagonal included; iff with stable S by stable_nonadjP"
+      },
+      "boolean-with-equality": {
+        "members": [
+          "GTMisc.conjectures.X163.x163_stableb"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.stable_sets.x163_stableb_compat"
+        ],
+        "note": "[forall x in S, [forall y in S, (x == y) || ~~ (x -- y)]]; Boolean equality with stable S by stable_eqbE"
+      },
+      "directed-loop-ignoring": {
+        "members": [
+          "Digraph.conjectures.X166.x166_stable_set"
+        ],
+        "count": 1,
+        "verdict": "distinct representation",
+        "state": "deferred",
+        "certificates": [],
+        "note": "diGraphType: distinct supplied vertices need both nonarcs and loops are ignored (classic_core.stable and X2.x2_arc_stable also forbid loops); deferred to a directed family, no conversion through a loop-forgetting simple graph"
+      }
+    },
+    "distinct_variants": {
+      "Digraph.conjectures.X166.x166_stable_set": "directed (diGraphType): distinct supplied vertices need both nonarcs and loops are ignored; deferred to a directed family, no conversion through a loop-forgetting simple graph",
+      "Digraph.conjectures.classic_core.stable": "directed bounded Boolean absence of every arc, loops included; a looped singleton separates it from x166_stable_set",
+      "Digraph.conjectures.X2.x2_arc_stable": "directed bounded Boolean absence of every arc, loops included",
+      "GTMisc.conjectures.XE2.xe2_independent3": "three distinct supplied vertices of an arbitrary relation with three forward nonedges; not a vertex-set predicate of an sgraph",
+      "Packing.conjectures.XE1.xe1_independent_set_count": "counting contract: inline bounded no-edge condition with exact cardinality, used by #993; left to a counting family"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.stable_sets.x3_stable_set_compat",
+      "Chromatic.migration.stable_sets.xe1_stable_set_compat",
+      "Chromatic.migration.stable_sets.xe2_cochromatic_colouring_compat",
+      "Chromatic.migration.stable_sets.xe2_cochromatic_number_compat",
+      "Chromatic.migration.stable_sets.xe2_max_cochromatic_on_n_compat",
+      "Chromatic.migration.stable_sets.erdos_758_statement_compat",
+      "Chromatic.migration.stable_sets.erdos_762_statement_compat",
+      "Chromatic.migration.stable_sets.erdos_922_statement_compat",
+      "Chromatic.migration.stable_sets.stable_cover_unique_induced_path_statement_compat",
+      "Chromatic.migration.stable_sets.cochromatic_gap_three_statement_compat",
+      "Chromatic.migration.stable_sets.stable_cover_unique_induced_path_statement_original_compat",
+      "Chromatic.migration.stable_sets.erdos_762_statement_original_compat",
+      "Extremal.migration.stable_sets.x56_stable_set_compat",
+      "Extremal.migration.stable_sets.x97_stable_set_compat",
+      "Extremal.migration.stable_sets.xe1_stable_set_compat",
+      "Extremal.migration.stable_sets.x56_homogeneous_set_compat",
+      "Extremal.migration.stable_sets.c8_complement_c8_erdos_hajnal_statement_compat",
+      "Extremal.migration.stable_sets.x97_maximum_independent_set_compat",
+      "Extremal.migration.stable_sets.x97_hits_all_maximum_independent_sets_compat",
+      "Extremal.migration.stable_sets.x97_hitting_number_at_most_compat",
+      "Extremal.migration.stable_sets.bollobas_erdos_tuza_independent_set_hitting_statement_compat",
+      "Extremal.migration.stable_sets.xe1_has_independent_set_compat",
+      "Extremal.migration.stable_sets.erdos_802_statement_compat",
+      "Extremal.migration.stable_sets.erdos_22_statement_compat",
+      "Extremal.migration.stable_sets.erdos_73_statement_compat",
+      "Extremal.migration.stable_sets.erdos_801_statement_compat",
+      "Extremal.migration.stable_sets.c8_complement_c8_erdos_hajnal_statement_original_compat",
+      "Extremal.migration.stable_sets.erdos_802_statement_original_compat",
+      "Extremal.migration.stable_sets.erdos_22_statement_original_compat",
+      "Extremal.migration.stable_sets.erdos_801_statement_original_compat",
+      "GTMisc.migration.stable_sets.x163_stableb_compat",
+      "GTMisc.migration.stable_sets.x169_stable_set_compat",
+      "GTMisc.migration.stable_sets.x208_stable_set_compat",
+      "GTMisc.migration.stable_sets.x29_stable_set_compat",
+      "GTMisc.migration.stable_sets.x163_normal_graphb_compat",
+      "GTMisc.migration.stable_sets.random_graphs_normal_whp_statement_compat",
+      "GTMisc.migration.stable_sets.x169_token_sliding_connected_compat",
+      "GTMisc.migration.stable_sets.x169_polytime_decides_TS_connectivity_compat",
+      "GTMisc.migration.stable_sets.token_sliding_chordal_clique_tree_degree_polytime_statement_compat",
+      "GTMisc.migration.stable_sets.x208_maximum_independent_set_output_compat",
+      "GTMisc.migration.stable_sets.x208_polytime_mis_on_compat",
+      "GTMisc.migration.stable_sets.Pt_free_maximum_independent_set_polytime_statement_compat",
+      "GTMisc.migration.stable_sets.x29_stable_cover_compat",
+      "GTMisc.migration.stable_sets.x29_normal_graph_compat",
+      "GTMisc.migration.stable_sets.no_c5_c7_complement_c7_normal_graph_statement_compat",
+      "GTMisc.migration.stable_sets.x169_polytime_decides_TS_connectivity_original_compat",
+      "GTMisc.migration.stable_sets.token_sliding_chordal_clique_tree_degree_polytime_statement_original_compat",
+      "GTMisc.migration.stable_sets.no_c5_c7_complement_c7_normal_graph_statement_original_compat",
+      "Packing.migration.stable_sets.x18_independent_set_compat",
+      "Packing.migration.stable_sets.xe1_stable_set_compat",
+      "Packing.migration.stable_sets.path_partition_independent_set_balance_statement_compat",
+      "Packing.migration.stable_sets.xe1_triangle_free_independence_guarantee_compat",
+      "Packing.migration.stable_sets.erdos_151_statement_compat",
+      "Packing.migration.stable_sets.erdos_151_statement_original_compat",
+      "GTMisc.migration.stable_sets.x163_event_weight_compat",
+      "Packing.migration.stable_sets.path_partition_independent_set_balance_statement_original_compat",
+      "GTMisc.migration.stable_sets.Pt_free_maximum_independent_set_polytime_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.stable_sets.stable_noedgeP",
+      "GTBase.stable_sets.stable_nonadjP",
+      "GTBase.stable_sets.stable_distinctP",
+      "GTBase.stable_sets.stable_eqbE",
+      "GTBase.stable_sets.stable_pair"
+    ],
+    "public_client": "base/theories/examples/stable_sets.v",
+    "legacy_baseline": "96be00e5259f813eed101893330ee162b63f69e2",
+    "migration_report": "meta/migration_reports/stable_sets.md",
+    "migration_spec": "meta/migration_reports/stable_sets.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A20.md",
     "upstream_audit": {
       "searched_modules": [
-        "GraphTheory.dom",
-        "GraphTheory.coloring"
+        "GraphTheory.core.dom (stable, stableP, stablePn, stableEedge, stable0, stable1, st_hereditary, sub_stable)",
+        "GraphTheory.core.coloring (stabsets, alpha_mem, stable_compl, stable_isubgraph, stable_induced; diso_stable is Abort)",
+        "GTBase.base (re-exports dom)"
       ],
-      "result": "candidate-found",
-      "candidate": "GraphTheory.dom.stable",
-      "note": "Upstream stable is a boolean predicate with stableP and standard closure lemmas. Directed and undirected local variants must be separated before migration.",
-      "audited_at": "2026-07-22"
-    }
+      "result": "upstream-canonical",
+      "candidate": "GraphTheory.core.dom.stable S",
+      "note": "Upstream stable is the Boolean [disjoint NS(S) & S] with reflection and closure lemmas; the raw corpus presentations are related to it by the GTBase.stable_sets views, without a new predicate. The directed X166 namesake is deferred. Evidence: coordination/evidence/Stable-set-discovery-by-matching-scope/ (upstream.txt) and coordination/evidence/A20-stable-sets/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "path_review (initial); matching_scope (combined histories)",
+    "independent_review": "meta/migration_reviews/stable_sets.md"
   }
 }

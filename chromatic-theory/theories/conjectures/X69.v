@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X69 -- v2 Havel problem row *)
 
 From GTBase Require Export base.
+From GTBase Require Import triangles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +10,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X69 vocabulary ************************************************)
 
 Definition x69_triangle (G : sgraph) (T : {set G}) : Prop :=
-  #|T| = 3 /\ clique T.
+  triangle T.
 
 Definition x69_triangles_distance_at_least (G : sgraph) (d : nat) : Prop :=
   forall A B : {set G},

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "family": "set-separator",
+  "primitive": {
+    "canonical_name": "GraphTheory.core.connectivity.separator",
+    "owner": "upstream",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "separates_xy"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.X39.x39_separates_xy",
+      "Packing.conjectures.X26.x26_separates_xy"
+    ],
+    "consumers_remaining": 2,
+    "relation": "one contract, upstream: GTMisc.X39.x39_separates_xy X Y A and Packing.X26.x26_separates_xy X Y Z (no simple sequence path from X to Y, B5's seq_set_path, has its vertex set, B1's seq_vertices, disjoint from the separator) are transparent aliases of GraphTheory.core.connectivity.separator G X Y A (every packaged Path from a vertex of X to a vertex of Y meets A), with argument order G, X, Y, separator and G implicit as before. GTBase.set_separators.seq_separatorP proves the frozen sequence bodies equivalent without any premise: upstream separatorI reduces arbitrary packaged paths to irredundant ones, whose node lists are set-to-set simple paths (seq_set_path_nodes, seq_vertices_nodes), and every such sequence packages as a Path with the same vertices (Path_of_path, mem_path, nodesE). Nothing restricts X, Y or the separator: endpoints may lie in it, one-vertex paths count, so every common vertex of X and Y lies in it (separator_seq1, upstream separator_cap), and empty endpoint sets are separated by anything. No second predicate, guard or base re-export is introduced. Distinct and untouched: upstream separates x y U, which also requires both endpoints outside U (separator_not_separates), Cycle's multigraph edge separator ueseparates, global vertex cutsets and balanced separators, Digraph dicuts, disjoint path collections and X116's inline hitting clause.",
+    "semantic_classes": {
+      "set-to-set-separator": {
+        "members": [
+          "GTMisc.conjectures.X39.x39_separates_xy",
+          "Packing.conjectures.X26.x26_separates_xy"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.set_separators.x39_separates_xy_compat",
+          "Packing.migration.set_separators.x26_separates_xy_compat"
+        ],
+        "note": "upstream separator G X Y A over packaged paths, endpoint hits allowed and one-vertex paths counted; the frozen sequence bodies are equivalent through the unconditional seq_separatorP. X39's ball row, the cross-module X40 distance-2 row (partial) and X26's bounded-degree row are frozen over it with every guard and quantifier order, and B5's complete X39Original, X40Original and X26Original rows (raw support, set path and separator; balls live at this pin) are reused end to end. The incoming A22 raw-ball Originals are a combined-parent obligation, not claimed here. The final B26 integration also registers the actual A22 balls.X39Original, X40Original and X26Original complete rows over raw B1 supports, B5 paths/separators and A22 balls. Earlier per-family copies and all their frozen bodies remain unchanged; the deepest existing A22 whole proofs explicitly reuse the adapted B5 separator bridges."
+      }
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.set_separators.coarse_menger_ball_separator_statement_compat",
+      "GTMisc.migration.set_separators.coarse_menger_ball_separator_statement_original_compat",
+      "GTMisc.migration.set_separators.coarse_menger_distance_two_separator_statement_compat",
+      "GTMisc.migration.set_separators.coarse_menger_distance_two_separator_statement_original_compat",
+      "GTMisc.migration.set_separators.x39_separates_xy_compat",
+      "Packing.migration.set_separators.bounded_degree_distant_induced_menger_statement_compat",
+      "Packing.migration.set_separators.bounded_degree_distant_induced_menger_statement_original_compat",
+      "Packing.migration.set_separators.x26_separates_xy_compat",
+      "GTMisc.migration.balls.coarse_menger_ball_separator_statement_original_compat",
+      "GTMisc.migration.balls.coarse_menger_distance_two_separator_statement_original_compat",
+      "Packing.migration.balls.bounded_degree_distant_induced_menger_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.set_separators.seq_separatorP",
+      "GTBase.set_separators.separator_set0l",
+      "GTBase.set_separators.separator_set0r",
+      "GTBase.set_separators.separator_setT",
+      "GTBase.set_separators.separator_endpointL",
+      "GTBase.set_separators.separator_endpointR",
+      "GTBase.set_separators.separator_seq1",
+      "GTBase.set_separators.separator_mono",
+      "GTBase.set_separators.separator_sym",
+      "GTBase.set_separators.separator_not_separates"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.connectivity",
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.sgraph",
+        "GTBase.walks_paths",
+        "GTBase.base"
+      ],
+      "result": "exact-upstream-canonical",
+      "candidate": "GraphTheory.core.connectivity.separator",
+      "note": "coq-graph-theory's connectivity.v defines separator (G : diGraph) A B S := every packaged Path from A to B has a vertex in S, with separatorI (irredundant paths suffice) and separator_cap (A :&: B lies in S), and the different separates x y U (x and y both outside U, and every Path from x to y meets U). Both migrated wrappers are separator at an sgraph, so the canonical is upstream; GTBase.set_separators adds only the sequence bridge seq_separatorP and corner lemmas, defines no predicate and is not re-exported by GTBase.base.",
+      "audited_at": "2026-10-03"
+    },
+    "migration_report": "meta/migration_reports/set_separators.md",
+    "reviewed_by": "family_scope (initial source); matching_scope (existing A22 composition source read)",
+    "migration_spec": "meta/migration_reports/set_separators.spec.json",
+    "downstream_client": "base/theories/examples/set_separators.v",
+    "reviewed_commit": "3cc9c86c673a6839768ee119c6dd6e70eca3f391",
+    "independent_review": "meta/migration_reviews/set_separators.md"
+  }
+}

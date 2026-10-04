@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.X98 -- v2 polynomial Kuhn-Osthus row *)
 
 From GTBase Require Export base.
+From GTBase Require Import model_support induced_paths induced_subdivisions.
 From Extremal.conjectures Require Import X59.
 
 Set Implicit Arguments.
@@ -12,18 +13,11 @@ Unset Printing Implicit Defensive.
 Definition x98_consecutive_in_path (G : sgraph) (p : seq G) (u v : G) : Prop :=
   seq_consecutive p u v.
 
+(** Since the B22 library migration (2026-10-03) a transparent alias of
+    [GTBase.induced_paths.induced_path_between] (the same body by conversion); the original body
+    is frozen and certified in theories/migration/induced_paths.v. *)
 Definition x98_induced_path_between (G : sgraph) (a b : G) (p : seq G) : Prop :=
-  match p with
-  | [::] => False
-  | x :: q =>
-      x = a /\
-      last x q = b /\
-      uniq p /\
-      path (--) x q /\
-      forall u v : G,
-        u \in p -> v \in p -> u -- v -> u != v ->
-        x98_consecutive_in_path p u v
-  end.
+  induced_path_between a b p.
 
 (** An internal (non-endpoint) vertex of a candidate edge-path [p] whose
     endpoints are [a] and [b]. *)
@@ -33,44 +27,92 @@ Definition x98_internal (G : sgraph) (p : seq G) (a b x : G) : Prop :=
 (** A vertex of the whole subdivision model: a branch vertex, or a vertex
     lying on some edge-path. *)
 Definition x98_model_vertex (H G : sgraph)
-    (br : H -> G) (ep : H -> H -> seq G) (x : G) : Prop :=
-  (exists h : H, br h = x) \/ (exists u v : H, u -- v /\ x \in ep u v).
+    (br : H -> G) (ep : H -> H -> seq G) (x : G) : Prop := model_support br ep x.
 
-Record x98_induced_subdivision_model (H G : sgraph) := X98Model {
-  x98_branch : H -> G;
-  x98_branch_injective : injective x98_branch;
-  x98_edge_path : H -> H -> seq G;
-  x98_edge_path_valid :
+(** The strong induced-subdivision model is the canonical
+    [GTBase.induced_subdivisions.induced_subdivision_model] (pattern before host).  The
+    definitions below keep the local constructor and projection names with their exact
+    types and implicit arguments; every field formula is convertible to the canonical one. *)
+Definition x98_induced_subdivision_model (H G : sgraph) : Type := induced_subdivision_model H G.
+
+Definition X98Model (H G : sgraph) (x98_branch : H -> G) (x98_branch_injective : injective x98_branch)
+    (x98_edge_path : H -> H -> seq G)
+    (x98_edge_path_valid :
+       forall u v : H,
+         u -- v ->
+         x98_induced_path_between
+           (x98_branch u) (x98_branch v) (x98_edge_path u v))
+    (x98_internal_avoids_branch :
+       forall (u v w : H) (x : G),
+         u -- v ->
+         x98_internal (x98_edge_path u v) (x98_branch u) (x98_branch v) x ->
+         x != x98_branch w)
+    (x98_paths_internally_disjoint :
+       forall (u v u' v' : H) (x : G),
+         u -- v -> u' -- v' ->
+         x98_internal (x98_edge_path u v) (x98_branch u) (x98_branch v) x ->
+         x98_internal (x98_edge_path u' v') (x98_branch u') (x98_branch v') x ->
+         (u = u' /\ v = v') \/ (u = v' /\ v = u'))
+    (x98_global_induced :
+       forall x y : G,
+         x98_model_vertex x98_branch x98_edge_path x ->
+         x98_model_vertex x98_branch x98_edge_path y ->
+         x -- y ->
+         exists u v : H, u -- v /\ x98_consecutive_in_path (x98_edge_path u v) x y) :
+    x98_induced_subdivision_model H G :=
+  @InducedSubdivisionModel H G x98_branch x98_branch_injective x98_edge_path x98_edge_path_valid
+    x98_internal_avoids_branch x98_paths_internally_disjoint x98_global_induced.
+
+Definition x98_branch (H G : sgraph) (x0 : x98_induced_subdivision_model H G) : H -> G :=
+  isd_branch x0.
+
+Definition x98_branch_injective (H G : sgraph) (x0 : x98_induced_subdivision_model H G) :
+    injective (x98_branch x0) :=
+  @isd_branch_injective H G x0.
+
+Definition x98_edge_path (H G : sgraph) (x0 : x98_induced_subdivision_model H G) : H -> H -> seq G :=
+  isd_edge_path x0.
+
+Definition x98_edge_path_valid (H G : sgraph) (x0 : x98_induced_subdivision_model H G) :
     forall u v : H,
       u -- v ->
-      x98_induced_path_between
-        (x98_branch u) (x98_branch v) (x98_edge_path u v);
-  (** internal path vertices avoid every branch vertex *)
-  x98_internal_avoids_branch :
+      x98_induced_path_between (x98_branch x0 u) (x98_branch x0 v) (x98_edge_path x0 u v) :=
+  @isd_edge_path_valid H G x0.
+
+Definition x98_internal_avoids_branch (H G : sgraph) (x0 : x98_induced_subdivision_model H G) :
     forall (u v w : H) (x : G),
       u -- v ->
-      x98_internal (x98_edge_path u v) (x98_branch u) (x98_branch v) x ->
-      x != x98_branch w;
-  (** edge-paths are pairwise internally vertex-disjoint (a shared internal
-      vertex forces the two undirected edges to coincide) *)
-  x98_paths_internally_disjoint :
+      x98_internal (x98_edge_path x0 u v) (x98_branch x0 u) (x98_branch x0 v) x ->
+      x != x98_branch x0 w :=
+  @isd_internal_avoids_branch H G x0.
+
+Definition x98_paths_internally_disjoint (H G : sgraph) (x0 : x98_induced_subdivision_model H G) :
     forall (u v u' v' : H) (x : G),
       u -- v -> u' -- v' ->
-      x98_internal (x98_edge_path u v) (x98_branch u) (x98_branch v) x ->
-      x98_internal (x98_edge_path u' v') (x98_branch u') (x98_branch v') x ->
-      (u = u' /\ v = v') \/ (u = v' /\ v = u');
-  (** global inducedness: the only G-edges among model vertices join two
-      consecutive vertices of a single subdivision path *)
-  x98_global_induced :
-    forall x y : G,
-      x98_model_vertex x98_branch x98_edge_path x ->
-      x98_model_vertex x98_branch x98_edge_path y ->
-      x -- y ->
-      exists u v : H, u -- v /\ x98_consecutive_in_path (x98_edge_path u v) x y
-}.
+      x98_internal (x98_edge_path x0 u v) (x98_branch x0 u) (x98_branch x0 v) x ->
+      x98_internal (x98_edge_path x0 u' v') (x98_branch x0 u') (x98_branch x0 v') x ->
+      (u = u' /\ v = v') \/ (u = v' /\ v = u') :=
+  @isd_paths_internally_disjoint H G x0.
 
-Definition x98_induced_subdivision (H G : sgraph) : Prop :=
-  inhabited (x98_induced_subdivision_model H G).
+Definition x98_global_induced (H G : sgraph) (x0 : x98_induced_subdivision_model H G) :
+    forall x y : G,
+      x98_model_vertex (x98_branch x0) (x98_edge_path x0) x ->
+      x98_model_vertex (x98_branch x0) (x98_edge_path x0) y ->
+      x -- y ->
+      exists u v : H, u -- v /\ x98_consecutive_in_path (x98_edge_path x0 u v) x y :=
+  @isd_global_induced H G x0.
+
+Arguments X98Model [H G] [x98_branch] x98_branch_injective [x98_edge_path]
+  x98_edge_path_valid x98_internal_avoids_branch x98_paths_internally_disjoint x98_global_induced.
+Arguments x98_branch [H G] x0 _.
+Arguments x98_branch_injective [H G x0 x1 x2] _.
+Arguments x98_edge_path [H G] x0 _ _.
+Arguments x98_edge_path_valid [H G] x0 [u v] _.
+Arguments x98_internal_avoids_branch [H G x0 u v] w [x] _ _.
+Arguments x98_paths_internally_disjoint [H G x0 u v u' v' x] _ _ _ _.
+Arguments x98_global_induced [H G x0 x y] _ _ _.
+
+Definition x98_induced_subdivision (H G : sgraph) : Prop := induced_subdivision H G.
 
 (** Corpus row: studies:std_bonamy_et_al_polynomial_k_hn_osthus_conjecture
     Site: none

@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py proper_colouring --details /tmp
 
 - Canonical: `GTBase.colourings.proper_colouring`.
 - Baseline: `a6db537386d7092db506526fbcfd2dbe9760ed5e`.
-- Scope: 8 helpers, 10 statements, 26 frozen objects, 71 recorded references.
-- Source checks: 238/238 pass; consistent.
+- Scope: 8 helpers, 10 statements, 26 frozen objects, 77 recorded references.
+- Source checks: 240/240 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -26,4 +26,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py proper_colouring --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/simple_edges.v#X64Legacy.statement`, `chromatic-theory/theories/migration/delete_edge.v#X64Legacy.finite_bridgeless_cubic_two_homogeneous_exceptions_statement`, `chromatic-theory/theories/migration/delete_edge.v#X64Original.finite_bridgeless_cubic_two_homogeneous_exceptions_statement`, `chromatic-theory/theories/migration/consecutive_in_path.v#X83Legacy.statement`, `chromatic-theory/theories/migration/consecutive_in_cycle.v#X3Legacy.rainbow_consecutive_vertices_in_hole_statement`, `chromatic-theory/theories/migration/triangle_free.v#X187Legacy.planar_triangle_free_request_graph_fraction_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/simple_edges.v#X64Legacy.statement`, `chromatic-theory/theories/migration/delete_edge.v#X64Legacy.finite_bridgeless_cubic_two_homogeneous_exceptions_statement`, `chromatic-theory/theories/migration/delete_edge.v#X64Original.finite_bridgeless_cubic_two_homogeneous_exceptions_statement`, `chromatic-theory/theories/migration/consecutive_in_path.v#X83Legacy.statement`, `chromatic-theory/theories/migration/consecutive_in_cycle.v#X3Legacy.rainbow_consecutive_vertices_in_hole_statement`, `chromatic-theory/theories/migration/triangle_free.v#X187Legacy.planar_triangle_free_request_graph_fraction_statement`, `chromatic-theory/theories/migration/induced_paths.v#X83Legacy.aravind_rainbow_induced_chromatic_path_statement`, `chromatic-theory/theories/migration/induced_cycles.v#X3Legacy.rainbow_consecutive_vertices_in_hole_statement`.

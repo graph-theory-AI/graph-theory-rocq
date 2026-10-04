@@ -1,6 +1,8 @@
 (** * Hypergraph.conjectures.X108 -- v2 3-uniform Burr-Erdos row *)
 
 From GTBase Require Export base.
+From GTBase Require Import hypergraph_uniformity.
+Require Hypergraph.foundations.hypergraph_copies.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,7 +11,7 @@ Unset Printing Implicit Defensive.
 (** ** Local X108 vocabulary ***********************************************)
 
 Definition x108_uniform (T : finType) (E : {set {set T}}) (r : nat) : Prop :=
-  forall e : {set T}, e \in E -> #|e| = r.
+  uniform_family E r.
 
 Definition x108_degree_in
     (T : finType) (E : {set {set T}}) (W : {set T}) (v : T) : nat :=
@@ -22,15 +24,12 @@ Definition x108_d_degenerate (T : finType) (E : {set {set T}}) (d : nat) : Prop 
 
 Definition x108_image_edge
     (T U : finType) (f : T -> U) (e : {set T}) : {set U} :=
-  [set y : U | [exists x : T, (x \in e) && (y == f x)]].
+  f @: e.
 
 Definition x108_monochromatic_copy
     (T : finType) (E : {set {set T}}) (N : nat)
     (col : {set 'I_N} -> bool) : Prop :=
-  exists (colour : bool) (f : T -> 'I_N),
-    injective f /\
-    forall e : {set T},
-      e \in E -> col (x108_image_edge f e) = colour.
+  Hypergraph.foundations.hypergraph_copies.hg_mono_copy E col.
 
 Definition x108_two_colour_ramsey_at_most
     (T : finType) (E : {set {set T}}) (N : nat) : Prop :=

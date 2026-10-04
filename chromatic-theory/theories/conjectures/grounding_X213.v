@@ -8,7 +8,7 @@
 
 From mathcomp Require Import fingroup perm.
 From GraphTheory Require Import bij.
-From GTBase Require Import base.
+From GTBase Require Import base set_pairs.
 From Chromatic.conjectures Require Import U8 X3 X213.
 
 Set Implicit Arguments.
@@ -143,7 +143,7 @@ Lemma x213_anticomplete_set0 (G : sgraph) :
   x3_anticomplete (@set0 G) (@set0 G) /\ χ(@set0 G) = 0 /\ χ(@set0 G) = 0.
 Proof.
 split; last by split; exact: chi0.
-by split; [rewrite -setI_eq0 set0I eqxx | move=> a b; rewrite inE].
+by apply/anticompleteP; split; [rewrite -setI_eq0 set0I eqxx | move=> a b; rewrite inE].
 Qed.
 
 (** Guard has teeth: the clique alternative is not free -- [K_1] has no

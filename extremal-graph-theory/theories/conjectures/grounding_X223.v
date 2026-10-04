@@ -10,7 +10,7 @@
 
     Everything is closed by [Qed]; see the [Print Assumptions] audit at the end. *)
 
-From GTBase Require Import base.
+From GTBase Require Import base set_pairs.
 From Extremal.conjectures Require Import X223.
 
 Set Implicit Arguments.
@@ -122,7 +122,7 @@ Qed.
     so the shape of the conclusion is satisfiable (the content is the SIZE
     bounds). *)
 Lemma anticomplete_set0 (G : sgraph) (B : {set G}) : x223_anticomplete set0 B.
-Proof. by split; [rewrite disjoints_subset sub0set | move=> a b; rewrite inE]. Qed.
+Proof. by apply/anticompleteP; split; [rewrite disjoints_subset sub0set | move=> a b; rewrite inE]. Qed.
 
 (** ** Row arxiv:1810.00058#02 (c-sparse pairs) *)
 

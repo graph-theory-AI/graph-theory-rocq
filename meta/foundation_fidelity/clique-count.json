@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "family": "clique-count",
+  "modules": {
+    "GTBase.clique_counts": {
+      "path": "base/theories/clique_counts.v",
+      "overrides": {
+        "all_clique_count": {
+          "verdict": "FAITHFUL",
+          "note": "Number of cliques of G (vertex sets inducing complete graphs), the empty one included: #|cliques [set: G]|. K_0 gives 1."
+        },
+        "nonempty_clique_count": {
+          "verdict": "FAITHFUL",
+          "note": "Number of nonempty cliques; one less than all_clique_count (nonempty_clique_countS). K_0 gives 0."
+        },
+        "clique_count_size": {
+          "verdict": "FAITHFUL",
+          "note": "Number of cliques with exactly r vertices; 1 at r = 0, #|G| at r = 1, #|E(G)| at r = 2, 0 above the order; r = 3 counts triangles."
+        }
+      },
+      "machine_evidence": [
+        "in_cliquesT",
+        "all_clique_countE",
+        "nonempty_clique_countE",
+        "clique_count_sizeE",
+        "nonempty_clique_countS",
+        "clique_count_size0",
+        "clique_count_size1",
+        "clique_count_size2",
+        "clique_count_size_gt"
+      ]
+    }
+  }
+}

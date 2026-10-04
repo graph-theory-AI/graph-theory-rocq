@@ -38,6 +38,8 @@ From GraphTheory Require Import mgraph.
 From GTBase Require Import base.
 From Cycle.foundations Require Export connectivity.
 From Cycle.foundations Require Import path_subgraphs.
+From Cycle.foundations Require eulerian.
+From Cycle.foundations Require Import spanning_trees.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -102,8 +104,7 @@ Definition is_matching (G : mgraph) (M : {set edge G}) : Prop :=
 Definition spanning_connected (G : mgraph) (T : {set edge G}) : Prop :=
   forall x y : G, exists w, uwalk x y w /\ all (fun e => e \in T) w.
 
-Definition spanning_tree (G : mgraph) (T : {set edge G}) : Prop :=
-  spanning_connected T /\ acyclic T.
+Definition spanning_tree (G : mgraph) (T : {set edge G}) : Prop := spanning_tree_edge_set T.
 
 (** ** Bridges, cubic, eulerian *)
 
@@ -131,8 +132,7 @@ Definition simple_mgraph (G : mgraph) : Prop :=
     under which a loop graph is eulerian).
     [@MOVE-to-base]: general graph notion, migrate to graph-theory-base when a
     second area needs it. *)
-Definition eulerian (G : mgraph) : Prop :=
-  mconnected G /\ forall v : G, ~~ odd (mdeg v).
+Definition eulerian (G : mgraph) : Prop := Cycle.foundations.eulerian.eulerian G.
 
 (** An eulerian tour: a closed walk traversing every edge exactly once. *)
 Definition is_eulerian_tour (G : mgraph) (w : seq (edge G)) : Prop :=

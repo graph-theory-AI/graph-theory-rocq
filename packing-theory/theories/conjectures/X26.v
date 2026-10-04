@@ -1,6 +1,7 @@
 (** * Packing.conjectures.X26 -- v2 distant induced-Menger row *)
 
 From GTBase Require Export base.
+From GTBase Require Import balls.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -8,12 +9,11 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X26 vocabulary ************************************************)
 
-Fixpoint x26_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
-  if r is r'.+1 then x26_ball r' x :|: \bigcup_(z in x26_ball r' x) N(z)
-  else [set x].
+Definition x26_ball (G : sgraph) (r : nat) (x : G) : {set G} :=
+  ball r x.
 
 Definition x26_set_ball (G : sgraph) (r : nat) (S : {set G}) : {set G} :=
-  \bigcup_(x in S) x26_ball r x.
+  set_ball r S.
 
 Definition x26_path_vertices (G : sgraph) (p : seq G) : {set G} :=
   seq_vertices p.
@@ -35,11 +35,13 @@ Definition x26_has_k_distant_xy_paths
     (forall p : seq G, p \in paths -> x26_xy_path X Y p) /\
     x26_pairwise_distant_paths d paths.
 
+(** Since the B26 library migration (2026-10-03) a transparent alias of upstream
+    [GraphTheory.core.connectivity.separator G X Y Z]: every packaged path from X to Y meets Z, the
+    endpoints may lie in Z and one-vertex paths count.  The former sequence body is frozen and
+    certified equivalent, through [GTBase.set_separators.seq_separatorP], in
+    theories/migration/set_separators.v. *)
 Definition x26_separates_xy (G : sgraph) (X Y Z : {set G}) : Prop :=
-  forall p : seq G,
-    x26_xy_path X Y p ->
-    [disjoint x26_path_vertices p & Z] ->
-    False.
+  separator G X Y Z.
 
 (** ** X26 statements ******************************************************)
 

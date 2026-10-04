@@ -12,6 +12,7 @@
 From GTBase Require Import base.
 From GraphTheory Require Import minor.
 From Minor.foundations Require Import containment width_params.
+From Minor.foundations Require Import shallow_minors.
 From Minor.conjectures Require Import X27 X42 X220.
 
 Set Implicit Arguments.
@@ -312,7 +313,7 @@ Qed.
     expansion (witnessed by the zero polynomial). *)
 Lemma X220_poly_expansion_nonvacuous : x220_polynomial_expansion X220_Cnull.
 Proof.
-exists [::] => G G0 r H [B [ctr [ctrB _ _ _]]].
+exists [::] => G G0 r H [B [ctr [_ ctrB _]]].
 have H0 : #|H| = 0.
   apply/eqP; rewrite -leqn0 leqNgt; apply/negP => /card_gt0P[x _].
   exact: (card0_absurd (ctr x) G0).
@@ -322,14 +323,7 @@ Qed.
 (** NON-VACUITY of the shallow-minor primitive: every graph is its own 0-shallow
     minor (singleton branch sets). *)
 Lemma X220_shallow_minor_refl (G : sgraph) : x220_shallow_minor G G 0.
-Proof.
-exists (fun x => [set x]), id; split.
-- by move=> x; rewrite inE.
-- move=> x v; rewrite inE => /eqP->; exists [::]; split=> //=.
-  by rewrite andbT inE.
-- by move=> x y xy; rewrite disjoints1 inE.
-- by move=> x y xy; exists x, y; split=> //; rewrite inE.
-Qed.
+Proof. exact: internal_shallow_minor_refl. Qed.
 
 (** GUARD HAS TEETH (row 9): the expansion bound is not automatic — the zero
     polynomial fails already for ['K_3], which is its own 0-shallow minor. *)

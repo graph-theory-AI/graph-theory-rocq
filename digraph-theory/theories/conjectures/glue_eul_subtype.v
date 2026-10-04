@@ -321,12 +321,15 @@ Qed.
 Lemma ueglue_Eulerian :
   loopless D2 -> Eulerian D1 -> Eulerian D2 -> Eulerian ueglue.
 Proof.
-move=> l2 e1 e2 z; case: z => [u|w].
+move=> l2 e1 e2 z; change (indeg z = outdeg z).
+have e1' : forall v : D1, indeg v = outdeg v := e1.
+have e2' : forall v : D2, indeg v = outdeg v := e2.
+case: z => [u|w].
 - case: (altP (u =P a)) => [->|Nua].
   + rewrite ueglue_indeg_merged // ueglue_outdeg_merged //.
-    by rewrite (e1 a) (e2 b).
-  + by rewrite ueglue_indeg_inl_ne // ueglue_outdeg_inl_ne // (e1 u).
-- by rewrite ueglue_indeg_inr ueglue_outdeg_inr (e2 (val w)).
+    by rewrite (e1' a) (e2' b).
+  + by rewrite ueglue_indeg_inl_ne // ueglue_outdeg_inl_ne // (e1' u).
+- by rewrite ueglue_indeg_inr ueglue_outdeg_inr (e2' (val w)).
 Qed.
 
 End UEGlue.

@@ -1,0 +1,39 @@
+{
+ "schema_version": 1,
+ "family": "whole-tree",
+ "modules": {
+  "GTBase.trees": {
+   "path": "base/theories/trees.v",
+   "overrides": {
+    "is_treeb": {
+     "verdict": "FAITHFUL",
+     "note": "is_treeb S: the Boolean [is_forestb S && connectedb S] of the upstream is_tree S, reflected by is_treeP; at [set: G] it decides whether the whole graph is a tree, 'K_0 included."
+    }
+   },
+   "machine_evidence": [
+    "is_treeP",
+    "is_treeT_forest",
+    "is_treeT_connected",
+    "is_treeTI",
+    "is_treeT_connect",
+    "is_treeTI_connect",
+    "is_treeT_unique",
+    "is_tree_K0",
+    "is_tree_K1",
+    "is_tree_K2",
+    "not_is_tree_K3",
+    "not_is_tree_two_isolated",
+    "claw_centre",
+    "claw_adj_cl",
+    "claw_adj_lc",
+    "claw_adj_cc_false",
+    "claw_adj_ll_false",
+    "claw_path_cl",
+    "claw_path_lc",
+    "claw_path_ll",
+    "claw_unique",
+    "is_tree_claw"
+   ]
+  }
+ }
+}

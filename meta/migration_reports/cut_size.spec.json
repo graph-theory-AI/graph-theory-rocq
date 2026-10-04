@@ -288,16 +288,10 @@
     "extremal-graph-theory/theories/migration/edge_count.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x78_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat.",
     "extremal-graph-theory/theories/migration/edge_count.v#X78Original.h_free_max_cut_three_fourths_surplus_statement": "A7 snapshot: A7 froze this row over its own frozen helpers but kept the live x78_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat.",
     "extremal-graph-theory/theories/migration/subgraph_of.v#X78Legacy.h_free_max_cut_three_fourths_surplus_statement": "A5 snapshot: A5 froze this row over its own frozen helpers but kept the live x78_cut_size (after A9 GTBase.common.cut_size, a conversion of the post-M1 body). Kept unchanged; the complete pre-M1 row is Extremal.migration.cut_size.X78Original.h_free_max_cut_three_fourths_surplus_statement, certified by h_free_max_cut_three_fourths_surplus_statement_original_compat.",
-    "extremal-graph-theory/theories/migration/cycle_lengths.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement": "B15 per-row snapshot: family cycle-lengths (B15) froze only its own raw cycle existence in X76's row, so this copy still calls the live x76_cut_size, which after A9 unfolds to cut_size (and A7's live x76_edge_count). Kept as B15's per-row row; the complete pre-M1 row is Extremal.migration.cycle_lengths.X76Original.ck_free_max_cut_polynomial_surplus_statement over this family's frozen X76Original.x76_cut_size."
+    "extremal-graph-theory/theories/migration/cycle_lengths.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement": "B15 per-row snapshot: family cycle-lengths (B15) froze only its own raw cycle existence in X76's row, so this copy still calls the live x76_cut_size, which after A9 unfolds to cut_size (and A7's live x76_edge_count). Kept as B15's per-row row; the complete pre-M1 row is Extremal.migration.cycle_lengths.X76Original.ck_free_max_cut_polynomial_surplus_statement over this family's frozen X76Original.x76_cut_size.",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v#X209UniformLegacy.x209_is_min_scaled_excess": "D1 current snapshot: frozen with the raw D1 uniformity, it keeps the live A9 x209_scaled_excess. It stays byte-exact; the complete row is Hypergraph.migration.uniform_hypergraph.X209UniformOriginal.x209_is_min_scaled_excess over the A9 frozen modules, certified by x209_is_min_scaled_excess_original_compat."
   },
   "cross_module_consumers": [],
-  "distinct_variants": [
-    {
-      "qualified": "Hypergraph.conjectures.X209.x209_uniform",
-      "path": "hypergraph-theory/theories/conjectures/X209.v",
-      "name": "x209_uniform",
-      "note": "k-uniformity of the family; a premise of the row, not part of the count"
-    }
-  ],
+  "distinct_variants": [],
   "kernel_evidence": "Print All Dependencies of frozen/live statements and Print Assumptions of every certificate, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A9-cut_size/ (outside the repository)"
 }
