@@ -2,6 +2,7 @@
 
 From GTBase Require Export base.
 From Hypergraph.conjectures Require Import X6.
+Require Hypergraph.foundations.hypergraph_regularity.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -17,7 +18,7 @@ Definition x73_hyperdegree (T : finType) (E : {set {set T}}) (v : T) : nat :=
   incidence_degree E v.
 
 Definition x73_regular (T : finType) (E : {set {set T}}) (d : nat) : Prop :=
-  forall v : T, x73_hyperdegree E v = d.
+  Hypergraph.foundations.hypergraph_regularity.hg_regular E d.
 
 (** ** X73 statements ******************************************************)
 
