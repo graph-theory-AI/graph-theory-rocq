@@ -12,6 +12,7 @@
       alternating-walk condition. *)
 
 From GTBase Require Export base.
+From GTBase Require Import walk_usage.
 From Infinite Require Import foundations.igraph.
 From mathcomp Require Import all_boot.
 
@@ -119,14 +120,12 @@ Fixpoint alt_walk_from (G : iDigraph) (b : bool) (x : dV G) (p : seq (dV G)) : P
   | y :: p' => (if b then darc x y else darc y x) /\ alt_walk_from (~~ b) y p'
   end.
 
-(** The alternating walk [x :: p] (polarity [b]) USES the arc [a → c]. *)
-Fixpoint walk_uses (G : iDigraph) (b : bool) (x : dV G) (p : seq (dV G)) (a c : dV G) : Prop :=
-  match p with
-  | [::] => False
-  | y :: p' =>
-      ((b = true /\ x = a /\ y = c) \/ (b = false /\ y = a /\ x = c))
-      \/ walk_uses (~~ b) y p' a c
-  end.
+(** The alternating walk [x :: p] (polarity [b]) USES the arc [a → c].
+    Since the B28 library migration (2026-10-04) a transparent alias of [GTBase.walk_usage.alt_uses] at the
+    vertex type [dV G], the same recursion over an arbitrary Type.  The former Fixpoint is frozen and certified
+    equivalent, by induction on [p], in theories/migration/walk_usage.v. *)
+Definition walk_uses (G : iDigraph) (b : bool) (x : dV G) (p : seq (dV G)) (a c : dV G) : Prop :=
+  alt_uses b x p a c.
 
 (** UNIVERSAL: every pair of arcs lies on a common alternating walk. *)
 Definition universal (G : iDigraph) : Prop :=

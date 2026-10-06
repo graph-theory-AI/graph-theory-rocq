@@ -36568,7 +36568,7 @@
       "declaration_hash": "6627e5682172deaf8b5ee3b1274cc944ca0ccc557543f385e47fb51e686a7af8",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 63,
+      "line": 64,
       "local_dependencies": [],
       "name": "decides",
       "normalized_name": "decides",
@@ -36585,7 +36585,7 @@
       "declaration_hash": "6c1923a37ceff8764310808edf6db05f8348f5450985892aa6b5f2776f5b8232",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 77,
+      "line": 78,
       "local_dependencies": [],
       "name": "runs_in_time",
       "normalized_name": "runs_in_time",
@@ -36602,7 +36602,7 @@
       "declaration_hash": "0fee4b51cba9b5413e746868dd98ec28a6e752b11f0ee3b0fb43fdcc269a39ed",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 80,
+      "line": 81,
       "local_dependencies": [],
       "name": "poly_bounded",
       "normalized_name": "poly_bounded",
@@ -36623,7 +36623,7 @@
         "GTMisc.conjectures.D7.min_eop_spec"
       ],
       "kind": "Definition",
-      "line": 83,
+      "line": 84,
       "local_dependencies": [],
       "name": "dnat_val",
       "normalized_name": "dnat_val",
@@ -36642,7 +36642,7 @@
         "GTMisc.conjectures.D7.algorithm_for_graph_homomorphisms_statement"
       ],
       "kind": "Definition",
-      "line": 88,
+      "line": 89,
       "local_dependencies": [],
       "name": "enc_hom",
       "normalized_name": "enc_hom",
@@ -36661,7 +36661,7 @@
         "GTMisc.conjectures.D7.edp_feasible"
       ],
       "kind": "Definition",
-      "line": 133,
+      "line": 134,
       "local_dependencies": [],
       "name": "walkb",
       "normalized_name": "walkb",
@@ -36673,14 +36673,14 @@
       "signature_shape_hash": "9cb61f000a7252f9e9c9e3cf86ee9b00a15d34a59072ec81b578f3ea63b885cb"
     },
     {
-      "body_hash": "ca98ef9cf9ef75d2c97ef389cafaf219c55de0a2004d6d936e7cdaf248cc6b89",
-      "body_shape_hash": "ca98ef9cf9ef75d2c97ef389cafaf219c55de0a2004d6d936e7cdaf248cc6b89",
-      "declaration_hash": "b7f0ccc487eb01721f92145c97b95f96c4c5bc3edf2b2f8c68e894614c61e531",
+      "body_hash": "74c5de22af9aa33c085a721b5cb0055ce8293b6398d61a208438a52b4ed2e061",
+      "body_shape_hash": "74c5de22af9aa33c085a721b5cb0055ce8293b6398d61a208438a52b4ed2e061",
+      "declaration_hash": "34f784984d81bdbb8a561de76bca188a8e62b26b3cd9ceaa5d48319a6cb03513",
       "direct_consumers": [
         "GTMisc.conjectures.D7.edp_feasible"
       ],
       "kind": "Definition",
-      "line": 172,
+      "line": 173,
       "local_dependencies": [],
       "name": "walk_uses",
       "normalized_name": "walk_uses",
@@ -36699,7 +36699,7 @@
         "GTMisc.conjectures.D7.edp_opt"
       ],
       "kind": "Definition",
-      "line": 175,
+      "line": 180,
       "local_dependencies": [
         "walk_uses",
         "walkb"
@@ -36721,7 +36721,7 @@
         "GTMisc.conjectures.D7.edp_ratio_spec"
       ],
       "kind": "Definition",
-      "line": 184,
+      "line": 189,
       "local_dependencies": [
         "edp_feasible"
       ],
@@ -36744,7 +36744,7 @@
         "GTMisc.conjectures.D7.enc_edp"
       ],
       "kind": "Definition",
-      "line": 190,
+      "line": 195,
       "local_dependencies": [],
       "name": "edp_input",
       "normalized_name": "edp_input",
@@ -36761,7 +36761,7 @@
       "declaration_hash": "23599dd9dcb6c15863994fef2c9654811a0cbd3b82c18b59cf0765cad638f48f",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 192,
+      "line": 197,
       "local_dependencies": [
         "edp_input"
       ],
@@ -36782,7 +36782,7 @@
         "GTMisc.conjectures.D7.maxedp_approx"
       ],
       "kind": "Definition",
-      "line": 193,
+      "line": 198,
       "local_dependencies": [
         "edp_input"
       ],
@@ -36803,7 +36803,7 @@
         "GTMisc.conjectures.D7.maxedp_approx"
       ],
       "kind": "Definition",
-      "line": 198,
+      "line": 203,
       "local_dependencies": [
         "dnat_val",
         "edp_input",
@@ -36826,7 +36826,7 @@
         "GTMisc.conjectures.D7.approximation_ratio_for_maximum_edge_disjoint_paths_statement"
       ],
       "kind": "Definition",
-      "line": 203,
+      "line": 208,
       "local_dependencies": [
         "edp_ratio_spec",
         "enc_edp"
@@ -36848,7 +36848,7 @@
         "GTMisc.conjectures.D7.approximation_ratio_for_maximum_edge_disjoint_paths_statement"
       ],
       "kind": "Definition",
-      "line": 206,
+      "line": 211,
       "local_dependencies": [],
       "name": "little_o_sqrt",
       "normalized_name": "little_o_sqrt",
@@ -36867,7 +36867,7 @@
         "GTMisc.conjectures.D7.h_factor"
       ],
       "kind": "Definition",
-      "line": 244,
+      "line": 249,
       "local_dependencies": [],
       "name": "is_copy",
       "normalized_name": "is_copy",
@@ -36886,7 +36886,7 @@
         "GTMisc.conjectures.D7.hfactor_problem"
       ],
       "kind": "Definition",
-      "line": 275,
+      "line": 280,
       "local_dependencies": [
         "is_copy"
       ],
@@ -36907,7 +36907,7 @@
         "GTMisc.conjectures.D7.hfactor_problem"
       ],
       "kind": "Definition",
-      "line": 282,
+      "line": 287,
       "local_dependencies": [],
       "name": "mindeg_cn",
       "normalized_name": "mindeg_cn",
@@ -36929,7 +36929,7 @@
         "GTMisc.conjectures.D7.poly_reduces"
       ],
       "kind": "Record",
-      "line": 285,
+      "line": 290,
       "local_dependencies": [],
       "name": "problem",
       "normalized_name": "problem",
@@ -36948,7 +36948,7 @@
         "GTMisc.conjectures.D7.NP_hard"
       ],
       "kind": "Definition",
-      "line": 290,
+      "line": 295,
       "local_dependencies": [
         "problem"
       ],
@@ -36969,7 +36969,7 @@
         "GTMisc.conjectures.D7.NP_hard"
       ],
       "kind": "Definition",
-      "line": 296,
+      "line": 301,
       "local_dependencies": [
         "problem"
       ],
@@ -36990,7 +36990,7 @@
         "GTMisc.conjectures.D7.complexity_of_the_h_factor_statement"
       ],
       "kind": "Definition",
-      "line": 303,
+      "line": 308,
       "local_dependencies": [
         "in_NP",
         "poly_reduces",
@@ -37013,7 +37013,7 @@
         "GTMisc.conjectures.D7.complexity_of_the_h_factor_statement"
       ],
       "kind": "Definition",
-      "line": 306,
+      "line": 311,
       "local_dependencies": [
         "h_factor",
         "mindeg_cn",
@@ -37036,7 +37036,7 @@
         "GTMisc.conjectures.D7.fas_ptas_spec"
       ],
       "kind": "Definition",
-      "line": 352,
+      "line": 357,
       "local_dependencies": [],
       "name": "is_tournament",
       "normalized_name": "is_tournament",
@@ -37055,7 +37055,7 @@
         "GTMisc.conjectures.D7.fas_opt"
       ],
       "kind": "Definition",
-      "line": 384,
+      "line": 389,
       "local_dependencies": [],
       "name": "back_arcs",
       "normalized_name": "back_arcs",
@@ -37074,7 +37074,7 @@
         "GTMisc.conjectures.D7.fas_ptas_spec"
       ],
       "kind": "Definition",
-      "line": 387,
+      "line": 392,
       "local_dependencies": [
         "back_arcs"
       ],
@@ -37097,7 +37097,7 @@
         "GTMisc.conjectures.D7.t_vsize"
       ],
       "kind": "Definition",
-      "line": 391,
+      "line": 396,
       "local_dependencies": [],
       "name": "t_input",
       "normalized_name": "t_input",
@@ -37114,7 +37114,7 @@
       "declaration_hash": "5458a55daa41e23e3bc02d18c8ae643bf805ab47c52c4ed2961ee75ed4297c60",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 393,
+      "line": 398,
       "local_dependencies": [
         "t_input"
       ],
@@ -37135,7 +37135,7 @@
         "GTMisc.conjectures.D7.ptas_for_feedback_arc_set_in_tournaments_statement"
       ],
       "kind": "Definition",
-      "line": 394,
+      "line": 399,
       "local_dependencies": [
         "t_input"
       ],
@@ -37156,7 +37156,7 @@
         "GTMisc.conjectures.D7.ptas_for_feedback_arc_set_in_tournaments_statement"
       ],
       "kind": "Definition",
-      "line": 398,
+      "line": 403,
       "local_dependencies": [
         "dnat_val",
         "fas_opt",
@@ -37180,7 +37180,7 @@
         "GTMisc.conjectures.D7.edge_outerplanar"
       ],
       "kind": "Definition",
-      "line": 434,
+      "line": 439,
       "local_dependencies": [],
       "name": "outerplanar_w",
       "normalized_name": "outerplanar_w",
@@ -37200,7 +37200,7 @@
         "GTMisc.conjectures.D7.level_rel_sym"
       ],
       "kind": "Definition",
-      "line": 473,
+      "line": 478,
       "local_dependencies": [],
       "name": "level_rel",
       "normalized_name": "level_rel",
@@ -37219,7 +37219,7 @@
         "GTMisc.conjectures.D7.level_graph"
       ],
       "kind": "Lemma",
-      "line": 478,
+      "line": 483,
       "local_dependencies": [
         "level_rel"
       ],
@@ -37240,7 +37240,7 @@
         "GTMisc.conjectures.D7.level_graph"
       ],
       "kind": "Lemma",
-      "line": 481,
+      "line": 486,
       "local_dependencies": [
         "level_rel"
       ],
@@ -37261,7 +37261,7 @@
         "GTMisc.conjectures.D7.edge_outerplanar"
       ],
       "kind": "Definition",
-      "line": 484,
+      "line": 489,
       "local_dependencies": [
         "level_rel_irr",
         "level_rel_sym"
@@ -37283,7 +37283,7 @@
         "GTMisc.conjectures.D7.min_edge_outerplanar"
       ],
       "kind": "Definition",
-      "line": 486,
+      "line": 491,
       "local_dependencies": [
         "level_graph",
         "outerplanar_w"
@@ -37305,7 +37305,7 @@
         "GTMisc.conjectures.D7.min_eop_spec"
       ],
       "kind": "Definition",
-      "line": 492,
+      "line": 497,
       "local_dependencies": [
         "edge_outerplanar"
       ],
@@ -37326,7 +37326,7 @@
         "GTMisc.conjectures.D7.finding_k_edge_outerplanar_graph_embeddings_statement"
       ],
       "kind": "Definition",
-      "line": 495,
+      "line": 500,
       "local_dependencies": [
         "dnat_val",
         "min_edge_outerplanar"
@@ -48028,7 +48028,7 @@
         "Infinite.conjectures.D4inf4.strongly_minimal_cover"
       ],
       "kind": "Record",
-      "line": 21,
+      "line": 22,
       "local_dependencies": [],
       "name": "iHypergraph",
       "normalized_name": "iHypergraph",
@@ -48047,7 +48047,7 @@
         "Infinite.conjectures.D4inf4.strong_matchings_and_covers_statement"
       ],
       "kind": "Definition",
-      "line": 29,
+      "line": 30,
       "local_dependencies": [
         "iHypergraph"
       ],
@@ -48068,7 +48068,7 @@
         "Infinite.conjectures.D4inf4.strongly_maximal_matching"
       ],
       "kind": "Definition",
-      "line": 33,
+      "line": 34,
       "local_dependencies": [
         "iHypergraph"
       ],
@@ -48089,7 +48089,7 @@
         "Infinite.conjectures.D4inf4.strongly_minimal_cover"
       ],
       "kind": "Definition",
-      "line": 37,
+      "line": 38,
       "local_dependencies": [
         "iHypergraph"
       ],
@@ -48110,7 +48110,7 @@
         "Infinite.conjectures.D4inf4.strong_matchings_and_covers_statement"
       ],
       "kind": "Definition",
-      "line": 41,
+      "line": 42,
       "local_dependencies": [
         "hmatching",
         "iHypergraph"
@@ -48132,7 +48132,7 @@
         "Infinite.conjectures.D4inf4.strong_matchings_and_covers_statement"
       ],
       "kind": "Definition",
-      "line": 47,
+      "line": 48,
       "local_dependencies": [
         "hcover",
         "iHypergraph"
@@ -48164,7 +48164,7 @@
         "Infinite.conjectures.D4inf4.walk_uses"
       ],
       "kind": "Record",
-      "line": 84,
+      "line": 85,
       "local_dependencies": [],
       "name": "iDigraph",
       "normalized_name": "iDigraph",
@@ -48183,7 +48183,7 @@
         "Infinite.conjectures.D4inf4.highly_arc_transitive"
       ],
       "kind": "Definition",
-      "line": 92,
+      "line": 93,
       "local_dependencies": [
         "iDigraph"
       ],
@@ -48204,7 +48204,7 @@
         "Infinite.conjectures.D4inf4.highly_arc_transitive"
       ],
       "kind": "Fixpoint",
-      "line": 96,
+      "line": 97,
       "local_dependencies": [
         "iDigraph"
       ],
@@ -48225,7 +48225,7 @@
         "Infinite.conjectures.D4inf4.universal_highly_arc_transitive_digraphs_statement"
       ],
       "kind": "Definition",
-      "line": 106,
+      "line": 107,
       "local_dependencies": [
         "darc_path",
         "dautomorphism",
@@ -48248,7 +48248,7 @@
         "Infinite.conjectures.D4inf4.universal"
       ],
       "kind": "Fixpoint",
-      "line": 113,
+      "line": 114,
       "local_dependencies": [
         "iDigraph"
       ],
@@ -48262,14 +48262,14 @@
       "signature_shape_hash": "9b72933f0ea49636d3227f38b01e02f5a99a4409a521f0ebfdb711877faaf926"
     },
     {
-      "body_hash": "080ba7d3877c2eb278853a1e97cebb467742c193f5986904fbab0230240b1f63",
-      "body_shape_hash": "080ba7d3877c2eb278853a1e97cebb467742c193f5986904fbab0230240b1f63",
-      "declaration_hash": "47ea7cea532310df1f9495e8d0abdd4ab0bf0d7a0657345a02b0e70b03ade533",
+      "body_hash": "240e1f4b0e7d6f04e6ab5f4d8f191c440cc7e083e881a9d7ef84fe54c6fdd103",
+      "body_shape_hash": "240e1f4b0e7d6f04e6ab5f4d8f191c440cc7e083e881a9d7ef84fe54c6fdd103",
+      "declaration_hash": "a22965e63945b673178ae3622a8b8732939d665c4419aea9a1cb0805e6ab0229",
       "direct_consumers": [
         "Infinite.conjectures.D4inf4.universal"
       ],
-      "kind": "Fixpoint",
-      "line": 121,
+      "kind": "Definition",
+      "line": 122,
       "local_dependencies": [
         "iDigraph"
       ],
@@ -48290,7 +48290,7 @@
         "Infinite.conjectures.D4inf4.universal_highly_arc_transitive_digraphs_statement"
       ],
       "kind": "Definition",
-      "line": 130,
+      "line": 129,
       "local_dependencies": [
         "alt_walk_from",
         "iDigraph",
@@ -48313,7 +48313,7 @@
         "Infinite.conjectures.D4inf4.universal_highly_arc_transitive_digraphs_statement"
       ],
       "kind": "Definition",
-      "line": 136,
+      "line": 135,
       "local_dependencies": [
         "iDigraph"
       ],
@@ -48334,7 +48334,7 @@
         "Infinite.conjectures.D4inf4.universal_highly_arc_transitive_digraphs_statement"
       ],
       "kind": "Definition",
-      "line": 142,
+      "line": 141,
       "local_dependencies": [
         "iDigraph"
       ],
@@ -48355,7 +48355,7 @@
         "Infinite.conjectures.D4inf4.universal_highly_arc_transitive_digraphs_statement"
       ],
       "kind": "Definition",
-      "line": 147,
+      "line": 146,
       "local_dependencies": [
         "iDigraph"
       ],
@@ -48376,7 +48376,7 @@
         "Infinite.conjectures.D4inf4.universal_highly_arc_transitive_digraphs_statement"
       ],
       "kind": "Definition",
-      "line": 148,
+      "line": 147,
       "local_dependencies": [
         "iDigraph"
       ],
