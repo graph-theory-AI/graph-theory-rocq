@@ -3,6 +3,7 @@
 From GTBase Require Export base.
 Require Hypergraph.foundations.hypergraph_copies.
 Require Hypergraph.foundations.hypergraph_forcing.
+Require Hypergraph.foundations.hedgehog.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -19,15 +20,15 @@ Unset Printing Implicit Defensive.
     spike lies in exactly one edge, each edge has 3 distinct vertices, so
     [H_t] is 3-uniform with body [t] and [C(t,2)] spikes/edges. *)
 
-Definition x117_spike (t : nat) : Type := {p : 'I_t * 'I_t | p.1 < p.2}.
+Definition x117_spike (t : nat) : Type := Hypergraph.foundations.hedgehog.hedgehog_spike t.
 
-Definition x117_vertex (t : nat) : Type := ('I_t + x117_spike t)%type.
+Definition x117_vertex (t : nat) : Type := Hypergraph.foundations.hedgehog.hedgehog_vertex t.
 
 Definition x117_edge (t : nat) (s : x117_spike t) : {set x117_vertex t} :=
-  [set inl (sval s).1; inl (sval s).2; inr s].
+  Hypergraph.foundations.hedgehog.hedgehog_edge s.
 
 Definition x117_edges (t : nat) : {set {set x117_vertex t}} :=
-  [set x117_edge s | s : x117_spike t].
+  Hypergraph.foundations.hedgehog.hedgehog_edges t.
 
 (** *** Two-colour monochromatic copy in the complete 3-uniform host. *)
 

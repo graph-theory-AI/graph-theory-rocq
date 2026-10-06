@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "family": "hedgehog",
+  "modules": {
+    "Hypergraph.foundations.hedgehog": {
+      "path": "hypergraph-theory/theories/foundations/hedgehog.v",
+      "overrides": {
+        "hedgehog_spike": {
+          "verdict": "FAITHFUL",
+          "note": "Ordered pairs (i, j) of I_t with i < j as a Boolean-witness subtype: one spike per unordered pair."
+        },
+        "hedgehog_vertex": {
+          "verdict": "FAITHFUL",
+          "note": "Sum carrier I_t + hedgehog_spike t: body vertices inl i and spike vertices inr s."
+        },
+        "hedgehog_edge": {
+          "verdict": "FAITHFUL",
+          "note": "The tagged triple [set inl i; inl j; inr s] of the spike s = (i, j); always three vertices."
+        },
+        "hedgehog_edges": {
+          "verdict": "FAITHFUL",
+          "note": "Image family of hedgehog_edge over all spikes: one edge per spike, rank three, empty for t < 2."
+        }
+      },
+      "machine_evidence": [
+        "hedgehog_spike_neq",
+        "hedgehog_edge_spike",
+        "hedgehog_edge_inj",
+        "card_hedgehog_edge",
+        "hedgehog_edgesP",
+        "hedgehog_edges_card",
+        "card_hedgehog_edges",
+        "card_hedgehog_vertex"
+      ]
+    }
+  }
+}
