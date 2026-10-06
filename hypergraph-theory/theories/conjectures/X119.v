@@ -4,6 +4,7 @@ From GTBase Require Export base.
 From GTBase Require Import hypergraph_uniformity.
 Require Hypergraph.foundations.hypergraph_copies.
 Require Hypergraph.foundations.hypergraph_forcing.
+Require Hypergraph.foundations.hypergraph_ramsey.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -39,8 +40,7 @@ Definition x119_forces_mono
     size forcing a monochromatic copy of [H = (T,E)]. *)
 Definition x119_ramsey_number
     (T : finType) (E : {set {set T}}) (q R : nat) : Prop :=
-  x119_forces_mono E q R /\
-  forall N : nat, x119_forces_mono E q N -> R <= N.
+  Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number E 'I_q R.
 
 (** Integer ceiling square root: the least [s] with [m <= s^2].  Chosen as an
     upper approximation of [sqrt m] so the tower bound stays an honest upper

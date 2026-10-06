@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "family": "ramsey-number",
+  "modules": {
+    "Hypergraph.foundations.hypergraph_ramsey": {
+      "path": "hypergraph-theory/theories/foundations/hypergraph_ramsey.v",
+      "overrides": {
+        "hg_ramsey_number": {
+          "verdict": "FAITHFUL",
+          "note": "Forcing at the supplied R and minimality against every forcing host size (D5 hg_forces_mono); arbitrary carrier, family and palette; unique; empty palette minimum 0; with a colour and the empty family minimum #|T|."
+        }
+      },
+      "machine_evidence": [
+        "hg_ramsey_number_forces",
+        "hg_ramsey_number_min",
+        "hg_ramsey_number_uniq",
+        "hg_ramsey_number_empty_palette",
+        "hg_forces_mono_set0",
+        "hg_ramsey_number_set0"
+      ]
+    }
+  }
+}

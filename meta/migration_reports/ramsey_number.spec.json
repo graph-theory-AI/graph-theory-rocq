@@ -1,0 +1,303 @@
+{
+  "family": "ramsey-number",
+  "canonical_name": "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number",
+  "canonical_short_name": "hg_ramsey_number",
+  "relation": "Attained hypergraph Ramsey number: hg_ramsey_number E C R holds when the host I_R forces a monochromatic copy of the pattern E : {set {set T}} under the palette C : Type (D5 hg_forces_mono) and every forcing host size N has R <= N. R is supplied: no existence theorem, choice or minimum extraction; arbitrary carrier, family and palette, no uniformity, nonempty-family, inhabited-palette or positivity guard (empty palette: minimum 0; a colour and the empty family: minimum #|T|). The Extremal graph-arrow Ramsey numbers (X195, X215) are separate interfaces.",
+  "baseline_commit": "eae6c3ae123de43cad5ac0675ee25ab3f48c7b10",
+  "namespaces": {
+    "hypergraph-theory": "Hypergraph"
+  },
+  "certificate_files": [
+    "hypergraph-theory/theories/foundations/hypergraph_ramsey.v",
+    "hypergraph-theory/theories/migration/ramsey_number.v",
+    "hypergraph-theory/theories/migration/hedgehog.v",
+    "hypergraph-theory/theories/migration/image_edge.v",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v"
+  ],
+  "extra_certificates": [
+    "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_forces",
+    "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_min",
+    "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_uniq",
+    "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_empty_palette",
+    "Hypergraph.foundations.hypergraph_ramsey.hg_forces_mono_set0",
+    "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number_set0"
+  ],
+  "downstream_client": "hypergraph-theory/theories/examples/ramsey_numbers.v",
+  "summary": [
+    "D10 turns X117 x117_ramsey_number and X119 x119_ramsey_number into aliases of the new public Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number E C R: forcing at the supplied R and minimality over the D5 forcing view, with bool (X117, the hedgehog family) and I_q (X119, arbitrary E) palettes; headers and implicit arguments unchanged; no guard, choice or existence theorem.",
+    "Frozen at the D9 pin in hypergraph-theory/theories/migration/ramsey_number.v: both sources (keeping the live D5 forcing and D7 hedgehog aliases) and both complete current rows (X117 hedgehog bounds with positive e1/e2 and truncated subtraction; X119 tower with q >= 2, cq before T/E, live D1 uniformity, no-isolated guard and the opaque x119_sqrt). The complete histories are the existing deepest Originals, reused unchanged with their genuine iff: D7 X117HedgehogOriginal and D3 X119ImageOriginal, with their 13 raw supports (historical role). 4 owned + 15 borrowed mappings; 4 whole iff.",
+    "No older proof needed adaptation; the ten reverse files compile unchanged. Extremal X195/X215 x195/x215_ramsey_number are deferred distinct graph-arrow interfaces of this owner, untouched. Public client hypergraph-theory/theories/examples/ramsey_numbers.v."
+  ],
+  "kernel_evidence": "Exact types/implicit status of both sources, the four whole iff, all old declarations against eae6c3a, the 133 reverse headers, Print Assumptions, About-resolved strict closures and negatives, through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D10-by-lancelot/ (outside the repository)",
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X117.x117_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/ramsey_number.v",
+      "frozen": "X117RamseyLegacy.x117_ramsey_number",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.ramsey_number.x117_ramsey_number_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number (x117_edges t) bool R",
+      "binding_note": "Frozen at the D9 pin eae6c3a, the family baseline where the X117/X119 texts are bound."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X117.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "conlon_fox_rodl_hedgehog_ramsey_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/ramsey_number.v",
+      "frozen": "X117RamseyLegacy.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "substitutions": {
+        "x117_ramsey_number": "X117RamseyLegacy.x117_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.ramsey_number.conlon_fox_rodl_hedgehog_ramsey_statement_compat",
+      "corpus": "v2",
+      "binding_note": "Frozen at the D9 pin eae6c3a, the family baseline where the X117/X119 texts are bound."
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X119.x119_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/ramsey_number.v",
+      "frozen": "X119RamseyLegacy.x119_ramsey_number",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.ramsey_number.x119_ramsey_number_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number E 'I_q R",
+      "binding_note": "Frozen at the D9 pin eae6c3a, the family baseline where the X117/X119 texts are bound."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/ramsey_number.v",
+      "frozen": "X119RamseyLegacy.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "substitutions": {
+        "x119_ramsey_number": "X119RamseyLegacy.x119_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.ramsey_number.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_compat",
+      "corpus": "v2",
+      "binding_note": "Frozen at the D9 pin eae6c3a, the family baseline where the X117/X119 texts are bound."
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_spike",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_spike",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "HedgehogLegacy.x117_spike",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.hedgehog.x117_spike_compat",
+      "commit": "eaa6564c3788f6e3e2db7a7bddbe9adba157c334"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_vertex",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_vertex",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "HedgehogLegacy.x117_vertex",
+      "substitutions": {
+        "x117_spike": "HedgehogLegacy.x117_spike"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.x117_vertex_compat",
+      "commit": "eaa6564c3788f6e3e2db7a7bddbe9adba157c334"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_edge",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_edge",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "HedgehogLegacy.x117_edge",
+      "substitutions": {
+        "x117_spike": "HedgehogLegacy.x117_spike",
+        "x117_vertex": "HedgehogLegacy.x117_vertex"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.x117_edge_compat",
+      "commit": "eaa6564c3788f6e3e2db7a7bddbe9adba157c334"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_edges",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_edges",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "HedgehogLegacy.x117_edges",
+      "substitutions": {
+        "x117_spike": "HedgehogLegacy.x117_spike",
+        "x117_vertex": "HedgehogLegacy.x117_vertex",
+        "x117_edge": "HedgehogLegacy.x117_edge"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.x117_edges_compat",
+      "commit": "eaa6564c3788f6e3e2db7a7bddbe9adba157c334"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "X117HedgehogOriginal.x117_ramsey_number",
+      "substitutions": {
+        "x117_edge": "HedgehogLegacy.x117_edge",
+        "x117_edges": "HedgehogLegacy.x117_edges",
+        "x117_forces_mono": "IM.X117ImageLegacy.x117_forces_mono"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.x117_ramsey_number_original_compat",
+      "commit": "eaa6564c3788f6e3e2db7a7bddbe9adba157c334"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X117.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "conlon_fox_rodl_hedgehog_ramsey_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "substitutions": {
+        "x117_ramsey_number": "X117HedgehogOriginal.x117_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.conlon_fox_rodl_hedgehog_ramsey_statement_original_compat",
+      "commit": "eaa6564c3788f6e3e2db7a7bddbe9adba157c334",
+      "corpus": "v2",
+      "binding_note": "Existing deepest complete Original of hedgehog.spec.json, reused unchanged with its genuine iff; effective source text eaa6564c3788f6e3e2db7a7bddbe9adba157c334."
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_image_edge",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_image_edge",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "ImageLegacy.x117_image_edge",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.image_edge.x117_image_edge_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_image_edge",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_image_edge",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "ImageLegacy.x119_image_edge",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.image_edge.x119_image_edge_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_monochromatic_copy",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_monochromatic_copy",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X117ImageLegacy.x117_monochromatic_copy",
+      "substitutions": {
+        "x117_image_edge": "ImageLegacy.x117_image_edge"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x117_monochromatic_copy_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_forces_mono",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_forces_mono",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X117ImageLegacy.x117_forces_mono",
+      "substitutions": {
+        "x117_monochromatic_copy": "X117ImageLegacy.x117_monochromatic_copy"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x117_forces_mono_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_monochromatic_copy",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_monochromatic_copy",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X119ImageLegacy.x119_monochromatic_copy",
+      "substitutions": {
+        "x119_image_edge": "ImageLegacy.x119_image_edge"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x119_monochromatic_copy_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_forces_mono",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_forces_mono",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X119ImageLegacy.x119_forces_mono",
+      "substitutions": {
+        "x119_monochromatic_copy": "X119ImageLegacy.x119_monochromatic_copy"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x119_forces_mono_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X119ImageLegacy.x119_ramsey_number",
+      "substitutions": {
+        "x119_forces_mono": "X119ImageLegacy.x119_forces_mono"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x119_ramsey_number_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X119ImageOriginal.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "substitutions": {
+        "x119_uniform": "UH.UniformLegacy.x119_uniform",
+        "x119_ramsey_number": "X119ImageLegacy.x119_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.image_edge.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2",
+      "binding_note": "Existing deepest complete Original of image_edge.spec.json, reused unchanged with its genuine iff; effective source text 9e030727db115917ae077ac07a8fc6aa68661f73."
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x119_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x119_uniform_compat",
+      "commit": "3be65eed7084abfae36dee74f7117b598325bc4c"
+    }
+  ],
+  "known_stale_snapshots": {
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v#X119UniformLegacy.conlon_fox_sudakov_three_uniform_ramsey_tower_statement": "D1 current snapshot: frozen with D1's raw x119_uniform, it keeps the live x119_ramsey_number, now the D10 alias of hg_ramsey_number. It stays byte-exact; the complete row is the existing D3 Hypergraph.migration.image_edge.X119ImageOriginal.conlon_fox_sudakov_three_uniform_ramsey_tower_statement (certificate conlon_fox_sudakov_three_uniform_ramsey_tower_statement_original_compat), reused by D10."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "Extremal.conjectures.X195.x195_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/X195.v",
+      "name": "x195_ramsey_number",
+      "representation": "simple-graph family arrow, attained n and no smaller arrowing host",
+      "note": "Deferred graph-Ramsey class of this owner; arrows, graph copies and rows untouched."
+    },
+    {
+      "qualified": "Extremal.conjectures.X215.x215_ramsey_number",
+      "path": "extremal-graph-theory/theories/conjectures/X215.v",
+      "name": "x215_ramsey_number",
+      "representation": "Boolean diagonal clique arrow, attained N and no smaller arrowing host",
+      "note": "Deferred graph-Ramsey class of this owner; the blocked rational-limit row and the source untouched."
+    }
+  ]
+}
