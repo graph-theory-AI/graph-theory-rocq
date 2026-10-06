@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py matching --details /tmp/migrati
 
 - Canonical: `GraphTheory.connectivity.matching`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 5 helpers, 11 statements, 26 frozen objects, 109 recorded references.
-- Source checks: 259/259 pass; consistent.
+- Scope: 7 helpers, 16 statements, 48 frozen objects, 188 recorded references.
+- Source checks: 447/447 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -22,11 +22,16 @@ Full evidence: `python3 meta/migration_report.py matching --details /tmp/migrati
 | `Extremal.conjectures.X180.log_degree_multitasker_exists_statement` / arxiv:1611.02400#01 | `Extremal.migration.matching.log_degree_multitasker_exists_statement_compat` |
 | `Digraph.conjectures.path_fas.matchingFAS_iff_dw1_statement` / no corpus row | `Digraph.migration.matching.matchingFAS_iff_dw1_statement_compat` |
 | `Packing.conjectures.U9.matchings_extends_to_hamilton_cycles_in_hypercubes_statement` / opg:matchings_extends_to_hamilton_cycles_in_hypercubes | `Packing.migration.matching.matchings_extends_to_hamilton_cycles_in_hypercubes_statement_compat` |
+| `Hypergraph.conjectures.U12.rysers_statement` / opg:rysers_conjecture | `Hypergraph.migration.matching.rysers_statement_compat` |
+| `Hypergraph.conjectures.X6.lovasz_r_partite_matching_deletion_statement` / studies:std_lov_sz_conjecture_on_r_partite_hypergraph_matchi | `Hypergraph.migration.matching.lovasz_r_partite_matching_deletion_statement_compat` |
+| `Hypergraph.conjectures.X6.r_partite_matching_deletion_tradeoff_statement` / arxiv:2505.05339#02 | `Hypergraph.migration.matching.r_partite_matching_deletion_tradeoff_statement_compat` |
+| `Hypergraph.conjectures.X6.erdos_matching_extremal_formula_statement` / erdos:1020 | `Hypergraph.migration.matching.erdos_matching_extremal_formula_statement_compat` |
+| `Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement` / studies:std_aharoni_charbit_howard_conjecture_on_matchings_i | `Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_compat` |
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py matching --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `Packing.conjectures.X15alone.x15_matching`, `Hypergraph.conjectures.X6.x6_matching`.
+Excluded distinct variants: `Packing.conjectures.X15alone.x15_matching`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement`, `graph-theory-misc/theories/migration/subcubic.v#X14Legacy.subcubic_matching_lower_bound_statement`, `packing-theory/theories/migration/cycle_edges.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement`, `packing-theory/theories/migration/hypercubes.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_count.v#X180Legacy.log_degree_multitasker_exists_statement`, `graph-theory-misc/theories/migration/subcubic.v#X14Legacy.subcubic_matching_lower_bound_statement`, `packing-theory/theories/migration/cycle_edges.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement`, `packing-theory/theories/migration/hypercubes.v#U9Legacy.matchings_extends_to_hamilton_cycles_in_hypercubes_statement`, `hypergraph-theory/theories/migration/partite_uniform.v#X6PartiteLegacy.lovasz_r_partite_matching_deletion_statement`, `hypergraph-theory/theories/migration/incidence_degree.v#X73Legacy.regular_tripartite_hypergraph_matching_lower_bound_statement`, `hypergraph-theory/theories/migration/uniform_hypergraph.v#X6UniformLegacy.erdos_matching_extremal_formula_statement`, `hypergraph-theory/theories/migration/partite_uniform.v#U12PartiteLegacy.rysers_statement`, `hypergraph-theory/theories/migration/partite_uniform.v#X73PartiteOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement`, `hypergraph-theory/theories/migration/uniform_hypergraph.v#X6UniformLegacy.x6_extremal_no_k_matching`, `hypergraph-theory/theories/migration/partite_uniform.v#X73PartiteLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement`, `hypergraph-theory/theories/migration/partite_uniform.v#X6PartiteLegacy.r_partite_matching_deletion_tradeoff_statement`.

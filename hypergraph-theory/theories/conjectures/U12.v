@@ -42,6 +42,7 @@
 From GTBase Require Export base.
 From GTBase Require Import hypergraph_uniformity.
 Require Hypergraph.foundations.hypergraph.
+Require Hypergraph.foundations.hypergraph_matchings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -262,8 +263,7 @@ Definition r_partite_uniform (T : finType) (r : nat) (part : T -> 'I_r)
 
 (** A matching: a subfamily of pairwise-disjoint hyperedges. *)
 Definition hg_matching (T : finType) (M E : {set {set T}}) : Prop :=
-  M \subset E /\
-  {in M &, forall e f : {set T}, e != f -> [disjoint e & f]}.
+  Hypergraph.foundations.hypergraph_matchings.hg_matching M E.
 
 (** [nu] is the matching number ν(H): the maximum size of a matching. *)
 Definition is_matching_number (T : finType) (E : {set {set T}}) (nu : nat) : Prop :=

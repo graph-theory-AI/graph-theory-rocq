@@ -22,6 +22,28 @@
         "matching_graph_forest",
         "matching_graph_forestP"
       ]
+    },
+    "Hypergraph.foundations.hypergraph_matchings": {
+      "path": "hypergraph-theory/theories/foundations/hypergraph_matchings.v",
+      "overrides": {
+        "hg_matching": {
+          "verdict": "FAITHFUL",
+          "note": "M is a subfamily of the hyperedge family E and its distinct members are pairwise disjoint (MathComp trivIset, hg_matchingP); arbitrary finite carrier, M before E; the empty hyperedge is allowed, no uniformity, positivity, covering or maximality guard."
+        }
+      },
+      "machine_evidence": [
+        "hg_matchingP",
+        "hg_matching_sub",
+        "hg_matching_trivIset",
+        "hg_matching_card",
+        "hg_matching0",
+        "hg_matching_set0E",
+        "hg_matching1",
+        "hg_matchingS",
+        "hg_matching_ambient",
+        "hg_matching_overlap",
+        "hg_matching_set0U"
+      ]
     }
   }
 }
