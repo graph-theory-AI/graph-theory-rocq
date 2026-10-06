@@ -13,6 +13,7 @@
 
 From GTBase Require Export base.
 From Infinite Require Import foundations.igraph.
+Require Infinite.foundations.regularity.
 From mathcomp Require Import all_boot.
 From mathcomp Require Import all_algebra.
 Import GRing.Theory.
@@ -90,8 +91,7 @@ Definition end_devouring_rays_statement : Prop :=
 Definition locally_finite (G : iGraph) : Prop :=
   forall x : iV G, finite_sub (fun w => iadj x w).
 Definition regular (r : nat) (G : iGraph) : Prop :=
-  forall x : iV G, exists e : 'I_r -> iV G,
-    injective e /\ (forall w, iadj x w <-> exists i, e i = w).
+  Infinite.foundations.regularity.iregular r G.
 Definition one_ended (G : iGraph) : Prop :=
   (exists r : nat -> iV G, ray r) /\
   (forall r r' : nat -> iV G, ray r -> ray r' -> end_equiv r r').
