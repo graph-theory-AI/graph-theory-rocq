@@ -55,6 +55,7 @@
 
 From GraphTheory Require Import minor.
 From GTBase Require Export base.
+From GTBase Require Import walk_usage.
 From GTMisc.foundations Require Export complexity.
 
 Set Implicit Arguments.
@@ -170,8 +171,12 @@ Definition algorithm_for_graph_homomorphisms_statement : Prop :=
 Definition walkb {G : sgraph} (s t : G) (p : seq G) : bool :=
   (p != [::]) && pathp s t p.
 
+(** Since the B28 library migration (2026-10-04) a transparent alias of [GTBase.walk_usage.seq_consecutiveb]
+    on [s :: p], the Boolean view of [GTBase.walks_paths.seq_consecutive]: [u] and [v] are adjacent entries of
+    [s :: p] in either order, the same body by conversion.  The former body is frozen in
+    theories/migration/walk_usage.v. *)
 Definition walk_uses {G : sgraph} (s : G) (p : seq G) (u v : G) : bool :=
-  ((u, v) \in zip (s :: p) p) || ((v, u) \in zip (s :: p) p).
+  seq_consecutiveb (s :: p) u v.
 
 Definition edp_feasible {G : sgraph} {D : seq (G * G)}
   (S : {set 'I_(size D)}) (route : 'I_(size D) -> seq G) : Prop :=

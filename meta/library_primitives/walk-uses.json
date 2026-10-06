@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "family": "walk-uses",
+  "primitive": {
+    "canonical_name": "GTBase.walk_usage.seq_consecutiveb",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "walk_uses"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.D7.walk_uses",
+      "Infinite.conjectures.D4inf4.walk_uses"
+    ],
+    "consumers_remaining": 2,
+    "relation": "two separate public views of GTBase.walk_usage, with no identification between them. Finite undirected pair occurrence: GTMisc.D7.walk_uses s p u v is seq_consecutiveb (s :: p) u v by conversion, the Boolean form of B3's GTBase.walks_paths.seq_consecutive (same body with || for \\/, reflected by seq_consecutivebP, equal to MathComp's infix test by seq_consecutivebE): u and v are adjacent entries of s :: p in either order; no edge, nonempty-walk, uniqueness, distinct-endpoint or terminal premise; an empty tail uses nothing and a repeated adjacent value uses its loop pair. Alternating oriented usage: Infinite.D4inf4.walk_uses b x p a c is alt_uses b x p a c over the vertex Type of an iDigraph (an explicit iff by induction): some step of x :: p, read with polarity b flipping at every step, is (a, c) in its current orientation; Prop with propositional equality, no arc, no alt_walk_from validity, no eqType, choice or inhabitance. On an eqType carrier alt_uses implies consecutive occurrence (alt_uses_consecutive); the converse fails. Distinct and untouched: Cycle.D1.edp_feasible, an edge-labelled multigraph routing homonym of a D7 chain name.",
+    "semantic_classes": {
+      "finite-undirected-pair": {
+        "members": [
+          "GTMisc.conjectures.D7.walk_uses"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "GTMisc.migration.walk_usage.walk_uses_compat"
+        ],
+        "note": "public contract GTBase.walk_usage.seq_consecutiveb, the Boolean view of B3's seq_consecutive (B3 keeps its ownership and declarations); D7's MaxEDP chain (edp_feasible, edp_opt, edp_ratio_spec, maxedp_approx) and row are frozen over it with both feasibility clauses, the Wagner guard and the same program for realization and cost."
+      },
+      "alternating-oriented": {
+        "members": [
+          "Infinite.conjectures.D4inf4.walk_uses"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Infinite.migration.walk_usage.walk_uses_compat"
+        ],
+        "note": "public contract GTBase.walk_usage.alt_uses over an arbitrary Type; D4inf4's universal chain and row are frozen over it with the same b, x, p witnessing alternating validity and both usages, and the three nonvacuity guards kept."
+      }
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.walk_usage.approximation_ratio_for_maximum_edge_disjoint_paths_statement_compat",
+      "GTMisc.migration.walk_usage.edp_feasible_compat",
+      "GTMisc.migration.walk_usage.edp_opt_compat",
+      "GTMisc.migration.walk_usage.edp_ratio_spec_compat",
+      "GTMisc.migration.walk_usage.maxedp_approx_compat",
+      "GTMisc.migration.walk_usage.walk_uses_compat",
+      "Infinite.migration.walk_usage.universal_compat",
+      "Infinite.migration.walk_usage.universal_highly_arc_transitive_digraphs_statement_compat",
+      "Infinite.migration.walk_usage.walk_uses_compat"
+    ],
+    "api_theorems": [
+      "GTBase.walk_usage.seq_consecutivebP",
+      "GTBase.walk_usage.seq_consecutivebE",
+      "GTBase.walk_usage.seq_consecutiveb_sym",
+      "GTBase.walk_usage.seq_consecutiveb_nil",
+      "GTBase.walk_usage.seq_consecutiveb_seq1",
+      "GTBase.walk_usage.seq_consecutiveb_cons2",
+      "GTBase.walk_usage.seq_consecutiveb_repeat",
+      "GTBase.walk_usage.alt_uses_nil",
+      "GTBase.walk_usage.alt_uses_cons",
+      "GTBase.walk_usage.alt_uses_head_true",
+      "GTBase.walk_usage.alt_uses_head_false",
+      "GTBase.walk_usage.alt_uses_step",
+      "GTBase.walk_usage.alt_uses1",
+      "GTBase.walk_usage.alt_uses_true1",
+      "GTBase.walk_usage.alt_uses_cat",
+      "GTBase.walk_usage.alt_uses_consecutive"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.mgraph",
+        "mathcomp.boot.seq",
+        "mathcomp.boot.path",
+        "GTBase.walks_paths"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "No named upstream predicate matches either view. MathComp's infix gives the finite test's value (seq_consecutivebE) and B3's seq_consecutive is its Prop contract, reused rather than enrolled; GraphTheory's multigraph walks are edge-labelled sequences, not the arbitrary-Type alternating raw vertex recurrence. GTBase.walk_usage is not re-exported by GTBase.base.",
+      "audited_at": "2026-10-04"
+    },
+    "migration_report": "meta/migration_reports/walk_usage.md",
+    "reviewed_by": "matching_scope",
+    "migration_spec": "meta/migration_reports/walk_usage.spec.json",
+    "downstream_client": "base/theories/examples/walk_usage.v",
+    "foundation_fidelity": "meta/foundation_fidelity/walk-uses.json",
+    "reviewed_commit": "3cf14c26f0f92868e8406575845813192820e410",
+    "independent_review": "meta/migration_reviews/walk_usage.md"
+  }
+}

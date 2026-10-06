@@ -167,7 +167,7 @@ Proof. by rewrite /walkb /pathp /= eqxx. Qed.
     edge); [K2]'s walk uses its only edge. *)
 Lemma walk_uses_sym (G : sgraph) (s : G) (p : seq G) (u v : G) :
   walk_uses s p u v = walk_uses s p v u.
-Proof. by rewrite /walk_uses orbC. Qed.
+Proof. exact: walk_usage.seq_consecutiveb_sym. Qed.
 
 Lemma walk_uses_K2 : walk_uses (ord0 : K2) [:: ord_max] ord0 ord_max.
 Proof. by rewrite /walk_uses /=. Qed.
