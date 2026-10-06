@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "family": "forces-mono",
+  "modules": {
+    "Hypergraph.foundations.hypergraph_forcing": {
+      "path": "hypergraph-theory/theories/foundations/hypergraph_forcing.v",
+      "overrides": {
+        "hg_forces_mono": {
+          "verdict": "FAITHFUL",
+          "note": "Every colouring of all subsets of the finite host by the palette has a monochromatic copy; host and palette explicit; vacuous for an empty palette, an injection for a singleton one."
+        }
+      },
+      "machine_evidence": [
+        "hg_forces_monoE",
+        "hg_forces_monoS",
+        "hg_forces_mono_empty_palette",
+        "hg_forces_mono_card",
+        "hg_forces_mono_singleton",
+        "hg_forces_mono_transport"
+      ]
+    }
+  }
+}

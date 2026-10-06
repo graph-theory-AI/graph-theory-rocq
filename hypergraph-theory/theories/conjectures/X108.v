@@ -3,6 +3,7 @@
 From GTBase Require Export base.
 From GTBase Require Import hypergraph_uniformity.
 Require Hypergraph.foundations.hypergraph_copies.
+Require Hypergraph.foundations.hypergraph_forcing.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -33,7 +34,7 @@ Definition x108_monochromatic_copy
 
 Definition x108_two_colour_ramsey_at_most
     (T : finType) (E : {set {set T}}) (N : nat) : Prop :=
-  forall col : {set 'I_N} -> bool, x108_monochromatic_copy E col.
+  Hypergraph.foundations.hypergraph_forcing.hg_forces_mono E 'I_N bool.
 
 (** ** X108 statements *****************************************************)
 

@@ -75,6 +75,10 @@
         "GTMisc.conjectures.X39.x39_pairwise_distant_paths",
         "Packing.conjectures.X26.x26_pairwise_distant_paths"
       ],
+      "204b64fb0162482e6d52fef05f41c4ce2b0e657f621f93c3047cfeb4d11e5406": [
+        "Hypergraph.conjectures.X108.x108_two_colour_ramsey_at_most",
+        "Hypergraph.conjectures.X117.x117_forces_mono"
+      ],
       "20b775c30c4b8c4657e94363abc712ab3eb707a7d5556a2cc284f893454773ac": [
         "Extremal.conjectures.X36.x36_degree_in_edge_set",
         "Extremal.conjectures.X84.x84_degree_in",
@@ -131,10 +135,6 @@
       "3d4c5ddffb4928cc9eecb298d4084fe4fdf4fd426ec007bf9874f4fa44dae236": [
         "Chromatic.conjectures.X81.x81_proper_orientation_bound",
         "GTMisc.conjectures.X82.x82_proper_orientation_bound"
-      ],
-      "3d53eda4a31303941dc9e85ee12f092d658301a9337790e534755e12558d10ea": [
-        "Hypergraph.conjectures.X108.x108_two_colour_ramsey_at_most",
-        "Hypergraph.conjectures.X117.x117_forces_mono"
       ],
       "3f39d5c348e5b79d06e842c114e6cc571583bbf44e4b0ebfda1a01ec05745d43": [
         "Digraph.conjectures.P9.remove_arcs",
@@ -45530,7 +45530,7 @@
         "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement"
       ],
       "kind": "Definition",
-      "line": 10,
+      "line": 11,
       "local_dependencies": [],
       "name": "x108_uniform",
       "normalized_name": "uniform",
@@ -45549,7 +45549,7 @@
         "Hypergraph.conjectures.X108.x108_d_degenerate"
       ],
       "kind": "Definition",
-      "line": 15,
+      "line": 16,
       "local_dependencies": [],
       "name": "x108_degree_in",
       "normalized_name": "degree_in",
@@ -45568,7 +45568,7 @@
         "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement"
       ],
       "kind": "Definition",
-      "line": 19,
+      "line": 20,
       "local_dependencies": [
         "x108_degree_in"
       ],
@@ -45587,7 +45587,7 @@
       "declaration_hash": "0d106cd70dd54a54cd86e1dc4661ef7e7cb4627e62aeb90f3e40c9859931593c",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 24,
+      "line": 25,
       "local_dependencies": [],
       "name": "x108_image_edge",
       "normalized_name": "image_edge",
@@ -45602,11 +45602,9 @@
       "body_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
       "body_shape_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
       "declaration_hash": "038e9bf57c17e29755a0d10e8b23c9bed585902a05733871a33690a0cfe55ca2",
-      "direct_consumers": [
-        "Hypergraph.conjectures.X108.x108_two_colour_ramsey_at_most"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 28,
+      "line": 29,
       "local_dependencies": [],
       "name": "x108_monochromatic_copy",
       "normalized_name": "monochromatic_copy",
@@ -45618,17 +45616,15 @@
       "signature_shape_hash": "fb58cd8b96e9365aba0f4d8b6a9639f5f25ce741a5c8afb8d104b280e0039eed"
     },
     {
-      "body_hash": "b16d26e2137ade048e2ab8ac874dc4aa18e5df9429d636edc0d4427b04639c3b",
-      "body_shape_hash": "3d53eda4a31303941dc9e85ee12f092d658301a9337790e534755e12558d10ea",
-      "declaration_hash": "c977478185b041d7ac34ce4590b5f96fc25663f8538598cae53b7940c3bb4e75",
+      "body_hash": "204b64fb0162482e6d52fef05f41c4ce2b0e657f621f93c3047cfeb4d11e5406",
+      "body_shape_hash": "204b64fb0162482e6d52fef05f41c4ce2b0e657f621f93c3047cfeb4d11e5406",
+      "declaration_hash": "c0378fd590b43696b9cb8a72202065669e40d7a1be0679ac2b343d3679c9095e",
       "direct_consumers": [
         "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement"
       ],
       "kind": "Definition",
-      "line": 33,
-      "local_dependencies": [
-        "x108_monochromatic_copy"
-      ],
+      "line": 34,
+      "local_dependencies": [],
       "name": "x108_two_colour_ramsey_at_most",
       "normalized_name": "two_colour_ramsey_at_most",
       "package": "hypergraph-theory",
@@ -45648,7 +45644,7 @@
         "Hypergraph.conjectures.X117.x117_vertex"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x117_spike",
       "normalized_name": "spike",
@@ -45668,7 +45664,7 @@
         "Hypergraph.conjectures.X117.x117_edges"
       ],
       "kind": "Definition",
-      "line": 22,
+      "line": 23,
       "local_dependencies": [
         "x117_spike"
       ],
@@ -45689,7 +45685,7 @@
         "Hypergraph.conjectures.X117.x117_edges"
       ],
       "kind": "Definition",
-      "line": 24,
+      "line": 25,
       "local_dependencies": [
         "x117_spike",
         "x117_vertex"
@@ -45711,7 +45707,7 @@
         "Hypergraph.conjectures.X117.x117_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 28,
       "local_dependencies": [
         "x117_edge",
         "x117_spike",
@@ -45732,7 +45728,7 @@
       "declaration_hash": "2437b1ebf37b83ca684f57483951be95d519cd92f1460f16a03bf679706fd283",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 30,
+      "line": 31,
       "local_dependencies": [],
       "name": "x117_image_edge",
       "normalized_name": "image_edge",
@@ -45747,11 +45743,9 @@
       "body_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
       "body_shape_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
       "declaration_hash": "13633959be84b96daa785f92200ba79f1aac5dec582b93c9e043932663142534",
-      "direct_consumers": [
-        "Hypergraph.conjectures.X117.x117_forces_mono"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 36,
+      "line": 37,
       "local_dependencies": [],
       "name": "x117_monochromatic_copy",
       "normalized_name": "monochromatic_copy",
@@ -45763,17 +45757,15 @@
       "signature_shape_hash": "fb58cd8b96e9365aba0f4d8b6a9639f5f25ce741a5c8afb8d104b280e0039eed"
     },
     {
-      "body_hash": "adc977551823314cdb97cf392173673c1eab934f0f547db5099243af63a0e12b",
-      "body_shape_hash": "3d53eda4a31303941dc9e85ee12f092d658301a9337790e534755e12558d10ea",
-      "declaration_hash": "87d4b50dc89e4bde43dfc46aae2cb46f4041930c8bc5d6d9291fdc6bd843069b",
+      "body_hash": "204b64fb0162482e6d52fef05f41c4ce2b0e657f621f93c3047cfeb4d11e5406",
+      "body_shape_hash": "204b64fb0162482e6d52fef05f41c4ce2b0e657f621f93c3047cfeb4d11e5406",
+      "declaration_hash": "a8867c27c0c07f273db6e9e864bc8dfee7a6b015671aaaf2347c297a780e825a",
       "direct_consumers": [
         "Hypergraph.conjectures.X117.x117_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 41,
-      "local_dependencies": [
-        "x117_monochromatic_copy"
-      ],
+      "line": 42,
+      "local_dependencies": [],
       "name": "x117_forces_mono",
       "normalized_name": "forces_mono",
       "package": "hypergraph-theory",
@@ -45791,7 +45783,7 @@
         "Hypergraph.conjectures.X117.conlon_fox_rodl_hedgehog_ramsey_statement"
       ],
       "kind": "Definition",
-      "line": 47,
+      "line": 48,
       "local_dependencies": [
         "x117_edges",
         "x117_forces_mono"
@@ -45813,7 +45805,7 @@
         "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement"
       ],
       "kind": "Definition",
-      "line": 10,
+      "line": 11,
       "local_dependencies": [],
       "name": "x119_uniform",
       "normalized_name": "uniform",
@@ -45832,7 +45824,7 @@
         "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement"
       ],
       "kind": "Definition",
-      "line": 15,
+      "line": 16,
       "local_dependencies": [],
       "name": "x119_no_isolated",
       "normalized_name": "no_isolated",
@@ -45849,7 +45841,7 @@
       "declaration_hash": "061206de23c0db69e9d67191459d7dabda47fac7982bf93855df22f37d13ea87",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 19,
+      "line": 20,
       "local_dependencies": [],
       "name": "x119_image_edge",
       "normalized_name": "image_edge",
@@ -45864,11 +45856,9 @@
       "body_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
       "body_shape_hash": "9eebe137b1b30b32cdc05690d7a090651713f02d8d0244e244cb93365385f0dd",
       "declaration_hash": "87db116f31f524712cc14c04fcee36285e5418748971339fd181fa795fe847c8",
-      "direct_consumers": [
-        "Hypergraph.conjectures.X119.x119_forces_mono"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 25,
+      "line": 26,
       "local_dependencies": [],
       "name": "x119_monochromatic_copy",
       "normalized_name": "monochromatic_copy",
@@ -45880,17 +45870,15 @@
       "signature_shape_hash": "552800fa8d07ed07a5d0c7658bc5f10b41a57e77bafaf774b6060668f1d24993"
     },
     {
-      "body_hash": "c31b606b4cb5c78f21a329f4c70a0b463a4f12190378408bb32e7b096499cd80",
-      "body_shape_hash": "d754afac54203d71215804fcf3d937ccd4a5e60162c3c1eaf775da67890a6a00",
-      "declaration_hash": "95f0b85b3e1a1947a515e4dcc251db84ad19f9f35e9737785f0d5f0c8d91f771",
+      "body_hash": "6013b31ed815605da9c3def73536b7fb85d4cb9494903ccf41278641c49dee76",
+      "body_shape_hash": "6013b31ed815605da9c3def73536b7fb85d4cb9494903ccf41278641c49dee76",
+      "declaration_hash": "6855464b3408617d6bba9d51f978ae6c8186b14342ef846c36fbde560baa9c72",
       "direct_consumers": [
         "Hypergraph.conjectures.X119.x119_ramsey_number"
       ],
       "kind": "Definition",
-      "line": 30,
-      "local_dependencies": [
-        "x119_monochromatic_copy"
-      ],
+      "line": 31,
+      "local_dependencies": [],
       "name": "x119_forces_mono",
       "normalized_name": "forces_mono",
       "package": "hypergraph-theory",
@@ -45908,7 +45896,7 @@
         "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement"
       ],
       "kind": "Definition",
-      "line": 36,
+      "line": 37,
       "local_dependencies": [
         "x119_forces_mono"
       ],
@@ -45929,7 +45917,7 @@
         "Hypergraph.conjectures.X119.x119_sqrt"
       ],
       "kind": "Lemma",
-      "line": 43,
+      "line": 44,
       "local_dependencies": [],
       "name": "x119_sqrt_ex",
       "normalized_name": "sqrt_ex",
@@ -45948,7 +45936,7 @@
         "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement"
       ],
       "kind": "Definition",
-      "line": 49,
+      "line": 50,
       "local_dependencies": [
         "x119_sqrt_ex"
       ],
