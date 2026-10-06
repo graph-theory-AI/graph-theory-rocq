@@ -46583,7 +46583,7 @@
         "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement"
       ],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x73_balanced_tripartite",
       "normalized_name": "balanced_tripartite",
@@ -46598,11 +46598,9 @@
       "body_hash": "a7e32a2618b29c3a027ded738d5c7809b76c82c8da66623ba2dca1c3bc3df79b",
       "body_shape_hash": "a7e32a2618b29c3a027ded738d5c7809b76c82c8da66623ba2dca1c3bc3df79b",
       "declaration_hash": "cda467aa4e3277b62e59feb7b2d919d710631bbc4ecb54c8da6b9b414d235e06",
-      "direct_consumers": [
-        "Hypergraph.conjectures.X73.x73_regular"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 15,
+      "line": 16,
       "local_dependencies": [],
       "name": "x73_hyperdegree",
       "normalized_name": "hyperdegree",
@@ -46614,17 +46612,15 @@
       "signature_shape_hash": "d11c448054f7495781ccce66bc048b31945cf7418fbc917f664617c379d24d12"
     },
     {
-      "body_hash": "217a9d3cb5dc184fb23920fbe06cfa6d6f33a728d6517a053c7fd31818aa7851",
-      "body_shape_hash": "08034ce293683d6313adbad20b5a50dc18104c0f2d5af01dcae03b420a15d800",
-      "declaration_hash": "a3a5752b84627a83b9dfe0e21ba1f2e449cf460a9a9f12068ebb21c653d9c652",
+      "body_hash": "54bca5a8d5e7561a9e3feda7b9200aeaf123a4f5c3af4f878b10ba534898de61",
+      "body_shape_hash": "54bca5a8d5e7561a9e3feda7b9200aeaf123a4f5c3af4f878b10ba534898de61",
+      "declaration_hash": "d691b8083e15fff040cd5a2c036766c5a0ea2aac2f85e6e202429e0da2094863",
       "direct_consumers": [
         "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement"
       ],
       "kind": "Definition",
-      "line": 18,
-      "local_dependencies": [
-        "x73_hyperdegree"
-      ],
+      "line": 19,
+      "local_dependencies": [],
       "name": "x73_regular",
       "normalized_name": "regular",
       "package": "hypergraph-theory",

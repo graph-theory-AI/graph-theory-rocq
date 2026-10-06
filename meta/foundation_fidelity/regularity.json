@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "family": "regularity",
+  "modules": {
+    "Hypergraph.foundations.hypergraph_regularity": {
+      "path": "hypergraph-theory/theories/foundations/hypergraph_regularity.v",
+      "overrides": {
+        "hg_regular": {
+          "verdict": "FAITHFUL",
+          "note": "Every vertex lies in exactly d members of the supplied family (A10 incidence_degree); arbitrary finite carrier, E before d; empty carrier regular of every degree, empty members never count; Boolean view hg_regularP."
+        }
+      },
+      "machine_evidence": [
+        "hg_regularP",
+        "hg_regular_void",
+        "hg_regular_uniq",
+        "hg_regular_set0",
+        "hg_regular_set0E",
+        "incidence_degree_set0U",
+        "hg_regular_set0U",
+        "hg_regular_set1_set0",
+        "hg_regular_setT"
+      ]
+    }
+  }
+}

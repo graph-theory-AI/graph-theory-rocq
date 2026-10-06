@@ -1,0 +1,141 @@
+{
+  "family": "regularity",
+  "canonical_name": "Hypergraph.foundations.hypergraph_regularity.hg_regular",
+  "canonical_short_name": "hg_regular",
+  "relation": "Finite supplied-family incidence regularity: hg_regular E d holds when every vertex v of the finite carrier lies in exactly d members of the supplied family E : {set {set T}}, counted by A10 incidence_degree E v. Arbitrary carrier and family, E before d, universal equality; no uniformity, positivity, inhabited-carrier, nonempty-edge, covering or attained-degree premise (an empty carrier is regular of every degree; empty members never count). Simple-graph, multigraph, directed and infinite (ordinal neighbour enumeration, D4inf3) regularity are separate.",
+  "baseline_commit": "7e030f252c859c5334185673b10b69971cab9402",
+  "namespaces": {
+    "hypergraph-theory": "Hypergraph"
+  },
+  "certificate_files": [
+    "hypergraph-theory/theories/foundations/hypergraph_regularity.v",
+    "hypergraph-theory/theories/migration/regularity.v",
+    "hypergraph-theory/theories/migration/matching.v",
+    "hypergraph-theory/theories/migration/partite_uniform.v",
+    "hypergraph-theory/theories/migration/incidence_degree.v"
+  ],
+  "extra_certificates": [
+    "Hypergraph.foundations.hypergraph_regularity.hg_regularP",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_void",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_uniq",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0E",
+    "Hypergraph.foundations.hypergraph_regularity.incidence_degree_set0U",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0U",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_set1_set0",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_setT"
+  ],
+  "downstream_client": "hypergraph-theory/theories/examples/regular_hypergraphs.v",
+  "summary": [
+    "D8 turns X73 x73_regular into the alias of the new public Hypergraph.foundations.hypergraph_regularity.hg_regular E d: every vertex lies in exactly d members of the supplied family, counted by A10 incidence_degree; same finite carrier, E before d, universal equality, all empty cases kept. Infinite.conjectures.D4inf3.regular is a deferred distinct class of the same owner.",
+    "Frozen at the D7 pin in hypergraph-theory/theories/migration/regularity.v: the source (keeping the live A10 degree alias) and the complete current X73 row over it (keeping the live D2 partite and D6 matching aliases): 1 current whole iff. The complete Original is the existing, unchanged D6 X73MatchingOriginal row with its genuine D6 iff, reused as an original-statement; it and the four providers it reaches (A10 raw degree and regularity, D2 raw partite source, D6 raw matching) are borrowed with explicit effective commits. 2 owned + 5 borrowed mappings; 2 whole iff.",
+    "No older proof needed adaptation. The old D2 X73PartiteLegacy and D6 X73MatchingLegacy current rows, which still call the live x73_regular, stay byte-exact with notes; the other four old frozen X73 declarations (A10 helper and row, D2 and D6 Originals) are untouched. Public client hypergraph-theory/theories/examples/regular_hypergraphs.v."
+  ],
+  "kernel_evidence": "Exact types/implicit status of the source and its Section-discharged canonical, the two whole iff, all old declarations against 7e030f2, the actual eight-file reverse closure (132 headers), Print Assumptions and Locate/About-resolved strict closures, through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D8-by-lancelot/ (outside the repository)",
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X73.x73_regular",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_regular",
+      "frozen_path": "hypergraph-theory/theories/migration/regularity.v",
+      "frozen": "Legacy.x73_regular",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.regularity.x73_regular_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph_regularity.hg_regular E d",
+      "binding_note": "Frozen at the D7 pin 7e030f2, the family baseline where the X73 text is bound."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/regularity.v",
+      "frozen": "X73RegularLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "substitutions": {
+        "x73_regular": "Legacy.x73_regular"
+      },
+      "certificate": "Hypergraph.migration.regularity.regular_tripartite_hypergraph_matching_lower_bound_statement_compat",
+      "corpus": "v2",
+      "binding_note": "Frozen at the D7 pin 7e030f2, the family baseline where the X73 text is bound."
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X6.x6_matching",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_matching",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x6_matching",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.matching.x6_matching_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X6.x6_r_partite_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_r_partite_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "PartiteLegacy.x6_r_partite_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.partite_uniform.x6_r_partite_uniform_compat",
+      "commit": "e53098e84635d8612e34e5d239fd13fe5afa9fb8"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X73.x73_hyperdegree",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_hyperdegree",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x73_hyperdegree",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.x73_hyperdegree_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X73.x73_regular",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_regular",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X73Legacy.hyperdegree_regular",
+      "substitutions": {
+        "x73_hyperdegree": "Legacy.x73_hyperdegree",
+        "x73_regular": "hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.x73_regular_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "substitutions": {
+        "x6_matching": "Legacy.x6_matching",
+        "x6_r_partite_uniform": "PU.PartiteLegacy.x6_r_partite_uniform",
+        "x73_regular": "ID.X73Legacy.hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2",
+      "binding_note": "The existing, unchanged D6 complete A10+D2+D6 Original (raw A10 regularity and degree, D2 partite source, D6 matching) with its genuine D6 iff; effective source text 9e030727db115917ae077ac07a8fc6aa68661f73, D6 owner module eaa6564 (frozen_at there is descriptive only)."
+    }
+  ],
+  "known_stale_snapshots": {
+    "hypergraph-theory/theories/migration/partite_uniform.v#X73PartiteLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement": "D2 current snapshot: it keeps the live x73_regular, now the D8 alias of hg_regular (and the live D6 x6_matching). It stays byte-exact; the complete row is the existing D6 Hypergraph.migration.matching.X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement (raw A10 regularity and degree, D2 partite, D6 matching; certificate regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat), reused by D8.",
+    "hypergraph-theory/theories/migration/matching.v#X73MatchingLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement": "D6 current snapshot: frozen with the D6 matching, it keeps the live x73_regular, now the D8 alias of hg_regular (and the live D2 x6_r_partite_uniform). It stays byte-exact; the complete row is the existing D6 Hypergraph.migration.matching.X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement (raw A10 regularity and degree, D2 partite, D6 matching; certificate regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat), reused by D8."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "Infinite.conjectures.D4inf3.regular",
+      "path": "infinite-graph-theory/theories/conjectures/D4inf3.v",
+      "name": "regular",
+      "representation": "infinite graph, ordinal neighbour enumeration",
+      "note": "regular r G on an iGraph (arbitrary Type vertices, Prop adjacency): every vertex has an injective I_r-indexed enumeration of exactly its neighbours. Deferred class of this owner; source and row untouched."
+    }
+  ]
+}
