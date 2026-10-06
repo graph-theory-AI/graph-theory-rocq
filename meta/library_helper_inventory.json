@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2560,
-    "repeated_body_shapes": 143,
+    "repeated_body_shapes": 142,
     "repeated_normalized_names": 212,
     "repeated_signature_shapes": 305,
     "statements_excluded": 700,
@@ -245,10 +245,6 @@
       "6743df6930d375b3130d033d4f36b1d88dba52ee5c52d107b4440baa0d4c832e": [
         "Chromatic.conjectures.XE2.xe2_sqrt_lower",
         "Extremal.conjectures.XE1.xe1_sqrt_floor"
-      ],
-      "6a31ee1af5cd9e2462f6a149b0bc819b1f7a05efd0b34be998e1f2d5803f2bf7": [
-        "Cycle.conjectures.D1.petersen",
-        "Cycle.conjectures.U10.petersen"
       ],
       "6c542d3e78b3a5fe336ecb7258846499f70efe0e6dd674198efeaa6885509429": [
         "Extremal.conjectures.D2ram.edge_count",
@@ -11578,7 +11574,7 @@
         "Cycle.conjectures.D1.has_nz_kflow_del"
       ],
       "kind": "Definition",
-      "line": 59,
+      "line": 60,
       "local_dependencies": [],
       "name": "iconservative",
       "normalized_name": "iconservative",
@@ -11597,7 +11593,7 @@
         "Cycle.conjectures.D1.has_nz_rflow"
       ],
       "kind": "Definition",
-      "line": 99,
+      "line": 100,
       "local_dependencies": [],
       "name": "rconservative",
       "normalized_name": "rconservative",
@@ -11616,7 +11612,7 @@
         "Cycle.conjectures.D1.has_nz_kflow"
       ],
       "kind": "Definition",
-      "line": 102,
+      "line": 103,
       "local_dependencies": [],
       "name": "int_bounded",
       "normalized_name": "int_bounded",
@@ -11637,7 +11633,7 @@
         "Cycle.conjectures.D1.three_flow_statement"
       ],
       "kind": "Definition",
-      "line": 106,
+      "line": 107,
       "local_dependencies": [
         "iconservative",
         "int_bounded"
@@ -11659,7 +11655,7 @@
         "Cycle.conjectures.D1.three_4_flows_statement"
       ],
       "kind": "Definition",
-      "line": 110,
+      "line": 111,
       "local_dependencies": [
         "iconservative"
       ],
@@ -11680,7 +11676,7 @@
         "Cycle.conjectures.D1.circular_flow_number_le"
       ],
       "kind": "Definition",
-      "line": 119,
+      "line": 120,
       "local_dependencies": [
         "rconservative"
       ],
@@ -11702,7 +11698,7 @@
         "Cycle.conjectures.D1.circular_flow_numbers_of_r_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 126,
+      "line": 127,
       "local_dependencies": [
         "has_nz_rflow"
       ],
@@ -11724,7 +11720,7 @@
         "Cycle.conjectures.D1.is_2t1_graph"
       ],
       "kind": "Definition",
-      "line": 132,
+      "line": 133,
       "local_dependencies": [],
       "name": "mreg",
       "normalized_name": "mreg",
@@ -11743,7 +11739,7 @@
         "Cycle.conjectures.D1.circular_flow_numbers_of_r_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 140,
+      "line": 141,
       "local_dependencies": [
         "mreg"
       ],
@@ -11764,7 +11760,7 @@
         "Cycle.conjectures.D1.is_class1"
       ],
       "kind": "Definition",
-      "line": 146,
+      "line": 147,
       "local_dependencies": [],
       "name": "mDelta",
       "normalized_name": "mDelta",
@@ -11783,7 +11779,7 @@
         "Cycle.conjectures.D1.circular_flow_number_of_regular_class_1_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 150,
+      "line": 151,
       "local_dependencies": [
         "mDelta"
       ],
@@ -11804,7 +11800,7 @@
         "Cycle.conjectures.D1.is_bidirected"
       ],
       "kind": "Definition",
-      "line": 185,
+      "line": 186,
       "local_dependencies": [],
       "name": "is_sign",
       "normalized_name": "is_sign",
@@ -11823,7 +11819,7 @@
         "Cycle.conjectures.D1.bouchets_6_flow_statement"
       ],
       "kind": "Definition",
-      "line": 190,
+      "line": 191,
       "local_dependencies": [
         "is_sign"
       ],
@@ -11844,7 +11840,7 @@
         "Cycle.conjectures.D1.has_nz_biflow"
       ],
       "kind": "Definition",
-      "line": 195,
+      "line": 196,
       "local_dependencies": [],
       "name": "bnet",
       "normalized_name": "bnet",
@@ -11863,7 +11859,7 @@
         "Cycle.conjectures.D1.bouchets_6_flow_statement"
       ],
       "kind": "Definition",
-      "line": 200,
+      "line": 201,
       "local_dependencies": [
         "bnet"
       ],
@@ -11886,7 +11882,7 @@
         "Cycle.conjectures.D1.in_cycle_space"
       ],
       "kind": "Definition",
-      "line": 231,
+      "line": 232,
       "local_dependencies": [],
       "name": "sedge",
       "normalized_name": "sedge",
@@ -11905,7 +11901,7 @@
         "Cycle.conjectures.D1.cycle_continuous"
       ],
       "kind": "Definition",
-      "line": 238,
+      "line": 239,
       "local_dependencies": [
         "sedge"
       ],
@@ -11926,7 +11922,7 @@
         "Cycle.conjectures.D1.antichains_in_the_cycle_continuous_order_statement"
       ],
       "kind": "Definition",
-      "line": 243,
+      "line": 244,
       "local_dependencies": [
         "in_cycle_space",
         "sedge"
@@ -11948,7 +11944,7 @@
         "Cycle.conjectures.D1.mg_minor"
       ],
       "kind": "Definition",
-      "line": 304,
+      "line": 305,
       "local_dependencies": [],
       "name": "mg_branch_connected",
       "normalized_name": "mg_branch_connected",
@@ -11967,7 +11963,7 @@
         "Cycle.conjectures.D1.four_flow_statement"
       ],
       "kind": "Definition",
-      "line": 312,
+      "line": 313,
       "local_dependencies": [
         "mg_branch_connected"
       ],
@@ -11981,14 +11977,12 @@
       "signature_shape_hash": "4ce8f78649fcaf49311b13462796bd0ea5f2bb5c04a6811f82c9982b969399a1"
     },
     {
-      "body_hash": "8c17ab3837c4ccae85af4428ce3a74a4a140197b45f6b50b995a4d98a7cc633b",
-      "body_shape_hash": "8c17ab3837c4ccae85af4428ce3a74a4a140197b45f6b50b995a4d98a7cc633b",
-      "declaration_hash": "3cebd084ae5a1e2c562202a83e4c037d9c2ccb6769d3262b3d5bded44b991c85",
-      "direct_consumers": [
-        "Cycle.conjectures.D1.pconn"
-      ],
+      "body_hash": "ca7f27c80ad7e923b5a2e9da15bed283a2f678ff052e2e55b14133bed96708e0",
+      "body_shape_hash": "ca7f27c80ad7e923b5a2e9da15bed283a2f678ff052e2e55b14133bed96708e0",
+      "declaration_hash": "e42f6bcad12bcc33a0f163a144d537cd570a2035acf7bbbc6952ef16189b4e14",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 321,
+      "line": 322,
       "local_dependencies": [],
       "name": "pedges",
       "normalized_name": "pedges",
@@ -12000,17 +11994,13 @@
       "signature_shape_hash": "8d542658aa33e38dcc7450b6fd0d94a363fb5fa7cd2746caa1789354eba6fc89"
     },
     {
-      "body_hash": "430662e17ec6f8784e22399b1dbd7a4c129bca3e40490f753802b2c050f23803",
-      "body_shape_hash": "430662e17ec6f8784e22399b1dbd7a4c129bca3e40490f753802b2c050f23803",
-      "declaration_hash": "51ce52372f7bb92050849aec83122f160451577a389499078f2666d2be5852cf",
-      "direct_consumers": [
-        "Cycle.conjectures.D1.padj"
-      ],
+      "body_hash": "a0055beb68e65e3665b26eec3870748405d467b50cd9034b9dc58c7cd9121a00",
+      "body_shape_hash": "a0055beb68e65e3665b26eec3870748405d467b50cd9034b9dc58c7cd9121a00",
+      "declaration_hash": "52c2833c2576e6163884bdd0c8a27620b91ff400e6609ddd7fa45d17ffc9ad05",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 328,
-      "local_dependencies": [
-        "pedges"
-      ],
+      "line": 329,
+      "local_dependencies": [],
       "name": "pconn",
       "normalized_name": "pconn",
       "package": "cycle-theory",
@@ -12021,18 +12011,16 @@
       "signature_shape_hash": "2efc091e38f01cfb23fc1fe23f145eed7a3f7d2b092495df7e0bc324ec99f80f"
     },
     {
-      "body_hash": "734a3cb27fba4563a9ea3aec889dd56b2c941779015140a4ca146c53dc98b792",
-      "body_shape_hash": "734a3cb27fba4563a9ea3aec889dd56b2c941779015140a4ca146c53dc98b792",
-      "declaration_hash": "478791589f8b4d5fb0799c7a5ad439c33591381867d6b1c756fb90099e0c2819",
+      "body_hash": "d07a9df728a432bf138b46af74c3645c1398ea6c649abec8d2b9c1f7f1e57822",
+      "body_shape_hash": "d07a9df728a432bf138b46af74c3645c1398ea6c649abec8d2b9c1f7f1e57822",
+      "declaration_hash": "d6575f7e0ee342aa4f9bde81b3c3638d80dfe87936149feefc662a97ed2c8a94",
       "direct_consumers": [
         "Cycle.conjectures.D1.padj_irrefl",
         "Cycle.conjectures.D1.padj_sym"
       ],
       "kind": "Definition",
-      "line": 329,
-      "local_dependencies": [
-        "pconn"
-      ],
+      "line": 330,
+      "local_dependencies": [],
       "name": "padj",
       "normalized_name": "padj",
       "package": "cycle-theory",
@@ -12046,11 +12034,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "254d834774a4f7839f2a25a2776d8ea673eec97af4425d5af5112a7434a79611",
-      "direct_consumers": [
-        "Cycle.conjectures.D1.petersen"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 330,
+      "line": 331,
       "local_dependencies": [
         "padj"
       ],
@@ -12067,11 +12053,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "24e6029b5fbd6cfdf0f54e8f50b6a3431dc098aaf9c71cfcb5f21505090e5b6b",
-      "direct_consumers": [
-        "Cycle.conjectures.D1.petersen"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 333,
+      "line": 334,
       "local_dependencies": [
         "padj"
       ],
@@ -12085,18 +12069,15 @@
       "signature_shape_hash": "b27d523796d24b111dcbcb4a1f6c1a43c05c6b1790f4f938f4abaf896e407c9e"
     },
     {
-      "body_hash": "6a31ee1af5cd9e2462f6a149b0bc819b1f7a05efd0b34be998e1f2d5803f2bf7",
-      "body_shape_hash": "6a31ee1af5cd9e2462f6a149b0bc819b1f7a05efd0b34be998e1f2d5803f2bf7",
-      "declaration_hash": "296b22c62add36e3f824a0f0d3f1a268c6b946a00de68d977d2953215d8b56cb",
+      "body_hash": "3f59eee3f0d79f2af79bb1cc2e360a80f7eb5b078fe91e88a85119faa56a59ac",
+      "body_shape_hash": "3f59eee3f0d79f2af79bb1cc2e360a80f7eb5b078fe91e88a85119faa56a59ac",
+      "declaration_hash": "213218eaf9cc79da4a324619406d9f250adc52ba6776b7436ae3533236df0883",
       "direct_consumers": [
         "Cycle.conjectures.D1.four_flow_statement"
       ],
       "kind": "Definition",
-      "line": 336,
-      "local_dependencies": [
-        "padj_irrefl",
-        "padj_sym"
-      ],
+      "line": 337,
+      "local_dependencies": [],
       "name": "petersen",
       "normalized_name": "petersen",
       "package": "cycle-theory",
@@ -12115,7 +12096,7 @@
         "Cycle.conjectures.D1.unit_vector_flows_statement"
       ],
       "kind": "Definition",
-      "line": 397,
+      "line": 398,
       "local_dependencies": [],
       "name": "sphere_vec",
       "normalized_name": "sphere_vec",
@@ -12134,7 +12115,7 @@
         "Cycle.conjectures.D1.unit_vector_flows_statement"
       ],
       "kind": "Definition",
-      "line": 400,
+      "line": 401,
       "local_dependencies": [],
       "name": "vconservative",
       "normalized_name": "vconservative",
@@ -12151,7 +12132,7 @@
       "declaration_hash": "4006c79ac28bf9cc16ce4337cf6b54ba734c97a23a6a6d0497d84083cc3560f6",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 432,
+      "line": 433,
       "local_dependencies": [
         "sphere_vec"
       ],
@@ -12179,7 +12160,7 @@
         "Cycle.conjectures.D1.local_tension"
       ],
       "kind": "Definition",
-      "line": 462,
+      "line": 463,
       "local_dependencies": [],
       "name": "dart",
       "normalized_name": "dart",
@@ -12198,7 +12179,7 @@
         "Cycle.conjectures.D1.dflip_inj"
       ],
       "kind": "Definition",
-      "line": 464,
+      "line": 465,
       "local_dependencies": [
         "dart"
       ],
@@ -12219,7 +12200,7 @@
         "Cycle.conjectures.D1.dalpha"
       ],
       "kind": "Lemma",
-      "line": 465,
+      "line": 466,
       "local_dependencies": [
         "dflip"
       ],
@@ -12240,7 +12221,7 @@
         "Cycle.conjectures.D1.facemap"
       ],
       "kind": "Definition",
-      "line": 468,
+      "line": 469,
       "local_dependencies": [
         "dart",
         "dflip_inj"
@@ -12262,7 +12243,7 @@
         "Cycle.conjectures.D1.faces"
       ],
       "kind": "Definition",
-      "line": 472,
+      "line": 473,
       "local_dependencies": [
         "dalpha",
         "dart"
@@ -12285,7 +12266,7 @@
         "Cycle.conjectures.D1.local_tension"
       ],
       "kind": "Definition",
-      "line": 475,
+      "line": 476,
       "local_dependencies": [
         "dart",
         "facemap"
@@ -12307,7 +12288,7 @@
         "Cycle.conjectures.D1.local_tension"
       ],
       "kind": "Definition",
-      "line": 476,
+      "line": 477,
       "local_dependencies": [
         "dart"
       ],
@@ -12328,7 +12309,7 @@
         "Cycle.conjectures.D1.contractible"
       ],
       "kind": "Definition",
-      "line": 479,
+      "line": 480,
       "local_dependencies": [
         "dart"
       ],
@@ -12349,7 +12330,7 @@
         "Cycle.conjectures.D1.contractible"
       ],
       "kind": "Definition",
-      "line": 484,
+      "line": 485,
       "local_dependencies": [],
       "name": "symd",
       "normalized_name": "symd",
@@ -12368,7 +12349,7 @@
         "Cycle.conjectures.D1.edge_width_geq"
       ],
       "kind": "Definition",
-      "line": 488,
+      "line": 489,
       "local_dependencies": [
         "dart",
         "faces",
@@ -12392,7 +12373,7 @@
         "Cycle.conjectures.D1.five_local_tensions_statement"
       ],
       "kind": "Definition",
-      "line": 491,
+      "line": 492,
       "local_dependencies": [
         "contractible"
       ],
@@ -12413,7 +12394,7 @@
         "Cycle.conjectures.D1.has_5_local_tension"
       ],
       "kind": "Definition",
-      "line": 495,
+      "line": 496,
       "local_dependencies": [
         "dart",
         "dsign",
@@ -12436,7 +12417,7 @@
         "Cycle.conjectures.D1.five_local_tensions_statement"
       ],
       "kind": "Definition",
-      "line": 501,
+      "line": 502,
       "local_dependencies": [
         "local_tension"
       ],
@@ -12457,7 +12438,7 @@
         "Cycle.conjectures.D1.imbalance"
       ],
       "kind": "Definition",
-      "line": 536,
+      "line": 537,
       "local_dependencies": [],
       "name": "otail",
       "normalized_name": "otail",
@@ -12476,7 +12457,7 @@
         "Cycle.conjectures.D1.imbalance"
       ],
       "kind": "Definition",
-      "line": 548,
+      "line": 549,
       "local_dependencies": [],
       "name": "ohead",
       "normalized_name": "ohead",
@@ -12495,7 +12476,7 @@
         "Cycle.conjectures.D1.jaegers_modular_orientation_statement"
       ],
       "kind": "Definition",
-      "line": 550,
+      "line": 551,
       "local_dependencies": [
         "ohead",
         "otail"
@@ -12517,7 +12498,7 @@
         "Cycle.conjectures.D1.ncomp"
       ],
       "kind": "Definition",
-      "line": 576,
+      "line": 577,
       "local_dependencies": [],
       "name": "erel",
       "normalized_name": "erel",
@@ -12536,7 +12517,7 @@
         "Cycle.conjectures.D1.nullity"
       ],
       "kind": "Definition",
-      "line": 585,
+      "line": 586,
       "local_dependencies": [
         "erel"
       ],
@@ -12558,7 +12539,7 @@
         "Cycle.conjectures.D1.flow_poly_eval"
       ],
       "kind": "Definition",
-      "line": 586,
+      "line": 587,
       "local_dependencies": [
         "ncomp"
       ],
@@ -12579,7 +12560,7 @@
         "Cycle.conjectures.D1.half_integral_flow_polynomial_values_statement"
       ],
       "kind": "Definition",
-      "line": 590,
+      "line": 591,
       "local_dependencies": [
         "nullity"
       ],
@@ -12600,7 +12581,7 @@
         "Cycle.conjectures.D1.real_roots_of_the_flow_polynomial_statement"
       ],
       "kind": "Definition",
-      "line": 595,
+      "line": 596,
       "local_dependencies": [
         "nullity"
       ],
@@ -12622,7 +12603,7 @@
         "Cycle.conjectures.D1.cradj_sym"
       ],
       "kind": "Definition",
-      "line": 649,
+      "line": 650,
       "local_dependencies": [],
       "name": "cradj",
       "normalized_name": "cradj",
@@ -12641,7 +12622,7 @@
         "Cycle.conjectures.D1.cayley"
       ],
       "kind": "Lemma",
-      "line": 652,
+      "line": 653,
       "local_dependencies": [
         "cradj"
       ],
@@ -12662,7 +12643,7 @@
         "Cycle.conjectures.D1.cayley"
       ],
       "kind": "Lemma",
-      "line": 655,
+      "line": 656,
       "local_dependencies": [
         "cradj"
       ],
@@ -12683,7 +12664,7 @@
         "Cycle.conjectures.D1.a_homomorphism_problem_for_flows_statement"
       ],
       "kind": "Definition",
-      "line": 658,
+      "line": 659,
       "local_dependencies": [
         "cradj_irrefl",
         "cradj_sym"
@@ -12705,7 +12686,7 @@
         "Cycle.conjectures.D1.a_homomorphism_problem_for_flows_statement"
       ],
       "kind": "Definition",
-      "line": 662,
+      "line": 663,
       "local_dependencies": [],
       "name": "Bflow",
       "normalized_name": "Bflow",
@@ -12725,7 +12706,7 @@
         "Cycle.conjectures.D1.frac_feasible"
       ],
       "kind": "Definition",
-      "line": 790,
+      "line": 791,
       "local_dependencies": [],
       "name": "routes",
       "normalized_name": "routes",
@@ -12744,7 +12725,7 @@
         "Cycle.conjectures.D1.approximation_ratio_for_k_outerplanar_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 805,
+      "line": 806,
       "local_dependencies": [
         "routes"
       ],
@@ -12765,7 +12746,7 @@
         "Cycle.conjectures.D1.approximation_ratio_for_k_outerplanar_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 812,
+      "line": 813,
       "local_dependencies": [
         "routes"
       ],
@@ -12786,7 +12767,7 @@
         "Cycle.conjectures.D1.approximation_ratio_for_k_outerplanar_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 819,
+      "line": 820,
       "local_dependencies": [],
       "name": "frac_value",
       "normalized_name": "frac_value",
@@ -12806,7 +12787,7 @@
         "Cycle.conjectures.D1.vskel_sym"
       ],
       "kind": "Definition",
-      "line": 821,
+      "line": 822,
       "local_dependencies": [],
       "name": "vskel_rel",
       "normalized_name": "vskel_rel",
@@ -12825,7 +12806,7 @@
         "Cycle.conjectures.D1.vskel"
       ],
       "kind": "Lemma",
-      "line": 826,
+      "line": 827,
       "local_dependencies": [
         "vskel_rel"
       ],
@@ -12846,7 +12827,7 @@
         "Cycle.conjectures.D1.vskel"
       ],
       "kind": "Lemma",
-      "line": 832,
+      "line": 833,
       "local_dependencies": [
         "vskel_rel"
       ],
@@ -12867,7 +12848,7 @@
         "Cycle.conjectures.D1.mtreewidth_le"
       ],
       "kind": "Definition",
-      "line": 835,
+      "line": 836,
       "local_dependencies": [
         "vskel_irrefl",
         "vskel_sym"
@@ -12889,7 +12870,7 @@
         "Cycle.conjectures.D1.approximation_ratio_for_k_outerplanar_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 837,
+      "line": 838,
       "local_dependencies": [
         "vskel"
       ],
@@ -12911,7 +12892,7 @@
         "Cycle.conjectures.U10.perfect_matching_cover"
       ],
       "kind": "Definition",
-      "line": 56,
+      "line": 57,
       "local_dependencies": [],
       "name": "is_perfect_matching",
       "normalized_name": "is_perfect_matching",
@@ -12932,7 +12913,7 @@
         "Cycle.conjectures.U10.the_berge_fulkerson_statement"
       ],
       "kind": "Definition",
-      "line": 63,
+      "line": 64,
       "local_dependencies": [],
       "name": "cubic_bridgeless",
       "normalized_name": "cubic_bridgeless",
@@ -12951,7 +12932,7 @@
         "Cycle.conjectures.U10.the_berge_fulkerson_statement"
       ],
       "kind": "Definition",
-      "line": 68,
+      "line": 69,
       "local_dependencies": [
         "is_perfect_matching"
       ],
@@ -12965,16 +12946,16 @@
       "signature_shape_hash": "873a64093cc9e7b90f96503c05d110659bbd1da4a02294743fb8140cc7871773"
     },
     {
-      "body_hash": "deada0a53269709e40ce3a3b41f90496950a461561ff311ae116b22be561b8d9",
-      "body_shape_hash": "deada0a53269709e40ce3a3b41f90496950a461561ff311ae116b22be561b8d9",
-      "declaration_hash": "6db75584ee7f7fb2aaaee6994eb83949db480621ebec4d3be91819e385d3d43d",
+      "body_hash": "4d83e073f1f9587f9994ab582f39d5e4601f6838675c999f1802e1faaac12553",
+      "body_shape_hash": "4d83e073f1f9587f9994ab582f39d5e4601f6838675c999f1802e1faaac12553",
+      "declaration_hash": "1635480a5c5f0e2d6f058e78702c183d0fc073ac74f9eb4085807b6fbf0a60c3",
       "direct_consumers": [
         "Cycle.conjectures.U10.Pedge",
         "Cycle.conjectures.U10.padj",
         "Cycle.conjectures.U10.psupp"
       ],
       "kind": "Definition",
-      "line": 118,
+      "line": 119,
       "local_dependencies": [],
       "name": "petersenV",
       "normalized_name": "petersenV",
@@ -12986,16 +12967,16 @@
       "signature_shape_hash": "ece17c3627e4abc16c4d3ed0ef78dafe006fd0a7349f067291bb4ef8c0cf268b"
     },
     {
-      "body_hash": "6b97dcc3c76ee0698fcb2accf1722571dce1bf7a84869c70d848d662bac77e22",
-      "body_shape_hash": "6b97dcc3c76ee0698fcb2accf1722571dce1bf7a84869c70d848d662bac77e22",
-      "declaration_hash": "daf088623ad7c94d3bb7aa15088c605e68bbcbed475c895d47d88e5fa6518008",
+      "body_hash": "81a328e0dc88333a5ea40233fc431d24ecb69c2e96f9a2e726e85690f24392b4",
+      "body_shape_hash": "81a328e0dc88333a5ea40233fc431d24ecb69c2e96f9a2e726e85690f24392b4",
+      "declaration_hash": "80203aa22b6b77812aaef051a34c84838e5b4497b931455327d4c6fc1e3394f2",
       "direct_consumers": [
         "Cycle.conjectures.U10.Pedge",
         "Cycle.conjectures.U10.padj_irrefl",
         "Cycle.conjectures.U10.padj_sym"
       ],
       "kind": "Definition",
-      "line": 132,
+      "line": 138,
       "local_dependencies": [
         "petersenV"
       ],
@@ -13012,11 +12993,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "254d834774a4f7839f2a25a2776d8ea673eec97af4425d5af5112a7434a79611",
-      "direct_consumers": [
-        "Cycle.conjectures.U10.petersen"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 135,
+      "line": 141,
       "local_dependencies": [
         "padj"
       ],
@@ -13033,11 +13012,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "24e6029b5fbd6cfdf0f54e8f50b6a3431dc098aaf9c71cfcb5f21505090e5b6b",
-      "direct_consumers": [
-        "Cycle.conjectures.U10.petersen"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 138,
+      "line": 144,
       "local_dependencies": [
         "padj"
       ],
@@ -13051,16 +13028,13 @@
       "signature_shape_hash": "b27d523796d24b111dcbcb4a1f6c1a43c05c6b1790f4f938f4abaf896e407c9e"
     },
     {
-      "body_hash": "6a31ee1af5cd9e2462f6a149b0bc819b1f7a05efd0b34be998e1f2d5803f2bf7",
-      "body_shape_hash": "6a31ee1af5cd9e2462f6a149b0bc819b1f7a05efd0b34be998e1f2d5803f2bf7",
-      "declaration_hash": "296b22c62add36e3f824a0f0d3f1a268c6b946a00de68d977d2953215d8b56cb",
+      "body_hash": "ce252c55155c35652724cc8303a0e1a20587cf6a39020bc4d4ef6d093178501f",
+      "body_shape_hash": "ce252c55155c35652724cc8303a0e1a20587cf6a39020bc4d4ef6d093178501f",
+      "declaration_hash": "16ff6b673da3e66848fa908801edfced1a15c2bcf553608878bfa6cbddf473e3",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 144,
-      "local_dependencies": [
-        "padj_irrefl",
-        "padj_sym"
-      ],
+      "line": 147,
+      "local_dependencies": [],
       "name": "petersen",
       "normalized_name": "petersen",
       "package": "cycle-theory",
@@ -13080,7 +13054,7 @@
         "Cycle.conjectures.U10.psupp"
       ],
       "kind": "Definition",
-      "line": 146,
+      "line": 149,
       "local_dependencies": [
         "padj",
         "petersenV"
@@ -13102,7 +13076,7 @@
         "Cycle.conjectures.U10.Padj"
       ],
       "kind": "Definition",
-      "line": 151,
+      "line": 154,
       "local_dependencies": [
         "Pedge",
         "petersenV"
@@ -13124,7 +13098,7 @@
         "Cycle.conjectures.U10.petersen_coloring_statement"
       ],
       "kind": "Definition",
-      "line": 154,
+      "line": 157,
       "local_dependencies": [
         "Pedge",
         "psupp"
@@ -13146,7 +13120,7 @@
         "Cycle.conjectures.U10.petersen_coloring_statement"
       ],
       "kind": "Definition",
-      "line": 160,
+      "line": 163,
       "local_dependencies": [],
       "name": "mut_adj3",
       "normalized_name": "mut_adj3",
@@ -13165,7 +13139,7 @@
         "Cycle.conjectures.U10.contains_odd_edge_cut"
       ],
       "kind": "Definition",
-      "line": 206,
+      "line": 209,
       "local_dependencies": [],
       "name": "is_odd_edge_cut",
       "normalized_name": "is_odd_edge_cut",
@@ -13184,7 +13158,7 @@
         "Cycle.conjectures.U10.intersecting_two_perfect_matchings_statement"
       ],
       "kind": "Definition",
-      "line": 219,
+      "line": 222,
       "local_dependencies": [
         "is_odd_edge_cut"
       ],

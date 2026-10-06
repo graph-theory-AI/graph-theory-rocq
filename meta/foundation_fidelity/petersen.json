@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "family": "petersen",
+  "modules": {
+    "GTBase.petersen": {
+      "path": "base/theories/petersen.v",
+      "overrides": {
+        "petersen_ord": {
+          "verdict": "FAITHFUL",
+          "note": "The Petersen graph drawn on 'I_10: outer 5-cycle 0..4, spokes i ~ i+5, inner pentagram 5-7-9-6-8-5, from the literal ordered table; the natural relation is false outside 0..9 and on equal ends; isomorphic to petersen_kneser."
+        },
+        "petersen_kneser": {
+          "verdict": "FAITHFUL",
+          "note": "The Kneser graph KG(5,2): the ten two-element subsets of 'I_5 (exact cardinality subtype), adjacent iff disjoint; irreflexive since every vertex has two elements; isomorphic to petersen_ord."
+        }
+      },
+      "machine_evidence": [
+        "petersen_ord_adj_sym",
+        "petersen_ord_adj_irrefl",
+        "petersen_ord_edgeE",
+        "petersen_connC",
+        "petersen_conn_out",
+        "petersen_conn_refl",
+        "kneser52_adj_sym",
+        "kneser52_adj_irrefl",
+        "petersen_kneser_edgeE",
+        "card_kneser52V",
+        "petersen_label_card2",
+        "val_petersen_kmap",
+        "disjoint_set2",
+        "petersen_kmap_adj",
+        "petersen_label_inj_bool",
+        "petersen_kmap_inj",
+        "codom_petersen_kmap",
+        "petersen_kmapK",
+        "petersen_kinvK"
+      ]
+    }
+  }
+}

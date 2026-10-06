@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "family": "petersen",
+  "primitive": {
+    "canonical_name": "GTBase.petersen.petersen_ord",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "padj",
+      "pconn",
+      "pedges",
+      "petersen",
+      "petersenV"
+    ],
+    "source_definitions": [
+      "Cycle.conjectures.D1.padj",
+      "Cycle.conjectures.D1.pconn",
+      "Cycle.conjectures.D1.pedges",
+      "Cycle.conjectures.D1.petersen",
+      "Cycle.conjectures.U10.padj",
+      "Cycle.conjectures.U10.petersen",
+      "Cycle.conjectures.U10.petersenV"
+    ],
+    "consumers_remaining": 8,
+    "relation": "the Petersen graph in two named views kept on their own carriers: Cycle D1 pedges/pconn/padj/petersen (the literal ordered table of fifteen natural pairs, the natural relation, false outside 0..9 and on equal ends, the ordinal relation on 'I_10 and its SGraph) equal GTBase.petersen.petersen_edge_table, petersen_conn and petersen_ord_adj by conversion, and the graph agrees pointwise with petersen_ord with the identity isomorphism; Cycle U10 petersenV/padj/petersen (the exact cardinality-two subtype of {set 'I_5}, disjointness, its SGraph) are kneser52V and kneser52_adj by conversion, the graph agreeing pointwise with petersen_kneser and by the identity isomorphism. The four constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. The views are related by the explicit isomorphism petersen_ord_kneser_diso (the labelling table of grounding_D1, now public); isomorphism is not equality of carriers. U10's Pedge/psupp/Padj stay convertible.",
+    "semantic_classes": {
+      "ordinal-table-view": {
+        "members": [
+          "Cycle.conjectures.D1.padj",
+          "Cycle.conjectures.D1.pconn",
+          "Cycle.conjectures.D1.pedges",
+          "Cycle.conjectures.D1.petersen"
+        ],
+        "count": 4,
+        "verdict": "equivalent",
+        "certificates": [
+          "Cycle.migration.petersen.d1_padj_compat",
+          "Cycle.migration.petersen.pconn_compat",
+          "Cycle.migration.petersen.pedges_compat",
+          "Cycle.migration.petersen.d1_petersen_compat"
+        ],
+        "note": "the literal ordered fifteen-pair table, the natural relation (false outside 0..9 and on equal ends), the ordinal relation and its SGraph; conversion for the table and relations, pointwise adjacency and the identity isomorphism for the graph"
+      },
+      "kneser-view": {
+        "members": [
+          "Cycle.conjectures.U10.padj",
+          "Cycle.conjectures.U10.petersen",
+          "Cycle.conjectures.U10.petersenV"
+        ],
+        "count": 3,
+        "verdict": "equivalent",
+        "certificates": [
+          "Cycle.migration.petersen.u10_padj_compat",
+          "Cycle.migration.petersen.u10_petersen_compat",
+          "Cycle.migration.petersen.petersenV_compat"
+        ],
+        "note": "the exact cardinality-two subtype of {set 'I_5}, disjointness and its SGraph; conversion for the carrier and relation (Pedge/psupp/Padj stay convertible), pointwise adjacency and the identity isomorphism for the graph"
+      }
+    },
+    "distinct_variants": {},
+    "compatibility_theorems": [
+      "Cycle.migration.petersen.Padj_compat",
+      "Cycle.migration.petersen.Pedge_compat",
+      "Cycle.migration.petersen.d1_padj_compat",
+      "Cycle.migration.petersen.d1_padj_proofs_compat",
+      "Cycle.migration.petersen.d1_petersen_compat",
+      "Cycle.migration.petersen.external_petersen_BF_cover_statement_compat",
+      "Cycle.migration.petersen.four_flow_statement_compat",
+      "Cycle.migration.petersen.pconn_compat",
+      "Cycle.migration.petersen.pedges_compat",
+      "Cycle.migration.petersen.petersenV_compat",
+      "Cycle.migration.petersen.petersen_coloring_statement_compat",
+      "Cycle.migration.petersen.petersen_coloring_statement_original_compat",
+      "Cycle.migration.petersen.psupp_compat",
+      "Cycle.migration.petersen.u10_padj_compat",
+      "Cycle.migration.petersen.u10_padj_proofs_compat",
+      "Cycle.migration.petersen.u10_petersen_compat"
+    ],
+    "api_theorems": [
+      "GTBase.petersen.petersen_ord_adj_sym",
+      "GTBase.petersen.petersen_ord_adj_irrefl",
+      "GTBase.petersen.petersen_ord_edgeE",
+      "GTBase.petersen.petersen_connC",
+      "GTBase.petersen.petersen_conn_out",
+      "GTBase.petersen.petersen_conn_refl",
+      "GTBase.petersen.kneser52_adj_sym",
+      "GTBase.petersen.kneser52_adj_irrefl",
+      "GTBase.petersen.petersen_kneser_edgeE",
+      "GTBase.petersen.card_kneser52V",
+      "GTBase.petersen.petersen_label_card2",
+      "GTBase.petersen.val_petersen_kmap",
+      "GTBase.petersen.disjoint_set2",
+      "GTBase.petersen.petersen_kmap_adj",
+      "GTBase.petersen.petersen_label_inj_bool",
+      "GTBase.petersen.petersen_kmap_inj",
+      "GTBase.petersen.codom_petersen_kmap",
+      "GTBase.petersen.petersen_kmapK",
+      "GTBase.petersen.petersen_kinvK",
+      "GTBase.petersen.petersen_ord_kneser_diso",
+      "Cycle.migration.petersen.d1_petersen_diso",
+      "Cycle.migration.petersen.u10_petersen_diso"
+    ],
+    "public_client": "base/theories/examples/petersen.v",
+    "legacy_baseline": "ba3c7488b171091c9121dd8ea0ab2f73c3d294bf",
+    "migration_report": "meta/migration_reports/petersen.md",
+    "migration_spec": "meta/migration_reports/petersen.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A24.md",
+    "foundation_fidelity": "meta/foundation_fidelity/petersen.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory (no petersen or kneser declaration, case-insensitive)",
+        "GraphTheory.core.sgraph/digraph (SGraph, Diso', eq_diso, diso_sym/comp, diso_card_edge reused)",
+        "MathComp finset/fintype (card_draws, cards2, inj_card_bij, iinv)"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.petersen.petersen_ord and GTBase.petersen.petersen_kneser",
+      "note": "No installed upstream Petersen or Kneser graph; both views and the isomorphism are local, over upstream SGraph/Diso'. Evidence: coordination/evidence/A24-petersen-discovery-by-path-review/ (upstream.txt) and coordination/evidence/A24-petersen/.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "matching_scope",
+    "reviewed_commit": "897a7d30a0137195d30ae803d0482b5df31c3869",
+    "independent_review": "meta/migration_reviews/petersen.md"
+  }
+}

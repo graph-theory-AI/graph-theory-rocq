@@ -216,19 +216,19 @@ Proof. by rewrite card_sig -cardsE card_draws card_ord. Qed.
 (** WITNESSES: pairwise-disjoint 2-subsets are [padj]-adjacent. *)
 Lemma pj_01_23 : padj pv01 pv23.
 Proof.
-by rewrite /padj !SubK -setI_eq0; apply/eqP/setP => z;
+by rewrite /padj /GTBase.petersen.kneser52_adj !SubK -setI_eq0; apply/eqP/setP => z;
   rewrite !inE -!val_eqE /=; case: (val z) => [|[|[|[|[|n]]]]].
 Qed.
 
 Lemma pj_01_24 : padj pv01 pv24.
 Proof.
-by rewrite /padj !SubK -setI_eq0; apply/eqP/setP => z;
+by rewrite /padj /GTBase.petersen.kneser52_adj !SubK -setI_eq0; apply/eqP/setP => z;
   rewrite !inE -!val_eqE /=; case: (val z) => [|[|[|[|[|n]]]]].
 Qed.
 
 Lemma pj_01_34 : padj pv01 pv34.
 Proof.
-by rewrite /padj !SubK -setI_eq0; apply/eqP/setP => z;
+by rewrite /padj /GTBase.petersen.kneser52_adj !SubK -setI_eq0; apply/eqP/setP => z;
   rewrite !inE -!val_eqE /=; case: (val z) => [|[|[|[|[|n]]]]].
 Qed.
 
