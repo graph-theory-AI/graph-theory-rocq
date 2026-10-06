@@ -59,6 +59,7 @@ import argparse
 import hashlib
 import json
 import os
+import posixpath
 import re
 import shlex
 import subprocess
@@ -209,6 +210,216 @@ def frozen_reference(name: str, modules: set[str] = frozenset()) -> bool:
 
 def live_reference(text: str, name: str, modules: set[str] = frozenset()) -> bool:
     return any(not frozen_reference(m.group(), modules) for m in ref_re(name).finditer(text))
+
+
+class ProviderContext:
+    """Conservative source attribution in the declared project build context.
+
+    Repository namespaces belong exclusively to repository project roots;
+    installed libraries must not inject or shadow them. This is a supported
+    build contract, not certification of an arbitrary ambient Rocq loader.
+    Unknown contexts keep the old candidate superset. Instances are local to a
+    single dependency/report query, so current reads are never cached across it.
+    """
+
+    NON_LOADER_SETTINGS = {
+        "ROCQ_OPAM_SWITCH", "ROCQ_STEP_TIMEOUT", "ROCQ_QED_TIMEOUT",
+        "ROCQ_WORKDIR", "ROCQ_PROJECT_ROOT", "ROCQ_CLI_CPUS", "ROCQ_CLI_MEMORY",
+        "ROCQ_MCP_MEMORY",
+    }
+
+    def __init__(self, commit: str | None):
+        self.commit = commit
+        self.namespaces = INV.repository_namespaces()
+        self.roots = {package + "/theories": namespace
+                      for package, namespace in self.namespaces.items()}
+        self.projects: dict[str, tuple[set[str], set[str]] | None] = {}
+        self.contexts: dict[str, set[str] | None] = {}
+        self.fallbacks: set[tuple[str, str]] = set()
+        self.modes: dict[str, str] | None = None
+        self.regular_paths: set[str] = set()
+
+    def unknown(self, path: str, reason: str) -> None:
+        self.fallbacks.add((path, reason))
+
+    def regular_text(self, path: str) -> str:
+        relative = Path(path)
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError("non-repository path")
+        if self.commit is not None:
+            if self.modes is None:
+                self.modes = {}
+                for line in git("ls-tree", "-r", self.commit).splitlines():
+                    identity, name = line.split("\t", 1)
+                    self.modes[name] = identity.split()[0]
+            if self.modes.get(path) not in {"100644", "100755"}:
+                raise ValueError("missing or non-regular historical source")
+        else:
+            target = ROOT / relative
+            if (not target.is_file() or any((ROOT / parent).is_symlink()
+                    for parent in (relative, *relative.parents) if parent != Path("."))):
+                raise ValueError("missing or non-regular current source")
+        text = source_at(self.commit, path)
+        self.regular_paths.add(path)
+        return text
+
+    def project(self, package: str) -> tuple[set[str], set[str]] | None:
+        if package in self.projects:
+            return self.projects[package]
+        path = package + "/_CoqProject"
+        try:
+            text = self.regular_text(path)
+            tokens = shlex.split(text, comments=True)
+            mappings, members = [], set()
+            i = 0
+            while i < len(tokens):
+                token = tokens[i]
+                if token in {"-R", "-Q"} and i + 2 < len(tokens):
+                    directory, namespace = tokens[i + 1:i + 3]
+                    root = posixpath.normpath(package + "/" + directory)
+                    if (directory != posixpath.relpath(root, package)
+                            or self.roots.get(root) != namespace):
+                        raise ValueError("unsupported or remapped namespace root")
+                    mappings.append((root, namespace))
+                    i += 3
+                elif (tokens[i:i + 3] == ["-arg", "-w", "-arg"] and i + 3 < len(tokens)
+                      and re.fullmatch(r"[+-]?[A-Za-z][A-Za-z0-9_-]*(?:,[+-]?[A-Za-z][A-Za-z0-9_-]*)*",
+                                       tokens[i + 3])):
+                    i += 4
+                elif (token.startswith("theories/") and token.endswith(".v")
+                      and ".." not in Path(token).parts):
+                    members.add(token)
+                    i += 1
+                else:
+                    raise ValueError("unsupported project option or source path")
+            roots = {root for root, namespace in mappings}
+            if (not mappings or len(roots) != len(mappings)
+                    or len({namespace for root, namespace in mappings}) != len(mappings)
+                    or package + "/theories" not in roots):
+                raise ValueError("missing, duplicate or ambiguous namespace mapping")
+            self.projects[package] = members, roots
+        except (OSError, UnicodeError, ValueError, subprocess.CalledProcessError) as exc:
+            self.unknown(path, str(exc))
+            self.projects[package] = None
+        return self.projects[package]
+
+    def context(self, package: str) -> set[str] | None:
+        if package in self.contexts:
+            return self.contexts[package]
+        path = package + "/_CoqProject"
+        overrides = sorted(name for name, value in os.environ.items() if value
+                           and name.startswith(("COQ", "ROCQ"))
+                           and name not in self.NON_LOADER_SETTINGS)
+        if overrides:
+            self.unknown(path, "ambient loader/compiler settings: " + ", ".join(overrides))
+            self.contexts[package] = None
+            return None
+        project = self.project(package)
+        if project is None:
+            self.contexts[package] = None
+            return None
+        _, roots = project
+        try:
+            local_modules = set()
+            all_local_modules = set()
+            imported_projects = {}
+            for root in sorted(roots):
+                owner = root.split("/", 1)[0]
+                imported = self.project(owner)
+                if imported is None:
+                    raise ValueError("unsupported mapped project: " + owner)
+                imported_projects[owner] = imported
+                local_modules.update(self.namespaces[owner] + "." + member[len("theories/"):-2].replace("/", ".")
+                                     for member in imported[0])
+                if self.commit is not None:
+                    paths = [path for path in self.modes or {} if path.startswith(root + "/") and path.endswith(".v")]
+                else:
+                    paths = [path.relative_to(ROOT).as_posix() for path in (ROOT / root).rglob("*.v")]
+                all_local_modules.update(self.namespaces[owner] + "." + path[len(root) + 1:-2].replace("/", ".")
+                                         for path in paths)
+            # Scan the whole declared local context, not an under-approximated
+            # textual Require closure. No assertion about empty external deps.
+            for owner, imported in imported_projects.items():
+                for member in sorted(imported[0]):
+                    source = owner + "/" + member
+                    clean = statement_ownership_text(self.regular_text(source))
+                    if re.search(r"\b(?:Load|LoadPath)\b|\b(?:Add|Remove|Declare)\s+ML\b", clean):
+                        raise ValueError("dynamic loader command in " + source)
+                    self.check_requires(clean, local_modules, all_local_modules, source)
+            self.contexts[package] = roots
+        except (OSError, UnicodeError, ValueError, subprocess.CalledProcessError) as exc:
+            self.unknown(path, str(exc))
+            self.contexts[package] = None
+        return self.contexts[package]
+
+    def check_requires(self, clean: str, local_modules: set[str], all_local_modules: set[str], source: str) -> None:
+        # An unlisted local .vo can carry loader effects even though its source
+        # is not among the checked members. Unsupported/bare unknown imports
+        # therefore retain candidates; external qualified identities remain
+        # subject to the documented non-injection contract, not an empty graph.
+        qualified = rf"{IDENT}(?:\.{IDENT})*"
+        start = 0
+        for end in (*[match.end() for match in re.finditer(r"\.(?=\s|$)", clean)], len(clean)):
+            sentence = clean[start:end].strip()
+            start = end
+            if not re.search(r"\bRequire\b", sentence):
+                continue
+            command = re.fullmatch(rf"(?:From\s+({qualified})\s+)?Require\s+"
+                                   rf"(?:(?:Import|Export)\s+)?({qualified}(?:\s+{qualified})*)\s*\.", sentence)
+            if command is None:
+                raise ValueError("unsupported Require command in " + source)
+            prefix, names = command.groups()
+            for name in names.split():
+                target = (prefix + "." if prefix else "") + name
+                head, _, tail = target.partition(".")
+                # Recursive -R roots also permit e.g. Packing.X15 for
+                # Packing.conjectures.X15. Keep every possible suffix, never
+                # choose an import-order winner; unchecked matches fall back.
+                candidates = {module for module in all_local_modules
+                              if module == target or module.endswith("." + target)
+                              or (head in self.namespaces.values() and tail
+                                  and module.startswith(head + ".") and module.endswith("." + tail))}
+                if candidates - local_modules:
+                    raise ValueError("unlisted local Require " + target + " in " + source)
+                if candidates:
+                    continue
+                if target.split(".", 1)[0] in self.namespaces.values():
+                    raise ValueError("unlisted or unmapped local Require " + target + " in " + source)
+                if prefix is None:
+                    raise ValueError("unresolved or partial Require " + target + " in " + source)
+
+    def possible(self, consumer: str, provider: str) -> bool:
+        package = consumer.split("/", 1)[0]
+        if package == provider.split("/", 1)[0]:
+            return True
+        roots = self.context(package)
+        if roots is None:
+            return True
+        try:
+            for path in (consumer, provider):
+                owner, relative = path.split("/", 1)
+                project = self.project(owner)
+                if project is None or relative not in project[0]:
+                    raise ValueError("missing/unknown provider or consumer project membership: " + path)
+                if path not in self.regular_paths:
+                    self.regular_text(path)
+        except (OSError, UnicodeError, ValueError, subprocess.CalledProcessError) as exc:
+            self.unknown(consumer, str(exc))
+            return True
+        return any(provider.startswith(root + "/") for root in roots)
+
+    def reference(self, consumer: str, token: str, providers: set[str]) -> bool:
+        # Qualified references retain the previous full/suffix treatment.
+        if "." in token:
+            return True
+        if not providers:
+            self.unknown(consumer, "missing provider provenance for " + token)
+            return True
+        return any(self.possible(consumer, provider) for provider in sorted(providers))
+
+    def diagnostics(self) -> list[dict]:
+        return [{"commit": self.commit, "path": path, "reason": reason}
+                for path, reason in sorted(self.fallbacks)]
 
 
 def module_spans(clean: str) -> list[tuple[str, int, int]]:
@@ -495,7 +706,8 @@ def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) 
 
 def statement_dependencies(base: str | None, sources: set[str], rows: dict, *,
                            include_public: bool = False,
-                           additional_statements: set[str] = frozenset()) -> tuple[set[str], set[str]]:
+                           additional_statements: set[str] = frozenset(),
+                           provider_context: ProviderContext | None = None) -> tuple[set[str], set[str]]:
     """Discover baseline statement consumers independently of the frozen list.
 
     Read build-listed conjecture declarations, resolve same-file names first,
@@ -513,7 +725,9 @@ def statement_dependencies(base: str | None, sources: set[str], rows: dict, *,
         public_repository_path(additional_statement_path(name)) for name in additional_statements)
     paths = (git("ls-tree", "-r", "--name-only", base).splitlines() if base is not None
              else sorted(set(git("ls-files", "--cached", "--others", "--exclude-standard").splitlines())))
+    context = provider_context if provider_context is not None else ProviderContext(base)
     projects, nodes, node_packages, short_names = {}, {}, {}, defaultdict(set)
+    node_paths = {}
     for path in paths:
         public = public_repository_path(path)
         if not path.endswith(".v") or not ("/theories/conjectures/" in path or include_public and public):
@@ -542,10 +756,12 @@ def statement_dependencies(base: str | None, sources: set[str], rows: dict, *,
                 qualified = module + "." + decl["name"]
                 nodes[qualified] = (module, decl)
                 node_packages[qualified] = package
+                node_paths[qualified] = path
                 short_names[decl["name"]].add(qualified)
     if include_public and sources - set(nodes):
         raise RegistryError(f"source declarations missing from baseline dependency index: {sorted(sources - set(nodes))}")
     reverse, forward = defaultdict(set), defaultdict(set)
+    unrestricted = set()
     for qualified, (module, decl) in nodes.items():
         for token in QUALIFIED_IDENT_RE.findall(body_after_name(decl)):
             if "." in token:
@@ -558,11 +774,22 @@ def statement_dependencies(base: str | None, sources: set[str], rows: dict, *,
             for dependency in candidates:
                 reverse[dependency].add(qualified)
                 forward[qualified].add(dependency)
-    reached, pending = set(sources), list(sources)
+                if "." in token or module + "." + token in nodes:
+                    unrestricted.add((qualified, dependency))
+
+    def eligible(consumer: str, dependency: str) -> bool:
+        return ((consumer, dependency) in unrestricted
+                or context.possible(node_paths[consumer], node_paths[dependency]))
+
+    # Evaluate the same edge predicate only along source-reachable paths. In
+    # particular, unrelated declarations need not inspect their project context.
+    reached, pending = set(sources), sorted(sources)
     while pending:
-        for consumer in reverse[pending.pop()] - reached:
-            reached.add(consumer)
-            pending.append(consumer)
+        dependency = pending.pop()
+        for consumer in sorted(reverse[dependency] - reached):
+            if eligible(consumer, dependency):
+                reached.add(consumer)
+                pending.append(consumer)
     if additional_statements & sources or additional_statements - (reached & set(nodes)):
         raise ValueError("additional statements must be reached from migrated sources and cannot be source helpers")
     statements = {name for name in reached if name in nodes and
@@ -570,11 +797,14 @@ def statement_dependencies(base: str | None, sources: set[str], rows: dict, *,
              any(row.get("repo") == node_packages[name]
                  for row in rows.get(name.rsplit(".", 1)[-1], [])))}
     statements.update(additional_statements)
-    ancestors, pending = set(statements), list(statements)
+    ancestors, pending = set(statements), sorted(statements)
     while pending:
-        for dependency in forward[pending.pop()] - ancestors:
-            ancestors.add(dependency)
-            pending.append(dependency)
+        consumer = pending.pop()
+        # Every intermediary on a source-to-statement path is already reached.
+        for dependency in sorted((forward[consumer] & reached) - ancestors):
+            if eligible(consumer, dependency):
+                ancestors.add(dependency)
+                pending.append(dependency)
     return statements, reached & ancestors
 
 
@@ -860,13 +1090,18 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     chain_names = {o["name"] for o in spec["frozen"] if o["kind"] == "chain"}
     statements = []
     computed_chain: set[str] = set()
+    providers: dict[str, set[str]] = defaultdict(set)
+    for obj in spec["frozen"]:
+        if obj["kind"] in {"source", "chain", "statement"}:
+            providers[obj["name"]].add(obj["path"])
+    baseline_context, current_context = ProviderContext(base), ProviderContext(None)
     expected_statements, reaching = statement_dependencies(
         base, expected_sources, rows_base, include_public=bool(repository_sources),
-        additional_statements=additional)
+        additional_statements=additional, provider_context=baseline_context)
     if additional:
         statement_dependencies(None, expected_sources, rows_now,
                                include_public=bool(repository_sources),
-                               additional_statements=additional)
+                               additional_statements=additional, provider_context=current_context)
     _, role_errors = statement_obligations(
         spec, expected_statements=expected_statements, rows_base=rows_base, rows_now=rows_now)
     for error in role_errors:
@@ -888,6 +1123,8 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         reaches = {n for n in closure if local_closure(decls, n) & source_names}
         affected = sorted(reaches - {obj["name"]})
         computed_chain.update(affected)
+        for name in affected:
+            providers[name].add(obj["path"])
         frozen_here = {o["name"] for o in spec["frozen"]
                        if o["path"] == obj["path"] and o["kind"] in {"source", "chain"}
                        and o.get("commit", base) == base}
@@ -949,7 +1186,10 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         for decl in declarations(path.read_text()):
             if decl["module"] is None:
                 continue
-            hits = sorted(n for n in live_names if live_reference(body_after_name(decl), n, frozen_modules))
+            hits = sorted(n for n in live_names if any(
+                not frozen_reference(match.group(), frozen_modules)
+                and current_context.reference(rel, match.group(), providers[n])
+                for match in ref_re(n).finditer(body_after_name(decl))))
             if hits:
                 stale.append({"frozen": f"{rel}#{decl['module']}.{decl['name']}",
                               "resolves_through_live": hits,
@@ -976,8 +1216,11 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         clean = INV.strip_comments(src)
         decls = declarations(src)
         for name, pattern in patterns.items():
+            declared_here = any(d["name"] == name and d["module"] is None for d in decls)
             for match in pattern.finditer(clean):
                 if frozen_reference(match.group(), frozen_modules):
+                    continue
+                if not declared_here and not current_context.reference(rel, match.group(), providers[name]):
                     continue
                 line = clean.count("\n", 0, match.start()) + 1
                 owner = next((d for d in reversed(decls) if d["line"] <= line), None)
@@ -986,8 +1229,7 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
                 if owner and owner["name"] == name and owner["line"] == line:
                     continue
                 consumers.append({"name": name, "path": rel, "line": line, "in": owner_name,
-                                  "declared_here": any(d["name"] == name and d["module"] is None
-                                                       for d in decls)})
+                                  "declared_here": declared_here})
         if canonical_re.search(clean) and "/migration/" not in rel:
             try:
                 before = INV.strip_comments(source_at(base, rel))
@@ -1028,10 +1270,12 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         "cross_module_consumers": spec.get("cross_module_consumers", []),
         "canonical_users": sorted(canonical_users, key=lambda u: u["path"]),
         "distinct_variants": spec.get("distinct_variants", []),
+        "provider_context_fallbacks": baseline_context.diagnostics() + current_context.diagnostics(),
         "checks": checks,
         "ok": all(c["ok"] for c in checks),
         "validation_limits": [
             "Default checks compare source text, registry coverage and conservative lexical dependencies; they do not prove theorem types.",
+            "Bare provider attribution assumes repository namespaces come exclusively from declared project roots; external libraries must not inject or shadow them. Unknown loader/project contexts retain all lexical candidates; source auditing does not certify an ambient compiler installation.",
             "--kernel checks exact closed statement equivalences and assumptions of every named certificate/API theorem, using already-built modules.",
             ("Dependency discovery also scans build-listed public base/foundation declarations for explicitly enrolled repository sources; it does not resolve notation, constructor names, module aliases or Section context like Rocq."
              if repository_sources else

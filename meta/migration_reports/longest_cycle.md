@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py longest_cycle --details /tmp/mi
 
 - Canonical: `GTBase.walks_paths.seq_longest_cycle`.
 - Baseline: `c52825404e519998716b02ccb40f73cfc604dc56`.
-- Scope: 3 helpers, 3 statements, 8 frozen objects, 28 recorded references.
-- Source checks: 106/106 pass; consistent.
+- Scope: 3 helpers, 3 statements, 8 frozen objects, 27 recorded references.
+- Source checks: 105/105 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

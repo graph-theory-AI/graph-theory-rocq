@@ -1811,6 +1811,315 @@ class ClassicalSourceTests(unittest.TestCase):
         self.assertEqual(REPORT.check_kernel(self.spec), [])
 
 
+class ProviderAttributionTests(unittest.TestCase):
+    """Actual short-name collisions and conservative project-context boundaries."""
+
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    commit = ReportTests.commit
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+
+    def setUp(self):
+        ReportTests.setUp(self)
+        old_source, old_cert = self.source, self.certificate
+        self.source = "infinite-graph-theory/theories/conjectures/X0.v"
+        self.certificate = "infinite-graph-theory/theories/migration/test_family.v"
+        self.module = "Infinite.migration.test_family"
+        self.helper = "Infinite.conjectures.X0.local_helper"
+        self.statement = "Infinite.conjectures.X0.test_statement"
+        self.other = "chromatic-theory/theories/conjectures/X1.v"
+        self.other_cert = "chromatic-theory/theories/migration/collision.v"
+        self.other_statement = "Chromatic.conjectures.X1.foreign_statement"
+        self.infinite_project = ("-R theories Infinite\n-Q ../base/theories GTBase\n"
+                                 "theories/conjectures/X0.v\n")
+        self.other_project = ("-R theories Chromatic\n-Q ../base/theories GTBase\n"
+                              "theories/conjectures/X1.v\n")
+        self.write("base/_CoqProject", "-Q theories GTBase\ntheories/common.v\n")
+        common = (self.root / "base/theories/common.v").read_text()
+        self.write("base/theories/common.v", common + "Definition local_helper (n : nat) : Prop := n = 0.\n")
+        self.write("infinite-graph-theory/_CoqProject", self.infinite_project)
+        self.write("chromatic-theory/_CoqProject", self.other_project)
+        self.write(self.source, self.original)
+        self.write(self.other, "From GTBase Require Import common.\n"
+                   "Definition foreign_statement : Prop := local_helper 0.\n")
+        (self.root / old_source).unlink()
+        (self.root / old_cert).unlink()
+        self.row["repo"] = "infinite-graph-theory"
+        self.write_manifests("v2")
+        manifest_path = "meta/" + REPORT.REG.CORPORA["v2"]["manifest"]
+        manifest = json.loads((self.root / manifest_path).read_text())
+        manifest["rows"].append(dict(self.row, formal_name="foreign_statement", repo="chromatic-theory", slug="foreign"))
+        self.write_json(manifest_path, manifest)
+        primitive = self.registry["primitives"]["test-family"]
+        primitive["owner"] = "infinite-graph-theory"
+        primitive["source_definitions"] = [self.helper]
+        primitive["compatibility_theorems"] = [self.module + ".helper_compat", self.module + ".statement_compat", "GTBase.common.unrelated"]
+        self.write_json("meta/library_primitives/test-family.json", {"schema_version":1, "family":"test-family", "primitive":primitive})
+        self.write_json("meta/library_helper_inventory.json", {"helpers":[{
+            "qualified_name":self.helper,
+            "declaration_hash":REPORT.sha256(REPORT.find_decl(self.original, "local_helper")["text"])}]})
+        self.baseline = self.commit()
+        self.spec["baseline_commit"] = self.baseline
+        self.spec["namespaces"]["infinite-graph-theory"] = "Infinite"
+        self.spec["certificate_files"][0] = self.certificate
+        for obj in self.spec["frozen"]:
+            obj["path"], obj["frozen_path"] = self.source, self.certificate
+            obj["qualified"] = (self.helper if obj["kind"] == "source" else self.statement)
+            obj["certificate"] = obj["certificate"].replace("GTBase.migration", "Infinite.migration")
+        self.cert_source = self.cert_source.replace("From GTBase.conjectures", "From Infinite.conjectures")
+        self.write(self.source, self.live)
+        self.write(self.certificate, self.cert_source)
+        self.write("infinite-graph-theory/_CoqProject", self.infinite_project + "theories/migration/test_family.v\n")
+        self.write(self.other_cert, "From GTBase Require Import common.\nModule OtherLegacy.\n"
+                   "Definition old_row : Prop := local_helper 0.\nEnd OtherLegacy.\n")
+        self.write("chromatic-theory/_CoqProject", self.other_project + "theories/migration/collision.v\n")
+
+    def dependencies(self, commit=None):
+        rows, _ = REPORT.manifest_rows(commit)
+        return REPORT.statement_dependencies(commit, {self.helper}, rows)[0]
+
+    def test_all_three_attribution_sites_exclude_only_unavailable_provider(self):
+        result = self.report()
+        self.assertEqual([c for c in result["checks"] if not c["ok"]], [])
+        self.assertEqual(self.dependencies(self.baseline), {self.statement})
+        self.assertEqual(result["stale_snapshots"], [])
+        self.assertFalse(any(c["path"].startswith("chromatic-theory/") for c in result["consumers"]))
+        # A real family stale reference still fails, even in a newly added file.
+        self.write("infinite-graph-theory/theories/migration/stale.v",
+                   "Module PriorLegacy.\nDefinition bad : Prop := local_helper 0.\nEnd PriorLegacy.\n")
+        self.assertTrue(any("resolves through live" in failure for failure in self.failures()))
+
+    def test_mapped_ambiguity_transitive_import_and_qualified_references_stay(self):
+        self.assertNotIn(self.other_statement, self.dependencies())
+        self.write("chromatic-theory/_CoqProject", self.other_project + "-Q ../infinite-graph-theory/theories Infinite\n"
+                   "theories/migration/collision.v\n")
+        # Visibility is an over-approximation: no direct Require is necessary.
+        self.assertIn(self.other_statement, self.dependencies())
+        self.write("base/theories/relay.v", "Require Export Infinite.conjectures.X0.\n")
+        self.write("base/_CoqProject", "-Q theories GTBase\n-Q ../infinite-graph-theory/theories Infinite\n"
+                   "theories/common.v\ntheories/relay.v\n")
+        self.write(self.other, "From GTBase Require Import relay.\nDefinition foreign_statement : Prop := local_helper 0.\n")
+        self.assertIn(self.other_statement, self.dependencies())
+        self.write("chromatic-theory/_CoqProject", self.other_project)
+        for spelling in ("Infinite.conjectures.X0.local_helper", "X0.local_helper"):
+            with self.subTest(spelling=spelling):
+                self.write(self.other, "Definition foreign_statement : Prop := " + spelling + " 0.\n")
+                self.assertIn(self.other_statement, self.dependencies())
+
+    def test_mapping_edits_and_each_historical_snapshot_are_fresh(self):
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        project = self.root / "chromatic-theory/_CoqProject"
+        old = project.stat()
+        project.write_text(self.other_project + "-Q ../infinite-graph-theory/theories Infinite\n")
+        os.utime(project, ns=(old.st_atime_ns, old.st_mtime_ns))
+        current = self.commit()
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.assertTrue(REPORT.ProviderContext(current).possible(self.other, self.source))
+        self.assertFalse(REPORT.ProviderContext(self.baseline).possible(self.other, self.source))
+        project.write_text(self.other_project)
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_reachable_chains_preserve_mixed_qualified_and_bare_edges(self):
+        self.write(self.source, (self.root / self.source).read_text() +
+                   "Definition bridge := local_helper 0.\n"
+                   "Definition chained_statement := bridge /\\ test_statement.\n")
+        self.write(self.other, "Definition foreign_bridge := local_helper 0.\n"
+                   "Definition foreign_statement := foreign_bridge /\\ "
+                   "Infinite.conjectures.X0.local_helper 0 /\\ local_helper 0.\n")
+        rows, _ = REPORT.manifest_rows(None)
+        statements, chains = REPORT.statement_dependencies(None, {self.helper}, rows)
+        self.assertEqual(statements, {self.statement, self.other_statement,
+                         "Infinite.conjectures.X0.chained_statement"})
+        # The qualified occurrence preserves its edge even when the same pair
+        # also occurs bare. The unavailable bare intermediary must stay absent.
+        self.assertEqual(chains, statements | {self.helper, "Infinite.conjectures.X0.bridge"})
+
+    def test_lazy_fallback_diagnostics_are_independent_of_hash_seed(self):
+        # Two roots can reach one consumer through a qualified or a bare edge.
+        # A deterministic walk must inspect the same contexts in either run.
+        script = r'''
+import json,sys
+sys.path.insert(0, "meta")
+import test_migration_report as T
+c=T.ProviderAttributionTests("test_all_three_attribution_sites_exclude_only_unavailable_provider")
+c.setUp(); M=T.REPORT
+try:
+    c.write(c.source,(c.root/c.source).read_text()+"Definition other_helper (n : nat) : Prop := n = n.\n")
+    c.write(c.other,"Definition foreign_statement : Prop := Infinite.conjectures.X0.other_helper 0 /\\ local_helper 0.\n")
+    c.write("chromatic-theory/_CoqProject",c.other_project+"-I plugins\n")
+    context=M.ProviderContext(None);rows,_=M.manifest_rows(None)
+    reached,chain=M.statement_dependencies(None,{c.helper,"Infinite.conjectures.X0.other_helper"},rows,provider_context=context)
+    print(json.dumps([sorted(reached),sorted(chain),context.diagnostics()],sort_keys=True))
+finally:
+    c.doCleanups()
+'''
+        outputs = []
+        for seed in range(1, 13):
+            proc = subprocess.run([sys.executable, "-B", "-c", script],
+                                  cwd=Path(__file__).resolve().parents[1],
+                                  env={**os.environ, "PYTHONHASHSEED": str(seed)},
+                                  capture_output=True, text=True)
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            outputs.append(proc.stdout)
+        self.assertEqual(len(set(outputs)), 1)
+
+    def test_unsupported_projects_keep_old_candidates(self):
+        changes = ["-Q ../infinite-graph-theory/theories Alias\n",
+                   "-Q ../base/theories OtherBase\n", "-Q ../base/theories GTBase\n",
+                   "-Q ../base/theories/conjectures GTBase.conjectures\n",
+                   "-Q /tmp/external Infinite\n", "-I plugins\n", "-include extra.project\n",
+                   "-arg -require -arg Infinite.conjectures.X0\n", "-arg -compat -arg 8.20\n"]
+        for extra in changes:
+            with self.subTest(extra=extra):
+                self.write("chromatic-theory/_CoqProject", self.other_project + extra)
+                context = REPORT.ProviderContext(None)
+                self.assertTrue(context.possible(self.other, self.source))
+                self.assertTrue(context.diagnostics())
+                if extra.startswith("-include"):
+                    with self.assertRaises(REPORT.RegistryError):
+                        self.dependencies()
+                else:
+                    self.assertIn(self.other_statement, self.dependencies())
+
+    def test_noncanonical_mapping_spelling_cannot_hide_symlink_traversal(self):
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.assertFalse(REPORT.ProviderContext(self.baseline).possible(self.other, self.source))
+        with tempfile.TemporaryDirectory() as temporary:
+            outside = Path(temporary)
+            (outside / "inner").mkdir()
+            (outside / "base/theories").mkdir(parents=True)
+            (self.root / "redirect").symlink_to(outside / "inner", target_is_directory=True)
+            for spelling in ("../redirect/../base/theories", "../base/./theories",
+                             "../base/theories/", "../base//theories"):
+                with self.subTest(spelling=spelling):
+                    self.write("chromatic-theory/_CoqProject",
+                               self.other_project.replace("../base/theories", spelling))
+                    if "redirect" in spelling:
+                        self.assertNotEqual((self.root / "chromatic-theory" / spelling).resolve(),
+                                            (self.root / "base/theories").resolve())
+                    pin = self.commit()
+                    for commit in (None, pin):
+                        context = REPORT.ProviderContext(commit)
+                        self.assertTrue(context.possible(self.other, self.source))
+                        self.assertTrue(context.diagnostics())
+            self.write("chromatic-theory/_CoqProject", self.other_project)
+            self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_loader_commands_and_ambient_overrides_keep_old_candidates(self):
+        original = (self.root / self.other).read_text()
+        for command in ('Load "fragment".', 'Time Add LoadPath "../infinite-graph-theory/theories" as Infinite.',
+                        'Remove LoadPath "old".', 'Declare ML Module "plugin".'):
+            with self.subTest(command=command):
+                self.write(self.other, command + "\n" + original)
+                context = REPORT.ProviderContext(None)
+                self.assertTrue(context.possible(self.other, self.source))
+                self.assertTrue(context.diagnostics())
+        self.write(self.other, original)
+        for name in ("COQPATH", "ROCQPATH", "COQLIB", "COQFLAGS", "ROCQ_UNKNOWN_LOADER"):
+            with self.subTest(environment=name), patch.dict(os.environ, {name:"hidden"}):
+                context = REPORT.ProviderContext(None)
+                self.assertTrue(context.possible(self.other, self.source))
+                self.assertTrue(context.diagnostics())
+                self.assertIn(self.other_statement, self.dependencies())
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_unlisted_or_missing_local_requires_keep_candidates(self):
+        self.write("chromatic-theory/theories/hidden.v", "Definition hidden : True := I.\n")
+        original = (self.root / self.other).read_text()
+        for command in ("Require Chromatic.hidden.", "From Chromatic Require Import hidden.",
+                        "From Chromatic Require Import absent.", "Require hidden.",
+                        "Require conjectures.hidden.", "Time Require Chromatic.hidden."):
+            with self.subTest(command=command):
+                self.write(self.other, command + "\n" + original)
+                context = REPORT.ProviderContext(None)
+                self.assertTrue(context.possible(self.other, self.source))
+                self.assertTrue(context.diagnostics())
+                self.assertIn(self.other_statement, self.dependencies())
+        self.write(self.other, original)
+        # An unrelated deferred source is not itself a reason to fall back.
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_recursive_project_require_keeps_all_suffix_candidates(self):
+        original = (self.root / self.other).read_text()
+        self.write(self.other, "Require Chromatic.X1.\n" + original)
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.write("chromatic-theory/theories/other/X1.v", "Definition hidden := True.\n")
+        context = REPORT.ProviderContext(None)
+        self.assertTrue(context.possible(self.other, self.source))
+        self.assertTrue(context.diagnostics())
+        self.write("chromatic-theory/_CoqProject", self.other_project + "theories/other/X1.v\n")
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_masking_warning_lists_and_non_loader_settings(self):
+        original = (self.root / self.other).read_text()
+        self.write(self.other, '(* Load "bad". (* nested *) *)\n' + original)
+        self.write("chromatic-theory/_CoqProject", self.other_project +
+                   "-arg -w -arg -notation-overridden,-ambiguous-paths,-deprecated\n")
+        with patch.dict(os.environ, {"ROCQ_STEP_TIMEOUT":"30", "ROCQ_QED_TIMEOUT":"180"}):
+            self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.write(self.other, 'Definition quoted := "Add LoadPath ""bad""".\n' + original)
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.write(self.other, 'Definition quoted := "unterminated.\n' + original)
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_non_regular_missing_and_cross_root_contexts_do_not_prune(self):
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        path = self.root / "chromatic-theory/_CoqProject"
+        text = path.read_text()
+        path.unlink()
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.write("hidden.project", text)
+        path.symlink_to(self.root / "hidden.project")
+        pin = self.commit()
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.assertTrue(REPORT.ProviderContext(pin).possible(self.other, self.source))
+        path.unlink(); path.write_text(text)
+        source = self.root / self.source
+        saved = source.read_text(); source.unlink()
+        self.write("hidden.v", saved); source.symlink_to(self.root / "hidden.v")
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+        with tempfile.TemporaryDirectory() as other, patch.object(REPORT, "ROOT", Path(other)):
+            self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_source_audit_does_not_call_rocq_and_diagnostics_are_returned(self):
+        original = subprocess.run
+        def only_source_commands(args, *rest, **kwargs):
+            self.assertEqual(args[0], "git")
+            return original(args, *rest, **kwargs)
+        with patch.object(REPORT.subprocess, "run", side_effect=only_source_commands):
+            self.assertEqual(self.failures(), [])
+            with patch.dict(os.environ, {"COQPATH":"unknown"}):
+                result = self.report()
+                self.assertFalse(result["ok"])
+                self.assertTrue(result["provider_context_fallbacks"])
+                self.assertTrue(any(c["path"] == self.other for c in result["consumers"]))
+
+    @unittest.skipUnless(KERNEL, "requires --kernel")
+    def test_real_compiled_distinct_providers_and_external_transitive_wrapper(self):
+        env = REPORT.ROCQ.environment()
+        def compile(path, extra=()):
+            proc = subprocess.run(["coqc", "-Q", "base/theories", "GTBase", "-R",
+                "infinite-graph-theory/theories", "Infinite", "-R", "chromatic-theory/theories", "Chromatic",
+                *extra, path], cwd=self.root, env=env, text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        for path in ("base/theories/common.v", self.source, self.certificate, self.other, self.other_cert):
+            compile(path)
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        self.assertEqual(self.dependencies(), {self.statement})
+        self.write("external/relay.v", "Require Export Infinite.conjectures.X0.\n")
+        compile("external/relay.v", ("-Q", "external", "External"))
+        self.write(self.other, "From External Require Import relay.\n"
+                   "Definition foreign_statement : Prop := local_helper 0.\n"
+                   "Lemma binding : foreign_statement <-> Infinite.conjectures.X0.local_helper 0.\n"
+                   "Proof. exact (iff_refl _). Qed.\n")
+        self.write("chromatic-theory/_CoqProject", self.other_project + "-Q ../infinite-graph-theory/theories Infinite\n")
+        compile(self.other, ("-Q", "external", "External"))
+        self.assertIn(self.other_statement, self.dependencies())
+
+
 class SourceCacheTests(unittest.TestCase):
     """Warm caches must preserve fresh report/provenance checks and errors."""
 

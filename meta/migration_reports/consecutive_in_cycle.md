@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py consecutive_in_cycle --details 
 
 - Canonical: `GTBase.walks_paths.seq_cyclic_consecutiveb`.
 - Baseline: `49ddc033ec6be3372ba6813f044fd26922fad16d`.
-- Scope: 7 helpers, 18 statements, 59 frozen objects, 245 recorded references.
-- Source checks: 528/528 pass; consistent.
+- Scope: 7 helpers, 18 statements, 59 frozen objects, 243 recorded references.
+- Source checks: 527/527 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
