@@ -1,7 +1,7 @@
 (** * GTMisc.conjectures.X116 -- v2 coarse Menger (bounded-separator) row *)
 
 From GTBase Require Export base.
-From GTBase Require Import balls.
+From GTBase Require Import balls distant_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -29,22 +29,24 @@ Definition x116_ST_path (G : sgraph) (S T : {set G}) (p : seq G) : Prop :=
 
 (** Two paths are at distance at least [d] iff, in addition to being
     vertex-disjoint, the closed [d.-1]-ball around one avoids the vertex set of
-    the other (no vertex of one lies within distance [d-1] of the other). *)
+    the other (no vertex of one lies within distance [d-1] of the other).
+    Since the B27 library migration (2026-10-03) a transparent alias of
+    [GTBase.distant_paths.pairwise_distant_seqs]: for unequal sequence values of the family, the closed
+    [d.-1]-set-ball around one support misses the other (so [d] = 0 and 1 mean disjoint supports).  The former
+    vertex-disjointness conjunct is redundant and dropped ([pairwise_distant_seqsP]).  The former body is
+    frozen and certified equivalent in theories/migration/distant_paths.v. *)
 Definition x116_pairwise_distant_paths
     (G : sgraph) (d : nat) (paths : seq (seq G)) : Prop :=
-  forall p q : seq G,
-    p \in paths -> q \in paths -> p != q ->
-    [disjoint x116_path_vertices p & x116_path_vertices q] /\
-    [disjoint x116_set_ball (d.-1) (x116_path_vertices p) & x116_path_vertices q].
+  pairwise_distant_seqs d paths.
 
-(** [k] distinct [S]-[T] paths that are pairwise at distance at least [d]. *)
+(** [k] distinct [S]-[T] paths that are pairwise at distance at least [d].
+    Since the B27 library migration (2026-10-03) a transparent alias of
+    [GTBase.distant_paths.has_k_distant_set_paths]: exactly [k] distinct set-to-set paths whose unequal values
+    satisfy [pairwise_distant_seqs d].  The former body is frozen and certified equivalent in
+    theories/migration/distant_paths.v. *)
 Definition x116_has_k_distant_ST_paths
     (G : sgraph) (d k : nat) (S T : {set G}) : Prop :=
-  exists paths : seq (seq G),
-    size paths = k /\
-    uniq paths /\
-    (forall p : seq G, p \in paths -> x116_ST_path S T p) /\
-    x116_pairwise_distant_paths d paths.
+  has_k_distant_set_paths d k S T.
 
 (** ** X116 statement *****************************************************)
 

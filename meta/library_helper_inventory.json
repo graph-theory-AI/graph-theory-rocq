@@ -69,6 +69,12 @@
         "Chromatic.conjectures.X70.x70_graph",
         "Digraph.conjectures.X2.x2_sgraph"
       ],
+      "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21": [
+        "GTMisc.conjectures.X116.x116_pairwise_distant_paths",
+        "GTMisc.conjectures.X146.x146_pairwise_distant_A_paths",
+        "GTMisc.conjectures.X39.x39_pairwise_distant_paths",
+        "Packing.conjectures.X26.x26_pairwise_distant_paths"
+      ],
       "20b775c30c4b8c4657e94363abc712ab3eb707a7d5556a2cc284f893454773ac": [
         "Extremal.conjectures.X36.x36_degree_in_edge_set",
         "Extremal.conjectures.X84.x84_degree_in",
@@ -91,10 +97,6 @@
       "289c7b960de9665c726957fe8ec69ae2598644d7c4c6932854f893d4964ff6c1": [
         "Extremal.conjectures.X98.x98_model_vertex",
         "GTMisc.conjectures.X114.x114_model_vertex"
-      ],
-      "2d519adc4d37014786bee5ea2e133db8e6f21fb9d2985459e5c051bbb1b4a4af": [
-        "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
-        "Packing.conjectures.X26.x26_has_k_distant_xy_paths"
       ],
       "2da3ef4ff389999aa86ccaa9de1d11a776478f4da668b3855c295abd0c919f4a": [
         "Extremal.conjectures.D2pr.srel",
@@ -282,6 +284,10 @@
       "755a15eb4d1a35e53f6b993edd454d56cf34513fb7d278b21a875b5fc766f062": [
         "GTMisc.conjectures.X197.x197_cops_win_in",
         "Topological.conjectures.X202.x202_cops_win_in"
+      ],
+      "76b060722ab82b0bdf7cf7d99d8b9ee691925c4903ea02bb37d265421a6ee82d": [
+        "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
+        "Packing.conjectures.X26.x26_has_k_distant_xy_paths"
       ],
       "76e5a6841934eab591158c05f111c81b3c462ace8efb0d41b051da403ca5b487": [
         "Digraph.conjectures.X2.subdigraph_embed",
@@ -1045,11 +1051,6 @@
       "e75c2c96a8fae51060a00d90d74fd9c6eeacd757abd36073609f83b0c68abab4": [
         "Extremal.conjectures.D2pr.edge2",
         "Packing.conjectures.U9.edge_setG"
-      ],
-      "e862a8d3d9c4d7a4b8e9c3c8a8af7761b2841d128c3c0045a1c1c09c9b3f3cba": [
-        "GTMisc.conjectures.X116.x116_pairwise_distant_paths",
-        "GTMisc.conjectures.X146.x146_pairwise_distant_A_paths",
-        "GTMisc.conjectures.X39.x39_pairwise_distant_paths"
       ],
       "e973ad7dcebcb6d58ce6c2c56e2757ed828620691f2dd0b0f11eb78b00ef4908": [
         "Cycle.conjectures.X184.x184_directed_k_edge_connected",
@@ -38944,8 +38945,7 @@
       "body_shape_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
       "declaration_hash": "4a006fee41ed0e0f162e5e3614f0074be95045938b8cb0cb4d6c1bd17f078a6a",
       "direct_consumers": [
-        "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement",
-        "GTMisc.conjectures.X116.x116_pairwise_distant_paths"
+        "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement"
       ],
       "kind": "Definition",
       "line": 20,
@@ -38964,8 +38964,7 @@
       "body_shape_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "declaration_hash": "078479a68a821cf2538ee5c166459f458b239dde0eaf8d1b10f29e8e9689c9b2",
       "direct_consumers": [
-        "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement",
-        "GTMisc.conjectures.X116.x116_pairwise_distant_paths"
+        "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement"
       ],
       "kind": "Definition",
       "line": 23,
@@ -38984,8 +38983,7 @@
       "body_shape_hash": "7938e3ce6ae5fcc07d25819e7f66fe6b85bfd8b75490ed3c6afe2e02e9ecd77e",
       "declaration_hash": "fbd154209d0921186686be469f4d5ccedee5d3be966075b38f75c9c0d085fac3",
       "direct_consumers": [
-        "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement",
-        "GTMisc.conjectures.X116.x116_has_k_distant_ST_paths"
+        "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement"
       ],
       "kind": "Definition",
       "line": 26,
@@ -39000,18 +38998,13 @@
       "signature_shape_hash": "bcd0f89bb4122110dc2dce412c6860b5009c39c11e86475ce23b608ceae94d33"
     },
     {
-      "body_hash": "df96f45ed5e929544964ba2f86f4716ad5215e09cd0b251b34abf7996cd92381",
-      "body_shape_hash": "e862a8d3d9c4d7a4b8e9c3c8a8af7761b2841d128c3c0045a1c1c09c9b3f3cba",
-      "declaration_hash": "172b513476aec8c973ac87968cfa2c079237b8999643e93bcfa4fb1ac9e82c1e",
-      "direct_consumers": [
-        "GTMisc.conjectures.X116.x116_has_k_distant_ST_paths"
-      ],
+      "body_hash": "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21",
+      "body_shape_hash": "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21",
+      "declaration_hash": "5c9302bc74087ff924b41749efee6d5d82bc8e0c19689a609c2f3eb0168beffc",
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 29,
-      "local_dependencies": [
-        "x116_path_vertices",
-        "x116_set_ball"
-      ],
+      "local_dependencies": [],
       "name": "x116_pairwise_distant_paths",
       "normalized_name": "pairwise_distant_paths",
       "package": "graph-theory-misc",
@@ -39022,18 +39015,15 @@
       "signature_shape_hash": "5ab45cf71b3749d2183b5659b71d9731197dc7cf14596f640a3ebb4bebbec266"
     },
     {
-      "body_hash": "5aa2accf5254816b8c106e84e76b10d38efaf17f3d6a33682a449056dfbedf2d",
-      "body_shape_hash": "e0c133377f6c13c0c6aef4f98d5dc71b1b260e00a7743aa4b9ceb1c27528f45c",
-      "declaration_hash": "fa6bd138adffd421189d8b8e3eb7f759b21fa2ef7f04387c0153269c1dcfcb9e",
+      "body_hash": "cff0ec74d8ca14f5684adb19dfee6b71ad22b30dd6955c26caa9d1682b45f3bf",
+      "body_shape_hash": "cff0ec74d8ca14f5684adb19dfee6b71ad22b30dd6955c26caa9d1682b45f3bf",
+      "declaration_hash": "0723b8ccb936525b46f1de8658fb4cf54b3fe78b391216006b2df211f758717f",
       "direct_consumers": [
         "GTMisc.conjectures.X116.coarse_menger_paths_bounded_separator_statement"
       ],
       "kind": "Definition",
-      "line": 39,
-      "local_dependencies": [
-        "x116_ST_path",
-        "x116_pairwise_distant_paths"
-      ],
+      "line": 41,
+      "local_dependencies": [],
       "name": "x116_has_k_distant_ST_paths",
       "normalized_name": "has_k_distant_ST_paths",
       "package": "graph-theory-misc",
@@ -39749,8 +39739,7 @@
       "body_shape_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
       "declaration_hash": "fa936076017ad51fe35bbc63d11020c42f94f96080168084e45d27b2dc61430a",
       "direct_consumers": [
-        "GTMisc.conjectures.X146.x146_every_A_path_hits_ball",
-        "GTMisc.conjectures.X146.x146_pairwise_distant_A_paths"
+        "GTMisc.conjectures.X146.x146_every_A_path_hits_ball"
       ],
       "kind": "Definition",
       "line": 14,
@@ -39769,8 +39758,7 @@
       "body_shape_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "declaration_hash": "fbf3b43629ba8f641321aace9262525da84134c2490b9a6125458b235f7a3764",
       "direct_consumers": [
-        "GTMisc.conjectures.X146.x146_every_A_path_hits_ball",
-        "GTMisc.conjectures.X146.x146_pairwise_distant_A_paths"
+        "GTMisc.conjectures.X146.x146_every_A_path_hits_ball"
       ],
       "kind": "Definition",
       "line": 17,
@@ -39805,18 +39793,15 @@
       "signature_shape_hash": "d88ffffa0cf60152ff620234ba48d40f38d7eef18a9a0eb5896b6558b7867ac8"
     },
     {
-      "body_hash": "38d0233047a10557f4dd975dfe6368e79539719de880680b2fa8d2087cbd0fae",
-      "body_shape_hash": "e862a8d3d9c4d7a4b8e9c3c8a8af7761b2841d128c3c0045a1c1c09c9b3f3cba",
-      "declaration_hash": "4fa1464e787e26a943d1e5937937734ea3d32205e02530f32f57612a1d20d114",
+      "body_hash": "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21",
+      "body_shape_hash": "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21",
+      "declaration_hash": "9b83390180652172e9934e2b06f187c816aa6d434ed5cefc04a49d6cd75c8424",
       "direct_consumers": [
         "GTMisc.conjectures.X146.x146_has_k_distant_A_paths"
       ],
       "kind": "Definition",
       "line": 32,
-      "local_dependencies": [
-        "x146_path_vertices",
-        "x146_set_ball"
-      ],
+      "local_dependencies": [],
       "name": "x146_pairwise_distant_A_paths",
       "normalized_name": "pairwise_distant_A_paths",
       "package": "graph-theory-misc",
@@ -39834,7 +39819,7 @@
         "GTMisc.conjectures.X146.geelen_coarse_gallai_A_paths_statement"
       ],
       "kind": "Definition",
-      "line": 39,
+      "line": 41,
       "local_dependencies": [
         "x146_A_path",
         "x146_pairwise_distant_A_paths"
@@ -39856,7 +39841,7 @@
         "GTMisc.conjectures.X146.geelen_coarse_gallai_A_paths_statement"
       ],
       "kind": "Definition",
-      "line": 47,
+      "line": 49,
       "local_dependencies": [
         "x146_A_path",
         "x146_path_vertices",
@@ -41946,8 +41931,7 @@
       "body_shape_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
       "declaration_hash": "c2e47907ab333d67367a956b8b5a4ec5a144a9985b98405ec454d9eaa9727680",
       "direct_consumers": [
-        "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement",
-        "GTMisc.conjectures.X39.x39_pairwise_distant_paths"
+        "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement"
       ],
       "kind": "Definition",
       "line": 14,
@@ -41965,9 +41949,7 @@
       "body_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "body_shape_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "declaration_hash": "1ab2df48d1bdeb4d39fc18347a74ddb6c34840f2dfe70f339d53b4e976adc5a9",
-      "direct_consumers": [
-        "GTMisc.conjectures.X39.x39_pairwise_distant_paths"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 17,
       "local_dependencies": [],
@@ -41984,9 +41966,7 @@
       "body_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
       "body_shape_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
       "declaration_hash": "994ef210f00cb5112ec695171fb3d15997f699b749a59c5921516fd350652a82",
-      "direct_consumers": [
-        "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 20,
       "local_dependencies": [],
@@ -42000,18 +41980,13 @@
       "signature_shape_hash": "df236376697e52be574c8f66029d65e6b467dc03a79c47f152788337c755d017"
     },
     {
-      "body_hash": "823dbf2213c7a90fb3288fb433acbc34b0602b9dc82ba0fbe841ae400e816b11",
-      "body_shape_hash": "e862a8d3d9c4d7a4b8e9c3c8a8af7761b2841d128c3c0045a1c1c09c9b3f3cba",
-      "declaration_hash": "02270f325bae4b2e2b1c93201af6407c282d6ead1ea382f280739aadf20f5cae",
-      "direct_consumers": [
-        "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths"
-      ],
+      "body_hash": "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21",
+      "body_shape_hash": "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21",
+      "declaration_hash": "46f6fb068a5fca96d9e5166c05cc4ad90554096c81e1739ab578c20f4c73dace",
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 23,
-      "local_dependencies": [
-        "x39_path_vertices",
-        "x39_set_ball"
-      ],
+      "local_dependencies": [],
       "name": "x39_pairwise_distant_paths",
       "normalized_name": "pairwise_distant_paths",
       "package": "graph-theory-misc",
@@ -42022,18 +41997,15 @@
       "signature_shape_hash": "5ab45cf71b3749d2183b5659b71d9731197dc7cf14596f640a3ebb4bebbec266"
     },
     {
-      "body_hash": "199e6d6a998842b3743c6f7418d5af283596bd4b289eaa2fc80cdb1bb91dc849",
-      "body_shape_hash": "2d519adc4d37014786bee5ea2e133db8e6f21fb9d2985459e5c051bbb1b4a4af",
-      "declaration_hash": "3f80fdb646871529fc132e2ad8e3859f8b8f377ae03acfb0d1e809b9fccb57df",
+      "body_hash": "76b060722ab82b0bdf7cf7d99d8b9ee691925c4903ea02bb37d265421a6ee82d",
+      "body_shape_hash": "76b060722ab82b0bdf7cf7d99d8b9ee691925c4903ea02bb37d265421a6ee82d",
+      "declaration_hash": "b89f81906ad99cec1de2d03d9d6d9edb958ae02f302af59491f63884198461e0",
       "direct_consumers": [
         "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement"
       ],
       "kind": "Definition",
-      "line": 30,
-      "local_dependencies": [
-        "x39_pairwise_distant_paths",
-        "x39_xy_path"
-      ],
+      "line": 32,
+      "local_dependencies": [],
       "name": "x39_has_k_distant_xy_paths",
       "normalized_name": "has_k_distant_xy_paths",
       "package": "graph-theory-misc",
@@ -42051,7 +42023,7 @@
         "GTMisc.conjectures.X39.coarse_menger_ball_separator_statement"
       ],
       "kind": "Definition",
-      "line": 38,
+      "line": 40,
       "local_dependencies": [],
       "name": "x39_separates_xy",
       "normalized_name": "separates_xy",
@@ -52980,9 +52952,7 @@
       "body_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
       "body_shape_hash": "96cb64d112cfe8395b923cfa817e1c07110f1e5181ea393f5c1488886373f786",
       "declaration_hash": "697be643ccf7655de6bc1092bb26954a0a0a946024259c85176ba45da8bf5f9e",
-      "direct_consumers": [
-        "Packing.conjectures.X26.x26_pairwise_distant_paths"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 14,
       "local_dependencies": [],
@@ -52999,9 +52969,7 @@
       "body_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "body_shape_hash": "109551d3e9963aa6185bc83fbac08e1abf2148a3a5a3484bd12d69c6b6089114",
       "declaration_hash": "2eab39ba0791eab9d37e8de6da1bc1515cc3b07b4caaa99a319d9be483a4fdd8",
-      "direct_consumers": [
-        "Packing.conjectures.X26.x26_pairwise_distant_paths"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 17,
       "local_dependencies": [],
@@ -53018,9 +52986,7 @@
       "body_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
       "body_shape_hash": "dfb343e2ea83fc4eae65d96a82779e7935e71453aa6041556c48a9cce838ab21",
       "declaration_hash": "e7c146bf69054d20d2559856e51e44735e1465ce843b51e38b117c12c2985c08",
-      "direct_consumers": [
-        "Packing.conjectures.X26.x26_has_k_distant_xy_paths"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 20,
       "local_dependencies": [],
@@ -53034,18 +53000,13 @@
       "signature_shape_hash": "df236376697e52be574c8f66029d65e6b467dc03a79c47f152788337c755d017"
     },
     {
-      "body_hash": "0a9a0153a4f1b28c2881885fb56de2ee8531e1625a045422bb56d383740ba7fd",
-      "body_shape_hash": "3d2efa1ede68505e39819a6f2b0265bc74b694628e5859d6ffd74e45c5c1ed02",
-      "declaration_hash": "6b0fe51eae1c4ef998843601d253609814ade9575fe98dcfa67e87d3d61dc4aa",
-      "direct_consumers": [
-        "Packing.conjectures.X26.x26_has_k_distant_xy_paths"
-      ],
+      "body_hash": "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21",
+      "body_shape_hash": "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21",
+      "declaration_hash": "5340a4e31feff43ae305e937969acc7a2afacadbb99355edef9237f34d623311",
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 23,
-      "local_dependencies": [
-        "x26_path_vertices",
-        "x26_set_ball"
-      ],
+      "local_dependencies": [],
       "name": "x26_pairwise_distant_paths",
       "normalized_name": "pairwise_distant_paths",
       "package": "packing-theory",
@@ -53056,18 +53017,15 @@
       "signature_shape_hash": "5ab45cf71b3749d2183b5659b71d9731197dc7cf14596f640a3ebb4bebbec266"
     },
     {
-      "body_hash": "0e0556c0995fc238fdb0fc2161327e2d648d94d9bd27e6c2ea6f9697bb160ed1",
-      "body_shape_hash": "2d519adc4d37014786bee5ea2e133db8e6f21fb9d2985459e5c051bbb1b4a4af",
-      "declaration_hash": "c09aef6f86d902a17404a60dabb25bc21109ef11e973cb8e1feae1cc7fa0c99f",
+      "body_hash": "76b060722ab82b0bdf7cf7d99d8b9ee691925c4903ea02bb37d265421a6ee82d",
+      "body_shape_hash": "76b060722ab82b0bdf7cf7d99d8b9ee691925c4903ea02bb37d265421a6ee82d",
+      "declaration_hash": "383b1869ce53cd0292e02941a55358e406114ab397be5be0b5404f8c0b04f4e3",
       "direct_consumers": [
         "Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement"
       ],
       "kind": "Definition",
-      "line": 29,
-      "local_dependencies": [
-        "x26_pairwise_distant_paths",
-        "x26_xy_path"
-      ],
+      "line": 31,
+      "local_dependencies": [],
       "name": "x26_has_k_distant_xy_paths",
       "normalized_name": "has_k_distant_xy_paths",
       "package": "packing-theory",
@@ -53085,7 +53043,7 @@
         "Packing.conjectures.X26.bounded_degree_distant_induced_menger_statement"
       ],
       "kind": "Definition",
-      "line": 37,
+      "line": 39,
       "local_dependencies": [],
       "name": "x26_separates_xy",
       "normalized_name": "separates_xy",
