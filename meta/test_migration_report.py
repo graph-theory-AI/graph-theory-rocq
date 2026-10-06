@@ -12,6 +12,8 @@ import contextlib
 import copy
 import io
 import json
+import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -155,6 +157,64 @@ class ReportTests(unittest.TestCase):
 
     def test_complete_family_passes(self):
         self.assertEqual(self.failures(), [])
+
+    def distinct_variant_fixture(self):
+        declaration = "\nDefinition distinct_helper : nat := 7.\n"
+        self.original += declaration
+        self.live += declaration
+        self.rebaseline()
+        self.spec["distinct_variants"] = [{
+            "qualified": "GTBase.conjectures.X0.distinct_helper",
+            "path": self.source, "name": "distinct_helper",
+        }]
+
+    def test_details_distinct_variant_without_optional_note(self):
+        self.distinct_variant_fixture()
+        report = self.report()
+        self.assertTrue(report["ok"])
+        before = copy.deepcopy(report)
+        item = report["distinct_variants"][0]
+        expected = (f"- `{item['qualified']}` "
+                    f"(sha256 `{item['declaration_sha256'][:16]}…`, unchanged)")
+        self.assertIn(expected + "\n", REPORT.render_details(report, self.spec))
+        self.assertEqual(report, before)
+
+    def test_details_preserves_present_note_including_empty(self):
+        self.distinct_variant_fixture()
+        for note in ("Different contract; retained unchanged.", ""):
+            with self.subTest(note=note):
+                self.spec["distinct_variants"][0]["note"] = note
+                report = self.report()
+                self.assertTrue(report["ok"])
+                item = report["distinct_variants"][0]
+                expected = (f"- `{item['qualified']}` "
+                            f"(sha256 `{item['declaration_sha256'][:16]}…`, "
+                            f"unchanged): {note}\n")
+                self.assertIn(expected, REPORT.render_details(report, self.spec))
+
+    def test_optional_note_does_not_make_required_identity_optional(self):
+        self.distinct_variant_fixture()
+        original = copy.deepcopy(self.spec["distinct_variants"][0])
+        for key in ("qualified", "path", "name"):
+            with self.subTest(key=key):
+                self.spec["distinct_variants"][0] = copy.deepcopy(original)
+                del self.spec["distinct_variants"][0][key]
+                with self.assertRaises(KeyError):
+                    self.report()
+        self.spec["distinct_variants"][0] = original
+        report = self.report()
+        del report["distinct_variants"][0]["declaration_sha256"]
+        with self.assertRaises(KeyError):
+            REPORT.render_details(report, self.spec)
+
+    def test_noteless_distinct_variant_still_requires_unchanged_source(self):
+        self.distinct_variant_fixture()
+        self.write(self.source, self.live.replace(
+            "Definition distinct_helper : nat := 7.",
+            "Definition distinct_helper : nat := 8."))
+        self.assertIn("distinct variant GTBase.conjectures.X0.distinct_helper unchanged",
+                      self.failures())
+
 
     def test_omitted_statement_is_rejected(self):
         self.spec["frozen"] = self.spec["frozen"][:1]
@@ -915,6 +975,290 @@ class AdditionalStatementTests(unittest.TestCase):
         self.assertTrue(REPORT.check_kernel(self.spec))
 
 
+class PublicAdditionalStatementTests(unittest.TestCase):
+    """An explicitly selected public Prop, including an older complete snapshot."""
+
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+    rebaseline = ReportTests.rebaseline
+    register = FrozenRoleTests.register
+    commit = AdditionalStatementTests.commit
+    assert_invalid = AdditionalStatementTests.assert_invalid
+
+    def setUp(self):
+        AdditionalStatementTests.setUp(self)
+        old_path = self.extra_path
+        self.extra_path = "base/theories/foundations/X2.v"
+        self.extra = "GTBase.foundations.X2.extra_claim"
+        (self.root / old_path).unlink()
+        self.write(self.extra_path, self.extra_text)
+        project = self.root / "base/_CoqProject"
+        project.write_text(project.read_text().replace(
+            "theories/conjectures/X2.v", "theories/foundations/X2.v"))
+        self.cert_source = self.cert_source.replace(
+            "From GTBase.conjectures Require Import X1 X2.",
+            "From GTBase.conjectures Require Import X1.\nFrom GTBase.foundations Require Import X2.")
+        self.spec["additional_statements"] = [self.extra]
+        self.spec["frozen"][-1].update(qualified=self.extra, path=self.extra_path)
+        self.spec["cross_module_consumers"][-1]["path"] = self.extra_path
+        self.write(self.certificate, self.cert_source)
+        self.rebaseline()
+
+    def compile_fixture(self):
+        for source in ("common", "conjectures/X0", "conjectures/X1", "foundations/X2",
+                       "migration/test_family"):
+            proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/" + source + ".v"],
+                                  cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                  text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+
+    def add_original(self):
+        old_text = self.extra_text.replace("forall n, middle n.", "forall n, middle n /\\ True.")
+        self.write(self.extra_path, old_text)
+        old_pin = self.commit()
+        self.write(self.extra_path, self.extra_text)
+        self.rebaseline()
+        self.cert_source += (
+            "Module Original.\n"
+            "Definition extra_claim : Prop := forall n, MiddleLegacy.middle n /\\ True.\n"
+            "End Original.\n"
+            "Lemma original_extra_compat : Original.extra_claim <-> extra_claim.\n"
+            "Proof. split; intros H n; [exact (proj1 (H n)) | split; [apply H | exact I]]. Qed.\n")
+        original = {**copy.deepcopy(self.spec["frozen"][-1]), "kind": "original-statement",
+                    "commit": old_pin, "frozen": "Original.extra_claim",
+                    "certificate": self.module + ".original_extra_compat"}
+        self.spec["frozen"].append(original)
+        self.register("original_extra_compat")
+        self.write(self.certificate, self.cert_source)
+
+    def test_public_prop_without_repository_source_enables_complete_index(self):
+        self.assertNotIn("repository_sources", self.registry["primitives"]["test-family"])
+        self.assertEqual(self.failures(), [])
+        rows, _ = REPORT.manifest_rows(self.spec["baseline_commit"])
+        for pin in (self.spec["baseline_commit"], None):
+            found, closure = REPORT.statement_dependencies(
+                pin, {self.helper}, rows, additional_statements={self.extra})
+            self.assertEqual(found, {self.statement, self.extra})
+            self.assertIn("GTBase.conjectures.X1.middle", closure)
+        # Indexing public files never auto-enrolls other Prop-valued definitions.
+        self.assertNotIn(self.extra, REPORT.statement_dependencies(
+            self.spec["baseline_commit"], {self.helper}, rows, include_public=True)[0])
+        del self.spec["frozen"][2]
+        self.assertIn("additional statement paths have complete frozen intermediary coverage", self.failures())
+
+    def test_public_current_and_original_keep_exact_source_provenance(self):
+        self.add_original()
+        self.assertEqual(self.failures(), [])
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        self.spec["frozen"][-1]["commit"] = self.spec["baseline_commit"]
+        self.assertTrue(any("frozen copy" in failure for failure in self.failures()))
+        self.spec["frozen"][-1] = original
+        self.write(self.certificate, self.cert_source.replace(
+            "forall n, MiddleLegacy.middle n /\\ True.", "True."))
+        self.assertTrue(any("frozen copy" in failure for failure in self.failures()))
+        self.write(self.certificate, self.cert_source)
+        self.spec["frozen"].append(copy.deepcopy(self.spec["frozen"][-2]))
+        self.assert_invalid("one exact non_corpus")
+        self.spec["frozen"].pop()
+        del self.spec["frozen"][-2]
+        self.assert_invalid("one exact non_corpus")
+
+    def test_supported_public_paths_do_not_allow_arbitrary_files(self):
+        for name in ("Reconstruction.foundations.kelly.claim", "GTBase.common.claim",
+                     "ClassicalLemmas.konig.source.claim"):
+            with self.subTest(name=name):
+                self.assertTrue(REPORT.public_repository_path(REPORT.additional_statement_path(name)))
+        for name in ("Unknown.foundations.source.claim", "GTBase.migration.source.claim",
+                     "GTBase.examples.source.claim", "Chromatic.private.source.claim",
+                     "GTBase.foundations._assum_probe.claim", "GTBase.scratch_probe.claim"):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "additional statement"):
+                REPORT.additional_statement_path(name)
+
+    def test_original_identity_and_immutable_commit_guards(self):
+        self.add_original()
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        self.command("git", "branch", "moving-history", original["commit"])
+        for mutation in ({"commit": "moving-history"}, {"commit": None}, {"commit": "0" * 40},
+                         {"commit": original["commit"][:7]}, {"non_corpus": False},
+                         {"corpus": "v2"}, {"path": self.middle_path}, {"name": "middle"},
+                         {"certificate": None}, {"kind": "chain"}):
+            with self.subTest(mutation=mutation):
+                self.spec["frozen"][-1] = {**original, **mutation}
+                self.assert_invalid("additional statement|repository source git")
+        self.spec["frozen"][-1] = original
+        self.assertEqual(self.failures(), [])
+
+    def historical_snapshot(self, source=None, project=None, alias=None):
+        """Create a distinct old commit without changing the valid current files."""
+        targets = (self.extra_path, "base/_CoqProject")
+        current = {p: (self.root / p).read_text() for p in targets}
+        old = self.spec["frozen"][-1]["commit"]
+        self.write(self.extra_path, source if source is not None else
+                   self.command("git", "show", old + ":" + self.extra_path))
+        if project is not None:
+            self.write("base/_CoqProject", project)
+        if alias:
+            file = self.root / alias
+            self.write("snapshot-copy", file.read_text())
+            file.unlink()
+            file.symlink_to(self.root / "snapshot-copy")
+        historical = self.commit()
+        for p, text in current.items():
+            file = self.root / p
+            if file.is_symlink():
+                file.unlink()
+            self.write(p, text)
+        self.spec["frozen"][-1]["commit"] = historical
+
+    def test_original_project_namespace_and_regular_blob_guards(self):
+        self.add_original()
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        project = (self.root / "base/_CoqProject").read_text()
+        for changed in (project.replace("theories/foundations/X2.v\n", ""),
+                        project.replace("-Q theories GTBase", "-Q theories Wrong")):
+            with self.subTest(project=changed):
+                self.spec["frozen"][-1] = copy.deepcopy(original)
+                self.historical_snapshot(project=changed)
+                self.assert_invalid("not build-listed|namespace ownership")
+        for alias in (self.extra_path, "base/_CoqProject"):
+            with self.subTest(alias=alias):
+                self.spec["frozen"][-1] = copy.deepcopy(original)
+                self.historical_snapshot(alias=alias)
+                self.assert_invalid("expected regular source blob")
+
+    def test_original_missing_files_and_corpus_identity_are_rejected(self):
+        self.add_original()
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        for relative in (self.extra_path, "base/_CoqProject"):
+            with self.subTest(missing=relative):
+                file = self.root / relative
+                text = file.read_text()
+                file.unlink()
+                self.spec["frozen"][-1] = {**original, "commit": self.commit()}
+                self.write(relative, text)
+                self.assert_invalid("repository source git|regular source blob")
+        for paths in REPORT.REG.CORPORA.values():
+            relative = "meta/" + paths["manifest"]
+            file = self.root / relative
+            text = file.read_text()
+            manifest = json.loads(text)
+            manifest["rows"].append({"formal_name": "extra_claim"})
+            self.write(relative, json.dumps(manifest))
+            self.spec["frozen"][-1] = {**original, "commit": self.commit()}
+            self.write(relative, text)
+            self.assert_invalid("outside historical corpus manifests")
+        self.spec["frozen"][-1] = original
+        self.assertEqual(self.failures(), [])
+
+    def test_original_nullary_shape_scope_and_load_guards(self):
+        self.add_original()
+        original = copy.deepcopy(self.spec["frozen"][-1])
+        raw = self.command("git", "show", original["commit"] + ":" + self.extra_path)
+        for source in (raw.replace("(**", "Section S.\n(**") + "\nEnd S.\n",
+                       raw.replace("(**", "Module S.\n(**") + "\nEnd S.\n",
+                       raw.replace("(**", "Time Section é.\n(**") + "\nEnd é.\n",
+                       raw.replace("(**", 'Load "scope_fragment".\n(**') + "\nEnd S.\n",
+                       raw.replace("extra_claim : Prop", "extra_claim (n : nat) : Prop"),
+                       raw.replace("extra_claim : Prop", "extra_claim")):
+            with self.subTest(source=source):
+                self.spec["frozen"][-1] = copy.deepcopy(original)
+                self.historical_snapshot(source=source)
+                self.assert_invalid("additional statement|unsupported Module/Section")
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_compiled_unused_original_section_is_rejected(self):
+        self.add_original()
+        self.compile_fixture()
+        raw = self.command("git", "show", self.spec["frozen"][-1]["commit"] + ":" + self.extra_path)
+        scoped = raw.replace("(**", "Section Hidden.\n(**") + "\nEnd Hidden.\n"
+        self.write(self.extra_path, scoped)
+        proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/foundations/X2.v"],
+                              cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                              text=True, capture_output=True)
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        self.write(self.extra_path, self.extra_text)
+        self.historical_snapshot(source=scoped)
+        self.assert_invalid("outside Module/Section")
+
+    def test_public_regular_source_project_and_namespace_guards_stay_fresh(self):
+        self.assertEqual(self.failures(), [])
+        for relative in (self.extra_path, "base/_CoqProject"):
+            file = self.root / relative
+            text = file.read_text()
+            file.unlink()
+            self.assert_invalid("missing or aliased")
+            target = self.root / "copy"
+            target.write_text(text)
+            file.symlink_to(target)
+            self.assert_invalid("missing or aliased")
+            file.unlink()
+            file.write_text(text)
+        project = self.root / "base/_CoqProject"
+        original = project.read_text()
+        project.write_text(original.replace("theories/foundations/X2.v\n", ""))
+        self.assert_invalid("not build-listed")
+        project.write_text(original.replace("-Q theories GTBase", "-Q theories Wrong"))
+        self.assert_invalid("namespace ownership")
+        project.write_text(original)
+        self.write(self.extra_path, self.extra_text.replace("middle n", "False"))
+        self.assert_invalid("must be reached")
+
+    test_public_shape_and_scope_guards = AdditionalStatementTests.test_prop_shape_and_scopes_reject_helpers_and_hidden_parameters
+    test_public_wrong_mapping_guards = AdditionalStatementTests.test_wrong_or_missing_mapping_is_rejected
+    test_public_manifest_exclusion = AdditionalStatementTests.test_corpus_name_at_either_pin_cannot_be_enrolled
+    test_public_frozen_body_and_whole_certificate = AdditionalStatementTests.test_frozen_body_and_whole_certificate_checks_still_apply
+    test_public_kernel_guarded_certificate = AdditionalStatementTests.test_kernel_accepts_full_enrolled_prop_and_rejects_guarded_certificate
+    test_public_kernel_axioms = AdditionalStatementTests.test_kernel_rejects_inherited_axioms_without_an_exemption
+    test_public_kernel_implicit_parameter = AdditionalStatementTests.test_kernel_checks_unapplied_frozen_prop_even_with_inferable_implicit
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_compiled_public_scopes_and_load_reject_at_both_pins(self):
+        self.compile_fixture()
+        self.write("base/scope_fragment.v", "Section S.\n")
+        for prefix, label in (("Time Section S.\n", "S"), ("Section é.\n", "é"),
+                              ('Section S.\nRedirect "escaped "" End S" Check nat.\n', "S"),
+                              ('Load "scope_fragment".\n', "S")):
+            with self.subTest(prefix=prefix):
+                source = self.extra_text.replace("(**", prefix + "(**") + f"End {label}.\n"
+                self.write(self.extra_path, source)
+                proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/foundations/X2.v"],
+                                      cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                      text=True, capture_output=True)
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+                self.assert_invalid("Module/Section|source-splicing Load")
+                self.rebaseline()
+                self.write(self.extra_path, self.extra_text)
+                self.assert_invalid("Module/Section|source-splicing Load")
+                self.rebaseline()
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_public_original_kernel_checks_every_complete_endpoint(self):
+        self.add_original()
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        old_proof = "Proof. split; intros H n; [exact (proj1 (H n)) | split; [apply H | exact I]]. Qed."
+        changed = self.cert_source.replace(
+            "Lemma original_extra_compat : Original.extra_claim <-> extra_claim.",
+            "Lemma original_extra_compat : False -> (Original.extra_claim <-> extra_claim).")
+        self.write(self.certificate, changed.replace(old_proof, "Proof. intros H; destruct H. Qed."))
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+        changed = self.cert_source.replace(
+            "Definition extra_claim : Prop := forall n, MiddleLegacy.middle n /\\ True.",
+            "Definition extra_claim {n : nat} : Prop := MiddleLegacy.middle n /\\ True.")
+        changed = changed.replace("Original.extra_claim <->", "@Original.extra_claim 0 <->")
+        changed = changed.replace(old_proof,
+            "Proof. change ((0 = 0 /\\ True) <-> forall n : nat, n = n). "
+            "split; intros; [reflexivity | split; [reflexivity | exact I]]. Qed.")
+        self.write(self.certificate, changed)
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+
 class RepositorySourceTests(unittest.TestCase):
     """A real public source -> foundation intermediary -> two corpus rows."""
 
@@ -1465,6 +1809,526 @@ class ClassicalSourceTests(unittest.TestCase):
                                         env=env, text=True, capture_output=True)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+
+class ProviderAttributionTests(unittest.TestCase):
+    """Actual short-name collisions and conservative project-context boundaries."""
+
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    commit = ReportTests.commit
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+
+    def setUp(self):
+        ReportTests.setUp(self)
+        old_source, old_cert = self.source, self.certificate
+        self.source = "infinite-graph-theory/theories/conjectures/X0.v"
+        self.certificate = "infinite-graph-theory/theories/migration/test_family.v"
+        self.module = "Infinite.migration.test_family"
+        self.helper = "Infinite.conjectures.X0.local_helper"
+        self.statement = "Infinite.conjectures.X0.test_statement"
+        self.other = "chromatic-theory/theories/conjectures/X1.v"
+        self.other_cert = "chromatic-theory/theories/migration/collision.v"
+        self.other_statement = "Chromatic.conjectures.X1.foreign_statement"
+        self.infinite_project = ("-R theories Infinite\n-Q ../base/theories GTBase\n"
+                                 "theories/conjectures/X0.v\n")
+        self.other_project = ("-R theories Chromatic\n-Q ../base/theories GTBase\n"
+                              "theories/conjectures/X1.v\n")
+        self.write("base/_CoqProject", "-Q theories GTBase\ntheories/common.v\n")
+        common = (self.root / "base/theories/common.v").read_text()
+        self.write("base/theories/common.v", common + "Definition local_helper (n : nat) : Prop := n = 0.\n")
+        self.write("infinite-graph-theory/_CoqProject", self.infinite_project)
+        self.write("chromatic-theory/_CoqProject", self.other_project)
+        self.write(self.source, self.original)
+        self.write(self.other, "From GTBase Require Import common.\n"
+                   "Definition foreign_statement : Prop := local_helper 0.\n")
+        (self.root / old_source).unlink()
+        (self.root / old_cert).unlink()
+        self.row["repo"] = "infinite-graph-theory"
+        self.write_manifests("v2")
+        manifest_path = "meta/" + REPORT.REG.CORPORA["v2"]["manifest"]
+        manifest = json.loads((self.root / manifest_path).read_text())
+        manifest["rows"].append(dict(self.row, formal_name="foreign_statement", repo="chromatic-theory", slug="foreign"))
+        self.write_json(manifest_path, manifest)
+        primitive = self.registry["primitives"]["test-family"]
+        primitive["owner"] = "infinite-graph-theory"
+        primitive["source_definitions"] = [self.helper]
+        primitive["compatibility_theorems"] = [self.module + ".helper_compat", self.module + ".statement_compat", "GTBase.common.unrelated"]
+        self.write_json("meta/library_primitives/test-family.json", {"schema_version":1, "family":"test-family", "primitive":primitive})
+        self.write_json("meta/library_helper_inventory.json", {"helpers":[{
+            "qualified_name":self.helper,
+            "declaration_hash":REPORT.sha256(REPORT.find_decl(self.original, "local_helper")["text"])}]})
+        self.baseline = self.commit()
+        self.spec["baseline_commit"] = self.baseline
+        self.spec["namespaces"]["infinite-graph-theory"] = "Infinite"
+        self.spec["certificate_files"][0] = self.certificate
+        for obj in self.spec["frozen"]:
+            obj["path"], obj["frozen_path"] = self.source, self.certificate
+            obj["qualified"] = (self.helper if obj["kind"] == "source" else self.statement)
+            obj["certificate"] = obj["certificate"].replace("GTBase.migration", "Infinite.migration")
+        self.cert_source = self.cert_source.replace("From GTBase.conjectures", "From Infinite.conjectures")
+        self.write(self.source, self.live)
+        self.write(self.certificate, self.cert_source)
+        self.write("infinite-graph-theory/_CoqProject", self.infinite_project + "theories/migration/test_family.v\n")
+        self.write(self.other_cert, "From GTBase Require Import common.\nModule OtherLegacy.\n"
+                   "Definition old_row : Prop := local_helper 0.\nEnd OtherLegacy.\n")
+        self.write("chromatic-theory/_CoqProject", self.other_project + "theories/migration/collision.v\n")
+
+    def dependencies(self, commit=None):
+        rows, _ = REPORT.manifest_rows(commit)
+        return REPORT.statement_dependencies(commit, {self.helper}, rows)[0]
+
+    def test_all_three_attribution_sites_exclude_only_unavailable_provider(self):
+        result = self.report()
+        self.assertEqual([c for c in result["checks"] if not c["ok"]], [])
+        self.assertEqual(self.dependencies(self.baseline), {self.statement})
+        self.assertEqual(result["stale_snapshots"], [])
+        self.assertFalse(any(c["path"].startswith("chromatic-theory/") for c in result["consumers"]))
+        # A real family stale reference still fails, even in a newly added file.
+        self.write("infinite-graph-theory/theories/migration/stale.v",
+                   "Module PriorLegacy.\nDefinition bad : Prop := local_helper 0.\nEnd PriorLegacy.\n")
+        self.assertTrue(any("resolves through live" in failure for failure in self.failures()))
+
+    def test_mapped_ambiguity_transitive_import_and_qualified_references_stay(self):
+        self.assertNotIn(self.other_statement, self.dependencies())
+        self.write("chromatic-theory/_CoqProject", self.other_project + "-Q ../infinite-graph-theory/theories Infinite\n"
+                   "theories/migration/collision.v\n")
+        # Visibility is an over-approximation: no direct Require is necessary.
+        self.assertIn(self.other_statement, self.dependencies())
+        self.write("base/theories/relay.v", "Require Export Infinite.conjectures.X0.\n")
+        self.write("base/_CoqProject", "-Q theories GTBase\n-Q ../infinite-graph-theory/theories Infinite\n"
+                   "theories/common.v\ntheories/relay.v\n")
+        self.write(self.other, "From GTBase Require Import relay.\nDefinition foreign_statement : Prop := local_helper 0.\n")
+        self.assertIn(self.other_statement, self.dependencies())
+        self.write("chromatic-theory/_CoqProject", self.other_project)
+        for spelling in ("Infinite.conjectures.X0.local_helper", "X0.local_helper"):
+            with self.subTest(spelling=spelling):
+                self.write(self.other, "Definition foreign_statement : Prop := " + spelling + " 0.\n")
+                self.assertIn(self.other_statement, self.dependencies())
+
+    def test_mapping_edits_and_each_historical_snapshot_are_fresh(self):
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        project = self.root / "chromatic-theory/_CoqProject"
+        old = project.stat()
+        project.write_text(self.other_project + "-Q ../infinite-graph-theory/theories Infinite\n")
+        os.utime(project, ns=(old.st_atime_ns, old.st_mtime_ns))
+        current = self.commit()
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.assertTrue(REPORT.ProviderContext(current).possible(self.other, self.source))
+        self.assertFalse(REPORT.ProviderContext(self.baseline).possible(self.other, self.source))
+        project.write_text(self.other_project)
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_reachable_chains_preserve_mixed_qualified_and_bare_edges(self):
+        self.write(self.source, (self.root / self.source).read_text() +
+                   "Definition bridge := local_helper 0.\n"
+                   "Definition chained_statement := bridge /\\ test_statement.\n")
+        self.write(self.other, "Definition foreign_bridge := local_helper 0.\n"
+                   "Definition foreign_statement := foreign_bridge /\\ "
+                   "Infinite.conjectures.X0.local_helper 0 /\\ local_helper 0.\n")
+        rows, _ = REPORT.manifest_rows(None)
+        statements, chains = REPORT.statement_dependencies(None, {self.helper}, rows)
+        self.assertEqual(statements, {self.statement, self.other_statement,
+                         "Infinite.conjectures.X0.chained_statement"})
+        # The qualified occurrence preserves its edge even when the same pair
+        # also occurs bare. The unavailable bare intermediary must stay absent.
+        self.assertEqual(chains, statements | {self.helper, "Infinite.conjectures.X0.bridge"})
+
+    def test_lazy_fallback_diagnostics_are_independent_of_hash_seed(self):
+        # Two roots can reach one consumer through a qualified or a bare edge.
+        # A deterministic walk must inspect the same contexts in either run.
+        script = r'''
+import json,sys
+sys.path.insert(0, "meta")
+import test_migration_report as T
+c=T.ProviderAttributionTests("test_all_three_attribution_sites_exclude_only_unavailable_provider")
+c.setUp(); M=T.REPORT
+try:
+    c.write(c.source,(c.root/c.source).read_text()+"Definition other_helper (n : nat) : Prop := n = n.\n")
+    c.write(c.other,"Definition foreign_statement : Prop := Infinite.conjectures.X0.other_helper 0 /\\ local_helper 0.\n")
+    c.write("chromatic-theory/_CoqProject",c.other_project+"-I plugins\n")
+    context=M.ProviderContext(None);rows,_=M.manifest_rows(None)
+    reached,chain=M.statement_dependencies(None,{c.helper,"Infinite.conjectures.X0.other_helper"},rows,provider_context=context)
+    print(json.dumps([sorted(reached),sorted(chain),context.diagnostics()],sort_keys=True))
+finally:
+    c.doCleanups()
+'''
+        outputs = []
+        for seed in range(1, 13):
+            proc = subprocess.run([sys.executable, "-B", "-c", script],
+                                  cwd=Path(__file__).resolve().parents[1],
+                                  env={**os.environ, "PYTHONHASHSEED": str(seed)},
+                                  capture_output=True, text=True)
+            self.assertEqual(proc.returncode, 0, proc.stderr)
+            outputs.append(proc.stdout)
+        self.assertEqual(len(set(outputs)), 1)
+
+    def test_unsupported_projects_keep_old_candidates(self):
+        changes = ["-Q ../infinite-graph-theory/theories Alias\n",
+                   "-Q ../base/theories OtherBase\n", "-Q ../base/theories GTBase\n",
+                   "-Q ../base/theories/conjectures GTBase.conjectures\n",
+                   "-Q /tmp/external Infinite\n", "-I plugins\n", "-include extra.project\n",
+                   "-arg -require -arg Infinite.conjectures.X0\n", "-arg -compat -arg 8.20\n"]
+        for extra in changes:
+            with self.subTest(extra=extra):
+                self.write("chromatic-theory/_CoqProject", self.other_project + extra)
+                context = REPORT.ProviderContext(None)
+                self.assertTrue(context.possible(self.other, self.source))
+                self.assertTrue(context.diagnostics())
+                if extra.startswith("-include"):
+                    with self.assertRaises(REPORT.RegistryError):
+                        self.dependencies()
+                else:
+                    self.assertIn(self.other_statement, self.dependencies())
+
+    def test_noncanonical_mapping_spelling_cannot_hide_symlink_traversal(self):
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.assertFalse(REPORT.ProviderContext(self.baseline).possible(self.other, self.source))
+        with tempfile.TemporaryDirectory() as temporary:
+            outside = Path(temporary)
+            (outside / "inner").mkdir()
+            (outside / "base/theories").mkdir(parents=True)
+            (self.root / "redirect").symlink_to(outside / "inner", target_is_directory=True)
+            for spelling in ("../redirect/../base/theories", "../base/./theories",
+                             "../base/theories/", "../base//theories"):
+                with self.subTest(spelling=spelling):
+                    self.write("chromatic-theory/_CoqProject",
+                               self.other_project.replace("../base/theories", spelling))
+                    if "redirect" in spelling:
+                        self.assertNotEqual((self.root / "chromatic-theory" / spelling).resolve(),
+                                            (self.root / "base/theories").resolve())
+                    pin = self.commit()
+                    for commit in (None, pin):
+                        context = REPORT.ProviderContext(commit)
+                        self.assertTrue(context.possible(self.other, self.source))
+                        self.assertTrue(context.diagnostics())
+            self.write("chromatic-theory/_CoqProject", self.other_project)
+            self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_loader_commands_and_ambient_overrides_keep_old_candidates(self):
+        original = (self.root / self.other).read_text()
+        for command in ('Load "fragment".', 'Time Add LoadPath "../infinite-graph-theory/theories" as Infinite.',
+                        'Remove LoadPath "old".', 'Declare ML Module "plugin".'):
+            with self.subTest(command=command):
+                self.write(self.other, command + "\n" + original)
+                context = REPORT.ProviderContext(None)
+                self.assertTrue(context.possible(self.other, self.source))
+                self.assertTrue(context.diagnostics())
+        self.write(self.other, original)
+        for name in ("COQPATH", "ROCQPATH", "COQLIB", "COQFLAGS", "ROCQ_UNKNOWN_LOADER"):
+            with self.subTest(environment=name), patch.dict(os.environ, {name:"hidden"}):
+                context = REPORT.ProviderContext(None)
+                self.assertTrue(context.possible(self.other, self.source))
+                self.assertTrue(context.diagnostics())
+                self.assertIn(self.other_statement, self.dependencies())
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_unlisted_or_missing_local_requires_keep_candidates(self):
+        self.write("chromatic-theory/theories/hidden.v", "Definition hidden : True := I.\n")
+        original = (self.root / self.other).read_text()
+        for command in ("Require Chromatic.hidden.", "From Chromatic Require Import hidden.",
+                        "From Chromatic Require Import absent.", "Require hidden.",
+                        "Require conjectures.hidden.", "Time Require Chromatic.hidden."):
+            with self.subTest(command=command):
+                self.write(self.other, command + "\n" + original)
+                context = REPORT.ProviderContext(None)
+                self.assertTrue(context.possible(self.other, self.source))
+                self.assertTrue(context.diagnostics())
+                self.assertIn(self.other_statement, self.dependencies())
+        self.write(self.other, original)
+        # An unrelated deferred source is not itself a reason to fall back.
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_recursive_project_require_keeps_all_suffix_candidates(self):
+        original = (self.root / self.other).read_text()
+        self.write(self.other, "Require Chromatic.X1.\n" + original)
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.write("chromatic-theory/theories/other/X1.v", "Definition hidden := True.\n")
+        context = REPORT.ProviderContext(None)
+        self.assertTrue(context.possible(self.other, self.source))
+        self.assertTrue(context.diagnostics())
+        self.write("chromatic-theory/_CoqProject", self.other_project + "theories/other/X1.v\n")
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_masking_warning_lists_and_non_loader_settings(self):
+        original = (self.root / self.other).read_text()
+        self.write(self.other, '(* Load "bad". (* nested *) *)\n' + original)
+        self.write("chromatic-theory/_CoqProject", self.other_project +
+                   "-arg -w -arg -notation-overridden,-ambiguous-paths,-deprecated\n")
+        with patch.dict(os.environ, {"ROCQ_STEP_TIMEOUT":"30", "ROCQ_QED_TIMEOUT":"180"}):
+            self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.write(self.other, 'Definition quoted := "Add LoadPath ""bad""".\n' + original)
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.write(self.other, 'Definition quoted := "unterminated.\n' + original)
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_non_regular_missing_and_cross_root_contexts_do_not_prune(self):
+        self.assertFalse(REPORT.ProviderContext(None).possible(self.other, self.source))
+        path = self.root / "chromatic-theory/_CoqProject"
+        text = path.read_text()
+        path.unlink()
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.write("hidden.project", text)
+        path.symlink_to(self.root / "hidden.project")
+        pin = self.commit()
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+        self.assertTrue(REPORT.ProviderContext(pin).possible(self.other, self.source))
+        path.unlink(); path.write_text(text)
+        source = self.root / self.source
+        saved = source.read_text(); source.unlink()
+        self.write("hidden.v", saved); source.symlink_to(self.root / "hidden.v")
+        self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+        with tempfile.TemporaryDirectory() as other, patch.object(REPORT, "ROOT", Path(other)):
+            self.assertTrue(REPORT.ProviderContext(None).possible(self.other, self.source))
+
+    def test_source_audit_does_not_call_rocq_and_diagnostics_are_returned(self):
+        original = subprocess.run
+        def only_source_commands(args, *rest, **kwargs):
+            self.assertEqual(args[0], "git")
+            return original(args, *rest, **kwargs)
+        with patch.object(REPORT.subprocess, "run", side_effect=only_source_commands):
+            self.assertEqual(self.failures(), [])
+            with patch.dict(os.environ, {"COQPATH":"unknown"}):
+                result = self.report()
+                self.assertFalse(result["ok"])
+                self.assertTrue(result["provider_context_fallbacks"])
+                self.assertTrue(any(c["path"] == self.other for c in result["consumers"]))
+
+    @unittest.skipUnless(KERNEL, "requires --kernel")
+    def test_real_compiled_distinct_providers_and_external_transitive_wrapper(self):
+        env = REPORT.ROCQ.environment()
+        def compile(path, extra=()):
+            proc = subprocess.run(["coqc", "-Q", "base/theories", "GTBase", "-R",
+                "infinite-graph-theory/theories", "Infinite", "-R", "chromatic-theory/theories", "Chromatic",
+                *extra, path], cwd=self.root, env=env, text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        for path in ("base/theories/common.v", self.source, self.certificate, self.other, self.other_cert):
+            compile(path)
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        self.assertEqual(self.dependencies(), {self.statement})
+        self.write("external/relay.v", "Require Export Infinite.conjectures.X0.\n")
+        compile("external/relay.v", ("-Q", "external", "External"))
+        self.write(self.other, "From External Require Import relay.\n"
+                   "Definition foreign_statement : Prop := local_helper 0.\n"
+                   "Lemma binding : foreign_statement <-> Infinite.conjectures.X0.local_helper 0.\n"
+                   "Proof. exact (iff_refl _). Qed.\n")
+        self.write("chromatic-theory/_CoqProject", self.other_project + "-Q ../infinite-graph-theory/theories Infinite\n")
+        compile(self.other, ("-Q", "external", "External"))
+        self.assertIn(self.other_statement, self.dependencies())
+
+
+class SourceCacheTests(unittest.TestCase):
+    """Warm caches must preserve fresh report/provenance checks and errors."""
+
+    setUp = ReportTests.setUp
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    commit = ReportTests.commit
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+
+    caches = ("_full_commit", "_historical_source", "_historical_blob",
+              "_inventory_index", "_declarations")
+
+    @contextlib.contextmanager
+    def uncached(self):
+        with contextlib.ExitStack() as stack:
+            for name in self.caches:
+                stack.enter_context(patch.object(REPORT, name, getattr(REPORT, name).__wrapped__))
+            yield
+
+    def test_report_bytes_and_duplicate_read_reduction(self):
+        for name in self.caches:
+            getattr(REPORT, name).cache_clear()
+        with patch.object(REPORT, "_git_at", wraps=REPORT._git_at) as reads:
+            cold = self.report()
+            cold_calls = reads.call_count
+            reads.reset_mock()
+            warm = self.report()
+            warm_calls = reads.call_count
+            reads.reset_mock()
+            with self.uncached():
+                original = self.report()
+            uncached_calls = reads.call_count
+        self.assertEqual(self.failures(), [])
+        self.assertEqual(cold, warm)
+        self.assertEqual(warm, original)
+        self.assertLess(warm_calls, cold_calls)
+        self.assertLess(cold_calls, uncached_calls)
+        self.assertEqual(json.dumps(warm, sort_keys=True), json.dumps(original, sort_keys=True))
+        for renderer in (REPORT.render_markdown, REPORT.render_details):
+            self.assertEqual(renderer(warm, self.spec), renderer(original, self.spec))
+        warm["checks"].clear()
+        self.assertEqual(self.report(), original)
+
+    def test_live_edits_with_restored_mtime_remain_fresh(self):
+        self.assertEqual(self.failures(), [])
+        path = self.root / self.certificate
+        old = path.stat()
+        path.write_text(self.cert_source.replace(":= n = n.", ":= n = 0."))
+        os.utime(path, ns=(old.st_atime_ns, old.st_mtime_ns))
+        self.assertTrue(self.failures())
+        self.write(self.certificate, self.cert_source)
+        self.assertEqual(self.failures(), [])
+        self.write(self.source, self.live.replace("canonical n", "canonical 0"))
+        self.assertTrue(self.failures())
+
+    def test_current_registry_and_manifest_remain_fresh(self):
+        self.assertEqual(self.failures(), [])
+        self.row["status"] = "changed"
+        self.write_manifests("v2")
+        self.assertTrue(self.failures())
+        self.row["status"] = "open"
+        self.write_manifests("v2")
+        self.assertEqual(self.failures(), [])
+        path = self.root / "meta/library_primitives/test-family.json"
+        registry = json.loads(path.read_text())
+        registry["primitive"]["source_definitions"] = []
+        path.write_text(json.dumps(registry))
+        self.assertTrue(self.failures())
+
+    def test_parser_returns_fresh_containers_and_keys_by_text(self):
+        expected = REPORT.declarations(self.original)
+        result = REPORT.declarations(self.original)
+        result[0]["name"] = "corrupted"
+        result.clear()
+        self.assertEqual(REPORT.declarations(self.original), expected)
+        changed = self.original.replace("n = n", "n = 0")
+        self.assertNotEqual(REPORT.declarations(changed), expected)
+        with patch.object(REPORT.INV, "strip_comments", wraps=REPORT.INV.strip_comments) as parse:
+            REPORT.declarations(self.original)
+            REPORT.declarations(self.original)
+            self.assertEqual(parse.call_count, 0)
+
+    def test_moving_refs_and_different_commits(self):
+        self.command("git", "tag", "moving")
+        for ref in ("HEAD", "moving", self.baseline):
+            self.assertEqual(REPORT.source_at(ref, self.source), self.original)
+        changed = self.original.replace("n = n", "n = 0")
+        self.write(self.source, changed)
+        current = self.commit()
+        self.command("git", "tag", "-f", "moving")
+        for ref in ("HEAD", "moving", current):
+            self.assertEqual(REPORT.source_at(ref, self.source), changed)
+        self.assertEqual(REPORT.source_at(self.baseline, self.source), self.original)
+        self.assertNotEqual(REPORT.blob_at(current, self.source),
+                            REPORT.blob_at(self.baseline, self.source))
+
+    def test_cross_root_missing_objects_do_not_hit_other_repository(self):
+        REPORT.source_at(self.baseline, self.source)
+        other = self.root / "other"
+        other.mkdir()
+        self.command("git", "-C", str(other), "init", "-q")
+        with patch.object(REPORT, "ROOT", other):
+            with self.assertRaises(subprocess.CalledProcessError):
+                REPORT.source_at(self.baseline, self.source)
+
+    def test_tree_expression_retains_original_git_semantics(self):
+        tree = self.command("git", "rev-parse", self.baseline + "^{tree}")
+        self.assertEqual(REPORT.source_at(tree, self.source), self.original)
+        self.assertEqual(REPORT.blob_at(tree, self.source),
+                         REPORT.git("rev-parse", tree + ":" + self.source).strip())
+        self.assertEqual(REPORT.inventory_hash(tree, self.helper),
+                         REPORT.inventory_hash(self.baseline, self.helper))
+
+    def test_alternate_object_store_changes_retain_git_errors(self):
+        other = self.root / "alternate"
+        self.command("git", "clone", "--shared", "-q", str(self.root), str(other))
+        with patch.object(REPORT, "ROOT", other):
+            self.assertEqual(REPORT.source_at(self.baseline, self.source), self.original)
+            (other / ".git/objects/info/alternates").write_text("/missing-object-store\n")
+            with self.assertRaises(subprocess.CalledProcessError):
+                REPORT.source_at(self.baseline, self.source)
+
+    def test_git_indirection_retargeting_and_replacement_refs(self):
+        other = self.root / "other"
+        self.command("git", "clone", "-q", str(self.root), str(other))
+        self.write(self.source, self.original.replace("n = n", "n = 0"))
+        changed = self.commit()
+        self.command("git", "-C", str(other), "fetch", "-q", str(self.root), changed)
+        self.command("git", "-C", str(other), "replace", self.baseline, changed)
+        alias = self.root / "alias"
+        alias.mkdir()
+        pointer = alias / ".git"
+        pointer.write_text("gitdir: " + str(self.root / ".git") + "\n")
+        with patch.object(REPORT, "ROOT", alias):
+            self.assertEqual(REPORT.source_at(self.baseline, self.source), self.original)
+            pointer.write_text("gitdir: " + str(other / ".git") + "\n")
+            self.assertEqual(REPORT.source_at(self.baseline, self.source),
+                             REPORT.git("show", f"{self.baseline}:{self.source}"))
+            self.assertNotEqual(REPORT.source_at(self.baseline, self.source), self.original)
+
+    def test_object_directory_override_and_failed_reads_are_not_cached(self):
+        REPORT.source_at(self.baseline, self.source)
+        empty = self.root / "empty-objects"
+        empty.mkdir()
+        with patch.dict(os.environ, {"GIT_OBJECT_DIRECTORY": str(empty)}):
+            with self.assertRaises(subprocess.CalledProcessError):
+                REPORT.source_at(self.baseline, self.source)
+            with self.assertRaises(subprocess.CalledProcessError):
+                REPORT.blob_at(self.baseline, self.source)
+        missing = "new-ref"
+        with self.assertRaises(subprocess.CalledProcessError):
+            REPORT.source_at(missing, self.source)
+        self.command("git", "branch", missing, self.baseline)
+        self.assertEqual(REPORT.source_at(missing, self.source), self.original)
+        with patch.object(REPORT, "_git_at", wraps=REPORT._git_at) as reads:
+            for _ in range(2):
+                with self.assertRaises(subprocess.CalledProcessError):
+                    REPORT.source_at(self.baseline, "absent.v")
+            self.assertEqual(reads.call_count, 2)
+
+    def test_loose_and_packed_replacements_bypass_warm_caches(self):
+        old_hash = REPORT.inventory_hash(self.baseline, self.helper)
+        old_blob = REPORT.blob_at(self.baseline, self.source)
+        REPORT.source_at(self.baseline, self.source)
+        changed = self.original.replace("n = n", "n = 0")
+        self.write(self.source, changed)
+        self.write_json("meta/library_helper_inventory.json", {"helpers": [{
+            "qualified_name": self.helper, "declaration_hash": "changed"}]})
+        replacement = self.commit()
+        self.command("git", "replace", self.baseline, replacement)
+        for packed in (False, True):
+            if packed:
+                self.command("git", "pack-refs", "--all", "--prune")
+                shutil.rmtree(self.root / ".git/refs/replace")
+            self.assertEqual(REPORT.source_at(self.baseline, self.source), changed)
+            self.assertEqual(REPORT.inventory_hash(self.baseline, self.helper), "changed")
+            self.assertNotEqual(REPORT.blob_at(self.baseline, self.source), old_blob)
+        self.command("git", "replace", "-d", self.baseline)
+        self.assertEqual(REPORT.inventory_hash(self.baseline, self.helper), old_hash)
+        self.assertEqual(REPORT.source_at(self.baseline, self.source), self.original)
+
+    def test_inventory_first_match_and_original_error_order(self):
+        path = "meta/library_helper_inventory.json"
+        good = {"qualified_name": self.helper, "declaration_hash": "first"}
+        cases = ([good, dict(good, declaration_hash="second")], [good, None],
+                 [None, good], [{"qualified_name": self.helper}],
+                 [{"qualified_name": "other"}, good])
+        for helpers in cases:
+            with self.subTest(helpers=helpers):
+                self.write_json(path, {"helpers": helpers})
+                pin = self.commit()
+                try:
+                    with self.uncached():
+                        expected = REPORT.inventory_hash(pin, self.helper)
+                except (TypeError, KeyError) as error:
+                    for _ in range(2):
+                        with self.assertRaises(type(error)):
+                            REPORT.inventory_hash(pin, self.helper)
+                else:
+                    self.assertEqual(REPORT.inventory_hash(pin, self.helper), expected)
+                    self.assertEqual(REPORT.inventory_hash(pin, self.helper), expected)
+        self.write(path, "invalid json")
+        pin = self.commit()
+        for _ in range(2):
+            with self.assertRaises(json.JSONDecodeError):
+                REPORT.inventory_hash(pin, self.helper)
 
 
 if __name__ == "__main__":

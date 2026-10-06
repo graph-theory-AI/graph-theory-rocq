@@ -84,8 +84,18 @@ An explicitly reviewed complete non-corpus proposition whose name lacks
 `_statement` can be listed in its report specification's optional
 `additional_statements` array of qualified names. Each must be reached from the
 migrated sources at both baseline and current source, outside both manifests,
-and have exactly one `kind: statement`, `non_corpus: true` frozen mapping and a
-complete iff certificate. Its source and project must be regular, build-listed
+and have exactly one current `kind: statement`, `non_corpus: true` frozen mapping
+at the family baseline and a complete iff certificate. Explicit additional
+`original-statement` snapshots of that same identity are permitted; every snapshot
+must pass the same immutable full-commit, regular source/project, build ownership,
+explicit non-corpus identity and top-level nullary/scope checks at its own effective
+commit, as well as source/body provenance and complete iff checks. No other role may
+hide a whole proposition. Known conjecture modules and the existing supported
+public-library locations (GTBase, area foundations and ClassicalLemmas) are accepted;
+migration/example/private/probe files are not public enrollment locations. An
+explicit public additional Prop enables public intermediary indexing even without
+a public source descriptor; unrelated Props are never enrolled automatically.
+Its source and project must be regular, build-listed
 and owned by the recorded namespace at the immutable full baseline commit and
 in the current tree. The initial format accepts only top-level
 `Definition NAME : Prop := ...` outside Modules and Sections; parameterized or
@@ -138,3 +148,36 @@ Existing module-wide audits are not divided into artificial families.
 Run `python3 meta/test_family_registry.py`, `make audit`, and the usual migration
 gates through `environment/proof-shell.sh`. Registry and loader changes also
 route to `make mutation`.
+
+## Source provider attribution
+
+Migration source reports audit the **declared project build context**. Repository
+logical namespaces come exclusively from the corresponding repository project
+roots; external dependencies must not inject or shadow those namespaces. This is
+a supported-build contract, not certification of an arbitrary installed Rocq or
+ambient loader environment. Kernel checks and independent elaboration/dependency
+checks remain required; the report does not implement a complete installed-library
+collision preflight.
+
+For an unqualified, nonlocal helper reference, all providers available under the
+consumer's ordinary `_CoqProject` roots remain candidates. A provider outside all
+those roots is excluded only in a supported context. This same policy applies to
+whole-row discovery, stale frozen bodies and repository consumers. Same-file and
+qualified/suffix references keep the previous conservative handling; mapped
+ambiguities are never resolved by choosing one provider. External Requires are
+not assumed to have empty dependencies.
+
+Unsupported or uncertain context retains the original candidate superset (and
+any existing validation error). This includes ambient loader/compiler overrides,
+remapped/overlapping/absolute or noncanonical relative roots, unsupported project options, non-regular or
+missing source/project files, dynamic loader commands, and Requires to unchecked
+local modules or unresolved partial modules. The supported project grammar is
+ordinary registered `-R`/`-Q` roots, build-listed source paths and warning-only
+`-arg -w -arg VALUE`; local members under every mapped root are checked. Independent
+excluded sources are not automatically treated as imported. Harmless opam-switch,
+wrapper resource and MCP timeout/workdir settings are distinguished from loader
+overrides. Fallbacks are recorded in the full report's
+`provider_context_fallbacks`; they do not waive coverage or stale-reference errors.
+Historical contexts use their effective commit's project/source text; current
+contexts are read afresh for each query. Default auditing remains toolchain-free
+and does not inspect installed libraries or invoke Rocq.

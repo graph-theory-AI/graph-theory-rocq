@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py matching --details /tmp/migrati
 
 - Canonical: `GraphTheory.connectivity.matching`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 7 helpers, 16 statements, 48 frozen objects, 264 recorded references.
-- Source checks: 518/518 pass; consistent.
+- Scope: 7 helpers, 16 statements, 48 frozen objects, 190 recorded references.
+- Source checks: 448/448 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
