@@ -2769,6 +2769,74 @@ class ParametricStatementTests(unittest.TestCase):
         self.rebaseline()
         self.assertIn(self.schema + ": binding targets do not reach migrated sources at any pin", self.failures())
 
+    # Kernel probes.
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_accepts_parametric_endpoint_and_implicit_certificate_binders(self):
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        self.set_certificate(compat="Lemma schema_compat {P Q : nat -> Prop} :\n"
+                                    "  SchemaLegacy.schema_claim P Q <-> GTBase.conjectures.X2.schema_claim P Q.\n"
+                                    "Proof. split; intro h; exact h. Qed.\n")
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_rejects_wrong_endpoint_bindings_and_shapes(self):
+        live = "GTBase.conjectures.X2.schema_claim"
+        compats = {
+            "global form": "Lemma schema_compat :\n  (forall P Q, SchemaLegacy.schema_claim P Q) <-> (forall P Q, " + live + " P Q).\n"
+                           "Proof. split; intros h P Q; apply h. Qed.\n",
+            "guarded": "Lemma schema_compat (P Q : nat -> Prop) : False ->\n  (SchemaLegacy.schema_claim P Q <-> " + live + " P Q).\n"
+                       "Proof. intros []. Qed.\n",
+            "witness": "Lemma schema_compat :\n  SchemaLegacy.schema_claim (fun _ => True) (fun _ => True) <-> " + live + " (fun _ => True) (fun _ => True).\n"
+                       "Proof. split; intro h; exact h. Qed.\n",
+            "swapped binders": "Lemma schema_compat (Q P : nat -> Prop) :\n  SchemaLegacy.schema_claim P Q <-> " + live + " P Q.\n"
+                               "Proof. split; intro h; exact h. Qed.\n",
+            "section hypothesis": "Section Guard.\nHypothesis guard : True.\nLemma schema_compat (P Q : nat -> Prop) :\n"
+                                  "  SchemaLegacy.schema_claim P Q <-> " + live + " P Q.\n"
+                                  "Proof using guard. split; intro h; exact h. Qed.\nEnd Guard.\n",
+        }
+        for name, compat in compats.items():
+            with self.subTest(name=name):
+                self.set_certificate(compat=compat)
+                self.compile_fixture()
+                self.assertTrue(REPORT.check_kernel(self.spec))
+        self.set_certificate()
+        self.compile_fixture()
+        self.entry()["parameters"][1]["kernel_type"] = self.NAT + " -> Corelib.Init.Datatypes.bool"
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_conversion_rejects_captured_or_opaque_live_shapes(self):
+        # Text checks pass, but a certificate-local definition captures the
+        # witness's bare `middle` with a non-convertible meaning; only the
+        # kernel conversion of the live endpoint with its witness sees that.
+        tail = self.certificate_tail(between="Definition middle (n : nat) : Prop := n = n /\\ True.\n")
+        tail = tail.replace("Lemma middle_compat (n : nat) : MiddleLegacy.middle n <-> middle n.",
+                            "Lemma middle_compat (n : nat) : MiddleLegacy.middle n <-> GTBase.conjectures.X1.middle n.")
+        self.cert_source = self.cert_base + tail
+        self.write(self.certificate, self.cert_source)
+        self.assertEqual(self.failures(), [])
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+        # A convertible capture is semantically harmless and is accepted.
+        self.set_certificate(between="Local Notation middle := MiddleLegacy.middle.\n")
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        # An opaque witness cannot be unfolded, so the conversion fails.
+        self.set_certificate(shape="Lemma schema_claim_live_shape : Prop.\nProof. exact ("
+                                   + self.binding + " -> forall n, middle n /\\ P n). Qed.\n")
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+        self.set_certificate(frozen="Definition schema_claim {x : nat} : Prop := " + self.binding
+                                    + " -> forall n, MiddleLegacy.middle n /\\ P n.\n",
+                             compat="Lemma schema_compat (P Q : nat -> Prop) :\n"
+                                    "  @SchemaLegacy.schema_claim P Q 0 <-> GTBase.conjectures.X2.schema_claim P Q.\n"
+                                    "Proof. split; intro h; exact h. Qed.\n")
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

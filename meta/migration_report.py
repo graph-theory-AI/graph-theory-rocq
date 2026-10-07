@@ -993,6 +993,24 @@ def parametric_reach_errors(spec: dict, entries: dict, sources: set[str], includ
     return errors
 
 
+def parametric_probe(entry: dict, frozen: str, certificate: str, with_live: bool) -> list[str]:
+    """Exact discharged types, the pointwise certificate and live-shape conversion.
+
+    Every endpoint is @-applied, so no implicit argument can be instantiated;
+    Prop is not a product, so no discharged parameter can be absorbed.
+    """
+    binders = " ".join(f"({p['name']} : {p['kernel_type']})" for p in entry["parameters"])
+    args = " ".join(p["name"] for p in entry["parameters"])
+    live, shape = entry["qualified"], entry["live_shape"]
+    lines = [f"Check (@{frozen} : forall {binders}, Prop)."]
+    if with_live:
+        lines += [f"Check (@{live} : forall {binders}, Prop).",
+                  f"Check (@{shape} : forall {binders}, Prop).",
+                  f"Check (fun {binders} => (@eq_refl Prop (@{live} {args}) : @{live} {args} = @{shape} {args}))."]
+    lines.append(f"Check (@{certificate} : forall {binders}, @{frozen} {args} <-> @{live} {args}).")
+    return lines
+
+
 def section_copy_problem(clean: str, name: str, module: str | None, entry: dict, what: str) -> str | None:
     """Placement of a frozen copy (module given) or live-shape witness (top level)."""
     try:
@@ -1269,6 +1287,7 @@ def check_kernel(spec: dict) -> list[str]:
         return [str(exc)]
     if errors:
         return errors
+    parametric = parametric_statement_entries(spec)
     groups = defaultdict(list)
     certificates = defaultdict(set)
     packages = {namespace: package for package, namespace in spec["namespaces"].items()}
@@ -1286,12 +1305,21 @@ def check_kernel(spec: dict) -> list[str]:
         for index, token in enumerate(tokens[:-2]):
             if token in {"-R", "-Q"}:
                 flags.extend(tokens[index:index + 3])
+        live_modules = {module for obj in objects if obj["qualified"] in parametric
+                        for module in (obj["qualified"].rsplit(".", 1)[0],
+                                       parametric[obj["qualified"]]["live_shape"].rsplit(".", 1)[0])}
         imports = sorted({module_for_path(obj["frozen_path"], spec["namespaces"])
                           for obj in objects} | {name.rsplit(".", 1)[0]
-                                                for name in certificates[package]})
+                                                for name in certificates[package]} | live_modules)
         body = ["Require " + module + "." for module in imports]
+        probed = set()
         for obj in objects:
             frozen = module_for_path(obj["frozen_path"], spec["namespaces"]) + "." + obj["frozen"]
+            if obj["qualified"] in parametric:
+                body.extend(parametric_probe(parametric[obj["qualified"]], frozen, obj["certificate"],
+                                             obj["qualified"] not in probed))
+                probed.add(obj["qualified"])
+                continue
             if obj["qualified"] in additional_statement_names(spec):
                 body.append(f"Check (@{frozen} : Prop).")
                 body.append(f"Check (@{obj['qualified']} : Prop).")
