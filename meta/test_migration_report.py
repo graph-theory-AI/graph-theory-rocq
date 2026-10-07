@@ -2837,6 +2837,105 @@ class ParametricStatementTests(unittest.TestCase):
         self.compile_fixture()
         self.assertTrue(REPORT.check_kernel(self.spec))
 
+    # Historical parametric snapshots (T2a) and stale scans (T3).
+
+    def add_snapshot(self, old_claim=None, old_scaffold=None, old_closed=None):
+        """Commit an older X2, then the current one; enroll the older Original."""
+        old_claim = old_claim or ("(** A Section-parametric whole conjecture. *)\n"
+                                  "Definition schema_claim : Prop := closed -> forall n, P n /\\ middle n.\n")
+        current = self.schema_text
+        self.write(self.schema_path, self.schema_source(scaffold=old_scaffold, claim=old_claim, closed=old_closed))
+        self.rebaseline()
+        old = self.spec["baseline_commit"]
+        self.write(self.schema_path, current)
+        self.rebaseline()
+        self.cert_source = (self.cert_source + "Module SchemaOriginal.\nSection Schema.\n" + self.SCAFFOLD
+                            + "Definition schema_claim : Prop := " + self.binding
+                            + " -> forall n, P n /\\ MiddleLegacy.middle n.\n"
+                            + "End Schema.\nEnd SchemaOriginal.\n"
+                            + "Lemma schema_original_compat (P Q : nat -> Prop) :\n"
+                            "  SchemaOriginal.schema_claim P Q <-> GTBase.conjectures.X2.schema_claim P Q.\n"
+                            "Proof. split; intros h c n; destruct (h c n); split; assumption. Qed.\n")
+        self.write(self.certificate, self.cert_source)
+        self.register("schema_original_compat")
+        self.spec["frozen"].append({
+            "kind": "original-statement", "qualified": self.schema, "path": self.schema_path,
+            "name": "schema_claim", "commit": old, "frozen_path": self.certificate,
+            "frozen": "SchemaOriginal.schema_claim", "certificate": self.module + ".schema_original_compat",
+            "non_corpus": True,
+            "substitutions": {"middle": "MiddleLegacy.middle", "closed": self.binding}})
+        return old
+    def test_parametric_snapshot_at_an_older_commit_passes(self):
+        self.add_snapshot()
+        self.assertEqual(self.failures(), [])
+
+    def test_identical_snapshot_can_share_the_frozen_copy(self):
+        old = self.add_snapshot(old_claim=self.claim_text)
+        self.spec["frozen"][-1].update(frozen="SchemaLegacy.schema_claim",
+                                       certificate=self.module + ".schema_compat")
+        self.assertEqual(self.failures(), [])
+        self.assertTrue(old)
+
+    def test_parametric_snapshot_guards(self):
+        old = self.add_snapshot()
+        snapshot = self.spec["frozen"][-1]
+        tree = self.command("git", "rev-parse", old + "^{tree}")
+        for commit, match in ((self.spec["baseline_commit"], "distinct immutable"),
+                              (old[:12], "distinct immutable"),
+                              (self.command("git", "commit-tree", tree, "-m", "side"), "ancestor of the baseline")):
+            with self.subTest(commit=commit):
+                snapshot["commit"] = commit
+                self.assert_invalid(match)
+        snapshot["commit"] = old
+        snapshot["kind"] = "original-chain"
+        self.assert_invalid("whole statement roles")
+        snapshot["kind"] = "original-statement"
+        self.spec["frozen"].append(copy.deepcopy(snapshot))
+        self.assert_invalid("distinct immutable")
+
+    def test_snapshot_scaffold_bindings_and_parameters_must_hold_at_its_commit(self):
+        cases = (
+            (dict(old_scaffold=self.SCAFFOLD.replace("Q : nat -> Prop", "Q : nat -> bool")), "scaffold differs"),
+            (dict(old_closed="Definition closed : Prop := forall n, Q n -> P n.\n"), "binding target closed differs"),
+            (dict(old_claim="(** Old. *)\nDefinition schema_claim : Prop := forall n, middle n /\\ Q n.\n"),
+             "bindings must name exactly"),
+        )
+        for parts, match in cases:
+            with self.subTest(parts=parts):
+                self.setUp()
+                self.add_snapshot(**parts)
+                self.assert_invalid(match)
+
+    def test_stale_scan_sees_parametric_endpoints(self):
+        old_cert = "base/theories/migration/old_family.v"
+        self.write(old_cert, "From GTBase.conjectures Require Import X2.\nModule OldLegacy.\n"
+                   "Definition old_glued : Prop := schema_claim (fun _ => True) (fun _ => True).\n"
+                   "End OldLegacy.\n")
+        label = (old_cert + "#OldLegacy.old_glued resolves through live ['schema_claim']")
+        self.assertIn(label, self.failures())
+        self.spec["known_stale_snapshots"] = {old_cert + "#OldLegacy.old_glued": "replaced by schema_compat"}
+        self.assertEqual(self.failures(), [])
+        del self.spec["known_stale_snapshots"]
+        self.write(old_cert, "From GTBase.migration Require Import test_family.\nModule OldLegacy.\n"
+                   "Definition old_glued : Prop := SchemaLegacy.schema_claim (fun _ => True) (fun _ => True).\n"
+                   "End OldLegacy.\n")
+        self.assertEqual(self.failures(), [])
+
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_checks_parametric_snapshots(self):
+        self.add_snapshot()
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        self.cert_source = self.cert_source.replace(
+            "Lemma schema_original_compat (P Q : nat -> Prop) :\n",
+            "Lemma schema_original_compat (P Q : nat -> Prop) : False ->\n").replace(
+            "Proof. split; intros h c n; destruct (h c n); split; assumption. Qed.\n",
+            "Proof. intros []. Qed.\n")
+        self.write(self.certificate, self.cert_source)
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

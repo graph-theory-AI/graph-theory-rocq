@@ -953,8 +953,17 @@ def validate_parametric_statements(spec: dict, rows_base: dict, rows_now: dict) 
         if len(rows) != 1 or rows[0].get("commit", base) != base:
             raise ValueError(f"{qualified}: parametric statement needs one baseline statement mapping")
         by_commit = {base: rows[0]}
-        if snapshots:
-            raise ValueError(f"{qualified}: parametric original-statement snapshots are not supported")
+        for obj in snapshots:
+            commit = obj.get("commit")
+            if (not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit)
+                    or INV.source_git(ROOT, "cat-file", "-t", commit).strip() != "commit"
+                    or commit in by_commit):
+                raise ValueError(f"{qualified}: parametric snapshots need distinct immutable full commits")
+            try:
+                INV.source_git(ROOT, "merge-base", "--is-ancestor", commit, base)
+            except RegistryError:
+                raise ValueError(f"{qualified}: parametric snapshot commit must be an ancestor of the baseline") from None
+            by_commit[commit] = obj
         targets = {}
         for commit in (*sorted(by_commit, key=lambda c: c != base), None):
             what = f"{qualified} at {commit[:7] if commit else 'current tree'}"
@@ -987,6 +996,19 @@ def parametric_reach_errors(spec: dict, entries: dict, sources: set[str], includ
     for qualified, entry in sorted(entries.items()):
         targets = {qualified.rsplit(".", 1)[0] + "." + key for key in entry["bindings"]}
         reaching = set(reaching_base) | set(reaching_now) | set(sources)
+        for obj in spec["frozen"]:
+            if obj.get("qualified") != qualified or obj.get("kind") != "original-statement":
+                continue
+            rows, _ = manifest_rows(obj["commit"])
+            try:
+                reaching |= statement_dependencies(obj["commit"], set(sources), rows,
+                                                   include_public=include_public,
+                                                   additional_statements={qualified})[1]
+            except ValueError as exc:
+                # An endpoint the sources do not reach at that commit cannot
+                # make its referenced companions reach them either.
+                if "must be reached" not in str(exc):
+                    raise
         if targets & reaching:
             errors.append(f"{qualified}: binding targets reach migrated sources and would be live chains: "
                           f"{sorted(targets & reaching)}")
@@ -1591,7 +1613,9 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     # Frozen bodies anywhere in the migration layer that still resolve through
     # a live helper or chain declaration of this family.
     # Computed chains, not only the spec's list, so a missing freeze cannot hide.
-    live_names = source_names | chain_names | computed_chain
+    # Enrolled parametric endpoints resolve through this family's helpers too;
+    # an earlier family's frozen body that applies one of them live is stale.
+    live_names = source_names | chain_names | computed_chain | {name.rsplit(".", 1)[1] for name in parametric}
     stale = []
     for path in sorted(ROOT.glob("*/theories/migration/*.v")):
         rel = path.relative_to(ROOT).as_posix()
