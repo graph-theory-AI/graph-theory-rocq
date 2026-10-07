@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "family": "complete-multipartite",
+  "primitive": {
+    "canonical_name": "GTBase.complete_multipartite_graphs.complete_multipartite_graph",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "cmp_rel",
+      "complete_multipartite",
+      "multipartite_rel"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.U4.cmp_rel",
+      "Chromatic.conjectures.U4.complete_multipartite",
+      "Chromatic.conjectures.X218.x218_complete_multipartite",
+      "Chromatic.conjectures.X218.x218_multipartite_rel"
+    ],
+    "consumers_remaining": 6,
+    "relation": "the complete multipartite graph with k parts of size m on the product carrier 'I_k * 'I_m (parts first): Chromatic U4 cmp_rel/complete_multipartite and X218 x218_multipartite_rel/x218_complete_multipartite are GTBase.complete_multipartite_graphs.complete_multipartite_rel/complete_multipartite_graph, the relation x.1 != y.1 by conversion and each graph pointwise and by the identity isomorphism. The four constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. Every k and m is allowed (k = 0 or m = 0 empty, k = 1 edgeless, m = 1 complete); 'K_k and 'K_n,m live on other carriers and are related by isomorphisms only.",
+    "semantic_classes": {
+      "equipartite-product-carrier": {
+        "members": [
+          "Chromatic.conjectures.U4.cmp_rel",
+          "Chromatic.conjectures.U4.complete_multipartite",
+          "Chromatic.conjectures.X218.x218_complete_multipartite",
+          "Chromatic.conjectures.X218.x218_multipartite_rel"
+        ],
+        "count": 4,
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.complete_multipartite_graphs.cmp_rel_compat",
+          "Chromatic.migration.complete_multipartite_graphs.complete_multipartite_compat",
+          "Chromatic.migration.complete_multipartite_graphs.x218_complete_multipartite_compat",
+          "Chromatic.migration.complete_multipartite_graphs.x218_multipartite_rel_compat"
+        ],
+        "note": "the carrier 'I_k * 'I_m with parts first, the relation x.1 != y.1 and its SGraph; conversion for the relation, pointwise adjacency and the identity isomorphism for the graph; zero parameters allowed"
+      }
+    },
+    "distinct_variants": {
+      "Extremal.conjectures.XE1.xe1_complete_multipartite_with_sizes": "a predicate on a supplied graph: a partition into k parts of arbitrary, possibly zero, sizes with every edge between parts; not a constructor and not equipartite (consumer erdos_550_statement, frozen by subgraph-of)",
+      "Digraph.conjectures.X221.x221_oriented_complete_multipartite": "a directed predicate: oriented with transitive non-adjacency (any part sizes); a different interface, no Digraph build"
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.complete_multipartite_graphs.choice_number_of_k_chromatic_graphs_of_bounded_order_statement_compat",
+      "Chromatic.migration.complete_multipartite_graphs.cmp_rel_compat",
+      "Chromatic.migration.complete_multipartite_graphs.cmp_rel_proofs_compat",
+      "Chromatic.migration.complete_multipartite_graphs.complete_multipartite_compat",
+      "Chromatic.migration.complete_multipartite_graphs.every_forest_is_multibounding_statement_compat",
+      "Chromatic.migration.complete_multipartite_graphs.x218_complete_multipartite_compat",
+      "Chromatic.migration.complete_multipartite_graphs.x218_multibounding_compat",
+      "Chromatic.migration.complete_multipartite_graphs.x218_multipartite_proofs_compat",
+      "Chromatic.migration.complete_multipartite_graphs.x218_multipartite_rel_compat"
+    ],
+    "api_theorems": [
+      "GTBase.complete_multipartite_graphs.complete_multipartite_sym",
+      "GTBase.complete_multipartite_graphs.complete_multipartite_irrefl",
+      "GTBase.complete_multipartite_graphs.complete_multipartite_edgeE",
+      "GTBase.complete_multipartite_graphs.card_complete_multipartite_graph",
+      "GTBase.complete_multipartite_graphs.complete_multipartite_same_part",
+      "GTBase.complete_multipartite_graphs.complete_multipartite_diff_part",
+      "GTBase.complete_multipartite_graphs.card_complete_multipartite_graph0n",
+      "GTBase.complete_multipartite_graphs.card_complete_multipartite_graphn0",
+      "GTBase.complete_multipartite_graphs.complete_multipartite_graph1n_edgeless",
+      "GTBase.complete_multipartite_graphs.complete_multipartite_graphn1_edgeE",
+      "GTBase.complete_multipartite_graphs.complete_multipartite_graphn1_diso",
+      "Chromatic.migration.complete_multipartite_graphs.complete_multipartite_diso",
+      "Chromatic.migration.complete_multipartite_graphs.x218_complete_multipartite_diso"
+    ],
+    "public_client": "base/theories/examples/complete_multipartite_graphs.v",
+    "legacy_baseline": "9e3f1efa368ca76a654e4c11c796758f72af3ec9",
+    "migration_report": "meta/migration_reports/complete_multipartite_graphs.md",
+    "migration_spec": "meta/migration_reports/complete_multipartite_graphs.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A27.md",
+    "foundation_fidelity": "meta/foundation_fidelity/complete-multipartite.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory (no multipartite or Turan construction; complete on ordinals, KB on a sum carrier)",
+        "MathComp (no multipartite construction; card_prod, card_ord reused)",
+        "GTBase and ClassicalLemmas (none before this family)"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.complete_multipartite_graphs.complete_multipartite_graph",
+      "note": "No installed equipartite complete multipartite construction; the product carrier and relation of both sources are kept. Evidence: coordination/evidence/A27-multipartite-discovery/ (SCOPE.md) and coordination/evidence/A27-complete-multipartite/.",
+      "audited_at": "2026-10-04"
+    },
+    "reviewed_by": null
+  }
+}
