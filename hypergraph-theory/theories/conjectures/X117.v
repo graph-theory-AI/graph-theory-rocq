@@ -4,6 +4,7 @@ From GTBase Require Export base.
 Require Hypergraph.foundations.hypergraph_copies.
 Require Hypergraph.foundations.hypergraph_forcing.
 Require Hypergraph.foundations.hedgehog.
+Require Hypergraph.foundations.hypergraph_ramsey.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -50,8 +51,7 @@ Definition x117_forces_mono
 (** [R] is the two-colour Ramsey number [r(H_t;2)]: the least host size that
     forces a monochromatic copy of [H_t]. *)
 Definition x117_ramsey_number (t R : nat) : Prop :=
-  x117_forces_mono (x117_edges t) R /\
-  forall N : nat, x117_forces_mono (x117_edges t) N -> R <= N.
+  Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number (x117_edges t) bool R.
 
 (** ** X117 statements *****************************************************)
 
