@@ -21,6 +21,21 @@
         "hg_regular_set1_set0",
         "hg_regular_setT"
       ]
+    },
+    "Infinite.foundations.regularity": {
+      "path": "infinite-graph-theory/theories/foundations/regularity.v",
+      "overrides": {
+        "iregular": {
+          "verdict": "FAITHFUL",
+          "note": "Every vertex has an injective I_r-indexed enumeration of exactly its neighbours; local existential enumerators, no choice or decidability, r before G; empty carrier regular at every r, r = 0 iff no adjacency; finite_sub of each neighbourhood derived from the same enumerator."
+        }
+      },
+      "machine_evidence": [
+        "iregular_finite_sub",
+        "iregular_void",
+        "iregular0",
+        "iregular_isolated"
+      ]
     }
   }
 }
