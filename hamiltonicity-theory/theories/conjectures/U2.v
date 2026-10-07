@@ -25,6 +25,7 @@
 
 From GTBase Require Export base.
 From mathcomp Require Import fingroup.
+From GTBase Require Import cayley_graphs.
 From Topological.foundations Require Import embedding.
 
 Set Implicit Arguments.
@@ -116,22 +117,25 @@ End LineGraph.
     Vertices are group elements; [x -- y] iff x⁻¹y or y⁻¹x lies in [S].  The
     explicit symmetrisation (OR) and [x != y] make the [sgraph] obligations
     immediate for ANY [S]; the meaningful regime (symmetric, generating [S]) is
-    pinned by the guards in the statement. *)
+    pinned by the guards in the statement.  Since the A26 library migration [cayley_rel] and
+    [cayley_graph] are transparent aliases of [GTBase.cayley_graphs.undirected_cayley_rel S] and
+    [undirected_cayley_graph S] (the same carrier and relation); the original Section is frozen
+    and certified in theories/migration/cayley_graphs.v. *)
 Section Cayley.
 Variable gT : finGroupType.
 Variable S : {set gT}.
 Local Open Scope group_scope.
 
 Definition cayley_rel : rel gT :=
-  fun x y => (x != y) && ((x^-1 * y \in S) || (y^-1 * x \in S)).
+  @undirected_cayley_rel gT S.
 
 Lemma cayley_sym : symmetric cayley_rel.
-Proof. by move=> x y; rewrite /cayley_rel eq_sym orbC. Qed.
+Proof. exact: undirected_cayley_sym. Qed.
 
 Lemma cayley_irrefl : irreflexive cayley_rel.
-Proof. by move=> x; rewrite /cayley_rel eqxx. Qed.
+Proof. exact: undirected_cayley_irrefl. Qed.
 
-Definition cayley_graph : sgraph := SGraph cayley_sym cayley_irrefl.
+Definition cayley_graph : sgraph := undirected_cayley_graph S.
 End Cayley.
 
 (** A connection set is symmetric iff it is closed under inverses. *)

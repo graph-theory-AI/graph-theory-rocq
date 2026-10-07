@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "family": "cayley-graph",
+  "primitive": {
+    "canonical_name": "GTBase.cayley_graphs.undirected_cayley_graph",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "cayley_adj",
+      "cayley_graph",
+      "cayley_rel"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.D2ram.cayley_adj",
+      "Extremal.conjectures.D2ram.cayley_graph",
+      "Hamilton.conjectures.U2.cayley_graph",
+      "Hamilton.conjectures.U2.cayley_rel"
+    ],
+    "consumers_remaining": 6,
+    "relation": "the undirected Cayley graph of a supplied finite group and an arbitrary connection set: Extremal D2ram cayley_adj/cayley_graph and Hamilton U2 cayley_rel/cayley_graph (Sections over gT : finGroupType and S : {set gT}) are GTBase.cayley_graphs.undirected_cayley_rel/undirected_cayley_graph: the carrier gT and the loopless symmetrised relation (x != y) && ((x^-1 * y \\in S) || (y^-1 * x \\in S)) by conversion (U2's group_scope and D2ram's explicit %g elaborate to the same term); each graph agrees pointwise with undirected_cayley_graph and by the identity isomorphism. The four constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. No inverse closure, generation, abelianity or order condition is imposed on the primitive; the row guards stay in the rows.",
+    "semantic_classes": {
+      "group-carrier-symmetrised": {
+        "members": [
+          "Extremal.conjectures.D2ram.cayley_adj",
+          "Extremal.conjectures.D2ram.cayley_graph",
+          "Hamilton.conjectures.U2.cayley_graph",
+          "Hamilton.conjectures.U2.cayley_rel"
+        ],
+        "count": 4,
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "certificates": [
+          "Extremal.migration.cayley_graphs.cayley_adj_compat",
+          "Extremal.migration.cayley_graphs.cayley_graph_compat",
+          "Hamilton.migration.cayley_graphs.cayley_graph_compat",
+          "Hamilton.migration.cayley_graphs.cayley_rel_compat"
+        ],
+        "note": "the supplied group gT as carrier, any S : {set gT}, the relation (x != y) && ((x^-1 * y \\in S) || (y^-1 * x \\in S)) (D2ram with explicit %g, U2 under Local Open Scope group_scope: the same elaborated term) and its SGraph; conversion for the relation, pointwise adjacency and the identity isomorphism for the graph"
+      }
+    },
+    "distinct_variants": {
+      "Digraph.constructions.cayley.cayley": "directed Cayley digraph: arc x -> y iff x^-1 * y \\in A, loops kept when 1 \\in A, no symmetrisation of an arbitrary A; a different interface, neither aliased nor migrated here (no Digraph build)"
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.cayley_graphs.cayley_adj_compat",
+      "Extremal.migration.cayley_graphs.cayley_adj_proofs_compat",
+      "Extremal.migration.cayley_graphs.cayley_graph_compat",
+      "Extremal.migration.cayley_graphs.ramsey_properties_of_cayley_graphs_statement_compat",
+      "Hamilton.migration.cayley_graphs.cayley_graph_compat",
+      "Hamilton.migration.cayley_graphs.cayley_proofs_compat",
+      "Hamilton.migration.cayley_graphs.cayley_rel_compat",
+      "Hamilton.migration.cayley_graphs.hamiltonian_cycle_compat",
+      "Hamilton.migration.cayley_graphs.hamiltonicity_of_cayley_graphs_statement_compat",
+      "Hamilton.migration.cayley_graphs.is_hamiltonian_compat",
+      "Hamilton.migration.cayley_graphs.symmetric_set_compat"
+    ],
+    "api_theorems": [
+      "GTBase.cayley_graphs.undirected_cayley_sym",
+      "GTBase.cayley_graphs.undirected_cayley_irrefl",
+      "GTBase.cayley_graphs.undirected_cayley_edgeE",
+      "GTBase.cayley_graphs.card_undirected_cayley_graph",
+      "GTBase.cayley_graphs.undirected_cayley_edge_mul",
+      "GTBase.cayley_graphs.undirected_cayley_edge_inv",
+      "GTBase.cayley_graphs.undirected_cayley_set0",
+      "GTBase.cayley_graphs.undirected_cayley_set1",
+      "GTBase.cayley_graphs.undirected_cayley_setT",
+      "GTBase.cayley_graphs.undirected_cayley_setT_diso",
+      "Extremal.migration.cayley_graphs.cayley_graph_diso",
+      "Hamilton.migration.cayley_graphs.cayley_graph_diso"
+    ],
+    "public_client": "base/theories/examples/cayley_graphs.v",
+    "legacy_baseline": "5832ba9c3026f28df9d8dd9c689d115f644ce3b1",
+    "migration_report": "meta/migration_reports/cayley_graphs.md",
+    "migration_spec": "meta/migration_reports/cayley_graphs.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A26.md",
+    "foundation_fidelity": "meta/foundation_fidelity/cayley-graph.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory (no Cayley construction; search archived in the discovery upstream.txt)",
+        "GraphTheory.core.sgraph/digraph (SGraph, eq_diso, diso_Kn reused)",
+        "MathComp fingroup (finGroupType, invg/mulg lemmas mulKg, invMg, invgK, mulgKV, eq_mulVg1, invg_eq1) and perm (client)",
+        "Digraph.constructions.cayley (directed, kept distinct)"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.cayley_graphs.undirected_cayley_graph",
+      "note": "No installed undirected Cayley graph: GraphTheory has none and the local Digraph construction is directed with loops. Evidence: coordination/evidence/A26-cayley-discovery/ (upstream.txt) and coordination/evidence/A26-cayley-graphs/.",
+      "audited_at": "2026-10-04"
+    },
+    "reviewed_by": null
+  }
+}

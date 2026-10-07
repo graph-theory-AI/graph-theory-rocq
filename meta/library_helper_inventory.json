@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2560,
-    "repeated_body_shapes": 144,
+    "repeated_body_shapes": 146,
     "repeated_normalized_names": 212,
     "repeated_signature_shapes": 305,
     "statements_excluded": 700,
@@ -365,6 +365,10 @@
         "Chromatic.conjectures.X43.x43_line_rel",
         "Reconstruction.conjectures.U11.sline_rel"
       ],
+      "8a16edf20b91a510631322527308e0d05e6a0de147e71e9c0bc6e0363a946912": [
+        "Extremal.conjectures.D2ram.cayley_graph",
+        "Hamilton.conjectures.U2.cayley_graph"
+      ],
       "8c0a5eb33e418ae17527e96ea9bd7a25a000b77ff4efeed7def97728359286bc": [
         "Chromatic.conjectures.X34.x34_edge_colour_rel",
         "Cycle.conjectures.X212.x212_edge_colour_rel",
@@ -423,6 +427,10 @@
       "a04b38db192b6028be6f00d59e1a2d09d518071bd3684dc8ef4956b20337bfcf": [
         "Chromatic.conjectures.X142.x142_proper_edge_colouring",
         "GTMisc.conjectures.X14.x14_proper_edge_colouring"
+      ],
+      "a07d1473fe3b0b01069ad02f6fd4ed706e9f622765734229a76e20d96c69c09f": [
+        "Extremal.conjectures.D2ram.cayley_adj",
+        "Hamilton.conjectures.U2.cayley_rel"
       ],
       "a1ec7e28697be9ad539a6e1acaee4851e0ed24b9025d205a0cf685e2990fb565": [
         "Hypergraph.conjectures.U12.hg_matching",
@@ -30059,7 +30067,7 @@
         "Extremal.conjectures.D2ram.common_graph"
       ],
       "kind": "Definition",
-      "line": 80,
+      "line": 81,
       "local_dependencies": [],
       "name": "edge_count",
       "normalized_name": "edge_count",
@@ -30078,7 +30086,7 @@
         "Extremal.conjectures.D2ram.multicolour_erdos_hajnal_statement"
       ],
       "kind": "Definition",
-      "line": 107,
+      "line": 108,
       "local_dependencies": [],
       "name": "uses_all_colours",
       "normalized_name": "uses_all_colours",
@@ -30097,7 +30105,7 @@
         "Extremal.conjectures.D2ram.multicolour_erdos_hajnal_statement"
       ],
       "kind": "Definition",
-      "line": 111,
+      "line": 112,
       "local_dependencies": [],
       "name": "contains_pattern",
       "normalized_name": "contains_pattern",
@@ -30116,7 +30124,7 @@
         "Extremal.conjectures.D2ram.multicolour_erdos_hajnal_statement"
       ],
       "kind": "Definition",
-      "line": 116,
+      "line": 117,
       "local_dependencies": [],
       "name": "palette_on",
       "normalized_name": "palette_on",
@@ -30135,7 +30143,7 @@
         "Extremal.conjectures.D2ram.complete_bipartite_subgraphs_of_perfect_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 150,
+      "line": 151,
       "local_dependencies": [],
       "name": "perfect_graph",
       "normalized_name": "perfect_graph",
@@ -30154,7 +30162,7 @@
         "Extremal.conjectures.D2ram.complete_bipartite_subgraphs_of_perfect_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 170,
+      "line": 171,
       "local_dependencies": [],
       "name": "complete_bipartite_sub",
       "normalized_name": "complete_bipartite_sub",
@@ -30173,7 +30181,7 @@
         "Extremal.conjectures.D2ram.common_graph"
       ],
       "kind": "Definition",
-      "line": 200,
+      "line": 201,
       "local_dependencies": [],
       "name": "mono_copies",
       "normalized_name": "mono_copies",
@@ -30192,7 +30200,7 @@
         "Extremal.conjectures.D2ram.chromatic_number_of_common_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 232,
+      "line": 233,
       "local_dependencies": [
         "edge_count",
         "mono_copies"
@@ -30207,15 +30215,15 @@
       "signature_shape_hash": "ea123d14a47d3c8fecd3f855c427512e33b52cbaad7f5d5d8ade3431e24f4c1f"
     },
     {
-      "body_hash": "508ddf76c3a8a0e78cfa875be1514996be083e199b9ee61a066fd78ab21c1d5d",
-      "body_shape_hash": "508ddf76c3a8a0e78cfa875be1514996be083e199b9ee61a066fd78ab21c1d5d",
-      "declaration_hash": "0be75ad7a038d57ed952c9f7237af878340fb11997d3a21c5f969e89347be979",
+      "body_hash": "a07d1473fe3b0b01069ad02f6fd4ed706e9f622765734229a76e20d96c69c09f",
+      "body_shape_hash": "a07d1473fe3b0b01069ad02f6fd4ed706e9f622765734229a76e20d96c69c09f",
+      "declaration_hash": "74ecf88adff220ae213c315559fac4599ea46b70f71bbe751ee99dffc895f1df",
       "direct_consumers": [
         "Extremal.conjectures.D2ram.cayley_adj_irrefl",
         "Extremal.conjectures.D2ram.cayley_adj_sym"
       ],
       "kind": "Definition",
-      "line": 283,
+      "line": 284,
       "local_dependencies": [],
       "name": "cayley_adj",
       "normalized_name": "cayley_adj",
@@ -30230,11 +30238,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "ab22137b6242f86f4cf0ce27f55487178e80187be75bfd98291d568ae9949013",
-      "direct_consumers": [
-        "Extremal.conjectures.D2ram.cayley_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 287,
+      "line": 292,
       "local_dependencies": [
         "cayley_adj"
       ],
@@ -30251,11 +30257,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "cb17d19222723b90af47de35176ddb9bd0f39ee4c6af99f1fd5b274eca81f7ec",
-      "direct_consumers": [
-        "Extremal.conjectures.D2ram.cayley_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 290,
+      "line": 295,
       "local_dependencies": [
         "cayley_adj"
       ],
@@ -30269,18 +30273,15 @@
       "signature_shape_hash": "9fa1f47edec2586fa2757f87937ada3e26396d5c0beae4c98f0eafb9099f39cb"
     },
     {
-      "body_hash": "e4a68aac8b64f9f355ef589bf51f45e29219e9b9a7694d888ef9d9fa97d32586",
-      "body_shape_hash": "e4a68aac8b64f9f355ef589bf51f45e29219e9b9a7694d888ef9d9fa97d32586",
-      "declaration_hash": "d5ef8a5a4e5fe89a67480183a6b356588bda2cb2238dda3de3ce6523ed7f595c",
+      "body_hash": "8a16edf20b91a510631322527308e0d05e6a0de147e71e9c0bc6e0363a946912",
+      "body_shape_hash": "8a16edf20b91a510631322527308e0d05e6a0de147e71e9c0bc6e0363a946912",
+      "declaration_hash": "abe29df64add150b25364e5079ca37065d14f8a4397a3d22988b32c3e4fa8cd9",
       "direct_consumers": [
         "Extremal.conjectures.D2ram.ramsey_properties_of_cayley_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 293,
-      "local_dependencies": [
-        "cayley_adj_irrefl",
-        "cayley_adj_sym"
-      ],
+      "line": 298,
+      "local_dependencies": [],
       "name": "cayley_graph",
       "normalized_name": "cayley_graph",
       "package": "extremal-graph-theory",
@@ -30298,7 +30299,7 @@
         "Extremal.conjectures.D2ram.the_erdos_hajnal_statement"
       ],
       "kind": "Definition",
-      "line": 321,
+      "line": 326,
       "local_dependencies": [],
       "name": "has_induced_copy",
       "normalized_name": "has_induced_copy",
@@ -43816,7 +43817,7 @@
         "Hamilton.conjectures.U2.hamiltonian_paths_and_cycles_in_vertex_transitive_gr_statement"
       ],
       "kind": "Definition",
-      "line": 33,
+      "line": 34,
       "local_dependencies": [],
       "name": "hamiltonian_path",
       "normalized_name": "hamiltonian_path",
@@ -43838,7 +43839,7 @@
         "Hamilton.conjectures.U2.uniquely_hamiltonian"
       ],
       "kind": "Definition",
-      "line": 46,
+      "line": 47,
       "local_dependencies": [],
       "name": "hamiltonian_cycle",
       "normalized_name": "hamiltonian_cycle",
@@ -43861,7 +43862,7 @@
         "Hamilton.conjectures.U2.hamiltonicity_of_cayley_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 51,
+      "line": 52,
       "local_dependencies": [
         "hamiltonian_cycle"
       ],
@@ -43884,7 +43885,7 @@
         "Hamilton.conjectures.U2.uniquely_hamiltonian"
       ],
       "kind": "Definition",
-      "line": 55,
+      "line": 56,
       "local_dependencies": [],
       "name": "cycle_edges",
       "normalized_name": "cycle_edges",
@@ -43903,7 +43904,7 @@
         "Hamilton.conjectures.U2.vertex_transitive"
       ],
       "kind": "Definition",
-      "line": 64,
+      "line": 65,
       "local_dependencies": [],
       "name": "graph_automorphism",
       "normalized_name": "graph_automorphism",
@@ -43922,7 +43923,7 @@
         "Hamilton.conjectures.U2.hamiltonian_paths_and_cycles_in_vertex_transitive_gr_statement"
       ],
       "kind": "Definition",
-      "line": 77,
+      "line": 78,
       "local_dependencies": [
         "graph_automorphism"
       ],
@@ -43941,7 +43942,7 @@
       "declaration_hash": "5bf5a2a71ab877c5e193d4a8cac7113c174edc254f24b7176362603340d8968d",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 92,
+      "line": 93,
       "local_dependencies": [],
       "name": "lg_oedge",
       "normalized_name": "lg_oedge",
@@ -43960,7 +43961,7 @@
         "Hamilton.conjectures.U2.lg_rel"
       ],
       "kind": "Definition",
-      "line": 97,
+      "line": 98,
       "local_dependencies": [],
       "name": "lg_ends",
       "normalized_name": "lg_ends",
@@ -43980,7 +43981,7 @@
         "Hamilton.conjectures.U2.lg_sym"
       ],
       "kind": "Definition",
-      "line": 99,
+      "line": 100,
       "local_dependencies": [
         "lg_ends"
       ],
@@ -44001,7 +44002,7 @@
         "Hamilton.conjectures.U2.line_graph"
       ],
       "kind": "Lemma",
-      "line": 102,
+      "line": 103,
       "local_dependencies": [
         "lg_rel"
       ],
@@ -44022,7 +44023,7 @@
         "Hamilton.conjectures.U2.line_graph"
       ],
       "kind": "Lemma",
-      "line": 108,
+      "line": 109,
       "local_dependencies": [
         "lg_rel"
       ],
@@ -44043,7 +44044,7 @@
         "Hamilton.conjectures.U2.hamiltonian_cycles_in_line_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 111,
+      "line": 112,
       "local_dependencies": [
         "lg_irrefl",
         "lg_sym"
@@ -44058,15 +44059,15 @@
       "signature_shape_hash": "01e1240e4406dc8ba0f954cabf85e146d1f80fd42ebaecdc5c970defb1a97749"
     },
     {
-      "body_hash": "24f2f7eb599afab3a12f8437b719f375485febdacaea66f62ede6b908277cffe",
-      "body_shape_hash": "24f2f7eb599afab3a12f8437b719f375485febdacaea66f62ede6b908277cffe",
-      "declaration_hash": "3f85cb427cf2e9785a36aec682b4306c299d38e04bbad27df37829b26f011db8",
+      "body_hash": "a07d1473fe3b0b01069ad02f6fd4ed706e9f622765734229a76e20d96c69c09f",
+      "body_shape_hash": "a07d1473fe3b0b01069ad02f6fd4ed706e9f622765734229a76e20d96c69c09f",
+      "declaration_hash": "43323758ed84bb5a1b8609813efeb402db2e4a45be17440abf039d14aa7bc321",
       "direct_consumers": [
         "Hamilton.conjectures.U2.cayley_irrefl",
         "Hamilton.conjectures.U2.cayley_sym"
       ],
       "kind": "Definition",
-      "line": 124,
+      "line": 128,
       "local_dependencies": [],
       "name": "cayley_rel",
       "normalized_name": "cayley_rel",
@@ -44081,11 +44082,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "93aa0f80412f331fe1467ace769c3e8fdb36bbe2a5518a38ebc199c0b02efb62",
-      "direct_consumers": [
-        "Hamilton.conjectures.U2.cayley_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 127,
+      "line": 131,
       "local_dependencies": [
         "cayley_rel"
       ],
@@ -44102,11 +44101,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "14baf7e33d8c22ee52d10836204640d8114600b24fc849cec8bcb54fd3e1789b",
-      "direct_consumers": [
-        "Hamilton.conjectures.U2.cayley_graph"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 130,
+      "line": 134,
       "local_dependencies": [
         "cayley_rel"
       ],
@@ -44120,18 +44117,15 @@
       "signature_shape_hash": "8eb9104d3c9bc4caef12c86c417f8bd6c092a340ea3ef95f25dbe1d756434fdc"
     },
     {
-      "body_hash": "b51e5ef60a5abbca2509453086159de94f513596e73f0dfff204fcb56829bf5e",
-      "body_shape_hash": "b51e5ef60a5abbca2509453086159de94f513596e73f0dfff204fcb56829bf5e",
-      "declaration_hash": "7df177021bed096f2fe454010abfa9b73d120cb8cd5ecc2dc20fe872718fd24c",
+      "body_hash": "8a16edf20b91a510631322527308e0d05e6a0de147e71e9c0bc6e0363a946912",
+      "body_shape_hash": "8a16edf20b91a510631322527308e0d05e6a0de147e71e9c0bc6e0363a946912",
+      "declaration_hash": "abe29df64add150b25364e5079ca37065d14f8a4397a3d22988b32c3e4fa8cd9",
       "direct_consumers": [
         "Hamilton.conjectures.U2.hamiltonicity_of_cayley_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 133,
-      "local_dependencies": [
-        "cayley_irrefl",
-        "cayley_sym"
-      ],
+      "line": 137,
+      "local_dependencies": [],
       "name": "cayley_graph",
       "normalized_name": "cayley_graph",
       "package": "hamiltonicity-theory",
@@ -44149,7 +44143,7 @@
         "Hamilton.conjectures.U2.hamiltonicity_of_cayley_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 136,
+      "line": 140,
       "local_dependencies": [],
       "name": "symmetric_set",
       "normalized_name": "symmetric_set",
@@ -44168,7 +44162,7 @@
         "Hamilton.conjectures.U2.uniquely_hamiltonian_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 212,
+      "line": 216,
       "local_dependencies": [
         "cycle_edges",
         "hamiltonian_cycle"
@@ -44190,7 +44184,7 @@
         "Hamilton.conjectures.U2.hamilton_decomposition_into_two"
       ],
       "kind": "Definition",
-      "line": 244,
+      "line": 248,
       "local_dependencies": [],
       "name": "edge_set",
       "normalized_name": "edge_set",
@@ -44209,7 +44203,7 @@
         "Hamilton.conjectures.U2.decomposing_the_prism_of_a_3_connected_cubic_planar_statement"
       ],
       "kind": "Definition",
-      "line": 260,
+      "line": 264,
       "local_dependencies": [
         "cycle_edges",
         "edge_set",

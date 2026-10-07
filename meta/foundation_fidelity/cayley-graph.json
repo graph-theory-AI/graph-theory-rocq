@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "family": "cayley-graph",
+  "modules": {
+    "GTBase.cayley_graphs": {
+      "path": "base/theories/cayley_graphs.v",
+      "overrides": {
+        "undirected_cayley_graph": {
+          "verdict": "FAITHFUL",
+          "note": "The undirected Cayley graph of a finite group gT and any S : {set gT}: vertices the group elements, x and y adjacent iff x != y and x^-1 * y or y^-1 * x lies in S; loopless also when 1 \\in S, symmetric for every S, the usual Cayley graph when S is inverse-closed; no generation, abelianity or order condition. Not the directed Digraph cayley."
+        }
+      },
+      "machine_evidence": [
+        "undirected_cayley_sym",
+        "undirected_cayley_irrefl",
+        "undirected_cayley_edgeE",
+        "card_undirected_cayley_graph",
+        "undirected_cayley_edge_mul",
+        "undirected_cayley_edge_inv",
+        "undirected_cayley_set0",
+        "undirected_cayley_set1",
+        "undirected_cayley_setT",
+        "undirected_cayley_setT_diso"
+      ]
+    }
+  }
+}
