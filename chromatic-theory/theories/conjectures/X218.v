@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X218 -- chi-boundedness, multibounding and clustered-colouring rows (wave X218, 2026-09-23) *)
 
 From GTBase Require Export base.
+From GTBase Require Import complete_multipartite_graphs.
 From Chromatic.foundations Require Import chi_bounding.
 From Chromatic.conjectures Require Import U8 X130 X194.
 
@@ -35,15 +36,19 @@ Definition x218_path_induced_copy (T : sgraph) (r : T) (G : sgraph) : Prop :=
            x218_induced_run (phi r) (map phi (r :: p)))].
 
 (** The complete [d]-partite graph [K_d(t)] with all [d] parts of size [t]:
-    vertices are pairs (part, index), adjacent exactly when the parts differ. *)
+    vertices are pairs (part, index), adjacent exactly when the parts differ.
+    Since the A27 library migration [x218_multipartite_rel] and [x218_complete_multipartite] are transparent aliases of
+    [GTBase.complete_multipartite_graphs.complete_multipartite_rel] and [complete_multipartite_graph]
+    (the same carrier and relation); the originals are frozen and certified in
+    theories/migration/complete_multipartite_graphs.v. *)
 Definition x218_multipartite_rel (d t : nat) : rel ('I_d * 'I_t) :=
-  fun x y => x.1 != y.1.
+  @complete_multipartite_rel d t.
 Lemma x218_multipartite_sym d t : symmetric (@x218_multipartite_rel d t).
-Proof. by move=> x y; rewrite /x218_multipartite_rel eq_sym. Qed.
+Proof. exact: complete_multipartite_sym. Qed.
 Lemma x218_multipartite_irrefl d t : irreflexive (@x218_multipartite_rel d t).
-Proof. by move=> x; rewrite /x218_multipartite_rel eqxx. Qed.
+Proof. exact: complete_multipartite_irrefl. Qed.
 Definition x218_complete_multipartite (d t : nat) : sgraph :=
-  SGraph (@x218_multipartite_sym d t) (@x218_multipartite_irrefl d t).
+  complete_multipartite_graph d t.
 
 (** [H] is MULTIBOUNDING: two coefficient FUNCTIONS [c] and [e] of the
     parameter [d] -- an explicit bounding function, given in the polynomial

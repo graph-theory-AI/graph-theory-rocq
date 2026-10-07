@@ -39,6 +39,7 @@
    total_graph shadow it. We use mgraph for the raw edge/incident/edges_at/source/target API. *)
 From GraphTheory Require Import minor mgraph.
 From GTBase Require Export base.
+From GTBase Require Import complete_multipartite_graphs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -123,19 +124,23 @@ Definition Delta_edge_critical (G : mgraph) : Prop :=
 
 (** ** Complete multipartite graph K_{m*k} (Row 7) *****************************)
 
+(** Since the A27 library migration [cmp_rel] and [complete_multipartite] are transparent aliases of
+    [GTBase.complete_multipartite_graphs.complete_multipartite_rel] and [complete_multipartite_graph]
+    (the same carrier and relation); the originals are frozen and certified in
+    theories/migration/complete_multipartite_graphs.v. *)
 Definition cmp_rel (k m : nat) : rel ('I_k * 'I_m) :=
-  fun x y => x.1 != y.1.
+  @complete_multipartite_rel k m.
 
 Lemma cmp_rel_sym (k m : nat) : symmetric (@cmp_rel k m).
-Proof. by move=> x y; rewrite /cmp_rel eq_sym. Qed.
+Proof. exact: complete_multipartite_sym. Qed.
 
 Lemma cmp_rel_irrefl (k m : nat) : irreflexive (@cmp_rel k m).
-Proof. by move=> x; rewrite /cmp_rel eqxx. Qed.
+Proof. exact: complete_multipartite_irrefl. Qed.
 
 (** K_{m*k}: complete [k]-partite graph with [k] parts each of size [m]
     (two vertices adjacent iff in different parts). *)
 Definition complete_multipartite (k m : nat) : sgraph :=
-  SGraph (@cmp_rel_sym k m) (@cmp_rel_irrefl k m).
+  complete_multipartite_graph k m.
 
 (** ** Acyclic list colouring (Row 10, PLANARITY-GATED) ************************)
 
