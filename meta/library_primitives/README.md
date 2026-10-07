@@ -109,6 +109,31 @@ exception and cannot remove an ordinarily discovered statement. Independent
 review supplies the semantic classification as a statement; a nullary `Prop`
 type alone cannot distinguish a statement from a proposition used as a helper.
 
+A whole proposition declared inside a Section is enrolled only through the
+separate `parametric_statements` list, never by its type; the nullary
+`additional_statements` rules above are unchanged and still reject it. Each entry
+(`qualified`, `section`, `variables`, `parameters`, `bindings`, `live_shape`) names
+the single enclosing top-level Section, its complete reviewed `Variable NAME : TYPE.`
+scaffold, the discharged parameters in Section order with fully qualified kernel
+types (token grammar: qualified names, Prop/Set/Type, parentheses, arrows and
+application only), the argument lists of referenced same-Section declarations (whose
+`(@module.name args)` substitutions the tool generates and requires), and the
+`<certificate module>.<name>_live_shape` witness. The frozen copy is the sole
+declaration of a same-label Section directly inside a plain frozen module; the
+witness is the sole declaration of a top-level Section, with the original text
+modulo the bindings only. Scope labels are unique within their enclosing scope,
+binding targets must not reach the migrated sources at any pin, and history must
+be plain (baseline an ancestor of HEAD, no replacement refs or grafts).
+`original-statement` snapshots at ancestor commits pass the same checks there.
+Kernel checks pin the exact discharged types of the frozen, live and witness
+constants, require the pointwise certificate `forall params, @frozen params <->
+@live params` with no premise and zero assumptions, and check the live endpoint
+convertible to its witness. The stale-snapshot scan also treats the family's
+parametric endpoints as live names. Modules, functors, nested or reused scopes,
+wrapped scope commands, other Section commands, dependent scaffolds, frozen Section
+companions and Section-parametric chains fail closed; excluded syntax is open
+debt, not completed migration.
+
 The registered theorem gate recognizes `ClassicalLemmas` as owned by
 `classical-lemmas`; it forces the same fresh local source closure as other
 packages. Classical source/project changes rebuild that package and its Packing

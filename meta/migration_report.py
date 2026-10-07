@@ -24,7 +24,12 @@ Statement objects may select corpus "opg" or "v2", or explicitly set
 An optional "additional_statements" list explicitly classifies reached, closed
 non-corpus Props whose names are not discovered automatically. Enrollment is
 restricted to unambiguous top-level nullary Definitions, with ordinary frozen
-body, complete-iff and zero-assumption checks still required.
+body, complete-iff and zero-assumption checks still required. A separate
+"parametric_statements" list explicitly enrolls reached whole Props lying
+directly in one top-level Section: each entry pins the Section, its complete
+Variable scaffold, the discharged parameters with fully qualified kernel types,
+generated @-bindings of referenced same-Section declarations and a live-shape
+witness; certificates are pointwise iffs at every parameter.
 Every occurrence of a complete row requires a statement role and an exact iff
 probe, independently of its label. New reused nonstatement objects use the
 "historical" role; the existing named historical roles remain supported aliases.
@@ -704,6 +709,450 @@ def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) 
     return names
 
 
+PARAMETRIC_KEYS = frozenset({"qualified", "section", "variables", "parameters", "bindings", "live_shape"})
+VARIABLE_COMMAND_RE = re.compile(rf"Variable ({IDENT}) : (\S.*)\.")
+SECTION_DECLARATION_RE = re.compile(rf"(Definition|Inductive)\s+({IDENT})(?![A-Za-z0-9_'])")
+KERNEL_TYPE_TOKEN_RE = re.compile(rf"\s*(->|\(|\)|{IDENT}(?:\.{IDENT})*)")
+
+
+def kernel_type_wellformed(text: str) -> bool:
+    """Token grammar of reviewed kernel types (no inference, no notation):
+
+    type := app ('->' app)*;  app := atom+;  atom := NAME | '(' type ')'
+    where NAME is Prop, Set, Type or a fully qualified identifier. Isolated
+    punctuation, digits, holes and scopes are not tokens, so they are rejected.
+    """
+    tokens, pos = [], 0
+    while text[pos:].strip():
+        match = KERNEL_TYPE_TOKEN_RE.match(text, pos)
+        if match is None:
+            return False
+        tokens.append(match.group(1))
+        pos = match.end()
+    index = 0
+
+    def atom() -> bool:
+        nonlocal index
+        if index < len(tokens) and tokens[index] == "(":
+            index += 1
+            if not arrows() or index >= len(tokens) or tokens[index] != ")":
+                return False
+            index += 1
+            return True
+        if (index < len(tokens) and tokens[index] not in {"(", ")", "->"}
+                and (tokens[index] in {"Prop", "Set", "Type"} or "." in tokens[index])):
+            index += 1
+            return True
+        return False
+
+    def application() -> bool:
+        if not atom():
+            return False
+        while index < len(tokens) and tokens[index] not in {")", "->"}:
+            if not atom():
+                return False
+        return True
+
+    def arrows() -> bool:
+        nonlocal index
+        if not application():
+            return False
+        while index < len(tokens) and tokens[index] == "->":
+            index += 1
+            if not application():
+                return False
+        return True
+
+    return bool(tokens) and arrows() and index == len(tokens)
+
+
+def scope_tree(clean: str, what: str) -> list[dict]:
+    """Every Module/Section scope of a masked file, with its enclosing scope.
+
+    Parametric enrollment only; the nullary scan above is unchanged. The same
+    fail-closed command rules apply: wrapped scope keywords and source-splicing
+    Load are rejected, `Module M := N.` aliases are not scopes, and every scope
+    must be closed. A Module is plain only when its opener is `Module M.`.
+    """
+    if re.search(r"\bLoad\b", clean):
+        raise ValueError(f"{what}: parametric enrollment cannot follow source-splicing Load")
+    scope_keywords = re.compile(r"\b(?:Module|Section|End)\b")
+    scopes = re.compile(rf"(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})(?![\w'])")
+    openers, stack, command_start = [], [], 0
+    for keyword in scope_keywords.finditer(clean):
+        scope = scopes.match(clean, keyword.start())
+        if scope is None:
+            raise ValueError(f"{what}: unsupported Module/Section identifier syntax")
+        while INV.sentence_end(clean, command_start) <= scope.start():
+            command_start = INV.sentence_end(clean, command_start)
+        if clean[command_start:scope.start()].strip():
+            raise ValueError(f"{what}: wrapped scope commands are unsupported")
+        kind, label = scope.groups()
+        end = INV.sentence_end(clean, scope.end())
+        if kind == "End":
+            if not stack or openers[stack[-1]]["label"] != label:
+                raise ValueError(f"{what}: unsupported scope structure")
+            openers[stack.pop()]["close_start"] = scope.start()
+            continue
+        tail = clean[scope.end():end]
+        if kind.startswith("Module") and re.fullmatch(rf"\s*:=\s*{IDENT}(?:\.{IDENT})*\s*\.\s*", tail):
+            continue
+        openers.append({"kind": "Section" if kind == "Section" else "Module",
+                        "plain": kind == "Module" and re.fullmatch(r"\s*\.\s*", tail) is not None,
+                        "label": label, "body_start": end, "close_start": None,
+                        "parent": stack[-1] if stack else None})
+        stack.append(len(openers) - 1)
+    if stack:
+        raise ValueError(f"{what}: unclosed Module/Section scope")
+    return openers
+
+
+def scope_chain(openers: list[dict], offset: int) -> list[int]:
+    """Indices of the scopes enclosing offset, outermost first."""
+    return [index for index, opener in enumerate(openers)
+            if opener["body_start"] <= offset < opener["close_start"]]
+
+
+def unique_label(openers: list[dict], parent: int | None, label: str) -> bool:
+    """One opener of any kind with this label directly in the same enclosing scope."""
+    return sum(o["parent"] == parent and o["label"] == label for o in openers) == 1
+
+
+def section_commands(clean: str, start: int, stop: int) -> list[str]:
+    """Normalized commands of a masked Section body between start and stop."""
+    out, pos = [], start
+    while True:
+        while pos < stop and clean[pos].isspace():
+            pos += 1
+        if pos >= stop:
+            return out
+        end = INV.sentence_end(clean, pos)
+        out.append(INV.normalize_space(clean[pos:end]))
+        pos = end
+
+
+def plain_tokens(text: str) -> set[str]:
+    return {token for token in QUALIFIED_IDENT_RE.findall(text) if "." not in token}
+
+
+def parametric_statement_entries(spec: dict) -> dict[str, dict]:
+    """Schema of the explicit Section-parametric enrollment list (never inferred)."""
+    entries = spec.get("parametric_statements", [])
+    if not isinstance(entries, list):
+        raise ValueError("parametric_statements must be a list of entries")
+    cert_modules = {module_for_path(path, spec.get("namespaces")) for path in spec.get("certificate_files", [])}
+    out: dict[str, dict] = {}
+    for entry in entries:
+        if not isinstance(entry, dict) or set(entry) != PARAMETRIC_KEYS:
+            raise ValueError("parametric_statements entries need exactly the keys " + ", ".join(sorted(PARAMETRIC_KEYS)))
+        qualified, section = entry["qualified"], entry["section"]
+        if (not isinstance(qualified, str) or not re.fullmatch(rf"{IDENT}(?:\.{IDENT})+", qualified)
+                or qualified in out):
+            raise ValueError("parametric_statements need unique qualified names")
+        name = qualified.rsplit(".", 1)[1]
+        if not isinstance(section, str) or not re.fullmatch(IDENT, section):
+            raise ValueError(f"{qualified}: parametric statement needs a Section label")
+        variables, parameters, bindings = entry["variables"], entry["parameters"], entry["bindings"]
+        if (not isinstance(variables, list) or not variables
+                or any(not isinstance(text, str) or not VARIABLE_COMMAND_RE.fullmatch(text) for text in variables)):
+            raise ValueError(f"{qualified}: parametric statement variables must list the reviewed `Variable NAME : TYPE.` commands")
+        if (not isinstance(parameters, list) or not parameters
+                or any(not isinstance(p, dict) or set(p) != {"name", "kernel_type"}
+                       or not isinstance(p["name"], str) or not re.fullmatch(IDENT, p["name"])
+                       or not isinstance(p["kernel_type"], str) for p in parameters)
+                or len({p["name"] for p in parameters}) != len(parameters)):
+            raise ValueError(f"{qualified}: parametric statement parameters must be unique {{name, kernel_type}} objects")
+        for parameter in parameters:
+            if not kernel_type_wellformed(parameter["kernel_type"]):
+                raise ValueError(f"{qualified}: kernel_type of {parameter['name']} must use only "
+                                 "fully qualified names, Prop, Set, Type, arrows and parentheses")
+        if (not isinstance(bindings, dict)
+                or any(not re.fullmatch(IDENT, key) or not isinstance(args, list)
+                       or any(not isinstance(arg, str) or not re.fullmatch(IDENT, arg) for arg in args)
+                       for key, args in bindings.items())):
+            raise ValueError(f"{qualified}: parametric statement bindings must map declaration names to argument name lists")
+        shape = entry["live_shape"]
+        if (not isinstance(shape, str) or "." not in shape
+                or shape.rsplit(".", 1)[1] != name + "_live_shape"
+                or shape.rsplit(".", 1)[0] not in cert_modules):
+            raise ValueError(f"{qualified}: live_shape must be <certificate module>.{name}_live_shape")
+        out[qualified] = entry
+    overlap = set(out) & additional_statement_names(spec)
+    if overlap:
+        raise ValueError(f"parametric and nullary additional statements must be disjoint: {sorted(overlap)}")
+    return out
+
+
+def parametric_history_guard(base: str) -> None:
+    """Forged or rewritten history must not reach parametric enrollment reads."""
+    if os.environ.get("GIT_REPLACE_REF_BASE") or os.environ.get("GIT_GRAFT_FILE"):
+        raise ValueError("parametric statements do not support replacement or graft environments")
+    if INV.source_git(ROOT, "for-each-ref", "--count=1", "refs/replace/").strip():
+        raise ValueError("parametric statements do not support replacement refs")
+    common = Path(INV.source_git(ROOT, "rev-parse", "--git-common-dir").strip())
+    if ((common if common.is_absolute() else ROOT / common) / "info" / "grafts").exists():
+        raise ValueError("parametric statements do not support grafts")
+    try:
+        INV.source_git(ROOT, "merge-base", "--is-ancestor", base, "HEAD")
+    except RegistryError:
+        raise ValueError("parametric statements require a baseline that is an ancestor of HEAD") from None
+
+
+def parametric_source_facts(source: str, name: str, entry: dict, what: str) -> dict:
+    """Scope, scaffold, parameters and binding keys of one source at one commit."""
+    clean = statement_ownership_text(source)
+    matches = [match for match in DECL_RE.finditer(clean) if match.group(1) == name]
+    if (len(matches) != 1 or not re.match(rf"\s*Definition\s+{re.escape(name)}\s*:\s*Prop\s*:=",
+                                          clean[matches[0].start():])):
+        raise ValueError(f"{what}: parametric statement requires one Definition : Prop")
+    offset = matches[0].start() + len(clean[matches[0].start():]) - len(clean[matches[0].start():].lstrip())
+    openers = scope_tree(clean, what)
+    chain = scope_chain(openers, offset)
+    if (len(chain) != 1 or openers[chain[0]]["kind"] != "Section"
+            or openers[chain[0]]["label"] != entry["section"]):
+        raise ValueError(f"{what}: parametric statement must lie directly in top-level Section {entry['section']}")
+    if not unique_label(openers, None, entry["section"]):
+        raise ValueError(f"{what}: Section label {entry['section']} must open exactly one top-level scope")
+    variables, types, declarations = [], {}, []
+    for text in section_commands(clean, openers[chain[0]]["body_start"], offset):
+        variable = VARIABLE_COMMAND_RE.fullmatch(text)
+        declaration = SECTION_DECLARATION_RE.match(text)
+        if variable:
+            variables.append(text)
+            types[variable.group(1)] = variable.group(2)
+        elif declaration and not (declaration.group(1) == "Inductive" and re.search(r"\bwith\b", text)):
+            declarations.append(declaration.group(2))
+        else:
+            raise ValueError(f"{what}: unsupported Section command {text.split()[0]}")
+    if variables != entry["variables"]:
+        raise ValueError(f"{what}: Section scaffold differs from the reviewed variables")
+    names = [VARIABLE_COMMAND_RE.fullmatch(text).group(1) for text in variables]
+    if len(set(names)) != len(names) or set(names) & set(declarations):
+        raise ValueError(f"{what}: duplicate Section names")
+    for variable in names:
+        if plain_tokens(types[variable]) & (set(names) | set(declarations)):
+            raise ValueError(f"{what}: dependent Section variable {variable} is unsupported")
+    tokens = plain_tokens(INV.normalize_space(clean[offset:INV.sentence_end(clean, offset)]))
+    bindings = entry["bindings"]
+    if set(bindings) != {declaration for declaration in declarations if declaration in tokens}:
+        raise ValueError(f"{what}: bindings must name exactly the referenced same-Section declarations")
+    for key, args in bindings.items():
+        positions = [names.index(arg) if arg in names else -1 for arg in args]
+        if -1 in positions or positions != sorted(set(positions)):
+            raise ValueError(f"{what}: binding {key} must apply Section variables in Section order")
+    used = [variable for variable in names
+            if variable in tokens or any(variable in args for args in bindings.values())]
+    if [parameter["name"] for parameter in entry["parameters"]] != used:
+        raise ValueError(f"{what}: parameters must be exactly the Section variables the statement uses, "
+                         "in Section order")
+    return {"variables": names, "declarations": declarations}
+
+
+def generated_binding(qualified: str, key: str, args: list[str]) -> str:
+    return "(@" + qualified.rsplit(".", 1)[0] + "." + key + "".join(" " + arg for arg in args) + ")"
+
+
+def check_parametric_substitutions(obj: dict, entry: dict, facts: dict, what: str) -> None:
+    substitutions = obj.get("substitutions", {})
+    if (not isinstance(substitutions, dict)
+            or any(not isinstance(k, str) or not isinstance(v, str) for k, v in substitutions.items())):
+        raise ValueError(f"{what}: substitutions must map names to text")
+    variables, declarations = set(facts["variables"]), set(facts["declarations"])
+    for key, args in entry["bindings"].items():
+        if substitutions.get(key) != generated_binding(entry["qualified"], key, args):
+            raise ValueError(f"{what}: binding {key} must be the generated "
+                             f"{generated_binding(entry['qualified'], key, args)}")
+    for key, value in substitutions.items():
+        if key in entry["bindings"]:
+            continue
+        if key in variables or key in declarations:
+            raise ValueError(f"{what}: substitutions cannot replace Section variable or declaration {key}")
+        if plain_tokens(value) & variables:
+            raise ValueError(f"{what}: substitution values cannot mention Section variables")
+
+
+def validate_parametric_statements(spec: dict, rows_base: dict, rows_now: dict) -> set[str]:
+    """Explicit Section-parametric whole Props: separate from the nullary list.
+
+    Each entry pins the enclosing Section, its complete Variable scaffold, the
+    discharged parameters with kernel types, generated @-bindings and a
+    live-shape witness. Checked at the baseline, every snapshot commit and in
+    the current tree; kernel mode checks exact discharged types and conversion.
+    """
+    entries = parametric_statement_entries(spec)
+    if not entries:
+        return set()
+    base = spec["baseline_commit"]
+    if (not re.fullmatch(r"[0-9a-f]{40}", base)
+            or INV.source_git(ROOT, "cat-file", "-t", base).strip() != "commit"):
+        raise ValueError("parametric statements require an immutable full baseline commit")
+    parametric_history_guard(base)
+    for qualified, entry in sorted(entries.items()):
+        path = additional_statement_path(qualified)
+        package, name = path.split("/", 1)[0], qualified.rsplit(".", 1)[1]
+        project_path = package + "/_CoqProject"
+        if rows_base.get(name) or rows_now.get(name):
+            raise ValueError(f"{qualified}: parametric statement must be outside both corpus manifests")
+        related = [obj for obj in spec["frozen"] if obj.get("qualified") == qualified]
+        if any(obj.get("kind") not in STATEMENT_KINDS for obj in related):
+            raise ValueError(f"{qualified}: parametric statements require whole statement roles")
+        rows = [obj for obj in related if obj.get("kind") == "statement"]
+        snapshots = [obj for obj in related if obj.get("kind") == "original-statement"]
+        for obj in related:
+            if (obj.get("non_corpus") is not True or "corpus" in obj or obj.get("path") != path
+                    or obj.get("name") != name or not obj.get("certificate")
+                    or "." not in str(obj.get("frozen", ""))):
+                raise ValueError(f"{qualified}: parametric statement objects need exact non_corpus identity")
+        if len(rows) != 1 or rows[0].get("commit", base) != base:
+            raise ValueError(f"{qualified}: parametric statement needs one baseline statement mapping")
+        by_commit = {base: rows[0]}
+        for obj in snapshots:
+            commit = obj.get("commit")
+            if (not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit)
+                    or INV.source_git(ROOT, "cat-file", "-t", commit).strip() != "commit"
+                    or commit in by_commit):
+                raise ValueError(f"{qualified}: parametric snapshots need distinct immutable full commits")
+            try:
+                INV.source_git(ROOT, "merge-base", "--is-ancestor", commit, base)
+            except RegistryError:
+                raise ValueError(f"{qualified}: parametric snapshot commit must be an ancestor of the baseline") from None
+            by_commit[commit] = obj
+        targets = {}
+        for commit in (*sorted(by_commit, key=lambda c: c != base), None):
+            what = f"{qualified} at {commit[:7] if commit else 'current tree'}"
+            if commit is not None:
+                if commit != base and manifest_rows(commit)[0].get(name):
+                    raise ValueError(f"{qualified}: parametric snapshot must be outside historical corpus manifests")
+                _, source = INV.regular_source_blob(ROOT, commit, path)
+                _, project = INV.regular_source_blob(ROOT, commit, project_path)
+            else:
+                for relative in (path, project_path):
+                    file = ROOT / relative
+                    if not file.is_file() or file.resolve() != ROOT.resolve() / relative:
+                        raise ValueError(f"{qualified}: current source/project missing or aliased")
+                source, project = source_at(None, path), source_at(None, project_path)
+            if INV.project_module(path, project) + "." + name != qualified:
+                raise ValueError(f"{qualified}: parametric statement ownership mismatch")
+            facts = parametric_source_facts(source, name, entry, what)
+            check_parametric_substitutions(by_commit.get(commit, rows[0]), entry, facts, what)
+            for key in entry["bindings"]:
+                text = find_decl(source, key)["text"]
+                if targets.setdefault(key, text) != text:
+                    raise ValueError(f"{what}: binding target {key} differs from the baseline")
+    return set(entries)
+
+
+def parametric_reach_errors(spec: dict, entries: dict, sources: set[str], include_public: bool,
+                            reaching_base: set[str], reaching_now: set[str]) -> list[str]:
+    """Binding targets must not reach migrated sources at any pin (provider-aware)."""
+    errors = []
+    for qualified, entry in sorted(entries.items()):
+        targets = {qualified.rsplit(".", 1)[0] + "." + key for key in entry["bindings"]}
+        reaching = set(reaching_base) | set(reaching_now) | set(sources)
+        for obj in spec["frozen"]:
+            if obj.get("qualified") != qualified or obj.get("kind") != "original-statement":
+                continue
+            rows, _ = manifest_rows(obj["commit"])
+            try:
+                reaching |= statement_dependencies(obj["commit"], set(sources), rows,
+                                                   include_public=include_public,
+                                                   additional_statements={qualified})[1]
+            except ValueError as exc:
+                # An endpoint the sources do not reach at that commit cannot
+                # make its referenced companions reach them either.
+                if "must be reached" not in str(exc):
+                    raise
+        if targets & reaching:
+            errors.append(f"{qualified}: binding targets reach migrated sources and would be live chains: "
+                          f"{sorted(targets & reaching)}")
+    return errors
+
+
+def parametric_probe(entry: dict, frozen: str, certificate: str, with_live: bool) -> list[str]:
+    """Exact discharged types, the pointwise certificate and live-shape conversion.
+
+    Every endpoint is @-applied, so no implicit argument can be instantiated;
+    Prop is not a product, so no discharged parameter can be absorbed.
+    """
+    binders = " ".join(f"({p['name']} : {p['kernel_type']})" for p in entry["parameters"])
+    args = " ".join(p["name"] for p in entry["parameters"])
+    live, shape = entry["qualified"], entry["live_shape"]
+    lines = [f"Check (@{frozen} : forall {binders}, Prop)."]
+    if with_live:
+        lines += [f"Check (@{live} : forall {binders}, Prop).",
+                  f"Check (@{shape} : forall {binders}, Prop).",
+                  f"Check (fun {binders} => (@Corelib.Init.Logic.eq_refl Prop (@{live} {args})"
+                  f" : @Corelib.Init.Logic.eq Prop (@{live} {args}) (@{shape} {args})))."]
+    lines.append(f"Check (@{certificate} : forall {binders}, @{frozen} {args} <-> @{live} {args}).")
+    return lines
+
+
+def section_copy_problem(clean: str, name: str, module: str | None, entry: dict, what: str) -> str | None:
+    """Placement of a frozen copy (module given) or live-shape witness (top level)."""
+    try:
+        openers = scope_tree(clean, what)
+    except ValueError as exc:
+        return str(exc)
+    label = entry["section"]
+    candidates = []
+    for match in DECL_RE.finditer(clean):
+        if match.group(1) != name:
+            continue
+        offset = match.start() + len(clean[match.start():]) - len(clean[match.start():].lstrip())
+        chain = scope_chain(openers, offset)
+        shape = [(openers[i]["kind"], openers[i]["label"]) for i in chain]
+        if shape == ([("Module", module)] if module else []) + [("Section", label)]:
+            candidates.append((offset, chain))
+    if len(candidates) != 1:
+        return f"expected one {name} directly in Section {label}" + (f" of module {module}" if module else " at top level")
+    offset, chain = candidates[0]
+    section = openers[chain[-1]]
+    if module and (not openers[chain[0]]["plain"] or not unique_label(openers, None, module)):
+        return f"module {module} must be a plain unique top-level Module"
+    if not unique_label(openers, section["parent"], label):
+        return f"Section label {label} must open exactly one scope in its enclosing scope"
+    commands = section_commands(clean, section["body_start"], section["close_start"])
+    declaration = INV.normalize_space(clean[offset:INV.sentence_end(clean, offset)])
+    if commands != [*entry["variables"], declaration]:
+        return f"Section {label} must hold exactly the reviewed variables followed by {name}"
+    if not re.match(rf"Definition {re.escape(name)} : Prop :=", declaration):
+        return f"{name} must be a Definition : Prop"
+    return None
+
+
+def parametric_copy_checks(spec: dict, entries: dict, check) -> None:
+    """Frozen copies and live-shape witnesses sit in their reviewed Section scaffolds."""
+    base = spec["baseline_commit"]
+    certificate_paths = {module_for_path(path, spec["namespaces"]): path for path in spec["certificate_files"]}
+    for obj in spec["frozen"]:
+        entry = entries.get(obj.get("qualified"))
+        if entry is None:
+            continue
+        module, _, name = obj["frozen"].rpartition(".")
+        problem = section_copy_problem(statement_ownership_text(source_at(None, obj["frozen_path"])),
+                                       name, module, entry, obj["frozen_path"])
+        check(problem is None, f"{obj['qualified']}: frozen copy {obj['frozen']} lies in its Section scaffold",
+              problem or "")
+    for qualified, entry in sorted(entries.items()):
+        module, _, name = entry["live_shape"].rpartition(".")
+        source = source_at(None, certificate_paths[module])
+        problem = section_copy_problem(statement_ownership_text(source), name, None, entry,
+                                       certificate_paths[module])
+        check(problem is None, f"{qualified}: live-shape witness {name} lies in its top-level Section scaffold",
+              problem or "")
+        short = qualified.rsplit(".", 1)[1]
+        original = find_decl(source_at(base, additional_statement_path(qualified)), short)["text"]
+        substitutions = {key: generated_binding(qualified, key, args) for key, args in entry["bindings"].items()}
+        substitutions[short] = name
+        expected = substitute(original, substitutions)
+        try:
+            actual = find_decl(source, name)["text"]
+        except ValueError as exc:
+            actual = str(exc)
+        check(actual == expected, f"{qualified}: live-shape witness matches the original modulo generated bindings",
+              "" if actual == expected else f"expected: {expected} | witness: {actual}")
+
+
 def statement_dependencies(base: str | None, sources: set[str], rows: dict, *,
                            include_public: bool = False,
                            additional_statements: set[str] = frozenset(),
@@ -855,18 +1304,25 @@ def statement_obligations(spec: dict, *, expected_statements: set[str] | None = 
     if rows_now is None:
         rows_now, _ = manifest_rows(None)
     additional = validate_additional_statements(spec, rows_base, rows_now)
+    parametric = validate_parametric_statements(spec, rows_base, rows_now)
+    enrolled = additional | parametric
+    reach_errors = []
     if expected_statements is None:
         entry = load_library_registry(ROOT)["primitives"].get(spec["family"], {})
         sources = migrated_registry_sources(entry)
-        expected_statements, _ = statement_dependencies(
+        expected_statements, reaching = statement_dependencies(
             base, sources, rows_base,
             include_public=bool(entry.get("repository_sources")),
-            additional_statements=additional)
-        if additional:
-            statement_dependencies(None, sources, rows_now,
-                                   include_public=bool(entry.get("repository_sources")),
-                                   additional_statements=additional)
-    objects, errors = [], []
+            additional_statements=enrolled)
+        if enrolled:
+            _, reaching_now = statement_dependencies(None, sources, rows_now,
+                                                     include_public=bool(entry.get("repository_sources")),
+                                                     additional_statements=enrolled)
+            if parametric:
+                reach_errors = parametric_reach_errors(
+                    spec, parametric_statement_entries(spec), sources,
+                    bool(entry.get("repository_sources")), reaching, reaching_now)
+    objects, errors = [], list(reach_errors)
     for obj in spec["frozen"]:
         identity = module_for_path(obj["path"], spec["namespaces"]) + "." + obj["name"]
         if identity != obj["qualified"]:
@@ -907,6 +1363,7 @@ def check_kernel(spec: dict) -> list[str]:
         return [str(exc)]
     if errors:
         return errors
+    parametric = parametric_statement_entries(spec)
     groups = defaultdict(list)
     certificates = defaultdict(set)
     packages = {namespace: package for package, namespace in spec["namespaces"].items()}
@@ -924,12 +1381,21 @@ def check_kernel(spec: dict) -> list[str]:
         for index, token in enumerate(tokens[:-2]):
             if token in {"-R", "-Q"}:
                 flags.extend(tokens[index:index + 3])
+        live_modules = {module for obj in objects if obj["qualified"] in parametric
+                        for module in (obj["qualified"].rsplit(".", 1)[0],
+                                       parametric[obj["qualified"]]["live_shape"].rsplit(".", 1)[0])}
         imports = sorted({module_for_path(obj["frozen_path"], spec["namespaces"])
                           for obj in objects} | {name.rsplit(".", 1)[0]
-                                                for name in certificates[package]})
+                                                for name in certificates[package]} | live_modules)
         body = ["Require " + module + "." for module in imports]
+        probed = set()
         for obj in objects:
             frozen = module_for_path(obj["frozen_path"], spec["namespaces"]) + "." + obj["frozen"]
+            if obj["qualified"] in parametric:
+                body.extend(parametric_probe(parametric[obj["qualified"]], frozen, obj["certificate"],
+                                             obj["qualified"] not in probed))
+                probed.add(obj["qualified"])
+                continue
             if obj["qualified"] in additional_statement_names(spec):
                 body.append(f"Check (@{frozen} : Prop).")
                 body.append(f"Check (@{obj['qualified']} : Prop).")
@@ -984,6 +1450,9 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     rows_base, legs_base = manifest_rows(base)
     rows_now, legs_now = manifest_rows(None)
     additional = validate_additional_statements(spec, rows_base, rows_now)
+    parametric_entries = parametric_statement_entries(spec)
+    parametric = validate_parametric_statements(spec, rows_base, rows_now)
+    enrolled = additional | parametric
     repository_sources = entry.get("repository_sources", {})
     INV.repository_source_records(ROOT, entry)
     expected_sources = migrated_registry_sources(entry)
@@ -1097,11 +1566,13 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     baseline_context, current_context = ProviderContext(base), ProviderContext(None)
     expected_statements, reaching = statement_dependencies(
         base, expected_sources, rows_base, include_public=bool(repository_sources),
-        additional_statements=additional, provider_context=baseline_context)
-    if additional:
-        statement_dependencies(None, expected_sources, rows_now,
-                               include_public=bool(repository_sources),
-                               additional_statements=additional, provider_context=current_context)
+        additional_statements=enrolled, provider_context=baseline_context)
+    reaching_now: set[str] = set()
+    if enrolled:
+        _, reaching_now = statement_dependencies(None, expected_sources, rows_now,
+                                                 include_public=bool(repository_sources),
+                                                 additional_statements=enrolled,
+                                                 provider_context=current_context)
     _, role_errors = statement_obligations(
         spec, expected_statements=expected_statements, rows_base=rows_base, rows_now=rows_now)
     for error in role_errors:
@@ -1110,12 +1581,20 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     check(expected_statements == supplied_statements,
           "affected statement coverage matches baseline dependencies",
           f"missing={sorted(expected_statements - supplied_statements)}; extra={sorted(supplied_statements - expected_statements)}")
-    if repository_sources or additional:
+    if repository_sources or enrolled:
         frozen_chain = {obj['qualified'] for obj in spec['frozen'] if obj['kind'] in {'source', 'chain'}}
         missing_chain = reaching - expected_statements - frozen_chain
         label = ("public source paths" if repository_sources else "additional statement paths")
         check(not missing_chain, label + " have complete frozen intermediary coverage",
               f"missing={sorted(missing_chain)}")
+    if parametric:
+        reach_errors = parametric_reach_errors(spec, parametric_entries, expected_sources,
+                                               bool(repository_sources), reaching, reaching_now)
+        for qualified in sorted(parametric):
+            problems = [error for error in reach_errors if error.startswith(qualified + ":")]
+            check(not problems, f"{qualified}: binding targets do not reach migrated sources at any pin",
+                  "; ".join(problems))
+        parametric_copy_checks(spec, parametric_entries, check)
     for obj in (o for o in spec["frozen"] if o["kind"] == "statement"):
         base_src, live_src = source_at(base, obj["path"]), source_at(None, obj["path"])
         decls = {d["name"]: d for d in declarations(base_src) if d["module"] is None}
@@ -1175,11 +1654,22 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
             "doc_block_unchanged": doc_same,
             "statement_text_unchanged": text_same,
         })
+        if obj["qualified"] in parametric_entries:
+            parametric_entry = parametric_entries[obj["qualified"]]
+            statements[-1].update({
+                "section": parametric_entry["section"],
+                "parameters": parametric_entry["parameters"],
+                "variables_sha256": sha256("\n".join(parametric_entry["variables"])),
+                "bindings": parametric_entry["bindings"],
+                "live_shape": parametric_entry["live_shape"],
+            })
 
     # Frozen bodies anywhere in the migration layer that still resolve through
     # a live helper or chain declaration of this family.
     # Computed chains, not only the spec's list, so a missing freeze cannot hide.
-    live_names = source_names | chain_names | computed_chain
+    # Enrolled parametric endpoints resolve through this family's helpers too;
+    # an earlier family's frozen body that applies one of them live is stale.
+    live_names = source_names | chain_names | computed_chain | {name.rsplit(".", 1)[1] for name in parametric}
     stale = []
     for path in sorted(ROOT.glob("*/theories/migration/*.v")):
         rel = path.relative_to(ROOT).as_posix()
@@ -1281,7 +1771,9 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
              if repository_sources else
              "Dependency discovery scans build-listed conjecture declarations, including Inductive and Record bodies; it does not resolve notation, constructor names, module aliases or Section context like Rocq."),
             "Helper exact types, Section scaffolding and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.",
-        ],
+        ] + ([
+            "Section-parametric endpoints: default checks pin the enclosing Section, its complete Variable scaffold, the parameter names, generated bindings, frozen-copy and live-shape placement and text; --kernel checks exact discharged types, the pointwise certificate and conversion of the live endpoint with its live-shape witness. Dependent scaffolds, other Section commands, frozen Section companions and Section-parametric chains are unsupported.",
+        ] if parametric else []),
     }
 
 
@@ -1306,6 +1798,12 @@ def render_markdown(report: dict, spec: dict) -> str:
     for statement in report["statements"]:
         lines.append(f"| `{statement['qualified']}` / {statement['row_id']} "
                      f"| `{statement['certificate']}` |")
+    parametric = [statement for statement in report["statements"] if "parameters" in statement]
+    if parametric:
+        lines += ["", "Section-parametric endpoints (pointwise certificates over every discharged parameter): "
+                  + ", ".join(f"`{statement['qualified']}` ("
+                              + ", ".join(parameter["name"] for parameter in statement["parameters"]) + ")"
+                              for statement in parametric) + "."]
     lines += ["", "Source checks compare frozen text, registry and statement coverage, "
               "bridge endpoints, and unchanged statement metadata. They do not prove theorem types.",
               f"`python3 meta/migration_report.py {family} --check --kernel` checks exact closed "
@@ -1366,6 +1864,17 @@ def render_details(report: dict, spec: dict) -> str:
             f"| {st['row_id']} | {st['phase']} | `{st['qualified']}` | {st['status']} "
             f"| {(st['legs'] or {}).get('statement')} | {chain} | {cert} "
             f"| {'unchanged' if st['statement_text_unchanged'] and st['doc_block_unchanged'] else 'CHANGED'} |")
+    parametric = [st for st in report["statements"] if "parameters" in st]
+    if parametric:
+        lines += ["", "## Section-parametric endpoints", "",
+                  "| Statement | Section | Discharged parameters (kernel types) | Generated bindings | Live-shape witness |",
+                  "|---|---|---|---|---|"]
+        for st in parametric:
+            parameters = ", ".join(f"`{p['name']} : {p['kernel_type']}`" for p in st["parameters"])
+            bindings = ", ".join(f"`{key}` ({' '.join(args) or 'none'})"
+                                 for key, args in sorted(st["bindings"].items())) or "none"
+            lines.append(f"| `{st['qualified']}` | `{st['section']}` | {parameters} | {bindings} "
+                         f"| `{st['live_shape']}` |")
     lines += ["", "## Frozen objects", "",
               "Each frozen copy equals the original declaration after comment stripping, "
               "whitespace normalization and the listed identifier substitutions.", "",

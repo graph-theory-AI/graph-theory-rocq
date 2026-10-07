@@ -2331,5 +2331,868 @@ class SourceCacheTests(unittest.TestCase):
                 REPORT.inventory_hash(pin, self.helper)
 
 
+class ParametricStatementTests(unittest.TestCase):
+    """An explicitly enrolled Section-parametric whole Prop with a same-Section companion."""
+
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+    rebaseline = ReportTests.rebaseline
+    register = FrozenRoleTests.register
+    commit = AdditionalStatementTests.commit
+    assert_invalid = AdditionalStatementTests.assert_invalid
+
+    NAT = "Corelib.Init.Datatypes.nat"
+    VARIABLES = ["Variable P : nat -> Prop.", "Variable Q : nat -> Prop.", "Variable unused : nat."]
+    SCAFFOLD = "Variable P : nat -> Prop.\nVariable Q : nat -> Prop.\nVariable unused : nat.\n"
+
+    def setUp(self):
+        ReportTests.setUp(self)
+        self.middle_path = "base/theories/conjectures/X1.v"
+        self.schema_path = "base/theories/conjectures/X2.v"
+        self.schema = "GTBase.conjectures.X2.schema_claim"
+        self.middle_text = ("From GTBase.conjectures Require Import X0.\n"
+                            "Definition middle (n : nat) : Prop := local_helper n.\n")
+        self.closed_text = "Definition closed : Prop := forall n, P n -> Q n.\n"
+        self.claim_text = ("(** A Section-parametric whole conjecture. *)\n"
+                           "Definition schema_claim : Prop := closed -> forall n, middle n /\\ P n.\n")
+        self.schema_text = self.schema_source()
+        self.write(self.middle_path, self.middle_text)
+        self.write(self.schema_path, self.schema_text)
+        project = self.root / "base/_CoqProject"
+        project.write_text(project.read_text() + "theories/conjectures/X1.v\ntheories/conjectures/X2.v\n")
+        self.binding = "(@GTBase.conjectures.X2.closed P Q)"
+        self.frozen_claim = ("Definition schema_claim : Prop := " + self.binding
+                             + " -> forall n, MiddleLegacy.middle n /\\ P n.\n")
+        self.shape_claim = ("Definition schema_claim_live_shape : Prop := " + self.binding
+                            + " -> forall n, middle n /\\ P n.\n")
+        self.cert_base = self.cert_source
+        self.cert_source = self.cert_base + self.certificate_tail()
+        self.write(self.certificate, self.cert_source)
+        self.spec["parametric_statements"] = [{
+            "qualified": self.schema, "section": "Schema", "variables": list(self.VARIABLES),
+            "parameters": [{"name": "P", "kernel_type": self.NAT + " -> Prop"},
+                           {"name": "Q", "kernel_type": self.NAT + " -> Prop"}],
+            "bindings": {"closed": ["P", "Q"]},
+            "live_shape": self.module + ".schema_claim_live_shape"}]
+        self.spec["frozen"].extend([
+            {"kind": "chain", "qualified": "GTBase.conjectures.X1.middle",
+             "path": self.middle_path, "name": "middle", "frozen_path": self.certificate,
+             "frozen": "MiddleLegacy.middle", "certificate": self.module + ".middle_compat",
+             "substitutions": {"local_helper": "Legacy.local_helper"}},
+            {"kind": "statement", "qualified": self.schema, "path": self.schema_path,
+             "name": "schema_claim", "frozen_path": self.certificate,
+             "frozen": "SchemaLegacy.schema_claim", "certificate": self.module + ".schema_compat",
+             "non_corpus": True,
+             "substitutions": {"middle": "MiddleLegacy.middle", "closed": self.binding}},
+        ])
+        self.spec["cross_module_consumers"] = [
+            {"path": self.middle_path, "name": "local_helper", "note": "intermediary"},
+            {"path": self.schema_path, "name": "middle", "note": "whole Prop"},
+        ]
+        self.register("middle_compat")
+        self.register("schema_compat")
+        self.rebaseline()
+
+    def schema_source(self, scaffold=None, claim=None, closed=None, before="", inside="", after=""):
+        return ("From GTBase.conjectures Require Import X1.\n" + before + "Section Schema.\n"
+                + (self.SCAFFOLD if scaffold is None else scaffold)
+                + (self.closed_text if closed is None else closed) + inside
+                + (self.claim_text if claim is None else claim) + "End Schema.\n" + after)
+
+    def certificate_tail(self, frozen=None, shape=None, legacy_scaffold=None, shape_scaffold=None,
+                         compat=None, between=""):
+        frozen = self.frozen_claim if frozen is None else frozen
+        shape = self.shape_claim if shape is None else shape
+        legacy_scaffold = self.SCAFFOLD if legacy_scaffold is None else legacy_scaffold
+        shape_scaffold = self.SCAFFOLD if shape_scaffold is None else shape_scaffold
+        compat = (compat if compat is not None else
+                  "Lemma schema_compat (P Q : nat -> Prop) :\n"
+                  "  SchemaLegacy.schema_claim P Q <-> GTBase.conjectures.X2.schema_claim P Q.\n"
+                  "Proof. split; intro h; exact h. Qed.\n")
+        return ("From GTBase.conjectures Require Import X1 X2.\n"
+                "Module MiddleLegacy.\n"
+                "Definition middle (n : nat) : Prop := Legacy.local_helper n.\n"
+                "End MiddleLegacy.\n"
+                "Module SchemaLegacy.\nSection Schema.\n" + legacy_scaffold + frozen
+                + "End Schema.\nEnd SchemaLegacy.\n" + between
+                + "Section Schema.\n" + shape_scaffold + shape + "End Schema.\n"
+                + "Lemma middle_compat (n : nat) : MiddleLegacy.middle n <-> middle n.\n"
+                "Proof. split; trivial. Qed.\n" + compat)
+
+    def set_certificate(self, **parts):
+        self.cert_source = self.cert_base + self.certificate_tail(**parts)
+        self.write(self.certificate, self.cert_source)
+
+    def entry(self):
+        return self.spec["parametric_statements"][0]
+
+    def statement_object(self):
+        return next(o for o in self.spec["frozen"] if o.get("qualified") == self.schema)
+
+    def at_both_pins(self, source, match):
+        for baseline in (False, True):
+            with self.subTest(source=source, baseline=baseline):
+                self.write(self.schema_path, source)
+                if baseline:
+                    self.rebaseline()
+                    self.write(self.schema_path, self.schema_text)
+                self.assert_invalid(match)
+                self.write(self.schema_path, self.schema_text)
+                self.rebaseline()
+
+    def compile_fixture(self, extra=()):
+        for source in ("common", "conjectures/X0", "conjectures/X1", "conjectures/X2", *extra,
+                       "migration/test_family"):
+            proc = subprocess.run(["coqc", "-Q", "theories", "GTBase", "theories/" + source + ".v"],
+                                  cwd=self.root / "base", env=REPORT.ROCQ.environment(),
+                                  text=True, capture_output=True)
+            self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+
+    # Positive cases and non-weakening.
+
+    def test_parametric_whole_prop_with_binding_passes(self):
+        self.assertEqual(self.failures(), [])
+        report = self.report()
+        row = next(s for s in report["statements"] if s["qualified"] == self.schema)
+        self.assertEqual([p["name"] for p in row["parameters"]], ["P", "Q"])
+        self.assertEqual(row["bindings"], {"closed": ["P", "Q"]})
+        self.assertIn("Section-parametric", REPORT.render_markdown(report, {**self.spec, "report_name": "x"}))
+        rows, _ = REPORT.manifest_rows(self.spec["baseline_commit"])
+        found, path = REPORT.statement_dependencies(self.spec["baseline_commit"], {self.helper}, rows,
+                                                   additional_statements={self.schema})
+        self.assertEqual(found, {self.statement, self.schema})
+        self.assertNotIn("GTBase.conjectures.X2.closed", path)
+
+    def test_unbound_parametric_prop_passes(self):
+        claim = ("(** An unbound Section-parametric conjecture. *)\n"
+                 "Definition schema_claim : Prop := forall n, middle n /\\ P n.\n")
+        self.schema_text = self.schema_source(claim=claim)
+        self.write(self.schema_path, self.schema_text)
+        self.set_certificate(
+            frozen="Definition schema_claim : Prop := forall n, MiddleLegacy.middle n /\\ P n.\n",
+            shape="Definition schema_claim_live_shape : Prop := forall n, middle n /\\ P n.\n",
+            compat="Lemma schema_compat (P : nat -> Prop) :\n"
+                   "  SchemaLegacy.schema_claim P <-> GTBase.conjectures.X2.schema_claim P.\n"
+                   "Proof. split; intro h; exact h. Qed.\n")
+        self.entry()["parameters"] = self.entry()["parameters"][:1]
+        self.entry()["bindings"] = {}
+        del self.statement_object()["substitutions"]["closed"]
+        self.rebaseline()
+        self.assertEqual(self.failures(), [])
+
+    def test_masked_scope_strings_and_other_scopes_outside_the_section_pass(self):
+        self.schema_text = self.schema_source(
+            before='Redirect "Section Schema" Check nat.\nModule Other.\nSection Schema.\nEnd Schema.\nEnd Other.\n',
+            scaffold="Variable P : nat -> Prop.\n(* End Schema. *)\nVariable Q : nat -> Prop.\nVariable unused : nat.\n",
+            after='Redirect "End Schema" Check nat.\n')
+        self.write(self.schema_path, self.schema_text)
+        self.rebaseline()
+        self.assertEqual(self.failures(), [])
+        # Two commands on one line are not a wrapped scope (same rule as the
+        # nullary scanner): the Section opener is a real top-level scope.
+        self.schema_text = self.schema_source().replace("Section Schema.\n", "Check nat. Section Schema.\n", 1)
+        self.write(self.schema_path, self.schema_text)
+        self.rebaseline()
+        self.assertEqual(self.failures(), [])
+
+    def test_nullary_enrollment_still_rejects_the_section_prop(self):
+        del self.spec["parametric_statements"]
+        self.spec["additional_statements"] = [self.schema]
+        self.assert_invalid("outside Module/Section scopes")
+
+    def test_section_prop_is_never_enrolled_by_its_type(self):
+        del self.spec["parametric_statements"]
+        self.assertIn("affected statement coverage matches baseline dependencies", self.failures())
+
+    # Schema, parameters, bindings and substitutions.
+
+    def test_parametric_schema_is_strict(self):
+        original = copy.deepcopy(self.entry())
+        cases = [
+            None, {}, "x",
+            {**original, "extra": 1},
+            {key: value for key, value in original.items() if key != "bindings"},
+            {**original, "qualified": "bare"},
+            {**original, "section": "bad-label"},
+            {**original, "parameters": []},
+            {**original, "parameters": original["parameters"] + [original["parameters"][0]]},
+            {**original, "variables": ["Variables P Q : nat -> Prop."]},
+            {**original, "bindings": {"closed": "P"}},
+            {**original, "live_shape": self.module + ".schema_claim_shape"},
+            {**original, "live_shape": "GTBase.elsewhere.schema_claim_live_shape"},
+        ]
+        for kernel_type in ("_ -> Prop", "nat -> Prop", "P -> Prop", "forall x : " + self.NAT + ", Prop",
+                            self.NAT + " -> Prop%type", ""):
+            cases.append({**original, "parameters": [{"name": "P", "kernel_type": kernel_type},
+                                                     original["parameters"][1]]})
+        for value in cases:
+            with self.subTest(value=value):
+                self.spec["parametric_statements"] = [value]
+                self.assert_invalid("parametric|live_shape|kernel_type")
+        self.spec["parametric_statements"] = [original, copy.deepcopy(original)]
+        self.assert_invalid("unique qualified")
+        self.spec["parametric_statements"] = {"x": original}
+        self.assert_invalid("must be a list")
+        self.spec["parametric_statements"] = [original]
+        self.spec["additional_statements"] = [self.schema]
+        # The unchanged nullary validator rejects this Section Prop first; the
+        # separate list's own disjointness rule is checked directly as well.
+        self.assert_invalid("outside Module/Section scopes")
+        with self.assertRaisesRegex(ValueError, "disjoint"):
+            REPORT.parametric_statement_entries(self.spec)
+
+    def test_omitted_extra_or_reordered_parameters_are_rejected(self):
+        p, q = self.entry()["parameters"]
+        unused = {"name": "unused", "kernel_type": self.NAT}
+        for parameters in ([p], [q, p], [p, q, unused], [q]):
+            with self.subTest(parameters=parameters):
+                self.entry()["parameters"] = parameters
+                self.assert_invalid("parameters must be exactly")
+        self.entry()["parameters"] = [p, q]
+
+    def test_variables_must_be_the_complete_reviewed_scaffold(self):
+        for variables in (self.VARIABLES[:2], [self.VARIABLES[1], self.VARIABLES[0], self.VARIABLES[2]],
+                          ["Variable P : Corelib.Init.Datatypes.nat -> Prop."] + self.VARIABLES[1:]):
+            with self.subTest(variables=variables):
+                self.entry()["variables"] = variables
+                self.assert_invalid("scaffold differs")
+        self.entry()["variables"] = list(self.VARIABLES)
+
+    def test_bindings_are_exact_ordered_and_generated(self):
+        for bindings, match in (({"closed": ["Q", "P"]}, "Section order"),
+                                ({"closed": ["P", "R"]}, "Section order"),
+                                ({"closed": ["P", "P", "Q"]}, "Section order"),
+                                ({}, "bindings must name exactly"),
+                                ({"closed": ["P", "Q"], "middle": []}, "bindings must name exactly"),
+                                ({"closed": ["P"]}, "parameters must be exactly|generated")):
+            with self.subTest(bindings=bindings):
+                self.entry()["bindings"] = bindings
+                self.assert_invalid(match)
+        self.entry()["bindings"] = {"closed": ["P", "Q"]}
+        substitutions = self.statement_object()["substitutions"]
+        for value in ("(@GTBase.conjectures.X2.closed P (fun _ => True))", "(@GTBase.conjectures.X1.middle)",
+                      "(@GTBase.conjectures.X2.closed Q P)", "GTBase.conjectures.X2.closed P Q", None):
+            with self.subTest(value=value):
+                if value is None:
+                    del substitutions["closed"]
+                else:
+                    substitutions["closed"] = value
+                self.assert_invalid("must be the generated")
+                substitutions["closed"] = self.binding
+
+    def test_substitutions_cannot_capture_parameters_or_bypass_bindings(self):
+        substitutions = self.statement_object()["substitutions"]
+        for key, value, match in (("P", "(fun _ => True)", "cannot replace Section variable"),
+                                  ("unused", "0", "cannot replace Section variable"),
+                                  ("middle", "(fun n => P n)", "cannot mention Section variables")):
+            with self.subTest(key=key, value=value):
+                saved = dict(substitutions)
+                substitutions[key] = value
+                self.assert_invalid(match)
+                substitutions.clear()
+                substitutions.update(saved)
+
+    # Scopes, Section commands and dependent scaffolds.
+
+    def test_scope_shapes_are_rejected_at_both_pins(self):
+        body = self.SCAFFOLD + self.closed_text + self.claim_text
+        header = "From GTBase.conjectures Require Import X1.\n"
+        cases = {
+            header + "Module M.\nSection Schema.\n" + body + "End Schema.\nEnd M.\n": "directly in top-level Section",
+            header + "Module F (X : Sig).\nSection Schema.\n" + body + "End Schema.\nEnd F.\n": "directly in top-level Section",
+            header + "Module Type T.\nSection Schema.\n" + body + "End Schema.\nEnd T.\n": "directly in top-level Section",
+            header + "Section Outer.\nSection Schema.\n" + body + "End Schema.\nEnd Outer.\n": "directly in top-level Section",
+            header + self.SCAFFOLD.replace("Variable", "Parameter") + self.claim_text.replace("closed -> ", ""): "directly in top-level Section",
+            header + "Time Section Schema.\n" + body + "End Schema.\n": "wrapped scope",
+            header + "Timeout 5 Section Schema.\n" + body + "End Schema.\n": "wrapped scope",
+            header + 'Redirect "f" Section Schema.\n' + body + "End Schema.\n": "wrapped scope",
+            header + 'Load "fragment".\nSection Schema.\n' + body + "End Schema.\n": "source-splicing Load",
+            header + "Section Schema.\nEnd Schema.\nSection Schema.\n" + body + "End Schema.\n": "exactly one top-level scope",
+            header + "Module Schema.\nEnd Schema.\nSection Schema.\n" + body + "End Schema.\n": "exactly one top-level scope",
+            header + "Section Schema.\n" + body + "End Schema.\nSection Schema.\nEnd Schema.\n": "exactly one top-level scope",
+            header + "Section Schema.\n" + body: "unclosed",
+            header + "Section Other.\n" + body + "End Other.\n": "directly in top-level Section Schema",
+        }
+        for source, match in cases.items():
+            self.at_both_pins(source, match)
+
+    def test_section_command_whitelist_is_not_bypassed(self):
+        for command in ('Redirect "End Schema" Check nat.\n', "Hypothesis h : forall n, P n.\n",
+                        "Variables (R S : nat -> Prop).\n", "Let k := 0.\n", "Context (R : nat).\n",
+                        "Local Definition k := 0.\n", "#[local] Definition k := 0.\n",
+                        "Local Notation k := 0.\n", "Implicit Types n : nat.\n",
+                        "Fixpoint k (n : nat) : nat := n.\n", 'Redirect "f" Variable R : nat.\n',
+                        "Lemma k : True.\nProof. exact I. Qed.\n"):
+            self.at_both_pins(self.schema_source(inside=command), "unsupported Section command")
+
+    def test_dependent_scaffolds_are_rejected(self):
+        # The reviewed variables match the source at both pins, so only the
+        # dependency rule can reject: Rocq would discharge T through P's type.
+        cases = (("Variable T : Type.\nVariable P : T -> Prop.\nVariable Q : nat -> Prop.\nVariable unused : nat.\n",
+                  ["Variable T : Type.", "Variable P : T -> Prop.", *self.VARIABLES[1:]]),
+                 ("Variable P : nat -> Prop.\nVariable Q : nat -> Prop.\nDefinition U := nat.\nVariable unused : U.\n",
+                  [*self.VARIABLES[:2], "Variable unused : U."]))
+        for scaffold, variables in cases:
+            for parameters in (self.entry()["parameters"],
+                               [{"name": "T", "kernel_type": "Type"}, *self.entry()["parameters"]]):
+                with self.subTest(scaffold=scaffold, parameters=parameters):
+                    saved = copy.deepcopy(self.entry())
+                    self.entry().update(variables=variables, parameters=parameters)
+                    self.write(self.schema_path, self.schema_source(scaffold=scaffold))
+                    self.rebaseline()
+                    self.assert_invalid("dependent Section variable")
+                    self.spec["parametric_statements"] = [saved]
+                    self.write(self.schema_path, self.schema_text)
+                    self.rebaseline()
+
+    # Lost hypotheses, frozen copy and witness placement, history.
+
+    def test_lost_hypotheses_are_rejected_everywhere(self):
+        self.write(self.schema_path, self.schema_text.replace("closed -> ", ""))
+        self.assert_invalid("bindings must name exactly")
+        self.write(self.schema_path, self.schema_text)
+        self.set_certificate(frozen=self.frozen_claim.replace(self.binding + " -> ", ""))
+        self.assertTrue(any("frozen copy SchemaLegacy.schema_claim matches" in f for f in self.failures()))
+        self.set_certificate(shape=self.shape_claim.replace(self.binding + " -> ", ""))
+        self.assertIn(self.schema + ": live-shape witness matches the original modulo generated bindings",
+                      self.failures())
+
+    def test_frozen_copy_and_witness_placement(self):
+        frozen_label = self.schema + ": frozen copy SchemaLegacy.schema_claim lies in its Section scaffold"
+        shape_label = self.schema + ": live-shape witness schema_claim_live_shape lies in its top-level Section scaffold"
+        legacy = ("Module SchemaLegacy.\nSection Schema.\n" + self.SCAFFOLD + self.frozen_claim
+                  + "End Schema.\nEnd SchemaLegacy.\n")
+        top = "Section Schema.\n" + self.SCAFFOLD + self.shape_claim + "End Schema.\n"
+        cases = [
+            (dict(legacy_scaffold=self.SCAFFOLD.replace("Variable unused : nat.\n", "")), frozen_label),
+            (dict(legacy_scaffold="Variable Q : nat -> Prop.\nVariable P : nat -> Prop.\nVariable unused : nat.\n"), frozen_label),
+            (dict(legacy_scaffold=self.SCAFFOLD + "Definition extra : nat := 0.\n"), frozen_label),
+            (dict(shape_scaffold=self.SCAFFOLD.replace("nat -> Prop", "Datatypes.nat -> Prop")), shape_label),
+            (dict(between="Section Schema.\nEnd Schema.\n"), shape_label),
+            (dict(shape="Lemma schema_claim_live_shape : Prop.\nProof. exact True. Qed.\n"), shape_label),
+        ]
+        for parts, label in cases:
+            with self.subTest(parts=parts):
+                self.set_certificate(**parts)
+                self.assertIn(label, self.failures())
+        for text, label in (
+                (self.cert_base + self.certificate_tail().replace(legacy, legacy + "Module Again.\nEnd Again.\n")
+                 .replace("Module SchemaLegacy.\nSection Schema.\n", "Module SchemaLegacy.\nSection Schema.\nEnd Schema.\nSection Schema.\n", 1), frozen_label),
+                (self.cert_base + self.certificate_tail().replace(legacy, legacy.replace("Section Schema.\n", "")
+                 .replace("End Schema.\n", "")), frozen_label),
+                (self.cert_base + self.certificate_tail().replace(legacy, legacy.replace("Module SchemaLegacy.\n", "Module SchemaLegacy (X : Sig).\n")), frozen_label),
+                (self.cert_base + self.certificate_tail().replace(top, "Module Shape.\n" + top + "End Shape.\n"), shape_label)):
+            with self.subTest(text=text[-400:]):
+                self.write(self.certificate, text)
+                self.assertIn(label, self.failures())
+        self.set_certificate()
+
+    def test_binding_target_must_be_unchanged(self):
+        self.write(self.schema_path, self.schema_source(closed="Definition closed : Prop := forall n, Q n -> P n.\n"))
+        self.assert_invalid("binding target closed differs")
+
+    def test_history_guards(self):
+        baseline = self.spec["baseline_commit"]
+        self.spec["baseline_commit"] = baseline[:12]
+        self.assert_invalid("immutable full baseline")
+        tree = self.command("git", "rev-parse", baseline + "^{tree}")
+        orphan = self.command("git", "commit-tree", tree, "-m", "orphan")
+        self.spec["baseline_commit"] = orphan
+        self.assert_invalid("ancestor of HEAD")
+        self.spec["baseline_commit"] = baseline
+        self.command("git", "replace", baseline, orphan)
+        self.assert_invalid("replacement refs")
+        self.command("git", "replace", "-d", baseline)
+        grafts = self.root / ".git/info/grafts"
+        grafts.parent.mkdir(exist_ok=True)
+        grafts.write_text("")
+        self.assert_invalid("grafts")
+        grafts.unlink()
+        self.assertEqual(self.failures(), [])
+
+    def test_corpus_name_or_non_regular_source_cannot_be_enrolled(self):
+        manifest = "meta/" + REPORT.REG.CORPORA["v2"]["manifest"]
+        ordinary = json.loads((self.root / manifest).read_text())
+        self.write_json(manifest, {"rows": [self.row, {**self.row, "formal_name": "schema_claim"}]})
+        self.assert_invalid("outside both corpus manifests")
+        self.write_json(manifest, ordinary)
+        target = self.root / self.schema_path
+        duplicate = self.root / "schema-copy.v"
+        duplicate.write_text(self.schema_text)
+        target.unlink()
+        target.symlink_to(duplicate)
+        self.assert_invalid("missing or aliased")
+        self.rebaseline()
+        target.unlink()
+        target.write_text(self.schema_text)
+        self.assert_invalid("expected regular source blob")
+
+    # Companion reach through resolved provider dependencies (r2 section 2).
+
+    def relay(self, at_baseline, at_current, imported="X3"):
+        relay_path = "base/theories/conjectures/X3.v"
+        relay_text = ("From GTBase.conjectures Require Export X1.\n"
+                      "Definition relay (n : nat) : Prop := {}.\n")
+        project = self.root / "base/_CoqProject"
+        if "X3.v" not in project.read_text():
+            project.write_text(project.read_text() + "theories/conjectures/X3.v\n")
+        closed = "Definition closed : Prop := forall n, P n -> relay n -> Q n.\n"
+        source = self.schema_source(closed=closed).replace("Require Import X1.", "Require Import " + imported + ".")
+        self.write(self.schema_path, source)
+        self.write(relay_path, relay_text.format("middle n" if at_baseline else "n = n"))
+        self.schema_text = source
+        self.rebaseline()
+        self.write(relay_path, relay_text.format("middle n" if at_current else "n = n"))
+        self.spec["cross_module_consumers"].append({"path": relay_path, "name": "middle", "note": "relay"})
+
+    def test_companion_reaching_sources_cross_module_is_rejected(self):
+        for at_baseline, at_current in ((True, True), (False, True), (True, False)):
+            with self.subTest(at_baseline=at_baseline, at_current=at_current):
+                self.relay(at_baseline, at_current)
+                label = self.schema + ": binding targets do not reach migrated sources at any pin"
+                self.assertIn(label, self.failures())
+                with patch.object(REPORT.ROCQ, "environment", side_effect=AssertionError("metadata rejected")):
+                    errors = REPORT.check_kernel(self.spec)
+                self.assertTrue(any("would be live chains" in error for error in errors), errors)
+
+    def test_companion_reach_follows_re_exports(self):
+        closed = "Definition closed : Prop := forall n, P n -> middle n -> Q n.\n"
+        project = self.root / "base/_CoqProject"
+        project.write_text(project.read_text() + "theories/conjectures/X3.v\n")
+        self.write("base/theories/conjectures/X3.v", "From GTBase.conjectures Require Export X1.\n")
+        self.schema_text = self.schema_source(closed=closed).replace("Require Import X1.", "Require Import X3.")
+        self.write(self.schema_path, self.schema_text)
+        self.rebaseline()
+        self.assertIn(self.schema + ": binding targets do not reach migrated sources at any pin", self.failures())
+
+    # Kernel probes.
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_accepts_parametric_endpoint_and_implicit_certificate_binders(self):
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        self.set_certificate(compat="Lemma schema_compat {P Q : nat -> Prop} :\n"
+                                    "  SchemaLegacy.schema_claim P Q <-> GTBase.conjectures.X2.schema_claim P Q.\n"
+                                    "Proof. split; intro h; exact h. Qed.\n")
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_rejects_wrong_endpoint_bindings_and_shapes(self):
+        live = "GTBase.conjectures.X2.schema_claim"
+        compats = {
+            "global form": "Lemma schema_compat :\n  (forall P Q, SchemaLegacy.schema_claim P Q) <-> (forall P Q, " + live + " P Q).\n"
+                           "Proof. split; intros h P Q; apply h. Qed.\n",
+            "guarded": "Lemma schema_compat (P Q : nat -> Prop) : False ->\n  (SchemaLegacy.schema_claim P Q <-> " + live + " P Q).\n"
+                       "Proof. intros []. Qed.\n",
+            "witness": "Lemma schema_compat :\n  SchemaLegacy.schema_claim (fun _ => True) (fun _ => True) <-> " + live + " (fun _ => True) (fun _ => True).\n"
+                       "Proof. split; intro h; exact h. Qed.\n",
+            "swapped binders": "Lemma schema_compat (Q P : nat -> Prop) :\n  SchemaLegacy.schema_claim P Q <-> " + live + " P Q.\n"
+                               "Proof. split; intro h; exact h. Qed.\n",
+            "section hypothesis": "Section Guard.\nHypothesis guard : True.\nLemma schema_compat (P Q : nat -> Prop) :\n"
+                                  "  SchemaLegacy.schema_claim P Q <-> " + live + " P Q.\n"
+                                  "Proof using guard. split; intro h; exact h. Qed.\nEnd Guard.\n",
+        }
+        for name, compat in compats.items():
+            with self.subTest(name=name):
+                self.set_certificate(compat=compat)
+                self.compile_fixture()
+                self.assertTrue(REPORT.check_kernel(self.spec))
+        self.set_certificate()
+        self.compile_fixture()
+        self.entry()["parameters"][1]["kernel_type"] = self.NAT + " -> Corelib.Init.Datatypes.bool"
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_conversion_rejects_captured_or_opaque_live_shapes(self):
+        # Text checks pass, but a certificate-local definition captures the
+        # witness's bare `middle` with a non-convertible meaning; only the
+        # kernel conversion of the live endpoint with its witness sees that.
+        tail = self.certificate_tail(between="Definition middle (n : nat) : Prop := n = n /\\ True.\n")
+        tail = tail.replace("Lemma middle_compat (n : nat) : MiddleLegacy.middle n <-> middle n.",
+                            "Lemma middle_compat (n : nat) : MiddleLegacy.middle n <-> GTBase.conjectures.X1.middle n.")
+        self.cert_source = self.cert_base + tail
+        self.write(self.certificate, self.cert_source)
+        self.assertEqual(self.failures(), [])
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+        # A convertible capture is semantically harmless and is accepted.
+        self.set_certificate(between="Local Notation middle := MiddleLegacy.middle.\n")
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        # An opaque witness cannot be unfolded, so the conversion fails.
+        self.set_certificate(shape="Lemma schema_claim_live_shape : Prop.\nProof. exact ("
+                                   + self.binding + " -> forall n, middle n /\\ P n). Qed.\n")
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+        self.set_certificate(frozen="Definition schema_claim {x : nat} : Prop := " + self.binding
+                                    + " -> forall n, MiddleLegacy.middle n /\\ P n.\n",
+                             compat="Lemma schema_compat (P Q : nat -> Prop) :\n"
+                                    "  @SchemaLegacy.schema_claim P Q 0 <-> GTBase.conjectures.X2.schema_claim P Q.\n"
+                                    "Proof. split; intro h; exact h. Qed.\n")
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+    # Historical parametric snapshots (T2a) and stale scans (T3).
+
+    def add_snapshot(self, old_claim=None, old_scaffold=None, old_closed=None):
+        """Commit an older X2, then the current one; enroll the older Original."""
+        old_claim = old_claim or ("(** A Section-parametric whole conjecture. *)\n"
+                                  "Definition schema_claim : Prop := closed -> forall n, P n /\\ middle n.\n")
+        current = self.schema_text
+        self.write(self.schema_path, self.schema_source(scaffold=old_scaffold, claim=old_claim, closed=old_closed))
+        self.rebaseline()
+        old = self.spec["baseline_commit"]
+        self.write(self.schema_path, current)
+        self.rebaseline()
+        self.cert_source = (self.cert_source + "Module SchemaOriginal.\nSection Schema.\n" + self.SCAFFOLD
+                            + "Definition schema_claim : Prop := " + self.binding
+                            + " -> forall n, P n /\\ MiddleLegacy.middle n.\n"
+                            + "End Schema.\nEnd SchemaOriginal.\n"
+                            + "Lemma schema_original_compat (P Q : nat -> Prop) :\n"
+                            "  SchemaOriginal.schema_claim P Q <-> GTBase.conjectures.X2.schema_claim P Q.\n"
+                            "Proof. split; intros h c n; destruct (h c n); split; assumption. Qed.\n")
+        self.write(self.certificate, self.cert_source)
+        self.register("schema_original_compat")
+        self.spec["frozen"].append({
+            "kind": "original-statement", "qualified": self.schema, "path": self.schema_path,
+            "name": "schema_claim", "commit": old, "frozen_path": self.certificate,
+            "frozen": "SchemaOriginal.schema_claim", "certificate": self.module + ".schema_original_compat",
+            "non_corpus": True,
+            "substitutions": {"middle": "MiddleLegacy.middle", "closed": self.binding}})
+        return old
+    def test_parametric_snapshot_at_an_older_commit_passes(self):
+        self.add_snapshot()
+        self.assertEqual(self.failures(), [])
+
+    def test_identical_snapshot_can_share_the_frozen_copy(self):
+        old = self.add_snapshot(old_claim=self.claim_text)
+        self.spec["frozen"][-1].update(frozen="SchemaLegacy.schema_claim",
+                                       certificate=self.module + ".schema_compat")
+        self.assertEqual(self.failures(), [])
+        self.assertTrue(old)
+
+    def test_parametric_snapshot_guards(self):
+        old = self.add_snapshot()
+        snapshot = self.spec["frozen"][-1]
+        tree = self.command("git", "rev-parse", old + "^{tree}")
+        for commit, match in ((self.spec["baseline_commit"], "distinct immutable"),
+                              (old[:12], "distinct immutable"),
+                              (self.command("git", "commit-tree", tree, "-m", "side"), "ancestor of the baseline")):
+            with self.subTest(commit=commit):
+                snapshot["commit"] = commit
+                self.assert_invalid(match)
+        snapshot["commit"] = old
+        snapshot["kind"] = "original-chain"
+        self.assert_invalid("whole statement roles")
+        snapshot["kind"] = "original-statement"
+        self.spec["frozen"].append(copy.deepcopy(snapshot))
+        self.assert_invalid("distinct immutable")
+
+    def test_snapshot_scaffold_bindings_and_parameters_must_hold_at_its_commit(self):
+        cases = (
+            (dict(old_scaffold=self.SCAFFOLD.replace("Q : nat -> Prop", "Q : nat -> bool")), "scaffold differs"),
+            (dict(old_closed="Definition closed : Prop := forall n, Q n -> P n.\n"), "binding target closed differs"),
+            (dict(old_claim="(** Old. *)\nDefinition schema_claim : Prop := forall n, middle n /\\ Q n.\n"),
+             "bindings must name exactly"),
+        )
+        for parts, match in cases:
+            with self.subTest(parts=parts):
+                self.setUp()
+                self.add_snapshot(**parts)
+                self.assert_invalid(match)
+
+    def test_stale_scan_sees_parametric_endpoints(self):
+        old_cert = "base/theories/migration/old_family.v"
+        self.write(old_cert, "From GTBase.conjectures Require Import X2.\nModule OldLegacy.\n"
+                   "Definition old_glued : Prop := schema_claim (fun _ => True) (fun _ => True).\n"
+                   "End OldLegacy.\n")
+        label = (old_cert + "#OldLegacy.old_glued resolves through live ['schema_claim']")
+        self.assertIn(label, self.failures())
+        self.spec["known_stale_snapshots"] = {old_cert + "#OldLegacy.old_glued": "replaced by schema_compat"}
+        self.assertEqual(self.failures(), [])
+        del self.spec["known_stale_snapshots"]
+        self.write(old_cert, "From GTBase.migration Require Import test_family.\nModule OldLegacy.\n"
+                   "Definition old_glued : Prop := SchemaLegacy.schema_claim (fun _ => True) (fun _ => True).\n"
+                   "End OldLegacy.\n")
+        self.assertEqual(self.failures(), [])
+
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_checks_parametric_snapshots(self):
+        self.add_snapshot()
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        self.cert_source = self.cert_source.replace(
+            "Lemma schema_original_compat (P Q : nat -> Prop) :\n",
+            "Lemma schema_original_compat (P Q : nat -> Prop) : False ->\n").replace(
+            "Proof. split; intros h c n; destruct (h c n); split; assumption. Qed.\n",
+            "Proof. intros []. Qed.\n")
+        self.write(self.certificate, self.cert_source)
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+    # C5: coverage from the independent review (F1-F7) and hardening (F9, F11).
+
+    def snapshot_object(self, old):
+        """Enroll the swapped-conjunct Original of an older commit (as add_snapshot does)."""
+        self.cert_source = (self.cert_source + "Module SchemaOriginal.\nSection Schema.\n" + self.SCAFFOLD
+                            + "Definition schema_claim : Prop := " + self.binding
+                            + " -> forall n, P n /\\ MiddleLegacy.middle n.\n"
+                            + "End Schema.\nEnd SchemaOriginal.\n"
+                            + "Lemma schema_original_compat (P Q : nat -> Prop) :\n"
+                            "  SchemaOriginal.schema_claim P Q <-> GTBase.conjectures.X2.schema_claim P Q.\n"
+                            "Proof. split; intros h c n; destruct (h c n); split; assumption. Qed.\n")
+        self.write(self.certificate, self.cert_source)
+        self.register("schema_original_compat")
+        self.spec["frozen"].append({
+            "kind": "original-statement", "qualified": self.schema, "path": self.schema_path,
+            "name": "schema_claim", "commit": old, "frozen_path": self.certificate,
+            "frozen": "SchemaOriginal.schema_claim", "certificate": self.module + ".schema_original_compat",
+            "non_corpus": True,
+            "substitutions": {"middle": "MiddleLegacy.middle", "closed": self.binding}})
+
+    def two_commit_history(self, old_source, current_source, old_files=(), current_files=()):
+        """Commit an older state, then the baseline; return the older commit."""
+        for path, text in old_files:
+            self.write(path, text)
+        self.write(self.schema_path, old_source)
+        self.rebaseline()
+        old = self.spec["baseline_commit"]
+        for path, text in current_files:
+            self.write(path, text)
+        self.schema_text = current_source
+        self.write(self.schema_path, current_source)
+        self.rebaseline()
+        return old
+
+    OLD_CLAIM = ("(** A Section-parametric whole conjecture. *)\n"
+                 "Definition schema_claim : Prop := closed -> forall n, P n /\\ middle n.\n")
+
+    def test_provider_restricted_companion_and_conservative_fallback(self):
+        # F1 (r2 F2e/F2f): a same-named relay that reaches the sources exists only in a
+        # package that the endpoint's project does not map; with an ambient loader
+        # setting the context is unknown and every candidate is kept.
+        foreign = "chromatic-theory/theories/conjectures/X9.v"
+        self.write("chromatic-theory/_CoqProject",
+                   "-R theories Chromatic\n-Q ../base/theories GTBase\ntheories/conjectures/X9.v\n")
+        self.write(foreign, "From GTBase.conjectures Require Import X0.\n"
+                   "Definition relay (n : nat) : Prop := local_helper n.\n")
+        self.schema_text = self.schema_source(closed="Definition closed : Prop := forall n, P n -> relay n -> Q n.\n")
+        self.write(self.schema_path, self.schema_text)
+        # As in ProviderAttributionTests, the certificate is build-listed only after
+        # migration, so the baseline project context is known rather than a fallback.
+        project = self.root / "base/_CoqProject"
+        listed = project.read_text()
+        project.write_text(listed.replace("theories/migration/test_family.v\n", ""))
+        self.rebaseline()
+        project.write_text(listed)
+        self.spec["cross_module_consumers"].append({"path": foreign, "name": "local_helper", "note": "foreign relay"})
+        report = self.report()
+        self.assertEqual(report["provider_context_fallbacks"], [])
+        self.assertEqual([c["check"] for c in report["checks"] if not c["ok"]], [])
+        label = self.schema + ": binding targets do not reach migrated sources at any pin"
+        with patch.dict(os.environ, {"COQPATH": "hidden"}):
+            self.assertIn(label, self.failures())
+            with patch.object(REPORT.ROCQ, "environment", side_effect=AssertionError("metadata rejected")):
+                self.assertTrue(any("would be live chains" in e for e in REPORT.check_kernel(self.spec)))
+
+    def test_snapshot_only_companion_reach_is_rejected(self):
+        # F2: the companion reaches the sources only at the snapshot commit.
+        relay_path = "base/theories/conjectures/X3.v"
+        relay = "From GTBase.conjectures Require Export X1.\nDefinition relay (n : nat) : Prop := {}.\n"
+        project = self.root / "base/_CoqProject"
+        project.write_text(project.read_text() + "theories/conjectures/X3.v\n")
+        closed = "Definition closed : Prop := forall n, P n -> relay n -> Q n.\n"
+        source = lambda claim=None: self.schema_source(closed=closed, claim=claim).replace(
+            "Require Import X1.", "Require Import X3.")
+        old = self.two_commit_history(source(self.OLD_CLAIM), source(),
+                                      old_files=[(relay_path, relay.format("middle n"))],
+                                      current_files=[(relay_path, relay.format("n = n"))])
+        self.snapshot_object(old)
+        self.spec["cross_module_consumers"].append({"path": relay_path, "name": "middle", "note": "relay"})
+        label = self.schema + ": binding targets do not reach migrated sources at any pin"
+        self.assertIn(label, self.failures())
+        with patch.object(REPORT.ROCQ, "environment", side_effect=AssertionError("metadata rejected")):
+            self.assertTrue(any("would be live chains" in e for e in REPORT.check_kernel(self.spec)))
+        # Control: without the snapshot the same tree is accepted.
+        self.spec["frozen"].pop()
+        self.assertNotIn(label, self.failures())
+
+    def test_unrelated_snapshot_discovery_errors_propagate(self):
+        # F2/F10: only "must be reached" is absorbed at a snapshot commit; any other
+        # discovery error there (here another package's malformed project) fails closed.
+        foreign = "chromatic-theory/theories/conjectures/X9.v"
+        old = self.two_commit_history(
+            self.schema_source(claim=self.OLD_CLAIM), self.schema_text,
+            old_files=[("chromatic-theory/_CoqProject", "-R theories Chromatic\n-custom x\ntheories/conjectures/X9.v\n"),
+                       (foreign, "Definition other (n : nat) : Prop := n = n.\n")],
+            current_files=[("chromatic-theory/_CoqProject", "-R theories Chromatic\ntheories/conjectures/X9.v\n")])
+        self.snapshot_object(old)
+        self.assert_invalid("unsupported project option")
+
+    def test_history_environment_guards(self):
+        # F3: replacement and graft environments are rejected for parametric enrollment.
+        for name, value in (("GIT_REPLACE_REF_BASE", "refs/elsewhere/"), ("GIT_GRAFT_FILE", "/nonexistent-grafts")):
+            with self.subTest(name=name), patch.dict(os.environ, {name: value}):
+                self.assert_invalid("replacement or graft environments")
+        self.assertEqual(self.failures(), [])
+
+    def test_parametric_ownership_failures_at_both_pins(self):
+        # F4: the parametric validator's own ownership read at both pins. The
+        # failures come from its project_module call (unlisted source, remapped
+        # namespace); the trailing comparison alone cannot fail, since
+        # project_module either raises or returns exactly the qualified module.
+        project = self.root / "base/_CoqProject"
+        original = project.read_text()
+        for replacement, match in ((original.replace("-Q theories GTBase", "-Q theories Wrong"), "namespace ownership"),
+                                   (original.replace("theories/conjectures/X2.v\n", ""), "not build-listed")):
+            for baseline in (False, True):
+                with self.subTest(match=match, baseline=baseline):
+                    project.write_text(replacement)
+                    if baseline:
+                        self.rebaseline()
+                        project.write_text(original)
+                    self.assert_invalid(match)
+                    project.write_text(original)
+                    self.rebaseline()
+        self.assertEqual(self.failures(), [])
+
+    def test_manifest_exclusion_at_baseline_and_snapshot_commits(self):
+        # F5: a corpus row with the endpoint's name at the baseline only, or at a
+        # snapshot commit only, is rejected.
+        manifest = "meta/" + REPORT.REG.CORPORA["v2"]["manifest"]
+        ordinary = json.loads((self.root / manifest).read_text())
+        claimed = {"rows": [self.row, {**self.row, "formal_name": "schema_claim"}]}
+        self.write_json(manifest, claimed)
+        self.rebaseline()
+        self.write_json(manifest, ordinary)
+        self.assert_invalid("outside both corpus manifests")
+        self.rebaseline()
+        self.assertEqual(self.failures(), [])
+        old = self.two_commit_history(self.schema_source(claim=self.OLD_CLAIM), self.schema_text,
+                                      old_files=[(manifest, json.dumps(claimed))],
+                                      current_files=[(manifest, json.dumps(ordinary))])
+        self.snapshot_object(old)
+        self.assert_invalid("outside historical corpus manifests")
+
+    def test_more_frozen_copy_and_witness_placements_are_rejected(self):
+        # F7: placements listed by the design but not yet exercised.
+        frozen_label = self.schema + ": frozen copy SchemaLegacy.schema_claim lies in its Section scaffold"
+        shape_label = self.schema + ": live-shape witness schema_claim_live_shape lies in its top-level Section scaffold"
+        legacy = ("Module SchemaLegacy.\nSection Schema.\n" + self.SCAFFOLD + self.frozen_claim
+                  + "End Schema.\nEnd SchemaLegacy.\n")
+        top = "Section Schema.\n" + self.SCAFFOLD + self.shape_claim + "End Schema.\n"
+        tail = self.certificate_tail()
+        cases = (
+            ("W inside SchemaLegacy",
+             tail.replace(legacy + top, legacy.replace("End SchemaLegacy.\n", top + "End SchemaLegacy.\n")),
+             shape_label),
+            ("F at top level", tail.replace(legacy, "Module SchemaLegacy.\nEnd SchemaLegacy.\n"
+                                            + "Section Schema.\n" + self.SCAFFOLD + self.frozen_claim + "End Schema.\n"),
+             frozen_label),
+            ("F inside a Module Type", tail.replace("Module SchemaLegacy.\n", "Module Type SchemaLegacy.\n"), frozen_label),
+            ("F in another Section label", tail.replace(legacy, legacy.replace("Section Schema.\n", "Section Other.\n")
+                                                        .replace("End Schema.\n", "End Other.\n")), frozen_label),
+            ("respelled F variable", tail.replace(legacy, legacy.replace("Variable P : nat -> Prop.",
+                                                                         "Variable P : Datatypes.nat -> Prop.")),
+             frozen_label),
+        )
+        for name, text, label in cases:
+            with self.subTest(name=name):
+                self.assertNotEqual(text, tail)
+                self.write(self.certificate, self.cert_base + text)
+                self.assertIn(label, self.failures())
+        self.set_certificate()
+        self.assertEqual(self.failures(), [])
+
+    def test_kernel_type_token_grammar(self):
+        # F11: only fully qualified names, Prop/Set/Type, parentheses and the literal arrow.
+        original = copy.deepcopy(self.entry()["parameters"])
+        for kernel_type in (self.NAT + " - > Prop", "1 -> Prop", self.NAT + " > Prop", self.NAT + " -> Prop -",
+                            "(" + self.NAT + " -> Prop", self.NAT + ") -> Prop", ".nat -> Prop",
+                            "Corelib..nat -> Prop", self.NAT + " -> 0", self.NAT + ", Prop", "-> Prop",
+                            self.NAT + " -> -> Prop", "()", self.NAT + " -> Prop ->", self.NAT + "->",
+                            "Prop%type", "Corelib.Init.Datatypes.nat -> Prop 1"):
+            with self.subTest(kernel_type=kernel_type):
+                self.entry()["parameters"][0]["kernel_type"] = kernel_type
+                self.assert_invalid("kernel_type")
+        for kernel_type in ("(" + self.NAT + " -> Prop) -> Prop", "Foo.bar'2 -> Type", "Set -> Prop",
+                            "Corelib.Init.Datatypes.list " + self.NAT + " -> Prop", "((Prop))",
+                            self.NAT + "->Prop"):
+            with self.subTest(valid=kernel_type):
+                self.entry()["parameters"][0]["kernel_type"] = kernel_type
+                self.assertIn(self.schema, REPORT.parametric_statement_entries(self.spec))
+        self.entry()["parameters"] = original
+        self.assertEqual(self.failures(), [])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_rejects_global_form_and_extra_implicit_snapshots(self):
+        # F6: the remaining design-listed T2a kernel negatives.
+        self.add_snapshot()
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        pointwise = ("Lemma schema_original_compat (P Q : nat -> Prop) :\n"
+                     "  SchemaOriginal.schema_claim P Q <-> GTBase.conjectures.X2.schema_claim P Q.\n")
+        global_form = ("Lemma schema_original_compat :\n  (forall P Q, SchemaOriginal.schema_claim P Q) <->\n"
+                       "  (forall P Q, GTBase.conjectures.X2.schema_claim P Q).\n")
+        proof = "Proof. split; intros h c n; destruct (h c n); split; assumption. Qed.\n"
+        global_proof = "Proof. split; intros h P Q c n; destruct (h P Q c n); split; assumption. Qed.\n"
+        base = self.cert_source
+        self.cert_source = base.replace(pointwise + proof, global_form + global_proof)
+        self.assertNotEqual(self.cert_source, base)
+        self.write(self.certificate, self.cert_source)
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+        original_copy = "Definition schema_claim : Prop := " + self.binding + " -> forall n, P n /\\ MiddleLegacy.middle n.\n"
+        implicit_copy = original_copy.replace("schema_claim : Prop", "schema_claim {x : nat} : Prop")
+        self.cert_source = base.replace(original_copy, implicit_copy).replace(
+            pointwise, "Lemma schema_original_compat (P Q : nat -> Prop) :\n"
+                       "  @SchemaOriginal.schema_claim P Q 0 <-> GTBase.conjectures.X2.schema_claim P Q.\n")
+        self.assertNotEqual(self.cert_source, base)
+        self.write(self.certificate, self.cert_source)
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_conversion_line_is_prelude_independent(self):
+        # F9: the conversion line names Corelib's eq/eq_refl, so a shadowing prelude
+        # (MathComp's eqtype eq_refl) can neither break it nor change its meaning.
+        def probe(prelude, body):
+            path = self.root / "base" / "prelude_probe.v"
+            path.write_text(prelude + "Require GTBase.conjectures.X2 " + self.module + ".\n" + body + "\n")
+            return subprocess.run(["coqc", "-Q", "theories", "GTBase", str(path)], cwd=self.root / "base",
+                                  env=REPORT.ROCQ.environment(), text=True, capture_output=True)
+        shadow = "From mathcomp Require Import eqtype.\n"
+        self.compile_fixture()
+        lines = REPORT.parametric_probe(self.entry(), self.module + ".SchemaLegacy.schema_claim",
+                                        self.module + ".schema_compat", True)
+        conversion = [line for line in lines if "eq_refl" in line]
+        self.assertEqual(len(conversion), 1)
+        self.assertIn("@Corelib.Init.Logic.eq_refl Prop", conversion[0])
+        self.assertIn("@Corelib.Init.Logic.eq Prop", conversion[0])
+        # Control: the shadow is real for the unqualified spelling.
+        self.assertEqual(probe("", "Check (@eq_refl Prop True).").returncode, 0)
+        self.assertNotEqual(probe(shadow, "Check (@eq_refl Prop True).").returncode, 0)
+        for prelude in ("", shadow):
+            with self.subTest(prelude=prelude):
+                proc = probe(prelude, "\n".join(lines))
+                self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        # The binding stays semantic in either prelude: a captured witness still fails.
+        tail = self.certificate_tail(between="Definition middle (n : nat) : Prop := n = n /\\ True.\n")
+        tail = tail.replace("Lemma middle_compat (n : nat) : MiddleLegacy.middle n <-> middle n.",
+                            "Lemma middle_compat (n : nat) : MiddleLegacy.middle n <-> GTBase.conjectures.X1.middle n.")
+        self.cert_source = self.cert_base + tail
+        self.write(self.certificate, self.cert_source)
+        self.compile_fixture()
+        for prelude in ("", shadow):
+            with self.subTest(captured=prelude):
+                self.assertNotEqual(probe(prelude, conversion[0]).returncode, 0)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
