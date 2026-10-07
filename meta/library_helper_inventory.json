@@ -34149,11 +34149,9 @@
       "body_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
       "body_shape_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
       "declaration_hash": "e48051d690f5e92c5046644d0fad36876039675d90bcdecdac84564be2a22b03",
-      "direct_consumers": [
-        "Extremal.conjectures.X84.x84_cycle_edge_set"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x84_edge_set",
       "normalized_name": "edge_set",
@@ -34172,7 +34170,7 @@
         "Extremal.conjectures.X84.x84_connected_support"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [],
       "name": "x84_edge_rel",
       "normalized_name": "edge_rel",
@@ -34188,12 +34186,10 @@
       "body_shape_hash": "f437a7c69bdf11bd4cff6602e08b96965ed43ff830801ff43a6ca621338d4911",
       "declaration_hash": "54d86b95e796f3338fada21229219eedec05435737845b6e66a7b0cd64bb7701",
       "direct_consumers": [
-        "Extremal.conjectures.X84.x84_connected_support",
-        "Extremal.conjectures.X84.x84_cycle_edge_set",
-        "Extremal.conjectures.X84.x84_has_cycle_length"
+        "Extremal.conjectures.X84.x84_connected_support"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 17,
       "local_dependencies": [],
       "name": "x84_support",
       "normalized_name": "support",
@@ -34208,11 +34204,9 @@
       "body_hash": "20b775c30c4b8c4657e94363abc712ab3eb707a7d5556a2cc284f893454773ac",
       "body_shape_hash": "20b775c30c4b8c4657e94363abc712ab3eb707a7d5556a2cc284f893454773ac",
       "declaration_hash": "da26eac40b08153d4436f2126d1c00a43b092fe386bdab67df923d0d4857cb71",
-      "direct_consumers": [
-        "Extremal.conjectures.X84.x84_cycle_edge_set"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 19,
+      "line": 20,
       "local_dependencies": [],
       "name": "x84_degree_in",
       "normalized_name": "degree_in",
@@ -34227,11 +34221,9 @@
       "body_hash": "d4efe06f0ebc899ba14d0f63e1dc0fce85ac7519b2e7b21d00612aa93bc04ae2",
       "body_shape_hash": "31879a7c3ab62a2f10a54dbeaed0e5b8781a839a9d035470080b9b98ace9ab34",
       "declaration_hash": "f89e69079cfb6adde046d647a441650a557a5db6ad80e635365384944160d82a",
-      "direct_consumers": [
-        "Extremal.conjectures.X84.x84_cycle_edge_set"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 22,
+      "line": 23,
       "local_dependencies": [
         "x84_edge_rel",
         "x84_support"
@@ -34246,21 +34238,13 @@
       "signature_shape_hash": "b788da207ce223d5c72387e6301cc651ef54b1e91f6a8b4d5fc382f146bf317c"
     },
     {
-      "body_hash": "63729874e64f38a6ff4a384314f1129e496bfea4cfbab785b54682b81225aa5c",
-      "body_shape_hash": "31fbd0df7663c19afb9656041f3978f9351fe56ab757f773882b8c966a610362",
-      "declaration_hash": "128e4829bf8603fd38bf75f6050dbfabd9b4c327002f74ab69288627cd63c38c",
-      "direct_consumers": [
-        "Extremal.conjectures.X84.x84_cycle_count",
-        "Extremal.conjectures.X84.x84_has_cycle_length"
-      ],
+      "body_hash": "b269b2064c54089e2a4d3d76150443850591d4720b9477bff1cc423dfab73c4e",
+      "body_shape_hash": "b269b2064c54089e2a4d3d76150443850591d4720b9477bff1cc423dfab73c4e",
+      "declaration_hash": "2793318fcdc29f39a0fee0a980e0cf4e81c78824f7dd68f5713f007d7b336338",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 26,
-      "local_dependencies": [
-        "x84_connected_support",
-        "x84_degree_in",
-        "x84_edge_set",
-        "x84_support"
-      ],
+      "line": 27,
+      "local_dependencies": [],
       "name": "x84_cycle_edge_set",
       "normalized_name": "cycle_edge_set",
       "package": "extremal-graph-theory",
@@ -34271,17 +34255,15 @@
       "signature_shape_hash": "b788da207ce223d5c72387e6301cc651ef54b1e91f6a8b4d5fc382f146bf317c"
     },
     {
-      "body_hash": "74bba9025b5efe07cd76626c8b9a0322bfb295fdcd6b65526d97882f1e2a871f",
-      "body_shape_hash": "b44ca67459f07c6965c154f46fd23c8809d996a590b0b04a3e0b5182d00439eb",
-      "declaration_hash": "bc8e77518f02f8a1800a0eb592db34ad6a35d7c578809b7186b80547d62253a4",
+      "body_hash": "4c6429cca992d3aa96d04eb9095cbb868ee8ffa6d93bc135588947dc0a550fe3",
+      "body_shape_hash": "4c6429cca992d3aa96d04eb9095cbb868ee8ffa6d93bc135588947dc0a550fe3",
+      "declaration_hash": "1f97380e90d12caa7ba11c0d1912964b98d319c3d9926251106b7fefb4af534a",
       "direct_consumers": [
         "Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement"
       ],
       "kind": "Definition",
       "line": 33,
-      "local_dependencies": [
-        "x84_cycle_edge_set"
-      ],
+      "local_dependencies": [],
       "name": "x84_cycle_count",
       "normalized_name": "cycle_count",
       "package": "extremal-graph-theory",
@@ -34292,18 +34274,15 @@
       "signature_shape_hash": "0596fb401e0ad5525f64c30a46df4b74ef3b429bb464e52445ea6a2244565dd3"
     },
     {
-      "body_hash": "87a42fab854cff290ebc1fd016bcb143c95c8b25c7f4722322e9597de2589e1b",
-      "body_shape_hash": "06bd08c75757a4ca3525d78ac8f357ef1c78473c6c44e434fdba948040c4b291",
-      "declaration_hash": "d0fa71d348c2afdbd27bb6cdad5ce1ba56a1270c95d96e0b76ef0fa8c305c664",
+      "body_hash": "c5e5b0ab5d41feaca918e534213dc785d9bc6dcc23c23b9b25857d5869f99e56",
+      "body_shape_hash": "c5e5b0ab5d41feaca918e534213dc785d9bc6dcc23c23b9b25857d5869f99e56",
+      "declaration_hash": "322815c65912cdb33e6220ca78e581395ead625812a2956a58d3c391ca0916e4",
       "direct_consumers": [
         "Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement"
       ],
       "kind": "Definition",
-      "line": 36,
-      "local_dependencies": [
-        "x84_cycle_edge_set",
-        "x84_support"
-      ],
+      "line": 39,
+      "local_dependencies": [],
       "name": "x84_has_cycle_length",
       "normalized_name": "has_cycle_length",
       "package": "extremal-graph-theory",
@@ -34322,7 +34301,7 @@
         "Extremal.conjectures.X84.x84_turan2_sym"
       ],
       "kind": "Definition",
-      "line": 40,
+      "line": 45,
       "local_dependencies": [],
       "name": "x84_turan2_rel",
       "normalized_name": "turan2_rel",
@@ -34341,7 +34320,7 @@
         "Extremal.conjectures.X84.x84_turan2"
       ],
       "kind": "Lemma",
-      "line": 43,
+      "line": 48,
       "local_dependencies": [
         "x84_turan2_rel"
       ],
@@ -34362,7 +34341,7 @@
         "Extremal.conjectures.X84.x84_turan2"
       ],
       "kind": "Lemma",
-      "line": 48,
+      "line": 53,
       "local_dependencies": [
         "x84_turan2_rel"
       ],
@@ -34383,7 +34362,7 @@
         "Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement"
       ],
       "kind": "Definition",
-      "line": 51,
+      "line": 56,
       "local_dependencies": [
         "x84_turan2_irrefl",
         "x84_turan2_sym"

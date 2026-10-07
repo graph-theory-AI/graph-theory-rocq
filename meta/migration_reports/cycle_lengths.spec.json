@@ -2,7 +2,7 @@
   "family": "cycle-lengths",
   "canonical_name": "GTBase.walks_paths.has_ucycle_length",
   "canonical_short_name": "has_ucycle_length",
-  "relation": "two contracts over the adjacency relation, five sequence helpers by conversion: X59/X76 has_cycle_length is the RAW existence GTBase.walks_paths.has_ucycle_length (@edge_rel G) n (some MathComp ucycle of exactly n entries, no length guard: 0 always, 1 never on an sgraph, 2 exactly with an edge); X28 no_cycle_length_between is the RAW interval exclusion no_ucycle_length_between (@edge_rel G) a b (inclusive endpoints; an interval containing 0 always fails, one containing 2 excludes edges); X159 no_cycle_length_between is the GENUINE interval exclusion no_cycle_length_between (@edge_rel G) lo hi (explicit 2 < size c); X204 no_cycle_length is the GENUINE exact absence no_cycle_length (@edge_rel G) n (Boolean disequality). Raw and genuine agree only under the explicit guards 2 < n (has_ucycle_lengthE) and 2 < lo (no_ucycle_length_betweenE); no alias is redirected to the other contract. X84's same-named helper quantifies connected two-regular EDGE FAMILIES, not sequences, and is classified deferred without a bridge.",
+  "relation": "two contracts over the adjacency relation, five sequence helpers by conversion: X59/X76 has_cycle_length is the RAW existence GTBase.walks_paths.has_ucycle_length (@edge_rel G) n (some MathComp ucycle of exactly n entries, no length guard: 0 always, 1 never on an sgraph, 2 exactly with an edge); X28 no_cycle_length_between is the RAW interval exclusion no_ucycle_length_between (@edge_rel G) a b (inclusive endpoints; an interval containing 0 always fails, one containing 2 excludes edges); X159 no_cycle_length_between is the GENUINE interval exclusion no_cycle_length_between (@edge_rel G) lo hi (explicit 2 < size c); X204 no_cycle_length is the GENUINE exact absence no_cycle_length (@edge_rel G) n (Boolean disequality). Raw and genuine agree only under the explicit guards 2 < n (has_ucycle_lengthE) and 2 < lo (no_ucycle_length_betweenE); no alias is redirected to the other contract. X84's same-named helper quantifies connected two-regular EDGE FAMILIES, not sequences: classified deferred without a bridge until B28, and since B29 migrated with x84_cycle_edge_set and x84_cycle_count as the separate edge-family class over Extremal.foundations.edge_cycles (edge_family_cycle, edge_family_cycle_count, has_edge_family_cycle_length; the five conjuncts in order over an arbitrary supplied family), still with no bridge to the sequence contracts.",
   "baseline_commit": "4b63976bad086439fa79f74eaccd270cd1291eb9",
   "namespaces": {
     "base": "GTBase",
@@ -12,7 +12,10 @@
   "certificate_files": [
     "base/theories/walks_paths.v",
     "chromatic-theory/theories/migration/cycle_lengths.v",
-    "extremal-graph-theory/theories/migration/cycle_lengths.v"
+    "extremal-graph-theory/theories/migration/cycle_lengths.v",
+    "extremal-graph-theory/theories/foundations/edge_cycles.v",
+    "extremal-graph-theory/theories/migration/simple_edges.v",
+    "extremal-graph-theory/theories/migration/incidence_degree.v"
   ],
   "extra_certificates": [
     "GTBase.walks_paths.has_ucycle_length0",
@@ -42,7 +45,21 @@
     "GTBase.walks_paths.cycle_lengths_ground_K0",
     "GTBase.walks_paths.cycle_lengths_ground_K1",
     "GTBase.walks_paths.cycle_lengths_ground_K2",
-    "GTBase.walks_paths.cycle_lengths_ground_K3"
+    "GTBase.walks_paths.cycle_lengths_ground_K3",
+    "Extremal.foundations.edge_cycles.in_edge_family_support",
+    "Extremal.foundations.edge_cycles.edge_family_support_set0",
+    "Extremal.foundations.edge_cycles.edge_family_rel_sym",
+    "Extremal.foundations.edge_cycles.edge_family_rel_singleton",
+    "Extremal.foundations.edge_cycles.edge_family_cycleP",
+    "Extremal.foundations.edge_cycles.edge_family_cycle_subset",
+    "Extremal.foundations.edge_cycles.edge_family_cycle_support_gt2",
+    "Extremal.foundations.edge_cycles.edge_family_cycle_set0",
+    "Extremal.foundations.edge_cycles.edge_family_cycle_order",
+    "Extremal.foundations.edge_cycles.edge_family_cycle_triangle",
+    "Extremal.foundations.edge_cycles.edge_family_rel_closed",
+    "Extremal.foundations.edge_cycles.has_edge_family_cycle_length_gt2",
+    "Extremal.foundations.edge_cycles.edge_family_cycle_count_small",
+    "Extremal.foundations.edge_cycles.edge_family_cycle_count_gt0"
   ],
   "summary": [
     "Batch B, family B15 (cycle lengths of a sequence relation): five sequence helpers now unfold, by conversion, to two contracts in `GTBase.walks_paths` over the adjacency relation `@edge_rel G`. RAW, over MathComp `ucycle` with no length guard: Extremal X59 and X76 `has_cycle_length` are `has_ucycle_length` (some ucycle of exactly n entries) and Chromatic X28 `no_cycle_length_between` is `no_ucycle_length_between` (no ucycle with between a and b entries, inclusive). GENUINE, with the explicit `2 < size c`: Chromatic X159 `no_cycle_length_between` is `no_cycle_length_between` and Chromatic X204 `no_cycle_length` is the exact absence `no_cycle_length` (a Boolean disequality). The raw contracts are preserved at EVERY parameter: raw length 0 is always witnessed by the empty ucycle, raw length 1 is impossible on a simple graph, raw length 2 is an edge, a raw interval containing 0 always fails and one containing 2 excludes edges; genuine lengths 0, 1 and 2 are impossible; reversed intervals are vacuous. The two contracts are bridged only under the explicit guards `2 < n` (`has_ucycle_lengthE`) and `2 < lo` (`no_ucycle_length_betweenE`); the rows use lengths 4..8 and X76's `3 <= k`, where they agree, but no alias is redirected.",
@@ -52,11 +69,17 @@
     "",
     "History (complete rows, over the earlier families' frozen copies, all by conversion of their own certificates): `X59Original` (A5+B15) over A5's frozen `x59_subgraph_of`; `X76Original` (A7+A9+B15, pre-M1) over A7's frozen pre-M1 count `A7.X76Original.x76_edge_count` and A9's pre-M1 cut size `A9.X76Original.x76_cut_size`, both over M1's frozen edge set; `X96Original` (A5+A7+B15) over A7's frozen raw rank count `A7.Legacy.x4_edge_count`, A5's frozen containment and the frozen chain. The eight A5/A7/A9 snapshots that keep live helpers of this family (A5 X59/X96 rows; A7 X76 and X96 Legacy and Original rows; A9 X76 Legacy and Original rows) are unchanged and documented below, with reciprocal notes for this family's per-row copies in the subgraph_of, edge_count and cut_size specs.",
     "",
-    "Classification of the same-named `Extremal.conjectures.X84.x84_has_cycle_length`: it quantifies connected two-regular EDGE FAMILIES (`x84_cycle_edge_set`, support size > 2, |F| = |support|, degree 2, connected support) and is impossible at l <= 2; the raw sequence contract is always witnessed at l = 0 and witnessed at l = 2 exactly when an edge exists, while raw l = 1 is impossible on an sgraph. It is registered in the deferred class `edge-family-exact-length` with no bridge claimed; its X85 count consumer and A10's incidence-degree history belong to a separate family. B11's classification of `x84_cycle_edge_set` as a distinct edge-set predicate is unchanged.",
+    "Classification of the same-named `Extremal.conjectures.X84.x84_has_cycle_length`: it quantifies connected two-regular EDGE FAMILIES (`x84_cycle_edge_set`, support size > 2, |F| = |support|, degree 2, connected support) and is impossible at l <= 2; the raw sequence contract is always witnessed at l = 0 and witnessed at l = 2 exactly when an edge exists, while raw l = 1 is impossible on an sgraph. It was registered in the deferred class `edge-family-exact-length`, with no bridge claimed, up to B28; B29 migrates it (see below). B11's classification of `x84_cycle_edge_set` as a distinct edge-set predicate is unchanged.",
     "",
     "Kernel evidence, independent of this textual report, from `Print All Dependencies`: no frozen row, chain or Original reaches a live helper of this family or any of the five canonicals; the Originals also reach no live A5, A7, A9 or M1 helper or canonical; each live row reaches its canonical and its alias. Summary: /srv/graph-theory-rocq/coordination/evidence/B15-cycle_lengths/print_all_dependencies_summary.txt.",
     "",
-    "Baseline 4b63976 is a private, not-for-integration prerequisite baseline on marcol-b15-base: 8e97ca6 = B14 ed08916 + coordinator work/a9-integration 501b89f (A7, A8, A9 integrated; merge base B11 13c00aa), then 4b63976 = 8e97ca6 + the approved B12 #916 follow-up 03c25da. Conflicts were unions only (five _CoqProject files, genuine_cycle stale notes) and regenerated reports. No statement text, doc block, manifest row or leg state changes (checked below)."
+    "Baseline 4b63976 is a private, not-for-integration prerequisite baseline on marcol-b15-base: 8e97ca6 = B14 ed08916 + coordinator work/a9-integration 501b89f (A7, A8, A9 integrated; merge base B11 13c00aa), then 4b63976 = 8e97ca6 + the approved B12 #916 follow-up 03c25da. Conflicts were unions only (five _CoqProject files, genuine_cycle stale notes) and regenerated reports. No statement text, doc block, manifest row or leg state changes (checked below).",
+    "",
+    "B29 (2026-10-04), edge-family class. Extremal X84's `x84_cycle_edge_set`, `x84_cycle_count` and `x84_has_cycle_length` are now `Extremal.foundations.edge_cycles.edge_family_cycle`, `edge_family_cycle_count` and `has_edge_family_cycle_length`, by conversion: for an arbitrary supplied family F, in order, F consists of host edges (E(G)), its support has more than two vertices, |F| equals the support size, every support vertex has incidence degree two (A10) and every two support vertices are connected by the raw relation `[set x; y] \\in F`. No ambient connectivity, spanning, induced, orientation, start point or traversal condition; support and relation keep their behaviour on malformed families. The deferred class `edge-family-exact-length` becomes the migrated class `edge-family-cycles`; the sequence classes, X115, X211, U6 and B11's extraction stay separate, with no bridge claimed.",
+    "",
+    "Corners in the public-only client extremal-graph-theory/theories/examples/edge_cycles.v: the empty family, K_0, K_1, K_2 and every length at most two have no cycle; K_3 has exactly one; a K_4 triangle qualifies beside an uncovered vertex with host chords outside F; two disjoint K_6 triangles are host edges but disconnected; a singleton member keeps its reflexive raw relation and is rejected by the host-edge conjunct.",
+    "",
+    "Fifteen objects appended, thirty in all, thirteen complete iff: the three sources and the X84 and X85 rows at the family baseline 4b63976 (conversions); the raw support, relation and connectivity of 061154c; M1's `Legacy.edge_set` and A10's `Legacy.x84_degree_in`, bound with their owners' certificates; the raw cycle, count and length chains and the two complete pre-M1 / A10 Originals (M1's set equality `x84_edge_set_compat`, A10's conversion, pointwise row transports with the same family and witnesses). X85's natural-denominator proxy for e and every row status are unchanged. All fifteen earlier mappings and every old proof are unchanged. Kernel evidence for all thirty objects on fully qualified closures: /srv/graph-theory-rocq/coordination/evidence/B29-edge_cycles/print_all_dependencies_summary.txt."
   ],
   "frozen": [
     {
@@ -248,6 +271,271 @@
         "x96_c4_free": "X96Legacy.c4_free"
       },
       "certificate": "Extremal.migration.cycle_lengths.bollobas_erdos_large_c4_free_subgraph_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X84.x84_cycle_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_cycle_edge_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeLegacy.cycle_edge_set",
+      "substitutions": {
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_has_cycle_length": "has_cycle_length"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x84_cycle_edge_set_compat",
+      "commit": "4b63976bad086439fa79f74eaccd270cd1291eb9"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X84.x84_cycle_count",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_cycle_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeLegacy.cycle_count",
+      "substitutions": {
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_has_cycle_length": "has_cycle_length"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x84_cycle_count_compat",
+      "commit": "4b63976bad086439fa79f74eaccd270cd1291eb9"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X84.x84_has_cycle_length",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_has_cycle_length",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeLegacy.has_cycle_length",
+      "substitutions": {
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_has_cycle_length": "has_cycle_length"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x84_has_cycle_length_compat",
+      "commit": "4b63976bad086439fa79f74eaccd270cd1291eb9"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "odd_cycle_free_turan2_unique_cycle_extremal_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeLegacy.odd_cycle_free_turan2_unique_cycle_extremal_statement",
+      "substitutions": {
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_has_cycle_length": "has_cycle_length"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.odd_cycle_free_turan2_unique_cycle_extremal_statement_compat",
+      "commit": "4b63976bad086439fa79f74eaccd270cd1291eb9",
+      "original_certificate": "Extremal.migration.cycle_lengths.odd_cycle_free_turan2_unique_cycle_extremal_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X85.arman_tsaturian_average_degree_cycle_count_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X85.v",
+      "name": "arman_tsaturian_average_degree_cycle_count_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X85EdgeLegacy.arman_tsaturian_average_degree_cycle_count_statement",
+      "substitutions": {
+        "x84_cycle_count": "X84EdgeLegacy.cycle_count",
+        "x84_cycle_edge_set": "X84EdgeLegacy.cycle_edge_set",
+        "x84_has_cycle_length": "X84EdgeLegacy.has_cycle_length"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.arman_tsaturian_average_degree_cycle_count_statement_compat",
+      "commit": "4b63976bad086439fa79f74eaccd270cd1291eb9",
+      "original_certificate": "Extremal.migration.cycle_lengths.arman_tsaturian_average_degree_cycle_count_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X84.x84_support",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_support",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeOriginal.support",
+      "substitutions": {
+        "x84_connected_support": "connected_support",
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_degree_in": "ID.Legacy.x84_degree_in",
+        "x84_edge_rel": "edge_rel",
+        "x84_edge_set": "M1.Legacy.edge_set",
+        "x84_has_cycle_length": "has_cycle_length",
+        "x84_support": "support"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x84_support_frozen_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X84.x84_edge_rel",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_edge_rel",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeOriginal.edge_rel",
+      "substitutions": {
+        "x84_connected_support": "connected_support",
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_degree_in": "ID.Legacy.x84_degree_in",
+        "x84_edge_rel": "edge_rel",
+        "x84_edge_set": "M1.Legacy.edge_set",
+        "x84_has_cycle_length": "has_cycle_length",
+        "x84_support": "support"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x84_edge_rel_frozen_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X84.x84_connected_support",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_connected_support",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeOriginal.connected_support",
+      "substitutions": {
+        "x84_connected_support": "connected_support",
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_degree_in": "ID.Legacy.x84_degree_in",
+        "x84_edge_rel": "edge_rel",
+        "x84_edge_set": "M1.Legacy.edge_set",
+        "x84_has_cycle_length": "has_cycle_length",
+        "x84_support": "support"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x84_connected_support_frozen_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X84.x84_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_edge_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x84_edge_set": "edge_set"
+      },
+      "certificate": "Extremal.migration.simple_edges.x84_edge_set_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X84.x84_degree_in",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_degree_in",
+      "frozen_path": "extremal-graph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x84_degree_in",
+      "substitutions": {},
+      "certificate": "Extremal.migration.incidence_degree.x84_degree_in_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X84.x84_cycle_edge_set",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_cycle_edge_set",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeOriginal.cycle_edge_set",
+      "substitutions": {
+        "x84_connected_support": "connected_support",
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_degree_in": "ID.Legacy.x84_degree_in",
+        "x84_edge_rel": "edge_rel",
+        "x84_edge_set": "M1.Legacy.edge_set",
+        "x84_has_cycle_length": "has_cycle_length",
+        "x84_support": "support"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x84_cycle_edge_set_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X84.x84_cycle_count",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_cycle_count",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeOriginal.cycle_count",
+      "substitutions": {
+        "x84_connected_support": "connected_support",
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_degree_in": "ID.Legacy.x84_degree_in",
+        "x84_edge_rel": "edge_rel",
+        "x84_edge_set": "M1.Legacy.edge_set",
+        "x84_has_cycle_length": "has_cycle_length",
+        "x84_support": "support"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x84_cycle_count_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.X84.x84_has_cycle_length",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "x84_has_cycle_length",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeOriginal.has_cycle_length",
+      "substitutions": {
+        "x84_connected_support": "connected_support",
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_degree_in": "ID.Legacy.x84_degree_in",
+        "x84_edge_rel": "edge_rel",
+        "x84_edge_set": "M1.Legacy.edge_set",
+        "x84_has_cycle_length": "has_cycle_length",
+        "x84_support": "support"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.x84_has_cycle_length_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X84.v",
+      "name": "odd_cycle_free_turan2_unique_cycle_extremal_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X84EdgeOriginal.odd_cycle_free_turan2_unique_cycle_extremal_statement",
+      "substitutions": {
+        "x84_connected_support": "connected_support",
+        "x84_cycle_count": "cycle_count",
+        "x84_cycle_edge_set": "cycle_edge_set",
+        "x84_degree_in": "ID.Legacy.x84_degree_in",
+        "x84_edge_rel": "edge_rel",
+        "x84_edge_set": "M1.Legacy.edge_set",
+        "x84_has_cycle_length": "has_cycle_length",
+        "x84_support": "support"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.odd_cycle_free_turan2_unique_cycle_extremal_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X85.arman_tsaturian_average_degree_cycle_count_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X85.v",
+      "name": "arman_tsaturian_average_degree_cycle_count_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/cycle_lengths.v",
+      "frozen": "X85EdgeOriginal.arman_tsaturian_average_degree_cycle_count_statement",
+      "substitutions": {
+        "x84_connected_support": "X84EdgeOriginal.connected_support",
+        "x84_cycle_count": "X84EdgeOriginal.cycle_count",
+        "x84_cycle_edge_set": "X84EdgeOriginal.cycle_edge_set",
+        "x84_degree_in": "ID.Legacy.x84_degree_in",
+        "x84_edge_rel": "X84EdgeOriginal.edge_rel",
+        "x84_edge_set": "M1.Legacy.edge_set",
+        "x84_has_cycle_length": "X84EdgeOriginal.has_cycle_length",
+        "x84_support": "X84EdgeOriginal.support"
+      },
+      "certificate": "Extremal.migration.cycle_lengths.arman_tsaturian_average_degree_cycle_count_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
+      "corpus": "v2"
     }
   ],
   "known_stale_snapshots": {
@@ -265,15 +553,14 @@
       "path": "extremal-graph-theory/theories/conjectures/X96.v",
       "name": "x59_has_cycle_length",
       "note": "Cross-file chain of X96: x96_c4_free G := ~ x59_has_cycle_length G 4 (length 4, where the raw and genuine contracts agree); frozen as X96Legacy.c4_free over Legacy.x59_has_cycle_length, and reused by the complete X96Original."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X85.v",
+      "name": "x84_cycle_count",
+      "note": "Cross-module row X85 counts with X84's x84_cycle_count; frozen as X85EdgeLegacy over X84EdgeLegacy.cycle_count and end to end as X85EdgeOriginal over X84EdgeOriginal.cycle_count; statement text unchanged."
     }
   ],
   "distinct_variants": [
-    {
-      "qualified": "Extremal.conjectures.X84.x84_has_cycle_length",
-      "path": "extremal-graph-theory/theories/conjectures/X84.v",
-      "name": "x84_has_cycle_length",
-      "note": "connected two-regular EDGE FAMILY of support size l, not a sequence contract; deferred in the registry with no bridge claimed; untouched"
-    },
     {
       "qualified": "Cycle.conjectures.XE2.xe2_cycle_lengths",
       "path": "cycle-theory/theories/conjectures/XE2.v",
