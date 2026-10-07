@@ -115,7 +115,8 @@ separate `parametric_statements` list, never by its type; the nullary
 (`qualified`, `section`, `variables`, `parameters`, `bindings`, `live_shape`) names
 the single enclosing top-level Section, its complete reviewed `Variable NAME : TYPE.`
 scaffold, the discharged parameters in Section order with fully qualified kernel
-types, the argument lists of referenced same-Section declarations (whose
+types (token grammar: qualified names, Prop/Set/Type, parentheses, arrows and
+application only), the argument lists of referenced same-Section declarations (whose
 `(@module.name args)` substitutions the tool generates and requires), and the
 `<certificate module>.<name>_live_shape` witness. The frozen copy is the sole
 declaration of a same-label Section directly inside a plain frozen module; the

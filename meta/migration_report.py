@@ -712,7 +712,58 @@ def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) 
 PARAMETRIC_KEYS = frozenset({"qualified", "section", "variables", "parameters", "bindings", "live_shape"})
 VARIABLE_COMMAND_RE = re.compile(rf"Variable ({IDENT}) : (\S.*)\.")
 SECTION_DECLARATION_RE = re.compile(rf"(Definition|Inductive)\s+({IDENT})(?![A-Za-z0-9_'])")
-KERNEL_TYPE_RE = re.compile(r"[A-Za-z0-9_'.()>\s-]+")
+KERNEL_TYPE_TOKEN_RE = re.compile(rf"\s*(->|\(|\)|{IDENT}(?:\.{IDENT})*)")
+
+
+def kernel_type_wellformed(text: str) -> bool:
+    """Token grammar of reviewed kernel types (no inference, no notation):
+
+    type := app ('->' app)*;  app := atom+;  atom := NAME | '(' type ')'
+    where NAME is Prop, Set, Type or a fully qualified identifier. Isolated
+    punctuation, digits, holes and scopes are not tokens, so they are rejected.
+    """
+    tokens, pos = [], 0
+    while text[pos:].strip():
+        match = KERNEL_TYPE_TOKEN_RE.match(text, pos)
+        if match is None:
+            return False
+        tokens.append(match.group(1))
+        pos = match.end()
+    index = 0
+
+    def atom() -> bool:
+        nonlocal index
+        if index < len(tokens) and tokens[index] == "(":
+            index += 1
+            if not arrows() or index >= len(tokens) or tokens[index] != ")":
+                return False
+            index += 1
+            return True
+        if (index < len(tokens) and tokens[index] not in {"(", ")", "->"}
+                and (tokens[index] in {"Prop", "Set", "Type"} or "." in tokens[index])):
+            index += 1
+            return True
+        return False
+
+    def application() -> bool:
+        if not atom():
+            return False
+        while index < len(tokens) and tokens[index] not in {")", "->"}:
+            if not atom():
+                return False
+        return True
+
+    def arrows() -> bool:
+        nonlocal index
+        if not application():
+            return False
+        while index < len(tokens) and tokens[index] == "->":
+            index += 1
+            if not application():
+                return False
+        return True
+
+    return bool(tokens) and arrows() and index == len(tokens)
 
 
 def scope_tree(clean: str, what: str) -> list[dict]:
@@ -812,10 +863,7 @@ def parametric_statement_entries(spec: dict) -> dict[str, dict]:
                 or len({p["name"] for p in parameters}) != len(parameters)):
             raise ValueError(f"{qualified}: parametric statement parameters must be unique {{name, kernel_type}} objects")
         for parameter in parameters:
-            kernel_type = parameter["kernel_type"]
-            if (not KERNEL_TYPE_RE.fullmatch(kernel_type) or not kernel_type.strip()
-                    or any(token not in {"Prop", "Set", "Type"} and "." not in token
-                           for token in QUALIFIED_IDENT_RE.findall(kernel_type))):
+            if not kernel_type_wellformed(parameter["kernel_type"]):
                 raise ValueError(f"{qualified}: kernel_type of {parameter['name']} must use only "
                                  "fully qualified names, Prop, Set, Type, arrows and parentheses")
         if (not isinstance(bindings, dict)
@@ -1033,7 +1081,8 @@ def parametric_probe(entry: dict, frozen: str, certificate: str, with_live: bool
     if with_live:
         lines += [f"Check (@{live} : forall {binders}, Prop).",
                   f"Check (@{shape} : forall {binders}, Prop).",
-                  f"Check (fun {binders} => (@eq_refl Prop (@{live} {args}) : @{live} {args} = @{shape} {args}))."]
+                  f"Check (fun {binders} => (@Corelib.Init.Logic.eq_refl Prop (@{live} {args})"
+                  f" : @Corelib.Init.Logic.eq Prop (@{live} {args}) (@{shape} {args})))."]
     lines.append(f"Check (@{certificate} : forall {binders}, @{frozen} {args} <-> @{live} {args}).")
     return lines
 
