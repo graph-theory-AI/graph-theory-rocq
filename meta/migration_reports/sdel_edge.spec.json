@@ -138,7 +138,10 @@
       "documented_status": "non-corpus external theorem (Whitney 1932, Hemminger 1969, Greenwell 1971) registered in meta/external_theorems.json; the implication stays conditional; unchanged"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "reconstruction-theory/theories/migration/simple_line_graphs.v#KellyLegacy.whitney_line_inversion_premise": "A25 snapshot: A25 froze Kelly's Whitney inversion premise over its own frozen line construction but kept the live same_edge_deck of this family. Kept unchanged; the complete premise is Reconstruction.migration.simple_line_graphs.KellyOriginal.whitney_line_inversion_premise, over this family's frozen U11Legacy.same_edge_deck, certified through whitney_line_inversion_premise_compat.",
+    "reconstruction-theory/theories/migration/simple_line_graphs.v#ImplicationsU11Legacy.external_whitney_line_inversion_statement": "A25 snapshot: A25 froze the non-corpus external Whitney statement over its own frozen line construction but kept the live same_edge_deck of this family. Kept unchanged; the complete statement is Reconstruction.migration.simple_line_graphs.ImplicationsU11Original.external_whitney_line_inversion_statement, over this family's frozen U11Legacy.same_edge_deck, certified through external_whitney_line_inversion_statement_compat."
+  },
   "cross_module_consumers": [
     {
       "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
