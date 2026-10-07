@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X43 -- v2 strong edge-colouring row *)
 
 From GTBase Require Export base.
+From GTBase Require Import simple_line_graphs.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -11,20 +12,23 @@ Unset Printing Implicit Defensive.
 Definition x43_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
+(** Since the A25 library migration [x43_line_vertex], [x43_line_rel] and [x43_line_graph] are
+    [GTBase.simple_line_graphs]'s simple line graph (the same edge-set subtype and relation); the
+    original definitions and proofs are frozen in [Chromatic.migration.simple_line_graphs]. *)
 Definition x43_line_vertex (G : sgraph) : Type :=
-  {e : {set G} | e \in x43_edge_set G}.
+  simple_line_vertex G.
 
 Definition x43_line_rel (G : sgraph) : rel (x43_line_vertex G) :=
-  fun e f => (val e != val f) && (val e :&: val f != set0).
+  @simple_line_rel G.
 
 Lemma x43_line_rel_sym (G : sgraph) : symmetric (@x43_line_rel G).
-Proof. by move=> e f; rewrite /x43_line_rel eq_sym setIC. Qed.
+Proof. exact: simple_line_sym. Qed.
 
 Lemma x43_line_rel_irrefl (G : sgraph) : irreflexive (@x43_line_rel G).
-Proof. by move=> e; rewrite /x43_line_rel eqxx. Qed.
+Proof. exact: simple_line_irrefl. Qed.
 
 Definition x43_line_graph (G : sgraph) : sgraph :=
-  SGraph (@x43_line_rel_sym G) (@x43_line_rel_irrefl G).
+  simple_line_graph G.
 
 Definition x43_strong_edge_colourable (G : sgraph) (k : nat) : Prop :=
   χ([set: graph_power (x43_line_graph G) 2]) <= k.

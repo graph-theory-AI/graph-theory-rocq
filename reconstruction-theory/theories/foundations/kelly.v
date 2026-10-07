@@ -93,7 +93,7 @@
     grounding file, whence the [E] suffix. *)
 
 From GTBase Require Export base.
-From GTBase Require Import common.
+From GTBase Require Import common simple_line_graphs.
 From GraphTheory Require Import preliminaries bij digraph sgraph.
 From Reconstruction Require Import conjectures.U11.
 
@@ -155,59 +155,45 @@ Lemma imsetI_inj (aT rT : finType) (f : aT -> rT) :
   forall A B : {set aT}, f @: (A :&: B) = f @: A :&: f @: B.
 Proof. by move=> inj_f A B; apply: imsetI => x y _ _; exact: (inj_f x y). Qed.
 
+(** Since the A25 library migration the functoriality below is GTBase.simple_line_graphs's
+    (promoted from here: [simple_line_edge_diso], [simple_line_imsetK], [simple_line_map],
+    [simple_line_mapK], [simple_line_map_mono], [simple_line_graph_diso]); every name and type
+    is kept as a thin wrapper. *)
 Section LineDiso.
 Variables (G H : sgraph).
 Variable h : diso G H.
 
 Lemma diso_imset_edge (f : {set G}) : f \in E(G) -> h @: f \in E(H).
-Proof.
-case/edgesP => x [y] [-> xy]; rewrite imsetU1 imset_set1 in_edges.
-by rewrite (edge_diso h).
-Qed.
+Proof. exact: simple_line_edge_diso. Qed.
 
 Lemma diso_imset_edge' (f : {set H}) : f \in E(H) -> h^-1 @: f \in E(G).
-Proof.
-case/edgesP => x [y] [-> xy]; rewrite imsetU1 imset_set1 in_edges.
-by rewrite (edge_diso' h).
-Qed.
+Proof. exact: simple_line_edge_inv_diso. Qed.
 
 Lemma imset_bijK (A : {set G}) : h^-1 @: (h @: A) = A.
-Proof.
-apply/setP => x; apply/idP/idP.
-- by case/imsetP => y /imsetP[z zA ->] ->; rewrite bijK.
-- by move=> xA; rewrite -(bijK h x); exact: imset_f _ (imset_f _ xA).
-Qed.
+Proof. exact: simple_line_imsetK. Qed.
 
 Lemma imset_bijK' (A : {set H}) : h @: (h^-1 @: A) = A.
-Proof.
-apply/setP => x; apply/idP/idP.
-- by case/imsetP => y /imsetP[z zA ->] ->; rewrite bijK'.
-- by move=> xA; rewrite -(bijK' h x); exact: imset_f _ (imset_f _ xA).
-Qed.
+Proof. exact: simple_line_imset_invK. Qed.
 
 Definition sldf (a : sline_graph G) : sline_graph H :=
-  Sub (h @: val a) (diso_imset_edge (valP a)).
+  simple_line_map h a.
 
 Definition sldb (a : sline_graph H) : sline_graph G :=
-  Sub (h^-1 @: val a) (diso_imset_edge' (valP a)).
+  simple_line_unmap h a.
 
 Lemma sldfK : cancel sldf sldb.
-Proof. by move=> a; apply: val_inj; rewrite /= imset_bijK. Qed.
+Proof. exact: simple_line_mapK. Qed.
 
 Lemma sldbK : cancel sldb sldf.
-Proof. by move=> a; apply: val_inj; rewrite /= imset_bijK'. Qed.
+Proof. exact: simple_line_unmapK. Qed.
 
 Lemma sldf_mono : {mono sldf : a b / a -- b}.
-Proof.
-have inj_h : injective h := @bij_injective _ _ (diso_v h).
-move=> a b; rewrite !sline_adjE /= -(imsetI_inj inj_h).
-by rewrite (inj_eq (imset_inj inj_h)) imset_eq0.
-Qed.
+Proof. exact: simple_line_map_mono. Qed.
 
 End LineDiso.
 
 Lemma sline_diso (G H : sgraph) : G ≃ H -> sline_graph G ≃ sline_graph H.
-Proof. move=> h; exact: Diso' (@sldfK _ _ h) (@sldbK _ _ h) (@sldf_mono _ _ h). Qed.
+Proof. exact: simple_line_graph_diso. Qed.
 
 (** ============================================================================
     3.  Deleting a vertex of [sline_graph G] = the line graph of a card.
