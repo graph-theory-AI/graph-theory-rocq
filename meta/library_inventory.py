@@ -28,18 +28,22 @@ INVENTORY = META / "library_helper_inventory.json"
 POLICY = META / "faithfulness_policy.json"
 WAVES = META / "v2_statement_waves.json"
 
+# Names are ASCII identifiers, apostrophes included. A name followed by an
+# identifier character or by any non-ASCII character is unsupported: it is
+# omitted (or, for scope commands, rejected), never read as a shorter prefix.
+IDENT_END = r"(?![\w'\u0080-\U0010FFFF])"
 DECL_RE = re.compile(
     r"^\s*(?:(?:Local|Global|Polymorphic|Monomorphic|Program)\s+)*"
     r"(Definition|Let|Fixpoint|CoFixpoint|Inductive|CoInductive|Record|Variant|Class|"
     r"Instance|Lemma|Theorem|Corollary|Proposition|Fact|Remark|Example)\s+"
-    r"([A-Za-z_][A-Za-z0-9_']*)\b",
+    r"([A-Za-z_][A-Za-z0-9_']*)" + IDENT_END,
     re.M,
 )
 REPOSITORY_DECL_RE = re.compile(
     r"^\s*(?:(?:Local|Global|Polymorphic|Monomorphic|Program)\s+)*"
     r"(?:Definition|Let|Fixpoint|CoFixpoint|Inductive|CoInductive|Record|Variant|Class|"
     r"Instance|Lemma|Theorem|Corollary|Proposition|Fact|Remark|Example)\s+"
-    r"([A-Za-z_][A-Za-z0-9_']*)\b",
+    r"([A-Za-z_][A-Za-z0-9_']*)" + IDENT_END,
     re.M,
 )
 IDENT_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_']*")
@@ -310,6 +314,100 @@ def project_module(path: str, project: str) -> str:
     return expected
 
 
+MASK_RE = re.compile(r'\(\*|\*\)|"')
+COMMENT_DELIMITER_RE = re.compile(r"\(\*|\*\)")
+SCOPE_KEYWORD_RE = re.compile(r"\b(?:Module|Section|End)\b")
+SCOPE_RE = re.compile(r"(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+"
+                      r"([A-Za-z_][A-Za-z0-9_']*)" + IDENT_END)
+
+
+def scope_mask(source: str, what: str = "source") -> str:
+    """Mask nested comments and Rocq doubled-quote strings without moving offsets.
+
+    Joint scanning matters: comment delimiters inside strings do not open
+    comments, and scope words inside strings or comments are not commands.
+    """
+    result = list(source)
+    index = 0
+    while (token := MASK_RE.search(source, index)) is not None:
+        if token.group() == "*)":
+            raise ValueError(f"{what} has an unmatched comment delimiter")
+        end = token.end()
+        if token.group() == '"':
+            while (end := source.find('"', end)) >= 0 and source.startswith('""', end):
+                end += 2
+            if end < 0:
+                raise ValueError(f"{what} has an unterminated comment or string")
+            end += 1
+        else:
+            depth = 1
+            while depth:
+                delimiter = COMMENT_DELIMITER_RE.search(source, end)
+                if delimiter is None:
+                    raise ValueError(f"{what} has an unterminated comment or string")
+                depth += 1 if delimiter.group() == "(*" else -1
+                end = delimiter.end()
+        result[token.start():end] = ["\n" if c == "\n" else " " for c in source[token.start():end]]
+        index = end
+    return "".join(result)
+
+
+def scope_openers(masked: str) -> list[dict]:
+    """Every Module/Section scope of a masked source, in opening order.
+
+    Every Module/Section/End word must begin a command, so wrapped or prefixed
+    commands (Time, Redirect, attributes), source-splicing Load and names this
+    reader does not support are rejected rather than guessed. As in Rocq, End
+    closes the innermost open scope and must name it, a Module cannot open
+    inside a Section, and every scope must be closed. Typed modules and
+    functors open Module scopes; aliases (`Module M := N.`) open none.
+    """
+    if re.search(r"\bLoad\b", masked):
+        raise ValueError("source-splicing Load is unsupported")
+    openers: list[dict] = []
+    stack: list[int] = []
+    command_start = 0
+
+    def at(offset: int) -> str:
+        return "line %d" % (masked.count("\n", 0, offset) + 1)
+
+    for keyword in SCOPE_KEYWORD_RE.finditer(masked):
+        scope = SCOPE_RE.match(masked, keyword.start())
+        if scope is None:
+            raise ValueError(f"{at(keyword.start())}: unsupported Module/Section command or name")
+        while sentence_end(masked, command_start) <= scope.start():
+            command_start = sentence_end(masked, command_start)
+        if masked[command_start:scope.start()].strip():
+            raise ValueError(f"{at(keyword.start())}: wrapped scope commands are unsupported")
+        kind, label = scope.groups()
+        end = sentence_end(masked, scope.end())
+        if kind == "End":
+            if not stack or openers[stack[-1]]["label"] != label:
+                raise ValueError(f"{at(keyword.start())}: End {label} does not close the innermost open scope")
+            openers[stack.pop()]["close_start"] = scope.start()
+            continue
+        if kind != "Section":
+            if any(openers[i]["kind"] == "Section" for i in stack):
+                raise ValueError(f"{at(keyword.start())}: Module {label} opens inside a Section")
+            if masked[scope.end():end].lstrip().startswith(":="):
+                continue
+        openers.append({"kind": "Section" if kind == "Section" else "Module", "label": label,
+                        "body_start": end, "close_start": None})
+        stack.append(len(openers) - 1)
+    if stack:
+        raise ValueError(f"{openers[stack[-1]]['kind']} {openers[stack[-1]]['label']} is not closed")
+    return openers
+
+
+def enclosing_scopes(source: str, position: int) -> list[tuple[str, str]]:
+    """Module/Section scopes enclosing `position` of a source, outermost first."""
+    masked = scope_mask(source)
+    if masked[position].isspace() and not source[position].isspace():
+        raise ValueError("declaration is inside a comment or string")
+    return [(o["kind"], o["label"]) for o in scope_openers(masked)
+            if o["body_start"] <= position < o["close_start"]]
+
+
 def repository_source_records(root: Path, spec: dict) -> dict[str, dict]:
     """Validate explicit public sources, separately checking original and current.
 
@@ -349,17 +447,12 @@ def repository_source_records(root: Path, spec: dict) -> dict[str, dict]:
             if (len(matches) != 1 or matches[0].group(1) != 'Definition'
                     or 'Local' in matches[0].group(0).split()):
                 raise RegistryError(f"{qualified}: {label} source needs one top-level Definition")
-            stack = []
-            prefix = clean[:matches[0].start()]
-            for m in re.finditer(r"^\s*(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|End)\s+([\w']+)\b", prefix, re.M):
-                if m.group(1) == 'End':
-                    if stack and stack[-1] == m.group(2):
-                        stack.pop()
-                elif not prefix[m.end():sentence_end(prefix, m.end())].lstrip().startswith(':='):
-                    # Typed modules and functors open scopes too. Module aliases
-                    # do not, and Sections deliberately leave a public Definition.
-                    stack.append(m.group(2))
-            if stack:
+            try:
+                scopes = enclosing_scopes(text, matches[0].start(2))
+            except ValueError as exc:
+                raise RegistryError(f"{qualified}: {label} malformed scope source: {exc}") from None
+            # Sections deliberately leave a public Definition; any Module does not.
+            if any(kind == 'Module' for kind, _ in scopes):
                 raise RegistryError(f"{qualified}: {label} nested-module source is unsupported")
             parsed, _ = parse_source(text, path, module, set())
             record = next(record for record in parsed if record['name'] == name)

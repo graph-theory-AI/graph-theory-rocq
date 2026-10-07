@@ -1259,6 +1259,109 @@ class PublicAdditionalStatementTests(unittest.TestCase):
         self.assertTrue(REPORT.check_kernel(self.spec))
 
 
+# Scope-ownership fixtures shared by RepositorySourceTests and the identifier/scope test classes after it
+# (primed-identifier and scope-ownership correction).
+INV = REPORT.INV
+LIVE = "Definition local_helper (n : nat) : Prop := canonical n.\n"
+REQUIRE = "From GTBase Require Import common.\n"
+SIG = "Module Type Sig'.\nEnd Sig'.\n"
+NESTED, MALFORMED = "nested-module", "malformed scope"
+# (label, text before the enrolled Definition, text after it, expected RegistryError fragment or None = accepted).
+SCOPE_CASES = (
+    ("primed module, same-named section inside", "Module N'.\nSection N.\nEnd N.\n", "End N'.\n", "nested-module"),
+    ("unprimed module, primed section inside", "Module N.\nSection N'.\nEnd N'.\n", "End N.\n", "nested-module"),
+    ("typed primed module", "Module Type Sig'.\nEnd Sig'.\nModule N' : Sig'.\nSection N.\nEnd N.\n", "End N'.\n",
+     "nested-module"),
+    ("primed functor", "Module Type Sig'.\nEnd Sig'.\nModule N' (X : Sig').\nSection N.\nEnd N.\n", "End N'.\n",
+     "nested-module"),
+    ("primed module type", "Module Type N'.\nSection N.\nEnd N.\n", "End N'.\n", "nested-module"),
+    ("primed module import", "Module Import N'.\nSection N.\nEnd N.\n", "End N'.\n", "nested-module"),
+    ("nested modules, balanced inner", "Module N'.\nModule N.\nEnd N.\n", "End N'.\n", "nested-module"),
+    ("primed alias before", "Module N' := Nat.\n", "", None),
+    ("balanced primed module before", "Module N'.\nEnd N'.\n", "", None),
+    ("balanced primed module with same-named section", "Module N'.\nSection N.\nEnd N.\nEnd N'.\n", "", None),
+    ("balanced nested similar modules", "Module N.\nModule N'.\nEnd N'.\nEnd N.\n", "", None),
+    ("balanced typed and functor modules", "Module Type Sig'.\nEnd Sig'.\nModule N' : Sig'.\nEnd N'.\n"
+     "Module F' (X : Sig').\nEnd F'.\n", "", None),
+    ("public primed section", "Section S'.\n", "End S'.\n", None),
+)
+# (id, text before the enrolled Definition, text after it, expected: None = accepted, NESTED or MALFORMED,
+#  scopes enclosing the Definition, or the enclosing_scopes error fragment for MALFORMED rows).
+SCOPE_FIXTURES = (
+    ("acc_top", "", "", None, []),
+    ("acc_alias", "Module N' := Nat.\n", "", None, []),
+    ("acc_functor_application_alias",
+     SIG + "Module M'.\nEnd M'.\nModule F' (X : Sig').\nEnd F'.\nModule N' := F' M'.\n", "", None, []),
+    ("acc_balanced_primed_module", "Module N'.\nEnd N'.\n", "", None, []),
+    ("acc_balanced_primed_module_same_named_section", "Module N'.\nSection N.\nEnd N.\nEnd N'.\n", "", None, []),
+    ("acc_balanced_nested_similar_modules", "Module N.\nModule N'.\nEnd N'.\nEnd N.\n", "", None, []),
+    ("acc_balanced_typed_and_functor", SIG + "Module N' : Sig'.\nEnd N'.\nModule F' (X : Sig').\nEnd F'.\n", "",
+     None, []),
+    ("acc_public_primed_section", "Section S'.\n", "End S'.\n", None, [("Section", "S'")]),
+    ("acc_nested_same_name_sections", "Section N.\nSection N.\nEnd N.\n", "End N.\n", None, [("Section", "N")]),
+    ("acc_inside_nested_sections", "Section N.\nSection N'.\n", "End N'.\nEnd N.\n", None,
+     [("Section", "N"), ("Section", "N'")]),
+    ("acc_section_then_same_name_module", "Section N.\n", "End N.\nModule N.\nEnd N.\n", None, [("Section", "N")]),
+    ("acc_module_after_definition", "", "Module N.\nEnd N.\n", None, []),
+    ("nest_primed_module_same_named_section", "Module N'.\nSection N.\nEnd N.\n", "End N'.\n", NESTED,
+     [("Module", "N'")]),
+    ("nest_module_primed_section", "Module N.\nSection N'.\nEnd N'.\n", "End N.\n", NESTED, [("Module", "N")]),
+    ("nest_typed_primed_module", SIG + "Module N' : Sig'.\nSection N.\nEnd N.\n", "End N'.\n", NESTED,
+     [("Module", "N'")]),
+    ("nest_primed_functor", SIG + "Module F' (X : Sig').\nSection N.\nEnd N.\n", "End F'.\n", NESTED,
+     [("Module", "F'")]),
+    ("nest_primed_module_type", "Module Type N'.\nSection N.\nEnd N.\n", "End N'.\n", NESTED, [("Module", "N'")]),
+    ("nest_primed_module_import", "Module Import N'.\nSection N.\nEnd N.\n", "End N'.\n", NESTED,
+     [("Module", "N'")]),
+    ("nest_balanced_inner_module", "Module N'.\nModule N.\nEnd N.\n", "End N'.\n", NESTED, [("Module", "N'")]),
+    ("nest_same_name_section", "Module N.\nSection N.\nEnd N.\n", "End N.\n", NESTED, [("Module", "N")]),
+    ("nest_same_name_primed_section", "Module N'.\nSection N'.\nEnd N'.\n", "End N'.\n", NESTED,
+     [("Module", "N'")]),
+    ("nest_inside_same_name_section", "Module N.\nSection N.\n", "End N.\nEnd N.\n", NESTED,
+     [("Module", "N"), ("Section", "N")]),
+    ("nest_same_name_modules", "Module N.\nModule N.\nEnd N.\n", "End N.\n", NESTED, [("Module", "N")]),
+    ("nest_same_name_section_in_module_type", "Module Type N.\nSection N.\nEnd N.\n", "End N.\n", NESTED,
+     [("Module", "N")]),
+    ("nest_inside_section_inside_module", "Module N.\nSection S.\n", "End S.\nEnd N.\n", NESTED,
+     [("Module", "N"), ("Section", "S")]),
+    ("mal_end_without_open", "End N.\n", "", MALFORMED, "End N does not close"),
+    ("mal_mismatched_end", "Module N.\nEnd M.\n", "", MALFORMED, "End M does not close"),
+    ("mal_crossing_scopes", "Module N.\nSection S.\nEnd N.\nEnd S.\n", "", MALFORMED, "End N does not close"),
+    ("mal_unclosed_module_containing", "Module N.\n", "", MALFORMED, "Module N is not closed"),
+    ("mal_unclosed_section_containing", "Section S.\n", "", MALFORMED, "Section S is not closed"),
+    ("mal_unclosed_after_definition", "", "Module N.\n", MALFORMED, "Module N is not closed"),
+    ("mal_module_inside_section", "Section S.\nModule N.\nEnd N.\nEnd S.\n", "", MALFORMED,
+     "Module N opens inside a Section"),
+    ("mal_same_name_module_inside_section", "Section N.\nModule N.\nEnd N.\nEnd N.\n", "", MALFORMED,
+     "Module N opens inside a Section"),
+    # Legal Rocq (legality probe A13), but `Module N : T := M.` is not recognised as an alias: fail-closed.
+    ("unsupported_typed_alias", SIG + "Module M'.\nEnd M'.\nModule N' : Sig' := M'.\n", "", MALFORMED,
+     "Module N' is not closed"),
+)
+ORIGINAL_IDS = ("nest_primed_module_same_named_section", "nest_same_name_section", "acc_nested_same_name_sections",
+                "mal_crossing_scopes")
+# (id, text before the enrolled Definition, text after it, expected: None = accepted, NESTED or MALFORMED + fragment).
+R4_FIXTURES = (
+    ("same_line_open_and_close", "Check nat. Module N.\n", "Check nat. End N.\n", NESTED),
+    ("same_line_open_only", "Check nat. Module N.\n", "End N.\n", NESTED),
+    ("same_line_after_open", "Module N. Check nat.\n", "End N. Check nat.\n", NESTED),
+    ("strings_fake_scopes", 'Module N.\nDefinition s1 := "\nEnd N.\n".\n',
+     'Definition s2 := "\nModule N.\n".\nEnd N.\n', NESTED),
+    ("comment_fakes_scopes", "Module N.\n(* End N. *)\n", "(* Module N. *)\nEnd N.\n", NESTED),
+    ("string_without_scope_words", 'Definition s := "plain text".\n', "", None),
+    ("notation_string_with_end", "Notation \"x 'End'\" := (x) (at level 0).\n", "", None),
+    ("comment_control", "(* Module N. *)\n", "", None),
+    ("load_splice", "Load Other.\n", "", MALFORMED + ".*Load"),
+    ("time_wrapper", "Time Module N.\n", "End N.\n", MALFORMED + ".*wrapped"),
+    ("redirect_wrapper", 'Redirect "out" Module N.\n', "End N.\n", MALFORMED + ".*wrapped"),
+    ("attribute_prefix", "#[local] Module N.\n", "End N.\n", MALFORMED + ".*wrapped"),
+    ("declare_module_in_type", SIG + "Module Type T.\nDeclare Module N : Sig'.\nEnd T.\n", "", MALFORMED + ".*wrapped"),
+    ("non_ascii_scope_name", "Module N\u03b1.\n", "End N\u03b1.\n", MALFORMED + ".*unsupported Module/Section"),
+    ("combining_mark_scope_name", "Module Ne\u0301.\n", "End Ne\u0301.\n", MALFORMED + ".*unsupported Module/Section"),
+    ("alias_inside_section", "Section S.\nModule N := Nat.\nEnd S.\n", "", MALFORMED + ".*inside a Section"),
+)
+
+
 class RepositorySourceTests(unittest.TestCase):
     """A real public source -> foundation intermediary -> two corpus rows."""
 
@@ -1673,6 +1776,294 @@ class RepositorySourceTests(unittest.TestCase):
         self.assertEqual(self.failures(), [])
         self.compile_fixture()
         self.assertTrue(REPORT.check_kernel(self.spec))
+
+    def pin_original(self, text):
+        live = (self.root / self.source).read_text()
+        self.write(self.source, text)
+        self.pin["commit"] = self.commit()
+        self.pin["blob"] = self.command("git", "rev-parse", self.pin["commit"] + ":" + self.source)
+        self.write(self.source, live)
+
+    def assert_outcome(self, label, expected):
+        if expected is None:
+            self.assertEqual(set(self.records()), {self.helper})
+        else:
+            with self.assertRaisesRegex(REPORT.RegistryError, f"{label} {expected}"):
+                self.records()
+
+    def rebaseline_statement_file(self, path, text):
+        live_source = (self.root / self.source).read_text()
+        certificate = (self.root / self.certificate).read_text()
+        self.write(self.source, self.original)
+        (self.root / self.certificate).unlink()
+        self.write(path, text)
+        base = self.commit()
+        self.spec["baseline_commit"] = base
+        self.pin["commit"] = base
+        self.pin["blob"] = self.command("git", "rev-parse", base + ":" + self.source)
+        self.write_registry()
+        self.write(self.source, live_source)
+        self.write(self.certificate, certificate)
+
+    def test_primed_scope_names_decide_top_level_enrollment(self):
+        for label, before, after, expected in SCOPE_CASES:
+            with self.subTest(label=label, source="current"):
+                self.write(self.source, REQUIRE + before + LIVE + after)
+                if expected:
+                    with self.assertRaisesRegex(REPORT.RegistryError, "current " + expected):
+                        self.records()
+                else:
+                    self.assertEqual(set(self.records()), {self.helper})
+        baseline = dict(self.pin)
+        for label, before, after, expected in SCOPE_CASES[:2]:
+            with self.subTest(label=label, source="original"):
+                self.write(self.source, REQUIRE + LIVE)
+                self.pin.update(baseline)
+                self.pin_original(before + self.original + after)
+                with self.assertRaisesRegex(REPORT.RegistryError, "original " + expected):
+                    self.records()
+
+    def test_primed_declaration_is_not_enrolled_under_unprimed_name(self):
+        primed = LIVE.replace("local_helper", "local_helper'")
+        self.write(self.source, REQUIRE + primed)
+        with self.assertRaisesRegex(REPORT.RegistryError, "current source needs one top-level Definition"):
+            self.records()
+        self.write(self.source, REQUIRE + LIVE)
+        self.pin_original(self.original.replace("local_helper", "local_helper'"))
+        with self.assertRaisesRegex(REPORT.RegistryError, "original source needs one top-level Definition"):
+            self.records()
+
+    def test_primed_twin_does_not_block_exact_enrollment(self):
+        self.write(self.source, REQUIRE + LIVE + "Definition local_helper' (n : nat) : Prop := local_helper n.\n")
+        records = self.records()
+        self.assertEqual(set(records), {self.helper})
+        self.assertEqual(records[self.helper]["name"], "local_helper")
+
+    def test_registry_declaration_names_keep_apostrophes(self):
+        compat = self.module + ".helper_compat"
+        text = (self.root / self.certificate).read_text()
+        self.write(self.certificate, text.replace("Lemma helper_compat n", "Lemma helper_compat' n"))
+        _, errors = REPORT.INV.validate_registry({"helpers": []})
+        self.assertTrue(any("compatibility declarations do not exist" in e and compat in e for e in errors), errors)
+        self.primitive["compatibility_theorems"] = [compat + "'" if n == compat else n
+                                                    for n in self.primitive["compatibility_theorems"]]
+        self.write_registry()
+        _, errors = REPORT.INV.validate_registry({"helpers": []})
+        self.assertFalse(any("compatibility declarations do not exist" in e for e in errors), errors)
+
+    def test_statement_doc_check_uses_the_statement_block_not_a_primed_twin(self):
+        statement = self.statements[0]
+        twin_doc = "(** Twin doc. *)\nDefinition test0_statement' : Prop := True.\n"
+        own_doc = "(** Corpus row: test0\n    English statement: reflexivity. *)\n"
+        body = "Definition test0_statement : Prop := forall n, intermediary.middle n.\n"
+        head = "From Chromatic.foundations Require Import intermediary.\n"
+        self.rebaseline_statement_file(statement["path"], head + twin_doc + own_doc + body)
+        check = statement["qualified"] + ": doc block unchanged since baseline"
+        self.assertNotIn(check, self.failures())
+        for live, doc_failure in ((head + twin_doc + body, True),
+                                  (head + twin_doc.replace("Twin doc", "Edited twin doc") + own_doc + body, False)):
+            with self.subTest(live=live):
+                self.write(statement["path"], live)
+                self.assertEqual(check in self.failures(), doc_failure)
+
+    def test_scope_tracking_decides_top_level_enrollment(self):
+        for ident, before, after, expected, _ in SCOPE_FIXTURES:
+            with self.subTest(ident=ident, source="current"):
+                self.write(self.source, REQUIRE + before + LIVE + after)
+                self.assert_outcome("current", expected)
+        self.write(self.source, REQUIRE + LIVE)
+        baseline = dict(self.pin)
+        for ident, before, after, expected, _ in SCOPE_FIXTURES:
+            if ident in ORIGINAL_IDS:
+                with self.subTest(ident=ident, source="original"):
+                    self.pin.update(baseline)
+                    self.pin_original(before + self.original + after)
+                    self.assert_outcome("original", expected)
+
+    def test_r4_scope_ownership(self):
+        for ident, before, after, expected in R4_FIXTURES:
+            with self.subTest(ident=ident, source="current"):
+                self.write(self.source, REQUIRE + before + LIVE + after)
+                self.assert_outcome("current", expected)
+        self.write(self.source, REQUIRE + LIVE)
+        baseline = dict(self.pin)
+        for ident, before, after, expected in R4_FIXTURES:
+            if ident in ("same_line_open_and_close", "strings_fake_scopes", "load_splice"):
+                with self.subTest(ident=ident, source="original"):
+                    self.pin.update(baseline)
+                    self.pin_original(before + self.original + after)
+                    self.assert_outcome("original", expected)
+
+    def test_declaration_only_inside_a_string_is_not_enrolled(self):
+        self.write(self.source, REQUIRE + 'Definition s := "\n' + LIVE + '".\n')
+        with self.assertRaisesRegex(REPORT.RegistryError, "current malformed scope source: .*inside a comment or string"):
+            self.records()
+
+
+class PrimedIdentifierTests(unittest.TestCase):
+    """Sites 1-3 (declaration readers) and 4 (doc ownership), at source level."""
+
+    def names(self, src):
+        clean = REPORT.INV.strip_comments(src)
+        return ([d["name"] for d in REPORT.declarations(src)],
+                [m.group(2) for m in REPORT.INV.DECL_RE.finditer(clean)],
+                [m.group(1) for m in REPORT.INV.REPOSITORY_DECL_RE.finditer(clean)])
+
+    def test_declaration_readers_keep_apostrophes(self):
+        for src, expected in (
+                ("Definition f' (n : nat) : nat := n.\n", ["f'"]),
+                ("Lemma g'' : True.\nProof. exact I. Qed.\n", ["g''"]),
+                ("Definition h'k : nat := 0.\n", ["h'k"]),
+                ("Definition t : nat := 0.\nDefinition t' : nat := t.\n", ["t", "t'"]),
+                ("Local Definition w' : nat := 0.\nProgram Definition z'' : nat := 0.\n", ["w'", "z''"]),
+                ("Definition a'b'\n  : nat := 0.\nDefinition c'(n : nat) := n.\n", ["a'b'", "c'"]),
+                ("Definition plain : nat := 0.\nLemma plain_le : plain <= plain.\nProof. done. Qed.\n",
+                 ["plain", "plain_le"])):
+            with self.subTest(src=src):
+                self.assertEqual(self.names(src), (expected, expected, expected))
+
+    def test_unsupported_unicode_names_are_omitted_not_truncated(self):
+        # The readers support ASCII identifiers with apostrophes only. A name with a non-ASCII letter is not
+        # supported: it is omitted, never reported under a shorter ASCII prefix. This is not Unicode support.
+        for src in ("Definition fooα : nat := 0.\n", "Definition p'α : nat := 0.\n",
+                    "Definition a'bé : nat := 0.\n"):
+            with self.subTest(src=src):
+                self.assertEqual(self.names(src), ([], [], []))
+
+    def test_primed_twins_and_module_qualification(self):
+        twins = "Definition t : nat := 0.\nDefinition t' : nat := t.\nLemma t_le : t <= t'.\nProof. done. Qed.\n"
+        self.assertEqual(REPORT.find_decl(twins, "t")["text"], "Definition t : nat := 0.")
+        self.assertEqual(REPORT.find_decl(twins, "t'")["text"], "Definition t' : nat := t.")
+        records, _ = REPORT.INV.parse_source(twins, "base/theories/conjectures/Fx.v", "GTBase.conjectures.Fx", set())
+        self.assertEqual([(r["name"], r["local_dependencies"]) for r in records],
+                         [("t", []), ("t'", ["t"]), ("t_le", ["t", "t'"])])
+        self.assertEqual(records[1]["signature"], ": nat")
+        scoped = "Module M.\nDefinition u' : nat := 0.\nEnd M.\nDefinition u' : nat := 1.\n"
+        self.assertEqual([(d["module"], d["name"]) for d in REPORT.declarations(scoped)],
+                         [("M", "u'"), (None, "u'")])
+        self.assertEqual(REPORT.find_decl(scoped, "u'", "M")["text"], "Definition u' : nat := 0.")
+        self.assertEqual(REPORT.find_decl(scoped, "u'")["text"], "Definition u' : nat := 1.")
+        ambiguous = "Module A.\nDefinition v' : nat := 0.\nEnd A.\nModule B.\nDefinition v' : nat := 1.\nEnd B.\n"
+        with self.assertRaisesRegex(ValueError, "found 0"):
+            REPORT.find_decl(ambiguous, "v'")
+        self.assertEqual(REPORT.find_decl(ambiguous, "v'", "B")["text"], "Definition v' : nat := 1.")
+
+    def test_doc_block_belongs_to_the_exact_name(self):
+        f = "(** Doc f. *)\nDefinition f : Prop := True.\n"
+        fp = "(** Doc f'. *)\nDefinition f' : Prop := True.\n"
+        fpp = "(** Doc f''. *)\nDefinition f'' : Prop := True.\n"
+        for src in (f + fp, fp + f, fpp + fp + f, f + fpp + fp):
+            with self.subTest(src=src):
+                self.assertEqual(REPORT.doc_block(src, "f"), "(** Doc f. *)")
+                self.assertEqual(REPORT.doc_block(src, "f'"), "(** Doc f'. *)")
+        # Never select a primed twin's block for an undocumented or absent unprimed name.
+        for src in (fp, fp + "Definition f : Prop := True.\n", fpp + fp):
+            with self.subTest(src=src):
+                self.assertIsNone(REPORT.doc_block(src, "f"))
+        self.assertIsNone(REPORT.doc_block(fpp, "f'"))
+
+
+class EnclosingScopeTests(unittest.TestCase):
+    """The scope helper itself, on comment-stripped text, at the enrolled Definition's position."""
+
+    def test_enclosing_scopes_of_fixtures(self):
+        for ident, before, after, expected, scopes in SCOPE_FIXTURES:
+            with self.subTest(ident=ident):
+                clean = REPORT.INV.strip_comments(before + LIVE + after)
+                if expected == MALFORMED:
+                    with self.assertRaisesRegex(ValueError, scopes):
+                        REPORT.INV.enclosing_scopes(clean, len(before))
+                else:
+                    self.assertEqual(REPORT.INV.enclosing_scopes(clean, len(before)), scopes)
+
+    def test_comments_do_not_open_or_close_scopes(self):
+        src = "(* Module N.\nEnd N. *)\nSection S.\n(* End S. *)\n" + LIVE + "End S.\n"
+        clean = REPORT.INV.strip_comments(src)
+        self.assertEqual(REPORT.INV.enclosing_scopes(clean, src.index("Definition")), [("Section", "S")])
+
+
+class ScopeHelperTests(unittest.TestCase):
+    """library_inventory.scope_mask / scope_openers / enclosing_scopes."""
+
+    def test_scope_mask_masks_comments_and_strings_jointly(self):
+        source = '(* a " (* b *) *)\nDefinition s := "(* End ""N"" *)".\nModule N.\n'
+        masked = INV.scope_mask(source)
+        self.assertEqual(len(masked), len(source))
+        self.assertEqual([i for i, c in enumerate(masked) if c == "\n"], [i for i, c in enumerate(source) if c == "\n"])
+        self.assertIn("Module N.", masked)
+        self.assertNotIn("End", masked)
+        self.assertNotIn("(*", masked)
+        for malformed in ('Definition s := "open', "(* open", "*)", '"a"" b'):
+            with self.subTest(malformed=malformed), self.assertRaises(ValueError):
+                INV.scope_mask(malformed)
+        self.assertEqual(REPORT.statement_ownership_text(source), masked)
+
+    def test_scope_openers_parse_same_line_commands_and_reject_wrapped_ones(self):
+        openers = INV.scope_openers(INV.scope_mask("Check nat. Module N.\nSection S.\nEnd S. End N.\n"))
+        self.assertEqual([(o["kind"], o["label"]) for o in openers], [("Module", "N"), ("Section", "S")])
+        for source, fragment in (("Time Module N.\nEnd N.\n", "wrapped"), ("Load X.\n", "Load"),
+                                 ("Module N.\nEnd M.\n", "does not close"), ("End N.\n", "does not close"),
+                                 ("Module N.\n", "not closed"), ("Section S.\nModule N.\nEnd N.\nEnd S.\n", "inside a Section"),
+                                 ("Module N\u03b1.\nEnd N\u03b1.\n", "unsupported")):
+            with self.subTest(source=source), self.assertRaisesRegex(ValueError, fragment):
+                INV.scope_openers(INV.scope_mask(source))
+
+    def test_enclosing_scopes_rejects_positions_inside_strings(self):
+        source = 'Definition s := "\n' + LIVE + '".\n'
+        with self.assertRaisesRegex(ValueError, "inside a comment or string"):
+            INV.enclosing_scopes(source, source.index("local_helper"))
+
+
+class DeclarationScopeTests(unittest.TestCase):
+    """migration_report.declarations: dotted module attribution through the shared helper."""
+
+    def modules(self, src):
+        return [(d["module"], d["name"]) for d in REPORT.declarations(src)]
+
+    def test_module_attribution(self):
+        for src, expected in (
+                ("Module N.\nSection N.\nEnd N.\nDefinition f := 0.\nEnd N.\n", [("N", "f")]),
+                ("Module A.\nModule B.\nDefinition g := 0.\nEnd B.\nDefinition g2 := 0.\nEnd A.\n",
+                 [("A.B", "g"), ("A", "g2")]),
+                ("Module Import L.\nDefinition h := 0.\nEnd L.\n", [("L", "h")]),
+                ("Module Type S.\nEnd S.\nModule L : S.\nDefinition k := 0.\nEnd L.\n", [("L", "k")]),
+                ("Module Type S.\nEnd S.\nModule F (X : S).\nDefinition p := 0.\nEnd F.\n", [("F", "p")]),
+                ("Section S.\nDefinition q := 0.\nEnd S.\n", [(None, "q")]),
+                ("Module M := Nat.\nDefinition r := 0.\n", [(None, "r")]),
+                ("Check nat. Module N.\nDefinition s := 0.\nEnd N.\n", [("N", "s")]),
+                ('Module N.\nDefinition s1 := "\nEnd N.\n".\nDefinition t := 0.\nEnd N.\n', [("N", "s1"), ("N", "t")]),
+                ("(* c *)\nModule Legacy.\nDefinition f (G : sgraph) : Prop :=\n  g G. (* x. *)\nEnd Legacy.\n"
+                 "Definition g (G : sgraph) : Prop := True.\n", [("Legacy", "f"), (None, "g")])):
+            with self.subTest(src=src):
+                self.assertEqual(self.modules(src), expected)
+
+    def test_nested_declarations_are_not_top_level(self):
+        src = "Module N.\nSection N.\nEnd N.\nDefinition f := 0.\nEnd N.\nModule A.\nModule B.\nDefinition g := 0.\nEnd B.\nEnd A.\n"
+        for name in ("f", "g"):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "found 0"):
+                REPORT.find_decl(src, name)
+        self.assertEqual(REPORT.find_decl(src, "g", "A.B")["text"], "Definition g := 0.")
+        self.assertEqual(REPORT.find_decl(src, "f", "N")["text"], "Definition f := 0.")
+
+    def test_unsupported_structure_raises(self):
+        for src, fragment in (("Load X.\nDefinition f := 0.\n", "Load"),
+                              ("Time Module N.\nDefinition f := 0.\nEnd N.\n", "wrapped"),
+                              ("Module N.\nDefinition f := 0.\n", "not closed"),
+                              ('Definition s := "\nDefinition f := 0.\n".\n', "inside a string")):
+            with self.subTest(src=src), self.assertRaisesRegex(ValueError, fragment):
+                REPORT.declarations(src)
+
+    def test_ascii_only_names_are_omitted_not_truncated(self):
+        # Not Unicode support: names with a non-ASCII continuation (precomposed, combining or a prime symbol)
+        # are omitted by every reader, never reported under a shorter ASCII prefix.
+        for src in ("Definition fooe\u0301 := 0.\n", "Definition f\u2032 := 0.\n", "Definition p'\u03b1 := 0.\n",
+                    "Definition x\u2080 := 0.\n"):
+            with self.subTest(src=src):
+                clean = INV.strip_comments(src)
+                self.assertEqual([d["name"] for d in REPORT.declarations(src)], [])
+                self.assertEqual([m.group(2) for m in INV.DECL_RE.finditer(clean)], [])
+                self.assertEqual([m.group(1) for m in INV.REPOSITORY_DECL_RE.finditer(clean)], [])
+        self.assertIsNone(REPORT.doc_block("(** d *)\nDefinition fe\u0301 := 0.\n", "fe"))
 
 
 class ClassicalSourceTests(unittest.TestCase):

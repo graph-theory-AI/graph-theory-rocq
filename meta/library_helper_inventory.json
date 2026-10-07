@@ -885,7 +885,7 @@
         "Digraph.conjectures.two_extremal_hajos.pt_ac_A",
         "Digraph.conjectures.two_extremal_hajos.pt_ac_B",
         "Digraph.conjectures.two_extremal_hajos.pt_edges_split",
-        "Digraph.conjectures.two_extremal_hajos.ptree_ind",
+        "Digraph.conjectures.two_extremal_hajos.ptree_ind'",
         "Digraph.conjectures.two_extremal_hajos.size_pt_leafBpar",
         "Digraph.conjectures.unvd.unavoidableP",
         "Extremal.conjectures.D2pr.srel_irr",
@@ -27963,7 +27963,7 @@
         "Digraph.conjectures.two_extremal_hajos.pt_nA",
         "Digraph.conjectures.two_extremal_hajos.pt_nB",
         "Digraph.conjectures.two_extremal_hajos.pt_nleaves",
-        "Digraph.conjectures.two_extremal_hajos.ptree_ind",
+        "Digraph.conjectures.two_extremal_hajos.ptree_ind'",
         "Digraph.conjectures.two_extremal_hajos.realises_Eulerian",
         "Digraph.conjectures.two_extremal_hajos.realises_digonG_forest",
         "Digraph.conjectures.two_extremal_hajos.realises_loopless",
@@ -28041,14 +28041,14 @@
       "local_dependencies": [
         "ptree"
       ],
-      "name": "ptree_ind",
-      "normalized_name": "ptree_ind",
+      "name": "ptree_ind'",
+      "normalized_name": "ptree_ind'",
       "package": "digraph-theory",
       "path": "digraph-theory/theories/conjectures/two_extremal_hajos.v",
       "phase": null,
-      "qualified_name": "Digraph.conjectures.two_extremal_hajos.ptree_ind",
-      "signature": "' (P : ptree -> Prop) : (forall ch, foldr (fun p acc => P p.2 /\\ acc) True ch -> P (Node ch)) -> forall t, P t",
-      "signature_shape_hash": "3b3b4d2684a87e815481b4ed238f9ed879322b8e60d762c7ff0d9463799a683f"
+      "qualified_name": "Digraph.conjectures.two_extremal_hajos.ptree_ind'",
+      "signature": "(P : ptree -> Prop) : (forall ch, foldr (fun p acc => P p.2 /\\ acc) True ch -> P (Node ch)) -> forall t, P t",
+      "signature_shape_hash": "49c6b238cb77006381df02098f87df4c54ffbc7f68251f54c02b74ad7ad3e777"
     },
     {
       "body_hash": "5c0354d62af14045348aac98da31081f1f3713a1d15092013b99f06fa0d0d2ce",
