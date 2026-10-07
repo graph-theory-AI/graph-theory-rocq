@@ -89,10 +89,9 @@ DECL_KEYWORDS = (
 )
 DECL_RE = re.compile(
     rf"^\s*(?:(?:Local|Global|Polymorphic|Monomorphic|Program)\s+)*"
-    rf"(?:{DECL_KEYWORDS})\s+({IDENT})\b",
+    rf"(?:{DECL_KEYWORDS})\s+({IDENT})" + INV.IDENT_END,
     re.M,
 )
-MODULE_RE = re.compile(rf"^\s*Module\s+({IDENT})\s*\.", re.M)
 SKIP_PREFIXES = ("_assum_", "_faith_", "scratch_", "gcheck")
 QUALIFIED_IDENT_RE = re.compile(rf"(?<![A-Za-z0-9_'.]){IDENT}(?:\.{IDENT})*(?![A-Za-z0-9_'])")
 STATEMENT_KINDS = frozenset({"statement", "original-statement"})
@@ -427,19 +426,12 @@ class ProviderContext:
                 for path, reason in sorted(self.fallbacks)]
 
 
-def module_spans(clean: str) -> list[tuple[str, int, int]]:
-    """(name, start, end) of every non-nested `Module M. ... End M.` block."""
-    spans = []
-    for match in MODULE_RE.finditer(clean):
-        name = match.group(1)
-        end = re.compile(rf"^\s*End\s+{re.escape(name)}\s*\.", re.M).search(clean, match.end())
-        if end:
-            spans.append((name, match.start(), end.end()))
-    return spans
-
-
 def declarations(src: str) -> list[dict]:
-    """Every declaration of a file: name, enclosing module, normalized text, line."""
+    """Every declaration of a file: name, enclosing module, normalized text, line.
+
+    The module is the dotted path of the enclosing Modules (Sections leave no
+    trace), or None at top level. Unsupported scope structure raises.
+    """
     # Callers may modify their result; cached data contains immutable scalars.
     return [dict(zip(("name", "module", "text", "line"), row))
             for row in _declarations(src)]
@@ -448,11 +440,16 @@ def declarations(src: str) -> list[dict]:
 @lru_cache(maxsize=2048)
 def _declarations(src: str) -> tuple[tuple, ...]:
     clean = INV.strip_comments(src)
-    spans = module_spans(clean)
+    masked = INV.scope_mask(src)
+    modules = [o for o in INV.scope_openers(masked) if o["kind"] == "Module"]
     out = []
     for match in DECL_RE.finditer(clean):
         start = clean.rfind("\n", 0, match.start(1)) + 1
-        module = next((n for n, s, e in spans if s <= match.start() < e), None)
+        if masked[match.start(1)].isspace():
+            line = clean.count("\n", 0, match.start(1)) + 1
+            raise ValueError(f"declaration {match.group(1)} at line {line} is inside a string")
+        module = ".".join(o["label"] for o in modules
+                          if o["body_start"] <= match.start(1) < o["close_start"]) or None
         text = INV.normalize_space(clean[start:INV.sentence_end(clean, start)])
         out.append((match.group(1), module, text,
                     clean.count("\n", 0, match.start(1)) + 1))
@@ -511,7 +508,7 @@ def inventory_hash(commit: str, qualified: str) -> str | None:
 
 def doc_block(src: str, name: str) -> str | None:
     """Raw text of the comment that immediately precedes `Definition name`."""
-    match = re.search(rf"^Definition\s+{re.escape(name)}\b", src, re.M)
+    match = re.search(rf"^Definition\s+{re.escape(name)}" + INV.IDENT_END, src, re.M)
     if not match:
         return None
     head = src[:match.start()].rstrip()
@@ -559,43 +556,11 @@ def additional_statement_names(spec: dict) -> set[str]:
 def statement_ownership_text(source: str) -> str:
     """Mask nested comments and Rocq doubled-quote strings without moving offsets.
 
-    This narrow enrollment lexer intentionally does not change ordinary family
-    parsing. Joint scanning matters: comment delimiters inside strings must not
-    hide real scope commands, and scope words in strings must not close scopes.
+    The enrollment lexer is shared with declaration scope attribution. Joint
+    scanning matters: comment delimiters inside strings must not hide real
+    scope commands, and scope words in strings must not close scopes.
     """
-    result = list(source)
-    depth, quoted, index = 0, False, 0
-    while index < len(source):
-        width = 1
-        if depth:
-            if source.startswith("(*", index):
-                depth += 1
-                width = 2
-            elif source.startswith("*)", index):
-                depth -= 1
-                width = 2
-        elif quoted:
-            if source.startswith('""', index):
-                width = 2
-            elif source[index] == '"':
-                quoted = False
-        elif source.startswith("(*", index):
-            depth = 1
-            width = 2
-        elif source[index] == '"':
-            quoted = True
-        elif source.startswith("*)", index):
-            raise ValueError("additional statement has an unmatched comment delimiter")
-        else:
-            index += 1
-            continue
-        for offset in range(index, index + width):
-            if source[offset] != "\n":
-                result[offset] = " "
-        index += width
-    if depth or quoted:
-        raise ValueError("additional statement has an unterminated comment or string")
-    return "".join(result)
+    return INV.scope_mask(source, "additional statement")
 
 
 def additional_statement_path(qualified: str) -> str:
@@ -685,7 +650,7 @@ def validate_additional_statements(spec: dict, rows_base: dict, rows_now: dict) 
             # command on the same line. Scan conservatively: ambiguous command
             # text must fail closed rather than hide an opener behind a wrapper.
             scope_keywords = re.compile(r"\b(?:Module|Section|End)\b")
-            scopes = re.compile(rf"(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})(?![\w'])")
+            scopes = re.compile(rf"(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})" + INV.IDENT_END)
             command_start = 0
             for keyword in scope_keywords.finditer(prefix):
                 scope = scopes.match(prefix, keyword.start())
@@ -777,7 +742,7 @@ def scope_tree(clean: str, what: str) -> list[dict]:
     if re.search(r"\bLoad\b", clean):
         raise ValueError(f"{what}: parametric enrollment cannot follow source-splicing Load")
     scope_keywords = re.compile(r"\b(?:Module|Section|End)\b")
-    scopes = re.compile(rf"(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})(?![\w'])")
+    scopes = re.compile(rf"(Module(?:\s+Type)?(?:\s+(?:Import|Export))?|Section|End)\s+({IDENT})" + INV.IDENT_END)
     openers, stack, command_start = [], [], 0
     for keyword in scope_keywords.finditer(clean):
         scope = scopes.match(clean, keyword.start())
