@@ -24,7 +24,12 @@ Statement objects may select corpus "opg" or "v2", or explicitly set
 An optional "additional_statements" list explicitly classifies reached, closed
 non-corpus Props whose names are not discovered automatically. Enrollment is
 restricted to unambiguous top-level nullary Definitions, with ordinary frozen
-body, complete-iff and zero-assumption checks still required.
+body, complete-iff and zero-assumption checks still required. A separate
+"parametric_statements" list explicitly enrolls reached whole Props lying
+directly in one top-level Section: each entry pins the Section, its complete
+Variable scaffold, the discharged parameters with fully qualified kernel types,
+generated @-bindings of referenced same-Section declarations and a live-shape
+witness; certificates are pointwise iffs at every parameter.
 Every occurrence of a complete row requires a statement role and an exact iff
 probe, independently of its label. New reused nonstatement objects use the
 "historical" role; the existing named historical roles remain supported aliases.
