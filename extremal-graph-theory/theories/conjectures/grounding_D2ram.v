@@ -122,12 +122,12 @@ Qed.
 (** With the empty connection set the Cayley graph is edgeless. *)
 Lemma cayley_adj_set0 (gT : finGroupType) (x y : gT) :
   @cayley_adj gT set0 x y = false.
-Proof. by rewrite /cayley_adj !in_set0 orbF andbF. Qed.
+Proof. by rewrite /cayley_adj /GTBase.cayley_graphs.undirected_cayley_rel !in_set0 orbF andbF. Qed.
 
 (** With the full connection set the Cayley graph is the complete graph on [gT]. *)
 Lemma cayley_adj_setT (gT : finGroupType) (x y : gT) :
   @cayley_adj gT setT x y = (x != y).
-Proof. by rewrite /cayley_adj !in_setT orbT andbT. Qed.
+Proof. by rewrite /cayley_adj /GTBase.cayley_graphs.undirected_cayley_rel !in_setT orbT andbT. Qed.
 
 (** ** Row 5 — induced copies *)
 
