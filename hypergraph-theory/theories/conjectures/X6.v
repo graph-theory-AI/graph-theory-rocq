@@ -3,6 +3,7 @@
 From GTBase Require Export base.
 From GTBase Require Import hypergraph_uniformity.
 Require Hypergraph.foundations.hypergraph.
+Require Hypergraph.foundations.hypergraph_matchings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -18,8 +19,7 @@ Definition x6_r_partite_uniform
   Hypergraph.foundations.hypergraph.hg_partite_uniform part E.
 
 Definition x6_matching (T : finType) (M E : {set {set T}}) : Prop :=
-  M \subset E /\
-  {in M &, forall e f : {set T}, e != f -> [disjoint e & f]}.
+  Hypergraph.foundations.hypergraph_matchings.hg_matching M E.
 
 Definition x6_matching_number (T : finType) (E : {set {set T}}) (nu : nat) : Prop :=
   (exists M : {set {set T}}, x6_matching M E /\ #|M| = nu) /\

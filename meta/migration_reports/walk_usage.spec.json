@@ -1,0 +1,205 @@
+{
+  "family": "walk-uses",
+  "canonical_name": "GTBase.walk_usage.seq_consecutiveb",
+  "canonical_short_name": "seq_consecutiveb",
+  "relation": "two separate public views of GTBase.walk_usage, with no identification between them. Finite undirected pair occurrence: GTMisc.D7.walk_uses s p u v is seq_consecutiveb (s :: p) u v by conversion, the Boolean form of B3's GTBase.walks_paths.seq_consecutive (same body with || for \\/, reflected by seq_consecutivebP, equal to MathComp's infix test by seq_consecutivebE): u and v are adjacent entries of s :: p in either order; no edge, nonempty-walk, uniqueness, distinct-endpoint or terminal premise; an empty tail uses nothing and a repeated adjacent value uses its loop pair. Alternating oriented usage: Infinite.D4inf4.walk_uses b x p a c is alt_uses b x p a c over the vertex Type of an iDigraph (an explicit iff by induction): some step of x :: p, read with polarity b flipping at every step, is (a, c) in its current orientation; Prop with propositional equality, no arc, no alt_walk_from validity, no eqType, choice or inhabitance. On an eqType carrier alt_uses implies consecutive occurrence (alt_uses_consecutive); the converse fails. Distinct and untouched: Cycle.D1.edp_feasible, an edge-labelled multigraph routing homonym of a D7 chain name.",
+  "baseline_commit": "016b8687b63e0191aaa50bf5427ad20cd9c487e9",
+  "namespaces": {
+    "graph-theory-misc": "GTMisc",
+    "infinite-graph-theory": "Infinite",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/walk_usage.v",
+    "graph-theory-misc/theories/migration/walk_usage.v",
+    "infinite-graph-theory/theories/migration/walk_usage.v"
+  ],
+  "extra_certificates": [
+    "GTBase.walk_usage.seq_consecutivebP",
+    "GTBase.walk_usage.seq_consecutivebE",
+    "GTBase.walk_usage.seq_consecutiveb_sym",
+    "GTBase.walk_usage.seq_consecutiveb_nil",
+    "GTBase.walk_usage.seq_consecutiveb_seq1",
+    "GTBase.walk_usage.seq_consecutiveb_cons2",
+    "GTBase.walk_usage.seq_consecutiveb_repeat",
+    "GTBase.walk_usage.alt_uses_nil",
+    "GTBase.walk_usage.alt_uses_cons",
+    "GTBase.walk_usage.alt_uses_head_true",
+    "GTBase.walk_usage.alt_uses_head_false",
+    "GTBase.walk_usage.alt_uses_step",
+    "GTBase.walk_usage.alt_uses1",
+    "GTBase.walk_usage.alt_uses_true1",
+    "GTBase.walk_usage.alt_uses_cat",
+    "GTBase.walk_usage.alt_uses_consecutive"
+  ],
+  "summary": [
+    "B28 walk-uses, two separate classes. GTMisc D7's `walk_uses s p u v` (Boolean: `(u, v)` or `(v, u)` is a pair of `zip (s :: p) p`) is `GTBase.walk_usage.seq_consecutiveb (s :: p) u v` by conversion, the Boolean view of B3's `seq_consecutive` (reflection `seq_consecutivebP`, MathComp `infix` form `seq_consecutivebE`; B3 keeps its module and ownership). Infinite D4inf4's recursive `walk_uses b x p a c` over the vertex Type of an `iDigraph` is `GTBase.walk_usage.alt_uses b x p a c`, the same recursion over any Type, by an induction on the tail. No edge, walk validity, eqType, choice or inhabitance assumption is added; the classes are not identified (`alt_uses_consecutive` states the only valid direction, on an eqType carrier).",
+    "",
+    "Corners in the public-only client base/theories/examples/walk_usage.v: empty and one-entry sequences, symmetry, a repeated adjacent value, no cyclic closing pair; the alternating head step at both polarities over an arbitrary Type, the empty tail, two-step parity and the wrong orientation of a forward step, which the finite view accepts.",
+    "",
+    "Frozen at 016b868 with every guard: D7's chain `edp_feasible` (both clauses), `edp_opt`, `edp_ratio_spec` (Wagner guard, rho of the order) and `maxedp_approx` (one program realizes and is polynomial on `enc_edp`) and the OPG row (exists p rho, maxedp_approx p rho /\\ little_o_sqrt rho; its documented improvement-branch and value-estimation reading is kept; the older two-branch wording of D7's Row 2 section comment and of the implications_D7 header is recorded, not repaired), all by conversion; D4inf4's `universal` and its OPG row (local finiteness, high arc transitivity, universality and the three nonvacuity guards), by pointwise transport. Two whole iff; no earlier snapshot, so no Original. Routes: D7 (graph-theory-misc) and D4inf4 (infinite-graph-theory); no Digraph source."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.D7.walk_uses",
+      "path": "graph-theory-misc/theories/conjectures/D7.v",
+      "name": "walk_uses",
+      "frozen_path": "graph-theory-misc/theories/migration/walk_usage.v",
+      "frozen": "Legacy.walk_uses",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.walk_usage.walk_uses_compat",
+      "live_unfolds_to": "seq_consecutiveb (s :: p) u v"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.D7.edp_feasible",
+      "path": "graph-theory-misc/theories/conjectures/D7.v",
+      "name": "edp_feasible",
+      "frozen_path": "graph-theory-misc/theories/migration/walk_usage.v",
+      "frozen": "D7Legacy.edp_feasible",
+      "substitutions": {
+        "walk_uses": "Legacy.walk_uses"
+      },
+      "certificate": "GTMisc.migration.walk_usage.edp_feasible_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.D7.edp_opt",
+      "path": "graph-theory-misc/theories/conjectures/D7.v",
+      "name": "edp_opt",
+      "frozen_path": "graph-theory-misc/theories/migration/walk_usage.v",
+      "frozen": "D7Legacy.edp_opt",
+      "substitutions": {
+        "edp_feasible": "D7Legacy.edp_feasible"
+      },
+      "certificate": "GTMisc.migration.walk_usage.edp_opt_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.D7.edp_ratio_spec",
+      "path": "graph-theory-misc/theories/conjectures/D7.v",
+      "name": "edp_ratio_spec",
+      "frozen_path": "graph-theory-misc/theories/migration/walk_usage.v",
+      "frozen": "D7Legacy.edp_ratio_spec",
+      "substitutions": {
+        "edp_opt": "D7Legacy.edp_opt"
+      },
+      "certificate": "GTMisc.migration.walk_usage.edp_ratio_spec_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.D7.maxedp_approx",
+      "path": "graph-theory-misc/theories/conjectures/D7.v",
+      "name": "maxedp_approx",
+      "frozen_path": "graph-theory-misc/theories/migration/walk_usage.v",
+      "frozen": "D7Legacy.maxedp_approx",
+      "substitutions": {
+        "edp_ratio_spec": "D7Legacy.edp_ratio_spec"
+      },
+      "certificate": "GTMisc.migration.walk_usage.maxedp_approx_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.D7.approximation_ratio_for_maximum_edge_disjoint_paths_statement",
+      "path": "graph-theory-misc/theories/conjectures/D7.v",
+      "name": "approximation_ratio_for_maximum_edge_disjoint_paths_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/walk_usage.v",
+      "frozen": "D7Legacy.approximation_ratio_for_maximum_edge_disjoint_paths_statement",
+      "substitutions": {
+        "maxedp_approx": "D7Legacy.maxedp_approx"
+      },
+      "certificate": "GTMisc.migration.walk_usage.approximation_ratio_for_maximum_edge_disjoint_paths_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "Infinite.conjectures.D4inf4.walk_uses",
+      "path": "infinite-graph-theory/theories/conjectures/D4inf4.v",
+      "name": "walk_uses",
+      "frozen_path": "infinite-graph-theory/theories/migration/walk_usage.v",
+      "frozen": "Legacy.walk_uses",
+      "substitutions": {},
+      "certificate": "Infinite.migration.walk_usage.walk_uses_compat",
+      "live_unfolds_to": "alt_uses b x p a c"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Infinite.conjectures.D4inf4.universal",
+      "path": "infinite-graph-theory/theories/conjectures/D4inf4.v",
+      "name": "universal",
+      "frozen_path": "infinite-graph-theory/theories/migration/walk_usage.v",
+      "frozen": "D4inf4Legacy.universal",
+      "substitutions": {
+        "walk_uses": "Legacy.walk_uses"
+      },
+      "certificate": "Infinite.migration.walk_usage.universal_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Infinite.conjectures.D4inf4.universal_highly_arc_transitive_digraphs_statement",
+      "path": "infinite-graph-theory/theories/conjectures/D4inf4.v",
+      "name": "universal_highly_arc_transitive_digraphs_statement",
+      "frozen_path": "infinite-graph-theory/theories/migration/walk_usage.v",
+      "frozen": "D4inf4Legacy.universal_highly_arc_transitive_digraphs_statement",
+      "substitutions": {
+        "universal": "D4inf4Legacy.universal"
+      },
+      "certificate": "Infinite.migration.walk_usage.universal_highly_arc_transitive_digraphs_statement_compat",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {
+    "infinite-graph-theory/theories/migration/walk_usage.v#Legacy.walk_uses": "B28 frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (Legacy.walk_uses itself), not the live Infinite.conjectures.D4inf4.walk_uses; its kernel dependency closure contains no live family name (B28 kernel evidence)."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_D1.v",
+      "name": "edp_feasible",
+      "note": "Lexical homonym only: Cycle.conjectures.D1.edp_feasible, an edge-labelled multigraph routing predicate (distinct variant), not D7's chain; untouched."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_D7.v",
+      "name": "walk_uses",
+      "note": "D7 grounding walk_uses_sym and walk_uses_K2; walk_uses_sym's proof now uses the public seq_consecutiveb_sym (header unchanged), walk_uses_K2 recompiles unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_D7.v",
+      "name": "edp_feasible",
+      "note": "D7 grounding edp_feasible_set0; recompiles unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_D7.v",
+      "name": "edp_opt",
+      "note": "D7 grounding edp_opt_nil; recompiles unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_D7.v",
+      "name": "edp_ratio_spec",
+      "note": "D7 grounding maxedp_approx_realizes; recompiles unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_D7.v",
+      "name": "maxedp_approx",
+      "note": "D7 grounding maxedp_approx_cost and maxedp_approx_realizes; recompile unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/implications_D7.v",
+      "name": "approximation_ratio_for_maximum_edge_disjoint_paths_statement",
+      "note": "Check command only (no proved implication edge); statement text unchanged."
+    },
+    {
+      "path": "infinite-graph-theory/theories/conjectures/grounding_D4inf4.v",
+      "name": "walk_uses",
+      "note": "D4inf4 grounding alt_walk_single; recompiles unchanged through the alias."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Cycle.conjectures.D1.edp_feasible",
+      "path": "cycle-theory/theories/conjectures/D1.v",
+      "name": "edp_feasible",
+      "note": "edge-labelled multigraph routing predicate sharing a D7 chain name; a different contract, untouched"
+    }
+  ]
+}

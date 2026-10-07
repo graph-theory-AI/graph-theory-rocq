@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "family": "regularity",
+  "primitive": {
+    "canonical_name": "Hypergraph.foundations.hypergraph_regularity.hg_regular",
+    "owner": "hypergraph-theory",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "regular"
+    ],
+    "source_definitions": [
+      "Hypergraph.conjectures.X73.x73_regular",
+      "Infinite.conjectures.D4inf3.regular"
+    ],
+    "consumers_remaining": 2,
+    "relation": "Finite supplied-family incidence regularity: hg_regular E d holds when every vertex v of the finite carrier lies in exactly d members of the supplied family E : {set {set T}}, counted by A10 incidence_degree E v. Arbitrary carrier and family, E before d, universal equality; no uniformity, positivity, inhabited-carrier, nonempty-edge, covering or attained-degree premise (an empty carrier is regular of every degree; empty members never count). Simple-graph, multigraph, directed and infinite (ordinal neighbour enumeration, D4inf3) regularity are separate.",
+    "semantic_classes": {
+      "finite-incidence-regularity": {
+        "members": [
+          "Hypergraph.conjectures.X73.x73_regular"
+        ],
+        "count": 1,
+        "verdict": "equivalent (same term)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.regularity.x73_regular_compat"
+        ],
+        "canonical": "Hypergraph.foundations.hypergraph_regularity.hg_regular",
+        "note": "x73_regular E d := forall v, x73_hyperdegree E v = d, with x73_hyperdegree the A10 alias of incidence_degree: the alias of hg_regular over the same count, same carrier and argument order."
+      },
+      "infinite-neighbour-enumeration": {
+        "members": [
+          "Infinite.conjectures.D4inf3.regular"
+        ],
+        "count": 1,
+        "verdict": "equivalent (same term)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Infinite.migration.regularity.regular_compat"
+        ],
+        "canonical": "Infinite.foundations.regularity.iregular",
+        "owner": "infinite-graph-theory",
+        "canonical_relation": "iregular r G: every vertex x of the Prop-level iGraph G (arbitrary vertex Type, Prop adjacency) has an injective enumeration e : I_r -> iV G of exactly its neighbours (iadj x w iff w = e i for some i), local and existential: no global selection, choice or decidability, r before G. The unchanged body of the D4inf3 source on the existing Infinite.foundations.igraph carrier.",
+        "public_client": "infinite-graph-theory/theories/examples/regular_igraphs.v",
+        "migration_record": "meta/LIBRARY_MIGRATION_D9.md",
+        "review": "Separate D9 binding: this class needs its own independent step-10 review (someone other than the implementer, lancelot) and the root whole-statement check of its one whole iff; the D8 finite-class review facts do not cover it.",
+        "upstream_audit": {
+          "searched_modules": [
+            "GraphTheory core modules",
+            "mathcomp.boot",
+            "Infinite.foundations.igraph",
+            "GTBase.base"
+          ],
+          "result": "new-area-primitive",
+          "candidate": "Infinite.foundations.igraph (iGraph, iV, iadj, finite_sub)",
+          "note": "No regularity predicate for Prop-level infinite graphs upstream or in the repository; GTBase.base.regular needs a finite sgraph. The canonical reuses the existing igraph carrier unchanged and derives finite_sub of each neighbourhood from the same enumerator.",
+          "audited_at": "2026-10-04"
+        },
+        "note": "Both directions of exact neighbourhood coverage and injectivity are kept; an empty carrier is regular at every r and r = 0 means no adjacency. The D4inf3 row keeps locally_finite as a conjunct although iregular_finite_sub derives it.",
+        "reviewed_by": "family_scope",
+        "reviewed_commit": "eae6c3ae123de43cad5ac0675ee25ab3f48c7b10",
+        "independent_review": "meta/migration_reviews/infinite_regularity.md"
+      }
+    },
+    "compatibility_theorems": [
+      "Hypergraph.migration.regularity.x73_regular_compat",
+      "Hypergraph.migration.regularity.regular_tripartite_hypergraph_matching_lower_bound_statement_compat",
+      "Infinite.migration.regularity.regular_compat",
+      "Infinite.migration.regularity.infinite_uniquely_hamiltonian_graphs_statement_compat"
+    ],
+    "api_theorems": [
+      "Hypergraph.foundations.hypergraph_regularity.hg_regularP",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_void",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_uniq",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0E",
+      "Hypergraph.foundations.hypergraph_regularity.incidence_degree_set0U",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0U",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_set1_set0",
+      "Hypergraph.foundations.hypergraph_regularity.hg_regular_setT",
+      "Infinite.foundations.regularity.iregular_finite_sub",
+      "Infinite.foundations.regularity.iregular_void",
+      "Infinite.foundations.regularity.iregular0",
+      "Infinite.foundations.regularity.iregular_isolated"
+    ],
+    "public_client": "hypergraph-theory/theories/examples/regular_hypergraphs.v",
+    "legacy_baseline": "7e030f252c859c5334185673b10b69971cab9402",
+    "migration_report": "meta/migration_reports/regularity.md",
+    "migration_spec": "meta/migration_reports/regularity.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D8.md",
+    "foundation_fidelity": "meta/foundation_fidelity/regularity.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core modules",
+        "mathcomp.boot",
+        "GTBase.incidence",
+        "GTBase.base"
+      ],
+      "result": "new-area-primitive",
+      "candidate": "GTBase.incidence.incidence_degree",
+      "note": "No hypergraph regularity predicate upstream (MathComp regular is algebraic). The reusable piece is A10 incidence_degree with universal equality and the Boolean forall view; GTBase.base.regular (simple graphs), mregular (multigraph incidences) and D2pr regularb (2-edge adjacency) are different contracts. No second-area consumer, so the canonical stays in Hypergraph (no GTBase promotion).",
+      "audited_at": "2026-10-04"
+    },
+    "reviewed_by": "family_scope",
+    "reviewed_commit": "216204c1dfe3a483cc952446ff1f494397ccc7a8",
+    "independent_review": "meta/migration_reviews/regularity.md",
+    "migration_notes_d9": "D9 (2026-10-04, lancelot): the deferred infinite-neighbour-enumeration class of this owner is migrated. Infinite.conjectures.D4inf3.regular now unfolds to the public Infinite.foundations.regularity.iregular on the existing igraph carrier; the source and the complete five-conjunct existential row are frozen in Infinite.migration.regularity (bound at the family baseline 7e030f2, frozen at the D8 pin). Both classes are migrated, so the status is deprecated. The finite class, its canonical, API, client, fidelity and review facts are unchanged."
+  }
+}

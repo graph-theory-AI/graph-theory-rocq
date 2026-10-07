@@ -1,0 +1,37 @@
+{
+ "schema_version": 1,
+ "family": "walk-uses",
+ "modules": {
+  "GTBase.walk_usage": {
+   "path": "base/theories/walk_usage.v",
+   "overrides": {
+    "seq_consecutiveb": {
+     "verdict": "FAITHFUL",
+     "note": "seq_consecutiveb s u v: (u, v) or (v, u) is a pair of zip s (behead s), the Boolean form of seq_consecutive (seq_consecutivebP); empty and one-entry sequences use nothing, a repeated adjacent value uses its loop pair, a cyclic closing pair is not used unless adjacent."
+    },
+    "alt_uses": {
+     "verdict": "FAITHFUL",
+     "note": "alt_uses b x p a c: some step of x :: p, read with polarity b flipping at every step, is (a, c) forward at polarity true and backward at polarity false; the empty tail uses nothing; any Type, propositional equality, no validity requirement."
+    }
+   },
+   "machine_evidence": [
+    "seq_consecutivebP",
+    "seq_consecutivebE",
+    "seq_consecutiveb_sym",
+    "seq_consecutiveb_nil",
+    "seq_consecutiveb_seq1",
+    "seq_consecutiveb_cons2",
+    "seq_consecutiveb_repeat",
+    "alt_uses_nil",
+    "alt_uses_cons",
+    "alt_uses_head_true",
+    "alt_uses_head_false",
+    "alt_uses_step",
+    "alt_uses1",
+    "alt_uses_true1",
+    "alt_uses_cat",
+    "alt_uses_consecutive"
+   ]
+  }
+ }
+}

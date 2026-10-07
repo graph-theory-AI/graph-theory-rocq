@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "family": "forces-mono",
+  "primitive": {
+    "canonical_name": "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono",
+    "owner": "hypergraph-theory",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "forces_mono",
+      "two_colour_ramsey_at_most"
+    ],
+    "source_definitions": [
+      "Hypergraph.conjectures.X108.x108_two_colour_ramsey_at_most",
+      "Hypergraph.conjectures.X117.x117_forces_mono",
+      "Hypergraph.conjectures.X119.x119_forces_mono"
+    ],
+    "consumers_remaining": 1,
+    "relation": "Forcing a monochromatic copy: hg_forces_mono E U C holds when every colouring col : {set U} -> C of all subsets of the finite host U by the palette C : Type has a monochromatic copy hg_mono_copy E col (D4). Host and palette are explicit. No inhabited palette, positive palette size, uniformity, nonempty family or no-isolated condition: an empty palette has no colouring (set0 is a host subset), so forcing is vacuous and X119's q = 0 Ramsey predicate holds exactly at R = 0; a singleton palette forces iff the whole carrier injects; theorems needing a colour take it explicitly. Ramsey numbers (forcing AND minimality, shared with Extremal), D4 copies, D3 images, Extremal graph/list forcing and C8 constancy are separate.",
+    "semantic_classes": {
+      "bool-palette": {
+        "members": [
+          "Hypergraph.conjectures.X108.x108_two_colour_ramsey_at_most",
+          "Hypergraph.conjectures.X117.x117_forces_mono"
+        ],
+        "count": 2,
+        "verdict": "equivalent (same term)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.forces_mono.x108_two_colour_ramsey_at_most_compat",
+          "Hypergraph.migration.forces_mono.x117_forces_mono_compat"
+        ],
+        "note": "Host I_N, palette bool; both aliases are hg_forces_mono E I_N bool, so x117_forces_mono_equiv_x108 stays by conversion."
+      },
+      "ordinal-palette": {
+        "members": [
+          "Hypergraph.conjectures.X119.x119_forces_mono"
+        ],
+        "count": 1,
+        "verdict": "equivalent (same term)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hypergraph.migration.forces_mono.x119_forces_mono_compat"
+        ],
+        "note": "Host I_N, palette I_q; the alias keeps the E q N argument order (the copy keeps N q)."
+      }
+    },
+    "compatibility_theorems": [
+      "Hypergraph.migration.forces_mono.x108_two_colour_ramsey_at_most_compat",
+      "Hypergraph.migration.forces_mono.three_uniform_degenerate_hypergraph_ramsey_linear_statement_compat",
+      "Hypergraph.migration.forces_mono.x117_forces_mono_compat",
+      "Hypergraph.migration.forces_mono.x117_ramsey_number_compat",
+      "Hypergraph.migration.forces_mono.conlon_fox_rodl_hedgehog_ramsey_statement_compat",
+      "Hypergraph.migration.forces_mono.x119_forces_mono_compat",
+      "Hypergraph.migration.forces_mono.x119_ramsey_number_compat",
+      "Hypergraph.migration.forces_mono.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_compat"
+    ],
+    "api_theorems": [
+      "Hypergraph.foundations.hypergraph_forcing.hg_forces_monoE",
+      "Hypergraph.foundations.hypergraph_forcing.hg_forces_monoS",
+      "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono_empty_palette",
+      "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono_card",
+      "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono_singleton",
+      "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono_transport"
+    ],
+    "public_client": "hypergraph-theory/theories/examples/forcing.v",
+    "legacy_baseline": "7647f2bd8507b2b2ebab4f2a7b92f1f8cf7ae95b",
+    "migration_report": "meta/migration_reports/forces_mono.md",
+    "migration_spec": "meta/migration_reports/forces_mono.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D5.md",
+    "foundation_fidelity": "meta/foundation_fidelity/forces-mono.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core modules",
+        "mathcomp.boot",
+        "Hypergraph.foundations.hypergraph_copies",
+        "Extremal.foundations.list_ramsey",
+        "Extremal.foundations.edge_colourings"
+      ],
+      "result": "new-area-primitive",
+      "candidate": "Hypergraph.foundations.hypergraph_copies.hg_mono_copy",
+      "note": "No Ramsey or forcing primitive upstream. The forcing view quantifies D4's hg_mono_copy over all colourings of the host subsets, with host and palette explicit; Extremal list_ramsey.lr_forces (graph list-Ramsey) and edge_colourings.mono_copy (graph) are different representations.",
+      "audited_at": "2026-10-03"
+    },
+    "reviewed_by": "matching_scope",
+    "reviewed_commit": "e14645d6fb6068c1a89862f60b82e958212f2422",
+    "independent_review": "meta/migration_reviews/forces_mono.md"
+  }
+}

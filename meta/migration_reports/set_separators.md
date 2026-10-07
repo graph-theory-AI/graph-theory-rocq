@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py set_separators --details /tmp/m
 
 - Canonical: `GraphTheory.core.connectivity.separator`.
 - Baseline: `a02e1c2108db331363787c099f8fcb99aa4e6b41`.
-- Scope: 2 helpers, 3 statements, 33 frozen objects, 35 recorded references.
-- Source checks: 205/205 pass; consistent.
+- Scope: 2 helpers, 3 statements, 33 frozen objects, 44 recorded references.
+- Source checks: 208/208 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -21,4 +21,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Cycle.foundations.connectivity.ueseparates`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/balls.v#X39Legacy.coarse_menger_ball_separator_statement`, `graph-theory-misc/theories/migration/balls.v#X40Legacy.coarse_menger_distance_two_separator_statement`, `packing-theory/theories/migration/balls.v#X26Legacy.bounded_degree_distant_induced_menger_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/balls.v#X39Legacy.coarse_menger_ball_separator_statement`, `graph-theory-misc/theories/migration/balls.v#X40Legacy.coarse_menger_distance_two_separator_statement`, `packing-theory/theories/migration/balls.v#X26Legacy.bounded_degree_distant_induced_menger_statement`, `graph-theory-misc/theories/migration/distant_paths.v#X39Legacy.coarse_menger_ball_separator_statement`, `graph-theory-misc/theories/migration/distant_paths.v#X40Legacy.coarse_menger_distance_two_separator_statement`, `packing-theory/theories/migration/distant_paths.v#X26Legacy.bounded_degree_distant_induced_menger_statement`.

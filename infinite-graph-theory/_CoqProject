@@ -3,6 +3,8 @@
 -arg -w -arg -notation-overridden
 
 theories/foundations/igraph.v
+theories/foundations/regularity.v
+theories/examples/regular_igraphs.v
 theories/conjectures/D4doa.v
 theories/conjectures/grounding_D4doa.v
 theories/conjectures/implications_D4doa.v
@@ -32,3 +34,5 @@ theories/conjectures/grounding_X228.v
 theories/conjectures/implications_X228.v
 
 theories/migration/proper_colouring.v
+theories/migration/walk_usage.v
+theories/migration/regularity.v

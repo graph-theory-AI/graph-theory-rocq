@@ -1,7 +1,7 @@
 (** * GTMisc.conjectures.X39 -- v2 coarse Menger row *)
 
 From GTBase Require Export base.
-From GTBase Require Import balls.
+From GTBase Require Import balls distant_paths.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -21,20 +21,22 @@ Definition x39_path_vertices (G : sgraph) (p : seq G) : {set G} :=
 Definition x39_xy_path (G : sgraph) (X Y : {set G}) (p : seq G) : Prop :=
   seq_set_path X Y p.
 
+(** Since the B27 library migration (2026-10-03) a transparent alias of
+    [GTBase.distant_paths.pairwise_distant_seqs]: for unequal sequence values of the family, the closed
+    [d.-1]-set-ball around one support misses the other (so [d] = 0 and 1 mean disjoint supports).  The former
+    vertex-disjointness conjunct is redundant and dropped ([pairwise_distant_seqsP]).  The former body is
+    frozen and certified equivalent in theories/migration/distant_paths.v. *)
 Definition x39_pairwise_distant_paths
     (G : sgraph) (d : nat) (paths : seq (seq G)) : Prop :=
-  forall p q : seq G,
-    p \in paths -> q \in paths -> p != q ->
-    [disjoint x39_path_vertices p & x39_path_vertices q] /\
-    [disjoint x39_set_ball (d.-1) (x39_path_vertices p) & x39_path_vertices q].
+  pairwise_distant_seqs d paths.
 
+(** Since the B27 library migration (2026-10-03) a transparent alias of
+    [GTBase.distant_paths.has_k_distant_set_paths]: exactly [k] distinct set-to-set paths whose unequal values
+    satisfy [pairwise_distant_seqs d].  The former body is frozen and certified equivalent in
+    theories/migration/distant_paths.v. *)
 Definition x39_has_k_distant_xy_paths
     (G : sgraph) (d k : nat) (X Y : {set G}) : Prop :=
-  exists paths : seq (seq G),
-    size paths = k /\
-    uniq paths /\
-    (forall p : seq G, p \in paths -> x39_xy_path X Y p) /\
-    x39_pairwise_distant_paths d paths.
+  has_k_distant_set_paths d k X Y.
 
 (** Since the B26 library migration (2026-10-03) a transparent alias of upstream
     [GraphTheory.core.connectivity.separator G X Y A]: every packaged path from X to Y meets A, the

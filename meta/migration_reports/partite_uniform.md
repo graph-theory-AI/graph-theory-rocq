@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py partite_uniform --details /tmp/
 
 - Canonical: `Hypergraph.foundations.hypergraph.hg_partite_uniform`.
 - Baseline: `e53098e84635d8612e34e5d239fd13fe5afa9fb8`.
-- Scope: 3 helpers, 6 statements, 22 frozen objects, 62 recorded references.
-- Source checks: 202/202 pass; consistent.
+- Scope: 3 helpers, 6 statements, 22 frozen objects, 76 recorded references.
+- Source checks: 207/207 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -22,4 +22,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py partite_uniform --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `hypergraph-theory/theories/migration/incidence_degree.v#X73Legacy.regular_tripartite_hypergraph_matching_lower_bound_statement`, `hypergraph-theory/theories/migration/incidence_degree.v#X225Legacy.kpartite_hypergraph_turan_exponent_dmax_statement`, `hypergraph-theory/theories/migration/uniform_hypergraph.v#X225UniformLegacy.kpartite_hypergraph_turan_exponent_dmax_statement`, `hypergraph-theory/theories/migration/uniform_hypergraph.v#X225UniformOriginal.kpartite_hypergraph_turan_exponent_dmax_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `hypergraph-theory/theories/migration/incidence_degree.v#X73Legacy.regular_tripartite_hypergraph_matching_lower_bound_statement`, `hypergraph-theory/theories/migration/incidence_degree.v#X225Legacy.kpartite_hypergraph_turan_exponent_dmax_statement`, `hypergraph-theory/theories/migration/uniform_hypergraph.v#X225UniformLegacy.kpartite_hypergraph_turan_exponent_dmax_statement`, `hypergraph-theory/theories/migration/uniform_hypergraph.v#X225UniformOriginal.kpartite_hypergraph_turan_exponent_dmax_statement`, `hypergraph-theory/theories/migration/matching.v#U12MatchingLegacy.rysers_statement`, `hypergraph-theory/theories/migration/matching.v#X6MatchingLegacy.r_partite_matching_deletion_tradeoff_statement`, `hypergraph-theory/theories/migration/matching.v#X6MatchingLegacy.lovasz_r_partite_matching_deletion_statement`, `hypergraph-theory/theories/migration/matching.v#X73MatchingLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement`, `hypergraph-theory/theories/migration/regularity.v#X73RegularLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement`.

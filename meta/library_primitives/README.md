@@ -148,3 +148,36 @@ Existing module-wide audits are not divided into artificial families.
 Run `python3 meta/test_family_registry.py`, `make audit`, and the usual migration
 gates through `environment/proof-shell.sh`. Registry and loader changes also
 route to `make mutation`.
+
+## Source provider attribution
+
+Migration source reports audit the **declared project build context**. Repository
+logical namespaces come exclusively from the corresponding repository project
+roots; external dependencies must not inject or shadow those namespaces. This is
+a supported-build contract, not certification of an arbitrary installed Rocq or
+ambient loader environment. Kernel checks and independent elaboration/dependency
+checks remain required; the report does not implement a complete installed-library
+collision preflight.
+
+For an unqualified, nonlocal helper reference, all providers available under the
+consumer's ordinary `_CoqProject` roots remain candidates. A provider outside all
+those roots is excluded only in a supported context. This same policy applies to
+whole-row discovery, stale frozen bodies and repository consumers. Same-file and
+qualified/suffix references keep the previous conservative handling; mapped
+ambiguities are never resolved by choosing one provider. External Requires are
+not assumed to have empty dependencies.
+
+Unsupported or uncertain context retains the original candidate superset (and
+any existing validation error). This includes ambient loader/compiler overrides,
+remapped/overlapping/absolute or noncanonical relative roots, unsupported project options, non-regular or
+missing source/project files, dynamic loader commands, and Requires to unchecked
+local modules or unresolved partial modules. The supported project grammar is
+ordinary registered `-R`/`-Q` roots, build-listed source paths and warning-only
+`-arg -w -arg VALUE`; local members under every mapped root are checked. Independent
+excluded sources are not automatically treated as imported. Harmless opam-switch,
+wrapper resource and MCP timeout/workdir settings are distinguished from loader
+overrides. Fallbacks are recorded in the full report's
+`provider_context_fallbacks`; they do not waive coverage or stale-reference errors.
+Historical contexts use their effective commit's project/source text; current
+contexts are read afresh for each query. Default auditing remains toolchain-free
+and does not inspect installed libraries or invoke Rocq.

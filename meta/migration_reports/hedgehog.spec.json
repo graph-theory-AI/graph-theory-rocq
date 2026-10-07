@@ -1,0 +1,205 @@
+{
+  "family": "hedgehog",
+  "canonical_name": "Hypergraph.foundations.hedgehog.hedgehog_edges",
+  "canonical_short_name": "hedgehog_edges",
+  "relation": "The finite hedgehog H_t: hedgehog_spike t is the subtype of ordered pairs (i, j) of I_t with i < j (Boolean strict-order witness), hedgehog_vertex t the sum carrier I_t + hedgehog_spike t, hedgehog_edge s the tagged triple [set inl i; inl j; inr s] of the spike s = (i, j), and hedgehog_edges t the image family of all spikes. Same carriers and MathComp finite subtype/sum/set/image structures as the X117 vocabulary, inferred by unfolding (no new instance); no positivity or rank guard (empty for t = 0, edgeless for t = 1). Ramsey numbers, forcing, copies and images and the GTMisc X87 Boolean ordered-edge lookup are separate.",
+  "baseline_commit": "eaa6564c3788f6e3e2db7a7bddbe9adba157c334",
+  "namespaces": {
+    "hypergraph-theory": "Hypergraph"
+  },
+  "certificate_files": [
+    "hypergraph-theory/theories/foundations/hedgehog.v",
+    "hypergraph-theory/theories/migration/hedgehog.v",
+    "hypergraph-theory/theories/migration/image_edge.v"
+  ],
+  "extra_certificates": [
+    "Hypergraph.foundations.hedgehog.hedgehog_spike_neq",
+    "Hypergraph.foundations.hedgehog.hedgehog_edge_spike",
+    "Hypergraph.foundations.hedgehog.hedgehog_edge_inj",
+    "Hypergraph.foundations.hedgehog.card_hedgehog_edge",
+    "Hypergraph.foundations.hedgehog.hedgehog_edgesP",
+    "Hypergraph.foundations.hedgehog.hedgehog_edges_card",
+    "Hypergraph.foundations.hedgehog.card_hedgehog_edges",
+    "Hypergraph.foundations.hedgehog.card_hedgehog_vertex"
+  ],
+  "downstream_client": "hypergraph-theory/theories/examples/hedgehog_hypergraphs.v",
+  "summary": [
+    "D7 turns X117 x117_spike, x117_vertex, x117_edge and x117_edges into aliases of the new public Hypergraph.foundations.hedgehog constructors hedgehog_spike, hedgehog_vertex, hedgehog_edge and hedgehog_edges: the same ordered-pair subtype, sum carrier, tagged triple and image family, with Type-valued and dependent signatures and finite inference unchanged. No positivity or rank guard; the client covers t = 0, 1, 2.",
+    "Frozen at the D6 pin in hypergraph-theory/theories/migration/hedgehog.v: the 4 raw constructors (calling one another only through HedgehogLegacy), the Ramsey chain (forcing at R and minimality) and the complete current row (keeping the live D5 forcing), and the complete D3+D4+D5+D7 Original chain and row over the raw constructors and D3's actual frozen image/copy/forcing (3 borrowed objects, historical role, alias IM). 8 owned + 3 borrowed mappings; 2 whole iff.",
+    "No older proof needed adaptation. The six older partial snapshots (Ramsey chain and row in D3 X117ImageLegacy, D4 X117CopyLegacy and D5 X117ForcingLegacy) stay byte-exact with notes, and reciprocal notes cover the new current snapshots. GTMisc.conjectures.X87.x87_edge, an ordered Boolean edge lookup, is a deferred distinct variant: untouched. Public client hypergraph-theory/theories/examples/hedgehog_hypergraphs.v."
+  ],
+  "kernel_evidence": "Exact types/implicit status of the four sources (Type-valued and dependent signatures, finite inference), the two whole iff, all old declarations against eaa6564, the actual consumers, Print Assumptions and About-resolved strict closures, through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D7-by-lancelot/ (outside the repository)",
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X117.x117_spike",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_spike",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "HedgehogLegacy.x117_spike",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.hedgehog.x117_spike_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hedgehog.hedgehog_spike t",
+      "binding_note": "Frozen at the D6 pin eaa6564, the family baseline where the X117 text is bound."
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X117.x117_vertex",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_vertex",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "HedgehogLegacy.x117_vertex",
+      "substitutions": {
+        "x117_spike": "HedgehogLegacy.x117_spike"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.x117_vertex_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hedgehog.hedgehog_vertex t",
+      "binding_note": "Frozen at the D6 pin eaa6564, the family baseline where the X117 text is bound."
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X117.x117_edge",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_edge",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "HedgehogLegacy.x117_edge",
+      "substitutions": {
+        "x117_spike": "HedgehogLegacy.x117_spike",
+        "x117_vertex": "HedgehogLegacy.x117_vertex"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.x117_edge_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hedgehog.hedgehog_edge s",
+      "binding_note": "Frozen at the D6 pin eaa6564, the family baseline where the X117 text is bound."
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X117.x117_edges",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_edges",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "HedgehogLegacy.x117_edges",
+      "substitutions": {
+        "x117_spike": "HedgehogLegacy.x117_spike",
+        "x117_vertex": "HedgehogLegacy.x117_vertex",
+        "x117_edge": "HedgehogLegacy.x117_edge"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.x117_edges_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hedgehog.hedgehog_edges t",
+      "binding_note": "Frozen at the D6 pin eaa6564, the family baseline where the X117 text is bound."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X117.x117_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "X117HedgehogLegacy.x117_ramsey_number",
+      "substitutions": {
+        "x117_edge": "HedgehogLegacy.x117_edge",
+        "x117_edges": "HedgehogLegacy.x117_edges"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.x117_ramsey_number_compat",
+      "binding_note": "Frozen at the D6 pin eaa6564, the family baseline where the X117 text is bound."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X117.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "conlon_fox_rodl_hedgehog_ramsey_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "X117HedgehogLegacy.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "substitutions": {
+        "x117_ramsey_number": "X117HedgehogLegacy.x117_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.conlon_fox_rodl_hedgehog_ramsey_statement_compat",
+      "corpus": "v2",
+      "binding_note": "Frozen at the D6 pin eaa6564, the family baseline where the X117 text is bound."
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Hypergraph.conjectures.X117.x117_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "X117HedgehogOriginal.x117_ramsey_number",
+      "substitutions": {
+        "x117_edge": "HedgehogLegacy.x117_edge",
+        "x117_edges": "HedgehogLegacy.x117_edges",
+        "x117_forces_mono": "IM.X117ImageLegacy.x117_forces_mono"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.x117_ramsey_number_original_compat",
+      "binding_note": "Complete D3+D4+D5+D7 Original: the same eaa6564 text over the raw frozen HedgehogLegacy constructors and D3's actual frozen IM.X117ImageLegacy.x117_forces_mono (raw copy and image), through the certificate module alias IM = Hypergraph.migration.image_edge; bound at the family baseline eaa6564."
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X117.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "conlon_fox_rodl_hedgehog_ramsey_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/hedgehog.v",
+      "frozen": "X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "substitutions": {
+        "x117_ramsey_number": "X117HedgehogOriginal.x117_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.hedgehog.conlon_fox_rodl_hedgehog_ramsey_statement_original_compat",
+      "corpus": "v2",
+      "binding_note": "Complete D3+D4+D5+D7 Original: the same eaa6564 text over the raw frozen HedgehogLegacy constructors and D3's actual frozen IM.X117ImageLegacy.x117_forces_mono (raw copy and image), through the certificate module alias IM = Hypergraph.migration.image_edge; bound at the family baseline eaa6564."
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_image_edge",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_image_edge",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "ImageLegacy.x117_image_edge",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.image_edge.x117_image_edge_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_monochromatic_copy",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_monochromatic_copy",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X117ImageLegacy.x117_monochromatic_copy",
+      "substitutions": {
+        "x117_image_edge": "ImageLegacy.x117_image_edge"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x117_monochromatic_copy_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_forces_mono",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_forces_mono",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X117ImageLegacy.x117_forces_mono",
+      "substitutions": {
+        "x117_monochromatic_copy": "X117ImageLegacy.x117_monochromatic_copy"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x117_forces_mono_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    }
+  ],
+  "known_stale_snapshots": {
+    "hypergraph-theory/theories/migration/image_edge.v#X117ImageLegacy.x117_ramsey_number": "D3 partial snapshot: its Ramsey chain keeps the live x117_edges, now the D7 alias of hedgehog_edges. It stays byte-exact; the complete chain is Hypergraph.migration.hedgehog.X117HedgehogOriginal.x117_ramsey_number (certificate x117_ramsey_number_original_compat).",
+    "hypergraph-theory/theories/migration/image_edge.v#X117ImageLegacy.conlon_fox_rodl_hedgehog_ramsey_statement": "D3 partial snapshot: through its frozen chain X117ImageLegacy.x117_ramsey_number, which keeps the live x117_edges, it reaches the D7 hedgehog alias. It stays byte-exact; the complete row is Hypergraph.migration.hedgehog.X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement over the raw HedgehogLegacy constructors (certificate conlon_fox_rodl_hedgehog_ramsey_statement_original_compat).",
+    "hypergraph-theory/theories/migration/monochromatic_copy.v#X117CopyLegacy.x117_ramsey_number": "D4 partial snapshot: its Ramsey chain keeps the live x117_edges, now the D7 alias of hedgehog_edges. It stays byte-exact; the complete chain is Hypergraph.migration.hedgehog.X117HedgehogOriginal.x117_ramsey_number (certificate x117_ramsey_number_original_compat).",
+    "hypergraph-theory/theories/migration/monochromatic_copy.v#X117CopyLegacy.conlon_fox_rodl_hedgehog_ramsey_statement": "D4 partial snapshot: through its frozen chain X117CopyLegacy.x117_ramsey_number, which keeps the live x117_edges, it reaches the D7 hedgehog alias. It stays byte-exact; the complete row is Hypergraph.migration.hedgehog.X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement over the raw HedgehogLegacy constructors (certificate conlon_fox_rodl_hedgehog_ramsey_statement_original_compat).",
+    "hypergraph-theory/theories/migration/forces_mono.v#X117ForcingLegacy.x117_ramsey_number": "D5 partial snapshot: its Ramsey chain keeps the live x117_edges, now the D7 alias of hedgehog_edges. It stays byte-exact; the complete chain is Hypergraph.migration.hedgehog.X117HedgehogOriginal.x117_ramsey_number (certificate x117_ramsey_number_original_compat).",
+    "hypergraph-theory/theories/migration/forces_mono.v#X117ForcingLegacy.conlon_fox_rodl_hedgehog_ramsey_statement": "D5 partial snapshot: through its frozen chain X117ForcingLegacy.x117_ramsey_number, which keeps the live x117_edges, it reaches the D7 hedgehog alias. It stays byte-exact; the complete row is Hypergraph.migration.hedgehog.X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement over the raw HedgehogLegacy constructors (certificate conlon_fox_rodl_hedgehog_ramsey_statement_original_compat).",
+    "hypergraph-theory/theories/migration/ramsey_number.v#X117RamseyLegacy.x117_ramsey_number": "D10 current snapshot: the frozen x117_ramsey_number keeps the live x117_edges (the D7 hedgehog alias). It stays byte-exact; the complete row is the existing D7 Hypergraph.migration.hedgehog.X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement (certificate conlon_fox_rodl_hedgehog_ramsey_statement_original_compat), reused by D10.",
+    "hypergraph-theory/theories/migration/ramsey_number.v#X117RamseyLegacy.conlon_fox_rodl_hedgehog_ramsey_statement": "D10 current snapshot: through its frozen X117RamseyLegacy.x117_ramsey_number, which keeps the live x117_edges (the D7 hedgehog alias), it reaches that alias. It stays byte-exact; the complete row is the existing D7 Hypergraph.migration.hedgehog.X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement (certificate conlon_fox_rodl_hedgehog_ramsey_statement_original_compat), reused by D10."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.X87.x87_edge",
+      "path": "graph-theory-misc/theories/conjectures/X87.v",
+      "name": "x87_edge",
+      "representation": "ordered Boolean edge lookup",
+      "note": "x87_edge (E : {ffun I_n * I_n -> bool}) i j := E (i, j): a lookup in a Boolean adjacency function on ordered pairs, unrelated to the hedgehog construction; deferred in the same registry envelope, source and row untouched."
+    }
+  ]
+}

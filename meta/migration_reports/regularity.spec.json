@@ -1,0 +1,341 @@
+{
+  "family": "regularity",
+  "canonical_name": "Hypergraph.foundations.hypergraph_regularity.hg_regular",
+  "canonical_short_name": "hg_regular",
+  "relation": "Finite supplied-family incidence regularity: hg_regular E d holds when every vertex v of the finite carrier lies in exactly d members of the supplied family E : {set {set T}}, counted by A10 incidence_degree E v. Arbitrary carrier and family, E before d, universal equality; no uniformity, positivity, inhabited-carrier, nonempty-edge, covering or attained-degree premise (an empty carrier is regular of every degree; empty members never count). Simple-graph, multigraph, directed and infinite (ordinal neighbour enumeration, D4inf3) regularity are separate.",
+  "baseline_commit": "7e030f252c859c5334185673b10b69971cab9402",
+  "namespaces": {
+    "hypergraph-theory": "Hypergraph",
+    "infinite-graph-theory": "Infinite"
+  },
+  "certificate_files": [
+    "hypergraph-theory/theories/foundations/hypergraph_regularity.v",
+    "hypergraph-theory/theories/migration/regularity.v",
+    "hypergraph-theory/theories/migration/matching.v",
+    "hypergraph-theory/theories/migration/partite_uniform.v",
+    "hypergraph-theory/theories/migration/incidence_degree.v",
+    "infinite-graph-theory/theories/foundations/regularity.v",
+    "infinite-graph-theory/theories/migration/regularity.v"
+  ],
+  "extra_certificates": [
+    "Hypergraph.foundations.hypergraph_regularity.hg_regularP",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_void",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_uniq",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0E",
+    "Hypergraph.foundations.hypergraph_regularity.incidence_degree_set0U",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_set0U",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_set1_set0",
+    "Hypergraph.foundations.hypergraph_regularity.hg_regular_setT",
+    "Infinite.foundations.regularity.iregular_finite_sub",
+    "Infinite.foundations.regularity.iregular_void",
+    "Infinite.foundations.regularity.iregular0",
+    "Infinite.foundations.regularity.iregular_isolated"
+  ],
+  "downstream_client": "hypergraph-theory/theories/examples/regular_hypergraphs.v",
+  "summary": [
+    "D8 turns X73 x73_regular into the alias of the new public Hypergraph.foundations.hypergraph_regularity.hg_regular E d: every vertex lies in exactly d members of the supplied family, counted by A10 incidence_degree; same finite carrier, E before d, universal equality, all empty cases kept. Infinite.conjectures.D4inf3.regular is a deferred distinct class of the same owner.",
+    "Frozen at the D7 pin in hypergraph-theory/theories/migration/regularity.v: the source (keeping the live A10 degree alias) and the complete current X73 row over it (keeping the live D2 partite and D6 matching aliases): 1 current whole iff. The complete Original is the existing, unchanged D6 X73MatchingOriginal row with its genuine D6 iff, reused as an original-statement; it and the four providers it reaches (A10 raw degree and regularity, D2 raw partite source, D6 raw matching) are borrowed with explicit effective commits. 2 owned + 5 borrowed mappings; 2 whole iff.",
+    "No older proof needed adaptation. The old D2 X73PartiteLegacy and D6 X73MatchingLegacy current rows, which still call the live x73_regular, stay byte-exact with notes; the other four old frozen X73 declarations (A10 helper and row, D2 and D6 Originals) are untouched. Public client hypergraph-theory/theories/examples/regular_hypergraphs.v.",
+    "D9 (superseding the deferral recorded above) migrates the infinite-neighbour-enumeration class of this owner: Infinite.conjectures.D4inf3.regular is now the alias of the public Infinite.foundations.regularity.iregular r G on the existing iGraph carrier (local injective I_r enumeration of exactly the neighbours, no choice). Frozen in infinite-graph-theory/theories/migration/regularity.v, bound at this family baseline 7e030f2 (frozen at the D8 pin 216204c, descriptive; source and closure byte-identical at both): the source and the complete existential row with both outer existentials and all five conjuncts (2 < r, locally_finite, regular, one_ended, the spanning-double-ray uniquely_hamiltonian proxy). 2 owned mappings, 1 whole iff; with the finite class 9 mappings and 3 whole iff. No older proof adapted; the five reverse files (21 old headers) are unchanged. The short name regular is also GTBase.base.regular and other local constants: the cross-module consumers and frozen bodies that the repository-wide lexical scan reaches outside the actual D4inf3 reverse closure are declared as lexical matches only."
+  ],
+  "kernel_evidence": "Exact types/implicit status of the source and its Section-discharged canonical, the two whole iff, all old declarations against 7e030f2, the actual eight-file reverse closure (132 headers), Print Assumptions and Locate/About-resolved strict closures, through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D8-by-lancelot/ (outside the repository); D9 (infinite class): exact types, record identity, Print Assumptions, Locate/About-resolved closures, meaningful negatives and the 21 reverse headers under /srv/graph-theory-rocq/coordination/evidence/D9-by-lancelot/",
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X73.x73_regular",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_regular",
+      "frozen_path": "hypergraph-theory/theories/migration/regularity.v",
+      "frozen": "Legacy.x73_regular",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.regularity.x73_regular_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph_regularity.hg_regular E d",
+      "binding_note": "Frozen at the D7 pin 7e030f2, the family baseline where the X73 text is bound."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/regularity.v",
+      "frozen": "X73RegularLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "substitutions": {
+        "x73_regular": "Legacy.x73_regular"
+      },
+      "certificate": "Hypergraph.migration.regularity.regular_tripartite_hypergraph_matching_lower_bound_statement_compat",
+      "corpus": "v2",
+      "binding_note": "Frozen at the D7 pin 7e030f2, the family baseline where the X73 text is bound."
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X6.x6_matching",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_matching",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "Legacy.x6_matching",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.matching.x6_matching_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X6.x6_r_partite_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X6.v",
+      "name": "x6_r_partite_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/partite_uniform.v",
+      "frozen": "PartiteLegacy.x6_r_partite_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.partite_uniform.x6_r_partite_uniform_compat",
+      "commit": "e53098e84635d8612e34e5d239fd13fe5afa9fb8"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X73.x73_hyperdegree",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_hyperdegree",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x73_hyperdegree",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.x73_hyperdegree_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X73.x73_regular",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "x73_regular",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X73Legacy.hyperdegree_regular",
+      "substitutions": {
+        "x73_hyperdegree": "Legacy.x73_hyperdegree",
+        "x73_regular": "hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.x73_regular_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X73.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "path": "hypergraph-theory/theories/conjectures/X73.v",
+      "name": "regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/matching.v",
+      "frozen": "X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement",
+      "substitutions": {
+        "x6_matching": "Legacy.x6_matching",
+        "x6_r_partite_uniform": "PU.PartiteLegacy.x6_r_partite_uniform",
+        "x73_regular": "ID.X73Legacy.hyperdegree_regular"
+      },
+      "certificate": "Hypergraph.migration.matching.regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2",
+      "binding_note": "The existing, unchanged D6 complete A10+D2+D6 Original (raw A10 regularity and degree, D2 partite source, D6 matching) with its genuine D6 iff; effective source text 9e030727db115917ae077ac07a8fc6aa68661f73, D6 owner module eaa6564 (frozen_at there is descriptive only)."
+    },
+    {
+      "kind": "source",
+      "qualified": "Infinite.conjectures.D4inf3.regular",
+      "path": "infinite-graph-theory/theories/conjectures/D4inf3.v",
+      "name": "regular",
+      "frozen_path": "infinite-graph-theory/theories/migration/regularity.v",
+      "frozen": "Legacy.regular",
+      "substitutions": {},
+      "certificate": "Infinite.migration.regularity.regular_compat",
+      "live_unfolds_to": "Infinite.foundations.regularity.iregular r G",
+      "frozen_at": "216204c1dfe3a483cc952446ff1f494397ccc7a8",
+      "binding_note": "Source and whole dependency closure have identical blobs at family baseline 7e030f2 and frozen_at 216204c; the family baseline is the actual effective commit. Fresh elaborated provider/type checks remain required in implementation and review."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Infinite.conjectures.D4inf3.infinite_uniquely_hamiltonian_graphs_statement",
+      "path": "infinite-graph-theory/theories/conjectures/D4inf3.v",
+      "name": "infinite_uniquely_hamiltonian_graphs_statement",
+      "frozen_path": "infinite-graph-theory/theories/migration/regularity.v",
+      "frozen": "D4inf3Legacy.infinite_uniquely_hamiltonian_graphs_statement",
+      "substitutions": {
+        "regular": "Legacy.regular"
+      },
+      "certificate": "Infinite.migration.regularity.infinite_uniquely_hamiltonian_graphs_statement_compat",
+      "corpus": "opg",
+      "frozen_at": "216204c1dfe3a483cc952446ff1f494397ccc7a8",
+      "binding_note": "Source and whole dependency closure have identical blobs at family baseline 7e030f2 and frozen_at 216204c; the family baseline is the actual effective commit. Fresh elaborated provider/type checks remain required in implementation and review."
+    }
+  ],
+  "known_stale_snapshots": {
+    "hypergraph-theory/theories/migration/partite_uniform.v#X73PartiteLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement": "D2 current snapshot: it keeps the live x73_regular, now the D8 alias of hg_regular (and the live D6 x6_matching). It stays byte-exact; the complete row is the existing D6 Hypergraph.migration.matching.X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement (raw A10 regularity and degree, D2 partite, D6 matching; certificate regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat), reused by D8.",
+    "hypergraph-theory/theories/migration/matching.v#X73MatchingLegacy.regular_tripartite_hypergraph_matching_lower_bound_statement": "D6 current snapshot: frozen with the D6 matching, it keeps the live x73_regular, now the D8 alias of hg_regular (and the live D2 x6_r_partite_uniform). It stays byte-exact; the complete row is the existing D6 Hypergraph.migration.matching.X73MatchingOriginal.regular_tripartite_hypergraph_matching_lower_bound_statement (raw A10 regularity and degree, D2 partite, D6 matching; certificate regular_tripartite_hypergraph_matching_lower_bound_statement_original_compat), reused by D8.",
+    "chromatic-theory/theories/migration/delete_edge.v#X64Legacy.finite_bridgeless_cubic_two_homogeneous_exceptions_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "chromatic-theory/theories/migration/delete_edge.v#X64Original.finite_bridgeless_cubic_two_homogeneous_exceptions_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "chromatic-theory/theories/migration/delete_edges.v#X7Legacy.six_regular_four_one_graph_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "chromatic-theory/theories/migration/edge_colourings.v#X213Legacy.one_factorization_conjecture_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "chromatic-theory/theories/migration/induced_free.v#X43Legacy.statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "chromatic-theory/theories/migration/proper_colouring.v#X63Legacy.cubic_two_homogeneous_four_colour_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "chromatic-theory/theories/migration/proper_colouring.v#X64Original.finite_bridgeless_cubic_two_homogeneous_exceptions_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "chromatic-theory/theories/migration/simple_edges.v#X64Legacy.statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.bondy_linear_cycle_cubic_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "graph-theory-misc/theories/migration/incidence_degree.v#X37Legacy.regular_graph_spanning_subgraph_degree_class_balance_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "graph-theory-misc/theories/migration/subgraph_of.v#XE2Legacy.erdos_715_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "hamiltonicity-theory/theories/migration/cycle_edges.v#U2Legacy.decomposing_the_prism_of_a_3_connected_cubic_planar_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "hamiltonicity-theory/theories/migration/cycle_edges.v#U2Legacy.uniquely_hamiltonian_graphs_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "hamiltonicity-theory/theories/migration/cycle_edges.v#X211Legacy.cantoni_planar_cubic_three_hamilton_cycles_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family.",
+    "homomorphism-theory/theories/migration/bipartition.v#U3Legacy.weak_pentagon_statement": "Lexical short-name match only: the regular in this frozen body is GTBase.base.regular (simple-graph neighbourhood regularity; the certificate file never imports Infinite), not the migrated Infinite source; not a stale snapshot of this family."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "base/theories/examples/min_degree.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "base/theories/examples/min_degree_at_least.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "base/theories/examples/subcubic.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/U1.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X213.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X63.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X64.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X7.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U1.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X213.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/D2str.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X216.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X37.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/XE2.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_X216.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/U2.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/X211.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "hamiltonicity-theory/theories/conjectures/grounding_X211.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "homomorphism-theory/theories/conjectures/grounding_U3.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/U7.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X5.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X5.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/U13.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/U9.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "spectral-graph-theory/theories/conjectures/D5.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "spectral-graph-theory/theories/conjectures/grounding_D5.v",
+      "name": "regular",
+      "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    }
+  ],
+  "distinct_variants": [],
+  "infinite_downstream_client": "infinite-graph-theory/theories/examples/regular_igraphs.v"
+}

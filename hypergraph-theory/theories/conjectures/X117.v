@@ -2,6 +2,9 @@
 
 From GTBase Require Export base.
 Require Hypergraph.foundations.hypergraph_copies.
+Require Hypergraph.foundations.hypergraph_forcing.
+Require Hypergraph.foundations.hedgehog.
+Require Hypergraph.foundations.hypergraph_ramsey.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -18,15 +21,15 @@ Unset Printing Implicit Defensive.
     spike lies in exactly one edge, each edge has 3 distinct vertices, so
     [H_t] is 3-uniform with body [t] and [C(t,2)] spikes/edges. *)
 
-Definition x117_spike (t : nat) : Type := {p : 'I_t * 'I_t | p.1 < p.2}.
+Definition x117_spike (t : nat) : Type := Hypergraph.foundations.hedgehog.hedgehog_spike t.
 
-Definition x117_vertex (t : nat) : Type := ('I_t + x117_spike t)%type.
+Definition x117_vertex (t : nat) : Type := Hypergraph.foundations.hedgehog.hedgehog_vertex t.
 
 Definition x117_edge (t : nat) (s : x117_spike t) : {set x117_vertex t} :=
-  [set inl (sval s).1; inl (sval s).2; inr s].
+  Hypergraph.foundations.hedgehog.hedgehog_edge s.
 
 Definition x117_edges (t : nat) : {set {set x117_vertex t}} :=
-  [set x117_edge s | s : x117_spike t].
+  Hypergraph.foundations.hedgehog.hedgehog_edges t.
 
 (** *** Two-colour monochromatic copy in the complete 3-uniform host. *)
 
@@ -43,13 +46,12 @@ Definition x117_monochromatic_copy
     3-subsets of the host. *)
 Definition x117_forces_mono
     (T : finType) (E : {set {set T}}) (N : nat) : Prop :=
-  forall col : {set 'I_N} -> bool, x117_monochromatic_copy E col.
+  Hypergraph.foundations.hypergraph_forcing.hg_forces_mono E 'I_N bool.
 
 (** [R] is the two-colour Ramsey number [r(H_t;2)]: the least host size that
     forces a monochromatic copy of [H_t]. *)
 Definition x117_ramsey_number (t R : nat) : Prop :=
-  x117_forces_mono (x117_edges t) R /\
-  forall N : nat, x117_forces_mono (x117_edges t) N -> R <= N.
+  Hypergraph.foundations.hypergraph_ramsey.hg_ramsey_number (x117_edges t) bool R.
 
 (** ** X117 statements *****************************************************)
 

@@ -1,0 +1,389 @@
+{
+  "family": "forces-mono",
+  "canonical_name": "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono",
+  "canonical_short_name": "hg_forces_mono",
+  "relation": "Forcing a monochromatic copy: hg_forces_mono E U C holds when every colouring col : {set U} -> C of all subsets of the finite host U by the palette C : Type has a monochromatic copy hg_mono_copy E col (D4). Host and palette are explicit. No inhabited palette, positive palette size, uniformity, nonempty family or no-isolated condition: an empty palette has no colouring (set0 is a host subset), so forcing is vacuous and X119's q = 0 Ramsey predicate holds exactly at R = 0; a singleton palette forces iff the whole carrier injects; theorems needing a colour take it explicitly. Ramsey numbers (forcing AND minimality, shared with Extremal), D4 copies, D3 images, Extremal graph/list forcing and C8 constancy are separate.",
+  "baseline_commit": "7647f2bd8507b2b2ebab4f2a7b92f1f8cf7ae95b",
+  "namespaces": {
+    "hypergraph-theory": "Hypergraph"
+  },
+  "certificate_files": [
+    "hypergraph-theory/theories/foundations/hypergraph_forcing.v",
+    "hypergraph-theory/theories/migration/forces_mono.v",
+    "hypergraph-theory/theories/migration/image_edge.v",
+    "hypergraph-theory/theories/migration/incidence_degree.v",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v"
+  ],
+  "extra_certificates": [
+    "Hypergraph.foundations.hypergraph_forcing.hg_forces_monoE",
+    "Hypergraph.foundations.hypergraph_forcing.hg_forces_monoS",
+    "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono_empty_palette",
+    "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono_card",
+    "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono_singleton",
+    "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono_transport"
+  ],
+  "downstream_client": "hypergraph-theory/theories/examples/forcing.v",
+  "summary": [
+    "D5 turns X108 x108_two_colour_ramsey_at_most and X117 x117_forces_mono (bool) and X119 x119_forces_mono (I_q, E q N order) into aliases of the new public Hypergraph.foundations.hypergraph_forcing.hg_forces_mono E U C: every colouring of the host subsets by the palette has D4's hg_mono_copy. Empty palettes force vacuously; a singleton palette forces iff the carrier injects.",
+    "Frozen at the D4 pin: 3 sources, the 2 Ramsey-number chains (forcing and minimality, kept as chains) and 3 complete current rows: 3 new whole iff, all conversions. The complete histories are D3's existing X108ImageOriginal, X119ImageOriginal and complete X117ImageLegacy rows, bound at 9e03072 with D3's certificates (3 reused whole iff), with their D3/D1/A10 support in the historical role.",
+    "No older proof needed adaptation (D4's three reviewed D3 adaptations are retained); statuses, legs, docs, guards and the opaque x119_sqrt_ex witness are unchanged. Public client: hypergraph-theory/theories/examples/forcing.v."
+  ],
+  "kernel_evidence": "Exact types/implicit status of the sources and API, the six whole iff, all old declarations against 7647f2b, the 25 actual consumers, Print Assumptions, About-resolved Print All Dependencies closures and the sqrt witness, through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D5-by-lancelot/ (outside the repository)",
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X108.x108_two_colour_ramsey_at_most",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_two_colour_ramsey_at_most",
+      "frozen_path": "hypergraph-theory/theories/migration/forces_mono.v",
+      "frozen": "X108ForcingLegacy.x108_two_colour_ramsey_at_most",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.forces_mono.x108_two_colour_ramsey_at_most_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono E 'I_N bool"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/forces_mono.v",
+      "frozen": "X108ForcingLegacy.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "substitutions": {
+        "x108_two_colour_ramsey_at_most": "X108ForcingLegacy.x108_two_colour_ramsey_at_most"
+      },
+      "certificate": "Hypergraph.migration.forces_mono.three_uniform_degenerate_hypergraph_ramsey_linear_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X117.x117_forces_mono",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_forces_mono",
+      "frozen_path": "hypergraph-theory/theories/migration/forces_mono.v",
+      "frozen": "X117ForcingLegacy.x117_forces_mono",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.forces_mono.x117_forces_mono_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono E 'I_N bool"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X117.x117_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/forces_mono.v",
+      "frozen": "X117ForcingLegacy.x117_ramsey_number",
+      "substitutions": {
+        "x117_forces_mono": "X117ForcingLegacy.x117_forces_mono"
+      },
+      "certificate": "Hypergraph.migration.forces_mono.x117_ramsey_number_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X117.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "conlon_fox_rodl_hedgehog_ramsey_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/forces_mono.v",
+      "frozen": "X117ForcingLegacy.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "substitutions": {
+        "x117_ramsey_number": "X117ForcingLegacy.x117_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.forces_mono.conlon_fox_rodl_hedgehog_ramsey_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Hypergraph.conjectures.X119.x119_forces_mono",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_forces_mono",
+      "frozen_path": "hypergraph-theory/theories/migration/forces_mono.v",
+      "frozen": "X119ForcingLegacy.x119_forces_mono",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.forces_mono.x119_forces_mono_compat",
+      "live_unfolds_to": "Hypergraph.foundations.hypergraph_forcing.hg_forces_mono E 'I_N 'I_q"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Hypergraph.conjectures.X119.x119_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/forces_mono.v",
+      "frozen": "X119ForcingLegacy.x119_ramsey_number",
+      "substitutions": {
+        "x119_forces_mono": "X119ForcingLegacy.x119_forces_mono"
+      },
+      "certificate": "Hypergraph.migration.forces_mono.x119_ramsey_number_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/forces_mono.v",
+      "frozen": "X119ForcingLegacy.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "substitutions": {
+        "x119_ramsey_number": "X119ForcingLegacy.x119_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.forces_mono.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X117.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "conlon_fox_rodl_hedgehog_ramsey_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X117ImageLegacy.conlon_fox_rodl_hedgehog_ramsey_statement",
+      "substitutions": {
+        "x117_ramsey_number": "X117ImageLegacy.x117_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.image_edge.conlon_fox_rodl_hedgehog_ramsey_statement_compat",
+      "corpus": "v2",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X108.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X108ImageOriginal.three_uniform_degenerate_hypergraph_ramsey_linear_statement",
+      "substitutions": {
+        "x108_uniform": "UH.UniformLegacy.x108_uniform",
+        "x108_d_degenerate": "ID.X108Legacy.d_degenerate",
+        "x108_two_colour_ramsey_at_most": "X108ImageLegacy.x108_two_colour_ramsey_at_most"
+      },
+      "certificate": "Hypergraph.migration.image_edge.three_uniform_degenerate_hypergraph_ramsey_linear_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Hypergraph.conjectures.X119.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X119ImageOriginal.conlon_fox_sudakov_three_uniform_ramsey_tower_statement",
+      "substitutions": {
+        "x119_uniform": "UH.UniformLegacy.x119_uniform",
+        "x119_ramsey_number": "X119ImageLegacy.x119_ramsey_number"
+      },
+      "certificate": "Hypergraph.migration.image_edge.conlon_fox_sudakov_three_uniform_ramsey_tower_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X108.x108_image_edge",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_image_edge",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "ImageLegacy.x108_image_edge",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.image_edge.x108_image_edge_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_image_edge",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_image_edge",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "ImageLegacy.x117_image_edge",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.image_edge.x117_image_edge_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_image_edge",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_image_edge",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "ImageLegacy.x119_image_edge",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.image_edge.x119_image_edge_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X108.x108_monochromatic_copy",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_monochromatic_copy",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X108ImageLegacy.x108_monochromatic_copy",
+      "substitutions": {
+        "x108_image_edge": "ImageLegacy.x108_image_edge"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x108_monochromatic_copy_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X108.x108_two_colour_ramsey_at_most",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_two_colour_ramsey_at_most",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X108ImageLegacy.x108_two_colour_ramsey_at_most",
+      "substitutions": {
+        "x108_monochromatic_copy": "X108ImageLegacy.x108_monochromatic_copy"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x108_two_colour_ramsey_at_most_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_monochromatic_copy",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_monochromatic_copy",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X117ImageLegacy.x117_monochromatic_copy",
+      "substitutions": {
+        "x117_image_edge": "ImageLegacy.x117_image_edge"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x117_monochromatic_copy_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_forces_mono",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_forces_mono",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X117ImageLegacy.x117_forces_mono",
+      "substitutions": {
+        "x117_monochromatic_copy": "X117ImageLegacy.x117_monochromatic_copy"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x117_forces_mono_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X117.x117_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X117.v",
+      "name": "x117_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X117ImageLegacy.x117_ramsey_number",
+      "substitutions": {
+        "x117_forces_mono": "X117ImageLegacy.x117_forces_mono"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x117_ramsey_number_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_monochromatic_copy",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_monochromatic_copy",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X119ImageLegacy.x119_monochromatic_copy",
+      "substitutions": {
+        "x119_image_edge": "ImageLegacy.x119_image_edge"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x119_monochromatic_copy_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_forces_mono",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_forces_mono",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X119ImageLegacy.x119_forces_mono",
+      "substitutions": {
+        "x119_monochromatic_copy": "X119ImageLegacy.x119_monochromatic_copy"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x119_forces_mono_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_ramsey_number",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_ramsey_number",
+      "frozen_path": "hypergraph-theory/theories/migration/image_edge.v",
+      "frozen": "X119ImageLegacy.x119_ramsey_number",
+      "substitutions": {
+        "x119_forces_mono": "X119ImageLegacy.x119_forces_mono"
+      },
+      "certificate": "Hypergraph.migration.image_edge.x119_ramsey_number_compat",
+      "commit": "aa1f6f38d309d50725f98b5e1b42dff6414af30b"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X108.x108_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x108_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x108_uniform_compat",
+      "commit": "3be65eed7084abfae36dee74f7117b598325bc4c"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X119.x119_uniform",
+      "path": "hypergraph-theory/theories/conjectures/X119.v",
+      "name": "x119_uniform",
+      "frozen_path": "hypergraph-theory/theories/migration/uniform_hypergraph.v",
+      "frozen": "UniformLegacy.x119_uniform",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.uniform_hypergraph.x119_uniform_compat",
+      "commit": "3be65eed7084abfae36dee74f7117b598325bc4c"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X108.x108_degree_in",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_degree_in",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "Legacy.x108_degree_in",
+      "substitutions": {},
+      "certificate": "Hypergraph.migration.incidence_degree.x108_degree_in_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Hypergraph.conjectures.X108.x108_d_degenerate",
+      "path": "hypergraph-theory/theories/conjectures/X108.v",
+      "name": "x108_d_degenerate",
+      "frozen_path": "hypergraph-theory/theories/migration/incidence_degree.v",
+      "frozen": "X108Legacy.d_degenerate",
+      "substitutions": {
+        "x108_degree_in": "Legacy.x108_degree_in",
+        "x108_d_degenerate": "d_degenerate"
+      },
+      "certificate": "Hypergraph.migration.incidence_degree.x108_d_degenerate_compat",
+      "commit": "a54026d37a8b40d53340be71be783ac5d5fe3635"
+    }
+  ],
+  "known_stale_snapshots": {
+    "hypergraph-theory/theories/migration/incidence_degree.v#X108Legacy.three_uniform_degenerate_hypergraph_ramsey_linear_statement": "A10 partial snapshot: its live x108_two_colour_ramsey_at_most is now the D5 forcing alias. It stays byte-exact; the complete row is the existing D3 Hypergraph.migration.image_edge.X108ImageOriginal.three_uniform_degenerate_hypergraph_ramsey_linear_statement (certificate three_uniform_degenerate_hypergraph_ramsey_linear_statement_original_compat), reused by this family.",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v#X108UniformLegacy.three_uniform_degenerate_hypergraph_ramsey_linear_statement": "D1 current snapshot: its live x108_two_colour_ramsey_at_most is now the D5 forcing alias. It stays byte-exact; the complete row is the existing D3 Hypergraph.migration.image_edge.X108ImageOriginal.three_uniform_degenerate_hypergraph_ramsey_linear_statement (certificate three_uniform_degenerate_hypergraph_ramsey_linear_statement_original_compat), reused by this family.",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v#X108UniformOriginal.three_uniform_degenerate_hypergraph_ramsey_linear_statement": "D1 complete A10+D1 Original: its live x108_two_colour_ramsey_at_most is now the D5 forcing alias. It stays byte-exact; the complete row is the existing D3 Hypergraph.migration.image_edge.X108ImageOriginal.three_uniform_degenerate_hypergraph_ramsey_linear_statement (certificate three_uniform_degenerate_hypergraph_ramsey_linear_statement_original_compat), reused by this family.",
+    "hypergraph-theory/theories/migration/uniform_hypergraph.v#X119UniformLegacy.conlon_fox_sudakov_three_uniform_ramsey_tower_statement": "D1 current snapshot: its live x119_ramsey_number now reaches the D5 forcing alias. It stays byte-exact; the complete row is the existing D3 Hypergraph.migration.image_edge.X119ImageOriginal.conlon_fox_sudakov_three_uniform_ramsey_tower_statement (certificate conlon_fox_sudakov_three_uniform_ramsey_tower_statement_original_compat), reused by this family.",
+    "hypergraph-theory/theories/migration/hedgehog.v#X117HedgehogLegacy.conlon_fox_rodl_hedgehog_ramsey_statement": "D7 current snapshot: through its frozen chain X117HedgehogLegacy.x117_ramsey_number, which keeps the live x117_forces_mono (the D5 alias), it reaches the D5 forcing alias. It stays byte-exact; the complete row is Hypergraph.migration.hedgehog.X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement (certificate conlon_fox_rodl_hedgehog_ramsey_statement_original_compat).",
+    "hypergraph-theory/theories/migration/hedgehog.v#X117HedgehogLegacy.x117_ramsey_number": "D7 current snapshot: frozen with the raw D7 hedgehog constructors, the Ramsey chain keeps the live x117_forces_mono (the D5 alias). It stays byte-exact; the complete chain is Hypergraph.migration.hedgehog.X117HedgehogOriginal.x117_ramsey_number over D3's actual X117ImageLegacy.x117_forces_mono (certificate x117_ramsey_number_original_compat).",
+    "hypergraph-theory/theories/migration/ramsey_number.v#X117RamseyLegacy.x117_ramsey_number": "D10 current snapshot: the frozen x117_ramsey_number keeps the live x117_forces_mono (the D5 alias). It stays byte-exact; the complete row is the existing D7 Hypergraph.migration.hedgehog.X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement (certificate conlon_fox_rodl_hedgehog_ramsey_statement_original_compat), reused by D10.",
+    "hypergraph-theory/theories/migration/ramsey_number.v#X117RamseyLegacy.conlon_fox_rodl_hedgehog_ramsey_statement": "D10 current snapshot: through its frozen X117RamseyLegacy.x117_ramsey_number, which keeps the live x117_forces_mono (the D5 alias), it reaches that alias. It stays byte-exact; the complete row is the existing D7 Hypergraph.migration.hedgehog.X117HedgehogOriginal.conlon_fox_rodl_hedgehog_ramsey_statement (certificate conlon_fox_rodl_hedgehog_ramsey_statement_original_compat), reused by D10.",
+    "hypergraph-theory/theories/migration/ramsey_number.v#X119RamseyLegacy.x119_ramsey_number": "D10 current snapshot: the frozen x119_ramsey_number keeps the live x119_forces_mono (the D5 alias). It stays byte-exact; the complete row is the existing D3 Hypergraph.migration.image_edge.X119ImageOriginal.conlon_fox_sudakov_three_uniform_ramsey_tower_statement (certificate conlon_fox_sudakov_three_uniform_ramsey_tower_statement_original_compat), reused by D10.",
+    "hypergraph-theory/theories/migration/ramsey_number.v#X119RamseyLegacy.conlon_fox_sudakov_three_uniform_ramsey_tower_statement": "D10 current snapshot: through its frozen X119RamseyLegacy.x119_ramsey_number, which keeps the live x119_forces_mono (the D5 alias), it reaches that alias. It stays byte-exact; the complete row is the existing D3 Hypergraph.migration.image_edge.X119ImageOriginal.conlon_fox_sudakov_three_uniform_ramsey_tower_statement (certificate conlon_fox_sudakov_three_uniform_ramsey_tower_statement_original_compat), reused by D10."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x108_two_colour_ramsey_at_most",
+      "note": "x117_forces_mono_equiv_x108 (both bool aliases are hg_forces_mono E I_N bool, so its proof stays a conversion) and x108_two_colour_ramsey_at_most_equiv_x119_forces_mono keep exact types and unchanged proofs."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x117_forces_mono",
+      "note": "x117_forces_mono_equiv_x108 and x117_forces_mono_equiv_x119_forces_mono keep exact types and unchanged proofs."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
+      "name": "x119_forces_mono",
+      "note": "x108_two_colour_ramsey_at_most_equiv_x119_forces_mono and x117_forces_mono_equiv_x119_forces_mono keep exact types and unchanged proofs (b2i2/i22b unchanged)."
+    }
+  ],
+  "distinct_variants": []
+}
