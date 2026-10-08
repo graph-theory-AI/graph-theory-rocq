@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py simple_line_graphs --details /t
 
 - Canonical: `GTBase.simple_line_graphs.simple_line_graph`.
 - Baseline: `897a7d30a0137195d30ae803d0482b5df31c3869`.
-- Scope: 7 helpers, 6 statements, 40 frozen objects, 98 recorded references.
-- Source checks: 319/319 pass; consistent.
+- Scope: 7 helpers, 6 statements, 40 frozen objects, 122 recorded references.
+- Source checks: 320/320 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

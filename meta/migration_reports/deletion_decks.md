@@ -6,7 +6,7 @@ Full evidence: `python3 meta/migration_report.py deletion_decks --details /tmp/m
 
 - Canonical: `Reconstruction.foundations.decks.same_deck`.
 - Baseline: `3bdfdae32824d4762ba8105367f7858a706a02e2`.
-- Scope: 5 helpers, 4 statements, 22 frozen objects, 87 recorded references.
+- Scope: 5 helpers, 4 statements, 22 frozen objects, 106 recorded references.
 - Source checks: 194/194 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |

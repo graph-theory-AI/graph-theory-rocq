@@ -39,7 +39,7 @@
     "Baseline: accepted coordinator 3bdfdae (tree ade432af), which contains A4 (5ec0f33) and A25 with the C19 composition (ff7bd3b).",
     "Rows: reconstruction_statement (opg; three-vertex guards on G and H, kept although redundant), edge_reconstruction_statement (opg; four-edge guard on G only), Kelly whitney_line_inversion_premise and implications_U11 external_whitney_line_inversion_statement (non-corpus; four-edge guard and same-edge-deck hypothesis; explicit conditional premises, unproved).",
     "Deepest Originals: the vertex row is its own (chain unchanged since 3b2638f, upstream closure only); the edge row is A4 U11Legacy (raw edge deck at 9e03072) and the two Whitney rows are A25 KellyOriginal / ImplicationsU11Original (A4 raw edge deck and A25 raw line graph at 9e03072), certified through A4/A25 own certificates; the A4 and A25 certificate files are unchanged and compile.",
-    "Distinct, unchanged: Digraph P9 same_deck (directed switching deck, deferred separate family), U11 Seidel switching deck, X21 ell-decks; kelly public-boundary extraction is the later D2 change. Proof-only adaptation: two rewrite lines of implications_U11.same_deck_equiv_x21_same_l_deck now use decks.vdel_cardE (the same equation as its vdel_card_setC1, for the canonical name); no statement or type changes."
+    "Distinct, unchanged: Digraph P9 same_deck (directed switching deck, deferred separate family), U11 Seidel switching deck, X21 ell-decks; kelly's public boundary was extracted by the separate D2 change (theories/migration/kelly_public_boundary.v): kelly imports no conjecture module and binds the canonical decks, del_edge_set and simple_line_graph, every name, Arguments and type (by kernel ascription) kept. Proof-only adaptation: two rewrite lines of implications_U11.same_deck_equiv_x21_same_l_deck now use decks.vdel_cardE (the same equation as its vdel_card_setC1, for the canonical name); no statement or type changes."
   ],
   "known_stale_snapshots": {
     "reconstruction-theory/theories/migration/simple_line_graphs.v#KellyLegacy.whitney_line_inversion_premise": "Earlier-family snapshot (A25, simple-line-graph): A25 froze only the line construction in Kelly's Whitney premise and kept the edge deck live by design, so this copy applies the live same_edge_deck, which since deletion-decks is the transparent alias of Reconstruction.foundations.decks.same_edge_deck (the same body, edge card del_edge_set G [set e] = sdel_edge G e). The complete row with every migrated helper at its original body is A25's own KellyOriginal.whitney_line_inversion_premise (A4 raw edge deck, A25 raw line graph), certified by Reconstruction.migration.simple_line_graphs.whitney_line_inversion_premise_original_compat; the current row is frozen here as KellyLegacy.whitney_line_inversion_premise.",
@@ -109,27 +109,27 @@
     {
       "path": "reconstruction-theory/theories/foundations/kelly.v",
       "name": "edge_reconstruction_statement",
-      "note": "Kelly/Greenwell foundations over the U11 names (its 33 declarations, types and Arguments unchanged; it compiles unchanged); its Whitney premise is frozen here as KellyLegacy; extraction of its public boundary is the later D2 change."
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
     },
     {
       "path": "reconstruction-theory/theories/foundations/kelly.v",
       "name": "reconstruction_statement",
-      "note": "Kelly/Greenwell foundations over the U11 names (its 33 declarations, types and Arguments unchanged; it compiles unchanged); its Whitney premise is frozen here as KellyLegacy; extraction of its public boundary is the later D2 change."
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
     },
     {
       "path": "reconstruction-theory/theories/foundations/kelly.v",
       "name": "same_deck",
-      "note": "Kelly/Greenwell foundations over the U11 names (its 33 declarations, types and Arguments unchanged; it compiles unchanged); its Whitney premise is frozen here as KellyLegacy; extraction of its public boundary is the later D2 change."
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
     },
     {
       "path": "reconstruction-theory/theories/foundations/kelly.v",
       "name": "same_edge_deck",
-      "note": "Kelly/Greenwell foundations over the U11 names (its 33 declarations, types and Arguments unchanged; it compiles unchanged); its Whitney premise is frozen here as KellyLegacy; extraction of its public boundary is the later D2 change."
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
     },
     {
       "path": "reconstruction-theory/theories/foundations/kelly.v",
       "name": "vdel_card",
-      "note": "Kelly/Greenwell foundations over the U11 names (its 33 declarations, types and Arguments unchanged; it compiles unchanged); its Whitney premise is frozen here as KellyLegacy; extraction of its public boundary is the later D2 change."
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
     }
   ],
   "distinct_variants": [
