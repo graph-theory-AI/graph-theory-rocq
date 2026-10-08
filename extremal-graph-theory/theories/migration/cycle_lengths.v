@@ -27,7 +27,9 @@
 
 From GTBase Require Import base.
 From Extremal.conjectures Require Import X4 X59 X76 X96.
+From Extremal.conjectures Require Import X84 X85.
 From Extremal.migration Require subgraph_of edge_count cut_size.
+From Extremal.migration Require simple_edges incidence_degree.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -192,3 +194,197 @@ Print Assumptions ck_free_max_cut_polynomial_surplus_statement_compat.
 Print Assumptions ck_free_max_cut_polynomial_surplus_statement_original_compat.
 Print Assumptions bollobas_erdos_large_c4_free_subgraph_statement_compat.
 Print Assumptions bollobas_erdos_large_c4_free_subgraph_statement_original_compat.
+
+(** ** B29 (2026-10-04): X84's edge-family cycles
+
+    Since B29 the X84 helpers [x84_cycle_edge_set], [x84_cycle_count] and [x84_has_cycle_length] are aliases of
+    [Extremal.foundations.edge_cycles] ([edge_family_cycle], [edge_family_cycle_count],
+    [has_edge_family_cycle_length]), the same bodies by conversion: the five conjuncts in order (host edges, support
+    larger than two, as many members as support vertices, incidence degree two, connected support) over an arbitrary
+    supplied family.  [X84EdgeLegacy] / [X85EdgeLegacy] freeze them and the two complete current rows at the
+    family baseline 4b63976, keeping the live M1 / A10 aliases and the unchanged local support vocabulary.
+    [X84EdgeOriginal] / [X85EdgeOriginal] freeze the pre-M1 support, relation and connectivity of 061154c, the cycle,
+    count and length chains and both rows over M1's raw [Legacy.edge_set] and A10's raw [Legacy.x84_degree_in]
+    (aliased, not imported); their certificates use M1's proved set equality [x84_edge_set_compat] and A10's
+    conversion [x84_degree_in_compat], and transport the rows pointwise with the same family and witnesses. *)
+
+Module M1 := Extremal.migration.simple_edges.
+Module ID := Extremal.migration.incidence_degree.
+
+Module X84EdgeLegacy.
+
+Definition cycle_edge_set (G : sgraph) (F : {set {set G}}) : bool :=
+  [&& F \subset x84_edge_set G,
+      2 < #|x84_support F|,
+      #|F| == #|x84_support F|,
+      [forall v in x84_support F, x84_degree_in F v == 2]
+    & x84_connected_support F].
+
+Definition cycle_count (G : sgraph) : nat :=
+  #|[set F : {set {set G}} | @cycle_edge_set G F]|.
+
+Definition has_cycle_length (G : sgraph) (l : nat) : Prop :=
+  exists F : {set {set G}},
+    @cycle_edge_set G F /\ #|x84_support F| = l.
+
+Definition odd_cycle_free_turan2_unique_cycle_extremal_statement : Prop :=
+  forall k : nat, 1 < k ->
+  exists N : nat, forall n : nat, N <= n ->
+    ~ has_cycle_length (x84_turan2 n) (2 * k + 1) /\
+    forall G : sgraph, #|G| = n ->
+      ~ has_cycle_length G (2 * k + 1) ->
+      cycle_count G <= cycle_count (x84_turan2 n) /\
+      (cycle_count G = cycle_count (x84_turan2 n) ->
+         inhabited (G ≃ x84_turan2 n)).
+
+End X84EdgeLegacy.
+
+Module X85EdgeLegacy.
+
+Definition arman_tsaturian_average_degree_cycle_count_statement : Prop :=
+  exists c den N : nat,
+    [/\ 0 < c, 1 < den &
+      forall (n d : nat) (G : sgraph),
+        N <= d -> #|G| = n -> x85_average_degree_exact G d ->
+        x85_log_corrected_exponential_bound c den n d (X84EdgeLegacy.cycle_count G)].
+
+End X85EdgeLegacy.
+
+Module X84EdgeOriginal.
+
+Definition support (G : sgraph) (F : {set {set G}}) : {set G} :=
+  [set v : G | [exists e in F, v \in e]].
+
+Definition edge_rel (G : sgraph) (F : {set {set G}}) : rel G :=
+  fun x y => [set x; y] \in F.
+
+Definition connected_support (G : sgraph) (F : {set {set G}}) : bool :=
+  [forall x in support F,
+    [forall y in support F, connect (edge_rel F) x y]].
+
+Definition cycle_edge_set (G : sgraph) (F : {set {set G}}) : bool :=
+  [&& F \subset M1.Legacy.edge_set G,
+      2 < #|support F|,
+      #|F| == #|support F|,
+      [forall v in support F, ID.Legacy.x84_degree_in F v == 2]
+    & connected_support F].
+
+Definition cycle_count (G : sgraph) : nat :=
+  #|[set F : {set {set G}} | @cycle_edge_set G F]|.
+
+Definition has_cycle_length (G : sgraph) (l : nat) : Prop :=
+  exists F : {set {set G}},
+    @cycle_edge_set G F /\ #|support F| = l.
+
+Definition odd_cycle_free_turan2_unique_cycle_extremal_statement : Prop :=
+  forall k : nat, 1 < k ->
+  exists N : nat, forall n : nat, N <= n ->
+    ~ has_cycle_length (x84_turan2 n) (2 * k + 1) /\
+    forall G : sgraph, #|G| = n ->
+      ~ has_cycle_length G (2 * k + 1) ->
+      cycle_count G <= cycle_count (x84_turan2 n) /\
+      (cycle_count G = cycle_count (x84_turan2 n) ->
+         inhabited (G ≃ x84_turan2 n)).
+
+End X84EdgeOriginal.
+
+Module X85EdgeOriginal.
+
+Definition arman_tsaturian_average_degree_cycle_count_statement : Prop :=
+  exists c den N : nat,
+    [/\ 0 < c, 1 < den &
+      forall (n d : nat) (G : sgraph),
+        N <= d -> #|G| = n -> x85_average_degree_exact G d ->
+        x85_log_corrected_exponential_bound c den n d (X84EdgeOriginal.cycle_count G)].
+
+End X85EdgeOriginal.
+
+(** *** B29 current sources and rows: conversions *)
+
+Lemma x84_cycle_edge_set_compat (G : sgraph) (F : {set {set G}}) :
+  X84EdgeLegacy.cycle_edge_set F = x84_cycle_edge_set F.
+Proof. by []. Qed.
+
+Lemma x84_cycle_count_compat (G : sgraph) : X84EdgeLegacy.cycle_count G = x84_cycle_count G.
+Proof. by []. Qed.
+
+Lemma x84_has_cycle_length_compat (G : sgraph) (l : nat) :
+  X84EdgeLegacy.has_cycle_length G l <-> x84_has_cycle_length G l.
+Proof. exact: iff_refl. Qed.
+
+Lemma odd_cycle_free_turan2_unique_cycle_extremal_statement_compat :
+  X84EdgeLegacy.odd_cycle_free_turan2_unique_cycle_extremal_statement <->
+  odd_cycle_free_turan2_unique_cycle_extremal_statement.
+Proof. exact: iff_refl. Qed.
+
+Lemma arman_tsaturian_average_degree_cycle_count_statement_compat :
+  X85EdgeLegacy.arman_tsaturian_average_degree_cycle_count_statement <->
+  arman_tsaturian_average_degree_cycle_count_statement.
+Proof. exact: iff_refl. Qed.
+
+(** *** Before M1, A10 and B29: the raw local vocabulary and the complete rows *)
+
+Lemma x84_support_frozen_compat (G : sgraph) (F : {set {set G}}) :
+  X84EdgeOriginal.support F = x84_support F.
+Proof. by []. Qed.
+
+Lemma x84_edge_rel_frozen_compat (G : sgraph) (F : {set {set G}}) :
+  X84EdgeOriginal.edge_rel F = x84_edge_rel F.
+Proof. by []. Qed.
+
+Lemma x84_connected_support_frozen_compat (G : sgraph) (F : {set {set G}}) :
+  X84EdgeOriginal.connected_support F = x84_connected_support F.
+Proof. by []. Qed.
+
+(** M1's raw edge set is the host edge set by a proved set equality; A10's raw degree is the incidence degree by
+    conversion. *)
+Lemma x84_cycle_edge_set_original_compat (G : sgraph) (F : {set {set G}}) :
+  X84EdgeOriginal.cycle_edge_set F = x84_cycle_edge_set F.
+Proof. by rewrite /X84EdgeOriginal.cycle_edge_set M1.x84_edge_set_compat. Qed.
+
+Lemma x84_cycle_count_original_compat (G : sgraph) : X84EdgeOriginal.cycle_count G = x84_cycle_count G.
+Proof. by apply: eq_card => F; rewrite !inE x84_cycle_edge_set_original_compat. Qed.
+
+Lemma x84_has_cycle_length_original_compat (G : sgraph) (l : nat) :
+  X84EdgeOriginal.has_cycle_length G l <-> x84_has_cycle_length G l.
+Proof.
+split=> -[F [cF sF]]; exists F; split=> //.
+  by move: cF; rewrite x84_cycle_edge_set_original_compat.
+by rewrite x84_cycle_edge_set_original_compat.
+Qed.
+
+Lemma odd_cycle_free_turan2_unique_cycle_extremal_statement_original_compat :
+  X84EdgeOriginal.odd_cycle_free_turan2_unique_cycle_extremal_statement <->
+  odd_cycle_free_turan2_unique_cycle_extremal_statement.
+Proof.
+split=> h k k1; have [N hN] := h k k1; exists N => n Nn; have [nt hG] := hN n Nn; split.
+- by move=> hl; apply: nt; apply/x84_has_cycle_length_original_compat.
+- move=> G cG nG; rewrite -!x84_cycle_count_original_compat; apply: hG => // hx; apply: nG.
+  exact/x84_has_cycle_length_original_compat.
+- by move=> hl; apply: nt; apply/x84_has_cycle_length_original_compat.
+- move=> G cG nG; rewrite !x84_cycle_count_original_compat; apply: hG => // hx; apply: nG.
+  exact/x84_has_cycle_length_original_compat.
+Qed.
+
+Lemma arman_tsaturian_average_degree_cycle_count_statement_original_compat :
+  X85EdgeOriginal.arman_tsaturian_average_degree_cycle_count_statement <->
+  arman_tsaturian_average_degree_cycle_count_statement.
+Proof.
+split=> -[c [den [N [c0 d1 h]]]]; exists c, den, N; split=> // n d G Nd nG avg.
+  by rewrite -x84_cycle_count_original_compat; apply: h.
+by rewrite x84_cycle_count_original_compat; apply: h.
+Qed.
+
+Print Assumptions x84_cycle_edge_set_compat.
+Print Assumptions x84_cycle_count_compat.
+Print Assumptions x84_has_cycle_length_compat.
+Print Assumptions odd_cycle_free_turan2_unique_cycle_extremal_statement_compat.
+Print Assumptions arman_tsaturian_average_degree_cycle_count_statement_compat.
+Print Assumptions x84_support_frozen_compat.
+Print Assumptions x84_edge_rel_frozen_compat.
+Print Assumptions x84_connected_support_frozen_compat.
+Print Assumptions x84_cycle_edge_set_original_compat.
+Print Assumptions x84_cycle_count_original_compat.
+Print Assumptions x84_has_cycle_length_original_compat.
+Print Assumptions odd_cycle_free_turan2_unique_cycle_extremal_statement_original_compat.
+Print Assumptions arman_tsaturian_average_degree_cycle_count_statement_original_compat.

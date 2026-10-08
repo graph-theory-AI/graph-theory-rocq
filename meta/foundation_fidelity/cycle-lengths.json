@@ -56,6 +56,51 @@
     "cycle_lengths_ground_K2",
     "cycle_lengths_ground_K3"
    ]
+  },
+  "Extremal.foundations.edge_cycles": {
+   "path": "extremal-graph-theory/theories/foundations/edge_cycles.v",
+   "overrides": {
+    "edge_family_support": {
+     "verdict": "FAITHFUL",
+     "note": "the vertices lying in some member of an arbitrary supplied family, whatever the member's size."
+    },
+    "edge_family_rel": {
+     "verdict": "FAITHFUL",
+     "note": "the raw pair relation [set x; y] \\in F; a singleton member relates its vertex to itself (edge_family_rel_singleton); not normalized."
+    },
+    "edge_family_connected": {
+     "verdict": "FAITHFUL",
+     "note": "every two support vertices are connected by edge_family_rel F (MathComp connect)."
+    },
+    "edge_family_cycle": {
+     "verdict": "FAITHFUL",
+     "note": "the five conjuncts in order: F \\subset E(G), 2 < #|support|, #|F| = #|support|, incidence degree two on the support, connected support; a triangle beside an uncovered vertex qualifies, disjoint triangles and malformed members do not."
+    },
+    "edge_family_cycle_count": {
+     "verdict": "FAITHFUL",
+     "note": "the number of qualifying families; zero on graphs with at most two vertices, one on K_3."
+    },
+    "has_edge_family_cycle_length": {
+     "verdict": "FAITHFUL",
+     "note": "some qualifying family has exactly l support vertices; impossible for l <= 2."
+    }
+   },
+   "machine_evidence": [
+    "in_edge_family_support",
+    "edge_family_support_set0",
+    "edge_family_rel_sym",
+    "edge_family_rel_singleton",
+    "edge_family_cycleP",
+    "edge_family_cycle_subset",
+    "edge_family_cycle_support_gt2",
+    "edge_family_cycle_set0",
+    "edge_family_cycle_order",
+    "edge_family_cycle_triangle",
+    "edge_family_rel_closed",
+    "has_edge_family_cycle_length_gt2",
+    "edge_family_cycle_count_small",
+    "edge_family_cycle_count_gt0"
+   ]
   }
  }
 }

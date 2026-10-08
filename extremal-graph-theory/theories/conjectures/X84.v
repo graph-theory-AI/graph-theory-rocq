@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.X84 -- v2 odd-cycle-free cycle extremal row *)
 
 From GTBase Require Export base.
+From Extremal.foundations Require Import edge_cycles.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -24,19 +25,23 @@ Definition x84_connected_support (G : sgraph) (F : {set {set G}}) : bool :=
   [forall x in x84_support F,
     [forall y in x84_support F, connect (x84_edge_rel F) x y]].
 
+(** Since the B29 library migration (2026-10-04) a transparent alias of
+    [Extremal.foundations.edge_cycles.edge_family_cycle], the same body by conversion; the former body is frozen
+    in theories/migration/cycle_lengths.v. *)
 Definition x84_cycle_edge_set (G : sgraph) (F : {set {set G}}) : bool :=
-  [&& F \subset x84_edge_set G,
-      2 < #|x84_support F|,
-      #|F| == #|x84_support F|,
-      [forall v in x84_support F, x84_degree_in F v == 2]
-    & x84_connected_support F].
+  edge_family_cycle F.
 
+(** Since the B29 library migration (2026-10-04) a transparent alias of
+    [Extremal.foundations.edge_cycles.edge_family_cycle_count], the same body by conversion; the former body is frozen
+    in theories/migration/cycle_lengths.v. *)
 Definition x84_cycle_count (G : sgraph) : nat :=
-  #|[set F : {set {set G}} | @x84_cycle_edge_set G F]|.
+  edge_family_cycle_count G.
 
+(** Since the B29 library migration (2026-10-04) a transparent alias of
+    [Extremal.foundations.edge_cycles.has_edge_family_cycle_length], the same body by conversion; the former body is frozen
+    in theories/migration/cycle_lengths.v. *)
 Definition x84_has_cycle_length (G : sgraph) (l : nat) : Prop :=
-  exists F : {set {set G}},
-    @x84_cycle_edge_set G F /\ #|x84_support F| = l.
+  has_edge_family_cycle_length G l.
 
 Definition x84_turan2_rel (n : nat) : rel 'I_n :=
   fun i j => (i != j) && ((i < n %/ 2) != (j < n %/ 2)).
