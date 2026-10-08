@@ -3,8 +3,9 @@
     This file proves [bipartite_matching_underrepresentation_llm3_statement],
     [bipartite_matching_underrepresentation_llm2_statement],
     [bipartite_matching_underrepresentation_llm_statement] and
-    [bipartite_matching_underrepresentation] of [Packing.conjectures.X15],
-    i.e. Conjecture 1.15 of
+    [bipartite_matching_underrepresentation] of [Packing.conjectures.X15]
+    (by conversion: the file does not import X15 and states them over the
+    public vocabulary, see the bridging section), i.e. Conjecture 1.15 of
 
       R. Aharoni, N. Alon, E. Berger, M. Chudnovsky, D. Kotlar, M. Loebl,
       R. Ziv, "Fair representation by independent sets", arXiv:1611.03196,
@@ -248,7 +249,8 @@
     Vocabulary and elementary facts:
     - [x15_edge_setE], [matching_x15] : the local X15 vocabulary of [X15.v] is
       the coq-graph-theory vocabulary ([E(G)], [matching]), so the library's
-      König/Hall infrastructure applies verbatim;
+      König/Hall infrastructure applies verbatim (the former bridges, now
+      stated over the owners and reflexive);
     - [edges_leq_cover] : a vertex cover [V] bounds [#|E(G)| <= #|V| * Delta G];
     - [x15_big_matching] : a bipartite [G] with [Delta G > 0] has a matching of
       size at least [#|E(G)| %/ Delta G] (König min-cover = max-matching).
@@ -307,9 +309,10 @@
       additivity;
     - [approx_fair_rounds] : the conjecture, for a graph equipped with a proper
       line colouring;
-    - [x15_rounds_instance] : the same in the vocabulary of [X15];
+    - [x15_rounds_instance] : the same in the form of the statements of [X15];
     - [x15_llm3_proof], [x15_llm2_proof], [x15_llm_proof],
-      [bipartite_matching_underrepresentation] : the four statements of X15.v.
+      [bipartite_matching_underrepresentation] : the four statements of X15.v,
+      unfolded (each type is convertible to its X15 statement).
 
     ** Provenance, sources, and what corresponds to what
 
@@ -467,7 +470,7 @@
 
 From GTBase Require Export base.
 From GraphTheory Require Import preliminaries digraph sgraph connectivity.
-From Packing Require Import X15.
+From Packing.foundations Require Import edge_families.
 From Stdlib Require Import Lia.
 From ClassicalLemmas Require Import necklace.necklace konig.paths2
                                     konig.line_colouring.
@@ -478,13 +481,27 @@ Unset Printing Implicit Defensive.
 
 (** ** Bridging the X15 vocabulary with coq-graph-theory *********************)
 
-Lemma x15_edge_setE (G : sgraph) : x15_edge_set G = E(G).
+(** This foundation imports no conjecture file.  X15's [x15_edge_set],
+    [x15_matching] and [x15_edge_family] are transparent aliases of
+    [sg_edge_set], [matching] and [edge_families.edge_family]; the eight
+    declarations stated in X15's vocabulary until the fair-matching release
+    keep their names and are stated over those owners: each complete type is
+    the former X15-stated one with X15's constants unfolded.  Where X15's
+    term [x15_edge_set G] fixed a type (the count [#|x15_edge_set G|], the
+    equation of [x15_edge_setE]), the annotation
+    [(sg_edge_set G : {set {set G}})] keeps the finite type that
+    [x15_edge_set]'s declared type selected.  The
+    two lemmas below are the former bridges, now reflexive; [E(G)] is
+    notation for [sg_edge_set G], so no proof rewrites with [x15_edge_setE]
+    any more. *)
+
+Lemma x15_edge_setE (G : sgraph) : (sg_edge_set G : {set {set G}}) = E(G).
 Proof. by []. Qed.
 
 (** [x15_matching] is a transparent alias of [matching] since the C1 library
     migration (2026-10-02); the lemma is kept for its consumers below. *)
 Lemma matching_x15 (G : sgraph) (M : {set {set G}}) :
-  matching M -> x15_matching M.
+  matching M -> matching M.
 Proof. by []. Qed.
 
 (** ** A vertex cover bounds the number of edges ****************************)
@@ -523,7 +540,7 @@ Qed.
 Theorem x15_big_matching (G : sgraph) :
   bipartite G -> 0 < Delta G ->
   exists M : {set {set G}},
-    x15_matching M /\ #|x15_edge_set G| %/ Delta G <= #|M|.
+    matching M /\ #|(sg_edge_set G : {set {set G}})| %/ Delta G <= #|M|.
 Proof.
 move=> [f fP] dpos.
 have bipA : bipartition [set x : G | f x].
@@ -534,7 +551,7 @@ have smV := @argmin_smallest _ (@vcover G) setT covT.
 set V := [arg min_(B < setT | vcover B) #|B|] in smV.
 have [M mM defM] := min_vcover_matching bipA smV.
 exists M; split; first exact: matching_x15.
-rewrite x15_edge_setE -defM -(mulnK #|V| dpos).
+rewrite -defM -(mulnK #|V| dpos).
 by apply: leq_div2r; apply: edges_leq_cover; case: smV.
 Qed.
 
@@ -2458,12 +2475,19 @@ rewrite /ceil_div; apply: leq_div2r.
 by rewrite -addnBA // leq_addr.
 Qed.
 
-(** ** The linear-constant fair matching, in the vocabulary of [X15] *)
+(** ** The linear-constant fair matching, stated as in [X15]
+
+    Each type below is the former X15-stated type with X15's aliases and
+    statement constants unfolded; [x15_llm3_proof], [x15_llm2_proof],
+    [x15_llm_proof] and [bipartite_matching_underrepresentation] prove X15's
+    [bipartite_matching_underrepresentation_llm3_statement], [_llm2_],
+    [_llm_] and [bipartite_matching_underrepresentation_statement] by
+    conversion. *)
 
 Theorem x15_rounds_instance (m : nat) (G : sgraph) (E : 'I_m -> {set {set G}}) :
-  bipartite G -> 0 < Delta G -> x15_edge_family E ->
+  bipartite G -> 0 < Delta G -> edge_family E ->
   exists S : {set {set G}},
-    x15_matching S /\
+    matching S /\
     (#|sg_edge_set G| %/ Delta G <= #|S| + (12 * m + 14))%N /\
     forall i : 'I_m, #|S :&: E i| <= ceil_div #|E i| (Delta G).
 Proof.
@@ -2476,13 +2500,35 @@ have [C [mC hsz hcl]] := approx_fair_rounds fP subE dpos col_lt col_match.
 by exists C; split; [exact: matching_x15 | split].
 Qed.
 
-Theorem x15_llm3_proof : bipartite_matching_underrepresentation_llm3_statement.
+Theorem x15_llm3_proof :
+  forall m : nat, exists c : nat,
+    c <= 12 * m + 14 /\
+    forall (G : sgraph) (E : 'I_m -> {set {set G}}),
+      bipartite G ->
+      0 < Delta G ->
+      edge_family E ->
+      exists S : {set {set G}},
+        matching S /\
+        (#|sg_edge_set G| %/ Delta G <= #|S| + c)%N /\
+        forall i : 'I_m,
+          #|S :&: E i| <= ceil_div #|E i| (Delta G).
 Proof.
 move=> m; exists (12 * m + 14); split; first by [].
 exact: x15_rounds_instance.
 Qed.
 
-Theorem x15_llm2_proof : bipartite_matching_underrepresentation_llm2_statement.
+Theorem x15_llm2_proof :
+  forall m : nat, exists c : nat,
+    c <= (m + 1)^2 * (16*m + 29) /\
+    forall (G : sgraph) (E : 'I_m -> {set {set G}}),
+      bipartite G ->
+      0 < Delta G ->
+      edge_family E ->
+      exists S : {set {set G}},
+        matching S /\
+        (#|sg_edge_set G| %/ Delta G <= #|S| + c)%N /\
+        forall i : 'I_m,
+          #|S :&: E i| <= ceil_div #|E i| (Delta G).
 Proof.
 move=> m; exists (12 * m + 14); split.
   have h1 : 12 * m + 14 <= 16 * m + 29 by rewrite -!plusE -!multE; apply/leP; lia.
@@ -2490,20 +2536,47 @@ move=> m; exists (12 * m + 14); split.
 move=> G E bipG dpos famE; exact: x15_rounds_instance.
 Qed.
 
-Theorem x15_llm_proof : bipartite_matching_underrepresentation_llm_statement.
+Theorem x15_llm_proof :
+  forall m : nat, exists c : nat,
+    c <= 32 * (m + 1)^3 /\
+    forall (G : sgraph) (E : 'I_m -> {set {set G}}),
+      bipartite G ->
+      0 < Delta G ->
+      edge_family E ->
+      exists S : {set {set G}},
+        matching S /\
+        (#|(sg_edge_set G : {set {set G}})| %/ Delta G <= #|S| + c)%N /\
+        forall i : 'I_m,
+          #|S :&: E i| <= ceil_div #|E i| (Delta G).
 Proof.
 move=> m; exists (12 * m + 14); split.
   have h1 : 12 * m + 14 <= 32 * (m + 1).
     by rewrite mulnDr muln1 -!plusE -!multE; apply/leP; lia.
   apply: leq_trans h1 _; rewrite leq_pmul2l // -{1}(expn1 (m + 1)).
   by apply: leq_pexp2l; rewrite ?addn1.
-move=> G E bipG dpos famE; rewrite x15_edge_setE.
+move=> G E bipG dpos famE.
 exact: x15_rounds_instance.
 Qed.
 
 Corollary bipartite_matching_underrepresentation :
-  bipartite_matching_underrepresentation_statement.
+  forall m : nat, exists c : nat,
+    forall (G : sgraph) (E : 'I_m -> {set {set G}}),
+      bipartite G ->
+      0 < Delta G ->
+      edge_family E ->
+      exists S : {set {set G}},
+        matching S /\
+        (#|(sg_edge_set G : {set {set G}})| %/ Delta G <= #|S| + c)%N /\
+        forall i : 'I_m,
+          #|S :&: E i| <= ceil_div #|E i| (Delta G).
 Proof. by move=> m; have [c [_ hc]] := x15_llm_proof m; exists c. Qed.
+
+(** The four types above were X15 statement constants, which hide the binder
+    of [m]: their [Arguments] carried no argument scope, and keep none. *)
+Arguments x15_llm3_proof : clear scopes.
+Arguments x15_llm2_proof : clear scopes.
+Arguments x15_llm_proof : clear scopes.
+Arguments bipartite_matching_underrepresentation : clear scopes.
 
 Print Assumptions x15_big_matching.
 Print Assumptions round_exists.

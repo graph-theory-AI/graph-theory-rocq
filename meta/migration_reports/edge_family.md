@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py edge_family --details /tmp/migr
 
 - Canonical: `Packing.foundations.edge_families.edge_family`.
 - Baseline: `9e030727db115917ae077ac07a8fc6aa68661f73`.
-- Scope: 1 helpers, 4 statements, 7 frozen objects, 20 recorded references.
-- Source checks: 80/80 pass; consistent.
+- Scope: 1 helpers, 4 statements, 7 frozen objects, 15 recorded references.
+- Source checks: 75/75 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
