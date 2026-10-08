@@ -9,8 +9,11 @@
     the seven declarations keep their names and are stated over the public owners
     [E(G)], [GTBase.simple_cuts.cut_edges] and [GTBase.edge_copies]'s
     [edge_decomposition_by_equal_parts] / [edge_decomposition_exact], of which the
-    X47 and X212 names are aliases; their types differ from the former ones only by
-    conversion. *)
+    X47 and X212 names are aliases. Six former types hold by conversion with their
+    former bodies. [x47_decomposition_x212] is the exception: its former premise used
+    X47's nested-quantifier copy image, equal to the pair-form image only by proof
+    (Packing.migration.edge_copies.x47_copy_edge_set_compat), so its former contract
+    is recovered through the compatibility certificates, not by conversion. *)
 
 From GTBase Require Import base common.
 From GTBase Require simple_cuts edge_copies.

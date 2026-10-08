@@ -42,4 +42,8 @@ No tree, nonempty-pattern, connectedness or nonempty-part guard belongs to these
 - `GTBase.simple_cuts.cut_edges`;
 - `GTBase.edge_copies`'s equal-part and exact-count decompositions.
 
-The X47 and X212 names are aliases of these, so the old types hold by conversion. Both direction-sensitive implication edges of `implications_A1` keep their statements.
+The X47 and X212 names are aliases of these. Six former types hold by conversion with their former bodies.
+
+**The exception is `x47_decomposition_x212`.** Its former premise used X47's nested-quantifier copy image, which equals the pair-form image only by proof (`x47_copy_edge_set_compat`). Its former contract is therefore recovered through `x47_tree_decomposition_by_copies_compat` and `x212_decomposition_into_copies_compat`, not by conversion. The same holds for the former contracts of the two X47/X48 → Barat-Thomassen edges of `implications_A1`, through the whole-row certificates.
+
+Both direction-sensitive implication edges of `implications_A1` keep their statements.
