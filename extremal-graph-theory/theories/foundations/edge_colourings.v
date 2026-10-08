@@ -14,7 +14,9 @@
 
     Contents:
     - [colour_class col p]: the SPANNING subgraph of [G] keeping exactly the
-      edges whose colour satisfies [p];
+      edges whose colour satisfies [p]; since library migration D12 (second
+      stage) a transparent public adapter of
+      [GTBase.edge_colourings.edge_colour_class];
     - [edges_colour_class] / [card_edges_colour_class_split]: its edge set, and
       the fact that [p] and its complement split [E(G)] (the counting lemma the
       X215 Ramsey implication runs on);
@@ -34,16 +36,22 @@ Section ColourClass.
 Variables (G : sgraph) (C : eqType).
 Variables (col : {set G} -> C) (p : pred C).
 
-Definition cc_rel : rel G := [rel x y | (x -- y) && p (col [set x; y])].
+(** Since library migration D12 (second stage) [cc_rel] and [colour_class] are
+    transparent public adapters of [GTBase.edge_colourings.edge_colour_class_rel]
+    and [GTBase.edge_colourings.edge_colour_class]: same Section binders, host
+    carrier, adjacency [(x -- y) && p (col [set x; y])] and [Arguments].  The
+    original Section, with its symmetry/irreflexivity scripts, is frozen and
+    certified in theories/migration/edge_colour_class.v. *)
+Definition cc_rel : rel G := GTBase.edge_colourings.edge_colour_class_rel col p.
 
 Lemma cc_sym : symmetric cc_rel.
-Proof. by move=> x y; rewrite /cc_rel /= sg_sym setUC. Qed.
+Proof. exact: GTBase.edge_colourings.edge_colour_class_sym. Qed.
 
 Lemma cc_irrefl : irreflexive cc_rel.
-Proof. by move=> x; rewrite /cc_rel /= sg_irrefl. Qed.
+Proof. exact: GTBase.edge_colourings.edge_colour_class_irrefl. Qed.
 
 (** The spanning subgraph of [G] carrying exactly the [p]-coloured edges. *)
-Definition colour_class : sgraph := SGraph cc_sym cc_irrefl.
+Definition colour_class : sgraph := GTBase.edge_colourings.edge_colour_class col p.
 
 Lemma colour_class_adj (x y : G) :
   @sedge colour_class x y = (x -- y) && p (col [set x; y]).
