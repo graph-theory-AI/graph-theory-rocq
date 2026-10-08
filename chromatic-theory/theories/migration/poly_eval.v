@@ -131,9 +131,7 @@ Qed.
 Lemma x3_polynomially_chi_bounded_compat (F : sgraph -> Prop) :
   X3Legacy.x3_polynomially_chi_bounded F <-> x3_polynomially_chi_bounded F.
 Proof.
-split=> -[p h]; exists p => G FG.
-- by rewrite -x3_poly_eval_compat; exact: h.
-- by rewrite x3_poly_eval_compat; exact: h.
+split=> -[p h]; exists p => G FG; move: (h G FG); rewrite x3_poly_eval_compat => le; exact: le.
 Qed.
 
 Lemma hereditary_chi_bounded_not_polynomial_statement_compat :
@@ -162,9 +160,7 @@ Qed.
 Lemma x124_poly_chi_bounded_compat (C : sgraph -> Prop) :
   X124Legacy.x124_poly_chi_bounded C <-> x124_poly_chi_bounded C.
 Proof.
-split=> -[p h]; exists p => G CG.
-- by rewrite -x124_poly_eval_compat; exact: h.
-- by rewrite x124_poly_eval_compat; exact: h.
+split=> -[p h]; exists p => G CG; move: (h G CG); rewrite x124_poly_eval_compat => le; exact: le.
 Qed.
 
 Lemma dreier_torunczyk_merge_width_poly_chi_bounded_statement_compat :

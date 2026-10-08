@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "family": "poly-list-chi-bounded",
+  "modules": {
+    "Chromatic.foundations.chi_bounding": {
+      "path": "chromatic-theory/theories/foundations/chi_bounding.v",
+      "overrides": {
+        "poly_list_chi_bounded": {
+          "verdict": "FAITHFUL",
+          "note": "Polynomially chi-bounded in list form: one natural coefficient list (lowest degree first) chosen BEFORE the graphs bounds chi by its Horner evaluation at omega over the whole class (a per-graph choice would be vacuous). No guard: the empty list bounds only chi = 0. Non-vacuous (graphs with at most one vertex), hereditary along inclusion, a bound in the arbitrary-function sense, and defeated by unbounded chi at bounded omega; equivalent to the normal form c * omega ^ d over the naturals (poly_forms, the omega = 0 corner included)."
+        }
+      },
+      "machine_evidence": [
+        "poly_list_chi_bounded_small",
+        "poly_list_chi_bounded_sub",
+        "poly_list_chi_boundedW",
+        "not_poly_list_chi_bounded_of_unbounded"
+      ]
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "family": "poly-list-chi-bounded",
+  "primitive": {
+    "canonical_name": "Chromatic.foundations.chi_bounding.poly_list_chi_bounded",
+    "owner": "chromatic-theory",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "poly_chi_bounded",
+      "polynomially_chi_bounded"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X124.x124_poly_chi_bounded",
+      "Chromatic.conjectures.X3.x3_polynomially_chi_bounded"
+    ],
+    "consumers_remaining": 2,
+    "relation": "a class F of finite simple graphs is polynomially chi-bounded in LIST form: one natural coefficient list p (lowest degree first), chosen before the graphs, bounds the chromatic number of every member by GTBase.poly_nat.horner_nat p evaluated at its clique number. X3's x3_polynomially_chi_bounded (used by X65 and X66's x66_good) and X124's x124_poly_chi_bounded (whose x124_omega G := omega([set: G])) are transparent aliases, each related to its frozen original by a CONVERSION (A31's evaluator aliases unfold to the canonical evaluator), so every row using them is equivalent in every polarity, X3's negated class included. No guard: the empty list bounds exactly chromatic number zero. Over the naturals it is equivalent to the normal form poly_chi_bounded (c * omega ^ d) by Chromatic.foundations.poly_forms.poly_chi_bounded_x3E (the omega = 0 corner included), which stays a distinct encoding.",
+    "semantic_classes": {
+      "list-form-poly-chi-bound": {
+        "members": [
+          "Chromatic.conjectures.X124.x124_poly_chi_bounded",
+          "Chromatic.conjectures.X3.x3_polynomially_chi_bounded"
+        ],
+        "count": 2,
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.poly_list_chi_bounded.x124_poly_chi_bounded_compat",
+          "Chromatic.migration.poly_list_chi_bounded.x3_polynomially_chi_bounded_compat"
+        ],
+        "note": "one coefficient list quantified before the graphs, natural Horner evaluation at the clique number; conversions to the owner's body"
+      }
+    },
+    "distinct_variants": {
+      "Chromatic.foundations.chi_bounding.poly_chi_bounded": "the normal form c * omega ^ d (P-normal), owned by the same module and used by X218: equivalent over the naturals (poly_forms.poly_chi_bounded_x3E, omega = 0 corner included) but a distinct encoding with its own consumers; not merged.",
+      "Chromatic.foundations.chi_bounding.chi_bounded_class": "an arbitrary bounding function of the clique number (family chi-bounded); strictly weaker (poly_list_chi_boundedW)."
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.poly_list_chi_bounded.dreier_torunczyk_merge_width_poly_chi_bounded_statement_compat",
+      "Chromatic.migration.poly_list_chi_bounded.dreier_torunczyk_merge_width_poly_chi_bounded_statement_original_compat",
+      "Chromatic.migration.poly_list_chi_bounded.forest_free_polynomial_chi_bound_statement_compat",
+      "Chromatic.migration.poly_list_chi_bounded.good_trees_disjoint_union_good_statement_compat",
+      "Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_compat",
+      "Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_original_compat",
+      "Chromatic.migration.poly_list_chi_bounded.x124_poly_chi_bounded_compat",
+      "Chromatic.migration.poly_list_chi_bounded.x124_poly_chi_bounded_original_compat",
+      "Chromatic.migration.poly_list_chi_bounded.x3_polynomially_chi_bounded_compat",
+      "Chromatic.migration.poly_list_chi_bounded.x3_raw_class_compat",
+      "Chromatic.migration.poly_list_chi_bounded.x66_good_compat"
+    ],
+    "api_theorems": [
+      "Chromatic.foundations.chi_bounding.poly_list_chi_bounded_small",
+      "Chromatic.foundations.chi_bounding.poly_list_chi_bounded_sub",
+      "Chromatic.foundations.chi_bounding.poly_list_chi_boundedW",
+      "Chromatic.foundations.chi_bounding.not_poly_list_chi_bounded_of_unbounded",
+      "Chromatic.foundations.poly_forms.chi_eq0_omega0",
+      "Chromatic.foundations.poly_forms.x3_poly_chi_boundedW",
+      "Chromatic.foundations.poly_forms.poly_chi_bounded_x3W",
+      "Chromatic.foundations.poly_forms.poly_chi_bounded_x3E"
+    ],
+    "public_client": "chromatic-theory/theories/examples/poly_list_chi_bounded.v",
+    "legacy_baseline": "0449699300e18f2ddf0773ede1c81976e632a284",
+    "migration_report": "meta/migration_reports/poly_list_chi_bounded.md",
+    "migration_spec": "meta/migration_reports/poly_list_chi_bounded.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A32.md",
+    "foundation_fidelity": "meta/foundation_fidelity/poly-list-chi-bounded.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GTBase.chi_bounding (chi_bounded_via / chi_bounded_class: an arbitrary bounding function, family chi-bounded)",
+        "GraphTheory 0.9.7 core coloring (chromatic and clique numbers; no polynomial chi-bounding)",
+        "MathComp algebra poly (horner_rec, the evaluator only; adapted by GTBase.poly_nat in A31)",
+        "Chromatic.foundations.chi_bounding and poly_forms (the normal form poly_chi_bounded and the two conversions)"
+      ],
+      "result": "existing-area-canonical",
+      "candidate": "Chromatic.foundations.chi_bounding, which already owns the normal form",
+      "note": "No upstream or GTBase predicate quantifies one polynomial over a graph class. chi_bounding already owns the polynomial bound (normal form) and its edges, so the list form is owned beside it over the A31 canonical evaluator; poly_forms keeps its seven names, now stated over the owners' constants and importing no conjecture file. Evidence: coordination/evidence/resume-2026-10-06/poly-utility-discovery-by-arthur/ and the A31 scope handoff (A32 = stage 2).",
+      "audited_at": "2026-10-08"
+    },
+    "reviewed_by": null
+  }
+}

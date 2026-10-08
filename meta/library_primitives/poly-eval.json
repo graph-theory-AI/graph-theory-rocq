@@ -27,7 +27,7 @@
         "declaration_hash": "ab33659353c3cc7bab1b2143b5179f7d723bef782093888862ccdbf2b7b049f5"
       }
     },
-    "consumers_remaining": 11,
+    "consumers_remaining": 10,
     "relation": "the Horner evaluation of a natural coefficient list (lowest degree first) at a natural point, with GTBase.poly_nat.horner_nat p x := mathcomp poly.horner_rec p x at the natural semiring canonical: the six Fixpoints Chromatic X3/X124, Extremal X59/X60, GTMisc X128/X139 xN_poly_eval (if p is a :: q then a + x * eval q x else 0), the foldr Minor X220 x220_poly_eval and the public foldr Chromatic.foundations.chi_bounding.horner_nat are transparent aliases of it, each related to its frozen original by an UNCONDITIONAL pointwise equality (induction or the foldr bridge; not a conversion). The empty list evaluates to 0 at every point; no guard. Imports are narrow (ssralg/poly Required, only ssralg canonicals imported) and GTBase.base does not re-export the module.",
     "semantic_classes": {
       "horner-nat-list": {

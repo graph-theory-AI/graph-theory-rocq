@@ -1,0 +1,188 @@
+{
+  "family": "poly-list-chi-bounded",
+  "canonical_name": "Chromatic.foundations.chi_bounding.poly_list_chi_bounded",
+  "canonical_short_name": "poly_list_chi_bounded",
+  "relation": "polynomial chi-boundedness of a graph class in LIST form: one natural coefficient list p (lowest degree first), chosen before the graphs, bounds chi([set: G]) by GTBase.poly_nat.horner_nat p (omega([set: G])) on every member. X3 x3_polynomially_chi_bounded and X124 x124_poly_chi_bounded (x124_omega G := omega([set: G])) are transparent aliases, each related to its frozen original by a CONVERSION, so every row using them is equivalent in every polarity (X3 negates the class). The normal form poly_chi_bounded (c * omega ^ d) stays distinct; poly_forms proves the two equivalent (omega = 0 corner included).",
+  "baseline_commit": "0449699300e18f2ddf0773ede1c81976e632a284",
+  "namespaces": {
+    "chromatic-theory": "Chromatic"
+  },
+  "certificate_files": [
+    "chromatic-theory/theories/migration/poly_list_chi_bounded.v"
+  ],
+  "extra_certificates": [
+    "Chromatic.migration.poly_list_chi_bounded.x3_raw_class_compat"
+  ],
+  "summary": [
+    "Batch A, family A32 (the list-form polynomial chi-bound, stage 2 of the polynomial scope), on the A31 candidate 0449699 (stage 1, natural Horner evaluation), itself on the reviewed A30 candidate db16a76; neither parent is accepted main. New Chromatic.foundations.chi_bounding.poly_list_chi_bounded F := exists p : seq nat, forall G, F G -> chi([set: G]) <= GTBase.poly_nat.horner_nat p (omega([set: G])), owned beside the normal form poly_chi_bounded, with sanity API (non-vacuity, heredity, a list bound is a bound, teeth) and public client chromatic-theory/theories/examples/poly_list_chi_bounded.v. X3's x3_polynomially_chi_bounded and X124's x124_poly_chi_bounded become transparent aliases.",
+    "",
+    "poly_forms drops its X3 import and keeps its seven qualified names (x3_poly_evalE, x3_poly_eval_dom, chi_eq0_omega0, x3_poly_eval_monomial, x3_poly_chi_boundedW, poly_chi_bounded_x3W, poly_chi_bounded_x3E), stated over the owners' constants (GTBase.poly_nat.horner_nat, chi_bounding.horner_nat, poly_list_chi_bounded, poly_chi_bounded); each complete type is convertible to its former X3-stated type (kernel ascriptions in an X3 context). The omega = 0 corner (chi_eq0_omega0) is kept. X218, implications_X218 (the apply: lines), implications_X66, implications_U8 and atlas implications_A2 compile unchanged.",
+    "",
+    "Frozen verbatim at 0449699: the two classes (over A31's live evaluator aliases and X124's x124_omega), x66_good, and the five whole rows (X3 negated class, X65, X66, X124). Every class certificate is a conversion, so every row is equivalent in every polarity. The deepest Originals of X3 and X124 are A31's Chromatic.migration.poly_eval.X3Original / X124Original, whose closures reach no live list-form class; their certificates here compose C10's registered Original certificate (X3) or A16's clique-number equality (X124) with A31's unconditional evaluator equality (x3_raw_class_compat, x124_poly_eval_compat) and the conversion. Eleven certificates. In poly_eval.v, A31's two class certificates are restated (proof only, types unchanged) to pass through the alias by conversion.",
+    "",
+    "History: 3 earlier frozen objects reach a live list-form class by actual qualified closure resolution (kernel scan of 161 frozen objects in the 18 chromatic certificate files whose compiled closure contains X3 or X124, at the built A31 candidate): C9's X3Legacy row and C10's Legacy and X3Original rows, all through X3's class. They stay byte-exact as documented stale snapshots; the C9 spec drops the two migrated distinct variants with a qualified note. A28/X66 (disjoint union) stays an explicit pending composition and is not claimed: at an actual parent containing A28, its X66 row reaches this family's alias through x66_good."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_polynomially_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_polynomially_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/poly_list_chi_bounded.v",
+      "frozen": "X3Legacy.x3_polynomially_chi_bounded",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.x3_polynomially_chi_bounded_compat",
+      "live_unfolds_to": "Chromatic.foundations.chi_bounding.poly_list_chi_bounded F"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.hereditary_chi_bounded_not_polynomial_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "hereditary_chi_bounded_not_polynomial_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_list_chi_bounded.v",
+      "frozen": "X3Legacy.hereditary_chi_bounded_not_polynomial_statement",
+      "substitutions": {
+        "x3_polynomially_chi_bounded": "X3Legacy.x3_polynomially_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.hereditary_chi_bounded_not_polynomial_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "hereditary_chi_bounded_not_polynomial_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X3Original.hereditary_chi_bounded_not_polynomial_statement",
+      "substitutions": {
+        "x3_hereditary_class": "GC.Legacy.x3_hereditary_class",
+        "chi_bounded": "ChiLegacy.chi_bounded",
+        "x3_polynomially_chi_bounded": "X3Legacy.x3_polynomially_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X65.forest_free_polynomial_chi_bound_statement",
+      "path": "chromatic-theory/theories/conjectures/X65.v",
+      "name": "forest_free_polynomial_chi_bound_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_list_chi_bounded.v",
+      "frozen": "X65Legacy.forest_free_polynomial_chi_bound_statement",
+      "substitutions": {
+        "x3_polynomially_chi_bounded": "X3Legacy.x3_polynomially_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.forest_free_polynomial_chi_bound_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X66.x66_good",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "x66_good",
+      "frozen_path": "chromatic-theory/theories/migration/poly_list_chi_bounded.v",
+      "frozen": "X66Legacy.x66_good",
+      "substitutions": {
+        "x3_polynomially_chi_bounded": "X3Legacy.x3_polynomially_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.x66_good_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X66.good_trees_disjoint_union_good_statement",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "good_trees_disjoint_union_good_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_list_chi_bounded.v",
+      "frozen": "X66Legacy.good_trees_disjoint_union_good_statement",
+      "substitutions": {
+        "x66_good": "X66Legacy.x66_good"
+      },
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.good_trees_disjoint_union_good_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X124.x124_poly_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "x124_poly_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/poly_list_chi_bounded.v",
+      "frozen": "X124Legacy.x124_poly_chi_bounded",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.x124_poly_chi_bounded_compat",
+      "live_unfolds_to": "Chromatic.foundations.chi_bounding.poly_list_chi_bounded C"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X124.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_list_chi_bounded.v",
+      "frozen": "X124Legacy.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "substitutions": {
+        "x124_poly_chi_bounded": "X124Legacy.x124_poly_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.dreier_torunczyk_merge_width_poly_chi_bounded_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X124.x124_poly_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "x124_poly_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X124Original.x124_poly_chi_bounded",
+      "substitutions": {
+        "x124_poly_eval": "X124Legacy.x124_poly_eval",
+        "x124_omega": "CN.Legacy.x124_omega"
+      },
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.x124_poly_chi_bounded_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X124.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X124Original.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "substitutions": {
+        "x124_poly_chi_bounded": "X124Original.x124_poly_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_list_chi_bounded.dreier_torunczyk_merge_width_poly_chi_bounded_statement_original_compat"
+    }
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/X65.v",
+      "name": "x3_polynomially_chi_bounded",
+      "note": "X65's row uses X3's list-form class across modules; frozen as X65Legacy over X3Legacy.x3_polynomially_chi_bounded at the A31 candidate (conversion)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "x3_polynomially_chi_bounded",
+      "note": "X66's x66_good is X3's list-form class at the induced-H-free class; frozen as X66Legacy.x66_good over X3Legacy.x3_polynomially_chi_bounded. X66's live disjoint union is untouched (A28 pending, not claimed)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_U8.v",
+      "name": "forest_free_polynomial_chi_bound_statement",
+      "note": "implications_U8 compiles unchanged (proofs and types)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X218.v",
+      "name": "forest_free_polynomial_chi_bound_statement",
+      "note": "implications_X218 compiles unchanged: its apply: lines of the poly_forms bridges x3_poly_chi_boundedW and poly_chi_bounded_x3W, now stated over the list-form owner, work as before (the former X3-stated types are convertible: kernel ascriptions)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X66.v",
+      "name": "good_trees_disjoint_union_good_statement",
+      "note": "implications_X66 compiles unchanged; its poly_chi_bounded_x3W apply line works as before. X66's x66_good is frozen as X66Legacy.x66_good; the live disjoint union is untouched (A28 pending, not claimed)."
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/chi_bounded_classes.v#X3Legacy.hereditary_chi_bounded_not_polynomial_statement": "C9 (chi_bounded_classes) snapshot: that family froze this object over its own frozen helpers but kept the live x3_polynomially_chi_bounded, since A32 a transparent alias of Chromatic.foundations.chi_bounding.poly_list_chi_bounded (a conversion of the A31-candidate body, certificate x3_polynomially_chi_bounded_compat). Kept byte-exact; its own iff to the live row still compiles. The complete row is Chromatic.migration.poly_eval.X3Original.hereditary_chi_bounded_not_polynomial_statement (A31), certified to the live row by Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_original_compat.",
+    "chromatic-theory/theories/migration/graph_classes.v#Legacy.hereditary_chi_bounded_not_polynomial_statement": "C10 (graph_classes) snapshot: that family froze this object over its own frozen helpers but kept the live x3_polynomially_chi_bounded, since A32 a transparent alias of Chromatic.foundations.chi_bounding.poly_list_chi_bounded (a conversion of the A31-candidate body, certificate x3_polynomially_chi_bounded_compat). Kept byte-exact; its own iff to the live row still compiles. The complete row is Chromatic.migration.poly_eval.X3Original.hereditary_chi_bounded_not_polynomial_statement (A31), certified to the live row by Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_original_compat.",
+    "chromatic-theory/theories/migration/graph_classes.v#X3Original.hereditary_chi_bounded_not_polynomial_statement": "C10 (graph_classes) snapshot: that family froze this object over its own frozen helpers but kept the live x3_polynomially_chi_bounded, since A32 a transparent alias of Chromatic.foundations.chi_bounding.poly_list_chi_bounded (a conversion of the A31-candidate body, certificate x3_polynomially_chi_bounded_compat). Kept byte-exact; its own iff to the live row still compiles. The complete row is Chromatic.migration.poly_eval.X3Original.hereditary_chi_bounded_not_polynomial_statement (A31), certified to the live row by Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_original_compat."
+  },
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.foundations.chi_bounding.poly_chi_bounded",
+      "path": "chromatic-theory/theories/foundations/chi_bounding.v",
+      "name": "poly_chi_bounded",
+      "note": "the normal form c * omega ^ d, used by X218: equivalent over the naturals (poly_forms.poly_chi_bounded_x3E) but a distinct encoding; unchanged"
+    }
+  ]
+}
