@@ -253,3 +253,135 @@ Lemma proper_pair_edge_colouring_K1 (c : C) :
 Proof. by split=> // u v w; rewrite (ord1 u) (ord1 v) sg_irrefl. Qed.
 
 End Grounding.
+
+(** ** Colour classes
+
+    Library migration D12, family "edge-colour-class"
+    (meta/library_primitives/edge-colour-class.json).  The shared colour-class
+    contract of [Extremal.foundations.edge_colourings.colour_class], promoted
+    under distinct names so that no file importing both modules rebinds a short
+    name; that Extremal declaration is the same contract, and its public adapter
+    is the next stage of this family.
+
+    [edge_colour_class col p] is the SPANNING subgraph of [G] keeping exactly the
+    edges whose colour satisfies [p]: the vertex type is that of [G] (isolated
+    vertices stay) and [x -- y] holds iff [x -- y] in [G] and [p (col [set x; y])]
+    ([edge_colour_classE]).  The palette [C] is an arbitrary [eqType], [col] a
+    total set map on [{set G}], read only on actual edges
+    ([eq_edge_colour_class]), and [p] any colour predicate; one colour [c] is
+    [pred1 c].  Its edge set is [[set e in E(G) | p (col e)]]
+    ([edges_edge_colour_class]); [p] and [predC p] split [E(G)]
+    ([card_edges_edge_colour_class_split]); [predT] keeps every edge
+    ([edge_colour_class_predT]), [pred0] none ([edges_edge_colour_class_pred0]);
+    an edge lies in the class of its own colour and no other
+    ([edges_edge_colour_class1]), so a constant colouring has one class
+    ([edges_edge_colour_class_const]).  A simple graph on the same vertex type
+    whose adjacency agrees pointwise with [edge_colour_class_rel col p] is
+    isomorphic to [edge_colour_class col p] through the identity
+    ([edge_colour_class_eq_diso], [edge_colour_class_eq_disoE]).  No guard: empty
+    or edgeless hosts and unused colours are allowed, and no total set map into an
+    empty palette exists ([no_set_map_into_empty_palette]). *)
+
+(* The identity transports below compute through the bijection coercion. *)
+From GraphTheory Require Import bij.
+
+Section EdgeColourClass.
+Variables (G : sgraph) (C : eqType) (col : {set G} -> C) (p : pred C).
+
+Definition edge_colour_class_rel : rel G := [rel x y | (x -- y) && p (col [set x; y])].
+
+Lemma edge_colour_class_sym : symmetric edge_colour_class_rel.
+Proof. by move=> x y; rewrite /edge_colour_class_rel /= sg_sym setUC. Qed.
+
+Lemma edge_colour_class_irrefl : irreflexive edge_colour_class_rel.
+Proof. by move=> x; rewrite /edge_colour_class_rel /= sg_irrefl. Qed.
+
+(** The spanning subgraph of [G] carrying exactly the [p]-coloured edges. *)
+Definition edge_colour_class : sgraph :=
+  SGraph edge_colour_class_sym edge_colour_class_irrefl.
+
+Lemma edge_colour_classE (x y : G) :
+  @edge_rel edge_colour_class x y = (x -- y) && p (col [set x; y]).
+Proof. by []. Qed.
+
+Lemma edges_edge_colour_class : E(edge_colour_class) = [set e in E(G) | p (col e)].
+Proof.
+apply/setP => e; rewrite inE; apply/idP/idP.
+- case/edgesP => x [y [-> /andP[xy pc]]].
+  by rewrite in_edges xy.
+- case/andP => /edgesP[x [y [-> xy]]] pc.
+  by apply/edgesP; exists x, y; split => //; apply/andP; split.
+Qed.
+
+(** Same-carrier transport through the identity (transparent, so the map
+    computes: [edge_colour_class_eq_disoE]). *)
+Lemma edge_colour_class_eq_diso (r : rel G) (r_sym : symmetric r) (r_irrefl : irreflexive r) :
+  r =2 edge_colour_class_rel -> diso (SGraph r_sym r_irrefl) edge_colour_class.
+Proof. by move=> rE; apply: eq_diso. Defined.
+
+Lemma edge_colour_class_eq_disoE (r : rel G) (r_sym : symmetric r) (r_irrefl : irreflexive r)
+    (rE : r =2 edge_colour_class_rel) (v : G) :
+  edge_colour_class_eq_diso r_sym r_irrefl rE v = v.
+Proof. by []. Qed.
+
+End EdgeColourClass.
+
+Arguments edge_colour_class_rel [G C] col p _ _.
+Arguments edge_colour_class [G C] col p.
+
+(** Values off the edge set are irrelevant: two colourings (over any palettes)
+    whose predicates agree on the actual edges give the same adjacency, hence
+    identity-isomorphic classes. *)
+Lemma eq_edge_colour_class_rel (G : sgraph) (C D : eqType)
+    (col : {set G} -> C) (p : pred C) (col' : {set G} -> D) (p' : pred D) :
+  {in E(G), forall e, p (col e) = p' (col' e)} ->
+  edge_colour_class_rel col p =2 edge_colour_class_rel col' p'.
+Proof.
+move=> eqE x y; rewrite /edge_colour_class_rel /=.
+by case xy: (x -- y) => //=; rewrite eqE // in_edges.
+Qed.
+
+Lemma eq_edge_colour_class (G : sgraph) (C D : eqType)
+    (col : {set G} -> C) (p : pred C) (col' : {set G} -> D) (p' : pred D) :
+  {in E(G), forall e, p (col e) = p' (col' e)} ->
+  edge_colour_class col p ≃ edge_colour_class col' p'.
+Proof. by move=> eqE; apply: eq_diso; exact: eq_edge_colour_class_rel. Defined.
+
+(** [p] and its complement split the edge set. *)
+Lemma card_edges_edge_colour_class_split (G : sgraph) (C : eqType)
+    (col : {set G} -> C) (p : pred C) :
+  #|E(edge_colour_class col p)| + #|E(edge_colour_class col (predC p))| = #|E(G)|.
+Proof.
+rewrite !edges_edge_colour_class.
+have -> : [set e in E(G) | p (col e)] = E(G) :&: [set e | p (col e)].
+  by apply/setP => e; rewrite !inE andbC.
+have -> : [set e in E(G) | predC p (col e)] = E(G) :\: [set e | p (col e)].
+  by apply/setP => e; rewrite !inE andbC.
+exact: cardsID.
+Qed.
+
+(** Corners: [predT] keeps the host, [pred0] keeps no edge. *)
+Lemma edge_colour_class_predT (G : sgraph) (C : eqType) (col : {set G} -> C) :
+  edge_colour_class col predT ≃ G.
+Proof.
+apply: (@Diso' (edge_colour_class col predT) G id id) => // x y.
+by rewrite edge_colour_classE /= andbT.
+Defined.
+
+Lemma edges_edge_colour_class_pred0 (G : sgraph) (C : eqType) (col : {set G} -> C) :
+  E(edge_colour_class col pred0) = set0.
+Proof. by apply/setP => e; rewrite edges_edge_colour_class !inE andbF. Qed.
+
+(** An edge lies in the class of its own colour and in no other. *)
+Lemma edges_edge_colour_class1 (G : sgraph) (C : eqType) (col : {set G} -> C) (c : C)
+    (e : {set G}) :
+  e \in E(G) -> (e \in E(edge_colour_class col (pred1 c))) = (col e == c).
+Proof. by move=> eG; rewrite edges_edge_colour_class inE eG. Qed.
+
+(** A constant colouring has a single nonempty class. *)
+Lemma edges_edge_colour_class_const (G : sgraph) (C : eqType) (c d : C) :
+  E(edge_colour_class (fun _ : {set G} => c) (pred1 d)) = if c == d then E(G) else set0.
+Proof.
+apply/setP => e; rewrite edges_edge_colour_class !inE /=.
+by case: (c == d); rewrite ?andbT ?andbF ?inE.
+Qed.
