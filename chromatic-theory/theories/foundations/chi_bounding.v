@@ -19,6 +19,7 @@
 From GTBase Require Export base.
 From GTBase Require Import chi_bounding.
 From GTBase Require Import colourings.
+From GTBase Require poly_nat.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -135,11 +136,12 @@ Qed.
 
 (** ** Horner domination (F4) *******************************************)
 
-(** Horner evaluation of a coefficient list, the shape of [X3.x3_poly_eval]
-    (kept here as a [foldr] so that this foundation file depends on no
-    conjecture file; [poly_forms.v] identifies the two). *)
-Definition horner_nat (p : seq nat) (x : nat) : nat :=
-  foldr (fun a r => a + x * r) 0 p.
+(** Horner evaluation of a coefficient list, the shape of [X3.x3_poly_eval] (this foundation file
+    still depends on no conjecture file; [poly_forms.v] identifies the two).  Since the A31 library
+    migration [horner_nat] is a transparent alias of the canonical natural Horner evaluation
+    [GTBase.poly_nat.horner_nat] (upstream [horner_rec] at nat).  The original [foldr] is frozen in
+    theories/migration/poly_eval.v, related to the alias by an unconditional pointwise equality. *)
+Definition horner_nat (p : seq nat) (x : nat) : nat := GTBase.poly_nat.horner_nat p x.
 
 (** F4: for [t >= 1] a Horner evaluation is dominated by the normal form
     (sum of the coefficients) * t ^ (size p - 1).  The guard [1 <= t] is
@@ -147,16 +149,7 @@ Definition horner_nat (p : seq nat) (x : nat) : nat :=
     right-hand side vanishes as soon as [p] has two or more coefficients. *)
 Lemma horner_nat_dom (p : seq nat) (t : nat) :
   1 <= t -> horner_nat p t <= (\sum_(i <- p) i) * t ^ (size p).-1.
-Proof.
-move=> t1; elim: p => [|a p IH] //=.
-have ht k : 1 <= t ^ k by rewrite expn_gt0 t1.
-case: p IH => [|b q] IH /=.
-  by rewrite muln0 addn0 big_cons big_nil addn0 expn0 muln1.
-rewrite big_cons mulnDl; apply: leq_add.
-  by rewrite -{1}(muln1 a) leq_mul2l ht orbT.
-apply: leq_trans (leq_mul (leqnn t) IH) _.
-by rewrite mulnCA -expnS.
-Qed.
+Proof. exact: GTBase.poly_nat.horner_nat_dom. Qed.
 
 Print Assumptions poly_chi_bounded_small.
 Print Assumptions poly_chi_boundedW.

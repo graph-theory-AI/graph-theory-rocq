@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py hereditary_class --details /tmp
 
 - Canonical: `GTBase.graph_classes.hereditary_class`.
 - Baseline: `5f8211a10b7260fec67dad1450be6da41efeb1a9`.
-- Scope: 5 helpers, 3 statements, 9 frozen objects, 18 recorded references.
-- Source checks: 97/97 pass; consistent.
+- Scope: 5 helpers, 3 statements, 9 frozen objects, 21 recorded references.
+- Source checks: 98/98 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -21,4 +21,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `GTMisc.conjectures.X87.x87_hereditary`, `Chromatic.conjectures.U8.vminor_closed`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/chi_bounded_classes.v#X3Legacy.hereditary_chi_bounded_not_polynomial_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/chi_bounded_classes.v#X3Legacy.hereditary_chi_bounded_not_polynomial_statement`, `chromatic-theory/theories/migration/poly_eval.v#X3Legacy.hereditary_chi_bounded_not_polynomial_statement`.

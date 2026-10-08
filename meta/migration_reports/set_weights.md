@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py set_weights --details /tmp/migr
 
 - Canonical: `GraphTheory.core.dom.weight_set`.
 - Baseline: `3bdfdae32824d4762ba8105367f7858a706a02e2`.
-- Scope: 4 helpers, 4 statements, 14 frozen objects, 34 recorded references.
-- Source checks: 129/129 pass; consistent.
+- Scope: 4 helpers, 4 statements, 14 frozen objects, 37 recorded references.
+- Source checks: 130/130 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -22,4 +22,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Chromatic.conjectures.X187.x187_total_request_weight`, `Chromatic.conjectures.X187.x187_satisfied_request_weight`, `Extremal.conjectures.D2tur.tree_weight`, `Digraph.conjectures.X216.x216_cycle_weight`, `Extremal.conjectures.D2chr.match_weight`, `Extremal.conjectures.D2chr.coloring_weight`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/edge_count.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement`, `graph-theory-misc/theories/migration/ambient_shallow_minors.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement`, `graph-theory-misc/theories/migration/ambient_shallow_minors.v#X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement`, `graph-theory-misc/theories/migration/ambient_grad.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/edge_count.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement`, `graph-theory-misc/theories/migration/ambient_shallow_minors.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement`, `graph-theory-misc/theories/migration/ambient_shallow_minors.v#X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement`, `graph-theory-misc/theories/migration/ambient_grad.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement`, `graph-theory-misc/theories/migration/poly_eval.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement`.

@@ -9,6 +9,7 @@
 From Chromatic.conjectures Require Import U8.
 From GTBase Require Import colourings graph_classes induced_paths induced_cycles.
 From GTBase Require Import set_pairs.
+From GTBase Require poly_nat.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -85,8 +86,10 @@ Definition x3_iso_closed (F : sgraph -> Prop) : Prop :=
 Definition x3_hereditary_class (F : sgraph -> Prop) : Prop :=
   GTBase.graph_classes.hereditary_class F.
 
-Fixpoint x3_poly_eval (p : seq nat) (x : nat) : nat :=
-  if p is a :: q then a + x * x3_poly_eval q x else 0.
+(** Since the A31 library migration [x3_poly_eval] is a transparent alias of the canonical natural Horner evaluation
+    [GTBase.poly_nat.horner_nat] (upstream [horner_rec] at nat).  The original is frozen in
+    theories/migration/poly_eval.v, related to the alias by an unconditional pointwise equality. *)
+Definition x3_poly_eval (p : seq nat) (x : nat) : nat := GTBase.poly_nat.horner_nat p x.
 
 Definition x3_polynomially_chi_bounded (F : sgraph -> Prop) : Prop :=
   exists p : seq nat,

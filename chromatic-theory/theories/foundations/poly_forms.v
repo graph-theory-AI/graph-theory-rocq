@@ -24,13 +24,15 @@
 
 From GTBase Require Export base.
 From Chromatic.foundations Require Import chi_bounding.
+From GTBase Require poly_nat.
 From Chromatic.conjectures Require Import X3.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
-(** X3's Horner [Fixpoint] is the [foldr] of [chi_bounding.horner_nat]. *)
+(** X3's Horner evaluation is [chi_bounding.horner_nat]: since the A31 library migration both are aliases of
+    [GTBase.poly_nat.horner_nat]. *)
 Lemma x3_poly_evalE (p : seq nat) (x : nat) : x3_poly_eval p x = horner_nat p x.
 Proof. by elim: p => //= a p ->. Qed.
 
@@ -47,10 +49,7 @@ Proof. by move/eqP; rewrite omega_eq0 => /eqP ->; exact: chi0. Qed.
 (** The coefficient list of the monomial [c * t ^ d]: [d] zeros, then [c]. *)
 Lemma x3_poly_eval_monomial (c d t : nat) :
   x3_poly_eval (nseq d 0 ++ [:: c]) t = c * t ^ d.
-Proof.
-elim: d => [|d IH] /=; first by rewrite muln0 addn0 expn0 muln1.
-by rewrite IH expnS mulnCA.
-Qed.
+Proof. exact: GTBase.poly_nat.horner_nat_monomial. Qed.
 
 (** ** The two conversions ************************************************)
 
