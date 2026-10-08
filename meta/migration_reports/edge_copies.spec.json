@@ -1,0 +1,318 @@
+{
+  "family": "edge-copies",
+  "canonical_name": "GTBase.edge_copies.edge_image",
+  "canonical_short_name": "edge_image",
+  "baseline_commit": "423936c66e0df86dff050496e86421193ebb1bcd",
+  "namespaces": {
+    "base": "GTBase",
+    "packing-theory": "Packing",
+    "cycle-theory": "Cycle",
+    "atlas": "Atlas",
+    "digraph-theory": "Digraph"
+  },
+  "relation": "Edge images of simple graphs and two list-decomposition conventions. An injective edge image ranges over the adjacent pairs of the pattern and need not lie in the host; an embedded copy also preserves adjacency. X47 decomposes by parts that are equal whenever they share an edge (repeated parts allowed); X212 counts every 2-element vertex set exactly as often as it is a host edge (repeated nonempty parts excluded, repeated empty parts allowed). Packing X47 writes its image with nested existentials over vertices, proved equal to the pair form; Cycle X212 uses the pair form verbatim. No tree, nonempty-pattern, connectedness or nonempty-part guard is added.",
+  "summary": [
+    "Five source definitions (X47 copy and equal-part decomposition, X212 image, copy and exact-count decomposition), three complete rows (X47, X48, Barat-Thomassen) and the X47/X48 deepest Originals, which compose this family's raw copy with M1's raw edges, A11's raw minimum degree and the simple-cut family's raw cuts. The Barat-Thomassen row and the X212 definitions are unchanged since their creation and use no earlier migrated helper, so their frozen copies are their deepest originals. Earlier certificates are byte-preserved.",
+    "Atlas.foundations.tree_decompositions now imports no conjecture module: its seven declarations keep their names and are stated over E(G), GTBase.simple_cuts.cut_edges and GTBase.edge_copies, convertibly to their former types."
+  ],
+  "certificate_files": [
+    "base/theories/edge_copies.v",
+    "packing-theory/theories/migration/edge_copies.v",
+    "cycle-theory/theories/migration/edge_copies.v",
+    "packing-theory/theories/migration/simple_edges.v",
+    "packing-theory/theories/migration/min_degree_at_least.v",
+    "packing-theory/theories/migration/simple_cuts.v"
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X47.x47_copy_edge_set",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_copy_edge_set",
+      "frozen_path": "packing-theory/theories/migration/edge_copies.v",
+      "frozen": "Legacy.x47_copy_edge_set",
+      "substitutions": {},
+      "certificate": "Packing.migration.edge_copies.x47_copy_edge_set_compat",
+      "live_unfolds_to": "GTBase.edge_copies.injective_edge_image T F"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X47.x47_tree_decomposition_by_copies",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_tree_decomposition_by_copies",
+      "frozen_path": "packing-theory/theories/migration/edge_copies.v",
+      "frozen": "Legacy.x47_tree_decomposition_by_copies",
+      "substitutions": {
+        "x47_copy_edge_set": "Legacy.x47_copy_edge_set"
+      },
+      "certificate": "Packing.migration.edge_copies.x47_tree_decomposition_by_copies_compat",
+      "live_unfolds_to": "GTBase.edge_copies.edge_decomposition_by_equal_parts G T"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X47.tree_decomposition_delta_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/edge_copies.v",
+      "frozen": "X47Legacy.tree_decomposition_delta_edge_connected_statement",
+      "substitutions": {
+        "x47_tree_decomposition_by_copies": "Legacy.x47_tree_decomposition_by_copies"
+      },
+      "certificate": "Packing.migration.edge_copies.tree_decomposition_delta_edge_connected_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X48.tree_decomposition_leaf_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X48.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/edge_copies.v",
+      "frozen": "X48Legacy.tree_decomposition_leaf_edge_connected_statement",
+      "substitutions": {
+        "x47_tree_decomposition_by_copies": "Legacy.x47_tree_decomposition_by_copies"
+      },
+      "certificate": "Packing.migration.edge_copies.tree_decomposition_leaf_edge_connected_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X47.x47_tree_decomposition_by_copies",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_tree_decomposition_by_copies",
+      "frozen_path": "packing-theory/theories/migration/edge_copies.v",
+      "frozen": "Original.x47_tree_decomposition_by_copies",
+      "substitutions": {
+        "x47_copy_edge_set": "Legacy.x47_copy_edge_set",
+        "x47_edge_set": "SE.Legacy.edge_set"
+      },
+      "certificate": "Packing.migration.edge_copies.x47_tree_decomposition_by_copies_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.X47.tree_decomposition_delta_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/edge_copies.v",
+      "frozen": "X47Original.tree_decomposition_delta_edge_connected_statement",
+      "substitutions": {
+        "x47_edge_set": "SE.Legacy.edge_set",
+        "x47_edge_connected": "SC.Original.x47_edge_connected",
+        "x47_min_degree_at_least": "MD.Legacy.x47_min_degree_at_least",
+        "x47_tree_decomposition_by_copies": "Original.x47_tree_decomposition_by_copies"
+      },
+      "certificate": "Packing.migration.edge_copies.tree_decomposition_delta_edge_connected_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.X48.tree_decomposition_leaf_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X48.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/edge_copies.v",
+      "frozen": "X48Original.tree_decomposition_leaf_edge_connected_statement",
+      "substitutions": {
+        "x47_edge_set": "SE.Legacy.edge_set",
+        "x47_edge_connected": "SC.Original.x47_edge_connected",
+        "x47_min_degree_at_least": "MD.Legacy.x47_min_degree_at_least",
+        "x47_tree_decomposition_by_copies": "Original.x47_tree_decomposition_by_copies"
+      },
+      "certificate": "Packing.migration.edge_copies.tree_decomposition_leaf_edge_connected_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X212.x212_copy_edges",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_copy_edges",
+      "frozen_path": "cycle-theory/theories/migration/edge_copies.v",
+      "frozen": "Legacy.x212_copy_edges",
+      "substitutions": {},
+      "certificate": "Cycle.migration.edge_copies.x212_copy_edges_compat",
+      "live_unfolds_to": "GTBase.edge_copies.edge_image f"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X212.x212_copy_of",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_copy_of",
+      "frozen_path": "cycle-theory/theories/migration/edge_copies.v",
+      "frozen": "Legacy.x212_copy_of",
+      "substitutions": {
+        "x212_copy_edges": "Legacy.x212_copy_edges"
+      },
+      "certificate": "Cycle.migration.edge_copies.x212_copy_of_compat",
+      "live_unfolds_to": "GTBase.edge_copies.embedded_edge_copy T A"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X212.x212_decomposition_into_copies",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_decomposition_into_copies",
+      "frozen_path": "cycle-theory/theories/migration/edge_copies.v",
+      "frozen": "Legacy.x212_decomposition_into_copies",
+      "substitutions": {
+        "x212_copy_of": "Legacy.x212_copy_of"
+      },
+      "certificate": "Cycle.migration.edge_copies.x212_decomposition_into_copies_compat",
+      "live_unfolds_to": "GTBase.edge_copies.edge_decomposition_exact T D"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X212.barat_thomassen_tree_decomposition_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "barat_thomassen_tree_decomposition_statement",
+      "frozen_path": "cycle-theory/theories/migration/edge_copies.v",
+      "frozen": "X212Legacy.barat_thomassen_tree_decomposition_statement",
+      "substitutions": {
+        "x212_decomposition_into_copies": "Legacy.x212_decomposition_into_copies"
+      },
+      "certificate": "Cycle.migration.edge_copies.barat_thomassen_tree_decomposition_statement_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X47.x47_edge_set",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_edge_set",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x47_edge_set": "edge_set"
+      },
+      "certificate": "Packing.migration.simple_edges.x47_edge_set_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X47.x47_min_degree_at_least",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_min_degree_at_least",
+      "frozen_path": "packing-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x47_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Packing.migration.min_degree_at_least.x47_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G d",
+      "commit": "9abf440da80115caeffd299077976b48f4e07d74"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X47.x47_crossing_edges",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_crossing_edges",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "Original.x47_crossing_edges",
+      "substitutions": {
+        "x47_edge_set": "SE.Legacy.edge_set"
+      },
+      "certificate": "Packing.migration.simple_cuts.x47_crossing_edges_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X47.x47_edge_connected",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_edge_connected",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "Original.x47_edge_connected",
+      "substitutions": {
+        "x47_crossing_edges": "Original.x47_crossing_edges"
+      },
+      "certificate": "Packing.migration.simple_cuts.x47_edge_connected_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    }
+  ],
+  "extra_certificates": [
+    "GTBase.edge_copies.edge_imageE",
+    "GTBase.edge_copies.injective_edge_image_nested",
+    "GTBase.edge_copies.edge_image_nested",
+    "GTBase.edge_copies.edge_image_id",
+    "GTBase.edge_copies.edge_image_sub",
+    "GTBase.edge_copies.embedded_edge_copy_sub",
+    "GTBase.edge_copies.injective_edge_image_contained",
+    "GTBase.edge_copies.embedded_edge_copy_self",
+    "GTBase.edge_copies.edge_decomposition_equal_parts_exact",
+    "GTBase.edge_copies.edge_decomposition_exact_nil",
+    "GTBase.edge_copies.edge_decomposition_equal_parts_nil",
+    "GTBase.edge_copies.edge_decomposition_exact_self",
+    "GTBase.edge_copies.edge_decomposition_exact_double_not",
+    "GTBase.edge_copies.tree_has_edge",
+    "Packing.migration.edge_copies.x47_tree_decomposition_by_copies_pre_simple_cuts"
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "note": "The X47-to-Barat-Thomassen implication keeps both complete endpoints; its proof uses the restated Atlas bridge lemmas through apply/exact, which unify with the aliases by conversion."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "barat_thomassen_tree_decomposition_statement",
+      "note": "Target endpoint of the X47 implication, unchanged; the exact-count decomposition is reached through the public undup transport by conversion."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "note": "The X48-to-Barat-Thomassen implication keeps both complete endpoints and its majorant argument."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "barat_thomassen_tree_decomposition_statement",
+      "note": "Target endpoint of the X48 implication, unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_decomposition_into_copies",
+      "note": "The one-vertex-tree grounding of the empty list uses the unchanged name; the alias unfolds to the same body."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_decomposition_into_copies",
+      "note": "The non-edge exclusion lemma uses the unchanged name and its exact-count body by conversion."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "barat_thomassen_tree_decomposition_statement",
+      "note": "The existing Print Assumptions endpoint remains the whole unchanged Barat-Thomassen row."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/X48.v",
+      "name": "x47_tree_decomposition_by_copies",
+      "note": "The complete X48 row keeps the X47 decomposition name, its quantifiers and guards, with a whole-row certificate."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X48.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "note": "The existing X47-to-X48 implication keeps both complete endpoints."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X48.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "note": "The existing X47-to-X48 implication keeps both complete endpoints."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Packing.foundations.edge_partitions.edge_partition",
+      "path": "packing-theory/theories/foundations/edge_partitions.v",
+      "name": "edge_partition",
+      "note": "An indexed family of edge classes; repeated and empty parts are treated differently, so it is not a drop-in replacement for either list convention."
+    },
+    {
+      "qualified": "Cycle.conjectures.U6.edge_partitionT",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "edge_partitionT",
+      "note": "Multigraph edge-object list partition; not simple-graph 2-element vertex sets."
+    },
+    {
+      "qualified": "Cycle.conjectures.U6.edge_partition_of",
+      "path": "cycle-theory/theories/conjectures/U6.v",
+      "name": "edge_partition_of",
+      "note": "Multigraph edge-object partition of a supplied edge set; separate family."
+    }
+  ],
+  "known_stale_snapshots": {
+    "packing-theory/theories/migration/min_degree_at_least.v#X47Legacy.tree_decomposition_delta_edge_connected_statement": "Earlier A11 snapshot freezes raw minimum degree but keeps the live X47 decomposition; preserved unchanged. The edge-copies X47Original composes A11 raw degree, M1 raw edges, the simple-cut raw cuts and this family's raw copy.",
+    "packing-theory/theories/migration/min_degree_at_least.v#X48Legacy.tree_decomposition_leaf_edge_connected_statement": "Earlier A11 snapshot freezes raw minimum degree but keeps the live X47 decomposition; preserved unchanged. The edge-copies X48Original is the complete raw row.",
+    "packing-theory/theories/migration/simple_cuts.v#X47Legacy.tree_decomposition_delta_edge_connected_statement": "Earlier simple-cut snapshot freezes cut connectivity but keeps the live X47 decomposition; preserved unchanged. The edge-copies X47Original adds the frozen copy to the simple-cut Original chain.",
+    "packing-theory/theories/migration/simple_cuts.v#X48Legacy.tree_decomposition_leaf_edge_connected_statement": "Earlier simple-cut snapshot freezes cut connectivity but keeps the live X47 decomposition; preserved unchanged. The edge-copies X48Original adds the frozen copy.",
+    "packing-theory/theories/migration/simple_cuts.v#Original.x47_tree_decomposition_by_copies": "Earlier simple-cut Original freezes M1 raw edges but keeps the live X47 copy predicate; preserved unchanged. The edge-copies Original.x47_tree_decomposition_by_copies freezes the copy too, certified by x47_tree_decomposition_by_copies_pre_simple_cuts."
+  }
+}
