@@ -1,0 +1,186 @@
+{
+  "family": "natural-data-decoder",
+  "canonical_name": "GTBase.complexity.data_nth_nat",
+  "canonical_short_name": "data_nth_nat",
+  "relation": "definitional equality: X157's and X164's local output decoders x157_data_nth_nat / x164_data_nth_nat d i (identical bodies, unchanged since their authoring 8800958) are GTBase.complexity.data_nth_nat d i, the same fixpoint, so every certificate is a kernel conversion; the colour adapters x157_output_colour (modulo k, k = 0 included) and x164_output_colour (modulo 3), both at the vertex's enum rank, stay distinct and unchanged",
+  "baseline_commit": "3bdfdae32824d4762ba8105367f7858a706a02e2",
+  "namespaces": {
+    "chromatic-theory": "Chromatic",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/complexity.v",
+    "chromatic-theory/theories/migration/natural_data_decoder.v"
+  ],
+  "extra_certificates": [
+    "GTBase.complexity.data_nth_nat0",
+    "GTBase.complexity.data_nth_natS",
+    "GTBase.complexity.data_nth_nat_Dnil",
+    "GTBase.complexity.data_nth_nat_enc_list",
+    "GTBase.complexity.data_nth_nat_enc_list_default"
+  ],
+  "summary": [
+    "natural-data-decoder, one family over the existing module `GTBase.complexity` (re-exported by GTBase.base): the positional natural reader `data_nth_nat d i` of an output datum, added next to the scalar reader `data_nat_value` with the legacy body unchanged.",
+    "Its exact contract, corners included: position 0 of a Dcons cell is its head's natural value (0 for a non-Dnat head), position j+1 is position j of the tail; a scalar Dnat n, as a whole datum or as a malformed list tail, reads n at its position 0 and 0 after; Dnil and Dpair read 0 everywhere (`data_nth_nat0`, `data_nth_natS`, `data_nth_nat_Dnil`); on an encoded list of naturals it is nth 0 (`data_nth_nat_enc_list`, `data_nth_nat_enc_list_default`).",
+    "Chromatic X157 (local connectivity, fixed k >= 4, cost-coupled polytime output) and X164 (fixed surface and boundary, linear-time 3-colouring output) keep their decoders `x157_data_nth_nat` / `x164_data_nth_nat` as transparent aliases of `data_nth_nat d i`; nothing else in either file changes. The adapters `x157_output_colour` (modulo k, so modulo 0 keeps the value) and `x164_output_colour` (modulo 3) and every row guard, quantifier order and doc block stay as they were.",
+    "The certificates in `Chromatic.migration.natural_data_decoder` freeze both decoders and every same-file declaration through which a row reaches them (X157: output colour, output-or-none, polytime chain; X164: output colour, valid output, linear-time chain) and the two complete rows, all kernel conversions. `X157Original` composes the end-to-end pre-migration X157 row over the internal-vertices family's frozen chain (B2, baseline 9e03072) and this family's frozen decoding; X164 has no earlier snapshot.",
+    "X164 stays a documented blocked, unfaithful row (no extension precondition; orientable surface only; the boundary parameter does not constrain the embedding): its body, status and defect text are unchanged, and this migration neither repairs nor certifies its algorithmic claim."
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/natural_data_decoder.v#Legacy.x157_data_nth_nat": "natural-data-decoder frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (Legacy.x157_data_nth_nat itself), not the live Chromatic.conjectures.X157.x157_data_nth_nat; its kernel dependency closure contains no live decoder (coordination/evidence/resume-2026-10-06/natural-data-decoder-candidate-by-lancelot/kernel/closures.json). Certified by x157_data_nth_nat_compat.",
+    "chromatic-theory/theories/migration/natural_data_decoder.v#Legacy.x164_data_nth_nat": "natural-data-decoder frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (Legacy.x164_data_nth_nat itself), not the live Chromatic.conjectures.X164.x164_data_nth_nat; its kernel dependency closure contains no live decoder (coordination/evidence/resume-2026-10-06/natural-data-decoder-candidate-by-lancelot/kernel/closures.json). Certified by x164_data_nth_nat_compat.",
+    "chromatic-theory/theories/migration/internal_vertices.v#X157Legacy.polytime_colouring_or_none": "Earlier-family snapshot (B2, internal-vertices, baseline 9e03072): B2 froze only X157's internal-vertex chain and kept the output decoding live by design, so this copy still applies the live x157_output_k_colouring_or_none, which since natural-data-decoder reaches GTBase.complexity.data_nth_nat through the alias x157_data_nth_nat (the same fixpoint by conversion). Over B2's frozen chain and this family's frozen decoding, the complete pre-B2, pre-natural-data-decoder row is Chromatic.migration.natural_data_decoder.X157Original.statement, certified by local_connectivity_k_colouring_polytime_statement_original_compat."
+  },
+  "cross_module_consumers": [],
+  "distinct_variants": [],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X157.x157_data_nth_nat",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "x157_data_nth_nat",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "Legacy.x157_data_nth_nat",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.natural_data_decoder.x157_data_nth_nat_compat",
+      "live_unfolds_to": "data_nth_nat d i"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X157.x157_output_colour",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "x157_output_colour",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "Legacy.x157_output_colour",
+      "substitutions": {
+        "x157_data_nth_nat": "Legacy.x157_data_nth_nat"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.x157_output_colour_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X157.x157_output_k_colouring_or_none",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "x157_output_k_colouring_or_none",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "Legacy.x157_output_k_colouring_or_none",
+      "substitutions": {
+        "x157_output_colour": "Legacy.x157_output_colour"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.x157_output_k_colouring_or_none_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X157.x157_polytime_colouring_or_none",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "x157_polytime_colouring_or_none",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "Legacy.x157_polytime_colouring_or_none",
+      "substitutions": {
+        "x157_output_k_colouring_or_none": "Legacy.x157_output_k_colouring_or_none"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.x157_polytime_colouring_or_none_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X157.local_connectivity_k_colouring_polytime_statement",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "local_connectivity_k_colouring_polytime_statement",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "X157Legacy.local_connectivity_k_colouring_polytime_statement",
+      "substitutions": {
+        "x157_polytime_colouring_or_none": "Legacy.x157_polytime_colouring_or_none"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.local_connectivity_k_colouring_polytime_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X157.x157_polytime_colouring_or_none",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "x157_polytime_colouring_or_none",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "X157Original.polytime_colouring_or_none",
+      "substitutions": {
+        "x157_polytime_colouring_or_none": "polytime_colouring_or_none",
+        "x157_max_local_connectivity_at_most": "internal_vertices.X157Legacy.max_local_connectivity_at_most",
+        "x157_output_k_colouring_or_none": "Legacy.x157_output_k_colouring_or_none"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.x157_polytime_colouring_or_none_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X157.local_connectivity_k_colouring_polytime_statement",
+      "path": "chromatic-theory/theories/conjectures/X157.v",
+      "name": "local_connectivity_k_colouring_polytime_statement",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "X157Original.statement",
+      "substitutions": {
+        "local_connectivity_k_colouring_polytime_statement": "statement",
+        "x157_polytime_colouring_or_none": "polytime_colouring_or_none"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.local_connectivity_k_colouring_polytime_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X164.x164_data_nth_nat",
+      "path": "chromatic-theory/theories/conjectures/X164.v",
+      "name": "x164_data_nth_nat",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "Legacy.x164_data_nth_nat",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.natural_data_decoder.x164_data_nth_nat_compat",
+      "live_unfolds_to": "data_nth_nat d i"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X164.x164_output_colour",
+      "path": "chromatic-theory/theories/conjectures/X164.v",
+      "name": "x164_output_colour",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "Legacy.x164_output_colour",
+      "substitutions": {
+        "x164_data_nth_nat": "Legacy.x164_data_nth_nat"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.x164_output_colour_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X164.x164_valid_output",
+      "path": "chromatic-theory/theories/conjectures/X164.v",
+      "name": "x164_valid_output",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "Legacy.x164_valid_output",
+      "substitutions": {
+        "x164_output_colour": "Legacy.x164_output_colour"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.x164_valid_output_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X164.x164_linear_time_outputs_three_colouring",
+      "path": "chromatic-theory/theories/conjectures/X164.v",
+      "name": "x164_linear_time_outputs_three_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "Legacy.x164_linear_time_outputs_three_colouring",
+      "substitutions": {
+        "x164_valid_output": "Legacy.x164_valid_output"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.x164_linear_time_outputs_three_colouring_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X164.linear_time_surface_triangle_free_three_colouring_output_statement",
+      "path": "chromatic-theory/theories/conjectures/X164.v",
+      "name": "linear_time_surface_triangle_free_three_colouring_output_statement",
+      "frozen_path": "chromatic-theory/theories/migration/natural_data_decoder.v",
+      "frozen": "X164Legacy.linear_time_surface_triangle_free_three_colouring_output_statement",
+      "substitutions": {
+        "x164_linear_time_outputs_three_colouring": "Legacy.x164_linear_time_outputs_three_colouring"
+      },
+      "certificate": "Chromatic.migration.natural_data_decoder.linear_time_surface_triangle_free_three_colouring_output_statement_compat",
+      "corpus": "v2"
+    }
+  ]
+}
