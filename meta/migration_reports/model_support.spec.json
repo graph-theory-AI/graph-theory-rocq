@@ -346,7 +346,9 @@
     "extremal-graph-theory/theories/migration/induced_subdivisions.v#Legacy.x98_induced_subdivision_model": "C20 current-baseline snapshot freezes the whole strong X98 Record but retains this family's already-migrated live x98_model_vertex in global_induced. It stays explicit; this family's X98Original.x98_induced_subdivision_model is the complete Record with the frozen raw support, reused by C20.",
     "graph-theory-misc/theories/migration/induced_subdivisions.v#Legacy.x114_induced_subdivision_model": "C20 current-baseline snapshot freezes the whole strong X114 Record but retains this family's already-migrated live x114_model_vertex in global_induced. It stays explicit; this family's X114Original.x114_induced_subdivision_model is the complete Record with the frozen raw support, reused by C20.",
     "minor-theory/theories/migration/induced_cycles.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement": "B23 per-row snapshot: family induced-cycle (B23) froze only its induced-cycle / hole helpers and chains in this object (theta_prism_even_wheel_free_bounded_treewidth_statement), so this copy still calls the live x220_prism, x220_theta, which reaches this family's canonical through this family's live alias (directly, or through its live chain). Kept as B23's per-row copy; the complete combined rows are the earlier families' Originals reused and certified end to end in B23's spec.",
-    "minor-theory/theories/migration/simple_line_graphs.v#X220Legacy.four_family_free_logarithmic_treewidth_statement": "A25 per-row snapshot: A25 froze X220's four-family row over its own raw line graph (GraphLegacy.sline_graph at 897a7d3) but kept the live is_subdivision_of (after C19 over GTBase.model_support.model_support, the same predicate by conversion). Kept unchanged; the complete row is Minor.migration.simple_line_graphs.X220Original.four_family_free_logarithmic_treewidth_statement over this family's raw Legacy.is_subdivision_of chain at bb0bf3c (borrowed through the alias MS) and A25's frozen line graph, certified by Minor.migration.simple_line_graphs.four_family_free_logarithmic_treewidth_statement_original_compat."
+    "minor-theory/theories/migration/simple_line_graphs.v#X220Legacy.four_family_free_logarithmic_treewidth_statement": "A25 per-row snapshot: A25 froze X220's four-family row over its own raw line graph (GraphLegacy.sline_graph at 897a7d3) but kept the live is_subdivision_of (after C19 over GTBase.model_support.model_support, the same predicate by conversion). Kept unchanged; the complete row is Minor.migration.simple_line_graphs.X220Original.four_family_free_logarithmic_treewidth_statement over this family's raw Legacy.is_subdivision_of chain at bb0bf3c (borrowed through the alias MS) and A25's frozen line graph, certified by Minor.migration.simple_line_graphs.four_family_free_logarithmic_treewidth_statement_original_compat.",
+    "minor-theory/theories/migration/prism_configuration.v#Legacy.x220_prism": "Later-family snapshot (prism-configuration, baseline 29336a8c, 2026-10-08): the frozen prism predicate keeps this family's live subdiv_rep (now over GTBase.model_support). Its Original.x220_prism counterpart is over this family's raw Legacy.subdiv_rep and the explicitly frozen graph.",
+    "minor-theory/theories/migration/prism_configuration.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement": "Later-family snapshot (prism-configuration, baseline 29336a8c, 2026-10-08): the frozen theta/prism row keeps this family's live x220_theta. Its X220Original counterpart uses this family's frozen X220Legacy.x220_theta and raw Legacy.subdiv_rep, certified through this family's X220Original certificate."
   },
   "cross_module_consumers": [
     {
@@ -422,7 +424,27 @@
     {
       "path": "minor-theory/theories/foundations/hole_containments.v",
       "name": "x220_prism",
-      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure."
+      "note": "Existing consumer, unchanged: its exact type and proof body are retained and it is rebuilt in the focused import closure. Since 2026-10-08 (prism-configuration): prism_even_hole states its hypothesis with the public prism_configuration (X220's x220_prism is its alias) and hole_containments no longer imports X220."
+    },
+    {
+      "path": "minor-theory/theories/foundations/prism_configurations.v",
+      "name": "subdiv_rep",
+      "note": "Since 2026-10-08 (prism-configuration): the public prism_configuration states the spanning/exact subdivision with the live subdiv_rep, verbatim from X220's x220_prism."
+    },
+    {
+      "path": "minor-theory/theories/foundations/prism_configurations.v",
+      "name": "is_subdivision_of",
+      "note": "Since 2026-10-08 (prism-configuration): prism_configuration_is_subdivision forgets the triangle restriction into is_subdivision_of H prism_base."
+    },
+    {
+      "path": "minor-theory/theories/examples/prism_configurations.v",
+      "name": "subdiv_rep",
+      "note": "Since 2026-10-08 (prism-configuration): the public example proves subdiv_rep for an explicit model of the 3-prism with one subdivided triangle edge."
+    },
+    {
+      "path": "minor-theory/theories/examples/prism_configurations.v",
+      "name": "is_subdivision_of",
+      "note": "Since 2026-10-08 (prism-configuration): the same example is a subdivision of prism_base (prism_split_is_subdivision) that is not a prism configuration."
     }
   ],
   "distinct_variants": []

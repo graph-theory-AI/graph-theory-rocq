@@ -5,6 +5,7 @@ From GTBase Require Import graph_classes.
 From GraphTheory Require Import minor.
 From Minor.foundations Require Import containment width_params.
 From Minor.foundations Require Import shallow_minors.
+From Minor.foundations Require Import prism_configurations.
 From Minor.conjectures Require Import X27 X42.
 
 Set Implicit Arguments.
@@ -58,14 +59,13 @@ Definition x220_wall (t : nat) : sgraph := SGraph (@x220_wall_sym t) (@x220_wall
 
 Definition x220_theta (H : sgraph) : Prop := is_subdivision_of H (KB 2 3).
 
-Definition x220_prism3 : sgraph :=
-  el_graph 6 [:: (0,1); (1,2); (0,2); (3,4); (4,5); (3,5); (0,3); (1,4); (2,5)].
+(** Since the prism-configuration library migration (2026-10-08) [x220_prism3] and [x220_prism]
+    are transparent aliases of [Minor.foundations.prism_configurations.prism_base] and
+    [prism_configuration] (the same edge list and the same predicate); the former bodies are
+    frozen and certified in theories/migration/prism_configuration.v. *)
+Definition x220_prism3 : sgraph := prism_configurations.prism_base.
 
-Definition x220_prism (H : sgraph) : Prop :=
-  exists m : subdiv_model x220_prism3 H,
-    subdiv_rep m /\
-    forall u v : x220_prism3,
-      u -- v -> ((val u < 3) == (val v < 3)) -> sdm_path m u v = [::].
+Definition x220_prism (H : sgraph) : Prop := prism_configurations.prism_configuration H.
 
 (** *** Wheels ************************************************************
 

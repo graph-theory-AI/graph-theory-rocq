@@ -32,13 +32,14 @@
     Holes and cyclic consecutiveness are stated with the public canonicals
     [GTBase.induced_cycles.hole] and [GTBase.walks_paths.seq_cyclic_consecutiveb] (library
     migrations B23 and B4), not with X27's transparent aliases [x27_hole] and
-    [x27_consecutive_in_cycle]: every theorem keeps its name and, up to those conversions,
-    its type, and X27 is no longer imported. *)
+    [x27_consecutive_in_cycle]; prisms are stated with the public
+    [Minor.foundations.prism_configurations.prism_configuration] (X220's [x220_prism] is its
+    alias).  Every theorem keeps its name and, up to those conversions, its type; neither X27
+    nor X220 is imported. *)
 
 From GTBase Require Export base.
 From GTBase Require induced_cycles.
-From Minor.foundations Require Import containment.
-From Minor.conjectures Require Import X220.
+From Minor.foundations Require Import containment prism_configurations.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -619,22 +620,22 @@ Qed.
 
 (** ** Every prism contains an even hole **********************************
 
-    A PRISM ([x220_prism] of conjectures/X220.v) is a subdivision of the 3-prism
-    [x220_prism3] in which the six TRIANGLE edges stay unsubdivided, so only the three
-    matching edges [(0,3)], [(1,4)], [(2,5)] become paths.  Two of those three paths
-    have interiors of the same parity; together with the two triangle edges joining
-    their ends they form an induced 4-cycle of [x220_prism3] -- e.g.
-    [0 -- 3 -- 4 -- 1 -- 0], whose diagonals [0 -- 4] and [3 -- 1] are not edges of the
-    3-prism -- and the resulting hole has even length. *)
+    A PRISM ([prism_configuration] of foundations/prism_configurations.v; X220's [x220_prism]
+    is its alias) is a subdivision of the 3-prism [prism_base] in which the six TRIANGLE
+    edges stay unsubdivided, so only the three matching edges [(0,3)], [(1,4)], [(2,5)]
+    become paths.  Two of those three paths have interiors of the same parity; together
+    with the two triangle edges joining their ends they form an induced 4-cycle of
+    [prism_base] -- e.g. [0 -- 3 -- 4 -- 1 -- 0], whose diagonals [0 -- 4] and [3 -- 1] are
+    not edges of the 3-prism -- and the resulting hole has even length. *)
 
 Lemma prism_even_hole (H : sgraph) :
-  x220_prism H -> exists c : seq H, induced_cycles.hole c /\ ~~ odd (size c).
+  prism_configuration H -> exists c : seq H, induced_cycles.hole c /\ ~~ odd (size c).
 Proof.
 case=> m [rep tri].
-have revs : forall u v : x220_prism3, u -- v ->
+have revs : forall u v : prism_base, u -- v ->
     size (sdm_path m v u) = size (sdm_path m u v).
   by move=> u v uv; rewrite (sdm_pathC m uv) size_rev.
-have main : forall a b c d : x220_prism3, a -- b -> b -- c -> c -- d -> d -- a ->
+have main : forall a b c d : prism_base, a -- b -> b -- c -> c -- d -> d -- a ->
     ~~ (a -- c) -> ~~ (b -- d) -> a != c -> b != d ->
     sdm_path m b c = [::] -> sdm_path m d a = [::] ->
     odd (size (sdm_path m a b)) = odd (size (sdm_path m c d)) ->
@@ -649,27 +650,27 @@ pose F03 := odd (size (sdm_path m n0 n3)).
 pose F14 := odd (size (sdm_path m n1 n4)).
 pose F25 := odd (size (sdm_path m n2 n5)).
 have [p1|q1] := boolP (F03 == F14).
-  have e1 : (n0 : x220_prism3) -- n3 by [].
-  have e2 : (n3 : x220_prism3) -- n4 by [].
-  have e3 : (n4 : x220_prism3) -- n1 by [].
-  have e4 : (n1 : x220_prism3) -- n0 by [].
+  have e1 : (n0 : prism_base) -- n3 by [].
+  have e2 : (n3 : prism_base) -- n4 by [].
+  have e3 : (n4 : prism_base) -- n1 by [].
+  have e4 : (n1 : prism_base) -- n0 by [].
   apply: (main n0 n3 n4 n1 e1 e2 e3 e4) => //.
   - exact: (tri n3 n4 e2 isT).
   - exact: (tri n1 n0 e4 isT).
   - by rewrite (revs n1 n4 e3); apply/eqP.
 have [p2|q2] := boolP (F03 == F25).
-  have e1 : (n0 : x220_prism3) -- n3 by [].
-  have e2 : (n3 : x220_prism3) -- n5 by [].
-  have e3 : (n5 : x220_prism3) -- n2 by [].
-  have e4 : (n2 : x220_prism3) -- n0 by [].
+  have e1 : (n0 : prism_base) -- n3 by [].
+  have e2 : (n3 : prism_base) -- n5 by [].
+  have e3 : (n5 : prism_base) -- n2 by [].
+  have e4 : (n2 : prism_base) -- n0 by [].
   apply: (main n0 n3 n5 n2 e1 e2 e3 e4) => //.
   - exact: (tri n3 n5 e2 isT).
   - exact: (tri n2 n0 e4 isT).
   - by rewrite (revs n2 n5 e3); apply/eqP.
-have e1 : (n1 : x220_prism3) -- n4 by [].
-have e2 : (n4 : x220_prism3) -- n5 by [].
-have e3 : (n5 : x220_prism3) -- n2 by [].
-have e4 : (n2 : x220_prism3) -- n1 by [].
+have e1 : (n1 : prism_base) -- n4 by [].
+have e2 : (n4 : prism_base) -- n5 by [].
+have e3 : (n5 : prism_base) -- n2 by [].
+have e4 : (n2 : prism_base) -- n1 by [].
 apply: (main n1 n4 n5 n2 e1 e2 e3 e4) => //.
 - exact: (tri n4 n5 e2 isT).
 - exact: (tri n2 n1 e4 isT).
