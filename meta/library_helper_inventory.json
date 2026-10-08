@@ -106,6 +106,10 @@
         "Extremal.conjectures.D2pr.srel",
         "GTMisc.conjectures.U13.relAdj"
       ],
+      "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2": [
+        "Chromatic.conjectures.X81.x81_proper_orientation_bound",
+        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
+      ],
       "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c": [
         "Chromatic.conjectures.X126.x126_genuine_path",
         "GTMisc.conjectures.X14.x14_genuine_path",
@@ -124,6 +128,10 @@
         "Digraph.conjectures.XE2.xe2_directed_cycle",
         "GTMisc.conjectures.XE1.xe1_rel_cycle"
       ],
+      "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48": [
+        "Chromatic.conjectures.X81.x81_proper_orientation",
+        "GTMisc.conjectures.X82.x82_proper_orientation"
+      ],
       "3b292dcb610289fb181c69580c08c9b93ddafe9879a8b455ac73dbeb1206cd87": [
         "Extremal.conjectures.X98.x98_induced_subdivision_model",
         "GTMisc.conjectures.X114.x114_induced_subdivision_model"
@@ -131,10 +139,6 @@
       "3c3980ab048cbce1bc06cc70c1ba63c5296cb9da1f0a9c4fc029a82422218578": [
         "Digraph.conjectures.X16.x16_no_sources",
         "Digraph.conjectures.X2.no_sources"
-      ],
-      "3d4c5ddffb4928cc9eecb298d4084fe4fdf4fd426ec007bf9874f4fa44dae236": [
-        "Chromatic.conjectures.X81.x81_proper_orientation_bound",
-        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
       ],
       "3f39d5c348e5b79d06e842c114e6cc571583bbf44e4b0ebfda1a01ec05745d43": [
         "Digraph.conjectures.P9.remove_arcs",
@@ -223,10 +227,6 @@
       "5f55dcd49e0fcadd3cebad1d18d33f1bc6ac0bae46b8b04aadc804f19f4cc935": [
         "Hamilton.conjectures.U2.vertex_transitive",
         "Hamilton.conjectures.X211.x211_vertex_transitive"
-      ],
-      "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e": [
-        "Chromatic.conjectures.X81.x81_orientation_of",
-        "GTMisc.conjectures.X82.x82_orientation_of"
       ],
       "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f": [
         "Cycle.conjectures.X24.x24_cycle_edge_seq",
@@ -378,6 +378,10 @@
         "GTMisc.conjectures.X144.x144_complete_between",
         "GTMisc.conjectures.X41.x41_complete_between"
       ],
+      "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e": [
+        "Chromatic.conjectures.X81.x81_indegree",
+        "GTMisc.conjectures.X82.x82_indegree"
+      ],
       "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c": [
         "Chromatic.conjectures.X3.x3_complement_graph",
         "Chromatic.conjectures.XE2.xe2_complement_graph",
@@ -475,9 +479,9 @@
         "Cycle.conjectures.X9.x9_cycle_chord_count",
         "Extremal.conjectures.XE2.xe2_cycle_diagonal_count"
       ],
-      "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5": [
-        "Chromatic.conjectures.X81.x81_indegree",
-        "GTMisc.conjectures.X82.x82_indegree"
+      "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487": [
+        "Chromatic.conjectures.X81.x81_orientation_of",
+        "GTMisc.conjectures.X82.x82_orientation_of"
       ],
       "b912fd109637af2ce26ee1e9de3ce0a260311e17f8196eec11e1b18bf60e0ba4": [
         "Hypergraph.conjectures.U12.k_uniform",
@@ -1112,10 +1116,6 @@
         "Extremal.conjectures.X56.x56_complement_rel",
         "Extremal.conjectures.XE1.xe1_complement_rel",
         "GTMisc.conjectures.X29.x29_complement_rel"
-      ],
-      "fd91119307d03817d27c8e6669932f2a85e1a3d2ad237259329d3cfd3939c4d9": [
-        "Chromatic.conjectures.X81.x81_proper_orientation",
-        "GTMisc.conjectures.X82.x82_proper_orientation"
       ],
       "feb3e84a1bc87cd86889fef44671f7e5757d03fe2303a4fb97e3c42e64f39631": [
         "Digraph.conjectures.X221.x221_eulerian",
@@ -10791,14 +10791,12 @@
       "signature_shape_hash": "6603ad256a32aedea73574a9bcd123cc4cec0027a80887710cfcccef89a70346"
     },
     {
-      "body_hash": "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e",
-      "body_shape_hash": "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e",
-      "declaration_hash": "17767893c54195403fc8e63595a858c0e79223783d96c857ae77f7d316cc045b",
-      "direct_consumers": [
-        "Chromatic.conjectures.X81.x81_proper_orientation_bound"
-      ],
+      "body_hash": "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487",
+      "body_shape_hash": "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487",
+      "declaration_hash": "964f1bfcec57119869c67266c01b034427fef4ce4cab75c891ba7e34a1ead74c",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x81_orientation_of",
       "normalized_name": "orientation_of",
@@ -10810,15 +10808,12 @@
       "signature_shape_hash": "4b6d55e3326a0500b148ba977569919f5e926240d9230c6af7c31b6161f639f4"
     },
     {
-      "body_hash": "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5",
-      "body_shape_hash": "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5",
-      "declaration_hash": "7d3ef70e9672a241d1793f0b95b079781f023d2ce716876ea8dd287e390a8206",
-      "direct_consumers": [
-        "Chromatic.conjectures.X81.x81_proper_orientation",
-        "Chromatic.conjectures.X81.x81_proper_orientation_bound"
-      ],
+      "body_hash": "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e",
+      "body_shape_hash": "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e",
+      "declaration_hash": "b794279b71ec29ec2eae5568a5031040bd5ed13eff60bdf6db91665a7715aed4",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 14,
+      "line": 17,
       "local_dependencies": [],
       "name": "x81_indegree",
       "normalized_name": "indegree",
@@ -10830,17 +10825,13 @@
       "signature_shape_hash": "ec4da8536c8a3646cfc93d26da08d80c3c0054f101ce4455795213bbdf53be83"
     },
     {
-      "body_hash": "34cc180d804e4eaec92c4d50aeace5335fa6e1a3ea3b5e65fe4db09afc2a7850",
-      "body_shape_hash": "fd91119307d03817d27c8e6669932f2a85e1a3d2ad237259329d3cfd3939c4d9",
-      "declaration_hash": "662bc45ba1045cad7755c7fc213e9136535e68681a95eb731e3381721cb70242",
-      "direct_consumers": [
-        "Chromatic.conjectures.X81.x81_proper_orientation_bound"
-      ],
+      "body_hash": "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48",
+      "body_shape_hash": "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48",
+      "declaration_hash": "34d030b843f187842fce69947ce81672d8bd384283e0a664cdb502529c2143fe",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 17,
-      "local_dependencies": [
-        "x81_indegree"
-      ],
+      "line": 23,
+      "local_dependencies": [],
       "name": "x81_proper_orientation",
       "normalized_name": "proper_orientation",
       "package": "chromatic-theory",
@@ -10851,19 +10842,15 @@
       "signature_shape_hash": "4b6d55e3326a0500b148ba977569919f5e926240d9230c6af7c31b6161f639f4"
     },
     {
-      "body_hash": "df63046d71e20da6d39236223e2b71652f2d0d2828ff5f275be513eb88273149",
-      "body_shape_hash": "3d4c5ddffb4928cc9eecb298d4084fe4fdf4fd426ec007bf9874f4fa44dae236",
-      "declaration_hash": "56272918753c7057cfe316f0f14f9522ea89996a0df27784332a8d2e3f4e1cd8",
+      "body_hash": "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2",
+      "body_shape_hash": "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2",
+      "declaration_hash": "c5980a1cb6cec4c2f458d0b97e403674d9d4d3747c830a646b8b63b621d9a2bf",
       "direct_consumers": [
         "Chromatic.conjectures.X81.bipartite_proper_orientation_half_delta_constant_statement"
       ],
       "kind": "Definition",
-      "line": 20,
-      "local_dependencies": [
-        "x81_indegree",
-        "x81_orientation_of",
-        "x81_proper_orientation"
-      ],
+      "line": 29,
+      "local_dependencies": [],
       "name": "x81_proper_orientation_bound",
       "normalized_name": "proper_orientation_bound",
       "package": "chromatic-theory",
@@ -42414,14 +42401,12 @@
       "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
     },
     {
-      "body_hash": "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e",
-      "body_shape_hash": "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e",
-      "declaration_hash": "0e9fc31c8b5913f2bc763c4b596c08f46f1295cb04593521ed1df9565f2833f3",
-      "direct_consumers": [
-        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
-      ],
+      "body_hash": "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487",
+      "body_shape_hash": "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487",
+      "declaration_hash": "72b40b94eb695eda237c986227a3907c1f9adf7b65fbfaebd2e958d7f055e862",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x82_orientation_of",
       "normalized_name": "orientation_of",
@@ -42433,15 +42418,12 @@
       "signature_shape_hash": "4b6d55e3326a0500b148ba977569919f5e926240d9230c6af7c31b6161f639f4"
     },
     {
-      "body_hash": "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5",
-      "body_shape_hash": "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5",
-      "declaration_hash": "29e132990a55c3c0b8dcfb99a692b6b3910499658ce1d5cea9d8b9e5dfd2b50d",
-      "direct_consumers": [
-        "GTMisc.conjectures.X82.x82_proper_orientation",
-        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
-      ],
+      "body_hash": "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e",
+      "body_shape_hash": "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e",
+      "declaration_hash": "c40a6e71db3ea05f1ef1f74c08e2f227e9823061a794790595f18f46793ced36",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 15,
+      "line": 18,
       "local_dependencies": [],
       "name": "x82_indegree",
       "normalized_name": "indegree",
@@ -42453,17 +42435,13 @@
       "signature_shape_hash": "ec4da8536c8a3646cfc93d26da08d80c3c0054f101ce4455795213bbdf53be83"
     },
     {
-      "body_hash": "443302fd601cdb1d5d91830c0ff91ba376c6523bdc2b9773d205a68ae8f3a6cc",
-      "body_shape_hash": "fd91119307d03817d27c8e6669932f2a85e1a3d2ad237259329d3cfd3939c4d9",
-      "declaration_hash": "9641f5f967f30d7a0ebd4152c7f8b6e20e49e2c608261b39cb5efc6baf2227ec",
-      "direct_consumers": [
-        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
-      ],
+      "body_hash": "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48",
+      "body_shape_hash": "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48",
+      "declaration_hash": "7f969a320389ba5a7d603bc945390ac544ade39f5e46edf3e59041ec3a954362",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 18,
-      "local_dependencies": [
-        "x82_indegree"
-      ],
+      "line": 24,
+      "local_dependencies": [],
       "name": "x82_proper_orientation",
       "normalized_name": "proper_orientation",
       "package": "graph-theory-misc",
@@ -42474,19 +42452,15 @@
       "signature_shape_hash": "4b6d55e3326a0500b148ba977569919f5e926240d9230c6af7c31b6161f639f4"
     },
     {
-      "body_hash": "7ba3174641c20c1918a54e4e158ae66ed1986e09b75528ec3c6a6fd14feccd00",
-      "body_shape_hash": "3d4c5ddffb4928cc9eecb298d4084fe4fdf4fd426ec007bf9874f4fa44dae236",
-      "declaration_hash": "64c0de29da969ac3300c91f950e1f358d45aee7a99ca37b412a6a9501f79baaa",
+      "body_hash": "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2",
+      "body_shape_hash": "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2",
+      "declaration_hash": "263b06d51d5f1cef76c0e39646c0777af1427f1c2016af8db841a1b2baf4041b",
       "direct_consumers": [
         "GTMisc.conjectures.X82.outerplanar_bounded_proper_orientation_number_statement"
       ],
       "kind": "Definition",
-      "line": 21,
-      "local_dependencies": [
-        "x82_indegree",
-        "x82_orientation_of",
-        "x82_proper_orientation"
-      ],
+      "line": 30,
+      "local_dependencies": [],
       "name": "x82_proper_orientation_bound",
       "normalized_name": "proper_orientation_bound",
       "package": "graph-theory-misc",
@@ -42504,7 +42478,7 @@
         "GTMisc.conjectures.X82.outerplanar_bounded_proper_orientation_number_statement"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 36,
       "local_dependencies": [],
       "name": "x82_outerplanar",
       "normalized_name": "outerplanar",

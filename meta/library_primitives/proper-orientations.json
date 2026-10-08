@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "family": "proper-orientations",
+  "primitive": {
+    "canonical_name": "GTBase.orientations.proper_orientation_bound",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "orientation_of",
+      "indegree",
+      "proper_orientation",
+      "proper_orientation_bound"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X81.x81_indegree",
+      "Chromatic.conjectures.X81.x81_orientation_of",
+      "Chromatic.conjectures.X81.x81_proper_orientation",
+      "Chromatic.conjectures.X81.x81_proper_orientation_bound",
+      "GTMisc.conjectures.X82.x82_indegree",
+      "GTMisc.conjectures.X82.x82_orientation_of",
+      "GTMisc.conjectures.X82.x82_proper_orientation",
+      "GTMisc.conjectures.X82.x82_proper_orientation_bound"
+    ],
+    "consumers_remaining": 2,
+    "relation": "one family over GTBase.orientations, for a simple graph G and an arbitrary Boolean relation D : rel G, each X81 / X82 helper by conversion: x8?_orientation_of D is orientation_of D (every arc joins adjacent vertices and every edge carries exactly one of its two arcs, D x y (+) D y x; so no loop and no digon); x8?_indegree D v is rel_indegree D v (the vertices u with D u v: incoming, not outgoing; a loop counts); x8?_proper_orientation D is proper_indegrees D (adjacent vertices have different indegrees, on an arbitrary D: no orientation is asserted, and a relation with a loop can be proper); x8?_proper_orientation_bound G k is proper_orientation_bound G k (one D with the three conjuncts in this order and every indegree at most k). Empty and edgeless hosts satisfy the bound at 0 through the empty relation; the bound is monotone in k with the same D. No orientation, loop, digon, nonemptiness or guard is added. Distinct and untouched: B16's diGraphType indeg (its owner keeps it), arc-set and selection indegrees (Alon-Tarsi at_indegree / at_spanning_orientation, P9 arcset_indeg) and Digraph XE2's split pair xe2_uses_only_edges / xe2_orients_edge.",
+    "semantic_classes": {
+      "edge-only-exclusive-orientation": {
+        "members": [
+          "Chromatic.conjectures.X81.x81_orientation_of",
+          "GTMisc.conjectures.X82.x82_orientation_of"
+        ],
+        "count": 2,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.orientations.x81_orientation_of_compat",
+          "GTMisc.migration.orientations.x82_orientation_of_compat"
+        ],
+        "note": "orientation_of D: arcs only between adjacent vertices and exactly one direction per edge (D x y (+) D y x); no loop (orientation_of_noloop), no digon (orientation_of_nodigon); the empty relation orients an edgeless host."
+      },
+      "incoming-cardinality": {
+        "members": [
+          "Chromatic.conjectures.X81.x81_indegree",
+          "GTMisc.conjectures.X82.x82_indegree"
+        ],
+        "count": 2,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.orientations.x81_indegree_compat",
+          "GTMisc.migration.orientations.x82_indegree_compat"
+        ],
+        "note": "rel_indegree D v = #|[set u | D u v]|: incoming vertices, a loop counts; the empty relation gives 0 (rel_indegree0)."
+      },
+      "proper-indegrees": {
+        "members": [
+          "Chromatic.conjectures.X81.x81_proper_orientation",
+          "GTMisc.conjectures.X82.x82_proper_orientation"
+        ],
+        "count": 2,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.orientations.x81_proper_orientation_compat",
+          "GTMisc.migration.orientations.x82_proper_orientation_compat"
+        ],
+        "note": "proper_indegrees D: adjacent vertices have different indegrees, for an arbitrary D; it does not imply orientation_of D (a loop relation on K2 is proper)."
+      },
+      "bounded-proper-orientation": {
+        "members": [
+          "Chromatic.conjectures.X81.x81_proper_orientation_bound",
+          "GTMisc.conjectures.X82.x82_proper_orientation_bound"
+        ],
+        "count": 2,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.orientations.x81_proper_orientation_bound_compat",
+          "GTMisc.migration.orientations.x82_proper_orientation_bound_compat"
+        ],
+        "note": "proper_orientation_bound G k: one D, orientation_of D /\\ proper_indegrees D /\\ every rel_indegree D v <= k, in this order; monotone in k with the same D; 0 on empty and edgeless hosts."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.orientations.bipartite_proper_orientation_half_delta_constant_statement_compat",
+      "Chromatic.migration.orientations.x81_indegree_compat",
+      "Chromatic.migration.orientations.x81_orientation_of_compat",
+      "Chromatic.migration.orientations.x81_proper_orientation_bound_compat",
+      "Chromatic.migration.orientations.x81_proper_orientation_compat",
+      "GTMisc.migration.orientations.outerplanar_bounded_proper_orientation_number_statement_compat",
+      "GTMisc.migration.orientations.planar_bounded_proper_orientation_number_statement_compat",
+      "GTMisc.migration.orientations.x82_indegree_compat",
+      "GTMisc.migration.orientations.x82_orientation_of_compat",
+      "GTMisc.migration.orientations.x82_proper_orientation_bound_compat",
+      "GTMisc.migration.orientations.x82_proper_orientation_compat"
+    ],
+    "api_theorems": [
+      "GTBase.orientations.orientation_of_edge",
+      "GTBase.orientations.orientation_of_xor",
+      "GTBase.orientations.orientation_of_exclusive",
+      "GTBase.orientations.orientation_of_noloop",
+      "GTBase.orientations.orientation_of_nodigon",
+      "GTBase.orientations.in_rel_indegree",
+      "GTBase.orientations.rel_indegree0",
+      "GTBase.orientations.rel_indegree_gt0",
+      "GTBase.orientations.orientation_of_edgeless",
+      "GTBase.orientations.proper_indegrees_edgeless",
+      "GTBase.orientations.proper_orientation_bound_edgeless",
+      "GTBase.orientations.proper_orientation_bound_mono",
+      "GTBase.orientations.proper_orientation_bound_card0"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.sgraph",
+        "mathcomp.boot.fintype",
+        "mathcomp.boot.finset",
+        "Digraph.foundations.degree_balance"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "Root audit (evidence/D11-proper-orientations-discovery/upstream-audit.txt): the pinned GraphTheory sources declare no orient / indeg / in_degree; relType packages a finite Boolean relation but names no orientation of a simple graph. B16's indeg counts incoming vertices of a diGraphType and keeps its owner and interface; D11 takes a supplied relation on an independent simple-graph carrier. GTBase.orientations is not re-exported by GTBase.base.",
+      "audited_at": "2026-10-04"
+    },
+    "migration_report": "meta/migration_reports/orientations.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/orientations.spec.json",
+    "downstream_client": "base/theories/examples/orientations.v",
+    "foundation_fidelity": "meta/foundation_fidelity/proper-orientations.json"
+  }
+}
