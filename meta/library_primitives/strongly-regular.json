@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "family": "strongly-regular",
+  "primitive": {
+    "canonical_name": "GTBase.strongly_regular.strongly_regular_parameters",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "srg",
+      "strongly_regular"
+    ],
+    "source_definitions": [
+      "Hom.conjectures.U3.srg",
+      "Hom.conjectures.U3.strongly_regular",
+      "Spectral.conjectures.D5.strongly_regular"
+    ],
+    "consumers_remaining": 2,
+    "relation": "strongly regular parameters: GTBase.strongly_regular.strongly_regular_parameters G k lam mu is the three unguarded clauses (regular G k; adjacent pairs have lam common neighbours; distinct non-adjacent pairs have mu). Two distinct existentials: has_strongly_regular_parameters (unguarded; Hom U3 srg/strongly_regular convert to the clauses and to it; K_2, the empty graph, complete, edgeless and clique-union graphs are accepted) and connected_nontrivial_strongly_regular (exactly connected [set: G], 0 < k and k < #|G|.-1; Spectral D5 strongly_regular is a proved iff, its flat five-conjunct body not being a conversion; K_{2,2} with (2,0,2) is in, K_2 and the degenerate graphs out). Only guarded implies unguarded. The adjacency-matrix identity A^2 = k I + lam A + mu (J - I - A) over int is Spectral.foundations.strongly_regular_matrix (equivalent to the clauses for all parameters, and with the same guards to the guarded existential); grounding_D5 sr_clauses/sr_mateq/strongly_regular_alg convert to the canonicals and its theorems are proved wrappers. GTBase does not import Spectral.",
+    "semantic_classes": {
+      "unguarded-parameter-existential": {
+        "members": [
+          "Hom.conjectures.U3.srg",
+          "Hom.conjectures.U3.strongly_regular"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Hom.migration.strongly_regular.u3_srg_compat",
+          "Hom.migration.strongly_regular.u3_strongly_regular_compat"
+        ],
+        "note": "the three unguarded clauses and their unguarded existential; conversion to strongly_regular_parameters and has_strongly_regular_parameters (K_2 and the degenerate graphs accepted)"
+      },
+      "connected-nontrivial-degree-existential": {
+        "members": [
+          "Spectral.conjectures.D5.strongly_regular"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "state": "migrated-alias",
+        "certificates": [
+          "Spectral.migration.strongly_regular.d5_strongly_regular_compat"
+        ],
+        "note": "connected [set: G], 0 < k and k < #|G|.-1 with the clauses, one flat five-conjunct existential; proved iff with connected_nontrivial_strongly_regular, not a conversion"
+      }
+    },
+    "distinct_variants": {},
+    "compatibility_theorems": [
+      "Hom.migration.strongly_regular.u3_srg_compat",
+      "Hom.migration.strongly_regular.u3_strongly_regular_compat",
+      "Hom.migration.strongly_regular.cores_of_strongly_regular_graphs_statement_compat",
+      "Spectral.migration.strongly_regular.d5_strongly_regular_compat",
+      "Spectral.migration.strongly_regular.triangle_free_strongly_regular_graphs_statement_compat",
+      "Spectral.migration.strongly_regular.sr_clauses_compat",
+      "Spectral.migration.strongly_regular.sr_mateq_compat",
+      "Spectral.migration.strongly_regular.strongly_regular_alg_compat",
+      "Spectral.migration.strongly_regular.legacy_sr_mateqE",
+      "Spectral.migration.strongly_regular.legacy_strongly_regularE"
+    ],
+    "api_theorems": [
+      "GTBase.strongly_regular.strongly_regular_parameters_regular",
+      "GTBase.strongly_regular.strongly_regular_parameters_degree_unique",
+      "GTBase.strongly_regular.strongly_regular_parameters_lambda_unique",
+      "GTBase.strongly_regular.strongly_regular_parameters_mu_unique",
+      "GTBase.strongly_regular.connected_nontrivial_strongly_regularW",
+      "GTBase.strongly_regular.connected_nontrivial_strongly_regular_connected",
+      "GTBase.strongly_regular.connected_nontrivial_strongly_regular_regular",
+      "GTBase.strongly_regular.connected_nontrivial_strongly_regular_card",
+      "Spectral.foundations.strongly_regular_matrix.strongly_regular_matrix_identityP",
+      "Spectral.foundations.strongly_regular_matrix.connected_nontrivial_strongly_regular_matrixP",
+      "Spectral.foundations.strongly_regular_matrix.adjmx_sqr_common_nbr",
+      "Spectral.foundations.strongly_regular_matrix.card_common_nbr_enum",
+      "Spectral.foundations.strongly_regular_matrix.card_enum_val_pred",
+      "Spectral.foundations.strongly_regular_matrix.int01_mul",
+      "Spectral.foundations.strongly_regular_matrix.int_natr_inj",
+      "Spectral.foundations.strongly_regular_matrix.strongly_regular_rhs_diag",
+      "Spectral.foundations.strongly_regular_matrix.strongly_regular_rhs_off"
+    ],
+    "public_client": "base/theories/examples/strongly_regular.v",
+    "legacy_baseline": "a69e27fedb17b9a509dc794b45f6e2aa5c8f4e9e",
+    "migration_report": "meta/migration_reports/strongly_regular.md",
+    "migration_spec": "meta/migration_reports/strongly_regular.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A33.md",
+    "foundation_fidelity": "meta/foundation_fidelity/strongly-regular.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "installed user-contrib .v sources (GraphTheory, mathcomp, HB, elpi, Ltac2, Stdlib): strongly regular / srg / regular / common-neighbour definitions",
+        "GraphTheory sgraph, connectivity with all_boot and all_algebra: Search \"regular\", \"srg\", \"strongly\", \"common\""
+      ],
+      "result": "no-upstream-candidate",
+      "candidate": "",
+      "note": "Within that scope only MathComp GRing.regular (algebraic) appears; no strongly regular, regular-graph or common-neighbour notion was found. This is scoped search evidence, not a universal nonexistence claim (SRG-discovery-by-lancelot erratum 1).",
+      "audited_at": "2026-10-06"
+    },
+    "reviewed_by": "lancelot (discovery and erratum 1); master scope decision"
+  }
+}
