@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py induced_cycles --details /tmp/m
 
 - Canonical: `GTBase.induced_cycles.chordless_cycle`.
 - Baseline: `7d8cc47829b045a122d6f6421ddc2d928dd9675a`.
-- Scope: 7 helpers, 14 statements, 44 frozen objects, 160 recorded references.
-- Source checks: 438/438 pass; consistent.
+- Scope: 7 helpers, 14 statements, 44 frozen objects, 152 recorded references.
+- Source checks: 430/430 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

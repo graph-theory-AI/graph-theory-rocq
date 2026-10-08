@@ -1003,12 +1003,12 @@
     {
       "path": "minor-theory/theories/foundations/hole_containments.v",
       "name": "x27_consecutive_in_cycle",
-      "note": "Proof consumer (Minor.foundations): hole containment lemmas. Three proofs that unfold x27_consecutive_in_cycle also unfold seq_cyclic_consecutiveb; every lemma statement is unchanged."
+      "note": "Proof consumer (Minor.foundations): hole containment lemmas. Three proofs that unfold x27_consecutive_in_cycle also unfold seq_cyclic_consecutiveb; every lemma statement is unchanged. Since 2026-10-08 (hole-containment consumer rewrite H1): hole_containments states these results with the canonical GTBase.induced_cycles.hole and GTBase.walks_paths.seq_cyclic_consecutiveb directly and no longer imports X27; every theorem keeps its name, Arguments, opacity and closed assumptions, and its old type up to the conversion of X27's transparent aliases (kernel ascription)."
     },
     {
       "path": "minor-theory/theories/foundations/hole_containments.v",
       "name": "x27_hole",
-      "note": "Proof consumer (Minor.foundations): hole containment lemmas. Three proofs that unfold x27_consecutive_in_cycle also unfold seq_cyclic_consecutiveb; every lemma statement is unchanged."
+      "note": "Proof consumer (Minor.foundations): hole containment lemmas. Three proofs that unfold x27_consecutive_in_cycle also unfold seq_cyclic_consecutiveb; every lemma statement is unchanged. Since 2026-10-08 (hole-containment consumer rewrite H1): hole_containments states these results with the canonical GTBase.induced_cycles.hole and GTBase.walks_paths.seq_cyclic_consecutiveb directly and no longer imports X27; every theorem keeps its name, Arguments, opacity and closed assumptions, and its old type up to the conversion of X27's transparent aliases (kernel ascription)."
     }
   ],
   "distinct_variants": [
