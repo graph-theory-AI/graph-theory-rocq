@@ -2,7 +2,7 @@
   "family": "surface-embeddable",
   "canonical_name": "GTBase.surface.surface_embeddable",
   "canonical_short_name": "surface_embeddable",
-  "relation": "definitional equality, pre-existing: the five local surface wrappers X150 x150_embeddable_in_fixed_surface, X152 x152_embeddable_in_fixed_surface, X167 x167_embedded_in_fixed_surface, X138 x138_embeddable_on_surface (surface G) and X164 x164_embedded_in_fixed_surface_with_boundary (surface boundary G, boundary unused) are, unchanged since their authoring 8800958, the existing public GTBase.surface.surface_embeddable surface G (the encoded orientable-genus value surface_euler_genus of a finite rotation system at most the bound; the unchanged formula can understate the genus of a disconnected graph; the empty graph reads 1). No wrapper, chain or row changes; every certificate is a kernel conversion, and the two Originals reuse the earlier families' own row certificates.",
+  "relation": "definitional equality, pre-existing: the six local surface wrappers X150 x150_embeddable_in_fixed_surface, X152 x152_embeddable_in_fixed_surface, X167 x167_embedded_in_fixed_surface, X138 x138_embeddable_on_surface (surface G), X210 x210_euler_genus_embeddable (G g, the canonical with its arguments swapped: surface_embeddable g G) and X164 x164_embedded_in_fixed_surface_with_boundary (surface boundary G, boundary unused) are, unchanged since their authoring 8800958, the existing public GTBase.surface.surface_embeddable surface G (the encoded orientable-genus value surface_euler_genus of a finite rotation system at most the bound; the unchanged formula can understate the genus of a disconnected graph; the empty graph reads 1). No wrapper, chain or row changes; every certificate is a kernel conversion, and the two Originals reuse the earlier families' own row certificates.",
   "baseline_commit": "3bdfdae32824d4762ba8105367f7858a706a02e2",
   "namespaces": {
     "base": "GTBase",
@@ -29,13 +29,15 @@
     "GTMisc.migration.surface_embeddable.x167_embedded_in_fixed_surface_canonical",
     "GTMisc.migration.surface_embeddable.fixed_surface_spanning_tree_polytope_linear_xc_statement_canonical",
     "Topological.migration.surface_embeddable.x138_embeddable_on_surface_canonical",
-    "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_canonical"
+    "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_canonical",
+    "Chromatic.migration.surface_embeddable.x210_euler_genus_embeddable_canonical",
+    "Chromatic.migration.surface_embeddable.surface_conflict_colouring_sqrt_genus_statement_canonical"
   ],
   "summary": [
     "surface-embeddable, one family over the existing public module GTBase.surface (re-exported by GTBase.base): the canonical is the unchanged `surface_embeddable surface G`, already audited LIGHTWEIGHT; no primitive is added and no fidelity fragment is enrolled.",
     "Its contract, kept exactly: a finite rotation system E of G whose encoded orientable-genus value `surface_euler_genus E`, the connected-map formula `(2 + edges - vertices - faces) %/ 2` in truncated nat arithmetic, is at most `surface`; a bound, so monotone in `surface`; non-orientable surfaces are not modelled; on a disconnected graph this unchanged formula can understate the genus (each row keeps its own connectedness guard, where it has one); the empty graph reads 1 (public client base/theories/examples/surface_embeddable.v).",
-    "Five wrappers reach six rows: Chromatic X150, X152 and its literal duplicate X154, X164; GTMisc X167; Topological X138. Four are direct aliases with binders (surface G); X164's takes (surface boundary G) and ignores boundary, which is not `surface_embeddable_with_boundary` (an existential boundary set, audited BROKEN). The wrappers were canonical aliases from their authoring, so no conjecture file changes (no statement churn); the aliases stay while consumers remain.",
-    "Certificates (one file per area) freeze each wrapper and every same-file declaration through which a row reaches it, and the six complete rows, verbatim at the baseline; X167Original and X138Original compose the end-to-end pre-migration rows over the earlier families B18 (spanning-tree) and C8 (monochromatic). The *_canonical lemmas state each wrapper and each complete current row with surface_embeddable written out, every guard, bound and quantifier in place.",
+    "Six wrappers reach seven rows: Chromatic X150, X152 and its literal duplicate X154, X164, X210; GTMisc X167; Topological X138. Four are direct aliases with binders (surface G); X210's is the canonical with its arguments in the order (G, g) (x210_euler_genus_embeddable G g = surface_embeddable g G; added by F1 as an append to the Chromatic certificate file); X164's takes (surface boundary G) and ignores boundary, which is not `surface_embeddable_with_boundary` (an existential boundary set, audited BROKEN). The wrappers were canonical aliases from their authoring, so no conjecture file changes (no statement churn); the aliases stay while consumers remain.",
+    "Certificates (one file per area) freeze each wrapper and every same-file declaration through which a row reaches it, and the seven complete rows (X210 by the F1 append), verbatim at the baseline; X167Original and X138Original compose the end-to-end pre-migration rows over the earlier families B18 (spanning-tree) and C8 (monochromatic). The *_canonical lemmas state each wrapper and each complete current row with surface_embeddable written out, every guard, bound and quantifier in place.",
     "X164 stays a documented blocked, unfaithful row (no extension precondition; orientable surface only; the boundary parameter does not constrain the embedding; it also has no connectedness guard): body, guards, quantifier order, status and defect text are unchanged, and no certificate here claims its English statement is faithful. X167 stays blocked (vacuous extension system), X138, X150, X152 and X154 partial.",
     "Combined-parent note: X164's output-decoder chain (x164_data_nth_nat .. x164_linear_time_outputs_three_colouring) belongs to the separately queued family natural-data-decoder (candidate 5a0f56d, also at baseline 3bdfdae), whose own X164 copies keep this family's wrapper and instance class live and vice versa. When both are on one actual parent, the family integrated second must add reciprocal known_stale_snapshots keys and the end-to-end X164Original over both families' frozen chains."
   ],
@@ -261,6 +263,30 @@
         "x138_clustered_two_colourable_with_clustering": "C8.X138Legacy.x138_clustered_two_colourable_with_clustering"
       },
       "certificate": "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X210.x210_euler_genus_embeddable",
+      "path": "chromatic-theory/theories/conjectures/X210.v",
+      "name": "x210_euler_genus_embeddable",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "X210Legacy.x210_euler_genus_embeddable",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.surface_embeddable.x210_euler_genus_embeddable_compat",
+      "live_unfolds_to": "surface_embeddable g G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X210.surface_conflict_colouring_sqrt_genus_statement",
+      "path": "chromatic-theory/theories/conjectures/X210.v",
+      "name": "surface_conflict_colouring_sqrt_genus_statement",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "X210Legacy.surface_conflict_colouring_sqrt_genus_statement",
+      "substitutions": {
+        "x210_euler_genus_embeddable": "X210Legacy.x210_euler_genus_embeddable"
+      },
+      "certificate": "Chromatic.migration.surface_embeddable.surface_conflict_colouring_sqrt_genus_statement_compat",
       "corpus": "v2"
     }
   ]

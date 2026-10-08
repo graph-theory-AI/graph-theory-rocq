@@ -222,3 +222,58 @@ Print Assumptions gimbel_thomassen_triangle_free_surface_three_colourability_pol
 Print Assumptions fixed_surface_four_colourability_polytime_statement_canonical.
 Print Assumptions fixed_surface_four_colourability_polytime_duplicate_statement_canonical.
 Print Assumptions linear_time_surface_triangle_free_three_colouring_output_statement_canonical.
+
+(** ** F1: the sixth wrapper and seventh row, X210 (additive to candidate 8cb5b546)
+
+    [x210_euler_genus_embeddable G g] is [surface_embeddable g G] with its arguments in the order (G, g), unchanged
+    since its authoring (8800958; d8db810 changed X210's comments only); no earlier library family froze any part of
+    X210's row at the baseline 3bdfdae.  [X210Legacy] freezes the wrapper, with its argument order, and the complete
+    row verbatim at the baseline, both kernel conversions; the row has no other migrated helper, so [X210Legacy] is
+    already its deepest original.  The row stays BLOCKED (KNOWN UNFAITHFUL: the positivity of C and C' is dropped;
+    orientable genus only; it also carries no connectedness guard), and no certificate here claims its English
+    statement is faithful. *)
+
+From Chromatic.conjectures Require Import X210.
+
+Module X210Legacy.
+
+Definition x210_euler_genus_embeddable (G : sgraph) (g : nat) : Prop :=
+  surface_embeddable g G.
+
+Definition surface_conflict_colouring_sqrt_genus_statement : Prop :=
+  exists C C' : nat,
+    forall (G : sgraph) (g k : nat),
+      X210Legacy.x210_euler_genus_embeddable G g ->
+      C' * g <= k * k ->
+      x210_conflict_k_colourable_under_bound G k C.
+
+End X210Legacy.
+
+Lemma x210_euler_genus_embeddable_compat (G : sgraph) (g : nat) :
+  X210Legacy.x210_euler_genus_embeddable G g <-> x210_euler_genus_embeddable G g.
+Proof. exact: iff_refl. Qed.
+
+Lemma surface_conflict_colouring_sqrt_genus_statement_compat :
+  X210Legacy.surface_conflict_colouring_sqrt_genus_statement <->
+  surface_conflict_colouring_sqrt_genus_statement.
+Proof. exact: iff_refl. Qed.
+
+(** The argument order is swapped with respect to the canonical: [x210_euler_genus_embeddable G g] is
+    [surface_embeddable g G]. *)
+Lemma x210_euler_genus_embeddable_canonical (G : sgraph) (g : nat) :
+  x210_euler_genus_embeddable G g <-> surface_embeddable g G.
+Proof. exact: iff_refl. Qed.
+
+Lemma surface_conflict_colouring_sqrt_genus_statement_canonical :
+  surface_conflict_colouring_sqrt_genus_statement <->
+  exists C C' : nat,
+    forall (G : sgraph) (g k : nat),
+      surface_embeddable g G ->
+      C' * g <= k * k ->
+      x210_conflict_k_colourable_under_bound G k C.
+Proof. exact: iff_refl. Qed.
+
+Print Assumptions x210_euler_genus_embeddable_compat.
+Print Assumptions surface_conflict_colouring_sqrt_genus_statement_compat.
+Print Assumptions x210_euler_genus_embeddable_canonical.
+Print Assumptions surface_conflict_colouring_sqrt_genus_statement_canonical.

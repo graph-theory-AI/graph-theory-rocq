@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py surface_embeddable --details /t
 
 - Canonical: `GTBase.surface.surface_embeddable`.
 - Baseline: `3bdfdae32824d4762ba8105367f7858a706a02e2`.
-- Scope: 5 helpers, 6 statements, 17 frozen objects, 42 recorded references.
-- Source checks: 150/150 pass; consistent.
+- Scope: 6 helpers, 7 statements, 19 frozen objects, 47 recorded references.
+- Source checks: 170/170 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -17,6 +17,7 @@ Full evidence: `python3 meta/migration_report.py surface_embeddable --details /t
 | `Chromatic.conjectures.X164.linear_time_surface_triangle_free_three_colouring_output_statement` / arxiv:1601.01197#00 | `Chromatic.migration.surface_embeddable.linear_time_surface_triangle_free_three_colouring_output_statement_compat` |
 | `GTMisc.conjectures.X167.fixed_surface_spanning_tree_polytope_linear_xc_statement` / arxiv:1604.07976#00 | `GTMisc.migration.surface_embeddable.fixed_surface_spanning_tree_polytope_linear_xc_statement_compat` |
 | `Topological.conjectures.X138.esperet_joret_surface_triangle_free_clustered_two_colouring_statement` / studies:std_esperet_joret_question_on_clustered_colouring_of | `Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_compat` |
+| `Chromatic.conjectures.X210.surface_conflict_colouring_sqrt_genus_statement` / arxiv:1803.10962#00 | `Chromatic.migration.surface_embeddable.surface_conflict_colouring_sqrt_genus_statement_compat` |
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py surface_embeddable --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
