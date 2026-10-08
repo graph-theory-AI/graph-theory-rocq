@@ -1,0 +1,42 @@
+{
+ "schema_version": 1,
+ "family": "proper-orientations",
+ "modules": {
+  "GTBase.orientations": {
+   "path": "base/theories/orientations.v",
+   "overrides": {
+    "orientation_of": {
+     "verdict": "FAITHFUL",
+     "note": "orientation_of D: every arc joins adjacent vertices and every edge carries exactly one of its two arcs (D x y (+) D y x), for an arbitrary Boolean D on a simple graph; hence no loop and no digon."
+    },
+    "rel_indegree": {
+     "verdict": "FAITHFUL",
+     "note": "rel_indegree D v = #|[set u | D u v]|: the vertices sending an arc to v (incoming, a loop counts)."
+    },
+    "proper_indegrees": {
+     "verdict": "FAITHFUL",
+     "note": "proper_indegrees D: adjacent vertices have different indegrees; a predicate on an arbitrary D that does not assert orientation (a loop relation can be proper)."
+    },
+    "proper_orientation_bound": {
+     "verdict": "FAITHFUL",
+     "note": "proper_orientation_bound G k: one D with orientation_of D, proper_indegrees D and every indegree at most k, in this order; 0 on empty and edgeless hosts; monotone in k with the same D."
+    }
+   },
+   "machine_evidence": [
+    "orientation_of_edge",
+    "orientation_of_xor",
+    "orientation_of_exclusive",
+    "orientation_of_noloop",
+    "orientation_of_nodigon",
+    "in_rel_indegree",
+    "rel_indegree0",
+    "rel_indegree_gt0",
+    "orientation_of_edgeless",
+    "proper_indegrees_edgeless",
+    "proper_orientation_bound_edgeless",
+    "proper_orientation_bound_mono",
+    "proper_orientation_bound_card0"
+   ]
+  }
+ }
+}
