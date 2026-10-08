@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2560,
-    "repeated_body_shapes": 146,
+    "repeated_body_shapes": 145,
     "repeated_normalized_names": 212,
     "repeated_signature_shapes": 305,
     "statements_excluded": 700,
@@ -106,6 +106,10 @@
         "Extremal.conjectures.D2pr.srel",
         "GTMisc.conjectures.U13.relAdj"
       ],
+      "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2": [
+        "Chromatic.conjectures.X81.x81_proper_orientation_bound",
+        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
+      ],
       "2f5197fd3d79a113d989b4dac3e6b73354869b4340fba9763d7c2add4cf31e8c": [
         "Chromatic.conjectures.X126.x126_genuine_path",
         "GTMisc.conjectures.X14.x14_genuine_path",
@@ -124,6 +128,10 @@
         "Digraph.conjectures.XE2.xe2_directed_cycle",
         "GTMisc.conjectures.XE1.xe1_rel_cycle"
       ],
+      "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48": [
+        "Chromatic.conjectures.X81.x81_proper_orientation",
+        "GTMisc.conjectures.X82.x82_proper_orientation"
+      ],
       "3b292dcb610289fb181c69580c08c9b93ddafe9879a8b455ac73dbeb1206cd87": [
         "Extremal.conjectures.X98.x98_induced_subdivision_model",
         "GTMisc.conjectures.X114.x114_induced_subdivision_model"
@@ -131,10 +139,6 @@
       "3c3980ab048cbce1bc06cc70c1ba63c5296cb9da1f0a9c4fc029a82422218578": [
         "Digraph.conjectures.X16.x16_no_sources",
         "Digraph.conjectures.X2.no_sources"
-      ],
-      "3d4c5ddffb4928cc9eecb298d4084fe4fdf4fd426ec007bf9874f4fa44dae236": [
-        "Chromatic.conjectures.X81.x81_proper_orientation_bound",
-        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
       ],
       "3f39d5c348e5b79d06e842c114e6cc571583bbf44e4b0ebfda1a01ec05745d43": [
         "Digraph.conjectures.P9.remove_arcs",
@@ -208,11 +212,6 @@
         "Digraph.conjectures.two_extremal.symcyc",
         "Digraph.conjectures.two_extremal_glue.dicyc"
       ],
-      "59f108367724bc2f6577bee48af88899b18c3e5492ccf5c65c720a71d7a06755": [
-        "Chromatic.conjectures.U4.cmp_rel",
-        "Chromatic.conjectures.X218.x218_multipartite_rel",
-        "Extremal.conjectures.X191.x191_clique_blowup_rel"
-      ],
       "5b5b078cb23ae3e7bda1701d9d598e99ad66bda625d25c3c7a47e3e2f5a6c13f": [
         "Extremal.conjectures.XE2.xe2_min_degree",
         "GTMisc.conjectures.X227.x227_min_degree"
@@ -228,10 +227,6 @@
       "5f55dcd49e0fcadd3cebad1d18d33f1bc6ac0bae46b8b04aadc804f19f4cc935": [
         "Hamilton.conjectures.U2.vertex_transitive",
         "Hamilton.conjectures.X211.x211_vertex_transitive"
-      ],
-      "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e": [
-        "Chromatic.conjectures.X81.x81_orientation_of",
-        "GTMisc.conjectures.X82.x82_orientation_of"
       ],
       "64d2e05a18387d1a816361661b70d3e053d44a1023f388975a4e8105b6ea718f": [
         "Cycle.conjectures.X24.x24_cycle_edge_seq",
@@ -383,6 +378,10 @@
         "GTMisc.conjectures.X144.x144_complete_between",
         "GTMisc.conjectures.X41.x41_complete_between"
       ],
+      "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e": [
+        "Chromatic.conjectures.X81.x81_indegree",
+        "GTMisc.conjectures.X82.x82_indegree"
+      ],
       "96761f01b7741329a3b0c6b689d41662b49771927bd7fd050db979152b1b0f4c": [
         "Chromatic.conjectures.X3.x3_complement_graph",
         "Chromatic.conjectures.XE2.xe2_complement_graph",
@@ -480,9 +479,9 @@
         "Cycle.conjectures.X9.x9_cycle_chord_count",
         "Extremal.conjectures.XE2.xe2_cycle_diagonal_count"
       ],
-      "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5": [
-        "Chromatic.conjectures.X81.x81_indegree",
-        "GTMisc.conjectures.X82.x82_indegree"
+      "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487": [
+        "Chromatic.conjectures.X81.x81_orientation_of",
+        "GTMisc.conjectures.X82.x82_orientation_of"
       ],
       "b912fd109637af2ce26ee1e9de3ce0a260311e17f8196eec11e1b18bf60e0ba4": [
         "Hypergraph.conjectures.U12.k_uniform",
@@ -1117,10 +1116,6 @@
         "Extremal.conjectures.X56.x56_complement_rel",
         "Extremal.conjectures.XE1.xe1_complement_rel",
         "GTMisc.conjectures.X29.x29_complement_rel"
-      ],
-      "fd91119307d03817d27c8e6669932f2a85e1a3d2ad237259329d3cfd3939c4d9": [
-        "Chromatic.conjectures.X81.x81_proper_orientation",
-        "GTMisc.conjectures.X82.x82_proper_orientation"
       ],
       "feb3e84a1bc87cd86889fef44671f7e5757d03fe2303a4fb97e3c42e64f39631": [
         "Digraph.conjectures.X221.x221_eulerian",
@@ -4272,7 +4267,7 @@
         "Chromatic.conjectures.U4.is_lambda"
       ],
       "kind": "Definition",
-      "line": 46,
+      "line": 47,
       "local_dependencies": [],
       "name": "colourable_count",
       "normalized_name": "colourable_count",
@@ -4291,7 +4286,7 @@
         "Chromatic.conjectures.U4.partial_list_coloring_0_statement"
       ],
       "kind": "Definition",
-      "line": 61,
+      "line": 62,
       "local_dependencies": [
         "colourable_count"
       ],
@@ -4312,7 +4307,7 @@
         "Chromatic.conjectures.U4.paintable"
       ],
       "kind": "Fixpoint",
-      "line": 69,
+      "line": 70,
       "local_dependencies": [],
       "name": "paintableb",
       "normalized_name": "paintableb",
@@ -4331,7 +4326,7 @@
         "Chromatic.conjectures.U4.k_paintable"
       ],
       "kind": "Definition",
-      "line": 94,
+      "line": 95,
       "local_dependencies": [
         "paintableb"
       ],
@@ -4352,7 +4347,7 @@
         "Chromatic.conjectures.U4.is_online_choice_number"
       ],
       "kind": "Definition",
-      "line": 97,
+      "line": 98,
       "local_dependencies": [
         "paintable"
       ],
@@ -4373,7 +4368,7 @@
         "Chromatic.conjectures.U4.bounding_the_on_line_choice_number_in_terms_of_the_c_statement"
       ],
       "kind": "Definition",
-      "line": 100,
+      "line": 101,
       "local_dependencies": [
         "k_paintable"
       ],
@@ -4394,7 +4389,7 @@
         "Chromatic.conjectures.U4.list_colorings_of_edge_critical_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 105,
+      "line": 106,
       "local_dependencies": [],
       "name": "Delta_edge_critical",
       "normalized_name": "Delta_edge_critical",
@@ -4406,15 +4401,15 @@
       "signature_shape_hash": "b14cf0f39677bd91c15ddbac2c09cd8efab2992b68ea34fd94eb5549d405de6b"
     },
     {
-      "body_hash": "59f108367724bc2f6577bee48af88899b18c3e5492ccf5c65c720a71d7a06755",
-      "body_shape_hash": "59f108367724bc2f6577bee48af88899b18c3e5492ccf5c65c720a71d7a06755",
-      "declaration_hash": "9ce4e429a4756d5b358b86c786007d1c6813f825969d4611304a954e96e09c77",
+      "body_hash": "1f2ba9d8fd3a4508db5094e87cd24949ce9238f4e27fa42d654e09a488722737",
+      "body_shape_hash": "1f2ba9d8fd3a4508db5094e87cd24949ce9238f4e27fa42d654e09a488722737",
+      "declaration_hash": "de7371dfb2549c9705c43d6f1d0b6737ddf0e803361b13c6b310dc0d76922d35",
       "direct_consumers": [
         "Chromatic.conjectures.U4.cmp_rel_irrefl",
         "Chromatic.conjectures.U4.cmp_rel_sym"
       ],
       "kind": "Definition",
-      "line": 123,
+      "line": 124,
       "local_dependencies": [],
       "name": "cmp_rel",
       "normalized_name": "cmp_rel",
@@ -4429,11 +4424,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "53b9b42a7c73585333e4806e3a9aae4271a3ebf825068ee92f7f65ad084ab057",
-      "direct_consumers": [
-        "Chromatic.conjectures.U4.complete_multipartite"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 128,
+      "line": 133,
       "local_dependencies": [
         "cmp_rel"
       ],
@@ -4450,11 +4443,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "698d891cdd8284df7b2d2b6885ca6c040ecb3b491a674a1ac728ba392f907d09",
-      "direct_consumers": [
-        "Chromatic.conjectures.U4.complete_multipartite"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 131,
+      "line": 136,
       "local_dependencies": [
         "cmp_rel"
       ],
@@ -4468,18 +4459,15 @@
       "signature_shape_hash": "d4c3c4e9e28039d851e96dc14a41a69d6797c39f0b74da00bc5965b6e6cd231f"
     },
     {
-      "body_hash": "015c65addeec923429380ed70ed5e25c95c5266e1826e3cbf97d300c43e366b7",
-      "body_shape_hash": "015c65addeec923429380ed70ed5e25c95c5266e1826e3cbf97d300c43e366b7",
-      "declaration_hash": "1fa4e5f232a61aa0a04a66bc524fcf8c95a6e1e857a6a614f630200791295a8b",
+      "body_hash": "0aa57601bde7095d1cfc1a09e0898d8de286f0a596788f83cfe5f6ce2ff8f422",
+      "body_shape_hash": "0aa57601bde7095d1cfc1a09e0898d8de286f0a596788f83cfe5f6ce2ff8f422",
+      "declaration_hash": "ea44f94f83a8eb8ec1d6e1e7ebc3c2eadc63d6fb2a9e44ddc92b0d9ec27d7c43",
       "direct_consumers": [
         "Chromatic.conjectures.U4.choice_number_of_k_chromatic_graphs_of_bounded_order_statement"
       ],
       "kind": "Definition",
-      "line": 134,
-      "local_dependencies": [
-        "cmp_rel_irrefl",
-        "cmp_rel_sym"
-      ],
+      "line": 139,
+      "local_dependencies": [],
       "name": "complete_multipartite",
       "normalized_name": "complete_multipartite",
       "package": "chromatic-theory",
@@ -4497,7 +4485,7 @@
         "Chromatic.conjectures.U4.acyclically_choosable"
       ],
       "kind": "Definition",
-      "line": 139,
+      "line": 144,
       "local_dependencies": [],
       "name": "acyclic_colouring",
       "normalized_name": "acyclic_colouring",
@@ -4516,7 +4504,7 @@
         "Chromatic.conjectures.U4.acyclic_list_colouring_of_planar_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 151,
+      "line": 156,
       "local_dependencies": [
         "acyclic_colouring"
       ],
@@ -4537,7 +4525,7 @@
         "Chromatic.conjectures.U4.strong_colorability_statement"
       ],
       "kind": "Definition",
-      "line": 156,
+      "line": 161,
       "local_dependencies": [],
       "name": "strongly_colorable",
       "normalized_name": "strongly_colorable",
@@ -8470,7 +8458,7 @@
         "Chromatic.conjectures.X218.x218_path_induced_copy"
       ],
       "kind": "Definition",
-      "line": 10,
+      "line": 11,
       "local_dependencies": [],
       "name": "x218_induced_run",
       "normalized_name": "induced_run",
@@ -8489,7 +8477,7 @@
         "Chromatic.conjectures.X218.path_induced_rooted_tree_polynomial_chi_bound_statement"
       ],
       "kind": "Definition",
-      "line": 25,
+      "line": 26,
       "local_dependencies": [
         "x218_induced_run"
       ],
@@ -8503,15 +8491,15 @@
       "signature_shape_hash": "ec3f60e8fac9b4330dd36e304644db50665a327542ce925e74d01ec4397869d7"
     },
     {
-      "body_hash": "59f108367724bc2f6577bee48af88899b18c3e5492ccf5c65c720a71d7a06755",
-      "body_shape_hash": "59f108367724bc2f6577bee48af88899b18c3e5492ccf5c65c720a71d7a06755",
-      "declaration_hash": "2d384a4effb5bb4cc3c569c8c70bb0abd6d0b118be411060e2fc506c4202ca31",
+      "body_hash": "cdd467e99417cd71a50d2521b98ed7253e4239ef59adc9c8231c5974b301ce51",
+      "body_shape_hash": "cdd467e99417cd71a50d2521b98ed7253e4239ef59adc9c8231c5974b301ce51",
+      "declaration_hash": "97a6cc36e9d80b1974f4e2f311ac3cff92bbb2fcbb96d458dfc118d58a37353f",
       "direct_consumers": [
         "Chromatic.conjectures.X218.x218_multipartite_irrefl",
         "Chromatic.conjectures.X218.x218_multipartite_sym"
       ],
       "kind": "Definition",
-      "line": 36,
+      "line": 37,
       "local_dependencies": [],
       "name": "x218_multipartite_rel",
       "normalized_name": "multipartite_rel",
@@ -8526,11 +8514,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "6e4fcfb7bcc2cd2a5165160cc93021429838ae580a2ec0a869d633929f3b943e",
-      "direct_consumers": [
-        "Chromatic.conjectures.X218.x218_complete_multipartite"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 41,
+      "line": 46,
       "local_dependencies": [
         "x218_multipartite_rel"
       ],
@@ -8547,11 +8533,9 @@
       "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "declaration_hash": "b200b4e8082aa1078b8add2205d92e1305364181c15b3a90d02e0eca3750b16f",
-      "direct_consumers": [
-        "Chromatic.conjectures.X218.x218_complete_multipartite"
-      ],
+      "direct_consumers": [],
       "kind": "Lemma",
-      "line": 43,
+      "line": 48,
       "local_dependencies": [
         "x218_multipartite_rel"
       ],
@@ -8565,18 +8549,15 @@
       "signature_shape_hash": "60bb28f444af9311f33cb5d1d965f29822ad3c14aff99b3b56f96dd85fcab215"
     },
     {
-      "body_hash": "977ae5f34268effaca6057876eaed686a847620f3068c29beaa2bd20be10b7cb",
-      "body_shape_hash": "5136787c2948b0a587b541a68b21923693169a0113e4b253529436a90b6974c5",
-      "declaration_hash": "7f0b8b9f50c07dd97b1336e30941aac752d3ab684d0827d9bd6c2177aeb934e8",
+      "body_hash": "68923ed4a385713d1e2d920cbbb31b35cb9973b1f1b5e6934560b3d2690b4de5",
+      "body_shape_hash": "68923ed4a385713d1e2d920cbbb31b35cb9973b1f1b5e6934560b3d2690b4de5",
+      "declaration_hash": "7860861af584f6a5fba7f73d28831f143445f88142c859e8ee7991c5335bec47",
       "direct_consumers": [
         "Chromatic.conjectures.X218.x218_multibounding"
       ],
       "kind": "Definition",
-      "line": 45,
-      "local_dependencies": [
-        "x218_multipartite_irrefl",
-        "x218_multipartite_sym"
-      ],
+      "line": 50,
+      "local_dependencies": [],
       "name": "x218_complete_multipartite",
       "normalized_name": "complete_multipartite",
       "package": "chromatic-theory",
@@ -8594,7 +8575,7 @@
         "Chromatic.conjectures.X218.every_forest_is_multibounding_statement"
       ],
       "kind": "Definition",
-      "line": 47,
+      "line": 52,
       "local_dependencies": [
         "x218_complete_multipartite"
       ],
@@ -8615,7 +8596,7 @@
         "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
       ],
       "kind": "Definition",
-      "line": 63,
+      "line": 68,
       "local_dependencies": [],
       "name": "x218_odd_minor",
       "normalized_name": "odd_minor",
@@ -8634,7 +8615,7 @@
         "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
       ],
       "kind": "Definition",
-      "line": 76,
+      "line": 81,
       "local_dependencies": [],
       "name": "x218_connected_treedepth_at_most",
       "normalized_name": "connected_treedepth_at_most",
@@ -8653,7 +8634,7 @@
         "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
       ],
       "kind": "Definition",
-      "line": 82,
+      "line": 87,
       "local_dependencies": [],
       "name": "x218_defective_chromatic_class_le",
       "normalized_name": "defective_chromatic_class_le",
@@ -8672,7 +8653,7 @@
         "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
       ],
       "kind": "Definition",
-      "line": 92,
+      "line": 97,
       "local_dependencies": [],
       "name": "x218_clustered_chromatic_class_le",
       "normalized_name": "clustered_chromatic_class_le",
@@ -10810,14 +10791,12 @@
       "signature_shape_hash": "6603ad256a32aedea73574a9bcd123cc4cec0027a80887710cfcccef89a70346"
     },
     {
-      "body_hash": "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e",
-      "body_shape_hash": "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e",
-      "declaration_hash": "17767893c54195403fc8e63595a858c0e79223783d96c857ae77f7d316cc045b",
-      "direct_consumers": [
-        "Chromatic.conjectures.X81.x81_proper_orientation_bound"
-      ],
+      "body_hash": "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487",
+      "body_shape_hash": "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487",
+      "declaration_hash": "964f1bfcec57119869c67266c01b034427fef4ce4cab75c891ba7e34a1ead74c",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x81_orientation_of",
       "normalized_name": "orientation_of",
@@ -10829,15 +10808,12 @@
       "signature_shape_hash": "4b6d55e3326a0500b148ba977569919f5e926240d9230c6af7c31b6161f639f4"
     },
     {
-      "body_hash": "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5",
-      "body_shape_hash": "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5",
-      "declaration_hash": "7d3ef70e9672a241d1793f0b95b079781f023d2ce716876ea8dd287e390a8206",
-      "direct_consumers": [
-        "Chromatic.conjectures.X81.x81_proper_orientation",
-        "Chromatic.conjectures.X81.x81_proper_orientation_bound"
-      ],
+      "body_hash": "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e",
+      "body_shape_hash": "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e",
+      "declaration_hash": "b794279b71ec29ec2eae5568a5031040bd5ed13eff60bdf6db91665a7715aed4",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 14,
+      "line": 17,
       "local_dependencies": [],
       "name": "x81_indegree",
       "normalized_name": "indegree",
@@ -10849,17 +10825,13 @@
       "signature_shape_hash": "ec4da8536c8a3646cfc93d26da08d80c3c0054f101ce4455795213bbdf53be83"
     },
     {
-      "body_hash": "34cc180d804e4eaec92c4d50aeace5335fa6e1a3ea3b5e65fe4db09afc2a7850",
-      "body_shape_hash": "fd91119307d03817d27c8e6669932f2a85e1a3d2ad237259329d3cfd3939c4d9",
-      "declaration_hash": "662bc45ba1045cad7755c7fc213e9136535e68681a95eb731e3381721cb70242",
-      "direct_consumers": [
-        "Chromatic.conjectures.X81.x81_proper_orientation_bound"
-      ],
+      "body_hash": "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48",
+      "body_shape_hash": "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48",
+      "declaration_hash": "34d030b843f187842fce69947ce81672d8bd384283e0a664cdb502529c2143fe",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 17,
-      "local_dependencies": [
-        "x81_indegree"
-      ],
+      "line": 23,
+      "local_dependencies": [],
       "name": "x81_proper_orientation",
       "normalized_name": "proper_orientation",
       "package": "chromatic-theory",
@@ -10870,19 +10842,15 @@
       "signature_shape_hash": "4b6d55e3326a0500b148ba977569919f5e926240d9230c6af7c31b6161f639f4"
     },
     {
-      "body_hash": "df63046d71e20da6d39236223e2b71652f2d0d2828ff5f275be513eb88273149",
-      "body_shape_hash": "3d4c5ddffb4928cc9eecb298d4084fe4fdf4fd426ec007bf9874f4fa44dae236",
-      "declaration_hash": "56272918753c7057cfe316f0f14f9522ea89996a0df27784332a8d2e3f4e1cd8",
+      "body_hash": "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2",
+      "body_shape_hash": "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2",
+      "declaration_hash": "c5980a1cb6cec4c2f458d0b97e403674d9d4d3747c830a646b8b63b621d9a2bf",
       "direct_consumers": [
         "Chromatic.conjectures.X81.bipartite_proper_orientation_half_delta_constant_statement"
       ],
       "kind": "Definition",
-      "line": 20,
-      "local_dependencies": [
-        "x81_indegree",
-        "x81_orientation_of",
-        "x81_proper_orientation"
-      ],
+      "line": 29,
+      "local_dependencies": [],
       "name": "x81_proper_orientation_bound",
       "normalized_name": "proper_orientation_bound",
       "package": "chromatic-theory",
@@ -34168,11 +34136,9 @@
       "body_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
       "body_shape_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
       "declaration_hash": "e48051d690f5e92c5046644d0fad36876039675d90bcdecdac84564be2a22b03",
-      "direct_consumers": [
-        "Extremal.conjectures.X84.x84_cycle_edge_set"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 8,
+      "line": 9,
       "local_dependencies": [],
       "name": "x84_edge_set",
       "normalized_name": "edge_set",
@@ -34191,7 +34157,7 @@
         "Extremal.conjectures.X84.x84_connected_support"
       ],
       "kind": "Definition",
-      "line": 13,
+      "line": 14,
       "local_dependencies": [],
       "name": "x84_edge_rel",
       "normalized_name": "edge_rel",
@@ -34207,12 +34173,10 @@
       "body_shape_hash": "f437a7c69bdf11bd4cff6602e08b96965ed43ff830801ff43a6ca621338d4911",
       "declaration_hash": "54d86b95e796f3338fada21229219eedec05435737845b6e66a7b0cd64bb7701",
       "direct_consumers": [
-        "Extremal.conjectures.X84.x84_connected_support",
-        "Extremal.conjectures.X84.x84_cycle_edge_set",
-        "Extremal.conjectures.X84.x84_has_cycle_length"
+        "Extremal.conjectures.X84.x84_connected_support"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 17,
       "local_dependencies": [],
       "name": "x84_support",
       "normalized_name": "support",
@@ -34227,11 +34191,9 @@
       "body_hash": "20b775c30c4b8c4657e94363abc712ab3eb707a7d5556a2cc284f893454773ac",
       "body_shape_hash": "20b775c30c4b8c4657e94363abc712ab3eb707a7d5556a2cc284f893454773ac",
       "declaration_hash": "da26eac40b08153d4436f2126d1c00a43b092fe386bdab67df923d0d4857cb71",
-      "direct_consumers": [
-        "Extremal.conjectures.X84.x84_cycle_edge_set"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 19,
+      "line": 20,
       "local_dependencies": [],
       "name": "x84_degree_in",
       "normalized_name": "degree_in",
@@ -34246,11 +34208,9 @@
       "body_hash": "d4efe06f0ebc899ba14d0f63e1dc0fce85ac7519b2e7b21d00612aa93bc04ae2",
       "body_shape_hash": "31879a7c3ab62a2f10a54dbeaed0e5b8781a839a9d035470080b9b98ace9ab34",
       "declaration_hash": "f89e69079cfb6adde046d647a441650a557a5db6ad80e635365384944160d82a",
-      "direct_consumers": [
-        "Extremal.conjectures.X84.x84_cycle_edge_set"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 22,
+      "line": 23,
       "local_dependencies": [
         "x84_edge_rel",
         "x84_support"
@@ -34265,21 +34225,13 @@
       "signature_shape_hash": "b788da207ce223d5c72387e6301cc651ef54b1e91f6a8b4d5fc382f146bf317c"
     },
     {
-      "body_hash": "63729874e64f38a6ff4a384314f1129e496bfea4cfbab785b54682b81225aa5c",
-      "body_shape_hash": "31fbd0df7663c19afb9656041f3978f9351fe56ab757f773882b8c966a610362",
-      "declaration_hash": "128e4829bf8603fd38bf75f6050dbfabd9b4c327002f74ab69288627cd63c38c",
-      "direct_consumers": [
-        "Extremal.conjectures.X84.x84_cycle_count",
-        "Extremal.conjectures.X84.x84_has_cycle_length"
-      ],
+      "body_hash": "b269b2064c54089e2a4d3d76150443850591d4720b9477bff1cc423dfab73c4e",
+      "body_shape_hash": "b269b2064c54089e2a4d3d76150443850591d4720b9477bff1cc423dfab73c4e",
+      "declaration_hash": "2793318fcdc29f39a0fee0a980e0cf4e81c78824f7dd68f5713f007d7b336338",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 26,
-      "local_dependencies": [
-        "x84_connected_support",
-        "x84_degree_in",
-        "x84_edge_set",
-        "x84_support"
-      ],
+      "line": 27,
+      "local_dependencies": [],
       "name": "x84_cycle_edge_set",
       "normalized_name": "cycle_edge_set",
       "package": "extremal-graph-theory",
@@ -34290,17 +34242,15 @@
       "signature_shape_hash": "b788da207ce223d5c72387e6301cc651ef54b1e91f6a8b4d5fc382f146bf317c"
     },
     {
-      "body_hash": "74bba9025b5efe07cd76626c8b9a0322bfb295fdcd6b65526d97882f1e2a871f",
-      "body_shape_hash": "b44ca67459f07c6965c154f46fd23c8809d996a590b0b04a3e0b5182d00439eb",
-      "declaration_hash": "bc8e77518f02f8a1800a0eb592db34ad6a35d7c578809b7186b80547d62253a4",
+      "body_hash": "4c6429cca992d3aa96d04eb9095cbb868ee8ffa6d93bc135588947dc0a550fe3",
+      "body_shape_hash": "4c6429cca992d3aa96d04eb9095cbb868ee8ffa6d93bc135588947dc0a550fe3",
+      "declaration_hash": "1f97380e90d12caa7ba11c0d1912964b98d319c3d9926251106b7fefb4af534a",
       "direct_consumers": [
         "Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement"
       ],
       "kind": "Definition",
       "line": 33,
-      "local_dependencies": [
-        "x84_cycle_edge_set"
-      ],
+      "local_dependencies": [],
       "name": "x84_cycle_count",
       "normalized_name": "cycle_count",
       "package": "extremal-graph-theory",
@@ -34311,18 +34261,15 @@
       "signature_shape_hash": "0596fb401e0ad5525f64c30a46df4b74ef3b429bb464e52445ea6a2244565dd3"
     },
     {
-      "body_hash": "87a42fab854cff290ebc1fd016bcb143c95c8b25c7f4722322e9597de2589e1b",
-      "body_shape_hash": "06bd08c75757a4ca3525d78ac8f357ef1c78473c6c44e434fdba948040c4b291",
-      "declaration_hash": "d0fa71d348c2afdbd27bb6cdad5ce1ba56a1270c95d96e0b76ef0fa8c305c664",
+      "body_hash": "c5e5b0ab5d41feaca918e534213dc785d9bc6dcc23c23b9b25857d5869f99e56",
+      "body_shape_hash": "c5e5b0ab5d41feaca918e534213dc785d9bc6dcc23c23b9b25857d5869f99e56",
+      "declaration_hash": "322815c65912cdb33e6220ca78e581395ead625812a2956a58d3c391ca0916e4",
       "direct_consumers": [
         "Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement"
       ],
       "kind": "Definition",
-      "line": 36,
-      "local_dependencies": [
-        "x84_cycle_edge_set",
-        "x84_support"
-      ],
+      "line": 39,
+      "local_dependencies": [],
       "name": "x84_has_cycle_length",
       "normalized_name": "has_cycle_length",
       "package": "extremal-graph-theory",
@@ -34341,7 +34288,7 @@
         "Extremal.conjectures.X84.x84_turan2_sym"
       ],
       "kind": "Definition",
-      "line": 40,
+      "line": 45,
       "local_dependencies": [],
       "name": "x84_turan2_rel",
       "normalized_name": "turan2_rel",
@@ -34360,7 +34307,7 @@
         "Extremal.conjectures.X84.x84_turan2"
       ],
       "kind": "Lemma",
-      "line": 43,
+      "line": 48,
       "local_dependencies": [
         "x84_turan2_rel"
       ],
@@ -34381,7 +34328,7 @@
         "Extremal.conjectures.X84.x84_turan2"
       ],
       "kind": "Lemma",
-      "line": 48,
+      "line": 53,
       "local_dependencies": [
         "x84_turan2_rel"
       ],
@@ -34402,7 +34349,7 @@
         "Extremal.conjectures.X84.odd_cycle_free_turan2_unique_cycle_extremal_statement"
       ],
       "kind": "Definition",
-      "line": 51,
+      "line": 56,
       "local_dependencies": [
         "x84_turan2_irrefl",
         "x84_turan2_sym"
@@ -42454,14 +42401,12 @@
       "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
     },
     {
-      "body_hash": "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e",
-      "body_shape_hash": "6278165226ea31ac39e155273b42c6cc23312647eb731eaad0c40ee5a6d0301e",
-      "declaration_hash": "0e9fc31c8b5913f2bc763c4b596c08f46f1295cb04593521ed1df9565f2833f3",
-      "direct_consumers": [
-        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
-      ],
+      "body_hash": "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487",
+      "body_shape_hash": "b347d69d71e7ef71db7951f110f2af63bf0376bc9008d7620bb1842a7befc487",
+      "declaration_hash": "72b40b94eb695eda237c986227a3907c1f9adf7b65fbfaebd2e958d7f055e862",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 9,
+      "line": 10,
       "local_dependencies": [],
       "name": "x82_orientation_of",
       "normalized_name": "orientation_of",
@@ -42473,15 +42418,12 @@
       "signature_shape_hash": "4b6d55e3326a0500b148ba977569919f5e926240d9230c6af7c31b6161f639f4"
     },
     {
-      "body_hash": "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5",
-      "body_shape_hash": "b5a7734d1ccd952185ee600c9d41b9b9656ec0096130afbc9e9b7b5de7f0afa5",
-      "declaration_hash": "29e132990a55c3c0b8dcfb99a692b6b3910499658ce1d5cea9d8b9e5dfd2b50d",
-      "direct_consumers": [
-        "GTMisc.conjectures.X82.x82_proper_orientation",
-        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
-      ],
+      "body_hash": "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e",
+      "body_shape_hash": "9263d34fe1f4103c673cdca9722d78945dad4c6a043a8fdf44d39daf39903f7e",
+      "declaration_hash": "c40a6e71db3ea05f1ef1f74c08e2f227e9823061a794790595f18f46793ced36",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 15,
+      "line": 18,
       "local_dependencies": [],
       "name": "x82_indegree",
       "normalized_name": "indegree",
@@ -42493,17 +42435,13 @@
       "signature_shape_hash": "ec4da8536c8a3646cfc93d26da08d80c3c0054f101ce4455795213bbdf53be83"
     },
     {
-      "body_hash": "443302fd601cdb1d5d91830c0ff91ba376c6523bdc2b9773d205a68ae8f3a6cc",
-      "body_shape_hash": "fd91119307d03817d27c8e6669932f2a85e1a3d2ad237259329d3cfd3939c4d9",
-      "declaration_hash": "9641f5f967f30d7a0ebd4152c7f8b6e20e49e2c608261b39cb5efc6baf2227ec",
-      "direct_consumers": [
-        "GTMisc.conjectures.X82.x82_proper_orientation_bound"
-      ],
+      "body_hash": "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48",
+      "body_shape_hash": "3a4040e1208a42a52cb8cca504510ee337241121cc9a524a02df09a714c2ad48",
+      "declaration_hash": "7f969a320389ba5a7d603bc945390ac544ade39f5e46edf3e59041ec3a954362",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 18,
-      "local_dependencies": [
-        "x82_indegree"
-      ],
+      "line": 24,
+      "local_dependencies": [],
       "name": "x82_proper_orientation",
       "normalized_name": "proper_orientation",
       "package": "graph-theory-misc",
@@ -42514,19 +42452,15 @@
       "signature_shape_hash": "4b6d55e3326a0500b148ba977569919f5e926240d9230c6af7c31b6161f639f4"
     },
     {
-      "body_hash": "7ba3174641c20c1918a54e4e158ae66ed1986e09b75528ec3c6a6fd14feccd00",
-      "body_shape_hash": "3d4c5ddffb4928cc9eecb298d4084fe4fdf4fd426ec007bf9874f4fa44dae236",
-      "declaration_hash": "64c0de29da969ac3300c91f950e1f358d45aee7a99ca37b412a6a9501f79baaa",
+      "body_hash": "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2",
+      "body_shape_hash": "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2",
+      "declaration_hash": "263b06d51d5f1cef76c0e39646c0777af1427f1c2016af8db841a1b2baf4041b",
       "direct_consumers": [
         "GTMisc.conjectures.X82.outerplanar_bounded_proper_orientation_number_statement"
       ],
       "kind": "Definition",
-      "line": 21,
-      "local_dependencies": [
-        "x82_indegree",
-        "x82_orientation_of",
-        "x82_proper_orientation"
-      ],
+      "line": 30,
+      "local_dependencies": [],
       "name": "x82_proper_orientation_bound",
       "normalized_name": "proper_orientation_bound",
       "package": "graph-theory-misc",
@@ -42544,7 +42478,7 @@
         "GTMisc.conjectures.X82.outerplanar_bounded_proper_orientation_number_statement"
       ],
       "kind": "Definition",
-      "line": 27,
+      "line": 36,
       "local_dependencies": [],
       "name": "x82_outerplanar",
       "normalized_name": "outerplanar",

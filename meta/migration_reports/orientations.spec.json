@@ -1,0 +1,220 @@
+{
+  "family": "proper-orientations",
+  "canonical_name": "GTBase.orientations.proper_orientation_bound",
+  "canonical_short_name": "proper_orientation_bound",
+  "relation": "one family over GTBase.orientations, for a simple graph G and an arbitrary Boolean relation D : rel G, each X81 / X82 helper by conversion: x8?_orientation_of D is orientation_of D (every arc joins adjacent vertices and every edge carries exactly one of its two arcs, D x y (+) D y x; so no loop and no digon); x8?_indegree D v is rel_indegree D v (the vertices u with D u v: incoming, not outgoing; a loop counts); x8?_proper_orientation D is proper_indegrees D (adjacent vertices have different indegrees, on an arbitrary D: no orientation is asserted, and a relation with a loop can be proper); x8?_proper_orientation_bound G k is proper_orientation_bound G k (one D with the three conjuncts in this order and every indegree at most k). Empty and edgeless hosts satisfy the bound at 0 through the empty relation; the bound is monotone in k with the same D. No orientation, loop, digon, nonemptiness or guard is added. Distinct and untouched: B16's diGraphType indeg (its owner keeps it), arc-set and selection indegrees (Alon-Tarsi at_indegree / at_spanning_orientation, P9 arcset_indeg) and Digraph XE2's split pair xe2_uses_only_edges / xe2_orients_edge.",
+  "baseline_commit": "e681570b9c330b5fb0831e3076f07a1bc2644e8f",
+  "namespaces": {
+    "chromatic-theory": "Chromatic",
+    "graph-theory-misc": "GTMisc",
+    "base": "GTBase"
+  },
+  "certificate_files": [
+    "base/theories/orientations.v",
+    "chromatic-theory/theories/migration/orientations.v",
+    "graph-theory-misc/theories/migration/orientations.v"
+  ],
+  "extra_certificates": [
+    "GTBase.orientations.orientation_of_edge",
+    "GTBase.orientations.orientation_of_xor",
+    "GTBase.orientations.orientation_of_exclusive",
+    "GTBase.orientations.orientation_of_noloop",
+    "GTBase.orientations.orientation_of_nodigon",
+    "GTBase.orientations.in_rel_indegree",
+    "GTBase.orientations.rel_indegree0",
+    "GTBase.orientations.rel_indegree_gt0",
+    "GTBase.orientations.orientation_of_edgeless",
+    "GTBase.orientations.proper_indegrees_edgeless",
+    "GTBase.orientations.proper_orientation_bound_edgeless",
+    "GTBase.orientations.proper_orientation_bound_mono",
+    "GTBase.orientations.proper_orientation_bound_card0"
+  ],
+  "summary": [
+    "D11 proper-orientations, one family over the new public module `GTBase.orientations` (not re-exported by GTBase.base). For a simple graph G and an arbitrary Boolean relation `D : rel G`, Chromatic X81's and GTMisc X82's four helpers are, by conversion: `orientation_of D` (every arc joins adjacent vertices and every edge carries exactly one of its two arcs, `D x y (+) D y x`), `rel_indegree D v` (the vertices sending an arc to v: incoming, a loop counts), `proper_indegrees D` (adjacent vertices have different indegrees, for an arbitrary D: no orientation is asserted) and `proper_orientation_bound G k` (one D with the three conjuncts in this order and every indegree at most k). Binders, inferred G and every Arguments status are unchanged (baseline parity); no orientation, loop, digon, nonemptiness or guard is added.",
+    "",
+    "API: arcs are edges, exclusivity, no loop, no digon, the empty relation's indegree, positive indegree, the edgeless and empty-host bound at 0, and monotonicity in k with the same D. Corners in the public-only client base/theories/examples/orientations.v: empty K_0 and edgeless K_1 at 0; on K_2 the single arc 0 -> 1 has indegrees 0 and 1 and gives bound 1 and 2 but not 0; both arcs form a digon; a loop at 0 is proper without being an orientation.",
+    "",
+    "Frozen verbatim at the B29 pin e681570, eleven objects: the eight sources and three complete rows, X81's bipartite row (some C before every bipartite G, then some k with the bound and 2 * k <= Delta G + 2 * C), X82's outerplanar row (one C before every G under the unchanged forbidden-minor `x82_outerplanar`) and X101's planar row (one C before every G under the unchanged `wagner_planar`, through X101's import of X82). The guards and Delta / bipartite stay live, not migrated here. Three whole iff, all conversions; no earlier snapshot, so no Original. The reverse closure is X81.v, X82.v and X101.v alone (coqdep and lexical scans; no old proof header). Routes: X81 (chromatic-theory), X82 and X101 (graph-theory-misc); no Digraph source."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X81.x81_orientation_of",
+      "path": "chromatic-theory/theories/conjectures/X81.v",
+      "name": "x81_orientation_of",
+      "frozen_path": "chromatic-theory/theories/migration/orientations.v",
+      "frozen": "Legacy.x81_orientation_of",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.orientations.x81_orientation_of_compat",
+      "live_unfolds_to": "orientation_of D"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X81.x81_indegree",
+      "path": "chromatic-theory/theories/conjectures/X81.v",
+      "name": "x81_indegree",
+      "frozen_path": "chromatic-theory/theories/migration/orientations.v",
+      "frozen": "Legacy.x81_indegree",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.orientations.x81_indegree_compat",
+      "live_unfolds_to": "rel_indegree D v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X81.x81_proper_orientation",
+      "path": "chromatic-theory/theories/conjectures/X81.v",
+      "name": "x81_proper_orientation",
+      "frozen_path": "chromatic-theory/theories/migration/orientations.v",
+      "frozen": "Legacy.x81_proper_orientation",
+      "substitutions": {
+        "x81_indegree": "Legacy.x81_indegree"
+      },
+      "certificate": "Chromatic.migration.orientations.x81_proper_orientation_compat",
+      "live_unfolds_to": "proper_indegrees D"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X81.x81_proper_orientation_bound",
+      "path": "chromatic-theory/theories/conjectures/X81.v",
+      "name": "x81_proper_orientation_bound",
+      "frozen_path": "chromatic-theory/theories/migration/orientations.v",
+      "frozen": "Legacy.x81_proper_orientation_bound",
+      "substitutions": {
+        "x81_indegree": "Legacy.x81_indegree",
+        "x81_orientation_of": "Legacy.x81_orientation_of",
+        "x81_proper_orientation": "Legacy.x81_proper_orientation"
+      },
+      "certificate": "Chromatic.migration.orientations.x81_proper_orientation_bound_compat",
+      "live_unfolds_to": "proper_orientation_bound G k"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X81.bipartite_proper_orientation_half_delta_constant_statement",
+      "path": "chromatic-theory/theories/conjectures/X81.v",
+      "name": "bipartite_proper_orientation_half_delta_constant_statement",
+      "frozen_path": "chromatic-theory/theories/migration/orientations.v",
+      "frozen": "X81Legacy.bipartite_proper_orientation_half_delta_constant_statement",
+      "substitutions": {
+        "x81_proper_orientation_bound": "Legacy.x81_proper_orientation_bound"
+      },
+      "certificate": "Chromatic.migration.orientations.bipartite_proper_orientation_half_delta_constant_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X82.x82_orientation_of",
+      "path": "graph-theory-misc/theories/conjectures/X82.v",
+      "name": "x82_orientation_of",
+      "frozen_path": "graph-theory-misc/theories/migration/orientations.v",
+      "frozen": "Legacy.x82_orientation_of",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.orientations.x82_orientation_of_compat",
+      "live_unfolds_to": "orientation_of D"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X82.x82_indegree",
+      "path": "graph-theory-misc/theories/conjectures/X82.v",
+      "name": "x82_indegree",
+      "frozen_path": "graph-theory-misc/theories/migration/orientations.v",
+      "frozen": "Legacy.x82_indegree",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.orientations.x82_indegree_compat",
+      "live_unfolds_to": "rel_indegree D v"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X82.x82_proper_orientation",
+      "path": "graph-theory-misc/theories/conjectures/X82.v",
+      "name": "x82_proper_orientation",
+      "frozen_path": "graph-theory-misc/theories/migration/orientations.v",
+      "frozen": "Legacy.x82_proper_orientation",
+      "substitutions": {
+        "x82_indegree": "Legacy.x82_indegree"
+      },
+      "certificate": "GTMisc.migration.orientations.x82_proper_orientation_compat",
+      "live_unfolds_to": "proper_indegrees D"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X82.x82_proper_orientation_bound",
+      "path": "graph-theory-misc/theories/conjectures/X82.v",
+      "name": "x82_proper_orientation_bound",
+      "frozen_path": "graph-theory-misc/theories/migration/orientations.v",
+      "frozen": "Legacy.x82_proper_orientation_bound",
+      "substitutions": {
+        "x82_indegree": "Legacy.x82_indegree",
+        "x82_orientation_of": "Legacy.x82_orientation_of",
+        "x82_proper_orientation": "Legacy.x82_proper_orientation"
+      },
+      "certificate": "GTMisc.migration.orientations.x82_proper_orientation_bound_compat",
+      "live_unfolds_to": "proper_orientation_bound G k"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X82.outerplanar_bounded_proper_orientation_number_statement",
+      "path": "graph-theory-misc/theories/conjectures/X82.v",
+      "name": "outerplanar_bounded_proper_orientation_number_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/orientations.v",
+      "frozen": "X82Legacy.outerplanar_bounded_proper_orientation_number_statement",
+      "substitutions": {
+        "x82_proper_orientation_bound": "Legacy.x82_proper_orientation_bound"
+      },
+      "certificate": "GTMisc.migration.orientations.outerplanar_bounded_proper_orientation_number_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X101.planar_bounded_proper_orientation_number_statement",
+      "path": "graph-theory-misc/theories/conjectures/X101.v",
+      "name": "planar_bounded_proper_orientation_number_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/orientations.v",
+      "frozen": "X101Legacy.planar_bounded_proper_orientation_number_statement",
+      "substitutions": {
+        "x82_proper_orientation_bound": "Legacy.x82_proper_orientation_bound"
+      },
+      "certificate": "GTMisc.migration.orientations.planar_bounded_proper_orientation_number_statement_compat",
+      "corpus": "v2"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/X101.v",
+      "name": "x82_proper_orientation_bound",
+      "note": "Row X101 (studies:std_bounded_proper_orientation_number_of_planar_grap_436) uses X82's bound through its Require Import of X82; frozen as X101Legacy over Legacy.x82_proper_orientation_bound."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.conjectures.XE2.xe2_orients_edge",
+      "path": "digraph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_orients_edge",
+      "note": "exclusive direction on host edges (r x y = ~~ r y x) as a separate predicate, paired with xe2_uses_only_edges; the split conjunction is not enrolled, untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.XE2.xe2_uses_only_edges",
+      "path": "digraph-theory/theories/conjectures/XE2.v",
+      "name": "xe2_uses_only_edges",
+      "note": "arcs only on host edges as a separate predicate; untouched"
+    },
+    {
+      "qualified": "Digraph.foundations.degree_balance.indeg",
+      "path": "digraph-theory/theories/foundations/degree_balance.v",
+      "name": "indeg",
+      "note": "incoming degree of a diGraphType, owned by B16's degree-balance family with its interface; untouched"
+    },
+    {
+      "qualified": "Chromatic.foundations.alon_tarsi.at_indegree",
+      "path": "chromatic-theory/theories/foundations/alon_tarsi.v",
+      "name": "at_indegree",
+      "note": "incoming degree in an arc set {set V * V}; a different representation, untouched"
+    },
+    {
+      "qualified": "Chromatic.applications.alon_tarsi_triangle.at_spanning_orientation",
+      "path": "chromatic-theory/theories/applications/alon_tarsi_triangle.v",
+      "name": "at_spanning_orientation",
+      "note": "an arc set on host edges without both directions, which may leave edges unoriented; untouched"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X81 -- v2 proper-orientation bipartite row *)
 
 From GTBase Require Export base.
+From GTBase Require Import orientations.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -8,21 +9,29 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X81 vocabulary ************************************************)
 
+(** Since the D11 library migration (2026-10-04) a transparent alias of
+    [GTBase.orientations.orientation_of], the same body by conversion; the former body is frozen
+    in theories/migration/orientations.v. *)
 Definition x81_orientation_of (G : sgraph) (D : rel G) : Prop :=
-  (forall x y : G, D x y -> x -- y) /\
-  forall x y : G, x -- y -> (D x y) (+) (D y x).
+  orientation_of D.
 
+(** Since the D11 library migration (2026-10-04) a transparent alias of
+    [GTBase.orientations.rel_indegree], the same body by conversion; the former body is frozen
+    in theories/migration/orientations.v. *)
 Definition x81_indegree (G : sgraph) (D : rel G) (v : G) : nat :=
-  #|[set u : G | D u v]|.
+  rel_indegree D v.
 
+(** Since the D11 library migration (2026-10-04) a transparent alias of
+    [GTBase.orientations.proper_indegrees], the same body by conversion; the former body is frozen
+    in theories/migration/orientations.v. *)
 Definition x81_proper_orientation (G : sgraph) (D : rel G) : Prop :=
-  forall x y : G, x -- y -> x81_indegree D x != x81_indegree D y.
+  proper_indegrees D.
 
+(** Since the D11 library migration (2026-10-04) a transparent alias of
+    [GTBase.orientations.proper_orientation_bound], the same body by conversion; the former body is frozen
+    in theories/migration/orientations.v. *)
 Definition x81_proper_orientation_bound (G : sgraph) (k : nat) : Prop :=
-  exists D : rel G,
-    x81_orientation_of D /\
-    x81_proper_orientation D /\
-    forall v : G, x81_indegree D v <= k.
+  proper_orientation_bound G k.
 
 (** ** X81 statements ******************************************************)
 
