@@ -1,0 +1,267 @@
+{
+  "family": "surface-embeddable",
+  "canonical_name": "GTBase.surface.surface_embeddable",
+  "canonical_short_name": "surface_embeddable",
+  "relation": "definitional equality, pre-existing: the five local surface wrappers X150 x150_embeddable_in_fixed_surface, X152 x152_embeddable_in_fixed_surface, X167 x167_embedded_in_fixed_surface, X138 x138_embeddable_on_surface (surface G) and X164 x164_embedded_in_fixed_surface_with_boundary (surface boundary G, boundary unused) are, unchanged since their authoring 8800958, the existing public GTBase.surface.surface_embeddable surface G (the encoded orientable-genus value surface_euler_genus of a finite rotation system at most the bound; the unchanged formula can understate the genus of a disconnected graph; the empty graph reads 1). No wrapper, chain or row changes; every certificate is a kernel conversion, and the two Originals reuse the earlier families' own row certificates.",
+  "baseline_commit": "3bdfdae32824d4762ba8105367f7858a706a02e2",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "graph-theory-misc": "GTMisc",
+    "topological-graph-theory": "Topological"
+  },
+  "certificate_files": [
+    "base/theories/surface.v",
+    "chromatic-theory/theories/migration/surface_embeddable.v",
+    "graph-theory-misc/theories/migration/surface_embeddable.v",
+    "topological-graph-theory/theories/migration/surface_embeddable.v"
+  ],
+  "extra_certificates": [
+    "GTBase.surface.surface_embeddable_K1",
+    "GTBase.surface.surface_embeddable_edgeless",
+    "Chromatic.migration.surface_embeddable.x150_embeddable_in_fixed_surface_canonical",
+    "Chromatic.migration.surface_embeddable.x152_embeddable_in_fixed_surface_canonical",
+    "Chromatic.migration.surface_embeddable.x164_embedded_in_fixed_surface_with_boundary_canonical",
+    "Chromatic.migration.surface_embeddable.gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement_canonical",
+    "Chromatic.migration.surface_embeddable.fixed_surface_four_colourability_polytime_statement_canonical",
+    "Chromatic.migration.surface_embeddable.fixed_surface_four_colourability_polytime_duplicate_statement_canonical",
+    "Chromatic.migration.surface_embeddable.linear_time_surface_triangle_free_three_colouring_output_statement_canonical",
+    "GTMisc.migration.surface_embeddable.x167_embedded_in_fixed_surface_canonical",
+    "GTMisc.migration.surface_embeddable.fixed_surface_spanning_tree_polytope_linear_xc_statement_canonical",
+    "Topological.migration.surface_embeddable.x138_embeddable_on_surface_canonical",
+    "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_canonical"
+  ],
+  "summary": [
+    "surface-embeddable, one family over the existing public module GTBase.surface (re-exported by GTBase.base): the canonical is the unchanged `surface_embeddable surface G`, already audited LIGHTWEIGHT; no primitive is added and no fidelity fragment is enrolled.",
+    "Its contract, kept exactly: a finite rotation system E of G whose encoded orientable-genus value `surface_euler_genus E`, the connected-map formula `(2 + edges - vertices - faces) %/ 2` in truncated nat arithmetic, is at most `surface`; a bound, so monotone in `surface`; non-orientable surfaces are not modelled; on a disconnected graph this unchanged formula can understate the genus (each row keeps its own connectedness guard, where it has one); the empty graph reads 1 (public client base/theories/examples/surface_embeddable.v).",
+    "Five wrappers reach six rows: Chromatic X150, X152 and its literal duplicate X154, X164; GTMisc X167; Topological X138. Four are direct aliases with binders (surface G); X164's takes (surface boundary G) and ignores boundary, which is not `surface_embeddable_with_boundary` (an existential boundary set, audited BROKEN). The wrappers were canonical aliases from their authoring, so no conjecture file changes (no statement churn); the aliases stay while consumers remain.",
+    "Certificates (one file per area) freeze each wrapper and every same-file declaration through which a row reaches it, and the six complete rows, verbatim at the baseline; X167Original and X138Original compose the end-to-end pre-migration rows over the earlier families B18 (spanning-tree) and C8 (monochromatic). The *_canonical lemmas state each wrapper and each complete current row with surface_embeddable written out, every guard, bound and quantifier in place.",
+    "X164 stays a documented blocked, unfaithful row (no extension precondition; orientable surface only; the boundary parameter does not constrain the embedding; it also has no connectedness guard): body, guards, quantifier order, status and defect text are unchanged, and no certificate here claims its English statement is faithful. X167 stays blocked (vacuous extension system), X138, X150, X152 and X154 partial.",
+    "Combined-parent note: X164's output-decoder chain (x164_data_nth_nat .. x164_linear_time_outputs_three_colouring) belongs to the separately queued family natural-data-decoder (candidate 5a0f56d, also at baseline 3bdfdae), whose own X164 copies keep this family's wrapper and instance class live and vice versa. When both are on one actual parent, the family integrated second must add reciprocal known_stale_snapshots keys and the end-to-end X164Original over both families' frozen chains."
+  ],
+  "known_stale_snapshots": {
+    "topological-graph-theory/theories/migration/monochromatic.v#X138Legacy.esperet_joret_surface_triangle_free_clustered_two_colouring_statement": "Earlier-family snapshot (C8, monochromatic, baseline 47eed16): C8 froze only X138's clustered-colouring chain and kept the surface wrapper x138_embeddable_on_surface live by design. That wrapper is unchanged since its authoring (it was always surface_embeddable surface G), so this copy still reads the original wrapper body. The complete row with every migrated helper at its original body is Topological.migration.surface_embeddable.X138Original.statement, certified by esperet_joret_surface_triangle_free_clustered_two_colouring_statement_original_compat (through C8's own row certificate).",
+    "graph-theory-misc/theories/migration/spanning_trees.v#X167Legacy.fixed_surface_spanning_tree_polytope_linear_xc_statement": "Earlier-family snapshot (B18, spanning-tree, baseline 7848021): B18 froze only X167's spanning-tree chain and kept the surface wrapper x167_embedded_in_fixed_surface live by design. That wrapper is unchanged since its authoring (it was always surface_embeddable surface G), so this copy still reads the original wrapper body. The complete row with every migrated helper at its original body is GTMisc.migration.surface_embeddable.X167Original.statement, certified by fixed_surface_spanning_tree_polytope_linear_xc_statement_original_compat (through B18's own row certificate)."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/X154.v",
+      "name": "fixed_surface_four_colourability_polytime_statement",
+      "note": "X154's duplicate row is literally X152's statement (a deliberate synonym so the duplicate corpus row cannot drift). Frozen as X154Legacy over X152Legacy.fixed_surface_four_colourability_polytime_statement; statement text unchanged."
+    }
+  ],
+  "distinct_variants": [],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X150.x150_embeddable_in_fixed_surface",
+      "path": "chromatic-theory/theories/conjectures/X150.v",
+      "name": "x150_embeddable_in_fixed_surface",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "Legacy.x150_embeddable_in_fixed_surface",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.surface_embeddable.x150_embeddable_in_fixed_surface_compat",
+      "live_unfolds_to": "surface_embeddable surface G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X150.x150_polytime_decides_3_colourability_on_surface",
+      "path": "chromatic-theory/theories/conjectures/X150.v",
+      "name": "x150_polytime_decides_3_colourability_on_surface",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "Legacy.x150_polytime_decides_3_colourability_on_surface",
+      "substitutions": {
+        "x150_embeddable_in_fixed_surface": "Legacy.x150_embeddable_in_fixed_surface"
+      },
+      "certificate": "Chromatic.migration.surface_embeddable.x150_polytime_decides_3_colourability_on_surface_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X150.gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement",
+      "path": "chromatic-theory/theories/conjectures/X150.v",
+      "name": "gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "X150Legacy.gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement",
+      "substitutions": {
+        "x150_polytime_decides_3_colourability_on_surface": "Legacy.x150_polytime_decides_3_colourability_on_surface"
+      },
+      "certificate": "Chromatic.migration.surface_embeddable.gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X152.x152_embeddable_in_fixed_surface",
+      "path": "chromatic-theory/theories/conjectures/X152.v",
+      "name": "x152_embeddable_in_fixed_surface",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "Legacy.x152_embeddable_in_fixed_surface",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.surface_embeddable.x152_embeddable_in_fixed_surface_compat",
+      "live_unfolds_to": "surface_embeddable surface G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X152.x152_polytime_decides_four_colourability",
+      "path": "chromatic-theory/theories/conjectures/X152.v",
+      "name": "x152_polytime_decides_four_colourability",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "Legacy.x152_polytime_decides_four_colourability",
+      "substitutions": {
+        "x152_embeddable_in_fixed_surface": "Legacy.x152_embeddable_in_fixed_surface"
+      },
+      "certificate": "Chromatic.migration.surface_embeddable.x152_polytime_decides_four_colourability_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X152.fixed_surface_four_colourability_polytime_statement",
+      "path": "chromatic-theory/theories/conjectures/X152.v",
+      "name": "fixed_surface_four_colourability_polytime_statement",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "X152Legacy.fixed_surface_four_colourability_polytime_statement",
+      "substitutions": {
+        "x152_polytime_decides_four_colourability": "Legacy.x152_polytime_decides_four_colourability"
+      },
+      "certificate": "Chromatic.migration.surface_embeddable.fixed_surface_four_colourability_polytime_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X154.fixed_surface_four_colourability_polytime_duplicate_statement",
+      "path": "chromatic-theory/theories/conjectures/X154.v",
+      "name": "fixed_surface_four_colourability_polytime_duplicate_statement",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "X154Legacy.fixed_surface_four_colourability_polytime_duplicate_statement",
+      "substitutions": {
+        "fixed_surface_four_colourability_polytime_statement": "X152Legacy.fixed_surface_four_colourability_polytime_statement"
+      },
+      "certificate": "Chromatic.migration.surface_embeddable.fixed_surface_four_colourability_polytime_duplicate_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X164.x164_embedded_in_fixed_surface_with_boundary",
+      "path": "chromatic-theory/theories/conjectures/X164.v",
+      "name": "x164_embedded_in_fixed_surface_with_boundary",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "Legacy.x164_embedded_in_fixed_surface_with_boundary",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.surface_embeddable.x164_embedded_in_fixed_surface_with_boundary_compat",
+      "live_unfolds_to": "surface_embeddable surface G"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X164.x164_instance_class",
+      "path": "chromatic-theory/theories/conjectures/X164.v",
+      "name": "x164_instance_class",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "Legacy.x164_instance_class",
+      "substitutions": {
+        "x164_embedded_in_fixed_surface_with_boundary": "Legacy.x164_embedded_in_fixed_surface_with_boundary"
+      },
+      "certificate": "Chromatic.migration.surface_embeddable.x164_instance_class_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X164.x164_linear_time_outputs_three_colouring",
+      "path": "chromatic-theory/theories/conjectures/X164.v",
+      "name": "x164_linear_time_outputs_three_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "Legacy.x164_linear_time_outputs_three_colouring",
+      "substitutions": {
+        "x164_instance_class": "Legacy.x164_instance_class"
+      },
+      "certificate": "Chromatic.migration.surface_embeddable.x164_linear_time_outputs_three_colouring_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X164.linear_time_surface_triangle_free_three_colouring_output_statement",
+      "path": "chromatic-theory/theories/conjectures/X164.v",
+      "name": "linear_time_surface_triangle_free_three_colouring_output_statement",
+      "frozen_path": "chromatic-theory/theories/migration/surface_embeddable.v",
+      "frozen": "X164Legacy.linear_time_surface_triangle_free_three_colouring_output_statement",
+      "substitutions": {
+        "x164_linear_time_outputs_three_colouring": "Legacy.x164_linear_time_outputs_three_colouring"
+      },
+      "certificate": "Chromatic.migration.surface_embeddable.linear_time_surface_triangle_free_three_colouring_output_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X167.x167_embedded_in_fixed_surface",
+      "path": "graph-theory-misc/theories/conjectures/X167.v",
+      "name": "x167_embedded_in_fixed_surface",
+      "frozen_path": "graph-theory-misc/theories/migration/surface_embeddable.v",
+      "frozen": "Legacy.x167_embedded_in_fixed_surface",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.surface_embeddable.x167_embedded_in_fixed_surface_compat",
+      "live_unfolds_to": "surface_embeddable surface G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X167.fixed_surface_spanning_tree_polytope_linear_xc_statement",
+      "path": "graph-theory-misc/theories/conjectures/X167.v",
+      "name": "fixed_surface_spanning_tree_polytope_linear_xc_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/surface_embeddable.v",
+      "frozen": "X167Legacy.fixed_surface_spanning_tree_polytope_linear_xc_statement",
+      "substitutions": {
+        "x167_embedded_in_fixed_surface": "Legacy.x167_embedded_in_fixed_surface"
+      },
+      "certificate": "GTMisc.migration.surface_embeddable.fixed_surface_spanning_tree_polytope_linear_xc_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X167.fixed_surface_spanning_tree_polytope_linear_xc_statement",
+      "path": "graph-theory-misc/theories/conjectures/X167.v",
+      "name": "fixed_surface_spanning_tree_polytope_linear_xc_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/surface_embeddable.v",
+      "frozen": "X167Original.statement",
+      "substitutions": {
+        "fixed_surface_spanning_tree_polytope_linear_xc_statement": "statement",
+        "x167_embedded_in_fixed_surface": "Legacy.x167_embedded_in_fixed_surface",
+        "x167_spanning_tree_polytope_xc": "B18.X167Legacy.x167_spanning_tree_polytope_xc"
+      },
+      "certificate": "GTMisc.migration.surface_embeddable.fixed_surface_spanning_tree_polytope_linear_xc_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Topological.conjectures.X138.x138_embeddable_on_surface",
+      "path": "topological-graph-theory/theories/conjectures/X138.v",
+      "name": "x138_embeddable_on_surface",
+      "frozen_path": "topological-graph-theory/theories/migration/surface_embeddable.v",
+      "frozen": "Legacy.x138_embeddable_on_surface",
+      "substitutions": {},
+      "certificate": "Topological.migration.surface_embeddable.x138_embeddable_on_surface_compat",
+      "live_unfolds_to": "surface_embeddable surface G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Topological.conjectures.X138.esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+      "path": "topological-graph-theory/theories/conjectures/X138.v",
+      "name": "esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+      "frozen_path": "topological-graph-theory/theories/migration/surface_embeddable.v",
+      "frozen": "X138Legacy.esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+      "substitutions": {
+        "x138_embeddable_on_surface": "Legacy.x138_embeddable_on_surface"
+      },
+      "certificate": "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Topological.conjectures.X138.esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+      "path": "topological-graph-theory/theories/conjectures/X138.v",
+      "name": "esperet_joret_surface_triangle_free_clustered_two_colouring_statement",
+      "frozen_path": "topological-graph-theory/theories/migration/surface_embeddable.v",
+      "frozen": "X138Original.statement",
+      "substitutions": {
+        "esperet_joret_surface_triangle_free_clustered_two_colouring_statement": "statement",
+        "x138_embeddable_on_surface": "Legacy.x138_embeddable_on_surface",
+        "x138_clustered_two_colourable_with_clustering": "C8.X138Legacy.x138_clustered_two_colourable_with_clustering"
+      },
+      "certificate": "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_original_compat",
+      "corpus": "v2"
+    }
+  ]
+}
