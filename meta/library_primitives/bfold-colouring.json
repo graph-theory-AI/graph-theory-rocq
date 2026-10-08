@@ -13,7 +13,7 @@
       "Chromatic.conjectures.X130.x130_bfold_colouring",
       "Extremal.conjectures.D2chr.bfold_colouring"
     ],
-    "consumers_remaining": 2,
+    "consumers_remaining": 1,
     "relation": "definitional equality: Chromatic X130's x130_bfold_colouring and Extremal D2chr's bfold_colouring (the same body up to the binder annotation v : G, both unchanged since authoring) are GTBase.bfold_colourings.bfold_colouring b f: every vertex v gets a b-element subset f v of the supplied palette 'I_a and adjacent vertices get disjoint subsets, with no guard (b = 0 and an empty vertex type allowed; a vertex forces b <= a and an edge 2 * b <= a). The fractional-chromatic consumers stay distinct and are not migrated: X130's x130_frac_chi_le is an existential cross-multiplied natural bound and D2chr's is_fractional_chromatic an attained rational minimum, each with its own 0 < b.",
     "semantic_classes": {
       "uniform-b-fold-colouring": {

@@ -40,6 +40,7 @@ From GraphTheory Require Import minor.
 From Extremal.foundations Require Export circular_colouring.
 From mathcomp Require Import all_algebra.
 From GTBase Require Import bfold_colourings.
+From Extremal.foundations Require Import fractional_colouring.
 Import GRing.Theory Num.Theory.
 
 Set Implicit Arguments.
@@ -66,9 +67,11 @@ Local Open Scope ring_scope.
 Definition bfold_colouring (G : sgraph) (a b : nat) (f : G -> {set 'I_a}) : Prop :=
   bfold_colourings.bfold_colouring b f.
 
+(** Since the fractional-chromatic library migration [is_fractional_chromatic] is a transparent alias of
+    [Extremal.foundations.fractional_colouring.is_fractional_chromatic] (the same body, over the canonical
+    b-fold colouring); the former body is frozen in theories/migration/fractional_chromatic.v. *)
 Definition is_fractional_chromatic (G : sgraph) (r : rat) : Prop :=
-  (exists a b : nat, (0 < b)%N /\ (exists f, @bfold_colouring G a b f) /\ r = a%:Q / b%:Q) /\
-  (forall a b : nat, (0 < b)%N -> (exists f, @bfold_colouring G a b f) -> r <= a%:Q / b%:Q).
+  fractional_colouring.is_fractional_chromatic G r.
 
 Definition is_hadwiger (G : sgraph) (h : nat) : Prop :=
   minor G 'K_h /\ (forall h', minor G 'K_h' -> (h' <= h)%N).

@@ -1,0 +1,139 @@
+{
+  "family": "fractional-chromatic",
+  "baseline_commit": "9e83cd855c2d29352812287ea06ea4d368d7aea4",
+  "canonical_name": "Extremal.foundations.fractional_colouring.is_fractional_chromatic",
+  "canonical_short_name": "is_fractional_chromatic",
+  "namespaces": {
+    "extremal-graph-theory": "Extremal"
+  },
+  "certificate_files": [
+    "extremal-graph-theory/theories/foundations/fractional_colouring.v",
+    "extremal-graph-theory/theories/migration/fractional_chromatic.v",
+    "extremal-graph-theory/theories/migration/bfold_colouring.v"
+  ],
+  "extra_certificates": [
+    "Extremal.foundations.fractional_colouring.is_fractional_chromatic_attained",
+    "Extremal.foundations.fractional_colouring.is_fractional_chromatic_le",
+    "Extremal.foundations.fractional_colouring.is_fractional_chromatic_unique",
+    "Extremal.foundations.fractional_colouring.is_fractional_chromatic_ge0",
+    "Extremal.foundations.fractional_colouring.is_fractional_chromatic_empty",
+    "Extremal.migration.fractional_chromatic.is_fractional_chromatic_canonical",
+    "Extremal.migration.fractional_chromatic.fractional_hadwiger_statement_canonical",
+    "Extremal.migration.fractional_chromatic.is_fractional_chromatic_original_compat"
+  ],
+  "relation": "definitional equality: Extremal D2chr's is_fractional_chromatic G r (unchanged since its authoring 818a76c) is Extremal.foundations.fractional_colouring.is_fractional_chromatic G r: r is the attained rational minimum of a/b over (a:b)-colourings with 0 < b, i.e. some GTBase b-fold colouring f : G -> {set 'I_a} with 0 < b has r = a/b, and r <= a/b for every such colouring; no guard on G (the empty graph has value 0). The X130 existential cross-multiplied bound x130_frac_chi_le, the circular chromatic number and the colouring-mixing threshold stay distinct.",
+  "summary": [
+    "fractional-chromatic, one family: D2chr's attained fractional chromatic number is_fractional_chromatic becomes public as Extremal.foundations.fractional_colouring.is_fractional_chromatic (an Extremal area foundation, next to the circular analogue is_circular_chromatic) with the same body over the GTBase b-fold colouring; D2chr keeps its name as a transparent alias (Require Import, not Export).",
+    "Baseline: the accepted bfold-colouring candidate 9e83cd85, where D2chr's bfold_colouring is already bfold's alias of GTBase.bfold_colourings.bfold_colouring.",
+    "Row: fractional_hadwiger_statement (opg) with its 0 < #|G| guard; is_hadwiger (integer Hadwiger number) and is_fractional_hadwiger (the clique-minor LP, a later separate family) stay live and unchanged.",
+    "Deepest Original: bfold-colouring's frozen chain at 3bdfdae (Legacy.is_fractional_chromatic over Legacy.bfold_colouring, unchanged since 818a76c), certified by bfold's own row certificate; no earlier family froze the row before bfold.",
+    "Atlas.foundations.fractional and implications_A1 are unchanged; the Atlas public boundary closes only with the later fractional clique-minor family."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2chr.is_fractional_chromatic",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "is_fractional_chromatic",
+      "frozen_path": "extremal-graph-theory/theories/migration/fractional_chromatic.v",
+      "frozen": "Legacy.is_fractional_chromatic",
+      "substitutions": {},
+      "certificate": "Extremal.migration.fractional_chromatic.is_fractional_chromatic_compat",
+      "live_unfolds_to": "fractional_colouring.is_fractional_chromatic G r"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2chr.fractional_hadwiger_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "fractional_hadwiger_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/fractional_chromatic.v",
+      "frozen": "D2chrLegacy.fractional_hadwiger_statement",
+      "substitutions": {
+        "is_fractional_chromatic": "Legacy.is_fractional_chromatic"
+      },
+      "certificate": "Extremal.migration.fractional_chromatic.fractional_hadwiger_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.D2chr.bfold_colouring",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "bfold_colouring",
+      "frozen_path": "extremal-graph-theory/theories/migration/bfold_colouring.v",
+      "frozen": "Legacy.bfold_colouring",
+      "substitutions": {},
+      "certificate": "Extremal.migration.bfold_colouring.bfold_colouring_compat",
+      "commit": "3bdfdae32824d4762ba8105367f7858a706a02e2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.D2chr.is_fractional_chromatic",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "is_fractional_chromatic",
+      "frozen_path": "extremal-graph-theory/theories/migration/bfold_colouring.v",
+      "frozen": "Legacy.is_fractional_chromatic",
+      "substitutions": {
+        "bfold_colouring": "Legacy.bfold_colouring"
+      },
+      "certificate": "Extremal.migration.bfold_colouring.is_fractional_chromatic_compat",
+      "commit": "3bdfdae32824d4762ba8105367f7858a706a02e2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.D2chr.fractional_hadwiger_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "fractional_hadwiger_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/fractional_chromatic.v",
+      "frozen": "D2chrOriginal.statement",
+      "substitutions": {
+        "fractional_hadwiger_statement": "statement",
+        "is_fractional_chromatic": "BF.Legacy.is_fractional_chromatic"
+      },
+      "certificate": "Extremal.migration.fractional_chromatic.fractional_hadwiger_statement_original_compat",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "fractional_hadwiger_statement",
+      "note": "Atlas implication edges e003, e042 and e223 cite D2chr's fractional Hadwiger row by name; the row is unchanged (certified here) and the edges recompile unchanged."
+    },
+    {
+      "path": "atlas/theories/foundations/fractional.v",
+      "name": "is_fractional_chromatic",
+      "note": "Atlas fractional foundation: frac_chi_le_chi, frac_chromatic_exists and frac_chi_n_alpha use D2chr's is_fractional_chromatic through the unchanged D2chr name (now the alias); headers and proofs unchanged. The Atlas import of D2chr and grounding_D2chr stays until the later fractional clique-minor family, so this family does not remove the Atlas.fractional release barrier."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
+      "name": "is_fractional_chromatic",
+      "note": "Grounding consumers is_fractional_chromatic_unique, is_fractional_chromatic_K2 and the row witnesses fractional_hadwiger_hyps_K2 / fractional_hadwiger_instance_K2 use the unchanged D2chr name and recompile unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/examples/fractional_colouring.v",
+      "name": "is_fractional_chromatic",
+      "note": "fractional-chromatic public-only client (it imports only GTBase base/bfold_colourings, MathComp and Extremal.foundations.fractional_colouring): its is_fractional_chromatic is the canonical name, a package-level lexical match on the shared short name, not a use of the D2chr alias."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.X130.x130_frac_chi_le",
+      "path": "chromatic-theory/theories/conjectures/X130.v",
+      "name": "x130_frac_chi_le",
+      "note": "an EXISTENTIAL cross-multiplied natural bound (exists a b f, 0 < b, an (a:b)-colouring and a * q <= p * b), vacuous in the bound for q = 0; the X130/X131/X149/X173/X204/X218 rows supply their own q > 0. Not an attained minimum; kept distinct."
+    },
+    {
+      "qualified": "Extremal.foundations.circular_colouring.is_circular_chromatic",
+      "path": "extremal-graph-theory/theories/foundations/circular_colouring.v",
+      "name": "is_circular_chromatic",
+      "note": "the circular chromatic number: the same attained-minimum shape over (p,q)-colourings of an abstract boolean adjacency; a different invariant."
+    },
+    {
+      "qualified": "Extremal.conjectures.D2chr.is_colouring_mixing_threshold",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "is_colouring_mixing_threshold",
+      "note": "an infimum over mixing pairs with NO attainment; a different object."
+    }
+  ]
+}

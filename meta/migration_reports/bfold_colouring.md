@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py bfold_colouring --details /tmp/
 
 - Canonical: `GTBase.bfold_colourings.bfold_colouring`.
 - Baseline: `3bdfdae32824d4762ba8105367f7858a706a02e2`.
-- Scope: 2 helpers, 7 statements, 12 frozen objects, 49 recorded references.
-- Source checks: 144/144 pass; consistent.
+- Scope: 2 helpers, 7 statements, 12 frozen objects, 73 recorded references.
+- Source checks: 154/154 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -23,6 +23,6 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py bfold_colouring --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Excluded distinct variants: `GTMisc.conjectures.U13.weighted_colourable`, `Chromatic.conjectures.XE2.xe2_ab_choosable`, `Chromatic.conjectures.X130.x130_frac_chi_le`, `Extremal.conjectures.D2chr.is_fractional_chromatic`.
+Excluded distinct variants: `GTMisc.conjectures.U13.weighted_colourable`, `Chromatic.conjectures.XE2.xe2_ab_choosable`, `Chromatic.conjectures.X130.x130_frac_chi_le`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/cycle_lengths.v#X204Legacy.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/cycle_lengths.v#X204Legacy.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement`, `extremal-graph-theory/theories/migration/fractional_chromatic.v#Legacy.is_fractional_chromatic`.
