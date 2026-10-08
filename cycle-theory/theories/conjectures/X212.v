@@ -27,6 +27,7 @@
 From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
 Require GTBase.edge_colourings.
+Require GTBase.simple_cuts.
 From Cycle.foundations Require Export connectivity.
 From Cycle.conjectures Require Export U6.
 
@@ -155,7 +156,7 @@ Definition x212_cycle_within (G : sgraph) (S : {set G}) : Prop :=
 
 (** The edge cut of a vertex set: the edges with exactly one end in [S]. *)
 Definition x212_edge_cut (G : sgraph) (S : {set G}) : {set {set G}} :=
-  [set e in E(G) | #|e :&: S| == 1].
+  GTBase.simple_cuts.cut_edges S.
 
 (** Cyclic edge connectivity: no set of fewer than [k] edges separates [G] into
     two sides that both contain a cycle. *)

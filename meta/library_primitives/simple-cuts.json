@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "family": "simple-cuts",
+  "primitive": {
+    "canonical_name": "GTBase.simple_cuts.cut_edges",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "crossing_edges",
+      "edge_connected",
+      "edge_cut"
+    ],
+    "source_definitions": [
+      "Cycle.conjectures.X212.x212_edge_cut",
+      "Packing.conjectures.X47.x47_crossing_edges",
+      "Packing.conjectures.X47.x47_edge_connected"
+    ],
+    "consumers_remaining": 2,
+    "relation": "Set-valued simple cuts: edges of E(G) meeting both S and its complement. Packing X47 uses the same intersection body over the M1 edge alias; Cycle X212 uses the equivalent count-one formula, proved equal on two-element simple edges. X47 cut connectivity is the unguarded forall-nonempty-proper-side lower bound, true for every k at orders 0 and 1; it is not deletion connectivity without its 1 < #|G| guard. Existing common.cut_size is reused through the exact cardinality bridge.",
+    "semantic_classes": {
+      "simple-cut-set": {
+        "members": [
+          "Packing.conjectures.X47.x47_crossing_edges",
+          "Cycle.conjectures.X212.x212_edge_cut"
+        ],
+        "count": 2,
+        "verdict": "equivalent",
+        "note": "Intersection and count-one formulas agree on simple graph edges; no side guard."
+      },
+      "cut-lower-bound": {
+        "members": [
+          "Packing.conjectures.X47.x47_edge_connected"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "note": "No order guard: all nonempty proper cuts have at least k edges; vacuous at orders zero and one."
+      }
+    },
+    "compatibility_theorems": [
+      "Packing.migration.simple_cuts.x47_crossing_edges_compat",
+      "Packing.migration.simple_cuts.x47_edge_connected_compat",
+      "Packing.migration.simple_cuts.tree_decomposition_delta_edge_connected_statement_compat",
+      "Packing.migration.simple_cuts.tree_decomposition_leaf_edge_connected_statement_compat",
+      "Packing.migration.simple_cuts.x47_crossing_edges_original_compat",
+      "Packing.migration.simple_cuts.x47_edge_connected_original_compat",
+      "Packing.migration.simple_cuts.x47_tree_decomposition_original_compat",
+      "Packing.migration.simple_cuts.tree_decomposition_delta_edge_connected_statement_original_compat",
+      "Packing.migration.simple_cuts.tree_decomposition_leaf_edge_connected_statement_original_compat",
+      "Cycle.migration.simple_cuts.x212_edge_cut_compat",
+      "Cycle.migration.simple_cuts.x212_cyclically_edge_connected_compat",
+      "Cycle.migration.simple_cuts.bondy_linear_cycle_cubic_statement_compat",
+      "Cycle.migration.simple_cuts.x212_cyclically_edge_connected_pre_genuine",
+      "Cycle.migration.simple_cuts.x212_cyclically_edge_connected_original_compat",
+      "Cycle.migration.simple_cuts.bondy_linear_cycle_cubic_statement_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.simple_cuts.cut_edgesE",
+      "GTBase.simple_cuts.cut_edges_sub",
+      "GTBase.simple_cuts.cut_edges0",
+      "GTBase.simple_cuts.cut_edgesC",
+      "GTBase.simple_cuts.cut_edgesT",
+      "GTBase.simple_cuts.card_cut_edges",
+      "GTBase.simple_cuts.cut_edges_count1",
+      "GTBase.simple_cuts.cut_connected0",
+      "GTBase.simple_cuts.cut_connected_leq",
+      "GTBase.simple_cuts.cut_connected_small",
+      "GTBase.simple_cuts.connect_crossing",
+      "GTBase.simple_cuts.k_edge_connected_cut"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.connectivity",
+        "GraphTheory.core.mgraph",
+        "GTBase.common"
+      ],
+      "result": "new-local-generic",
+      "candidate": "GTBase.common.cut_size (cardinality bridge)",
+      "note": "Pinned39-module source search retained in coordination tree-edge contract: no public set-valued simple-cut or exact unguarded cut-bound owner; reuse E(G) and common.cut_size. Directed and multigraph edge-object cuts stay separate.",
+      "audited_at": "2026-10-08"
+    },
+    "migration_report": "meta/migration_reports/simple_cuts.md",
+    "migration_spec": "meta/migration_reports/simple_cuts.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_SIMPLE_CUTS.md",
+    "foundation_fidelity": "meta/foundation_fidelity/simple-cuts.json",
+    "downstream_client": "base/theories/examples/simple_cuts.v",
+    "reviewed_by": null
+  }
+}
