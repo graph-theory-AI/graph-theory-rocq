@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "family": "disjoint-union",
+  "primitive": {
+    "canonical_name": "GraphTheory.core.sgraph.sjoin",
+    "owner": "upstream",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "disjoint_union",
+      "disjoint_union_rel"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X66.x66_disjoint_union",
+      "Chromatic.conjectures.X66.x66_disjoint_union_rel",
+      "Digraph.conjectures.X2.x2_disjoint_union",
+      "Digraph.conjectures.X2.x2_disjoint_union_rel"
+    ],
+    "consumers_remaining": 4,
+    "relation": "the disjoint union of two graphs on the sum carrier, each summand keeping its own adjacency and nothing across. Simple graphs: Chromatic X66 x66_disjoint_union_rel/x66_disjoint_union are upstream GraphTheory join_rel/sjoin (despite its name the disjoint union), the relation by conversion and the graph pointwise and by the identity isomorphism; the two constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. Digraphs: Digraph X2 x2_disjoint_union/x2_disjoint_union_rel are Digraph.constructions.digraph_sum digraph_sum/digraph_sum_rel over the existing Finite/HasArc core (no proof fields): the carrier, the relation, every arc and the packaged diGraphType convert. Loops and asymmetric arcs of a summand are kept and either summand may be empty; a join (heroes.djoin, X122 x122_dijoin) is not this construction.",
+    "representations": {
+      "simple-graph": {
+        "canonical_name": "GraphTheory.core.sgraph.sjoin",
+        "relation": "GraphTheory.core.sgraph.join_rel",
+        "owner": "upstream",
+        "members": [
+          "Chromatic.conjectures.X66.x66_disjoint_union",
+          "Chromatic.conjectures.X66.x66_disjoint_union_rel"
+        ],
+        "public_client": "base/theories/examples/disjoint_union.v"
+      },
+      "directed": {
+        "canonical_name": "Digraph.constructions.digraph_sum.digraph_sum",
+        "relation": "Digraph.constructions.digraph_sum.digraph_sum_rel",
+        "owner": "digraph-theory",
+        "module": "digraph-theory/theories/constructions/digraph_sum.v",
+        "members": [
+          "Digraph.conjectures.X2.x2_disjoint_union",
+          "Digraph.conjectures.X2.x2_disjoint_union_rel"
+        ],
+        "public_client": "digraph-theory/theories/examples/disjoint_sums.v"
+      }
+    },
+    "semantic_classes": {
+      "simple-graph-sum": {
+        "members": [
+          "Chromatic.conjectures.X66.x66_disjoint_union",
+          "Chromatic.conjectures.X66.x66_disjoint_union_rel"
+        ],
+        "count": 2,
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.disjoint_union.x66_disjoint_union_compat",
+          "Chromatic.migration.disjoint_union.x66_disjoint_union_rel_compat"
+        ],
+        "note": "upstream join_rel/sjoin on G + H: the relation by conversion, the graph pointwise and by the identity isomorphism; the two opaque constructor proofs frozen with their scripts and related through eq_diso"
+      },
+      "directed-sum": {
+        "members": [
+          "Digraph.conjectures.X2.x2_disjoint_union",
+          "Digraph.conjectures.X2.x2_disjoint_union_rel"
+        ],
+        "count": 2,
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "certificates": [
+          "Digraph.migration.disjoint_union.x2_disjoint_union_compat",
+          "Digraph.migration.disjoint_union.x2_disjoint_union_rel_compat"
+        ],
+        "note": "Digraph.constructions.digraph_sum on D1 + D2 with Finite.on and HasArc.Build: the alias, the relation, the arcs and the packaged diGraphType convert; loops, asymmetric arcs and empty summands kept"
+      }
+    },
+    "distinct_variants": {
+      "Digraph.conjectures.heroes.djoin": "domination join H1 => H2: the same sum carrier with every arc from the left summand to the right one added; a join, not the disjoint union",
+      "Digraph.conjectures.X122.x122_dijoin": "dijoin L -> R: the same sum carrier with every left-to-right arc added and none back; a join, not the disjoint union"
+    },
+    "historical_snapshots": {
+      "digraph-theory/theories/migration/path_vertices.v#X2UnionLegacy.statement": "B1 snapshot: B1 (path-vertices, baseline 9e03072) froze X2's raw subdivision/Maderian chain in the union row but kept the live x2_disjoint_union, which after A28 unfolds to Digraph.constructions.digraph_sum.digraph_sum (the same carrier, arcs and packaging by conversion). Kept unchanged, with B1's certificate and B2's reuse (Digraph.migration.internal_vertices.delta_plus_maderian_disjoint_union_statement_compat); the complete pre-B1, pre-A28 row over B1's raw X2MaderianLegacy.delta_plus_maderian and this family's frozen Section DisjointUnion is Digraph.migration.disjoint_union.X2Original.delta_plus_maderian_disjoint_union_statement, certified by delta_plus_maderian_disjoint_union_statement_original_compat."
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.disjoint_union.good_trees_disjoint_union_good_statement_compat",
+      "Chromatic.migration.disjoint_union.x66_disjoint_union_compat",
+      "Chromatic.migration.disjoint_union.x66_disjoint_union_proofs_compat",
+      "Chromatic.migration.disjoint_union.x66_disjoint_union_rel_compat",
+      "Digraph.migration.disjoint_union.delta_plus_maderian_disjoint_union_statement_compat",
+      "Digraph.migration.disjoint_union.delta_plus_maderian_disjoint_union_statement_original_compat",
+      "Digraph.migration.disjoint_union.x2_disjoint_union_compat",
+      "Digraph.migration.disjoint_union.x2_disjoint_union_rel_compat",
+      "Digraph.migration.path_vertices.contains_subdivision_compat",
+      "Digraph.migration.path_vertices.delta_plus_maderian_compat",
+      "Digraph.migration.path_vertices.mader_delta_plus_bound_compat",
+      "Digraph.migration.path_vertices.x2_path_internal_compat",
+      "Digraph.migration.path_vertices.x2_path_vertices_compat"
+    ],
+    "api_theorems": [
+      "Digraph.constructions.digraph_sum.digraph_sum_arcE",
+      "Digraph.constructions.digraph_sum.digraph_sum_arc_inl",
+      "Digraph.constructions.digraph_sum.digraph_sum_arc_inr",
+      "Digraph.constructions.digraph_sum.digraph_sum_arc_inl_inr",
+      "Digraph.constructions.digraph_sum.digraph_sum_arc_inr_inl",
+      "Digraph.constructions.digraph_sum.card_digraph_sum",
+      "Chromatic.migration.disjoint_union.x66_disjoint_union_diso",
+      "Digraph.migration.disjoint_union.x2_disjoint_union_arc_compat",
+      "Digraph.migration.disjoint_union.x2_disjoint_union_digraph_compat",
+      "Digraph.migration.disjoint_union.x2_disjoint_union_legacy_arcE",
+      "Digraph.migration.disjoint_union.x2_disjoint_union_arcE"
+    ],
+    "public_client": "base/theories/examples/disjoint_union.v",
+    "legacy_baseline": "ec5fb25603796f719fa67cdfeb0bea4ebc928242",
+    "migration_report": "meta/migration_reports/disjoint_union.md",
+    "migration_spec": "meta/migration_reports/disjoint_union.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A28.md",
+    "foundation_fidelity": "meta/foundation_fidelity/disjoint-union.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory core.sgraph (join_rel/sjoin: the disjoint union despite the name; join_rel_sym, join_rel_irrefl, join_disc, sjoin_disconnected) and treewidth (join_is_forest)",
+        "MathComp fintype (sum carrier, card_sum)",
+        "Digraph core and constructions (no directed sum; heroes.djoin and X122 x122_dijoin are joins)",
+        "GTBase and ClassicalLemmas (no disjoint-union construction)"
+      ],
+      "result": "upstream-exact-simple; new-local-directed",
+      "candidate": "GraphTheory.core.sgraph.sjoin; Digraph.constructions.digraph_sum.digraph_sum",
+      "note": "The simple-graph union is upstream sjoin, reused without a duplicate canonical; the directed sum is a focused public Digraph module over the existing HB core (GTBase does not depend on Digraph). Evidence: coordination/evidence/A28-disjoint-union-discovery/ and coordination/evidence/A28-disjoint-union/.",
+      "audited_at": "2026-10-04"
+    },
+    "reviewed_by": null
+  }
+}
