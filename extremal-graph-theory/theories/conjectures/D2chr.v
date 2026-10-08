@@ -39,6 +39,7 @@ From GTBase Require Import edge_colourings.
 From GraphTheory Require Import minor.
 From Extremal.foundations Require Export circular_colouring.
 From mathcomp Require Import all_algebra.
+From GTBase Require Import bfold_colourings.
 Import GRing.Theory Num.Theory.
 
 Set Implicit Arguments.
@@ -59,8 +60,11 @@ Local Open Scope ring_scope.
         rational weights on non-empty connected, pairwise-adjacent branch sets, each vertex
         covered with total weight ≤ 1, maximise the total weight (0/1 weights recover
         a clique minor, so the optimum is had_f ≥ had). *)
+(** Since the bfold-colouring library migration [bfold_colouring] is a transparent alias of
+    [GTBase.bfold_colourings.bfold_colouring] (the same body); the former body is frozen in
+    theories/migration/bfold_colouring.v. *)
 Definition bfold_colouring (G : sgraph) (a b : nat) (f : G -> {set 'I_a}) : Prop :=
-  (forall v, #|f v| = b) /\ (forall x y : G, x -- y -> [disjoint f x & f y]).
+  bfold_colourings.bfold_colouring b f.
 
 Definition is_fractional_chromatic (G : sgraph) (r : rat) : Prop :=
   (exists a b : nat, (0 < b)%N /\ (exists f, @bfold_colouring G a b f) /\ r = a%:Q / b%:Q) /\

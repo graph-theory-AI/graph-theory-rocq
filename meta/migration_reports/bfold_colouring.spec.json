@@ -1,0 +1,277 @@
+{
+  "family": "bfold-colouring",
+  "canonical_name": "GTBase.bfold_colourings.bfold_colouring",
+  "canonical_short_name": "bfold_colouring",
+  "relation": "definitional equality: Extremal D2chr's bfold_colouring and Chromatic X130's x130_bfold_colouring (the same body up to the binder annotation v : G, both unchanged since authoring) are GTBase.bfold_colourings.bfold_colouring b f: every vertex gets a b-element subset of the supplied palette 'I_a and adjacent vertices get disjoint subsets, with no guard (b = 0 and an empty vertex type allowed). The consumer chains stay distinct and are not migrated: X130's x130_frac_chi_le is an existential cross-multiplied natural bound (exists a b f, 0 < b, an (a:b)-colouring and a * q <= p * b; vacuous in the bound for q = 0, every row supplying q > 0) and D2chr's is_fractional_chromatic is an attained rational minimum over colourings with 0 < b.",
+  "baseline_commit": "3bdfdae32824d4762ba8105367f7858a706a02e2",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal"
+  },
+  "certificate_files": [
+    "base/theories/bfold_colourings.v",
+    "chromatic-theory/theories/migration/bfold_colouring.v",
+    "extremal-graph-theory/theories/migration/bfold_colouring.v"
+  ],
+  "extra_certificates": [
+    "GTBase.bfold_colourings.bfold_colouringP",
+    "GTBase.bfold_colourings.bfold_colouring0",
+    "GTBase.bfold_colourings.bfold_colouring_empty",
+    "GTBase.bfold_colourings.bfold_colouring_le",
+    "GTBase.bfold_colourings.bfold_colouring_edge",
+    "Chromatic.migration.bfold_colouring.x130_bfold_colouring_canonical",
+    "Extremal.migration.bfold_colouring.bfold_colouring_canonical"
+  ],
+  "summary": [
+    "bfold-colouring, one family over the new focused module GTBase.bfold_colourings (no conjecture import, no base re-export): the (a:b)-fold colouring bfold_colouring b f of a supplied map f : G -> {set 'I_a}, the shared body of two local sources in two area packages (Chromatic X130, Extremal D2chr).",
+    "Its exact contract, corners included: #|f v| = b for every vertex and disjoint sets on adjacent vertices; b = 0 is allowed (the constant empty map, bfold_colouring0), an empty vertex type makes every map a colouring (bfold_colouring_empty), a vertex forces b <= a (bfold_colouring_le), an edge forces 2 * b <= a (bfold_colouring_edge); bfold_colouringP is the finite Boolean form. No positivity, no connectedness, no ratio.",
+    "Kept distinct and not migrated: X130's x130_frac_chi_le (a bound, not a minimum) and D2chr's is_fractional_chromatic (an attained rational minimum); both are frozen here as chain members over the frozen sources. The Hadwiger vocabulary of D2chr is outside this family and applied live.",
+    "Rows: X130, X131 (its literal duplicate), X149, X173, X204, X218 (the K_r-free degenerate row) and D2chr's fractional Hadwiger row, every guard and quantifier in place. X204Original composes B15's frozen cycle-length exclusion (Chromatic.migration.cycle_lengths) with this family's frozen chain."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X130.x130_bfold_colouring",
+      "path": "chromatic-theory/theories/conjectures/X130.v",
+      "name": "x130_bfold_colouring",
+      "frozen_path": "chromatic-theory/theories/migration/bfold_colouring.v",
+      "frozen": "Legacy.x130_bfold_colouring",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.bfold_colouring.x130_bfold_colouring_compat",
+      "live_unfolds_to": "bfold_colouring b f"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X130.x130_frac_chi_le",
+      "path": "chromatic-theory/theories/conjectures/X130.v",
+      "name": "x130_frac_chi_le",
+      "frozen_path": "chromatic-theory/theories/migration/bfold_colouring.v",
+      "frozen": "Legacy.x130_frac_chi_le",
+      "substitutions": {
+        "x130_bfold_colouring": "Legacy.x130_bfold_colouring"
+      },
+      "certificate": "Chromatic.migration.bfold_colouring.x130_frac_chi_le_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X130.dvorak_mnich_planar_girth5_fractional_chromatic_statement",
+      "path": "chromatic-theory/theories/conjectures/X130.v",
+      "name": "dvorak_mnich_planar_girth5_fractional_chromatic_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bfold_colouring.v",
+      "frozen": "X130Legacy.dvorak_mnich_planar_girth5_fractional_chromatic_statement",
+      "substitutions": {
+        "x130_frac_chi_le": "Legacy.x130_frac_chi_le"
+      },
+      "certificate": "Chromatic.migration.bfold_colouring.dvorak_mnich_planar_girth5_fractional_chromatic_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X131.dvorak_mnich_planar_girth5_fractional_chromatic_duplicate_statement",
+      "path": "chromatic-theory/theories/conjectures/X131.v",
+      "name": "dvorak_mnich_planar_girth5_fractional_chromatic_duplicate_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bfold_colouring.v",
+      "frozen": "X131Legacy.dvorak_mnich_planar_girth5_fractional_chromatic_duplicate_statement",
+      "substitutions": {
+        "dvorak_mnich_planar_girth5_fractional_chromatic_statement": "X130Legacy.dvorak_mnich_planar_girth5_fractional_chromatic_statement"
+      },
+      "certificate": "Chromatic.migration.bfold_colouring.dvorak_mnich_planar_girth5_fractional_chromatic_duplicate_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X149.gimbel_kundgen_li_thomassen_four_chromatic_planar_fractional_statement",
+      "path": "chromatic-theory/theories/conjectures/X149.v",
+      "name": "gimbel_kundgen_li_thomassen_four_chromatic_planar_fractional_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bfold_colouring.v",
+      "frozen": "X149Legacy.gimbel_kundgen_li_thomassen_four_chromatic_planar_fractional_statement",
+      "substitutions": {
+        "x130_frac_chi_le": "Legacy.x130_frac_chi_le"
+      },
+      "certificate": "Chromatic.migration.bfold_colouring.gimbel_kundgen_li_thomassen_four_chromatic_planar_fractional_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X173.planar_triangle_free_fractional_chromatic_bound_statement",
+      "path": "chromatic-theory/theories/conjectures/X173.v",
+      "name": "planar_triangle_free_fractional_chromatic_bound_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bfold_colouring.v",
+      "frozen": "X173Legacy.planar_triangle_free_fractional_chromatic_bound_statement",
+      "substitutions": {
+        "x130_frac_chi_le": "Legacy.x130_frac_chi_le"
+      },
+      "certificate": "Chromatic.migration.bfold_colouring.planar_triangle_free_fractional_chromatic_bound_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X204.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
+      "path": "chromatic-theory/theories/conjectures/X204.v",
+      "name": "planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bfold_colouring.v",
+      "frozen": "X204Legacy.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
+      "substitutions": {
+        "x130_frac_chi_le": "Legacy.x130_frac_chi_le"
+      },
+      "certificate": "Chromatic.migration.bfold_colouring.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X204.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
+      "path": "chromatic-theory/theories/conjectures/X204.v",
+      "name": "planar_no_4_5_cycles_fractional_below_eleven_thirds_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bfold_colouring.v",
+      "frozen": "X204Original.statement",
+      "substitutions": {
+        "planar_no_4_5_cycles_fractional_below_eleven_thirds_statement": "statement",
+        "x204_no_cycle_length": "CL.Legacy.x204_no_cycle_length",
+        "x130_frac_chi_le": "Legacy.x130_frac_chi_le"
+      },
+      "certificate": "Chromatic.migration.bfold_colouring.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X218.kr_free_degenerate_fractional_chromatic_sublinear_statement",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "kr_free_degenerate_fractional_chromatic_sublinear_statement",
+      "frozen_path": "chromatic-theory/theories/migration/bfold_colouring.v",
+      "frozen": "X218Legacy.kr_free_degenerate_fractional_chromatic_sublinear_statement",
+      "substitutions": {
+        "x130_frac_chi_le": "Legacy.x130_frac_chi_le"
+      },
+      "certificate": "Chromatic.migration.bfold_colouring.kr_free_degenerate_fractional_chromatic_sublinear_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2chr.bfold_colouring",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "bfold_colouring",
+      "frozen_path": "extremal-graph-theory/theories/migration/bfold_colouring.v",
+      "frozen": "Legacy.bfold_colouring",
+      "substitutions": {},
+      "certificate": "Extremal.migration.bfold_colouring.bfold_colouring_compat",
+      "live_unfolds_to": "bfold_colourings.bfold_colouring b f"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Extremal.conjectures.D2chr.is_fractional_chromatic",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "is_fractional_chromatic",
+      "frozen_path": "extremal-graph-theory/theories/migration/bfold_colouring.v",
+      "frozen": "Legacy.is_fractional_chromatic",
+      "substitutions": {
+        "bfold_colouring": "Legacy.bfold_colouring"
+      },
+      "certificate": "Extremal.migration.bfold_colouring.is_fractional_chromatic_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2chr.fractional_hadwiger_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "fractional_hadwiger_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/bfold_colouring.v",
+      "frozen": "D2chrLegacy.fractional_hadwiger_statement",
+      "substitutions": {
+        "is_fractional_chromatic": "Legacy.is_fractional_chromatic"
+      },
+      "certificate": "Extremal.migration.bfold_colouring.fractional_hadwiger_statement_compat",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/cycle_lengths.v#X204Legacy.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement": "Earlier-family snapshot (B15, cycle lengths, baseline 4b63976): B15 froze only X204's cycle-length exclusion x204_no_cycle_length and kept the fractional chain live by design, so this copy still applies the live x130_frac_chi_le, which since bfold-colouring reaches GTBase.bfold_colourings.bfold_colouring through the alias x130_bfold_colouring (the same body by conversion). Kept unchanged; B15's certificate stays true. The complete pre-B15, pre-bfold-colouring row is Chromatic.migration.bfold_colouring.X204Original.statement (B15's frozen exclusion and this family's frozen chain), certified by planar_no_4_5_cycles_fractional_below_eleven_thirds_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "atlas/theories/foundations/fractional.v",
+      "name": "bfold_colouring",
+      "note": "Atlas fractional colouring foundation: colouring_feas, frac_chromatic_exists, bfold_n_alpha and frac_chi_n_alpha use D2chr's bfold_colouring / is_fractional_chromatic through the unchanged D2chr names; their headers are unchanged and their proofs recompile unchanged. Its fractional Hadwiger dependency on D2chr is a later distinct family, so this is not a removal of the Atlas.fractional release barrier."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
+      "name": "bfold_colouring",
+      "note": "Grounding consumers (bfold_colouring_trivial, is_fractional_chromatic_unique, is_fractional_chromatic_K2) and the historical old_* defect witnesses are unchanged and recompile unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X218.v",
+      "name": "x130_frac_chi_le",
+      "note": "Grounding consumers x218_frac_chi_K1 and x218_not_frac_chi_K2_zero are unchanged and recompile unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "fractional_hadwiger_statement",
+      "note": "Atlas implication edges cite D2chr's fractional Hadwiger row by name; the row is unchanged (certified here) and the edges recompile unchanged."
+    },
+    {
+      "path": "atlas/theories/foundations/fractional.v",
+      "name": "is_fractional_chromatic",
+      "note": "Atlas fractional foundation uses D2chr's attained rational minimum (frac_chi_le_chi, frac_chromatic_exists, frac_chi_n_alpha) by its unchanged name; headers and proofs unchanged. Not a migration of that notion and not a removal of the Atlas.fractional barrier."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X131.v",
+      "name": "dvorak_mnich_planar_girth5_fractional_chromatic_statement",
+      "note": "X131's duplicate row is literally X130's statement; frozen here as X131Legacy over X130Legacy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X149.v",
+      "name": "x130_frac_chi_le",
+      "note": "X149's row applies the chain with q = 1; frozen here as X149Legacy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X173.v",
+      "name": "x130_frac_chi_le",
+      "note": "X173's row applies the chain with q = #|G|.+1; frozen here as X173Legacy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X204.v",
+      "name": "x130_frac_chi_le",
+      "note": "X204's row applies the chain under its own 0 < q; frozen here as X204Legacy and, over B15's frozen exclusion, X204Original."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "name": "x130_frac_chi_le",
+      "note": "X218's K_r-free degenerate row applies the chain under its own 0 < q; frozen here as X218Legacy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X218.v",
+      "name": "kr_free_degenerate_fractional_chromatic_sublinear_statement",
+      "note": "Grounding of X218 cites the unchanged row by name and recompiles unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
+      "name": "is_fractional_chromatic",
+      "note": "Grounding consumers is_fractional_chromatic_unique, is_fractional_chromatic_K2 and the D2chr row witnesses use the unchanged chain name and recompile unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTMisc.conjectures.U13.weighted_colourable",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "weighted_colourable",
+      "note": "vertex-weighted multicolouring: #|f v| = p v for a weight p : G -> nat (the uniform b is the special case p = fun=> b), existentially quantified over f with palette 'I_k; a generalisation, not this contract"
+    },
+    {
+      "qualified": "Chromatic.conjectures.XE2.xe2_ab_choosable",
+      "path": "chromatic-theory/theories/conjectures/XE2.v",
+      "name": "xe2_ab_choosable",
+      "note": "(a:b)-choosability: for every list assignment L with #|L v| = a over any finite colour type, a choice S v of b colours from L v, disjoint on adjacent vertices; a list version, not this supplied-palette contract"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X130.x130_frac_chi_le",
+      "path": "chromatic-theory/theories/conjectures/X130.v",
+      "name": "x130_frac_chi_le",
+      "note": "consumer chain kept distinct: an existential cross-multiplied natural bound on the fractional chromatic number (frozen here as a chain member, not migrated)"
+    },
+    {
+      "qualified": "Extremal.conjectures.D2chr.is_fractional_chromatic",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "is_fractional_chromatic",
+      "note": "consumer chain kept distinct: an attained rational minimum (frozen here as a chain member, not migrated)"
+    }
+  ]
+}

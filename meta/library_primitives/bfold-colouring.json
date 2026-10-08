@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "family": "bfold-colouring",
+  "primitive": {
+    "canonical_name": "GTBase.bfold_colourings.bfold_colouring",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "bfold_colouring"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X130.x130_bfold_colouring",
+      "Extremal.conjectures.D2chr.bfold_colouring"
+    ],
+    "consumers_remaining": 2,
+    "relation": "definitional equality: Chromatic X130's x130_bfold_colouring and Extremal D2chr's bfold_colouring (the same body up to the binder annotation v : G, both unchanged since authoring) are GTBase.bfold_colourings.bfold_colouring b f: every vertex v gets a b-element subset f v of the supplied palette 'I_a and adjacent vertices get disjoint subsets, with no guard (b = 0 and an empty vertex type allowed; a vertex forces b <= a and an edge 2 * b <= a). The fractional-chromatic consumers stay distinct and are not migrated: X130's x130_frac_chi_le is an existential cross-multiplied natural bound and D2chr's is_fractional_chromatic an attained rational minimum, each with its own 0 < b.",
+    "semantic_classes": {
+      "uniform-b-fold-colouring": {
+        "members": [
+          "Chromatic.conjectures.X130.x130_bfold_colouring",
+          "Extremal.conjectures.D2chr.bfold_colouring"
+        ],
+        "count": 2,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.bfold_colouring.x130_bfold_colouring_compat",
+          "Extremal.migration.bfold_colouring.bfold_colouring_compat"
+        ],
+        "note": "bfold_colouring b f over a supplied f : G -> {set 'I_a}: #|f v| = b for every vertex and [disjoint f x & f y] on every edge; bfold_colouringP gives the finite Boolean form."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.bfold_colouring.dvorak_mnich_planar_girth5_fractional_chromatic_duplicate_statement_compat",
+      "Chromatic.migration.bfold_colouring.dvorak_mnich_planar_girth5_fractional_chromatic_statement_compat",
+      "Chromatic.migration.bfold_colouring.gimbel_kundgen_li_thomassen_four_chromatic_planar_fractional_statement_compat",
+      "Chromatic.migration.bfold_colouring.kr_free_degenerate_fractional_chromatic_sublinear_statement_compat",
+      "Chromatic.migration.bfold_colouring.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement_compat",
+      "Chromatic.migration.bfold_colouring.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement_original_compat",
+      "Chromatic.migration.bfold_colouring.planar_triangle_free_fractional_chromatic_bound_statement_compat",
+      "Chromatic.migration.bfold_colouring.x130_bfold_colouring_canonical",
+      "Chromatic.migration.bfold_colouring.x130_bfold_colouring_compat",
+      "Chromatic.migration.bfold_colouring.x130_frac_chi_le_compat",
+      "Extremal.migration.bfold_colouring.bfold_colouring_canonical",
+      "Extremal.migration.bfold_colouring.bfold_colouring_compat",
+      "Extremal.migration.bfold_colouring.fractional_hadwiger_statement_compat",
+      "Extremal.migration.bfold_colouring.is_fractional_chromatic_compat"
+    ],
+    "api_theorems": [
+      "GTBase.bfold_colourings.bfold_colouringP",
+      "GTBase.bfold_colourings.bfold_colouring0",
+      "GTBase.bfold_colourings.bfold_colouring_empty",
+      "GTBase.bfold_colourings.bfold_colouring_le",
+      "GTBase.bfold_colourings.bfold_colouring_edge"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.coloring",
+        "GraphTheory.core.sgraph",
+        "mathcomp.boot.finset"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "The pinned GraphTheory (core/coloring.v: cliques and the clique number) and MathComp have no b-fold, multicolouring or fractional colouring notion; a search of all 39 pinned GraphTheory sources for fractional / b-fold / multicolouring finds none. Ownership rule 3: the body is used by two area packages (Chromatic X130, Extremal D2chr, the latter also consumed by Atlas.fractional), so it is placed in GTBase, in a focused module without conjecture imports or base re-export.",
+      "audited_at": "2026-10-08"
+    },
+    "migration_report": "meta/migration_reports/bfold_colouring.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/bfold_colouring.spec.json",
+    "downstream_client": "base/theories/examples/bfold_colourings.v",
+    "foundation_fidelity": "meta/foundation_fidelity/bfold-colouring.json"
+  }
+}
