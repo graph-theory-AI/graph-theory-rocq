@@ -41,6 +41,7 @@ From Extremal.foundations Require Export circular_colouring.
 From mathcomp Require Import all_algebra.
 From GTBase Require Import bfold_colourings.
 From Extremal.foundations Require Import fractional_colouring.
+From Extremal.foundations Require Import fractional_hadwiger.
 Import GRing.Theory Num.Theory.
 
 Set Implicit Arguments.
@@ -76,18 +77,16 @@ Definition is_fractional_chromatic (G : sgraph) (r : rat) : Prop :=
 Definition is_hadwiger (G : sgraph) (h : nat) : Prop :=
   minor G 'K_h /\ (forall h', minor G 'K_h' -> (h' <= h)%N).
 
+(** Since the fractional-clique-minor library migration [frac_clique_minor] and [is_fractional_hadwiger] are
+    transparent aliases of [Extremal.foundations.fractional_hadwiger] (the same bodies: the clique-minor LP as
+    repaired in wave E10, and its attained maximum); the former bodies are frozen in
+    theories/migration/fractional_clique_minor.v. *)
 Definition frac_clique_minor (G : sgraph) (n : nat)
     (B : 'I_n -> {set G}) (w : 'I_n -> rat) (r : rat) : Prop :=
-  [/\ (forall i, 0 <= w i),
-      (forall i, B i != set0 /\ connected (B i)),
-      (forall i j, i != j -> exists x y : G, [/\ x \in B i, y \in B j & x -- y]),
-      (forall v : G, (\sum_(i | v \in B i) w i <= 1)%R)
-    & r = \sum_i w i].
+  fractional_hadwiger.frac_clique_minor B w r.
 
 Definition is_fractional_hadwiger (G : sgraph) (r : rat) : Prop :=
-  (exists (n : nat) (B : 'I_n -> {set G}) (w : 'I_n -> rat), frac_clique_minor B w r) /\
-  (forall (n : nat) (B : 'I_n -> {set G}) (w : 'I_n -> rat) (r' : rat),
-     frac_clique_minor B w r' -> r' <= r).
+  fractional_hadwiger.is_fractional_hadwiger G r.
 
 (** Corpus row: opg:fractional_hadwiger
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/fractional_hadwiger/

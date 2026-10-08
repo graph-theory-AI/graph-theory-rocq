@@ -186,13 +186,14 @@
   ],
   "known_stale_snapshots": {
     "chromatic-theory/theories/migration/cycle_lengths.v#X204Legacy.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement": "Earlier-family snapshot (B15, cycle lengths, baseline 4b63976): B15 froze only X204's cycle-length exclusion x204_no_cycle_length and kept the fractional chain live by design, so this copy still applies the live x130_frac_chi_le, which since bfold-colouring reaches GTBase.bfold_colourings.bfold_colouring through the alias x130_bfold_colouring (the same body by conversion). Kept unchanged; B15's certificate stays true. The complete pre-B15, pre-bfold-colouring row is Chromatic.migration.bfold_colouring.X204Original.statement (B15's frozen exclusion and this family's frozen chain), certified by planar_no_4_5_cycles_fractional_below_eleven_thirds_statement_original_compat.",
-    "extremal-graph-theory/theories/migration/fractional_chromatic.v#Legacy.is_fractional_chromatic": "Later-family snapshot (fractional-chromatic, baseline 9e83cd85): fractional-chromatic froze D2chr's is_fractional_chromatic at its baseline, where bfold_colouring had already been migrated by this family, so this copy applies that live (migrated) bfold_colouring by design. The complete chain at its original body stays this family's Legacy.is_fractional_chromatic over Legacy.bfold_colouring (3bdfdae), certified by is_fractional_chromatic_compat; fractional-chromatic's D2chrOriginal composes it."
+    "extremal-graph-theory/theories/migration/fractional_chromatic.v#Legacy.is_fractional_chromatic": "Later-family snapshot (fractional-chromatic, baseline 9e83cd85): fractional-chromatic froze D2chr's is_fractional_chromatic at its baseline, where bfold_colouring had already been migrated by this family, so this copy applies that live (migrated) bfold_colouring by design. The complete chain at its original body stays this family's Legacy.is_fractional_chromatic over Legacy.bfold_colouring (3bdfdae), certified by is_fractional_chromatic_compat; fractional-chromatic's D2chrOriginal composes it.",
+    "extremal-graph-theory/theories/migration/fractional_clique_minor.v#D2chrLegacy.fractional_hadwiger_statement": "Later-family snapshot (fractional-clique-minor, baseline 95ac06eb): fractional-clique-minor froze the fractional Hadwiger row at its baseline, where is_fractional_chromatic (this family's chain) had been migrated by fractional-chromatic, so this copy applies the live is_fractional_chromatic by design. The chain at its original body stays this family's Legacy.is_fractional_chromatic over Legacy.bfold_colouring (3bdfdae); fractional-clique-minor's D2chrOriginal composes it."
   },
   "cross_module_consumers": [
     {
       "path": "atlas/theories/foundations/fractional.v",
       "name": "bfold_colouring",
-      "note": "Atlas fractional colouring foundation: colouring_feas, frac_chromatic_exists, bfold_n_alpha and frac_chi_n_alpha use D2chr's bfold_colouring / is_fractional_chromatic through the unchanged D2chr names; their headers are unchanged and their proofs recompile unchanged. Its fractional Hadwiger dependency on D2chr is a later distinct family, so this is not a removal of the Atlas.fractional release barrier."
+      "note": "Atlas fractional colouring foundation: colouring_feas, frac_chromatic_exists, bfold_n_alpha and frac_chi_n_alpha use D2chr's bfold_colouring / is_fractional_chromatic through the unchanged D2chr names; their headers are unchanged and their proofs recompile unchanged. Its fractional Hadwiger dependency on D2chr is a later distinct family, so this is not a removal of the Atlas.fractional release barrier. Since the later fractional-clique-minor family (2026-10-08) Atlas.foundations.fractional imports GTBase.bfold_colourings and Extremal.foundations.fractional_colouring (and fractional_hadwiger) instead of D2chr, so these are the canonical names (a lexical match on the shared short name); every Atlas type and proof is unchanged."
     },
     {
       "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
@@ -212,7 +213,7 @@
     {
       "path": "atlas/theories/foundations/fractional.v",
       "name": "is_fractional_chromatic",
-      "note": "Atlas fractional foundation uses D2chr's attained rational minimum (frac_chi_le_chi, frac_chromatic_exists, frac_chi_n_alpha) by its unchanged name; headers and proofs unchanged. Not a migration of that notion and not a removal of the Atlas.fractional barrier."
+      "note": "Atlas fractional foundation uses D2chr's attained rational minimum (frac_chi_le_chi, frac_chromatic_exists, frac_chi_n_alpha) by its unchanged name; headers and proofs unchanged. Not a migration of that notion and not a removal of the Atlas.fractional barrier. Since the later fractional-clique-minor family (2026-10-08) Atlas.foundations.fractional imports GTBase.bfold_colourings and Extremal.foundations.fractional_colouring (and fractional_hadwiger) instead of D2chr, so these are the canonical names (a lexical match on the shared short name); every Atlas type and proof is unchanged."
     },
     {
       "path": "chromatic-theory/theories/conjectures/X131.v",

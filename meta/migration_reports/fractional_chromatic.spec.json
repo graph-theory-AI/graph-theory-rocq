@@ -27,7 +27,8 @@
     "Baseline: the accepted bfold-colouring candidate 9e83cd85, where D2chr's bfold_colouring is already bfold's alias of GTBase.bfold_colourings.bfold_colouring.",
     "Row: fractional_hadwiger_statement (opg) with its 0 < #|G| guard; is_hadwiger (integer Hadwiger number) and is_fractional_hadwiger (the clique-minor LP, a later separate family) stay live and unchanged.",
     "Deepest Original: bfold-colouring's frozen chain at 3bdfdae (Legacy.is_fractional_chromatic over Legacy.bfold_colouring, unchanged since 818a76c), certified by bfold's own row certificate; no earlier family froze the row before bfold.",
-    "Atlas.foundations.fractional and implications_A1 are unchanged; the Atlas public boundary closes only with the later fractional clique-minor family."
+    "Atlas.foundations.fractional and implications_A1 are unchanged; the Atlas public boundary closes only with the later fractional clique-minor family.",
+    "Later-family note (2026-10-08, fractional-clique-minor): the clique-minor LP frac_clique_minor and is_fractional_hadwiger, applied live here, are migrated by the later family fractional-clique-minor (Extremal.foundations.fractional_hadwiger, certified in extremal-graph-theory/theories/migration/fractional_clique_minor.v). Atlas.foundations.fractional now imports only public modules, which closes the Atlas.fractional release barrier; this family's frozen objects, certificates and baseline are unchanged."
   ],
   "frozen": [
     {
@@ -93,7 +94,9 @@
       "corpus": "opg"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/fractional_clique_minor.v#D2chrLegacy.fractional_hadwiger_statement": "Later-family snapshot (fractional-clique-minor, baseline 95ac06eb): fractional-clique-minor froze the fractional Hadwiger row at its baseline, where is_fractional_chromatic had already been migrated by this family, so this copy applies that live (migrated) is_fractional_chromatic by design. The row at its valid original bodies is fractional-clique-minor's D2chrOriginal.statement (bfold's frozen chi_f chain and its own frozen is_fractional_hadwiger), certified through this family's fractional_hadwiger_statement_original_compat."
+  },
   "cross_module_consumers": [
     {
       "path": "atlas/theories/conjectures/implications_A1.v",
@@ -103,7 +106,7 @@
     {
       "path": "atlas/theories/foundations/fractional.v",
       "name": "is_fractional_chromatic",
-      "note": "Atlas fractional foundation: frac_chi_le_chi, frac_chromatic_exists and frac_chi_n_alpha use D2chr's is_fractional_chromatic through the unchanged D2chr name (now the alias); headers and proofs unchanged. The Atlas import of D2chr and grounding_D2chr stays until the later fractional clique-minor family, so this family does not remove the Atlas.fractional release barrier."
+      "note": "Atlas fractional foundation: frac_chi_le_chi, frac_chromatic_exists and frac_chi_n_alpha use D2chr's is_fractional_chromatic through the unchanged D2chr name (now the alias); headers and proofs unchanged. The Atlas import of D2chr and grounding_D2chr stays until the later fractional clique-minor family, so this family does not remove the Atlas.fractional release barrier. Since the later fractional-clique-minor family (2026-10-08) Atlas.foundations.fractional imports GTBase.bfold_colourings and Extremal.foundations.fractional_colouring (and fractional_hadwiger) instead of D2chr, so these are the canonical names (a lexical match on the shared short name); every Atlas type and proof is unchanged."
     },
     {
       "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
