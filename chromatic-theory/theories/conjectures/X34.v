@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X34 -- v2 odd-degree planar linear arboricity row *)
 
 From GTBase Require Export base.
+Require GTBase.edge_colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -11,23 +12,27 @@ Unset Printing Implicit Defensive.
 Definition x34_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.
 
+(** Since library migration D12 the colour class [i] of [col] is
+    [GTBase.edge_colourings.edge_colour_class col (pred1 i)]: same host carrier,
+    adjacency [(x -- y) && (col [set x; y] == i)]; the original declarations are
+    frozen in migration/edge_colour_class.v. *)
 Definition x34_edge_colour_rel
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : rel G :=
-  fun x y => (x -- y) && (col [set x; y] == i).
+  GTBase.edge_colourings.edge_colour_class_rel col (pred1 i).
 
 Lemma x34_edge_colour_sym
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) :
   symmetric (x34_edge_colour_rel col i).
-Proof. by move=> x y; rewrite /x34_edge_colour_rel sg_sym setUC. Qed.
+Proof. exact: GTBase.edge_colourings.edge_colour_class_sym. Qed.
 
 Lemma x34_edge_colour_irrefl
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) :
   irreflexive (x34_edge_colour_rel col i).
-Proof. by move=> x; rewrite /x34_edge_colour_rel sg_irrefl. Qed.
+Proof. exact: GTBase.edge_colourings.edge_colour_class_irrefl. Qed.
 
 Definition x34_colour_graph
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : sgraph :=
-  SGraph (x34_edge_colour_sym col i) (x34_edge_colour_irrefl col i).
+  GTBase.edge_colourings.edge_colour_class col (pred1 i).
 
 Definition x34_linear_forest_colour
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : Prop :=
