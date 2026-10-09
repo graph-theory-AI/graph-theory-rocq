@@ -116,7 +116,7 @@ Definition majority_3col_tournament_statement : Prop :=
   forall T : tournament, exists col : T -> 'I_3, majority_col col.
 
 (** A digraph is EULERIAN when in-degree equals out-degree at every vertex. *)
-Definition indeg (D : diGraphType) (v : D) : nat := #|[set u | u --> v]|.
+Definition indeg (D : diGraphType) (v : D) : nat := degree_balance.indeg v.
 Definition eulerian (D : diGraphType) : bool :=
   degree_balance.balancedb D.
 

@@ -21,6 +21,7 @@
 From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude digraph oriented dipath strong.
+From Digraph.foundations Require neighbourhoods degree_balance.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -32,20 +33,23 @@ Section Degrees.
 Variable D : diGraphType.
 Implicit Types (v w : D).
 
-Definition Nout v : {set D} := [set w | v --> w].
-Definition Nin  v : {set D} := [set u | u --> v].
+(** Out- and in-neighbourhoods: the public [Digraph.foundations.neighbourhoods] ones (family
+    directed-neighbourhood; transparent aliases). *)
+Definition Nout v : {set D} := neighbourhoods.Nout v.
+Definition Nin  v : {set D} := neighbourhoods.Nin v.
 
-(** In-degree (companion of [outdeg], which is [#|Nout v|] by definition). *)
-Definition indeg v : nat := #|Nin v|.
+(** In-degree (companion of [outdeg], which is [#|Nout v|] by definition): the canonical
+    [Digraph.foundations.degree_balance.indeg] (transparent alias). *)
+Definition indeg v : nat := degree_balance.indeg v.
 
 (** Second out-neighbourhood: vertices at directed distance exactly two from [v]
     (an out-neighbour of an out-neighbour, distinct from [v] and not itself an
-    out-neighbour). *)
-Definition Nout2 v : {set D} :=
-  [set w | [&& w != v, w \notin Nout v & [exists u, (u \in Nout v) && (u --> w)]]].
+    out-neighbour); the public [neighbourhoods.Nout2] (transparent alias). *)
+Definition Nout2 v : {set D} := neighbourhoods.Nout2 v.
 
-(** Diregular of degree [d]: every vertex has in-degree and out-degree exactly [d]. *)
-Definition diregular (d : nat) : bool := [forall v, (outdeg v == d) && (indeg v == d)].
+(** Diregular of degree [d]: every vertex has in-degree and out-degree exactly [d]; the public
+    [degree_balance.diregular] (transparent alias). *)
+Definition diregular (d : nat) : bool := degree_balance.diregular D d.
 
 End Degrees.
 
