@@ -274,8 +274,9 @@ End Grounding.
     ([card_edges_edge_colour_class_split]); [predT] keeps every edge
     ([edge_colour_class_predT]), [pred0] none ([edges_edge_colour_class_pred0]);
     an edge lies in the class of its own colour and no other
-    ([edges_edge_colour_class1]), so a constant colouring has one class
-    ([edges_edge_colour_class_const]).  A simple graph on the same vertex type
+    ([edges_edge_colour_class1]), so under a constant colouring only the class
+    of the chosen colour can be nonempty, and an edgeless host has no nonempty
+    class at all ([edges_edge_colour_class_const]).  A simple graph on the same vertex type
     whose adjacency agrees pointwise with [edge_colour_class_rel col p] is
     isomorphic to [edge_colour_class col p] through the identity
     ([edge_colour_class_eq_diso], [edge_colour_class_eq_disoE]).  No guard: empty
@@ -378,7 +379,8 @@ Lemma edges_edge_colour_class1 (G : sgraph) (C : eqType) (col : {set G} -> C) (c
   e \in E(G) -> (e \in E(edge_colour_class col (pred1 c))) = (col e == c).
 Proof. by move=> eG; rewrite edges_edge_colour_class inE eG. Qed.
 
-(** A constant colouring has a single nonempty class. *)
+(** Under a constant colouring only the class of the chosen colour can be
+    nonempty (it is [E(G)], empty too when the host is edgeless). *)
 Lemma edges_edge_colour_class_const (G : sgraph) (C : eqType) (c d : C) :
   E(edge_colour_class (fun _ : {set G} => c) (pred1 d)) = if c == d then E(G) else set0.
 Proof.
