@@ -76,7 +76,7 @@
       ],
       "result": "no-direct-candidate",
       "candidate": "GraphTheory.sgraph.is_tree",
-      "note": "coq-graph-theory 0.9.7 has is_forest, is_tree S := is_forest S /\\ connected S, the forest record, sunit, 'K_n and 'K_n,m, but no path-graph or pathwidth predicate; Delta is GTBase.base's maximum degree. GTBase.path_trees imports base (which owns Delta) and is not re-exported, avoiding the base/walks_paths cycle. Concrete ordinal path constructors (Hom U3 path_graph, Packing X18/X226), linear forests (forests, not trees: X212, X34, X23, X74, digraph path_fas), the sequence/multigraph path contracts and the tree-decomposition index trees stay separate. Legacy bodies and per-row certificates: meta/migration_reports/path_tree.md.",
+      "note": "coq-graph-theory 0.9.7 has is_forest, is_tree S := is_forest S /\\ connected S, the forest record, sunit, 'K_n and 'K_n,m, but no path-graph or pathwidth predicate; Delta is GTBase.base's maximum degree. GTBase.path_trees imports base (which owns Delta) and is not re-exported, avoiding the base/walks_paths cycle. Concrete ordinal path constructors (Hom U3 path_graph, Packing X18/X226), the sequence/multigraph path contracts and the tree-decomposition index trees stay separate. Legacy bodies and per-row certificates: meta/migration_reports/path_tree.md. Linear forests (forests, not trees) are GTBase.path_trees.linear_forest in the same module since D14 (family linear-forest: the X34/X212/X23 colour-class aliases; the X74 and digraph path_fas degree forms are later classes of that owner), distinct from path_tree: path_tree T <-> linear_forest T /\\ connected [set: T].",
       "audited_at": "2026-10-03"
     },
     "migration_report": "meta/migration_reports/path_tree.md",
