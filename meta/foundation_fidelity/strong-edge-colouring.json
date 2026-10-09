@@ -1,0 +1,37 @@
+{
+ "schema_version": 1,
+ "family": "strong-edge-colouring",
+ "modules": {
+  "Chromatic.foundations.strong_pair_palettes": {
+   "path": "chromatic-theory/theories/foundations/strong_pair_palettes.v",
+   "overrides": {
+    "distinct_edge_pairs": {
+     "verdict": "FAITHFUL",
+     "note": "distinct_edge_pairs x y u v: the unordered pairs {x, y} and {u, v} differ (neither orientation matches)."
+    },
+    "near_edge_pairs": {
+     "verdict": "FAITHFUL",
+     "note": "near_edge_pairs x y u v: a shared vertex or an adjacent pair of endpoints, the eight disjuncts in order."
+    },
+    "strong_pair_colourable": {
+     "verdict": "FAITHFUL",
+     "note": "strong_pair_colourable G k: a symmetric map on all ordered vertex pairs into 'I_k separating two host edges whose pairs are distinct and near; total, so k = 0 only on the empty host; monotone in k."
+    }
+   },
+   "machine_evidence": [
+    "distinct_edge_pairs_refl",
+    "distinct_edge_pairs_flip",
+    "distinct_edge_pairsC",
+    "near_edge_pairs_refl",
+    "near_edge_pairsC",
+    "near_edge_pairs_share",
+    "strong_pair_colourable_mono",
+    "strong_pair_colourable0",
+    "strong_pair_colourable_card0",
+    "strong_pair_colourable_gt0",
+    "strong_pair_colourable_edgeless",
+    "strong_pair_colourable_two"
+   ]
+  }
+ }
+}
