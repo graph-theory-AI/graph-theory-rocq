@@ -19,6 +19,8 @@ theories/foundations/choice_number.v
 # edge_colourings.v: K_n as a loopless multigraph, line-graph choosability ->
 # edge-choosability, and chi'(K_n) <= n-1 for even n (round robin) (X219 e039 edge).
 theories/foundations/edge_colourings.v
+theories/foundations/strong_pair_palettes.v
+theories/examples/strong_pair_palettes.v
 # partial_lists.v: existence of lambda_t (partial list colouring) by palette
 # canonicalisation (U4 e000 edge).
 theories/foundations/partial_lists.v
@@ -174,3 +176,4 @@ theories/migration/complete_multipartite_graphs.v
 theories/migration/orientations.v
 theories/migration/edge_colour_class.v
 theories/migration/disjoint_union.v
+theories/migration/strong_pair_palettes.v

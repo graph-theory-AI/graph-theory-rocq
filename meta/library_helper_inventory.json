@@ -4541,7 +4541,7 @@
       "declaration_hash": "85c41f2029fc59f7723fe1ca8ecc35d4d02a71d9d6c36fb693b8a4fbd8b71d12",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 66,
+      "line": 67,
       "local_dependencies": [],
       "name": "regular_m",
       "normalized_name": "regular_m",
@@ -4561,7 +4561,7 @@
         "Chromatic.conjectures.U5.three_edge_coloring_statement"
       ],
       "kind": "Definition",
-      "line": 78,
+      "line": 79,
       "local_dependencies": [],
       "name": "cubic",
       "normalized_name": "cubic",
@@ -4580,7 +4580,7 @@
         "Chromatic.conjectures.U5.msimple"
       ],
       "kind": "Definition",
-      "line": 79,
+      "line": 80,
       "local_dependencies": [],
       "name": "edge_ends",
       "normalized_name": "edge_ends",
@@ -4599,7 +4599,7 @@
         "Chromatic.conjectures.U5.behzads_statement"
       ],
       "kind": "Definition",
-      "line": 87,
+      "line": 88,
       "local_dependencies": [
         "edge_ends"
       ],
@@ -4620,7 +4620,7 @@
         "Chromatic.conjectures.U5.usimple"
       ],
       "kind": "Lemma",
-      "line": 89,
+      "line": 90,
       "local_dependencies": [],
       "name": "madj_sym",
       "normalized_name": "madj_sym",
@@ -4639,7 +4639,7 @@
         "Chromatic.conjectures.U5.usimple"
       ],
       "kind": "Lemma",
-      "line": 99,
+      "line": 100,
       "local_dependencies": [],
       "name": "madj_irrefl",
       "normalized_name": "madj_irrefl",
@@ -4659,7 +4659,7 @@
         "Chromatic.conjectures.U5.three_edge_coloring_statement"
       ],
       "kind": "Definition",
-      "line": 101,
+      "line": 102,
       "local_dependencies": [
         "madj_irrefl",
         "madj_sym"
@@ -4681,7 +4681,7 @@
         "Chromatic.conjectures.U5.three_edge_coloring_statement"
       ],
       "kind": "Definition",
-      "line": 102,
+      "line": 103,
       "local_dependencies": [
         "usimple"
       ],
@@ -4702,7 +4702,7 @@
         "Chromatic.conjectures.U5.three_edge_coloring_statement"
       ],
       "kind": "Definition",
-      "line": 103,
+      "line": 104,
       "local_dependencies": [],
       "name": "remove_edge",
       "normalized_name": "remove_edge",
@@ -4714,14 +4714,12 @@
       "signature_shape_hash": "7d97f4773f113b8acef9d58d9f15d68f9ac0eaba641a4c8eb706dfbe04cc9bbb"
     },
     {
-      "body_hash": "16678cda2f7f475bfd0ef56d530eef57420f7000005c1a399956635d0956dabf",
-      "body_shape_hash": "16678cda2f7f475bfd0ef56d530eef57420f7000005c1a399956635d0956dabf",
-      "declaration_hash": "8112850d666769288e99385dce756c860ab507643e63b799ec0843a314eecade",
-      "direct_consumers": [
-        "Chromatic.conjectures.U5.strong_edge_colourable"
-      ],
+      "body_hash": "b4273531935cb3b658c034b408dd32d85a01b40f8b937181418c7a1a781f2b77",
+      "body_shape_hash": "b4273531935cb3b658c034b408dd32d85a01b40f8b937181418c7a1a781f2b77",
+      "declaration_hash": "8d62231abb08702fdb318b74dd455109e9112dd26b5a384398057e70ac91c63c",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 106,
+      "line": 107,
       "local_dependencies": [],
       "name": "diff_edge",
       "normalized_name": "diff_edge",
@@ -4733,14 +4731,12 @@
       "signature_shape_hash": "ce29601305ab8a8c2c20a0fa231c33ab86f5cb41d3a2d1094339c35cb6468511"
     },
     {
-      "body_hash": "ac84488068c8b5393f9ff656afa37461d949268103cacebdd0eb233521b316a9",
-      "body_shape_hash": "ac84488068c8b5393f9ff656afa37461d949268103cacebdd0eb233521b316a9",
-      "declaration_hash": "02ba35139c6eb6560646809884044a117b7a7c20e38778c76d22c5f0b973bb6a",
-      "direct_consumers": [
-        "Chromatic.conjectures.U5.strong_edge_colourable"
-      ],
+      "body_hash": "9f215b14c7178cb3298cce070f9fec04a3d65bdff2120d18cdc5afdab85222e3",
+      "body_shape_hash": "9f215b14c7178cb3298cce070f9fec04a3d65bdff2120d18cdc5afdab85222e3",
+      "declaration_hash": "c2065781404345b544425a61830b4ab0e5da2bfc62e2ab4cf50f1ecbfa9d6c85",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 120,
+      "line": 124,
       "local_dependencies": [],
       "name": "near_edge",
       "normalized_name": "near_edge",
@@ -4752,18 +4748,15 @@
       "signature_shape_hash": "ce29601305ab8a8c2c20a0fa231c33ab86f5cb41d3a2d1094339c35cb6468511"
     },
     {
-      "body_hash": "86594adc00924596b269a8679ffbd2189d29493416d6c44bb433911919b89529",
-      "body_shape_hash": "86594adc00924596b269a8679ffbd2189d29493416d6c44bb433911919b89529",
-      "declaration_hash": "75d524a1ce84ddf78b321378a7a8c3bca3521c98c433d70488ecdb534a8a42fb",
+      "body_hash": "d4acd2edd29643ceafcda0913ad04005620ef99b1b208b0a6d831247ec0395e8",
+      "body_shape_hash": "d4acd2edd29643ceafcda0913ad04005620ef99b1b208b0a6d831247ec0395e8",
+      "declaration_hash": "2543cf8c43987f908a5657217337f58ed20182e0883c5f8009c2f6ad2150ee82",
       "direct_consumers": [
         "Chromatic.conjectures.U5.strong_edge_colouring_statement"
       ],
       "kind": "Definition",
-      "line": 123,
-      "local_dependencies": [
-        "diff_edge",
-        "near_edge"
-      ],
+      "line": 130,
+      "local_dependencies": [],
       "name": "strong_edge_colourable",
       "normalized_name": "strong_edge_colourable",
       "package": "chromatic-theory",
@@ -4781,7 +4774,7 @@
         "Chromatic.conjectures.U5.is_r_graph"
       ],
       "kind": "Definition",
-      "line": 158,
+      "line": 165,
       "local_dependencies": [],
       "name": "edge_boundary",
       "normalized_name": "edge_boundary",
@@ -4800,7 +4793,7 @@
         "Chromatic.conjectures.U5.seymours_r_graph_statement"
       ],
       "kind": "Definition",
-      "line": 168,
+      "line": 175,
       "local_dependencies": [
         "edge_boundary"
       ],
@@ -4822,7 +4815,7 @@
         "Chromatic.conjectures.U5.sds_sym"
       ],
       "kind": "Definition",
-      "line": 206,
+      "line": 213,
       "local_dependencies": [],
       "name": "sds_rel",
       "normalized_name": "sds_rel",
@@ -4841,7 +4834,7 @@
         "Chromatic.conjectures.U5.subdivide_edge_s"
       ],
       "kind": "Lemma",
-      "line": 214,
+      "line": 221,
       "local_dependencies": [
         "sds_rel"
       ],
@@ -4862,7 +4855,7 @@
         "Chromatic.conjectures.U5.subdivide_edge_s"
       ],
       "kind": "Lemma",
-      "line": 220,
+      "line": 227,
       "local_dependencies": [
         "sds_rel"
       ],
@@ -4883,7 +4876,7 @@
         "Chromatic.conjectures.U5.subdivR_s"
       ],
       "kind": "Definition",
-      "line": 222,
+      "line": 229,
       "local_dependencies": [
         "sds_irrefl",
         "sds_sym"
@@ -4905,7 +4898,7 @@
         "Chromatic.conjectures.U5.homeomorphic_s"
       ],
       "kind": "Inductive",
-      "line": 224,
+      "line": 231,
       "local_dependencies": [
         "subdivide_edge_s"
       ],
@@ -4926,7 +4919,7 @@
         "Chromatic.conjectures.U5.three_edge_coloring_statement"
       ],
       "kind": "Definition",
-      "line": 231,
+      "line": 238,
       "local_dependencies": [
         "subdivR_s"
       ],
@@ -4947,7 +4940,7 @@
         "Chromatic.conjectures.U5.goldbergs_statement"
       ],
       "kind": "Definition",
-      "line": 262,
+      "line": 269,
       "local_dependencies": [],
       "name": "overfull_parameter",
       "normalized_name": "overfull_parameter",
@@ -4969,7 +4962,7 @@
         "Chromatic.conjectures.U5.uniform_hg"
       ],
       "kind": "Record",
-      "line": 292,
+      "line": 299,
       "local_dependencies": [],
       "name": "hypergraph",
       "normalized_name": "hypergraph",
@@ -4988,7 +4981,7 @@
         "Chromatic.conjectures.U5.a_generalization_of_vizings_theorem_statement"
       ],
       "kind": "Definition",
-      "line": 304,
+      "line": 311,
       "local_dependencies": [
         "hypergraph"
       ],
@@ -5009,7 +5002,7 @@
         "Chromatic.conjectures.U5.a_generalization_of_vizings_theorem_statement"
       ],
       "kind": "Definition",
-      "line": 308,
+      "line": 315,
       "local_dependencies": [
         "hypergraph"
       ],
@@ -5030,7 +5023,7 @@
         "Chromatic.conjectures.U5.a_generalization_of_vizings_theorem_statement"
       ],
       "kind": "Definition",
-      "line": 310,
+      "line": 317,
       "local_dependencies": [
         "hypergraph"
       ],
@@ -5054,7 +5047,7 @@
         "Chromatic.conjectures.U5.universal_steiner_triple_systems_statement"
       ],
       "kind": "Record",
-      "line": 336,
+      "line": 343,
       "local_dependencies": [],
       "name": "sts",
       "normalized_name": "sts",
@@ -5073,7 +5066,7 @@
         "Chromatic.conjectures.U5.universal_steiner_triple_systems_statement"
       ],
       "kind": "Definition",
-      "line": 348,
+      "line": 355,
       "local_dependencies": [
         "sts"
       ],
@@ -5094,7 +5087,7 @@
         "Chromatic.conjectures.U5.is_universal_sts"
       ],
       "kind": "Definition",
-      "line": 358,
+      "line": 365,
       "local_dependencies": [
         "sts"
       ],
@@ -5115,7 +5108,7 @@
         "Chromatic.conjectures.U5.universal_steiner_triple_systems_statement"
       ],
       "kind": "Definition",
-      "line": 365,
+      "line": 372,
       "local_dependencies": [
         "cubic",
         "sts",
@@ -5138,7 +5131,7 @@
         "Chromatic.conjectures.U5.acyclic_edge_colouring"
       ],
       "kind": "Definition",
-      "line": 390,
+      "line": 397,
       "local_dependencies": [],
       "name": "edge_colour_seq",
       "normalized_name": "edge_colour_seq",
@@ -5157,7 +5150,7 @@
         "Chromatic.conjectures.U5.acyclic_edge_coloring_statement"
       ],
       "kind": "Definition",
-      "line": 402,
+      "line": 409,
       "local_dependencies": [
         "edge_colour_seq"
       ],
@@ -5178,7 +5171,7 @@
         "Chromatic.conjectures.U5.star_chromatic_index_of_cubic_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 428,
+      "line": 435,
       "local_dependencies": [],
       "name": "star_edge_colouring",
       "normalized_name": "star_edge_colouring",

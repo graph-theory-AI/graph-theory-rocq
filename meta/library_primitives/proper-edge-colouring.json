@@ -71,7 +71,7 @@
     "distinct_variants": {
       "Chromatic.conjectures.U5.acyclic_edge_colouring": "Embeds the pair properness clauses but adds the no-bichromatic-cycle restriction; a whole definition that is not ordinary proper edge colouring. Untouched.",
       "Chromatic.conjectures.U5.star_edge_colouring": "Embeds the pair properness clauses but adds the star restriction; untouched (D2chr's star_edge_colouring is a chain of this family because it calls proper_ec).",
-      "Chromatic.conjectures.U5.strong_edge_colourable": "Distance-two edge constraint; untouched.",
+      "Chromatic.conjectures.U5.strong_edge_colourable": "Distance-two edge constraint, not ordinary proper edge colouring; since D13 stage 1 owned by family strong-edge-colouring (total symmetric pair-palette class).",
       "Chromatic.conjectures.X43.x43_strong_edge_colourable": "Distance-two edge constraint on a local line graph; untouched.",
       "Chromatic.conjectures.XE1.xe1_strong_edge_colouring": "Distance-two edge constraint; untouched.",
       "Chromatic.conjectures.X219.x219_edge_choosable": "List assignments with membership requirements; its inlined properness belongs to a later list family. Untouched.",
