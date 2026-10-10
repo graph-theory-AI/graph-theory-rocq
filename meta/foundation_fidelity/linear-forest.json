@@ -1,0 +1,30 @@
+{
+ "schema_version": 1,
+ "family": "linear-forest",
+ "modules": {
+  "GTBase.path_trees": {
+   "path": "base/theories/path_trees.v",
+   "overrides": {
+    "linear_forest": {
+     "verdict": "FAITHFUL",
+     "note": "linear_forest G: the whole graph G is a forest in coq-graph-theory's sense (is_forest [set: G]: unique irredundant paths) and every vertex has at most two neighbours (Delta G <= 2), i.e. a disjoint union of paths; no connectedness, nonemptiness or size guard: the empty graph, edgeless graphs, K1 and K2 qualify, the triangle (not a forest) and the claw (degree 3) do not; a path tree is exactly a connected linear forest."
+    }
+   },
+   "machine_evidence": [
+    "linear_forest_forest",
+    "linear_forest_Delta",
+    "linear_forest_degree",
+    "linear_forestI",
+    "linear_forestP",
+    "path_tree_linear_forest",
+    "path_treeP",
+    "linear_forest_edgeless",
+    "linear_forest_K0",
+    "linear_forest_K1",
+    "linear_forest_K2",
+    "not_linear_forest_K3",
+    "not_linear_forest_claw"
+   ]
+  }
+ }
+}

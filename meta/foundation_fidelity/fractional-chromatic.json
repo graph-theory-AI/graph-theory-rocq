@@ -1,0 +1,22 @@
+{
+ "schema_version": 1,
+ "family": "fractional-chromatic",
+ "modules": {
+  "Extremal.foundations.fractional_colouring": {
+   "path": "extremal-graph-theory/theories/foundations/fractional_colouring.v",
+   "overrides": {
+    "is_fractional_chromatic": {
+     "verdict": "FAITHFUL",
+     "note": "is_fractional_chromatic G r: r is the attained minimum of a/b over the (a:b)-colourings (GTBase b-fold colourings over the supplied palette 'I_a) with a positive denominator b, the standard fractional chromatic number of a finite graph as a relation; the value is unique and, for every finite graph, exists (LP attainment, Atlas.foundations.fractional.frac_chromatic_exists). No guard on G: the empty graph has value 0. Rows that need a non-empty graph carry their own guard."
+    }
+   },
+   "machine_evidence": [
+    "is_fractional_chromatic_attained",
+    "is_fractional_chromatic_le",
+    "is_fractional_chromatic_unique",
+    "is_fractional_chromatic_ge0",
+    "is_fractional_chromatic_empty"
+   ]
+  }
+ }
+}

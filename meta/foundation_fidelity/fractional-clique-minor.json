@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "family": "fractional-clique-minor",
+  "modules": {
+    "Extremal.foundations.fractional_hadwiger": {
+      "path": "extremal-graph-theory/theories/foundations/fractional_hadwiger.v",
+      "overrides": {
+        "frac_clique_minor": {
+          "verdict": "FAITHFUL",
+          "note": "frac_clique_minor B w r: a feasible point of the fractional clique-minor LP of G with value r: non-negative weights on an indexed family of branch sets, each NON-EMPTY and connected, pairwise adjacent for distinct indices, every vertex covered by total weight at most 1, r the total weight (branch sets need not be disjoint). This is the body repaired in wave E10; the pre-repair body (possibly empty branch sets) had an unbounded LP and is kept only as a historical record in grounding_D2chr."
+        },
+        "is_fractional_hadwiger": {
+          "verdict": "FAITHFUL",
+          "note": "is_fractional_hadwiger G r: r is the attained maximum of the clique-minor LP, the standard fractional Hadwiger number of a finite graph as a relation; the value is unique, lies in [0, #|G|], and exists for every finite graph (LP attainment, Atlas.foundations.fractional.frac_hadwiger_exists). No guard on G: the empty graph has value 0."
+        }
+      },
+      "machine_evidence": [
+        "frac_clique_minor_trivial",
+        "frac_clique_minor_nonempty",
+        "frac_clique_minor_le_card",
+        "is_fractional_hadwiger_unique",
+        "is_fractional_hadwiger_ge0",
+        "is_fractional_hadwiger_le_card"
+      ]
+    }
+  }
+}
