@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py natural_data_decoder --details 
 
 - Canonical: `GTBase.complexity.data_nth_nat`.
 - Baseline: `3bdfdae32824d4762ba8105367f7858a706a02e2`.
-- Scope: 2 helpers, 2 statements, 12 frozen objects, 25 recorded references.
-- Source checks: 87/87 pass; consistent.
+- Scope: 2 helpers, 2 statements, 12 frozen objects, 32 recorded references.
+- Source checks: 88/88 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -18,4 +18,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py natural_data_decoder --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/natural_data_decoder.v#Legacy.x157_data_nth_nat`, `chromatic-theory/theories/migration/natural_data_decoder.v#Legacy.x164_data_nth_nat`, `chromatic-theory/theories/migration/internal_vertices.v#X157Legacy.polytime_colouring_or_none`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/natural_data_decoder.v#Legacy.x157_data_nth_nat`, `chromatic-theory/theories/migration/natural_data_decoder.v#Legacy.x164_data_nth_nat`, `chromatic-theory/theories/migration/internal_vertices.v#X157Legacy.polytime_colouring_or_none`, `chromatic-theory/theories/migration/surface_embeddable.v#Legacy.x164_linear_time_outputs_three_colouring`.
