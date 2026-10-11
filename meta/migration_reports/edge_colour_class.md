@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py edge_colour_class --details /tm
 
 - Canonical: `GTBase.edge_colourings.edge_colour_class`.
 - Baseline: `2f37b10a711c81b9bfb6dcb1581ac2c527974baa`.
-- Scope: 8 helpers, 4 statements, 34 frozen objects, 69 recorded references.
-- Source checks: 241/241 pass; consistent.
+- Scope: 8 helpers, 4 statements, 34 frozen objects, 83 recorded references.
+- Source checks: 244/244 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,4 +20,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py edge_colour_class --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_colourings.v#X229Legacy.expander_proper_colouring_two_connected_palettes_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/edge_colourings.v#X229Legacy.expander_proper_colouring_two_connected_palettes_statement`, `chromatic-theory/theories/migration/linear_forest.v#Legacy.x34_linear_forest_colour`, `cycle-theory/theories/migration/linear_forest.v#Legacy.x212_linear_forest_colour`, `topological-graph-theory/theories/migration/linear_forest.v#Legacy.x23_linear_forest_colour`.

@@ -1,0 +1,174 @@
+{
+  "family": "fractional-clique-minor",
+  "baseline_commit": "95ac06eb99283588fb5dc8d4350a728cbf68dba3",
+  "canonical_name": "Extremal.foundations.fractional_hadwiger.frac_clique_minor",
+  "canonical_short_name": "frac_clique_minor",
+  "namespaces": {
+    "extremal-graph-theory": "Extremal"
+  },
+  "certificate_files": [
+    "extremal-graph-theory/theories/foundations/fractional_hadwiger.v",
+    "extremal-graph-theory/theories/migration/fractional_clique_minor.v",
+    "extremal-graph-theory/theories/migration/bfold_colouring.v"
+  ],
+  "extra_certificates": [
+    "Extremal.foundations.fractional_hadwiger.frac_clique_minor_trivial",
+    "Extremal.foundations.fractional_hadwiger.frac_clique_minor_nonempty",
+    "Extremal.foundations.fractional_hadwiger.frac_clique_minor_le_card",
+    "Extremal.foundations.fractional_hadwiger.is_fractional_hadwiger_unique",
+    "Extremal.foundations.fractional_hadwiger.is_fractional_hadwiger_ge0",
+    "Extremal.foundations.fractional_hadwiger.is_fractional_hadwiger_le_card",
+    "Extremal.migration.fractional_clique_minor.frac_clique_minor_canonical",
+    "Extremal.migration.fractional_clique_minor.is_fractional_hadwiger_canonical",
+    "Extremal.migration.fractional_clique_minor.fractional_hadwiger_statement_canonical"
+  ],
+  "relation": "definitional equality: Extremal D2chr's frac_clique_minor B w r and is_fractional_hadwiger G r (texts of the wave-E10 repair e61d308, unchanged since) are Extremal.foundations.fractional_hadwiger.frac_clique_minor B w r and .is_fractional_hadwiger G r: a feasible point of the clique-minor LP (non-negative weights, NON-EMPTY connected branch sets, distinct indices adjacent, every vertex covered by weight at most 1, r the total weight; branch sets need not be disjoint) and its attained maximum, with no guard on G (the empty graph has value 0). The pre-E10 body (possibly empty branch sets, an unbounded LP, a vacuous row) is a re-audited defect kept verbatim in grounding_D2chr as a historical reference, never an Original. The integer Hadwiger number is_hadwiger stays distinct.",
+  "summary": [
+    "fractional-clique-minor, one family: D2chr's clique-minor LP frac_clique_minor and its attained maximum is_fractional_hadwiger become public as Extremal.foundations.fractional_hadwiger (an Extremal area foundation over GTBase connected; no minor import) with the same bodies; D2chr keeps both names as transparent aliases (Require Import, not Export).",
+    "Baseline: the fractional-chromatic candidate 95ac06eb, where D2chr's is_fractional_chromatic is already that family's alias and its bfold_colouring bfold's alias.",
+    "History: frac_clique_minor's text is that of the wave-E10 repair (e61d308, 2026-09-24: B i != set0 added), unchanged since; is_fractional_hadwiger's text is unchanged since 818a76c. Before E10 the LP was unbounded (an empty branch set carries any weight) and the row was vacuous; the pre-E10 body stays verbatim in Extremal.conjectures.grounding_D2chr.old_frac_clique_minor with its witness old_is_fractional_hadwiger_unsat, a re-audited defect and historical reference only, never an Original of this family.",
+    "Row: fractional_hadwiger_statement (opg) with its 0 < #|G| guard; is_hadwiger (integer Hadwiger number) stays live and distinct; is_fractional_chromatic is applied live in the Legacy row (the fractional-chromatic family's alias, a later-family snapshot keyed reciprocally in its spec).",
+    "Deepest Original: the row at its valid original bodies, bfold-colouring's frozen chi_f chain at 3bdfdae (BF.Legacy.is_fractional_chromatic over BF.Legacy.bfold_colouring) and this family's frozen post-E10 Legacy.is_fractional_hadwiger, certified through fractional-chromatic's own Original certificate by conversion.",
+    "Atlas.foundations.fractional now imports only public modules (GTBase base/bfold_colourings, GraphTheory minor, Extremal.foundations fractional_colouring/fractional_hadwiger/lp_rational) and no conjecture file; every Atlas declaration keeps its exact type (kernel ascription to the baseline-printed types) and its proof. implications_A1 keeps its corpus imports."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2chr.frac_clique_minor",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "frac_clique_minor",
+      "frozen_path": "extremal-graph-theory/theories/migration/fractional_clique_minor.v",
+      "frozen": "Legacy.frac_clique_minor",
+      "substitutions": {},
+      "certificate": "Extremal.migration.fractional_clique_minor.frac_clique_minor_compat",
+      "live_unfolds_to": "fractional_hadwiger.frac_clique_minor B w r"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.D2chr.is_fractional_hadwiger",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "is_fractional_hadwiger",
+      "frozen_path": "extremal-graph-theory/theories/migration/fractional_clique_minor.v",
+      "frozen": "Legacy.is_fractional_hadwiger",
+      "substitutions": {
+        "frac_clique_minor": "Legacy.frac_clique_minor"
+      },
+      "certificate": "Extremal.migration.fractional_clique_minor.is_fractional_hadwiger_compat",
+      "live_unfolds_to": "fractional_hadwiger.is_fractional_hadwiger G r"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.D2chr.fractional_hadwiger_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "fractional_hadwiger_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/fractional_clique_minor.v",
+      "frozen": "D2chrLegacy.fractional_hadwiger_statement",
+      "substitutions": {
+        "is_fractional_hadwiger": "Legacy.is_fractional_hadwiger"
+      },
+      "certificate": "Extremal.migration.fractional_clique_minor.fractional_hadwiger_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.D2chr.bfold_colouring",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "bfold_colouring",
+      "frozen_path": "extremal-graph-theory/theories/migration/bfold_colouring.v",
+      "frozen": "Legacy.bfold_colouring",
+      "substitutions": {},
+      "certificate": "Extremal.migration.bfold_colouring.bfold_colouring_compat",
+      "commit": "3bdfdae32824d4762ba8105367f7858a706a02e2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Extremal.conjectures.D2chr.is_fractional_chromatic",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "is_fractional_chromatic",
+      "frozen_path": "extremal-graph-theory/theories/migration/bfold_colouring.v",
+      "frozen": "Legacy.is_fractional_chromatic",
+      "substitutions": {
+        "bfold_colouring": "Legacy.bfold_colouring"
+      },
+      "certificate": "Extremal.migration.bfold_colouring.is_fractional_chromatic_compat",
+      "commit": "3bdfdae32824d4762ba8105367f7858a706a02e2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.D2chr.fractional_hadwiger_statement",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "fractional_hadwiger_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/fractional_clique_minor.v",
+      "frozen": "D2chrOriginal.statement",
+      "substitutions": {
+        "fractional_hadwiger_statement": "statement",
+        "is_fractional_chromatic": "BF.Legacy.is_fractional_chromatic",
+        "is_fractional_hadwiger": "Legacy.is_fractional_hadwiger"
+      },
+      "certificate": "Extremal.migration.fractional_clique_minor.fractional_hadwiger_statement_original_compat",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {
+    "extremal-graph-theory/theories/migration/bfold_colouring.v#D2chrLegacy.fractional_hadwiger_statement": "Earlier-family snapshot (bfold-colouring, baseline 3bdfdae): bfold froze the fractional Hadwiger row with the Hadwiger vocabulary applied live by design, so this copy applies the live is_fractional_hadwiger, which since fractional-clique-minor reaches Extremal.foundations.fractional_hadwiger through D2chr's alias (the same body by conversion). Kept unchanged; bfold's certificate stays true. The row at its valid original bodies is this family's D2chrOriginal.statement.",
+    "extremal-graph-theory/theories/migration/fractional_chromatic.v#D2chrLegacy.fractional_hadwiger_statement": "Earlier-family snapshot (fractional-chromatic, baseline 9e83cd85): fractional-chromatic froze the row with is_hadwiger and is_fractional_hadwiger applied live by design (this later family), so this copy applies the live is_fractional_hadwiger, now D2chr's alias of Extremal.foundations.fractional_hadwiger (the same body by conversion). Kept unchanged; its certificate stays true.",
+    "extremal-graph-theory/theories/migration/fractional_chromatic.v#D2chrOriginal.statement": "Earlier-family snapshot (fractional-chromatic, baseline 9e83cd85): fractional-chromatic's Original froze the chi_f chain at bfold's original body and kept is_fractional_hadwiger live, so it applies the live alias. Kept unchanged; its certificate stays true. This family's D2chrOriginal.statement freezes is_fractional_hadwiger as well and is certified through it."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "atlas/theories/foundations/fractional.v",
+      "name": "frac_clique_minor",
+      "note": "Atlas fractional foundation (fam_ok, hfeas_bounded, frac_hadwiger_exists): since this family it imports Extremal.foundations.fractional_hadwiger, not D2chr, so its frac_clique_minor and frac_clique_minor_le_card are the canonical names; every Atlas declaration keeps its exact type (kernel ascription) and its proof."
+    },
+    {
+      "path": "atlas/theories/foundations/fractional.v",
+      "name": "is_fractional_hadwiger",
+      "note": "Atlas minor_K_le_frac_hadwiger and frac_hadwiger_exists: the canonical is_fractional_hadwiger since this family (Atlas imports the public foundation, not D2chr); types and proofs unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "fractional_hadwiger_statement",
+      "note": "Atlas implication edges e003, e042 and e223 cite D2chr's fractional Hadwiger row by name; the row is unchanged (certified here) and the edges recompile unchanged, applying the Atlas lemmas (now stated over the canonical names) to D2chr's aliases by conversion."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
+      "name": "frac_clique_minor",
+      "note": "Grounding consumers frac_clique_minor_trivial, frac_clique_minor_nonempty, frac_clique_minor_le_card and the K1/K2 witnesses use the unchanged D2chr name and recompile unchanged. Its old_frac_clique_minor (the pre-E10 defective body) and old_is_fractional_hadwiger_unsat are kept verbatim as the re-audited historical record."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
+      "name": "is_fractional_hadwiger",
+      "note": "Grounding consumers is_fractional_hadwiger_unique, is_fractional_hadwiger_K1/_K2 and the row witnesses use the unchanged D2chr name and recompile unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/examples/fractional_hadwiger.v",
+      "name": "frac_clique_minor",
+      "note": "fractional-clique-minor public-only client (it imports only GTBase base, MathComp and Extremal.foundations.fractional_hadwiger): its frac_clique_minor is the canonical name, a package-level lexical match on the shared short name, not a use of the D2chr alias."
+    },
+    {
+      "path": "extremal-graph-theory/theories/examples/fractional_hadwiger.v",
+      "name": "is_fractional_hadwiger",
+      "note": "Public-only client: the canonical is_fractional_hadwiger (lexical match on the shared short name)."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Extremal.conjectures.D2chr.is_hadwiger",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "is_hadwiger",
+      "note": "the INTEGER Hadwiger number (a K_h minor over GraphTheory minor, with maximality); a different invariant, not an LP; kept distinct and live."
+    },
+    {
+      "qualified": "Extremal.conjectures.grounding_D2chr.old_frac_clique_minor",
+      "path": "extremal-graph-theory/theories/conjectures/grounding_D2chr.v",
+      "name": "old_frac_clique_minor",
+      "note": "the PRE-E10 defective body (branch sets possibly empty), kept verbatim with its witness old_is_fractional_hadwiger_unsat as the re-audited historical record; not equivalent (it has no maximum for any graph) and never an Original."
+    },
+    {
+      "qualified": "Atlas.foundations.fractional.hopt",
+      "path": "atlas/theories/foundations/fractional.v",
+      "name": "hopt",
+      "note": "the LP over a SET of branch sets (a bramble, goodb/hfeas), local to Atlas's existence proof frac_hadwiger_exists; a different indexing (no repetition), related to the canonical by that proof, not by definition."
+    }
+  ]
+}
