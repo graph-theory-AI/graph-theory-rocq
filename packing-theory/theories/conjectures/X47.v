@@ -1,6 +1,7 @@
 (** * Packing.conjectures.X47 -- v2 tree edge-decomposition row *)
 
 From GTBase Require Export base.
+From GTBase Require simple_cuts.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -15,13 +16,10 @@ Definition x47_min_degree_at_least (G : sgraph) (d : nat) : Prop :=
   min_degree_at_least G d.
 
 Definition x47_crossing_edges (G : sgraph) (S : {set G}) : {set {set G}} :=
-  [set e in x47_edge_set G | (e :&: S != set0) && (e :&: (~: S) != set0)].
+  GTBase.simple_cuts.cut_edges S.
 
 Definition x47_edge_connected (G : sgraph) (k : nat) : Prop :=
-  forall S : {set G},
-    S != set0 ->
-    S != [set: G] ->
-    k <= #|x47_crossing_edges S|.
+  GTBase.simple_cuts.cut_connected G k.
 
 Definition x47_copy_edge_set
     (G T : sgraph) (F : {set {set G}}) : Prop :=

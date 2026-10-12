@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py proper_edge_colouring --details
 
 - Canonical: `GTBase.edge_colourings.proper_edge_colouring`.
 - Baseline: `3011c280a09f292461a3b1e5a99f7be3febfbbb9`.
-- Scope: 5 helpers, 7 statements, 28 frozen objects, 61 recorded references.
-- Source checks: 243/243 pass; consistent.
+- Scope: 5 helpers, 7 statements, 28 frozen objects, 64 recorded references.
+- Source checks: 244/244 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -25,4 +25,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Chromatic.conjectures.U5.acyclic_edge_colouring`, `Chromatic.conjectures.U5.star_edge_colouring`, `Chromatic.conjectures.X43.x43_strong_edge_colourable`, `Chromatic.conjectures.XE1.xe1_strong_edge_colouring`, `Chromatic.conjectures.X219.x219_edge_choosable`, `Cycle.conjectures.X9.x9_cycle_incident_edges_properly_coloured`, `Chromatic.conjectures.X100.x100_modular_edge_colouring`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/simple_path.v#X14Legacy.andersen_rainbow_path_statement`, `graph-theory-misc/theories/migration/simple_path.v#X62Legacy.rainbow_paths_linear_edge_cover_statement`, `graph-theory-misc/theories/migration/path_edges.v#X14Legacy.andersen_rainbow_path_statement`, `graph-theory-misc/theories/migration/path_edges.v#X62Legacy.rainbow_paths_linear_edge_cover_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `graph-theory-misc/theories/migration/simple_path.v#X14Legacy.andersen_rainbow_path_statement`, `graph-theory-misc/theories/migration/simple_path.v#X62Legacy.rainbow_paths_linear_edge_cover_statement`, `graph-theory-misc/theories/migration/path_edges.v#X14Legacy.andersen_rainbow_path_statement`, `graph-theory-misc/theories/migration/path_edges.v#X62Legacy.rainbow_paths_linear_edge_cover_statement`, `extremal-graph-theory/theories/migration/edge_colour_class.v#X229Legacy.expander_proper_colouring_two_connected_palettes_statement`.

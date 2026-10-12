@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py cycle_lengths --details /tmp/mi
 
 - Canonical: `GTBase.walks_paths.has_ucycle_length`.
 - Baseline: `4b63976bad086439fa79f74eaccd270cd1291eb9`.
-- Scope: 8 helpers, 8 statements, 30 frozen objects, 59 recorded references.
-- Source checks: 271/271 pass; consistent.
+- Scope: 8 helpers, 8 statements, 30 frozen objects, 62 recorded references.
+- Source checks: 272/272 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -26,4 +26,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Cycle.conjectures.XE2.xe2_cycle_lengths`, `Cycle.conjectures.XE2.xe2_all_cycle_lengths_in`, `Chromatic.conjectures.XE2.xe2_odd_cycle_lengths_bounded`, `Digraph.conjectures.X19.x19_distinct_cycle_lengths`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/subgraph_of.v#X59Legacy.c4_free_subgraph_polynomial_average_degree_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#X96Legacy.bollobas_erdos_large_c4_free_subgraph_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X76Original.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X96Legacy.bollobas_erdos_large_c4_free_subgraph_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X96Original.bollobas_erdos_large_c4_free_subgraph_statement`, `extremal-graph-theory/theories/migration/cut_size.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/cut_size.v#X76Original.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/poly_eval.v#X59Legacy.c4_free_subgraph_polynomial_average_degree_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/subgraph_of.v#X59Legacy.c4_free_subgraph_polynomial_average_degree_statement`, `extremal-graph-theory/theories/migration/subgraph_of.v#X96Legacy.bollobas_erdos_large_c4_free_subgraph_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X76Original.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X96Legacy.bollobas_erdos_large_c4_free_subgraph_statement`, `extremal-graph-theory/theories/migration/edge_count.v#X96Original.bollobas_erdos_large_c4_free_subgraph_statement`, `extremal-graph-theory/theories/migration/cut_size.v#X76Legacy.ck_free_max_cut_polynomial_surplus_statement`, `extremal-graph-theory/theories/migration/cut_size.v#X76Original.ck_free_max_cut_polynomial_surplus_statement`, `chromatic-theory/theories/migration/bfold_colouring.v#X204Legacy.planar_no_4_5_cycles_fractional_below_eleven_thirds_statement`, `extremal-graph-theory/theories/migration/poly_eval.v#X59Legacy.c4_free_subgraph_polynomial_average_degree_statement`.

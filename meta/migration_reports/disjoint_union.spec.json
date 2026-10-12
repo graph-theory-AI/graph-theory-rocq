@@ -1,0 +1,243 @@
+{
+  "family": "disjoint-union",
+  "canonical_name": "GraphTheory.core.sgraph.sjoin",
+  "canonical_short_name": "sjoin",
+  "relation": "the disjoint union of two graphs on the sum carrier, each summand keeping its own adjacency and nothing across. Simple graphs: Chromatic X66 x66_disjoint_union_rel/x66_disjoint_union are upstream GraphTheory join_rel/sjoin (despite its name the disjoint union), the relation by conversion and the graph pointwise and by the identity isomorphism; the two constructor proofs are related through the graphs they build (eq_diso), never by proof-field equality. Digraphs: Digraph X2 x2_disjoint_union/x2_disjoint_union_rel are Digraph.constructions.digraph_sum digraph_sum/digraph_sum_rel over the existing Finite/HasArc core (no proof fields): the carrier, the relation, every arc and the packaged diGraphType convert. Loops and asymmetric arcs of a summand are kept and either summand may be empty; a join (heroes.djoin, X122 x122_dijoin) is not this construction.",
+  "baseline_commit": "ec5fb25603796f719fa67cdfeb0bea4ebc928242",
+  "namespaces": {
+    "chromatic-theory": "Chromatic",
+    "digraph-theory": "Digraph"
+  },
+  "certificate_files": [
+    "digraph-theory/theories/constructions/digraph_sum.v",
+    "chromatic-theory/theories/migration/disjoint_union.v",
+    "digraph-theory/theories/migration/disjoint_union.v",
+    "digraph-theory/theories/migration/path_vertices.v"
+  ],
+  "extra_certificates": [
+    "Digraph.constructions.digraph_sum.digraph_sum_arcE",
+    "Digraph.constructions.digraph_sum.digraph_sum_arc_inl",
+    "Digraph.constructions.digraph_sum.digraph_sum_arc_inr",
+    "Digraph.constructions.digraph_sum.digraph_sum_arc_inl_inr",
+    "Digraph.constructions.digraph_sum.digraph_sum_arc_inr_inl",
+    "Digraph.constructions.digraph_sum.card_digraph_sum",
+    "Chromatic.migration.disjoint_union.x66_disjoint_union_diso",
+    "Digraph.migration.disjoint_union.x2_disjoint_union_arc_compat",
+    "Digraph.migration.disjoint_union.x2_disjoint_union_digraph_compat",
+    "Digraph.migration.disjoint_union.x2_disjoint_union_legacy_arcE",
+    "Digraph.migration.disjoint_union.x2_disjoint_union_arcE"
+  ],
+  "summary": [
+    "Batch A, family A28 (disjoint unions), on Arthur's A27 pin ec5fb25. Simple graphs reuse upstream GraphTheory join_rel/sjoin (sum carrier, no edge across; join_rel_sym/irrefl, sjoin_disconnected, join_is_forest): X66's x66_disjoint_union_rel and x66_disjoint_union are now aliases and its two constructor proofs one-line uses of the upstream ones. Digraphs get the focused public Digraph.constructions.digraph_sum (no conjecture import, no guard): the carrier D1 + D2 with Finite.on and a HasArc instance, arcs inside each summand and none across, both injection and both cross-arc equations and the cardinal sum; X2's Section DisjointUnion now aliases it with the same packaging. Two public clients cover empty summands on either side, a loop, an asymmetric arc and the forest bridge.",
+    "",
+    "Frozen verbatim at ec5fb25: X66's relation, both constructor proofs with their scripts, the graph and the complete good-trees row (both tree guards, both goodness premises); X2's entire Section DisjointUnion (alias, anonymous Finite/HasArc packaging, relation) and its current row. The complete X2 Original at B1's baseline 9e03072 joins this frozen sum with B1's raw X2MaderianLegacy.delta_plus_maderian (nonempty host, minimum out-degree, complete subdivision model); B1's five raw providers are borrowed as historical objects. Fourteen mappings, three whole iffs.",
+    "",
+    "Proof consumers: implications_X66's x66_union_forest and the gc:e036 theorem, the X2 grounding/implication files, X16, X17, X52, X90, X107, directed_kneser_nonexistence and the B1/B2 certificates recompile unchanged. B1's X2UnionLegacy.statement keeps the live sum (documented snapshot); A28's per-row X2 copy keeps B1/B2's live chain (reciprocal notes in both specs)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X66.x66_disjoint_union_rel",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "x66_disjoint_union_rel",
+      "frozen_path": "chromatic-theory/theories/migration/disjoint_union.v",
+      "frozen": "X66Legacy.x66_disjoint_union_rel",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.disjoint_union.x66_disjoint_union_rel_compat",
+      "live_unfolds_to": "@join_rel G H"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X66.x66_disjoint_union_sym",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "x66_disjoint_union_sym",
+      "frozen_path": "chromatic-theory/theories/migration/disjoint_union.v",
+      "frozen": "X66Legacy.x66_disjoint_union_sym",
+      "substitutions": {
+        "x66_disjoint_union_rel": "X66Legacy.x66_disjoint_union_rel"
+      },
+      "certificate": "Chromatic.migration.disjoint_union.x66_disjoint_union_proofs_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X66.x66_disjoint_union_irrefl",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "x66_disjoint_union_irrefl",
+      "frozen_path": "chromatic-theory/theories/migration/disjoint_union.v",
+      "frozen": "X66Legacy.x66_disjoint_union_irrefl",
+      "substitutions": {
+        "x66_disjoint_union_rel": "X66Legacy.x66_disjoint_union_rel"
+      },
+      "certificate": "Chromatic.migration.disjoint_union.x66_disjoint_union_proofs_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X66.x66_disjoint_union",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "x66_disjoint_union",
+      "frozen_path": "chromatic-theory/theories/migration/disjoint_union.v",
+      "frozen": "X66Legacy.x66_disjoint_union",
+      "substitutions": {
+        "x66_disjoint_union_sym": "X66Legacy.x66_disjoint_union_sym",
+        "x66_disjoint_union_irrefl": "X66Legacy.x66_disjoint_union_irrefl"
+      },
+      "certificate": "Chromatic.migration.disjoint_union.x66_disjoint_union_compat",
+      "live_unfolds_to": "sjoin G H"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X66.good_trees_disjoint_union_good_statement",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "good_trees_disjoint_union_good_statement",
+      "frozen_path": "chromatic-theory/theories/migration/disjoint_union.v",
+      "frozen": "X66Legacy.good_trees_disjoint_union_good_statement",
+      "substitutions": {
+        "x66_disjoint_union": "X66Legacy.x66_disjoint_union"
+      },
+      "certificate": "Chromatic.migration.disjoint_union.good_trees_disjoint_union_good_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X2.x2_disjoint_union",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_disjoint_union",
+      "frozen_path": "digraph-theory/theories/migration/disjoint_union.v",
+      "frozen": "X2Legacy.x2_disjoint_union",
+      "substitutions": {},
+      "certificate": "Digraph.migration.disjoint_union.x2_disjoint_union_compat",
+      "live_unfolds_to": "digraph_sum D1 D2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.X2.x2_disjoint_union_rel",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_disjoint_union_rel",
+      "frozen_path": "digraph-theory/theories/migration/disjoint_union.v",
+      "frozen": "X2Legacy.x2_disjoint_union_rel",
+      "substitutions": {},
+      "certificate": "Digraph.migration.disjoint_union.x2_disjoint_union_rel_compat",
+      "live_unfolds_to": "@digraph_sum_rel D1 D2 x y"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.delta_plus_maderian_disjoint_union_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "delta_plus_maderian_disjoint_union_statement",
+      "frozen_path": "digraph-theory/theories/migration/disjoint_union.v",
+      "frozen": "X2Legacy.delta_plus_maderian_disjoint_union_statement",
+      "substitutions": {
+        "x2_disjoint_union": "X2Legacy.x2_disjoint_union"
+      },
+      "certificate": "Digraph.migration.disjoint_union.delta_plus_maderian_disjoint_union_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Digraph.conjectures.X2.delta_plus_maderian_disjoint_union_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "delta_plus_maderian_disjoint_union_statement",
+      "frozen_path": "digraph-theory/theories/migration/disjoint_union.v",
+      "frozen": "X2Original.delta_plus_maderian_disjoint_union_statement",
+      "substitutions": {
+        "x2_disjoint_union": "X2Legacy.x2_disjoint_union",
+        "delta_plus_maderian": "B1.X2MaderianLegacy.delta_plus_maderian"
+      },
+      "certificate": "Digraph.migration.disjoint_union.delta_plus_maderian_disjoint_union_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X2.x2_path_vertices",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_path_vertices",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x2_path_vertices",
+      "substitutions": {},
+      "certificate": "Digraph.migration.path_vertices.x2_path_vertices_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X2.x2_path_internal",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_path_internal",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2Legacy.path_internal",
+      "substitutions": {
+        "x2_path_internal": "path_internal",
+        "x2_path_vertices": "Legacy.x2_path_vertices"
+      },
+      "certificate": "Digraph.migration.path_vertices.x2_path_internal_compat",
+      "note": "B1 owner certificate; B2 (internal-vertices) relates the same frozen object to its seq_interior canonical through Digraph.migration.internal_vertices.x2_path_internal_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X2.contains_subdivision",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "contains_subdivision",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2Legacy.contains_subdivision",
+      "substitutions": {
+        "x2_path_internal": "path_internal"
+      },
+      "certificate": "Digraph.migration.path_vertices.contains_subdivision_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X2.mader_delta_plus_bound",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta_plus_bound",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2BoundsLegacy.mader_delta_plus_bound",
+      "substitutions": {
+        "contains_subdivision": "X2Legacy.contains_subdivision"
+      },
+      "certificate": "Digraph.migration.path_vertices.mader_delta_plus_bound_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X2.delta_plus_maderian",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "delta_plus_maderian",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2MaderianLegacy.delta_plus_maderian",
+      "substitutions": {
+        "mader_delta_plus_bound": "X2BoundsLegacy.mader_delta_plus_bound"
+      },
+      "certificate": "Digraph.migration.path_vertices.delta_plus_maderian_compat"
+    }
+  ],
+  "known_stale_snapshots": {
+    "digraph-theory/theories/migration/path_vertices.v#X2UnionLegacy.statement": "B1 snapshot: B1 (path-vertices, baseline 9e03072) froze X2's raw subdivision/Maderian chain in the union row but kept the live x2_disjoint_union, which after A28 unfolds to Digraph.constructions.digraph_sum.digraph_sum (the same carrier, arcs and packaging by conversion). Kept unchanged, with B1's certificate and B2's reuse (Digraph.migration.internal_vertices.delta_plus_maderian_disjoint_union_statement_compat); the complete pre-B1, pre-A28 row over B1's raw X2MaderianLegacy.delta_plus_maderian and this family's frozen Section DisjointUnion is Digraph.migration.disjoint_union.X2Original.delta_plus_maderian_disjoint_union_statement, certified by delta_plus_maderian_disjoint_union_statement_original_compat."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X66.v",
+      "name": "good_trees_disjoint_union_good_statement",
+      "note": "Implication consumers: x66_union_forest (is_forest of the union through upstream join_is_forest, already documented as sjoin) and the gc:e036 theorem every_forest_is_good_implies_good_trees_disjoint_union_good keep their headers and proofs; the target row keeps both goodness premises although the proof does not use them."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X66.v",
+      "name": "x66_disjoint_union",
+      "note": "Implication consumers: x66_union_forest (is_forest of the union through upstream join_is_forest, already documented as sjoin) and the gc:e036 theorem every_forest_is_good_implies_good_trees_disjoint_union_good keep their headers and proofs; the target row keeps both goodness premises although the proof does not use them."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.conjectures.heroes.djoin",
+      "path": "digraph-theory/theories/conjectures/heroes.v",
+      "name": "djoin",
+      "note": "domination join H1 => H2: the same sum carrier with every arc from the left summand to the right one added; a join, not the disjoint union"
+    },
+    {
+      "qualified": "Digraph.conjectures.X122.x122_dijoin",
+      "path": "digraph-theory/theories/conjectures/X122.v",
+      "name": "x122_dijoin",
+      "note": "dijoin L -> R: the same sum carrier with every left-to-right arc added and none back; a join, not the disjoint union"
+    }
+  ],
+  "kernel_evidence": "Print Assumptions of every certificate and API theorem, exact types and Arguments of the frozen and live objects, the frozen and live diGraphType packaging and arc equations, graph-constructor nonconversion probes, the independently expanded raw X2 Original, strict dependency closures of the frozen objects with closure parity against the baseline, and the types of every declaration in the reverse dependency closure of X66 and X2 at the baseline, through the pinned image; /srv/graph-theory-rocq/coordination/evidence/A28-disjoint-union/ (outside the repository)"
+}

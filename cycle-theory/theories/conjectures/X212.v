@@ -26,6 +26,9 @@
 
 From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
+Require GTBase.edge_colourings.
+Require GTBase.path_trees.
+Require GTBase.simple_cuts.
 From Cycle.foundations Require Export connectivity.
 From Cycle.conjectures Require Export U6.
 
@@ -68,27 +71,35 @@ Definition x212_decomposition_into_copies (G T : sgraph)
     the [G]-edges coloured [i], and a linear forest is an acyclic subgraph of
     maximum degree at most two, i.e. a disjoint union of paths. *)
 
+(** Since library migration D12 the colour class [i] of [col] is
+    [GTBase.edge_colourings.edge_colour_class col (pred1 i)]: same host carrier,
+    adjacency [(x -- y) && (col [set x; y] == i)]; the original declarations are
+    frozen in migration/edge_colour_class.v. *)
 Definition x212_edge_colour_rel
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : rel G :=
-  fun x y => (x -- y) && (col [set x; y] == i).
+  GTBase.edge_colourings.edge_colour_class_rel col (pred1 i).
 
 Lemma x212_edge_colour_sym
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) :
   symmetric (x212_edge_colour_rel col i).
-Proof. by move=> x y; rewrite /x212_edge_colour_rel sg_sym setUC. Qed.
+Proof. exact: GTBase.edge_colourings.edge_colour_class_sym. Qed.
 
 Lemma x212_edge_colour_irrefl
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) :
   irreflexive (x212_edge_colour_rel col i).
-Proof. by move=> x; rewrite /x212_edge_colour_rel sg_irrefl. Qed.
+Proof. exact: GTBase.edge_colourings.edge_colour_class_irrefl. Qed.
 
 Definition x212_colour_graph
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : sgraph :=
-  SGraph (x212_edge_colour_sym col i) (x212_edge_colour_irrefl col i).
+  GTBase.edge_colourings.edge_colour_class col (pred1 i).
 
+(** Since library migration D14 this is [GTBase.path_trees.linear_forest] of the
+    colour class (a forest of maximum degree at most two, no connectedness or
+    nonemptiness guard); the original declaration is frozen in
+    migration/linear_forest.v. *)
 Definition x212_linear_forest_colour
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : Prop :=
-  is_forest [set: x212_colour_graph col i] /\ Delta (x212_colour_graph col i) <= 2.
+  GTBase.path_trees.linear_forest (x212_colour_graph col i).
 
 Definition x212_linear_arboricity_at_most (G : sgraph) (q : nat) : Prop :=
   exists col : {set G} -> 'I_q, forall i : 'I_q, x212_linear_forest_colour col i.
@@ -150,7 +161,7 @@ Definition x212_cycle_within (G : sgraph) (S : {set G}) : Prop :=
 
 (** The edge cut of a vertex set: the edges with exactly one end in [S]. *)
 Definition x212_edge_cut (G : sgraph) (S : {set G}) : {set {set G}} :=
-  [set e in E(G) | #|e :&: S| == 1].
+  GTBase.simple_cuts.cut_edges S.
 
 (** Cyclic edge connectivity: no set of fewer than [k] edges separates [G] into
     two sides that both contain a cycle. *)

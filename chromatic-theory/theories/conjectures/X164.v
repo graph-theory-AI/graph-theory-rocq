@@ -27,13 +27,11 @@ Definition x164_enc_instance (I : x164_instance) : data :=
       (enc_list [seq enc_bool (v \in x164_boundary I) | v <- enum (x164_graph I)])
       (enc_list [seq enc_nat (val (@x164_precolour I v)) | v <- enum (x164_graph I)])).
 
-Fixpoint x164_data_nth_nat (d : data) (i : nat) : nat :=
-  match d, i with
-  | Dcons (Dnat n) _, 0 => n
-  | Dcons _ rest, j.+1 => x164_data_nth_nat rest j
-  | Dnat n, 0 => n
-  | _, _ => 0
-  end.
+(** Since the natural-data-decoder library migration (2026-10-08) a transparent alias of
+    [GTBase.complexity.data_nth_nat], the same body by conversion; the former body is frozen in
+    theories/migration/natural_data_decoder.v. *)
+Definition x164_data_nth_nat (d : data) (i : nat) : nat :=
+  data_nth_nat d i.
 
 Definition x164_output_colour (I : x164_instance) (out : data)
     (v : x164_graph I) : nat :=

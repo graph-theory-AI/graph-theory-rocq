@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "family": "linear-forest",
+  "primitive": {
+    "canonical_name": "GTBase.path_trees.linear_forest",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "linear_forest_colour"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X34.x34_linear_forest_colour",
+      "Cycle.conjectures.X212.x212_linear_forest_colour",
+      "Topological.conjectures.X23.x23_linear_forest_colour"
+    ],
+    "consumers_remaining": 3,
+    "relation": "definitional: xNN_linear_forest_colour col i is GTBase.path_trees.linear_forest (xNN_colour_graph col i) = is_forest [set: xNN_colour_graph col i] /\\ Delta (xNN_colour_graph col i) <= 2, the frozen body, convertible; path_tree G <-> linear_forest G /\\ connected [set: G]",
+    "semantic_classes": {
+      "colour-class-linear-forest": {
+        "members": [
+          "Chromatic.conjectures.X34.x34_linear_forest_colour",
+          "Cycle.conjectures.X212.x212_linear_forest_colour",
+          "Topological.conjectures.X23.x23_linear_forest_colour"
+        ],
+        "count": 3,
+        "verdict": "equivalent (definitional: conversion)",
+        "state": "migrated-alias",
+        "canonical": "GTBase.path_trees.linear_forest",
+        "certificates": [
+          "Chromatic.migration.linear_forest.x34_linear_forest_colour_compat",
+          "Cycle.migration.linear_forest.x212_linear_forest_colour_compat",
+          "Topological.migration.linear_forest.x23_linear_forest_colour_compat"
+        ],
+        "note": "X34, X212 and X23 xNN_linear_forest_colour col i read is_forest [set: xNN_colour_graph col i] /\\ Delta (xNN_colour_graph col i) <= 2 over D12's spanning colour class: the body of linear_forest at that graph, convertible; isolated and unused-colour vertices stay in the carrier; no guard is added."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.linear_forest.planar_odd_degree_linear_forests_plus_matching_statement_compat",
+      "Chromatic.migration.linear_forest.x34_linear_forest_colour_compat",
+      "Chromatic.migration.linear_forest.x34_linear_forests_and_matching_compat",
+      "Cycle.migration.linear_forest.linear_arboricity_regular_statement_compat",
+      "Cycle.migration.linear_forest.x212_linear_arboricity_at_most_compat",
+      "Cycle.migration.linear_forest.x212_linear_arboricity_compat",
+      "Cycle.migration.linear_forest.x212_linear_forest_colour_compat",
+      "Topological.migration.linear_forest.planar_linear_arboricity_statement_compat",
+      "Topological.migration.linear_forest.x23_linear_arboricity_at_most_compat",
+      "Topological.migration.linear_forest.x23_linear_arboricity_compat",
+      "Topological.migration.linear_forest.x23_linear_forest_colour_compat"
+    ],
+    "api_theorems": [
+      "GTBase.path_trees.linear_forest_forest",
+      "GTBase.path_trees.linear_forest_Delta",
+      "GTBase.path_trees.linear_forest_degree",
+      "GTBase.path_trees.linear_forestI",
+      "GTBase.path_trees.linear_forestP",
+      "GTBase.path_trees.path_tree_linear_forest",
+      "GTBase.path_trees.path_treeP",
+      "GTBase.path_trees.linear_forest_edgeless",
+      "GTBase.path_trees.linear_forest_K0",
+      "GTBase.path_trees.linear_forest_K1",
+      "GTBase.path_trees.linear_forest_K2",
+      "GTBase.path_trees.not_linear_forest_K3",
+      "GTBase.path_trees.not_linear_forest_claw"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.digraph",
+        "GTBase.base",
+        "GTBase.path_trees"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "GraphTheory.core.sgraph.is_forest",
+      "note": "coq-graph-theory 0.9.7 has is_forest, is_tree S := is_forest S /\\ connected S, forestI, forest3 and the forest record, but no linear forest and no maximum-degree predicate; Delta is GTBase.base's maximum degree and Delta_le2P its degree form in GTBase.path_trees, so the canonical is the forest analogue of path_tree in that module. Degree forms (Digraph path_fas.linear_forest, GTMisc X74 x74_induced_linear_forest) are later classes of this owner. Legacy bodies and per-row certificates: meta/migration_reports/linear_forest.md.",
+      "audited_at": "2026-10-09"
+    },
+    "public_client": "base/theories/examples/path_trees.v",
+    "legacy_baseline": "1123673d3b2910361a05bc5381fdecd68c610951",
+    "migration_report": "meta/migration_reports/linear_forest.md",
+    "migration_spec": "meta/migration_reports/linear_forest.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D14.md",
+    "foundation_fidelity": "meta/foundation_fidelity/linear-forest.json"
+  }
+}
