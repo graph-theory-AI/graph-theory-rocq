@@ -2,6 +2,7 @@
 
 From GTBase Require Export base.
 Require GTBase.edge_colourings.
+Require GTBase.path_trees.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -34,10 +35,13 @@ Definition x34_colour_graph
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : sgraph :=
   GTBase.edge_colourings.edge_colour_class col (pred1 i).
 
+(** Since library migration D14 this is [GTBase.path_trees.linear_forest] of the
+    colour class (a forest of maximum degree at most two, no connectedness or
+    nonemptiness guard); the original declaration is frozen in
+    migration/linear_forest.v. *)
 Definition x34_linear_forest_colour
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : Prop :=
-  is_forest [set: x34_colour_graph col i] /\
-  Delta (x34_colour_graph col i) <= 2.
+  GTBase.path_trees.linear_forest (x34_colour_graph col i).
 
 Definition x34_matching_colour
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : Prop :=

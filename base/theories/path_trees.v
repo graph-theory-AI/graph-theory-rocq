@@ -15,10 +15,10 @@
     [is_forest], [is_tree S := is_forest S /\ connected S], the [forest] record,
     [sunit], ['K_n] and ['K_n,m]; it has no path-graph or pathwidth predicate.
     Concrete path constructions on ordinals (Hom U3 [path_graph], Packing
-    [x18_path_graph] / [x226_path_graph]), linear forests (forests of maximum degree
-    two), and the sequence and multigraph path contracts of
-    [GTBase.walks_paths] / [Cycle.foundations.path_subgraphs] are different
-    representations and stay separate.
+    [x18_path_graph] / [x226_path_graph]) and the sequence and multigraph path
+    contracts of [GTBase.walks_paths] / [Cycle.foundations.path_subgraphs] are
+    different representations and stay separate.  Linear forests (forests of maximum
+    degree two, not necessarily connected) are [linear_forest] at the end of this file.
 
     Specification, every clause proved below:
     - a path tree is a tree, hence a forest and connected, and every vertex has at
@@ -127,6 +127,109 @@ Qed.
 Lemma not_path_tree_claw : ~ path_tree 'K_1,3.
 Proof.
 move=> /(path_tree_degree (inl ord0 : 'K_1,3)) le2.
+have sub : [set inr i | i in [set: 'I_3]] \subset N(inl ord0 : 'K_1,3).
+  by apply/subsetP => _ /imsetP[i _ ->]; rewrite inE.
+have deg3 : 2 < #|N(inl ord0 : 'K_1,3)|.
+  apply: leq_trans (subset_leq_card sub).
+  by rewrite card_imset ?cardsT ?card_ord //; exact: inr_inj.
+by move: (leq_trans deg3 le2).
+Qed.
+
+(** ** Linear forests
+
+    Library migration D14, family [linear-forest]
+    (meta/library_primitives/linear-forest.json).  [linear_forest G] holds when the
+    whole graph [G] is a forest ([is_forest [set: G]]: unique irredundant paths) and
+    every vertex has at most two neighbours ([Delta G <= 2]), i.e. [G] is a disjoint
+    union of paths.  It is the forest analogue of [path_tree] and stays distinct from
+    it: a path tree is a CONNECTED linear forest ([path_treeP]).  No connectedness,
+    nonemptiness or size premise is added.
+
+    Specification, every clause proved below:
+    - a linear forest is a forest whose vertices have at most two neighbours, and
+      conversely (the degree form, through [Delta_le2P]);
+    - [path_tree G <-> linear_forest G /\ connected [set: G]];
+    - every edgeless graph is a linear forest, in particular the EMPTY graph
+      ['K_0]; ['K_1] and the single edge ['K_2] are linear forests;
+    - a cycle is excluded: the triangle ['K_3] is not a forest;
+    - a branching vertex is excluded: the claw ['K_1,3] has a vertex of degree 3. *)
+Definition linear_forest (G : sgraph) : Prop := is_forest [set: G] /\ Delta G <= 2.
+
+Section LinearForest.
+Variable G : sgraph.
+Implicit Types (v : G).
+
+Lemma linear_forest_forest : linear_forest G -> is_forest [set: G].
+Proof. by case. Qed.
+
+Lemma linear_forest_Delta : linear_forest G -> Delta G <= 2.
+Proof. by case. Qed.
+
+Lemma linear_forest_degree v : linear_forest G -> #|N(v)| <= 2.
+Proof. by move/linear_forest_Delta/Delta_le2P. Qed.
+
+Lemma linear_forestI : is_forest [set: G] -> (forall v, #|N(v)| <= 2) -> linear_forest G.
+Proof. by move=> fG dG; split=> //; apply/Delta_le2P. Qed.
+
+(** The degree equivalence. *)
+Lemma linear_forestP :
+  linear_forest G <-> is_forest [set: G] /\ (forall v, #|N(v)| <= 2).
+Proof.
+split=> [lG|[fG dG]]; last exact: linear_forestI.
+by split=> [|v]; [exact: linear_forest_forest | exact: linear_forest_degree].
+Qed.
+
+(** A path tree is a linear forest; a linear forest is a path tree exactly when it
+    is connected. *)
+Lemma path_tree_linear_forest : path_tree G -> linear_forest G.
+Proof. by move=> pG; split; [exact: path_tree_forest | exact: path_tree_Delta]. Qed.
+
+Lemma path_treeP : path_tree G <-> linear_forest G /\ connected [set: G].
+Proof.
+split=> [pG|[[fG dG] cG]].
+  by split; [exact: path_tree_linear_forest | exact: path_tree_connected].
+by split=> //; split.
+Qed.
+
+(** An edgeless graph is a linear forest: every path is trivial and every
+    neighbourhood is empty. *)
+Lemma linear_forest_edgeless : (forall x y : G, ~~ (x -- y)) -> linear_forest G.
+Proof.
+move=> noE; split.
+- move=> x y p q [ip _] [iq _].
+  have xy : x = y.
+    case/connectP: (Path_connect p) => -[_ -> //|z s] /= /andP[xz _].
+    by case/negP: (noE x z).
+  move: p q ip iq; rewrite -xy => p q ip iq.
+  by rewrite (irredxx ip) (irredxx iq).
+- apply/Delta_le2P => v; rewrite (_ : N(v) = set0) ?cards0 //.
+  by apply/setP => w; rewrite !inE (negbTE (noE v w)).
+Qed.
+
+End LinearForest.
+
+(** ** Linear-forest grounding: empty, singleton, edge, cycle and branch *)
+
+Lemma linear_forest_K0 : linear_forest 'K_0.
+Proof. exact: path_tree_linear_forest path_tree_K0. Qed.
+
+Lemma linear_forest_K1 : linear_forest 'K_1.
+Proof. exact: path_tree_linear_forest path_tree_K1. Qed.
+
+Lemma linear_forest_K2 : linear_forest 'K_2.
+Proof. exact: path_tree_linear_forest path_tree_K2. Qed.
+
+(** A cycle: the triangle is not a forest. *)
+Lemma not_linear_forest_K3 : ~ linear_forest 'K_3.
+Proof.
+move=> /linear_forest_forest Hf; have card3 : 3 <= #|'K_3| by rewrite card_ord.
+by have [x [y [xy nadj]]] := forest3 Hf card3; rewrite /edge_rel /= xy in nadj.
+Qed.
+
+(** A branch: the centre of the claw has three neighbours. *)
+Lemma not_linear_forest_claw : ~ linear_forest 'K_1,3.
+Proof.
+move=> /(linear_forest_degree (inl ord0 : 'K_1,3)) le2.
 have sub : [set inr i | i in [set: 'I_3]] \subset N(inl ord0 : 'K_1,3).
   by apply/subsetP => _ /imsetP[i _ ->]; rewrite inE.
 have deg3 : 2 < #|N(inl ord0 : 'K_1,3)|.

@@ -118,11 +118,11 @@ Qed.
 
 (** ** [diff_edge] — identity: an edge is never "different" from itself. *)
 Lemma diff_edge_refl (G : sgraph) (x y : G) : diff_edge x y x y = false.
-Proof. by rewrite /diff_edge !eqxx. Qed.
+Proof. by rewrite /diff_edge /Chromatic.foundations.strong_pair_palettes.distinct_edge_pairs !eqxx. Qed.
 
 (** ** [near_edge] — identity: an edge is "near" itself (shared endpoints). *)
 Lemma near_edge_refl (G : sgraph) (x y : G) : near_edge x y x y.
-Proof. by rewrite /near_edge eqxx. Qed.
+Proof. by rewrite /near_edge /Chromatic.foundations.strong_pair_palettes.near_edge_pairs eqxx. Qed.
 
 (** ** [strong_edge_colourable] — witness: ['K_1] (edgeless) is strongly
     1-colourable; the induced-matching constraint is vacuous. *)

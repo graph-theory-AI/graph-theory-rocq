@@ -184,6 +184,41 @@ Definition enc_nat (n : nat) : data := Dnat n.
 Definition data_nat_value (d : data) : nat :=
   if d is Dnat n then n else 0.
 
+(** The natural output decoder: [data_nth_nat d i] is the natural at position [i] of an output
+    datum, read through its [Dcons] cells.  Position [0] of a cell [Dcons e rest] is [e]'s natural
+    value ([n] for [e = Dnat n], [0] for any other entry), position [j.+1] is position [j] of
+    [rest]; a scalar [Dnat n], as a whole datum or as a malformed list tail, reads [n] at its
+    position [0] and [0] after it; [Dnil] and [Dpair] read [0] at every position
+    ([data_nth_nat0], [data_nth_natS]).  On an encoded list of naturals it is [nth 0], positions
+    past the end reading [0] ([data_nth_nat_enc_list]).  It reads naturals only: a colouring
+    adapter (modulo [k], or the enum rank of a vertex) is a separate layer. *)
+Fixpoint data_nth_nat (d : data) (i : nat) : nat :=
+  match d, i with
+  | Dcons (Dnat n) _, 0 => n
+  | Dcons _ rest, j.+1 => data_nth_nat rest j
+  | Dnat n, 0 => n
+  | _, _ => 0
+  end.
+
+Lemma data_nth_nat0 (d : data) :
+  data_nth_nat d 0 = data_nat_value (if d is Dcons e _ then e else d).
+Proof. by case: d => // -[]. Qed.
+
+Lemma data_nth_natS (d : data) (i : nat) :
+  data_nth_nat d i.+1 = if d is Dcons _ rest then data_nth_nat rest i else 0.
+Proof. by case: d => // -[]. Qed.
+
+Lemma data_nth_nat_Dnil (i : nat) : data_nth_nat Dnil i = 0.
+Proof. by case: i. Qed.
+
+Lemma data_nth_nat_enc_list (s : seq nat) (i : nat) :
+  data_nth_nat (enc_list [seq enc_nat n | n <- s]) i = nth 0 s i.
+Proof. by rewrite /enc_list; elim: s i => [|n s IHs] [|i] //=. Qed.
+
+Lemma data_nth_nat_enc_list_default (s : seq nat) (i : nat) :
+  size s <= i -> data_nth_nat (enc_list [seq enc_nat n | n <- s]) i = 0.
+Proof. by move=> le_s_i; rewrite data_nth_nat_enc_list nth_default. Qed.
+
 (** A graph as its adjacency matrix (row-major list of boolean lists). *)
 Definition enc_graph (G : sgraph) : data :=
   enc_list [seq enc_list [seq enc_bool (i -- j) | j <- enum G] | i <- enum G].
