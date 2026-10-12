@@ -6,6 +6,7 @@ From GraphTheory Require Import minor.
 From Minor.foundations Require Import containment width_params.
 From Minor.foundations Require Import shallow_minors.
 From Minor.conjectures Require Import X27 X42.
+From GTBase Require poly_nat.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -166,8 +167,10 @@ Definition x220_ball_in (G : sgraph) (B : {set G}) (c : G) (r : nat) : Prop := i
 
 Definition x220_shallow_minor (G H : sgraph) (r : nat) : Prop := internal_shallow_minor G H r.
 
-Definition x220_poly_eval (p : seq nat) (x : nat) : nat :=
-  foldr (fun a acc => a + x * acc) 0 p.
+(** Since the A31 library migration [x220_poly_eval] is a transparent alias of the canonical natural Horner evaluation
+    [GTBase.poly_nat.horner_nat] (upstream [horner_rec] at nat).  The original is frozen in
+    theories/migration/poly_eval.v, related to the alias by an unconditional pointwise equality. *)
+Definition x220_poly_eval (p : seq nat) (x : nat) : nat := GTBase.poly_nat.horner_nat p x.
 
 Definition x220_polynomial_expansion (C : sgraph -> Prop) : Prop :=
   exists p : seq nat,

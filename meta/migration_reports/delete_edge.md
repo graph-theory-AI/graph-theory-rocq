@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py delete_edge --details /tmp/migr
 
 - Canonical: `GTBase.common.del_edge_set`.
 - Baseline: `dbee364e6be7ac2e9a8e7edecbb1ff5f0878c8c0`.
-- Scope: 4 helpers, 3 statements, 21 frozen objects, 40 recorded references.
-- Source checks: 145/145 pass; consistent.
+- Scope: 4 helpers, 3 statements, 21 frozen objects, 43 recorded references.
+- Source checks: 146/146 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -19,4 +19,4 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 `python3 meta/migration_report.py delete_edge --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/simple_edges.v#X64Legacy.bridgeless`, `extremal-graph-theory/theories/migration/induced_free.v#X61Legacy.induced_saturated`, `extremal-graph-theory/theories/migration/induced_free.v#X61Original.induced_saturated`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/simple_edges.v#X64Legacy.bridgeless`, `extremal-graph-theory/theories/migration/induced_free.v#X61Legacy.induced_saturated`, `extremal-graph-theory/theories/migration/induced_free.v#X61Original.induced_saturated`, `extremal-graph-theory/theories/migration/poly_eval.v#X60Legacy.induced_saturation_even_cycle_polynomial_size_statement`.

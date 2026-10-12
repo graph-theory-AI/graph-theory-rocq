@@ -1,0 +1,696 @@
+{
+  "family": "poly-eval",
+  "canonical_name": "GTBase.poly_nat.horner_nat",
+  "canonical_short_name": "horner_nat",
+  "relation": "the Horner evaluation of a natural coefficient list (lowest degree first) at a natural point, with GTBase.poly_nat.horner_nat p x := mathcomp poly.horner_rec p x at the natural semiring canonical: the six Fixpoints Chromatic X3/X124, Extremal X59/X60, GTMisc X128/X139 xN_poly_eval, the foldr Minor X220 x220_poly_eval and the public foldr Chromatic.foundations.chi_bounding.horner_nat are transparent aliases of it, each related to its frozen original by an UNCONDITIONAL pointwise equality (induction or the foldr bridge; not a conversion), so every row using them is equivalent in every polarity. The empty list evaluates to 0 at every point; no guard.",
+  "baseline_commit": "db16a76376d1a9c29142b38f97d5109d6dd942fa",
+  "namespaces": {
+    "base": "GTBase",
+    "chromatic-theory": "Chromatic",
+    "extremal-graph-theory": "Extremal",
+    "graph-theory-misc": "GTMisc",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/poly_nat.v",
+    "chromatic-theory/theories/migration/poly_eval.v",
+    "extremal-graph-theory/theories/migration/poly_eval.v",
+    "graph-theory-misc/theories/migration/poly_eval.v",
+    "minor-theory/theories/migration/poly_eval.v"
+  ],
+  "extra_certificates": [
+    "GTBase.poly_nat.horner_nat_nil",
+    "GTBase.poly_nat.horner_nat_cons",
+    "GTBase.poly_nat.horner_nat_foldr",
+    "GTBase.poly_nat.horner_nat_x0",
+    "GTBase.poly_nat.horner_nat_monomial",
+    "GTBase.poly_nat.horner_nat_rcons0",
+    "GTBase.poly_nat.horner_nat_mono",
+    "GTBase.poly_nat.horner_nat_dom"
+  ],
+  "summary": [
+    "Batch A, family A31 (natural Horner evaluation, stage 1 of the polynomial scope; the P-list class owner is the separate stage A32), on the reviewed CANDIDATE parent A30 db16a76 (not accepted main). New GTBase.poly_nat.horner_nat p x := mathcomp poly.horner_rec p x at nat, a thin adapter in a narrow-import module (ssralg/poly Required, only ssralg canonicals imported; not re-exported by GTBase.base), with the nil/cons-complete API clients need (nil, cons, foldr shape, x = 0, monomial, trailing zero, monotonicity, domination for 1 <= t). The six Fixpoints X3/X124/X59/X60/X128/X139 xN_poly_eval, X220's foldr x220_poly_eval and the public foldr chi_bounding.horner_nat become transparent aliases. Public client base/theories/examples/poly_nat.v (coefficient order 321/123, the dom-guard counterexample).",
+    "",
+    "Frozen verbatim at the parent: the eight raw evaluators, the chains x3_polynomially_chi_bounded, x66_good, x124_poly_chi_bounded, x128_expansion_bounded, x139_polynomial_expansion_class and x220_polynomial_expansion, and the twelve whole rows (X3 negated class, X65, X66, X124, X59, X98, X60, X128, X139 and X220's three). The deepest Originals of the eight rows with history (X3, X124, X59, X98, X60, X128, X139, X220 twin width) are the deepest existing Originals, whose closures reach no live migrated-family helper (kernel audit), with the evaluator replaced by the raw freeze; each whole-row iff composes the unconditional evaluator equality with the earlier Original's registered certificate. Thirty-eight certificates.",
+    "",
+    "History: 37 earlier frozen objects in 14 specs reach a live evaluator by actual qualified closure resolution (kernel scan of 706 frozen objects); they stay byte-exact and are documented stale snapshots. Proof consumers: chi_bounding.horner_nat_dom, poly_forms.x3_poly_eval_monomial and implications_X220's x220_poly_eval_mono, poly_addE and poly_shiftE are restated through the adapter API with unchanged types. Statement texts, guards and quantifier order are unchanged; separator, grad, shallow-minor and P-normal contracts stay distinct."
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "bounded_tree_mu_polynomial_biclique_tree_alpha_statement",
+      "note": "grounding_X220 compiles unchanged (proofs and types)."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "bounded_tree_mu_polynomial_biclique_tree_alpha_statement",
+      "note": "implications_X220: x220_poly_eval_mono, poly_addE and poly_shiftE are restated through the GTBase.poly_nat nil/cons API (proof only, types unchanged); the e072 equivalence compiles unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_U8.v",
+      "name": "forest_free_polynomial_chi_bound_statement",
+      "note": "implications_U8 compiles unchanged (proofs and types)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X218.v",
+      "name": "forest_free_polynomial_chi_bound_statement",
+      "note": "implications_X218 compiles unchanged; its apply: lines of the poly_forms bridges work as before."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X66.v",
+      "name": "good_trees_disjoint_union_good_statement",
+      "note": "X66's x66_good is X3's list-form class at the induced-H-free class; frozen as X66Legacy.x66_good over X3Legacy.x3_polynomially_chi_bounded. X66's live disjoint union is untouched."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "horner_nat",
+      "note": "The A31 alias body names the canonical GTBase.poly_nat.horner_nat (fully qualified); the public source Chromatic.foundations.chi_bounding.horner_nat only shares its short name. Not a use of that source."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "horner_nat",
+      "note": "The A31 alias body names the canonical GTBase.poly_nat.horner_nat (fully qualified); the public source Chromatic.foundations.chi_bounding.horner_nat only shares its short name. Not a use of that source."
+    },
+    {
+      "path": "chromatic-theory/theories/foundations/poly_forms.v",
+      "name": "horner_nat",
+      "note": "poly_forms keeps its seven names and types; x3_poly_eval_monomial is restated through GTBase.poly_nat.horner_nat_monomial (proof only), the other proofs compile unchanged. Its X3 import is removed only in stage A32 (P-list owner)."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X59.v",
+      "name": "horner_nat",
+      "note": "The A31 alias body names the canonical GTBase.poly_nat.horner_nat (fully qualified); the public source Chromatic.foundations.chi_bounding.horner_nat only shares its short name. Not a use of that source."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "horner_nat",
+      "note": "The A31 alias body names the canonical GTBase.poly_nat.horner_nat (fully qualified); the public source Chromatic.foundations.chi_bounding.horner_nat only shares its short name. Not a use of that source."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "horner_nat",
+      "note": "The A31 alias body names the canonical GTBase.poly_nat.horner_nat (fully qualified); the public source Chromatic.foundations.chi_bounding.horner_nat only shares its short name. Not a use of that source."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "horner_nat",
+      "note": "The A31 alias body names the canonical GTBase.poly_nat.horner_nat (fully qualified); the public source Chromatic.foundations.chi_bounding.horner_nat only shares its short name. Not a use of that source."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "horner_nat",
+      "note": "The A31 alias body names the canonical GTBase.poly_nat.horner_nat (fully qualified); the public source Chromatic.foundations.chi_bounding.horner_nat only shares its short name. Not a use of that source."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "polynomial_expansion_bounded_twin_width_statement",
+      "note": "grounding_X220 compiles unchanged (proofs and types)."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "tree_mu_ktt_free_polynomial_tree_alpha_statement",
+      "note": "grounding_X220 compiles unchanged (proofs and types)."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "tree_mu_ktt_free_polynomial_tree_alpha_statement",
+      "note": "implications_X220: x220_poly_eval_mono, poly_addE and poly_shiftE are restated through the GTBase.poly_nat nil/cons API (proof only, types unchanged); the e072 equivalence compiles unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_poly_eval",
+      "note": "grounding_X220 compiles unchanged (proofs and types)."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X220.v",
+      "name": "x220_poly_eval",
+      "note": "implications_X220: x220_poly_eval_mono, poly_addE and poly_shiftE are restated through the GTBase.poly_nat nil/cons API (proof only, types unchanged); the e072 equivalence compiles unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_polynomial_expansion",
+      "note": "grounding_X220 compiles unchanged (proofs and types)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_U8.v",
+      "name": "x3_poly_eval",
+      "note": "implications_U8 compiles unchanged (proofs and types)."
+    },
+    {
+      "path": "chromatic-theory/theories/foundations/poly_forms.v",
+      "name": "x3_poly_eval",
+      "note": "poly_forms keeps its seven names and types; x3_poly_eval_monomial is restated through GTBase.poly_nat.horner_nat_monomial (proof only), the other proofs compile unchanged. Its X3 import is removed only in stage A32 (P-list owner)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X65.v",
+      "name": "x3_polynomially_chi_bounded",
+      "note": "X65's row uses X3's list-form class across modules; frozen as X65Legacy over X3Legacy.x3_polynomially_chi_bounded (raw evaluator)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "x3_polynomially_chi_bounded",
+      "note": "X66's x66_good is X3's list-form class at the induced-H-free class; frozen as X66Legacy.x66_good over X3Legacy.x3_polynomially_chi_bounded. X66's live disjoint union is untouched."
+    },
+    {
+      "path": "chromatic-theory/theories/foundations/poly_forms.v",
+      "name": "x3_polynomially_chi_bounded",
+      "note": "poly_forms keeps its seven names and types; x3_poly_eval_monomial is restated through GTBase.poly_nat.horner_nat_monomial (proof only), the other proofs compile unchanged. Its X3 import is removed only in stage A32 (P-list owner)."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "x59_poly_eval",
+      "note": "X98's row uses X59's evaluator across modules; frozen as X98Legacy / X98Original over X59Legacy.x59_poly_eval."
+    },
+    {
+      "path": "chromatic-theory/theories/examples/poly_list_chi_bounded.v",
+      "name": "horner_nat",
+      "note": "The A32 public client names the canonical GTBase.poly_nat.horner_nat (fully qualified); the public source Chromatic.foundations.chi_bounding.horner_nat only shares its short name. Not a use of that source."
+    }
+  ],
+  "distinct_variants": [],
+  "known_stale_snapshots": {
+    "chromatic-theory/theories/migration/chi_bounded_classes.v#X3Legacy.hereditary_chi_bounded_not_polynomial_statement": "chi_bounded_classes snapshot: that family froze this object over its own frozen helpers but kept the live x3_polynomially_chi_bounded, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Chromatic.migration.poly_eval.X3Original.hereditary_chi_bounded_not_polynomial_statement, certified by hereditary_chi_bounded_not_polynomial_statement_original_compat.",
+    "chromatic-theory/theories/migration/clique_number.v#X124Legacy.x124_poly_chi_bounded": "clique_number snapshot: that family froze this object over its own frozen helpers but kept the live x124_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Chromatic.migration.poly_eval.X124Original (class and row), certified by x124_poly_chi_bounded_original_compat and dreier_torunczyk_merge_width_poly_chi_bounded_statement_original_compat.",
+    "chromatic-theory/theories/migration/graph_classes.v#Legacy.hereditary_chi_bounded_not_polynomial_statement": "graph_classes snapshot: that family froze this object over its own frozen helpers but kept the live x3_polynomially_chi_bounded, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Chromatic.migration.poly_eval.X3Original.hereditary_chi_bounded_not_polynomial_statement, certified by hereditary_chi_bounded_not_polynomial_statement_original_compat.",
+    "chromatic-theory/theories/migration/graph_classes.v#X3Original.hereditary_chi_bounded_not_polynomial_statement": "graph_classes snapshot: that family froze this object over its own frozen helpers but kept the live x3_polynomially_chi_bounded, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Chromatic.migration.poly_eval.X3Original.hereditary_chi_bounded_not_polynomial_statement, certified by hereditary_chi_bounded_not_polynomial_statement_original_compat.",
+    "chromatic-theory/theories/migration/poly_eval.v#X3Legacy.x3_poly_eval": "A31 frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (the module-local frozen evaluator itself), not the live x3_poly_eval; the A31 kernel closure analysis shows no live evaluator in its dependency closure. Certified by the unconditional pointwise equality x3_poly_eval_compat.",
+    "chromatic-theory/theories/migration/poly_eval.v#X124Legacy.x124_poly_eval": "A31 frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (the module-local frozen evaluator itself), not the live x124_poly_eval; the A31 kernel closure analysis shows no live evaluator in its dependency closure. Certified by the unconditional pointwise equality x124_poly_eval_compat.",
+    "extremal-graph-theory/theories/migration/consecutive_in_path.v#X98Legacy.statement": "consecutive_in_path snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X98Original.polynomial_kuhn_osthus_induced_subdivision_statement, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/cycle_lengths.v#X59Legacy.c4_free_subgraph_polynomial_average_degree_statement": "cycle_lengths snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X59Original.c4_free_subgraph_polynomial_average_degree_statement, certified by c4_free_subgraph_polynomial_average_degree_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/cycle_lengths.v#X59Original.c4_free_subgraph_polynomial_average_degree_statement": "cycle_lengths snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X59Original.c4_free_subgraph_polynomial_average_degree_statement, certified by c4_free_subgraph_polynomial_average_degree_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/delete_edge.v#X60Legacy.induced_saturation_even_cycle_polynomial_size_statement": "delete_edge snapshot: that family froze this object over its own frozen helpers but kept the live x60_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X60Original.induced_saturation_even_cycle_polynomial_size_statement, certified by induced_saturation_even_cycle_polynomial_size_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/delete_edge.v#X60Original.induced_saturation_even_cycle_polynomial_size_statement": "delete_edge snapshot: that family froze this object over its own frozen helpers but kept the live x60_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X60Original.induced_saturation_even_cycle_polynomial_size_statement, certified by induced_saturation_even_cycle_polynomial_size_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/induced_paths.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement": "induced_paths snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X98Original.polynomial_kuhn_osthus_induced_subdivision_statement, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/induced_subdivisions.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement": "induced_subdivisions snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X98Original.polynomial_kuhn_osthus_induced_subdivision_statement, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/model_support.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement": "model_support snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X98Original.polynomial_kuhn_osthus_induced_subdivision_statement, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/model_support.v#X98Original.polynomial_kuhn_osthus_induced_subdivision_statement": "model_support snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X98Original.polynomial_kuhn_osthus_induced_subdivision_statement, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/poly_eval.v#X59Legacy.x59_poly_eval": "A31 frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (the module-local frozen evaluator itself), not the live x59_poly_eval; the A31 kernel closure analysis shows no live evaluator in its dependency closure. Certified by the unconditional pointwise equality x59_poly_eval_compat.",
+    "extremal-graph-theory/theories/migration/poly_eval.v#X60Legacy.x60_poly_eval": "A31 frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (the module-local frozen evaluator itself), not the live x60_poly_eval; the A31 kernel closure analysis shows no live evaluator in its dependency closure. Certified by the unconditional pointwise equality x60_poly_eval_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X59Legacy.c4_free_subgraph_polynomial_average_degree_statement": "subgraph_of snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X59Original.c4_free_subgraph_polynomial_average_degree_statement, certified by c4_free_subgraph_polynomial_average_degree_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement": "subgraph_of snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X98Original.polynomial_kuhn_osthus_induced_subdivision_statement, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.",
+    "extremal-graph-theory/theories/migration/subgraph_of.v#X98Original.polynomial_kuhn_osthus_induced_subdivision_statement": "subgraph_of snapshot: that family froze this object over its own frozen helpers but kept the live x59_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Extremal.migration.poly_eval.X98Original.polynomial_kuhn_osthus_induced_subdivision_statement, certified by polynomial_kuhn_osthus_induced_subdivision_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_grad.v#X128Legacy.x128_expansion_bounded": "ambient_grad snapshot: that family froze this object over its own frozen helpers but kept the live x128_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X128Original (expansion chain and row, over C16's frozen grad and A30's frozen separator), certified by x128_expansion_bounded_original_compat and dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_grad.v#X139Legacy.x139_polynomial_expansion_class": "ambient_grad snapshot: that family froze this object over its own frozen helpers but kept the live x139_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X139Original (class and row, over C16's frozen grad), certified by x139_polynomial_expansion_class_original_compat and esperet_raymond_polynomial_expansion_scol_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_grad.v#X139Legacy.esperet_raymond_polynomial_expansion_scol_statement": "ambient_grad snapshot: that family froze this object over its own frozen helpers but kept the live x139_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X139Original (class and row, over C16's frozen grad), certified by x139_polynomial_expansion_class_original_compat and esperet_raymond_polynomial_expansion_scol_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_shallow_minors.v#X128Legacy.x128_expansion_bounded": "ambient_shallow_minors snapshot: that family froze this object over its own frozen helpers but kept the live x128_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X128Original (expansion chain and row, over C16's frozen grad and A30's frozen separator), certified by x128_expansion_bounded_original_compat and dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_shallow_minors.v#X128Original.x128_expansion_bounded": "ambient_shallow_minors snapshot: that family froze this object over its own frozen helpers but kept the live x128_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X128Original (expansion chain and row, over C16's frozen grad and A30's frozen separator), certified by x128_expansion_bounded_original_compat and dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_shallow_minors.v#X139Legacy.x139_polynomial_expansion_class": "ambient_shallow_minors snapshot: that family froze this object over its own frozen helpers but kept the live x139_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X139Original (class and row, over C16's frozen grad), certified by x139_polynomial_expansion_class_original_compat and esperet_raymond_polynomial_expansion_scol_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_shallow_minors.v#X139Legacy.esperet_raymond_polynomial_expansion_scol_statement": "ambient_shallow_minors snapshot: that family froze this object over its own frozen helpers but kept the live x139_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X139Original (class and row, over C16's frozen grad), certified by x139_polynomial_expansion_class_original_compat and esperet_raymond_polynomial_expansion_scol_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_shallow_minors.v#X139Original.x139_polynomial_expansion_class": "ambient_shallow_minors snapshot: that family froze this object over its own frozen helpers but kept the live x139_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X139Original (class and row, over C16's frozen grad), certified by x139_polynomial_expansion_class_original_compat and esperet_raymond_polynomial_expansion_scol_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_shallow_minors.v#X139Original.esperet_raymond_polynomial_expansion_scol_statement": "ambient_shallow_minors snapshot: that family froze this object over its own frozen helpers but kept the live x139_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X139Original (class and row, over C16's frozen grad), certified by x139_polynomial_expansion_class_original_compat and esperet_raymond_polynomial_expansion_scol_statement_original_compat.",
+    "graph-theory-misc/theories/migration/edge_count.v#X128Legacy.expansion_bounded": "edge_count snapshot: that family froze this object over its own frozen helpers but kept the live x128_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X128Original (expansion chain and row, over C16's frozen grad and A30's frozen separator), certified by x128_expansion_bounded_original_compat and dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
+    "graph-theory-misc/theories/migration/edge_count.v#X139Legacy.polynomial_expansion_class": "edge_count snapshot: that family froze this object over its own frozen helpers but kept the live x139_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X139Original (class and row, over C16's frozen grad), certified by x139_polynomial_expansion_class_original_compat and esperet_raymond_polynomial_expansion_scol_statement_original_compat.",
+    "graph-theory-misc/theories/migration/edge_count.v#X139Legacy.esperet_raymond_polynomial_expansion_scol_statement": "edge_count snapshot: that family froze this object over its own frozen helpers but kept the live x139_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X139Original (class and row, over C16's frozen grad), certified by x139_polynomial_expansion_class_original_compat and esperet_raymond_polynomial_expansion_scol_statement_original_compat.",
+    "graph-theory-misc/theories/migration/poly_eval.v#X128Legacy.x128_poly_eval": "A31 frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (the module-local frozen evaluator itself), not the live x128_poly_eval; the A31 kernel closure analysis shows no live evaluator in its dependency closure. Certified by the unconditional pointwise equality x128_poly_eval_compat.",
+    "graph-theory-misc/theories/migration/poly_eval.v#X139Legacy.x139_poly_eval": "A31 frozen source, a lexical false positive: the recursive call inside this verbatim Fixpoint is its own fix binder (the module-local frozen evaluator itself), not the live x139_poly_eval; the A31 kernel closure analysis shows no live evaluator in its dependency closure. Certified by the unconditional pointwise equality x139_poly_eval_compat.",
+    "graph-theory-misc/theories/migration/set_weights.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement": "set_weights snapshot: that family froze this object over its own frozen helpers but kept the live x128_expansion_bounded, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X128Original (expansion chain and row, over C16's frozen grad and A30's frozen separator), certified by x128_expansion_bounded_original_compat and dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
+    "minor-theory/theories/migration/shallow_minors.v#Legacy.x220_polynomial_expansion": "shallow_minors snapshot: that family froze this object over its own frozen helpers but kept the live x220_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Minor.migration.poly_eval.X220Original (expansion chain and twin-width row, over the frozen shallow minor), certified by x220_polynomial_expansion_original_compat and polynomial_expansion_bounded_twin_width_statement_original_compat.",
+    "chromatic-theory/theories/migration/poly_list_chi_bounded.v#X124Legacy.x124_poly_chi_bounded": "A32 current snapshot: A32 froze this object verbatim at 0449699 over its frozen list-form class but kept the live x124_poly_eval of this family, as the source did. It stays byte-exact; the complete history is Chromatic.migration.poly_eval.X124Original (A31: class over the frozen clique number and the raw evaluator, and the row), whose iffs are Chromatic.migration.poly_list_chi_bounded.x124_poly_chi_bounded_original_compat and dreier_torunczyk_merge_width_poly_chi_bounded_statement_original_compat, the poly_list_chi_bounded report rechecks.",
+    "chromatic-theory/theories/migration/poly_list_chi_bounded.v#X3Legacy.x3_polynomially_chi_bounded": "A32 current snapshot: A32 froze this object verbatim at 0449699 over its frozen list-form class but kept the live x3_poly_eval of this family, as the source did. It stays byte-exact; the complete history is A31's raw class Chromatic.migration.poly_eval.X3Legacy.x3_polynomially_chi_bounded (related to this freeze by x3_raw_class_compat) and the complete X3 row Chromatic.migration.poly_eval.X3Original.hereditary_chi_bounded_not_polynomial_statement, whose whole-row iff is Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_original_compat, the poly_list_chi_bounded report rechecks.",
+    "chromatic-theory/theories/migration/disjoint_union.v#X66Legacy.good_trees_disjoint_union_good_statement": "Earlier-integrated family snapshot (disjoint-union, A28, baseline ec5fb25, integrated before this family): disjoint-union froze only X66's disjoint union (x66_disjoint_union_rel, its two constructor proofs and x66_disjoint_union) and kept the goodness x66_good live by design, so this copy applies the live x66_good, whose X3 class evaluates through x3_poly_eval, since this family a transparent alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint by the unconditional x3_poly_eval_compat). Kept byte-exact; its own iff to the live row still compiles. Over disjoint-union's frozen union and this family's frozen goodness X66Legacy.x66_good, the complete pre-migration row is Chromatic.migration.poly_eval.X66Original.good_trees_disjoint_union_good_statement, certified by x66_original_compat (X66-combined)."
+  },
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.foundations.chi_bounding.horner_nat",
+      "path": "chromatic-theory/theories/foundations/chi_bounding.v",
+      "name": "horner_nat",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "Legacy.horner_nat",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.poly_eval.horner_nat_compat",
+      "live_unfolds_to": "GTBase.poly_nat.horner_nat p x",
+      "commit": "db16a76376d1a9c29142b38f97d5109d6dd942fa",
+      "repository_source": true
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X3.x3_poly_eval",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_poly_eval",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X3Legacy.x3_poly_eval",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.poly_eval.x3_poly_eval_compat",
+      "live_unfolds_to": "GTBase.poly_nat.horner_nat p x"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X3.x3_polynomially_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "x3_polynomially_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X3Legacy.x3_polynomially_chi_bounded",
+      "substitutions": {
+        "x3_poly_eval": "X3Legacy.x3_poly_eval"
+      },
+      "certificate": "Chromatic.migration.poly_eval.x3_polynomially_chi_bounded_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X3.hereditary_chi_bounded_not_polynomial_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "hereditary_chi_bounded_not_polynomial_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X3Legacy.hereditary_chi_bounded_not_polynomial_statement",
+      "substitutions": {
+        "x3_polynomially_chi_bounded": "X3Legacy.x3_polynomially_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_eval.hereditary_chi_bounded_not_polynomial_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X3.hereditary_chi_bounded_not_polynomial_statement",
+      "path": "chromatic-theory/theories/conjectures/X3.v",
+      "name": "hereditary_chi_bounded_not_polynomial_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X3Original.hereditary_chi_bounded_not_polynomial_statement",
+      "substitutions": {
+        "x3_hereditary_class": "GC.Legacy.x3_hereditary_class",
+        "chi_bounded": "ChiLegacy.chi_bounded",
+        "x3_polynomially_chi_bounded": "X3Legacy.x3_polynomially_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_eval.hereditary_chi_bounded_not_polynomial_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X65.forest_free_polynomial_chi_bound_statement",
+      "path": "chromatic-theory/theories/conjectures/X65.v",
+      "name": "forest_free_polynomial_chi_bound_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X65Legacy.forest_free_polynomial_chi_bound_statement",
+      "substitutions": {
+        "x3_polynomially_chi_bounded": "X3Legacy.x3_polynomially_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_eval.forest_free_polynomial_chi_bound_statement_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X66.x66_good",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "x66_good",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X66Legacy.x66_good",
+      "substitutions": {
+        "x3_polynomially_chi_bounded": "X3Legacy.x3_polynomially_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_eval.x66_good_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X66.good_trees_disjoint_union_good_statement",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "good_trees_disjoint_union_good_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X66Legacy.good_trees_disjoint_union_good_statement",
+      "substitutions": {
+        "x66_good": "X66Legacy.x66_good"
+      },
+      "certificate": "Chromatic.migration.poly_eval.good_trees_disjoint_union_good_statement_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.X124.x124_poly_eval",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "x124_poly_eval",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X124Legacy.x124_poly_eval",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.poly_eval.x124_poly_eval_compat",
+      "live_unfolds_to": "GTBase.poly_nat.horner_nat p x"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Chromatic.conjectures.X124.x124_poly_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "x124_poly_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X124Legacy.x124_poly_chi_bounded",
+      "substitutions": {
+        "x124_poly_eval": "X124Legacy.x124_poly_eval"
+      },
+      "certificate": "Chromatic.migration.poly_eval.x124_poly_chi_bounded_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.X124.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X124Legacy.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "substitutions": {
+        "x124_poly_chi_bounded": "X124Legacy.x124_poly_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_eval.dreier_torunczyk_merge_width_poly_chi_bounded_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Chromatic.conjectures.X124.x124_poly_chi_bounded",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "x124_poly_chi_bounded",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X124Original.x124_poly_chi_bounded",
+      "substitutions": {
+        "x124_poly_eval": "X124Legacy.x124_poly_eval",
+        "x124_omega": "CN.Legacy.x124_omega"
+      },
+      "certificate": "Chromatic.migration.poly_eval.x124_poly_chi_bounded_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X124.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "path": "chromatic-theory/theories/conjectures/X124.v",
+      "name": "dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X124Original.dreier_torunczyk_merge_width_poly_chi_bounded_statement",
+      "substitutions": {
+        "x124_poly_chi_bounded": "X124Original.x124_poly_chi_bounded"
+      },
+      "certificate": "Chromatic.migration.poly_eval.dreier_torunczyk_merge_width_poly_chi_bounded_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X59.x59_poly_eval",
+      "path": "extremal-graph-theory/theories/conjectures/X59.v",
+      "name": "x59_poly_eval",
+      "frozen_path": "extremal-graph-theory/theories/migration/poly_eval.v",
+      "frozen": "X59Legacy.x59_poly_eval",
+      "substitutions": {},
+      "certificate": "Extremal.migration.poly_eval.x59_poly_eval_compat",
+      "live_unfolds_to": "GTBase.poly_nat.horner_nat p x"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X59.c4_free_subgraph_polynomial_average_degree_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X59.v",
+      "name": "c4_free_subgraph_polynomial_average_degree_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/poly_eval.v",
+      "frozen": "X59Legacy.c4_free_subgraph_polynomial_average_degree_statement",
+      "substitutions": {
+        "x59_poly_eval": "X59Legacy.x59_poly_eval"
+      },
+      "certificate": "Extremal.migration.poly_eval.c4_free_subgraph_polynomial_average_degree_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X59.c4_free_subgraph_polynomial_average_degree_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X59.v",
+      "name": "c4_free_subgraph_polynomial_average_degree_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/poly_eval.v",
+      "frozen": "X59Original.c4_free_subgraph_polynomial_average_degree_statement",
+      "substitutions": {
+        "x59_poly_eval": "X59Legacy.x59_poly_eval",
+        "x59_subgraph_of": "A5.Legacy.x59_subgraph_of",
+        "x59_has_cycle_length": "CL.Legacy.x59_has_cycle_length"
+      },
+      "certificate": "Extremal.migration.poly_eval.c4_free_subgraph_polynomial_average_degree_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "Extremal.conjectures.X60.x60_poly_eval",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "x60_poly_eval",
+      "frozen_path": "extremal-graph-theory/theories/migration/poly_eval.v",
+      "frozen": "X60Legacy.x60_poly_eval",
+      "substitutions": {},
+      "certificate": "Extremal.migration.poly_eval.x60_poly_eval_compat",
+      "live_unfolds_to": "GTBase.poly_nat.horner_nat p x"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X60.induced_saturation_even_cycle_polynomial_size_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "induced_saturation_even_cycle_polynomial_size_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/poly_eval.v",
+      "frozen": "X60Legacy.induced_saturation_even_cycle_polynomial_size_statement",
+      "substitutions": {
+        "x60_poly_eval": "X60Legacy.x60_poly_eval"
+      },
+      "certificate": "Extremal.migration.poly_eval.induced_saturation_even_cycle_polynomial_size_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X60.induced_saturation_even_cycle_polynomial_size_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X60.v",
+      "name": "induced_saturation_even_cycle_polynomial_size_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/poly_eval.v",
+      "frozen": "X60Original.induced_saturation_even_cycle_polynomial_size_statement",
+      "substitutions": {
+        "x60_poly_eval": "X60Legacy.x60_poly_eval",
+        "x60_edge_set": "SE.Legacy.edge_set",
+        "x60_delete_edge_graph": "DE.Legacy.x60_delete_edge_graph"
+      },
+      "certificate": "Extremal.migration.poly_eval.induced_saturation_even_cycle_polynomial_size_statement_original_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "polynomial_kuhn_osthus_induced_subdivision_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/poly_eval.v",
+      "frozen": "X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "substitutions": {
+        "x59_poly_eval": "X59Legacy.x59_poly_eval"
+      },
+      "certificate": "Extremal.migration.poly_eval.polynomial_kuhn_osthus_induced_subdivision_statement_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "path": "extremal-graph-theory/theories/conjectures/X98.v",
+      "name": "polynomial_kuhn_osthus_induced_subdivision_statement",
+      "frozen_path": "extremal-graph-theory/theories/migration/poly_eval.v",
+      "frozen": "X98Original.polynomial_kuhn_osthus_induced_subdivision_statement",
+      "substitutions": {
+        "x59_subgraph_of": "A5.Legacy.x59_subgraph_of",
+        "x59_poly_eval": "X59Legacy.x59_poly_eval",
+        "x98_induced_subdivision": "MS.X98Original.x98_induced_subdivision"
+      },
+      "certificate": "Extremal.migration.poly_eval.polynomial_kuhn_osthus_induced_subdivision_statement_original_compat"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X128.x128_poly_eval",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_poly_eval",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X128Legacy.x128_poly_eval",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.poly_eval.x128_poly_eval_compat",
+      "live_unfolds_to": "GTBase.poly_nat.horner_nat p x"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X128.x128_expansion_bounded",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_expansion_bounded",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X128Legacy.x128_expansion_bounded",
+      "substitutions": {
+        "x128_poly_eval": "X128Legacy.x128_poly_eval"
+      },
+      "certificate": "GTMisc.migration.poly_eval.x128_expansion_bounded_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X128.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "substitutions": {
+        "x128_expansion_bounded": "X128Legacy.x128_expansion_bounded"
+      },
+      "certificate": "GTMisc.migration.poly_eval.dvorak_cheap_balanced_separator_bounded_expansion_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X128.x128_expansion_bounded",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_expansion_bounded",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X128Original.x128_expansion_bounded",
+      "substitutions": {
+        "x128_grad_at_most": "ASM.X128Original.x128_grad_at_most",
+        "x128_poly_eval": "X128Legacy.x128_poly_eval"
+      },
+      "certificate": "GTMisc.migration.poly_eval.x128_expansion_bounded_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X128.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "substitutions": {
+        "x128_expansion_bounded": "X128Original.x128_expansion_bounded",
+        "x128_cheap_bal_sep": "SW.X128Legacy.x128_cheap_bal_sep"
+      },
+      "certificate": "GTMisc.migration.poly_eval.dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X139.x139_poly_eval",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "x139_poly_eval",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X139Legacy.x139_poly_eval",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.poly_eval.x139_poly_eval_compat",
+      "live_unfolds_to": "GTBase.poly_nat.horner_nat p x"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X139.x139_polynomial_expansion_class",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "x139_polynomial_expansion_class",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X139Legacy.x139_polynomial_expansion_class",
+      "substitutions": {
+        "x139_poly_eval": "X139Legacy.x139_poly_eval"
+      },
+      "certificate": "GTMisc.migration.poly_eval.x139_polynomial_expansion_class_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X139.esperet_raymond_polynomial_expansion_scol_statement",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "esperet_raymond_polynomial_expansion_scol_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X139Legacy.esperet_raymond_polynomial_expansion_scol_statement",
+      "substitutions": {
+        "x139_polynomial_expansion_class": "X139Legacy.x139_polynomial_expansion_class",
+        "x139_poly_eval": "X139Legacy.x139_poly_eval"
+      },
+      "certificate": "GTMisc.migration.poly_eval.esperet_raymond_polynomial_expansion_scol_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "GTMisc.conjectures.X139.x139_polynomial_expansion_class",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "x139_polynomial_expansion_class",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X139Original.x139_polynomial_expansion_class",
+      "substitutions": {
+        "x139_grad_at_most": "ASM.X139Original.x139_grad_at_most",
+        "x139_poly_eval": "X139Legacy.x139_poly_eval"
+      },
+      "certificate": "GTMisc.migration.poly_eval.x139_polynomial_expansion_class_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X139.esperet_raymond_polynomial_expansion_scol_statement",
+      "path": "graph-theory-misc/theories/conjectures/X139.v",
+      "name": "esperet_raymond_polynomial_expansion_scol_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/poly_eval.v",
+      "frozen": "X139Original.esperet_raymond_polynomial_expansion_scol_statement",
+      "substitutions": {
+        "x139_polynomial_expansion_class": "X139Original.x139_polynomial_expansion_class",
+        "x139_poly_eval": "X139Legacy.x139_poly_eval"
+      },
+      "certificate": "GTMisc.migration.poly_eval.esperet_raymond_polynomial_expansion_scol_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X220.x220_poly_eval",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_poly_eval",
+      "frozen_path": "minor-theory/theories/migration/poly_eval.v",
+      "frozen": "X220Legacy.x220_poly_eval",
+      "substitutions": {},
+      "certificate": "Minor.migration.poly_eval.x220_poly_eval_compat",
+      "live_unfolds_to": "GTBase.poly_nat.horner_nat p x"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X220.x220_polynomial_expansion",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_polynomial_expansion",
+      "frozen_path": "minor-theory/theories/migration/poly_eval.v",
+      "frozen": "X220Legacy.x220_polynomial_expansion",
+      "substitutions": {
+        "x220_poly_eval": "X220Legacy.x220_poly_eval"
+      },
+      "certificate": "Minor.migration.poly_eval.x220_polynomial_expansion_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.tree_mu_ktt_free_polynomial_tree_alpha_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "tree_mu_ktt_free_polynomial_tree_alpha_statement",
+      "frozen_path": "minor-theory/theories/migration/poly_eval.v",
+      "frozen": "X220Legacy.tree_mu_ktt_free_polynomial_tree_alpha_statement",
+      "substitutions": {
+        "x220_poly_eval": "X220Legacy.x220_poly_eval"
+      },
+      "certificate": "Minor.migration.poly_eval.tree_mu_ktt_free_polynomial_tree_alpha_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.bounded_tree_mu_polynomial_biclique_tree_alpha_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "bounded_tree_mu_polynomial_biclique_tree_alpha_statement",
+      "frozen_path": "minor-theory/theories/migration/poly_eval.v",
+      "frozen": "X220Legacy.bounded_tree_mu_polynomial_biclique_tree_alpha_statement",
+      "substitutions": {
+        "x220_poly_eval": "X220Legacy.x220_poly_eval"
+      },
+      "certificate": "Minor.migration.poly_eval.bounded_tree_mu_polynomial_biclique_tree_alpha_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.polynomial_expansion_bounded_twin_width_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "polynomial_expansion_bounded_twin_width_statement",
+      "frozen_path": "minor-theory/theories/migration/poly_eval.v",
+      "frozen": "X220Legacy.polynomial_expansion_bounded_twin_width_statement",
+      "substitutions": {
+        "x220_polynomial_expansion": "X220Legacy.x220_polynomial_expansion"
+      },
+      "certificate": "Minor.migration.poly_eval.polynomial_expansion_bounded_twin_width_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Minor.conjectures.X220.x220_polynomial_expansion",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_polynomial_expansion",
+      "frozen_path": "minor-theory/theories/migration/poly_eval.v",
+      "frozen": "X220Original.x220_polynomial_expansion",
+      "substitutions": {
+        "x220_shallow_minor": "SM.Legacy.x220_shallow_minor",
+        "x220_poly_eval": "X220Legacy.x220_poly_eval"
+      },
+      "certificate": "Minor.migration.poly_eval.x220_polynomial_expansion_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X220.polynomial_expansion_bounded_twin_width_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "polynomial_expansion_bounded_twin_width_statement",
+      "frozen_path": "minor-theory/theories/migration/poly_eval.v",
+      "frozen": "X220Original.polynomial_expansion_bounded_twin_width_statement",
+      "substitutions": {
+        "x220_polynomial_expansion": "X220Original.x220_polynomial_expansion"
+      },
+      "certificate": "Minor.migration.poly_eval.polynomial_expansion_bounded_twin_width_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X66.good_trees_disjoint_union_good_statement",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "good_trees_disjoint_union_good_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X66Original.good_trees_disjoint_union_good_statement",
+      "substitutions": {
+        "x66_good": "X66Legacy.x66_good",
+        "x66_disjoint_union": "DU.X66Legacy.x66_disjoint_union"
+      },
+      "certificate": "Chromatic.migration.poly_eval.x66_original_compat"
+    }
+  ]
+}

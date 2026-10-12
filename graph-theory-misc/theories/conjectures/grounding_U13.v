@@ -418,7 +418,7 @@ Qed.
 
 (** [gold_total] — identity: empty state holds no gold. *)
 Lemma gold_total_set0 (G : sgraph) (g : G -> nat) : gold_total g set0 = 0.
-Proof. by rewrite /gold_total big_set0. Qed.
+Proof. by rewrite /gold_total /weight_set big_set0. Qed.
 
 (** [leaf_game_solution] — witness: on the single-vertex tree, the game value is
     the total gold and the (only) optimal move is the lone vertex; this satisfies
@@ -439,9 +439,9 @@ move=> S; split.
   split.
   + by rewrite SE; apply/andP; split;
        [exact: set11 | apply: leq_trans (max_card _) _; rewrite card_ord].
-  + by rewrite Sd gold_total_set0 addn0 subn0 /gold_total SE big_set1.
+  + by rewrite Sd gold_total_set0 addn0 subn0 /gold_total /weight_set SE big_set1.
   + by move=> u _;
-       rewrite (ord1 u) Sd gold_total_set0 addn0 subn0 /gold_total SE big_set1.
+       rewrite (ord1 u) Sd gold_total_set0 addn0 subn0 /gold_total /weight_set SE big_set1.
 Qed.
 
 (** ============================================================================
