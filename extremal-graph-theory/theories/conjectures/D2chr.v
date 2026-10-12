@@ -39,6 +39,9 @@ From GTBase Require Import edge_colourings.
 From GraphTheory Require Import minor.
 From Extremal.foundations Require Export circular_colouring.
 From mathcomp Require Import all_algebra.
+From GTBase Require Import bfold_colourings.
+From Extremal.foundations Require Import fractional_colouring.
+From Extremal.foundations Require Import fractional_hadwiger.
 Import GRing.Theory Num.Theory.
 
 Set Implicit Arguments.
@@ -59,28 +62,31 @@ Local Open Scope ring_scope.
         rational weights on non-empty connected, pairwise-adjacent branch sets, each vertex
         covered with total weight ≤ 1, maximise the total weight (0/1 weights recover
         a clique minor, so the optimum is had_f ≥ had). *)
+(** Since the bfold-colouring library migration [bfold_colouring] is a transparent alias of
+    [GTBase.bfold_colourings.bfold_colouring] (the same body); the former body is frozen in
+    theories/migration/bfold_colouring.v. *)
 Definition bfold_colouring (G : sgraph) (a b : nat) (f : G -> {set 'I_a}) : Prop :=
-  (forall v, #|f v| = b) /\ (forall x y : G, x -- y -> [disjoint f x & f y]).
+  bfold_colourings.bfold_colouring b f.
 
+(** Since the fractional-chromatic library migration [is_fractional_chromatic] is a transparent alias of
+    [Extremal.foundations.fractional_colouring.is_fractional_chromatic] (the same body, over the canonical
+    b-fold colouring); the former body is frozen in theories/migration/fractional_chromatic.v. *)
 Definition is_fractional_chromatic (G : sgraph) (r : rat) : Prop :=
-  (exists a b : nat, (0 < b)%N /\ (exists f, @bfold_colouring G a b f) /\ r = a%:Q / b%:Q) /\
-  (forall a b : nat, (0 < b)%N -> (exists f, @bfold_colouring G a b f) -> r <= a%:Q / b%:Q).
+  fractional_colouring.is_fractional_chromatic G r.
 
 Definition is_hadwiger (G : sgraph) (h : nat) : Prop :=
   minor G 'K_h /\ (forall h', minor G 'K_h' -> (h' <= h)%N).
 
+(** Since the fractional-clique-minor library migration [frac_clique_minor] and [is_fractional_hadwiger] are
+    transparent aliases of [Extremal.foundations.fractional_hadwiger] (the same bodies: the clique-minor LP as
+    repaired in wave E10, and its attained maximum); the former bodies are frozen in
+    theories/migration/fractional_clique_minor.v. *)
 Definition frac_clique_minor (G : sgraph) (n : nat)
     (B : 'I_n -> {set G}) (w : 'I_n -> rat) (r : rat) : Prop :=
-  [/\ (forall i, 0 <= w i),
-      (forall i, B i != set0 /\ connected (B i)),
-      (forall i j, i != j -> exists x y : G, [/\ x \in B i, y \in B j & x -- y]),
-      (forall v : G, (\sum_(i | v \in B i) w i <= 1)%R)
-    & r = \sum_i w i].
+  fractional_hadwiger.frac_clique_minor B w r.
 
 Definition is_fractional_hadwiger (G : sgraph) (r : rat) : Prop :=
-  (exists (n : nat) (B : 'I_n -> {set G}) (w : 'I_n -> rat), frac_clique_minor B w r) /\
-  (forall (n : nat) (B : 'I_n -> {set G}) (w : 'I_n -> rat) (r' : rat),
-     frac_clique_minor B w r' -> r' <= r).
+  fractional_hadwiger.is_fractional_hadwiger G r.
 
 (** Corpus row: opg:fractional_hadwiger
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/fractional_hadwiger/

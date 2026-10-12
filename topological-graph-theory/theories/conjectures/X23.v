@@ -2,6 +2,7 @@
 
 From GTBase Require Export base.
 Require GTBase.edge_colourings.
+Require GTBase.path_trees.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -42,10 +43,13 @@ Definition x23_colour_graph
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : sgraph :=
   GTBase.edge_colourings.edge_colour_class col (pred1 i).
 
+(** Since library migration D14 this is [GTBase.path_trees.linear_forest] of the
+    colour class (a forest of maximum degree at most two, no connectedness or
+    nonemptiness guard); the original declaration is frozen in
+    migration/linear_forest.v. *)
 Definition x23_linear_forest_colour
     (G : sgraph) (q : nat) (col : {set G} -> 'I_q) (i : 'I_q) : Prop :=
-  is_forest [set: x23_colour_graph col i] /\
-  Delta (x23_colour_graph col i) <= 2.
+  GTBase.path_trees.linear_forest (x23_colour_graph col i).
 
 Definition x23_linear_arboricity_at_most (G : sgraph) (q : nat) : Prop :=
   exists col : {set G} -> 'I_q,

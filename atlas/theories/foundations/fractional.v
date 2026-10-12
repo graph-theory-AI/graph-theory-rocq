@@ -6,11 +6,17 @@
     of the clique-minor LP) of [Extremal.conjectures.D2chr] and the integral
     invariants: [chi_f <= chi] and [n <= had_f] whenever [K_n] is a minor.  They
     would belong in [extremal-graph-theory]'s foundations, but that package cannot
-    import [minor-theory]'s rows, so they live in the atlas. *)
+    import [minor-theory]'s rows, so they live in the atlas.
+    Since the fractional-clique-minor library migration this module imports no
+    conjecture file: the two invariants are the public
+    [Extremal.foundations.fractional_colouring.is_fractional_chromatic] (over GTBase's
+    [bfold_colouring]) and [Extremal.foundations.fractional_hadwiger]'s
+    [frac_clique_minor]/[is_fractional_hadwiger] (with [frac_clique_minor_le_card]), of
+    which D2chr's names are transparent aliases; every statement and proof is unchanged. *)
 
-From GTBase Require Import base.
+From GTBase Require Import base bfold_colourings.
 From GraphTheory Require Import minor.
-From Extremal.conjectures Require Import D2chr grounding_D2chr.
+From Extremal.foundations Require Import fractional_colouring fractional_hadwiger.
 From Extremal.foundations Require Import lp_rational.
 From mathcomp Require Import all_algebra.
 Import GRing.Theory Num.Theory.
