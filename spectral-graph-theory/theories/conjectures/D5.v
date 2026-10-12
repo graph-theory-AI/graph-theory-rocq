@@ -30,7 +30,7 @@
 From mathcomp Require Import all_boot.
 From GTBase Require Import colourings.
 From GraphTheory Require Import sgraph.
-From GTBase Require Import base.
+From GTBase Require Import base strongly_regular.
 From mathcomp Require Import all_algebra perm.
 From Spectral Require Import foundations.spectral.
 
@@ -43,7 +43,8 @@ Import GRing.Theory Num.Theory.
 
 (** ** Row 1 — Triangle-free strongly regular graphs (Algebraic Graph Theory, OPEN)
 
-    Area-specific primitive [strongly_regular]: combinatorial (int/nat, no matrices).
+    [strongly_regular] is an alias of GTBase's [connected_nontrivial_strongly_regular]
+    (A33, base/theories/strongly_regular.v): combinatorial (int/nat, no matrices).
     A graph is strongly regular when it is connected, [k]-regular with [0 < k < n-1],
     every pair of adjacent vertices has exactly [lam] common neighbours, and every pair
     of distinct non-adjacent vertices has exactly [mu] common neighbours.  (Triangle-
@@ -62,12 +63,7 @@ Import GRing.Theory Num.Theory.
     triangle-free strongly regular graphs.  Combined with the seven known examples this
     is equivalent to the existence of an eighth. *)
 Definition strongly_regular (G : sgraph) : Prop :=
-  exists k lam mu : nat,
-    [/\ connected [set: G],
-        (0 < k)%N /\ (k < (#|G|).-1)%N,
-        regular G k,
-        (forall u v : G, u -- v -> #|common_nbr u v| = lam) &
-        (forall u v : G, u != v -> ~~ (u -- v) -> #|common_nbr u v| = mu)].
+  connected_nontrivial_strongly_regular G.
 
 (** Corpus row: opg:triangle_free_strongly_regular_graphs
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/triangle_free_strongly_regular_graphs/

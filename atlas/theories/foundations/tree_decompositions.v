@@ -35,17 +35,8 @@ Lemma k_edge_connected_cut (G : sgraph) (k : nat) (S : {set G}) :
   k_edge_connected G k -> S != set0 -> S != [set: G] ->
   k <= #|x47_crossing_edges S|.
 Proof.
-case=> _ H S0 ST; rewrite leqNgt; apply/negP => lt.
-have C := connectedTE (H _ lt).
-have [x xS] := set0Pn _ S0.
-have [y yS] : exists y, y \notin S.
-  by apply/existsP; move: ST; apply: contraNT; rewrite negb_exists => /forallP h;
-     apply/eqP/setP => z; rewrite inE; move: (h z); rewrite negbK.
-have [u [v [uv uS vS]]] := connect_crossing (C x y) xS yS.
-move: uv; rewrite /edge_rel /= /del_es_rel /= => /andP [uv]; apply/negP; rewrite negbK.
-rewrite inE x47_edge_setE in_edges uv /=; apply/andP; split; apply/set0Pn.
-  by exists u; rewrite !inE eqxx uS.
-by exists v; rewrite !inE eqxx orbT vS.
+move=> kc S0 ST.
+exact: (@GTBase.simple_cuts.k_edge_connected_cut G k kc S S0 ST).
 Qed.
 
 (** ... and minimum degree at least [k]. *)
@@ -60,7 +51,7 @@ apply: leq_trans (k_edge_connected_cut (S := [set v]) kc _ _) _.
 - by apply/set0Pn; exists v; rewrite inE.
 - by apply/eqP => /setP /(_ w); rewrite !inE (negbTE vw).
 apply: leq_trans (leq_imset_card (fun u => [set v; u]) N(v)); apply: subset_leq_card.
-apply/subsetP => e; rewrite inE x47_edge_setE => /andP [/edgesP [a [b [-> ab]]] /andP [m1 m2]].
+apply/subsetP => e; rewrite GTBase.simple_cuts.cut_edgesE => /andP [/edgesP [a [b [-> ab]]] /andP [m1 m2]].
 apply/imsetP.
 have [c [cin cv]] : exists c, c \in [set a; b] /\ c != v.
   have [c cm] := set0Pn _ m2; move: cm; rewrite !inE => /andP [cin cv]; exists c; split => //.

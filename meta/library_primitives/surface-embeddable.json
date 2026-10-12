@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "family": "surface-embeddable",
+  "primitive": {
+    "canonical_name": "GTBase.surface.surface_embeddable",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "LIGHTWEIGHT",
+    "normalized_names": [
+      "embeddable_in_fixed_surface",
+      "embeddable_on_surface",
+      "embedded_in_fixed_surface",
+      "embedded_in_fixed_surface_with_boundary",
+      "euler_genus_embeddable"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X150.x150_embeddable_in_fixed_surface",
+      "Chromatic.conjectures.X152.x152_embeddable_in_fixed_surface",
+      "Chromatic.conjectures.X164.x164_embedded_in_fixed_surface_with_boundary",
+      "Chromatic.conjectures.X210.x210_euler_genus_embeddable",
+      "GTMisc.conjectures.X167.x167_embedded_in_fixed_surface",
+      "Topological.conjectures.X138.x138_embeddable_on_surface"
+    ],
+    "consumers_remaining": 6,
+    "relation": "definitional equality, pre-existing: each local wrapper is, unchanged since its authoring (8800958), the existing public GTBase.surface.surface_embeddable surface G (a finite rotation system E of G whose encoded orientable-genus value surface_euler_genus E, the connected-map formula (2 + edges - vertices - faces) %/ 2 in truncated nat arithmetic, is at most surface; on a disconnected graph this unchanged formula can understate the genus, so rows keep their own connectedness guards; the empty graph reads 1). X150/X152/X167/X138 take (surface, G); X210 takes (G, g) and is surface_embeddable g G; X164 takes (surface, boundary, G) and ignores boundary, which is NOT surface_embeddable_with_boundary (a different, existential-boundary contract audited BROKEN). No wrapper or row changes; certificates freeze the wrappers, chains and rows verbatim and state each wrapper and complete current row in the canonical vocabulary, every connectedness guard, bound and quantifier order in place.",
+    "semantic_classes": {
+      "direct-canonical-alias": {
+        "members": [
+          "Chromatic.conjectures.X150.x150_embeddable_in_fixed_surface",
+          "Chromatic.conjectures.X152.x152_embeddable_in_fixed_surface",
+          "GTMisc.conjectures.X167.x167_embedded_in_fixed_surface",
+          "Topological.conjectures.X138.x138_embeddable_on_surface"
+        ],
+        "count": 4,
+        "verdict": "conversion (the canonical by definition since authoring)",
+        "state": "migrated-alias (pre-existing, definition unchanged)",
+        "certificates": [
+          "Chromatic.migration.surface_embeddable.x150_embeddable_in_fixed_surface_compat",
+          "Chromatic.migration.surface_embeddable.x152_embeddable_in_fixed_surface_compat",
+          "GTMisc.migration.surface_embeddable.x167_embedded_in_fixed_surface_compat",
+          "Topological.migration.surface_embeddable.x138_embeddable_on_surface_compat"
+        ],
+        "note": "surface_embeddable surface G with the same binders (surface : nat) (G : sgraph); the statements keep their wrappers (no churn) and their own guards: X150/X152 class connectivity, X167 and X138 connected [set: G]. The *_canonical lemmas state wrapper and row with surface_embeddable written out."
+      },
+      "boundary-ignoring-adapter": {
+        "members": [
+          "Chromatic.conjectures.X164.x164_embedded_in_fixed_surface_with_boundary"
+        ],
+        "count": 1,
+        "verdict": "conversion (the canonical with an unused boundary argument)",
+        "state": "migrated-alias (pre-existing adapter, definition unchanged)",
+        "certificates": [
+          "Chromatic.migration.surface_embeddable.x164_embedded_in_fixed_surface_with_boundary_compat"
+        ],
+        "note": "x164_embedded_in_fixed_surface_with_boundary surface boundary G is surface_embeddable surface G for every boundary (x164_embedded_in_fixed_surface_with_boundary_canonical); the boundary bound lives only in the instance class (#|x164_boundary I| <= boundary). It is not surface_embeddable_with_boundary. The X164 row stays BLOCKED (KNOWN UNFAITHFUL: no extension precondition, orientable only, boundary does not constrain the embedding, no connectedness guard)."
+      },
+      "argument-order-alias": {
+        "members": [
+          "Chromatic.conjectures.X210.x210_euler_genus_embeddable"
+        ],
+        "count": 1,
+        "verdict": "conversion (the canonical with its arguments in the order (G, g))",
+        "state": "migrated-alias (pre-existing, definition unchanged)",
+        "certificates": [
+          "Chromatic.migration.surface_embeddable.x210_euler_genus_embeddable_compat"
+        ],
+        "note": "x210_euler_genus_embeddable G g is surface_embeddable g G (x210_euler_genus_embeddable_canonical); binders (G : sgraph) (g : nat) and argument order are kept. Added by F1 (Marcol review 7ed8f862) as the sixth wrapper; X210 row (seventh) stays BLOCKED (KNOWN UNFAITHFUL: positivity of C and C-prime dropped; orientable genus; no connectedness guard)."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.surface_embeddable.fixed_surface_four_colourability_polytime_duplicate_statement_canonical",
+      "Chromatic.migration.surface_embeddable.fixed_surface_four_colourability_polytime_duplicate_statement_compat",
+      "Chromatic.migration.surface_embeddable.fixed_surface_four_colourability_polytime_statement_canonical",
+      "Chromatic.migration.surface_embeddable.fixed_surface_four_colourability_polytime_statement_compat",
+      "Chromatic.migration.surface_embeddable.gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement_canonical",
+      "Chromatic.migration.surface_embeddable.gimbel_thomassen_triangle_free_surface_three_colourability_polytime_statement_compat",
+      "Chromatic.migration.surface_embeddable.linear_time_surface_triangle_free_three_colouring_output_statement_canonical",
+      "Chromatic.migration.surface_embeddable.linear_time_surface_triangle_free_three_colouring_output_statement_compat",
+      "Chromatic.migration.surface_embeddable.linear_time_surface_triangle_free_three_colouring_output_statement_original_compat",
+      "Chromatic.migration.surface_embeddable.surface_conflict_colouring_sqrt_genus_statement_canonical",
+      "Chromatic.migration.surface_embeddable.surface_conflict_colouring_sqrt_genus_statement_compat",
+      "Chromatic.migration.surface_embeddable.x150_embeddable_in_fixed_surface_canonical",
+      "Chromatic.migration.surface_embeddable.x150_embeddable_in_fixed_surface_compat",
+      "Chromatic.migration.surface_embeddable.x150_polytime_decides_3_colourability_on_surface_compat",
+      "Chromatic.migration.surface_embeddable.x152_embeddable_in_fixed_surface_canonical",
+      "Chromatic.migration.surface_embeddable.x152_embeddable_in_fixed_surface_compat",
+      "Chromatic.migration.surface_embeddable.x152_polytime_decides_four_colourability_compat",
+      "Chromatic.migration.surface_embeddable.x164_embedded_in_fixed_surface_with_boundary_canonical",
+      "Chromatic.migration.surface_embeddable.x164_embedded_in_fixed_surface_with_boundary_compat",
+      "Chromatic.migration.surface_embeddable.x164_instance_class_compat",
+      "Chromatic.migration.surface_embeddable.x164_linear_time_outputs_three_colouring_compat",
+      "Chromatic.migration.surface_embeddable.x164_linear_time_outputs_three_colouring_original_compat",
+      "Chromatic.migration.surface_embeddable.x210_euler_genus_embeddable_canonical",
+      "Chromatic.migration.surface_embeddable.x210_euler_genus_embeddable_compat",
+      "GTMisc.migration.surface_embeddable.fixed_surface_spanning_tree_polytope_linear_xc_statement_canonical",
+      "GTMisc.migration.surface_embeddable.fixed_surface_spanning_tree_polytope_linear_xc_statement_compat",
+      "GTMisc.migration.surface_embeddable.fixed_surface_spanning_tree_polytope_linear_xc_statement_original_compat",
+      "GTMisc.migration.surface_embeddable.x167_embedded_in_fixed_surface_canonical",
+      "GTMisc.migration.surface_embeddable.x167_embedded_in_fixed_surface_compat",
+      "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_canonical",
+      "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_compat",
+      "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_original_compat",
+      "Topological.migration.surface_embeddable.x138_embeddable_on_surface_canonical",
+      "Topological.migration.surface_embeddable.x138_embeddable_on_surface_compat"
+    ],
+    "api_theorems": [
+      "GTBase.surface.surface_embeddable_K1",
+      "GTBase.surface.surface_embeddable_edgeless"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "mathcomp.boot",
+        "GTBase.surface",
+        "Topological.foundations.embedding"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "The pinned GraphTheory 0.9.7 and MathComp have no surface, rotation-system or genus notion (sgraph.v only mentions plane embeddings in a comment). The canonical is the existing public GTBase.surface.surface_embeddable, already audited LIGHTWEIGHT in meta/foundation_fidelity.json (module default: finite rotation systems, consumers must respect connectedness), so this family enrolls no fidelity fragment and adds no primitive. GTBase.surface.surface_embeddable_with_boundary has a different contract (an existential boundary set, audited BROKEN as vacuous) and is not a substitute for X164's ignored-boundary wrapper. Topological.foundations.embedding has a separate rotation record and genus formula under other names; a shared-ownership bridge would need a full record/face/genus comparison and is outside this family, as are face-orbit models, cops games and linear forests.",
+      "audited_at": "2026-10-08"
+    },
+    "migration_report": "meta/migration_reports/surface_embeddable.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/surface_embeddable.spec.json",
+    "downstream_client": "base/theories/examples/surface_embeddable.v"
+  }
+}

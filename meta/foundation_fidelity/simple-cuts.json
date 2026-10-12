@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "family": "simple-cuts",
+  "modules": {
+    "GTBase.simple_cuts": {
+      "path": "base/theories/simple_cuts.v",
+      "overrides": {
+        "cut_edges": {
+          "verdict": "FAITHFUL",
+          "note": "Simple edges meeting both a vertex set and its complement, without side restrictions; exact set/count-one/cardinality bridges."
+        },
+        "cut_connected": {
+          "verdict": "FAITHFUL",
+          "note": "The exact unguarded cut lower bound of X47, vacuous at orders0/1. Do not identify with guarded deletion connectivity."
+        }
+      },
+      "machine_evidence": [
+        "cut_edgesE",
+        "cut_edges_sub",
+        "cut_edges0",
+        "cut_edgesC",
+        "cut_edgesT",
+        "card_cut_edges",
+        "cut_edges_count1",
+        "cut_connected0",
+        "cut_connected_leq",
+        "cut_connected_small",
+        "connect_crossing",
+        "k_edge_connected_cut"
+      ]
+    }
+  }
+}
