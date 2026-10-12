@@ -4,6 +4,8 @@
 > 2026-07-23 and reworked 2026-10-02 onto upstream `E(G)` and `GTBase.common`,
 > with transparent compatibility aliases retained for one cycle. Since 2026-10-02
 > the migration has priority: statement waves X230+ wait until section 15 is done.
+> On 2026-10-12, Rocq 9.2 became a release requirement; section 16 adds the
+> toolchain transition and its acceptance criteria.
 >
 > Scope: migrate reusable vocabulary out of conjecture files without changing
 > the meaning, status, provenance, or accepted assumptions of any conjecture.
@@ -567,4 +569,80 @@ A primitive moves from an area foundation to `GTBase` only when a second area ne
 The section 14 measures and the M5 exit criteria hold, and
 `meta/library_inventory.py` reports no repeated reusable family without a registry
 entry: every remaining local helper is classified paper-specific or compatibility
-alias. Statement waves then resume under the no-new-unclassified-helper rule.
+alias. With the 2026-10-12 release requirement, section 16 must also pass before
+the migration release is complete. Statement waves then resume under the
+no-new-unclassified-helper rule.
+
+## 16. Rocq 9.2 release requirement (added 2026-10-12)
+
+The released libraries must build, install, and pass their mathematical checks
+on an explicitly pinned Rocq 9.2 release. Start compatibility work against
+9.2.0, then record the exact version selected for acceptance. Compatibility of
+the complete dependency set has not yet been established by a build.
+
+### Placement in the remaining work
+
+- Complete batch 2's reader recovery, independent review, and recursive proof
+  check with its existing Rocq 9.1.1 image and evidence.
+- Keep batches 3-5 on their existing reviewed toolchain and orchestration.
+- Prepare the 9.2 environment and compatibility changes in isolation before
+  the final release candidate is frozen. Lancelot coordinates the work and
+  records its implementer and independent reviewer. Preparation must respect
+  the existing VM resource limits and reserved acceptance/checker slots.
+- Include the toolchain change as separate reviewed commits in the final
+  release candidate, alongside the release surface and tooling repairs. Run
+  that candidate's full acceptance on 9.2 from a clean build.
+
+The intended two remaining full acceptance points are batch 3 on 9.1.1 and the
+final release candidate on 9.2. This is a scheduling target, not a reason to
+reuse incompatible evidence or waive a failed check. Report dependency or proof
+porting blockers before freezing the candidate; update the estimate from actual
+build results. A release accepted only on 9.1 does not meet the new requirement.
+
+### Preparation and early checks
+
+1. Create a separate VM image and Mac opam switch. Pin Rocq, Stdlib, OCaml,
+   MathComp, graph-theory, mathcomp-classical, Hierarchy Builder, zify, and any
+   proof/editor plugins used by the workflow. Prefer the existing dependency
+   versions where they build correctly; change only versions that need to move.
+   Record exact versions, source pins, platform, and the VM image digest.
+2. Check dependency installation, then compile the public base, representative
+   area modules, migration certificates, and a representative heavy Digraph
+   proof. Time the heavy sample to size the final run. Keep proof restructuring
+   and optional native-computation optimization outside this compatibility task.
+3. Exercise the existing validation tools against real 9.2 output before a long
+   run, including dependency extraction, exact-type probes, Print Assumptions,
+   recursive rocqchk summaries, mutation failures, and their result readers.
+   Include deliberately rejected cases. Newly exposed assumptions require
+   investigation, not suppression or an automatic expansion of allowed axioms.
+4. Adapt proof scripts, packaging, and tool parsing in separate reviewed changes.
+   Preserve statement meaning, historical source pins, and accepted assumptions.
+   In particular, inspect SSReflect matching and tactic behavior, diagnostic
+   changes, and the 9.2 Print Assumptions behavior. Re-run the Mac portability
+   checks under the actual 9.2 switch.
+
+### Fresh acceptance and release
+
+- Build all 17 repository projects and their dependencies for the selected 9.2
+  toolchain in a clean worktree. Keep compiled objects, dependency files, caches,
+  and receipts separate from the 9.1 environment. Historical receipts remain
+  provenance; they do not establish acceptance under 9.2. Do not require object
+  bytes to match across compiler versions.
+- Run the complete mathematical and metadata acceptance on the exact release
+  tree: semantic migration certificates, assumptions, grounding/faithfulness,
+  mutation tests, corpus/implication checks, and full recursive rocqchk. Preserve
+  the mathematical criteria when adapting version-specific output readers.
+- Install the released packages into a fresh downstream environment and compile
+  examples that import only public library modules. Verify the VM and Mac
+  workflows with their recorded toolchains.
+- Update package constraints, supported-version documentation, build commands,
+  CI configuration, and release receipts to name the tested 9.2 environment.
+  The proof acceptance must be visible alongside the metadata-only CI result.
+  Claim continued 9.1 support only if the final source is also tested there.
+
+Upstream references checked when adding this requirement:
+[Rocq 9.2 changes](https://rocq-prover.org/doc/v9.2/refman/changes.html#version-9-2)
+document changes to SSReflect matching, tactic behavior, and Print Assumptions;
+[MathComp installation instructions](https://github.com/math-comp/math-comp/blob/master/INSTALL.md)
+include a 9.2.0 setup. These references guide preparation; they do not certify
+this repository's pinned dependency combination.
