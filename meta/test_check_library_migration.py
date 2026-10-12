@@ -22,7 +22,8 @@ class MigrationBuildTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory(prefix="migration-build-")
         self.addCleanup(temporary.cleanup)
-        self.root = Path(temporary.name)
+        # The checker's ROOT is resolved; so must its stand-in be (macOS TMPDIR is a symlink).
+        self.root = Path(temporary.name).resolve()
         self.env = M.ROCQ.environment()
         for name, value in (("ROOT", self.root), ("NAMESPACE_PACKAGES", {
                 "Fixture": "fixture", "Support": "support", "Leaf": "leaf", "Unused": "unused"})):
@@ -425,6 +426,19 @@ class MigrationBuildTests(unittest.TestCase):
                 M.dependency_rules(text)
 
 
+class RuntimeStatisticFilterTests(unittest.TestCase):
+    def test_gc_exit_statistics_are_dropped_and_diagnostics_kept(self):
+        # OCaml 5.3.0 counters, and the OCaml 5.2.1 line the Mac audit saw outside the former fixed list.
+        statistics = ("allocated_words: 1052\r\nminor_words: 977\ntop_heap_words: 4096\n"
+                      "mean_space_overhead: 26.572022\n")
+        self.assertEqual(M.RUNTIME_STATISTIC_RE.sub("", statistics).strip(), "")
+        for diagnostic in ("Warning: Cannot find a physical path bound to logical path Leaf.base.",
+                           'File "./theories/a.v", line 3, characters 0-10:',
+                           "  heap_words: 12", "heap_words: 12 words", "Heap_words: 12", "a.vo: 12.v"):
+            with self.subTest(diagnostic=diagnostic):
+                self.assertEqual(M.RUNTIME_STATISTIC_RE.sub("", diagnostic), diagnostic)
+
+
 class ClassicalBuildTests(unittest.TestCase):
     """Exercise the production ClassicalLemmas owner mapping, not a patched map."""
 
@@ -438,7 +452,7 @@ class ClassicalBuildTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory(prefix="classical-build-")
         self.addCleanup(temporary.cleanup)
-        self.root = Path(temporary.name)
+        self.root = Path(temporary.name).resolve()
         replacement = patch.object(M, "ROOT", self.root)
         replacement.start()
         self.addCleanup(replacement.stop)

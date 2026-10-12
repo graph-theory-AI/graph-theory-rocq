@@ -25,6 +25,9 @@ from family_registry import RegistryError, load_library_registry
 
 
 ROOT = Path(__file__).resolve().parents[1]
+# One verbose-GC exit statistic of the OCaml runtime, `name: number` on its own
+# line; the set of names differs between OCaml releases.
+RUNTIME_STATISTIC_RE = re.compile(r"(?m)^[a-z]+(?:_[a-z]+)*: [0-9]+(?:\.[0-9]+)?\r?$")
 
 NAMESPACE_PACKAGES = {
     "GTBase": "base",
@@ -77,12 +80,9 @@ def run_build_tool(command: list[str], directory: Path, env: dict[str, str], *,
                               capture_output=True, check=False)
     except OSError as exc:
         raise BuildError(f"cannot execute {command[0]}: {exc}") from exc
-    # Pinned OCaml's verbose-GC exit counters are runtime instrumentation,
-    # not unresolved-import warnings. Preserve them for compile diagnostics.
-    diagnostics = re.sub(
-        r"(?m)^(?:allocated_words|minor_words|promoted_words|major_words|"
-        r"minor_collections|major_collections|forced_major_collections|"
-        r"heap_words|top_heap_words): [0-9]+\r?$", "", proc.stderr)
+    # OCaml's verbose-GC exit counters are runtime instrumentation, not
+    # unresolved-import warnings. Preserve them for compile diagnostics.
+    diagnostics = RUNTIME_STATISTIC_RE.sub("", proc.stderr)
     if proc.returncode or (reject_warnings and diagnostics.strip()):
         detail = re.sub(r"\s+", " ", (proc.stdout + proc.stderr)[-1600:]).strip()
         raise BuildError(f"{directory.name}: {' '.join(command)} failed; {detail}")
