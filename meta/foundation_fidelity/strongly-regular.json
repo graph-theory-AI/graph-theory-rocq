@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "family": "strongly-regular",
+  "modules": {
+    "GTBase.strongly_regular": {
+      "path": "base/theories/strongly_regular.v",
+      "overrides": {
+        "strongly_regular_parameters": {
+          "verdict": "FAITHFUL",
+          "note": "k-regular, exactly lam common neighbours for every adjacent pair, exactly mu for every pair of distinct non-adjacent vertices; no guard (parameters are not functions of degenerate graphs)."
+        },
+        "has_strongly_regular_parameters": {
+          "verdict": "FAITHFUL",
+          "note": "some parameters, unguarded: accepts K_2, the empty graph, complete, edgeless and clique-union graphs."
+        },
+        "connected_nontrivial_strongly_regular": {
+          "verdict": "FAITHFUL",
+          "note": "some parameters of a connected graph with 0 < k < #|G|.-1 (nat predecessor: at least three vertices); excludes K_2 and the degenerate graphs; K_{2,2} is in."
+        }
+      },
+      "machine_evidence": [
+        "connected_nontrivial_strongly_regularW",
+        "connected_nontrivial_strongly_regular_card",
+        "strongly_regular_parameters_degree_unique",
+        "strongly_regular_parameters_lambda_unique",
+        "strongly_regular_parameters_mu_unique"
+      ]
+    },
+    "Spectral.foundations.strongly_regular_matrix": {
+      "path": "spectral-graph-theory/theories/foundations/strongly_regular_matrix.v",
+      "overrides": {
+        "strongly_regular_matrix_identity": {
+          "verdict": "FAITHFUL",
+          "note": "A^2 = k I + lam A + mu (J - I - A) for the integer adjacency matrix indexed by enum_val; equivalent to the counting clauses for all parameters."
+        },
+        "connected_nontrivial_strongly_regular_matrix": {
+          "verdict": "FAITHFUL",
+          "note": "the matrix identity with the same three guards; equivalent to connected_nontrivial_strongly_regular."
+        }
+      },
+      "machine_evidence": [
+        "strongly_regular_matrix_identityP",
+        "connected_nontrivial_strongly_regular_matrixP",
+        "adjmx_sqr_common_nbr"
+      ]
+    }
+  }
+}

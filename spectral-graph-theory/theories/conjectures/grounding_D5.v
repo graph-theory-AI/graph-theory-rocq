@@ -26,6 +26,8 @@
 From GTBase Require Import base.
 From mathcomp Require Import all_algebra perm.
 From Spectral Require Import foundations.spectral.
+From GTBase Require Import strongly_regular.
+From Spectral Require Import foundations.strongly_regular_matrix.
 From Spectral.conjectures Require Import D5.
 
 Set Implicit Arguments.
@@ -46,6 +48,7 @@ Proof.
 exists 2, 0, 2; split.
 - exact: (@Knm_connected 1 1).
 - by split=> //; rewrite card_sum !card_ord.
+split.
 - by move=> [x|y]; rewrite ?deg_Knm_l ?deg_Knm_r.
 - move=> [x|x] [y|y] uv //.
   + rewrite /common_nbr opn_Knm_l opn_Knm_r.
@@ -68,11 +71,11 @@ Proof. by move=> [x|x] [y|y] [z|z]. Qed.
     regular for some degree — the guards are genuine consequences. *)
 Lemma strongly_regular_connected (G : sgraph) :
   strongly_regular G -> connected [set: G].
-Proof. by case=> k [lam] [mu] [] . Qed.
+Proof. exact: connected_nontrivial_strongly_regular_connected. Qed.
 
 Lemma strongly_regular_regular (G : sgraph) :
   strongly_regular G -> exists k, regular G k.
-Proof. by case=> k [lam] [mu] [_ _ rk _ _]; exists k. Qed.
+Proof. exact: connected_nontrivial_strongly_regular_regular. Qed.
 
 (** ============================================================================
     Row 4 — [proper_colb].
@@ -294,112 +297,54 @@ Proof.
 by apply: eq_existsb => s; rewrite liso_clause_matE.
 Qed.
 
-(** ---- (2) [strongly_regular] : neighbour counting  <->  adjacency-matrix identity ---- *)
+(** ---- (2) [strongly_regular] : neighbour counting  <->  adjacency-matrix identity ----
+
+    A33: the matrix theory introduced here now lives in [Spectral.foundations.strongly_regular_matrix], stated
+    against the GTBase canonicals; every qualified name below keeps its type and arguments as a proved wrapper
+    (frozen originals and their certificates: Spectral.migration.strongly_regular). *)
 Lemma mulif (P Q : bool) :
   ((if P then 1 else 0) : int) * (if Q then 1 else 0) = if P && Q then 1 else 0.
-Proof. by case: P; case: Q; rewrite ?mul0r ?mul1r ?mulr0. Qed.
+Proof. exact: int01_mul. Qed.
 
 Lemma card_evpre (G:sgraph) (Q : pred G) :
   #|[set k : 'I_#|G| | Q (enum_val k)]| = #|[set v : G | Q v]|.
-Proof.
-have -> : [set v : G | Q v]
-        = enum_val @: [set k : 'I_#|G| | Q (enum_val k)].
-  apply/setP => v; rewrite inE; apply/idP/imsetP.
-  - move=> Qv; exists (enum_rank v); last by rewrite enum_rankK.
-    by rewrite inE enum_rankK.
-  - by move=> [k]; rewrite inE => Qk ->.
-by rewrite (card_imset _ (@enum_val_inj _ G)).
-Qed.
+Proof. exact: card_enum_val_pred. Qed.
 
 Lemma count_cn (G:sgraph) (a b : G) :
   #|[set k : 'I_#|G| | (a -- enum_val k) && (enum_val k -- b)]| = #|common_nbr a b|.
-Proof.
-rewrite (card_evpre (fun v => (a -- v) && (v -- b))).
-suff -> : [set v : G | (a -- v) && (v -- b)] = common_nbr a b by [].
-rewrite /common_nbr; apply/setP => v; rewrite !inE.
-by rewrite (@sg_sym G v b).
-Qed.
+Proof. exact: card_common_nbr_enum. Qed.
 
 Lemma adjmx2_common (G:sgraph) (i j : 'I_#|G|) :
   (adjmx int G *m adjmx int G) i j
    = #|common_nbr (enum_val i) (enum_val j)|%:R.
-Proof.
-rewrite mxE.
-under eq_bigr => k _ do rewrite !mxE mulif.
-rewrite -big_mkcond.
-rewrite (eq_bigr (fun _ => (1%N)%:R : int)); last by move=> k _; rewrite mulr1n.
-rewrite -natr_sum sum1dep_card; congr (_ %:R).
-by move: (enum_val i) (enum_val j) => a b; exact: count_cn.
-Qed.
+Proof. exact: adjmx_sqr_common_nbr. Qed.
 
 Definition sr_clauses (G:sgraph) (k lam mu : nat) : Prop :=
-  [/\ regular G k,
-      (forall u v : G, u -- v -> #|common_nbr u v| = lam) &
-      (forall u v : G, u != v -> ~~ (u -- v) -> #|common_nbr u v| = mu)].
+  strongly_regular_parameters G k lam mu.
 
 Definition sr_mateq (G : sgraph) (k lam mu : nat) : Prop :=
-  adjmx int G *m adjmx int G
-    = k%:R%:M + lam%:R *: adjmx int G
-      + mu%:R *: (const_mx 1 - 1%:M - adjmx int G).
+  strongly_regular_matrix_identity G k lam mu.
 
 Lemma natr_int_inj (a b : nat) : (a%:R = b%:R :> int) -> a = b.
-Proof. by move=> /eqP; rewrite eqr_nat => /eqP. Qed.
+Proof. exact: int_natr_inj. Qed.
 
 Lemma sr_rhs_diag (G:sgraph) (k lam mu:nat) (i:'I_#|G|) :
   (k%:R%:M + lam%:R *: adjmx int G + mu%:R *: (const_mx 1 - 1%:M - adjmx int G)) i i = k%:R.
-Proof.
-by rewrite !mxE eqxx sg_irrefl mulr0 mulr1n subr0 addr0 mulr0 addr0.
-Qed.
+Proof. exact: strongly_regular_rhs_diag. Qed.
 
 Lemma sr_rhs_off (G:sgraph) (k lam mu:nat) (i j:'I_#|G|) : i != j ->
   (k%:R%:M + lam%:R *: adjmx int G + mu%:R *: (const_mx 1 - 1%:M - adjmx int G)) i j
   = lam%:R * (if enum_val i -- enum_val j then 1 else 0)
     + mu%:R * (if enum_val i -- enum_val j then 0 else 1).
-Proof.
-move=> nij; rewrite !mxE (negbTE nij) mulr0n add0r subr0.
-by case: (enum_val i -- enum_val j); rewrite ?subrr ?subr0.
-Qed.
+Proof. exact: strongly_regular_rhs_off. Qed.
 
 Lemma sr_mateqE (G:sgraph) (k lam mu : nat) :
   sr_mateq G k lam mu <-> sr_clauses G k lam mu.
-Proof.
-rewrite /sr_mateq /sr_clauses; split.
-- move=> Heq; split.
-  + move=> v; move: Heq => /matrixP/(_ (enum_rank v) (enum_rank v)).
-    rewrite adjmx2_common sr_rhs_diag => /natr_int_inj.
-    by rewrite enum_rankK /common_nbr setIid.
-  + move=> u v uv; have nij : enum_rank u != enum_rank v.
-      by rewrite (inj_eq enum_rank_inj) (sg_edgeNeq uv).
-    move: Heq => /matrixP/(_ (enum_rank u) (enum_rank v)).
-    rewrite adjmx2_common (sr_rhs_off _ _ _ nij) !enum_rankK uv.
-    by rewrite mulr1 mulr0 addr0 => /natr_int_inj.
-  + move=> u v ne nadj; have nij : enum_rank u != enum_rank v.
-      by rewrite (inj_eq enum_rank_inj) (negbTE ne).
-    move: Heq => /matrixP/(_ (enum_rank u) (enum_rank v)).
-    rewrite adjmx2_common (sr_rhs_off _ _ _ nij) !enum_rankK (negbTE nadj).
-    by rewrite mulr0 mulr1 add0r => /natr_int_inj.
-- move=> [rk hlam hmu]; apply/matrixP => i j.
-  rewrite adjmx2_common.
-  case: (eqVneq i j) => [->|nij].
-  + by rewrite sr_rhs_diag /common_nbr setIid (rk (enum_val j)).
-  + rewrite (sr_rhs_off _ _ _ nij).
-    case: (boolP (enum_val i -- enum_val j)) => [adj|nadj].
-    * by rewrite mulr1 mulr0 addr0 (hlam _ _ adj).
-    * rewrite mulr0 mulr1 add0r hmu //.
-      by apply: contra_neq nij => /enum_val_inj ->.
-Qed.
+Proof. exact: strongly_regular_matrix_identityP. Qed.
 
 Definition strongly_regular_alg (G : sgraph) : Prop :=
-  exists k lam mu : nat,
-    [/\ connected [set: G], (0 < k)%N /\ (k < (#|G|).-1)%N & sr_mateq G k lam mu].
+  connected_nontrivial_strongly_regular_matrix G.
 
 Lemma strongly_regularE (G : sgraph) :
   strongly_regular G <-> strongly_regular_alg G.
-Proof.
-split.
-- case=> k [lam] [mu] [conn kk rk hlam hmu].
-  exists k, lam, mu; split=> //.
-  by apply/sr_mateqE; split.
-- case=> k [lam] [mu] [conn kk /sr_mateqE [rk hlam hmu]].
-  by exists k, lam, mu; split.
-Qed.
+Proof. exact: connected_nontrivial_strongly_regular_matrixP. Qed.

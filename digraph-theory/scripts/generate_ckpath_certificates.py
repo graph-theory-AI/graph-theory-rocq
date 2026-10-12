@@ -13,6 +13,8 @@ This is an untrusted build-time tool: Rocq recomputes every hinted propagation.
 from __future__ import annotations
 
 import argparse
+import io
+import sys
 from collections import defaultdict, deque
 from dataclasses import dataclass
 from itertools import combinations, product
@@ -1235,12 +1237,52 @@ def write_rocq_chain_final(path: Path, name: str, base: str,
             "Qed.\n")
 
 
+def cnf_text(formula: Sequence[Clause], indent: str = "  ") -> str:
+    """write_rocq_cnf's exact text (the renderer carries literals as raw text)"""
+    buffer = io.StringIO()
+    write_rocq_cnf(buffer, formula, indent=indent)
+    return buffer.getvalue()
+
+
+def records_text(proof: Sequence[HintedAddition]) -> str:
+    """the replay records' exact lines, as write_rocq_chain_block writes them"""
+    return "".join(
+        f"  ({rocq_nat_list(encode_literal(x) for x in addition.clause)},"
+        f"{rocq_nat_list(addition.hints)}){';' if index + 1 < len(proof) else ''}\n"
+        for index, addition in enumerate(proof))
+
+
+def chain_block_fields(prefix_name: str, name: str, base: str, base_module: str,
+                       selected_base: Sequence[Clause], block: Microblock,
+                       block_index: int, width: int):
+    """the explicit-format fields of one block, for the shared renderer (scripts/ckpath_chain_render.py)"""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import ckpath_chain_render as render
+    return render.Block(
+        fmt="explicit", group=prefix_name, label=block_label(block_index, width), name=name,
+        base_module=base_module, base=base,
+        counts=(str(block.start), str(block.start + len(block.proof)), str(len(block.base_ids)),
+                str(len(block.imported_ids)), str(len(block.import_groups))),
+        base_ids_comment=rocq_nat_list(block.base_ids), selected_base=cnf_text(selected_base),
+        base_ids=None, output=cnf_text([addition.clause for addition in block.proof]),
+        records=records_text(block.proof),
+        selections=[render.Selection(block_label(group.producer_block, width),
+                                     rocq_nat_list(group.output_indices))
+                    for group in block.import_groups])
+
+
 def write_rocq_microblock_chain(
         output_prefix: Path, name: str, base: str, base_module: str,
         variable_count: int, base_clauses: Sequence[Clause],
-        proof: Sequence[HintedAddition], block_size: int = 25
+        proof: Sequence[HintedAddition], block_size: int = 25,
+        legacy_layout: bool = False
 ) -> tuple[list[Path], Path, list[Microblock]]:
-    """Validate and emit a complete gap-free bounded-memory replay chain."""
+    """Validate and emit a complete gap-free bounded-memory replay chain.
+
+    Restructured layout (default; ckpath-restructure-design-by-arthur): per block a data-only
+    <prefix>_blockNN_data.v and a hypothesis-form replay <prefix>_blockNN.v, one <prefix>_assembly.v
+    re-deriving every <name>_blockNN_sound, and the final.  ``legacy_layout`` emits today's chain
+    (through the same renderer), so the two paths can be compared byte for byte."""
     if block_size <= 0 or block_size > MAX_MICROBLOCK_SIZE:
         raise ValueError(
             f"microblock size must be between 1 and {MAX_MICROBLOCK_SIZE}")
@@ -1270,8 +1312,10 @@ def write_rocq_microblock_chain(
             f"{prefix.name}_{block_label(index, width)}.v")
         for index in range(len(ranges))
     ]
-    module_names = [path.stem for path in block_paths]
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import ckpath_chain_render as render
     blocks: list[Microblock] = []
+    fields = []
     for block_index, (start, stop) in enumerate(ranges):
         block = project_microblock(
             len(base_clauses), proof, start, stop - start, block_size)
@@ -1281,15 +1325,27 @@ def write_rocq_microblock_chain(
                             for identifier in block.imported_ids]
         local_input = selected_base + imported_clauses
         check_hints(variable_count, local_input, block.proof)
-        write_rocq_chain_block(
-            block_paths[block_index], module_names, name, base, base_module,
-            selected_base, block, block_index, width)
+        if any(group.producer_block >= block_index for group in block.import_groups):
+            raise ValueError("a producer does not precede its consumer")
+        b = chain_block_fields(prefix.name, name, base, base_module,
+                               selected_base, block, block_index, width)
+        fields.append(b)
+        if legacy_layout:
+            block_paths[block_index].write_text(render.render_old_block(b), encoding="ascii")
+        else:
+            prefix.with_name(f"{b.module()}_data.v").write_text(render.render_data(b), encoding="ascii")
+            block_paths[block_index].write_text(render.render_replay(b), encoding="ascii")
         blocks.append(block)
 
+    final = render.Final(group=prefix.name, name=name, base_module=base_module,
+                         last_label=block_label(len(blocks) - 1, width), base=base,
+                         rights=len(blocks[-1].proof) - 1)
     final_path = prefix.with_name(f"{prefix.name}_final.v")
-    write_rocq_chain_final(
-        final_path, name, base, base_module, module_names[-1], len(blocks) - 1,
-        len(blocks[-1].proof), width)
+    if legacy_layout:
+        final_path.write_text(render.render_old_final(final), encoding="ascii")
+    else:
+        prefix.with_name(f"{prefix.name}_assembly.v").write_text(render.render_assembly(fields), encoding="ascii")
+        final_path.write_text(render.render_new_final(final), encoding="ascii")
     return block_paths, final_path, blocks
 
 
@@ -1497,6 +1553,9 @@ def main() -> None:
     chain_parser.add_argument("--rocq-name", required=True)
     chain_parser.add_argument("--rocq-base", required=True)
     chain_parser.add_argument("--rocq-base-module", required=True)
+    chain_parser.add_argument(
+        "--legacy-layout", action="store_true",
+        help="emit the pre-restructure chain (for byte comparison with the committed form)")
     orbit_parser = subparsers.add_parser(
         "orbit-masks",
         help="emit masks in the exact order of Rocq orbit_representatives")
@@ -1611,7 +1670,7 @@ def main() -> None:
         block_paths, final_path, blocks = write_rocq_microblock_chain(
             args.output_prefix, args.rocq_name, args.rocq_base,
             args.rocq_base_module, variable_count, base, proof,
-            args.block_size)
+            args.block_size, legacy_layout=args.legacy_layout)
         print(f"{len(proof)} additions -> {len(blocks)} gap-free blocks; "
               f"max {max(len(block.base_ids) for block in blocks)} selected "
               f"base clauses, max "

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "family": "natural-data-decoder",
+  "primitive": {
+    "canonical_name": "GTBase.complexity.data_nth_nat",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "data_nth_nat"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X157.x157_data_nth_nat",
+      "Chromatic.conjectures.X164.x164_data_nth_nat"
+    ],
+    "consumers_remaining": 2,
+    "relation": "definitional equality: X157's and X164's local decoders x157_data_nth_nat / x164_data_nth_nat d i (identical bodies) are GTBase.complexity.data_nth_nat d i, the same fixpoint, with every corner kept: position 0 of a Dcons cell is its head's natural value (0 for a non-Dnat head), position j+1 recurses into the tail, a scalar Dnat n (whole datum or malformed tail) reads n at its position 0 and 0 after, Dnil and Dpair read 0 everywhere. The colour adapters (x157_output_colour modulo k, x164_output_colour modulo 3, both at the vertex's enum rank) stay distinct and unchanged.",
+    "semantic_classes": {
+      "positional-natural-decoder": {
+        "members": [
+          "Chromatic.conjectures.X157.x157_data_nth_nat",
+          "Chromatic.conjectures.X164.x164_data_nth_nat"
+        ],
+        "count": 2,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.natural_data_decoder.x157_data_nth_nat_compat",
+          "Chromatic.migration.natural_data_decoder.x164_data_nth_nat_compat"
+        ],
+        "note": "data_nth_nat d i: the natural at position i read through Dcons cells; a non-natural entry, a position past the end, Dnil and Dpair read 0; a scalar Dnat n reads n at its position 0, also as a malformed tail (data_nth_nat0, data_nth_natS); on an encoded list of naturals it is nth 0 (data_nth_nat_enc_list, data_nth_nat_enc_list_default)."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.natural_data_decoder.linear_time_surface_triangle_free_three_colouring_output_statement_compat",
+      "Chromatic.migration.natural_data_decoder.local_connectivity_k_colouring_polytime_statement_compat",
+      "Chromatic.migration.natural_data_decoder.local_connectivity_k_colouring_polytime_statement_original_compat",
+      "Chromatic.migration.natural_data_decoder.x157_data_nth_nat_compat",
+      "Chromatic.migration.natural_data_decoder.x157_output_colour_compat",
+      "Chromatic.migration.natural_data_decoder.x157_output_k_colouring_or_none_compat",
+      "Chromatic.migration.natural_data_decoder.x157_polytime_colouring_or_none_compat",
+      "Chromatic.migration.natural_data_decoder.x157_polytime_colouring_or_none_original_compat",
+      "Chromatic.migration.natural_data_decoder.x164_data_nth_nat_compat",
+      "Chromatic.migration.natural_data_decoder.x164_linear_time_outputs_three_colouring_compat",
+      "Chromatic.migration.natural_data_decoder.x164_output_colour_compat",
+      "Chromatic.migration.natural_data_decoder.x164_valid_output_compat"
+    ],
+    "api_theorems": [
+      "GTBase.complexity.data_nth_nat0",
+      "GTBase.complexity.data_nth_natS",
+      "GTBase.complexity.data_nth_nat_Dnil",
+      "GTBase.complexity.data_nth_nat_enc_list",
+      "GTBase.complexity.data_nth_nat_enc_list_default"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "mathcomp.boot.seq",
+        "GraphTheory.core.preliminaries",
+        "GTBase.complexity"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "The complexity model's data type, its encoders (enc_list, enc_nat) and the scalar reader data_nat_value are GTBase's own (GTBase.complexity); neither MathComp nor the pinned GraphTheory knows this data type, and GTBase.complexity has no positional reader before this family (data_nat_value reads a single Dnat only). MathComp's nth is the reference behaviour on encoded lists (data_nth_nat_enc_list), not a candidate for the data type itself. So the decoder is added to GTBase.complexity, next to data_nat_value, with the legacy body unchanged.",
+      "audited_at": "2026-10-08"
+    },
+    "migration_report": "meta/migration_reports/natural_data_decoder.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/natural_data_decoder.spec.json",
+    "downstream_client": "base/theories/examples/natural_data_decoder.v",
+    "foundation_fidelity": "meta/foundation_fidelity/natural-data-decoder.json"
+  }
+}

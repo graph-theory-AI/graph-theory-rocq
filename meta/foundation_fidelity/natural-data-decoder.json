@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "family": "natural-data-decoder",
+  "modules": {
+    "GTBase.complexity": {
+      "path": "base/theories/complexity.v",
+      "overrides": {
+        "data_nth_nat": {
+          "verdict": "FAITHFUL",
+          "note": "data_nth_nat d i: the natural at position i of an output datum read through its Dcons cells; position 0 of a cell is its head's natural value (n for Dnat n, 0 for any other entry), position j+1 is position j of the tail; a scalar Dnat n, also as a malformed tail, reads n at its position 0 and 0 after; Dnil and Dpair read 0 everywhere. On an encoded list of naturals it is nth 0, so positions past the end read 0. A natural reader only: the modulo-k / modulo-3 colouring adapters and the vertex enum rank are separate."
+        }
+      },
+      "machine_evidence": [
+        "data_nth_nat0",
+        "data_nth_natS",
+        "data_nth_nat_Dnil",
+        "data_nth_nat_enc_list",
+        "data_nth_nat_enc_list_default"
+      ]
+    }
+  }
+}
