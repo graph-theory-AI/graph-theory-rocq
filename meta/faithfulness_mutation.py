@@ -26,10 +26,12 @@ import dataclasses
 import os
 import re
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
 import textwrap
+import time
 from pathlib import Path
 
 import rocq_toolchain as ROCQ
@@ -39,6 +41,129 @@ ROOT = Path(__file__).resolve().parents[1]
 # Exact-type canaries request a milestone-scoped build; other canaries retain
 # the historical finite bound around their full detector.
 DEFAULT_TIMEOUT = 300
+
+# Resource guards (the reviewed parmut r4 F2 / F3 guards of the batch runner): a check that ran out of
+# memory, disk or time, or was killed by a signal, is never counted as a killed mutant.  They are
+# checked on the baseline and on the mutant call BEFORE the kill rule.  The timeout value is unchanged.
+CGROUP = Path("/sys/fs/cgroup")
+RESOURCE_MARKERS = ("No space left on device", "ENOSPC", "Cannot allocate memory", "ENOMEM", "Killed", "Error 137")
+GRACE_S = 5
+
+
+def cgroup_oom_kills() -> int | None:
+    """The oom_kill counter of this container's cgroup v2 memory.events, or None where it is unreadable
+    (no cgroup v2, e.g. macOS: the guard is then unavailable).  It counts the WHOLE container, so an
+    OOM kill of a concurrent process also fails the check: that fails closed, which is acceptable."""
+    try:
+        text = (CGROUP / "memory.events").read_text()
+    except OSError:
+        return None
+    for line in text.splitlines():
+        parts = line.split()
+        if len(parts) == 2 and parts[0] == "oom_kill" and parts[1].isdigit():
+            return int(parts[1])
+    return None
+
+
+def group_live(pgid: int) -> list[int]:
+    """The non-zombie processes of a process group, from this machine's own /proc (a zombie never
+    counts as live and is reaped when it is our child).  Without /proc (macOS) the POSIX probe
+    killpg(pgid, 0) is used, where a zombie counts as live: that fails closed."""
+    if os.path.isdir("/proc"):
+        live = []
+        for entry in os.listdir("/proc"):
+            if not entry.isdigit():
+                continue
+            try:
+                stat = Path(f"/proc/{entry}/stat").read_text()
+            except OSError:
+                continue
+            fields = stat[stat.rindex(")") + 2:].split()      # after "pid (comm) ": state ppid pgrp ...
+            if int(fields[2]) != pgid:
+                continue
+            if fields[0] == "Z":
+                try:
+                    os.waitpid(int(entry), os.WNOHANG)
+                except ChildProcessError:
+                    pass
+                continue
+            live.append(int(entry))
+        return live
+    try:
+        os.killpg(pgid, 0)
+    except ProcessLookupError:
+        return []
+    except PermissionError:
+        pass
+    return [pgid]
+
+
+def kill_group(pgid: int) -> bool:
+    """TERM the call's process group, wait a grace, KILL, then wait until no live process of the group
+    remains -> True iff the group is empty."""
+    for sig, wait in ((signal.SIGTERM, GRACE_S), (signal.SIGKILL, 10)):
+        if not group_live(pgid):
+            return True
+        try:
+            os.killpg(pgid, sig)
+        except ProcessLookupError:
+            return True
+        deadline = time.time() + wait
+        while time.time() < deadline:
+            if not group_live(pgid):
+                return True
+            time.sleep(0.1)
+    return not group_live(pgid)
+
+
+@dataclasses.dataclass(frozen=True)
+class CheckResult:
+    returncode: int | None          # None: the call timed out
+    stdout: str
+    stderr: str
+    group_empty: bool
+    oom_kill_delta: int | None      # None: memory.events unreadable here
+    markers: tuple[str, ...]
+
+    @property
+    def output(self) -> str:
+        return self.stdout + self.stderr
+
+
+def run_guarded(command: list[str], cwd: Path, env: dict[str, str], timeout: int) -> CheckResult:
+    """One check call in its own session: the timeout, then the group kill; the oom_kill delta and the
+    resource markers recorded."""
+    oom_before = cgroup_oom_kills()
+    proc = subprocess.Popen(command, cwd=cwd, env=env, text=True, stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE, start_new_session=True)
+    timed_out = False
+    try:
+        stdout, stderr = proc.communicate(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        timed_out = True
+        kill_group(proc.pid)
+        stdout, stderr = proc.communicate()
+    empty = kill_group(proc.pid)
+    oom_after = cgroup_oom_kills()
+    delta = None if oom_before is None or oom_after is None else oom_after - oom_before
+    text = (stdout or "") + (stderr or "")
+    return CheckResult(None if timed_out else proc.returncode, stdout or "", stderr or "", empty, delta,
+                       tuple(m for m in RESOURCE_MARKERS if m in text))
+
+
+def resource_failure(result: CheckResult, timeout: int) -> str | None:
+    """The guards, in order -> the FAILED detail, or None."""
+    if result.oom_kill_delta:
+        return f"resource: oom_kill {result.oom_kill_delta}"
+    if result.markers:
+        return f"resource: markers {list(result.markers)}"
+    if not result.group_empty:
+        return "resource: the process group is not empty after the kill"
+    if result.returncode is not None and result.returncode < 0:
+        return f"resource: signal {-result.returncode}"
+    if result.returncode is None:
+        return f"timed out after {timeout}s"
+    return None
 
 
 @dataclasses.dataclass(frozen=True)
@@ -471,7 +596,7 @@ def apply_mutation(workspace: Path, mutant: Mutant) -> None:
             f.write(textwrap.dedent(appendix.text).lstrip("\n"))
 
 
-def run_check(workspace: Path, mutant: Mutant, timeout: int) -> subprocess.CompletedProcess[str]:
+def run_check(workspace: Path, mutant: Mutant, timeout: int) -> CheckResult:
     env = ROCQ.environment()
     if mutant.detector == "lint":
         command = [sys.executable, "meta/faithfulness_lint.py", "--files",
@@ -481,14 +606,33 @@ def run_check(workspace: Path, mutant: Mutant, timeout: int) -> subprocess.Compl
         if mutant.detector == "milestone-scoped":
             env["CHECK_MILESTONE_SCOPED_BUILD"] = mutant.phase
         command = [sys.executable, "meta/check_milestone.py", mutant.phase, mutant.package]
-    return subprocess.run(
-        command,
-        cwd=workspace,
-        env=env,
-        text=True,
-        capture_output=True,
-        timeout=timeout,
-    )
+    return run_guarded(command, workspace, env, timeout)
+
+
+def baseline_verdict(baseline: CheckResult, timeout: int) -> str | None:
+    """None when the unmutated workspace was accepted cleanly; otherwise the FAILED detail."""
+    failure = resource_failure(baseline, timeout)
+    if failure:
+        return failure
+    if baseline.returncode != 0:
+        tail = baseline.output[-800:].replace("\n", "\\n")
+        return f"BASELINE REJECTED before mutation; tail={tail}"
+    return None
+
+
+def mutant_verdict(proc: CheckResult, signature: str, timeout: int) -> tuple[bool, str]:
+    """The resource guards first; then the kill rule: KILLED iff a non-zero exit and the expected signature."""
+    failure = resource_failure(proc, timeout)
+    if failure:
+        return False, failure
+    output = proc.output
+    killed = proc.returncode != 0 and signature in output
+    if killed:
+        return True, f"baseline accepted; killed by {signature}"
+    if proc.returncode == 0:
+        return False, "SURVIVED: check_milestone accepted the mutant"
+    tail = output[-800:].replace("\n", "\\n")
+    return False, f"rejected for the wrong reason; expected {signature}; tail={tail}"
 
 
 def run_mutant(mutant: Mutant, timeout: int, keep: bool) -> tuple[bool, str, Path | None]:
@@ -496,21 +640,11 @@ def run_mutant(mutant: Mutant, timeout: int, keep: bool) -> tuple[bool, str, Pat
     kept: Path | None = tmp if keep else None
     try:
         copy_workspace(mutant, tmp)
-        baseline = run_check(tmp, mutant, timeout)
-        if baseline.returncode != 0:
-            tail = (baseline.stdout + baseline.stderr)[-800:].replace("\n", "\\n")
-            return False, f"BASELINE REJECTED before mutation; tail={tail}", kept
+        failure = baseline_verdict(run_check(tmp, mutant, timeout), timeout)
+        if failure:
+            return False, failure, kept
         apply_mutation(tmp, mutant)
-        proc = run_check(tmp, mutant, timeout)
-        output = proc.stdout + proc.stderr
-        killed = proc.returncode != 0 and mutant.expected_signature in output
-        if killed:
-            detail = f"baseline accepted; killed by {mutant.expected_signature}"
-        elif proc.returncode == 0:
-            detail = "SURVIVED: check_milestone accepted the mutant"
-        else:
-            tail = output[-800:].replace("\n", "\\n")
-            detail = f"rejected for the wrong reason; expected {mutant.expected_signature}; tail={tail}"
+        killed, detail = mutant_verdict(run_check(tmp, mutant, timeout), mutant.expected_signature, timeout)
         return killed, detail, kept
     finally:
         if not keep:
