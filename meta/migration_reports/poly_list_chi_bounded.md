@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py poly_list_chi_bounded --details
 
 - Canonical: `Chromatic.foundations.chi_bounding.poly_list_chi_bounded`.
 - Baseline: `0449699300e18f2ddf0773ede1c81976e632a284`.
-- Scope: 2 helpers, 4 statements, 10 frozen objects, 39 recorded references.
-- Source checks: 93/93 pass; consistent.
+- Scope: 2 helpers, 4 statements, 10 frozen objects, 42 recorded references.
+- Source checks: 94/94 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -22,4 +22,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Chromatic.foundations.chi_bounding.poly_chi_bounded`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/chi_bounded_classes.v#X3Legacy.hereditary_chi_bounded_not_polynomial_statement`, `chromatic-theory/theories/migration/graph_classes.v#Legacy.hereditary_chi_bounded_not_polynomial_statement`, `chromatic-theory/theories/migration/graph_classes.v#X3Original.hereditary_chi_bounded_not_polynomial_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/chi_bounded_classes.v#X3Legacy.hereditary_chi_bounded_not_polynomial_statement`, `chromatic-theory/theories/migration/disjoint_union.v#X66Legacy.good_trees_disjoint_union_good_statement`, `chromatic-theory/theories/migration/graph_classes.v#Legacy.hereditary_chi_bounded_not_polynomial_statement`, `chromatic-theory/theories/migration/graph_classes.v#X3Original.hereditary_chi_bounded_not_polynomial_statement`.

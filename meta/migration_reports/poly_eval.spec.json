@@ -206,7 +206,8 @@
     "graph-theory-misc/theories/migration/set_weights.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement": "set_weights snapshot: that family froze this object over its own frozen helpers but kept the live x128_expansion_bounded, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is GTMisc.migration.poly_eval.X128Original (expansion chain and row, over C16's frozen grad and A30's frozen separator), certified by x128_expansion_bounded_original_compat and dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
     "minor-theory/theories/migration/shallow_minors.v#Legacy.x220_polynomial_expansion": "shallow_minors snapshot: that family froze this object over its own frozen helpers but kept the live x220_poly_eval, whose evaluator is now an alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint/foldr by the unconditional A31 evaluator certificate). Kept byte-exact; its own iff to the live row still compiles. The complete row is Minor.migration.poly_eval.X220Original (expansion chain and twin-width row, over the frozen shallow minor), certified by x220_polynomial_expansion_original_compat and polynomial_expansion_bounded_twin_width_statement_original_compat.",
     "chromatic-theory/theories/migration/poly_list_chi_bounded.v#X124Legacy.x124_poly_chi_bounded": "A32 current snapshot: A32 froze this object verbatim at 0449699 over its frozen list-form class but kept the live x124_poly_eval of this family, as the source did. It stays byte-exact; the complete history is Chromatic.migration.poly_eval.X124Original (A31: class over the frozen clique number and the raw evaluator, and the row), whose iffs are Chromatic.migration.poly_list_chi_bounded.x124_poly_chi_bounded_original_compat and dreier_torunczyk_merge_width_poly_chi_bounded_statement_original_compat, the poly_list_chi_bounded report rechecks.",
-    "chromatic-theory/theories/migration/poly_list_chi_bounded.v#X3Legacy.x3_polynomially_chi_bounded": "A32 current snapshot: A32 froze this object verbatim at 0449699 over its frozen list-form class but kept the live x3_poly_eval of this family, as the source did. It stays byte-exact; the complete history is A31's raw class Chromatic.migration.poly_eval.X3Legacy.x3_polynomially_chi_bounded (related to this freeze by x3_raw_class_compat) and the complete X3 row Chromatic.migration.poly_eval.X3Original.hereditary_chi_bounded_not_polynomial_statement, whose whole-row iff is Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_original_compat, the poly_list_chi_bounded report rechecks."
+    "chromatic-theory/theories/migration/poly_list_chi_bounded.v#X3Legacy.x3_polynomially_chi_bounded": "A32 current snapshot: A32 froze this object verbatim at 0449699 over its frozen list-form class but kept the live x3_poly_eval of this family, as the source did. It stays byte-exact; the complete history is A31's raw class Chromatic.migration.poly_eval.X3Legacy.x3_polynomially_chi_bounded (related to this freeze by x3_raw_class_compat) and the complete X3 row Chromatic.migration.poly_eval.X3Original.hereditary_chi_bounded_not_polynomial_statement, whose whole-row iff is Chromatic.migration.poly_list_chi_bounded.hereditary_chi_bounded_not_polynomial_statement_original_compat, the poly_list_chi_bounded report rechecks.",
+    "chromatic-theory/theories/migration/disjoint_union.v#X66Legacy.good_trees_disjoint_union_good_statement": "Earlier-integrated family snapshot (disjoint-union, A28, baseline ec5fb25, integrated before this family): disjoint-union froze only X66's disjoint union (x66_disjoint_union_rel, its two constructor proofs and x66_disjoint_union) and kept the goodness x66_good live by design, so this copy applies the live x66_good, whose X3 class evaluates through x3_poly_eval, since this family a transparent alias of GTBase.poly_nat.horner_nat (equal to the raw Fixpoint by the unconditional x3_poly_eval_compat). Kept byte-exact; its own iff to the live row still compiles. Over disjoint-union's frozen union and this family's frozen goodness X66Legacy.x66_good, the complete pre-migration row is Chromatic.migration.poly_eval.X66Original.good_trees_disjoint_union_good_statement, certified by x66_original_compat (X66-combined)."
   },
   "frozen": [
     {
@@ -677,6 +678,19 @@
         "x220_polynomial_expansion": "X220Original.x220_polynomial_expansion"
       },
       "certificate": "Minor.migration.poly_eval.polynomial_expansion_bounded_twin_width_statement_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Chromatic.conjectures.X66.good_trees_disjoint_union_good_statement",
+      "path": "chromatic-theory/theories/conjectures/X66.v",
+      "name": "good_trees_disjoint_union_good_statement",
+      "frozen_path": "chromatic-theory/theories/migration/poly_eval.v",
+      "frozen": "X66Original.good_trees_disjoint_union_good_statement",
+      "substitutions": {
+        "x66_good": "X66Legacy.x66_good",
+        "x66_disjoint_union": "DU.X66Legacy.x66_disjoint_union"
+      },
+      "certificate": "Chromatic.migration.poly_eval.x66_original_compat"
     }
   ]
 }

@@ -193,3 +193,62 @@ Lemma dreier_torunczyk_merge_width_poly_chi_bounded_statement_original_compat :
   X124Original.dreier_torunczyk_merge_width_poly_chi_bounded_statement <->
   dreier_torunczyk_merge_width_poly_chi_bounded_statement.
 Proof. by split=> h C mw; apply/x124_poly_chi_bounded_original_compat; exact: h. Qed.
+
+(** ** X66-combined: the end-to-end X66 row over both frozen chains
+
+    The family disjoint-union (certificate [Chromatic.migration.disjoint_union], bound here as [Module DU]), integrated
+    before this family, froze X66's disjoint union ([DU.X66Legacy.x66_disjoint_union], with its relation and its two
+    constructor proofs) and kept the goodness live; this family freezes the goodness ([X66Legacy.x66_good], over the raw
+    class [X3Legacy.x3_polynomially_chi_bounded] and the raw evaluator [X3Legacy.x3_poly_eval]) and keeps the disjoint union
+    live.  Each family's frozen [good_trees_disjoint_union_good_statement] therefore applies the other family's chain live
+    (the reciprocal known stale snapshots of the specs).  Over both frozen chains,
+    [X66Original.good_trees_disjoint_union_good_statement] is the row with every migrated helper at its original body:
+    X66's statement at ec5fb25, the disjoint-union pin and the last commit before either migration.  Three closed
+    certificates: to the disjoint-union family's frozen row (the goodness, pointwise by [x66_good_compat]); to this family's
+    frozen row (the union, across the identity isomorphism [DU.x66_disjoint_union_diso]: goodness reads the forbidden graph
+    only through isomorphisms onto induced subgraphs); and the whole row to the live statement (the first composed with the
+    disjoint-union family's row certificate).  The live statement is unchanged. *)
+
+Require Chromatic.migration.disjoint_union.
+
+Module DU := Chromatic.migration.disjoint_union.
+
+Module X66Original.
+
+Definition good_trees_disjoint_union_good_statement : Prop :=
+  forall H1 H2 : sgraph,
+    is_tree [set: H1] ->
+    is_tree [set: H2] ->
+    X66Legacy.x66_good H1 ->
+    X66Legacy.x66_good H2 ->
+    X66Legacy.x66_good (DU.X66Legacy.x66_disjoint_union H1 H2).
+
+End X66Original.
+
+Lemma x66_original_du_compat :
+  X66Original.good_trees_disjoint_union_good_statement <-> DU.X66Legacy.good_trees_disjoint_union_good_statement.
+Proof.
+split=> h H1 H2 t1 t2 g1 g2; apply/x66_good_compat; apply: h => //; exact/x66_good_compat.
+Qed.
+
+Lemma x66_original_pe_compat :
+  X66Original.good_trees_disjoint_union_good_statement <-> X66Legacy.good_trees_disjoint_union_good_statement.
+Proof.
+have inv (U U' : sgraph) : U ≃ U' -> X66Legacy.x66_good U -> X66Legacy.x66_good U'.
+  move=> i [p hp]; exists p => G nG; apply: hp => -[S [j]]; apply: nG.
+  by exists S; exact: inhabits (diso_comp (diso_sym i) j).
+split=> h H1 H2 t1 t2 g1 g2.
+- exact: inv (DU.x66_disjoint_union_diso H1 H2) (h H1 H2 t1 t2 g1 g2).
+- exact: inv (diso_sym (DU.x66_disjoint_union_diso H1 H2)) (h H1 H2 t1 t2 g1 g2).
+Qed.
+
+Lemma x66_original_compat :
+  X66Original.good_trees_disjoint_union_good_statement <->
+  Chromatic.conjectures.X66.good_trees_disjoint_union_good_statement.
+Proof.
+exact: (iff_trans x66_original_du_compat DU.good_trees_disjoint_union_good_statement_compat).
+Qed.
+
+Print Assumptions x66_original_du_compat.
+Print Assumptions x66_original_pe_compat.
+Print Assumptions x66_original_compat.
