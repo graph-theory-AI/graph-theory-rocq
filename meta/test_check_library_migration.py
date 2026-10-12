@@ -502,9 +502,19 @@ class ClassicalRoutingTests(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertEqual(ROUTE.package_source_change(path), "classical-lemmas")
                 calls = self.route(path)
-                self.assertIn(["make", "classical-lemmas", "packing-theory"], calls)
+                self.assertIn(["make", "atlas", "classical-lemmas", "packing-theory"], calls)
                 self.assertIn([ROUTE.sys.executable, "meta/check_library_migration.py"], calls)
                 self.assertIn([ROUTE.sys.executable, "meta/migration_report.py", "--all", "--check", "--kernel"], calls)
+
+    def test_atlas_and_misc_sources_are_packages_and_rebuild_atlas(self):
+        for path, package, build in (
+                ("atlas/theories/conjectures/implications_A2.v", "atlas", ["make", "atlas"]),
+                ("graph-theory-misc/theories/conjectures/X14.v", "graph-theory-misc",
+                 ["make", "atlas", "graph-theory-misc"]),
+                ("minor-theory/_CoqProject", "minor-theory", ["make", "atlas", "graph-theory-misc", "minor-theory"])):
+            with self.subTest(path=path):
+                self.assertEqual(ROUTE.package_source_change(path), package)
+                self.assertIn(build, self.route(path))
 
     def test_similarly_named_unknown_package_does_not_acquire_ownership(self):
         path = "classical-lemmas-other/theories/konig/line_colouring.v"
