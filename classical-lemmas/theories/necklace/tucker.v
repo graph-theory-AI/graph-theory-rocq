@@ -92,6 +92,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Import GRing.Theory.
+Set SsrOldRewriteGoalsOrder.
 Local Open Scope ring_scope.
 
 
