@@ -93,6 +93,7 @@
 
 From mathcomp Require Import all_boot.
 From ClassicalLemmas Require necklace.necklace_prime.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
