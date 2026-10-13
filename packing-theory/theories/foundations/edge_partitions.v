@@ -109,7 +109,7 @@ move=> part.
 have ->: E(G) = \bigcup_i E i.
   apply/setP => e; rewrite (proj1 part e).
   by apply/existsP/bigcupP => -[i ei]; exists i.
-symmetry; rewrite -sum1_card partition_disjoint_bigcup; last exact: (proj2 part).
+symmetry; rewrite -sum1_card partition_disjoint_bigcup; first [exact: (proj2 part)|idtac].
 by apply: eq_bigr => i _; rewrite sum1_card.
 Qed.
 
