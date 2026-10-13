@@ -1,6 +1,7 @@
 (** Finite counting proof of the chromatic-family list Ramsey equality.
     Source: Fox--He--Luo--Xu, arXiv:2103.15175, Section 3.1. *)
 From mathcomp Require Import all_boot.
+Set SsrOldRewriteGoalsOrder.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
