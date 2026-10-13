@@ -1,0 +1,179 @@
+{
+  "family": "strongly-regular",
+  "canonical_name": "GTBase.strongly_regular.strongly_regular_parameters",
+  "canonical_short_name": "strongly_regular_parameters",
+  "relation": "strongly regular parameters: GTBase.strongly_regular.strongly_regular_parameters G k lam mu is the three unguarded clauses (regular G k; adjacent pairs have lam common neighbours; distinct non-adjacent pairs have mu). Two distinct existentials: has_strongly_regular_parameters (unguarded; Hom U3 srg/strongly_regular convert to the clauses and to it; K_2, the empty graph, complete, edgeless and clique-union graphs are accepted) and connected_nontrivial_strongly_regular (exactly connected [set: G], 0 < k and k < #|G|.-1; Spectral D5 strongly_regular is a proved iff, its flat five-conjunct body not being a conversion; K_{2,2} with (2,0,2) is in, K_2 and the degenerate graphs out). Only guarded implies unguarded. The adjacency-matrix identity A^2 = k I + lam A + mu (J - I - A) over int is Spectral.foundations.strongly_regular_matrix (equivalent to the clauses for all parameters, and with the same guards to the guarded existential); grounding_D5 sr_clauses/sr_mateq/strongly_regular_alg convert to the canonicals and its theorems are proved wrappers. GTBase does not import Spectral.",
+  "baseline_commit": "a69e27fedb17b9a509dc794b45f6e2aa5c8f4e9e",
+  "namespaces": {
+    "base": "GTBase",
+    "homomorphism-theory": "Hom",
+    "spectral-graph-theory": "Spectral"
+  },
+  "certificate_files": [
+    "base/theories/strongly_regular.v",
+    "spectral-graph-theory/theories/foundations/strongly_regular_matrix.v",
+    "homomorphism-theory/theories/migration/strongly_regular.v",
+    "spectral-graph-theory/theories/migration/strongly_regular.v"
+  ],
+  "extra_certificates": [
+    "GTBase.strongly_regular.strongly_regular_parameters_regular",
+    "GTBase.strongly_regular.strongly_regular_parameters_degree_unique",
+    "GTBase.strongly_regular.strongly_regular_parameters_lambda_unique",
+    "GTBase.strongly_regular.strongly_regular_parameters_mu_unique",
+    "GTBase.strongly_regular.connected_nontrivial_strongly_regularW",
+    "GTBase.strongly_regular.connected_nontrivial_strongly_regular_connected",
+    "GTBase.strongly_regular.connected_nontrivial_strongly_regular_regular",
+    "GTBase.strongly_regular.connected_nontrivial_strongly_regular_card",
+    "Spectral.foundations.strongly_regular_matrix.strongly_regular_matrix_identityP",
+    "Spectral.foundations.strongly_regular_matrix.connected_nontrivial_strongly_regular_matrixP",
+    "Spectral.foundations.strongly_regular_matrix.adjmx_sqr_common_nbr",
+    "Spectral.foundations.strongly_regular_matrix.card_common_nbr_enum",
+    "Spectral.foundations.strongly_regular_matrix.card_enum_val_pred",
+    "Spectral.foundations.strongly_regular_matrix.int01_mul",
+    "Spectral.foundations.strongly_regular_matrix.int_natr_inj",
+    "Spectral.foundations.strongly_regular_matrix.strongly_regular_rhs_diag",
+    "Spectral.foundations.strongly_regular_matrix.strongly_regular_rhs_off",
+    "Spectral.migration.strongly_regular.legacy_sr_mateqE",
+    "Spectral.migration.strongly_regular.legacy_strongly_regularE"
+  ],
+  "summary": [
+    "Family A33 (strongly regular graphs). GTBase.strongly_regular owns the unguarded parameter predicate and two distinct existential wrappers: has_strongly_regular_parameters (U3: no connectivity or degree guard, K_2 accepted by grounding_U3.srg_K2) and connected_nontrivial_strongly_regular (D5: exactly connected, 0 < k and k < #|G|.-1; K_{2,2} with (2,0,2) in). No unguarded equivalence is claimed. The matrix identity and its two equivalences (introduced in grounding_D5, technique 3) are released as Spectral.foundations.strongly_regular_matrix; every grounding_D5 qualified name keeps its type and arguments as a proved wrapper.",
+    "",
+    "Eight rows are frozen at the literal parent a69e27f (bodies byte-identical to a59246d for U3, 7c23ef2 for D5 and 9c47cd0 for the grounding matrix block; only statement doc comments changed since). The two whole statements keep their quantifiers, the eight-graph non-isomorphism clause and the live is_core/hom_equiv/triangle_free providers. The two frozen grounding theorems hold of the frozen bodies (legacy_sr_mateqE, legacy_strongly_regularE). No SRG name or common_nbr occurs in any migration module at the parent: this is scoped search evidence, not proof that no equivalent body was frozen elsewhere; the provider/history scan is part of the gate evidence."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Hom.conjectures.U3.srg",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "srg",
+      "frozen_path": "homomorphism-theory/theories/migration/strongly_regular.v",
+      "frozen": "Legacy.srg",
+      "substitutions": {},
+      "certificate": "Hom.migration.strongly_regular.u3_srg_compat",
+      "live_unfolds_to": "strongly_regular_parameters G k l m",
+      "note": "Body identical since a59246d. The three unguarded clauses; conversion."
+    },
+    {
+      "kind": "source",
+      "qualified": "Hom.conjectures.U3.strongly_regular",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "strongly_regular",
+      "frozen_path": "homomorphism-theory/theories/migration/strongly_regular.v",
+      "frozen": "Legacy.strongly_regular",
+      "substitutions": {
+        "srg": "Legacy.srg"
+      },
+      "certificate": "Hom.migration.strongly_regular.u3_strongly_regular_compat",
+      "live_unfolds_to": "has_strongly_regular_parameters G",
+      "note": "Body identical since a59246d. Unguarded existential: K_2 and the degenerate graphs stay accepted; conversion."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Hom.conjectures.U3.cores_of_strongly_regular_graphs_statement",
+      "path": "homomorphism-theory/theories/conjectures/U3.v",
+      "name": "cores_of_strongly_regular_graphs_statement",
+      "frozen_path": "homomorphism-theory/theories/migration/strongly_regular.v",
+      "frozen": "U3Legacy.cores_of_strongly_regular_graphs_statement",
+      "substitutions": {
+        "strongly_regular": "Legacy.strongly_regular"
+      },
+      "certificate": "Hom.migration.strongly_regular.cores_of_strongly_regular_graphs_statement_compat",
+      "note": "Body identical since a59246d; live is_core, hom_equiv and K_n; conversion."
+    },
+    {
+      "kind": "source",
+      "qualified": "Spectral.conjectures.D5.strongly_regular",
+      "path": "spectral-graph-theory/theories/conjectures/D5.v",
+      "name": "strongly_regular",
+      "frozen_path": "spectral-graph-theory/theories/migration/strongly_regular.v",
+      "frozen": "Legacy.strongly_regular",
+      "substitutions": {},
+      "certificate": "Spectral.migration.strongly_regular.d5_strongly_regular_compat",
+      "live_unfolds_to": "connected_nontrivial_strongly_regular G",
+      "note": "Body identical since 7c23ef2. One flat five-conjunct existential; proved iff (the three counting clauses are grouped into strongly_regular_parameters), not a conversion; exactly the guards connected, 0 < k, k < #|G|.-1."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Spectral.conjectures.D5.triangle_free_strongly_regular_graphs_statement",
+      "path": "spectral-graph-theory/theories/conjectures/D5.v",
+      "name": "triangle_free_strongly_regular_graphs_statement",
+      "frozen_path": "spectral-graph-theory/theories/migration/strongly_regular.v",
+      "frozen": "D5Legacy.triangle_free_strongly_regular_graphs_statement",
+      "substitutions": {
+        "strongly_regular": "Legacy.strongly_regular"
+      },
+      "certificate": "Spectral.migration.strongly_regular.triangle_free_strongly_regular_graphs_statement_compat",
+      "note": "Body identical since 7c23ef2: the I_8 index, triangle-freeness and the pairwise non-isomorphism clause are unchanged."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Spectral.conjectures.grounding_D5.sr_clauses",
+      "path": "spectral-graph-theory/theories/conjectures/grounding_D5.v",
+      "name": "sr_clauses",
+      "frozen_path": "spectral-graph-theory/theories/migration/strongly_regular.v",
+      "frozen": "GroundingLegacy.sr_clauses",
+      "substitutions": {},
+      "certificate": "Spectral.migration.strongly_regular.sr_clauses_compat",
+      "live_unfolds_to": "strongly_regular_parameters G k lam mu",
+      "note": "Grounding definition, body identical since 9c47cd0 (the same three clauses as U3 srg up to binder names); conversion."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Spectral.conjectures.grounding_D5.sr_mateq",
+      "path": "spectral-graph-theory/theories/conjectures/grounding_D5.v",
+      "name": "sr_mateq",
+      "frozen_path": "spectral-graph-theory/theories/migration/strongly_regular.v",
+      "frozen": "GroundingLegacy.sr_mateq",
+      "substitutions": {},
+      "certificate": "Spectral.migration.strongly_regular.sr_mateq_compat",
+      "live_unfolds_to": "strongly_regular_matrix_identity G k lam mu",
+      "note": "Grounding definition, body identical since 9c47cd0: A^2 = k I + lam A + mu (J - I - A) over int; conversion to the Spectral foundation."
+    },
+    {
+      "kind": "chain",
+      "qualified": "Spectral.conjectures.grounding_D5.strongly_regular_alg",
+      "path": "spectral-graph-theory/theories/conjectures/grounding_D5.v",
+      "name": "strongly_regular_alg",
+      "frozen_path": "spectral-graph-theory/theories/migration/strongly_regular.v",
+      "frozen": "GroundingLegacy.strongly_regular_alg",
+      "substitutions": {
+        "sr_mateq": "GroundingLegacy.sr_mateq"
+      },
+      "certificate": "Spectral.migration.strongly_regular.strongly_regular_alg_compat",
+      "live_unfolds_to": "connected_nontrivial_strongly_regular_matrix G",
+      "note": "Grounding definition, body identical since 9c47cd0: the matrix form with the same three guards; conversion."
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "homomorphism-theory/theories/conjectures/grounding_U3.v",
+      "name": "srg",
+      "note": "srg_K2 : srg K_2 1 0 0 (the unguarded clauses accept K_2); statement and proof unchanged"
+    },
+    {
+      "path": "homomorphism-theory/theories/conjectures/grounding_U3.v",
+      "name": "strongly_regular",
+      "note": "strongly_regular_K2 (unguarded existential); statement and proof unchanged"
+    },
+    {
+      "path": "spectral-graph-theory/theories/conjectures/grounding_D5.v",
+      "name": "strongly_regular",
+      "note": "the GTBase.strongly_regular module import (lexical), sr_K22, strongly_regular_connected, strongly_regular_regular and strongly_regularE over the live guarded D5 predicate; statements unchanged, proofs adapted to the grouped clauses or proved from the canonical API"
+    },
+    {
+      "path": "spectral-graph-theory/theories/conjectures/implications_D5.v",
+      "name": "triangle_free_strongly_regular_graphs_statement",
+      "note": "D5_nodes_in_scope, a trivial self-equality of the live D5 row; type unchanged"
+    },
+    {
+      "path": "spectral-graph-theory/theories/foundations/strongly_regular_matrix.v",
+      "name": "strongly_regular",
+      "note": "the GTBase.strongly_regular module import (lexical only); no use of the D5 or U3 definition"
+    }
+  ],
+  "distinct_variants": [],
+  "kernel_evidence": "Print Assumptions of every certificate, API and matrix theorem; exact types and Arguments of every pre-existing qualified name (U3, D5, grounding_U3, grounding_D5) against the a69e27f build; coordination/evidence/A33-strongly-regular/ (outside the repository)",
+  "downstream_client": "base/theories/examples/strongly_regular.v"
+}

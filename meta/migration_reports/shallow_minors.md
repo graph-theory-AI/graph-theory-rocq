@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py shallow_minors --details /tmp/m
 
 - Canonical: `Minor.foundations.shallow_minors.internal_shallow_minor`.
 - Baseline: `311fdcb89dc12a78c62cb0ee6d2477896cbce9a7`.
-- Scope: 2 helpers, 1 statements, 4 frozen objects, 9 recorded references.
-- Source checks: 57/57 pass; consistent.
+- Scope: 2 helpers, 1 statements, 4 frozen objects, 14 recorded references.
+- Source checks: 58/58 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -18,3 +18,5 @@ Source checks compare frozen text, registry and statement coverage, bridge endpo
 Helper types, Section context, notation/constructor resolution and compiled dependency closure still require independent review and family-specific Section and kernel dependency evidence.
 
 Excluded distinct variants: `GTMisc.conjectures.X128.x128_shallow_minor_model`, `GTMisc.conjectures.X139.x139_shallow_minor_model`.
+
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `minor-theory/theories/migration/poly_eval.v#X220Legacy.x220_polynomial_expansion`.

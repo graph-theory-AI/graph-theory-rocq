@@ -4,7 +4,7 @@
   "primitive": {
     "canonical_name": "GTBase.edge_colourings.edge_colour_class",
     "owner": "base",
-    "status": "migrating",
+    "status": "deprecated",
     "fidelity": "FAITHFUL",
     "normalized_names": [
       "colour_graph",
@@ -15,11 +15,13 @@
       "Chromatic.conjectures.X34.x34_edge_colour_rel",
       "Cycle.conjectures.X212.x212_colour_graph",
       "Cycle.conjectures.X212.x212_edge_colour_rel",
+      "Extremal.foundations.edge_colourings.cc_rel",
+      "Extremal.foundations.edge_colourings.colour_class",
       "Topological.conjectures.X23.x23_colour_graph",
       "Topological.conjectures.X23.x23_edge_colour_rel"
     ],
-    "consumers_remaining": 9,
-    "relation": "Spanning colour class: edge_colour_class col p is the simple graph on the host carrier (isolated vertices kept) whose adjacency is (x -- y) && p (col [set x; y]) for a total set map col : {set G} -> C over an arbitrary eqType palette and a colour predicate p; the six local X34/X212/X23 colour classes are the instances p := pred1 i, col : {set G} -> 'I_q. Adjacency is the same function by conversion; the graphs, built from different opaque symmetry/irreflexivity proofs, are related only by the identity isomorphism. No proper-colouring, positivity, inhabited-graph or extra predicate guard; values off E(G) are irrelevant and no total map into 'I_0 exists, even on the empty host.",
+    "consumers_remaining": 17,
+    "relation": "Spanning colour class: edge_colour_class col p is the simple graph on the host carrier (isolated vertices kept) whose adjacency is (x -- y) && p (col [set x; y]) for a total set map col : {set G} -> C over an arbitrary eqType palette and a colour predicate p; the six local X34/X212/X23 colour classes are the instances p := pred1 i, col : {set G} -> 'I_q. Adjacency is the same function by conversion; the graphs, built from different opaque symmetry/irreflexivity proofs, are related only by the identity isomorphism. No proper-colouring, positivity, inhabited-graph or extra predicate guard; values off E(G) are irrelevant and no total map into 'I_0 exists, even on the empty host. Second stage: the Extremal foundation's public colour_class col p and cc_rel col p are transparent adapters of the same contract (same Section binders, carrier and Arguments), with the X229 row and its complete C6+D12 Original certified.",
     "semantic_classes": {
       "single-colour-class": {
         "members": [
@@ -53,11 +55,15 @@
           "Extremal.foundations.edge_colourings.cc_rel"
         ],
         "count": 2,
-        "verdict": "same contract (pending public adapter)",
-        "state": "pending-adapter",
-        "certificates": [],
+        "verdict": "equivalent (same adjacency by conversion; identity isomorphism of the graphs)",
+        "state": "migrated-alias (public adapter kept)",
+        "certificates": [
+          "Extremal.migration.edge_colour_class.cc_rel_compat",
+          "Extremal.migration.edge_colour_class.colour_class_compat",
+          "Extremal.migration.edge_colour_class.colour_class_diso"
+        ],
         "canonical": "GTBase.edge_colourings.edge_colour_class",
-        "note": "The Extremal area foundation colour_class col p (cc_rel, cc_sym, cc_irrefl) is the same contract, promoted here under distinct names; it is unchanged in this first stage. Its transparent public adapter, with the old C6 snapshots and its row history, is the next scoped stage of this family under the same owner; it is neither mathematically distinct nor a second final canonical, and the promotion is not complete."
+        "note": "Extremal.foundations.edge_colourings.cc_rel col p is edge_colour_class_rel col p and colour_class col p is edge_colour_class col p: public names kept as transparent adapters with the original Section binders (G, C, col, p), spanning carrier and Arguments colour_class [G C] col p; cc_sym/cc_irrefl keep their headers and are proved by the canonical lemmas, their original scripts frozen with the whole Section."
       }
     },
     "compatibility_theorems": [
@@ -89,7 +95,14 @@
       "Topological.migration.edge_colour_class.x23_linear_forest_colour_compat",
       "Topological.migration.edge_colour_class.x23_linear_arboricity_at_most_compat",
       "Topological.migration.edge_colour_class.x23_linear_arboricity_compat",
-      "Topological.migration.edge_colour_class.planar_linear_arboricity_statement_compat"
+      "Topological.migration.edge_colour_class.planar_linear_arboricity_statement_compat",
+      "Extremal.migration.edge_colour_class.cc_rel_compat",
+      "Extremal.migration.edge_colour_class.colour_class_compat",
+      "Extremal.migration.edge_colour_class.colour_class_diso",
+      "Extremal.migration.edge_colour_class.colour_class_disoE",
+      "Extremal.migration.edge_colour_class.cc_proofs_compat",
+      "Extremal.migration.edge_colour_class.expander_proper_colouring_two_connected_palettes_statement_compat",
+      "Extremal.migration.edge_colour_class.expander_proper_colouring_two_connected_palettes_statement_original_compat"
     ],
     "api_theorems": [
       "GTBase.edge_colourings.edge_colour_class_sym",
@@ -122,8 +135,22 @@
       ],
       "result": "adapted-in-base",
       "candidate": "Extremal.foundations.edge_colourings.colour_class",
-      "note": "Upstream has no colour-class or edge-predicate spanning subgraph: del_edges deletes the edges inside a vertex set, srestrict/induced act on vertices; eq_diso gives the identity isomorphism. GTBase.common.del_edge_set over [set e | col e != i] is only pointwise equal (not convertible) and would need new is_forest/Delta transport. The reviewed Extremal area contract colour_class col p is convertible with the three local constructions at p := pred1 i; with consumers in four areas it is promoted into GTBase.edge_colourings under distinct names.",
+      "note": "Upstream has no colour-class or edge-predicate spanning subgraph: del_edges deletes the edges inside a vertex set, srestrict/induced act on vertices; eq_diso gives the identity isomorphism. GTBase.common.del_edge_set over [set e | col e != i] is only pointwise equal (not convertible) and would need new is_forest/Delta transport. The reviewed Extremal area contract colour_class col p is convertible with the three local constructions at p := pred1 i; with consumers in four areas it is promoted into GTBase.edge_colourings under distinct names. Second stage (2026-10-04): the Extremal colour_class/cc_rel are transparent public adapters.",
       "audited_at": "2026-10-04"
+    },
+    "repository_sources": {
+      "Extremal.foundations.edge_colourings.cc_rel": {
+        "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+        "commit": "2f37b10a711c81b9bfb6dcb1581ac2c527974baa",
+        "blob": "076853893b6dc0ee4be08dad1402f24d3ab4474b",
+        "declaration_hash": "789901bdfe348d558f9dafab7ac8fd558d98595dd8fdb360a5aadb5358563b57"
+      },
+      "Extremal.foundations.edge_colourings.colour_class": {
+        "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+        "commit": "2f37b10a711c81b9bfb6dcb1581ac2c527974baa",
+        "blob": "076853893b6dc0ee4be08dad1402f24d3ab4474b",
+        "declaration_hash": "917eeff51cab4247ede00968299d4b3ed52e470b5ef44b2e12879a329203702c"
+      }
     }
   }
 }

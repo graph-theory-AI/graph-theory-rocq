@@ -577,10 +577,7 @@ Qed.
 (** The trivial bipartition imposes nothing: the cut of the empty vertex set is
     empty, and the empty set contains no cycle. *)
 Lemma x212_edge_cut0 (G : sgraph) : x212_edge_cut (G := G) set0 = set0.
-Proof.
-apply/setP => e; rewrite !inE setI0 cards0 andbF.
-by [].
-Qed.
+Proof. exact: GTBase.simple_cuts.cut_edges0. Qed.
 
 (** ** bm-066 — Birmelé's conjecture on long cycles *)
 

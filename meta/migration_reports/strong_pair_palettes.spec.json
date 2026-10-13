@@ -1,0 +1,117 @@
+{
+  "family": "strong-edge-colouring",
+  "canonical_name": "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable",
+  "canonical_short_name": "strong_pair_colourable",
+  "relation": "strong edge colouring, in stages; stage 1 migrates U5's total symmetric pair palette to Chromatic.foundations.strong_pair_palettes, by conversion: U5.diff_edge x y u v is distinct_edge_pairs x y u v (the unordered pairs {x, y} and {u, v} differ), U5.near_edge x y u v is near_edge_pairs x y u v (the eight disjuncts x = u, x = v, y = u, y = v, x -- u, x -- v, y -- u, y -- v) and U5.strong_edge_colourable G k is strong_pair_colourable G k (a map on ALL ordered vertex pairs into 'I_k, symmetric, separating two host edges whose pairs are distinct and near, the guards in this order). No nonemptiness, edge or palette guard: at k = 0 it holds exactly on the empty host, an edgeless nonempty host needs 0 < k, two near distinct edges need two colours, and the palette bound is monotone. Later classes of this family, not migrated here and not identified with this one: X43's chromatic number of the square of its line graph (deferred, same normalized name; it needs a parent with A25) and XE1's exact edge-set palette with its edgeless k = 0 clause and index (cross-name). No line-graph equivalence is asserted.",
+  "baseline_commit": "5a107c3bc98e06e1914da17cf23ec6951cf91462",
+  "namespaces": {
+    "chromatic-theory": "Chromatic"
+  },
+  "certificate_files": [
+    "chromatic-theory/theories/foundations/strong_pair_palettes.v",
+    "chromatic-theory/theories/migration/strong_pair_palettes.v"
+  ],
+  "extra_certificates": [
+    "Chromatic.foundations.strong_pair_palettes.distinct_edge_pairs_refl",
+    "Chromatic.foundations.strong_pair_palettes.distinct_edge_pairs_flip",
+    "Chromatic.foundations.strong_pair_palettes.distinct_edge_pairsC",
+    "Chromatic.foundations.strong_pair_palettes.near_edge_pairs_refl",
+    "Chromatic.foundations.strong_pair_palettes.near_edge_pairsC",
+    "Chromatic.foundations.strong_pair_palettes.near_edge_pairs_share",
+    "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_mono",
+    "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable0",
+    "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_card0",
+    "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_gt0",
+    "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_edgeless",
+    "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_two"
+  ],
+  "summary": [
+    "D13 stage 1, class total symmetric pair palette of the new family strong-edge-colouring. Chromatic U5's `diff_edge`, `near_edge` and `strong_edge_colourable` are, by conversion, `Chromatic.foundations.strong_pair_palettes`' `distinct_edge_pairs` (the unordered pairs differ), `near_edge_pairs` (the eight disjuncts) and `strong_pair_colourable` (a symmetric map on ALL ordered vertex pairs into `'I_k` separating two host edges whose pairs are distinct and near, the guards in this order). No nonemptiness, edge or palette guard is added; binders, inferred G and every Arguments status are unchanged.",
+    "",
+    "API: pair distinction (reflexive, flipped, symmetric), nearness (reflexive, symmetric, shared vertex), the zero palette exactly on the empty host, every palette on the empty host, a nonempty palette on a nonempty host, one colour on an edgeless host, two colours for near distinct edges, monotonicity. Corners in the public-only client chromatic-theory/theories/examples/strong_pair_palettes.v: K_0 at 0 and 6; K_1 not at 0, at 1; K_2's edge at 1, not at 0; K_3's near edges {0, 1} and {1, 2} rule out one colour.",
+    "",
+    "Frozen verbatim at the D11 pin 5a107c3 (frozen helpers named Legacy.): the three bodies and the complete OPG row `strong_edge_colouring_statement` (every G with 0 < Delta G, the odd / even nat bound), one whole iff by conversion; no earlier snapshot, so no Original. The row documentation, including its line-graph-distance wording recorded by D13 discovery, is unchanged. grounding_U5's `diff_edge_refl` and `near_edge_refl` add one qualified unfold each (headers unchanged); `strong_edge_colourable_K1` is unchanged. The coqdep closure is U5 with grounding_U5, implications_U5 and migration/mregular. X43's same-named helper is a deferred class; XE1's exact palette is a later cross-name class; both untouched, as are A1 and the pending A25. Route: U5 (chromatic-theory)."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.U5.diff_edge",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "diff_edge",
+      "frozen_path": "chromatic-theory/theories/migration/strong_pair_palettes.v",
+      "frozen": "Legacy.diff_edge",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.strong_pair_palettes.diff_edge_compat",
+      "live_unfolds_to": "distinct_edge_pairs x y u v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.U5.near_edge",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "near_edge",
+      "frozen_path": "chromatic-theory/theories/migration/strong_pair_palettes.v",
+      "frozen": "Legacy.near_edge",
+      "substitutions": {},
+      "certificate": "Chromatic.migration.strong_pair_palettes.near_edge_compat",
+      "live_unfolds_to": "near_edge_pairs x y u v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Chromatic.conjectures.U5.strong_edge_colourable",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "strong_edge_colourable",
+      "frozen_path": "chromatic-theory/theories/migration/strong_pair_palettes.v",
+      "frozen": "Legacy.strong_edge_colourable",
+      "substitutions": {
+        "diff_edge": "Legacy.diff_edge",
+        "near_edge": "Legacy.near_edge"
+      },
+      "certificate": "Chromatic.migration.strong_pair_palettes.strong_edge_colourable_compat",
+      "live_unfolds_to": "strong_pair_colourable G k"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Chromatic.conjectures.U5.strong_edge_colouring_statement",
+      "path": "chromatic-theory/theories/conjectures/U5.v",
+      "name": "strong_edge_colouring_statement",
+      "frozen_path": "chromatic-theory/theories/migration/strong_pair_palettes.v",
+      "frozen": "U5Legacy.strong_edge_colouring_statement",
+      "substitutions": {
+        "strong_edge_colourable": "Legacy.strong_edge_colourable"
+      },
+      "certificate": "Chromatic.migration.strong_pair_palettes.strong_edge_colouring_statement_compat",
+      "corpus": "opg"
+    }
+  ],
+  "known_stale_snapshots": {},
+  "cross_module_consumers": [
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "diff_edge",
+      "note": "diff_edge_refl: proof-only adaptation, one added qualified unfold of the public distinct_edge_pairs (D13 stage 1); theorem type unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "near_edge",
+      "note": "near_edge_refl: proof-only adaptation, one added qualified unfold of the public near_edge_pairs (D13 stage 1); theorem type unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "strong_edge_colourable",
+      "note": "strong_edge_colourable_K1: the K_1 witness at one colour; proof unchanged (exists unfolds the alias), theorem type unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_U5.v",
+      "name": "strong_edge_colouring_statement",
+      "note": "Print Assumptions of the live row; unchanged."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.X43.x43_strong_edge_colourable",
+      "path": "chromatic-theory/theories/conjectures/X43.v",
+      "name": "x43_strong_edge_colourable",
+      "note": "chi of the square of X43's local line graph; a deferred class of this family (later stage on a parent with A25), no bridge claimed here; untouched"
+    }
+  ]
+}

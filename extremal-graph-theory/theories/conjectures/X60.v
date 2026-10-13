@@ -1,6 +1,7 @@
 (** * Extremal.conjectures.X60 -- v2 polynomial induced-saturation row *)
 
 From GTBase Require Export base.
+From GTBase Require poly_nat.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -8,8 +9,10 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X60 vocabulary ************************************************)
 
-Fixpoint x60_poly_eval (p : seq nat) (x : nat) : nat :=
-  if p is a :: q then a + x * x60_poly_eval q x else 0.
+(** Since the A31 library migration [x60_poly_eval] is a transparent alias of the canonical natural Horner evaluation
+    [GTBase.poly_nat.horner_nat] (upstream [horner_rec] at nat).  The original is frozen in
+    theories/migration/poly_eval.v, related to the alias by an unconditional pointwise equality. *)
+Definition x60_poly_eval (p : seq nat) (x : nat) : nat := GTBase.poly_nat.horner_nat p x.
 
 Definition x60_edge_set (G : sgraph) : {set {set G}} :=
   sg_edge_set G.

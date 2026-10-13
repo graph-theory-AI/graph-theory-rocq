@@ -29,6 +29,24 @@
         "edges_edge_colour_class1",
         "edges_edge_colour_class_const"
       ]
+    },
+    "Extremal.foundations.edge_colourings": {
+      "path": "extremal-graph-theory/theories/foundations/edge_colourings.v",
+      "overrides": {
+        "colour_class": {
+          "verdict": "FAITHFUL",
+          "note": "Public adapter kept under its old name: a transparent alias of GTBase.edge_colourings.edge_colour_class col p (spanning host carrier, arbitrary eqType palette, total set map, colour predicate), with the original Section binders and Arguments."
+        },
+        "cc_rel": {
+          "verdict": "FAITHFUL",
+          "note": "Public adapter kept under its old name: a transparent alias of GTBase.edge_colourings.edge_colour_class_rel col p, the adjacency (x -- y) && p (col [set x; y])."
+        }
+      },
+      "machine_evidence": [
+        "colour_class_adj",
+        "edges_colour_class",
+        "card_edges_colour_class_split"
+      ]
     }
   }
 }

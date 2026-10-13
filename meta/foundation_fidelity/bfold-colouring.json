@@ -1,0 +1,22 @@
+{
+ "schema_version": 1,
+ "family": "bfold-colouring",
+ "modules": {
+  "GTBase.bfold_colourings": {
+   "path": "base/theories/bfold_colourings.v",
+   "overrides": {
+    "bfold_colouring": {
+     "verdict": "FAITHFUL",
+     "note": "bfold_colouring b f: the supplied map f : G -> {set 'I_a} gives every vertex a b-element set of colours from the supplied palette 'I_a and adjacent vertices disjoint sets, the standard (a:b)-colouring; b = 0 and an empty vertex type are allowed without a guard, a vertex forces b <= a and an edge 2 * b <= a. No ratio a/b is part of it: fractional-chromatic consumers carry their own 0 < b."
+    }
+   },
+   "machine_evidence": [
+    "bfold_colouringP",
+    "bfold_colouring0",
+    "bfold_colouring_empty",
+    "bfold_colouring_le",
+    "bfold_colouring_edge"
+   ]
+  }
+ }
+}

@@ -40,7 +40,9 @@
     "",
     "Kernel evidence, independent of this textual report: `Print All Dependencies` of every frozen statement and of X126Original contains no live helper or chain of this family and not `path_tree`; X126Original reaches no live B6 helper and not `seq_simple_path`; each live statement reaches `path_tree` and its alias (/srv/graph-theory-rocq/coordination/evidence/B9-path_tree/print_all_dependencies_summary.txt).",
     "",
-    "No statement text, doc block, manifest row or leg state changes (checked below)."
+    "No statement text, doc block, manifest row or leg state changes (checked below).",
+    "",
+    "D14 (linear-forest, 2026-10-09): the colour-class helpers X34/X212/X23 `xNN_linear_forest_colour`, listed here until then as untouched distinct variants, are now owned by the linear-forest family as aliases of `GTBase.path_trees.linear_forest`, the forest analogue added to the same module (`path_tree G <-> linear_forest G /\\ connected [set: G]`, `path_treeP`), so they leave this list. `path_tree`, its API and every certificate of this family are unchanged."
   ],
   "frozen": [
     {
@@ -207,31 +209,13 @@
       "qualified": "Digraph.conjectures.path_fas.linear_forest",
       "path": "digraph-theory/theories/conjectures/path_fas.v",
       "name": "linear_forest",
-      "note": "linear forest (a forest, not a tree); untouched"
+      "note": "linear forest in degree form (a forest, not a tree); a later class of the linear-forest owner (GTBase.path_trees.linear_forest); untouched"
     },
     {
       "qualified": "GTMisc.conjectures.X74.x74_induced_linear_forest",
       "path": "graph-theory-misc/theories/conjectures/X74.v",
       "name": "x74_induced_linear_forest",
-      "note": "induced linear forest on a vertex set; untouched"
-    },
-    {
-      "qualified": "Cycle.conjectures.X212.x212_linear_forest_colour",
-      "path": "cycle-theory/theories/conjectures/X212.v",
-      "name": "x212_linear_forest_colour",
-      "note": "colour classes are forests of maximum degree two; untouched"
-    },
-    {
-      "qualified": "Chromatic.conjectures.X34.x34_linear_forest_colour",
-      "path": "chromatic-theory/theories/conjectures/X34.v",
-      "name": "x34_linear_forest_colour",
-      "note": "colour classes of maximum degree two; untouched"
-    },
-    {
-      "qualified": "Topological.conjectures.X23.x23_linear_forest_colour",
-      "path": "topological-graph-theory/theories/conjectures/X23.v",
-      "name": "x23_linear_forest_colour",
-      "note": "colour classes of maximum degree two; untouched"
+      "note": "induced linear forest on a vertex set; a later class of the linear-forest owner (GTBase.path_trees.linear_forest); untouched"
     },
     {
       "qualified": "Extremal.conjectures.X105.x105_star_tree",

@@ -25,13 +25,15 @@
     each is specific to homomorphism statements): [cycle_graph]/[C5]
     (odd-cycle targets), [path_graph], [star_graph], [bipartite_rel],
     [triangle_free], [k_connected], [longest_cycle], [chord], [is_path],
-    [longest_path], [hom_ffun]/[endo_count], [hom_equiv], [strongly_regular],
-    [pcayley]/[pconn_set].  [graph_power]/[subdivision]/[frac_power] are the
+    [longest_path], [hom_ffun]/[endo_count], [hom_equiv],
+    [pcayley]/[pconn_set].  [srg]/[strongly_regular] are aliases of the GTBase
+    strongly regular canonicals (A33: the parameter clauses and the UNGUARDED
+    existential, [GTBase.strongly_regular]).  [graph_power]/[subdivision]/[frac_power] are the
     pure colouring-free [sgraph] constructions promoted from chromatic-theory/U1
     (tagged [@MOVE-to-base]: base candidates once a 2nd area needs them). *)
 
 From GTBase Require Export base.
-From GTBase Require Import path_graphs.
+From GTBase Require Import path_graphs strongly_regular.
 From mathcomp Require Import fingroup.
 
 Set Implicit Arguments.
@@ -266,12 +268,10 @@ Definition chromatic_number_of_frac_3_3_power_of_graph_statement : Prop :=
     itself ([is_core G]) or a complete graph (G is hom-equivalent to ['K_n],
     whose core is ['K_n]). *)
 Definition srg (G : sgraph) (k l m : nat) : Prop :=
-  [/\ regular G k,
-      (forall x y : G, x -- y -> #|common_nbr x y| = l)
-    & (forall x y : G, x != y -> ~~ x -- y -> #|common_nbr x y| = m)].
+  strongly_regular_parameters G k l m.
 
 Definition strongly_regular (G : sgraph) : Prop :=
-  exists k l m : nat, srg G k l m.
+  has_strongly_regular_parameters G.
 
 (** Corpus row: opg:cores_of_strongly_regular_graphs
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/cores_of_strongly_regular_graphs/

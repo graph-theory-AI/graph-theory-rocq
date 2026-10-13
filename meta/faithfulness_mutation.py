@@ -66,6 +66,10 @@ class Mutant:
     detector: str = "milestone"
 
 
+# The exact-type fixtures use the open list-total-colouring row, whose only
+# external references are metadata comments. The former bounded-order row now
+# has a migration equivalence proof: mutating it stops compilation at that proof
+# before the intended exact-type detector can run. Only temporary copies change.
 MUTANTS = [
     Mutant(
         name="u4_open_row_trivial_true_direct_proof",
@@ -74,8 +78,8 @@ MUTANTS = [
         replacements=(
             Replacement(
                 "chromatic-theory/theories/conjectures/U4.v",
-                "choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
-                "Definition choice_number_of_k_chromatic_graphs_of_bounded_order_statement : Prop :=\n  True.",
+                "list_total_colouring_statement",
+                "Definition list_total_colouring_statement : Prop :=\n  True.",
             ),
         ),
         appendices=(
@@ -86,8 +90,8 @@ MUTANTS = [
 (** MUTATION TEST CANARY: this lemma is written only in a temporary copy.
     If committed, it would prove an open row directly and must be rejected by
     the exact-type faithfulness gate. *)
-Lemma mutation_direct_proof_choice_number_of_k_chromatic_graphs_of_bounded_order_statement :
-  choice_number_of_k_chromatic_graphs_of_bounded_order_statement.
+Lemma mutation_direct_proof_list_total_colouring_statement :
+  list_total_colouring_statement.
 Proof. exact I. Qed.
 """,
             ),
@@ -103,8 +107,8 @@ Proof. exact I. Qed.
         replacements=(
             Replacement(
                 "chromatic-theory/theories/conjectures/U4.v",
-                "choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
-                "Definition choice_number_of_k_chromatic_graphs_of_bounded_order_statement : Prop :=\n  False.",
+                "list_total_colouring_statement",
+                "Definition list_total_colouring_statement : Prop :=\n  False.",
             ),
         ),
         appendices=(
@@ -115,8 +119,8 @@ Proof. exact I. Qed.
 (** MUTATION TEST CANARY: this lemma is written only in a temporary copy.
     If committed, it would refute a non-disproved row unconditionally and must
     be rejected by the exact-type faithfulness gate. *)
-Lemma mutation_refutes_choice_number_of_k_chromatic_graphs_of_bounded_order_statement :
-  ~ choice_number_of_k_chromatic_graphs_of_bounded_order_statement.
+Lemma mutation_refutes_list_total_colouring_statement :
+  ~ list_total_colouring_statement.
 Proof. by []. Qed.
 """,
             ),
@@ -132,8 +136,8 @@ Proof. by []. Qed.
         replacements=(
             Replacement(
                 "chromatic-theory/theories/conjectures/U4.v",
-                "choice_number_of_k_chromatic_graphs_of_bounded_order_statement",
-                "Definition choice_number_of_k_chromatic_graphs_of_bounded_order_statement : Prop :=\n  True.",
+                "list_total_colouring_statement",
+                "Definition list_total_colouring_statement : Prop :=\n  True.",
             ),
         ),
         appendices=(
@@ -143,7 +147,7 @@ Proof. by []. Qed.
 
 (** A transparent alias must not hide a forbidden direct proof from the gate. *)
 Definition mutation_statement_alias : Prop :=
-  choice_number_of_k_chromatic_graphs_of_bounded_order_statement.
+  list_total_colouring_statement.
 Definition mutation_hidden_direct_proof : mutation_statement_alias := I.
 """,
             ),

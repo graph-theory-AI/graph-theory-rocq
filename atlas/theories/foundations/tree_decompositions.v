@@ -4,18 +4,26 @@
     [x47_edge_connected], [x47_min_degree_at_least], list decompositions whose
     parts sharing an edge are equal) and the cycle row's encodings ([E(G)],
     edge-deletion [k_edge_connected] of GTBase.common, exact-count
-    [x212_decomposition_into_copies]). *)
+    [x212_decomposition_into_copies]).
+    Since the edge-copy library migration this module imports no conjecture file:
+    the seven declarations keep their names and are stated over the public owners
+    [E(G)], [GTBase.simple_cuts.cut_edges] and [GTBase.edge_copies]'s
+    [edge_decomposition_by_equal_parts] / [edge_decomposition_exact], of which the
+    X47 and X212 names are aliases. Six former types hold by conversion with their
+    former bodies. [x47_decomposition_x212] is the exception: its former premise used
+    X47's nested-quantifier copy image, equal to the pair-form image only by proof
+    (Packing.migration.edge_copies.x47_copy_edge_set_compat), so its former contract
+    is recovered through the compatibility certificates, not by conversion. *)
 
 From GTBase Require Import base common.
-From Packing.conjectures Require Import X47.
-From Cycle.conjectures Require Import X212.
+From GTBase Require simple_cuts edge_copies.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 (** The X47 edge comprehension is the library's [E(G)]. *)
-Lemma x47_edge_setE (G : sgraph) : x47_edge_set G = E(G).
+Lemma x47_edge_setE (G : sgraph) : sg_edge_set G = E(G).
 Proof. by []. Qed.
 
 (** A walk leaving [S] uses an edge with one end in [S] and one outside. *)
@@ -33,19 +41,10 @@ Qed.
     [k] edges across every nonempty proper vertex set (X47's cut form). *)
 Lemma k_edge_connected_cut (G : sgraph) (k : nat) (S : {set G}) :
   k_edge_connected G k -> S != set0 -> S != [set: G] ->
-  k <= #|x47_crossing_edges S|.
+  k <= #|GTBase.simple_cuts.cut_edges S|.
 Proof.
-case=> _ H S0 ST; rewrite leqNgt; apply/negP => lt.
-have C := connectedTE (H _ lt).
-have [x xS] := set0Pn _ S0.
-have [y yS] : exists y, y \notin S.
-  by apply/existsP; move: ST; apply: contraNT; rewrite negb_exists => /forallP h;
-     apply/eqP/setP => z; rewrite inE; move: (h z); rewrite negbK.
-have [u [v [uv uS vS]]] := connect_crossing (C x y) xS yS.
-move: uv; rewrite /edge_rel /= /del_es_rel /= => /andP [uv]; apply/negP; rewrite negbK.
-rewrite inE x47_edge_setE in_edges uv /=; apply/andP; split; apply/set0Pn.
-  by exists u; rewrite !inE eqxx uS.
-by exists v; rewrite !inE eqxx orbT vS.
+move=> kc S0 ST.
+exact: (@GTBase.simple_cuts.k_edge_connected_cut G k kc S S0 ST).
 Qed.
 
 (** ... and minimum degree at least [k]. *)
@@ -60,7 +59,7 @@ apply: leq_trans (k_edge_connected_cut (S := [set v]) kc _ _) _.
 - by apply/set0Pn; exists v; rewrite inE.
 - by apply/eqP => /setP /(_ w); rewrite !inE (negbTE vw).
 apply: leq_trans (leq_imset_card (fun u => [set v; u]) N(v)); apply: subset_leq_card.
-apply/subsetP => e; rewrite inE x47_edge_setE => /andP [/edgesP [a [b [-> ab]]] /andP [m1 m2]].
+apply/subsetP => e; rewrite GTBase.simple_cuts.cut_edgesE => /andP [/edgesP [a [b [-> ab]]] /andP [m1 m2]].
 apply/imsetP.
 have [c [cin cv]] : exists c, c \in [set a; b] /\ c != v.
   have [c cm] := set0Pn _ m2; move: cm; rewrite !inE => /andP [cin cv]; exists c; split => //.
@@ -75,49 +74,18 @@ Qed.
 (** An X47 decomposition (parts sharing an edge are equal, repetitions allowed)
     yields an X212 decomposition (exact-count form): drop the repetitions. *)
 Lemma x47_decomposition_x212 (G T : sgraph) :
-  x47_tree_decomposition_by_copies G T ->
-  exists D : seq {set {set G}}, x212_decomposition_into_copies T D.
-Proof.
-case=> parts [Hcopy [Hsub [Hcov Hdis]]].
-exists (undup parts); split.
-- move=> A; rewrite mem_undup => Ap.
-  have Asub := Hsub A Ap.
-  have [f [finj eA]] := Hcopy A Ap.
-  rewrite eA in Asub *.
-  exists f; split => //.
-  + move=> x y xy; have := subsetP Asub [set f x; f y].
-    rewrite x47_edge_setE in_edges; apply; rewrite inE.
-    by apply/existsP; exists x; apply/existsP; exists y; rewrite xy eqxx.
-  + apply/setP => e; rewrite !inE; apply/existsP/existsP.
-    * by case=> x /existsP [y] h; exists (x, y).
-    * by case=> [[x y]] /= h; exists x; apply/existsP; exists y.
-- move=> e; case: (boolP (e \in E(G))) => eE /=.
-  + have eE' : e \in x47_edge_set G by rewrite x47_edge_setE.
-    have [F [Fp eF]] := Hcov e eE'.
-    rewrite (@eq_in_count _ _ (pred1 F)) ?count_uniq_mem ?undup_uniq ?mem_undup ?Fp //.
-    move=> A; rewrite mem_undup => Ap /=.
-    apply/idP/eqP => [eA|->//]; exact: Hdis Ap Fp eA eF.
-  + apply/eqP; rewrite -leqn0 leqNgt -has_count; apply/negP => /hasP [A].
-    rewrite mem_undup => Ap eA.
-    by move: eE; rewrite -x47_edge_setE (subsetP (Hsub A Ap) e eA).
-Qed.
+  GTBase.edge_copies.edge_decomposition_by_equal_parts G T ->
+  exists D : seq {set {set G}}, GTBase.edge_copies.edge_decomposition_exact T D.
+Proof. exact: GTBase.edge_copies.edge_decomposition_equal_parts_exact. Qed.
 
 (** A tree on at least two vertices has an edge. *)
-Lemma tree_has_edge (T : sgraph) : 1 < #|T| -> is_tree [set: T] -> 0 < #|x47_edge_set T|.
-Proof.
-move=> T1 [_ con].
-have [a [b [_ _ ab]]] := card_gt1P T1.
-have [u [v uv]] : exists u v : T, u -- v.
-  have := connectedTE con a b; case/connectP => p pth la.
-  case: p pth la => [|z p] /= ; first by move=> _ e; rewrite e eqxx in ab.
-  by case/andP => az _ _; exists a, z.
-by apply/card_gt0P; exists [set u; v]; rewrite x47_edge_setE in_edges.
-Qed.
+Lemma tree_has_edge (T : sgraph) : 1 < #|T| -> is_tree [set: T] -> 0 < #|E(T)|.
+Proof. exact: GTBase.edge_copies.tree_has_edge. Qed.
 
 (** The one-vertex tree: only edgeless graphs have [0 %| #|E(G)|]. *)
 Lemma trivial_tree_decomposition (G T : sgraph) :
-  #|E(G)| = 0 -> exists D : seq {set {set G}}, x212_decomposition_into_copies T D.
+  #|E(G)| = 0 -> exists D : seq {set {set G}}, GTBase.edge_copies.edge_decomposition_exact T D.
 Proof.
-move=> /eqP; rewrite cards_eq0 => /eqP E0; exists [::]; split => // e.
-by rewrite E0 inE.
+move=> /eqP; rewrite cards_eq0 => /eqP E0; exists [::].
+exact: GTBase.edge_copies.edge_decomposition_exact_nil E0.
 Qed.

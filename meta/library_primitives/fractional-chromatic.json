@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "family": "fractional-chromatic",
+  "primitive": {
+    "canonical_name": "Extremal.foundations.fractional_colouring.is_fractional_chromatic",
+    "owner": "extremal-graph-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "is_fractional_chromatic"
+    ],
+    "source_definitions": [
+      "Extremal.conjectures.D2chr.is_fractional_chromatic"
+    ],
+    "consumers_remaining": 1,
+    "relation": "definitional equality: Extremal D2chr's is_fractional_chromatic G r (unchanged since its authoring 818a76c) is Extremal.foundations.fractional_colouring.is_fractional_chromatic G r: r is the ATTAINED rational minimum of a/b over (a:b)-colourings with a positive denominator (some GTBase b-fold colouring f : G -> {set 'I_a} with 0 < b has r = a/b, and r <= a/b for every such colouring), with no guard on G (the empty graph has value 0). The value is unique; its existence for every finite graph is the LP attainment theorem Atlas.foundations.fractional.frac_chromatic_exists. Distinct and not migrated: X130's existential cross-multiplied bound x130_frac_chi_le, the circular chromatic number is_circular_chromatic, D2chr's colouring-mixing threshold (an infimum without attainment).",
+    "semantic_classes": {
+      "attained-fractional-chromatic-number": {
+        "members": [
+          "Extremal.conjectures.D2chr.is_fractional_chromatic"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Extremal.migration.fractional_chromatic.is_fractional_chromatic_compat"
+        ],
+        "note": "is_fractional_chromatic G r over a rational r: attainment (some (a:b)-colouring with 0 < b and r = a/b) and minimality (r <= a/b for every (a:b)-colouring with 0 < b); D2chr keeps its name as a transparent alias."
+      }
+    },
+    "compatibility_theorems": [
+      "Extremal.migration.fractional_chromatic.fractional_hadwiger_statement_canonical",
+      "Extremal.migration.fractional_chromatic.fractional_hadwiger_statement_compat",
+      "Extremal.migration.fractional_chromatic.fractional_hadwiger_statement_original_compat",
+      "Extremal.migration.fractional_chromatic.is_fractional_chromatic_canonical",
+      "Extremal.migration.fractional_chromatic.is_fractional_chromatic_compat",
+      "Extremal.migration.fractional_chromatic.is_fractional_chromatic_original_compat"
+    ],
+    "api_theorems": [
+      "Extremal.foundations.fractional_colouring.is_fractional_chromatic_attained",
+      "Extremal.foundations.fractional_colouring.is_fractional_chromatic_le",
+      "Extremal.foundations.fractional_colouring.is_fractional_chromatic_unique",
+      "Extremal.foundations.fractional_colouring.is_fractional_chromatic_ge0",
+      "Extremal.foundations.fractional_colouring.is_fractional_chromatic_empty"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.coloring",
+        "GraphTheory.core.sgraph",
+        "mathcomp.algebra.rat"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "The pinned GraphTheory (39 sources) and MathComp have no fractional chromatic number, b-fold or multicolouring notion (in-image search for fractional / b-fold / multicolouring / hadwiger: 0 files). Ownership rule 4: the attained minimum is used by one area (Extremal: the D2chr row and its grounding) and by Atlas foundations; it is placed in an Extremal area foundation next to the circular analogue is_circular_chromatic (Extremal.foundations.circular_colouring, which already imports all_algebra). GTBase has no algebra/rat import, so placing it there would add a mathcomp-algebra dependency to base.",
+      "audited_at": "2026-10-08"
+    },
+    "migration_report": "meta/migration_reports/fractional_chromatic.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/fractional_chromatic.spec.json",
+    "downstream_client": "extremal-graph-theory/theories/examples/fractional_colouring.v",
+    "foundation_fidelity": "meta/foundation_fidelity/fractional-chromatic.json"
+  }
+}

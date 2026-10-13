@@ -90,7 +90,9 @@
       "corpus": "v2"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "minor-theory/theories/migration/poly_eval.v#X220Legacy.x220_polynomial_expansion": "A31 current snapshot: A31 froze this object verbatim at db16a76 over its frozen raw evaluator but kept the live x220_shallow_minor of this family, as the source did. It stays byte-exact; the complete history is Minor.migration.poly_eval.X220Original (the frozen shallow minor and the raw evaluator), whose whole-row iff polynomial_expansion_bounded_twin_width_statement_original_compat the poly_eval report rechecks."
+  },
   "cross_module_consumers": [
     {
       "path": "minor-theory/theories/conjectures/grounding_X220.v",

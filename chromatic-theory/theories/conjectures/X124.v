@@ -1,6 +1,8 @@
 (** * Chromatic.conjectures.X124 -- v2 merge-width polynomial chi-boundedness row *)
 
 From GTBase Require Export base.
+From GTBase Require poly_nat.
+From Chromatic.foundations Require chi_bounding.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -8,17 +10,20 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X124 vocabulary ***********************************************)
 
-Fixpoint x124_poly_eval (p : seq nat) (x : nat) : nat :=
-  if p is a :: q then a + x * x124_poly_eval q x else 0.
+(** Since the A31 library migration [x124_poly_eval] is a transparent alias of the canonical natural Horner evaluation
+    [GTBase.poly_nat.horner_nat] (upstream [horner_rec] at nat).  The original is frozen in
+    theories/migration/poly_eval.v, related to the alias by an unconditional pointwise equality. *)
+Definition x124_poly_eval (p : seq nat) (x : nat) : nat := GTBase.poly_nat.horner_nat p x.
 
 (** Clique number omega(G). *)
 Definition x124_omega (G : sgraph) : nat := ω([set: G]).
 
 (** Polynomially chi-bounded class: one polynomial bounds chi in terms of omega
     across every member.  This CONCLUSION is faithful. *)
-Definition x124_poly_chi_bounded (C : sgraph -> Prop) : Prop :=
-  exists p : seq nat,
-    forall G : sgraph, C G -> χ([set: G]) <= x124_poly_eval p (x124_omega G).
+(** Since the A32 library migration [x124_poly_chi_bounded] is a transparent alias of the list-form class
+    [Chromatic.foundations.chi_bounding.poly_list_chi_bounded] (the same body over the canonical natural Horner
+    evaluation).  The original is frozen and certified in theories/migration/poly_list_chi_bounded.v. *)
+Definition x124_poly_chi_bounded (C : sgraph -> Prop) : Prop := Chromatic.foundations.chi_bounding.poly_list_chi_bounded C.
 
 Inductive x124_merge_expr (k : nat) : Type :=
 | x124_vertex of 'I_k

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "family": "strong-edge-colouring",
+  "primitive": {
+    "canonical_name": "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable",
+    "owner": "chromatic-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "diff_edge",
+      "near_edge",
+      "strong_edge_colourable"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.U5.diff_edge",
+      "Chromatic.conjectures.U5.near_edge",
+      "Chromatic.conjectures.U5.strong_edge_colourable",
+      "Chromatic.conjectures.X43.x43_strong_edge_colourable"
+    ],
+    "consumers_remaining": 2,
+    "relation": "strong edge colouring, in stages; stage 1 migrates U5's total symmetric pair palette to Chromatic.foundations.strong_pair_palettes, by conversion: U5.diff_edge x y u v is distinct_edge_pairs x y u v (the unordered pairs {x, y} and {u, v} differ), U5.near_edge x y u v is near_edge_pairs x y u v (the eight disjuncts x = u, x = v, y = u, y = v, x -- u, x -- v, y -- u, y -- v) and U5.strong_edge_colourable G k is strong_pair_colourable G k (a map on ALL ordered vertex pairs into 'I_k, symmetric, separating two host edges whose pairs are distinct and near, the guards in this order). No nonemptiness, edge or palette guard: at k = 0 it holds exactly on the empty host, an edgeless nonempty host needs 0 < k, two near distinct edges need two colours, and the palette bound is monotone. Later classes of this family, not migrated here and not identified with this one: X43's chromatic number of the square of its line graph (deferred, same normalized name; it needs a parent with A25) and XE1's exact edge-set palette with its edgeless k = 0 clause and index (cross-name). No line-graph equivalence is asserted.",
+    "semantic_classes": {
+      "total-symmetric-pair-palette": {
+        "members": [
+          "Chromatic.conjectures.U5.strong_edge_colourable"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.strong_pair_palettes.strong_edge_colourable_compat"
+        ],
+        "note": "strong_pair_colourable G k: a symmetric map on all ordered vertex pairs into 'I_k separating two host edges with distinct near pairs; the U5 row (0 < Delta G, the odd / even bound) is frozen over it, one whole iff."
+      },
+      "unordered-pair-distinction": {
+        "members": [
+          "Chromatic.conjectures.U5.diff_edge"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.strong_pair_palettes.diff_edge_compat"
+        ],
+        "note": "distinct_edge_pairs x y u v: neither x = u, y = v nor x = v, y = u."
+      },
+      "near-pairs": {
+        "members": [
+          "Chromatic.conjectures.U5.near_edge"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Chromatic.migration.strong_pair_palettes.near_edge_compat"
+        ],
+        "note": "near_edge_pairs x y u v: the eight disjuncts, a shared vertex or an adjacent pair of endpoints."
+      },
+      "line-graph-square": {
+        "members": [
+          "Chromatic.conjectures.X43.x43_strong_edge_colourable"
+        ],
+        "count": 1,
+        "verdict": "distinct representation",
+        "state": "deferred",
+        "certificates": [],
+        "note": "chi([set: graph_power (x43_line_graph G) 2]) <= k: a chromatic number on the square of X43's local line graph, true at every k on edgeless hosts where the pair palette needs 0 < k on a nonempty host; deferred to a later class stage on a parent with A25 (which freezes this helper and X43's row) and its pre-M1 + A1 whole Original; no bridge claimed here."
+      }
+    },
+    "compatibility_theorems": [
+      "Chromatic.migration.strong_pair_palettes.diff_edge_compat",
+      "Chromatic.migration.strong_pair_palettes.near_edge_compat",
+      "Chromatic.migration.strong_pair_palettes.strong_edge_colourable_compat",
+      "Chromatic.migration.strong_pair_palettes.strong_edge_colouring_statement_compat"
+    ],
+    "api_theorems": [
+      "Chromatic.foundations.strong_pair_palettes.distinct_edge_pairs_refl",
+      "Chromatic.foundations.strong_pair_palettes.distinct_edge_pairs_flip",
+      "Chromatic.foundations.strong_pair_palettes.distinct_edge_pairsC",
+      "Chromatic.foundations.strong_pair_palettes.near_edge_pairs_refl",
+      "Chromatic.foundations.strong_pair_palettes.near_edge_pairsC",
+      "Chromatic.foundations.strong_pair_palettes.near_edge_pairs_share",
+      "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_mono",
+      "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable0",
+      "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_card0",
+      "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_gt0",
+      "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_edgeless",
+      "Chromatic.foundations.strong_pair_palettes.strong_pair_colourable_two"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.mgraph",
+        "GraphTheory.core.coloring",
+        "GTBase.base",
+        "GTBase.edge_colourings"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "D13 discovery (evidence/D13-strong-edge-discovery/upstream-search.txt): the pinned coq-graph-theory has no strong edge colouring, induced matching, graph power, edge colouring or chromatic index (its mgraph.line_graph is the directed line digraph of a multigraph); GTBase's multigraph line_graph / chromatic_index and the proper-edge-colouring canonical have no distance-two clause. The pair palette is a Chromatic foundations module, not re-exported.",
+      "audited_at": "2026-10-04"
+    },
+    "migration_report": "meta/migration_reports/strong_pair_palettes.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/strong_pair_palettes.spec.json",
+    "downstream_client": "chromatic-theory/theories/examples/strong_pair_palettes.v",
+    "foundation_fidelity": "meta/foundation_fidelity/strong-edge-colouring.json"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "family": "disjoint-union",
+  "modules": {
+    "Digraph.constructions.digraph_sum": {
+      "path": "digraph-theory/theories/constructions/digraph_sum.v",
+      "overrides": {
+        "digraph_sum": {
+          "verdict": "FAITHFUL",
+          "note": "The disjoint union (sum) of two finite digraphs on D1 + D2: the arcs of D1 between left vertices, those of D2 between right vertices, no arc across in either direction; loops and asymmetric arcs kept, either summand may be empty, #|V| = #|D1| + #|D2|. Not a join (heroes.djoin, X122 x122_dijoin add left-to-right arcs). The simple-graph union is upstream sjoin."
+        }
+      },
+      "machine_evidence": [
+        "digraph_sum_arcE",
+        "digraph_sum_arc_inl",
+        "digraph_sum_arc_inr",
+        "digraph_sum_arc_inl_inr",
+        "digraph_sum_arc_inr_inl",
+        "card_digraph_sum"
+      ]
+    }
+  }
+}
