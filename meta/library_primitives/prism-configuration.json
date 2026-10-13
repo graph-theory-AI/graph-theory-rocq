@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "family": "prism-configuration",
+  "primitive": {
+    "canonical_name": "Minor.foundations.prism_configurations.prism_configuration",
+    "owner": "minor-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "prism",
+      "prism3"
+    ],
+    "source_definitions": [
+      "Minor.conjectures.X220.x220_prism",
+      "Minor.conjectures.X220.x220_prism3"
+    ],
+    "consumers_remaining": 1,
+    "relation": "definitional equality: Minor X220's x220_prism3 (el_graph 6 with the nine-edge list of the 3-prism: triangles {0,1,2}, {3,4,5} and matching (0,3), (1,4), (2,5)) and x220_prism H (H IS a spanning and exact subdivision of it, subdiv_rep, whose same-side model edges - exactly the six triangle edges - have empty interiors) are Minor.foundations.prism_configurations.prism_base and prism_configuration H, with the same edge list, witness model, endpoint value test, adjacency hypothesis and no guard (six or more vertices is a consequence). It is a whole-host predicate; containment of a prism is an induced copy of such an H. The restriction has teeth (a subdivided triangle edge gives a subdivision of prism_base that is not a prism configuration). Distinct: Topological D6emb's is_prism (isomorphism to C_n x K_2, n > 2) and antiprisms; the X220/X67 thetas are not part of this family.",
+    "semantic_classes": {
+      "prism-base-graph": {
+        "members": [
+          "Minor.conjectures.X220.x220_prism3"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Minor.migration.prism_configuration.x220_prism3_compat"
+        ],
+        "note": "The 3-prism as el_graph 6 over the same nine-edge list, verbatim."
+      },
+      "prism-three-path-configuration": {
+        "members": [
+          "Minor.conjectures.X220.x220_prism"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "state": "migrated-alias",
+        "certificates": [
+          "Minor.migration.prism_configuration.x220_prism_compat"
+        ],
+        "note": "Whole-host spanning/exact subdivision of the 3-prism with unsubdivided triangle edges, verbatim."
+      }
+    },
+    "compatibility_theorems": [
+      "Minor.migration.prism_configuration.x220_prism3_compat",
+      "Minor.migration.prism_configuration.x220_prism_compat",
+      "Minor.migration.prism_configuration.theta_prism_even_wheel_free_bounded_treewidth_statement_compat",
+      "Minor.migration.prism_configuration.x220_prism_original_compat",
+      "Minor.migration.prism_configuration.theta_prism_even_wheel_free_bounded_treewidth_statement_original_compat"
+    ],
+    "api_theorems": [
+      "Minor.foundations.prism_configurations.prism_base_card",
+      "Minor.foundations.prism_configurations.prism_base_same_side",
+      "Minor.foundations.prism_configurations.prism_base_cross",
+      "Minor.foundations.prism_configurations.prism_configuration_base",
+      "Minor.foundations.prism_configurations.prism_configuration_is_subdivision",
+      "Minor.foundations.prism_configurations.prism_configuration_card",
+      "Minor.foundations.prism_configurations.prism_configuration_side_edge",
+      "Minor.foundations.prism_configurations.prism_configuration_triangles"
+    ],
+    "downstream_client": "minor-theory/theories/examples/prism_configurations.v",
+    "foundation_fidelity": "meta/foundation_fidelity/prism-configuration.json",
+    "migration_report": "meta/migration_reports/prism_configuration.md",
+    "migration_spec": "meta/migration_reports/prism_configuration.spec.json",
+    "reviewed_by": null,
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.minor",
+        "GraphTheory.core.connectivity",
+        "GTBase.common"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "Searched all 39 installed GraphTheory .v files in the pinned image (case-insensitive): 'prism', 'subdivision', 'three_path' and '3pc' occur nowhere; 'theta' occurs only as connectivity.theta / theta_vertices (s independent x-y paths, a Menger corollary), not a configuration predicate. The subdivision-model vocabulary is Minor.foundations.containment, so the owner is a Minor foundation (used by Minor X220 and hole_containments only).",
+      "audited_at": "2026-10-08"
+    }
+  }
+}

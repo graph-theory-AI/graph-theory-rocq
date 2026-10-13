@@ -95,11 +95,19 @@
 From GTBase Require Export base.
 From GTBase Require Import common simple_line_graphs.
 From GraphTheory Require Import preliminaries bij digraph sgraph.
-From Reconstruction Require Import conjectures.U11.
+From Reconstruction Require Import foundations.decks.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
+
+(** Since the D2 public-boundary change kelly imports no conjecture module: the deck vocabulary is
+    Reconstruction.foundations.decks (U11's deck names are transparent aliases of it), the card
+    [G - e] is GTBase's [del_edge_set G [set e]] (U11's [sdel_edge G e] is an alias of it), and the
+    line graph is GTBase's [simple_line_graph], written [sline_graph] here through a local,
+    parsing-only abbreviation (U11's [sline_graph] is a transparent alias of it).  Every exported name
+    and type is kept; the certificates are in theories/migration/kelly_public_boundary.v. *)
+Local Notation sline_graph := simple_line_graph (only parsing).
 
 (** ============================================================================
     1.  Adjacency and edge sets of the U11 constructions.
@@ -109,7 +117,7 @@ Unset Printing Implicit Defensive.
     Both sides live on the vertex type of [G] ([sdel_edge] keeps the
     vertices). *)
 Lemma sdel_adjE (G : sgraph) (e : {set G}) (x y : G) :
-  @edge_rel (@sdel_edge G e) x y = (x -- y) && ([set x; y] != e).
+  @edge_rel (del_edge_set G [set e]) x y = (x -- y) && ([set x; y] != e).
 Proof. exact: del_edge_set1. Qed.
 
 (** Adjacency in [sline_graph G]: distinct edges whose endpoint sets meet. *)
@@ -124,23 +132,23 @@ Proof. by rewrite card_sig. Qed.
 (** The edge set of the card [G - e] is [E(G)] minus [e] (and nothing else is
     lost): the one rewrite that identifies the two index types. *)
 Lemma in_edge_set_sdel (G : sgraph) (e f : {set G}) :
-  (f \in E(@sdel_edge G e)) = (f \in E(G)) && (f != e).
+  (f \in E(del_edge_set G [set e])) = (f \in E(G)) && (f != e).
 Proof.
 apply/idP/idP.
-- rewrite (in_sg_edge_set (G := @sdel_edge G e)) => /existsP[x /existsP[y]].
+- rewrite (in_sg_edge_set (G := del_edge_set G [set e])) => /existsP[x /existsP[y]].
   rewrite sdel_adjE -andbA => /and3P[xy nef /eqP Ef]; rewrite Ef nef andbT.
   rewrite (in_sg_edge_set (G := G)); apply/existsP; exists x; apply/existsP.
   by exists y; rewrite xy eqxx.
 - case/andP => /edgesP[x [y] [Ef xy]] nef.
-  rewrite (in_sg_edge_set (G := @sdel_edge G e)); apply/existsP; exists x.
+  rewrite (in_sg_edge_set (G := del_edge_set G [set e])); apply/existsP; exists x.
   apply/existsP; exists y; rewrite sdel_adjE xy /=.
   by rewrite -Ef nef eqxx.
 Qed.
 
 Lemma edge_set_sdel (G : sgraph) (e : {set G}) :
-  E(@sdel_edge G e) = E(G) :\ e.
+  E(del_edge_set G [set e]) = E(G) :\ e.
 Proof.
-suff H : forall f : {set G}, (f \in E(@sdel_edge G e)) = (f \in E(G) :\ e).
+suff H : forall f : {set G}, (f \in E(del_edge_set G [set e])) = (f \in E(G) :\ e).
   by apply/setP => f; exact: H f.
 by move=> f; rewrite in_edge_set_sdel in_setD1 andbC.
 Qed.
@@ -203,33 +211,33 @@ Section LineCard.
 Variables (G : sgraph) (e0 : sline_graph G).
 
 Lemma lcf_proof (x : @vdel_card (sline_graph G) e0) :
-  val (val x) \in E(@sdel_edge G (val e0)).
+  val (val x) \in E(del_edge_set G [set val e0]).
 Proof.
 rewrite in_edge_set_sdel (valP (val x)) val_eqE /=.
 by move: (valP x); rewrite inE.
 Qed.
 
 Definition lcf (x : @vdel_card (sline_graph G) e0) :
-    sline_graph (@sdel_edge G (val e0)) := Sub (val (val x)) (lcf_proof x).
+    sline_graph (del_edge_set G [set val e0]) := Sub (val (val x)) (lcf_proof x).
 
-Lemma lcb_in (f : sline_graph (@sdel_edge G (val e0))) :
+Lemma lcb_in (f : sline_graph (del_edge_set G [set val e0])) :
   ((val f : {set G}) \in E(G)) && ((val f : {set G}) != val e0).
 Proof.
-have H : (val f : {set G}) \in E(@sdel_edge G (val e0)) := valP f.
+have H : (val f : {set G}) \in E(del_edge_set G [set val e0]) := valP f.
 by rewrite in_edge_set_sdel in H.
 Qed.
 
-Lemma lcb_proof1 (f : sline_graph (@sdel_edge G (val e0))) : val f \in E(G).
+Lemma lcb_proof1 (f : sline_graph (del_edge_set G [set val e0])) : val f \in E(G).
 Proof. by case/andP: (lcb_in f). Qed.
 
-Definition lcb0 (f : sline_graph (@sdel_edge G (val e0))) : sline_graph G :=
+Definition lcb0 (f : sline_graph (del_edge_set G [set val e0])) : sline_graph G :=
   Sub (val f) (lcb_proof1 f).
 
-Lemma lcb_proof2 (f : sline_graph (@sdel_edge G (val e0))) :
+Lemma lcb_proof2 (f : sline_graph (del_edge_set G [set val e0])) :
   lcb0 f \in [set u : sline_graph G | u != e0].
 Proof. by rewrite inE -val_eqE /=; case/andP: (lcb_in f). Qed.
 
-Definition lcb (f : sline_graph (@sdel_edge G (val e0))) :
+Definition lcb (f : sline_graph (del_edge_set G [set val e0])) :
     @vdel_card (sline_graph G) e0 := Sub (lcb0 f) (lcb_proof2 f).
 
 Lemma lcfK : cancel lcf lcb.
@@ -242,7 +250,7 @@ Lemma lcf_mono : {mono lcf : x y / x -- y}.
 Proof. by []. Qed.
 
 Lemma vdel_card_sline :
-  @vdel_card (sline_graph G) e0 ≃ sline_graph (@sdel_edge G (val e0)).
+  @vdel_card (sline_graph G) e0 ≃ sline_graph (del_edge_set G [set val e0]).
 Proof. exact: Diso' lcfK lcbK lcf_mono. Qed.
 
 End LineCard.
@@ -284,7 +292,8 @@ Qed.
 (** The Reconstruction Conjecture, applied to the line graphs, turns equality of
     edge decks into an isomorphism of line graphs. *)
 Theorem reconstruction_line_diso :
-  reconstruction_statement ->
+  (forall G H : sgraph,
+     (3 <= #|G|)%N -> (3 <= #|H|)%N -> same_deck G H -> inhabited (G ≃ H)) ->
   forall G H : sgraph, (3 <= #|E(G)|)%N -> same_edge_deck G H ->
     inhabited (sline_graph G ≃ sline_graph H).
 Proof.
@@ -292,6 +301,9 @@ move=> RC G H mG dGH; apply: RC; last exact: same_edge_deck_line.
 - by rewrite card_sline_graph.
 - by rewrite card_sline_graph -(same_edge_deck_card_edge dGH).
 Qed.
+
+(** The pre-D2 argument scopes (the hypothesis was the constant [reconstruction_statement]). *)
+Arguments reconstruction_line_diso _ [G H]%_sgraph_scope _ _.
 
 (** The line-graph INVERSION step of Greenwell's proof, in exactly the form the
     reduction needs: between two graphs with at least four edges and the same
@@ -311,9 +323,16 @@ Definition whitney_line_inversion_premise : Prop :=
     Conjecture implies the Edge Reconstruction Conjecture. *)
 Theorem whitney_reconstruction_edge_reconstruction :
   whitney_line_inversion_premise ->
-  reconstruction_statement -> edge_reconstruction_statement.
+  (forall G H : sgraph,
+     (3 <= #|G|)%N -> (3 <= #|H|)%N -> same_deck G H -> inhabited (G ≃ H)) ->
+  forall G : sgraph, (4 <= #|E(G)|)%N ->
+    forall H : sgraph, same_edge_deck G H -> inhabited (G ≃ H).
 Proof.
 move=> W RC G mG H dGH; apply: W; [exact: mG | exact: dGH |].
 apply: (reconstruction_line_diso RC); last exact: dGH.
 by apply: leq_trans mG.
 Qed.
+
+(** The pre-D2 argument scopes (the hypotheses were the constants [reconstruction_statement] and
+    [edge_reconstruction_statement]). *)
+Arguments whitney_reconstruction_edge_reconstruction _ _ [G] _ [H] _ : clear scopes.

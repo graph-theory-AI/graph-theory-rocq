@@ -1,0 +1,236 @@
+{
+  "family": "prism-configuration",
+  "baseline_commit": "29336a8c9d22d7016d665c696c444bfb15dbefb5",
+  "canonical_name": "Minor.foundations.prism_configurations.prism_configuration",
+  "canonical_short_name": "prism_configuration",
+  "namespaces": {
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "minor-theory/theories/foundations/prism_configurations.v",
+    "minor-theory/theories/migration/prism_configuration.v",
+    "minor-theory/theories/migration/model_support.v",
+    "minor-theory/theories/migration/consecutive_in_cycle.v"
+  ],
+  "extra_certificates": [
+    "Minor.foundations.prism_configurations.prism_base_card",
+    "Minor.foundations.prism_configurations.prism_base_same_side",
+    "Minor.foundations.prism_configurations.prism_base_cross",
+    "Minor.foundations.prism_configurations.prism_configuration_base",
+    "Minor.foundations.prism_configurations.prism_configuration_is_subdivision",
+    "Minor.foundations.prism_configurations.prism_configuration_card",
+    "Minor.foundations.prism_configurations.prism_configuration_side_edge",
+    "Minor.foundations.prism_configurations.prism_configuration_triangles",
+    "Minor.migration.prism_configuration.x220_prism3_canonical",
+    "Minor.migration.prism_configuration.x220_prism_canonical"
+  ],
+  "relation": "definitional equality: Minor X220's x220_prism3 (el_graph 6 with the nine-edge list of the 3-prism: triangles {0,1,2}, {3,4,5} and matching (0,3), (1,4), (2,5)) and x220_prism H (H IS a spanning and exact subdivision of it, subdiv_rep, whose same-side model edges - exactly the six triangle edges - have empty interiors) are Minor.foundations.prism_configurations.prism_base and prism_configuration H, with the same edge list, witness model, endpoint value test, adjacency hypothesis and no guard (six or more vertices is a consequence). It is a whole-host predicate; containment of a prism is an induced copy of such an H. The restriction has teeth (a subdivided triangle edge gives a subdivision of prism_base that is not a prism configuration). Distinct: Topological D6emb's is_prism (isomorphism to C_n x K_2, n > 2) and antiprisms; the X220/X67 thetas are not part of this family.",
+  "summary": [
+    "prism-configuration, one family: X220's 3-prism graph x220_prism3 and its three-path prism predicate x220_prism become public as Minor.foundations.prism_configurations (prism_base, prism_configuration; over GTBase and Minor.foundations.containment only) with the same bodies; X220 keeps both names as transparent aliases (Require Import, not Export).",
+    "Baseline: the hole-containment consumer rewrite H1 29336a8c (parent a69e27f), not main.",
+    "Frozen at the baseline: the explicit graph Legacy.x220_prism3, Legacy.x220_prism over it, and the complete theta/prism row over Legacy.x220_prism. The deepest Original is C19's X220Original row (C19's raw subdivision support and theta, B4's raw even-wheel chain) with its prism replaced by a prism over C19's raw Legacy.subdiv_rep and this family's frozen graph; its certificate goes through C19's (and so B4's) registered certificates. The reused C19/B4 frozen objects are recorded as historical at their baselines.",
+    "Consumer: Minor.foundations.hole_containments.prism_even_hole now states its hypothesis with prism_configuration, and hole_containments imports neither X27 (since H1) nor X220. Its name, Arguments, opacity and closed assumptions are unchanged and its old type ascribes by conversion.",
+    "Earlier snapshots that apply the live x220_prism3 / x220_prism (C19's X220Legacy and X220Original, B4's and B23's X220Legacy rows) stay byte-identical and are keyed below."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X220.x220_prism3",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_prism3",
+      "frozen_path": "minor-theory/theories/migration/prism_configuration.v",
+      "frozen": "Legacy.x220_prism3",
+      "substitutions": {},
+      "certificate": "Minor.migration.prism_configuration.x220_prism3_compat",
+      "live_unfolds_to": "prism_configurations.prism_base"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X220.x220_prism",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_prism",
+      "frozen_path": "minor-theory/theories/migration/prism_configuration.v",
+      "frozen": "Legacy.x220_prism",
+      "substitutions": {
+        "x220_prism3": "Legacy.x220_prism3"
+      },
+      "certificate": "Minor.migration.prism_configuration.x220_prism_compat",
+      "live_unfolds_to": "prism_configurations.prism_configuration H"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/prism_configuration.v",
+      "frozen": "X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x220_prism": "Legacy.x220_prism"
+      },
+      "certificate": "Minor.migration.prism_configuration.theta_prism_even_wheel_free_bounded_treewidth_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Minor.conjectures.X220.x220_prism",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_prism",
+      "frozen_path": "minor-theory/theories/migration/prism_configuration.v",
+      "frozen": "Original.x220_prism",
+      "substitutions": {
+        "x220_prism3": "Legacy.x220_prism3",
+        "subdiv_rep": "MS.Legacy.subdiv_rep"
+      },
+      "certificate": "Minor.migration.prism_configuration.x220_prism_original_compat"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "frozen_path": "minor-theory/theories/migration/prism_configuration.v",
+      "frozen": "X220Original.theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "substitutions": {
+        "x220_theta": "MS.X220Legacy.x220_theta",
+        "x220_prism": "Original.x220_prism",
+        "x220_even_wheel_free": "B4.X220Legacy.even_wheel_free"
+      },
+      "certificate": "Minor.migration.prism_configuration.theta_prism_even_wheel_free_bounded_treewidth_statement_original_compat"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.foundations.containment.sdm_covers",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "sdm_covers",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "Legacy.sdm_covers",
+      "substitutions": {},
+      "certificate": "Minor.migration.model_support.sdm_covers_compat",
+      "commit": "bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.foundations.containment.subdiv_rep",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "subdiv_rep",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "Legacy.subdiv_rep",
+      "substitutions": {
+        "sdm_covers": "(@Legacy.sdm_covers K H m)",
+        "sdm_realises": "(@sdm_realises K H m)"
+      },
+      "certificate": "Minor.migration.model_support.subdiv_rep_compat",
+      "commit": "bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.foundations.containment.is_subdivision_of",
+      "path": "minor-theory/theories/foundations/containment.v",
+      "name": "is_subdivision_of",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "Legacy.is_subdivision_of",
+      "substitutions": {
+        "subdiv_rep": "Legacy.subdiv_rep"
+      },
+      "certificate": "Minor.migration.model_support.is_subdivision_of_compat",
+      "commit": "bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X220.x220_theta",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_theta",
+      "frozen_path": "minor-theory/theories/migration/model_support.v",
+      "frozen": "X220Legacy.x220_theta",
+      "substitutions": {
+        "is_subdivision_of": "Legacy.is_subdivision_of"
+      },
+      "certificate": "Minor.migration.model_support.x220_theta_compat",
+      "commit": "bb0bf3cd7c1d14e014704ebd5e24b03e4c475cb8"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X27.x27_consecutive_in_cycle",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_consecutive_in_cycle",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "Legacy.x27_consecutive_in_cycle",
+      "substitutions": {},
+      "certificate": "Minor.migration.consecutive_in_cycle.x27_consecutive_in_cycle_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X27.x27_hole",
+      "path": "minor-theory/theories/conjectures/X27.v",
+      "name": "x27_hole",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X27Legacy.hole",
+      "substitutions": {
+        "x27_consecutive_in_cycle": "Legacy.x27_consecutive_in_cycle",
+        "x27_hole": "hole"
+      },
+      "certificate": "Minor.migration.consecutive_in_cycle.x27_hole_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Minor.conjectures.X220.x220_even_wheel_free",
+      "path": "minor-theory/theories/conjectures/X220.v",
+      "name": "x220_even_wheel_free",
+      "frozen_path": "minor-theory/theories/migration/consecutive_in_cycle.v",
+      "frozen": "X220Legacy.even_wheel_free",
+      "substitutions": {
+        "x220_even_wheel_free": "even_wheel_free",
+        "x27_hole": "X27Legacy.hole"
+      },
+      "certificate": "Minor.migration.consecutive_in_cycle.x220_even_wheel_free_compat",
+      "commit": "49ddc033ec6be3372ba6813f044fd26922fad16d"
+    }
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_prism3",
+      "note": "card_prism3 (#|x220_prism3| = 6) keeps its statement over the alias; card_ord proves it by conversion."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "x220_prism",
+      "note": "X220_prism_card and the non-vacuity grounding X220_cstar_nonvacuous keep their statements over the alias; unchanged proofs, recompiled."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "x220_prism",
+      "note": "even_hole_free_no_prism keeps its hypothesis over the alias and applies hole_containments' prism_even_hole (now stated with prism_configuration) by conversion; unchanged proof and type."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X220.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "note": "The existing Print Assumptions endpoint remains the whole theta/prism row, unchanged."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/implications_X42.v",
+      "name": "theta_prism_even_wheel_free_bounded_treewidth_statement",
+      "note": "e051_modulo_even_wheel keeps the whole row as its source hypothesis (candidate edge, status unchanged); unchanged proof and type."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Topological.conjectures.D6emb.is_prism",
+      "path": "topological-graph-theory/theories/conjectures/D6emb.v",
+      "name": "is_prism",
+      "note": "isomorphism to the Cartesian prism C_n x K_2 for some n > 2: an isomorphism class of graphs, not a subdivision configuration (at n = 3 it implies, but is not equivalent to, a prism configuration)."
+    },
+    {
+      "qualified": "Topological.conjectures.D6emb.is_antiprism",
+      "path": "topological-graph-theory/theories/conjectures/D6emb.v",
+      "name": "is_antiprism",
+      "note": "antiprisms; a different graph family."
+    }
+  ],
+  "known_stale_snapshots": {
+    "minor-theory/theories/migration/model_support.v#X220Legacy.x220_prism": "Earlier C19 snapshot: C19 froze the prism predicate over its own raw subdivision support but kept the live x220_prism3, which is now this family's alias of prism_base (same edge list). Preserved byte-identical; this family's Original.x220_prism freezes the graph explicitly as Legacy.x220_prism3, and its X220Original is the deepest row.",
+    "minor-theory/theories/migration/consecutive_in_cycle.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement": "Earlier B4 whole-row snapshot: B4 froze its even-wheel chain and kept the live x220_theta and x220_prism; preserved byte-identical. The complete row with a frozen prism is this family's X220Original.",
+    "minor-theory/theories/migration/induced_cycles.v#X220Legacy.theta_prism_even_wheel_free_bounded_treewidth_statement": "Earlier B23 per-row snapshot: B23 froze its hole helpers and chains in this row and kept the live x220_prism; preserved byte-identical. The complete row with a frozen prism is this family's X220Original."
+  }
+}
