@@ -13,6 +13,7 @@
 
 From GTBase Require Import base.
 From Reconstruction.conjectures Require Import U11.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
