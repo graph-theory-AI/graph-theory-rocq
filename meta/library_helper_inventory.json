@@ -49594,7 +49594,7 @@
         "Minor.conjectures.X220.x220_wall_rel"
       ],
       "kind": "Definition",
-      "line": 14,
+      "line": 15,
       "local_dependencies": [],
       "name": "x220_wall_r0",
       "normalized_name": "wall_r0",
@@ -49614,7 +49614,7 @@
         "Minor.conjectures.X220.x220_wall_sym"
       ],
       "kind": "Definition",
-      "line": 36,
+      "line": 37,
       "local_dependencies": [
         "x220_wall_r0"
       ],
@@ -49635,7 +49635,7 @@
         "Minor.conjectures.X220.x220_wall"
       ],
       "kind": "Lemma",
-      "line": 39,
+      "line": 40,
       "local_dependencies": [
         "x220_wall_rel"
       ],
@@ -49656,7 +49656,7 @@
         "Minor.conjectures.X220.x220_wall"
       ],
       "kind": "Lemma",
-      "line": 42,
+      "line": 43,
       "local_dependencies": [
         "x220_wall_rel"
       ],
@@ -49678,7 +49678,7 @@
         "Minor.conjectures.X220.four_family_free_logarithmic_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 48,
+      "line": 49,
       "local_dependencies": [
         "x220_wall_irrefl",
         "x220_wall_sym"
@@ -49700,7 +49700,7 @@
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 50,
+      "line": 51,
       "local_dependencies": [],
       "name": "x220_theta",
       "normalized_name": "theta",
@@ -49712,14 +49712,12 @@
       "signature_shape_hash": "ea123d14a47d3c8fecd3f855c427512e33b52cbaad7f5d5d8ade3431e24f4c1f"
     },
     {
-      "body_hash": "d792f53cd3628b4a8c3970075cfddb100f2222faabab6fc1ba5386521ffb63d4",
-      "body_shape_hash": "d792f53cd3628b4a8c3970075cfddb100f2222faabab6fc1ba5386521ffb63d4",
-      "declaration_hash": "44f64c5c091cc17b79fb6638c77d9d9a57b571384fd8e7b45556f3bcf19278c2",
-      "direct_consumers": [
-        "Minor.conjectures.X220.x220_prism"
-      ],
+      "body_hash": "a836705dcf73cf9cae09ebcf8b0d1697aa75719d40264248f1f742aa470d99c0",
+      "body_shape_hash": "a836705dcf73cf9cae09ebcf8b0d1697aa75719d40264248f1f742aa470d99c0",
+      "declaration_hash": "90fb43c823bf91f9f222a55f82d7e407ffab687ba0dbca87777ebf85c100ee5d",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 61,
+      "line": 62,
       "local_dependencies": [],
       "name": "x220_prism3",
       "normalized_name": "prism3",
@@ -49731,17 +49729,15 @@
       "signature_shape_hash": "01e1240e4406dc8ba0f954cabf85e146d1f80fd42ebaecdc5c970defb1a97749"
     },
     {
-      "body_hash": "35ccf4ae702e66fe5c41bb4dfb873a5a21e39ac854706dde18f499dcd2ed5825",
-      "body_shape_hash": "50b0a38daf5b1823fbb3f6690bd36568b4e46e3e5894470b95860c569d9d71df",
-      "declaration_hash": "56c1d1647ef33c4c30a6c1342438b61cc0a9554d10b605f174ff2a9a54aab8bc",
+      "body_hash": "046722671ccb088b6fcb6d39ee123fb7954829aada75f83a3c0f11d93f69271b",
+      "body_shape_hash": "046722671ccb088b6fcb6d39ee123fb7954829aada75f83a3c0f11d93f69271b",
+      "declaration_hash": "50837af3dc87706d597ee17e65d3ccbbbe8eb31ec91631fdfd6146b632190b29",
       "direct_consumers": [
         "Minor.conjectures.X220.theta_prism_even_wheel_free_bounded_treewidth_statement"
       ],
       "kind": "Definition",
-      "line": 64,
-      "local_dependencies": [
-        "x220_prism3"
-      ],
+      "line": 68,
+      "local_dependencies": [],
       "name": "x220_prism",
       "normalized_name": "prism",
       "package": "minor-theory",
@@ -53648,7 +53644,7 @@
         "Reconstruction.conjectures.U11.sw_sym"
       ],
       "kind": "Definition",
-      "line": 99,
+      "line": 103,
       "local_dependencies": [],
       "name": "sw_rel",
       "normalized_name": "sw_rel",
@@ -53667,7 +53663,7 @@
         "Reconstruction.conjectures.U11.vertex_switch"
       ],
       "kind": "Lemma",
-      "line": 100,
+      "line": 104,
       "local_dependencies": [
         "sw_rel"
       ],
@@ -53688,7 +53684,7 @@
         "Reconstruction.conjectures.U11.vertex_switch"
       ],
       "kind": "Lemma",
-      "line": 102,
+      "line": 106,
       "local_dependencies": [
         "sw_rel"
       ],
@@ -53709,7 +53705,7 @@
         "Reconstruction.conjectures.U11.switch_vertex"
       ],
       "kind": "Definition",
-      "line": 104,
+      "line": 108,
       "local_dependencies": [
         "sw_irrefl",
         "sw_sym"
@@ -53731,7 +53727,7 @@
         "Reconstruction.conjectures.U11.same_switching_deck"
       ],
       "kind": "Definition",
-      "line": 106,
+      "line": 110,
       "local_dependencies": [
         "vertex_switch"
       ],
@@ -53753,7 +53749,7 @@
         "Reconstruction.conjectures.U11.sde_sym"
       ],
       "kind": "Definition",
-      "line": 124,
+      "line": 128,
       "local_dependencies": [],
       "name": "sde_rel",
       "normalized_name": "sde_rel",
@@ -53770,7 +53766,7 @@
       "declaration_hash": "46d72946e12648d08ec48dd44a15be93511c49e0c2d3603aa48652944cc99fdb",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 125,
+      "line": 129,
       "local_dependencies": [
         "sde_rel"
       ],
@@ -53789,7 +53785,7 @@
       "declaration_hash": "f653831aeb435804a691e55435e92005bed6689d1c359e43e8e681c76d6358f4",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 127,
+      "line": 131,
       "local_dependencies": [
         "sde_rel"
       ],
@@ -53806,11 +53802,9 @@
       "body_hash": "ebb08eec303b222e642ccec8d65af72c05e6223695a5020d850bc72faffeec4f",
       "body_shape_hash": "ebb08eec303b222e642ccec8d65af72c05e6223695a5020d850bc72faffeec4f",
       "declaration_hash": "ee64ddf22cc6647cc33c3fbbf91c521bfca0d495b3d466ea92aae09aa4d749e2",
-      "direct_consumers": [
-        "Reconstruction.conjectures.U11.same_edge_deck"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 129,
+      "line": 133,
       "local_dependencies": [],
       "name": "sdel_edge",
       "normalized_name": "sdel_edge",
@@ -53830,7 +53824,7 @@
         "Reconstruction.conjectures.U11.sline_sym"
       ],
       "kind": "Definition",
-      "line": 146,
+      "line": 150,
       "local_dependencies": [],
       "name": "sline_rel",
       "normalized_name": "sline_rel",
@@ -53847,7 +53841,7 @@
       "declaration_hash": "837476bbac85401d9620b71c76d2ab07705c1d6e59c8aa7c4cf0dd474b0fb96e",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 148,
+      "line": 152,
       "local_dependencies": [
         "sline_rel"
       ],
@@ -53866,7 +53860,7 @@
       "declaration_hash": "ce0adcf6e7ec470a6eb86539326307cfe98260e97f622f29fe2445e462dfc0ab",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 150,
+      "line": 154,
       "local_dependencies": [
         "sline_rel"
       ],
@@ -53887,7 +53881,7 @@
         "Reconstruction.conjectures.U11.grahams_conjecture_on_tree_reconstruction_statement"
       ],
       "kind": "Definition",
-      "line": 152,
+      "line": 156,
       "local_dependencies": [],
       "name": "sline_graph",
       "normalized_name": "sline_graph",
@@ -53899,14 +53893,12 @@
       "signature_shape_hash": "01e1240e4406dc8ba0f954cabf85e146d1f80fd42ebaecdc5c970defb1a97749"
     },
     {
-      "body_hash": "fb1787e20f4c6d9f7ebc9cf79e30499c24e5f37c00b96949756ff945c5bd39dc",
-      "body_shape_hash": "fb1787e20f4c6d9f7ebc9cf79e30499c24e5f37c00b96949756ff945c5bd39dc",
-      "declaration_hash": "1bab2885a6a8f6ddb811d26ae94c379b79bef34372c03ea7a3d77bd0be5cd4fd",
-      "direct_consumers": [
-        "Reconstruction.conjectures.U11.same_deck"
-      ],
+      "body_hash": "58e5f83d7905fe4e625d88886a215a793ac557bd5e67c8a4228ceeff75c9192c",
+      "body_shape_hash": "58e5f83d7905fe4e625d88886a215a793ac557bd5e67c8a4228ceeff75c9192c",
+      "declaration_hash": "2098fd5aa2091493f9e535a45aaadebeaab556ba864dac36af0911cbd00d4fbe",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 154,
+      "line": 158,
       "local_dependencies": [],
       "name": "vdel_card",
       "normalized_name": "vdel_card",
@@ -53925,7 +53917,7 @@
         "Reconstruction.conjectures.U11.switching_reconstructible"
       ],
       "kind": "Definition",
-      "line": 157,
+      "line": 164,
       "local_dependencies": [
         "switch_vertex"
       ],
@@ -53946,7 +53938,7 @@
         "Reconstruction.conjectures.U11.switching_reconstruction_statement"
       ],
       "kind": "Definition",
-      "line": 175,
+      "line": 182,
       "local_dependencies": [
         "same_switching_deck"
       ],
@@ -53960,17 +53952,13 @@
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
-      "body_hash": "1ede8bedb702b604d9438324f0ad15db5665e4ec7962b2bbce8e0ad4edeedd4d",
-      "body_shape_hash": "1ede8bedb702b604d9438324f0ad15db5665e4ec7962b2bbce8e0ad4edeedd4d",
-      "declaration_hash": "c4de84df4bba290025455e75325c17c2db2b73b2061d0a093bf508ba9172909b",
-      "direct_consumers": [
-        "Reconstruction.conjectures.U11.edge_reconstructible"
-      ],
+      "body_hash": "1415f8dcabba21dd16cd81c0aec50893c29ca9f3a79a5d518c1d35e0484c8b58",
+      "body_shape_hash": "1415f8dcabba21dd16cd81c0aec50893c29ca9f3a79a5d518c1d35e0484c8b58",
+      "declaration_hash": "8b25516c27a3c9a14194ec1007f45bfc3e5ea5667af124e6b31ab1feab938333",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 204,
-      "local_dependencies": [
-        "sdel_edge"
-      ],
+      "line": 211,
+      "local_dependencies": [],
       "name": "same_edge_deck",
       "normalized_name": "same_edge_deck",
       "package": "reconstruction-theory",
@@ -53981,17 +53969,15 @@
       "signature_shape_hash": "386157e12d686b4cdea1c7e7e1bddc5b3f28be1b17c3f1036579936afdc0bb30"
     },
     {
-      "body_hash": "2c6e8739cf8f7a890dcaf686c9acee7ff44c9504f919cb12435c34679a0d30a8",
-      "body_shape_hash": "2c6e8739cf8f7a890dcaf686c9acee7ff44c9504f919cb12435c34679a0d30a8",
-      "declaration_hash": "dc187e3531bda646f762011a5e12855fcc4eb4c55f971f82d8488d67f85502f7",
+      "body_hash": "bff8e5a1b7ce492a042bbe8db1dc763c3c933f1dc1660f0218265d5a86bc4ce1",
+      "body_shape_hash": "bff8e5a1b7ce492a042bbe8db1dc763c3c933f1dc1660f0218265d5a86bc4ce1",
+      "declaration_hash": "0f7d42bc5fdb6314bdcfb9376642fc0a09e03e2108119fedc51b8375740e55ec",
       "direct_consumers": [
         "Reconstruction.conjectures.U11.edge_reconstruction_statement"
       ],
       "kind": "Definition",
-      "line": 223,
-      "local_dependencies": [
-        "same_edge_deck"
-      ],
+      "line": 231,
+      "local_dependencies": [],
       "name": "edge_reconstructible",
       "normalized_name": "edge_reconstructible",
       "package": "reconstruction-theory",
@@ -54002,18 +53988,15 @@
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
-      "body_hash": "c7f12e183879f4c0148e133b68f6996c7e704152edc7a8858c8115c2aba9104d",
-      "body_shape_hash": "c7f12e183879f4c0148e133b68f6996c7e704152edc7a8858c8115c2aba9104d",
-      "declaration_hash": "b45185baab13b78aff9e4633aca7f133667eb32616a256769ba01eec7f31509e",
+      "body_hash": "2df00cd3312d84a5c99087ff623ff7f8bb091b6581c3c66707f1039606472fe6",
+      "body_shape_hash": "2df00cd3312d84a5c99087ff623ff7f8bb091b6581c3c66707f1039606472fe6",
+      "declaration_hash": "99905d058783216fd4ec2f68b20db04d122a7be1d6ed1a07c4a43f2e286cf3c4",
       "direct_consumers": [
-        "Reconstruction.conjectures.U11.reconstructible",
         "Reconstruction.conjectures.U11.reconstruction_statement"
       ],
       "kind": "Definition",
-      "line": 278,
-      "local_dependencies": [
-        "vdel_card"
-      ],
+      "line": 286,
+      "local_dependencies": [],
       "name": "same_deck",
       "normalized_name": "same_deck",
       "package": "reconstruction-theory",
@@ -54024,15 +54007,13 @@
       "signature_shape_hash": "386157e12d686b4cdea1c7e7e1bddc5b3f28be1b17c3f1036579936afdc0bb30"
     },
     {
-      "body_hash": "53b1e32017f91ad20269248d37c77427af48307de88dfadfd3a8b0bdaa1286bc",
-      "body_shape_hash": "53b1e32017f91ad20269248d37c77427af48307de88dfadfd3a8b0bdaa1286bc",
-      "declaration_hash": "9b035deefd5887a965bd8e4cda28d12e8e181b71c39983701f30352547b91fa7",
+      "body_hash": "8a4efac53b614bf0e264a9761e23d7483be334711e46d470bbb825c1565141cb",
+      "body_shape_hash": "8a4efac53b614bf0e264a9761e23d7483be334711e46d470bbb825c1565141cb",
+      "declaration_hash": "6199ab30de2082fc6929fc64a1c2850d871bd10e7ab9c07d1c416e59a963c6eb",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 296,
-      "local_dependencies": [
-        "same_deck"
-      ],
+      "line": 305,
+      "local_dependencies": [],
       "name": "reconstructible",
       "normalized_name": "reconstructible",
       "package": "reconstruction-theory",

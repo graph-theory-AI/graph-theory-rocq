@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py simple_line_graphs --details /t
 
 - Canonical: `GTBase.simple_line_graphs.simple_line_graph`.
 - Baseline: `897a7d30a0137195d30ae803d0482b5df31c3869`.
-- Scope: 7 helpers, 6 statements, 40 frozen objects, 90 recorded references.
-- Source checks: 317/317 pass; consistent.
+- Scope: 7 helpers, 6 statements, 40 frozen objects, 122 recorded references.
+- Source checks: 320/320 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -24,4 +24,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `GTBase.base.line_graph`, `GTMisc.conjectures.X102.x102_line_graph_of`, `Infinite.conjectures.D4legacy.iedge_vertex`, `Infinite.conjectures.D4legacy.iline_adj`, `Infinite.conjectures.D4legacy.iline_graph`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/induced_free.v#X43Legacy.statement`, `reconstruction-theory/theories/migration/sdel_edge.v#KellyLegacy.whitney_line_inversion_premise`, `reconstruction-theory/theories/migration/sdel_edge.v#ImplicationsU11Legacy.external_whitney_line_inversion_statement`, `minor-theory/theories/migration/model_support.v#X220Legacy.four_family_free_logarithmic_treewidth_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/induced_free.v#X43Legacy.statement`, `reconstruction-theory/theories/migration/sdel_edge.v#KellyLegacy.whitney_line_inversion_premise`, `reconstruction-theory/theories/migration/sdel_edge.v#ImplicationsU11Legacy.external_whitney_line_inversion_statement`, `minor-theory/theories/migration/model_support.v#X220Legacy.four_family_free_logarithmic_treewidth_statement`, `reconstruction-theory/theories/migration/deletion_decks.v#KellyLegacy.whitney_line_inversion_premise`, `reconstruction-theory/theories/migration/deletion_decks.v#ImplicationsU11Legacy.external_whitney_line_inversion_statement`.

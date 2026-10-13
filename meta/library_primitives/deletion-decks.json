@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "family": "deletion-decks",
+  "primitive": {
+    "canonical_name": "Reconstruction.foundations.decks.same_deck",
+    "owner": "reconstruction-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "edge_reconstructible",
+      "reconstructible",
+      "same_deck",
+      "same_edge_deck",
+      "vdel_card"
+    ],
+    "source_definitions": [
+      "Digraph.conjectures.P9.same_deck",
+      "Reconstruction.conjectures.U11.edge_reconstructible",
+      "Reconstruction.conjectures.U11.reconstructible",
+      "Reconstruction.conjectures.U11.same_deck",
+      "Reconstruction.conjectures.U11.same_edge_deck",
+      "Reconstruction.conjectures.U11.vdel_card"
+    ],
+    "consumers_remaining": 3,
+    "relation": "definitional equality: U11's undirected deletion-deck vocabulary vdel_card v (induced [set u | u != v]), same_deck / reconstructible (a bijection of the vertex sets matching the cards up to isomorphism, so every card keeps its multiplicity) and same_edge_deck / edge_reconstructible (a bijection of the edge index types {e | e \\in E(G)} matching the edge-deleted cards up to isomorphism) are the public Reconstruction.foundations.decks definitions, the same bodies; the edge card is A4's canonical del_edge_set G [set e], of which U11's sdel_edge G e is a transparent alias. No guard lives in a definition: the three-vertex guards (on G and H), the four-edge guard (on G only) and the Whitney premise's hypotheses stay in the statements. Digraph P9's same_deck (directed carrier, deleted-vertex cards compared modulo arc-reversal switching) shares the short name only and is not migrated; U11's Seidel switching deck, X21's ell-decks and kelly's public boundary (D2) are separate.",
+    "semantic_classes": {
+      "undirected-deletion-decks": {
+        "members": [
+          "Reconstruction.conjectures.U11.edge_reconstructible",
+          "Reconstruction.conjectures.U11.reconstructible",
+          "Reconstruction.conjectures.U11.same_deck",
+          "Reconstruction.conjectures.U11.same_edge_deck",
+          "Reconstruction.conjectures.U11.vdel_card"
+        ],
+        "count": 5,
+        "verdict": "conversion (the same bodies; the edge card del_edge_set G [set e] is U11's sdel_edge G e)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Reconstruction.migration.deletion_decks.edge_reconstructible_compat",
+          "Reconstruction.migration.deletion_decks.reconstructible_compat",
+          "Reconstruction.migration.deletion_decks.same_deck_compat",
+          "Reconstruction.migration.deletion_decks.same_edge_deck_compat",
+          "Reconstruction.migration.deletion_decks.vdel_card_compat"
+        ],
+        "note": "U11 keeps its five names, binders and implicit arguments (vdel_card keeps G implicit) as transparent aliases (decks required without Import); statements, doc blocks and guards unchanged."
+      },
+      "directed-switching-deck": {
+        "members": [
+          "Digraph.conjectures.P9.same_deck"
+        ],
+        "count": 1,
+        "verdict": "distinct representation: digraph carrier, deleted-vertex cards compared modulo arc-reversal switching (sw_iso), not graph isomorphism",
+        "state": "deferred",
+        "note": "Kept distinct by master decision; the directed switching-deck predicates form a later separate family. Unchanged here (distinct_variants in the spec)."
+      }
+    },
+    "compatibility_theorems": [
+      "Reconstruction.migration.deletion_decks.edge_reconstructible_canonical",
+      "Reconstruction.migration.deletion_decks.edge_reconstructible_compat",
+      "Reconstruction.migration.deletion_decks.edge_reconstruction_statement_canonical",
+      "Reconstruction.migration.deletion_decks.edge_reconstruction_statement_compat",
+      "Reconstruction.migration.deletion_decks.edge_reconstruction_statement_original_compat",
+      "Reconstruction.migration.deletion_decks.external_whitney_line_inversion_statement_canonical",
+      "Reconstruction.migration.deletion_decks.external_whitney_line_inversion_statement_compat",
+      "Reconstruction.migration.deletion_decks.external_whitney_line_inversion_statement_original_compat",
+      "Reconstruction.migration.deletion_decks.reconstructible_canonical",
+      "Reconstruction.migration.deletion_decks.reconstructible_compat",
+      "Reconstruction.migration.deletion_decks.reconstruction_statement_canonical",
+      "Reconstruction.migration.deletion_decks.reconstruction_statement_compat",
+      "Reconstruction.migration.deletion_decks.same_deck_canonical",
+      "Reconstruction.migration.deletion_decks.same_deck_compat",
+      "Reconstruction.migration.deletion_decks.same_edge_deck_canonical",
+      "Reconstruction.migration.deletion_decks.same_edge_deck_compat",
+      "Reconstruction.migration.deletion_decks.vdel_card_canonical",
+      "Reconstruction.migration.deletion_decks.vdel_card_compat",
+      "Reconstruction.migration.deletion_decks.whitney_line_inversion_premise_canonical",
+      "Reconstruction.migration.deletion_decks.whitney_line_inversion_premise_compat",
+      "Reconstruction.migration.deletion_decks.whitney_line_inversion_premise_original_compat"
+    ],
+    "api_theorems": [
+      "Reconstruction.foundations.decks.card_vdel_card",
+      "Reconstruction.foundations.decks.edgeless_same_edge_deck",
+      "Reconstruction.foundations.decks.same_deck_card",
+      "Reconstruction.foundations.decks.same_deck_refl",
+      "Reconstruction.foundations.decks.same_edge_deck_card_edge",
+      "Reconstruction.foundations.decks.same_edge_deck_refl",
+      "Reconstruction.foundations.decks.vdel_cardE"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.mgraph",
+        "GraphTheory.core.open_confluence",
+        "GraphTheory.core.bij",
+        "GraphTheory.core.preliminaries",
+        "mathcomp.boot.fintype",
+        "GTBase.common",
+        "GTBase.simple_line_graphs"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": null,
+      "note": "Reused from Marcol's contract (reconstruction-decks-contract-by-marcol.md c2187520, erratum cc4b9a9d) and kept: the pinned GraphTheory 0.9.7 / MathComp have no deck, reconstruction or vertex-deletion-card vocabulary (only multigraph and pre-graph remove_vertex and a directed-arc del_edge, all different carriers), and no public owner of the five names exists; induced, bijective, diso, E(G) and GTBase.common.del_edge_set are reused unchanged, and upstream's induced [set~ v] is reached through the proved equation vdel_cardE, never assumed convertible. Rejected as deck primitives: mgraph/pre-graph remove_vertex, digraph del_edge and del_vertex, base line_graph, P9's directed switching deck, X21's ell-decks and a set-of-isomorphism-classes model (which loses multiplicity).",
+      "audited_at": "2026-10-08"
+    },
+    "migration_report": "meta/migration_reports/deletion_decks.md",
+    "reviewed_by": null,
+    "migration_spec": "meta/migration_reports/deletion_decks.spec.json",
+    "downstream_client": "reconstruction-theory/theories/examples/decks.v",
+    "foundation_fidelity": "meta/foundation_fidelity/deletion-decks.json"
+  }
+}

@@ -140,7 +140,8 @@
   ],
   "known_stale_snapshots": {
     "reconstruction-theory/theories/migration/simple_line_graphs.v#KellyLegacy.whitney_line_inversion_premise": "A25 snapshot: A25 froze Kelly's Whitney inversion premise over its own frozen line construction but kept the live same_edge_deck of this family. Kept unchanged; the complete premise is Reconstruction.migration.simple_line_graphs.KellyOriginal.whitney_line_inversion_premise, over this family's frozen U11Legacy.same_edge_deck, certified through whitney_line_inversion_premise_compat.",
-    "reconstruction-theory/theories/migration/simple_line_graphs.v#ImplicationsU11Legacy.external_whitney_line_inversion_statement": "A25 snapshot: A25 froze the non-corpus external Whitney statement over its own frozen line construction but kept the live same_edge_deck of this family. Kept unchanged; the complete statement is Reconstruction.migration.simple_line_graphs.ImplicationsU11Original.external_whitney_line_inversion_statement, over this family's frozen U11Legacy.same_edge_deck, certified through external_whitney_line_inversion_statement_compat."
+    "reconstruction-theory/theories/migration/simple_line_graphs.v#ImplicationsU11Legacy.external_whitney_line_inversion_statement": "A25 snapshot: A25 froze the non-corpus external Whitney statement over its own frozen line construction but kept the live same_edge_deck of this family. Kept unchanged; the complete statement is Reconstruction.migration.simple_line_graphs.ImplicationsU11Original.external_whitney_line_inversion_statement, over this family's frozen U11Legacy.same_edge_deck, certified through external_whitney_line_inversion_statement_compat.",
+    "reconstruction-theory/theories/migration/deletion_decks.v#Legacy.same_edge_deck": "Later-family snapshot (deletion-decks, baseline 3bdfdae): deletion-decks froze U11's edge deck at its baseline, where sdel_edge had already been migrated by this family, so this copy applies that live (migrated) sdel_edge by design. The complete raw edge deck stays this family's U11Legacy.same_edge_deck (9e03072), and the edge row's deepest Original stays this family's U11Legacy.edge_reconstruction_statement, certified by edge_reconstruction_statement_compat against the live row (now over Reconstruction.foundations.decks)."
   },
   "cross_module_consumers": [
     {
@@ -182,6 +183,11 @@
       "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
       "name": "edge_reconstruction_statement",
       "note": "reconstruction_implies_edge_reconstruction (conditional on the external theorem): unchanged"
+    },
+    {
+      "path": "reconstruction-theory/theories/examples/decks.v",
+      "name": "same_edge_deck",
+      "note": "deletion-decks public-only client (it imports only GTBase.base and Reconstruction.foundations.decks): its same_edge_deck is the canonical decks name, a package-level lexical match on the shared short name, not a use of the U11 alias."
     }
   ],
   "distinct_variants": [],
