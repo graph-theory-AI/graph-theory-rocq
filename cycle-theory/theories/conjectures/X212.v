@@ -29,6 +29,7 @@ From GTBase Require Export base.
 Require GTBase.edge_colourings.
 Require GTBase.path_trees.
 Require GTBase.simple_cuts.
+Require GTBase.edge_copies.
 From Cycle.foundations Require Export connectivity.
 From Cycle.conjectures Require Export U6.
 
@@ -46,23 +47,17 @@ Unset Printing Implicit Defensive.
     [T].  Injectivity makes the copy have exactly [#|E(T)|] edges. *)
 
 Definition x212_copy_edges (G T : sgraph) (f : T -> G) : {set {set G}} :=
-  [set e : {set G} |
-     [exists p : T * T, (p.1 -- p.2) && (e == [set f p.1; f p.2])]].
+  GTBase.edge_copies.edge_image f.
 
 Definition x212_copy_of (G T : sgraph) (A : {set {set G}}) : Prop :=
-  exists f : T -> G,
-    [/\ injective f,
-        (forall x y : T, x -- y -> f x -- f y)
-      & A = x212_copy_edges f].
+  GTBase.edge_copies.embedded_edge_copy T A.
 
 (** A DECOMPOSITION of [E(G)] into copies of [T]: a list of edge sets, each a
     copy of [T], such that every 2-element vertex set lies in exactly one member
     when it is an edge of [G] and in none otherwise. *)
 Definition x212_decomposition_into_copies (G T : sgraph)
     (D : seq {set {set G}}) : Prop :=
-  (forall A, A \in D -> x212_copy_of T A) /\
-  (forall e : {set G},
-     count (fun A : {set {set G}} => e \in A) D = ((e \in E(G)) : nat)).
+  GTBase.edge_copies.edge_decomposition_exact T D.
 
 (** *** Linear forests and linear arboricity (bm-016)
 

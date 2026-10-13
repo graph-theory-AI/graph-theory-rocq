@@ -8,8 +8,11 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X190 vocabulary ***********************************************)
 
+(** Since the A30 library migration [x190_weight] is a transparent alias of the upstream finite-set weight
+    [GraphTheory.dom.weight_set] (the same body); the original is frozen and certified in
+    theories/migration/set_weights.v. *)
 Definition x190_weight (G : sgraph) (rho : G -> nat) (S : {set G}) : nat :=
-  \sum_(v in S) rho v.
+  weight_set rho S.
 
 Definition x190_strongly_sublinear_separator_class (C : sgraph -> Prop) : Prop :=
   exists a b K : nat,

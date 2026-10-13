@@ -129,7 +129,11 @@
       "corpus": "v2"
     }
   ],
-  "known_stale_snapshots": {},
+  "known_stale_snapshots": {
+    "graph-theory-misc/theories/migration/set_weights.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement": "A30 current snapshot: A30 froze X128's whole row verbatim at 3bdfdae over its frozen weight and separator but kept the live C23 expansion chain x128_expansion_bounded (with the live grad x128_grad_at_most below it), as the source did. It stays byte-exact; the complete history is GTMisc.migration.set_weights.X128Original (the C16 complete A7+C16 Original expansion chain, provider GTMisc.migration.ambient_shallow_minors.X128Original, under the A30 frozen separator and weight), whose whole-row iff dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat the set_weights report rechecks.",
+    "graph-theory-misc/theories/migration/poly_eval.v#X128Legacy.x128_expansion_bounded": "A31 current snapshot: A31 froze this object verbatim at db16a76 over its frozen raw evaluator but kept the live x128_grad_at_most of this family, as the source did. It stays byte-exact; the complete history is GTMisc.migration.poly_eval.X128Original (C16's frozen grad chain, A30's frozen separator and the raw evaluator), whose whole-row iff dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat the poly_eval report rechecks.",
+    "graph-theory-misc/theories/migration/poly_eval.v#X139Legacy.x139_polynomial_expansion_class": "A31 current snapshot: A31 froze this object verbatim at db16a76 over its frozen raw evaluator but kept the live x139_grad_at_most of this family, as the source did. It stays byte-exact; the complete history is GTMisc.migration.poly_eval.X139Original (C16's frozen grad chain and the raw evaluator), whose whole-row iff esperet_raymond_polynomial_expansion_scol_statement_original_compat the poly_eval report rechecks."
+  },
   "cross_module_consumers": [],
   "distinct_variants": []
 }

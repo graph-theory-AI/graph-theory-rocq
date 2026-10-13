@@ -17,6 +17,7 @@
 From GTBase Require Import base.
 From Minor.foundations Require Import containment width_params hole_containments.
 From Minor.conjectures Require Import X27 X42 X220.
+From GTBase Require poly_nat.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -27,10 +28,7 @@ Unset Printing Implicit Defensive.
 (** The Horner evaluation of a list of NATURAL coefficients is monotone. *)
 Lemma x220_poly_eval_mono (p : seq nat) (a b : nat) :
   a <= b -> x220_poly_eval p a <= x220_poly_eval p b.
-Proof.
-move=> ab; elim: p => [|c q IH] //=.
-by rewrite leq_add2l leq_mul.
-Qed.
+Proof. exact: GTBase.poly_nat.horner_nat_mono. Qed.
 
 (** A graph whose induced biclique number is [s] has no induced ['K_s+1,s+1]. *)
 Lemma x220_ibn_free (G : sgraph) (s : nat) :
@@ -83,9 +81,11 @@ Fixpoint poly_add (p q : seq nat) : seq nat :=
 Lemma poly_addE (p q : seq nat) (x : nat) :
   x220_poly_eval (poly_add p q) x = x220_poly_eval p x + x220_poly_eval q x.
 Proof.
-elim: p q => [q|a p IH [|b q]] /=; first by rewrite add0n.
-- by rewrite addn0.
-- by rewrite IH mulnDr addnACA.
+elim: p q => [q|a p IH [|b q]]; first by rewrite /x220_poly_eval GTBase.poly_nat.horner_nat_nil add0n.
+- by rewrite /x220_poly_eval GTBase.poly_nat.horner_nat_nil addn0.
+- have -> : poly_add (a :: p) (b :: q) = (a + b) :: poly_add p q by [].
+  move: IH; rewrite /x220_poly_eval => IH.
+  by rewrite !GTBase.poly_nat.horner_nat_cons IH mulnDr addnACA.
 Qed.
 
 Fixpoint poly_shift (p : seq nat) : seq nat :=
@@ -98,7 +98,9 @@ Proof.
 elim: p => [//|a q IH].
 have e : poly_shift (a :: q)
        = poly_add (poly_add [:: a] (poly_shift q)) (0 :: poly_shift q) by [].
-by rewrite e !poly_addE /= IH muln0 addn0 add0n mulSn addnA.
+rewrite e !poly_addE; move: IH; rewrite /x220_poly_eval => IH.
+rewrite !GTBase.poly_nat.horner_nat_cons GTBase.poly_nat.horner_nat_nil IH.
+by rewrite muln0 addn0 add0n mulSn addnA.
 Qed.
 
 (** *** Existence of the induced biclique number *)

@@ -565,8 +565,11 @@ Definition imbalance_statement : Prop :=
 Definition is_leaf (G : sgraph) (S : {set G}) (v : G) : bool :=
   (v \in S) && (#|N(v) :&: S| <= 1).
 
+(** Since the A30 library migration [gold_total] is a transparent alias of the upstream finite-set weight
+    [GraphTheory.dom.weight_set] (the same body); the original is frozen and certified in
+    theories/migration/set_weights.v. *)
 Definition gold_total (G : sgraph) (g : G -> nat) (S : {set G}) : nat :=
-  \sum_(v in S) g v.
+  weight_set g S.
 
 Definition leaf_game_solution (G : sgraph) (g : G -> nat)
   (val : {set G} -> nat) (sigma : {set G} -> G) : Prop :=

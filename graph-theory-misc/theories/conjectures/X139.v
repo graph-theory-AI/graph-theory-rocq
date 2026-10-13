@@ -2,6 +2,7 @@
 
 From GTBase Require Export base.
 From GTMisc.foundations Require Import ambient_shallow_minors.
+From GTBase Require poly_nat.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,8 +10,10 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X139 vocabulary ***********************************************)
 
-Fixpoint x139_poly_eval (p : seq nat) (x : nat) : nat :=
-  if p is a :: q then a + x * x139_poly_eval q x else 0.
+(** Since the A31 library migration [x139_poly_eval] is a transparent alias of the canonical natural Horner evaluation
+    [GTBase.poly_nat.horner_nat] (upstream [horner_rec] at nat).  The original is frozen in
+    theories/migration/poly_eval.v, related to the alias by an unconditional pointwise equality. *)
+Definition x139_poly_eval (p : seq nat) (x : nat) : nat := GTBase.poly_nat.horner_nat p x.
 
 Definition x139_radius_at_most (G : sgraph) (S : {set G}) (r : nat) : Prop := ambient_radius_at_most S r.
 
