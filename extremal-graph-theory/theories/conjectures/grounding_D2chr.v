@@ -20,6 +20,7 @@ From Extremal.conjectures Require Import D2chr.
 (* Re-import after D2chr: its re-exported base shadows the ring-scope [1] on [rat]. *)
 From mathcomp Require Import all_algebra.
 Import GRing.Theory Num.Theory.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
