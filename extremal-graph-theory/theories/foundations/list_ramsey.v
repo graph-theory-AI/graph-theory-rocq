@@ -22,7 +22,7 @@ rewrite E card_family.
 have cf c : #|F c| = if c \in S then 1 else #|Y|.
   by rewrite /F; case: (c \in S); rewrite ?card1 ?cardT.
 rewrite /image_mem (eq_map cf).
-rewrite cardE /enum_mem -enumT size_filter.
+rewrite [#|~: S|]cardE /enum_mem -enumT size_filter.
 elim: (enum C) => [|c cs IH] //=.
 rewrite inE; case: (c \in S); by rewrite /= ?mul1n ?expnS IH.
 Qed.
