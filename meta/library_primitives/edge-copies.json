@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "family": "edge-copies",
+  "primitive": {
+    "canonical_name": "GTBase.edge_copies.edge_image",
+    "owner": "base",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "copy_edge_set",
+      "tree_decomposition_by_copies",
+      "copy_edges",
+      "copy_of",
+      "decomposition_into_copies"
+    ],
+    "source_definitions": [
+      "Cycle.conjectures.X212.x212_copy_edges",
+      "Cycle.conjectures.X212.x212_copy_of",
+      "Cycle.conjectures.X212.x212_decomposition_into_copies",
+      "Packing.conjectures.X47.x47_copy_edge_set",
+      "Packing.conjectures.X47.x47_tree_decomposition_by_copies"
+    ],
+    "consumers_remaining": 2,
+    "relation": "Edge images of simple graphs (the 2-element sets [set f x; f y] over adjacent pattern pairs) and two list-decomposition conventions. X47 copy = injective image, not required to lie in the host; X212 copy = injective adjacency-preserving image; X47 decomposition = parts equal whenever they share an edge (repeats allowed); X212 decomposition = exact count against host-edge membership (repeated nonempty parts excluded). X47 nested-existential images equal the pair form by proof; X212 bodies are converted verbatim.",
+    "semantic_classes": {
+      "injective-edge-image": {
+        "members": [
+          "Packing.conjectures.X47.x47_copy_edge_set"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "note": "Nested existentials over vertex pairs; proved equal to the pair-form image (injective_edge_image_nested); no host-edge requirement."
+      },
+      "edge-image": {
+        "members": [
+          "Cycle.conjectures.X212.x212_copy_edges"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "note": "Pair-form image over adjacent pattern pairs, verbatim."
+      },
+      "embedded-edge-copy": {
+        "members": [
+          "Cycle.conjectures.X212.x212_copy_of"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "note": "Injective and adjacency-preserving; contains its image in the host (embedded_edge_copy_sub)."
+      },
+      "equal-part-decomposition": {
+        "members": [
+          "Packing.conjectures.X47.x47_tree_decomposition_by_copies"
+        ],
+        "count": 1,
+        "verdict": "equivalent",
+        "note": "Parts are injective images inside E(G), covering E(G), equal when they share an edge; repeated parts allowed."
+      },
+      "exact-count-decomposition": {
+        "members": [
+          "Cycle.conjectures.X212.x212_decomposition_into_copies"
+        ],
+        "count": 1,
+        "verdict": "conversion",
+        "note": "Members are embedded copies; each 2-element set counted exactly as often as it is a host edge."
+      }
+    },
+    "compatibility_theorems": [
+      "Packing.migration.edge_copies.x47_copy_edge_set_compat",
+      "Packing.migration.edge_copies.x47_tree_decomposition_by_copies_compat",
+      "Packing.migration.edge_copies.tree_decomposition_delta_edge_connected_statement_compat",
+      "Packing.migration.edge_copies.tree_decomposition_leaf_edge_connected_statement_compat",
+      "Packing.migration.edge_copies.x47_tree_decomposition_by_copies_pre_simple_cuts",
+      "Packing.migration.edge_copies.x47_tree_decomposition_by_copies_original_compat",
+      "Packing.migration.edge_copies.tree_decomposition_delta_edge_connected_statement_original_compat",
+      "Packing.migration.edge_copies.tree_decomposition_leaf_edge_connected_statement_original_compat",
+      "Cycle.migration.edge_copies.x212_copy_edges_compat",
+      "Cycle.migration.edge_copies.x212_copy_of_compat",
+      "Cycle.migration.edge_copies.x212_decomposition_into_copies_compat",
+      "Cycle.migration.edge_copies.barat_thomassen_tree_decomposition_statement_compat"
+    ],
+    "api_theorems": [
+      "GTBase.edge_copies.edge_imageE",
+      "GTBase.edge_copies.injective_edge_image_nested",
+      "GTBase.edge_copies.edge_image_nested",
+      "GTBase.edge_copies.edge_image_id",
+      "GTBase.edge_copies.edge_image_sub",
+      "GTBase.edge_copies.embedded_edge_copy_sub",
+      "GTBase.edge_copies.injective_edge_image_contained",
+      "GTBase.edge_copies.embedded_edge_copy_self",
+      "GTBase.edge_copies.edge_decomposition_equal_parts_exact",
+      "GTBase.edge_copies.edge_decomposition_exact_nil",
+      "GTBase.edge_copies.edge_decomposition_equal_parts_nil",
+      "GTBase.edge_copies.edge_decomposition_exact_self",
+      "GTBase.edge_copies.edge_decomposition_exact_double_not",
+      "GTBase.edge_copies.tree_has_edge"
+    ],
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.sgraph",
+        "GraphTheory.core.connectivity",
+        "GraphTheory.core.mgraph",
+        "GTBase.common"
+      ],
+      "result": "new-local-generic",
+      "candidate": "none",
+      "note": "Contract discovery (master tree-edge extraction contract, pinned 39-module search): no public copy-image or list edge-decomposition owner; indexed edge partitions and MathComp partitions are different representations.",
+      "audited_at": "2026-10-08"
+    },
+    "migration_report": "meta/migration_reports/edge_copies.md",
+    "migration_spec": "meta/migration_reports/edge_copies.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_EDGE_COPIES.md",
+    "foundation_fidelity": "meta/foundation_fidelity/edge-copies.json",
+    "downstream_client": "base/theories/examples/edge_copies.v",
+    "reviewed_by": null
+  }
+}

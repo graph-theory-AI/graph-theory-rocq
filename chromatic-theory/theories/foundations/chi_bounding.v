@@ -8,7 +8,11 @@
       [poly_chi_bounded F]   -- some [c], [d] bound chi by c * omega^d on F,
                                 the "polynomially chi-bounded" of the sources.
 
-    Both quantify the bounding data BEFORE the graphs of the class, which is the
+    A third, [poly_list_chi_bounded F] (some coefficient list [p] bounds chi by
+    its Horner evaluation at omega on F), is the list form of the same notion,
+    owned here since the A32 library migration (X3 and X124 alias it).
+
+    All three quantify the bounding data BEFORE the graphs of the class, which is the
     intended reading of "the class is (polynomially) chi-bounded"; a per-graph
     choice would be vacuous. Ordinary chi-boundedness now uses the canonical
     [GTBase.chi_bounding.chi_bounded_class]; this module and [U8.chi_bounded]
@@ -19,6 +23,7 @@
 From GTBase Require Export base.
 From GTBase Require Import chi_bounding.
 From GTBase Require Import colourings.
+From GTBase Require poly_nat.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -39,6 +44,15 @@ Definition chi_bounded_class (F : sgraph -> Prop) : Prop :=
 Definition poly_chi_bounded (F : sgraph -> Prop) : Prop :=
   exists c d : nat,
     forall G : sgraph, F G -> χ([set: G]) <= c * ω([set: G]) ^ d.
+
+(** A class [F] is polynomially chi-bounded in LIST form: one coefficient list [p] (lowest degree first), chosen before the
+    graphs, bounds the chromatic number by its natural Horner evaluation at the clique number over the whole class.  Over
+    the naturals it is equivalent to the normal form [poly_chi_bounded] ([poly_forms.poly_chi_bounded_x3E], the [omega = 0]
+    corner included: such a graph has no vertex).  Since the A32 library migration X3's [x3_polynomially_chi_bounded] and
+    X124's [x124_poly_chi_bounded] are aliases of it. *)
+Definition poly_list_chi_bounded (F : sgraph -> Prop) : Prop :=
+  exists p : seq nat,
+    forall G : sgraph, F G -> χ([set: G]) <= GTBase.poly_nat.horner_nat p (ω([set: G])).
 
 (** ** Sanity lemmas ******************************************************)
 
@@ -80,6 +94,33 @@ move=> unb [c [d H]]; have [G [FG wle clt]] := unb c.
 have wle1 := expn_leq1 d wle.
 have : χ([set: G]) <= c.
   by apply: leq_trans (H G FG) _; rewrite -{2}(muln1 c) leq_mul2l wle1 orbT.
+by rewrite leqNgt clt.
+Qed.
+
+(** The same sanity laws for the LIST form: non-vacuity ([p = [:: 1]]), heredity along class inclusion, a list bound is
+    a bound (the bounding function is the evaluation itself), and teeth: a class whose chromatic number is unbounded at
+    a bounded clique number is not list-bounded, since evaluation is monotone in the point. *)
+Lemma poly_list_chi_bounded_small : poly_list_chi_bounded (fun G : sgraph => #|G| <= 1).
+Proof.
+exists [:: 1] => G le1; rewrite GTBase.poly_nat.horner_nat_cons GTBase.poly_nat.horner_nat_nil muln0 addn0.
+by apply: leq_trans (leq_chi _) _; rewrite cardsT.
+Qed.
+
+Lemma poly_list_chi_bounded_sub (F F' : sgraph -> Prop) :
+  (forall G, F G -> F' G) -> poly_list_chi_bounded F' -> poly_list_chi_bounded F.
+Proof. by move=> sub [p H]; exists p => G FG; apply: H; apply: sub. Qed.
+
+Lemma poly_list_chi_boundedW (F : sgraph -> Prop) :
+  poly_list_chi_bounded F -> chi_bounded_class F.
+Proof. by case=> p H; exists (GTBase.poly_nat.horner_nat p). Qed.
+
+Lemma not_poly_list_chi_bounded_of_unbounded (F : sgraph -> Prop) (k : nat) :
+  (forall n : nat, exists G : sgraph,
+      [/\ F G, ω([set: G]) <= k & n < χ([set: G])]) ->
+  ~ poly_list_chi_bounded F.
+Proof.
+move=> unb [p H]; have [G [FG wle clt]] := unb (GTBase.poly_nat.horner_nat p k).
+have := leq_trans (H G FG) (GTBase.poly_nat.horner_nat_mono p wle).
 by rewrite leqNgt clt.
 Qed.
 
@@ -135,11 +176,12 @@ Qed.
 
 (** ** Horner domination (F4) *******************************************)
 
-(** Horner evaluation of a coefficient list, the shape of [X3.x3_poly_eval]
-    (kept here as a [foldr] so that this foundation file depends on no
-    conjecture file; [poly_forms.v] identifies the two). *)
-Definition horner_nat (p : seq nat) (x : nat) : nat :=
-  foldr (fun a r => a + x * r) 0 p.
+(** Horner evaluation of a coefficient list, the shape of [X3.x3_poly_eval] (this foundation file
+    still depends on no conjecture file; [poly_forms.v] identifies the two).  Since the A31 library
+    migration [horner_nat] is a transparent alias of the canonical natural Horner evaluation
+    [GTBase.poly_nat.horner_nat] (upstream [horner_rec] at nat).  The original [foldr] is frozen in
+    theories/migration/poly_eval.v, related to the alias by an unconditional pointwise equality. *)
+Definition horner_nat (p : seq nat) (x : nat) : nat := GTBase.poly_nat.horner_nat p x.
 
 (** F4: for [t >= 1] a Horner evaluation is dominated by the normal form
     (sum of the coefficients) * t ^ (size p - 1).  The guard [1 <= t] is
@@ -147,20 +189,15 @@ Definition horner_nat (p : seq nat) (x : nat) : nat :=
     right-hand side vanishes as soon as [p] has two or more coefficients. *)
 Lemma horner_nat_dom (p : seq nat) (t : nat) :
   1 <= t -> horner_nat p t <= (\sum_(i <- p) i) * t ^ (size p).-1.
-Proof.
-move=> t1; elim: p => [|a p IH] //=.
-have ht k : 1 <= t ^ k by rewrite expn_gt0 t1.
-case: p IH => [|b q] IH /=.
-  by rewrite muln0 addn0 big_cons big_nil addn0 expn0 muln1.
-rewrite big_cons mulnDl; apply: leq_add.
-  by rewrite -{1}(muln1 a) leq_mul2l ht orbT.
-apply: leq_trans (leq_mul (leqnn t) IH) _.
-by rewrite mulnCA -expnS.
-Qed.
+Proof. exact: GTBase.poly_nat.horner_nat_dom. Qed.
 
 Print Assumptions poly_chi_bounded_small.
 Print Assumptions poly_chi_boundedW.
 Print Assumptions not_poly_chi_bounded_of_unbounded.
+Print Assumptions poly_list_chi_bounded_small.
+Print Assumptions poly_list_chi_bounded_sub.
+Print Assumptions poly_list_chi_boundedW.
+Print Assumptions not_poly_list_chi_bounded_of_unbounded.
 
 Print Assumptions chi_le_palette.
 Print Assumptions chi_le_choosable.

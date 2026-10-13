@@ -2,6 +2,7 @@
 
 From GTBase Require Export base.
 From GTMisc.foundations Require Import ambient_shallow_minors.
+From GTBase Require poly_nat.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -9,8 +10,10 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X128 vocabulary ***********************************************)
 
-Fixpoint x128_poly_eval (p : seq nat) (x : nat) : nat :=
-  if p is a :: q then a + x * x128_poly_eval q x else 0.
+(** Since the A31 library migration [x128_poly_eval] is a transparent alias of the canonical natural Horner evaluation
+    [GTBase.poly_nat.horner_nat] (upstream [horner_rec] at nat).  The original is frozen in
+    theories/migration/poly_eval.v, related to the alias by an unconditional pointwise equality. *)
+Definition x128_poly_eval (p : seq nat) (x : nat) : nat := GTBase.poly_nat.horner_nat p x.
 
 (** Radius-bounded branch sets for shallow minors. *)
 Definition x128_radius_at_most (G : sgraph) (S : {set G}) (r : nat) : Prop := ambient_radius_at_most S r.
@@ -22,8 +25,11 @@ Definition x128_grad_at_most (G : sgraph) (r d : nat) : Prop := ambient_grad_at_
 Definition x128_expansion_bounded (G : sgraph) (p : seq nat) : Prop :=
   forall r : nat, x128_grad_at_most G r (x128_poly_eval p r).
 
+(** Since the A30 library migration [x128_weight] is a transparent alias of the upstream finite-set weight
+    [GraphTheory.dom.weight_set] (the same body); the original is frozen and certified in
+    theories/migration/set_weights.v. *)
 Definition x128_weight (G : sgraph) (rho : G -> nat) (S : {set G}) : nat :=
-  \sum_(v in S) rho v.
+  weight_set rho S.
 
 Definition x128_cheap_bal_sep (G : sgraph) (rho : G -> nat) (t k : nat) : Prop :=
   exists S Z : {set G},

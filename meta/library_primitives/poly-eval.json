@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "family": "poly-eval",
+  "primitive": {
+    "canonical_name": "GTBase.poly_nat.horner_nat",
+    "owner": "base",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "poly_eval"
+    ],
+    "source_definitions": [
+      "Chromatic.conjectures.X124.x124_poly_eval",
+      "Chromatic.conjectures.X3.x3_poly_eval",
+      "Chromatic.foundations.chi_bounding.horner_nat",
+      "Extremal.conjectures.X59.x59_poly_eval",
+      "Extremal.conjectures.X60.x60_poly_eval",
+      "GTMisc.conjectures.X128.x128_poly_eval",
+      "GTMisc.conjectures.X139.x139_poly_eval",
+      "Minor.conjectures.X220.x220_poly_eval"
+    ],
+    "repository_sources": {
+      "Chromatic.foundations.chi_bounding.horner_nat": {
+        "path": "chromatic-theory/theories/foundations/chi_bounding.v",
+        "commit": "db16a76376d1a9c29142b38f97d5109d6dd942fa",
+        "blob": "3f6c01d406ca290f0db3170b9536838dd8c98bfe",
+        "declaration_hash": "ab33659353c3cc7bab1b2143b5179f7d723bef782093888862ccdbf2b7b049f5"
+      }
+    },
+    "consumers_remaining": 10,
+    "relation": "the Horner evaluation of a natural coefficient list (lowest degree first) at a natural point, with GTBase.poly_nat.horner_nat p x := mathcomp poly.horner_rec p x at the natural semiring canonical: the six Fixpoints Chromatic X3/X124, Extremal X59/X60, GTMisc X128/X139 xN_poly_eval (if p is a :: q then a + x * eval q x else 0), the foldr Minor X220 x220_poly_eval and the public foldr Chromatic.foundations.chi_bounding.horner_nat are transparent aliases of it, each related to its frozen original by an UNCONDITIONAL pointwise equality (induction or the foldr bridge; not a conversion). The empty list evaluates to 0 at every point; no guard. Imports are narrow (ssralg/poly Required, only ssralg canonicals imported) and GTBase.base does not re-export the module.",
+    "semantic_classes": {
+      "horner-nat-list": {
+        "members": [
+          "Chromatic.conjectures.X124.x124_poly_eval",
+          "Chromatic.conjectures.X3.x3_poly_eval",
+          "Chromatic.foundations.chi_bounding.horner_nat",
+          "Extremal.conjectures.X59.x59_poly_eval",
+          "Extremal.conjectures.X60.x60_poly_eval",
+          "GTMisc.conjectures.X128.x128_poly_eval",
+          "GTMisc.conjectures.X139.x139_poly_eval",
+          "Minor.conjectures.X220.x220_poly_eval"
+        ],
+        "count": 8,
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "certificates": [
+          "Chromatic.migration.poly_eval.horner_nat_compat",
+          "Chromatic.migration.poly_eval.x124_poly_eval_compat",
+          "Chromatic.migration.poly_eval.x3_poly_eval_compat",
+          "Extremal.migration.poly_eval.x59_poly_eval_compat",
+          "Extremal.migration.poly_eval.x60_poly_eval_compat",
+          "GTMisc.migration.poly_eval.x128_poly_eval_compat",
+          "GTMisc.migration.poly_eval.x139_poly_eval_compat",
+          "Minor.migration.poly_eval.x220_poly_eval_compat"
+        ],
+        "note": "natural coefficient lists, lowest degree first, Horner order; unconditional pointwise equality with the canonical (induction for the six Fixpoints, the foldr bridge for X220 and chi_bounding); not conversions"
+      }
+    },
+    "distinct_variants": {},
+    "compatibility_theorems": [
+      "Chromatic.migration.poly_eval.dreier_torunczyk_merge_width_poly_chi_bounded_statement_compat",
+      "Chromatic.migration.poly_eval.dreier_torunczyk_merge_width_poly_chi_bounded_statement_original_compat",
+      "Chromatic.migration.poly_eval.forest_free_polynomial_chi_bound_statement_compat",
+      "Chromatic.migration.poly_eval.good_trees_disjoint_union_good_statement_compat",
+      "Chromatic.migration.poly_eval.hereditary_chi_bounded_not_polynomial_statement_compat",
+      "Chromatic.migration.poly_eval.hereditary_chi_bounded_not_polynomial_statement_original_compat",
+      "Chromatic.migration.poly_eval.horner_nat_compat",
+      "Chromatic.migration.poly_eval.x124_poly_chi_bounded_compat",
+      "Chromatic.migration.poly_eval.x124_poly_chi_bounded_original_compat",
+      "Chromatic.migration.poly_eval.x124_poly_eval_compat",
+      "Chromatic.migration.poly_eval.x3_poly_eval_compat",
+      "Chromatic.migration.poly_eval.x3_polynomially_chi_bounded_compat",
+      "Chromatic.migration.poly_eval.x66_good_compat",
+      "Chromatic.migration.poly_eval.x66_original_compat",
+      "Chromatic.migration.poly_eval.x66_original_du_compat",
+      "Chromatic.migration.poly_eval.x66_original_pe_compat",
+      "Extremal.migration.poly_eval.c4_free_subgraph_polynomial_average_degree_statement_compat",
+      "Extremal.migration.poly_eval.c4_free_subgraph_polynomial_average_degree_statement_original_compat",
+      "Extremal.migration.poly_eval.induced_saturation_even_cycle_polynomial_size_statement_compat",
+      "Extremal.migration.poly_eval.induced_saturation_even_cycle_polynomial_size_statement_original_compat",
+      "Extremal.migration.poly_eval.polynomial_kuhn_osthus_induced_subdivision_statement_compat",
+      "Extremal.migration.poly_eval.polynomial_kuhn_osthus_induced_subdivision_statement_original_compat",
+      "Extremal.migration.poly_eval.x59_poly_eval_compat",
+      "Extremal.migration.poly_eval.x60_poly_eval_compat",
+      "GTMisc.migration.poly_eval.dvorak_cheap_balanced_separator_bounded_expansion_statement_compat",
+      "GTMisc.migration.poly_eval.dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat",
+      "GTMisc.migration.poly_eval.esperet_raymond_polynomial_expansion_scol_statement_compat",
+      "GTMisc.migration.poly_eval.esperet_raymond_polynomial_expansion_scol_statement_original_compat",
+      "GTMisc.migration.poly_eval.x128_expansion_bounded_compat",
+      "GTMisc.migration.poly_eval.x128_expansion_bounded_original_compat",
+      "GTMisc.migration.poly_eval.x128_poly_eval_compat",
+      "GTMisc.migration.poly_eval.x139_poly_eval_compat",
+      "GTMisc.migration.poly_eval.x139_polynomial_expansion_class_compat",
+      "GTMisc.migration.poly_eval.x139_polynomial_expansion_class_original_compat",
+      "Minor.migration.poly_eval.bounded_tree_mu_polynomial_biclique_tree_alpha_statement_compat",
+      "Minor.migration.poly_eval.polynomial_expansion_bounded_twin_width_statement_compat",
+      "Minor.migration.poly_eval.polynomial_expansion_bounded_twin_width_statement_original_compat",
+      "Minor.migration.poly_eval.tree_mu_ktt_free_polynomial_tree_alpha_statement_compat",
+      "Minor.migration.poly_eval.x220_poly_eval_compat",
+      "Minor.migration.poly_eval.x220_polynomial_expansion_compat",
+      "Minor.migration.poly_eval.x220_polynomial_expansion_original_compat"
+    ],
+    "api_theorems": [
+      "GTBase.poly_nat.horner_nat_nil",
+      "GTBase.poly_nat.horner_nat_cons",
+      "GTBase.poly_nat.horner_nat_foldr",
+      "GTBase.poly_nat.horner_nat_x0",
+      "GTBase.poly_nat.horner_nat_monomial",
+      "GTBase.poly_nat.horner_nat_rcons0",
+      "GTBase.poly_nat.horner_nat_mono",
+      "GTBase.poly_nat.horner_nat_dom"
+    ],
+    "public_client": "base/theories/examples/poly_nat.v",
+    "legacy_baseline": "db16a76376d1a9c29142b38f97d5109d6dd942fa",
+    "migration_report": "meta/migration_reports/poly_eval.md",
+    "migration_spec": "meta/migration_reports/poly_eval.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A31.md",
+    "foundation_fidelity": "meta/foundation_fidelity/poly-eval.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "MathComp algebra poly (horner_rec, the faithful Horner order at any semiring; horner on {poly R})",
+        "GraphTheory 0.9.7 core (only wpgt char_poly/horner_eval over a ring; no natural coefficient-list evaluator)",
+        "MathComp boot (no horner)",
+        "GTBase and the area foundations (Chromatic.foundations.chi_bounding.horner_nat, a foldr duplicate, now an alias)"
+      ],
+      "result": "thin-adapter-to-upstream",
+      "candidate": "mathcomp.algebra.poly.horner_rec at nat",
+      "note": "Upstream horner_rec at the natural semiring is the canonical evaluation; GTBase.poly_nat is a thin adapter with the nil/cons API clients need (they get no nat semiring instance), in a separate narrow-import module that GTBase.base does not re-export. Evidence: coordination/evidence/resume-2026-10-06/poly-utility-discovery-by-arthur/ (final receipt, correction-r1 adapter probes) and coordination/evidence/A31-poly-eval/.",
+      "audited_at": "2026-10-08"
+    },
+    "reviewed_by": null
+  }
+}

@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py induced_subdivisions --details 
 
 - Canonical: `GTBase.induced_subdivisions.induced_subdivision_model`.
 - Baseline: `952a89bdecf65bed9be3a1393eabc91ca091d26c`.
-- Scope: 4 helpers, 2 statements, 14 frozen objects, 81 recorded references.
-- Source checks: 109/109 pass; consistent.
+- Scope: 4 helpers, 2 statements, 14 frozen objects, 84 recorded references.
+- Source checks: 110/110 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,4 +20,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Minor.foundations.containment.subdiv_model`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement`, `graph-theory-misc/theories/migration/subcubic.v#X114Legacy.subcubic_induced_subdivision_np_complete_statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `extremal-graph-theory/theories/migration/subgraph_of.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement`, `graph-theory-misc/theories/migration/subcubic.v#X114Legacy.subcubic_induced_subdivision_np_complete_statement`, `extremal-graph-theory/theories/migration/poly_eval.v#X98Legacy.polynomial_kuhn_osthus_induced_subdivision_statement`.

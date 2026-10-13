@@ -1,7 +1,7 @@
 (** * Packing.conjectures.X47 -- v2 tree edge-decomposition row *)
 
 From GTBase Require Export base.
-From GTBase Require simple_cuts.
+From GTBase Require simple_cuts edge_copies.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -23,19 +23,10 @@ Definition x47_edge_connected (G : sgraph) (k : nat) : Prop :=
 
 Definition x47_copy_edge_set
     (G T : sgraph) (F : {set {set G}}) : Prop :=
-  exists f : T -> G,
-    injective f /\
-    F = [set e : {set G} |
-          [exists x : T, [exists y : T, (x -- y) && (e == [set f x; f y])]]].
+  GTBase.edge_copies.injective_edge_image T F.
 
 Definition x47_tree_decomposition_by_copies (G T : sgraph) : Prop :=
-  exists parts : seq {set {set G}},
-    (forall F : {set {set G}}, F \in parts -> @x47_copy_edge_set G T F) /\
-    (forall F : {set {set G}}, F \in parts -> F \subset x47_edge_set G) /\
-    (forall e : {set G}, e \in x47_edge_set G ->
-      exists F : {set {set G}}, F \in parts /\ e \in F) /\
-    forall (F1 F2 : {set {set G}}) (e : {set G}),
-      F1 \in parts -> F2 \in parts -> e \in F1 -> e \in F2 -> F1 = F2.
+  GTBase.edge_copies.edge_decomposition_by_equal_parts G T.
 
 (** ** X47 statements ******************************************************)
 
