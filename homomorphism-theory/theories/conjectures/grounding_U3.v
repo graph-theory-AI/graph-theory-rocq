@@ -18,6 +18,7 @@ From GTBase Require Import base.
 From GraphTheory Require Import dom.
 From mathcomp Require Import fingroup.
 From Hom.conjectures Require Import U3.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
