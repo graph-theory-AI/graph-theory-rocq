@@ -24,6 +24,7 @@
 From GTBase Require Import base.
 From mathcomp Require Import fingroup perm.
 From Topological.conjectures Require Import X228.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
