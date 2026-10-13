@@ -173,14 +173,15 @@ def render_assembly(blocks: list) -> str:
          'From Digraph Require Import ckpath_cnf %s %s.\n' % (checker_module, b0.base_module) +
          ''.join('From Digraph Require Import %s.\n' % b.module() for b in blocks) + 'Import ListNotations.\n'
          'Set Warnings "-abstract-large-number".\n\n')       # r2 (C3): the same warnings line as the other kinds
+    lemmas = []
     for b in blocks:
-        s += ('Theorem %s :\n  forall rho, satisfies_cnf rho (%s) ->\n    satisfies_cnf rho %s.\nProof.\nintros rho Hbase.\n'
-              'apply (%s rho Hbase).\napply satisfies_cnf_concat_intro.\n' % (b.sound(), b.base, b.out(), b.replay()))
+        t = ('Theorem %s :\n  forall rho, satisfies_cnf rho (%s) ->\n    satisfies_cnf rho %s.\nProof.\nintros rho Hbase.\n'
+             'apply (%s rho Hbase).\napply satisfies_cnf_concat_intro.\n' % (b.sound(), b.base, b.out(), b.replay()))
         for x in b.selections:
-            s += ('constructor.\n{ apply (satisfies_cnf_select rho %s %s).\n  - exact (%s rho Hbase).\n  - vm_compute. reflexivity. }\n'
+            t += ('constructor.\n{ apply (satisfies_cnf_select rho %s %s).\n  - exact (%s rho Hbase).\n  - vm_compute. reflexivity. }\n'
                   % (b.out(x.label), x.indices, b.sound(x.label)))
-        s += 'constructor.\nQed.\n\n'
-    return s
+        lemmas.append(t + 'constructor.\nQed.\n')
+    return s + '\n'.join(lemmas)       # one blank line between lemmas, none at end of file (git diff --check)
 
 
 def render_new_final(f: Final) -> str:
