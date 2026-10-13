@@ -68,6 +68,7 @@ From GraphTheory Require Import mgraph sgraph.
 From GTBase Require Export base.
 From Cycle.foundations Require Import matchings_cuts.
 From Cycle.conjectures Require Import U6 U10.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
