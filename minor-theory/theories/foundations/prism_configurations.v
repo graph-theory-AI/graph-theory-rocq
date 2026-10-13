@@ -113,4 +113,3 @@ exists (fun i => sdm_branch m (l i)), (fun i => sdm_branch m (r i)); split.
 - move=> i j; apply/eqP => /(@sdm_inj _ _ m) /(congr1 val) e.
   by have := lside i; rewrite e rside.
 Qed.
-
