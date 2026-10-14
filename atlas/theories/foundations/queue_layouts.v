@@ -3,10 +3,11 @@
     [queue_number_le] (minor-theory width_params) orders the vertices by an
     injective key [G -> nat]; [x158_queue_layout] (topological X158) by the
     positions in a duplicate-free enumeration.  Sorting the enumeration by the
-    key makes the two orders agree ([sort_index_lt]). *)
+    key makes the two orders agree ([sort_index_lt]).  Both lemmas use only the
+    library vocabulary: X158's [x158_edge_set G] is the transparent alias
+    [sg_edge_set G], i.e. [E(G)], so [x158_edge_ends] applies to its edges as is. *)
 
 From GTBase Require Import base.
-From Topological.conjectures Require Import X158.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -36,9 +37,9 @@ apply/idP/idP => h.
     by move: h; rewrite ltnNge le.
 Qed.
 
-(** The two named ends of an X158 edge are its ends, and they are adjacent. *)
+(** The two named ends of an edge of [E(G)] (an X158 edge) are its ends, and they are adjacent. *)
 Lemma x158_edge_ends (G : sgraph) (e : {set G}) (a d : G) :
-  e \in x158_edge_set G -> a \in e -> d \in e -> a != d -> e = [set a; d] /\ a -- d.
+  e \in E(G) -> a \in e -> d \in e -> a != d -> e = [set a; d] /\ a -- d.
 Proof.
 rewrite in_sg_edge_set => /existsP [x /existsP [y /andP [xy /eqP ->]]].
 rewrite !inE => /orP [] /eqP -> /orP [] /eqP ->; rewrite ?eqxx //= => _.

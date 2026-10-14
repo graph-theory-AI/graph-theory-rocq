@@ -31,6 +31,7 @@
 From HB Require Import structures.
 From mathcomp Require Import all_boot all_algebra.
 From Digraph Require Import prelude digraph oriented tournament.
+From Digraph.foundations Require Import neighbourhoods.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -96,6 +97,88 @@ Proof. by []. Qed.
 
 Lemma balanced_converse (D : diGraphType) : balanced (converse D) <-> balanced D.
 Proof. by split=> h v; move: (h v); rewrite indeg_converse outdeg_converse => ->. Qed.
+
+(** ** Neighbourhood bridges and diregularity (family directed-neighbourhood)
+
+    The two canonical degrees are the cardinalities of the public neighbourhoods of
+    [Digraph.foundations.neighbourhoods], by conversion.  [diregular d] is the Boolean "out-degree
+    and in-degree are both [d] at every vertex", with the conjunct order of its conjecture-local
+    source ([outdeg] first).  It is vacuous on the empty carrier for every [d] ([diregular_card0]);
+    a loop counts once on each side, so a vertex with a loop and no other arc is 1-diregular; an
+    arcless digraph is 0-diregular ([diregular_arcless]); a diregular digraph is balanced
+    ([diregular_balanced]); the converse digraph has the same diregularity ([diregular_converse]). *)
+
+Section Diregular.
+Variable D : diGraphType.
+Implicit Types (v w : D).
+
+Lemma indeg_NinE v : indeg v = #|Nin v|.
+Proof. by []. Qed.
+
+Lemma outdeg_NoutE v : outdeg v = #|Nout v|.
+Proof. by []. Qed.
+
+(** Diregular of degree [d]: every vertex has in-degree and out-degree exactly [d].  (The binder is
+    ascribed [D]: here both degrees are generalized constants, so nothing else fixes its type.) *)
+Definition diregular (d : nat) : bool := [forall v : D, (outdeg v == d) && (indeg v == d)].
+
+Lemma diregularP d : reflect (forall v, outdeg v = d /\ indeg v = d) (diregular d).
+Proof.
+apply: (iffP forallP) => h v; first by case/andP: (h v) => /eqP-> /eqP->.
+by case: (h v) => -> ->; rewrite !eqxx.
+Qed.
+
+Lemma diregular_vertex d v : diregular d -> outdeg v = d /\ indeg v = d.
+Proof. by move/diregularP. Qed.
+
+Lemma diregular_balanced d : diregular d -> balanced D.
+Proof. by move/diregularP=> h v; case: (h v) => -> ->. Qed.
+
+(** Vacuous on the empty carrier, for every degree. *)
+Lemma diregular_card0 d : #|D| = 0 -> diregular d.
+Proof. by move=> D0; apply/forallP=> v; move: (max_card (pred1 v)); rewrite D0 card1. Qed.
+
+Lemma diregular_arcless : (forall u w : D, ~~ (u --> w)) -> diregular 0.
+Proof.
+move=> none; apply/diregularP=> v.
+by rewrite indeg_NinE outdeg_NoutE (arcless_Nout none) (arcless_Nin none) cards0.
+Qed.
+
+End Diregular.
+
+Lemma diregular_converse (D : diGraphType) d : diregular (converse D) d = diregular D d.
+Proof.
+apply/diregularP/diregularP=> h v; have [o i] := h v.
+  by split; [move: i; rewrite indeg_converse | move: o; rewrite outdeg_converse].
+by split; [rewrite outdeg_converse | rewrite indeg_converse].
+Qed.
+
+(** ** Tournaments: [N_out]/[N_in] are the general neighbourhoods, and the degrees add up to [#|T| - 1] *)
+
+Section TournamentDegrees.
+Variable T : tournament.
+Implicit Types (u : T).
+
+Lemma tournament_N_outE u : N_out u = Nout u.
+Proof. by []. Qed.
+
+Lemma tournament_N_inE u : N_in u = Nin u.
+Proof. by []. Qed.
+
+Lemma tournament_outdegE u : outdeg u = #|N_out u|.
+Proof. by []. Qed.
+
+Lemma tournament_indegE u : indeg u = #|N_in u|.
+Proof. by []. Qed.
+
+Lemma tournament_indeg_outdeg u : indeg u + outdeg u = #|T|.-1.
+Proof.
+have [part dis] := N_out_in_partition u.
+rewrite -(cardsC1 u) part cardsU (disjoint_setI0 dis) cards0 subn0 addnC.
+by rewrite tournament_indegE tournament_outdegE.
+Qed.
+
+End TournamentDegrees.
 
 (** ** Grounding *)
 Section DegreeBalanceGrounding.

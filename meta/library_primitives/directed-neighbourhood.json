@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "family": "directed-neighbourhood",
+  "primitive": {
+    "canonical_name": "Digraph.foundations.neighbourhoods.Nout",
+    "owner": "digraph-theory",
+    "status": "migrating",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "Nout",
+      "Nin",
+      "indeg",
+      "Nout2",
+      "diregular"
+    ],
+    "source_definitions": [
+      "Digraph.conjectures.classic_core.Nout",
+      "Digraph.conjectures.classic_core.Nin",
+      "Digraph.conjectures.classic_core.indeg",
+      "Digraph.conjectures.classic_core.Nout2",
+      "Digraph.conjectures.classic_core.diregular",
+      "Digraph.conjectures.colouring_variants.indeg",
+      "Digraph.conjectures.reals_growth.indeg"
+    ],
+    "consumers_remaining": 4,
+    "relation": "Directed neighbourhoods of a finite digraph (diGraphType D) and the in-degree and regularity predicates read through them. Canonical bodies: Digraph.foundations.neighbourhoods.Nout v := [set w | v --> w], Nin v := [set u | u --> v] and Nout2 v := [set w | [&& w != v, w \\notin Nout v & [exists u, (u \\in Nout v) && (u --> w)]]] (directed distance exactly two; both exclusions kept); the in-degree is B16's Digraph.foundations.degree_balance.indeg v := #|[set u | u --> v]| (#|Nin v| by conversion), beside core oriented.outdeg; d-diregularity is degree_balance.diregular d := [forall v : D, (outdeg v == d) && (indeg v == d)] (Boolean, out-degree conjunct first). classic_core Nout/Nin/Nout2/indeg/diregular and colouring_variants.indeg are transparent aliases of these bodies (conversion; names, declared types, implicit arguments and transparency unchanged). Loops count on both sides, digons are allowed, and diregularity is vacuous on the empty carrier for every d. STAGED (master-directed-neighbourhood-scope-decision.md 6d6d2b8d, option C): core/tournament's N_out/N_in (the same comprehensions restricted to a tournament), the three rows that reach this family only through them (X2 tournament_outneighborhood_degeneracy_statement and tournament_outneighborhood_cycle_statement, X93 local_tournament_dichromatic_bound_statement) and the X93 chain x93_t_local_tournament are a LATER STAGE of this family: the migration tools admit no public source under core/ (family_registry.public_repository_path), so they need a gate-tooling change admitting core/ or another reviewed route. They are untouched here (core/tournament.v keeps its parent text); the measured N_in ascription finding is kept for that stage.",
+    "representations": {
+      "out-neighbourhood": {
+        "canonical_name": "Digraph.foundations.neighbourhoods.Nout",
+        "owner": "digraph-theory",
+        "module": "digraph-theory/theories/foundations/neighbourhoods.v",
+        "members": [
+          "Digraph.conjectures.classic_core.Nout"
+        ]
+      },
+      "in-neighbourhood": {
+        "canonical_name": "Digraph.foundations.neighbourhoods.Nin",
+        "owner": "digraph-theory",
+        "module": "digraph-theory/theories/foundations/neighbourhoods.v",
+        "members": [
+          "Digraph.conjectures.classic_core.Nin"
+        ]
+      },
+      "second-out-neighbourhood": {
+        "canonical_name": "Digraph.foundations.neighbourhoods.Nout2",
+        "owner": "digraph-theory",
+        "module": "digraph-theory/theories/foundations/neighbourhoods.v",
+        "members": [
+          "Digraph.conjectures.classic_core.Nout2"
+        ]
+      },
+      "in-degree": {
+        "canonical_name": "Digraph.foundations.degree_balance.indeg",
+        "owner": "digraph-theory (B16 degree-balance)",
+        "module": "digraph-theory/theories/foundations/degree_balance.v",
+        "members": [
+          "Digraph.conjectures.classic_core.indeg",
+          "Digraph.conjectures.colouring_variants.indeg"
+        ]
+      },
+      "diregular": {
+        "canonical_name": "Digraph.foundations.degree_balance.diregular",
+        "owner": "digraph-theory",
+        "module": "digraph-theory/theories/foundations/degree_balance.v",
+        "members": [
+          "Digraph.conjectures.classic_core.diregular"
+        ]
+      }
+    },
+    "semantic_classes": {
+      "digraph-neighbourhood": {
+        "members": [
+          "Digraph.conjectures.classic_core.Nout",
+          "Digraph.conjectures.classic_core.Nin",
+          "Digraph.conjectures.classic_core.Nout2"
+        ],
+        "count": 3,
+        "verdict": "equivalent (definitional: conversion)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Digraph.migration.directed_neighbourhood.Nout_compat",
+          "Digraph.migration.directed_neighbourhood.Nin_compat",
+          "Digraph.migration.directed_neighbourhood.Nout2_compat"
+        ],
+        "note": "classic_core Nout v := [set w | v --> w], Nin v := [set u | u --> v] and Nout2 (distance exactly two: w != v, w \\notin Nout v and a common out-neighbour) are the neighbourhoods bodies verbatim; the aliases keep their {set D} declared types and the Section's implicit D."
+      },
+      "in-degree": {
+        "members": [
+          "Digraph.conjectures.classic_core.indeg",
+          "Digraph.conjectures.colouring_variants.indeg"
+        ],
+        "count": 2,
+        "verdict": "equivalent (definitional: conversion)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Digraph.migration.directed_neighbourhood.indeg_compat",
+          "Digraph.migration.directed_neighbourhood.cv_indeg_compat"
+        ],
+        "note": "classic_core.indeg v := #|Nin v| and colouring_variants.indeg D v := #|[set u | u --> v]| are B16's degree_balance.indeg v by conversion; colouring_variants.indeg keeps its explicit D and has no live consumer."
+      },
+      "diregular": {
+        "members": [
+          "Digraph.conjectures.classic_core.diregular"
+        ],
+        "count": 1,
+        "verdict": "equivalent (definitional: conversion)",
+        "state": "migrated-alias",
+        "certificates": [
+          "Digraph.migration.directed_neighbourhood.diregular_compat",
+          "Digraph.migration.directed_neighbourhood.diregular_ascription"
+        ],
+        "note": "classic_core.diregular d := [forall v, (outdeg v == d) && (indeg v == d)] is degree_balance.diregular D d by conversion (diregular_compat); diregular_ascription records the unchanged declared type; vacuous on the empty carrier, a loop counts once on each side."
+      },
+      "legacy-axiom-defect": {
+        "members": [
+          "Digraph.conjectures.reals_growth.indeg"
+        ],
+        "count": 1,
+        "verdict": "same contract, deferred (legacy-axiom defect)",
+        "state": "deferred",
+        "certificates": [],
+        "note": "reals_growth.indeg D v := #|[set w : D | w --> v]| has the canonical in-degree body but is NOT migrated here, for the reason B16 records for reals_growth.eulerian, its only consumer: the two non-corpus EC-log rows inherit four classical-reals axioms through their statements, so a certificate of them fails the kernel assumptions audit. It stays deferred with B16's class."
+      }
+    },
+    "staged": {
+      "decision": "master-directed-neighbourhood-scope-decision.md 6d6d2b8d",
+      "later_stage_endpoints": [
+        "Digraph.core.tournament.N_out",
+        "Digraph.core.tournament.N_in"
+      ],
+      "later_stage_rows": [
+        "Digraph.conjectures.X2.tournament_outneighborhood_degeneracy_statement",
+        "Digraph.conjectures.X2.tournament_outneighborhood_cycle_statement",
+        "Digraph.conjectures.X93.local_tournament_dichromatic_bound_statement"
+      ],
+      "later_stage_chains": [
+        "Digraph.conjectures.X93.x93_t_local_tournament"
+      ],
+      "reason": "STAGED (master-directed-neighbourhood-scope-decision.md 6d6d2b8d, option C): core/tournament's N_out/N_in (the same comprehensions restricted to a tournament), the three rows that reach this family only through them (X2 tournament_outneighborhood_degeneracy_statement and tournament_outneighborhood_cycle_statement, X93 local_tournament_dichromatic_bound_statement) and the X93 chain x93_t_local_tournament are a LATER STAGE of this family: the migration tools admit no public source under core/ (family_registry.public_repository_path), so they need a gate-tooling change admitting core/ or another reviewed route. They are untouched here (core/tournament.v keeps its parent text); the measured N_in ascription finding is kept for that stage."
+    },
+    "distinct_variants": {
+      "GTBase.orientations.rel_indegree": "D11's in-degree of a SUPPLIED relation D : rel G on a simple-graph host (proper orientations); D11 lists B16's indeg as its distinct variant, reciprocally (X81 x81_indegree and X82 x82_indegree are its aliases, owned by D11); untouched",
+      "Chromatic.foundations.alon_tarsi.at_indegree": "Alon-Tarsi in-degree inside a supplied set of ordered pairs; untouched",
+      "Digraph.conjectures.P9.arcset_indeg": "in-degree inside a supplied arc set A : {set D * D}; untouched",
+      "Digraph.conjectures.P9.arcset_outdeg": "out-degree inside a supplied arc set A : {set D * D}; untouched",
+      "Digraph.conjectures.packing.selindeg": "in-degree of a selection f : D -> {set D} (#|[set u | v \\in f u]|); untouched",
+      "Digraph.conjectures.X86.x86_sel_indeg": "selection in-degree restricted to a set S; untouched",
+      "Digraph.conjectures.path_fas.sdeg": "undirected simple-graph degree; untouched",
+      "Digraph.conjectures.twinwidth.red_deg": "red-graph degree of a trigraph; untouched",
+      "Infinite.conjectures.D4_unblocked.i_neighbourhood": "Prop-valued neighbourhood of an infinite iGraph; untouched",
+      "Digraph.core.tournament.N_out": "STAGED, a later stage of THIS family (master-directed-neighbourhood-scope-decision.md 6d6d2b8d): the out-neighbourhood restricted to a tournament, the body of neighbourhoods.Nout; core/ is outside the tools' public-source scope; untouched (parent text)",
+      "Digraph.core.tournament.N_in": "STAGED, a later stage of THIS family (master-directed-neighbourhood-scope-decision.md 6d6d2b8d): the in-neighbourhood restricted to a tournament, the body of neighbourhoods.Nin (its alias must take NO {set T} ascription: measured About/Printing All parity); untouched (parent text)",
+      "Digraph.conjectures.X107.x107_total_degree_at_most": "inline let-bound in-degree inside a total-degree bound; the later semidegree/total-degree family. In this family's spec it is enrolled lexical-only (see its chain object), never aliased."
+    },
+    "historical_snapshots": {
+      "digraph-theory/theories/migration/degree_balance.v#Legacy.x221_eulerian": "B16 per-row snapshot: degree-balance (baseline 2981122) froze its own source x221_eulerian (forall v : D, outdeg v = classic_core.indeg v) over the then-live classic_core.indeg, which since this family is the transparent alias of degree_balance.indeg (the same comprehension; conversion). It stays byte-exact under B16's ownership. The complete pre-B16 body over the raw in-degree is this family's DegreeBalanceOriginal.x221_eulerian (x221_eulerian_original_compat), and the complete row X221Original.orientation_C4_eulerian_avoidable_statement (orientation_C4_eulerian_avoidable_statement_original_compat).",
+      "digraph-theory/theories/migration/degree_balance.v#Legacy.cv_eulerian": "B16 per-row snapshot: degree-balance (baseline 2981122) froze its own source colouring_variants.eulerian ([forall v : D, colouring_variants.indeg v == outdeg v]) over the then-live colouring_variants.indeg, which since this family is the transparent alias of degree_balance.indeg (conversion). It stays byte-exact under B16's ownership. The complete pre-B16 body over the raw in-degree is DegreeBalanceOriginal.cv_eulerian (cv_eulerian_original_compat), and the complete row ColouringVariantsOriginal.majority_3col_eulerian_statement (majority_3col_eulerian_statement_original_compat).",
+      "digraph-theory/theories/migration/degree_balance.v#Legacy.Eulerian": "B16 per-row snapshot: degree-balance (baseline 2981122) froze its own source two_extremal.Eulerian (forall v : D, classic_core.indeg v = outdeg v) over the then-live classic_core.indeg, which since this family is the transparent alias of degree_balance.indeg (conversion). It stays byte-exact under B16's ownership. The complete pre-B16 body over the raw in-degree is DegreeBalanceOriginal.Eulerian (Eulerian_original_compat); the complete row TwoExtremalOriginal.H6_no_full_cover and the whole Props TwoExtremalGlueOriginal.conj_9_2_glued and GlueEulSubtypeOriginal.conj_9_2_glued_e are recomposed over it (their *_original_compat certificates).",
+      "digraph-theory/theories/migration/path_vertices.v#X2BoundsLegacy.mader_delta_zero_bound": "B1/B2 per-row snapshot: path-vertices (baseline 9e03072) froze the Mader delta-zero bound over its own frozen X2Legacy.contains_subdivision but kept the live X2 min_semidegree_at_least (forall v, m <= outdeg v /\\ m <= indeg v, over classic_core's indeg), which since this family reads the alias of degree_balance.indeg (conversion). It stays byte-exact under B1's ownership. The complete chain over B1's raw subdivision, this family's frozen min_semidegree_at_least and the raw in-degree is X2Original.mader_delta_zero_bound (mader_delta_zero_bound_original_compat), and the complete row X2Original.mader_delta0_transitive_tournament_statement (mader_delta0_transitive_tournament_statement_original_compat)."
+    },
+    "compatibility_theorems": [
+      "Digraph.migration.directed_neighbourhood.Eulerian_original_compat",
+      "Digraph.migration.directed_neighbourhood.H6_no_full_cover_original_compat",
+      "Digraph.migration.directed_neighbourhood.Nin_compat",
+      "Digraph.migration.directed_neighbourhood.Nout2_compat",
+      "Digraph.migration.directed_neighbourhood.Nout_compat",
+      "Digraph.migration.directed_neighbourhood.antidirected_path_compat",
+      "Digraph.migration.directed_neighbourhood.antidirected_tree_compat",
+      "Digraph.migration.directed_neighbourhood.antidirected_trees_in_digraphs_statement_compat",
+      "Digraph.migration.directed_neighbourhood.arc_disjoint_directed_cycles_in_regular_directed_gra_statement_compat",
+      "Digraph.migration.directed_neighbourhood.behzad_chartrand_wall_girth_regular_digraph_statement_compat",
+      "Digraph.migration.directed_neighbourhood.bounded_degree_acyclic_oriented_ramsey_linear_statement_compat",
+      "Digraph.migration.directed_neighbourhood.conj_9_2_glued_e_original_compat",
+      "Digraph.migration.directed_neighbourhood.conj_9_2_glued_original_compat",
+      "Digraph.migration.directed_neighbourhood.cv_eulerian_original_compat",
+      "Digraph.migration.directed_neighbourhood.cv_indeg_compat",
+      "Digraph.migration.directed_neighbourhood.decomposing_an_even_tournament_in_directed_paths_statement_compat",
+      "Digraph.migration.directed_neighbourhood.diregular_compat",
+      "Digraph.migration.directed_neighbourhood.hamilton_cycle_in_small_d_diregular_graphs_statement_compat",
+      "Digraph.migration.directed_neighbourhood.indeg_compat",
+      "Digraph.migration.directed_neighbourhood.jackson_hamilton_small_diregular_statement_compat",
+      "Digraph.migration.directed_neighbourhood.least_mader_delta_zero_compat",
+      "Digraph.migration.directed_neighbourhood.long_dicycle_diregular_statement_compat",
+      "Digraph.migration.directed_neighbourhood.mader_delta0_transitive_tournament_statement_compat",
+      "Digraph.migration.directed_neighbourhood.mader_delta0_transitive_tournament_statement_original_compat",
+      "Digraph.migration.directed_neighbourhood.mader_delta_zero_bound_compat",
+      "Digraph.migration.directed_neighbourhood.mader_delta_zero_bound_original_compat",
+      "Digraph.migration.directed_neighbourhood.majority_3col_eulerian_statement_original_compat",
+      "Digraph.migration.directed_neighbourhood.min_semidegree_at_least_compat",
+      "Digraph.migration.directed_neighbourhood.min_semidegree_half_compat",
+      "Digraph.migration.directed_neighbourhood.orientation_C4_eulerian_avoidable_statement_original_compat",
+      "Digraph.migration.directed_neighbourhood.realises_E_original_compat",
+      "Digraph.migration.directed_neighbourhood.realises_W_original_compat",
+      "Digraph.migration.directed_neighbourhood.semidegree_oriented_paths_statement_compat",
+      "Digraph.migration.directed_neighbourhood.seymour_second_neighbourhood_statement_compat",
+      "Digraph.migration.directed_neighbourhood.stein_oriented_paths_strict_semidegree_statement_compat",
+      "Digraph.migration.directed_neighbourhood.x107_total_degree_at_most_compat",
+      "Digraph.migration.directed_neighbourhood.x17_min_semidegree_strict_half_compat",
+      "Digraph.migration.directed_neighbourhood.x221_eulerian_avoidable_original_compat",
+      "Digraph.migration.directed_neighbourhood.x221_eulerian_original_compat"
+    ],
+    "api_theorems": [
+      "Digraph.foundations.neighbourhoods.NoutE",
+      "Digraph.foundations.neighbourhoods.NinE",
+      "Digraph.foundations.neighbourhoods.NoutP",
+      "Digraph.foundations.neighbourhoods.NinP",
+      "Digraph.foundations.neighbourhoods.Nout2E",
+      "Digraph.foundations.neighbourhoods.Nout2P",
+      "Digraph.foundations.neighbourhoods.Nout2I",
+      "Digraph.foundations.neighbourhoods.Nout2_neq",
+      "Digraph.foundations.neighbourhoods.self_notin_Nout2",
+      "Digraph.foundations.neighbourhoods.Nout2_notin_Nout",
+      "Digraph.foundations.neighbourhoods.arc_notin_Nout2",
+      "Digraph.foundations.neighbourhoods.disjoint_Nout2_Nout",
+      "Digraph.foundations.neighbourhoods.Nout2_subC",
+      "Digraph.foundations.neighbourhoods.loop_Nout_Nin",
+      "Digraph.foundations.neighbourhoods.digon_Nout_Nin",
+      "Digraph.foundations.neighbourhoods.digon_notin_Nout2",
+      "Digraph.foundations.neighbourhoods.arcless_Nout",
+      "Digraph.foundations.neighbourhoods.arcless_Nin",
+      "Digraph.foundations.neighbourhoods.arcless_Nout2",
+      "Digraph.foundations.neighbourhoods.Nout_converse",
+      "Digraph.foundations.neighbourhoods.Nin_converse",
+      "Digraph.foundations.degree_balance.indeg_NinE",
+      "Digraph.foundations.degree_balance.outdeg_NoutE",
+      "Digraph.foundations.degree_balance.diregularP",
+      "Digraph.foundations.degree_balance.diregular_vertex",
+      "Digraph.foundations.degree_balance.diregular_balanced",
+      "Digraph.foundations.degree_balance.diregular_card0",
+      "Digraph.foundations.degree_balance.diregular_arcless",
+      "Digraph.foundations.degree_balance.diregular_converse",
+      "Digraph.foundations.degree_balance.tournament_N_outE",
+      "Digraph.foundations.degree_balance.tournament_N_inE",
+      "Digraph.foundations.degree_balance.tournament_outdegE",
+      "Digraph.foundations.degree_balance.tournament_indegE",
+      "Digraph.foundations.degree_balance.tournament_indeg_outdeg",
+      "Digraph.migration.directed_neighbourhood.diregular_ascription"
+    ],
+    "public_client": "digraph-theory/theories/examples/neighbourhoods.v",
+    "legacy_baseline": "761e776c64d251a0a9af04a40628766d012aff36",
+    "migration_report": "meta/migration_reports/directed_neighbourhood.md",
+    "migration_spec": "meta/migration_reports/directed_neighbourhood.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_D15.md",
+    "foundation_fidelity": "meta/foundation_fidelity/directed-neighbourhood.json",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.digraph",
+        "GraphTheory.core.sgraph",
+        "Digraph.core.digraph",
+        "Digraph.core.oriented",
+        "Digraph.core.tournament",
+        "Digraph.foundations.degree_balance",
+        "GTBase.orientations",
+        "Chromatic.foundations.alon_tarsi",
+        "mathcomp.boot.finset"
+      ],
+      "result": "no-direct-candidate",
+      "candidate": "GraphTheory.core.digraph.open_neigh",
+      "note": "coq-graph-theory has open_neigh u := [set v | u -- v] (N(u)) and closed_neigh on its diGraph record, but no in-neighbourhood, no second neighbourhood and no in- or out-degree (B16's audit). Digraph's HB carrier reaches it only through to_GT D := RelType (@arc D), a Definition, not a coercion; open_neigh (to_GT D) u = Nout u is a bridge, never a canonical body. The Digraph core has outdeg (core/oriented.v) and B16 owns indeg; this family adds the focused public neighbourhoods module (prelude and core/digraph only) and degree_balance.diregular, and aliases the conjecture-local copies.",
+      "audited_at": "2026-10-09"
+    }
+  }
+}
