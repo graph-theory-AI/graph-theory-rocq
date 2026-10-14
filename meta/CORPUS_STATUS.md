@@ -56,7 +56,7 @@
 
 ## Foundation fidelity registry
 
-- **298 audited primitives**: 284 faithful · 12 lightweight · 2 broken.
+- **305 audited primitives**: 291 faithful · 12 lightweight · 2 broken.
 - Registry: module contracts in `meta/foundation_fidelity.json` and family verdicts in `meta/foundation_fidelity/`; validate declarations and evidence names with `python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is never inferred from compilation.
 
 | verdict | primitive | misuse watch |
@@ -124,9 +124,9 @@ Area-local foundations (each area builds these on top of `base`):
 | graph-theory-misc | `ambient_shallow_minors`, `complexity`, `cops` |
 | hypergraph-theory | `hedgehog`, `hypergraph`, `hypergraph_copies`, `hypergraph_forcing`, `hypergraph_matchings`, `hypergraph_ramsey`, `hypergraph_regularity` |
 | infinite-graph-theory | `igraph`, `regularity` |
-| minor-theory | `containment`, `hole_containments`, `minor_dec`, `poset_unavoidability`, `ramsey_small`, `shallow_minors`, `width_params` |
+| minor-theory | `containment`, `hole_containments`, `minor_dec`, `poset_unavoidability`, `prism_configurations`, `ramsey_small`, `shallow_minors`, `width_params` |
 | packing-theory | `edge_families`, `edge_partitions`, `fair_matching`, `matching`, `tree_leaves` |
-| reconstruction-theory | `kelly` |
+| reconstruction-theory | `decks`, `kelly` |
 | spectral-graph-theory | `spectral`, `strongly_regular_matrix` |
 | topological-graph-theory | `crossing`, `crossing_genus`, `embedding`, `geometry`, `girth`, `signed_embedding` |
 

@@ -1,0 +1,431 @@
+{
+  "family": "deletion-decks",
+  "canonical_name": "Reconstruction.foundations.decks.same_deck",
+  "canonical_short_name": "same_deck",
+  "relation": "definitional equality: U11 vdel_card, same_deck, reconstructible, same_edge_deck and edge_reconstructible are the public Reconstruction.foundations.decks definitions (the same bodies; the edge card is A4 canonical del_edge_set G [set e], of which U11 sdel_edge G e is a transparent alias), so every frozen = live certificate is a kernel conversion; the bijection-of-index-sets (multiplicity) model and every statement guard and the Whitney conditional premise are unchanged; the deepest Originals of the edge row and the two Whitney rows are A4 and A25 raw frozen rows, certified by their own certificates.",
+  "baseline_commit": "3bdfdae32824d4762ba8105367f7858a706a02e2",
+  "namespaces": {
+    "reconstruction-theory": "Reconstruction"
+  },
+  "certificate_files": [
+    "reconstruction-theory/theories/foundations/decks.v",
+    "reconstruction-theory/theories/migration/deletion_decks.v",
+    "reconstruction-theory/theories/migration/sdel_edge.v",
+    "reconstruction-theory/theories/migration/simple_line_graphs.v"
+  ],
+  "extra_certificates": [
+    "Reconstruction.foundations.decks.vdel_cardE",
+    "Reconstruction.foundations.decks.card_vdel_card",
+    "Reconstruction.foundations.decks.same_deck_refl",
+    "Reconstruction.foundations.decks.same_deck_card",
+    "Reconstruction.foundations.decks.same_edge_deck_refl",
+    "Reconstruction.foundations.decks.same_edge_deck_card_edge",
+    "Reconstruction.foundations.decks.edgeless_same_edge_deck",
+    "Reconstruction.migration.deletion_decks.vdel_card_canonical",
+    "Reconstruction.migration.deletion_decks.same_deck_canonical",
+    "Reconstruction.migration.deletion_decks.reconstructible_canonical",
+    "Reconstruction.migration.deletion_decks.same_edge_deck_canonical",
+    "Reconstruction.migration.deletion_decks.edge_reconstructible_canonical",
+    "Reconstruction.migration.deletion_decks.reconstruction_statement_canonical",
+    "Reconstruction.migration.deletion_decks.edge_reconstruction_statement_canonical",
+    "Reconstruction.migration.deletion_decks.whitney_line_inversion_premise_canonical",
+    "Reconstruction.migration.deletion_decks.external_whitney_line_inversion_statement_canonical"
+  ],
+  "additional_statements": [
+    "Reconstruction.foundations.kelly.whitney_line_inversion_premise"
+  ],
+  "summary": [
+    "deletion-decks (D1), one family: the undirected vertex- and edge-deletion decks of U11 (vdel_card, same_deck, reconstructible, same_edge_deck, edge_reconstructible) become public in the new module Reconstruction.foundations.decks with the same bodies; U11 keeps its five names as transparent aliases (decks required without Import), its statements, doc blocks and guards unchanged.",
+    "Baseline: accepted coordinator 3bdfdae (tree ade432af), which contains A4 (5ec0f33) and A25 with the C19 composition (ff7bd3b).",
+    "Rows: reconstruction_statement (opg; three-vertex guards on G and H, kept although redundant), edge_reconstruction_statement (opg; four-edge guard on G only), Kelly whitney_line_inversion_premise and implications_U11 external_whitney_line_inversion_statement (non-corpus; four-edge guard and same-edge-deck hypothesis; explicit conditional premises, unproved).",
+    "Deepest Originals: the vertex row is its own (chain unchanged since 3b2638f, upstream closure only); the edge row is A4 U11Legacy (raw edge deck at 9e03072) and the two Whitney rows are A25 KellyOriginal / ImplicationsU11Original (A4 raw edge deck and A25 raw line graph at 9e03072), certified through A4/A25 own certificates; the A4 and A25 certificate files are unchanged and compile.",
+    "Distinct, unchanged: Digraph P9 same_deck (directed switching deck, deferred separate family), U11 Seidel switching deck, X21 ell-decks; kelly's public boundary was extracted by the separate D2 change (theories/migration/kelly_public_boundary.v): kelly imports no conjecture module and binds the canonical decks, del_edge_set and simple_line_graph, every name, Arguments and type (by kernel ascription) kept. Proof-only adaptation: two rewrite lines of implications_U11.same_deck_equiv_x21_same_l_deck now use decks.vdel_cardE (the same equation as its vdel_card_setC1, for the canonical name); no statement or type changes."
+  ],
+  "known_stale_snapshots": {
+    "reconstruction-theory/theories/migration/simple_line_graphs.v#KellyLegacy.whitney_line_inversion_premise": "Earlier-family snapshot (A25, simple-line-graph): A25 froze only the line construction in Kelly's Whitney premise and kept the edge deck live by design, so this copy applies the live same_edge_deck, which since deletion-decks is the transparent alias of Reconstruction.foundations.decks.same_edge_deck (the same body, edge card del_edge_set G [set e] = sdel_edge G e). The complete row with every migrated helper at its original body is A25's own KellyOriginal.whitney_line_inversion_premise (A4 raw edge deck, A25 raw line graph), certified by Reconstruction.migration.simple_line_graphs.whitney_line_inversion_premise_original_compat; the current row is frozen here as KellyLegacy.whitney_line_inversion_premise.",
+    "reconstruction-theory/theories/migration/simple_line_graphs.v#ImplicationsU11Legacy.external_whitney_line_inversion_statement": "Earlier-family snapshot (A25, simple-line-graph): A25 froze only the line construction in the non-corpus external Whitney statement and kept the edge deck live by design, so this copy applies the live same_edge_deck, which since deletion-decks is the transparent alias of Reconstruction.foundations.decks.same_edge_deck. The complete row with every migrated helper at its original body is A25's own ImplicationsU11Original.external_whitney_line_inversion_statement, certified by Reconstruction.migration.simple_line_graphs.external_whitney_line_inversion_statement_original_compat; the current row is frozen here as ImplicationsU11Legacy.external_whitney_line_inversion_statement."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
+      "name": "reconstructible",
+      "note": "U11 groundings (cards, reflexivity, order/edge counts, reconstructible_self) stated over the U11 aliases; statements unchanged and compile unchanged."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
+      "name": "same_deck",
+      "note": "U11 groundings (cards, reflexivity, order/edge counts, reconstructible_self) stated over the U11 aliases; statements unchanged and compile unchanged."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
+      "name": "same_edge_deck",
+      "note": "U11 groundings (cards, reflexivity, order/edge counts, reconstructible_self) stated over the U11 aliases; statements unchanged and compile unchanged."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/grounding_U11.v",
+      "name": "vdel_card",
+      "note": "U11 groundings (cards, reflexivity, order/edge counts, reconstructible_self) stated over the U11 aliases; statements unchanged and compile unchanged."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "edge_reconstruction_statement",
+      "note": "Greenwell implication, external Whitney statement (frozen here as ImplicationsU11Legacy) and the X21 ell-deck bridge; statements unchanged; two proof lines of same_deck_equiv_x21_same_l_deck now rewrite with decks.vdel_cardE (the same equation for the canonical name)."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "reconstruction_statement",
+      "note": "Greenwell implication, external Whitney statement (frozen here as ImplicationsU11Legacy) and the X21 ell-deck bridge; statements unchanged; two proof lines of same_deck_equiv_x21_same_l_deck now rewrite with decks.vdel_cardE (the same equation for the canonical name)."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "same_deck",
+      "note": "Greenwell implication, external Whitney statement (frozen here as ImplicationsU11Legacy) and the X21 ell-deck bridge; statements unchanged; two proof lines of same_deck_equiv_x21_same_l_deck now rewrite with decks.vdel_cardE (the same equation for the canonical name)."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "same_edge_deck",
+      "note": "Greenwell implication, external Whitney statement (frozen here as ImplicationsU11Legacy) and the X21 ell-deck bridge; statements unchanged; two proof lines of same_deck_equiv_x21_same_l_deck now rewrite with decks.vdel_cardE (the same equation for the canonical name)."
+    },
+    {
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "vdel_card",
+      "note": "Greenwell implication, external Whitney statement (frozen here as ImplicationsU11Legacy) and the X21 ell-deck bridge; statements unchanged; two proof lines of same_deck_equiv_x21_same_l_deck now rewrite with decks.vdel_cardE (the same equation for the canonical name)."
+    },
+    {
+      "path": "reconstruction-theory/theories/examples/decks.v",
+      "name": "same_deck",
+      "note": "The public-only client: it imports only GTBase.base and Reconstruction.foundations.decks, so these names are the canonical decks names (a lexical match on the shared short names), not U11 consumers."
+    },
+    {
+      "path": "reconstruction-theory/theories/examples/decks.v",
+      "name": "same_edge_deck",
+      "note": "The public-only client: it imports only GTBase.base and Reconstruction.foundations.decks, so these names are the canonical decks names (a lexical match on the shared short names), not U11 consumers."
+    },
+    {
+      "path": "reconstruction-theory/theories/examples/decks.v",
+      "name": "vdel_card",
+      "note": "The public-only client: it imports only GTBase.base and Reconstruction.foundations.decks, so these names are the canonical decks names (a lexical match on the shared short names), not U11 consumers."
+    },
+    {
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "edge_reconstruction_statement",
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
+    },
+    {
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "reconstruction_statement",
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
+    },
+    {
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "same_deck",
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
+    },
+    {
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "same_edge_deck",
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
+    },
+    {
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "vdel_card",
+      "note": "Kelly/Greenwell foundations. Since the separate D2 change kelly imports no conjecture module: its deck tokens bind Reconstruction.foundations.decks directly (the constants the U11 aliases unfold to), its card is del_edge_set and its line graph simple_line_graph (local parsing-only abbreviation sline_graph); all 33 names, Arguments and types (by kernel ascription to the fully qualified pre-D2 types) are kept, certified in theories/migration/kelly_public_boundary.v. Its Whitney premise is frozen here as KellyLegacy. The report counts these tokens through its same-package provider rule; the actual kernel providers are recorded by the D2 evidence."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Digraph.conjectures.P9.same_deck",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "same_deck",
+      "representation": "directed switching deck: digraph carrier, deleted-vertex cards compared modulo arc-reversal switching (sw_iso)",
+      "note": "Same short name only; kept distinct by master decision (later separate directed-deck family). Unchanged."
+    }
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Reconstruction.conjectures.U11.vdel_card",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "vdel_card",
+      "frozen_path": "reconstruction-theory/theories/migration/deletion_decks.v",
+      "frozen": "Legacy.vdel_card",
+      "substitutions": {},
+      "certificate": "Reconstruction.migration.deletion_decks.vdel_card_compat",
+      "live_unfolds_to": "decks.vdel_card v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Reconstruction.conjectures.U11.same_edge_deck",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "same_edge_deck",
+      "frozen_path": "reconstruction-theory/theories/migration/deletion_decks.v",
+      "frozen": "Legacy.same_edge_deck",
+      "substitutions": {},
+      "certificate": "Reconstruction.migration.deletion_decks.same_edge_deck_compat",
+      "live_unfolds_to": "decks.same_edge_deck G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "Reconstruction.conjectures.U11.edge_reconstructible",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "edge_reconstructible",
+      "frozen_path": "reconstruction-theory/theories/migration/deletion_decks.v",
+      "frozen": "Legacy.edge_reconstructible",
+      "substitutions": {
+        "same_edge_deck": "Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.deletion_decks.edge_reconstructible_compat",
+      "live_unfolds_to": "decks.edge_reconstructible G"
+    },
+    {
+      "kind": "source",
+      "qualified": "Reconstruction.conjectures.U11.same_deck",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "same_deck",
+      "frozen_path": "reconstruction-theory/theories/migration/deletion_decks.v",
+      "frozen": "Legacy.same_deck",
+      "substitutions": {
+        "vdel_card": "Legacy.vdel_card"
+      },
+      "certificate": "Reconstruction.migration.deletion_decks.same_deck_compat",
+      "live_unfolds_to": "decks.same_deck G H"
+    },
+    {
+      "kind": "source",
+      "qualified": "Reconstruction.conjectures.U11.reconstructible",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "reconstructible",
+      "frozen_path": "reconstruction-theory/theories/migration/deletion_decks.v",
+      "frozen": "Legacy.reconstructible",
+      "substitutions": {
+        "same_deck": "Legacy.same_deck"
+      },
+      "certificate": "Reconstruction.migration.deletion_decks.reconstructible_compat",
+      "live_unfolds_to": "decks.reconstructible G"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Reconstruction.conjectures.U11.reconstruction_statement",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "reconstruction_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/deletion_decks.v",
+      "frozen": "U11Legacy.reconstruction_statement",
+      "substitutions": {
+        "same_deck": "Legacy.same_deck"
+      },
+      "certificate": "Reconstruction.migration.deletion_decks.reconstruction_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Reconstruction.conjectures.U11.edge_reconstruction_statement",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "edge_reconstruction_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/deletion_decks.v",
+      "frozen": "U11Legacy.edge_reconstruction_statement",
+      "substitutions": {
+        "edge_reconstructible": "Legacy.edge_reconstructible"
+      },
+      "certificate": "Reconstruction.migration.deletion_decks.edge_reconstruction_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Reconstruction.foundations.kelly.whitney_line_inversion_premise",
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "whitney_line_inversion_premise",
+      "frozen_path": "reconstruction-theory/theories/migration/deletion_decks.v",
+      "frozen": "KellyLegacy.whitney_line_inversion_premise",
+      "substitutions": {
+        "same_edge_deck": "Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.deletion_decks.whitney_line_inversion_premise_compat",
+      "non_corpus": true
+    },
+    {
+      "kind": "statement",
+      "qualified": "Reconstruction.conjectures.implications_U11.external_whitney_line_inversion_statement",
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "external_whitney_line_inversion_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/deletion_decks.v",
+      "frozen": "ImplicationsU11Legacy.external_whitney_line_inversion_statement",
+      "substitutions": {
+        "same_edge_deck": "Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.deletion_decks.external_whitney_line_inversion_statement_compat",
+      "non_corpus": true
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sde_rel",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sde_rel",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "Legacy.sde_rel",
+      "substitutions": {},
+      "certificate": "Reconstruction.migration.sdel_edge.sde_rel_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sde_sym",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sde_sym",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "ProofsLegacy.sde_sym",
+      "substitutions": {
+        "sde_rel": "(Legacy.sde_rel e)"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.sdel_edge_proofs_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sde_irrefl",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sde_irrefl",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "ProofsLegacy.sde_irrefl",
+      "substitutions": {
+        "sde_rel": "(Legacy.sde_rel e)"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.sdel_edge_proofs_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sdel_edge",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sdel_edge",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "GraphLegacy.sdel_edge",
+      "substitutions": {
+        "sde_sym": "(ProofsLegacy.sde_sym e)",
+        "sde_irrefl": "(ProofsLegacy.sde_irrefl e)"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.sdel_edge_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.same_edge_deck",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "same_edge_deck",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "U11Legacy.same_edge_deck",
+      "substitutions": {
+        "sdel_edge": "GraphLegacy.sdel_edge"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.same_edge_deck_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.edge_reconstructible",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "edge_reconstructible",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "U11Legacy.edge_reconstructible",
+      "substitutions": {
+        "same_edge_deck": "U11Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.edge_reconstructible_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sline_rel",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sline_rel",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "Legacy.sline_rel",
+      "substitutions": {},
+      "certificate": "Reconstruction.migration.simple_line_graphs.sline_rel_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sline_sym",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sline_sym",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "ProofsLegacy.sline_sym",
+      "substitutions": {
+        "sline_rel": "(@Legacy.sline_rel G)"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.sline_proofs_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sline_irrefl",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sline_irrefl",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "ProofsLegacy.sline_irrefl",
+      "substitutions": {
+        "sline_rel": "(@Legacy.sline_rel G)"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.sline_proofs_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Reconstruction.conjectures.U11.sline_graph",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "sline_graph",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "GraphLegacy.sline_graph",
+      "substitutions": {
+        "sline_sym": "(@ProofsLegacy.sline_sym G)",
+        "sline_irrefl": "(@ProofsLegacy.sline_irrefl G)"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.sline_graph_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Reconstruction.conjectures.U11.edge_reconstruction_statement",
+      "path": "reconstruction-theory/theories/conjectures/U11.v",
+      "name": "edge_reconstruction_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/sdel_edge.v",
+      "frozen": "U11Legacy.edge_reconstruction_statement",
+      "substitutions": {
+        "edge_reconstructible": "U11Legacy.edge_reconstructible"
+      },
+      "certificate": "Reconstruction.migration.sdel_edge.edge_reconstruction_statement_compat",
+      "corpus": "opg",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Reconstruction.foundations.kelly.whitney_line_inversion_premise",
+      "path": "reconstruction-theory/theories/foundations/kelly.v",
+      "name": "whitney_line_inversion_premise",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "KellyOriginal.whitney_line_inversion_premise",
+      "substitutions": {
+        "sline_graph": "GraphLegacy.sline_graph",
+        "same_edge_deck": "A4.U11Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.whitney_line_inversion_premise_original_compat",
+      "non_corpus": true,
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Reconstruction.conjectures.implications_U11.external_whitney_line_inversion_statement",
+      "path": "reconstruction-theory/theories/conjectures/implications_U11.v",
+      "name": "external_whitney_line_inversion_statement",
+      "frozen_path": "reconstruction-theory/theories/migration/simple_line_graphs.v",
+      "frozen": "ImplicationsU11Original.external_whitney_line_inversion_statement",
+      "substitutions": {
+        "sline_graph": "GraphLegacy.sline_graph",
+        "same_edge_deck": "A4.U11Legacy.same_edge_deck"
+      },
+      "certificate": "Reconstruction.migration.simple_line_graphs.external_whitney_line_inversion_statement_original_compat",
+      "non_corpus": true,
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    }
+  ]
+}
