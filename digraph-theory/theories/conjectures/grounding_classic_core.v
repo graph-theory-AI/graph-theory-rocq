@@ -70,7 +70,7 @@ Proof.
 have [E D'] := N_out_in_partition v.
 have key : #|[set~ v]| = #|N_out v| + #|N_in v|.
   by rewrite E cardsU (disjoint_setI0 D') cards0 subn0.
-rewrite /indeg outdeg_card_Nout Nin_N_in Nout_N_out addnC.
+rewrite indeg_is_card outdeg_card_Nout Nin_N_in Nout_N_out addnC.
 by rewrite -key cardsC1.
 Qed.
 
@@ -100,13 +100,13 @@ Qed.
 
 Lemma C3_indeg (u : C3) : indeg u = 1%N.
 Proof.
-rewrite /indeg /Nin (_ : [set w | w --> u] = [set u - 1]) ?cards1 //.
+rewrite /indeg /degree_balance.indeg (_ : [set w | w --> u] = [set u - 1]) ?cards1 //.
 apply/setP=> w; rewrite !inE arcC3E.
 by case: u w => -[|[|[|]]] // ? [[|[|[|]]] //].
 Qed.
 
 Lemma C3_diregular1 : diregular C3 1.
-Proof. by apply/forallP=> u; rewrite C3_outdeg C3_indeg !eqxx. Qed.
+Proof. by apply/forallP=> u; rewrite C3_outdeg (C3_indeg u : degree_balance.indeg u = 1%N) !eqxx. Qed.
 
 End C3Degrees.
 
@@ -130,7 +130,7 @@ Qed.
 (** The sink [ord_max] of [TT n.+1] has in-degree [n]. *)
 Lemma TT_has_sink : indeg (ord_max : TT n.+1) = n.
 Proof.
-rewrite /indeg /Nin (_ : [set w | w --> (ord_max : TT n.+1)] = [set~ ord_max]).
+rewrite /indeg /degree_balance.indeg (_ : [set w | w --> (ord_max : TT n.+1)] = [set~ ord_max]).
   by rewrite cardsC1 card_TT.
 apply/setP=> w; rewrite !inE arcTTE /=.
 have wle : (w <= n)%N by have := ltn_ord w; rewrite ltnS.

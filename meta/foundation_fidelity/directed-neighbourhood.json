@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "family": "directed-neighbourhood",
+  "modules": {
+    "Digraph.foundations.neighbourhoods": {
+      "path": "digraph-theory/theories/foundations/neighbourhoods.v",
+      "overrides": {
+        "Nout": {
+          "verdict": "FAITHFUL",
+          "note": "Nout v: the out-neighbourhood [set w | v --> w] of a vertex of a finite digraph; a loop makes v its own out-neighbour; no looplessness, connectivity or inhabited-carrier premise; outdeg v = #|Nout v| by conversion; the converse digraph swaps it with Nin."
+        },
+        "Nin": {
+          "verdict": "FAITHFUL",
+          "note": "Nin v: the in-neighbourhood [set u | u --> v]; a loop makes v its own in-neighbour; B16's indeg v = #|Nin v| by conversion; the converse digraph swaps it with Nout."
+        },
+        "Nout2": {
+          "verdict": "FAITHFUL",
+          "note": "Nout2 v: the second out-neighbourhood, the vertices w at directed distance exactly two: w != v, w is not an out-neighbour of v, and some out-neighbour u of v has u --> w. Both exclusions are kept even when a loop or a digon gives a walk of length two back to v or to an out-neighbour (Nout2_neq, Nout2_notin_Nout, digon_notin_Nout2)."
+        }
+      },
+      "machine_evidence": [
+        "NoutE",
+        "NinE",
+        "NoutP",
+        "NinP",
+        "Nout2E",
+        "Nout2P",
+        "Nout2I",
+        "Nout2_neq",
+        "self_notin_Nout2",
+        "Nout2_notin_Nout",
+        "arc_notin_Nout2",
+        "disjoint_Nout2_Nout",
+        "Nout2_subC",
+        "loop_Nout_Nin",
+        "digon_Nout_Nin",
+        "digon_notin_Nout2",
+        "arcless_Nout",
+        "arcless_Nin",
+        "arcless_Nout2",
+        "Nout_converse",
+        "Nin_converse"
+      ]
+    },
+    "Digraph.foundations.degree_balance": {
+      "path": "digraph-theory/theories/foundations/degree_balance.v",
+      "overrides": {
+        "diregular": {
+          "verdict": "FAITHFUL",
+          "note": "diregular D d: the Boolean [forall v : D, (outdeg v == d) && (indeg v == d)], out-degree conjunct first as in its source; vacuous on the empty carrier for every d (diregular_card0); a loop counts once on each side; an arcless digraph is 0-diregular; implies balanced (diregular_balanced); invariant under the converse."
+        }
+      },
+      "machine_evidence": [
+        "indeg_NinE",
+        "outdeg_NoutE",
+        "diregularP",
+        "diregular_vertex",
+        "diregular_balanced",
+        "diregular_card0",
+        "diregular_arcless",
+        "diregular_converse",
+        "tournament_N_outE",
+        "tournament_N_inE",
+        "tournament_outdegE",
+        "tournament_indegE",
+        "tournament_indeg_outdeg"
+      ]
+    }
+  }
+}

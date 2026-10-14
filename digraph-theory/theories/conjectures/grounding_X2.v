@@ -110,7 +110,7 @@ Lemma x2_delta0_hyps_nonvacuous (m : nat) :
   exists D : diGraphType, (0 < #|D|)%N /\ min_semidegree_at_least D m.
 Proof.
 exists (dense_dg m : diGraphType); split; first by rewrite card_dense.
-by move=> v; rewrite /indeg /Nin outdeg_dense indeg_dense.
+by move=> v; rewrite /indeg /degree_balance.indeg outdeg_dense indeg_dense.
 Qed.
 
 Lemma x2_delta_plus_hyps_nonvacuous (m : nat) :
