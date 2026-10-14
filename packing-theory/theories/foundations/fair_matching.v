@@ -472,9 +472,9 @@ From GTBase Require Export base.
 From GraphTheory Require Import preliminaries digraph sgraph connectivity.
 From Packing.foundations Require Import edge_families.
 From Stdlib Require Import Lia.
-Set SsrOldRewriteGoalsOrder.
 From ClassicalLemmas Require Import necklace.necklace konig.paths2
                                     konig.line_colouring.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
