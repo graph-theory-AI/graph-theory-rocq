@@ -23,6 +23,7 @@
 From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude digraph.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
