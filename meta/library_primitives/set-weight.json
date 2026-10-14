@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "family": "set-weight",
+  "primitive": {
+    "canonical_name": "GraphTheory.core.dom.weight_set",
+    "owner": "upstream",
+    "status": "deprecated",
+    "fidelity": "FAITHFUL",
+    "normalized_names": [
+      "weight",
+      "gold_total"
+    ],
+    "source_definitions": [
+      "GTMisc.conjectures.U13.gold_total",
+      "GTMisc.conjectures.X128.x128_weight",
+      "Minor.conjectures.X190.x190_weight",
+      "Minor.conjectures.X199.x199_weight"
+    ],
+    "consumers_remaining": 4,
+    "relation": "the natural weight of a finite set, sum of the supplied natural weights of its members, with upstream GraphTheory.core.dom.weight_set w S := \\sum_(v in S) w v canonical: GTMisc X128 x128_weight, Minor X190 x190_weight, Minor X199 x199_weight and GTMisc U13 gold_total are its body at T := G (the same binder and argument order) and are transparent aliases of it, related by conversion. Any finite carrier, any natural weights (zero weights included) and any set (the empty set weighs 0); no positivity hypothesis. GTBase.set_weights bridges it to the event and total weights fg_event_weight w [in S] and fg_total_weight w of GTBase.finite_graph, whose ratio predicates keep their own positive-total-weight guards.",
+    "semantic_classes": {
+      "finite-set-natural-sum": {
+        "members": [
+          "GTMisc.conjectures.U13.gold_total",
+          "GTMisc.conjectures.X128.x128_weight",
+          "Minor.conjectures.X190.x190_weight",
+          "Minor.conjectures.X199.x199_weight"
+        ],
+        "count": 4,
+        "state": "migrated-alias",
+        "verdict": "equivalent",
+        "certificates": [
+          "GTMisc.migration.set_weights.gold_total_compat",
+          "GTMisc.migration.set_weights.x128_weight_compat",
+          "Minor.migration.set_weights.x190_weight_compat",
+          "Minor.migration.set_weights.x199_weight_compat"
+        ],
+        "note": "(G : sgraph) (w : G -> nat) (S : {set G}) : nat := \\sum_(v in S) w v, the upstream body at T := G; definitional equality (conversion), zero weights and empty sets allowed"
+      }
+    },
+    "distinct_variants": {
+      "Chromatic.conjectures.X187.x187_total_request_weight": "a sum of two request-set weights (ReqEq and ReqNeq), not one set weight; X187's request vocabulary",
+      "Chromatic.conjectures.X187.x187_satisfied_request_weight": "conditional sums over the satisfied requests of a 3-colouring; X187's request vocabulary",
+      "Extremal.conjectures.D2tur.tree_weight": "a binary edge weight w : V -> V -> nat summed over a set of ordered pairs; a different interface",
+      "Digraph.conjectures.X216.x216_cycle_weight": "rational arc weights summed along a directed cycle sequence; not a set weight",
+      "Extremal.conjectures.D2chr.match_weight": "an integer product of signs over a perfect matching; not a set weight",
+      "Extremal.conjectures.D2chr.coloring_weight": "an integer sum of matching weights over colour-compatible matchings; not a set weight"
+    },
+    "compatibility_theorems": [
+      "GTMisc.migration.set_weights.a_gold_grabbing_game_statement_compat",
+      "GTMisc.migration.set_weights.dvorak_cheap_balanced_separator_bounded_expansion_statement_compat",
+      "GTMisc.migration.set_weights.dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat",
+      "GTMisc.migration.set_weights.gold_total_compat",
+      "GTMisc.migration.set_weights.leaf_game_solution_compat",
+      "GTMisc.migration.set_weights.x128_cheap_bal_sep_compat",
+      "GTMisc.migration.set_weights.x128_weight_compat",
+      "Minor.migration.set_weights.strongly_sublinear_separator_constant_M_statement_compat",
+      "Minor.migration.set_weights.thin_overlay_without_bounded_degree_statement_compat",
+      "Minor.migration.set_weights.x190_strongly_sublinear_separator_class_compat",
+      "Minor.migration.set_weights.x190_weight_compat",
+      "Minor.migration.set_weights.x199_weight_compat",
+      "Minor.migration.set_weights.x199_weighted_balanced_separator_compat",
+      "Minor.migration.set_weights.x199_weighted_balanced_separator_with_constant_M_compat"
+    ],
+    "api_theorems": [
+      "GTBase.set_weights.weight_set_event",
+      "GTBase.set_weights.weight_setT",
+      "GTBase.set_weights.weight_set0",
+      "GTBase.set_weights.weight_set1",
+      "GTBase.set_weights.weight_setU",
+      "GTBase.set_weights.weight_setC",
+      "GTBase.set_weights.weight_set_subset",
+      "GTBase.set_weights.weight_set_le_total",
+      "GTBase.set_weights.weight_set_eq0",
+      "GTBase.set_weights.weight_set_const",
+      "GTBase.set_weights.eq_weight_set"
+    ],
+    "public_client": "base/theories/examples/set_weights.v",
+    "legacy_baseline": "3bdfdae32824d4762ba8105367f7858a706a02e2",
+    "migration_report": "meta/migration_reports/set_weights.md",
+    "migration_spec": "meta/migration_reports/set_weights.spec.json",
+    "migration_record": "meta/LIBRARY_MIGRATION_A30.md",
+    "upstream_audit": {
+      "searched_modules": [
+        "GraphTheory.core.dom (weight_set, the exact body; wset0, minweight_minset, maxweight_maxset and arg_minset assume positive weights; gamma_w/alpha_w/IR_w)",
+        "GraphTheory 0.9.7 (no other weight or cost definition; no sources installed, audited by kernel Search)",
+        "MathComp bigop/finset (big_set0, big_set1, big_setID, bigU, sum_nat_const, sum_nat_eq0, eq_bigl, eq_bigr)",
+        "GTBase.finite_graph (fg_event_weight over a predicate, fg_total_weight; ratio predicates with positive-total-weight guards)"
+      ],
+      "result": "upstream-canonical",
+      "candidate": "GraphTheory.core.dom.weight_set w S",
+      "note": "Upstream weight_set is exactly the four local bodies at T := G and is re-exported by GTBase.base; no summation primitive is added. GTBase.set_weights gives positivity-free views and the finite-set coercion bridge to fg_event_weight w [in S]. Evidence: coordination/evidence/resume-2026-10-06/A30-set-weights-family-summary-by-arthur.md and the A30 packet.",
+      "audited_at": "2026-10-08"
+    },
+    "reviewed_by": null
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "family": "edge-copies",
+  "modules": {
+    "GTBase.edge_copies": {
+      "path": "base/theories/edge_copies.v",
+      "overrides": {
+        "edge_image": {
+          "verdict": "FAITHFUL",
+          "note": "The 2-element vertex sets [set f x; f y] over adjacent pattern pairs; no host-edge, injectivity or tree condition."
+        },
+        "injective_edge_image": {
+          "verdict": "FAITHFUL",
+          "note": "X47 copy: some injective f with F its image; image edges need not be host edges."
+        },
+        "embedded_edge_copy": {
+          "verdict": "FAITHFUL",
+          "note": "X212 copy: injective, adjacency-preserving, A its image (hence inside E(G))."
+        },
+        "edge_decomposition_by_equal_parts": {
+          "verdict": "FAITHFUL",
+          "note": "X47 decomposition: parts are injective images inside E(G), cover E(G), and are equal when they share an edge; repeated parts allowed; no pattern or part guard."
+        },
+        "edge_decomposition_exact": {
+          "verdict": "FAITHFUL",
+          "note": "X212 decomposition: members are embedded copies and every 2-element set is counted exactly as often as it is a host edge; repeated nonempty parts excluded, repeated empty parts allowed."
+        }
+      },
+      "machine_evidence": [
+        "edge_imageE",
+        "injective_edge_image_nested",
+        "edge_image_nested",
+        "edge_image_id",
+        "edge_image_sub",
+        "embedded_edge_copy_sub",
+        "injective_edge_image_contained",
+        "embedded_edge_copy_self",
+        "edge_decomposition_equal_parts_exact",
+        "edge_decomposition_exact_nil",
+        "edge_decomposition_equal_parts_nil",
+        "edge_decomposition_exact_self",
+        "edge_decomposition_exact_double_not",
+        "tree_has_edge"
+      ]
+    }
+  }
+}

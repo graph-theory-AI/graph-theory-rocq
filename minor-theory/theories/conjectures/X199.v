@@ -8,8 +8,11 @@ Unset Printing Implicit Defensive.
 
 (** ** Local X199 vocabulary ***********************************************)
 
+(** Since the A30 library migration [x199_weight] is a transparent alias of the upstream finite-set weight
+    [GraphTheory.dom.weight_set] (the same body); the original is frozen and certified in
+    theories/migration/set_weights.v. *)
 Definition x199_weight (G : sgraph) (rho : G -> nat) (S : {set G}) : nat :=
-  \sum_(v in S) rho v.
+  weight_set rho S.
 
 Definition x199_weighted_balanced_separator
     (G : sgraph) (rho : G -> nat) (S M : {set G}) : Prop :=

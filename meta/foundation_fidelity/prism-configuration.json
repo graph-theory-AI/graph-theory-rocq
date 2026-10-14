@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "family": "prism-configuration",
+  "modules": {
+    "Minor.foundations.prism_configurations": {
+      "path": "minor-theory/theories/foundations/prism_configurations.v",
+      "overrides": {
+        "prism_base": {
+          "verdict": "FAITHFUL",
+          "note": "The 3-prism: two triangles joined by a perfect matching, given by the explicit nine-edge list of el_graph 6."
+        },
+        "prism_configuration": {
+          "verdict": "FAITHFUL",
+          "note": "H IS a prism (three-path configuration triangle-triangle): a spanning and exact subdivision of prism_base whose six triangle edges stay unsubdivided. Whole-host predicate, no guard."
+        }
+      },
+      "machine_evidence": [
+        "prism_base_card",
+        "prism_base_same_side",
+        "prism_base_cross",
+        "prism_configuration_base",
+        "prism_configuration_is_subdivision",
+        "prism_configuration_card",
+        "prism_configuration_side_edge",
+        "prism_configuration_triangles"
+      ]
+    }
+  }
+}

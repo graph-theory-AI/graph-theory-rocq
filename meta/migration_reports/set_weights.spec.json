@@ -1,0 +1,266 @@
+{
+  "family": "set-weight",
+  "canonical_name": "GraphTheory.core.dom.weight_set",
+  "canonical_short_name": "weight_set",
+  "relation": "the natural weight of a finite set, sum of the supplied natural weights of its members, with upstream GraphTheory.core.dom.weight_set w S := \\sum_(v in S) w v canonical: GTMisc X128 x128_weight, Minor X190 x190_weight, Minor X199 x199_weight and GTMisc U13 gold_total are its body at T := G (the same binder and argument order) and are transparent aliases of it, related by conversion. Any finite carrier, any natural weights (zero weights included) and any set (the empty set weighs 0); no positivity hypothesis. GTBase.set_weights bridges it to the event and total weights fg_event_weight w [in S] and fg_total_weight w of GTBase.finite_graph, whose ratio predicates keep their own positive-total-weight guards.",
+  "baseline_commit": "3bdfdae32824d4762ba8105367f7858a706a02e2",
+  "namespaces": {
+    "base": "GTBase",
+    "graph-theory-misc": "GTMisc",
+    "minor-theory": "Minor"
+  },
+  "certificate_files": [
+    "base/theories/set_weights.v",
+    "graph-theory-misc/theories/migration/set_weights.v",
+    "minor-theory/theories/migration/set_weights.v"
+  ],
+  "extra_certificates": [
+    "GTBase.set_weights.weight_set_event",
+    "GTBase.set_weights.weight_setT",
+    "GTBase.set_weights.weight_set0",
+    "GTBase.set_weights.weight_set1",
+    "GTBase.set_weights.weight_setU",
+    "GTBase.set_weights.weight_setC",
+    "GTBase.set_weights.weight_set_subset",
+    "GTBase.set_weights.weight_set_le_total",
+    "GTBase.set_weights.weight_set_eq0",
+    "GTBase.set_weights.weight_set_const",
+    "GTBase.set_weights.eq_weight_set"
+  ],
+  "summary": [
+    "Batch A, family A30 (finite-set weights), on the accepted parent P' 3bdfdae. The four local weights GTMisc X128 x128_weight, Minor X190 x190_weight, Minor X199 x199_weight and GTMisc U13 gold_total ((G : sgraph) (w : G -> nat) (S : {set G}) : nat := \\sum_(v in S) w v; U13's alpha-equivalent copy found by the body scan) are upstream GraphTheory.core.dom.weight_set at T := G and become transparent aliases of it. No summation primitive is added: GTBase.set_weights gives positivity-free views (empty set 0, singleton, whole carrier = fg_total_weight, constant weights c * #|S|, disjoint additivity, complement split, monotonicity, zero test, pointwise extensionality) and the finite-set coercion bridge weight_set w S = fg_event_weight w [in S]. Public client base/theories/examples/set_weights.v.",
+    "",
+    "Frozen verbatim at P': the four sources, the separator and game-value chains (x128_cheap_bal_sep, x190_strongly_sublinear_separator_class, x199_weighted_balanced_separator and its constant-M variant, leaf_game_solution) and four complete rows: X128 (p before q, individual-graph expansion hypothesis, 1 <= t, at most q t outliers, t-times cheapness, two-times connected-part balance), X190 (0 < a < b, exponent bound, weighted balance; identity-cover vacuity blocked), X199 (bound before ell >= 1, cardinality bounds, weighted balance; class/quantifier/bound defects blocked) and U13's gold-grabbing game (nonempty tree, Bellman recursion with truncated subtraction). X128's deepest Original combines C16's complete A7+C16 Original expansion chain with the A30 frozen separator and weight. Fourteen certificates, all conversions except the Original's whole-chain composition.",
+    "",
+    "Proof consumers: grounding_U13's gold_total_set0 and leaf_game_E1 add one unfold of the public weight; the X128 history certificates of edge_count, ambient_shallow_minors and ambient_grad and the rest of the reverse closure recompile byte-exact. Separator contracts, polynomial evaluation and graph encodings stay distinct."
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_U13.v",
+      "name": "gold_total",
+      "note": "Grounding consumers: gold_total_set0 and leaf_game_E1 add one unfold of the public weight (/weight_set) before big_set0 / big_set1; headers unchanged."
+    },
+    {
+      "path": "graph-theory-misc/theories/conjectures/grounding_U13.v",
+      "name": "leaf_game_solution",
+      "note": "Grounding consumer: leaf_game_E1 keeps its header (the game value gold_total g with the lone vertex as move); its proof adds one unfold of the public weight before big_set1."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "Chromatic.conjectures.X187.x187_total_request_weight",
+      "path": "chromatic-theory/theories/conjectures/X187.v",
+      "name": "x187_total_request_weight",
+      "note": "a sum of two request-set weights (ReqEq and ReqNeq), not one set weight; X187's request vocabulary"
+    },
+    {
+      "qualified": "Chromatic.conjectures.X187.x187_satisfied_request_weight",
+      "path": "chromatic-theory/theories/conjectures/X187.v",
+      "name": "x187_satisfied_request_weight",
+      "note": "conditional sums over the satisfied requests of a 3-colouring; X187's request vocabulary"
+    },
+    {
+      "qualified": "Extremal.conjectures.D2tur.tree_weight",
+      "path": "extremal-graph-theory/theories/conjectures/D2tur.v",
+      "name": "tree_weight",
+      "note": "a binary edge weight w : V -> V -> nat summed over a set of ordered pairs; a different interface"
+    },
+    {
+      "qualified": "Digraph.conjectures.X216.x216_cycle_weight",
+      "path": "digraph-theory/theories/conjectures/X216.v",
+      "name": "x216_cycle_weight",
+      "note": "rational arc weights summed along a directed cycle sequence; not a set weight"
+    },
+    {
+      "qualified": "Extremal.conjectures.D2chr.match_weight",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "match_weight",
+      "note": "an integer product of signs over a perfect matching; not a set weight"
+    },
+    {
+      "qualified": "Extremal.conjectures.D2chr.coloring_weight",
+      "path": "extremal-graph-theory/theories/conjectures/D2chr.v",
+      "name": "coloring_weight",
+      "note": "an integer sum of matching weights over colour-compatible matchings; not a set weight"
+    }
+  ],
+  "known_stale_snapshots": {
+    "graph-theory-misc/theories/migration/edge_count.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement": "A7 snapshot: A7 froze this row over its own frozen grad and expansion chain (the A7 frozen count) but kept the live x128_cheap_bal_sep, whose x128_weight is now upstream weight_set (the same body, by conversion). Kept byte-exact; its iff to the live row still compiles. The complete row is GTMisc.migration.set_weights.X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement (A7 count, C16 radius/model/grad and A30 weight/separator frozen), certified by dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_shallow_minors.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement": "C16 current-baseline snapshot: C16 froze this row over its frozen radius/model/grad chain but kept the live x128_cheap_bal_sep, whose x128_weight is now upstream weight_set (the same body, by conversion). Kept byte-exact; its iff to the live row still compiles. The complete row is GTMisc.migration.set_weights.X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement, certified by dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_shallow_minors.v#X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement": "C16 complete A7+C16 Original: its expansion chain is fully frozen, but the row kept the then-live x128_cheap_bal_sep, whose x128_weight is now upstream weight_set (the same body, by conversion). Kept byte-exact; its iff to the live row still compiles. A30 reuses exactly this expansion chain (X128Original.x128_expansion_bounded, as provider ASM) under its frozen separator and weight in GTMisc.migration.set_weights.X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement, certified by dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
+    "graph-theory-misc/theories/migration/ambient_grad.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement": "C23 current snapshot: C23 froze this row over its frozen grad and expansion chain (keeping the live C16 model alias and A7 count) and kept the live x128_cheap_bal_sep, whose x128_weight is now upstream weight_set (the same body, by conversion). Kept byte-exact; its iff to the live row still compiles. The complete row is GTMisc.migration.set_weights.X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement, certified by dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat.",
+    "graph-theory-misc/theories/migration/poly_eval.v#X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement": "A31 current snapshot: A31 froze this object verbatim at db16a76 over its frozen raw evaluator but kept the live x128_cheap_bal_sep of this family, as the source did. It stays byte-exact; the complete history is GTMisc.migration.poly_eval.X128Original (C16's frozen grad chain, A30's frozen separator and the raw evaluator), whose whole-row iff dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat the poly_eval report rechecks."
+  },
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.X128.x128_weight",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_weight",
+      "frozen_path": "graph-theory-misc/theories/migration/set_weights.v",
+      "frozen": "X128Legacy.x128_weight",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.set_weights.x128_weight_compat",
+      "live_unfolds_to": "weight_set rho S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.X128.x128_cheap_bal_sep",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "x128_cheap_bal_sep",
+      "frozen_path": "graph-theory-misc/theories/migration/set_weights.v",
+      "frozen": "X128Legacy.x128_cheap_bal_sep",
+      "substitutions": {
+        "x128_weight": "X128Legacy.x128_weight"
+      },
+      "certificate": "GTMisc.migration.set_weights.x128_cheap_bal_sep_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.X128.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_weights.v",
+      "frozen": "X128Legacy.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "substitutions": {
+        "x128_cheap_bal_sep": "X128Legacy.x128_cheap_bal_sep"
+      },
+      "certificate": "GTMisc.migration.set_weights.dvorak_cheap_balanced_separator_bounded_expansion_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "GTMisc.conjectures.X128.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "path": "graph-theory-misc/theories/conjectures/X128.v",
+      "name": "dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_weights.v",
+      "frozen": "X128Original.dvorak_cheap_balanced_separator_bounded_expansion_statement",
+      "substitutions": {
+        "x128_expansion_bounded": "ASM.X128Original.x128_expansion_bounded",
+        "x128_cheap_bal_sep": "X128Legacy.x128_cheap_bal_sep"
+      },
+      "certificate": "GTMisc.migration.set_weights.dvorak_cheap_balanced_separator_bounded_expansion_statement_original_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "GTMisc.conjectures.U13.gold_total",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "gold_total",
+      "frozen_path": "graph-theory-misc/theories/migration/set_weights.v",
+      "frozen": "U13Legacy.gold_total",
+      "substitutions": {},
+      "certificate": "GTMisc.migration.set_weights.gold_total_compat",
+      "live_unfolds_to": "weight_set g S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "GTMisc.conjectures.U13.leaf_game_solution",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "leaf_game_solution",
+      "frozen_path": "graph-theory-misc/theories/migration/set_weights.v",
+      "frozen": "U13Legacy.leaf_game_solution",
+      "substitutions": {
+        "gold_total": "U13Legacy.gold_total"
+      },
+      "certificate": "GTMisc.migration.set_weights.leaf_game_solution_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "GTMisc.conjectures.U13.a_gold_grabbing_game_statement",
+      "path": "graph-theory-misc/theories/conjectures/U13.v",
+      "name": "a_gold_grabbing_game_statement",
+      "frozen_path": "graph-theory-misc/theories/migration/set_weights.v",
+      "frozen": "U13Legacy.a_gold_grabbing_game_statement",
+      "substitutions": {
+        "leaf_game_solution": "U13Legacy.leaf_game_solution"
+      },
+      "certificate": "GTMisc.migration.set_weights.a_gold_grabbing_game_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X190.x190_weight",
+      "path": "minor-theory/theories/conjectures/X190.v",
+      "name": "x190_weight",
+      "frozen_path": "minor-theory/theories/migration/set_weights.v",
+      "frozen": "X190Legacy.x190_weight",
+      "substitutions": {},
+      "certificate": "Minor.migration.set_weights.x190_weight_compat",
+      "live_unfolds_to": "weight_set rho S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X190.x190_strongly_sublinear_separator_class",
+      "path": "minor-theory/theories/conjectures/X190.v",
+      "name": "x190_strongly_sublinear_separator_class",
+      "frozen_path": "minor-theory/theories/migration/set_weights.v",
+      "frozen": "X190Legacy.x190_strongly_sublinear_separator_class",
+      "substitutions": {
+        "x190_weight": "X190Legacy.x190_weight"
+      },
+      "certificate": "Minor.migration.set_weights.x190_strongly_sublinear_separator_class_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X190.thin_overlay_without_bounded_degree_statement",
+      "path": "minor-theory/theories/conjectures/X190.v",
+      "name": "thin_overlay_without_bounded_degree_statement",
+      "frozen_path": "minor-theory/theories/migration/set_weights.v",
+      "frozen": "X190Legacy.thin_overlay_without_bounded_degree_statement",
+      "substitutions": {
+        "x190_strongly_sublinear_separator_class": "X190Legacy.x190_strongly_sublinear_separator_class"
+      },
+      "certificate": "Minor.migration.set_weights.thin_overlay_without_bounded_degree_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "source",
+      "qualified": "Minor.conjectures.X199.x199_weight",
+      "path": "minor-theory/theories/conjectures/X199.v",
+      "name": "x199_weight",
+      "frozen_path": "minor-theory/theories/migration/set_weights.v",
+      "frozen": "X199Legacy.x199_weight",
+      "substitutions": {},
+      "certificate": "Minor.migration.set_weights.x199_weight_compat",
+      "live_unfolds_to": "weight_set rho S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X199.x199_weighted_balanced_separator",
+      "path": "minor-theory/theories/conjectures/X199.v",
+      "name": "x199_weighted_balanced_separator",
+      "frozen_path": "minor-theory/theories/migration/set_weights.v",
+      "frozen": "X199Legacy.x199_weighted_balanced_separator",
+      "substitutions": {
+        "x199_weight": "X199Legacy.x199_weight"
+      },
+      "certificate": "Minor.migration.set_weights.x199_weighted_balanced_separator_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Minor.conjectures.X199.x199_weighted_balanced_separator_with_constant_M",
+      "path": "minor-theory/theories/conjectures/X199.v",
+      "name": "x199_weighted_balanced_separator_with_constant_M",
+      "frozen_path": "minor-theory/theories/migration/set_weights.v",
+      "frozen": "X199Legacy.x199_weighted_balanced_separator_with_constant_M",
+      "substitutions": {
+        "x199_weighted_balanced_separator": "X199Legacy.x199_weighted_balanced_separator"
+      },
+      "certificate": "Minor.migration.set_weights.x199_weighted_balanced_separator_with_constant_M_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Minor.conjectures.X199.strongly_sublinear_separator_constant_M_statement",
+      "path": "minor-theory/theories/conjectures/X199.v",
+      "name": "strongly_sublinear_separator_constant_M_statement",
+      "frozen_path": "minor-theory/theories/migration/set_weights.v",
+      "frozen": "X199Legacy.strongly_sublinear_separator_constant_M_statement",
+      "substitutions": {
+        "x199_weighted_balanced_separator_with_constant_M": "X199Legacy.x199_weighted_balanced_separator_with_constant_M"
+      },
+      "certificate": "Minor.migration.set_weights.strongly_sublinear_separator_constant_M_statement_compat",
+      "corpus": "v2"
+    }
+  ]
+}

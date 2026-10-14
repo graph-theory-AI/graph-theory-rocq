@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "family": "poly-eval",
+  "modules": {
+    "GTBase.poly_nat": {
+      "path": "base/theories/poly_nat.v",
+      "overrides": {
+        "horner_nat": {
+          "verdict": "FAITHFUL",
+          "note": "Horner evaluation of a natural coefficient list (lowest degree first) at a natural point: upstream horner_rec at nat; the empty list is 0 at every point, x = 0 gives the head coefficient, no guard; the domination bound needs 1 <= t (counterexample [:: 1; 1] at 0 in the public client); coefficient order matters ([1;2;3]@10 = 321, reversed 123)."
+        }
+      },
+      "machine_evidence": [
+        "horner_nat_nil",
+        "horner_nat_cons",
+        "horner_nat_foldr",
+        "horner_nat_x0",
+        "horner_nat_monomial",
+        "horner_nat_rcons0",
+        "horner_nat_mono",
+        "horner_nat_dom"
+      ]
+    }
+  }
+}

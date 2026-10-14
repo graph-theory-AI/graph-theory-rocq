@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py disjoint_union --details /tmp/m
 
 - Canonical: `GraphTheory.core.sgraph.sjoin`.
 - Baseline: `ec5fb25603796f719fa67cdfeb0bea4ebc928242`.
-- Scope: 4 helpers, 2 statements, 14 frozen objects, 29 recorded references.
-- Source checks: 108/108 pass; consistent.
+- Scope: 4 helpers, 2 statements, 14 frozen objects, 34 recorded references.
+- Source checks: 110/110 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,4 +20,4 @@ Helper types, Section context, notation/constructor resolution and compiled depe
 
 Excluded distinct variants: `Digraph.conjectures.heroes.djoin`, `Digraph.conjectures.X122.x122_dijoin`.
 
-Prior snapshot limitations (explanations and replacement certificates in the inputs): `digraph-theory/theories/migration/path_vertices.v#X2UnionLegacy.statement`.
+Prior snapshot limitations (explanations and replacement certificates in the inputs): `chromatic-theory/theories/migration/poly_eval.v#X66Legacy.good_trees_disjoint_union_good_statement`, `chromatic-theory/theories/migration/poly_list_chi_bounded.v#X66Legacy.good_trees_disjoint_union_good_statement`, `digraph-theory/theories/migration/path_vertices.v#X2UnionLegacy.statement`.

@@ -79,6 +79,10 @@
 
 From GTBase Require Export base.
 From GTBase Require Import simple_line_graphs.
+(* The deletion-deck vocabulary ([vdel_card], [same_deck], [reconstructible], [same_edge_deck],
+   [edge_reconstructible]) is public since the deletion-decks library migration (2026-10-08); it is
+   required without Import, and the five U11 names below are transparent aliases of it. *)
+From Reconstruction Require foundations.decks.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -152,8 +156,11 @@ Proof. exact: simple_line_irrefl. Qed.
 Definition sline_graph : sgraph := simple_line_graph G.
 End SLine.
 
-(** *** Vertex-deleted card [G − v]: the induced subgraph on [{u | u ≠ v}]. *)
-Definition vdel_card (G : sgraph) (v : G) : sgraph := induced [set u : G | u != v].
+(** *** Vertex-deleted card [G − v]: the induced subgraph on [{u | u ≠ v}].
+    Since the deletion-decks library migration (2026-10-08) a transparent alias of
+    [Reconstruction.foundations.decks.vdel_card], the same body; the original is frozen in
+    theories/migration/deletion_decks.v. *)
+Definition vdel_card (G : sgraph) (v : G) : sgraph := decks.vdel_card v.
 
 (** ============================================================================
     Row 1 — Switching (Seidel) reconstruction (Stanley) — OPEN.
@@ -215,14 +222,15 @@ Definition switching_reconstruction_statement : Prop :=
     deck is isomorphic to [G].
     ========================================================================== *)
 
+(* Since the deletion-decks library migration (2026-10-08) [same_edge_deck] and
+   [edge_reconstructible] are transparent aliases of [Reconstruction.foundations.decks]'s, whose
+   card is [del_edge_set G [set e]] (= [sdel_edge G e] above); the originals are frozen in
+   theories/migration/deletion_decks.v. *)
 Definition same_edge_deck (G H : sgraph) : Prop :=
-  exists f : {e : {set G} | e \in E(G)} -> {e : {set H} | e \in E(H)},
-    bijective f /\
-    forall e : {e : {set G} | e \in E(G)},
-      inhabited (@sdel_edge G (val e) ≃ @sdel_edge H (val (f e))).
+  decks.same_edge_deck G H.
 
 Definition edge_reconstructible (G : sgraph) : Prop :=
-  forall H : sgraph, same_edge_deck G H -> inhabited (G ≃ H).
+  decks.edge_reconstructible G.
 
 (** Corpus row: opg:edge_reconstruction_conjecture
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/edge_reconstruction_conjecture/
@@ -289,13 +297,14 @@ Definition grahams_conjecture_on_tree_reconstruction_statement : Prop :=
     cards up to isomorphism.
     ========================================================================== *)
 
+(* Since the deletion-decks library migration (2026-10-08) [same_deck] and [reconstructible] are
+   transparent aliases of [Reconstruction.foundations.decks]'s (the same bodies); the originals are
+   frozen in theories/migration/deletion_decks.v. *)
 Definition same_deck (G H : sgraph) : Prop :=
-  exists f : G -> H,
-    bijective f /\
-    forall v : G, inhabited (@vdel_card G v ≃ @vdel_card H (f v)).
+  decks.same_deck G H.
 
 Definition reconstructible (G : sgraph) : Prop :=
-  forall H : sgraph, same_deck G H -> inhabited (G ≃ H).
+  decks.reconstructible G.
 
 (** Corpus row: opg:reconstruction_conjecture
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/reconstruction_conjecture/

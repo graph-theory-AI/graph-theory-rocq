@@ -1,6 +1,7 @@
 (** * Chromatic.conjectures.X130 -- v2 planar girth-5 fractional-chromatic row *)
 
 From GTBase Require Export base.
+From GTBase Require Import bfold_colourings.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -12,9 +13,11 @@ Unset Printing Implicit Defensive.
     a-element palette ['I_a], and adjacent vertices receive DISJOINT subsets.
     (This replicates base/Extremal's [bfold_colouring]; the fractional chromatic
     number χ_f(G) = inf a/b over all such colourings, attained/rational for a
-    finite G.) *)
+    finite G.)  Since the bfold-colouring library migration a transparent alias of
+    [GTBase.bfold_colourings.bfold_colouring] (the same body); the former body is frozen in
+    theories/migration/bfold_colouring.v. *)
 Definition x130_bfold_colouring (G : sgraph) (a b : nat) (f : G -> {set 'I_a}) : Prop :=
-  (forall v : G, #|f v| = b) /\ (forall x y : G, x -- y -> [disjoint f x & f y]).
+  bfold_colouring b f.
 
 (** [x130_frac_chi_le G p q]: the fractional chromatic number of G is ≤ p/q.
     Since χ_f(G) is the infimum of a/b over (a:b)-colourings and this infimum is

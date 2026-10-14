@@ -27,13 +27,11 @@ Definition x157_max_local_connectivity_at_most (G : sgraph) (k : nat) : Prop :=
   forall (x y : G) (m : nat),
     x != y -> x157_internally_disjoint_xy_paths x y m -> m <= k.
 
-Fixpoint x157_data_nth_nat (d : data) (i : nat) : nat :=
-  match d, i with
-  | Dcons (Dnat n) _, 0 => n
-  | Dcons _ rest, j.+1 => x157_data_nth_nat rest j
-  | Dnat n, 0 => n
-  | _, _ => 0
-  end.
+(** Since the natural-data-decoder library migration (2026-10-08) a transparent alias of
+    [GTBase.complexity.data_nth_nat], the same body by conversion; the former body is frozen in
+    theories/migration/natural_data_decoder.v. *)
+Definition x157_data_nth_nat (d : data) (i : nat) : nat :=
+  data_nth_nat d i.
 
 Definition x157_output_colour (G : sgraph) (k : nat) (out : data) (v : G) : nat :=
   x157_data_nth_nat out (enum_rank v) %% k.

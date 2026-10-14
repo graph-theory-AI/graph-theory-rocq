@@ -1,9 +1,10 @@
 (** * Minor.foundations.hole_containments -- even holes inside the forbidden configurations
 
-    The X27 / X42 / X220 rows forbid even HOLES ([x27_hole], an induced cycle on more
-    than three vertices), while the rows they are compared with forbid CONFIGURATIONS
-    (an induced [C_4], an induced ['K_s,s], an induced theta, an induced prism).  Every
-    corpus argument between those rows needs the containments
+    The X27 / X42 / X220 rows forbid even HOLES ([GTBase.induced_cycles.hole], X27's
+    [x27_hole]: an induced cycle on more than three vertices), while the rows they are
+    compared with forbid CONFIGURATIONS (an induced [C_4], an induced ['K_s,s], an
+    induced theta, an induced prism).  Every corpus argument between those rows needs
+    the containments
 
       "this configuration contains an even hole"
 
@@ -12,11 +13,11 @@
     piece of shared machinery:
 
     - [spairs s], the list of CONSECUTIVE PAIRS of [s].  Both [sd_consec]
-      (foundations/containment.v) and [x27_consecutive_in_cycle]
-      (conjectures/X27.v) are membership in a list of consecutive pairs -- of a path in
-      the first case, of a cyclic rotation in the second -- and [spairs_cat_mid] is the
-      one equation that lets a cycle assembled from several subdivision paths inherit
-      its chordlessness from those paths.
+      (foundations/containment.v) and [seq_cyclic_consecutiveb]
+      (GTBase.walks_paths; X27's [x27_consecutive_in_cycle]) are membership in a list of
+      consecutive pairs -- of a path in the first case, of a cyclic rotation in the
+      second -- and [spairs_cat_mid] is the one equation that lets a cycle assembled from
+      several subdivision paths inherit its chordlessness from those paths.
     - [four_cycle_hole] : four vertices carrying the four cycle edges and neither
       diagonal form a hole.  This settles the [C_4] and the ['K_s,s] containment
       outright ([KB_even_hole]).
@@ -26,12 +27,19 @@
       of length [4] plus the sum of the four path sizes ([fch_size]).  This is the
       shared engine for the theta and the prism: a theta is a subdivision of ['K_2,3]
       and a prism one of the 3-prism, and in both model graphs the configuration used
-      by the parity argument is an induced 4-cycle. *)
+      by the parity argument is an induced 4-cycle.
+
+    Holes and cyclic consecutiveness are stated with the public canonicals
+    [GTBase.induced_cycles.hole] and [GTBase.walks_paths.seq_cyclic_consecutiveb] (library
+    migrations B23 and B4), not with X27's transparent aliases [x27_hole] and
+    [x27_consecutive_in_cycle]; prisms are stated with the public
+    [Minor.foundations.prism_configurations.prism_configuration] (X220's [x220_prism] is its
+    alias).  Every theorem keeps its name and, up to those conversions, its type; neither X27
+    nor X220 is imported. *)
 
 From GTBase Require Export base.
 From GTBase Require induced_cycles.
-From Minor.foundations Require Import containment.
-From Minor.conjectures Require Import X27 X220.
+From Minor.foundations Require Import containment prism_configurations.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -116,16 +124,16 @@ by rewrite !mem_spairs_rev orbC.
 Qed.
 
 Lemma consec_spairs (G : sgraph) (a : G) (s : seq G) (x y : G) :
-  x27_consecutive_in_cycle (a :: s) x y
+  seq_cyclic_consecutiveb (a :: s) x y
   = ((x, y) \in spairs (a :: s ++ [:: a])) || ((y, x) \in spairs (a :: s ++ [:: a])).
-Proof. by rewrite /x27_consecutive_in_cycle /seq_cyclic_consecutiveb rot1_cons -cats1 spairs_closeE. Qed.
+Proof. by rewrite /seq_cyclic_consecutiveb rot1_cons -cats1 spairs_closeE. Qed.
 
 (** ** Four vertices with the four cycle edges and no diagonal form a hole ***)
 
 Lemma four_cycle_hole (G : sgraph) (a b c d : G) :
   a -- b -> b -- c -> c -- d -> d -- a ->
   ~~ (a -- c) -> ~~ (b -- d) -> a != c -> b != d ->
-  x27_hole [:: a; b; c; d].
+  induced_cycles.hole [:: a; b; c; d].
 Proof.
 move=> ab bc cd da nac nbd ac bd.
 have e1 := sg_edgeNeq ab; have e2 := sg_edgeNeq bc; have e3 := sg_edgeNeq cd.
@@ -164,7 +172,7 @@ by rewrite !eqxx.
 Qed.
 
 Lemma isubgraph_hole (G H : sgraph) (i : H ⇀ G) (c : seq H) :
-  x27_hole c -> x27_hole [seq i x | x <- c].
+  induced_cycles.hole c -> induced_cycles.hole [seq i x | x <- c].
 Proof.
 case=> [/andP[cyc uc] [sz ind]].
 have iinj : injective (isubgraph_fun i) by exact: isubgraph_inj i.
@@ -208,7 +216,7 @@ Qed.
 (** ['K_s,s] with [s >= 2] carries a four-cycle without diagonals, so an induced copy
     of it in [G] yields an even hole of [G]. *)
 Lemma KB_even_hole (G : sgraph) (s : nat) (i : (KB s s) ⇀ G) :
-  2 <= s -> exists c : seq G, x27_hole c /\ ~~ odd (size c).
+  2 <= s -> exists c : seq G, induced_cycles.hole c /\ ~~ odd (size c).
 Proof.
 move=> s2.
 have lt0 : 0 < s by apply: leq_trans s2.
@@ -223,7 +231,7 @@ Qed.
 
 (** An induced four-cycle is an even hole. *)
 Lemma C4_even_hole (G : sgraph) (i : (cycle_graph 4) ⇀ G) :
-  exists c : seq G, x27_hole c /\ ~~ odd (size c).
+  exists c : seq G, induced_cycles.hole c /\ ~~ odd (size c).
 Proof.
 have E : forall u v : cycle_graph 4, (i u -- i v) = (u -- v).
   by move=> u v; rewrite isubgraph_mono.
@@ -445,7 +453,7 @@ Qed.
 Lemma fch_consec_intro (x y : G) :
   [|| sd_consec (B w0) (B w1) (P w0 w1) x y, sd_consec (B w1) (B w2) (P w1 w2) x y,
       sd_consec (B w2) (B w3) (P w2 w3) x y | sd_consec (B w3) (B w0) (P w3 w0) x y] ->
-  x27_consecutive_in_cycle fch_cycle x y.
+  seq_cyclic_consecutiveb fch_cycle x y.
 Proof.
 move=> H.
 rewrite /fch_cycle consec_spairs -cat_cons cat4_snoc spairs_4 !mem_cat -!orbA.
@@ -502,7 +510,7 @@ Qed.
 
 Lemma fch_chordless (x y : G) :
   x \in fch_cycle -> y \in fch_cycle -> x -- y -> x != y ->
-  x27_consecutive_in_cycle fch_cycle x y.
+  seq_cyclic_consecutiveb fch_cycle x y.
 Proof.
 move=> hx hy xy nxy.
 have m02 : ~~ (w0 -- w2) := n02.
@@ -536,7 +544,7 @@ rewrite /fch_cycle /=; do 4!(rewrite ?size_cat /=).
 by rewrite !addnS !addnA.
 Qed.
 
-Lemma fch_hole : x27_hole fch_cycle.
+Lemma fch_hole : induced_cycles.hole fch_cycle.
 Proof.
 split; first by rewrite /ucycle fch_cycleP fch_uniq.
 split; last by apply/induced_cycles.cyclic_chordless_edge_neq; exact: fch_chordless.
@@ -552,7 +560,7 @@ Lemma fch_even_hole (K G : sgraph) (m : subdiv_model K G) (w0 w1 w2 w3 : K) :
   ~~ (w0 -- w2) -> ~~ (w1 -- w3) -> w0 != w2 -> w1 != w3 ->
   ~~ odd (size (sdm_path m w0 w1) + size (sdm_path m w1 w2)
           + size (sdm_path m w2 w3) + size (sdm_path m w3 w0)) ->
-  exists c : seq G, x27_hole c /\ ~~ odd (size c).
+  exists c : seq G, induced_cycles.hole c /\ ~~ odd (size c).
 Proof.
 move=> rep e01 e12 e23 e30 n02 n13 d02 d13 par.
 exists (fch_cycle m w0 w1 w2 w3); split.
@@ -572,7 +580,7 @@ Qed.
     bipartite), so [fch_even_hole] turns it into an even hole. *)
 
 Lemma subdiv_KB23_even_hole (H : sgraph) :
-  is_subdivision_of H (KB 2 3) -> exists c : seq H, x27_hole c /\ ~~ odd (size c).
+  is_subdivision_of H (KB 2 3) -> exists c : seq H, induced_cycles.hole c /\ ~~ odd (size c).
 Proof.
 case=> m rep.
 pose a0 : KB 2 3 := inl (@Ordinal 2 0 isT).
@@ -587,7 +595,7 @@ have Lrev : forall j : 'I_3,
   have e0 : (inr j : KB 2 3) -- a0 by [].
   by rewrite (sdm_pathC m e1) (sdm_pathC m e0) !size_rev.
 have main : forall j k : 'I_3, j != k -> F j = F k ->
-    exists c : seq H, x27_hole c /\ ~~ odd (size c).
+    exists c : seq H, induced_cycles.hole c /\ ~~ odd (size c).
   move=> j k jk par; rewrite /F in par.
   have ej0 : a0 -- (inr j : KB 2 3) by [].
   have ej1 : (inr j : KB 2 3) -- a1 by [].
@@ -612,26 +620,26 @@ Qed.
 
 (** ** Every prism contains an even hole **********************************
 
-    A PRISM ([x220_prism] of conjectures/X220.v) is a subdivision of the 3-prism
-    [x220_prism3] in which the six TRIANGLE edges stay unsubdivided, so only the three
-    matching edges [(0,3)], [(1,4)], [(2,5)] become paths.  Two of those three paths
-    have interiors of the same parity; together with the two triangle edges joining
-    their ends they form an induced 4-cycle of [x220_prism3] -- e.g.
-    [0 -- 3 -- 4 -- 1 -- 0], whose diagonals [0 -- 4] and [3 -- 1] are not edges of the
-    3-prism -- and the resulting hole has even length. *)
+    A PRISM ([prism_configuration] of foundations/prism_configurations.v; X220's [x220_prism]
+    is its alias) is a subdivision of the 3-prism [prism_base] in which the six TRIANGLE
+    edges stay unsubdivided, so only the three matching edges [(0,3)], [(1,4)], [(2,5)]
+    become paths.  Two of those three paths have interiors of the same parity; together
+    with the two triangle edges joining their ends they form an induced 4-cycle of
+    [prism_base] -- e.g. [0 -- 3 -- 4 -- 1 -- 0], whose diagonals [0 -- 4] and [3 -- 1] are
+    not edges of the 3-prism -- and the resulting hole has even length. *)
 
 Lemma prism_even_hole (H : sgraph) :
-  x220_prism H -> exists c : seq H, x27_hole c /\ ~~ odd (size c).
+  prism_configuration H -> exists c : seq H, induced_cycles.hole c /\ ~~ odd (size c).
 Proof.
 case=> m [rep tri].
-have revs : forall u v : x220_prism3, u -- v ->
+have revs : forall u v : prism_base, u -- v ->
     size (sdm_path m v u) = size (sdm_path m u v).
   by move=> u v uv; rewrite (sdm_pathC m uv) size_rev.
-have main : forall a b c d : x220_prism3, a -- b -> b -- c -> c -- d -> d -- a ->
+have main : forall a b c d : prism_base, a -- b -> b -- c -> c -- d -> d -- a ->
     ~~ (a -- c) -> ~~ (b -- d) -> a != c -> b != d ->
     sdm_path m b c = [::] -> sdm_path m d a = [::] ->
     odd (size (sdm_path m a b)) = odd (size (sdm_path m c d)) ->
-    exists q : seq H, x27_hole q /\ ~~ odd (size q).
+    exists q : seq H, induced_cycles.hole q /\ ~~ odd (size q).
   move=> a b c d e1 e2 e3 e4 na nb da db p1 p2 par.
   apply: (fch_even_hole rep e1 e2 e3 e4 na nb da db).
   by rewrite p1 p2 /= !addn0 oddD par addbb.
@@ -642,27 +650,27 @@ pose F03 := odd (size (sdm_path m n0 n3)).
 pose F14 := odd (size (sdm_path m n1 n4)).
 pose F25 := odd (size (sdm_path m n2 n5)).
 have [p1|q1] := boolP (F03 == F14).
-  have e1 : (n0 : x220_prism3) -- n3 by [].
-  have e2 : (n3 : x220_prism3) -- n4 by [].
-  have e3 : (n4 : x220_prism3) -- n1 by [].
-  have e4 : (n1 : x220_prism3) -- n0 by [].
+  have e1 : (n0 : prism_base) -- n3 by [].
+  have e2 : (n3 : prism_base) -- n4 by [].
+  have e3 : (n4 : prism_base) -- n1 by [].
+  have e4 : (n1 : prism_base) -- n0 by [].
   apply: (main n0 n3 n4 n1 e1 e2 e3 e4) => //.
   - exact: (tri n3 n4 e2 isT).
   - exact: (tri n1 n0 e4 isT).
   - by rewrite (revs n1 n4 e3); apply/eqP.
 have [p2|q2] := boolP (F03 == F25).
-  have e1 : (n0 : x220_prism3) -- n3 by [].
-  have e2 : (n3 : x220_prism3) -- n5 by [].
-  have e3 : (n5 : x220_prism3) -- n2 by [].
-  have e4 : (n2 : x220_prism3) -- n0 by [].
+  have e1 : (n0 : prism_base) -- n3 by [].
+  have e2 : (n3 : prism_base) -- n5 by [].
+  have e3 : (n5 : prism_base) -- n2 by [].
+  have e4 : (n2 : prism_base) -- n0 by [].
   apply: (main n0 n3 n5 n2 e1 e2 e3 e4) => //.
   - exact: (tri n3 n5 e2 isT).
   - exact: (tri n2 n0 e4 isT).
   - by rewrite (revs n2 n5 e3); apply/eqP.
-have e1 : (n1 : x220_prism3) -- n4 by [].
-have e2 : (n4 : x220_prism3) -- n5 by [].
-have e3 : (n5 : x220_prism3) -- n2 by [].
-have e4 : (n2 : x220_prism3) -- n1 by [].
+have e1 : (n1 : prism_base) -- n4 by [].
+have e2 : (n4 : prism_base) -- n5 by [].
+have e3 : (n5 : prism_base) -- n2 by [].
+have e4 : (n2 : prism_base) -- n1 by [].
 apply: (main n1 n4 n5 n2 e1 e2 e3 e4) => //.
 - exact: (tri n4 n5 e2 isT).
 - exact: (tri n2 n1 e4 isT).

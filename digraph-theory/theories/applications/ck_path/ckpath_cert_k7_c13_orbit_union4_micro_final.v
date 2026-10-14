@@ -2,7 +2,7 @@
     The complete microblock chain ends in the empty clause. *)
 
 From Stdlib Require Import List.
-From Digraph Require Import ckpath_cnf ckpath_cert_k7_c13_orbit_union4_base_data ckpath_cert_k7_c13_orbit_union4_micro_block94.
+From Digraph Require Import ckpath_cnf ckpath_cert_k7_c13_orbit_union4_base_data ckpath_cert_k7_c13_orbit_union4_micro_assembly ckpath_cert_k7_c13_orbit_union4_micro_block94_data.
 Import ListNotations.
 
 Theorem c13_k7_orbit_union4_micro_base_unsatisfiable :

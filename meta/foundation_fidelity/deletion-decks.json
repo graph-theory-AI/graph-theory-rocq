@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "family": "deletion-decks",
+  "modules": {
+    "Reconstruction.foundations.decks": {
+      "path": "reconstruction-theory/theories/foundations/decks.v",
+      "overrides": {
+        "vdel_card": {
+          "verdict": "FAITHFUL",
+          "note": "vdel_card v: the card G - v, the subgraph induced on the vertices other than v; equal to upstream's induced [set~ v] (vdel_cardE) and of order #|G| - 1 (card_vdel_card)."
+        },
+        "same_deck": {
+          "verdict": "FAITHFUL",
+          "note": "same_deck G H: a bijection f of the vertex sets with vdel_card v isomorphic to vdel_card (f v) for every v; the multiset-of-cards reading (every card counted with multiplicity); forces equal orders (same_deck_card); no order guard (the conjecture's three-vertex guards live in the statement)."
+        },
+        "reconstructible": {
+          "verdict": "FAITHFUL",
+          "note": "reconstructible G: every H with the same deck is isomorphic to G; no guard."
+        },
+        "same_edge_deck": {
+          "verdict": "FAITHFUL",
+          "note": "same_edge_deck G H: a bijection f of the edge index types {e | e \\in E(G)} with del_edge_set G [set e] isomorphic to del_edge_set H [set f e] for every edge; forces equal edge counts (same_edge_deck_card_edge); any two edgeless graphs have the same edge deck (edgeless_same_edge_deck), so a positive edge-count guard is needed and lives in the statements."
+        },
+        "edge_reconstructible": {
+          "verdict": "FAITHFUL",
+          "note": "edge_reconstructible G: every H with the same edge deck is isomorphic to G; no guard."
+        }
+      },
+      "machine_evidence": [
+        "vdel_cardE",
+        "card_vdel_card",
+        "same_deck_refl",
+        "same_deck_card",
+        "same_edge_deck_refl",
+        "same_edge_deck_card_edge",
+        "edgeless_same_edge_deck"
+      ]
+    }
+  }
+}

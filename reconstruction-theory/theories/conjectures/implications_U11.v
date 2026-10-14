@@ -236,13 +236,13 @@ split=> [[f [fbij fiso]]|[F [Fbij Fiso]]].
       by move=> S; rewrite iHK gf iGK'.
     by move=> T; rewrite iGK fg iHK'.
   move=> S; rewrite (eqP (xchooseP (exG S))).
-  by move: (fiso (iG S)); rewrite !vdel_card_setC1.
+  by move: (fiso (iG S)); rewrite !Reconstruction.foundations.decks.vdel_cardE.
 - case: Fbij => Finv FF FF'.
   exists (fun v => iH (F (dG v))); split.
     exists (fun w => iG (Finv (dH w))).
       by move=> v; rewrite iHK' FF iGK.
     by move=> w; rewrite iGK' FF' iHK.
-  move=> v; rewrite !vdel_card_setC1 -[[set~ iH (F (dG v))]](eqP (xchooseP (exH (F (dG v))))).
+  move=> v; rewrite !Reconstruction.foundations.decks.vdel_cardE -[[set~ iH (F (dG v))]](eqP (xchooseP (exH (F (dG v))))).
   by move: (Fiso (dG v)).
 Qed.
 

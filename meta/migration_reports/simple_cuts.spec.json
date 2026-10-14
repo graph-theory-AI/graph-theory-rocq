@@ -1,0 +1,430 @@
+{
+  "family": "simple-cuts",
+  "baseline_commit": "a69e27fedb17b9a509dc794b45f6e2aa5c8f4e9e",
+  "canonical_name": "GTBase.simple_cuts.cut_edges",
+  "canonical_short_name": "cut_edges",
+  "relation": "Set-valued simple cuts: edges of E(G) meeting both S and its complement. Packing X47 uses the same intersection body over the M1 edge alias; Cycle X212 uses the equivalent count-one formula, proved equal on two-element simple edges. X47 cut connectivity is the unguarded forall-nonempty-proper-side lower bound, true for every k at orders 0 and 1; it is not deletion connectivity without its 1 < #|G| guard. Existing common.cut_size is reused through the exact cardinality bridge.",
+  "namespaces": {
+    "base": "GTBase",
+    "packing-theory": "Packing",
+    "cycle-theory": "Cycle",
+    "atlas": "Atlas",
+    "digraph-theory": "Digraph"
+  },
+  "certificate_files": [
+    "base/theories/simple_cuts.v",
+    "packing-theory/theories/migration/simple_cuts.v",
+    "cycle-theory/theories/migration/simple_cuts.v",
+    "packing-theory/theories/migration/simple_edges.v",
+    "packing-theory/theories/migration/min_degree_at_least.v",
+    "cycle-theory/theories/migration/genuine_cycle.v"
+  ],
+  "extra_certificates": [
+    "GTBase.simple_cuts.cut_edgesE",
+    "GTBase.simple_cuts.cut_edges_sub",
+    "GTBase.simple_cuts.cut_edges0",
+    "GTBase.simple_cuts.cut_edgesC",
+    "GTBase.simple_cuts.cut_edgesT",
+    "GTBase.simple_cuts.card_cut_edges",
+    "GTBase.simple_cuts.cut_edges_count1",
+    "GTBase.simple_cuts.cut_connected0",
+    "GTBase.simple_cuts.cut_connected_leq",
+    "GTBase.simple_cuts.cut_connected_small",
+    "GTBase.simple_cuts.connect_crossing",
+    "GTBase.simple_cuts.k_edge_connected_cut",
+    "Packing.migration.simple_cuts.x47_crossing_edges_compat",
+    "Packing.migration.simple_cuts.x47_edge_connected_compat",
+    "Packing.migration.simple_cuts.tree_decomposition_delta_edge_connected_statement_compat",
+    "Packing.migration.simple_cuts.tree_decomposition_leaf_edge_connected_statement_compat",
+    "Packing.migration.simple_cuts.x47_crossing_edges_original_compat",
+    "Packing.migration.simple_cuts.x47_edge_connected_original_compat",
+    "Packing.migration.simple_cuts.x47_tree_decomposition_original_compat",
+    "Packing.migration.simple_cuts.tree_decomposition_delta_edge_connected_statement_original_compat",
+    "Packing.migration.simple_cuts.tree_decomposition_leaf_edge_connected_statement_original_compat",
+    "Cycle.migration.simple_cuts.x212_edge_cut_compat",
+    "Cycle.migration.simple_cuts.x212_cyclically_edge_connected_compat",
+    "Cycle.migration.simple_cuts.bondy_linear_cycle_cubic_statement_compat",
+    "Cycle.migration.simple_cuts.x212_cyclically_edge_connected_pre_genuine",
+    "Cycle.migration.simple_cuts.x212_cyclically_edge_connected_original_compat",
+    "Cycle.migration.simple_cuts.bondy_linear_cycle_cubic_statement_original_compat"
+  ],
+  "summary": [
+    "Set-valued simple cuts: edges of E(G) meeting both S and its complement. Packing X47 uses the same intersection body over the M1 edge alias; Cycle X212 uses the equivalent count-one formula, proved equal on two-element simple edges. X47 cut connectivity is the unguarded forall-nonempty-proper-side lower bound, true for every k at orders 0 and 1; it is not deletion connectivity without its 1 < #|G| guard. Existing common.cut_size is reused through the exact cardinality bridge.",
+    "Three source helpers, three complete current rows and three deepest-original rows. Frozen M1/A11/B10 provider definitions and all earlier certificates remain byte-preserved. X47/X48 decomposition repeated-part semantics and the distinct X212 cyclic-side guards are unchanged. Atlas public extraction is incomplete until the separate copy/list-decomposition family."
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X47.x47_crossing_edges",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_crossing_edges",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "Legacy.x47_crossing_edges",
+      "substitutions": {},
+      "certificate": "Packing.migration.simple_cuts.x47_crossing_edges_compat",
+      "live_unfolds_to": "GTBase.simple_cuts.cut_edges S"
+    },
+    {
+      "kind": "source",
+      "qualified": "Packing.conjectures.X47.x47_edge_connected",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_edge_connected",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "Legacy.x47_edge_connected",
+      "substitutions": {
+        "x47_crossing_edges": "Legacy.x47_crossing_edges"
+      },
+      "certificate": "Packing.migration.simple_cuts.x47_edge_connected_compat",
+      "live_unfolds_to": "GTBase.simple_cuts.cut_connected G k"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X47.tree_decomposition_delta_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "X47Legacy.tree_decomposition_delta_edge_connected_statement",
+      "substitutions": {
+        "x47_edge_connected": "Legacy.x47_edge_connected"
+      },
+      "certificate": "Packing.migration.simple_cuts.tree_decomposition_delta_edge_connected_statement_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Packing.conjectures.X48.tree_decomposition_leaf_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X48.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "X48Legacy.tree_decomposition_leaf_edge_connected_statement",
+      "substitutions": {
+        "x47_edge_connected": "Legacy.x47_edge_connected"
+      },
+      "certificate": "Packing.migration.simple_cuts.tree_decomposition_leaf_edge_connected_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X47.x47_crossing_edges",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_crossing_edges",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "Original.x47_crossing_edges",
+      "substitutions": {
+        "x47_edge_set": "SE.Legacy.edge_set"
+      },
+      "certificate": "Packing.migration.simple_cuts.x47_crossing_edges_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X47.x47_edge_connected",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_edge_connected",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "Original.x47_edge_connected",
+      "substitutions": {
+        "x47_crossing_edges": "Original.x47_crossing_edges"
+      },
+      "certificate": "Packing.migration.simple_cuts.x47_edge_connected_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Packing.conjectures.X47.x47_tree_decomposition_by_copies",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_tree_decomposition_by_copies",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "Original.x47_tree_decomposition_by_copies",
+      "substitutions": {
+        "x47_edge_set": "SE.Legacy.edge_set"
+      },
+      "certificate": "Packing.migration.simple_cuts.x47_tree_decomposition_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.X47.tree_decomposition_delta_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "X47Original.tree_decomposition_delta_edge_connected_statement",
+      "substitutions": {
+        "x47_edge_set": "SE.Legacy.edge_set",
+        "x47_edge_connected": "Original.x47_edge_connected",
+        "x47_min_degree_at_least": "MD.Legacy.x47_min_degree_at_least",
+        "x47_tree_decomposition_by_copies": "Original.x47_tree_decomposition_by_copies"
+      },
+      "certificate": "Packing.migration.simple_cuts.tree_decomposition_delta_edge_connected_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Packing.conjectures.X48.tree_decomposition_leaf_edge_connected_statement",
+      "path": "packing-theory/theories/conjectures/X48.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "frozen_path": "packing-theory/theories/migration/simple_cuts.v",
+      "frozen": "X48Original.tree_decomposition_leaf_edge_connected_statement",
+      "substitutions": {
+        "x47_edge_set": "SE.Legacy.edge_set",
+        "x47_edge_connected": "Original.x47_edge_connected",
+        "x47_min_degree_at_least": "MD.Legacy.x47_min_degree_at_least",
+        "x47_tree_decomposition_by_copies": "Original.x47_tree_decomposition_by_copies"
+      },
+      "certificate": "Packing.migration.simple_cuts.tree_decomposition_leaf_edge_connected_statement_original_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "source",
+      "qualified": "Cycle.conjectures.X212.x212_edge_cut",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_edge_cut",
+      "frozen_path": "cycle-theory/theories/migration/simple_cuts.v",
+      "frozen": "Legacy.x212_edge_cut",
+      "substitutions": {},
+      "certificate": "Cycle.migration.simple_cuts.x212_edge_cut_compat",
+      "live_unfolds_to": "GTBase.simple_cuts.cut_edges S"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Cycle.conjectures.X212.x212_cyclically_edge_connected",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cyclically_edge_connected",
+      "frozen_path": "cycle-theory/theories/migration/simple_cuts.v",
+      "frozen": "X212Legacy.x212_cyclically_edge_connected",
+      "substitutions": {
+        "x212_edge_cut": "Legacy.x212_edge_cut"
+      },
+      "certificate": "Cycle.migration.simple_cuts.x212_cyclically_edge_connected_compat"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Cycle.conjectures.X212.bondy_linear_cycle_cubic_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "bondy_linear_cycle_cubic_statement",
+      "frozen_path": "cycle-theory/theories/migration/simple_cuts.v",
+      "frozen": "X212Legacy.bondy_linear_cycle_cubic_statement",
+      "substitutions": {
+        "x212_cyclically_edge_connected": "X212Legacy.x212_cyclically_edge_connected"
+      },
+      "certificate": "Cycle.migration.simple_cuts.bondy_linear_cycle_cubic_statement_compat"
+    },
+    {
+      "kind": "original-chain",
+      "qualified": "Cycle.conjectures.X212.x212_cyclically_edge_connected",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cyclically_edge_connected",
+      "frozen_path": "cycle-theory/theories/migration/simple_cuts.v",
+      "frozen": "X212Original.cyclically_edge_connected",
+      "substitutions": {
+        "x212_cyclically_edge_connected": "cyclically_edge_connected",
+        "x212_cycle_within": "GC.X212Legacy.cycle_within",
+        "x212_edge_cut": "Legacy.x212_edge_cut"
+      },
+      "certificate": "Cycle.migration.simple_cuts.x212_cyclically_edge_connected_original_compat",
+      "commit": "00d6bb3a80759b365fffab282d47603510bf839e"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Cycle.conjectures.X212.bondy_linear_cycle_cubic_statement",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "bondy_linear_cycle_cubic_statement",
+      "frozen_path": "cycle-theory/theories/migration/simple_cuts.v",
+      "frozen": "X212Original.bondy_linear_cycle_cubic_statement",
+      "substitutions": {
+        "x212_cyclically_edge_connected": "X212Original.cyclically_edge_connected",
+        "x212_cycle": "GC.Legacy.x212_cycle"
+      },
+      "certificate": "Cycle.migration.simple_cuts.bondy_linear_cycle_cubic_statement_original_compat",
+      "commit": "00d6bb3a80759b365fffab282d47603510bf839e"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X47.x47_edge_set",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_edge_set",
+      "frozen_path": "packing-theory/theories/migration/simple_edges.v",
+      "frozen": "Legacy.edge_set",
+      "substitutions": {
+        "x47_edge_set": "edge_set"
+      },
+      "certificate": "Packing.migration.simple_edges.x47_edge_set_compat",
+      "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Packing.conjectures.X47.x47_min_degree_at_least",
+      "path": "packing-theory/theories/conjectures/X47.v",
+      "name": "x47_min_degree_at_least",
+      "frozen_path": "packing-theory/theories/migration/min_degree_at_least.v",
+      "frozen": "Legacy.x47_min_degree_at_least",
+      "substitutions": {},
+      "certificate": "Packing.migration.min_degree_at_least.x47_min_degree_at_least_compat",
+      "live_unfolds_to": "min_degree_at_least G d",
+      "commit": "9abf440da80115caeffd299077976b48f4e07d74"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.X212.x212_cycle",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cycle",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "Legacy.x212_cycle",
+      "substitutions": {},
+      "certificate": "Cycle.migration.genuine_cycle.x212_cycle_compat",
+      "live_unfolds_to": "seq_cycleb (--) c",
+      "commit": "00d6bb3a80759b365fffab282d47603510bf839e"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Cycle.conjectures.X212.x212_cycle_within",
+      "path": "cycle-theory/theories/conjectures/X212.v",
+      "name": "x212_cycle_within",
+      "frozen_path": "cycle-theory/theories/migration/genuine_cycle.v",
+      "frozen": "X212Legacy.cycle_within",
+      "substitutions": {
+        "x212_cycle": "Legacy.x212_cycle",
+        "x212_cycle_within": "cycle_within"
+      },
+      "certificate": "Cycle.migration.genuine_cycle.x212_cycle_within_compat",
+      "commit": "00d6bb3a80759b365fffab282d47603510bf839e"
+    }
+  ],
+  "known_stale_snapshots": {
+    "packing-theory/theories/migration/min_degree_at_least.v#X47Legacy.tree_decomposition_delta_edge_connected_statement": "Earlier A11 snapshot freezes raw minimum degree but keeps the live cut-connectivity helper; preserved unchanged. The simple-cuts X47Original composes A11 raw degree, M1 raw edges and this family raw cuts/connectivity in the complete row.",
+    "packing-theory/theories/migration/min_degree_at_least.v#X48Legacy.tree_decomposition_leaf_edge_connected_statement": "Earlier A11 snapshot freezes raw minimum degree but keeps the live cut-connectivity helper; preserved unchanged. The simple-cuts X48Original composes A11 raw degree, M1 raw edges and this family raw cuts/connectivity in the complete row.",
+    "cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.cyclically_edge_connected": "Earlier B10 snapshot freezes raw cycle-within but retains live x212_edge_cut. Its bytes stay fixed; simple-cuts X212Original.cyclically_edge_connected combines B10 raw cycles with the frozen count-one cut.",
+    "cycle-theory/theories/migration/genuine_cycle.v#X212Legacy.bondy_linear_cycle_cubic_statement": "Earlier B10 whole-row snapshot reaches the live cut through its frozen cyclic-connectivity chain. Preserved unchanged; simple-cuts X212Original.bondy_linear_cycle_cubic_statement is the deeper raw-cycle/raw-cut row.",
+    "packing-theory/theories/migration/edge_copies.v#X47Legacy.tree_decomposition_delta_edge_connected_statement": "Later edge-copies snapshot freezes the X47 copy and decomposition and intentionally keeps the live cut-connectivity helper. Its X47Original counterpart composes this family Original cut connectivity with M1 raw edges, A11 raw degree and the raw copy.",
+    "packing-theory/theories/migration/edge_copies.v#X48Legacy.tree_decomposition_leaf_edge_connected_statement": "Later edge-copies snapshot freezes the X47 copy and decomposition and intentionally keeps the live cut-connectivity helper. Its X48Original counterpart composes this family Original cut connectivity with M1 raw edges, A11 raw degree and the raw copy."
+  },
+  "cross_module_consumers": [
+    {
+      "path": "packing-theory/theories/conjectures/X48.v",
+      "name": "x47_edge_connected",
+      "note": "The complete X48 row retains its local helper name and all guards, with a whole-row certificate."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_edge_cut",
+      "note": "Existing empty-cut grounding lemma now uses the public cut identity; its type is unchanged."
+    },
+    {
+      "path": "atlas/theories/foundations/tree_decompositions.v",
+      "name": "x47_crossing_edges",
+      "note": "Deletion-to-cut and minimum-degree proofs use the proved public cut membership API with their complete old types. Copy/decomposition imports remain until the separate family."
+    },
+    {
+      "path": "atlas/theories/foundations/tree_decompositions.v",
+      "name": "x47_edge_connected",
+      "note": "Atlas decomposition transport retains the X47 cut-bound endpoint; the separate copy/decomposition family remains deferred."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "note": "Existing implication endpoints and their full quantifier/guard order are unchanged."
+    },
+    {
+      "path": "atlas/theories/conjectures/implications_A1.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "note": "Existing implication endpoints and their full quantifier/guard order are unchanged."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "x212_cyclically_edge_connected",
+      "note": "The unchanged singleton nonvacuity theorem keeps both cycle-containing-side guards."
+    },
+    {
+      "path": "cycle-theory/theories/conjectures/grounding_X212.v",
+      "name": "bondy_linear_cycle_cubic_statement",
+      "note": "The existing Print Assumptions endpoint remains the whole unchanged Bondy row."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X48.v",
+      "name": "x47_edge_connected",
+      "note": "Existing antitonicity proof uses the same unguarded cut lower bound; theorem type and proof text stay unchanged."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X48.v",
+      "name": "tree_decomposition_delta_edge_connected_statement",
+      "note": "Existing complete X47-to-X48 implication retains both endpoints and its majorant argument."
+    },
+    {
+      "path": "packing-theory/theories/conjectures/implications_X48.v",
+      "name": "tree_decomposition_leaf_edge_connected_statement",
+      "note": "Existing complete X47-to-X48 implication retains both endpoints and its majorant argument."
+    }
+  ],
+  "distinct_variants": [
+    {
+      "qualified": "GTBase.common.cut_size",
+      "path": "base/theories/common.v",
+      "name": "cut_size",
+      "note": "Existing numeric cardinality of a simple cut, reused by the exact card_cut_edges bridge; not replaced by the set-valued operation."
+    },
+    {
+      "qualified": "GTBase.common.k_edge_connected",
+      "path": "base/theories/common.v",
+      "name": "k_edge_connected",
+      "note": "Deletion connectivity requires 1 < order. Only its implication to cut_connected is proved; singleton separation is a public negative example."
+    },
+    {
+      "qualified": "Cycle.conjectures.X184.x184_out_cut",
+      "path": "cycle-theory/theories/conjectures/X184.v",
+      "name": "x184_out_cut",
+      "note": "Directed multigraph edge objects with source inside and target outside; not unordered simple edges."
+    },
+    {
+      "qualified": "Cycle.conjectures.X184.x184_directed_k_edge_connected",
+      "path": "cycle-theory/theories/conjectures/X184.v",
+      "name": "x184_directed_k_edge_connected",
+      "note": "Directed edge-object cut bound, preserving multiplicities and orientation; separate family."
+    },
+    {
+      "qualified": "Cycle.conjectures.U10.is_odd_edge_cut",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "is_odd_edge_cut",
+      "note": "Predicate on a supplied multigraph edge-object set, using an existential vertex side and odd cardinality."
+    },
+    {
+      "qualified": "Cycle.conjectures.U10.contains_odd_edge_cut",
+      "path": "cycle-theory/theories/conjectures/U10.v",
+      "name": "contains_odd_edge_cut",
+      "note": "Existence of a contained odd multigraph cut; no simple-edge identification."
+    },
+    {
+      "qualified": "Digraph.conjectures.X179.x179_out_cut",
+      "path": "digraph-theory/theories/conjectures/X179.v",
+      "name": "x179_out_cut",
+      "note": "Ordered arc pairs leaving a side in a digraph; orientation retained."
+    },
+    {
+      "qualified": "Digraph.conjectures.X179.x179_k_arc_strongly_connected",
+      "path": "digraph-theory/theories/conjectures/X179.v",
+      "name": "x179_k_arc_strongly_connected",
+      "note": "Lower bound for ordered directed cuts; separate arc-connectivity family."
+    },
+    {
+      "qualified": "Digraph.conjectures.sad.outcut",
+      "path": "digraph-theory/theories/conjectures/sad.v",
+      "name": "outcut",
+      "note": "Section-bound ordered arc cut in a digraph; distinct from simple unordered edges."
+    },
+    {
+      "qualified": "Digraph.conjectures.sad.arc_strong",
+      "path": "digraph-theory/theories/conjectures/sad.v",
+      "name": "arc_strong",
+      "note": "Section-bound directed cut connectivity with its existing nonempty proper-side guards."
+    },
+    {
+      "qualified": "Digraph.conjectures.two_extremal.outcut",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "outcut",
+      "note": "Numeric directed arc-cut cardinality used by the local-connectivity minimum."
+    },
+    {
+      "qualified": "Digraph.conjectures.packing.dicut_size",
+      "path": "digraph-theory/theories/conjectures/packing.v",
+      "name": "dicut_size",
+      "note": "Numeric directed arc-cut cardinality; one-way side guards belong to its dijoin consumers."
+    }
+  ]
+}
