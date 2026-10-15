@@ -45,6 +45,7 @@ From HB Require Import structures.
 From mathcomp Require Import all_boot all_algebra.
 From Digraph Require Import prelude digraph oriented tournament dipath.
 From Digraph Require Import dichromatic two_extremal classic_core colouring_variants.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
