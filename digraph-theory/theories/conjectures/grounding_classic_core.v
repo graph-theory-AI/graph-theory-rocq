@@ -25,6 +25,7 @@ From HB Require Import structures.
 From mathcomp Require Import all_boot all_fingroup all_algebra.
 From Digraph Require Import prelude digraph oriented dipath strong tournament.
 From Digraph Require Import classic_core.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
