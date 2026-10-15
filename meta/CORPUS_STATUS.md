@@ -56,7 +56,7 @@
 
 ## Foundation fidelity registry
 
-- **305 audited primitives**: 291 faithful · 12 lightweight · 2 broken.
+- **309 audited primitives**: 295 faithful · 12 lightweight · 2 broken.
 - Registry: module contracts in `meta/foundation_fidelity.json` and family verdicts in `meta/foundation_fidelity/`; validate declarations and evidence names with `python3 meta/foundation_fidelity.py --check`. Unlisted primitives remain unaudited; trust is never inferred from compilation.
 
 | verdict | primitive | misuse watch |
@@ -119,7 +119,7 @@ Area-local foundations (each area builds these on top of `base`):
 |---|---|
 | chromatic-theory | `alon_tarsi`, `branch_paths`, `chi_bounding`, `choice_number`, `critical`, `edge_colourings`, `forest_paths`, `partial_lists`, `poly_forms`, `strong_pair_palettes` |
 | cycle-theory | `comp_reduce`, `connectivity`, `cycle_space`, `eulerian`, `matchings_cuts`, `path_subgraphs`, `spanning_trees` |
-| digraph-theory | `cycles`, `degree_balance`, `interop_graph_theory`, `longest_cycles`, `prelude`, `subdivision`, `tournament_unavoidability` |
+| digraph-theory | `cycles`, `degree_balance`, `interop_graph_theory`, `longest_cycles`, `neighbourhoods`, `prelude`, `subdivision`, `tournament_unavoidability` |
 | extremal-graph-theory | `circular_colouring`, `degree_bounds`, `edge_colourings`, `edge_cycles`, `fractional_colouring`, `fractional_hadwiger`, `list_ramsey`, `lp_rational`, `ramsey`, `vc` |
 | graph-theory-misc | `ambient_shallow_minors`, `complexity`, `cops` |
 | hypergraph-theory | `hedgehog`, `hypergraph`, `hypergraph_copies`, `hypergraph_forcing`, `hypergraph_matchings`, `hypergraph_ramsey`, `hypergraph_regularity` |

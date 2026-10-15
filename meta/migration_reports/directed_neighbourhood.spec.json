@@ -1,0 +1,850 @@
+{
+  "family": "directed-neighbourhood",
+  "canonical_name": "Digraph.foundations.neighbourhoods.Nout",
+  "canonical_short_name": "Nout",
+  "baseline_commit": "761e776c64d251a0a9af04a40628766d012aff36",
+  "namespaces": {
+    "digraph-theory": "Digraph"
+  },
+  "certificate_files": [
+    "digraph-theory/theories/foundations/neighbourhoods.v",
+    "digraph-theory/theories/foundations/degree_balance.v",
+    "digraph-theory/theories/migration/directed_neighbourhood.v",
+    "digraph-theory/theories/migration/degree_balance.v",
+    "digraph-theory/theories/migration/path_vertices.v",
+    "digraph-theory/theories/migration/tournament_unavoidability.v"
+  ],
+  "frozen": [
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.classic_core.Nout",
+      "path": "digraph-theory/theories/conjectures/classic_core.v",
+      "name": "Nout",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "Legacy.Nout",
+      "substitutions": {},
+      "certificate": "Digraph.migration.directed_neighbourhood.Nout_compat",
+      "live_unfolds_to": "neighbourhoods.Nout v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.classic_core.Nin",
+      "path": "digraph-theory/theories/conjectures/classic_core.v",
+      "name": "Nin",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "Legacy.Nin",
+      "substitutions": {},
+      "certificate": "Digraph.migration.directed_neighbourhood.Nin_compat",
+      "live_unfolds_to": "neighbourhoods.Nin v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.classic_core.indeg",
+      "path": "digraph-theory/theories/conjectures/classic_core.v",
+      "name": "indeg",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "Legacy.indeg",
+      "substitutions": {
+        "Nin": "Legacy.Nin"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.indeg_compat",
+      "live_unfolds_to": "degree_balance.indeg v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.classic_core.Nout2",
+      "path": "digraph-theory/theories/conjectures/classic_core.v",
+      "name": "Nout2",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "Legacy.Nout2",
+      "substitutions": {
+        "Nout": "Legacy.Nout"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.Nout2_compat",
+      "live_unfolds_to": "neighbourhoods.Nout2 v"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.classic_core.diregular",
+      "path": "digraph-theory/theories/conjectures/classic_core.v",
+      "name": "diregular",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "Legacy.diregular",
+      "substitutions": {
+        "indeg": "@Legacy.indeg D"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.diregular_compat",
+      "live_unfolds_to": "degree_balance.diregular D d"
+    },
+    {
+      "kind": "source",
+      "qualified": "Digraph.conjectures.colouring_variants.indeg",
+      "path": "digraph-theory/theories/conjectures/colouring_variants.v",
+      "name": "indeg",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "Legacy.cv_indeg",
+      "substitutions": {
+        "indeg": "cv_indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.cv_indeg_compat",
+      "live_unfolds_to": "degree_balance.indeg v"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.P9.antidirected_tree",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "antidirected_tree",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "P9Legacy.antidirected_tree",
+      "substitutions": {
+        "classic_core.indeg": "Legacy.indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.antidirected_tree_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.min_semidegree_at_least",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "min_semidegree_at_least",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X2Legacy.min_semidegree_at_least",
+      "substitutions": {
+        "indeg": "Legacy.indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.min_semidegree_at_least_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.mader_delta_zero_bound",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta_zero_bound",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X2Legacy.mader_delta_zero_bound",
+      "substitutions": {
+        "min_semidegree_at_least": "X2Legacy.min_semidegree_at_least"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.mader_delta_zero_bound_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.least_mader_delta_zero",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "least_mader_delta_zero",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X2Legacy.least_mader_delta_zero",
+      "substitutions": {
+        "mader_delta_zero_bound": "X2Legacy.mader_delta_zero_bound"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.least_mader_delta_zero_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.antidirected_path",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "antidirected_path",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X2Legacy.antidirected_path",
+      "substitutions": {
+        "indeg": "Legacy.indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.antidirected_path_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X2.min_semidegree_half",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "min_semidegree_half",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X2Legacy.min_semidegree_half",
+      "substitutions": {
+        "indeg": "Legacy.indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.min_semidegree_half_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X17.x17_min_semidegree_strict_half",
+      "path": "digraph-theory/theories/conjectures/X17.v",
+      "name": "x17_min_semidegree_strict_half",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X17Legacy.x17_min_semidegree_strict_half",
+      "substitutions": {
+        "classic_core.indeg": "Legacy.indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.x17_min_semidegree_strict_half_compat"
+    },
+    {
+      "kind": "chain",
+      "qualified": "Digraph.conjectures.X107.x107_total_degree_at_most",
+      "path": "digraph-theory/theories/conjectures/X107.v",
+      "name": "x107_total_degree_at_most",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X107Legacy.x107_total_degree_at_most",
+      "substitutions": {},
+      "certificate": "Digraph.migration.directed_neighbourhood.x107_total_degree_at_most_compat",
+      "note": "LEXICAL-ONLY enrollment (master-directed-neighbourhood-scope-decision.md 6d6d2b8d, option X-a): x107_total_degree_at_most binds a LOCAL let indeg v := #|[set u : D | u --> v]|, which shadows every imported indeg; the tool's lexical discovery resolves the name to classic_core.indeg (X107 imports X2, which imports classic_core), while the kernel closure (E1) shows no dependency on this family. Frozen verbatim (no substitution inside the let), certificate iff_refl of unchanged text."
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.classic_core.seymour_second_neighbourhood_statement",
+      "path": "digraph-theory/theories/conjectures/classic_core.v",
+      "name": "seymour_second_neighbourhood_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "ClassicCoreLegacy.seymour_second_neighbourhood_statement",
+      "substitutions": {
+        "Nout2": "Legacy.Nout2"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.seymour_second_neighbourhood_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.classic_core.long_dicycle_diregular_statement",
+      "path": "digraph-theory/theories/conjectures/classic_core.v",
+      "name": "long_dicycle_diregular_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "ClassicCoreLegacy.long_dicycle_diregular_statement",
+      "substitutions": {
+        "indeg": "Legacy.indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.long_dicycle_diregular_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.classic_core.jackson_hamilton_small_diregular_statement",
+      "path": "digraph-theory/theories/conjectures/classic_core.v",
+      "name": "jackson_hamilton_small_diregular_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "ClassicCoreLegacy.jackson_hamilton_small_diregular_statement",
+      "substitutions": {
+        "diregular": "Legacy.diregular"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.jackson_hamilton_small_diregular_statement_compat",
+      "non_corpus": true
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.P9.hamilton_cycle_in_small_d_diregular_graphs_statement",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "hamilton_cycle_in_small_d_diregular_graphs_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "P9Legacy.hamilton_cycle_in_small_d_diregular_graphs_statement",
+      "substitutions": {
+        "jackson_hamilton_small_diregular_statement": "ClassicCoreLegacy.jackson_hamilton_small_diregular_statement"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.hamilton_cycle_in_small_d_diregular_graphs_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.P9.antidirected_trees_in_digraphs_statement",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "antidirected_trees_in_digraphs_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "P9Legacy.antidirected_trees_in_digraphs_statement",
+      "substitutions": {
+        "antidirected_tree": "P9Legacy.antidirected_tree"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.antidirected_trees_in_digraphs_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.P9.arc_disjoint_directed_cycles_in_regular_directed_gra_statement",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "arc_disjoint_directed_cycles_in_regular_directed_gra_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "P9Legacy.arc_disjoint_directed_cycles_in_regular_directed_gra_statement",
+      "substitutions": {
+        "diregular": "Legacy.diregular"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.arc_disjoint_directed_cycles_in_regular_directed_gra_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.P9.decomposing_an_even_tournament_in_directed_paths_statement",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "decomposing_an_even_tournament_in_directed_paths_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "P9Legacy.decomposing_an_even_tournament_in_directed_paths_statement",
+      "substitutions": {
+        "classic_core.indeg": "Legacy.indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.decomposing_an_even_tournament_in_directed_paths_statement_compat",
+      "corpus": "opg"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X19.behzad_chartrand_wall_girth_regular_digraph_statement",
+      "path": "digraph-theory/theories/conjectures/X19.v",
+      "name": "behzad_chartrand_wall_girth_regular_digraph_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X19Legacy.behzad_chartrand_wall_girth_regular_digraph_statement",
+      "substitutions": {
+        "diregular": "Legacy.diregular"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.behzad_chartrand_wall_girth_regular_digraph_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.mader_delta0_transitive_tournament_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta0_transitive_tournament_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X2Legacy.mader_delta0_transitive_tournament_statement",
+      "substitutions": {
+        "least_mader_delta_zero": "X2Legacy.least_mader_delta_zero"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.mader_delta0_transitive_tournament_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X2.semidegree_oriented_paths_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "semidegree_oriented_paths_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X2Legacy.semidegree_oriented_paths_statement",
+      "substitutions": {
+        "min_semidegree_half": "X2Legacy.min_semidegree_half",
+        "antidirected_path": "X2Legacy.antidirected_path"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.semidegree_oriented_paths_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X17.stein_oriented_paths_strict_semidegree_statement",
+      "path": "digraph-theory/theories/conjectures/X17.v",
+      "name": "stein_oriented_paths_strict_semidegree_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X17Legacy.stein_oriented_paths_strict_semidegree_statement",
+      "substitutions": {
+        "x17_min_semidegree_strict_half": "X17Legacy.x17_min_semidegree_strict_half"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.stein_oriented_paths_strict_semidegree_statement_compat",
+      "corpus": "v2"
+    },
+    {
+      "kind": "statement",
+      "qualified": "Digraph.conjectures.X107.bounded_degree_acyclic_oriented_ramsey_linear_statement",
+      "path": "digraph-theory/theories/conjectures/X107.v",
+      "name": "bounded_degree_acyclic_oriented_ramsey_linear_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X107Legacy.bounded_degree_acyclic_oriented_ramsey_linear_statement",
+      "substitutions": {
+        "x107_total_degree_at_most": "X107Legacy.x107_total_degree_at_most"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.bounded_degree_acyclic_oriented_ramsey_linear_statement_compat",
+      "corpus": "v2",
+      "note": "LEXICAL-ONLY enrollment (master-directed-neighbourhood-scope-decision.md 6d6d2b8d, option X-a): x107_total_degree_at_most binds a LOCAL let indeg v := #|[set u : D | u --> v]|, which shadows every imported indeg; the tool's lexical discovery resolves the name to classic_core.indeg (X107 imports X2, which imports classic_core), while the kernel closure (E1) shows no dependency on this family. Frozen verbatim (no substitution inside the let), certificate iff_refl of unchanged text."
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X221.x221_eulerian",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "x221_eulerian",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "DegreeBalanceOriginal.x221_eulerian",
+      "substitutions": {
+        "indeg": "Legacy.indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.x221_eulerian_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.colouring_variants.eulerian",
+      "path": "digraph-theory/theories/conjectures/colouring_variants.v",
+      "name": "eulerian",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "DegreeBalanceOriginal.cv_eulerian",
+      "substitutions": {
+        "eulerian": "cv_eulerian",
+        "indeg": "Legacy.cv_indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.cv_eulerian_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.two_extremal.Eulerian",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "Eulerian",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "DegreeBalanceOriginal.Eulerian",
+      "substitutions": {
+        "indeg": "Legacy.indeg"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.Eulerian_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X221.x221_eulerian_avoidable",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "x221_eulerian_avoidable",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X221Original.eulerian_avoidable",
+      "substitutions": {
+        "x221_eulerian_avoidable": "eulerian_avoidable",
+        "x221_eulerian": "DegreeBalanceOriginal.x221_eulerian",
+        "contains_subdigraph": "Digraph.migration.tournament_unavoidability.Legacy.contains_subdigraph"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.x221_eulerian_avoidable_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.two_extremal_glue.realises_W",
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "realises_W",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "TwoExtremalGlueOriginal.realises_W",
+      "substitutions": {
+        "Eulerian": "DegreeBalanceOriginal.Eulerian"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.realises_W_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.glue_eul_subtype.realises_E",
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "realises_E",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "GlueEulSubtypeOriginal.realises_E",
+      "substitutions": {
+        "Eulerian": "DegreeBalanceOriginal.Eulerian"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.realises_E_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "name": "orientation_C4_eulerian_avoidable_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X221Original.orientation_C4_eulerian_avoidable_statement",
+      "substitutions": {
+        "x221_eulerian_avoidable": "X221Original.eulerian_avoidable"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.orientation_C4_eulerian_avoidable_statement_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement",
+      "path": "digraph-theory/theories/conjectures/colouring_variants.v",
+      "name": "majority_3col_eulerian_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "ColouringVariantsOriginal.majority_3col_eulerian_statement",
+      "substitutions": {
+        "eulerian": "DegreeBalanceOriginal.cv_eulerian"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.majority_3col_eulerian_statement_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Digraph.conjectures.two_extremal.H6_no_full_cover",
+      "path": "digraph-theory/theories/conjectures/two_extremal.v",
+      "name": "H6_no_full_cover",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "TwoExtremalOriginal.H6_no_full_cover",
+      "substitutions": {
+        "Eulerian": "DegreeBalanceOriginal.Eulerian"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.H6_no_full_cover_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a",
+      "corpus": "v2"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Digraph.conjectures.two_extremal_glue.conj_9_2_glued",
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "conj_9_2_glued",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "TwoExtremalGlueOriginal.conj_9_2_glued",
+      "substitutions": {
+        "realises_W": "TwoExtremalGlueOriginal.realises_W"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.conj_9_2_glued_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a",
+      "non_corpus": true
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Digraph.conjectures.glue_eul_subtype.conj_9_2_glued_e",
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "conj_9_2_glued_e",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "GlueEulSubtypeOriginal.conj_9_2_glued_e",
+      "substitutions": {
+        "realises_E": "GlueEulSubtypeOriginal.realises_E"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.conj_9_2_glued_e_original_compat",
+      "commit": "298112264b7c31820acf889c6da29b710fd39c9a",
+      "non_corpus": true
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X2.mader_delta_zero_bound",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta_zero_bound",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X2Original.mader_delta_zero_bound",
+      "substitutions": {
+        "min_semidegree_at_least": "X2Legacy.min_semidegree_at_least",
+        "contains_subdivision": "Digraph.migration.path_vertices.X2Legacy.contains_subdivision"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.mader_delta_zero_bound_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "original-statement",
+      "qualified": "Digraph.conjectures.X2.mader_delta0_transitive_tournament_statement",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "mader_delta0_transitive_tournament_statement",
+      "frozen_path": "digraph-theory/theories/migration/directed_neighbourhood.v",
+      "frozen": "X2Original.mader_delta0_transitive_tournament_statement",
+      "substitutions": {
+        "least_mader_delta_zero": "X2Original.least_mader_delta_zero"
+      },
+      "certificate": "Digraph.migration.directed_neighbourhood.mader_delta0_transitive_tournament_statement_original_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73",
+      "corpus": "v2"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X2.x2_path_vertices",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_path_vertices",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "Legacy.x2_path_vertices",
+      "substitutions": {},
+      "certificate": "Digraph.migration.path_vertices.x2_path_vertices_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X2.x2_path_internal",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "x2_path_internal",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2Legacy.path_internal",
+      "substitutions": {
+        "x2_path_internal": "path_internal",
+        "x2_path_vertices": "Legacy.x2_path_vertices"
+      },
+      "certificate": "Digraph.migration.path_vertices.x2_path_internal_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.X2.contains_subdivision",
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "contains_subdivision",
+      "frozen_path": "digraph-theory/theories/migration/path_vertices.v",
+      "frozen": "X2Legacy.contains_subdivision",
+      "substitutions": {
+        "x2_path_internal": "path_internal"
+      },
+      "certificate": "Digraph.migration.path_vertices.contains_subdivision_compat",
+      "commit": "9e030727db115917ae077ac07a8fc6aa68661f73"
+    },
+    {
+      "kind": "historical",
+      "qualified": "Digraph.conjectures.unvd.contains_subdigraph",
+      "path": "digraph-theory/theories/conjectures/unvd.v",
+      "name": "contains_subdigraph",
+      "frozen_path": "digraph-theory/theories/migration/tournament_unavoidability.v",
+      "frozen": "Legacy.contains_subdigraph",
+      "substitutions": {},
+      "certificate": "Digraph.migration.tournament_unavoidability.contains_subdigraph_compat",
+      "commit": "97605ddae838bc6e84b0602240148246e9d065f2"
+    }
+  ],
+  "extra_certificates": [
+    "Digraph.foundations.neighbourhoods.NoutE",
+    "Digraph.foundations.neighbourhoods.NinE",
+    "Digraph.foundations.neighbourhoods.NoutP",
+    "Digraph.foundations.neighbourhoods.NinP",
+    "Digraph.foundations.neighbourhoods.Nout2E",
+    "Digraph.foundations.neighbourhoods.Nout2P",
+    "Digraph.foundations.neighbourhoods.Nout2I",
+    "Digraph.foundations.neighbourhoods.Nout2_neq",
+    "Digraph.foundations.neighbourhoods.self_notin_Nout2",
+    "Digraph.foundations.neighbourhoods.Nout2_notin_Nout",
+    "Digraph.foundations.neighbourhoods.arc_notin_Nout2",
+    "Digraph.foundations.neighbourhoods.disjoint_Nout2_Nout",
+    "Digraph.foundations.neighbourhoods.Nout2_subC",
+    "Digraph.foundations.neighbourhoods.loop_Nout_Nin",
+    "Digraph.foundations.neighbourhoods.digon_Nout_Nin",
+    "Digraph.foundations.neighbourhoods.digon_notin_Nout2",
+    "Digraph.foundations.neighbourhoods.arcless_Nout",
+    "Digraph.foundations.neighbourhoods.arcless_Nin",
+    "Digraph.foundations.neighbourhoods.arcless_Nout2",
+    "Digraph.foundations.neighbourhoods.Nout_converse",
+    "Digraph.foundations.neighbourhoods.Nin_converse",
+    "Digraph.foundations.degree_balance.indeg_NinE",
+    "Digraph.foundations.degree_balance.outdeg_NoutE",
+    "Digraph.foundations.degree_balance.diregularP",
+    "Digraph.foundations.degree_balance.diregular_vertex",
+    "Digraph.foundations.degree_balance.diregular_balanced",
+    "Digraph.foundations.degree_balance.diregular_card0",
+    "Digraph.foundations.degree_balance.diregular_arcless",
+    "Digraph.foundations.degree_balance.diregular_converse",
+    "Digraph.foundations.degree_balance.tournament_N_outE",
+    "Digraph.foundations.degree_balance.tournament_N_inE",
+    "Digraph.foundations.degree_balance.tournament_outdegE",
+    "Digraph.foundations.degree_balance.tournament_indegE",
+    "Digraph.foundations.degree_balance.tournament_indeg_outdeg",
+    "Digraph.migration.directed_neighbourhood.diregular_ascription"
+  ],
+  "cross_module_consumers": [
+    {
+      "path": "digraph-theory/theories/applications/ck_path/ckpath_cert_graph_common.v",
+      "name": "indeg",
+      "note": "Short-name match only: in cycle_graph_valuation_internal_row_count_closed, indeg is a local `have` hypothesis (outdeg_in ... = d), not an in-degree; the ck_path certificate graph is unaffected and byte-identical."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "indeg",
+      "note": "This family's own P9 objects: the chain antidirected_tree (l.184) and the row decomposing_an_even_tournament_in_directed_paths_statement (l.496) qualify classic_core.indeg; frozen as P9Legacy.*; text unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "diregular",
+      "note": "This family's row arc_disjoint_directed_cycles_in_regular_directed_gra_statement (over classic_core.diregular), frozen as P9Legacy.*; text unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "jackson_hamilton_small_diregular_statement",
+      "note": "This family's row hamilton_cycle_in_small_d_diregular_graphs_statement, P9's corpus alias of classic_core's Jackson row; frozen as P9Legacy.* over ClassicCoreLegacy; text unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X107.v",
+      "name": "indeg",
+      "note": "LEXICAL-ONLY enrollment (master-directed-neighbourhood-scope-decision.md 6d6d2b8d, option X-a): x107_total_degree_at_most binds a LOCAL let indeg v := #|[set u : D | u --> v]|, which shadows every imported indeg; the tool's lexical discovery resolves the name to classic_core.indeg (X107 imports X2, which imports classic_core), while the kernel closure (E1) shows no dependency on this family. Frozen verbatim (no substitution inside the let), certificate iff_refl of unchanged text."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X17.v",
+      "name": "indeg",
+      "note": "This family's chain x17_min_semidegree_strict_half (qualified classic_core.indeg), frozen as X17Legacy.*; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X19.v",
+      "name": "diregular",
+      "note": "This family's row behzad_chartrand_wall_girth_regular_digraph_statement, frozen as X19Legacy.*; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/X2.v",
+      "name": "indeg",
+      "note": "This family's chains min_semidegree_at_least (l.66), antidirected_path (l.464) and min_semidegree_half (l.467), frozen as X2Legacy.*; text unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/generalised_wheel.v",
+      "name": "indeg",
+      "note": "Short-name match of the public B16 name: proof consumer gwheel_Eulerian unfolds /degree_balance.indeg (B16's adaptation); unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/glue_eul_subtype.v",
+      "name": "indeg",
+      "note": "Proof consumers ueglue_indeg_split/_inr/_inl_ne/_merged (l.196/247/280/311) now unfold /indeg /degree_balance.indeg instead of /indeg /Nin (this family's proof-only adaptation; theorem types unchanged); ueglue_Eulerian (l.326) is unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_P9.v",
+      "name": "antidirected_tree",
+      "note": "Proof consumer antidirected_tree_is_tree over the chain antidirected_tree; statement and script unchanged (conversion)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X2.v",
+      "name": "min_semidegree_at_least",
+      "note": "Proof consumers semideg_emptyD, x2_delta0_unguarded_false and x2_delta0_hyps_nonvacuous over the chain min_semidegree_at_least; statements unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_X2.v",
+      "name": "indeg",
+      "note": "Proof consumer x2_delta0_hyps_nonvacuous: l.113 now unfolds /indeg /degree_balance.indeg instead of /indeg /Nin (proof-only adaptation; type unchanged)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_h2_concrete.v",
+      "name": "indeg",
+      "note": "Short-name match of the public B16 name: symcyc3_Eulerian unfolds /degree_balance.indeg; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_reals2.v",
+      "name": "indeg",
+      "note": "Short-name match only: gr_eulerian_TT1 unfolds reals_growth's file-local indeg (B16's deferred legacy-axiom class, registered here as deferred, not migrated); unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/implications_X2.v",
+      "name": "mader_delta_zero_bound",
+      "note": "Implication module of phase X2: subdivision_TT_gives_delta0_bound uses the chain mader_delta_zero_bound; statement and script unchanged (conversion)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/two_extremal_glue.v",
+      "name": "indeg",
+      "note": "Short-name match of the public B16 name: di_cycle_Eulerian unfolds /degree_balance.indeg (B16's adaptation); unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/examples/degree_balance.v",
+      "name": "indeg",
+      "note": "B16's public client (reversed, per_vertex_converse_handshake) uses the public degree_balance.indeg; unchanged."
+    },
+    {
+      "path": "digraph-theory/theories/foundations/degree_balance.v",
+      "name": "Nin",
+      "note": "This family's public degree_balance additions (indeg_NinE, tournament_N_inE) over the public neighbourhoods.Nin, the canonical."
+    },
+    {
+      "path": "digraph-theory/theories/foundations/degree_balance.v",
+      "name": "Nout",
+      "note": "This family's public degree_balance additions (outdeg_NoutE, tournament_N_outE) over the public neighbourhoods.Nout, the canonical."
+    },
+    {
+      "path": "digraph-theory/theories/examples/neighbourhoods.v",
+      "name": "Nout",
+      "note": "This family's public client: uses the public neighbourhoods / degree_balance API (the canonicals), not the classic_core sources."
+    },
+    {
+      "path": "digraph-theory/theories/examples/neighbourhoods.v",
+      "name": "Nin",
+      "note": "This family's public client: uses the public neighbourhoods / degree_balance API (the canonicals), not the classic_core sources."
+    },
+    {
+      "path": "digraph-theory/theories/examples/neighbourhoods.v",
+      "name": "Nout2",
+      "note": "This family's public client: uses the public neighbourhoods / degree_balance API (the canonicals), not the classic_core sources."
+    },
+    {
+      "path": "digraph-theory/theories/examples/neighbourhoods.v",
+      "name": "indeg",
+      "note": "This family's public client: uses the public neighbourhoods / degree_balance API (the canonicals), not the classic_core sources."
+    },
+    {
+      "path": "digraph-theory/theories/examples/neighbourhoods.v",
+      "name": "diregular",
+      "note": "This family's public client: uses the public neighbourhoods / degree_balance API (the canonicals), not the classic_core sources."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_classic_core.v",
+      "name": "Nout",
+      "note": "Proof consumers: the groundings of classic_core's helpers and rows. Theorem types unchanged; proof-only adaptations at l.73 (indeg_is_card), l.103/l.133 (unfold /degree_balance.indeg) and l.109 (C3_indeg read at degree_balance.indeg)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_classic_core.v",
+      "name": "Nin",
+      "note": "Proof consumers: the groundings of classic_core's helpers and rows. Theorem types unchanged; proof-only adaptations at l.73 (indeg_is_card), l.103/l.133 (unfold /degree_balance.indeg) and l.109 (C3_indeg read at degree_balance.indeg)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_classic_core.v",
+      "name": "indeg",
+      "note": "Proof consumers: the groundings of classic_core's helpers and rows. Theorem types unchanged; proof-only adaptations at l.73 (indeg_is_card), l.103/l.133 (unfold /degree_balance.indeg) and l.109 (C3_indeg read at degree_balance.indeg)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_classic_core.v",
+      "name": "Nout2",
+      "note": "Proof consumers: the groundings of classic_core's helpers and rows. Theorem types unchanged; proof-only adaptations at l.73 (indeg_is_card), l.103/l.133 (unfold /degree_balance.indeg) and l.109 (C3_indeg read at degree_balance.indeg)."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_classic_core.v",
+      "name": "diregular",
+      "note": "Proof consumers: the groundings of classic_core's helpers and rows. Theorem types unchanged; proof-only adaptations at l.73 (indeg_is_card), l.103/l.133 (unfold /degree_balance.indeg) and l.109 (C3_indeg read at degree_balance.indeg)."
+    }
+  ],
+  "known_stale_snapshots": {
+    "digraph-theory/theories/migration/degree_balance.v#Legacy.x221_eulerian": "B16 per-row snapshot: degree-balance (baseline 2981122) froze its own source x221_eulerian (forall v : D, outdeg v = classic_core.indeg v) over the then-live classic_core.indeg, which since this family is the transparent alias of degree_balance.indeg (the same comprehension; conversion). It stays byte-exact under B16's ownership. The complete pre-B16 body over the raw in-degree is this family's DegreeBalanceOriginal.x221_eulerian (x221_eulerian_original_compat), and the complete row X221Original.orientation_C4_eulerian_avoidable_statement (orientation_C4_eulerian_avoidable_statement_original_compat).",
+    "digraph-theory/theories/migration/degree_balance.v#Legacy.cv_eulerian": "B16 per-row snapshot: degree-balance (baseline 2981122) froze its own source colouring_variants.eulerian ([forall v : D, colouring_variants.indeg v == outdeg v]) over the then-live colouring_variants.indeg, which since this family is the transparent alias of degree_balance.indeg (conversion). It stays byte-exact under B16's ownership. The complete pre-B16 body over the raw in-degree is DegreeBalanceOriginal.cv_eulerian (cv_eulerian_original_compat), and the complete row ColouringVariantsOriginal.majority_3col_eulerian_statement (majority_3col_eulerian_statement_original_compat).",
+    "digraph-theory/theories/migration/degree_balance.v#Legacy.Eulerian": "B16 per-row snapshot: degree-balance (baseline 2981122) froze its own source two_extremal.Eulerian (forall v : D, classic_core.indeg v = outdeg v) over the then-live classic_core.indeg, which since this family is the transparent alias of degree_balance.indeg (conversion). It stays byte-exact under B16's ownership. The complete pre-B16 body over the raw in-degree is DegreeBalanceOriginal.Eulerian (Eulerian_original_compat); the complete row TwoExtremalOriginal.H6_no_full_cover and the whole Props TwoExtremalGlueOriginal.conj_9_2_glued and GlueEulSubtypeOriginal.conj_9_2_glued_e are recomposed over it (their *_original_compat certificates).",
+    "digraph-theory/theories/migration/path_vertices.v#X2BoundsLegacy.mader_delta_zero_bound": "B1/B2 per-row snapshot: path-vertices (baseline 9e03072) froze the Mader delta-zero bound over its own frozen X2Legacy.contains_subdivision but kept the live X2 min_semidegree_at_least (forall v, m <= outdeg v /\\ m <= indeg v, over classic_core's indeg), which since this family reads the alias of degree_balance.indeg (conversion). It stays byte-exact under B1's ownership. The complete chain over B1's raw subdivision, this family's frozen min_semidegree_at_least and the raw in-degree is X2Original.mader_delta_zero_bound (mader_delta_zero_bound_original_compat), and the complete row X2Original.mader_delta0_transitive_tournament_statement (mader_delta0_transitive_tournament_statement_original_compat).",
+    "digraph-theory/theories/migration/directed_neighbourhood.v#X107Legacy.x107_total_degree_at_most": "Lexical short-name match only (decision X-a): the indeg in this frozen body is the LOCAL let-binding let indeg v := #|[set u : D | u --> v]|, which shadows every imported indeg; it is not the migrated classic_core.indeg, and the kernel closure (E1) shows no dependency on this family. Not a stale snapshot."
+  },
+  "distinct_variants": [
+    {
+      "qualified": "GTBase.orientations.rel_indegree",
+      "path": "base/theories/orientations.v",
+      "name": "rel_indegree",
+      "note": "D11's in-degree of a SUPPLIED relation D : rel G on a simple-graph host (proper orientations); D11 lists B16's indeg as its distinct variant, reciprocally (X81 x81_indegree and X82 x82_indegree are its aliases, owned by D11); untouched"
+    },
+    {
+      "qualified": "Chromatic.foundations.alon_tarsi.at_indegree",
+      "path": "chromatic-theory/theories/foundations/alon_tarsi.v",
+      "name": "at_indegree",
+      "note": "Alon-Tarsi in-degree inside a supplied set of ordered pairs; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.P9.arcset_indeg",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "arcset_indeg",
+      "note": "in-degree inside a supplied arc set A : {set D * D}; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.P9.arcset_outdeg",
+      "path": "digraph-theory/theories/conjectures/P9.v",
+      "name": "arcset_outdeg",
+      "note": "out-degree inside a supplied arc set A : {set D * D}; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.packing.selindeg",
+      "path": "digraph-theory/theories/conjectures/packing.v",
+      "name": "selindeg",
+      "note": "in-degree of a selection f : D -> {set D} (#|[set u | v \\in f u]|); untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.X86.x86_sel_indeg",
+      "path": "digraph-theory/theories/conjectures/X86.v",
+      "name": "x86_sel_indeg",
+      "note": "selection in-degree restricted to a set S; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.path_fas.sdeg",
+      "path": "digraph-theory/theories/conjectures/path_fas.v",
+      "name": "sdeg",
+      "note": "undirected simple-graph degree; untouched"
+    },
+    {
+      "qualified": "Digraph.conjectures.twinwidth.red_deg",
+      "path": "digraph-theory/theories/conjectures/twinwidth.v",
+      "name": "red_deg",
+      "note": "red-graph degree of a trigraph; untouched"
+    },
+    {
+      "qualified": "Infinite.conjectures.D4_unblocked.i_neighbourhood",
+      "path": "infinite-graph-theory/theories/conjectures/D4_unblocked.v",
+      "name": "i_neighbourhood",
+      "note": "Prop-valued neighbourhood of an infinite iGraph; untouched"
+    },
+    {
+      "qualified": "Digraph.core.tournament.N_out",
+      "path": "digraph-theory/theories/core/tournament.v",
+      "name": "N_out",
+      "note": "STAGED, a later stage of THIS family (master-directed-neighbourhood-scope-decision.md 6d6d2b8d): the out-neighbourhood restricted to a tournament, the body of neighbourhoods.Nout; core/ is outside the tools' public-source scope; untouched (parent text)"
+    },
+    {
+      "qualified": "Digraph.core.tournament.N_in",
+      "path": "digraph-theory/theories/core/tournament.v",
+      "name": "N_in",
+      "note": "STAGED, a later stage of THIS family (master-directed-neighbourhood-scope-decision.md 6d6d2b8d): the in-neighbourhood restricted to a tournament, the body of neighbourhoods.Nin (its alias must take NO {set T} ascription: measured About/Printing All parity); untouched (parent text)"
+    }
+  ],
+  "relation": "Directed neighbourhoods of a finite digraph (diGraphType D) and the in-degree and regularity predicates read through them. Canonical bodies: Digraph.foundations.neighbourhoods.Nout v := [set w | v --> w], Nin v := [set u | u --> v] and Nout2 v := [set w | [&& w != v, w \\notin Nout v & [exists u, (u \\in Nout v) && (u --> w)]]] (directed distance exactly two; both exclusions kept); the in-degree is B16's Digraph.foundations.degree_balance.indeg v := #|[set u | u --> v]| (#|Nin v| by conversion), beside core oriented.outdeg; d-diregularity is degree_balance.diregular d := [forall v : D, (outdeg v == d) && (indeg v == d)] (Boolean, out-degree conjunct first). classic_core Nout/Nin/Nout2/indeg/diregular and colouring_variants.indeg are transparent aliases of these bodies (conversion; names, declared types, implicit arguments and transparency unchanged). Loops count on both sides, digons are allowed, and diregularity is vacuous on the empty carrier for every d. STAGED (master-directed-neighbourhood-scope-decision.md 6d6d2b8d, option C): core/tournament's N_out/N_in (the same comprehensions restricted to a tournament), the three rows that reach this family only through them (X2 tournament_outneighborhood_degeneracy_statement and tournament_outneighborhood_cycle_statement, X93 local_tournament_dichromatic_bound_statement) and the X93 chain x93_t_local_tournament are a LATER STAGE of this family: the migration tools admit no public source under core/ (family_registry.public_repository_path), so they need a gate-tooling change admitting core/ or another reviewed route. They are untouched here (core/tournament.v keeps its parent text); the measured N_in ascription finding is kept for that stage.",
+  "summary": [
+    "Family directed-neighbourhood (contract master-directed-neighbourhood-contract.md 86b00148 and addendum ed04e65a, option C; scope decision master-directed-neighbourhood-scope-decision.md 6d6d2b8d), FIRST STAGE, on the A28 main 761e776c. New focused public module Digraph.foundations.neighbourhoods (imports prelude and core/digraph only) with Nout/Nin/Nout2 verbatim and the elementary API (membership views, the distance-two exclusion, loop/digon/arcless corners, converse swaps); Digraph.foundations.degree_balance gains the Boolean diregular (out-degree conjunct first), the bridges indeg v = #|Nin v| and outdeg v = #|Nout v| (conversion) and the tournament equalities. No new degree: B16's indeg and core oriented.outdeg stay canonical.",
+    "",
+    "Endpoints of this stage (6), transparent aliases with names, declared types, implicit D, Arguments and transparency unchanged: classic_core Nout, Nin, Nout2 -> neighbourhoods; classic_core indeg and colouring_variants.indeg -> degree_balance.indeg; classic_core diregular -> degree_balance.diregular. STAGED (master-directed-neighbourhood-scope-decision.md 6d6d2b8d, option C): core/tournament's N_out/N_in (the same comprehensions restricted to a tournament), the three rows that reach this family only through them (X2 tournament_outneighborhood_degeneracy_statement and tournament_outneighborhood_cycle_statement, X93 local_tournament_dichromatic_bound_statement) and the X93 chain x93_t_local_tournament are a LATER STAGE of this family: the migration tools admit no public source under core/ (family_registry.public_repository_path), so they need a gate-tooling change admitting core/ or another reviewed route. They are untouched here (core/tournament.v keeps its parent text); the measured N_in ascription finding is kept for that stage.",
+    "",
+    "Rows of this stage (11), frozen with their own chains, every guard in its order (redundant ones included): classic_core Seymour (opg), long dicycle (opg), Jackson (non-corpus: its corpus row is P9's alias); P9 Hamilton alias, antidirected trees (chain antidirected_tree), arc-disjoint cycles, and decomposing_an_even_tournament_in_directed_paths_statement (opg; its classic_core.indeg is qualified in the source: the 14th row of the full scope, a count correction accepted in the scope decision); X19; X2 Mader delta-zero (chains min_semidegree_at_least, mader_delta_zero_bound, least_mader_delta_zero) and semidegree (chains min_semidegree_half, antidirected_path); X17 (chain x17_min_semidegree_strict_half). LEXICAL-ONLY enrollment (master-directed-neighbourhood-scope-decision.md 6d6d2b8d, option X-a): x107_total_degree_at_most binds a LOCAL let indeg v := #|[set u : D | u --> v]|, which shadows every imported indeg; the tool's lexical discovery resolves the name to classic_core.indeg (X107 imports X2, which imports classic_core), while the kernel closure (E1) shows no dependency on this family. Frozen verbatim (no substitution inside the let), certificate iff_refl of unchanged text.",
+    "",
+    "History: B16's three per-row snapshots (x221_eulerian, cv_eulerian, Eulerian) and B1/B2's Mader bound snapshot keep this family's live in-degree; each is keyed below with its complete Original over the raw in-degrees (DegreeBalanceOriginal and the *Original row modules; the X221 row also over poset-unavoidability's frozen contains_subdigraph; X2Original over B1's raw contains_subdivision). The whole Props conj_9_2_glued/_e (B16's additional statements) reach no live source of this family and are enrolled only as complete Originals (non_corpus).",
+    "",
+    "Proof-only adaptations (theorem types unchanged): grounding_classic_core.v (the in/out-degree identities and the C3 groundings unfold degree_balance.indeg), grounding_X2.v l.113, glue_eul_subtype.v l.196/247/280/311. Deferred, not migrated: reals_growth.indeg (B16's legacy-axiom class); distinct models as listed. No statement text, doc block, manifest row or leg state changes; no classical-assumption change."
+  ]
+}

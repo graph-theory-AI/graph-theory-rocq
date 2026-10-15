@@ -193,7 +193,7 @@ Lemma ueglue_indeg_split (z : ueglue) :
   indeg z = #|[set v : D1 | uearc (inl v) z]|
           + #|[set w : D2mb | uearc (inr w) z]|.
 Proof.
-rewrite /indeg /Nin.
+rewrite /indeg /degree_balance.indeg.
 rewrite (card_set_sum (A:=D1) (B:=D2mb) (fun u : ueglue => u --> z)).
 by congr (_ + _); apply: eq_card => t; rewrite !inE ueglue_arcE.
 Qed.
@@ -244,7 +244,7 @@ have inlcard : #|[set v : D1 | uearc (inl v) (inr w0)]| = (b --> val w0 : nat).
   rewrite (_ : [set v : D1 | (v == a) && false] = set0) ?cards0 //.
   by apply/setP => v; rewrite !inE andbF.
 rewrite inlcard.
-rewrite /indeg /Nin.
+rewrite /indeg /degree_balance.indeg.
 rewrite -(cardsID [set b] [set w : D2 | w --> val w0]).
 congr (_ + _).
 - rewrite (_ : _ :&: _ = if b --> val w0 then [set b] else set0).
@@ -277,7 +277,7 @@ move=> Nua; rewrite ueglue_indeg_split.
 rewrite (_ : #|[set w : D2mb | uearc (inr w) (inl u)]| = 0); last first.
   apply/eqP; rewrite cards_eq0; apply/eqP/setP => w.
   by rewrite !inE /uearc /= (negbTE Nua).
-by rewrite addn0; rewrite /indeg /Nin; apply: eq_card => v; rewrite !inE.
+by rewrite addn0; rewrite /indeg /degree_balance.indeg; apply: eq_card => v; rewrite !inE.
 Qed.
 
 (** THE DEGREE-UNION at the merged vertex (out): [outdeg (inl a) = outdeg_{D1} a +
@@ -308,7 +308,7 @@ congr (_ + _).
 rewrite (eq_card (B := [set w : D2mb | val w --> b])); last first.
   by move=> w; rewrite !inE /uearc /= eqxx.
 rewrite (@card_sig_pred D2 (fun x : D2 => x != b) (fun z => z --> b)).
-rewrite /indeg /Nin; apply: eq_card => v; rewrite !inE.
+rewrite /indeg /degree_balance.indeg; apply: eq_card => v; rewrite !inE.
 case: (altP (v =P b)) => [->|//].
 by rewrite (l2 b) andbF.
 Qed.

@@ -2,7 +2,7 @@
   "counts": {
     "files": 321,
     "helpers": 2560,
-    "repeated_body_shapes": 146,
+    "repeated_body_shapes": 147,
     "repeated_normalized_names": 212,
     "repeated_signature_shapes": 305,
     "statements_excluded": 700,
@@ -68,6 +68,10 @@
       "179924813bbecd4ed4b3da04eb0f17d3cc659d34ea71fe7cdf44f09b17e537a2": [
         "Chromatic.conjectures.X70.x70_graph",
         "Digraph.conjectures.X2.x2_sgraph"
+      ],
+      "1b9c2acf4f7203af42ada1a945d73cac8825d89acb8d16ef95cf7de4b364f3b1": [
+        "Digraph.conjectures.classic_core.indeg",
+        "Digraph.conjectures.colouring_variants.indeg"
       ],
       "1df7d8c171c718b6dc31bb6ae6c96fae69ba79ada340964f920efb81058d0e21": [
         "GTMisc.conjectures.X116.x116_pairwise_distant_paths",
@@ -18972,14 +18976,12 @@
       "signature_shape_hash": "617b1d5818f848eede3b6f4bb33b1b3fc8140eb4fb64bc78428d500da9045616"
     },
     {
-      "body_hash": "903c62094c66c07acf5172f90cdc0fd2afef1213e3c51f51d80509669923e985",
-      "body_shape_hash": "903c62094c66c07acf5172f90cdc0fd2afef1213e3c51f51d80509669923e985",
-      "declaration_hash": "0d6dad2234134fe86abd154fe2e900dd09f7be8fd347890285f3ede62442dc5c",
-      "direct_consumers": [
-        "Digraph.conjectures.classic_core.Nout2"
-      ],
+      "body_hash": "4b45c41bacf771347d3c1180e130fbf24170d2545c94529bf7b1f80a28eab910",
+      "body_shape_hash": "4b45c41bacf771347d3c1180e130fbf24170d2545c94529bf7b1f80a28eab910",
+      "declaration_hash": "a27309ee3e432f42476bb3e651ad6d6ace00da992ab23a65cd40609e901d64ba",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 34,
+      "line": 35,
       "local_dependencies": [],
       "name": "Nout",
       "normalized_name": "Nout",
@@ -18991,14 +18993,12 @@
       "signature_shape_hash": "9e32d43a9d584be0d032e1bf94460b7da7372ae1fa5d08f790011cf808c63c57"
     },
     {
-      "body_hash": "db0cab1856846fbabe6652af21918db5931ac7c696298c4e59f65ad9ebb62a47",
-      "body_shape_hash": "db0cab1856846fbabe6652af21918db5931ac7c696298c4e59f65ad9ebb62a47",
-      "declaration_hash": "326e6c0c8ce9294275a3661815dc632816619342a909faedb417931ca6758b14",
-      "direct_consumers": [
-        "Digraph.conjectures.classic_core.indeg"
-      ],
+      "body_hash": "38cf1935dbc4f7129d69e7586570c2b6ce7152baaafe4a1e2eaad4af91bd5973",
+      "body_shape_hash": "38cf1935dbc4f7129d69e7586570c2b6ce7152baaafe4a1e2eaad4af91bd5973",
+      "declaration_hash": "1bb11a91026c3bf617c4fefa56b8d380972511197f4f3bdbd2155d706ffba655",
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 36,
+      "line": 39,
       "local_dependencies": [],
       "name": "Nin",
       "normalized_name": "Nin",
@@ -19010,18 +19010,15 @@
       "signature_shape_hash": "9e32d43a9d584be0d032e1bf94460b7da7372ae1fa5d08f790011cf808c63c57"
     },
     {
-      "body_hash": "66295f66a9cf06459055d7c0965a3e9bbffd03aed42c878525c40458719673ce",
-      "body_shape_hash": "66295f66a9cf06459055d7c0965a3e9bbffd03aed42c878525c40458719673ce",
-      "declaration_hash": "6f96db051f0956d1a783eddf8dea1173ee708e132b8849a20b07b073b6efa5c2",
+      "body_hash": "1b9c2acf4f7203af42ada1a945d73cac8825d89acb8d16ef95cf7de4b364f3b1",
+      "body_shape_hash": "1b9c2acf4f7203af42ada1a945d73cac8825d89acb8d16ef95cf7de4b364f3b1",
+      "declaration_hash": "d479fdfb0d76b7f724380a560039f9acd2fcf78abcb6eeb0050a5afad8cd849e",
       "direct_consumers": [
-        "Digraph.conjectures.classic_core.diregular",
         "Digraph.conjectures.classic_core.long_dicycle_diregular_statement"
       ],
       "kind": "Definition",
-      "line": 37,
-      "local_dependencies": [
-        "Nin"
-      ],
+      "line": 40,
+      "local_dependencies": [],
       "name": "indeg",
       "normalized_name": "indeg",
       "package": "digraph-theory",
@@ -19032,17 +19029,15 @@
       "signature_shape_hash": "d02772929bf16cdd00c788837805ece85de618afd5794687023493ca9ab96530"
     },
     {
-      "body_hash": "b85b4865c01d3d20b54f313d89df0c1d2c5233310ac17af43a8536a023056a83",
-      "body_shape_hash": "b85b4865c01d3d20b54f313d89df0c1d2c5233310ac17af43a8536a023056a83",
-      "declaration_hash": "6e89747a361774dda1d227453eac93cc75fb645cf17b78003cb595e679f892d4",
+      "body_hash": "cdece9cbfc03a12a2945a0e315353b203cb69888f9f906090f94aa24f7019dd1",
+      "body_shape_hash": "cdece9cbfc03a12a2945a0e315353b203cb69888f9f906090f94aa24f7019dd1",
+      "declaration_hash": "0828aa9ff430356bbe3c8aed58664e66231a5abf040354b7f61793cc73721167",
       "direct_consumers": [
         "Digraph.conjectures.classic_core.seymour_second_neighbourhood_statement"
       ],
       "kind": "Definition",
-      "line": 40,
-      "local_dependencies": [
-        "Nout"
-      ],
+      "line": 44,
+      "local_dependencies": [],
       "name": "Nout2",
       "normalized_name": "Nout2",
       "package": "digraph-theory",
@@ -19053,17 +19048,15 @@
       "signature_shape_hash": "9e32d43a9d584be0d032e1bf94460b7da7372ae1fa5d08f790011cf808c63c57"
     },
     {
-      "body_hash": "d8854f751ce7b2de1fa8005059e3eed703fb9ab13740ae5351b59a18ffedd894",
-      "body_shape_hash": "d8854f751ce7b2de1fa8005059e3eed703fb9ab13740ae5351b59a18ffedd894",
-      "declaration_hash": "4bd16db1894efc66daa23461c8951385998e1394fad4f8eaf933b82c7421d603",
+      "body_hash": "b6051e4404bc3d8a9bdf1c6ddf5f73c0468962db7176cde7e7a291a2356264da",
+      "body_shape_hash": "b6051e4404bc3d8a9bdf1c6ddf5f73c0468962db7176cde7e7a291a2356264da",
+      "declaration_hash": "0a8833a51d7c8aaa12991c7b51f3b90a721835a5b7cfb99a653afe64bcb184d5",
       "direct_consumers": [
         "Digraph.conjectures.classic_core.jackson_hamilton_small_diregular_statement"
       ],
       "kind": "Definition",
-      "line": 46,
-      "local_dependencies": [
-        "indeg"
-      ],
+      "line": 49,
+      "local_dependencies": [],
       "name": "diregular",
       "normalized_name": "diregular",
       "package": "digraph-theory",
@@ -19079,7 +19072,7 @@
       "declaration_hash": "8cd0894d781ae1b92af550bab8b61f206527169b50152927b84bab523bb9935d",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 51,
+      "line": 55,
       "local_dependencies": [],
       "name": "oriented_dicycle_size_ge3",
       "normalized_name": "oriented_dicycle_size_ge3",
@@ -19096,7 +19089,7 @@
       "declaration_hash": "1f69d3d958f6ce95cd52a5303e329c2bbabeba26f5c17a904ed27e2ade2b67e4",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 106,
+      "line": 110,
       "local_dependencies": [],
       "name": "caccetta_haggkvist_triangle_statement",
       "normalized_name": "caccetta_haggkvist_triangle_statement",
@@ -19113,7 +19106,7 @@
       "declaration_hash": "055b170dfb65269acb1342f7bdf8cfa4427dffd45d15abba5a54ae7f62400dce",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 136,
+      "line": 140,
       "local_dependencies": [
         "diregular"
       ],
@@ -19134,7 +19127,7 @@
         "Digraph.conjectures.classic_core.stable_meeting_longest_dipaths_statement"
       ],
       "kind": "Definition",
-      "line": 178,
+      "line": 182,
       "local_dependencies": [],
       "name": "stable",
       "normalized_name": "stable",
@@ -19312,9 +19305,9 @@
       "signature_shape_hash": "183034a5ae1cdb6bae87b74e53f56e5469cb9b5a35104278d3dab9bbf766bec3"
     },
     {
-      "body_hash": "03278e5694a59d5072b2b7ae1ec79963488baa447affd75591495f1fef454601",
-      "body_shape_hash": "03278e5694a59d5072b2b7ae1ec79963488baa447affd75591495f1fef454601",
-      "declaration_hash": "3eef7ce3b483a0ce54fd21af024f7dcd6a2e9c65019b330342dc7f9e9dc47633",
+      "body_hash": "1b9c2acf4f7203af42ada1a945d73cac8825d89acb8d16ef95cf7de4b364f3b1",
+      "body_shape_hash": "1b9c2acf4f7203af42ada1a945d73cac8825d89acb8d16ef95cf7de4b364f3b1",
+      "declaration_hash": "b779285a61e1259f24d02eeba0c384c69f51e6797e56fb7f1fac92f66d7a96d3",
       "direct_consumers": [],
       "kind": "Definition",
       "line": 117,
