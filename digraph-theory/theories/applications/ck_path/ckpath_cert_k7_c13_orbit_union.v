@@ -256,7 +256,7 @@ have Asubc : A \subset [set z in c].
   apply: (subset_trans
     (@odd_active_subset_gateway D c S HSclosed)).
   apply/subsetP=> q.
-  by rewrite /odd_gateway_set inE => /andP[].
+  by rewrite /odd_gateway_set !inE => /andP[].
 have [root [rootc [rootA [Hrep _]]]] :=
   @choose_cycle_set_orbit_root D c A 13 #|A| uc Hcsize Asubc erefl
     Apos Hrooted.
