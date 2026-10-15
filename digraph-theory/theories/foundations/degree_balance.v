@@ -38,6 +38,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Import GRing.Theory.
+Set SsrOldRewriteGoalsOrder.
 
 Section DegreeBalance.
 Variable D : diGraphType.
