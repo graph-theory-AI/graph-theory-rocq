@@ -5,6 +5,7 @@ From mathcomp Require Import all_boot zify.
 From Stdlib Require Import Lia.
 From Digraph Require Import prelude digraph oriented dipath
   ckpath_cycle_tools ckpath_cert_base ckpath_cert_valuation.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
