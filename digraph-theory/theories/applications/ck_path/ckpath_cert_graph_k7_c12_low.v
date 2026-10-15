@@ -13,6 +13,7 @@ From Digraph Require Import prelude digraph oriented dipath
   ckpath_cert_k7_c12_low3_reduction
   ckpath_rotation_paths
   ckpath_rotation_paths_k7 ckpath_cert_graph_common ckpath_k7_orbits.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
