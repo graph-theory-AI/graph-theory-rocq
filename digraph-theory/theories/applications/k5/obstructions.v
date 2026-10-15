@@ -24,6 +24,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Import GRing.Theory.
+Set SsrOldRewriteGoalsOrder.
 Local Open Scope ring_scope.
 
 (** The 20-disjunct obstruction pattern over the 8 cell-occupancy bits. *)
