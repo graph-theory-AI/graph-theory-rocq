@@ -67,7 +67,10 @@ def public_repository_path(path: str) -> bool:
     if parts[:2] == ('classical-lemmas', 'theories'):
         return len(parts) >= 3 and not {'conjectures', 'migration', 'examples'}.intersection(parts[2:-1])
     return ((len(parts) == 3 and parts[:2] == ('base', 'theories'))
-            or (len(parts) >= 4 and parts[1:3] == ('theories', 'foundations')))
+            or (len(parts) >= 4 and parts[1] == 'theories'
+                and parts[2] in {'foundations', 'core', 'invariants', 'constructions'})
+            or (len(parts) >= 4
+                and parts[:3] == ('digraph-theory', 'theories', 'invariants_advanced')))
 
 
 def load_library_registry(root: Path = ROOT, *, allow_missing_reports: bool = False) -> dict:
