@@ -83,6 +83,27 @@ class GuardTests(unittest.TestCase):
         self.assertTrue(result.group_empty)
         self.assertEqual(FM.mutant_verdict(result, SIGNATURE, 2), (False, "timed out after 2s"))
 
+    def test_pipes_held_outside_the_group_is_a_failure(self) -> None:
+        # N-1: a grandchild in its OWN session keeps the output pipes open after the group kill.  The drain is bounded
+        # (PIPE_DRAIN_S, 1 s here) and the call is FAILED with the marker, never a kill and never an endless wait.
+        pidfile = self.dir / "grandchild.pid"
+        body = (f"import subprocess, time\np = subprocess.Popen(['sleep', '300'], start_new_session=True)\n"
+                f"open({str(pidfile)!r}, 'w').write(str(p.pid))\nprint({SIGNATURE!r}, flush=True)\ntime.sleep(60)\n")
+        try:
+            with mock.patch.object(FM, "PIPE_DRAIN_S", 1):
+                result = self.check(body, timeout=2)
+        finally:
+            if pidfile.exists():
+                try:
+                    os.kill(int(pidfile.read_text()), signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+        self.assertTrue(pidfile.exists(), "the grandchild started before the kill (else the test is void)")
+        self.assertIsNone(result.returncode)
+        self.assertFalse(result.group_empty)
+        self.assertEqual(result.markers, ("pipes held after the timeout kill",))
+        self.assertEqual(FM.mutant_verdict(result, SIGNATURE, 2), (False, "resource: markers ['pipes held after the timeout kill']"))
+
     def test_baseline_guard(self) -> None:
         result = self.check("import sys\nprint('Cannot allocate memory')\nsys.exit(1)\n")
         self.assertEqual(FM.baseline_verdict(result, 60), "resource: markers ['Cannot allocate memory']")

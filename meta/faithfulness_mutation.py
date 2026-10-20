@@ -48,6 +48,9 @@ DEFAULT_TIMEOUT = 300
 CGROUP = Path("/sys/fs/cgroup")
 RESOURCE_MARKERS = ("No space left on device", "ENOSPC", "Cannot allocate memory", "ENOMEM", "Killed", "Error 137")
 GRACE_S = 5
+# N-1 (G-3): after the timeout's group kill, the output pipes are drained for at most PIPE_DRAIN_S.  A process that left
+# the call's session (setsid) can hold them open; the call is then FAILED "pipes held after the timeout kill", never waited on.
+PIPE_DRAIN_S = 30
 
 
 def cgroup_oom_kills() -> int | None:
@@ -142,7 +145,17 @@ def run_guarded(command: list[str], cwd: Path, env: dict[str, str], timeout: int
     except subprocess.TimeoutExpired:
         timed_out = True
         kill_group(proc.pid)
-        stdout, stderr = proc.communicate()
+        try:
+            stdout, stderr = proc.communicate(timeout=PIPE_DRAIN_S)
+        except subprocess.TimeoutExpired:
+            for pipe in (proc.stdout, proc.stderr):
+                pipe.close()
+            held = ("pipes held after the timeout kill",)
+            try:
+                proc.wait(timeout=PIPE_DRAIN_S)
+            except subprocess.TimeoutExpired:
+                held += ("group leader alive after the kill",)
+            return CheckResult(None, "", "", False, None, held)
     empty = kill_group(proc.pid)
     oom_after = cgroup_oom_kills()
     delta = None if oom_before is None or oom_after is None else oom_after - oom_before
