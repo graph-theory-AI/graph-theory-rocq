@@ -69,6 +69,7 @@ mutation:
 	python3 meta/faithfulness_mutation.py --timeout 1800
 	python3 meta/library_inventory.py --validate
 	python3 meta/migration_report.py --validate --kernel
+	python3 meta/test_install_gate.py
 
 # Active vacuity/refutability probe: try to close each `_statement` and its negation with a
 # bounded automation ladder + curated witnesses (meta/probe_hints/). Any statement that is
@@ -121,6 +122,21 @@ digraph-theory: base
 # builds it and build_edge_graph.py picks its @EDGE annotations up like any package.
 atlas: $(filter-out base classical-lemmas,$(PACKAGES)) digraph-theory
 	cd $@ && rocq makefile -f _CoqProject -o Makefile.coq && $(MAKE) -f Makefile.coq
+
+# G-6 / G-8: the public-library install gate and the opam metadata lint (meta/install_gate.py).
+# install-gate needs INSTALL_GATE_OUT, a fresh directory OUTSIDE the repository, and the source ids the
+# caller binds, GATE_SOURCE_COMMIT and GATE_SOURCE_TREE (40-hex, the same pair as `make rocqchk`; the gate
+# never reads git). It lints the opam files, builds and installs the public packages with their own
+# build: commands into a fresh private prefix under INSTALL_GATE_OUT, and compiles every example against
+# that prefix only. INSTALL_GATE_ARGS passes e.g. --jobs N (the value of %{jobs}%, default 1) or
+# --tree-sha256 FILE (every input must equal its row).
+.PHONY: install-gate opam-lint
+install-gate:
+	@test -n "$(INSTALL_GATE_OUT)" || { echo 'make install-gate: set INSTALL_GATE_OUT=<a fresh directory outside the repository>'; exit 2; }
+	python3 meta/install_gate.py --out "$(INSTALL_GATE_OUT)" --source-commit "$(GATE_SOURCE_COMMIT)" --source-tree "$(GATE_SOURCE_TREE)" $(INSTALL_GATE_ARGS)
+
+opam-lint:
+	python3 meta/install_gate.py --lint-only
 
 clean:
 	@for p in $(PACKAGES) digraph-theory atlas; do (cd $$p && rocq makefile -f _CoqProject -o Makefile.coq >/dev/null 2>&1 && $(MAKE) -f Makefile.coq clean) 2>/dev/null || true; done
