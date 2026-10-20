@@ -7,13 +7,15 @@ distinct.
 
 a3 (arthur, RC R-10, 2026-10-20): the receipt's source (O-1): SourceIdentity (S1-S10, on temporary git repositories), MainSource
 (M1) and ReceiptFixture (F1-F5: main() end to end on a one-module fixture tree with a fake rocqchk).  a1 / a2 (RC G-1, 2026-10-14)
-ran at G-1's first execution (48 tests OK).
+ran at G-1's first execution (48 tests OK).  a4 (V-O1 r1): ReceiptFixture runs main() in-process and the fake checker through
+sys.executable, since /tmp is noexec in the gate containers.
 """
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import os
-import shutil
 import signal
 import subprocess
 import sys
@@ -540,40 +542,59 @@ class MainSource(unittest.TestCase):
                         self.assertFalse(out.exists())
 
 
-FAKE_ROCQCHK = """#!/bin/sh
-if [ "$1" = --version ]; then echo "The Rocq Proof Checker, fake (test_rocqchk_all ReceiptFixture)"; exit 0; fi
-cat "$(dirname "$0")/shard1.out"
-"""
+FAKE_ROCQCHK = '''"""a fake rocqchk for ReceiptFixture, run as `sys.executable rocqchk.py ...` (never exec'd itself)"""
+import sys
+from pathlib import Path
+if sys.argv[1:] == ["--version"]:
+    print("The Rocq Proof Checker, fake (test_rocqchk_all ReceiptFixture)")
+    sys.exit(0)
+sys.stdout.write(Path(__file__).with_name("shard1.out").read_text())
+'''
+
+
+class Run:
+    """main()'s exit code and stdout"""
+    def __init__(self, returncode, stdout):
+        self.returncode, self.stdout = returncode, stdout
 
 
 class ReceiptFixture(GitTmp):
-    """main() end to end: a one-module fixture tree (meta/ = the module under test + rocq_toolchain.py; base/ = GTBase.a) and a fake
-    rocqchk selected by ROCQ_OPAM_SWITCH (rocq_toolchain.environment's own override); --shard1-only writes receipt.json"""
+    """main() end to end, IN-PROCESS: R.ROOT patched to a one-module fixture tree (base/ = GTBase.a), and the checker command redirected
+    to `sys.executable <fake>/rocqchk.py` (R.rocqchk_argv for the shards; the one `rocqchk --version` call through a subprocess.run
+    wrapper that passes every other command, git included, unchanged).  a4: nothing is exec'd from the temporary directory, because
+    /tmp is noexec in the gate containers (V-O1 r1, 2026-10-20: a #!/bin/sh fake there never ran).  --shard1-only writes receipt.json."""
     def tree(self, root):
-        (root / "meta").mkdir(parents=True)
-        shutil.copy(R.__file__, root / "meta" / "rocqchk_all.py")
-        shutil.copy(Path(R.__file__).with_name("rocq_toolchain.py"), root / "meta" / "rocq_toolchain.py")
         (root / "base" / "theories").mkdir(parents=True)
         (root / "base" / "_CoqProject").write_text("-R theories GTBase\ntheories/a.v\n")
         (root / "base" / ".Makefile.coq.d").write_text("")
         (root / "base" / "theories" / "a.vo").write_bytes(b"a stand-in .vo\n")
-        sw = self.t / "switch" / "bin"
-        sw.mkdir(parents=True)
-        (sw / "rocqchk").write_text(FAKE_ROCQCHK)
-        (sw / "rocqchk").chmod(0o755)
+        fake = self.t / "fake"
+        fake.mkdir()
+        (fake / "rocqchk.py").write_text(FAKE_ROCQCHK)
         vo = {"GTBase.a": str(root / "base" / "theories" / "a.vo"), "Corelib.Init.Logic": "/fake/Corelib/Init/Logic.vo"}
-        (sw / "shard1.out").write_text(output(["GTBase.a"], ["Corelib.Init.Logic"], intern_as=vo, axioms=()))
+        (fake / "shard1.out").write_text(output(["GTBase.a"], ["Corelib.Init.Logic"], intern_as=vo, axioms=()))
         return root
 
     def run_tool(self, root, *args):
-        out = self.t / "out"
-        p = subprocess.run([sys.executable, "-B", str(root / "meta" / "rocqchk_all.py"), "--out", str(out), "--budget", "1",
-                            "--caps", "1,1,1,1", "--min-cpus", "1", "--poll-s", "0.01", *args],
-                           env=dict(os.environ, ROCQ_OPAM_SWITCH=str(self.t / "switch")), capture_output=True, text=True, timeout=120)
-        return p, out
+        out, fake = self.t / "out", str(self.t / "fake" / "rocqchk.py")
+        real_run, real_argv = subprocess.run, R.rocqchk_argv
+
+        def run(cmd, *a, **k):
+            if list(cmd[:1]) == ["rocqchk"]:
+                cmd = [sys.executable, fake, *cmd[1:]]
+            return real_run(cmd, *a, **k)
+
+        def argv(*a, **k):
+            return [sys.executable, fake, *real_argv(*a, **k)[1:]]
+
+        buf = io.StringIO()
+        with mock.patch.object(R, "ROOT", root), mock.patch.object(R, "rocqchk_argv", argv), \
+                mock.patch.object(R.subprocess, "run", run), contextlib.redirect_stdout(buf):
+            rc = R.main(["--out", str(out), "--budget", "1", "--caps", "1,1,1,1", "--min-cpus", "1", "--poll-s", "0.01", *args])
+        return Run(rc, buf.getvalue()), out
 
     def receipt(self, p, out):
-        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertEqual(p.returncode, 0, p.stdout)
         text = (out / "receipt.json").read_text()
         receipt = json.loads(text)
         self.assertTrue(receipt["verdict"].startswith("ROCQCHK_ALL_SHARD1_ONLY_PASS"), receipt["verdict"])
@@ -584,7 +605,7 @@ class ReceiptFixture(GitTmp):
     def test_F1_nested_root_receipt(self):                         # the O-1 layout, end to end
         root, ec, et = self.nested()
         self.tree(root)
-        source, text =self.receipt(*self.run_tool(root, "--shard1-only", "--source-commit", C40, "--source-tree", T40))
+        source, text = self.receipt(*self.run_tool(root, "--shard1-only", "--source-commit", C40, "--source-tree", T40))
         self.assertEqual(source, {"commit": C40, "tree": T40, "root_is_git_toplevel": False, "git_commit": None, "git_tree": None,
                                   "tracked_changes": None, "verified": False, "accepted": True})
         self.assertNotIn(ec, text)
@@ -601,7 +622,7 @@ class ReceiptFixture(GitTmp):
         root = self.tree(self.t / "top")
         c, t = repo(root, {})
         p, out = self.run_tool(root, "--shard1-only", "--source-commit", C40, "--source-tree", t)
-        self.assertEqual(p.returncode, 2, p.stdout + p.stderr)
+        self.assertEqual(p.returncode, 2, p.stdout)
         self.assertIn("REFUSED", p.stdout)
         self.assertFalse(out.exists())
 
@@ -609,9 +630,9 @@ class ReceiptFixture(GitTmp):
         root, _, _ = self.nested()
         self.tree(root)
         p, out = self.run_tool(root, "--shard1-only")
-        self.assertEqual((p.returncode, out.exists()), (2, False), p.stdout + p.stderr)
+        self.assertEqual((p.returncode, out.exists()), (2, False), p.stdout)
         p, out = self.run_tool(root, "--plan-only")
-        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertEqual(p.returncode, 0, p.stdout)
         self.assertIn("PLAN_ONLY", p.stdout)
         self.assertFalse((out / "receipt.json").exists())
 
