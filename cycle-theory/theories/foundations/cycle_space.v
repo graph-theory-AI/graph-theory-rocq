@@ -355,7 +355,7 @@ split.
   by case: (v \in map (@rhd G) r); [right | left].
 - have hverts : forall u : G, H_inc (eset r) u -> u \in x :: map (@rhd G) r.
     move=> u /existsP[e /andP[eE iu]].
-    move: eE; rewrite inE => /mapP[a ar ae].
+    move: eE; rewrite /eset inE /redges => /mapP[a ar ae].
     rewrite ae in iu.
     case/orP: (incident_step iu) => /eqP ->.
     + by rewrite -htl mem_cat (map_f _ ar).

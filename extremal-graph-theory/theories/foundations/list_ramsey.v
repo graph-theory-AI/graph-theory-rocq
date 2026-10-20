@@ -1,6 +1,7 @@
 (** Finite counting proof of the chromatic-family list Ramsey equality.
     Source: Fox--He--Luo--Xu, arXiv:2103.15175, Section 3.1. *)
 From mathcomp Require Import all_boot.
+Set SsrOldRewriteGoalsOrder.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
@@ -22,7 +23,7 @@ rewrite E card_family.
 have cf c : #|F c| = if c \in S then 1 else #|Y|.
   by rewrite /F; case: (c \in S); rewrite ?card1 ?cardT.
 rewrite /image_mem (eq_map cf).
-rewrite cardE /enum_mem -enumT size_filter.
+rewrite [#|~: S|]cardE /enum_mem -enumT size_filter.
 elim: (enum C) => [|c cs IH] //=.
 rewrite inE; case: (c \in S); by rewrite /= ?mul1n ?expnS IH.
 Qed.

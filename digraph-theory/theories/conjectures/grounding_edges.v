@@ -59,6 +59,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Import GRing.Theory Num.Theory.
+Set SsrOldRewriteGoalsOrder.
 
 (** ====================================================================== *)
 (** ** §0 — reusable small witnesses                                        *)

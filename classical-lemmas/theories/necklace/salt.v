@@ -192,7 +192,7 @@ have -> : (\sum_(i < n) (-1) ^+ (lift ord0 (lift ord0 i))
   rewrite mulr_sumr; apply: eq_bigr => i _.
   rewrite !lift0 mergeat_cons2 salt_cons2 -mulnb natrM !exprS !mulN1r opprK.
   by rewrite !mulrA; congr (_ * _)%R; rewrite mulr_natr mulr_natl.
-rewrite IH; [|by rewrite /= sza|by rewrite /= zp].
+rewrite IH; first [by rewrite /= sza | by rewrite /= zp | idtac].
 rewrite [behead _]/= -!mulnb !natrM mulrBr.
 have h3 := salt3 xp yp zp.
 have hR : ((p <= (x + y) %% p + z)%:R + (p <= x + y)%:R
@@ -354,7 +354,7 @@ elim: n s => [|n IH] [|x [|y s]] // sz.
   have sz' : size s = 0 by move: sz => /= [].
   by rewrite (size0nil sz') deleteS delete0 take0.
 have sz' : size s = n.+1 by move: sz => /= [].
-rewrite !deleteS diffs_cons2 -deleteS IH; last by rewrite /= sz'.
+rewrite !deleteS diffs_cons2 -deleteS IH; first [by rewrite /= sz' | idtac].
 by rewrite diffs_cons2.
 Qed.
 
@@ -512,9 +512,8 @@ have termL : Phi n (delete n.+1 [:: s0, s1 & s']) = (s0 == 0) && salt (take n a)
   by rewrite head_delete // (diffs_delete_last (n := n)) ?sz.
 have termM i : i < n ->
     Phi n (delete i.+1 [:: s0, s1 & s']) = (s0 == 0) && salt (mergeat i a).
-  move=> hi; rewrite (Phi_evenE oddn) ?size_delete ?sz //.
-    by rewrite head_delete // diffs_delete_mid ?sz // !ltnS.
-  exact: leqW hi.
+  move=> hi; rewrite (Phi_evenE oddn) ?size_delete ?sz //;
+    first [by rewrite head_delete // diffs_delete_mid ?sz // !ltnS | exact: leqW hi].
 rewrite big_ord_recl big_ord_recr expr0 mul1r term0.
 rewrite !lift0 termL.
 rewrite -[((-1) ^+ ord_max.+1)%R]signr_odd /= oddn expr1 mulN1r.
@@ -567,9 +566,8 @@ have term1 : Phi n.+1 (delete 1 [:: s0, s1, s2 & s'])
   by rewrite head_delete // (diffs_delete_mid (i := 1)) ?sz // -/a aE mergeat0.
 have termM i : i < n -> Phi n.+1 (delete i.+2 [:: s0, s1, s2 & s'])
              = (dmod s0 0 < dmod s0 s1) && salt (mergeat i (behead a)).
-  move=> hi; rewrite (Phi_oddE oddn1) ?size_delete ?sz //.
-    by rewrite head_delete // diffs_delete_mid ?sz // -/a aE mergeat_cons1.
-  exact: leqW hi.
+  move=> hi; rewrite (Phi_oddE oddn1) ?size_delete ?sz //;
+    first [by rewrite head_delete // diffs_delete_mid ?sz // -/a aE mergeat_cons1 | exact: leqW hi].
 have termL : Phi n.+1 (delete n.+2 [:: s0, s1, s2 & s'])
              = (dmod s0 0 < dmod s0 s1) && salt (take n (behead a)).
   rewrite (Phi_oddE oddn1) ?size_delete ?sz //.

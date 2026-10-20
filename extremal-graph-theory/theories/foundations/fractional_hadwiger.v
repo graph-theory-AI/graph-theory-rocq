@@ -33,6 +33,7 @@
 From GTBase Require Import base.
 From mathcomp Require Import all_algebra.
 Import GRing.Theory Num.Theory.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

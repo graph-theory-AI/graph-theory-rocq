@@ -79,6 +79,7 @@ From mathcomp Require Import all_boot.
 From GraphTheory Require Import preliminaries digraph sgraph connectivity.
 From ClassicalLemmas Require Import konig.paths2.
 From GTBase Require Import incidence.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

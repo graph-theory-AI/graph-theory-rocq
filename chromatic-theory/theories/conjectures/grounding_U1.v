@@ -9,6 +9,7 @@
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import digraph sgraph coloring.
 From Chromatic.conjectures Require Import U1.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

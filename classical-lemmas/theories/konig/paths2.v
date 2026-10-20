@@ -87,6 +87,7 @@
 
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import preliminaries digraph sgraph connectivity.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

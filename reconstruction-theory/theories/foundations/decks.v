@@ -19,6 +19,7 @@
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import preliminaries digraph sgraph.
 From GTBase Require Import base.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

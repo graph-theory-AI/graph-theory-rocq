@@ -16,6 +16,7 @@ From GraphTheory Require Import mgraph.
 From GTBase Require Import base induced_paths.
 From Packing.conjectures Require Import U9.
 Require Packing.foundations.matching.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

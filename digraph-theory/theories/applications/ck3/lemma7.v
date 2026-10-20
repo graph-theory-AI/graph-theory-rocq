@@ -16,6 +16,7 @@
 From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude digraph oriented dipath strong.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -313,7 +314,7 @@ have pt1' : dipath z t1'.
 have memA1 : forall u, u \in z :: t1' -> u \notin x :: s.
   move=> u; rewrite inE => /orP[/eqP->|ut]; first by rewrite zxs.
   case/mapP: ut => U Ut1 ->.
-  by have := valP U; rewrite inE.
+  by have := valP U; rewrite in_set.
 have takeE : x :: take a.-1 s = take a (x :: s).
   by rewrite -{2}(prednK a_ge1).
 have pp : dipath x (take a.-1 s) by exact: dipath_take.

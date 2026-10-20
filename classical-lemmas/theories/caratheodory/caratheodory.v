@@ -76,6 +76,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Import GRing.Theory Num.Theory Order.POrderTheory Order.TotalTheory.
+Set SsrOldRewriteGoalsOrder.
 Local Open Scope ring_scope.
 
 (** ** A minimiser of a rational function on a nonempty sequence *)
