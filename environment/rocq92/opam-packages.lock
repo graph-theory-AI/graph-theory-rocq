@@ -1,0 +1,23 @@
+# Rocq 9.2 step (1), variant B2, DRAFT r0 (arthur, 2026-10-12): top-level versions for graph-theory-rocq:rocq9.2-r0.
+# Base: environment/image/opam-packages.lock (b795050e, the 9.1.1 image). A version is kept where its released opam file
+# admits rocq-core 9.2.0 and moved only where it does not (PLAN-rocq92-step1-B2.md, section 3). The remaining dependencies
+# are solved by opam and recorded in installed-packages.txt.
+# coq-graph-theory has no release for 9.2 (BLOCKER B-1): variant B2 pins upstream master 322e352b by path (version dev, UNRELEASED).
+dune.3.23.1
+rocq-core.9.2.0
+rocq-stdlib.9.1.0
+elpi.3.7.1
+rocq-elpi.3.4.0
+rocq-hierarchy-builder.1.10.3
+rocq-mathcomp-boot.2.6.0
+rocq-mathcomp-ssreflect.2.6.0
+rocq-mathcomp-order.2.6.0
+rocq-mathcomp-finite-group.2.6.0
+rocq-mathcomp-fingroup.2.6.0
+rocq-mathcomp-algebra.2.6.0
+rocq-micromega-plugin.1.1.1
+rocq-mathcomp-finmap.2.2.4
+rocq-mathcomp-classical.1.16.0
+rocq-mathcomp-zify.1.7.0+2.4+9.0
+coq-mathcomp-zify.1.7.0+2.4+9.0
+coq-graph-theory.dev
