@@ -1,0 +1,32 @@
+# Not installable at the classifier parent 2933916: a public module imports a corpus file
+# (resolved only by a queued family release; the module stays listed, see README.md):
+#   chromatic-theory/theories/foundations/poly_forms.v -> conjectures/X3.v
+opam-version: "2.0"
+synopsis: "Chromatic graph theory: colourings, choice numbers and chi-boundedness"
+description: """
+The Chromatic public library of graph-theory-rocq: colourings, edge colourings, choice numbers, chi-boundedness, critical graphs and Alon-Tarsi orientations.
+Builds and installs only public modules; conjectures, migration certificates
+and examples are not installed.
+This package is developed and validated with the pinned Rocq 9.1.1 toolchain.
+Building requires Python >= 3.9 (tested with 3.12.3); conf-python-3 only checks
+that python3 is present.
+"""
+maintainer: "Marc Lelarge <marc.lelarge@gmail.com>"
+authors: [ "Marc Lelarge" ]
+license: "Apache-2.0"
+homepage: "https://github.com/graph-theory-AI/graph-theory-rocq"
+bug-reports: "https://github.com/graph-theory-AI/graph-theory-rocq/issues"
+dev-repo: "git+https://github.com/graph-theory-AI/graph-theory-rocq.git"
+depends: [
+  "rocq-core" {= "9.1.1"}
+  "rocq-graph-theory-base" {= version}
+  "coq-graph-theory" {= "0.9.7"}
+  "rocq-mathcomp-boot" {= "2.5.0"}
+  "conf-python-3" {build}
+]
+build: [
+  ["python3" "-c" "import sys; sys.exit(0 if sys.version_info >= (3, 9) else 'rocq-graph-theory packaging needs Python >= 3.9 at build time')"]
+  ["python3" "-B" "meta/library_package.py" "chromatic-theory"]
+  ["sh" "-c" "cd _build/library/chromatic-theory && rocq makefile -f _CoqProject -o Makefile.coq"]
+  [make "-C" "_build/library/chromatic-theory" "-f" "Makefile.coq" "-j%{jobs}%"]
+]

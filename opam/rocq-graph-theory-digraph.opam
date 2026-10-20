@@ -1,0 +1,32 @@
+opam-version: "2.0"
+synopsis: "Directed graphs and tournaments for Rocq and MathComp"
+description: """
+The Digraph public library of graph-theory-rocq: digraphs, tournaments, orders, dipaths, Cayley and circulant constructions and their invariants.
+Builds and installs only public modules; conjectures, migration certificates
+and examples are not installed.
+This package is developed and validated with the pinned Rocq 9.1.1 toolchain.
+Building requires Python >= 3.9 (tested with 3.12.3); conf-python-3 only checks
+that python3 is present.
+"""
+maintainer: "Marc Lelarge <marc.lelarge@gmail.com>"
+authors: [ "Marc Lelarge" ]
+license: "Apache-2.0"
+homepage: "https://github.com/graph-theory-AI/graph-theory-rocq"
+bug-reports: "https://github.com/graph-theory-AI/graph-theory-rocq/issues"
+dev-repo: "git+https://github.com/graph-theory-AI/graph-theory-rocq.git"
+depends: [
+  "rocq-core" {= "9.1.1"}
+  "coq-graph-theory" {= "0.9.7"}
+  "rocq-hierarchy-builder" {= "1.10.3"}
+  "rocq-mathcomp-algebra" {= "2.5.0"}
+  "rocq-mathcomp-boot" {= "2.5.0"}
+  "rocq-mathcomp-classical" {= "1.16.0"}
+  "rocq-mathcomp-fingroup" {= "2.5.0"}
+  "conf-python-3" {build}
+]
+build: [
+  ["python3" "-c" "import sys; sys.exit(0 if sys.version_info >= (3, 9) else 'rocq-graph-theory packaging needs Python >= 3.9 at build time')"]
+  ["python3" "-B" "meta/library_package.py" "digraph-theory"]
+  ["sh" "-c" "cd _build/library/digraph-theory && rocq makefile -f _CoqProject -o Makefile.coq"]
+  [make "-C" "_build/library/digraph-theory" "-f" "Makefile.coq" "-j%{jobs}%"]
+]

@@ -1,0 +1,27 @@
+opam-version: "2.0"
+synopsis: "Infinite graphs: basic vocabulary and regularity"
+description: """
+The Infinite public library of graph-theory-rocq: infinite graphs and regularity.
+Builds and installs only public modules; conjectures, migration certificates
+and examples are not installed.
+This package is developed and validated with the pinned Rocq 9.1.1 toolchain.
+Building requires Python >= 3.9 (tested with 3.12.3); conf-python-3 only checks
+that python3 is present.
+"""
+maintainer: "Marc Lelarge <marc.lelarge@gmail.com>"
+authors: [ "Marc Lelarge" ]
+license: "Apache-2.0"
+homepage: "https://github.com/graph-theory-AI/graph-theory-rocq"
+bug-reports: "https://github.com/graph-theory-AI/graph-theory-rocq/issues"
+dev-repo: "git+https://github.com/graph-theory-AI/graph-theory-rocq.git"
+depends: [
+  "rocq-core" {= "9.1.1"}
+  "rocq-mathcomp-boot" {= "2.5.0"}
+  "conf-python-3" {build}
+]
+build: [
+  ["python3" "-c" "import sys; sys.exit(0 if sys.version_info >= (3, 9) else 'rocq-graph-theory packaging needs Python >= 3.9 at build time')"]
+  ["python3" "-B" "meta/library_package.py" "infinite-graph-theory"]
+  ["sh" "-c" "cd _build/library/infinite-graph-theory && rocq makefile -f _CoqProject -o Makefile.coq"]
+  [make "-C" "_build/library/infinite-graph-theory" "-f" "Makefile.coq" "-j%{jobs}%"]
+]

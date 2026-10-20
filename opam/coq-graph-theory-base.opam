@@ -1,0 +1,16 @@
+# Compatibility wrapper. Canonical file: opam/coq-graph-theory-base.opam; the old location keeps an identical copy.
+opam-version: "2.0"
+synopsis: "Compatibility name for rocq-graph-theory-base"
+description: """
+Installs nothing itself: it depends on rocq-graph-theory-base at the same version.
+It provides the public GTBase library only. Unlike its former build of the whole base project, it no longer installs conjectures, migration certificates or examples.
+"""
+maintainer: "Marc Lelarge <marc.lelarge@gmail.com>"
+authors: [ "Marc Lelarge" ]
+license: "Apache-2.0"
+homepage: "https://github.com/graph-theory-AI/graph-theory-rocq"
+bug-reports: "https://github.com/graph-theory-AI/graph-theory-rocq/issues"
+dev-repo: "git+https://github.com/graph-theory-AI/graph-theory-rocq.git"
+depends: [
+  "rocq-graph-theory-base" {= version}
+]

@@ -1,4 +1,4 @@
-# graph-theory-base (`coq-graph-theory-base`, namespace `GTBase`)
+# graph-theory-base (`rocq-graph-theory-base`, compatibility name `coq-graph-theory-base`, namespace `GTBase`)
 
 The single owner of **cross-area primitives** for the graph-theory-rocq federation (plan §A
 ownership table). Every area package depends ONLY on this (never on a sibling).
@@ -32,6 +32,8 @@ ownership table). Every area package depends ONLY on this (never on a sibling).
 Import with `From GTBase Require Import base.` (area packages add `-Q ../base/theories GTBase`
 to their `_CoqProject`). Compiles axiom-free on switch `digraph` (Rocq 9.1.1 + coq-graph-theory);
 `chromatic-theory/U1` consumes it.
+Installed as the opam package `rocq-graph-theory-base`, which installs the public modules only; see
+"Public library packages (opam)" in the root README.
 
 **Heavyweight planar layer (real embeddings/faces/genus) still deferred** to a future `coq-fourcolor`
 spike — needed only by surface/triangulation/crossing-number rows; the combinatorial `wagner_planar`
