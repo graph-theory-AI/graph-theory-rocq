@@ -19,7 +19,7 @@ axiom-free with a faithfulness audit recorded in the manifest; blocked rows need
 [`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md).
 
 **Latest update (2026-09-23/24, branch `conjecture-relations`)** — re-synchronised the Rocq
-statements with the graph-conjectures corpus at commit `b72c585` (pending PR): 38 Bondy–Murty
+statements with the graph-conjectures corpus at commit `b72c585` (merged into its main by PR #18 on 2026-09-23): 38 Bondy–Murty
 Appendix A rows and the curated `others` row joined the manifest, every one of the 741
 conjecture statements now carries a doc block with its corpus row, site and review links, an
 English back-translation of the Rocq body and its non-standard definitions, a shared vocabulary
@@ -109,18 +109,25 @@ axiom-free with `Print Assumptions` clean:
 
 ```sh
 git clone https://github.com/graph-theory-AI/graph-conjectures graph-conjectures
-git -C graph-conjectures checkout b72c585      # the pinned corpus commit (see below)
+git -C graph-conjectures checkout --detach b72c5857060addbe4523016e88ae3aa626e958fd   # the pinned corpus commit (see below)
 make gate
 ```
 
 `make gate` regenerates the manifests from the conjecture source, so it needs that checkout.
-It is looked for, in order, at `$GRAPH_CONJECTURES`, `./graph-conjectures` (the nested clone,
-git-ignored) and `../../graph-conjectures` (`meta/corpus_registry.py:graph_conjectures_dir`).
-The committed manifests are pinned to commit `b72c585` of the branch `CDC-relations-update`
-(`meta/corpus_registry.py:GRAPH_CONJECTURES_PIN`): as of 2026-09-23 that branch is a pending
-pull request of the official repository and is the reference corpus until it is merged; if it
-is not yet on the official remote, fetch it from the fork `lviennot/graph-conjectures`. That
-commit adds the Bondy–Murty Appendix A records (`bm-NNN`), the curated `others` records and
+If `$GRAPH_CONJECTURES` is set, it is the only place looked at; otherwise `./graph-conjectures`
+(the nested clone, git-ignored), the sibling `../graph-conjectures` and
+`~/Recherche/graph-conjectures` are tried in that order
+(`meta/corpus_registry.py:graph_conjectures_dir`). The checkout found is VERIFIED before use:
+it must be the top level of its own git clone, its `HEAD` must be exactly
+`b72c5857060addbe4523016e88ae3aa626e958fd` (`GRAPH_CONJECTURES_COMMIT`), and `data/` must have no
+changed or untracked file; anything else stops the command with `GraphConjecturesPinError`
+instead of reading another corpus. Without any checkout, `make audit` replays the committed
+pinned snapshot (as in CI).
+The committed manifests are pinned to the exact commit `b72c5857060addbe4523016e88ae3aa626e958fd`
+(`meta/corpus_registry.py:GRAPH_CONJECTURES_COMMIT`; short label `GRAPH_CONJECTURES_PIN`). It
+came from the branch `CDC-relations-update`, merged into the official repository's `main` by
+pull request #18 on 2026-09-23, so a clone of `main` contains it; the corpus is that commit, not
+`main`'s later head. That commit adds the Bondy–Murty Appendix A records (`bm-NNN`), the curated `others` records and
 the relations graph (`data/relations.json`) to the arXiv, OpenProblemGarden and erdősproblems
 corpora.
 

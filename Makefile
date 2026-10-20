@@ -62,6 +62,7 @@ mutation:
 	python3 meta/test_formal_resolutions.py
 	python3 meta/test_statement_docs.py
 	python3 meta/test_check_edges.py
+	python3 meta/test_corpus_registry_pin.py
 	python3 meta/faithfulness_lint.py --validate
 	python3 meta/faithfulness_mutation.py --timeout 1800
 	python3 meta/library_inventory.py --validate
