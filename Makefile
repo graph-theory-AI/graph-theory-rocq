@@ -63,6 +63,7 @@ mutation:
 	python3 meta/test_statement_docs.py
 	python3 meta/test_check_edges.py
 	python3 meta/faithfulness_lint.py --validate
+	python3 meta/test_faithfulness_mutation.py
 	python3 meta/faithfulness_mutation.py --timeout 1800
 	python3 meta/library_inventory.py --validate
 	python3 meta/migration_report.py --validate --kernel
