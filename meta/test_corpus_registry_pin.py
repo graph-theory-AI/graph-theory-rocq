@@ -15,7 +15,8 @@ from unittest.mock import patch
 import corpus_registry as REG
 
 
-FIXTURE_GIT_ENV = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull}
+FIXTURE_GIT_ENV = {**{k: v for k, v in os.environ.items() if not k.startswith("GIT_")},
+                   "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull}
 
 
 def git(path, *args):
