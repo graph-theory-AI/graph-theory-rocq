@@ -350,4 +350,3 @@ constructor.
   - vm_compute. reflexivity. }
 constructor.
 Qed.
-
