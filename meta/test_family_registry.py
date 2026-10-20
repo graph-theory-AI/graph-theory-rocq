@@ -235,6 +235,36 @@ class FamilyRegistries(unittest.TestCase):
         with self.assertRaisesRegex(R.RegistryError, 'without aliases'):
             R.load_library_registry(self.root)
 
+    def test_area_library_layers_can_own_repository_sources(self):
+        _, source = self.repository_source()
+        name = 'Digraph.core.source.original'
+        self.primitive['source_definitions'] = [name]
+        self.primitive['repository_sources'] = {name: source}
+        for relative, accepted in (
+            ('digraph-theory/theories/core/source.v', True),
+            ('digraph-theory/theories/invariants/source.v', True),
+            ('digraph-theory/theories/constructions/source.v', True),
+            ('digraph-theory/theories/invariants_advanced/source.v', True),
+            ('minor-theory/theories/core/nested/source.v', True),
+            ('minor-theory/theories/invariants_advanced/source.v', False),
+            ('digraph-theory/theories/conjectures/source.v', False),
+            ('digraph-theory/theories/migration/source.v', False),
+            ('digraph-theory/theories/examples/source.v', False),
+            ('digraph-theory/theories/applications/source.v', False),
+            ('digraph-theory/theories/private/source.v', False),
+            ('digraph-theory/theories/core/_faith_source.v', False)):
+            with self.subTest(path=relative):
+                target = self.root / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text('Definition original := True.\n')
+                source['path'] = relative
+                self.write_family()
+                if accepted:
+                    self.assertEqual(R.load_library_registry(self.root)['primitives']['fixture'], self.primitive)
+                else:
+                    with self.assertRaises(R.RegistryError):
+                        R.load_library_registry(self.root)
+
     def test_duplicate_source_ownership_is_rejected_without_a_shared_index(self):
         self.repository_source()
         self.write_family()

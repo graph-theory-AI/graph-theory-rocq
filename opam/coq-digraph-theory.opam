@@ -1,0 +1,16 @@
+# Compatibility wrapper. Canonical file: opam/coq-digraph-theory.opam; the old location keeps an identical copy.
+opam-version: "2.0"
+synopsis: "Compatibility name for rocq-graph-theory-digraph"
+description: """
+Installs nothing itself: it depends on rocq-graph-theory-digraph at the same version.
+It provides the public Digraph library only. Unlike its former build of the whole digraph project, it no longer installs conjectures, applications or the Cheng-Keevash certificate modules.
+"""
+maintainer: "Marc Lelarge <marc.lelarge@gmail.com>"
+authors: [ "Marc Lelarge" ]
+license: "Apache-2.0"
+homepage: "https://github.com/graph-theory-AI/graph-theory-rocq"
+bug-reports: "https://github.com/graph-theory-AI/graph-theory-rocq/issues"
+dev-repo: "git+https://github.com/graph-theory-AI/graph-theory-rocq.git"
+depends: [
+  "rocq-graph-theory-digraph" {= version}
+]
