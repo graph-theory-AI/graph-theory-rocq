@@ -60,6 +60,7 @@ mutation:
 	python3 meta/test_family_registry.py
 	python3 meta/test_check_library_migration.py
 	python3 meta/test_formal_resolutions.py
+	python3 meta/test_rocqchk_all.py
 	python3 meta/test_statement_docs.py
 	python3 meta/test_check_edges.py
 	python3 meta/faithfulness_lint.py --validate
@@ -87,6 +88,22 @@ gap-repairs:
 
 probe:
 	python3 meta/vacuity_probe.py $(PROBE_ARGS)
+
+# C-4: the recursive rocqchk of every project module, sharded (meta/rocqchk_all.py; batch 2's SR-32c extended to all 17 projects).
+# Run it after a FULL build of every package (including digraph-theory and atlas), in ONE container with at least ROCQCHK_BUDGET GiB
+# of memory and at least 4 CPUs (up to 3-4 shards run at once); it takes hours. ROCQCHK_OUT is required: a fresh directory OUTSIDE
+# the repository. Its verdict.txt and receipt.json are the run's receipt. OCAMLRUNPARAM is pinned to the gates' value, s=1M,o=20;
+# SR-32c's caps were measured with the default GC; they are expected to stay conservative under o=20 (the D-4.6 analysis measured
+# lower COMPILE peaks with it; rocqchk under o=20 is unmeasured until its first run).
+# GATE_SOURCE_COMMIT and GATE_SOURCE_TREE are required (shared with install-gate): the 40-hex commit and tree the objects were built
+# from (D-5 passes the ids it binds). The receipt records them; git confirms them only when the tree is itself a git toplevel, and an
+# enclosing repository is never read (O-1). A receipt is accepted only when its source.accepted is true (rocqchk_all.source_accepted).
+# `make rocqchk ROCQCHK_ARGS=--shard1-only` runs the joint-load shard alone first, to measure it.
+ROCQCHK_BUDGET ?= 48
+.PHONY: rocqchk
+rocqchk:
+	@test -n "$(ROCQCHK_OUT)" || { echo 'make rocqchk: set ROCQCHK_OUT=<a fresh directory outside the repository>'; exit 2; }
+	OCAMLRUNPARAM=s=1M,o=20 python3 meta/rocqchk_all.py --out "$(ROCQCHK_OUT)" --source-commit "$(GATE_SOURCE_COMMIT)" --source-tree "$(GATE_SOURCE_TREE)" --budget $(ROCQCHK_BUDGET) --min-cpus 4 $(ROCQCHK_ARGS)
 
 $(PACKAGES):
 	cd $@ && rocq makefile -f _CoqProject -o Makefile.coq && $(MAKE) -f Makefile.coq
