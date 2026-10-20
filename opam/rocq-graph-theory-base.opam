@@ -17,6 +17,8 @@ depends: [
   "rocq-core" {= "9.2.0"}
   "coq-graph-theory" {= "dev"}
   "rocq-mathcomp-algebra" {= "2.6.0"}
+  "rocq-mathcomp-boot" {= "2.6.0"}
+  "rocq-mathcomp-finite-group" {= "2.6.0"}
   "rocq-hierarchy-builder" {= "1.10.3"}
   "conf-python-3" {build}
 ]

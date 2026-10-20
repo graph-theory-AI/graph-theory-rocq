@@ -205,7 +205,7 @@ Conjectures, statements, grounding and implication files, applications, migratio
 
 | opam package | area | namespace | public modules | internal deps (`{= version}`) | external deps (exact pins) | at `2e15adf` |
 |---|---|---|---:|---|---|---|
-| `rocq-graph-theory-base` | `base/` | `GTBase` | 55 | — | coq-graph-theory dev (pin-depends), rocq-mathcomp-algebra 2.6.0, rocq-hierarchy-builder 1.10.3 | no corpus barrier; installed end to end at `2933916` |
+| `rocq-graph-theory-base` | `base/` | `GTBase` | 55 | — | coq-graph-theory dev (pin-depends), mathcomp algebra/boot/finite-group 2.6.0; rocq-hierarchy-builder 1.10.3 (a reviewed pin, not a measured direct need) | no corpus barrier; installed end to end at `2933916` |
 | `rocq-graph-theory-classical-lemmas` | `classical-lemmas/` | `ClassicalLemmas` | 15 | base | coq-graph-theory, mathcomp algebra/boot/order | no corpus barrier |
 | `rocq-graph-theory-topological` | `topological-graph-theory/` | `Topological` | 6 | base | coq-graph-theory, mathcomp algebra/boot/finite-group | no corpus barrier |
 | `rocq-graph-theory-minor` | `minor-theory/` | `Minor` | 8 | base | coq-graph-theory | no corpus barrier |
@@ -225,7 +225,7 @@ Conjectures, statements, grounding and implication files, applications, migratio
 - Every package also depends on `rocq-core` 9.2.0 and on `conf-python-3` at build time.
 - MathComp packages are `rocq-mathcomp-*` 2.6.0, except `rocq-mathcomp-classical` 1.16.0. On Rocq 9.2 the fingroup modules belong to `rocq-mathcomp-finite-group`.
 - `coq-graph-theory` is the UNRELEASED commit `322e352b` of rocq-community/graph-theory (tree `46c83591`). Every package that lists it pins it with `pin-depends` (url#commit).
-- The dependencies listed are the direct ones measured from each package's public modules. Base keeps its reviewed pins; its direct needs are mathcomp boot and finite-group.
+- The dependencies listed are the direct ones measured from each package's public modules. Base also keeps its reviewed `rocq-hierarchy-builder` pin, which is not a measured direct need.
 
 **Barriers:** a package is blocked when one of its public modules imports a corpus file. Such a module is never dropped to make packaging pass. At `2e15adf` no package is blocked.
 
