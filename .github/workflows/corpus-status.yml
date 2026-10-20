@@ -16,6 +16,8 @@ env:
   META_SUITES_TOOLCHAIN_FREE: >-
     test_family_registry.py test_statement_docs.py test_library_api.py
     test_faithfulness_mutation.py test_corpus_registry_pin.py
+    test_library_inventory_alias_retention.py test_library_inventory_classification.py
+    test_rocqchk_all.py test_install_gate.py
   META_SUITES_ROCQ: >-
     test_check_library_migration.py test_migration_report.py
     test_formal_resolutions.py test_check_edges.py
