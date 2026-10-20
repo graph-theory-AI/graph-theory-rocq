@@ -164,6 +164,21 @@ class Classification(unittest.TestCase):
         data = copy.deepcopy(self.data); data["milestones"]["post-rc-wave"] = {"description": "x"}
         self.assert_only(data, "milestone post-rc-wave needs description")
 
+    def test_a_milestone_cited_only_by_alias_milestones_is_not_stale(self):
+        # the stand-alone check (__main__) passes the G-5 citations, as library_inventory.py --check does
+        data = copy.deepcopy(self.data)
+        data["milestones"]["post-rc-alias-retirement"] = dict(data["milestones"]["post-rc-wave"])
+        data["alias_milestones"] = {"M.x_a": "remove-after:post-rc-alias-retirement", "M.x_b": "retain:certificate"}
+        self.assertEqual(CL.alias_milestone_citations(data), {"post-rc-alias-retirement"})
+        self.assert_only(data, "milestone post-rc-alias-retirement is referenced by no entry (stale)")
+        path = self.root / "classification.json"
+        path.write_text(json.dumps(data))
+        with patch.object(INV, "ROOT", self.root):
+            errors = CL.validate_classification(self.inventory, self.registry, path,
+                                                also_used=CL.alias_milestone_citations(data))[0]
+        self.assertEqual(errors, [])
+        self.assertEqual(CL.alias_milestone_citations({"alias_milestones": []}), set())
+
 
 if __name__ == "__main__":
     unittest.main()

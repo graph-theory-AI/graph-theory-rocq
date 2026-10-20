@@ -222,11 +222,25 @@ def validate_classification(inventory: dict, registry: dict[str, dict], path: Pa
     return errors, line
 
 
+def alias_milestone_citations(data: object) -> set[str]:
+    """The milestone ids cited by the file's G-5 alias_milestones (remove-after:<id>), so that the stand-alone G-4 check does not
+    call a milestone stale that only G-5 cites; their validation stays library_inventory.py --check's (validate_milestones)."""
+    authored = data.get("alias_milestones") if isinstance(data, dict) else None
+    if not isinstance(authored, dict):
+        return set()
+    return {value.split(":", 1)[1] for value in authored.values()
+            if isinstance(value, str) and value.startswith("remove-after:")}
+
+
 if __name__ == "__main__":
     import sys
     from family_registry import load_library_registry
     inventory = INV.build_inventory()
-    problems, summary = validate_classification(inventory, load_library_registry(INV.ROOT)["primitives"])
+    try:
+        cited = alias_milestone_citations(INV.load_json(CLASSIFICATION))
+    except ValueError:
+        cited = set()   # validate_classification reports the unreadable file itself
+    problems, summary = validate_classification(inventory, load_library_registry(INV.ROOT)["primitives"], also_used=cited)
     print(summary)
     for problem in problems:
         print(f"  ERROR: {problem}", file=sys.stderr)
