@@ -93,9 +93,10 @@ jobs:
       - name: opam root cache (restore)
         id: opam-cache
         uses: actions/cache/restore@v4
+        # Bump "recipe-N" in the key whenever the install steps below change.
         with:
           path: ~/.opam
-          key: opam-${{ steps.image.outputs.id }}-ocaml-5.3.0-${{ hashFiles('environment/rocq92/opam-packages.lock', 'environment/rocq92/installed-packages.txt') }}-${{ env.ROCQ_OPAM_COMMIT }}-${{ env.OPAM_REPOSITORY_COMMIT }}-${{ env.GRAPH_THEORY_COMMIT }}
+          key: opam-recipe-2-${{ steps.image.outputs.id }}-ocaml-5.3.0-${{ hashFiles('environment/rocq92/opam-packages.lock', 'environment/rocq92/installed-packages.txt') }}-${{ env.ROCQ_OPAM_COMMIT }}-${{ env.OPAM_REPOSITORY_COMMIT }}-${{ env.GRAPH_THEORY_COMMIT }}
       - name: opam repositories at the recorded commits, and the switch
         if: steps.opam-cache.outputs.cache-hit != 'true'
         run: |
@@ -121,13 +122,15 @@ jobs:
         if: steps.opam-cache.outputs.cache-hit != 'true'
         run: |
           mapfile -t packages < <(grep -v '^#' environment/rocq92/opam-packages.lock | sed '/^$/d')
-          opam install --switch=graph-theory-rocq -j "$(nproc)" "${packages[@]}"
+          # memprof-limits is a depopt of rocq-runtime: in the accepted image it came with rocq-mcp-evolve
+          # and the whole Rocq stack was rebuilt with it (the image's build-1c.log l.92-93). Installing it
+          # here builds the same configuration without the MCP server.
+          opam install --switch=graph-theory-rocq -j "$(nproc)" "${packages[@]}" memprof-limits.0.3.0
       - name: The switch is exactly the accepted image's, minus its MCP server
         run: |
-          # In the image, not in CI: the MCP server and what only it requires (measured in the image with
-          # `opam list --installed --required-by=<lock> --recursive`, against rocq-mcp-evolve's cone).
-          image_only='memprof-limits 0.3.0
-          rocq-mcp-evolve dev'
+          # In the image, not in CI: the MCP server only (memprof-limits, which it pulled in, is installed
+          # above because the Rocq stack depends on it optionally).
+          image_only='rocq-mcp-evolve dev'
           # In CI, not in the image: none. A package added here needs its version and a reason.
           ci_only=''
           export LC_ALL=C
@@ -146,7 +149,7 @@ jobs:
           [ "$image_extra" = "$(printf '%s\n' "$image_only" | sed 's/^ *//; /^$/d' | sort)" ] || { echo "the image's packages differ"; exit 1; }
           [ -z "$absent" ] || { echo "locked, but not installed: $absent"; exit 1; }
           grep -qx 'ocaml 5.3.0' "$t/installed.txt"
-          echo "switch: $(wc -l < "$t/installed.txt") packages == the image's $(wc -l < "$t/inventory.txt") minus the MCP server's 2"
+          echo "switch: $(wc -l < "$t/installed.txt") packages == the image's $(wc -l < "$t/inventory.txt") minus the MCP server"
       - name: opam root cache (save, before the suites can fail)
         if: steps.opam-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
