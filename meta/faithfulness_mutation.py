@@ -694,10 +694,8 @@ def main(argv: list[str]) -> int:
     print(f"running {len(selected)} faithfulness mutation canary/canaries")
     for mutant in selected:
         print(f"- {mutant.name}: {mutant.note}")
-        try:
-            ok, detail, kept = run_mutant(mutant, args.timeout, args.keep)
-        except subprocess.TimeoutExpired:
-            ok, detail, kept = False, f"timed out after {args.timeout}s", None
+        # N-2 (G-3): run_guarded owns the timeout (a timed-out check is FAILED "timed out after Ns"), so no handler here.
+        ok, detail, kept = run_mutant(mutant, args.timeout, args.keep)
         status = "KILLED" if ok else "FAILED"
         print(f"  [{status}] {detail}")
         if kept is not None:
