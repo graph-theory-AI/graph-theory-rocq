@@ -59,6 +59,10 @@ MUTATION_GATE_PATHS = {
     "meta/test_family_registry.py",
     "meta/migration_report.py",
     "meta/test_migration_report.py",
+    "meta/install_gate.py",
+    "meta/test_install_gate.py",
+    "meta/library_api.py",
+    "meta/test_library_api.py",
 }
 
 MIGRATION_GATE_PATHS = {
