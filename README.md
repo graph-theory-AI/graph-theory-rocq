@@ -250,7 +250,8 @@ Only modules of installed packages resolve; a corpus or example module never doe
 opam pin add -y --no-action --kind=git .
 opam install rocq-graph-theory-base --jobs=2
 # or, from the forge, at the release commit
-opam pin add -y --no-action git+https://github.com/graph-theory-AI/graph-theory-rocq.git#<commit of the release>
+: "${RC_COMMIT:?Set RC_COMMIT to the full tested release commit}"
+opam pin add -y --no-action "git+https://github.com/graph-theory-AI/graph-theory-rocq.git#${RC_COMMIT}"
 opam install rocq-graph-theory-misc --jobs=2
 ```
 
