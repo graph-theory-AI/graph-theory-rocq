@@ -14,28 +14,36 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 META = ROOT / "meta"
-PACKAGE_DIRS = {"base", "classical-lemmas"} | {
+# Every build unit is a top-level directory with its own _CoqProject: base,
+# classical-lemmas, the `-theory` areas, atlas and graph-theory-misc.
+PACKAGE_DIRS = {
     path.name
     for path in ROOT.iterdir()
-    if path.is_dir() and path.name.endswith("-theory")
+    if path.is_dir() and (path / "_CoqProject").is_file()
 }
 MILESTONE_RE = re.compile(
     r"^([^/]+)/theories/conjectures/(?:grounding_|implications_)?"
     r"((?:U|D|P|X|XE|T)[A-Za-z0-9_]+)\.v$"
 )
+PROJECT_MAPPING_RE = re.compile(r"^-[QR]\s+\.\./([^/\s]+)/theories\s")
+
+
+def project_reverse_dependencies() -> dict[str, set[str]]:
+    """Map each package to the packages whose _CoqProject loads its theories."""
+    reverse: dict[str, set[str]] = {}
+    for package in sorted(PACKAGE_DIRS):
+        for line in (ROOT / package / "_CoqProject").read_text().splitlines():
+            match = PROJECT_MAPPING_RE.match(line.strip())
+            if match and match.group(1) not in {"base", package}:
+                reverse.setdefault(match.group(1), set()).add(package)
+    return reverse
+
 
 # Package dependency edges not already represented by the ubiquitous GTBase
-# dependency.  A changed package is rebuilt together with every reverse
-# dependency in this closure.
-REVERSE_DEPENDENCIES = {
-    "classical-lemmas": {"packing-theory"},
-    "minor-theory": {"graph-theory-misc"},
-    "topological-graph-theory": {
-        "hamiltonicity-theory",
-        "packing-theory",
-        "graph-theory-misc",
-    },
-}
+# dependency, read from the packages' `-Q ../<package>/theories` mappings (atlas
+# loads every area package).  A changed package is rebuilt together with every
+# reverse dependency in this closure.
+REVERSE_DEPENDENCIES = project_reverse_dependencies()
 
 MUTATION_GATE_PATHS = {
     "meta/changed_milestones.py",
@@ -194,23 +202,36 @@ def validate_routing_fixtures() -> None:
         "classical-lemmas-other/theories/konig/line_colouring.v": None,
         "chromatic-theory/theories/migration/simple_edges.v": "chromatic-theory",
         "digraph-theory/rocq-digraph-theory.opam": "digraph-theory",
+        "atlas/theories/conjectures/implications_A2.v": "atlas",
+        "atlas/_CoqProject": "atlas",
+        "graph-theory-misc/theories/conjectures/X14.v": "graph-theory-misc",
+        "graph-theory-misc/_CoqProject": "graph-theory-misc",
+        "blueprint/README.md": None,
         "meta/check_milestone.py": None,
     }
     for path, expected in fixtures.items():
         actual = package_source_change(path)
         if actual != expected:
             raise SystemExit(f"routing fixture failed for {path}: {actual!r} != {expected!r}")
-    expected_closure = {
-        "topological-graph-theory",
-        "hamiltonicity-theory",
-        "packing-theory",
-        "graph-theory-misc",
+    expected_closures = {
+        "topological-graph-theory": {
+            "topological-graph-theory",
+            "hamiltonicity-theory",
+            "packing-theory",
+            "graph-theory-misc",
+            "atlas",
+        },
+        "classical-lemmas": {"classical-lemmas", "packing-theory", "atlas"},
+        "minor-theory": {"minor-theory", "graph-theory-misc", "atlas"},
+        "chromatic-theory": {"chromatic-theory", "atlas"},
+        "digraph-theory": {"digraph-theory", "atlas"},
+        "graph-theory-misc": {"graph-theory-misc", "atlas"},
+        "atlas": {"atlas"},
     }
-    actual_closure = reverse_dependency_closure({"topological-graph-theory"})
-    if actual_closure != expected_closure:
-        raise SystemExit(f"reverse-dependency fixture failed: {actual_closure!r}")
-    if reverse_dependency_closure({"classical-lemmas"}) != {"classical-lemmas", "packing-theory"}:
-        raise SystemExit("classical-lemmas reverse-dependency fixture failed")
+    for package, expected_closure in expected_closures.items():
+        actual_closure = reverse_dependency_closure({package})
+        if actual_closure != expected_closure:
+            raise SystemExit(f"reverse-dependency fixture failed for {package}: {actual_closure!r}")
     print("changed-path routing fixtures OK")
 
 
