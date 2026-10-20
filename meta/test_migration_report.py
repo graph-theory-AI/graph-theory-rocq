@@ -2534,6 +2534,12 @@ class SourceCacheTests(unittest.TestCase):
             yield
 
     def test_report_bytes_and_duplicate_read_reduction(self):
+        # Any GIT_* variable turns the history cache off (_history_repository);
+        # an inherited GIT_PAGER or GIT_EDITOR must not turn this cache measurement into a no-cache run.
+        environment = patch.dict(os.environ, {name: value for name, value in os.environ.items()
+                                              if not name.startswith("GIT_")}, clear=True)
+        environment.start()
+        self.addCleanup(environment.stop)
         for name in self.caches:
             getattr(REPORT, name).cache_clear()
         with patch.object(REPORT, "_git_at", wraps=REPORT._git_at) as reads:
