@@ -205,26 +205,27 @@ Conjectures, statements, grounding and implication files, applications, migratio
 
 | opam package | area | namespace | public modules | internal deps (`{= version}`) | external deps (exact pins) | at `2e15adf` |
 |---|---|---|---:|---|---|---|
-| `rocq-graph-theory-base` | `base/` | `GTBase` | 55 | — | coq-graph-theory 0.9.7, rocq-mathcomp-algebra 2.5.0, rocq-hierarchy-builder 1.10.3 | no corpus barrier; installed end to end at `2933916` |
+| `rocq-graph-theory-base` | `base/` | `GTBase` | 55 | — | coq-graph-theory dev (pin-depends), rocq-mathcomp-algebra 2.6.0, rocq-hierarchy-builder 1.10.3 | no corpus barrier; installed end to end at `2933916` |
 | `rocq-graph-theory-classical-lemmas` | `classical-lemmas/` | `ClassicalLemmas` | 15 | base | coq-graph-theory, mathcomp algebra/boot/order | no corpus barrier |
-| `rocq-graph-theory-topological` | `topological-graph-theory/` | `Topological` | 6 | base | coq-graph-theory, mathcomp algebra/boot/fingroup | no corpus barrier |
+| `rocq-graph-theory-topological` | `topological-graph-theory/` | `Topological` | 6 | base | coq-graph-theory, mathcomp algebra/boot/finite-group | no corpus barrier |
 | `rocq-graph-theory-minor` | `minor-theory/` | `Minor` | 8 | base | coq-graph-theory | no corpus barrier |
 | `rocq-graph-theory-chromatic` | `chromatic-theory/` | `Chromatic` | 10 | base | coq-graph-theory, mathcomp boot | no corpus barrier |
 | `rocq-graph-theory-cycle` | `cycle-theory/` | `Cycle` | 7 | base | coq-graph-theory | no corpus barrier |
-| `rocq-graph-theory-packing` | `packing-theory/` | `Packing` | 5 | base, classical-lemmas | coq-graph-theory, rocq-stdlib 9.0.0 | no corpus barrier |
+| `rocq-graph-theory-packing` | `packing-theory/` | `Packing` | 5 | base, classical-lemmas | coq-graph-theory, rocq-stdlib 9.1.0 | no corpus barrier |
 | `rocq-graph-theory-reconstruction` | `reconstruction-theory/` | `Reconstruction` | 2 | base | coq-graph-theory, mathcomp boot | no corpus barrier |
 | `rocq-graph-theory-hypergraph` | `hypergraph-theory/` | `Hypergraph` | 7 | base | — | no corpus barrier |
 | `rocq-graph-theory-misc` | `graph-theory-misc/` | `GTMisc` | 3 | base | coq-graph-theory | no corpus barrier |
-| `rocq-graph-theory-spectral` | `spectral-graph-theory/` | `Spectral` | 2 | base | coq-graph-theory, mathcomp algebra/boot/fingroup | no corpus barrier |
+| `rocq-graph-theory-spectral` | `spectral-graph-theory/` | `Spectral` | 2 | base | coq-graph-theory, mathcomp algebra/boot/finite-group | no corpus barrier |
 | `rocq-graph-theory-extremal` | `extremal-graph-theory/` | `Extremal` | 10 | base | coq-graph-theory, mathcomp algebra/boot/order | no corpus barrier |
 | `rocq-graph-theory-infinite` | `infinite-graph-theory/` | `Infinite` | 2 | — | mathcomp boot | no corpus barrier |
-| `rocq-graph-theory-digraph` | `digraph-theory/` | `Digraph` | 24 | — | coq-graph-theory, rocq-hierarchy-builder, mathcomp algebra/boot/classical/fingroup | no corpus barrier |
+| `rocq-graph-theory-digraph` | `digraph-theory/` | `Digraph` | 24 | — | coq-graph-theory, rocq-hierarchy-builder, mathcomp algebra/boot/classical/finite-group | no corpus barrier |
 | `rocq-graph-theory-atlas` | `atlas/` | `Atlas` | 6 | base, chromatic, extremal, misc, hypergraph | coq-graph-theory, mathcomp algebra | no corpus barrier |
 
 **Dependency notes:**
-- Every package also depends on `rocq-core` 9.1.1 and on `conf-python-3` at build time.
-- MathComp packages are `rocq-mathcomp-*` 2.5.0, except `rocq-mathcomp-classical` 1.16.0.
-- The dependencies listed are the direct ones measured from each package's public modules. Base keeps its reviewed pins, which reach its direct needs (mathcomp boot and fingroup) transitively.
+- Every package also depends on `rocq-core` 9.2.0 and on `conf-python-3` at build time.
+- MathComp packages are `rocq-mathcomp-*` 2.6.0, except `rocq-mathcomp-classical` 1.16.0. On Rocq 9.2 the fingroup modules belong to `rocq-mathcomp-finite-group`.
+- `coq-graph-theory` is the UNRELEASED commit `322e352b` of rocq-community/graph-theory (tree `46c83591`). Every package that lists it pins it with `pin-depends` (url#commit).
+- The dependencies listed are the direct ones measured from each package's public modules. Base keeps its reviewed pins; its direct needs are mathcomp boot and finite-group.
 
 **Barriers:** a package is blocked when one of its public modules imports a corpus file. Such a module is never dropped to make packaging pass. At `2e15adf` no package is blocked.
 
@@ -242,14 +243,14 @@ From Digraph Require Import core.tournament.
 
 Only modules of installed packages resolve; a corpus or example module never does. The repository's `theories/examples/` files are public-API clients built by `make`, and no example reaches a corpus file. They are documentation, not installed.
 
-**Installing from a checkout through local pins:** use a switch with Rocq 9.1.1, MathComp 2.5.0, `rocq-mathcomp-classical` 1.16.0, `coq-graph-theory` 0.9.7, `rocq-hierarchy-builder` 1.10.3 and `rocq-stdlib` 9.0.0. On this project's VM, pass `--jobs=2` explicitly: the default job count failed there, and the base installation succeeded with `--jobs=2`.
+**Installing from source (development opam files, not a release):** these files are not published in any opam repository, and no opam-repository release is claimed. Pin the WHOLE source, never one package alone: `pin-depends` is not transitive, so a single pinned package would leave its internal dependencies unpinned. Use a switch with Rocq 9.2.0, `rocq-stdlib` 9.1.0, MathComp 2.6.0 (`rocq-mathcomp-classical` 1.16.0) and `rocq-hierarchy-builder` 1.10.3; `coq-graph-theory` comes from its `pin-depends` commit. On this project's VM, pass `--jobs=2` explicitly: the default job count failed there.
 
 ```sh
-# from the repository root (it holds the opam/ directory)
-opam pin add rocq-graph-theory-base . --kind=path --no-action
+# from a CLEAN checkout at the release commit (the VCS kind pins the committed state, not the working directory)
+opam pin add -y --no-action --kind=git .
 opam install rocq-graph-theory-base --jobs=2
-# a package with internal dependencies: pin each of them too, e.g.
-opam pin add rocq-graph-theory-misc . --kind=path --no-action
+# or, from the forge, at the release commit
+opam pin add -y --no-action git+https://github.com/graph-theory-AI/graph-theory-rocq.git#<commit of the release>
 opam install rocq-graph-theory-misc --jobs=2
 ```
 

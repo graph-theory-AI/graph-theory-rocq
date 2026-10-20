@@ -4,7 +4,7 @@ description: """
 The Infinite public library of graph-theory-rocq: infinite graphs and regularity.
 Builds and installs only public modules; conjectures, migration certificates
 and examples are not installed.
-This package is developed and validated with the pinned Rocq 9.1.1 toolchain.
+This package is developed and validated with the pinned Rocq 9.2 toolchain (rocq-core 9.2.0, rocq-stdlib 9.1.0, MathComp 2.6.0).
 Building requires Python >= 3.9 (tested with 3.12.3); conf-python-3 only checks
 that python3 is present.
 """
@@ -15,8 +15,8 @@ homepage: "https://github.com/graph-theory-AI/graph-theory-rocq"
 bug-reports: "https://github.com/graph-theory-AI/graph-theory-rocq/issues"
 dev-repo: "git+https://github.com/graph-theory-AI/graph-theory-rocq.git"
 depends: [
-  "rocq-core" {= "9.1.1"}
-  "rocq-mathcomp-boot" {= "2.5.0"}
+  "rocq-core" {= "9.2.0"}
+  "rocq-mathcomp-boot" {= "2.6.0"}
   "conf-python-3" {build}
 ]
 build: [

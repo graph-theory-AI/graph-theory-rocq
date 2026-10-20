@@ -4,7 +4,7 @@ description: """
 The Reconstruction public library of graph-theory-rocq: Kelly's lemma.
 Builds and installs only public modules; conjectures, migration certificates
 and examples are not installed.
-This package is developed and validated with the pinned Rocq 9.1.1 toolchain.
+This package is developed and validated with the pinned Rocq 9.2 toolchain (rocq-core 9.2.0, rocq-stdlib 9.1.0, MathComp 2.6.0); coq-graph-theory is the UNRELEASED commit 322e352b (tree 46c83591), pinned by pin-depends.
 Building requires Python >= 3.9 (tested with 3.12.3); conf-python-3 only checks
 that python3 is present.
 """
@@ -15,11 +15,14 @@ homepage: "https://github.com/graph-theory-AI/graph-theory-rocq"
 bug-reports: "https://github.com/graph-theory-AI/graph-theory-rocq/issues"
 dev-repo: "git+https://github.com/graph-theory-AI/graph-theory-rocq.git"
 depends: [
-  "rocq-core" {= "9.1.1"}
+  "rocq-core" {= "9.2.0"}
   "rocq-graph-theory-base" {= version}
-  "coq-graph-theory" {= "0.9.7"}
-  "rocq-mathcomp-boot" {= "2.5.0"}
+  "coq-graph-theory" {= "dev"}
+  "rocq-mathcomp-boot" {= "2.6.0"}
   "conf-python-3" {build}
+]
+pin-depends: [
+  ["coq-graph-theory.dev" "git+https://github.com/rocq-community/graph-theory.git#322e352b72c4ca3f153e5f80123c5020a0d40620"]
 ]
 build: [
   ["python3" "-c" "import sys; sys.exit(0 if sys.version_info >= (3, 9) else 'rocq-graph-theory packaging needs Python >= 3.9 at build time')"]
