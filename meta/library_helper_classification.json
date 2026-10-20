@@ -1,0 +1,1167 @@
+{
+  "schema_version": 1,
+  "header": [
+    "Repository-wide classification of the helpers outside every registered family (G-4; meta/library_classification.py).",
+    "names: every residual repeated normalized name (repeated in the inventory, claimed by no family normalized_names).",
+    "body_shapes: every repeated non-empty body shape whose helpers are in no repeated-name group and are no family source.",
+    "Out of scope: singletons (a normalized name or body shape held once) and the empty-body group (bodiless declarations).",
+    "paper_specific: different notions or carriers behind one name or body, or one paper vocabulary; kept local.",
+    "family_companion: Marc's compatibility alias: a companion, bridge or projection of a REGISTERED family (checked).",
+    "candidate_family: a reusable notion with its proposed family and a milestone; joins_registered: a further copy of a registered notion.",
+    "A milestone records a plan; it deletes nothing and licenses no statement change."
+  ],
+  "milestones": {
+    "post-rc-library-wave": {
+      "description": "the first library migration wave after the RC: it registers or extends the candidate families named here, each through the twelve-step protocol",
+      "owner": "coordinator",
+      "after": "RC"
+    }
+  },
+  "names": {
+    "H_free": {
+      "class": "paper_specific",
+      "reason": "minor-free in one row, induced-bigraph-free in the other: different notions",
+      "members": [
+        "Extremal.conjectures.X207.x207_H_free",
+        "GTMisc.conjectures.X94.x94_H_free"
+      ]
+    },
+    "acyclic_rel": {
+      "class": "candidate_family",
+      "reason": "acyclic relations; X92 in bool vs XE2 in Prop",
+      "members": [
+        "Digraph.conjectures.X92.x92_acyclic_rel",
+        "Digraph.conjectures.XE2.xe2_acyclic_rel"
+      ],
+      "family_id": "acyclic-relations",
+      "milestone": "post-rc-library-wave"
+    },
+    "arrows": {
+      "class": "candidate_family",
+      "reason": "Ramsey arrows; X195 general, X215 the diagonal two-colour case",
+      "members": [
+        "Extremal.conjectures.X195.x195_arrows",
+        "Extremal.conjectures.X215.x215_arrows"
+      ],
+      "family_id": "ramsey-arrows",
+      "milestone": "post-rc-library-wave"
+    },
+    "branch": {
+      "class": "family_companion",
+      "reason": "projection of the registered induced-subdivision record (isd_* x0)",
+      "members": [
+        "Extremal.conjectures.X98.x98_branch",
+        "GTMisc.conjectures.X114.x114_branch"
+      ],
+      "family": "induced-subdivision",
+      "kind": "projection"
+    },
+    "branch_injective": {
+      "class": "family_companion",
+      "reason": "projection of the registered induced-subdivision record (isd_* x0)",
+      "members": [
+        "Extremal.conjectures.X98.x98_branch_injective",
+        "GTMisc.conjectures.X114.x114_branch_injective"
+      ],
+      "family": "induced-subdivision",
+      "kind": "projection"
+    },
+    "captured": {
+      "class": "candidate_family",
+      "reason": "cops and robbers vocabulary; X197 = X202, X80 is another encoding",
+      "members": [
+        "GTMisc.conjectures.X197.x197_captured",
+        "GTMisc.conjectures.X80.x80_captured",
+        "Topological.conjectures.X202.x202_captured"
+      ],
+      "family_id": "cops-and-robbers",
+      "milestone": "post-rc-library-wave"
+    },
+    "closed_neighbourhood": {
+      "class": "candidate_family",
+      "reason": "closed neighbourhoods; X11 of a set vs X155 of a vertex",
+      "members": [
+        "Minor.conjectures.X11.x11_closed_neighbourhood",
+        "Packing.conjectures.X155.x155_closed_neighbourhood"
+      ],
+      "family_id": "closed-neighbourhood",
+      "milestone": "post-rc-library-wave"
+    },
+    "colour_classes_large": {
+      "class": "candidate_family",
+      "reason": "large colour classes of an edge colouring; X9 equals X10 modulo the edge set",
+      "members": [
+        "Cycle.conjectures.X10.x10_colour_classes_large",
+        "Cycle.conjectures.X9.x9_colour_classes_large"
+      ],
+      "family_id": "edge-colour-class-sizes",
+      "milestone": "post-rc-library-wave"
+    },
+    "complement_irrefl": {
+      "class": "family_companion",
+      "reason": "irreflexivity companion of the registered complement relation, one per row",
+      "members": [
+        "Chromatic.conjectures.X3.x3_complement_irrefl",
+        "Chromatic.conjectures.XE2.xe2_complement_irrefl",
+        "Extremal.conjectures.X56.x56_complement_irrefl",
+        "Extremal.conjectures.XE1.xe1_complement_irrefl",
+        "GTMisc.conjectures.X29.x29_complement_irrefl"
+      ],
+      "family": "complement",
+      "kind": "companion"
+    },
+    "complement_sym": {
+      "class": "family_companion",
+      "reason": "symmetry companion of the registered complement relation, one per row",
+      "members": [
+        "Chromatic.conjectures.X3.x3_complement_sym",
+        "Chromatic.conjectures.XE2.xe2_complement_sym",
+        "Extremal.conjectures.X56.x56_complement_sym",
+        "Extremal.conjectures.XE1.xe1_complement_sym",
+        "GTMisc.conjectures.X29.x29_complement_sym"
+      ],
+      "family": "complement",
+      "kind": "companion"
+    },
+    "cop_move": {
+      "class": "candidate_family",
+      "reason": "cops and robbers vocabulary; X197 = X202, X80 is another encoding",
+      "members": [
+        "GTMisc.conjectures.X197.x197_cop_move",
+        "Topological.conjectures.X202.x202_cop_move"
+      ],
+      "family_id": "cops-and-robbers",
+      "milestone": "post-rc-library-wave"
+    },
+    "cop_number_at_most": {
+      "class": "candidate_family",
+      "reason": "cop number bound; X80 (strategy plus rank) vs X202 (round count) needs a proof",
+      "members": [
+        "GTMisc.conjectures.X80.x80_cop_number_at_most",
+        "Topological.conjectures.X202.x202_cop_number_at_most"
+      ],
+      "family_id": "cops-and-robbers",
+      "milestone": "post-rc-library-wave"
+    },
+    "cop_position": {
+      "class": "candidate_family",
+      "reason": "cops and robbers vocabulary; X197 = X202, X80 is another encoding",
+      "members": [
+        "GTMisc.conjectures.X197.x197_cop_position",
+        "Topological.conjectures.X202.x202_cop_position"
+      ],
+      "family_id": "cops-and-robbers",
+      "milestone": "post-rc-library-wave"
+    },
+    "cops_win_in": {
+      "class": "candidate_family",
+      "reason": "cops and robbers vocabulary; X197 = X202, X80 is another encoding",
+      "members": [
+        "GTMisc.conjectures.X197.x197_cops_win_in",
+        "Topological.conjectures.X202.x202_cops_win_in"
+      ],
+      "family_id": "cops-and-robbers",
+      "milestone": "post-rc-library-wave"
+    },
+    "cycle_diagonal_count": {
+      "class": "candidate_family",
+      "reason": "diagonals of a cycle over the registered consecutive_in_cycle (XE1, XE2)",
+      "members": [
+        "Chromatic.conjectures.XE1.xe1_cycle_diagonal_count",
+        "Extremal.conjectures.XE2.xe2_cycle_diagonal_count"
+      ],
+      "family_id": "cycle-diagonals",
+      "milestone": "post-rc-library-wave"
+    },
+    "degree_class_size": {
+      "class": "candidate_family",
+      "reason": "the size of a degree class; X37 = X38",
+      "members": [
+        "GTMisc.conjectures.X37.x37_degree_class_size",
+        "GTMisc.conjectures.X38.x38_degree_class_size"
+      ],
+      "family_id": "degree-classes",
+      "milestone": "post-rc-library-wave"
+    },
+    "degree_two_count": {
+      "class": "candidate_family",
+      "reason": "the number of degree-two vertices; X14 = X5",
+      "members": [
+        "GTMisc.conjectures.X14.x14_degree_two_count",
+        "Hamilton.conjectures.X5.x5_degree_two_count"
+      ],
+      "family_id": "degree-classes",
+      "milestone": "post-rc-library-wave"
+    },
+    "delete_edge_irrefl": {
+      "class": "family_companion",
+      "reason": "irreflexivity companion of the registered single-edge deletion",
+      "members": [
+        "Chromatic.conjectures.X64.x64_delete_edge_irrefl",
+        "Extremal.conjectures.X60.x60_delete_edge_irrefl"
+      ],
+      "family": "single-edge-deletion",
+      "kind": "companion"
+    },
+    "delete_edge_sym": {
+      "class": "family_companion",
+      "reason": "symmetry companion of the registered single-edge deletion",
+      "members": [
+        "Chromatic.conjectures.X64.x64_delete_edge_sym",
+        "Extremal.conjectures.X60.x60_delete_edge_sym"
+      ],
+      "family": "single-edge-deletion",
+      "kind": "companion"
+    },
+    "delete_edges_irrefl": {
+      "class": "family_companion",
+      "reason": "irreflexivity companion of the registered edge-set deletion",
+      "members": [
+        "Chromatic.conjectures.X7.x7_delete_edges_irrefl",
+        "Chromatic.conjectures.XE1.xe1_delete_edges_irrefl",
+        "Extremal.conjectures.XE1.xe1_delete_edges_irrefl"
+      ],
+      "family": "edge-set-deletion",
+      "kind": "companion"
+    },
+    "delete_edges_sym": {
+      "class": "family_companion",
+      "reason": "symmetry companion of the registered edge-set deletion",
+      "members": [
+        "Chromatic.conjectures.X7.x7_delete_edges_sym",
+        "Chromatic.conjectures.XE1.xe1_delete_edges_sym",
+        "Extremal.conjectures.XE1.xe1_delete_edges_sym"
+      ],
+      "family": "edge-set-deletion",
+      "kind": "companion"
+    },
+    "diamond": {
+      "class": "candidate_family",
+      "reason": "the diamond K4 minus an edge; X42 = X43",
+      "members": [
+        "Chromatic.conjectures.X43.x43_diamond",
+        "Minor.conjectures.X42.x42_diamond"
+      ],
+      "family_id": "diamond",
+      "milestone": "post-rc-library-wave"
+    },
+    "diamond_irrefl": {
+      "class": "candidate_family",
+      "reason": "irreflexivity of the diamond's adjacency relation; X42 = X43",
+      "members": [
+        "Chromatic.conjectures.X43.x43_diamond_irrefl",
+        "Minor.conjectures.X42.x42_diamond_irrefl"
+      ],
+      "family_id": "diamond",
+      "milestone": "post-rc-library-wave"
+    },
+    "diamond_rel": {
+      "class": "candidate_family",
+      "reason": "the diamond's adjacency relation; X42 = X43",
+      "members": [
+        "Chromatic.conjectures.X43.x43_diamond_rel",
+        "Minor.conjectures.X42.x42_diamond_rel"
+      ],
+      "family_id": "diamond",
+      "milestone": "post-rc-library-wave"
+    },
+    "diamond_sym": {
+      "class": "candidate_family",
+      "reason": "symmetry of the diamond's adjacency relation; X42 = X43",
+      "members": [
+        "Chromatic.conjectures.X43.x43_diamond_sym",
+        "Minor.conjectures.X42.x42_diamond_sym"
+      ],
+      "family_id": "diamond",
+      "milestone": "post-rc-library-wave"
+    },
+    "dijoin": {
+      "class": "paper_specific",
+      "reason": "a digraph join in one row, a Lucchesi-Younger dijoin in the other",
+      "members": [
+        "Digraph.conjectures.X122.x122_dijoin",
+        "Digraph.conjectures.packing.dijoin"
+      ]
+    },
+    "directed_path": {
+      "class": "candidate_family",
+      "reason": "directed paths; X166 = X179",
+      "members": [
+        "Digraph.conjectures.X166.x166_directed_path",
+        "Digraph.conjectures.X179.x179_directed_path"
+      ],
+      "family_id": "directed-paths-cuts",
+      "milestone": "post-rc-library-wave"
+    },
+    "edge_colour_irrefl": {
+      "class": "family_companion",
+      "reason": "irreflexivity companion of the registered edge-colour class relation",
+      "members": [
+        "Chromatic.conjectures.X34.x34_edge_colour_irrefl",
+        "Cycle.conjectures.X212.x212_edge_colour_irrefl",
+        "Topological.conjectures.X23.x23_edge_colour_irrefl"
+      ],
+      "family": "edge-colour-class",
+      "kind": "companion"
+    },
+    "edge_colour_sym": {
+      "class": "family_companion",
+      "reason": "symmetry companion of the registered edge-colour class relation",
+      "members": [
+        "Chromatic.conjectures.X34.x34_edge_colour_sym",
+        "Cycle.conjectures.X212.x212_edge_colour_sym",
+        "Topological.conjectures.X23.x23_edge_colour_sym"
+      ],
+      "family": "edge-colour-class",
+      "kind": "companion"
+    },
+    "edge_disjoint_triangles": {
+      "class": "candidate_family",
+      "reason": "edge-disjoint triangles over the registered triangle names (XE2, X5)",
+      "members": [
+        "Extremal.conjectures.XE2.xe2_edge_disjoint_triangles",
+        "Packing.conjectures.X5.x5_edge_disjoint_triangles"
+      ],
+      "family_id": "edge-disjoint-triangles",
+      "milestone": "post-rc-library-wave"
+    },
+    "edge_path": {
+      "class": "family_companion",
+      "reason": "projection of the registered induced-subdivision record (isd_* x0)",
+      "members": [
+        "Extremal.conjectures.X98.x98_edge_path",
+        "GTMisc.conjectures.X114.x114_edge_path"
+      ],
+      "family": "induced-subdivision",
+      "kind": "projection"
+    },
+    "edge_path_valid": {
+      "class": "family_companion",
+      "reason": "projection of the registered induced-subdivision record (isd_* x0)",
+      "members": [
+        "Extremal.conjectures.X98.x98_edge_path_valid",
+        "GTMisc.conjectures.X114.x114_edge_path_valid"
+      ],
+      "family": "induced-subdivision",
+      "kind": "projection"
+    },
+    "edge_setE": {
+      "class": "family_companion",
+      "reason": "bridge lemmas x*_edge_set G = E(G) onto the registered edge set, one per row",
+      "members": [
+        "GTMisc.conjectures.vocabulary_misc.x102_edge_setE",
+        "GTMisc.conjectures.vocabulary_misc.x14_edge_setE",
+        "GTMisc.conjectures.vocabulary_misc.x20_edge_setE",
+        "GTMisc.conjectures.vocabulary_misc.x37_edge_setE",
+        "GTMisc.conjectures.vocabulary_misc.x38_edge_setE",
+        "GTMisc.conjectures.vocabulary_misc.x77_edge_setE",
+        "Packing.conjectures.vocabulary_packing.x15_edge_setE",
+        "Packing.conjectures.vocabulary_packing.x25_edge_setE",
+        "Packing.conjectures.vocabulary_packing.x47_edge_setE",
+        "Packing.conjectures.vocabulary_packing.x5_edge_setE",
+        "Packing.conjectures.vocabulary_packing.xe1_edge_setE",
+        "Topological.conjectures.vocabulary_topological.x158_edge_setE"
+      ],
+      "family": "simple-graph-edge-set",
+      "kind": "bridge"
+    },
+    "edp_feasible": {
+      "class": "paper_specific",
+      "reason": "edge-disjoint paths over an mgraph in one row and an sgraph in the other",
+      "members": [
+        "Cycle.conjectures.D1.edp_feasible",
+        "GTMisc.conjectures.D7.edp_feasible"
+      ]
+    },
+    "enc_digraph": {
+      "class": "candidate_family",
+      "reason": "digraph encodings of the complexity layer (X90, X166, X114)",
+      "members": [
+        "Digraph.conjectures.X166.x166_enc_digraph",
+        "Digraph.conjectures.X90.x90_enc_digraph"
+      ],
+      "family_id": "complexity-layer",
+      "milestone": "post-rc-library-wave"
+    },
+    "enc_instance": {
+      "class": "paper_specific",
+      "reason": "a generic name for different encoded objects of each row",
+      "members": [
+        "Chromatic.conjectures.X164.x164_enc_instance",
+        "Digraph.conjectures.X166.x166_enc_instance"
+      ]
+    },
+    "extension_system": {
+      "class": "paper_specific",
+      "reason": "sibling rows X167 / X168, already known unfaithful and blocked (STATEMENT_IMPROVEMENTS)",
+      "members": [
+        "GTMisc.conjectures.X167.x167_extension_system",
+        "GTMisc.conjectures.X168.x168_extension_system"
+      ]
+    },
+    "faces": {
+      "class": "paper_specific",
+      "reason": "dart orbits in one row, a rotation-system face count in the other",
+      "members": [
+        "Cycle.conjectures.D1.faces",
+        "Topological.conjectures.X228.x228_faces"
+      ]
+    },
+    "global_induced": {
+      "class": "family_companion",
+      "reason": "projection of the registered induced-subdivision record (isd_* x0)",
+      "members": [
+        "Extremal.conjectures.X98.x98_global_induced",
+        "GTMisc.conjectures.X114.x114_global_induced"
+      ],
+      "family": "induced-subdivision",
+      "kind": "projection"
+    },
+    "graph": {
+      "class": "paper_specific",
+      "reason": "a generic name for different graph objects of each row",
+      "members": [
+        "Chromatic.conjectures.X164.x164_graph",
+        "Chromatic.conjectures.X70.x70_graph"
+      ]
+    },
+    "graph_automorphism": {
+      "class": "candidate_family",
+      "reason": "graph automorphisms; U2 = X211, X211 is already marked to move to base",
+      "members": [
+        "Hamilton.conjectures.U2.graph_automorphism",
+        "Hamilton.conjectures.X211.x211_graph_automorphism"
+      ],
+      "family_id": "graph-symmetry",
+      "milestone": "post-rc-library-wave"
+    },
+    "hat_strategy": {
+      "class": "candidate_family",
+      "reason": "hat-guessing strategies, repeated in X99 and X227",
+      "members": [
+        "GTMisc.conjectures.X227.x227_hat_strategy",
+        "GTMisc.conjectures.X99.x99_hat_strategy"
+      ],
+      "family_id": "hat-guessing",
+      "milestone": "post-rc-library-wave"
+    },
+    "hom_count": {
+      "class": "candidate_family",
+      "reason": "homomorphism counts; D2tur, and X143 = X135",
+      "members": [
+        "Extremal.conjectures.D2tur.hom_count",
+        "Extremal.conjectures.X143.x143_hom_count",
+        "Hom.conjectures.X135.x135_hom_count"
+      ],
+      "family_id": "hom-count",
+      "milestone": "post-rc-library-wave"
+    },
+    "image_edgeE": {
+      "class": "family_companion",
+      "reason": "bridge from a row's image edge onto the registered image-edge notion",
+      "members": [
+        "Hypergraph.conjectures.vocabulary_hypergraph.x117_image_edgeE",
+        "Hypergraph.conjectures.vocabulary_hypergraph.x119_image_edgeE"
+      ],
+      "family": "image-edge",
+      "kind": "bridge"
+    },
+    "in_np": {
+      "class": "candidate_family",
+      "reason": "membership in NP; X90's program-cost NP vs D7's in_NP needs a proof",
+      "members": [
+        "Digraph.conjectures.X166.x166_in_np",
+        "Digraph.conjectures.X90.x90_in_np"
+      ],
+      "family_id": "complexity-layer",
+      "milestone": "post-rc-library-wave"
+    },
+    "induced_copy": {
+      "class": "paper_specific",
+      "reason": "an induced copy of a bigraph in one row, of a tournament in the other",
+      "members": [
+        "GTMisc.conjectures.X94.x94_induced_copy",
+        "Infinite.conjectures.X228.x228_induced_copy"
+      ]
+    },
+    "instance": {
+      "class": "paper_specific",
+      "reason": "a generic name for different problem instances of each row",
+      "members": [
+        "Chromatic.conjectures.X164.x164_instance",
+        "Digraph.conjectures.X166.x166_instance"
+      ]
+    },
+    "internal": {
+      "class": "candidate_family",
+      "reason": "internal-vertex tests of a path (X98 / X114 endpoint-relative, X216 the interior set); the registered seq_interior, proof needed",
+      "members": [
+        "Extremal.conjectures.X98.x98_internal",
+        "GTMisc.conjectures.X114.x114_internal",
+        "GTMisc.conjectures.X216.x216_internal"
+      ],
+      "family_id": "internal-vertices",
+      "milestone": "post-rc-library-wave",
+      "joins_registered": true
+    },
+    "internal_avoids_branch": {
+      "class": "family_companion",
+      "reason": "projection of the registered induced-subdivision record (isd_* x0)",
+      "members": [
+        "Extremal.conjectures.X98.x98_internal_avoids_branch",
+        "GTMisc.conjectures.X114.x114_internal_avoids_branch"
+      ],
+      "family": "induced-subdivision",
+      "kind": "projection"
+    },
+    "is_tournament": {
+      "class": "candidate_family",
+      "reason": "tournaments; a canonical exists in base common.v (tournament)",
+      "members": [
+        "Digraph.conjectures.heroes.is_tournament",
+        "GTMisc.conjectures.D7.is_tournament"
+      ],
+      "family_id": "tournaments",
+      "milestone": "post-rc-library-wave"
+    },
+    "kempe_step": {
+      "class": "paper_specific",
+      "reason": "a vertex Kempe change in one row, an edge Kempe change in the other",
+      "members": [
+        "Chromatic.conjectures.X162.x162_kempe_step",
+        "Chromatic.conjectures.X213.x213_kempe_step"
+      ]
+    },
+    "linear_arboricity": {
+      "class": "candidate_family",
+      "reason": "linear arboricity over the registered linear forest colouring; X212 = X23",
+      "members": [
+        "Cycle.conjectures.X212.x212_linear_arboricity",
+        "Topological.conjectures.X23.x23_linear_arboricity"
+      ],
+      "family_id": "linear-arboricity",
+      "milestone": "post-rc-library-wave"
+    },
+    "linear_arboricity_at_most": {
+      "class": "candidate_family",
+      "reason": "the linear arboricity bound; X212 = X23",
+      "members": [
+        "Cycle.conjectures.X212.x212_linear_arboricity_at_most",
+        "Topological.conjectures.X23.x23_linear_arboricity_at_most"
+      ],
+      "family_id": "linear-arboricity",
+      "milestone": "post-rc-library-wave"
+    },
+    "loopless": {
+      "class": "candidate_family",
+      "reason": "loopless digraphs; base's loopless is for mgraph only; X16 = X19 = X2",
+      "members": [
+        "Digraph.conjectures.X16.x16_loopless",
+        "Digraph.conjectures.X19.x19_loopless",
+        "Digraph.conjectures.two_extremal.loopless"
+      ],
+      "family_id": "digraph-loops-sources",
+      "milestone": "post-rc-library-wave"
+    },
+    "matching_equiv_matching": {
+      "class": "family_companion",
+      "reason": "bridge from a row's matching onto the registered matching predicate",
+      "members": [
+        "GTMisc.conjectures.vocabulary_misc.x14_matching_equiv_matching",
+        "Packing.conjectures.vocabulary_packing.x15_matching_equiv_matching"
+      ],
+      "family": "matching",
+      "kind": "bridge"
+    },
+    "no_sources": {
+      "class": "candidate_family",
+      "reason": "digraphs without sources, repeated in several digraph rows",
+      "members": [
+        "Digraph.conjectures.X16.x16_no_sources",
+        "Digraph.conjectures.X2.no_sources"
+      ],
+      "family_id": "digraph-loops-sources",
+      "milestone": "post-rc-library-wave"
+    },
+    "np_complete": {
+      "class": "candidate_family",
+      "reason": "NP-completeness of the complexity layer, repeated across rows",
+      "members": [
+        "Digraph.conjectures.X90.x90_np_complete",
+        "GTMisc.conjectures.X114.x114_np_complete"
+      ],
+      "family_id": "complexity-layer",
+      "milestone": "post-rc-library-wave"
+    },
+    "oedges": {
+      "class": "paper_specific",
+      "reason": "a count (twice the edge count) in one row, an oriented edge set in the other",
+      "members": [
+        "Extremal.conjectures.D2tur.oedges",
+        "GTMisc.conjectures.U13.oedges"
+      ]
+    },
+    "oriented": {
+      "class": "candidate_family",
+      "reason": "orientations of a graph; X122.oriented equals oriented_dg, X2 adds a guard",
+      "members": [
+        "Digraph.conjectures.X122.x122_oriented",
+        "Digraph.conjectures.X2.x2_oriented"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    },
+    "oriented_dg": {
+      "class": "candidate_family",
+      "reason": "orientations of a graph as digraphs, repeated across rows",
+      "members": [
+        "Digraph.conjectures.chi_bounded.oriented_dg",
+        "Digraph.conjectures.heroes_dichotomy.oriented_dg"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    },
+    "oriented_forest": {
+      "class": "candidate_family",
+      "reason": "oriented forests over the underlying graph (P9, X2)",
+      "members": [
+        "Digraph.conjectures.chi_bounded.oriented_forest",
+        "Digraph.conjectures.heroes_dichotomy.oriented_forest"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    },
+    "oriented_tree": {
+      "class": "candidate_family",
+      "reason": "oriented trees over the underlying graph (P9, X2)",
+      "members": [
+        "Digraph.conjectures.P9.oriented_tree",
+        "Digraph.conjectures.X2.oriented_tree"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    },
+    "out_cut": {
+      "parts": [
+        {
+          "class": "candidate_family",
+          "reason": "the out-cut of a vertex set as an arc set of a digraph (X179), with outcut",
+          "members": [
+            "Digraph.conjectures.X179.x179_out_cut"
+          ],
+          "family_id": "directed-paths-cuts",
+          "milestone": "post-rc-library-wave"
+        },
+        {
+          "class": "paper_specific",
+          "reason": "the out-cut of a vertex set as mgraph edges, specific to X184",
+          "members": [
+            "Cycle.conjectures.X184.x184_out_cut"
+          ]
+        }
+      ]
+    },
+    "outcut": {
+      "class": "candidate_family",
+      "reason": "directed out-cuts; an arc set (sad) vs its count (two_extremal)",
+      "members": [
+        "Digraph.conjectures.sad.outcut",
+        "Digraph.conjectures.two_extremal.outcut"
+      ],
+      "family_id": "directed-paths-cuts",
+      "milestone": "post-rc-library-wave"
+    },
+    "output_colour": {
+      "class": "paper_specific",
+      "reason": "decoder outputs of X157 and X164, where X164 is the three-colour case",
+      "members": [
+        "Chromatic.conjectures.X157.x157_output_colour",
+        "Chromatic.conjectures.X164.x164_output_colour"
+      ]
+    },
+    "padj_irrefl": {
+      "class": "family_companion",
+      "reason": "irreflexivity companion of the registered Petersen adjacency",
+      "members": [
+        "Cycle.conjectures.D1.padj_irrefl",
+        "Cycle.conjectures.U10.padj_irrefl"
+      ],
+      "family": "petersen",
+      "kind": "companion"
+    },
+    "padj_sym": {
+      "class": "family_companion",
+      "reason": "symmetry companion of the registered Petersen adjacency",
+      "members": [
+        "Cycle.conjectures.D1.padj_sym",
+        "Cycle.conjectures.U10.padj_sym"
+      ],
+      "family": "petersen",
+      "kind": "companion"
+    },
+    "palette_on": {
+      "class": "candidate_family",
+      "reason": "colour palettes of Ramsey rows; D2ram ('I_n) vs X4 (finType) carriers",
+      "members": [
+        "Extremal.conjectures.D2ram.palette_on",
+        "Extremal.conjectures.X4.x4_palette_on"
+      ],
+      "family_id": "ramsey-arrows",
+      "milestone": "post-rc-library-wave"
+    },
+    "path_irrefl": {
+      "class": "family_companion",
+      "reason": "irreflexivity companion of the registered ordinal path relation",
+      "members": [
+        "Packing.conjectures.X18.x18_path_irrefl",
+        "Packing.conjectures.X226.x226_path_irrefl"
+      ],
+      "family": "ordinal-path",
+      "kind": "companion"
+    },
+    "path_sym": {
+      "class": "family_companion",
+      "reason": "symmetry companion of the registered ordinal path relation",
+      "members": [
+        "Packing.conjectures.X18.x18_path_sym",
+        "Packing.conjectures.X226.x226_path_sym"
+      ],
+      "family": "ordinal-path",
+      "kind": "companion"
+    },
+    "paths_internally_disjoint": {
+      "parts": [
+        {
+          "class": "family_companion",
+          "reason": "the internal disjointness property of the registered induced-subdivision model",
+          "members": [
+            "Extremal.conjectures.X98.x98_paths_internally_disjoint",
+            "GTMisc.conjectures.X114.x114_paths_internally_disjoint"
+          ],
+          "family": "induced-subdivision",
+          "kind": "companion"
+        },
+        {
+          "class": "paper_specific",
+          "reason": "a Menger-style system of m paths with pairwise disjoint interiors, specific to XE2",
+          "members": [
+            "Extremal.conjectures.XE2.xe2_paths_internally_disjoint"
+          ]
+        }
+      ]
+    },
+    "problem": {
+      "class": "paper_specific",
+      "reason": "a generic name for different decision problems of each row",
+      "members": [
+        "Digraph.conjectures.X90.x90_problem",
+        "GTMisc.conjectures.D7.problem"
+      ]
+    },
+    "pure_pair": {
+      "parts": [
+        {
+          "class": "candidate_family",
+          "reason": "pure pairs of vertex sets (disjoint, non-empty, complete or anticomplete); X41 = X144",
+          "members": [
+            "GTMisc.conjectures.X144.x144_pure_pair",
+            "GTMisc.conjectures.X41.x41_pure_pair"
+          ],
+          "family_id": "pure-pairs",
+          "milestone": "post-rc-library-wave"
+        },
+        {
+          "class": "paper_specific",
+          "reason": "a pure pair of a bipartite bigraph's two sides, specific to X94",
+          "members": [
+            "GTMisc.conjectures.X94.x94_pure_pair"
+          ]
+        }
+      ]
+    },
+    "rainbow_cycle": {
+      "class": "candidate_family",
+      "reason": "rainbow cycles of an edge colouring; X10 and X24 are equivalent forms",
+      "members": [
+        "Cycle.conjectures.X10.x10_rainbow_cycle",
+        "Cycle.conjectures.X24.x24_rainbow_cycle"
+      ],
+      "family_id": "edge-colour-class-sizes",
+      "milestone": "post-rc-library-wave"
+    },
+    "real_sel": {
+      "class": "paper_specific",
+      "reason": "a Prop selection in one dijoin row, a bool selection in the other",
+      "members": [
+        "Digraph.conjectures.X86.x86_real_sel",
+        "Digraph.conjectures.packing.real_sel"
+      ]
+    },
+    "red_deg": {
+      "class": "candidate_family",
+      "reason": "red degrees of twin-width, in twinwidth and X220",
+      "members": [
+        "Digraph.conjectures.twinwidth.red_deg",
+        "Minor.conjectures.X220.x220_red_deg"
+      ],
+      "family_id": "twin-width",
+      "milestone": "post-rc-library-wave"
+    },
+    "robber_move": {
+      "class": "candidate_family",
+      "reason": "cops and robbers vocabulary; X197 = X202, X80 is another encoding",
+      "members": [
+        "GTMisc.conjectures.X197.x197_robber_move",
+        "Topological.conjectures.X202.x202_robber_move"
+      ],
+      "family_id": "cops-and-robbers",
+      "milestone": "post-rc-library-wave"
+    },
+    "same_colour_outneighbours": {
+      "class": "candidate_family",
+      "reason": "out-neighbours of one colour; X45 is the three-colour case of X51",
+      "members": [
+        "Digraph.conjectures.X45.x45_same_colour_outneighbours",
+        "Digraph.conjectures.X51.x51_same_colour_outneighbours"
+      ],
+      "family_id": "same-colour-outneighbours",
+      "milestone": "post-rc-library-wave"
+    },
+    "spanning_tree_polytope_xc": {
+      "class": "paper_specific",
+      "reason": "sibling rows X167 / X168, already known unfaithful and blocked (STATEMENT_IMPROVEMENTS)",
+      "members": [
+        "GTMisc.conjectures.X167.x167_spanning_tree_polytope_xc",
+        "GTMisc.conjectures.X168.x168_spanning_tree_polytope_xc"
+      ]
+    },
+    "star_edge_colouring": {
+      "class": "candidate_family",
+      "reason": "star edge colourings in U5 and D2chr; its move trigger (a second area) is met",
+      "members": [
+        "Chromatic.conjectures.U5.star_edge_colouring",
+        "Extremal.conjectures.D2chr.star_edge_colouring"
+      ],
+      "family_id": "star-edge-colouring",
+      "milestone": "post-rc-library-wave"
+    },
+    "switching_reconstructible": {
+      "class": "paper_specific",
+      "reason": "switching reconstruction of digraphs in one row, of graphs in the other",
+      "members": [
+        "Digraph.conjectures.P9.switching_reconstructible",
+        "Reconstruction.conjectures.U11.switching_reconstructible"
+      ]
+    },
+    "theta": {
+      "class": "candidate_family",
+      "reason": "theta graphs; X67 (induced) and X220 are equivalent forms",
+      "members": [
+        "Minor.conjectures.X220.x220_theta",
+        "Minor.conjectures.X67.x67_theta"
+      ],
+      "family_id": "theta-graphs",
+      "milestone": "post-rc-library-wave"
+    },
+    "transitive_tournament": {
+      "class": "candidate_family",
+      "reason": "transitive tournaments, repeated in heroes, D7, X123 and heroes_dichotomy",
+      "members": [
+        "Digraph.conjectures.X123.x123_transitive_tournament",
+        "Digraph.conjectures.heroes_dichotomy.transitive_tournament"
+      ],
+      "family_id": "tournaments",
+      "milestone": "post-rc-library-wave"
+    },
+    "unbounded": {
+      "class": "paper_specific",
+      "reason": "XE1's unbounded vs X13's tends to infinity: different notions under one name",
+      "members": [
+        "Chromatic.conjectures.XE1.xe1_unbounded",
+        "Extremal.conjectures.X13.x13_unbounded"
+      ]
+    },
+    "underlying": {
+      "class": "candidate_family",
+      "reason": "the underlying graph of a digraph, repeated across digraph rows",
+      "members": [
+        "Digraph.conjectures.chi_bounded.underlying",
+        "Digraph.conjectures.heroes_dichotomy.underlying"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    },
+    "uniform_equiv_hg_uniform": {
+      "class": "family_companion",
+      "reason": "bridges from each row's uniformity onto the registered uniform hypergraph",
+      "members": [
+        "Hypergraph.conjectures.vocabulary_hypergraph.x104_uniform_equiv_hg_uniform",
+        "Hypergraph.conjectures.vocabulary_hypergraph.x108_uniform_equiv_hg_uniform",
+        "Hypergraph.conjectures.vocabulary_hypergraph.x119_uniform_equiv_hg_uniform",
+        "Hypergraph.conjectures.vocabulary_hypergraph.x137_uniform_equiv_hg_uniform",
+        "Hypergraph.conjectures.vocabulary_hypergraph.x209_uniform_equiv_hg_uniform",
+        "Hypergraph.conjectures.vocabulary_hypergraph.x6_uniform_equiv_hg_uniform"
+      ],
+      "family": "uniform-hypergraph",
+      "kind": "bridge"
+    },
+    "uniquely_hamiltonian": {
+      "class": "paper_specific",
+      "reason": "a finite carrier in one row, an infinite carrier in the other",
+      "members": [
+        "Hamilton.conjectures.U2.uniquely_hamiltonian",
+        "Infinite.conjectures.D4inf3.uniquely_hamiltonian"
+      ]
+    },
+    "urel": {
+      "class": "candidate_family",
+      "reason": "the underlying relation of a digraph; one copy adds a u != v guard",
+      "members": [
+        "Digraph.conjectures.chi_bounded.urel",
+        "Digraph.conjectures.heroes_dichotomy.urel"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    },
+    "urel_irrefl": {
+      "class": "candidate_family",
+      "reason": "irreflexivity of the underlying relation of a digraph, repeated per row",
+      "members": [
+        "Digraph.conjectures.chi_bounded.urel_irrefl",
+        "Digraph.conjectures.heroes_dichotomy.urel_irrefl"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    },
+    "urel_sym": {
+      "class": "candidate_family",
+      "reason": "symmetry of the underlying relation of a digraph, repeated per row",
+      "members": [
+        "Digraph.conjectures.chi_bounded.urel_sym",
+        "Digraph.conjectures.heroes_dichotomy.urel_sym"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    },
+    "vertex_transitive": {
+      "class": "candidate_family",
+      "reason": "vertex-transitive graphs; U2 = X211",
+      "members": [
+        "Hamilton.conjectures.U2.vertex_transitive",
+        "Hamilton.conjectures.X211.x211_vertex_transitive"
+      ],
+      "family_id": "graph-symmetry",
+      "milestone": "post-rc-library-wave"
+    },
+    "weakly_connected": {
+      "class": "candidate_family",
+      "reason": "weak connectivity of a digraph through its underlying graph (P9, X2)",
+      "members": [
+        "Digraph.conjectures.P9.weakly_connected",
+        "Digraph.conjectures.X2.weakly_connected"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    }
+  },
+  "body_shapes": {
+    "142e18fdfb184f57531f08c7bb5eb8c998f444ba5483d032c5ee5e7950f9be97": {
+      "class": "candidate_family",
+      "reason": "stable (independent) vertex sets of a digraph; X2 and classic_core are identical",
+      "members": [
+        "Digraph.conjectures.X2.x2_arc_stable",
+        "Digraph.conjectures.classic_core.stable"
+      ],
+      "family_id": "digraph-stable-sets",
+      "milestone": "post-rc-library-wave"
+    },
+    "179924813bbecd4ed4b3da04eb0f17d3cc659d34ea71fe7cdf44f09b17e537a2": {
+      "class": "paper_specific",
+      "reason": "a local wrapper of the upstream SGraph constructor (X2), next to X70's own graph object",
+      "members": [
+        "Digraph.conjectures.X2.x2_sgraph"
+      ]
+    },
+    "2671940f95ae8c5c15341681c15f90951b0a4ae89bf82b57687a9896d64058ad": {
+      "class": "candidate_family",
+      "reason": "the largest chromatic number of a radius-two ball; X161 and X186 are identical",
+      "members": [
+        "Chromatic.conjectures.X161.x161_local_chromatic_radius_two",
+        "Chromatic.conjectures.X186.x186_chi2"
+      ],
+      "family_id": "local-chromatic-number",
+      "milestone": "post-rc-library-wave"
+    },
+    "2da3ef4ff389999aa86ccaa9de1d11a776478f4da668b3855c295abd0c919f4a": {
+      "class": "candidate_family",
+      "reason": "the irreflexive symmetrisation of a relation; D2pr.srel and U13.relAdj are identical",
+      "members": [
+        "Extremal.conjectures.D2pr.srel",
+        "GTMisc.conjectures.U13.relAdj"
+      ],
+      "family_id": "symmetrised-relations",
+      "milestone": "post-rc-library-wave"
+    },
+    "3f39d5c348e5b79d06e842c114e6cc571583bbf44e4b0ebfda1a01ec05745d43": {
+      "class": "paper_specific",
+      "reason": "P9's carrier copies for arc removal, arc reversal and switching: one body for three notions",
+      "members": [
+        "Digraph.conjectures.P9.remove_arcs",
+        "Digraph.conjectures.P9.rev_arc",
+        "Digraph.conjectures.P9.switched"
+      ]
+    },
+    "461d037876314935d51c93a17b4f34688d86a17e0f4af9566fa941dae90d6042": {
+      "class": "candidate_family",
+      "reason": "the underlying relation of a digraph (two_extremal.uADJ), with the urel group",
+      "members": [
+        "Digraph.conjectures.two_extremal.uADJ"
+      ],
+      "family_id": "digraph-underlying-graph",
+      "milestone": "post-rc-library-wave"
+    },
+    "4660e248f9af4339b4c26d8119dabcd981d69d17288d14f7946f15bcfd3d8cf9": {
+      "class": "paper_specific",
+      "reason": "D1's flow conservation at three value types (int, rat, vectors), local to that row",
+      "members": [
+        "Cycle.conjectures.D1.iconservative",
+        "Cycle.conjectures.D1.rconservative",
+        "Cycle.conjectures.D1.vconservative"
+      ]
+    },
+    "4b66a6b93f4a68d01a0a2a16ba3ce822a0527afd09d7aaac71122c306edaa52b": {
+      "class": "paper_specific",
+      "reason": "a merged vertex and a glue point: different notions sharing the body inl a",
+      "members": [
+        "Digraph.conjectures.glue_eul_subtype.uemerged",
+        "Digraph.conjectures.two_extremal_glue.pa"
+      ]
+    },
+    "4f024db616cf66c52537646d3d96e724ff03d6f09f8c266d719e273a1f88c56b": {
+      "class": "candidate_family",
+      "reason": "outerplanarity as no K4 and no K2,3 minor; D7 and X82 are identical",
+      "members": [
+        "GTMisc.conjectures.D7.outerplanar_w",
+        "GTMisc.conjectures.X82.x82_outerplanar"
+      ],
+      "family_id": "outerplanar",
+      "milestone": "post-rc-library-wave"
+    },
+    "589ddf4441503fa61dd7b4b8358903c2ad3d7ccf18bdb2764884dda9b7bea7d8": {
+      "class": "paper_specific",
+      "reason": "two 'I_n carrier copies carrying different arc relations (symmetric vs directed cycle)",
+      "members": [
+        "Digraph.conjectures.two_extremal.symcyc",
+        "Digraph.conjectures.two_extremal_glue.dicyc"
+      ]
+    },
+    "6743df6930d375b3130d033d4f36b1d88dba52ee5c52d107b4440baa0d4c832e": {
+      "class": "candidate_family",
+      "reason": "the integer square root floor characterisation; XE1 and XE2 are identical",
+      "members": [
+        "Chromatic.conjectures.XE2.xe2_sqrt_lower",
+        "Extremal.conjectures.XE1.xe1_sqrt_floor"
+      ],
+      "family_id": "integer-square-root",
+      "milestone": "post-rc-library-wave"
+    },
+    "71ad35656ff65cd04a5234facfcec314ff97ee15049d153feeb971c60b27b4f2": {
+      "class": "candidate_family",
+      "reason": "the realisation relation of a ptree glue, duplicated in two sibling glue files",
+      "members": [
+        "Digraph.conjectures.glue_eul_subtype.realises_E",
+        "Digraph.conjectures.two_extremal_glue.realises_W"
+      ],
+      "family_id": "glue-realisations",
+      "milestone": "post-rc-library-wave"
+    },
+    "76e5a6841934eab591158c05f111c81b3c462ace8efb0d41b051da403ca5b487": {
+      "class": "candidate_family",
+      "reason": "subdigraph containment by an injective arc-preserving map; X2 and unvd are identical",
+      "members": [
+        "Digraph.conjectures.X2.subdigraph_embed",
+        "Digraph.conjectures.unvd.contains_subdigraph"
+      ],
+      "family_id": "subdigraph-containment",
+      "milestone": "post-rc-library-wave"
+    },
+    "789db669612215483e2d60090f99f8423521eb660236d0c73539fd075035e72d": {
+      "class": "family_companion",
+      "reason": "the model constructor of the registered induced-subdivision record in X98 / X114",
+      "members": [
+        "Extremal.conjectures.X98.X98Model",
+        "GTMisc.conjectures.X114.X114Model"
+      ],
+      "family": "induced-subdivision",
+      "kind": "companion"
+    },
+    "a3fa0d9c7888e1c938addcad4b7fa092f6fccfdef5d1a268de8341b1959dad46": {
+      "class": "candidate_family",
+      "reason": "Hamiltonian cycles as spanning ucycles; U2 and U9 are identical",
+      "members": [
+        "Hamilton.conjectures.U2.hamiltonian_cycle",
+        "Packing.conjectures.U9.hamiltonian_cycleG"
+      ],
+      "family_id": "hamiltonian-cycles",
+      "milestone": "post-rc-library-wave"
+    },
+    "aef26aa96762399f9ef11308f2980db2198ba63ebe0eca5faf22b0e5b7a36f47": {
+      "class": "candidate_family",
+      "reason": "the chords of a cycle (X9), with the cycle_diagonal_count group",
+      "members": [
+        "Cycle.conjectures.X9.x9_cycle_chord_count"
+      ],
+      "family_id": "cycle-diagonals",
+      "milestone": "post-rc-library-wave"
+    },
+    "ba3223db334fb70446e2dac22a967601dd2b2616c91ab491e325703a6861ea0b": {
+      "class": "candidate_family",
+      "reason": "nonrepetitive colourings along even paths; X126 and X23 are equivalent forms",
+      "members": [
+        "Chromatic.conjectures.X126.x126_nonrepetitive",
+        "Topological.conjectures.X23.x23_nonrepetitive_colouring"
+      ],
+      "family_id": "nonrepetitive-colourings",
+      "milestone": "post-rc-library-wave"
+    },
+    "da889e041992bd5a7d4fb44f54cb528efaefc386d9828d9d6ae32f90914e9854": {
+      "class": "paper_specific",
+      "reason": "a digraph join and a glue vertex sum: different notions on one disjoint-sum carrier",
+      "members": [
+        "Digraph.conjectures.heroes.djoin",
+        "Digraph.conjectures.two_extremal_glue.vsum"
+      ]
+    },
+    "e75c2c96a8fae51060a00d90d74fd9c6eeacd757abd36073609f83b0c68abab4": {
+      "class": "candidate_family",
+      "reason": "further unmigrated copies of the registered edge set E(G) as 2-subsets (D2pr, U9)",
+      "members": [
+        "Extremal.conjectures.D2pr.edge2",
+        "Packing.conjectures.U9.edge_setG"
+      ],
+      "family_id": "simple-graph-edge-set",
+      "milestone": "post-rc-library-wave",
+      "joins_registered": true
+    },
+    "e973ad7dcebcb6d58ce6c2c56e2757ed828620691f2dd0b0f11eb78b00ef4908": {
+      "parts": [
+        {
+          "class": "candidate_family",
+          "reason": "k-arc-strong connectivity through out-cuts of a digraph (X179)",
+          "members": [
+            "Digraph.conjectures.X179.x179_k_arc_strongly_connected"
+          ],
+          "family_id": "directed-paths-cuts",
+          "milestone": "post-rc-library-wave"
+        },
+        {
+          "class": "paper_specific",
+          "reason": "k-edge connectivity of an mgraph through its out-cuts, specific to X184",
+          "members": [
+            "Cycle.conjectures.X184.x184_directed_k_edge_connected"
+          ]
+        }
+      ]
+    }
+  }
+}

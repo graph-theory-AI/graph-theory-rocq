@@ -883,11 +883,19 @@ def main(argv: list[str]) -> int:
                     "library_helper_inventory.json has drifted; run "
                     "python3 meta/library_inventory.py --write"
                 )
+        # G-4: every residual repeated name and body shape is classified (imported here: it imports this module).
+        import library_classification
+        classification_errors, classification_line = library_classification.validate_classification(inventory, registry)
+        errors.extend(classification_errors)
+    else:
+        classification_line = ""
 
     if args.json:
         print(json.dumps({"counts": inventory["counts"], "errors": errors}, indent=2))
     else:
         print_summary(inventory, registry, args.max_groups)
+        if classification_line:
+            print(classification_line)
         for error in errors:
             print(f"  ERROR: {error}", file=sys.stderr)
     return 1 if errors else 0
