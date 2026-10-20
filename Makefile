@@ -21,6 +21,7 @@ gate:
 	$(MAKE) atlas
 	python3 meta/build_edge_graph.py --check
 	python3 meta/foundation_fidelity.py --check
+	python3 meta/library_api.py --check
 	python3 meta/faithfulness_lint.py --new-waves --check
 	python3 meta/check_edges.py --assumptions --registry
 	python3 meta/sync_edge_legs.py --check
@@ -48,6 +49,7 @@ audit:
 	python3 meta/build_edge_graph.py --check
 	python3 meta/build_v2_manifest.py --check
 	python3 meta/foundation_fidelity.py --check
+	python3 meta/library_api.py --check
 	python3 meta/faithfulness_lint.py --all
 	python3 meta/check_edges.py --registry
 	python3 meta/sync_edge_legs.py --check
@@ -57,6 +59,7 @@ audit:
 	python3 meta/migration_report.py --all --check
 
 mutation:
+	python3 meta/test_library_api.py
 	python3 meta/test_family_registry.py
 	python3 meta/test_check_library_migration.py
 	python3 meta/test_formal_resolutions.py
