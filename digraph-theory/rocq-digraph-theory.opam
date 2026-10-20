@@ -1,42 +1,16 @@
+# Compatibility wrapper. Canonical file: opam/rocq-digraph-theory.opam; the old location keeps an identical copy.
 opam-version: "2.0"
-name: "rocq-digraph-theory"
-version: "dev"
+synopsis: "Compatibility name for rocq-graph-theory-digraph"
+description: """
+Installs nothing itself: it depends on rocq-graph-theory-digraph at the same version.
+It provides the public Digraph library only. Unlike its former build of the whole digraph project, it no longer installs conjectures, applications or the Cheng-Keevash certificate modules.
+"""
 maintainer: "Marc Lelarge <marc.lelarge@gmail.com>"
 authors: [ "Marc Lelarge" ]
 license: "Apache-2.0"
-homepage: "https://github.com/LLM4Rocq/graph-theory-rocq"
-bug-reports: "https://github.com/LLM4Rocq/graph-theory-rocq/issues"
-dev-repo: "git+https://github.com/LLM4Rocq/graph-theory-rocq.git"
-
-synopsis: "Directed graphs and tournaments for the Rocq/MathComp ecosystem"
-description: """
-A MathComp-based formal library for directed graphs and tournaments: the
-order-minimised clique number (omega-bar), the dichromatic number, lexicographic
-substitution, circulant/Cayley constructions, and their invariant theory. It is
-the directed companion to coq-graph-theory, reusing the latter's undirected
-clique/coloring machinery rather than reimplementing it. Classical (mathematician-
-facing) via mathcomp-classical. See docs/DESIGN.md.
-"""
-
-build: [ [ make "-j%{jobs}%" ] ]
-install: [ [ make "install" ] ]
-
+homepage: "https://github.com/graph-theory-AI/graph-theory-rocq"
+bug-reports: "https://github.com/graph-theory-AI/graph-theory-rocq/issues"
+dev-repo: "git+https://github.com/graph-theory-AI/graph-theory-rocq.git"
 depends: [
-  "rocq-core"                 { >= "8.19"  }
-  "rocq-mathcomp-ssreflect"   { >= "2.5.0" }
-  "rocq-mathcomp-algebra"     { >= "2.5.0" }
-  "rocq-mathcomp-fingroup"    { >= "2.5.0" }
-  "rocq-mathcomp-classical"   { >= "1.16.0" }
-  "rocq-hierarchy-builder"    { >= "1.5.0" }
-  "coq-graph-theory"          { >= "0.9.7" }
-  "coq-graph-theory-base"
-]
-
-tags: [
-  "category:Mathematics/Combinatorics and Graph Theory/Graph Theory"
-  "keyword:graph theory"
-  "keyword:digraph"
-  "keyword:tournament"
-  "keyword:clique number"
-  "logpath:Digraph"
+  "rocq-graph-theory-digraph" {= version}
 ]

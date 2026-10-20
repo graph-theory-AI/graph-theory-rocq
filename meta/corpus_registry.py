@@ -24,32 +24,93 @@ through row_urls(), so the manifest builders and the statement-doc gate agree by
 import json
 import os
 import re
+import subprocess
 
 META = os.path.dirname(os.path.abspath(__file__))
 MONO = os.path.dirname(META)
 
 # ── the graph-conjectures clone ──
-# Reference clone (2026-09-23): the nested checkout <repo>/graph-conjectures, pinned to commit
-# b72c585 of branch CDC-relations-update (a pending pull request of the official repository
-# https://github.com/graph-theory-AI/graph-conjectures; until it is merged that branch, not
-# upstream main, is the reference). $GRAPH_CONJECTURES overrides; the old sibling location
-# ../../graph-conjectures is kept as a fallback.
-GRAPH_CONJECTURES_PIN = "b72c585"
-GRAPH_CONJECTURES_BRANCH = "CDC-relations-update"
+# Reference clone: the nested checkout <repo>/graph-conjectures, pinned to the exact commit
+# b72c5857 of https://github.com/graph-theory-AI/graph-conjectures. It came from the branch
+# CDC-relations-update, merged into main by PR #18 on 2026-09-23, so main contains it; the pin is
+# that exact commit, never main's later head. $GRAPH_CONJECTURES, when set, is the only place looked at;
+# otherwise the nested clone, the sibling <repo>/../graph-conjectures and
+# ~/Recherche/graph-conjectures are tried in that order. Whatever is found is VERIFIED
+# against the full pinned commit (verify_graph_conjectures).
+GRAPH_CONJECTURES_PIN = "b72c585"   # the short label recorded as provenance.graph_conjectures_pin
+GRAPH_CONJECTURES_COMMIT = "b72c5857060addbe4523016e88ae3aa626e958fd"
+GRAPH_CONJECTURES_BRANCH = "main"   # a branch that contains the pinned commit (not its head)
+
+
+class GraphConjecturesPinError(Exception):
+    """A graph-conjectures checkout was found but is not the pinned one.
+
+    Deliberately NOT a SystemExit: build_v2_manifest reads SystemExit from
+    graph_conjectures_dir() as "no clone" and takes its pinned local replay (CI), and a wrong
+    checkout must never be mistaken for an absent one."""
+
+
+# Variables that would make git read another repository than the one at PATH.
+GIT_SELECT_ENV = ("GIT_DIR", "GIT_WORK_TREE", "GIT_COMMON_DIR", "GIT_INDEX_FILE", "GIT_OBJECT_DIRECTORY",
+                  "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_NAMESPACE")
+
+
+def _git(path, *args):
+    """Run a read-only git query in PATH (no optional locks: the gate mount is read-only), with
+    the repository-selecting GIT_* variables removed so that PATH alone decides the repository."""
+    env = {k: v for k, v in os.environ.items() if k not in GIT_SELECT_ENV}
+    try:
+        proc = subprocess.run(["git", "--no-optional-locks", "-C", path, *args],
+                              capture_output=True, text=True, env=env)
+    except OSError as exc:
+        return 1, "", str(exc)
+    return proc.returncode, proc.stdout.strip(), proc.stderr.strip()
+
+
+def verify_graph_conjectures(path):
+    """Raise GraphConjecturesPinError unless PATH is the top level of its own git checkout,
+    its HEAD is exactly GRAPH_CONJECTURES_COMMIT, and its data/ has no change and no
+    untracked file."""
+    def fail(why):
+        raise GraphConjecturesPinError(
+            f"corpus_registry: graph-conjectures checkout {path!r} {why}; the corpus is pinned to "
+            f"{GRAPH_CONJECTURES_COMMIT} (git -C graph-conjectures checkout --detach "
+            f"{GRAPH_CONJECTURES_COMMIT}), see README")
+    if not os.path.isdir(os.path.join(path, "data")):
+        fail("has no data/ directory")
+    rc, top, err = _git(path, "rev-parse", "--show-toplevel")
+    if rc or os.path.realpath(top) != os.path.realpath(path):
+        fail(f"is not the top level of its own git checkout ({err or top})")
+    rc, head, err = _git(path, "rev-parse", "HEAD")
+    if rc or head != GRAPH_CONJECTURES_COMMIT:
+        fail(f"is at {head or err}, not at the pinned commit")
+    rc, status, err = _git(path, "status", "--porcelain", "--untracked-files=all", "--", "data")
+    if rc or status:
+        detail = (err or status).splitlines()[0] if (err or status) else f"git status rc {rc}"
+        fail(f"has changed or untracked files under data/ ({detail})")
 
 
 def graph_conjectures_dir():
-    """Directory of the graph-conjectures clone (must contain data/), or SystemExit."""
-    cands = [os.environ.get("GRAPH_CONJECTURES"),
-             os.path.join(MONO, "graph-conjectures"),
+    """Directory of the PINNED graph-conjectures clone.
+
+    $GRAPH_CONJECTURES is authoritative when set: that path is verified and returned, or
+    GraphConjecturesPinError is raised. Otherwise the first candidate that has a data/
+    directory is verified the same way. SystemExit only when no candidate has data/ at all
+    (CI: build_v2_manifest then takes its pinned local replay)."""
+    env = os.environ.get("GRAPH_CONJECTURES")
+    if env:
+        verify_graph_conjectures(env)
+        return env
+    cands = [os.path.join(MONO, "graph-conjectures"),
              os.path.join(os.path.dirname(MONO), "graph-conjectures"),
              os.path.expanduser("~/Recherche/graph-conjectures")]
     for c in cands:
-        if c and os.path.isdir(os.path.join(c, "data")):
+        if os.path.isdir(os.path.join(c, "data")):
+            verify_graph_conjectures(c)
             return c
     raise SystemExit("corpus_registry: graph-conjectures clone not found (looked at "
-                     f"{[c for c in cands if c]}); clone it into {MONO}/graph-conjectures "
-                     f"(pin {GRAPH_CONJECTURES_PIN}, branch {GRAPH_CONJECTURES_BRANCH}) or set "
+                     f"{cands}); clone it into {MONO}/graph-conjectures "
+                     f"(pin {GRAPH_CONJECTURES_COMMIT}, branch {GRAPH_CONJECTURES_BRANCH}) or set "
                      "GRAPH_CONJECTURES=/path/to/graph-conjectures")
 
 

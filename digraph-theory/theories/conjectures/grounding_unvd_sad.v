@@ -71,6 +71,7 @@ Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
 Import GRing.Theory Num.Theory.
+Set SsrOldRewriteGoalsOrder.
 
 (** ====================================================================== *)
 (** ** Small reusable facts about [C3] (the directed triangle)              *)

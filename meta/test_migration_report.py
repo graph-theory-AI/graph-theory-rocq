@@ -1069,14 +1069,43 @@ class PublicAdditionalStatementTests(unittest.TestCase):
 
     def test_supported_public_paths_do_not_allow_arbitrary_files(self):
         for name in ("Reconstruction.foundations.kelly.claim", "GTBase.common.claim",
-                     "ClassicalLemmas.konig.source.claim"):
+                     "ClassicalLemmas.konig.source.claim", "Digraph.core.digraph.claim",
+                     "Digraph.invariants.strong.claim", "Digraph.constructions.product.claim",
+                     "Digraph.invariants_advanced.degree_balance.claim"):
             with self.subTest(name=name):
                 self.assertTrue(REPORT.public_repository_path(REPORT.additional_statement_path(name)))
         for name in ("Unknown.foundations.source.claim", "GTBase.migration.source.claim",
                      "GTBase.examples.source.claim", "Chromatic.private.source.claim",
-                     "GTBase.foundations._assum_probe.claim", "GTBase.scratch_probe.claim"):
+                     "GTBase.foundations._assum_probe.claim", "GTBase.scratch_probe.claim",
+                     "Digraph.applications.source.claim", "Digraph.core._faith_probe.claim",
+                     "Minor.invariants_advanced.source.claim"):
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, "additional statement"):
                 REPORT.additional_statement_path(name)
+
+    def test_area_core_prop_enters_dependency_index_with_frozen_coverage(self):
+        old_path = self.extra_path
+        self.extra_path = "base/theories/core/X2.v"
+        self.extra = "GTBase.core.X2.extra_claim"
+        (self.root / old_path).unlink()
+        self.write(self.extra_path, self.extra_text)
+        project = self.root / "base/_CoqProject"
+        project.write_text(project.read_text().replace("foundations/X2.v", "core/X2.v"))
+        self.cert_source = self.cert_source.replace(
+            "From GTBase.foundations Require Import X2.", "From GTBase.core Require Import X2.")
+        self.write(self.certificate, self.cert_source)
+        self.spec["additional_statements"] = [self.extra]
+        self.spec["frozen"][-1].update(qualified=self.extra, path=self.extra_path)
+        self.spec["cross_module_consumers"][-1]["path"] = self.extra_path
+        self.rebaseline()
+        self.assertEqual(self.failures(), [])
+        rows, _ = REPORT.manifest_rows(self.spec["baseline_commit"])
+        for pin in (self.spec["baseline_commit"], None):
+            found, closure = REPORT.statement_dependencies(
+                pin, {self.helper}, rows, additional_statements={self.extra})
+            self.assertEqual(found, {self.statement, self.extra})
+            self.assertIn("GTBase.conjectures.X1.middle", closure)
+        del self.spec["frozen"][2]
+        self.assertIn("additional statement paths have complete frozen intermediary coverage", self.failures())
 
     def test_original_identity_and_immutable_commit_guards(self):
         self.add_original()
@@ -2534,6 +2563,12 @@ class SourceCacheTests(unittest.TestCase):
             yield
 
     def test_report_bytes_and_duplicate_read_reduction(self):
+        # Any GIT_* variable turns the history cache off (_history_repository);
+        # an inherited GIT_PAGER or GIT_EDITOR must not turn this cache measurement into a no-cache run.
+        environment = patch.dict(os.environ, {name: value for name, value in os.environ.items()
+                                              if not name.startswith("GIT_")}, clear=True)
+        environment.start()
+        self.addCleanup(environment.stop)
         for name in self.caches:
             getattr(REPORT, name).cache_clear()
         with patch.object(REPORT, "_git_at", wraps=REPORT._git_at) as reads:

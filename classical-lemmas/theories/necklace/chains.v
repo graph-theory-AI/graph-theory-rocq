@@ -167,10 +167,10 @@ Proof.
 move=> rnk_inj Fdiag Fanti.
 rewrite pair_big /=.
 rewrite (bigID (fun q : I * I => (rnk q.2 < rnk q.1)%N)) /=.
-rewrite [X in _ + X](reindex_inj (h := fun q : I * I => (q.2, q.1))); last first.
-  by move=> [a b] [a' b'] [] -> ->.
-rewrite [X in _ + X](eq_bigr (fun q : I * I => - F q.1 q.2)); last first.
-  by move=> q _ /=; rewrite Fanti.
+rewrite [X in _ + X](reindex_inj (h := fun q : I * I => (q.2, q.1)));
+  first [by move=> [a b] [a' b'] [] -> -> | idtac].
+rewrite [X in _ + X](eq_bigr (fun q : I * I => - F q.1 q.2));
+  first [by move=> q _ /=; rewrite Fanti | idtac].
 rewrite [X in _ + X]sumrN.
 apply/eqP; rewrite subr_eq0; apply/eqP.
 rewrite [in RHS]big_mkcond [in LHS]big_mkcond; apply: eq_bigr => q _ /=.
@@ -243,19 +243,19 @@ pose rk (i : I) := val (enum_rank i).
 have rkinj : injective rk by move=> a b /val_inj/enum_rank_inj.
 have hne : forall i, P i -> (rk i != rk (t i)).
   move=> i hi; apply/eqP => e.
-  move: (tne i hi); rewrite -(_ : t i = tau i); last by rewrite /t hi.
+  move: (tne i hi); rewrite -(_ : t i = tau i); first [by rewrite /t hi | idtac].
   by rewrite -(rkinj _ _ e) eqxx.
 rewrite (bigID (fun i => (rk i < rk (t i))%N)) /=.
-rewrite [X in _ + X](eq_bigl (fun i => P i && (rk (t i) < rk i)%N)); last first.
-  move=> i /=; case hi : (P i) => //=.
-  case: (ltngtP (rk i) (rk (t i))) => // /rkinj e.
-  by move: (hne i hi); rewrite -e eqxx.
+rewrite [X in _ + X](eq_bigl (fun i => P i && (rk (t i) < rk i)%N));
+  first [by (move=> i /=; case hi : (P i) => //=;
+             case: (ltngtP (rk i) (rk (t i))) => // /rkinj e;
+             by move: (hne i hi); rewrite -e eqxx) | idtac].
 rewrite [X in _ + X](reindex_inj tinj) /=.
-rewrite [X in _ + X](eq_bigl (fun i => P i && (rk i < rk (t i))%N)); last first.
-  move=> i /=; rewrite tinv; congr (_ && _).
-  by rewrite /t; case hi : (P i); rewrite ?hi // (tP i hi).
-rewrite [X in _ + X](eq_bigr (fun i => - F i)); last first.
-  by move=> i /andP[hi _]; rewrite /t hi tF.
+rewrite [X in _ + X](eq_bigl (fun i => P i && (rk i < rk (t i))%N));
+  first [by (move=> i /=; rewrite tinv; congr (_ && _);
+             by rewrite /t; case hi : (P i); rewrite ?hi // (tP i hi)) | idtac].
+rewrite [X in _ + X](eq_bigr (fun i => - F i));
+  first [by move=> i /andP[hi _]; rewrite /t hi tF | idtac].
 by rewrite sumrN subrr.
 Qed.
 
@@ -276,10 +276,10 @@ Lemma aug_bigsum (R : nzRingType) (cell I : finType) (P : pred I)
   = \sum_(i | P i) b i.
 Proof.
 rewrite (eq_bigr (fun y => \sum_(i | P i) (b i *: (cc (F i) : {ffun cell -> R^o})) y));
-  last by move=> y _; rewrite sum_ffunE.
+  first [by move=> y _; rewrite sum_ffunE | idtac].
 rewrite exchange_big /=; apply: eq_bigr => i _.
-rewrite (eq_bigr (fun y => b i * (cc (F i) : {ffun cell -> R^o}) y)); last first.
-  by move=> y _; rewrite scale_ffunE.
+rewrite (eq_bigr (fun y => b i * (cc (F i) : {ffun cell -> R^o}) y));
+  first [by move=> y _; rewrite scale_ffunE | idtac].
 by rewrite -mulr_sumr sum_cc_aug mulr1.
 Qed.
 
@@ -300,7 +300,7 @@ Lemma aug_lin (R : nzRingType) (cell cell' : finType)
   \sum_(y : cell') (lin f x) y = \sum_(c : cell) x c * (\sum_(y : cell') (f c) y).
 Proof.
 rewrite /lin (eq_bigr (fun y => \sum_(c : cell) (x c *: f c) y));
-  last by move=> y _; rewrite sum_ffunE.
+  first [by move=> y _; rewrite sum_ffunE | idtac].
 rewrite exchange_big /=; apply: eq_bigr => c _.
 rewrite mulr_sumr; apply: eq_bigr => y _.
 by rewrite scale_ffunE.

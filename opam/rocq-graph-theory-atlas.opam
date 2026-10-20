@@ -1,0 +1,36 @@
+opam-version: "2.0"
+synopsis: "Cross-area graph-theory foundations: complete minors, degeneracy and decompositions"
+description: """
+The Atlas public library of graph-theory-rocq: complete minors, cops bridges, degeneracy, fractional colourings, queue layouts and tree decompositions.
+Builds and installs only public modules; conjectures, migration certificates
+and examples are not installed.
+This package is developed and validated with the pinned Rocq 9.2 toolchain (rocq-core 9.2.0, rocq-stdlib 9.1.0, MathComp 2.6.0); coq-graph-theory is the UNRELEASED commit 322e352b (tree 46c83591), pinned by pin-depends.
+Building requires Python >= 3.9 (tested with 3.12.3); conf-python-3 only checks
+that python3 is present.
+"""
+maintainer: "Marc Lelarge <marc.lelarge@gmail.com>"
+authors: [ "Marc Lelarge" ]
+license: "Apache-2.0"
+homepage: "https://github.com/graph-theory-AI/graph-theory-rocq"
+bug-reports: "https://github.com/graph-theory-AI/graph-theory-rocq/issues"
+dev-repo: "git+https://github.com/graph-theory-AI/graph-theory-rocq.git"
+depends: [
+  "rocq-core" {= "9.2.0"}
+  "rocq-graph-theory-base" {= version}
+  "rocq-graph-theory-chromatic" {= version}
+  "rocq-graph-theory-extremal" {= version}
+  "rocq-graph-theory-misc" {= version}
+  "rocq-graph-theory-hypergraph" {= version}
+  "coq-graph-theory" {= "dev"}
+  "rocq-mathcomp-algebra" {= "2.6.0"}
+  "conf-python-3" {build}
+]
+pin-depends: [
+  ["coq-graph-theory.dev" "git+https://github.com/rocq-community/graph-theory.git#322e352b72c4ca3f153e5f80123c5020a0d40620"]
+]
+build: [
+  ["python3" "-c" "import sys; sys.exit(0 if sys.version_info >= (3, 9) else 'rocq-graph-theory packaging needs Python >= 3.9 at build time')"]
+  ["python3" "-B" "meta/library_package.py" "atlas"]
+  ["sh" "-c" "cd _build/library/atlas && rocq makefile -f _CoqProject -o Makefile.coq"]
+  [make "-C" "_build/library/atlas" "-f" "Makefile.coq" "-j%{jobs}%"]
+]

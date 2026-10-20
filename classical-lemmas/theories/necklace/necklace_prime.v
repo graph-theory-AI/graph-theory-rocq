@@ -125,6 +125,7 @@
 
 From mathcomp Require Import all_boot.
 From ClassicalLemmas Require Import necklace.necklace_complex necklace.tucker.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

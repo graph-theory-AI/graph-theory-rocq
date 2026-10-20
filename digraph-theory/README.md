@@ -155,6 +155,17 @@ The build delegates to a `Makefile.coq` generated from `_CoqProject` via
 `coq_makefile` / `rocq makefile` — the standard rocq-community pattern. `coqc`
 finds the MathComp dependencies automatically (opam `user-contrib`).
 
+## Installing the public library
+
+The opam package `rocq-graph-theory-digraph` installs the 24 public `Digraph` modules only:
+`core/`, `constructions/`, `invariants/`, `invariants_advanced/` and `foundations/`.
+It needs no `GTBase`. Conjectures, applications and the Cheng–Keevash certificate modules are
+not installed; build them in this repository with `make`.
+
+The former names `rocq-digraph-theory` and `coq-digraph-theory` are now compatibility wrappers.
+They install nothing themselves and depend on `rocq-graph-theory-digraph` at the same version.
+See "Public library packages (opam)" in the root README for pins, `--jobs=2` and versioning.
+
 ## Installing dependencies (example)
 
 ```sh

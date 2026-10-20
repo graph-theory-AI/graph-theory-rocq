@@ -38,6 +38,7 @@ Import GRing.Theory Num.Theory.
    in-scope [Order] modules) supplies the total-order transitivity/weakening
    lemmas [ltW], [le_trans], [le_lt_trans] used in [cflow_T3_le4]. *)
 Import mathcomp.order.order.Order.TTheory.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

@@ -78,6 +78,7 @@ From mathcomp Require Import all_algebra all_fingroup.
 From Cycle.conjectures Require Import D1.
 
 Import GRing.Theory Num.Theory.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

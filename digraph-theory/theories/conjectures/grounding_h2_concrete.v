@@ -26,6 +26,7 @@ From Digraph Require Import prelude interop_graph_theory digraph oriented tourna
 From Digraph Require Import dipath strong dichromatic classic_core.
 From Digraph Require Import two_extremal two_extremal_hajos two_extremal_glue.
 From Digraph Require Import generalised_wheel glue_eul_subtype glue_tree.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

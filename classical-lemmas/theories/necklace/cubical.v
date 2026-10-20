@@ -192,10 +192,10 @@ Proof.
 move=> Fdiag Fanti.
 rewrite pair_big /=.
 rewrite (bigID (fun q : 'I_N * 'I_N => (val q.2 < val q.1)%N)) /=.
-rewrite [X in _ + X](reindex_inj (h := fun q : 'I_N * 'I_N => (q.2, q.1))); last first.
-  by move=> [a b] [a' b'] [] -> ->.
-rewrite [X in _ + X](eq_bigr (fun j : 'I_N*'I_N => - F j.1 j.2)); last first.
-  by move=> q _ /=; rewrite Fanti.
+rewrite [X in _ + X](reindex_inj (h := fun q : 'I_N * 'I_N => (q.2, q.1)));
+  first [by move=> [a b] [a' b'] [] -> -> | idtac].
+rewrite [X in _ + X](eq_bigr (fun j : 'I_N*'I_N => - F j.1 j.2));
+  first [by move=> q _ /=; rewrite Fanti | idtac].
 rewrite [X in _ + X]sumrN.
 apply/eqP; rewrite subr_eq0; apply/eqP.
 rewrite [in RHS]big_mkcond [in LHS]big_mkcond; apply: eq_bigr => q _ /=.
@@ -208,12 +208,11 @@ Qed.
 Lemma quadC (c : cellN) (j i : 'I_N) : i != j -> quad c j i = quad c i j.
 Proof.
 move=> ij; rewrite /quad.
-rewrite [fv (fv c i (tc (c i))) j (tc (c j))]fvC 1?eq_sym //.
-rewrite [fv (fv c i (tc (c i))) j (bc (c j))]fvC 1?eq_sym //.
-rewrite [fv (fv c i (bc (c i))) j (tc (c j))]fvC 1?eq_sym //.
-rewrite [fv (fv c i (bc (c i))) j (bc (c j))]fvC 1?eq_sym //.
+rewrite [fv (fv c i (tc (c i))) j (tc (c j))](fvC _ _ _ ij) 1?eq_sym //.
+rewrite [fv (fv c i (tc (c i))) j (bc (c j))](fvC _ _ _ ij) 1?eq_sym //.
+rewrite [fv (fv c i (bc (c i))) j (tc (c j))](fvC _ _ _ ij) 1?eq_sym //.
+rewrite [fv (fv c i (bc (c i))) j (bc (c j))](fvC _ _ _ ij) 1?eq_sym //.
 by rewrite -!addrA; congr (_ + _); rewrite addrCA.
-all: by rewrite eq_sym.
 Qed.
 
 Lemma coefT_anti (c : cellN) (j i : 'I_N) :

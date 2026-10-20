@@ -25,6 +25,7 @@ From mathcomp Require Import all_boot all_fingroup all_algebra.
 From Digraph Require Import prelude interop_graph_theory digraph tournament order.
 From Digraph Require Import omegabar.
 From Digraph Require Import product.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

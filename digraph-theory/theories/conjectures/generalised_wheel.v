@@ -75,6 +75,7 @@ From GraphTheory Require Import preliminaries.
 From Digraph Require Import prelude interop_graph_theory digraph oriented tournament.
 From Digraph Require Import dipath strong dichromatic classic_core two_extremal.
 From Digraph Require Import two_extremal_hajos two_extremal_glue.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

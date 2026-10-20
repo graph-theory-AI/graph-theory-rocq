@@ -19,6 +19,7 @@
 
 From mathcomp Require Import all_boot all_order all_algebra.
 Import GRing.Theory Num.Theory Order.TotalTheory Order.POrderTheory.
+Set SsrOldRewriteGoalsOrder.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.

@@ -19,7 +19,7 @@ axiom-free with a faithfulness audit recorded in the manifest; blocked rows need
 [`meta/CORPUS_STATUS.md`](meta/CORPUS_STATUS.md).
 
 **Latest update (2026-09-23/24, branch `conjecture-relations`)** — re-synchronised the Rocq
-statements with the graph-conjectures corpus at commit `b72c585` (pending PR): 38 Bondy–Murty
+statements with the graph-conjectures corpus at commit `b72c585` (merged into its main by PR #18 on 2026-09-23): 38 Bondy–Murty
 Appendix A rows and the curated `others` row joined the manifest, every one of the 741
 conjecture statements now carries a doc block with its corpus row, site and review links, an
 English back-translation of the Rocq body and its non-standard definitions, a shared vocabulary
@@ -109,18 +109,25 @@ axiom-free with `Print Assumptions` clean:
 
 ```sh
 git clone https://github.com/graph-theory-AI/graph-conjectures graph-conjectures
-git -C graph-conjectures checkout b72c585      # the pinned corpus commit (see below)
+git -C graph-conjectures checkout --detach b72c5857060addbe4523016e88ae3aa626e958fd   # the pinned corpus commit (see below)
 make gate
 ```
 
 `make gate` regenerates the manifests from the conjecture source, so it needs that checkout.
-It is looked for, in order, at `$GRAPH_CONJECTURES`, `./graph-conjectures` (the nested clone,
-git-ignored) and `../../graph-conjectures` (`meta/corpus_registry.py:graph_conjectures_dir`).
-The committed manifests are pinned to commit `b72c585` of the branch `CDC-relations-update`
-(`meta/corpus_registry.py:GRAPH_CONJECTURES_PIN`): as of 2026-09-23 that branch is a pending
-pull request of the official repository and is the reference corpus until it is merged; if it
-is not yet on the official remote, fetch it from the fork `lviennot/graph-conjectures`. That
-commit adds the Bondy–Murty Appendix A records (`bm-NNN`), the curated `others` records and
+If `$GRAPH_CONJECTURES` is set, it is the only place looked at; otherwise `./graph-conjectures`
+(the nested clone, git-ignored), the sibling `../graph-conjectures` and
+`~/Recherche/graph-conjectures` are tried in that order
+(`meta/corpus_registry.py:graph_conjectures_dir`). The checkout found is VERIFIED before use:
+it must be the top level of its own git clone, its `HEAD` must be exactly
+`b72c5857060addbe4523016e88ae3aa626e958fd` (`GRAPH_CONJECTURES_COMMIT`), and `data/` must have no
+changed or untracked file; anything else stops the command with `GraphConjecturesPinError`
+instead of reading another corpus. Without any checkout, `make audit` replays the committed
+pinned snapshot (as in CI).
+The committed manifests are pinned to the exact commit `b72c5857060addbe4523016e88ae3aa626e958fd`
+(`meta/corpus_registry.py:GRAPH_CONJECTURES_COMMIT`; short label `GRAPH_CONJECTURES_PIN`). It
+came from the branch `CDC-relations-update`, merged into the official repository's `main` by
+pull request #18 on 2026-09-23, so a clone of `main` contains it; the corpus is that commit, not
+`main`'s later head. That commit adds the Bondy–Murty Appendix A records (`bm-NNN`), the curated `others` records and
 the relations graph (`data/relations.json`) to the arXiv, OpenProblemGarden and erdősproblems
 corpora.
 
@@ -192,6 +199,79 @@ full dynamics and planar-construction conclusions remain unformalized. See the
 Run `ROCQ_OPAM_SWITCH=rocq-tools make gap-repairs` to compile the artifacts and
 check their exact theorem types and closed assumptions.
 
+## Public library packages (opam)
+
+**Status: prepared metadata, not a release.**
+- Only `rocq-graph-theory-base` has been installed end to end. The other packages' metadata is prepared and staged, but not yet install-tested.
+- No release tag has been chosen.
+- Counts, dependencies and barriers below are measured at `2e15adf` (the classifier and this metadata on `45474d5`). No public module imports a corpus file there: the barriers listed at the classifier parent `2933916` were resolved by their family releases.
+
+Each package builds and installs **only public modules**. These live in `base/theories/*.v`, in `classical-lemmas/theories/` except its conjectures, migration and examples, and in `<area>/theories/{foundations,core,invariants,constructions}/` (plus `digraph-theory/theories/invariants_advanced/`). They are installed as `.v`/`.vo`/`.glob` under `user-contrib/<Namespace>`.
+
+Conjectures, statements, grounding and implication files, applications, migration certificates and `examples/` are never installed. They stay in this repository and are built by `make`.
+
+| opam package | area | namespace | public modules | internal deps (`{= version}`) | external deps (exact pins) | at `2e15adf` |
+|---|---|---|---:|---|---|---|
+| `rocq-graph-theory-base` | `base/` | `GTBase` | 55 | — | coq-graph-theory dev (pin-depends), mathcomp algebra/boot/finite-group 2.6.0; rocq-hierarchy-builder 1.10.3 (a reviewed pin, not a measured direct need) | no corpus barrier; installed end to end at `2933916` |
+| `rocq-graph-theory-classical-lemmas` | `classical-lemmas/` | `ClassicalLemmas` | 15 | base | coq-graph-theory, mathcomp algebra/boot/order | no corpus barrier |
+| `rocq-graph-theory-topological` | `topological-graph-theory/` | `Topological` | 6 | base | coq-graph-theory, mathcomp algebra/boot/finite-group | no corpus barrier |
+| `rocq-graph-theory-minor` | `minor-theory/` | `Minor` | 8 | base | coq-graph-theory | no corpus barrier |
+| `rocq-graph-theory-chromatic` | `chromatic-theory/` | `Chromatic` | 10 | base | coq-graph-theory, mathcomp boot | no corpus barrier |
+| `rocq-graph-theory-cycle` | `cycle-theory/` | `Cycle` | 7 | base | coq-graph-theory | no corpus barrier |
+| `rocq-graph-theory-packing` | `packing-theory/` | `Packing` | 5 | base, classical-lemmas | coq-graph-theory, rocq-stdlib 9.1.0 | no corpus barrier |
+| `rocq-graph-theory-reconstruction` | `reconstruction-theory/` | `Reconstruction` | 2 | base | coq-graph-theory, mathcomp boot | no corpus barrier |
+| `rocq-graph-theory-hypergraph` | `hypergraph-theory/` | `Hypergraph` | 7 | base | — | no corpus barrier |
+| `rocq-graph-theory-misc` | `graph-theory-misc/` | `GTMisc` | 3 | base | coq-graph-theory | no corpus barrier |
+| `rocq-graph-theory-spectral` | `spectral-graph-theory/` | `Spectral` | 2 | base | coq-graph-theory, mathcomp algebra/boot/finite-group | no corpus barrier |
+| `rocq-graph-theory-extremal` | `extremal-graph-theory/` | `Extremal` | 10 | base | coq-graph-theory, mathcomp algebra/boot/order | no corpus barrier |
+| `rocq-graph-theory-infinite` | `infinite-graph-theory/` | `Infinite` | 2 | — | mathcomp boot | no corpus barrier |
+| `rocq-graph-theory-digraph` | `digraph-theory/` | `Digraph` | 24 | — | coq-graph-theory, rocq-hierarchy-builder, mathcomp algebra/boot/classical/finite-group | no corpus barrier |
+| `rocq-graph-theory-atlas` | `atlas/` | `Atlas` | 6 | base, chromatic, extremal, misc, hypergraph | coq-graph-theory, mathcomp algebra | no corpus barrier |
+
+**Dependency notes:**
+- Every package also depends on `rocq-core` 9.2.0 and on `conf-python-3` at build time.
+- MathComp packages are `rocq-mathcomp-*` 2.6.0, except `rocq-mathcomp-classical` 1.16.0. On Rocq 9.2 the fingroup modules belong to `rocq-mathcomp-finite-group`.
+- `coq-graph-theory` is the UNRELEASED commit `322e352b` of rocq-community/graph-theory (tree `46c83591`). Every package that lists it pins it with `pin-depends` (url#commit).
+- The dependencies listed are the direct ones measured from each package's public modules. Base also keeps its reviewed `rocq-hierarchy-builder` pin, which is not a measured direct need.
+
+**Barriers:** a package is blocked when one of its public modules imports a corpus file. Such a module is never dropped to make packaging pass. At `2e15adf` no package is blocked.
+
+**Empty layers:** `hamiltonicity-theory` (`Hamilton`) and `homomorphism-theory` (`Hom`) have no public layer yet, only statements. They have no package, and none will be invented.
+
+**Compatibility names:** `coq-graph-theory-base`, `rocq-digraph-theory` and `coq-digraph-theory` are now wrappers. Each installs nothing itself and depends on `rocq-graph-theory-base` or `rocq-graph-theory-digraph` at the same version. They provide the public library only, no longer the corpus, applications or certificate modules. Their canonical files are in `opam/`; the old files in `base/` and `digraph-theory/` are identical copies.
+
+**Supported imports:** the logical path is the namespace followed by the path under `theories/`, for example:
+
+```coq
+From GTBase Require Import base.
+From Packing Require Import foundations.matching.
+From Digraph Require Import core.tournament.
+```
+
+Only modules of installed packages resolve; a corpus or example module never does. The repository's `theories/examples/` files are public-API clients built by `make`, and no example reaches a corpus file. They are documentation, not installed.
+
+**Installing from source (development opam files, not a release):** these files are not published in any opam repository, and no opam-repository release is claimed. Pin the WHOLE source, never one package alone: `pin-depends` is not transitive, so a single pinned package would leave its internal dependencies unpinned. Use a switch with Rocq 9.2.0, `rocq-stdlib` 9.1.0, MathComp 2.6.0 (`rocq-mathcomp-classical` 1.16.0) and `rocq-hierarchy-builder` 1.10.3; `coq-graph-theory` comes from its `pin-depends` commit. On this project's VM, pass `--jobs=2` explicitly: the default job count failed there.
+
+```sh
+# from a CLEAN checkout at the release commit (the VCS kind pins the committed state, not the working directory)
+opam pin add -y --no-action --kind=git .
+opam install rocq-graph-theory-base --jobs=2
+# or, from the forge, at the release commit
+: "${RC_COMMIT:?Set RC_COMMIT to the full tested release commit}"
+opam pin add -y --no-action "git+https://github.com/graph-theory-AI/graph-theory-rocq.git#${RC_COMMIT}"
+opam install rocq-graph-theory-misc --jobs=2
+```
+
+**Build requirement:** building requires **Python >= 3.9** (tested with 3.12.3). It stages the public modules with `meta/library_package.py`. `conf-python-3` only checks that `python3` is present, so each package's first build step checks the version.
+
+**Versioning:** consistent with the plan's §12.
+- All packages share one version, and internal dependencies require exactly that version.
+- Public names follow the registry: stable once `canonical`; possibly changed while `proposed` or `auditing`. Deprecated aliases remain for at least one completed migration batch and until their tracked consumers are zero.
+- **Major** increment: removing or renaming a canonical name, removing a deprecated alias after that window, or a semantic correction of a public definition. A semantic correction is not a deprecation: it needs a faithfulness audit, a manifest note and an explicit old/new relationship.
+- **Minor** increment: new public modules or names, and new deprecations that keep their aliases.
+- **Patch** increment: proofs, documentation or packaging only, with no change to public names or meanings.
+- Statement `formal_name`s are permanent corpus identifiers and are not part of these packages.
+
 ## Packages
 | package | namespace | core | deferred |
 |---|---|---:|---:|
@@ -213,7 +293,7 @@ check their exact theorem types and closed assumptions.
 Σ = 142 core + 85 deferred = 227.
 
 ## Layout
-- `base/` — `coq-graph-theory-base`: the single owner of cross-area primitives (interop façade,
+- `base/` — `rocq-graph-theory-base` (compatibility name `coq-graph-theory-base`): the single owner of cross-area primitives (interop façade,
   homomorphism, products, list-χ, line/total-graph, Δ, surfaces) and, in `theories/common.v`,
   the shared conjecture vocabulary built on the re-exported coq-graph-theory modules
   (`connectivity`, `minor`, `treewidth`, `dom`).

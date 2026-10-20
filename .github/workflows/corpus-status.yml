@@ -4,10 +4,23 @@ name: corpus-status
 # the edge graph has no drift, and CORPUS_STATUS.md matches the committed manifest/overlay with the
 # headline invariants intact (227 total, 0 todo). The full `make gate` (per-milestone Coq builds,
 # axiom-free + Print-Assumptions checks) runs in the Rocq+MathComp+coq-graph-theory environment.
+# The meta test suites run here too: the toolchain-free ones in `audit`, the ones that compile with
+# Rocq in `meta-kernel`, on the pinned Rocq 9.2 stack of environment/rocq92.
 on:
   push:
     branches: [main]
   pull_request:
+
+env:
+  # Every meta/test_*.py is listed in exactly one of these two lists (checked in `audit`).
+  META_SUITES_TOOLCHAIN_FREE: >-
+    test_family_registry.py test_statement_docs.py test_library_api.py
+    test_faithfulness_mutation.py test_corpus_registry_pin.py
+    test_library_inventory_alias_retention.py test_library_inventory_classification.py
+    test_rocqchk_all.py test_install_gate.py
+  META_SUITES_ROCQ: >-
+    test_check_library_migration.py test_migration_report.py
+    test_formal_resolutions.py test_check_edges.py
 
 jobs:
   audit:
@@ -18,6 +31,147 @@ jobs:
           fetch-depth: 0 # Migration certificates compare pinned historical sources.
       - uses: actions/setup-python@v6
         with:
-          python-version: '3.x'
+          python-version: '3.12'
       - name: Toolchain-free corpus-status audit
         run: make audit
+      - name: Every meta suite is in exactly one job
+        if: ${{ !cancelled() }}
+        run: |
+          listed=$(printf '%s\n' $META_SUITES_TOOLCHAIN_FREE $META_SUITES_ROCQ | sort)
+          present=$(cd meta && ls test_*.py | sort)
+          twice=$(printf '%s\n' "$listed" | uniq -d)
+          unlisted=$(comm -13 <(printf '%s\n' "$listed") <(printf '%s\n' "$present"))
+          absent=$(comm -23 <(printf '%s\n' "$listed") <(printf '%s\n' "$present"))
+          [ -z "$twice" ] || { echo "listed twice: $twice"; exit 1; }
+          [ -z "$unlisted" ] || { echo "meta suites in no CI job: $unlisted"; exit 1; }
+          [ -z "$absent" ] || { echo "listed but not in meta/: $absent"; exit 1; }
+      - name: Toolchain-free meta suites and self-tests
+        if: ${{ !cancelled() }}
+        run: |
+          failed=
+          for t in $META_SUITES_TOOLCHAIN_FREE; do
+            echo "== $t"; python3 "meta/$t" || failed="$failed $t"
+          done
+          python3 meta/faithfulness_lint.py --validate || failed="$failed faithfulness_lint--validate"
+          python3 meta/library_inventory.py --validate || failed="$failed library_inventory--validate"
+          [ -z "$failed" ] || { echo "FAILED:$failed"; exit 1; }
+
+  meta-kernel:
+    # The meta suites that compile with Rocq, on the pinned stack of environment/rocq92, installed as its
+    # Dockerfile installs it: Ubuntu 24.04, apt opam, OCaml 5.3.0, opam-packages.lock, coq-graph-theory dev
+    # pinned by commit and tree (UNRELEASED). The opam repositories are cloned at recorded commits: the
+    # Dockerfile's two "released" repositories are both served from github.com/rocq-prover/opam (released/).
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      OPAMYES: "1"
+      OPAMROOTISOK: "1"
+      ROCQ_OPAM_SWITCH: graph-theory-rocq
+      ROCQ_OPAM_COMMIT: 5b421e98c905c0fa7da863ada4e6aab3ad7d0ba0
+      OPAM_REPOSITORY_COMMIT: aa5edcdc97d75965948a27672611b3ae34f9c89c
+      GRAPH_THEORY_COMMIT: 322e352b72c4ca3f153e5f80123c5020a0d40620
+      GRAPH_THEORY_TREE: 46c83591eb83d3b6ac81a2e1403d1d27c8abff4f
+      # One of the two conditions of the run that exposed the host-dependent failures fixed by
+      # a3090872 (the other is the symlinked TMPDIR of the test step).
+      GIT_PAGER: cat
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # migration_report compares pinned historical sources.
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: System packages (the Dockerfile's build dependencies)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential ca-certificates curl git jq \
+            libgmp-dev m4 opam patch pkg-config rsync unzip xz-utils zlib1g-dev
+      - name: Runner image identity (for the cache key)
+        id: image
+        run: |
+          # ImageOS / ImageVersion are runner process variables, not in the workflow's env context.
+          [ -n "${ImageOS:-}" ] && [ -n "${ImageVersion:-}" ] || { echo "ImageOS / ImageVersion unset"; exit 1; }
+          echo "id=$ImageOS-$ImageVersion" >> "$GITHUB_OUTPUT"
+      - name: opam root cache (restore)
+        id: opam-cache
+        uses: actions/cache/restore@v4
+        # Bump "recipe-N" in the key whenever the install steps below change.
+        with:
+          path: ~/.opam
+          key: opam-recipe-2-${{ steps.image.outputs.id }}-ocaml-5.3.0-${{ hashFiles('environment/rocq92/opam-packages.lock', 'environment/rocq92/installed-packages.txt') }}-${{ env.ROCQ_OPAM_COMMIT }}-${{ env.OPAM_REPOSITORY_COMMIT }}-${{ env.GRAPH_THEORY_COMMIT }}
+      - name: opam repositories at the recorded commits, and the switch
+        if: steps.opam-cache.outputs.cache-hit != 'true'
+        run: |
+          git clone -q --filter=blob:none https://github.com/ocaml/opam-repository "$RUNNER_TEMP/opam-repository"
+          git -C "$RUNNER_TEMP/opam-repository" checkout -q --detach "$OPAM_REPOSITORY_COMMIT"
+          git clone -q --filter=blob:none https://github.com/rocq-prover/opam "$RUNNER_TEMP/rocq-opam"
+          git -C "$RUNNER_TEMP/rocq-opam" checkout -q --detach "$ROCQ_OPAM_COMMIT"
+          opam init --bare --disable-sandboxing --no-setup -y default "$RUNNER_TEMP/opam-repository"
+          opam repo add rocq-released "$RUNNER_TEMP/rocq-opam/released" --dont-select
+          opam switch create graph-theory-rocq ocaml-base-compiler.5.3.0 --no-switch \
+            --repositories=rocq-released,default -j "$(nproc)"
+      - name: coq-graph-theory dev at the pinned commit and tree
+        if: steps.opam-cache.outputs.cache-hit != 'true'
+        run: |
+          g="$RUNNER_TEMP/graph-theory"
+          git init -q "$g"
+          git -C "$g" fetch -q --no-tags https://github.com/rocq-community/graph-theory "$GRAPH_THEORY_COMMIT"
+          git -C "$g" checkout -q --detach FETCH_HEAD
+          [ "$(git -C "$g" rev-parse HEAD)" = "$GRAPH_THEORY_COMMIT" ]
+          [ "$(git -C "$g" rev-parse 'HEAD^{tree}')" = "$GRAPH_THEORY_TREE" ]
+          opam pin add --switch=graph-theory-rocq -n -k path coq-graph-theory.dev "$g"
+      - name: Install the locked stack
+        if: steps.opam-cache.outputs.cache-hit != 'true'
+        run: |
+          mapfile -t packages < <(grep -v '^#' environment/rocq92/opam-packages.lock | sed '/^$/d')
+          # memprof-limits is a depopt of rocq-runtime: in the accepted image it came with rocq-mcp-evolve
+          # and the whole Rocq stack was rebuilt with it (the image's build-1c.log l.92-93). Installing it
+          # here builds the same configuration without the MCP server.
+          opam install --switch=graph-theory-rocq -j "$(nproc)" "${packages[@]}" memprof-limits.0.3.0
+      - name: The switch is exactly the accepted image's, minus its MCP server
+        run: |
+          # In the image, not in CI: the MCP server only (memprof-limits, which it pulled in, is installed
+          # above because the Rocq stack depends on it optionally).
+          image_only='rocq-mcp-evolve dev'
+          # In CI, not in the image: none. A package added here needs its version and a reason.
+          ci_only=''
+          export LC_ALL=C
+          t="$RUNNER_TEMP"
+          opam list --switch=graph-theory-rocq --installed --columns=name,version --short --color=never \
+            | awk 'NF == 2 {print $1 " " $2}' | sort > "$t/installed.txt"
+          grep -v '^==' environment/rocq92/installed-packages.txt | awk 'NF == 2 {print $1 " " $2}' \
+            | sort > "$t/inventory.txt"
+          grep -v '^#' environment/rocq92/opam-packages.lock | sed '/^$/d' | sed 's/\./ /' | sort > "$t/lock.txt"
+          ci_extra=$(comm -23 "$t/installed.txt" "$t/inventory.txt")
+          image_extra=$(comm -13 "$t/installed.txt" "$t/inventory.txt")
+          absent=$(comm -23 "$t/lock.txt" "$t/installed.txt")
+          echo "installed, not in the image: [${ci_extra}]"
+          echo "in the image, not installed: [${image_extra}]"
+          [ "$ci_extra" = "$(printf '%s\n' "$ci_only" | sed 's/^ *//; /^$/d' | sort)" ] || { echo "unexpected CI-only packages"; exit 1; }
+          [ "$image_extra" = "$(printf '%s\n' "$image_only" | sed 's/^ *//; /^$/d' | sort)" ] || { echo "the image's packages differ"; exit 1; }
+          [ -z "$absent" ] || { echo "locked, but not installed: $absent"; exit 1; }
+          grep -qx 'ocaml 5.3.0' "$t/installed.txt"
+          echo "switch: $(wc -l < "$t/installed.txt") packages == the image's $(wc -l < "$t/inventory.txt") minus the MCP server"
+      - name: opam root cache (save, before the suites can fail)
+        if: steps.opam-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.opam
+          key: ${{ steps.opam-cache.outputs.cache-primary-key }}
+      - name: Meta suites that compile with Rocq 9.2
+        run: |
+          # The other condition of the exposing run: a temporary root reached through a symlink.
+          mkdir -p "$RUNNER_TEMP/tmp-real"
+          ln -sfn "$RUNNER_TEMP/tmp-real" "$RUNNER_TEMP/tmp-link"
+          export TMPDIR="$RUNNER_TEMP/tmp-link"
+          echo "TMPDIR=$TMPDIR -> $(realpath "$TMPDIR"); GIT_PAGER=$GIT_PAGER; $(python3 --version)"
+          [ "$(realpath "$TMPDIR")" != "$TMPDIR" ]
+          failed=
+          for t in $META_SUITES_ROCQ; do
+            echo "== $t"
+            if [ "$t" = test_migration_report.py ]; then set -- --kernel; else set --; fi
+            opam exec --switch=graph-theory-rocq -- python3 "meta/$t" "$@" || failed="$failed $t"
+          done
+          opam exec --switch=graph-theory-rocq -- python3 meta/migration_report.py --validate --kernel \
+            || failed="$failed migration_report--validate--kernel"
+          [ -z "$failed" ] || { echo "FAILED:$failed"; exit 1; }

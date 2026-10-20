@@ -71,7 +71,7 @@ End X175Legacy.
 
 Lemma x175_path_internal_compat (G : sgraph) (x y : G) (p : seq G) :
   Legacy.x175_path_internal x y p = x175_path_internal x y p.
-Proof. by apply/setP => z; rewrite /x175_path_internal in_seq_interior inE andbA. Qed.
+Proof. by apply/setP => z; rewrite /x175_path_internal in_seq_interior [z \in Legacy.x175_path_internal _ _ _]inE andbA. Qed.
 
 Lemma x175_Kt_subdivision_compat (G : sgraph) (t : nat) :
   X175Legacy.Kt_subdivision G t <-> x175_Kt_subdivision G t.

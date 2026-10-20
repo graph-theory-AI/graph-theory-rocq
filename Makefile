@@ -21,6 +21,7 @@ gate:
 	$(MAKE) atlas
 	python3 meta/build_edge_graph.py --check
 	python3 meta/foundation_fidelity.py --check
+	python3 meta/library_api.py --check
 	python3 meta/faithfulness_lint.py --new-waves --check
 	python3 meta/check_edges.py --assumptions --registry
 	python3 meta/sync_edge_legs.py --check
@@ -48,6 +49,7 @@ audit:
 	python3 meta/build_edge_graph.py --check
 	python3 meta/build_v2_manifest.py --check
 	python3 meta/foundation_fidelity.py --check
+	python3 meta/library_api.py --check
 	python3 meta/faithfulness_lint.py --all
 	python3 meta/check_edges.py --registry
 	python3 meta/sync_edge_legs.py --check
@@ -57,15 +59,22 @@ audit:
 	python3 meta/migration_report.py --all --check
 
 mutation:
+	python3 meta/test_library_api.py
 	python3 meta/test_family_registry.py
 	python3 meta/test_check_library_migration.py
 	python3 meta/test_formal_resolutions.py
+	python3 meta/test_rocqchk_all.py
 	python3 meta/test_statement_docs.py
 	python3 meta/test_check_edges.py
+	python3 meta/test_corpus_registry_pin.py
 	python3 meta/faithfulness_lint.py --validate
+	python3 meta/test_faithfulness_mutation.py
 	python3 meta/faithfulness_mutation.py --timeout 1800
 	python3 meta/library_inventory.py --validate
+	python3 meta/test_library_inventory_classification.py
+	python3 meta/test_library_inventory_alias_retention.py
 	python3 meta/migration_report.py --validate --kernel
+	python3 meta/test_install_gate.py
 
 # Active vacuity/refutability probe: try to close each `_statement` and its negation with a
 # bounded automation ladder + curated witnesses (meta/probe_hints/). Any statement that is
@@ -87,6 +96,22 @@ gap-repairs:
 probe:
 	python3 meta/vacuity_probe.py $(PROBE_ARGS)
 
+# C-4: the recursive rocqchk of every project module, sharded (meta/rocqchk_all.py; batch 2's SR-32c extended to all 17 projects).
+# Run it after a FULL build of every package (including digraph-theory and atlas), in ONE container with at least ROCQCHK_BUDGET GiB
+# of memory and at least 4 CPUs (up to 3-4 shards run at once); it takes hours. ROCQCHK_OUT is required: a fresh directory OUTSIDE
+# the repository. Its verdict.txt and receipt.json are the run's receipt. OCAMLRUNPARAM is pinned to the gates' value, s=1M,o=20;
+# SR-32c's caps were measured with the default GC; they are expected to stay conservative under o=20 (the D-4.6 analysis measured
+# lower COMPILE peaks with it; rocqchk under o=20 is unmeasured until its first run).
+# GATE_SOURCE_COMMIT and GATE_SOURCE_TREE are required (shared with install-gate): the 40-hex commit and tree the objects were built
+# from (D-5 passes the ids it binds). The receipt records them; git confirms them only when the tree is itself a git toplevel, and an
+# enclosing repository is never read (O-1). A receipt is accepted only when its source.accepted is true (rocqchk_all.source_accepted).
+# `make rocqchk ROCQCHK_ARGS=--shard1-only` runs the joint-load shard alone first, to measure it.
+ROCQCHK_BUDGET ?= 48
+.PHONY: rocqchk
+rocqchk:
+	@test -n "$(ROCQCHK_OUT)" || { echo 'make rocqchk: set ROCQCHK_OUT=<a fresh directory outside the repository>'; exit 2; }
+	OCAMLRUNPARAM=s=1M,o=20 python3 meta/rocqchk_all.py --out "$(ROCQCHK_OUT)" --source-commit "$(GATE_SOURCE_COMMIT)" --source-tree "$(GATE_SOURCE_TREE)" --budget $(ROCQCHK_BUDGET) --min-cpus 4 $(ROCQCHK_ARGS)
+
 $(PACKAGES):
 	cd $@ && rocq makefile -f _CoqProject -o Makefile.coq && $(MAKE) -f Makefile.coq
 
@@ -102,6 +127,21 @@ digraph-theory: base
 # builds it and build_edge_graph.py picks its @EDGE annotations up like any package.
 atlas: $(filter-out base classical-lemmas,$(PACKAGES)) digraph-theory
 	cd $@ && rocq makefile -f _CoqProject -o Makefile.coq && $(MAKE) -f Makefile.coq
+
+# G-6 / G-8: the public-library install gate and the opam metadata lint (meta/install_gate.py).
+# install-gate needs INSTALL_GATE_OUT, a fresh directory OUTSIDE the repository, and the source ids the
+# caller binds, GATE_SOURCE_COMMIT and GATE_SOURCE_TREE (40-hex, the same pair as `make rocqchk`; the gate
+# never reads git). It lints the opam files, builds and installs the public packages with their own
+# build: commands into a fresh private prefix under INSTALL_GATE_OUT, and compiles every example against
+# that prefix only. INSTALL_GATE_ARGS passes e.g. --jobs N (the value of %{jobs}%, default 1) or
+# --tree-sha256 FILE (every input must equal its row).
+.PHONY: install-gate opam-lint
+install-gate:
+	@test -n "$(INSTALL_GATE_OUT)" || { echo 'make install-gate: set INSTALL_GATE_OUT=<a fresh directory outside the repository>'; exit 2; }
+	python3 meta/install_gate.py --out "$(INSTALL_GATE_OUT)" --source-commit "$(GATE_SOURCE_COMMIT)" --source-tree "$(GATE_SOURCE_TREE)" $(INSTALL_GATE_ARGS)
+
+opam-lint:
+	python3 meta/install_gate.py --lint-only
 
 clean:
 	@for p in $(PACKAGES) digraph-theory atlas; do (cd $$p && rocq makefile -f _CoqProject -o Makefile.coq >/dev/null 2>&1 && $(MAKE) -f Makefile.coq clean) 2>/dev/null || true; done

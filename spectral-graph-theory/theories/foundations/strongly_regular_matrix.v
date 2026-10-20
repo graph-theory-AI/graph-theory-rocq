@@ -23,6 +23,7 @@ Unset Printing Implicit Defensive.
 
 Local Open Scope ring_scope.
 Import GRing.Theory Num.Theory.
+Set SsrOldRewriteGoalsOrder.
 
 (** The product of two 0/1 integers is the 0/1 image of the conjunction. *)
 Lemma int01_mul (P Q : bool) :

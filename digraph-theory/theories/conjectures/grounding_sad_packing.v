@@ -39,6 +39,7 @@ From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude digraph oriented dipath strong tournament.
 From Digraph Require Import sad packing.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

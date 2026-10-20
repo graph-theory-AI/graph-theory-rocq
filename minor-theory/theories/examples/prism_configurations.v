@@ -9,6 +9,7 @@
       a prism configuration has two vertex-disjoint triangles. *)
 From GTBase Require Import base.
 From Minor.foundations Require Import containment prism_configurations.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

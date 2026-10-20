@@ -60,9 +60,9 @@ Proof. by apply/eqP => /setP/(_ ord_max); rewrite !inE. Qed.
 
 Example nongraph_family_two : incidence_degree triple_and_singleton ord0 = 2.
 Proof.
-rewrite /incidence_degree (_ : [set e in _ | _] = triple_and_singleton).
-  by rewrite cards2 triple_neq_singleton.
-by apply/setP => e; rewrite !inE; apply/andb_idr => /orP[] /eqP ->; rewrite !inE.
+rewrite /incidence_degree (_ : [set e in _ | _] = triple_and_singleton);
+  first [by rewrite cards2 triple_neq_singleton
+        |by apply/setP => e; rewrite !inE; apply/andb_idr => /orP[] /eqP ->; rewrite !inE].
 Qed.
 
 Example nongraph_family_one : incidence_degree triple_and_singleton ord_max = 1.

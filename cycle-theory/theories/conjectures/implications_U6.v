@@ -72,6 +72,7 @@ From GraphTheory Require Import mgraph.
 From GTBase Require Export base.
 From Cycle.foundations Require Import cycle_space comp_reduce.
 From Cycle.conjectures Require Import U6 X212 U10.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.

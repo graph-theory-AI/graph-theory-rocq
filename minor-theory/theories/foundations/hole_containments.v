@@ -40,6 +40,7 @@
 From GTBase Require Export base.
 From GTBase Require induced_cycles.
 From Minor.foundations Require Import containment prism_configurations.
+Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
