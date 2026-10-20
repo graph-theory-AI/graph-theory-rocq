@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""API index controls: explicit trust, project enrollment and stale artifacts."""
+"""API index controls: explicit trust, project enrollment, stale artifacts, and git read only at the root's own toplevel."""
+import os
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -61,7 +63,7 @@ class IndexControls(unittest.TestCase):
             project = root / "base/_CoqProject"
             project.write_text("-Q theories GTBase\n")
             with patch.object(API, "ROOT", root), \
-                 patch.object(API.subprocess, "check_output", return_value=b"base/theories/sample.v\0"):
+                 patch.object(API, "tracked_files", return_value=["base/theories/sample.v", ""]):
                 with self.assertRaisesRegex(ValueError, "not build-listed"):
                     API.public_declarations()
                 project.write_text("-Q theories GTBase\ntheories/sample.v\n")
@@ -78,6 +80,60 @@ class IndexControls(unittest.TestCase):
                 self.assertEqual(API.main(["--check"]), 1)
                 output.write_text("current\n")
                 self.assertEqual(API.main(["--check"]), 0)
+
+
+class TrackedSources(unittest.TestCase):
+    """The tracked sources come from git only at the root's own toplevel (the O-1 rule); anything else is refused."""
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory(prefix="library-api-git-")
+        self.addCleanup(temporary.cleanup)
+        self.t = Path(temporary.name).resolve()
+        environment = patch.dict(os.environ, {"GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull,
+                                              "GIT_CEILING_DIRECTORIES": str(self.t)})
+        environment.start()
+        self.addCleanup(environment.stop)
+        for key in API.GIT_SELECT_ENV:
+            os.environ.pop(key, None)
+
+    def repo(self, path, tracked):
+        subprocess.run(["git", "-c", "init.defaultBranch=main", "init", "-q", str(path)], check=True, capture_output=True)
+        for relative in tracked:
+            (path / relative).parent.mkdir(parents=True, exist_ok=True)
+            (path / relative).write_text("Definition x := 0.\n")
+            subprocess.run(["git", "-C", str(path), "add", relative], check=True, capture_output=True)
+        return path
+
+    def test_a_toplevel_checkout_lists_its_tracked_files(self):
+        root = self.repo(self.t / "top", ["base/theories/sample.v"])
+        (root / "base/theories/untracked.v").write_text("Definition y := 0.\n")
+        self.assertEqual([p for p in API.tracked_files(root) if p], ["base/theories/sample.v"])
+
+    def test_o1_a_tree_nested_in_another_repository_is_refused(self):
+        enclosing = self.repo(self.t / "enclosing", ["base/theories/other.v"])
+        root = enclosing / "archive"
+        (root / "base/theories").mkdir(parents=True)
+        (root / "base/theories/sample.v").write_text("Definition x := 0.\n")
+        listed = subprocess.run(["git", "-C", str(enclosing), "ls-files"], check=True, capture_output=True, text=True)
+        self.assertEqual(listed.stdout.split(), ["base/theories/other.v"])  # the enclosing repository exists, tracking another file
+        with self.assertRaisesRegex(ValueError, "not its own git toplevel"):
+            API.tracked_files(root)
+
+    def test_an_archive_without_a_repository_is_refused(self):
+        root = self.t / "plain"
+        (root / "base/theories").mkdir(parents=True)
+        (root / "base/theories/sample.v").write_text("Definition x := 0.\n")
+        with self.assertRaisesRegex(ValueError, "not its own git toplevel"):
+            API.tracked_files(root)
+
+    def test_git_selecting_variables_are_ignored(self):
+        enclosing = self.repo(self.t / "enclosing", ["base/theories/other.v"])
+        nested = enclosing / "archive"
+        nested.mkdir()
+        own = self.repo(self.t / "own", ["base/theories/own.v"])
+        with patch.dict(os.environ, {"GIT_DIR": str(enclosing / ".git"), "GIT_WORK_TREE": str(nested)}):
+            with self.assertRaisesRegex(ValueError, "not its own git toplevel"):
+                API.tracked_files(nested)
+            self.assertEqual([p for p in API.tracked_files(own) if p], ["base/theories/own.v"])
 
 
 if __name__ == "__main__":

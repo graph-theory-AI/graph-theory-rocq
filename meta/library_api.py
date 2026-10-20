@@ -3,11 +3,15 @@
 
 Uses the migration gate's declaration/scope parser and registry readers. This
 is a source index, not a compiler symbol table or an installation certificate.
+The tracked sources are read from git only when the repository root is itself a
+git toplevel; an archive, or a tree nested in another checkout, is refused
+rather than indexed from an enclosing repository (the O-1 rule).
 """
 from __future__ import annotations
 
 import argparse
 from collections import defaultdict
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -22,6 +26,9 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "meta/LIBRARY_API.md"
 KIND = re.compile(r"^(?P<modifiers>(?:(?:Local|Global|Polymorphic|Monomorphic|Program)\s+)*)"
                   rf"(?P<kind>{MR.DECL_KEYWORDS})\s+")
+# The variables that would make git read another repository than the root's own.
+GIT_SELECT_ENV = ("GIT_DIR", "GIT_WORK_TREE", "GIT_COMMON_DIR", "GIT_INDEX_FILE", "GIT_OBJECT_DIRECTORY",
+                  "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_NAMESPACE")
 
 
 def cell(value: str) -> str:
@@ -33,10 +40,32 @@ def source_link(name: str, path: str, line: int | None = None) -> str:
     return f"[{name}](../{path}{anchor})"
 
 
+def tracked_files(root: Path) -> list[str]:
+    """The files git tracks at `root`, read only when `root` is its own git toplevel, without the variables that select
+    another repository; anything else (no repository, an archive, a tree nested in another checkout) is refused."""
+    env = {key: value for key, value in os.environ.items() if key not in GIT_SELECT_ENV}
+
+    def git(*args: str) -> subprocess.CompletedProcess:
+        return subprocess.run(["git", "--no-optional-locks", "--no-replace-objects", *args], cwd=root, env=env,
+                              capture_output=True)
+
+    try:
+        top = git("rev-parse", "--show-toplevel")
+    except FileNotFoundError as exc:
+        raise ValueError("git is not available: the API index reads the tracked sources of a git checkout") from exc
+    toplevel = top.stdout.decode().strip()
+    if top.returncode or not toplevel or os.path.realpath(toplevel) != os.path.realpath(root):
+        reason = top.stderr.decode().strip() or f"its toplevel is {toplevel}"
+        raise ValueError(f"{root} is not its own git toplevel ({reason}); run the API index in a checkout of the "
+                         "source, not in an archive or a tree nested in another repository")
+    listed = git("ls-files", "-z")
+    if listed.returncode:
+        raise ValueError(f"git ls-files in {root}: {listed.stderr.decode().strip()}")
+    return listed.stdout.decode().split("\0")
+
+
 def public_declarations() -> tuple[dict[str, str], dict[str, dict]]:
-    tracked = subprocess.check_output(
-        ["git", "--no-optional-locks", "--no-replace-objects", "ls-files", "-z"], cwd=ROOT
-    ).decode().split("\0")
+    tracked = tracked_files(ROOT)
     modules, declarations = {}, {}
     for relative in sorted(set(tracked)):
         if not relative.endswith(".v") or not public_repository_path(relative):
