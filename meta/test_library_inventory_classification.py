@@ -81,8 +81,14 @@ class Classification(unittest.TestCase):
         self.assertIn("body_shapes 1 (paper_specific 1)", line)
 
     def test_missing_name_group(self):
+        data = copy.deepcopy(self.data); del data["names"]["count_sym"]
+        self.assert_only(data, "residual group count_sym is unclassified")
+        # widget is the only entry citing post-rc-wave, so deleting it ALSO makes that milestone stale: a second and
+        # correct error (C1's version of this test expected one; the first execution's finding F-1)
         data = copy.deepcopy(self.data); del data["names"]["widget"]
-        self.assert_only(data, "residual group widget is unclassified")
+        self.assertEqual(sorted(e.split(": ", 1)[1] for e in self.run_check(data)),
+                         ["milestone post-rc-wave is referenced by no entry (stale)",
+                          "names: residual group widget is unclassified"])
 
     def test_stale_name_entry(self):
         data = copy.deepcopy(self.data); data["names"]["edge_count"] = data["names"]["widget"]

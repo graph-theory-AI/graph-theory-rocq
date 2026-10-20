@@ -858,12 +858,42 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--max-groups", type=int, default=20)
     parser.add_argument("--validate", action="store_true")
+    parser.add_argument("--suggest-milestones", action="store_true",
+                        help="print a rule-derived milestone per retained alias (to author; never part of --write/--check)")
     args = parser.parse_args(argv)
 
     if args.validate:
         return validate_self_test()
     inventory = build_inventory()
     registry, errors = validate_registry(inventory)
+    # G-5: the retained aliases' static reference inventory, rendered into the generated inventory
+    # (imported here: library_alias_retention and library_classification import this module). The authored
+    # data is read first: its alias_retention_exceptions bind the rows' errors in every mode.
+    import library_alias_retention
+    import library_classification
+    try:
+        authored = load_json(library_classification.CLASSIFICATION)
+        authored_error = None if isinstance(authored, dict) else f"{library_classification.CLASSIFICATION.name} must be an object"
+    except ValueError as exc:
+        authored, authored_error = {}, str(exc)
+    if authored_error is not None:
+        authored = {}
+    rows, retention_counts, fallbacks = library_alias_retention.alias_rows(
+        registry, authored.get(library_alias_retention.EXCEPTIONS_KEY))
+    if authored_error is not None:
+        fallbacks.append(authored_error)   # without the data no exception is accepted: fail closed in every mode
+    inventory["scope"]["alias_retention"] = (
+        "every .v under a repository package's theories/ (grounding_ and implications_ included); "
+        "the rules are in meta/library_alias_retention.py")
+    inventory["alias_retention"] = {"counts": retention_counts, "rows": rows}
+    errors.extend(fallbacks)
+    if args.suggest_milestones:
+        print(json.dumps(library_alias_retention.suggest_milestones(rows), indent=2, sort_keys=True))
+        # the diagnostics stay visible in this mode too (Marcol K-1): every error, then the counts
+        for error in errors:
+            print(f"  ERROR: {error}", file=sys.stderr)
+        print(library_alias_retention.counts_line(retention_counts, None), file=sys.stderr)
+        return 1 if fallbacks else 0
     if POLICY.exists():  # the prospective-wave policy lands with the P1 hardening stream
         errors.extend(validate_policy())
     if args.new_waves or args.wave:
@@ -883,10 +913,15 @@ def main(argv: list[str]) -> int:
                     "library_helper_inventory.json has drifted; run "
                     "python3 meta/library_inventory.py --write"
                 )
-        # G-4: every residual repeated name and body shape is classified (imported here: it imports this module).
-        import library_classification
-        classification_errors, classification_line = library_classification.validate_classification(inventory, registry)
+        # G-4: every residual repeated name and body shape is classified;
+        # G-5: every retained alias has an authored milestone that its computed rows allow (the data read above).
+        milestone_errors, cited = library_alias_retention.validate_milestones(
+            rows, authored.get("alias_milestones"), authored.get("milestones") or {}, inventory)
+        errors.extend(milestone_errors)
+        classification_errors, classification_line = library_classification.validate_classification(
+            inventory, registry, also_used=cited)
         errors.extend(classification_errors)
+        classification_line += "; " + library_alias_retention.counts_line(retention_counts, authored.get("alias_milestones"))
     else:
         classification_line = ""
 

@@ -66,6 +66,7 @@ mutation:
 	python3 meta/faithfulness_mutation.py --timeout 1800
 	python3 meta/library_inventory.py --validate
 	python3 meta/test_library_inventory_classification.py
+	python3 meta/test_library_inventory_alias_retention.py
 	python3 meta/migration_report.py --validate --kernel
 
 # Active vacuity/refutability probe: try to close each `_statement` and its negation with a
