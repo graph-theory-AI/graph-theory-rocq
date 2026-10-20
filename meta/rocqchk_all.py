@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Recursive rocqchk of every project module, sharded:  python3 meta/rocqchk_all.py --out DIR [options]
+"""Recursive rocqchk of all project modules, sharded:  python3 meta/rocqchk_all.py --out DIR --source-commit C --source-tree T [options]
 
-DRAFT a1 (arthur, RC G-1, 2026-10-14; Marcol's review RC-G1-draft-review-by-marcol 73690bc7 applied): never executed.  It ports
-batch 2's reviewed SR-32c run (master-SR32c-r2-by-lancelot and addenda 1-4, run master-SR32c-run-1-by-lancelot: SR32C_ROCQCHK_PASS)
-from digraph-theory alone to all 17 projects, as one repository command.
+a2 (arthur, RC R-10, 2026-10-20): the receipt's source (O-1; plan RC-G1-O1-receipt-source-plan-by-arthur + addendum-1, Marcol's
+review f8a8ce5d).  a1 (RC G-1, 2026-10-14; Marcol's review RC-G1-draft-review-by-marcol 73690bc7 applied) ran at G-1's first
+execution (48 tests OK, --plan-only, --shard1-only PASS on Rocq 9.2).  It ports batch 2's reviewed SR-32c run
+(master-SR32c-r2-by-lancelot and addenda 1-4, run master-SR32c-run-1-by-lancelot: SR32C_ROCQCHK_PASS) from digraph-theory alone to
+all 17 projects, as one repository command.
 
 Objects:
   P   every `theories/*.v` row of the _CoqProject of every non-hidden top-level directory that has one (hidden directories are not
@@ -42,6 +44,14 @@ Outputs (DIR must not exist and must lie OUTSIDE the repository): plan/ (modules
 externals.txt), shard-<i>/ (modules.txt, rocqchk.out, rocqchk.rc, console.txt with a HEARTBEAT every --heartbeat-s, axioms*.txt,
 verdict.txt), schedule.log, verdict.txt (one ROCQCHK_ALL_<PASS|INCOMPLETE|FAIL> line, or ROCQCHK_ALL_SHARD1_ONLY_<...>) and
 receipt.json.  Exit 0 PASS, 3 INCOMPLETE, 1 FAIL, 2 refused.
+Source (a2, O-1): --source-commit / --source-tree are the 40-hex ids the caller binds (D-5: the reconciled source), required unless
+--plan-only.  git is read only when ROOT is itself a git toplevel (the realpath of `rev-parse --show-toplevel` == ROOT), never in an
+enclosing repository (a1's receipt named the checkout around G-1's scratch root).  At a toplevel, a HEAD or HEAD^{tree} other than
+the declared ids is refused, and a tracked change is recorded.  receipt.json's "source": commit and tree (as declared),
+root_is_git_toplevel, git_commit, git_tree and tracked_changes (null unless ROOT is a toplevel), verified, accepted.  The consumer
+rule (source_accepted; Lancelot 32c19fee): a receipt is accepted only when verified (a toplevel at the declared ids, no tracked
+change) or when every git field is null (an archive, or a tree nested in another checkout); a toplevel with a tracked change accepts
+nothing.  The checked objects are not digested here: the caller binds them (D-5: per-stage input identity, runbook r3 section 3).
 Resources: the caps are ADMISSION estimates (running caps <= --budget at every start, serial lanes, backfill: SR-32c's scheduler
 a3), measured by SR-32c with the DEFAULT OCaml GC; nothing is enforced per process.  Run it in ONE container with memory >= --budget
 GiB and >= --min-cpus CPUs (up to 3-4 shards run at once; Marcol R-4): when the cgroup's memory.max / cpu.max are readable and
@@ -72,6 +82,9 @@ OWN_MAPPING_RE = re.compile(r"^-[RQ]\s+theories\s+([A-Za-z][A-Za-z0-9_]*)\s*$")
 INTERN_RE = re.compile(r"^\[intern (\S+)", re.M)
 LIBRARY_RE = re.compile(r"^(Checking|Admitting) library: (\S+)", re.M)
 INCOMPLETE_RC = {124: "the per-shard limit was reached", 137: "SIGKILL, e.g. an OOM"}
+HEX40_RE = re.compile(r"^[0-9a-f]{40}$")
+GIT_SELECT_ENV = ("GIT_DIR", "GIT_WORK_TREE", "GIT_COMMON_DIR", "GIT_INDEX_FILE", "GIT_OBJECT_DIRECTORY",
+                  "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_NAMESPACE")     # a2 (O-1): they would select another repository
 
 
 class Refused(Exception):
@@ -429,14 +442,63 @@ def cgroup_limits() -> tuple[int | None, float | None]:
     return mem, cpus
 
 
-def git_read(*args: str) -> str:
-    """a1 (Marcol N-3): reads never refresh the index"""
-    return subprocess.run(["git", "--no-optional-locks", *args], cwd=ROOT, capture_output=True, text=True).stdout
+def source_identity(root: Path, commit: str, tree: str) -> dict:
+    """a2 (O-1): the receipt's source.  `commit` / `tree` are the caller's ids; git is read only when `root` is itself a git toplevel,
+    with --no-optional-locks (a1, Marcol N-3: reads never refresh the index) and without the variables that select another
+    repository.  A `root/.git` that git does not read as `root`'s toplevel is refused, never reported as no repository."""
+    for flag, value in (("--source-commit", commit), ("--source-tree", tree)):
+        if not HEX40_RE.match(value or ""):
+            hint = " (make rocqchk: set GATE_SOURCE_COMMIT and GATE_SOURCE_TREE)" if not value else ""
+            raise Refused(f"{flag} {value!r} is not a 40-hex lower-case id{hint}")
+    env = {k: v for k, v in os.environ.items() if k not in GIT_SELECT_ENV}
+
+    def git(*args: str) -> subprocess.CompletedProcess:
+        return subprocess.run(["git", "--no-optional-locks", *args], cwd=root, env=env, capture_output=True, text=True)
+
+    try:
+        top = git("rev-parse", "--show-toplevel")
+        is_top = (top.returncode == 0 and top.stdout.strip() != ""
+                  and os.path.realpath(top.stdout.strip()) == os.path.realpath(root))
+        why = top.stderr.strip() or f"its toplevel is {top.stdout.strip()}"
+    except FileNotFoundError:                             # no git binary
+        is_top, why = False, "git not found"
+    if not is_top and (root / ".git").exists():
+        raise Refused(f"{root}/.git exists but git does not read {root} as its toplevel: {why}")
+    source = {"commit": commit, "tree": tree, "root_is_git_toplevel": is_top, "git_commit": None, "git_tree": None,
+              "tracked_changes": None, "verified": False}
+    if is_top:
+        head, head_tree = git("rev-parse", "--verify", "HEAD^{commit}"), git("rev-parse", "--verify", "HEAD^{tree}")
+        status = git("status", "--porcelain", "--untracked-files=no")
+        if head.returncode or head_tree.returncode or status.returncode:
+            raise Refused(f"git cannot read HEAD or the status of the toplevel {root}: "
+                          f"{(head.stderr + head_tree.stderr + status.stderr).strip()}")
+        source.update(git_commit=head.stdout.strip(), git_tree=head_tree.stdout.strip(), tracked_changes=bool(status.stdout))
+        if (source["git_commit"], source["git_tree"]) != (commit, tree):
+            raise Refused(f"{root} is a git toplevel at {source['git_commit']} (tree {source['git_tree']}), not at the declared "
+                          f"{commit} (tree {tree})")
+        source["verified"] = not source["tracked_changes"]
+    source["accepted"] = source_accepted(source)
+    return source
+
+
+def source_accepted(source: dict) -> bool:
+    """a2 (O-1): the consumer rule (Lancelot 32c19fee; Marcol O-3): accepted only when verified at a toplevel (git ids == the declared
+    ids, no tracked change), or when verified is false and every git field is null (an archive, or a tree nested in another
+    checkout).  Any other shape accepts nothing."""
+    if not all(isinstance(source.get(k), str) and HEX40_RE.match(source[k]) for k in ("commit", "tree")):
+        return False
+    if source.get("verified") is True:
+        return (source.get("root_is_git_toplevel") is True and source.get("tracked_changes") is False
+                and source.get("git_commit") == source["commit"] and source.get("git_tree") == source["tree"])
+    return (source.get("verified") is False and source.get("root_is_git_toplevel") is False
+            and source.get("git_commit") is None and source.get("git_tree") is None and source.get("tracked_changes") is None)
 
 
 def main(argv: list[str]) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--out", required=True, type=Path, help="a fresh directory OUTSIDE the repository")
+    ap.add_argument("--source-commit", help="a2 (O-1): the 40-hex commit the objects were built from; required unless --plan-only")
+    ap.add_argument("--source-tree", help="a2 (O-1): the 40-hex tree of that commit; required unless --plan-only")
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument("--plan-only", action="store_true", help="write plan/ and stop; nothing is checked")
     mode.add_argument("--shard1-only", action="store_true", help="run the joint-load shard 1 alone and stop (a sizing measurement)")
@@ -459,6 +521,12 @@ def main(argv: list[str]) -> int:
             raise Refused(f"{out} exists")
         if out.is_relative_to(ROOT):                      # a1 (Marcol N-5): never leave untracked run files in the repository
             raise Refused(f"{out} is inside the repository {ROOT}")
+        source = None                                     # a2 (O-1): a plan without ids writes no receipt
+        if not (a.plan_only and a.source_commit is None and a.source_tree is None):
+            if a.source_commit is None or a.source_tree is None:
+                raise Refused("--source-commit and --source-tree are required (unless --plan-only)")
+            source = source_identity(ROOT, a.source_commit, a.source_tree)
+            print(f"SOURCE {json.dumps(source, sort_keys=True)}")
         mem, cpus = cgroup_limits()                       # a1 (Marcol R-4): only refuses, and only on a readable, smaller limit
         if mem is not None and mem < a.budget * 2 ** 30:
             raise Refused(f"the cgroup's memory.max {mem} B < --budget {a.budget} GiB")
@@ -538,8 +606,7 @@ def main(argv: list[str]) -> int:
         for l in lines + guards + [final]:
             print(l)
         (out / "verdict.txt").write_text("\n".join(lines + guards + [final]) + "\n")
-        receipt = {"tool": "meta/rocqchk_all.py", "tool_sha256": sha256(Path(__file__)), "head": git_read("rev-parse", "HEAD").strip(),
-                   "tracked_changes": bool(git_read("status", "--porcelain", "--untracked-files=no")),
+        receipt = {"tool": "meta/rocqchk_all.py", "tool_sha256": sha256(Path(__file__)), "source": source,
                    "rocqchk_version": version, "ocamlrunparam": os.environ.get("OCAMLRUNPARAM"), "budget_gib": a.budget,
                    "cgroup_memory_max": mem, "cgroup_cpus": cpus, "os_cpu_count": os.cpu_count(), "limit_s": a.limit_s,
                    "mode": "shard1-only" if a.shard1_only else "full",
