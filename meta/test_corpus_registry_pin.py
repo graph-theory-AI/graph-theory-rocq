@@ -15,10 +15,15 @@ from unittest.mock import patch
 import corpus_registry as REG
 
 
+FIXTURE_GIT_ENV = {**os.environ, "GIT_CONFIG_NOSYSTEM": "1", "GIT_CONFIG_GLOBAL": os.devnull}
+
+
 def git(path, *args):
+    """Fixture git, isolated from the user's and the system's git configuration (signing, hooks)."""
     return subprocess.run(
-        ["git", "-c", "user.email=t@t", "-c", "user.name=t", "-C", str(path), *args],
-        check=True, capture_output=True, text=True).stdout.strip()
+        ["git", "-c", "user.email=t@t", "-c", "user.name=t", "-c", "commit.gpgsign=false",
+         "-C", str(path), *args],
+        check=True, capture_output=True, text=True, env=FIXTURE_GIT_ENV).stdout.strip()
 
 
 def make_clone(path: Path) -> str:
@@ -126,6 +131,14 @@ class PinnedDiscovery(unittest.TestCase):
         self.use(empty)
         with self.assertRaisesRegex(REG.GraphConjecturesPinError, "no data/"):
             REG.graph_conjectures_dir()
+
+    def test_k_repository_selecting_variables_are_ignored(self):
+        # GIT_DIR naming another repository must not decide which repository is checked
+        other = self.tmp / "other"
+        make_clone(other)
+        self.use(self.clone)
+        with patch.dict(os.environ, {"GIT_DIR": str(other / ".git"), "GIT_WORK_TREE": str(other)}):
+            self.assertEqual(REG.graph_conjectures_dir(), str(self.clone))
 
     def test_j_data_outside_any_git_checkout_is_an_error(self):
         plain = self.tmp / "plain"

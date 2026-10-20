@@ -50,11 +50,18 @@ class GraphConjecturesPinError(Exception):
     checkout must never be mistaken for an absent one."""
 
 
+# Variables that would make git read another repository than the one at PATH.
+GIT_SELECT_ENV = ("GIT_DIR", "GIT_WORK_TREE", "GIT_COMMON_DIR", "GIT_INDEX_FILE", "GIT_OBJECT_DIRECTORY",
+                  "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_NAMESPACE")
+
+
 def _git(path, *args):
-    """Run a read-only git query in PATH (no optional locks: the gate mount is read-only)."""
+    """Run a read-only git query in PATH (no optional locks: the gate mount is read-only), with
+    the repository-selecting GIT_* variables removed so that PATH alone decides the repository."""
+    env = {k: v for k, v in os.environ.items() if k not in GIT_SELECT_ENV}
     try:
         proc = subprocess.run(["git", "--no-optional-locks", "-C", path, *args],
-                              capture_output=True, text=True)
+                              capture_output=True, text=True, env=env)
     except OSError as exc:
         return 1, "", str(exc)
     return proc.returncode, proc.stdout.strip(), proc.stderr.strip()
