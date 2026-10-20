@@ -33,6 +33,7 @@ jobs:
       - name: Toolchain-free corpus-status audit
         run: make audit
       - name: Every meta suite is in exactly one job
+        if: ${{ !cancelled() }}
         run: |
           listed=$(printf '%s\n' $META_SUITES_TOOLCHAIN_FREE $META_SUITES_ROCQ | sort)
           present=$(cd meta && ls test_*.py | sort)
@@ -43,6 +44,7 @@ jobs:
           [ -z "$unlisted" ] || { echo "meta suites in no CI job: $unlisted"; exit 1; }
           [ -z "$absent" ] || { echo "listed but not in meta/: $absent"; exit 1; }
       - name: Toolchain-free meta suites and self-tests
+        if: ${{ !cancelled() }}
         run: |
           failed=
           for t in $META_SUITES_TOOLCHAIN_FREE; do
@@ -82,12 +84,18 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends build-essential ca-certificates curl git jq \
             libgmp-dev m4 opam patch pkg-config rsync unzip xz-utils zlib1g-dev
-      - name: opam root cache
+      - name: Runner image identity (for the cache key)
+        id: image
+        run: |
+          # ImageOS / ImageVersion are runner process variables, not in the workflow's env context.
+          [ -n "${ImageOS:-}" ] && [ -n "${ImageVersion:-}" ] || { echo "ImageOS / ImageVersion unset"; exit 1; }
+          echo "id=$ImageOS-$ImageVersion" >> "$GITHUB_OUTPUT"
+      - name: opam root cache (restore)
         id: opam-cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ~/.opam
-          key: opam-${{ env.ImageOS }}-${{ env.ImageVersion }}-ocaml-5.3.0-${{ hashFiles('environment/rocq92/opam-packages.lock') }}-${{ env.ROCQ_OPAM_COMMIT }}-${{ env.OPAM_REPOSITORY_COMMIT }}-${{ env.GRAPH_THEORY_COMMIT }}
+          key: opam-${{ steps.image.outputs.id }}-ocaml-5.3.0-${{ hashFiles('environment/rocq92/opam-packages.lock', 'environment/rocq92/installed-packages.txt') }}-${{ env.ROCQ_OPAM_COMMIT }}-${{ env.OPAM_REPOSITORY_COMMIT }}-${{ env.GRAPH_THEORY_COMMIT }}
       - name: opam repositories at the recorded commits, and the switch
         if: steps.opam-cache.outputs.cache-hit != 'true'
         run: |
@@ -114,20 +122,37 @@ jobs:
         run: |
           mapfile -t packages < <(grep -v '^#' environment/rocq92/opam-packages.lock | sed '/^$/d')
           opam install --switch=graph-theory-rocq -j "$(nproc)" "${packages[@]}"
-      - name: The switch matches the accepted image (exact versions, nothing extra)
+      - name: The switch is exactly the accepted image's, minus its MCP server
         run: |
+          # In the image, not in CI: the MCP server and what only it requires (measured in the image with
+          # `opam list --installed --required-by=<lock> --recursive`, against rocq-mcp-evolve's cone).
+          image_only='memprof-limits 0.3.0
+          rocq-mcp-evolve dev'
+          # In CI, not in the image: none. A package added here needs its version and a reason.
+          ci_only=''
+          export LC_ALL=C
           t="$RUNNER_TEMP"
           opam list --switch=graph-theory-rocq --installed --columns=name,version --short --color=never \
             | awk 'NF == 2 {print $1 " " $2}' | sort > "$t/installed.txt"
           grep -v '^==' environment/rocq92/installed-packages.txt | awk 'NF == 2 {print $1 " " $2}' \
             | sort > "$t/inventory.txt"
           grep -v '^#' environment/rocq92/opam-packages.lock | sed '/^$/d' | sed 's/\./ /' | sort > "$t/lock.txt"
-          extra=$(comm -23 "$t/installed.txt" "$t/inventory.txt")
+          ci_extra=$(comm -23 "$t/installed.txt" "$t/inventory.txt")
+          image_extra=$(comm -13 "$t/installed.txt" "$t/inventory.txt")
           absent=$(comm -23 "$t/lock.txt" "$t/installed.txt")
-          [ -z "$extra" ] || { echo "installed, but not in the image's inventory: $extra"; exit 1; }
+          echo "installed, not in the image: [${ci_extra}]"
+          echo "in the image, not installed: [${image_extra}]"
+          [ "$ci_extra" = "$(printf '%s\n' "$ci_only" | sed 's/^ *//; /^$/d' | sort)" ] || { echo "unexpected CI-only packages"; exit 1; }
+          [ "$image_extra" = "$(printf '%s\n' "$image_only" | sed 's/^ *//; /^$/d' | sort)" ] || { echo "the image's packages differ"; exit 1; }
           [ -z "$absent" ] || { echo "locked, but not installed: $absent"; exit 1; }
           grep -qx 'ocaml 5.3.0' "$t/installed.txt"
-          echo "switch: $(wc -l < "$t/installed.txt") packages, all in the image's inventory at the same version"
+          echo "switch: $(wc -l < "$t/installed.txt") packages == the image's $(wc -l < "$t/inventory.txt") minus the MCP server's 2"
+      - name: opam root cache (save, before the suites can fail)
+        if: steps.opam-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.opam
+          key: ${{ steps.opam-cache.outputs.cache-primary-key }}
       - name: Meta suites that compile with Rocq 9.2
         run: |
           # The other condition of the exposing run: a temporary root reached through a symlink.
