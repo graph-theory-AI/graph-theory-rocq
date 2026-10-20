@@ -197,36 +197,36 @@ check their exact theorem types and closed assumptions.
 **Status: prepared metadata, not a release.**
 - Only `rocq-graph-theory-base` has been installed end to end. The other packages' metadata is prepared and staged, but not yet install-tested.
 - No release tag has been chosen.
-- Counts, dependencies and barriers below are measured at the classifier parent `2933916`. They must be refreshed after the queued family releases are integrated.
+- Counts, dependencies and barriers below are measured at `2e15adf` (the classifier and this metadata on `45474d5`). No public module imports a corpus file there: the barriers listed at the classifier parent `2933916` were resolved by their family releases.
 
 Each package builds and installs **only public modules**. These live in `base/theories/*.v`, in `classical-lemmas/theories/` except its conjectures, migration and examples, and in `<area>/theories/{foundations,core,invariants,constructions}/` (plus `digraph-theory/theories/invariants_advanced/`). They are installed as `.v`/`.vo`/`.glob` under `user-contrib/<Namespace>`.
 
 Conjectures, statements, grounding and implication files, applications, migration certificates and `examples/` are never installed. They stay in this repository and are built by `make`.
 
-| opam package | area | namespace | public modules | internal deps (`{= version}`) | external deps (exact pins) | at `2933916` |
+| opam package | area | namespace | public modules | internal deps (`{= version}`) | external deps (exact pins) | at `2e15adf` |
 |---|---|---|---:|---|---|---|
-| `rocq-graph-theory-base` | `base/` | `GTBase` | 49 | — | coq-graph-theory 0.9.7, rocq-mathcomp-algebra 2.5.0, rocq-hierarchy-builder 1.10.3 | installed end to end |
+| `rocq-graph-theory-base` | `base/` | `GTBase` | 55 | — | coq-graph-theory 0.9.7, rocq-mathcomp-algebra 2.5.0, rocq-hierarchy-builder 1.10.3 | no corpus barrier; installed end to end at `2933916` |
 | `rocq-graph-theory-classical-lemmas` | `classical-lemmas/` | `ClassicalLemmas` | 15 | base | coq-graph-theory, mathcomp algebra/boot/order | no corpus barrier |
 | `rocq-graph-theory-topological` | `topological-graph-theory/` | `Topological` | 6 | base | coq-graph-theory, mathcomp algebra/boot/fingroup | no corpus barrier |
-| `rocq-graph-theory-minor` | `minor-theory/` | `Minor` | 7 | base | coq-graph-theory | **blocked**: `hole_containments.v` imports X27, X220 |
-| `rocq-graph-theory-chromatic` | `chromatic-theory/` | `Chromatic` | 9 | base | coq-graph-theory, mathcomp boot | **blocked**: `poly_forms.v` imports X3 |
+| `rocq-graph-theory-minor` | `minor-theory/` | `Minor` | 8 | base | coq-graph-theory | no corpus barrier |
+| `rocq-graph-theory-chromatic` | `chromatic-theory/` | `Chromatic` | 10 | base | coq-graph-theory, mathcomp boot | no corpus barrier |
 | `rocq-graph-theory-cycle` | `cycle-theory/` | `Cycle` | 7 | base | coq-graph-theory | no corpus barrier |
-| `rocq-graph-theory-packing` | `packing-theory/` | `Packing` | 5 | base, classical-lemmas | coq-graph-theory, rocq-stdlib 9.0.0 | **blocked**: `fair_matching.v` imports X15 |
-| `rocq-graph-theory-reconstruction` | `reconstruction-theory/` | `Reconstruction` | 1 | base | coq-graph-theory | **blocked**: `kelly.v` (its only public module) imports U11 |
+| `rocq-graph-theory-packing` | `packing-theory/` | `Packing` | 5 | base, classical-lemmas | coq-graph-theory, rocq-stdlib 9.0.0 | no corpus barrier |
+| `rocq-graph-theory-reconstruction` | `reconstruction-theory/` | `Reconstruction` | 2 | base | coq-graph-theory, mathcomp boot | no corpus barrier |
 | `rocq-graph-theory-hypergraph` | `hypergraph-theory/` | `Hypergraph` | 7 | base | — | no corpus barrier |
 | `rocq-graph-theory-misc` | `graph-theory-misc/` | `GTMisc` | 3 | base | coq-graph-theory | no corpus barrier |
-| `rocq-graph-theory-spectral` | `spectral-graph-theory/` | `Spectral` | 1 | base | coq-graph-theory, mathcomp algebra/boot/fingroup | no corpus barrier |
-| `rocq-graph-theory-extremal` | `extremal-graph-theory/` | `Extremal` | 8 | base | coq-graph-theory, mathcomp algebra/boot/order | no corpus barrier |
+| `rocq-graph-theory-spectral` | `spectral-graph-theory/` | `Spectral` | 2 | base | coq-graph-theory, mathcomp algebra/boot/fingroup | no corpus barrier |
+| `rocq-graph-theory-extremal` | `extremal-graph-theory/` | `Extremal` | 10 | base | coq-graph-theory, mathcomp algebra/boot/order | no corpus barrier |
 | `rocq-graph-theory-infinite` | `infinite-graph-theory/` | `Infinite` | 2 | — | mathcomp boot | no corpus barrier |
-| `rocq-graph-theory-digraph` | `digraph-theory/` | `Digraph` | 22 | — | coq-graph-theory, rocq-hierarchy-builder, mathcomp algebra/boot/classical/fingroup | no corpus barrier |
-| `rocq-graph-theory-atlas` | `atlas/` | `Atlas` | 6 | base, chromatic, extremal, misc, hypergraph | coq-graph-theory, mathcomp algebra | **blocked**: `fractional.v` (Extremal D2chr), `queue_layouts.v` (Topological X158), `tree_decompositions.v` (Cycle X212, Packing X47) |
+| `rocq-graph-theory-digraph` | `digraph-theory/` | `Digraph` | 24 | — | coq-graph-theory, rocq-hierarchy-builder, mathcomp algebra/boot/classical/fingroup | no corpus barrier |
+| `rocq-graph-theory-atlas` | `atlas/` | `Atlas` | 6 | base, chromatic, extremal, misc, hypergraph | coq-graph-theory, mathcomp algebra | no corpus barrier |
 
 **Dependency notes:**
 - Every package also depends on `rocq-core` 9.1.1 and on `conf-python-3` at build time.
 - MathComp packages are `rocq-mathcomp-*` 2.5.0, except `rocq-mathcomp-classical` 1.16.0.
 - The dependencies listed are the direct ones measured from each package's public modules. Base keeps its reviewed pins, which reach its direct needs (mathcomp boot and fingroup) transitively.
 
-**Blocked packages:** a blocked package's public module imports a corpus file. Each barrier is resolved only by a queued family release. The module is never dropped to make packaging pass, so the package cannot build from installed dependencies until that release is integrated.
+**Barriers:** a package is blocked when one of its public modules imports a corpus file. Such a module is never dropped to make packaging pass. At `2e15adf` no package is blocked.
 
 **Empty layers:** `hamiltonicity-theory` (`Hamilton`) and `homomorphism-theory` (`Hom`) have no public layer yet, only statements. They have no package, and none will be invented.
 

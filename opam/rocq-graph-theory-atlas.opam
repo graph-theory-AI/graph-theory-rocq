@@ -1,8 +1,3 @@
-# Not installable at the classifier parent 2933916: a public module imports a corpus file
-# (resolved only by a queued family release; the module stays listed, see README.md):
-#   atlas/theories/foundations/fractional.v -> extremal-graph-theory/theories/conjectures/D2chr.v, grounding_D2chr.v
-#   atlas/theories/foundations/queue_layouts.v -> topological-graph-theory/theories/conjectures/X158.v
-#   atlas/theories/foundations/tree_decompositions.v -> cycle-theory/theories/conjectures/X212.v, packing-theory/theories/conjectures/X47.v
 opam-version: "2.0"
 synopsis: "Cross-area graph-theory foundations: complete minors, degeneracy and decompositions"
 description: """

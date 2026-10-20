@@ -157,7 +157,7 @@ finds the MathComp dependencies automatically (opam `user-contrib`).
 
 ## Installing the public library
 
-The opam package `rocq-graph-theory-digraph` installs the 22 public `Digraph` modules only:
+The opam package `rocq-graph-theory-digraph` installs the 24 public `Digraph` modules only:
 `core/`, `constructions/`, `invariants/`, `invariants_advanced/` and `foundations/`.
 It needs no `GTBase`. Conjectures, applications and the Cheng–Keevash certificate modules are
 not installed; build them in this repository with `make`.
