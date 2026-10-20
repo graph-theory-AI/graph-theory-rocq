@@ -480,7 +480,7 @@ class SourceIdentity(GitTmp):
         root = self.t / "plain"
         root.mkdir()
         good = "a" * 40
-        for bad in ("", "HEAD", "a" * 39, "a" * 41, "A" * 40, "a" * 64, None):
+        for bad in ("", "HEAD", "a" * 39, "a" * 41, "A" * 40, "a" * 64, "a" * 40 + "\n", None):   # a4: a trailing newline (Marcol)
             for args in ((bad, good), (good, bad)):
                 with self.subTest(args=args), self.assertRaises(R.Refused):
                     R.source_identity(root, *args)
@@ -525,6 +525,7 @@ class SourceIdentity(GitTmp):
                   "verified at other git ids": dict(top, git_commit=C40),
                   "verified with an unknown tracked state": dict(top, tracked_changes=None),
                   "a malformed declared id": dict(archive, commit="HEAD"),
+                  "a declared id with a trailing newline": dict(archive, tree=archive["tree"] + "\n"),
                   "no source at all": {}}
         for name, s in shapes.items():
             with self.subTest(name):

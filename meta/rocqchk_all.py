@@ -82,7 +82,7 @@ OWN_MAPPING_RE = re.compile(r"^-[RQ]\s+theories\s+([A-Za-z][A-Za-z0-9_]*)\s*$")
 INTERN_RE = re.compile(r"^\[intern (\S+)", re.M)
 LIBRARY_RE = re.compile(r"^(Checking|Admitting) library: (\S+)", re.M)
 INCOMPLETE_RC = {124: "the per-shard limit was reached", 137: "SIGKILL, e.g. an OOM"}
-HEX40_RE = re.compile(r"^[0-9a-f]{40}$")
+HEX40_RE = re.compile(r"[0-9a-f]{40}")                     # a4 (Marcol, R-10 review): used with fullmatch; `$` also matched before a final "\n"
 GIT_SELECT_ENV = ("GIT_DIR", "GIT_WORK_TREE", "GIT_COMMON_DIR", "GIT_INDEX_FILE", "GIT_OBJECT_DIRECTORY",
                   "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_NAMESPACE")     # a2 (O-1): they would select another repository
 
@@ -447,7 +447,7 @@ def source_identity(root: Path, commit: str, tree: str) -> dict:
     with --no-optional-locks (a1, Marcol N-3: reads never refresh the index) and without the variables that select another
     repository.  A `root/.git` that git does not read as `root`'s toplevel is refused, never reported as no repository."""
     for flag, value in (("--source-commit", commit), ("--source-tree", tree)):
-        if not HEX40_RE.match(value or ""):
+        if not HEX40_RE.fullmatch(value or ""):
             hint = " (make rocqchk: set GATE_SOURCE_COMMIT and GATE_SOURCE_TREE)" if not value else ""
             raise Refused(f"{flag} {value!r} is not a 40-hex lower-case id{hint}")
     env = {k: v for k, v in os.environ.items() if k not in GIT_SELECT_ENV}
@@ -485,7 +485,7 @@ def source_accepted(source: dict) -> bool:
     """a2 (O-1): the consumer rule (Lancelot 32c19fee; Marcol O-3): accepted only when verified at a toplevel (git ids == the declared
     ids, no tracked change), or when verified is false and every git field is null (an archive, or a tree nested in another
     checkout).  Any other shape accepts nothing."""
-    if not all(isinstance(source.get(k), str) and HEX40_RE.match(source[k]) for k in ("commit", "tree")):
+    if not all(isinstance(source.get(k), str) and HEX40_RE.fullmatch(source[k]) for k in ("commit", "tree")):
         return False
     if source.get("verified") is True:
         return (source.get("root_is_git_toplevel") is True and source.get("tracked_changes") is False
