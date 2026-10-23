@@ -81,8 +81,11 @@ Definition fair_matching_edge_partition_statement : Prop :=
     Notes: PROVED in this development — theories/foundations/fair_matching.v derives it
       with the explicit constant c(m) = 12m + 14. The size bound |S| >= |E(G)|/Delta(G)
       - c is rendered over naturals as floor(|E(G)|/Delta(G)) <= |S| + c, avoiding
-      truncated subtraction; the guard 0 < Delta(G) excludes the edgeless graph, where
-      division by Delta(G) = 0 is degenerate. *)
+      truncated subtraction; for a fixed c this floor form is weaker than the source's
+      form by less than one (floor vs ceiling), so the two are equivalent up to c -> c+1:
+      12m + 14 is the constant of the floor form, 12m + 15 in the source's form. The guard
+      0 < Delta(G) excludes the edgeless graph, where division by Delta(G) = 0 is
+      degenerate. *)
 Definition bipartite_matching_underrepresentation_statement : Prop :=
   forall m : nat, exists c : nat,
     forall (G : sgraph) (E : 'I_m -> {set {set G}}),

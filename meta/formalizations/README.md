@@ -10,7 +10,7 @@ Seven source records now have exact, assumption-free Rocq proofs in this reposit
 | `2310.04265__09` | Negation of the existing Question 5.9 statement | [question_5_9_resolution.v](../../digraph-theory/theories/applications/question_5_9_resolution.v) |
 | `1812.02420__03` | No directed Kneser graph at `(k,b)=(5,3)`, refuting the universal existence statement | [directed_kneser_nonexistence.v](../../digraph-theory/theories/applications/directed_kneser_nonexistence.v) |
 | `2209.09107__00` | The triangle refutes printed Alon–Tarsi Question 6.1 with its unfloored degree bound | [alon_tarsi_triangle.v](../../chromatic-theory/theories/applications/alon_tarsi_triangle.v) |
-| `1611.03196__03` | Conjecture 1.15: every bipartite `G` with `Delta(G)>0` and any `m` edge sets `E_i` admit a matching of size at least `#E(G)/Delta(G) - c(m)` meeting each `E_i` in at most `ceil(#E_i/Delta(G))` edges, with `c(m) = 12m + 14` | [fair_matching.v](../../packing-theory/theories/foundations/fair_matching.v) |
+| `1611.03196__03` | Conjecture 1.15: every bipartite `G` with `Delta(G)>0` and any `m` edge sets `E_i` admit a matching `S` with `floor(#E(G)/Delta(G)) <= #S + c(m)` meeting each `E_i` in at most `ceil(#E_i/Delta(G))` edges, with `c(m) = 12m + 14` (so `#S >= #E(G)/Delta(G) - (12m + 15)`) | [fair_matching.v](../../packing-theory/theories/foundations/fair_matching.v) |
 
 The last entry, added on 2026-09-16 and sharpened on 2026-09-18 and
 2026-09-19, is proved
@@ -29,8 +29,10 @@ of their necklaces, and the leaves are `2^L` copies of all the colour classes
 padded with the empty matching. And the write-up's trimming step disappears,
 parity being repaired by retyping the first bead of each odd type to a null type
 and discarding its edge, so each round rounds the class counts exactly down. The
-constant is therefore linear, `c(m) = 12m + 14`, against the `32(m+1)^3` claimed
-by the attack. Those first two deviations are suggestions of Laurent Viennot,
+constant is therefore linear, `c(m) = 12m + 14` in the formal floor form
+`floor(#E(G)/Delta(G)) <= #S + c(m)` (`12m + 15` in the source's form
+`#S >= #E(G)/Delta(G) - c(m)`, floor and ceiling differing by less than one),
+against the `32(m+1)^3` claimed by the attack. Those first two deviations are suggestions of Laurent Viennot,
 and are what turns the write-up's `O(m^3)` into `O(m)`; a third of his
 suggestions sharpens the ledger of a single round — a cut interior to a bead
 group throws its edge away and so cannot also witness a conflict, conflicts
@@ -45,10 +47,12 @@ only on MathComp and GraphTheory and on which `packing-theory` depends;
 Carathéodory over the rationals is there too but is no longer used by this proof.
 See
 [X15_FAIR_MATCHING_REPORT.md](../../packing-theory/docs/X15_FAIR_MATCHING_REPORT.md)
-and `classical-lemmas/NECKLACE_STATUS.md`. Unlike the six entries above, its
-source correspondence has **not** been independently reviewed: the registry entry
-names no reviewer. The statement it proves is the pre-existing, already-reviewed
-encoding of Conjecture 1.15 in `X15.v`, unchanged.
+and `classical-lemmas/NECKLACE_STATUS.md`. Its source correspondence was
+independently reviewed on 2026-10-23 (the registry entry names the reviewer):
+confirmed, with one precision — the explicit constant `12m + 14` is that of the
+formal floor form, `12m + 15` in the source's form. The statement it proves is
+the pre-existing, already-reviewed encoding of Conjecture 1.15 in `X15.v`,
+unchanged.
 
 ## Checked repair artifacts
 
