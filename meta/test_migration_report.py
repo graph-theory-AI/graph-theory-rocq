@@ -280,6 +280,10 @@ class ReportTests(unittest.TestCase):
         self.write_json("meta/opg_legs_state.json", {"entries": {"test": {"statement": "done", "edges": "done",
                                                                           "note": "changed"}}})
         self.assertIn("test_statement: leg-state entry unchanged since baseline", self.failures())
+        for key, value in (("grounding", "done"), ("commit", "abc1234")):
+            self.write_json("meta/opg_legs_state.json", {"entries": {"test": {"statement": "done", "edges": "done",
+                                                                              key: value}}})
+            self.assertIn("test_statement: leg-state entry unchanged since baseline", self.failures())
 
     def test_non_corpus_requires_explicit_marker(self):
         self.write_manifests(None)
