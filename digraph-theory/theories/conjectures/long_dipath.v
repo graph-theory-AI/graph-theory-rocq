@@ -13,7 +13,7 @@
 From HB Require Import structures.
 From mathcomp Require Import all_boot.
 From Digraph Require Import prelude digraph oriented dipath ck3_main
-  ckpath_k4 ckpath_k5 ckpath_k6.
+  ckpath_k4 ckpath_k5 ckpath_k6 ckpath_k7_concrete.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -29,9 +29,9 @@ Unset Printing Implicit Defensive.
     Definitions: [orientedDigraph] - irreflexive asymmetric arc relation (core/oriented.v);
       [outdeg v] (core/oriented.v); [ell D] - the maximum number of arcs of a directed path,
       paths being duplicate-free (core/dipath.v).
-    Notes: Path length is counted in ARCS, as in the source. The d = 3, 4, 5, 6 instances are
+    Notes: Path length is counted in ARCS, as in the source. The d = 3, 4, 5, 6, 7 instances are
       proved unconditionally in this package (applications ck3 and ck_path, recorded here as
-      [conj1_delta3_proved] .. [conj1_delta6_proved]), so the remaining content is the
+      [conj1_delta3_proved] .. [conj1_delta7_proved]), so the remaining content is the
       general d. *)
 Definition cheng_keevash_conj1_statement : Prop :=
   forall (D : orientedDigraph) (d : nat),
@@ -63,6 +63,12 @@ Theorem conj1_implies_delta6 :
   forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 6 <= outdeg v) -> 2 * 6 <= ell D.
 Proof. by move=> H D *; apply: H. Qed.
 
+(** General ⟹ the δ = 7 instance (exactly the shape of [ck_conj1_at_7]). *)
+Theorem conj1_implies_delta7 :
+  cheng_keevash_conj1_statement ->
+  forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 7 <= outdeg v) -> 2 * 7 <= ell D.
+Proof. by move=> H D *; apply: H. Qed.
+
 (** ** The δ = 3 node is unconditionally PROVED (applications/ck3). *)
 Remark conj1_delta3_proved :
   forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 3 <= outdeg v) -> 2 * 3 <= ell D.
@@ -81,3 +87,9 @@ Proof. exact: ck_conj1_at_5. Qed.
 Remark conj1_delta6_proved :
   forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 6 <= outdeg v) -> 2 * 6 <= ell D.
 Proof. exact: ck_conj1_at_6. Qed.
+
+(** ** The δ = 7 node is unconditionally PROVED ([applications/ck_path],
+    [ckpath_k7_concrete]: the checked C12 / C13 certificate families). *)
+Remark conj1_delta7_proved :
+  forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 7 <= outdeg v) -> 2 * 7 <= ell D.
+Proof. exact: ck_conj1_at_7. Qed.
