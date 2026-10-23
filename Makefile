@@ -11,6 +11,7 @@ hamiltonicity-theory packing-theory: topological-graph-theory   # Wave-1: use th
 classical-lemmas: base   # A10: konig/line_colouring's edeg is GTBase.incidence.incidence_degree
 packing-theory: classical-lemmas   # X15: Alon's splitting necklace theorem
 graph-theory-misc: topological-graph-theory minor-theory   # X80/X102 reuse embedding + tree-decomposition foundations
+extremal-graph-theory: minor-theory   # D2pr row 7: polyhedralb decides planarity with Minor.foundations.minor_dec.minorb
 
 # CI gate (G1 + acceptance): manifest reproduces, edge-graph has no drift, every landed
 # milestone passes check_milestone (compiles, axiom-free, Print-Assumptions-clean, legs justified).

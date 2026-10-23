@@ -70,17 +70,20 @@
         numerator and denominator of every fraction equally, so the counting quotient
         is exactly the true uniform-lift probability.  "Concentrated on a single
         value" = ∃k with P(χ=k) → 1 (whp), in eventual ε–N form.
-      - Row 7 is PARTIAL: PLANARITY is not installed as a decidable predicate
-        (gate G2), so the boolean count [polyhedralb] uses only 3-connectivity (an
-        over-approximation of polyhedra; by Steinitz polyhedra = 3-connected PLANAR).
-        Missing: the planarity restriction and the identification of the limit F (the
-        open content).  The statement asserts a well-defined limiting β-distribution
-        F exists (eventual empirical convergence) — the faithful core of the open
-        "what is the distribution?". *)
+      - Row 7 is PARTIAL.  The boolean count [polyhedralb] is 3-connectivity AND
+        planarity (by Steinitz, polyhedra = 3-connected PLANAR graphs): planarity is
+        [wagner_planar] (no K5 / K3,3 minor), decided by [Minor.foundations.minor_dec]'s
+        [minorb] / [minorP] ([polyhedralbP]; 2026-10-23 planarity-guard repair; before
+        it the count used 3-connectivity only, an over-approximation).  Still missing:
+        counting up to topological equivalence (labelled here) and the identification
+        of the limit F (the open content).  The statement asserts a well-defined
+        limiting β-distribution F exists (eventual empirical convergence) — the
+        faithful core of the open "what is the distribution?". *)
 
 From mathcomp Require Import all_boot.
 From GraphTheory Require Import digraph sgraph coloring dom.
 From GTBase Require Import base.
+From Minor Require Import foundations.minor_dec.
 From mathcomp Require Import all_algebra perm.
 Import GRing.Theory Num.Theory.
 
@@ -393,11 +396,12 @@ Definition random_stable_roommates_statement : Prop :=
     Source (Problem): over topologically-inequivalent polyhedra with [k] edges,
     [β := v/(k+2)] ([v] = #vertices); what is the distribution of [β] as [k→∞]?
 
-    PARTIAL (see header): planarity is not a decidable predicate in the installed
-    toolchain, so the boolean polyhedron test [polyhedralb] uses only 3-connectivity
-    ([three_connb]: [3 < |V|] and deleting any [<3] vertices keeps the graph
-    connected).  [cP v k] counts labelled 3-connected graphs on ['I_v] with [k]
-    edges; [Dk k] totals over [v ≤ k]; [Bk k x] totals those with [β ≤ x] (for fixed
+    PARTIAL (see header).  The boolean polyhedron test [polyhedralb] is
+    3-connectivity ([three_connb]: [3 < |V|] and deleting any [<3] vertices keeps the
+    graph connected) AND planarity: no [K5] and no [K3,3] minor of the labelled graph
+    [fg_labelled_sgraph E], decided by [minorb] ([polyhedralbP] reflects it to
+    [three_connb E /\ wagner_planar (fg_labelled_sgraph E)]).  [cP v k] counts
+    labelled 3-connected planar graphs on ['I_v] with [k] edges; [Dk k] totals over [v ≤ k]; [Bk k x] totals those with [β ≤ x] (for fixed
     [k], [v] vertices, [β ≤ x ⟺ v ≤ x·(k+2)]).  The OPEN "what is the distribution?"
     is rendered as: a limiting CDF [F] EXISTS, i.e. the empirical fraction
     [Bk k x / Dk k] converges to [F x] for every threshold [x] (eventual ε–N,
@@ -411,7 +415,20 @@ Definition three_connb (V:finType)(E:{set {set V}}) : bool :=
          [forall x : V, [forall y : V,
             (x \notin T) ==> (y \notin T) ==> connect (radj E T) x y]]]
     & valid_edges E].
-Definition polyhedralb (v:nat)(E:{set {set 'I_v}}) : bool := three_connb E.
+Definition polyhedralb (v:nat)(E:{set {set 'I_v}}) : bool :=
+  [&& three_connb E,
+      ~~ minorb (fg_labelled_sgraph E) 'K_5
+    & ~~ minorb (fg_labelled_sgraph E) (KB 3 3)].
+
+(** The boolean test is exactly 3-connectivity plus Wagner planarity. *)
+Lemma polyhedralbP (v:nat)(E:{set {set 'I_v}}) :
+  reflect (three_connb E /\ wagner_planar (fg_labelled_sgraph E)) (polyhedralb E).
+Proof.
+rewrite /polyhedralb /wagner_planar.
+apply: (iffP and3P) => [[-> h5 h33]|[-> [h5 h33]]].
+- by split=> //; split=> /minorP; [rewrite (negbTE h5) | rewrite (negbTE h33)].
+- by split=> //; apply/negP=> /minorP.
+Qed.
 Definition cP (v k:nat) : nat :=
   #|[set E : {set {set 'I_v}} | polyhedralb E && (#|E| == k)]|.
 Definition Dk (k:nat) : nat := \sum_(i < k.+1) cP i k.
@@ -433,18 +450,20 @@ Definition is_beta_limit (F:rat -> rat) : Prop :=
       with at least one graph counted, the empirical fraction Bk(k,x)/Dk(k) is within eps of
       F(x).
     Definitions: [three_connb E] - more than 3 vertices, every vertex set of size less than 3 leaves the
-      rest connected, and [valid_edges] (D2pr.v); [polyhedralb v E] - the polyhedron test, here
-      just [three_connb] (D2pr.v); [cP v k] - the number of labelled such graphs on 'I_v with k
+      rest connected, and [valid_edges] (D2pr.v); [polyhedralb v E] - the polyhedron test:
+      [three_connb] and no K5 / K3,3 minor of [fg_labelled_sgraph E] (GTBase), i.e. 3-connected
+      and [wagner_planar] ([polyhedralbP], D2pr.v; [minorb], Minor.foundations.minor_dec);
+      [cP v k] - the number of labelled such graphs on 'I_v with k
       edges (D2pr.v); [Dk k] - their total over v <= k (D2pr.v); [Bk k x] - the total over the
       v with beta = v/(k+2) <= x (D2pr.v); [is_beta_limit F] - the eventual convergence above,
       cross-multiplied with an absolute value (D2pr.v); [radj E S] - adjacency avoiding the set
       S, used to express vertex deletion (D2pr.v).
-    Notes: this row is recorded as PARTIAL. Planarity is not available as a decidable predicate in
-      the installed toolchain, so [polyhedralb] uses only 3-connectivity, an OVER-approximation
-      of polyhedra (by Steinitz, polyhedra are exactly the 3-connected PLANAR graphs). Graphs
-      are counted LABELLED, whereas the source counts topologically inequivalent polyhedra.
-      The source asks WHAT the distribution is; the body asserts only that a limiting
-      distribution F exists. All three gaps are recorded in the ledger. *)
+    Notes: this row is recorded as PARTIAL. By Steinitz, polyhedra are exactly the 3-connected
+      PLANAR graphs; [polyhedralb] now has both conditions (planarity guard added 2026-10-23;
+      before it only 3-connectivity was counted, an over-approximation). Graphs are counted
+      LABELLED, whereas the source counts topologically inequivalent polyhedra. The source asks
+      WHAT the distribution is; the body asserts only that a limiting distribution F exists.
+      These two remaining gaps are recorded in the ledger. *)
 Definition asymptotic_distribution_of_form_of_polyhedra_statement : Prop :=
   exists F : rat -> rat,
     (forall x:rat, (0 <= F x)%R /\ (F x <= 1)%R) /\ is_beta_limit F.

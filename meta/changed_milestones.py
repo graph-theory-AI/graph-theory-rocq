@@ -231,7 +231,7 @@ def validate_routing_fixtures() -> None:
             "atlas",
         },
         "classical-lemmas": {"classical-lemmas", "packing-theory", "atlas"},
-        "minor-theory": {"minor-theory", "graph-theory-misc", "atlas"},
+        "minor-theory": {"minor-theory", "graph-theory-misc", "extremal-graph-theory", "atlas"},
         "chromatic-theory": {"chromatic-theory", "atlas"},
         "digraph-theory": {"digraph-theory", "atlas"},
         "graph-theory-misc": {"graph-theory-misc", "atlas"},
