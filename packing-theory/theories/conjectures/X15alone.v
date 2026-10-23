@@ -104,11 +104,9 @@ Definition fair_matching_edge_partition_statement : Prop :=
       This file is a self-contained scratch variant of conjectures/X15.v and is not
       listed in packing-theory/_CoqProject. Both forms are PROVED in this development:
       theories/foundations/fair_matching.v proves the X15.v llm variant with the same
-      bound 32*(m+1)^3, and Conjecture 1.15 itself with c(m) = 12m + 14 in the floor form
-      below (12m + 15 in the source's form). The size bound
+      bound 32*(m+1)^3, and Conjecture 1.15 itself with c(m) = 12m + 14. The size bound
       |S| >= |E(G)|/Delta(G) - c is rendered over naturals as
-      floor(|E(G)|/Delta(G)) <= |S| + c (equivalent up to c -> c+1), avoiding truncated
-      subtraction; the guard
+      floor(|E(G)|/Delta(G)) <= |S| + c, avoiding truncated subtraction; the guard
       0 < Delta(G) excludes the edgeless graph, where division by Delta(G) = 0 is
       degenerate. *)
 Definition bipartite_matching_underrepresentation_statement : Prop :=
