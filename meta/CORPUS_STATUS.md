@@ -80,8 +80,8 @@
 
 | area | slug | reason |
 |---|---|---|
-| extremal-graph-theory | asymptotic_distribution_of_form_of_polyhedra | planarity omitted (=3-connected, not polyhedra); fix=three_connb /\ wagner_planar |
-| extremal-graph-theory | covering_powers_of_cycles_with_equivalence_subgraphs | 2k<n guard admits n=2k+1 (refutable); regime guard insufficient |
+| extremal-graph-theory | asymptotic_distribution_of_form_of_polyhedra | planarity guard added 2026-10-23 (polyhedralb = three_connb && no K5 / K3,3 minor, reflected to wagner_planar by polyhedralbP); still partial: labelled counting (source: topologically inequivalent polyhedra) and existence of the limiting distribution only (source asks what it is) |
+| extremal-graph-theory | covering_powers_of_cycles_with_equivalence_subgraphs | regime guard repaired 2026-10-23: linear regime n >= c k (c existential) replaces the unconstrained threshold g (strictly stronger); stays partial: the source does not fix the n-regime (literal every-n reading refuted by near-complete C_{2k+1+t}^k, t = o(sqrt k)), so the linear regime is an interpretation |
 | extremal-graph-theory | mixing_circular_colourings_0 | M_c real infimum; rational-threshold approximation |
 | graph-theory-misc | finding_k_edge_outerplanar_graph_embeddings | Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial — proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up) |
 | infinite-graph-theory | coloring_the_odd_distance_graph | D4inf5: iGraph on R*R over rcfType, sqrt-free odd-integer-distance edge; chi=infinity via READING-2 (finite-subgraph chromatic unboundedness: forall n, exists finite S not n-colourable). PROXY on two documented axes: reading-2 is the choice-free direction of chi=infinity (converse = De Bruijn-Erdos), and forall R:rcfType is field-generic vs the specific reals. Audited partial: odd_dist faithful, n>=1 slice carries open content (grounding not_1_colorable), axiom-free. |

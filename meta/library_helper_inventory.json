@@ -6,7 +6,7 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 526,
-      "cross_file_declarations": 1897,
+      "cross_file_declarations": 1898,
       "cross_file_files": 1016,
       "implicit_use": 3,
       "packages_without_project": [
@@ -19536,6 +19536,7 @@
             "edge-count"
           ],
           "declarations": [
+            "extremal-graph-theory/theories/migration/edge_count.v:<line 984>",
             "extremal-graph-theory/theories/migration/edge_count.v:<line 985>",
             "minor-theory/theories/conjectures/grounding_U7.v:<line 18>",
             "minor-theory/theories/conjectures/grounding_U7.v:<line 24>",
@@ -24311,8 +24312,8 @@
     ]
   },
   "counts": {
-    "files": 321,
-    "helpers": 2560,
+    "files": 322,
+    "helpers": 2563,
     "repeated_body_shapes": 147,
     "repeated_normalized_names": 212,
     "repeated_signature_shapes": 305,
@@ -25130,6 +25131,8 @@
         "Digraph.conjectures.long_dipath.conj1_implies_delta4",
         "Digraph.conjectures.long_dipath.conj1_implies_delta5",
         "Digraph.conjectures.long_dipath.conj1_implies_delta6",
+        "Digraph.conjectures.long_dipath_k7.conj1_delta7_proved",
+        "Digraph.conjectures.long_dipath_k7.conj1_implies_delta7",
         "Digraph.conjectures.packing.bermond_thomassen_implies_hoang_reed_weak",
         "Digraph.conjectures.packing.hoang_reed_implies_one_cycle",
         "Digraph.conjectures.path_fas.Delta_star_min",
@@ -25214,6 +25217,7 @@
         "Digraph.conjectures.two_extremal_hajos.ptree_ind'",
         "Digraph.conjectures.two_extremal_hajos.size_pt_leafBpar",
         "Digraph.conjectures.unvd.unavoidableP",
+        "Extremal.conjectures.D2pr.polyhedralbP",
         "Extremal.conjectures.D2pr.srel_irr",
         "Extremal.conjectures.D2pr.srel_sym",
         "Extremal.conjectures.D2ram.cayley_adj_irrefl",
@@ -47683,6 +47687,40 @@
       "signature_shape_hash": "f8bdc377a6c9c4e12d4a8a5273732cde21ae506d000cc2158b3ff113288b38b9"
     },
     {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "a207702cfa5a71abcb9919687dfa1022b77ddfe1e511e974e65f93096b0f08b6",
+      "direct_consumers": [],
+      "kind": "Theorem",
+      "line": 18,
+      "local_dependencies": [],
+      "name": "conj1_implies_delta7",
+      "normalized_name": "conj1_implies_delta7",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/long_dipath_k7.v",
+      "phase": null,
+      "qualified_name": "Digraph.conjectures.long_dipath_k7.conj1_implies_delta7",
+      "signature": ": cheng_keevash_conj1_statement -> forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 7 <= outdeg v) -> 2 * 7 <= ell D",
+      "signature_shape_hash": "e91a50d8f538c6dd399682d2690a524c08beeda41edee52de1c65659c76875b7"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "a2c08d370706c5deeb19067906cf5ebeb586e018cd48d9c1102f787223a088f0",
+      "direct_consumers": [],
+      "kind": "Remark",
+      "line": 24,
+      "local_dependencies": [],
+      "name": "conj1_delta7_proved",
+      "normalized_name": "conj1_delta7_proved",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/long_dipath_k7.v",
+      "phase": null,
+      "qualified_name": "Digraph.conjectures.long_dipath_k7.conj1_delta7_proved",
+      "signature": ": forall D : orientedDigraph, 0 < #|D| -> (forall v : D, 7 <= outdeg v) -> 2 * 7 <= ell D",
+      "signature_shape_hash": "0fc58eb4795029eac267c552ddae12ffbab8578c920bf34bcb4cdccdb72b51f7"
+    },
+    {
       "body_hash": "7533c1331d2d3473b65b1e7e01eda71a13cc269a5d8f3a84885faf0a640554dd",
       "body_shape_hash": "7533c1331d2d3473b65b1e7e01eda71a13cc269a5d8f3a84885faf0a640554dd",
       "declaration_hash": "49cb366df72db727a19382ed3c790f3d9d9eac0bd69a162069925542625cdfc9",
@@ -53685,7 +53723,7 @@
         "Extremal.conjectures.D2pr.srel_sym"
       ],
       "kind": "Definition",
-      "line": 90,
+      "line": 93,
       "local_dependencies": [],
       "name": "srel",
       "normalized_name": "srel",
@@ -53704,7 +53742,7 @@
         "Extremal.conjectures.D2pr.mkG"
       ],
       "kind": "Lemma",
-      "line": 98,
+      "line": 101,
       "local_dependencies": [
         "srel"
       ],
@@ -53725,7 +53763,7 @@
         "Extremal.conjectures.D2pr.mkG"
       ],
       "kind": "Lemma",
-      "line": 100,
+      "line": 103,
       "local_dependencies": [
         "srel"
       ],
@@ -53748,7 +53786,7 @@
         "Extremal.conjectures.D2pr.strong_power"
       ],
       "kind": "Definition",
-      "line": 102,
+      "line": 105,
       "local_dependencies": [
         "srel",
         "srel_irr",
@@ -53776,7 +53814,7 @@
         "Extremal.conjectures.D2pr.regularb"
       ],
       "kind": "Definition",
-      "line": 104,
+      "line": 107,
       "local_dependencies": [],
       "name": "adjb",
       "normalized_name": "adjb",
@@ -53797,7 +53835,7 @@
         "Extremal.conjectures.D2pr.negative_association_in_uniform_forests_statement"
       ],
       "kind": "Definition",
-      "line": 108,
+      "line": 111,
       "local_dependencies": [],
       "name": "edge2",
       "normalized_name": "edge2",
@@ -53818,7 +53856,7 @@
         "Extremal.conjectures.D2pr.three_connb"
       ],
       "kind": "Definition",
-      "line": 112,
+      "line": 115,
       "local_dependencies": [],
       "name": "valid_edges",
       "normalized_name": "valid_edges",
@@ -53838,7 +53876,7 @@
         "Extremal.conjectures.D2pr.NHB"
       ],
       "kind": "Definition",
-      "line": 132,
+      "line": 135,
       "local_dependencies": [
         "adjb"
       ],
@@ -53859,7 +53897,7 @@
         "Extremal.conjectures.D2pr.NHB"
       ],
       "kind": "Definition",
-      "line": 134,
+      "line": 137,
       "local_dependencies": [
         "adjb"
       ],
@@ -53881,7 +53919,7 @@
         "Extremal.conjectures.D2pr.NHB"
       ],
       "kind": "Definition",
-      "line": 136,
+      "line": 139,
       "local_dependencies": [
         "adjb"
       ],
@@ -53902,7 +53940,7 @@
         "Extremal.conjectures.D2pr.almost_all_non_hamiltonian_3_regular_graphs_are_1_co_statement"
       ],
       "kind": "Definition",
-      "line": 138,
+      "line": 141,
       "local_dependencies": [
         "hamiltonianb",
         "regularb",
@@ -53925,7 +53963,7 @@
         "Extremal.conjectures.D2pr.almost_all_non_hamiltonian_3_regular_graphs_are_1_co_statement"
       ],
       "kind": "Definition",
-      "line": 142,
+      "line": 145,
       "local_dependencies": [
         "connectedb",
         "hamiltonianb",
@@ -53949,7 +53987,7 @@
         "Extremal.conjectures.D2pr.coloring_random_subgraphs_statement"
       ],
       "kind": "Definition",
-      "line": 168,
+      "line": 171,
       "local_dependencies": [
         "adjb",
         "edge2",
@@ -53972,7 +54010,7 @@
         "Extremal.conjectures.D2pr.is_shannon_capacity"
       ],
       "kind": "Definition",
-      "line": 206,
+      "line": 209,
       "local_dependencies": [
         "mkG"
       ],
@@ -53993,7 +54031,7 @@
         "Extremal.conjectures.D2pr.shannon_capacity_of_the_seven_cycle_statement"
       ],
       "kind": "Definition",
-      "line": 226,
+      "line": 229,
       "local_dependencies": [
         "strong_power"
       ],
@@ -54014,7 +54052,7 @@
         "Extremal.conjectures.D2pr.forestb"
       ],
       "kind": "Definition",
-      "line": 255,
+      "line": 258,
       "local_dependencies": [
         "adjb"
       ],
@@ -54035,7 +54073,7 @@
         "Extremal.conjectures.D2pr.negative_association_in_uniform_forests_statement"
       ],
       "kind": "Definition",
-      "line": 274,
+      "line": 277,
       "local_dependencies": [
         "cpts",
         "edge2"
@@ -54057,7 +54095,7 @@
         "Extremal.conjectures.D2pr.chiLift"
       ],
       "kind": "Definition",
-      "line": 300,
+      "line": 303,
       "local_dependencies": [],
       "name": "liftadj",
       "normalized_name": "liftadj",
@@ -54076,7 +54114,7 @@
         "Extremal.conjectures.D2pr.chromatic_number_of_random_lifts_of_complete_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 317,
+      "line": 320,
       "local_dependencies": [
         "liftadj",
         "mkG"
@@ -54098,7 +54136,7 @@
         "Extremal.conjectures.D2pr.Pstar"
       ],
       "kind": "Definition",
-      "line": 344,
+      "line": 347,
       "local_dependencies": [],
       "name": "stable_solvableb",
       "normalized_name": "stable_solvableb",
@@ -54117,7 +54155,7 @@
         "Extremal.conjectures.D2pr.random_stable_roommates_statement"
       ],
       "kind": "Definition",
-      "line": 365,
+      "line": 368,
       "local_dependencies": [
         "stable_solvableb"
       ],
@@ -54138,7 +54176,7 @@
         "Extremal.conjectures.D2pr.three_connb"
       ],
       "kind": "Definition",
-      "line": 388,
+      "line": 391,
       "local_dependencies": [
         "adjb"
       ],
@@ -54156,10 +54194,11 @@
       "body_shape_hash": "73ef3fb64e546d7221784fbdba1750151b30d91e802e868c5fa8b0f5a0a15467",
       "declaration_hash": "0ea3d686bd5001f0999a4b3ffa95e8ba5d0a88bf3770717eb9c07c0d5e993f62",
       "direct_consumers": [
-        "Extremal.conjectures.D2pr.polyhedralb"
+        "Extremal.conjectures.D2pr.polyhedralb",
+        "Extremal.conjectures.D2pr.polyhedralbP"
       ],
       "kind": "Definition",
-      "line": 408,
+      "line": 412,
       "local_dependencies": [
         "radj",
         "valid_edges"
@@ -54174,14 +54213,15 @@
       "signature_shape_hash": "cd8531c8c26bb176f755c10b0cafe7f9b92f844ce3093b826029f43af9612bfd"
     },
     {
-      "body_hash": "74b3b408565df028c8081e9dbdb758e0b8aa9be8c838d05c1d45122e3378b717",
-      "body_shape_hash": "74b3b408565df028c8081e9dbdb758e0b8aa9be8c838d05c1d45122e3378b717",
-      "declaration_hash": "0bf7e200d4e6c9f0a52dcfda20300498fa5d957d0e5110a1bbbda676b599892d",
+      "body_hash": "019f1e04e979adf2f4356ac369aa4758152e0ac05e29c062277c48d8c04ca746",
+      "body_shape_hash": "019f1e04e979adf2f4356ac369aa4758152e0ac05e29c062277c48d8c04ca746",
+      "declaration_hash": "52ef19aeb0ca97c5f49fb49b32a9a2c3ac925c33b4dd95a4d2a8176660459d1b",
       "direct_consumers": [
-        "Extremal.conjectures.D2pr.cP"
+        "Extremal.conjectures.D2pr.cP",
+        "Extremal.conjectures.D2pr.polyhedralbP"
       ],
       "kind": "Definition",
-      "line": 414,
+      "line": 418,
       "local_dependencies": [
         "three_connb"
       ],
@@ -54195,6 +54235,26 @@
       "signature_shape_hash": "77e78034382e9a085f20efce73be2f44beefe9e60d8e7f2617409c1864e14717"
     },
     {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "486070bbb798661a3d3534acdc1fa98e0b571430aab05de1576ee65b4f73a9d9",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 422,
+      "local_dependencies": [
+        "polyhedralb",
+        "three_connb"
+      ],
+      "name": "polyhedralbP",
+      "normalized_name": "polyhedralbP",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/D2pr.v",
+      "phase": null,
+      "qualified_name": "Extremal.conjectures.D2pr.polyhedralbP",
+      "signature": "(v:nat)(E:{set {set 'I_v}}) : reflect (three_connb E /\\ wagner_planar (fg_labelled_sgraph E)) (polyhedralb E)",
+      "signature_shape_hash": "d5b041b5f06c37a2f3169cd81f2df5643b6513daf99e8928e1bc4a4a027cabfb"
+    },
+    {
       "body_hash": "44931b2410d8769cd4c30eb41846cd9b744c7b67b8e200e1c9f4e69ed0488b12",
       "body_shape_hash": "44931b2410d8769cd4c30eb41846cd9b744c7b67b8e200e1c9f4e69ed0488b12",
       "declaration_hash": "f078c29a53e39ed6913830b4194dee87f7a460a49e526a1c414fa24bc6eaf9e5",
@@ -54203,7 +54263,7 @@
         "Extremal.conjectures.D2pr.Dk"
       ],
       "kind": "Definition",
-      "line": 415,
+      "line": 432,
       "local_dependencies": [
         "polyhedralb"
       ],
@@ -54224,7 +54284,7 @@
         "Extremal.conjectures.D2pr.is_beta_limit"
       ],
       "kind": "Definition",
-      "line": 417,
+      "line": 434,
       "local_dependencies": [
         "cP"
       ],
@@ -54245,7 +54305,7 @@
         "Extremal.conjectures.D2pr.is_beta_limit"
       ],
       "kind": "Definition",
-      "line": 418,
+      "line": 435,
       "local_dependencies": [
         "cP"
       ],
@@ -54266,7 +54326,7 @@
         "Extremal.conjectures.D2pr.asymptotic_distribution_of_form_of_polyhedra_statement"
       ],
       "kind": "Definition",
-      "line": 420,
+      "line": 437,
       "local_dependencies": [
         "Bk",
         "Dk"
@@ -55020,7 +55080,7 @@
         "Extremal.conjectures.D2str.is_eq_cover_number"
       ],
       "kind": "Definition",
-      "line": 416,
+      "line": 419,
       "local_dependencies": [
         "equivalence_graph"
       ],
@@ -55041,7 +55101,7 @@
         "Extremal.conjectures.D2str.covering_powers_of_cycles_with_equivalence_subgraphs_statement"
       ],
       "kind": "Definition",
-      "line": 423,
+      "line": 426,
       "local_dependencies": [
         "eq_covers"
       ],
@@ -75864,7 +75924,7 @@
       "declaration_hash": "9d932ece2ebd4d720926e1c71b83db344325b6bd0485536b76b3f8cd18260bbb",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 111,
+      "line": 118,
       "local_dependencies": [
         "x15_edge_family",
         "x15_matching"
@@ -75884,7 +75944,7 @@
       "declaration_hash": "0071b6157c3884b3ee9229db71ddf2b88223146f24440b32829d37b01f176f88",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 128,
+      "line": 135,
       "local_dependencies": [
         "x15_edge_family",
         "x15_matching"
