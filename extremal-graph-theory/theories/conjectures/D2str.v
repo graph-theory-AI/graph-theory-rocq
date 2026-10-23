@@ -395,13 +395,16 @@ Definition simultaneous_partition_of_hypergraphs_statement : Prop :=
     G); a cover is a family of them covering every edge; the equivalence covering
     number eq(G) is the minimum cover size.  Ω(k) = a uniform linear lower bound
     in the genuine asymptotic regime (n large RELATIVE to k): constants
-    [cnum,cden > 0], a growth threshold [g : nat -> nat] and a base point [k0]
-    with [cnum·k ≤ cden·eq] for all [k ≥ k0] and all [n ≥ g k].  The free [g]
-    captures "for n sufficiently large depending on k" — a bare guard like
+    [cnum,cden > 0], a regime constant [c] and a base point [k0] with
+    [cnum·k ≤ cden·eq] for all [k ≥ k0] and all [n ≥ c·k].  A bare guard like
     [2k < n] (or even [2k+1 < n]) is NOT faithful, since near-complete powers
     such as [C_{2k+1}^k = K_{2k+1}] (eq = 1) or the cocktail-party
-    [C_{2k+2}^k] (eq = O(log k)) violate any linear bound; [g] must be allowed to
-    grow past them. *)
+    [C_{2k+2}^k] (eq = O(log k)) violate any linear bound; more generally for
+    [n = 2k+1+t] the complement is [t]-regular, so eq is o(k) whenever t = o(√k).
+    The body takes the LINEAR regime [n ≥ c·k] with [c] existential (2026-10-23
+    regime-guard repair; it replaces an unconstrained threshold [g : nat -> nat],
+    which made the encoded Ω(k) weaker).  The source does not fix the n-regime,
+    so the row stays PARTIAL (the regime is an interpretation). *)
 
 (** The cycle [C_n] on ['I_n]: [x] and [y] adjacent iff cyclically consecutive.
     [@MOVE-to-base]: generic cycle family, migrate when a 2nd area needs it. *)
@@ -430,8 +433,8 @@ Definition is_eq_cover_number (G : sgraph) (m : nat) : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/covering_powers_of_cycles_with_equivalence_subgraphs/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/covering_powers_of_cycles_with_equivalence_subgraphs.json
     English statement: (Open Problem Garden, "Covering powers of cycles with equivalence subgraphs")
-      There are positive naturals cnum, cden, a growth threshold g and a base point k0 such
-      that for every k >= k0, every n >= g k and every m that is the equivalence covering number
+      There are positive naturals cnum, cden, a regime constant c and a base point k0 such
+      that for every k >= k0, every n >= c k and every m that is the equivalence covering number
       of the k-th power of the n-cycle, cnum * k <= cden * m; that is, eq(C_n^k) is Omega(k).
     Definitions: [equivalence_graph G e] - e is an equivalence relation all of whose non-trivial related
       pairs are edges of G, i.e. a disjoint union of cliques of G (D2str.v); [eq_covers G es] -
@@ -439,18 +442,21 @@ Definition is_eq_cover_number (G : sgraph) (m : nat) : Prop :=
       related by some entry (D2str.v); [is_eq_cover_number G m] - m is the minimum length of
       such a cover (D2str.v); [graph_power G k] - the distance power, x and y adjacent when
       they are at distance at most k (GTBase); [cycle_graph n] - C_n on 'I_n (GTBase).
-    Notes: this row is recorded as PARTIAL. Omega(k) is an asymptotic-in-n lower bound, so the
-      n-regime is an EXISTENTIALLY quantified growth threshold g with n >= g k, NOT a bare
-      guard such as 2k < n: near-complete powers like C_{2k+1}^k = K_{2k+1} (covering number 1)
-      or the cocktail-party graph C_{2k+2}^k (covering number O(log k)) violate any linear
-      bound, so g must be allowed to grow past them. The constant is the ratio cnum/cden.
-      Because g is existentially quantified with no growth constraint, the statement is
-      formally weaker than the source conjecture (ledger). *)
+    Notes: this row is recorded as PARTIAL: the source ("Given k and n ... Omega(k)"; discussion:
+      "even for n very large compared to k") does not fix the relation between n and k, so the
+      n-regime is an interpretation (unresolved source issue). The literal reading (every n) is
+      refutable: near-complete powers like C_{2k+1}^k = K_{2k+1} (covering number 1), the
+      cocktail-party graph C_{2k+2}^k (covering number O(log k)) and, more generally,
+      C_{2k+1+t}^k with t = o(sqrt k) (a t-regular complement) violate any linear bound. The
+      body takes the LINEAR regime n >= c k with an existential constant c, which excludes them
+      for every c > 2 once k is large; c, k0 and the ratio cnum/cden are existential.
+      Regime-guard repair 2026-10-23: the threshold was an unconstrained g : nat -> nat with
+      n >= g k, which made the encoded Omega(k) weaker (it is the special case g := c * k). *)
 Definition covering_powers_of_cycles_with_equivalence_subgraphs_statement : Prop :=
   exists cnum cden : nat,
     [/\ 0 < cnum, 0 < cden &
-        exists (g : nat -> nat) (k0 : nat),
+        exists c k0 : nat,
           forall (k n m : nat),
-            k0 <= k -> g k <= n ->
+            k0 <= k -> c * k <= n ->
             is_eq_cover_number (graph_power (cycle_graph n) k) m ->
             (cnum * k <= cden * m)%N].
