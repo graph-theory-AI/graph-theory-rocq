@@ -1,4 +1,4 @@
-# X15 — `bipartite_matching_underrepresentation`: proved, with `c(m) = 12m + 14`
+# X15 — `bipartite_matching_underrepresentation`: proved, with `c(m) = 12m + 14` (floor form)
 
 Target (in `packing-theory/theories/conjectures/X15.v`), arXiv:1611.03196
 Conj. 1.15, with the explicit constant claimed by the LLM attack
@@ -19,6 +19,12 @@ forall m : nat, exists c : nat,
 **Proved**, with the constant `c(m) = 12m + 14` — linear in `m`, against the
 `32(m+1)^3` claimed by the attack and the `(m+1)^2(16m+29)` of the first version
 of this development.
+
+The constant is that of the formal size bound `#|E(G)| %/ Delta G <= #|S| + c`, a
+FLOOR form. The source's form `|S| >= |E(G)|/Delta(G) - c(m)` needs the ceiling
+of `|E(G)|/Delta(G)` instead, which exceeds the floor by less than one, so in the
+source's form the certified constant is `12m + 15`. For the existence statement
+(Conjecture 1.15) the two forms are equivalent.
 
 The `O(m^3)` of the write-up became `O(m)` through two suggestions of Laurent
 Viennot — remove one bead of every odd type and throw its edge away instead of
@@ -48,9 +54,11 @@ outside comments. `python3 meta/check_milestone.py X15 packing-theory` reports
 `ACCEPTED: 11/11`, and the proof is registered in `meta/formal_resolutions.json`
 under record key `1611.03196__03` (direction `prove`).
 
-> The correspondence review recorded with that entry is **pending**: the
-> registry entry names no independent reviewer. The formal statement it proves
-> is the pre-existing, already-reviewed encoding in `X15.v`, unchanged.
+> The correspondence review recorded with that entry was performed independently
+> on 2026-10-23 (the registry entry names the reviewer): correspondence
+> confirmed, with the floor-form precision on the constant stated in section 1.
+> The formal statement it proves is the pre-existing, already-reviewed encoding
+> in `X15.v`, unchanged.
 
 ## 2. The proof
 
@@ -162,7 +170,7 @@ the `log` of a balanced tree.
 | error of one round | `2(2m+3) + 2m = 6m + 6` | `herr` inside `round_exists` |
 | error of one round, at scale 2, with the two roundings | `2(6m+6) + 2 = 12m + 14` | `round_exists` |
 | `L` rounds on `2^L` matchings | `(2^L − 1)(12m + 14)` against `2^L` sizes | `rounds_exists` |
-| `c(m)` | `12m + 14` | `approx_fair_rounds`, `x15_rounds_instance`, `x15_llm3_proof` |
+| `c(m)` | `12m + 14` (floor form; `12m + 15` in the source's form) | `approx_fair_rounds`, `x15_rounds_instance`, `x15_llm3_proof` |
 
 ### Next improvements: `c(m) = 8m + 8`, and `8m + 6`
 
