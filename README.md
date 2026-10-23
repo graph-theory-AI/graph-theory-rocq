@@ -58,21 +58,30 @@ statement-complete claim with `make audit` (toolchain-free) or the full `make ga
 
 ## Building
 
-Everything here is Rocq 9.1 + MathComp 2.5 + [`coq-graph-theory`](https://github.com/rocq-community/graph-theory) 0.9.7.
-A full clean build of the whole corpus takes about six minutes.
+The tested environment is **Rocq core 9.2.0, rocq-stdlib 9.1.0, OCaml 5.3.0,
+MathComp 2.6.0, classical 1.16.0 and Hierarchy Builder 1.10.3**, with the unreleased
+[`coq-graph-theory`](https://github.com/rocq-community/graph-theory) commit
+`322e352b72c4ca3f153e5f80123c5020a0d40620`. This release makes **no Rocq 9.1 support claim**.
+See the [accepted release receipt](meta/releases/ROCQ92_ACCEPTED_2026-10-23.md) and
+[image recipe and full pin inventory](environment/rocq92/README.md).
 
 ### 1. One-time toolchain setup
 
+For a native development switch, use the locked package versions:
+
 ```sh
-opam switch create digraph ocaml-base-compiler.5.2.1
+opam switch create digraph ocaml-base-compiler.5.3.0
 eval $(opam env --switch=digraph)
 opam repo add rocq-released https://rocq-prover.org/opam/released
-opam install coq-graph-theory.0.9.7 rocq-mathcomp-classical.1.16.0
+opam pin add -n coq-graph-theory.dev \
+  'git+https://github.com/rocq-community/graph-theory.git#322e352b72c4ca3f153e5f80123c5020a0d40620'
+opam install --jobs=2 $(sed '/^#/d; /^$/d' environment/rocq92/opam-packages.lock)
 ```
 
-Those two packages pull in everything else: `rocq-core` 9.1.1, `rocq-stdlib` 9.0.0,
-MathComp 2.5.0 (`ssreflect`/`algebra`/`fingroup`/`finmap`) and Hierarchy-Builder 1.10.2.
-Budget 15-30 minutes — opam builds it all from source.
+These top-level versions are locked; a native install still resolves platform dependencies.
+The release receipt distinguishes the accepted Linux image from the fresh Mac installation,
+including its Python and Zify qualifications. The image recipe also records which build inputs
+remain live; rebuilding it does not reproduce the accepted image's identity.
 
 Name the switch `digraph` if you can: the gates in `meta/` look for `~/.opam/digraph` by
 default. Any other name works too, as long as you either put it on `PATH` (`eval $(opam env)`)
@@ -85,10 +94,10 @@ make all -j4              # base + classical-lemmas + the 13 area packages
 make digraph-theory -j4   # the absorbed Digraph package
 ```
 
-`make all` is 356 files, ~3.5 min (4 cores, warm switch — roughly double that on CI-class
-hardware). `digraph-theory` is 1,393 files, 1,262 of them the committed Cheng–Keevash
-certificate modules (see the note below), and dominates the build time: use `-j` and budget
-a long first build. It is kept out of `all` because its proofs are the heaviest in the repo;
+`digraph-theory` includes the large committed Cheng–Keevash certificate development
+(see the note below) and dominates a full build. Budget a long first build; the release
+receipt records the measured remainder stages and their resource limits. It is kept
+out of `all` because its proofs are the heaviest in the repo;
 its P9 milestone is still covered by `make gate`.
 
 Build one package on its own with `make chromatic-theory`, and start over with `make clean`.
@@ -98,11 +107,13 @@ run inside that directory, so you can drop down to `Makefile.coq` for a single f
 ### 3. Check the corpus claims
 
 ```sh
-make audit    # no Rocq needed — python3 only, a few seconds
+make audit    # no Rocq needed — python3 only; runtime depends on the host
 ```
 
 `make audit` verifies that the committed manifest, leg-state overlay, dependency graph and
-`meta/CORPUS_STATUS.md` are mutually consistent. This is what CI runs.
+`meta/CORPUS_STATUS.md` are mutually consistent. CI runs this audit and the meta test suites;
+the `meta-kernel` job installs the locked Rocq 9.2 stack. D-5 is the release acceptance.
+The Mac audit took 38 minutes; do not assume this target is instantaneous.
 
 The full acceptance gate additionally builds every landed milestone and checks it is
 axiom-free with `Print Assumptions` clean:
@@ -177,12 +188,15 @@ two orchestrating Claude sessions, which are not metered.
 
 ### Note on `digraph-theory/theories/applications/ck_path`
 
-The 1,262 certificate modules (`ckpath_cert_*`, about 97 MB of sources) are **committed**, so a
-fresh clone proves the δ = 4, 5, 6 cases of the Cheng–Keevash path conjecture with no SAT solver.
-`scripts/generate_ckpath_certificates.py` plus an external SAT solver produced them; they are
-untrusted data that the transparent hinted-RUP/DRUP checker replays inside Rocq, and regenerating
-them is only needed when a certificate family changes. The six unfinished k = 7 cover drafts
-are not committed. See `digraph-theory/theories/applications/ck_path/README.md`.
+The certificate modules are **committed**, so a fresh clone can check the
+δ = 4, 5, 6, 7 cases of the Cheng–Keevash path conjecture without a SAT solver.
+`scripts/generate_ckpath_certificates.py` and an external SAT solver produced the certificate
+data; the transparent hinted-RUP/DRUP checker replays it inside Rocq.
+The proved theorem [`ck_conj1_delta7`](digraph-theory/theories/applications/ck_path/ckpath_k7_concrete.v)
+states that a nonempty oriented graph with minimum out-degree at least 7 has a simple
+directed path of at least 14 arcs; `ck_conj1_delta7_path` supplies a path of exactly 14 arcs.
+The k = 7 proof is already in the accepted source. Its registry entry and dedicated receipt
+are follow-up documentation work. See the [development README](digraph-theory/theories/applications/ck_path/README.md).
 
 ## Checked formal resolutions
 
@@ -201,9 +215,9 @@ check their exact theorem types and closed assumptions.
 
 ## Public library packages (opam)
 
-**Status: prepared metadata, not a release.**
-- Only `rocq-graph-theory-base` has been installed end to end. The other packages' metadata is prepared and staged, but not yet install-tested.
-- No release tag has been chosen.
+**Status: accepted source release, tagged `rocq92-accepted-2026-10-23`.**
+- All 15 public packages and 3 compatibility wrappers were installed in a fresh Mac opam root; all 110 downstream examples passed. D-5 also passed its Linux private-prefix install gate.
+- The [release receipt](meta/releases/ROCQ92_ACCEPTED_2026-10-23.md) records the exact source, environment, checks and installation qualifications. This is not an opam-repository release.
 - Counts, dependencies and barriers below are measured at `2e15adf` (the classifier and this metadata on `45474d5`). No public module imports a corpus file there: the barriers listed at the classifier parent `2933916` were resolved by their family releases.
 
 Each package builds and installs **only public modules**. These live in `base/theories/*.v`, in `classical-lemmas/theories/` except its conjectures, migration and examples, and in `<area>/theories/{foundations,core,invariants,constructions}/` (plus `digraph-theory/theories/invariants_advanced/`). They are installed as `.v`/`.vo`/`.glob` under `user-contrib/<Namespace>`.
@@ -250,19 +264,19 @@ From Digraph Require Import core.tournament.
 
 Only modules of installed packages resolve; a corpus or example module never does. The repository's `theories/examples/` files are public-API clients built by `make`, and no example reaches a corpus file. They are documentation, not installed.
 
-**Installing from source (development opam files, not a release):** these files are not published in any opam repository, and no opam-repository release is claimed. Pin the WHOLE source, never one package alone: `pin-depends` is not transitive, so a single pinned package would leave its internal dependencies unpinned. Use a switch with Rocq 9.2.0, `rocq-stdlib` 9.1.0, MathComp 2.6.0 (`rocq-mathcomp-classical` 1.16.0) and `rocq-hierarchy-builder` 1.10.3; `coq-graph-theory` comes from its `pin-depends` commit. On this project's VM, pass `--jobs=2` explicitly: the default job count failed there.
+**Installing the accepted source release:** these files are not published in any opam repository, and no opam-repository release is claimed. Pin the WHOLE source, never one package alone: `pin-depends` is not transitive, so a single pinned package would leave its internal dependencies unpinned. Use a switch with Rocq 9.2.0, `rocq-stdlib` 9.1.0, MathComp 2.6.0 (`rocq-mathcomp-classical` 1.16.0) and `rocq-hierarchy-builder` 1.10.3; `coq-graph-theory` comes from its `pin-depends` commit. On this project's VM, pass `--jobs=2` explicitly: the default job count failed there.
 
 ```sh
 # from a CLEAN checkout at the release commit (the VCS kind pins the committed state, not the working directory)
 opam pin add -y --no-action --kind=git .
 opam install rocq-graph-theory-base --jobs=2
 # or, from the forge, at the release commit
-: "${RC_COMMIT:?Set RC_COMMIT to the full tested release commit}"
+RC_COMMIT=3ca79221b863786b7b79c68f9a635928e8f82601
 opam pin add -y --no-action "git+https://github.com/graph-theory-AI/graph-theory-rocq.git#${RC_COMMIT}"
 opam install rocq-graph-theory-misc --jobs=2
 ```
 
-**Build requirement:** building requires **Python >= 3.9** (tested with 3.12.3). It stages the public modules with `meta/library_package.py`. `conf-python-3` only checks that `python3` is present, so each package's first build step checks the version.
+**Build requirement:** building requires **Python >= 3.9** (tested with 3.12.3 on Linux and 3.12.4 on the Mac). It stages the public modules with `meta/library_package.py`. `conf-python-3` only checks that `python3` is present, so each package's first build step checks the version.
 
 **Versioning:** consistent with the plan's §12.
 - All packages share one version, and internal dependencies require exactly that version.

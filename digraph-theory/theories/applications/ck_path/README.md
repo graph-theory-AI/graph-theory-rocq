@@ -1,9 +1,9 @@
-# Directed-path cases k = 4, 5, 6
+# Directed-path cases k = 4, 5, 6, 7
 
 This directory extends the Cheng--Keevash directed-path development from
 `applications/ck3`.  Its public end products prove that every nonempty
 oriented graph of minimum out-degree at least `k` has a simple directed path
-with `2*k` arcs, for `k = 4, 5, 6`.
+with `2*k` arcs, for `k = 4, 5, 6, 7`.
 
 ## Proof structure
 
@@ -29,15 +29,18 @@ with `2*k` arcs, for `k = 4, 5, 6`.
 - `ckpath_cert_graph_{common,odd,c10}.v` proves that the remaining graph
   configurations satisfy the certified formulas.  `ckpath_k4.v`,
   `ckpath_k5.v`, and `ckpath_k6.v` assemble the exact kernel cases.
+- `ckpath_k7_concrete.v` closes the k = 7 case using the checked C12 and C13
+  certificate families and the finite-refutation theorem in `ckpath_k7.v`.
 
 ## Public results
 
-- `ck_conj1_delta4`, `ck_conj1_delta5`, `ck_conj1_delta6` prove
-  `2*k <= ell D` from minimum out-degree at least `k` for `k = 4,5,6`.
-- `ck_conj1_delta4_path`, `ck_conj1_delta5_path`, and
-  `ck_conj1_delta6_path` return explicit simple directed paths with exactly
-  8, 10, and 12 arcs.
-- `ck_conj1_at_4`, `ck_conj1_at_5`, and `ck_conj1_at_6` expose the same
+- `ck_conj1_delta4`, `ck_conj1_delta5`, `ck_conj1_delta6` and `ck_conj1_delta7`
+  prove `2*k <= ell D` for a nonempty oriented graph with minimum out-degree
+  at least `k`, for `k = 4,5,6,7`.
+- `ck_conj1_delta4_path`, `ck_conj1_delta5_path`,
+  `ck_conj1_delta6_path` and `ck_conj1_delta7_path` return explicit simple directed
+  paths with exactly 8, 10, 12 and 14 arcs.
+- `ck_conj1_at_4`, `ck_conj1_at_5`, `ck_conj1_at_6` and `ck_conj1_at_7` expose the same
   results in the notation of Cheng--Keevash Conjecture 1.
 
 ## Certificate trust boundary
@@ -56,7 +59,7 @@ runs `rocqchk`, and checks `Print Assumptions` for the public results.
 From `digraph-theory/`, the integrated build is:
 
 ```sh
-opam exec --switch=rocq-tools -- make
+opam exec --switch=digraph -- make
 ```
 
 The certificate generator can reconstruct DIMACS instances and hinted proof
