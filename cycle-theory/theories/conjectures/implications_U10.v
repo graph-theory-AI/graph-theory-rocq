@@ -90,9 +90,10 @@ Unset Printing Implicit Defensive.
     them meets every claw (every triple of pairwise adjacent Petersen edges, which
     in the triangle-free Petersen graph is a triple of edges through one vertex)
     in exactly one edge, and every Petersen edge lies in exactly two of the six.
-    It mentions no host graph.  Formalized below as [petersen_BF_cover]
-    (2026-10-23, classical-lemmas/TODO.md item 8), so the edge is [verified];
-    the conditional theorem that takes it as an explicit hypothesis is kept. *)
+    Not formalized here: it is carried as an explicit hypothesis of the
+    conditional edge below (never an [Axiom], never [Admitted]), which is why
+    that edge is [status=conditional external=...] rather than [verified]. It
+    mentions no host graph. *)
 Definition external_petersen_BF_cover_statement : Prop :=
   exists LP : seq {set Pedge},
     [/\ size LP = 6,
@@ -100,6 +101,13 @@ Definition external_petersen_BF_cover_statement : Prop :=
            S \in LP -> mut_adj3 Padj q1 q2 q3 ->
            ((q1 \in S) + (q2 \in S) + (q3 \in S))%N = 1)
       & (forall q : Pedge, count (fun S : {set Pedge} => q \in S) LP = 2)].
+
+(* 2026-10-23 (classical-lemmas/TODO.md item 8): this statement is now PROVED, by
+   [petersen_BF_cover] below, and the edge is [verified]
+   ([unconditional_petersen_coloring_implies_berge_fulkerson]).  The doc block above is
+   kept verbatim because the petersen library-migration certificate freezes it
+   (meta/migration_reports/petersen.spec.json); its "Not formalized here" sentence
+   describes the conditional theorem, which is kept unchanged. *)
 
 (** ** A finite-set helper: extract three distinct elements from a 3-set *)
 
@@ -182,88 +190,11 @@ Qed.
 
 (** ** The Petersen graph's own Berge–Fulkerson cover (classical-lemmas TODO 8)
 
-    The six perfect matchings, as a table on the 5-bit vertex codes of
-    [implications_U6] ([pcode], [pC2], [pnbr]): [pmt a b] (for [a < b] the codes
-    of two adjacent Petersen vertices) is a 6-bit code whose bit [k] is set iff
-    that Petersen edge lies in the [k]-th matching.  The matchings are the six
-    complementary pentagon / pentagram pairs of K5: for a cyclic order
-    (a0 a1 a2 a3 a4) of ['I_5], the edges {a_i, a_(i+1)} -- {a_(i+2), a_(i+4)}.
-    Two closed checks on small numbers ([pm_count_check], [pm_claw_check]) give
-    the two properties; a claw is reduced to the three edges at a vertex by
-    [petersen_claw].  A member [pmS k] contains BOTH orientations of each of its
-    edges, as [Pedge] is the ordered-pair type. *)
-Definition pmt (a b : nat) : nat :=
-  match a, b with
-  | 3, 12 => 10 | 3, 20 => 33 | 3, 24 => 20 | 5, 10 => 36 | 5, 18 => 24
-  | 5, 24 => 3 | 6, 9 => 17 | 6, 17 => 6 | 6, 24 => 40 | 9, 18 => 34
-  | 9, 20 => 12 | 10, 17 => 9 | 10, 20 => 18 | 12, 17 => 48 | 12, 18 => 5
-  | _, _ => 0
-  end.
-
-Definition pml (a b : nat) : nat := pmt (minn a b) (maxn a b).
-
-(** Every Petersen edge lies in exactly two of the six matchings. *)
-Lemma pm_count_check :
-  all (fun c => all (fun d => count (fun k => pbit k (pml c d)) (iota 0 6) == 2)
-    (pnbr c)) pC2.
-Proof. by compute. Qed.
-
-(** At every Petersen vertex, each matching contains exactly one of the three
-    edges. *)
-Lemma pm_claw_check :
-  all (fun c => all (fun d1 => all (fun d2 => all (fun d3 =>
-      [&& d1 != d2, d2 != d3 & d1 != d3] ==>
-      all (fun k => (pbit k (pml c d1) + pbit k (pml c d2)
-                     + pbit k (pml c d3) == 1)%N) (iota 0 6))
-    (pnbr c)) (pnbr c)) (pnbr c)) pC2.
-Proof. by compute. Qed.
-
-Definition pmX (X Y : {set 'I_5}) (k : nat) : bool := pbit k (pml (pcode X) (pcode Y)).
-
-Definition pmS (k : nat) : {set Pedge} :=
-  [set q : Pedge | pmX (val (val q).1) (val (val q).2) k].
-
-Definition pmL : seq {set Pedge} := map pmS (iota 0 6).
-
-Lemma pmXC (X Y : {set 'I_5}) k : pmX X Y k = pmX Y X k.
-Proof. by rewrite /pmX /pml minnC maxnC. Qed.
-
-Lemma pmS_supp (q : Pedge) (p y : petersenV) (k : nat) :
-  psupp q = [set p; y] -> (q \in pmS k) = pmX (val p) (val y) k.
-Proof.
-move=> e.
-have a : padj (val q).1 (val q).2 := valP q.
-have n : (val q).1 != (val q).2 := padj_neq a.
-have h1 : (val q).1 \in [set p; y] by rewrite -e /psupp set21.
-have h2 : (val q).2 \in [set p; y] by rewrite -e /psupp set22.
-rewrite inE; move: h1 h2 n; rewrite !inE => /orP[] /eqP -> /orP[] /eqP ->;
-  rewrite ?eqxx // => _.
-exact: pmXC.
-Qed.
-
+    Proved by a finite check in implications_U6.v ([petersen_BF_cover_body]: the six
+    perfect matchings as a table on the 5-bit vertex codes, two closed checks on
+    small numbers, and the claw lemma); that lemma states this very Prop. *)
 Theorem petersen_BF_cover : external_petersen_BF_cover_statement.
-Proof.
-exists pmL; split.
-- by rewrite size_map size_iota.
-- move=> S q1 q2 q3 /mapP[k hk ->] /petersen_claw
-    [p [y1 [y2 [y3 [e1 e2 e3 [a1 a2 a3] [d12 d23 d13]]]]]].
-  rewrite (pmS_supp _ e1) (pmS_supp _ e2) (pmS_supp _ e3) /pmX.
-  have hd : forall y y' : petersenV, y != y' -> pcode (val y) != pcode (val y').
-    by move=> y y'; apply: contraNneq => /pcode_inj/val_inj ->.
-  move/allP: pm_claw_check => /(_ _ (pcode_V p)) /= /allP /(_ _ (pcode_nbr a1))
-    /= /allP /(_ _ (pcode_nbr a2)) /= /allP /(_ _ (pcode_nbr a3)).
-  rewrite (hd _ _ d12) (hd _ _ d23) (hd _ _ d13) => /implyP /(_ isT).
-  move=> /andP[h0 /andP[h1 /andP[h2 /andP[h3 /andP[h4 /andP[h5 _]]]]]].
-  move: hk; rewrite mem_iota add0n => /andP[_].
-  by case: k => [|[|[|[|[|[|k]]]]]] // _; apply/eqP.
-- move=> q; rewrite count_map.
-  have a : padj (val q).1 (val q).2 := valP q.
-  rewrite (eq_count (a2 := fun k => pmX (val (val q).1) (val (val q).2) k)); last first.
-    by move=> k /=; rewrite inE.
-  move/allP: pm_count_check => /(_ _ (pcode_V (val q).1)) /allP
-    /(_ _ (pcode_nbr a)) /eqP.
-  by rewrite /pmX.
-Qed.
+Proof. exact: petersen_BF_cover_body. Qed.
 
 (** ** The scheduled edge *)
 
