@@ -708,6 +708,33 @@
       },
       "specializes": "cheng_keevash_conj1_statement"
     },
+    "ck_conj1_delta7": {
+      "title": "Cheng–Keevash Conj 1 (Thomassé directed-path) — proved at δ = 7",
+      "decoded": "For every nonempty oriented graph D (0 < #|D|, no loops, no digons) in which every vertex has out-degree at least 7, the longest directed simple path has length at least 14 (ℓ(D) ≥ 14); ℓ(D) counts arcs. This is the δ = 7 case of the conjecture that minimum out-degree δ forces a directed path of length 2δ, proved unconditionally; its finite C12 / C13 cases are refuted inside Rocq by checked certificate families (applications/ck_path/).",
+      "match_title": "Directed path of length twice the minimum outdegree",
+      "source": {
+        "slug": "directed_cycle_of_length_twice_the_minimum_outdegree"
+      },
+      "specializes": "cheng_keevash_conj1_statement"
+    },
+    "ck_conj1_delta7_path": {
+      "title": "Cheng–Keevash Conj 1 at δ = 7 — explicit 14-arc path",
+      "decoded": "For every nonempty oriented graph D (0 < #|D|, no loops, no digons) in which every vertex has out-degree at least 7, there exist a start vertex x and a sequence s of 14 vertices forming a directed simple path from x (dipath x s with size s = 14); i.e. a directed simple path with 14 arcs exists. This is the path-existence (unfolded) form of the δ = 7 case of the directed-path conjecture.",
+      "match_title": "Directed path of length twice the minimum outdegree",
+      "source": {
+        "slug": "directed_cycle_of_length_twice_the_minimum_outdegree"
+      },
+      "specializes": "cheng_keevash_conj1_statement"
+    },
+    "ck_conj1_at_7": {
+      "title": "Cheng–Keevash Conj 1 at δ = 7 — in the conjecture's notation",
+      "decoded": "For every nonempty oriented graph D (0 < #|D|, no loops, no digons) in which every vertex has out-degree at least 7, 2·7 ≤ ℓ(D). This is exactly the d = 7 instance of cheng_keevash_conj1_statement (for all D and d, 0 < #|D| and minimum out-degree at least d imply 2·d ≤ ℓ(D)); the same result as ck_conj1_delta7, stated in the conjecture's notation.",
+      "match_title": "Directed path of length twice the minimum outdegree",
+      "source": {
+        "slug": "directed_cycle_of_length_twice_the_minimum_outdegree"
+      },
+      "specializes": "cheng_keevash_conj1_statement"
+    },
     "ck_theorem4_oriented": {
       "title": "Cheng–Keevash Theorem 4 (oriented) — ℓ(D) ≥ 2δ − ⌊(δ−1)/2⌋",
       "decoded": "For every nonempty oriented graph D (0 < #|D|, no loops, no digons) and every δ such that every vertex has out-degree at least δ, the longest directed simple path satisfies ℓ(D) ≥ 2δ − ⌊(δ−1)/2⌋ (nat truncated subtraction; the ⌊·⌋/2 coded as (δ−1)./2). This is the general unconditional lower bound; at δ = 2 it gives the 2δ = 4 conjecture bound exactly (2·2 − ⌊1/2⌋ = 4), and it is the partial-progress envelope toward the full 2δ directed-path conjecture.",

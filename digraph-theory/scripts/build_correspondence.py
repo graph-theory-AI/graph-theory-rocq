@@ -77,6 +77,7 @@ CLUSTER_BY_FILE = {
     "theories/applications/k5/acn_base.v": "P1",
     "theories/applications/ck3/ck3_main.v": "P1",
     "theories/applications/ck3/lemma7.v": "P1",
+    "theories/applications/ck_path/ckpath_k7_concrete.v": "P1",
     "theories/constructions/circulant.v": "P1",
     "theories/invariants_advanced/substitution.v": "G",
     "theories/invariants_advanced/transitive.v": "G",
