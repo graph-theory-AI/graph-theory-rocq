@@ -42,13 +42,15 @@
     a Berge–Fulkerson cover of [G].
 
     The only non-elementary ingredient is the Petersen graph's OWN
-    Berge–Fulkerson structure (a fixed finite object); per the plan's
-    cited-but-unformalized policy (§3 leg 3) it is carried as the EXPLICIT
-    hypothesis [external_petersen_BF_cover_statement] below — a statement purely
-    about the Petersen edges [Pedge]/[Padj]/[mut_adj3], never about [G] — rather
-    than re-enumerated here.  The genuine pull-back reduction (every claw is hit
-    once ⟹ each [M_i] is perfect; covered-twice transfers) is proved in full, so
-    the [Qed] gate confirms the edge under the EXACT [U10.v] formulations.
+    Berge–Fulkerson structure (a fixed finite object), stated as
+    [external_petersen_BF_cover_statement] below — a statement purely about the
+    Petersen edges [Pedge]/[Padj]/[mut_adj3], never about [G].  The pull-back
+    reduction (every claw is hit once ⟹ each [M_i] is perfect; covered-twice
+    transfers) is proved in full in [petersen_coloring_implies_berge_fulkerson],
+    which takes that statement as an explicit hypothesis; the statement itself is
+    proved by a finite check in [petersen_BF_cover] (2026-10-23), and the edge is
+    [unconditional_petersen_coloring_implies_berge_fulkerson], with no hypothesis, under
+    the EXACT [U10.v] formulations.
 
     Citation.  F. Jaeger, "A survey of the cycle double cover conjecture", in
     Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1–12 (Petersen colouring ⟹
@@ -67,7 +69,7 @@
 From GraphTheory Require Import mgraph sgraph.
 From GTBase Require Export base.
 From Cycle.foundations Require Import matchings_cuts.
-From Cycle.conjectures Require Import U6 U10.
+From Cycle.conjectures Require Import U6 U10 implications_U6.
 Set SsrOldRewriteGoalsOrder.
 
 Set Implicit Arguments.
@@ -88,10 +90,9 @@ Unset Printing Implicit Defensive.
     them meets every claw (every triple of pairwise adjacent Petersen edges, which
     in the triangle-free Petersen graph is a triple of edges through one vertex)
     in exactly one edge, and every Petersen edge lies in exactly two of the six.
-    Not formalized here: it is carried as an explicit hypothesis of the
-    conditional edge below (never an [Axiom], never [Admitted]), which is why
-    that edge is [status=conditional external=...] rather than [verified]. It
-    mentions no host graph. *)
+    It mentions no host graph.  Formalized below as [petersen_BF_cover]
+    (2026-10-23, classical-lemmas/TODO.md item 8), so the edge is [verified];
+    the conditional theorem that takes it as an explicit hypothesis is kept. *)
 Definition external_petersen_BF_cover_statement : Prop :=
   exists LP : seq {set Pedge},
     [/\ size LP = 6,
@@ -126,9 +127,12 @@ exists a, b, c; split.
   by rewrite setUA.
 Qed.
 
-(** ** The scheduled edge *)
+(** ** The pull-back reduction, with the Petersen cover as an explicit hypothesis
 
-(*@EDGE from=petersen_coloring_statement to=the_berge_fulkerson_statement kind=implies status=conditional external="external_petersen_BF_cover_statement" proof=petersen_coloring_implies_berge_fulkerson cite="F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12" note="Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (carried as the explicit Petersen-side hypothesis external_petersen_BF_cover_statement) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f" *)
+    (Until 2026-10-23 this was the scheduled edge, [status=conditional]; its
+    annotation now sits on [unconditional_petersen_coloring_implies_berge_fulkerson]
+    below.) *)
+
 Theorem petersen_coloring_implies_berge_fulkerson :
   external_petersen_BF_cover_statement ->
   petersen_coloring_statement ->
@@ -175,6 +179,98 @@ split.
     by move=> S /=; rewrite inE.
   exact: Htwice (f e).
 Qed.
+
+(** ** The Petersen graph's own Berge–Fulkerson cover (classical-lemmas TODO 8)
+
+    The six perfect matchings, as a table on the 5-bit vertex codes of
+    [implications_U6] ([pcode], [pC2], [pnbr]): [pmt a b] (for [a < b] the codes
+    of two adjacent Petersen vertices) is a 6-bit code whose bit [k] is set iff
+    that Petersen edge lies in the [k]-th matching.  The matchings are the six
+    complementary pentagon / pentagram pairs of K5: for a cyclic order
+    (a0 a1 a2 a3 a4) of ['I_5], the edges {a_i, a_(i+1)} -- {a_(i+2), a_(i+4)}.
+    Two closed checks on small numbers ([pm_count_check], [pm_claw_check]) give
+    the two properties; a claw is reduced to the three edges at a vertex by
+    [petersen_claw].  A member [pmS k] contains BOTH orientations of each of its
+    edges, as [Pedge] is the ordered-pair type. *)
+Definition pmt (a b : nat) : nat :=
+  match a, b with
+  | 3, 12 => 10 | 3, 20 => 33 | 3, 24 => 20 | 5, 10 => 36 | 5, 18 => 24
+  | 5, 24 => 3 | 6, 9 => 17 | 6, 17 => 6 | 6, 24 => 40 | 9, 18 => 34
+  | 9, 20 => 12 | 10, 17 => 9 | 10, 20 => 18 | 12, 17 => 48 | 12, 18 => 5
+  | _, _ => 0
+  end.
+
+Definition pml (a b : nat) : nat := pmt (minn a b) (maxn a b).
+
+(** Every Petersen edge lies in exactly two of the six matchings. *)
+Lemma pm_count_check :
+  all (fun c => all (fun d => count (fun k => pbit k (pml c d)) (iota 0 6) == 2)
+    (pnbr c)) pC2.
+Proof. by compute. Qed.
+
+(** At every Petersen vertex, each matching contains exactly one of the three
+    edges. *)
+Lemma pm_claw_check :
+  all (fun c => all (fun d1 => all (fun d2 => all (fun d3 =>
+      [&& d1 != d2, d2 != d3 & d1 != d3] ==>
+      all (fun k => (pbit k (pml c d1) + pbit k (pml c d2)
+                     + pbit k (pml c d3) == 1)%N) (iota 0 6))
+    (pnbr c)) (pnbr c)) (pnbr c)) pC2.
+Proof. by compute. Qed.
+
+Definition pmX (X Y : {set 'I_5}) (k : nat) : bool := pbit k (pml (pcode X) (pcode Y)).
+
+Definition pmS (k : nat) : {set Pedge} :=
+  [set q : Pedge | pmX (val (val q).1) (val (val q).2) k].
+
+Definition pmL : seq {set Pedge} := map pmS (iota 0 6).
+
+Lemma pmXC (X Y : {set 'I_5}) k : pmX X Y k = pmX Y X k.
+Proof. by rewrite /pmX /pml minnC maxnC. Qed.
+
+Lemma pmS_supp (q : Pedge) (p y : petersenV) (k : nat) :
+  psupp q = [set p; y] -> (q \in pmS k) = pmX (val p) (val y) k.
+Proof.
+move=> e.
+have a : padj (val q).1 (val q).2 := valP q.
+have n : (val q).1 != (val q).2 := padj_neq a.
+have h1 : (val q).1 \in [set p; y] by rewrite -e /psupp set21.
+have h2 : (val q).2 \in [set p; y] by rewrite -e /psupp set22.
+rewrite inE; move: h1 h2 n; rewrite !inE => /orP[] /eqP -> /orP[] /eqP ->;
+  rewrite ?eqxx // => _.
+exact: pmXC.
+Qed.
+
+Theorem petersen_BF_cover : external_petersen_BF_cover_statement.
+Proof.
+exists pmL; split.
+- by rewrite size_map size_iota.
+- move=> S q1 q2 q3 /mapP[k hk ->] /petersen_claw
+    [p [y1 [y2 [y3 [e1 e2 e3 [a1 a2 a3] [d12 d23 d13]]]]]].
+  rewrite (pmS_supp _ e1) (pmS_supp _ e2) (pmS_supp _ e3) /pmX.
+  have hd : forall y y' : petersenV, y != y' -> pcode (val y) != pcode (val y').
+    by move=> y y'; apply: contraNneq => /pcode_inj/val_inj ->.
+  move/allP: pm_claw_check => /(_ _ (pcode_V p)) /= /allP /(_ _ (pcode_nbr a1))
+    /= /allP /(_ _ (pcode_nbr a2)) /= /allP /(_ _ (pcode_nbr a3)).
+  rewrite (hd _ _ d12) (hd _ _ d23) (hd _ _ d13) => /implyP /(_ isT).
+  move=> /andP[h0 /andP[h1 /andP[h2 /andP[h3 /andP[h4 /andP[h5 _]]]]]].
+  move: hk; rewrite mem_iota add0n => /andP[_].
+  by case: k => [|[|[|[|[|[|k]]]]]] // _; apply/eqP.
+- move=> q; rewrite count_map.
+  have a : padj (val q).1 (val q).2 := valP q.
+  rewrite (eq_count (a2 := fun k => pmX (val (val q).1) (val (val q).2) k)); last first.
+    by move=> k /=; rewrite inE.
+  move/allP: pm_count_check => /(_ _ (pcode_V (val q).1)) /allP
+    /(_ _ (pcode_nbr a)) /eqP.
+  by rewrite /pmX.
+Qed.
+
+(** ** The scheduled edge *)
+
+(*@EDGE from=petersen_coloring_statement to=the_berge_fulkerson_statement kind=implies status=verified proof=unconditional_petersen_coloring_implies_berge_fulkerson cite="F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12" note="Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (petersen_BF_cover, a finite check on the Pedge encoding) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f" *)
+Theorem unconditional_petersen_coloring_implies_berge_fulkerson :
+  petersen_coloring_statement -> the_berge_fulkerson_statement.
+Proof. exact: petersen_coloring_implies_berge_fulkerson petersen_BF_cover. Qed.
 
 (** ================================================================= *)
 (** ** Berge-Fulkerson =>  intersecting two perfect matchings (Row 1 => Row 3)
