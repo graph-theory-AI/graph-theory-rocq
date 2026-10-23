@@ -67,7 +67,7 @@ jobs:
       OPAMYES: "1"
       OPAMROOTISOK: "1"
       ROCQ_OPAM_SWITCH: graph-theory-rocq
-      ROCQ_OPAM_COMMIT: 5b421e98c905c0fa7da863ada4e6aab3ad7d0ba0
+      GT_ROCQ_OPAM_COMMIT: 5b421e98c905c0fa7da863ada4e6aab3ad7d0ba0
       OPAM_REPOSITORY_COMMIT: aa5edcdc97d75965948a27672611b3ae34f9c89c
       GRAPH_THEORY_COMMIT: 322e352b72c4ca3f153e5f80123c5020a0d40620
       GRAPH_THEORY_TREE: 46c83591eb83d3b6ac81a2e1403d1d27c8abff4f
@@ -98,14 +98,14 @@ jobs:
         # Bump "recipe-N" in the key whenever the install steps below change.
         with:
           path: ~/.opam
-          key: opam-recipe-2-${{ steps.image.outputs.id }}-ocaml-5.3.0-${{ hashFiles('environment/rocq92/opam-packages.lock', 'environment/rocq92/installed-packages.txt') }}-${{ env.ROCQ_OPAM_COMMIT }}-${{ env.OPAM_REPOSITORY_COMMIT }}-${{ env.GRAPH_THEORY_COMMIT }}
+          key: opam-recipe-2-${{ steps.image.outputs.id }}-ocaml-5.3.0-${{ hashFiles('environment/rocq92/opam-packages.lock', 'environment/rocq92/installed-packages.txt') }}-${{ env.GT_ROCQ_OPAM_COMMIT }}-${{ env.OPAM_REPOSITORY_COMMIT }}-${{ env.GRAPH_THEORY_COMMIT }}
       - name: opam repositories at the recorded commits, and the switch
         if: steps.opam-cache.outputs.cache-hit != 'true'
         run: |
           git clone -q --filter=blob:none https://github.com/ocaml/opam-repository "$RUNNER_TEMP/opam-repository"
           git -C "$RUNNER_TEMP/opam-repository" checkout -q --detach "$OPAM_REPOSITORY_COMMIT"
           git clone -q --filter=blob:none https://github.com/rocq-prover/opam "$RUNNER_TEMP/rocq-opam"
-          git -C "$RUNNER_TEMP/rocq-opam" checkout -q --detach "$ROCQ_OPAM_COMMIT"
+          git -C "$RUNNER_TEMP/rocq-opam" checkout -q --detach "$GT_ROCQ_OPAM_COMMIT"
           opam init --bare --disable-sandboxing --no-setup -y default "$RUNNER_TEMP/opam-repository"
           opam repo add rocq-released "$RUNNER_TEMP/rocq-opam/released" --dont-select
           opam switch create graph-theory-rocq ocaml-base-compiler.5.3.0 --no-switch \
