@@ -401,9 +401,10 @@ Definition simultaneous_partition_of_hypergraphs_statement : Prop :=
     such as [C_{2k+1}^k = K_{2k+1}] (eq = 1) or the cocktail-party
     [C_{2k+2}^k] (eq = O(log k)) violate any linear bound; more generally for
     [n = 2k+1+t] the complement is [t]-regular, so eq is o(k) whenever t = o(√k).
-    The regime must therefore be LINEAR, [n ≥ c·k] with [c] existential (2026-10-23
+    The body takes the LINEAR regime [n ≥ c·k] with [c] existential (2026-10-23
     regime-guard repair; it replaces an unconstrained threshold [g : nat -> nat],
-    which made the encoded Ω(k) weaker than the source). *)
+    which made the encoded Ω(k) weaker).  The source does not fix the n-regime,
+    so the row stays PARTIAL (the regime is an interpretation). *)
 
 (** The cycle [C_n] on ['I_n]: [x] and [y] adjacent iff cyclically consecutive.
     [@MOVE-to-base]: generic cycle family, migrate when a 2nd area needs it. *)
@@ -441,13 +442,16 @@ Definition is_eq_cover_number (G : sgraph) (m : nat) : Prop :=
       related by some entry (D2str.v); [is_eq_cover_number G m] - m is the minimum length of
       such a cover (D2str.v); [graph_power G k] - the distance power, x and y adjacent when
       they are at distance at most k (GTBase); [cycle_graph n] - C_n on 'I_n (GTBase).
-    Notes: the n-regime is LINEAR, n >= c k with an existential constant c, NOT a bare guard
-      such as 2k < n: near-complete powers like C_{2k+1}^k = K_{2k+1} (covering number 1), the
+    Notes: this row is recorded as PARTIAL: the source ("Given k and n ... Omega(k)"; discussion:
+      "even for n very large compared to k") does not fix the relation between n and k, so the
+      n-regime is an interpretation (unresolved source issue). The literal reading (every n) is
+      refutable: near-complete powers like C_{2k+1}^k = K_{2k+1} (covering number 1), the
       cocktail-party graph C_{2k+2}^k (covering number O(log k)) and, more generally,
-      C_{2k+1+t}^k with t = o(sqrt k) (a t-regular complement) violate any linear bound, and
-      they all lie below every linear threshold c k with c > 2 once k is large. The constant is
-      the ratio cnum/cden. Regime-guard repair 2026-10-23: the threshold was an unconstrained
-      g : nat -> nat with n >= g k, which made the encoded Omega(k) weaker than the source. *)
+      C_{2k+1+t}^k with t = o(sqrt k) (a t-regular complement) violate any linear bound. The
+      body takes the LINEAR regime n >= c k with an existential constant c, which excludes them
+      for every c > 2 once k is large; c, k0 and the ratio cnum/cden are existential.
+      Regime-guard repair 2026-10-23: the threshold was an unconstrained g : nat -> nat with
+      n >= g k, which made the encoded Omega(k) weaker (it is the special case g := c * k). *)
 Definition covering_powers_of_cycles_with_equivalence_subgraphs_statement : Prop :=
   exists cnum cden : nat,
     [/\ 0 < cnum, 0 < cden &

@@ -1707,14 +1707,14 @@
       "package": "extremal-graph-theory"
     },
     "covering_powers_of_cycles_with_equivalence_subgraphs": {
-      "statement": "done",
-      "grounding": "done",
+      "statement": "partial",
+      "grounding": "partial",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
       "commit": "56c49319",
       "package": "extremal-graph-theory",
-      "note": "regime guard repaired 2026-10-23: linear regime n >= c k (c existential) replaces the unconstrained threshold g; near-complete C_{2k+1+t}^k (t = o(sqrt k)) have eq = o(k), so no sublinear guard is faithful"
+      "note": "regime guard repaired 2026-10-23: linear regime n >= c k (c existential) replaces the unconstrained threshold g (strictly stronger); stays partial: the source does not fix the n-regime (literal every-n reading refuted by near-complete C_{2k+1+t}^k, t = o(sqrt k)), so the linear regime is an interpretation"
     },
     "star_chromatic_index_of_complete_graphs": {
       "statement": "done",
