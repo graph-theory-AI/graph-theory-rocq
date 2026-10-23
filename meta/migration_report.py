@@ -1600,7 +1600,13 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         corpus = row_now.get("_corpus")
         if not non_corpus:
             before_legs, now_legs = legs_base.get(corpus, {}), legs_now.get(corpus, {})
-            check(slug in before_legs and before_legs.get(slug) == now_legs.get(slug),
+            # The `edges` leg is DERIVED from the edge evidence by sync_edge_legs.py, which gates it itself
+            # (sync_edge_legs --check), and a newly proved edge legitimately moves it.  Every other field of
+            # the entry (statement, grounding, correspondence, audit_page, commit, package, note) stays frozen.
+            def frozen_legs(entry):
+                return {k: v for k, v in entry.items() if k != "edges"} if isinstance(entry, dict) else entry
+            check(slug in before_legs
+                  and frozen_legs(before_legs.get(slug)) == frozen_legs(now_legs.get(slug)),
                   f"{formal}: leg-state entry unchanged since baseline")
         statements.append({
             "qualified": obj["qualified"],
