@@ -1693,9 +1693,9 @@
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "818a76c",
+      "commit": "56c49319",
       "package": "extremal-graph-theory",
-      "note": "planarity omitted (=3-connected, not polyhedra); fix=three_connb /\\ wagner_planar"
+      "note": "planarity guard added 2026-10-23 (polyhedralb = three_connb && no K5 / K3,3 minor, reflected to wagner_planar by polyhedralbP); still partial: labelled counting (source: topologically inequivalent polyhedra) and existence of the limiting distribution only (source asks what it is)"
     },
     "circular_choosability_of_planar_graphs": {
       "statement": "done",
@@ -1707,14 +1707,14 @@
       "package": "extremal-graph-theory"
     },
     "covering_powers_of_cycles_with_equivalence_subgraphs": {
-      "statement": "partial",
-      "grounding": "partial",
+      "statement": "done",
+      "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "818a76c",
+      "commit": "56c49319",
       "package": "extremal-graph-theory",
-      "note": "2k<n guard admits n=2k+1 (refutable); regime guard insufficient"
+      "note": "regime guard repaired 2026-10-23: linear regime n >= c k (c existential) replaces the unconstrained threshold g; near-complete C_{2k+1+t}^k (t = o(sqrt k)) have eq = o(k), so no sublinear guard is faithful"
     },
     "star_chromatic_index_of_complete_graphs": {
       "statement": "done",
