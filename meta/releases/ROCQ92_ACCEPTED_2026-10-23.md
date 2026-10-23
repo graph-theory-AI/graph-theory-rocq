@@ -51,7 +51,7 @@ It used the inherited allowance ending 16:29:50 UTC; the conditional fresh
 evidence at 15:18:06 UTC. Acceptance was recorded at 15:34:36 UTC under the
 owner's prior conditional approval. No new fix ledger or image change was used.
 Timings are shared-host measurements, within the graph-theory aggregate cap of
-10 CPUs / 64 GiB. S11 used 2 CPUs / 8 GiB and S12 used 2 CPUs / 4 GiB. These are not isolated-host benchmark results.
+10 CPUs / 64 GiB. S11 ran under caps of 2 CPUs / 8 GiB and S12 under 2 CPUs / 4 GiB. These are not isolated-host benchmark results.
 
 The [single pin comparison](rocq92-accepted-2026-10-23/pin-comparison.txt) passed
 against the actual raw outputs and declared expected sets. Opam 2.1.5 lacks native
@@ -114,8 +114,10 @@ The Ubuntu runner's first locked-stack installation is a separate environment
 execution. A runner or infrastructure failure is classified as a follow-up;
 D-5 remains the acceptance record. CI success is not asserted by this receipt.
 
-This documentation commit changes no proof, project file, Makefile, opam metadata,
-meta tooling or tested input. Its README changes are checked by
-`python3 meta/report_corpus_status.py --check --edge-legs` before merging.
+This documentation commit changes no proof, project file, Makefile, opam metadata
+or meta tooling. README.md is read by the audit's headline check
+(`meta/report_corpus_status.py`, lines 472–483); its headline counts are unchanged,
+and `python3 meta/report_corpus_status.py --check --edge-legs` passed on this head.
+The change lands under the owner's explicit authorization of this follow-up PR.
 The already proved `ck_conj1_delta7` theorem is now described accurately in both
 READMEs; its dedicated registration and receipt are subsequent mathematics work.
