@@ -91,14 +91,14 @@
         "name": "::type_scope:'exists'_x_'..'_x_','_x",
         "kind": "not"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'/\\'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
@@ -206,8 +206,8 @@
         "name": "::nat_scope:x_'<='_x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -410,8 +410,8 @@
         "name": "::nat_scope:x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -509,14 +509,14 @@
         "name": "::type_scope:'exists'_x_'..'_x_','_x",
         "kind": "not"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
@@ -629,8 +629,8 @@
         "name": "::nat_scope:x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -833,8 +833,8 @@
         "name": "::nat_scope:x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -932,14 +932,14 @@
         "name": "::type_scope:'exists'_x_'..'_x_','_x",
         "kind": "not"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
@@ -1052,8 +1052,8 @@
         "name": "::nat_scope:x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -1256,8 +1256,8 @@
         "name": "::nat_scope:x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -1355,14 +1355,14 @@
         "name": "::type_scope:'exists'_x_'..'_x_','_x",
         "kind": "not"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
@@ -1475,8 +1475,8 @@
         "name": "::nat_scope:x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -1484,7 +1484,7 @@
   },
   "AC_kcritical3": {
     "file": "theories/applications/k5/acn_base.v",
-    "line": 431,
+    "line": 432,
     "statement": "AC_kcritical3 : (3 <= m)%N -> kcritical 3 (AC m' : tournament)",
     "digraph": {
       "AC": {
@@ -1594,8 +1594,8 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
         "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
@@ -1729,13 +1729,13 @@
         "name": "::nat_scope:x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -1743,7 +1743,7 @@
   },
   "omegabar_AC": {
     "file": "theories/applications/k5/acn_base.v",
-    "line": 374,
+    "line": 375,
     "statement": "omegabar_AC : (3 <= m)%N -> ω̄((AC m' : tournament)) = 3",
     "digraph": {
       "AC": {
@@ -1833,14 +1833,14 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.ssr.ssrbool:::function_scope:'['_'rel'_x_x_'|'_x_']'": {
@@ -1943,13 +1943,13 @@
         "name": "::nat_scope:x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -1957,7 +1957,7 @@
   },
   "omegabar_AC_del": {
     "file": "theories/applications/k5/acn_base.v",
-    "line": 423,
+    "line": 424,
     "statement": "omegabar_AC_del (v : ACm) :\n  (3 <= m)%N -> ω̄(del_tournament v) = 2",
     "digraph": {
       "AC": {
@@ -2062,14 +2062,14 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
@@ -2187,13 +2187,13 @@
         "name": "::nat_scope:x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -2291,8 +2291,8 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       }
@@ -2435,13 +2435,13 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -2719,13 +2719,13 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -2958,13 +2958,13 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -3222,13 +3222,13 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -3366,8 +3366,8 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       }
@@ -3635,13 +3635,13 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -3864,13 +3864,13 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -4118,13 +4118,13 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -4252,8 +4252,8 @@
         "name": "::nat_scope:x_'<'_x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.fingroup:finGroupType": {
-        "lib": "mathcomp.fingroup.fingroup",
+      "mathcomp.finite_group.fingroup:finGroupType": {
+        "lib": "mathcomp.finite_group.fingroup",
         "name": "finGroupType",
         "kind": "abbrev"
       }
@@ -4261,7 +4261,7 @@
   },
   "ck_conj1_delta3": {
     "file": "theories/applications/ck3/ck3_main.v",
-    "line": 147,
+    "line": 148,
     "statement": "ck_conj1_delta3 (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 3 <= outdeg v) -> 6 <= ell D",
     "digraph": {
       "DiGraph": {
@@ -4316,8 +4316,8 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
         "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
@@ -4390,7 +4390,7 @@
   },
   "ck_conj1_delta3_path": {
     "file": "theories/applications/ck3/ck3_main.v",
-    "line": 158,
+    "line": 159,
     "statement": "ck_conj1_delta3_path (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 3 <= outdeg v) ->\n  exists x : D, exists s : seq D, dipath x s /\\ size s = 6",
     "digraph": {
       "DiGraph": {
@@ -4435,11 +4435,6 @@
         "name": "::type_scope:'exists'_x_'..'_x_','_x",
         "kind": "not"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'/\\'_x",
@@ -4448,6 +4443,11 @@
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
@@ -4504,7 +4504,7 @@
   },
   "ck_conj1_delta2": {
     "file": "theories/applications/ck3/lemma7.v",
-    "line": 698,
+    "line": 792,
     "statement": "ck_conj1_delta2 (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 2 <= outdeg v) -> 4 <= ell D",
     "digraph": {
       "DiGraph": {
@@ -4559,8 +4559,8 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
         "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
@@ -4631,9 +4631,386 @@
       }
     }
   },
+  "ck_conj1_delta7": {
+    "file": "theories/applications/ck_path/ckpath_k7_concrete.v",
+    "line": 29,
+    "statement": "ck_conj1_delta7 (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 7 <= outdeg v) -> 14 <= ell D",
+    "digraph": {
+      "DiGraph": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "DiGraph_IsOriented": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ell": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "has_dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "orientedDigraph": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "outdeg": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
+        "lib": "HB.structures",
+        "name": "::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.bigop:::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x": {
+        "lib": "mathcomp.boot.bigop",
+        "name": "::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_'exists'_x_':'_x_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_'exists'_x_':'_x_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.path:path": {
+        "lib": "mathcomp.boot.path",
+        "name": "path",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:::seq_scope:x_'::'_x": {
+        "lib": "mathcomp.boot.seq",
+        "name": "::seq_scope:x_'::'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.seq:uniq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "uniq",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.tuple:::type_scope:x_'.-tuple'": {
+        "lib": "mathcomp.boot.tuple",
+        "name": "::type_scope:x_'.-tuple'",
+        "kind": "not"
+      }
+    }
+  },
+  "ck_conj1_delta7_path": {
+    "file": "theories/applications/ck_path/ckpath_k7_concrete.v",
+    "line": 41,
+    "statement": "ck_conj1_delta7_path (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 7 <= outdeg v) ->\n  exists x : D, exists s : seq D, dipath x s /\\ size s = 14",
+    "digraph": {
+      "DiGraph": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "DiGraph_IsOriented": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "orientedDigraph": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "outdeg": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:'exists'_x_'..'_x_','_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:'exists'_x_'..'_x_','_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'/\\'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Logic:::type_scope:x_'='_x": {
+        "lib": "Corelib.Init.Logic",
+        "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
+        "lib": "HB.structures",
+        "name": "::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.path:path": {
+        "lib": "mathcomp.boot.path",
+        "name": "path",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:::seq_scope:x_'::'_x": {
+        "lib": "mathcomp.boot.seq",
+        "name": "::seq_scope:x_'::'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.seq:seq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "seq",
+        "kind": "abbrev"
+      },
+      "mathcomp.boot.seq:size": {
+        "lib": "mathcomp.boot.seq",
+        "name": "size",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:uniq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "uniq",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      }
+    }
+  },
+  "ck_conj1_at_7": {
+    "file": "theories/applications/ck_path/ckpath_k7_concrete.v",
+    "line": 54,
+    "statement": "ck_conj1_at_7 (D : orientedDigraph) :\n  0 < #|D| -> (forall v : D, 7 <= outdeg v) -> 2 * 7 <= ell D",
+    "digraph": {
+      "DiGraph": {
+        "lib": "Digraph.core.digraph",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "DiGraph_IsOriented": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": true
+      },
+      "arc": {
+        "lib": "Digraph.core.digraph",
+        "kind": "def",
+        "plumbing": false
+      },
+      "dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "ell": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "has_dipath": {
+        "lib": "Digraph.core.dipath",
+        "kind": "def",
+        "plumbing": false
+      },
+      "orientedDigraph": {
+        "lib": "Digraph.core.oriented",
+        "kind": "abbrev",
+        "plumbing": false
+      },
+      "outdeg": {
+        "lib": "Digraph.core.oriented",
+        "kind": "def",
+        "plumbing": false
+      }
+    },
+    "external": {
+      "Corelib.Init.Datatypes:::bool_scope:x_'&&'_x": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "::bool_scope:x_'&&'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Datatypes:nat": {
+        "lib": "Corelib.Init.Datatypes",
+        "name": "nat",
+        "kind": "ind"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
+      },
+      "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
+        "lib": "HB.structures",
+        "name": "::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'",
+        "kind": "not"
+      },
+      "mathcomp.boot.bigop:::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x": {
+        "lib": "mathcomp.boot.bigop",
+        "name": "::nat_scope:'\\max_'_'('_x_'<'_x_'|'_x_')'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.finset:::set_scope:'['_'set'_x_'|'_x_']'": {
+        "lib": "mathcomp.boot.finset",
+        "name": "::set_scope:'['_'set'_x_'|'_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::bool_scope:'['_'exists'_x_':'_x_x_']'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::bool_scope:'['_'exists'_x_':'_x_x_']'",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_'exists'_x_':'_x_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_'exists'_x_':'_x_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::fin_quant_scope:','_x": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::fin_quant_scope:','_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.fintype:::nat_scope:'#|'_x_'|'": {
+        "lib": "mathcomp.boot.fintype",
+        "name": "::nat_scope:'#|'_x_'|'",
+        "kind": "not"
+      },
+      "mathcomp.boot.path:path": {
+        "lib": "mathcomp.boot.path",
+        "name": "path",
+        "kind": "def"
+      },
+      "mathcomp.boot.seq:::seq_scope:x_'::'_x": {
+        "lib": "mathcomp.boot.seq",
+        "name": "::seq_scope:x_'::'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.seq:uniq": {
+        "lib": "mathcomp.boot.seq",
+        "name": "uniq",
+        "kind": "def"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'*'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'*'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<'_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<'_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.ssrnat:::nat_scope:x_'<='_x": {
+        "lib": "mathcomp.boot.ssrnat",
+        "name": "::nat_scope:x_'<='_x",
+        "kind": "not"
+      },
+      "mathcomp.boot.tuple:::type_scope:x_'.-tuple'": {
+        "lib": "mathcomp.boot.tuple",
+        "name": "::type_scope:x_'.-tuple'",
+        "kind": "not"
+      }
+    }
+  },
   "ck_theorem4_oriented": {
     "file": "theories/applications/ck3/lemma7.v",
-    "line": 684,
+    "line": 778,
     "statement": "ck_theorem4_oriented (D : orientedDigraph) (delta : nat) :\n  0 < #|D| -> (forall v : D, delta <= outdeg v) ->\n  2 * delta - (delta - 1)./2 <= ell D",
     "digraph": {
       "DiGraph": {
@@ -4688,8 +5065,8 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
         "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
@@ -4777,7 +5154,7 @@
   },
   "lemma7": {
     "file": "theories/applications/ck3/lemma7.v",
-    "line": 646,
+    "line": 740,
     "statement": "lemma7 (D : orientedDigraph) (delta : nat) :\n  0 < #|D| -> (forall v : D, delta <= outdeg v) ->\n  2 * delta <= ell D \\/\n  exists S : {set D},\n    [/\\ S != set0, #|S| <= delta\n      & forall v, v \\in S -> 2 * delta - ell D <= outdeg_in S v]",
     "digraph": {
       "DiGraph": {
@@ -4842,14 +5219,14 @@
         "name": "::type_scope:'exists'_x_'..'_x_','_x",
         "kind": "not"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'\\/'_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'\\/'_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.ssr.ssrbool:::bool_scope:x_'\\in'_x": {
@@ -4961,7 +5338,7 @@
   },
   "no_short_strong3": {
     "file": "theories/applications/ck3/ck3_main.v",
-    "line": 28,
+    "line": 29,
     "statement": "no_short_strong3 (H : orientedDigraph) :\n  (forall v : H, outdeg v = 3) -> 0 < #|H| -> strongb H ->\n  ell H <= 5 -> False",
     "digraph": {
       "DiGraph": {
@@ -5021,11 +5398,6 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
@@ -5035,6 +5407,11 @@
         "lib": "Corelib.Init.Logic",
         "name": "False",
         "kind": "ind"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
+        "kind": "not"
       },
       "HB.structures:::HB_scope:'{'_x_'of'_x_'&'_'..'_'&'_x_'}'": {
         "lib": "HB.structures",
@@ -5120,7 +5497,7 @@
   },
   "omegabar_lexprod_ge": {
     "file": "theories/invariants_advanced/substitution.v",
-    "line": 168,
+    "line": 169,
     "statement": "omegabar_lexprod_ge :\n  ω̄(S) + ω̄(H) <= ω̄(lexprod_tournament S H) + 1",
     "digraph": {
       "arc": {
@@ -5265,8 +5642,8 @@
         "name": "::nat_scope:x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -5379,14 +5756,14 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
@@ -5494,8 +5871,8 @@
         "name": "::nat_scope:x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -5603,14 +5980,14 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.Init.Specif:::type_scope:'{'_x_':'_x_'|'_x_'}'": {
@@ -5713,8 +6090,8 @@
         "name": "::nat_scope:x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -5897,8 +6274,8 @@
         "name": "::nat_scope:x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -5936,11 +6313,6 @@
         "name": "::type_scope:'exists'_x_'..'_x_','_x",
         "kind": "not"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'/\\'_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'/\\'_x",
@@ -5949,6 +6321,11 @@
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.ssr.ssrfun:bijective": {
@@ -6050,8 +6427,8 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
         "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
@@ -6160,8 +6537,8 @@
         "name": "::nat_scope:x_'<='_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }
@@ -6239,14 +6616,14 @@
         "name": "nat",
         "kind": "ind"
       },
-      "Corelib.Init.Logic:::type_scope:x_'->'_x": {
-        "lib": "Corelib.Init.Logic",
-        "name": "::type_scope:x_'->'_x",
-        "kind": "not"
-      },
       "Corelib.Init.Logic:::type_scope:x_'='_x": {
         "lib": "Corelib.Init.Logic",
         "name": "::type_scope:x_'='_x",
+        "kind": "not"
+      },
+      "Corelib.Init.Notations:::type_scope:x_'->'_x": {
+        "lib": "Corelib.Init.Notations",
+        "name": "::type_scope:x_'->'_x",
         "kind": "not"
       },
       "Corelib.ssr.ssrbool:::bool_scope:x_'==>'_x": {
@@ -6329,8 +6706,8 @@
         "name": "::nat_scope:x_'<'_x",
         "kind": "not"
       },
-      "mathcomp.fingroup.perm:::type_scope:'{'_'perm'_x_'}'": {
-        "lib": "mathcomp.fingroup.perm",
+      "mathcomp.finite_group.perm:::type_scope:'{'_'perm'_x_'}'": {
+        "lib": "mathcomp.finite_group.perm",
         "name": "::type_scope:'{'_'perm'_x_'}'",
         "kind": "not"
       }

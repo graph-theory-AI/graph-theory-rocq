@@ -78,18 +78,19 @@ All 13 new exits `Print Assumptions`-clean; plan in `docs/PLAN_K34.md`,
 dossier in `docs/k34_dossier.md`, oracle `scripts/k4_oracle.py`
 (114 tests).
 
-**Cheng–Keevash paths — the δ = 3, 4, 5, 6 cases.**
-`ck_conj1_delta3`, `ck_conj1_delta4`, `ck_conj1_delta5`, and
-`ck_conj1_delta6`: every nonempty oriented digraph with minimum out-degree
-at least δ contains a directed simple path of length `2*δ` for
-δ ∈ {3,4,5,6}.  The original δ = 3 development supplied
+**Cheng–Keevash paths — the δ = 3, 4, 5, 6, 7 cases.**
+`ck_conj1_delta3`, `ck_conj1_delta4`, `ck_conj1_delta5`,
+`ck_conj1_delta6`, and `ck_conj1_delta7`: every nonempty oriented digraph with
+minimum out-degree at least δ contains a directed simple path of length `2*δ`
+for δ ∈ {3,4,5,6,7}.  The original δ = 3 development supplied
 the `Oriented` structure, directed simple paths and ℓ(D) (`core/dipath`),
 strong connectivity with the sink-SCC reduction (`invariants/strong`),
 and — uniform in δ — **Cheng–Keevash Lemma 7** with its corollaries
 `ck_theorem4_oriented` (ℓ ≥ 2δ − ⌊(δ−1)/2⌋) and the δ = 2 case
-(`applications/ck3/`).  The δ = 4,5,6 endgames live in
+(`applications/ck3/`).  The δ = 4,5,6,7 endgames live in
 `applications/ck_path/`; their finite C9/C10/C11 cases are discharged by a
-transparent hinted-RUP/DRUP checker whose generated traces are untrusted data.
+transparent hinted-RUP/DRUP checker whose generated traces are untrusted data,
+and δ = 7 closes with the checked C12 and C13 certificate families.
 All public results are axiom-free.  See `applications/ck_path/README.md` and
 the original plan in `docs/PLAN_CK3.md`.
 
