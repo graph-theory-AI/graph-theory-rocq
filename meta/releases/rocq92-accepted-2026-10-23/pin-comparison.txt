@@ -1,0 +1,10 @@
+opam --version: 2.1.5
+ROOT (opam pin scan --normalise .): expected 18, observed 18: MATCH
+ROOT (opam pin scan ., table names): expected 18, observed 18: MATCH
+RECURSIVE EXTRA, RAW bytes as the reviewed harness parsed them: SUBPATH labels [base digraph-theory] vs [base digraph-theory]: MATCH
+RECURSIVE EXTRA, content after inserting the missing newline before each SUBPATH (subpath/name from the label): expected 3, observed 3: MATCH
+RECURSIVE EXTRA, subpath from each record's file:// URL instead of the label: MATCH
+expected root: coq-digraph-theory coq-graph-theory-base rocq-digraph-theory rocq-graph-theory-atlas rocq-graph-theory-base rocq-graph-theory-chromatic rocq-graph-theory-classical-lemmas rocq-graph-theory-cycle rocq-graph-theory-digraph rocq-graph-theory-extremal rocq-graph-theory-hypergraph rocq-graph-theory-infinite rocq-graph-theory-minor rocq-graph-theory-misc rocq-graph-theory-packing rocq-graph-theory-reconstruction rocq-graph-theory-spectral rocq-graph-theory-topological
+expected recursive extra: base/coq-graph-theory-base digraph-theory/coq-digraph-theory digraph-theory/rocq-digraph-theory
+observed recursive extra (normalised): base/coq-graph-theory-base digraph-theory/coq-digraph-theory digraph-theory/rocq-digraph-theory
+NOT a native --recursive result (opam 2.1.5 has none); the S10c stage result of attempt 2: PASS
