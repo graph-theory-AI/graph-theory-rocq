@@ -81,11 +81,8 @@ Definition fair_matching_edge_partition_statement : Prop :=
     Notes: PROVED in this development — theories/foundations/fair_matching.v derives it
       with the explicit constant c(m) = 12m + 14. The size bound |S| >= |E(G)|/Delta(G)
       - c is rendered over naturals as floor(|E(G)|/Delta(G)) <= |S| + c, avoiding
-      truncated subtraction; for a fixed c this floor form is weaker than the source's
-      form by less than one (floor vs ceiling), so the two are equivalent up to c -> c+1:
-      12m + 14 is the constant of the floor form, 12m + 15 in the source's form. The guard
-      0 < Delta(G) excludes the edgeless graph, where division by Delta(G) = 0 is
-      degenerate. *)
+      truncated subtraction; the guard 0 < Delta(G) excludes the edgeless graph, where
+      division by Delta(G) = 0 is degenerate. *)
 Definition bipartite_matching_underrepresentation_statement : Prop :=
   forall m : nat, exists c : nat,
     forall (G : sgraph) (E : 'I_m -> {set {set G}}),
@@ -97,6 +94,13 @@ Definition bipartite_matching_underrepresentation_statement : Prop :=
         (#|x15_edge_set G| %/ Delta G <= #|S| + c)%N /\
         forall i : 'I_m,
           #|S :&: E i| <= ceil_div #|E i| (Delta G).
+
+(* Note on the constant (independent correspondence review, 2026-10-23), kept outside the
+   frozen doc block above: for a fixed c the floor form floor(|E(G)|/Delta(G)) <= |S| + c is
+   weaker than the source's |S| >= |E(G)|/Delta(G) - c by less than one (floor vs ceiling), so
+   the two agree up to c -> c+1 and are equivalent as existence statements. The explicit
+   constant 12m + 14 proved in fair_matching.v is that of the floor form, 12m + 15 in the
+   source's form. *)
 
 (** No corpus row: LLM-proof variant of bipartite_matching_underrepresentation_statement (arxiv:1611.03196#03) with an explicit constant; see https://github.com/graph-theory-AI/Graph-Theory-LLM-Proofs/blob/main/attacks/1611.03196__03/output.md *)
 Definition bipartite_matching_underrepresentation_llm_statement : Prop :=
