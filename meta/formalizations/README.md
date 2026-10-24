@@ -10,7 +10,7 @@ Seven source records now have exact, assumption-free Rocq proofs in this reposit
 | `2310.04265__09` | Negation of the existing Question 5.9 statement | [question_5_9_resolution.v](../../digraph-theory/theories/applications/question_5_9_resolution.v) |
 | `1812.02420__03` | No directed Kneser graph at `(k,b)=(5,3)`, refuting the universal existence statement | [directed_kneser_nonexistence.v](../../digraph-theory/theories/applications/directed_kneser_nonexistence.v) |
 | `2209.09107__00` | The triangle refutes printed Alon–Tarsi Question 6.1 with its unfloored degree bound | [alon_tarsi_triangle.v](../../chromatic-theory/theories/applications/alon_tarsi_triangle.v) |
-| `1611.03196__03` | Conjecture 1.15: every bipartite `G` with `Delta(G)>0` and any `m` edge sets `E_i` admit a matching `S` with `floor(#E(G)/Delta(G)) <= #S + c(m)` meeting each `E_i` in at most `ceil(#E_i/Delta(G))` edges, with `c(m) = 12m + 14` (so `#S >= #E(G)/Delta(G) - (12m + 15)`) | [fair_matching.v](../../packing-theory/theories/foundations/fair_matching.v) |
+| `1611.03196__03` | Conjecture 1.15: every bipartite `G` with `Delta(G)>0` and any `m` edge sets `E_i` admit a matching `S` with `floor(#E(G)/Delta(G)) <= #S + c(m)` meeting each `E_i` in at most `ceil(#E_i/Delta(G))` edges, with `c(m) = 12m + 14` in this formal floor form, giving `12m + 15` in the paper's form `#S >= #E(G)/Delta(G) - c(m)` | [fair_matching.v](../../packing-theory/theories/foundations/fair_matching.v) |
 
 The last entry, added on 2026-09-16 and sharpened on 2026-09-18 and
 2026-09-19, is proved
@@ -31,16 +31,18 @@ parity being repaired by retyping the first bead of each odd type to a null type
 and discarding its edge, so each round rounds the class counts exactly down. The
 constant is therefore linear, `c(m) = 12m + 14` in the formal floor form
 `floor(#E(G)/Delta(G)) <= #S + c(m)` (`12m + 15` in the source's form
-`#S >= #E(G)/Delta(G) - c(m)`, floor and ceiling differing by less than one),
+`#S >= #E(G)/Delta(G) - c(m)`, allowing one extra unit when converting the floor bound),
 against the `32(m+1)^3` claimed by the attack. Those first two deviations are suggestions of Laurent Viennot,
 and are what turns the write-up's `O(m^3)` into `O(m)`; a third of his
 suggestions sharpens the ledger of a single round — a cut interior to a bead
 group throws its edge away and so cannot also witness a conflict, conflicts
 being between two *kept*, hence unanimous, edges whose thief change sits at a
-group boundary — which brings `16m + 24` down to `12m + 14`. The same file also
+group boundary — which brings `16m + 24` down to `12m + 14` in the formal floor
+form (`12m + 15` in the paper's inequality form). The same file also
 proves X15's own `bipartite_matching_underrepresentation_llm_statement`,
-`..._llm2_statement` and `..._llm3_statement` (`c <= 12m + 14`), all with that
-same constant. The topological and classical inputs — Alon's theorem via
+`..._llm2_statement` and `..._llm3_statement` (`c <= 12m + 14` in the formal floor
+form, giving `12m + 15` in the paper's form), all with that same floor-form
+constant. The topological and classical inputs — Alon's theorem via
 Meunier's simplotopal Tucker lemma, König's line colouring, and the structure of
 the union of two matchings — are in the `classical-lemmas` package, which depends
 only on MathComp and GraphTheory and on which `packing-theory` depends;
@@ -87,13 +89,15 @@ The development environment used Rocq 9.1.1, OCaml 5.3.0 and the installed MathC
 Read the [first-round development journal](JOURNAL.md) and [second-round journal](ROUND2_JOURNAL.md) for the proof attempts, MCP workflow, certificate optimizations and integration decisions. The [assumptions transcript](ASSUMPTIONS.txt) records the successful six-entry check. The [registry documentation](../FORMAL_RESOLUTIONS.md) explains source correspondence and the validation contract.
 
 Validation on 2026-09-19, after sharpening the ledger of a single round
-(`c(m)` from `16m+24` down to `12m+14`: hits and conflicts charge disjoint cuts,
+(`c(m)` from `16m+24` down to `12m+14` in the formal floor form, or `12m+15`
+in the paper's inequality form: hits and conflicts charge disjoint cuts,
 and only the `2m` class types are charged for the parity repair):
 `python3 meta/check_milestone.py X15 packing-theory` passed all 11 acceptance
 checks again, `make classical-lemmas && make packing-theory` is clean, and
 `Print Assumptions` answers `Closed under the global context` for the nine
 results of `fair_matching.v`. The `..._llm3_statement` of `X15.v` was tightened
-from `c <= 16m + 25` to `c <= 12m + 14`; `..._statement`,
+from `c <= 16m + 25` to `c <= 12m + 14` in the formal floor form
+(`12m + 15` in the paper's form); `..._statement`,
 `..._llm_statement` and `..._llm2_statement` are unchanged.
 
 Validation on 2026-09-18, after the synchronized-rounds rewrite of

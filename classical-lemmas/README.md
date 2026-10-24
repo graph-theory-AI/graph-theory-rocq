@@ -149,7 +149,10 @@ Rocq 9.1.1 with MathComp 2.5.0 and coq-graph-theory 0.9.7.
 
 `packing-theory` uses `necklace/` and `konig/` to prove Conjecture 1.15 of
 arXiv:1611.03196 (`packing-theory/theories/foundations/fair_matching.v`), with
-the linear constant `c(m) = 12m + 14`; the two parts of that proof that are
+the linear constant `c(m) = 12m + 14` in the formal floor form
+`floor(|E(G)|/Delta(G)) <= |S| + c(m)`, or `12m + 15` in the paper's form
+`|S| >= |E(G)|/Delta(G) - c(m)`. These are two readings of the same proof.
+The two parts of that proof that are
 *not* classical — the interpolation of two matchings by a necklace splitting,
 and the synchronized rounds that iterate it — live there, with their only
 client, and not here.  `caratheodory/` was written for an earlier version of
