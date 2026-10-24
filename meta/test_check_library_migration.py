@@ -525,7 +525,8 @@ class ClassicalRoutingTests(unittest.TestCase):
                 ("atlas/theories/conjectures/implications_A2.v", "atlas", ["make", "atlas"]),
                 ("graph-theory-misc/theories/conjectures/X14.v", "graph-theory-misc",
                  ["make", "atlas", "graph-theory-misc"]),
-                ("minor-theory/_CoqProject", "minor-theory", ["make", "atlas", "graph-theory-misc", "minor-theory"])):
+                ("minor-theory/_CoqProject", "minor-theory",
+                 ["make", "atlas", "extremal-graph-theory", "graph-theory-misc", "minor-theory"])):
             with self.subTest(path=path):
                 self.assertEqual(ROUTE.package_source_change(path), package)
                 self.assertIn(build, self.route(path))
