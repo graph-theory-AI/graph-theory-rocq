@@ -450,6 +450,227 @@ class ReportTests(unittest.TestCase):
         self.assertTrue(REPORT.check_kernel(self.spec))
 
 
+class RepairTests(unittest.TestCase):
+    """A reviewed, source-backed strengthening of a migrated complete row (`repair`)."""
+
+    setUp = ReportTests.setUp
+    write = ReportTests.write
+    write_json = ReportTests.write_json
+    command = ReportTests.command
+    commit = ReportTests.commit
+    write_manifests = ReportTests.write_manifests
+    report = ReportTests.report
+    failures = ReportTests.failures
+    rebaseline = ReportTests.rebaseline
+    compile_fixture = ReportTests.compile_fixture
+
+    GUARDED = "forall n, 9 <= n -> local_helper n."
+    RECORD = "meta/STATEMENT_IMPROVEMENTS.md"
+    REPAIRED_DOC = "(** Corpus row: test\n    English statement: every number from 7 on equals itself. *)"
+    ONE_WAY = ("Lemma statement_compat : test_statement -> X0Legacy.statement.\n"
+               "Proof. intros h n hn; refine (h n _); induction hn; "
+               "[repeat constructor | constructor; assumption]. Qed.\n")
+
+    def guarded_baseline(self):
+        """Baseline row guarded by 9 <= n, migrated with an exact iff, as X34 at D12 / D14."""
+        self.original = self.original.replace("forall n, local_helper n.", self.GUARDED)
+        self.live = self.live.replace("forall n, local_helper n.", self.GUARDED)
+        self.cert_source = self.cert_source.replace(
+            "Definition statement : Prop := forall n, Legacy.local_helper n.",
+            "Definition statement : Prop := forall n, 9 <= n -> Legacy.local_helper n.").replace(
+            "Proof. split; intros h n; apply h. Qed.", "Proof. split; intros h n; exact (h n). Qed.")
+        self.write(self.certificate, self.cert_source)
+        self.rebaseline()
+
+    def repair_fixture(self):
+        """Then the reviewed repair 9 -> 7: one guard token, a new doc block, a one-way certificate."""
+        self.guarded_baseline()
+        self.repaired = self.live.replace("9 <= n", "7 <= n").replace(
+            "(** Corpus row: test\n    English statement: every number equals itself. *)", self.REPAIRED_DOC)
+        self.write(self.source, self.repaired)
+        self.cert_source = self.cert_source.replace(
+            "Lemma statement_compat : X0Legacy.statement <-> test_statement.\n"
+            "Proof. split; intros h n; exact (h n). Qed.\n", self.ONE_WAY)
+        self.write(self.certificate, self.cert_source)
+        self.write(self.RECORD, "- test_statement: source repair, the guard 9 <= n became 7 <= n.\n")
+        self.repair = {"replace": ["9 <= n", "7 <= n"],
+                       "doc_block_sha256": REPORT.sha256(self.REPAIRED_DOC),
+                       "record": self.RECORD}
+        self.spec["frozen"][1]["repair"] = copy.deepcopy(self.repair)
+
+    def test_guarded_baseline_passes_without_repair(self):
+        self.guarded_baseline()
+        self.assertEqual(self.failures(), [])
+
+    def test_reviewed_repair_passes(self):
+        self.repair_fixture()
+        self.assertEqual(self.failures(), [])
+
+    def test_repair_is_needed_for_a_changed_statement(self):
+        self.repair_fixture()
+        del self.spec["frozen"][1]["repair"]
+        failures = self.failures()
+        self.assertIn(self.statement + ": statement text unchanged since baseline", failures)
+        self.assertIn(self.statement + ": doc block unchanged since baseline", failures)
+
+    def test_any_other_text_change_is_rejected(self):
+        self.repair_fixture()
+        for live in (self.repaired.replace("local_helper n.\n", "local_helper (n + 0).\n"),
+                     self.repaired.replace("7 <= n", "8 <= n"),
+                     self.live.replace(
+                         "(** Corpus row: test\n    English statement: every number equals itself. *)",
+                         self.REPAIRED_DOC)):
+            with self.subTest(live=live):
+                self.write(self.source, live)
+                self.assertIn(self.statement + ": statement text is the baseline text with exactly "
+                              "the reviewed repair", self.failures())
+
+    def test_replaced_text_must_occur_exactly_once_in_the_baseline(self):
+        self.repair_fixture()
+        for replace in (["8 <= n", "7 <= n"], ["n", "m"]):
+            with self.subTest(replace=replace):
+                self.spec["frozen"][1]["repair"]["replace"] = replace
+                self.assertIn(self.statement + ": statement text is the baseline text with exactly "
+                              "the reviewed repair", self.failures())
+
+    def test_doc_block_must_match_the_pinned_sha(self):
+        self.repair_fixture()
+        self.write(self.source, self.repaired.replace("from 7 on", "from seven on"))
+        self.assertIn(self.statement + ": doc block matches the reviewed repair", self.failures())
+
+    def test_manifest_row_and_legs_stay_frozen_under_a_repair(self):
+        self.repair_fixture()
+        self.row["status"] = "solved"
+        self.write_manifests("v2")
+        self.assertIn("test_statement: manifest row unchanged since baseline", self.failures())
+
+    def test_malformed_repairs_are_rejected(self):
+        self.repair_fixture()
+        good = copy.deepcopy(self.repair)
+        bad = [
+            {**good, "extra": 1},
+            {key: value for key, value in good.items() if key != "record"},
+            {**good, "replace": ["9 <= n"]},
+            {**good, "replace": ["9 <= n", "9 <= n"]},
+            {**good, "replace": ["", "7 <= n"]},
+            {**good, "replace": "9 <= n"},
+            {**good, "doc_block_sha256": "0" * 63},
+            {**good, "doc_block_sha256": "A" * 64},
+            {**good, "record": ""},
+            {**good, "record": "/srv/NOTE.md"},
+            {**good, "record": "../NOTE.md"},
+            {**good, "record": "meta/../NOTE.md"},
+            "9 <= n -> 7 <= n",
+        ]
+        for repair in bad:
+            with self.subTest(repair=repair):
+                self.spec["frozen"][1]["repair"] = repair
+                with self.assertRaisesRegex(ValueError, "repair"):
+                    self.report()
+                with self.assertRaisesRegex(ValueError, "repair"):
+                    REPORT.statement_obligations(self.spec)
+
+    def test_repair_only_on_statement_roles(self):
+        self.repair_fixture()
+        self.spec["frozen"][0]["repair"] = copy.deepcopy(self.repair)
+        with self.assertRaisesRegex(ValueError, "repair is only valid on statement"):
+            self.report()
+
+    def test_original_repair_requires_the_identical_statement_repair(self):
+        self.repair_fixture()
+        original = copy.deepcopy(self.spec["frozen"][1])
+        original.update(kind="original-statement")
+        self.spec["frozen"].append(original)
+        for statement_repair in (None, {**self.repair, "record": "elsewhere"}):
+            with self.subTest(statement_repair=statement_repair):
+                if statement_repair is None:
+                    del self.spec["frozen"][1]["repair"]
+                else:
+                    self.spec["frozen"][1]["repair"] = statement_repair
+                with self.assertRaisesRegex(ValueError, "identical repair on its statement"):
+                    self.report()
+
+    def test_repair_record_must_be_an_in_repository_explanation(self):
+        self.repair_fixture()
+        check = (f"{self.statement}: repair record {{}} is a repository file naming the statement "
+                 "and its repaired text")
+        self.assertNotIn(check.format(self.RECORD), self.failures())
+        self.spec["frozen"][1]["repair"]["record"] = "coordination/evidence/test/NOTE.md"
+        self.assertIn(check.format("coordination/evidence/test/NOTE.md"), self.failures())
+        self.spec["frozen"][1]["repair"]["record"] = self.RECORD
+        for text in ("- another_statement: the guard 9 <= n became 7 <= n.\n",
+                     "- test_statement: a source repair.\n"):
+            with self.subTest(text=text):
+                self.write(self.RECORD, text)
+                self.assertIn(check.format(self.RECORD), self.failures())
+
+    def test_original_repair_cannot_bypass_the_statement_checks(self):
+        """An identical repair on an original-statement leaves the statement entry's checks in force."""
+        self.repair_fixture()
+        original = copy.deepcopy(self.spec["frozen"][1])
+        original["kind"] = "original-statement"
+        self.spec["frozen"].append(original)
+        check = self.statement + ": statement text is the baseline text with exactly the reviewed repair"
+        self.assertNotIn(check, self.failures())
+        self.write(self.source, self.repaired.replace("local_helper n.\n", "local_helper (n + 0).\n"))
+        self.assertIn(check, self.failures())
+
+    def test_compact_report_names_the_repair_only_when_present(self):
+        marker = "Source repairs after migration"
+        self.assertNotIn(marker, REPORT.render_markdown(self.report(), self.spec))
+        self.repair_fixture()
+        report = self.report()
+        self.assertTrue(report["ok"])
+        self.assertEqual(report["statements"][0]["repair"], self.repair)
+        text = REPORT.render_markdown(report, self.spec)
+        self.assertIn(f"{marker}: ONE-WAY source-repair certificates (`live -> frozen`), not migration "
+                      f"equivalences; every other row keeps its exact iff: `{self.statement}` "
+                      f"(`9 <= n` -> `7 <= n`; record `{self.RECORD}`).", text)
+
+    def test_kernel_probe_shape_follows_the_repair(self):
+        self.repair_fixture()
+        bodies, real_run = [], subprocess.run
+
+        def capture(args, **kwargs):   # only the coqc probe is intercepted; git still runs
+            if args[0] != "coqc":
+                return real_run(args, **kwargs)
+            bodies.append(Path(args[-1]).read_text())
+            return subprocess.CompletedProcess(args, 1, "", "")
+        with patch.object(REPORT.subprocess, "run", side_effect=capture):
+            self.assertTrue(REPORT.check_kernel(self.spec))
+        self.assertEqual(len(bodies), 1)
+        self.assertIn(f"Check ({self.module}.statement_compat : {self.statement} -> "
+                      f"{self.module}.X0Legacy.statement).", bodies[0])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_accepts_one_way_certificate_under_repair(self):
+        self.repair_fixture()
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_rejects_reverse_wrong_endpoint_or_guarded_certificate(self):
+        self.repair_fixture()
+        # each lemma COMPILES (compile_fixture asserts rc 0); only the probe's exact type rejects it
+        for lemma in ("Lemma statement_compat : X0Legacy.statement -> test_statement.\n"
+                      "Proof. intros _ n _; exact (eq_refl n). Qed.\n",
+                      "Lemma statement_compat : X0Legacy.statement -> X0Legacy.statement.\n"
+                      "Proof. exact (fun h => h). Qed.\n",
+                      "Lemma statement_compat : False -> (test_statement -> X0Legacy.statement).\n"
+                      "Proof. intros h; destruct h. Qed.\n"):
+            with self.subTest(lemma=lemma):
+                self.write(self.certificate, self.cert_source.replace(self.ONE_WAY, lemma))
+                self.compile_fixture()
+                self.assertTrue(REPORT.check_kernel(self.spec))
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_without_repair_still_requires_the_iff(self):
+        self.repair_fixture()
+        self.compile_fixture()
+        del self.spec["frozen"][1]["repair"]
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
+
 class FrozenRoleTests(unittest.TestCase):
     """A primary row must not hide a mislabeled additional complete Original."""
 

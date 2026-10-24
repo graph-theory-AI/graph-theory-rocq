@@ -59,7 +59,7 @@ Definition x34_linear_forests_and_matching
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2302.13312__00/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2302.13312__00.json
     English statement: (Bonamy, Czyzewska, Kowalik and Pilipczuk 2023, Conjecture 2, arXiv:2302.13312)
-      For every planar finite simple graph G whose maximum degree is odd and at least 9, the edges
+      For every planar finite simple graph G whose maximum degree is odd and at least 7, the edges
       of G can be coloured with (Delta(G)-1)/2 + 1 colours so that each of the first (Delta(G)-1)/2
       colour classes is a linear forest, i.e. a forest of maximum degree at most 2, and the last
       colour class is a matching.
@@ -69,16 +69,20 @@ Definition x34_linear_forests_and_matching
       colour i (this file); [x34_linear_forests_and_matching col] - the first q colours are linear
       forests and the last is a matching (this file); [x34_edge_set G] (this file); [wagner_planar],
       [is_forest], [Delta] (GTBase base/theories/base.v).
-    Notes: DISCREPANCY with the corpus text: the source conjecture assumes Delta >= 7, whereas the
-      Rocq guard is 9 <= Delta G. The formal statement is therefore WEAKER than the conjecture, and
-      it excludes exactly the case Delta = 7, which the corpus records as the only case still open;
-      the cases Delta >= 9 are already proved in the literature. This is recorded in
-      meta/STATEMENT_IMPROVEMENTS.md. The body is left untouched here, WP4 changes comments only. *)
+    Notes: REPAIRED on 2026-10-24 (source re-read at the upstream pin b72c5857): the source
+      conjecture assumes odd Delta >= 7. Until this repair the guard was 9 <= Delta G, following
+      a misreading in meta/X10-X110_faithfulness_audit.md l.53. That guard made the row WEAKER than
+      the conjecture: it excluded exactly the case Delta = 7, which the corpus records as the only
+      case still open (Delta >= 9 is proved in the literature). The repair strengthens the row
+      toward the source. The library-migration certificates (D12 edge_colour_class.v, D14
+      linear_forest.v) keep the pre-repair row frozen with its 9 guard and prove that this row
+      implies it; see the `repair` entries of their migration specs and the X34 entry of
+      meta/STATEMENT_IMPROVEMENTS.md. *)
 Definition planar_odd_degree_linear_forests_plus_matching_statement : Prop :=
   forall G : sgraph,
     wagner_planar G ->
     odd (Delta G) ->
-    9 <= Delta G ->
+    7 <= Delta G ->
     let q := (Delta G - 1) %/ 2 in
     exists col : {set G} -> 'I_(q.+1),
       x34_linear_forests_and_matching col.
