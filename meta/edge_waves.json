@@ -1646,16 +1646,14 @@
    "tier": "done",
    "wave": "prior",
    "host": "cycle-theory",
-   "state": "conditional",
-   "proof": "petersen_coloring_implies_berge_fulkerson",
-   "external": [
-    "external_petersen_BF_cover_statement"
-   ],
+   "state": "verified",
+   "proof": "unconditional_petersen_coloring_implies_berge_fulkerson",
+   "external": [],
    "reason": "",
-   "proved_by": "prior waves",
-   "reviewed_by": "prior second readers (see meta/X191-X210 and X211-X229 faithfulness audits)",
-   "reviewed_at": "2026-09-23",
-   "note": "Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (carried as the explicit Petersen-side hypothesis external_petersen_BF_cover_statement) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f"
+   "proved_by": "Arthur (mathematics tranche 1, 2026-10-23): petersen_BF_cover proves external_petersen_BF_cover_statement (classical-lemmas TODO 8); the conditional petersen_coloring_implies_berge_fulkerson of the prior waves is kept",
+   "reviewed_by": "Marcol (Claude Opus 5.5 via Claude Code, session c3a9758a-e037-427e-9161-450e0098bf44), independent reviewer; author Arthur",
+   "reviewed_at": "2026-10-23",
+   "note": "Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (petersen_BF_cover, a finite check on the Pedge encoding) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f"
   },
   "petersen_coloring_statement->three_4_flows_statement:implies": {
    "gc": "e032",

@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py mregular --details /tmp/migrati
 
 - Canonical: `GTBase.base.mregular`.
 - Baseline: `58f2862aa45b932cebb4cc59401a6b16f5d0c82a`.
-- Scope: 3 helpers, 11 statements, 16 frozen objects, 67 recorded references.
-- Source checks: 191/191 pass; consistent.
+- Scope: 3 helpers, 11 statements, 16 frozen objects, 69 recorded references.
+- Source checks: 193/193 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

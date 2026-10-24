@@ -1402,6 +1402,13 @@ def local_closure(decls: dict[str, dict], name: str) -> set[str]:
     return seen
 
 
+def frozen_legs(entry):
+    """A leg-state overlay entry without its DERIVED `edges` leg. sync_edge_legs.py derives that leg from the
+    edge evidence and gates it itself (sync_edge_legs --check), and a newly proved edge legitimately moves it;
+    every other field (statement, grounding, correspondence, audit_page, commit, package, note) stays frozen."""
+    return {k: v for k, v in entry.items() if k != "edges"} if isinstance(entry, dict) else entry
+
+
 def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     validate_frozen_kinds(spec)
     base = spec["baseline_commit"]
@@ -1600,7 +1607,9 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         corpus = row_now.get("_corpus")
         if not non_corpus:
             before_legs, now_legs = legs_base.get(corpus, {}), legs_now.get(corpus, {})
-            check(slug in before_legs and before_legs.get(slug) == now_legs.get(slug),
+            # the derived `edges` leg is exempt (frozen_legs); every other field of the entry stays frozen
+            check(slug in before_legs
+                  and frozen_legs(before_legs.get(slug)) == frozen_legs(now_legs.get(slug)),
                   f"{formal}: leg-state entry unchanged since baseline")
         statements.append({
             "qualified": obj["qualified"],

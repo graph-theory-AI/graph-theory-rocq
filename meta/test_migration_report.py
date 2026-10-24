@@ -266,6 +266,25 @@ class ReportTests(unittest.TestCase):
         self.write_json("meta/opg_legs_state.json", {"entries": {"test": {"statement": "blocked"}}})
         self.assertIn("test_statement: leg-state entry unchanged since baseline", self.failures())
 
+    def test_only_the_derived_edges_leg_may_move(self):
+        # sync_edge_legs.py derives and gates the `edges` leg; every other field of the entry stays frozen
+        self.write_manifests("opg")
+        self.write_json("meta/opg_legs_state.json", {"entries": {"test": {"statement": "done", "edges": "partial"}}})
+        self.rebaseline()
+        self.spec["frozen"][1]["corpus"] = "opg"
+        self.assertEqual(self.failures(), [])
+        self.write_json("meta/opg_legs_state.json", {"entries": {"test": {"statement": "done", "edges": "done"}}})
+        self.assertEqual(self.failures(), [])
+        self.write_json("meta/opg_legs_state.json", {"entries": {"test": {"statement": "partial", "edges": "done"}}})
+        self.assertIn("test_statement: leg-state entry unchanged since baseline", self.failures())
+        self.write_json("meta/opg_legs_state.json", {"entries": {"test": {"statement": "done", "edges": "done",
+                                                                          "note": "changed"}}})
+        self.assertIn("test_statement: leg-state entry unchanged since baseline", self.failures())
+        for key, value in (("grounding", "done"), ("commit", "abc1234")):
+            self.write_json("meta/opg_legs_state.json", {"entries": {"test": {"statement": "done", "edges": "done",
+                                                                              key: value}}})
+            self.assertIn("test_statement: leg-state entry unchanged since baseline", self.failures())
+
     def test_non_corpus_requires_explicit_marker(self):
         self.write_manifests(None)
         self.rebaseline()
