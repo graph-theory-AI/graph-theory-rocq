@@ -33,6 +33,11 @@ witness; certificates are pointwise iffs at every parameter.
 Every occurrence of a complete row requires a statement role and an exact iff
 probe, independently of its label. New reused nonstatement objects use the
 "historical" role; the existing named historical roles remain supported aliases.
+A statement or original-statement object may carry a "repair": a reviewed,
+source-backed strengthening of an already migrated row. It names the one exact
+replacement that turns the baseline statement text into the live one, pins the
+repaired doc block by sha256 and cites its record. The frozen copy stays
+verbatim; the exact probe of the certificate becomes `live -> frozen`.
 It verifies that
 
   * each frozen copy equals its original declaration, after comment stripping,
@@ -47,7 +52,9 @@ It verifies that
     helper or chain declaration of this family (reported, not hidden, when an
     earlier family's certificate does);
   * statement texts, their doc blocks, manifest rows and leg states are unchanged
-    since the baseline, and the listed distinct name matches are untouched;
+    since the baseline (under a repair: the text is the baseline text with exactly
+    the reviewed replacement and the doc block has the pinned hash), and the
+    listed distinct name matches are untouched;
   * every certificate theorem is declared in its certificate file.
 
 --write refreshes only the compact committed meta/migration_reports/FAMILY.md;
@@ -100,6 +107,7 @@ HISTORICAL_KINDS = frozenset({
     "b3-frozen", "b4-frozen", "c5-frozen", "m1-frozen",
 })
 FROZEN_KINDS = STATEMENT_KINDS | HISTORICAL_KINDS | {"source", "chain", "original-chain"}
+REPAIR_KEYS = frozenset({"replace", "doc_block_sha256", "record"})
 
 
 def sha256(text: str) -> str:
@@ -1249,6 +1257,39 @@ def validate_frozen_kinds(spec: dict) -> None:
             raise ValueError(f"frozen[{index}]: unsupported kind {kind!r}; "
                              "use a statement role for complete rows and historical "
                              "for reused nonstatement objects")
+    validate_repairs(spec)
+
+
+def validate_repairs(spec: dict) -> None:
+    """Schema of `repair` (a reviewed strengthening of a migrated complete row).
+
+    Only on a statement or original-statement object that is not an enrolled
+    additional or parametric statement. An original-statement repair needs the
+    identical repair on the statement object of the same row, which carries the
+    text and doc-block checks."""
+    repaired = [(index, obj) for index, obj in enumerate(spec["frozen"]) if "repair" in obj]
+    if not repaired:
+        return
+    enrolled = additional_statement_names(spec) | set(parametric_statement_entries(spec))
+    statement_repairs = {obj["qualified"]: obj.get("repair") for obj in spec["frozen"]
+                         if obj.get("kind") == "statement"}
+    for index, obj in repaired:
+        repair, what = obj["repair"], f"frozen[{index}] {obj.get('qualified')}"
+        if obj.get("kind") not in STATEMENT_KINDS or obj.get("qualified") in enrolled:
+            raise ValueError(f"{what}: repair is only valid on statement or original-statement objects "
+                             "that are not enrolled additional or parametric statements")
+        replace = repair.get("replace") if isinstance(repair, dict) else None
+        if (not isinstance(repair, dict) or set(repair) != REPAIR_KEYS
+                or not isinstance(replace, list) or len(replace) != 2
+                or not all(isinstance(text, str) and text for text in replace)
+                or replace[0] == replace[1]
+                or not isinstance(repair["doc_block_sha256"], str)
+                or not re.fullmatch(r"[0-9a-f]{64}", repair["doc_block_sha256"])
+                or not isinstance(repair["record"], str) or not repair["record"]):
+            raise ValueError(f"{what}: repair must be {{replace: [old, new] (two distinct nonempty strings), "
+                             "doc_block_sha256: 64 lowercase hex, record: nonempty string}")
+        if obj["kind"] == "original-statement" and statement_repairs.get(obj["qualified"]) != repair:
+            raise ValueError(f"{what}: an original-statement repair needs the identical repair on its statement")
 
 
 def statement_obligations(spec: dict, *, expected_statements: set[str] | None = None,
@@ -1364,7 +1405,11 @@ def check_kernel(spec: dict) -> list[str]:
             if obj["qualified"] in additional_statement_names(spec):
                 body.append(f"Check (@{frozen} : Prop).")
                 body.append(f"Check (@{obj['qualified']} : Prop).")
-            body.append(f"Check ({obj['certificate']} : {frozen} <-> {obj['qualified']}).")
+            if "repair" in obj:
+                # a reviewed strengthening: the repaired live row implies the frozen one
+                body.append(f"Check ({obj['certificate']} : {obj['qualified']} -> {frozen}).")
+            else:
+                body.append(f"Check ({obj['certificate']} : {frozen} <-> {obj['qualified']}).")
         body.extend(f"Print Assumptions {name}." for name in sorted(certificates[package]))
         with tempfile.TemporaryDirectory(prefix="migration-exact-type-") as tmp:
             probe = Path(tmp) / "migration_exact_type.v"
@@ -1591,12 +1636,24 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         check(set(affected) <= frozen_here,
               f"{obj['qualified']}: frozen chain covers {affected}",
               f"not frozen: {sorted(set(affected) - frozen_here)}")
-        text_same = find_decl(base_src, obj["name"])["text"] == \
-            find_decl(live_src, obj["name"])["text"]
-        check(text_same, f"{obj['qualified']}: statement text unchanged since baseline")
+        base_text, live_text = find_decl(base_src, obj["name"])["text"], find_decl(live_src, obj["name"])["text"]
+        text_same = base_text == live_text
         doc_same = doc_block(base_src, obj["name"]) == doc_block(live_src, obj["name"])
-        check(doc_same and doc_block(live_src, obj["name"]) is not None,
-              f"{obj['qualified']}: doc block unchanged since baseline")
+        repair = obj.get("repair")
+        if repair is None:
+            check(text_same, f"{obj['qualified']}: statement text unchanged since baseline")
+            check(doc_same and doc_block(live_src, obj["name"]) is not None,
+                  f"{obj['qualified']}: doc block unchanged since baseline")
+        else:
+            old, new = repair["replace"]
+            occurrences = base_text.count(old)
+            check(occurrences == 1 and live_text == base_text.replace(old, new),
+                  f"{obj['qualified']}: statement text is the baseline text with exactly the reviewed repair",
+                  f"{old!r} occurs {occurrences} times in the baseline text" if occurrences != 1
+                  else f"expected: {base_text.replace(old, new)} | live: {live_text}")
+            check(sha256(doc_block(live_src, obj["name"]) or "") == repair["doc_block_sha256"]
+                  and doc_block(live_src, obj["name"]) is not None,
+                  f"{obj['qualified']}: doc block matches the reviewed repair")
         formal = obj["name"]
         base_rows, now_rows = rows_for_object(rows_base, obj), rows_for_object(rows_now, obj)
         non_corpus = obj.get("non_corpus", False)
@@ -1639,6 +1696,8 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
             "doc_block_unchanged": doc_same,
             "statement_text_unchanged": text_same,
         })
+        if repair is not None:
+            statements[-1]["repair"] = repair
         if obj["qualified"] in parametric_entries:
             parametric_entry = parametric_entries[obj["qualified"]]
             statements[-1].update({
@@ -1783,6 +1842,13 @@ def render_markdown(report: dict, spec: dict) -> str:
     for statement in report["statements"]:
         lines.append(f"| `{statement['qualified']}` / {statement['row_id']} "
                      f"| `{statement['certificate']}` |")
+    repaired = [statement for statement in report["statements"] if "repair" in statement]
+    if repaired:
+        lines += ["", "Repaired after migration (a reviewed strengthening; the kernel certificate is "
+                  "`live -> frozen`): " + ", ".join(
+                      f"`{statement['qualified']}` (`{statement['repair']['replace'][0]}` -> "
+                      f"`{statement['repair']['replace'][1]}`; record `{statement['repair']['record']}`)"
+                      for statement in repaired) + "."]
     parametric = [statement for statement in report["statements"] if "parameters" in statement]
     if parametric:
         lines += ["", "Section-parametric endpoints (pointwise certificates over every discharged parameter): "
@@ -1845,10 +1911,17 @@ def render_details(report: dict, spec: dict) -> str:
         cert = f"`{st['certificate']}`"
         if st.get("original_certificate"):
             cert += f"; end-to-end `{st['original_certificate']}`"
+        if "repair" in st:
+            cert += " (repair: `live -> frozen`)"
+            metadata = (f"repaired: `{st['repair']['replace'][0]}` -> `{st['repair']['replace'][1]}`, "
+                        f"doc block sha256 `{st['repair']['doc_block_sha256'][:16]}…`, "
+                        f"record `{st['repair']['record']}`")
+        else:
+            metadata = 'unchanged' if st['statement_text_unchanged'] and st['doc_block_unchanged'] else 'CHANGED'
         lines.append(
             f"| {st['row_id']} | {st['phase']} | `{st['qualified']}` | {st['status']} "
             f"| {(st['legs'] or {}).get('statement')} | {chain} | {cert} "
-            f"| {'unchanged' if st['statement_text_unchanged'] and st['doc_block_unchanged'] else 'CHANGED'} |")
+            f"| {metadata} |")
     parametric = [st for st in report["statements"] if "parameters" in st]
     if parametric:
         lines += ["", "## Section-parametric endpoints", "",

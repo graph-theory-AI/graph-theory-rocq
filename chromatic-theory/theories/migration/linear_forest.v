@@ -12,10 +12,14 @@
     [X34Legacy] freezes the chain [x34_linear_forests_and_matching] over the frozen
     source, with the live matching clause, and the row with its exact [let q], the
     same colouring for the widened linear-forest colours and the [ord_max] matching,
-    and the full planar / odd / [9 <= Delta G] guards (the documented 9-vs-7 defect
-    is kept).  The complete row before M1, D12 and D14 is D12's [X34Original] in
-    Chromatic.migration.edge_colour_class, borrowed with its certificate.  The
-    regeneration spec is meta/migration_reports/linear_forest.spec.json. *)
+    and the full planar / odd / [9 <= Delta G] guards of the D14 baseline, frozen
+    verbatim.  The live row was REPAIRED on 2026-10-24 to the source's
+    [7 <= Delta G] (a strengthening).  The row certificate is therefore one-way: the
+    live row implies the frozen one, because the converse is the open case
+    Delta = 7 (the spec's [repair] entries).  The complete row before M1, D12 and
+    D14 is D12's [X34Original] in Chromatic.migration.edge_colour_class, borrowed
+    with its certificate.  The regeneration spec is
+    meta/migration_reports/linear_forest.spec.json. *)
 
 From GTBase Require Import base.
 From Chromatic.conjectures Require Import X34.
@@ -66,7 +70,13 @@ Lemma x34_linear_forests_and_matching_compat
   X34Legacy.linear_forests_and_matching col <-> x34_linear_forests_and_matching col.
 Proof. exact: iff_refl. Qed.
 
+(** Repaired row (2026-10-24): the live guard [7 <= Delta G] is weaker than the
+    frozen [9 <= Delta G], so the live row implies the frozen one by conversion of
+    the body.  The converse is the open case Delta = 7. *)
 Lemma planar_odd_degree_linear_forests_plus_matching_statement_compat :
-  X34Legacy.planar_odd_degree_linear_forests_plus_matching_statement <->
-  planar_odd_degree_linear_forests_plus_matching_statement.
-Proof. exact: iff_refl. Qed.
+  planar_odd_degree_linear_forests_plus_matching_statement ->
+  X34Legacy.planar_odd_degree_linear_forests_plus_matching_statement.
+Proof.
+move=> row G pl od ge.
+exact: (row G pl od (leq_trans (isT : 7 <= 9) ge)).
+Qed.

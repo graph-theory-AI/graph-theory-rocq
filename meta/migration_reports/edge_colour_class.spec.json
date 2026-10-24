@@ -48,7 +48,8 @@
     "D12 (first stage of the colour-class promotion) turns the six X34/X212/X23 helpers edge_colour_rel and colour_graph into aliases of GTBase.edge_colourings.edge_colour_class_rel col (pred1 i) and edge_colour_class col (pred1 i), the Extremal area colour-class contract promoted under distinct names; headers and implicit arguments unchanged, no guard.",
     "Frozen at the D10 pin in <area>/theories/migration/edge_colour_class.v: the six sources and the six opaque symmetry/irreflexivity lemmas with their original scripts (relation renamed to Legacy), the linear-forest and linear-arboricity chains and the three rows; the six live lemmas keep their headers and are proved by the canonical lemmas. Graph certificates are adjacency equality, the identity isomorphism and its identity carrier map.",
     "Four whole iff, kernel-checked: the three current rows by conversion (is_forest and Delta read only carrier and adjacency), and the complete X34 Original over M1's frozen raw edge set at 061154c (same colouring for the widened linear-forest colours and the ord_max matching, exact let q, planar / odd / 9 <= Delta guards with the documented 9-vs-7 defect kept). X212 and X23 keep the supplied colouring, attained minimum and universal minimality.",
-    "Second stage: Extremal.foundations.edge_colourings.cc_rel and colour_class are now transparent public adapters of the same contract, with the original Section binders, carrier and Arguments; only cc_sym/cc_irrefl changed proofs. The whole original Section is frozen in extremal-graph-theory/theories/migration/edge_colour_class.v, with the X229 row (kernel conversion) and the complete X229Original over C6's raw proper_ecolouring at 3011c28: 7 appended mappings (34 total) and 2 whole iff (6 total). The C6 certificate file and mappings are unchanged."
+    "Second stage: Extremal.foundations.edge_colourings.cc_rel and colour_class are now transparent public adapters of the same contract, with the original Section binders, carrier and Arguments; only cc_sym/cc_irrefl changed proofs. The whole original Section is frozen in extremal-graph-theory/theories/migration/edge_colour_class.v, with the X229 row (kernel conversion) and the complete X229Original over C6's raw proper_ecolouring at 3011c28: 7 appended mappings (34 total) and 2 whole iff (6 total). The C6 certificate file and mappings are unchanged.",
+    "Repair (2026-10-24, X34 re-audit; record coordination/evidence/math-2026-10-24/x34-source-reading-by-marcol/NOTE.md): the live X34 row's guard 9 <= Delta G became the source's 7 <= Delta G, a strengthening. The frozen X34Legacy and X34Original rows keep the D12 text verbatim; their statement and original-statement entries carry the identical repair (one exact text replacement, the pinned doc block, the record), and both certificates are kernel-checked as live -> frozen (the converse is the open case Delta = 7)."
   ],
   "kernel_evidence": "Exact types/implicit status of the six conjecture sources and lemmas and of the two Extremal public sources (first and second stage); all six whole iff; the 23-file discovery reverse closure of the three conjecture roots (323 old proof headers) and, separately, the actual 55-consumer closure of the public GTBase append (2396 old declarations in 130 files byte-identical); the 10-file Extremal reverse closure (49 old proof headers); Print Assumptions, About-resolved strict closures (frozen/live/M1/C6) and negatives, through the pinned image. /srv/graph-theory-rocq/coordination/evidence/D12-by-lancelot/ and D12-stage2-by-lancelot/ (outside the repository)",
   "known_stale_snapshots": {
@@ -172,7 +173,12 @@
         "x34_linear_forests_and_matching": "linear_forests_and_matching"
       },
       "certificate": "Chromatic.migration.edge_colour_class.planar_odd_degree_linear_forests_plus_matching_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": ["9 <= Delta G", "7 <= Delta G"],
+        "doc_block_sha256": "2e2bb357bd196aef7194d49d0bed628c5f1ad0794e32f22340b176a1760ce3e1",
+        "record": "coordination/evidence/math-2026-10-24/x34-source-reading-by-marcol/NOTE.md"
+      }
     },
     {
       "kind": "historical",
@@ -232,6 +238,11 @@
       "certificate": "Chromatic.migration.edge_colour_class.planar_odd_degree_linear_forests_plus_matching_statement_original_compat",
       "commit": "061154c33b0b464be13dbb664acd24e2b34f2bc4",
       "corpus": "v2",
+      "repair": {
+        "replace": ["9 <= Delta G", "7 <= Delta G"],
+        "doc_block_sha256": "2e2bb357bd196aef7194d49d0bed628c5f1ad0794e32f22340b176a1760ce3e1",
+        "record": "coordination/evidence/math-2026-10-24/x34-source-reading-by-marcol/NOTE.md"
+      },
       "binding_note": "Bound to 061154c, M1's parent: the X34 row before M1 and D12; every other declaration of its closure is unchanged since, so the D12 Legacy colour graph is reused."
     },
     {
