@@ -2104,7 +2104,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "petersen_coloring_statement->the_berge_fulkerson_statement:implies:conditional",
+   "rocq_edge": "petersen_coloring_statement->the_berge_fulkerson_statement:implies:verified",
    "argument": "Both conjectures concern bridgeless cubic graphs, so the hypothesis classes coincide. A Petersen coloring maps the three edges incident to any vertex of G to three mutually adjacent edges of the Petersen graph P, i.e., to the edge-triple at a vertex of P. P has six perfect matchings covering every edge of P exactly twice; the preimage under the coloring of each is a perfect matching of G (exactly one of the three edges at each vertex of G is mapped into it), and each edge e of G lies in exactly two of the six preimages, since f(e) lies in exactly two of P's matchings. This is Jaeger's classical observation, and the OPG source context states explicitly that the Petersen coloring conjecture implies the Berge-Fulkerson conjecture.",
    "citations": [
     "http://www.openproblemgarden.org/op/petersen_coloring_conjecture"
@@ -2282,7 +2282,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "circular_flow_numbers_of_r_graphs_statement->circular_flow_number_of_regular_class_1_graphs_statement:implies:conditional",
+   "rocq_edge": "circular_flow_numbers_of_r_graphs_statement->circular_flow_number_of_regular_class_1_graphs_statement:implies:verified",
    "argument": "Hypothesis-class containment, stated explicitly in the source's OPG context: every (2t+1)-regular class 1 graph decomposes into 2t+1 perfect matchings, and each perfect matching must contain an edge of every odd cut ∂(X) (a matching covering an odd-cardinality X cannot match X internally), so |∂(X)| ≥ 2t+1 and the graph is a (2t+1)-graph. Hence the r-graph bound F_c ≤ 2+2/t restricted to class 1 regular graphs gives the target for all t > 1. The residual t = 1 case of the target is a known theorem (3-edge-colorable cubic graphs have F_c ≤ 4, noted in the target's context), so the implication holds. Both are now disproved, consistent with the direction.",
    "citations": [
     "http://www.openproblemgarden.org/op/circular_flow_numbers_of_r_graphs"
