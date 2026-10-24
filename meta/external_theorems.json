@@ -58,9 +58,8 @@
       "citation": "W. T. Tutte, On the imbedding of linear graphs in surfaces, Proc. London Math. Soc. 51 (1949) 474-483, and A contribution to the theory of chromatic polynomials, Canad. J. Math. 6 (1954) 80-91, DOI 10.4153/CJM-1954-010-9; cited as 'Tutte's characterization of cubic graphs with flow number 4' by E. Steffen, Edge-colorings and circular flow numbers on regular graphs, J. Graph Theory 79 (2015) 1-7",
       "claim": "A cubic graph has a nowhere-zero 4-flow if and only if it is 3-edge-colourable; hence every loopless 3-regular class-1 multigraph with at least one vertex has flow number, and so circular flow number, at most 4 -- a nowhere-zero rational r-flow for every rational r > 4.",
       "kind": "theorem",
-      "used_by": [
-        "circular_flow_numbers_of_r_graphs_statement->circular_flow_number_of_regular_class_1_graphs_statement:implies"
-      ],
+      "used_by": [],
+      "formalized_by": "tutte_class1_cubic (cycle-theory/theories/conjectures/implications_D1.v), 2026-10-24, classical-lemmas TODO 6 (the direction stated here: a 3-edge-colouring gives a nowhere-zero 4-flow): edge circular_flow_numbers_of_r_graphs_statement->circular_flow_number_of_regular_class_1_graphs_statement:implies is now verified (unconditional_circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs)",
       "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
       "review": "PASS -- a theorem (Tutte): a 3-edge-colouring of a loopless cubic multigraph is a nowhere-zero Z2xZ2-flow, hence a nowhere-zero 4-flow, hence a real r-flow for every r >= 4, so circular_flow_number_le G 4. is_class1 with mreg G 3 and loopless is exactly '3-edge-colourable cubic'. Not stronger than needed; the 0 < #|G| guard is harmless (the empty graph satisfies the conclusion anyway)."
     },
