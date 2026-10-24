@@ -20,9 +20,9 @@
   "edges": 144,
   "by_status": {
    "candidate": 32,
-   "conditional": 13,
+   "conditional": 12,
    "refuted-direction": 33,
-   "verified": 66
+   "verified": 67
   },
   "by_kind": {
    "equiv": 6,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 82
+  "proved_theorems": 83
  },
  "edges": [
   {
@@ -1367,13 +1367,11 @@
    "from": "petersen_coloring_statement",
    "to": "the_berge_fulkerson_statement",
    "kind": "implies",
-   "status": "conditional",
+   "status": "verified",
    "cite": "F. Jaeger, A survey of the cycle double cover conjecture, in Cycles in Graphs, Ann. Discrete Math. 27 (1985) 1-12",
-   "proof": "petersen_coloring_implies_berge_fulkerson",
-   "note": "Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (carried as the explicit Petersen-side hypothesis external_petersen_BF_cover_statement) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f",
-   "external": [
-    "external_petersen_BF_cover_statement"
-   ],
+   "proof": "unconditional_petersen_coloring_implies_berge_fulkerson",
+   "note": "Jaeger: a Petersen colouring pulls back the Petersen graph's own six perfect matchings (petersen_BF_cover, a finite check on the Pedge encoding) to a Berge-Fulkerson cover of G; at each cubic vertex the three incident edges form a line-adjacent triple, mapped to a Petersen claw met once by each matching, so every pullback is a perfect matching, and covered-twice transfers along f",
+   "external": [],
    "sources": [
     "cycle-theory/implications_U10.v"
    ]
