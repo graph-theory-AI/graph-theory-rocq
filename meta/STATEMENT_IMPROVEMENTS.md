@@ -1571,6 +1571,14 @@ them.
   therefore excludes exactly `Delta = 7`, which the corpus `status_semantics` records as the only
   case still open (`Delta >= 9` is proved). Severity: **too weak** (the encoded range is already a
   theorem).
+  Erratum (source re-read 2026-10-24 at the upstream pin `b72c5857`): Conjecture 2 is stated for
+  odd `Delta >= 7`, so this entry stands. The `9 <= Delta G` guard came from
+  `meta/X10-X110_faithfulness_audit.md` l.53, whose reading that the source "states odd `Δ ≥ 9`"
+  was the error (odd `Delta >= 9` is the paper's proved consequence). The `9 -> 7` repair
+  strengthens the row toward the source. It is pending migration-gate support, because
+  `meta/migration_report.py` requires exact iff certificates for the frozen X34 rows
+  (`migration/edge_colour_class.v`, `migration/linear_forest.v`). Record:
+  `coordination/evidence/math-2026-10-24/x34-source-reading-by-marcol/NOTE.md`.
 - `studies:std_dreier_toru_czyk_conjecture_merge_width_polynomi` (`X124.v`, leg `blocked`) — the
   merge expression is consumed only through `x124_expr_leaves`, so the "bounded merge-width"
   antecedent restricts nothing and the implication collapses to "every class is polynomially
