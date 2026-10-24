@@ -7,13 +7,15 @@ Full evidence: `python3 meta/migration_report.py linear_forest --details /tmp/mi
 - Canonical: `GTBase.path_trees.linear_forest`.
 - Baseline: `1123673d3b2910361a05bc5381fdecd68c610951`.
 - Scope: 3 helpers, 3 statements, 36 frozen objects, 35 recorded references.
-- Source checks: 223/223 pass; consistent.
+- Source checks: 224/224 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
 | `Chromatic.conjectures.X34.planar_odd_degree_linear_forests_plus_matching_statement` / arxiv:2302.13312#00 | `Chromatic.migration.linear_forest.planar_odd_degree_linear_forests_plus_matching_statement_compat` |
 | `Cycle.conjectures.X212.linear_arboricity_regular_statement` / bm:bm-016 | `Cycle.migration.linear_forest.linear_arboricity_regular_statement_compat` |
 | `Topological.conjectures.X23.planar_linear_arboricity_statement` / studies:std_planar_linear_arboricity_conjecture | `Topological.migration.linear_forest.planar_linear_arboricity_statement_compat` |
+
+Source repairs after migration: ONE-WAY source-repair certificates (`live -> frozen`), not migration equivalences; every other row keeps its exact iff: `Chromatic.conjectures.X34.planar_odd_degree_linear_forests_plus_matching_statement` (`9 <= Delta G` -> `7 <= Delta G`; record `meta/STATEMENT_IMPROVEMENTS.md`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py linear_forest --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
