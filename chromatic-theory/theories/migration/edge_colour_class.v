@@ -21,10 +21,14 @@
     061154c) in the matching clause, with the same colouring for the widened
     linear-forest colours and the [ord_max] matching, the exact [let q], and the
     full planar / odd / [9 <= Delta G] guards.  Both rows stay frozen verbatim with
-    the [9 <= Delta G] guard of the D12 baseline.  The live row was REPAIRED on
-    2026-10-24 to the source's [7 <= Delta G] (a strengthening).  The two row
-    certificates are therefore one-way: the live row implies each frozen row,
-    because the converse is the open case Delta = 7 (the spec's [repair] entries).
+    the [9 <= Delta G] guard of the D12 baseline.
+
+    SOURCE REPAIR (2026-10-24): the live X34 row now has the source's
+    [7 <= Delta G] (arXiv:2302.13312, Conjecture 2: odd Delta >= 7; see the X34
+    entry of meta/STATEMENT_IMPROVEMENTS.md).  Its two row certificates below are
+    therefore ONE-WAY SOURCE-REPAIR certificates (live -> frozen), NOT migration
+    equivalences: the converse is the open case Delta = 7.  They are bound by the
+    spec's [repair] entries.  Every other row of this family keeps its exact iff.
     The regeneration spec is meta/migration_reports/edge_colour_class.spec.json. *)
 
 From GTBase Require Import base.
@@ -130,9 +134,10 @@ Lemma x34_linear_forests_and_matching_compat
   X34Legacy.linear_forests_and_matching col <-> x34_linear_forests_and_matching col.
 Proof. exact: iff_refl. Qed.
 
-(** Repaired row (2026-10-24): the live guard [7 <= Delta G] is weaker than the
-    frozen [9 <= Delta G], so the live row implies the frozen one by conversion of
-    the body.  The converse is the open case Delta = 7. *)
+(** One-way source-repair certificate, not a migration equivalence (2026-10-24):
+    the live guard [7 <= Delta G] is weaker than the frozen [9 <= Delta G], so the
+    live row implies the frozen one by conversion of the body.  The converse is
+    the open case Delta = 7. *)
 Lemma planar_odd_degree_linear_forests_plus_matching_statement_compat :
   planar_odd_degree_linear_forests_plus_matching_statement ->
   X34Legacy.planar_odd_degree_linear_forests_plus_matching_statement.
@@ -186,7 +191,7 @@ split=> -[lf mc]; split.
 - exact/x34_matching_colour_original_compat.
 Qed.
 
-(** Repaired row (2026-10-24): one-way, as above. *)
+(** One-way source-repair certificate, not a migration equivalence, as above. *)
 Lemma planar_odd_degree_linear_forests_plus_matching_statement_original_compat :
   planar_odd_degree_linear_forests_plus_matching_statement ->
   X34Original.planar_odd_degree_linear_forests_plus_matching_statement.

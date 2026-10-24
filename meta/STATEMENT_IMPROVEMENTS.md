@@ -1571,15 +1571,29 @@ them.
   therefore excludes exactly `Delta = 7`, which the corpus `status_semantics` records as the only
   case still open (`Delta >= 9` is proved). Severity: **too weak** (the encoded range is already a
   theorem).
-  Erratum (source re-read 2026-10-24 at the upstream pin `b72c5857`): Conjecture 2 is stated for
-  odd `Delta >= 7`, so this entry stands. The `9 <= Delta G` guard came from
-  `meta/X10-X110_faithfulness_audit.md` l.53, whose reading that the source "states odd `Δ ≥ 9`"
-  was the error (odd `Delta >= 9` is the paper's proved consequence). The `9 -> 7` repair
-  strengthens the row toward the source. **REPAIRED on 2026-10-24:** the live guard is
-  `7 <= Delta G`. The frozen X34 rows (`migration/edge_colour_class.v`,
-  `migration/linear_forest.v`) keep the `9` guard, and their certificates are kernel-checked as
-  `live -> frozen`, through the `repair` entries of their migration specs (`meta/migration_report.py`
-  checks the one exact replacement, the pinned doc block and the one-way probe). Record:
+  **Source re-read and repair (2026-10-24).** The source is Bonamy, Czyżewska, Kowalik and
+  Pilipczuk, *Partitioning edges of a planar graph into linear forests and a matching*,
+  https://arxiv.org/abs/2302.13312. Its Conjecture 2 (odd `Delta >= 7`) reads: "For every planar
+  graph G of odd maximum degree Δ ≥ 7 the edges of G can be partitioned into (Δ−1)/2 linear forests
+  and one matching."
+  - The corpus row at the upstream pin `b72c5857` quotes the same text, and its status records
+    Δ = 7 as the only open case.
+  - The project supervisor's primary-source reading (2026-10-24, arXiv:2302.13312v1, §1) confirms
+    that Conjecture 2 uses odd Δ ≥ 7. The paper's Theorem 2 treats maximum degree at most 9, which
+    settles Δ = 9, and known results cover odd Δ ≥ 11.
+  - The `9 <= Delta G` guard came from `meta/X10-X110_faithfulness_audit.md` l.53, whose reading
+    that the source "states odd `Δ ≥ 9`" was the error (odd `Delta >= 9` is the paper's proved
+    consequence).
+  **REPAIRED:** the live guard is `7 <= Delta G`. This repairs the source correspondence; it does not
+  prove the open case Δ = 7. It is a SOURCE REPAIR, not a migration equivalence:
+  - the D12 and D14 library-migration certificates (`migration/edge_colour_class.v`,
+    `migration/linear_forest.v`) keep the pre-repair rows frozen with the `9` guard;
+  - they now prove only that the live row implies each frozen row (`live -> frozen`); the converse
+    is the open case `Delta = 7`.
+  The `repair` entries of `meta/migration_reports/edge_colour_class.spec.json` and
+  `meta/migration_reports/linear_forest.spec.json` bind the one exact text replacement and the
+  repaired doc block's hash, and name this entry as their record. Every other row of both families
+  keeps its exact iff certificate. Working notes on the project VM, secondary:
   `coordination/evidence/math-2026-10-24/x34-source-reading-by-marcol/NOTE.md`.
 - `studies:std_dreier_toru_czyk_conjecture_merge_width_polynomi` (`X124.v`, leg `blocked`) — the
   merge expression is consumed only through `x124_expr_leaves`, so the "bounded merge-width"

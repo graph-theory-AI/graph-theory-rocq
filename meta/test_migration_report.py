@@ -465,6 +465,7 @@ class RepairTests(unittest.TestCase):
     compile_fixture = ReportTests.compile_fixture
 
     GUARDED = "forall n, 9 <= n -> local_helper n."
+    RECORD = "meta/STATEMENT_IMPROVEMENTS.md"
     REPAIRED_DOC = "(** Corpus row: test\n    English statement: every number from 7 on equals itself. *)"
     ONE_WAY = ("Lemma statement_compat : test_statement -> X0Legacy.statement.\n"
                "Proof. intros h n hn; refine (h n _); induction hn; "
@@ -491,9 +492,10 @@ class RepairTests(unittest.TestCase):
             "Lemma statement_compat : X0Legacy.statement <-> test_statement.\n"
             "Proof. split; intros h n; exact (h n). Qed.\n", self.ONE_WAY)
         self.write(self.certificate, self.cert_source)
+        self.write(self.RECORD, "- test_statement: source repair, the guard 9 <= n became 7 <= n.\n")
         self.repair = {"replace": ["9 <= n", "7 <= n"],
                        "doc_block_sha256": REPORT.sha256(self.REPAIRED_DOC),
-                       "record": "coordination/evidence/test/NOTE.md"}
+                       "record": self.RECORD}
         self.spec["frozen"][1]["repair"] = copy.deepcopy(self.repair)
 
     def test_guarded_baseline_passes_without_repair(self):
@@ -555,6 +557,9 @@ class RepairTests(unittest.TestCase):
             {**good, "doc_block_sha256": "0" * 63},
             {**good, "doc_block_sha256": "A" * 64},
             {**good, "record": ""},
+            {**good, "record": "/srv/NOTE.md"},
+            {**good, "record": "../NOTE.md"},
+            {**good, "record": "meta/../NOTE.md"},
             "9 <= n -> 7 <= n",
         ]
         for repair in bad:
@@ -585,16 +590,42 @@ class RepairTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "identical repair on its statement"):
                     self.report()
 
+    def test_repair_record_must_be_an_in_repository_explanation(self):
+        self.repair_fixture()
+        check = (f"{self.statement}: repair record {{}} is a repository file naming the statement "
+                 "and its repaired text")
+        self.assertNotIn(check.format(self.RECORD), self.failures())
+        self.spec["frozen"][1]["repair"]["record"] = "coordination/evidence/test/NOTE.md"
+        self.assertIn(check.format("coordination/evidence/test/NOTE.md"), self.failures())
+        self.spec["frozen"][1]["repair"]["record"] = self.RECORD
+        for text in ("- another_statement: the guard 9 <= n became 7 <= n.\n",
+                     "- test_statement: a source repair.\n"):
+            with self.subTest(text=text):
+                self.write(self.RECORD, text)
+                self.assertIn(check.format(self.RECORD), self.failures())
+
+    def test_original_repair_cannot_bypass_the_statement_checks(self):
+        """An identical repair on an original-statement leaves the statement entry's checks in force."""
+        self.repair_fixture()
+        original = copy.deepcopy(self.spec["frozen"][1])
+        original["kind"] = "original-statement"
+        self.spec["frozen"].append(original)
+        check = self.statement + ": statement text is the baseline text with exactly the reviewed repair"
+        self.assertNotIn(check, self.failures())
+        self.write(self.source, self.repaired.replace("local_helper n.\n", "local_helper (n + 0).\n"))
+        self.assertIn(check, self.failures())
+
     def test_compact_report_names_the_repair_only_when_present(self):
-        self.assertNotIn("Repaired after migration", REPORT.render_markdown(self.report(), self.spec))
+        marker = "Source repairs after migration"
+        self.assertNotIn(marker, REPORT.render_markdown(self.report(), self.spec))
         self.repair_fixture()
         report = self.report()
         self.assertTrue(report["ok"])
         self.assertEqual(report["statements"][0]["repair"], self.repair)
         text = REPORT.render_markdown(report, self.spec)
-        self.assertIn(f"Repaired after migration (a reviewed strengthening; the kernel certificate is "
-                      f"`live -> frozen`): `{self.statement}` (`9 <= n` -> `7 <= n`; record "
-                      f"`coordination/evidence/test/NOTE.md`).", text)
+        self.assertIn(f"{marker}: ONE-WAY source-repair certificates (`live -> frozen`), not migration "
+                      f"equivalences; every other row keeps its exact iff: `{self.statement}` "
+                      f"(`9 <= n` -> `7 <= n`; record `{self.RECORD}`).", text)
 
     def test_kernel_probe_shape_follows_the_repair(self):
         self.repair_fixture()
@@ -618,9 +649,12 @@ class RepairTests(unittest.TestCase):
         self.assertEqual(REPORT.check_kernel(self.spec), [])
 
     @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
-    def test_kernel_rejects_wrong_endpoint_or_guarded_one_way_certificate(self):
+    def test_kernel_rejects_reverse_wrong_endpoint_or_guarded_certificate(self):
         self.repair_fixture()
-        for lemma in ("Lemma statement_compat : X0Legacy.statement -> X0Legacy.statement.\n"
+        # each lemma COMPILES (compile_fixture asserts rc 0); only the probe's exact type rejects it
+        for lemma in ("Lemma statement_compat : X0Legacy.statement -> test_statement.\n"
+                      "Proof. intros _ n _; exact (eq_refl n). Qed.\n",
+                      "Lemma statement_compat : X0Legacy.statement -> X0Legacy.statement.\n"
                       "Proof. exact (fun h => h). Qed.\n",
                       "Lemma statement_compat : False -> (test_statement -> X0Legacy.statement).\n"
                       "Proof. intros h; destruct h. Qed.\n"):

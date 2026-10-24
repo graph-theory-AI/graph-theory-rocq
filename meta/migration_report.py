@@ -34,10 +34,12 @@ Every occurrence of a complete row requires a statement role and an exact iff
 probe, independently of its label. New reused nonstatement objects use the
 "historical" role; the existing named historical roles remain supported aliases.
 A statement or original-statement object may carry a "repair": a reviewed,
-source-backed strengthening of an already migrated row. It names the one exact
-replacement that turns the baseline statement text into the live one, pins the
-repaired doc block by sha256 and cites its record. The frozen copy stays
-verbatim; the exact probe of the certificate becomes `live -> frozen`.
+source-backed strengthening of an already migrated row (a source repair, not a
+migration equivalence). It names the one exact replacement that turns the
+baseline statement text into the live one, pins the repaired doc block by sha256
+and names its record, a repository file that explains the source reading. The
+frozen copy stays verbatim; the exact probe of the certificate becomes
+`live -> frozen`. Every object without a repair keeps the exact iff probe.
 It verifies that
 
   * each frozen copy equals its original declaration, after comment stripping,
@@ -1285,9 +1287,11 @@ def validate_repairs(spec: dict) -> None:
                 or replace[0] == replace[1]
                 or not isinstance(repair["doc_block_sha256"], str)
                 or not re.fullmatch(r"[0-9a-f]{64}", repair["doc_block_sha256"])
-                or not isinstance(repair["record"], str) or not repair["record"]):
+                or not isinstance(repair["record"], str)
+                or not re.fullmatch(r"[A-Za-z0-9_-][A-Za-z0-9_.-]*(?:/[A-Za-z0-9_-][A-Za-z0-9_.-]*)*",
+                                    repair["record"])):
             raise ValueError(f"{what}: repair must be {{replace: [old, new] (two distinct nonempty strings), "
-                             "doc_block_sha256: 64 lowercase hex, record: nonempty string}")
+                             "doc_block_sha256: 64 lowercase hex, record: a relative repository file path}")
         if obj["kind"] == "original-statement" and statement_repairs.get(obj["qualified"]) != repair:
             raise ValueError(f"{what}: an original-statement repair needs the identical repair on its statement")
 
@@ -1654,6 +1658,12 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
             check(sha256(doc_block(live_src, obj["name"]) or "") == repair["doc_block_sha256"]
                   and doc_block(live_src, obj["name"]) is not None,
                   f"{obj['qualified']}: doc block matches the reviewed repair")
+            # the published reader needs the source reading in the repository itself
+            record = ROOT / repair["record"]
+            record_text = record.read_text() if record.is_file() and not record.is_symlink() else ""
+            check(obj["name"] in record_text and new in record_text,
+                  f"{obj['qualified']}: repair record {repair['record']} is a repository file naming the "
+                  "statement and its repaired text")
         formal = obj["name"]
         base_rows, now_rows = rows_for_object(rows_base, obj), rows_for_object(rows_now, obj)
         non_corpus = obj.get("non_corpus", False)
@@ -1844,8 +1854,8 @@ def render_markdown(report: dict, spec: dict) -> str:
                      f"| `{statement['certificate']}` |")
     repaired = [statement for statement in report["statements"] if "repair" in statement]
     if repaired:
-        lines += ["", "Repaired after migration (a reviewed strengthening; the kernel certificate is "
-                  "`live -> frozen`): " + ", ".join(
+        lines += ["", "Source repairs after migration: ONE-WAY source-repair certificates (`live -> frozen`), "
+                  "not migration equivalences; every other row keeps its exact iff: " + ", ".join(
                       f"`{statement['qualified']}` (`{statement['repair']['replace'][0]}` -> "
                       f"`{statement['repair']['replace'][1]}`; record `{statement['repair']['record']}`)"
                       for statement in repaired) + "."]
@@ -1912,8 +1922,8 @@ def render_details(report: dict, spec: dict) -> str:
         if st.get("original_certificate"):
             cert += f"; end-to-end `{st['original_certificate']}`"
         if "repair" in st:
-            cert += " (repair: `live -> frozen`)"
-            metadata = (f"repaired: `{st['repair']['replace'][0]}` -> `{st['repair']['replace'][1]}`, "
+            cert += " (one-way source-repair certificate `live -> frozen`, not a migration equivalence)"
+            metadata = (f"source repair: `{st['repair']['replace'][0]}` -> `{st['repair']['replace'][1]}`, "
                         f"doc block sha256 `{st['repair']['doc_block_sha256'][:16]}…`, "
                         f"record `{st['repair']['record']}`")
         else:
