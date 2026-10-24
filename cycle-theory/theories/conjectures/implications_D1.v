@@ -225,11 +225,11 @@ Qed.
     Claim: every loopless 3-regular class-1 multigraph with at least one vertex
     has circular flow number at most 4, that is, a nowhere-zero rational r-flow
     for every rational r > 4.
-    Not formalized here: it is carried as an explicit hypothesis of the
-    conditional edge below (never an [Axiom], never [Admitted]), which is why
-    that edge is [status=conditional external=...] rather than [verified]. It is
-    needed only for the residual [t = 1] case of the target row, which the
-    source row (quantified over [1 < t]) does not cover. *)
+    It is needed only for the residual [t = 1] case of the target row, which
+    the source row (quantified over [1 < t]) does not cover.  Proved below as
+    [tutte_class1_cubic] (2026-10-24, classical-lemmas TODO 6; the direction
+    used, from a 3-edge-colouring to a nowhere-zero 4-flow); the reduction
+    that takes it as a hypothesis is kept. *)
 Definition external_tutte_class1_cubic_statement : Prop :=
   forall G : mgraph,
     (0 < #|G|)%N -> loopless G -> mreg G 3 -> is_class1 G ->
@@ -239,7 +239,11 @@ Definition external_tutte_class1_cubic_statement : Prop :=
 Lemma cfn_bound_t1 : 2%:R + 2%:R / 1%:R = 4%:R :> rat.
 Proof. by rewrite divr1 -natrD. Qed.
 
-(*@EDGE from=circular_flow_numbers_of_r_graphs_statement to=circular_flow_number_of_regular_class_1_graphs_statement kind=implies status=conditional external="external_tutte_class1_cubic_statement" proof=circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs cite="gc:e096" note="For t>1 the hypothesis class is contained: class1_is_2t1 turns loopless + (2t+1)-regular + class 1 into a (2t+1)-graph, via the 2t+1 colour classes being perfect matchings (matchings_cuts.class1_pm_partition) each meeting every odd cut in an odd number of edges (matchings_cuts.pm_cut_parity), so Row 1 applies verbatim. The residual t=1 case, which Row 1 (1<t) does not cover, is Tutte's characterization of cubic graphs with flow number 4, carried as the external hypothesis" *)
+(** The reduction, with Tutte's theorem as an explicit hypothesis.  (Until
+    2026-10-24 this was the edge gc:e096, [status=conditional]; its annotation
+    now sits on
+    [unconditional_circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs]
+    below, after [tutte_class1_cubic].) *)
 Theorem circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs :
   external_tutte_class1_cubic_statement ->
   circular_flow_numbers_of_r_graphs_statement ->
@@ -467,6 +471,312 @@ have [phi [hc hb]] : has_nz_kflow (Hc r0) 5.
 by exists phi; split; [exact: iconservative_collapse hr0 hc | exact: hb].
 Qed.
 
+(** ================================================================= *)
+(** ** gc:e096 at [t = 1]: Tutte's theorem for class-1 cubic multigraphs
+       (classical-lemmas TODO 6, the direction used) *)
+
+(** A 3-edge-colouring of a loopless cubic multigraph yields a nowhere-zero
+    integer 4-flow.  The colour classes are perfect matchings
+    ([matchings_cuts.class1_pm_partition]), so the complement of a class is a
+    2-regular edge set.  Balanced orientations [dA] of the complement [A] of
+    one class and [dB] of the complement [B] of another give the Kirchhoff
+    weighting [osgn A dA + 2 * osgn B dB]; since no edge lies outside both
+    complements, its values are in {+-1, +-2, +-3}.  Balanced orientations of
+    even edge sets come from closed routes: [spath_step_route] and
+    [has_closed_route] are [cycle_space.spath_step] and [has_circuit] returning
+    the closed route with distinct edges instead of the circuit it spans, and
+    following such a route orients its edges in a balanced way. *)
+
+Lemma spath_step_route (G : mgraph) (C : {set edge G}) (x : G)
+    (r : seq (edge G * bool)) :
+  (forall v : G, subdeg C v != 1) -> r != [::] -> spath C x r ->
+  (exists (y : G) (s : seq (edge G * bool)),
+     [/\ s != [::], rwalk y s, rlast y s = y, uniq (redges s)
+       & all (fun a : edge G * bool => a.1 \in C) s]) \/
+  (exists a : edge G * bool, spath C x (rcons r a)).
+Proof.
+move=> Cdeg rn0 /and4P[wr aC ue uv].
+have esC : eset r \subset C := eset_sub aC.
+have htl := rwalk_tails wr.
+have uh : uniq (map (@rhd G) r) by move: uv => /andP[].
+have ynotl : rlast x r \notin map (@rtl G) r.
+  move: uv; rewrite -htl cat_uniq => /and3P[_ h _].
+  by move: h; rewrite /= orbF.
+have yhd : rlast x r \in map (@rhd G) r.
+  rewrite /rlast; apply: last_mem.
+  by rewrite -size_eq0 size_map size_eq0.
+have hdeg : subdeg (eset r) (rlast x r) = 1.
+  rewrite (subdeg_eset _ ue).
+  have -> : count (fun a : edge G * bool => rtl a == rlast x r) r = 0.
+    apply/eqP; rewrite -leqn0 leqNgt -has_count.
+    apply/negP => /hasP[a ar /eqP ha].
+    by move: ynotl; rewrite -ha (map_f _ ar).
+  rewrite add0n.
+  have := count_uniq_mem (rlast x r) uh.
+  by rewrite count_map yhd.
+have ygt : (0 < subdeg (C :\: eset r) (rlast x r))%N.
+  have hsum := subdeg_setD (rlast x r) esC.
+  rewrite hdeg in hsum.
+  case: (posnP (subdeg (C :\: eset r) (rlast x r))) => // h0.
+  by move: (Cdeg (rlast x r)); rewrite hsum h0 addn0 eqxx.
+have [f fD [b hb]] := subdeg_gt0P ygt.
+move: fD; rewrite in_setD inE => /andP[fnotr fC].
+case: (boolP (endpoint (~~ b) f \in x :: map (@rhd G) r)) => [zin|znot]; last first.
+- right; exists (f, b); apply/and4P; split.
+  + by rewrite rwalk_rcons wr /=; apply/eqP; exact: hb.
+  + by rewrite all_rcons /= fC.
+  + rewrite /redges map_rcons rcons_uniq.
+    by apply/andP; split; [exact: fnotr | exact: ue].
+  + rewrite map_rcons -rcons_cons rcons_uniq.
+    by apply/andP; split; [exact: znot | exact: uv].
+- left.
+  have [r1 [r2 [req r1z]]] := rverts_split zin.
+  have wr2 : rwalk (endpoint (~~ b) f) r2.
+    by move: wr; rewrite req rwalk_cat -r1z => /andP[].
+  have l2 : rlast (endpoint (~~ b) f) r2 = rlast x r.
+    by rewrite -r1z -rlast_cat -req.
+  exists (endpoint (~~ b) f), (r2 ++ [:: (f, b)]); split.
+  + by rewrite -size_eq0 size_cat /= addn1.
+  + by rewrite rwalk_cat wr2 /= l2 andbT; apply/eqP; exact: hb.
+  + by rewrite rlast_cat /= l2.
+  + rewrite redges_cat cat_uniq /=.
+    apply/and3P; split; last by [].
+    * by move: ue; rewrite req redges_cat cat_uniq => /and3P[_ _].
+    * rewrite orbF; apply/negP => hf.
+      move: fnotr; rewrite req redges_cat mem_cat hf orbT.
+      by move/negP; apply.
+  + rewrite all_cat; apply/andP; split; last by rewrite /= fC.
+    by move: aC; rewrite req all_cat => /andP[].
+Qed.
+
+Lemma has_closed_route_bound (G : mgraph) (C : {set edge G}) (n : nat) :
+  (forall v : G, subdeg C v != 1) ->
+  forall (x : G) (r : seq (edge G * bool)),
+    spath C x r -> r != [::] -> (#|G| <= size r + n)%N ->
+    exists (y : G) (s : seq (edge G * bool)),
+      [/\ s != [::], rwalk y s, rlast y s = y, uniq (redges s)
+        & all (fun a : edge G * bool => a.1 \in C) s].
+Proof.
+move=> Cdeg; elim: n => [|n IH] x r sp rn0 hb.
+- have uv : uniq (x :: map (@rhd G) r) by case/and4P: sp.
+  have h := uniq_size_leq uv.
+  rewrite /= size_map in h; rewrite addn0 in hb.
+  by move: (leq_trans h hb); rewrite ltnn.
+- have [hs|[a spa]] := spath_step_route Cdeg rn0 sp; first exact: hs.
+  apply: (IH x (rcons r a) spa).
+  + by rewrite -size_eq0 size_rcons.
+  + by rewrite size_rcons addSn -addnS.
+Qed.
+
+Lemma has_closed_route (G : mgraph) (C : {set edge G}) :
+  C != set0 -> (forall v : G, subdeg C v != 1) ->
+  exists (y : G) (s : seq (edge G * bool)),
+    [/\ s != [::], rwalk y s, rlast y s = y, uniq (redges s)
+      & all (fun a : edge G * bool => a.1 \in C) s].
+Proof.
+move=> /set0Pn[e eC] Cdeg.
+case: (boolP (source e == target e)) => [/eqP loop|nloop].
+- exists (source e), [:: (e, false)]; split.
+  + by [].
+  + by rewrite /= eqxx.
+  + by rewrite /rlast /rhd /= -loop.
+  + by [].
+  + by rewrite /= eC.
+- apply: (@has_closed_route_bound G C #|G| Cdeg (source e) [:: (e, false)]).
+  + rewrite /spath; apply/and4P; split.
+    * by rewrite /= eqxx.
+    * by rewrite /= eC.
+    * by rewrite /redges /=.
+    * rewrite /= andbT mem_seq1; apply/negP => /eqP h.
+      by move: nloop; rewrite h /rhd /= eqxx.
+  + by [].
+  + by rewrite /= add1n; exact: leqnSn.
+Qed.
+
+(** A route with distinct edges traverses each of its edges in one direction. *)
+Lemma route_dir_unique (G : mgraph) (s : seq (edge G * bool)) (e : edge G)
+    (b b' : bool) :
+  uniq (redges s) -> (e, b) \in s -> (e, b') \in s -> b = b'.
+Proof.
+move=> u /(nthP (e, b))[i hi ei] /(nthP (e, b))[j hj ej].
+have hij : i = j.
+  apply: (uniqP e u); rewrite ?inE ?size_map //.
+  by rewrite /redges !(nth_map (e, b)) // ei ej.
+by move: ei ej; rewrite hij => -> [].
+Qed.
+
+(** A closed route leaves every vertex as often as it enters it. *)
+Lemma closed_route_count (G : mgraph) (y : G) (s : seq (edge G * bool)) (v : G) :
+  rwalk y s -> rlast y s = y ->
+  count (fun a : edge G * bool => rtl a == v) s
+  = count (fun a : edge G * bool => rhd a == v) s.
+Proof.
+move=> w l.
+have htl : map (@rtl G) s ++ [:: y] = y :: map (@rhd G) s.
+  by have := rwalk_tails w; rewrite l.
+have h := congr1 (count (pred1 v)) htl.
+apply/eqP; move: h; rewrite count_cat /= addn0 addnC !count_map.
+by move/eqP; rewrite eqn_add2l.
+Qed.
+
+(** Following a closed route with distinct edges orients its edge set in a
+    balanced way: an edge keeps its reference direction iff the route
+    traverses it forwards. *)
+Lemma closed_route_balanced (G : mgraph) (y : G) (s : seq (edge G * bool)) :
+  rwalk y s -> rlast y s = y -> uniq (redges s) ->
+  x212_balanced (eset s) (fun e => (e, false) \in s).
+Proof.
+move=> w l u v.
+set d := fun e => (e, false) \in s.
+have htl : {in s, forall a, x212_tail d a.1 = rtl a}.
+  case=> e [] ha; rewrite /x212_tail /d /rtl /=; last by rewrite ha.
+  by case: ifP => // hf; have := route_dir_unique u ha hf.
+have hhd : {in s, forall a, x212_head d a.1 = rhd a}.
+  case=> e [] ha; rewrite /x212_head /d /rhd /=; last by rewrite ha.
+  by case: ifP => // hf; have := route_dir_unique u ha hf.
+have hcnt : forall (F : edge G -> G) (g : edge G * bool -> G),
+    {in s, forall a, F a.1 = g a} ->
+    #|[set e in eset s | F e == v]| = count (fun a => g a == v) s.
+  move=> F g hFg.
+  have -> : [set e in eset s | F e == v] = [set e in redges s | F e == v].
+    by apply/setP => e; rewrite !inE.
+  rewrite (card_seq_filter _ u) count_map.
+  by apply: eq_in_count => a ha /=; rewrite hFg.
+by rewrite (hcnt _ _ htl) (hcnt _ _ hhd) (closed_route_count v w l).
+Qed.
+
+(** Every even edge set has a balanced orientation: peel off one closed route
+    and recurse on the rest (as in [cycle_space.even_circuit_decomposition]). *)
+Lemma even_balanced_bound (G : mgraph) (n : nat) (C : {set edge G}) :
+  (#|C| <= n)%N -> (forall v : G, ~~ odd (subdeg C v)) ->
+  exists d : edge G -> bool, x212_balanced C d.
+Proof.
+elim: n C => [|n IH] C hn Ce.
+  have C0 : C = set0 by apply/eqP; rewrite -cards_eq0 -leqn0.
+  by exists xpredT => v; rewrite C0; apply: eq_card => e; rewrite !inE.
+case: (boolP (C == set0)) => [/eqP C0|Cn0].
+  by exists xpredT => v; rewrite C0; apply: eq_card => e; rewrite !inE.
+have Cd1 : forall v : G, subdeg C v != 1.
+  by move=> v; apply: contraNneq (Ce v) => ->.
+have [y [s [sn0 w l u aC]]] := has_closed_route Cn0 Cd1.
+have DsubC : eset s \subset C := eset_sub aC.
+have Dev : forall v : G, ~~ odd (subdeg (eset s) v).
+  move=> v; rewrite (subdeg_eset v u) (closed_route_count v w l).
+  by rewrite addnn odd_double.
+have [a sa] : exists a, a \in s.
+  by move: sn0; case: (s) => [//|a s0] _; exists a; rewrite in_cons eqxx.
+have hlt : (#|C :\: eset s| <= n)%N.
+  rewrite cardsD (setIidPr DsubC).
+  have hD1 : (1 <= #|eset s|)%N.
+    by apply/card_gt0P; exists a.1; rewrite inE; exact: map_f sa.
+  apply: (leq_trans (leq_sub2l #|C| hD1)).
+  by rewrite leq_subLR add1n.
+have Dev' : forall v : G, ~~ odd (subdeg (C :\: eset s) v).
+  move=> v; apply: subdeg_setD_even;
+    [exact: DsubC | exact: Ce v | exact: Dev v].
+have [d' hd'] := IH _ hlt Dev'.
+have hr := closed_route_balanced w l u.
+set dr := fun e => (e, false) \in s in hr.
+pose dd := fun e => if e \in eset s then dr e else d' e.
+exists dd => v.
+have key : forall P : pred (edge G),
+    #|[set e in C | P e]|
+    = #|[set e in eset s | P e]| + #|[set e in C :\: eset s | P e]|.
+  move=> P; rewrite -(cardsID (eset s) [set e in C | P e]).
+  congr (_ + _); apply: eq_card => e; rewrite !inE; last by rewrite andbA.
+  case he: (e \in redges s); rewrite ?andbF ?andbT //=.
+  by have := subsetP DsubC e; rewrite inE he => /(_ isT) ->.
+have hdd : forall (S : {set edge G}) (d : edge G -> bool)
+    (F : (edge G -> bool) -> edge G -> G),
+    (forall d0 e, F d0 e = if d0 e then F xpredT e else F xpred0 e) ->
+    {in S, dd =1 d} ->
+    #|[set e in S | F dd e == v]| = #|[set e in S | F d e == v]|.
+  move=> S d F hF hS; apply: eq_card => e; rewrite !inE.
+  by case eS: (e \in S) => //=; rewrite hF [in RHS]hF hS.
+have hT : forall (d0 : edge G -> bool) (e : edge G),
+    x212_tail d0 e = if d0 e then x212_tail xpredT e else x212_tail xpred0 e.
+  by move=> d0 e; rewrite /x212_tail; case: (d0 e).
+have hH : forall (d0 : edge G -> bool) (e : edge G),
+    x212_head d0 e = if d0 e then x212_head xpredT e else x212_head xpred0 e.
+  by move=> d0 e; rewrite /x212_head; case: (d0 e).
+have hin : {in eset s, dd =1 dr} by move=> e he; rewrite /dd he.
+have hout : {in C :\: eset s, dd =1 d'}.
+  by move=> e; rewrite inE => /andP[he _]; rewrite /dd (negbTE he).
+rewrite !key (hdd _ _ _ hT hin) (hdd _ _ _ hH hin).
+by rewrite (hdd _ _ _ hT hout) (hdd _ _ _ hH hout) (hr v) (hd' v).
+Qed.
+
+Lemma even_balanced (G : mgraph) (C : {set edge G}) :
+  (forall v : G, ~~ odd (subdeg C v)) ->
+  exists d : edge G -> bool, x212_balanced C d.
+Proof. exact: (even_balanced_bound (leqnn #|C|)). Qed.
+
+(** The complement of a perfect matching of a cubic multigraph is 2-regular. *)
+Lemma cubic_pm_compl_even (G : mgraph) (M : {set edge G}) :
+  mreg G 3 -> (forall v : G, subdeg M v = 1) ->
+  forall v : G, ~~ odd (subdeg (~: M) v).
+Proof.
+move=> hreg hM v.
+have h := subdeg_setD v (subsetT M).
+rewrite setTD hM in h.
+have h3 : subdeg [set: edge G] v = 3 by exact: hreg v.
+have -> : subdeg (~: M) v = 2 by apply/eqP; rewrite -(eqn_add2l 1) -h h3.
+by [].
+Qed.
+
+(** A loopless cubic multigraph of chromatic index 3 has a nowhere-zero
+    integer 4-flow. *)
+Lemma class1_cubic_nz_4flow (G : mgraph) :
+  loopless G -> mreg G 3 -> chromatic_index G = 3 -> has_nz_kflow G 4.
+Proof.
+move=> hll hreg hci.
+have [P [hP3 hpart hpm]] := class1_pm_partition hll hreg hci.
+have /card_gt1P[Ma [Mb [hMa hMb hab]]] : (1 < #|P|)%N by rewrite hP3.
+have htriv : trivIset P by case/and3P: hpart.
+have hdis : [disjoint Ma & Mb] := trivIsetP htriv Ma Mb hMa hMb hab.
+have [dA hA] := even_balanced (cubic_pm_compl_even hreg (hpm Ma hMa)).
+have [dB hB] := even_balanced (cubic_pm_compl_even hreg (hpm Mb hMb)).
+exists (fun e => osgn (~: Ma) dA e + 2%:R * osgn (~: Mb) dB e); split.
+  move=> v; rewrite !big_split /= -!mulr_sumr.
+  by rewrite (osgn_conservative hA v) (osgn_conservative hB v).
+move=> e; rewrite /osgn !inE.
+case hea : (e \in Ma); case heb : (e \in Mb) => /=.
+- by move: (disjointFr hdis hea); rewrite heb.
+- by case: (dB e).
+- by case: (dA e).
+- by case: (dA e); case: (dB e).
+Qed.
+
+(** Tutte's theorem, the direction used by gc:e096: a loopless 3-regular
+    class-1 multigraph has circular flow number at most 4 (its integer 4-flow
+    is a rational r-flow for every r > 4). *)
+Theorem tutte_class1_cubic : external_tutte_class1_cubic_statement.
+Proof.
+move=> G Hn hll hreg hc1.
+have hD : mDelta G = 3%N.
+  apply/eqP; rewrite eqn_leq; apply/andP; split.
+    by apply/bigmax_leqP => v _; rewrite hreg.
+  have /card_gt0P[v0 _] : (0 < #|[set: G]|)%N by rewrite cardsT.
+  by rewrite -(hreg v0); exact: leq_bigmax.
+have [phi [hc hb]] := class1_cubic_nz_4flow hll hreg (etrans hc1 hD).
+move=> r hr; exists (fun e => (phi e)%:~R); split.
+  by move=> v; rewrite -!rmorph_sum /= (hc v).
+move=> e; have [h1 h3] := hb e.
+rewrite -intr_norm; split; first by rewrite ler1z.
+apply: (@mathcomp.order.order.Order.POrderTheory.le_trans _ _ 3%:R).
+  by move: h3; rewrite -(ler_int rat).
+rewrite lerBrDr natr1; exact: mathcomp.order.order.Order.POrderTheory.ltW.
+Qed.
+
+(*@EDGE from=circular_flow_numbers_of_r_graphs_statement to=circular_flow_number_of_regular_class_1_graphs_statement kind=implies status=verified proof=unconditional_circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs cite="gc:e096" note="For t>1 the hypothesis class is contained: class1_is_2t1 turns loopless + (2t+1)-regular + class 1 into a (2t+1)-graph, via the 2t+1 colour classes being perfect matchings (matchings_cuts.class1_pm_partition) each meeting every odd cut in an odd number of edges (matchings_cuts.pm_cut_parity), so Row 1 applies verbatim. The residual t=1 case, which Row 1 (1<t) does not cover, is Tutte's characterization of cubic graphs with flow number 4, proved as tutte_class1_cubic: the complements A, B of two colour classes are 2-regular, balanced orientations of them (from closed routes) give osgn A dA + 2 osgn B dB, a nowhere-zero integer 4-flow, hence a rational r-flow for every r > 4" *)
+Theorem unconditional_circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs :
+  circular_flow_numbers_of_r_graphs_statement ->
+  circular_flow_number_of_regular_class_1_graphs_statement.
+Proof.
+exact: circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs
+  tutte_class1_cubic.
+Qed.
+
 
 (** ── Audited non-edges (machine-readable; extracted by build_edge_graph.py) ── *)
 
@@ -480,3 +790,7 @@ Qed.
 (** ** Axiom audit (gc:e246) *)
 
 Print Assumptions orientable_five_cycle_double_cover_implies_five_flow.
+
+(** ** Axiom audit (gc:e096) *)
+
+Print Assumptions unconditional_circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs.
