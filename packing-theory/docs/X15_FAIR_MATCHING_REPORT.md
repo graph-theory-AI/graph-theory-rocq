@@ -22,8 +22,9 @@ of this development.
 
 The constant is that of the formal size bound `#|E(G)| %/ Delta G <= #|S| + c`, a
 FLOOR form. The source's form `|S| >= |E(G)|/Delta(G) - c(m)` needs the ceiling
-of `|E(G)|/Delta(G)` instead, which exceeds the floor by less than one, so in the
-source's form the certified constant is `12m + 15`. For the existence statement
+of `|E(G)|/Delta(G)` instead, which exceeds the floor by at most one (by exactly
+one when `Delta(G)` does not divide `|E(G)|`), so in the source's form the certified
+constant is `12m + 15`. For the existence statement
 (Conjecture 1.15) the two forms are equivalent.
 
 The `O(m^3)` of the write-up became `O(m)` through two suggestions of Laurent

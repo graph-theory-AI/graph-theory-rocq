@@ -96,11 +96,12 @@ Definition bipartite_matching_underrepresentation_statement : Prop :=
           #|S :&: E i| <= ceil_div #|E i| (Delta G).
 
 (* Note on the constant (independent correspondence review, 2026-10-23), kept outside the
-   frozen doc block above: for a fixed c the floor form floor(|E(G)|/Delta(G)) <= |S| + c is
-   weaker than the source's |S| >= |E(G)|/Delta(G) - c by less than one (floor vs ceiling), so
-   the two agree up to c -> c+1 and are equivalent as existence statements. The explicit
-   constant 12m + 14 proved in fair_matching.v is that of the floor form, 12m + 15 in the
-   source's form. *)
+   frozen doc block above: the source's |S| >= |E(G)|/Delta(G) - c means |S| + c >= the CEILING
+   of |E(G)|/Delta(G), which exceeds its floor by at most one (by exactly one when Delta(G) does
+   not divide |E(G)|). So the floor form floor(|E(G)|/Delta(G)) <= |S| + c at c gives the
+   source's form at c + 1, and the source's form at c gives the floor form at c: the two are
+   equivalent as existence statements. The explicit constant 12m + 14 proved in fair_matching.v
+   is that of the floor form, 12m + 15 in the source's form. *)
 
 (** No corpus row: LLM-proof variant of bipartite_matching_underrepresentation_statement (arxiv:1611.03196#03) with an explicit constant; see https://github.com/graph-theory-AI/Graph-Theory-LLM-Proofs/blob/main/attacks/1611.03196__03/output.md *)
 Definition bipartite_matching_underrepresentation_llm_statement : Prop :=
