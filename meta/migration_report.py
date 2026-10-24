@@ -1409,6 +1409,15 @@ def frozen_legs(entry):
     return {k: v for k, v in entry.items() if k != "edges"} if isinstance(entry, dict) else entry
 
 
+def frozen_row(row):
+    """A manifest row without its DERIVED `legs.edges` value. The manifest builders merge the leg-state overlay into
+    each row's `legs`, so a newly proved edge moves that one value as well (see frozen_legs); every other field of
+    the row, including the other legs, stays frozen. A row whose `legs` is not a mapping is compared unchanged."""
+    if isinstance(row, dict) and isinstance(row.get("legs"), dict):
+        return {**row, "legs": frozen_legs(row["legs"])}
+    return row
+
+
 def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
     validate_frozen_kinds(spec)
     base = spec["baseline_commit"]
@@ -1599,7 +1608,9 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
             check(not rows_base.get(formal) and not rows_now.get(formal),
                   f"{formal}: explicitly non-corpus statement has no manifest row")
         else:
-            check(len(now_rows) == 1 and base_rows == now_rows,
+            # the row's derived `legs.edges` value is exempt (frozen_row); every other field stays frozen
+            check(len(now_rows) == 1
+                  and [frozen_row(row) for row in base_rows] == [frozen_row(row) for row in now_rows],
                   f"{formal}: manifest row unchanged since baseline",
                   f"{len(base_rows)} baseline / {len(now_rows)} current rows")
         row_now = now_rows[0] if now_rows else {}
