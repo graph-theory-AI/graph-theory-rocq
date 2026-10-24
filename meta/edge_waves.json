@@ -195,8 +195,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (mathematics tranche 2, 2026-10-24): tutte_class1_cubic proves external_tutte_class1_cubic_statement (classical-lemmas TODO 6); the conditional circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs of wave E5 is kept",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (Claude Opus 5.5 via Claude Code), independent reviewer (coordination message marcol-arthur-lancelot-mac-T2A-REVIEW-APPROVE-20261024T153405Z, APPROVE 486933dd..c51475d8); author Arthur",
+   "reviewed_at": "2026-10-24",
    "note": "For t>1 the hypothesis class is contained: class1_is_2t1 turns loopless + (2t+1)-regular + class 1 into a (2t+1)-graph, via the 2t+1 colour classes being perfect matchings (matchings_cuts.class1_pm_partition) each meeting every odd cut in an odd number of edges (matchings_cuts.pm_cut_parity), so Row 1 applies verbatim. The residual t=1 case, which Row 1 (1<t) does not cover, is Tutte's characterization of cubic graphs with flow number 4, proved as tutte_class1_cubic: the complements A, B of two colour classes are 2-regular, balanced orientations of them (from closed routes) give osgn A dA + 2 osgn B dB, a nowhere-zero integer 4-flow, hence a rational r-flow for every r > 4"
   },
   "circular_flow_numbers_of_r_graphs_statement->five_flow_statement:implies": {
