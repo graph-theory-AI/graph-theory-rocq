@@ -285,6 +285,32 @@ class ReportTests(unittest.TestCase):
                                                                               key: value}}})
             self.assertIn("test_statement: leg-state entry unchanged since baseline", self.failures())
 
+    def test_only_the_derived_edges_leg_of_a_manifest_row_may_move(self):
+        # the manifest builders merge the overlay's legs into the row, so its derived `edges` value moves too
+        manifest = "meta/" + REPORT.REG.CORPORA["opg"]["manifest"]
+        overlay = "meta/" + REPORT.REG.CORPORA["opg"]["overlay"]
+        self.row["legs"] = {"statement": "done", "edges": "partial"}
+        self.write_manifests("opg")
+        self.write_json(overlay, {"entries": {"test": {"statement": "done", "edges": "partial"}}})
+        self.rebaseline()
+        self.spec["frozen"][1]["corpus"] = "opg"
+        self.assertEqual(self.failures(), [])
+        self.write_json(overlay, {"entries": {"test": {"statement": "done", "edges": "done"}}})
+        for legs in ({"statement": "done", "edges": "done"}, {"statement": "done"}):
+            with self.subTest(legs=legs):
+                self.write_json(manifest, {"rows": [{**self.row, "legs": legs}]})
+                self.assertEqual(self.failures(), [])
+        for changed in ({"legs": {"statement": "partial", "edges": "done"}},
+                        {"legs": {"statement": "done", "edges": "done", "grounding": "done"}},
+                        {"legs": ["done"]},
+                        {"status": "proved"},
+                        {"phase": "X1"}):
+            with self.subTest(changed=changed):
+                self.write_json(manifest, {"rows": [{**self.row, **changed}]})
+                self.assertIn("test_statement: manifest row unchanged since baseline", self.failures())
+        self.write_json(manifest, {"rows": [self.row, {**self.row, "row_id": "test:1"}]})
+        self.assertIn("test_statement: manifest row unchanged since baseline", self.failures())
+
     def test_non_corpus_requires_explicit_marker(self):
         self.write_manifests(None)
         self.rebaseline()
