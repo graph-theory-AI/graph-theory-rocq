@@ -125,6 +125,10 @@ class ReportTests(unittest.TestCase):
         self.write(path, json.dumps(value))
 
     def command(self, *args):
+        if args and args[0] == "git":
+            # No automatic gc / maintenance in fixture repositories: a detached background run could
+            # still be writing in .git when the temporary directory is removed (errno 39 on CI).
+            args = ("git", "-c", "gc.auto=0", "-c", "maintenance.auto=false", *args[1:])
         result = subprocess.run(args, cwd=self.root, text=True, capture_output=True)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         return result.stdout.strip()
