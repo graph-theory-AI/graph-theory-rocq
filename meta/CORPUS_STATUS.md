@@ -134,13 +134,14 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **144 edges** — by status {'candidate': 32, 'conditional': 4, 'refuted-direction': 33, 'verified': 75}, by kind {'equiv': 6, 'implies': 138, 'refutes': 0, 'specializes': 0}; 91 Qed-proved relative theorems.
+- **144 edges** — by status {'candidate': 32, 'conditional': 3, 'refuted-direction': 32, 'verified': 77}, by kind {'equiv': 6, 'implies': 138, 'refutes': 0, 'specializes': 0}; 93 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
   - `bipartite_digraph_asymmetric_outdegree_girth_statement` implies `bipartite_digraph_outdegree_girth_statement` (digraph-theory/implications_X46.v)
   - `bounded_tree_mu_polynomial_biclique_tree_alpha_statement` equiv `tree_mu_ktt_free_polynomial_tree_alpha_statement` (minor-theory/implications_X220.v)
   - `chen_chvatal_metric_lines_statement` equiv `chen_chvatal_guarded_metric_lines_statement` (graph-theory-misc/implications_X110.v)
   - `circular_flow_numbers_of_r_graphs_statement` implies `circular_flow_number_of_regular_class_1_graphs_statement` (cycle-theory/implications_D1.v)
+  - `cycle_double_covers_containing_predefined_2_regular_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
   - `delta122_hero_k1_plus_dipath2_free_statement` implies `delta122_hero_oriented_complete_multipartite_statement` (digraph-theory/implications_X221.v)
   - `delta122_hero_oriented_complete_multipartite_statement` implies `delta122_hero_k1_plus_dipath2_free_statement` (digraph-theory/implications_X221.v)
   - `edge_list_coloring_statement` implies `list_chromatic_index_even_clique_statement` (chromatic-theory/implications_X219.v)
@@ -160,6 +161,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `forest_free_polynomial_chi_bound_statement` implies `polynomial_gyarfas_sumner_tree_statement` (chromatic-theory/implications_X218.v)
   - `fractional_hadwiger_statement` implies `hadwiger_independence_minor_statement` (atlas/implications_A1.v)
   - `fractional_hadwiger_statement` implies `seagull_statement` (atlas/implications_A1.v)
+  - `goldbergs_statement` implies `seymours_r_graph_statement` (chromatic-theory/implications_U5.v)
   - `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` implies `triangle_free_induced_tree_chi_bounded_statement` (chromatic-theory/implications_X213.v)
   - `hadwiger_chromatic_clique_minor_statement` implies `fractional_hadwiger_statement` (atlas/implications_A1.v)
   - `hadwiger_chromatic_clique_minor_statement` implies `hadwiger_independence_minor_statement` (minor-theory/implications_X214.v)
@@ -211,17 +213,16 @@ Area-local foundations (each area builds these on top of `base`):
   - `tree_decomposition_leaf_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
-- Edge evidence: **75 verified** (Qed-closed, no external assumption) · **4 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **77 verified** (Qed-closed, no external assumption) · **3 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `circular_flow_numbers_of_r_graphs_statement` implies `three_flow_statement` — external: `external_steffen_3flow_5graphs_statement` (cycle-theory/implications_D1.v)
-  - `cycle_double_covers_containing_predefined_2_regular_statement` implies `cycle_double_cover_statement` — external: `external_cdc_cubic_2connected_reduction_statement` (cycle-theory/implications_U6.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
-  - **opg**: 38 done · 10 partial · 0 blocked · 179 todo  (227 rows)
+  - **opg**: 39 done · 9 partial · 0 blocked · 179 todo  (227 rows)
   - **v2**: 79 done · 5 partial · 0 blocked · 1589 todo  (1673 rows)
 
-### Documented non-edges (33 `refuted-direction`)
+### Documented non-edges (32 `refuted-direction`)
 
 Pairs deliberately NOT connected: the direction was examined and rejected (the implication does not hold, or holds only via a layer out of scope). A documented non-edge discharges the corresponding corpus relation for the `edges` leg.
 
@@ -240,7 +241,6 @@ Pairs deliberately NOT connected: the direction was examined and rejected (the i
 | `five_flow_statement` | `three_flow_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): classical antichain: a nowhere-zero 5-flow does not yield a nowhere-zero 3-flow. Earlier note: edge_connected 4 => bridgeless (hypothesis ok) but a nowhere-zero 5-flow does NOT yield a nowhere-zero 3-flow; conclusion implication fails. Does not compile. |
 | `four_flow_statement` | `five_flow_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): classical antichain (Jaeger 1979 survey): the 3-/4-/5-flow conjectures are mutually independent; corpus e176 is related_only. Earlier note: 4-flow's class (bridgeless, no Petersen minor) is not contained in 5-flow's class (all bridgeless); and nz-4 => nz-5 runs the wrong way against the hypotheses. Does not compile. |
 | `geodesic_cycles_and_tuttes_theorem_statement` | `covering_powers_of_cycles_with_equivalence_subgraphs_statement` | implies | Non-edge. Both mention 'cycles' but denote different objects: Row 2 is a metric/peripheral-cycle existence statement over arbitrary 3-connected G; Row 5 is an Omega(k) lower bound on the equivalence covering number of the specific family C_n^k. An edge-length/peripheral assignment yields no bound on a cover by equivalence subgraphs (nor vice versa). No direction holds. Not stated. |
-| `goldbergs_statement` | `seymours_r_graph_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): Goldberg gives chi' <= r+1, not chi' = r; corpus e001 claims the wrong direction (reported upstream, meta/CORPUS_FEEDBACK.md). Earlier note: Goldberg bound gives chi'<=r+1, not the chi'=r faithful Seymour requires; deep relationship (Chen-Jing-Zang 2019), not an elementary Qed |
 | `high_connectivity_no_k_n_statement` | `jorgensens_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): fails Qed: the exists-N size bound never constrains small 6-connected graphs; both endpoints G2-blocked (abstract planarity). Earlier note: FAILS Qed: size hypothesis missing; both endpoints G2-blocked (abstract is_planar) |
 | `jorgensens_statement` | `high_connectivity_no_k_n_statement` | implies | REFUTED-DIRECTION (metadata wave M, 2026-09-24): fails Qed: no way to discharge the n <> 6 cases. Earlier note: FAILS Qed: needs the n<>6 cases; both endpoints G2-blocked |
 | `linear_hypergraphs_with_dimension_3_statement` | `simultaneous_partition_of_hypergraphs_statement` | implies | Non-edge. The only two D2str nodes sharing a hypergraph carrier (T:finType, {set {set T}}), but independent: Row 1 assumes a LINEAR dim-3 hypergraph and concludes a plane triangle/segment representation; Row 4 assumes two r-UNIFORM families and concludes a single rainbow-dense r-partition. Neither hypothesis class contains the other and neither conclusion transports. No reduction/specialisation in either direction. Not stated. |

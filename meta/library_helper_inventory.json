@@ -6,7 +6,7 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 526,
-      "cross_file_declarations": 1905,
+      "cross_file_declarations": 1907,
       "cross_file_files": 1016,
       "implicit_use": 3,
       "packages_without_project": [
@@ -29,7 +29,7 @@
         "cross_file": {
           "certificates_of": [],
           "declarations": [
-            "chromatic-theory/theories/conjectures/grounding_U4.v:<line 198>"
+            "chromatic-theory/theories/conjectures/grounding_U4.v:<line 204>"
           ],
           "files": [
             "chromatic-theory/theories/conjectures/grounding_U4.v"
@@ -2832,7 +2832,7 @@
         "cross_file": {
           "certificates_of": [],
           "declarations": [
-            "chromatic-theory/theories/conjectures/implications_U5.v:<line 275>",
+            "chromatic-theory/theories/conjectures/implications_U5.v:<line 278>",
             "chromatic-theory/theories/conjectures/implications_U5.v:bz_ends_in"
           ],
           "files": [
@@ -4784,6 +4784,8 @@
             "cycle-theory/theories/conjectures/grounding_U6.v:cubic_G3p",
             "cycle-theory/theories/conjectures/grounding_U6.v:cubic_loopless",
             "cycle-theory/theories/conjectures/grounding_U6.v:cubic_mdeg",
+            "cycle-theory/theories/conjectures/implications_U6.v:<line 1779>",
+            "cycle-theory/theories/conjectures/implications_U6.v:cdc2c_cubic_two_connected",
             "cycle-theory/theories/conjectures/implications_U6.v:cubic_edges_at",
             "cycle-theory/theories/conjectures/implications_U6.v:cubic_has_circuit",
             "cycle-theory/theories/conjectures/implications_U6.v:external_cdc_cubic_2connected_reduction_statement",
@@ -28717,9 +28719,9 @@
       "signature_shape_hash": "2efd05bd9543689f754c5b7355b71e44214b623f1f1fafe9fceed69fc2f130b1"
     },
     {
-      "body_hash": "9e9ea790e42c8b6b05d446c2c53574b736c48794c7c2aab1e902c6a8548dce6d",
-      "body_shape_hash": "9e9ea790e42c8b6b05d446c2c53574b736c48794c7c2aab1e902c6a8548dce6d",
-      "declaration_hash": "e71eab38857d96939fdf61341ebcb5bfbef7d4a58204b93551c0608e86586d04",
+      "body_hash": "a377f4bb7f744ce92390e7c0984627efc81811dc43f4db321618927d95f3f019",
+      "body_shape_hash": "a377f4bb7f744ce92390e7c0984627efc81811dc43f4db321618927d95f3f019",
+      "declaration_hash": "cc6cba2e8a8bacdf209e3121e0af24829e693b62b676feea81f8dcb8a2cc92b1",
       "direct_consumers": [
         "Chromatic.conjectures.U4.list_colorings_of_edge_critical_graphs_statement"
       ],
@@ -28744,7 +28746,7 @@
         "Chromatic.conjectures.U4.cmp_rel_sym"
       ],
       "kind": "Definition",
-      "line": 124,
+      "line": 125,
       "local_dependencies": [],
       "name": "cmp_rel",
       "normalized_name": "cmp_rel",
@@ -28761,7 +28763,7 @@
       "declaration_hash": "53b9b42a7c73585333e4806e3a9aae4271a3ebf825068ee92f7f65ad084ab057",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 133,
+      "line": 134,
       "local_dependencies": [
         "cmp_rel"
       ],
@@ -28780,7 +28782,7 @@
       "declaration_hash": "698d891cdd8284df7b2d2b6885ca6c040ecb3b491a674a1ac728ba392f907d09",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 136,
+      "line": 137,
       "local_dependencies": [
         "cmp_rel"
       ],
@@ -28801,7 +28803,7 @@
         "Chromatic.conjectures.U4.choice_number_of_k_chromatic_graphs_of_bounded_order_statement"
       ],
       "kind": "Definition",
-      "line": 139,
+      "line": 140,
       "local_dependencies": [],
       "name": "complete_multipartite",
       "normalized_name": "complete_multipartite",
@@ -28820,7 +28822,7 @@
         "Chromatic.conjectures.U4.acyclically_choosable"
       ],
       "kind": "Definition",
-      "line": 144,
+      "line": 145,
       "local_dependencies": [],
       "name": "acyclic_colouring",
       "normalized_name": "acyclic_colouring",
@@ -28839,7 +28841,7 @@
         "Chromatic.conjectures.U4.acyclic_list_colouring_of_planar_graphs_statement"
       ],
       "kind": "Definition",
-      "line": 156,
+      "line": 157,
       "local_dependencies": [
         "acyclic_colouring"
       ],
@@ -28860,7 +28862,7 @@
         "Chromatic.conjectures.U4.strong_colorability_statement"
       ],
       "kind": "Definition",
-      "line": 161,
+      "line": 162,
       "local_dependencies": [],
       "name": "strongly_colorable",
       "normalized_name": "strongly_colorable",
