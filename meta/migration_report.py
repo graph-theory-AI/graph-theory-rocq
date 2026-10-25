@@ -42,7 +42,10 @@ frozen copy stays verbatim, and the exact probe of the certificate follows the
 repair's "direction": "strengthen" (the default) probes `live -> frozen`,
 "weaken" probes `frozen -> live`, and "re-encode" probes the record's
 "relation", an exact Rocq type in which {frozen} and {live} stand for the two
-statements. Optional "row_fields" and "leg_fields" list exactly the manifest-row
+statements. The schema and the probe accept any relation that names both statements
+and type-checks, a trivially provable one included; that it is the intended
+relation is the reviewer's duty, recorded with the repair. Optional
+"row_fields" and "leg_fields" list exactly the manifest-row
 and leg-state fields the repair changes; identity and source fields can never
 be listed. An original-statement repair needs the identical repair on the row's
 statement object, in the same spec or else in exactly one other family spec.
