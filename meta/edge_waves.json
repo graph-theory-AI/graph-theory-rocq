@@ -1854,16 +1854,14 @@
    "tier": "T3",
    "wave": "E5",
    "host": "cycle-theory",
-   "state": "conditional",
-   "proof": "small_cycle_double_cover_implies_cycle_double_cover",
-   "external": [
-    "external_cdc_simple_reduction_statement"
-   ],
+   "state": "verified",
+   "proof": "unconditional_small_cycle_double_cover_implies_cycle_double_cover",
+   "external": [],
    "reason": "",
-   "proved_by": "wave E5 agent (Claude Opus 5), 2026-09-24",
-   "reviewed_by": "Claude Opus 5 second reader R1 (edge programme, 2026-09-24): externals, load-bearing foundations and <=2-tactic proofs re-read; see meta/E1-A1_edge_audit.md",
-   "reviewed_at": "2026-09-24",
-   "note": "bm-013 gives, for every SIMPLE bridgeless multigraph, a cycle double cover with at most #|G|-1 members; forgetting the size bound gives the simple case of Row 11, and the simple-to-general step is the cited external reduction of the CDC to simple graphs"
+   "proved_by": "Arthur (mathematics tranche 3, 2026-10-25): cdc_simple_reduction proves external_cdc_simple_reduction_statement (classical-lemmas TODO 3); the conditional small_cycle_double_cover_implies_cycle_double_cover of wave E5 is kept",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "bm-013 gives, for every SIMPLE bridgeless multigraph, a cycle double cover with at most #|G|-1 members; forgetting the size bound gives the simple case of Row 11, and the simple-to-general step is proved as cdc_simple_reduction: subdividing every edge twice gives a simple bridgeless multigraph, and the middle edges of its cycle double cover form one of the original graph"
   },
   "small_hereditary_class_bounded_twin_width_statement->polynomial_expansion_bounded_twin_width_statement:implies": {
    "gc": "e078",
