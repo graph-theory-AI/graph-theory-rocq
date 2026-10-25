@@ -60,8 +60,8 @@ Definition kelly_manvel_n_minus_r_deck_reconstruction_statement : Prop :=
     Site: none
     Review: none
     English statement: (Nydl, "Nydl's Conjecture (ell-deck reconstruction of trees)")
-      For all natural numbers n and ell with 4 <= n and floor(n/2) + 1 <= ell, any two trees
-      on n vertices that have the same ell-deck are isomorphic; two graphs have the same
+      For all natural numbers n and ell with 4 <= n and floor(n/2) + 1 <= ell <= n, any two
+      trees on n vertices that have the same ell-deck are isomorphic; two graphs have the same
       ell-deck when some bijection between their ell-element vertex subsets matches the
       corresponding induced subgraphs up to isomorphism.
     Definitions: [x21_same_l_deck T1 T2 ell] — equality of ell-decks, as above (X21.v);
@@ -69,16 +69,18 @@ Definition kelly_manvel_n_minus_r_deck_reconstruction_statement : Prop :=
       a connected forest (coq-graph-theory); [n./2] is MathComp integer halving, that is
       floor(n/2).
     Notes: both vertex-count hypotheses are written out ([#|T1| = n] and [#|T2| = n]) rather
-      than left implicit in the phrase "two trees on n vertices". Nothing here forces the
-      ell-deck to be non-empty; for ell above n the index type is empty, but the threshold
-      hypothesis floor(n/2) + 1 <= ell does not exclude ell > n, so for such ell the
-      hypothesis [x21_same_l_deck] is satisfied by the empty bijection and the statement
-      then asserts that any two trees on n vertices are isomorphic — see the improvement
-      ledger. *)
+      than left implicit in the phrase "two trees on n vertices". The guard [ell <= n] (added
+      2026-10-25) is load-bearing: an ell-deck is a deck of ell-vertex cards, so the source's
+      ell ranges up to n (its (n-r)-decks); for ell above n the index type is empty, the
+      hypothesis [x21_same_l_deck] holds with the empty bijection, and without the guard the
+      claw K_1,3 and the path P_4 (n = 4, ell = 5) refute the body
+      (meta/probe_hints/nydl_tree_l_deck_reconstruction_statement.v; the improvement
+      ledger). *)
 Definition nydl_tree_l_deck_reconstruction_statement : Prop :=
   forall (n ell : nat) (T1 T2 : sgraph),
     4 <= n ->
     n./2 + 1 <= ell ->
+    ell <= n ->
     #|T1| = n ->
     #|T2| = n ->
     is_tree [set: T1] ->

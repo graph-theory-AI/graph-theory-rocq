@@ -32,6 +32,9 @@ deliberate near-duplicates that the suffix heuristic does not catch.
   the statement asserts that any two `n`-vertex trees are isomorphic. Counterexample: `n = 4`,
   `ell = 5`, `T1 = P4`, `T2 = K_{1,3}`. Fix in a later wave: add `ell <= n` (the corpus row means
   `floor(n/2) + 1 <= ell <= n`).
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the guard `ell <= n` is added; the claw
+  `K_{1,3}` and the path `P_4` at `n = 4`, `ell = 5` refute the unguarded body
+  (`meta/probe_hints/nydl_tree_l_deck_reconstruction_statement.v`).
 - `studies:std_spinoza_west_connectedness_threshold_conjecture`
   (`reconstruction-theory/theories/conjectures/X21.v:105`,
   `spinoza_west_l_deck_connectedness_statement`) — severity: **too strong (refutable as written)**.
