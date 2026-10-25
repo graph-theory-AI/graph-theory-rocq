@@ -76,6 +76,10 @@ From Cycle.foundations Require Import matchings_cuts comp_reduce.
 From Cycle.conjectures Require Import X212.
 From mathcomp Require Import all_algebra all_fingroup.
 From Cycle.conjectures Require Import D1.
+(* [implications_U6] re-exports [base], which must not come after [all_algebra]
+   (see above): it is only Required, and the gc:e184 section uses its inflation
+   lemmas through local abbreviations. *)
+From Cycle.conjectures Require implications_U6.
 
 Import GRing.Theory Num.Theory.
 Set SsrOldRewriteGoalsOrder.
@@ -170,9 +174,10 @@ Qed.
     5-regular multigraph in which every odd vertex set has an edge cut of at
     least five edges) has circular flow number at most 3, then every
     4-edge-connected multigraph with an edge has a nowhere-zero integer 3-flow.
-    Not formalized here: it is carried as an explicit hypothesis of the
-    conditional edge below (never an [Axiom], never [Admitted]), which is why
-    that edge is [status=conditional external=...] rather than [verified]. *)
+    Proved below as [steffen_3flow_5graphs] (2026-10-25, classical-lemmas
+    TODO 5), without Kochol's reduction: a 4-edge-connected graph inflates to a
+    5-graph, whose rational flow rounds to an integer 3-flow; the reduction
+    that takes it as a hypothesis is kept. *)
 Definition external_steffen_3flow_5graphs_statement : Prop :=
   (forall G : mgraph, (0 < #|G|)%N -> is_2t1_graph G 2 ->
      circular_flow_number_le G 3%:R) ->
@@ -182,7 +187,10 @@ Definition external_steffen_3flow_5graphs_statement : Prop :=
 Lemma cfn_bound_t2 : 2%:R + 2%:R / 2%:R = 3%:R :> rat.
 Proof. by rewrite divff ?pnatr_eq0 // natr1. Qed.
 
-(*@EDGE from=circular_flow_numbers_of_r_graphs_statement to=three_flow_statement kind=implies status=conditional external="external_steffen_3flow_5graphs_statement" proof=circular_flow_numbers_of_r_graphs_implies_three_flow cite="gc:e184" note="The t=2 instance of Row 1 is exactly 'every 5-graph has circular flow number at most 2+2/2=3' (cfn_bound_t2); Steffen's cited equivalence turns that into Tutte's 3-flow conjecture, and is carried as the explicit external hypothesis external_steffen_3flow_5graphs_statement" *)
+(** The reduction, with Steffen's direction as an explicit hypothesis.  (Until
+    2026-10-25 this was the edge gc:e184, [status=conditional]; its annotation
+    now sits on [unconditional_circular_flow_numbers_of_r_graphs_implies_three_flow]
+    below, after [steffen_3flow_5graphs].) *)
 Theorem circular_flow_numbers_of_r_graphs_implies_three_flow :
   external_steffen_3flow_5graphs_statement ->
   circular_flow_numbers_of_r_graphs_statement -> three_flow_statement.
@@ -1043,6 +1051,136 @@ have hpos : 0 <= \sum_(v in S) r X v.
 by move: hneg; rewrite mathcomp.order.order.Order.TotalTheory.ltNge hpos.
 Qed.
 
+(** The demands [q] are met by some edge set as soon as they sum to zero and no
+    set [S] demands more than the number of edges entering it. *)
+Lemma odiff_demand_cut (q : G -> int) :
+  \sum_v q v = 0 ->
+  (forall S : {set G},
+     \sum_(v in S) q v <= #|[set e | (ohead o e \in S) && (otail o e \notin S)]|%:R) ->
+  exists X : {set edge G}, forall v, odiff X v = q v.
+Proof.
+(* As for [odiff_demand]: minimise the total deviation [phi X].  A deficit
+   vertex either reaches a surplus by a residual path (toggle it), or the set
+   [S] it reaches is closed; then [S] receives exactly its entering edges
+   ([odiff_closed]), which the cut condition makes at least [\sum_S q], while
+   the deviation over [S] is negative. *)
+move=> hq0 hcut.
+pose r X v := odiff X v - q v.
+pose phi X := (\sum_v absz (r X v))%N.
+have hr0 : forall X, \sum_v r X v = 0.
+  by move=> X; rewrite sumrB odiff_sum hq0 subrr.
+have done0 : forall X, phi X = 0%N -> exists X', forall v, odiff X' v = q v.
+  move=> X h0; exists X => v; apply/eqP; rewrite -subr_eq0 -absz_eq0.
+  by rewrite -leqn0 -h0 /phi (bigD1 v) //=; exact: leq_addr.
+suff hind : forall n X, (phi X <= n)%N -> exists X', forall v, odiff X' v = q v.
+  exact: (hind _ set0 (leqnn _)).
+elim=> [|n IH] X hX.
+  by apply: done0; apply/eqP; rewrite -leqn0; exact: hX.
+case: (eqVneq (phi X) 0%N) => [/done0 //|hne].
+suff [X' hlt] : exists X', (phi X' < phi X)%N.
+  by apply: (IH X'); rewrite -ltnS (leq_trans hlt hX).
+have [v0 hv0] : exists v0, r X v0 < 0.
+  case: (pickP (fun v => r X v < 0)) => [v0 hv0|hall]; first by exists v0.
+  have hge : forall v, 0 <= r X v.
+    by move=> v; rewrite mathcomp.order.order.Order.TotalTheory.leNgt hall.
+  have hz := psumr_eq0P (fun v _ => hge v) (hr0 X).
+  by exfalso; move/eqP: hne; apply; apply: big1 => v _; rewrite hz.
+pose S := [set w | connect (ores X) v0 w].
+case: (pickP (fun w => (w \in S) && (0 < r X w))) => [w /andP[hwS hw]|hnone].
+  rewrite inE in hwS; case/connectP: hwS => p hp hwl; rewrite hwl in hw.
+  move: hw; case: (shortenP hp) => p' hp' hu _ hw.
+  have [X' hX'] := odiff_path hp' hu.
+  set w' := last v0 p' in hw hX'.
+  have hneq : (w' == v0) = false.
+    apply/eqP => e; move: hw; rewrite e => h.
+    have := mathcomp.order.order.Order.POrderTheory.lt_trans hv0 h.
+    by rewrite mathcomp.order.order.Order.POrderTheory.ltxx.
+  have hr' : forall v, r X' v = r X v + (v == v0)%:R - (v == w')%:R.
+    by move=> v; rewrite /r hX' addrAC; congr (_ - _); rewrite addrAC.
+  exists X'.
+  rewrite /phi (bigD1 v0) //= [X in (_ < X)%N](bigD1 v0) //=.
+  rewrite -addSn; apply: leq_add.
+    by rewrite hr' eqxx eq_sym hneq subr0; exact: absz_addr1_lt.
+  apply: leq_sum => v hv; rewrite hr' (negbTE hv) addr0.
+  case: (eqVneq v w') => [hvw|hvw]; last by rewrite subr0.
+  by rewrite hvw; apply: ltnW; exact: absz_subr1_lt.
+exfalso.
+have hcl : forall a b, a \in S -> ores X a b -> b \in S.
+  by move=> a b; rewrite !inE => ha hab; exact: connect_trans ha (connect1 hab).
+have hS0 : v0 \in S by rewrite inE connect0.
+have hle : forall v, v \in S -> r X v <= 0.
+  move=> v hv; move: (hnone v); rewrite /= hv /= => /negbT.
+  by rewrite -mathcomp.order.order.Order.TotalTheory.leNgt.
+have hneg : \sum_(v in S) r X v < 0.
+  rewrite (bigD1 v0) //=.
+  have hrest : \sum_(v in S | v != v0) r X v <= 0.
+    by apply: sumr_le0 => v /andP[hv _]; exact: hle.
+  by rewrite -(addr0 0) ltr_leD.
+have hpos : 0 <= \sum_(v in S) r X v.
+  by rewrite /r sumrB (odiff_closed hcl) subr_ge0; exact: hcut.
+by move: hneg; rewrite mathcomp.order.order.Order.TotalTheory.ltNge hpos.
+Qed.
+
+(** An orientation in which no set has more than twice as many edges leaving as entering carries a
+    nowhere-zero 3-flow: the demands [- imbalance o] meet the cut condition, so some [X] meets them
+    ([odiff_demand_cut]), and [1 + [e in X]] along [o] is conservative. *)
+Lemma cut_orientation_flow3 :
+  (forall S : {set G},
+     (#|[set e | (otail o e \in S) && (ohead o e \notin S)]|
+      <= 2 * #|[set e | (ohead o e \in S) && (otail o e \notin S)]|)%N) ->
+  has_nz_kflow G 3.
+Proof.
+move=> hcut.
+have hq0 : \sum_v (- imbalance o v) = 0.
+  by rewrite sumrN (eq_bigr _ (fun v _ => imbalance_odiff v)) odiff_sum oppr0.
+(* [\sum_S - imbalance] is the number of edges leaving [S] minus those entering it. *)
+have hqcut : forall S : {set G}, \sum_(v in S) (- imbalance o v)
+    <= #|[set e | (ohead o e \in S) && (otail o e \notin S)]|%:R.
+  move=> S; rewrite sumrN imbalance_cut opprB lerBlDr -natrD ler_nat.
+  by rewrite addnn -mul2n; exact: hcut.
+have [X hX] := odiff_demand_cut hq0 hqcut.
+(* Along [o], the value is [1] off [X] and [2] on [X]. *)
+pose a e : int := 1 + (e \in X)%:R.
+exists (fun e => if o e then a e else - a e); split.
+  move=> v; apply/eqP; rewrite -subr_eq0.
+  have hc : forall (C : {set edge G}) (P : pred (edge G)),
+      \sum_e ((e \in C) && P e)%:R = #|[set e in C | P e]|%:R :> int.
+    move=> C P; rewrite -sum_indz [RHS]big_mkcond; apply: eq_bigr => e _.
+    by case: (P e); case: (e \in C).
+  have hc' : forall P : pred (edge G),
+      \sum_e (P e)%:R = #|[set e | P e]|%:R :> int.
+    move=> P; rewrite -(_ : [set e in [set: edge G] | P e] = [set e | P e]);
+      last by apply/setP => e; rewrite !inE.
+    by rewrite -hc; apply: eq_bigr => e _; rewrite in_setT.
+  rewrite (big_mkcond (fun e => source e == v)).
+  rewrite (big_mkcond (fun e => target e == v)) -sumrB.
+  rewrite (eq_bigr (fun e => ((otail o e == v)%:R - (ohead o e == v)%:R)
+    + (((e \in X) && (otail o e == v))%:R
+       - ((e \in X) && (ohead o e == v))%:R))); last first.
+    move=> e _.
+    have h1 : forall (b : bool) (x : int), (if b then x else 0) = x * b%:R.
+      by move=> [] x; rewrite ?mulr1 ?mulr0.
+    have h2 : (if o e then a e else - a e)
+                * ((source e == v)%:R - (target e == v)%:R)
+              = a e * ((otail o e == v)%:R - (ohead o e == v)%:R).
+      by rewrite /otail /ohead; case: (o e); rewrite // mulNr -mulrN opprB.
+    have h3 : forall b1 b2 : bool, ((b1 && b2)%:R : int) = b1%:R * b2%:R.
+      by move=> [] []; rewrite ?mulr1 ?mulr0.
+    by rewrite !h1 -mulrBr h2 !h3 -mulrBr /a mulrDl mul1r.
+  rewrite big_split /= !sumrB !hc !hc'.
+  have e1 : (#|[set e | otail o e == v]|%:R
+             - #|[set e | ohead o e == v]|%:R : int) = - imbalance o v.
+    by rewrite /imbalance opprB.
+  have e2 : (#|[set e in X | otail o e == v]|%:R
+             - #|[set e in X | ohead o e == v]|%:R : int) = imbalance o v.
+    by rewrite -[RHS]opprK -(hX v) /odiff opprB.
+  by rewrite e1 e2 addNr.
+move=> e /=.
+have -> : `|if o e then a e else - a e| = `|a e| by case: (o e); rewrite ?normrN.
+by rewrite /a; case: (e \in X) => /=; rewrite ?addr0 ?normr1 //; split.
+Qed.
+
+
 End ModOrient.
 
 Theorem modular_orientation_to_flow : external_modular_orientation_to_flow_statement.
@@ -1108,6 +1246,310 @@ Proof.
 exact: jaegers_modular_orientation_implies_three_flow modular_orientation_to_flow.
 Qed.
 
+(** ================================================================= *)
+(** ** gc:e184: the direction of Steffen's equivalence used by Row 1 => Tutte's
+       3-flow (classical-lemmas TODO 5)
+
+    No reduction of Kochol, no splitting of Mader and no attainment of the
+    circular flow number: the premise is used at one graph and one rational.
+    - The doubled inflation [inf2G G] (implications_U6's [infG] with every
+      cycle edge doubled) is 5-regular ([inf2_mdeg]).  A set that splits the
+      ends of a vertex cuts its doubled cycle in at least four edges
+      ([inf2_cut_split]); a union of whole vertex classes cuts the copies of a
+      cut of [G] ([inf2_cut_union]), which [edge_connected G 4] makes at least
+      four when the union is odd ([inf2_union_proper], [edge_connected_cut]).
+      An odd set of a 5-regular multigraph has an odd cut, so [inf2G G] is a
+      5-graph ([inf2_2t1]).
+    - The premise at [r = 3 + 1/(m+1)] gives a nowhere-zero rational flow;
+      along its signs no set has more than twice as many edges leaving as
+      entering ([rflow_cut_orientation]), and [odiff_demand_cut] turns that
+      orientation into an integer flow with values 1 and 2
+      ([cut_orientation_flow3]).
+    - Contracting the cycles keeps a flow on the copies of the edges of [G]
+      ([inf2_contract_flow]). *)
+
+(* [implications_U6] is only Required (see the header): its inflation lemmas
+   are used through these abbreviations. *)
+Local Notation inf_end := implications_U6.inf_end.
+Local Notation inf_nxt := implications_U6.inf_nxt.
+Local Notation inf_prv := implications_U6.inf_prv.
+Local Notation inf_end_nxt := implications_U6.inf_end_nxt.
+Local Notation inf_prv_nxt := implications_U6.inf_prv_nxt.
+Local Notation inf_nxt_prv := implications_U6.inf_nxt_prv.
+Local Notation inf_reach := implications_U6.inf_reach.
+
+(** A [k]-edge-connected multigraph has at least [k] edges across every cut that separates two vertices:
+    deleting the cut would leave a walk between them, which [uwalk_crosses] makes cross it. *)
+Lemma edge_connected_cut (G0 : mgraph) (k : nat) (S : {set G0}) (x y : G0) :
+  edge_connected G0 k -> x \in S -> y \notin S -> (k <= #|cut S|)%N.
+Proof.
+move=> hk hx hy; rewrite leqNgt; apply/negP => hlt.
+have [w [hw hall]] := hk (cut S) hlt x y.
+have hxy : (x \in S) != (y \in S) by rewrite hx (negbTE hy).
+have [f hfw hfc] := uwalk_crosses hw hxy.
+by move: (allP hall f hfw); rewrite hfc.
+Qed.
+
+(** Along an orbit of [f], a predicate that holds at the start and fails later is left at some step. *)
+Lemma iter_cross (T : Type) (f : T -> T) (P : pred T) (z : T) (n : nat) :
+  P z -> ~~ P (iter n f z) -> exists i, P (iter i f z) && ~~ P (iter i.+1 f z).
+Proof.
+move=> hz; elim: n => [|n IH] /=; first by rewrite hz.
+case hn: (P (iter n f z)).
+  by move=> hn1; exists n; rewrite hn hn1.
+by move=> _; apply: IH; rewrite hn.
+Qed.
+
+Section Inflate2.
+Variable G : mgraph.
+
+(** The doubled inflation: [inl e] joins the two ends of [e]; [inr (a, c)], for
+    [c : bool], joins [a] to the next end at the same vertex, so every cycle
+    edge of [infG] comes twice. *)
+Definition inf2_endpoint (b : bool) (f : edge G + ((edge G * bool) * bool))
+    : edge G * bool :=
+  match f with
+  | inl e => (e, b)
+  | inr ac => if b then inf_nxt ac.1 else ac.1
+  end.
+
+Definition inf2G : mgraph :=
+  @Graph unit unit (edge G * bool)%type (edge G + ((edge G * bool) * bool))%type
+    inf2_endpoint (fun _ => tt) (fun _ => tt).
+
+(** Each end [a] is the [b]-end of one copy when [a.2 = b], and of two cycle
+    edges: [inr (a, _)] for [b = false], [inr (inf_prv a, _)] for [b = true]. *)
+Lemma inf2_ends_at (b : bool) (a : inf2G) :
+  #|ends_at [set: edge inf2G] b a| = ((a.2 == b) + 2)%N.
+Proof.
+set x0 := if b then inf_prv a else a.
+have hP : forall f : edge inf2G, (f \in ends_at [set: edge inf2G] b a)
+    = match f with inl e => (e == a.1) && (a.2 == b) | inr p => p.1 == x0 end.
+  move=> -[e|[x c]]; rewrite !inE /= /inf2_endpoint /=.
+    by case: a {x0} => e' b'; rewrite xpair_eqE /= eq_sym [b == _]eq_sym.
+  rewrite /x0; case: b {x0} => //=.
+  by apply/eqP/eqP => [<-|->]; [rewrite inf_prv_nxt | rewrite inf_nxt_prv].
+have hS : ends_at [set: edge inf2G] b a
+    = (@inl (edge G) ((edge G * bool) * bool) @: [set e : edge G | (e == a.1) && (a.2 == b)])
+      :|: (@inr (edge G) ((edge G * bool) * bool) @: [set (x0, false); (x0, true)]).
+  apply/setP => f; rewrite hP inE; case: f => [e|p].
+    rewrite (mem_imset _ _ (@inl_inj _ _)) inE orbC.
+    by case: imsetP => // -[y _].
+  rewrite orbC (mem_imset _ _ (@inr_inj _ _)) !inE.
+  case: imsetP => [[y _]|] //=.
+  move=> _; case: p => x c /=; rewrite orbF !xpair_eqE; case: c; rewrite ?andbT ?andbF ?orbF //.
+rewrite hS cardsU (_ : _ :&: _ = set0); last first.
+  apply/setP => f; rewrite !inE; apply/negP => /andP[/imsetP[y _ ->] /imsetP[z _]] //.
+rewrite cards0 subn0 !card_imset; try by [exact: inl_inj | exact: inr_inj].
+rewrite cards2 xpair_eqE eqxx /=; congr (_ + _)%N.
+case: (a.2 == b).
+  by rewrite (_ : [set e | e == a.1 & true] = [set a.1]) ?cards1 //; apply/setP => x; rewrite !inE andbT.
+by rewrite (_ : [set e | e == a.1 & false] = set0) ?cards0 //; apply/setP => x; rewrite !inE andbF.
+Qed.
+
+Lemma inf2_mdeg (a : inf2G) : mdeg a = 5%N.
+Proof. by rewrite /mdeg /subdeg !inf2_ends_at; case: a => e []. Qed.
+
+Lemma inf2_card : #|inf2G| = (2 * #|edge G|)%N.
+Proof. by rewrite card_prod card_bool mulnC. Qed.
+
+(** A set that splits the ends of one vertex cuts its doubled cycle twice: at least four edges. *)
+Lemma inf2_cut_split (X : {set inf2G}) (a b : inf2G) :
+  a \in X -> b \notin X -> inf_end b = inf_end a -> (4 <= #|cut X|)%N.
+Proof.
+move=> ha hb hab.
+have [n hn] := inf_reach hab.
+have hbn : ~~ ((iter n (@inf_nxt G) a : inf2G) \in X) by rewrite hn.
+have [i /andP[hi hi1]] := @iter_cross _ (@inf_nxt G) (fun x : inf2G => x \in X) a n ha hbn.
+have [n' hn'] := inf_reach (esym hab).
+have han : ~~ ~~ ((iter n' (@inf_nxt G) b : inf2G) \in X) by rewrite hn' ha.
+have [j /andP[hj hj1]] := @iter_cross _ (@inf_nxt G) (fun x : inf2G => x \notin X) b n' hb han.
+move: hi1 hj1 => /= hi1 hj1; rewrite negbK in hj1.
+set x1 := iter i (@inf_nxt G) a in hi hi1.
+set x2 := iter j (@inf_nxt G) b in hj hj1.
+(* Each crossing step of the walk round the cycle is a pair of parallel cut edges. *)
+have hc : forall (x : edge G * bool) (c : bool),
+    ((x : inf2G) \in X) != ((@inf_nxt G x : inf2G) \in X) -> (inr (x, c) : edge inf2G) \in cut X.
+  by move=> x c h; rewrite inE /source /target /=; case: (x \in X) h; case: (inf_nxt x \in X).
+pose E4 : {set edge inf2G} := [set (inr (x1, c) : edge inf2G) | c in [set: bool]]
+                              :|: [set (inr (x2, c) : edge inf2G) | c in [set: bool]].
+have hsub : E4 \subset cut X.
+  apply/subsetP => f; rewrite inE => /orP[] /imsetP[c _ ->]; apply: hc.
+    by rewrite hi hi1.
+  by rewrite (negbTE hj) hj1.
+have hx12 : x1 != x2 by apply: contraNneq hj => <-.
+have hcard : #|E4| = 4%N.
+  rewrite cardsU (_ : _ :&: _ = set0) ?cards0 ?subn0; last first.
+    apply/setP => f; rewrite !inE; apply/negP => /andP[/imsetP[c _ ->] /imsetP[d _ [h _]]].
+    by move: hx12; rewrite h eqxx.
+  by rewrite !card_imset ?cardsT ?card_bool // => c d [].
+by apply: leq_trans (subset_leq_card hsub); rewrite hcard.
+Qed.
+
+(** A union of whole vertex classes cuts exactly the copies of the edges of the cut of [G]. *)
+Lemma inf2_cut_union (S : {set G}) :
+  #|cut [set a : inf2G | inf_end a \in S]| = #|cut S|.
+Proof.
+have hinj : injective (fun e : edge G => (inl e : edge inf2G)) by move=> x y [].
+rewrite -(card_imset (cut S) hinj); apply: eq_card => f.
+case: f => [e|[x c]].
+  rewrite (mem_imset _ _ hinj) !inE /source /target /=.
+  by rewrite /inf_end /=.
+(* A cycle edge has both ends at the same vertex of [G]. *)
+rewrite !inE /source /target /= inf_end_nxt addbb; apply/esym/negbTE/imsetP => -[y _] //.
+Qed.
+
+(** An odd union of whole vertex classes comes from a proper nonempty vertex set of [G]. *)
+Lemma inf2_union_proper (S : {set G}) :
+  odd #|[set a : inf2G | inf_end a \in S]| -> exists x y, x \in S /\ y \notin S.
+Proof.
+move=> hodd.
+case: (pickP (mem S)) => [x hx|hS0]; last first.
+  move: hodd; rewrite (_ : [set a : inf2G | inf_end a \in S] = set0) ?cards0 //.
+  by apply/setP => a; rewrite !inE; exact: (hS0 (inf_end a)).
+case: (pickP (predC (mem S))) => [y hy|hS1]; first by exists x, y.
+(* [S] is every vertex: the union is all ends, an even number ([inf2_card]). *)
+move: hodd; rewrite (_ : [set a : inf2G | inf_end a \in S] = setT) ?cardsT ?inf2_card ?oddM //.
+apply/setP => a; rewrite !inE; have := hS1 (inf_end a).
+by rewrite /= => /negbFE.
+Qed.
+
+Lemma inf2_2t1 : edge_connected G 4 -> is_2t1_graph inf2G 2.
+Proof.
+move=> hk; split; first by move=> a; rewrite inf2_mdeg.
+move=> X hX.
+(* In a 5-regular multigraph an odd set has an odd cut, so four crossing edges make five. *)
+have hpar : odd #|cut X| by rewrite (@reg_cut_parity _ 5 X inf2_mdeg) oddM hX.
+suff h4 : (4 <= #|cut X|)%N.
+  move: h4; rewrite leq_eqVlt => /orP[/eqP h|//].
+  by move: hpar; rewrite -h.
+case: (boolP [exists a : inf2G, exists b : inf2G, [&& a \in X, b \notin X & inf_end b == inf_end a]]).
+  by case/existsP => a /existsP[b /and3P[ha hb /eqP hab]]; exact: inf2_cut_split ha hb hab.
+(* Otherwise [X] is a union of whole vertex classes, of a proper nonempty set of vertices of [G]. *)
+move=> hno.
+set S := [set v : G | [exists a : inf2G, (a \in X) && (inf_end a == v)]].
+have hXS : X = [set a : inf2G | inf_end a \in S].
+  apply/setP => a; rewrite !inE; apply/idP/idP => [ha|/existsP[a' /andP[ha' /eqP he]]].
+    by apply/existsP; exists a; rewrite ha eqxx.
+  apply: contraNT hno => hna; apply/existsP; exists a'; apply/existsP; exists a.
+  by rewrite ha' hna he eqxx.
+have hodd : odd #|[set a : inf2G | inf_end a \in S]| by rewrite -hXS.
+have [x [y [hx hy]]] := @inf2_union_proper S hodd.
+by rewrite hXS inf2_cut_union; exact: edge_connected_cut hk hx hy.
+Qed.
+
+(** Contracting the cycles: the values on the copies [inl e] form a flow of [G].  Summed over the ends of
+    [v], conservation counts every cycle edge of [v] once leaving and once entering, so they cancel. *)
+Lemma inf2_contract_flow (k : nat) : has_nz_kflow inf2G k -> has_nz_kflow G k.
+Proof.
+move=> [phi2 [hcons hbnd]].
+exists (fun e => phi2 (inl e)); split; last by move=> e; exact: hbnd.
+move=> v.
+(* Gather the edges of [inf2G] by the vertex of [G] at their [b]-end. *)
+have hside : forall b : bool,
+    \sum_(a : inf2G | inf_end a == v) \sum_(f : edge inf2G | endpoint b f == a) phi2 f
+    = \sum_(f : edge inf2G | inf_end (endpoint b f) == v) phi2 f.
+  move=> b; rewrite [RHS](partition_big (fun f => endpoint b f) (fun a : inf2G => inf_end a == v)) //=.
+  apply: eq_bigr => a /eqP ha; apply: eq_bigl => f.
+  by case: (inf2_endpoint b f =P a) => [->|]; rewrite ?ha ?eqxx ?andbF ?andbT.
+(* The copies give the [b]-side sum of [G]; the cycle edges of [v] give the same sum on both sides. *)
+have hsplit : forall b : bool,
+    \sum_(f : edge inf2G | inf_end (endpoint b f) == v) phi2 f
+    = \sum_(e : edge G | endpoint b e == v) phi2 (inl e)
+      + \sum_(p : (edge G * bool) * bool | inf_end p.1 == v) phi2 (inr p).
+  move=> b; rewrite big_mkcond big_sumType /=; congr (_ + _).
+    by rewrite [RHS]big_mkcond; apply: eq_bigr => e _.
+  rewrite [RHS]big_mkcond; apply: eq_bigr => p _.
+  by case: b => //=; rewrite inf_end_nxt.
+have hc : \sum_(a : inf2G | inf_end a == v) \sum_(f : edge inf2G | endpoint false f == a) phi2 f
+        = \sum_(a : inf2G | inf_end a == v) \sum_(f : edge inf2G | endpoint true f == a) phi2 f.
+  by apply: eq_bigr => a _; exact: hcons a.
+by move: hc; rewrite !hside !hsplit => /addIr.
+Qed.
+
+End Inflate2.
+
+
+(** Rounding: a nowhere-zero rational [r]-flow with [r = 3 + 1/(m+1)], [m] the number of edges, orients
+    the edges (along the sign of the flow) so that no set has more than twice as many edges leaving as
+    entering.  Over a cut, the absolute values leaving and entering balance; each lies in
+    [[1, 2 + 1/(m+1)]], and at most [m] edges enter. *)
+Lemma rflow_cut_orientation (H : mgraph) :
+  has_nz_rflow H (3%:R + (#|edge H|.+1)%:R^-1) ->
+  exists o : edge H -> bool, forall S : {set H},
+    (#|[set e | (otail o e \in S) && (ohead o e \notin S)]|
+     <= 2 * #|[set e | (ohead o e \in S) && (otail o e \notin S)]|)%N.
+Proof.
+move=> [phi [hcons hb]].
+pose o e := 0 < phi e.
+exists o => S.
+(* Conservation summed over [S]: the flow on the edges with source in [S] equals the flow on the
+   edges with target in [S]. *)
+have hend : forall b : bool,
+    \sum_(v in S) \sum_(e | endpoint b e == v) phi e = \sum_(e | endpoint b e \in S) phi e.
+  move=> b; rewrite [RHS](partition_big (fun e => endpoint b e) (mem S)) //=.
+  apply: eq_bigr => v hv; apply: eq_bigl => e.
+  by case: (endpoint b e =P v) => [->|]; rewrite ?hv ?andbF ?andbT.
+have hST : \sum_(e | source e \in S) phi e = \sum_(e | target e \in S) phi e.
+  by rewrite -(hend false) -(hend true); apply: eq_bigr => v _; exact: hcons.
+set Out := [set e | otail o e \in S & ohead o e \notin S].
+set In := [set e | ohead o e \in S & otail o e \notin S].
+(* Along [o], that difference is the absolute flow leaving [S] minus the one entering it. *)
+have hpt : forall e, (if source e \in S then phi e else 0) - (if target e \in S then phi e else 0)
+    = (if e \in Out then `|phi e| else 0) - (if e \in In then `|phi e| else 0).
+  move=> e; rewrite !inE /otail /ohead /o.
+  case: (boolP (0 < phi e)) => hp.
+    rewrite (gtr0_norm hp).
+    by case: (source e \in S); case: (target e \in S); rewrite /= ?subr0 ?sub0r ?subrr.
+  rewrite (ler0_norm (_ : phi e <= 0)); last by rewrite order.Order.TotalTheory.leNgt.
+  by case: (source e \in S); case: (target e \in S); rewrite /= ?subr0 ?sub0r ?subrr ?opprK.
+have hbal : \sum_(e in Out) `|phi e| = \sum_(e in In) `|phi e|.
+  apply/eqP; rewrite -subr_eq0 big_mkcond [X in _ - X]big_mkcond -sumrB.
+  rewrite -(eq_bigr _ (fun e _ => hpt e)) sumrB -!big_mkcond /=.
+  by rewrite hST subrr.
+(* Each absolute value lies in [[1, 2 + 1/(m+1)]], and fewer than [m+1] edges enter [S]. *)
+set m := #|edge H|.
+have hlo : (#|Out|%:R : rat) <= \sum_(e in Out) `|phi e|.
+  have -> : (#|Out|%:R : rat) = \sum_(e in Out) 1 by rewrite sumr_const.
+  by apply: ler_sum => e _; exact: (hb e).1.
+have h31 : (3 : rat) + m.+1%:R^-1 - 1 = 2 + m.+1%:R^-1.
+  by rewrite addrAC (_ : (3 : rat) - 1 = 2) //; apply/eqP; rewrite subr_eq.
+have hhi : \sum_(e in In) `|phi e| <= #|In|%:R * (2 + m.+1%:R^-1).
+  have -> : #|In|%:R * (2 + m.+1%:R^-1) = \sum_(e in In) (2 + m.+1%:R^-1 : rat).
+    by rewrite sumr_const mulr_natl.
+  by apply: ler_sum => e _; rewrite -h31; exact: (hb e).2.
+have hIn : (#|In| < m.+1)%N by rewrite ltnS /m; exact: max_card.
+have hfrac : (#|In|%:R : rat) * m.+1%:R^-1 < 1.
+  by rewrite ltr_pdivrMr ?ltr0n // mul1r ltr_nat.
+have : (#|Out|%:R : rat) < (2 * #|In|).+1%:R.
+  apply: (order.Order.POrderTheory.le_lt_trans hlo); rewrite hbal.
+  apply: (order.Order.POrderTheory.le_lt_trans hhi).
+  have -> : ((2 * #|In|).+1%:R : rat) = #|In|%:R * 2 + 1.
+    by rewrite -[(2 * #|In|).+1]addn1 natrD mulnC natrM.
+  by rewrite mulrDr ltrD2l.
+by rewrite ltr_nat ltnS.
+Qed.
+
+(** gc:e184's external, proved: the doubled inflation [inf2G G] of a 4-edge-connected [G] with an edge is a
+    5-graph ([inf2_2t1], [inf2_card]); the premise gives it a nowhere-zero [r]-flow for
+    [r = 3 + 1/(m+1)], which rounds to an orientation with the cut condition ([rflow_cut_orientation]),
+    hence a nowhere-zero 3-flow of [inf2G G] ([cut_orientation_flow3]), which contracts to one of [G]
+    ([inf2_contract_flow]). *)
+Theorem steffen_3flow_5graphs : external_steffen_3flow_5graphs_statement.
+Proof.
+move=> Hprem G hE hk.
+have hH0 : (0 < #|inf2G G|)%N by rewrite inf2_card muln_gt0.
+have hr : (3%:R : rat) < 3%:R + (#|edge (inf2G G)|.+1)%:R^-1.
+  by rewrite ltrDl invr_gt0 ltr0n.
+have [o ho] := rflow_cut_orientation (Hprem _ hH0 (inf2_2t1 hk) _ hr).
+exact: inf2_contract_flow (cut_orientation_flow3 ho).
+Qed.
+
+(*@EDGE from=circular_flow_numbers_of_r_graphs_statement to=three_flow_statement kind=implies status=verified proof=unconditional_circular_flow_numbers_of_r_graphs_implies_three_flow cite="gc:e184" note="The t=2 instance of Row 1 is exactly 'every 5-graph has circular flow number at most 2+2/2=3' (cfn_bound_t2); the direction of Steffen's cited equivalence used here is proved as steffen_3flow_5graphs: a 4-edge-connected G inflates (every vertex a doubled cycle through its arc ends) to a 5-graph, whose rational flow at r = 3+1/(m+1) orients the edges so that no set has more than twice as many leaving as entering edges, hence an integer flow with values 1 and 2 (odiff_demand_cut), which contracts to G" *)
+Theorem unconditional_circular_flow_numbers_of_r_graphs_implies_three_flow :
+  circular_flow_numbers_of_r_graphs_statement -> three_flow_statement.
+Proof. exact: circular_flow_numbers_of_r_graphs_implies_three_flow steffen_3flow_5graphs. Qed.
+
 (** ── Audited non-edges (machine-readable; extracted by build_edge_graph.py) ── *)
 
 
@@ -1129,3 +1571,8 @@ Print Assumptions unconditional_circular_flow_numbers_of_r_graphs_implies_circul
 
 Print Assumptions modular_orientation_to_flow.
 Print Assumptions unconditional_jaegers_modular_orientation_implies_three_flow.
+
+(** ** Axiom audit (gc:e184) *)
+
+Print Assumptions steffen_3flow_5graphs.
+Print Assumptions unconditional_circular_flow_numbers_of_r_graphs_implies_three_flow.
