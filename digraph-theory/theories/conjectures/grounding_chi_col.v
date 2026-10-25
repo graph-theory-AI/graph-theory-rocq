@@ -383,6 +383,18 @@ Proof. by apply/degree_balance.balancedP; exact: degree_balance.balanced_ground_
 Lemma not_eulerian_TT2 : ~~ eulerian (TT 2).
 Proof. by apply/negP => /degree_balance.balancedP; exact: degree_balance.not_balanced_ground_TT2. Qed.
 
+(** Since 2026-10-25 [majority_3col_eulerian_statement] also assumes [loopless D] (a looped
+    vertex is balanced and was a same-coloured out-neighbour of itself).  Its antecedent class
+    stays inhabited: C3, a tournament, is loopless, Eulerian and nonempty. *)
+Lemma majority_eulerian_loopless_class_inhabited :
+  exists D : diGraphType,
+    [/\ Digraph.conjectures.two_extremal.loopless D, eulerian D & (0 < #|D|)%N].
+Proof.
+exists (C3 : diGraphType); split; first by move=> v; exact: arcxx.
+- exact: eulerian_C3.
+- by rewrite card_C3.
+Qed.
+
 (** ==================================================================== *)
 (** ** I. [acyclic_number_ge] teeth (chi_bounded.v, avec_core "attained" clause).
 

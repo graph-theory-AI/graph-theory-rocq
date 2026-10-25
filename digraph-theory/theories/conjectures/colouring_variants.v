@@ -72,36 +72,48 @@ Proof. by []. Qed.
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__00/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__00.json
     English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Conjecture 2)
-      Every finite digraph has a majority 3-colouring: there is a colouring of its vertices by
-      three colours such that every vertex v has at most half of its out-neighbours coloured
-      like v.
-    Definitions: [majority_col col] - at every vertex at most half of its out-neighbours carry
-      the same colour as itself, written without division as 2 * #(same-coloured out-neighbours)
-      <= outdeg (this file); [same_col_outnb col v] - the out-neighbours of v with the colour of
-      v (this file); [outdeg v] - out-degree (core/oriented.v); ['I_3] - a three-element colour
-      set (MathComp).
-    Notes: The empty digraph and isolated vertices satisfy the condition trivially; no guard is
-      needed because the conclusion is an existential over colourings, which is inhabited. *)
+      Every finite loopless digraph has a majority 3-colouring: there is a colouring of its
+      vertices by three colours such that every vertex v has at most half of its out-neighbours
+      coloured like v.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [majority_col col] - at every vertex at most half of its out-neighbours carry the same
+      colour as itself, written without division as 2 * #(same-coloured out-neighbours) <= outdeg
+      (this file); [same_col_outnb col v] - the out-neighbours of v with the colour of v (this
+      file); [outdeg v] - out-degree (core/oriented.v); ['I_3] - a three-element colour set
+      (MathComp).
+    Notes: the [loopless D] guard is load-bearing. [diGraphType] allows loops, and a loop at v
+      makes v a same-coloured out-neighbour of itself, so the one-vertex digraph with a loop has no
+      majority colouring with any number of colours
+      (meta/probe_hints/majority_3col_statement.v).  The source's digraphs have no loops: its
+      Theorem 1, every digraph has a majority 4-colouring, fails on that digraph.  The guard was
+      added on 2026-10-25 (meta/STATEMENT_IMPROVEMENTS.md).  The empty digraph and isolated
+      vertices satisfy the condition trivially. *)
 Definition majority_3col_statement : Prop :=
-  forall D : diGraphType, exists col : D -> 'I_3, majority_col col.
+  forall D : diGraphType, loopless D -> exists col : D -> 'I_3, majority_col col.
 
 (** Corpus row: arxiv:1608.03040#01
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__01/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__01.json
     English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Conjecture 9)
-      For every k >= 2 and every finite digraph there is a colouring of the vertices by k+1
-      colours such that every vertex v has at most a fraction 1/k of its out-neighbours coloured
-      like v, written without division as k * #(same-coloured out-neighbours of v) <= outdeg v.
-    Definitions: [kmajority_col k col] - the parametric bound k * #(same-coloured
-      out-neighbours) <= outdeg at every vertex (this file); [same_col_outnb col v] (this file);
-      [outdeg v] (core/oriented.v); ['I_k.+1] - a colour set of size k+1 (MathComp).
+      For every k >= 2 and every finite loopless digraph there is a colouring of the vertices by
+      k+1 colours such that every vertex v has at most a fraction 1/k of its out-neighbours
+      coloured like v, written without division as k * #(same-coloured out-neighbours of v) <=
+      outdeg v.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [kmajority_col k col] - the parametric bound k * #(same-coloured out-neighbours) <= outdeg
+      at every vertex (this file); [same_col_outnb col v] (this file); [outdeg v]
+      (core/oriented.v); ['I_k.+1] - a colour set of size k+1 (MathComp).
     Notes: The corpus row is marked disproved (Girao, Kittipassorn, Popielarz showed k+1 colours
       do not suffice for k >= 3); the definition encodes the conjecture as originally stated,
       which is what a refutation must contradict. At k = 2 it is exactly majority colouring
-      ([kmajority_col2] in this file). *)
+      ([kmajority_col2] in this file). The [loopless D] guard is load-bearing: a loop makes a
+      vertex a same-coloured out-neighbour of itself, so the one-vertex digraph with a loop
+      refuted the earlier unguarded body cheaply (meta/probe_hints/majority_k1col_statement.v),
+      unlike the genuine refutation, which uses loopless digraphs.  The guard was added on
+      2026-10-25 (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition majority_k1col_statement : Prop :=
   forall (k : nat), 2 <= k ->
-    forall D : diGraphType, exists col : D -> 'I_k.+1, kmajority_col k col.
+    forall D : diGraphType, loopless D -> exists col : D -> 'I_k.+1, kmajority_col k col.
 
 (** Corpus row: arxiv:1608.03040#03
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__03/
@@ -124,39 +136,47 @@ Definition eulerian (D : diGraphType) : bool :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__04/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__04.json
     English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 3)
-      Every finite Eulerian digraph, that is every digraph in which in-degree equals out-degree
-      at every vertex, has a majority 3-colouring.
-    Definitions: [eulerian D] - in-degree equals out-degree at every vertex (this file); [indeg
-      v] - in-degree (this file, also defined in conjectures/classic_core.v); [majority_col]
-      (this file).
+      Every finite loopless Eulerian digraph, that is every loopless digraph in which in-degree
+      equals out-degree at every vertex, has a majority 3-colouring.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [eulerian D] - in-degree equals out-degree at every vertex (this file); [indeg v] -
+      in-degree (this file, also defined in conjectures/classic_core.v); [majority_col] (this
+      file).
     Notes: [eulerian] encodes only the balanced-degree condition and drops the connectivity
       usually required of an Eulerian digraph, so the hypothesis is weaker and the statement
       correspondingly stronger; majority colouring is a local condition, and a balanced digraph
-      is a disjoint union of connected balanced digraphs, so the two readings are equivalent. *)
+      is a disjoint union of connected balanced digraphs, so the two readings are equivalent.
+      The [loopless D] guard is load-bearing: a looped vertex is balanced and is a same-coloured
+      out-neighbour of itself, so the one-vertex digraph with a loop refuted the earlier
+      unguarded body (meta/probe_hints/majority_3col_eulerian_statement.v); the source's digraphs
+      have no loops.  The guard was added on 2026-10-25 as a reviewed one-way source repair of
+      this migrated row (direction weaken; meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition majority_3col_eulerian_statement : Prop :=
-  forall D : diGraphType, eulerian D ->
+  forall D : diGraphType, loopless D -> eulerian D ->
     exists col : D -> 'I_3, majority_col col.
 
 (** *** Relative edges among the majority statements *)
 
 (** Conjecture 9 at [k = 2] gives a 3-colouring with [2·(#same) <= deg⁺], which
-    is exactly the majority condition: Conj 9 ⇒ Conj 2. *)
+    is exactly the majority condition: Conj 9 ⇒ Conj 2 (both carry the loopless guard). *)
 Theorem majority_k1col_implies_majority_3col :
   majority_k1col_statement -> majority_3col_statement.
 Proof.
-move=> H9 D; have [col Hcol] := H9 2 (leqnn 2) D.
+move=> H9 D lD; have [col Hcol] := H9 2 (leqnn 2) D lD.
 by exists col; exact: Hcol.
 Qed.
 
-(** The general digraph statement specialises to tournaments. *)
+(** The general digraph statement specialises to tournaments, which are loopless
+    (their arc relation is irreflexive). *)
 Theorem majority_3col_implies_tournament :
   majority_3col_statement -> majority_3col_tournament_statement.
-Proof. by move=> H T; apply: (H T). Qed.
+Proof. by move=> H T; apply: (H T); exact: arcxx. Qed.
 
-(** The general digraph statement specialises to Eulerian digraphs. *)
+(** The general digraph statement specialises to Eulerian digraphs (both carry the
+    loopless guard). *)
 Theorem majority_3col_implies_eulerian :
   majority_3col_statement -> majority_3col_eulerian_statement.
-Proof. by move=> H D _; apply: H. Qed.
+Proof. by move=> H D lD _; apply: H. Qed.
 
 (** ** 2. Oriented chromatic number / digraph homomorphism ******************* *)
 

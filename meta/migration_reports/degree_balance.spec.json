@@ -113,7 +113,8 @@
     "",
     "B17 rows, frozen complete in cycle-theory/theories/migration/eulerian.v over the frozen helper with every guard in its order: `decomposing_an_eulerian_graph_into_cycles_statement` (opg, positive vertex and edge counts, `simple_mgraph`, the floor bound `(#|G| - 1) %/ 2`), `decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement` (opg, positive vertex count, minimum arc-end degree 4, the SUPPLIED directed `is_eulerian_tour w`, the cyclic-consecutive exclusion), `decomposing_eulerian_graphs_statement` (opg, positive counts, `edge_connected G 6`, the supplied `transition2_system`, the compatible decomposition). `is_eulerian_tour` (a supplied DIRECTED closed walk from an existential vertex using every edge once) and `even_subgraph` are NOT migrated and no tour equivalence or extra nonempty/loopless guard is stated: the directed-tour limitation documented in row 5 is preserved as is. Proof consumers grounding_U6 `eulerian_unit`, `eulerian_mconnected`, `eulerian_Gd`, `eulerian_G2loop` and `u6_decomposing_eulerian_G2loop` compile unchanged (the alias is transparent). History: no migration snapshot references the helper or the rows; the only lexical mention is this family's own `cv_eulerian_compat` (colouring_variants.eulerian, a short-name match). Routing: normal milestone U6 (cycle-theory); the import consumers U10, grounding_U10, implications_U6/U10 and Atlas.implications_A1 recompile without change.",
     "",
-    "directed-neighbourhood (first stage, baseline 761e776c, 2026-10-09): classic_core.indeg and colouring_variants.indeg, which this family's per-row snapshots Legacy.x221_eulerian, Legacy.cv_eulerian and Legacy.Eulerian keep live, are now transparent aliases of this family's canonical indeg (conversion). directed-neighbourhood keys the three snapshots in its own spec and freezes their complete pre-B16 Originals over the raw in-degrees (DegreeBalanceOriginal and the *Original row modules of Digraph.migration.directed_neighbourhood). Nothing of this family changes: indeg, balanced and balancedb keep their bodies; foundations/degree_balance.v gains diregular, the indeg/outdeg bridges and the tournament equalities, owned by directed-neighbourhood."
+    "directed-neighbourhood (first stage, baseline 761e776c, 2026-10-09): classic_core.indeg and colouring_variants.indeg, which this family's per-row snapshots Legacy.x221_eulerian, Legacy.cv_eulerian and Legacy.Eulerian keep live, are now transparent aliases of this family's canonical indeg (conversion). directed-neighbourhood keys the three snapshots in its own spec and freezes their complete pre-B16 Originals over the raw in-degrees (DegreeBalanceOriginal and the *Original row modules of Digraph.migration.directed_neighbourhood). Nothing of this family changes: indeg, balanced and balancedb keep their bodies; foundations/degree_balance.v gains diregular, the indeg/outdeg bridges and the tournament equalities, owned by directed-neighbourhood.",
+    "Source repair (2026-10-25, PROGRAMME A2 with the A4 direction weaken, its first use; record meta/STATEMENT_IMPROVEMENTS.md, arxiv:1608.03040#04 entry), not a migration equivalence: the live colouring_variants row majority_3col_eulerian_statement gained a loopless D guard (the looped one-vertex digraph is balanced and refuted the unguarded row). The frozen ColouringVariantsLegacy row keeps the B16 text verbatim; its statement entry carries the repair (one exact text replacement, the pinned doc block, the record, direction weaken), and its certificate is kernel-checked as frozen -> live (the converse would derive the refuted unguarded row)."
   ],
   "frozen": [
     {
@@ -193,7 +194,16 @@
         "eulerian": "Legacy.cv_eulerian"
       },
       "certificate": "Digraph.migration.degree_balance.majority_3col_eulerian_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "eulerian D ->",
+          "loopless D -> eulerian D ->"
+        ],
+        "doc_block_sha256": "7a7f06ef489170c1e992f66e6bf6d71e5ea3fe6dc287c33afa3a50074da67fc4",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "direction": "weaken"
+      }
     },
     {
       "kind": "statement",

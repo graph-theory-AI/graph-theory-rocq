@@ -31,19 +31,19 @@ Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
-(*@EDGE from=majority_3col_statement to=majority_3col_tournament_statement kind=implies status=verified proof=majority_3col_implies_majority_3col_tournament cite="gc:e016" note="Class instantiation: a tournament IS a diGraphType (the Tournament structure inherits DiGraph), and both rows use the same majority_col predicate, so the universal statement applied to T is literally the conclusion." *)
+(*@EDGE from=majority_3col_statement to=majority_3col_tournament_statement kind=implies status=verified proof=majority_3col_implies_majority_3col_tournament cite="gc:e016" note="Class instantiation: a tournament IS a diGraphType (the Tournament structure inherits DiGraph) and is loopless (its arc relation is irreflexive, arcxx), and both rows use the same majority_col predicate, so the universal statement applied to T and its looplessness is literally the conclusion." *)
 
 Theorem majority_3col_implies_majority_3col_tournament :
   majority_3col_statement -> majority_3col_tournament_statement.
 Proof. exact: majority_3col_implies_tournament. Qed.
 
-(*@EDGE from=majority_3col_statement to=majority_3col_eulerian_statement kind=implies status=verified proof=majority_3col_implies_majority_3col_eulerian cite="gc:e017" note="Hypothesis dropping: the target only adds the eulerian D premise to the same conclusion, so the unrestricted statement applies after discarding it." *)
+(*@EDGE from=majority_3col_statement to=majority_3col_eulerian_statement kind=implies status=verified proof=majority_3col_implies_majority_3col_eulerian cite="gc:e017" note="Hypothesis dropping: both rows carry the loopless D guard, and the target only adds the eulerian D premise to the same conclusion, so the source applies to D and its looplessness after discarding the eulerian premise." *)
 
 Theorem majority_3col_implies_majority_3col_eulerian :
   majority_3col_statement -> majority_3col_eulerian_statement.
 Proof. exact: majority_3col_implies_eulerian. Qed.
 
-(*@EDGE from=majority_k1col_statement to=majority_3col_statement kind=implies status=verified proof=majority_k1col_implies_majority_3col cite="gc:e018" note="Parameter instantiation at k = 2: 'I_k.+1 becomes 'I_3 and kmajority_col 2 col is CONVERTIBLE to majority_col col (kmajority_col2 in colouring_variants.v), so the k = 2 instance is the target verbatim." *)
+(*@EDGE from=majority_k1col_statement to=majority_3col_statement kind=implies status=verified proof=majority_k1col_implies_majority_3col cite="gc:e018" note="Parameter instantiation at k = 2: 'I_k.+1 becomes 'I_3 and kmajority_col 2 col is CONVERTIBLE to majority_col col (kmajority_col2 in colouring_variants.v), so the k = 2 instance, with the loopless D guard passed through, is the target verbatim." *)
 
 Theorem majority_k1col_implies_majority_3col :
   majority_k1col_statement -> majority_3col_statement.

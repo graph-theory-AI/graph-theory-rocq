@@ -26,12 +26,12 @@ Lemma x45_same_colour_outneighboursE (D : diGraphType) (col : D -> 'I_3) (v : D)
   x45_same_colour_outneighbours col v = #|same_col_outnb col v|.
 Proof. by []. Qed.
 
-(*@EDGE from=majority_3col_statement to=majority_three_colouring_beta_statement kind=implies status=verified proof=majority_3col_implies_majority_three_colouring_beta cite="gc:e038" note="Take beta = 1/2 (p = 1, q = 2) and ignore the target's loopless guard: x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= 1 * outdeg of the target." *)
+(*@EDGE from=majority_3col_statement to=majority_three_colouring_beta_statement kind=implies status=verified proof=majority_3col_implies_majority_three_colouring_beta cite="gc:e038" note="Take beta = 1/2 (p = 1, q = 2) and pass the target's loopless guard to the source (both rows carry it): x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= 1 * outdeg of the target." *)
 
 Theorem majority_3col_implies_majority_three_colouring_beta :
   majority_3col_statement -> majority_three_colouring_beta_statement.
 Proof.
-move=> H; exists 1, 2; split => // D _; have [col Hcol] := H D; exists col => v.
+move=> H; exists 1, 2; split => // D lD; have [col Hcol] := H D lD; exists col => v.
 by rewrite mul1n x45_same_colour_outneighboursE; exact: (forallP Hcol v).
 Qed.
 

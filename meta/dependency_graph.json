@@ -1085,7 +1085,7 @@
    "status": "verified",
    "cite": "gc:e017",
    "proof": "majority_3col_implies_majority_3col_eulerian",
-   "note": "Hypothesis dropping: the target only adds the eulerian D premise to the same conclusion, so the unrestricted statement applies after discarding it.",
+   "note": "Hypothesis dropping: both rows carry the loopless D guard, and the target only adds the eulerian D premise to the same conclusion, so the source applies to D and its looplessness after discarding the eulerian premise.",
    "external": [],
    "sources": [
     "digraph-theory/implications_X1.v"
@@ -1098,7 +1098,7 @@
    "status": "verified",
    "cite": "gc:e016",
    "proof": "majority_3col_implies_majority_3col_tournament",
-   "note": "Class instantiation: a tournament IS a diGraphType (the Tournament structure inherits DiGraph), and both rows use the same majority_col predicate, so the universal statement applied to T is literally the conclusion.",
+   "note": "Class instantiation: a tournament IS a diGraphType (the Tournament structure inherits DiGraph) and is loopless (its arc relation is irreflexive, arcxx), and both rows use the same majority_col predicate, so the universal statement applied to T and its looplessness is literally the conclusion.",
    "external": [],
    "sources": [
     "digraph-theory/implications_X1.v"
@@ -1111,7 +1111,7 @@
    "status": "verified",
    "cite": "gc:e038",
    "proof": "majority_3col_implies_majority_three_colouring_beta",
-   "note": "Take beta = 1/2 (p = 1, q = 2) and ignore the target's loopless guard: x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= 1 * outdeg of the target.",
+   "note": "Take beta = 1/2 (p = 1, q = 2) and pass the target's loopless guard to the source (both rows carry it): x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= 1 * outdeg of the target.",
    "external": [],
    "sources": [
     "digraph-theory/implications_X45.v"
@@ -1124,7 +1124,7 @@
    "status": "verified",
    "cite": "gc:e018",
    "proof": "majority_k1col_implies_majority_3col",
-   "note": "Parameter instantiation at k = 2: 'I_k.+1 becomes 'I_3 and kmajority_col 2 col is CONVERTIBLE to majority_col col (kmajority_col2 in colouring_variants.v), so the k = 2 instance is the target verbatim.",
+   "note": "Parameter instantiation at k = 2: 'I_k.+1 becomes 'I_3 and kmajority_col 2 col is CONVERTIBLE to majority_col col (kmajority_col2 in colouring_variants.v), so the k = 2 instance, with the loopless D guard passed through, is the target verbatim.",
    "external": [],
    "sources": [
     "digraph-theory/implications_X1.v"

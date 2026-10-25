@@ -1288,10 +1288,10 @@
    "proof": "majority_3col_implies_majority_3col_eulerian",
    "external": [],
    "reason": "",
-   "proved_by": "wave E3 agent (Claude Opus 5), 2026-09-24",
-   "reviewed_by": "Claude Opus 5 second reader R1 (edge programme, 2026-09-24): externals, load-bearing foundations and <=2-tactic proofs re-read; see meta/E1-A1_edge_audit.md",
-   "reviewed_at": "2026-09-24",
-   "note": "Hypothesis dropping: the target only adds the eulerian D premise to the same conclusion, so the unrestricted statement applies after discarding it."
+   "proved_by": "wave E3 agent (Claude Opus 5), 2026-09-24 Re-proved by Lancelot (lane 4, 2026-10-25) after the loopless guards on the majority rows.",
+   "reviewed_by": "Arthur (lane 4 loop-sweep review, 2026-10-25)",
+   "reviewed_at": "2026-10-25",
+   "note": "Hypothesis dropping: both rows carry the loopless D guard, and the target only adds the eulerian D premise to the same conclusion, so the source applies to D and its looplessness after discarding the eulerian premise."
   },
   "majority_3col_statement->majority_3col_tournament_statement:implies": {
    "gc": "e016",
@@ -1302,10 +1302,10 @@
    "proof": "majority_3col_implies_majority_3col_tournament",
    "external": [],
    "reason": "",
-   "proved_by": "wave E3 agent (Claude Opus 5), 2026-09-24",
-   "reviewed_by": "Claude Opus 5 second reader R1 (edge programme, 2026-09-24): externals, load-bearing foundations and <=2-tactic proofs re-read; see meta/E1-A1_edge_audit.md",
-   "reviewed_at": "2026-09-24",
-   "note": "Class instantiation: a tournament IS a diGraphType (the Tournament structure inherits DiGraph), and both rows use the same majority_col predicate, so the universal statement applied to T is literally the conclusion."
+   "proved_by": "wave E3 agent (Claude Opus 5), 2026-09-24 Re-proved by Lancelot (lane 4, 2026-10-25) after the loopless guards on the majority rows.",
+   "reviewed_by": "Arthur (lane 4 loop-sweep review, 2026-10-25)",
+   "reviewed_at": "2026-10-25",
+   "note": "Class instantiation: a tournament IS a diGraphType (the Tournament structure inherits DiGraph) and is loopless (its arc relation is irreflexive, arcxx), and both rows use the same majority_col predicate, so the universal statement applied to T and its looplessness is literally the conclusion."
   },
   "majority_3col_statement->majority_three_colouring_beta_statement:implies": {
    "gc": "e038",
@@ -1316,10 +1316,10 @@
    "proof": "majority_3col_implies_majority_three_colouring_beta",
    "external": [],
    "reason": "",
-   "proved_by": "Arthur (mathematics programme, 2026-10-25): re-proved after the X45 re-encoding (some beta < 1 on loopless digraphs; witness beta = 1/2); first proved by the wave E3 agent (Claude Opus 5), 2026-09-24",
-   "reviewed_by": "Marcol (X45 review, 2026-10-25)",
+   "proved_by": "Arthur (mathematics programme, 2026-10-25): re-proved after the X45 re-encoding (some beta < 1 on loopless digraphs; witness beta = 1/2); first proved by the wave E3 agent (Claude Opus 5), 2026-09-24 Re-proved by Lancelot (lane 4, 2026-10-25) after the loopless guards on the majority rows.",
+   "reviewed_by": "Arthur (lane 4 loop-sweep review, 2026-10-25)",
    "reviewed_at": "2026-10-25",
-   "note": "Take beta = 1/2 (p = 1, q = 2) and ignore the target's loopless guard: x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= 1 * outdeg of the target."
+   "note": "Take beta = 1/2 (p = 1, q = 2) and pass the target's loopless guard to the source (both rows carry it): x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= 1 * outdeg of the target."
   },
   "majority_k1col_statement->majority_3col_statement:implies": {
    "gc": "e018",
@@ -1330,10 +1330,10 @@
    "proof": "majority_k1col_implies_majority_3col",
    "external": [],
    "reason": "",
-   "proved_by": "wave E3 agent (Claude Opus 5), 2026-09-24",
-   "reviewed_by": "Claude Opus 5 second reader R1 (edge programme, 2026-09-24): externals, load-bearing foundations and <=2-tactic proofs re-read; see meta/E1-A1_edge_audit.md",
-   "reviewed_at": "2026-09-24",
-   "note": "Parameter instantiation at k = 2: 'I_k.+1 becomes 'I_3 and kmajority_col 2 col is CONVERTIBLE to majority_col col (kmajority_col2 in colouring_variants.v), so the k = 2 instance is the target verbatim."
+   "proved_by": "wave E3 agent (Claude Opus 5), 2026-09-24 Re-proved by Lancelot (lane 4, 2026-10-25) after the loopless guards on the majority rows.",
+   "reviewed_by": "Arthur (lane 4 loop-sweep review, 2026-10-25)",
+   "reviewed_at": "2026-10-25",
+   "note": "Parameter instantiation at k = 2: 'I_k.+1 becomes 'I_3 and kmajority_col 2 col is CONVERTIBLE to majority_col col (kmajority_col2 in colouring_variants.v), so the k = 2 instance, with the loopless D guard passed through, is the target verbatim."
   },
   "matthews_sumner_four_connected_claw_free_statement->bondy_linear_cycle_cubic_statement:implies": {
    "gc": "e244",

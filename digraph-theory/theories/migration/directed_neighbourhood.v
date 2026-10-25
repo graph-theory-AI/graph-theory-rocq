@@ -43,7 +43,14 @@
     Mader chain in path_vertices.v calls the live [min_semidegree_at_least]; [X2Original] recomposes
     the Mader delta-zero row over B1's raw [contains_subdivision], this family's frozen
     [min_semidegree_at_least] and the raw in-degree.  Hashes and substitutions:
-    meta/migration_reports/directed_neighbourhood.md. *)
+    meta/migration_reports/directed_neighbourhood.md.
+
+    SOURCE REPAIR (2026-10-25, direction weaken): the live [majority_3col_eulerian_statement] gained a
+    [loopless D] guard.  [ColouringVariantsOriginal] stays verbatim, and its certificate below is a
+    ONE-WAY SOURCE-REPAIR certificate (original -> live), not a migration equivalence.  Its spec entry
+    carries the identical repair as the degree_balance statement entry, which holds the text,
+    doc-block, row and leg checks (meta/migration_report.py: an original-statement repair may rest on
+    its statement in exactly one other family spec).  Every other certificate keeps its exact iff. *)
 
 From HB Require Import structures.
 From mathcomp Require Import all_boot all_fingroup all_algebra.
@@ -488,10 +495,13 @@ Lemma orientation_C4_eulerian_avoidable_statement_original_compat :
   <-> Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement.
 Proof. by split=> h b; apply/x221_eulerian_avoidable_original_compat. Qed.
 
+(** One-way source-repair certificate, not a migration equivalence (2026-10-25, direction weaken; the
+    identical repair is carried by the degree_balance statement entry): the live row gained the
+    [loopless D] guard, so the original row implies it. *)
 Lemma majority_3col_eulerian_statement_original_compat :
   ColouringVariantsOriginal.majority_3col_eulerian_statement
-  <-> Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement.
-Proof. exact: iff_refl. Qed.
+  -> Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement.
+Proof. by move=> h D _; exact: h. Qed.
 
 Lemma H6_no_full_cover_original_compat :
   TwoExtremalOriginal.H6_no_full_cover <-> Digraph.conjectures.two_extremal.H6_no_full_cover.
