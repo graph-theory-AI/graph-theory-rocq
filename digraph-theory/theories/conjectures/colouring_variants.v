@@ -95,19 +95,25 @@ Definition majority_3col_statement : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__01/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__01.json
     English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Conjecture 9)
-      For every k >= 2 and every finite digraph there is a colouring of the vertices by k+1
-      colours such that every vertex v has at most a fraction 1/k of its out-neighbours coloured
-      like v, written without division as k * #(same-coloured out-neighbours of v) <= outdeg v.
-    Definitions: [kmajority_col k col] - the parametric bound k * #(same-coloured
-      out-neighbours) <= outdeg at every vertex (this file); [same_col_outnb col v] (this file);
-      [outdeg v] (core/oriented.v); ['I_k.+1] - a colour set of size k+1 (MathComp).
+      For every k >= 2 and every finite loopless digraph there is a colouring of the vertices by
+      k+1 colours such that every vertex v has at most a fraction 1/k of its out-neighbours
+      coloured like v, written without division as k * #(same-coloured out-neighbours of v) <=
+      outdeg v.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [kmajority_col k col] - the parametric bound k * #(same-coloured out-neighbours) <= outdeg
+      at every vertex (this file); [same_col_outnb col v] (this file); [outdeg v]
+      (core/oriented.v); ['I_k.+1] - a colour set of size k+1 (MathComp).
     Notes: The corpus row is marked disproved (Girao, Kittipassorn, Popielarz showed k+1 colours
       do not suffice for k >= 3); the definition encodes the conjecture as originally stated,
       which is what a refutation must contradict. At k = 2 it is exactly majority colouring
-      ([kmajority_col2] in this file). *)
+      ([kmajority_col2] in this file). The [loopless D] guard is load-bearing: a loop makes a
+      vertex a same-coloured out-neighbour of itself, so the one-vertex digraph with a loop
+      refuted the earlier unguarded body cheaply (meta/probe_hints/majority_k1col_statement.v),
+      unlike the genuine refutation, which uses loopless digraphs.  The guard was added on
+      2026-10-25 (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition majority_k1col_statement : Prop :=
   forall (k : nat), 2 <= k ->
-    forall D : diGraphType, exists col : D -> 'I_k.+1, kmajority_col k col.
+    forall D : diGraphType, loopless D -> exists col : D -> 'I_k.+1, kmajority_col k col.
 
 (** Corpus row: arxiv:1608.03040#03
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__03/
