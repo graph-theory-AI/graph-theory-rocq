@@ -2410,7 +2410,7 @@
     },
     "sands_sauer_woodrow_statement": {
       "title": "Sands–Sauer–Woodrow monochromatic reachability (arc-coloured digraphs)",
-      "decoded": "For every number of colours k there is a bound f such that every k-arc-coloured digraph D has a vertex set S which is a union of at most f stable sets and such that every vertex v of D reaches some vertex of S by a monochromatic directed path (a path whose arcs all carry one colour; the colour and target may depend on v).",
+      "decoded": "For every number of colours k there is a bound f such that every k-arc-coloured loopless digraph D (no vertex has a loop: the stable sets of this file count loops) has a vertex set S which is a union of at most f stable sets and such that every vertex v of D reaches some vertex of S by a monochromatic directed path (a path whose arcs all carry one colour; the colour and target may depend on v).",
       "match_title": "Monochromatic reachability in arc-colored digraphs",
       "source": {
         "slug": "monochromatoc_reachability_in_arc_colored_digraphs"

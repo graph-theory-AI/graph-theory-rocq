@@ -286,14 +286,18 @@ Definition union_of_stables (D : diGraphType) (m : nat) (S : {set D}) : Prop :=
       & S = \bigcup_(P <- parts) P].
 
 (** No corpus row: this is the general Sands-Sauer-Woodrow statement (for every number k of arc
-    colours there is a bound f such that every k-arc-coloured digraph has a set S, a union of at
-    most f stable sets, with every vertex reaching S by a monochromatic directed path), and it
-    is the text of the corpus row opg:monochromatoc_reachability_in_arc_colored_digraphs; the
-    manifest attaches that row to [mono_reach_or_rainbow_statement] above instead, so this
-    definition owns no row. Recorded in meta/STATEMENT_IMPROVEMENTS.md. *)
+    colours there is a bound f such that every k-arc-coloured loopless digraph has a set S, a
+    union of at most f stable sets, with every vertex reaching S by a monochromatic directed
+    path), and it is the text of the corpus row
+    opg:monochromatoc_reachability_in_arc_colored_digraphs; the manifest attaches that row to
+    [mono_reach_or_rainbow_statement] above instead, so this definition owns no row. Recorded in
+    meta/STATEMENT_IMPROVEMENTS.md. The guard [loopless D] (two_extremal.v, added 2026-10-25)
+    is load-bearing: [stable] counts loops inside S, so without it a one-vertex digraph with a
+    loop refutes the body (meta/probe_hints/sands_sauer_woodrow_statement.v); loops never change
+    monochromatic reachability, so the guard keeps the source's reading. *)
 Definition sands_sauer_woodrow_statement : Prop :=
   forall k : nat, exists f : nat,
-    forall (D : diGraphType) (c : arc_colouring D k),
+    forall (D : diGraphType) (c : arc_colouring D k), loopless D ->
       exists S : {set D},
         [/\ union_of_stables f S
           & forall v : D, exists2 s : D, s \in S & mono_reach_any c v s].
