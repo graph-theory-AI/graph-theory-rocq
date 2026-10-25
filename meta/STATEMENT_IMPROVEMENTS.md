@@ -41,6 +41,9 @@ deliberate near-duplicates that the suffix heuristic does not catch.
   Exactly the same missing `ell <= n` guard: for `n = 6`, `ell = 7`, take `G = K6` and `H` edgeless
   on 6 vertices; the `7`-decks are both empty, so the hypothesis holds and the conclusion
   `connected [set: G] <-> connected [set: H]` fails.
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the guard `ell <= n` is added; `K_6` and
+  the edgeless graph on six vertices at `n = 6`, `ell = 7` refute the unguarded body
+  (`meta/probe_hints/spinoza_west_l_deck_connectedness_statement.v`).
 - `studies:std_kelly_manvel_conjecture_reconstruction_from_the`
   (`reconstruction-theory/theories/conjectures/X21.v:52`,
   `kelly_manvel_n_minus_r_deck_reconstruction_statement`) — severity: **too weak (mild)**.

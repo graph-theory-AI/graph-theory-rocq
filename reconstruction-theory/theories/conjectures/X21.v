@@ -92,22 +92,26 @@ Definition nydl_tree_l_deck_reconstruction_statement : Prop :=
     Site: none
     Review: none
     English statement: (Spinoza and West, "Spinoza-West Connectedness Threshold Conjecture")
-      For all natural numbers n and ell with 6 <= n and floor(n/2) + 1 <= ell, and for any
-      two graphs G and H on n vertices having the same ell-deck: G is connected if and only
-      if H is connected.
+      For all natural numbers n and ell with 6 <= n and floor(n/2) + 1 <= ell <= n, and for
+      any two graphs G and H on n vertices having the same ell-deck: G is connected if and
+      only if H is connected.
     Definitions: [x21_same_l_deck G H ell] — equality of ell-decks, as above (X21.v);
       [connected [set: G]] — the whole vertex set of G is connected in G (coq-graph-theory);
       [n./2] is MathComp integer halving, that is floor(n/2).
     Notes: the corpus wording is that "the connectedness of an n-vertex graph G is
       determined by its ell-deck"; being determined by the deck is encoded in the usual way,
       as: two n-vertex graphs with the same ell-deck agree on connectedness. The corpus
-      classifies this row as Informal. The same ell > n remark as for the Nydl row applies:
-      the threshold hypothesis does not bound ell by n, so for ell > n the deck-equality
-      hypothesis is vacuously satisfiable — see the improvement ledger. *)
+      classifies this row as Informal. The guard [ell <= n] (added 2026-10-25) is
+      load-bearing, as for the Nydl row: for ell above n the deck-equality hypothesis holds
+      with the empty bijection, and without the guard K_6 and the edgeless graph on six
+      vertices (n = 6, ell = 7) refute the body
+      (meta/probe_hints/spinoza_west_l_deck_connectedness_statement.v; the improvement
+      ledger). *)
 Definition spinoza_west_l_deck_connectedness_statement : Prop :=
   forall (n ell : nat) (G H : sgraph),
     6 <= n ->
     n./2 + 1 <= ell ->
+    ell <= n ->
     #|G| = n ->
     #|H| = n ->
     x21_same_l_deck G H ell ->
