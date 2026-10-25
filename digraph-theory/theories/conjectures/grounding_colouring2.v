@@ -89,6 +89,17 @@ move=> k0; exists (C3 : diGraphType), (fun _ _ => Ordinal k0).
 by rewrite card_C3.
 Qed.
 
+(** Since 2026-10-25 [sands_sauer_woodrow_statement] ranges over LOOPLESS k-arc-coloured
+    digraphs; the same witness C3, a tournament, is loopless, so the guarded class is inhabited
+    for every k ≥ 1 too. *)
+Lemma ssw_loopless_class_inhabited (k : nat) :
+  (0 < k)%N ->
+  exists (D : diGraphType) (c : arc_colouring D k), loopless D /\ (0 < #|D|)%N.
+Proof.
+move=> k0; exists (C3 : diGraphType), (fun _ _ => Ordinal k0).
+by split; [move=> v; rewrite arcxx | rewrite card_C3].
+Qed.
+
 (** *** A.4  [oriented_chromatic_planar_bounded_statement] ranges over loopless
     oriented digraphs whose underlying simple graph is planar.  TT 2 (a single
     arc) is loopless and oriented; its underlying graph is a single edge, which
