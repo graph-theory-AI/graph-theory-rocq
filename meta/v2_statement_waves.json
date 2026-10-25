@@ -5189,8 +5189,8 @@
       "repo": "extremal-graph-theory",
       "defines_file": "X230.v",
       "implemented_by": "Marcol (Claude Opus 5.5), X230 pilot wave, branch math/marcol-x230-20261025, 2026-10-25",
-      "source_verified_by": "",
-      "source_verified_at": "",
+      "source_verified_by": "Arthur (X230 wave verifier, A3: pinned records re-read at b72c5857: data/arxiv_extracted/1905.05312.json[1], 2108.00987.json[0], 2108.00991.json[0], 2311.01887.json[2] and the four data/arxiv_reviews records)",
+      "source_verified_at": "2026-10-25",
       "commit": "x230-prospective-pilot",
       "rows": {
         "axv_1905_05312_00": {
@@ -5512,8 +5512,8 @@
           "reason": "The threshold Ramsey multiplicity m(H) of Conlon-Fox-Sudakov-Wei: the minimum number of monochromatic copies of H over 2-colourings of K_{r(H)}."
         }
       },
-      "faithfulness_verified_by": "",
-      "faithfulness_result": ""
+      "faithfulness_verified_by": "Arthur (X230 wave verification, 2026-10-25)",
+      "faithfulness_result": "Readback 2026-10-25 (verifier Arthur): 4/4 PASS. 1905.05312#00: n/6 <= b < n/4 cleared exactly to n <= 6b /\\ 4b < n; book number <= b as at most b common neighbours per edge; the balanced complete bipartite graph excluded up to isomorphism; S_{b,n} as the prism blow-up with the halves of n - 4b on a matched pair, which has floor(n^2/4) edges, book number b and exactly b^2(n - 4b) triangles, while the halves in one triangle give b(b-s)(b-t) more triangles, so it is the only placement under which the equality clause can hold. 2108.00987#00 and 2108.00991#00: m(H) as the minimum number of monochromatic (not necessarily induced) copies over 2-colourings (G, complement) of K_{r(H)}, copies = embeddings / automorphisms (exact), values cleared exactly (2m = (k-1)!; 2m = k!; 4m = (k-1)(k-1)!), P_k with k vertices (k!/2 = copies of a k-vertex path in K_k), sufficiently large as an existential threshold. 2311.01887#00: n <= f(n) <= r(K_n) through the unique Ramsey number; rational eps equivalent to real eps; the existence of r(G_n) asserted; the pinned text and review ask for arbitrary n-vertex graphs (the context's connected class would be a strengthening). Grounding: hypotheses inhabited per row; each guard (the K_{n/2,n/2} exclusion, the threshold, the lower bound n <= f(n)) shown load-bearing; helper sanity for all ten helpers."
     }
   }
 }
