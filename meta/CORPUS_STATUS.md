@@ -134,7 +134,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **144 edges** — by status {'candidate': 32, 'conditional': 10, 'refuted-direction': 33, 'verified': 69}, by kind {'equiv': 6, 'implies': 138, 'refutes': 0, 'specializes': 0}; 85 Qed-proved relative theorems.
+- **144 edges** — by status {'candidate': 32, 'conditional': 8, 'refuted-direction': 33, 'verified': 71}, by kind {'equiv': 6, 'implies': 138, 'refutes': 0, 'specializes': 0}; 87 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
   - `bipartite_digraph_asymmetric_outdegree_girth_statement` implies `bipartite_digraph_outdegree_girth_statement` (digraph-theory/implications_X46.v)
@@ -169,6 +169,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `hat_guessing_degree_degeneracy_bounds_statement` implies `hat_guessing_degeneracy_bounded_statement` (graph-theory-misc/implications_X227.v)
   - `hoand_reed_statement` implies `caccetta_haggkvist_statement` (digraph-theory/implications_P9.v)
   - `hypergraph_cop_number_sqrt_n_over_k_statement` implies `meyniel_cop_number_sqrt_statement` (atlas/implications_A1.v)
+  - `jaegers_modular_orientation_statement` implies `three_flow_statement` (cycle-theory/implications_D1.v)
   - `kt_minor_free_hypergraph_chromatic_three_halves_statement` implies `k3_minor_free_hypergraph_three_colourable_statement` (hypergraph-theory/implications_X225.v)
   - `kt_minor_free_two_s_plus_t_choosable_statement` implies `list_hadwiger_statement` (atlas/implications_A1.v)
   - `list_reed_choice_number_statement` implies `reeds_omega_delta_and_chi_statement` (chromatic-theory/implications_U1.v)
@@ -193,6 +194,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `r_partite_matching_deletion_tradeoff_statement` implies `rysers_statement` (hypergraph-theory/implications_U12.v)
   - `ramsey_nice_forest_family_eventual_statement` implies `ramsey_nice_forest_family_infinite_statement` (extremal-graph-theory/implications_X223.v)
   - `reeds_omega_delta_and_chi_statement` implies `bounding_the_chromatic_number_of_triangle_free_graph_statement` (chromatic-theory/implications_U8.v)
+  - `small_cycle_double_cover_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
   - `smith_two_longest_cycles_statement` equiv `smith_longest_cycles_r_connected_statement` (cycle-theory/implications_X212.v)
   - `subdivision_of_a_transitive_tournament_in_digraphs_w_statement` implies `oriented_trees_delta_plus_maderian_statement` (digraph-theory/implications_X2.v)
   - `subgraph_of_large_average_degree_and_large_average_d_statement` implies `chromatic_girth_average_degree_subgraph_statement` (atlas/implications_A1.v)
@@ -205,21 +207,19 @@ Area-local foundations (each area builds these on top of `base`):
   - `tree_decomposition_leaf_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
-- Edge evidence: **69 verified** (Qed-closed, no external assumption) · **10 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **71 verified** (Qed-closed, no external assumption) · **8 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `circular_flow_numbers_of_r_graphs_statement` implies `three_flow_statement` — external: `external_steffen_3flow_5graphs_statement` (cycle-theory/implications_D1.v)
   - `cycle_double_covers_containing_predefined_2_regular_statement` implies `cycle_double_cover_statement` — external: `external_cdc_cubic_2connected_reduction_statement` (cycle-theory/implications_U6.v)
-  - `jaegers_modular_orientation_statement` implies `three_flow_statement` — external: `external_modular_orientation_to_flow_statement` (cycle-theory/implications_D1.v)
   - `petersen_coloring_statement` implies `cycle_double_cover_statement` — external: `external_five_even_cover_cubic_reduction_statement` (cycle-theory/implications_U6.v)
   - `petersen_coloring_statement` implies `m_n_cycle_covers_statement` — external: `external_five_even_cover_cubic_reduction_statement` (cycle-theory/implications_U6.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
-  - `small_cycle_double_cover_statement` implies `cycle_double_cover_statement` — external: `external_cdc_simple_reduction_statement` (cycle-theory/implications_U6.v)
   - `strong_5_cycle_double_cover_statement` implies `cycle_double_cover_statement` — external: `external_five_even_cover_cubic_reduction_statement` (cycle-theory/implications_U6.v)
   - `strong_5_cycle_double_cover_statement` implies `m_n_cycle_covers_statement` — external: `external_five_even_cover_cubic_reduction_statement` (cycle-theory/implications_U6.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
   - **opg**: 36 done · 12 partial · 0 blocked · 179 todo  (227 rows)
-  - **v2**: 78 done · 6 partial · 0 blocked · 1589 todo  (1673 rows)
+  - **v2**: 79 done · 5 partial · 0 blocked · 1589 todo  (1673 rows)
 
 ### Documented non-edges (33 `refuted-direction`)
 

@@ -20,9 +20,9 @@
   "edges": 144,
   "by_status": {
    "candidate": 32,
-   "conditional": 10,
+   "conditional": 8,
    "refuted-direction": 33,
-   "verified": 69
+   "verified": 71
   },
   "by_kind": {
    "equiv": 6,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 85
+  "proved_theorems": 87
  },
  "edges": [
   {
@@ -901,13 +901,11 @@
    "from": "jaegers_modular_orientation_statement",
    "to": "three_flow_statement",
    "kind": "implies",
-   "status": "conditional",
+   "status": "verified",
    "cite": "Jaeger, Nowhere-zero flow problems, Selected Topics in Graph Theory 3 (1988) 71-95; Tutte 1954 (3-flow conjecture and orientation/flow duality)",
-   "proof": "jaegers_modular_orientation_implies_three_flow",
-   "note": "Jaeger's modular-orientation conjecture at k=1 (4*1=4 edge-connected, 2*1+1=3) is Tutte's 3-flow conjecture; the mod-3 orientation is converted to a nowhere-zero 3-flow by the cited external orientation/flow duality",
-   "external": [
-    "external_modular_orientation_to_flow_statement"
-   ],
+   "proof": "unconditional_jaegers_modular_orientation_implies_three_flow",
+   "note": "Jaeger's modular-orientation conjecture at k=1 (4*1=4 edge-connected, 2*1+1=3) is Tutte's 3-flow conjecture; the mod-3 orientation is converted to a nowhere-zero 3-flow by the orientation/flow duality, proved as modular_orientation_to_flow: along the orientation put 1 off an edge set X and 1-m on X, where X meets the demands imbalance/m (found by augmenting paths)",
+   "external": [],
    "sources": [
     "cycle-theory/implications_D1.v"
    ]
@@ -1547,13 +1545,11 @@
    "from": "small_cycle_double_cover_statement",
    "to": "cycle_double_cover_statement",
    "kind": "implies",
-   "status": "conditional",
+   "status": "verified",
    "cite": "gc:e209",
-   "proof": "small_cycle_double_cover_implies_cycle_double_cover",
-   "note": "bm-013 gives, for every SIMPLE bridgeless multigraph, a cycle double cover with at most #|G|-1 members; forgetting the size bound gives the simple case of Row 11, and the simple-to-general step is the cited external reduction of the CDC to simple graphs",
-   "external": [
-    "external_cdc_simple_reduction_statement"
-   ],
+   "proof": "unconditional_small_cycle_double_cover_implies_cycle_double_cover",
+   "note": "bm-013 gives, for every SIMPLE bridgeless multigraph, a cycle double cover with at most #|G|-1 members; forgetting the size bound gives the simple case of Row 11, and the simple-to-general step is proved as cdc_simple_reduction: subdividing every edge twice gives a simple bridgeless multigraph, and the middle edges of its cycle double cover form one of the original graph",
+   "external": [],
    "sources": [
     "cycle-theory/implications_U6.v"
    ]
