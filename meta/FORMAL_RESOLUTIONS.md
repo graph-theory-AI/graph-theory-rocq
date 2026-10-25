@@ -235,7 +235,8 @@ is the same.
 - Synchronized rounds of halvings mix those matchings. Each round is a single
   application of Alon's splitting necklace theorem at `q = 2` (formalized in
   `classical-lemmas`) to the concatenated necklaces of one level of the mixing tree.
-- Parity is repaired by removing the first bead of each odd type.
+- Parity is repaired by removing one bead of every odd type and discarding its edge (the
+  X15 report, section 1).
 
 The construction, its deviations from the attack write-up and the constant are
 described in `packing-theory/docs/X15_FAIR_MATCHING_REPORT.md`. The correspondence

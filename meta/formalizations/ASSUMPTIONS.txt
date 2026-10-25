@@ -1,8 +1,34 @@
+1611.03196__03
+bipartite_matching_underrepresentation_statement : Prop
+     : Prop
+bipartite_matching_underrepresentation
+:
+bipartite_matching_underrepresentation_statement
+     : bipartite_matching_underrepresentation_statement
+Closed under the global context
+Closed under the global context
+
+1812.02420__03
+directed_kneser_existence_statement : Prop
+     : Prop
+directed_kneser_existence_disproved : ~ directed_kneser_existence_statement
+     : ~ directed_kneser_existence_statement
+Closed under the global context
+Closed under the global context
+
 2103.15175__00
 list_ramsey_chromatic_resolution_statement : Prop
      : Prop
 list_ramsey_chromatic_resolution : list_ramsey_chromatic_resolution_statement
      : list_ramsey_chromatic_resolution_statement
+Closed under the global context
+Closed under the global context
+
+2209.09107__00
+question_6_1_statement : Prop
+     : Prop
+question_6_1_disproved : ~ question_6_1_statement
+     : ~ question_6_1_statement
 Closed under the global context
 Closed under the global context
 
@@ -21,60 +47,11 @@ cochromatic_gap_three_proved : cochromatic_gap_three_statement
      : cochromatic_gap_three_statement
 Closed under the global context
 Closed under the global context
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ + _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ - _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ <= _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ < _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ >= _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ > _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ <= _ <= _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ < _ <= _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ <= _ < _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ < _ < _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
-File "/var/folders/1s/6gkm107x2_j11hgynqwnwcwm74sy_h/T/rocq-resolution-i9dssvka/ResolutionCheck.v", line 2, characters 0-40:
-Warning: Notation "_ * _" was already used in scope nat_scope.
-[notation-overridden,parsing,default]
 
 2512.10438__00
 problem_5_1_q6_n9_statement : Prop
      : Prop
 problem_5_1_q6_n9 : problem_5_1_q6_n9_statement
      : problem_5_1_q6_n9_statement
-Closed under the global context
-Closed under the global context
-
-1812.02420__03
-directed_kneser_existence_statement : Prop
-     : Prop
-directed_kneser_existence_disproved : ~ directed_kneser_existence_statement
-     : ~ directed_kneser_existence_statement
-Closed under the global context
-Closed under the global context
-
-2209.09107__00
-question_6_1_statement : Prop
-     : Prop
-question_6_1_disproved : ~ question_6_1_statement
-     : ~ question_6_1_statement
 Closed under the global context
 Closed under the global context
