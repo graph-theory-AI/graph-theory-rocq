@@ -136,7 +136,9 @@ Definition constructive_diagonal_ramsey_lower_bound_statement : Prop :=
       have, and the "determine its value" half records no conjectured value at all. The body
       above is a PLACEHOLDER that forces the limit to be RATIONAL, which is a strictly
       different (and possibly false) proposition - a wrong-object encoding, kept only so the
-      row compiles and carries its vocabulary. No source-verification tuple is claimed. *)
+      row compiles and carries its vocabulary. No source-verification tuple is claimed. In the
+      placeholder, p * b - q * a is a truncated subtraction: when q * a >= p * b the lower bound
+      is 0^k, which the guards 0 < a, 0 < b do not exclude. *)
 Definition diagonal_ramsey_root_limit_statement : Prop :=
   exists p q : nat,
     0 < q /\
