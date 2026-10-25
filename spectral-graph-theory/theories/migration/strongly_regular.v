@@ -9,7 +9,15 @@
     to [strongly_regular_parameters], [Spectral.foundations.strongly_regular_matrix.strongly_regular_matrix_identity]
     and [connected_nontrivial_strongly_regular_matrix]; its two theorems hold of the frozen bodies
     ([legacy_sr_mateqE], [legacy_strongly_regularE]).  Baseline, hashes and exact substitutions are recorded in
-    meta/migration_reports/strongly_regular.spec.json. *)
+    meta/migration_reports/strongly_regular.spec.json.
+
+    SOURCE REPAIR (2026-10-25): the frozen eight-graph row is a theorem: K_{2,2}, ..., K_{9,9} are connected
+    nontrivial, triangle-free and strongly regular ([D5Legacy_row_holds]).  The live D5 row now asks for an
+    eighth triangle-free strongly regular graph with [0 < mu < k], isomorphic to none of the seven known graphs
+    (Spectral.foundations.triangle_free_srg; see the triangle_free_strongly_regular_graphs entry of
+    meta/STATEMENT_IMPROVEMENTS.md).  Its certificate below is therefore a ONE-WAY SOURCE-REPAIR certificate
+    (live -> frozen), NOT a migration equivalence, bound by the spec's [repair] entry.  The other certificates
+    of this file keep their exact iffs. *)
 
 From GTBase Require Import base strongly_regular.
 From mathcomp Require Import all_algebra perm.
@@ -95,12 +103,54 @@ Proof.
 split=> [/d5_strongly_regular_compat/strongly_regularE // | /(strongly_regularE G)/d5_strongly_regular_compat //].
 Qed.
 
-(** ** Full-statement certificate. *)
+(** ** The frozen eight-graph row is a theorem
+
+    [K_{n,n}] is triangle-free and, for [n >= 2], connected nontrivial strongly regular with [(n, 0, n)];
+    [K_{2,2}], ..., [K_{9,9}] have pairwise different vertex counts.  This is the defect that the source repair
+    of 2026-10-25 removes (meta/STATEMENT_IMPROVEMENTS.md, triangle_free_strongly_regular_graphs entry). *)
+
+Lemma d5_Knn_triangle_free n : triangle_free 'K_n,n.
+Proof. by move=> [x|x] [y|y] [z|z]. Qed.
+
+Lemma d5_Knn_strongly_regular n : connected_nontrivial_strongly_regular 'K_n.+2,n.+2.
+Proof.
+exists n.+2, 0%N, n.+2; split.
+- exact: (@Knm_connected n.+1 n.+1).
+- by split=> //; rewrite card_sum !card_ord addnS /= -addSnnS ltn_addr.
+split.
+- by move=> [x|y]; rewrite ?deg_Knm_l ?deg_Knm_r.
+- move=> [x|x] [y|y] uv //.
+  + rewrite /common_nbr opn_Knm_l opn_Knm_r.
+    apply/eqP; rewrite cards_eq0; apply/eqP/setP => z; rewrite !inE.
+    by case: z => z; apply/andP => -[/imsetP[? _ ?] /imsetP[? _ ?]].
+  + rewrite /common_nbr opn_Knm_l opn_Knm_r.
+    apply/eqP; rewrite cards_eq0; apply/eqP/setP => z; rewrite !inE.
+    by case: z => z; apply/andP => -[/imsetP[? _ ?] /imsetP[? _ ?]].
+- move=> [x|x] [y|y] _ nadj //.
+  + by rewrite /common_nbr !opn_Knm_l setIid card_imset ?cardsT ?card_ord //; exact: inr_inj.
+  + by rewrite /common_nbr !opn_Knm_r setIid card_imset ?cardsT ?card_ord //; exact: inl_inj.
+Qed.
+
+Lemma d5_diso_card (G H : sgraph) : inhabited (G ≃ H) -> #|G| = #|H|.
+Proof. by case=> i; exact: bij_eq_card (bij.bij_bijective (diso_v i)). Qed.
+
+Lemma D5Legacy_row_holds : D5Legacy.triangle_free_strongly_regular_graphs_statement.
+Proof.
+exists (fun i : 'I_8 => 'K_(val i).+2,(val i).+2); split.
+- move=> i; split; first exact: d5_Knn_triangle_free.
+  by apply/d5_strongly_regular_compat; exact: d5_Knn_strongly_regular.
+- move=> i j ij /d5_diso_card.
+  rewrite !card_sum !card_ord !addnS !addSn => /eqP.
+  rewrite !eqSS => /eqP h.
+  have ji : i = j by apply: val_inj; move: h; rewrite !addnn; exact: double_inj.
+  by rewrite ji eqxx in ij.
+Qed.
+
+(** ** Full-statement certificate: a ONE-WAY SOURCE-REPAIR certificate (live -> frozen), not a migration
+    equivalence (2026-10-25).  The live row asks for an eighth triangle-free strongly regular graph with
+    [0 < mu < k], isomorphic to none of the seven known graphs; the frozen row is a theorem
+    ([D5Legacy_row_holds]), so the live row implies it.  The converse would solve the open problem. *)
 
 Lemma triangle_free_strongly_regular_graphs_statement_compat :
-  D5Legacy.triangle_free_strongly_regular_graphs_statement <-> triangle_free_strongly_regular_graphs_statement.
-Proof.
-split=> -[g [hg hiso]]; exists g; split=> // i; have [tf sr] := hg i; split=> //.
-- exact/d5_strongly_regular_compat.
-- exact/d5_strongly_regular_compat.
-Qed.
+  triangle_free_strongly_regular_graphs_statement -> D5Legacy.triangle_free_strongly_regular_graphs_statement.
+Proof. by move=> _; exact: D5Legacy_row_holds. Qed.
