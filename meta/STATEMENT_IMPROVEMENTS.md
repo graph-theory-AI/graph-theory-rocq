@@ -32,12 +32,18 @@ deliberate near-duplicates that the suffix heuristic does not catch.
   the statement asserts that any two `n`-vertex trees are isomorphic. Counterexample: `n = 4`,
   `ell = 5`, `T1 = P4`, `T2 = K_{1,3}`. Fix in a later wave: add `ell <= n` (the corpus row means
   `floor(n/2) + 1 <= ell <= n`).
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the guard `ell <= n` is added; the claw
+  `K_{1,3}` and the path `P_4` at `n = 4`, `ell = 5` refute the unguarded body
+  (`meta/probe_hints/nydl_tree_l_deck_reconstruction_statement.v`).
 - `studies:std_spinoza_west_connectedness_threshold_conjecture`
   (`reconstruction-theory/theories/conjectures/X21.v:105`,
   `spinoza_west_l_deck_connectedness_statement`) — severity: **too strong (refutable as written)**.
   Exactly the same missing `ell <= n` guard: for `n = 6`, `ell = 7`, take `G = K6` and `H` edgeless
   on 6 vertices; the `7`-decks are both empty, so the hypothesis holds and the conclusion
   `connected [set: G] <-> connected [set: H]` fails.
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the guard `ell <= n` is added; `K_6` and
+  the edgeless graph on six vertices at `n = 6`, `ell = 7` refute the unguarded body
+  (`meta/probe_hints/spinoza_west_l_deck_connectedness_statement.v`).
 - `studies:std_kelly_manvel_conjecture_reconstruction_from_the`
   (`reconstruction-theory/theories/conjectures/X21.v:52`,
   `kelly_manvel_n_minus_r_deck_reconstruction_statement`) — severity: **too weak (mild)**.
@@ -434,6 +440,10 @@ Not flagged by the suffix rule:
    is unsatisfiable as soon as one edge exists: the one-edge hypergraph with empty
    incidence refutes the row. Suggested WP6 fix: add `forall e, exists v, hinc e v`
    (or `1 <= k`) as a guard. Corpus leg is `done` — should be revisited.
+   **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the guard `forall e, exists v, hinc e v`
+   is added. The alternative `1 <= k` would not repair the row: an edge with no vertex has at
+   most `k` vertices for every `k`, and `meta/probe_hints/strong_matchings_and_covers_statement.v`
+   refutes the unguarded body at `k = 1`.
 4. `opg:universal_highly_arc_transitive_digraphs` (`D4inf4.v:176`) — **too strong,
    deliberate**. The existential carries three extra non-vacuity guards (`d_has_arc`,
    `d_infinite`, `d_no_sink_source`) absent from the source question, so a positive
