@@ -19,6 +19,8 @@ From mathcomp Require Import all_algebra.
 From Extremal.conjectures Require Import D2chr.
 (* Re-import after D2chr: its re-exported base shadows the ring-scope [1] on [rat]. *)
 From mathcomp Require Import all_algebra.
+(* [zify]: [lia] on ssrnat and int (Row 2's re-encoding grounding). *)
+From mathcomp Require Import zify.
 Import GRing.Theory Num.Theory.
 Set SsrOldRewriteGoalsOrder.
 
@@ -265,6 +267,210 @@ Proof.
 move=> [LB1 GT1] [LB2 GT2]; apply: rle_anti.
 - exact: (GT2 _ LB1).
 - exact: (GT1 _ LB2).
+Qed.
+
+(** *** Row 2 as re-encoded on 2026-10-25: the source's threshold [mixes_from]
+    ([is_circular_mixing_threshold]), the convention [2 <= l], and [M_c(K_2) = 2]. *)
+
+Lemma is_circular_mixing_threshold_unique (G : sgraph) (r1 r2 : rat) :
+  is_circular_mixing_threshold G r1 -> is_circular_mixing_threshold G r2 -> r1 = r2.
+Proof.
+move=> [LB1 GT1] [LB2 GT2]; apply: rle_anti.
+- exact: (GT2 _ LB1).
+- exact: (GT1 _ LB2).
+Qed.
+
+(** A [(k,q)]-colouring of a graph with an edge needs [2q <= k]. *)
+Lemma pqb_edge_ratio (G : sgraph) (k q : nat) (x y : G) (c : {ffun G -> 'I_k}) :
+  x -- y -> @pqb G k q c -> (2 * q <= k)%N.
+Proof.
+move=> xy /forallP/(_ x)/forallP/(_ y)/implyP/(_ xy)/andP[h1 h2].
+lia.
+Qed.
+
+(** Below 2, a ratio [(2q-1)/q] above [l] exists ([q] = the denominator of [l]). *)
+Lemma rat_below_two (l : rat) : l < 2%:Q ->
+  exists q : nat, (0 < q)%N /\ l <= ((2 * q).-1)%:Q / q%:Q.
+Proof.
+move=> l2.
+have d0 := denq_gt0 l.
+have hD : ((absz (denq l))%:Q = (denq l)%:~R).
+  by rewrite -[X in _ = X%:~R](gtz0_abs d0).
+exists (absz (denq l)); split; first by rewrite absz_gt0 lt0r_neq0.
+have E : l = (numq l)%:~R / (denq l)%:~R by rewrite divq_num_den.
+set q := absz (denq l).
+rewrite {1}E hD.
+move: l2; rewrite {1}E.
+have dq : (0 : rat) < (denq l)%:~R by rewrite ltr0z.
+rewrite ltr_pdivrMr // ler_pM2r ?invr_gt0 // -intrM !ler_int ltr_int => h.
+lia.
+Qed.
+
+(** For a graph with an edge the convention [2 <= l] of [mixes_from] is redundant: a ratio
+    below 2 admits no colouring of the edge, so no such ratio mixes. *)
+Lemma mixes_from_edge (G : sgraph) (x y : G) (l : rat) : x -- y ->
+  mixes_from G l <->
+  (forall k q : nat, (0 < q)%N -> l <= k%:Q / q%:Q -> circ_mixing_at G k q).
+Proof.
+move=> xy; split=> [[] //|H]; split=> //.
+rewrite order.Order.TotalTheory.leNgt; apply/negP => /rat_below_two [q [q0 hq]].
+have [[c hc] _] := H _ _ q0 hq.
+have := pqb_edge_ratio xy hc.
+lia.
+Qed.
+
+(** Without the convention the statement fails: on the graph with no vertex every ratio
+    mixes, so every rational is a threshold and there is no greatest lower bound. *)
+Lemma K0_circ_mixing_at (k q : nat) : circ_mixing_at 'K_0 k q.
+Proof.
+have cE : forall c c' : {ffun 'K_0 -> 'I_k}, c = c'.
+  by move=> c c'; apply/ffunP => -[m h]; exfalso; rewrite ltn0 in h.
+split; last by move=> c c' _ _; rewrite (cE c c'); exact: connect0.
+have c : {ffun 'K_0 -> 'I_k}.
+  by apply: finfun => -[m h]; exfalso; rewrite ltn0 in h.
+by exists c; apply/forallP => -[m h]; exfalso; rewrite ltn0 in h.
+Qed.
+
+Lemma no_threshold_glb_without_convention :
+  ~ exists r : rat, forall l : rat,
+      (forall k q : nat, (0 < q)%N -> l <= k%:Q / q%:Q -> circ_mixing_at 'K_0 k q) -> r <= l.
+Proof.
+case=> r H.
+have := H (r - 1) (fun k q _ _ => K0_circ_mixing_at k q).
+by rewrite lerBrDr gerDl ler10.
+Qed.
+
+(** ** M_c(K_2) = 2, not attained *)
+
+Section MixingK2.
+Variables (k q : nat).
+Hypotheses (q0 : (0 < q)%N) (kq : (2 * q < k)%N).
+
+Definition mc_k2col (a b : 'I_k) : {ffun 'K_2 -> 'I_k} :=
+  [ffun v : 'K_2 => if v == ord0 then a else b].
+
+Lemma mc_k2col_eta (c : {ffun 'K_2 -> 'I_k}) : c = mc_k2col (c ord0) (c ord_max).
+Proof.
+apply/ffunP => v; rewrite ffunE; case: ifP => [/eqP -> //|].
+by move: v => [[|[|n]] ?] //= _; congr (c _); exact: val_inj.
+Qed.
+
+Definition mc_k2ok (a b : nat) : bool :=
+  (q <= absz (Posz a - Posz b))%N && (absz (Posz a - Posz b) <= k - q)%N.
+
+Lemma mc_k2ok_sym (a b : nat) : mc_k2ok a b = mc_k2ok b a.
+Proof. by rewrite /mc_k2ok distnC. Qed.
+
+Lemma mc_k2col_pqb (a b : 'I_k) : pqb q (mc_k2col a b) = mc_k2ok a b.
+Proof.
+apply/idP/idP.
+  by move=> /forallP/(_ ord0)/forallP/(_ ord_max); rewrite !ffunE /=.
+move=> h; apply/forallP => x; apply/forallP => y; apply/implyP => xy; rewrite !ffunE.
+move: x y xy => [[|[|m]] ?] [[|[|n]] ?] //= _.
+by rewrite -mc_k2ok_sym in h.
+Qed.
+
+Lemma mc_k2_move_b (a b b' : 'I_k) :
+  mc_k2ok a b -> mc_k2ok a b' -> connect (@recolour_adj 'K_2 k q) (mc_k2col a b) (mc_k2col a b').
+Proof.
+move=> h h'; have [<-|ne] := eqVneq b b'; first exact: connect0.
+apply: connect1; rewrite /recolour_adj !mc_k2col_pqb h h' /=.
+have -> : [set v | mc_k2col a b v != mc_k2col a b' v] = [set ord_max].
+  apply/setP => v; rewrite !inE !ffunE; move: v => [[|[|m]] i] //=.
+  by rewrite eqxx.
+by rewrite cards1.
+Qed.
+
+Lemma mc_k2_move_a (a a' b : 'I_k) :
+  mc_k2ok a b -> mc_k2ok a' b -> connect (@recolour_adj 'K_2 k q) (mc_k2col a b) (mc_k2col a' b).
+Proof.
+move=> h h'; have [<-|ne] := eqVneq a a'; first exact: connect0.
+apply: connect1; rewrite /recolour_adj !mc_k2col_pqb h h' /=.
+have -> : [set v | mc_k2col a b v != mc_k2col a' b v] = [set ord0].
+  apply/setP => v; rewrite !inE !ffunE; move: v => [[|[|m]] i] //=.
+  by rewrite eqxx.
+by rewrite cards1.
+Qed.
+
+(** One rotation step: [(n+1, b)] reaches [(n, b1)] through [(n+1, b1)], where
+    [b1 = n + 1 + q] taken modulo [k]. *)
+Lemma mc_k2ok_step (n b1 : nat) : (n.+1 < k)%N ->
+  b1 = (if (n.+1 + q < k)%N then n.+1 + q else n.+1 + q - k)%N ->
+  [/\ mc_k2ok n.+1 b1, mc_k2ok n b1 & (b1 < k)%N].
+Proof. move=> nk ->; rewrite /mc_k2ok; case: ifP => h; split; lia. Qed.
+
+Let qk : (q < k)%N. Proof. lia. Qed.
+Let k0 : (0 < k)%N. Proof. lia. Qed.
+
+Definition mc_k2base : {ffun 'K_2 -> 'I_k} := mc_k2col (Ordinal k0) (Ordinal qk).
+
+Lemma mc_k2_reach (n : nat) (a b : 'I_k) :
+  val a = n -> mc_k2ok a b -> connect (@recolour_adj 'K_2 k q) (mc_k2col a b) mc_k2base.
+Proof.
+elim: n a b => [|n IH] a b an h.
+  move: h; have -> : a = Ordinal k0 by apply: val_inj.
+  move=> h; apply: mc_k2_move_b => //.
+  by rewrite /mc_k2ok /=; lia.
+have nk : (n.+1 < k)%N by rewrite -an ltn_ord.
+have [h1 h2 hb] := mc_k2ok_step nk erefl.
+set b1 := Ordinal hb.
+have nk' : (n < k)%N by lia.
+apply: connect_trans (mc_k2_move_b (b' := b1) h _) _; first by rewrite an.
+apply: connect_trans (mc_k2_move_a (a' := Ordinal nk') _ _) _; first by rewrite an.
+  exact: h2.
+exact: IH.
+Qed.
+
+Lemma mc_K2_circ_mixing_at : circ_mixing_at 'K_2 k q.
+Proof.
+split.
+  by exists mc_k2base; rewrite mc_k2col_pqb /mc_k2ok /=; lia.
+move=> c c' hc hc'.
+rewrite (mc_k2col_eta c) (mc_k2col_eta c') in hc hc' *.
+rewrite !mc_k2col_pqb in hc hc'.
+apply: connect_trans (mc_k2_reach erefl hc) _.
+have sym : symmetric (@recolour_adj 'K_2 k q) by move=> x y; exact: recolour_adj_sym.
+by rewrite (sym_connect_sym sym); exact: mc_k2_reach erefl hc'.
+Qed.
+
+End MixingK2.
+
+(** [M_c(K_2) = 2]: every ratio above 2 mixes. *)
+Lemma circular_mixing_threshold_K2 : is_circular_mixing_threshold 'K_2 2%:Q.
+Proof.
+split=> [l [] //|s Hs].
+rewrite order.Order.TotalTheory.leNgt; apply/negP => s2.
+have [m2 ms] := midf_lt s2.
+have Hm : mixes_from 'K_2 ((2%:Q + s) / 2%:R).
+  split; first exact: order.Order.POrderTheory.ltW.
+  move=> k q q0 hk; apply: mc_K2_circ_mixing_at => //.
+  have : 2%:Q < k%:Q / q%:Q by apply: order.Order.POrderTheory.lt_le_trans hk.
+  rewrite ltr_pdivlMr ?ltr0n // -natrM ltr_nat.
+  lia.
+by have := Hs _ Hm; rewrite order.Order.TotalTheory.leNgt ms.
+Qed.
+
+(** The threshold of [K_2] is not attained: at [k/q = 2/1] the two colourings are frozen. *)
+Lemma circular_mixing_threshold_K2_not_attained : ~ mixes_from 'K_2 2%:Q.
+Proof.
+case=> _ /(_ 2%N 1%N isT); rewrite divr1 order.Order.POrderTheory.lexx => /(_ isT) [_ hmix].
+have i0 : (0 < 2)%N by []. have i1 : (1 < 2)%N by [].
+have frozen : forall d, ~~ @recolour_adj 'K_2 2 1 (mc_k2col (Ordinal i0) (Ordinal i1)) d.
+  move=> d; rewrite /recolour_adj (mc_k2col_eta d) !mc_k2col_pqb.
+  case: (d ord0) (d ord_max) => [[|[|m]] im] [[|[|n]] jn] //=.
+    have -> : [set v | mc_k2col (Ordinal i0) (Ordinal i1) v != mc_k2col (Ordinal im) (Ordinal jn) v]
+      = set0.
+      apply/setP => v; rewrite !inE !ffunE.
+      by case: ifP => _; apply/negbTE; rewrite negbK; apply/eqP/val_inj.
+    by rewrite cards0.
+  have -> : [set v | mc_k2col (Ordinal i0) (Ordinal i1) v != mc_k2col (Ordinal im) (Ordinal jn) v]
+    = setT.
+    by apply/setP => v; rewrite !inE !ffunE; case: ifP => _; apply/eqP => /(congr1 val).
+  by rewrite cardsT card_ord.
+have := hmix (mc_k2col (Ordinal i0) (Ordinal i1)) (mc_k2col (Ordinal i1) (Ordinal i0)).
+rewrite !mc_k2col_pqb /mc_k2ok /= => /(_ isT isT) /connectP [[|d p] /= hp e].
+  by move/(congr1 (fun f : {ffun 'K_2 -> 'I_2} => val (f ord0))): e; rewrite !ffunE.
+by move: hp => /andP[hd _]; move: (frozen d); rewrite hd.
 Qed.
 
 (** ** Row 3 — bipartite *)
