@@ -180,6 +180,11 @@
       "path": "spectral-graph-theory/theories/foundations/strongly_regular_matrix.v",
       "name": "strongly_regular",
       "note": "the GTBase.strongly_regular module import (lexical only); no use of the D5 or U3 definition"
+    },
+    {
+      "path": "spectral-graph-theory/theories/foundations/triangle_free_srg.v",
+      "name": "strongly_regular",
+      "note": "the GTBase.strongly_regular module import (lexical only): the seven known graphs are checked against the canonical strongly_regular_parameters; no use of the D5 or U3 definition"
     }
   ],
   "distinct_variants": [],
