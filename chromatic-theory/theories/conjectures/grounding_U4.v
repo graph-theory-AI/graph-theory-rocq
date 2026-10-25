@@ -146,15 +146,21 @@ Proof. by case. Qed.
 Lemma mDelta_unit : mDelta (unit_graph tt) = 0.
 Proof. by rewrite /mDelta; apply: big1 => v _; apply: eq_card0; case. Qed.
 
-(** ** [Delta_edge_critical] — witness: vacuously Δ-edge-critical (its line
-    graph has no vertices). *)
-Lemma Delta_edge_critical_unit : Delta_edge_critical (unit_graph tt).
-Proof. by case. Qed.
-
 (** ** [line_graph] — identity: the line graph of an edgeless multigraph is
     empty. *)
 Lemma line_graph_unit_empty : #|line_graph (unit_graph tt)| = 0.
 Proof. exact: card_void. Qed.
+
+(** ** [Delta_edge_critical] — guard has teeth: the edgeless multigraph is NOT
+    Δ-edge-critical, being Δ-edge-colourable (its line graph is empty).  Until
+    2026-10-25 [Delta_edge_critical] only asked that deleting any edge lower the
+    chromatic index, which this graph met vacuously. *)
+Lemma not_Delta_edge_critical_unit : ~ Delta_edge_critical (unit_graph tt).
+Proof.
+case; rewrite mDelta_unit => h _; move: h.
+have := leq_chi [set: line_graph (unit_graph tt)].
+by rewrite cardsT line_graph_unit_empty leqn0 => /eqP ->.
+Qed.
 
 (** ** [total_graph] — identity: the total graph of the edgeless one-vertex
     multigraph has no edges. *)
