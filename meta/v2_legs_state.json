@@ -674,14 +674,14 @@
    "note": "Authored in X182.v:planar_cover_poset_dimension_polynomial_bound_statement. Retargeted after GTBase.posets: finite posets have explicit carriers and orders, cover graphs are concrete sgraphs, height is bounded via finite chains, dimension is bounded by a realizer of linear extensions, and planarity uses wagner_planar on the cover graph. States the polynomial-in-height version."
   },
   "axv_1612_08698_00": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "list-flexibility-poset-foundations",
+   "commit": "x183-exact-list-size-reencoding",
    "package": "chromatic-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = a fatal mis-quantification of list size that makes the retargeted Prop provably FALSE rather than the open conjecture. The surface uses GTBase.list_flexibility.weighted_epsilon_flexible G d.+1 p q, whose list constraint is `k <= #|L v|` (lists of size AT LEAST d+1) while its total request weight weighted_request_total sums w(v,c) over ALL colours c in L(v). Weighted flexibility is not monotone in list "
+   "note": "Authored in X183.v:degenerate_list_flexibility_d_plus_one_statement. Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): for every d there is a fixed rational epsilon p/q such that every d-degenerate graph is weighted epsilon-flexible for lists of size exactly d+1 (local x183_weighted_flexible_exact; the base predicate allowed longer lists, which made the body false). This states the weighted branch of the source question."
   },
   "axv_1612_09143_00": {
    "statement": "todo",

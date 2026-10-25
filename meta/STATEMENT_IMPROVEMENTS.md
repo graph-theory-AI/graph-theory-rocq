@@ -1673,6 +1673,9 @@ them.
   lists of size AT LEAST `d+1` while the request weight sums over all colours of each list, and
   weighted flexibility is not monotone in list size; the source is about lists of size exactly
   `d+1`. Severity: **too strong** (provably false).
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the body uses the local
+  `x183_weighted_flexible_exact`, lists of size exactly `d+1`; the one-vertex graph with a list of
+  `q+1` colours refutes the old body (`meta/probe_hints/degenerate_list_flexibility_d_plus_one_statement.v`).
 - `arxiv:1802.03727#00` (`X203.v`, leg `blocked`) — the universal quantifier over graphs includes
   the empty graph, which has minimum degree `d` vacuously and is separation `j`-choosable for every
   `j`. Severity: **too strong** (refutable).
