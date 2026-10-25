@@ -11,7 +11,7 @@ Eight source records now have exact, assumption-free Rocq proofs or refutations 
 | `1812.02420__03` | No directed Kneser graph at `(k,b)=(5,3)`, refuting the universal existence statement | [directed_kneser_nonexistence.v](../../digraph-theory/theories/applications/directed_kneser_nonexistence.v) |
 | `2209.09107__00` | The triangle refutes printed Alon–Tarsi Question 6.1 with its unfloored degree bound | [alon_tarsi_triangle.v](../../chromatic-theory/theories/applications/alon_tarsi_triangle.v) |
 | `1611.03196__03` | Conjecture 1.15: every bipartite `G` with `Delta(G)>0` and any `m` edge sets `E_i` admit a matching `S` with `floor(#E(G)/Delta(G)) <= #S + c(m)` meeting each `E_i` in at most `ceil(#E_i/Delta(G))` edges, with `c(m) = 12m + 14` in this formal floor form, giving `12m + 15` in the paper's form `#S >= #E(G)/Delta(G) - c(m)` | [fair_matching.v](../../packing-theory/theories/foundations/fair_matching.v) |
-| `opg:melnikovs_valency_variety_problem` | A 37-vertex graph with degrees `0..29` and chromatic number 3 refutes the printed bound (it has an isolated vertex, which the statement admits) | [melnikov_valency_variety.v](../../chromatic-theory/theories/applications/melnikov_valency_variety.v) |
+| `opg:melnikovs_valency_variety_problem` | A 37-vertex graph with degrees `0..29` is properly 3-colourable, answering the printed question negatively (it has an isolated vertex, which the statement admits) | [melnikov_valency_variety.v](../../chromatic-theory/theories/applications/melnikov_valency_variety.v) |
 
 The `1611.03196__03` entry, added on 2026-09-16 and sharpened on 2026-09-18 and
 2026-09-19, is proved
