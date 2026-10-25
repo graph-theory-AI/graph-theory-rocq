@@ -4809,7 +4809,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "small_cycle_double_cover_statement->cycle_double_cover_statement:implies:conditional",
+   "rocq_edge": "small_cycle_double_cover_statement->cycle_double_cover_statement:implies:verified",
    "argument": "A cycle double cover with at most n-1 cycles is, in particular, a cycle double cover, so Bondy's conjecture gives CDC for simple bridgeless graphs. CDC for general bridgeless graphs reduces to the simple case by standard steps. A loop is a cycle and can be used twice. Degree-2 vertices can be suppressed, and vertex splitting reduces the problem to simple cubic (indeed 3-connected cubic) graphs, as the target's own context notes. bm-013's context also says it explicitly: 'This strengthens the Cycle Double Cover Conjecture'.",
    "citations": []
   },
