@@ -210,6 +210,13 @@ meta/check_statement_docs.py --ignore-baseline cycle-theory` -> 46 target(s), 46
   ANTISYMMETRY condition of a Nesetril-Raspaud antisymmetric flow (the set B of used values
   satisfies B ∩ (−B) = ∅) is absent. The row is a proxy and the Rocq statement is strictly weaker
   than the conjecture. Recorded in the doc block.
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): `x184_z5_antisymmetric_flow` now carries the
+  antisymmetry conjunct (no two edges, equal or not, have values summing to 0 modulo 5). The old
+  object was strictly weaker: two parallel edges with values 1 and 4 carry a flow of the old kind and
+  no antisymmetric one (kernel-checked, with the logical relation new -> old, in the re-encoding's
+  receipt). The statement leg goes from partial to done; `faithfulness_verified_by` is filled after
+  the independent review. Per the pinned extracted context of the paper's Conjecture 14, its
+  Corollary 13(iv) already gives k = 12, so the row as stated is settled by its own source.
 - `opg:approximation_ratio_for_k_outerplanar_graphs` (`D1.v:802`) — severity: **wrong object
   (proxy)**. The corpus row is a *question* about the approximation ratio of MaxEDP / MaxIMF on
   k-outerplanar graphs; the Rocq body is a bounded-integrality-gap statement on the
