@@ -68,20 +68,12 @@ Proof. by exists (C3 : diGraphType); rewrite card_C3. Qed.
 (** *** A.1'  Since 2026-10-25 the majority rows [majority_3col_statement],
     [majority_k1col_statement] and [majority_3col_eulerian_statement] quantify over
     LOOPLESS digraphs (a loop made a vertex a same-coloured out-neighbour of itself).
-    Their antecedent classes are inhabited by C3: a tournament, hence loopless, and
-    balanced (in-degree = out-degree = 1), hence Eulerian. *)
+    Their antecedent classes are inhabited by C3, a tournament, hence loopless (the loopless
+    Eulerian class of the third row is grounded in grounding_chi_col.v, section H, beside
+    [eulerian_C3]). *)
 Lemma majority_loopless_class_inhabited :
   exists D : diGraphType, loopless D /\ (0 < #|D|)%N.
 Proof. by exists (C3 : diGraphType); split; [move=> v; exact: arcxx | rewrite card_C3]. Qed.
-
-Lemma majority_eulerian_loopless_class_inhabited :
-  exists D : diGraphType, [/\ loopless D, eulerian D & (0 < #|D|)%N].
-Proof.
-exists (C3 : diGraphType); split; first by move=> v; exact: arcxx.
-- by apply/Digraph.foundations.degree_balance.balancedP;
-     exact: Digraph.foundations.degree_balance.balanced_ground_C3.
-- by rewrite card_C3.
-Qed.
 
 (** *** A.2  [mono_reach_or_rainbow_statement] ranges over nonempty 3-arc-
     coloured tournaments.  C3 IS a tournament, is nonempty, and carries an
