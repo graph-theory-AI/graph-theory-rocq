@@ -2526,3 +2526,30 @@ twenty-four new per-phase files.  Three new files were added to
   (`x6_r_partite_uniform_equiv_r_partite_uniform`,
   `x6_matching_equiv_hg_matching`,
   `x6_matching_number_equiv_is_matching_number`) and are NOT duplicated here.
+
+## extremal-graph-theory — `mixing_circular_colourings_0` re-encoded to the source's threshold (2026-10-25)
+
+Item of coordination/PROGRAMME.md, section 3, Marcol's lane, under authorization A1 (a source-backed re-encoding of a
+non-frozen row). The statement is frozen by no migration family; only the helper `is_colouring_mixing_threshold` is pinned,
+as a `distinct_variants` entry of `meta/migration_reports/fractional_chromatic.spec.json`, so it stays byte-identical.
+
+- **Source** (pinned upstream graph-conjectures b72c5857, `data/problems.json`, OPG node 37907, discussion of "Mixing
+  Circular Colourings"): a `(k,q)`-colouring maps `V(G)` to `{0, ..., k-1}` with `q <= |f(u) - f(v)| <= k - q` on every
+  edge; `G` is `(k,q)`-mixing if all `(k,q)`-colourings can be generated from a single one by recolouring one vertex at a
+  time; "Define the circular mixing threshold of `G` to be `M_c(G) := inf{l in Q : G is (k,q)-mixing whenever k/q >= l}`."
+  Question: "Is `M_c(G)` always rational?" The source also notes `M_c(K_2) = 2`, not attained.
+- **Before** (since its authoring): `forall G : sgraph, exists r : rat, is_colouring_mixing_threshold G r`, with
+  `is_colouring_mixing_threshold G r` the greatest lower bound of `p/q` over single mixing pairs (`mixing_pair`: `q > 0`,
+  `2q <= p`, a colouring exists, `circ_mixing`). That is the infimum of the mixing ratios, not the source's threshold
+  "mixing for EVERY ratio `>= l`"; mixing is not monotone in `k/q` (the source's `L_m` example).
+- **After**: `forall G : sgraph, exists r : rat, is_circular_mixing_threshold G r`, with
+  - `circ_mixing_at G k q` (a `(k,q)`-colouring exists and `circ_mixing G k q`),
+  - `mixes_from G l` (`2 <= l` and `circ_mixing_at G k q` for every `q > 0` with `k/q >= l`),
+  - `is_circular_mixing_threshold G r` (the greatest lower bound of the thresholds).
+- **Convention** `2 <= l`: for a graph with an edge it changes nothing (`mixes_from_edge`: no ratio below 2 admits a
+  colouring of an edge). For an edgeless graph every ratio mixes and the source's infimum is not a number; without the
+  convention the statement is false at the graph with no vertex (`no_threshold_glb_without_convention`).
+- **Teeth** (`grounding_D2chr.v`): `is_circular_mixing_threshold_unique`; `circular_mixing_threshold_K2`
+  (`M_c(K_2) = 2`: `K_2` is `(k,q)`-mixing for every `k > 2q`); `circular_mixing_threshold_K2_not_attained` (at `2/1` the
+  two colourings of `K_2` are frozen).
+- The row stays PARTIAL (no real-number layer); the logical relation between the two bodies is recorded by the reviewer.
