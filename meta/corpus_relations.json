@@ -4050,7 +4050,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "half_flow_pair_statement->five_flow_statement:implies:conditional",
+   "rocq_edge": "half_flow_pair_statement->five_flow_statement:implies:verified",
    "argument": "The source's own context states the implication explicitly: given a 1/2-flow-pair (phi_2, phi_4), the combination (5*phi_2 + phi_4)/2 is a circular 5-flow. Checking: if phi_2(e) = ±1 then |5*phi_2(e) + phi_4(e)| ∈ [2,8] (since |phi_4(e)| <= 3), so the value lies in [1,4]; if phi_2(e) = 0 the condition |phi_4(e)| >= 2 gives a value in [1, 3/2]. All edge values lie in [1, 5-1] in absolute value, i.e. a circular 5-flow, and by the standard equivalence (Goddyn-Tarsi-Zhang: flow number = ceiling of circular flow number) the graph then has a nowhere-zero 5-flow. Direction as claimed.",
    "citations": [
     "https://arxiv.org/abs/2511.02892"
