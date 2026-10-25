@@ -194,7 +194,10 @@ have Tn0 : [set: edge G] != set0 by rewrite -card_gt0 cardsT.
 by have [D [_ Dcirc]] := has_circuit Tn0 Cdeg; exists D.
 Qed.
 
-(*@EDGE from=strong_5_cycle_double_cover_statement to=m_n_cycle_covers_statement kind=implies status=conditional external="external_five_even_cover_cubic_reduction_statement" proof=strong_5_cycle_double_cover_implies_m_n_cycle_covers cite="gc:e085" note="Row 10 is cubic-only and needs a circuit to start from: cubic_has_circuit supplies one (cycle_space.has_circuit on the full edge set, every degree being 3, hence never 1), and dropping Row 10's extra 'some member contains C' clause leaves exactly a (5,2)-cover of every cubic bridgeless graph; the cubic-to-general step is the cited external reduction" *)
+(** The reduction, with the cubic reduction as an explicit hypothesis.  (Until
+    2026-10-25 this was the edge gc:e085, [status=conditional]; its annotation
+    now sits on [unconditional_strong_5_cycle_double_cover_implies_m_n_cycle_covers]
+    below, after [five_even_cover_cubic_reduction].) *)
 Theorem strong_5_cycle_double_cover_implies_m_n_cycle_covers :
   external_five_even_cover_cubic_reduction_statement ->
   strong_5_cycle_double_cover_statement -> m_n_cycle_covers_statement.
@@ -205,7 +208,9 @@ have [L [Lsize Leven Lcount _]] := Hs G D Hn Hc Hbl Dcirc.
 by exists L; split.
 Qed.
 
-(*@EDGE from=strong_5_cycle_double_cover_statement to=cycle_double_cover_statement kind=implies status=conditional external="external_five_even_cover_cubic_reduction_statement" proof=strong_5_cycle_double_cover_implies_cycle_double_cover cite="gc:e086" note="Composition of gc:e085 (Row 10 => Row 7, cubic reduction carried as the external) with the unconditional gc:e084 (Row 7 => Row 11, the even-subgraph-to-circuits refinement F14)" *)
+(** (Until 2026-10-25 the edge gc:e086, [status=conditional]; its annotation now
+    sits on [unconditional_strong_5_cycle_double_cover_implies_cycle_double_cover]
+    below.) *)
 Theorem strong_5_cycle_double_cover_implies_cycle_double_cover :
   external_five_even_cover_cubic_reduction_statement ->
   strong_5_cycle_double_cover_statement -> cycle_double_cover_statement.
@@ -944,7 +949,9 @@ exists (map (ppull f) (index_enum 'I_5)); split.
 Qed.
 
 
-(*@EDGE from=petersen_coloring_statement to=m_n_cycle_covers_statement kind=implies status=conditional external="external_five_even_cover_cubic_reduction_statement" proof=petersen_coloring_implies_m_n_cycle_covers cite="gc:e090" note="Pull back the Petersen graph's double cover by five even subgraphs along the Petersen colouring: the three edges at a vertex of a cubic graph go to a claw of the (triangle-free) Petersen graph (petersen_claw), every member meets every claw evenly (plab_claw_even) and every Petersen edge lies in exactly two members (plab_card), so petersen_pullback_cover gives a (5,2)-cover of every cubic bridgeless graph; the finite Petersen facts are proved by closed compute checks on 5-bit codes. The cubic-to-general step is the cited Jaeger 1985 / Zhang reduction, carried as the same external as gc:e085." *)
+(** (Until 2026-10-25 the edge gc:e090, [status=conditional]; its annotation now
+    sits on [unconditional_petersen_coloring_implies_m_n_cycle_covers] below,
+    after [five_even_cover_cubic_reduction].) *)
 Theorem petersen_coloring_implies_m_n_cycle_covers :
   external_five_even_cover_cubic_reduction_statement ->
   petersen_coloring_statement -> m_n_cycle_covers_statement.
@@ -954,7 +961,8 @@ have [f hf] := Hp G Hn (conj Hc Hbl).
 exact: petersen_pullback_cover Hc hf.
 Qed.
 
-(*@EDGE from=petersen_coloring_statement to=cycle_double_cover_statement kind=implies status=conditional external="external_five_even_cover_cubic_reduction_statement" proof=petersen_coloring_implies_cycle_double_cover cite="gc:e091" note="Composition of gc:e090 (Petersen colouring => (5,2)-cover, modulo the cited cubic reduction) with the unconditional gc:e084 (split the five even subgraphs into circuits, cycle_space.even_circuit_decomposition)." *)
+(** (Until 2026-10-25 the edge gc:e091, [status=conditional]; its annotation now
+    sits on [unconditional_petersen_coloring_implies_cycle_double_cover] below.) *)
 Theorem petersen_coloring_implies_cycle_double_cover :
   external_five_even_cover_cubic_reduction_statement ->
   petersen_coloring_statement -> cycle_double_cover_statement.
@@ -962,6 +970,431 @@ Proof.
 move=> Hred Hp; apply: m_n_cycle_covers_implies_cycle_double_cover.
 exact: petersen_coloring_implies_m_n_cycle_covers Hred Hp.
 Qed.
+
+(** ================================================================= *)
+(** ** gc:e085 / e086 / e090 / e091: the cubic reduction of five-even-subgraph
+       double covers (classical-lemmas TODO 2)
+
+    Jaeger's and Zhang's reduction for "cycle" (= even subgraph) double covers
+    needs no vertex splitting: inflate every vertex into a cycle.  [infG G] has
+    the arc ends [(e, b)] of [G] as vertices; the copy [inl e] joins the two
+    ends of [e], and the cycle edge [inr a] joins [a] to the next end at the
+    same vertex ([inf_nxt], MathComp's [next] on the list [inf_ends]).
+    - [infG G] is 3-regular ([inf_subdeg]), and loopless when no vertex of [G]
+      has degree one ([inf_loopless]), which bridgelessness gives
+      ([inf_mdeg1]); so it is cubic ([inf_cubic]).
+    - It is bridgeless ([inf_bridgeless]): a cycle edge lies on its vertex's
+      cycle ([inf_cycle_not_bridge]), and a walk of [G] avoiding [e] lifts to
+      one avoiding [inl e] ([inf_lift]).
+    - Contracting the cycles ([inf_contract]) keeps even subgraphs even: the
+      degree of the contraction at [v] is the sum of the degrees at the ends of
+      [v] minus twice the cycle edges of [v] ([inf_contract_even]), so a double
+      cover of [infG G] by five even subgraphs maps to one of [G]
+      ([inf_cover]). *)
+
+(** Members of [C] picked out by one or two named elements. *)
+Lemma inf_card1 (T : finType) (C : {set T}) (P : pred T) (x : T) :
+  (forall f, P f = (f == x)) -> #|[set f in C | P f]| = (x \in C).
+Proof.
+move=> hP; case: (boolP (x \in C)) => hx.
+  rewrite (_ : [set f in C | P f] = [set x]) ?cards1 //.
+  by apply/setP => f; rewrite !inE hP; case: (f =P x) => [->|]; rewrite ?hx ?andbF.
+rewrite (_ : [set f in C | P f] = set0) ?cards0 //.
+by apply/setP => f; rewrite !inE hP; case: (f =P x) => [->|]; rewrite ?(negbTE hx) ?andbF.
+Qed.
+
+Lemma inf_card2 (T : finType) (C : {set T}) (P : pred T) (x y : T) :
+  x != y -> (forall f, P f = (f == x) || (f == y)) ->
+  #|[set f in C | P f]| = (x \in C) + (y \in C).
+Proof.
+move=> hxy hP.
+rewrite (_ : [set f in C | P f] = [set f in C | f == x] :|: [set f in C | f == y]).
+  rewrite cardsU (inf_card1 _ (fun f => erefl)) (inf_card1 _ (fun f => erefl)).
+  rewrite (_ : _ :&: _ = set0) ?cards0 ?subn0 //.
+  apply/setP => f; rewrite !inE; apply/negP => /andP[/andP[_ /eqP ->] /andP[_ hy]].
+  by move: hxy; rewrite hy.
+by apply/setP => f; rewrite !inE hP andb_orr.
+Qed.
+
+(** [next] on a duplicate-free cycle advances the index by one, cyclically. *)
+Lemma inf_index_next (T : eqType) (s : seq T) (x : T) :
+  uniq s -> x \in s -> index (next s x) s = (index x s).+1 %% size s.
+Proof.
+move=> us xs; rewrite next_nth xs.
+case: s us xs => [//|y s'] us xs.
+have hi : (index x (y :: s') < (size s').+1)%N.
+  by rewrite -[(size s').+1]/(size (y :: s')) index_mem.
+set i := index x (y :: s') in hi *.
+case: (ltnP i (size s')) => hlt.
+  rewrite (_ : nth y s' i = nth y (y :: s') i.+1) // index_uniq //= ?modn_small //;
+    by rewrite ltnS.
+have -> : i = size s' by apply/eqP; rewrite eqn_leq hlt -ltnS hi.
+by rewrite nth_default //= eqxx modnn.
+Qed.
+
+Lemma inf_index_iter (T : eqType) (s : seq T) (x : T) (n : nat) :
+  uniq s -> x \in s ->
+  iter n (next s) x \in s /\ index (iter n (next s) x) s = (index x s + n) %% size s.
+Proof.
+move=> us xs; elim: n => [|n [hin hidx]] /=.
+  by rewrite addn0 modn_small // index_mem.
+split; first by rewrite mem_next.
+by rewrite inf_index_next // hidx addnS -addn1 modnDml addn1.
+Qed.
+
+Section Inflate.
+Variable G : mgraph.
+
+(** The arc ends of [G] at the vertex [v], in a fixed order. *)
+Definition inf_end (a : edge G * bool) : G := endpoint a.2 a.1.
+Definition inf_ends (v : G) : seq (edge G * bool) :=
+  enum [set a : edge G * bool | inf_end a == v].
+Definition inf_nxt (a : edge G * bool) : edge G * bool := next (inf_ends (inf_end a)) a.
+Definition inf_prv (a : edge G * bool) : edge G * bool := path.prev (inf_ends (inf_end a)) a.
+
+(** The inflation: the copy [inl e] of [e] joins its two ends; the cycle edge
+    [inr a] joins [a] to the next end at the same vertex. *)
+Definition inf_endpoint (b : bool) (f : edge G + (edge G * bool)) : edge G * bool :=
+  match f with
+  | inl e => (e, b)
+  | inr a => if b then inf_nxt a else a
+  end.
+
+Definition infG : mgraph :=
+  @Graph unit unit (edge G * bool)%type (edge G + (edge G * bool))%type
+    inf_endpoint (fun _ => tt) (fun _ => tt).
+
+Lemma inf_ends_uniq (v : G) : uniq (inf_ends v).
+Proof. exact: enum_uniq. Qed.
+
+Lemma mem_inf_ends (v : G) (a : edge G * bool) : (a \in inf_ends v) = (inf_end a == v).
+Proof. by rewrite mem_enum inE. Qed.
+
+Lemma inf_end_nxt (a : edge G * bool) : inf_end (inf_nxt a) = inf_end a.
+Proof.
+by apply/eqP; rewrite -mem_inf_ends /inf_nxt mem_next mem_inf_ends.
+Qed.
+
+Lemma inf_end_prv (a : edge G * bool) : inf_end (inf_prv a) = inf_end a.
+Proof.
+by apply/eqP; rewrite -mem_inf_ends /inf_prv path.mem_prev mem_inf_ends.
+Qed.
+
+Lemma inf_prv_nxt (a : edge G * bool) : inf_prv (inf_nxt a) = a.
+Proof. by rewrite /inf_prv inf_end_nxt path.prev_next // inf_ends_uniq. Qed.
+
+Lemma inf_nxt_prv (a : edge G * bool) : inf_nxt (inf_prv a) = a.
+Proof. by rewrite /inf_nxt inf_end_prv path.next_prev // inf_ends_uniq. Qed.
+
+(** Every end has three arc ends in [infG]: its copy, its own cycle edge and
+    the cycle edge of the previous end. *)
+Lemma inf_subdeg (C : {set edge infG}) (a : infG) :
+  subdeg C a = (((inl a.1 : edge infG) \in C) + ((inr a : edge infG) \in C)
+               + ((inr (inf_prv a) : edge infG) \in C))%N.
+Proof.
+case: a => e b.
+have hsrc : forall f : edge infG, (endpoint false f == ((e, b) : infG))
+    = if b then f == inr (e, b) else (f == inl e) || (f == inr (e, b)).
+  case: b => -[g|c]; rewrite /= ?xpair_eqE /= ?andbT ?andbF ?orbF;
+    by [| apply/eqP/eqP => [->|[]] | apply/eqP/eqP => [[->]|[]->]
+        | apply/eqP/eqP; congruence].
+have hnp : forall c : edge G * bool, (inf_nxt c == (e, b)) = (c == inf_prv (e, b)).
+  by move=> c; apply/eqP/eqP => [<-|->]; [rewrite inf_prv_nxt | rewrite inf_nxt_prv].
+have htgt : forall f : edge infG, (endpoint true f == ((e, b) : infG))
+    = if b then (f == inl e) || (f == inr (inf_prv (e, b)))
+      else f == inr (inf_prv (e, b)).
+  move=> -[g|c].
+    case: b {hsrc hnp}; rewrite /= ?xpair_eqE /= ?andbT ?andbF ?orbF;
+      by [| apply/eqP/eqP => [->|[]] | apply/eqP/eqP => [[->]|[]->]
+          | apply/eqP/eqP; congruence].
+  by rewrite /= hnp; case: b {hsrc hnp} => /=; apply/eqP/eqP => [->|[]->].
+rewrite /subdeg /ends_at.
+case: b hsrc htgt hnp => /= hsrc htgt _.
+  by rewrite (inf_card1 _ hsrc) (inf_card2 _ _ htgt) // addnCA addnA.
+by rewrite (inf_card2 _ _ hsrc) // (inf_card1 _ htgt).
+Qed.
+
+(** The ends at [v] count its degree (a loop twice). *)
+Lemma inf_card_ends_in (X : {set edge G}) (v : G) :
+  #|[set a : edge G * bool | (inf_end a == v) && (a.1 \in X)]| = subdeg X v.
+Proof.
+set A := [set a : edge G * bool | (inf_end a == v) && (a.1 \in X)].
+have hb : forall b : bool, A :&: [set a | a.2 == b] = [set (e, b) | e in ends_at X b v].
+  move=> b; apply/setP => -[e c]; rewrite !inE.
+  apply/idP/idP => [/andP[/andP[he hX] /eqP hc]|/imsetP[f]].
+    by apply/imsetP; exists e; [rewrite !inE hX -hc | rewrite -hc].
+  by rewrite !inE => /andP[hf hv] [-> ->]; rewrite hf hv eqxx.
+rewrite -(cardsID [set a | a.2 == true] A) hb.
+rewrite (_ : A :\: [set a | a.2 == true] = A :&: [set a | a.2 == false]); last first.
+  by apply/setP => -[e c]; rewrite !inE; case: c; rewrite ?andbT ?andbF.
+rewrite hb !card_imset; try by move=> x y [->].
+by rewrite /subdeg addnC.
+Qed.
+
+Lemma inf_card_ends (v : G) : #|[set a : edge G * bool | inf_end a == v]| = mdeg v.
+Proof.
+by rewrite /mdeg -inf_card_ends_in; apply: eq_card => a; rewrite !inE andbT.
+Qed.
+
+Lemma inf_size_ends (v : G) : size (inf_ends v) = mdeg v.
+Proof. by rewrite -cardE inf_card_ends. Qed.
+
+(** In a bridgeless multigraph no vertex has degree one: the only edge at such
+    a vertex would be a bridge. *)
+Lemma inf_mdeg1 : bridgeless G -> forall v : G, mdeg v != 1%N.
+Proof.
+move=> hbl v; apply/negP => /eqP h1.
+have hcard : #|[set a : edge G * bool | inf_end a == v]| = 1%N.
+  by rewrite inf_card_ends.
+have [[e b] he] : exists a, a \in [set a : edge G * bool | inf_end a == v].
+  by apply/card_gt0P; rewrite hcard.
+rewrite inE in he; move/eqP: he => he.
+have huniq : forall a', inf_end a' = v -> a' = (e, b).
+  move=> a' ha'; apply: (card_le1_eqP (eq_leq hcard)); by rewrite inE ?ha' ?he.
+have hother : endpoint (~~ b) e != v.
+  apply/eqP => ho; have := huniq (e, ~~ b) ho.
+  by case: b {he ho huniq}.
+(* The edge [e] is then a bridge: a walk between its ends leaves [v], whose
+   only arc end is the [b]-end of [e]. *)
+apply: (hbl e) => w hw.
+have [w' [hw' hmem]] : exists w',
+    uwalk (endpoint b e) (endpoint (~~ b) e) w' /\ (e \in w' -> e \in w).
+  case: b {huniq he hother} => /=; last by exists w.
+  by exists (rev w); split; [exact: uwalk_rev | rewrite mem_rev].
+case: w' hw' hmem => [/eqP hxy|f w'' hw' hmem].
+  by move: hother; rewrite -hxy -he /inf_end eqxx.
+have hf : f = e.
+  case/orP: hw' => /andP[/eqP hs _].
+    by have := huniq (f, false) (etrans hs he); case.
+  by have := huniq (f, true) (etrans hs he); case.
+exists e; first by rewrite inE.
+by apply: hmem; rewrite hf mem_head.
+Qed.
+
+Lemma inf_loopless : bridgeless G -> loopless infG.
+Proof.
+(* A cycle edge is a loop only on a vertex with a single end. *)
+move=> hbl [e|a]; first by rewrite /source /target /= xpair_eqE eqxx.
+rewrite /source /target /=; apply/eqP => h.
+set s := inf_ends (inf_end a) in h.
+have has : a \in s by rewrite mem_inf_ends.
+have hidx := inf_index_next (inf_ends_uniq (inf_end a)) has.
+rewrite -/s -/(inf_nxt a) -h in hidx.
+have hsz : size s != 1%N by rewrite inf_size_ends inf_mdeg1.
+have hlt : (index a s < size s)%N by rewrite index_mem.
+case: (ltnP (index a s).+1 (size s)) => h2.
+  by move: hidx; rewrite modn_small // => /eqP; rewrite eqn_leq ltnn andbF.
+have he : (index a s).+1 = size s by apply/eqP; rewrite eqn_leq hlt h2.
+move: hidx; rewrite he modnn => h0.
+by move: he hsz; rewrite h0 => <-.
+Qed.
+
+Lemma inf_cubic : bridgeless G -> cubic infG.
+Proof.
+move=> hbl; have hll := inf_loopless hbl; split => // a.
+by rewrite -(mdeg_loopless _ hll) /mdeg inf_subdeg !in_setT.
+Qed.
+
+(** Walks around the cycle of a vertex. *)
+Lemma inf_iter_end (a : edge G * bool) (n : nat) : inf_end (iter n inf_nxt a) = inf_end a.
+Proof. by elim: n => //= n IH; rewrite inf_end_nxt. Qed.
+
+Lemma inf_iter_next (a : edge G * bool) (n : nat) :
+  iter n inf_nxt a = iter n (next (inf_ends (inf_end a))) a.
+Proof. by elim: n => //= n IH; rewrite -IH /inf_nxt inf_iter_end. Qed.
+
+Lemma inf_walk_iter (a : infG) (m n : nat) :
+  @uwalk infG (iter m inf_nxt a) (iter (m + n) inf_nxt a)
+        [seq (inr (iter i inf_nxt a) : edge infG) | i <- iota m n].
+Proof.
+elim: n m => [|n IH] m /=; first by rewrite addn0 eqxx.
+by rewrite eqxx addnS -addSn (IH m.+1).
+Qed.
+
+(** Any two ends at the same vertex are joined around its cycle. *)
+Lemma inf_reach (a b : edge G * bool) :
+  inf_end b = inf_end a -> exists n, iter n inf_nxt a = b.
+Proof.
+move=> hb; set s := inf_ends (inf_end a).
+have us : uniq s := inf_ends_uniq (inf_end a).
+have has : a \in s by rewrite mem_inf_ends.
+have hbs : b \in s by rewrite mem_inf_ends hb.
+have hia : (index a s < size s)%N by rewrite index_mem.
+have hib : (index b s < size s)%N by rewrite index_mem.
+exists ((index b s + size s - index a s) %% size s).
+rewrite inf_iter_next -/s.
+have [hin hidx] := inf_index_iter ((index b s + size s - index a s) %% size s) us has.
+rewrite -(nth_index a hin) hidx modnDmr subnKC ?modnDr ?modn_small ?nth_index //.
+exact: leq_trans (ltnW hia) (leq_addl _ _).
+Qed.
+
+(** A cycle edge is not a bridge: go round the rest of the cycle. *)
+Lemma inf_cycle_not_bridge (a : infG) : ~ is_bridge (inr a : edge infG).
+Proof.
+move=> hbr; set s := inf_ends (inf_end a).
+have us : uniq s := inf_ends_uniq (inf_end a).
+have has : a \in s by rewrite mem_inf_ends.
+have hia : (index a s < size s)%N by rewrite index_mem.
+have hd : (0 < size s)%N by apply: leq_ltn_trans hia.
+have hiter : forall i, index (iter i inf_nxt a) s = (index a s + i) %% size s.
+  by move=> i; rewrite inf_iter_next -/s; case: (inf_index_iter i us has).
+have hin : forall i, iter i inf_nxt a \in s.
+  by move=> i; rewrite inf_iter_next -/s; case: (inf_index_iter i us has).
+have hfull : iter (size s) inf_nxt a = a.
+  by rewrite -(nth_index a (hin _)) hiter modnDr modn_small // nth_index.
+(* From [inf_nxt a] round to [a] through the other [size s - 1] cycle edges. *)
+have hW := inf_walk_iter a 1 (size s).-1.
+rewrite add1n prednK // hfull in hW.
+have [g /set1P hg] := hbr _ (uwalk_rev hW).
+rewrite hg mem_rev => /mapP[i].
+rewrite mem_iota add1n prednK // => /andP[hi1 hi2] [hai].
+have := hiter i; rewrite -hai => h.
+have : (index a s + i == index a s + 0 %[mod size s]).
+  by rewrite addn0 -h modn_small.
+rewrite eqn_modDl mod0n modn_small // => /eqP hi0.
+by rewrite hi0 in hi1.
+Qed.
+
+(** Walks of [G] lift to [infG], through copies of their own edges only. *)
+Lemma inf_lift (x y : G) (w : seq (edge G)) (a0 b1 : infG) :
+  uwalk x y w -> inf_end a0 = x -> inf_end b1 = y ->
+  exists W : seq (edge infG),
+    uwalk a0 b1 W /\ (forall g, (inl g : edge infG) \in W -> g \in w).
+Proof.
+have hcyc : forall a b : infG, inf_end b = inf_end a ->
+    exists W : seq (edge infG),
+      uwalk a b W /\ (forall g, (inl g : edge infG) \in W = false).
+  move=> a b hab; have [n hn] := inf_reach hab.
+  exists [seq (inr (iter i inf_nxt a) : edge infG) | i <- iota 0 n]; split.
+    by have := inf_walk_iter a 0 n; rewrite add0n hn.
+  by move=> g; apply/negP => /mapP[i _].
+(* Each step through [g] goes round the cycle to the matching end of [g],
+   then along its copy. *)
+elim: w x a0 => [|g w IH] x a0 /=.
+  move=> /eqP <- ha0 hb1.
+  have [W [hW hW']] := hcyc a0 b1 (etrans hb1 (esym ha0)).
+  by exists W; split => // h; rewrite hW'.
+case/orP => /andP[/eqP hs hw] ha0 hb1.
+  have [W1 [hW1 hW1']] := hcyc a0 (g, false) (etrans hs (esym ha0)).
+  have [W2 [hW2 hW2']] := IH (target g) (g, true) hw erefl hb1.
+  exists (W1 ++ inl g :: W2); split.
+    by apply: uwalk_cat hW1 _; apply: uwalk_cons; [by [] | exact: hW2].
+  move=> h; rewrite mem_cat hW1' /= in_cons => /orP[/eqP [->]|/hW2' hh].
+    by rewrite mem_head.
+  by rewrite in_cons hh orbT.
+have [W1 [hW1 hW1']] := hcyc a0 (g, true) (etrans hs (esym ha0)).
+have [W2 [hW2 hW2']] := IH (source g) (g, false) hw erefl hb1.
+exists (W1 ++ inl g :: W2); split.
+  by apply: uwalk_cat hW1 _; apply: uwalk_cons_rev; [by [] | exact: hW2].
+move=> h; rewrite mem_cat hW1' /= in_cons => /orP[/eqP [->]|/hW2' hh].
+  by rewrite mem_head.
+by rewrite in_cons hh orbT.
+Qed.
+
+Lemma inf_bridgeless : bridgeless G -> bridgeless infG.
+Proof.
+(* A bridge [inl e] of [infG] would make [e] a bridge of [G]: a walk of [G]
+   avoiding [e] lifts to one of [infG] avoiding [inl e]. *)
+move=> hbl [e|a]; last exact: inf_cycle_not_bridge.
+move=> hbr; apply: (hbl e) => w hw.
+case: (boolP (e \in w)) => [ew|new]; first by exists e; rewrite ?inE.
+exfalso.
+have [W [hW hW']] := inf_lift (a0 := (e, false)) (b1 := (e, true)) hw erefl erefl.
+have [g /set1P hg hgW] := hbr W hW.
+rewrite hg in hgW.
+by move: new; rewrite (hW' e hgW).
+Qed.
+
+(** Contraction: the edges of [G] whose copy lies in [C]. *)
+Definition inf_contract (C : {set edge infG}) : {set edge G} :=
+  [set e | (inl e : edge infG) \in C].
+
+Lemma inf_contract_even (C : {set edge infG}) :
+  even_subgraph C -> even_subgraph (inf_contract C).
+Proof.
+(* Summing the degrees of [C] over the ends at [v] counts the copies there
+   once and the cycle edges of [v] twice. *)
+move=> hC v.
+have hA : subdeg (inf_contract C) v
+        = (\sum_(a | inf_end a == v) (((inl a.1 : edge infG) \in C) : nat))%N.
+  rewrite -inf_card_ends_in -sum1dep_card big_mkcondr /=.
+  by apply: eq_bigr => a _; rewrite inE; case: (_ \in C).
+have hB : (\sum_(a | inf_end a == v) (((inr (inf_prv a) : edge infG) \in C) : nat)
+         = \sum_(a | inf_end a == v) (((inr a : edge infG) \in C) : nat))%N.
+  rewrite [RHS](reindex_inj (can_inj inf_nxt_prv)) /=.
+  by apply: eq_bigl => a; rewrite inf_end_prv.
+have hsum : (\sum_(a | inf_end a == v) subdeg C a
+            = subdeg (inf_contract C) v
+              + 2 * \sum_(a | inf_end a == v) (((inr a : edge infG) \in C) : nat))%N.
+  rewrite (eq_bigr _ (fun a _ => inf_subdeg C a)) !big_split /= hB -hA.
+  by rewrite mul2n -addnn addnA.
+have heven : ~~ odd (\sum_(a | inf_end a == v) subdeg C a).
+  apply: (big_ind (fun n => ~~ odd n)); first by [].
+    by move=> x y hx hy; rewrite oddD (negbTE hx) (negbTE hy).
+  by move=> a _; exact: hC.
+by move: heven; rewrite hsum oddD oddM addbF.
+Qed.
+
+Lemma inf_cover : u6_five_even_cover infG -> u6_five_even_cover G.
+Proof.
+case=> L [hs he hc]; exists (map inf_contract L); split.
+- by rewrite size_map.
+- by move=> C' /mapP[C hC ->]; exact: inf_contract_even (he C hC).
+- move=> e; rewrite count_map -(hc (inl e)); apply: eq_count => C.
+  by rewrite /= inE.
+Qed.
+
+End Inflate.
+
+(** The reduction of five-even-subgraph double covers to cubic graphs. *)
+Theorem five_even_cover_cubic_reduction : external_five_even_cover_cubic_reduction_statement.
+Proof.
+move=> Hcub G Hn He Hbl.
+have [e0 _] := card_gt0P He.
+apply: inf_cover; apply: Hcub.
+- by apply/card_gt0P; exists ((e0, false) : infG G).
+- by apply/card_gt0P; exists (inl e0 : edge (infG G)).
+- exact: inf_cubic.
+- exact: inf_bridgeless.
+Qed.
+
+
+(*@EDGE from=strong_5_cycle_double_cover_statement to=m_n_cycle_covers_statement kind=implies status=verified proof=unconditional_strong_5_cycle_double_cover_implies_m_n_cycle_covers cite="gc:e085" note="Row 10 is cubic-only and needs a circuit to start from: cubic_has_circuit supplies one (cycle_space.has_circuit on the full edge set, every degree being 3, hence never 1), and dropping Row 10's extra 'some member contains C' clause leaves exactly a (5,2)-cover of every cubic bridgeless graph; the cubic-to-general step is proved as five_even_cover_cubic_reduction: inflate every vertex into a cycle through its arc ends (a cubic bridgeless graph) and contract the cycles back, which keeps even subgraphs even" *)
+Theorem unconditional_strong_5_cycle_double_cover_implies_m_n_cycle_covers :
+  strong_5_cycle_double_cover_statement -> m_n_cycle_covers_statement.
+Proof.
+exact: strong_5_cycle_double_cover_implies_m_n_cycle_covers
+  five_even_cover_cubic_reduction.
+Qed.
+
+(*@EDGE from=strong_5_cycle_double_cover_statement to=cycle_double_cover_statement kind=implies status=verified proof=unconditional_strong_5_cycle_double_cover_implies_cycle_double_cover cite="gc:e086" note="Composition of gc:e085 (Row 10 => Row 7, with the cubic reduction proved as five_even_cover_cubic_reduction) with the unconditional gc:e084 (Row 7 => Row 11, the even-subgraph-to-circuits refinement F14)" *)
+Theorem unconditional_strong_5_cycle_double_cover_implies_cycle_double_cover :
+  strong_5_cycle_double_cover_statement -> cycle_double_cover_statement.
+Proof.
+exact: strong_5_cycle_double_cover_implies_cycle_double_cover
+  five_even_cover_cubic_reduction.
+Qed.
+
+(*@EDGE from=petersen_coloring_statement to=m_n_cycle_covers_statement kind=implies status=verified proof=unconditional_petersen_coloring_implies_m_n_cycle_covers cite="gc:e090" note="Pull back the Petersen graph's double cover by five even subgraphs along the Petersen colouring: the three edges at a vertex of a cubic graph go to a claw of the (triangle-free) Petersen graph (petersen_claw), every member meets every claw evenly (plab_claw_even) and every Petersen edge lies in exactly two members (plab_card), so petersen_pullback_cover gives a (5,2)-cover of every cubic bridgeless graph; the finite Petersen facts are proved by closed compute checks on 5-bit codes. The cubic-to-general step (Jaeger 1985 / Zhang) is proved as five_even_cover_cubic_reduction, as for gc:e085." *)
+Theorem unconditional_petersen_coloring_implies_m_n_cycle_covers :
+  petersen_coloring_statement -> m_n_cycle_covers_statement.
+Proof.
+exact: petersen_coloring_implies_m_n_cycle_covers five_even_cover_cubic_reduction.
+Qed.
+
+(*@EDGE from=petersen_coloring_statement to=cycle_double_cover_statement kind=implies status=verified proof=unconditional_petersen_coloring_implies_cycle_double_cover cite="gc:e091" note="Composition of gc:e090 (Petersen colouring => (5,2)-cover, with the cubic reduction proved as five_even_cover_cubic_reduction) with the unconditional gc:e084 (split the five even subgraphs into circuits, cycle_space.even_circuit_decomposition)." *)
+Theorem unconditional_petersen_coloring_implies_cycle_double_cover :
+  petersen_coloring_statement -> cycle_double_cover_statement.
+Proof.
+exact: petersen_coloring_implies_cycle_double_cover five_even_cover_cubic_reduction.
+Qed.
+
+(** Axiom audit (gc:e085, e086, e090, e091). *)
+Print Assumptions five_even_cover_cubic_reduction.
+Print Assumptions unconditional_strong_5_cycle_double_cover_implies_m_n_cycle_covers.
+Print Assumptions unconditional_strong_5_cycle_double_cover_implies_cycle_double_cover.
+Print Assumptions unconditional_petersen_coloring_implies_m_n_cycle_covers.
+Print Assumptions unconditional_petersen_coloring_implies_cycle_double_cover.
 
 (** ** The six perfect matchings of the Petersen graph (classical-lemmas TODO 8)
 
