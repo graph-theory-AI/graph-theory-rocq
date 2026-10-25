@@ -4078,14 +4078,14 @@
       "source_verified_by": "Arthur (source re-read at the pin b72c5857: data/arxiv_extracted/1612.08698.json and data/arxiv_reviews/1612.08698__00.json, 2026-10-25)",
       "source_verified_at": "2026-10-25",
       "commit": "x183-exact-list-size-reencoding",
-      "faithfulness_verified_by": "",
+      "faithfulness_verified_by": "Marcol (X183 review, 2026-10-25)",
       "rows": {
         "axv_1612_08698_00": {
           "formal_name": "degenerate_list_flexibility_d_plus_one_statement",
           "note": "Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): for every d there is a fixed rational epsilon p/q such that every d-degenerate graph is weighted epsilon-flexible for lists of size exactly d+1 (local x183_weighted_flexible_exact; the base predicate allowed longer lists, which made the body false). This states the weighted branch of the source question."
         }
       },
-      "faithfulness_result": "RE-ENCODED 2026-10-25 (A1), independent review pending: the body asks for lists of size exactly d+1 (local x183_weighted_flexible_exact), resolving the 2026-07-17 finding; the old body (lists of size at least d+1) is refuted by one vertex with a list of q+1 colours under the uniform request. Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = a fatal mis-quantification of list size that makes the retargeted Prop provably FALSE rather than the open conjecture. The surface uses GTBase.list_flexibility.weighted_epsilon_flexible G d.+1 p q, whose list constraint is `k <= #|L v|` (lists of size AT LEAST d+1) while its total request weight weighted_request_total sums w(v,c) over ALL colours c in L(v). Weighted flexibility is not monotone in list size: a uniform-weight vertex with a list of size N has"
+      "faithfulness_result": "RE-ENCODED 2026-10-25 (A1), independent review: Marcol APPROVE 2026-10-25 (old -> new; the old body is false): the body asks for lists of size exactly d+1 (local x183_weighted_flexible_exact), resolving the 2026-07-17 finding; the old body (lists of size at least d+1) is refuted by one vertex with a list of q+1 colours under the uniform request. Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = a fatal mis-quantification of list size that makes the retargeted Prop provably FALSE rather than the open conjecture. The surface uses GTBase.list_flexibility.weighted_epsilon_flexible G d.+1 p q, whose list constraint is `k <= #|L v|` (lists of size AT LEAST d+1) while its total request weight weighted_request_total sums w(v,c) over ALL colours c in L(v). Weighted flexibility is not monotone in list size: a uniform-weight vertex with a list of size N has"
     },
     "X184": {
       "phase": "X184",
