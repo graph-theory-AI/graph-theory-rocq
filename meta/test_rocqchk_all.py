@@ -397,7 +397,10 @@ def git(cwd, *args):
     """git in a fixture repository: a pinned identity, no system or global configuration, no inherited GIT_* variable"""
     env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
     env.update(GIT_ENV)
-    return subprocess.run(["git", "-c", "init.defaultBranch=main", *args], cwd=cwd, env=env, capture_output=True, text=True,
+    # No automatic gc / maintenance: a detached background run could still be writing in .git when the
+    # temporary directory is removed (errno 39 on CI).
+    return subprocess.run(["git", "-c", "init.defaultBranch=main", "-c", "gc.auto=0", "-c", "maintenance.auto=false", *args],
+                          cwd=cwd, env=env, capture_output=True, text=True,
                           check=True).stdout.strip()
 
 

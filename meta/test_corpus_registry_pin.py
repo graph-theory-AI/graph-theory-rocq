@@ -20,9 +20,12 @@ FIXTURE_GIT_ENV = {**{k: v for k, v in os.environ.items() if not k.startswith("G
 
 
 def git(path, *args):
-    """Fixture git, isolated from the user's and the system's git configuration (signing, hooks)."""
+    """Fixture git, isolated from the user's and the system's git configuration (signing, hooks), with
+    no automatic gc / maintenance (a detached background run could still be writing in .git when
+    the temporary directory is removed: errno 39 on CI)."""
     return subprocess.run(
         ["git", "-c", "user.email=t@t", "-c", "user.name=t", "-c", "commit.gpgsign=false",
+         "-c", "gc.auto=0", "-c", "maintenance.auto=false",
          "-C", str(path), *args],
         check=True, capture_output=True, text=True, env=FIXTURE_GIT_ENV).stdout.strip()
 

@@ -96,11 +96,13 @@ class TrackedSources(unittest.TestCase):
             os.environ.pop(key, None)
 
     def repo(self, path, tracked):
-        subprocess.run(["git", "-c", "init.defaultBranch=main", "init", "-q", str(path)], check=True, capture_output=True)
+        # No automatic gc / maintenance in the fixture (errno 39 on CI when a background run outlives the test).
+        quiet = ["-c", "gc.auto=0", "-c", "maintenance.auto=false"]
+        subprocess.run(["git", "-c", "init.defaultBranch=main", *quiet, "init", "-q", str(path)], check=True, capture_output=True)
         for relative in tracked:
             (path / relative).parent.mkdir(parents=True, exist_ok=True)
             (path / relative).write_text("Definition x := 0.\n")
-            subprocess.run(["git", "-C", str(path), "add", relative], check=True, capture_output=True)
+            subprocess.run(["git", *quiet, "-C", str(path), "add", relative], check=True, capture_output=True)
         return path
 
     def test_a_toplevel_checkout_lists_its_tracked_files(self):
