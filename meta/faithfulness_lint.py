@@ -22,7 +22,10 @@ ROOT = Path(__file__).resolve().parents[1]
 META = ROOT / "meta"
 POLICY = json.loads((META / "faithfulness_policy.json").read_text())
 ALLOWLIST = META / "faithfulness_lint_allowlist.json"
-DEF_START_RE = re.compile(r"^\s*Definition\s+([A-Za-z_][A-Za-z0-9_']*)\b", re.M)
+# Horizontal whitespace only before Definition: with \s* the match (hence the reported line and the
+# 12-line guard window) began at the blank line above the statement's doc block, which strips to
+# whitespace, and the window read the previous statement's lines instead of its own guard notes.
+DEF_START_RE = re.compile(r"^[ \t]*Definition\s+([A-Za-z_][A-Za-z0-9_']*)\b", re.M)
 
 
 @dataclass(frozen=True)
@@ -233,7 +236,32 @@ Definition fixture_statement : Prop :=
     if missing:
         print(f"faithfulness-lint self-test FAILED: missing rules {missing}", file=sys.stderr)
         return 1
-    print(f"faithfulness-lint self-test OK: {len(expected)} rule families exercised")
+    # The guard window is the statement's own context, the 12 lines above its Definition: a note
+    # in its own doc block counts (own_note), a note of the statement before it does not (borrowed).
+    filler = "".join(f"Definition filler_{i} : nat := {i}.\n" for i in range(14))
+    own_note = (
+        "(** No note here. *)\n"
+        "Definition first_statement : Prop := True.\n" + filler +
+        "(** The truncated subtraction n - 1 is guarded by 0 < n. *)\n"
+        "Definition second_statement : Prop := forall n : nat, 0 < n -> n - 1 < n.\n"
+    )
+    borrowed_note = (
+        "(** The truncated subtraction n - 1 is guarded by 0 < n. *)\n"
+        "Definition first_statement : Prop := forall n : nat, 0 < n -> n - 1 < n.\n\n"
+        "(** No note here.\n" + "".join(f"    Line {i}.\n" for i in range(13)) + "*)\n"
+        "Definition second_statement : Prop := forall n : nat, n - 1 <= n.\n"
+    )
+
+    def subtraction_findings(source: str) -> set[str]:
+        return {f.statement for f in lint_source("fixture.v", source, {})
+                if f.rule == "unguarded-nat-subtraction"}
+
+    if subtraction_findings(own_note) or subtraction_findings(borrowed_note) != {"second_statement"}:
+        print("faithfulness-lint self-test FAILED: the guard window must read the statement's "
+              "own doc block", file=sys.stderr)
+        return 1
+    print(f"faithfulness-lint self-test OK: {len(expected)} rule families exercised; "
+          "guard window anchored at the statement")
     return 0
 
 

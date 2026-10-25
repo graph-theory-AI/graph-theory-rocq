@@ -250,7 +250,8 @@ Definition barat_thomassen_tree_decomposition_statement : Prop :=
       and on a loopless carrier the arc-end count and the incidence count agree
       ([connectivity.subdeg_loopless]). PASS. See
       meta/X211-X229_faithfulness_audit.md and
-      meta/STATEMENT_IMPROVEMENTS.md. *)
+      meta/STATEMENT_IMPROVEMENTS.md. The bound #|G| - 1 is a truncated
+      subtraction, exact because the hypothesis 0 < #|G| guards it. *)
 Definition small_cycle_double_cover_statement : Prop :=
   forall G : mgraph,
     (0 < #|G|)%N -> simple_mgraph G -> bridgeless G ->
