@@ -982,6 +982,13 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   `arxiv:1608.03040#00` (`majority_3col_statement`, `conjectures/colouring_variants.v`) verbatim.
   Two rows of different strength are then pinned to the same proposition, and the weaker,
   genuinely-`solved` Open Problem 1 is not formalised at all.
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): re-encoded as Open Problem 1 asks: some
+  `p < q` such that every LOOPLESS digraph has a 3-colouring with `q * #same <= p * outdeg v` at
+  every vertex `v`. The guard `loopless D` (`two_extremal.loopless`) is load-bearing:
+  `diGraphType` allows loops, and the one-vertex digraph with a loop refuted the old body and
+  violates the bound for every `beta < 1`
+  (`meta/probe_hints/majority_three_colouring_beta_statement.v`). The edge e038 (`#00 ==> #02`)
+  stays verified, with `beta = 1/2`.
 - `arxiv:2310.04265#03` (Conjecture 3.13) → `conjectures/twinwidth.v:conj_3_13_statement` —
   **too strong / wrong invariant**. The corpus text now reads `tww(T, p) <= f(tww(T))`; the body
   bounds the ordered twin-width by `f(omegabar T)`. During this documentation pass the row's
@@ -1042,7 +1049,8 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   (`studies:std_alon_pach_solymosi_conjecture`) are the same conjecture with the same rational-
   exponent encoding, differing only in where the witness size is quantified.
   `X45.v:majority_three_colouring_beta_statement` vs
-  `colouring_variants.v:majority_3col_statement` (see above).
+  `colouring_variants.v:majority_3col_statement` (see above; separated by the X45 re-encoding of
+  2026-10-25).
   `X17.v:stein_oriented_paths_strict_semidegree_statement` and
   `X2.v:semidegree_oriented_paths_statement` are the strict and non-strict semidegree thresholds of
   the same family (this pair is deliberate).
