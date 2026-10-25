@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **208 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **12 partial** · **7 blocked**.
+- **206 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **14 partial** · **7 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -15,7 +15,7 @@
 | chromatic-theory | Chromatic | 32 | 0 | 0 | 32 |
 | cycle-theory | Cycle | 29 | 0 | 0 | 29 |
 | digraph-theory | Digraph | 32 | 0 | 0 | 32 |
-| extremal-graph-theory | Extremal | 29 | 3 | 0 | 32 |
+| extremal-graph-theory | Extremal | 28 | 4 | 0 | 32 |
 | graph-theory-misc | GTMisc | 16 | 1 | 0 | 17 |
 | hamiltonicity-theory | Hamilton | 9 | 0 | 0 | 9 |
 | homomorphism-theory | Hom | 10 | 0 | 0 | 10 |
@@ -25,16 +25,16 @@
 | packing-theory | Packing | 15 | 0 | 0 | 15 |
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
-| topological-graph-theory | Topological | 9 | 4 | 5 | 18 |
-| **TOTAL** | | **208** | **12** | **7** | **227** |
+| topological-graph-theory | Topological | 8 | 5 | 5 | 18 |
+| **TOTAL** | | **206** | **14** | **7** | **227** |
 
 ## Per-phase (milestones)
 
 | phase | done | partial | blocked | total |
 |---|--:|--:|--:|--:|
 | D1 | 15 | 0 | 0 | 15 |
-| D2 | 29 | 3 | 0 | 32 |
-| D3 | 2 | 4 | 4 | 10 |
+| D2 | 28 | 4 | 0 | 32 |
+| D3 | 1 | 5 | 4 | 10 |
 | D4 | 8 | 4 | 2 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
 | D6 | 3 | 0 | 1 | 4 |
@@ -76,19 +76,21 @@
 | LIGHTWEIGHT | `GTMisc.conjectures.D7.in_NP` | The verifier and verifier-cost function are decoupled. Use only as an abstract relational layer until GTBase gains a coupled NP verifier. |
 | LIGHTWEIGHT | `GTMisc.conjectures.D7.poly_reduces` | Relational reduction vocabulary with a decoupled abstract cost function; unsuitable for positive algorithm-existence claims. |
 
-## Partial — faithful but conditional / needs a deferred layer (12)
+## Partial — faithful but conditional / needs a deferred layer (14)
 
 | area | slug | reason |
 |---|---|---|
 | extremal-graph-theory | asymptotic_distribution_of_form_of_polyhedra | planarity guard added 2026-10-23 (polyhedralb = three_connb && no K5 / K3,3 minor, reflected to wagner_planar by polyhedralbP); still partial: labelled counting (source: topologically inequivalent polyhedra) and existence of the limiting distribution only (source asks what it is) |
 | extremal-graph-theory | covering_powers_of_cycles_with_equivalence_subgraphs | regime guard repaired 2026-10-23: linear regime n >= c k (c existential) replaces the unconstrained threshold g (strictly stronger); stays partial: the source does not fix the n-regime (literal every-n reading refuted by near-complete C_{2k+1+t}^k, t = o(sqrt k)), so the linear regime is an interpretation |
 | extremal-graph-theory | mixing_circular_colourings_0 | M_c real infimum; rational-threshold approximation |
+| extremal-graph-theory | what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian | PARTIAL (statement leg since 2026-10-25, as its doc-block Notes in D2tur.v say): only Question 1 of the source is formalised, and as 'the smallest such k exists' rather than 'what is it'; Questions 2-4 (a shortest Hamiltonian path, 1-trees, a Hamiltonian cycle) need an optimisation over Hamiltonian paths and a 1-tree primitive, both deferred (meta/STATEMENT_IMPROVEMENTS.md). |
 | graph-theory-misc | finding_k_edge_outerplanar_graph_embeddings | Track B: coupled prog model + REPAIRED level-partition proxy (audit caught Pconst(1) proving the old elev-proxy form); stays partial — proxy for the true embedding-based k-edge-outerplanarity (Track-A layer makes it expressible, follow-up) |
 | infinite-graph-theory | coloring_the_odd_distance_graph | D4inf5: iGraph on R*R over rcfType, sqrt-free odd-integer-distance edge; chi=infinity via READING-2 (finite-subgraph chromatic unboundedness: forall n, exists finite S not n-colourable). PROXY on two documented axes: reading-2 is the choice-free direction of chi=infinity (converse = De Bruijn-Erdos), and forall R:rcfType is field-generic vs the specific reals. Audited partial: odd_dist faithful, n>=1 slice carries open content (grounding not_1_colorable), axiom-free. |
 | infinite-graph-theory | hamiltonian_cycles_in_line_graphs_of_infinite_graphs | PARTIAL proxy, explicit statement in Infinite.conjectures.D4legacy: Hamilton circle rendered by the D4inf3 spanning double-ray proxy; edge-connectivity rendered as kappa(L(G))>=4. infinite_graph guard added by audit 2026-07-22 (load-bearing: finite carriers refute the unguarded double-ray proxy while the source holds there via finite Hamilton cycles). Needs the topological circle layer to return to done. |
 | infinite-graph-theory | hamiltonian_cycles_in_powers_of_infinite_graphs | PARTIAL proxy, explicit statement in Infinite.conjectures.D4legacy: cube/square Hamilton circles via the spanning double-ray proxy. infinite_graph guard added by audit 2026-07-22 (unguarded form was machine-refuted axiom-free at K_1). Needs the topological circle layer to return to done. |
 | infinite-graph-theory | infinite_uniquely_hamiltonian_graphs | D4inf3: exists locally_finite 1-ended r-regular (r>2) uniquely-hamiltonian G. PROXY: uniquely_hamiltonian = spanning DOUBLE RAY (int-indexed), faithful to a Hamilton CIRCLE only in the co-assumed 1-ended locally-finite class (not the general Freudenthal topological circle). Audited partial: guards 2<r/one_ended/locally_finite load-bearing, trivialization+refutation fail, axiom-free. |
 | topological-graph-theory | crossing_numbers_and_coloring | PARTIAL proxy: sub-level comparison over xsplit-achievable counts, robust to exactly-k non-monotonicity but not yet validated as drawing crossing number because local rotation/alternation data is missing. The t=5 slice remains a useful strength check. |
+| topological-graph-theory | crossing_sequences | PARTIAL: orientable-primary crossing-sequence row over the xsplit genus-crossing model. The statement realizes strictly-decreasing-to-0 sequences by a CONNECTED graph and has useful structure (non-increasing, functional, inhabited; xsplit_connected checked), but readback/external-review proxy flagged the same missing local drawing rotation/alternation equivalence as D3cr, and the nonorientable resp. twin is not built. |
 | topological-graph-theory | the_crossing_number_of_the_complete_bipartite_graph | PARTIAL proxy: direct form is_crossing_number (KB m n) (Zarankiewicz value) over the xsplit planarization model. Readback/external-review proxy flagged missing local drawing rotation/alternation data, so equivalence to drawing crossing number is unvalidated; degenerate m,n<=2 planar/0 checks remain useful grounding. |
 | topological-graph-theory | the_crossing_number_of_the_complete_graph | PARTIAL proxy: direct form is_crossing_number 'K_n (Guy value) over the xsplit planarization model. Readback/external-review proxy flagged missing local drawing rotation/alternation data, so equivalence to drawing crossing number is unvalidated; needs a drawing/rotation layer to return to done. |
 | topological-graph-theory | the_crossing_number_of_the_hypercube | PARTIAL proxy: two-sided eps-N statement over xsplit-achievable counts; body/minimum-window probes and quantifier-order checks remain useful, but equivalence to drawing crossing number is unvalidated without a drawing/rotation layer. |
