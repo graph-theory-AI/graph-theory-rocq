@@ -232,8 +232,10 @@ Definition is_circular_mixing_threshold (G : sgraph) (r : rat) : Prop :=
       EVERY ratio k/q >= l, not for one pair: mixing is not monotone in k/q.
       Convention: thresholds are taken >= 2 ([mixes_from]). For a graph with an edge this
       changes nothing, since no ratio below 2 admits a colouring of an edge. For an edgeless
-      graph every ratio mixes, so the source's infimum is not a number; the convention gives
-      M_c = 2. The teeth are in grounding_D2chr.v.
+      graph with a vertex every positive ratio mixes (k = 0 admits no colouring), so the
+      source's infimum is 0. For the graph with no vertex every ratio mixes, so no rational is
+      even a lower bound of the thresholds. The convention gives M_c = 2 in both cases. The
+      teeth are in grounding_D2chr.v.
       Re-encoded on 2026-10-25 (PROGRAMME.md, A1). Until then the statement used
       [is_colouring_mixing_threshold], the infimum of p/q over single mixing pairs, which is
       kept unchanged above. *)

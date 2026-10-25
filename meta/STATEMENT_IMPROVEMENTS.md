@@ -2547,8 +2547,10 @@ as a `distinct_variants` entry of `meta/migration_reports/fractional_chromatic.s
   - `mixes_from G l` (`2 <= l` and `circ_mixing_at G k q` for every `q > 0` with `k/q >= l`),
   - `is_circular_mixing_threshold G r` (the greatest lower bound of the thresholds).
 - **Convention** `2 <= l`: for a graph with an edge it changes nothing (`mixes_from_edge`: no ratio below 2 admits a
-  colouring of an edge). For an edgeless graph every ratio mixes and the source's infimum is not a number; without the
-  convention the statement is false at the graph with no vertex (`no_threshold_glb_without_convention`).
+  colouring of an edge). For an edgeless graph with a vertex every positive ratio mixes (`k = 0` admits no colouring), so
+  the source's infimum is 0. For the graph with no vertex every ratio mixes, so no rational is even a lower bound and,
+  without the convention, the statement is false there (`no_threshold_glb_without_convention`). The convention gives
+  `M_c = 2` in both cases.
 - **Teeth** (`grounding_D2chr.v`): `is_circular_mixing_threshold_unique`; `circular_mixing_threshold_K2`
   (`M_c(K_2) = 2`: `K_2` is `(k,q)`-mixing for every `k > 2q`); `circular_mixing_threshold_K2_not_attained` (at `2/1` the
   two colourings of `K_2` are frozen).
