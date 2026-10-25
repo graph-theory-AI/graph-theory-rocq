@@ -14,8 +14,10 @@
     the [Print Assumptions] audit at the end. *)
 
 From GTBase Require Import base common clique_counts path_graphs.
-From mathcomp Require Import all_algebra zify.
 From Extremal.conjectures Require Import X230.
+(* MathComp last: X230 re-exports GTBase.base, whose GraphTheory notations would otherwise shadow
+   the ring notations (the 1 of the rat window in [g230_growth_hyp_claim]). *)
+From mathcomp Require Import all_algebra zify.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
