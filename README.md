@@ -1,10 +1,12 @@
 # graph-theory-rocq
 
 ![corpus-status](https://github.com/LLM4Rocq/graph-theory-rocq/actions/workflows/corpus-status.yml/badge.svg)
-**OpenProblemGarden corpus: statement-complete** — 227/227 attempted · **208 done** (axiom-free
-`Definition <name>_statement : Prop`, `Print Assumptions` clean) · **12 partial** · **7 blocked**.
-Release: **`opg-v1.0.1-227-attempted`** (release-time counts 212/8/7; 4 crossing-number rows were
-since downgraded to partial — `meta/CORPUS_STATUS.md` is the canonical living report). v1
+**OpenProblemGarden corpus: statement-complete** — 227/227 attempted · **206 done** (axiom-free
+`Definition <name>_statement : Prop`, `Print Assumptions` clean) · **14 partial** · **7 blocked**.
+Release: **`opg-v1.0.1-227-attempted`** (release-time counts 212/8/7; six rows were since
+downgraded to partial: four crossing-number rows, then `crossing_sequences` and
+`what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian`, whose own
+notes call them partial — `meta/CORPUS_STATUS.md` is the canonical living report). v1
 completion report: [`meta/OPG_FULL_FORMALIZATION_PLAN.md`](meta/OPG_FULL_FORMALIZATION_PLAN.md).
 
 **v2 corpus (growing)** — every conjecture source of the upstream `graph-conjectures` repo:
@@ -195,12 +197,16 @@ data; the transparent hinted-RUP/DRUP checker replays it inside Rocq.
 The proved theorem [`ck_conj1_delta7`](digraph-theory/theories/applications/ck_path/ckpath_k7_concrete.v)
 states that a nonempty oriented graph with minimum out-degree at least 7 has a simple
 directed path of at least 14 arcs; `ck_conj1_delta7_path` supplies a path of exactly 14 arcs.
-The k = 7 proof is already in the accepted source. Its registry entry and dedicated receipt
-are follow-up documentation work. See the [development README](digraph-theory/theories/applications/ck_path/README.md).
+Both are in the accepted Rocq 9.2 release candidate
+([`meta/releases/ROCQ92_ACCEPTED_2026-10-23.md`](meta/releases/ROCQ92_ACCEPTED_2026-10-23.md)).
+They settle the case δ = 7 only: the conjecture itself (`cheng_keevash_conj1_statement`) stays
+open, so they are recorded as special cases in
+[`digraph-theory/docs/correspondence/curated.json`](digraph-theory/docs/correspondence/curated.json),
+not as formal resolutions. See the [development README](digraph-theory/theories/applications/ck_path/README.md).
 
 ## Checked formal resolutions
 
-Six source records have checked formal resolutions: five new formalizations and a bridge to the existing Question 5.9 counterexample family. The latest additions disprove directed Kneser existence at `(5,3)` and the printed Alon–Tarsi Question 6.1. All six have closed assumptions.
+Seven source records have checked formal resolutions: six new formalizations and a bridge to the existing Question 5.9 counterexample family. The latest addition proves Conjecture 1.15 of arXiv:1611.03196 (a large matching in a bipartite graph that takes at most its fair share of each given edge set); the two before it disprove directed Kneser existence at `(5,3)` and the printed Alon–Tarsi Question 6.1. All seven have closed assumptions.
 
 See the [proof overview](meta/formalizations/README.md), [latest development journal](meta/formalizations/ROUND2_JOURNAL.md), and [resolution registry](meta/FORMAL_RESOLUTIONS.md). Run `ROCQ_OPAM_SWITCH=rocq-tools make resolutions` to build and check them with the compatible development switch.
 
