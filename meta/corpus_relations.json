@@ -2208,7 +2208,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "jaegers_modular_orientation_statement->three_flow_statement:implies:conditional",
+   "rocq_edge": "jaegers_modular_orientation_statement->three_flow_statement:implies:verified",
    "argument": "The k=1 case of Jaeger's conjecture concerns 4-edge-connected graphs and asks for a modular 3-orientation (indegree-outdegree = 0 mod 3), which by Tutte's theorem is equivalent to a nowhere-zero Z3-flow and hence to a nowhere-zero 3-flow. So the target is precisely the k=1 instance of the source, and the universally quantified source implies it by restriction. The source's own OPG context states verbatim: 'For k=1, this problem is precisely the 3-flow conjecture.' The disproof of the general conjecture (for k>=3) does not affect this logical implication; the k=1 case remains open.",
    "citations": [
     "http://www.openproblemgarden.org/op/jaegers_modular_orientation_conjecture"
