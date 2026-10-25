@@ -1670,18 +1670,18 @@
       "phase": "X45",
       "repo": "digraph-theory",
       "defines_file": "X45.v",
-      "implemented_by": "Codex X45 digraph clean-1 pass",
-      "source_verified_by": "Codex X45 source readback pass",
-      "source_verified_at": "2026-07-11",
-      "commit": "x45-digraph-clean1",
+      "implemented_by": "Arthur (A1 re-encoding, coordination/PROGRAMME.md section 3, 2026-10-25)",
+      "source_verified_by": "Marcol (X45 review, 2026-10-25: pinned data/arxiv_extracted/1608.03040.json Open Problem 1 and data/arxiv_reviews/1608.03040__02.json re-read)",
+      "source_verified_at": "2026-10-25",
+      "commit": "x45-beta-loopless-reencoding",
       "rows": {
         "axv_1608_03040_02": {
           "formal_name": "majority_three_colouring_beta_statement",
-          "note": "Encodes the majority-colouring row: a universal beta<1 allows every digraph to be 3-coloured with at most beta out-neighbours of each vertex sharing its colour."
+          "note": "Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): some beta = p/q < 1 such that every loopless digraph has a 3-colouring with at most beta * outdeg(v) out-neighbours of each vertex v sharing its colour (the body fixed beta = 1/2 and allowed loops). Original source-facing statement name preserved: majority_three_colouring_beta_statement."
         }
       },
-      "faithfulness_verified_by": "Codex X45 source readback pass (2026-07-11)",
-      "faithfulness_result": "Faithfulness readback: 1/1 PASS. Preserves existence of a uniform beta<1, every finite digraph, a 3-colouring, and the per-vertex same-colour out-neighbour bound; beta is encoded as a positive rational comparison."
+      "faithfulness_verified_by": "Marcol (X45 review, 2026-10-25)",
+      "faithfulness_result": "Readback 2026-10-25 (reviewer Marcol): 1/1 PASS. Open Problem 1 asks for some beta < 1; the body asks for p < q with q * #same <= p * outdeg v at every vertex of every loopless digraph, an exact rational form of beta (a real beta < 1 that works can be raised to a rational one below 1, and no negative beta works on a digraph with an arc). The loopless guard is load-bearing: a loop makes a vertex its own same-coloured out-neighbour, and the one-vertex looped digraph refuted the earlier body. The earlier body fixed beta = 1/2 (the stronger majority 3-colouring row #00) and implies the new one."
     },
     "X46": {
       "phase": "X46",

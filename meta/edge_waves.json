@@ -1318,10 +1318,10 @@
    "proof": "majority_3col_implies_majority_three_colouring_beta",
    "external": [],
    "reason": "",
-   "proved_by": "wave E3 agent (Claude Opus 5), 2026-09-24",
-   "reviewed_by": "Claude Opus 5 second reader R1 (edge programme, 2026-09-24): externals, load-bearing foundations and <=2-tactic proofs re-read; see meta/E1-A1_edge_audit.md",
-   "reviewed_at": "2026-09-24",
-   "note": "Same condition, two vocabularies: x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= outdeg of the target; the X45 body already encodes beta = 1/2, so no parameter monotonicity step is needed."
+   "proved_by": "Arthur (mathematics programme, 2026-10-25): re-proved after the X45 re-encoding (some beta < 1 on loopless digraphs; witness beta = 1/2); first proved by the wave E3 agent (Claude Opus 5), 2026-09-24",
+   "reviewed_by": "Marcol (X45 review, 2026-10-25)",
+   "reviewed_at": "2026-10-25",
+   "note": "Take beta = 1/2 (p = 1, q = 2) and ignore the target's loopless guard: x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= 1 * outdeg of the target."
   },
   "majority_k1col_statement->majority_3col_statement:implies": {
    "gc": "e018",
