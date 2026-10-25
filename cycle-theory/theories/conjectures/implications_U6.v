@@ -228,9 +228,9 @@ Qed.
     Claim: if every simple bridgeless multigraph with at least one vertex has a
     cycle double cover, then so does every bridgeless multigraph with at least
     one vertex and at least one edge.
-    Not formalized here: it is carried as an explicit hypothesis of the
-    conditional edge below (never an [Axiom], never [Admitted]), which is why
-    that edge is [status=conditional external=...] rather than [verified]. *)
+    Proved below as [cdc_simple_reduction] (2026-10-25, classical-lemmas
+    TODO 3), by subdividing every edge twice; the reduction that takes it as a
+    hypothesis is kept. *)
 Definition external_cdc_simple_reduction_statement : Prop :=
   (forall G : mgraph,
      (0 < #|G|)%N -> simple_mgraph G -> bridgeless G ->
@@ -239,13 +239,294 @@ Definition external_cdc_simple_reduction_statement : Prop :=
      (0 < #|G|)%N -> (0 < #|edge G|)%N -> bridgeless G ->
      exists L : seq {set edge G}, cdc L).
 
-(*@EDGE from=small_cycle_double_cover_statement to=cycle_double_cover_statement kind=implies status=conditional external="external_cdc_simple_reduction_statement" proof=small_cycle_double_cover_implies_cycle_double_cover cite="gc:e209" note="bm-013 gives, for every SIMPLE bridgeless multigraph, a cycle double cover with at most #|G|-1 members; forgetting the size bound gives the simple case of Row 11, and the simple-to-general step is the cited external reduction of the CDC to simple graphs" *)
+(** The reduction, with the simple-graph reduction as an explicit hypothesis.
+    (Until 2026-10-25 this was the edge gc:e209, [status=conditional]; its
+    annotation now sits on
+    [unconditional_small_cycle_double_cover_implies_cycle_double_cover] below,
+    after [cdc_simple_reduction].) *)
 Theorem small_cycle_double_cover_implies_cycle_double_cover :
   external_cdc_simple_reduction_statement ->
   small_cycle_double_cover_statement -> cycle_double_cover_statement.
 Proof.
 move=> Hred Hs; apply: Hred => G Hn Hsimp Hbl.
 by have [L [HL _]] := Hs G Hn Hsimp Hbl; exists L.
+Qed.
+
+(** ================================================================= *)
+(** ** gc:e209: the reduction of the CDC to simple graphs
+       (classical-lemmas TODO 3)
+
+    Subdivide every edge twice: [sdG G] has the vertices of [G] plus two new
+    vertices [inr (e, false)], [inr (e, true)] per edge [e], and each edge [e]
+    becomes the path [source e -- (e, false) -- (e, true) -- target e] of the
+    edges [(e, Some false)], [(e, None)], [(e, Some true)].  A loop becomes a
+    triangle and parallel edges become internally disjoint paths, so [sdG G]
+    is simple.  An undirected walk of [G] lifts to [sdG G] ([sd_lift]), so a
+    bridge of [sdG G] would give a bridge of [G].  A circuit of [sdG G] passes
+    through a new vertex with both or neither of its two edges, so it contains
+    all three edges of [e] or none; its middle edges [sd_back C] form a circuit
+    of [G] (degrees are preserved at the old vertices, and a walk projects
+    through [sd_pi], keeping only its middle edges).  Hence a cycle double
+    cover of [sdG G] maps to one of [G]. *)
+
+Section Subdivide.
+Variable G : mgraph.
+
+Definition sd_end (b : bool) (f : edge G * option bool) : G + (edge G * bool) :=
+  match f.2 with
+  | None => inr (f.1, b)
+  | Some c => if b == c then inl (endpoint c f.1) else inr (f.1, c)
+  end.
+
+Definition sdG : mgraph :=
+  @Graph unit unit (G + (edge G * bool))%type (edge G * option bool)%type
+    sd_end (fun _ => tt) (fun _ => tt).
+
+(** The old vertex below a vertex of [sdG]. *)
+Definition sd_pi (x : sdG) : G :=
+  match x with inl v => v | inr (e, c) => endpoint c e end.
+
+(** The middle edges of an edge set of [sdG]. *)
+Definition sd_back (C : {set edge sdG}) : {set edge G} :=
+  [set e | ((e, None) : edge sdG) \in C].
+
+(** The three edges of [e], traversed from the [b]-end of [e]. *)
+Definition sd_path (b : bool) (e : edge G) : seq (edge sdG) :=
+  if b then [:: (e, Some true); (e, None); (e, Some false)]
+  else [:: (e, Some false); (e, None); (e, Some true)].
+
+Fixpoint sd_lift (x : G) (w : seq (edge G)) : seq (edge sdG) :=
+  match w with
+  | [::] => [::]
+  | e :: w' =>
+      if source e == x then sd_path false e ++ sd_lift (target e) w'
+      else sd_path true e ++ sd_lift (source e) w'
+  end.
+
+Definition sd_proj (w : seq (edge sdG)) : seq (edge G) :=
+  [seq f.1 | f <- w & f.2 == None].
+
+Lemma sd_loopless : loopless sdG.
+Proof.
+by move=> [e [[]|]]; rewrite /source /target /= /sd_end //=; apply/eqP => -[].
+Qed.
+
+Lemma sd_simple : simple_mgraph sdG.
+Proof.
+(* An edge of [sdG] is determined by its two ends, and no edge runs between
+   the ends of another one in the opposite direction. *)
+have key : forall f1 f2 : edge sdG,
+    source f1 = source f2 -> target f1 = target f2 -> f1 = f2.
+  by move=> [e1 [[]|]] [e2 [[]|]]; rewrite /source /target /= /sd_end /=
+    => h1 h2; congruence.
+have keyr : forall f1 f2 : edge sdG,
+    source f1 = target f2 -> target f1 = source f2 -> False.
+  by move=> [e1 [[]|]] [e2 [[]|]]; rewrite /source /target /= /sd_end /=
+    => h1 h2; congruence.
+split; first exact: sd_loopless.
+move=> x y.
+have hI : edges x y :&: edges y x = set0.
+  apply/setP => f; rewrite !inE; apply/negP.
+  move=> /andP[/andP[/eqP sx /eqP ty] /andP[/eqP sy /eqP tx]].
+  by move: (sd_loopless f); rewrite sx tx eqxx.
+rewrite -cardsUI hI cards0 addn0.
+apply/card_le1_eqP => f1 f2; rewrite !inE.
+move=> /orP[/andP[/eqP s1 /eqP t1]|/andP[/eqP s1 /eqP t1]]
+       /orP[/andP[/eqP s2 /eqP t2]|/andP[/eqP s2 /eqP t2]].
+- by apply: key; rewrite ?s1 ?s2 ?t1 ?t2.
+- by case: (keyr f2 f1); rewrite ?s1 ?s2 ?t1 ?t2.
+- by case: (keyr f2 f1); rewrite ?s1 ?s2 ?t1 ?t2.
+- by apply: key; rewrite ?s1 ?s2 ?t1 ?t2.
+Qed.
+
+Lemma sd_lift_uwalk (x y : G) (w : seq (edge G)) :
+  uwalk x y w -> uwalk (inl x : sdG) (inl y) (sd_lift x w).
+Proof.
+elim: w x => [x /eqP -> /=|e w IH x h /=]; first by rewrite eqxx.
+case: ifP => [/eqP hs|hs].
+  do 3 (apply: uwalk_cons; first by rewrite /source /= /sd_end /= ?hs).
+  apply: IH; case/orP: h => /andP[/eqP h1 h2] //.
+  by rewrite h1 -hs.
+case/orP: h => /andP[/eqP h1 h2]; first by rewrite h1 eqxx in hs.
+do 3 (apply: uwalk_cons_rev; first by rewrite /target /= /sd_end /= ?h1).
+exact: IH.
+Qed.
+
+Lemma sd_lift_mem (x : G) (w : seq (edge G)) (f : edge sdG) :
+  f \in sd_lift x w -> f.1 \in w.
+Proof.
+elim: w x => [//|e w IH x]; rewrite in_cons.
+have hp : forall b, f \in sd_path b e -> f.1 = e.
+  by move=> []; rewrite /sd_path !inE => /or3P[] /eqP ->.
+move=> h; have {h} : f \in sd_path (source e != x) e
+    ++ sd_lift (if source e == x then target e else source e) w.
+  by move: h => /=; case: ifP.
+by rewrite mem_cat => /orP[/hp ->|/IH ->]; rewrite ?eqxx ?orbT.
+Qed.
+
+Lemma sd_bridgeless : bridgeless G -> bridgeless sdG.
+Proof.
+(* A bridge [(e, k)] of [sdG] makes [e] a bridge of [G]: a walk of [G] from
+   [source e] to [target e] avoiding [e] lifts, with the other two edges of
+   [e], to a walk between the ends of [(e, k)] avoiding it. *)
+move=> hbl [e k] hbr; apply: (hbl e) => w hw.
+case: (boolP (e \in w)) => [ew|new]; first by exists e; rewrite ?inE.
+exfalso.
+have hl := sd_lift_uwalk hw.
+have hnot : forall j, ((e, j) : edge sdG) \notin sd_lift (source e) w.
+  by move=> j; apply/negP => /sd_lift_mem /=; apply/negP.
+case: k hbr => [[]|] hbr.
+- have hw' : uwalk (source ((e, Some true) : edge sdG))
+      (target ((e, Some true) : edge sdG))
+      ([:: (e, None); (e, Some false)] ++ sd_lift (source e) w).
+    do 2 (apply: uwalk_cons_rev; first by []).
+    exact: hl.
+  have [g /set1P -> hg] := hbr _ hw'.
+  move: hg; rewrite mem_cat (negbTE (hnot _)) !inE.
+  by rewrite !xpair_eqE eqxx.
+- have hw' : uwalk (source ((e, Some false) : edge sdG))
+      (target ((e, Some false) : edge sdG))
+      (sd_lift (source e) w ++ [:: (e, Some true); (e, None)]).
+    apply: uwalk_cat hl _.
+    do 2 (apply: uwalk_cons_rev; first by []).
+    by rewrite /= eqxx.
+  have [g /set1P -> hg] := hbr _ hw'.
+  move: hg; rewrite mem_cat (negbTE (hnot _)) !inE.
+  by rewrite !xpair_eqE eqxx.
+- have hw' : uwalk (source ((e, None) : edge sdG))
+      (target ((e, None) : edge sdG))
+      ((e, Some false) :: sd_lift (source e) w ++ [:: (e, Some true)]).
+    apply: uwalk_cons_rev; first by [].
+    apply: uwalk_cat hl _.
+    apply: uwalk_cons_rev; first by [].
+    by rewrite /= eqxx.
+  have [g /set1P -> hg] := hbr _ hw'.
+  move: hg; rewrite in_cons mem_cat (negbTE (hnot _)) !inE.
+  by rewrite !xpair_eqE eqxx.
+Qed.
+
+Lemma sd_proj_uwalk (x y : sdG) (w : seq (edge sdG)) :
+  uwalk x y w -> uwalk (sd_pi x) (sd_pi y) (sd_proj w).
+Proof.
+(* An outer edge [(e, Some c)] has both ends above [endpoint c e]; a middle
+   edge [(e, None)] lies above [e]. *)
+elim: w x => [x /eqP -> /=|[e [c|]] w IH x h]; first by rewrite eqxx.
+  have hpi : sd_pi (source ((e, Some c) : edge sdG))
+           = sd_pi (target ((e, Some c) : edge sdG)) by clear h; case: c.
+  rewrite /sd_proj /=; case/orP: h => /andP[/eqP hx hw].
+  - by rewrite -hx hpi; exact: IH hw.
+  - by rewrite -hx -hpi; exact: IH hw.
+rewrite /sd_proj /=; case/orP: h => /andP[/eqP hx hw].
+- by apply: uwalk_cons; [rewrite -hx | exact: IH hw].
+- by apply: uwalk_cons_rev; [rewrite -hx | exact: IH hw].
+Qed.
+
+(** In a [{0,2}]-regular edge set of [sdG], the three edges of [e] are all in
+    or all out. *)
+Lemma sd_reg (C : {set edge sdG}) (e : edge G) :
+  subgraph_kregular C 2 ->
+  ((e, Some false) \in C) = ((e, None) \in C) /\
+  ((e, Some true) \in C) = ((e, None) \in C).
+Proof.
+(* The new vertex [inr (e, c)] has exactly two arc ends, so its degree in [C]
+   counts two of the three edges of [e]. *)
+move=> hreg.
+have card1 : forall (P : pred (edge sdG)) f0,
+    (forall f, P f = (f == f0)) -> #|[set f in C | P f]| = (f0 \in C).
+  move=> P f0 hP; case: (boolP (f0 \in C)) => h0.
+    rewrite (_ : [set f in C | P f] = [set f0]) ?cards1 //.
+    apply/setP => f; rewrite !inE hP.
+    by case: (f =P f0) => [->|]; rewrite ?h0 ?andbF.
+  rewrite (_ : [set f in C | P f] = set0) ?cards0 //.
+  apply/setP => f; rewrite !inE hP.
+  by case: (f =P f0) => [->|]; rewrite ?(negbTE h0) ?andbF.
+have es : forall c (f : edge sdG), (endpoint false f == (inr (e, c) : sdG))
+    = (f == (e, if c then Some true else None)).
+  move=> [] [g [[]|]]; rewrite /= /sd_end /= ?xpair_eqE /= ?andbT ?andbF;
+    by [apply/eqP/eqP => [[->]|->] | apply/eqP => -[]].
+have et : forall c (f : edge sdG), (endpoint true f == (inr (e, c) : sdG))
+    = (f == (e, if c then None else Some false)).
+  move=> [] [g [[]|]]; rewrite /= /sd_end /= ?xpair_eqE /= ?andbT ?andbF;
+    by [apply/eqP/eqP => [[->]|->] | apply/eqP => -[]].
+have hd : forall c, subdeg C (inr (e, c))
+    = ((e, if c then Some true else None) \in C)
+      + ((e, if c then None else Some false) \in C).
+  by move=> c; rewrite /subdeg /ends_at (card1 _ _ (es c)) (card1 _ _ (et c)).
+have h2 : forall a b : bool, (a + b = 0 \/ a + b = 2)%N -> a = b.
+  by move=> [] [] //= [].
+split.
+- by apply/esym/h2; rewrite -(hd false); exact: hreg.
+- by apply/h2; rewrite -(hd true); exact: hreg.
+Qed.
+
+Lemma sd_subdeg (C : {set edge sdG}) (v : G) :
+  subgraph_kregular C 2 -> subdeg (sd_back C) v = subdeg C (inl v).
+Proof.
+(* The [b]-ends of [C] at [inl v] are the outer edges [(g, Some b)] of the
+   edges [g] of [sd_back C] whose [b]-end is [v]. *)
+move=> hreg.
+have hr : forall g c, (((g, Some c) : edge sdG) \in C) = ((g, None) \in C).
+  by move=> g []; case: (sd_reg g hreg).
+have hb : forall b, ends_at C b (inl v)
+    = [set ((g, Some b) : edge sdG) | g in ends_at (sd_back C) b v].
+  move=> b; apply/setP => f; apply/idP/idP.
+    case: f => g [c|]; rewrite inE /= /sd_end /=.
+    - case: (b =P c) => [<-|_] /andP[hC] /eqP // [hv].
+      by apply/imsetP; exists g => //; rewrite !inE -(hr g b) hC hv eqxx.
+    - by case/andP => _ /eqP.
+  case/imsetP => g; rewrite !inE => /andP[hC /eqP hv] ->.
+  by rewrite hr hC /= /sd_end /= eqxx hv.
+have inj : forall b, injective (fun g : edge G => ((g, Some b) : edge sdG)).
+  by move=> b g1 g2 [].
+by rewrite /subdeg !hb !card_imset.
+Qed.
+
+Lemma sd_circuit (C : {set edge sdG}) : is_circuit C -> is_circuit (sd_back C).
+Proof.
+case=> hne hreg hconn.
+have hr : forall g c, (((g, Some c) : edge sdG) \in C) = ((g, None) \in C).
+  by move=> g []; case: (sd_reg g hreg).
+split.
+- case/set0Pn: hne => -[g k] hf; apply/set0Pn; exists g; rewrite inE.
+  by case: k hf => [c|] hf //; rewrite -(hr g c).
+- by move=> v; rewrite sd_subdeg //; exact: hreg.
+have lift_inc : forall z, H_inc (sd_back C) z -> H_inc C (inl z).
+  move=> z /existsP[e /andP[he /existsP[b /eqP hb]]].
+  apply/existsP; exists (e, Some b); rewrite hr; move: he; rewrite inE => -> /=.
+  by apply/existsP; exists b; rewrite /= /sd_end /= eqxx hb.
+move=> x y hx hy.
+have [w /andP[hu ha]] := hconn _ _ (lift_inc _ hx) (lift_inc _ hy).
+exists (sd_proj w); apply/andP; split; first exact: (sd_proj_uwalk hu).
+apply/allP => e /mapP[[g k]]; rewrite mem_filter /= => /andP[/eqP hk hf] ->.
+by rewrite inE -hk (allP ha _ hf).
+Qed.
+
+Lemma sd_cdc (L : seq {set edge sdG}) : cdc L -> cdc (map sd_back L).
+Proof.
+case=> hc hcnt; split.
+  by move=> C' /mapP[C hC ->]; exact: sd_circuit (hc C hC).
+move=> e; rewrite count_map -(hcnt (e, None)).
+by apply: eq_count => C /=; rewrite inE.
+Qed.
+
+End Subdivide.
+
+(** The reduction of the CDC to simple graphs (Jaeger 1985, Section 2), at
+    the form stated by the external. *)
+Theorem cdc_simple_reduction : external_cdc_simple_reduction_statement.
+Proof.
+move=> Hs G Hn _ Hbl.
+have Hn' : (0 < #|sdG G|)%N.
+  by case/card_gt0P: Hn => v _; apply/card_gt0P; exists (inl v).
+have [L hL] := Hs (sdG G) Hn' (sd_simple G) (sd_bridgeless Hbl).
+by exists (map (@sd_back G) L); exact: sd_cdc.
+Qed.
+
+(*@EDGE from=small_cycle_double_cover_statement to=cycle_double_cover_statement kind=implies status=verified proof=unconditional_small_cycle_double_cover_implies_cycle_double_cover cite="gc:e209" note="bm-013 gives, for every SIMPLE bridgeless multigraph, a cycle double cover with at most #|G|-1 members; forgetting the size bound gives the simple case of Row 11, and the simple-to-general step is proved as cdc_simple_reduction: subdividing every edge twice gives a simple bridgeless multigraph, and the middle edges of its cycle double cover form one of the original graph" *)
+Theorem unconditional_small_cycle_double_cover_implies_cycle_double_cover :
+  small_cycle_double_cover_statement -> cycle_double_cover_statement.
+Proof.
+exact: small_cycle_double_cover_implies_cycle_double_cover cdc_simple_reduction.
 Qed.
 
 (** ================================================================= *)
@@ -852,3 +1133,8 @@ Print Assumptions cycle_double_covers_containing_predefined_2_regular_implies_cy
 Print Assumptions petersen_pullback_cover.
 Print Assumptions petersen_coloring_implies_m_n_cycle_covers.
 Print Assumptions petersen_coloring_implies_cycle_double_cover.
+
+(** ** Axiom audit (gc:e209) *)
+
+Print Assumptions cdc_simple_reduction.
+Print Assumptions unconditional_small_cycle_double_cover_implies_cycle_double_cover.
