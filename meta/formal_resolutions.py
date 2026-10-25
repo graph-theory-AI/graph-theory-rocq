@@ -49,6 +49,9 @@ ENTRY_FIELDS = {
     "opg": COMMON_FIELDS | set(SOURCE_IDENTITY["opg"]),
 }
 OPG_KEY = re.compile(r"opg:([a-z0-9_]+)")
+# A compiler warning: its location line, the message, then the [category,...] line.
+WARNING_BLOCK = re.compile(
+    r'^File "[^"\n]*", line \d+, characters \d+-\d+:\nWarning:(?:.*\n)*?\[[\w,-]+\](?:\n|\Z)', re.M)
 
 
 class ResolutionError(ValueError):
@@ -328,9 +331,24 @@ def verify_entry(root: Path, entry: dict, *, build: bool = True) -> VerifiedReso
         probe = Path(temporary) / "ResolutionCheck.v"
         probe.write_text(body)
         output = run(["rocq", "compile", *flags, str(probe)], package, env)
+    # The decision reads the whole compiler output; only the recorded transcript drops warnings.
     if "Axioms:" in output or output.count("Closed under the global context") != 2:
         raise ResolutionError(f"statement/proof assumptions are not closed:\n{output}")
-    return VerifiedResolution(entry["record_key"], statement, theorem, entry["direction"], output)
+    return VerifiedResolution(entry["record_key"], statement, theorem, entry["direction"],
+                              transcript(output, temporary))
+
+
+def transcript(output: str, temporary: str) -> str:
+    """The probe output without compiler warning blocks.
+
+    A warning block names the run's temporary probe file, so keeping it would
+    make the --report differ on every run. Any other mention of that directory
+    is an unrecognised message and fails rather than being recorded.
+    """
+    kept = WARNING_BLOCK.sub("", output)
+    if temporary in kept or "Warning:" in kept:
+        raise ResolutionError(f"unrecognised compiler message in the probe output:\n{output}")
+    return kept
 
 
 def selected_entries(root: Path, *, package: str | None = None,

@@ -70,7 +70,9 @@ constants to report `Closed under the global context`. This rejects additional
 mathematical axioms, admissions, conditional proofs, the wrong polarity and
 proofs of unrelated statements. A stored transcript is supplementary evidence;
 it never substitutes for the live compiler checks. Use `--report PATH` to save
-the successful probe output.
+the successful probe output. The report drops compiler warning blocks, which name the
+run's temporary probe file, so it is reproducible; the pass or fail decision reads the
+whole output, and any other mention of the probe file fails the check.
 
 The milestone gate allows only the freshly verified triple
 `(statement, theorem, direction)`. All other exact-type faithfulness probes remain
@@ -259,3 +261,7 @@ files are ignored. A second top-level definition, including one in a `Section` o
 `Local` one, is ambiguous, and malformed scopes fail closed. The selection tests
 cover `--record` and `--package` in both modes. One compiled run checks and reports
 only the selected entry.
+
+The transcript tests strip one- and multi-line warning blocks and refuse an
+unrecognised message. A compiled fixture whose import really warns (checked by
+compiling the same probe directly) yields a report without `Warning:` or the probe path.
