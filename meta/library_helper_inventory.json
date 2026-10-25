@@ -24322,12 +24322,12 @@
   },
   "counts": {
     "files": 322,
-    "helpers": 2566,
+    "helpers": 2567,
     "repeated_body_shapes": 147,
     "repeated_normalized_names": 212,
     "repeated_signature_shapes": 306,
     "statements_excluded": 700,
-    "x_wave_helpers": 1409
+    "x_wave_helpers": 1410
   },
   "groups": {
     "body_shape_hash": {
@@ -31814,6 +31814,25 @@
       "qualified_name": "Chromatic.conjectures.X181.x181_random_graph_clique_chromatic_constant",
       "signature": ": Prop",
       "signature_shape_hash": "ed67660129784c837b5ba4a9e21be61bc0fd5c32db42e4be3039ebe804be72f6"
+    },
+    {
+      "body_hash": "44b847ed57afd1f903472866d469057b5b64d52ba31214bbd99022ff328ba3e0",
+      "body_shape_hash": "44b847ed57afd1f903472866d469057b5b64d52ba31214bbd99022ff328ba3e0",
+      "declaration_hash": "57fcbfd32a16307d7980e3565a7cece72ea19e42f176a453b4a908a9c3d02bc0",
+      "direct_consumers": [
+        "Chromatic.conjectures.X183.degenerate_list_flexibility_d_plus_one_statement"
+      ],
+      "kind": "Definition",
+      "line": 9,
+      "local_dependencies": [],
+      "name": "x183_weighted_flexible_exact",
+      "normalized_name": "weighted_flexible_exact",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X183.v",
+      "phase": "X183",
+      "qualified_name": "Chromatic.conjectures.X183.x183_weighted_flexible_exact",
+      "signature": "(G : sgraph) (k p q : nat) : Prop",
+      "signature_shape_hash": "9a13e5e2c4b337460f762f95c988cd0ea67bb13d8bbf19593b51fb087ee85bcc"
     },
     {
       "body_hash": "0ec6adebc366b779b880b32b7377822bd953be4c9f1601187e0f1161265cd53a",
@@ -40303,7 +40322,7 @@
         "Digraph.conjectures.X179.x179_k_vertex_strongly_connected"
       ],
       "kind": "Definition",
-      "line": 10,
+      "line": 11,
       "local_dependencies": [],
       "name": "x179_strongly_connected_after_deleting",
       "normalized_name": "strongly_connected_after_deleting",
@@ -40322,7 +40341,7 @@
         "Digraph.conjectures.X179.x179_kappa_maderian"
       ],
       "kind": "Definition",
-      "line": 17,
+      "line": 18,
       "local_dependencies": [
         "x179_strongly_connected_after_deleting"
       ],
@@ -40343,7 +40362,7 @@
         "Digraph.conjectures.X179.x179_k_arc_strongly_connected"
       ],
       "kind": "Definition",
-      "line": 20,
+      "line": 21,
       "local_dependencies": [],
       "name": "x179_out_cut",
       "normalized_name": "out_cut",
@@ -40362,7 +40381,7 @@
         "Digraph.conjectures.X179.x179_arc_kappa_maderian"
       ],
       "kind": "Definition",
-      "line": 23,
+      "line": 24,
       "local_dependencies": [
         "x179_out_cut"
       ],
@@ -40379,11 +40398,9 @@
       "body_hash": "37ee547ed319fab50e2318f02e3b86adc8c974deeeff91a4c8437f6eece86f4b",
       "body_shape_hash": "37ee547ed319fab50e2318f02e3b86adc8c974deeeff91a4c8437f6eece86f4b",
       "declaration_hash": "e415e907d1f5847d7d3d7f529a96cbcd3ab589da383c4c7603ca5ad67150ba36",
-      "direct_consumers": [
-        "Digraph.conjectures.X179.x179_directed_subdivision"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
-      "line": 26,
+      "line": 27,
       "local_dependencies": [],
       "name": "x179_directed_path",
       "normalized_name": "directed_path",
@@ -40395,18 +40412,16 @@
       "signature_shape_hash": "88cd7f72c752a1c6de53ccaa7a158fc254a2598ad0de4fa83085cdc3d70354a6"
     },
     {
-      "body_hash": "73df2e96612c5d1d9d85fe5d9449a4aa38c8c5e12b299551495bd777a8c91fe1",
-      "body_shape_hash": "e45304083d5d6b635bde6c9dc7d747dcb0b2eff1cbe64e190eebdca7eeb8f6c6",
-      "declaration_hash": "5115c6df6df9098f80214cf1c994281090771044939b5a0ed03b8ae8b667fab7",
+      "body_hash": "eff6a3405ed2470e1387a7d984e0a62591b637386bb7ffbdf8cd49c9d2ba4625",
+      "body_shape_hash": "eff6a3405ed2470e1387a7d984e0a62591b637386bb7ffbdf8cd49c9d2ba4625",
+      "declaration_hash": "e7f2f210d2a7676b3bf26b4e116605af85bf321b363b17f253d7efa99681c973",
       "direct_consumers": [
         "Digraph.conjectures.X179.x179_arc_kappa_maderian",
         "Digraph.conjectures.X179.x179_kappa_maderian"
       ],
       "kind": "Definition",
-      "line": 29,
-      "local_dependencies": [
-        "x179_directed_path"
-      ],
+      "line": 30,
+      "local_dependencies": [],
       "name": "x179_directed_subdivision",
       "normalized_name": "directed_subdivision",
       "package": "digraph-theory",
@@ -40417,14 +40432,14 @@
       "signature_shape_hash": "7d59720c52d055e5ae202f74efb147f83ee5b077e4bab12c12ebcdb7e13fa6aa"
     },
     {
-      "body_hash": "f51234d015166a1b3795a547cc27a83be7e383a313ad358b8d74e839550a993b",
-      "body_shape_hash": "d442f816dbea5ef3c36ac5e2b445540581265bd52a1d7a0c65531144f8b0c393",
-      "declaration_hash": "67250b71084dd4dfeea416cf9bd0385280dd3f56338b6059ea2bcd32fb927316",
+      "body_hash": "62e63bafb9e1d310c42233477c9033ceb4fa540f093534dd4ce489695cf7b317",
+      "body_shape_hash": "1b152955781729e53369c849df5bc5d9a4dfbc1d9c7166369ef309dfec28dd76",
+      "declaration_hash": "ca107343732f67dc420bdef9dcd6de7a7d21e76a31aab87d036ed240550b2abc",
       "direct_consumers": [
         "Digraph.conjectures.X179.digraph_kappa_maderian_statement"
       ],
       "kind": "Definition",
-      "line": 38,
+      "line": 50,
       "local_dependencies": [
         "x179_directed_subdivision",
         "x179_k_vertex_strongly_connected"
@@ -40439,14 +40454,14 @@
       "signature_shape_hash": "1df638342453dfeab4177ffe20578994bca0d7dc155ec596c82c0b58fc45aa39"
     },
     {
-      "body_hash": "01d3af5182f9ec90b98afc7e9f6de79fff0839e587e31a5467498ceb084edbfa",
-      "body_shape_hash": "f7658a3de3af4aac46136c86ce20691147d24feaab17747edfd8d0f5e74b96ab",
-      "declaration_hash": "c14a36fa89e56d537dab88499088869c67775f57ee3e17e0b98e336fe62714c1",
+      "body_hash": "97a95bc35c19e8bf862386e8902342cf11ea2d579f9be931dbc0289184cc54d0",
+      "body_shape_hash": "973ef160dc1e414c384960329b9aca9448b64cb8648b8b667245ff84b1ae515d",
+      "declaration_hash": "33bb1f092d7496ce6ffcbe846ecca2077ea9bec6c9ecf8da8bc7198eaaee885e",
       "direct_consumers": [
         "Digraph.conjectures.X179.digraph_kappa_maderian_statement"
       ],
       "kind": "Definition",
-      "line": 43,
+      "line": 57,
       "local_dependencies": [
         "x179_directed_subdivision",
         "x179_k_arc_strongly_connected"
@@ -69536,7 +69551,7 @@
         "Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement"
       ],
       "kind": "Definition",
-      "line": 116,
+      "line": 119,
       "local_dependencies": [
         "complete_sub"
       ],
@@ -69558,7 +69573,7 @@
         "Hypergraph.conjectures.U12.critical_k_forest"
       ],
       "kind": "Definition",
-      "line": 147,
+      "line": 153,
       "local_dependencies": [],
       "name": "berge_cycle",
       "normalized_name": "berge_cycle",
@@ -69577,7 +69592,7 @@
         "Hypergraph.conjectures.U12.k_forest"
       ],
       "kind": "Definition",
-      "line": 181,
+      "line": 187,
       "local_dependencies": [
         "berge_cycle"
       ],
@@ -69598,7 +69613,7 @@
         "Hypergraph.conjectures.U12.k_tree"
       ],
       "kind": "Definition",
-      "line": 185,
+      "line": 191,
       "local_dependencies": [],
       "name": "hg_connected",
       "normalized_name": "hg_connected",
@@ -69618,7 +69633,7 @@
         "Hypergraph.conjectures.U12.k_tree"
       ],
       "kind": "Definition",
-      "line": 195,
+      "line": 201,
       "local_dependencies": [
         "berge_acyclic",
         "k_uniform"
@@ -69640,7 +69655,7 @@
         "Hypergraph.conjectures.U12.are_critical_k_forests_tight_statement"
       ],
       "kind": "Definition",
-      "line": 199,
+      "line": 205,
       "local_dependencies": [
         "hg_connected",
         "k_forest"
@@ -69662,7 +69677,7 @@
         "Hypergraph.conjectures.U12.are_critical_k_forests_tight_statement"
       ],
       "kind": "Definition",
-      "line": 203,
+      "line": 209,
       "local_dependencies": [
         "berge_cycle",
         "k_forest"
@@ -69684,7 +69699,7 @@
         "Hypergraph.conjectures.U12.rysers_statement"
       ],
       "kind": "Definition",
-      "line": 238,
+      "line": 244,
       "local_dependencies": [],
       "name": "r_partite_uniform",
       "normalized_name": "r_partite_uniform",
@@ -69703,7 +69718,7 @@
         "Hypergraph.conjectures.U12.is_matching_number"
       ],
       "kind": "Definition",
-      "line": 263,
+      "line": 269,
       "local_dependencies": [],
       "name": "hg_matching",
       "normalized_name": "hg_matching",
@@ -69722,7 +69737,7 @@
         "Hypergraph.conjectures.U12.rysers_statement"
       ],
       "kind": "Definition",
-      "line": 267,
+      "line": 273,
       "local_dependencies": [
         "hg_matching"
       ],
@@ -69743,7 +69758,7 @@
         "Hypergraph.conjectures.U12.is_cover_number"
       ],
       "kind": "Definition",
-      "line": 272,
+      "line": 278,
       "local_dependencies": [],
       "name": "hg_cover",
       "normalized_name": "hg_cover",
@@ -69762,7 +69777,7 @@
         "Hypergraph.conjectures.U12.rysers_statement"
       ],
       "kind": "Definition",
-      "line": 276,
+      "line": 282,
       "local_dependencies": [
         "hg_cover"
       ],
