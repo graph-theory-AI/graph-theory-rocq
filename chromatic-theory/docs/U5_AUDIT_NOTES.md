@@ -30,10 +30,14 @@ All 9 rows faithful + axiom-free after the two corrections below.
   Seymour link is the deep Chen–Jing–Zang theorem). Federation verified-edge count returns to 0 — the
   honest state. The r-graph density lemmas `mDelta_le`/`overfull_le` (both Goldberg terms ≤ r+1)
   remain as genuine facts in `implications_U5.v`.
+- **2026-10-25 (coordination/PROGRAMME.md A1): reverted to the source.** The pinned OPG text is
+  "Conjecture χ'(G) ≤ r+1 for every r-graph G", so the χ' = r reading above was stronger than the
+  source. The body is `edge_colourable G r.+1` again, and `goldberg ⟹ seymour` is a verified edge
+  (e001, `goldbergs_implies_seymours_r_graph`, from `mDelta_le` and `overfull_le`).
 
 ## Edges (machine-readable `(*@EDGE*)`)
 - `edge_list_coloring ⟹ goldbergs` — candidate (cross-milestone to U4).
-- `goldbergs ⟹ seymours_r_graph` — **candidate** (demoted, see above).
+- `goldbergs ⟹ seymours_r_graph` — **verified** since 2026-10-25 (e001; a candidate before, see above).
 - `list_total_colouring ⟹ behzads` — refuted-direction (now points at U5's real `behzads_statement`;
   the U4 annotation was retargeted from the old dangling `behzad_total_colouring_statement` name, and
   the extractor dedups the two assertions into one edge sourced `[U4+U5]`).

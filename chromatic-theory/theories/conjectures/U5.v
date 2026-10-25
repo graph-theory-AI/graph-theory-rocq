@@ -183,19 +183,19 @@ Definition is_r_graph (G : mgraph) (r : nat) : Prop :=
     English statement: (Seymour 1979; Open Problem Garden, "Seymour's r-graph conjecture")
       For every r and every multigraph G that is an r-graph, that is every vertex is incident with
       exactly r edges and every vertex set of odd size has at least r edges in its edge boundary,
-      the chromatic index of G is at most r.
+      the chromatic index of G is at most r + 1.
     Definitions: [is_r_graph G r] - r-regularity counted with parallel edges together with the
       odd-cut condition |edge boundary of X| >= r for every X of odd size (this file);
       [edge_boundary X] - the edges with exactly one endpoint in X (this file); [edge_colourable G
       k] - the chromatic index of G, i.e. chi of its line graph, is at most k (GTBase
       base/theories/base.v).
-    Notes: DISCREPANCY with the corpus text: the source conjecture is chi'(G) <= r + 1 for every
-      r-graph, whereas the Rocq body concludes [edge_colourable G r], i.e. chi'(G) <= r. As written
-      the Rocq statement is strictly stronger than Seymour's conjecture and is in fact refutable:
-      the Petersen graph is a 3-graph with chromatic index 4. This is recorded in
-      meta/STATEMENT_IMPROVEMENTS.md; the body is left untouched here, WP4 changes comments only. *)
+    Notes: the body concludes [edge_colourable G r.+1], i.e. chi'(G) <= r + 1, the source's form.
+      From ff00f33f (2026-06-26) to 2026-10-25 it concluded [edge_colourable G r], chi'(G) <= r,
+      stronger than the source (meta/STATEMENT_IMPROVEMENTS.md); coordination/PROGRAMME.md A1
+      restored it. On an r-graph both Goldberg terms are at most r + 1, so Goldberg's conjecture
+      implies this row (edge e001, [goldbergs_implies_seymours_r_graph] in implications_U5.v). *)
 Definition seymours_r_graph_statement : Prop :=
-  forall (r : nat) (G : mgraph), is_r_graph G r -> edge_colourable G r.
+  forall (r : nat) (G : mgraph), is_r_graph G r -> edge_colourable G r.+1.
 
 (** ============================================================================
     Row 3 — 3-edge-colouring conjecture — OPEN.

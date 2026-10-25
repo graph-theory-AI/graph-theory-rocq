@@ -1594,6 +1594,10 @@ them.
   `chi'(G) <= r+1` for every r-graph, the body concludes `edge_colourable G r`, i.e.
   `chi'(G) <= r`. Severity: **too strong**, and in fact refutable — the Petersen graph is a
   3-graph with chromatic index 4, so the statement as written is false. Fix: `edge_colourable G r.+1`.
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the body concludes `edge_colourable G r.+1`,
+  the source's form; the old body implies the new one (`r <= r.+1`). Goldberg's conjecture now
+  implies the row (e001 verified, `goldbergs_implies_seymours_r_graph`), and
+  `meta/CORPUS_FEEDBACK.md` item 2 is withdrawn.
 - `opg:list_colorings_of_edge_critical_graphs` (`U4.v`) — `Delta_edge_critical` only requires that
   deleting any edge lowers the chromatic index; the classical Delta-edge-critical hypothesis also
   requires `chi'(G) = Delta + 1`. The hypothesis holds for strictly more graphs than the source's.

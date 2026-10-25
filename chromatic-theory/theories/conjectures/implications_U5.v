@@ -233,15 +233,18 @@ Qed.
 
 (** ** The scheduled edge *)
 
-(** Goldberg ⟹ Seymour's r-graph conjecture is NOT a verified (Qed) edge against the FAITHFUL
-    Seymour statement (χ' ≤ r).  Goldberg's bound is max(Δ+1, w) = max(r+1, r) = r+1 for an r-graph,
-    so it yields only χ' ≤ r+1, NOT the χ' = r Seymour asserts.  The r-graph density facts
-    [mDelta_le] / [overfull_le] above are genuine (both Goldberg terms ≤ r+1) but do not close the
-    gap from r+1 to r.  An earlier draft stated Seymour as [edge_colourable G r.+1] (χ' ≤ r+1),
-    against which the edge was trivially provable — but that endpoint WEAKENED the conjecture (now
-    corrected to [edge_colourable G r]).  Recorded as a candidate; the genuine Goldberg–Seymour
-    relationship is the deep Chen–Jing–Zang theorem, not this elementary bound. *)
-(*@EDGE from=goldbergs_statement to=seymours_r_graph_statement kind=implies status=refuted-direction cite="Goldberg 1973; Seymour, On multicolourings of cubic graphs, Proc. LMS (3) 38 (1979) 423-460" note="REFUTED-DIRECTION (metadata wave M, 2026-09-24): Goldberg gives chi' <= r+1, not chi' = r; corpus e001 claims the wrong direction (reported upstream, meta/CORPUS_FEEDBACK.md). Earlier note: Goldberg bound gives chi'<=r+1, not the chi'=r faithful Seymour requires; deep relationship (Chen-Jing-Zang 2019), not an elementary Qed" *)
+(** Goldberg ⟹ Seymour's r-graph conjecture (gc:e001).  On an r-graph both Goldberg terms are at
+    most r+1 ([mDelta_le], [overfull_le]), so Goldberg's bound max(Δ+1, w) gives χ' ≤ r+1, which
+    is Seymour's conjecture in the source's form.  (From ff00f33f until 2026-10-25 the Seymour body
+    concluded χ' ≤ r, strictly stronger than the source, and this edge was recorded as
+    refuted-direction; the body was restored to χ' ≤ r+1 under coordination/PROGRAMME.md A1.) *)
+(*@EDGE from=goldbergs_statement to=seymours_r_graph_statement kind=implies status=verified proof=goldbergs_implies_seymours_r_graph cite="gc:e001" note="On an r-graph both Goldberg terms are at most r+1: mDelta G <= r (every vertex has exactly r incident edges) and overfull_parameter G <= r (the loopless handshake plus the odd-cut condition give |E(S)| <= r * floor(|S|/2)), so Goldberg's bound max(Delta+1, w) gives chi' <= r+1, Seymour's r-graph conjecture in the source's form (body restored 2026-10-25, PROGRAMME A1)" *)
+Theorem goldbergs_implies_seymours_r_graph : goldbergs_statement -> seymours_r_graph_statement.
+Proof.
+move=> Hg r G Hrg; rewrite /edge_colourable.
+apply: leq_trans (Hg G) _.
+by rewrite geq_max ltnS (mDelta_le Hrg) (leq_trans (overfull_le Hrg)).
+Qed.
 
 (** ** e002: X33's list total colouring bound ==> Behzad (verified)
 
@@ -365,3 +368,4 @@ Qed.
 (*@EDGE from=list_total_colouring_statement to=behzads_statement kind=implies status=refuted-direction cite="OPG_FULL_FORMALIZATION_PLAN §6" note="FORBIDDEN and CROSS-MILESTONE (list-total is U4): chi''_l = chi'' does not yield the chi'' <= Delta+2 bound" *)
 
 Print Assumptions total_list_colouring_delta_plus_two_implies_behzads.
+Print Assumptions goldbergs_implies_seymours_r_graph.
