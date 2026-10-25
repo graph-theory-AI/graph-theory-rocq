@@ -969,6 +969,16 @@
       ],
       "family_id": "digraph-underlying-graph",
       "milestone": "post-rc-library-wave"
+    },
+    "weighted_flexible_exact": {
+      "class": "candidate_family",
+      "reason": "weighted p/q-flexibility for lists of size exactly k; X132 and X183 share one body (the A2 repair and the A1 re-encoding of 2026-10-25)",
+      "members": [
+        "Chromatic.conjectures.X132.x132_weighted_flexible_exact",
+        "Chromatic.conjectures.X183.x183_weighted_flexible_exact"
+      ],
+      "family_id": "list-flexibility-exact",
+      "milestone": "post-rc-library-wave"
     }
   },
   "body_shapes": {
