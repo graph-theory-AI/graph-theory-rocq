@@ -20,9 +20,9 @@
   "edges": 144,
   "by_status": {
    "candidate": 32,
-   "conditional": 4,
-   "refuted-direction": 33,
-   "verified": 75
+   "conditional": 3,
+   "refuted-direction": 32,
+   "verified": 77
   },
   "by_kind": {
    "equiv": 6,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 91
+  "proved_theorems": 93
  },
  "edges": [
   {
@@ -275,13 +275,11 @@
    "from": "cycle_double_covers_containing_predefined_2_regular_statement",
    "to": "cycle_double_cover_statement",
    "kind": "implies",
-   "status": "conditional",
+   "status": "verified",
    "cite": "gc:e098",
-   "proof": "cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover",
-   "note": "Instantiate the source at S = set0: it is 2-regular (degree 0 everywhere, subdeg0), G - E(set0) = G is connected since a 2-connected multigraph is connected (two_connected_del_set0), and the empty circuit decomposition [::] of set0 is trivially contained in L; so the source yields a CDC of every cubic 2-connected multigraph. The cubic 2-connected-to-general step is the cited Jaeger 1985 / Zhang reduction, carried as the external. The earlier BLOCKED verdict (needing Tutte's non-separating induced circuit and a three_connected predicate) is withdrawn: S = set0 suffices.",
-   "external": [
-    "external_cdc_cubic_2connected_reduction_statement"
-   ],
+   "proof": "unconditional_cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover",
+   "note": "Instantiate the source at S = set0: it is 2-regular (degree 0 everywhere, subdeg0), G - E(set0) = G is connected since a 2-connected multigraph is connected (two_connected_del_set0), and the empty circuit decomposition [::] of set0 is trivially contained in L; so the source yields a CDC of every cubic 2-connected multigraph. The cubic 2-connected-to-general step is proved as cdc_cubic_2connected_reduction: collapse the components (comp_reduce.Hc), inflate every vertex into a cycle (infG, a connected cubic bridgeless multigraph, 2-connected since a cut vertex of a cubic graph forces a bridge), contract a cycle double cover back to even subgraphs and split them into circuits; a single edge is a loop covered twice.",
+   "external": [],
    "sources": [
     "cycle-theory/implications_U6.v"
    ]
@@ -706,10 +704,10 @@
    "from": "goldbergs_statement",
    "to": "seymours_r_graph_statement",
    "kind": "implies",
-   "status": "refuted-direction",
-   "cite": "Goldberg 1973; Seymour, On multicolourings of cubic graphs, Proc. LMS (3) 38 (1979) 423-460",
-   "proof": "",
-   "note": "REFUTED-DIRECTION (metadata wave M, 2026-09-24): Goldberg gives chi' <= r+1, not chi' = r; corpus e001 claims the wrong direction (reported upstream, meta/CORPUS_FEEDBACK.md). Earlier note: Goldberg bound gives chi'<=r+1, not the chi'=r faithful Seymour requires; deep relationship (Chen-Jing-Zang 2019), not an elementary Qed",
+   "status": "verified",
+   "cite": "gc:e001",
+   "proof": "goldbergs_implies_seymours_r_graph",
+   "note": "On an r-graph both Goldberg terms are at most r+1: mDelta G <= r (every vertex has exactly r incident edges) and overfull_parameter G <= r (the loopless handshake plus the odd-cut condition give |E(S)| <= r * floor(|S|/2)), so Goldberg's bound max(Delta+1, w) gives chi' <= r+1, Seymour's r-graph conjecture in the source's form (body restored 2026-10-25, PROGRAMME A1)",
    "external": [],
    "sources": [
     "chromatic-theory/implications_U5.v"

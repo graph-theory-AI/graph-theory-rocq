@@ -66,7 +66,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "goldbergs_statement->seymours_r_graph_statement:implies:refuted-direction",
+   "rocq_edge": "goldbergs_statement->seymours_r_graph_statement:implies:verified",
    "argument": "Let G be an r-graph, so Δ(G) = r. For any subgraph H with |V(H)| = 2k+1 odd (k ≥ 1): the degree sum over V(H) in G is r(2k+1), and the odd-cut condition forces at least r edge-ends to leave V(H), so |E(H)| ≤ |E(G[V(H)])| ≤ (r(2k+1) − r)/2 = rk, giving ⌈|E(H)|/⌊|V(H)|/2⌋⌉ ≤ r. For even |V(H)| = 2k, r-regularity gives |E(H)| ≤ rk, ratio ≤ r. Hence w(G) ≤ r, and Goldberg's bound χ' ≤ max{Δ+1, w} = max{r+1, r} = r+1 is exactly Seymour's conjecture. This also matches the OPG context, which notes Seymour's conjecture is equivalent to χ' ≤ max{Δ, w} + 1, a consequence of Goldberg's bound since max{Δ+1, w} ≤ max{Δ, w} + 1. Direction correct: Goldberg (all multigraphs) is stronger.",
    "citations": [
     "http://www.openproblemgarden.org/op/goldbergs_conjecture"

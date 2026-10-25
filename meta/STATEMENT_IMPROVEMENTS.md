@@ -1050,6 +1050,10 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   replacement path avoid branch vertices; unlike `X2.contains_subdivision` it does NOT require the
   interiors of distinct replacement paths to be pairwise disjoint, so a "subdivision" here may
   reuse internal vertices. The intended statement is strictly stronger.
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): `x179_directed_subdivision` is now
+  `X2.contains_subdivision` unfolded (pairwise disjoint path interiors). The same re-encoding adds
+  the host guard `k < #|G|` (the one-vertex digraph refuted the old body,
+  `meta/probe_hints/digraph_kappa_maderian_statement.v`) and a loopless `D`.
 - `opg:hamilton_cycle_in_small_d_diregular_graphs` →
   `conjectures/P9.v:hamilton_cycle_in_small_d_diregular_graphs_statement` (alias of
   `classic_core.jackson_hamilton_small_diregular_statement`) — **too weak (mild)**. The row says
@@ -1506,6 +1510,23 @@ by equivalence lemmas.
   `K_5^(3)`, bound `n^2(n-1)`) has no Rocq counterpart, so the statement does not cover its row.
   Same pattern as `opg:forcing_a_k_6_minor` in minor-theory, which DOES conjoin both of its
   source propositions — the conventions differ between the two rows.
+  **Source re-read and repair (2026-10-25, PROGRAMME A2).** The pinned OPG row (upstream `b72c5857`,
+  `data/problems.json`; our manifest's `source_propositions`) states two conjectures: "Every simple
+  3-uniform hypergraph on 3n vertices which contains no complete 3-uniform hypergraph on four vertices
+  has at most ½ n²(5n-3) hyperedges." and "Every simple 3-uniform hypergraph on 2n vertices which
+  contains no complete 3-uniform hypergraph on five vertices has at most n²(n-1) hyperedges."
+  **REPAIRED:** `turans_problem_for_hypergraphs_statement` now conjoins both under the shared
+  quantifiers and guards `0 < n` and `k_uniform E 3`. Its premises
+  `#|T| = 3 * n -> ~ contains_complete E 4 3 -> 2 * #|E| <= n ^ 2 * (5 * n - 3)` became
+  `(#|T| = 3 * n -> ~ contains_complete E 4 3 -> 2 * #|E| <= n ^ 2 * (5 * n - 3)) /\ (#|T| = 2 * n -> ~ contains_complete E 5 3 -> #|E| <= n ^ 2 * (n - 1))`.
+  The guard `0 < n` keeps `n - 1` exact and loses nothing: for n = 0 the second conjecture holds
+  trivially. This is a SOURCE REPAIR (a strengthening), not a migration equivalence:
+  - the D1 uniform-hypergraph certificate (`migration/uniform_hypergraph.v`) keeps the pre-repair row
+    frozen and now proves only `live -> frozen`; the converse would derive the open `K_5^(3)`
+    conjecture from the `K_4^(3)` one;
+  - the `repair` entry of `meta/migration_reports/uniform_hypergraph.spec.json` binds the one exact
+    text replacement and the repaired doc block's hash, and names this entry as its record;
+  - the statement leg was already `done`, and no leg or manifest field changes.
 - `studies:std_erd_s_rado_sunflower_conjecture` (`X137.v:28`) — severity: **deliberate deviation
   from `statement_text`** (stronger than the recorded text). The corpus text is "there is a
   constant `C = C(r)` depending only on `r` such that `f_r(k) <= C^k`"; the body puts the
@@ -1695,6 +1716,9 @@ them.
   lists of size AT LEAST `d+1` while the request weight sums over all colours of each list, and
   weighted flexibility is not monotone in list size; the source is about lists of size exactly
   `d+1`. Severity: **too strong** (provably false).
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the body uses the local
+  `x183_weighted_flexible_exact`, lists of size exactly `d+1`; the one-vertex graph with a list of
+  `q+1` colours refutes the old body (`meta/probe_hints/degenerate_list_flexibility_d_plus_one_statement.v`).
 - `arxiv:1802.03727#00` (`X203.v`, leg `blocked`) — the universal quantifier over graphs includes
   the empty graph, which has minimum degree `d` vacuously and is separation `j`-choosable for every
   `j`. Severity: **too strong** (refutable).

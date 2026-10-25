@@ -96,9 +96,11 @@ Definition frankls_union_closed_sets_statement : Prop :=
 (** ================================================================= *)
 (** ** Row 2 — Turán's problem for 3-uniform hypergraphs  (OPEN)
 
-    Source (primary, K_4^{(3)}-free leg): "Conjecture Every simple 3-uniform
+    Source, two conjectures (K_4^{(3)}-free leg): "Conjecture Every simple 3-uniform
     hypergraph on 3n vertices which contains no complete 3-uniform hypergraph on
-    four vertices has at most ½ n²(5n-3) hyperedges."
+    four vertices has at most ½ n²(5n-3) hyperedges." (K_5^{(3)}-free leg):
+    "Conjecture Every simple 3-uniform hypergraph on 2n vertices which contains no
+    complete 3-uniform hypergraph on five vertices has at most n²(n-1) hyperedges."
 
     Carrier: vertices [T : finType], hyperedges [E : {set {set T}}].  simple +
     3-uniform = [k_uniform E 3] (a [{set {set T}}] family is automatically simple:
@@ -106,7 +108,8 @@ Definition frankls_union_closed_sets_statement : Prop :=
     complete 3-uniform hypergraph on four vertices" = no 4-set all of whose
     3-subsets are hyperedges = [~ contains_complete E 4 3].  Hyperedge count =
     [#|E|].  The bound ½ n²(5n-3) is stated fraction-free as
-    [2 * #|E| <= n^2 * (5*n - 3)].  Guard [0 < n]. *)
+    [2 * #|E| <= n^2 * (5*n - 3)].  Guard [0 < n].  The second leg reads "on 2n
+    vertices" = [#|T| = 2 * n], [~ contains_complete E 5 3], [#|E| <= n^2 * (n - 1)]. *)
 
 (** [S] spans a complete [k]-uniform hypergraph: every [k]-subset of [S] is a
     hyperedge. *)
@@ -122,28 +125,31 @@ Definition contains_complete (T : finType) (E : {set {set T}}) (m k : nat) : Pro
 (** Corpus row: opg:turans_problem_for_hypergraphs
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/turans_problem_for_hypergraphs/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/turans_problem_for_hypergraphs.json
-    English statement: (Open Problem Garden, "Turan's problem for hypergraphs")
-      For every n at least 1, every simple 3-uniform hypergraph on 3n vertices that contains no
-      complete 3-uniform hypergraph on four vertices has at most one half of n squared times
-      (5n-3) hyperedges.
+    English statement: (Open Problem Garden, "Turan's problem for hypergraphs", both conjectures
+      of the row)  For every n at least 1 and every simple 3-uniform hypergraph H:
+      (1) if H has 3n vertices and contains no complete 3-uniform hypergraph on four vertices,
+          then H has at most one half of n squared times (5n-3) hyperedges;
+      (2) if H has 2n vertices and contains no complete 3-uniform hypergraph on five vertices,
+          then H has at most n squared times (n-1) hyperedges.
     Definitions: [k_uniform E k] - every hyperedge of E has exactly k vertices
       (hypergraph-theory/theories/conjectures/U12.v); [complete_sub E S k] - every k-element
       subset of S is a hyperedge of E (same file); [contains_complete E m k] - some m-element
       vertex set spans a complete k-uniform hypergraph inside E (same file).
     Notes: a hyperedge family is a [{set {set T}}], so simplicity (no repeated hyperedge) holds
-      by construction.  The bound is stated fraction-free as 2 * #|E| <= n^2 * (5n - 3), and the
-      guard [0 < n] keeps 5n - 3 out of natural truncation.  PARTIAL COVERAGE: the corpus row
-      carries TWO conjectures - the one above and "every simple 3-uniform hypergraph on 2n
-      vertices with no complete 3-uniform hypergraph on five vertices has at most n^2(n-1)
-      hyperedges" - and only the first is formalised here (see
-      meta/STATEMENT_IMPROVEMENTS.md). *)
+      by construction.  The two conjectures are conjoined under shared quantifiers, as the row
+      forcing_a_k_6_minor (minor-theory U7.v) conjoins its two propositions.  The second
+      conjunct was added by the source repair recorded in meta/STATEMENT_IMPROVEMENTS.md;
+      before it only the first was formalized, and migration/uniform_hypergraph.v keeps that
+      form frozen.  The first bound is stated fraction-free as 2 * #|E| <= n^2 * (5n - 3).
+      The shared guard [0 < n] keeps 5n - 3 and n - 1 out of natural truncation; for n = 0
+      the second conjecture holds trivially (no vertex, so no 3-element hyperedge), so the
+      guard loses nothing there. *)
 Definition turans_problem_for_hypergraphs_statement : Prop :=
   forall (n : nat) (T : finType) (E : {set {set T}}),
     0 < n ->
     k_uniform E 3 ->
-    #|T| = 3 * n ->
-    ~ contains_complete E 4 3 ->
-    2 * #|E| <= n ^ 2 * (5 * n - 3).
+    (#|T| = 3 * n -> ~ contains_complete E 4 3 -> 2 * #|E| <= n ^ 2 * (5 * n - 3)) /\
+    (#|T| = 2 * n -> ~ contains_complete E 5 3 -> #|E| <= n ^ 2 * (n - 1)).
 
 (** ================================================================= *)
 (** ** Row 3 — Are critical k-forests tight?  (OPEN)

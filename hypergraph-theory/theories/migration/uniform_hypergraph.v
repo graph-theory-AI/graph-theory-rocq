@@ -15,7 +15,16 @@
       X209's minimum/excess chain over [CS.X209Legacy.scaled_excess] (unused T' and outer-carrier
       E' kept), X6 #834 and XE2 #833 with [ID.Legacy.x6_hg_degree], X108 with
       [ID.X108Legacy.d_degenerate], X225 #01 with the frozen [hg_turan] and the actual frozen
-      [ID.FoundationLegacy.dmax] (its opaque [degenerate_ex] witness is reused, not replaced). *)
+      [ID.FoundationLegacy.dmax] (its opaque [degenerate_ex] witness is reused, not replaced).
+
+    SOURCE REPAIR (2026-10-25): the live U12 row [turans_problem_for_hypergraphs_statement]
+    now conjoins the second conjecture of its OPG row (3-uniform on 2n vertices, no
+    K_5^{(3)}, at most n^2(n-1) hyperedges; see the turans_problem_for_hypergraphs entry
+    of meta/STATEMENT_IMPROVEMENTS.md).  Its certificate below is therefore a ONE-WAY
+    SOURCE-REPAIR certificate (live -> frozen), NOT a migration equivalence: the converse
+    would derive the open K_5^{(3)} conjecture from the K_4^{(3)} one.  It is bound by the spec's [repair] entry.
+    Every other row of this family keeps its exact iff.  The regeneration spec is
+    meta/migration_reports/uniform_hypergraph.spec.json. *)
 From GTBase Require Import base.
 Require Hypergraph.foundations.hypergraph.
 Require Hypergraph.conjectures.U12 Hypergraph.conjectures.X104 Hypergraph.conjectures.X108.
@@ -522,11 +531,17 @@ Proof.
 exact: iff_refl.
 Qed.
 
+(** One-way source-repair certificate, not a migration equivalence (2026-10-25):
+    the live row conjoins the K_5^{(3)} conjecture to the frozen K_4^{(3)} one under the
+    same quantifiers and guards, so the live row implies the frozen one by its first
+    conjunct.  The converse would derive the open K_5^{(3)} conjecture from the
+    K_4^{(3)} one. *)
 Lemma turans_problem_for_hypergraphs_statement_compat :
-  U12UniformLegacy.turans_problem_for_hypergraphs_statement <->
-  Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement.
+  Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement ->
+  U12UniformLegacy.turans_problem_for_hypergraphs_statement.
 Proof.
-exact: iff_refl.
+move=> row n T E n0 u t k4.
+exact: (row n T E n0 u).1 t k4.
 Qed.
 
 Lemma brown_erdos_sos_three_uniform_statement_compat :
