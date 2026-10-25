@@ -5,9 +5,9 @@
       "accepted_fallbacks": [
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
-      "aliases": 526,
-      "cross_file_declarations": 1907,
-      "cross_file_files": 1016,
+      "aliases": 527,
+      "cross_file_declarations": 1915,
+      "cross_file_files": 1017,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -19,9 +19,9 @@
       ],
       "undecided_files": 0,
       "unlisted_files": 0,
-      "with_cross_file": 369,
+      "with_cross_file": 370,
       "with_own_certificate": 511,
-      "with_same_file": 447
+      "with_same_file": 448
     },
     "rows": [
       {
@@ -9170,6 +9170,51 @@
           "statements": [
             "h_free_eps_bounded_sparse_pair_statement",
             "induced_turan_even_cycle_sparse_statement"
+          ]
+        }
+      },
+      {
+        "alias": "Extremal.conjectures.X230.x230_ramsey_number",
+        "cross_file": {
+          "certificates_of": [],
+          "declarations": [
+            "extremal-graph-theory/theories/conjectures/grounding_X230.v:<line 459>",
+            "extremal-graph-theory/theories/conjectures/grounding_X230.v:g230_growth_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X230.v:g230_growth_without_lower",
+            "extremal-graph-theory/theories/conjectures/grounding_X230.v:g230_ramsey_K2",
+            "extremal-graph-theory/theories/conjectures/grounding_X230.v:g230_ramsey_card",
+            "extremal-graph-theory/theories/conjectures/grounding_X230.v:g230_ramsey_one",
+            "extremal-graph-theory/theories/conjectures/grounding_X230.v:g230_ramsey_sanity_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X230.v:g230_ramsey_unique"
+          ],
+          "files": [
+            "extremal-graph-theory/theories/conjectures/grounding_X230.v"
+          ],
+          "statements": [],
+          "undecided": [],
+          "unlisted": []
+        },
+        "family": "ramsey-number",
+        "file": "extremal-graph-theory/theories/conjectures/X230.v",
+        "frozen_references": 0,
+        "implicit_use": false,
+        "own_certificate": {
+          "declarations": [],
+          "files": []
+        },
+        "provider_unlisted": false,
+        "require_chain": {
+          "extremal-graph-theory/theories/conjectures/grounding_X230.v": "unknown"
+        },
+        "same_file": {
+          "declarations": [
+            "ramsey_numbers_of_arbitrary_growth_statement",
+            "x230_threshold_multiplicity"
+          ],
+          "statements": [
+            "ramsey_numbers_of_arbitrary_growth_statement",
+            "threshold_ramsey_multiplicity_odd_cycles_statement",
+            "threshold_ramsey_multiplicity_paths_statement"
           ]
         }
       },
@@ -24321,13 +24366,13 @@
     ]
   },
   "counts": {
-    "files": 322,
-    "helpers": 2566,
+    "files": 323,
+    "helpers": 2576,
     "repeated_body_shapes": 147,
-    "repeated_normalized_names": 212,
-    "repeated_signature_shapes": 306,
-    "statements_excluded": 700,
-    "x_wave_helpers": 1409
+    "repeated_normalized_names": 213,
+    "repeated_signature_shapes": 310,
+    "statements_excluded": 704,
+    "x_wave_helpers": 1419
   },
   "groups": {
     "body_shape_hash": {
@@ -25475,7 +25520,8 @@
       ],
       "arrows": [
         "Extremal.conjectures.X195.x195_arrows",
-        "Extremal.conjectures.X215.x215_arrows"
+        "Extremal.conjectures.X215.x215_arrows",
+        "Extremal.conjectures.X230.x230_arrows"
       ],
       "ball": [
         "GTMisc.conjectures.X113.x113_ball",
@@ -26088,6 +26134,10 @@
         "Extremal.conjectures.X98.x98_model_vertex",
         "GTMisc.conjectures.X114.x114_model_vertex"
       ],
+      "mono_copies": [
+        "Extremal.conjectures.D2ram.mono_copies",
+        "Extremal.conjectures.X230.x230_mono_copies"
+      ],
       "monochromatic": [
         "Chromatic.conjectures.X181.x181_monochromatic",
         "GTMisc.conjectures.U13.monochromatic"
@@ -26297,6 +26347,7 @@
       "ramsey_number": [
         "Extremal.conjectures.X195.x195_ramsey_number",
         "Extremal.conjectures.X215.x215_ramsey_number",
+        "Extremal.conjectures.X230.x230_ramsey_number",
         "Hypergraph.conjectures.X117.x117_ramsey_number",
         "Hypergraph.conjectures.X119.x119_ramsey_number"
       ],
@@ -26680,6 +26731,10 @@
         "Reconstruction.conjectures.U11.sde_rel",
         "Reconstruction.conjectures.U11.sw_rel"
       ],
+      "1535f6a4547e85f989418b22e789cb6fed956b601df7c6bcdb204539ab9affe4": [
+        "Extremal.conjectures.X230.x230_threshold_multiplicity",
+        "Extremal.conjectures.XE2.xe2_induced_ramsey_number"
+      ],
       "15a0216e2d09e3f50d25170ff7a4382aaadd595e2bfee38d61d1e52cc178f49c": [
         "Chromatic.conjectures.X126.x126_nonrepetitive_list_colouring",
         "Chromatic.conjectures.X75.x75_lists_size_one_or_five"
@@ -26706,6 +26761,11 @@
       "17f070d61ead6741d4f154c453b1ef51d16577eb5ec3874cbae1bbd8868df5da": [
         "Digraph.conjectures.sad.in_arcset",
         "Digraph.conjectures.sad.spanning_strong"
+      ],
+      "1887d5261105eb8798693829b8f6d58ab5cc98bfabcd99f05b2f242a459b665a": [
+        "Extremal.conjectures.D2tur.hom_count",
+        "Extremal.conjectures.X230.x230_copies",
+        "Extremal.conjectures.X230.x230_mono_copies"
       ],
       "1985d61715f2733328c0729a0c02bf536f81166704615922c501f6aa4ec6e677": [
         "Chromatic.conjectures.X126.x126_nonrepetitive",
@@ -27016,6 +27076,10 @@
         "Cycle.conjectures.D1.int_bounded",
         "Cycle.conjectures.X228.x228_kflow"
       ],
+      "35ff1890da58f546529e59b8d8b994d1efb7522f8d0da950e93dca1921f06642": [
+        "Extremal.conjectures.X230.x230_ramsey_number",
+        "Extremal.conjectures.XE1.xe1_diagonal_ramsey_number"
+      ],
       "360e207207845d1709c64242056b458fd88ff1317f14959c10cf9a1cdc07d36a": [
         "GTMisc.conjectures.X62.x62_edges_covered_by_paths",
         "Minor.conjectures.X11.x11_pairwise_anticomplete_paths"
@@ -27055,6 +27119,10 @@
         "Topological.conjectures.D3D6_unblocked.proper_minor",
         "Topological.conjectures.X103.x103_common_point_set_embedding",
         "Topological.conjectures.X103.x103_simultaneously_embeddable"
+      ],
+      "39583d0786042b03060b0a169f88c616ec202657dfea0ae9e0bb4be4f863f7af": [
+        "Extremal.conjectures.X230.x230_book_at_most",
+        "Packing.conjectures.X226.x226_eta_le"
       ],
       "3a9f82e06cec6245cc87c1151ba6a1dfa411ad2faec614749e24fa7bf0e01660": [
         "Digraph.conjectures.two_extremal.symcyc_rel",
@@ -57014,6 +57082,213 @@
       "qualified_name": "Extremal.conjectures.X229.x229_robust_sublinear_expander",
       "signature": "(G : sgraph) : Prop",
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "809657fcbe67728bc5b01681eea8a609ce82dc2085f32cf09b9553c9ec5628d9",
+      "body_shape_hash": "809657fcbe67728bc5b01681eea8a609ce82dc2085f32cf09b9553c9ec5628d9",
+      "declaration_hash": "1656cd116ff5828d3b7c7afbf464833b1a8be02609f77422855e2c12793f64d1",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.books_versus_triangles_extremal_density_statement"
+      ],
+      "kind": "Definition",
+      "line": 20,
+      "local_dependencies": [],
+      "name": "x230_book_at_most",
+      "normalized_name": "book_at_most",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_book_at_most",
+      "signature": "(G : sgraph) (b : nat) : Prop",
+      "signature_shape_hash": "39583d0786042b03060b0a169f88c616ec202657dfea0ae9e0bb4be4f863f7af"
+    },
+    {
+      "body_hash": "c6e104a61a3c3619d46ee1583744dc5f9fc18a26e7ae1bd92608199a20a8b077",
+      "body_shape_hash": "c6e104a61a3c3619d46ee1583744dc5f9fc18a26e7ae1bd92608199a20a8b077",
+      "declaration_hash": "fd6bb1f911155ffd217ff5c7d95cf57dbbc05aa98bb5bfc20c29b9eca71a516e",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.x230_prism_blowup"
+      ],
+      "kind": "Definition",
+      "line": 27,
+      "local_dependencies": [],
+      "name": "x230_prism_rel",
+      "normalized_name": "prism_rel",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_prism_rel",
+      "signature": "(i j : nat) : bool",
+      "signature_shape_hash": "206a132f22261a5ae6d56e0653b7a3f2a76ce7fe2709b4fb1cccf1c6e0e6f1c2"
+    },
+    {
+      "body_hash": "d4f6d41deb6e60196893ac74ada7b11988d126bef2abed6860a37a76abd07a4d",
+      "body_shape_hash": "64eb90363f9794bd81d1a49d7256f98c37d6d9676bfc3314da377e5f58e259de",
+      "declaration_hash": "33f4dbe41d122fd856614ed7c70ab7fe783d13ab44997c2d6dbb64d33690cd2a",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.books_versus_triangles_extremal_density_statement"
+      ],
+      "kind": "Definition",
+      "line": 31,
+      "local_dependencies": [
+        "x230_prism_rel"
+      ],
+      "name": "x230_prism_blowup",
+      "normalized_name": "prism_blowup",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_prism_blowup",
+      "signature": "(b n : nat) (G : sgraph) : Prop",
+      "signature_shape_hash": "91fbe1065f4e31afb26730ad6d6f070a851b795a9b14237cf84efc8e499cae9f"
+    },
+    {
+      "body_hash": "fbfdcce76579e030e98bafd81295997418298203cd26f57d3bc29847f495aefa",
+      "body_shape_hash": "fbfdcce76579e030e98bafd81295997418298203cd26f57d3bc29847f495aefa",
+      "declaration_hash": "82f954491f37366cc3c76f0365104fe80eb02de817bb0c4ca2f4243efe61bc56",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.x230_automorphisms",
+        "Extremal.conjectures.X230.x230_copies"
+      ],
+      "kind": "Definition",
+      "line": 43,
+      "local_dependencies": [],
+      "name": "x230_embeddings",
+      "normalized_name": "embeddings",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_embeddings",
+      "signature": "(H G : sgraph) : {set {ffun H -> G}}",
+      "signature_shape_hash": "9020b3cbcc91c353e33265f9142ce20dbf5a0563ab5afc206729dfa0cf26f270"
+    },
+    {
+      "body_hash": "11428bbdc62020d94e090c95c8d7ee495d54cf581af8841c3d1be0547e09cc72",
+      "body_shape_hash": "075352f946d55fbc4f0982566bff53c0749058d2c5514f194f9841cfec76e2b8",
+      "declaration_hash": "5077bbd66c3dcc2c5945b6f46ccafb664c39e6cee82b3814832b0d120ab9e5e5",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.x230_copies"
+      ],
+      "kind": "Definition",
+      "line": 50,
+      "local_dependencies": [
+        "x230_embeddings"
+      ],
+      "name": "x230_automorphisms",
+      "normalized_name": "automorphisms",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_automorphisms",
+      "signature": "(H : sgraph) : {set {ffun H -> H}}",
+      "signature_shape_hash": "258f029c2b0147243f449f85532a97a50f62ee8746ee7ede19514ea49b4f4403"
+    },
+    {
+      "body_hash": "5a97934c964802e39d98fbd940836a0a5546b899a8c5704d9743b8ac3443425f",
+      "body_shape_hash": "deb6afc0e92cf48eb3b51b230d95e1cd28445dc091771b372c56adbd1f079f3f",
+      "declaration_hash": "b759a66196d38121fe7d0f7ddb486aa679f2cd22e8ac3a7935edfc1e4590c082",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.x230_mono_copies"
+      ],
+      "kind": "Definition",
+      "line": 53,
+      "local_dependencies": [
+        "x230_automorphisms",
+        "x230_embeddings"
+      ],
+      "name": "x230_copies",
+      "normalized_name": "copies",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_copies",
+      "signature": "(H G : sgraph) : nat",
+      "signature_shape_hash": "1887d5261105eb8798693829b8f6d58ab5cc98bfabcd99f05b2f242a459b665a"
+    },
+    {
+      "body_hash": "5cd65cf50e88be06798277b7ddc7660dc0b4c4d49764e0beb5135fcbff4724e9",
+      "body_shape_hash": "a1f411f0ab35103d076e7c294bcfcd8e784f95f8fd8746a907de3e11980138be",
+      "declaration_hash": "dce833608a30391eab9dc3a66646f17e59be43517cbc38beaa34fbf9ebb0f12c",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.x230_threshold_multiplicity"
+      ],
+      "kind": "Definition",
+      "line": 56,
+      "local_dependencies": [
+        "x230_copies"
+      ],
+      "name": "x230_mono_copies",
+      "normalized_name": "mono_copies",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_mono_copies",
+      "signature": "(H G : sgraph) : nat",
+      "signature_shape_hash": "1887d5261105eb8798693829b8f6d58ab5cc98bfabcd99f05b2f242a459b665a"
+    },
+    {
+      "body_hash": "473b453c797d0cb87098acc9ae9dad09741ae7faa681278dd16e17c31eb28900",
+      "body_shape_hash": "473b453c797d0cb87098acc9ae9dad09741ae7faa681278dd16e17c31eb28900",
+      "declaration_hash": "bc68eedbef9ef64418d4c10909554d8e8c728e1628f0015638e41b96f0580cbb",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.x230_ramsey_number"
+      ],
+      "kind": "Definition",
+      "line": 60,
+      "local_dependencies": [],
+      "name": "x230_arrows",
+      "normalized_name": "arrows",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_arrows",
+      "signature": "(R : nat) (H : sgraph) : Prop",
+      "signature_shape_hash": "d52276aa1a369941badfaa1a1bf3b054c06cd83fe64601054b269837dfe09863"
+    },
+    {
+      "body_hash": "4c7f94c36e2290e9ed50d49390bf64a828359c0da46b674dcd60be794b926718",
+      "body_shape_hash": "c4a1c50d4a2bd98d9908e68d661eaad40bb30b7a4a9fb8497eef375f480a12a2",
+      "declaration_hash": "9f79ee891c5b8a17ae37c4d3eb733749854b5043d6b3d81dbd9ea14e7cdd86ed",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.ramsey_numbers_of_arbitrary_growth_statement",
+        "Extremal.conjectures.X230.x230_threshold_multiplicity"
+      ],
+      "kind": "Definition",
+      "line": 64,
+      "local_dependencies": [
+        "x230_arrows"
+      ],
+      "name": "x230_ramsey_number",
+      "normalized_name": "ramsey_number",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_ramsey_number",
+      "signature": "(H : sgraph) (R : nat) : Prop",
+      "signature_shape_hash": "35ff1890da58f546529e59b8d8b994d1efb7522f8d0da950e93dca1921f06642"
+    },
+    {
+      "body_hash": "0ffea09b06c41a1ff7a79ca60e7a001aab15f5c2aec0cdf7b3927ba3652472a3",
+      "body_shape_hash": "c9dd19f05a5ece19936c6846f528831fb238f1c5aeb01a5fab68fd86c18f505e",
+      "declaration_hash": "8b26b00247de922c47203345a02853a9cfa2e7abece3adf7462afef9ce9c20dd",
+      "direct_consumers": [
+        "Extremal.conjectures.X230.threshold_ramsey_multiplicity_odd_cycles_statement",
+        "Extremal.conjectures.X230.threshold_ramsey_multiplicity_paths_statement"
+      ],
+      "kind": "Definition",
+      "line": 68,
+      "local_dependencies": [
+        "x230_mono_copies",
+        "x230_ramsey_number"
+      ],
+      "name": "x230_threshold_multiplicity",
+      "normalized_name": "threshold_multiplicity",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X230.v",
+      "phase": "X230",
+      "qualified_name": "Extremal.conjectures.X230.x230_threshold_multiplicity",
+      "signature": "(H : sgraph) (m : nat) : Prop",
+      "signature_shape_hash": "1535f6a4547e85f989418b22e789cb6fed956b601df7c6bcdb204539ab9affe4"
     },
     {
       "body_hash": "857e81095417ec9a7b32ad78ef7497e0e68db404b9edf9f8ff9d7b7f4a404cbd",
