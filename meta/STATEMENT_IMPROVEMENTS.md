@@ -976,6 +976,13 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   `sands_sauer_woodrow_statement` and give the tournament variant its own row (or fold it into
   `opg:monochromatic_reachability_vs_rainbow_triangles`, which `conjectures/P9.v` already carries
   as an alias of exactly this body).
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the row is rebound to
+  `sands_sauer_woodrow_statement`; the tournament variant stays the body of
+  `opg:monochromatic_reachability_vs_rainbow_triangles` through its P9 alias. Before the rebind
+  the target gained a `loopless D` guard: `diGraphType` allows loops and `classic_core.stable`
+  counts loops inside `S`, so a one-vertex digraph with a loop refuted the unguarded body
+  (`meta/probe_hints/sands_sauer_woodrow_statement.v`); loops never change monochromatic
+  reachability, so the guard keeps the source's reading.
 - `arxiv:1608.03040#02` (Open Problem 1) →
   `conjectures/X45.v:majority_three_colouring_beta_statement` — **too strong**. The row asks
   whether SOME constant `beta < 1` works; the body fixes `beta = 1/2`, i.e. it restates

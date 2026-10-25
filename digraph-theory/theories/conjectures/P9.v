@@ -309,9 +309,10 @@ Definition cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement : Prop
       (conjectures/colouring_variants.v); [tournament] (core/tournament.v).
     Notes: This node is an alias: its body is exactly
       [colouring_variants.mono_reach_or_rainbow_statement], so the two names denote the same
-      proposition. The manifest attaches to that other name the row
-      opg:monochromatoc_reachability_in_arc_colored_digraphs, whose text is the general
-      Sands-Sauer-Woodrow statement; see the note there and meta/STATEMENT_IMPROVEMENTS.md. *)
+      proposition. That other name carries no row of its own: until 2026-10-25 the manifest
+      attached to it the row opg:monochromatoc_reachability_in_arc_colored_digraphs, whose text
+      is the general Sands-Sauer-Woodrow statement and which is now bound to
+      [colouring_variants.sands_sauer_woodrow_statement] (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition monochromatic_reachability_vs_rainbow_triangles_statement : Prop :=
   mono_reach_or_rainbow_statement.
 
