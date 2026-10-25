@@ -1508,13 +1508,14 @@
       "note": "M_c real infimum; rational-threshold approximation"
     },
     "what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian": {
-      "statement": "done",
+      "statement": "partial",
       "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
       "commit": "818a76c",
-      "package": "extremal-graph-theory"
+      "package": "extremal-graph-theory",
+      "note": "PARTIAL (statement leg since 2026-10-25, as its doc-block Notes in D2tur.v say): only Question 1 of the source is formalised, and as 'the smallest such k exists' rather than 'what is it'; Questions 2-4 (a shortest Hamiltonian path, 1-trees, a Hamiltonian cycle) need an optimisation over Hamiltonian paths and a 1-tree primitive, both deferred (meta/STATEMENT_IMPROVEMENTS.md)."
     },
     "coloring_random_subgraphs": {
       "statement": "done",
@@ -1822,7 +1823,7 @@
       "note": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked."
     },
     "crossing_sequences": {
-      "statement": "done",
+      "statement": "partial",
       "grounding": "done",
       "edges": "todo",
       "correspondence": "todo",
