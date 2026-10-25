@@ -309,8 +309,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (mathematics programme, 2026-10-25): cdc_cubic_2connected_reduction proves external_cdc_cubic_2connected_reduction_statement (classical-lemmas TODO 4); the conditional cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover of wave E5 is kept",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (TODO #4 review, 2026-10-25)",
+   "reviewed_at": "2026-10-25",
    "note": "Instantiate the source at S = set0: it is 2-regular (degree 0 everywhere, subdeg0), G - E(set0) = G is connected since a 2-connected multigraph is connected (two_connected_del_set0), and the empty circuit decomposition [::] of set0 is trivially contained in L; so the source yields a CDC of every cubic 2-connected multigraph. The cubic 2-connected-to-general step is proved as cdc_cubic_2connected_reduction: collapse the components (comp_reduce.Hc), inflate every vertex into a cycle (infG, a connected cubic bridgeless multigraph, 2-connected since a cut vertex of a cubic graph forces a bridge), contract a cycle double cover back to even subgraphs and split them into circuits; a single edge is a loop covered twice."
   },
   "decomposing_eulerian_graphs_statement->cycle_double_cover_statement:implies": {
