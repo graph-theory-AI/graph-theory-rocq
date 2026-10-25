@@ -34,12 +34,19 @@ Every occurrence of a complete row requires a statement role and an exact iff
 probe, independently of its label. New reused nonstatement objects use the
 "historical" role; the existing named historical roles remain supported aliases.
 A statement or original-statement object may carry a "repair": a reviewed,
-source-backed strengthening of an already migrated row (a source repair, not a
+source-backed change of an already migrated row (a source repair, not a
 migration equivalence). It names the one exact replacement that turns the
 baseline statement text into the live one, pins the repaired doc block by sha256
 and names its record, a repository file that explains the source reading. The
-frozen copy stays verbatim; the exact probe of the certificate becomes
-`live -> frozen`. Every object without a repair keeps the exact iff probe.
+frozen copy stays verbatim, and the exact probe of the certificate follows the
+repair's "direction": "strengthen" (the default) probes `live -> frozen`,
+"weaken" probes `frozen -> live`, and "re-encode" probes the record's
+"relation", an exact Rocq type in which {frozen} and {live} stand for the two
+statements. Optional "row_fields" and "leg_fields" list exactly the manifest-row
+and leg-state fields the repair changes; identity and source fields can never
+be listed. An original-statement repair needs the identical repair on the row's
+statement object, in the same spec or else in exactly one other family spec.
+Every object without a repair keeps the exact iff probe.
 It verifies that
 
   * each frozen copy equals its original declaration, after comment stripping,
@@ -55,8 +62,9 @@ It verifies that
     earlier family's certificate does);
   * statement texts, their doc blocks, manifest rows and leg states are unchanged
     since the baseline (under a repair: the text is the baseline text with exactly
-    the reviewed replacement and the doc block has the pinned hash), and the
-    listed distinct name matches are untouched;
+    the reviewed replacement, the doc block has the pinned hash, and the row and
+    leg fields that changed are exactly the listed ones), and the listed distinct
+    name matches are untouched;
   * every certificate theorem is declared in its certificate file.
 
 --write refreshes only the compact committed meta/migration_reports/FAMILY.md;
@@ -110,6 +118,21 @@ HISTORICAL_KINDS = frozenset({
 })
 FROZEN_KINDS = STATEMENT_KINDS | HISTORICAL_KINDS | {"source", "chain", "original-chain"}
 REPAIR_KEYS = frozenset({"replace", "doc_block_sha256", "record"})
+REPAIR_OPTIONAL_KEYS = frozenset({"direction", "relation", "row_fields", "leg_fields"})
+REPAIR_DIRECTIONS = ("strengthen", "weaken", "re-encode")
+# the probe of each fixed direction; a re-encode states its own relation and may not restate these
+REPAIR_PROBES = {"strengthen": "{live} -> {frozen}", "weaken": "{frozen} -> {live}"}
+PLAIN_RELATIONS = frozenset({"{live} -> {frozen}", "{frozen} -> {live}",
+                             "{frozen} <-> {live}", "{live} <-> {frozen}"})
+# row identity, source and binding fields, and the leg's package, never change under a repair; the derived
+# edges leg is exempt anyway (frozen_legs), so listing it is an error too
+REPAIR_FROZEN_ROW_FIELDS = frozenset({
+    "row_id", "slug", "record_key", "node_id", "arxiv_id", "erdos_id", "canonical_url", "abs_url",
+    "site_url", "title", "kind", "corpus", "_corpus", "repo", "formal_name", "legs", "source_text",
+    "source_excerpt", "source_hash", "source_locator", "source_propositions", "source_commit_repo",
+    "source_commit_problems_json", "statement_text", "context_text", "paper_title", "paper_authors",
+})
+REPAIR_FROZEN_LEG_FIELDS = frozenset({"edges", "package"})
 
 
 def sha256(text: str) -> str:
@@ -1262,13 +1285,86 @@ def validate_frozen_kinds(spec: dict) -> None:
     validate_repairs(spec)
 
 
+def repair_direction(repair: dict) -> str:
+    return repair.get("direction", "strengthen")
+
+
+def repair_probe_type(repair: dict, frozen: str, live: str) -> str:
+    """The exact certificate type of a repair, with the two statements' qualified names filled in."""
+    relation = repair["relation"] if repair_direction(repair) == "re-encode" else REPAIR_PROBES[repair_direction(repair)]
+    return relation.replace("{frozen}", frozen).replace("{live}", live)
+
+
+REPAIR_LABELS = {
+    "strengthen": ("Source repairs after migration", "ONE-WAY source-repair certificates (`live -> frozen`)"),
+    "weaken": ("Source weakenings after migration", "ONE-WAY source-repair certificates (`frozen -> live`)"),
+    "re-encode": ("Source re-encodings after migration", "certificates of each record's stated relation"),
+}
+REPAIR_CERTIFICATE_NOTES = {
+    "strengthen": " (one-way source-repair certificate `live -> frozen`, not a migration equivalence)",
+    "weaken": " (one-way source-repair certificate `frozen -> live`, not a migration equivalence)",
+    "re-encode": " (source re-encoding certificate of the relation `{relation}`, not a migration equivalence)",
+}
+
+
+def repair_fields_note(repair: dict, sep: str) -> str:
+    return "".join(f"{sep}{label} " + ", ".join(f"`{field}`" for field in repair[key])
+                   for key, label in (("row_fields", "row fields"), ("leg_fields", "leg fields")) if key in repair)
+
+
+def repair_item(statement: dict) -> str:
+    repair = statement["repair"]
+    relation = f"; relation `{repair['relation']}`" if "relation" in repair else ""
+    return (f"`{statement['qualified']}` (`{repair['replace'][0]}` -> `{repair['replace'][1]}`{relation}; "
+            f"record `{repair['record']}`{repair_fields_note(repair, '; ')})")
+
+
+def sibling_statement_repairs(spec: dict, qualified: str) -> list:
+    """The repairs (None when absent) of the statement objects named `qualified` in the OTHER family specs."""
+    found = []
+    for path in sorted(REPORTS.glob("*.spec.json")):
+        if path.name == f"{spec.get('report_name')}.spec.json":
+            continue
+        other = json.loads(path.read_text())
+        found += [obj.get("repair") for obj in other.get("frozen", [])
+                  if obj.get("kind") == "statement" and obj.get("qualified") == qualified]
+    return found
+
+
+def repair_fields_valid(fields, denied: frozenset) -> bool:
+    return (isinstance(fields, list) and len(set(fields)) == len(fields)
+            and all(isinstance(field, str) and re.fullmatch(r"[a-z_][a-z0-9_]*", field)
+                    and field not in denied for field in fields))
+
+
+def relation_valid(relation) -> bool:
+    """One Rocq type naming both statements, with no other placeholder, no sentence end, comment or string (nor a
+    backquote or bar, which the Markdown reports could not quote), and not one of the plain implications or iffs
+    that belong to the fixed directions or to no repair."""
+    if not isinstance(relation, str) or len(relation) > 400 or "\n" in relation:
+        return False
+    rest = relation.replace("{frozen}", "").replace("{live}", "")
+    bare = re.sub(r"[\s()]", "", relation)   # parentheses cannot turn a plain form into another relation
+    depth = 0   # balanced, so the relation cannot close the probe's `Check (cert : ...)` early
+    for char in relation:
+        depth += {"(": 1, ")": -1}.get(char, 0)
+        if depth < 0:
+            return False
+    return (depth == 0 and "{frozen}" in relation and "{live}" in relation
+            and not re.search(r"[{}\"`|]|\(\*|\*\)|\.(?![A-Za-z_])", rest)
+            and bare not in {re.sub(r"\s", "", plain) for plain in PLAIN_RELATIONS})
+
+
 def validate_repairs(spec: dict) -> None:
-    """Schema of `repair` (a reviewed strengthening of a migrated complete row).
+    """Schema of `repair` (a reviewed source change of a migrated complete row).
 
     Only on a statement or original-statement object that is not an enrolled
     additional or parametric statement. An original-statement repair needs the
-    identical repair on the statement object of the same row, which carries the
-    text and doc-block checks."""
+    identical repair on the statement object of the same row (in this spec, or
+    else in exactly one other family spec), which carries the text and doc-block
+    checks. A re-encode, and only a re-encode, states its
+    relation; the optional field lists name changeable manifest-row and leg
+    fields only."""
     repaired = [(index, obj) for index, obj in enumerate(spec["frozen"]) if "repair" in obj]
     if not repaired:
         return
@@ -1281,7 +1377,7 @@ def validate_repairs(spec: dict) -> None:
             raise ValueError(f"{what}: repair is only valid on statement or original-statement objects "
                              "that are not enrolled additional or parametric statements")
         replace = repair.get("replace") if isinstance(repair, dict) else None
-        if (not isinstance(repair, dict) or set(repair) != REPAIR_KEYS
+        if (not isinstance(repair, dict) or not REPAIR_KEYS <= set(repair) <= REPAIR_KEYS | REPAIR_OPTIONAL_KEYS
                 or not isinstance(replace, list) or len(replace) != 2
                 or not all(isinstance(text, str) and text for text in replace)
                 or replace[0] == replace[1]
@@ -1292,8 +1388,27 @@ def validate_repairs(spec: dict) -> None:
                                     repair["record"])):
             raise ValueError(f"{what}: repair must be {{replace: [old, new] (two distinct nonempty strings), "
                              "doc_block_sha256: 64 lowercase hex, record: a relative repository file path}")
-        if obj["kind"] == "original-statement" and statement_repairs.get(obj["qualified"]) != repair:
-            raise ValueError(f"{what}: an original-statement repair needs the identical repair on its statement")
+        direction = repair.get("direction", "strengthen")
+        if direction not in REPAIR_DIRECTIONS:
+            raise ValueError(f"{what}: repair direction must be one of {', '.join(REPAIR_DIRECTIONS)}")
+        if (direction == "re-encode") != ("relation" in repair):
+            raise ValueError(f"{what}: a repair states a relation exactly when its direction is re-encode")
+        if direction == "re-encode" and not relation_valid(repair["relation"]):
+            raise ValueError(f"{what}: repair relation must be one line of at most 400 characters naming "
+                             "{frozen} and {live}, with no other placeholder, sentence end, comment or string, "
+                             "and not a plain implication or iff (those are strengthen, weaken or no repair)")
+        for key, denied in (("row_fields", REPAIR_FROZEN_ROW_FIELDS), ("leg_fields", REPAIR_FROZEN_LEG_FIELDS)):
+            if key in repair and not (repair_fields_valid(repair[key], denied) and repair[key]):
+                raise ValueError(f"{what}: repair {key} must be a nonempty list of distinct field names, none of "
+                                 f"{sorted(denied)}")
+        if obj["kind"] == "original-statement":
+            # the statement object carries the text, doc-block, row and leg checks: in this spec, or else in
+            # exactly one other family spec (a row migrated by one family and snapshotted by another)
+            carriers = ([statement_repairs[obj["qualified"]]] if obj["qualified"] in statement_repairs
+                        else sibling_statement_repairs(spec, obj["qualified"]))
+            if carriers != [repair]:
+                raise ValueError(f"{what}: an original-statement repair needs the identical repair on its statement "
+                                 "(in this spec, or else in exactly one other family spec)")
 
 
 def statement_obligations(spec: dict, *, expected_statements: set[str] | None = None,
@@ -1410,8 +1525,9 @@ def check_kernel(spec: dict) -> list[str]:
                 body.append(f"Check (@{frozen} : Prop).")
                 body.append(f"Check (@{obj['qualified']} : Prop).")
             if "repair" in obj:
-                # a reviewed strengthening: the repaired live row implies the frozen one
-                body.append(f"Check ({obj['certificate']} : {obj['qualified']} -> {frozen}).")
+                # a reviewed source repair: the certificate has exactly the type its direction (or relation) fixes
+                body.append(f"Check ({obj['certificate']} : "
+                            f"{repair_probe_type(obj['repair'], frozen, obj['qualified'])}).")
             else:
                 body.append(f"Check ({obj['certificate']} : {frozen} <-> {obj['qualified']}).")
         body.extend(f"Print Assumptions {name}." for name in sorted(certificates[package]))
@@ -1451,20 +1567,33 @@ def local_closure(decls: dict[str, dict], name: str) -> set[str]:
     return seen
 
 
-def frozen_legs(entry):
+def frozen_legs(entry, leg_fields=frozenset()):
     """A leg-state overlay entry without its DERIVED `edges` leg. sync_edge_legs.py derives that leg from the
     edge evidence and gates it itself (sync_edge_legs --check), and a newly proved edge legitimately moves it;
-    every other field (statement, grounding, correspondence, audit_page, commit, package, note) stays frozen."""
-    return {k: v for k, v in entry.items() if k != "edges"} if isinstance(entry, dict) else entry
+    every other field (statement, grounding, correspondence, audit_page, commit, package, note) stays frozen,
+    except the fields a reviewed repair lists (leg_fields)."""
+    return ({k: v for k, v in entry.items() if k != "edges" and k not in leg_fields}
+            if isinstance(entry, dict) else entry)
 
 
-def frozen_row(row):
+def frozen_row(row, row_fields=frozenset(), leg_fields=frozenset()):
     """A manifest row without its DERIVED `legs.edges` value. The manifest builders merge the leg-state overlay into
     each row's `legs`, so a newly proved edge moves that one value as well (see frozen_legs); every other field of
-    the row, including the other legs, stays frozen. A row whose `legs` is not a mapping is compared unchanged."""
-    if isinstance(row, dict) and isinstance(row.get("legs"), dict):
-        return {**row, "legs": frozen_legs(row["legs"])}
+    the row, including the other legs, stays frozen, except the fields a reviewed repair lists. A row whose `legs`
+    is not a mapping is compared unchanged."""
+    if isinstance(row, dict):
+        row = {k: v for k, v in row.items() if k not in row_fields}
+        if isinstance(row.get("legs"), dict):
+            return {**row, "legs": frozen_legs(row["legs"], leg_fields)}
     return row
+
+
+def changed_fields(before, now) -> set:
+    """The keys whose values differ between two mappings (a key present on one side only counts)."""
+    if not isinstance(before, dict) or not isinstance(now, dict):
+        return set()
+    return {key for key in before.keys() | now.keys() if before.get(key, None) != now.get(key, None)
+            or (key in before) != (key in now)}
 
 
 def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
@@ -1665,6 +1794,9 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
                   f"{obj['qualified']}: repair record {repair['record']} is a repository file naming the "
                   "statement and its repaired text")
         formal = obj["name"]
+        # a repair may change exactly its listed row and leg fields; the checks below compare everything else
+        row_fields = set((repair or {}).get("row_fields", []))
+        leg_fields = set((repair or {}).get("leg_fields", []))
         base_rows, now_rows = rows_for_object(rows_base, obj), rows_for_object(rows_now, obj)
         non_corpus = obj.get("non_corpus", False)
         check(isinstance(non_corpus, bool)
@@ -1677,9 +1809,16 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         else:
             # the row's derived `legs.edges` value is exempt (frozen_row); every other field stays frozen
             check(len(now_rows) == 1
-                  and [frozen_row(row) for row in base_rows] == [frozen_row(row) for row in now_rows],
-                  f"{formal}: manifest row unchanged since baseline",
+                  and [frozen_row(row, row_fields, leg_fields) for row in base_rows]
+                  == [frozen_row(row, row_fields, leg_fields) for row in now_rows],
+                  f"{formal}: manifest row unchanged since baseline"
+                  + (" outside the repair's listed fields" if row_fields or leg_fields else ""),
                   f"{len(base_rows)} baseline / {len(now_rows)} current rows")
+            if row_fields and len(base_rows) == len(now_rows) == 1:
+                changed = changed_fields(frozen_row(base_rows[0]), frozen_row(now_rows[0])) - {"legs"}
+                check(changed == row_fields,
+                      f"{formal}: the manifest-row fields that changed are exactly the repair's row_fields",
+                      f"changed {sorted(changed)}, listed {sorted(row_fields)}")
         row_now = now_rows[0] if now_rows else {}
         slug = row_now.get("slug")
         corpus = row_now.get("_corpus")
@@ -1687,8 +1826,14 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
             before_legs, now_legs = legs_base.get(corpus, {}), legs_now.get(corpus, {})
             # the derived `edges` leg is exempt (frozen_legs); every other field of the entry stays frozen
             check(slug in before_legs
-                  and frozen_legs(before_legs.get(slug)) == frozen_legs(now_legs.get(slug)),
-                  f"{formal}: leg-state entry unchanged since baseline")
+                  and frozen_legs(before_legs.get(slug), leg_fields) == frozen_legs(now_legs.get(slug), leg_fields),
+                  f"{formal}: leg-state entry unchanged since baseline"
+                  + (" outside the repair's leg_fields" if leg_fields else ""))
+            if leg_fields:
+                changed = changed_fields(frozen_legs(before_legs.get(slug)), frozen_legs(now_legs.get(slug)))
+                check(changed == leg_fields,
+                      f"{formal}: the leg-state fields that changed are exactly the repair's leg_fields",
+                      f"changed {sorted(changed)}, listed {sorted(leg_fields)}")
         statements.append({
             "qualified": obj["qualified"],
             "row_id": row_now.get("row_id") or (f"opg:{slug}" if corpus == "opg" else "no corpus row"),
@@ -1853,12 +1998,14 @@ def render_markdown(report: dict, spec: dict) -> str:
         lines.append(f"| `{statement['qualified']}` / {statement['row_id']} "
                      f"| `{statement['certificate']}` |")
     repaired = [statement for statement in report["statements"] if "repair" in statement]
-    if repaired:
-        lines += ["", "Source repairs after migration: ONE-WAY source-repair certificates (`live -> frozen`), "
-                  "not migration equivalences; every other row keeps its exact iff: " + ", ".join(
-                      f"`{statement['qualified']}` (`{statement['repair']['replace'][0]}` -> "
-                      f"`{statement['repair']['replace'][1]}`; record `{statement['repair']['record']}`)"
-                      for statement in repaired) + "."]
+    clause = "; every other row keeps its exact iff"   # said once, in the first repair sentence
+    for direction in REPAIR_DIRECTIONS:
+        group = [statement for statement in repaired if repair_direction(statement["repair"]) == direction]
+        if group:
+            label, kind = REPAIR_LABELS[direction]
+            lines += ["", f"{label}: {kind}, not migration equivalences{clause}: "
+                      + ", ".join(repair_item(statement) for statement in group) + "."]
+            clause = ""
     parametric = [statement for statement in report["statements"] if "parameters" in statement]
     if parametric:
         lines += ["", "Section-parametric endpoints (pointwise certificates over every discharged parameter): "
@@ -1922,10 +2069,11 @@ def render_details(report: dict, spec: dict) -> str:
         if st.get("original_certificate"):
             cert += f"; end-to-end `{st['original_certificate']}`"
         if "repair" in st:
-            cert += " (one-way source-repair certificate `live -> frozen`, not a migration equivalence)"
+            cert += REPAIR_CERTIFICATE_NOTES[repair_direction(st["repair"])].format(
+                relation=st["repair"].get("relation"))
             metadata = (f"source repair: `{st['repair']['replace'][0]}` -> `{st['repair']['replace'][1]}`, "
                         f"doc block sha256 `{st['repair']['doc_block_sha256'][:16]}…`, "
-                        f"record `{st['repair']['record']}`")
+                        f"record `{st['repair']['record']}`" + repair_fields_note(st["repair"], ", "))
         else:
             metadata = 'unchanged' if st['statement_text_unchanged'] and st['doc_block_unchanged'] else 'CHANGED'
         lines.append(

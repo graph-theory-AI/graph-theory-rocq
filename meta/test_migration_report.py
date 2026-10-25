@@ -674,6 +674,271 @@ class RepairTests(unittest.TestCase):
         del self.spec["frozen"][1]["repair"]
         self.assertTrue(REPORT.check_kernel(self.spec))
 
+    # A4 (coordination/PROGRAMME.md section 3): a repair may also weaken or re-encode, and may list the
+    # manifest-row and leg fields it changes.
+    WEAKER_DOC = "(** Corpus row: test\n    English statement: every number from 10 on equals itself. *)"
+    WEAKER = ("Lemma statement_compat : X0Legacy.statement -> test_statement.\n"
+              "Proof. intros h n hn; refine (h n _); induction hn; "
+              "[repeat constructor | constructor; assumption]. Qed.\n")
+    REENCODED_DOC = "(** Corpus row: test\n    English statement: every number up to 9 equals itself. *)"
+    RELATION = "{frozen} /\\ {live}"
+    BOTH = ("Lemma statement_compat : X0Legacy.statement /\\ test_statement.\n"
+            "Proof. split; intros n _; exact (eq_refl n). Qed.\n")
+
+    def changed_fixture(self, old, new, doc, lemma, **extra):
+        """The guarded baseline, then one reviewed repair of the given direction (extra keys)."""
+        self.guarded_baseline()
+        self.repaired = self.live.replace(old, new).replace(
+            "(** Corpus row: test\n    English statement: every number equals itself. *)", doc)
+        self.write(self.source, self.repaired)
+        self.cert_source = self.cert_source.replace(
+            "Lemma statement_compat : X0Legacy.statement <-> test_statement.\n"
+            "Proof. split; intros h n; exact (h n). Qed.\n", lemma)
+        self.lemma = lemma
+        self.write(self.certificate, self.cert_source)
+        self.write(self.RECORD, f"- test_statement: source repair, the guard {old} became {new}.\n")
+        self.repair = {"replace": [old, new], "doc_block_sha256": REPORT.sha256(doc),
+                       "record": self.RECORD, **extra}
+        self.spec["frozen"][1]["repair"] = copy.deepcopy(self.repair)
+
+    def weaken_fixture(self, **extra):
+        self.changed_fixture("9 <= n", "10 <= n", self.WEAKER_DOC, self.WEAKER, direction="weaken", **extra)
+
+    def reencode_fixture(self, **extra):
+        self.changed_fixture("9 <= n", "n <= 9", self.REENCODED_DOC, self.BOTH,
+                             direction="re-encode", relation=self.RELATION, **extra)
+
+    def probe_body(self):
+        bodies, real_run = [], subprocess.run
+
+        def capture(args, **kwargs):   # only the coqc probe is intercepted; git still runs
+            if args[0] != "coqc":
+                return real_run(args, **kwargs)
+            bodies.append(Path(args[-1]).read_text())
+            return subprocess.CompletedProcess(args, 1, "", "")
+        with patch.object(REPORT.subprocess, "run", side_effect=capture):
+            self.assertTrue(REPORT.check_kernel(self.spec))
+        self.assertEqual(len(bodies), 1)
+        return bodies[0]
+
+    def test_explicit_strengthen_is_the_default(self):
+        self.repair_fixture()
+        default_text = REPORT.render_markdown(self.report(), self.spec)
+        self.spec["frozen"][1]["repair"]["direction"] = "strengthen"
+        self.assertEqual(self.failures(), [])
+        self.assertEqual(REPORT.render_markdown(self.report(), self.spec), default_text)
+        self.assertIn(f"Check ({self.module}.statement_compat : {self.statement} -> "
+                      f"{self.module}.X0Legacy.statement).", self.probe_body())
+
+    def test_reviewed_weakening_and_reencoding_pass(self):
+        for fixture in (self.weaken_fixture, self.reencode_fixture):
+            with self.subTest(fixture=fixture.__name__):
+                self.setUp()
+                fixture()
+                self.assertEqual(self.failures(), [])
+
+    def test_kernel_probe_shape_follows_the_direction(self):
+        self.weaken_fixture()
+        self.assertIn(f"Check ({self.module}.statement_compat : {self.module}.X0Legacy.statement -> "
+                      f"{self.statement}).", self.probe_body())
+        self.setUp()
+        self.reencode_fixture()
+        self.assertIn(f"Check ({self.module}.statement_compat : {self.module}.X0Legacy.statement /\\ "
+                      f"{self.statement}).", self.probe_body())
+
+    def test_text_checks_hold_under_every_direction(self):
+        for fixture in (self.weaken_fixture, self.reencode_fixture):
+            with self.subTest(fixture=fixture.__name__):
+                self.setUp()
+                fixture()
+                self.write(self.source, self.repaired.replace("local_helper n.\n", "local_helper (n + 0).\n"))
+                self.assertIn(self.statement + ": statement text is the baseline text with exactly the reviewed "
+                              "repair", self.failures())
+                self.write(self.source, self.repaired.replace("equals itself", "is itself"))
+                self.assertIn(self.statement + ": doc block matches the reviewed repair", self.failures())
+
+    def test_malformed_directions_and_relations_are_rejected(self):
+        self.reencode_fixture()
+        good = copy.deepcopy(self.repair)
+        bad = [
+            {**good, "direction": "both"},
+            {**good, "direction": None},
+            {**{k: v for k, v in good.items() if k != "relation"}},
+            {**good, "direction": "weaken"},
+            {**{k: v for k, v in good.items() if k != "direction"}},
+            {**good, "relation": "{frozen} /\\ True"},
+            {**good, "relation": "{frozen} /\\ {live} /\\ {other}"},
+            {**good, "relation": "{frozen} /\\ {live}). Axiom cheat : False. Check (I"},
+            {**good, "relation": "{frozen}) (I /\\ ({live}"},
+            {**good, "relation": "({frozen} /\\ {live}"},
+            {**good, "relation": "{frozen} /\\ {live}."},
+            {**good, "relation": "{frozen} /\\ (* x *) {live}"},
+            {**good, "relation": "{frozen} /\\ \"{live}\""},
+            {**good, "relation": "{frozen} /\\ `{live}`"},
+            {**good, "relation": "{frozen} \\/ {live} | x"},
+            {**good, "relation": "{frozen} /\\\n{live}"},
+            {**good, "relation": "{frozen} /\\ {live} /\\ " + "True /\\ " * 60 + "True"},
+            {**good, "relation": "{frozen} -> {live}"},
+            {**good, "relation": "  {live}  ->  {frozen} "},
+            {**good, "relation": "(({frozen}) <-> ({live}))"},
+            {**good, "relation": "{live} <-> {frozen}"},
+            {**good, "relation": 3},
+        ]
+        for repair in bad:
+            with self.subTest(repair=repair):
+                self.spec["frozen"][1]["repair"] = repair
+                with self.assertRaisesRegex(ValueError, "repair"):
+                    self.report()
+        for relation in ("Nat.le 0 0 -> ({frozen} /\\ {live})", "({frozen} -> {live}) /\\ {frozen}"):
+            with self.subTest(relation=relation):
+                self.spec["frozen"][1]["repair"] = {**good, "relation": relation}
+                self.report()   # accepted by the schema (the kernel probe decides its type)
+        self.spec["frozen"][1]["repair"] = {**good, "direction": "strengthen"}
+        with self.assertRaisesRegex(ValueError, "relation exactly when its direction is re-encode"):
+            self.report()
+
+    def test_repair_field_lists_are_validated(self):
+        self.weaken_fixture()
+        good = copy.deepcopy(self.repair)
+        for key, value in (("row_fields", []), ("row_fields", "status"), ("row_fields", ["status", "status"]),
+                           ("row_fields", ["slug"]), ("row_fields", ["formal_name"]), ("row_fields", ["legs"]),
+                           ("row_fields", ["source_text"]), ("row_fields", ["Status"]), ("row_fields", [3]),
+                           ("leg_fields", ["edges"]), ("leg_fields", ["package"]), ("leg_fields", [])):
+            with self.subTest(key=key, value=value):
+                self.spec["frozen"][1]["repair"] = {**good, key: value}
+                with self.assertRaisesRegex(ValueError, f"repair {key}"):
+                    self.report()
+
+    def test_listed_row_fields_change_exactly(self):
+        self.weaken_fixture(row_fields=["status"])
+        manifest = "meta/" + REPORT.REG.CORPORA["v2"]["manifest"]
+        self.write_json(manifest, {"rows": [{**self.row, "status": "partially solved"}]})
+        self.assertEqual(self.failures(), [])
+        exact = "test_statement: the manifest-row fields that changed are exactly the repair's row_fields"
+        outside = "test_statement: manifest row unchanged since baseline outside the repair's listed fields"
+        self.write_json(manifest, {"rows": [self.row]})
+        self.assertIn(exact, self.failures())
+        for changed in ({"status": "partially solved", "phase": "X1"}, {"status": "proved", "title": "t"}):
+            with self.subTest(changed=changed):
+                self.write_json(manifest, {"rows": [{**self.row, **changed}]})
+                failures = self.failures()
+                self.assertIn(outside, failures)
+                self.assertIn(exact, failures)
+
+    def test_listed_leg_fields_change_exactly(self):
+        self.weaken_fixture(leg_fields=["statement"])
+        manifest = "meta/" + REPORT.REG.CORPORA["v2"]["manifest"]
+        overlay = "meta/" + REPORT.REG.CORPORA["v2"]["overlay"]
+        self.write_json(overlay, {"entries": {"test": {"statement": "partial"}}})
+        self.write_json(manifest, {"rows": [{**self.row, "legs": {"statement": "partial"}}]})
+        self.assertEqual(self.failures(), [])
+        exact = "test_statement: the leg-state fields that changed are exactly the repair's leg_fields"
+        self.write_json(overlay, {"entries": {"test": {"statement": "done"}}})
+        self.assertIn(exact, self.failures())
+        self.write_json(overlay, {"entries": {"test": {"statement": "partial", "note": "n"}}})
+        failures = self.failures()
+        self.assertIn("test_statement: leg-state entry unchanged since baseline outside the repair's leg_fields",
+                      failures)
+        self.assertIn(exact, failures)
+        self.write_json(overlay, {"entries": {"test": {"statement": "partial"}}})
+        self.write_json(manifest, {"rows": [{**self.row, "legs": {"statement": "partial", "grounding": "done"}}]})
+        self.assertIn("test_statement: manifest row unchanged since baseline outside the repair's listed fields",
+                      self.failures())
+
+    def test_original_repair_may_rest_on_exactly_one_other_family_spec(self):
+        """A row migrated by one family and snapshotted (original-statement) by another, as
+        majority_3col_eulerian_statement in degree_balance and directed_neighbourhood."""
+        self.weaken_fixture()
+        original = {**copy.deepcopy(self.spec["frozen"][1]), "kind": "original-statement"}
+        spec = {**copy.deepcopy(self.spec), "frozen": [copy.deepcopy(self.spec["frozen"][0]), original]}
+        statement = copy.deepcopy(self.spec["frozen"][1])
+        reports = "meta/migration_reports/"
+        self.write_json(reports + "other_family.spec.json", {"frozen": [statement]})
+        REPORT.validate_repairs(spec)
+        for siblings in ({"other_family": [{**statement, "repair": {**self.repair, "record": "elsewhere"}}]},
+                         {"other_family": [{key: value for key, value in statement.items() if key != "repair"}]},
+                         {"other_family": [statement], "third_family": [statement]},
+                         {"other_family": [{**statement, "kind": "original-statement"}]},
+                         {"test_family": [statement]}):
+            with self.subTest(siblings=siblings):
+                for path in (self.root / reports).glob("*.spec.json"):
+                    path.unlink()
+                for name, frozen in siblings.items():
+                    self.write_json(reports + f"{name}.spec.json", {"frozen": frozen})
+                with self.assertRaisesRegex(ValueError, "identical repair on its statement"):
+                    REPORT.validate_repairs(spec)
+
+    def test_unlisted_fields_still_stay_frozen_under_every_direction(self):
+        for fixture in (self.weaken_fixture, self.reencode_fixture):
+            with self.subTest(fixture=fixture.__name__):
+                self.setUp()
+                fixture()
+                self.row["status"] = "solved"
+                self.write_manifests("v2")
+                self.assertIn("test_statement: manifest row unchanged since baseline", self.failures())
+
+    def test_compact_report_names_each_direction(self):
+        self.weaken_fixture(row_fields=["status"], leg_fields=["statement"])
+        self.write_json("meta/" + REPORT.REG.CORPORA["v2"]["manifest"],
+                        {"rows": [{**self.row, "status": "partially solved", "legs": {"statement": "partial"}}]})
+        self.write_json("meta/" + REPORT.REG.CORPORA["v2"]["overlay"], {"entries": {"test": {"statement": "partial"}}})
+        report = self.report()
+        self.assertTrue(report["ok"], [c for c in report["checks"] if not c["ok"]])
+        text = REPORT.render_markdown(report, self.spec)
+        self.assertIn("Source weakenings after migration: ONE-WAY source-repair certificates (`frozen -> live`), "
+                      "not migration equivalences; every other row keeps its exact iff: "
+                      f"`{self.statement}` (`9 <= n` -> `10 <= n`; record `{self.RECORD}`; row fields `status`; "
+                      "leg fields `statement`).", text)
+        self.assertNotIn("Source repairs after migration", text)
+        details = REPORT.render_details(report, self.spec)
+        self.assertIn("(one-way source-repair certificate `frozen -> live`, not a migration equivalence)", details)
+        self.assertIn(", row fields `status`, leg fields `statement`", details)
+        self.setUp()
+        self.reencode_fixture()
+        text = REPORT.render_markdown(self.report(), self.spec)
+        self.assertIn("Source re-encodings after migration: certificates of each record's stated relation, not "
+                      "migration equivalences; every other row keeps its exact iff: "
+                      f"`{self.statement}` (`9 <= n` -> `n <= 9`; relation `{self.RELATION}`; "
+                      f"record `{self.RECORD}`).", text)
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_accepts_weakening_and_reencoding_certificates(self):
+        for fixture in (self.weaken_fixture, self.reencode_fixture):
+            with self.subTest(fixture=fixture.__name__):
+                self.setUp()
+                fixture()
+                self.compile_fixture()
+                self.assertEqual(REPORT.check_kernel(self.spec), [])
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_rejects_reverse_wrong_endpoint_or_guarded_weakening(self):
+        self.weaken_fixture()
+        # each lemma COMPILES (compile_fixture asserts rc 0); only the probe's exact type rejects it
+        for lemma in ("Lemma statement_compat : test_statement -> X0Legacy.statement.\n"
+                      "Proof. intros _ n _; exact (eq_refl n). Qed.\n",
+                      "Lemma statement_compat : X0Legacy.statement -> X0Legacy.statement.\n"
+                      "Proof. exact (fun h => h). Qed.\n",
+                      "Lemma statement_compat : False -> (X0Legacy.statement -> test_statement).\n"
+                      "Proof. intros h; destruct h. Qed.\n"):
+            with self.subTest(lemma=lemma):
+                self.write(self.certificate, self.cert_source.replace(self.WEAKER, lemma))
+                self.compile_fixture()
+                self.assertTrue(REPORT.check_kernel(self.spec))
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_rejects_a_reencoding_certificate_of_another_relation(self):
+        self.reencode_fixture()
+        for lemma in ("Lemma statement_compat : test_statement /\\ X0Legacy.statement.\n"
+                      "Proof. split; intros n _; exact (eq_refl n). Qed.\n",
+                      "Lemma statement_compat : X0Legacy.statement -> test_statement.\n"
+                      "Proof. intros _ n _; exact (eq_refl n). Qed.\n",
+                      "Lemma statement_compat : X0Legacy.statement /\\ X0Legacy.statement.\n"
+                      "Proof. split; intros n _; exact (eq_refl n). Qed.\n"):
+            with self.subTest(lemma=lemma):
+                self.write(self.certificate, self.cert_source.replace(self.BOTH, lemma))
+                self.compile_fixture()
+                self.assertTrue(REPORT.check_kernel(self.spec))
+
 
 class FrozenRoleTests(unittest.TestCase):
     """A primary row must not hide a mislabeled additional complete Original."""
