@@ -580,14 +580,14 @@
    "audit_page": "todo"
   },
   "axv_1610_00876_05": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x171-x190-batch1",
+   "commit": "x179-host-guard-disjoint-subdivision-reencoding",
    "package": "digraph-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = mis-encoded k-strong-connectivity premise, and it does NOT resolve: x179_k_vertex_strongly_connected G k := (forall S, #|S|<k -> G-S strongly connected) DROPS the standard |V(G)|>=k+1 guard, so degenerate tiny graphs (1-vertex, even 0-vertex) are vacuously k-strong for EVERY k while being unable to host a subdivision of any D with >=2 vertices; this makes x179_kappa_maderian D (exists k, forall k-stron"
+   "note": "Authored in X179.v:digraph_kappa_maderian_statement. Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): for every loopless digraph D there is a k such that every host with more than k vertices and strong connectivity at least k, and a k such that every host with more than k vertices and strong arc-connectivity at least k, contains a subdivision of D with pairwise internally disjoint paths (X2.contains_subdivision unfolded). The old body lacked the host guard (the one-vertex digraph refuted it) and let replacement paths share interiors."
   },
   "axv_1611_01270_00": {
    "statement": "todo",

@@ -1039,6 +1039,10 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   replacement path avoid branch vertices; unlike `X2.contains_subdivision` it does NOT require the
   interiors of distinct replacement paths to be pairwise disjoint, so a "subdivision" here may
   reuse internal vertices. The intended statement is strictly stronger.
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): `x179_directed_subdivision` is now
+  `X2.contains_subdivision` unfolded (pairwise disjoint path interiors). The same re-encoding adds
+  the host guard `k < #|G|` (the one-vertex digraph refuted the old body,
+  `meta/probe_hints/digraph_kappa_maderian_statement.v`) and a loopless `D`.
 - `opg:hamilton_cycle_in_small_d_diregular_graphs` →
   `conjectures/P9.v:hamilton_cycle_in_small_d_diregular_graphs_statement` (alias of
   `classic_core.jackson_hamilton_small_diregular_statement`) — **too weak (mild)**. The row says
