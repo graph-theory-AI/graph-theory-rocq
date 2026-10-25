@@ -79,7 +79,7 @@ ALREADY = {
  'splitting_a_digraph_with_minimum_outdegree_constraints':'splitting_min_outdegree_statement',
  'long_directed_cycles_in_digraph_with_minimum_in_and_out_degree':'long_dicycle_diregular_statement',
  'stable_set_meeting_all_longest_directed_paths':'stable_meeting_longest_dipaths_statement',
- 'monochromatoc_reachability_in_arc_colored_digraphs':'mono_reach_or_rainbow_statement',
+ 'monochromatoc_reachability_in_arc_colored_digraphs':'sands_sauer_woodrow_statement',
  'directed_cycle_of_length_twice_the_minimum_outdegree':'cheng_keevash_conj1_statement',  # FIX (was long_dipath_statement)
  'linial_berge_path_partition_duality':'linial_berge_statement',
  'erdos_posa_property_for_long_directed_cycles':'erdos_posa_long_dicycles_statement',
@@ -95,7 +95,7 @@ STATUS_SEM = {
  'large_induced_forest_in_a_planar_graph':"PARTIAL — partial lower bounds on the induced-forest size are proven; the conjectured fraction is open. Node states the conjectured bound (DEFERRED-adjacent: planarity, gate G2).",
  'partial_list_coloring':"PARTIAL — the floor bound holds in special cases (Albertson–Grossman–Haas and successors); the general inequality is open. Node states the general conjecture.",
  'cycles_in_graphs_of_large_chromatic_number':"PARTIAL — several special cases (specific cycle-length sets, girth conditions) proven; the general statement is open.",
- 'monochromatoc_reachability_in_arc_colored_digraphs':"PARTIAL — known for few colours / tournament sub-cases; general open. Already formalized in digraph-theory (mono_reach_or_rainbow_statement) as the open general proposition.",
+ 'monochromatoc_reachability_in_arc_colored_digraphs':"PARTIAL — known for few colours / tournament sub-cases; general open. Already formalized in digraph-theory (sands_sauer_woodrow_statement, over loopless digraphs) as the open general proposition; bound to the three-colour tournament variant mono_reach_or_rainbow_statement until 2026-10-25.",
  'hoand_reed_conjecture':"PARTIAL — proven for k ≤ 3; general k open. Already formalized in digraph-theory (hoang_reed_statement).",
  'erdos_posa_property_for_long_directed_cycles':"PARTIAL — the (unrestricted) directed Erdős–Pósa property is known (Reed–Robertson–Seymour–Thomas); the LONG-directed-cycle variant is open. Already formalized (erdos_posa_long_dicycles_statement).",
  'jones_conjecture':"PARTIAL — proven for planar graphs (Jones); the general bound is open. (Planarity → gate G2 for the planar case.)",

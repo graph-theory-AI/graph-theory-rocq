@@ -250,27 +250,15 @@ Definition rainbow_triangle (D : diGraphType) (c : arc_colouring D 3) : Prop :=
     [/\ a --> b, b --> c0, c0 --> a
       & uniq [:: c a b; c b c0; c c0 a]].
 
-(** Corpus row: opg:monochromatoc_reachability_in_arc_colored_digraphs
-    Site: https://graph-theory-ai.github.io/graph-conjectures/op/monochromatoc_reachability_in_arc_colored_digraphs/
-    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/monochromatoc_reachability_in_arc_colored_digraphs.json
-    English statement: (Open Problem Garden, Monochromatic reachability in arc-colored digraphs; the body encodes the tournament rainbow-triangle variant of Sands-Sauer-Woodrow)
-      For every finite tournament T with at least one vertex and every colouring of its arcs by
-      three colours, either T has a rainbow directed triangle, that is a directed 3-cycle whose
-      three arcs carry three distinct colours, or T has a vertex v from which every vertex is
-      reachable by a directed path all of whose arcs have one and the same colour (the colour
-      may depend on the target).
-    Definitions: [arc_colouring D k] - a function assigning a colour in 'I_k to each ordered
-      pair, read only on actual arcs (this file); [rainbow_triangle c] - a directed triangle
-      with three distinct arc colours (this file); [mono_reach c i v w] - reachability in the
-      sub-relation of arcs of colour i, reflexive-transitive (this file); [mono_root c v] - v
-      reaches every vertex monochromatically (this file); [tournament] (core/tournament.v).
-    Notes: DISCREPANCY: the corpus statement_text of this row is the general Sands-Sauer-Woodrow
-      statement (for every k there is f(k) such that every k-arc-coloured digraph has a set S, a
-      union of f(k) stable sets, monochromatically reachable from every vertex). That statement
-      is formalised in this file as [sands_sauer_woodrow_statement], which the manifest leaves
-      without a row; the body documented here is instead the three-colour tournament variant.
-      Recorded in meta/STATEMENT_IMPROVEMENTS.md. The guard 0 < #|T| keeps the root disjunct
-      from being vacuously satisfiable on the empty tournament. *)
+(** No corpus row: the three-colour tournament variant of Sands-Sauer-Woodrow (every
+    nonempty tournament whose arcs are coloured with three colours has a rainbow directed
+    triangle or a vertex from which every vertex is reachable by a one-colour directed path).
+    The row opg:monochromatic_reachability_vs_rainbow_triangles carries exactly this body through
+    its alias [P9.monochromatic_reachability_vs_rainbow_triangles_statement]. Until 2026-10-25
+    the manifest also attached to this definition the row
+    opg:monochromatoc_reachability_in_arc_colored_digraphs, whose text is the general statement;
+    that row is now bound to [sands_sauer_woodrow_statement] below (meta/STATEMENT_IMPROVEMENTS.md).
+    The guard 0 < #|T| excludes the empty tournament, on which neither disjunct can hold. *)
 Definition mono_reach_or_rainbow_statement : Prop :=
   forall (T : tournament) (c : arc_colouring T 3),
     (0 < #|T|)%N ->
@@ -285,15 +273,31 @@ Definition union_of_stables (D : diGraphType) (m : nat) (S : {set D}) : Prop :=
         all (fun P => stable P) parts
       & S = \bigcup_(P <- parts) P].
 
-(** No corpus row: this is the general Sands-Sauer-Woodrow statement (for every number k of arc
-    colours there is a bound f such that every k-arc-coloured digraph has a set S, a union of at
-    most f stable sets, with every vertex reaching S by a monochromatic directed path), and it
-    is the text of the corpus row opg:monochromatoc_reachability_in_arc_colored_digraphs; the
-    manifest attaches that row to [mono_reach_or_rainbow_statement] above instead, so this
-    definition owns no row. Recorded in meta/STATEMENT_IMPROVEMENTS.md. *)
+(** Corpus row: opg:monochromatoc_reachability_in_arc_colored_digraphs
+    Site: https://graph-theory-ai.github.io/graph-conjectures/op/monochromatoc_reachability_in_arc_colored_digraphs/
+    Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/monochromatoc_reachability_in_arc_colored_digraphs.json
+    English statement: (Open Problem Garden, Monochromatic reachability in arc-colored digraphs; Sands-Sauer-Woodrow)
+      For every number k of colours there is an integer f such that every finite loopless
+      digraph D whose arcs are coloured with k colours has a vertex set S, the union of at most f
+      stable sets, such that every vertex of D has a directed path, all of whose arcs carry one
+      colour, to some vertex of S.
+    Definitions: [arc_colouring D k] - a function assigning a colour in 'I_k to each ordered
+      pair, read only on actual arcs (this file); [union_of_stables f S] - S is the union of at
+      most f stable sets (this file); [stable S] - no arc joins two members of S (classic_core.v);
+      [mono_reach_any c v s] - v reaches s in the sub-relation of the arcs of one colour,
+      reflexive-transitive (this file); [loopless D] - no vertex carries a loop (two_extremal.v).
+    Notes: "at most f" stable sets is equivalent to the source's "f" stable sets, since the
+      empty set is stable; a vertex of S reaches itself by the empty path. The guard
+      [loopless D] (added 2026-10-25) is load-bearing: [stable] counts loops inside S, so
+      without it a one-vertex digraph with a loop refutes the body
+      (meta/probe_hints/sands_sauer_woodrow_statement.v); loops never change monochromatic
+      reachability, so the guard keeps the source's reading. For k = 0 only the empty digraph
+      carries an arc colouring, a harmless degeneracy. Until 2026-10-25 this row was bound to
+      [mono_reach_or_rainbow_statement] above, the three-colour tournament variant
+      (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition sands_sauer_woodrow_statement : Prop :=
   forall k : nat, exists f : nat,
-    forall (D : diGraphType) (c : arc_colouring D k),
+    forall (D : diGraphType) (c : arc_colouring D k), loopless D ->
       exists S : {set D},
         [/\ union_of_stables f S
           & forall v : D, exists2 s : D, s \in S & mono_reach_any c v s].
