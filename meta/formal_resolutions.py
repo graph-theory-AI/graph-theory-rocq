@@ -49,9 +49,10 @@ ENTRY_FIELDS = {
     "opg": COMMON_FIELDS | set(SOURCE_IDENTITY["opg"]),
 }
 OPG_KEY = re.compile(r"opg:([a-z0-9_]+)")
-# A compiler warning: its location line, the message, then the [category,...] line.
-WARNING_BLOCK = re.compile(
-    r'^File "[^"\n]*", line \d+, characters \d+-\d+:\nWarning:(?:.*\n)*?\[[\w,-]+\](?:\n|\Z)', re.M)
+# A compiler warning: its location line, a line starting "Warning:", further message lines,
+# then its own [category,...] line (categories may contain dots, as in deprecated-since-9.2).
+WARNING_LOCATION = re.compile(r'File "[^"\n]*", line \d+, characters \d+-\d+:')
+WARNING_CATEGORY = re.compile(r"\[[^\]\n]+\]")
 
 
 class ResolutionError(ValueError):
@@ -343,12 +344,32 @@ def transcript(output: str, temporary: str) -> str:
 
     A warning block names the run's temporary probe file, so keeping it would
     make the --report differ on every run. Any other mention of that directory
-    is an unrecognised message and fails rather than being recorded.
+    is an unrecognised message and fails rather than being recorded. A block
+    must end with its category line before the next location line or the end
+    of the output, so a malformed block can never swallow real output.
     """
-    kept = WARNING_BLOCK.sub("", output)
-    if temporary in kept or "Warning:" in kept:
-        raise ResolutionError(f"unrecognised compiler message in the probe output:\n{output}")
-    return kept
+    def unrecognised() -> ResolutionError:
+        return ResolutionError(f"unrecognised compiler message in the probe output:\n{output}")
+
+    lines = output.splitlines(keepends=True)
+    kept: list[str] = []
+    index = 0
+    while index < len(lines):
+        if (WARNING_LOCATION.fullmatch(lines[index].rstrip("\n"))
+                and index + 1 < len(lines) and lines[index + 1].startswith("Warning:")):
+            end = index + 1
+            while not WARNING_CATEGORY.fullmatch(lines[end].rstrip("\n")):
+                end += 1
+                if end == len(lines) or WARNING_LOCATION.fullmatch(lines[end].rstrip("\n")):
+                    raise unrecognised()
+            index = end + 1
+        else:
+            kept.append(lines[index])
+            index += 1
+    text = "".join(kept)
+    if temporary in text or "Warning:" in text:
+        raise unrecognised()
+    return text
 
 
 def selected_entries(root: Path, *, package: str | None = None,

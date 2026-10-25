@@ -212,27 +212,34 @@ class ResolutionCanaries(unittest.TestCase):
         checks = "claim : Prop\n     : Prop\nClosed under the global context\n"
         self.assertEqual(R.transcript(warning + long_warning + checks + warning, tmp), checks)
         self.assertEqual(R.transcript(checks, tmp), checks)
+        no_category = warning.replace("[notation-overridden,parsing,default]\n", "")
         for bad in (f'File "{tmp}/ResolutionCheck.v", line 1, characters 0-5:\nSomething else.\n' + checks,
                     "Warning: a warning without its location.\n" + checks,
-                    warning.replace("[notation-overridden,parsing,default]\n", "") + checks):
+                    no_category + checks,
+                    # A block without its category must not swallow output up to the next block's category.
+                    no_category + checks + warning):
             with self.subTest(bad=bad):
                 with self.assertRaisesRegex(R.ResolutionError, "unrecognised compiler message"):
                     R.transcript(bad, tmp)
 
     def test_report_transcript_is_reproducible_when_the_probe_warns(self):
-        # Importing the statement module re-declares "_ + _" in nat_scope, so the probe warns.
-        notation = 'Notation "x + y" := (Nat.add x y) (at level 50, left associativity) : nat_scope.\n'
+        # As in X15, importing the statement module re-exports ssrnat, whose nat_scope notations override
+        # the prelude's; the statement is also deprecated. So the probe's Require and Check both warn.
+        header = "From mathcomp Require Export ssrnat.\n"
         claim = "Definition claim : Prop := 2 = 2.\n"
-        self.statement.write_text(notation + claim)
+        self.statement.write_text(header + '#[deprecated(since="fixture", note="canary")]\n' + claim)
         self.entry["statement_sha256"] = R.declaration_hash(claim)
         self.write_metadata()
         result = R.verify_resolutions(self.root)
         self.assertEqual(result[0].assumptions.count("Closed under the global context"), 2)
         self.assertNotIn("Warning:", result[0].assumptions)
         self.assertNotIn("rocq-resolution-", result[0].assumptions)
-        # Not vacuous: the same probe, compiled directly, does warn.
+        # Not vacuous: the same probe text, compiled directly, does warn.
         probe = self.root / "WarningProbe.v"
-        probe.write_text("Require Import Fixture.statement Fixture.proof.\nPrint Assumptions Fixture.proof.resolved.\n")
+        probe.write_text("Require Import Fixture.proof.\nRequire Import Fixture.statement.\n"
+                         "Check (Fixture.statement.claim : Prop).\nCheck (Fixture.proof.resolved : "
+                         "Fixture.statement.claim).\nPrint Assumptions Fixture.statement.claim.\n"
+                         "Print Assumptions Fixture.proof.resolved.\n")
         flags, _files = R.project(self.root, "fixture")
         output = R.run(["rocq", "compile", *flags, str(probe)], self.root / "fixture", R.ROCQ.environment())
         self.assertIn("Warning:", output)

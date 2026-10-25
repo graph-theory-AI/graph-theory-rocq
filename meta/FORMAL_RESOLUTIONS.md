@@ -262,6 +262,9 @@ files are ignored. A second top-level definition, including one in a `Section` o
 cover `--record` and `--package` in both modes. One compiled run checks and reports
 only the selected entry.
 
-The transcript tests strip one- and multi-line warning blocks and refuse an
-unrecognised message. A compiled fixture whose import really warns (checked by
-compiling the same probe directly) yields a report without `Warning:` or the probe path.
+The transcript tests strip one- and multi-line warning blocks, including dotted
+categories such as `deprecated-since-9.2`. They refuse an unrecognised message, and a
+block without its category line, which must not swallow the output that follows. One
+compiled fixture re-exports `ssrnat`, as X15's imports do, and deprecates its statement. It yields
+a report without `Warning:` or the probe path, although the same probe text, compiled
+directly, warns.
