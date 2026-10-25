@@ -7,9 +7,8 @@
       "citation": "L. A. Goddyn, M. Tarsi, C.-Q. Zhang, On (k,d)-colorings and fractional nowhere-zero flows, Journal of Graph Theory 28 (1998) 155-161",
       "claim": "The flow number of a graph is the ceiling of its circular flow number; in particular a graph carrying a circular 5-flow (a real-valued Kirchhoff flow with |phi(e)| in [1,4] on every edge) has a nowhere-zero integer 5-flow. The Rocq Prop states the instance needed here in the denominator-free form: if an integer edge weighting chi of a multigraph is Kirchhoff-conservative at every vertex and satisfies 2 <= |chi e| <= 8 on every edge -- equivalently, chi/2 is a nowhere-zero circular 5-flow -- then the multigraph has a nowhere-zero integer 5-flow.",
       "kind": "theorem",
-      "used_by": [
-        "half_flow_pair_statement->five_flow_statement:implies"
-      ],
+      "used_by": [],
+      "formalized_by": "circular_5_flow_round (cycle-theory/theories/conjectures/implications_X228.v), 2026-10-25, classical-lemmas TODO 1 (the instance stated here, by parity: a balanced orientation s of the edges where chi is odd, then (chi + s)/2): edge half_flow_pair_statement->five_flow_statement:implies is now verified (unconditional_half_flow_pair_implies_five_flow)",
       "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
       "review": "PASS -- a theorem, correctly stated and neither stronger nor weaker than needed: chi/2 is a real nowhere-zero flow with values of modulus in [1,4], and Goddyn-Tarsi-Zhang (flow number = ceiling of circular flow number; already the Hoffman/Tutte rounding of a real flow to an integer flow between floor and ceiling edgewise) gives an integer flow with modulus in [1,4]. Loops cancel in iconservative and may take any nonzero value. Not trivial (it is the integrality step), not refutable, no numeric boundary to guard."
     },

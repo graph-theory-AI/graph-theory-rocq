@@ -908,16 +908,14 @@
    "tier": "done",
    "wave": "prior",
    "host": "cycle-theory",
-   "state": "conditional",
-   "proof": "half_flow_pair_implies_five_flow",
-   "external": [
-    "external_circular_5_flow_statement"
-   ],
+   "state": "verified",
+   "proof": "unconditional_half_flow_pair_implies_five_flow",
+   "external": [],
    "reason": "",
-   "proved_by": "prior waves",
-   "reviewed_by": "prior second readers (see meta/X191-X210 and X211-X229 faithfulness audits)",
-   "reviewed_at": "2026-09-23",
-   "note": "From a 1/2-flow-pair (phi2,phi4) the integer circulation chi = 5*phi2 + phi4 satisfies 2 <= |chi| <= 8 on every edge, i.e. chi/2 is a nowhere-zero circular 5-flow; the circular-to-integer step is the cited external hypothesis external_circular_5_flow_statement"
+   "proved_by": "Arthur (mathematics tranche 3, 2026-10-25): circular_5_flow_round proves external_circular_5_flow_statement (classical-lemmas TODO 1); the conditional half_flow_pair_implies_five_flow of the prior waves is kept",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "From a 1/2-flow-pair (phi2,phi4) the integer circulation chi = 5*phi2 + phi4 satisfies 2 <= |chi| <= 8 on every edge, i.e. chi/2 is a nowhere-zero circular 5-flow; the circular-to-integer step is proved as circular_5_flow_round: the edges where chi is odd form an even edge set, a balanced orientation s of it (implications_D1.even_balanced) makes chi + s even, and (chi + s)/2 is a nowhere-zero integer 5-flow"
   },
   "hamiltonian_cycles_in_line_graphs_of_infinite_graphs_statement->hamiltonian_cycles_in_line_graphs_statement:implies": {
    "gc": "e068",
