@@ -29,20 +29,27 @@ Definition x51_respects_lists
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__06/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__06.json
     English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 7)
-      There is a constant c >= 1 such that every finite digraph is majority c-choosable: for
-      every assignment of a colour list of size at least c to each vertex there is a colouring
-      picking each vertex's colour from its own list in which every vertex has at most half of
-      its out-neighbours coloured like itself.
-    Definitions: [x51_majority_colouring col] - at most half of the out-neighbours share the
-      colour, written as 2 * #same <= outdeg (this file); [x51_respects_lists L col] - each
-      vertex is coloured from its own list (this file); [x51_same_colour_outneighbours] (this
-      file); [outdeg] (core/oriented.v).
+      There is a constant c >= 1 such that every finite loopless digraph is majority
+      c-choosable: for every assignment of a colour list of size at least c to each vertex there
+      is a colouring picking each vertex's colour from its own list in which every vertex has at
+      most half of its out-neighbours coloured like itself.
+    Definitions: [irreflexive (@arc D)] - no vertex has an arc to itself (the body of
+      two_extremal.loopless, which this file does not import); [x51_majority_colouring col] - at
+      most half of the out-neighbours share the colour, written as 2 * #same <= outdeg (this
+      file); [x51_respects_lists L col] - each vertex is coloured from its own list (this file);
+      [x51_same_colour_outneighbours] (this file); [outdeg] (core/oriented.v).
     Notes: The colour universe is an arbitrary finite type quantified inside the statement, so a
-      single c works for lists over any palette. *)
+      single c works for lists over any palette.  The looplessness guard is load-bearing.
+      [diGraphType] allows loops, and a loop at v makes v a same-coloured out-neighbour of
+      itself, so the one-vertex digraph with a loop has no majority colouring from any lists
+      (meta/probe_hints/majority_choosable_universal_constant_statement.v).  The source's
+      digraphs have no loops.  The guard was added on 2026-10-25
+      (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition majority_choosable_universal_constant_statement : Prop :=
   exists c : nat,
     0 < c /\
     forall (D : diGraphType) (C : finType) (L : D -> {set C}),
+      irreflexive (@arc D) ->
       (forall v : D, c <= #|L v|) ->
       exists col : D -> C,
         x51_respects_lists L col /\
