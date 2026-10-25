@@ -25,11 +25,11 @@
       - Row 1 [is_fractional_hadwiger] gives the LP relaxation of the (clique-minor)
         Hadwiger number — a faithful but definitional choice of the fractional value;
         branch sets are NON-EMPTY (wave-E10 guard repair, see the row's Notes).
-      - Row 2 (mixing) is PARTIAL: the genuine object M_c(G) is a REAL number and the
+      - Row 2 (mixing) is PARTIAL: the genuine object M_c(G) is a REAL infimum and the
         question is whether it is rational; with no real-number / recolouring-dynamics
         layer we model the recolouring graph by single-vertex moves under [connect] and
-        state the existence of a RATIONAL attained mixing threshold (the cleanest
-        faithful core of "is M_c(G) always rational?").
+        state the existence of a RATIONAL greatest lower bound of the source's mixing
+        thresholds (re-encoded on 2026-10-25; see the row's Notes).
       - Row 9 quantifies over every real-closed field [R : rcfType] (the reals R are one
         instance); the vertices are nonzero 3-vectors with perpendicularity adjacency,
         the natural representative model of the lines-through-the-origin graph. *)
@@ -145,10 +145,13 @@ Definition fractional_hadwiger_statement : Prop :=
 
 (** ** Row 2 — Is the colouring-mixing threshold M_c(G) always rational? (OPEN; PARTIAL).
     The recolouring graph on the [(p,q)]-colourings (single-vertex moves); [circ_mixing]
-    says it is connected (all valid colourings reachable). M_c(G) is the INFIMUM p/q over
-    mixing pairs; the statement asserts this infimum is RATIONAL for every G — the
-    faithful core of the rationality question (NO attainment is required: [r] is modelled
-    as the greatest lower bound, not as an attained minimum). *)
+    says it is connected (all valid colourings reachable). Following the source, M_c(G)
+    is the INFIMUM of the thresholds [l] such that [G] is [(k,q)]-mixing for EVERY ratio
+    [k/q >= l] ([mixes_from]); the statement asserts that this infimum is RATIONAL for
+    every G (NO attainment is required: [r] is the greatest lower bound).  [mixing_pair]
+    and [is_colouring_mixing_threshold], the infimum of [p/q] over single mixing pairs used
+    by the statement until 2026-10-25, are kept unchanged: the fractional_chromatic
+    migration report pins the latter as a distinct variant. *)
 
 (** [pqb G p q c] is the decidable (boolean) reflection of the shared Prop-level
     [pq_colouring (fun x y => x -- y) p q (fun v => c v : nat)] (foundations): the
@@ -186,30 +189,56 @@ Definition is_colouring_mixing_threshold (G : sgraph) (r : rat) : Prop :=
   (forall s : rat,
      (forall p q : nat, mixing_pair G p q -> s <= p%:Q / q%:Q) -> s <= r).
 
+(** [G] is [(k,q)]-mixing in the source's sense: some [(k,q)]-colouring exists (the
+    source generates every colouring from a single one) and all of them are connected by
+    single-vertex recolourings. *)
+Definition circ_mixing_at (G : sgraph) (k q : nat) : Prop :=
+  (exists c : {ffun G -> 'I_k}, @pqb G k q c) /\ circ_mixing G k q.
+
+(** [l] is a mixing threshold of [G]: [l >= 2] (the convention stated in the row's Notes)
+    and [G] is [(k,q)]-mixing for every [q > 0] with [k/q >= l]. *)
+Definition mixes_from (G : sgraph) (l : rat) : Prop :=
+  2%:Q <= l /\
+  forall k q : nat, (0 < q)%N -> l <= k%:Q / q%:Q -> circ_mixing_at G k q.
+
+(** [r = M_c(G)]: the greatest lower bound of the thresholds [mixes_from G]. *)
+Definition is_circular_mixing_threshold (G : sgraph) (r : rat) : Prop :=
+  (forall l : rat, mixes_from G l -> r <= l) /\
+  (forall s : rat, (forall l : rat, mixes_from G l -> s <= l) -> s <= r).
+
 (** Corpus row: opg:mixing_circular_colourings_0
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/mixing_circular_colourings_0/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/mixing_circular_colourings_0.json
     English statement: (Open Problem Garden, "Mixing Circular Colourings")
-      For every finite graph G the circular mixing threshold M_c(G) is rational: there is a
-      rational r that is the greatest lower bound of the ratios p/q over all pairs (p,q) for
-      which the single-vertex recolouring graph on the (p,q)-colourings of G is connected.
+      For every finite graph G the circular mixing threshold
+      M_c(G) = inf { l : G is (k,q)-mixing whenever k/q >= l } is rational, where G is
+      (k,q)-mixing when all (k,q)-colourings of G can be generated from a single one by
+      recolouring one vertex at a time.
     Definitions: [pqb G p q c] - the boolean reflection of [pq_colouring] over {ffun G -> 'I_p}: on every
       edge the two colours differ by at least q and at most p - q in absolute value
       (D2chr.v); [recolour_adj G p q] - two valid (p,q)-colourings differing at exactly one
       vertex (D2chr.v); [circ_mixing G p q] - all valid (p,q)-colourings are connected under
-      [recolour_adj] (D2chr.v); [mixing_pair G p q] - q > 0, 2q <= p, at least one valid
-      (p,q)-colouring exists, and [circ_mixing] holds (D2chr.v);
-      [is_colouring_mixing_threshold G r] - r is a lower bound of the ratios p/q over mixing
-      pairs and the greatest such (D2chr.v); [pq_colouring] - foundations/circular_colouring.v.
-    Notes: this row is recorded as PARTIAL. The genuine object M_c(G) is a real number and the
-      question is whether it is rational; with no real-number or recolouring-dynamics layer,
-      the recolouring graph is modelled by single-vertex moves under [connect] and the
+      [recolour_adj] (D2chr.v); [circ_mixing_at G k q] - at least one valid (k,q)-colouring
+      exists and [circ_mixing G k q] holds (D2chr.v); [mixes_from G l] - 2 <= l and
+      [circ_mixing_at G k q] for every q > 0 with k/q >= l (D2chr.v);
+      [is_circular_mixing_threshold G r] - r is a lower bound of the thresholds
+      [mixes_from G] and the greatest such (D2chr.v); [pq_colouring] - foundations/circular_colouring.v.
+    Notes: this row is recorded as PARTIAL. The genuine object M_c(G) is a real infimum and
+      the question is whether it is rational; with no real-number or recolouring-dynamics
+      layer, the recolouring graph is modelled by single-vertex moves under [connect] and the
       statement asserts the existence of a RATIONAL greatest lower bound, with NO attainment
-      required. The guards q > 0 and 2q <= p together with the requirement that a valid
-      colouring exists block the spurious empty-palette pair p = 0, under which [pqb] holds
-      vacuously and would drag the infimum down to a meaningless 0. *)
+      required: the source remarks that K_2, with M_c(K_2) = 2, does not attain it.
+      As in the source's definition (OPG node 37907), a threshold l must make G mixing for
+      EVERY ratio k/q >= l, not for one pair: mixing is not monotone in k/q.
+      Convention: thresholds are taken >= 2 ([mixes_from]). For a graph with an edge this
+      changes nothing, since no ratio below 2 admits a colouring of an edge. For an edgeless
+      graph every ratio mixes, so the source's infimum is not a number; the convention gives
+      M_c = 2. The teeth are in grounding_D2chr.v.
+      Re-encoded on 2026-10-25 (PROGRAMME.md, A1). Until then the statement used
+      [is_colouring_mixing_threshold], the infimum of p/q over single mixing pairs, which is
+      kept unchanged above. *)
 Definition mixing_circular_colourings_0_statement : Prop :=
-  forall G : sgraph, exists r : rat, is_colouring_mixing_threshold G r.
+  forall G : sgraph, exists r : rat, is_circular_mixing_threshold G r.
 
 (** Corpus row: opg:list_chromatic_number_and_maximum_degree_of_bipartite_graphs
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/list_chromatic_number_and_maximum_degree_of_bipartite_graphs/
