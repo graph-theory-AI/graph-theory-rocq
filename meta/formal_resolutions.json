@@ -167,8 +167,8 @@
       "correspondence": {
         "explanation": "The row statement (U1.v) is the affirmative answer to the OPG question as printed: for every finite simple graph G with at least two vertices, ceil(floor(w(G)/2) / (|V(G)| - w(G))) < chi(G), where w(G) is the number of distinct vertex degrees, computed as the size of the duplicate-free list of the degrees #|N(x)| (degree 0 included); the inner halving and the outer ceil_div are exact nat floor and ceiling. The refutation instantiates G with the 37-vertex graph of the resolution write-up (coordination/sources/melnikovs_valency_variety_problem/output.md, section 1), encoded on I_37 with the edges of its six rules. Computation over an explicit list of the 37 vertices checks the write-up degree table (degrees 0, 1, ..., 29, so w = 30 and the bound is ceil(15/7) = 3) and a proper colouring by three classes (A, T, u1..u6, u10..u12 and z; B; C and u7..u9), so chi <= 3 by GTBase.colourings.proper_colouring_chi, and 3 < chi fails. Caveat: the graph has an isolated vertex z; the printed wording any graph G with at least two vertices admits it, as does the row body; the OPG status is unchanged. The write-up claim that 37 vertices is minimum is not formalized.",
         "implemented_by": "Marcol (Claude Opus 5.5, mathematics programme, 2026-10-25)",
-        "reviewed_by": "",
-        "reviewed_at": ""
+        "reviewed_by": "Lancelot (Melnikov review, 2026-10-25)",
+        "reviewed_at": "2026-10-25"
       }
     }
   ]
