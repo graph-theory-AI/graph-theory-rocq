@@ -409,9 +409,9 @@
    "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x45-digraph-clean1",
+   "commit": "x45-beta-loopless-reencoding",
    "package": "digraph-theory",
-   "note": "Authored in X45.v:majority_three_colouring_beta_statement. Encodes the majority-colouring row: a universal beta<1 allows every digraph to be 3-coloured with at most beta out-neighbours of each vertex sharing its colour."
+   "note": "Authored in X45.v:majority_three_colouring_beta_statement. Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): some beta = p/q < 1 such that every loopless digraph has a 3-colouring with at most beta * outdeg(v) out-neighbours of each vertex v sharing its colour (the body fixed beta = 1/2 and allowed loops). Original source-facing statement name preserved: majority_three_colouring_beta_statement."
   },
   "axv_1608_03040_03": {
    "statement": "done",
