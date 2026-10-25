@@ -2334,7 +2334,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "cycle_double_covers_containing_predefined_2_regular_statement->cycle_double_cover_statement:implies:conditional",
+   "rocq_edge": "cycle_double_covers_containing_predefined_2_regular_statement->cycle_double_cover_statement:implies:verified",
    "argument": "CDC reduces to bridgeless cubic graphs (stated in the target's OPG context), and a minimal cubic counterexample is 3-connected by the standard 2-cut reduction. By Tutte's theorem, a 3-connected graph has a non-separating induced circuit C. If C is Hamiltonian, the cubic graph is 3-edge-colorable (cubic graphs have even order, so the Hamiltonian cycle is even) and therefore has a CDC. Otherwise G−V(C) is connected and, since G is cubic and C induced, each vertex of C sends exactly one edge to G−V(C), so G−E(C) is connected; applying the source conjecture with S = C (a connected 2-regular subgraph of the 2-connected G) yields a CDC of G, contradicting minimality. Every step is a classical theorem; the chain is rigorous.",
    "citations": []
   },
