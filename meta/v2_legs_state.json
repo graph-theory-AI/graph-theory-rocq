@@ -1789,11 +1789,14 @@
    "audit_page": "todo"
   },
   "axv_1905_05312_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x230-prospective-pilot",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X230.v:books_versus_triangles_extremal_density_statement. Conlon-Fox-Sudakov Conjecture 1.1. n/6 <= b < n/4 cleared to n <= 6b and 4b < n (guarding n - 4b); book number at most b is x230_book_at_most (every edge has at most b common neighbours); the excluded graph is 'K_(n/2),(n - n/2) up to isomorphism; triangles are clique_count_size G 3. S_{b,n} is x230_prism_blowup b n G: a labelling by the 3-prism with parts b, b, s, b, b, t, the halves s, t of n - 4b on a matched pair (the only placement with the conjectured count)."
   },
   "axv_1905_10483_00": {
    "statement": "todo",
@@ -2945,18 +2948,24 @@
    "audit_page": "todo"
   },
   "axv_2108_00987_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x230-prospective-pilot",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X230.v:threshold_ramsey_multiplicity_odd_cycles_statement. Conlon-Fox-Sudakov-Wei Conjecture 4 (odd cycles). m(H) is x230_threshold_multiplicity: the least number of monochromatic copies of H (x230_mono_copies, copies = embeddings / automorphisms, not necessarily induced) over 2-colourings of K_{r(H)}, a colouring being a graph on r(H) vertices and its complement; r(H) is x230_ramsey_number. 'Sufficiently large odd k' is an existential threshold K; (k-1)!/2 is cleared to 2 m = (k-1)!."
   },
   "axv_2108_00991_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x230-prospective-pilot",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X230.v:threshold_ramsey_multiplicity_paths_statement. Conlon-Fox-Sudakov-Wei Conjecture 3 (paths). P_k is ordinal_path k, the path on k vertices (K_k holds k!/2 copies of it); m(H) as for arxiv:2108.00987#00. The values are cleared to 2 m = k! (k even) and 4 m = (k-1) (k-1)! (k odd), for all k beyond an existential threshold K."
   },
   "axv_2108_02685_00": {
    "statement": "done",
@@ -4573,11 +4582,14 @@
    "audit_page": "todo"
   },
   "axv_2311_01887_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x230-prospective-pilot",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X230.v:ramsey_numbers_of_arbitrary_growth_statement. Ahme-Scott Conjecture 10. n <= f(n) <= r(K_n) is read through x230_ramsey_number 'K_n R; eps ranges over positive rationals and the window (1 - eps) f(n) <= r(G_n) <= (1 + eps) f(n) is in rat, so nothing is truncated; the conclusion asserts that r(G_n) exists and lies in the window for all n beyond an existential N. The conjecture's text asks for arbitrary graphs G_n on n vertices."
   },
   "axv_2311_05066_00": {
    "statement": "todo",
