@@ -1668,6 +1668,33 @@ them.
   **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the body uses the local
   `x183_weighted_flexible_exact`, lists of size exactly `d+1`; the one-vertex graph with a list of
   `q+1` colours refutes the old body (`meta/probe_hints/degenerate_list_flexibility_d_plus_one_statement.v`).
+- `studies:std_dvo_k_norin_postle_flexibility_conjecture_planar` (`X132.v`, leg `done`) — the same
+  defect as X183, found by Marcol in the X183 review (r3_x132_false, evidence
+  `math-2026-10-25/x183-review-by-marcol`): `weighted_epsilon_flexible G k p q` for `k` = 5, 4 and 3
+  requires lists of size AT LEAST `k` while the request weight sums over all colours of each list.
+  The one-vertex graph is planar, and one list of `q+5` colours, each requested with weight 1, gives
+  total request `q+5` and satisfied weight 1, so the body is false
+  (`meta/probe_hints/dvorak_norin_postle_planar_list_flexibility_statement.v`). The 2026-07-15
+  readback had called the row faithful. Severity: **too strong** (provably false).
+  **REPAIRED 2026-10-25** (coordination/PROGRAMME.md A2; the row is frozen by the A15 triangle_free
+  family): `dvorak_norin_postle_planar_list_flexibility_statement` uses the local
+  `x132_weighted_flexible_exact`, lists of size exactly 5, 4 and 3, as in the source (Problem 1 of
+  Dvorak, Norin and Postle as quoted by arXiv:1902.02971 and arXiv:1902.04069: "assignment L of
+  lists of size (a) five in general, (b) four if G is triangle-free, (c) three if G has girth at
+  least five"). The body's three cases became
+  `x132_weighted_flexible_exact G 5 p q /\ (x132_triangle_free G -> x132_weighted_flexible_exact G 4 p q) /\ (girth_geq G 5 -> x132_weighted_flexible_exact G 3 p q)`.
+  This is a SOURCE REPAIR, not a migration equivalence:
+  - the A15 certificate keeps the frozen row and proves `frozen -> live` (direction "weaken"; same
+    p/q, since a list of size exactly k has size at least k); `X132Legacy_row_false` in
+    `chromatic-theory/theories/migration/triangle_free.v` proves the frozen row false;
+  - the `repair` entry of `meta/migration_reports/triangle_free.spec.json` binds the one exact text
+    replacement and the repaired doc block's hash, and names this entry as its record;
+  - no leg or manifest field changes (the leg stays `done`).
+  Logical relation: old -> new with the same p and q; the old body is false; the new body is open
+  (arXiv:1902.02971 proves case (b), arXiv:1902.04069 case (c) for girth at least 6).
+  `x132_weighted_flexible_exact` and X183's `x183_weighted_flexible_exact` share one body; the pair
+  is classified in `meta/library_helper_classification.json` as the candidate family
+  `list-flexibility-exact` (post-RC library wave; a GTBase home in `list_flexibility.v`).
 - `arxiv:1802.03727#00` (`X203.v`, leg `blocked`) — the universal quantifier over graphs includes
   the empty graph, which has minimum degree `d` vacuously and is separation `j`-choosable for every
   `j`. Severity: **too strong** (refutable).

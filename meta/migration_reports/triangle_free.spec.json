@@ -29,7 +29,8 @@
     "",
     "Frozen verbatim at f52251a: the three helpers, X192's chain x192_polytime_additive_chromatic_approx and the whole rows X132 dvorak_norin_postle_planar_list_flexibility_statement (one p/q with 0 < p <= q for the 5/4/3 list cases, girth_geq G 5 kept), X187 planar_triangle_free_request_graph_fraction_statement (disproved; planarity, disjoint degree-two positive-weight request sets, exact cross-multiplied fraction; empty request sets and zero totals stay possible) and X192 triangle_free_minor_closed_chromatic_additive_approx_statement (alpha before the class, excluded-minor witness only). X192's chain bridge reuses the same program and polynomial-cost proof in both directions and converts only the triangle-free domain conjunct; both decoded-output bounds are untouched and no extensionality is used. Complete rows: X187 (text at C5's baseline a6db537) over this family's frozen helper and C5's frozen proper 3-colouring; X192 (text at C11's baseline 6e1a1c4) over C11's frozen excluded-minor class and this family's frozen chain. Each complete bridge converts the A15 pieces and reuses the earlier certificate.",
     "",
-    "History: C5's X187Legacy row and C11's Legacy X192 row keep the live names byte-for-byte and are documented below; A15's per-row copies keep C5's live proper colouring and C11's live class and are documented reciprocally in those specs. Statement doc blocks are unchanged. The arbitrary-relation XE2 predicate and the three Digraph triangle variants stay distinct."
+    "History: C5's X187Legacy row and C11's Legacy X192 row keep the live names byte-for-byte and are documented below; A15's per-row copies keep C5's live proper colouring and C11's live class and are documented reciprocally in those specs. Statement doc blocks are unchanged. The arbitrary-relation XE2 predicate and the three Digraph triangle variants stay distinct.",
+    "Source repair (2026-10-25, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md, studies:std_dvo_k_norin_postle_flexibility_conjecture_planar entry), not a migration equivalence: the frozen X132Legacy row asks for lists of size AT LEAST 5, 4 and 3 and is false (X132Legacy_row_false in the certificate file: the planar one-vertex graph with one list of q+5 colours, each requested with weight 1). The live X132 row dvorak_norin_postle_planar_list_flexibility_statement asks for lists of size exactly 5, 4 and 3 through the local x132_weighted_flexible_exact, with its doc block rewritten; the repair's direction is weaken and its certificate is the one-way frozen -> live, with the same p/q. Legs and manifest fields are unchanged."
   ],
   "frozen": [
     {
@@ -76,7 +77,16 @@
         "x132_triangle_free": "Legacy.x132_triangle_free"
       },
       "certificate": "Chromatic.migration.triangle_free.dvorak_norin_postle_planar_list_flexibility_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "weighted_epsilon_flexible G 5 p q /\\ (x132_triangle_free G -> weighted_epsilon_flexible G 4 p q) /\\ (girth_geq G 5 -> weighted_epsilon_flexible G 3 p q)",
+          "x132_weighted_flexible_exact G 5 p q /\\ (x132_triangle_free G -> x132_weighted_flexible_exact G 4 p q) /\\ (girth_geq G 5 -> x132_weighted_flexible_exact G 3 p q)"
+        ],
+        "direction": "weaken",
+        "doc_block_sha256": "bd84079b79bafc5de0d2421e85738e00a6daa15dda8e3ea74e2e421641e954a3",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md"
+      }
     },
     {
       "kind": "statement",
