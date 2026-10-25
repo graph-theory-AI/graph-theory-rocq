@@ -1998,7 +1998,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "strong_5_cycle_double_cover_statement->m_n_cycle_covers_statement:implies:conditional",
+   "rocq_edge": "strong_5_cycle_double_cover_statement->m_n_cycle_covers_statement:implies:verified",
    "argument": "The source context states it strengthens the 5-cycle double cover conjecture, and the target's chart labels the (5,2) entry '5CDC conj', identifying the general (5,2)-cover conjecture with the 5-CDC conjecture. Chain: any nonempty bridgeless cubic graph has a circuit C; strong 5-CDC applied to C gives a 5-CDC of that graph. The general bridgeless case reduces to cubic by Fleischner's splitting lemma (expand vertices of degree >=4 preserving bridgelessness); restricting each of the 5 even subgraphs of the cubic expansion to E(G) is even at every original vertex (parity argument across the gadget) and covers each original edge exactly twice, yielding a (5,2)-cycle-cover of G. This is the standard reduction of 5-CDC to cubic graphs. Direction as claimed.",
    "citations": [
     "http://www.openproblemgarden.org/op/strong_5_cycle_double_cover_conjecture",
@@ -2025,7 +2025,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "strong_5_cycle_double_cover_statement->cycle_double_cover_statement:implies:conditional",
+   "rocq_edge": "strong_5_cycle_double_cover_statement->cycle_double_cover_statement:implies:verified",
    "argument": "Strong 5-CDC applied to any circuit of a bridgeless cubic graph yields a 5-cycle double cover, hence a CDC, of every bridgeless cubic graph (every such nonempty graph contains a circuit). The CDC conjecture for general bridgeless graphs reduces to cubic graphs via vertex splitting, as stated explicitly in the target's OPG context ('problem may be reduced to cubic graphs'). Decomposing the five even subgraphs into edge-disjoint circuits gives the required list of cycles covering each edge exactly twice. Direction as claimed (source is a double strengthening of CDC, per its own context).",
    "citations": [
     "http://www.openproblemgarden.org/op/strong_5_cycle_double_cover_conjecture",
@@ -2130,7 +2130,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "petersen_coloring_statement->m_n_cycle_covers_statement:implies:conditional",
+   "rocq_edge": "petersen_coloring_statement->m_n_cycle_covers_statement:implies:verified",
    "argument": "The target, 'every bridgeless graph has a (5,2)-cycle-cover', is exactly the five cycle double cover conjecture (the OPG (m,n) chart labels the (5,2) entry '5CDC conj'). The source's equivalent reformulation (2), stated in its context, is that every bridgeless graph admits a cycle-continuous map f to the Petersen graph P. P has a double cover by 5 even subgraphs; the preimage of each is an even subgraph of G (cycle-continuity), and each edge e of G is covered exactly as many times as f(e), namely twice, yielding a (5,2)-cycle-cover of G. The OPG source page states explicitly that Petersen coloring implies the five cycle double cover conjecture. Hypothesis classes match (all bridgeless graphs via reformulation (2)).",
    "citations": [
     "http://www.openproblemgarden.org/op/petersen_coloring_conjecture",
@@ -2157,7 +2157,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "petersen_coloring_statement->cycle_double_cover_statement:implies:conditional",
+   "rocq_edge": "petersen_coloring_statement->cycle_double_cover_statement:implies:verified",
    "argument": "Via reformulation (2) of the Petersen coloring conjecture (every bridgeless graph has a cycle-continuous map to the Petersen graph P), pulling back a double cover of P by 5 even subgraphs gives 5 even subgraphs of G covering each edge exactly twice — a (5,2)-cycle cover, hence in particular a cycle double cover. The hypothesis class (all bridgeless graphs) matches CDC exactly. This is Jaeger's classical implication; the CDC target page lists the five cycle double cover conjecture (implied by Petersen coloring per the source's OPG context) among its strengthenings.",
    "citations": [
     "http://www.openproblemgarden.org/op/petersen_coloring_conjecture",
@@ -4833,7 +4833,7 @@
     "to": "opg:m_n_cycle_covers"
    },
    "both_formalized": true,
-   "rocq_edge": "strong_5_cycle_double_cover_statement->m_n_cycle_covers_statement:implies:conditional",
+   "rocq_edge": "strong_5_cycle_double_cover_statement->m_n_cycle_covers_statement:implies:verified",
    "argument": "Direction: the strong form implies the plain form. Every bridgeless cubic graph contains a circuit, so the strong 5-CDC conjecture yields a double cover of every bridgeless cubic graph by five 2-regular subgraphs. In a cubic graph these are exactly the nonempty even subgraphs. The general 5-CDC conjecture reduces to bridgeless cubic graphs by the standard steps: suppress degree-2 vertices, split higher-degree vertices while keeping 2-edge-connectivity (Fleischner's splitting lemma), and pull the even-subgraph covers back. The target's context states explicitly that it strengthens the 5-cycle double cover conjecture.",
    "citations": []
   },
@@ -4881,7 +4881,7 @@
     "to": "opg:m_n_cycle_covers"
    },
    "both_formalized": true,
-   "rocq_edge": "petersen_coloring_statement->m_n_cycle_covers_statement:implies:conditional",
+   "rocq_edge": "petersen_coloring_statement->m_n_cycle_covers_statement:implies:verified",
    "argument": "Direction: the Petersen coloring conjecture implies 5-CDC. The target node's own context says so explicitly ('would imply both Berge–Fulkerson and the five cycle double cover conjecture'). Proof sketch: the Petersen graph P has a double cover by five even subgraphs. A Petersen coloring (a cycle-continuous map G -> P) pulls each of these back to an even subgraph of G, and each edge of G still lies in exactly two of them. This proves 5-CDC for bridgeless cubic graphs, and the standard reduction extends it to all bridgeless graphs. The equivalent form stated in the context, a cycle-continuous map from every bridgeless graph, covers general graphs directly.",
    "citations": []
   },
