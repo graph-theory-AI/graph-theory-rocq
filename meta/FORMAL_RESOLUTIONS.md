@@ -5,18 +5,33 @@ upstream conjecture catalog. Its source statuses, manifests, snapshots and
 statement-formalization legs remain unchanged. A source row can therefore still
 say `open` or `partial` while this registry records a checked proof or disproof.
 
-Run the proof checks with a compatible installed Rocq/opam switch:
+The registry holds seven entries:
+
+| Record key | Direction | Result (section below) |
+|---|---|---|
+| `1611.03196__03` | prove | Fair representation by matchings (X15) |
+| `1812.02420__03` | disprove | Directed Kneser nonexistence |
+| `2103.15175__00` | prove | List Ramsey numbers |
+| `2209.09107__00` | disprove | Alon–Tarsi orientation counterexample |
+| `2310.04265__09` | disprove | Question 5.9 |
+| `2408.02400__00` | prove | Chromatic and cochromatic gap |
+| `2512.10438__00` | prove | Color-avoiding tournament paths |
+
+Run the proof checks in the repository's pinned Rocq 9.2 toolchain (the image of
+the guarded wrapper, where `rocq` is on `PATH`):
 
 ```sh
-ROCQ_OPAM_SWITCH=rocq-tools make resolutions
-ROCQ_OPAM_SWITCH=rocq-tools python3 meta/test_formal_resolutions.py
+make resolutions                                  # python3 meta/formal_resolutions.py
+python3 meta/test_formal_resolutions.py
+python3 meta/formal_resolutions.py --record 1611.03196__03
+python3 meta/formal_resolutions.py --package digraph-theory --metadata-only
 ```
 
-On the development machine, `rocq-tools` provides Rocq 9.1.1 built with OCaml
-5.3.0, matching the existing graph library objects. The historical `digraph`
-switch also provides Rocq 9.1.1 but was built with OCaml 5.2.1, so it cannot read
-those objects. `ROCQ_OPAM_SWITCH` accepts either a switch name or an absolute
-switch directory. With no override, the existing historical default is retained.
+`--record KEY` (repeatable) and `--package PACKAGE` restrict either mode to those
+entries; an unknown key, or a selection that matches no entry, fails. Outside the
+image, `ROCQ_OPAM_SWITCH` selects an opam switch by name or absolute directory: it
+must be the Rocq and OCaml build that produced the existing objects, since the Rocq
+version alone does not identify compatible objects.
 
 The checker builds the registered statement/proof targets with the package's
 generated Makefile, then recompiles the actual registered source files and a
@@ -27,13 +42,27 @@ proofs were not checked.
 
 ## What an entry establishes
 
-Each entry copies the source row identity, text, locator and source hash from the
+Each v2 entry copies the source row identity, text, locator and source hash from the
 pinned corpus manifest. It names a statement file and a fully qualified
 proposition, the statement declaration's SHA-256 digest, a proof file and a fully
 qualified theorem, and the direction `prove` or `disprove`. Both source files
 must be listed in their package's `_CoqProject`, and the qualified names must
 match the files' load-path mappings. Existing formalized rows must use their
 original statement location and formal name.
+
+An OPG entry (`"corpus": "opg"`) is keyed `opg:<slug>` and copies the identity of
+that row of the pinned `opg_corpus_manifest.json`: `node_id`, `canonical_url`, the
+two upstream commits `source_commit_repo` and `source_commit_problems_json`,
+`source_text` and `selected_proposition`. OPG rows carry no source hash, and the
+checker does not invent one. The statement must be the row's `formal_name`, in the
+row's package. Its `statement_file` must be the one project-listed file of that
+package that defines the name at top level:
+- definitions inside a `Module`, such as the frozen copies in migration
+  certificates, do not count;
+- a `Section` leaves its definitions public, so they do count;
+- a second top-level definition makes the row ambiguous and is rejected.
+
+Every entry carries exactly the fields of its corpus.
 
 The checker compiles either `Check (theorem : statement)` or
 `Check (theorem : ~ statement)`, and requires `Print Assumptions` for **both**
@@ -185,6 +214,31 @@ expanding three vertices and considering its six possible directed nonloop arcs;
 it uses ordinary Boolean case analysis. This refutes the printed inequality;
 no floored variant is claimed.
 
+## Fair representation by matchings
+
+For source record `1611.03196__03`,
+`Packing.foundations.fair_matching.bipartite_matching_underrepresentation` has
+exactly the existing
+`Packing.conjectures.X15.bipartite_matching_underrepresentation_statement` type
+(arXiv:1611.03196, Conjecture 1.15). For every `m` there is a constant `c(m)` with
+the following property. Let `G` be a bipartite graph with at least one edge and
+`E_1, ..., E_m` any sets of its edges. Then `G` has a matching `S` with
+`floor(|E(G)|/Delta(G)) <= |S| + c(m)` and `|S ∩ E_i| <= ceil(|E_i|/Delta(G))`
+for every `i`.
+
+The proof gives `c(m) = 12m + 14` in this floor form. In the source's form
+`|S| >= |E(G)|/Delta(G) - c(m)` the constant is `12m + 15`; the existence statement
+is the same.
+- König's line colouring splits `E(G)` into `Delta(G)` matchings.
+- Synchronized rounds of halvings mix those matchings. Each round is a single
+  application of Alon's splitting necklace theorem at `q = 2` (formalized in
+  `classical-lemmas`) to the concatenated necklaces of one level of the mixing tree.
+- Parity is repaired by removing the first bead of each odd type.
+
+The construction, its deviations from the attack write-up and the constant are
+described in `packing-theory/docs/X15_FAIR_MATCHING_REPORT.md`. The correspondence
+was reviewed independently on 2026-10-23.
+
 ## Regression tests
 
 The test suite uses isolated synthetic packages and real Rocq compilation. Its
@@ -194,3 +248,14 @@ statement substitution, command/path injection, duplicate entries, missing build
 entries and lack of a distinct correspondence reviewer. A further compiler probe
 checks that registering one proof does not exempt a second, unregistered proof
 of the same statement.
+
+The OPG tests compile one synthetic OPG resolution and reject:
+- each changed identity field, and a malformed or unknown `opg:<slug>` key;
+- duplicate rows, a row without `formal_name`, another package or name;
+- fields of the wrong corpus.
+
+For the statement file, frozen `Module` copies, comments, strings and unlisted
+files are ignored. A second top-level definition, including one in a `Section` or a
+`Local` one, is ambiguous, and malformed scopes fail closed. The selection tests
+cover `--record` and `--package` in both modes. One compiled run checks and reports
+only the selected entry.

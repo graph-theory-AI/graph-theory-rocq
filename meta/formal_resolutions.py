@@ -6,6 +6,13 @@ an exact proof (or refutation). Rocq recompiles both source files, checks the ex
 type, and reports the transitive assumptions of both constants. This cannot
 verify that mathematical prose and its formal encoding mean the same thing;
 the explicit correspondence review remains a separate obligation.
+
+A v2 entry names its source row by row_id and copies the row's pinned hash,
+text and locator. An OPG entry is keyed opg:<slug> and copies the pinned OPG
+manifest row's identity (node id, URL, both upstream commits, text and selected
+proposition); its statement is the row's formal_name, defined at top level (outside
+every Module) in exactly one file of the owning package. --record and --package
+restrict a run to part of the registry; a selection that matches nothing fails.
 """
 from __future__ import annotations
 
@@ -21,11 +28,27 @@ import sys
 import tempfile
 
 import gate_contracts as CONTRACTS
+import library_inventory as INV
 import rocq_toolchain as ROCQ
 
 ROOT = Path(__file__).resolve().parent.parent
 QUALIFIED = re.compile(r"[A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)+")
 SHA256 = re.compile(r"[0-9a-f]{64}")
+COMMON_FIELDS = {
+    "record_key", "corpus", "package", "statement", "statement_file",
+    "statement_sha256", "theorem", "theorem_file", "direction", "correspondence",
+}
+# Fields copied verbatim from the pinned manifest row; the v2 record_key is copied too.
+SOURCE_IDENTITY = {
+    "v2": ("record_key", "source_hash", "source_text", "source_locator"),
+    "opg": ("node_id", "canonical_url", "source_commit_repo",
+            "source_commit_problems_json", "source_text", "selected_proposition"),
+}
+ENTRY_FIELDS = {
+    "v2": COMMON_FIELDS | {"row_id", *SOURCE_IDENTITY["v2"]},
+    "opg": COMMON_FIELDS | set(SOURCE_IDENTITY["opg"]),
+}
+OPG_KEY = re.compile(r"opg:([a-z0-9_]+)")
 
 
 class ResolutionError(ValueError):
@@ -123,17 +146,44 @@ def registry_entries(root: Path) -> list[dict]:
     return entries
 
 
+def top_level_definitions(source: str, what: str) -> set[str]:
+    """Definition/Let names of a source outside every Module.
+
+    A Section leaves its definitions public under the file's module, so they
+    count; a Module (such as a migration certificate's frozen Legacy copy) does
+    not. Comments and strings are masked; unsupported scope structure fails.
+    """
+    try:
+        masked = INV.scope_mask(source, what)
+        modules = [o for o in INV.scope_openers(masked) if o["kind"] == "Module"]
+    except ValueError as exc:
+        raise ResolutionError(f"{what}: unsupported Module/Section structure: {exc}") from None
+    return {match.group(1) for match in CONTRACTS.DEFINITION_DECL_RE.finditer(masked)
+            if not any(o["body_start"] <= match.start(1) < o["close_start"] for o in modules)}
+
+
+def statement_location(root: Path, listed: set[str], name: str) -> str:
+    """The one project file of a package that defines `name` at top level."""
+    owners = []
+    for relative in sorted(listed):
+        source = local_file(root, relative).read_text()
+        # The substring test only skips files that cannot define the name.
+        if name in source and name in top_level_definitions(source, relative):
+            owners.append(relative)
+    if len(owners) != 1:
+        raise ResolutionError(f"formal_name {name} needs exactly one top-level definition "
+                              f"in its package, found {owners or 'none'}")
+    return owners[0]
+
+
 def validate_entry(root: Path, entry: dict) -> tuple[list[str], list[Path]]:
-    required = {
-        "record_key", "corpus", "row_id", "source_hash", "source_text",
-        "source_locator", "package", "statement", "statement_file",
-        "statement_sha256", "theorem", "theorem_file", "direction",
-        "correspondence",
-    }
-    if missing := required - entry.keys():
-        raise ResolutionError(f"missing fields: {sorted(missing)}")
-    if entry["corpus"] not in ("v2", "opg"):
+    corpus = entry.get("corpus")
+    if not isinstance(corpus, str) or corpus not in ENTRY_FIELDS:
         raise ResolutionError("corpus must be v2 or opg")
+    if missing := ENTRY_FIELDS[corpus] - entry.keys():
+        raise ResolutionError(f"missing fields: {sorted(missing)}")
+    if extra := entry.keys() - ENTRY_FIELDS[corpus]:
+        raise ResolutionError(f"fields not used by {corpus} entries: {sorted(extra)}")
     if entry["direction"] not in ("prove", "disprove"):
         raise ResolutionError("direction must be prove or disprove")
     for field in ("statement", "theorem"):
@@ -141,25 +191,39 @@ def validate_entry(root: Path, entry: dict) -> tuple[list[str], list[Path]]:
             raise ResolutionError(f"{field} must be a fully qualified Rocq constant")
     if entry["statement"] == entry["theorem"]:
         raise ResolutionError("statement and theorem must be distinct constants")
-    for field in ("source_hash", "statement_sha256"):
+    for field in ("source_hash", "statement_sha256") if corpus == "v2" else ("statement_sha256",):
         if not isinstance(entry[field], str) or not SHA256.fullmatch(entry[field]):
             raise ResolutionError(f"{field} must be a SHA-256 hexadecimal digest")
     package = entry["package"]
     if not isinstance(package, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", package):
         raise ResolutionError("invalid package")
-    manifest = read_json(root / "meta" / f"{entry['corpus']}_corpus_manifest.json")
-    matches = [row for row in manifest["rows"] if row.get("row_id") == entry["row_id"]]
+    manifest = read_json(root / "meta" / f"{corpus}_corpus_manifest.json")
+    if corpus == "opg":
+        key = OPG_KEY.fullmatch(entry["record_key"]) if isinstance(entry["record_key"], str) else None
+        if key is None:
+            raise ResolutionError("an OPG record_key must be opg:<slug>")
+        source = f"OPG slug {key.group(1)}"
+        matches = [row for row in manifest["rows"] if row.get("slug") == key.group(1)]
+    else:
+        source = entry["row_id"]
+        matches = [row for row in manifest["rows"] if row.get("row_id") == entry["row_id"]]
     if len(matches) != 1:
-        raise ResolutionError(f"source row must occur exactly once: {entry['row_id']}")
+        raise ResolutionError(f"source row must occur exactly once: {source}")
     row = matches[0]
-    for field in ("record_key", "source_hash", "source_text", "source_locator"):
+    for field in SOURCE_IDENTITY[corpus]:
         if entry[field] != row.get(field):
             raise ResolutionError(f"{field} differs from the pinned source row")
     if row.get("repo") != package:
         raise ResolutionError("package differs from source row ownership")
+    if corpus == "opg" and not row.get("formal_name"):
+        raise ResolutionError("an OPG resolution needs the source row's formal_name")
     if row.get("formal_name") and entry["statement"].rsplit(".", 1)[1] != row["formal_name"]:
         raise ResolutionError("statement differs from the corpus formal_name")
-    if row.get("formal_name"):
+    flags, listed = project(root, package)
+    if corpus == "opg":
+        if entry["statement_file"] != statement_location(root, listed, row["formal_name"]):
+            raise ResolutionError("statement_file differs from the corpus statement location")
+    elif row.get("formal_name"):
         locator = re.search(r"\| Rocq: ([^#\s]+)#([A-Za-z0-9_']+)", row["source_locator"])
         if locator:
             expected_file = locator.group(1)
@@ -179,7 +243,6 @@ def validate_entry(root: Path, entry: dict) -> tuple[list[str], list[Path]]:
         raise ResolutionError("correspondence reviewer must differ from implementer")
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", review["reviewed_at"]):
         raise ResolutionError("correspondence reviewed_at must use YYYY-MM-DD")
-    flags, listed = project(root, package)
     paths: list[Path] = []
     for role, pattern in (("statement", CONTRACTS.DEFINITION_DECL_RE),
                           ("theorem", CONTRACTS.PROOF_DECL_RE)):
@@ -270,15 +333,25 @@ def verify_entry(root: Path, entry: dict, *, build: bool = True) -> VerifiedReso
     return VerifiedResolution(entry["record_key"], statement, theorem, entry["direction"], output)
 
 
+def selected_entries(root: Path, *, package: str | None = None,
+                     record_keys: set[str] | None = None) -> list[dict]:
+    """Registry entries of `package` and/or named by `record_keys` (None: no restriction)."""
+    entries = registry_entries(root)
+    if record_keys is not None and (
+            unknown := sorted(record_keys - {entry["record_key"] for entry in entries})):
+        raise ResolutionError(f"unknown record_key: {', '.join(unknown)}")
+    return [entry for entry in entries
+            if (package is None or entry.get("package") == package)
+            and (record_keys is None or entry["record_key"] in record_keys)]
+
+
 def verify_resolutions(root: Path = ROOT, *, package: str | None = None,
                        statement_names: set[str] | None = None,
+                       record_keys: set[str] | None = None,
                        build: bool = True) -> list[VerifiedResolution]:
-    entries = registry_entries(root)
     verified: list[VerifiedResolution] = []
-    for entry in entries:
-        if (package is None or entry.get("package") == package) and (
-            statement_names is None or entry.get("statement") in statement_names
-        ):
+    for entry in selected_entries(root, package=package, record_keys=record_keys):
+        if statement_names is None or entry.get("statement") in statement_names:
             try:
                 verified.append(verify_entry(root, entry, build=build))
             except ResolutionError as exc:
@@ -286,24 +359,31 @@ def verify_resolutions(root: Path = ROOT, *, package: str | None = None,
     return verified
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--metadata-only", action="store_true",
                         help="validate registry metadata only; never grants a faithfulness exemption")
     parser.add_argument("--report", type=Path, help="write the successful compiler assumptions output")
-    args = parser.parse_args()
+    parser.add_argument("--package", help="check only the entries of this package")
+    parser.add_argument("--record", action="append", metavar="KEY",
+                        help="check only this record_key (repeatable)")
+    args = parser.parse_args(argv)
+    records = None if args.record is None else set(args.record)
+    scope = "" if args.package is None and records is None else "; selected entries only"
     try:
+        selection = selected_entries(args.root, package=args.package, record_keys=records)
+        if scope and not selection:
+            raise ResolutionError("the --package / --record selection matches no registry entry")
         if args.metadata_only:
-            entries = registry_entries(args.root)
-            for entry in entries:
+            for entry in selection:
                 validate_entry(args.root, entry)
-            print(f"formal resolution metadata OK ({len(entries)} entries; proofs not checked)")
+            print(f"formal resolution metadata OK ({len(selection)} entries; proofs not checked{scope})")
         else:
-            entries = verify_resolutions(args.root)
+            entries = verify_resolutions(args.root, package=args.package, record_keys=records)
             for entry in entries:
                 print(f"OK {entry.record_key}: {entry.direction} {entry.statement}")
-            print(f"formal resolutions OK ({len(entries)} exact, assumption-free proofs)")
+            print(f"formal resolutions OK ({len(entries)} exact, assumption-free proofs{scope})")
             if args.report:
                 args.report.write_text("\n".join(
                     f"{entry.record_key}\n{entry.assumptions}" for entry in entries))
