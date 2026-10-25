@@ -691,14 +691,14 @@
    "audit_page": "todo"
   },
   "axv_1701_03366_00": {
-   "statement": "partial",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x171-x190-batch1",
+   "commit": "x184-antisymmetry-reencoding",
    "package": "cycle-theory",
-   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the defining ANTISYMMETRY property is entirely absent, so the row does not encode the conjecture's object. `x184_z5_antisymmetric_flow` (X184.v:20-25) is exactly two conjuncts — nowhere-zero (`phi e != ord0`) plus mod-5 conservation — i.e. a plain nowhere-zero Z5-flow, mislabeled \"antisymmetric.\" A Nešetřil–Raspaud antisymmetric flow additionally requires the used-value set B to satisfy B ∩ (−B) = ∅ (no Authored in X184.v:z5_antisymmetric_flow_edge_connectivity_statement."
+   "note": "Authored in X184.v:z5_antisymmetric_flow_edge_connectivity_statement. Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): the antisymmetry condition of a Z5-antisymmetric flow is now part of x184_z5_antisymmetric_flow (it was absent, faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: z5_antisymmetric_flow_edge_connectivity_statement."
   },
   "axv_1701_05597_00": {
    "statement": "blocked",
