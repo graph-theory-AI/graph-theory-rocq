@@ -5497,15 +5497,15 @@
         },
         "x230_mono_copies": {
           "classification": "paper_specific",
-          "reason": "Monochromatic copies of H in the 2-colouring of K_{|G|} given by G and its complement, as counted by m(H) in arXiv:2108.00987 and 2108.00991."
+          "reason": "Monochromatic copies of H in the 2-colouring of K_{|G|} given by G and its complement, as counted by m(H) in arXiv:2108.00987 and 2108.00991; its name group with D2ram.mono_copies (colour-respecting maps) is classified paper_specific."
         },
         "x230_arrows": {
           "classification": "paper_specific",
-          "reason": "R -> H: every 2-colouring of K_R has a monochromatic H, via has_subgraph and compl; the extremal migration copies (XE1Legacy.graph_ramsey) are frozen legacy bodies."
+          "reason": "R -> H: every 2-colouring of K_R has a monochromatic H, via has_subgraph and compl; a member of the classified arrows name group (candidate family ramsey-arrows, with X195 and X215)."
         },
         "x230_ramsey_number": {
           "classification": "paper_specific",
-          "reason": "The two-colour graph Ramsey number r(H) as the least arrowing R, needed by m(H) and by Conjecture 10 of arXiv:2311.01887."
+          "reason": "The two-colour graph Ramsey number r(H) as the least arrowing R, needed by m(H) and by Conjecture 10 of arXiv:2311.01887. Registered in library_primitives/ramsey-number.json as a deferred graph-arrow class (like X195 and X215): the canonical hg_ramsey_number lives in hypergraph-theory."
         },
         "x230_threshold_multiplicity": {
           "classification": "paper_specific",
