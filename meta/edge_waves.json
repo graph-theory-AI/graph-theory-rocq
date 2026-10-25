@@ -810,14 +810,14 @@
    "tier": "T4",
    "wave": "M",
    "host": "chromatic-theory",
-   "state": "refuted-direction",
-   "proof": null,
+   "state": "verified",
+   "proof": "goldbergs_implies_seymours_r_graph",
    "external": [],
-   "reason": "demoted from verified: Goldberg gives chi' <= r+1, not chi' = r; the real link is Chen-Jing-Zang 2019; report upstream",
-   "proved_by": null,
-   "reviewed_by": null,
-   "reviewed_at": null,
-   "note": "REFUTED-DIRECTION (metadata wave M, 2026-09-24): Goldberg gives chi' <= r+1, not chi' = r; corpus e001 claims the wrong direction (reported upstream, meta/CORPUS_FEEDBACK.md). Earlier note: Goldberg bound gives chi'<=r+1, not the chi'=r faithful Seymour requires; deep relationship (Chen-Jing-Zang 2019), not an elementary Qed"
+   "reason": "",
+   "proved_by": "Marcol (mathematics programme, 2026-10-25): the Seymour body restored to the source's chi' <= r+1 (PROGRAMME A1); the proof combines mDelta_le and overfull_le of wave M",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "On an r-graph both Goldberg terms are at most r+1 (mDelta_le: every vertex has exactly r incident edges; overfull_le: the loopless handshake plus the odd-cut condition give |E(S)| <= r * floor(|S|/2)), so Goldberg's bound gives chi' <= r+1, Seymour's r-graph conjecture in the source's form (body restored 2026-10-25, PROGRAMME A1). Earlier (metadata wave M, 2026-09-24): refuted-direction against the chi' <= r body."
   },
   "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement->triangle_free_induced_tree_chi_bounded_statement:implies": {
    "gc": "e229",
