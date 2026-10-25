@@ -59,3 +59,11 @@ Definition sparse_linear_pure_pair_statement : Prop :=
         x41_pure_pair A B /\
         eps_den ^ eps_den * #|A| ^ eps_den >= eps_num ^ eps_den * #|G| ^ eps_num /\
         eps_den * #|B| >= eps_num * #|G|.
+
+(* Correction (2026-10-26, Marc's decision), kept outside the frozen doc block above: the
+   DISCREPANCY note is withdrawn. arXiv:1810.00058 Conjecture 1.3 asks for a pure (eps|G|^eps,
+   eps|G|)-pair, which is this body; the corpus statement_text lost the exponent in PDF extraction.
+   Both sides linear holds only when H and its complement are forests (the paper, section 1), so it
+   fails for H = K_3. The polynomial A side is the 2026-07-11 audit fix
+   (meta/X10-X110_faithfulness_audit.md). See meta/STATEMENT_IMPROVEMENTS.md and
+   meta/CORPUS_FEEDBACK.md item 13. *)
