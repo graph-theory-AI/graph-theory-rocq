@@ -1,6 +1,6 @@
 # Checked graph-theory resolutions
 
-Seven source records now have exact, assumption-free Rocq proofs in this repository. Six are new formalizations; Question 5.9 reuses an existing construction through a new statement bridge.
+Eight source records now have exact, assumption-free Rocq proofs or refutations in this repository. Seven are new formalizations; Question 5.9 reuses an existing construction through a new statement bridge.
 
 | Source record | Checked result | Final module |
 |---|---|---|
@@ -11,8 +11,9 @@ Seven source records now have exact, assumption-free Rocq proofs in this reposit
 | `1812.02420__03` | No directed Kneser graph at `(k,b)=(5,3)`, refuting the universal existence statement | [directed_kneser_nonexistence.v](../../digraph-theory/theories/applications/directed_kneser_nonexistence.v) |
 | `2209.09107__00` | The triangle refutes printed Alon–Tarsi Question 6.1 with its unfloored degree bound | [alon_tarsi_triangle.v](../../chromatic-theory/theories/applications/alon_tarsi_triangle.v) |
 | `1611.03196__03` | Conjecture 1.15: every bipartite `G` with `Delta(G)>0` and any `m` edge sets `E_i` admit a matching `S` with `floor(#E(G)/Delta(G)) <= #S + c(m)` meeting each `E_i` in at most `ceil(#E_i/Delta(G))` edges, with `c(m) = 12m + 14` in this formal floor form, giving `12m + 15` in the paper's form `#S >= #E(G)/Delta(G) - c(m)` | [fair_matching.v](../../packing-theory/theories/foundations/fair_matching.v) |
+| `opg:melnikovs_valency_variety_problem` | A 37-vertex graph with degrees `0..29` is properly 3-colourable, answering the printed question negatively (it has an isolated vertex, which the statement admits) | [melnikov_valency_variety.v](../../chromatic-theory/theories/applications/melnikov_valency_variety.v) |
 
-The last entry, added on 2026-09-16 and sharpened on 2026-09-18 and
+The `1611.03196__03` entry, added on 2026-09-16 and sharpened on 2026-09-18 and
 2026-09-19, is proved
 through Alon's Splitting Necklace Theorem: König line colouring turns `E(G)` into
 `Delta(G)` matchings whose statistic vectors average to the target, and two
@@ -86,7 +87,7 @@ ROCQ_OPAM_SWITCH=rocq-tools python3 meta/formal_resolutions.py \
 
 The development environment used Rocq 9.1.1, OCaml 5.3.0 and the installed MathComp/GraphTheory libraries in `rocq-tools`. The live checker builds the required local dependencies and rejects nonclosed assumptions and mismatched statements. It preserves historical source statuses.
 
-Read the [first-round development journal](JOURNAL.md) and [second-round journal](ROUND2_JOURNAL.md) for the proof attempts, MCP workflow, certificate optimizations and integration decisions. The [assumptions transcript](ASSUMPTIONS.txt) records the successful seven-entry check (regenerated on 2026-10-25 in the Rocq 9.2 image). The [registry documentation](../FORMAL_RESOLUTIONS.md) explains source correspondence and the validation contract.
+Read the [first-round development journal](JOURNAL.md) and [second-round journal](ROUND2_JOURNAL.md) for the proof attempts, MCP workflow, certificate optimizations and integration decisions. The [assumptions transcript](ASSUMPTIONS.txt) records the successful eight-entry check (regenerated on 2026-10-25 in the Rocq 9.2 image; the Melnikov entry added the same day). The [registry documentation](../FORMAL_RESOLUTIONS.md) explains source correspondence and the validation contract.
 
 Validation on 2026-09-19, after sharpening the ledger of a single round
 (`c(m)` from `16m+24` down to `12m+14` in the formal floor form, or `12m+15`

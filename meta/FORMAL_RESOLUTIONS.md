@@ -5,7 +5,7 @@ upstream conjecture catalog. Its source statuses, manifests, snapshots and
 statement-formalization legs remain unchanged. A source row can therefore still
 say `open` or `partial` while this registry records a checked proof or disproof.
 
-The registry holds seven entries:
+The registry holds eight entries:
 
 | Record key | Direction | Result (section below) |
 |---|---|---|
@@ -16,6 +16,7 @@ The registry holds seven entries:
 | `2310.04265__09` | disprove | Question 5.9 |
 | `2408.02400__00` | prove | Chromatic and cochromatic gap |
 | `2512.10438__00` | prove | Color-avoiding tournament paths |
+| `opg:melnikovs_valency_variety_problem` | disprove | Melnikov's valency-variety problem |
 
 Run the proof checks in the repository's pinned Rocq 9.2 toolchain (the image of
 the guarded wrapper, where `rocq` is on `PATH`):
@@ -241,6 +242,28 @@ is the same.
 The construction, its deviations from the attack write-up and the constant are
 described in `packing-theory/docs/X15_FAIR_MATCHING_REPORT.md`. The correspondence
 was reviewed independently on 2026-10-23.
+
+## Melnikov's valency-variety problem
+
+For the OPG row `opg:melnikovs_valency_variety_problem`,
+`Chromatic.applications.melnikov_valency_variety.melnikovs_valency_variety_disproved`
+refutes `Chromatic.conjectures.U1.melnikovs_valency_variety_statement`, the
+affirmative answer to the problem as printed: every graph `G` with at least two
+vertices has chromatic number greater than `ceil(floor(w(G)/2) / (|V(G)| - w(G)))`,
+where the valency-variety `w(G)` counts the distinct vertex degrees, degree 0
+included.
+
+The 37-vertex graph of the resolution write-up has the degrees `0, 1, ..., 29`, so
+`w(G) = 30` and the bound is `ceil(15/7) = 3`, and a proper 3-colouring, so its
+chromatic number is at most 3 (a triangle makes it exactly 3). The proof checks the
+write-up's degree table and the colouring by computation over an explicit list of
+the 37 vertices, and bounds the chromatic number with
+`GTBase.colourings.proper_colouring_chi`.
+
+Caveat: the graph has an isolated vertex. The printed "any graph G with at least two
+vertices" admits it, and so does the row's body; whether the problem was meant for
+graphs without isolated vertices is not settled here, and the row's OPG status is
+unchanged. The write-up's claim that 37 vertices is the minimum is not formalized.
 
 ## Regression tests
 
