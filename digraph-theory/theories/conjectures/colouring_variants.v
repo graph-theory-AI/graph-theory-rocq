@@ -72,18 +72,24 @@ Proof. by []. Qed.
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__00/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__00.json
     English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Conjecture 2)
-      Every finite digraph has a majority 3-colouring: there is a colouring of its vertices by
-      three colours such that every vertex v has at most half of its out-neighbours coloured
-      like v.
-    Definitions: [majority_col col] - at every vertex at most half of its out-neighbours carry
-      the same colour as itself, written without division as 2 * #(same-coloured out-neighbours)
-      <= outdeg (this file); [same_col_outnb col v] - the out-neighbours of v with the colour of
-      v (this file); [outdeg v] - out-degree (core/oriented.v); ['I_3] - a three-element colour
-      set (MathComp).
-    Notes: The empty digraph and isolated vertices satisfy the condition trivially; no guard is
-      needed because the conclusion is an existential over colourings, which is inhabited. *)
+      Every finite loopless digraph has a majority 3-colouring: there is a colouring of its
+      vertices by three colours such that every vertex v has at most half of its out-neighbours
+      coloured like v.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [majority_col col] - at every vertex at most half of its out-neighbours carry the same
+      colour as itself, written without division as 2 * #(same-coloured out-neighbours) <= outdeg
+      (this file); [same_col_outnb col v] - the out-neighbours of v with the colour of v (this
+      file); [outdeg v] - out-degree (core/oriented.v); ['I_3] - a three-element colour set
+      (MathComp).
+    Notes: the [loopless D] guard is load-bearing. [diGraphType] allows loops, and a loop at v
+      makes v a same-coloured out-neighbour of itself, so the one-vertex digraph with a loop has no
+      majority colouring with any number of colours
+      (meta/probe_hints/majority_3col_statement.v).  The source's digraphs have no loops: its
+      Theorem 1, every digraph has a majority 4-colouring, fails on that digraph.  The guard was
+      added on 2026-10-25 (meta/STATEMENT_IMPROVEMENTS.md).  The empty digraph and isolated
+      vertices satisfy the condition trivially. *)
 Definition majority_3col_statement : Prop :=
-  forall D : diGraphType, exists col : D -> 'I_3, majority_col col.
+  forall D : diGraphType, loopless D -> exists col : D -> 'I_3, majority_col col.
 
 (** Corpus row: arxiv:1608.03040#01
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__01/
