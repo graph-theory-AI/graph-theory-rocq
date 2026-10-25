@@ -70,7 +70,9 @@ constants to report `Closed under the global context`. This rejects additional
 mathematical axioms, admissions, conditional proofs, the wrong polarity and
 proofs of unrelated statements. A stored transcript is supplementary evidence;
 it never substitutes for the live compiler checks. Use `--report PATH` to save
-the successful probe output.
+the successful probe output. The report drops compiler warning blocks, which name the
+run's temporary probe file, so it is reproducible; the pass or fail decision reads the
+whole output, and any other mention of the probe file fails the check.
 
 The milestone gate allows only the freshly verified triple
 `(statement, theorem, direction)`. All other exact-type faithfulness probes remain
@@ -233,7 +235,8 @@ is the same.
 - Synchronized rounds of halvings mix those matchings. Each round is a single
   application of Alon's splitting necklace theorem at `q = 2` (formalized in
   `classical-lemmas`) to the concatenated necklaces of one level of the mixing tree.
-- Parity is repaired by removing the first bead of each odd type.
+- Parity is repaired by removing one bead of every odd type and discarding its edge (the
+  X15 report, section 1).
 
 The construction, its deviations from the attack write-up and the constant are
 described in `packing-theory/docs/X15_FAIR_MATCHING_REPORT.md`. The correspondence
@@ -259,3 +262,10 @@ files are ignored. A second top-level definition, including one in a `Section` o
 `Local` one, is ambiguous, and malformed scopes fail closed. The selection tests
 cover `--record` and `--package` in both modes. One compiled run checks and reports
 only the selected entry.
+
+The transcript tests strip one- and multi-line warning blocks, including dotted
+categories such as `deprecated-since-9.2`. They refuse an unrecognised message, and a
+block without its category line, which must not swallow the output that follows. One
+compiled fixture re-exports `ssrnat`, as X15's imports do, and deprecates its statement. It yields
+a report without `Warning:` or the probe path, although the same probe text, compiled
+directly, warns.

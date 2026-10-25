@@ -86,7 +86,7 @@ ROCQ_OPAM_SWITCH=rocq-tools python3 meta/formal_resolutions.py \
 
 The development environment used Rocq 9.1.1, OCaml 5.3.0 and the installed MathComp/GraphTheory libraries in `rocq-tools`. The live checker builds the required local dependencies and rejects nonclosed assumptions and mismatched statements. It preserves historical source statuses.
 
-Read the [first-round development journal](JOURNAL.md) and [second-round journal](ROUND2_JOURNAL.md) for the proof attempts, MCP workflow, certificate optimizations and integration decisions. The [assumptions transcript](ASSUMPTIONS.txt) records the successful six-entry check. The [registry documentation](../FORMAL_RESOLUTIONS.md) explains source correspondence and the validation contract.
+Read the [first-round development journal](JOURNAL.md) and [second-round journal](ROUND2_JOURNAL.md) for the proof attempts, MCP workflow, certificate optimizations and integration decisions. The [assumptions transcript](ASSUMPTIONS.txt) records the successful seven-entry check (regenerated on 2026-10-25 in the Rocq 9.2 image). The [registry documentation](../FORMAL_RESOLUTIONS.md) explains source correspondence and the validation contract.
 
 Validation on 2026-09-19, after sharpening the ledger of a single round
 (`c(m)` from `16m+24` down to `12m+14` in the formal floor form, or `12m+15`
