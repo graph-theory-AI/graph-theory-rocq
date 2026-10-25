@@ -6,7 +6,7 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 526,
-      "cross_file_declarations": 1907,
+      "cross_file_declarations": 1909,
       "cross_file_files": 1016,
       "implicit_use": 3,
       "packages_without_project": [
@@ -6432,7 +6432,7 @@
           "declarations": [
             "digraph-theory/theories/conjectures/grounding_X221.v:x221_C3_eulerian",
             "digraph-theory/theories/conjectures/grounding_X221.v:x221_TT2_not_eulerian",
-            "digraph-theory/theories/migration/directed_neighbourhood.v:<line 476>",
+            "digraph-theory/theories/migration/directed_neighbourhood.v:<line 483>",
             "digraph-theory/theories/migration/directed_neighbourhood.v:x221_eulerian_original_compat"
           ],
           "files": [
@@ -7001,6 +7001,7 @@
           "declarations": [
             "cycle-theory/theories/conjectures/U6.v:eulerian",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:eulerian_C3",
+            "digraph-theory/theories/conjectures/grounding_chi_col.v:majority_eulerian_loopless_class_inhabited",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:not_eulerian_TT2",
             "digraph-theory/theories/conjectures/grounding_reals2.v:gr_eulerian_TT1",
             "digraph-theory/theories/migration/directed_neighbourhood.v:cv_eulerian_original_compat"
@@ -7240,6 +7241,7 @@
           "declarations": [
             "cycle-theory/theories/conjectures/U6.v:eulerian",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:eulerian_C3",
+            "digraph-theory/theories/conjectures/grounding_chi_col.v:majority_eulerian_loopless_class_inhabited",
             "digraph-theory/theories/conjectures/grounding_chi_col.v:not_eulerian_TT2",
             "digraph-theory/theories/conjectures/grounding_reals2.v:gr_eulerian_TT1",
             "digraph-theory/theories/migration/directed_neighbourhood.v:cv_eulerian_original_compat"
@@ -7596,8 +7598,8 @@
             "digraph-theory/theories/conjectures/implications2.v:conj9_weaken_const",
             "digraph-theory/theories/conjectures/implications_X221.v:<line 44>",
             "digraph-theory/theories/conjectures/reals_growth.v:<line 53>",
-            "digraph-theory/theories/migration/degree_balance.v:<line 35>",
-            "digraph-theory/theories/migration/directed_neighbourhood.v:<line 52>"
+            "digraph-theory/theories/migration/degree_balance.v:<line 42>",
+            "digraph-theory/theories/migration/directed_neighbourhood.v:<line 59>"
           ],
           "files": [
             "digraph-theory/theories/conjectures/X1.v",
@@ -43654,7 +43656,7 @@
       "declaration_hash": "b779285a61e1259f24d02eeba0c384c69f51e6797e56fb7f1fac92f66d7a96d3",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 117,
+      "line": 129,
       "local_dependencies": [],
       "name": "indeg",
       "normalized_name": "indeg",
@@ -43673,7 +43675,7 @@
         "Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement"
       ],
       "kind": "Definition",
-      "line": 120,
+      "line": 132,
       "local_dependencies": [],
       "name": "eulerian",
       "normalized_name": "eulerian",
@@ -43690,7 +43692,7 @@
       "declaration_hash": "5d7b63998841311323200122bfe10fe0a3df85856f82d6ddc58d3243ed6c2e43",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 139,
+      "line": 157,
       "local_dependencies": [
         "majority_3col_statement",
         "majority_k1col_statement"
@@ -43710,7 +43712,7 @@
       "declaration_hash": "c6f4e5631b3c1241e3483816b44277423fc5a6c5924c2d3704a9f830748d9b21",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 150,
+      "line": 168,
       "local_dependencies": [
         "majority_3col_statement",
         "majority_3col_tournament_statement"
@@ -43730,7 +43732,7 @@
       "declaration_hash": "29b8cda27d4b05b819075d58fffa886e02f3fd4b080d9b82523e905abe674494",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 155,
+      "line": 174,
       "local_dependencies": [
         "majority_3col_eulerian_statement",
         "majority_3col_statement"
@@ -43755,7 +43757,7 @@
         "Digraph.conjectures.colouring_variants.oriented_kcolouring"
       ],
       "kind": "Definition",
-      "line": 160,
+      "line": 180,
       "local_dependencies": [],
       "name": "dhom",
       "normalized_name": "dhom",
@@ -43772,7 +43774,7 @@
       "declaration_hash": "0eb09266642c2abec5e8d2dc496c8613cbd2d0c305d8f039af4ab7744dcaf7fb",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 169,
+      "line": 189,
       "local_dependencies": [
         "dhom"
       ],
@@ -43791,7 +43793,7 @@
       "declaration_hash": "9f840a3298970653bfb390adb8c091c3aec078350579cd032d84e882b7e48964",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 172,
+      "line": 192,
       "local_dependencies": [
         "dhom"
       ],
@@ -43813,7 +43815,7 @@
         "Digraph.conjectures.colouring_variants.oriented_chromatic_planar_bounded_statement"
       ],
       "kind": "Definition",
-      "line": 179,
+      "line": 199,
       "local_dependencies": [
         "dhom"
       ],
@@ -43834,7 +43836,7 @@
         "Digraph.conjectures.colouring_variants.ochi_le_dhom"
       ],
       "kind": "Definition",
-      "line": 189,
+      "line": 209,
       "local_dependencies": [
         "oriented_kcolouring"
       ],
@@ -43853,7 +43855,7 @@
       "declaration_hash": "54954a5bab29da262ee3f8c32adc48b9e3acf18f7732b26b8bb3d6154ee6642f",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 194,
+      "line": 214,
       "local_dependencies": [
         "dhom",
         "ochi_le"
@@ -43873,7 +43875,7 @@
       "declaration_hash": "c033fb3ff0fb4a7c9919926da40cd69f0c720a9172e8790abe102e747351c2e8",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 203,
+      "line": 223,
       "local_dependencies": [
         "oriented_kcolouring"
       ],
@@ -43903,7 +43905,7 @@
         "Digraph.conjectures.colouring_variants.setT_is_reach_set"
       ],
       "kind": "Definition",
-      "line": 212,
+      "line": 232,
       "local_dependencies": [],
       "name": "arc_colouring",
       "normalized_name": "arc_colouring",
@@ -43922,7 +43924,7 @@
         "Digraph.conjectures.colouring_variants.mono_reach"
       ],
       "kind": "Definition",
-      "line": 218,
+      "line": 238,
       "local_dependencies": [
         "arc_colouring"
       ],
@@ -43944,7 +43946,7 @@
         "Digraph.conjectures.colouring_variants.mono_reach_refl"
       ],
       "kind": "Definition",
-      "line": 223,
+      "line": 243,
       "local_dependencies": [
         "arc_colouring",
         "mono_rel"
@@ -43969,7 +43971,7 @@
         "Digraph.conjectures.colouring_variants.setT_is_reach_set"
       ],
       "kind": "Definition",
-      "line": 230,
+      "line": 250,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach"
@@ -43989,7 +43991,7 @@
       "declaration_hash": "3360637cf9349155edab6c74096905b49361d0982576b8382050547015f14d26",
       "direct_consumers": [],
       "kind": "Lemma",
-      "line": 235,
+      "line": 255,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach"
@@ -44012,7 +44014,7 @@
         "Digraph.conjectures.colouring_variants.mono_root_reaches_all"
       ],
       "kind": "Definition",
-      "line": 239,
+      "line": 259,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach_any"
@@ -44034,7 +44036,7 @@
         "Digraph.conjectures.colouring_variants.mono_reach_or_rainbow_statement"
       ],
       "kind": "Definition",
-      "line": 245,
+      "line": 265,
       "local_dependencies": [
         "arc_colouring"
       ],
@@ -44053,7 +44055,7 @@
       "declaration_hash": "0712000c6b7044bc6941faf69ea181771487c89432cfb584f91b5f6f1d7d74dd",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 252,
+      "line": 272,
       "local_dependencies": [
         "arc_colouring",
         "mono_root",
@@ -44076,7 +44078,7 @@
         "Digraph.conjectures.colouring_variants.sands_sauer_woodrow_statement"
       ],
       "kind": "Definition",
-      "line": 266,
+      "line": 286,
       "local_dependencies": [],
       "name": "union_of_stables",
       "normalized_name": "union_of_stables",
@@ -44093,7 +44095,7 @@
       "declaration_hash": "c83c707933c19bc607ca3dd1c2a672e6b5a90abd66d4ff4c51ea766d8d80c65c",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 304,
+      "line": 324,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach_any"
@@ -44113,7 +44115,7 @@
       "declaration_hash": "b411b480ef1dfe008add8b839242dc84f4861a1ad9b22f30297efabdebb56873",
       "direct_consumers": [],
       "kind": "Theorem",
-      "line": 319,
+      "line": 339,
       "local_dependencies": [
         "arc_colouring",
         "mono_reach_any",
