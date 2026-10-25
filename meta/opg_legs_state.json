@@ -2160,7 +2160,7 @@
       "audit_page": "todo",
       "commit": "bb0f97b",
       "package": "digraph-theory",
-      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean)."
+      "note": "P9 already-formalized directed row (absorbed digraph-theory project); statement in a P9 sibling conjecture file (classic_core.v/packing.v/sad.v/colouring_variants.v/long_dipath.v), re-exported/gated via check_milestone P9 (32/32 axiom-free, Print Assumptions clean). Since 2026-10-25 the statement carries a loopless guard (irreflexive arc): classic_core.stable counts loops, so the unguarded body was refuted by a one-vertex digraph with a loop (meta/probe_hints/stable_meeting_longest_dipaths_statement.v)."
     }
   }
 }
