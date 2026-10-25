@@ -1062,16 +1062,14 @@
    "tier": "done",
    "wave": "prior",
    "host": "cycle-theory",
-   "state": "conditional",
-   "proof": "jaegers_modular_orientation_implies_three_flow",
-   "external": [
-    "external_modular_orientation_to_flow_statement"
-   ],
+   "state": "verified",
+   "proof": "unconditional_jaegers_modular_orientation_implies_three_flow",
+   "external": [],
    "reason": "",
-   "proved_by": "prior waves",
-   "reviewed_by": "prior second readers (see meta/X191-X210 and X211-X229 faithfulness audits)",
-   "reviewed_at": "2026-09-23",
-   "note": "Jaeger's modular-orientation conjecture at k=1 (4*1=4 edge-connected, 2*1+1=3) is Tutte's 3-flow conjecture; the mod-3 orientation is converted to a nowhere-zero 3-flow by the cited external orientation/flow duality"
+   "proved_by": "Arthur (mathematics programme, 2026-10-25): modular_orientation_to_flow proves external_modular_orientation_to_flow_statement (classical-lemmas TODO 7); the conditional jaegers_modular_orientation_implies_three_flow of the prior waves is kept",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Jaeger's modular-orientation conjecture at k=1 (4*1=4 edge-connected, 2*1+1=3) is Tutte's 3-flow conjecture; the mod-3 orientation is converted to a nowhere-zero 3-flow by the orientation/flow duality, proved as modular_orientation_to_flow: along the orientation put 1 off an edge set X and 1-m on X, where X meets the demands imbalance/m (found by augmenting paths)"
   },
   "jorgensens_statement->forcing_a_k_6_minor_statement:implies": {
    "gc": "e046",

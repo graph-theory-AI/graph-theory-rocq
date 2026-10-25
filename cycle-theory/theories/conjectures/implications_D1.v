@@ -121,9 +121,9 @@ Qed.
     then it has a nowhere-zero integer (2k+1)-flow. (The constant weighting 1 on
     such an orientation is a nowhere-zero Z_(2k+1)-flow, and Tutte's theorem
     turns a nowhere-zero Z_m-flow into a nowhere-zero integer m-flow.)
-    Not formalized here: it is carried as an explicit hypothesis of the
-    conditional edge below (never an [Axiom], never [Admitted]), which is why
-    that edge is [status=conditional external=...] rather than [verified].
+    Proved below as [modular_orientation_to_flow] (2026-10-25,
+    classical-lemmas TODO 7), by augmenting paths; the reduction that takes it
+    as a hypothesis is kept.
     GUARD [0 < k] (2026-09-24, edge-wave audit): without it the statement is
     axiom-free REFUTABLE at k = 0, where the hypothesis is vacuous (every
     integer is a multiple of 1) while the conclusion [has_nz_kflow G 1] demands
@@ -139,7 +139,11 @@ Definition external_modular_orientation_to_flow_statement : Prop :=
 (** ================================================================= *)
 (** ** The scheduled edge *)
 
-(*@EDGE from=jaegers_modular_orientation_statement to=three_flow_statement kind=implies status=conditional external="external_modular_orientation_to_flow_statement" proof=jaegers_modular_orientation_implies_three_flow cite="Jaeger, Nowhere-zero flow problems, Selected Topics in Graph Theory 3 (1988) 71-95; Tutte 1954 (3-flow conjecture and orientation/flow duality)" note="Jaeger's modular-orientation conjecture at k=1 (4*1=4 edge-connected, 2*1+1=3) is Tutte's 3-flow conjecture; the mod-3 orientation is converted to a nowhere-zero 3-flow by the cited external orientation/flow duality" *)
+(** The reduction, with the orientation/flow duality as an explicit
+    hypothesis.  (Until 2026-10-25 this was the edge gc:e093,
+    [status=conditional]; its annotation now sits on
+    [unconditional_jaegers_modular_orientation_implies_three_flow] below,
+    after [modular_orientation_to_flow].) *)
 Theorem jaegers_modular_orientation_implies_three_flow :
   external_modular_orientation_to_flow_statement ->
   jaegers_modular_orientation_statement -> three_flow_statement.
@@ -778,6 +782,332 @@ exact: circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular
 Qed.
 
 
+(** ================================================================= *)
+(** ** gc:e093: Tutte's orientation/flow duality at [2k+1], [k >= 1]
+       (classical-lemmas TODO 7)
+
+    An orientation [o] whose imbalance is [m * q v] at every vertex
+    ([m = 2k+1]) gives a nowhere-zero integer [m]-flow: along [o], put [1] on
+    the edges outside an edge set [X] and [1 - m] on those of [X].  The result
+    is conservative exactly when the net inflow of [X] along [o] is [q v] at
+    every vertex, and such an [X] exists ([odiff_demand]) by augmenting paths.
+    Toggling the edges of a residual path ([ores], [odiff_path]) moves one unit
+    of deviation from its start to its end.  When no residual path from a
+    deficit vertex reaches a surplus vertex, the set [S] such paths reach is
+    closed, so [S] receives exactly its entering edges ([odiff_closed]); the
+    cut count ([imbalance_cut]) and [m >= 1] then make the deviation over [S]
+    non-negative, a contradiction. *)
+
+Section ModOrient.
+Variables (G : mgraph) (o : edge G -> bool).
+
+(** Net inflow, along [o], of the edge set [X] at [v]. *)
+Definition odiff (X : {set edge G}) (v : G) : int :=
+  (#|[set e in X | ohead o e == v]|)%:R - (#|[set e in X | otail o e == v]|)%:R.
+
+(** Residual steps: [a -> b] through an edge outside [X] entering [a] from
+    [b], or an edge of [X] leaving [a] towards [b]. *)
+Definition ores (X : {set edge G}) : rel G := fun a b =>
+  [exists e, ((e \notin X) && (ohead o e == a) && (otail o e == b))
+          || ((e \in X) && (otail o e == a) && (ohead o e == b))].
+
+Definition otoggle (X : {set edge G}) (e : edge G) : {set edge G} :=
+  if e \in X then X :\ e else e |: X.
+
+Lemma card_otoggle (X : {set edge G}) (e : edge G) (P : pred (edge G)) :
+  (#|[set f in otoggle X e | P f]|%:R : int)
+  = #|[set f in X | P f]|%:R + (if e \in X then - (P e)%:R else (P e)%:R).
+Proof.
+rewrite /otoggle; case: ifP => he.
+  have -> : [set f in X :\ e | P f] = [set f in X | P f] :\ e.
+    by apply/setP => f; rewrite !inE andbA.
+  rewrite [in RHS](cardsD1 e [set f in X | P f]) inE he /= natrD.
+  by rewrite addrC addKr.
+case hP: (P e).
+  rewrite (_ : [set f in e |: X | P f] = e |: [set f in X | P f]); last first.
+    by apply/setP => f; rewrite !inE; case: eqP => // ->; rewrite hP.
+  by rewrite cardsU1 inE he /= natrD addrC.
+rewrite (_ : [set f in e |: X | P f] = [set f in X | P f]); last first.
+  by apply/setP => f; rewrite !inE; case: eqP => // ->; rewrite hP he.
+by rewrite addr0.
+Qed.
+
+Lemma odiff_step (X : {set edge G}) (a b : G) :
+  ores X a b -> exists e,
+    (forall v, odiff (otoggle X e) v = odiff X v + (v == a)%:R - (v == b)%:R)
+    /\ (forall a' b', a' != a -> b' != a -> ores X a' b' ->
+          ores (otoggle X e) a' b').
+Proof.
+case/existsP => e he; exists e.
+have hea : (ohead o e == a) || (otail o e == a).
+  by case/orP: he => /andP[/andP[_ ->]] //= _; rewrite orbT.
+split.
+  move=> v; rewrite /odiff !card_otoggle.
+  case/orP: he => /andP[/andP[hX /eqP hh] /eqP ht];
+    rewrite ?(negbTE hX) ?hX hh ht ![_ == v]eq_sym.
+    by rewrite opprD addrACA addrA.
+  rewrite opprB.
+  set h := (#|[set f in X | ohead o f == v]|%:R : int).
+  set t := (#|[set f in X | otail o f == v]|%:R : int).
+  rewrite -!addrA; congr (_ + _); rewrite addrCA [RHS]addrCA; congr (_ + _).
+  by rewrite addrC.
+(* A residual step between two vertices other than [a] uses an edge other
+   than [e], whose membership the toggle does not change. *)
+move=> a' b' ha hb /existsP[f hf]; apply/existsP; exists f.
+have hfe : f != e.
+  apply/eqP => fe; rewrite fe in hf.
+  move/eqP: ha => ha; move/eqP: hb => hb.
+  by case/orP: hf => /andP[/andP[_ /eqP h1] /eqP h2];
+    case/orP: hea => /eqP h3; congruence.
+have hmem : (f \in otoggle X e) = (f \in X).
+  by rewrite /otoggle; case: ifP => _; rewrite !inE (negbTE hfe).
+by rewrite hmem.
+Qed.
+
+Lemma odiff_path (p : seq G) (u : G) (X : {set edge G}) :
+  path (ores X) u p -> uniq (u :: p) ->
+  exists X', forall v, odiff X' v = odiff X v + (v == u)%:R - (v == last u p)%:R.
+Proof.
+elim: p u X => [|w p IH] u X /=.
+  by move=> _ _; exists X => v; rewrite addrK.
+case/andP => huw hp; case/andP => hu hup.
+have [e [he hpres]] := odiff_step huw.
+have hp' : path (ores (otoggle X e)) w p.
+  apply: (@sub_in_path _ [pred x | x != u] (ores X)) hp.
+    by move=> a' b' ha hb; exact: hpres.
+  by apply/allP => x hx; apply/eqP => xu; move: hu; rewrite -xu hx.
+have [X' hX'] := IH w (otoggle X e) hp' hup.
+by exists X' => v; rewrite hX' he subrK.
+Qed.
+
+Lemma odiff_sum (X : {set edge G}) : \sum_v odiff X v = 0.
+Proof.
+have hcnt : forall f : edge G -> G,
+    \sum_v (#|[set e in X | f e == v]|%:R : int) = #|X|%:R.
+  move=> f; transitivity (\sum_e (if e \in X then (1 : int) else 0)).
+    rewrite (partition_big f xpredT) //=; apply: eq_bigr => v _.
+    by rewrite -sum_indz; exact: eq_bigl.
+  rewrite (sum_indz X xpredT); congr (_%:R).
+  by apply: eq_card => e; rewrite !inE andbT.
+by rewrite /odiff sumrB !hcnt subrr.
+Qed.
+
+Lemma odiff_sum_set (X : {set edge G}) (S : {set G}) :
+  \sum_(v in S) odiff X v
+  = #|[set e in X | ohead o e \in S]|%:R - #|[set e in X | otail o e \in S]|%:R.
+Proof.
+have hcnt : forall f : edge G -> G, \sum_(v in S) (#|[set e in X | f e == v]|%:R : int)
+                                    = #|[set e in X | f e \in S]|%:R.
+  move=> f; rewrite -sum_indz (partition_big f (mem S)) //=.
+  apply: eq_bigr => v hv; rewrite -sum_indz; apply: eq_bigl => e.
+  by case: (f e =P v) => [->|]; rewrite ?hv ?andbF.
+by rewrite /odiff sumrB !hcnt.
+Qed.
+
+Lemma imbalance_odiff (v : G) : imbalance o v = odiff [set: edge G] v.
+Proof.
+by rewrite /imbalance /odiff; congr (_%:R - _%:R); apply: eq_card => e; rewrite !inE.
+Qed.
+
+(** No residual step leaves [S]: then [S] receives exactly its entering
+    edges, all of them in [X]. *)
+Lemma odiff_closed (X : {set edge G}) (S : {set G}) :
+  (forall a b, a \in S -> ores X a b -> b \in S) ->
+  \sum_(v in S) odiff X v
+  = #|[set e | (ohead o e \in S) && (otail o e \notin S)]|%:R.
+Proof.
+move=> hcl; rewrite odiff_sum_set.
+(* An edge of [X] leaving [S] is a residual step out of [S]; an edge outside
+   [X] entering [S] is one too. *)
+have hB : [set e in X | otail o e \in S] \subset [set e in X | ohead o e \in S].
+  apply/subsetP => e; rewrite !inE => /andP[hX ht]; rewrite hX /=.
+  by apply: (hcl _ _ ht); apply/existsP; exists e; rewrite hX !eqxx orbT.
+have hD : [set e in X | ohead o e \in S] :\: [set e in X | otail o e \in S]
+        = [set e | (ohead o e \in S) && (otail o e \notin S)].
+  apply/setP => e; rewrite !inE; case hX: (e \in X) => /=; first by rewrite andbC.
+  case hh: (ohead o e \in S) => //=.
+  by rewrite (hcl _ _ hh) //; apply/existsP; exists e; rewrite hX !eqxx.
+rewrite -hD -[in LHS](cardsID [set e in X | otail o e \in S]
+                              [set e in X | ohead o e \in S]).
+by rewrite (setIidPr hB) natrD addrC addKr.
+Qed.
+
+Lemma imbalance_cut (S : {set G}) :
+  \sum_(v in S) imbalance o v
+  = #|[set e | (ohead o e \in S) && (otail o e \notin S)]|%:R
+    - #|[set e | (otail o e \in S) && (ohead o e \notin S)]|%:R.
+Proof.
+rewrite (eq_bigr _ (fun v _ => imbalance_odiff v)) odiff_sum_set.
+(* Split the edges with one end in [S] by where the other end lies. *)
+have hsplit : forall f g : edge G -> G,
+    #|[set e in [set: edge G] | f e \in S]|
+    = (#|[set e | (f e \in S) && (g e \notin S)]|
+       + #|[set e | (f e \in S) && (g e \in S)]|)%N.
+  move=> f g.
+  rewrite -(cardsID [set e | g e \in S] [set e in [set: edge G] | f e \in S]).
+  rewrite addnC; congr (_ + _); apply: eq_card => e; rewrite !inE.
+    by case: (f e \in S); case: (g e \in S).
+  by case: (f e \in S); case: (g e \in S).
+rewrite (hsplit (ohead o) (otail o)) (hsplit (otail o) (ohead o)) !natrD.
+rewrite (_ : #|[set e | otail o e \in S & ohead o e \in S]|
+           = #|[set e | ohead o e \in S & otail o e \in S]|); last first.
+  by apply: eq_card => e; rewrite !inE andbC.
+by rewrite opprD addrACA subrr addr0.
+Qed.
+
+Lemma absz_addr1_lt (x : int) : x < 0 -> (absz (x + 1)%R < absz x)%N.
+Proof.
+case: x => // n _; rewrite NegzE abszN.
+by rewrite -[n.+1]addn1 PoszD opprD subrK abszN /= addn1.
+Qed.
+
+Lemma absz_subr1_lt (x : int) : 0 < x -> (absz (x - 1)%R < absz x)%N.
+Proof.
+by case: x => [[|n]|n] //= _; rewrite subn1.
+Qed.
+
+(** The demands [q] with [imbalance o = m * q] are met by some edge set. *)
+Lemma odiff_demand (m : nat) (q : G -> int) :
+  (0 < m)%N -> (forall v, imbalance o v = m%:R * q v) ->
+  exists X : {set edge G}, forall v, odiff X v = q v.
+Proof.
+(* Minimise [phi X], the total deviation from the demands.  If some vertex
+   [v0] has a deficit, either a residual path from [v0] reaches a vertex with
+   a surplus (toggle it: [phi] decreases), or the set [S] that residual paths
+   from [v0] reach is closed, and the deviation over [S] is negative by
+   choice of [v0] yet non-negative by the cut count. *)
+move=> hm hq.
+pose r X v := odiff X v - q v.
+pose phi X := (\sum_v absz (r X v))%N.
+have hq0 : \sum_v q v = 0.
+  apply: (mulfI (_ : (m%:R : int) != 0)); first by rewrite pnatr_eq0 -lt0n.
+  rewrite mulr0 mulr_sumr (eq_bigr _ (fun v _ => esym (hq v))).
+  by rewrite (eq_bigr _ (fun v _ => imbalance_odiff v)); exact: odiff_sum.
+have hr0 : forall X, \sum_v r X v = 0.
+  by move=> X; rewrite sumrB odiff_sum hq0 subrr.
+have done0 : forall X, phi X = 0%N -> exists X', forall v, odiff X' v = q v.
+  move=> X h0; exists X => v; apply/eqP; rewrite -subr_eq0 -absz_eq0.
+  by rewrite -leqn0 -h0 /phi (bigD1 v) //=; exact: leq_addr.
+suff hind : forall n X, (phi X <= n)%N -> exists X', forall v, odiff X' v = q v.
+  exact: (hind _ set0 (leqnn _)).
+elim=> [|n IH] X hX.
+  by apply: done0; apply/eqP; rewrite -leqn0; exact: hX.
+case: (eqVneq (phi X) 0%N) => [/done0 //|hne].
+suff [X' hlt] : exists X', (phi X' < phi X)%N.
+  by apply: (IH X'); rewrite -ltnS (leq_trans hlt hX).
+have [v0 hv0] : exists v0, r X v0 < 0.
+  case: (pickP (fun v => r X v < 0)) => [v0 hv0|hall]; first by exists v0.
+  have hge : forall v, 0 <= r X v.
+    by move=> v; rewrite mathcomp.order.order.Order.TotalTheory.leNgt hall.
+  have hz := psumr_eq0P (fun v _ => hge v) (hr0 X).
+  by exfalso; move/eqP: hne; apply; apply: big1 => v _; rewrite hz.
+pose S := [set w | connect (ores X) v0 w].
+case: (pickP (fun w => (w \in S) && (0 < r X w))) => [w /andP[hwS hw]|hnone].
+  rewrite inE in hwS; case/connectP: hwS => p hp hwl; rewrite hwl in hw.
+  move: hw; case: (shortenP hp) => p' hp' hu _ hw.
+  have [X' hX'] := odiff_path hp' hu.
+  set w' := last v0 p' in hw hX'.
+  have hneq : (w' == v0) = false.
+    apply/eqP => e; move: hw; rewrite e => h.
+    have := mathcomp.order.order.Order.POrderTheory.lt_trans hv0 h.
+    by rewrite mathcomp.order.order.Order.POrderTheory.ltxx.
+  have hr' : forall v, r X' v = r X v + (v == v0)%:R - (v == w')%:R.
+    by move=> v; rewrite /r hX' addrAC; congr (_ - _); rewrite addrAC.
+  exists X'.
+  rewrite /phi (bigD1 v0) //= [X in (_ < X)%N](bigD1 v0) //=.
+  rewrite -addSn; apply: leq_add.
+    by rewrite hr' eqxx eq_sym hneq subr0; exact: absz_addr1_lt.
+  apply: leq_sum => v hv; rewrite hr' (negbTE hv) addr0.
+  case: (eqVneq v w') => [hvw|hvw]; last by rewrite subr0.
+  by rewrite hvw; apply: ltnW; exact: absz_subr1_lt.
+exfalso.
+have hcl : forall a b, a \in S -> ores X a b -> b \in S.
+  by move=> a b; rewrite !inE => ha hab; exact: connect_trans ha (connect1 hab).
+have hS0 : v0 \in S by rewrite inE connect0.
+have hle : forall v, v \in S -> r X v <= 0.
+  move=> v hv; move: (hnone v); rewrite /= hv /= => /negbT.
+  by rewrite -mathcomp.order.order.Order.TotalTheory.leNgt.
+have hneg : \sum_(v in S) r X v < 0.
+  rewrite (bigD1 v0) //=.
+  have hrest : \sum_(v in S | v != v0) r X v <= 0.
+    by apply: sumr_le0 => v /andP[hv _]; exact: hle.
+  by rewrite -(addr0 0) ltr_leD.
+have hm' : (0 : int) < m%:R by rewrite ltr0n.
+have hpos : 0 <= \sum_(v in S) r X v.
+  rewrite -(pmulr_rge0 _ hm') /r sumrB mulrBr.
+  have hsq : m%:R * \sum_(i in S) q i = \sum_(i in S) imbalance o i.
+    by rewrite mulr_sumr; apply: eq_bigr => v _; rewrite hq.
+  rewrite hsq imbalance_cut (odiff_closed hcl) opprB addrA -natrM.
+  rewrite -natrD -natrB ?ler0n //.
+  exact: leq_trans (leq_pmull _ hm) (leq_addr _ _).
+by move: hneg; rewrite mathcomp.order.order.Order.TotalTheory.ltNge hpos.
+Qed.
+
+End ModOrient.
+
+Theorem modular_orientation_to_flow : external_modular_orientation_to_flow_statement.
+Proof.
+move=> k G hk [o ho].
+pose m := (2 * k + 1)%N.
+have [q hq] : exists q : G -> int, forall v, imbalance o v = m%:R * q v.
+  have ho' : forall v, exists q : int, imbalance o v == m%:R * q.
+    by move=> v; have [q hq] := ho v; exists q; apply/eqP.
+  by exists (fun v => xchoose (ho' v)) => v; apply/eqP; exact: (xchooseP (ho' v)).
+have hm : (0 < m)%N by rewrite /m addn1.
+have [X hX] := odiff_demand hm hq.
+(* Along [o], the value is [1] off [X] and [1 - m] on [X]. *)
+pose a e : int := 1 - m%:R * (e \in X)%:R.
+exists (fun e => if o e then a e else - a e); split.
+  move=> v; apply/eqP; rewrite -subr_eq0.
+  have hc : forall (C : {set edge G}) (P : pred (edge G)),
+      \sum_e ((e \in C) && P e)%:R = #|[set e in C | P e]|%:R :> int.
+    move=> C P; rewrite -sum_indz [RHS]big_mkcond; apply: eq_bigr => e _.
+    by case: (P e); case: (e \in C).
+  have hc' : forall P : pred (edge G),
+      \sum_e (P e)%:R = #|[set e | P e]|%:R :> int.
+    move=> P; rewrite -(_ : [set e in [set: edge G] | P e] = [set e | P e]);
+      last by apply/setP => e; rewrite !inE.
+    by rewrite -hc; apply: eq_bigr => e _; rewrite in_setT.
+  rewrite (big_mkcond (fun e => source e == v)).
+  rewrite (big_mkcond (fun e => target e == v)) -sumrB.
+  rewrite (eq_bigr (fun e => ((otail o e == v)%:R - (ohead o e == v)%:R)
+    - m%:R * (((e \in X) && (otail o e == v))%:R
+              - ((e \in X) && (ohead o e == v))%:R))); last first.
+    move=> e _.
+    have h1 : forall (b : bool) (x : int), (if b then x else 0) = x * b%:R.
+      by move=> [] x; rewrite ?mulr1 ?mulr0.
+    have h2 : (if o e then a e else - a e)
+                * ((source e == v)%:R - (target e == v)%:R)
+              = a e * ((otail o e == v)%:R - (ohead o e == v)%:R).
+      by rewrite /otail /ohead; case: (o e); rewrite // mulNr -mulrN opprB.
+    have h3 : forall b1 b2 : bool, ((b1 && b2)%:R : int) = b1%:R * b2%:R.
+      by move=> [] []; rewrite ?mulr1 ?mulr0.
+    by rewrite !h1 -mulrBr h2 !h3 -mulrBr /a mulrBl mul1r -mulrA.
+  rewrite sumrB -mulr_sumr !sumrB !hc !hc'.
+  have e1 : (#|[set e | otail o e == v]|%:R
+             - #|[set e | ohead o e == v]|%:R : int) = - (m%:R * q v).
+    by rewrite -hq /imbalance opprB.
+  have e2 : (#|[set e in X | otail o e == v]|%:R
+             - #|[set e in X | ohead o e == v]|%:R : int) = - q v.
+    by rewrite -(hX v) /odiff opprB.
+  by rewrite e1 e2 mulrN opprK addNr.
+move=> e; rewrite addn1 /=.
+have -> : `|if o e then a e else - a e| = `|a e|.
+  by case: (o e); rewrite ?normrN.
+rewrite /a /m; case: (e \in X) => /=.
+  rewrite mulr1 addn1 -natr1 opprD addrCA subrr addr0 normrN normr_nat.
+  by split => //; rewrite ler1n muln_gt0.
+by rewrite mulr0 subr0 normr1; split => //; rewrite ler1n muln_gt0.
+Qed.
+
+
+(*@EDGE from=jaegers_modular_orientation_statement to=three_flow_statement kind=implies status=verified proof=unconditional_jaegers_modular_orientation_implies_three_flow cite="Jaeger, Nowhere-zero flow problems, Selected Topics in Graph Theory 3 (1988) 71-95; Tutte 1954 (3-flow conjecture and orientation/flow duality)" note="Jaeger's modular-orientation conjecture at k=1 (4*1=4 edge-connected, 2*1+1=3) is Tutte's 3-flow conjecture; the mod-3 orientation is converted to a nowhere-zero 3-flow by the orientation/flow duality, proved as modular_orientation_to_flow: along the orientation put 1 off an edge set X and 1-m on X, where X meets the demands imbalance/m (found by augmenting paths)" *)
+Theorem unconditional_jaegers_modular_orientation_implies_three_flow :
+  jaegers_modular_orientation_statement -> three_flow_statement.
+Proof.
+exact: jaegers_modular_orientation_implies_three_flow modular_orientation_to_flow.
+Qed.
+
 (** ── Audited non-edges (machine-readable; extracted by build_edge_graph.py) ── *)
 
 
@@ -794,3 +1124,8 @@ Print Assumptions orientable_five_cycle_double_cover_implies_five_flow.
 (** ** Axiom audit (gc:e096) *)
 
 Print Assumptions unconditional_circular_flow_numbers_of_r_graphs_implies_circular_flow_number_of_regular_class_1_graphs.
+
+(** ** Axiom audit (gc:e093) *)
+
+Print Assumptions modular_orientation_to_flow.
+Print Assumptions unconditional_jaegers_modular_orientation_implies_three_flow.

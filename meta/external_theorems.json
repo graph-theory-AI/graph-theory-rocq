@@ -68,9 +68,8 @@
       "citation": "W. T. Tutte, A contribution to the theory of chromatic polynomials, Canad. J. Math. 6 (1954) 80-91, DOI 10.4153/CJM-1954-010-9 (the Z_k-flow / k-flow equivalence), in the modular-orientation form used by F. Jaeger, Nowhere-zero flow problems, in Selected Topics in Graph Theory 3 (1988) 71-95",
       "claim": "For every k >= 1, if a multigraph carries an orientation whose imbalance (indegree minus outdegree) is a multiple of 2k+1 at every vertex, then it has a nowhere-zero integer (2k+1)-flow: the constant weighting 1 on such an orientation is a nowhere-zero Z_(2k+1)-flow, and Tutte's theorem turns a nowhere-zero Z_m-flow into a nowhere-zero integer m-flow. NOTE the guard 0 < k, added 2026-09-24: without it the Prop is axiom-free REFUTABLE at k = 0.",
       "kind": "theorem",
-      "used_by": [
-        "jaegers_modular_orientation_statement->three_flow_statement:implies"
-      ],
+      "used_by": [],
+      "formalized_by": "modular_orientation_to_flow (cycle-theory/theories/conjectures/implications_D1.v), 2026-10-25, classical-lemmas TODO 7 (the form stated here, k >= 1: along the orientation, 1 off an edge set X and 1-(2k+1) on X, with X meeting the demands imbalance/(2k+1) by augmenting paths): edge jaegers_modular_orientation_statement->three_flow_statement:implies is now verified (unconditional_jaegers_modular_orientation_implies_three_flow)",
       "reviewed_by": "Claude Opus 5 second reader (edge programme, 2026-09-24)",
       "review": "PASS -- with the 0 < k guard (E5) it is exactly Tutte's Z_m-flow => integer m-flow theorem at m = 2k+1 applied to the constant-1 weighting of a modular orientation (loops have imbalance 0 and any nonzero value). The k = 0 refutation is gone; the edge only uses k = 1. Not trivially true, not refutable."
     },
