@@ -115,12 +115,13 @@ Definition is_online_choice_number (G : sgraph) (m : nat) : Prop :=
 (** [mDelta] (multigraph maximum degree, parallel edges counted) is now in graph-theory-base —
     promoted (U4 ∩ U5) and reused here via the base export. *)
 
-(** [Δ]-edge-critical: deleting ANY edge strictly lowers the chromatic index
-    χ'(G) = χ(L(G)).  Deleting edge [e] = deleting vertex [e] of the line
-    graph, i.e. χ on [ [set: line_graph G] :\ e ]. *)
+(** [Δ]-edge-critical, as the source defines it: [G] is not [Δ]-edge-colourable, i.e.
+    Δ < χ'(G) = χ(L(G)) with Δ = [mDelta G], while every edge-deleted subgraph is
+    [Δ]-edge-colourable, for the same Δ.  Deleting edge [e] = deleting vertex [e] of the
+    line graph, i.e. χ on [ [set: line_graph G] :\ e ]. *)
 Definition Delta_edge_critical (G : mgraph) : Prop :=
-  forall e : line_graph G,
-    χ([set: line_graph G] :\ e) < χ([set: line_graph G]).
+  mDelta G < χ([set: line_graph G]) /\
+  forall e : line_graph G, χ([set: line_graph G] :\ e) <= mDelta G.
 
 (** ** Complete multipartite graph K_{m*k} (Row 7) *****************************)
 
@@ -270,21 +271,24 @@ Definition edge_list_coloring_statement : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/list_colorings_of_edge_critical_graphs/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/list_colorings_of_edge_critical_graphs.json
     English statement: (Vizing 1976; Open Problem Garden, "List colorings of edge-critical graphs")
-      For every loopless multigraph G that is edge-critical for the chromatic index, and for every
+      For every loopless multigraph G that is Delta-edge-critical, i.e. not Delta-edge-colourable
+      while every edge-deleted subgraph is (Delta the maximum degree of G), and for every
       assignment to each edge of a list of exactly Delta(G) colours, either all the lists are equal
       to each other or G admits a proper edge colouring picking each edge's colour from its own
       list.
-    Definitions: [Delta_edge_critical G] - deleting any single vertex of the line graph, that is
-      any single edge of G, strictly decreases chi of the line graph, i.e. strictly decreases the
-      chromatic index (this file); [mDelta G] - the maximum degree of a multigraph, parallel edges
-      counted (GTBase base/theories/base.v); [line_graph], [loopless] and [list_colourable] (GTBase
-      base.v).
-    Notes: Faithfulness caveat: the classical notion of a Delta-edge-critical graph also requires
-      the chromatic index to be Delta + 1, whereas [Delta_edge_critical] only requires that removing
-      any edge lowers the chromatic index. The Rocq hypothesis is therefore satisfied by more graphs
-      than the source's, which makes this statement formally stronger than the conjecture. The
-      source's "unless all lists are equal" is encoded as a disjunction whose first branch is "all
-      lists are equal". *)
+    Definitions: [Delta_edge_critical G] - mDelta G is less than chi of the line graph, and deleting
+      any single vertex of the line graph, that is any single edge of G, leaves chi of the line
+      graph at most mDelta G: the source's definition (this file); [mDelta G] - the maximum degree
+      of a multigraph, parallel edges counted (GTBase base/theories/base.v); [line_graph],
+      [loopless] and [list_colourable] (GTBase base.v).
+    Notes: until 2026-10-25 [Delta_edge_critical] only asked that deleting any edge lowers the
+      chromatic index; on loopless multigraphs that admits graphs with chi' = Delta + 2, and the
+      fat triangle (two parallel edges per side) with the lists {0,1,2,4} on one edge and
+      {0,1,2,3} on the five others refuted the body
+      (meta/probe_hints/list_colorings_of_edge_critical_graphs_statement.v). The hypothesis is now
+      the source's definition (coordination/PROGRAMME.md section 3). The source says "graph"; the
+      body ranges over loopless multigraphs, which include the simple graphs. The source's "unless
+      all lists are equal" is encoded as a disjunction whose first branch is "all lists are equal". *)
 Definition list_colorings_of_edge_critical_graphs_statement : Prop :=
   forall (G : mgraph),
     loopless G -> Delta_edge_critical G ->

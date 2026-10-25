@@ -1598,6 +1598,10 @@ them.
   deleting any edge lowers the chromatic index; the classical Delta-edge-critical hypothesis also
   requires `chi'(G) = Delta + 1`. The hypothesis holds for strictly more graphs than the source's.
   Severity: **too strong**.
+  **FIXED 2026-10-25** (coordination/PROGRAMME.md section 3): `Delta_edge_critical` is the
+  source's definition (not Δ-edge-colourable, every edge-deleted subgraph Δ-edge-colourable). The
+  old hypothesis admitted loopless multigraphs with `chi' = Delta + 2`, and the fat triangle refutes
+  the old body (`meta/probe_hints/list_colorings_of_edge_critical_graphs_statement.v`).
 - `opg:list_colourings_of_complete_multipartite_graphs_with_2_big_parts` (`U4.v`) — the corpus row
   asks for the VALUE of the least `t` with `ch(K_{a,b}+K_t) = chi(K_{a,b}+K_t)`; the body only
   asserts that this least `t` exists. Severity: **too weak** (a "what is" question encoded as

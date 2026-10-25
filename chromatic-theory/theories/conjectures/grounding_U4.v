@@ -146,15 +146,21 @@ Proof. by case. Qed.
 Lemma mDelta_unit : mDelta (unit_graph tt) = 0.
 Proof. by rewrite /mDelta; apply: big1 => v _; apply: eq_card0; case. Qed.
 
-(** ** [Delta_edge_critical] — witness: vacuously Δ-edge-critical (its line
-    graph has no vertices). *)
-Lemma Delta_edge_critical_unit : Delta_edge_critical (unit_graph tt).
-Proof. by case. Qed.
-
 (** ** [line_graph] — identity: the line graph of an edgeless multigraph is
     empty. *)
 Lemma line_graph_unit_empty : #|line_graph (unit_graph tt)| = 0.
 Proof. exact: card_void. Qed.
+
+(** ** [Delta_edge_critical] — guard has teeth: the edgeless multigraph is NOT
+    Δ-edge-critical, being Δ-edge-colourable (its line graph is empty).  Until
+    2026-10-25 [Delta_edge_critical] only asked that deleting any edge lower the
+    chromatic index, which this graph met vacuously. *)
+Lemma not_Delta_edge_critical_unit : ~ Delta_edge_critical (unit_graph tt).
+Proof.
+case; rewrite mDelta_unit => h _; move: h.
+have := leq_chi [set: line_graph (unit_graph tt)].
+by rewrite cardsT line_graph_unit_empty leqn0 => /eqP ->.
+Qed.
 
 (** ** [total_graph] — identity: the total graph of the edgeless one-vertex
     multigraph has no edges. *)
@@ -413,4 +419,159 @@ Proof. by rewrite /Delta big_ord1 card_N_complete. Qed.
 Lemma strong_K1 : strongly_colorable 'K_1 (2 * Delta 'K_1).
 Proof.
 by rewrite Delta_K1 muln0; apply: strongly_colorable0; rewrite card_ord.
+Qed.
+
+(** ** [Delta_edge_critical] — witness and guard with teeth on small multigraphs (2026-10-25).
+
+    The triangle (one edge per side) is Δ-edge-critical: Δ = 2 < χ' = 3, and deleting an edge
+    leaves chromatic index 2.  The fat triangle (two parallel edges per side) is NOT: χ' = 6 =
+    Δ + 2 and deleting an edge leaves 5 > Δ = 4; it is the graph that refuted the row under the
+    earlier definition (meta/probe_hints/list_colorings_of_edge_critical_graphs_statement.v).
+    Both have complete line graphs; the finite facts are checked by [vm_compute] after
+    [enum 'I_n] is rewritten to an explicit list. *)
+(* the fat triangle: edge e joins e %% 3 and (e %% 3).+1 %% 3 *)
+Definition ft_end (b : bool) (e : 'I_6) : 'I_3 :=
+  if b then @Ordinal 3 ((e %% 3).+1 %% 3) (@ltn_pmod (e %% 3).+1 3 isT)
+  else @Ordinal 3 (e %% 3) (@ltn_pmod e 3 isT).
+
+Definition fat_triangle : mgraph := @mgraph.Graph unit unit 'I_3 'I_6 ft_end (fun _ => tt) (fun _ => tt).
+
+Definition ft_I6 : seq 'I_6 :=
+  [:: @Ordinal 6 0 isT; @Ordinal 6 1 isT; @Ordinal 6 2 isT;
+      @Ordinal 6 3 isT; @Ordinal 6 4 isT; @Ordinal 6 5 isT].
+Definition ft_I3 : seq 'I_3 := [:: @Ordinal 3 0 isT; @Ordinal 3 1 isT; @Ordinal 3 2 isT].
+
+Lemma ft_enum6 : enum 'I_6 = ft_I6.
+Proof. by apply: (inj_map val_inj); rewrite val_enum_ord. Qed.
+Lemma ft_enum3 : enum 'I_3 = ft_I3.
+Proof. by apply: (inj_map val_inj); rewrite val_enum_ord. Qed.
+Lemma ft_all6 (P : pred 'I_6) : all P ft_I6 -> forall x, P x.
+Proof. by move=> /allP h x; apply: h; rewrite -ft_enum6 mem_enum. Qed.
+Lemma ft_all3 (P : pred 'I_3) : all P ft_I3 -> forall x, P x.
+Proof. by move=> /allP h x; apply: h; rewrite -ft_enum3 mem_enum. Qed.
+Lemma ft_card6 (P : pred 'I_6) : #|P| = count P ft_I6.
+Proof. by rewrite cardE /enum_mem -enumT ft_enum6 size_filter. Qed.
+
+Lemma ft_loopless : loopless fat_triangle.
+Proof.
+move=> e; move: e; apply: (ft_all6 (P := fun e : 'I_6 => ft_end false e != ft_end true e)).
+by vm_compute.
+Qed.
+
+(* the shared endpoint of two edges: a vertex both edges are incident to *)
+(* the shared endpoint of two edges: a vertex both edges are incident to *)
+Definition ft_common (e1 e2 : 'I_6) : 'I_3 :=
+  if e1 %% 3 == e2 %% 3 then ft_end false e1
+  else if (e1 %% 3).+1 %% 3 == e2 %% 3 then ft_end true e1 else ft_end false e1.
+
+Lemma ft_incident (x : fat_triangle) (e : edge fat_triangle) :
+  incident x e = (ft_end false e == x) || (ft_end true e == x).
+Proof. by apply/existsP/orP => [[[] h]|[h|h]]; [right | left | exists false | exists true]. Qed.
+
+Lemma ft_all66 (P : 'I_6 -> 'I_6 -> bool) : all (fun x => all (P x) ft_I6) ft_I6 -> forall x y, P x y.
+Proof. move=> h x; apply: ft_all6; move: x; exact: (ft_all6 (P := fun x => all (P x) ft_I6)). Qed.
+
+(** All six edges pairwise share an endpoint: the line graph is complete. *)
+Lemma ft_line_complete (e1 e2 : line_graph fat_triangle) : (e1 -- e2) = (e1 != e2).
+Proof.
+rewrite /edge_rel /= /line_rel; case: (e1 =P e2) => //= _.
+apply/existsP; exists (ft_common e1 e2); rewrite !ft_incident; move: e1 e2.
+apply: (ft_all66 (P := fun e1 e2 : 'I_6 =>
+  ((ft_end false e1 == ft_common e1 e2) || (ft_end true e1 == ft_common e1 e2)) &&
+  ((ft_end false e2 == ft_common e1 e2) || (ft_end true e2 == ft_common e1 e2)))).
+by vm_compute.
+Qed.
+
+Lemma ft_clique (A : {set line_graph fat_triangle}) : clique A.
+Proof. by move=> x y _ _ xy; rewrite ft_line_complete. Qed.
+
+Lemma ft_card_setD1 (T : finType) (x : T) : #|[set: T] :\ x| = #|T|.-1.
+Proof. by have := cardsD1 x [set: T]; rewrite in_setT cardsT add1n => ->. Qed.
+
+Lemma ft_cardL : #|line_graph fat_triangle| = 6.
+Proof. exact: card_ord. Qed.
+
+Lemma ft_chiT : χ([set: line_graph fat_triangle]) = 6.
+Proof. by rewrite (chi_clique (@ft_clique [set: _])) cardsT ft_cardL. Qed.
+
+Lemma ft_chiD (e : line_graph fat_triangle) : χ([set: line_graph fat_triangle] :\ e) = 5.
+Proof.
+by rewrite (chi_clique (@ft_clique _)) ft_card_setD1 ft_cardL.
+Qed.
+
+Lemma ft_edges_at (v : fat_triangle) : #|edges_at v| = 4.
+Proof.
+rewrite cardsE (eq_card (B := fun e : 'I_6 => (ft_end false e == v) || (ft_end true e == v))); first by move=> e; exact: ft_incident.
+rewrite ft_card6; apply/eqP; move: v.
+apply: (ft_all3 (P := fun v : 'I_3 =>
+  count (fun e : 'I_6 => (ft_end false e == v) || (ft_end true e == v)) ft_I6 == 4)).
+by vm_compute.
+Qed.
+
+Lemma ft_mDelta : mDelta fat_triangle = 4.
+Proof.
+apply/eqP; rewrite eqn_leq; apply/andP; split.
+- by apply/bigmax_leqP => v _; rewrite ft_edges_at.
+- by rewrite -(ft_edges_at (@Ordinal 3 0 isT)); apply: leq_bigmax_cond.
+Qed.
+
+(** NEW grounding, guard has teeth: the fat triangle (chi' = 6 = Delta + 2) is not Delta-edge-critical,
+    since deleting an edge leaves chromatic index 5 > 4. *)
+Lemma not_Delta_edge_critical_fat_triangle : ~ Delta_edge_critical fat_triangle.
+Proof. by case=> _ /(_ (@Ordinal 6 0 isT)); rewrite ft_chiD ft_mDelta. Qed.
+
+(** NEW grounding, witness: the triangle (one edge per side) is Delta-edge-critical:
+    Delta = 2 < chi' = 3 and deleting an edge leaves chromatic index 2. *)
+Definition tri_end (b : bool) (e : 'I_3) : 'I_3 :=
+  if b then @Ordinal 3 (e.+1 %% 3) (@ltn_pmod e.+1 3 isT) else e.
+
+Definition triangle_m : mgraph := @mgraph.Graph unit unit 'I_3 'I_3 tri_end (fun _ => tt) (fun _ => tt).
+
+Lemma tri_incident (x : triangle_m) (e : edge triangle_m) :
+  incident x e = (tri_end false e == x) || (tri_end true e == x).
+Proof. by apply/existsP/orP => [[[] h]|[h|h]]; [right | left | exists false | exists true]. Qed.
+
+Lemma ft_all33 (P : 'I_3 -> 'I_3 -> bool) : all (fun x => all (P x) ft_I3) ft_I3 -> forall x y, P x y.
+Proof. move=> h x; apply: ft_all3; move: x; exact: (ft_all3 (P := fun x => all (P x) ft_I3)). Qed.
+
+Definition tri_common (e1 e2 : 'I_3) : 'I_3 :=
+  if e1 == e2 then tri_end false e1 else if e1.+1 %% 3 == e2 then tri_end true e1 else tri_end false e1.
+
+Lemma tri_line_complete (e1 e2 : line_graph triangle_m) : (e1 -- e2) = (e1 != e2).
+Proof.
+rewrite /edge_rel /= /line_rel; case: (e1 =P e2) => //= _.
+apply/existsP; exists (tri_common e1 e2); rewrite !tri_incident; move: e1 e2.
+apply: (ft_all33 (P := fun e1 e2 : 'I_3 =>
+  ((tri_end false e1 == tri_common e1 e2) || (tri_end true e1 == tri_common e1 e2)) &&
+  ((tri_end false e2 == tri_common e1 e2) || (tri_end true e2 == tri_common e1 e2)))).
+by vm_compute.
+Qed.
+
+Lemma tri_clique (A : {set line_graph triangle_m}) : clique A.
+Proof. by move=> x y _ _ xy; rewrite tri_line_complete. Qed.
+
+Lemma tri_cardL : #|line_graph triangle_m| = 3.
+Proof. exact: card_ord. Qed.
+
+Lemma tri_edges_at (v : triangle_m) : #|edges_at v| = 2.
+Proof.
+rewrite cardsE (eq_card (B := fun e : 'I_3 => (tri_end false e == v) || (tri_end true e == v))); first by move=> e; exact: tri_incident.
+rewrite cardE /enum_mem -enumT ft_enum3 size_filter; apply/eqP; move: v.
+apply: (ft_all3 (P := fun v : 'I_3 =>
+  count (fun e : 'I_3 => (tri_end false e == v) || (tri_end true e == v)) ft_I3 == 2)).
+by vm_compute.
+Qed.
+
+Lemma tri_mDelta : mDelta triangle_m = 2.
+Proof.
+apply/eqP; rewrite eqn_leq; apply/andP; split.
+- by apply/bigmax_leqP => v _; rewrite tri_edges_at.
+- by rewrite -(tri_edges_at (@Ordinal 3 0 isT)); apply: leq_bigmax_cond.
+Qed.
+
+Lemma Delta_edge_critical_triangle : Delta_edge_critical triangle_m.
+Proof.
+split.
+- by rewrite (chi_clique (@tri_clique _)) cardsT tri_cardL tri_mDelta.
+- by move=> e; rewrite (chi_clique (@tri_clique _)) ft_card_setD1 tri_cardL tri_mDelta.
 Qed.
