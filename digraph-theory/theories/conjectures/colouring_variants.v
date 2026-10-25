@@ -136,17 +136,23 @@ Definition eulerian (D : diGraphType) : bool :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__04/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__04.json
     English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 3)
-      Every finite Eulerian digraph, that is every digraph in which in-degree equals out-degree
-      at every vertex, has a majority 3-colouring.
-    Definitions: [eulerian D] - in-degree equals out-degree at every vertex (this file); [indeg
-      v] - in-degree (this file, also defined in conjectures/classic_core.v); [majority_col]
-      (this file).
+      Every finite loopless Eulerian digraph, that is every loopless digraph in which in-degree
+      equals out-degree at every vertex, has a majority 3-colouring.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [eulerian D] - in-degree equals out-degree at every vertex (this file); [indeg v] -
+      in-degree (this file, also defined in conjectures/classic_core.v); [majority_col] (this
+      file).
     Notes: [eulerian] encodes only the balanced-degree condition and drops the connectivity
       usually required of an Eulerian digraph, so the hypothesis is weaker and the statement
       correspondingly stronger; majority colouring is a local condition, and a balanced digraph
-      is a disjoint union of connected balanced digraphs, so the two readings are equivalent. *)
+      is a disjoint union of connected balanced digraphs, so the two readings are equivalent.
+      The [loopless D] guard is load-bearing: a looped vertex is balanced and is a same-coloured
+      out-neighbour of itself, so the one-vertex digraph with a loop refuted the earlier
+      unguarded body (meta/probe_hints/majority_3col_eulerian_statement.v); the source's digraphs
+      have no loops.  The guard was added on 2026-10-25 as a reviewed one-way source repair of
+      this migrated row (direction weaken; meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition majority_3col_eulerian_statement : Prop :=
-  forall D : diGraphType, eulerian D ->
+  forall D : diGraphType, loopless D -> eulerian D ->
     exists col : D -> 'I_3, majority_col col.
 
 (** *** Relative edges among the majority statements *)
