@@ -427,6 +427,10 @@ Not flagged by the suffix rule:
    is unsatisfiable as soon as one edge exists: the one-edge hypergraph with empty
    incidence refutes the row. Suggested WP6 fix: add `forall e, exists v, hinc e v`
    (or `1 <= k`) as a guard. Corpus leg is `done` — should be revisited.
+   **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the guard `forall e, exists v, hinc e v`
+   is added. The alternative `1 <= k` would not repair the row: an edge with no vertex has at
+   most `k` vertices for every `k`, and `meta/probe_hints/strong_matchings_and_covers_statement.v`
+   refutes the unguarded body at `k = 1`.
 4. `opg:universal_highly_arc_transitive_digraphs` (`D4inf4.v:176`) — **too strong,
    deliberate**. The existential carries three extra non-vacuity guards (`d_has_arc`,
    `d_infinite`, `d_no_sink_source`) absent from the source question, so a positive

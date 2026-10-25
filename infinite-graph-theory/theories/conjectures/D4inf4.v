@@ -56,13 +56,14 @@ Definition strongly_minimal_cover (H : iHypergraph) (X : hV H -> Prop) : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/strong_matchings_and_covers/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/strong_matchings_and_covers.json
     English statement: (Open Problem Garden, "Strong matchings and covers") For
-      every (possibly infinite) hypergraph H and every k such that every edge of
-      H has at most k vertices, H has a strongly maximal matching and a strongly
-      minimal cover.  A matching is a set F of pairwise vertex-disjoint edges,
-      and it is strongly maximal when for every matching F' the edges of F' not
-      in F inject into the edges of F not in F'.  A cover is a set X of vertices
-      meeting every edge, and it is strongly minimal when for every cover X' the
-      vertices of X not in X' inject into the vertices of X' not in X.
+      every (possibly infinite) hypergraph H whose edges are nonempty and every k
+      such that every edge of H has at most k vertices, H has a strongly maximal
+      matching and a strongly minimal cover.  A matching is a set F of pairwise
+      vertex-disjoint edges, and it is strongly maximal when for every matching
+      F' the edges of F' not in F inject into the edges of F not in F'.  A cover
+      is a set X of vertices meeting every edge, and it is strongly minimal when
+      for every cover X' the vertices of X not in X' inject into the vertices of
+      X' not in X.
     Definitions: [iHypergraph] - a record of a vertex Type, an edge Type and a
       Prop-valued incidence (this file, D4inf4.v); [hedge_le k e] - the vertices
       of e are covered by a map from 'I_k, i.e. e has at most k vertices
@@ -71,14 +72,17 @@ Definition strongly_minimal_cover (H : iHypergraph) (X : hV H -> Prop) : Prop :=
       the subtype of P into the subtype of Q, the choice-free reading of "at
       most as many" (infinite-graph-theory/theories/foundations/igraph.v).
     Notes: the cardinal comparisons use [card_le], the injection form, so no
-      choice or cardinal arithmetic is needed.  CAVEAT (recorded in
-      meta/STATEMENT_IMPROVEMENTS.md): nothing forbids an EMPTY edge.  With
-      k = 0, [hedge_le 0 e] forces every edge to have no vertices, and then
-      [hcover X] is unsatisfiable as soon as one edge exists, so the statement
-      is refutable by the one-edge hypergraph with empty incidence; the source
-      implicitly assumes nonempty edges. *)
+      choice or cardinal arithmetic is needed.  The guard
+      [forall e, exists v, hinc e v] (added 2026-10-25) is load-bearing:
+      [iHypergraph] allows an edge with no vertex, which has at most k vertices
+      for every k and meets no vertex set, so without the guard [hcover] is
+      unsatisfiable and the one-edge hypergraph with empty incidence refutes the
+      body for every k (meta/probe_hints/strong_matchings_and_covers_statement.v;
+      a guard 1 <= k would not repair it).  Hypergraph edges are nonempty in the
+      source, whose covers must meet every edge (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition strong_matchings_and_covers_statement : Prop :=
   forall (H : iHypergraph) (k : nat),
+    (forall e : hE H, exists v, hinc e v) ->
     (forall e : hE H, hedge_le k e) ->
     (exists F : hE H -> Prop, strongly_maximal_matching F) /\
     (exists X : hV H -> Prop, strongly_minimal_cover X).
