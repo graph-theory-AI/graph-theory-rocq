@@ -206,7 +206,7 @@ not as formal resolutions. See the [development README](digraph-theory/theories/
 
 ## Checked formal resolutions
 
-Seven source records have checked formal resolutions: six new formalizations and a bridge to the existing Question 5.9 counterexample family. The latest addition proves Conjecture 1.15 of arXiv:1611.03196 (a large matching in a bipartite graph that takes at most its fair share of each given edge set); the two before it disprove directed Kneser existence at `(5,3)` and the printed Alon–Tarsi Question 6.1. All seven have closed assumptions.
+Eight source records have checked formal resolutions: seven new formalizations and a bridge to the existing Question 5.9 counterexample family. The latest addition refutes Melnikov's valency-variety problem as printed: a 37-vertex graph with the degrees 0 to 29 has chromatic number 3, which does not exceed the proposed bound ceil(15/7) = 3. The graph has an isolated vertex, which the printed statement admits; the row's OPG status is unchanged. Before it: Conjecture 1.15 of arXiv:1611.03196 (a large matching in a bipartite graph that takes at most its fair share of each given edge set), and the disproofs of directed Kneser existence at `(5,3)` and of the printed Alon–Tarsi Question 6.1. All eight have closed assumptions.
 
 See the [proof overview](meta/formalizations/README.md), [latest development journal](meta/formalizations/ROUND2_JOURNAL.md), and [resolution registry](meta/FORMAL_RESOLUTIONS.md). Run `ROCQ_OPAM_SWITCH=rocq-tools make resolutions` to build and check them with the compatible development switch.
 

@@ -147,6 +147,29 @@
         "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
         "reviewed_at": "2026-09-05"
       }
+    },
+    {
+      "record_key": "opg:melnikovs_valency_variety_problem",
+      "corpus": "opg",
+      "node_id": 46575,
+      "canonical_url": "http://www.openproblemgarden.org/op/melnikovs_valency_variety_problem",
+      "source_commit_repo": "b72c5857060addbe4523016e88ae3aa626e958fd",
+      "source_commit_problems_json": "56fa4523d69544a34c6df4280302fcc2af3943fe",
+      "source_text": "Problem The valency-variety $ w(G) $ of a graph $ G $ is the number of different degrees in $ G $ . Is the chromatic number of any graph $ G $ with at least two vertices greater than $$\\ceil{ \\frac{\\floor{w(G)/2}}{|V(G)| - w(G)} } ~ ?$$",
+      "selected_proposition": "primary OPG statement",
+      "package": "chromatic-theory",
+      "statement": "Chromatic.conjectures.U1.melnikovs_valency_variety_statement",
+      "statement_file": "chromatic-theory/theories/conjectures/U1.v",
+      "statement_sha256": "fb814bd91b9964ea98dda3ca9fa18cdfd3374eb19afb077b7bf56c6aba1b9740",
+      "theorem": "Chromatic.applications.melnikov_valency_variety.melnikovs_valency_variety_disproved",
+      "theorem_file": "chromatic-theory/theories/applications/melnikov_valency_variety.v",
+      "direction": "disprove",
+      "correspondence": {
+        "explanation": "The row statement (U1.v) is the affirmative answer to the OPG question as printed: for every finite simple graph G with at least two vertices, ceil(floor(w(G)/2) / (|V(G)| - w(G))) < chi(G), where w(G) is the number of distinct vertex degrees, computed as the size of the duplicate-free list of the degrees #|N(x)| (degree 0 included); the inner halving and the outer ceil_div are exact nat floor and ceiling. The refutation instantiates G with the 37-vertex graph of the resolution write-up (coordination/sources/melnikovs_valency_variety_problem/output.md, section 1), encoded on I_37 with the edges of its six rules. Computation over an explicit list of the 37 vertices checks the write-up degree table (degrees 0, 1, ..., 29, so w = 30 and the bound is ceil(15/7) = 3) and a proper colouring by three classes (A, T, u1..u6, u10..u12 and z; B; C and u7..u9), so chi <= 3 by GTBase.colourings.proper_colouring_chi, and 3 < chi fails. Caveat: the graph has an isolated vertex z; the printed wording any graph G with at least two vertices admits it, as does the row body; the OPG status is unchanged. The write-up claim that 37 vertices is minimum is not formalized.",
+        "implemented_by": "Marcol (Claude Opus 5.5, mathematics programme, 2026-10-25)",
+        "reviewed_by": "",
+        "reviewed_at": ""
+      }
     }
   ]
 }
