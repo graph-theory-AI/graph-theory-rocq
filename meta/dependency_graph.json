@@ -20,9 +20,9 @@
   "edges": 144,
   "by_status": {
    "candidate": 32,
-   "conditional": 8,
+   "conditional": 4,
    "refuted-direction": 33,
-   "verified": 71
+   "verified": 75
   },
   "by_kind": {
    "equiv": 6,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 87
+  "proved_theorems": 91
  },
  "edges": [
   {
@@ -1318,13 +1318,11 @@
    "from": "petersen_coloring_statement",
    "to": "cycle_double_cover_statement",
    "kind": "implies",
-   "status": "conditional",
+   "status": "verified",
    "cite": "gc:e091",
-   "proof": "petersen_coloring_implies_cycle_double_cover",
-   "note": "Composition of gc:e090 (Petersen colouring => (5,2)-cover, modulo the cited cubic reduction) with the unconditional gc:e084 (split the five even subgraphs into circuits, cycle_space.even_circuit_decomposition).",
-   "external": [
-    "external_five_even_cover_cubic_reduction_statement"
-   ],
+   "proof": "unconditional_petersen_coloring_implies_cycle_double_cover",
+   "note": "Composition of gc:e090 (Petersen colouring => (5,2)-cover, with the cubic reduction proved as five_even_cover_cubic_reduction) with the unconditional gc:e084 (split the five even subgraphs into circuits, cycle_space.even_circuit_decomposition).",
+   "external": [],
    "sources": [
     "cycle-theory/implications_U6.v"
    ]
@@ -1346,13 +1344,11 @@
    "from": "petersen_coloring_statement",
    "to": "m_n_cycle_covers_statement",
    "kind": "implies",
-   "status": "conditional",
+   "status": "verified",
    "cite": "gc:e090",
-   "proof": "petersen_coloring_implies_m_n_cycle_covers",
-   "note": "Pull back the Petersen graph's double cover by five even subgraphs along the Petersen colouring: the three edges at a vertex of a cubic graph go to a claw of the (triangle-free) Petersen graph (petersen_claw), every member meets every claw evenly (plab_claw_even) and every Petersen edge lies in exactly two members (plab_card), so petersen_pullback_cover gives a (5,2)-cover of every cubic bridgeless graph; the finite Petersen facts are proved by closed compute checks on 5-bit codes. The cubic-to-general step is the cited Jaeger 1985 / Zhang reduction, carried as the same external as gc:e085.",
-   "external": [
-    "external_five_even_cover_cubic_reduction_statement"
-   ],
+   "proof": "unconditional_petersen_coloring_implies_m_n_cycle_covers",
+   "note": "Pull back the Petersen graph's double cover by five even subgraphs along the Petersen colouring: the three edges at a vertex of a cubic graph go to a claw of the (triangle-free) Petersen graph (petersen_claw), every member meets every claw evenly (plab_claw_even) and every Petersen edge lies in exactly two members (plab_card), so petersen_pullback_cover gives a (5,2)-cover of every cubic bridgeless graph; the finite Petersen facts are proved by closed compute checks on 5-bit codes. The cubic-to-general step (Jaeger 1985 / Zhang) is proved as five_even_cover_cubic_reduction, as for gc:e085.",
+   "external": [],
    "sources": [
     "cycle-theory/implications_U6.v"
    ]
@@ -1584,13 +1580,11 @@
    "from": "strong_5_cycle_double_cover_statement",
    "to": "cycle_double_cover_statement",
    "kind": "implies",
-   "status": "conditional",
+   "status": "verified",
    "cite": "gc:e086",
-   "proof": "strong_5_cycle_double_cover_implies_cycle_double_cover",
-   "note": "Composition of gc:e085 (Row 10 => Row 7, cubic reduction carried as the external) with the unconditional gc:e084 (Row 7 => Row 11, the even-subgraph-to-circuits refinement F14)",
-   "external": [
-    "external_five_even_cover_cubic_reduction_statement"
-   ],
+   "proof": "unconditional_strong_5_cycle_double_cover_implies_cycle_double_cover",
+   "note": "Composition of gc:e085 (Row 10 => Row 7, with the cubic reduction proved as five_even_cover_cubic_reduction) with the unconditional gc:e084 (Row 7 => Row 11, the even-subgraph-to-circuits refinement F14)",
+   "external": [],
    "sources": [
     "cycle-theory/implications_U6.v"
    ]
@@ -1599,13 +1593,11 @@
    "from": "strong_5_cycle_double_cover_statement",
    "to": "m_n_cycle_covers_statement",
    "kind": "implies",
-   "status": "conditional",
+   "status": "verified",
    "cite": "gc:e085",
-   "proof": "strong_5_cycle_double_cover_implies_m_n_cycle_covers",
-   "note": "Row 10 is cubic-only and needs a circuit to start from: cubic_has_circuit supplies one (cycle_space.has_circuit on the full edge set, every degree being 3, hence never 1), and dropping Row 10's extra 'some member contains C' clause leaves exactly a (5,2)-cover of every cubic bridgeless graph; the cubic-to-general step is the cited external reduction",
-   "external": [
-    "external_five_even_cover_cubic_reduction_statement"
-   ],
+   "proof": "unconditional_strong_5_cycle_double_cover_implies_m_n_cycle_covers",
+   "note": "Row 10 is cubic-only and needs a circuit to start from: cubic_has_circuit supplies one (cycle_space.has_circuit on the full edge set, every degree being 3, hence never 1), and dropping Row 10's extra 'some member contains C' clause leaves exactly a (5,2)-cover of every cubic bridgeless graph; the cubic-to-general step is proved as five_even_cover_cubic_reduction: inflate every vertex into a cycle through its arc ends (a cubic bridgeless graph) and contract the cycles back, which keeps even subgraphs even",
+   "external": [],
    "sources": [
     "cycle-theory/implications_U6.v"
    ]
