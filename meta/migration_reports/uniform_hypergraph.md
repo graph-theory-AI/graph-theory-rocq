@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py uniform_hypergraph --details /t
 - Canonical: `GTBase.hypergraph_uniformity.uniform_family`.
 - Baseline: `3be65eed7084abfae36dee74f7117b598325bc4c`.
 - Scope: 11 helpers, 20 statements, 44 frozen objects, 165 recorded references.
-- Source checks: 450/450 pass; consistent.
+- Source checks: 451/451 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -31,6 +31,8 @@ Full evidence: `python3 meta/migration_report.py uniform_hypergraph --details /t
 | `Hypergraph.conjectures.XE2.erdos_833_statement` / erdos:833 | `Hypergraph.migration.uniform_hypergraph.erdos_833_statement_compat` |
 | `Extremal.conjectures.D2str.simultaneous_partition_of_hypergraphs_statement` / opg:simultaneous_partition_of_hypergraphs | `Extremal.migration.uniform_hypergraph.simultaneous_partition_of_hypergraphs_statement_compat` |
 | `Chromatic.conjectures.U5.a_generalization_of_vizings_theorem_statement` / opg:a_generalization_of_vizings_theorem | `Chromatic.migration.uniform_hypergraph.a_generalization_of_vizings_theorem_statement_compat` |
+
+Source repairs after migration: ONE-WAY source-repair certificates (`live -> frozen`), not migration equivalences; every other row keeps its exact iff: `Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement` (`#|T| = 3 * n -> ~ contains_complete E 4 3 -> 2 * #|E| <= n ^ 2 * (5 * n - 3)` -> `(#|T| = 3 * n -> ~ contains_complete E 4 3 -> 2 * #|E| <= n ^ 2 * (5 * n - 3)) /\ (#|T| = 2 * n -> ~ contains_complete E 5 3 -> #|E| <= n ^ 2 * (n - 1))`; record `meta/STATEMENT_IMPROVEMENTS.md`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py uniform_hypergraph --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
