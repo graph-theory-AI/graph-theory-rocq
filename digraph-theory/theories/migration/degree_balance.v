@@ -26,7 +26,14 @@
     grounding stay byte-identical to the baseline, and the registry classifies them as a deferred
     legacy-axiom defect (their statements inherit four classical-reals axioms).  No migration snapshot
     referenced these declarations, so per-row copies are complete.  Hashes and substitutions:
-    meta/migration_reports/degree_balance.md. *)
+    meta/migration_reports/degree_balance.md.
+
+    SOURCE REPAIR (2026-10-25, direction weaken; the first use of the A4 gate extension): the live
+    colouring_variants row [majority_3col_eulerian_statement] gained a [loopless D] guard (the looped
+    one-vertex digraph is balanced and refuted the unguarded row; see the arxiv:1608.03040#04 entry of
+    meta/STATEMENT_IMPROVEMENTS.md).  [ColouringVariantsLegacy] stays verbatim, and its certificate
+    below is a ONE-WAY SOURCE-REPAIR certificate (frozen -> live), not a migration equivalence, bound by
+    the spec's [repair] entry.  Every other certificate of this file keeps its exact iff. *)
 
 From HB Require Import structures.
 From mathcomp Require Import all_boot all_fingroup all_algebra.
@@ -163,10 +170,13 @@ Lemma orientation_C4_eulerian_avoidable_statement_compat :
   X221Legacy.orientation_C4_eulerian_avoidable_statement <-> orientation_C4_eulerian_avoidable_statement.
 Proof. by split=> h b; apply/x221_eulerian_avoidable_compat. Qed.
 
-(** arxiv:1608.03040#04 (unchanged). *)
+(** arxiv:1608.03040#04 (source repair 2026-10-25: the live row gained a loopless guard). *)
+(** One-way source-repair certificate, not a migration equivalence (2026-10-25, direction weaken):
+    the live row gained the [loopless D] guard, so the frozen row implies it (drop the guard).  The
+    converse would derive the frozen, unguarded row, which the looped one-vertex digraph refutes. *)
 Lemma majority_3col_eulerian_statement_compat :
-  ColouringVariantsLegacy.majority_3col_eulerian_statement <-> majority_3col_eulerian_statement.
-Proof. exact: iff_refl. Qed.
+  ColouringVariantsLegacy.majority_3col_eulerian_statement -> majority_3col_eulerian_statement.
+Proof. by move=> h D _; exact: h. Qed.
 
 (** derived:drv_twoext_h6 (unchanged): the complete row, every guard in its order. *)
 Lemma H6_no_full_cover_compat :

@@ -449,7 +449,16 @@
       },
       "certificate": "Digraph.migration.directed_neighbourhood.majority_3col_eulerian_statement_original_compat",
       "commit": "298112264b7c31820acf889c6da29b710fd39c9a",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "eulerian D ->",
+          "loopless D -> eulerian D ->"
+        ],
+        "doc_block_sha256": "7a7f06ef489170c1e992f66e6bf6d71e5ea3fe6dc287c33afa3a50074da67fc4",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "direction": "weaken"
+      }
     },
     {
       "kind": "original-statement",
@@ -845,6 +854,7 @@
     "",
     "History: B16's three per-row snapshots (x221_eulerian, cv_eulerian, Eulerian) and B1/B2's Mader bound snapshot keep this family's live in-degree; each is keyed below with its complete Original over the raw in-degrees (DegreeBalanceOriginal and the *Original row modules; the X221 row also over poset-unavoidability's frozen contains_subdigraph; X2Original over B1's raw contains_subdivision). The whole Props conj_9_2_glued/_e (B16's additional statements) reach no live source of this family and are enrolled only as complete Originals (non_corpus).",
     "",
-    "Proof-only adaptations (theorem types unchanged): grounding_classic_core.v (the in/out-degree identities and the C3 groundings unfold degree_balance.indeg), grounding_X2.v l.113, glue_eul_subtype.v l.196/247/280/311. Deferred, not migrated: reals_growth.indeg (B16's legacy-axiom class); distinct models as listed. No statement text, doc block, manifest row or leg state changes; no classical-assumption change."
+    "Proof-only adaptations (theorem types unchanged): grounding_classic_core.v (the in/out-degree identities and the C3 groundings unfold degree_balance.indeg), grounding_X2.v l.113, glue_eul_subtype.v l.196/247/280/311. Deferred, not migrated: reals_growth.indeg (B16's legacy-axiom class); distinct models as listed. No statement text, doc block, manifest row or leg state changes; no classical-assumption change.",
+    "Source repair (2026-10-25, PROGRAMME A2 with the A4 direction weaken): the live majority_3col_eulerian_statement gained a loopless D guard. ColouringVariantsOriginal stays verbatim; its original-statement entry carries the repair identical to the degree_balance statement entry (which holds the text, doc-block, row and leg checks), and its certificate is kernel-checked as original -> live."
   ]
 }

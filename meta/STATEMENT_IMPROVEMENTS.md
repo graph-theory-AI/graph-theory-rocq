@@ -1007,6 +1007,17 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   meeting it. **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the body gains
   `irreflexive (@arc D)`; loops change neither the directed paths nor `ell`, so the guard keeps
   the source's reading (`meta/probe_hints/stable_meeting_longest_dipaths_statement.v`).
+- `arxiv:1608.03040#00` (`conjectures/colouring_variants.v:majority_3col_statement`) and
+  `arxiv:1608.03040#01` (`conjectures/colouring_variants.v:majority_k1col_statement`) —
+  **refutable (loop)** (found 2026-10-25). `diGraphType` allows loops, and a loop at v makes v a
+  same-coloured out-neighbour of itself, so the one-vertex digraph with a loop has no majority
+  colouring (k = 2 for #01). The source's digraphs have no loops: its Theorem 1 (every digraph has a
+  majority 4-colouring) fails on that digraph. **FIXED 2026-10-25** (coordination/PROGRAMME.md A1,
+  Lancelot's lane 4): both bodies gain `loopless D`
+  (`meta/probe_hints/majority_3col_statement.v`, `meta/probe_hints/majority_k1col_statement.v`).
+  For #01, which the corpus marks disproved (Girão, Kittipassorn, Popielarz), the guard keeps the
+  genuine loopless refutation as what the negation must capture. The relative edges e016, e017,
+  e018 and e038 are re-proved over the guards, their reviewer fields cleared until review.
 - `arxiv:1608.03040#02` (Open Problem 1) →
   `conjectures/X45.v:majority_three_colouring_beta_statement` — **too strong**. The row asks
   whether SOME constant `beta < 1` works; the body fixes `beta = 1/2`, i.e. it restates
@@ -1057,6 +1068,17 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   weaker than the classical "Eulerian digraph". Majority colouring is a local condition and a
   balanced digraph is a disjoint union of connected balanced ones, so the two readings coincide;
   worth a bridging lemma rather than a body change.
+  **REPAIRED 2026-10-25** (coordination/PROGRAMME.md A2, with the A4 direction weaken, its first
+  use; Lancelot's lane 4): the row was also **refutable (loop)**. A looped vertex is balanced
+  (in-degree = out-degree = 1) and is a same-coloured out-neighbour of itself, so the one-vertex
+  digraph with a loop refuted the body (`meta/probe_hints/majority_3col_eulerian_statement.v`).
+  The live `majority_3col_eulerian_statement` now reads
+  `forall D : diGraphType, loopless D -> eulerian D -> exists col : D -> 'I_3, majority_col col`:
+  the exact replacement is `eulerian D ->` to `loopless D -> eulerian D ->`. It is a WEAKENING
+  (old -> new), so the migration certificates are one-way, frozen -> live:
+  `migration/degree_balance.v` (statement entry, the text, doc-block, row and leg checks) and
+  `migration/directed_neighbourhood.v` (original-statement entry with the identical repair). The
+  frozen copies stay verbatim. No manifest-row or leg field changes.
 - `studies:std_bang_jensen_et_al_conjecture_f_subdivision_compl` (`conjectures/X90.v`) and
   `arxiv:1604.02317#00` (`conjectures/X166.v`) — **model-relative**. Both are only as faithful as
   the GTBase `complexity.v` cost-coupled interpreter (`prog`, `prun`, `poly_cost_on`,
