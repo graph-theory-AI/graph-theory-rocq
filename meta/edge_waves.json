@@ -817,7 +817,7 @@
    "proved_by": "Marcol (mathematics programme, 2026-10-25): the Seymour body restored to the source's chi' <= r+1 (PROGRAMME A1); the proof combines mDelta_le and overfull_le of wave M",
    "reviewed_by": "",
    "reviewed_at": "",
-   "note": "On an r-graph both Goldberg terms are at most r+1 (mDelta_le: every vertex has exactly r incident edges; overfull_le: the loopless handshake plus the odd-cut condition give |E(S)| <= r * floor(|S|/2)), so Goldberg's bound gives chi' <= r+1, Seymour's r-graph conjecture in the source's form (body restored 2026-10-25, PROGRAMME A1). Earlier (metadata wave M, 2026-09-24): refuted-direction against the chi' <= r body."
+   "note": "On an r-graph both Goldberg terms are at most r+1: mDelta G <= r (every vertex has exactly r incident edges) and overfull_parameter G <= r (the loopless handshake plus the odd-cut condition give |E(S)| <= r * floor(|S|/2)), so Goldberg's bound max(Delta+1, w) gives chi' <= r+1, Seymour's r-graph conjecture in the source's form (body restored 2026-10-25, PROGRAMME A1)"
   },
   "graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement->triangle_free_induced_tree_chi_bounded_statement:implies": {
    "gc": "e229",
