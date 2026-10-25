@@ -1541,7 +1541,9 @@ have [w [hw _]] := hdel z x y hx hy.
 by exists w; split => //; apply/allP => e _; rewrite inE.
 Qed.
 
-(*@EDGE from=cycle_double_covers_containing_predefined_2_regular_statement to=cycle_double_cover_statement kind=implies status=conditional external="external_cdc_cubic_2connected_reduction_statement" proof=cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover cite="gc:e098" note="Instantiate the source at S = set0: it is 2-regular (degree 0 everywhere, subdeg0), G - E(set0) = G is connected since a 2-connected multigraph is connected (two_connected_del_set0), and the empty circuit decomposition [::] of set0 is trivially contained in L; so the source yields a CDC of every cubic 2-connected multigraph. The cubic 2-connected-to-general step is the cited Jaeger 1985 / Zhang reduction, carried as the external. The earlier BLOCKED verdict (needing Tutte's non-separating induced circuit and a three_connected predicate) is withdrawn: S = set0 suffices." *)
+(** (Until 2026-10-25 the edge gc:e098, [status=conditional]; its annotation now
+    sits on [unconditional_cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover]
+    below, after [cdc_cubic_2connected_reduction].) *)
 Theorem cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover :
   external_cdc_cubic_2connected_reduction_statement ->
   cycle_double_covers_containing_predefined_2_regular_statement ->
@@ -1551,6 +1553,256 @@ move=> Hred Hs; apply: Hred => G hn hc h2.
 have hk : subgraph_kregular (@set0 (edge G)) 2 by move=> v; left; exact: subdeg0.
 have [L [hL _]] := Hs G set0 hn hc h2 hk (two_connected_del_set0 h2).
 by exists L.
+Qed.
+
+(** ================================================================= *)
+(** ** gc:e098: the reduction of cycle double covers to cubic 2-connected
+       multigraphs (classical-lemmas TODO 4)
+
+    [cdc_cubic_2connected_reduction] proves
+    [external_cdc_cubic_2connected_reduction_statement] without block
+    decompositions.  Given a bridgeless [G] with at least two edges:
+    - collapse its components onto one vertex ([comp_reduce.Hc]: connected,
+      bridgeless, same edges, and the same even subgraphs, [cdc2c_Hc_even]);
+    - inflate every vertex into a cycle ([infG], gc:e085's construction): a
+      cubic, bridgeless and, by [inf_lift], connected multigraph
+      ([cdc2c_inf_mconnected]) with at least four vertices;
+    - such a multigraph is 2-connected ([cdc2c_cubic_two_connected]): a cut
+      vertex [z] leaves two sides whose cuts consist of edges at [z], disjoint
+      and nonempty, and [z] has three edges, so one cut is a single edge, a
+      bridge ([cdc2c_cut1_bridge]);
+    - a cycle double cover of the inflation contracts ([inf_contract]) to a
+      double cover of [G] by even subgraphs, which split into circuits
+      ([cycle_space.even_list_circuit_decomposition]).
+    With a single edge, the edge is a loop and covers itself twice
+    ([cdc2c_one_edge]). *)
+
+(** A circuit is an even subgraph. *)
+Lemma cdc2c_circuit_even (G : mgraph) (C : {set edge G}) :
+  is_circuit C -> forall v : G, ~~ odd (subdeg C v).
+Proof. by case=> _ hreg _ v; case: (hreg v) => ->. Qed.
+
+(** Even subgraphs of the collapsed graph [Hc r0] are even subgraphs of [G]
+    (the tail of comp_reduce.five_even_cover_connected_reduce, for one set). *)
+Lemma cdc2c_Hc_even (G : mgraph) (r0 : G) (C : {set edge G}) :
+  mroot r0 = r0 -> (forall v : Hc r0, ~~ odd (@subdeg (Hc r0) C v)) ->
+  forall v : G, ~~ odd (subdeg C v).
+Proof.
+move=> hr0 hC v.
+have keyends : forall (v : G) (h : vpred r0 v) (b : bool),
+    mroot v != v -> #|@ends_at (Hc r0) C b (Sub v h)| = #|ends_at C b v|.
+  move=> w h b hw; apply: eq_card => f; rewrite !inE.
+  by rewrite -val_eqE val_prj SubK (pr_eqE _ hr0 hw).
+have keydeg : forall (v : G) (h : vpred r0 v),
+    mroot v != v -> @subdeg (Hc r0) C (Sub v h) = subdeg C v.
+  move=> w h hw.
+  by rewrite /subdeg (keyends w h false hw) (keyends w h true hw).
+case: (boolP (mroot v == v)) => [/eqP hvr|hnr]; last first.
+  have hv : vpred r0 v by rewrite /vpred hnr.
+  by rewrite -(keydeg v hv hnr); exact: (hC (Sub v hv)).
+have hsum : ~~ odd (\sum_(y in mcomp v) subdeg C y).
+  by rewrite sum_subdeg_cut (cut_mcomp v) setI0 cards0 addn0 oddM /=.
+have hrest : ~~ odd (\sum_(y in mcomp v | y != v) subdeg C y).
+  apply: odd_sum_even_P => y /andP[hy hyv].
+  have hnr : mroot y != y.
+    apply/negP => /eqP hyy.
+    by move: hyv; rewrite (mroot_unique hvr hy hyy) eqxx.
+  have hv : vpred r0 y by rewrite /vpred hnr.
+  by rewrite -(keydeg y hv hnr); exact: (hC (Sub y hv)).
+by move: hsum; rewrite (bigD1 v (mcomp_id v)) /= oddD (negbTE hrest) addbF.
+Qed.
+
+(** The inflation of a connected multigraph is connected. *)
+Lemma cdc2c_inf_mconnected (G : mgraph) : mconnected G -> mconnected (infG G).
+Proof.
+move=> hc a b.
+have [w hw] := hc (inf_end a) (inf_end b).
+have [W [hW _]] := inf_lift hw erefl erefl.
+by exists W.
+Qed.
+
+(** An edge alone in a cut is a bridge. *)
+Lemma cdc2c_cut1_bridge (H : mgraph) (A : {set H}) (f : edge H) :
+  cut A = [set f] -> is_bridge f.
+Proof.
+move=> hA; apply/is_bridgeP => w hw.
+have hf : f \in cut A by rewrite hA set11.
+have hne : (source f \in A) != (target f \in A).
+  by move: hf; rewrite inE; case: (source f \in A); case: (target f \in A).
+have [g hgw] := uwalk_crosses hw hne.
+by rewrite hA => /set1P hg; rewrite -hg.
+Qed.
+
+(** Adjacency avoiding the vertex [z]. *)
+Definition cdc2c_radj (H : mgraph) (z : H) : rel H :=
+  fun u v => [&& u != z, v != z & mrel u v].
+
+Lemma cdc2c_reach_ne (H : mgraph) (z a u : H) :
+  a != z -> connect (cdc2c_radj z) a u -> u != z.
+Proof.
+move=> ha /connectP [p hp ->]; elim: p a ha hp => //= c p IH a ha /andP[hac hp].
+by apply: IH hp; case/and3P: hac.
+Qed.
+
+Lemma cdc2c_reach_walk (H : mgraph) (z x y : H) :
+  connect (cdc2c_radj z) x y -> x != z ->
+  exists w, uwalk x y w /\
+    all (fun e => (source e \notin [set z]) && (target e \notin [set z])) w.
+Proof.
+case/connectP => p; elim: p x => [x _ hl _|c p IH x /= /andP[hxc hp] hl hx].
+  have hxy : x = y by move: hl.
+  by exists [::]; rewrite /= hxy eqxx.
+case/and3P: hxc => _ hc /existsP[e he].
+have [w [hw hall]] := IH c hp hl hc.
+exists (e :: w); split.
+  case/orP: he => /andP[/eqP hs /eqP ht].
+  - by apply: uwalk_cons; [exact: hs | rewrite ht].
+  - by apply: uwalk_cons_rev; [exact: ht | rewrite hs].
+rewrite /= hall andbT !inE.
+by case/orP: he => /andP[/eqP -> /eqP ->]; rewrite hx hc.
+Qed.
+
+(** A connected, bridgeless, loopless cubic multigraph with at least three vertices
+    is 2-connected: a cut vertex [z] separates two sides whose cuts consist of edges
+    at [z]; they are disjoint and nonempty, and [z] has three edges, so one cut is a
+    single edge, a bridge. *)
+Lemma cdc2c_cubic_two_connected (H : mgraph) :
+  cubic H -> mconnected H -> bridgeless H -> (3 <= #|H|)%N -> two_connected H.
+Proof.
+move=> [hll hreg] hcon hbl h3; split => // z x y hx hy.
+rewrite !inE in hx hy.
+case: (boolP (connect (cdc2c_radj z) x y)) => cxy; first exact: cdc2c_reach_walk cxy hx.
+exfalso.
+have hsym : symmetric (cdc2c_radj z).
+  by move=> p q; rewrite /cdc2c_radj mrel_sym; case: (p != z); case: (q != z).
+have cS : forall a u v : H, a != z -> connect (cdc2c_radj z) a u -> v != z -> mrel u v ->
+    connect (cdc2c_radj z) a v.
+  move=> a u v ha hu hv huv; have hu' := cdc2c_reach_ne ha hu.
+  apply: (connect_trans hu); apply: connect1.
+  by rewrite /cdc2c_radj hv huv hu'.
+have hmrel : forall f : edge H, mrel (source f) (target f).
+  by move=> f; apply/existsP; exists f; rewrite !eqxx.
+pose S := [set u | connect (cdc2c_radj z) x u].
+pose T := [set u | connect (cdc2c_radj z) y u].
+have hcutz : forall a : H, a != z -> forall f, f \in cut [set u | connect (cdc2c_radj z) a u] ->
+    (source f == z) || (target f == z).
+  move=> a ha f; rewrite !inE.
+  case hs: (connect _ a (source f)); case ht: (connect _ a (target f)) => //= _.
+  - apply/orP; right; apply/negPn/negP => htz.
+    by move: ht; rewrite (cS a (source f) (target f) ha hs htz (hmrel f)).
+  - apply/orP; left; apply/negPn/negP => hsz.
+    by move: hs; rewrite (cS a (target f) (source f) ha ht hsz) // mrel_sym.
+have hzout : forall a : H, a != z -> z \notin [set u | connect (cdc2c_radj z) a u].
+  by move=> a ha; rewrite inE; apply/negP => /(cdc2c_reach_ne ha); rewrite eqxx.
+have hne : forall a : H, a != z -> exists f, f \in cut [set u | connect (cdc2c_radj z) a u].
+  move=> a ha; have [w hw] := hcon a z.
+  have hsep : (a \in [set u | connect (cdc2c_radj z) a u]) != (z \in [set u | connect (cdc2c_radj z) a u]).
+    by rewrite (negbTE (hzout a ha)) inE connect0.
+  by have [f _ hf] := uwalk_crosses hw hsep; exists f.
+have hST : forall u, u \in S -> u \in T -> False.
+  move=> u; rewrite !inE => hxu hyu; move: cxy.
+  have csym := sym_connect_sym hsym.
+  by rewrite (connect_trans hxu) // csym.
+have hdisj : [disjoint cut S & cut T].
+  apply/pred0P => f /=; apply/negP => /andP[hfS hfT].
+  have hcS : (source f \in S) (+) (target f \in S) by move: hfS; rewrite inE.
+  have hcT : (source f \in T) (+) (target f \in T) by move: hfT; rewrite inE.
+  case/orP: (hcutz x hx f hfS) => /eqP hz.
+  - have hzS : (source f \in S) = false by rewrite hz; apply/negbTE/hzout.
+    have hzT : (source f \in T) = false by rewrite hz; apply/negbTE/hzout.
+    by move: hcS hcT; rewrite hzS hzT /= => htS htT; exact: (hST (target f)).
+  - have hzS : (target f \in S) = false by rewrite hz; apply/negbTE/hzout.
+    have hzT : (target f \in T) = false by rewrite hz; apply/negbTE/hzout.
+    by move: hcS hcT; rewrite hzS hzT !addbF => hsS hsT; exact: (hST (source f)).
+have hsub : cut S :|: cut T \subset edges_at z.
+  apply/subsetP => f; rewrite inE => /orP[] hf; rewrite inE /incident.
+  - by case/orP: (hcutz x hx f hf) => hz; apply/existsP; [exists false | exists true].
+  - by case/orP: (hcutz y hy f hf) => hz; apply/existsP; [exists false | exists true].
+have hcard : (#|cut S| + #|cut T| <= 3)%N.
+  rewrite -cardsUI (disjoint_setI0 hdisj) cards0 addn0 -(hreg z).
+  exact: subset_leq_card hsub.
+have [f1 hf1] := hne x hx; have [f2 hf2] := hne y hy.
+have h1 : (0 < #|cut S|)%N by apply/card_gt0P; exists f1.
+have h2 : (0 < #|cut T|)%N by apply/card_gt0P; exists f2.
+case: (leqP #|cut S| 1) => hS.
+  have /cards1P [f hf] : #|cut S| == 1 by rewrite eqn_leq hS h1.
+  exact: hbl f (cdc2c_cut1_bridge hf).
+have hT : (#|cut T| <= 1)%N.
+  by rewrite -(leq_add2l 2); apply: leq_trans hcard; rewrite leq_add2r.
+have /cards1P [f hf] : #|cut T| == 1 by rewrite eqn_leq hT h2.
+exact: hbl f (cdc2c_cut1_bridge hf).
+Qed.
+
+(** A bridgeless multigraph with exactly one edge: the edge is a loop, which covered
+    twice by itself is a cycle double cover. *)
+Lemma cdc2c_one_edge (G : mgraph) :
+  bridgeless G -> #|edge G| = 1 -> exists L : seq {set edge G}, cdc L.
+Proof.
+move=> hbl h1.
+have /cards1P [e he] : #|[set: edge G]| == 1 by rewrite cardsT h1.
+have hall : forall f : edge G, f = e by move=> f; apply/set1P; rewrite -he in_setT.
+have hloop : source e = target e.
+  apply/eqP; apply/negPn/negP => hne; apply: (hbl e); apply/is_bridgeP => w.
+  case: w => [/= /eqP hst|g w _]; first by move: hne; rewrite hst eqxx.
+  by rewrite (hall g) mem_head.
+have hcirc : is_circuit [set e].
+  split.
+  - by apply/set0Pn; exists e; rewrite set11.
+  - move=> v; case: (eqVneq v (source e)) => [->|hv]; first by right; exact: subdeg_loop.
+    left; rewrite /subdeg.
+    have h0 : forall b, ends_at [set e] b v = set0.
+      move=> b; apply/setP => f; rewrite !inE (hall f) eqxx /=.
+      by apply/negbTE; case: b => /=; rewrite eq_sym // -hloop.
+    by rewrite !h0 cards0.
+  - move=> x y /existsP[f /andP[_ /existsP[b /eqP hx]]] /existsP[g /andP[_ /existsP[c /eqP hy]]].
+    exists [::]; rewrite /walk_in /= andbT.
+    move: hx hy; rewrite (hall f) (hall g).
+    by case: b; case: c => /= <- <-; rewrite ?hloop.
+exists [:: [set e]; [set e]]; split.
+  by move=> C; rewrite !inE => /orP[] /eqP ->.
+by move=> f; rewrite (hall f) /= set11.
+Qed.
+
+(** The reduction: cycle double covers of cubic 2-connected multigraphs give cycle
+    double covers of all bridgeless multigraphs. *)
+Theorem cdc_cubic_2connected_reduction : external_cdc_cubic_2connected_reduction_statement.
+Proof.
+move=> Hcub G Hn He Hbl.
+case: (ltnP 1 #|edge G|) => hE; last first.
+  have h1 : #|edge G| = 1 by apply/eqP; rewrite eqn_leq hE He.
+  exact: cdc2c_one_edge Hbl h1.
+have /card_gt0P[x0 _] : (0 < #|[set: G]|)%N by rewrite cardsT.
+pose r0 := mroot x0.
+have hr0 : mroot r0 = r0 := mroot_root x0.
+have hKc : mconnected (Hc r0) := Hc_mconnected hr0.
+have hKb : bridgeless (Hc r0) := @Hc_bridgeless G r0 Hbl.
+have hHcub : cubic (infG (Hc r0)) := inf_cubic hKb.
+have hHb : bridgeless (infG (Hc r0)) := inf_bridgeless hKb.
+have hHc : mconnected (infG (Hc r0)) := cdc2c_inf_mconnected hKc.
+have hHcard : (3 <= #|infG (Hc r0)|)%N.
+  have -> : #|infG (Hc r0)| = (#|edge G| * 2)%N by rewrite card_prod card_bool.
+  by apply: leq_trans (leq_mul hE (leqnn 2)).
+have hpos : (0 < #|infG (Hc r0)|)%N by apply: leq_trans hHcard.
+have [L [hLc hLn]] := Hcub (infG (Hc r0)) hpos hHcub
+  (cdc2c_cubic_two_connected hHcub hHc hHb hHcard).
+pose M := map (@inf_contract (Hc r0)) L.
+have hMev : forall X : {set edge G}, X \in M -> forall v : G, ~~ odd (subdeg X v).
+  move=> X /mapP[C hC ->]; apply: (cdc2c_Hc_even hr0).
+  exact: inf_contract_even (cdc2c_circuit_even (hLc C hC)).
+have hMn : forall e : edge G, count (fun X : {set edge G} => e \in X) M = 2.
+  move=> e; rewrite count_map -(hLn (inl e)); apply: eq_count => C.
+  by rewrite /= inE.
+have [D [hDc hDn]] := even_list_circuit_decomposition hMev.
+by exists D; split => // e; rewrite hDn hMn.
+Qed.
+
+(*@EDGE from=cycle_double_covers_containing_predefined_2_regular_statement to=cycle_double_cover_statement kind=implies status=verified proof=unconditional_cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover cite="gc:e098" note="Instantiate the source at S = set0: it is 2-regular (degree 0 everywhere, subdeg0), G - E(set0) = G is connected since a 2-connected multigraph is connected (two_connected_del_set0), and the empty circuit decomposition [::] of set0 is trivially contained in L; so the source yields a CDC of every cubic 2-connected multigraph. The cubic 2-connected-to-general step is proved as cdc_cubic_2connected_reduction: collapse the components (comp_reduce.Hc), inflate every vertex into a cycle (infG, a connected cubic bridgeless multigraph, 2-connected since a cut vertex of a cubic graph forces a bridge), contract a cycle double cover back to even subgraphs and split them into circuits; a single edge is a loop covered twice." *)
+Theorem unconditional_cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover :
+  cycle_double_covers_containing_predefined_2_regular_statement ->
+  cycle_double_cover_statement.
+Proof.
+exact: cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover
+  cdc_cubic_2connected_reduction.
 Qed.
 
 
@@ -1571,3 +1823,8 @@ Print Assumptions petersen_coloring_implies_cycle_double_cover.
 
 Print Assumptions cdc_simple_reduction.
 Print Assumptions unconditional_small_cycle_double_cover_implies_cycle_double_cover.
+
+(** ** Axiom audit (gc:e098) *)
+
+Print Assumptions cdc_cubic_2connected_reduction.
+Print Assumptions unconditional_cycle_double_covers_containing_predefined_2_regular_implies_cycle_double_cover.
