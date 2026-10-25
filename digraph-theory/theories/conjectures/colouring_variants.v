@@ -158,23 +158,25 @@ Definition majority_3col_eulerian_statement : Prop :=
 (** *** Relative edges among the majority statements *)
 
 (** Conjecture 9 at [k = 2] gives a 3-colouring with [2·(#same) <= deg⁺], which
-    is exactly the majority condition: Conj 9 ⇒ Conj 2. *)
+    is exactly the majority condition: Conj 9 ⇒ Conj 2 (both carry the loopless guard). *)
 Theorem majority_k1col_implies_majority_3col :
   majority_k1col_statement -> majority_3col_statement.
 Proof.
-move=> H9 D; have [col Hcol] := H9 2 (leqnn 2) D.
+move=> H9 D lD; have [col Hcol] := H9 2 (leqnn 2) D lD.
 by exists col; exact: Hcol.
 Qed.
 
-(** The general digraph statement specialises to tournaments. *)
+(** The general digraph statement specialises to tournaments, which are loopless
+    (their arc relation is irreflexive). *)
 Theorem majority_3col_implies_tournament :
   majority_3col_statement -> majority_3col_tournament_statement.
-Proof. by move=> H T; apply: (H T). Qed.
+Proof. by move=> H T; apply: (H T); exact: arcxx. Qed.
 
-(** The general digraph statement specialises to Eulerian digraphs. *)
+(** The general digraph statement specialises to Eulerian digraphs (both carry the
+    loopless guard). *)
 Theorem majority_3col_implies_eulerian :
   majority_3col_statement -> majority_3col_eulerian_statement.
-Proof. by move=> H D _; apply: H. Qed.
+Proof. by move=> H D lD _; apply: H. Qed.
 
 (** ** 2. Oriented chromatic number / digraph homomorphism ******************* *)
 
