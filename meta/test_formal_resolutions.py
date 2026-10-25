@@ -2,8 +2,10 @@
 """Mutation canaries for the resolution registry, including real Rocq checks."""
 from __future__ import annotations
 
+import contextlib
 import copy
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -200,6 +202,15 @@ class ResolutionCanaries(unittest.TestCase):
         with self.assertRaisesRegex(R.ResolutionError, "corpus statement location"):
             R.validate_entry(self.root, self.entry)
 
+    def test_entry_fields_are_exact(self):
+        mutated = copy.deepcopy(self.entry)
+        mutated["node_id"] = 1
+        with self.assertRaisesRegex(R.ResolutionError, "fields not used by v2 entries"):
+            R.validate_entry(self.root, mutated)
+        del mutated["node_id"], mutated["source_hash"]
+        with self.assertRaisesRegex(R.ResolutionError, "missing fields"):
+            R.validate_entry(self.root, mutated)
+
     def test_duplicate_entries_are_rejected(self):
         (self.root / "meta/formal_resolutions.json").write_text(
             json.dumps({"schema_version": 1, "resolutions": [self.entry, self.entry]}))
@@ -230,6 +241,170 @@ class ResolutionCanaries(unittest.TestCase):
         with self.assertRaisesRegex(R.ResolutionError, "The command has not failed"):
             R.run(["rocq", "compile", "-Q", "theories", "Fixture", str(probe)],
                   self.root / "fixture", R.ROCQ.environment())
+
+
+class OpgResolutions(unittest.TestCase):
+    """OPG rows: key opg:<slug>, pinned row identity, the unique top-level statement file, selection."""
+
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory(prefix="resolution-opg-")
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        (self.root / "meta").mkdir()
+        (self.root / "fixture/theories").mkdir(parents=True)
+        self.statement = self.root / "fixture/theories/statement.v"
+        self.statement.write_text("Definition claim : Prop := 2 = 2.\n")
+        (self.root / "fixture/theories/proof.v").write_text(
+            "Require Import Fixture.statement.\nTheorem resolved : claim. Proof. reflexivity. Qed.\n")
+        self.project = ["theories/statement.v", "theories/proof.v"]
+        self.write_project()
+        self.row = {
+            "slug": "fixture_problem", "node_id": 4242,
+            "canonical_url": "http://www.openproblemgarden.org/op/fixture_problem",
+            "source_commit_repo": "1" * 40, "source_commit_problems_json": "2" * 40,
+            "source_text": "Conjecture Two equals two.", "selected_proposition": "primary OPG statement",
+            "repo": "fixture", "formal_name": "claim", "status": "open",
+        }
+        self.entry = {
+            "record_key": "opg:fixture_problem", "corpus": "opg",
+            **{field: self.row[field] for field in R.SOURCE_IDENTITY["opg"]},
+            "package": "fixture", "statement": "Fixture.statement.claim",
+            "statement_file": "fixture/theories/statement.v",
+            "statement_sha256": R.declaration_hash(self.statement.read_text()),
+            "theorem": "Fixture.proof.resolved", "theorem_file": "fixture/theories/proof.v",
+            "direction": "prove",
+            "correspondence": {"explanation": "Synthetic OPG canary.",
+                               "implemented_by": "fixture author", "reviewed_by": "fixture reviewer",
+                               "reviewed_at": "2026-10-25"},
+        }
+        self.rows = [self.row]
+        self.entries = [self.entry]
+        self.write_metadata()
+
+    def write_project(self):
+        (self.root / "fixture/_CoqProject").write_text(
+            "-Q theories Fixture\n" + "".join(f"{source}\n" for source in self.project))
+
+    def write_metadata(self):
+        (self.root / "meta/opg_corpus_manifest.json").write_text(json.dumps({"rows": self.rows}))
+        (self.root / "meta/formal_resolutions.json").write_text(
+            json.dumps({"schema_version": 1, "resolutions": self.entries}))
+
+    def add_source(self, name, text, listed=True):
+        (self.root / "fixture/theories" / name).write_text(text)
+        if listed:
+            self.project.append(f"theories/{name}")
+            self.write_project()
+
+    def rejected(self, pattern, entry=None):
+        with self.assertRaisesRegex(R.ResolutionError, pattern):
+            R.validate_entry(self.root, self.entry if entry is None else entry)
+
+    def cli(self, *args):
+        out, err = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            code = R.main(["--root", str(self.root), *args])
+        return code, out.getvalue() + err.getvalue()
+
+    def test_positive_opg_resolution_compiles_and_preserves_the_manifest(self):
+        before = (self.root / "meta/opg_corpus_manifest.json").read_bytes()
+        result = R.verify_resolutions(self.root)
+        self.assertEqual([item.record_key for item in result], ["opg:fixture_problem"])
+        self.assertEqual(result[0].exact_type_key,
+                         ("Fixture.statement.claim", "Fixture.proof.resolved", "prove"))
+        self.assertEqual(before, (self.root / "meta/opg_corpus_manifest.json").read_bytes())
+
+    def test_source_identity_mutations_are_rejected(self):
+        for field in R.SOURCE_IDENTITY["opg"]:
+            with self.subTest(field=field):
+                mutated = copy.deepcopy(self.entry)
+                mutated[field] = 4243 if field == "node_id" else self.entry[field] + "x"
+                self.rejected(f"{field} differs from the pinned source row", mutated)
+
+    def test_key_and_row_identity_are_rejected_when_wrong(self):
+        cases = {
+            "fixture_problem": "opg:<slug>", "opg:Fixture_problem": "opg:<slug>",
+            "opg:fixture_problem ": "opg:<slug>", "opg:other_problem": "exactly once",
+        }
+        for key, pattern in cases.items():
+            with self.subTest(key=key):
+                self.rejected(pattern, {**self.entry, "record_key": key})
+        self.rejected("ownership", {**self.entry, "package": "other"})
+        self.rejected("formal_name", {**self.entry, "statement": "Fixture.statement.other"})
+        self.rows = [self.row, dict(self.row)]
+        self.write_metadata()
+        self.rejected("exactly once")
+
+    def test_entry_fields_are_exact(self):
+        self.rejected("fields not used by opg entries", {**self.entry, "source_hash": "0" * 64})
+        self.rejected("fields not used by opg entries", {**self.entry, "row_id": "opg:fixture_problem"})
+        mutated = copy.deepcopy(self.entry)
+        del mutated["node_id"]
+        self.rejected("missing fields", mutated)
+        self.rejected("corpus must be v2 or opg", {**self.entry, "corpus": ["opg"]})
+
+    def test_row_without_formal_name_is_rejected(self):
+        self.row["formal_name"] = ""
+        self.write_metadata()
+        self.rejected("needs the source row's formal_name")
+
+    def test_frozen_module_copies_comments_and_unlisted_files_do_not_count(self):
+        self.add_source("migration.v", "Module Legacy.\nDefinition claim : Prop := 2 = 2.\nEnd Legacy.\n"
+                                       "Module Alias := Legacy.\n")
+        self.add_source("notes.v", "(* Definition claim : Prop := True. *)\n"
+                                   "Definition note : string := \"\nDefinition claim\".\n")
+        self.add_source("unlisted.v", "Definition claim : Prop := True.\n", listed=False)
+        R.validate_entry(self.root, self.entry)
+        self.rejected("corpus statement location",
+                      {**self.entry, "statement_file": "fixture/theories/migration.v"})
+
+    def test_a_second_top_level_definition_is_ambiguous(self):
+        for name, text in (("copy.v", "Definition claim : Prop := True.\n"),
+                           ("section.v", "Section S.\nDefinition claim : Prop := True.\nEnd S.\n"),
+                           ("local.v", "Local Definition claim : Prop := True.\n")):
+            with self.subTest(name=name):
+                self.setUp()
+                self.add_source(name, text)
+                self.rejected("needs exactly one top-level definition")
+
+    def test_unsupported_scope_structure_fails_closed(self):
+        self.add_source("broken.v", "Definition claim : Prop := True.\nEnd Nowhere.\n")
+        self.rejected("unsupported Module/Section structure")
+
+    def test_selection_by_record_and_package(self):
+        broken = {**copy.deepcopy(self.entry), "record_key": "opg:missing_problem", "package": "other"}
+        self.entries = [self.entry, broken]
+        self.write_metadata()
+        cases = [
+            ((), 1, "source row must occur exactly once: OPG slug missing_problem"),
+            (("--record", "opg:fixture_problem"), 0, "1 entries; proofs not checked; selected entries only"),
+            (("--record", "opg:missing_problem"), 1, "source row must occur exactly once"),
+            (("--record", "opg:fixture_problem", "--record", "opg:missing_problem"), 1, "exactly once"),
+            (("--record", "opg:unknown_problem"), 1, "unknown record_key: opg:unknown_problem"),
+            (("--package", "fixture"), 0, "1 entries; proofs not checked; selected entries only"),
+            (("--package", "other"), 1, "exactly once"),
+            (("--package", "nowhere"), 1, "matches no registry entry"),
+            (("--package", "fixture", "--record", "opg:missing_problem"), 1, "matches no registry entry"),
+        ]
+        for args, code, text in cases:
+            with self.subTest(args=args):
+                got, output = self.cli("--metadata-only", *args)
+                self.assertEqual(got, code, output)
+                self.assertIn(text, output)
+
+    def test_record_selection_compiles_and_reports_only_the_selected_entry(self):
+        broken = {**copy.deepcopy(self.entry), "record_key": "opg:missing_problem", "package": "other"}
+        self.entries = [self.entry, broken]
+        self.write_metadata()
+        report = self.root / "report.txt"
+        code, output = self.cli("--record", "opg:fixture_problem", "--report", str(report))
+        self.assertEqual(code, 0, output)
+        self.assertIn("OK opg:fixture_problem: prove Fixture.statement.claim", output)
+        self.assertIn("formal resolutions OK (1 exact, assumption-free proofs; selected entries only)", output)
+        text = report.read_text()
+        self.assertTrue(text.startswith("opg:fixture_problem\n"))
+        self.assertNotIn("opg:missing_problem", text)
+        self.assertEqual(text.count("Closed under the global context"), 2)
 
 
 if __name__ == "__main__":
