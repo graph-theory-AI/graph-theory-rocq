@@ -1113,7 +1113,7 @@
    "status": "verified",
    "cite": "gc:e038",
    "proof": "majority_3col_implies_majority_three_colouring_beta",
-   "note": "Same condition, two vocabularies: x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= outdeg of the target; the X45 body already encodes beta = 1/2, so no parameter monotonicity step is needed.",
+   "note": "Take beta = 1/2 (p = 1, q = 2) and ignore the target's loopless guard: x45_same_colour_outneighbours col v is by conversion #|same_col_outnb col v|, so the boolean majority_col col of the source unfolds (via forallP) to the pointwise 2 * #same <= 1 * outdeg of the target.",
    "external": [],
    "sources": [
     "digraph-theory/implications_X45.v"
