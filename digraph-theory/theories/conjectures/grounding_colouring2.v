@@ -57,12 +57,31 @@ Unset Printing Implicit Defensive.
     Each Prop is [forall <class member>, ...] (or [exists f, forall member, ...]).
     We inhabit the class so the universal is not vacuously about nothing. *)
 
-(** *** A.1  [majority_3col_statement] ranges over ALL digraphs — inhabited by
+(** *** A.1  [majority_3col_statement] ranged over ALL digraphs until 2026-10-25 (now over
+    loopless digraphs, see A.1') — inhabited by
     the directed triangle C3 (3 vertices, 3 arcs).  (Trivially the class of
     digraphs is non-empty; we name a concrete nonempty member to also feed the
     value checks below.) *)
 Lemma majority_class_inhabited : exists D : diGraphType, (0 < #|D|)%N.
 Proof. by exists (C3 : diGraphType); rewrite card_C3. Qed.
+
+(** *** A.1'  Since 2026-10-25 the majority rows [majority_3col_statement],
+    [majority_k1col_statement] and [majority_3col_eulerian_statement] quantify over
+    LOOPLESS digraphs (a loop made a vertex a same-coloured out-neighbour of itself).
+    Their antecedent classes are inhabited by C3: a tournament, hence loopless, and
+    balanced (in-degree = out-degree = 1), hence Eulerian. *)
+Lemma majority_loopless_class_inhabited :
+  exists D : diGraphType, loopless D /\ (0 < #|D|)%N.
+Proof. by exists (C3 : diGraphType); split; [move=> v; exact: arcxx | rewrite card_C3]. Qed.
+
+Lemma majority_eulerian_loopless_class_inhabited :
+  exists D : diGraphType, [/\ loopless D, eulerian D & (0 < #|D|)%N].
+Proof.
+exists (C3 : diGraphType); split; first by move=> v; exact: arcxx.
+- by apply/Digraph.foundations.degree_balance.balancedP;
+     exact: Digraph.foundations.degree_balance.balanced_ground_C3.
+- by rewrite card_C3.
+Qed.
 
 (** *** A.2  [mono_reach_or_rainbow_statement] ranges over nonempty 3-arc-
     coloured tournaments.  C3 IS a tournament, is nonempty, and carries an

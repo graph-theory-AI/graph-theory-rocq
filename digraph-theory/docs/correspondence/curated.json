@@ -1929,7 +1929,7 @@
     },
     "majority_3col_eulerian_statement": {
       "title": "Majority 3-colouring of Eulerian digraphs (KOSvZW, Open Problem 3)",
-      "decoded": "Every Eulerian digraph D (in-degree equals out-degree at every vertex) admits a majority 3-colouring: a 3-colouring of its vertices such that at every vertex v at most half of its out-neighbours share v's own colour (2·#{w : v→w, col w = col v} ≤ outdeg v for all v). The Eulerian special case of the majority 3-colouring conjecture.",
+      "decoded": "Every loopless Eulerian digraph D (in-degree equals out-degree at every vertex) admits a majority 3-colouring: a 3-colouring of its vertices such that at every vertex v at most half of its out-neighbours share v's own colour (2·#{w : v→w, col w = col v} ≤ outdeg v for all v). The Eulerian special case of the majority 3-colouring conjecture.",
       "match_title": "Open Problem 3 (1608.03040): Does every Eulerian digraph have a majority 3-colouring?",
       "source": {
         "name": "arXiv 1608.03040",
@@ -1940,7 +1940,7 @@
     },
     "majority_3col_statement": {
       "title": "Majority 3-colouring Conjecture (Kreutzer–Oum–Seymour–van der Zypen–Wood, Conj 2)",
-      "decoded": "Every digraph D admits a vertex colouring with 3 colours that is a majority colouring: at every vertex v at most half of its out-neighbours share v's own colour (encoded fraction-free as 2·#{w : v→w, col w = col v} ≤ outdeg v for all v).",
+      "decoded": "Every loopless digraph D admits a vertex colouring with 3 colours that is a majority colouring: at every vertex v at most half of its out-neighbours share v's own colour (encoded fraction-free as 2·#{w : v→w, col w = col v} ≤ outdeg v for all v).",
       "match_title": "Conjecture 2 (1608.03040): Every digraph has a majority 3-colouring",
       "source": {
         "name": "arXiv 1608.03040",
@@ -1974,7 +1974,7 @@
     },
     "majority_k1col_statement": {
       "title": "Fractional majority colouring (Kreutzer–Oum–Seymour–van der Zypen–Wood, Conj 9)",
-      "decoded": "For every k ≥ 2, every digraph D admits a vertex colouring with k+1 colours such that at every vertex v at most a (1/k)-fraction of its out-neighbours share v's colour (encoded fraction-free as k·#{w : v→w, col w = col v} ≤ outdeg v for all v). At k = 2 this is exactly the majority 3-colouring condition.",
+      "decoded": "For every k ≥ 2, every loopless digraph D admits a vertex colouring with k+1 colours such that at every vertex v at most a (1/k)-fraction of its out-neighbours share v's colour (encoded fraction-free as k·#{w : v→w, col w = col v} ≤ outdeg v for all v). At k = 2 this is exactly the majority 3-colouring condition.",
       "match_title": "Conjecture 9 (1608.03040): (k+1)-colouring with at most (1/k)deg^+ same-coloured out-neighbours",
       "source": {
         "name": "arXiv 1608.03040",
