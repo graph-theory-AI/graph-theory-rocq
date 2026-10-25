@@ -1000,6 +1000,13 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   counts loops inside `S`, so a one-vertex digraph with a loop refuted the unguarded body
   (`meta/probe_hints/sands_sauer_woodrow_statement.v`); loops never change monochromatic
   reachability, so the guard keeps the source's reading.
+- `opg:stable_set_meeting_all_longest_directed_paths` →
+  `conjectures/classic_core.v:stable_meeting_longest_dipaths_statement` — **false as encoded**
+  (found 2026-10-25). `diGraphType` allows loops and `stable` counts loops inside `S`, so the
+  one-vertex digraph with a loop (`ell = 0`, its vertex alone a longest path) has no stable set
+  meeting it. **FIXED 2026-10-25** (coordination/PROGRAMME.md A1): the body gains
+  `irreflexive (@arc D)`; loops change neither the directed paths nor `ell`, so the guard keeps
+  the source's reading (`meta/probe_hints/stable_meeting_longest_dipaths_statement.v`).
 - `arxiv:1608.03040#02` (Open Problem 1) →
   `conjectures/X45.v:majority_three_colouring_beta_statement` — **too strong**. The row asks
   whether SOME constant `beta < 1` works; the body fixes `beta = 1/2`, i.e. it restates

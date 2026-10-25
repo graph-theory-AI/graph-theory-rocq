@@ -2458,7 +2458,7 @@
     },
     "stable_meeting_longest_dipaths_statement": {
       "title": "Stable set meeting all longest directed paths (Laborde–Payan–Xuong)",
-      "decoded": "Every digraph D (no nonemptiness guard) has a stable set S (an independent set: no two of its vertices are joined by an arc in either direction) that meets every longest directed path — for every directed path x :: s whose LENGTH (number of arcs, size s) attains the maximum ell(D) = max over dipaths of size s (so the path has ell(D) arcs and ell(D)+1 vertices, NOT ell(D) vertices), some vertex of S lies on that path (v ∈ x :: s).",
+      "decoded": "Every loopless digraph D (no nonemptiness guard; no vertex carries a loop, since the stable sets of classic_core count loops) has a stable set S (an independent set: no two of its vertices are joined by an arc in either direction) that meets every longest directed path — for every directed path x :: s whose LENGTH (number of arcs, size s) attains the maximum ell(D) = max over dipaths of size s (so the path has ell(D) arcs and ell(D)+1 vertices, NOT ell(D) vertices), some vertex of S lies on that path (v ∈ x :: s).",
       "match_title": "Stable set meeting all longest directed paths",
       "source": {
         "slug": "stable_set_meeting_all_longest_directed_paths"

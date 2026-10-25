@@ -190,19 +190,24 @@ Definition stable (D : diGraphType) (S : {set D}) : bool :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/stable_set_meeting_all_longest_directed_paths/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/stable_set_meeting_all_longest_directed_paths.json
     English statement: (Open Problem Garden, Stable set meeting all longest directed paths (Laborde-Payan-Xuong))
-      Every finite digraph D has a stable vertex set S, that is a set with no arc between any
-      two of its members, such that every longest directed path of D contains a vertex of S; a
-      directed path is longest when its number of arcs equals ell(D), the maximum number of arcs
-      of a directed path of D.
+      Every finite loopless digraph D has a stable vertex set S, that is a set with no arc between
+      any two of its members, such that every longest directed path of D contains a vertex of S;
+      a directed path is longest when its number of arcs equals ell(D), the maximum number of
+      arcs of a directed path of D.
     Definitions: [stable S] - no arc joins two members of S, loops inside S included (this
       file); [dipath x s] - x :: s is a duplicate-free vertex sequence following arcs
       (core/dipath.v); [ell D] - the maximum number of arcs of a directed path of D
-      (core/dipath.v).
+      (core/dipath.v); [irreflexive (@arc D)] - no vertex carries a loop (the body of
+      two_extremal.loopless, which this file cannot import).
     Notes: Path length is counted in arcs (size s), so a single vertex is a path of length 0; on
       a digraph with no arcs ell D = 0 and the condition is that S meets every vertex, forcing S
-      = setT, which is stable there. *)
+      = setT, which is stable there. The loopless guard (added 2026-10-25) is load-bearing:
+      [stable] counts loops inside S, so without it a one-vertex digraph with a loop refutes the
+      body (meta/probe_hints/stable_meeting_longest_dipaths_statement.v); loops change neither
+      the directed paths (dipath is duplicate-free) nor ell, so the guard keeps the source's
+      reading. *)
 Definition stable_meeting_longest_dipaths_statement : Prop :=
-  forall D : diGraphType,
+  forall D : diGraphType, irreflexive (@arc D) ->
     exists S : {set D}, stable S /\
       forall (x : D) (s : seq D), dipath x s -> size s = ell D ->
         exists2 v : D, v \in S & v \in x :: s.
