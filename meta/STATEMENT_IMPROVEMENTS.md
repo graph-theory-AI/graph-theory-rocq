@@ -1477,6 +1477,23 @@ by equivalence lemmas.
   `K_5^(3)`, bound `n^2(n-1)`) has no Rocq counterpart, so the statement does not cover its row.
   Same pattern as `opg:forcing_a_k_6_minor` in minor-theory, which DOES conjoin both of its
   source propositions — the conventions differ between the two rows.
+  **Source re-read and repair (2026-10-25, PROGRAMME A2).** The pinned OPG row (upstream `b72c5857`,
+  `data/problems.json`; our manifest's `source_propositions`) states two conjectures: "Every simple
+  3-uniform hypergraph on 3n vertices which contains no complete 3-uniform hypergraph on four vertices
+  has at most ½ n²(5n-3) hyperedges." and "Every simple 3-uniform hypergraph on 2n vertices which
+  contains no complete 3-uniform hypergraph on five vertices has at most n²(n-1) hyperedges."
+  **REPAIRED:** `turans_problem_for_hypergraphs_statement` now conjoins both under the shared
+  quantifiers and guards `0 < n` and `k_uniform E 3`. Its premises
+  `#|T| = 3 * n -> ~ contains_complete E 4 3 -> 2 * #|E| <= n ^ 2 * (5 * n - 3)` became
+  `(#|T| = 3 * n -> ~ contains_complete E 4 3 -> 2 * #|E| <= n ^ 2 * (5 * n - 3)) /\ (#|T| = 2 * n -> ~ contains_complete E 5 3 -> #|E| <= n ^ 2 * (n - 1))`.
+  The guard `0 < n` keeps `n - 1` exact and loses nothing: for n = 0 the second conjecture holds
+  trivially. This is a SOURCE REPAIR (a strengthening), not a migration equivalence:
+  - the D1 uniform-hypergraph certificate (`migration/uniform_hypergraph.v`) keeps the pre-repair row
+    frozen and now proves only `live -> frozen`; the converse would derive the open `K_5^(3)`
+    conjecture from the `K_4^(3)` one;
+  - the `repair` entry of `meta/migration_reports/uniform_hypergraph.spec.json` binds the one exact
+    text replacement and the repaired doc block's hash, and names this entry as its record;
+  - the statement leg was already `done`, and no leg or manifest field changes.
 - `studies:std_erd_s_rado_sunflower_conjecture` (`X137.v:28`) — severity: **deliberate deviation
   from `statement_text`** (stronger than the recorded text). The corpus text is "there is a
   constant `C = C(r)` depending only on `r` such that `f_r(k) <= C^k`"; the body puts the
