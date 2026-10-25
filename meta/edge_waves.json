@@ -1599,8 +1599,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (mathematics programme, 2026-10-25): five_even_cover_cubic_reduction proves external_five_even_cover_cubic_reduction_statement (classical-lemmas TODO 2); the conditional petersen_coloring_implies_cycle_double_cover of wave E6 is kept",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (TODO #2 review, 2026-10-25)",
+   "reviewed_at": "2026-10-25",
    "note": "Composition of gc:e090 (Petersen colouring => (5,2)-cover, with the cubic reduction proved as five_even_cover_cubic_reduction) with the unconditional gc:e084 (split the five even subgraphs into circuits, cycle_space.even_circuit_decomposition)."
   },
   "petersen_coloring_statement->intersecting_two_perfect_matchings_statement:implies": {
@@ -1627,8 +1627,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (mathematics programme, 2026-10-25): five_even_cover_cubic_reduction proves external_five_even_cover_cubic_reduction_statement (classical-lemmas TODO 2); the conditional petersen_coloring_implies_m_n_cycle_covers of wave E6 is kept",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (TODO #2 review, 2026-10-25)",
+   "reviewed_at": "2026-10-25",
    "note": "Pull back the Petersen graph's double cover by five even subgraphs along the Petersen colouring: the three edges at a vertex of a cubic graph go to a claw of the (triangle-free) Petersen graph (petersen_claw), every member meets every claw evenly (plab_claw_even) and every Petersen edge lies in exactly two members (plab_card), so petersen_pullback_cover gives a (5,2)-cover of every cubic bridgeless graph; the finite Petersen facts are proved by closed compute checks on 5-bit codes. The cubic-to-general step (Jaeger 1985 / Zhang) is proved as five_even_cover_cubic_reduction, as for gc:e085."
   },
   "petersen_coloring_statement->the_berge_fulkerson_statement:implies": {
@@ -1895,8 +1895,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (mathematics programme, 2026-10-25): five_even_cover_cubic_reduction proves external_five_even_cover_cubic_reduction_statement (classical-lemmas TODO 2); the conditional strong_5_cycle_double_cover_implies_cycle_double_cover of wave E5 is kept",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (TODO #2 review, 2026-10-25)",
+   "reviewed_at": "2026-10-25",
    "note": "Composition of gc:e085 (Row 10 => Row 7, with the cubic reduction proved as five_even_cover_cubic_reduction) with the unconditional gc:e084 (Row 7 => Row 11, the even-subgraph-to-circuits refinement F14)"
   },
   "strong_5_cycle_double_cover_statement->m_n_cycle_covers_statement:implies": {
@@ -1909,8 +1909,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (mathematics programme, 2026-10-25): five_even_cover_cubic_reduction proves external_five_even_cover_cubic_reduction_statement (classical-lemmas TODO 2); the conditional strong_5_cycle_double_cover_implies_m_n_cycle_covers of wave E5 is kept",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (TODO #2 review, 2026-10-25)",
+   "reviewed_at": "2026-10-25",
    "note": "Row 10 is cubic-only and needs a circuit to start from: cubic_has_circuit supplies one (cycle_space.has_circuit on the full edge set, every degree being 3, hence never 1), and dropping Row 10's extra 'some member contains C' clause leaves exactly a (5,2)-cover of every cubic bridgeless graph; the cubic-to-general step is proved as five_even_cover_cubic_reduction: inflate every vertex into a cycle through its arc ends (a cubic bridgeless graph) and contract the cycles back, which keeps even subgraphs even"
   },
   "subdivision_of_a_transitive_tournament_in_digraphs_w_statement->mader_delta0_transitive_tournament_statement:implies": {
