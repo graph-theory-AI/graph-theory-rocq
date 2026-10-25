@@ -15,7 +15,10 @@
     a [Prop], never [Axiom], never [Admitted]), while the genuine content of the
     reduction — that [5*phi_2 + phi_4] is a Kirchhoff circulation all of whose
     values lie between 2 and 8 in absolute value, i.e. that half of it is a
-    nowhere-zero circular 5-flow — is proved here.
+    nowhere-zero circular 5-flow — is proved here.  Since 2026-10-25 the
+    external itself is proved too ([circular_5_flow_round], classical-lemmas
+    TODO 1), and the edge is [status=verified] through
+    [unconditional_half_flow_pair_implies_five_flow].
 
     The scaling by two is folded into the external: rather than dividing by two
     in [rat], the external is stated on the INTEGER circulation [chi] with
@@ -31,6 +34,10 @@ From Cycle.conjectures Require Import D1 X228.
    [all_boot]; importing it afterwards would give back [all_boot]'s [%:R] and
    break the [int] ring numerals (cf. the import note of [D1.v]). *)
 From mathcomp Require Import all_algebra all_fingroup.
+(* [implications_D1] for [even_balanced], [osgn] and [osgn_conservative]
+   (balanced orientations of even edge sets), used by the proof of the
+   external below. *)
+From Cycle.conjectures Require Import implications_D1.
 
 Import GRing.Theory Num.Theory.
 (* [Order.TTheory] through the fully qualified path, to disambiguate the two
@@ -59,9 +66,10 @@ Open Scope ring_scope.
     and satisfies [2 <= |chi e| <= 8] on every edge — equivalently, [chi/2] is a
     nowhere-zero circular 5-flow — then the multigraph has a nowhere-zero
     integer 5-flow.
-    Not formalized here: it is carried as an explicit hypothesis of the
-    conditional edge below (never an [Axiom], never [Admitted]), which is why
-    that edge is [status=conditional external=...] rather than [verified]. *)
+    Proved below as [circular_5_flow_round] (2026-10-25, classical-lemmas
+    TODO 1), by a parity argument on the edges where [chi] is odd rather than
+    the general rounding theorem; the reduction that takes it as a hypothesis
+    is kept. *)
 Definition external_circular_5_flow_statement : Prop :=
   forall (G : mgraph) (chi : edge G -> int),
     iconservative chi ->
@@ -120,7 +128,11 @@ Qed.
 (** ================================================================= *)
 (** ** The scheduled edge *)
 
-(*@EDGE from=half_flow_pair_statement to=five_flow_statement kind=implies status=conditional external="external_circular_5_flow_statement" proof=half_flow_pair_implies_five_flow cite="gc:e174; Workshop on Cycles and Colourings 2025, arXiv:2511.02892 Conjecture 6.1 and its context; Goddyn-Tarsi-Zhang, On (k,d)-colorings and fractional nowhere-zero flows, J. Graph Theory 28 (1998) 155-161 (flow number = ceiling of circular flow number)" note="From a 1/2-flow-pair (phi2,phi4) the integer circulation chi = 5*phi2 + phi4 satisfies 2 <= |chi| <= 8 on every edge, i.e. chi/2 is a nowhere-zero circular 5-flow; the circular-to-integer step is the cited external hypothesis external_circular_5_flow_statement" *)
+(** The reduction, with the circular-to-integer step as an explicit
+    hypothesis.  (Until 2026-10-25 this was the edge gc:e174,
+    [status=conditional]; its annotation now sits on
+    [unconditional_half_flow_pair_implies_five_flow] below, after
+    [circular_5_flow_round].) *)
 Theorem half_flow_pair_implies_five_flow :
   external_circular_5_flow_statement ->
   half_flow_pair_statement -> five_flow_statement.
@@ -133,9 +145,117 @@ move=> e; rewrite /x228_combine.
 by apply: x228_combine_bounds; [exact: b2 | exact: b4 | exact: cmp].
 Qed.
 
+(** ================================================================= *)
+(** ** The external at the instance used (classical-lemmas TODO 1)
+
+    Rounding [chi/2] to an integer flow needs no general rounding theorem
+    here: the edges [O] on which [chi] is odd form an even edge set
+    (conservation read modulo 2), so [implications_D1.even_balanced] gives a
+    balanced orientation [d] of [O], and [s = osgn O d] is a circulation with
+    values in [{0, +-1}] that is nonzero exactly on [O].  Then [chi + s] is
+    even on every edge, and [g = (chi + s)/2] is an integer circulation with
+    [1 <= |g| <= 4], because [2 <= |chi| <= 8] and [|s| <= 1] give
+    [1 <= |2 g| <= 9]. *)
+
+Section Round.
+Variables (G : mgraph) (chi : edge G -> int).
+
+(** The edges on which [chi] is odd. *)
+Definition x228_odd : {set edge G} := [set e | (chi e %% 2)%Z == 1].
+
+Lemma x228_modz2 (e : edge G) :
+  (chi e %% 2)%Z = if e \in x228_odd then 1 else 0.
+Proof.
+rewrite inE; case: eqP => // h.
+have h0 : 0 <= (chi e %% 2)%Z by exact: modz_ge0.
+have h2 : (chi e %% 2)%Z < 2%:R by exact: ltz_pmod.
+by move: h0 h2 h; case: (chi e %% 2)%Z => [[|[|n]]|n].
+Qed.
+
+(** Conservation modulo 2: every vertex has even degree in [x228_odd]. *)
+Lemma x228_odd_even :
+  iconservative chi -> forall v : G, ~~ odd (subdeg x228_odd v).
+Proof.
+move=> hc v.
+pose q e := (chi e %/ 2)%Z.
+have hs : forall P : pred (edge G),
+    \sum_(e | P e) chi e
+    = (\sum_(e | P e) q e) * 2%:R + #|[set e in x228_odd | P e]|%:R.
+  move=> P; rewrite -sum_indz mulr_suml -big_split /=.
+  by apply: eq_bigr => e _; rewrite /q -x228_modz2 -divz_eq.
+have := hc v; rewrite !hs => h.
+set ns := #|[set e in x228_odd | source e == v]| in h.
+set nt := #|[set e in x228_odd | target e == v]| in h.
+have hd : subdeg x228_odd v = (ns + nt)%N by [].
+set Qs := \sum_(e | source e == v) q e in h.
+set Qt := \sum_(e | target e == v) q e in h.
+have hk : ((ns + nt)%N)%:R = (Qt - Qs + nt%:R) * 2%:R :> int.
+  have hns : ns%:R = Qt * 2%:R + nt%:R - Qs * 2%:R.
+    by rewrite -h [Qs * _ + _]addrC addrK.
+  rewrite natrD hns mulrDl mulrBl [nt%:R * _]mulr_natr mulr2n.
+  by rewrite [_ + nt%:R - _]addrAC addrA.
+rewrite hd; have := congr1 absz hk; rewrite natz abszM /= => ->.
+by rewrite oddM andbF.
+Qed.
+
+End Round.
+
+(** Twice an integer between 1 and 9 in absolute value: the integer lies
+    between 1 and 4. *)
+Lemma x228_half_bounds (x : int) :
+  1 <= 2%:R * `|x| -> 2%:R * `|x| <= 9%:R -> 1 <= `|x| /\ `|x| <= 4%:R.
+Proof.
+rewrite -abszE -natz -natrM ler1n ler_nat ler1n ler_nat => h1 h9.
+split; first by move: h1; case: (`|x|%N).
+rewrite -ltnS -(ltn_pmul2l (isT : (0 < 2)%N)).
+exact: leq_ltn_trans h9 _.
+Qed.
+
+(** Goddyn-Tarsi-Zhang at the instance used: the external holds. *)
+Theorem circular_5_flow_round : external_circular_5_flow_statement.
+Proof.
+move=> G chi hc hb.
+have [d hd] := even_balanced (x228_odd_even hc).
+set O := x228_odd chi in hd.
+pose s := osgn O d.
+pose g e : int :=
+  (chi e %/ 2)%Z + (if e \in O then (if d e then 1 else 0) else 0).
+have h2g : forall e, 2%:R * g e = chi e + s e.
+  move=> e; rewrite /g /s /osgn {2}(divz_eq (chi e) 2) x228_modz2 -/O.
+  rewrite [2%:R * _]mulrC mulrDl -addrA; congr (_ + _).
+  by case: (e \in O); case: (d e); rewrite ?mul0r ?addr0 ?subrr.
+exists g; split.
+  move=> v; apply: (mulfI (_ : 2%:R != 0 :> int)) => //.
+  rewrite !mulr_sumr !(eq_bigr _ (fun e _ => h2g e)).
+  by rewrite !big_split /= (hc v) (osgn_conservative hd v).
+move=> e; have [lo hi] := hb e.
+have hs : `|s e| <= 1.
+  by rewrite /s /osgn; case: (e \in O); case: (d e);
+    rewrite ?normrN ?normr1 ?normr0.
+have hn : 2%:R * `|g e| = `|chi e + s e| by rewrite -h2g normrM normr_nat.
+apply: x228_half_bounds; rewrite hn.
+  have h := ler_normD (chi e + s e) (- s e); rewrite addrK normrN in h.
+  rewrite -(lerD2r `|s e|); apply: le_trans h; apply: le_trans lo.
+  have -> : (2%:R : int) = 1 + 1 by [].
+  by rewrite lerD2l.
+apply: le_trans (ler_normD _ _) _.
+have -> : (9%:R : int) = 8%:R + 1 by [].
+exact: lerD.
+Qed.
+
+(*@EDGE from=half_flow_pair_statement to=five_flow_statement kind=implies status=verified proof=unconditional_half_flow_pair_implies_five_flow cite="gc:e174; Workshop on Cycles and Colourings 2025, arXiv:2511.02892 Conjecture 6.1 and its context; Goddyn-Tarsi-Zhang, On (k,d)-colorings and fractional nowhere-zero flows, J. Graph Theory 28 (1998) 155-161 (flow number = ceiling of circular flow number)" note="From a 1/2-flow-pair (phi2,phi4) the integer circulation chi = 5*phi2 + phi4 satisfies 2 <= |chi| <= 8 on every edge, i.e. chi/2 is a nowhere-zero circular 5-flow; the circular-to-integer step is proved as circular_5_flow_round: the edges where chi is odd form an even edge set, a balanced orientation s of it (implications_D1.even_balanced) makes chi + s even, and (chi + s)/2 is a nowhere-zero integer 5-flow" *)
+Theorem unconditional_half_flow_pair_implies_five_flow :
+  half_flow_pair_statement -> five_flow_statement.
+Proof. exact: half_flow_pair_implies_five_flow circular_5_flow_round. Qed.
+
 (** ** Axiom audit ********************************************************* *)
 
 Print Assumptions x228_combine_conservative.
 Print Assumptions x228_int_ge1.
 Print Assumptions x228_combine_bounds.
 Print Assumptions half_flow_pair_implies_five_flow.
+Print Assumptions x228_modz2.
+Print Assumptions x228_odd_even.
+Print Assumptions x228_half_bounds.
+Print Assumptions circular_5_flow_round.
+Print Assumptions unconditional_half_flow_pair_implies_five_flow.
