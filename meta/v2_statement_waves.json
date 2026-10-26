@@ -5569,6 +5569,76 @@
       },
       "faithfulness_verified_by": "Arthur (X231 wave verification, 2026-10-26)",
       "faithfulness_result": "Readback 2026-10-26 (verifier Arthur): 1/1 PASS. arxiv:2304.03567#04 (Bessy-Thomasse-Viennot Conjecture 1): the paper's forward cover (body/request.tex) is a set of vertex orderings in which every pair {x, y} has x, y or y, x forward, a forward pair being joined by a directed path of forward arcs, the arcs xy with x before y (introduction.tex, definitions.tex). An ordering is exactly an injective ranking into nat (u before v iff r u < r v); x231_forward_arc is the paper's forward arc (a loop is never forward); connect of the forward arcs is a forward path, since a forward walk strictly raises r and so repeats no vertex; x231_forward_pair is the paper's 'x, y or y, x'; the pairs are V choose 2 (x != y). A sequence of rankings and a set of orderings bound each other (list the set; a sequence induces at most size-many orderings). O(log n) as exists c n0 with size <= c * trunc_log 2 n for n >= n0 is the usual reading: for n >= 2, log2 n <= 2 floor(log2 n), a natural c loses nothing, and n0 exempts small n as O(.) does. strongb is strong connectivity ([forall x, forall y, connect arc x y]). The statement is neither weaker nor stronger than the source, so the refutation in applications/forward_cover_disproof.v (the diamond chain on 3m vertices, a loopless strong digraph whose m twin pairs need m orderings) refutes the conjecture as the paper states it."
+    },
+    "X232": {
+      "phase": "X232",
+      "repo": "graph-theory-misc",
+      "defines_file": "X232.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), Any lane (arXiv:1904.12273#01), branch math/marcol-heavypath-20261026, 2026-10-26",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x232-heavy-path",
+      "rows": {
+        "axv_1904_12273_01": {
+          "formal_name": "heavy_path_extension_statement",
+          "source_hash": "fb2f74d383e71a6c219c66a1bcaebc21015235f7c6a213cd7752a28ecc9a2f16",
+          "note": "Chudnovsky-Scott-Seymour heavy-path extension (arXiv:1904.12273, introduction l.146-149 of the e-print detectinglongodd.tex, sha256 2bf7dc35). ell >= 5 is fixed and a hole is long if its length is at least ell (l.124-125); C-major is l.126-127 verbatim (off C, and no three-vertex path of C contains all its neighbours in C); a shortest long odd hole is a long odd hole of minimum length (l.133-134). Bounded is read as a bound b depending only on ell, the length of a path is its number of edges, and a path of C is m + 1 cyclically consecutive vertices of C with m < |C| (x232_cycle_path). The paper works in a candidate graph (l.359-360); the row does not state it and it is not encoded. The row is refuted in applications/heavy_path_disproof.v (heavy_path_extension_disproved): at ell = 7 the graphs G(q), q = 2r + 3, on 3q + 4 vertices, with M of four C-major vertices, need a path of C with at least q edges.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g232_hp_hyp_inhabited",
+              "claim": "g232_hp_hyp_claim",
+              "references": [
+                "heavy_path_extension_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g232_hp_not_trivially_true",
+              "claim": "g232_hp_ntt_claim",
+              "references": [
+                "heavy_path_extension_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g232_path_major_sanity",
+                "claim": "g232_path_major_claim",
+                "references": [
+                  "x232_cycle_path",
+                  "x232_major"
+                ]
+              },
+              {
+                "theorem": "g232_long_hole_sanity",
+                "claim": "g232_long_hole_claim",
+                "references": [
+                  "x232_long_odd_hole",
+                  "x232_shortest_long_odd_hole"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x232_long_odd_hole": {
+          "classification": "paper_specific",
+          "reason": "A hole of odd length at least ell, the paper's long odd hole (l.124-125); GTBase.induced_cycles.hole is reused for the hole itself."
+        },
+        "x232_shortest_long_odd_hole": {
+          "classification": "paper_specific",
+          "reason": "A long odd hole of minimum length, the paper's shortest long odd hole (l.133-134)."
+        },
+        "x232_cycle_path": {
+          "classification": "paper_specific",
+          "reason": "A path of a cycle given as a vertex list: cyclically consecutive entries taken from a rotation, fewer edges than the cycle; no shared sub-path-of-a-cycle primitive exists."
+        },
+        "x232_major": {
+          "classification": "paper_specific",
+          "reason": "The paper's C-major vertex (l.126-127): off C, and no three-vertex path of C contains all its neighbours in C."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
