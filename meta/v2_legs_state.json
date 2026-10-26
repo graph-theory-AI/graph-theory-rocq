@@ -1088,14 +1088,14 @@
    "audit_page": "todo"
   },
   "axv_1710_11281_00": {
-   "statement": "blocked",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x191-x210-batch1",
+   "commit": "x202-genus-cop-number-reencoding",
    "package": "topological-graph-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk: the two-sided asymptotic c(g)=g^{1/2+o(1)} (upper AND lower, for both orientable c and nonorientable ec) is rendered as a ONE-SIDED, wrong-shaped upper bound. The window predicate x202_cop_number_genus_window is `exists cops, x202_genus_cop_number_at_most g cops /\\ eps_den*cops*cops <= (eps_den+eps_num)*g.+1` — a single upper inequality. Because more cops always suffices, `exists cops` collapses it to c(g)^2 <= (1+e"
+   "note": "PARTIAL (proxy) — The row is two-sided for both c(g) and the nonorientable c~(g) (arXiv:1710.11281 l.159-164); only c(g) is encoded: the nonorientable half c~(g) (crosscap number, l.53, l.55) is not encoded, the corpus having no audited embeds-in-N_k predicate. Authored in X202.v:genus_cop_number_sqrt_asymptotic_statement."
   },
   "axv_1710_11281_01": {
    "statement": "todo",
