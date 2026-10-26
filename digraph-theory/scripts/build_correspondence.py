@@ -29,7 +29,11 @@ docs/correspondence/curated.json (hand-edited).  Auto-joins to the corpus fill
 the rest.
 
   python3 scripts/build_correspondence.py            # write registry.json
-  python3 scripts/build_correspondence.py --check     # CI coverage gate
+  python3 scripts/build_correspondence.py --check     # coverage + staleness gate
+  python3 scripts/build_correspondence.py --self-test # toolchain-free test of the staleness comparison
+
+--check fails when the committed registry.json differs, byte for byte, from the registry this run
+would write (regenerate it with the first command), as well as on the coverage problems below.
 
 Requires the library to be built (make) for the .glob spans, exactly like
 extract_quotes.py / statement_closure.py.  stdlib only.
@@ -237,6 +241,36 @@ def discover_conjecture_statements():
     return found
 
 
+def registry_text(registry) -> str:
+    """The exact text written to registry.json (and compared by --check)."""
+    return json.dumps(registry, indent=2, ensure_ascii=False) + "\n"
+
+
+def registry_current(committed, registry) -> bool:
+    """True iff the committed registry.json bytes (None when absent) are exactly
+    what this run would write."""
+    return committed is not None and committed == registry_text(registry).encode("utf-8")
+
+
+def self_test():
+    """Toolchain-free negative test of the staleness comparison (make mutation):
+    a current registry passes; a changed entry, a missing file and one extra byte
+    are each stale."""
+    reg = {"meta": {"count": 1}, "entries": [{"id": "x", "decoded": "\u00e9"}]}
+    good = registry_text(reg).encode("utf-8")
+    cases = [
+        ("current", good, reg, True),
+        ("changed entry", good, {"meta": {"count": 1}, "entries": [{"id": "x", "decoded": "e"}]}, False),
+        ("missing file", None, reg, False),
+        ("extra byte", good + b"\n", reg, False),
+    ]
+    bad = [name for name, committed, r, want in cases if registry_current(committed, r) != want]
+    if bad:
+        print("correspondence self-test FAILED: " + ", ".join(bad), file=sys.stderr)
+        sys.exit(1)
+    print(f"correspondence self-test OK: {len(cases)} cases (1 current, 3 stale)")
+
+
 def main(check: bool):
     closure = sc.Closure()
     by_slug, by_ltitle, by_ctitle = load_corpus()
@@ -401,17 +435,22 @@ def main(check: bool):
         # *inline-bound* endpoints (not standalone Definitions, e.g. one_cycle,
         # delta3) — the dashboard renders those as plain text, so they are not a
         # coverage failure and are deliberately not gated here.
+        committed = REGISTRY.read_bytes() if REGISTRY.exists() else None
+        if not registry_current(committed, registry):
+            problems.append(
+                f"{REGISTRY.relative_to(ROOT)} is stale or missing: it differs from the "
+                f"registry this run would write; regenerate it with "
+                f"python3 scripts/build_correspondence.py")
         if problems:
             print("CORRESPONDENCE AUDIT FAILED:\n" + "\n\n".join(problems),
                   file=sys.stderr)
             sys.exit(1)
         print(f"correspondence audit OK: {len(rows)} entries, all decoded + "
-              f"clustered, all edges resolve")
+              f"clustered, all edges resolve, registry.json current")
         return
 
     WEB_DIR.mkdir(parents=True, exist_ok=True)
-    REGISTRY.write_text(json.dumps(registry, indent=2, ensure_ascii=False) + "\n",
-                        encoding="utf-8")
+    REGISTRY.write_text(registry_text(registry), encoding="utf-8")
     n_auth = sum(1 for r in rows if r["decoded_authored"])
     if skipped:
         print(f"  WARNING: skipped {len(skipped)} curated names absent from glob: "
@@ -427,4 +466,7 @@ def main(check: bool):
 
 
 if __name__ == "__main__":
-    main(check="--check" in sys.argv[1:])
+    if "--self-test" in sys.argv[1:]:
+        self_test()
+    else:
+        main(check="--check" in sys.argv[1:])

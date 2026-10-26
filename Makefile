@@ -76,6 +76,7 @@ mutation:
 	python3 meta/test_library_inventory_alias_retention.py
 	python3 meta/migration_report.py --validate --kernel
 	python3 meta/test_install_gate.py
+	python3 digraph-theory/scripts/build_correspondence.py --self-test
 
 # Active vacuity/refutability probe: try to close each `_statement` and its negation with a
 # bounded automation ladder + curated witnesses (meta/probe_hints/). Any statement that is
