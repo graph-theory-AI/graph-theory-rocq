@@ -696,9 +696,9 @@
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x184-antisymmetry-reencoding",
+   "commit": "x184-edge-connectivity-reencoding",
    "package": "cycle-theory",
-   "note": "Authored in X184.v:z5_antisymmetric_flow_edge_connectivity_statement. Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): the antisymmetry condition of a Z5-antisymmetric flow is now part of x184_z5_antisymmetric_flow (it was absent, faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: z5_antisymmetric_flow_edge_connectivity_statement."
+   "note": "Authored in X184.v:z5_antisymmetric_flow_edge_connectivity_statement. Re-encoded 2026-10-26 (coordination/PROGRAMME.md A1, Marc's decision 3): the hypothesis is the shared edge_connected (the underlying graph is k-edge-connected, the source's notion); before, x184_directed_k_edge_connected counted only the edges leaving each set. Re-encoded 2026-10-25: the antisymmetry condition of a Z5-antisymmetric flow is part of x184_z5_antisymmetric_flow (it was absent, faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: z5_antisymmetric_flow"
   },
   "axv_1701_05597_00": {
    "statement": "blocked",
