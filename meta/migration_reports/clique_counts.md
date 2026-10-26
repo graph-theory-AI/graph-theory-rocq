@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py clique_counts --details /tmp/mi
 
 - Canonical: `GTBase.clique_counts.all_clique_count`.
 - Baseline: `16d5a05dea232c0b2e3321675e31e8279c3f2350`.
-- Scope: 5 helpers, 4 statements, 19 frozen objects, 25 recorded references.
-- Source checks: 148/148 pass; consistent.
+- Scope: 5 helpers, 4 statements, 19 frozen objects, 26 recorded references.
+- Source checks: 151/151 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -15,6 +15,8 @@ Full evidence: `python3 meta/migration_report.py clique_counts --details /tmp/mi
 | `Extremal.conjectures.X4.triangle_supersaturation_statement` / erdos:1010 | `Extremal.migration.clique_counts.triangle_supersaturation_statement_compat` |
 | `Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement` / arxiv:1606.06810#00 | `Minor.migration.clique_counts.kt_immersion_clique_count_extremal_statement_compat` |
 | `Minor.conjectures.X175.kt_subdivision_clique_count_asymptotic_statement` / arxiv:1606.06810#01 | `Minor.migration.clique_counts.kt_subdivision_clique_count_asymptotic_statement_compat` |
+
+Source weakenings after migration: ONE-WAY source-repair certificates (`frozen -> live`), not migration equivalences; every other row keeps its exact iff: `Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement` (`x174_clique_count G <= x174_extremal_bound t n) /\ (exists G : sgraph, #|G| = n /\ x174_no_Kt_immersion G t /\ x174_clique_count G = x174_extremal_bound t n)` -> `x174_clique_count G <= x174_extremal_bound_exact t n) /\ (exists G : sgraph, #|G| = n /\ x174_no_Kt_immersion G t /\ x174_clique_count G = x174_extremal_bound_exact t n)`; record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `implemented_by`, `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `commit`, `note`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py clique_counts --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
