@@ -3909,20 +3909,18 @@
       "phase": "X174",
       "repo": "minor-theory",
       "defines_file": "X174.v",
-      "implemented_by": "Batch X171-X190 statement authoring pass; retargeted by immersion/extremal foundation pass (Codex), 2026-07-16",
-      "source_verified_by": "Codex immersion retarget faithfulness readback, 2026-07-16",
-      "source_verified_at": "2026-07-16",
-      "commit": "graph-metric-foundation-retarget",
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "implemented_by": "Arthur (A2 source repair of the 2026-07-16 Codex statement, coordination/PROGRAMME.md section 3, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read at the pin b72c5857: data/arxiv_extracted/1606.06810.json, the row's statement_text and context_text, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x174-bound-subtraction-repair",
+      "faithfulness_verified_by": "",
       "rows": {
         "axv_1606_06810_00": {
           "formal_name": "kt_immersion_clique_count_extremal_statement",
-          "note": "Retargeted using the existing U7 immersion relation; exact maximum is encoded as a universal upper bound plus existence of an n-vertex graph attaining 2^(t-2)(n-t+3).",
-          "state": "partial",
-          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: a nat-subtraction ordering bug, not a lightweight-surface or almost-all mis-quantification. The primitives are all faithful (weak `immersion` from U7 matches the paper's \"no weak K_t-immersion\"; the count-all-cliques convention makes 2^(t-2)(n-t+3) match the K_{t-2}+cone construction exactly for n>=t). But `x174_extremal_bound t n := 2^(t-2)*(n - t + 3)` computes `(n-t)+3` in nat, and the faithful hypot"
+          "note": "Repaired 2026-10-26 (coordination/PROGRAMME.md A2; frozen by the A17 clique_counts and B8 path_edges families): the bound is x174_extremal_bound_exact, 2^(t-2) * (n + 3 - t); the old (n - t) + 3 made the body false at n = t-2 (meta/probe_hints/kt_immersion_clique_count_extremal_statement.v). The exact maximum is a universal upper bound plus an n-vertex graph attaining it; immersion is U7's weak immersion."
         }
       },
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: a nat-subtraction ordering bug, not a lightweight-surface or almost-all mis-quantification. The primitives are all faithful (weak `immersion` from U7 matches the paper's \"no weak K_t-immersion\"; the count-all-cliques convention makes 2^(t-2)(n-t+3) match the K_{t-2}+cone construction exactly for n>=t). But `x174_extremal_bound t n := 2^(t-2)*(n - t + 3)` computes `(n-t)+3` in nat, and the faithful hypothesis `t-2 <= n` lets n<t (n in {t-2,t-1}), where n-t t"
+      "faithfulness_result": "REPAIRED 2026-10-26 (A2), independent review pending: the bound is 2^(t-2) * (n + 3 - t) (x174_extremal_bound_exact), equal to the source's 2^(t-2)(n-t+3) for every n >= t-2; the old (n - t) + 3 made the existence half false at n = t-2 (no graph on t-2 vertices has 2^(t-2) * 3 cliques). Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: a nat-subtraction ordering bug, not a lightweight-surface or almost-all mis-quantification. The primitives are all faithful (weak `immersion` from U7 matches the paper's \"no weak K_t-immersion\"; the count-all-cliques convention makes 2^(t-2)(n-t+3) match the K_{t-2}+cone construction exactly for n>=t). But `x174_extremal_bound t n := 2^(t-2)*(n - t + 3)` computes `(n-t)+3` in nat, and the faithful hypothesis `t-2 <= n` lets n<t (n in {t-2,t-1}), where n-t t"
     },
     "X175": {
       "phase": "X175",

@@ -33,7 +33,8 @@
     "",
     "Frozen verbatim at 16d5a05: the five counts (X4's over the unchanged triangle-set support, frozen as Legacy.x4_triangle_set while the live predicate stays), and the four current rows: D2tur number_of_cliques_in_minor_closed_classes_statement (nat c, strict 0 < t guard; no older history, so also complete), X4 triangle_supersaturation_statement (every nat division, equality and guard), X174 kt_immersion_clique_count_extremal_statement (all-clique count, the blocked natural subtraction n - t + 3 with the admitted n = t-2, t-1 cases, and both the upper-bound and the attainment halves) and X175 kt_subdivision_clique_count_asymptotic_statement (nonempty count, eventual-in-t upper envelope, uniform order kept). X88's count reaches no current or historical row; its misleadingly named row compares edge counts and stays untouched. Complete rows: X4Original over A7's frozen edge count (text at ae0e605), X174Original over B8's frozen immersion chain (048c768) and X175Original over B2's frozen subdivision chain (9e03072): seven whole-row iffs with the four current ones.",
     "",
-    "History: A7's X4Legacy supersaturation row, B8's X174Legacy row and B2's X175Legacy statement keep the live counts byte-for-byte and are documented below; A17's per-row X4/X174/X175 copies keep A7's, B8's and B2's live helpers and are documented reciprocally in those specs. The two existing proof clients grounding_D2tur.clique_count_gt0 and clique_count_K0 keep their types; each proof gains one rewrite back to the old comprehension. Atlas candidate e054 stays BLOCKED; no implication is added. A16's spec and registry drop only their X174 count exclusion, now migrated here. Doc blocks are unchanged. Maximum and inclusion-maximal clique predicates stay distinct."
+    "History: A7's X4Legacy supersaturation row, B8's X174Legacy row and B2's X175Legacy statement keep the live counts byte-for-byte and are documented below; A17's per-row X4/X174/X175 copies keep A7's, B8's and B2's live helpers and are documented reciprocally in those specs. The two existing proof clients grounding_D2tur.clique_count_gt0 and clique_count_K0 keep their types; each proof gains one rewrite back to the old comprehension. Atlas candidate e054 stays BLOCKED; no implication is added. A16's spec and registry drop only their X174 count exclusion, now migrated here. Doc blocks are unchanged. Maximum and inclusion-maximal clique predicates stay distinct.",
+    "Source repair (2026-10-26, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md, arxiv:1606.06810#00 entry), not a migration equivalence: the frozen X174Legacy and X174Original rows keep x174_extremal_bound, which computes (n - t) + 3 in the naturals, and are false (X174Legacy_row_false, X174Original_row_false in the certificate file: at t = 2, n = 0 the bound is 3 while the empty graph has one clique). The live X174 row kt_immersion_clique_count_extremal_statement uses the new local x174_extremal_bound_exact (n + 3 - t), with its doc block rewritten; x174_extremal_bound is unchanged. The repair's direction is weaken and both certificates are one-way frozen -> live; B8's path_edges spec carries the same repair on its X174 statement object. The row leaves partial: the repair lists the manifest-row fields implemented_by, source_verified_by, source_verified_at and verification_note and the leg fields statement (partial -> done), commit and note."
   ],
   "frozen": [
     {
@@ -156,7 +157,27 @@
         "x174_clique_count": "Legacy.x174_clique_count"
       },
       "certificate": "Minor.migration.clique_counts.kt_immersion_clique_count_extremal_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "x174_clique_count G <= x174_extremal_bound t n) /\\ (exists G : sgraph, #|G| = n /\\ x174_no_Kt_immersion G t /\\ x174_clique_count G = x174_extremal_bound t n)",
+          "x174_clique_count G <= x174_extremal_bound_exact t n) /\\ (exists G : sgraph, #|G| = n /\\ x174_no_Kt_immersion G t /\\ x174_clique_count G = x174_extremal_bound_exact t n)"
+        ],
+        "direction": "weaken",
+        "doc_block_sha256": "e3dbfb642a6ca36c258c122c067f32b03ccdd588356fdc2d856e8b497112fb92",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "implemented_by",
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "statement",
+          "commit",
+          "note"
+        ]
+      }
     },
     {
       "kind": "statement",
@@ -184,7 +205,27 @@
       },
       "certificate": "Minor.migration.clique_counts.kt_immersion_clique_count_extremal_statement_original_compat",
       "commit": "048c768adce0cfcbf5b5a5763d71fc8daf483db8",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "x174_clique_count G <= x174_extremal_bound t n) /\\ (exists G : sgraph, #|G| = n /\\ x174_no_Kt_immersion G t /\\ x174_clique_count G = x174_extremal_bound t n)",
+          "x174_clique_count G <= x174_extremal_bound_exact t n) /\\ (exists G : sgraph, #|G| = n /\\ x174_no_Kt_immersion G t /\\ x174_clique_count G = x174_extremal_bound_exact t n)"
+        ],
+        "direction": "weaken",
+        "doc_block_sha256": "e3dbfb642a6ca36c258c122c067f32b03ccdd588356fdc2d856e8b497112fb92",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "implemented_by",
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "statement",
+          "commit",
+          "note"
+        ]
+      }
     },
     {
       "kind": "original-statement",

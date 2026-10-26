@@ -1404,6 +1404,33 @@ Found by reading, not caught by the suffix heuristic (the more valuable WP4b inp
   `n = t-1` it evaluates to `2^(t-2) * 3` instead of `2^(t-2) * 1` and `2^(t-2) * 2`. The
   universal half is then too weak and the existence half asks for the wrong exact count. Fix:
   write the bound as `2^(t-2) * (n + 3 - t)` with the guard already present, or guard `t <= n`.
+  **REPAIRED 2026-10-26** (coordination/PROGRAMME.md A2; the row is frozen by the A17 clique_counts and
+  B8 path_edges families): `kt_immersion_clique_count_extremal_statement` uses the new local
+  `x174_extremal_bound_exact t n := 2^(t-2) * (n + 3 - t)`, which equals `2^(t-2) * (n - t + 3)` for every
+  `n >= t - 2`, as in the source (Fox and Wei, arXiv:1606.06810, statement_text at the pin b72c5857: "The
+  maximum number of cliques in a graph on $n \geq t-2$ vertices with no $K_t$-immersion is
+  $2^{t-2}(n-t+3)$."). The body's two uses of the bound became
+  `x174_clique_count G <= x174_extremal_bound_exact t n) /\ (exists G : sgraph, #|G| = n /\ x174_no_Kt_immersion G t /\ x174_clique_count G = x174_extremal_bound_exact t n)`;
+  `x174_extremal_bound` stays unchanged for the frozen migration copies. The severity above understated the
+  defect: at `n = t-2` the existence half asks for `2^(t-2) * 3` cliques on `t-2` vertices, where at most
+  `2^(t-2)` exist, so the old body is FALSE (`meta/probe_hints/kt_immersion_clique_count_extremal_statement.v`,
+  at `t = 2`, `n = 0`: the empty graph has one clique). For `n = t-2` and `n = t-1` the source's value is
+  right: no such graph immerses `K_t`, and the complete graph has `2^n` cliques. This is a SOURCE REPAIR,
+  not a migration equivalence:
+  - the A17 certificates (`minor-theory/theories/migration/clique_counts.v`, the row and the complete
+    original row) and the B8 certificate (`migration/path_edges.v`) keep their frozen rows and prove
+    `frozen -> live` (direction "weaken") through the falsity of the frozen rows (`X174Legacy_row_false`,
+    `X174Original_row_false`, and B8's `X174Legacy_row_false`);
+  - the `repair` entries of `meta/migration_reports/clique_counts.spec.json` (statement and
+    original-statement objects) and `meta/migration_reports/path_edges.spec.json` (statement object) bind the
+    one exact text replacement and the repaired doc block's hash, name this entry as their record, and list
+    the fields the repair changes: the manifest-row fields `implemented_by`, `source_verified_by`,
+    `source_verified_at` and `verification_note`, and the leg fields `statement` (`partial` -> `done`),
+    `commit` and `note`;
+  - the statement wave X174 records the repair (the row is no longer partial, a new note, the commit tag
+    `x174-bound-subtraction-repair`); its `faithfulness_verified_by` is filled after the independent review.
+  Logical relation: old -> new holds because the old body is false; for `n >= t` the two bodies coincide.
+  The new body is open.
 - `arxiv:1704.00125#00` (`X190.v:44`, `thin_overlay_without_bounded_degree_statement`) —
   severity: **vacuous-looking**. `x190_thin_system_of_overlays C` unfolds to
   `exists thin, forall G, C G -> exists _ : x190_overlay G thin, True`, and the `x190_overlay`
