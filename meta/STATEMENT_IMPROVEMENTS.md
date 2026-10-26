@@ -821,6 +821,16 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   induced-subdivision model is replicated byte for byte from
   `extremal-graph-theory/theories/conjectures/X98.v` because `graph-theory-misc` does not import
   that package (a second copy to reconcile in WP6).
+  FINDING 2026-10-26 (Arthur; Lancelot's routing, BOARD 15:42:23Z; reviewer Marcol): the "Trivial H excluded (fails
+  NP_hard)" of the wave note is false. The D7 layer gives `NP_hard` no hardness content (D2 under the H-factor
+  entry above), so this existential body is PROVABLE with `H = K_1`, whose containment problem is "G is nonempty"
+  (kernel-checked under non-row names: `old_K1_subdivision_iff`, `old_K1_subcubic`, `old_x114_statement_true`;
+  evidence `coordination/evidence/math-2026-10-26/np-hard-layer-by-arthur`). The statement leg should be blocked,
+  but it is not changed here: the row is frozen by five migration families (consecutive_in_path,
+  induced_paths, induced_subdivisions, model_support, subcubic), whose `migration_report --check` requires the
+  statement's doc block, manifest row and leg entry unchanged since the baseline, and a reviewed repair needs a
+  change of the statement text. The leg change waits for a gate path for a text-preserving re-block, or for a
+  re-encoding on a cost-coupled NP-completeness vocabulary.
 - Several rows state their extremal parameters RELATIONALLY (`is_book_thickness`,
   `is_pebbling_number`, `weighted_chromatic_number`, `weighted_clique_number`, `fas_opt`,
   `edp_opt`, `x89_max_quartet_distance`, `x141_zero_forcing_number`) and are therefore
