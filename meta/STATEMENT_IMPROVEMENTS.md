@@ -223,6 +223,15 @@ meta/check_statement_docs.py --ignore-baseline cycle-theory` -> 46 target(s), 46
   receipt). The statement leg goes from partial to done; `faithfulness_verified_by` is filled after
   the independent review. Per the pinned extracted context of the paper's Conjecture 14, its
   Corollary 13(iv) already gives k = 12, so the row as stated is settled by its own source.
+  **Second finding, FIXED 2026-10-26** (coordination/PROGRAMME.md A1; Marc's decision 3 of 25
+  October): severity **too weak**. The source calls a digraph t-edge-connected when its underlying
+  graph is (p. 4), while `x184_directed_k_edge_connected` counted only the edges LEAVING each set, a
+  strictly stronger hypothesis: two vertices joined by k parallel arcs u -> v are k-edge-connected
+  but have no edge leaving {v} (kernel-checked in the re-encoding's receipt, with the relation new
+  -> old: the directed hypothesis implies `edge_connected`). The statement's hypothesis is now the
+  shared `edge_connected` of `cycle-theory/theories/foundations/connectivity.v`;
+  `x184_out_cut` and `x184_directed_k_edge_connected` stay, unused and byte-identical, as the
+  excluded distinct variants of the simple_cuts spec.
 - `opg:approximation_ratio_for_k_outerplanar_graphs` (`D1.v:802`) — severity: **wrong object
   (proxy)**. The corpus row is a *question* about the approximation ratio of MaxEDP / MaxIMF on
   k-outerplanar graphs; the Rocq body is a bounded-integrality-gap statement on the

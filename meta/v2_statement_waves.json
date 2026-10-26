@@ -4089,18 +4089,18 @@
       "phase": "X184",
       "repo": "cycle-theory",
       "defines_file": "X184.v",
-      "implemented_by": "Arthur (A1 re-encoding, coordination/PROGRAMME.md section 3, 2026-10-25)",
-      "source_verified_by": "Arthur (source re-read at the pin b72c5857: data/arxiv_extracted/1701.03366.json and data/arxiv_reviews/1701.03366__00.json, 2026-10-25)",
-      "source_verified_at": "2026-10-25",
-      "commit": "x184-antisymmetry-reencoding",
-      "faithfulness_verified_by": "Marcol (X184 review, 2026-10-25)",
+      "implemented_by": "Arthur (A1 re-encoding, coordination/PROGRAMME.md section 3 and Marc's decision 3 of 25 October, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read at the pin b72c5857: data/arxiv_extracted/1701.03366.json; the source's p. 4 reading of a t-edge-connected digraph as one whose underlying graph is t-edge-connected, from Marc's decision 3 of 25 October, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x184-edge-connectivity-reencoding",
+      "faithfulness_verified_by": "",
       "rows": {
         "axv_1701_03366_00": {
           "formal_name": "z5_antisymmetric_flow_edge_connectivity_statement",
-          "note": "Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): the antisymmetry condition of a Z5-antisymmetric flow is now part of x184_z5_antisymmetric_flow (it was absent, faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: z5_antisymmetric_flow_edge_connectivity_statement."
+          "note": "Re-encoded 2026-10-26 (coordination/PROGRAMME.md A1, Marc's decision 3): the hypothesis is the shared edge_connected (the underlying graph is k-edge-connected, the source's notion); before, x184_directed_k_edge_connected counted only the edges leaving each set. Re-encoded 2026-10-25: the antisymmetry condition of a Z5-antisymmetric flow is part of x184_z5_antisymmetric_flow (it was absent, faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: z5_antisymmetric_flow_edge_connectivity_statement."
         }
       },
-      "faithfulness_result": "RE-ENCODED 2026-10-25 (A1), independent review: Marcol APPROVE 2026-10-25 (new -> old for the object and the statement, strict for the objects): x184_z5_antisymmetric_flow gains the Nesetril-Raspaud antisymmetry conjunct (no two edges, equal or not, carry values summing to 0 modulo 5), resolving the 2026-07-17 finding; the old object was strictly weaker (two parallel edges with values 1 and 4). Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: the defining ANTISYMMETRY property is entirely absent, so the row does not encode the conjecture's object. `x184_z5_antisymmetric_flow` (X184.v:20-25) is exactly two conjuncts — nowhere-zero (`phi e != ord0`) plus mod-5 conservation — i.e. a plain nowhere-zero Z5-flow, mislabeled \"antisymmetric.\" A Nešetřil–Raspaud antisymmetric flow additionally requires the used-value set B to satisfy B ∩ (−B) = ∅ (no two edges with opposite values; in Z5 never both 1&4 n"
+      "faithfulness_result": "RE-ENCODED 2026-10-26 (A1, Marc's decision 3), independent review pending: the hypothesis is the shared edge_connected (the underlying graph is k-edge-connected, the source's notion, p. 4) instead of x184_directed_k_edge_connected, which counted only the edges leaving each set and so excluded, e.g., two vertices joined by k parallel arcs u -> v. Previous result: RE-ENCODED 2026-10-25 (A1), independent review: Marcol APPROVE 2026-10-25 (new -> old for the object and the statement, strict for the objects): x184_z5_antisymmetric_flow gains the Nesetril-Raspaud antisymmetry conjunct (no two edges, equal or not, carry values summing to 0 modulo 5), resolving the 2026-07-17 finding; the old object was strictly weaker (two parallel edges with values 1 and 4). Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: the defining ANTISYMMETRY property is entirely absent, so the row does not encode the conjecture's object. `x184_z5_antisymmetric_flow` (X184.v:20-25) is exactly two conjuncts — nowhere-zero (`phi e != ord0`) plus mod-5 conservation — i.e. a plain nowhere-zero Z5-flow, mislabeled \"antisymmetric.\" A Nešetřil–Raspaud antisymmetric flow additionally requires the used-value set B to satisfy B ∩ (−B) = ∅ (no two edges with opposite values; in Z5 never both 1&4 n"
     },
     "X185": {
       "phase": "X185",
