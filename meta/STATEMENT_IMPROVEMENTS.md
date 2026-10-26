@@ -1018,6 +1018,14 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   For #01, which the corpus marks disproved (Girão, Kittipassorn, Popielarz), the guard keeps the
   genuine loopless refutation as what the negation must capture. The relative edges e016, e017,
   e018 and e038 are re-proved over the guards, their reviewer fields cleared until review.
+- `arxiv:1608.03040#06` (Open Problem 7) →
+  `conjectures/X51.v:majority_choosable_universal_constant_statement` — **refutable (loop)** (found
+  2026-10-25, Arthur's F1 in his lane 4 review). A loop at v makes v a same-coloured out-neighbour of
+  itself, so the one-vertex digraph with a loop has no majority colouring from any lists, for every c.
+  The source's digraphs have no loops. **FIXED 2026-10-25** (coordination/PROGRAMME.md A1, Lancelot's
+  item 4b): the body gains `irreflexive (@arc D)`, the body of `two_extremal.loopless`
+  (`meta/probe_hints/majority_choosable_universal_constant_statement.v`; non-vacuity
+  `conjectures/grounding_X51.v:x51_hyps_nonvacuous`). No edge uses the row.
 - `arxiv:1608.03040#02` (Open Problem 1) →
   `conjectures/X45.v:majority_three_colouring_beta_statement` — **too strong**. The row asks
   whether SOME constant `beta < 1` works; the body fixes `beta = 1/2`, i.e. it restates
