@@ -1,0 +1,1118 @@
+(** * GTMisc.applications.heavy_path_disproof -- the heavy-path extension is false as stated
+
+    Wave X232, row arxiv:1904.12273#01 (PROGRAMME A6). [heavy_path_extension_disproved] refutes
+    [heavy_path_extension_statement] of conjectures/X232.v, following the write-up in
+    coordination/sources/1904.12273__01 (verdict "disproved", referee report CONFIRMED).
+
+    The counterexample G(q), for q = 2r + 3 (odd, at least 3) and n = 3q: the hole C on positions
+    0 .. n - 1; for k = 0, 1, 2 a vertex y_k complete to the arc A_k (positions kq .. kq + q, A_2
+    ending at position 0); the y_k form a triangle; a vertex x complete to C and adjacent to no
+    y_k; M = {x, y_0, y_1, y_2}; ell = 7.
+    - Every hole of G(q) has at most 5 vertices (through x), or contains C (no y), or has 2q + 2
+      vertices (one y) or q + 3 (two y's): [hole_cases]. The last two are even, so C is a
+      shortest long odd hole at ell = 7 ([long_odd_big], [shortest_hC]). The arcs are normalised
+      by the rotation automorphism [sigma] (positions + q, y_k to y_(k + 1)).
+    - x and every y_k have four distinct neighbours on C, so they are C-major ([majors_hM]); x is
+      nonadjacent to the y_k.
+    - A path of C with fewer than q edges misses an arc A_k ([miss_arc]), so a path of C that
+      contains a neighbour of each y_k has at least q edges ([catch_bound]). With r = b, every
+      bound b is defeated.
+    Everything is closed by [Qed]; see the [Print Assumptions] audit at the end. Imported by
+    conjectures/grounding_X232.v for its witnesses. *)
+
+From mathcomp Require Import all_boot zify.
+From Stdlib Require Import Lia.
+From GraphTheory Require Import preliminaries digraph sgraph.
+From GTBase Require Import base induced_cycles.
+From GTMisc.conjectures Require Import X232.
+
+Set Implicit Arguments.
+Unset Strict Implicit.
+Unset Printing Implicit Defensive.
+
+(** ** Generic facts on holes *)
+
+Section HoleFacts.
+Variable T : eqType.
+Implicit Types (c : seq T) (u v : T).
+
+Lemma zip_rot1_next c u v : uniq c ->
+  ((u, v) \in zip c (rot 1 c)) = (u \in c) && (v == next c u).
+Proof.
+move=> uc; have sz : size (rot 1 c) = size c by rewrite size_rot.
+apply/idP/idP.
+  case/(nthP (u, u)) => i; rewrite size_zip sz minnn => ic.
+  rewrite nth_zip // => -[<- <-]; rewrite mem_nth //=.
+  rewrite next_nth mem_nth // index_uniq //.
+  case: c uc sz ic => [//|y p] _ _ ic /=.
+  rewrite rot1_cons nth_rcons.
+  have [h|h] := ltnP i (size p); first by rewrite (set_nth_default y).
+  have e : i = size p by apply/eqP; rewrite eqn_leq h -ltnS ic.
+  by rewrite e eqxx nth_default.
+case/andP => uc' /eqP ->; apply/(nthP (u, u)); exists (index u c).
+  by rewrite size_zip sz minnn index_mem.
+rewrite nth_zip // nth_index // next_nth uc'.
+case: c uc sz uc' => [//|y p] _ _ uc' /=.
+rewrite rot1_cons nth_rcons.
+have ic : index u (y :: p) < size (y :: p) by rewrite index_mem.
+have [h|h] := ltnP (index u (y :: p)) (size p); first by rewrite (set_nth_default y).
+have e : index u (y :: p) = size p by apply/eqP; rewrite eqn_leq h -ltnS ic.
+by move: e; rewrite /= => ->; rewrite eqxx nth_default.
+Qed.
+
+Lemma cyc_consecutive_next_prev c u v : uniq c ->
+  seq_cyclic_consecutiveb c u v = (u \in c) && (v == next c u) || (v \in c) && (u == next c v).
+Proof. by move=> uc; rewrite /seq_cyclic_consecutiveb !zip_rot1_next. Qed.
+
+(** [next] moves the index forward by one, cyclically. *)
+Lemma index_next c u : uniq c -> u \in c ->
+  index (next c u) c = (index u c).+1 %% size c.
+Proof.
+move=> uc uin; rewrite next_nth uin.
+case: c uc uin => [//|y p] uc uin.
+set i := index u (y :: p).
+have iu : i < (size p).+1 by rewrite -[(size p).+1]/(size (y :: p)) index_mem.
+have [lt|ge] := ltnP i (size p).
+  have -> : i.+1 %% size (y :: p) = i.+1 by apply: modn_small; rewrite /= ltnS.
+  by rewrite -[nth y p i]/(nth y (y :: p) i.+1) index_uniq.
+have e : i = size p by apply/eqP; rewrite eqn_leq ge -ltnS iu.
+by rewrite e nth_default //= eqxx modnn.
+Qed.
+
+Lemma index_iter_next c u k : uniq c -> u \in c ->
+  index (iter k (next c) u) c = (index u c + k) %% size c.
+Proof.
+move=> uc uin; elim: k => [|k IH] /=.
+  by rewrite addn0 modn_small // index_mem.
+have mk : iter k (next c) u \in c by elim: k {IH} => //= k ihk; rewrite mem_next.
+by rewrite index_next // IH addnS -addn1 modnDml addn1.
+Qed.
+
+(** In a uniq list of size at least [k + 1], [k] steps of [next] (0 < k) move every entry. *)
+Lemma iter_next_neq c u k : uniq c -> u \in c -> 0 < k < size c ->
+  iter k (next c) u != u.
+Proof.
+move=> uc uin /andP [k0 ks]; apply/eqP => e.
+have := index_iter_next k uc uin; rewrite e.
+have ium : index u c < size c by rewrite index_mem.
+rewrite -{1}(modn_small ium) => /esym/eqP.
+rewrite -{2}[index u c]addn0 eqn_modDl mod0n modn_small // => /eqP k0'.
+by move: k0; rewrite k0'.
+Qed.
+
+End HoleFacts.
+
+Section HoleClique.
+Variable G : sgraph.
+Implicit Types (d : seq G) (u v w : G).
+
+Lemma hole_uniq d : hole d -> uniq d.
+Proof. by case=> /andP []. Qed.
+
+Lemma hole_cycle d : hole d -> cycle (--) d.
+Proof. by case=> /andP []. Qed.
+
+(** In a hole, adjacent entries are consecutive: one is the [next] of the other. *)
+Lemma hole_adj_next d u v : hole d -> u \in d -> v \in d -> u -- v ->
+  (v == next d u) || (u == next d v).
+Proof.
+move=> hd ud vd uv; have [_ [_ hc]] := hd.
+by have := hc u v ud vd uv; rewrite cyc_consecutive_next_prev ?hole_uniq // ud vd.
+Qed.
+
+(** No hole contains three pairwise adjacent entries. *)
+Lemma hole_no_triangle d u v w : hole d -> u \in d -> v \in d -> w \in d ->
+  u -- v -> v -- w -> u -- w -> False.
+Proof.
+move=> hd ud vd wd uv vw uw.
+have uc := hole_uniq hd; have s4 : 3 < size d by case: hd => _ [].
+have f3 : forall a b c, a \in d -> b = next d a -> c = next d b -> a = next d c -> False.
+  move=> a b c ad eb ec ea.
+  have := @iter_next_neq _ d a 3 uc ad; rewrite /= -eb -ec -ea eqxx.
+  by move/(_ s4).
+have inj : {in d &, injective (next d)}.
+  by move=> a b _ _ e; rewrite -(prev_next uc a) e prev_next.
+have nuv : u != v by apply: contraTneq uv => ->; rewrite sg_irrefl.
+have nvw : v != w by apply: contraTneq vw => ->; rewrite sg_irrefl.
+have nuw : u != w by apply: contraTneq uw => ->; rewrite sg_irrefl.
+have := hole_adj_next hd ud wd uw; have := hole_adj_next hd vd wd vw.
+have := hole_adj_next hd ud vd uv.
+(* each pair is an arrow of [next]: a 3-cycle of arrows contradicts size > 3, and two arrows
+   out of, or into, one entry contradict that [next] is a function, resp. injective *)
+case/orP => /eqP h1; case/orP => /eqP h2; case/orP => /eqP h3.
+all: first [ by apply: (f3 u v w ud) | by apply: (f3 u w v ud) | by apply: (f3 v u w vd)
+           | by apply: (f3 v w u vd) | by apply: (f3 w u v wd) | by apply: (f3 w v u wd)
+           | by move: nvw; rewrite h1 h3 eqxx | by move: nuv; rewrite h1 h3 eqxx
+           | by move: nuw; rewrite (inj _ _ ud wd (etrans (esym h1) h2)) eqxx
+           | by move: nuv; rewrite (inj _ _ ud vd (etrans (esym h1) h2)) eqxx
+           | by move: nvw; rewrite (inj _ _ vd wd (etrans (esym h1) h2)) eqxx
+           | by move: nuw; rewrite h1 h2 eqxx | by move: nuv; rewrite h1 h2 eqxx
+           | by move: nvw; rewrite h1 h2 eqxx | by move: nuw; rewrite h2 h3 eqxx
+           | by move: nuv; rewrite h2 h3 eqxx | by move: nvw; rewrite h2 h3 eqxx ].
+Qed.
+
+End HoleClique.
+
+
+(** ** The counterexample G(q), q = 2r + 3 odd
+
+    C is the cycle on positions 0 .. n - 1, n = 3q; its arc A_k (k = 0, 1, 2) is positions kq .. kq + q
+    (A_2 ends at position 0); y_k is complete to A_k; the y_k form a triangle; x is complete to C and
+    has no other neighbour. *)
+
+Section Counterexample.
+Variable r : nat.
+
+Definition hq := (2 * r + 3)%N.
+Definition hN := (6 * r + 8)%N.
+Notation n := hN.+1.
+
+Lemma hn3q : n = 3 * hq.
+Proof. rewrite /hN /hq; lia. Qed.
+
+Definition hV := ('I_n + option 'I_3)%type.
+
+(** Position [i] lies on the arc [A_k]. *)
+Definition inarc (k : 'I_3) (i : 'I_n) : bool :=
+  (k * hq <= i <= k * hq + hq) || ((k == 2 :> nat) && (i == 0 :> nat)).
+
+Definition hp_rel (a b : hV) : bool :=
+  match a, b with
+  | inl i, inl j => ord_cycle_rel n i j
+  | inl i, inr (Some k) | inr (Some k), inl i => inarc k i
+  | inl _, inr None | inr None, inl _ => true
+  | inr (Some k), inr (Some k') => k != k'
+  | inr None, inr _ | inr (Some _), inr None => false
+  end.
+
+Lemma hp_sym : symmetric hp_rel.
+Proof.
+case=> [i|[k|]] [j|[k'|]] //=; first exact: ord_cycle_relC.
+by rewrite eq_sym.
+Qed.
+
+Lemma hp_irrefl : irreflexive hp_rel.
+Proof.
+case=> [i|[k|]] //=; last by rewrite eqxx.
+by apply: ord_cycle_rel_irr; rewrite /hN; lia.
+Qed.
+
+Definition HG : sgraph := SGraph hp_sym hp_irrefl.
+
+Definition cv (i : nat) : HG := inl (inord i).
+Definition yv (k : 'I_3) : HG := inr (Some k).
+Definition xv : HG := inr None.
+
+Definition hC : seq HG := [seq cv i | i <- iota 0 n].
+
+Lemma size_hC : size hC = n.
+Proof. by rewrite size_map size_iota. Qed.
+
+Lemma cv_inj i j : i < n -> j < n -> cv i = cv j -> i = j.
+Proof. by move=> ilt jlt [] /(congr1 (@nat_of_ord _)); rewrite !inordK. Qed.
+
+Lemma uniq_hC : uniq hC.
+Proof.
+rewrite map_inj_in_uniq ?iota_uniq // => i j; rewrite !mem_iota !add0n => /andP [_ ilt] /andP [_ jlt].
+exact: cv_inj.
+Qed.
+
+Lemma cv_val (i : 'I_n) : cv i = inl i.
+Proof. by rewrite /cv inord_val. Qed.
+
+Lemma mem_hC (a : HG) : (a \in hC) = (if a is inl _ then true else false).
+Proof.
+case: a => [i|b]; last by apply/negbTE/mapP => -[j _].
+apply/mapP; exists (val i); last by rewrite cv_val.
+by rewrite mem_iota add0n ltn_ord.
+Qed.
+
+Lemma nth_hC i : i < n -> nth xv hC i = cv i.
+Proof. by move=> ilt; rewrite (nth_map 0) ?size_iota // nth_iota. Qed.
+
+Lemma index_hC i : i < n -> index (cv i) hC = i.
+Proof.
+move=> ilt; rewrite -{1}(nth_hC ilt) index_uniq ?size_hC //; exact: uniq_hC.
+Qed.
+
+(** [next] on C is the successor modulo n. *)
+Lemma next_hC i : i < n -> next hC (cv i) = cv (i.+1 %% n).
+Proof.
+move=> ilt; have ci : cv i \in hC by rewrite mem_hC.
+have := index_next uniq_hC ci; rewrite index_hC // size_hC => e.
+have nin : next hC (cv i) \in hC by rewrite mem_next.
+rewrite -(nth_index xv nin) e nth_hC //; exact: ltn_pmod.
+Qed.
+
+Lemma cv_adj_succ i : i < n -> cv i -- cv (i.+1 %% n).
+Proof.
+move=> ilt; change (ord_cycle_rel n (inord i) (inord (i.+1 %% n))).
+by rewrite /ord_cycle_rel /= !inordK ?ltn_pmod // eqxx.
+Qed.
+
+Lemma cycle_hC : cycle (--) hC.
+Proof.
+apply: (cycle_from_next uniq_hC) => a; case/mapP => i; rewrite mem_iota add0n => /andP [_ ilt] ->.
+by rewrite next_hC //; apply: cv_adj_succ.
+Qed.
+
+(** Adjacency between positions of C is cyclic succession. *)
+Lemma cv_adjE (i j : 'I_n) :
+  (inl i : HG) -- inl j = (val j == (val i).+1 %% n) || (val i == (val j).+1 %% n).
+Proof. by []. Qed.
+
+Lemma chordless_hC : cyclic_chordless hC.
+Proof.
+move=> a b; rewrite !mem_hC; case: a => [i|//]; case: b => [j|//] _ _; rewrite cv_adjE => h.
+rewrite cyc_consecutive_next_prev ?uniq_hC // !mem_hC !andTb.
+rewrite -(cv_val i) -(cv_val j) !next_hC ?ltn_ord //.
+by case/orP: h => /eqP <-; rewrite eqxx ?orbT.
+Qed.
+
+Lemma hole_hC : hole hC.
+Proof.
+split; first by rewrite /ucycle cycle_hC uniq_hC.
+by split; [rewrite size_hC /hN; lia | exact: chordless_hC].
+Qed.
+
+Lemma odd_hC : odd (size hC).
+Proof. rewrite size_hC /hN; lia. Qed.
+
+(** ** The rotation sigma: positions shift by q, y_k goes to y_(k+1), x is fixed *)
+
+Definition sh (i : nat) : nat := (i + hq) %% n.
+Definition k1 (k : 'I_3) : 'I_3 := inord ((k + 1) %% 3).
+
+Lemma sh_lt i : sh i < n.
+Proof. exact: ltn_pmod. Qed.
+
+Lemma shE i : i < n -> sh i = if i + hq < n then i + hq else i + hq - n.
+Proof.
+move=> ilt; rewrite /sh; case: ltnP => [lt|ge]; first exact: modn_small.
+have -> : i + hq = (i + hq - n) + n by rewrite subnK.
+rewrite modnDr modn_small //; move: ilt; rewrite /hq /hN; lia.
+Qed.
+
+Lemma val_k1 (k : 'I_3) : (k1 k : nat) = (k + 1) %% 3.
+Proof. by rewrite /k1 inordK // ltn_pmod. Qed.
+
+Lemma val_inord_sh i : ((inord (sh i) : 'I_n) : nat) = sh i.
+Proof. by rewrite inordK // sh_lt. Qed.
+
+Lemma inarc_sh (k : 'I_3) (i : 'I_n) :
+  inarc (k1 k) (inord (sh i)) = inarc k i.
+Proof.
+rewrite /inarc val_k1 val_inord_sh shE ?ltn_ord //.
+have il := ltn_ord i; case: k => [[|[|[|//]]] kl] /=; rewrite /hq /hN in il *.
+all: rewrite ?add0n ?add1n ?modn_small // ?orbF ?mul0n ?mul1n ?add0n.
+all: by case: ifP => h; apply/idP/idP; lia.
+Qed.
+
+Definition sigma (a : HG) : HG :=
+  match a with
+  | inl i => cv (sh i)
+  | inr (Some k) => yv (k1 k)
+  | inr None => xv
+  end.
+
+Lemma sh_succ (i j : 'I_n) : (sh j == (sh i).+1 %% n) = (val j == (val i).+1 %% n).
+Proof.
+rewrite /sh.
+have -> : ((i + hq) %% n).+1 %% n = ((val i).+1 + hq) %% n.
+  by rewrite -addn1 modnDml addn1 addSn.
+by rewrite eqn_modDr modn_small ?ltn_ord.
+Qed.
+
+Lemma sh_inj (i j : 'I_n) : sh i = sh j -> i = j.
+Proof.
+move/eqP; rewrite /sh eqn_modDr !modn_small ?ltn_ord // => /eqP e.
+exact: val_inj.
+Qed.
+
+Lemma k1_inj : injective k1.
+Proof.
+move=> k k' /(congr1 (@nat_of_ord _)); rewrite !val_k1 => e; apply: val_inj => /=.
+by move: e; case: k => [[|[|[|//]]] ?]; case: k' => [[|[|[|//]]] ?].
+Qed.
+
+Lemma sigma_inj : injective sigma.
+Proof.
+move=> [i|[k|]] [j|[k'|]] //=.
+- by move/cv_inj => /(_ (sh_lt i) (sh_lt j)) /sh_inj ->.
+- by case=> /k1_inj ->.
+Qed.
+
+Lemma sigma_adj (a b : HG) : (sigma a -- sigma b) = (a -- b).
+Proof.
+case: a => [i|[k|]]; case: b => [j|[k'|]] //=.
+- change (ord_cycle_rel n (inord (sh i)) (inord (sh j)) = ord_cycle_rel n i j).
+  by rewrite /ord_cycle_rel /= !inordK ?sh_lt // !sh_succ.
+- exact: inarc_sh.
+- exact: inarc_sh.
+- change ((k1 k != k1 k') = (k != k')).
+  by rewrite (inj_eq k1_inj).
+Qed.
+
+Lemma hole_sigma (d : seq HG) : hole d -> hole (map sigma d).
+Proof. exact: hole_map sigma_inj sigma_adj. Qed.
+
+(** ** Holes through x, and the y-vertices of a hole *)
+
+Definition isC (a : HG) : bool := if a is inl _ then true else false.
+Definition isY (a : HG) : bool := if a is inr (Some _) then true else false.
+
+Lemma size_split (d : seq HG) : uniq d -> size d = count isC d + count isY d + (xv \in d).
+Proof.
+elim: d => [//|a d IH] /= /andP [ad ud]; rewrite IH // in_cons.
+case: a ad => [i|[k|]] ad /=; rewrite ?add0n ?addnS //.
+by rewrite /xv (negbTE ad).
+Qed.
+
+Lemma yy_adj (a b : HG) : isY a -> isY b -> a != b -> a -- b.
+Proof. by case: a => [//|[k|//]]; case: b => [//|[k'|//]] _ _ ne; apply: contra ne => /eqP ->. Qed.
+
+Lemma xc_adj (a : HG) : isC a -> xv -- a.
+Proof. by case: a. Qed.
+
+Lemma count_isY_le2 (d : seq HG) : hole d -> count isY d <= 2.
+Proof.
+move=> hd; rewrite -size_filter; set L := filter isY d.
+have uL : uniq L by rewrite filter_uniq ?hole_uniq.
+have sub : forall a, a \in L -> isY a && (a \in d) by move=> a; rewrite mem_filter.
+case: L uL sub => [|a [|b [|c L]]] //= uL sub.
+case/and4P: uL; rewrite !inE !negb_or => /and3P [ab ac _] /andP [bc _] _ _.
+have /andP [ya ad] := sub a (mem_head _ _).
+have /andP [yb bd] : isY b && (b \in d) by apply: sub; rewrite !inE eqxx orbT.
+have /andP [yc cd] : isY c && (c \in d) by apply: sub; rewrite !inE eqxx !orbT.
+exfalso; apply: (hole_no_triangle hd ad bd cd); exact: yy_adj.
+Qed.
+
+Lemma count_isC_x (d : seq HG) : hole d -> xv \in d -> count isC d <= 2.
+Proof.
+move=> hd xd; have uc := hole_uniq hd.
+rewrite -size_filter -[2]/(size [:: next d xv; path.prev d xv]).
+apply: uniq_leq_size; first by rewrite filter_uniq.
+move=> v; rewrite mem_filter => /andP [cv' vd].
+have := hole_adj_next hd xd vd (xc_adj cv'); case/orP => /eqP e.
+  by rewrite e mem_head.
+by rewrite e prev_next // !inE eqxx orbT.
+Qed.
+
+Lemma x_small (d : seq HG) : hole d -> xv \in d -> size d <= 5.
+Proof.
+move=> hd xd; rewrite size_split ?hole_uniq // xd.
+have := count_isC_x hd xd; have := count_isY_le2 hd; lia.
+Qed.
+
+(** ** Closure along C *)
+
+Definition pd (i : nat) : nat := (i + hN) %% n.
+
+Lemma pd_lt i : pd i < n.
+Proof. exact: ltn_pmod. Qed.
+
+Lemma pd_succ (j : 'I_n) : pd ((val j).+1 %% n) = j.
+Proof.
+rewrite /pd modnDml.
+have -> : (val j).+1 + hN = val j + n by rewrite addSnnS.
+by rewrite modnDr modn_small ?ltn_ord.
+Qed.
+
+Lemma cnbr (i j : 'I_n) : (inl i : HG) -- inl j -> val j = (val i).+1 %% n \/ val j = pd i.
+Proof.
+rewrite cv_adjE => /orP [/eqP e|/eqP e]; [by left | right].
+by rewrite e pd_succ.
+Qed.
+
+(** Reduction modulo n below 2n. *)
+Lemma mod2E m : m < n + n -> m %% n = if m < n then m else m - n.
+Proof.
+move=> mlt; case: ltnP => [lt|ge]; first exact: modn_small.
+have -> : m = (m - n) + n by rewrite subnK.
+by rewrite modnDr addnK modn_small //; lia.
+Qed.
+
+Lemma succ_ne_pd i : i < n -> i.+1 %% n != pd i.
+Proof.
+move=> ilt; rewrite /pd !mod2E; [lia|lia|].
+by case: ifP => h1; case: ifP => h2; rewrite /hN in ilt h1 h2 *; lia.
+Qed.
+
+Lemma cv_inl (i : 'I_n) : (inl i : HG) = cv i.
+Proof. by rewrite cv_val. Qed.
+
+Lemma hole_next_neq_prev (d : seq HG) (v : HG) : hole d -> v \in d -> next d v != path.prev d v.
+Proof.
+move=> hd vd; apply/eqP => e; have uc := hole_uniq hd.
+have := @iter_next_neq _ d v 2 uc vd; rewrite /= [X in next d X]e next_prev // eqxx.
+have s4 := hole_size hd.
+by move/(_ (ltnW s4))/negP.
+Qed.
+
+(** A position of C whose two neighbours on the hole are on C has both its C-neighbours on the hole. *)
+Lemma hole_closure (d : seq HG) (i : 'I_n) : hole d -> (inl i : HG) \in d ->
+  isC (next d (inl i)) -> isC (path.prev d (inl i)) ->
+  cv ((val i).+1 %% n) \in d /\ cv (pd i) \in d.
+Proof.
+move=> hd id ca cb; have uc := hole_uniq hd.
+have ad : next d (inl i) \in d by rewrite mem_next.
+have bd : path.prev d (inl i) \in d by rewrite path.mem_prev.
+have ia : (inl i : HG) -- next d (inl i) := next_cycle (hole_cycle hd) id.
+have bi : path.prev d (inl i) -- inl i := prev_cycle (hole_cycle hd) id.
+have ne := hole_next_neq_prev hd id.
+move: ca cb ad bd ia bi ne; case: (next d _) => [ja|//] _; case: (path.prev d _) => [jb|//] _ ad bd ia bi ne.
+rewrite sg_sym in bi.
+have [ea|ea] := cnbr ia; have [eb|eb] := cnbr bi.
+- by move: ne; rewrite (inj_eq (@inl_inj _ _)) -(inj_eq val_inj) ea eb eqxx.
+- by rewrite -ea -eb !cv_val.
+- by rewrite -ea -eb !cv_val.
+- by move: ne; rewrite (inj_eq (@inl_inj _ _)) -(inj_eq val_inj) ea eb eqxx.
+Qed.
+
+Lemma no_y_all_C (d : seq HG) : xv \notin d -> count isY d = 0 -> forall v, v \in d -> isC v.
+Proof.
+move=> xd /eqP; rewrite eqn0Ngt -has_count => /hasPn ny [i|[k|]] //= vd.
+- by move: (ny _ vd).
+- by rewrite vd in xd.
+Qed.
+
+(** A hole without x or y-vertices is all of C. *)
+Lemma no_y_big (d : seq HG) : hole d -> xv \notin d -> count isY d = 0 -> n <= size d.
+Proof.
+move=> hd xd yd; have uc := hole_uniq hd; have allC := no_y_all_C xd yd.
+have [v0 v0d] : exists v, v \in d by case: d hd {uc allC xd yd} => [/hole_size//|v d _]; exists v; exact: mem_head.
+have := allC v0 v0d; case: v0 v0d => [i0|//] i0d _.
+have step : forall k, cv ((i0 + k) %% n) \in d.
+  elim=> [|k IH]; first by rewrite addn0 modn_small // cv_val.
+  have nd : next d (cv ((i0 + k) %% n)) \in d by rewrite mem_next.
+  have pdd : path.prev d (cv ((i0 + k) %% n)) \in d by rewrite path.mem_prev.
+  have [ok _] := @hole_closure d (inord ((i0 + k) %% n)) hd IH (allC _ nd) (allC _ pdd).
+  move: ok; rewrite /= inordK ?ltn_pmod //.
+  have e : forall a, ((a + k) %% n).+1 %% n = (a + k.+1) %% n.
+    by move=> a; rewrite -addn1 modnDml addn1 addnS.
+  by rewrite e.
+rewrite -[hN.+1]size_hC; apply: uniq_leq_size uniq_hC _ => a.
+case/mapP => j; rewrite mem_iota add0n => /andP [_ jlt] ->.
+have := step (j + (n - i0)); have il := ltn_ord i0.
+by rewrite addnA [i0 + j]addnC -addnA subnKC ?(ltnW il) // modnDr modn_small.
+Qed.
+
+(** ** Arcs, in positions *)
+
+Definition o0 : 'I_3 := @Ordinal 3 0 isT.
+Definition o1 : 'I_3 := @Ordinal 3 1 isT.
+Definition o2 : 'I_3 := @Ordinal 3 2 isT.
+
+Lemma yc_adj (k : 'I_3) j : (yv k -- cv j) = inarc k (inord j).
+Proof. by []. Qed.
+
+Lemma inarc0 j : j < n -> inarc o0 (inord j) = (j <= hq).
+Proof. by move=> jl; rewrite /inarc inordK //= orbF. Qed.
+
+Lemma inarc1 j : j < n -> inarc o1 (inord j) = (hq <= j <= hq + hq).
+Proof. by move=> jl; rewrite /inarc inordK //= orbF mul1n. Qed.
+
+Lemma inarc2 j : j < n -> inarc o2 (inord j) = (hq + hq <= j) || (j == 0).
+Proof.
+move=> jl; rewrite /inarc inordK //=; congr (_ || _); apply/idP/idP; move: jl; rewrite /hq /hN; lia.
+Qed.
+
+Lemma cc_adj i j : i < n -> j < n -> (cv i -- cv j) = (j == i.+1 %% n) || (i == j.+1 %% n).
+Proof. by move=> il jl; rewrite /cv cv_adjE /= !inordK. Qed.
+
+(** Closure, in positions. *)
+Lemma closure_pos (d : seq HG) j : hole d -> j < n -> cv j \in d ->
+  isC (next d (cv j)) -> isC (path.prev d (cv j)) ->
+  (j.+1 < n -> cv j.+1 \in d) /\ (0 < j -> cv j.-1 \in d).
+Proof.
+move=> hd jl jd cn cp; have [h1 h2] := @hole_closure d (inord j) hd jd cn cp.
+move: h1 h2; rewrite /= inordK // /pd => h1 h2; split=> [lt|gt].
+  by move: h1; rewrite modn_small.
+move: h2; rewrite mod2E; first by lia.
+have -> : (j + hN < n) = false by apply/negbTE; rewrite -leqNgt; lia.
+by have -> : j + hN - n = j.-1 by lia.
+Qed.
+
+(** A set of positions closed under the steps inside an interval, with one seed, is the interval. *)
+Lemma run_in (P : nat -> Prop) lo hi s : lo <= s <= hi -> P s ->
+  (forall j, lo <= j <= hi -> P j -> (j < hi -> P j.+1) /\ (lo < j -> P j.-1)) ->
+  forall j, lo <= j <= hi -> P j.
+Proof.
+move=> /andP [ls sh] Ps step j /andP [lj jh].
+have [sj|js] := leqP s j.
+  have : forall k, s + k <= hi -> P (s + k).
+    elim=> [|k IH]; first by rewrite addn0.
+    move=> h; have /IH Pk : s + k <= hi by lia.
+    have := (step (s + k) _ Pk).1; rewrite addnS; apply; lia.
+  by move/(_ (j - s)); rewrite subnKC //; apply.
+have : forall k, k <= s - lo -> P (s - k).
+  elim=> [|k IH]; first by rewrite subn0.
+  move=> h; have /IH Pk : k <= s - lo by lia.
+  have := (step (s - k) _ Pk).2; rewrite subnS; apply; lia.
+by move/(_ (s - j)); rewrite subKn ?(ltnW js) //; apply; lia.
+Qed.
+
+(** Arithmetic of q and n. *)
+Lemma hq_lt_hN : hq < hN.
+Proof. rewrite /hq /hN; lia. Qed.
+
+Lemma iota_hi : hq.+1 + (hN - hq) = n.
+Proof. rewrite /hq /hN; lia. Qed.
+
+Lemma one_y_size : (hN - hq).+3 = (hq + hq).+2.
+Proof. rewrite /hq /hN; lia. Qed.
+
+Lemma two_y_size : (hq.-1).+4 = hq + 3.
+Proof. rewrite /hq; lia. Qed.
+
+Lemma hq_gt1 : 1 < hq.
+Proof. rewrite /hq; lia. Qed.
+
+Lemma le_hq_pred j : (j <= hq.-1) = (j < hq).
+Proof. rewrite /hq; apply/idP/idP; lia. Qed.
+
+Lemma add1_hq_pred : 1 + hq.-1 = hq.
+Proof. rewrite /hq; lia. Qed.
+
+Lemma hq_pred_lt_n j : j <= hq.-1 -> j.+1 < n.
+Proof. rewrite /hq /hN; lia. Qed.
+
+Lemma out12 j : j < n -> (~~ inarc o1 (inord j) && ~~ inarc o2 (inord j)) = (0 < j < hq).
+Proof. by move=> jl; rewrite inarc1 // inarc2 //; apply/idP/idP; move: jl; rewrite /hN /hq; lia. Qed.
+
+Lemma noedge12 i j : i < n -> j < n -> inarc o1 (inord i) -> ~~ inarc o2 (inord i) ->
+  inarc o2 (inord j) -> ~~ inarc o1 (inord j) -> ~~ (cv i -- cv j).
+Proof.
+move=> il jl; rewrite cc_adj // !mod2E; [lia|lia|].
+rewrite inarc1 // inarc2 // inarc1 // inarc2 //.
+by case: ifP; case: ifP; move: il jl; rewrite /hN /hq; lia.
+Qed.
+
+Definition pair12 (ka kb : 'I_3) : bool := (ka == o1) && (kb == o2) || (ka == o2) && (kb == o1).
+
+Lemma pair12_out ka kb j : pair12 ka kb -> j < n ->
+  (~~ inarc ka (inord j) && ~~ inarc kb (inord j)) = (0 < j < hq).
+Proof.
+by case/orP => /andP [/eqP -> /eqP ->] jl; rewrite -?out12 // andbC.
+Qed.
+
+Lemma pair12_noedge ka kb i j : pair12 ka kb -> i < n -> j < n ->
+  inarc kb (inord i) -> ~~ inarc ka (inord i) -> inarc ka (inord j) -> ~~ inarc kb (inord j) ->
+  ~~ (cv i -- cv j).
+Proof.
+case/orP => /andP [/eqP -> /eqP ->] il jl h1 h2 h3 h4; last exact: noedge12.
+by rewrite sg_sym; apply: noedge12.
+Qed.
+
+Lemma only_y (d : seq HG) y : count isY d = 1 -> y \in d -> isY y ->
+  forall a, a \in d -> isY a -> a = y.
+Proof.
+move=> c1 yd yy a ad ya; move: c1; rewrite -size_filter.
+have : y \in filter isY d by rewrite mem_filter yy yd.
+have : a \in filter isY d by rewrite mem_filter ya ad.
+by case: (filter isY d) => [|z [|]] //=; rewrite !inE => /eqP -> /eqP ->.
+Qed.
+
+Lemma isC_cv (v : HG) : isC v -> exists2 j, j < n & v = cv j.
+Proof. by case: v => [i|//] _; exists (val i); rewrite ?cv_val // ltn_ord. Qed.
+
+Lemma next1_neq (d : seq HG) v : hole d -> v \in d -> next d v != v.
+Proof.
+move=> hd vd; have := @iter_next_neq _ d v 1 (hole_uniq hd) vd; rewrite /=.
+by apply; exact: leq_trans _ (hole_size hd).
+Qed.
+
+Lemma next2_neq (d : seq HG) v : hole d -> v \in d -> next d (next d v) != v.
+Proof.
+move=> hd vd; have := @iter_next_neq _ d v 2 (hole_uniq hd) vd; rewrite /=.
+by apply; exact: leq_trans _ (hole_size hd).
+Qed.
+
+Lemma next3_neq (d : seq HG) v : hole d -> v \in d -> next d (next d (next d v)) != v.
+Proof.
+move=> hd vd; have := @iter_next_neq _ d v 3 (hole_uniq hd) vd; rewrite /=.
+by apply; exact: leq_trans _ (hole_size hd).
+Qed.
+
+Lemma prev1_neq (d : seq HG) v : hole d -> v \in d -> path.prev d v != v.
+Proof.
+move=> hd vd; apply: contra (next1_neq hd vd) => /eqP e.
+by rewrite -{1}e next_prev ?hole_uniq.
+Qed.
+
+Lemma next2_neq_prev (d : seq HG) v : hole d -> v \in d -> next d (next d v) != path.prev d v.
+Proof.
+move=> hd vd; apply: contra (next3_neq hd vd) => /eqP e.
+by rewrite e next_prev ?hole_uniq.
+Qed.
+
+(** A hole through y_0 and no other y-vertex, avoiding x, has 2q + 2 vertices. *)
+Lemma one_y0 (d : seq HG) : hole d -> xv \notin d -> count isY d = 1 -> yv o0 \in d ->
+  size d = (hq + hq).+2.
+Proof.
+move=> hd xd c1 yd; set y := yv o0.
+have uc := hole_uniq hd; have oy := only_y c1 yd isT.
+have notY : forall a, a \in d -> a != y -> isC a.
+  move=> [i|[k|]] ad //= ne; first by rewrite (oy _ ad isT) eqxx in ne.
+  by rewrite ad in xd.
+set u := next d y; set w := path.prev d y.
+have ud : u \in d by rewrite mem_next.
+have wd : w \in d by rewrite path.mem_prev.
+have uy : u != y := next1_neq hd yd.
+have wy : w != y.
+  by apply: contra uy => /eqP e; rewrite /u -{1}e /w next_prev.
+have cu := notY u ud uy; have cw := notY w wd wy.
+have uw : u != w := hole_next_neq_prev hd yd.
+have adjy : forall v, v \in d -> y -- v -> v = u \/ v = w.
+  move=> v vd yv'; case/orP: (hole_adj_next hd yd vd yv') => /eqP e; first by left.
+  by right; rewrite /w /y e prev_next.
+have nbC : forall v, v \in d -> isC v -> v != u -> v != w ->
+    isC (next d v) /\ isC (path.prev d v).
+  move=> v vd cv' vu vw; split.
+    apply: notY; first by rewrite mem_next.
+    by apply: contra vw => /eqP e; rewrite /w -e prev_next.
+  apply: notY; first by rewrite path.mem_prev.
+  by apply: contra vu => /eqP e; rewrite /u -e next_prev.
+(* the C-neighbours of y on the hole are u and w, at positions <= q *)
+have [ju jul eu] := isC_cv cu; have [jw jwl ew] := isC_cv cw.
+have yu : y -- u := next_cycle (hole_cycle hd) yd.
+have yw : y -- w by rewrite sg_sym; exact: prev_cycle (hole_cycle hd) yd.
+have juq : ju <= hq by move: yu; rewrite eu yc_adj inarc0.
+have jwq : jw <= hq by move: yw; rewrite ew yc_adj inarc0.
+have far : forall j, j < n -> hq < j -> cv j != u /\ cv j != w.
+  move=> j jl hj; rewrite eu ew; split; apply/eqP => /cv_inj e.
+    by have := e jl jul => ej; move: hj; rewrite ej ltnNge juq.
+  by have := e jl jwl => ej; move: hj; rewrite ej ltnNge jwq.
+have near : forall j, j < n -> cv j \in d -> j <= hq -> cv j = u \/ cv j = w.
+  by move=> j jl jd hj; apply: adjy jd _; rewrite yc_adj inarc0.
+(* a seed after u *)
+set s := next d u.
+have sd : s \in d by rewrite mem_next.
+have sy : s != y := next2_neq hd yd.
+have su : s != u := next1_neq hd ud.
+have sw : s != w.
+  apply/eqP => e; move: (next3_neq hd yd); rewrite -/u -/s e /w next_prev // eqxx.
+have [js jsl es] := isC_cv (notY s sd sy).
+have jsq : hq < js.
+  have jsd : cv js \in d by rewrite -es.
+  rewrite ltnNge; apply/negP => h; have [e|e] := near js jsl jsd h.
+    by move: su; rewrite es e eqxx.
+  by move: sw; rewrite es e eqxx.
+(* the run of positions q + 1 .. n - 1 lies on the hole *)
+have run : forall j, hq < j <= hN -> cv j \in d.
+  apply: (@run_in (fun j => cv j \in d) hq.+1 hN js); first by rewrite jsq -ltnS.
+    by rewrite -es.
+  move=> j /andP [lj jh] jd; have jl : j < n by rewrite ltnS.
+  have [ju' jw'] := far j jl lj.
+  have [nC pC] := nbC _ jd isT ju' jw'.
+  have [h1 h2] := closure_pos hd jl jd nC pC; split=> [lt|gt].
+    by apply: h1; rewrite ltnS.
+  by apply: h2; exact: leq_ltn_trans (leq0n hq) lj.
+(* counting the C-vertices of the hole *)
+set M := [seq cv j | j <- iota hq.+1 (hN - hq)].
+have inM : forall j, (j \in iota hq.+1 (hN - hq)) = (hq < j <= hN).
+  by move=> j; rewrite mem_iota iota_hi ltnS.
+have notM : forall v, v = u \/ v = w -> v \notin M.
+  move=> v ev; apply/mapP => -[j]; rewrite inM => /andP [lj jh] e.
+  have [/negP n1 /negP n2] := far j (leq_ltn_trans jh (ltnSn _)) lj.
+  by case: ev => ev; [apply: n1 | apply: n2]; rewrite -e ev.
+have uL : uniq (u :: w :: M).
+  rewrite cons_uniq in_cons negb_or uw.
+  rewrite (notM u (or_introl erefl)) cons_uniq (notM w (or_intror erefl)) /=.
+  rewrite map_inj_in_uniq ?iota_uniq // => i j; rewrite !inM => /andP [_ ih] /andP [_ jh].
+  by apply: cv_inj; rewrite ltnS.
+have s1 : {subset u :: w :: M <= filter isC d}.
+  move=> v; rewrite !inE mem_filter => /or3P [/eqP->|/eqP->|vM]; first by rewrite cu ud.
+    by rewrite cw wd.
+  by case/mapP: vM => j; rewrite inM => /run jd ->; rewrite jd.
+have s2 : {subset filter isC d <= u :: w :: M}.
+  move=> v; rewrite mem_filter => /andP [cv' vd]; have [j jl ej] := isC_cv cv'.
+  rewrite !inE; have [jq|jq] := leqP j hq.
+    have jd : cv j \in d by rewrite -ej.
+    by have [e|e] := near j jl jd jq; rewrite ej e eqxx ?orbT.
+  apply/orP; right; apply/orP; right; rewrite ej; apply/mapP; exists j => //.
+  by rewrite inM jq -ltnS.
+have eqs : size (filter isC d) = size (u :: w :: M).
+  by apply/eqP; rewrite eqn_leq !uniq_leq_size // filter_uniq.
+rewrite size_split // c1 (negbTE xd) -size_filter eqs /= size_map size_iota addn0 addn1.
+exact: one_y_size.
+Qed.
+
+Lemma only_two (d : seq HG) ya yb : count isY d = 2 -> ya \in d -> yb \in d -> ya != yb ->
+  isY ya -> isY yb -> forall a, a \in d -> isY a -> a = ya \/ a = yb.
+Proof.
+move=> c2 yad ybd ne ya' yb' a ad a'; move: c2; rewrite -size_filter.
+have : ya \in filter isY d by rewrite mem_filter ya' yad.
+have : yb \in filter isY d by rewrite mem_filter yb' ybd.
+have : a \in filter isY d by rewrite mem_filter a' ad.
+case: (filter isY d) => [|z1 [|z2 [|]]] //=; rewrite !inE => ha hb hya _.
+case/orP: ha => /eqP ->; case/orP: hb => /eqP eb; case/orP: hya => /eqP ea;
+  rewrite ?ea ?eb; auto; by move: ne; rewrite ea eb eqxx.
+Qed.
+
+(** A hole through y_1 and y_2, avoiding x, has q + 3 vertices; [ka], [kb] are 1 and 2 in the
+    order of the hole. *)
+Lemma two_y (d : seq HG) (ka kb : 'I_3) : pair12 ka kb -> hole d -> xv \notin d ->
+  count isY d = 2 -> yv ka \in d -> next d (yv ka) = yv kb -> size d = hq + 3.
+Proof.
+move=> pk hd xd c2 yad nab; set ya := yv ka; set yb := yv kb.
+have uc := hole_uniq hd.
+have ybd : yb \in d by rewrite /yb -nab mem_next.
+have ab : ya != yb by rewrite /yb -nab eq_sym next1_neq.
+have ot := only_two c2 yad ybd ab isT isT.
+have notY : forall a, a \in d -> a != ya -> a != yb -> isC a.
+  move=> [i|[k|]] ad //= na nb; last by rewrite ad in xd.
+  by case: (ot _ ad isT) => e; [move: na | move: nb]; rewrite e eqxx.
+have pb : path.prev d yb = ya by rewrite /yb -nab prev_next.
+set u := next d yb; set w := path.prev d ya.
+have ud : u \in d by rewrite mem_next.
+have wd : w \in d by rewrite path.mem_prev.
+have ub : u != yb := next1_neq hd ybd.
+have ua : u != ya by rewrite /u /yb -nab next2_neq.
+have wa : w != ya := prev1_neq hd yad.
+have wb : w != yb by rewrite /w /yb -nab eq_sym; exact: hole_next_neq_prev hd yad.
+have cu := notY u ud ua ub; have cw := notY w wd wa wb.
+have uw : u != w by rewrite /u /w /yb -nab; exact: next2_neq_prev hd yad.
+have adja : forall v, v \in d -> isC v -> ya -- v -> v = w.
+  move=> v vd cv' av; case/orP: (hole_adj_next hd yad vd av) => /eqP e.
+    by move: cv'; rewrite e nab.
+  by rewrite /w /ya e prev_next.
+have adjb : forall v, v \in d -> isC v -> yb -- v -> v = u.
+  move=> v vd cv' bv; case/orP: (hole_adj_next hd ybd vd bv) => /eqP e //.
+  by move: cv'; rewrite -[v](prev_next uc) -e pb.
+have nbC : forall v, v \in d -> isC v -> v != u -> v != w ->
+    isC (next d v) /\ isC (path.prev d v).
+  move=> v vd cv' vu vw; split.
+    apply: notY; first by rewrite mem_next.
+      by apply: contra vw => /eqP e; rewrite /w -e prev_next.
+    apply/eqP => e; move: cv'; rewrite -[v](prev_next uc) e pb.
+    by [].
+  apply: notY; first by rewrite path.mem_prev.
+    apply/eqP => e; move: cv'; rewrite -[v](next_prev uc) e nab.
+    by [].
+  by apply: contra vu => /eqP e; rewrite /u -e next_prev.
+(* positions *)
+have [ju jul eu] := isC_cv cu; have [jw jwl ew] := isC_cv cw.
+have bu : yb -- u := next_cycle (hole_cycle hd) ybd.
+have aw : ya -- w by rewrite sg_sym; exact: prev_cycle (hole_cycle hd) yad.
+have nau : ~~ (ya -- u) by apply/negP => /(adja _ ud cu) e; move: uw; rewrite e eqxx.
+have nbw : ~~ (yb -- w) by apply/negP => /(adjb _ wd cw) e; move: uw; rewrite e eqxx.
+have off : forall j, j < n -> cv j \in d -> cv j != u -> cv j != w -> 0 < j < hq.
+  move=> j jl jd ju' jw'; rewrite -(pair12_out pk jl).
+  rewrite -!yc_adj; apply/andP; split; apply/negP.
+    by move/(adja _ jd isT) => e; move: jw'; rewrite e eqxx.
+  by move/(adjb _ jd isT) => e; move: ju'; rewrite e eqxx.
+have inside : forall j, j < n -> 0 < j < hq -> cv j != u /\ cv j != w.
+  move=> j jl hj; rewrite -(pair12_out pk jl) -!yc_adj in hj; case/andP: hj => na nb.
+  by split; apply/eqP => e; [move: nb | move: na]; rewrite e ?bu ?aw.
+(* a seed after u *)
+set s := next d u.
+have sd : s \in d by rewrite mem_next.
+have sb : s != yb := next2_neq hd ybd.
+have sa : s != ya by rewrite /s /u /yb -nab next3_neq.
+have su : s != u := next1_neq hd ud.
+have cs := notY s sd sa sb.
+have sw : s != w.
+  apply/eqP => e; have us : u -- s := next_cycle (hole_cycle hd) ud.
+  move: us; rewrite e eu ew; apply/negP.
+  apply: (pair12_noedge pk jul jwl).
+  - by rewrite -yc_adj -eu.
+  - by rewrite -yc_adj -eu.
+  - by rewrite -yc_adj -ew.
+  - by rewrite -yc_adj -ew.
+have [js jsl es] := isC_cv cs.
+have jsr : 0 < js < hq by apply: off; rewrite -?es.
+(* the run of positions 1 .. q - 1 lies on the hole *)
+have run : forall j, 0 < j <= hq.-1 -> cv j \in d.
+  apply: (@run_in (fun j => cv j \in d) 1 hq.-1 js).
+  - by rewrite le_hq_pred.
+  - by rewrite -es.
+  move=> j /andP [lj jh] jd.
+  have jl : j < n by apply: ltnW; apply: hq_pred_lt_n.
+  have hj : 0 < j < hq by rewrite lj -le_hq_pred.
+  have [ju' jw'] := inside j jl hj.
+  have [nC pC] := nbC _ jd isT ju' jw'.
+  have [h1 h2] := closure_pos hd jl jd nC pC; split=> [lt|gt].
+    by apply: h1; apply: hq_pred_lt_n.
+  by apply: h2; exact: ltnW gt.
+(* counting *)
+set M := [seq cv j | j <- iota 1 hq.-1].
+have inM : forall j, (j \in iota 1 hq.-1) = (0 < j <= hq.-1).
+  by move=> j; rewrite mem_iota add1_hq_pred le_hq_pred.
+have notM : forall v, v = u \/ v = w -> v \notin M.
+  move=> v ev; apply/mapP => -[j]; rewrite inM => /andP [lj jh] e.
+  have jl : j < n by apply: ltnW; apply: hq_pred_lt_n.
+  have hj : 0 < j < hq by rewrite lj -le_hq_pred.
+  have [/negP n1 /negP n2] := inside j jl hj.
+  by case: ev => ev; [apply: n1 | apply: n2]; rewrite -e ev.
+have uL : uniq (u :: w :: M).
+  rewrite cons_uniq in_cons negb_or uw.
+  rewrite (notM u (or_introl erefl)) cons_uniq (notM w (or_intror erefl)) /=.
+  rewrite map_inj_in_uniq ?iota_uniq // => i j; rewrite !inM => /andP [_ ih] /andP [_ jh].
+  by apply: cv_inj; apply: ltnW; apply: hq_pred_lt_n.
+have s1 : {subset u :: w :: M <= filter isC d}.
+  move=> v; rewrite !inE mem_filter => /or3P [/eqP->|/eqP->|vM]; first by rewrite cu ud.
+    by rewrite cw wd.
+  by case/mapP: vM => j; rewrite inM => /run jd ->; rewrite jd.
+have s2 : {subset filter isC d <= u :: w :: M}.
+  move=> v; rewrite mem_filter => /andP [cv' vd]; have [j jl ej] := isC_cv cv'.
+  rewrite !inE; have jd : cv j \in d by rewrite -ej.
+  have [eu'|neu] := eqVneq (cv j) u; first by rewrite ej eu' eqxx.
+  have [ew'|new] := eqVneq (cv j) w; first by rewrite ej ew' eqxx orbT.
+  apply/orP; right; apply/orP; right; rewrite ej; apply/mapP; exists j => //.
+  by rewrite inM le_hq_pred; exact: off.
+have eqs : size (filter isC d) = size (u :: w :: M).
+  by apply/eqP; rewrite eqn_leq !uniq_leq_size // filter_uniq.
+rewrite size_split // c2 (negbTE xd) -size_filter eqs /= size_map size_iota addn0 addn2.
+exact: two_y_size.
+Qed.
+
+(** ** Transport by sigma, and the classification of holes *)
+
+Lemma k1_o0 : k1 o0 = o1. Proof. by apply: val_inj; rewrite /= val_k1. Qed.
+Lemma k1_o1 : k1 o1 = o2. Proof. by apply: val_inj; rewrite /= val_k1. Qed.
+Lemma k1_o2 : k1 o2 = o0. Proof. by apply: val_inj; rewrite /= val_k1. Qed.
+
+Lemma isY_sigma a : isY (sigma a) = isY a.
+Proof. by case: a => [i|[k|]]. Qed.
+
+Lemma xv_sigma (d : seq HG) : (xv \in map sigma d) = (xv \in d).
+Proof.
+apply/mapP/idP => [[a ad]|xd]; last by exists xv.
+by case: a ad => [i|[k|]] ad //= e; move: e.
+Qed.
+
+Lemma sigma_hyps (d : seq HG) : hole d -> xv \notin d ->
+  [/\ hole (map sigma d), xv \notin map sigma d, size (map sigma d) = size d
+    & count isY (map sigma d) = count isY d].
+Proof.
+move=> hd xd; split; [exact: hole_sigma | by rewrite xv_sigma | exact: size_map |].
+by rewrite count_map; apply: eq_count => a; rewrite /= isY_sigma.
+Qed.
+
+Lemma next_sigma (d : seq HG) a : uniq d -> next (map sigma d) (sigma a) = sigma (next d a).
+Proof. by move=> uc; have := @next_map _ _ sigma sigma_inj d uc a. Qed.
+
+Lemma one_y_any (d : seq HG) (k : 'I_3) : hole d -> xv \notin d -> count isY d = 1 ->
+  yv k \in d -> size d = (hq + hq).+2.
+Proof.
+move=> hd xd c1 yd.
+have [h1 x1 s1 c1'] := sigma_hyps hd xd.
+have [h2 x2 s2 c2'] := sigma_hyps h1 x1.
+have y1 : yv (k1 k) \in map sigma d by apply: (map_f sigma yd).
+have y2 : yv (k1 (k1 k)) \in map sigma (map sigma d) by apply: (map_f sigma y1).
+case: k yd y1 y2 => [[|[|[|//]]] kl] yd y1 y2.
+- by apply: one_y0 hd xd c1 _; rewrite (_ : o0 = Ordinal kl) //; apply: val_inj.
+- rewrite -s1 -s2; apply: one_y0 h2 x2 _ _; first by rewrite c2' c1'.
+  by rewrite (_ : Ordinal kl = o1) ?k1_o1 ?k1_o2 in y2 => //; apply: val_inj.
+- rewrite -s1; apply: one_y0 h1 x1 _ _; first by rewrite c1'.
+  by rewrite (_ : Ordinal kl = o2) ?k1_o2 in y1 => //; apply: val_inj.
+Qed.
+Lemma two_y_step (d : seq HG) (ka kb : 'I_3) : hole d -> xv \notin d -> count isY d = 2 ->
+  yv ka \in d -> next d (yv ka) = yv kb ->
+  [/\ hole (map sigma d), xv \notin map sigma d, count isY (map sigma d) = 2,
+      yv (k1 ka) \in map sigma d
+    & next (map sigma d) (yv (k1 ka)) = yv (k1 kb) /\ size (map sigma d) = size d].
+Proof.
+move=> hd xd c2 yd nab; have [h1 x1 s1 c1'] := sigma_hyps hd xd.
+split=> //; first by rewrite c1'.
+  exact: (map_f sigma yd).
+split=> //.
+by rewrite -[yv (k1 ka)]/(sigma (yv ka)) next_sigma ?hole_uniq // nab.
+Qed.
+
+Lemma pair_cases (ka kb : 'I_3) : ka != kb ->
+  [|| pair12 ka kb, pair12 (k1 ka) (k1 kb) | pair12 (k1 (k1 ka)) (k1 (k1 kb))].
+Proof.
+rewrite /pair12 -!(inj_eq val_inj) /= !val_k1.
+by case: ka kb => [[|[|[|//]]] ?] [[|[|[|//]]] ?].
+Qed.
+
+Lemma two_y_any (d : seq HG) (ka kb : 'I_3) : ka != kb -> hole d -> xv \notin d ->
+  count isY d = 2 -> yv ka \in d -> next d (yv ka) = yv kb -> size d = hq + 3.
+Proof.
+move=> nk hd xd c2 yd nab.
+have [h1 x1 c1 y1 [n1 s1]] := two_y_step hd xd c2 yd nab.
+have [h2 x2 c2' y2 [n2 s2]] := two_y_step h1 x1 c1 y1 n1.
+case/or3P: (pair_cases nk) => pk.
+- exact: two_y pk hd xd c2 yd nab.
+- by rewrite -s1; apply: two_y pk h1 x1 c1 y1 n1.
+- by rewrite -s1 -s2; apply: two_y pk h2 x2 c2' y2 n2.
+Qed.
+
+(** Every hole of G(q) has at most 5 vertices, or contains C, or has 2q + 2 or q + 3 vertices. *)
+Theorem hole_cases (d : seq HG) : hole d ->
+  [\/ size d <= 5, n <= size d, size d = (hq + hq).+2 | size d = hq + 3].
+Proof.
+move=> hd; have uc := hole_uniq hd.
+case xd: (xv \in d); first by constructor 1; apply: x_small.
+have xd' : xv \notin d by rewrite xd.
+have := count_isY_le2 hd.
+case c: (count isY d) => [|[|[|//]]] _.
+- by constructor 2; apply: no_y_big.
+- have : has isY d by rewrite has_count c.
+  case/hasP => -[i|[k|]] //= ad _.
+  by constructor 3; apply: (one_y_any hd xd' c ad).
+- have : size (filter isY d) = 2 by rewrite size_filter.
+  have uf : uniq (filter isY d) by rewrite filter_uniq.
+  have ina : forall a, a \in filter isY d -> isY a && (a \in d) by move=> a; rewrite mem_filter.
+  case: (filter isY d) uf ina => [|a [|b [|]]] //= uf ina _.
+  have /andP [ya ad] := ina a (mem_head _ _).
+  have /andP [yb bd] : isY b && (b \in d) by apply: ina; rewrite !inE eqxx orbT.
+  have ab : a != b by move: uf; rewrite !inE andbT.
+  clear uf ina; case: a b ya yb ad bd ab => [//|[ka|//]] [//|[kb|//]] _ _ ad bd ab.
+  have kab : ka != kb by apply: contra ab => /eqP ->.
+  constructor 4.
+  have adj : (inr (Some ka) : HG) -- inr (Some kb) by apply: yy_adj.
+  case/orP: (hole_adj_next hd ad bd adj) => /eqP e.
+    exact: (two_y_any kab hd xd' c ad (esym e)).
+  by apply: (two_y_any _ hd xd' c bd (esym e)); rewrite eq_sym.
+Qed.
+
+Lemma even_one_y : ~~ odd (hq + hq).+2.
+Proof. by rewrite /= negbK oddD addbb. Qed.
+
+Lemma even_two_y : ~~ odd (hq + 3).
+Proof. by rewrite /hq -addnA oddD oddM. Qed.
+
+(** C is a shortest odd hole of length at least 6: every odd hole of length >= 6 has n vertices
+    or more. *)
+Lemma long_odd_big (d : seq HG) : hole d -> odd (size d) -> 6 <= size d -> n <= size d.
+Proof.
+move=> hd od ld; case: (hole_cases hd) => // e.
+- by move: ld; rewrite leqNgt ltnS e.
+- by move: od; rewrite e (negbTE even_one_y).
+- by move: od; rewrite e (negbTE even_two_y).
+Qed.
+
+(** ** Paths of C *)
+
+Definition i0of (i : nat) : nat := if i < n then i else 0.
+
+Lemma i0of_lt i : i0of i < n.
+Proof. by rewrite /i0of; case: ifP. Qed.
+
+Lemma nth_rot_hC i idx : idx < n -> nth xv (rot i hC) idx = cv ((i0of i + idx) %% n).
+Proof.
+move=> idl; rewrite /i0of; case: ltnP => il; last first.
+  by rewrite rot_oversize ?size_hC // add0n modn_small // nth_hC.
+rewrite /rot nth_cat size_drop size_hC; case: ltnP => h.
+  have hi : i + idx < n by lia.
+  by rewrite nth_drop nth_hC // modn_small.
+have hi : idx - (n - i) < i by lia.
+have h2 : idx - (n - i) < n by lia.
+rewrite nth_take // nth_hC //.
+have h3 : i + idx < n + n by lia.
+rewrite mod2E //.
+have -> : (i + idx < n) = false by apply/negbTE; rewrite -leqNgt; lia.
+by congr cv; lia.
+Qed.
+
+Lemma mem_sub_hC i m v : m < n -> v \in take m.+1 (rot i hC) ->
+  exists2 j, j <= m & v = cv ((i0of i + j) %% n).
+Proof.
+move=> ml /(nthP xv) [idx]; rewrite size_take size_rot size_hC => idl <-.
+have idm : idx <= m by move: idl; case: ifP => c h; lia.
+exists idx => //; rewrite nth_take ?ltnS // nth_rot_hC //; lia.
+Qed.
+
+Lemma miss_arc i0 m : i0 < n -> m < hq ->
+  exists k : 'I_3, forall j, j <= m -> ~~ inarc k (inord ((i0 + j) %% n)).
+Proof.
+move=> il ml; have e3 := hn3q.
+have md : forall j, j <= m -> (i0 + j) %% n = if i0 + j < n then i0 + j else i0 + j - n.
+  by move=> j jm; apply: mod2E; lia.
+have lt : forall j, (i0 + j) %% n < n by move=> j; exact: ltn_pmod.
+case: (i0 =P 0) => [e0|n0].
+  by exists o1 => j jm; rewrite inarc1 // md //; case: ifP => c; lia.
+case: (leqP i0 hq) => [h1|h1].
+  by exists o2 => j jm; rewrite inarc2 // md //; case: ifP => c; lia.
+case: (leqP i0 (hq + hq)) => [h2|h2].
+  by exists o0 => j jm; rewrite inarc0 // md //; case: ifP => c; lia.
+by exists o1 => j jm; rewrite inarc1 // md //; case: ifP => c; lia.
+Qed.
+
+(** A path of C containing a neighbour of each y_k has at least q edges. *)
+Lemma catch_bound i m : m < n ->
+  (forall k : 'I_3, exists2 v, v \in take m.+1 (rot i hC) & yv k -- v) -> hq <= m.
+Proof.
+move=> ml hk; rewrite leqNgt; apply/negP => mq.
+have [k hk'] := miss_arc (i0of_lt i) mq.
+have [v vp yk] := hk k.
+have [j jm ev] := mem_sub_hC ml vp.
+by move: yk; rewrite ev yc_adj (negbTE (hk' j jm)).
+Qed.
+
+(** A vertex off C with four distinct neighbours on C is C-major. *)
+Lemma major_four (v : HG) a b c e : v \notin hC -> uniq [:: a; b; c; e] ->
+  a < n -> b < n -> c < n -> e < n ->
+  v -- cv a -> v -- cv b -> v -- cv c -> v -- cv e -> x232_major hC v.
+Proof.
+move=> vC u4 al bl cl el va vb vc ve; split=> //; case=> p [_ sp hp].
+have sub : {subset [seq cv t | t <- [:: a; b; c; e]] <= p}.
+  move=> w /mapP [t]; rewrite !inE => /or4P [] /eqP -> ->; apply: hp;
+    rewrite ?mem_hC // sg_sym //.
+have um : uniq [seq cv t | t <- [:: a; b; c; e]].
+  rewrite map_inj_in_uniq // => s t; rewrite !inE => hs ht; apply: cv_inj.
+  - by case/or4P: hs => /eqP ->.
+  - by case/or4P: ht => /eqP ->.
+by have := uniq_leq_size um sub; rewrite sp.
+Qed.
+
+(** ** The hypotheses hold for C and M = {x, y_0, y_1, y_2}, with ell = 7 *)
+
+Definition hM : {set HG} := [set xv; yv o0; yv o1; yv o2].
+
+Lemma shortest_hC : x232_shortest_long_odd_hole 7 hC.
+Proof.
+have n9 : 7 <= size hC by rewrite size_hC /hN; lia.
+split; first by split; [exact: hole_hC | exact: odd_hC | exact: n9].
+move=> d [hd od ld]; rewrite size_hC; apply: long_odd_big => //.
+exact: ltnW.
+Qed.
+
+Lemma hq3 : 3 <= hq.
+Proof. rewrite /hq; lia. Qed.
+
+Lemma majors_hM (v : HG) : v \in hM -> x232_major hC v.
+Proof.
+have e3 := hn3q; have h3 := hq3.
+rewrite /hM !inE -!orbA => /or4P [] /eqP ->.
+- apply: (@major_four _ 0 1 2 3); rewrite ?mem_hC //; lia.
+- apply: (@major_four _ 0 1 2 3); rewrite ?mem_hC ?yc_adj ?inarc0 //; lia.
+- apply: (@major_four _ hq hq.+1 hq.+2 hq.+3); rewrite ?mem_hC ?yc_adj ?inarc1 /= ?inE //; lia.
+- apply: (@major_four _ (hq + hq) (hq + hq).+1 (hq + hq).+2 0);
+    rewrite ?mem_hC ?yc_adj ?inarc2 /= ?inE //; lia.
+Qed.
+
+Lemma x_alone (v : HG) : v \in hM -> v != xv -> ~~ (xv -- v).
+Proof. by rewrite /hM !inE -!orbA => /or4P [] /eqP ->. Qed.
+
+Lemma y_in_hM (k : 'I_3) : yv k \in hM.
+Proof.
+rewrite /hM !inE -!orbA; case: k => [[|[|[|//]]] kl]; apply/or4P.
+- by constructor 2; apply/eqP; congr yv; apply: val_inj.
+- by constructor 3; apply/eqP; congr yv; apply: val_inj.
+- by constructor 4; apply/eqP; congr yv; apply: val_inj.
+Qed.
+
+End Counterexample.
+
+(** ** The heavy-path extension, as stated, is false *)
+
+Theorem heavy_path_extension_disproved : ~ heavy_path_extension_statement.
+Proof.
+move=> H; have [b Hb] := H 7 isT.
+have m0 : exists2 m0, m0 \in hM b & forall v, v \in hM b -> v != m0 -> ~~ (m0 -- v).
+  by exists (xv b); [rewrite /hM !inE eqxx | exact: x_alone].
+have [p [[i [m [ml ep]]] pb pc]] :=
+  Hb (HG b) (hC b) (hM b) (shortest_hC b) (@majors_hM b) m0.
+rewrite size_hC in ml.
+have sp : size p = m.+1 by rewrite ep size_takel // size_rot size_hC.
+have hb : hq b <= m.
+  apply: (@catch_bound b i m ml) => k.
+  by rewrite -ep; apply: pc; exact: y_in_hM.
+by move: pb; rewrite sp /=; move: hb; rewrite /hq; lia.
+Qed.
+
+Print Assumptions heavy_path_extension_disproved.
