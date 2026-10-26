@@ -4413,7 +4413,7 @@
       "source_verified_by": "Arthur (source re-read: the pinned records data/arxiv_extracted/1710.11281.json and data/arxiv_reviews/1710.11281__00.json at b72c5857 and the arXiv e-print, sha256 8ee90219, CopsandRobberNotes.tex sha256 a78f168a, l.46-55, 142-153 and 159-164, 2026-10-26)",
       "source_verified_at": "2026-10-26",
       "commit": "x202-genus-cop-number-reencoding",
-      "faithfulness_verified_by": "",
+      "faithfulness_verified_by": "Marcol (X202 review, 2026-10-26)",
       "rows": {
         "axv_1710_11281_00": {
           "formal_name": "genus_cop_number_sqrt_asymptotic_statement",
@@ -4422,7 +4422,7 @@
           "partial_reason": "The row is two-sided for both c(g) and the nonorientable c~(g) (arXiv:1710.11281 l.159-164); only c(g) is encoded: the nonorientable half c~(g) (crosscap number, l.53, l.55) is not encoded, the corpus having no audited embeds-in-N_k predicate."
         }
       },
-      "faithfulness_result": "RE-ENCODED 2026-10-26 (A1), independent review pending, leg PARTIAL (c~(g) not encoded): for every rational eps = p/q, 0 < 2p < q, some g0 with, for all g >= g0, x202_cop_number_lower g p q (some connected G with surface_embeddable g G and g^(q-2p) < c(G)^(2q)) and x202_cop_number_upper g p q (every such G has c(G)^(2q) < g^(q+2p)), i.e. g^(1/2-eps) < c(g) < g^(1/2+eps) of arXiv:1710.11281 l.159-164 with c(g) the maximum over connected graphs of genus at most g (l.55), in the standard game (l.46: a cop landing on the robber captures; X197's bodies). Earlier body: one-sided, a stronger bound in place of the upper one, c~(g) absent, capture tested only after the robber's move, and no connected guard, under which it was false (kernel-checked: the edgeless graph on k+1 vertices). Relation: none by content (old -> new only vacuously: the old body is false)."
+      "faithfulness_result": "RE-ENCODED 2026-10-26 (A1), independent review: Marcol APPROVE 2026-10-26 (re-encoding; relation none by content, old -> new only vacuously, the old body being false), leg PARTIAL (c~(g) not encoded): for every rational eps = p/q, 0 < 2p < q, some g0 with, for all g >= g0, x202_cop_number_lower g p q (some connected G with surface_embeddable g G and g^(q-2p) < c(G)^(2q)) and x202_cop_number_upper g p q (every such G has c(G)^(2q) < g^(q+2p)), i.e. g^(1/2-eps) < c(g) < g^(1/2+eps) of arXiv:1710.11281 l.159-164 with c(g) the maximum over connected graphs of genus at most g (l.55), in the standard game (l.46: a cop landing on the robber captures; X197's bodies). Earlier body: one-sided, a stronger bound in place of the upper one, c~(g) absent, capture tested only after the robber's move, and no connected guard, under which it was false (kernel-checked: the edgeless graph on k+1 vertices). Relation: none by content (old -> new only vacuously: the old body is false)."
     },
     "X203": {
       "phase": "X203",
