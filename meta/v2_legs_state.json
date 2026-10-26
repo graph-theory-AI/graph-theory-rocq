@@ -4132,11 +4132,14 @@
    "audit_page": "todo"
   },
   "axv_2304_03567_04": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x231-forward-cover",
+   "package": "digraph-theory",
+   "note": "Authored in X231.v:logarithmic_forward_cover_statement. Bessy-Thomasse-Viennot Conjecture 1. The forward cover is defined in the paper (body/request.tex of the arXiv e-print): a set of vertex orderings in which every pair {x, y} has x, y or y, x as a forward pair, i.e. joined by a directed path whose vertices increase in the ordering. An ordering is an injective ranking into nat (x231_forward_arc: the arcs that go up), the cover a sequence of rankings (x231_forward_cover), and the pairs are pairs of distinct vertices (x231_forward_pair: a forward path from the earlier endpoint to the later one). O(log n) is read as constants c and n0 with a cover of size at most c * trunc_log 2 n for every strong digraph on n >= n0 vertices. The row is refuted in applications/forward_cover_disproof.v (logarithmic_forward_cover_disproved): the diamond chain on 3m vertices needs m orderings."
   },
   "axv_2304_04246_00": {
    "statement": "todo",
