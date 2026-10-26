@@ -24398,13 +24398,13 @@
     ]
   },
   "counts": {
-    "files": 324,
-    "helpers": 2608,
+    "files": 325,
+    "helpers": 2620,
     "repeated_body_shapes": 148,
     "repeated_normalized_names": 214,
-    "repeated_signature_shapes": 318,
-    "statements_excluded": 705,
-    "x_wave_helpers": 1451
+    "repeated_signature_shapes": 319,
+    "statements_excluded": 706,
+    "x_wave_helpers": 1463
   },
   "groups": {
     "body_shape_hash": {
@@ -25394,6 +25394,12 @@
         "Infinite.conjectures.D4inf5.odd_dist_sym",
         "Infinite.conjectures.D4legacy.iline_adj_irr",
         "Infinite.conjectures.D4legacy.iline_adj_sym",
+        "Minor.conjectures.X147.x147_K0_fat_minor",
+        "Minor.conjectures.X147.x147_K1_fat_minor",
+        "Minor.conjectures.X147.x147_K2_not_fat_minor_K2",
+        "Minor.conjectures.X147.x147_far_unreachable",
+        "Minor.conjectures.X147.x147_graph_dist_refl",
+        "Minor.conjectures.X147.x147_id_quasi_isometry",
         "Minor.conjectures.X220.x220_wall_irrefl",
         "Minor.conjectures.X220.x220_wall_sym",
         "Minor.conjectures.X42.x42_diamond_irrefl",
@@ -28125,6 +28131,10 @@
       "ce29601305ab8a8c2c20a0fa231c33ab86f5cb41d3a2d1094339c35cb6468511": [
         "Chromatic.conjectures.U5.diff_edge",
         "Chromatic.conjectures.U5.near_edge"
+      ],
+      "cfa0376000dd050e081a2491644ce520f735689d65575fadfb4ab5beac98a108": [
+        "GTMisc.conjectures.X232.x232_long_odd_hole",
+        "GTMisc.conjectures.X232.x232_shortest_long_odd_hole"
       ],
       "d0d6408f2c5d211abb9f237d9d23e694748086a1e04380de1d70b1f0cb0ec8ba": [
         "Chromatic.conjectures.X181.x181_maximal_clique",
@@ -66646,6 +66656,87 @@
       "signature_shape_hash": "f268d2c1c0d24d76b4c88fd57b268d570d0e3e9a02a02cd94bda5f3475eae948"
     },
     {
+      "body_hash": "861751a519eafcd5f15b5b7a5cb96b30b40e47b3e924c9e32820e6b6ae92bbfd",
+      "body_shape_hash": "861751a519eafcd5f15b5b7a5cb96b30b40e47b3e924c9e32820e6b6ae92bbfd",
+      "declaration_hash": "58b7ff40d1da818e859d20aa9986fcae051ca9bae05e0609ebf502931db01797",
+      "direct_consumers": [
+        "GTMisc.conjectures.X232.x232_shortest_long_odd_hole"
+      ],
+      "kind": "Definition",
+      "line": 24,
+      "local_dependencies": [],
+      "name": "x232_long_odd_hole",
+      "normalized_name": "long_odd_hole",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X232.v",
+      "phase": "X232",
+      "qualified_name": "GTMisc.conjectures.X232.x232_long_odd_hole",
+      "signature": "(ell : nat) c : Prop",
+      "signature_shape_hash": "cfa0376000dd050e081a2491644ce520f735689d65575fadfb4ab5beac98a108"
+    },
+    {
+      "body_hash": "a114611cf9c5a5dacf597d9d63ab44664e8536f92d093a8f707228e962b899c6",
+      "body_shape_hash": "9a649c35d05605e9cb42eff5f6811f1a2c8dcd7a32b7843dee54ced9f1f842e6",
+      "declaration_hash": "36e9f27baa8627f446b1248001cc300a6234bcf483f4ba73cae12262e0422188",
+      "direct_consumers": [
+        "GTMisc.conjectures.X232.heavy_path_extension_statement"
+      ],
+      "kind": "Definition",
+      "line": 27,
+      "local_dependencies": [
+        "x232_long_odd_hole"
+      ],
+      "name": "x232_shortest_long_odd_hole",
+      "normalized_name": "shortest_long_odd_hole",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X232.v",
+      "phase": "X232",
+      "qualified_name": "GTMisc.conjectures.X232.x232_shortest_long_odd_hole",
+      "signature": "(ell : nat) c : Prop",
+      "signature_shape_hash": "cfa0376000dd050e081a2491644ce520f735689d65575fadfb4ab5beac98a108"
+    },
+    {
+      "body_hash": "cf848e3eb3772ec943162d53c153a65e9898dd9e347dd6fdbd0b6bd8a2454ea6",
+      "body_shape_hash": "cf848e3eb3772ec943162d53c153a65e9898dd9e347dd6fdbd0b6bd8a2454ea6",
+      "declaration_hash": "d610a6a472facd65772a09b493cdceb73fa7f7be37eda7ac42082dde9ff8c44f",
+      "direct_consumers": [
+        "GTMisc.conjectures.X232.heavy_path_extension_statement",
+        "GTMisc.conjectures.X232.x232_major"
+      ],
+      "kind": "Definition",
+      "line": 30,
+      "local_dependencies": [],
+      "name": "x232_cycle_path",
+      "normalized_name": "cycle_path",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X232.v",
+      "phase": "X232",
+      "qualified_name": "GTMisc.conjectures.X232.x232_cycle_path",
+      "signature": "c p : Prop",
+      "signature_shape_hash": "eebf141f607eeaa78b86f02e0922d5bebe44ed137cdd28b5ec9dc6409c052528"
+    },
+    {
+      "body_hash": "d558c84a02151789a59345991d345820a6e3639076c1ec9df9d03b95d66330c5",
+      "body_shape_hash": "195bcf3e45c69cbc6c93c9157b6202d7d4e02721c1558a792f2f91fa99796fb9",
+      "declaration_hash": "7d1a93709cb0a2d5105697c7f30fb70d93cc57ec7328f68a4c8908e156671ef7",
+      "direct_consumers": [
+        "GTMisc.conjectures.X232.heavy_path_extension_statement"
+      ],
+      "kind": "Definition",
+      "line": 33,
+      "local_dependencies": [
+        "x232_cycle_path"
+      ],
+      "name": "x232_major",
+      "normalized_name": "major",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X232.v",
+      "phase": "X232",
+      "qualified_name": "GTMisc.conjectures.X232.x232_major",
+      "signature": "c (v : G) : Prop",
+      "signature_shape_hash": "79e5b5072cdd57226a720b47d8115aa9c71a2ca06ef828cca8c50b1ecaff1d0d"
+    },
+    {
       "body_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
       "body_shape_hash": "fb8710b57976a4c8dda6d18fe4bb7f79b0650006fcc41849884bd6fb7fd6737a",
       "declaration_hash": "2b28d8ab9e0f40bb0b8da997e77261ae912db066e4a2012a65524858ec9369f5",
@@ -74431,15 +74522,40 @@
       "signature_shape_hash": "10c1ce6e577773d44fd06364d4694bfcc53e7dfd287f22fa1671c7a02fa553ba"
     },
     {
-      "body_hash": "a364c46cf86e4c74b7a2da5a8598d7e919b03b013ea2c10ec0bdc96bf69d6333",
-      "body_shape_hash": "a364c46cf86e4c74b7a2da5a8598d7e919b03b013ea2c10ec0bdc96bf69d6333",
-      "declaration_hash": "f38ff30c91ebc065106439af422178c2189c75c3244f9f8a589f0dfde769cd0b",
+      "body_hash": "715a3903a1df32a3c4f8d051b379e16ac40a064cbb8e49ac657c968addaaee4e",
+      "body_shape_hash": "715a3903a1df32a3c4f8d051b379e16ac40a064cbb8e49ac657c968addaaee4e",
+      "declaration_hash": "cd6f39cda01ebf46d6c0f8c2a5cbd333b817ac0922dc915c02c888bda3dc7b30",
       "direct_consumers": [
-        "Minor.conjectures.X147.georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement"
+        "Minor.conjectures.X147.x147_c_fat_minor",
+        "Minor.conjectures.X147.x147_far_unreachable"
       ],
       "kind": "Definition",
       "line": 9,
       "local_dependencies": [],
+      "name": "x147_far",
+      "normalized_name": "far",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X147.v",
+      "phase": "X147",
+      "qualified_name": "Minor.conjectures.X147.x147_far",
+      "signature": "(G : sgraph) (c : nat) (X Y : {set G}) : Prop",
+      "signature_shape_hash": "5777664175d68b1ecaa71d3d792fa54a557b99eda055a5b4c539274fb05580e7"
+    },
+    {
+      "body_hash": "3ca3e1ccbda3e1a288793250edd7acc93bacd63610cd94eea74fda480528b2d1",
+      "body_shape_hash": "383f1675870a794254881a6b6e3c805460dd759fe4d218db32f34434949721eb",
+      "declaration_hash": "997c2b8ef24f30872c6845afd18453ad865a4015358773b5cef494fe3b6a1d15",
+      "direct_consumers": [
+        "Minor.conjectures.X147.georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement",
+        "Minor.conjectures.X147.x147_K0_fat_minor",
+        "Minor.conjectures.X147.x147_K1_fat_minor",
+        "Minor.conjectures.X147.x147_K2_not_fat_minor_K2"
+      ],
+      "kind": "Definition",
+      "line": 18,
+      "local_dependencies": [
+        "x147_far"
+      ],
       "name": "x147_c_fat_minor",
       "normalized_name": "c_fat_minor",
       "package": "minor-theory",
@@ -74450,15 +74566,37 @@
       "signature_shape_hash": "8efac03d0ecf9db9159eded9c56c361a3b1b56a1f8761027cccc834aa5b2a712"
     },
     {
-      "body_hash": "e75a1b1d97e7b182324a48fbe258ab38716b8c81265bb7b4fafc7bc60950ac92",
-      "body_shape_hash": "e75a1b1d97e7b182324a48fbe258ab38716b8c81265bb7b4fafc7bc60950ac92",
-      "declaration_hash": "428d1f1e3b54fee223f28114f447887e1eb59c43e977ee27e39249d676664704",
+      "body_hash": "2cc5ad678b14c94ac83baf8d1159fe97bdaf459eed88e7ca896dc38d82516d91",
+      "body_shape_hash": "2cc5ad678b14c94ac83baf8d1159fe97bdaf459eed88e7ca896dc38d82516d91",
+      "declaration_hash": "e07d77cdded23940fc97ecde26588de235cb88446daac566cba657929bf3b618",
+      "direct_consumers": [
+        "Minor.conjectures.X147.x147_id_quasi_isometry",
+        "Minor.conjectures.X147.x147_quasi_isometric_to_H_minor_free"
+      ],
+      "kind": "Definition",
+      "line": 34,
+      "local_dependencies": [],
+      "name": "x147_quasi_isometry",
+      "normalized_name": "quasi_isometry",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X147.v",
+      "phase": "X147",
+      "qualified_name": "Minor.conjectures.X147.x147_quasi_isometry",
+      "signature": "(G Q : sgraph) (L C : nat) (phi : G -> Q) : Prop",
+      "signature_shape_hash": "9ae675f3eeb7909ce9359c6e09756c695971a10b3139ca1386f99824462256d9"
+    },
+    {
+      "body_hash": "96e89cbea7d2dcfd5a474977bc18a97b6acce83cd2a9b169c0c6613e94d88af2",
+      "body_shape_hash": "25809cc6eda213a114a81882c6908cb3e0092058b3a797cc6bbdf456f0b71012",
+      "declaration_hash": "40739041121c84e12b1cc2bf10d04275df850036f9d9b979ff9100d5e4ecb350",
       "direct_consumers": [
         "Minor.conjectures.X147.georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement"
       ],
       "kind": "Definition",
-      "line": 21,
-      "local_dependencies": [],
+      "line": 45,
+      "local_dependencies": [
+        "x147_quasi_isometry"
+      ],
       "name": "x147_quasi_isometric_to_H_minor_free",
       "normalized_name": "quasi_isometric_to_H_minor_free",
       "package": "minor-theory",
@@ -74467,6 +74605,118 @@
       "qualified_name": "Minor.conjectures.X147.x147_quasi_isometric_to_H_minor_free",
       "signature": "(G H : sgraph) (L C : nat) : Prop",
       "signature_shape_hash": "40efc9d7cddcbcfa85722cdb7edab7f4c43621d3c31d00f660861b83d6ee4935"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "22f26ba8c2566830bd1a8b247ac6fd4b5d8555a1590cee694befb40367c75baf",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 48,
+      "local_dependencies": [],
+      "name": "x147_graph_dist_refl",
+      "normalized_name": "graph_dist_refl",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X147.v",
+      "phase": "X147",
+      "qualified_name": "Minor.conjectures.X147.x147_graph_dist_refl",
+      "signature": "(G : sgraph) (x : G) : graph_dist x x = 0",
+      "signature_shape_hash": "eac0b697a6af6d7022dfc96a31722856bac4ce7d862a7f4d4d69f2c94ef99309"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "44890852bf132e340210dfd2e437d29e76a3aa9f1ff1239204eca3bd3eba5f23",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 60,
+      "local_dependencies": [
+        "x147_quasi_isometry"
+      ],
+      "name": "x147_id_quasi_isometry",
+      "normalized_name": "id_quasi_isometry",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X147.v",
+      "phase": "X147",
+      "qualified_name": "Minor.conjectures.X147.x147_id_quasi_isometry",
+      "signature": "(G : sgraph) : x147_quasi_isometry 1 0 (@id G)",
+      "signature_shape_hash": "c075dfb686b6c83715f04ea7fadb49be1cdf7b65926b0efa8efb81d9e2a4ac72"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "fa48f3774b5c8493326f3bf99db9790c2f67db6f963c931ac93e67a2f378e391",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 68,
+      "local_dependencies": [
+        "x147_far"
+      ],
+      "name": "x147_far_unreachable",
+      "normalized_name": "far_unreachable",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X147.v",
+      "phase": "X147",
+      "qualified_name": "Minor.conjectures.X147.x147_far_unreachable",
+      "signature": "(G : sgraph) (c : nat) (X Y : {set G}) : (forall a b : G, a \\in X -> b \\in Y -> ~~ connect (--) a b) -> x147_far c X Y",
+      "signature_shape_hash": "c10d6322ee7f2141200b068215681255fa7f58b3353721ae514ce31d82f3b0d0"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "e8d5305f41a5f7d111c6951b22379a25efc4f2bf4351b8108d673ed208fbc87b",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 74,
+      "local_dependencies": [
+        "x147_c_fat_minor"
+      ],
+      "name": "x147_K0_fat_minor",
+      "normalized_name": "K0_fat_minor",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X147.v",
+      "phase": "X147",
+      "qualified_name": "Minor.conjectures.X147.x147_K0_fat_minor",
+      "signature": "(G : sgraph) (c : nat) : x147_c_fat_minor G 'K_0 c",
+      "signature_shape_hash": "c2c37699d83e564e279828472f7da76d4ece52565001626841cfc5dff9975622"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "4671b76a0039c6a2880414429506e22ab1399456275429ed7af9021b44cfd67f",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 81,
+      "local_dependencies": [
+        "x147_c_fat_minor"
+      ],
+      "name": "x147_K1_fat_minor",
+      "normalized_name": "K1_fat_minor",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X147.v",
+      "phase": "X147",
+      "qualified_name": "Minor.conjectures.X147.x147_K1_fat_minor",
+      "signature": "(G : sgraph) (c : nat) (x0 : G) : x147_c_fat_minor G 'K_1 c",
+      "signature_shape_hash": "6e82d30de5b4d7d620316f08240ffd8a616e675b233504cdf3c81525e616d69e"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "85ac841984dd594d27a71b60610ef276cc9b174a1b6aee50aab49f4e7853da58",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 95,
+      "local_dependencies": [
+        "x147_c_fat_minor"
+      ],
+      "name": "x147_K2_not_fat_minor_K2",
+      "normalized_name": "K2_not_fat_minor_K2",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X147.v",
+      "phase": "X147",
+      "qualified_name": "Minor.conjectures.X147.x147_K2_not_fat_minor_K2",
+      "signature": "(c : nat) : ~ x147_c_fat_minor 'K_2 'K_2 c",
+      "signature_shape_hash": "de467098cb9a7ef0863c49e5f03f72df4c36995caddd6ba781a1c77e71b49906"
     },
     {
       "body_hash": "47b5538f4f50c638b1d2122df33e6b37158cbb74e075ca979dda9002a4ccc6d1",
