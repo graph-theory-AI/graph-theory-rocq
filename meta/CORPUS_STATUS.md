@@ -134,13 +134,14 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **144 edges** — by status {'candidate': 32, 'conditional': 3, 'refuted-direction': 32, 'verified': 77}, by kind {'equiv': 6, 'implies': 138, 'refutes': 0, 'specializes': 0}; 93 Qed-proved relative theorems.
+- **144 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 78}, by kind {'equiv': 6, 'implies': 138, 'refutes': 0, 'specializes': 0}; 94 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
   - `bipartite_digraph_asymmetric_outdegree_girth_statement` implies `bipartite_digraph_outdegree_girth_statement` (digraph-theory/implications_X46.v)
   - `bounded_tree_mu_polynomial_biclique_tree_alpha_statement` equiv `tree_mu_ktt_free_polynomial_tree_alpha_statement` (minor-theory/implications_X220.v)
   - `chen_chvatal_metric_lines_statement` equiv `chen_chvatal_guarded_metric_lines_statement` (graph-theory-misc/implications_X110.v)
   - `circular_flow_numbers_of_r_graphs_statement` implies `circular_flow_number_of_regular_class_1_graphs_statement` (cycle-theory/implications_D1.v)
+  - `circular_flow_numbers_of_r_graphs_statement` implies `three_flow_statement` (cycle-theory/implications_D1.v)
   - `cycle_double_covers_containing_predefined_2_regular_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
   - `delta122_hero_k1_plus_dipath2_free_statement` implies `delta122_hero_oriented_complete_multipartite_statement` (digraph-theory/implications_X221.v)
   - `delta122_hero_oriented_complete_multipartite_statement` implies `delta122_hero_k1_plus_dipath2_free_statement` (digraph-theory/implications_X221.v)
@@ -213,13 +214,12 @@ Area-local foundations (each area builds these on top of `base`):
   - `tree_decomposition_leaf_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
-- Edge evidence: **77 verified** (Qed-closed, no external assumption) · **3 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **78 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
-  - `circular_flow_numbers_of_r_graphs_statement` implies `three_flow_statement` — external: `external_steffen_3flow_5graphs_statement` (cycle-theory/implications_D1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
-  - **opg**: 39 done · 9 partial · 0 blocked · 179 todo  (227 rows)
+  - **opg**: 40 done · 8 partial · 0 blocked · 179 todo  (227 rows)
   - **v2**: 79 done · 5 partial · 0 blocked · 1589 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
@@ -285,7 +285,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
-- Statement legs over the 1673 non-alias rows: **420 done** · 10 partial · 45 blocked · 1198 todo.
+- Statement legs over the 1673 non-alias rows: **421 done** · 10 partial · 44 blocked · 1198 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -405,7 +405,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X200 | 1 | 0 | 0 | 0 | 1 |
 | X201 | 1 | 0 | 0 | 0 | 1 |
 | X202 | 0 | 0 | 1 | 0 | 1 |
-| X203 | 0 | 0 | 1 | 0 | 1 |
+| X203 | 1 | 0 | 0 | 0 | 1 |
 | X204 | 1 | 0 | 0 | 0 | 1 |
 | X205 | 0 | 0 | 1 | 0 | 1 |
 | X206 | 1 | 0 | 0 | 0 | 1 |
@@ -525,7 +525,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Upstream relations between corpus rows (adversarial AI review of the statements + literature), resolved against the manifests by `meta/build_corpus_relations.py` into `meta/corpus_relations.json`. **Not machine-checked** — the formally verified graph is the dependency graph above; these edges only say where an implication theorem is worth attempting (`cite="gc:<edge_id>"` on the resulting `@EDGE`).
 
 - **225 edges** from clone `b72c585` — by relation equivalent_to 8, implies 159, related_only 42, same_conjecture 16; by verdict confirmed 214, plausible 11; 0 endpoints without a manifest row.
-- **112 of the 167 implies/equivalent_to edges have both endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool for `implications_X2nn.v`.
+- **113 of the 167 implies/equivalent_to edges have both endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool for `implications_X2nn.v`.
 - **108 edges are already mirrored by a Rocq `@EDGE`** (implies→`implies`, equivalent_to→`equiv`; `same_conjecture`/`related_only` are never mirrored).
-- **79 distinct endpoints of *confirmed* implies/equivalent_to edges own no done statement** — each is a row whose formalization would unlock at least one cross-check.
+- **78 distinct endpoints of *confirmed* implies/equivalent_to edges own no done statement** — each is a row whose formalization would unlock at least one cross-check.
 

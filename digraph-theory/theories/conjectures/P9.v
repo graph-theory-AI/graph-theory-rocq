@@ -276,13 +276,14 @@ Definition minimum_number_of_transitive_subtournaments_of_order_statement : Prop
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/cyclic_spanning_subdigraph_with_small_cyclomatic_number/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/cyclic_spanning_subdigraph_with_small_cyclomatic_number.json
     English statement: (Open Problem Garden, Cyclic spanning subdigraph with small cyclomatic number)
-      For every finite digraph D in which every vertex lies on a directed cycle (equivalently,
-      all strong components are nontrivial) there is a spanning subdigraph, given as an arc
-      selector keeping only real arcs and leaving every vertex with positive kept in-degree and
-      positive kept out-degree, whose cyclomatic number (number of kept arcs, plus number of
-      weakly connected components of the kept subdigraph, minus number of vertices) is at most
-      the independence number of D.
-    Definitions: [cyclic_sel f] - the arc selector f keeps only real arcs and leaves positive
+      For every finite loopless digraph D in which every vertex lies on a directed cycle
+      (equivalently, all strong components are nontrivial) there is a spanning subdigraph,
+      given as an arc selector keeping only real arcs and leaving every vertex with positive
+      kept in-degree and positive kept out-degree, whose cyclomatic number (number of kept
+      arcs, plus number of weakly connected components of the kept subdigraph, minus number of
+      vertices) is at most the independence number of D.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [cyclic_sel f] - the arc selector f keeps only real arcs and leaves positive
       in- and out-degree at every vertex (this file); [cyclomatic f] - kept arcs + weakly
       connected components - vertices (this file); [nb_wcc f] / [wadj f] - weakly connected
       components of the kept subdigraph (this file); [alpha D] - the independence number, the
@@ -290,9 +291,15 @@ Definition minimum_number_of_transitive_subtournaments_of_order_statement : Prop
       (conjectures/classic_core.v).
     Notes: The corpus hypothesis all strong components are nontrivial is encoded by the
       equivalent every vertex lies on a directed cycle. A spanning subdigraph is modelled by an
-      arc selector f : D -> {set D} rather than by a new carrier type. *)
+      arc selector f : D -> {set D} rather than by a new carrier type.  The guard
+      [loopless D] is load-bearing: on the one-vertex digraph with a loop the vertex lies on a
+      directed cycle (the loop), its singleton is not stable, so [alpha D = 0], while every
+      cyclic arc selector keeps the loop and has cyclomatic number at least 1
+      (meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v).  The
+      source's digraphs have no loops.  The guard was added on 2026-10-26
+      (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement : Prop :=
-  forall D : diGraphType,
+  forall D : diGraphType, loopless D ->
     (forall v : D, exists c : seq D, dicycle c /\ v \in c) ->
     exists f : D -> {set D}, cyclic_sel f /\ (cyclomatic f <= alpha D).
 
@@ -347,21 +354,27 @@ Definition subdivision_of_a_transitive_tournament_in_digraphs_w_statement : Prop
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/antidirected_trees_in_digraphs/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/antidirected_trees_in_digraphs.json
     English statement: (Open Problem Garden, Antidirected trees in digraphs)
-      For every finite digraph D and every k >= 2, if the number of arcs of D exceeds (k-2)
-      times the number of its vertices, then D contains, as a subdigraph, every antidirected
-      tree T on k vertices, that is every orientation of a tree in which each vertex has
-      in-degree 0 or out-degree 0; containment means an injective arc-preserving map from T to
-      D.
-    Definitions: [nb_arcs D] - the number of ordered pairs forming an arc (this file);
+      For every finite loopless digraph D and every k >= 2, if the number of arcs of D
+      exceeds (k-2) times the number of its vertices, then D contains, as a subdigraph, every
+      antidirected tree T on k vertices, that is every orientation of a tree in which each
+      vertex has in-degree 0 or out-degree 0; containment means an injective arc-preserving
+      map from T to D.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [nb_arcs D] - the number of ordered pairs forming an arc (this file);
       [antidirected_tree T] - the underlying graph is a tree (weakly connected with #V - 1 arcs)
       and every vertex has in-degree 0 or out-degree 0 (this file); [tree_digraph] and
       [weakly_connected] (this file); [contains_subdig D T] - an injective arc-preserving map T
       -> D (this file); [orientedDigraph] (core/oriented.v).
     Notes: The guard 2 <= k keeps the natural-number subtraction k - 2 faithful; at k < 2 the
       corpus hypothesis is negative and the statement would be about all digraphs. Containment
-      is as a subdigraph (arcs preserved, not reflected), as in the corpus. *)
+      is as a subdigraph (arcs preserved, not reflected), as in the corpus.  The guard
+      [loopless D] is load-bearing: [nb_arcs] counts loops, so the one-vertex digraph with a
+      loop meets the arc-count hypothesis at k = 2 but cannot host the two-vertex antidirected
+      tree (meta/probe_hints/antidirected_trees_in_digraphs_statement.v).  The source's
+      digraphs have no loops.  The guard was added on 2026-10-26 as a one-way source repair of
+      the migrated row (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition antidirected_trees_in_digraphs_statement : Prop :=
-  forall (D : diGraphType) (k : nat), 2 <= k ->
+  forall (D : diGraphType) (k : nat), 2 <= k -> loopless D ->
     (k - 2) * #|D| < nb_arcs D ->
     forall T : orientedDigraph, antidirected_tree T -> #|T| = k -> contains_subdig D T.
 
@@ -413,7 +426,7 @@ Definition partitioning_planar_digraphs_statement : Prop :=
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/partitionning_a_tournament_into_k_strongly_connected_subtournaments.json
     English statement: (Open Problem Garden, Partitioning a tournament into k-strongly connected subtournaments)
       There is a function g from finite lists of positive integers to naturals such that for
-      every list k_1, ..., k_p of positive integers and every tournament T that is
+      every non-empty list k_1, ..., k_p (p >= 1) of positive integers and every tournament T that is
       g(k_1,...,k_p)-strongly connected, the vertex set of T partitions into p parts V_1, ...,
       V_p such that each V_i has more than one vertex and the subtournament it induces is
       k_i-strongly connected.
@@ -421,10 +434,16 @@ Definition partitioning_planar_digraphs_statement : Prop :=
       one part (this file); [sub_tournament S] - the subtournament induced by S
       (core/tournament.v).
     Notes: Nontriviality of each part is encoded as 1 < #|V_i|; note that [kstrong] itself
-      already requires k < #|V_i|. *)
+      already requires k < #|V_i|.  The guard [0 < size ks] is load-bearing: for the empty list
+      the positivity hypothesis holds vacuously and some tournament is g([::])-strong
+      (grounding_P9.kstrong_tournament_exists), but a tournament with a vertex has no partition
+      into zero parts
+      (meta/probe_hints/partitionning_a_tournament_into_k_strongly_connected_statement.v).  The
+      source partitions into V_1, ..., V_p with p >= 1.  The guard was added on 2026-10-26
+      (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition partitionning_a_tournament_into_k_strongly_connected_statement : Prop :=
   exists g : seq nat -> nat,
-    forall ks : seq nat, all (fun k => 0 < k) ks ->
+    forall ks : seq nat, 0 < size ks -> all (fun k => 0 < k) ks ->
       forall T : tournament, kstrong T (g ks) ->
         exists part : seq {set T},
           [/\ size part = size ks, set_partition part &
@@ -456,17 +475,22 @@ Definition switching_reconstruction_of_digraphs_statement : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/arc_disjoint_directed_cycles_in_regular_directed_graphs/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/arc_disjoint_directed_cycles_in_regular_directed_graphs.json
     English statement: (Open Problem Garden, Arc-disjoint directed cycles in regular directed graphs)
-      For every finite digraph D and every k, if D is k-diregular (every vertex has in-degree
-      and out-degree exactly k) then D has a list of at least binomial(k+1, 2) pairwise
-      arc-disjoint directed cycles.
+      For every finite digraph D with at least one vertex and every k, if D is k-diregular
+      (every vertex has in-degree and out-degree exactly k) then D has a list of at least
+      binomial(k+1, 2) pairwise arc-disjoint directed cycles.
     Definitions: [diregular D k] - in-degree and out-degree equal k at every vertex
       (conjectures/classic_core.v); [cyc_arcs c] - the arcs traversed by the cycle c (this
       file); [dicycle] (core/dipath.v).
     Notes: No parallel arcs is automatic here, arcs being a relation on vertices, so k-regular
       of the corpus is exactly [diregular]. The list is required to have at least, not exactly,
-      binomial(k+1,2) members. *)
+      binomial(k+1,2) members.  The guard [0 < #|D|] is load-bearing: the empty digraph is
+      k-diregular for every k, vacuously, but has no directed cycle, so without the guard the
+      body fails at k = 1
+      (meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v).
+      The source's k-regular digraphs have vertices.  The guard was added on 2026-10-26 as a
+      one-way source repair of the migrated row (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition arc_disjoint_directed_cycles_in_regular_directed_gra_statement : Prop :=
-  forall (D : diGraphType) (k : nat), diregular D k ->
+  forall (D : diGraphType) (k : nat), 0 < #|D| -> diregular D k ->
     exists P : seq (seq D),
       [/\ all (@dicycle D) P,
           pairwise (fun a b => [disjoint cyc_arcs a & cyc_arcs b]) P &

@@ -247,6 +247,15 @@ meta/check_statement_docs.py --ignore-baseline cycle-theory` -> 46 target(s), 46
   receipt). The statement leg goes from partial to done; `faithfulness_verified_by` is filled after
   the independent review. Per the pinned extracted context of the paper's Conjecture 14, its
   Corollary 13(iv) already gives k = 12, so the row as stated is settled by its own source.
+  **Second finding, FIXED 2026-10-26** (coordination/PROGRAMME.md A1; Marc's decision 3 of 25
+  October): severity **too weak**. The source calls a digraph t-edge-connected when its underlying
+  graph is (p. 4), while `x184_directed_k_edge_connected` counted only the edges LEAVING each set, a
+  strictly stronger hypothesis: two vertices joined by k parallel arcs u -> v are k-edge-connected
+  but have no edge leaving {v} (kernel-checked in the re-encoding's receipt, with the relation new
+  -> old: the directed hypothesis implies `edge_connected`). The statement's hypothesis is now the
+  shared `edge_connected` of `cycle-theory/theories/foundations/connectivity.v`;
+  `x184_out_cut` and `x184_directed_k_edge_connected` stay, unused and byte-identical, as the
+  excluded distinct variants of the simple_cuts spec.
 - `opg:approximation_ratio_for_k_outerplanar_graphs` (`D1.v:802`) — severity: **wrong object
   (proxy)**. The corpus row is a *question* about the approximation ratio of MaxEDP / MaxIMF on
   k-outerplanar graphs; the Rocq body is a bounded-integrality-gap statement on the
@@ -1049,6 +1058,14 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   For #01, which the corpus marks disproved (Girão, Kittipassorn, Popielarz), the guard keeps the
   genuine loopless refutation as what the negation must capture. The relative edges e016, e017,
   e018 and e038 are re-proved over the guards, their reviewer fields cleared until review.
+- `arxiv:1608.03040#06` (Open Problem 7) →
+  `conjectures/X51.v:majority_choosable_universal_constant_statement` — **refutable (loop)** (found
+  2026-10-25, Arthur's F1 in his lane 4 review). A loop at v makes v a same-coloured out-neighbour of
+  itself, so the one-vertex digraph with a loop has no majority colouring from any lists, for every c.
+  The source's digraphs have no loops. **FIXED 2026-10-25** (coordination/PROGRAMME.md A1, Lancelot's
+  item 4b): the body gains `irreflexive (@arc D)`, the body of `two_extremal.loopless`
+  (`meta/probe_hints/majority_choosable_universal_constant_statement.v`; non-vacuity
+  `conjectures/grounding_X51.v:x51_hyps_nonvacuous`). No edge uses the row.
 - `arxiv:1608.03040#02` (Open Problem 1) →
   `conjectures/X45.v:majority_three_colouring_beta_statement` — **too strong**. The row asks
   whether SOME constant `beta < 1` works; the body fixes `beta = 1/2`, i.e. it restates
@@ -1097,6 +1114,61 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   adds `V1 != set0` and `V1 != setT`. The guard is needed (without it `V1 := setT` trivialises the
   complement clause), but it is not in the corpus text; the corpus text itself is garbled (it
   writes the hypothesis degree as `d`, leaving `f(d)` unused).
+  The row was also **refutable (empty digraph)**: the empty digraph meets the out-degree hypothesis
+  vacuously for every f and d but has no non-empty proper vertex set, so the body was false for every
+  f. **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
+  `0 < #|D|` (`meta/probe_hints/splitting_min_outdegree_statement.v`; non-vacuity
+  `conjectures/grounding_classic_core.v:splitting_hyps_nonvacuous`). Its only relation, e200, is
+  related_only with no Rocq edge.
+- `opg:arc_disjoint_directed_cycles_in_regular_directed_graphs` →
+  `conjectures/P9.v:arc_disjoint_directed_cycles_in_regular_directed_gra_statement` — **refutable
+  (empty digraph)** (found 2026-10-25, Marc's decision 5). The empty digraph is k-diregular for every
+  k, vacuously, and has no directed cycle, so the body failed at k = 1. **REPAIRED 2026-10-26**
+  (coordination/PROGRAMME.md A2, with the A4 direction weaken; Lancelot's item 4b): the live
+  statement now reads `forall (D : diGraphType) (k : nat), 0 < #|D| -> diregular D k -> ...`; the
+  exact replacement is `diregular D k ->` to `0 < #|D| -> diregular D k ->`. It is a WEAKENING
+  (old -> new), so the certificate is one-way, frozen -> live:
+  `migration/directed_neighbourhood.v` (`P9Legacy` verbatim; the row's statement entry carries the
+  repair) (`meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v`).
+  Loops do not reopen the defect (a looped vertex is a one-vertex dicycle). No manifest-row or leg
+  field changes; no edge uses the row.
+- `opg:antidirected_trees_in_digraphs` → `conjectures/P9.v:antidirected_trees_in_digraphs_statement` —
+  **refutable (loop)** (found 2026-10-25, Marc's decision 5). `nb_arcs` counts loops, so the
+  one-vertex digraph with a loop met the arc-count hypothesis at k = 2,
+  `(k - 2) * #|D| = 0 < 1 = nb_arcs D`, but cannot host the two-vertex antidirected tree `TT 2`.
+  **REPAIRED 2026-10-26** (coordination/PROGRAMME.md A2, with the A4 direction weaken; Lancelot's item
+  4b): the live statement now reads
+  `forall (D : diGraphType) (k : nat), 2 <= k -> loopless D -> (k - 2) * #|D| < nb_arcs D -> ...`; the
+  exact replacement is `2 <= k ->` to `2 <= k -> loopless D ->`. It is a WEAKENING (old -> new), so the
+  certificate is one-way, frozen -> live: `migration/directed_neighbourhood.v` (`P9Legacy` verbatim;
+  the row's statement entry carries the repair)
+  (`meta/probe_hints/antidirected_trees_in_digraphs_statement.v`). No manifest-row or leg field
+  changes; no Rocq edge uses the row.
+- `opg:cyclic_spanning_subdigraph_with_small_cyclomatic_number` →
+  `conjectures/P9.v:cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement` — **refutable
+  (loop)** (found 2026-10-25, Marc's decision 5). On the one-vertex digraph with a loop, the vertex lies
+  on a directed cycle, its singleton is not stable (`alpha D = 0`), and every cyclic arc selector keeps
+  the loop (cyclomatic number at least 1). **FIXED 2026-10-26** (coordination/PROGRAMME.md A1,
+  Lancelot's item 4b): the body gains `loopless D`
+  (`meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v`; non-vacuity
+  `conjectures/grounding_P9.v:cyclic_spanning_hyps_nonvacuous`). No edge uses the row.
+- `opg:linial_berge_path_partition_duality` → `conjectures/packing.v:linial_berge_statement` —
+  **refutable (loop)** (found 2026-10-25, Marc's decision 5). A looped vertex lies in no acyclic set,
+  so on the one-vertex digraph with a loop every k-dicolourable induced set is empty, while at k = 1
+  every path partition has 1-norm 1, and the duality equation `pp_knorm k Q = #|S|` failed.
+  **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
+  `irreflexive (@arc D)`, the body of `two_extremal.loopless` (`meta/probe_hints/linial_berge_statement.v`;
+  non-vacuity `conjectures/grounding_unvd_sad.v:linial_berge_hyps_nonvacuous`). No edge uses the row.
+- `opg:partitionning_a_tournament_into_k_strongly_connected_subtournaments` →
+  `conjectures/P9.v:partitionning_a_tournament_into_k_strongly_connected_statement` — **refutable
+  (empty list)** (found 2026-10-25, Marc's decision 5). For `ks = [::]` the positivity hypothesis holds
+  vacuously and some tournament is g([::])-strong, so it has a vertex, but it has no partition into zero
+  parts. **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
+  `0 < size ks` (`meta/probe_hints/partitionning_a_tournament_into_k_strongly_connected_statement.v`).
+  The existence of k-strong tournaments for every k, which both the refutation and the non-vacuity need,
+  is `conjectures/grounding_P9.v:kstrong_tournament_exists` (rotational tournaments on 2(k+1)+1
+  vertices; `RT_del_strong`); non-vacuity `conjectures/grounding_P9.v:partition_hyps_nonvacuous`. No edge
+  uses the row.
 - `arxiv:1608.03040#04` (Open Problem 3) →
   `conjectures/colouring_variants.v:majority_3col_eulerian_statement` — **too strong (mild)**.
   `eulerian` keeps only the balanced-degree condition and drops connectivity, so the hypothesis is
@@ -1404,6 +1476,33 @@ Found by reading, not caught by the suffix heuristic (the more valuable WP4b inp
   `n = t-1` it evaluates to `2^(t-2) * 3` instead of `2^(t-2) * 1` and `2^(t-2) * 2`. The
   universal half is then too weak and the existence half asks for the wrong exact count. Fix:
   write the bound as `2^(t-2) * (n + 3 - t)` with the guard already present, or guard `t <= n`.
+  **REPAIRED 2026-10-26** (coordination/PROGRAMME.md A2; the row is frozen by the A17 clique_counts and
+  B8 path_edges families): `kt_immersion_clique_count_extremal_statement` uses the new local
+  `x174_extremal_bound_exact t n := 2^(t-2) * (n + 3 - t)`, which equals `2^(t-2) * (n - t + 3)` for every
+  `n >= t - 2`, as in the source (Fox and Wei, arXiv:1606.06810, statement_text at the pin b72c5857: "The
+  maximum number of cliques in a graph on $n \geq t-2$ vertices with no $K_t$-immersion is
+  $2^{t-2}(n-t+3)$."). The body's two uses of the bound became
+  `x174_clique_count G <= x174_extremal_bound_exact t n) /\ (exists G : sgraph, #|G| = n /\ x174_no_Kt_immersion G t /\ x174_clique_count G = x174_extremal_bound_exact t n)`;
+  `x174_extremal_bound` stays unchanged for the frozen migration copies. The severity above understated the
+  defect: at `n = t-2` the existence half asks for `2^(t-2) * 3` cliques on `t-2` vertices, where at most
+  `2^(t-2)` exist, so the old body is FALSE (`meta/probe_hints/kt_immersion_clique_count_extremal_statement.v`,
+  at `t = 2`, `n = 0`: the empty graph has one clique). For `n = t-2` and `n = t-1` the source's value is
+  right: no such graph immerses `K_t`, and the complete graph has `2^n` cliques. This is a SOURCE REPAIR,
+  not a migration equivalence:
+  - the A17 certificates (`minor-theory/theories/migration/clique_counts.v`, the row and the complete
+    original row) and the B8 certificate (`migration/path_edges.v`) keep their frozen rows and prove
+    `frozen -> live` (direction "weaken") through the falsity of the frozen rows (`X174Legacy_row_false`,
+    `X174Original_row_false`, and B8's `X174Legacy_row_false`);
+  - the `repair` entries of `meta/migration_reports/clique_counts.spec.json` (statement and
+    original-statement objects) and `meta/migration_reports/path_edges.spec.json` (statement object) bind the
+    one exact text replacement and the repaired doc block's hash, name this entry as their record, and list
+    the fields the repair changes: the manifest-row fields `implemented_by`, `source_verified_by`,
+    `source_verified_at` and `verification_note`, and the leg fields `statement` (`partial` -> `done`),
+    `commit` and `note`;
+  - the statement wave X174 records the repair (the row is no longer partial, a new note, the commit tag
+    `x174-bound-subtraction-repair`); its `faithfulness_verified_by` is filled after the independent review.
+  Logical relation: old -> new holds because the old body is false; for `n >= t` the two bodies coincide.
+  The new body is open.
 - `arxiv:1704.00125#00` (`X190.v:44`, `thin_overlay_without_bounded_degree_statement`) —
   severity: **vacuous-looking**. `x190_thin_system_of_overlays C` unfolds to
   `exists thin, forall G, C G -> exists _ : x190_overlay G thin, True`, and the `x190_overlay`
@@ -1780,6 +1879,34 @@ them.
 - `arxiv:1802.03727#00` (`X203.v`, leg `blocked`) — the universal quantifier over graphs includes
   the empty graph, which has minimum degree `d` vacuously and is separation `j`-choosable for every
   `j`. Severity: **too strong** (refutable).
+  **REPAIRED 2026-10-26** (coordination/PROGRAMME.md A2; the row is frozen by the A11
+  min_degree_at_least family): `separation_choosability_min_degree_unbounded_statement` adds the
+  guard `0 < #|G|`, as the source reads it: a graph of minimum degree `d` has a vertex (Conjecture
+  1.3 of Esperet, Kang and Thomassé, arXiv:1802.03727, statement_text at the pin b72c5857: "There is
+  a function $x_1(d)$ that satisfies $x_1(d) \to \infty$ as $d \to \infty$ such that
+  $\mathrm{ch}_{\mathrm{sep}}(G) \geq x_1(d)$ for any graph $G$ with minimum degree $d$."). The
+  body's graph quantifier became
+  `forall (d : nat) (G : sgraph), 0 < #|G| -> x203_min_degree_at_least G d ->`.
+  This is a SOURCE REPAIR, not a migration equivalence:
+  - the A11 certificate keeps the frozen row and proves `frozen -> live` (direction "weaken"; the
+    same x, since the guard is one more hypothesis); `X203Legacy_row_false` in
+    `chromatic-theory/theories/migration/min_degree_at_least.v` proves the frozen row false, and
+    `meta/probe_hints/separation_choosability_min_degree_unbounded_statement.v` refutes the old body;
+  - the `repair` entry of `meta/migration_reports/min_degree_at_least.spec.json` binds the one exact
+    text replacement and the repaired doc block's hash, names this entry as its record, and lists the
+    fields the repair changes: the manifest-row fields `implemented_by`, `source_verified_by`,
+    `source_verified_at` and `verification_note`, and the leg fields `statement` (`blocked` ->
+    `done`), `commit` and `note`;
+  - the statement wave X203 records the repair (the row is no longer blocked, a new note, the commit
+    tag `x203-nonempty-guard-repair`); its `faithfulness_verified_by` is filled after the independent
+    review.
+  The audit's second point, plain unboundedness in place of `x_1(d) -> infinity`, is not a defect:
+  with minimum degree at least `d` in place of exactly `d`, an unbounded `x` and an `x_1` tending to
+  infinity give each other (running minimum and maximum; the X203.v Notes). Logical relation: old ->
+  new with the same x; the old body is false; the new body is open. Edge e026 (Conjecture 1.4 implies
+  Conjecture 1.3, `meta/edge_waves.json`) keeps its documented `blocked` disposition, whose reason
+  names the old blocked target; re-opening it as a candidate would move the edges legs of both rows
+  from `done` to `todo`, so that change is left to the edge registry.
 - `arxiv:1803.10962#00` (`X210.v`, leg `blocked`) — the source's `C, C' > 0` is dropped, so
   degenerate witnesses such as `C = 0` are admitted; the positive constant `C` in "at most `Ck`
   conflicts" carries the whole content. Severity: **vacuous-looking**.

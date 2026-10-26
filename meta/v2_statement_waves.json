@@ -3909,20 +3909,18 @@
       "phase": "X174",
       "repo": "minor-theory",
       "defines_file": "X174.v",
-      "implemented_by": "Batch X171-X190 statement authoring pass; retargeted by immersion/extremal foundation pass (Codex), 2026-07-16",
-      "source_verified_by": "Codex immersion retarget faithfulness readback, 2026-07-16",
-      "source_verified_at": "2026-07-16",
-      "commit": "graph-metric-foundation-retarget",
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "implemented_by": "Arthur (A2 source repair of the 2026-07-16 Codex statement, coordination/PROGRAMME.md section 3, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read at the pin b72c5857: data/arxiv_extracted/1606.06810.json, the row's statement_text and context_text, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x174-bound-subtraction-repair",
+      "faithfulness_verified_by": "Marcol (X174 review, 2026-10-26)",
       "rows": {
         "axv_1606_06810_00": {
           "formal_name": "kt_immersion_clique_count_extremal_statement",
-          "note": "Retargeted using the existing U7 immersion relation; exact maximum is encoded as a universal upper bound plus existence of an n-vertex graph attaining 2^(t-2)(n-t+3).",
-          "state": "partial",
-          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: a nat-subtraction ordering bug, not a lightweight-surface or almost-all mis-quantification. The primitives are all faithful (weak `immersion` from U7 matches the paper's \"no weak K_t-immersion\"; the count-all-cliques convention makes 2^(t-2)(n-t+3) match the K_{t-2}+cone construction exactly for n>=t). But `x174_extremal_bound t n := 2^(t-2)*(n - t + 3)` computes `(n-t)+3` in nat, and the faithful hypot"
+          "note": "Repaired 2026-10-26 (coordination/PROGRAMME.md A2; frozen by the A17 clique_counts and B8 path_edges families): the bound is x174_extremal_bound_exact, 2^(t-2) * (n + 3 - t); the old (n - t) + 3 made the body false at n = t-2 (meta/probe_hints/kt_immersion_clique_count_extremal_statement.v). The exact maximum is a universal upper bound plus an n-vertex graph attaining it; immersion is U7's weak immersion."
         }
       },
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: a nat-subtraction ordering bug, not a lightweight-surface or almost-all mis-quantification. The primitives are all faithful (weak `immersion` from U7 matches the paper's \"no weak K_t-immersion\"; the count-all-cliques convention makes 2^(t-2)(n-t+3) match the K_{t-2}+cone construction exactly for n>=t). But `x174_extremal_bound t n := 2^(t-2)*(n - t + 3)` computes `(n-t)+3` in nat, and the faithful hypothesis `t-2 <= n` lets n<t (n in {t-2,t-1}), where n-t t"
+      "faithfulness_result": "REPAIRED 2026-10-26 (A2), independent review: Marcol APPROVE 2026-10-26 (old -> new through the old body's falsity; the two coincide for n >= t): the bound is 2^(t-2) * (n + 3 - t) (x174_extremal_bound_exact), equal to the source's 2^(t-2)(n-t+3) for every n >= t-2; the old (n - t) + 3 made the existence half false at n = t-2 (no graph on t-2 vertices has 2^(t-2) * 3 cliques). Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: a nat-subtraction ordering bug, not a lightweight-surface or almost-all mis-quantification. The primitives are all faithful (weak `immersion` from U7 matches the paper's \"no weak K_t-immersion\"; the count-all-cliques convention makes 2^(t-2)(n-t+3) match the K_{t-2}+cone construction exactly for n>=t). But `x174_extremal_bound t n := 2^(t-2)*(n - t + 3)` computes `(n-t)+3` in nat, and the faithful hypothesis `t-2 <= n` lets n<t (n in {t-2,t-1}), where n-t t"
     },
     "X175": {
       "phase": "X175",
@@ -4089,18 +4087,18 @@
       "phase": "X184",
       "repo": "cycle-theory",
       "defines_file": "X184.v",
-      "implemented_by": "Arthur (A1 re-encoding, coordination/PROGRAMME.md section 3, 2026-10-25)",
-      "source_verified_by": "Arthur (source re-read at the pin b72c5857: data/arxiv_extracted/1701.03366.json and data/arxiv_reviews/1701.03366__00.json, 2026-10-25)",
-      "source_verified_at": "2026-10-25",
-      "commit": "x184-antisymmetry-reencoding",
-      "faithfulness_verified_by": "Marcol (X184 review, 2026-10-25)",
+      "implemented_by": "Arthur (A1 re-encoding, coordination/PROGRAMME.md section 3 and Marc's decision 3 of 25 October, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read at the pin b72c5857: data/arxiv_extracted/1701.03366.json; the source's p. 4 reading of a t-edge-connected digraph as one whose underlying graph is t-edge-connected, from Marc's decision 3 of 25 October, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x184-edge-connectivity-reencoding",
+      "faithfulness_verified_by": "Marcol (X184 review, 2026-10-26)",
       "rows": {
         "axv_1701_03366_00": {
           "formal_name": "z5_antisymmetric_flow_edge_connectivity_statement",
-          "note": "Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): the antisymmetry condition of a Z5-antisymmetric flow is now part of x184_z5_antisymmetric_flow (it was absent, faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: z5_antisymmetric_flow_edge_connectivity_statement."
+          "note": "Re-encoded 2026-10-26 (coordination/PROGRAMME.md A1, Marc's decision 3): the hypothesis is the shared edge_connected (the underlying graph is k-edge-connected, the source's notion); before, x184_directed_k_edge_connected counted only the edges leaving each set. Re-encoded 2026-10-25: the antisymmetry condition of a Z5-antisymmetric flow is part of x184_z5_antisymmetric_flow (it was absent, faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: z5_antisymmetric_flow_edge_connectivity_statement."
         }
       },
-      "faithfulness_result": "RE-ENCODED 2026-10-25 (A1), independent review: Marcol APPROVE 2026-10-25 (new -> old for the object and the statement, strict for the objects): x184_z5_antisymmetric_flow gains the Nesetril-Raspaud antisymmetry conjunct (no two edges, equal or not, carry values summing to 0 modulo 5), resolving the 2026-07-17 finding; the old object was strictly weaker (two parallel edges with values 1 and 4). Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: the defining ANTISYMMETRY property is entirely absent, so the row does not encode the conjecture's object. `x184_z5_antisymmetric_flow` (X184.v:20-25) is exactly two conjuncts — nowhere-zero (`phi e != ord0`) plus mod-5 conservation — i.e. a plain nowhere-zero Z5-flow, mislabeled \"antisymmetric.\" A Nešetřil–Raspaud antisymmetric flow additionally requires the used-value set B to satisfy B ∩ (−B) = ∅ (no two edges with opposite values; in Z5 never both 1&4 n"
+      "faithfulness_result": "RE-ENCODED 2026-10-26 (A1, Marc's decision 3), independent review: Marcol APPROVE 2026-10-26 (new -> old with the same k; the old body was too weak): the hypothesis is the shared edge_connected (the underlying graph is k-edge-connected, the source's notion, p. 4) instead of x184_directed_k_edge_connected, which counted only the edges leaving each set and so excluded, e.g., two vertices joined by k parallel arcs u -> v. Previous result: RE-ENCODED 2026-10-25 (A1), independent review: Marcol APPROVE 2026-10-25 (new -> old for the object and the statement, strict for the objects): x184_z5_antisymmetric_flow gains the Nesetril-Raspaud antisymmetry conjunct (no two edges, equal or not, carry values summing to 0 modulo 5), resolving the 2026-07-17 finding; the old object was strictly weaker (two parallel edges with values 1 and 4). Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: the defining ANTISYMMETRY property is entirely absent, so the row does not encode the conjecture's object. `x184_z5_antisymmetric_flow` (X184.v:20-25) is exactly two conjuncts — nowhere-zero (`phi e != ord0`) plus mod-5 conservation — i.e. a plain nowhere-zero Z5-flow, mislabeled \"antisymmetric.\" A Nešetřil–Raspaud antisymmetric flow additionally requires the used-value set B to satisfy B ∩ (−B) = ∅ (no two edges with opposite values; in Z5 never both 1&4 n"
     },
     "X185": {
       "phase": "X185",
@@ -4430,20 +4428,18 @@
       "phase": "X203",
       "repo": "chromatic-theory",
       "defines_file": "X203.v",
-      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
-      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
-      "source_verified_at": "2026-07-16",
-      "commit": "x191-x210-batch1",
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "implemented_by": "Arthur (A2 source repair of the 2026-07-16 Codex statement, coordination/PROGRAMME.md section 3, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read at the pin b72c5857: data/arxiv_extracted/1802.03727.json, Conjecture 1.3 statement_text, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x203-nonempty-guard-repair",
+      "faithfulness_verified_by": "Marcol (X203 review, 2026-10-26)",
       "rows": {
         "axv_1802_03727_00": {
           "formal_name": "separation_choosability_min_degree_unbounded_statement",
-          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: separation_choosability_min_degree_unbounded_statement.",
-          "state": "blocked",
-          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the statement is trivially FALSE (refutable), so it cannot encode an open conjecture. In chromatic-theory/theories/conjectures/X203.v, `separation_choosability_min_degree_unbounded_statement` is `exists x, (forall B, exists d, B<=x d) /\\ forall d G, x203_min_degree_at_least G d -> x203_separation_choosability_at_least G (x d)`. The `forall G : sgraph` includes the empty graph (vertex type void, 0 vertic"
+          "note": "Repaired 2026-10-26 (coordination/PROGRAMME.md A2; the row is frozen by the A11 min_degree_at_least family): the guard 0 < #|G| excludes the empty graph, which refuted the old body (meta/probe_hints/separation_choosability_min_degree_unbounded_statement.v; faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: separation_choosability_min_degree_unbounded_statement."
         }
       },
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the statement is trivially FALSE (refutable), so it cannot encode an open conjecture. In chromatic-theory/theories/conjectures/X203.v, `separation_choosability_min_degree_unbounded_statement` is `exists x, (forall B, exists d, B<=x d) /\\ forall d G, x203_min_degree_at_least G d -> x203_separation_choosability_at_least G (x d)`. The `forall G : sgraph` includes the empty graph (vertex type void, 0 vertices). There, `x203_min_degree_at_least G d := forall v, "
+      "faithfulness_result": "REPAIRED 2026-10-26 (A2), independent review: Marcol APPROVE 2026-10-26 (old -> new with the same x; the old body is false; the new body is the source's Conjecture 1.3): the body adds the guard 0 < #|G| (a graph of minimum degree d has a vertex), which excludes the empty graph that refuted it; an unbounded x over graphs of minimum degree at least d is equivalent to the source's x_1(d) -> infinity over graphs of minimum degree exactly d (see the X203.v Notes). Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the statement is trivially FALSE (refutable), so it cannot encode an open conjecture. In chromatic-theory/theories/conjectures/X203.v, `separation_choosability_min_degree_unbounded_statement` is `exists x, (forall B, exists d, B<=x d) /\\ forall d G, x203_min_degree_at_least G d -> x203_separation_choosability_at_least G (x d)`. The `forall G : sgraph` includes the empty graph (vertex type void, 0 vertices). There, `x203_min_degree_at_least G d := forall v, "
     },
     "X204": {
       "phase": "X204",

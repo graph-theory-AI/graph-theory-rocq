@@ -80,7 +80,8 @@
     "",
     "Baseline 048c768 is a private, not-for-integration merge of the B7 series fa3f5f4 with the C6 history 7b04105 (union of _CoqProject lines and of one simple_path summary sentence; no .v file differs from both parents). No statement text, doc block, manifest row or leg state changes (checked below).",
     "",
-    "Later migration: the cyclic extractors listed here as separate contracts (Cycle X9 `x9_cycle_edges`, Cycle X24 `x24_cycle_edge_seq`, Packing X25 `x25_cycle_edge_seq`, GTMisc X216 `x216_cycle_edges` and Cycle XE1 `xe1_cycle_edges`) were migrated by B11 (family cycle-edges) onto `GTBase.walks_paths.seq_cycle_edge_list`, `seq_cycle_edge_set` and `seq_cycle_graph_edge_set`, which keep the closing pair that this family's open `seq_edge_list` lacks; they are no longer untouched distinct variants."
+    "Later migration: the cyclic extractors listed here as separate contracts (Cycle X9 `x9_cycle_edges`, Cycle X24 `x24_cycle_edge_seq`, Packing X25 `x25_cycle_edge_seq`, GTMisc X216 `x216_cycle_edges` and Cycle XE1 `xe1_cycle_edges`) were migrated by B11 (family cycle-edges) onto `GTBase.walks_paths.seq_cycle_edge_list`, `seq_cycle_edge_set` and `seq_cycle_graph_edge_set`, which keep the closing pair that this family's open `seq_edge_list` lacks; they are no longer untouched distinct variants.",
+    "Source repair (2026-10-26, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md, arxiv:1606.06810#00 entry), not a migration equivalence: the frozen X174Legacy row keeps x174_extremal_bound, which computes (n - t) + 3 in the naturals, and is false (X174Legacy_row_false in the certificate file: at t = 2, n = 0 the bound is 3 while the empty graph has one clique). The live X174 row uses the new local x174_extremal_bound_exact (n + 3 - t), with its doc block rewritten; the immersion chain and x174_extremal_bound are unchanged. The certificate is the one-way frozen -> live (direction weaken); A17's clique_counts spec carries the same repair on its X174 statement and original-statement objects. The row leaves partial (row fields implemented_by, source_verified_by, source_verified_at, verification_note; leg fields statement, commit, note)."
   ],
   "frozen": [
     {
@@ -304,7 +305,27 @@
         "x174_no_Kt_immersion": "no_Kt_immersion"
       },
       "certificate": "Minor.migration.path_edges.kt_immersion_clique_count_extremal_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "x174_clique_count G <= x174_extremal_bound t n) /\\ (exists G : sgraph, #|G| = n /\\ x174_no_Kt_immersion G t /\\ x174_clique_count G = x174_extremal_bound t n)",
+          "x174_clique_count G <= x174_extremal_bound_exact t n) /\\ (exists G : sgraph, #|G| = n /\\ x174_no_Kt_immersion G t /\\ x174_clique_count G = x174_extremal_bound_exact t n)"
+        ],
+        "direction": "weaken",
+        "doc_block_sha256": "e3dbfb642a6ca36c258c122c067f32b03ccdd588356fdc2d856e8b497112fb92",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "implemented_by",
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "statement",
+          "commit",
+          "note"
+        ]
+      }
     },
     {
       "kind": "source",

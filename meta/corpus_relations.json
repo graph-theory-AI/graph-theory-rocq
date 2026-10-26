@@ -17,7 +17,7 @@
    "plausible": 11
   },
   "n_unmapped_endpoints": 0,
-  "both_formalized": 152
+  "both_formalized": 153
  },
  "edges": [
   {
@@ -659,12 +659,12 @@
    "from_formal_name": "min_degree_forces_large_clique_or_bipartite_induced_statement",
    "to_formal_name": "separation_choosability_min_degree_unbounded_statement",
    "from_leg": "done",
-   "to_leg": "blocked",
+   "to_leg": "done",
    "via_alias": {
     "from": null,
     "to": null
    },
-   "both_formalized": false,
+   "both_formalized": true,
    "rocq_edge": null,
    "argument": "Explicitly stated in the paper itself: the source's context reads 'This conjecture, if true, would imply Conjecture 1.3', where Conjecture 1.3 is the target (ch_sep grows with minimum degree). The route is also verifiable: given min degree d, the source yields either K_{x2(d)}, for which ch_sep(K_{n}) ~ sqrt(n) (Kratochvil–Tuza–Voigt) tends to infinity, or a bipartite induced subgraph of min degree x3(d), to which the same paper's Theorem 1.2 gives ch_sep = Omega(log x3(d)). Separation choosability is monotone under induced subgraphs: a bad separated k-assignment on the induced subgraph extends to G by giving each remaining vertex a list of fresh colors, pairwise disjoint from all other lists, so those vertices are always colorable and separation is preserved. Hence ch_sep(G) -> infinity with d. Direction correct.",
    "citations": [

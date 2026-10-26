@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py min_degree_at_least --details /
 - Canonical: `GTBase.base.min_degree_at_least`.
 - Baseline: `9abf440da80115caeffd299077976b48f4e07d74`.
 - Scope: 12 helpers, 17 statements, 49 frozen objects, 151 recorded references.
-- Source checks: 439/439 pass; consistent.
+- Source checks: 442/442 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -28,6 +28,8 @@ Full evidence: `python3 meta/migration_report.py min_degree_at_least --details /
 | `Hom.conjectures.X135.engbers_homomorphism_count_maximisation_statement` / studies:std_engbers_homomorphism_count_maximisation_conjectu | `Hom.migration.min_degree_at_least.engbers_homomorphism_count_maximisation_statement_compat` |
 | `Packing.conjectures.X47.tree_decomposition_delta_edge_connected_statement` / arxiv:1507.08208#00 | `Packing.migration.min_degree_at_least.tree_decomposition_delta_edge_connected_statement_compat` |
 | `Packing.conjectures.X48.tree_decomposition_leaf_edge_connected_statement` / arxiv:1907.11600#00 | `Packing.migration.min_degree_at_least.tree_decomposition_leaf_edge_connected_statement_compat` |
+
+Source weakenings after migration: ONE-WAY source-repair certificates (`frozen -> live`), not migration equivalences; every other row keeps its exact iff: `Chromatic.conjectures.X203.separation_choosability_min_degree_unbounded_statement` (`forall (d : nat) (G : sgraph), x203_min_degree_at_least G d ->` -> `forall (d : nat) (G : sgraph), 0 < #|G| -> x203_min_degree_at_least G d ->`; record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `implemented_by`, `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `commit`, `note`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py min_degree_at_least --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

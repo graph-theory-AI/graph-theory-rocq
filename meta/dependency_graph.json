@@ -20,9 +20,9 @@
   "edges": 144,
   "by_status": {
    "candidate": 32,
-   "conditional": 3,
+   "conditional": 2,
    "refuted-direction": 32,
-   "verified": 77
+   "verified": 78
   },
   "by_kind": {
    "equiv": 6,
@@ -30,7 +30,7 @@
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 93
+  "proved_theorems": 94
  },
  "edges": [
   {
@@ -208,13 +208,11 @@
    "from": "circular_flow_numbers_of_r_graphs_statement",
    "to": "three_flow_statement",
    "kind": "implies",
-   "status": "conditional",
+   "status": "verified",
    "cite": "gc:e184",
-   "proof": "circular_flow_numbers_of_r_graphs_implies_three_flow",
-   "note": "The t=2 instance of Row 1 is exactly 'every 5-graph has circular flow number at most 2+2/2=3' (cfn_bound_t2); Steffen's cited equivalence turns that into Tutte's 3-flow conjecture, and is carried as the explicit external hypothesis external_steffen_3flow_5graphs_statement",
-   "external": [
-    "external_steffen_3flow_5graphs_statement"
-   ],
+   "proof": "unconditional_circular_flow_numbers_of_r_graphs_implies_three_flow",
+   "note": "The t=2 instance of Row 1 is exactly 'every 5-graph has circular flow number at most 2+2/2=3' (cfn_bound_t2); the direction of Steffen's cited equivalence used here is proved as steffen_3flow_5graphs: a 4-edge-connected G inflates (every vertex a doubled cycle through its arc ends) to a 5-graph, whose rational flow at r = 3+1/(m+1) orients the edges so that no set has more than twice as many leaving as entering edges, hence an integer flow with values 1 and 2 (odiff_demand_cut), which contracts to G",
+   "external": [],
    "sources": [
     "cycle-theory/implications_D1.v"
    ]
