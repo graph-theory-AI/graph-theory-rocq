@@ -229,9 +229,13 @@ Print Assumptions linear_time_surface_triangle_free_three_colouring_output_state
     since its authoring (8800958; d8db810 changed X210's comments only); no earlier library family froze any part of
     X210's row at the baseline 3bdfdae.  [X210Legacy] freezes the wrapper, with its argument order, and the complete
     row verbatim at the baseline, both kernel conversions; the row has no other migrated helper, so [X210Legacy] is
-    already its deepest original.  The row stays BLOCKED (KNOWN UNFAITHFUL: the positivity of C and C' is dropped;
-    orientable genus only; it also carries no connectedness guard), and no certificate here claims its English
-    statement is faithful. *)
+    already its deepest original.  The frozen row was BLOCKED (KNOWN UNFAITHFUL: the positivity of C and C' is
+    dropped; orientable genus only; no connectedness guard), and it is FALSE ([X210Legacy_row_false]: K_1 at k = 0).
+    X210 SOURCE REPAIR (2026-10-26, coordination/PROGRAMME.md A2; record meta/STATEMENT_IMPROVEMENTS.md): the live row
+    has rational constants C = p/q and C'^2 = p'/q', all positive, and the guards connected [set: G] and 0 < k; its
+    leg is PARTIAL (non-orientable surfaces are not modelled).  Its certificate is a ONE-WAY source-repair
+    certificate [frozen -> live] (direction "weaken") through that falsity, not a migration equivalence; the
+    wrapper keeps its exact iff. *)
 
 From Chromatic.conjectures Require Import X210.
 
@@ -253,10 +257,24 @@ Lemma x210_euler_genus_embeddable_compat (G : sgraph) (g : nat) :
   X210Legacy.x210_euler_genus_embeddable G g <-> x210_euler_genus_embeddable G g.
 Proof. exact: iff_refl. Qed.
 
+(** X210 SOURCE REPAIR (2026-10-26, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md), not a migration equivalence.
+    The frozen row admits k = 0, and K_1, which is planar ([surface_embeddable_K1]), has no colouring by no colour, for
+    every C and C', so the frozen row is false; its certificate is ONE-WAY, [frozen -> live] (direction "weaken"),
+    through that falsity. *)
+Lemma X210Legacy_row_false : ~ X210Legacy.surface_conflict_colouring_sqrt_genus_statement.
+Proof.
+move=> [C [C' h]].
+have hk : C' * 0 <= 0 * 0 by rewrite muln0.
+have := h 'K_1 0 0 surface_embeddable_K1 hk.
+move=> /(_ (fun _ _ _ _ => false)) [].
+  by split=> u v; rewrite (ord1 u) (ord1 v) sg_irrefl.
+by move=> col _; case: (col ord0).
+Qed.
+
 Lemma surface_conflict_colouring_sqrt_genus_statement_compat :
-  X210Legacy.surface_conflict_colouring_sqrt_genus_statement <->
+  X210Legacy.surface_conflict_colouring_sqrt_genus_statement ->
   surface_conflict_colouring_sqrt_genus_statement.
-Proof. exact: iff_refl. Qed.
+Proof. by move/X210Legacy_row_false. Qed.
 
 (** The argument order is swapped with respect to the canonical: [x210_euler_genus_embeddable G g] is
     [surface_embeddable g G]. *)
@@ -266,15 +284,19 @@ Proof. exact: iff_refl. Qed.
 
 Lemma surface_conflict_colouring_sqrt_genus_statement_canonical :
   surface_conflict_colouring_sqrt_genus_statement <->
-  exists C C' : nat,
-    forall (G : sgraph) (g k : nat),
-      surface_embeddable g G ->
-      C' * g <= k * k ->
-      x210_conflict_k_colourable_under_bound G k C.
+  exists p q p' q' : nat,
+    [/\ 0 < p, 0 < q, 0 < p', 0 < q' &
+      forall (G : sgraph) (g k : nat),
+        connected [set: G] ->
+        0 < k ->
+        surface_embeddable g G ->
+        p' * g <= q' * (k * k) ->
+        x210_conflict_k_colourable_under_rat_bound G k p q].
 Proof. exact: iff_refl. Qed.
 
 Print Assumptions x210_euler_genus_embeddable_compat.
 Print Assumptions surface_conflict_colouring_sqrt_genus_statement_compat.
+Print Assumptions X210Legacy_row_false.
 Print Assumptions x210_euler_genus_embeddable_canonical.
 Print Assumptions surface_conflict_colouring_sqrt_genus_statement_canonical.
 
