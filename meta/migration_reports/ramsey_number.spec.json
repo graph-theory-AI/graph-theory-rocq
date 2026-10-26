@@ -283,7 +283,28 @@
   "known_stale_snapshots": {
     "hypergraph-theory/theories/migration/uniform_hypergraph.v#X119UniformLegacy.conlon_fox_sudakov_three_uniform_ramsey_tower_statement": "D1 current snapshot: frozen with D1's raw x119_uniform, it keeps the live x119_ramsey_number, now the D10 alias of hg_ramsey_number. It stays byte-exact; the complete row is the existing D3 Hypergraph.migration.image_edge.X119ImageOriginal.conlon_fox_sudakov_three_uniform_ramsey_tower_statement (certificate conlon_fox_sudakov_three_uniform_ramsey_tower_statement_original_compat), reused by D10."
   },
-  "cross_module_consumers": [],
+  "cross_module_consumers": [
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X234.v",
+      "name": "x195_arrows",
+      "note": "Imports Extremal.conjectures.X195 and uses its graph-arrow Ramsey vocabulary (class graph-family-arrow-minimum, deferred: no frozen copy, X195 untouched); declared as routed by Lancelot (59), option (b): imported, no copy."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X234.v",
+      "name": "x195_ramsey_number",
+      "note": "Imports Extremal.conjectures.X195 and uses its graph-arrow Ramsey vocabulary (class graph-family-arrow-minimum, deferred: no frozen copy, X195 untouched); declared as routed by Lancelot (59), option (b): imported, no copy."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X234.v",
+      "name": "x195_arrows",
+      "note": "Imports Extremal.conjectures.X195 and uses its graph-arrow Ramsey vocabulary (class graph-family-arrow-minimum, deferred: no frozen copy, X195 untouched); declared as routed by Lancelot (59), option (b): imported, no copy."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X234.v",
+      "name": "x195_ramsey_number",
+      "note": "Imports Extremal.conjectures.X195 and uses its graph-arrow Ramsey vocabulary (class graph-family-arrow-minimum, deferred: no frozen copy, X195 untouched); declared as routed by Lancelot (59), option (b): imported, no copy."
+    }
+  ],
   "distinct_variants": [
     {
       "qualified": "Extremal.conjectures.X195.x195_ramsey_number",
