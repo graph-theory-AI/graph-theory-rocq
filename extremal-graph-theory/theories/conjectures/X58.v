@@ -49,3 +49,12 @@ Definition epsilon_bounded_h_free_anticomplete_pair_statement : Prop :=
           x58_anticomplete A B /\
           eps_num ^ eps_den * #|G| ^ eps_num <= eps_den ^ eps_den * #|A| ^ eps_den /\
           eps_num * #|G| <= eps_den * #|B|.
+
+(* Correction (2026-10-26, Marc's decision), kept outside the frozen doc block above: the
+   DISCREPANCY note is withdrawn. arXiv:1810.00058 Conjecture 1.4 asks for an anticomplete
+   (eps|G|^eps, eps|G|)-pair in every H-free eps-bounded graph, which is this body; eps-bounded is
+   spelled here as Delta(G) < eps|G|, equivalent to the paper's |N[v]| < eps|G| up to eps; the
+   corpus statement_text lost the exponent in PDF extraction. Both sides linear holds exactly for
+   forests H (Pure pairs I, arXiv:1809.00919, Theorem 1.4 and the remark after it). PARTIAL is the
+   upstream review's status, not an encoding defect. See meta/STATEMENT_IMPROVEMENTS.md and
+   meta/CORPUS_FEEDBACK.md item 13. *)

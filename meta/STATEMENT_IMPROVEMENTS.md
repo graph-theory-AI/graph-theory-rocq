@@ -707,6 +707,13 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   `eps_num < eps_den`.  The source asks for a pure `(eps|G|, eps|G|)`-pair, both sides linear.
   Severity: too weak.  Likely a copy of the near-linear template used in `X144.v` (where the
   `n^(1-o(1))` exponent form is correct).
+  **WITHDRAWN 2026-10-26** (Marc's decision; corpus text garbled, repaired in the encoding, as for
+  X49/X60): the finding read a corpus statement_text that lost an exponent. arXiv:1810.00058
+  Conjecture 1.3 reads "contains a pure (ε|G|^ε, ε|G|)-pair" (LaTeX
+  `$(\vare |G|^\vare, \vare |G|)$`), which is the body; the paper adds that both sides linear holds
+  only when H and its complement are forests. The polynomial A side is the 2026-07-11 audit fix
+  (`meta/X10-X110_faithfulness_audit.md`, X41). No body change; note after the Definition in
+  `X41.v`.
 
 ### Other
 
@@ -1954,6 +1961,13 @@ the back-translation of the Rocq bodies.
   for an anticomplete `(eps|G|, eps|G|)`-pair. The body bounds `B` linearly but bounds `A` by
   `eps_num^eps_den * #|G|^eps_num <= eps_den^eps_den * #|A|^eps_den`, i.e. `|A| >= eps * |G|^eps`,
   a SUBLINEAR bound whenever `eps < 1`. The two sides should carry the same linear bound.
+  **WITHDRAWN 2026-10-26** (Marc's decision; corpus text garbled, repaired in the encoding, as for
+  X49/X60): arXiv:1810.00058 Conjecture 1.4 reads "there is an anticomplete (ε|G|^ε, ε|G|)-pair";
+  the corpus statement_text lost the exponent. Both sides linear holds exactly for forests H (Pure
+  pairs I, arXiv:1809.00919, Theorem 1.4 and the remark after it), and the paper's proof of 1.4 from
+  3.4 builds an A side of size εn^ε. Audit fix of 2026-07-11
+  (`meta/X10-X110_faithfulness_audit.md`, X58). No body change; note after the Definition in
+  `X58.v`.
 - `studies:std_chv_tal_tuza_conjecture_on_maximum_odd_induced_c` (`conjectures/X115.v:57`) —
   severity: **too weak (disclosed proxy)**. Encodes `Theta(3^{n/3})` (two-sided constant factor,
   cubed) instead of the source's literal `= 3^{n/3}`, which is ill-posed over nat and already
