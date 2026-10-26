@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py directed_neighbourhood --detail
 
 - Canonical: `Digraph.foundations.neighbourhoods.Nout`.
 - Baseline: `761e776c64d251a0a9af04a40628766d012aff36`.
-- Scope: 6 helpers, 12 statements, 43 frozen objects, 188 recorded references.
-- Source checks: 435/435 pass; consistent.
+- Scope: 6 helpers, 12 statements, 43 frozen objects, 192 recorded references.
+- Source checks: 441/441 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -23,6 +23,8 @@ Full evidence: `python3 meta/migration_report.py directed_neighbourhood --detail
 | `Digraph.conjectures.X2.semidegree_oriented_paths_statement` / arxiv:2503.23191#00 | `Digraph.migration.directed_neighbourhood.semidegree_oriented_paths_statement_compat` |
 | `Digraph.conjectures.X17.stein_oriented_paths_strict_semidegree_statement` / studies:std_stein_s_conjecture_on_oriented_paths | `Digraph.migration.directed_neighbourhood.stein_oriented_paths_strict_semidegree_statement_compat` |
 | `Digraph.conjectures.X107.bounded_degree_acyclic_oriented_ramsey_linear_statement` / studies:std_buci_letzter_sudakov_problem_oriented_ramsey_num | `Digraph.migration.directed_neighbourhood.bounded_degree_acyclic_oriented_ramsey_linear_statement_compat` |
+
+Source weakenings after migration: ONE-WAY source-repair certificates (`frozen -> live`), not migration equivalences; every other row keeps its exact iff: `Digraph.conjectures.P9.antidirected_trees_in_digraphs_statement` (`2 <= k ->` -> `2 <= k -> loopless D ->`; record `meta/STATEMENT_IMPROVEMENTS.md`), `Digraph.conjectures.P9.arc_disjoint_directed_cycles_in_regular_directed_gra_statement` (`diregular D k ->` -> `0 < #|D| -> diregular D k ->`; record `meta/STATEMENT_IMPROVEMENTS.md`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py directed_neighbourhood --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
