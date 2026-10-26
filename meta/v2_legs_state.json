@@ -1024,14 +1024,14 @@
    "audit_page": "todo"
   },
   "axv_1709_09050_02": {
-   "statement": "blocked",
+   "statement": "partial",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x191-x210-batch1",
+   "commit": "x197-capture-game-reencoding",
    "package": "graph-theory-misc",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the top statement does NOT say capt3(G) > n. Foundation primitives: wagner_planar (base.v) = FAITHFUL planarity; the cops/robbers game (x197_cops_win_in) and x197_capture_time are bespoke local definitions in X197.v, not phase-1 primitives. Mis-quantification: x197_capture_time G cops t := exists C0, (forall r0, win_in t C0 r0) /\\ (forall t'<t, exists r0, ~win_in t' C0 r0). The minimality clause is boun"
+   "note": "PARTIAL (proxy) — The row asks two questions; the second, the source's precise sentence (a planar graph with capt(G) > n, arXiv:1709.09050 l.168-169), is encoded; the first (is the bound capt_3(G) <= 2n tight?) has no fixed meaning and is not encoded. Authored in X197.v:planar_cops_capture_time_linear_tight_statement."
   },
   "axv_1709_09050_03": {
    "statement": "todo",
