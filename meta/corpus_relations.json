@@ -4313,7 +4313,7 @@
     "to": null
    },
    "both_formalized": true,
-   "rocq_edge": "circular_flow_numbers_of_r_graphs_statement->three_flow_statement:implies:conditional",
+   "rocq_edge": "circular_flow_numbers_of_r_graphs_statement->three_flow_statement:implies:verified",
    "argument": "Steffen's source paper states explicitly: \"Tutte's 3-flow conjecture is equivalent to the statement that Fc(G) <= 3 for every 5-graph G.\" The t=2 instance of the source conjecture is exactly that statement (2+2/t = 3, 5-graphs). Since the source conjecture asserts the bound for ALL t>1, its truth contains the t=2 case, which is equivalent to (hence implies) the 3-flow conjecture. The converse fails: the 3-flow conjecture says nothing about t>2. So the relation is a strict one-way implication, not equivalence, matching the OPG context \"For t=2 it is Tutte's 3-flow conjecture.\" (Note the source is now disproved for large even t, but the t=2 case and thus the implication route remain intact.)",
    "citations": [
     "https://arxiv.org/abs/1310.8441",
