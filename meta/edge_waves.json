@@ -237,8 +237,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Arthur (mathematics programme, 2026-10-25): steffen_3flow_5graphs proves external_steffen_3flow_5graphs_statement (classical-lemmas TODO 5); the conditional circular_flow_numbers_of_r_graphs_implies_three_flow of wave E5 is kept",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Marcol (TODO #5 review, 2026-10-26)",
+   "reviewed_at": "2026-10-26",
    "note": "The t=2 instance of Row 1 is exactly 'every 5-graph has circular flow number at most 2+2/2=3' (cfn_bound_t2); the direction of Steffen's cited equivalence used here is proved as steffen_3flow_5graphs: a 4-edge-connected G inflates (every vertex a doubled cycle through its arc ends) to a 5-graph, whose rational flow at r = 3+1/(m+1) orients the edges so that no set has more than twice as many leaving as entering edges, hence an integer flow with values 1 and 2 (odiff_demand_cut), which contracts to G"
   },
   "conj2_1605_statement->graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement:equiv": {
