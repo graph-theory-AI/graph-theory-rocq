@@ -1261,14 +1261,14 @@
    "note": "Authored in X208.v:Pt_free_maximum_independent_set_polytime_statement. Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: Pt_free_maximum_independent_set_polytime_statement."
   },
   "axv_1803_08462_00": {
-   "statement": "partial",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "asymptotics-foundation-retarget",
+   "commit": "x209-multicoloured-cut-reencoding",
    "package": "hypergraph-theory",
-   "note": "PARTIAL (proxy) — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = a minimality mis-quantification in the extremal-min helper: X209.v line 41 reads `forall (T' : finType) (E' : {set {set T}}) (y : nat), ...` — the bound `T'` is unused and `E'` is typed over the OUTER witness type `T`, so \"smallest max r-cut over all m-edge k-graphs\" is actually the minimum over m-edge k-graphs on one chooseable vertex set, not all. `x209_is_min_scaled_excess` is thus non-functional and `exists exc Authored in X209.v:hypergraph_cut_excess_theta_sqrt_statement."
+   "note": "Authored in X209.v:hypergraph_cut_excess_theta_sqrt_statement. Re-encoded 2026-10-26 (coordination/PROGRAMME.md A2 with the A4 direction re-encode; frozen by the A9 cut_size and D1 uniform_hypergraph families): the multicoloured cut and the baseline S(k,r) r!/r^k of arXiv:1803.08462, and the minimum over every vertex type (x209_is_min_mc_scaled_excess); the earlier non-monochromatic cut and one-type minimum stay only in the frozen chains. Disproved by the source's Theorem 1.2."
   },
   "axv_1803_10962_00": {
    "statement": "partial",

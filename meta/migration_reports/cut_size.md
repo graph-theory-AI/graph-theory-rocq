@@ -6,14 +6,16 @@ Full evidence: `python3 meta/migration_report.py cut_size --details /tmp/migrati
 
 - Canonical: `GTBase.common.cut_size`.
 - Baseline: `9de20ca72a0d7c8279ff8861033bfd80ce12a84a`.
-- Scope: 4 helpers, 3 statements, 19 frozen objects, 38 recorded references.
-- Source checks: 141/141 pass; consistent.
+- Scope: 4 helpers, 3 statements, 19 frozen objects, 49 recorded references.
+- Source checks: 146/146 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
 | `Extremal.conjectures.X76.ck_free_max_cut_polynomial_surplus_statement` / studies:std_alon_et_al_c_k_free_max_cut_conjecture | `Extremal.migration.cut_size.ck_free_max_cut_polynomial_surplus_statement_compat` |
 | `Extremal.conjectures.X78.h_free_max_cut_three_fourths_surplus_statement` / studies:std_alon_krivelevich_sudakov_max_cut_exponent_conjec | `Extremal.migration.cut_size.h_free_max_cut_three_fourths_surplus_statement_compat` |
 | `Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement` / arxiv:1803.08462#00 | `Hypergraph.migration.cut_size.hypergraph_cut_excess_theta_sqrt_statement_compat` |
+
+Source re-encodings after migration: certificates of each record's stated relation, not migration equivalences; every other row keeps its exact iff: `Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement` (`x209_is_min_scaled_excess r k m (excess m)` -> `x209_is_min_mc_scaled_excess r k m (excess m)`; relation `({frozen} -> True) /\ ({live} -> True)`; record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `implemented_by`, `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `commit`, `note`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py cut_size --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

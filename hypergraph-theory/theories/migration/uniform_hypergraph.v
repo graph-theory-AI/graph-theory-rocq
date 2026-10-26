@@ -23,6 +23,11 @@
     of meta/STATEMENT_IMPROVEMENTS.md).  Its certificate below is therefore a ONE-WAY
     SOURCE-REPAIR certificate (live -> frozen), NOT a migration equivalence: the converse
     would derive the open K_5^{(3)} conjecture from the K_4^{(3)} one.  It is bound by the spec's [repair] entry.
+    X209 RE-ENCODING (2026-10-26, PROGRAMME A2 with the A4 direction re-encode; see the
+    arxiv:1803.08462#00 entry of meta/STATEMENT_IMPROVEMENTS.md): the live X209 row uses the source's
+    multicoloured cut and a minimum over every vertex type; its two certificates below carry only the
+    placeholder relation of the spec's repair entry, since neither row implies the other (the defects are
+    kernel-checked in migration/cut_size.v).
     Every other row of this family keeps its exact iff.  The regeneration spec is
     meta/migration_reports/uniform_hypergraph.spec.json. *)
 From GTBase Require Import base.
@@ -579,11 +584,12 @@ Proof.
 exact: iff_refl.
 Qed.
 
+(** X209 re-encoding: the placeholder relation of the repair entry, not a claim (see the header). *)
 Lemma hypergraph_cut_excess_theta_sqrt_statement_compat :
-  X209UniformLegacy.hypergraph_cut_excess_theta_sqrt_statement <->
-  Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement.
+  (X209UniformLegacy.hypergraph_cut_excess_theta_sqrt_statement -> True) /\
+  (Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement -> True).
 Proof.
-exact: iff_refl.
+by split.
 Qed.
 
 Lemma hypergraph_cop_number_sqrt_n_over_k_statement_compat :
@@ -689,13 +695,12 @@ split=> -[T [E [uE cE sE min]]]; exists T, E; split=> //.
 - by move=> T' E' y uE' cE' sE'; exact: (min T' E' y uE' cE' (proj1 (C _ _ _ _ _) sE')).
 Qed.
 
+(** X209 re-encoding: the placeholder relation of the repair entry, not a claim (see the header). *)
 Lemma hypergraph_cut_excess_theta_sqrt_statement_original_compat :
-  X209UniformOriginal.hypergraph_cut_excess_theta_sqrt_statement <->
-  Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement.
+  (X209UniformOriginal.hypergraph_cut_excess_theta_sqrt_statement -> True) /\
+  (Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement -> True).
 Proof.
-split=> st r k r2 rk; have [excess [ex th]] := st r k r2 rk; exists excess; split=> // m.
-- exact: (proj1 (x209_is_min_scaled_excess_original_compat _ _ _ _) (ex m)).
-- exact: (proj2 (x209_is_min_scaled_excess_original_compat _ _ _ _) (ex m)).
+by split.
 Qed.
 
 Lemma critical_three_uniform_min_degree_seven_statement_original_compat :

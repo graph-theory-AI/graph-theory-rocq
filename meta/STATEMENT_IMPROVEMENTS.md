@@ -1634,6 +1634,41 @@ by equivalence lemmas.
   used, and `E'` is typed over the OUTER witness type `T`. The "smallest maximum r-cut over all
   m-edge k-graphs" is therefore a minimum over m-edge k-graphs on ONE chooseable vertex set. Fix:
   type `E'` over `T'`.
+  **RE-ENCODED 2026-10-26** (coordination/PROGRAMME.md A2 with the A4 direction re-encode, routed by
+  Lancelot, message 9; the row is frozen by the A9 cut_size and D1 uniform_hypergraph families). The
+  source's own definitions (arXiv:1803.08462 e-print, sha256 572e09cb..., `hypergraph-max-cut.tex` sha256
+  ecb65b30...; copy in checkouts/lancelot/.lancelot-scratch/x209-src, the official deposit is the Mac's)
+  show a SECOND defect: "the size of the $r$-cut [is] the number of edges which have a vertex from every
+  part (we say such edges are \emph{multicoloured})" (l.291-294, and the abstract l.188-190), with the
+  random baseline "$\frac{S(k,r)r!}{r^{k}}m$" and the excess "its size minus $(S(k,r)r!/r^{k})m$"
+  (l.298-305), while the encoding counted non-monochromatic edges with the baseline `1 - r^(1-k)`; the two
+  agree only for `r = 2`. `hypergraph_cut_excess_theta_sqrt_statement` now uses the new local
+  `x209_is_min_mc_scaled_excess` (the multicoloured cut `x209_mc_cut_size`, the scaled excess
+  `r^k * c - S(k,r) r! * m` through the Stirling recursion `x209_stirling2`, and the minimum over every
+  vertex type, `E'` over `T'`). The body's one replacement is
+  `x209_is_min_scaled_excess r k m (excess m)` -> `x209_is_min_mc_scaled_excess r k m (excess m)`; the
+  earlier helpers stay unchanged for the frozen chains. This is a RE-ENCODING, not a migration
+  equivalence and not a one-way repair:
+  - NO implication holds in either direction: the cuts differ for `r >= 3`, and the frozen minimum ranges
+    over one fixed vertex type, so it is not the true minimum even at `r = 2`. The repair entries'
+    relation `({frozen} -> True) /\ ({live} -> True)` is a PLACEHOLDER the gate accepts, not a claim.
+  - The substance is the two defects, kernel-checked first under non-row names (the receipt's scratch
+    files) and then as the named lemmas of `hypergraph-theory/theories/migration/cut_size.v`, which the
+    cut_size spec lists as extra certificates: `x209_old_min_not_minimal` (the frozen minimum accepts 7 at
+    `(r, k, m) = (2, 3, 7)`, its competitors living on five vertices, while the Fano plane has scaled excess
+    at most 3) and `x209_cut_defect` (one triple, `r = 3`, coloured 0, 0, 2: cut in the frozen count, not
+    multicoloured).
+  - The `repair` entries of `meta/migration_reports/cut_size.spec.json` (statement object) and
+    `meta/migration_reports/uniform_hypergraph.spec.json` (statement and original-statement objects) bind
+    the one exact text replacement and the repaired doc block's hash, name this entry as their record, and
+    list the fields the repair changes: the manifest-row fields `implemented_by`, `source_verified_by`,
+    `source_verified_at` and `verification_note`, and the leg fields `statement` (`partial` -> `done`),
+    `commit` and `note`.
+  - `x209_stirling2` carries closed sanity lemmas next to it (`S(3,2) 2! = 6`, `S(3,3) 3! = 6`,
+    `S(2,3) = 0`, `S(k,1) = 1` for `k >= 1`, and the source's remark `S(k,2) 2! + 2 = 2^k`).
+  The new body encodes the source's conjecture, which the source's Theorem 1.2 (`thm:nontrivial`: for
+  `2 <= r <= k` with `r >= 3` or `k >= 4`, every m-edge k-graph has an r-cut with excess
+  `Omega(m^(5/9))`) refutes, as the corpus status `disproved` records.
 - `opg:turans_problem_for_hypergraphs` (`U12.v:105`) — severity: **too weak** (partial coverage).
   The corpus row carries TWO conjectures; only the first (3-uniform on 3n vertices, no
   `K_4^(3)`, bound `n^2(5n-3)/2`) is formalised. The second (3-uniform on 2n vertices, no
