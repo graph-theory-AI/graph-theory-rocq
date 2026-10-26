@@ -5637,6 +5637,475 @@
       },
       "faithfulness_verified_by": "Arthur (X232 wave verification, 2026-10-26)",
       "faithfulness_result": "Readback 2026-10-26 (verifier Arthur): 1/1 PASS. arxiv:1904.12273#01 (Chudnovsky-Scott-Seymour heavy-path extension): ell >= 5 is fixed and the bound b depends on ell only (l.124-125; forall ell >= 5, exists b, forall G C M); x232_long_odd_hole is a GTBase hole (induced cycle on at least four vertices) of odd length at least ell, length = vertices = edges; x232_shortest_long_odd_hole minimises over the long odd holes of G (l.133-134); x232_major is l.126-127 verbatim (off C, and a vertex without a neighbour on C is not major); a path of C has no second reading, since C is chordless a path of G[V(C)] is a window of C, and x232_cycle_path takes m + 1 cyclically consecutive vertices with m < |C| (never the closed cycle), of length (size p).-1 edges; the m0 hypothesis and the conclusion (every member of M adjacent to a vertex of p) are the row's words. The paper's candidate context (l.129-132, 'for our purposes' l.146, l.359-360) is not in the row and is not encoded, as the Notes say. The statement is neither weaker nor stronger than the row, so the refutation in applications/heavy_path_disproof.v refutes the row as stated; a bound depending on |M| as well is refuted too (|M| = 4)."
+    },
+    "X233": {
+      "phase": "X233",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X233.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X233 (A3; routing Lancelot (18)/(20), design x233-design-by-marcol agreed by Lancelot (27) and Arthur (item 105)), branch math/marcol-x233-20261026, 2026-10-26",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x233-dense-sparse-six",
+      "rows": {
+        "axv_2105_07370_00": {
+          "formal_name": "restricted_union_cover_statement",
+          "source_hash": "7a3b2be9f5be1f77facad0b8013ed6aabf337994f02c2341177a2596a746240b",
+          "note": "Chudnovsky-Scott-Seymour-Spirkl, Strengthening Rodl's theorem (arXiv:2105.07370, paper.tex sha256 0d51926b): the union variant (l.126-127) of Theorem 1.4 (l.119-123); eps-restricted l.89-91 (Delta of G[X] or of the complement on X at most eps|X|), H-free l.86-88 = induced_free; eps = a/b by monotonicity. Implied by the same paper's Theorem 1.4 (a partition is a union; design finding F1, status bookkeeping Lancelot's).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g233_cover_hyp_inhabited",
+              "claim": "g233_cover_hyp_claim",
+              "references": [
+                "restricted_union_cover_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g233_cover_not_trivially_true",
+              "claim": "g233_cover_ntt_claim",
+              "references": [
+                "restricted_union_cover_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g233_restricted_sanity",
+                "claim": "g233_restricted_claim",
+                "references": [
+                  "x233_restricted"
+                ]
+              },
+              {
+                "theorem": "g233_copies_sanity",
+                "claim": "g233_copies_claim",
+                "references": [
+                  "x233_induced_copies"
+                ]
+              },
+              {
+                "theorem": "g233_blockade_sanity",
+                "claim": "g233_blockade_claim",
+                "references": [
+                  "x233_blockade",
+                  "x233_width",
+                  "x233_transversal_triangle"
+                ]
+              },
+              {
+                "theorem": "g233_density_sanity",
+                "claim": "g233_density_claim",
+                "references": [
+                  "x233_max_density_at_most"
+                ]
+              },
+              {
+                "theorem": "g233_close_homogeneous_sanity",
+                "claim": "g233_close_homogeneous_claim",
+                "references": [
+                  "x233_close",
+                  "x233_homogeneous"
+                ]
+              },
+              {
+                "theorem": "g233_biclique_sanity",
+                "claim": "g233_biclique_claim",
+                "references": [
+                  "x233_biclique_number",
+                  "x233_degree_bounded"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2307_06455_00": {
+          "formal_name": "polynomial_nikiforov_statement",
+          "source_hash": "f39b0ff90ffc42a40eb4cb29eb7d6ed2e2aa835b13a4f8d46aad7126a7094c0f",
+          "note": "Nguyen-Scott-Seymour, Induced subgraph density IV (arXiv:2307.06455, density4.tex sha256 804d8076), Conjecture 1.8 (l.522-526): ind_H(G) counts isomorphisms onto induced subgraphs (l.162, l.498); eps = a/b, 0 < 2a < b, by the finiteness argument; d natural by monotonicity; guard 0 < |H| (the null H makes the hypothesis vacuous).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g233_nikiforov_hyp_inhabited",
+              "claim": "g233_nikiforov_hyp_claim",
+              "references": [
+                "polynomial_nikiforov_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g233_nikiforov_not_trivially_true",
+              "claim": "g233_nikiforov_ntt_claim",
+              "references": [
+                "polynomial_nikiforov_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g233_restricted_sanity",
+                "claim": "g233_restricted_claim",
+                "references": [
+                  "x233_restricted"
+                ]
+              },
+              {
+                "theorem": "g233_copies_sanity",
+                "claim": "g233_copies_claim",
+                "references": [
+                  "x233_induced_copies"
+                ]
+              },
+              {
+                "theorem": "g233_blockade_sanity",
+                "claim": "g233_blockade_claim",
+                "references": [
+                  "x233_blockade",
+                  "x233_width",
+                  "x233_transversal_triangle"
+                ]
+              },
+              {
+                "theorem": "g233_density_sanity",
+                "claim": "g233_density_claim",
+                "references": [
+                  "x233_max_density_at_most"
+                ]
+              },
+              {
+                "theorem": "g233_close_homogeneous_sanity",
+                "claim": "g233_close_homogeneous_claim",
+                "references": [
+                  "x233_close",
+                  "x233_homogeneous"
+                ]
+              },
+              {
+                "theorem": "g233_biclique_sanity",
+                "claim": "g233_biclique_claim",
+                "references": [
+                  "x233_biclique_number",
+                  "x233_degree_bounded"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2111_00532_00": {
+          "formal_name": "transversal_triangle_pure_pair_statement",
+          "source_hash": "54998b133be82e94092ea3a07706176538ea3ddb8679e680b788f2fd6fccd7dc",
+          "note": "Scott-Seymour-Spirkl, Pure pairs IX (arXiv:2111.00532, paper-pure9.tex sha256 5d338f15), Question 1.3 (l.130-135), affirmative form: |X| >= eps W and |Y| >= eps W^c as in the paper; the pinned text's symmetric |X|, |Y| >= eps W^c is the known Erdos-Hajnal-Pach theorem (l.113-121; design finding F2); c = 1/q, eps = 1/p by monotonicity (W >= 1).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g233_pure_hyp_inhabited",
+              "claim": "g233_pure_hyp_claim",
+              "references": [
+                "transversal_triangle_pure_pair_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g233_pure_not_trivially_true",
+              "claim": "g233_pure_ntt_claim",
+              "references": [
+                "transversal_triangle_pure_pair_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g233_restricted_sanity",
+                "claim": "g233_restricted_claim",
+                "references": [
+                  "x233_restricted"
+                ]
+              },
+              {
+                "theorem": "g233_copies_sanity",
+                "claim": "g233_copies_claim",
+                "references": [
+                  "x233_induced_copies"
+                ]
+              },
+              {
+                "theorem": "g233_blockade_sanity",
+                "claim": "g233_blockade_claim",
+                "references": [
+                  "x233_blockade",
+                  "x233_width",
+                  "x233_transversal_triangle"
+                ]
+              },
+              {
+                "theorem": "g233_density_sanity",
+                "claim": "g233_density_claim",
+                "references": [
+                  "x233_max_density_at_most"
+                ]
+              },
+              {
+                "theorem": "g233_close_homogeneous_sanity",
+                "claim": "g233_close_homogeneous_claim",
+                "references": [
+                  "x233_close",
+                  "x233_homogeneous"
+                ]
+              },
+              {
+                "theorem": "g233_biclique_sanity",
+                "claim": "g233_biclique_claim",
+                "references": [
+                  "x233_biclique_number",
+                  "x233_degree_bounded"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2311_05500_00": {
+          "formal_name": "bounded_density_universal_graph_statement",
+          "source_hash": "8a47065349951a9c51b81b294cd630c805ca2cbd7a560be11357de6c18974849",
+          "note": "Alon-Dodson-Jackson-McCarty-Nenadov-Southern (arXiv:2311.05500, univden-arXiv-v2.tex sha256 7f301cf9), Conjecture 1.1 (l.124-131): d = a/b > 1, C = C(d) before n, e(G)^a <= C^a n^(2a-b); m(H) <= a/b iff b e(H[S]) <= a|S| for every vertex set S (l.108-115); universal = has_subgraph for every member (l.101-102).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g233_universal_hyp_inhabited",
+              "claim": "g233_universal_hyp_claim",
+              "references": [
+                "bounded_density_universal_graph_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g233_universal_not_trivially_true",
+              "claim": "g233_universal_ntt_claim",
+              "references": [
+                "bounded_density_universal_graph_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g233_restricted_sanity",
+                "claim": "g233_restricted_claim",
+                "references": [
+                  "x233_restricted"
+                ]
+              },
+              {
+                "theorem": "g233_copies_sanity",
+                "claim": "g233_copies_claim",
+                "references": [
+                  "x233_induced_copies"
+                ]
+              },
+              {
+                "theorem": "g233_blockade_sanity",
+                "claim": "g233_blockade_claim",
+                "references": [
+                  "x233_blockade",
+                  "x233_width",
+                  "x233_transversal_triangle"
+                ]
+              },
+              {
+                "theorem": "g233_density_sanity",
+                "claim": "g233_density_claim",
+                "references": [
+                  "x233_max_density_at_most"
+                ]
+              },
+              {
+                "theorem": "g233_close_homogeneous_sanity",
+                "claim": "g233_close_homogeneous_claim",
+                "references": [
+                  "x233_close",
+                  "x233_homogeneous"
+                ]
+              },
+              {
+                "theorem": "g233_biclique_sanity",
+                "claim": "g233_biclique_claim",
+                "references": [
+                  "x233_biclique_number",
+                  "x233_degree_bounded"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2403_08303_00": {
+          "formal_name": "polynomial_close_rodl_statement",
+          "source_hash": "e78ab92787297bd5744872e47279100c659d3428f361efecfaf967ddb149e60b",
+          "note": "Bucic-Fox-Pham (arXiv:2403.08303, main.tex sha256 fc51ad74), Conjecture 10 (l.327-329): proper hereditary F (hereditary_class, some graph outside); alpha-close l.325 with edits counted as ordered pairs (alpha n^2/2 exact); eps-homogeneous l.257-258 cross-multiplied by C(|S|,2); eps = a/b, 0 < 2a < b, by the finiteness argument; C, d natural by monotonicity.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g233_rodl_hyp_inhabited",
+              "claim": "g233_rodl_hyp_claim",
+              "references": [
+                "polynomial_close_rodl_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g233_rodl_not_trivially_true",
+              "claim": "g233_rodl_ntt_claim",
+              "references": [
+                "polynomial_close_rodl_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g233_restricted_sanity",
+                "claim": "g233_restricted_claim",
+                "references": [
+                  "x233_restricted"
+                ]
+              },
+              {
+                "theorem": "g233_copies_sanity",
+                "claim": "g233_copies_claim",
+                "references": [
+                  "x233_induced_copies"
+                ]
+              },
+              {
+                "theorem": "g233_blockade_sanity",
+                "claim": "g233_blockade_claim",
+                "references": [
+                  "x233_blockade",
+                  "x233_width",
+                  "x233_transversal_triangle"
+                ]
+              },
+              {
+                "theorem": "g233_density_sanity",
+                "claim": "g233_density_claim",
+                "references": [
+                  "x233_max_density_at_most"
+                ]
+              },
+              {
+                "theorem": "g233_close_homogeneous_sanity",
+                "claim": "g233_close_homogeneous_claim",
+                "references": [
+                  "x233_close",
+                  "x233_homogeneous"
+                ]
+              },
+              {
+                "theorem": "g233_biclique_sanity",
+                "claim": "g233_biclique_claim",
+                "references": [
+                  "x233_biclique_number",
+                  "x233_degree_bounded"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2307_08361_00": {
+          "formal_name": "polynomial_degree_bounding_statement",
+          "source_hash": "43fdafa437bf5235dbea5d32fb03403f959ef334d6ab30ce9fcafe381c7cf77e",
+          "note": "Du-Girao-Hunter-McCarty-Scott (arXiv:2307.08361, Inducedfourcycle.tex sha256 77b41154), the question l.192, affirmative form: degree-bounded and tau l.181, d(G) = 2e/|G| l.213; polynomials with natural coefficients (horner_nat) lose nothing. Upstream solved (Girao-Hunter 2025), no formal resolution.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g233_degree_hyp_inhabited",
+              "claim": "g233_degree_hyp_claim",
+              "references": [
+                "polynomial_degree_bounding_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g233_degree_not_trivially_true",
+              "claim": "g233_degree_ntt_claim",
+              "references": [
+                "polynomial_degree_bounding_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g233_restricted_sanity",
+                "claim": "g233_restricted_claim",
+                "references": [
+                  "x233_restricted"
+                ]
+              },
+              {
+                "theorem": "g233_copies_sanity",
+                "claim": "g233_copies_claim",
+                "references": [
+                  "x233_induced_copies"
+                ]
+              },
+              {
+                "theorem": "g233_blockade_sanity",
+                "claim": "g233_blockade_claim",
+                "references": [
+                  "x233_blockade",
+                  "x233_width",
+                  "x233_transversal_triangle"
+                ]
+              },
+              {
+                "theorem": "g233_density_sanity",
+                "claim": "g233_density_claim",
+                "references": [
+                  "x233_max_density_at_most"
+                ]
+              },
+              {
+                "theorem": "g233_close_homogeneous_sanity",
+                "claim": "g233_close_homogeneous_claim",
+                "references": [
+                  "x233_close",
+                  "x233_homogeneous"
+                ]
+              },
+              {
+                "theorem": "g233_biclique_sanity",
+                "claim": "g233_biclique_claim",
+                "references": [
+                  "x233_biclique_number",
+                  "x233_degree_bounded"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x233_restricted": {
+          "classification": "paper_specific",
+          "reason": "eps-restricted set (arXiv:2105.07370 l.89-91 = arXiv:2307.06455 l.489-490): G[X] or the complement on X has maximum degree at most (a/b)|X|; GTBase Delta, upstream compl and induced are reused."
+        },
+        "x233_induced_copies": {
+          "classification": "paper_specific",
+          "reason": "ind_H(G), the number of copies of H in G, a copy being an isomorphism onto an induced subgraph (arXiv:2307.06455 l.162, l.498); no shared counter of induced embeddings exists (induced_free is a Prop)."
+        },
+        "x233_blockade": {
+          "classification": "paper_specific",
+          "reason": "A blockade of length 3: pairwise disjoint nonempty blocks (arXiv:2111.00532 l.89-90)."
+        },
+        "x233_width": {
+          "classification": "paper_specific",
+          "reason": "The width of a blockade, the minimum block size (arXiv:2111.00532 l.90)."
+        },
+        "x233_transversal_triangle": {
+          "classification": "paper_specific",
+          "reason": "A B-transversal triangle: one vertex in each block (arXiv:2111.00532 l.91-93); GTBase triangle_set is reused for the triangle."
+        },
+        "x233_max_density_at_most": {
+          "classification": "paper_specific",
+          "reason": "Density m(H) <= a/b, the maximum of e(H)/v(H) over subgraphs (arXiv:2311.05500 l.108-115); GTBase has degeneracy and average degree, not this maximum density."
+        },
+        "x233_close": {
+          "classification": "paper_specific",
+          "reason": "alpha-close to a family (arXiv:2403.08303 l.325): an edit to a graph of F on the same vertex set changing at most alpha n^2/2 pairs."
+        },
+        "x233_homogeneous": {
+          "classification": "paper_specific",
+          "reason": "eps-homogeneous set (arXiv:2403.08303 l.257-258): edge density at most eps or at least 1 - eps."
+        },
+        "x233_biclique_number": {
+          "classification": "paper_specific",
+          "reason": "tau(G), the largest s with a not necessarily induced K_{s,s} (arXiv:2307.08361 l.181); GTBase set_pairs complete_between is reused."
+        },
+        "x233_degree_bounded": {
+          "classification": "paper_specific",
+          "reason": "A degree-bounded class (arXiv:2307.08361 l.181): some g : N -> N with average degree at most g(tau)."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
