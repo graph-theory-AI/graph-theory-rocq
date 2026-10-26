@@ -7,7 +7,12 @@
       [(n - t + 3)] and both the upper-bound and the attainment halves; X175 keeps its eventual-in-t upper envelope.
     - [X174Original], [X175Original]: the complete rows, composing B8's frozen immersion chain (text at 048c768) and
       B2's frozen subdivision chain (text at 9e03072).  Their modules are aliased, not imported; the bridges reuse
-      their certificates. *)
+      their certificates.
+    - X174 source repair (2026-10-26, coordination/PROGRAMME.md A2; record meta/STATEMENT_IMPROVEMENTS.md): both frozen
+      X174 rows are false ([X174Legacy_row_false], [X174Original_row_false]: at t = 2, n = 0 the bound [(n - t) + 3]
+      asks the empty graph for three cliques) and the live row uses [x174_extremal_bound_exact].  Their certificates
+      are ONE-WAY source-repair certificates [frozen -> live] (direction "weaken"), not migration equivalences; the
+      count and X175 certificates keep their exact iffs. *)
 From Corelib Require Import Setoid Morphisms.
 From GTBase Require Import base clique_counts.
 From Minor.conjectures Require Import U7 X174 X175.
@@ -103,12 +108,26 @@ Proof.
 by rewrite /x175_clique_count nonempty_clique_countE.
 Qed.
 
-Lemma kt_immersion_clique_count_extremal_statement_compat :
-  X174Legacy.kt_immersion_clique_count_extremal_statement <-> kt_immersion_clique_count_extremal_statement.
+(** X174 SOURCE REPAIR (2026-10-26, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md), not a migration
+    equivalence.  [x174_extremal_bound] computes (n - t) + 3 in the naturals, so at n = t - 2 the frozen rows ask for a
+    graph on t - 2 vertices with 2^(t-2) * 3 cliques; at t = 2, n = 0 the only graph, the empty one, has one clique, so
+    both frozen rows are false ([B8.x174_empty_clique_count]).  The live row uses [x174_extremal_bound_exact]
+    (n + 3 - t); its certificates are ONE-WAY, [frozen -> live] (direction "weaken"), through that falsity. *)
+Lemma X174Legacy_row_false : ~ X174Legacy.kt_immersion_clique_count_extremal_statement.
 Proof.
-rewrite /X174Legacy.kt_immersion_clique_count_extremal_statement /kt_immersion_clique_count_extremal_statement.
-by setoid_rewrite x174_clique_count_compat.
+move=> h; have [_ [G [hG [_ hc]]]] := h 2 0 (leqnn 2) (leq0n _).
+by move: hc; rewrite x174_clique_count_compat B8.x174_empty_clique_count.
 Qed.
+
+Lemma X174Original_row_false : ~ X174Original.kt_immersion_clique_count_extremal_statement.
+Proof.
+move=> h; have [_ [G [hG [_ hc]]]] := h 2 0 (leqnn 2) (leq0n _).
+by move: hc; rewrite x174_clique_count_compat B8.x174_empty_clique_count.
+Qed.
+
+Lemma kt_immersion_clique_count_extremal_statement_compat :
+  X174Legacy.kt_immersion_clique_count_extremal_statement -> kt_immersion_clique_count_extremal_statement.
+Proof. by move/X174Legacy_row_false. Qed.
 
 (** The eventual threshold [N] is kept in both directions; only the count is rewritten. *)
 Lemma kt_subdivision_clique_count_asymptotic_statement_compat :
@@ -118,14 +137,11 @@ split=> h a b a0 b0; have [N hN] := h a b a0 b0; exists N => t Nt G noKt;
   move: (hN t Nt G noKt); by rewrite x175_clique_count_compat.
 Qed.
 
-(** Complete X174: B8's frozen immersion chain is kept; only the count is rewritten, then B8's certificate. *)
+(** Complete X174: B8's frozen immersion chain is kept; the frozen complete row is false, so the certificate is the
+    one-way [frozen -> live] of the source repair above. *)
 Lemma kt_immersion_clique_count_extremal_statement_original_compat :
-  X174Original.kt_immersion_clique_count_extremal_statement <-> kt_immersion_clique_count_extremal_statement.
-Proof.
-apply: (iff_trans _ B8.kt_immersion_clique_count_extremal_statement_compat).
-rewrite /X174Original.kt_immersion_clique_count_extremal_statement /B8.X174Legacy.kt_immersion_clique_count_extremal_statement.
-by setoid_rewrite x174_clique_count_compat.
-Qed.
+  X174Original.kt_immersion_clique_count_extremal_statement -> kt_immersion_clique_count_extremal_statement.
+Proof. by move/X174Original_row_false. Qed.
 
 (** Complete X175: B2's frozen subdivision chain is kept; only the count is rewritten, then B2's certificate. *)
 Lemma kt_subdivision_clique_count_asymptotic_statement_original_compat :

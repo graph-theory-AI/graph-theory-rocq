@@ -14,7 +14,12 @@
     the pairwise edge-disjointness of their edge sets.  No earlier migration froze
     either chain, so no historical original is owed.  The grounding lemmas of
     grounding_U7.v keep their statements.  Source hashes, substitutions and the
-    per-row theorem names are in meta/migration_reports/path_edges.md. *)
+    per-row theorem names are in meta/migration_reports/path_edges.md.
+    - X174 source repair (2026-10-26, coordination/PROGRAMME.md A2; record meta/STATEMENT_IMPROVEMENTS.md): the frozen
+      [X174Legacy] row is false ([X174Legacy_row_false]: at t = 2, n = 0 its bound [(n - t) + 3] asks the empty graph
+      for three cliques) and the live row uses [x174_extremal_bound_exact].  Its certificate is a ONE-WAY source-repair
+      certificate [frozen -> live] (direction "weaken"), not a migration equivalence; the other certificates keep their
+      exact iffs. *)
 
 From GTBase Require Import base.
 From GraphTheory Require Import minor connectivity coloring.
@@ -85,13 +90,35 @@ Lemma x174_no_Kt_immersion_compat (G : sgraph) (t : nat) :
   X174Legacy.no_Kt_immersion G t <-> x174_no_Kt_immersion G t.
 Proof. exact: iff_refl. Qed.
 
+(** X174 SOURCE REPAIR (2026-10-26, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md), not a migration
+    equivalence.  [x174_extremal_bound] computes (n - t) + 3 in the naturals, so at n = t - 2 the frozen row asks for
+    a graph on t - 2 vertices with 2^(t-2) * 3 cliques; at t = 2, n = 0 the only graph, the empty one, has one clique
+    (the empty set), so the frozen row is false.  The live row uses [x174_extremal_bound_exact] (n + 3 - t); its
+    certificate is ONE-WAY, [frozen -> live] (direction "weaken"), through that falsity. *)
+Lemma x174_empty_clique_count (G : sgraph) : #|G| = 0 -> x174_clique_count G = 1.
+Proof.
+move=> h0; change (#|cliques [set: G]| = 1).
+have e (K : {set G}) : K = set0.
+  by apply/eqP; rewrite -cards_eq0 -leqn0 -h0; exact: max_card.
+rewrite (_ : cliques _ = [set set0]) ?cards1 //.
+apply/setP => K; rewrite !inE (e K) eqxx sub0set /=.
+by apply/cliqueP => x; rewrite inE.
+Qed.
+
+Lemma X174Legacy_row_false : ~ X174Legacy.kt_immersion_clique_count_extremal_statement.
+Proof.
+move=> h; have [_ [G [hG [_ hc]]]] := h 2 0 (leqnn 2) (leq0n _).
+by move: hc; rewrite x174_empty_clique_count.
+Qed.
+
 Lemma kt_immersion_clique_count_extremal_statement_compat :
-  X174Legacy.kt_immersion_clique_count_extremal_statement <->
+  X174Legacy.kt_immersion_clique_count_extremal_statement ->
   kt_immersion_clique_count_extremal_statement.
-Proof. exact: iff_refl. Qed.
+Proof. by move/X174Legacy_row_false. Qed.
 
 Print Assumptions path_edges_compat.
 Print Assumptions immersion_compat.
 Print Assumptions coloring_and_immersion_statement_compat.
 Print Assumptions x174_no_Kt_immersion_compat.
 Print Assumptions kt_immersion_clique_count_extremal_statement_compat.
+Print Assumptions X174Legacy_row_false.

@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py path_edges --details /tmp/migra
 - Canonical: `GTBase.walks_paths.seq_edge_set`.
 - Baseline: `048c768adce0cfcbf5b5a5763d71fc8daf483db8`.
 - Scope: 5 helpers, 7 statements, 31 frozen objects, 81 recorded references.
-- Source checks: 279/279 pass; consistent.
+- Source checks: 282/282 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -18,6 +18,8 @@ Full evidence: `python3 meta/migration_report.py path_edges --details /tmp/migra
 | `Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement` / arxiv:1606.06810#00 | `Minor.migration.path_edges.kt_immersion_clique_count_extremal_statement_compat` |
 | `Extremal.conjectures.XE2.erdos_915_statement` / erdos:915 | `Extremal.migration.path_edges.erdos_915_statement_compat` |
 | `Packing.conjectures.X178.gallai_odd_semiclique_path_decomposition_statement` / arxiv:1609.06257#00 | `Packing.migration.path_edges.gallai_odd_semiclique_path_decomposition_statement_compat` |
+
+Source weakenings after migration: ONE-WAY source-repair certificates (`frozen -> live`), not migration equivalences; every other row keeps its exact iff: `Minor.conjectures.X174.kt_immersion_clique_count_extremal_statement` (`x174_clique_count G <= x174_extremal_bound t n) /\ (exists G : sgraph, #|G| = n /\ x174_no_Kt_immersion G t /\ x174_clique_count G = x174_extremal_bound t n)` -> `x174_clique_count G <= x174_extremal_bound_exact t n) /\ (exists G : sgraph, #|G| = n /\ x174_no_Kt_immersion G t /\ x174_clique_count G = x174_extremal_bound_exact t n)`; record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `implemented_by`, `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `commit`, `note`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py path_edges --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
