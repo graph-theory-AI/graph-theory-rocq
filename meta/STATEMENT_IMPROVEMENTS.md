@@ -912,6 +912,25 @@ classically false or empty of content.  These are placeholders, not encodings.
   not the conjectured upper bound but the stronger `limsup c(g)^2/(g+1) <= 1`.  The non-orientable
   half `ec(g)` is absent: `surface_embeddable` is the orientable rotation-system Euler genus of
   `base/theories/surface.v`.
+  **RE-ENCODED 2026-10-26** (coordination/PROGRAMME.md A1; the row is frozen by no migration family; Lancelot's
+  routing (message 33) and design agreement, Marcol's design review, 2026-10-26): the audit above found three of five
+  defects. Source: arXiv:1710.11281 v1, the only version and the pin's (e-print sha256 8ee90219...,
+  `CopsandRobberNotes.tex` sha256 a78f168a...; copy in checkouts/lancelot/.lancelot-scratch/x202-src-v1): l.46 (standard
+  terminology: the usual game), l.49 (c(G)), l.53 (the genus and the nonorientable genus, the crosscap number), l.55 (c(g)
+  and c~(g), maxima over genus AT MOST g), l.142-153 (the corollary: c(g) >= g^(1/2 (1 - o(1))), the lower half is a
+  stated theorem), l.159-164 (the conjecture). The defects: (1) one-sided; (2) the surviving bound stronger than the
+  conjectured one; (3) c~(g) absent; (4) capture tested only after the robber's move (one cop never caught the robber on
+  K_2: X197's rule-6 check, the same bodies); (5) no connected guard, under which the old body was FALSE (kernel-checked
+  under non-row names: the edgeless graph on k+1 vertices is planar for `surface_embeddable` and k cops never catch a
+  robber standing on an unoccupied vertex). The game became X197's corrected one with x202_ names (one shared copy is a
+  library-migration candidate); `x202_cop_number` is c(G); `x202_cop_number_upper` / `x202_cop_number_lower` are
+  c(g) < g^(1/2 + p/q) and g^(1/2 - p/q) < c(g) over the CONNECTED graphs with `surface_embeddable g G` (the maximum is
+  finite only there, and for a connected G this is g(G) <= g), with integer powers k^(2q) against g^(q +- 2p) and the
+  guard 2p < q; the statement keeps its name. Sanity lemmas in X202.v: c(K_2) = 1 (a cop landing on the robber
+  captures), K_1 connected, planar, c(K_1) = 1, #|G| cops win on every G, the edgeless graph on n+1 vertices planar with
+  cop number n+1 (the connected guard is load-bearing), the cop number functional. Relation: none by content (old -> new
+  only vacuously: the old body is false, (5)). The leg becomes PARTIAL: c~(g) is not encoded (no audited
+  embeds-in-N_k predicate; signed_embedding.v l.94-100 and its open TODO l.22-29).
 - `opg:the_crossing_number_of_the_complete_bipartite_graph`, `opg:the_crossing_number_of_the_complete_graph`,
   `opg:crossing_numbers_and_coloring`, `opg:the_crossing_number_of_the_hypercube`,
   `opg:crossing_sequences` — **proxy** (acknowledged PARTIAL).  All five use the
