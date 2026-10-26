@@ -1092,6 +1092,18 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   repair) (`meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v`).
   Loops do not reopen the defect (a looped vertex is a one-vertex dicycle). No manifest-row or leg
   field changes; no edge uses the row.
+- `opg:antidirected_trees_in_digraphs` → `conjectures/P9.v:antidirected_trees_in_digraphs_statement` —
+  **refutable (loop)** (found 2026-10-25, Marc's decision 5). `nb_arcs` counts loops, so the
+  one-vertex digraph with a loop met the arc-count hypothesis at k = 2,
+  `(k - 2) * #|D| = 0 < 1 = nb_arcs D`, but cannot host the two-vertex antidirected tree `TT 2`.
+  **REPAIRED 2026-10-26** (coordination/PROGRAMME.md A2, with the A4 direction weaken; Lancelot's item
+  4b): the live statement now reads
+  `forall (D : diGraphType) (k : nat), 2 <= k -> loopless D -> (k - 2) * #|D| < nb_arcs D -> ...`; the
+  exact replacement is `2 <= k ->` to `2 <= k -> loopless D ->`. It is a WEAKENING (old -> new), so the
+  certificate is one-way, frozen -> live: `migration/directed_neighbourhood.v` (`P9Legacy` verbatim;
+  the row's statement entry carries the repair)
+  (`meta/probe_hints/antidirected_trees_in_digraphs_statement.v`). No manifest-row or leg field
+  changes; no Rocq edge uses the row.
 - `arxiv:1608.03040#04` (Open Problem 3) →
   `conjectures/colouring_variants.v:majority_3col_eulerian_statement` — **too strong (mild)**.
   `eulerian` keeps only the balanced-degree condition and drops connectivity, so the hypothesis is

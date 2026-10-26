@@ -302,7 +302,7 @@ Proof. by rewrite /ham /dicycle /= card_C3. Qed.
     refutes the unguarded body) are in
     meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v. *)
 Lemma arc_disjoint_hyps_nonvacuous :
-  exists D : diGraphType, (0 < #|D|)%N /\ diregular D 1.
+  exists D : diGraphType, (0 < #|D|)%N /\ diregular D 1%N.
 Proof.
 exists (tournament.C3 : diGraphType); split; first by rewrite card_C3.
 apply/forallP => u; rewrite /outdeg /degree_balance.indeg; apply/andP; split; apply/eqP.
@@ -311,4 +311,37 @@ apply/forallP => u; rewrite /outdeg /degree_balance.indeg; apply/andP; split; ap
 - rewrite (_ : [set w | w --> u] = [set u - 1]) ?cards1 //.
   apply/setP => w; rewrite !inE arcC3E.
   by case: u w => -[|[|[|]]] // ? [[|[|[|]]] //].
+Qed.
+
+(** ** The [loopless D] guard of [antidirected_trees_in_digraphs_statement] (added on
+    2026-10-26) is not vacuous: at k = 2 the transitive tournament [TT 2] (one arc, no loop)
+    is a loopless host meeting the arc bound [(2 - 2) * #|D| < nb_arcs D], and [TT 2] is also a
+    two-vertex antidirected tree, so every hypothesis of the guarded body holds together.  The
+    guard's teeth (a looped vertex refutes the unguarded body) are in
+    meta/probe_hints/antidirected_trees_in_digraphs_statement.v. *)
+Lemma TT2_antidirected_tree : antidirected_tree (TT 2).
+Proof.
+rewrite /antidirected_tree /tree_digraph; apply/andP; split; first (apply/andP; split).
+- apply/forallP => u; apply/forallP => v.
+  have [->|huv] := eqVneq u v; first exact: connect0.
+  by apply: connect1; rewrite !arcTTE -neq_ltn val_eqE.
+- rewrite card_TT /nb_arcs.
+  apply/cards1P; exists (ord0, ord_max).
+  apply/setP => -[a b]; rewrite !inE arcTTE /=.
+  by case: a b => [[|[|a]] ha] [[|[|b]] hb].
+- apply/forallP => -[[|[|m]] hm] //=.
+  + by apply/orP; right; apply/eqP; apply: eq_card0 => u; rewrite !inE arcTTE.
+  + apply/orP; left; apply/eqP; apply: eq_card0 => w; rewrite !inE arcTTE /=.
+    by case: w => [[|[|w]] hw].
+Qed.
+
+Lemma antidirected_hyps_nonvacuous :
+  exists (D : diGraphType) (T : orientedDigraph),
+    [/\ loopless D, ((2 - 2) * #|D| < nb_arcs D)%N, antidirected_tree T & #|T| = 2%N].
+Proof.
+exists (TT 2 : diGraphType), (TT 2 : orientedDigraph); split.
+- by move=> v; exact: arcxx.
+- by rewrite mul0n; apply/card_gt0P; exists (ord0, ord_max); rewrite inE arcTTE.
+- exact: TT2_antidirected_tree.
+- exact: card_TT.
 Qed.

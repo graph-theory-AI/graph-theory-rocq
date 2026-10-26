@@ -52,11 +52,13 @@
     doc-block, row and leg checks (meta/migration_report.py: an original-statement repair may rest on
     its statement in exactly one other family spec).
 
-    SOURCE REPAIR (2026-10-26, direction weaken): the live
+    SOURCE REPAIRS (2026-10-26, direction weaken): the live
     [arc_disjoint_directed_cycles_in_regular_directed_gra_statement] gained a [0 < #|D|] guard (the
-    empty digraph is k-diregular for every k and has no cycle).  [P9Legacy] stays verbatim, and the
-    row's certificate below is a ONE-WAY SOURCE-REPAIR certificate (frozen -> live), not a migration
-    equivalence; its statement entry in this spec carries the repair.
+    empty digraph is k-diregular for every k and has no cycle), and the live
+    [antidirected_trees_in_digraphs_statement] gained a [loopless D] guard ([nb_arcs] counts loops).
+    [P9Legacy] stays verbatim, and these two rows' certificates below are ONE-WAY SOURCE-REPAIR
+    certificates (frozen -> live), not migration equivalences; their statement entries in this spec
+    carry the repairs.
 
     Every other certificate keeps its exact iff. *)
 
@@ -421,10 +423,12 @@ Lemma hamilton_cycle_in_small_d_diregular_graphs_statement_compat :
   <-> Digraph.conjectures.P9.hamilton_cycle_in_small_d_diregular_graphs_statement.
 Proof. exact: iff_refl. Qed.
 
+(** One-way source-repair certificate, not a migration equivalence (2026-10-26, direction weaken):
+    the live row gained the [loopless D] guard, so the frozen row implies it. *)
 Lemma antidirected_trees_in_digraphs_statement_compat :
   P9Legacy.antidirected_trees_in_digraphs_statement
-  <-> Digraph.conjectures.P9.antidirected_trees_in_digraphs_statement.
-Proof. exact: iff_refl. Qed.
+  -> Digraph.conjectures.P9.antidirected_trees_in_digraphs_statement.
+Proof. by move=> h D k hk _; exact: h. Qed.
 
 (** One-way source-repair certificate, not a migration equivalence (2026-10-26, direction weaken):
     the live row gained the [0 < #|D|] guard, so the frozen row implies it. *)
