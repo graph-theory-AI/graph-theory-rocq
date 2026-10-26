@@ -1032,6 +1032,18 @@ class RepairTests(unittest.TestCase):
                     self.report()
         self.spec["frozen"][1]["repair"] = {**good, "row_fields": ["status"]}
         self.report()   # an optional row_fields list is accepted by the schema
+        self.spec["frozen"][1].update(repair=copy.deepcopy(good), non_corpus=True)
+        with self.assertRaisesRegex(ValueError, "reblock repair needs a corpus row"):
+            self.report()
+
+    def test_reblock_adds_no_check_to_rows_without_it(self):
+        """The compact report prints the check count, so a statement without a reblock, corpus or non-corpus, gets
+        no reblock check (a non-corpus check in every family once changed four committed reports)."""
+        for non_corpus in (False, True):
+            with self.subTest(non_corpus=non_corpus):
+                self.spec["frozen"][1]["non_corpus"] = non_corpus
+                names = [item["check"] for item in self.report()["checks"]]
+                self.assertFalse([name for name in names if "reblock" in name], names)
 
     def test_reblock_kernel_probe_is_the_exact_iff(self):
         self.reblock_fixture()

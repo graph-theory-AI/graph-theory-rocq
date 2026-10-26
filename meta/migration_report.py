@@ -1427,6 +1427,11 @@ def validate_repairs(spec: dict) -> None:
         if reblock and not set(repair["leg_fields"]) & REBLOCK_LEG_STATES:
             raise ValueError(f"{what}: a reblock repair lists at least one leg state among "
                              f"{sorted(REBLOCK_LEG_STATES)} in leg_fields")
+        # rejected here, not as a report check, so that no other family's check count (printed in the compact
+        # report) changes
+        if reblock and obj.get("non_corpus"):
+            raise ValueError(f"{what}: a reblock repair needs a corpus row and its leg-state entry, not a "
+                             "non_corpus statement")
         if obj["kind"] == "original-statement":
             # the statement object carries the text, doc-block, row and leg checks: in this spec, or else in
             # exactly one other family spec (a row migrated by one family and snapshotted by another)
@@ -1841,8 +1846,6 @@ def build_report(spec: dict, *, allow_missing_reports: bool = False) -> dict:
         if non_corpus:
             check(not rows_base.get(formal) and not rows_now.get(formal),
                   f"{formal}: explicitly non-corpus statement has no manifest row")
-            check(repair is None or repair_direction(repair) != "reblock",
-                  f"{formal}: a reblock needs a corpus row and its leg-state entry")
         else:
             # the row's derived `legs.edges` value is exempt (frozen_row); every other field stays frozen
             check(len(now_rows) == 1
