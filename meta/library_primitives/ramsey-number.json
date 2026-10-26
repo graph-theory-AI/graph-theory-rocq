@@ -12,11 +12,12 @@
     "source_definitions": [
       "Extremal.conjectures.X195.x195_ramsey_number",
       "Extremal.conjectures.X215.x215_ramsey_number",
+      "Extremal.conjectures.X230.x230_ramsey_number",
       "Hypergraph.conjectures.X117.x117_ramsey_number",
       "Hypergraph.conjectures.X119.x119_ramsey_number"
     ],
-    "consumers_remaining": 4,
-    "relation": "Attained hypergraph Ramsey number: hg_ramsey_number E C R holds when the host I_R forces a monochromatic copy of the pattern E : {set {set T}} under the palette C : Type (D5 hg_forces_mono) and every forcing host size N has R <= N. R is supplied: no existence theorem, choice or minimum extraction; arbitrary carrier, family and palette, no uniformity, nonempty-family, inhabited-palette or positivity guard (empty palette: minimum 0; a colour and the empty family: minimum #|T|). The Extremal graph-arrow Ramsey numbers (X195, X215) are separate interfaces.",
+    "consumers_remaining": 6,
+    "relation": "Attained hypergraph Ramsey number: hg_ramsey_number E C R holds when the host I_R forces a monochromatic copy of the pattern E : {set {set T}} under the palette C : Type (D5 hg_forces_mono) and every forcing host size N has R <= N. R is supplied: no existence theorem, choice or minimum extraction; arbitrary carrier, family and palette, no uniformity, nonempty-family, inhabited-palette or positivity guard (empty palette: minimum 0; a colour and the empty family: minimum #|T|). The Extremal graph-arrow Ramsey numbers (X195, X215, X230) are separate interfaces.",
     "semantic_classes": {
       "hypergraph-attained-forcing-minimum": {
         "members": [
@@ -55,6 +56,16 @@
         "state": "deferred",
         "certificates": [],
         "note": "x215_ramsey_number k N: the Boolean diagonal clique arrow holds at N and fails below. A graph-arrow interface (with the existing X215/X195 bridge), deferred to a later graph-Ramsey class; the blocked rational-limit row and the source are untouched."
+      },
+      "graph-pattern-arrow-minimum": {
+        "members": [
+          "Extremal.conjectures.X230.x230_ramsey_number"
+        ],
+        "count": 1,
+        "verdict": "distinct representation (deferred)",
+        "state": "deferred",
+        "certificates": [],
+        "note": "x230_ramsey_number H R (X230 pilot wave, 2026-10-25): every graph on R vertices or its complement contains a copy of the graph H (has_subgraph, not induced), and no smaller R arrows H; the two-colour Ramsey number of a single graph pattern. A graph-arrow interface, deferred to a later graph-Ramsey class of this owner like X195 and X215; rows untouched."
       }
     },
     "compatibility_theorems": [

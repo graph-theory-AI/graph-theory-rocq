@@ -15,7 +15,7 @@
       "Hom.conjectures.U3.strongly_regular",
       "Spectral.conjectures.D5.strongly_regular"
     ],
-    "consumers_remaining": 2,
+    "consumers_remaining": 1,
     "relation": "strongly regular parameters: GTBase.strongly_regular.strongly_regular_parameters G k lam mu is the three unguarded clauses (regular G k; adjacent pairs have lam common neighbours; distinct non-adjacent pairs have mu). Two distinct existentials: has_strongly_regular_parameters (unguarded; Hom U3 srg/strongly_regular convert to the clauses and to it; K_2, the empty graph, complete, edgeless and clique-union graphs are accepted) and connected_nontrivial_strongly_regular (exactly connected [set: G], 0 < k and k < #|G|.-1; Spectral D5 strongly_regular is a proved iff, its flat five-conjunct body not being a conversion; K_{2,2} with (2,0,2) is in, K_2 and the degenerate graphs out). Only guarded implies unguarded. The adjacency-matrix identity A^2 = k I + lam A + mu (J - I - A) over int is Spectral.foundations.strongly_regular_matrix (equivalent to the clauses for all parameters, and with the same guards to the guarded existential); grounding_D5 sr_clauses/sr_mateq/strongly_regular_alg convert to the canonicals and its theorems are proved wrappers. GTBase does not import Spectral.",
     "semantic_classes": {
       "unguarded-parameter-existential": {

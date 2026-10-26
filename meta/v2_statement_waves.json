@@ -5179,6 +5179,337 @@
       },
       "faithfulness_verified_by": "Claude Opus 5 second reader, session 01P75Y6ikkgDyzUzzoef316Z",
       "faithfulness_result": "Readback 2026-09-23: 2/2 PASS (1 row stays blocked). axv_1810_08314_00: PASS -- layering is the standard 'adjacent vertices in the same or consecutive layers' (stated without subtraction), layered_tw_le bounds the intersection of every bag with every layer, queue_number_le forbids two nested edges in one queue with the strict order ord a < ord c < ord d < ord b (so edges sharing an endpoint may share a queue, as in the standard definition), and 'bounded implies bounded' is one f quantified before k and G. axv_2002_00496_02: BLOCKED CONFIRMED -- x228_unavoidable is a faithful reading of 'the cover graph of every poset of large enough dimension has H as a minor' with the right quantifier order, but the right-hand side of Conjecture 6 (Kelly's construction, or the K_4-gluing reformulation) is figure-defined in the source and not encodable, so blocking is right and the modelling choice recorded in v2_classification.json cannot be carried out from this paper. Stronger than the implementer's note: the committed placeholder follows from the 'only if' direction of Conjecture 6 alone, which is already KNOWN (Kelly's posets have planar pathwidth-3 cover graphs), so it carries none of the conjectural content; the doc block now says so. Both statements are vacuity_probe ok and implications_X228.v records e126 as a candidate."
+    },
+    "X230": {
+      "phase": "X230",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X230.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), X230 pilot wave, branch math/marcol-x230-20261025, 2026-10-25",
+      "source_verified_by": "Arthur (X230 wave verifier, A3: pinned records re-read at b72c5857: data/arxiv_extracted/1905.05312.json[1], 2108.00987.json[0], 2108.00991.json[0], 2311.01887.json[2] and the four data/arxiv_reviews records)",
+      "source_verified_at": "2026-10-25",
+      "commit": "x230-prospective-pilot",
+      "rows": {
+        "axv_1905_05312_00": {
+          "formal_name": "books_versus_triangles_extremal_density_statement",
+          "source_hash": "bac4efbb57ace1ae08536468ecb41eb5c435dfe62392dda9da843bf3e82d18e3",
+          "note": "Conlon-Fox-Sudakov Conjecture 1.1. n/6 <= b < n/4 cleared to n <= 6b and 4b < n (guarding n - 4b); book number at most b is x230_book_at_most (every edge has at most b common neighbours); the excluded graph is 'K_(n/2),(n - n/2) up to isomorphism; triangles are clique_count_size G 3. S_{b,n} is x230_prism_blowup b n G: a labelling by the 3-prism with parts b, b, s, b, b, t, the halves s, t of n - 4b on a matched pair (the only placement with the conjectured count).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g230_books_hyp_inhabited",
+              "claim": "g230_books_hyp_claim",
+              "references": [
+                "books_versus_triangles_extremal_density_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g230_books_not_trivially_true",
+              "claim": "g230_books_ntt_claim",
+              "references": [
+                "books_versus_triangles_extremal_density_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g230_book_sanity",
+                "claim": "g230_book_sanity_claim",
+                "references": [
+                  "x230_book_at_most"
+                ]
+              },
+              {
+                "theorem": "g230_prism_sanity",
+                "claim": "g230_prism_sanity_claim",
+                "references": [
+                  "x230_prism_blowup",
+                  "x230_prism_rel"
+                ]
+              },
+              {
+                "theorem": "g230_copies_sanity",
+                "claim": "g230_copies_sanity_claim",
+                "references": [
+                  "x230_automorphisms",
+                  "x230_copies",
+                  "x230_embeddings"
+                ]
+              },
+              {
+                "theorem": "g230_mono_sanity",
+                "claim": "g230_mono_sanity_claim",
+                "references": [
+                  "x230_mono_copies"
+                ]
+              },
+              {
+                "theorem": "g230_ramsey_sanity",
+                "claim": "g230_ramsey_sanity_claim",
+                "references": [
+                  "x230_arrows",
+                  "x230_ramsey_number"
+                ]
+              },
+              {
+                "theorem": "g230_threshold_sanity",
+                "claim": "g230_threshold_sanity_claim",
+                "references": [
+                  "x230_threshold_multiplicity"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2108_00987_00": {
+          "formal_name": "threshold_ramsey_multiplicity_odd_cycles_statement",
+          "source_hash": "317877648c745063509f48e6cca0462487282238ab44015a72ccef3eeb23b29d",
+          "note": "Conlon-Fox-Sudakov-Wei Conjecture 4 (odd cycles). m(H) is x230_threshold_multiplicity: the least number of monochromatic copies of H (x230_mono_copies, copies = embeddings / automorphisms, not necessarily induced) over 2-colourings of K_{r(H)}, a colouring being a graph on r(H) vertices and its complement; r(H) is x230_ramsey_number. 'Sufficiently large odd k' is an existential threshold K; (k-1)!/2 is cleared to 2 m = (k-1)!.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g230_odd_cycles_hyp_inhabited",
+              "claim": "g230_odd_cycles_hyp_claim",
+              "references": [
+                "threshold_ramsey_multiplicity_odd_cycles_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g230_odd_cycles_not_trivially_true",
+              "claim": "g230_odd_cycles_ntt_claim",
+              "references": [
+                "threshold_ramsey_multiplicity_odd_cycles_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g230_book_sanity",
+                "claim": "g230_book_sanity_claim",
+                "references": [
+                  "x230_book_at_most"
+                ]
+              },
+              {
+                "theorem": "g230_prism_sanity",
+                "claim": "g230_prism_sanity_claim",
+                "references": [
+                  "x230_prism_blowup",
+                  "x230_prism_rel"
+                ]
+              },
+              {
+                "theorem": "g230_copies_sanity",
+                "claim": "g230_copies_sanity_claim",
+                "references": [
+                  "x230_automorphisms",
+                  "x230_copies",
+                  "x230_embeddings"
+                ]
+              },
+              {
+                "theorem": "g230_mono_sanity",
+                "claim": "g230_mono_sanity_claim",
+                "references": [
+                  "x230_mono_copies"
+                ]
+              },
+              {
+                "theorem": "g230_ramsey_sanity",
+                "claim": "g230_ramsey_sanity_claim",
+                "references": [
+                  "x230_arrows",
+                  "x230_ramsey_number"
+                ]
+              },
+              {
+                "theorem": "g230_threshold_sanity",
+                "claim": "g230_threshold_sanity_claim",
+                "references": [
+                  "x230_threshold_multiplicity"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2108_00991_00": {
+          "formal_name": "threshold_ramsey_multiplicity_paths_statement",
+          "source_hash": "cd7eb798591519fb8084d56e0344450092d1387920a19a811ff4e196a56f01a5",
+          "note": "Conlon-Fox-Sudakov-Wei Conjecture 3 (paths). P_k is ordinal_path k, the path on k vertices (K_k holds k!/2 copies of it); m(H) as for arxiv:2108.00987#00. The values are cleared to 2 m = k! (k even) and 4 m = (k-1) (k-1)! (k odd), for all k beyond an existential threshold K.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g230_paths_hyp_inhabited",
+              "claim": "g230_paths_hyp_claim",
+              "references": [
+                "threshold_ramsey_multiplicity_paths_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g230_paths_not_trivially_true",
+              "claim": "g230_paths_ntt_claim",
+              "references": [
+                "threshold_ramsey_multiplicity_paths_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g230_book_sanity",
+                "claim": "g230_book_sanity_claim",
+                "references": [
+                  "x230_book_at_most"
+                ]
+              },
+              {
+                "theorem": "g230_prism_sanity",
+                "claim": "g230_prism_sanity_claim",
+                "references": [
+                  "x230_prism_blowup",
+                  "x230_prism_rel"
+                ]
+              },
+              {
+                "theorem": "g230_copies_sanity",
+                "claim": "g230_copies_sanity_claim",
+                "references": [
+                  "x230_automorphisms",
+                  "x230_copies",
+                  "x230_embeddings"
+                ]
+              },
+              {
+                "theorem": "g230_mono_sanity",
+                "claim": "g230_mono_sanity_claim",
+                "references": [
+                  "x230_mono_copies"
+                ]
+              },
+              {
+                "theorem": "g230_ramsey_sanity",
+                "claim": "g230_ramsey_sanity_claim",
+                "references": [
+                  "x230_arrows",
+                  "x230_ramsey_number"
+                ]
+              },
+              {
+                "theorem": "g230_threshold_sanity",
+                "claim": "g230_threshold_sanity_claim",
+                "references": [
+                  "x230_threshold_multiplicity"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2311_01887_00": {
+          "formal_name": "ramsey_numbers_of_arbitrary_growth_statement",
+          "source_hash": "70879e99a81e5a04e920e422e4e420506ac060b709eec4c33116bc46d5bcf7ee",
+          "note": "Ahme-Scott Conjecture 10. n <= f(n) <= r(K_n) is read through x230_ramsey_number 'K_n R; eps ranges over positive rationals and the window (1 - eps) f(n) <= r(G_n) <= (1 + eps) f(n) is in rat, so nothing is truncated; the conclusion asserts that r(G_n) exists and lies in the window for all n beyond an existential N. The conjecture's text asks for arbitrary graphs G_n on n vertices.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g230_growth_hyp_inhabited",
+              "claim": "g230_growth_hyp_claim",
+              "references": [
+                "ramsey_numbers_of_arbitrary_growth_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g230_growth_not_trivially_true",
+              "claim": "g230_growth_ntt_claim",
+              "references": [
+                "ramsey_numbers_of_arbitrary_growth_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g230_book_sanity",
+                "claim": "g230_book_sanity_claim",
+                "references": [
+                  "x230_book_at_most"
+                ]
+              },
+              {
+                "theorem": "g230_prism_sanity",
+                "claim": "g230_prism_sanity_claim",
+                "references": [
+                  "x230_prism_blowup",
+                  "x230_prism_rel"
+                ]
+              },
+              {
+                "theorem": "g230_copies_sanity",
+                "claim": "g230_copies_sanity_claim",
+                "references": [
+                  "x230_automorphisms",
+                  "x230_copies",
+                  "x230_embeddings"
+                ]
+              },
+              {
+                "theorem": "g230_mono_sanity",
+                "claim": "g230_mono_sanity_claim",
+                "references": [
+                  "x230_mono_copies"
+                ]
+              },
+              {
+                "theorem": "g230_ramsey_sanity",
+                "claim": "g230_ramsey_sanity_claim",
+                "references": [
+                  "x230_arrows",
+                  "x230_ramsey_number"
+                ]
+              },
+              {
+                "theorem": "g230_threshold_sanity",
+                "claim": "g230_threshold_sanity_claim",
+                "references": [
+                  "x230_threshold_multiplicity"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x230_book_at_most": {
+          "classification": "paper_specific",
+          "reason": "Book number at most b (every edge in at most b triangles), the parameter of Conjecture 1.1 of arXiv:1905.05312; no shared book-number primitive exists."
+        },
+        "x230_prism_rel": {
+          "classification": "paper_specific",
+          "reason": "Adjacency of the 3-prism on the labels 0..5, used only to define the extremal graph S_{b,n} of arXiv:1905.05312."
+        },
+        "x230_prism_blowup": {
+          "classification": "paper_specific",
+          "reason": "The paper's extremal graph S_{b,n} (3-prism blow-up with parts b, b, b, b and the two halves of n - 4b on a matched pair), stated up to isomorphism by a labelling."
+        },
+        "x230_embeddings": {
+          "classification": "paper_specific",
+          "reason": "Injective homomorphisms H -> G as a finite set, the numerator of the copy count used by the threshold Ramsey multiplicity rows."
+        },
+        "x230_automorphisms": {
+          "classification": "paper_specific",
+          "reason": "Automorphisms of H as a finite set, the denominator of the copy count used by the threshold Ramsey multiplicity rows."
+        },
+        "x230_copies": {
+          "classification": "paper_specific",
+          "reason": "Number of (not necessarily induced) copies of H in G, #embeddings / #automorphisms; D2ram.mono_copies counts labelled maps instead."
+        },
+        "x230_mono_copies": {
+          "classification": "paper_specific",
+          "reason": "Monochromatic copies of H in the 2-colouring of K_{|G|} given by G and its complement, as counted by m(H) in arXiv:2108.00987 and 2108.00991; its name group with D2ram.mono_copies (colour-respecting maps) is classified paper_specific."
+        },
+        "x230_arrows": {
+          "classification": "paper_specific",
+          "reason": "R -> H: every 2-colouring of K_R has a monochromatic H, via has_subgraph and compl; a member of the classified arrows name group (candidate family ramsey-arrows, with X195 and X215)."
+        },
+        "x230_ramsey_number": {
+          "classification": "paper_specific",
+          "reason": "The two-colour graph Ramsey number r(H) as the least arrowing R, needed by m(H) and by Conjecture 10 of arXiv:2311.01887. Registered in library_primitives/ramsey-number.json as a deferred graph-arrow class (like X195 and X215): the canonical hg_ramsey_number lives in hypergraph-theory."
+        },
+        "x230_threshold_multiplicity": {
+          "classification": "paper_specific",
+          "reason": "The threshold Ramsey multiplicity m(H) of Conlon-Fox-Sudakov-Wei: the minimum number of monochromatic copies of H over 2-colourings of K_{r(H)}."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X230 wave verification, 2026-10-25)",
+      "faithfulness_result": "Readback 2026-10-25 (verifier Arthur): 4/4 PASS. 1905.05312#00: n/6 <= b < n/4 cleared exactly to n <= 6b /\\ 4b < n; book number <= b as at most b common neighbours per edge; the balanced complete bipartite graph excluded up to isomorphism; S_{b,n} as the prism blow-up with the halves of n - 4b on a matched pair, which has floor(n^2/4) edges, book number b and exactly b^2(n - 4b) triangles, while the halves in one triangle give b(b-s)(b-t) more triangles, so it is the only placement under which the equality clause can hold. 2108.00987#00 and 2108.00991#00: m(H) as the minimum number of monochromatic (not necessarily induced) copies over 2-colourings (G, complement) of K_{r(H)}, copies = embeddings / automorphisms (exact), values cleared exactly (2m = (k-1)!; 2m = k!; 4m = (k-1)(k-1)!), P_k with k vertices (k!/2 = copies of a k-vertex path in K_k), sufficiently large as an existential threshold. 2311.01887#00: n <= f(n) <= r(K_n) through the unique Ramsey number; rational eps equivalent to real eps; the existence of r(G_n) asserted; the pinned text and review ask for arbitrary n-vertex graphs (the context's connected class would be a strengthening). Grounding: hypotheses inhabited per row; each guard (the K_{n/2,n/2} exclusion, the threshold, the lower bound n <= f(n)) shown load-bearing; helper sanity for all ten helpers."
     }
   }
 }

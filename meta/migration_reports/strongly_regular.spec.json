@@ -39,7 +39,8 @@
   "summary": [
     "Family A33 (strongly regular graphs). GTBase.strongly_regular owns the unguarded parameter predicate and two distinct existential wrappers: has_strongly_regular_parameters (U3: no connectivity or degree guard, K_2 accepted by grounding_U3.srg_K2) and connected_nontrivial_strongly_regular (D5: exactly connected, 0 < k and k < #|G|.-1; K_{2,2} with (2,0,2) in). No unguarded equivalence is claimed. The matrix identity and its two equivalences (introduced in grounding_D5, technique 3) are released as Spectral.foundations.strongly_regular_matrix; every grounding_D5 qualified name keeps its type and arguments as a proved wrapper.",
     "",
-    "Eight rows are frozen at the literal parent a69e27f (bodies byte-identical to a59246d for U3, 7c23ef2 for D5 and 9c47cd0 for the grounding matrix block; only statement doc comments changed since). The two whole statements keep their quantifiers, the eight-graph non-isomorphism clause and the live is_core/hom_equiv/triangle_free providers. The two frozen grounding theorems hold of the frozen bodies (legacy_sr_mateqE, legacy_strongly_regularE). No SRG name or common_nbr occurs in any migration module at the parent: this is scoped search evidence, not proof that no equivalent body was frozen elsewhere; the provider/history scan is part of the gate evidence."
+    "Eight rows are frozen at the literal parent a69e27f (bodies byte-identical to a59246d for U3, 7c23ef2 for D5 and 9c47cd0 for the grounding matrix block; only statement doc comments changed since). The two whole statements keep their quantifiers, the eight-graph non-isomorphism clause and the live is_core/hom_equiv/triangle_free providers. The two frozen grounding theorems hold of the frozen bodies (legacy_sr_mateqE, legacy_strongly_regularE). No SRG name or common_nbr occurs in any migration module at the parent: this is scoped search evidence, not proof that no equivalent body was frozen elsewhere; the provider/history scan is part of the gate evidence.",
+    "Source repair (2026-10-25, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md, triangle_free_strongly_regular_graphs entry), not a migration equivalence: the frozen D5Legacy eight-graph row is a theorem (K_{2,2}, ..., K_{9,9}; D5Legacy_row_holds in the certificate file), and the live D5 row now asks for an eighth triangle-free strongly regular graph with 0 < mu < k, isomorphic to none of the seven known graphs (Spectral.foundations.triangle_free_srg). The frozen row keeps the A33 text verbatim; its statement entry carries the repair (one exact text replacement, the pinned doc block, the record), and its certificate is kernel-checked as live -> frozen (the converse would solve the open problem)."
   ],
   "frozen": [
     {
@@ -104,7 +105,15 @@
         "strongly_regular": "Legacy.strongly_regular"
       },
       "certificate": "Spectral.migration.strongly_regular.triangle_free_strongly_regular_graphs_statement_compat",
-      "note": "Body identical since 7c23ef2: the I_8 index, triangle-freeness and the pairwise non-isomorphism clause are unchanged."
+      "note": "Body identical since 7c23ef2: the I_8 index, triangle-freeness and the pairwise non-isomorphism clause are unchanged.",
+      "repair": {
+        "replace": [
+          "exists g : 'I_8 -> sgraph, (forall i, triangle_free (g i) /\\ strongly_regular (g i)) /\\ (forall i j, i != j -> ~ inhabited (g i ≃ g j))",
+          "exists (G : sgraph) (k lam mu : nat), [/\\ (0 < #|G|)%N, triangle_free G, strongly_regular_parameters G k lam mu, (0 < mu)%N & (mu < k)%N] /\\ forall i : 'I_7, ~ inhabited (G ≃ known_triangle_free_srg i)"
+        ],
+        "doc_block_sha256": "c0fc9b8ac3d87ca43a7dc5526b6b9fc9b0c76a4dff2369f5de98eef5257dae9a",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md"
+      }
     },
     {
       "kind": "chain",
@@ -171,6 +180,11 @@
       "path": "spectral-graph-theory/theories/foundations/strongly_regular_matrix.v",
       "name": "strongly_regular",
       "note": "the GTBase.strongly_regular module import (lexical only); no use of the D5 or U3 definition"
+    },
+    {
+      "path": "spectral-graph-theory/theories/foundations/triangle_free_srg.v",
+      "name": "strongly_regular",
+      "note": "the GTBase.strongly_regular module import (lexical only): the seven known graphs are checked against the canonical strongly_regular_parameters; no use of the D5 or U3 definition"
     }
   ],
   "distinct_variants": [],
