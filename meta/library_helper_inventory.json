@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 1968,
-      "cross_file_files": 1026,
+      "cross_file_declarations": 1981,
+      "cross_file_files": 1028,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -9044,12 +9044,31 @@
         "cross_file": {
           "certificates_of": [],
           "declarations": [
+            "extremal-graph-theory/theories/conjectures/X234.v:clique_ramsey_count_statement",
+            "extremal-graph-theory/theories/conjectures/X234.v:mixed_blowup_colouring_statement",
+            "extremal-graph-theory/theories/conjectures/X234.v:multicolour_clique_ramsey_count_statement",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_K2_ramsey",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_clique_exact",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_clique_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_clique_noarrows",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_mixed_all",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_mixed_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_multi_exact",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_multi_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_multi_noarrows",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_ramsey_unique",
             "extremal-graph-theory/theories/conjectures/implications_X215.v:x215_ramsey_number_equiv_x195_ramsey_number"
           ],
           "files": [
+            "extremal-graph-theory/theories/conjectures/X234.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X234.v",
             "extremal-graph-theory/theories/conjectures/implications_X215.v"
           ],
-          "statements": [],
+          "statements": [
+            "extremal-graph-theory/theories/conjectures/X234.v:clique_ramsey_count_statement",
+            "extremal-graph-theory/theories/conjectures/X234.v:mixed_blowup_colouring_statement",
+            "extremal-graph-theory/theories/conjectures/X234.v:multicolour_clique_ramsey_count_statement"
+          ],
           "undecided": [],
           "unlisted": []
         },
@@ -9063,6 +9082,8 @@
         },
         "provider_unlisted": false,
         "require_chain": {
+          "extremal-graph-theory/theories/conjectures/X234.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X234.v": "unknown",
           "extremal-graph-theory/theories/conjectures/implications_X215.v": "unknown"
         },
         "same_file": {
@@ -24450,13 +24471,13 @@
     ]
   },
   "counts": {
-    "files": 326,
-    "helpers": 2668,
+    "files": 327,
+    "helpers": 2669,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 217,
     "repeated_signature_shapes": 326,
-    "statements_excluded": 712,
-    "x_wave_helpers": 1511
+    "statements_excluded": 715,
+    "x_wave_helpers": 1512
   },
   "groups": {
     "body_shape_hash": {
@@ -57909,6 +57930,25 @@
       "qualified_name": "Extremal.conjectures.X233.x233_degree_bounded",
       "signature": "(F : sgraph -> Prop) : Prop",
       "signature_shape_hash": "d750cc9d66ea7da7a91d634301c0b5615a1530a58affa556151b6e7685b1b035"
+    },
+    {
+      "body_hash": "2073266927b2223caaf2349d4046a65a7934d3d294ed52f241d273cb7bfd33d4",
+      "body_shape_hash": "2073266927b2223caaf2349d4046a65a7934d3d294ed52f241d273cb7bfd33d4",
+      "declaration_hash": "a3323872578d397a3075b53d806608f34eb2b98896ec56d15e9d2158b911ad55",
+      "direct_consumers": [
+        "Extremal.conjectures.X234.mixed_blowup_colouring_statement"
+      ],
+      "kind": "Definition",
+      "line": 21,
+      "local_dependencies": [],
+      "name": "x234_blowup_colouring",
+      "normalized_name": "blowup_colouring",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X234.v",
+      "phase": "X234",
+      "qualified_name": "Extremal.conjectures.X234.x234_blowup_colouring",
+      "signature": "(n : nat) (col : {set complete_multipartite_graph n 2} -> 'I_2) : Prop",
+      "signature_shape_hash": "506cb3cdff5d5e083b51657d5f0b80450f192f726626eedba5a0c10adfa52453"
     },
     {
       "body_hash": "857e81095417ec9a7b32ad78ef7497e0e68db404b9edf9f8ff9d7b7f4a404cbd",
