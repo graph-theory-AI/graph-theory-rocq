@@ -1789,6 +1789,34 @@ them.
 - `arxiv:1802.03727#00` (`X203.v`, leg `blocked`) — the universal quantifier over graphs includes
   the empty graph, which has minimum degree `d` vacuously and is separation `j`-choosable for every
   `j`. Severity: **too strong** (refutable).
+  **REPAIRED 2026-10-26** (coordination/PROGRAMME.md A2; the row is frozen by the A11
+  min_degree_at_least family): `separation_choosability_min_degree_unbounded_statement` adds the
+  guard `0 < #|G|`, as the source reads it: a graph of minimum degree `d` has a vertex (Conjecture
+  1.3 of Esperet, Kang and Thomassé, arXiv:1802.03727, statement_text at the pin b72c5857: "There is
+  a function $x_1(d)$ that satisfies $x_1(d) \to \infty$ as $d \to \infty$ such that
+  $\mathrm{ch}_{\mathrm{sep}}(G) \geq x_1(d)$ for any graph $G$ with minimum degree $d$."). The
+  body's graph quantifier became
+  `forall (d : nat) (G : sgraph), 0 < #|G| -> x203_min_degree_at_least G d ->`.
+  This is a SOURCE REPAIR, not a migration equivalence:
+  - the A11 certificate keeps the frozen row and proves `frozen -> live` (direction "weaken"; the
+    same x, since the guard is one more hypothesis); `X203Legacy_row_false` in
+    `chromatic-theory/theories/migration/min_degree_at_least.v` proves the frozen row false, and
+    `meta/probe_hints/separation_choosability_min_degree_unbounded_statement.v` refutes the old body;
+  - the `repair` entry of `meta/migration_reports/min_degree_at_least.spec.json` binds the one exact
+    text replacement and the repaired doc block's hash, names this entry as its record, and lists the
+    fields the repair changes: the manifest-row fields `implemented_by`, `source_verified_by`,
+    `source_verified_at` and `verification_note`, and the leg fields `statement` (`blocked` ->
+    `done`), `commit` and `note`;
+  - the statement wave X203 records the repair (the row is no longer blocked, a new note, the commit
+    tag `x203-nonempty-guard-repair`); its `faithfulness_verified_by` is filled after the independent
+    review.
+  The audit's second point, plain unboundedness in place of `x_1(d) -> infinity`, is not a defect:
+  with minimum degree at least `d` in place of exactly `d`, an unbounded `x` and an `x_1` tending to
+  infinity give each other (running minimum and maximum; the X203.v Notes). Logical relation: old ->
+  new with the same x; the old body is false; the new body is open. Edge e026 (Conjecture 1.4 implies
+  Conjecture 1.3, `meta/edge_waves.json`) keeps its documented `blocked` disposition, whose reason
+  names the old blocked target; re-opening it as a candidate would move the edges legs of both rows
+  from `done` to `todo`, so that change is left to the edge registry.
 - `arxiv:1803.10962#00` (`X210.v`, leg `blocked`) — the source's `C, C' > 0` is dropped, so
   degenerate witnesses such as `C = 0` are admitted; the positive constant `C` in "at most `Ck`
   conflicts" carries the whole content. Severity: **vacuous-looking**.
