@@ -1,6 +1,6 @@
 {
   "meta": {
-    "count": 307,
+    "count": 308,
     "github_blob": "https://github.com/LLM4Rocq/digraph-theory/blob/main",
     "coqdoc": "https://llm4rocq.github.io/digraph-theory/doc",
     "generator": "scripts/build_correspondence.py"
@@ -8216,6 +8216,44 @@
         "ec_log_statement",
         "ec_log_c6_statement"
       ],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "logarithmic_forward_cover_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "logarithmic_forward_cover_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2304.03567#04 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2304.03567__04/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2304.03567__04.json English statement: (arXiv:2304.03567, \"Temporalizing digraphs via linear-size balanced bi-trees\", Conjecture 1) Every strong digraph D on n vertices has a O(log n) size forward cover. A forward cover of D is a set of vertex orderings such that for every pair {x, y} of vertices, x, y or y, x is a forward pair in one of them: joined by a directed path whose vertices increase in that ordering. Definitions: [strongb D] - D is strongly connected (invariants/strong.v); [x231_forward_cover rs] - the rankings in rs are injective (vertex orderings) and every pair of distinct vertices is forward connected in one of them (this file); [x231_forward_pair r x y] - a forward path joins x and y, from the earlier endpoint to the later one in r (this file); [x231_forward_arc r] - the arcs that go up in r (this file); [trunc_log 2 n] - floor of log2 n (MathComp). Notes: O(log n) is read as constants c and n0 with a cover of size at most c * floor(log2 n) for every strong digraph on n >= n0 vertices. A vertex ordering is an injective ranking into nat, and the cover is a sequence: repeated orderings never help, so its size bounds the size of a set. Pairs are unordered pairs of distinct vertices, as in the source's request set V choose 2. The source (body/request.tex of the arXiv e-print, sha256 50912bde0934a2cc6b0066537dcaf4a77dd3275cdb56aa86d8065dd4703c3ed3) defines the forward cover in exactly these terms. The statement is refuted in applications/forward_cover_disproof.v: a cyclic chain of m directed diamonds on 3m vertices needs m orderings.",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2304.03567#04 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2304.03567__04/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2304.03567__04.json English statement: (arXiv:2304.03567, \"Temporalizing digraphs via linear-size balanced bi-trees\", Conjecture 1) Every strong digraph D on n vertices has a O(log n) size forward cover. A forward cover of D is a set of vertex orderings such that for every pair {x, y} of vertices, x, y or y, x is a forward pair in one of them: joined by a directed path whose vertices increase in that ordering. Definitions: [strongb D] - D is strongly connected (invariants/strong.v); [x231_forward_cover rs] - the rankings in rs are injective (vertex orderings) and every pair of distinct vertices is forward connected in one of them (this file); [x231_forward_pair r x y] - a forward path joins x and y, from the earlier endpoint to the later one in r (this file); [x231_forward_arc r] - the arcs that go up in r (this file); [trunc_log 2 n] - floor of log2 n (MathComp). Notes: O(log n) is read as constants c and n0 with a cover of size at most c * floor(log2 n) for every strong digraph on n >= n0 vertices. A vertex ordering is an injective ranking into nat, and the cover is a sequence: repeated orderings never help, so its size bounds the size of a set. Pairs are unordered pairs of distinct vertices, as in the source's request set V choose 2. The source (body/request.tex of the arXiv e-print, sha256 50912bde0934a2cc6b0066537dcaf4a77dd3275cdb56aa86d8065dd4703c3ed3) defines the forward cover in exactly these terms. The statement is refuted in applications/forward_cover_disproof.v: a cyclic chain of m directed diamonds on 3m vertices needs m orderings.",
+      "decoded_authored": false,
+      "formal": {
+        "name": "logarithmic_forward_cover_statement",
+        "file": "theories/conjectures/X231.v",
+        "line": 65,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X231.v#L65",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X231.html#Digraph.conjectures.X231.logarithmic_forward_cover_statement",
+        "verbatim": "Definition logarithmic_forward_cover_statement : Prop :=\n  exists c n0 : nat, forall D : diGraphType, strongb D -> n0 <= #|D| ->\n    exists rs : seq {ffun D -> nat}, x231_forward_cover rs /\\ size rs <= c * trunc_log 2 #|D|."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
       "grounded_by": [],
       "grounding": [],
       "faithfulness": ""
