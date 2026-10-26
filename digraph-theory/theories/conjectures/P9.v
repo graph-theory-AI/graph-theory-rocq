@@ -347,21 +347,27 @@ Definition subdivision_of_a_transitive_tournament_in_digraphs_w_statement : Prop
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/antidirected_trees_in_digraphs/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/antidirected_trees_in_digraphs.json
     English statement: (Open Problem Garden, Antidirected trees in digraphs)
-      For every finite digraph D and every k >= 2, if the number of arcs of D exceeds (k-2)
-      times the number of its vertices, then D contains, as a subdigraph, every antidirected
-      tree T on k vertices, that is every orientation of a tree in which each vertex has
-      in-degree 0 or out-degree 0; containment means an injective arc-preserving map from T to
-      D.
-    Definitions: [nb_arcs D] - the number of ordered pairs forming an arc (this file);
+      For every finite loopless digraph D and every k >= 2, if the number of arcs of D
+      exceeds (k-2) times the number of its vertices, then D contains, as a subdigraph, every
+      antidirected tree T on k vertices, that is every orientation of a tree in which each
+      vertex has in-degree 0 or out-degree 0; containment means an injective arc-preserving
+      map from T to D.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [nb_arcs D] - the number of ordered pairs forming an arc (this file);
       [antidirected_tree T] - the underlying graph is a tree (weakly connected with #V - 1 arcs)
       and every vertex has in-degree 0 or out-degree 0 (this file); [tree_digraph] and
       [weakly_connected] (this file); [contains_subdig D T] - an injective arc-preserving map T
       -> D (this file); [orientedDigraph] (core/oriented.v).
     Notes: The guard 2 <= k keeps the natural-number subtraction k - 2 faithful; at k < 2 the
       corpus hypothesis is negative and the statement would be about all digraphs. Containment
-      is as a subdigraph (arcs preserved, not reflected), as in the corpus. *)
+      is as a subdigraph (arcs preserved, not reflected), as in the corpus.  The guard
+      [loopless D] is load-bearing: [nb_arcs] counts loops, so the one-vertex digraph with a
+      loop meets the arc-count hypothesis at k = 2 but cannot host the two-vertex antidirected
+      tree (meta/probe_hints/antidirected_trees_in_digraphs_statement.v).  The source's
+      digraphs have no loops.  The guard was added on 2026-10-26 as a one-way source repair of
+      the migrated row (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition antidirected_trees_in_digraphs_statement : Prop :=
-  forall (D : diGraphType) (k : nat), 2 <= k ->
+  forall (D : diGraphType) (k : nat), 2 <= k -> loopless D ->
     (k - 2) * #|D| < nb_arcs D ->
     forall T : orientedDigraph, antidirected_tree T -> #|T| = k -> contains_subdig D T.
 
