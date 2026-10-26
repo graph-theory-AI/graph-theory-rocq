@@ -33,7 +33,15 @@
     one-vertex digraph is balanced and refuted the unguarded row; see the arxiv:1608.03040#04 entry of
     meta/STATEMENT_IMPROVEMENTS.md).  [ColouringVariantsLegacy] stays verbatim, and its certificate
     below is a ONE-WAY SOURCE-REPAIR certificate (frozen -> live), not a migration equivalence, bound by
-    the spec's [repair] entry.  Every other certificate of this file keeps its exact iff. *)
+    the spec's [repair] entry.
+
+    SOURCE REPAIR (2026-10-26, direction weaken): the live X221 row [orientation_C4_eulerian_avoidable_statement]
+    asks for an F-free SUBDIGRAPH on a nonempty vertex set of a nonempty host ([x221_eulerian_avoidable_sub]), as
+    arXiv:2510.11311 defines Eulerian-avoidability, not a spanning one (see the arxiv:2510.11311#04 entry of
+    meta/STATEMENT_IMPROVEMENTS.md).  [X221Legacy] stays verbatim; its row certificate below is a ONE-WAY
+    SOURCE-REPAIR certificate (frozen -> live, through [x221_eulerian_avoidable_sub_of_spanning]: the spanning
+    selection on the whole vertex set), not a migration equivalence.  Every other certificate of this file keeps
+    its exact iff. *)
 
 From HB Require Import structures.
 From mathcomp Require Import all_boot all_fingroup all_algebra.
@@ -165,10 +173,57 @@ Proof.
 split=> -[d h]; exists d => k D eD dk; apply: (h k D) => //; move: eD; exact/x221_eulerian_compat.
 Qed.
 
-(** arxiv:2510.11311#04 (unchanged). *)
+(** X221 SOURCE REPAIR (2026-10-26, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md), not a migration
+    equivalence.  A spanning selection f on a nonempty host gives a subdigraph on the whole vertex set: the selection
+    transported to [induced_digraph setT] along [val] ([x221_spanning_sel]), with no smaller out-degrees and no new
+    copy of F.  So the frozen row (spanning) implies the live row (a subdigraph on a nonempty vertex set) with the
+    same d. *)
+Definition x221_spanning_sel (D : diGraphType) (f : D -> {set D}) (v : induced_digraph [set: D])
+    : {set induced_digraph [set: D]} :=
+  [set w | val w \in f (val v)].
+
+Lemma x221_spanning_sel_outdeg (D : diGraphType) (f : D -> {set D}) (v : outsel (x221_spanning_sel f)) :
+  (outdeg (val (v : induced_digraph [set: D]) : outsel f) <= outdeg v)%N.
+Proof.
+pose vl (w : outsel (x221_spanning_sel f)) : D := val (w : induced_digraph [set: D]).
+have vl_inj : injective vl by move=> x y /val_inj.
+rewrite /outdeg -[X in (_ <= X)%N](card_imset _ vl_inj).
+apply: subset_leq_card; apply/subsetP => x; rewrite inE outsel_arcE => /andP [xf vx].
+apply/imsetP; exists (exist _ x (in_setT x) : outsel (x221_spanning_sel f)) => //.
+rewrite inE outsel_arcE /x221_spanning_sel inE ?sub_arcE /=.
+by apply/andP.
+Qed.
+
+Lemma x221_spanning_sel_free (F D : diGraphType) (f : D -> {set D}) :
+  ~ contains_subdigraph F (outsel f) -> ~ contains_subdigraph F (outsel (x221_spanning_sel f)).
+Proof.
+move=> hF [e [ei ea]]; apply: hF.
+pose vl (w : outsel (x221_spanning_sel f)) : D := val (w : induced_digraph [set: D]).
+have vl_inj : injective vl by move=> x y /val_inj.
+exists (fun x => vl (e x) : outsel f); split.
+  by move=> x y /vl_inj /ei.
+move=> u w /ea; rewrite !outsel_arcE /x221_spanning_sel inE ?sub_arcE.
+by [].
+Qed.
+
+Lemma x221_eulerian_avoidable_sub_of_spanning (F : diGraphType) :
+  x221_eulerian_avoidable F -> x221_eulerian_avoidable_sub F.
+Proof.
+move=> [d h]; exists d => k D hE hD hdeg.
+have [f [hk hF]] := h k D hE hdeg.
+exists [set: D], (x221_spanning_sel f); split.
+- by rewrite -card_gt0 cardsT.
+- by move=> v; apply: leq_trans (hk _) (x221_spanning_sel_outdeg v).
+- exact: x221_spanning_sel_free.
+Qed.
+
+(** arxiv:2510.11311#04: one-way source-repair certificate (frozen -> live, direction weaken). *)
 Lemma orientation_C4_eulerian_avoidable_statement_compat :
-  X221Legacy.orientation_C4_eulerian_avoidable_statement <-> orientation_C4_eulerian_avoidable_statement.
-Proof. by split=> h b; apply/x221_eulerian_avoidable_compat. Qed.
+  X221Legacy.orientation_C4_eulerian_avoidable_statement -> orientation_C4_eulerian_avoidable_statement.
+Proof.
+move=> h b; apply: x221_eulerian_avoidable_sub_of_spanning.
+by apply/x221_eulerian_avoidable_compat; exact: h.
+Qed.
 
 (** arxiv:1608.03040#04 (source repair 2026-10-25: the live row gained a loopless guard). *)
 (** One-way source-repair certificate, not a migration equivalence (2026-10-25, direction weaken):
@@ -215,6 +270,7 @@ Print Assumptions x221_eulerian_compat.
 Print Assumptions cv_eulerian_compat.
 Print Assumptions Eulerian_compat.
 Print Assumptions orientation_C4_eulerian_avoidable_statement_compat.
+Print Assumptions x221_eulerian_avoidable_sub_of_spanning.
 Print Assumptions majority_3col_eulerian_statement_compat.
 Print Assumptions H6_no_full_cover_compat.
 Print Assumptions realises_Eulerian_compat.

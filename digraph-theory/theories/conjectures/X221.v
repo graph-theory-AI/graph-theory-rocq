@@ -143,6 +143,32 @@ Definition x221_eulerian_avoidable (F : diGraphType) : Prop :=
         (forall v : outsel f, (k <= outdeg v)%N)
         /\ ~ contains_subdigraph F (outsel f).
 
+(** The source's subdigraph (repair of 2026-10-26): an F-free subdigraph on a NONEMPTY vertex set S
+    of a NONEMPTY host, given by an out-neighbourhood selection f on [induced_digraph S], in which
+    every vertex has at least k out-neighbours.  [x221_eulerian_avoidable] (a spanning selection
+    on all of D) stays unchanged for the frozen migration chains. *)
+Definition x221_eulerian_avoidable_sub (F : diGraphType) : Prop :=
+  exists d : nat -> nat,
+    forall (k : nat) (D : diGraphType),
+      x221_eulerian D -> (0 < #|D|)%N -> (forall v : D, (d k <= outdeg v)%N) ->
+      exists (S : {set D}) (f : induced_digraph S -> {set induced_digraph S}),
+        [/\ S != set0, (forall v : outsel f, (k <= outdeg v)%N)
+          & ~ contains_subdigraph F (outsel f)].
+
+(** Teeth: the guard [S != set0] is load-bearing.  Without it the empty vertex set would witness
+    the inner property for every k, every host and every nonempty F, so every such F would be
+    Eulerian-avoidable. *)
+Lemma x221_sub_guard_teeth (F : diGraphType) (k : nat) (D : diGraphType) :
+  (0 < #|F|)%N ->
+  exists (S : {set D}) (f : induced_digraph S -> {set induced_digraph S}),
+    (forall v : outsel f, (k <= outdeg v)%N) /\ ~ contains_subdigraph F (outsel f).
+Proof.
+move=> hF; exists set0, (fun _ => set0); split.
+  by case=> x hx; exfalso; move: hx; rewrite inE.
+move=> [e _]; have /card_gt0P [x _] := hF.
+by case: (e x) => y hy; move: hy; rewrite inE.
+Qed.
+
 (** *** The orientations of the 4-cycle
 
     [x221_c4or b] is the orientation of C_4 in which the edge {i, i+1} of the
@@ -360,39 +386,40 @@ Definition kextension_linear_unavoidability_statement : Prop :=
       Question 6.4)
       Is every orientation of the 4-cycle Eulerian-avoidable? That is, for each of the
       orientations F of the cycle on four vertices, is there a function d such that for every
-      k, every finite digraph in which each vertex has as many out-neighbours as in-neighbours
-      and at least d(k) out-neighbours contains a spanning subdigraph with no copy of F in
-      which every vertex still has at least k out-neighbours?
+      k, every finite digraph with at least one vertex in which each vertex has as many
+      out-neighbours as in-neighbours and at least d(k) out-neighbours contains a subdigraph,
+      on a nonempty set of its vertices, with no copy of F, in which every vertex has at least
+      k out-neighbours?
     Definitions: [x221_c4or b] - the orientation of the 4-cycle on 'Z_4 in which the edge
       {i, i+1} runs forwards exactly when b i holds (this file); [x221_eulerian D] - every
-      vertex has equal out- and in-degree (this file); [x221_eulerian_avoidable F] - the
-      existence of the threshold function d above (this file); [outsel f] - the spanning
-      subdigraph of D keeping the arcs of D that lie in the selection f (core/oriented.v);
+      vertex has equal out- and in-degree (this file); [x221_eulerian_avoidable_sub F] - the
+      existence of the threshold function d above (this file); [induced_digraph S] - the
+      digraph induced on the vertex set S (core/digraph.v); [outsel f] - the subdigraph of
+      [induced_digraph S] keeping the arcs that lie in the selection f (core/oriented.v);
       [contains_subdigraph F D] - an injective arc-preserving map from F to D, i.e. F is a
       subdigraph of D, not necessarily induced (conjectures/unvd.v); [outdeg]
       (core/oriented.v); [indeg] (conjectures/classic_core.v).
-    Notes: Three modelling choices. (1) The source's definition of Eulerian-avoidable leaves d
-      and k unbound; the intended reading, matching the paper's definition of AVOIDABLE, binds
-      d before k and is the one used here. (2) "F-free subdigraph" is taken with respect to
-      ordinary (not induced) containment, as in the avoidability literature; a spanning
-      subdigraph is presented by an out-neighbourhood selection, and [outsel] intersects the
-      selection with the arcs of D so every selection really gives a subdigraph. (3) The
-      sixteen boolean vectors b enumerate the orientations of C_4 with repetitions (the four
-      genuinely different orientations each occur several times), which is harmless for a
-      universally quantified question. (4) BLOCKED by the second-reader readback of
-      2026-09-23: choice (2) is NOT the source's. arXiv:2510.11311 defines "F is
-      Eulerian-avoidable" as "there exists d_F : N -> N such that every Eulerian digraph of
-      minimum out-degree at least d_F(k) contains an F-free SUBDIGRAPH of minimum out-degree
-      at least k", and a subdigraph there may live on any subset of the vertices, whereas
-      [outsel f] keeps every vertex of the host, so "forall v : outsel f, k <= outdeg v"
-      constrains ALL of V(D). A spanning witness gives a subdigraph witness but not
-      conversely (the vertices left out would each have to be given k out-arcs, which may
-      create copies of F; the source's notion is satisfied by a witness inside a single
-      component of a disjoint union, the spanning one is not), so this Prop IMPLIES Question
-      6.4 without being implied by it -- failure mode 3, "too strong". The row is
-      [state: blocked] in meta/v2_statement_waves.json; the fix is to existentially quantify
-      a vertex subset (an [induced_digraph S] carrying an out-neighbourhood selection, the
-      minimum out-degree taken inside S) instead of [outsel] on all of D. The binding order
-      "exists d, forall k" is the paper's own, and non-induced F-freeness is correct. *)
+    Notes: Modelling choices. (1) The source's definition of Eulerian-avoidable leaves d and k
+      unbound; the intended reading, matching the paper's definition of AVOIDABLE, binds d
+      before k and is the one used here. (2) "F-free subdigraph" is taken with respect to
+      ordinary (not induced) containment, as in the avoidability literature; a subdigraph with
+      vertex set S is an out-neighbourhood selection f on [induced_digraph S], and [outsel]
+      intersects the selection with the arcs, so every selection really gives a subdigraph and
+      every subdigraph on S arises (f v is its out-neighbourhood of v). (3) The sixteen boolean
+      vectors b enumerate the orientations of C_4 with repetitions, which is harmless for a
+      universally quantified question. (4) Hosts of type diGraphType may carry loops; a loop
+      adds one to the out- and the in-degree of its vertex, so deleting the loops keeps a host
+      Eulerian and lowers each out-degree by at most one, and no loop lies on a copy of an
+      oriented C_4, so loopy hosts change nothing beyond d -> d + 1 and the encoded notion
+      agrees with the source's.  REPAIRED 2026-10-26 (coordination/PROGRAMME.md A2; record
+      meta/STATEMENT_IMPROVEMENTS.md; the row is frozen by the degree_balance and
+      directed_neighbourhood families; Lancelot's routing, message 14): the body used
+      [x221_eulerian_avoidable], whose selection is SPANNING (outsel f on all of D), while the
+      source's subdigraph may live on any vertex subset (the second-reader readback of
+      2026-09-23: "too strong").  It now uses [x221_eulerian_avoidable_sub].  Both guards are
+      the source's reading: S != set0 (an empty subdigraph is F-free with a vacuous minimum
+      out-degree; see [x221_sub_guard_teeth]) and 0 < #|D| (the empty digraph has no minimum
+      out-degree; without the guard the new body would be false for every F).  The spanning
+      form implies the new one with the same d (take S the whole vertex set). *)
 Definition orientation_C4_eulerian_avoidable_statement : Prop :=
-  forall b : 'Z_4 -> bool, x221_eulerian_avoidable (x221_c4or b).
+  forall b : 'Z_4 -> bool, x221_eulerian_avoidable_sub (x221_c4or b).

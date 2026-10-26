@@ -17,7 +17,7 @@
       "Digraph.conjectures.reals_growth.eulerian",
       "Digraph.conjectures.two_extremal.Eulerian"
     ],
-    "consumers_remaining": 10,
+    "consumers_remaining": 11,
     "relation": "two contracts under the corpus name \"eulerian\". DIRECTED degree balance of a finite digraph (every vertex has equal in- and out-degree; canonical Digraph.foundations.degree_balance.balanced): two_extremal.Eulerian (forall v, indeg v = outdeg v over classic_core.indeg) is balanced D by conversion; colouring_variants.eulerian ([forall v, indeg v == outdeg v], Boolean, file-local in-degree) is balancedb D by conversion, reflected by balancedP; X221.x221_eulerian (forall v, outdeg v = indeg v) is the reversed-equation view balanced_revE, a proved iff. UNDIRECTED Eulerian multigraph (connected over all vertices through base's uwalk, every arc-end degree even, a loop counting two; the empty multigraph and an isolated vertex qualify; canonical Cycle.foundations.eulerian.eulerian over Cycle.foundations.connectivity, B17): Cycle.U6.eulerian (mconnected G /\\ forall v : G, ~~ odd (mdeg v)) is that canonical by conversion. The two contracts share only the name: no bridge between them is stated. Deferred: reals_growth.eulerian (same directed body, but its two non-corpus EC-log rows inherit classical-reals axioms through their statements: a legacy-axiom defect, left byte-identical). Distinct and untouched: U6.is_eulerian_tour (a supplied DIRECTED closed walk using every edge once; not migrated, no tour equivalence), U6.even_subgraph (even degrees of a supplied edge set, disconnected allowed) and Chromatic.foundations.alon_tarsi.at_eulerian (balance of a supplied finite set of ordered pairs).",
     "semantic_classes": {
       "legacy-axiom-defect": {

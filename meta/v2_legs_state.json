@@ -5668,14 +5668,14 @@
    "audit_page": "todo"
   },
   "axv_2510_11311_04": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x221-conjecture-relations",
    "package": "digraph-theory",
-   "note": "BLOCKED — Second-reader readback 2026-09-23 (session 01P75Y6ikkgDyzUzzoef316Z): TOO STRONG (failure mode 3). arXiv:2510.11311 defines 'F is Eulerian-avoidable' as 'there exists d_F : N -> N such that every Eulerian digraph of minimum out-degree at least d_F(k) contains an F-free SUBDIGRAPH of minimum out-degree at least k', where a subdigraph may live on any subset of the vertices. x221_eulerian_avoidable instead requires a SPANNING witness: outsel f has vertex type D, so 'forall v : outsel f, k <= outdeg v' forces EVERY vertex of the host to keep k out-arcs. Spanning implies the source's form"
+   "note": "Authored in X221.v:orientation_C4_eulerian_avoidable_statement. Question 6.4: is every orientation of C_4 Eulerian-avoidable? Repaired 2026-10-26 (coordination/PROGRAMME.md A2; frozen by the degree_balance and directed_neighbourhood families): x221_eulerian_avoidable_sub asks for an F-free subdigraph on a nonempty vertex set of a nonempty Eulerian host (a selection on induced_digraph S), as arXiv:2510.11311 defines Eulerian-avoidability; the spanning x221_eulerian_avoidable stays for the frozen chains."
   },
   "axv_2511_02892_00": {
    "statement": "todo",
