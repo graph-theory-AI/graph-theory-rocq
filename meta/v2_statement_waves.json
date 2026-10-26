@@ -4617,20 +4617,20 @@
       "phase": "X210",
       "repo": "chromatic-theory",
       "defines_file": "X210.v",
-      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
-      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
-      "source_verified_at": "2026-07-16",
-      "commit": "x191-x210-batch1",
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "implemented_by": "Arthur (A2 source repair of the 2026-07-16 Codex statement, coordination/PROGRAMME.md section 3, Lancelot's routing message 10, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read: the pinned record data/arxiv_extracted/1803.10962.json at b72c5857 and the arXiv e-print, sha256 0db384dc, dp1.tex l.80-83 and 126-128, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x210-rational-constants-repair",
+      "faithfulness_verified_by": "",
       "rows": {
         "axv_1803_10962_00": {
           "formal_name": "surface_conflict_colouring_sqrt_genus_statement",
-          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: surface_conflict_colouring_sqrt_genus_statement.",
-          "state": "blocked",
-          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk = dropped positivity of the constants, and it resolves against the statement: the source needs \"C, C' > 0\" (context even notes C < 1/2 is FORCED — the positive constant C in \"at most Ck conflicts\" is the entire content), but the formal statement quantifies `exists C C' : nat` with no positivity and leaves k unrestricted. The conflict machinery itself is faithful (x210_conflict_assignment = symmetric F wi"
+          "note": "Repaired 2026-10-26 (coordination/PROGRAMME.md A2; frozen by the F1 surface_embeddable family): positive rational constants C = p/q and C'^2 = p'/q', guards connected [set: G] and 0 < k; the old body was false at k = 0 (X210Legacy_row_false). Original source-facing statement name preserved: surface_conflict_colouring_sqrt_genus_statement.",
+          "state": "partial",
+          "partial_reason": "Non-orientable surfaces are not modelled: surface_embeddable bounds the orientable genus, so the row covers only the graphs embeddable on orientable surfaces. Repaired 2026-10-26 (coordination/PROGRAMME.md A2): positive rational constants C = p/q and C'^2 = p'/q', guards connected [set: G] and 0 < k; the old body was false at k = 0 (X210Legacy_row_false in chromatic migration/surface_embeddable.v)."
         }
       },
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = dropped positivity of the constants, and it resolves against the statement: the source needs \"C, C' > 0\" (context even notes C < 1/2 is FORCED — the positive constant C in \"at most Ck conflicts\" is the entire content), but the formal statement quantifies `exists C C' : nat` with no positivity and leaves k unrestricted. The conflict machinery itself is faithful (x210_conflict_assignment = symmetric F with #conflicts <= C*k per edge; x210_conflict_colouring "
+      "faithfulness_result": "REPAIRED 2026-10-26 (A2), independent review pending, leg PARTIAL (non-orientable surfaces are not modelled): positive rational constants C = p/q and C'^2 = p'/q' (equivalent to the source's positive reals by monotonicity), guards connected [set: G] (componentwise, harmless) and 0 < k (the source's implicit positivity); conflicts are a list of ordered colour pairs per edge, counted once against Ck. Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk = dropped positivity of the constants, and it resolves against the statement: the source needs \"C, C' > 0\" (context even notes C < 1/2 is FORCED — the positive constant C in \"at most Ck conflicts\" is the entire content), but the formal statement quantifies `exists C C' : nat` with no positivity and leaves k unrestricted. The conflict machinery itself is faithful (x210_conflict_assignment = symmetric F with #conflicts <= C*k per edge; x210_conflict_colouring "
     },
     "X211": {
       "phase": "X211",

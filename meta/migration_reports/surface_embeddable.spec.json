@@ -31,7 +31,8 @@
     "Topological.migration.surface_embeddable.x138_embeddable_on_surface_canonical",
     "Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_canonical",
     "Chromatic.migration.surface_embeddable.x210_euler_genus_embeddable_canonical",
-    "Chromatic.migration.surface_embeddable.surface_conflict_colouring_sqrt_genus_statement_canonical"
+    "Chromatic.migration.surface_embeddable.surface_conflict_colouring_sqrt_genus_statement_canonical",
+    "Chromatic.migration.surface_embeddable.X210Legacy_row_false"
   ],
   "summary": [
     "surface-embeddable, one family over the existing public module GTBase.surface (re-exported by GTBase.base): the canonical is the unchanged `surface_embeddable surface G`, already audited LIGHTWEIGHT; no primitive is added and no fidelity fragment is enrolled.",
@@ -39,7 +40,8 @@
     "Six wrappers reach seven rows: Chromatic X150, X152 and its literal duplicate X154, X164, X210; GTMisc X167; Topological X138. Four are direct aliases with binders (surface G); X210's is the canonical with its arguments in the order (G, g) (x210_euler_genus_embeddable G g = surface_embeddable g G; added by F1 as an append to the Chromatic certificate file); X164's takes (surface boundary G) and ignores boundary, which is not `surface_embeddable_with_boundary` (an existential boundary set, audited BROKEN). The wrappers were canonical aliases from their authoring, so no conjecture file changes (no statement churn); the aliases stay while consumers remain.",
     "Certificates (one file per area) freeze each wrapper and every same-file declaration through which a row reaches it, and the seven complete rows (X210 by the F1 append), verbatim at the baseline; X167Original and X138Original compose the end-to-end pre-migration rows over the earlier families B18 (spanning-tree) and C8 (monochromatic). The *_canonical lemmas state each wrapper and each complete current row with surface_embeddable written out, every guard, bound and quantifier in place.",
     "X164 stays a documented blocked, unfaithful row (no extension precondition; orientable surface only; the boundary parameter does not constrain the embedding; it also has no connectedness guard): body, guards, quantifier order, status and defect text are unchanged, and no certificate here claims its English statement is faithful. X167 stays blocked (vacuous extension system), X138, X150, X152 and X154 partial.",
-    "Combined-parent note: X164's output-decoder chain (x164_data_nth_nat .. x164_linear_time_outputs_three_colouring) belongs to the separately queued family natural-data-decoder (candidate 5a0f56d, also at baseline 3bdfdae), whose own X164 copies keep this family's wrapper and instance class live and vice versa. When both are on one actual parent, the family integrated second must add reciprocal known_stale_snapshots keys and the end-to-end X164Original over both families' frozen chains."
+    "Combined-parent note: X164's output-decoder chain (x164_data_nth_nat .. x164_linear_time_outputs_three_colouring) belongs to the separately queued family natural-data-decoder (candidate 5a0f56d, also at baseline 3bdfdae), whose own X164 copies keep this family's wrapper and instance class live and vice versa. When both are on one actual parent, the family integrated second must add reciprocal known_stale_snapshots keys and the end-to-end X164Original over both families' frozen chains.",
+    "Source repair of the X210 row (2026-10-26, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md, arxiv:1803.10962#00 entry), not a migration equivalence: the frozen X210Legacy row admits k = 0 and is false (X210Legacy_row_false, an extra certificate here: K_1, planar, has no colouring by no colour). The live row has positive rational constants C = p/q and C'^2 = p'/q' (new local helpers x210_conflict_assignment_rat and x210_conflict_k_colourable_under_rat_bound) and the guards connected [set: G] and 0 < k, with its doc block rewritten; the certificate is the one-way frozen -> live (direction weaken) through that falsity, and the canonical restatement follows the new body. The row leaves blocked for PARTIAL, not done: non-orientable surfaces are not modelled (row fields implemented_by, source_verified_by, source_verified_at, verification_note; leg fields statement, commit, note)."
   ],
   "known_stale_snapshots": {
     "topological-graph-theory/theories/migration/monochromatic.v#X138Legacy.esperet_joret_surface_triangle_free_clustered_two_colouring_statement": "Earlier-family snapshot (C8, monochromatic, baseline 47eed16): C8 froze only X138's clustered-colouring chain and kept the surface wrapper x138_embeddable_on_surface live by design. That wrapper is unchanged since its authoring (it was always surface_embeddable surface G), so this copy still reads the original wrapper body. The complete row with every migrated helper at its original body is Topological.migration.surface_embeddable.X138Original.statement, certified by esperet_joret_surface_triangle_free_clustered_two_colouring_statement_original_compat (through C8's own row certificate).",
@@ -288,7 +290,27 @@
         "x210_euler_genus_embeddable": "X210Legacy.x210_euler_genus_embeddable"
       },
       "certificate": "Chromatic.migration.surface_embeddable.surface_conflict_colouring_sqrt_genus_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "exists C C' : nat, forall (G : sgraph) (g k : nat), x210_euler_genus_embeddable G g -> C' * g <= k * k -> x210_conflict_k_colourable_under_bound G k C",
+          "exists p q p' q' : nat, [/\\ 0 < p, 0 < q, 0 < p', 0 < q' & forall (G : sgraph) (g k : nat), connected [set: G] -> 0 < k -> x210_euler_genus_embeddable G g -> p' * g <= q' * (k * k) -> x210_conflict_k_colourable_under_rat_bound G k p q]"
+        ],
+        "direction": "weaken",
+        "doc_block_sha256": "60fcc9b6474f58ca1774dfb24f2a457b296f0faadaaa6afc76af7fb93a04d7a1",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "implemented_by",
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "statement",
+          "commit",
+          "note"
+        ]
+      }
     },
     {
       "kind": "original-chain",

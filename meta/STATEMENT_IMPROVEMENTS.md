@@ -1783,6 +1783,35 @@ them.
 - `arxiv:1803.10962#00` (`X210.v`, leg `blocked`) — the source's `C, C' > 0` is dropped, so
   degenerate witnesses such as `C = 0` are admitted; the positive constant `C` in "at most `Ck`
   conflicts" carries the whole content. Severity: **vacuous-looking**.
+  **REPAIRED 2026-10-26** (coordination/PROGRAMME.md A2; the row is frozen by the F1 surface_embeddable
+  family; Lancelot's routing, message 10; Marcol's two additions): the severity above understated the
+  defect: the old body admits `k = 0`, and `K_1`, which is planar (`surface_embeddable_K1`), has no colouring
+  by no colour, for every `C` and `C'`, so the old body is FALSE (`X210Legacy_row_false`). Source: arXiv:1803.10962
+  (e-print sha256 0db384dc..., `dp1.tex` sha256 8f90d591...; copy in
+  checkouts/lancelot/.lancelot-scratch/x210-src, the official deposit is the Mac's), Conjecture `conj:heawood`
+  (l.126-128): "There exist $C,C'>0$ such that, for any simple graph $G$ that is embeddable on a surface of
+  Euler genus $g$, if every edge is assigned at most $C k$ conflicts from $[k]^2$, then $G$ is conflict
+  $k$-colourable, provided $k\ge C' \sqrt{g}$."; conflicts (l.80-83) are a list `K(u,v)` of ordered colour pairs
+  per edge, counted per edge against `Ck`. `surface_conflict_colouring_sqrt_genus_statement` became
+  `exists p q p' q' : nat, [/\ 0 < p, 0 < q, 0 < p', 0 < q' & forall (G : sgraph) (g k : nat), connected [set: G] -> 0 < k -> x210_euler_genus_embeddable G g -> p' * g <= q' * (k * k) -> x210_conflict_k_colourable_under_rat_bound G k p q]`,
+  with the new local helpers `x210_conflict_assignment_rat` (`q * |K(u,v)| <= p * k`, transpose symmetry) and
+  `x210_conflict_k_colourable_under_rat_bound`; the natural-constant helpers stay for the frozen copy. The
+  readings: positive rationals `C = p/q` and `C'^2 = p'/q'` are equivalent to the source's positive reals by
+  monotonicity (a smaller `C` asks for less, a larger `C'` admits fewer `k`); `connected [set: G]` is the
+  surface_embeddable rule and loses nothing (the claim applies componentwise); `0 < k` is the source's implicit
+  positivity; an orientable surface of genus `g` has Euler genus `2g`, absorbed by `C'`. The closed lemma
+  `x210_conflict_bound_teeth` (X210.v) shows the conflict bound is load-bearing: with `p = q = 1`, `K_2`, `k = 1`
+  and its one conflict are not conflict 1-colourable. This is a SOURCE REPAIR, not a migration equivalence:
+  - the F1 certificate (`chromatic-theory/theories/migration/surface_embeddable.v`) keeps the frozen row and
+    proves `frozen -> live` (direction "weaken") through `X210Legacy_row_false`, listed with the spec's extra
+    certificates; the canonical restatement follows the new body;
+  - the `repair` entry of `meta/migration_reports/surface_embeddable.spec.json` binds the one exact text
+    replacement and the repaired doc block's hash, names this entry as its record, and lists the fields the
+    repair changes: the manifest-row fields `implemented_by`, `source_verified_by`, `source_verified_at` and
+    `verification_note`, and the leg fields `statement` (`blocked` -> `partial`), `commit` and `note`;
+  - the leg is PARTIAL, not done: non-orientable surfaces are not modelled, so the row covers only the graphs
+    embeddable on orientable surfaces (the wave's partial_reason).
+  Logical relation: old -> new holds because the old body is false. The new body is open.
 - `studies:std_gimbel_thomassen_problem_3` (`X150.v`, leg `partial`), `arxiv:1010.2472#00`
   (`X152.v`, leg `partial`) and its duplicate `arxiv:1404.6356#00` (`X154.v`), plus the surface
   hypothesis of `X164.v` and `X210.v` — `surface_embeddable` unfolds to
