@@ -2429,6 +2429,11 @@ the back-translation of the Rocq bodies.
   `formal_name` would turn an open row into a recorded resolution. The two sibling rows
   `arxiv:2103.15175#01` and `studies:std_growth_rate_of_list_ramsey_numbers_alon_buci_kal` have
   `repo: null`.
+  **FIXED 2026-10-26** (coordination/PROGRAMME.md A1; wave X235, Lancelot (51) / (65)): the row carries
+  `formal_name: list_ramsey_chromatic_resolution_statement`, moved with its four definitions, names and
+  texts unchanged, to `conjectures/X235.v`; the registered resolution `2103.15175__00` is re-recorded there
+  (statement / statement_file only; statement_sha256 and the theorem in `applications/list_ramsey_graph.v`
+  unchanged). The three other proved forms stay `No corpus row` variants.
 - **Existing prose preserved**: five in-file comments carried load-bearing content and were folded
   into the new blocks before being removed (`erdos_802_statement` on `trunc_log 2` vs `logn 2` and
   the average-degree direction; `erdos_547_statement` on the `2 <= n` guard;

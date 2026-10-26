@@ -6217,6 +6217,70 @@
       },
       "faithfulness_verified_by": "Arthur (X234 wave verification, 2026-10-26)",
       "faithfulness_result": "Readback 2026-10-26 (verifier Arthur): 3/3 PASS against the pinned texts and the e-prints. The bodies were read with X195's x195_arrows (every colouring {set Host} -> 'I_k has a mono_copy of some Fam i; only edge values are read) and x195_ramsey_number (least n with 'K_n arrowing), mono_copy (injective, adjacency-preserving, every image edge of colour c; not induced), GTBase complete_multipartite_graph n 2 (carrier 'I_n * 'I_2, adjacent iff x.1 != y.1) and clique_count_size (s-cliques; 1 at s = 0), all at work/coordinator 92f9b916. arxiv:2207.07775#01: r(k) = r(k,k) (l.1089) is x195_ramsey_number 2 of the single graph K_k; K_{r(k)-1}[2] is the 2-blowup with independent parts (l.1096: the red and blue edges of a K_n 3-colouring; l.1108, l.1110-1111: only edges across parts are coloured); mixed (l.1092-1094) = no monochromatic K_k and not x234_blowup_colouring, which under no monochromatic K_k is the same as not the blowup of a Ramsey colouring (one vertex per part lifts a monochromatic K_k of chi); for infinitely many k = for every N some k >= N, not all large k (l.1121); k <= 2 never witnesses (K_0 always has a copy; for k = 1, 2 the blowup K_0[2] or K_1[2] has no edge, so every colouring is a blowup colouring). arxiv:2312.06895#00: K_t-Ramsey (l.84) is x195_arrows G 2 for an arbitrary finite G; r_{K_s}(K_t) is a minimum over K_t-Ramsey graphs of the copies of K_s, which are exactly the s-cliques; minimum = C(R, s) iff attained (by K_R) and a lower bound, as encoded; s = 0 and t = 0 are harmless; R exists by Ramsey's theorem and is unique. arxiv:2312.06895#01: l.134 states the q-colour generalization (the TeX cites conj:clique-clique; the upstream note's 'Theorem 1.2' is a rendering of that reference), so the row is determined; q colours in both the Ramsey property and the Ramsey number (forced, as the Notes say); q >= 2 excludes the vacuous q = 0 (no map into 'I_0) and the trivial q = 1; at q = 2 the body is row #00's verbatim (Remark g234_multi_two). Grounding (grounding_X234.v at 54bad952, read; compiled by Marcol's MCP with no holes, the wave run's check_milestone decides): the hyp_inhabited instances hold (r_q(K_2) = 2 for q >= 1, K_2 arrows K_2); the not_trivially_true claims are in the contract form (rows #00 / #01: the lower bound without x195_arrows G fails at s = t = 2, R = 2, G = K_1, and implies the row; the 'exactly' variant fails at K_3; row 2207.07775#01: 'for every k >= 2' fails at k = 2 and implies the row); helper_sanity for the paper_specific helper x234_blowup_colouring has two positive instances and a negative one on K_2[2] (l.1110's mechanism). The three derived v2_legs_state entries (8a93dc82), recomputed from the wave, are identical; no lint allowlist entry."
+    },
+    "X235": {
+      "phase": "X235",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X235.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X235 (A1 rebind of the registered resolution 2103.15175__00; routing Lancelot (51) R2 variant and (65), design rebind-design-by-marcol), branch math/marcol-x235-20261026, 2026-10-26",
+      "source_verified_by": "Arthur (X235 wave verifier, A3: pinned record re-read at b72c5857: data/arxiv_conjectures.json statement_text of 2103.15175 'Conjecture on R_l(H_s, k)' (row #00, published 2022-01-23), equal to the v2 manifest row whose source_hash the wave pins, and data/arxiv_reviews/2103.15175__00.json (open); the e-print of Lancelot's fetch (v2, the version the pin read): eprint.bin 6673991b, main.tex 568a68a1; the 9 quoted lines (4 blocks: l.128, 298, 300-305, 307) of evidence math-2026-10-26/x235-statements-by-marcol/SOURCES.txt regenerated from it byte-identical, the pinned text likewise)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x235-list-ramsey-rebind",
+      "rows": {
+        "axv_2103_15175_00": {
+          "formal_name": "list_ramsey_chromatic_resolution_statement",
+          "source_hash": "535d4a72e1dc3f9bb52adccf4ae3b9f5bbaf55de5275a5f497cc6ecdf9e32d31",
+          "note": "Fox-He-Luo-Xu, Multicolor list Ramsey numbers grow exponentially (arXiv:2103.15175v2, main.tex sha256 568a68a1): the conjecture of l.307 that the upper bound of Theorem thm:families (l.300-305) is the truth, R_l(H_s, k) = s^k + 1 for s >= 2; list Ramsey number l.128, of a family l.298. The registered, proved statement of 2103.15175__00, moved verbatim from applications/list_ramsey_graph.v with its four definitions.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g235_hyp_inhabited",
+              "claim": "g235_hyp_claim",
+              "references": [
+                "list_ramsey_chromatic_resolution_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g235_not_trivially_true",
+              "claim": "g235_ntt_claim",
+              "references": [
+                "list_ramsey_chromatic_resolution_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g235_helpers_sanity",
+                "claim": "g235_helpers_claim",
+                "references": [
+                  "lr_nat_valid_lists",
+                  "lr_nat_admissible",
+                  "lr_color_graph",
+                  "lr_nat_graph_forces"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "lr_nat_valid_lists": {
+          "classification": "paper_specific",
+          "reason": "Valid k-lists of arXiv:2103.15175 l.128 (L : E(K_n) -> (N choose k)): each edge gets the same duplicate-free list of k natural colours in both orientations; moved verbatim from applications/list_ramsey_nat.v."
+        },
+        "lr_nat_admissible": {
+          "classification": "paper_specific",
+          "reason": "An L-colouring of arXiv:2103.15175 l.128: a symmetric edge colouring choosing from the lists; moved verbatim from applications/list_ramsey_nat.v."
+        },
+        "lr_color_graph": {
+          "classification": "paper_specific",
+          "reason": "The colour class of a pair-function colouring phi : V -> V -> C of the complete graph on V, built with GTBase fg_mk_sgraph. Related to, but not an alias of, the edge-colour-class family (canonical GTBase edge_colour_class over a set map {set G} -> C): a different colouring representation, kept verbatim because the registered proof of 2103.15175__00 uses it (Lancelot (65) item 2)."
+        },
+        "lr_nat_graph_forces": {
+          "classification": "paper_specific",
+          "reason": "The list Ramsey forcing property of arXiv:2103.15175 l.298 for the family of graphs of chromatic number greater than s: some valid k-lists on K_n force a colour class whose library chromatic number exceeds s; moved verbatim from applications/list_ramsey_graph.v."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X235 wave verification, 2026-10-26)",
+      "faithfulness_result": "Readback 2026-10-26 (verifier Arthur): 1/1 PASS against the pinned text and the e-print. arxiv:2103.15175#00: list_ramsey_chromatic_resolution_statement says that for 2 <= s and 0 < k, (s^k).+1 forces and every forcing order is at least (s^k).+1, i.e. R_l(H_s, k) = s^k + 1 as the least n of l.128 / l.298; lr_nat_valid_lists is L : E(K_n) -> binom(N, k) (duplicate-free lists of k naturals, the same set in both orientations of an edge), lr_nat_admissible an L-colouring (symmetric, choosing from the lists), lr_color_graph the colour class on all vertices of K_n (GTBase fg_mk_sgraph), lr_nat_graph_forces the existence of lists all of whose L-colourings have a class of library chromatic number > s; a monochromatic copy of a graph with chromatic number > s exists iff some class has chi > s (a class contains the copy, and is itself a copy). The guards mirror the source (s >= 2 stated, k >= 1 implicit in binom(N, k)); either alone can be dropped, both together fail at s = k = 0 (0^0 = 1), as the Notes say. The move is verbatim: the five declarations of X235.v are byte-identical to their text at 23e3df2a (list_ramsey_nat.v, list_ramsey_graph.v), the applications files only gain the import, lose those declarations and change two comments (no proof line changes), and the A6 re-record changes statement, statement_file and source_locator of 2103.15175__00 (source_locator set to the value build_v2_manifest derives for the formal_name row, 1a571e6a; statement_sha256 unchanged; the A6 review is Lancelot's). Grounding (grounding_X235.v at ce73a9fb, read; compiled by Marcol's MCP with no holes, the wave run's check_milestone decides): hyp_inhabited at s = 2, k = 1 (the statement yields forces 2 1 3); not_trivially_true in the contract form (the unguarded variant fails at s = k = 0 by g235_forces_0_0_1 and implies the row), with forces 2 1 3, ~ forces 2 1 2 and the false R_l = s^k reading as extras; helper_sanity gives each of the four paper_specific helpers a positive and a negative instance. The derived v2_legs_state entry (674ba837), recomputed from the wave, is identical; the consumer scan finds no tracked name; no lint allowlist entry."
     }
   }
 }

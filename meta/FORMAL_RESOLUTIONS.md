@@ -120,6 +120,9 @@ possible labels, so fewer than `s^k` vertices cannot block all choices. Constant
 lists give the matching upper bound by the pigeonhole principle. The modules
 `applications/list_ramsey_nat.v` and `applications/list_ramsey_graph.v` establish
 the arbitrary-color and graph-chromatic interpretations, respectively.
+The proved proposition, `list_ramsey_chromatic_resolution_statement`, and its four
+definitions live in `conjectures/X235.v` since wave X235 (2026-10-26), names and texts
+unchanged, so that corpus row `arxiv:2103.15175#00` cites it as its `formal_name`.
 
 ## Initial result: Question 5.9
 

@@ -1,6 +1,7 @@
 (** Natural-number edge lists reduce to a finite ordinal palette. *)
 From mathcomp Require Import all_boot.
 From Extremal.foundations Require Import list_ramsey.
+From Extremal.conjectures Require Import X235.
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
@@ -13,16 +14,6 @@ rewrite inE => /orP [/eqP ->|cx].
 - exact: leq_maxl.
 - exact: leq_trans (IH cx) (leq_maxr a _).
 Qed.
-
-Definition lr_nat_valid_lists (V : finType) (k : nat)
-    (L : V -> V -> seq nat) : Prop :=
-  (forall x y c, (c \in L x y) = (c \in L y x)) /\
-  forall x y, x != y -> uniq (L x y) /\ size (L x y) = k.
-
-Definition lr_nat_admissible (V : finType) (L : V -> V -> seq nat)
-    (phi : V -> V -> nat) : Prop :=
-  (forall x y, phi x y = phi y x) /\
-  forall x y, x != y -> phi x y \in L x y.
 
 Definition lr_nat_avoids (V : finType) (s : nat)
     (phi : V -> V -> nat) : Prop :=
@@ -95,9 +86,9 @@ Definition lr_nat_is_number (s k r : nat) : Prop :=
 (** No corpus row: natural-number-colour variant of the list Ramsey equality R_l(H_s, k) = s^k + 1,
     PROVED below as [list_ramsey_natural]: edge lists are ordinary finite [seq nat] and the
     Ramsey number is the least n forcing a non-avoiding colouring. Same underlying result
-    as arXiv:2103.15175 Section 3.1, whose corpus row arxiv:2103.15175#00 carries no
-    formal_name and so cannot be cited; see
-    https://graph-theory-ai.github.io/graph-conjectures/arxiv/2103.15175__00/ *)
+    as arXiv:2103.15175 Section 3.1, whose corpus row arxiv:2103.15175#00 is stated in
+    Extremal.conjectures.X235 as [list_ramsey_chromatic_resolution_statement] (the graph form,
+    proved in applications/list_ramsey_graph.v from this theorem). *)
 Definition list_ramsey_natural_statement : Prop :=
   forall s k : nat, 2 <= s -> 0 < k -> lr_nat_is_number s k (s ^ k).+1.
 
