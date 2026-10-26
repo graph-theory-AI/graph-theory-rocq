@@ -276,13 +276,14 @@ Definition minimum_number_of_transitive_subtournaments_of_order_statement : Prop
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/cyclic_spanning_subdigraph_with_small_cyclomatic_number/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/cyclic_spanning_subdigraph_with_small_cyclomatic_number.json
     English statement: (Open Problem Garden, Cyclic spanning subdigraph with small cyclomatic number)
-      For every finite digraph D in which every vertex lies on a directed cycle (equivalently,
-      all strong components are nontrivial) there is a spanning subdigraph, given as an arc
-      selector keeping only real arcs and leaving every vertex with positive kept in-degree and
-      positive kept out-degree, whose cyclomatic number (number of kept arcs, plus number of
-      weakly connected components of the kept subdigraph, minus number of vertices) is at most
-      the independence number of D.
-    Definitions: [cyclic_sel f] - the arc selector f keeps only real arcs and leaves positive
+      For every finite loopless digraph D in which every vertex lies on a directed cycle
+      (equivalently, all strong components are nontrivial) there is a spanning subdigraph,
+      given as an arc selector keeping only real arcs and leaving every vertex with positive
+      kept in-degree and positive kept out-degree, whose cyclomatic number (number of kept
+      arcs, plus number of weakly connected components of the kept subdigraph, minus number of
+      vertices) is at most the independence number of D.
+    Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v);
+      [cyclic_sel f] - the arc selector f keeps only real arcs and leaves positive
       in- and out-degree at every vertex (this file); [cyclomatic f] - kept arcs + weakly
       connected components - vertices (this file); [nb_wcc f] / [wadj f] - weakly connected
       components of the kept subdigraph (this file); [alpha D] - the independence number, the
@@ -290,9 +291,15 @@ Definition minimum_number_of_transitive_subtournaments_of_order_statement : Prop
       (conjectures/classic_core.v).
     Notes: The corpus hypothesis all strong components are nontrivial is encoded by the
       equivalent every vertex lies on a directed cycle. A spanning subdigraph is modelled by an
-      arc selector f : D -> {set D} rather than by a new carrier type. *)
+      arc selector f : D -> {set D} rather than by a new carrier type.  The guard
+      [loopless D] is load-bearing: on the one-vertex digraph with a loop the vertex lies on a
+      directed cycle (the loop), its singleton is not stable, so [alpha D = 0], while every
+      cyclic arc selector keeps the loop and has cyclomatic number at least 1
+      (meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v).  The
+      source's digraphs have no loops.  The guard was added on 2026-10-26
+      (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement : Prop :=
-  forall D : diGraphType,
+  forall D : diGraphType, loopless D ->
     (forall v : D, exists c : seq D, dicycle c /\ v \in c) ->
     exists f : D -> {set D}, cyclic_sel f /\ (cyclomatic f <= alpha D).
 
