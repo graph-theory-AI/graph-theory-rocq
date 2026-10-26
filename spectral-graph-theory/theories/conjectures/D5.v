@@ -33,6 +33,7 @@ From GraphTheory Require Import sgraph.
 From GTBase Require Import base strongly_regular.
 From mathcomp Require Import all_algebra perm.
 From Spectral Require Import foundations.spectral.
+From Spectral Require Import foundations.triangle_free_srg.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -50,45 +51,49 @@ Import GRing.Theory Num.Theory.
     of distinct non-adjacent vertices has exactly [mu] common neighbours.  (Triangle-
     freeness forces [lam = 0].)
 
-    PRIMITIVITY GUARDS (faithfulness): [connected [set: G]] together with [0 < k] and
-    [k < (#|G|).-1] is the standard PRIMITIVE definition.  Without them an edgeless graph
-    ([regular G 0], vacuous [lam] clause, forced [mu = 0]), a complete graph, or a
-    disjoint union of cliques would trivially satisfy the predicate, making the "eighth
-    SRG" question vacuously provable.  [0 < k] guarantees an adjacent pair exists (so
-    [lam] is genuinely constrained); [k < (#|G|).-1] guarantees a distinct non-adjacent
-    pair exists (so [mu] is genuinely constrained) and rules out complete graphs.
-
-    "Is there an EIGHTH triangle-free strongly regular graph?" — exactly seven such
-    graphs are known, so the proposition is: there exist eight pairwise non-isomorphic
-    triangle-free strongly regular graphs.  Combined with the seven known examples this
-    is equivalent to the existence of an eighth. *)
+    The guards [connected [set: G]], [0 < k] and [k < (#|G|).-1] exclude an edgeless
+    graph, a complete graph and a disjoint union of cliques, but NOT the complete
+    bipartite graphs K_{n,n} (n >= 2): they are connected, triangle-free and strongly
+    regular with (n, 0, n), and imprimitive (their complements are disconnected).  The
+    former eight-graph statement of this row was therefore provable with K_{2,2}, ...,
+    K_{9,9} (migration/strongly_regular.v, meta/STATEMENT_IMPROVEMENTS.md); the statement
+    below states its guards on the parameters directly.  The alias stays: grounding_D5.v
+    grounds it, with K_{2,2} as its headline witness. *)
 Definition strongly_regular (G : sgraph) : Prop :=
   connected_nontrivial_strongly_regular G.
 
 (** Corpus row: opg:triangle_free_strongly_regular_graphs
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/triangle_free_strongly_regular_graphs/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/triangle_free_strongly_regular_graphs.json
-    English statement: (OPG "Triangle free strongly regular graphs")
-      There exist eight pairwise non-isomorphic simple graphs, each of which is both
-      triangle-free and strongly regular.
-    Definitions: [strongly_regular G] — there are k, lam and mu such that G is connected, is
-      k-regular with 0 < k < |V(G)| - 1, every adjacent pair of vertices has exactly lam
-      common neighbours, and every pair of distinct non-adjacent vertices has exactly mu
-      common neighbours (D5.v); [triangle_free], [regular G k] and [common_nbr u v] are
-      GTBase (base/theories/base.v); [connected] and [diso] written [≃] are
-      coq-graph-theory.
-    Notes: the corpus row is the Problem "Is there an eighth triangle free strongly regular
-      graph?". Exactly seven such graphs are known, so the question is formalized
-      affirmatively as the existence of eight pairwise non-isomorphic triangle-free strongly
-      regular graphs, indexed by ['I_8]; the equivalence with there being an eighth one
-      rests on the known list of seven, which is not formalized here. The primitivity guards
-      [connected], [0 < k] and [k < |V(G)| - 1] inside [strongly_regular] are load-bearing:
-      without them an edgeless graph, a complete graph or a disjoint union of cliques would
-      satisfy the predicate and the statement would become trivially provable. *)
+    English statement: (OPG "Triangle free strongly regular graphs": "Is there an eighth triangle
+      free strongly regular graph?")
+      There is a nonempty simple graph G that is triangle-free and strongly regular with
+      parameters (k, lam, mu) where 0 < mu < k, and that is isomorphic to none of the seven known
+      triangle-free strongly regular graphs: the five-cycle, the Petersen, Clebsch,
+      Hoffman-Singleton, Gewirtz and Higman-Sims graphs, and the (77,16,0,4) M22 graph.
+    Definitions: [strongly_regular_parameters G k lam mu] - G is k-regular, every adjacent pair
+      has exactly lam common neighbours and every distinct non-adjacent pair exactly mu
+      (GTBase, base/theories/strongly_regular.v); [known_triangle_free_srg i] - the seven known
+      graphs for i < 7, each checked triangle-free with its parameters
+      (spectral-graph-theory/theories/foundations/triangle_free_srg.v); [triangle_free] and
+      [common_nbr] are GTBase (base/theories/base.v); [diso] written [≃] is coq-graph-theory.
+    Notes: the source excludes degeneracies by mu >= 1, here [0 < mu], and counts exactly seven
+      known graphs, which are the PRIMITIVE ones (the graph and its complement connected): Klin
+      and Ziv-Av, "Computer Algebra Investigation of Known Primitive Triangle-Free Strongly Regular
+      Graphs" (2013), section 2 defines primitivity, section 4 lists these seven, and section 5
+      shows that a nonempty imprimitive triangle-free strongly regular graph is complete bipartite
+      or a union of disjoint edges.  The guards exclude exactly those two families: disjoint edges
+      have mu = 0, and K_{k,k} has mu = k (in a triangle-free strongly regular graph mu <= k, with
+      equality only for K_{k,k}).  Without [mu < k], K_{2,2}, ..., K_{9,9} proved the former
+      eight-graph encoding (meta/STATEMENT_IMPROVEMENTS.md).  [0 < #|G|] excludes the empty
+      graph, which has every parameter triple.  Being isomorphic to none of the seven explicit
+      graphs is the source's question itself; no uniqueness theorem is assumed.  A 57-regular
+      Moore graph of diameter two would be such a G. *)
 Definition triangle_free_strongly_regular_graphs_statement : Prop :=
-  exists g : 'I_8 -> sgraph,
-    (forall i, triangle_free (g i) /\ strongly_regular (g i)) /\
-    (forall i j, i != j -> ~ inhabited (g i ≃ g j)).
+  exists (G : sgraph) (k lam mu : nat),
+    [/\ (0 < #|G|)%N, triangle_free G, strongly_regular_parameters G k lam mu,
+        (0 < mu)%N & (mu < k)%N] /\
+    forall i : 'I_7, ~ inhabited (G ≃ known_triangle_free_srg i).
 
 (** ** Row 2 — Signing a graph to small-magnitude eigenvalues (Graph Theory, SOLVED) *)
 

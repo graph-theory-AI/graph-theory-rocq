@@ -103,6 +103,30 @@ uses. Gate: `python3 meta/check_statement_docs.py --ignore-baseline spectral-gra
   that exactly seven are known, so a prover must exhibit all eight rather than one new graph.
   A faithful alternative would enumerate the seven known graphs in `foundations/` and state the
   existence of one more, non-isomorphic to each.
+  **Re-read (2026-10-25, PROGRAMME A2): the row was PROVABLE, kernel-checked.** `strongly_regular` is GTBase's
+  `connected_nontrivial_strongly_regular` (connected, `0 < k < #|G|.-1`). The complete bipartite graphs K_{n,n}
+  (n >= 2) satisfy it with (n, 0, n) and are triangle-free, and K_{2,2}, ..., K_{9,9} are pairwise
+  non-isomorphic. So the eight-graph body is a theorem: `D5Legacy_row_holds` in
+  `spectral-graph-theory/theories/migration/strongly_regular.v`. The source's own guard against degeneracies,
+  mu >= 1, does not exclude K_{n,n} either. Its count of "exactly seven known" is the count of the PRIMITIVE
+  graphs, those whose complement is also connected: Klin and Ziv-Av, "Computer Algebra Investigation of Known
+  Primitive Triangle-Free Strongly Regular Graphs" (2013), https://easychair.org/publications/paper/BbN2,
+  define primitivity in section 2 and list the same seven in section 4. Their section 5 shows that a nonempty
+  imprimitive triangle-free strongly regular graph is complete bipartite (mu = k; in a triangle-free strongly
+  regular graph mu <= k, with equality only for K_{k,k}) or a union of disjoint edges (mu = 0).
+  **REPAIRED:** `triangle_free_strongly_regular_graphs_statement` now asks for an eighth graph directly: a
+  nonempty triangle-free strongly regular graph with parameters 0 < mu < k, isomorphic to none of the seven
+  known graphs, which `spectral-graph-theory/theories/foundations/triangle_free_srg.v` gives explicitly and
+  checks in the kernel. The seven graphs are the five-cycle, Petersen (GTBase `petersen_ord`), Clebsch,
+  Hoffman-Singleton, Gewirtz, M22 (77,16,0,4) and Higman-Sims, the last three built from S(3,6,22).
+  The body became
+  `exists (G : sgraph) (k lam mu : nat), [/\ (0 < #|G|)%N, triangle_free G, strongly_regular_parameters G k lam mu, (0 < mu)%N & (mu < k)%N] /\ forall i : 'I_7, ~ inhabited (G ≃ known_triangle_free_srg i)`.
+  This is a SOURCE REPAIR, not a migration equivalence:
+  - the A33 certificate keeps the frozen eight-graph row and proves `live -> frozen` (trivially, since the
+    frozen row is a theorem);
+  - the `repair` entry of `meta/migration_reports/strongly_regular.spec.json` binds the one exact text
+    replacement and the repaired doc block's hash, and names this entry as its record;
+  - no leg or manifest field changes.
 - `studies:std_elphick_farber_goldberg_wocjan_conjecture_s_s` (X6.v:51),
   `studies:std_elphick_farber_goldberg_wocjan_conjecture_square` (X134.v:27, a synonym of the
   former) and `opg:laplacian_degrees_of_a_graph` (D5.v:233) — severity: **vacuous-looking**. Each
