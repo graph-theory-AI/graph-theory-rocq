@@ -703,6 +703,25 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   to the starting position `C0` that the existential just chose, while `capt_3(G)` minimises
   over starting positions; a deliberately bad `C0` witnesses a large `t`.  Severity: too weak.
   (Row leg already `blocked`.)
+  **RE-ENCODED 2026-10-26** (coordination/PROGRAMME.md A1; the row is frozen by no migration family; Lancelot's
+  routing, message 30; Marcol's three design points): the audit above found one of four defects. Source:
+  arXiv:1709.09050 (e-print sha256 737a9d65..., `topCR_0422.tex` sha256 f0b1b4dc...; copy in
+  checkouts/lancelot/.lancelot-scratch/x197-src), l.78-81 (the game: the cops place first, then the robber; a round is
+  the cops' move, each cop independently, then the robber's; "The cops win if after a finite number of rounds, one of
+  them can occupy the same vertex as the robber. This is called a capture."), l.144-148 (the length counts rounds "not
+  including the initial round"; capt_k(G) is the length of an optimal play, the minimum over the cops' strategies with
+  the robber evading as long as possible; capt(G) = capt_{c(G)}(G)) and l.168-169 ("even providing an example of a
+  planar graph satisfying capt(G) > n remains open"). The defects: (1) the audited one, the minimality relative to the
+  chosen start; (2) capture was checked only after the robber's move, so a cop landing on the robber did not capture
+  and one cop never caught the robber on K_2; (3) three cops, where capt(G) uses c(G) (capt_3(G) <= capt(G) when
+  c(G) <= 2); (4) arbitrarily large graphs, where the source asks for one. `planar_cops_capture_time_linear_tight_statement`
+  became `exists (G : sgraph) (k t : nat), [/\ connected [set: G], wagner_planar G, x197_cop_number G k,
+  x197_capture_time G k t & #|G| < t]`, with `x197_cops_win_in` capturing in either half of a round and
+  `x197_capture_time` minimal over every start; the connected guard loses no witness (on a disconnected G, c(G) is the
+  sum and capt(G) the largest over the components). Sanity lemmas in X197.v: the capture time is functional, one cop
+  catches the robber on K_2 in one round, K_1 meets every guard, the empty graph is no witness. Relation old -> new:
+  none by content (different games, quantities and quantifiers). The row leaves `blocked` for PARTIAL: its first
+  question ("is the bound capt_3(G) <= 2n tight?") has no fixed meaning and is not encoded.
 - `arxiv:1802.05582#01` (`X205.v:44`) — the `rounds` argument of
   `x205_randomized_local_algorithm` is a phantom parameter: it occurs in the type signature and
   in the logarithmic bound but in none of the record's fields, and `x205_output` carries no

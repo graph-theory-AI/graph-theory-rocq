@@ -4320,20 +4320,20 @@
       "phase": "X197",
       "repo": "graph-theory-misc",
       "defines_file": "X197.v",
-      "implemented_by": "Batch X191-X210 statement authoring pass (Codex), 2026-07-16",
-      "source_verified_by": "Codex X191-X210 faithfulness readback, 2026-07-16",
-      "source_verified_at": "2026-07-16",
-      "commit": "x191-x210-batch1",
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "implemented_by": "Arthur (A1 re-encoding of the 2026-07-16 Codex statement, coordination/PROGRAMME.md section 3, Lancelot's routing message 30, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read: the pinned record data/arxiv_extracted/1709.09050.json at b72c5857 and the arXiv e-print, sha256 737a9d65, topCR_0422.tex sha256 f0b1b4dc, l.78-81, 144-148, 165 and 168-169, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x197-capture-game-reencoding",
+      "faithfulness_verified_by": "",
       "rows": {
         "axv_1709_09050_02": {
           "formal_name": "planar_cops_capture_time_linear_tight_statement",
-          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: planar_cops_capture_time_linear_tight_statement.",
-          "state": "blocked",
-          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the top statement does NOT say capt3(G) > n. Foundation primitives: wagner_planar (base.v) = FAITHFUL planarity; the cops/robbers game (x197_cops_win_in) and x197_capture_time are bespoke local definitions in X197.v, not phase-1 primitives. Mis-quantification: x197_capture_time G cops t := exists C0, (forall r0, win_in t C0 r0) /\\ (forall t'<t, exists r0, ~win_in t' C0 r0). The minimality clause is boun"
+          "note": "Re-encoded 2026-10-26 (coordination/PROGRAMME.md A1; frozen by no migration family): the row's second question, a connected planar G of order n with capt(G) > n, capt(G) the capture time with c(G) cops, in the source's game (a cop landing on the robber captures; rounds counted after the initial placement; the capture time minimal over every starting position). Original source-facing statement name preserved: planar_cops_capture_time_linear_tight_statement.",
+          "state": "partial",
+          "partial_reason": "The row asks two questions; the second, the source's precise sentence (a planar graph with capt(G) > n, arXiv:1709.09050 l.168-169), is encoded; the first (is the bound capt_3(G) <= 2n tight?) has no fixed meaning and is not encoded."
         }
       },
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the top statement does NOT say capt3(G) > n. Foundation primitives: wagner_planar (base.v) = FAITHFUL planarity; the cops/robbers game (x197_cops_win_in) and x197_capture_time are bespoke local definitions in X197.v, not phase-1 primitives. Mis-quantification: x197_capture_time G cops t := exists C0, (forall r0, win_in t C0 r0) /\\ (forall t'<t, exists r0, ~win_in t' C0 r0). The minimality clause is bound to the SAME existential C0, so it unfolds to `exists "
+      "faithfulness_result": "RE-ENCODED 2026-10-26 (A1), independent review pending, leg PARTIAL (the tightness question is not encoded): the second question exactly, exists a connected wagner_planar G with x197_cop_number G k, x197_capture_time G k t and |G| < t, in the game of arXiv:1709.09050 (l.78-81, 144-148): the cops place first, a cop landing on the robber captures, rounds are counted after the initial placement, and the capture time is minimal over every start (a function of G and k). Besides the audited start-relative minimality, the re-encoding fixes the capture rule (the old one let the robber escape a cop landing on it), the number of cops (capt(G) uses c(G), not 3) and the quantifier (one graph, not arbitrarily large ones). Earlier result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the top statement does NOT say capt3(G) > n. Foundation primitives: wagner_planar (base.v) = FAITHFUL planarity; the cops/robbers game (x197_cops_win_in) and x197_capture_time are bespoke local definitions in X197.v, not phase-1 primitives. Mis-quantification: x197_capture_time G cops t := exists C0, (forall r0, win_in t C0 r0) /\\ (forall t'<t, exists r0, ~win_in t' C0 r0). The minimality clause is bound to the SAME existential C0, so it unfolds to `exists "
     },
     "X198": {
       "phase": "X198",
