@@ -426,7 +426,7 @@ Definition partitioning_planar_digraphs_statement : Prop :=
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/partitionning_a_tournament_into_k_strongly_connected_subtournaments.json
     English statement: (Open Problem Garden, Partitioning a tournament into k-strongly connected subtournaments)
       There is a function g from finite lists of positive integers to naturals such that for
-      every list k_1, ..., k_p of positive integers and every tournament T that is
+      every non-empty list k_1, ..., k_p (p >= 1) of positive integers and every tournament T that is
       g(k_1,...,k_p)-strongly connected, the vertex set of T partitions into p parts V_1, ...,
       V_p such that each V_i has more than one vertex and the subtournament it induces is
       k_i-strongly connected.
@@ -434,10 +434,16 @@ Definition partitioning_planar_digraphs_statement : Prop :=
       one part (this file); [sub_tournament S] - the subtournament induced by S
       (core/tournament.v).
     Notes: Nontriviality of each part is encoded as 1 < #|V_i|; note that [kstrong] itself
-      already requires k < #|V_i|. *)
+      already requires k < #|V_i|.  The guard [0 < size ks] is load-bearing: for the empty list
+      the positivity hypothesis holds vacuously and some tournament is g([::])-strong
+      (grounding_P9.kstrong_tournament_exists), but a tournament with a vertex has no partition
+      into zero parts
+      (meta/probe_hints/partitionning_a_tournament_into_k_strongly_connected_statement.v).  The
+      source partitions into V_1, ..., V_p with p >= 1.  The guard was added on 2026-10-26
+      (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition partitionning_a_tournament_into_k_strongly_connected_statement : Prop :=
   exists g : seq nat -> nat,
-    forall ks : seq nat, all (fun k => 0 < k) ks ->
+    forall ks : seq nat, 0 < size ks -> all (fun k => 0 < k) ks ->
       forall T : tournament, kstrong T (g ks) ->
         exists part : seq {set T},
           [/\ size part = size ks, set_partition part &
