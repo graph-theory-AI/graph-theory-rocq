@@ -62,13 +62,6 @@ Definition x156_whp_where_defined
 
 (** ** Sanity lemmas ********************************************************)
 
-Lemma x156_graph_dist_refl (G : sgraph) (x : G) : graph_dist x x = 0.
-Proof.
-rewrite /graph_dist; case: ex_minnP => m hm hmin.
-apply/eqP; rewrite -leqn0; apply: hmin.
-by rewrite /= inE eqxx.
-Qed.
-
 Lemma x156_graph_dist0 (G : sgraph) (x y : G) : graph_dist x y = 0 -> x = y.
 Proof.
 rewrite /graph_dist; case: ex_minnP => m hm _ m0; move: hm; rewrite m0 /=.
