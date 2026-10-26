@@ -3422,20 +3422,20 @@
       "phase": "X147",
       "repo": "minor-theory",
       "defines_file": "X147.v",
-      "implemented_by": "Batch X131-X150 statement authoring pass (Codex), 2026-07-15",
-      "source_verified_by": "Codex X131-X150 faithfulness readback, 2026-07-15",
-      "source_verified_at": "2026-07-15",
-      "commit": "x131-x150-batch1",
+      "implemented_by": "Arthur (A1 re-encoding of the 2026-07-15 Codex statement, coordination/PROGRAMME.md section 3, Lancelot's routing of 2026-10-26 11:25Z, design reviewed by Marcol, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read: the pinned studies row and the arXiv:2509.09035 e-prints, v2 (the pin's version) sha256 ced7846b, as3.tex sha256 2b46754a, l.98-150, and v4 sha256 c39407c6, l.129-136 and 233-237, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x147-fat-minor-quasi-isometry-reencoding",
       "rows": {
         "std_georgakopoulos_papasoglu_conjecture_fat_minors": {
           "formal_name": "georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement",
-          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement.",
+          "note": "Re-encoded 2026-10-26 (coordination/PROGRAMME.md A1; frozen by no migration family): the source's (L,C)-quasi-isometry (one map, upper and lower bounds on reachable pairs, a C-dense image) and c-fat minor (branch sets for the vertices and the edges of H, every two more than c apart but a vertex and an incident edge), distances guarded by reachability (the source's infinity). Original source-facing statement name preserved: georgakopoulos_papasoglu_fat_minor_quasi_isometry_statement.",
           "state": "partial",
-          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the conclusion x147_quasi_isometric_to_H_minor_free (X147.v:22-32) is strictly weaker than a quasi-isometry, so it does not encode \"G admits an (L,C)-quasi-isometry to an H-minor-free graph.\" It provides two DECOUPLED maps f:G->Q, g:Q->G, each with ONLY the upper Lipschitz bound graph_dist(fx,fy) <= L*graph_dist(x,y)+C plus coarse-surjectivity; there is no lower bound (>= dist/L - C) and no quasi-invers"
+          "partial_reason": "Finite graphs only: the source allows infinite graphs (arXiv:2509.09035 v2 l.98); the finite statement follows from the source's but is not known to be equivalent to it."
         }
       },
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: the conclusion x147_quasi_isometric_to_H_minor_free (X147.v:22-32) is strictly weaker than a quasi-isometry, so it does not encode \"G admits an (L,C)-quasi-isometry to an H-minor-free graph.\" It provides two DECOUPLED maps f:G->Q, g:Q->G, each with ONLY the upper Lipschitz bound graph_dist(fx,fy) <= L*graph_dist(x,y)+C plus coarse-surjectivity; there is no lower bound (>= dist/L - C) and no quasi-inverse coupling. A genuine QI needs the lower bound. Without"
+      "faithfulness_verified_by": "Marcol (X147 review, 2026-10-26)",
+      "faithfulness_result": "RE-ENCODED 2026-10-26 (A1), independent review: Marcol APPROVE 2026-10-26 (re-encoding; relation none by content: different fat-minor notions in the hypothesis, one map with a lower bound and a dense image in the conclusion), leg PARTIAL (finite graphs only; the source allows infinite graphs): one map with the source's upper and lower bounds and a C-dense image; branch sets for the vertices and the edges of H, every two more than c apart but a vertex and an incident edge, each edge's set touching both its ends; distances guarded by reachability where the source has infinity (graph_dist truncates). The source labels the conjecture false in general (l.138-150; v4 l.233-237); the row's upstream status is open. Earlier result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest faithfulness risk: the conclusion x147_quasi_isometric_to_H_minor_free (X147.v:22-32) is strictly weaker than a quasi-isometry, so it does not encode \"G admits an (L,C)-quasi-isometry to an H-minor-free graph.\" It provides two DECOUPLED maps f:G->Q, g:Q->G, each with ONLY the upper Lipschitz bound graph_dist(fx,fy) <= L*graph_dist(x,y)+C plus coarse-surjectivity; there is no lower bound (>= dist/L - C) and no quasi-inverse coupling. A genuine QI needs the lower bound. Without"
     },
     "X148": {
       "phase": "X148",

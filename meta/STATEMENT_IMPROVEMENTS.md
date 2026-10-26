@@ -1519,6 +1519,25 @@ Found by reading, not caught by the suffix heuristic (the more valuable WP4b inp
   `dist(x,y)/L - C <= dist(f x, f y)` and the quasi-inverse condition `dist(g (f x), x) <= C`
   are both missing. Already flagged `PARTIAL (proxy)` in the row's `verification_note`
   (faithfulness audit 2026-07-17).
+  **RE-ENCODED 2026-10-26** (coordination/PROGRAMME.md A1; the row is frozen by no migration family; Lancelot's
+  routing and Marcol's design review of 2026-10-26): the audit above found one of three defects. Source:
+  arXiv:2509.09035 v2, the pin's version (e-print sha256 ced7846b..., `as3.tex` sha256 2b46754a...; copies in
+  checkouts/lancelot/.lancelot-scratch/x147-src-v2 and x147-src (v4, sha256 c39407c6...)): l.98 (graphs may be infinite),
+  l.100-103 (distances, infinity if no path), l.105-113 (the (L,C)-quasi-isometry: ONE map with the upper bound where
+  dist_G is finite, the lower bound where dist_H is finite and a C-dense image), l.115-125 (the c-fat minor: branch sets
+  for the vertices AND the edges of H, non-null, connected, pairwise disjoint, each edge's set joined to its ends' sets
+  (both ends: v4 l.129-136), every two more than c apart but a vertex and an incident edge), l.138-150 (the "False
+  conjecture", disproved in general by Davies, Hickingbotham, Illingworth and McCarty; v4 l.233-237 add the octahedron).
+  The defects: (1) the audited conclusion; (2) the fat minor had branch sets for the vertices only, adjacent ones
+  touching; (3) graph_dist truncates at #|G| where the source has infinity. The helpers became `x147_far` (every reachable
+  pair more than c apart), `x147_c_fat_minor` (the source's model), `x147_quasi_isometry` (one map, every distance
+  condition guarded by reachability) and `x147_quasi_isometric_to_H_minor_free` (some Q with no H minor and such a map);
+  the statement keeps its name and shape. A finite G loses nothing by a finite target (the image, shortest Q-paths
+  between image points and paths of length <= C to the image span a finite H-minor-free subgraph with the same distances
+  between image points). Sanity lemmas in X147.v: identity (1,0)-quasi-isometry, the infinity convention, K_0 and K_1
+  fat minors, K_2 not a c-fat minor of K_2; kernel-checked under non-row names besides: K_2 an OLD c-fat minor of K_2 for
+  every c, P_{c+3} containing K_2 as a c-fat minor, two isolated vertices at truncated distance 2. Relation old -> new:
+  none by content. The leg stays PARTIAL, now for "finite graphs only".
 - `arxiv:1606.06810#00` (`X174.v:26`, `kt_immersion_clique_count_extremal_statement`) —
   severity: **too weak / wrong object** on the two boundary values. `x174_extremal_bound t n`
   computes `(n - t) + 3` over the naturals, so at the two admitted values `n = t-2` and
