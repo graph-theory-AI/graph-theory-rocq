@@ -771,7 +771,10 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
 - `opg:complexity_of_the_h_factor_problem` (`D7.v:348`) carries two guards absent from the source
   text but needed to keep the statement open rather than refutable: `H` connected on at least
   three vertices (K1 and K2 are in P), and `a < b`, i.e. `0 < c < 1` (at `c = 1` the instance
-  class is empty).
+  class is empty).  Doc correction 2026-10-26 (Arthur, reviewer Marcol): the English statement ("more than
+  three vertices"), Notes (i) and this entry ("at least four vertices") said four vertices where the body has
+  `2 < #|H|` (at least three, the Hell-Kirkpatrick threshold the Notes cite); body unchanged. The universal-c reading is
+  a separate held finding.
 - `opg:finding_k_edge_outerplanar_graph_embeddings` (`D7.v:530`) uses a documented proxy for
   k-edge-outerplanarity (a planar graph with an edge-layering into outerplanar levels); the
   faces / outer-boundary definition needs the embedding API (gate G2).
