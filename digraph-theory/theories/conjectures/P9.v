@@ -456,17 +456,22 @@ Definition switching_reconstruction_of_digraphs_statement : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/arc_disjoint_directed_cycles_in_regular_directed_graphs/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/arc_disjoint_directed_cycles_in_regular_directed_graphs.json
     English statement: (Open Problem Garden, Arc-disjoint directed cycles in regular directed graphs)
-      For every finite digraph D and every k, if D is k-diregular (every vertex has in-degree
-      and out-degree exactly k) then D has a list of at least binomial(k+1, 2) pairwise
-      arc-disjoint directed cycles.
+      For every finite digraph D with at least one vertex and every k, if D is k-diregular
+      (every vertex has in-degree and out-degree exactly k) then D has a list of at least
+      binomial(k+1, 2) pairwise arc-disjoint directed cycles.
     Definitions: [diregular D k] - in-degree and out-degree equal k at every vertex
       (conjectures/classic_core.v); [cyc_arcs c] - the arcs traversed by the cycle c (this
       file); [dicycle] (core/dipath.v).
     Notes: No parallel arcs is automatic here, arcs being a relation on vertices, so k-regular
       of the corpus is exactly [diregular]. The list is required to have at least, not exactly,
-      binomial(k+1,2) members. *)
+      binomial(k+1,2) members.  The guard [0 < #|D|] is load-bearing: the empty digraph is
+      k-diregular for every k, vacuously, but has no directed cycle, so without the guard the
+      body fails at k = 1
+      (meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v).
+      The source's k-regular digraphs have vertices.  The guard was added on 2026-10-26 as a
+      one-way source repair of the migrated row (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition arc_disjoint_directed_cycles_in_regular_directed_gra_statement : Prop :=
-  forall (D : diGraphType) (k : nat), diregular D k ->
+  forall (D : diGraphType) (k : nat), 0 < #|D| -> diregular D k ->
     exists P : seq (seq D),
       [/\ all (@dicycle D) P,
           pairwise (fun a b => [disjoint cyc_arcs a & cyc_arcs b]) P &
