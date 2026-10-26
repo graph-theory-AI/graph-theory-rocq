@@ -163,7 +163,7 @@
     },
     "cops_win_in": {
       "class": "candidate_family",
-      "reason": "cops and robbers vocabulary; X197 = X202, X80 is another encoding",
+      "reason": "cops and robbers vocabulary; X80 is another encoding; X197 (re-encoded 2026-10-26: a cop landing on the robber captures) and X202 (capture checked only after the robber's move) now differ",
       "members": [
         "GTMisc.conjectures.X197.x197_cops_win_in",
         "Topological.conjectures.X202.x202_cops_win_in"
@@ -1157,6 +1157,15 @@
         "Digraph.conjectures.heroes.djoin",
         "Digraph.conjectures.two_extremal_glue.vsum"
       ]
+    },
+    "e3b2c2f0c62308dd624ebadfcda567443dbe57359d28c11fdf7bc05090e45854": {
+      "class": "candidate_family",
+      "reason": "k cops can win (some start and a round bound beat every robber), the cops and robbers notion; the same shape as X202's x202_cop_number_at_most (name group cop_number_at_most), but over X197's re-encoded game, where a cop landing on the robber captures",
+      "members": [
+        "GTMisc.conjectures.X197.x197_cops_can_win"
+      ],
+      "family_id": "cops-and-robbers",
+      "milestone": "post-rc-library-wave"
     },
     "e75c2c96a8fae51060a00d90d74fd9c6eeacd757abd36073609f83b0c68abab4": {
       "class": "candidate_family",
