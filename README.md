@@ -1,8 +1,8 @@
 # graph-theory-rocq
 
 ![corpus-status](https://github.com/LLM4Rocq/graph-theory-rocq/actions/workflows/corpus-status.yml/badge.svg)
-**OpenProblemGarden corpus: statement-complete** — 227/227 attempted · **206 done** (axiom-free
-`Definition <name>_statement : Prop`, `Print Assumptions` clean) · **14 partial** · **7 blocked**.
+**OpenProblemGarden corpus: statement-complete** — 227/227 attempted · **205 done** (axiom-free
+`Definition <name>_statement : Prop`, `Print Assumptions` clean) · **14 partial** · **8 blocked**.
 Release: **`opg-v1.0.1-227-attempted`** (release-time counts 212/8/7; six rows were since
 downgraded to partial: four crossing-number rows, then `crossing_sequences` and
 `what_is_the_smallest_number_of_disjoint_spanning_trees_made_a_graph_hamiltonian`, whose own

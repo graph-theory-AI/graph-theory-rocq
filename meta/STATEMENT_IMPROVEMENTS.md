@@ -797,6 +797,18 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   three vertices"), Notes (i) and this entry ("at least four vertices") said four vertices where the body has
   `2 < #|H|` (at least three, the Hell-Kirkpatrick threshold the Notes cite); body unchanged. The universal-c reading is
   a separate held finding.
+  BLOCKED 2026-10-26 (Arthur; Lancelot's routing, BOARD 15:42:23Z; reviewer Lancelot): statement and grounding legs
+  done -> blocked, body unchanged, a Notes sentence added. (D1) The source asks, for each fixed `c` and `H`, whether
+  the problem is NP-hard, a parametric question; the body asserts NP-hardness for every `c` in `(0, 1)`, including
+  the polynomial regime `delta(G) >= (1 - 1/chi_cr(H) + gamma) n` of Han and Treglown that the pinned review records.
+  (D2) The relational `problem` / `poly_reduces` / `in_NP` / `NP_hard` layer of D7.v gives `NP_hard` no hardness
+  content: a reduction is any function, its cost bound unrelated to computing it, and NP membership is decidable by
+  searching the bounded certificates, so every problem with a yes-instance and a no-instance is `NP_hard`, and the
+  body holds at `H = K_3`, `c = 1/3` (kernel-checked under non-row names: `old_NP_hard_of_yes_no`,
+  `old_bit_NP_hard`, `old_statement_at_K3`; evidence `coordination/evidence/math-2026-10-26/np-hard-layer-by-arthur`).
+  The same layer carries `studies:std_chudnovsky_seymour_trotignon_question_on_subcubi` (X114, below). A faithful
+  encoding needs a cost-coupled NP-hardness vocabulary over GTBase's `prog` model (`base/theories/complexity.v`)
+  and the threshold reading of the cited papers; both are separate items.
 - `opg:finding_k_edge_outerplanar_graph_embeddings` (`D7.v:530`) uses a documented proxy for
   k-edge-outerplanarity (a planar graph with an edge-layering into outerplanar levels); the
   faces / outer-boundary definition needs the embedding API (gate G2).
@@ -809,6 +821,16 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   induced-subdivision model is replicated byte for byte from
   `extremal-graph-theory/theories/conjectures/X98.v` because `graph-theory-misc` does not import
   that package (a second copy to reconcile in WP6).
+  FINDING 2026-10-26 (Arthur; Lancelot's routing, BOARD 15:42:23Z; reviewer Lancelot): the "Trivial H excluded (fails
+  NP_hard)" of the wave note is false. The D7 layer gives `NP_hard` no hardness content (D2 under the H-factor
+  entry above), so this existential body is PROVABLE with `H = K_1`, whose containment problem is "G is nonempty"
+  (kernel-checked under non-row names: `old_K1_subdivision_iff`, `old_K1_subcubic`, `old_x114_statement_true`;
+  evidence `coordination/evidence/math-2026-10-26/np-hard-layer-by-arthur`). The statement leg should be blocked,
+  but it is not changed here: the row is frozen by five migration families (consecutive_in_path,
+  induced_paths, induced_subdivisions, model_support, subcubic), whose `migration_report --check` requires the
+  statement's doc block, manifest row and leg entry unchanged since the baseline, and a reviewed repair needs a
+  change of the statement text. The leg change waits for a gate path for a text-preserving re-block, or for a
+  re-encoding on a cost-coupled NP-completeness vocabulary.
 - Several rows state their extremal parameters RELATIONALLY (`is_book_thickness`,
   `is_pebbling_number`, `weighted_chromatic_number`, `weighted_clique_number`, `fas_opt`,
   `edp_opt`, `x89_max_quartet_distance`, `x141_zero_forcing_number`) and are therefore
