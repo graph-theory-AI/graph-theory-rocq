@@ -346,7 +346,7 @@ Definition hfactor_problem (H : sgraph) (a b : nat) : problem :=
       ratio is strictly below 1 (a < b): at a = b the min-degree condition demands
       deg(v) >= |V(G)| on an irreflexive graph, the instance class is empty and NP-hardness
       would be false, so "a fixed positive real c" is read as 0 < c < 1.  BLOCKED 2026-10-26 (statement
-      leg done -> blocked; Lancelot's routing, reviewer Marcol; body unchanged): (D1) the source asks,
+      leg done -> blocked; Lancelot's routing, reviewer Lancelot; body unchanged): (D1) the source asks,
       for each fixed c and H, whether the problem is NP-hard, while this body asserts NP-hardness for
       EVERY c in (0, 1), including the polynomial regime delta(G) >= (1 - 1/chi_cr(H) + gamma) n of
       Han and Treglown recorded by the pinned review; (D2) the relational [NP_hard] above has no

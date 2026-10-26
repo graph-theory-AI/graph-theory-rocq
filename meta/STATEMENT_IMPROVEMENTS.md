@@ -797,7 +797,7 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   three vertices"), Notes (i) and this entry ("at least four vertices") said four vertices where the body has
   `2 < #|H|` (at least three, the Hell-Kirkpatrick threshold the Notes cite); body unchanged. The universal-c reading is
   a separate held finding.
-  BLOCKED 2026-10-26 (Arthur; Lancelot's routing, BOARD 15:42:23Z; reviewer Marcol): statement and grounding legs
+  BLOCKED 2026-10-26 (Arthur; Lancelot's routing, BOARD 15:42:23Z; reviewer Lancelot): statement and grounding legs
   done -> blocked, body unchanged, a Notes sentence added. (D1) The source asks, for each fixed `c` and `H`, whether
   the problem is NP-hard, a parametric question; the body asserts NP-hardness for every `c` in `(0, 1)`, including
   the polynomial regime `delta(G) >= (1 - 1/chi_cr(H) + gamma) n` of Han and Treglown that the pinned review records.
@@ -821,7 +821,7 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   induced-subdivision model is replicated byte for byte from
   `extremal-graph-theory/theories/conjectures/X98.v` because `graph-theory-misc` does not import
   that package (a second copy to reconcile in WP6).
-  FINDING 2026-10-26 (Arthur; Lancelot's routing, BOARD 15:42:23Z; reviewer Marcol): the "Trivial H excluded (fails
+  FINDING 2026-10-26 (Arthur; Lancelot's routing, BOARD 15:42:23Z; reviewer Lancelot): the "Trivial H excluded (fails
   NP_hard)" of the wave note is false. The D7 layer gives `NP_hard` no hardness content (D2 under the H-factor
   entry above), so this existential body is PROVABLE with `H = K_1`, whose containment problem is "G is nonempty"
   (kernel-checked under non-row names: `old_K1_subdivision_iff`, `old_K1_subcubic`, `old_x114_statement_true`;
