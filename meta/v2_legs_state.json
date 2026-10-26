@@ -2864,11 +2864,14 @@
    "audit_page": "todo"
   },
   "axv_2105_07370_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x233-dense-sparse-six",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X233.v:restricted_union_cover_statement. Chudnovsky-Scott-Seymour-Spirkl, Strengthening Rodl's theorem (arXiv:2105.07370, paper.tex sha256 0d51926b): the union variant (l.126-127) of Theorem 1.4 (l.119-123); eps-restricted l.89-91 (Delta of G[X] or of the complement on X at most eps|X|), H-free l.86-88 = induced_free; eps = a/b by monotonicity. Implied by the same paper's Theorem 1.4 (a partition is a union; design finding F1, status bookkeeping Lancelot's)."
   },
   "axv_2105_15195_00": {
    "statement": "todo",
@@ -3091,11 +3094,14 @@
    "audit_page": "todo"
   },
   "axv_2111_00532_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x233-dense-sparse-six",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X233.v:transversal_triangle_pure_pair_statement. Scott-Seymour-Spirkl, Pure pairs IX (arXiv:2111.00532, paper-pure9.tex sha256 5d338f15), Question 1.3 (l.130-135), affirmative form: |X| >= eps W and |Y| >= eps W^c as in the paper; the pinned text's symmetric |X|, |Y| >= eps W^c is the known Erdos-Hajnal-Pach theorem (l.113-121; design finding F2); c = 1/q, eps = 1/p by monotonicity (W >= 1)."
   },
   "axv_2111_00532_01": {
    "statement": "todo",
@@ -4272,18 +4278,24 @@
    "audit_page": "todo"
   },
   "axv_2307_06455_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x233-dense-sparse-six",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X233.v:polynomial_nikiforov_statement. Nguyen-Scott-Seymour, Induced subgraph density IV (arXiv:2307.06455, density4.tex sha256 804d8076), Conjecture 1.8 (l.522-526): ind_H(G) counts isomorphisms onto induced subgraphs (l.162, l.498); eps = a/b, 0 < 2a < b, by the finiteness argument; d natural by monotonicity; guard 0 < |H| (the null H makes the hypothesis vacuous)."
   },
   "axv_2307_08361_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x233-dense-sparse-six",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X233.v:polynomial_degree_bounding_statement. Du-Girao-Hunter-McCarty-Scott (arXiv:2307.08361, Inducedfourcycle.tex sha256 77b41154), the question l.192, affirmative form: degree-bounded and tau l.181, d(G) = 2e/|G| l.213; polynomials with natural coefficients (horner_nat) lose nothing. Upstream solved (Girao-Hunter 2025), no formal resolution."
   },
   "axv_2307_08361_01": {
    "statement": "done",
@@ -4605,11 +4617,14 @@
    "audit_page": "todo"
   },
   "axv_2311_05500_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x233-dense-sparse-six",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X233.v:bounded_density_universal_graph_statement. Alon-Dodson-Jackson-McCarty-Nenadov-Southern (arXiv:2311.05500, univden-arXiv-v2.tex sha256 7f301cf9), Conjecture 1.1 (l.124-131): d = a/b > 1, C = C(d) before n, e(G)^a <= C^a n^(2a-b); m(H) <= a/b iff b e(H[S]) <= a|S| for every vertex set S (l.108-115); universal = has_subgraph for every member (l.101-102)."
   },
   "axv_2311_05713_00": {
    "statement": "todo",
@@ -4830,11 +4845,14 @@
    "note": "Authored in X221.v:oriented_triangle_free_dichromatic_theta_statement. Conjecture 4: t-vec(n) = Theta(sqrt(n / log n)). Same shape with the relation x221_tbar (maximum of the nat-valued dichromatic number x221_dichro, a min-bigop over dicolorableb with neutral #|D|) and sqrt_ceil (n %/ trunc_log 2 n). Edge e158 from Conjecture 3 recorded as a candidate."
   },
   "axv_2403_08303_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x233-dense-sparse-six",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X233.v:polynomial_close_rodl_statement. Bucic-Fox-Pham (arXiv:2403.08303, main.tex sha256 fc51ad74), Conjecture 10 (l.327-329): proper hereditary F (hereditary_class, some graph outside); alpha-close l.325 with edits counted as ordered pairs (alpha n^2/2 exact); eps-homogeneous l.257-258 cross-multiplied by C(|S|,2); eps = a/b, 0 < 2a < b, by the finiteness argument; C, d natural by monotonicity."
   },
   "axv_2404_02021_00": {
    "statement": "todo",
