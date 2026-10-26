@@ -7,13 +7,15 @@ Full evidence: `python3 meta/migration_report.py subcubic --details /tmp/migrati
 - Canonical: `GTBase.base.subcubic`.
 - Baseline: `ba8b7be309af5926081ba760ba0d5ab8e94215f7`.
 - Scope: 2 helpers, 3 statements, 24 frozen objects, 46 recorded references.
-- Source checks: 164/164 pass; consistent.
+- Source checks: 168/168 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
 | `GTMisc.conjectures.X14.subcubic_matching_lower_bound_statement` / studies:std_biedl_demaine_duncan_fleischer_kobourov_subcubic | `GTMisc.migration.subcubic.subcubic_matching_lower_bound_statement_compat` |
 | `GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement` / studies:std_chudnovsky_seymour_trotignon_question_on_subcubi | `GTMisc.migration.subcubic.subcubic_induced_subdivision_np_complete_statement_compat` |
 | `GTMisc.conjectures.X102.bounded_tree_independence_forbidden_family_statement` / studies:std_bounded_tree_independence_number_conjecture_dall | `GTMisc.migration.subcubic.bounded_tree_independence_forbidden_family_statement_compat` |
+
+Text-preserving reblocks after migration (statement text unchanged and the exact iff kept; the doc block and the listed leg fields changed, each listed leg state now blocked): `GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement` (record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `note`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py subcubic --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

@@ -200,7 +200,21 @@
         "x114_hisc_problem": "X114Legacy.x114_hisc_problem"
       },
       "certificate": "GTMisc.migration.model_support.subcubic_induced_subdivision_np_complete_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "direction": "reblock",
+        "doc_block_sha256": "c7b1d0784588c7778b6f974ebb90300972efa293fa78ee8b5313a95f3d16619a",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "leg_fields": [
+          "statement",
+          "note"
+        ],
+        "row_fields": [
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ]
+      }
     },
     {
       "kind": "statement",
@@ -319,7 +333,21 @@
         "x114_hisc_problem": "X114Original.x114_hisc_problem"
       },
       "certificate": "GTMisc.migration.model_support.subcubic_induced_subdivision_np_complete_statement_original_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "direction": "reblock",
+        "doc_block_sha256": "c7b1d0784588c7778b6f974ebb90300972efa293fa78ee8b5313a95f3d16619a",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "leg_fields": [
+          "statement",
+          "note"
+        ],
+        "row_fields": [
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ]
+      }
     },
     {
       "kind": "original-statement",

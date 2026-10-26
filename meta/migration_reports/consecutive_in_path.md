@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py consecutive_in_path --details /
 - Canonical: `GTBase.walks_paths.seq_consecutive`.
 - Baseline: `ceadac8a097e951709afd63b65546f1a2513e0a5`.
 - Scope: 5 helpers, 6 statements, 33 frozen objects, 176 recorded references.
-- Source checks: 261/261 pass; consistent.
+- Source checks: 265/265 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -17,6 +17,8 @@ Full evidence: `python3 meta/migration_report.py consecutive_in_path --details /
 | `GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement` / studies:std_chudnovsky_seymour_trotignon_question_on_subcubi | `GTMisc.migration.consecutive_in_path.subcubic_induced_subdivision_np_complete_statement_compat` |
 | `GTMisc.conjectures.X91.avoidable_path_or_pk_free_statement` / studies:std_beisegel_chudnovsky_gurvich_milani_servatius_con | `GTMisc.migration.consecutive_in_path.avoidable_path_or_pk_free_statement_compat` |
 | `Minor.conjectures.X67.theta_triangle_free_bounded_degree_treewidth_statement` / arxiv:2001.01607#01 | `Minor.migration.consecutive_in_path.theta_triangle_free_bounded_degree_treewidth_statement_compat` |
+
+Text-preserving reblocks after migration (statement text unchanged and the exact iff kept; the doc block and the listed leg fields changed, each listed leg state now blocked): `GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement` (record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `note`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py consecutive_in_path --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.

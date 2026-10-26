@@ -939,6 +939,143 @@ class RepairTests(unittest.TestCase):
                 self.compile_fixture()
                 self.assertTrue(REPORT.check_kernel(self.spec))
 
+    # Marc's decision of 2026-10-26 (X114): a text-preserving reblock. The statement text and its exact iff
+    # certificate stay; the doc block (pinned) and the listed leg fields change, each listed leg state to blocked.
+    REBLOCKED_DOC = ("(** Corpus row: test\n    English statement: every number equals itself.\n"
+                     "    Notes: BLOCKED, the encoding makes the body provable. *)")
+    REBLOCKED_LEGS = {"statement": "blocked", "note": "BLOCKED: the encoding makes the body provable"}
+
+    def reblock_fixture(self, **extra):
+        """The migrated row (exact iff), then a reviewed reblock: a new doc block, statement leg and note."""
+        self.reblocked = self.live.replace(
+            "(** Corpus row: test\n    English statement: every number equals itself. *)", self.REBLOCKED_DOC)
+        self.write(self.source, self.reblocked)
+        self.write(self.RECORD, "- test_statement: reblocked, its statement leg is now blocked.\n")
+        self.repair = {"direction": "reblock", "doc_block_sha256": REPORT.sha256(self.REBLOCKED_DOC),
+                       "record": self.RECORD, "leg_fields": ["statement", "note"], **extra}
+        self.spec["frozen"][1]["repair"] = copy.deepcopy(self.repair)
+        self.manifest = "meta/" + REPORT.REG.CORPORA["v2"]["manifest"]
+        self.overlay = "meta/" + REPORT.REG.CORPORA["v2"]["overlay"]
+        self.write_json(self.overlay, {"entries": {"test": self.REBLOCKED_LEGS}})
+        self.write_json(self.manifest, {"rows": [{**self.row, "legs": {"statement": "blocked"}}]})
+
+    def test_reviewed_reblock_passes(self):
+        self.reblock_fixture()
+        self.assertEqual(self.failures(), [])
+
+    def test_reblock_keeps_the_statement_text(self):
+        self.reblock_fixture()
+        self.write(self.source, self.reblocked.replace("local_helper n.\n", "local_helper (n + 0).\n"))
+        self.assertIn(self.statement + ": statement text unchanged since baseline under the reviewed reblock",
+                      self.failures())
+
+    def test_reblock_pins_the_doc_block(self):
+        self.reblock_fixture()
+        for live in (self.reblocked.replace("makes the body provable", "makes it provable"), self.live):
+            with self.subTest(live=live):
+                self.write(self.source, live)
+                self.assertIn(self.statement + ": doc block matches the reviewed repair", self.failures())
+
+    def test_reblock_moves_each_listed_leg_state_to_blocked(self):
+        blocked = "test_statement: every leg state the reblock lists is now blocked"
+        exact = "test_statement: the leg-state fields that changed are exactly the repair's leg_fields"
+        self.reblock_fixture()
+        self.assertNotIn(blocked, self.failures())
+        for legs, expected in (({**self.REBLOCKED_LEGS, "statement": "partial"}, blocked),
+                               ({**self.REBLOCKED_LEGS, "statement": "done"}, exact),
+                               ({"statement": "blocked"}, exact)):
+            with self.subTest(legs=legs):
+                self.write_json(self.overlay, {"entries": {"test": legs}})
+                self.write_json(self.manifest, {"rows": [{**self.row, "legs": {"statement": legs["statement"]}}]})
+                self.assertIn(expected, self.failures())
+        self.write_json(self.overlay, {"entries": {"test": {**self.REBLOCKED_LEGS, "grounding": "blocked"}}})
+        self.assertIn("test_statement: leg-state entry unchanged since baseline outside the repair's leg_fields",
+                      self.failures())
+
+    def test_reblock_unlisted_row_fields_stay_frozen(self):
+        self.reblock_fixture()
+        self.write_json(self.manifest, {"rows": [{**self.row, "status": "solved", "legs": {"statement": "blocked"}}]})
+        self.assertIn("test_statement: manifest row unchanged since baseline outside the repair's listed fields",
+                      self.failures())
+
+    def test_reblock_record_names_the_statement_and_the_block(self):
+        self.reblock_fixture()
+        check = (f"{self.statement}: repair record {self.RECORD} is a repository file naming the statement "
+                 "and the word blocked")
+        self.assertNotIn(check, self.failures())
+        for text in ("- another_statement: reblocked, now blocked.\n", "- test_statement: reblocked.\n"):
+            with self.subTest(text=text):
+                self.write(self.RECORD, text)
+                self.assertIn(check, self.failures())
+
+    def test_malformed_reblocks_are_rejected(self):
+        self.reblock_fixture()
+        good = copy.deepcopy(self.repair)
+        bad = [
+            {**good, "replace": ["9 <= n", "7 <= n"]},
+            {**good, "relation": "{frozen} /\\ {live}"},
+            {**good, "extra": 1},
+            {key: value for key, value in good.items() if key != "leg_fields"},
+            {key: value for key, value in good.items() if key != "doc_block_sha256"},
+            {key: value for key, value in good.items() if key != "record"},
+            {**good, "leg_fields": []},
+            {**good, "leg_fields": ["note"]},
+            {**good, "leg_fields": ["edges", "statement"]},
+            {**good, "leg_fields": "statement"},
+            {**good, "row_fields": ["legs"]},
+            {key: value for key, value in good.items() if key != "direction"},
+        ]
+        for repair in bad:
+            with self.subTest(repair=repair):
+                self.spec["frozen"][1]["repair"] = repair
+                with self.assertRaisesRegex(ValueError, "repair"):
+                    self.report()
+        self.spec["frozen"][1]["repair"] = {**good, "row_fields": ["status"]}
+        self.report()   # an optional row_fields list is accepted by the schema
+        self.spec["frozen"][1].update(repair=copy.deepcopy(good), non_corpus=True)
+        with self.assertRaisesRegex(ValueError, "reblock repair needs a corpus row"):
+            self.report()
+
+    def test_reblock_adds_no_check_to_rows_without_it(self):
+        """The compact report prints the check count, so a statement without a reblock, corpus or non-corpus, gets
+        no reblock check (a non-corpus check in every family once changed four committed reports)."""
+        for non_corpus in (False, True):
+            with self.subTest(non_corpus=non_corpus):
+                self.spec["frozen"][1]["non_corpus"] = non_corpus
+                names = [item["check"] for item in self.report()["checks"]]
+                self.assertFalse([name for name in names if "reblock" in name], names)
+
+    def test_reblock_kernel_probe_is_the_exact_iff(self):
+        self.reblock_fixture()
+        self.assertIn(f"Check ({self.module}.statement_compat : {self.module}.X0Legacy.statement <-> "
+                      f"{self.statement}).", self.probe_body())
+
+    def test_compact_report_names_the_reblock(self):
+        self.reblock_fixture()
+        report = self.report()
+        self.assertTrue(report["ok"], [c for c in report["checks"] if not c["ok"]])
+        text = REPORT.render_markdown(report, self.spec)
+        self.assertIn("Text-preserving reblocks after migration (statement text unchanged and the exact iff kept; "
+                      "the doc block and the listed leg fields changed, each listed leg state now blocked): "
+                      f"`{self.statement}` (record `{self.RECORD}`; leg fields `statement`, `note`).", text)
+        self.assertNotIn("not migration equivalences", text)
+        details = REPORT.render_details(report, self.spec)
+        self.assertIn("(exact migration iff, kept under a text-preserving reblock)", details)
+        self.assertIn("text-preserving reblock, doc block sha256", details)
+
+    @unittest.skipUnless(KERNEL, "use --kernel for tiny compiled probes")
+    def test_kernel_accepts_the_iff_and_rejects_a_one_way_certificate_under_a_reblock(self):
+        self.reblock_fixture()
+        self.compile_fixture()
+        self.assertEqual(REPORT.check_kernel(self.spec), [])
+        one_way = ("Lemma statement_compat : X0Legacy.statement -> test_statement.\n"
+                   "Proof. intros h n; exact (h n). Qed.\n")
+        self.write(self.certificate, self.cert_source.replace(
+            "Lemma statement_compat : X0Legacy.statement <-> test_statement.\n"
+            "Proof. split; intros h n; apply h. Qed.\n", one_way))
+        self.compile_fixture()
+        self.assertTrue(REPORT.check_kernel(self.spec))
+
 
 class FrozenRoleTests(unittest.TestCase):
     """A primary row must not hide a mislabeled additional complete Original."""

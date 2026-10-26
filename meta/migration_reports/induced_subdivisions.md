@@ -7,12 +7,14 @@ Full evidence: `python3 meta/migration_report.py induced_subdivisions --details 
 - Canonical: `GTBase.induced_subdivisions.induced_subdivision_model`.
 - Baseline: `952a89bdecf65bed9be3a1393eabc91ca091d26c`.
 - Scope: 4 helpers, 2 statements, 14 frozen objects, 84 recorded references.
-- Source checks: 110/110 pass; consistent.
+- Source checks: 114/114 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
 | `Extremal.conjectures.X98.polynomial_kuhn_osthus_induced_subdivision_statement` / studies:std_bonamy_et_al_polynomial_k_hn_osthus_conjecture | `Extremal.migration.induced_subdivisions.polynomial_kuhn_osthus_induced_subdivision_statement_compat` |
 | `GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement` / studies:std_chudnovsky_seymour_trotignon_question_on_subcubi | `GTMisc.migration.induced_subdivisions.subcubic_induced_subdivision_np_complete_statement_compat` |
+
+Text-preserving reblocks after migration (statement text unchanged and the exact iff kept; the doc block and the listed leg fields changed, each listed leg state now blocked): `GTMisc.conjectures.X114.subcubic_induced_subdivision_np_complete_statement` (record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `note`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py induced_subdivisions --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
