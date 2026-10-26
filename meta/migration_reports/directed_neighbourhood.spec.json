@@ -453,7 +453,25 @@
       },
       "certificate": "Digraph.migration.directed_neighbourhood.orientation_C4_eulerian_avoidable_statement_original_compat",
       "commit": "298112264b7c31820acf889c6da29b710fd39c9a",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "x221_eulerian_avoidable (x221_c4or b)",
+          "x221_eulerian_avoidable_sub (x221_c4or b)"
+        ],
+        "direction": "weaken",
+        "doc_block_sha256": "36f4cfaab009831c3695c529e07a29aa34a938085c892be57a45eb6a9995a0b4",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "statement",
+          "note"
+        ]
+      }
     },
     {
       "kind": "original-statement",
@@ -885,6 +903,7 @@
     "Proof-only adaptations (theorem types unchanged): grounding_classic_core.v (the in/out-degree identities and the C3 groundings unfold degree_balance.indeg), grounding_X2.v l.113, glue_eul_subtype.v l.196/247/280/311. Deferred, not migrated: reals_growth.indeg (B16's legacy-axiom class); distinct models as listed. No statement text, doc block, manifest row or leg state changes; no classical-assumption change.",
     "Source repair (2026-10-25, PROGRAMME A2 with the A4 direction weaken): the live majority_3col_eulerian_statement gained a loopless D guard. ColouringVariantsOriginal stays verbatim; its original-statement entry carries the repair identical to the degree_balance statement entry (which holds the text, doc-block, row and leg checks), and its certificate is kernel-checked as original -> live.",
     "Source repair (2026-10-26, PROGRAMME A2 with the A4 direction weaken): the live arc_disjoint_directed_cycles_in_regular_directed_gra_statement gained a 0 < #|D| guard (the empty digraph is k-diregular for every k and has no cycle). P9Legacy stays verbatim; the row's statement entry here carries the repair, and its certificate is one-way, frozen -> live.",
-    "Source repair (2026-10-26, PROGRAMME A2 with the A4 direction weaken): the live antidirected_trees_in_digraphs_statement gained a loopless D guard (nb_arcs counts loops, so a looped vertex met the arc bound at k = 2). P9Legacy stays verbatim; the row's statement entry here carries the repair, and its certificate is one-way, frozen -> live."
+    "Source repair (2026-10-26, PROGRAMME A2 with the A4 direction weaken): the live antidirected_trees_in_digraphs_statement gained a loopless D guard (nb_arcs counts loops, so a looped vertex met the arc bound at k = 2). P9Legacy stays verbatim; the row's statement entry here carries the repair, and its certificate is one-way, frozen -> live.",
+    "Source repair of the X221 row (2026-10-26, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md, arxiv:2510.11311#04 entry): the original-statement entry carries the identical repair as degree_balance's statement entry (a subdigraph on a nonempty vertex set instead of a spanning selection); its certificate is the one-way original -> live through degree_balance's x221_eulerian_avoidable_sub_of_spanning. X221Original and its chain are unchanged."
   ]
 }

@@ -60,6 +60,11 @@
     certificates (frozen -> live), not migration equivalences; their statement entries in this spec
     carry the repairs.
 
+    SOURCE REPAIR (2026-10-26, direction weaken): the live X221 row asks for an F-free subdigraph on a nonempty
+    vertex set ([x221_eulerian_avoidable_sub]); [X221Original] stays verbatim and its row certificate below is
+    ONE-WAY (original -> live), through degree_balance's [x221_eulerian_avoidable_sub_of_spanning]; its
+    original-statement entry carries the identical repair as the degree_balance statement entry.
+
     Every other certificate keeps its exact iff. *)
 
 From HB Require Import structures.
@@ -504,10 +509,16 @@ have [f [hf nc]] := h k D (iffLR (eE D) eD) dk.
 by exists f; split=> // c; apply: nc; apply/cE.
 Qed.
 
+(** X221 SOURCE REPAIR (2026-10-26, direction weaken; record meta/STATEMENT_IMPROVEMENTS.md): the live row asks for
+    an F-free subdigraph on a nonempty vertex set, so this certificate is ONE-WAY (original -> live), through
+    degree_balance's [x221_eulerian_avoidable_sub_of_spanning], not a migration equivalence. *)
 Lemma orientation_C4_eulerian_avoidable_statement_original_compat :
   X221Original.orientation_C4_eulerian_avoidable_statement
-  <-> Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement.
-Proof. by split=> h b; apply/x221_eulerian_avoidable_original_compat. Qed.
+  -> Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement.
+Proof.
+move=> h b; apply: Digraph.migration.degree_balance.x221_eulerian_avoidable_sub_of_spanning.
+by apply/x221_eulerian_avoidable_original_compat; exact: h.
+Qed.
 
 (** One-way source-repair certificate, not a migration equivalence (2026-10-25, direction weaken; the
     identical repair is carried by the degree_balance statement entry): the live row gained the

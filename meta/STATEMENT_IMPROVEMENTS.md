@@ -1191,6 +1191,36 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   the GTBase `complexity.v` cost-coupled interpreter (`prog`, `prun`, `poly_cost_on`,
   `polytime_decides_on_class`); `X90` uses a genuine many-one reduction and looks sound, `X166`
   does not (above). Any later re-encoding should share one NP-completeness vocabulary.
+- `arxiv:2510.11311#04` (`conjectures/X221.v`, `orientation_C4_eulerian_avoidable_statement`, leg
+  `blocked`) — severity: **too strong**. `x221_eulerian_avoidable` asks for a SPANNING F-free selection
+  (`outsel f` on all of the host), while the source defines Eulerian-avoidability with an F-free
+  SUBDIGRAPH that may live on any vertex subset (pinned record data/arxiv_extracted/2510.11311.json at
+  b72c5857, entry 4, context_text: "A digraph $F$ is Eulerian-avoidable if there exists
+  $d_F:\mathbb{N}\rightarrow\mathbb{N}$ such that every Eulerian digraph (where each vertex has equal
+  out- and in-degree) with minimum out-degree at least $d_F(k)$ contains an $F$-free subdigraph with
+  minimum out-degree at least $k$."); found by the second-reader readback of 2026-09-23.
+  **REPAIRED 2026-10-26** (coordination/PROGRAMME.md A2; Lancelot's routing, message 14; Marcol's three
+  points; the row is frozen by the degree_balance (statement) and directed_neighbourhood
+  (original-statement) families): the body now uses the new local `x221_eulerian_avoidable_sub`, an
+  out-neighbourhood selection on `induced_digraph S` for a nonempty `S` of a nonempty Eulerian host; the
+  replacement is `x221_eulerian_avoidable (x221_c4or b)` -> `x221_eulerian_avoidable_sub (x221_c4or b)`.
+  Both guards are the source's reading: `S != set0` (an empty subdigraph is F-free with a vacuous minimum
+  out-degree; the closed lemma `x221_sub_guard_teeth` shows the inner property would then hold for every
+  nonempty F) and `0 < #|D|` (without it the empty host would make the new body false for every F). Loopy
+  hosts change nothing beyond `d -> d + 1` (the X221.v Notes). This is a SOURCE REPAIR, not a migration
+  equivalence:
+  - `migration/degree_balance.v` proves `x221_eulerian_avoidable_sub_of_spanning` (the spanning selection
+    transported to `induced_digraph setT`, the same out-degrees and no new copy of F) and the one-way
+    certificate `frozen -> live` (direction "weaken"); `migration/directed_neighbourhood.v`'s
+    original-statement certificate is one-way the same way;
+  - the `repair` entries of `meta/migration_reports/degree_balance.spec.json` (statement object) and
+    `meta/migration_reports/directed_neighbourhood.spec.json` (original-statement object, the identical
+    repair) bind the one exact text replacement and the repaired doc block's hash, name this entry as their
+    record, and list the fields the repair changes: the manifest-row fields `source_verified_by`,
+    `source_verified_at` and `verification_note` and the leg fields `statement` (`blocked` -> `done`) and
+    `note` (wave X221 holds six other rows, so `implemented_by` and the commit tag stay wave-level and
+    unchanged; the row carries its own `source_verified_by` / `_at`).
+  Logical relation: old -> new with the same d (S = the whole vertex set). The new body is open.
 
 ### Other
 
