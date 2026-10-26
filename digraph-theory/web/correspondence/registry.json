@@ -1474,8 +1474,8 @@
       "formal": {
         "name": "adams_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 650,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L650",
+        "line": 674,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L674",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.adams_statement",
         "verbatim": "Definition adams_statement : Prop :=\n  forall T : tournament, (exists c : seq T, dicycle c) ->\n    exists a : T * T, (a.1 --> a.2) /\\ (ndicycles (rev_arc a) < ndicycles T)."
       },
@@ -1538,22 +1538,22 @@
       "cluster": "?",
       "title": "antidirected_trees_in_digraphs_statement",
       "informal": {
-        "text": "Corpus row: opg:antidirected_trees_in_digraphs Site: https://graph-theory-ai.github.io/graph-conjectures/op/antidirected_trees_in_digraphs/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/antidirected_trees_in_digraphs.json English statement: (Open Problem Garden, Antidirected trees in digraphs) For every finite digraph D and every k >= 2, if the number of arcs of D exceeds (k-2) times the number of its vertices, then D contains, as a subdigraph, every antidirected tree T on k vertices, that is every orientation of a tree in which each vertex has in-degree 0 or out-degree 0; containment means an injective arc-preserving map from T to D. Definitions: [nb_arcs D] - the number of ordered pairs forming an arc (this file); [antidirected_tree T] - the underlying graph is a tree (weakly connected with #V - 1 arcs) and every vertex has in-degree 0 or out-degree 0 (this file); [tree_digraph] and [weakly_connected] (this file); [contains_subdig D T] - an injective arc-preserving map T -> D (this file); [orientedDigraph] (core/oriented.v). Notes: The guard 2 <= k keeps the natural-number subtraction k - 2 faithful; at k < 2 the corpus hypothesis is negative and the statement would be about all digraphs. Containment is as a subdigraph (arcs preserved, not reflected), as in the corpus.",
+        "text": "Corpus row: opg:antidirected_trees_in_digraphs Site: https://graph-theory-ai.github.io/graph-conjectures/op/antidirected_trees_in_digraphs/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/antidirected_trees_in_digraphs.json English statement: (Open Problem Garden, Antidirected trees in digraphs) For every finite loopless digraph D and every k >= 2, if the number of arcs of D exceeds (k-2) times the number of its vertices, then D contains, as a subdigraph, every antidirected tree T on k vertices, that is every orientation of a tree in which each vertex has in-degree 0 or out-degree 0; containment means an injective arc-preserving map from T to D. Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v); [nb_arcs D] - the number of ordered pairs forming an arc (this file); [antidirected_tree T] - the underlying graph is a tree (weakly connected with #V - 1 arcs) and every vertex has in-degree 0 or out-degree 0 (this file); [tree_digraph] and [weakly_connected] (this file); [contains_subdig D T] - an injective arc-preserving map T -> D (this file); [orientedDigraph] (core/oriented.v). Notes: The guard 2 <= k keeps the natural-number subtraction k - 2 faithful; at k < 2 the corpus hypothesis is negative and the statement would be about all digraphs. Containment is as a subdigraph (arcs preserved, not reflected), as in the corpus. The guard [loopless D] is load-bearing: [nb_arcs] counts loops, so the one-vertex digraph with a loop meets the arc-count hypothesis at k = 2 but cannot host the two-vertex antidirected tree (meta/probe_hints/antidirected_trees_in_digraphs_statement.v). The source's digraphs have no loops. The guard was added on 2026-10-26 as a one-way source repair of the migrated row (meta/STATEMENT_IMPROVEMENTS.md).",
         "source": {
           "name": "",
           "url": "",
           "attribution": ""
         }
       },
-      "decoded": "Corpus row: opg:antidirected_trees_in_digraphs Site: https://graph-theory-ai.github.io/graph-conjectures/op/antidirected_trees_in_digraphs/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/antidirected_trees_in_digraphs.json English statement: (Open Problem Garden, Antidirected trees in digraphs) For every finite digraph D and every k >= 2, if the number of arcs of D exceeds (k-2) times the number of its vertices, then D contains, as a subdigraph, every antidirected tree T on k vertices, that is every orientation of a tree in which each vertex has in-degree 0 or out-degree 0; containment means an injective arc-preserving map from T to D. Definitions: [nb_arcs D] - the number of ordered pairs forming an arc (this file); [antidirected_tree T] - the underlying graph is a tree (weakly connected with #V - 1 arcs) and every vertex has in-degree 0 or out-degree 0 (this file); [tree_digraph] and [weakly_connected] (this file); [contains_subdig D T] - an injective arc-preserving map T -> D (this file); [orientedDigraph] (core/oriented.v). Notes: The guard 2 <= k keeps the natural-number subtraction k - 2 faithful; at k < 2 the corpus hypothesis is negative and the statement would be about all digraphs. Containment is as a subdigraph (arcs preserved, not reflected), as in the corpus.",
+      "decoded": "Corpus row: opg:antidirected_trees_in_digraphs Site: https://graph-theory-ai.github.io/graph-conjectures/op/antidirected_trees_in_digraphs/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/antidirected_trees_in_digraphs.json English statement: (Open Problem Garden, Antidirected trees in digraphs) For every finite loopless digraph D and every k >= 2, if the number of arcs of D exceeds (k-2) times the number of its vertices, then D contains, as a subdigraph, every antidirected tree T on k vertices, that is every orientation of a tree in which each vertex has in-degree 0 or out-degree 0; containment means an injective arc-preserving map from T to D. Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v); [nb_arcs D] - the number of ordered pairs forming an arc (this file); [antidirected_tree T] - the underlying graph is a tree (weakly connected with #V - 1 arcs) and every vertex has in-degree 0 or out-degree 0 (this file); [tree_digraph] and [weakly_connected] (this file); [contains_subdig D T] - an injective arc-preserving map T -> D (this file); [orientedDigraph] (core/oriented.v). Notes: The guard 2 <= k keeps the natural-number subtraction k - 2 faithful; at k < 2 the corpus hypothesis is negative and the statement would be about all digraphs. Containment is as a subdigraph (arcs preserved, not reflected), as in the corpus. The guard [loopless D] is load-bearing: [nb_arcs] counts loops, so the one-vertex digraph with a loop meets the arc-count hypothesis at k = 2 but cannot host the two-vertex antidirected tree (meta/probe_hints/antidirected_trees_in_digraphs_statement.v). The source's digraphs have no loops. The guard was added on 2026-10-26 as a one-way source repair of the migrated row (meta/STATEMENT_IMPROVEMENTS.md).",
       "decoded_authored": false,
       "formal": {
         "name": "antidirected_trees_in_digraphs_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 363,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L363",
+        "line": 376,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L376",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.antidirected_trees_in_digraphs_statement",
-        "verbatim": "Definition antidirected_trees_in_digraphs_statement : Prop :=\n  forall (D : diGraphType) (k : nat), 2 <= k ->\n    (k - 2) * #|D| < nb_arcs D ->\n    forall T : orientedDigraph, antidirected_tree T -> #|T| = k -> contains_subdig D T."
+        "verbatim": "Definition antidirected_trees_in_digraphs_statement : Prop :=\n  forall (D : diGraphType) (k : nat), 2 <= k -> loopless D ->\n    (k - 2) * #|D| < nb_arcs D ->\n    forall T : orientedDigraph, antidirected_tree T -> #|T| = k -> contains_subdig D T."
       },
       "status": "open",
       "axiom_free": false,
@@ -1576,22 +1576,22 @@
       "cluster": "?",
       "title": "arc_disjoint_directed_cycles_in_regular_directed_gra_statement",
       "informal": {
-        "text": "Corpus row: opg:arc_disjoint_directed_cycles_in_regular_directed_graphs Site: https://graph-theory-ai.github.io/graph-conjectures/op/arc_disjoint_directed_cycles_in_regular_directed_graphs/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/arc_disjoint_directed_cycles_in_regular_directed_graphs.json English statement: (Open Problem Garden, Arc-disjoint directed cycles in regular directed graphs) For every finite digraph D and every k, if D is k-diregular (every vertex has in-degree and out-degree exactly k) then D has a list of at least binomial(k+1, 2) pairwise arc-disjoint directed cycles. Definitions: [diregular D k] - in-degree and out-degree equal k at every vertex (conjectures/classic_core.v); [cyc_arcs c] - the arcs traversed by the cycle c (this file); [dicycle] (core/dipath.v). Notes: No parallel arcs is automatic here, arcs being a relation on vertices, so k-regular of the corpus is exactly [diregular]. The list is required to have at least, not exactly, binomial(k+1,2) members.",
+        "text": "Corpus row: opg:arc_disjoint_directed_cycles_in_regular_directed_graphs Site: https://graph-theory-ai.github.io/graph-conjectures/op/arc_disjoint_directed_cycles_in_regular_directed_graphs/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/arc_disjoint_directed_cycles_in_regular_directed_graphs.json English statement: (Open Problem Garden, Arc-disjoint directed cycles in regular directed graphs) For every finite digraph D with at least one vertex and every k, if D is k-diregular (every vertex has in-degree and out-degree exactly k) then D has a list of at least binomial(k+1, 2) pairwise arc-disjoint directed cycles. Definitions: [diregular D k] - in-degree and out-degree equal k at every vertex (conjectures/classic_core.v); [cyc_arcs c] - the arcs traversed by the cycle c (this file); [dicycle] (core/dipath.v). Notes: No parallel arcs is automatic here, arcs being a relation on vertices, so k-regular of the corpus is exactly [diregular]. The list is required to have at least, not exactly, binomial(k+1,2) members. The guard [0 < #|D|] is load-bearing: the empty digraph is k-diregular for every k, vacuously, but has no directed cycle, so without the guard the body fails at k = 1 (meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v). The source's k-regular digraphs have vertices. The guard was added on 2026-10-26 as a one-way source repair of the migrated row (meta/STATEMENT_IMPROVEMENTS.md).",
         "source": {
           "name": "",
           "url": "",
           "attribution": ""
         }
       },
-      "decoded": "Corpus row: opg:arc_disjoint_directed_cycles_in_regular_directed_graphs Site: https://graph-theory-ai.github.io/graph-conjectures/op/arc_disjoint_directed_cycles_in_regular_directed_graphs/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/arc_disjoint_directed_cycles_in_regular_directed_graphs.json English statement: (Open Problem Garden, Arc-disjoint directed cycles in regular directed graphs) For every finite digraph D and every k, if D is k-diregular (every vertex has in-degree and out-degree exactly k) then D has a list of at least binomial(k+1, 2) pairwise arc-disjoint directed cycles. Definitions: [diregular D k] - in-degree and out-degree equal k at every vertex (conjectures/classic_core.v); [cyc_arcs c] - the arcs traversed by the cycle c (this file); [dicycle] (core/dipath.v). Notes: No parallel arcs is automatic here, arcs being a relation on vertices, so k-regular of the corpus is exactly [diregular]. The list is required to have at least, not exactly, binomial(k+1,2) members.",
+      "decoded": "Corpus row: opg:arc_disjoint_directed_cycles_in_regular_directed_graphs Site: https://graph-theory-ai.github.io/graph-conjectures/op/arc_disjoint_directed_cycles_in_regular_directed_graphs/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/arc_disjoint_directed_cycles_in_regular_directed_graphs.json English statement: (Open Problem Garden, Arc-disjoint directed cycles in regular directed graphs) For every finite digraph D with at least one vertex and every k, if D is k-diregular (every vertex has in-degree and out-degree exactly k) then D has a list of at least binomial(k+1, 2) pairwise arc-disjoint directed cycles. Definitions: [diregular D k] - in-degree and out-degree equal k at every vertex (conjectures/classic_core.v); [cyc_arcs c] - the arcs traversed by the cycle c (this file); [dicycle] (core/dipath.v). Notes: No parallel arcs is automatic here, arcs being a relation on vertices, so k-regular of the corpus is exactly [diregular]. The list is required to have at least, not exactly, binomial(k+1,2) members. The guard [0 < #|D|] is load-bearing: the empty digraph is k-diregular for every k, vacuously, but has no directed cycle, so without the guard the body fails at k = 1 (meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v). The source's k-regular digraphs have vertices. The guard was added on 2026-10-26 as a one-way source repair of the migrated row (meta/STATEMENT_IMPROVEMENTS.md).",
       "decoded_authored": false,
       "formal": {
         "name": "arc_disjoint_directed_cycles_in_regular_directed_gra_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 468,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L468",
+        "line": 492,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L492",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.arc_disjoint_directed_cycles_in_regular_directed_gra_statement",
-        "verbatim": "Definition arc_disjoint_directed_cycles_in_regular_directed_gra_statement : Prop :=\n  forall (D : diGraphType) (k : nat), diregular D k ->\n    exists P : seq (seq D),\n      [/\\ all (@dicycle D) P,\n          pairwise (fun a b => [disjoint cyc_arcs a & cyc_arcs b]) P &\n          'C(k.+1, 2) <= size P]."
+        "verbatim": "Definition arc_disjoint_directed_cycles_in_regular_directed_gra_statement : Prop :=\n  forall (D : diGraphType) (k : nat), 0 < #|D| -> diregular D k ->\n    exists P : seq (seq D),\n      [/\\ all (@dicycle D) P,\n          pairwise (fun a b => [disjoint cyc_arcs a & cyc_arcs b]) P &\n          'C(k.+1, 2) <= size P]."
       },
       "status": "open",
       "axiom_free": false,
@@ -1626,8 +1626,8 @@
       "formal": {
         "name": "arc_disjoint_out_branching_and_in_branching_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 528,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L528",
+        "line": 552,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L552",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.arc_disjoint_out_branching_and_in_branching_statement",
         "verbatim": "Definition arc_disjoint_out_branching_and_in_branching_statement : Prop :=\n  exists k : nat,\n    forall (D : diGraphType) (u v : D), karcstrong D k ->\n      exists f g : D -> {set D},\n        [/\\ out_branching f u, in_branching g v & arc_disjoint_sel f g]."
       },
@@ -1927,8 +1927,8 @@
       "formal": {
         "name": "bermond_thomassen_antecedent_C3",
         "file": "theories/conjectures/grounding_unvd_sad.v",
-        "line": 722,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/grounding_unvd_sad.v#L722",
+        "line": 732,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/grounding_unvd_sad.v#L732",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.grounding_unvd_sad.html#Digraph.conjectures.grounding_unvd_sad.bermond_thomassen_antecedent_C3",
         "verbatim": "Theorem bermond_thomassen_antecedent_C3 :\n  (0 < #|{: C3}|)%N /\\ (forall v : C3, (2 * 1 - 1 <= outdeg v)%N)."
       },
@@ -4782,22 +4782,22 @@
       "cluster": "?",
       "title": "cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement",
       "informal": {
-        "text": "Corpus row: opg:cyclic_spanning_subdigraph_with_small_cyclomatic_number Site: https://graph-theory-ai.github.io/graph-conjectures/op/cyclic_spanning_subdigraph_with_small_cyclomatic_number/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/cyclic_spanning_subdigraph_with_small_cyclomatic_number.json English statement: (Open Problem Garden, Cyclic spanning subdigraph with small cyclomatic number) For every finite digraph D in which every vertex lies on a directed cycle (equivalently, all strong components are nontrivial) there is a spanning subdigraph, given as an arc selector keeping only real arcs and leaving every vertex with positive kept in-degree and positive kept out-degree, whose cyclomatic number (number of kept arcs, plus number of weakly connected components of the kept subdigraph, minus number of vertices) is at most the independence number of D. Definitions: [cyclic_sel f] - the arc selector f keeps only real arcs and leaves positive in- and out-degree at every vertex (this file); [cyclomatic f] - kept arcs + weakly connected components - vertices (this file); [nb_wcc f] / [wadj f] - weakly connected components of the kept subdigraph (this file); [alpha D] - the independence number, the maximum size of an arc-free vertex set (this file); [stable S] (conjectures/classic_core.v). Notes: The corpus hypothesis all strong components are nontrivial is encoded by the equivalent every vertex lies on a directed cycle. A spanning subdigraph is modelled by an arc selector f : D -> {set D} rather than by a new carrier type.",
+        "text": "Corpus row: opg:cyclic_spanning_subdigraph_with_small_cyclomatic_number Site: https://graph-theory-ai.github.io/graph-conjectures/op/cyclic_spanning_subdigraph_with_small_cyclomatic_number/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/cyclic_spanning_subdigraph_with_small_cyclomatic_number.json English statement: (Open Problem Garden, Cyclic spanning subdigraph with small cyclomatic number) For every finite loopless digraph D in which every vertex lies on a directed cycle (equivalently, all strong components are nontrivial) there is a spanning subdigraph, given as an arc selector keeping only real arcs and leaving every vertex with positive kept in-degree and positive kept out-degree, whose cyclomatic number (number of kept arcs, plus number of weakly connected components of the kept subdigraph, minus number of vertices) is at most the independence number of D. Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v); [cyclic_sel f] - the arc selector f keeps only real arcs and leaves positive in- and out-degree at every vertex (this file); [cyclomatic f] - kept arcs + weakly connected components - vertices (this file); [nb_wcc f] / [wadj f] - weakly connected components of the kept subdigraph (this file); [alpha D] - the independence number, the maximum size of an arc-free vertex set (this file); [stable S] (conjectures/classic_core.v). Notes: The corpus hypothesis all strong components are nontrivial is encoded by the equivalent every vertex lies on a directed cycle. A spanning subdigraph is modelled by an arc selector f : D -> {set D} rather than by a new carrier type. The guard [loopless D] is load-bearing: on the one-vertex digraph with a loop the vertex lies on a directed cycle (the loop), its singleton is not stable, so [alpha D = 0], while every cyclic arc selector keeps the loop and has cyclomatic number at least 1 (meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v). The source's digraphs have no loops. The guard was added on 2026-10-26 (meta/STATEMENT_IMPROVEMENTS.md).",
         "source": {
           "name": "",
           "url": "",
           "attribution": ""
         }
       },
-      "decoded": "Corpus row: opg:cyclic_spanning_subdigraph_with_small_cyclomatic_number Site: https://graph-theory-ai.github.io/graph-conjectures/op/cyclic_spanning_subdigraph_with_small_cyclomatic_number/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/cyclic_spanning_subdigraph_with_small_cyclomatic_number.json English statement: (Open Problem Garden, Cyclic spanning subdigraph with small cyclomatic number) For every finite digraph D in which every vertex lies on a directed cycle (equivalently, all strong components are nontrivial) there is a spanning subdigraph, given as an arc selector keeping only real arcs and leaving every vertex with positive kept in-degree and positive kept out-degree, whose cyclomatic number (number of kept arcs, plus number of weakly connected components of the kept subdigraph, minus number of vertices) is at most the independence number of D. Definitions: [cyclic_sel f] - the arc selector f keeps only real arcs and leaves positive in- and out-degree at every vertex (this file); [cyclomatic f] - kept arcs + weakly connected components - vertices (this file); [nb_wcc f] / [wadj f] - weakly connected components of the kept subdigraph (this file); [alpha D] - the independence number, the maximum size of an arc-free vertex set (this file); [stable S] (conjectures/classic_core.v). Notes: The corpus hypothesis all strong components are nontrivial is encoded by the equivalent every vertex lies on a directed cycle. A spanning subdigraph is modelled by an arc selector f : D -> {set D} rather than by a new carrier type.",
+      "decoded": "Corpus row: opg:cyclic_spanning_subdigraph_with_small_cyclomatic_number Site: https://graph-theory-ai.github.io/graph-conjectures/op/cyclic_spanning_subdigraph_with_small_cyclomatic_number/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/cyclic_spanning_subdigraph_with_small_cyclomatic_number.json English statement: (Open Problem Garden, Cyclic spanning subdigraph with small cyclomatic number) For every finite loopless digraph D in which every vertex lies on a directed cycle (equivalently, all strong components are nontrivial) there is a spanning subdigraph, given as an arc selector keeping only real arcs and leaving every vertex with positive kept in-degree and positive kept out-degree, whose cyclomatic number (number of kept arcs, plus number of weakly connected components of the kept subdigraph, minus number of vertices) is at most the independence number of D. Definitions: [loopless D] - no vertex has an arc to itself (conjectures/two_extremal.v); [cyclic_sel f] - the arc selector f keeps only real arcs and leaves positive in- and out-degree at every vertex (this file); [cyclomatic f] - kept arcs + weakly connected components - vertices (this file); [nb_wcc f] / [wadj f] - weakly connected components of the kept subdigraph (this file); [alpha D] - the independence number, the maximum size of an arc-free vertex set (this file); [stable S] (conjectures/classic_core.v). Notes: The corpus hypothesis all strong components are nontrivial is encoded by the equivalent every vertex lies on a directed cycle. A spanning subdigraph is modelled by an arc selector f : D -> {set D} rather than by a new carrier type. The guard [loopless D] is load-bearing: on the one-vertex digraph with a loop the vertex lies on a directed cycle (the loop), its singleton is not stable, so [alpha D = 0], while every cyclic arc selector keeps the loop and has cyclomatic number at least 1 (meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v). The source's digraphs have no loops. The guard was added on 2026-10-26 (meta/STATEMENT_IMPROVEMENTS.md).",
       "decoded_authored": false,
       "formal": {
         "name": "cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 294,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L294",
+        "line": 301,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L301",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement",
-        "verbatim": "Definition cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement : Prop :=\n  forall D : diGraphType,\n    (forall v : D, exists c : seq D, dicycle c /\\ v \\in c) ->\n    exists f : D -> {set D}, cyclic_sel f /\\ (cyclomatic f <= alpha D)."
+        "verbatim": "Definition cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement : Prop :=\n  forall D : diGraphType, loopless D ->\n    (forall v : D, exists c : seq D, dicycle c /\\ v \\in c) ->\n    exists f : D -> {set D}, cyclic_sel f /\\ (cyclomatic f <= alpha D)."
       },
       "status": "open",
       "axiom_free": false,
@@ -4870,8 +4870,8 @@
       "formal": {
         "name": "decomposing_an_even_tournament_in_directed_paths_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 492,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L492",
+        "line": 516,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L516",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.decomposing_an_even_tournament_in_directed_paths_statement",
         "verbatim": "Definition decomposing_an_even_tournament_in_directed_paths_statement : Prop :=\n  forall T : tournament, ~~ odd #|T| ->\n    exists Q : seq (T * seq T),\n      [/\\ all (fun p => dipath p.1 p.2) Q,\n          [forall e : T * T, (\\sum_(p <- Q) (e \\in dipath_arcs p.1 p.2)) == (e.1 --> e.2)] &\n          size Q = \\sum_(v : T) (outdeg v - classic_core.indeg v)]."
       },
@@ -4908,8 +4908,8 @@
       "formal": {
         "name": "decomposing_k_arc_strong_tournament_into_k_spanning_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 547,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L547",
+        "line": 571,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L571",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.decomposing_k_arc_strong_tournament_into_k_spanning_statement",
         "verbatim": "Definition decomposing_k_arc_strong_tournament_into_k_spanning_statement : Prop :=\n  forall (T : tournament) (k : nat), 0 < k -> karcstrong T k ->\n    exists fs : seq (T -> {set T}),\n      [/\\ size fs = k, arc_decomp fs & all (fun f => strongb (outsel f)) fs]."
       },
@@ -5942,8 +5942,8 @@
       "formal": {
         "name": "edge_disjoint_hamilton_cycles_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 382,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L382",
+        "line": 395,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L395",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.edge_disjoint_hamilton_cycles_statement",
         "verbatim": "Definition edge_disjoint_hamilton_cycles_statement : Prop :=\n  forall k : nat, 2 <= k ->\n    exists f : nat -> nat,\n      forall T : tournament, kstrong T (f k) ->\n        exists Cs : seq (seq T),\n          [/\\ all (@ham T) Cs,\n              pairwise (fun a b => [disjoint cyc_arcs a & cyc_arcs b]) Cs &\n              size Cs = k]."
       },
@@ -6221,8 +6221,8 @@
       "formal": {
         "name": "erdos_posa_empty_ok",
         "file": "theories/conjectures/grounding_unvd_sad.v",
-        "line": 695,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/grounding_unvd_sad.v#L695",
+        "line": 705,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/grounding_unvd_sad.v#L705",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.grounding_unvd_sad.html#Digraph.conjectures.grounding_unvd_sad.erdos_posa_empty_ok",
         "verbatim": "Theorem erdos_posa_empty_ok :\n  forall ell : nat,\n    exists T : {set TT 0}, (#|T| <= 0)%N /\\ meets_long_dicycles ell T."
       },
@@ -6261,8 +6261,8 @@
       "formal": {
         "name": "erdos_posa_long_dicycles_statement",
         "file": "theories/conjectures/packing.v",
-        "line": 303,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/packing.v#L303",
+        "line": 311,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/packing.v#L311",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.packing.html#Digraph.conjectures.packing.erdos_posa_long_dicycles_statement",
         "verbatim": "Definition erdos_posa_long_dicycles_statement : Prop :=\n  forall ell : nat, (2 <= ell)%N ->\n  forall n : nat, exists t : nat,\n    forall D : diGraphType,\n      (exists P : seq (seq D),\n         [/\\ cycle_pack P, vtx_disjoint_pack P, size P = n &\n             all (fun c => ell <= size c)%N P])\n      \\/\n      (exists T : {set D}, (#|T| <= t)%N /\\ meets_long_dicycles ell T)."
       },
@@ -7017,8 +7017,8 @@
       "formal": {
         "name": "hamilton_cycle_in_small_d_diregular_graphs_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 584,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L584",
+        "line": 608,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L608",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.hamilton_cycle_in_small_d_diregular_graphs_statement",
         "verbatim": "Definition hamilton_cycle_in_small_d_diregular_graphs_statement : Prop :=\n  jackson_hamilton_small_diregular_statement."
       },
@@ -7176,8 +7176,8 @@
       "formal": {
         "name": "hoand_reed_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 512,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L512",
+        "line": 536,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L536",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.hoand_reed_statement",
         "verbatim": "Definition hoand_reed_statement : Prop := hoang_reed_statement."
       },
@@ -7214,8 +7214,8 @@
       "formal": {
         "name": "hoang_reed_antecedent_C3",
         "file": "theories/conjectures/grounding_unvd_sad.v",
-        "line": 727,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/grounding_unvd_sad.v#L727",
+        "line": 737,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/grounding_unvd_sad.v#L737",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.grounding_unvd_sad.html#Digraph.conjectures.grounding_unvd_sad.hoang_reed_antecedent_C3",
         "verbatim": "Theorem hoang_reed_antecedent_C3 :\n  (0 < #|{: C3}|)%N /\\ (forall v : C3, (1 <= outdeg v)%N)."
       },
@@ -7884,8 +7884,8 @@
       "formal": {
         "name": "large_acyclic_induced_subdigraph_in_a_planar_oriente_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 665,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L665",
+        "line": 689,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L689",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.large_acyclic_induced_subdigraph_in_a_planar_oriente_statement",
         "verbatim": "Definition large_acyclic_induced_subdigraph_in_a_planar_oriente_statement : Prop :=\n  forall (D : diGraphType) (llD : loopless D),\n    (forall u v : D, u --> v -> ~~ (v --> u)) ->\n    planar_sg (underlyingG llD) ->\n    exists S : {set D}, acyclicb (induced_digraph S) /\\ (3 * #|D| <= 5 * #|S|)."
       },
@@ -8111,15 +8111,15 @@
           "attribution": "Berge (Linial)"
         }
       },
-      "decoded": "For every digraph D and every k there exist a path-partition Q of V(D) (Q partitions every vertex into vertex-disjoint directed paths, pp_partition Q) and a vertex set S inducing a subdigraph with directed chromatic number ≤ k (dicolorableb (D[S]) k, i.e. χ⃗(D[S]) ≤ k) such that the k-norm of Q — the sum over paths of min(k, number of vertices on the path) — equals |S| (pp_knorm k Q = #|S|), and this is optimal: no path-partition Q' has k-norm smaller than |S| (forall Q' path-partition, #|S| ≤ pp_knorm k Q'). In other words the minimum k-norm over path-partitions equals the maximum order of an induced χ⃗ ≤ k subdigraph.",
+      "decoded": "For every loopless digraph D and every k there exist a path-partition Q of V(D) (Q partitions every vertex into vertex-disjoint directed paths, pp_partition Q) and a vertex set S inducing a subdigraph with directed chromatic number ≤ k (dicolorableb (D[S]) k, i.e. χ⃗(D[S]) ≤ k) such that the k-norm of Q — the sum over paths of min(k, number of vertices on the path) — equals |S| (pp_knorm k Q = #|S|), and this is optimal: no path-partition Q' has k-norm smaller than |S| (forall Q' path-partition, #|S| ≤ pp_knorm k Q'). In other words the minimum k-norm over path-partitions equals the maximum order of an induced χ⃗ ≤ k subdigraph.",
       "decoded_authored": true,
       "formal": {
         "name": "linial_berge_statement",
         "file": "theories/conjectures/packing.v",
-        "line": 261,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/packing.v#L261",
+        "line": 269,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/packing.v#L269",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.packing.html#Digraph.conjectures.packing.linial_berge_statement",
-        "verbatim": "Definition linial_berge_statement : Prop :=\n  forall (D : diGraphType) (k : nat),\n    exists (Q : seq (D * seq D)) (S : {set D}),\n      [/\\ (* Q is a path-partition realizing the minimum k-norm *)\n          pp_partition Q,\n          (* S induces a χ⃗ ≤ k subdigraph (a union of k acyclic sets) *)\n          dicolorableb (induced_digraph S) k,\n          (* duality: the realized k-norm equals |S| *)\n          pp_knorm k Q = #|S| &\n          (* and this is optimal: no path-partition has smaller k-norm than |S|,\n             i.e."
+        "verbatim": "Definition linial_berge_statement : Prop :=\n  forall (D : diGraphType) (k : nat), irreflexive (@arc D) ->\n    exists (Q : seq (D * seq D)) (S : {set D}),\n      [/\\ (* Q is a path-partition realizing the minimum k-norm *)\n          pp_partition Q,\n          (* S induces a χ⃗ ≤ k subdigraph (a union of k acyclic sets) *)\n          dicolorableb (induced_digraph S) k,\n          (* duality: the realized k-norm equals |S| *)\n          pp_knorm k Q = #|S| &\n          (* and this is optimal: no path-partition has smaller k-norm than |S|,\n             i.e."
       },
       "status": "open",
       "axiom_free": false,
@@ -8772,22 +8772,22 @@
       "cluster": "?",
       "title": "majority_choosable_universal_constant_statement",
       "informal": {
-        "text": "Corpus row: arxiv:1608.03040#06 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__06/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__06.json English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 7) There is a constant c >= 1 such that every finite digraph is majority c-choosable: for every assignment of a colour list of size at least c to each vertex there is a colouring picking each vertex's colour from its own list in which every vertex has at most half of its out-neighbours coloured like itself. Definitions: [x51_majority_colouring col] - at most half of the out-neighbours share the colour, written as 2 * #same <= outdeg (this file); [x51_respects_lists L col] - each vertex is coloured from its own list (this file); [x51_same_colour_outneighbours] (this file); [outdeg] (core/oriented.v). Notes: The colour universe is an arbitrary finite type quantified inside the statement, so a single c works for lists over any palette.",
+        "text": "Corpus row: arxiv:1608.03040#06 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__06/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__06.json English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 7) There is a constant c >= 1 such that every finite loopless digraph is majority c-choosable: for every assignment of a colour list of size at least c to each vertex there is a colouring picking each vertex's colour from its own list in which every vertex has at most half of its out-neighbours coloured like itself. Definitions: [irreflexive (@arc D)] - no vertex has an arc to itself (the body of two_extremal.loopless, which this file does not import); [x51_majority_colouring col] - at most half of the out-neighbours share the colour, written as 2 * #same <= outdeg (this file); [x51_respects_lists L col] - each vertex is coloured from its own list (this file); [x51_same_colour_outneighbours] (this file); [outdeg] (core/oriented.v). Notes: The colour universe is an arbitrary finite type quantified inside the statement, so a single c works for lists over any palette. The looplessness guard is load-bearing. [diGraphType] allows loops, and a loop at v makes v a same-coloured out-neighbour of itself, so the one-vertex digraph with a loop has no majority colouring from any lists (meta/probe_hints/majority_choosable_universal_constant_statement.v). The source's digraphs have no loops. The guard was added on 2026-10-25 (meta/STATEMENT_IMPROVEMENTS.md).",
         "source": {
           "name": "",
           "url": "",
           "attribution": ""
         }
       },
-      "decoded": "Corpus row: arxiv:1608.03040#06 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__06/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__06.json English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 7) There is a constant c >= 1 such that every finite digraph is majority c-choosable: for every assignment of a colour list of size at least c to each vertex there is a colouring picking each vertex's colour from its own list in which every vertex has at most half of its out-neighbours coloured like itself. Definitions: [x51_majority_colouring col] - at most half of the out-neighbours share the colour, written as 2 * #same <= outdeg (this file); [x51_respects_lists L col] - each vertex is coloured from its own list (this file); [x51_same_colour_outneighbours] (this file); [outdeg] (core/oriented.v). Notes: The colour universe is an arbitrary finite type quantified inside the statement, so a single c works for lists over any palette.",
+      "decoded": "Corpus row: arxiv:1608.03040#06 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__06/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__06.json English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 7) There is a constant c >= 1 such that every finite loopless digraph is majority c-choosable: for every assignment of a colour list of size at least c to each vertex there is a colouring picking each vertex's colour from its own list in which every vertex has at most half of its out-neighbours coloured like itself. Definitions: [irreflexive (@arc D)] - no vertex has an arc to itself (the body of two_extremal.loopless, which this file does not import); [x51_majority_colouring col] - at most half of the out-neighbours share the colour, written as 2 * #same <= outdeg (this file); [x51_respects_lists L col] - each vertex is coloured from its own list (this file); [x51_same_colour_outneighbours] (this file); [outdeg] (core/oriented.v). Notes: The colour universe is an arbitrary finite type quantified inside the statement, so a single c works for lists over any palette. The looplessness guard is load-bearing. [diGraphType] allows loops, and a loop at v makes v a same-coloured out-neighbour of itself, so the one-vertex digraph with a loop has no majority colouring from any lists (meta/probe_hints/majority_choosable_universal_constant_statement.v). The source's digraphs have no loops. The guard was added on 2026-10-25 (meta/STATEMENT_IMPROVEMENTS.md).",
       "decoded_authored": false,
       "formal": {
         "name": "majority_choosable_universal_constant_statement",
         "file": "theories/conjectures/X51.v",
-        "line": 42,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X51.v#L42",
+        "line": 48,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X51.v#L48",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X51.html#Digraph.conjectures.X51.majority_choosable_universal_constant_statement",
-        "verbatim": "Definition majority_choosable_universal_constant_statement : Prop :=\n  exists c : nat,\n    0 < c /\\\n    forall (D : diGraphType) (C : finType) (L : D -> {set C}),\n      (forall v : D, c <= #|L v|) ->\n      exists col : D -> C,\n        x51_respects_lists L col /\\\n        x51_majority_colouring col."
+        "verbatim": "Definition majority_choosable_universal_constant_statement : Prop :=\n  exists c : nat,\n    0 < c /\\\n    forall (D : diGraphType) (C : finType) (L : D -> {set C}),\n      irreflexive (@arc D) ->\n      (forall v : D, c <= #|L v|) ->\n      exists col : D -> C,\n        x51_respects_lists L col /\\\n        x51_majority_colouring col."
       },
       "status": "open",
       "axiom_free": false,
@@ -8912,20 +8912,20 @@
       "cluster": "?",
       "title": "majority_three_colouring_beta_statement",
       "informal": {
-        "text": "Corpus row: arxiv:1608.03040#02 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__02/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__02.json English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 1) There is a constant beta < 1, written as a fraction p/q of natural numbers with p < q, such that every finite loopless digraph has a colouring of its vertices by three colours in which every vertex v has at most beta times its out-degree out-neighbours coloured like v, written without division as q * #(out-neighbours of v with the colour of v) <= p * outdeg v. Definitions: [x45_same_colour_outneighbours col v] - the number of out-neighbours of v carrying the colour of v (this file); [outdeg v] (core/oriented.v); [loopless D] - no vertex carries a loop (conjectures/two_extremal.v). Notes: RE-ENCODED 2026-10-25 (coordination/PROGRAMME.md, A1). Until then the body fixed beta = 1/2 over all digraphs, which restated the strictly stronger majority 3-colouring conjecture [majority_3col_statement] of conjectures/colouring_variants.v (row arxiv:1608.03040#00), and a one-vertex digraph with a loop refuted it (meta/probe_hints/majority_three_colouring_beta_statement.v). Now beta is existential, as the source asks. A rational beta loses nothing: a real beta < 1 that works can be raised to a rational one below 1, and no negative beta works on a digraph with an arc. The guard [loopless D] is load-bearing: [diGraphType] allows loops, a loop makes v an out-neighbour of itself carrying its own colour, and the one-vertex digraph with a loop then violates the bound for every beta < 1, so the question presupposes loopless digraphs. The old body implies the new one (beta = 1/2); the converse is open. The pinned review records the question as solved: Knox and Samal (2018) give beta = 2/3. Recorded in meta/STATEMENT_IMPROVEMENTS.md.",
+        "text": "Corpus row: arxiv:1608.03040#02 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__02/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__02.json English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 1) There is a constant beta < 1, written as a fraction p/q of natural numbers with p < q, such that every finite loopless digraph has a colouring of its vertices by three colours in which every vertex v has at most beta times its out-degree out-neighbours coloured like v, written without division as q * #(out-neighbours of v with the colour of v) <= p * outdeg v. Definitions: [x45_same_colour_outneighbours col v] - the number of out-neighbours of v carrying the colour of v (this file); [outdeg v] (core/oriented.v); [loopless D] - no vertex carries a loop (conjectures/two_extremal.v). Notes: RE-ENCODED 2026-10-25 (coordination/PROGRAMME.md, A1). Until then the body fixed beta = 1/2 over all digraphs, which restated the strictly stronger majority 3-colouring conjecture [majority_3col_statement] of conjectures/colouring_variants.v (row arxiv:1608.03040#00), and a one-vertex digraph with a loop refuted it (meta/probe_hints/majority_three_colouring_beta_statement.v). Now beta is existential, as the source asks. A rational beta loses nothing: a real beta < 1 that works can be raised to a rational one below 1, and no negative beta works on a digraph with an arc. The guard [loopless D] is load-bearing: [diGraphType] allows loops, a loop makes v an out-neighbour of itself carrying its own colour, and the one-vertex digraph with a loop then violates the bound for every beta < 1, so the question presupposes loopless digraphs. The old body is false (the looped vertex), so it implies the new body only trivially. The converse fails: the pinned review records the question as solved, Knox and Samal (2018) give beta = 2/3, so the new body holds while the old one does not. The open question is the loopless majority 3-colouring conjecture [majority_3col_statement] (row arxiv:1608.03040#00), which implies the new body with p = 1, q = 2 (edge e038). Recorded in meta/STATEMENT_IMPROVEMENTS.md.",
         "source": {
           "name": "",
           "url": "",
           "attribution": ""
         }
       },
-      "decoded": "Corpus row: arxiv:1608.03040#02 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__02/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__02.json English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 1) There is a constant beta < 1, written as a fraction p/q of natural numbers with p < q, such that every finite loopless digraph has a colouring of its vertices by three colours in which every vertex v has at most beta times its out-degree out-neighbours coloured like v, written without division as q * #(out-neighbours of v with the colour of v) <= p * outdeg v. Definitions: [x45_same_colour_outneighbours col v] - the number of out-neighbours of v carrying the colour of v (this file); [outdeg v] (core/oriented.v); [loopless D] - no vertex carries a loop (conjectures/two_extremal.v). Notes: RE-ENCODED 2026-10-25 (coordination/PROGRAMME.md, A1). Until then the body fixed beta = 1/2 over all digraphs, which restated the strictly stronger majority 3-colouring conjecture [majority_3col_statement] of conjectures/colouring_variants.v (row arxiv:1608.03040#00), and a one-vertex digraph with a loop refuted it (meta/probe_hints/majority_three_colouring_beta_statement.v). Now beta is existential, as the source asks. A rational beta loses nothing: a real beta < 1 that works can be raised to a rational one below 1, and no negative beta works on a digraph with an arc. The guard [loopless D] is load-bearing: [diGraphType] allows loops, a loop makes v an out-neighbour of itself carrying its own colour, and the one-vertex digraph with a loop then violates the bound for every beta < 1, so the question presupposes loopless digraphs. The old body implies the new one (beta = 1/2); the converse is open. The pinned review records the question as solved: Knox and Samal (2018) give beta = 2/3. Recorded in meta/STATEMENT_IMPROVEMENTS.md.",
+      "decoded": "Corpus row: arxiv:1608.03040#02 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/1608.03040__02/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/1608.03040__02.json English statement: (Kreutzer, Oum, Seymour, van der Zypen, Wood 2016, arXiv:1608.03040, Open Problem 1) There is a constant beta < 1, written as a fraction p/q of natural numbers with p < q, such that every finite loopless digraph has a colouring of its vertices by three colours in which every vertex v has at most beta times its out-degree out-neighbours coloured like v, written without division as q * #(out-neighbours of v with the colour of v) <= p * outdeg v. Definitions: [x45_same_colour_outneighbours col v] - the number of out-neighbours of v carrying the colour of v (this file); [outdeg v] (core/oriented.v); [loopless D] - no vertex carries a loop (conjectures/two_extremal.v). Notes: RE-ENCODED 2026-10-25 (coordination/PROGRAMME.md, A1). Until then the body fixed beta = 1/2 over all digraphs, which restated the strictly stronger majority 3-colouring conjecture [majority_3col_statement] of conjectures/colouring_variants.v (row arxiv:1608.03040#00), and a one-vertex digraph with a loop refuted it (meta/probe_hints/majority_three_colouring_beta_statement.v). Now beta is existential, as the source asks. A rational beta loses nothing: a real beta < 1 that works can be raised to a rational one below 1, and no negative beta works on a digraph with an arc. The guard [loopless D] is load-bearing: [diGraphType] allows loops, a loop makes v an out-neighbour of itself carrying its own colour, and the one-vertex digraph with a loop then violates the bound for every beta < 1, so the question presupposes loopless digraphs. The old body is false (the looped vertex), so it implies the new body only trivially. The converse fails: the pinned review records the question as solved, Knox and Samal (2018) give beta = 2/3, so the new body holds while the old one does not. The open question is the loopless majority 3-colouring conjecture [majority_3col_statement] (row arxiv:1608.03040#00), which implies the new body with p = 1, q = 2 (edge e038). Recorded in meta/STATEMENT_IMPROVEMENTS.md.",
       "decoded_authored": false,
       "formal": {
         "name": "majority_three_colouring_beta_statement",
         "file": "theories/conjectures/X45.v",
-        "line": 45,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X45.v#L45",
+        "line": 48,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X45.v#L48",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X45.html#Digraph.conjectures.X45.majority_three_colouring_beta_statement",
         "verbatim": "Definition majority_three_colouring_beta_statement : Prop :=\n  exists p q : nat, (p < q)%N /\\\n    forall D : diGraphType, loopless D ->\n      exists col : D -> 'I_3,\n        forall v : D,\n          (q * x45_same_colour_outneighbours col v <= p * outdeg v)%N."
       },
@@ -9322,8 +9322,8 @@
       "formal": {
         "name": "monochromatic_reachability_vs_rainbow_triangles_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 316,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L316",
+        "line": 323,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L323",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.monochromatic_reachability_vs_rainbow_triangles_statement",
         "verbatim": "Definition monochromatic_reachability_vs_rainbow_triangles_statement : Prop :=\n  mono_reach_or_rainbow_statement."
       },
@@ -9438,8 +9438,8 @@
       "formal": {
         "name": "non_edges_vs_feedback_edge_sets_in_digraphs_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 567,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L567",
+        "line": 591,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L591",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.non_edges_vs_feedback_edge_sets_in_digraphs_statement",
         "verbatim": "Definition non_edges_vs_feedback_edge_sets_in_digraphs_statement : Prop :=\n  forall D : diGraphType, short_dicycle_free D -> 2 * min_feedback D <= nonedge_count D."
       },
@@ -10289,8 +10289,8 @@
       "formal": {
         "name": "oriented_chromatic_number_of_planar_graphs_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 603,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L603",
+        "line": 627,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L627",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.oriented_chromatic_number_of_planar_graphs_statement",
         "verbatim": "Definition oriented_chromatic_number_of_planar_graphs_statement : Prop :=\n  exists M : nat,\n    (forall (D : diGraphType) (llD : loopless D),\n        (forall u v : D, u --> v -> ~~ (v --> u)) ->\n        planar_sg (underlyingG llD) -> oriented_kcolouring D M) /\\\n    (exists (D : diGraphType) (llD : loopless D),\n        [/\\ (forall u v : D, u --> v -> ~~ (v --> u)),\n            planar_sg (underlyingG llD) & ~ oriented_kcolouring D M.-1])."
       },
@@ -10574,8 +10574,8 @@
       "formal": {
         "name": "oriented_trees_in_n_chromatic_digraphs_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 629,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L629",
+        "line": 653,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L653",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.oriented_trees_in_n_chromatic_digraphs_statement",
         "verbatim": "Definition oriented_trees_in_n_chromatic_digraphs_statement : Prop :=\n  forall (D : diGraphType) (k : nat), 2 <= k ->\n    (2 * k - 2 <= χ([set: underlying D]))%N ->\n    forall T : orientedDigraph, oriented_tree T -> #|T| = k -> contains_subdig D T."
       },
@@ -10688,8 +10688,8 @@
       "formal": {
         "name": "partitioning_planar_digraphs_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 405,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L405",
+        "line": 418,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L418",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.partitioning_planar_digraphs_statement",
         "verbatim": "Definition partitioning_planar_digraphs_statement : Prop :=\n  forall (D : diGraphType) (llD : loopless D),\n    (forall u v : D, u --> v -> ~~ (v --> u)) ->\n    planar_sg (underlyingG llD) ->\n    exists X : {set D}, acyclicb (induced_digraph X) /\\ acyclicb (induced_digraph (~: X))."
       },
@@ -10714,22 +10714,22 @@
       "cluster": "?",
       "title": "partitionning_a_tournament_into_k_strongly_connected_statement",
       "informal": {
-        "text": "Corpus row: opg:partitionning_a_tournament_into_k_strongly_connected_subtournaments Site: https://graph-theory-ai.github.io/graph-conjectures/op/partitionning_a_tournament_into_k_strongly_connected_subtournaments/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/partitionning_a_tournament_into_k_strongly_connected_subtournaments.json English statement: (Open Problem Garden, Partitioning a tournament into k-strongly connected subtournaments) There is a function g from finite lists of positive integers to naturals such that for every list k_1, ..., k_p of positive integers and every tournament T that is g(k_1,...,k_p)-strongly connected, the vertex set of T partitions into p parts V_1, ..., V_p such that each V_i has more than one vertex and the subtournament it induces is k_i-strongly connected. Definitions: [kstrong T k] (this file); [set_partition part] - every vertex lies in exactly one part (this file); [sub_tournament S] - the subtournament induced by S (core/tournament.v). Notes: Nontriviality of each part is encoded as 1 < #|V_i|; note that [kstrong] itself already requires k < #|V_i|.",
+        "text": "Corpus row: opg:partitionning_a_tournament_into_k_strongly_connected_subtournaments Site: https://graph-theory-ai.github.io/graph-conjectures/op/partitionning_a_tournament_into_k_strongly_connected_subtournaments/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/partitionning_a_tournament_into_k_strongly_connected_subtournaments.json English statement: (Open Problem Garden, Partitioning a tournament into k-strongly connected subtournaments) There is a function g from finite lists of positive integers to naturals such that for every non-empty list k_1, ..., k_p (p >= 1) of positive integers and every tournament T that is g(k_1,...,k_p)-strongly connected, the vertex set of T partitions into p parts V_1, ..., V_p such that each V_i has more than one vertex and the subtournament it induces is k_i-strongly connected. Definitions: [kstrong T k] (this file); [set_partition part] - every vertex lies in exactly one part (this file); [sub_tournament S] - the subtournament induced by S (core/tournament.v). Notes: Nontriviality of each part is encoded as 1 < #|V_i|; note that [kstrong] itself already requires k < #|V_i|. The guard [0 < size ks] is load-bearing: for the empty list the positivity hypothesis holds vacuously and some tournament is g([::])-strong (grounding_P9.kstrong_tournament_exists), but a tournament with a vertex has no partition into zero parts (meta/probe_hints/partitionning_a_tournament_into_k_strongly_connected_statement.v). The source partitions into V_1, ..., V_p with p >= 1. The guard was added on 2026-10-26 (meta/STATEMENT_IMPROVEMENTS.md).",
         "source": {
           "name": "",
           "url": "",
           "attribution": ""
         }
       },
-      "decoded": "Corpus row: opg:partitionning_a_tournament_into_k_strongly_connected_subtournaments Site: https://graph-theory-ai.github.io/graph-conjectures/op/partitionning_a_tournament_into_k_strongly_connected_subtournaments/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/partitionning_a_tournament_into_k_strongly_connected_subtournaments.json English statement: (Open Problem Garden, Partitioning a tournament into k-strongly connected subtournaments) There is a function g from finite lists of positive integers to naturals such that for every list k_1, ..., k_p of positive integers and every tournament T that is g(k_1,...,k_p)-strongly connected, the vertex set of T partitions into p parts V_1, ..., V_p such that each V_i has more than one vertex and the subtournament it induces is k_i-strongly connected. Definitions: [kstrong T k] (this file); [set_partition part] - every vertex lies in exactly one part (this file); [sub_tournament S] - the subtournament induced by S (core/tournament.v). Notes: Nontriviality of each part is encoded as 1 < #|V_i|; note that [kstrong] itself already requires k < #|V_i|.",
+      "decoded": "Corpus row: opg:partitionning_a_tournament_into_k_strongly_connected_subtournaments Site: https://graph-theory-ai.github.io/graph-conjectures/op/partitionning_a_tournament_into_k_strongly_connected_subtournaments/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/partitionning_a_tournament_into_k_strongly_connected_subtournaments.json English statement: (Open Problem Garden, Partitioning a tournament into k-strongly connected subtournaments) There is a function g from finite lists of positive integers to naturals such that for every non-empty list k_1, ..., k_p (p >= 1) of positive integers and every tournament T that is g(k_1,...,k_p)-strongly connected, the vertex set of T partitions into p parts V_1, ..., V_p such that each V_i has more than one vertex and the subtournament it induces is k_i-strongly connected. Definitions: [kstrong T k] (this file); [set_partition part] - every vertex lies in exactly one part (this file); [sub_tournament S] - the subtournament induced by S (core/tournament.v). Notes: Nontriviality of each part is encoded as 1 < #|V_i|; note that [kstrong] itself already requires k < #|V_i|. The guard [0 < size ks] is load-bearing: for the empty list the positivity hypothesis holds vacuously and some tournament is g([::])-strong (grounding_P9.kstrong_tournament_exists), but a tournament with a vertex has no partition into zero parts (meta/probe_hints/partitionning_a_tournament_into_k_strongly_connected_statement.v). The source partitions into V_1, ..., V_p with p >= 1. The guard was added on 2026-10-26 (meta/STATEMENT_IMPROVEMENTS.md).",
       "decoded_authored": false,
       "formal": {
         "name": "partitionning_a_tournament_into_k_strongly_connected_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 425,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L425",
+        "line": 444,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L444",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.partitionning_a_tournament_into_k_strongly_connected_statement",
-        "verbatim": "Definition partitionning_a_tournament_into_k_strongly_connected_statement : Prop :=\n  exists g : seq nat -> nat,\n    forall ks : seq nat, all (fun k => 0 < k) ks ->\n      forall T : tournament, kstrong T (g ks) ->\n        exists part : seq {set T},\n          [/\\ size part = size ks, set_partition part &\n              forall i : 'I_(size ks),\n                (1 < #|nth set0 part i|) /\\\n                kstrong (sub_tournament (nth set0 part i)) (nth 0 ks i)]."
+        "verbatim": "Definition partitionning_a_tournament_into_k_strongly_connected_statement : Prop :=\n  exists g : seq nat -> nat,\n    forall ks : seq nat, 0 < size ks -> all (fun k => 0 < k) ks ->\n      forall T : tournament, kstrong T (g ks) ->\n        exists part : seq {set T},\n          [/\\ size part = size ks, set_partition part &\n              forall i : 'I_(size ks),\n                (1 < #|nth set0 part i|) /\\\n                kstrong (sub_tournament (nth set0 part i)) (nth 0 ks i)]."
       },
       "status": "open",
       "axiom_free": false,
@@ -11470,15 +11470,15 @@
           "attribution": "Alon; Thomassen"
         }
       },
-      "decoded": "There is a function f : nat → nat such that for every digraph D and every d, if every vertex has out-degree at least f(d), then the vertex set splits into a proper bipartition (V1 nonempty and not all of D, with complement ~:V1) in which each part induces minimum out-degree at least d — every v in V1 has outdeg_in(V1, v) ≥ d, and every v outside V1 has outdeg_in(~:V1, v) ≥ d, where outdeg_in(A,v) counts only arcs whose head lies in A.",
+      "decoded": "There is a function f : nat → nat such that for every digraph D with at least one vertex and every d, if every vertex has out-degree at least f(d), then the vertex set splits into a proper bipartition (V1 nonempty and not all of D, with complement ~:V1) in which each part induces minimum out-degree at least d — every v in V1 has outdeg_in(V1, v) ≥ d, and every v outside V1 has outdeg_in(~:V1, v) ≥ d, where outdeg_in(A,v) counts only arcs whose head lies in A.",
       "decoded_authored": true,
       "formal": {
         "name": "splitting_min_outdegree_statement",
         "file": "theories/conjectures/classic_core.v",
-        "line": 171,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L171",
+        "line": 176,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L176",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.classic_core.html#Digraph.conjectures.classic_core.splitting_min_outdegree_statement",
-        "verbatim": "Definition splitting_min_outdegree_statement : Prop :=\n  exists f : nat -> nat,\n    forall (D : diGraphType) (d : nat),\n      (forall v : D, (f d <= outdeg v)%N) ->\n      exists V1 : {set D},\n        [/\\ (* a PROPER bipartition: both parts nonempty (without this, V1 := setT makes\n               the complement-side constraint vacuous, trivializing the statement) *)\n            V1 != set0,\n            V1 != [set: D],\n            (forall v : D, v \\in V1 -> (d <= outdeg_in V1 v)%N)\n          & (forall v : D, v \\notin V1 -> (d <= outdeg_in (~: V1) v)%N)]."
+        "verbatim": "Definition splitting_min_outdegree_statement : Prop :=\n  exists f : nat -> nat,\n    forall (D : diGraphType) (d : nat),\n      (0 < #|D|)%N ->\n      (forall v : D, (f d <= outdeg v)%N) ->\n      exists V1 : {set D},\n        [/\\ (* a PROPER bipartition: both parts nonempty (without this, V1 := setT makes\n               the complement-side constraint vacuous, trivializing the statement) *)\n            V1 != set0,\n            V1 != [set: D],\n            (forall v : D, v \\in V1 -> (d <= outdeg_in V1 v)%N)\n          & (forall v : D, v \\notin V1 -> (d <= outdeg_in (~: V1) v)%N)]."
       },
       "status": "open",
       "axiom_free": false,
@@ -11553,8 +11553,8 @@
       "formal": {
         "name": "stable_meeting_longest_dipaths_statement",
         "file": "theories/conjectures/classic_core.v",
-        "line": 209,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L209",
+        "line": 215,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/classic_core.v#L215",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.classic_core.html#Digraph.conjectures.classic_core.stable_meeting_longest_dipaths_statement",
         "verbatim": "Definition stable_meeting_longest_dipaths_statement : Prop :=\n  forall D : diGraphType, irreflexive (@arc D) ->\n    exists S : {set D}, stable S /\\\n      forall (x : D) (s : seq D), dipath x s -> size s = ell D ->\n        exists2 v : D, v \\in S & v \\in x :: s."
       },
@@ -11667,8 +11667,8 @@
       "formal": {
         "name": "subdivision_of_a_transitive_tournament_in_digraphs_w_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 341,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L341",
+        "line": 348,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L348",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.subdivision_of_a_transitive_tournament_in_digraphs_w_statement",
         "verbatim": "Definition subdivision_of_a_transitive_tournament_in_digraphs_w_statement : Prop :=\n  exists f : nat -> nat,\n    forall (k : nat) (D : diGraphType), (0 < #|D|)%N ->\n      (forall v : D, f k <= outdeg v) -> subdivides D (TT k : diGraphType)."
       },
@@ -11743,8 +11743,8 @@
       "formal": {
         "name": "switching_reconstruction_of_digraphs_statement",
         "file": "theories/conjectures/P9.v",
-        "line": 452,
-        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L452",
+        "line": 471,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/P9.v#L471",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.P9.html#Digraph.conjectures.P9.switching_reconstruction_of_digraphs_statement",
         "verbatim": "Definition switching_reconstruction_of_digraphs_statement : Prop :=\n  exists D : diGraphType, (12 <= #|D|) /\\ ~ switching_reconstructible D."
       },
