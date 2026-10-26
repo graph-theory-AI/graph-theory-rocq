@@ -24399,12 +24399,12 @@
   },
   "counts": {
     "files": 325,
-    "helpers": 2644,
-    "repeated_body_shapes": 148,
-    "repeated_normalized_names": 214,
-    "repeated_signature_shapes": 321,
+    "helpers": 2658,
+    "repeated_body_shapes": 150,
+    "repeated_normalized_names": 217,
+    "repeated_signature_shapes": 324,
     "statements_excluded": 706,
-    "x_wave_helpers": 1487
+    "x_wave_helpers": 1501
   },
   "groups": {
     "body_shape_hash": {
@@ -24540,6 +24540,10 @@
         "Cycle.conjectures.X212.x212_edge_colour_rel",
         "Topological.conjectures.X23.x23_edge_colour_rel"
       ],
+      "36e51f08f227e650dc97cacbece867e0f35b5bccd7975ef92f2978251b906a71": [
+        "GTMisc.conjectures.X197.x197_cop_number",
+        "Topological.conjectures.X202.x202_cop_number"
+      ],
       "37ee547ed319fab50e2318f02e3b86adc8c974deeeff91a4c8437f6eece86f4b": [
         "Digraph.conjectures.X166.x166_directed_path",
         "Digraph.conjectures.X179.x179_directed_path"
@@ -24559,6 +24563,10 @@
       "3c3980ab048cbce1bc06cc70c1ba63c5296cb9da1f0a9c4fc029a82422218578": [
         "Digraph.conjectures.X16.x16_no_sources",
         "Digraph.conjectures.X2.no_sources"
+      ],
+      "3df23795f02fc7561beedce126e275814bdfff196478baee638ee6bf9c718146": [
+        "GTMisc.conjectures.X197.x197_cops_win_in",
+        "Topological.conjectures.X202.x202_cops_win_in"
       ],
       "3f39d5c348e5b79d06e842c114e6cc571583bbf44e4b0ebfda1a01ec05745d43": [
         "Digraph.conjectures.P9.remove_arcs",
@@ -25454,13 +25462,25 @@
         "Topological.conjectures.D6emb.anti_sym",
         "Topological.conjectures.X176.x176_cone_rel_irrefl",
         "Topological.conjectures.X176.x176_cone_rel_sym",
+        "Topological.conjectures.X202.x202_K1_guards_cop_number",
+        "Topological.conjectures.X202.x202_K2_captured",
+        "Topological.conjectures.X202.x202_K2_cop_number_one",
+        "Topological.conjectures.X202.x202_K2_one_cop_wins",
+        "Topological.conjectures.X202.x202_all_vertices_win",
+        "Topological.conjectures.X202.x202_cop_number_functional",
+        "Topological.conjectures.X202.x202_edgeless_cop_number",
+        "Topological.conjectures.X202.x202_edgeless_needs_cops",
+        "Topological.conjectures.X202.x202_edgeless_no_dart",
+        "Topological.conjectures.X202.x202_edgeless_planar",
+        "Topological.conjectures.X202.x202_edgeless_stuck",
+        "Topological.conjectures.X202.x202_no_cop_never_wins",
         "Topological.conjectures.X23.x23_edge_colour_irrefl",
         "Topological.conjectures.X23.x23_edge_colour_sym",
         "Topological.conjectures.vocabulary_topological.x158_edge_setE"
       ],
       "e3b2c2f0c62308dd624ebadfcda567443dbe57359d28c11fdf7bc05090e45854": [
         "GTMisc.conjectures.X197.x197_cops_can_win",
-        "Topological.conjectures.X202.x202_cop_number_at_most"
+        "Topological.conjectures.X202.x202_cops_can_win"
       ],
       "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073": [
         "Chromatic.conjectures.X100.x100_edge_set",
@@ -25579,6 +25599,10 @@
       "H_free": [
         "Extremal.conjectures.X207.x207_H_free",
         "GTMisc.conjectures.X94.x94_H_free"
+      ],
+      "K2_captured": [
+        "GTMisc.conjectures.X197.x197_K2_captured",
+        "Topological.conjectures.X202.x202_K2_captured"
       ],
       "acyclic_rel": [
         "Digraph.conjectures.X92.x92_acyclic_rel",
@@ -25723,13 +25747,17 @@
         "GTMisc.conjectures.X197.x197_cop_move",
         "Topological.conjectures.X202.x202_cop_move"
       ],
-      "cop_number_at_most": [
-        "GTMisc.conjectures.X80.x80_cop_number_at_most",
-        "Topological.conjectures.X202.x202_cop_number_at_most"
+      "cop_number": [
+        "GTMisc.conjectures.X197.x197_cop_number",
+        "Topological.conjectures.X202.x202_cop_number"
       ],
       "cop_position": [
         "GTMisc.conjectures.X197.x197_cop_position",
         "Topological.conjectures.X202.x202_cop_position"
+      ],
+      "cops_can_win": [
+        "GTMisc.conjectures.X197.x197_cops_can_win",
+        "Topological.conjectures.X202.x202_cops_can_win"
       ],
       "cops_win_in": [
         "GTMisc.conjectures.X197.x197_cops_win_in",
@@ -26222,6 +26250,10 @@
         "Hypergraph.conjectures.X108.x108_monochromatic_copy",
         "Hypergraph.conjectures.X117.x117_monochromatic_copy",
         "Hypergraph.conjectures.X119.x119_monochromatic_copy"
+      ],
+      "no_cop_never_wins": [
+        "GTMisc.conjectures.X197.x197_no_cop_never_wins",
+        "Topological.conjectures.X202.x202_no_cop_never_wins"
       ],
       "no_cycle_length_between": [
         "Chromatic.conjectures.X159.x159_no_cycle_length_between",
@@ -26733,7 +26765,8 @@
       "06dcc04e9bbb082e39fddbb37a6c5223a7b22ebec1cdae5905b5c6a2b9ca7ebd": [
         "Extremal.conjectures.X84.x84_turan2",
         "Hom.conjectures.U3.star_graph",
-        "Packing.conjectures.X18.x18_path_graph"
+        "Packing.conjectures.X18.x18_path_graph",
+        "Topological.conjectures.X202.x202_edgeless"
       ],
       "07d1a7fcbf8fbada428187a8dd275b1e56f7db056ad5aaa3288564959b6b4523": [
         "Hypergraph.conjectures.X117.x117_spike",
@@ -26860,6 +26893,10 @@
         "Digraph.conjectures.two_extremal_glue.sumarc",
         "Digraph.conjectures.two_extremal_glue.vrel"
       ],
+      "1b11482c7bdabdab8f0c1123cd3a7b590e3ad09b73d1a9dd3c3cde398adbe04e": [
+        "GTMisc.conjectures.X197.x197_K2_captured",
+        "Topological.conjectures.X202.x202_K2_captured"
+      ],
       "1b2b8d872e44bcf421b833a967b47163b7b071eecf63bf25ef35dd40a2134931": [
         "Hypergraph.conjectures.X209.x209_mc_scaled_excess",
         "Hypergraph.conjectures.X209.x209_scaled_excess"
@@ -26934,6 +26971,10 @@
         "Packing.conjectures.X15alone.x15_matching",
         "Packing.conjectures.X18.x18_perfect_matching",
         "Packing.conjectures.X25.x25_perfect_matching"
+      ],
+      "1eb93e001073e7aa9f63953c69e356ae8ad9373483b6d2f978cc85bf4b0e3b3c": [
+        "Topological.conjectures.X202.x202_cop_number_lower",
+        "Topological.conjectures.X202.x202_cop_number_upper"
       ],
       "1ff8c8335811aa83a75f2635fd0d199c82d84ebb6c87325c7e77fb1632f3ab02": [
         "Chromatic.conjectures.U5.is_universal_sts",
@@ -27095,7 +27136,8 @@
         "Minor.conjectures.X95.x95_pathwidth_at_most",
         "Minor.conjectures.X95.x95_subgraph_indexed_tree_decomposition_width_at_most",
         "Packing.conjectures.X47.x47_edge_connected",
-        "Topological.conjectures.D3D6_unblocked.obstacle_number_at_most"
+        "Topological.conjectures.D3D6_unblocked.obstacle_number_at_most",
+        "Topological.conjectures.X202.x202_cop_number"
       ],
       "2d2ba99afb6352521678a4783f8f4e2987abd9b45e353d95d0c92302b5da996d": [
         "Chromatic.conjectures.X28.x28_no_cycle_length_between",
@@ -27669,6 +27711,10 @@
         "GTMisc.conjectures.X38.x38_min_degree_at_least",
         "Hom.conjectures.X135.x135_min_degree_at_least"
       ],
+      "867d08f6e2c8fe5932ec184aba91ba76d150360de745d01fda493d85d8accf0c": [
+        "GTMisc.conjectures.X197.x197_no_cop_never_wins",
+        "Topological.conjectures.X202.x202_no_cop_never_wins"
+      ],
       "86e86073247942d8078ab37e1acc0f603199fda4d54cc13ebbd781dbacd6e706": [
         "Extremal.conjectures.D2str.linear_hypergraph",
         "Hypergraph.conjectures.U12.berge_acyclic",
@@ -27680,7 +27726,7 @@
       ],
       "878eea52de2a61a474eb60e8305a31f08ca45eaf1b18c23e8a5e1e3ed380b887": [
         "GTMisc.conjectures.X197.x197_cops_can_win",
-        "Topological.conjectures.X202.x202_cop_number_at_most"
+        "Topological.conjectures.X202.x202_cops_can_win"
       ],
       "89aa86f47156b829bb5d72f3f44f64c2190f00ea79792a1fe3137bcf0d234396": [
         "Hypergraph.conjectures.X209.x209_is_max_mc_cut",
@@ -81537,10 +81583,13 @@
       "body_shape_hash": "d6e0b68e38c39040bd6f779254d19d13a6ccc841707759033ae50209efe4c192",
       "declaration_hash": "8375d37536e2ea3569f26004903d67a9473c6501a6e6a794baaba75a6cd88fea",
       "direct_consumers": [
+        "Topological.conjectures.X202.x202_K2_captured",
         "Topological.conjectures.X202.x202_captured",
         "Topological.conjectures.X202.x202_cop_move",
-        "Topological.conjectures.X202.x202_cop_number_at_most",
-        "Topological.conjectures.X202.x202_cops_win_in"
+        "Topological.conjectures.X202.x202_cops_can_win",
+        "Topological.conjectures.X202.x202_cops_win_in",
+        "Topological.conjectures.X202.x202_edgeless_stuck",
+        "Topological.conjectures.X202.x202_no_cop_never_wins"
       ],
       "kind": "Definition",
       "line": 8,
@@ -81559,10 +81608,12 @@
       "body_shape_hash": "b9ad23ab120b86135e20113a427e220aec9d3c1399f9d0b1ea3527e8e602b064",
       "declaration_hash": "ab324d1c772fb75f500007bcd4a5a20bbfc4a379d10bf9f997b22831ac44d0aa",
       "direct_consumers": [
-        "Topological.conjectures.X202.x202_cops_win_in"
+        "Topological.conjectures.X202.x202_K2_captured",
+        "Topological.conjectures.X202.x202_cops_win_in",
+        "Topological.conjectures.X202.x202_edgeless_stuck"
       ],
       "kind": "Definition",
-      "line": 12,
+      "line": 17,
       "local_dependencies": [
         "x202_cop_position"
       ],
@@ -81583,7 +81634,7 @@
         "Topological.conjectures.X202.x202_cops_win_in"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 21,
       "local_dependencies": [
         "x202_cop_position"
       ],
@@ -81604,7 +81655,7 @@
         "Topological.conjectures.X202.x202_cops_win_in"
       ],
       "kind": "Definition",
-      "line": 20,
+      "line": 25,
       "local_dependencies": [],
       "name": "x202_robber_move",
       "normalized_name": "robber_move",
@@ -81616,14 +81667,16 @@
       "signature_shape_hash": "e823074edd8641c69601bbe6859c7c192b45890309f3992d4dae44b21b7aeebf"
     },
     {
-      "body_hash": "63567c54b0f3aac39a3a92f44eb1731c0c305843f4872c5d31e5940510892c19",
-      "body_shape_hash": "755a15eb4d1a35e53f6b993edd454d56cf34513fb7d278b21a875b5fc766f062",
-      "declaration_hash": "e08011b4a8eb0700529e5babc9ac00c53d8058ff091886c120dd3ee787cadb3f",
+      "body_hash": "0ee1a5b0dd988ac5345818a6db499849f857b22a927a14ba6fa7aa19f0f16bfc",
+      "body_shape_hash": "3df23795f02fc7561beedce126e275814bdfff196478baee638ee6bf9c718146",
+      "declaration_hash": "7bc42ee00d4e84ee332958c706fdfc02689160ccd976b145989427e75aead42c",
       "direct_consumers": [
-        "Topological.conjectures.X202.x202_cop_number_at_most"
+        "Topological.conjectures.X202.x202_cops_can_win",
+        "Topological.conjectures.X202.x202_edgeless_stuck",
+        "Topological.conjectures.X202.x202_no_cop_never_wins"
       ],
       "kind": "Fixpoint",
-      "line": 23,
+      "line": 28,
       "local_dependencies": [
         "x202_captured",
         "x202_cop_move",
@@ -81642,66 +81695,353 @@
     {
       "body_hash": "75a50a5eafc57b03f3590779551f82ba5c64eb6c99632b7af40f45638a026e77",
       "body_shape_hash": "e3b2c2f0c62308dd624ebadfcda567443dbe57359d28c11fdf7bc05090e45854",
-      "declaration_hash": "81c4a88b8211e958e258dc26e34dbcc12ebe973b4e37ac2926e73fe27e48eaf2",
+      "declaration_hash": "b391b89593ac41abd36e68010822ace7b96400ef1e1a6d13142c78b2466c37c5",
       "direct_consumers": [
-        "Topological.conjectures.X202.x202_genus_cop_number_at_most"
+        "Topological.conjectures.X202.x202_K2_one_cop_wins",
+        "Topological.conjectures.X202.x202_all_vertices_win",
+        "Topological.conjectures.X202.x202_cop_number",
+        "Topological.conjectures.X202.x202_edgeless_needs_cops"
       ],
       "kind": "Definition",
-      "line": 32,
+      "line": 41,
       "local_dependencies": [
         "x202_cop_position",
         "x202_cops_win_in"
       ],
-      "name": "x202_cop_number_at_most",
-      "normalized_name": "cop_number_at_most",
+      "name": "x202_cops_can_win",
+      "normalized_name": "cops_can_win",
       "package": "topological-graph-theory",
       "path": "topological-graph-theory/theories/conjectures/X202.v",
       "phase": "X202",
-      "qualified_name": "Topological.conjectures.X202.x202_cop_number_at_most",
+      "qualified_name": "Topological.conjectures.X202.x202_cops_can_win",
       "signature": "(G : sgraph) (cops : nat) : Prop",
       "signature_shape_hash": "878eea52de2a61a474eb60e8305a31f08ca45eaf1b18c23e8a5e1e3ed380b887"
     },
     {
-      "body_hash": "1f83b47f38a9c2a89dfe8a42481e5693f35e82481443a341e1cec5fc9541032d",
-      "body_shape_hash": "873f87415e989860efc45b7763c73349953f45d4935f89f7e2b3986c176e1e2d",
-      "declaration_hash": "e701c84a9318a4f79ebfff49a279ca03ec2885dedb05eb5c1544903671eda291",
+      "body_hash": "3f290d70e40504769959c7be2ee43841b352edb88a8c42636253dd079a05d157",
+      "body_shape_hash": "36e51f08f227e650dc97cacbece867e0f35b5bccd7975ef92f2978251b906a71",
+      "declaration_hash": "de509ca75b0a7c03948645d36596a0106a086daa572e4c2e7241d4a781413f67",
       "direct_consumers": [
-        "Topological.conjectures.X202.x202_cop_number_genus_window"
+        "Topological.conjectures.X202.x202_K1_guards_cop_number",
+        "Topological.conjectures.X202.x202_K2_cop_number_one",
+        "Topological.conjectures.X202.x202_cop_number_functional",
+        "Topological.conjectures.X202.x202_cop_number_lower",
+        "Topological.conjectures.X202.x202_cop_number_upper",
+        "Topological.conjectures.X202.x202_edgeless_cop_number"
       ],
       "kind": "Definition",
-      "line": 36,
+      "line": 45,
       "local_dependencies": [
-        "x202_cop_number_at_most"
+        "x202_cops_can_win"
       ],
-      "name": "x202_genus_cop_number_at_most",
-      "normalized_name": "genus_cop_number_at_most",
+      "name": "x202_cop_number",
+      "normalized_name": "cop_number",
       "package": "topological-graph-theory",
       "path": "topological-graph-theory/theories/conjectures/X202.v",
       "phase": "X202",
-      "qualified_name": "Topological.conjectures.X202.x202_genus_cop_number_at_most",
-      "signature": "(g cops : nat) : Prop",
-      "signature_shape_hash": "93fb66e8c6d98fffa30fc7dbde31d660621c2c37ad59628b6a119f19ab80221c"
+      "qualified_name": "Topological.conjectures.X202.x202_cop_number",
+      "signature": "(G : sgraph) (k : nat) : Prop",
+      "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
     },
     {
-      "body_hash": "b1a6fa7a1a8ec358ea036e01c2f1975834afea89f7950be41989097d32a28567",
-      "body_shape_hash": "abab787a6d0428f9711eee17a500a9cd18f30d2fe9c2909fa38722d2fa2a3210",
-      "declaration_hash": "989ecb76e8f87d6e54fe2c21f3c9100e876fe8bcf3ac2728e5eaf2b920d89964",
+      "body_hash": "37052b4dd6a886a87f5a27016b52040cd1465c0eddf8d5d6f5cdc180e94b78c1",
+      "body_shape_hash": "afb725b80bf6fa68b917b716eff31e7e0bf6feff40913a8588c7c3cdfa86b8ad",
+      "declaration_hash": "b88d577bcee77f873947899fc5115ba8aed08647d7cd338fb21a67d8a17189fd",
       "direct_consumers": [
         "Topological.conjectures.X202.genus_cop_number_sqrt_asymptotic_statement"
       ],
       "kind": "Definition",
-      "line": 39,
+      "line": 49,
       "local_dependencies": [
-        "x202_genus_cop_number_at_most"
+        "x202_cop_number"
       ],
-      "name": "x202_cop_number_genus_window",
-      "normalized_name": "cop_number_genus_window",
+      "name": "x202_cop_number_upper",
+      "normalized_name": "cop_number_upper",
       "package": "topological-graph-theory",
       "path": "topological-graph-theory/theories/conjectures/X202.v",
       "phase": "X202",
-      "qualified_name": "Topological.conjectures.X202.x202_cop_number_genus_window",
-      "signature": "(g eps_num eps_den : nat) : Prop",
-      "signature_shape_hash": "19f4dbac3681bb252bbcf44bde3e27da654ea47ac8640117f8ece02850ff3792"
+      "qualified_name": "Topological.conjectures.X202.x202_cop_number_upper",
+      "signature": "(g p q : nat) : Prop",
+      "signature_shape_hash": "1eb93e001073e7aa9f63953c69e356ae8ad9373483b6d2f978cc85bf4b0e3b3c"
+    },
+    {
+      "body_hash": "b09b2fe1a52d45485add387c3a805cc016da80a056b9bff7aaf33f676b014ddf",
+      "body_shape_hash": "30030ba5ed47b1fd4527415836a90de6bf18b46918d30a1caddd37063d06bf9d",
+      "declaration_hash": "6c60b9d5bb5456242a01259be1717300d445c67944f86c72a51c7bf266e5a900",
+      "direct_consumers": [
+        "Topological.conjectures.X202.genus_cop_number_sqrt_asymptotic_statement"
+      ],
+      "kind": "Definition",
+      "line": 55,
+      "local_dependencies": [
+        "x202_cop_number"
+      ],
+      "name": "x202_cop_number_lower",
+      "normalized_name": "cop_number_lower",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_cop_number_lower",
+      "signature": "(g p q : nat) : Prop",
+      "signature_shape_hash": "1eb93e001073e7aa9f63953c69e356ae8ad9373483b6d2f978cc85bf4b0e3b3c"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "1dec89ceae344ab1daf3582b4119e35dc64ad5ed9ab5e9f3ecf8c13b4123357a",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 61,
+      "local_dependencies": [
+        "x202_cop_number"
+      ],
+      "name": "x202_cop_number_functional",
+      "normalized_name": "cop_number_functional",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_cop_number_functional",
+      "signature": "(G : sgraph) (k k' : nat) : x202_cop_number G k -> x202_cop_number G k' -> k = k'",
+      "signature_shape_hash": "56e6595ff378e9b07cf28c195f6f0d1580acddbc1e309a1fb88d06c201d976d4"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "57c9431ebf6d62d15d482b5f0f66489f56f9e9a458223d98791d46ef925d3555",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 71,
+      "local_dependencies": [
+        "x202_cop_position",
+        "x202_cops_win_in"
+      ],
+      "name": "x202_no_cop_never_wins",
+      "normalized_name": "no_cop_never_wins",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_no_cop_never_wins",
+      "signature": "(G : sgraph) (t : nat) (C : x202_cop_position G 0) (r : G) : ~ x202_cops_win_in t C r",
+      "signature_shape_hash": "867d08f6e2c8fe5932ec184aba91ba76d150360de745d01fda493d85d8accf0c"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "1509e4493637f1e6e4b927788d5fd0cd9a4e0f53f3810e81d2ffb14947f717af",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 80,
+      "local_dependencies": [
+        "x202_captured",
+        "x202_cop_position"
+      ],
+      "name": "x202_K2_captured",
+      "normalized_name": "K2_captured",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_K2_captured",
+      "signature": "(C : x202_cop_position 'K_2 1) (r : 'K_2) : x202_captured C r = (C ord0 == r)",
+      "signature_shape_hash": "1b11482c7bdabdab8f0c1123cd3a7b590e3ad09b73d1a9dd3c3cde398adbe04e"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "b93acbda6c60a1a09f1fa408660a54d2a8931351f7a2c063a4cccc0e4272d141",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 84,
+      "local_dependencies": [
+        "x202_cops_can_win"
+      ],
+      "name": "x202_K2_one_cop_wins",
+      "normalized_name": "K2_one_cop_wins",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_K2_one_cop_wins",
+      "signature": ": x202_cops_can_win 'K_2 1",
+      "signature_shape_hash": "46563fc2a431f9c640d3e8a08bc00269b1fa42cfa0c50346d92ae490d182d01b"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "7846ab5e8daad4c7cfa56851eb4e80d5a37e4bd4625c41adb5e6d390f0e783d4",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 94,
+      "local_dependencies": [
+        "x202_cop_number"
+      ],
+      "name": "x202_K2_cop_number_one",
+      "normalized_name": "K2_cop_number_one",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_K2_cop_number_one",
+      "signature": ": x202_cop_number 'K_2 1",
+      "signature_shape_hash": "486b4bbdc3759ab4708943c8feefd36d27ec56e830b9b3be5fbb460e652e58eb"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "4468672efd84deffdee11968058876fbf33574c95c628279b3db7039d1bd474f",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 101,
+      "local_dependencies": [
+        "x202_cop_number"
+      ],
+      "name": "x202_K1_guards_cop_number",
+      "normalized_name": "K1_guards_cop_number",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_K1_guards_cop_number",
+      "signature": ": [/\\ connected [set: 'K_1], surface_embeddable 0 'K_1 & x202_cop_number 'K_1 1]",
+      "signature_shape_hash": "a74df85e861ab55cb4f86fb856a31ec489d7fb257d55600898e40375713223c6"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "4e54d33ee4f66d91f5beac966a1f8f27be2402fdd310978ca8a5fec379497111",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 114,
+      "local_dependencies": [
+        "x202_cops_can_win"
+      ],
+      "name": "x202_all_vertices_win",
+      "normalized_name": "all_vertices_win",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_all_vertices_win",
+      "signature": "(G : sgraph) : x202_cops_can_win G #|G|",
+      "signature_shape_hash": "08882480e0bb9fda5c8c7a6ba789bc8544d37b51cb71df3c25a77d8f8f61745b"
+    },
+    {
+      "body_hash": "edbb600b1d5874178e62b1d161b369c34f6bb97441ed518f392c69190308fa1e",
+      "body_shape_hash": "edbb600b1d5874178e62b1d161b369c34f6bb97441ed518f392c69190308fa1e",
+      "declaration_hash": "791dd4ac11017dbed263b9e556a98cb77b6cc0fc7dad8fe5de64760d49e8e049",
+      "direct_consumers": [
+        "Topological.conjectures.X202.x202_edgeless_cop_number",
+        "Topological.conjectures.X202.x202_edgeless_needs_cops",
+        "Topological.conjectures.X202.x202_edgeless_no_dart",
+        "Topological.conjectures.X202.x202_edgeless_planar",
+        "Topological.conjectures.X202.x202_edgeless_stuck"
+      ],
+      "kind": "Definition",
+      "line": 121,
+      "local_dependencies": [],
+      "name": "x202_edgeless",
+      "normalized_name": "edgeless",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_edgeless",
+      "signature": "(n : nat) : sgraph",
+      "signature_shape_hash": "06dcc04e9bbb082e39fddbb37a6c5223a7b22ebec1cdae5905b5c6a2b9ca7ebd"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "1b9036e049b071e522f09197dba1d53951c92f618a0e2049c9fbf44d967d94ea",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 126,
+      "local_dependencies": [
+        "x202_edgeless"
+      ],
+      "name": "x202_edgeless_no_dart",
+      "normalized_name": "edgeless_no_dart",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_edgeless_no_dart",
+      "signature": "(n : nat) (d : surface_dart (x202_edgeless n)) : False",
+      "signature_shape_hash": "0e230dd01a942aa9ca8dc8f189088a83c08b64b5ded744e5563fd67a050011d7"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "2adc97e77d4b24dbf74869a5063be59666a0787b9c9ea6111729480d83c9735c",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 129,
+      "local_dependencies": [
+        "x202_edgeless"
+      ],
+      "name": "x202_edgeless_planar",
+      "normalized_name": "edgeless_planar",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_edgeless_planar",
+      "signature": "(n : nat) : surface_embeddable 0 (x202_edgeless n.+1)",
+      "signature_shape_hash": "4c3c092cfcba1cacb421511f273178e8bedb8b4e44ebb964f521608dd414205a"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "73ad1954dab95a6452fafdca6df8f41eb4155df19bbf62f0c416b8e652b131fa",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 132,
+      "local_dependencies": [
+        "x202_captured",
+        "x202_cop_position",
+        "x202_cops_win_in",
+        "x202_edgeless"
+      ],
+      "name": "x202_edgeless_stuck",
+      "normalized_name": "edgeless_stuck",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_edgeless_stuck",
+      "signature": "(n k : nat) (r : x202_edgeless n) (t : nat) (C : x202_cop_position (x202_edgeless n) k) : ~~ x202_captured C r -> ~ x202_cops_win_in t C r",
+      "signature_shape_hash": "1fa4fc542765f350b3f89034f51c13e9d0eb2aa50bfc21dd6de73d75a64d8abd"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "d766c94f8217f68d758882565ffd742d2ebe74e4f533cfebb06182f3ae9ae6d4",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 147,
+      "local_dependencies": [
+        "x202_cops_can_win",
+        "x202_edgeless"
+      ],
+      "name": "x202_edgeless_needs_cops",
+      "normalized_name": "edgeless_needs_cops",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_edgeless_needs_cops",
+      "signature": "(n k : nat) : k < n -> ~ x202_cops_can_win (x202_edgeless n) k",
+      "signature_shape_hash": "1b7cc147c105dcc07937a7d1957676de7a346d4df178402370222edbd4768703"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "d87e11592815a545fa833abbc337dfa8a04150f18c60104879ad58c14c9d1547",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 161,
+      "local_dependencies": [
+        "x202_cop_number",
+        "x202_edgeless"
+      ],
+      "name": "x202_edgeless_cop_number",
+      "normalized_name": "edgeless_cop_number",
+      "package": "topological-graph-theory",
+      "path": "topological-graph-theory/theories/conjectures/X202.v",
+      "phase": "X202",
+      "qualified_name": "Topological.conjectures.X202.x202_edgeless_cop_number",
+      "signature": "(n : nat) : x202_cop_number (x202_edgeless n.+1) n.+1",
+      "signature_shape_hash": "af723bd86b25eb77fe12615f9c0d68d6d858946703c9668f95db26e6474f1ef3"
     },
     {
       "body_hash": "35c55e0b201507b79777df32060ca23ca224feace06235e172004d595794649f",
