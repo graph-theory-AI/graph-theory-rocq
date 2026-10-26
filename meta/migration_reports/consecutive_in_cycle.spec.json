@@ -872,6 +872,26 @@
       "note": "Cross-module chromatic XE2 rows: xe2_triangles_plus_hamilton_cycle uses XE1's xe1_consecutive_in_cycle (negated and positive) and erdos:1091 uses xe1_odd_cycle_with_diagonals. Frozen in XE2Legacy over Legacy/XE1Legacy; statement texts unchanged."
     },
     {
+      "path": "extremal-graph-theory/theories/applications/geodesic_cycles_tutte.v",
+      "name": "on_cycle_walk",
+      "note": "Proof consumer: the A6 refutation of the D2str row (Extremal.applications.geodesic_cycles_tutte, registered in meta/formal_resolutions.json as opg:geodesic_cycles_and_tuttes_theorem); its lemmas and geodesic_cycles_and_tuttes_theorem_disproved use the live D2str definitions; statements unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/applications/geodesic_cycles_tutte.v",
+      "name": "geodesic_cycle",
+      "note": "Proof consumer: the A6 refutation of the D2str row (Extremal.applications.geodesic_cycles_tutte, registered in meta/formal_resolutions.json as opg:geodesic_cycles_and_tuttes_theorem); its lemmas and geodesic_cycles_and_tuttes_theorem_disproved use the live D2str definitions; statements unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/applications/geodesic_cycles_tutte.v",
+      "name": "peripheral_cycle",
+      "note": "Proof consumer: the A6 refutation of the D2str row (Extremal.applications.geodesic_cycles_tutte, registered in meta/formal_resolutions.json as opg:geodesic_cycles_and_tuttes_theorem); its lemmas and geodesic_cycles_and_tuttes_theorem_disproved use the live D2str definitions; statements unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/applications/geodesic_cycles_tutte.v",
+      "name": "geodesic_cycles_and_tuttes_theorem_statement",
+      "note": "Proof consumer: the A6 refutation of the D2str row (Extremal.applications.geodesic_cycles_tutte, registered in meta/formal_resolutions.json as opg:geodesic_cycles_and_tuttes_theorem); its lemmas and geodesic_cycles_and_tuttes_theorem_disproved use the live D2str definitions; statements unchanged."
+    },
+    {
       "path": "extremal-graph-theory/theories/conjectures/XE1.v",
       "name": "x4_consecutive_in_cycle",
       "note": "Cross-module extremal XE1 row: xe1_h5_graph uses X4's x4_consecutive_in_cycle (two negated chord exclusions and the edge-coverage clause). Frozen as XE1Legacy.h5_graph over Legacy.x4_consecutive_in_cycle; statement text unchanged."

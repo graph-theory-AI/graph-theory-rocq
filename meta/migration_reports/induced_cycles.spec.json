@@ -694,6 +694,16 @@
       "note": "X160's row density_zero_constricting_set_statement uses X3's chain x3_constricting through the X3 import; the row is frozen complete in this family's Chromatic certificate (X160Legacy, over the frozen X3 chain) and B4's complete X160Legacy row is reused; the file is unchanged."
     },
     {
+      "path": "extremal-graph-theory/theories/applications/geodesic_cycles_tutte.v",
+      "name": "peripheral_cycle",
+      "note": "Proof consumer: the A6 refutation of the D2str row (Extremal.applications.geodesic_cycles_tutte, registered in meta/formal_resolutions.json as opg:geodesic_cycles_and_tuttes_theorem); its lemmas and geodesic_cycles_and_tuttes_theorem_disproved use the live D2str definitions; statements unchanged."
+    },
+    {
+      "path": "extremal-graph-theory/theories/applications/geodesic_cycles_tutte.v",
+      "name": "geodesic_cycles_and_tuttes_theorem_statement",
+      "note": "Proof consumer: the A6 refutation of the D2str row (Extremal.applications.geodesic_cycles_tutte, registered in meta/formal_resolutions.json as opg:geodesic_cycles_and_tuttes_theorem); its lemmas and geodesic_cycles_and_tuttes_theorem_disproved use the live D2str definitions; statements unchanged."
+    },
+    {
       "path": "extremal-graph-theory/theories/conjectures/grounding_D2str.v",
       "name": "induced_cycle",
       "note": "D2str's grounding lemmas induced_cycle_nil (the empty list is an induced cycle) and induced_cycle_ucycle use the live alias; the raw chordless_ucycle view keeps sizes 0 and 2, so both recompile with unchanged proofs and theorem types (no size guard is added)."
