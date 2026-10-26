@@ -3587,20 +3587,18 @@
       "phase": "X156",
       "repo": "graph-theory-misc",
       "defines_file": "X156.v",
-      "implemented_by": "Batch X151-X170 statement authoring pass (Codex), 2026-07-15",
-      "source_verified_by": "Codex X151-X170 faithfulness readback, 2026-07-15",
-      "source_verified_at": "2026-07-15",
-      "commit": "x151-x170-batch1",
+      "implemented_by": "Arthur (A1 re-encoding of the 2026-07-15 Codex statement, coordination/PROGRAMME.md section 3, Lancelot's routing and Marcol's design review, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read: the pinned records data/arxiv_extracted/1408.4257.json and data/arxiv_reviews/1408.4257__00.json at b72c5857 and the arXiv e-print, sha256 bbace953, blockclassesrevised-2016-01-13.tex sha256 51349cf0, l.151-154, 161, 174, 180, 185, 289-290 and 302-318, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x156-block-tree-reencoding",
       "rows": {
         "axv_1408_4257_00": {
           "formal_name": "block_tree_diameter_bound_improvement_statement",
-          "note": "Retargeted 2026-07-16 from blocked placeholder to an axiom-free finite witness formulation; see meta/BLOCKED_RETARGETING_FOUNDATIONS.md. Original source-facing statement name preserved: block_tree_diameter_bound_improvement_statement.",
-          "state": "blocked",
-          "blocked_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the `f`-hypothesis `forall N, exists n, N<=n /\\ N<=f n` encodes \"f unbounded (limsup=∞)\", NOT the conjecture's \"f tends to ∞\", which is strictly stronger and renders the statement FALSE (machine-confirmed): an f dipping to 0 on odd n>=5 still satisfies it, forcing certificate diameter sqrt_ceil(n)*f(n)=0 at infinitely many n, which GTBase.finite_graph.fg_whp's cofinite GTBase.asymptotics.eventually cann"
+          "note": "Re-encoded 2026-10-26 (coordination/PROGRAMME.md A1; frozen by no migration family): R_n uniform over the connected graphs on [n] of a block-stable class (closed under isomorphism, G in the class iff each block is; Boolean classes), and for every f tending to infinity, with high probability along the n with a connected member (l.180) the block tree bt(R_n) has diameter at most f(n) ceil(sqrt n): arXiv:1408.4257 l.302-304, up to the two-way real/natural equivalence. Original source-facing statement name preserved: block_tree_diameter_bound_improvement_statement."
         }
       },
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the `f`-hypothesis `forall N, exists n, N<=n /\\ N<=f n` encodes \"f unbounded (limsup=∞)\", NOT the conjecture's \"f tends to ∞\", which is strictly stronger and renders the statement FALSE (machine-confirmed): an f dipping to 0 on odd n>=5 still satisfies it, forcing certificate diameter sqrt_ceil(n)*f(n)=0 at infinitely many n, which GTBase.finite_graph.fg_whp's cofinite GTBase.asymptotics.eventually cannot satisfy on any hard-graph model. This resolves again"
+      "faithfulness_verified_by": "Marcol (X156 review, 2026-10-26)",
+      "faithfulness_result": "RE-ENCODED 2026-10-26 (A1), independent review: Marcol APPROVE 2026-10-26 (re-encoding; relation none by content, old -> new only vacuously, the old body being false), leg DONE: the conjecture of arXiv:1408.4257 l.302-304 for R_n uniform over the connected members on 'I_n of a block-stable class A (x156_block_stable: GTBase iso_closed, and G in A iff each x156_blockb block of G is, l.152-154), x156_blockb the maximal sets without a cut vertex (l.151's three cases), x156_block_tree = bt(G) (l.174), x156_diameter_leb over reachable pairs (l.289-290), f tending to infinity with the bound f n * sqrt_ceil n, with high probability along the n of positive total weight (x156_whp_where_defined, l.180 and l.185). Earlier body: f merely unbounded (false, audit 2026-07-17), any observed family instead of a class, an existential block-tree certificate instead of bt(G), and fg_whp's positivity at every large n. Relation: none by content (old -> new only vacuously: the old body is false)."
     },
     "X157": {
       "phase": "X157",

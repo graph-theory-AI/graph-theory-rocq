@@ -690,6 +690,28 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   says `f` is unbounded, whereas the conjecture assumes `f` tends to infinity; the weaker
   hypothesis makes the statement false (an `f` dipping to 0 infinitely often forces certificate
   diameter 0 there).  Severity: too strong.  (Row leg already `blocked`.)
+  **RE-ENCODED 2026-10-26** (coordination/PROGRAMME.md A1; the row is frozen by no migration family; Lancelot's
+  routing and Marcol's design review of 2026-10-26): the audit above found one of four defects. Source:
+  arXiv:1408.4257 v2, the pin's version (e-print sha256 bbace953..., `blockclassesrevised-2016-01-13.tex` sha256
+  51349cf0...; copy in checkouts/lancelot/.lancelot-scratch/x156-src-v2): l.151 (a block is a maximal 2-connected
+  subgraph, a bridge or an isolated vertex), l.152-154 (classes closed under isomorphism; block-stable: G in A iff each
+  block is), l.174 (the block tree bt(G)), l.180 (A_n on [n], R_n uniform on A_n, "only integers n such that A_n is
+  non-empty"), l.185 (whp), l.289-290 (diameter within components), l.302-304 (the conjecture: R_n uniform over the
+  connected graphs in a block-stable class, the factor sqrt(log n) of 5 sqrt(n log n) replaced by any function tending
+  to infinity). The defects: (1) the audited hypothesis on f; (2) any observed family instead of a block-stable class;
+  (3) an existential block-tree certificate instead of bt(G) (every nonempty graph has one of diameter at most 2, a
+  forest one of diameter 0, so the old body was false through (1) alone); (4) fg_whp, which demands a positive total
+  weight at every large n where the source skips the n with A_n empty. The helpers became `x156_no_cut_vertexb` /
+  `x156_blockb` (maximal connected sets without a cut vertex, the three cases of l.151), `x156_block_tree` (bt(G) as a
+  bipartite sgraph), `x156_diameter_leb`, `x156_block_stable` (GTBase `iso_closed` plus the iff over blocks),
+  `x156_connected_member` (the connected members on 'I_n) and `x156_whp_where_defined` (fg_whp's body guarded by a
+  positive total weight); the statement keeps its name. Boolean classes (counting needs a decidable membership,
+  classically every class is one); natural f with f n * sqrt_ceil n, equivalent to the real form both ways. Sanity
+  lemmas in X156.v: blocks of K_1 and K_2, a non-isolated vertex is no block, bt(K_2) not of diameter 0, the classes of
+  all graphs and of edgeless graphs block-stable, fg_whp FAILS for the edgeless class while the guarded form holds, fg_whp
+  implies the guarded form; kernel-checked under non-row names besides: the old model holds for the families 'K_n, an
+  old certificate of diameter 0 for K_2. Relation: none by content (old -> new only vacuously: the old body is false,
+  (1)). The leg becomes DONE.
 - `arxiv:1604.07976#00` (`X167.v:34`) — extension complexity is not modelled: the record fields
   `x167_accepts_tree` / `x167_rejects_non_tree` have conclusion `True` and the only real field
   is `#|ineq_index| <= facets`, satisfied by an empty index.  Severity: vacuous-looking.
