@@ -75,7 +75,10 @@ Definition kelly_manvel_n_minus_r_deck_reconstruction_statement : Prop :=
       hypothesis [x21_same_l_deck] holds with the empty bijection, and without the guard the
       claw K_1,3 and the path P_4 (n = 4, ell = 5) refute the body
       (meta/probe_hints/nydl_tree_l_deck_reconstruction_statement.v; the improvement
-      ledger). *)
+      ledger). The conjecture is false as printed: Figure 1 of arXiv:2103.13359v3 gives two
+      non-isomorphic trees on 13 vertices with the same 7-deck, and n = 13, ell = 7 meets every
+      hypothesis; the row is recorded as disproved (meta/build_v2_manifest.py, ERRATA), and the
+      body is kept. *)
 Definition nydl_tree_l_deck_reconstruction_statement : Prop :=
   forall (n ell : nat) (T1 T2 : sgraph),
     4 <= n ->
