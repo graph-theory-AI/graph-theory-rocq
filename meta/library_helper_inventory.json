@@ -24399,12 +24399,12 @@
   },
   "counts": {
     "files": 324,
-    "helpers": 2598,
+    "helpers": 2608,
     "repeated_body_shapes": 148,
     "repeated_normalized_names": 214,
-    "repeated_signature_shapes": 317,
+    "repeated_signature_shapes": 318,
     "statements_excluded": 705,
-    "x_wave_helpers": 1441
+    "x_wave_helpers": 1451
   },
   "groups": {
     "body_shape_hash": {
@@ -24700,10 +24700,6 @@
       "74caed148a5246b3b37f03c2d6324838319bd7382f2aa74fc59ccb0e36edfe9c": [
         "GTMisc.conjectures.X128.x128_shallow_minor_model",
         "GTMisc.conjectures.X139.x139_shallow_minor_model"
-      ],
-      "755a15eb4d1a35e53f6b993edd454d56cf34513fb7d278b21a875b5fc766f062": [
-        "GTMisc.conjectures.X197.x197_cops_win_in",
-        "Topological.conjectures.X202.x202_cops_win_in"
       ],
       "76b060722ab82b0bdf7cf7d99d8b9ee691925c4903ea02bb37d265421a6ee82d": [
         "GTMisc.conjectures.X39.x39_has_k_distant_xy_paths",
@@ -25334,6 +25330,14 @@
         "GTMisc.conjectures.D7.level_rel_sym",
         "GTMisc.conjectures.U13.relAdj_irrefl",
         "GTMisc.conjectures.U13.relAdj_sym",
+        "GTMisc.conjectures.X197.x197_K0_capture_time_zero",
+        "GTMisc.conjectures.X197.x197_K1_capture_time_zero",
+        "GTMisc.conjectures.X197.x197_K1_cop_number_one",
+        "GTMisc.conjectures.X197.x197_K1_guards",
+        "GTMisc.conjectures.X197.x197_K2_capture_time_one",
+        "GTMisc.conjectures.X197.x197_K2_captured",
+        "GTMisc.conjectures.X197.x197_capture_time_functional",
+        "GTMisc.conjectures.X197.x197_no_cop_never_wins",
         "GTMisc.conjectures.X29.x29_complement_irrefl",
         "GTMisc.conjectures.X29.x29_complement_sym",
         "GTMisc.conjectures.X94.x94_underlying_irrefl",
@@ -25428,6 +25432,10 @@
         "Topological.conjectures.X23.x23_edge_colour_irrefl",
         "Topological.conjectures.X23.x23_edge_colour_sym",
         "Topological.conjectures.vocabulary_topological.x158_edge_setE"
+      ],
+      "e3b2c2f0c62308dd624ebadfcda567443dbe57359d28c11fdf7bc05090e45854": [
+        "GTMisc.conjectures.X197.x197_cops_can_win",
+        "Topological.conjectures.X202.x202_cop_number_at_most"
       ],
       "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073": [
         "Chromatic.conjectures.X100.x100_edge_set",
@@ -27048,6 +27056,7 @@
         "GTMisc.conjectures.U13.is_book_thickness",
         "GTMisc.conjectures.X141.x141_zero_forcing_number_le",
         "GTMisc.conjectures.X169.x169_token_sliding_connected",
+        "GTMisc.conjectures.X197.x197_cop_number",
         "GTMisc.conjectures.X77.x77_separation_dimension_at_most",
         "GTMisc.conjectures.X80.x80_cop_number_at_most",
         "GTMisc.conjectures.X82.x82_proper_orientation_bound",
@@ -27643,6 +27652,10 @@
         "Hypergraph.conjectures.X119.x119_no_isolated",
         "Hypergraph.conjectures.X72.x72_intersecting",
         "Hypergraph.conjectures.XE1.xe1_intersecting_hypergraph"
+      ],
+      "878eea52de2a61a474eb60e8305a31f08ca45eaf1b18c23e8a5e1e3ed380b887": [
+        "GTMisc.conjectures.X197.x197_cops_can_win",
+        "Topological.conjectures.X202.x202_cop_number_at_most"
       ],
       "89aa86f47156b829bb5d72f3f44f64c2190f00ea79792a1fe3137bcf0d234396": [
         "Hypergraph.conjectures.X209.x209_is_max_mc_cut",
@@ -65434,10 +65447,13 @@
       "body_shape_hash": "d6e0b68e38c39040bd6f779254d19d13a6ccc841707759033ae50209efe4c192",
       "declaration_hash": "e173c332eda1517533c5949188ccb8d07f8094a69ced061288eb3b0e17161a49",
       "direct_consumers": [
+        "GTMisc.conjectures.X197.x197_K2_captured",
         "GTMisc.conjectures.X197.x197_capture_time",
         "GTMisc.conjectures.X197.x197_captured",
         "GTMisc.conjectures.X197.x197_cop_move",
-        "GTMisc.conjectures.X197.x197_cops_win_in"
+        "GTMisc.conjectures.X197.x197_cops_can_win",
+        "GTMisc.conjectures.X197.x197_cops_win_in",
+        "GTMisc.conjectures.X197.x197_no_cop_never_wins"
       ],
       "kind": "Definition",
       "line": 8,
@@ -65456,10 +65472,11 @@
       "body_shape_hash": "b9ad23ab120b86135e20113a427e220aec9d3c1399f9d0b1ea3527e8e602b064",
       "declaration_hash": "6c99e9d641a62bde91193414fe5a4ade2458d0662aa2e8e3d06d9a6651861da5",
       "direct_consumers": [
+        "GTMisc.conjectures.X197.x197_K2_captured",
         "GTMisc.conjectures.X197.x197_cops_win_in"
       ],
       "kind": "Definition",
-      "line": 12,
+      "line": 16,
       "local_dependencies": [
         "x197_cop_position"
       ],
@@ -65480,7 +65497,7 @@
         "GTMisc.conjectures.X197.x197_cops_win_in"
       ],
       "kind": "Definition",
-      "line": 16,
+      "line": 20,
       "local_dependencies": [
         "x197_cop_position"
       ],
@@ -65501,7 +65518,7 @@
         "GTMisc.conjectures.X197.x197_cops_win_in"
       ],
       "kind": "Definition",
-      "line": 20,
+      "line": 24,
       "local_dependencies": [],
       "name": "x197_robber_move",
       "normalized_name": "robber_move",
@@ -65513,14 +65530,16 @@
       "signature_shape_hash": "e823074edd8641c69601bbe6859c7c192b45890309f3992d4dae44b21b7aeebf"
     },
     {
-      "body_hash": "ab4d70d44018abbb4aa5328d3fbaceba2c7e35a5ec6ff00520acceb88d946e48",
-      "body_shape_hash": "755a15eb4d1a35e53f6b993edd454d56cf34513fb7d278b21a875b5fc766f062",
-      "declaration_hash": "86671371f96e01527213b20c46658524418a47c579a52e64c9eed3bd8c1b3dd6",
+      "body_hash": "a1a761f78dbd7d3692e09fda59cf848e2a501680647fae1b10c2118a3430f22e",
+      "body_shape_hash": "3df23795f02fc7561beedce126e275814bdfff196478baee638ee6bf9c718146",
+      "declaration_hash": "d95e1a2e27cc8601cfefe04bec7b66b22eb3978879399649daa50cbc10ff7c42",
       "direct_consumers": [
-        "GTMisc.conjectures.X197.x197_capture_time"
+        "GTMisc.conjectures.X197.x197_capture_time",
+        "GTMisc.conjectures.X197.x197_cops_can_win",
+        "GTMisc.conjectures.X197.x197_no_cop_never_wins"
       ],
       "kind": "Fixpoint",
-      "line": 23,
+      "line": 27,
       "local_dependencies": [
         "x197_captured",
         "x197_cop_move",
@@ -65537,14 +65556,62 @@
       "signature_shape_hash": "df4fc7d42e18a05375ff0e0b61f61b7ebd0fd8e647c82eca327504382244db5a"
     },
     {
-      "body_hash": "5e72a57ebe2e9730524218d1ec34826a7495dd67959ab6ff5fcdffdfdaaeb227",
-      "body_shape_hash": "60c8b2ee31c333ec54442a7eda69c7ba66576233f02c446c3740bfcd51583fed",
-      "declaration_hash": "c51fe44aee8d482ff17d71f44d759aa6d0c7d466fedfae2fb3fb43f1abf7a503",
+      "body_hash": "73629b24834ce977821d0bf8e8f7f88f6c937f1d232ed061107b1390339bd6ef",
+      "body_shape_hash": "e3b2c2f0c62308dd624ebadfcda567443dbe57359d28c11fdf7bc05090e45854",
+      "declaration_hash": "4827759ca449d9d17538ff22d631fb64bc4496740ffd27361d7d6a381c54958e",
       "direct_consumers": [
-        "GTMisc.conjectures.X197.planar_cops_capture_time_linear_tight_statement"
+        "GTMisc.conjectures.X197.x197_cop_number"
       ],
       "kind": "Definition",
-      "line": 32,
+      "line": 41,
+      "local_dependencies": [
+        "x197_cop_position",
+        "x197_cops_win_in"
+      ],
+      "name": "x197_cops_can_win",
+      "normalized_name": "cops_can_win",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_cops_can_win",
+      "signature": "(G : sgraph) (cops : nat) : Prop",
+      "signature_shape_hash": "878eea52de2a61a474eb60e8305a31f08ca45eaf1b18c23e8a5e1e3ed380b887"
+    },
+    {
+      "body_hash": "d6d310ec06abfaef81abcb2cfb3047e4a8a67ab3940d6f6f6ea7f5b39cc98a92",
+      "body_shape_hash": "36e51f08f227e650dc97cacbece867e0f35b5bccd7975ef92f2978251b906a71",
+      "declaration_hash": "1f5cdc84321ebe63dc02cad5a7ca3194bc89619815c213554ffac5ac65e08c5c",
+      "direct_consumers": [
+        "GTMisc.conjectures.X197.planar_cops_capture_time_linear_tight_statement",
+        "GTMisc.conjectures.X197.x197_K1_cop_number_one"
+      ],
+      "kind": "Definition",
+      "line": 45,
+      "local_dependencies": [
+        "x197_cops_can_win"
+      ],
+      "name": "x197_cop_number",
+      "normalized_name": "cop_number",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_cop_number",
+      "signature": "(G : sgraph) (k : nat) : Prop",
+      "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
+    },
+    {
+      "body_hash": "d7c23e73fd27117b5439400bc8831f425bdf2f27faf23ca99be3711d47c0e16c",
+      "body_shape_hash": "ff41d17182f1010b201d90a9aa75701d862a51609162ee0ba46aad3c54ef7180",
+      "declaration_hash": "7c4e1f5e7c86aabc40fc62d1a2b02c2b3add62316e2dd7d9d27145b4355d679d",
+      "direct_consumers": [
+        "GTMisc.conjectures.X197.planar_cops_capture_time_linear_tight_statement",
+        "GTMisc.conjectures.X197.x197_K0_capture_time_zero",
+        "GTMisc.conjectures.X197.x197_K1_capture_time_zero",
+        "GTMisc.conjectures.X197.x197_K2_capture_time_one",
+        "GTMisc.conjectures.X197.x197_capture_time_functional"
+      ],
+      "kind": "Definition",
+      "line": 49,
       "local_dependencies": [
         "x197_cop_position",
         "x197_cops_win_in"
@@ -65555,8 +65622,160 @@
       "path": "graph-theory-misc/theories/conjectures/X197.v",
       "phase": "X197",
       "qualified_name": "GTMisc.conjectures.X197.x197_capture_time",
-      "signature": "(G : sgraph) (cops : nat) (t : nat) : Prop",
-      "signature_shape_hash": "186499b542f1abce6d595461ab4efad96e70f2a3cb846c2210208c3744d69473"
+      "signature": "(G : sgraph) (cops t : nat) : Prop",
+      "signature_shape_hash": "b75f35f6ee4ba997ae3d101d3ceaab0c68c87b34ea254fc3033935e33635ff44"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "60c84b90b81f9836bd3da6f40202a054209cb6fb3c02216b0837afe2225b5ff6",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 56,
+      "local_dependencies": [
+        "x197_capture_time"
+      ],
+      "name": "x197_capture_time_functional",
+      "normalized_name": "capture_time_functional",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_capture_time_functional",
+      "signature": "(G : sgraph) (k t t' : nat) : x197_capture_time G k t -> x197_capture_time G k t' -> t = t'",
+      "signature_shape_hash": "1b2245f4085de5554a03c6f814167f44026be3a12a61374b24498dc1d3f19e16"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "0d521f8f6400b99a20e1c5f0afe9347f44daf2604044668430a59605c4f17d90",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 66,
+      "local_dependencies": [
+        "x197_captured",
+        "x197_cop_position"
+      ],
+      "name": "x197_K2_captured",
+      "normalized_name": "K2_captured",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_K2_captured",
+      "signature": "(C : x197_cop_position 'K_2 1) (r : 'K_2) : x197_captured C r = (C ord0 == r)",
+      "signature_shape_hash": "1b11482c7bdabdab8f0c1123cd3a7b590e3ad09b73d1a9dd3c3cde398adbe04e"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "2f88bcd1237b7b9b8308abaadbfbd30a3d81ae75c2adf7a15977c7b120230fc8",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 70,
+      "local_dependencies": [
+        "x197_capture_time"
+      ],
+      "name": "x197_K2_capture_time_one",
+      "normalized_name": "K2_capture_time_one",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_K2_capture_time_one",
+      "signature": ": x197_capture_time 'K_2 1 1",
+      "signature_shape_hash": "c4a6237d17867f15da0e174e1481d808205351f74f3e04d1a0d8cd3a0321fb63"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "08dacbba95c27d41b08e387ee5a978589f64bab6ad750f7b6220166e05e9ecbf",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 86,
+      "local_dependencies": [
+        "x197_cop_position",
+        "x197_cops_win_in"
+      ],
+      "name": "x197_no_cop_never_wins",
+      "normalized_name": "no_cop_never_wins",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_no_cop_never_wins",
+      "signature": "(G : sgraph) (t : nat) (C : x197_cop_position G 0) (r : G) : ~ x197_cops_win_in t C r",
+      "signature_shape_hash": "867d08f6e2c8fe5932ec184aba91ba76d150360de745d01fda493d85d8accf0c"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "cc2f0f495ec50d1b3a7ed9ed9f81863c22a7504bf5c3a922a0aae1b10d92f475",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 95,
+      "local_dependencies": [],
+      "name": "x197_K1_guards",
+      "normalized_name": "K1_guards",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_K1_guards",
+      "signature": ": connected [set: 'K_1] /\\ wagner_planar 'K_1",
+      "signature_shape_hash": "a406204dd7c31535fa98b500189fed1d0e02e2323b3c3f57472dc394a800d548"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "ae1ee06ebc876143ffa8b094a0eddd75520f2e035d761e5f4832164039dcecbe",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 106,
+      "local_dependencies": [
+        "x197_cop_number"
+      ],
+      "name": "x197_K1_cop_number_one",
+      "normalized_name": "K1_cop_number_one",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_K1_cop_number_one",
+      "signature": ": x197_cop_number 'K_1 1",
+      "signature_shape_hash": "236a307e5312ea3c982fa05bfad16d352c1a16b0b3227e0bf9fe5d93160e2d34"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "221807e2301dcb11a3d422af1a43de801d734042e93e342797a9405a785fd732",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 115,
+      "local_dependencies": [
+        "x197_capture_time"
+      ],
+      "name": "x197_K1_capture_time_zero",
+      "normalized_name": "K1_capture_time_zero",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_K1_capture_time_zero",
+      "signature": ": x197_capture_time 'K_1 1 0",
+      "signature_shape_hash": "d5c2019f9bb2df2d44e75dc62622af6c3568201c4cd47970fc142615cecd77a0"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "1f953b2fd168749f3d80c1195ad8f28a5f0fa246e927040df45447cba00088da",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 122,
+      "local_dependencies": [
+        "x197_capture_time"
+      ],
+      "name": "x197_K0_capture_time_zero",
+      "normalized_name": "K0_capture_time_zero",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X197.v",
+      "phase": "X197",
+      "qualified_name": "GTMisc.conjectures.X197.x197_K0_capture_time_zero",
+      "signature": "(k t : nat) : x197_capture_time 'K_0 k t -> t = 0",
+      "signature_shape_hash": "df9b8d4a0e89a9a9cf53240d2ea8d6a8722c1d165dcd206da49342e0bde3936d"
     },
     {
       "body_hash": "0489931ac76b0570a14ebae2143312609f74dc7f0b12e0c1c9733aa909ca17b4",
