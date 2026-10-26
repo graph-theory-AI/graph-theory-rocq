@@ -1,4 +1,6 @@
 {
  "schema_version": 1,
- "entries": {}
+ "entries": {
+  "graph-theory-misc/theories/conjectures/X232.v:heavy_path_extension_statement:exists-after-graph-forall": "The existential after the graph quantifier is the path p of C, which by its nature depends on G, C and M. The uniform quantity, the bound b on its length, is quantified before the graph (forall ell, 5 <= ell -> exists b, forall G c M ...), which is the source's 'path of C of bounded length' (arXiv:1904.12273 l.146-149) with b depending only on ell. Reviewed with wave X232 (verifier Arthur, A6 reviewer Lancelot)."
+ }
 }
