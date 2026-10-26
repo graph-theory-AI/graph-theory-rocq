@@ -2437,7 +2437,7 @@
     },
     "splitting_min_outdegree_statement": {
       "title": "Splitting a digraph with minimum out-degree constraints (Alon; Thomassen)",
-      "decoded": "There is a function f : nat → nat such that for every digraph D and every d, if every vertex has out-degree at least f(d), then the vertex set splits into a proper bipartition (V1 nonempty and not all of D, with complement ~:V1) in which each part induces minimum out-degree at least d — every v in V1 has outdeg_in(V1, v) ≥ d, and every v outside V1 has outdeg_in(~:V1, v) ≥ d, where outdeg_in(A,v) counts only arcs whose head lies in A.",
+      "decoded": "There is a function f : nat → nat such that for every digraph D with at least one vertex and every d, if every vertex has out-degree at least f(d), then the vertex set splits into a proper bipartition (V1 nonempty and not all of D, with complement ~:V1) in which each part induces minimum out-degree at least d — every v in V1 has outdeg_in(V1, v) ≥ d, and every v outside V1 has outdeg_in(~:V1, v) ≥ d, where outdeg_in(A,v) counts only arcs whose head lies in A.",
       "match_title": "Splitting a digraph with minimum outdegree constraints",
       "source": {
         "slug": "splitting_a_digraph_with_minimum_outdegree_constraints"

@@ -254,6 +254,31 @@ Print Assumptions TT_has_source.
 Lemma outdeg_inT_eq (D : diGraphType) (v : D) : outdeg_in [set: D] v = outdeg v.
 Proof. by rewrite /outdeg_in /outdeg; apply: eq_card => w; rewrite !inE. Qed.
 
+(** ** The non-emptiness guard of [splitting_min_outdegree_statement] (added on 2026-10-26)
+    is not vacuous: for every m, the complete loopless digraph on m+1 vertices is non-empty
+    and has out-degree m at every vertex, so the guarded hypotheses [0 < #|D|] and
+    [forall v, m <= outdeg v] hold together at every forcing degree m = f d.  The guard's
+    teeth (the empty digraph refutes the unguarded body) are in
+    meta/probe_hints/splitting_min_outdegree_statement.v. *)
+Definition split_Kn (m : nat) : Type := 'I_m.+1.
+HB.instance Definition _ (m : nat) := Finite.on (split_Kn m).
+HB.instance Definition _ (m : nat) := HasArc.Build (split_Kn m) (fun u v => u != v).
+
+Lemma split_Kn_outdeg (m : nat) (v : split_Kn m) : outdeg v = m.
+Proof.
+rewrite /outdeg.
+have -> : [set w : split_Kn m | v --> w] = ~: [set v].
+  by apply/setP => w; rewrite !inE eq_sym.
+by rewrite cardsC1 card_ord.
+Qed.
+
+Lemma splitting_hyps_nonvacuous (m : nat) :
+  exists D : diGraphType, (0 < #|D|)%N /\ (forall v : D, (m <= outdeg v)%N).
+Proof.
+exists (split_Kn m); split; first by rewrite card_ord.
+by move=> v; rewrite split_Kn_outdeg.
+Qed.
+
 (** ** [diregular] genuinely constrains: C3 is 1-diregular (C3_diregular1) but is
     NOT 2-diregular — so the [diregular D d] hypothesis has teeth (it is not
     satisfied at every degree). *)

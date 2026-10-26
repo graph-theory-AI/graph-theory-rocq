@@ -1074,6 +1074,12 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   adds `V1 != set0` and `V1 != setT`. The guard is needed (without it `V1 := setT` trivialises the
   complement clause), but it is not in the corpus text; the corpus text itself is garbled (it
   writes the hypothesis degree as `d`, leaving `f(d)` unused).
+  The row was also **refutable (empty digraph)**: the empty digraph meets the out-degree hypothesis
+  vacuously for every f and d but has no non-empty proper vertex set, so the body was false for every
+  f. **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
+  `0 < #|D|` (`meta/probe_hints/splitting_min_outdegree_statement.v`; non-vacuity
+  `conjectures/grounding_classic_core.v:splitting_hyps_nonvacuous`). Its only relation, e200, is
+  related_only with no Rocq edge.
 - `arxiv:1608.03040#04` (Open Problem 3) →
   `conjectures/colouring_variants.v:majority_3col_eulerian_statement` — **too strong (mild)**.
   `eulerian` keeps only the balanced-degree condition and drops connectivity, so the hypothesis is
