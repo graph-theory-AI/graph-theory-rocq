@@ -31,8 +31,9 @@
       - [maxedp_approx] (its full positive witness would require a [prog]
         actually computing an approximation of the MaxEDP optimum together with
         a ratio proof for ALL planar inputs — out of scope for a SIMPLE check);
-      - [NP_hard] (a positive witness is a complete problem, i.e. a genuine
-        NP-hardness proof — out of scope; we record the elimination identity).
+      - [NP_hard] (we record the elimination identity only; NB 2026-10-26: in
+        this relational layer a positive witness certifies nothing, every problem
+        with a YES- and a NO-instance being [NP_hard]; see D7.v).
     These match the deliberate abstraction level of [D7.v]. *)
 
 From GTBase Require Import base.
@@ -258,8 +259,8 @@ exists (fun _ _ => true), (fun _ _ => 0), 0, 0, 0; split.
 Qed.
 
 (** [NP_hard]: elimination — NP-hardness yields a reduction from each NP
-    problem.  (A positive witness is a genuine completeness proof, out of
-    scope.) *)
+    problem.  (A positive witness would certify nothing here: every problem
+    with a YES- and a NO-instance is [NP_hard] in this layer; see D7.v.) *)
 Lemma NP_hard_elim (B A : problem) : NP_hard B -> in_NP A -> poly_reduces A B.
 Proof. by move=> H; apply: H. Qed.
 

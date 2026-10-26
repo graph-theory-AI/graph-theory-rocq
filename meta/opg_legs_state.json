@@ -1376,14 +1376,14 @@
       "package": "cycle-theory"
     },
     "complexity_of_the_h_factor_problem": {
-      "statement": "done",
-      "grounding": "done",
+      "statement": "blocked",
+      "grounding": "blocked",
       "edges": "todo",
       "correspondence": "todo",
       "audit_page": "todo",
-      "commit": "27f7a11",
+      "commit": "d7-hfactor-reblock-2026-10-26",
       "package": "graph-theory-misc",
-      "note": "NP_hard for non-trivial H (2<|H| /\\ connected); universal reduction claim, non-vacuous; Track-B skeptic caught the a<=b guard REFUTABLE (c=1 empties instances) — fixed to a<b"
+      "note": "BLOCKED 2026-10-26 (Arthur; Lancelot's routing, reviewer Marcol; body unchanged, D7.v Notes): D1 the source asks a parametric question (for each fixed c and H, is the problem NP-hard?) while the body asserts NP-hardness for every c in (0,1), including Han-Treglown's polynomial regime; D2 the relational NP_hard of D7.v has no hardness content (every problem with a yes- and a no-instance is NP_hard; the body holds at H = K_3, c = 1/3, kernel-checked). A faithful encoding needs a cost-coupled NP-hardness vocabulary over GTBase's prog model (meta/STATEMENT_IMPROVEMENTS.md). Was: statement done, grounding done, commit 27f7a11, note: NP_hard for non-trivial H (2<|H| /\\ connected); universal reduction claim, non-vacuous; Track-B skeptic caught the a<=b guard REFUTABLE (c=1 empties instances) — fixed to a<b"
     },
     "algorithm_for_graph_homomorphisms": {
       "statement": "done",

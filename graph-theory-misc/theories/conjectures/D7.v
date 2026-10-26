@@ -269,8 +269,10 @@ Definition approximation_ratio_for_maximum_edge_disjoint_paths_statement : Prop 
         poly-time, poly-size-blowup many-one reduction; [in_NP A] is a poly-size
         certificate + poly-time boolean verifier; [NP_hard B] is: every NP
         problem poly-reduces to [B].  No machine model: "computed in poly time"
-        is the abstract cost bound — a UNIVERSAL hardness claim is non-vacuous
-        in this reading (the coupled [prog] model is NOT needed here).
+        is the abstract cost bound.  WARNING (2026-10-26, kernel-checked): this
+        gives [NP_hard] no hardness content: every problem with a YES-instance
+        and a NO-instance is [NP_hard] here (a reduction is any function, its
+        cost bound unrelated to computing it), so the H-factor row is BLOCKED.
     The statement asserts NP-hardness of the (fixed-[H], fixed-[c]) H-factor
     problem; its truth value is the OPEN question. *)
 (* [@MOVE-to-base]: [is_copy]/[h_factor] are cross-area (subgraph-copy /
@@ -343,7 +345,15 @@ Definition hfactor_problem (H : sgraph) (a b : nat) : problem :=
       as the Hell-Kirkpatrick regime of a component of order at least 3.  (ii) the density
       ratio is strictly below 1 (a < b): at a = b the min-degree condition demands
       deg(v) >= |V(G)| on an irreflexive graph, the instance class is empty and NP-hardness
-      would be false, so "a fixed positive real c" is read as 0 < c < 1. *)
+      would be false, so "a fixed positive real c" is read as 0 < c < 1.  BLOCKED 2026-10-26 (statement
+      leg done -> blocked; Lancelot's routing, reviewer Marcol; body unchanged): (D1) the source asks,
+      for each fixed c and H, whether the problem is NP-hard, while this body asserts NP-hardness for
+      EVERY c in (0, 1), including the polynomial regime delta(G) >= (1 - 1/chi_cr(H) + gamma) n of
+      Han and Treglown recorded by the pinned review; (D2) the relational [NP_hard] above has no
+      hardness content: every problem with a yes-instance and a no-instance satisfies it, so this body
+      is provable wherever both exist, e.g. at H = K_3, c = 1/3 (kernel-checked under non-row names,
+      evidence math-2026-10-26/np-hard-layer-by-arthur).  A faithful encoding needs a cost-coupled
+      NP-hardness vocabulary over GTBase's prog model (a library question). *)
 Definition complexity_of_the_h_factor_statement : Prop :=
   forall (H : sgraph) (a b : nat),
     0 < a -> a < b -> 2 < #|H| -> connected [set: H] ->
