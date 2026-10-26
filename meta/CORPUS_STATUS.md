@@ -5,7 +5,7 @@
 ## Headline
 
 - **227/227 rows attempted** (100%), **0 todo**.
-- **206 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **14 partial** · **7 blocked**.
+- **205 done** (axiom-free `Definition <name>_statement : Prop`, `Print Assumptions` clean) · **14 partial** · **8 blocked**.
 - Federation: 13 area packages + `graph-theory-base` + absorbed `digraph-theory`.
 
 ## Per-area
@@ -16,7 +16,7 @@
 | cycle-theory | Cycle | 29 | 0 | 0 | 29 |
 | digraph-theory | Digraph | 32 | 0 | 0 | 32 |
 | extremal-graph-theory | Extremal | 28 | 4 | 0 | 32 |
-| graph-theory-misc | GTMisc | 16 | 1 | 0 | 17 |
+| graph-theory-misc | GTMisc | 15 | 1 | 1 | 17 |
 | hamiltonicity-theory | Hamilton | 9 | 0 | 0 | 9 |
 | homomorphism-theory | Hom | 10 | 0 | 0 | 10 |
 | hypergraph-theory | Hypergraph | 4 | 0 | 0 | 4 |
@@ -26,7 +26,7 @@
 | reconstruction-theory | Reconstruction | 4 | 0 | 0 | 4 |
 | spectral-graph-theory | Spectral | 5 | 0 | 0 | 5 |
 | topological-graph-theory | Topological | 8 | 5 | 5 | 18 |
-| **TOTAL** | | **206** | **14** | **7** | **227** |
+| **TOTAL** | | **205** | **14** | **8** | **227** |
 
 ## Per-phase (milestones)
 
@@ -38,7 +38,7 @@
 | D4 | 8 | 4 | 2 | 14 |
 | D5 | 5 | 0 | 0 | 5 |
 | D6 | 3 | 0 | 1 | 4 |
-| D7 | 4 | 1 | 0 | 5 |
+| D7 | 3 | 1 | 1 | 5 |
 | P9 | 32 | 0 | 0 | 32 |
 | U1 | 9 | 0 | 0 | 9 |
 | U10 | 3 | 0 | 0 | 3 |
@@ -95,10 +95,11 @@
 | topological-graph-theory | the_crossing_number_of_the_complete_graph | PARTIAL proxy: direct form is_crossing_number 'K_n (Guy value) over the xsplit planarization model. Readback/external-review proxy flagged missing local drawing rotation/alternation data, so equivalence to drawing crossing number is unvalidated; needs a drawing/rotation layer to return to done. |
 | topological-graph-theory | the_crossing_number_of_the_hypercube | PARTIAL proxy: two-sided eps-N statement over xsplit-achievable counts; body/minimum-window probes and quantifier-order checks remain useful, but equivalence to drawing crossing number is unvalidated without a drawing/rotation layer. |
 
-## Blocked — needs a layer deliberately out of scope (7)
+## Blocked — needs a layer deliberately out of scope (8)
 
 | area | slug | reason |
 |---|---|---|
+| graph-theory-misc | complexity_of_the_h_factor_problem | BLOCKED 2026-10-26 (Arthur; Lancelot's routing, reviewer Lancelot; body unchanged, D7.v Notes): D1 the source asks a parametric question (for each fixed c and H, is the problem NP-hard?) while the body asserts NP-hardness for every c in (0,1), including Han-Treglown's polynomial regime; D2 the relational NP_hard of D7.v has no hardness content (every problem with a yes- and a no-instance is NP_hard; the body holds at H = K_3, c = 1/3, kernel-checked). A faithful encoding needs a cost-coupled NP-hardness vocabulary over GTBase's prog model (meta/STATEMENT_IMPROVEMENTS.md). Was: statement done, grounding done, commit 27f7a11, note: NP_hard for non-trivial H (2<|H| /\ connected); universal reduction claim, non-vacuous; Track-B skeptic caught the a<=b guard REFUTABLE (c=1 empties instances) — fixed to a<b |
 | infinite-graph-theory | characterizing_aleph_0_aleph_1_graphs | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
 | infinite-graph-theory | highly_arc_transitive_two_ended_digraphs | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
 | topological-graph-theory | 3_colourability_of_arrangements_of_great_circles | Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): retargeted OPG witness surface (D3D6/D4_unblocked) does not model the conjecture; re-blocked. |
@@ -285,7 +286,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
-- Statement legs over the 1673 non-alias rows: **427 done** · 11 partial · 39 blocked · 1196 todo.
+- Statement legs over the 1673 non-alias rows: **433 done** · 11 partial · 39 blocked · 1190 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -436,6 +437,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X230 | 4 | 0 | 0 | 0 | 4 |
 | X231 | 1 | 0 | 0 | 0 | 1 |
 | X232 | 1 | 0 | 0 | 0 | 1 |
+| X233 | 6 | 0 | 0 | 0 | 6 |
 | X24 | 1 | 0 | 0 | 0 | 1 |
 | X25 | 1 | 0 | 0 | 0 | 1 |
 | X26 | 1 | 0 | 0 | 0 | 1 |
