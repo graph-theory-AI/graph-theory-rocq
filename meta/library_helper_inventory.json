@@ -24399,12 +24399,12 @@
   },
   "counts": {
     "files": 325,
-    "helpers": 2620,
+    "helpers": 2644,
     "repeated_body_shapes": 148,
     "repeated_normalized_names": 214,
-    "repeated_signature_shapes": 319,
+    "repeated_signature_shapes": 321,
     "statements_excluded": 706,
-    "x_wave_helpers": 1463
+    "x_wave_helpers": 1487
   },
   "groups": {
     "body_shape_hash": {
@@ -25330,6 +25330,25 @@
         "GTMisc.conjectures.D7.level_rel_sym",
         "GTMisc.conjectures.U13.relAdj_irrefl",
         "GTMisc.conjectures.U13.relAdj_sym",
+        "GTMisc.conjectures.X156.x156_K2_block_tree_not_diameter0",
+        "GTMisc.conjectures.X156.x156_K2_vertex_not_block",
+        "GTMisc.conjectures.X156.x156_all_graphs_block_stable",
+        "GTMisc.conjectures.X156.x156_block_above",
+        "GTMisc.conjectures.X156.x156_block_tree_edge",
+        "GTMisc.conjectures.X156.x156_blockb_K1",
+        "GTMisc.conjectures.X156.x156_blockb_K2",
+        "GTMisc.conjectures.X156.x156_blockb_setT",
+        "GTMisc.conjectures.X156.x156_connected_le1",
+        "GTMisc.conjectures.X156.x156_edgeless_block_stable",
+        "GTMisc.conjectures.X156.x156_edgeless_fg_whp_fails",
+        "GTMisc.conjectures.X156.x156_edgeless_no_connected_member",
+        "GTMisc.conjectures.X156.x156_edgeless_total_weight0",
+        "GTMisc.conjectures.X156.x156_edgeless_where_defined",
+        "GTMisc.conjectures.X156.x156_graph_dist0",
+        "GTMisc.conjectures.X156.x156_no_cut_K1",
+        "GTMisc.conjectures.X156.x156_no_cut_K2",
+        "GTMisc.conjectures.X156.x156_no_cut_pair",
+        "GTMisc.conjectures.X156.x156_whp_of_fg_whp",
         "GTMisc.conjectures.X197.x197_K0_capture_time_zero",
         "GTMisc.conjectures.X197.x197_K1_capture_time_zero",
         "GTMisc.conjectures.X197.x197_K1_cop_number_one",
@@ -27696,6 +27715,10 @@
         "Extremal.conjectures.XE1.xe1_graph_ramsey",
         "Extremal.conjectures.XE1.xe1_graph_ramsey_number"
       ],
+      "8fe9954ffb9ff223409cffd5554101439a7e8ea995b4093a2be3f2c509de5afe": [
+        "GTMisc.conjectures.X156.x156_blockb",
+        "GTMisc.conjectures.X156.x156_no_cut_vertexb"
+      ],
       "9123145df37b686a0ae595b014cedd01380424e6091ae1635edeabb7c1f4a6fe": [
         "Chromatic.conjectures.X34.x34_colour_graph",
         "Cycle.conjectures.X212.x212_colour_graph",
@@ -28427,6 +28450,10 @@
         "GTMisc.conjectures.X139.x139_scol_at_most",
         "Minor.conjectures.X201.x201_k_disjoint_large_treewidth_subgraphs"
       ],
+      "eb5f5905fbbeb810c90223e7167bdb1b911fb99c571afda0afb94632b5f47356": [
+        "GTMisc.conjectures.X156.x156_edgelessb",
+        "GTMisc.conjectures.X163.x163_normal_graphb"
+      ],
       "ebc792f58eb61b1c7502cdd3b5bf7abb8eb31fa2fa0fd2ebc673224f09fd2c39": [
         "Cycle.conjectures.X212.x212_cycle",
         "Hamilton.conjectures.U2.hamiltonian_cycle",
@@ -28642,6 +28669,7 @@
         "Extremal.conjectures.X56.x56_complement",
         "Extremal.conjectures.XE1.xe1_complement_graph",
         "GTMisc.conjectures.U13.subdivide1",
+        "GTMisc.conjectures.X156.x156_block_tree",
         "GTMisc.conjectures.X29.x29_complement",
         "Topological.conjectures.X176.x176_cone"
       ]
@@ -61937,7 +61965,7 @@
         "GTMisc.conjectures.D7.fas_ptas_spec"
       ],
       "kind": "Definition",
-      "line": 357,
+      "line": 351,
       "local_dependencies": [],
       "name": "is_tournament",
       "normalized_name": "is_tournament",
@@ -61956,7 +61984,7 @@
         "GTMisc.conjectures.D7.fas_opt"
       ],
       "kind": "Definition",
-      "line": 389,
+      "line": 383,
       "local_dependencies": [],
       "name": "back_arcs",
       "normalized_name": "back_arcs",
@@ -61975,7 +62003,7 @@
         "GTMisc.conjectures.D7.fas_ptas_spec"
       ],
       "kind": "Definition",
-      "line": 392,
+      "line": 386,
       "local_dependencies": [
         "back_arcs"
       ],
@@ -61998,7 +62026,7 @@
         "GTMisc.conjectures.D7.t_vsize"
       ],
       "kind": "Definition",
-      "line": 396,
+      "line": 390,
       "local_dependencies": [],
       "name": "t_input",
       "normalized_name": "t_input",
@@ -62015,7 +62043,7 @@
       "declaration_hash": "5458a55daa41e23e3bc02d18c8ae643bf805ab47c52c4ed2961ee75ed4297c60",
       "direct_consumers": [],
       "kind": "Definition",
-      "line": 398,
+      "line": 392,
       "local_dependencies": [
         "t_input"
       ],
@@ -62036,7 +62064,7 @@
         "GTMisc.conjectures.D7.ptas_for_feedback_arc_set_in_tournaments_statement"
       ],
       "kind": "Definition",
-      "line": 399,
+      "line": 393,
       "local_dependencies": [
         "t_input"
       ],
@@ -62057,7 +62085,7 @@
         "GTMisc.conjectures.D7.ptas_for_feedback_arc_set_in_tournaments_statement"
       ],
       "kind": "Definition",
-      "line": 403,
+      "line": 397,
       "local_dependencies": [
         "dnat_val",
         "fas_opt",
@@ -62081,7 +62109,7 @@
         "GTMisc.conjectures.D7.edge_outerplanar"
       ],
       "kind": "Definition",
-      "line": 439,
+      "line": 433,
       "local_dependencies": [],
       "name": "outerplanar_w",
       "normalized_name": "outerplanar_w",
@@ -62101,7 +62129,7 @@
         "GTMisc.conjectures.D7.level_rel_sym"
       ],
       "kind": "Definition",
-      "line": 478,
+      "line": 472,
       "local_dependencies": [],
       "name": "level_rel",
       "normalized_name": "level_rel",
@@ -62120,7 +62148,7 @@
         "GTMisc.conjectures.D7.level_graph"
       ],
       "kind": "Lemma",
-      "line": 483,
+      "line": 477,
       "local_dependencies": [
         "level_rel"
       ],
@@ -62141,7 +62169,7 @@
         "GTMisc.conjectures.D7.level_graph"
       ],
       "kind": "Lemma",
-      "line": 486,
+      "line": 480,
       "local_dependencies": [
         "level_rel"
       ],
@@ -62162,7 +62190,7 @@
         "GTMisc.conjectures.D7.edge_outerplanar"
       ],
       "kind": "Definition",
-      "line": 489,
+      "line": 483,
       "local_dependencies": [
         "level_rel_irr",
         "level_rel_sym"
@@ -62184,7 +62212,7 @@
         "GTMisc.conjectures.D7.min_edge_outerplanar"
       ],
       "kind": "Definition",
-      "line": 491,
+      "line": 485,
       "local_dependencies": [
         "level_graph",
         "outerplanar_w"
@@ -62206,7 +62234,7 @@
         "GTMisc.conjectures.D7.min_eop_spec"
       ],
       "kind": "Definition",
-      "line": 497,
+      "line": 491,
       "local_dependencies": [
         "edge_outerplanar"
       ],
@@ -62227,7 +62255,7 @@
         "GTMisc.conjectures.D7.finding_k_edge_outerplanar_graph_embeddings_statement"
       ],
       "kind": "Definition",
-      "line": 500,
+      "line": 494,
       "local_dependencies": [
         "dnat_val",
         "min_edge_outerplanar"
@@ -64732,84 +64760,577 @@
       "signature_shape_hash": "77a6166cecb65ed33fd8cb313f082ab150a0dc19876c70d927a04f8c01b1afd3"
     },
     {
-      "body_hash": "29ea6a458c1c3f5c0440a9abf0f3bfe44a779e9f17e09275bcf6ab0e612f01da",
-      "body_shape_hash": "29ea6a458c1c3f5c0440a9abf0f3bfe44a779e9f17e09275bcf6ab0e612f01da",
-      "declaration_hash": "80169bf4a5a60cf81ba5aa9f19b3c96476e282dfad7f796c2a92607d7792f8b1",
+      "body_hash": "e327117c87fd811d4cd959f111d0e1cc0520dd1f653bbb51c86f30b2203a8a07",
+      "body_shape_hash": "e327117c87fd811d4cd959f111d0e1cc0520dd1f653bbb51c86f30b2203a8a07",
+      "declaration_hash": "26fb7319d8dbca0195bb4fec21d9782319cfe4d7f89f08f31a9d8849886e702b",
       "direct_consumers": [
-        "GTMisc.conjectures.X156.x156_block_tree_certificate"
+        "GTMisc.conjectures.X156.x156_block_above",
+        "GTMisc.conjectures.X156.x156_blockb",
+        "GTMisc.conjectures.X156.x156_blockb_setT",
+        "GTMisc.conjectures.X156.x156_no_cut_K1",
+        "GTMisc.conjectures.X156.x156_no_cut_K2",
+        "GTMisc.conjectures.X156.x156_no_cut_pair"
       ],
       "kind": "Definition",
-      "line": 8,
+      "line": 10,
       "local_dependencies": [],
-      "name": "x156_two_connected_piece",
-      "normalized_name": "two_connected_piece",
+      "name": "x156_no_cut_vertexb",
+      "normalized_name": "no_cut_vertexb",
       "package": "graph-theory-misc",
       "path": "graph-theory-misc/theories/conjectures/X156.v",
       "phase": "X156",
-      "qualified_name": "GTMisc.conjectures.X156.x156_two_connected_piece",
-      "signature": "(G : sgraph) (B : {set G}) : Prop",
-      "signature_shape_hash": "556702903b4e0c63de408a8362fa5b231c9344e964315e6a66aba9ae0613a208"
+      "qualified_name": "GTMisc.conjectures.X156.x156_no_cut_vertexb",
+      "signature": "(G : sgraph) (B : {set G}) : bool",
+      "signature_shape_hash": "8fe9954ffb9ff223409cffd5554101439a7e8ea995b4093a2be3f2c509de5afe"
     },
     {
-      "body_hash": "a7240ef08ad8ba4cf55ffdf4fe62fe944d4f1dc6c9ef65885f162ed994493523",
-      "body_shape_hash": "ed94b714a5f7c4276609dde36455be23c7b84314b055d23e49aff896d354f469",
-      "declaration_hash": "44c77a377ec8e8448a2200ef020eb439dca49e4918b8bbdf3c451500d23b3008",
+      "body_hash": "8a3e2cc87c24b88ae58d077a4b654d49c522e36417c44f913569f490de6e0b4b",
+      "body_shape_hash": "ebf177b9dde83e31cae482a3bf2e9a3980b7e19313933de12607751dd4eb6bd9",
+      "declaration_hash": "9ee285629082db1edb05a47f191d40031f8cb2521fcb5756a5081984a3bbdafa",
       "direct_consumers": [
-        "GTMisc.conjectures.X156.x156_random_block_tree_diameter_bound"
+        "GTMisc.conjectures.X156.x156_K2_vertex_not_block",
+        "GTMisc.conjectures.X156.x156_block_above",
+        "GTMisc.conjectures.X156.x156_block_stable",
+        "GTMisc.conjectures.X156.x156_block_tree_edge",
+        "GTMisc.conjectures.X156.x156_block_tree_rel",
+        "GTMisc.conjectures.X156.x156_blockb_K1",
+        "GTMisc.conjectures.X156.x156_blockb_K2",
+        "GTMisc.conjectures.X156.x156_blockb_setT"
       ],
       "kind": "Definition",
-      "line": 15,
+      "line": 21,
       "local_dependencies": [
-        "x156_two_connected_piece"
+        "x156_no_cut_vertexb"
       ],
-      "name": "x156_block_tree_certificate",
-      "normalized_name": "block_tree_certificate",
+      "name": "x156_blockb",
+      "normalized_name": "blockb",
       "package": "graph-theory-misc",
       "path": "graph-theory-misc/theories/conjectures/X156.v",
       "phase": "X156",
-      "qualified_name": "GTMisc.conjectures.X156.x156_block_tree_certificate",
-      "signature": "(G : sgraph) (diam : nat) : Prop",
-      "signature_shape_hash": "db7f97e4e4967c178682959e9c14e838aa5a1269d89941c4f8fc2e4a08600079"
+      "qualified_name": "GTMisc.conjectures.X156.x156_blockb",
+      "signature": "(G : sgraph) (B : {set G}) : bool",
+      "signature_shape_hash": "8fe9954ffb9ff223409cffd5554101439a7e8ea995b4093a2be3f2c509de5afe"
     },
     {
-      "body_hash": "4fb260d4c20d87cb6bd8e512ff719afbdd3432b933c9dbf5d206a346fe2264c5",
-      "body_shape_hash": "4fb260d4c20d87cb6bd8e512ff719afbdd3432b933c9dbf5d206a346fe2264c5",
-      "declaration_hash": "be609bc943f2768e1a768354e81b0c34422010b1547daa91b4c82ebccfdb34af",
+      "body_hash": "b8521577c8b0791a91627c72adcdfbac1f15c594acee184cbb2cf61984e995f0",
+      "body_shape_hash": "ffec0b312e3637b2cf579f5812c66a40c276d67114ef352e5ac4058b3b64b88c",
+      "declaration_hash": "35f8d7210a10b07ea1e897d50bf0cf98ed71b459f7ebdfaa47a727743705f65e",
       "direct_consumers": [
-        "GTMisc.conjectures.X156.block_tree_diameter_bound_improvement_statement"
+        "GTMisc.conjectures.X156.x156_block_tree"
       ],
       "kind": "Definition",
-      "line": 24,
+      "line": 25,
+      "local_dependencies": [
+        "x156_blockb"
+      ],
+      "name": "x156_block_tree_rel",
+      "normalized_name": "block_tree_rel",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_block_tree_rel",
+      "signature": "(G : sgraph) : rel (G + {set G})%type",
+      "signature_shape_hash": "cb997c2f2cf8d1a7f67dcba98a9c0b44fc08b673607adedb7857d30da2e220ca"
+    },
+    {
+      "body_hash": "025dcd2d110797b1984889e6ae69aaf49caaed9e89a1490ad42314360a5df485",
+      "body_shape_hash": "bdd1a51d075adef953305d83120da6feba0091c0a66a871bb447848d8009b99d",
+      "declaration_hash": "4db5221ea373c40c8118208e7199b7b6cffb03049f379cef6e2292fe10acacd9",
+      "direct_consumers": [
+        "GTMisc.conjectures.X156.block_tree_diameter_bound_improvement_statement",
+        "GTMisc.conjectures.X156.x156_K2_block_tree_not_diameter0",
+        "GTMisc.conjectures.X156.x156_block_tree_edge"
+      ],
+      "kind": "Definition",
+      "line": 34,
+      "local_dependencies": [
+        "x156_block_tree_rel"
+      ],
+      "name": "x156_block_tree",
+      "normalized_name": "block_tree",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_block_tree",
+      "signature": "(G : sgraph) : sgraph",
+      "signature_shape_hash": "ff79ba71bd209a9dc605625aae997a89d17636a93a5e755d1d36f71e35222cb8"
+    },
+    {
+      "body_hash": "3cee6ddeb3177b88839968668d37bbbd3a8af33bb38c8cefe7a6cb69f31565ff",
+      "body_shape_hash": "3cee6ddeb3177b88839968668d37bbbd3a8af33bb38c8cefe7a6cb69f31565ff",
+      "declaration_hash": "2c1002152aecf66044b139bdb01600c6d556d833d8062802bbf34e42ec18e700",
+      "direct_consumers": [
+        "GTMisc.conjectures.X156.block_tree_diameter_bound_improvement_statement",
+        "GTMisc.conjectures.X156.x156_K2_block_tree_not_diameter0"
+      ],
+      "kind": "Definition",
+      "line": 36,
       "local_dependencies": [],
-      "name": "x156_random_block_stable_model",
-      "normalized_name": "random_block_stable_model",
+      "name": "x156_diameter_leb",
+      "normalized_name": "diameter_leb",
       "package": "graph-theory-misc",
       "path": "graph-theory-misc/theories/conjectures/X156.v",
       "phase": "X156",
-      "qualified_name": "GTMisc.conjectures.X156.x156_random_block_stable_model",
-      "signature": "(R : nat -> finType) (obs : forall n : nat, R n -> sgraph) : Prop",
-      "signature_shape_hash": "0436f0f2fed42cd0585f781156a17d6b5fd890c10ae06bb48e0dd003286d16cd"
+      "qualified_name": "GTMisc.conjectures.X156.x156_diameter_leb",
+      "signature": "(T : sgraph) (d : nat) : bool",
+      "signature_shape_hash": "77f1281d09bc9ae89603adc2199f7b1fe19f2c83decdf64055f7295f0fa01c2f"
     },
     {
-      "body_hash": "dcbb5a4449d7f9e78df8165eeb92c7a5264969c064dd951b7543cd8b500e8a33",
-      "body_shape_hash": "43506d96c50e44ce6b2e593d4c59be7c6820137f41a0aaea67e7556fa6cc2454",
-      "declaration_hash": "9692e22a8464a85e25835df85073be9ffe80a8fec4338ebf7f545cb25151d962",
+      "body_hash": "de4572be3a3aeabd2d3a8ba0e8cfcfd89556e96bfc1f37e1e83b8829f0541342",
+      "body_shape_hash": "b0ae72c865b96a85e75030cd7000293363c327081e6d49e84a9f18e628041fa2",
+      "declaration_hash": "c46e1bee62dec43396187739b1fa0443fe1fd2581dbe3ee42dead32352d96ccd",
       "direct_consumers": [
-        "GTMisc.conjectures.X156.block_tree_diameter_bound_improvement_statement"
+        "GTMisc.conjectures.X156.block_tree_diameter_bound_improvement_statement",
+        "GTMisc.conjectures.X156.x156_all_graphs_block_stable",
+        "GTMisc.conjectures.X156.x156_edgeless_block_stable"
       ],
       "kind": "Definition",
-      "line": 28,
+      "line": 41,
       "local_dependencies": [
-        "x156_block_tree_certificate"
+        "x156_blockb"
       ],
-      "name": "x156_random_block_tree_diameter_bound",
-      "normalized_name": "random_block_tree_diameter_bound",
+      "name": "x156_block_stable",
+      "normalized_name": "block_stable",
       "package": "graph-theory-misc",
       "path": "graph-theory-misc/theories/conjectures/X156.v",
       "phase": "X156",
-      "qualified_name": "GTMisc.conjectures.X156.x156_random_block_tree_diameter_bound",
-      "signature": "(R : nat -> finType) (obs : forall n : nat, R n -> sgraph) (f : nat -> nat) : Prop",
-      "signature_shape_hash": "433fd17d4d6ac421ad261e1459e52db139f3d9d5326d96a059d20d1cc2131744"
+      "qualified_name": "GTMisc.conjectures.X156.x156_block_stable",
+      "signature": "(A : sgraph -> bool) : Prop",
+      "signature_shape_hash": "592eddcc5617c3733e5da1dbebd2e197d415e013f58b86e912c8d619bc08753e"
+    },
+    {
+      "body_hash": "9380ebe84aec66af3dcaf74544850975eced9b1901783e93c762d2838b3dfb74",
+      "body_shape_hash": "9380ebe84aec66af3dcaf74544850975eced9b1901783e93c762d2838b3dfb74",
+      "declaration_hash": "5a4dc9a5f3e32fef0a640b0f646b4ccbe94bef035f8864dcbcb7c9cbdc0b3ad0",
+      "direct_consumers": [
+        "GTMisc.conjectures.X156.block_tree_diameter_bound_improvement_statement",
+        "GTMisc.conjectures.X156.x156_edgeless_fg_whp_fails",
+        "GTMisc.conjectures.X156.x156_edgeless_no_connected_member",
+        "GTMisc.conjectures.X156.x156_edgeless_total_weight0",
+        "GTMisc.conjectures.X156.x156_edgeless_where_defined"
+      ],
+      "kind": "Definition",
+      "line": 47,
+      "local_dependencies": [],
+      "name": "x156_connected_member",
+      "normalized_name": "connected_member",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_connected_member",
+      "signature": "(A : sgraph -> bool) (n : nat) (E : {set {set 'I_n}}) : bool",
+      "signature_shape_hash": "ac0ccfaaed5fced0a32b52dc50935ba60ea992bea63e19123652e9c2e4306165"
+    },
+    {
+      "body_hash": "6ff0357f27b31552ff41e750f52deb9c0129ba7a4c56fb3560cefb027d0ad7cb",
+      "body_shape_hash": "6ff0357f27b31552ff41e750f52deb9c0129ba7a4c56fb3560cefb027d0ad7cb",
+      "declaration_hash": "24ab5f3c188d7d073a67a2665321ce7b5521f8630d52cee8cf28613e365725e9",
+      "direct_consumers": [
+        "GTMisc.conjectures.X156.block_tree_diameter_bound_improvement_statement",
+        "GTMisc.conjectures.X156.x156_edgeless_where_defined",
+        "GTMisc.conjectures.X156.x156_whp_of_fg_whp"
+      ],
+      "kind": "Definition",
+      "line": 52,
+      "local_dependencies": [],
+      "name": "x156_whp_where_defined",
+      "normalized_name": "whp_where_defined",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_whp_where_defined",
+      "signature": "(T : nat -> finType) (w : forall n : nat, T n -> nat) (P : forall n : nat, pred (T n)) : Prop",
+      "signature_shape_hash": "daa687e2a2a1f477b5e6187263feae3985ca66872e53d1dd24f7f8e0f37e6110"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "8f3e273e62f61ea6a2fe839924a3b0ff060dcca105ad98106194d3f4bf6b5925",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 62,
+      "local_dependencies": [],
+      "name": "x156_graph_dist0",
+      "normalized_name": "graph_dist0",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_graph_dist0",
+      "signature": "(G : sgraph) (x y : G) : graph_dist x y = 0 -> x = y",
+      "signature_shape_hash": "d33050ea9e0e15d44faa5d7ad2acd97be1c6b84907f647305cde1bc26c9b081a"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "401cefbc3e2e503120896c010f41485fcf803269c1966a393b8ddd260d414a2a",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 72,
+      "local_dependencies": [],
+      "name": "x156_connected_le1",
+      "normalized_name": "connected_le1",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_connected_le1",
+      "signature": "(G : sgraph) (S : {set G}) : (forall x y : G, x \\in S -> y \\in S -> x = y) -> connected S",
+      "signature_shape_hash": "49d0ce70d59bf24fbe8196c738007bc1bb74636c7a5b3e0a4ab4da301e3ad39e"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "eb7e09b6b5f8ad7ab0950f614e89724d3f25bca1c276577d7915ac3ae7815500",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 80,
+      "local_dependencies": [
+        "x156_blockb",
+        "x156_no_cut_vertexb"
+      ],
+      "name": "x156_blockb_setT",
+      "normalized_name": "blockb_setT",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_blockb_setT",
+      "signature": "(G : sgraph) : x156_no_cut_vertexb [set: G] -> x156_blockb [set: G]",
+      "signature_shape_hash": "5192c37188e915a275d979478384304cf1edf5fbe33b22a6e8d590a400e4a2f6"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "c42f8d4ce477637faf7d20d942b427c8bd04df0c763e43db523c0a5173b96df0",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 86,
+      "local_dependencies": [
+        "x156_no_cut_vertexb"
+      ],
+      "name": "x156_no_cut_K1",
+      "normalized_name": "no_cut_K1",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_no_cut_K1",
+      "signature": ": x156_no_cut_vertexb [set: 'K_1]",
+      "signature_shape_hash": "e4a7f2e78d1b4962ab9e5b4233e8f5801b209060816908e3a3c0f7a068a2cc48"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "89f416ebc9e2f5bfa93aeab2a63b104bf2c3411db9cb6f1bb4005890c5fd453d",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 96,
+      "local_dependencies": [
+        "x156_no_cut_vertexb"
+      ],
+      "name": "x156_no_cut_K2",
+      "normalized_name": "no_cut_K2",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_no_cut_K2",
+      "signature": ": x156_no_cut_vertexb [set: 'K_2]",
+      "signature_shape_hash": "4f8bfd82cdae7f55b2ad71e1bfe91b2dc14df7a8a81f827d13a9c4d58997aadf"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "66460e1f0a12b491a69d680c74857499a8b859613aba636c85e4e54311fa7e64",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 107,
+      "local_dependencies": [
+        "x156_blockb"
+      ],
+      "name": "x156_blockb_K1",
+      "normalized_name": "blockb_K1",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_blockb_K1",
+      "signature": ": x156_blockb [set: 'K_1]",
+      "signature_shape_hash": "e73cd585e5d276ae49c1c181e4d00d1fe9336da39d46c30b5b5c21ed76798bc3"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "f487a9dbdfb462f3fb702155b730b88aad6410e84cf9d4b2ad58ab98722523ca",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 111,
+      "local_dependencies": [
+        "x156_blockb"
+      ],
+      "name": "x156_blockb_K2",
+      "normalized_name": "blockb_K2",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_blockb_K2",
+      "signature": ": x156_blockb [set: 'K_2]",
+      "signature_shape_hash": "50bb1d77e174a2f1f30aadc8de2544b2ffc4e0059044016739f33b5bfea8a9e6"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "0506e82427cd493a335f2eea67a27e1ecec171879e8d6d8c67bffb4aeea93458",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 114,
+      "local_dependencies": [
+        "x156_blockb"
+      ],
+      "name": "x156_K2_vertex_not_block",
+      "normalized_name": "K2_vertex_not_block",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_K2_vertex_not_block",
+      "signature": ": ~~ x156_blockb [set (ord0 : 'K_2)]",
+      "signature_shape_hash": "d7e586c6617eac6137732104eeb2cf28e8238b84aefaced709cb75b9255d6eed"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "5de7abcaa5fd59682ac812d27312a48b58e3b9274ce337b2f47faa9586db1f71",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 122,
+      "local_dependencies": [
+        "x156_block_tree",
+        "x156_blockb"
+      ],
+      "name": "x156_block_tree_edge",
+      "normalized_name": "block_tree_edge",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_block_tree_edge",
+      "signature": "(G : sgraph) (v : G) (B : {set G}) : v \\in B -> x156_blockb B -> (inl v : x156_block_tree G) -- inr B",
+      "signature_shape_hash": "e36bbb4ec7fd94445a267ec6761bef66fbe488f9f94963cf5af8409530953bda"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "d57ae1a4d50bb28095b9b09c96506ef4c20d641081c2bc05ac60a3baa30eec53",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 131,
+      "local_dependencies": [
+        "x156_block_tree",
+        "x156_diameter_leb"
+      ],
+      "name": "x156_K2_block_tree_not_diameter0",
+      "normalized_name": "K2_block_tree_not_diameter0",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_K2_block_tree_not_diameter0",
+      "signature": ": ~~ x156_diameter_leb (x156_block_tree 'K_2) 0",
+      "signature_shape_hash": "8166d5b4a7ab0f89f5ee2fa4d00b9e9c433072aa9a53a85a2a1c6befdf4232bc"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "d25ad0cc8835ab4771c79a997d1b1fd5e663c1ae0d922a75c85cbfa797e432fc",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 139,
+      "local_dependencies": [
+        "x156_block_stable"
+      ],
+      "name": "x156_all_graphs_block_stable",
+      "normalized_name": "all_graphs_block_stable",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_all_graphs_block_stable",
+      "signature": ": x156_block_stable (fun _ : sgraph => true)",
+      "signature_shape_hash": "8d1f6a921c5c2e4291f560dcff6235d05db02f67b769418f525f5bba63e85419"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "c9dc3660db17d2fdf3b675a4148d72c596c36484f2b525b194e9aed940092914",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 146,
+      "local_dependencies": [
+        "x156_no_cut_vertexb"
+      ],
+      "name": "x156_no_cut_pair",
+      "normalized_name": "no_cut_pair",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_no_cut_pair",
+      "signature": "(G : sgraph) (u v : G) : u -- v -> x156_no_cut_vertexb [set u; v]",
+      "signature_shape_hash": "422956dbd002f7dc0388cd015cdbeb3c6ce842be8af3affebcbdf31e3707e6ab"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "43e1d66db6a76828a97344407d368ebf1a15c5e35fd13addd9cf8fe40d10119f",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 157,
+      "local_dependencies": [
+        "x156_blockb",
+        "x156_no_cut_vertexb"
+      ],
+      "name": "x156_block_above",
+      "normalized_name": "block_above",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_block_above",
+      "signature": "(G : sgraph) (S : {set G}) : x156_no_cut_vertexb S -> exists2 B, x156_blockb B & S \\subset B",
+      "signature_shape_hash": "55c7a8dd3b35614bea767bec38c3a8a9254a20ba205519db252ab09c0631aa50"
+    },
+    {
+      "body_hash": "81a1bf8307dbf23a462ec03fb03bc9ef2487dba54dd65a94c4a1975fd4f29d30",
+      "body_shape_hash": "81a1bf8307dbf23a462ec03fb03bc9ef2487dba54dd65a94c4a1975fd4f29d30",
+      "declaration_hash": "ff111e7602f8d45a548f0afd2e36ea80a71d7c426437cd874f227c506e60f595",
+      "direct_consumers": [
+        "GTMisc.conjectures.X156.x156_edgeless_block_stable",
+        "GTMisc.conjectures.X156.x156_edgeless_fg_whp_fails",
+        "GTMisc.conjectures.X156.x156_edgeless_no_connected_member",
+        "GTMisc.conjectures.X156.x156_edgeless_total_weight0",
+        "GTMisc.conjectures.X156.x156_edgeless_where_defined"
+      ],
+      "kind": "Definition",
+      "line": 171,
+      "local_dependencies": [],
+      "name": "x156_edgelessb",
+      "normalized_name": "edgelessb",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_edgelessb",
+      "signature": "(G : sgraph) : bool",
+      "signature_shape_hash": "eb5f5905fbbeb810c90223e7167bdb1b911fb99c571afda0afb94632b5f47356"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "644c2e099c15b412fd4d60e9c2cda3e51228db0b07b1edc320ea58865aed6da1",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 174,
+      "local_dependencies": [
+        "x156_block_stable",
+        "x156_edgelessb"
+      ],
+      "name": "x156_edgeless_block_stable",
+      "normalized_name": "edgeless_block_stable",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_edgeless_block_stable",
+      "signature": ": x156_block_stable x156_edgelessb",
+      "signature_shape_hash": "1435eac51a2a596a8d63a0c072ce9e108c96c041fd373da8a9569fd72d7b93a1"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "52d731de2c0a8652ac5b50bb89f7088180392598ab89b77a957f76dda2850592",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 190,
+      "local_dependencies": [
+        "x156_connected_member",
+        "x156_edgelessb"
+      ],
+      "name": "x156_edgeless_no_connected_member",
+      "normalized_name": "edgeless_no_connected_member",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_edgeless_no_connected_member",
+      "signature": "(n : nat) (E : {set {set 'I_n.+2}}) : ~~ x156_connected_member x156_edgelessb E",
+      "signature_shape_hash": "e798b4f300856927cb58f3e5820f35aee84e5e3404f043b2a4b04c655ff575c0"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "06cb67ff5394ffd90fd39736541bff8bac87378f43553abee5ce7e76065ae590",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 202,
+      "local_dependencies": [
+        "x156_connected_member",
+        "x156_edgelessb"
+      ],
+      "name": "x156_edgeless_total_weight0",
+      "normalized_name": "edgeless_total_weight0",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_edgeless_total_weight0",
+      "signature": "(n : nat) : fg_total_weight (fun E : {set {set 'I_n.+2}} => nat_of_bool (x156_connected_member x156_edgelessb E)) = 0",
+      "signature_shape_hash": "9baa643a976a75cd4aa7eca22a658ea8eb947e900d98f44737c09b5782568f2f"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "e7d4fb01c09e69da8b9819f9ef02730e44569c282dddced3692051f2f5774a1f",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 210,
+      "local_dependencies": [
+        "x156_connected_member",
+        "x156_edgelessb"
+      ],
+      "name": "x156_edgeless_fg_whp_fails",
+      "normalized_name": "edgeless_fg_whp_fails",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_edgeless_fg_whp_fails",
+      "signature": "(P : forall n : nat, pred {set {set 'I_n}}) : ~ @fg_whp (fun n : nat => {set {set 'I_n}}) (fun n E => nat_of_bool (x156_connected_member x156_edgelessb E)) P",
+      "signature_shape_hash": "b49246b220c6f4709b2aabe4ee732c5684a6f55d64ef60d2000d8e4f354f01b5"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "601c76c2005e7f40262b74ddd8b70a235ed38b6ce9920cbe6852b96c9d978140",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 219,
+      "local_dependencies": [
+        "x156_connected_member",
+        "x156_edgelessb",
+        "x156_whp_where_defined"
+      ],
+      "name": "x156_edgeless_where_defined",
+      "normalized_name": "edgeless_where_defined",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_edgeless_where_defined",
+      "signature": "(P : forall n : nat, pred {set {set 'I_n}}) : @x156_whp_where_defined (fun n : nat => {set {set 'I_n}}) (fun n E => nat_of_bool (x156_connected_member x156_edgelessb E)) P",
+      "signature_shape_hash": "ba106fb9b7cea463cda5eea0de8e805c9c5ebd96b52c354a31984efc3a00a192"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "c8f2ddf330f930c94c0001851a40ab11203a658a1bf1fa691131650a31bcdb86",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 227,
+      "local_dependencies": [
+        "x156_whp_where_defined"
+      ],
+      "name": "x156_whp_of_fg_whp",
+      "normalized_name": "whp_of_fg_whp",
+      "package": "graph-theory-misc",
+      "path": "graph-theory-misc/theories/conjectures/X156.v",
+      "phase": "X156",
+      "qualified_name": "GTMisc.conjectures.X156.x156_whp_of_fg_whp",
+      "signature": "(T : nat -> finType) (w : forall n : nat, T n -> nat) (P : forall n : nat, pred (T n)) : fg_whp w P -> x156_whp_where_defined w P",
+      "signature_shape_hash": "eb0d2dbdd5b1f125b07e56e452594b9d95aab334de3a1481ff50cf0ae137831d"
     },
     {
       "body_hash": "520e20a9f83ea028f941af98080cee5532a506b830450f6bdb9a71bc38ef00fa",
