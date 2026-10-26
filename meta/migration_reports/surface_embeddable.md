@@ -7,7 +7,7 @@ Full evidence: `python3 meta/migration_report.py surface_embeddable --details /t
 - Canonical: `GTBase.surface.surface_embeddable`.
 - Baseline: `3bdfdae32824d4762ba8105367f7858a706a02e2`.
 - Scope: 6 helpers, 7 statements, 21 frozen objects, 52 recorded references.
-- Source checks: 181/181 pass; consistent.
+- Source checks: 185/185 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -18,6 +18,8 @@ Full evidence: `python3 meta/migration_report.py surface_embeddable --details /t
 | `GTMisc.conjectures.X167.fixed_surface_spanning_tree_polytope_linear_xc_statement` / arxiv:1604.07976#00 | `GTMisc.migration.surface_embeddable.fixed_surface_spanning_tree_polytope_linear_xc_statement_compat` |
 | `Topological.conjectures.X138.esperet_joret_surface_triangle_free_clustered_two_colouring_statement` / studies:std_esperet_joret_question_on_clustered_colouring_of | `Topological.migration.surface_embeddable.esperet_joret_surface_triangle_free_clustered_two_colouring_statement_compat` |
 | `Chromatic.conjectures.X210.surface_conflict_colouring_sqrt_genus_statement` / arxiv:1803.10962#00 | `Chromatic.migration.surface_embeddable.surface_conflict_colouring_sqrt_genus_statement_compat` |
+
+Source weakenings after migration: ONE-WAY source-repair certificates (`frozen -> live`), not migration equivalences; every other row keeps its exact iff: `Chromatic.conjectures.X210.surface_conflict_colouring_sqrt_genus_statement` (`exists C C' : nat, forall (G : sgraph) (g k : nat), x210_euler_genus_embeddable G g -> C' * g <= k * k -> x210_conflict_k_colourable_under_bound G k C` -> `exists p q p' q' : nat, [/\ 0 < p, 0 < q, 0 < p', 0 < q' & forall (G : sgraph) (g k : nat), connected [set: G] -> 0 < k -> x210_euler_genus_embeddable G g -> p' * g <= q' * (k * k) -> x210_conflict_k_colourable_under_rat_bound G k p q]`; record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `implemented_by`, `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `commit`, `note`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py surface_embeddable --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
