@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py uniform_hypergraph --details /t
 
 - Canonical: `GTBase.hypergraph_uniformity.uniform_family`.
 - Baseline: `3be65eed7084abfae36dee74f7117b598325bc4c`.
-- Scope: 11 helpers, 20 statements, 44 frozen objects, 165 recorded references.
-- Source checks: 451/451 pass; consistent.
+- Scope: 11 helpers, 20 statements, 44 frozen objects, 174 recorded references.
+- Source checks: 454/454 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -33,6 +33,8 @@ Full evidence: `python3 meta/migration_report.py uniform_hypergraph --details /t
 | `Chromatic.conjectures.U5.a_generalization_of_vizings_theorem_statement` / opg:a_generalization_of_vizings_theorem | `Chromatic.migration.uniform_hypergraph.a_generalization_of_vizings_theorem_statement_compat` |
 
 Source repairs after migration: ONE-WAY source-repair certificates (`live -> frozen`), not migration equivalences; every other row keeps its exact iff: `Hypergraph.conjectures.U12.turans_problem_for_hypergraphs_statement` (`#|T| = 3 * n -> ~ contains_complete E 4 3 -> 2 * #|E| <= n ^ 2 * (5 * n - 3)` -> `(#|T| = 3 * n -> ~ contains_complete E 4 3 -> 2 * #|E| <= n ^ 2 * (5 * n - 3)) /\ (#|T| = 2 * n -> ~ contains_complete E 5 3 -> #|E| <= n ^ 2 * (n - 1))`; record `meta/STATEMENT_IMPROVEMENTS.md`).
+
+Source re-encodings after migration: certificates of each record's stated relation, not migration equivalences: `Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement` (`x209_is_min_scaled_excess r k m (excess m)` -> `x209_is_min_mc_scaled_excess r k m (excess m)`; relation `({frozen} -> True) /\ ({live} -> True)`; record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `implemented_by`, `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `commit`, `note`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py uniform_hypergraph --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
