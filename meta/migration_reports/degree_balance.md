@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py degree_balance --details /tmp/m
 
 - Canonical: `Digraph.foundations.degree_balance.balanced`.
 - Baseline: `298112264b7c31820acf889c6da29b710fd39c9a`.
-- Scope: 4 helpers, 8 statements, 17 frozen objects, 155 recorded references.
-- Source checks: 280/280 pass; consistent.
+- Scope: 4 helpers, 8 statements, 17 frozen objects, 156 recorded references.
+- Source checks: 283/283 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
@@ -20,7 +20,7 @@ Full evidence: `python3 meta/migration_report.py degree_balance --details /tmp/m
 | `Cycle.conjectures.U6.decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement` / opg:decomposing_an_eulerian_graph_into_cycles_with_no_two_consecutives_edges_on_a_prescirbed_eulerian_tour | `Cycle.migration.eulerian.decomposing_an_eulerian_graph_into_cycles_with_no_tw_statement_compat` |
 | `Cycle.conjectures.U6.decomposing_eulerian_graphs_statement` / opg:decomposing_eulerian_graphs | `Cycle.migration.eulerian.decomposing_eulerian_graphs_statement_compat` |
 
-Source weakenings after migration: ONE-WAY source-repair certificates (`frozen -> live`), not migration equivalences; every other row keeps its exact iff: `Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement` (`eulerian D ->` -> `loopless D -> eulerian D ->`; record `meta/STATEMENT_IMPROVEMENTS.md`).
+Source weakenings after migration: ONE-WAY source-repair certificates (`frozen -> live`), not migration equivalences; every other row keeps its exact iff: `Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement` (`x221_eulerian_avoidable (x221_c4or b)` -> `x221_eulerian_avoidable_sub (x221_c4or b)`; record `meta/STATEMENT_IMPROVEMENTS.md`; row fields `source_verified_by`, `source_verified_at`, `verification_note`; leg fields `statement`, `note`), `Digraph.conjectures.colouring_variants.majority_3col_eulerian_statement` (`eulerian D ->` -> `loopless D -> eulerian D ->`; record `meta/STATEMENT_IMPROVEMENTS.md`).
 
 Source checks compare frozen text, registry and statement coverage, bridge endpoints, and unchanged statement metadata. They do not prove theorem types.
 `python3 meta/migration_report.py degree_balance --check --kernel` checks exact closed statement equivalences and all named theorem assumptions in already-built modules.
