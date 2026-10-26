@@ -1,5 +1,5 @@
 {
- "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
+ "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 2 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
  "schema_version": 1,
  "provenance": {
   "graph_conjectures_commit": "b72c5857060addbe4523016e88ae3aa626e958fd",
@@ -25,10 +25,10 @@
    "others": 1
   },
   "by_status": {
-   "disproved": 82,
-   "open": 1356,
+   "disproved": 83,
+   "open": 1354,
    "partial": 153,
-   "solved": 199
+   "solved": 200
   },
   "by_kind": {
    "Conjecture": 659,
@@ -5179,8 +5179,8 @@
    "source_verified_at": "2026-10-25",
    "verification_note": "Authored in X184.v:z5_antisymmetric_flow_edge_connectivity_statement. Re-encoded 2026-10-25 (coordination/PROGRAMME.md A1): the antisymmetry condition of a Z5-antisymmetric flow is now part of x184_z5_antisymmetric_flow (it was absent, faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: z5_antisymmetric_flow_edge_connectivity_statement.",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "solved",
+   "status_semantics": "Literature: solved in its own source, arXiv:1701.03366 (SIAM J. Discrete Math. 32 (2018)), Corollary 13(iv): every directed 12-edge-connected graph has a Z_5-antisymmetric flow (k = 12).",
    "review_status": "open",
    "review_date": "2026-05-15",
    "review_confidence": "high",
@@ -104404,8 +104404,8 @@
    "source_verified_at": "2026-07-11",
    "verification_note": "Authored in X21.v:nydl_tree_l_deck_reconstruction_statement. Encodes the Nydl tree deck row: for n>=4 and ell>=floor(n/2)+1, two n-vertex trees with the same ell-deck are isomorphic.",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "disproved",
+   "status_semantics": "Literature: false as printed; arXiv:2103.13359v3, Figure 1, gives two non-isomorphic trees on 13 vertices with the same 7-deck, and n = 13, ell = 7 meets every hypothesis.",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
