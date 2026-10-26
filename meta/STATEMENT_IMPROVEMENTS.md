@@ -1119,6 +1119,16 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
   `irreflexive (@arc D)`, the body of `two_extremal.loopless` (`meta/probe_hints/linial_berge_statement.v`;
   non-vacuity `conjectures/grounding_unvd_sad.v:linial_berge_hyps_nonvacuous`). No edge uses the row.
+- `opg:partitionning_a_tournament_into_k_strongly_connected_subtournaments` →
+  `conjectures/P9.v:partitionning_a_tournament_into_k_strongly_connected_statement` — **refutable
+  (empty list)** (found 2026-10-25, Marc's decision 5). For `ks = [::]` the positivity hypothesis holds
+  vacuously and some tournament is g([::])-strong, so it has a vertex, but it has no partition into zero
+  parts. **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
+  `0 < size ks` (`meta/probe_hints/partitionning_a_tournament_into_k_strongly_connected_statement.v`).
+  The existence of k-strong tournaments for every k, which both the refutation and the non-vacuity need,
+  is `conjectures/grounding_P9.v:kstrong_tournament_exists` (rotational tournaments on 2(k+1)+1
+  vertices; `RT_del_strong`); non-vacuity `conjectures/grounding_P9.v:partition_hyps_nonvacuous`. No edge
+  uses the row.
 - `arxiv:1608.03040#04` (Open Problem 3) →
   `conjectures/colouring_variants.v:majority_3col_eulerian_statement` — **too strong (mild)**.
   `eulerian` keeps only the balanced-degree condition and drops connectivity, so the hypothesis is
