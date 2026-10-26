@@ -45,10 +45,11 @@
     },
     "arrows": {
       "class": "candidate_family",
-      "reason": "Ramsey arrows; X195 general, X215 the diagonal two-colour case",
+      "reason": "Ramsey arrows; X195 general, X215 the diagonal two-colour case, X230 a single graph pattern in two colours",
       "members": [
         "Extremal.conjectures.X195.x195_arrows",
-        "Extremal.conjectures.X215.x215_arrows"
+        "Extremal.conjectures.X215.x215_arrows",
+        "Extremal.conjectures.X230.x230_arrows"
       ],
       "family_id": "ramsey-arrows",
       "milestone": "post-rc-library-wave"
@@ -579,6 +580,14 @@
       ],
       "family": "matching",
       "kind": "bridge"
+    },
+    "mono_copies": {
+      "class": "paper_specific",
+      "reason": "different notions: D2ram counts colour-respecting maps of H into a 2-colouring of K_n, X230 counts unlabelled copies of H in a graph plus those in its complement",
+      "members": [
+        "Extremal.conjectures.D2ram.mono_copies",
+        "Extremal.conjectures.X230.x230_mono_copies"
+      ]
     },
     "no_sources": {
       "class": "candidate_family",
@@ -1389,6 +1398,7 @@
     "Extremal.conjectures.X223.x223_anticomplete": "retain:frozen-statement",
     "Extremal.conjectures.X223.x223_bipartite_dg": "retain:frozen-statement",
     "Extremal.conjectures.X223.x223_edges_between": "retain:frozen-statement",
+    "Extremal.conjectures.X230.x230_ramsey_number": "retain:frozen-statement",
     "Extremal.conjectures.X30.x30_min_degree_at_least": "retain:frozen-statement",
     "Extremal.conjectures.X36.x36_degree_in_edge_set": "retain:frozen-statement",
     "Extremal.conjectures.X36.x36_edge_set": "retain:frozen-statement",
