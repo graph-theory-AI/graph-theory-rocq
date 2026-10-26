@@ -7,7 +7,11 @@
       stays live there.
     - [X187Original], [X192Original]: the complete rows.  X187 composes C5's frozen proper 3-colouring; X192 composes
       C11's frozen excluded-minor class with the frozen chain.  Earlier families' modules are aliased, not imported;
-      each bridge reuses the earlier certificate. *)
+      each bridge reuses the earlier certificate.
+    - X132 source repair (2026-10-25, coordination/PROGRAMME.md A2; record meta/STATEMENT_IMPROVEMENTS.md): the frozen
+      [X132Legacy] row is false ([X132Legacy_row_false]) and the live row asks for lists of size exactly 5, 4 and 3.
+      Its certificate is a ONE-WAY source-repair certificate [frozen -> live] (direction "weaken"), not a migration
+      equivalence; the file's other certificates keep their exact iffs. *)
 From Corelib Require Import Setoid Morphisms.
 From GTBase Require Import base.
 From Chromatic.conjectures Require Import X132 X187 X192.
@@ -132,13 +136,47 @@ split=> -[p [cost h]]; exists p; split=> // G [CG tf]; apply: h; split=> //;
   exact/x192_triangle_free_compat.
 Qed.
 
+(** X132 SOURCE REPAIR (2026-10-25, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md), not a migration
+    equivalence.  The frozen row asks for lists of size AT LEAST 5, 4 and 3 while the total request weight sums over
+    every listed colour, so it is false: the planar one-vertex graph with one list of q+5 colours, each requested with
+    weight 1, has total request q+5 and satisfied weight 1.  The live row asks for lists of size exactly 5, 4 and 3
+    ([x132_weighted_flexible_exact]); its certificate is ONE-WAY, [frozen -> live] (direction "weaken"), with the
+    same p/q: a list of size exactly k has size at least k, and only the triangle-free hypothesis is converted. *)
+Lemma x132_K1_planar : wagner_planar 'K_1.
+Proof.
+split=> /minor_card; rewrite card_ord /=.
+  by rewrite card_ord.
+by rewrite card_sum !card_ord.
+Qed.
+
+Lemma X132Legacy_row_false : ~ X132Legacy.dvorak_norin_postle_planar_list_flexibility_statement.
+Proof.
+move=> [p [q [hp _ /(_ 'K_1 x132_K1_planar) [[_ [_ hfl]] _]]]].
+have hsz : forall v : ('K_1 : sgraph), (5 <= #|[set: 'I_(q + 5)]|)%N.
+  by move=> v; rewrite cardsT card_ord leq_addl.
+have [f [_ hf]] := hfl 'I_(q + 5) (fun _ => setT) (fun _ _ => 1%N) hsz.
+move: hf; rewrite /weighted_request_total /weighted_request_satisfied.
+have -> : \sum_(v : ('K_1 : sgraph)) \sum_(c in [set: 'I_(q + 5)]) 1 = q + 5.
+  by rewrite big_ord1 sum1_card cardsT card_ord.
+have -> : \sum_(v : ('K_1 : sgraph)) 1 = 1 by rewrite big_ord1.
+rewrite muln1 => h.
+have : (q + 5 <= q)%N by apply: leq_trans h; rewrite leq_pmull.
+by rewrite -{2}(addn0 q) leq_add2l.
+Qed.
+
+Lemma x132_exact_of_at_least (G : sgraph) (k p q : nat) :
+  weighted_epsilon_flexible G k p q -> x132_weighted_flexible_exact G k p q.
+Proof. by move=> [_ [_ h]] C L w hL; apply: h => v; rewrite hL. Qed.
+
 Lemma dvorak_norin_postle_planar_list_flexibility_statement_compat :
-  X132Legacy.dvorak_norin_postle_planar_list_flexibility_statement <->
+  X132Legacy.dvorak_norin_postle_planar_list_flexibility_statement ->
   dvorak_norin_postle_planar_list_flexibility_statement.
 Proof.
-split=> -[p [q [p0 pq h]]]; exists p, q; split=> // G gp;
-  have [h5 [h4 h3]] := h G gp; split=> //; split=> // tf; apply: h4;
+move=> [p [q [p0 pq h]]]; exists p, q; split=> // G gp.
+have [h5 [h4 h3]] := h G gp; split; first exact: x132_exact_of_at_least.
+split=> [tf|g5]; apply: x132_exact_of_at_least; first apply: h4.
   exact/x132_triangle_free_compat.
+exact: h3.
 Qed.
 
 Lemma planar_triangle_free_request_graph_fraction_statement_compat :
