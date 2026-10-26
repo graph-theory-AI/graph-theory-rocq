@@ -770,7 +770,7 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   also the value-estimation form (no routing witness demanded).  Both documented in `Notes:`.
 - `opg:complexity_of_the_h_factor_problem` (`D7.v:348`) carries two guards absent from the source
   text but needed to keep the statement open rather than refutable: `H` connected on at least
-  four vertices (K1 and K2 are in P), and `a < b`, i.e. `0 < c < 1` (at `c = 1` the instance
+  three vertices (K1 and K2 are in P), and `a < b`, i.e. `0 < c < 1` (at `c = 1` the instance
   class is empty).
 - `opg:finding_k_edge_outerplanar_graph_embeddings` (`D7.v:530`) uses a documented proxy for
   k-edge-outerplanarity (a planar graph with an edge-layering into outerplanar levels); the

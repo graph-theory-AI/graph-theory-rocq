@@ -314,17 +314,11 @@ Definition hfactor_problem (H : sgraph) (a b : nat) : problem :=
      psize  := fun GH => #| sval GH |;
      pmem   := fun GH => h_factor H (sval GH) |}.
 
-(* Non-triviality guard on [H] (faithfulness): with only [0 < #|H|] the claim is
-   refutable — H = K1 makes every graph a YES-instance (in P) and H = K2 is a
-   perfect matching (Edmonds, in P), so [NP_hard] would be FALSE rather than
-   open.  We restrict to the regime the source intends ("a fixed graph H"): H
-   CONNECTED on at least 3 vertices (the Hell–Kirkpatrick threshold of a
-   component of order >= 3), where NP-hardness is the genuine OPEN question. *)
 (** Corpus row: opg:complexity_of_the_h_factor_problem
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/complexity_of_the_h_factor_problem/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/complexity_of_the_h_factor_problem.json
     English statement: (Open Problem Garden, "Complexity of the H-factor problem")
-      For every finite simple graph H that is connected and has more than three vertices, and
+      For every finite simple graph H that is connected and has at least three vertices, and
       for all natural numbers a < b with a > 0, the decision problem whose instances are the
       graphs G with a * |V(G)| <= b * deg(v) for every vertex v, and whose yes-instances are
       those G admitting an H-factor (a family of vertex-disjoint injective homomorphic copies
@@ -343,7 +337,7 @@ Definition hfactor_problem (H : sgraph) (a b : nat) : problem :=
       (abstract cost bounds rather than the [prog] model): the claim is universal, hence not
       vacuous in that reading.  "Polynomial" is the concrete bound n |-> a*n^d + b, the
       repo-wide convention.  Two guards depart from the literal source text and are
-      load-bearing.  (i) H is restricted to be connected with at least four vertices: with only
+      load-bearing.  (i) H is restricted to be connected with at least three vertices: with only
       |V(H)| > 0 the claim is refutable, since H = K1 makes every graph a yes-instance and
       H = K2 is perfect matching (Edmonds), both in P; the source's "a fixed graph H" is read
       as the Hell-Kirkpatrick regime of a component of order at least 3.  (ii) the density
