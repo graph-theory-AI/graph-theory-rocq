@@ -285,7 +285,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
-- Statement legs over the 1673 non-alias rows: **423 done** · 10 partial · 43 blocked · 1197 todo.
+- Statement legs over the 1673 non-alias rows: **425 done** · 9 partial · 42 blocked · 1197 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -411,7 +411,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X206 | 1 | 0 | 0 | 0 | 1 |
 | X207 | 0 | 0 | 1 | 0 | 1 |
 | X208 | 1 | 0 | 0 | 0 | 1 |
-| X209 | 0 | 1 | 0 | 0 | 1 |
+| X209 | 1 | 0 | 0 | 0 | 1 |
 | X21 | 3 | 0 | 0 | 0 | 3 |
 | X210 | 0 | 1 | 0 | 0 | 1 |
 | X211 | 6 | 0 | 1 | 0 | 7 |
@@ -425,7 +425,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X219 | 6 | 0 | 1 | 0 | 7 |
 | X22 | 1 | 0 | 0 | 0 | 1 |
 | X220 | 10 | 0 | 0 | 0 | 10 |
-| X221 | 6 | 0 | 1 | 0 | 7 |
+| X221 | 7 | 0 | 0 | 0 | 7 |
 | X223 | 5 | 0 | 1 | 0 | 6 |
 | X225 | 4 | 0 | 0 | 0 | 4 |
 | X226 | 4 | 0 | 0 | 0 | 4 |
@@ -528,5 +528,5 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 - **225 edges** from clone `b72c585` — by relation equivalent_to 8, implies 159, related_only 42, same_conjecture 16; by verdict confirmed 214, plausible 11; 0 endpoints without a manifest row.
 - **113 of the 167 implies/equivalent_to edges have both endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool for `implications_X2nn.v`.
 - **108 edges are already mirrored by a Rocq `@EDGE`** (implies→`implies`, equivalent_to→`equiv`; `same_conjecture`/`related_only` are never mirrored).
-- **78 distinct endpoints of *confirmed* implies/equivalent_to edges own no done statement** — each is a row whose formalization would unlock at least one cross-check.
+- **77 distinct endpoints of *confirmed* implies/equivalent_to edges own no done statement** — each is a row whose formalization would unlock at least one cross-check.
 

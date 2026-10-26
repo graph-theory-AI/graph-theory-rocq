@@ -6,7 +6,7 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 1923,
+      "cross_file_declarations": 1930,
       "cross_file_files": 1022,
       "implicit_use": 3,
       "packages_without_project": [
@@ -6432,7 +6432,7 @@
           "declarations": [
             "digraph-theory/theories/conjectures/grounding_X221.v:x221_C3_eulerian",
             "digraph-theory/theories/conjectures/grounding_X221.v:x221_TT2_not_eulerian",
-            "digraph-theory/theories/migration/directed_neighbourhood.v:<line 497>",
+            "digraph-theory/theories/migration/directed_neighbourhood.v:<line 502>",
             "digraph-theory/theories/migration/directed_neighbourhood.v:x221_eulerian_original_compat"
           ],
           "files": [
@@ -6462,7 +6462,8 @@
         },
         "same_file": {
           "declarations": [
-            "x221_eulerian_avoidable"
+            "x221_eulerian_avoidable",
+            "x221_eulerian_avoidable_sub"
           ],
           "statements": [
             "orientation_C4_eulerian_avoidable_statement"
@@ -7610,8 +7611,8 @@
             "digraph-theory/theories/conjectures/implications2.v:conj9_weaken_const",
             "digraph-theory/theories/conjectures/implications_X221.v:<line 44>",
             "digraph-theory/theories/conjectures/reals_growth.v:<line 53>",
-            "digraph-theory/theories/migration/degree_balance.v:<line 42>",
-            "digraph-theory/theories/migration/directed_neighbourhood.v:<line 69>"
+            "digraph-theory/theories/migration/degree_balance.v:<line 50>",
+            "digraph-theory/theories/migration/directed_neighbourhood.v:<line 74>"
           ],
           "files": [
             "digraph-theory/theories/conjectures/X1.v",
@@ -18800,8 +18801,18 @@
         "implicit_use": false,
         "own_certificate": {
           "declarations": [
-            "hypergraph-theory/theories/migration/cut_size.v:<line 81>",
-            "hypergraph-theory/theories/migration/cut_size.v:x209_cut_size_compat"
+            "hypergraph-theory/theories/migration/cut_size.v:<line 126>",
+            "hypergraph-theory/theories/migration/cut_size.v:<line 276>",
+            "hypergraph-theory/theories/migration/cut_size.v:<line 277>",
+            "hypergraph-theory/theories/migration/cut_size.v:<line 286>",
+            "hypergraph-theory/theories/migration/cut_size.v:<line 290>",
+            "hypergraph-theory/theories/migration/cut_size.v:<line 291>",
+            "hypergraph-theory/theories/migration/cut_size.v:<line 334>",
+            "hypergraph-theory/theories/migration/cut_size.v:<line 86>",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_cut_defect",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_cut_size_compat",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_fano_cut_le",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_five_cut_all"
           ],
           "files": [
             "hypergraph-theory/theories/migration/cut_size.v"
@@ -18813,9 +18824,7 @@
           "declarations": [
             "x209_is_max_r_cut"
           ],
-          "statements": [
-            "hypergraph_cut_excess_theta_sqrt_statement"
-          ]
+          "statements": []
         }
       },
       {
@@ -18826,7 +18835,14 @@
           ],
           "declarations": [
             "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v:x209_uniform_equiv_hg_uniform",
-            "hypergraph-theory/theories/migration/cut_size.v:is_min_scaled_excess"
+            "hypergraph-theory/theories/migration/cut_size.v:is_min_scaled_excess",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_fano_uniform",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_five_cut_all",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_five_excess",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_five_max_cut",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_five_missing",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_old_min_not_minimal",
+            "hypergraph-theory/theories/migration/cut_size.v:x209_seven_triples_five"
           ],
           "files": [
             "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
@@ -18857,6 +18873,7 @@
         },
         "same_file": {
           "declarations": [
+            "x209_is_min_mc_scaled_excess",
             "x209_is_min_scaled_excess"
           ],
           "statements": [
@@ -24382,12 +24399,12 @@
   },
   "counts": {
     "files": 324,
-    "helpers": 2585,
+    "helpers": 2598,
     "repeated_body_shapes": 148,
     "repeated_normalized_names": 214,
-    "repeated_signature_shapes": 312,
+    "repeated_signature_shapes": 317,
     "statements_excluded": 705,
-    "x_wave_helpers": 1428
+    "x_wave_helpers": 1441
   },
   "groups": {
     "body_shape_hash": {
@@ -25059,6 +25076,7 @@
         "Cycle.conjectures.X212.x212_edge_colour_sym",
         "Digraph.conjectures.X2.x2_induced_irrefl",
         "Digraph.conjectures.X2.x2_induced_sym",
+        "Digraph.conjectures.X221.x221_sub_guard_teeth",
         "Digraph.conjectures.chi_bounded.m3_landmark_refutes_2bound",
         "Digraph.conjectures.chi_bounded.urel_irrefl",
         "Digraph.conjectures.chi_bounded.urel_sym",
@@ -25340,6 +25358,11 @@
         "Hom.conjectures.X227.x227_kneser_irrefl",
         "Hom.conjectures.X227.x227_kneser_sym",
         "Hypergraph.conjectures.X119.x119_sqrt_ex",
+        "Hypergraph.conjectures.X209.x209_stirling2_2_3",
+        "Hypergraph.conjectures.X209.x209_stirling2_3_2",
+        "Hypergraph.conjectures.X209.x209_stirling2_3_3",
+        "Hypergraph.conjectures.X209.x209_stirling2_k_1",
+        "Hypergraph.conjectures.X209.x209_stirling2_k_2",
         "Hypergraph.conjectures.vocabulary_hypergraph.b2i2K",
         "Hypergraph.conjectures.vocabulary_hypergraph.i22bK",
         "Hypergraph.conjectures.vocabulary_hypergraph.k_uniform_equiv_hg_uniform",
@@ -26701,6 +26724,10 @@
         "Digraph.conjectures.packing.in_branching",
         "Digraph.conjectures.packing.out_branching"
       ],
+      "0b4b036208ef82e819d0edd623094e085df379a7bd639466f5081ea9a773c660": [
+        "Hypergraph.conjectures.X209.x209_cut_edge",
+        "Hypergraph.conjectures.X209.x209_multicoloured"
+      ],
       "0bae8f16ee0b381536cb1f07eb57f52b4be719e72f2739e0073bb1b84350db06": [
         "Chromatic.conjectures.X194.x194_clustered_chromatic_minor_class_le",
         "Chromatic.conjectures.X218.x218_connected_treedepth_at_most"
@@ -26799,6 +26826,10 @@
       "1ac9d0a035fbbd92d982d6d8e7c74c19aca498bfd358f821b14e02151fa1db63": [
         "Digraph.conjectures.two_extremal_glue.sumarc",
         "Digraph.conjectures.two_extremal_glue.vrel"
+      ],
+      "1b2b8d872e44bcf421b833a967b47163b7b071eecf63bf25ef35dd40a2134931": [
+        "Hypergraph.conjectures.X209.x209_mc_scaled_excess",
+        "Hypergraph.conjectures.X209.x209_scaled_excess"
       ],
       "1b97167380b182c9e28fe5118899e974aabfa5931b452a8817bc9076e3d8c927": [
         "Hypergraph.conjectures.XE1.xe1_complete_piece",
@@ -27087,6 +27118,10 @@
       "3215d17d3a08bbe439ee5b98f3cda3d6aaf4f15b9e21bad2708f8ff3dce09498": [
         "Digraph.conjectures.X179.x179_k_arc_strongly_connected",
         "Digraph.conjectures.X179.x179_k_vertex_strongly_connected"
+      ],
+      "33da659f88c53b7f40973f74c1720cf96bffbf5e7c4b8cbd18846d374675a91b": [
+        "Hypergraph.conjectures.X209.x209_is_min_mc_scaled_excess",
+        "Hypergraph.conjectures.X209.x209_is_min_scaled_excess"
       ],
       "34f243eae13d14ba706dff08be5d7ff8a809788c1122e46f7b94fdf61801bc95": [
         "Minor.conjectures.X220.x220_wall_r0",
@@ -27571,6 +27606,10 @@
         "Packing.conjectures.X226.x226_f",
         "Packing.conjectures.X226.x226_f_dim_le2"
       ],
+      "8334fdd37e430402e17c119791d624e9315c44aa862af2e7a42d8100660bbad8": [
+        "Hypergraph.conjectures.X209.x209_cut_size",
+        "Hypergraph.conjectures.X209.x209_mc_cut_size"
+      ],
       "84565ca2fb40a4e6a2d49d4dc91982b4edb987ef99a1f0ffc88f088fbe052064": [
         "Extremal.conjectures.X98.x98_model_vertex",
         "GTMisc.conjectures.X114.x114_model_vertex"
@@ -27604,6 +27643,10 @@
         "Hypergraph.conjectures.X119.x119_no_isolated",
         "Hypergraph.conjectures.X72.x72_intersecting",
         "Hypergraph.conjectures.XE1.xe1_intersecting_hypergraph"
+      ],
+      "89aa86f47156b829bb5d72f3f44f64c2190f00ea79792a1fe3137bcf0d234396": [
+        "Hypergraph.conjectures.X209.x209_is_max_mc_cut",
+        "Hypergraph.conjectures.X209.x209_is_max_r_cut"
       ],
       "8a792fd392fd79c0dd49fbd381541d2cf9699230adc19428015455bd1695747b": [
         "Chromatic.conjectures.X3.x3_holes_of_consecutive_lengths",
@@ -27879,7 +27922,8 @@
       ],
       "b2a8179a1f330346872603387f89ef5e02aaa9bbf3e10b300266a0fe5d38b0ce": [
         "Digraph.conjectures.X2.delta_plus_maderian",
-        "Digraph.conjectures.X221.x221_eulerian_avoidable"
+        "Digraph.conjectures.X221.x221_eulerian_avoidable",
+        "Digraph.conjectures.X221.x221_eulerian_avoidable_sub"
       ],
       "b349edbd8727460c5c27fae24985aaf8e8bf31eebc8916f711a74ad4c152d099": [
         "Chromatic.conjectures.X3.x3_stable_set",
@@ -42018,7 +42062,8 @@
       "body_shape_hash": "feb3e84a1bc87cd86889fef44671f7e5757d03fe2303a4fb97e3c42e64f39631",
       "declaration_hash": "2897a2d4d65a568087783968ec9534d2e88241d7dda6ded07209f5a32547ec9f",
       "direct_consumers": [
-        "Digraph.conjectures.X221.x221_eulerian_avoidable"
+        "Digraph.conjectures.X221.x221_eulerian_avoidable",
+        "Digraph.conjectures.X221.x221_eulerian_avoidable_sub"
       ],
       "kind": "Definition",
       "line": 126,
@@ -42036,9 +42081,7 @@
       "body_hash": "8128a3c0e1cb8e424992f122ae72bfacaa297b20efd9d5a7d2824f245100380f",
       "body_shape_hash": "d746698e7dd075ee19f6cd0f673af05c0cb571bb6e8e7b648c970f4d596320f6",
       "declaration_hash": "d69957426e2d03e02077f70ed5394f379291753255757e280fa6d5ac1f56b754",
-      "direct_consumers": [
-        "Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 137,
       "local_dependencies": [
@@ -42054,6 +42097,44 @@
       "signature_shape_hash": "b2a8179a1f330346872603387f89ef5e02aaa9bbf3e10b300266a0fe5d38b0ce"
     },
     {
+      "body_hash": "a6f8ed37f8a1c00d69b74e1e9386bf2a304a46cb5dd93670d7347078a7e26fef",
+      "body_shape_hash": "e9ae4ce1c776caf367c06d4bb5144e33d3d1637cfd5eb0637cb7d1740a5bc6b0",
+      "declaration_hash": "de956b7e25d00ec80e111f7fed23e05d4100352d5b164ba7dd2ae30883b51ce3",
+      "direct_consumers": [
+        "Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement"
+      ],
+      "kind": "Definition",
+      "line": 145,
+      "local_dependencies": [
+        "x221_eulerian"
+      ],
+      "name": "x221_eulerian_avoidable_sub",
+      "normalized_name": "eulerian_avoidable_sub",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "phase": "X221",
+      "qualified_name": "Digraph.conjectures.X221.x221_eulerian_avoidable_sub",
+      "signature": "(F : diGraphType) : Prop",
+      "signature_shape_hash": "b2a8179a1f330346872603387f89ef5e02aaa9bbf3e10b300266a0fe5d38b0ce"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "978eb0b8842f4e50f0614fa1cdd5144c8923270a75de402b16ada089c4624e3a",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 157,
+      "local_dependencies": [],
+      "name": "x221_sub_guard_teeth",
+      "normalized_name": "sub_guard_teeth",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X221.v",
+      "phase": "X221",
+      "qualified_name": "Digraph.conjectures.X221.x221_sub_guard_teeth",
+      "signature": "(F : diGraphType) (k : nat) (D : diGraphType) : (0 < #|F|)%N -> exists (S : {set D}) (f : induced_digraph S -> {set induced_digraph S}), (forall v : outsel f, (k <= outdeg v)%N) /\\ ~ contains_subdigraph F (outsel f)",
+      "signature_shape_hash": "19e0b68f9db47ed9491e61561723500992af5599d578dcab7c42b2a33778b7ac"
+    },
+    {
       "body_hash": "ab3e1577905af88a83c994ea5752510ee9d6fe39be533bc5934b47ae3c253f2c",
       "body_shape_hash": "ab3e1577905af88a83c994ea5752510ee9d6fe39be533bc5934b47ae3c253f2c",
       "declaration_hash": "1241c11e53cd82f5bfd05c0ded26d196dfb48c905bcfae887f51eeaa1423d28f",
@@ -42061,7 +42142,7 @@
         "Digraph.conjectures.X221.orientation_C4_eulerian_avoidable_statement"
       ],
       "kind": "Definition",
-      "line": 145,
+      "line": 171,
       "local_dependencies": [],
       "name": "x221_c4or",
       "normalized_name": "c4or",
@@ -70828,6 +70909,7 @@
       "body_shape_hash": "b912fd109637af2ce26ee1e9de3ce0a260311e17f8196eec11e1b18bf60e0ba4",
       "declaration_hash": "84da58ede65f9cc54d658ff5a7e142a08f9c44942f7bca624962b93b98e800e3",
       "direct_consumers": [
+        "Hypergraph.conjectures.X209.x209_is_min_mc_scaled_excess",
         "Hypergraph.conjectures.X209.x209_is_min_scaled_excess"
       ],
       "kind": "Definition",
@@ -70944,9 +71026,7 @@
       "body_hash": "7caa384d4047eb56f9525a77f30e0c389c34342a00da087560e5fce3d0f041d6",
       "body_shape_hash": "5eea7425b7981e0d02c5b5262a4e3f636e2c47bd064e459ef313a4d2762d5035",
       "declaration_hash": "0ebb1b1bca20f6c9bf25357f74b60a4ea3f3af8da0c686d51f8e7971ae3d71f2",
-      "direct_consumers": [
-        "Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 38,
       "local_dependencies": [
@@ -70959,6 +71039,230 @@
       "path": "hypergraph-theory/theories/conjectures/X209.v",
       "phase": "X209",
       "qualified_name": "Hypergraph.conjectures.X209.x209_is_min_scaled_excess",
+      "signature": "(r k m x : nat) : Prop",
+      "signature_shape_hash": "33da659f88c53b7f40973f74c1720cf96bffbf5e7c4b8cbd18846d374675a91b"
+    },
+    {
+      "body_hash": "8dba453c2f5ace9592a5ea9db0758908e822f66448e9ce8fb7a08a9db719842d",
+      "body_shape_hash": "8dba453c2f5ace9592a5ea9db0758908e822f66448e9ce8fb7a08a9db719842d",
+      "declaration_hash": "c5189f8a7d9dc158b03bec4cbd53e43865623bf6b61408fdb68424f7e203455c",
+      "direct_consumers": [
+        "Hypergraph.conjectures.X209.x209_mc_cut_size"
+      ],
+      "kind": "Definition",
+      "line": 47,
+      "local_dependencies": [],
+      "name": "x209_multicoloured",
+      "normalized_name": "multicoloured",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_multicoloured",
+      "signature": "(T : finType) (r : nat) (col : T -> 'I_r) (e : {set T}) : bool",
+      "signature_shape_hash": "0b4b036208ef82e819d0edd623094e085df379a7bd639466f5081ea9a773c660"
+    },
+    {
+      "body_hash": "4e73fe9cc8f3df67dc8d19923e1871122a368c0e87a7554967908b7512849ae6",
+      "body_shape_hash": "715f1512d327752a1261c0066d187448b4e2382ae07ef9ca22750403c0c273cb",
+      "declaration_hash": "45ceb188924fe70e49c9400b99f6d1c5e56a69964a0edc21069a9b2a342a00d7",
+      "direct_consumers": [
+        "Hypergraph.conjectures.X209.x209_is_max_mc_cut"
+      ],
+      "kind": "Definition",
+      "line": 56,
+      "local_dependencies": [
+        "x209_multicoloured"
+      ],
+      "name": "x209_mc_cut_size",
+      "normalized_name": "mc_cut_size",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_mc_cut_size",
+      "signature": "(T : finType) (E : {set {set T}}) (r : nat) (col : T -> 'I_r) : nat",
+      "signature_shape_hash": "8334fdd37e430402e17c119791d624e9315c44aa862af2e7a42d8100660bbad8"
+    },
+    {
+      "body_hash": "c27d878f5421cb46ce8fee593fd28bda91c31cbf81d1aef4b780b90e152408f9",
+      "body_shape_hash": "8452f8c6e3016ba131a9e0ded00e8069d96aa4187c9c3ac0bce11d16c4e26376",
+      "declaration_hash": "178650a6e7e2447b7930227e904b16542857e0992ffd3044b7d062720fdc330e",
+      "direct_consumers": [
+        "Hypergraph.conjectures.X209.x209_mc_scaled_excess"
+      ],
+      "kind": "Definition",
+      "line": 60,
+      "local_dependencies": [
+        "x209_mc_cut_size"
+      ],
+      "name": "x209_is_max_mc_cut",
+      "normalized_name": "is_max_mc_cut",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_is_max_mc_cut",
+      "signature": "(T : finType) (E : {set {set T}}) (r c : nat) : Prop",
+      "signature_shape_hash": "89aa86f47156b829bb5d72f3f44f64c2190f00ea79792a1fe3137bcf0d234396"
+    },
+    {
+      "body_hash": "cdb1a865cc511d3f55d744fe3ed03d2d6b8059412fc240b364d1467ff7cdbb56",
+      "body_shape_hash": "66c5e0a8bcf7140fce5cb4aeb4697221fd89805fe9687f9ac1220ab3a50ba9ae",
+      "declaration_hash": "b275b52bf1ed97d0db48d5662964ca54c55944e51a6073b4208c7b1e88f9e2e5",
+      "direct_consumers": [
+        "Hypergraph.conjectures.X209.x209_mc_scaled_excess",
+        "Hypergraph.conjectures.X209.x209_stirling2_2_3",
+        "Hypergraph.conjectures.X209.x209_stirling2_3_2",
+        "Hypergraph.conjectures.X209.x209_stirling2_3_3",
+        "Hypergraph.conjectures.X209.x209_stirling2_k_1",
+        "Hypergraph.conjectures.X209.x209_stirling2_k_2"
+      ],
+      "kind": "Fixpoint",
+      "line": 66,
+      "local_dependencies": [],
+      "name": "x209_stirling2",
+      "normalized_name": "stirling2",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_stirling2",
+      "signature": "(k r : nat) : nat",
+      "signature_shape_hash": "b705e95549aeebd1246aa018cbffd4c6b7a2b6a896dc75480c4d960354441eb0"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "5a5cf028d7e9097d63452aa4caf366d184f17e5015bfc59888e53695f0341e8c",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 75,
+      "local_dependencies": [
+        "x209_stirling2"
+      ],
+      "name": "x209_stirling2_3_2",
+      "normalized_name": "stirling2_3_2",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_stirling2_3_2",
+      "signature": ": x209_stirling2 3 2 * 2`! = 6",
+      "signature_shape_hash": "e50ecc6cd2b377cda4389070a44e13db0a80c42a2f4b61559c5c8d541784725d"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "d4c602cbae6c31357cc37d48619098906ae32551fa928e70a09a877c573ca08d",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 79,
+      "local_dependencies": [
+        "x209_stirling2"
+      ],
+      "name": "x209_stirling2_3_3",
+      "normalized_name": "stirling2_3_3",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_stirling2_3_3",
+      "signature": ": x209_stirling2 3 3 * 3`! = 6",
+      "signature_shape_hash": "d14a6388d37c68d71170f89ce6a36c72371678e289d4002be253a4663be27ab3"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "2ac3726a3ba107d870ca13c4b7a959402f3204e836a2c9e71175f2ff6b1f7c07",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 82,
+      "local_dependencies": [
+        "x209_stirling2"
+      ],
+      "name": "x209_stirling2_2_3",
+      "normalized_name": "stirling2_2_3",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_stirling2_2_3",
+      "signature": ": x209_stirling2 2 3 = 0",
+      "signature_shape_hash": "cf9409c34de514977c89f6c57f25e05ac13d6e45dff8fcded28d247e0e8ae614"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "aab8dfc07c1686df1a26ba96007f9e9ee861cea5e7a14285012e58a8cff4fe8c",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 85,
+      "local_dependencies": [
+        "x209_stirling2"
+      ],
+      "name": "x209_stirling2_k_1",
+      "normalized_name": "stirling2_k_1",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_stirling2_k_1",
+      "signature": "(k : nat) : 0 < k -> x209_stirling2 k 1 = 1",
+      "signature_shape_hash": "154989a3c730e2d60b7851750102f5e6ff0ef5cf6b3395b927a385c381c3ba8a"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "c1c57e975829cfc6a35afd19b45ce6b7f0f2db5bbce14d2bcc51452f61cee907",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 91,
+      "local_dependencies": [
+        "x209_stirling2"
+      ],
+      "name": "x209_stirling2_k_2",
+      "normalized_name": "stirling2_k_2",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_stirling2_k_2",
+      "signature": "(k : nat) : 0 < k -> x209_stirling2 k 2 * 2`! + 2 = 2 ^ k",
+      "signature_shape_hash": "6f210aa3418308081815efeeb46bbf9d5a5bf737eac64d34c819fb5640f151a3"
+    },
+    {
+      "body_hash": "0484d4de594619055794c77cc4503374fdaedda461e0bec4eea2f322a3e8629d",
+      "body_shape_hash": "4a846061222b86cff364640ad3c6656926ba1926436dd2fdc7c14947662f73f6",
+      "declaration_hash": "0e2a4ccb192e27c6b63ef7e213c06a66e830b711445cfa3c0f79b6478c924036",
+      "direct_consumers": [
+        "Hypergraph.conjectures.X209.x209_is_min_mc_scaled_excess"
+      ],
+      "kind": "Definition",
+      "line": 101,
+      "local_dependencies": [
+        "x209_is_max_mc_cut",
+        "x209_stirling2"
+      ],
+      "name": "x209_mc_scaled_excess",
+      "normalized_name": "mc_scaled_excess",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_mc_scaled_excess",
+      "signature": "(T : finType) (E : {set {set T}}) (r k x : nat) : Prop",
+      "signature_shape_hash": "1b2b8d872e44bcf421b833a967b47163b7b071eecf63bf25ef35dd40a2134931"
+    },
+    {
+      "body_hash": "47f9d5de85ae1c721f6c927c2b22c6a6271cb20db9ada9b3db6b78228c8c61f3",
+      "body_shape_hash": "2c9e29048851b732ecd209263943dfeed94ee6360eda4f02f7f9e9bf0f93ef1f",
+      "declaration_hash": "4aabced1e5a167d7478193205afcd77fefa3f1dd2000b14f89ae662a4de936fe",
+      "direct_consumers": [
+        "Hypergraph.conjectures.X209.hypergraph_cut_excess_theta_sqrt_statement"
+      ],
+      "kind": "Definition",
+      "line": 109,
+      "local_dependencies": [
+        "x209_mc_scaled_excess",
+        "x209_uniform"
+      ],
+      "name": "x209_is_min_mc_scaled_excess",
+      "normalized_name": "is_min_mc_scaled_excess",
+      "package": "hypergraph-theory",
+      "path": "hypergraph-theory/theories/conjectures/X209.v",
+      "phase": "X209",
+      "qualified_name": "Hypergraph.conjectures.X209.x209_is_min_mc_scaled_excess",
       "signature": "(r k m x : nat) : Prop",
       "signature_shape_hash": "33da659f88c53b7f40973f74c1720cf96bffbf5e7c4b8cbd18846d374675a91b"
     },
