@@ -4434,14 +4434,14 @@
       "source_verified_by": "Arthur (source re-read at the pin b72c5857: data/arxiv_extracted/1802.03727.json, Conjecture 1.3 statement_text, 2026-10-26)",
       "source_verified_at": "2026-10-26",
       "commit": "x203-nonempty-guard-repair",
-      "faithfulness_verified_by": "",
+      "faithfulness_verified_by": "Marcol (X203 review, 2026-10-26)",
       "rows": {
         "axv_1802_03727_00": {
           "formal_name": "separation_choosability_min_degree_unbounded_statement",
           "note": "Repaired 2026-10-26 (coordination/PROGRAMME.md A2; the row is frozen by the A11 min_degree_at_least family): the guard 0 < #|G| excludes the empty graph, which refuted the old body (meta/probe_hints/separation_choosability_min_degree_unbounded_statement.v; faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: separation_choosability_min_degree_unbounded_statement."
         }
       },
-      "faithfulness_result": "REPAIRED 2026-10-26 (A2), independent review pending: the body adds the guard 0 < #|G| (a graph of minimum degree d has a vertex), which excludes the empty graph that refuted it; an unbounded x over graphs of minimum degree at least d is equivalent to the source's x_1(d) -> infinity over graphs of minimum degree exactly d (see the X203.v Notes). Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the statement is trivially FALSE (refutable), so it cannot encode an open conjecture. In chromatic-theory/theories/conjectures/X203.v, `separation_choosability_min_degree_unbounded_statement` is `exists x, (forall B, exists d, B<=x d) /\\ forall d G, x203_min_degree_at_least G d -> x203_separation_choosability_at_least G (x d)`. The `forall G : sgraph` includes the empty graph (vertex type void, 0 vertices). There, `x203_min_degree_at_least G d := forall v, "
+      "faithfulness_result": "REPAIRED 2026-10-26 (A2), independent review: Marcol APPROVE 2026-10-26 (old -> new with the same x; the old body is false; the new body is the source's Conjecture 1.3): the body adds the guard 0 < #|G| (a graph of minimum degree d has a vertex), which excludes the empty graph that refuted it; an unbounded x over graphs of minimum degree at least d is equivalent to the source's x_1(d) -> infinity over graphs of minimum degree exactly d (see the X203.v Notes). Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> blocked). Biggest faithfulness risk: the statement is trivially FALSE (refutable), so it cannot encode an open conjecture. In chromatic-theory/theories/conjectures/X203.v, `separation_choosability_min_degree_unbounded_statement` is `exists x, (forall B, exists d, B<=x d) /\\ forall d G, x203_min_degree_at_least G d -> x203_separation_choosability_at_least G (x d)`. The `forall G : sgraph` includes the empty graph (vertex type void, 0 vertices). There, `x203_min_degree_at_least G d := forall v, "
     },
     "X204": {
       "phase": "X204",
