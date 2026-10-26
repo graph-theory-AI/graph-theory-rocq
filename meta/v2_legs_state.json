@@ -75,14 +75,14 @@
    "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = the assembled dichotomy is provably FALSE, and it resolves against faithfulness: the statement is `forall C hereditary, (A1 /\\ A2) \\/ (B1 /\\ B2)` where A1=x155_log_lower_bound, B1=x155_polynomial_lower_bound both require `exists G, C G /\\ ...`. Instantiating C := (fun _:sgraph => False) — vacuously hereditary — makes A1 and B1 each False, so the whole disjunction is False regardless of B2. Machine-refuted (probe co"
   },
   "axv_1408_4257_00": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x151-x170-batch1",
+   "commit": "x156-block-tree-reencoding",
    "package": "graph-theory-misc",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the `f`-hypothesis `forall N, exists n, N<=n /\\ N<=f n` encodes \"f unbounded (limsup=∞)\", NOT the conjecture's \"f tends to ∞\", which is strictly stronger and renders the statement FALSE (machine-confirmed): an f dipping to 0 on odd n>=5 still satisfies it, forcing certificate diameter sqrt_ceil(n)*f(n)=0 at infinitely many n, which GTBase.finite_graph.fg_whp's cofinite GTBase.asymptotics.eventually cann"
+   "note": "Authored in X156.v:block_tree_diameter_bound_improvement_statement. Re-encoded 2026-10-26 (coordination/PROGRAMME.md A1; frozen by no migration family): R_n uniform over the connected graphs on [n] of a block-stable class (closed under isomorphism, G in the class iff each block is; Boolean classes), and for every f tending to infinity, with high probability along the n with a connected member (l.180) the block tree bt(R_n) has diameter at most f(n) ceil(sqrt n): arXiv:1408.4257 l.302-304, up to the two-way real/natural equivalence. Original source-facing statement name preserved: block_tree_di"
   },
   "axv_1410_5292_00": {
    "statement": "todo",
