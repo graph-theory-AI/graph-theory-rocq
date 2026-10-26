@@ -6106,6 +6106,115 @@
       },
       "faithfulness_verified_by": "Arthur (X233 wave verification, 2026-10-26)",
       "faithfulness_result": "Readback 2026-10-26 (verifier Arthur): 6/6 PASS against the pinned texts and the e-prints. The bodies were read with the GTBase definitions (induced_free: no S with induced S isomorphic to H; has_subgraph: an injective hom_s map; hereditary_class: iso_closed and induced_closed; complete_between, anticomplete, triangle_set, horner_nat, Delta) and the upstream compl, subgraph and diso printed in my MCP. arxiv:2105.07370#00: x233_restricted is l.89-91 (compl(G)[X] is the complement of G[X]); N indexed sets with repeats and empty sets = at most N; a rational eps loses nothing (monotone in eps); the null H is vacuous. F1 is right: Theorem 1.4 (l.119-123, a partition) implies the row, so the paper proves it (status bookkeeping Lancelot's). arxiv:2307.06455#00: copies are the injective maps preserving and reflecting adjacency (l.162, l.498; labelled); both thresholds cross-multiply exactly; a natural d (monotone, since eps < 1) and a rational eps (jump points j/s) lose nothing; the guard 0 < |H| excludes only the null graph, for which the literal hypothesis holds for every G and the claim fails (random graphs). arxiv:2111.00532#00: blockade, width and transversal triangle are l.89-93; the encoded asymmetric |X| >= eps W, |Y| >= eps W^c is the paper's Question (l.130-135, confirmed by l.150-157), while the pinned text's symmetric form is the Erdos-Hajnal-Pach theorem for K_3 (l.113-121), so F2 (follow the paper) is right; eps = 1/p and c = 1/q lose nothing (W >= 1); the size bounds force X and Y nonempty, and the blocks make them disjoint. arxiv:2311.05500#00: d = a/b > 1 with C before n; m(H) <= d iff b e(H[S]) <= a|S| for every S (a subgraph on S has at most e(H[S]) edges); e(G) <= C n^(2-1/d) iff e(G)^a <= C^a n^(2a-b); has_subgraph is the not necessarily induced subgraph of l.101-102. arxiv:2403.08303#00: x233_close counts the ordered pairs where G and an F-graph on V(G) differ (twice the edits, so alpha n^2/2 is exact), with alpha = (a/b)^d; eps-homogeneous (l.257-258) cross-multiplied by C(|S|,2); proper = some graph outside F; natural C and d and a rational eps (jump points j/m) lose nothing; sets of size at most 1 count as homogeneous, which is harmless (every 2-set has density 0 or 1). arxiv:2307.08361#00: tau via complete_between (disjoint blocks for s >= 1), d(G) = 2e/|G| (l.213), degree-bounded l.181; natural-coefficient polynomials dominate real ones on N; the affirmative form of the question (upstream solved, Girao-Hunter). Grounding (grounding_X233.v at 28781fab, compiled with 0 holes in Marcol's run 4): each row's hyp_inhabited instance satisfies the hypotheses, each not_trivially_true variant is false and implies the row, and helper_sanity covers all ten x233_ helpers. The allowlist reasons (8169a331) are accurate; the six derived v2_legs_state entries (e5f50f88), recomputed from the wave, are identical."
+    },
+    "X234": {
+      "phase": "X234",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X234.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X234 (A3; routing Lancelot (18)/(20), design x234-design-by-marcol agreed by Lancelot (59) and Arthur (item 119)), branch math/marcol-x234-20261026, 2026-10-26",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x234-ramsey-three",
+      "rows": {
+        "axv_2207_07775_01": {
+          "formal_name": "mixed_blowup_colouring_statement",
+          "source_hash": "24eae48764c18ead5d3e9b2da4c4533efed313b668c784052137dda1d3e838a7",
+          "note": "Fox-Wigderson, Ramsey multiplicity and the Turan coloring (arXiv:2207.07775, multiplicity_aic_style.tex sha256 335c2e27), Conjecture conj:mixed (l.1114-1117): mixed blowup colourings (l.1092-1094) of K_{r(k)-1}[2] = complete_multipartite_graph (R-1) 2 (independent parts, l.1096, l.1108); r(k) = r(k,k) (l.1089) by X195's x195_ramsey_number 2; not a blowup of a Ramsey colouring = not x234_blowup_colouring; infinitely many k = for every N some k >= N (l.1121).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g234_mixed_hyp_inhabited",
+              "claim": "g234_mixed_hyp_claim",
+              "references": [
+                "mixed_blowup_colouring_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g234_mixed_not_trivially_true",
+              "claim": "g234_mixed_ntt_claim",
+              "references": [
+                "mixed_blowup_colouring_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g234_blowup_sanity",
+                "claim": "g234_blowup_claim",
+                "references": [
+                  "x234_blowup_colouring"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2312_06895_00": {
+          "formal_name": "clique_ramsey_count_statement",
+          "source_hash": "716097c9c1334c1565637e78e1cbb1b24053371d363064c7d80d4b7aeb02f228",
+          "note": "Fox-Tidor-Zhang, Triangle Ramsey numbers of complete graphs (arXiv:2312.06895, main-v2.tex sha256 a6b1c85c), Conjecture conj:clique-clique (l.96-100): H-Ramsey and r_F(H) (l.84) by X195's x195_arrows G 2 and x195_ramsey_number 2; copies of K_s = s-cliques (clique_count_size); the minimum C(R, s) = attained (K_R) and a lower bound over every K_t-Ramsey graph; Chvatal's s = 2 l.88-92; R exists by Ramsey's theorem.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g234_clique_hyp_inhabited",
+              "claim": "g234_clique_hyp_claim",
+              "references": [
+                "clique_ramsey_count_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g234_clique_not_trivially_true",
+              "claim": "g234_clique_ntt_claim",
+              "references": [
+                "clique_ramsey_count_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g234_blowup_sanity",
+                "claim": "g234_blowup_claim",
+                "references": [
+                  "x234_blowup_colouring"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2312_06895_01": {
+          "formal_name": "multicolour_clique_ramsey_count_statement",
+          "source_hash": "2eee2bc4c53d45e17e4041cfcf4af241ebdebd2da3d8972ab5cdcd230ff28b90",
+          "note": "Fox-Tidor-Zhang (arXiv:2312.06895, main-v2.tex sha256 a6b1c85c) l.134: the q-colour generalization of conj:clique-clique, stated by the paper; q colours in both the Ramsey property (x195_arrows G q) and the Ramsey number (r_q, x195_ramsey_number q); q >= 2 (q = 0 vacuous, q = 1 trivial); at q = 2 it is the body of axv_2312_06895_00.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g234_multi_hyp_inhabited",
+              "claim": "g234_multi_hyp_claim",
+              "references": [
+                "multicolour_clique_ramsey_count_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g234_multi_not_trivially_true",
+              "claim": "g234_multi_ntt_claim",
+              "references": [
+                "multicolour_clique_ramsey_count_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g234_blowup_sanity",
+                "claim": "g234_blowup_claim",
+                "references": [
+                  "x234_blowup_colouring"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x234_blowup_colouring": {
+          "classification": "paper_specific",
+          "reason": "Blowup colouring of K_n[2] (arXiv:2207.07775 l.1091-1094, l.1110): the colour of every edge depends only on the two parts it joins; GTBase complete_multipartite_graph and X195's Ramsey vocabulary are reused."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
