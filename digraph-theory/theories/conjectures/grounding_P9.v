@@ -295,3 +295,20 @@ Proof. by apply/setP=> -[u v]; rewrite /dipath_arcs !inE. Qed.
 Local Open Scope ring_scope.
 Lemma ham_C3 : @ham (tournament.C3 : diGraphType) [:: 0; 1; 1 + 1].
 Proof. by rewrite /ham /dicycle /= card_C3. Qed.
+
+(** ** The non-emptiness guard of [arc_disjoint_directed_cycles_in_regular_directed_gra_statement]
+    (added on 2026-10-26) is not vacuous: the directed triangle is non-empty and 1-diregular,
+    so the guarded hypotheses hold together at k = 1.  The guard's teeth (the empty digraph
+    refutes the unguarded body) are in
+    meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v. *)
+Lemma arc_disjoint_hyps_nonvacuous :
+  exists D : diGraphType, (0 < #|D|)%N /\ diregular D 1.
+Proof.
+exists (tournament.C3 : diGraphType); split; first by rewrite card_C3.
+apply/forallP => u; rewrite /outdeg /degree_balance.indeg; apply/andP; split; apply/eqP.
+- rewrite (_ : [set w | u --> w] = [set u + 1]) ?cards1 //.
+  by apply/setP => w; rewrite !inE arcC3E.
+- rewrite (_ : [set w | w --> u] = [set u - 1]) ?cards1 //.
+  apply/setP => w; rewrite !inE arcC3E.
+  by case: u w => -[|[|[|]]] // ? [[|[|[|]]] //].
+Qed.

@@ -1080,6 +1080,18 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   `0 < #|D|` (`meta/probe_hints/splitting_min_outdegree_statement.v`; non-vacuity
   `conjectures/grounding_classic_core.v:splitting_hyps_nonvacuous`). Its only relation, e200, is
   related_only with no Rocq edge.
+- `opg:arc_disjoint_directed_cycles_in_regular_directed_graphs` →
+  `conjectures/P9.v:arc_disjoint_directed_cycles_in_regular_directed_gra_statement` — **refutable
+  (empty digraph)** (found 2026-10-25, Marc's decision 5). The empty digraph is k-diregular for every
+  k, vacuously, and has no directed cycle, so the body failed at k = 1. **REPAIRED 2026-10-26**
+  (coordination/PROGRAMME.md A2, with the A4 direction weaken; Lancelot's item 4b): the live
+  statement now reads `forall (D : diGraphType) (k : nat), 0 < #|D| -> diregular D k -> ...`; the
+  exact replacement is `diregular D k ->` to `0 < #|D| -> diregular D k ->`. It is a WEAKENING
+  (old -> new), so the certificate is one-way, frozen -> live:
+  `migration/directed_neighbourhood.v` (`P9Legacy` verbatim; the row's statement entry carries the
+  repair) (`meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v`).
+  Loops do not reopen the defect (a looped vertex is a one-vertex dicycle). No manifest-row or leg
+  field changes; no edge uses the row.
 - `arxiv:1608.03040#04` (Open Problem 3) →
   `conjectures/colouring_variants.v:majority_3col_eulerian_statement` — **too strong (mild)**.
   `eulerian` keeps only the balanced-degree condition and drops connectivity, so the hypothesis is
