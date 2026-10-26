@@ -1104,6 +1104,14 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   the row's statement entry carries the repair)
   (`meta/probe_hints/antidirected_trees_in_digraphs_statement.v`). No manifest-row or leg field
   changes; no Rocq edge uses the row.
+- `opg:cyclic_spanning_subdigraph_with_small_cyclomatic_number` →
+  `conjectures/P9.v:cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement` — **refutable
+  (loop)** (found 2026-10-25, Marc's decision 5). On the one-vertex digraph with a loop, the vertex lies
+  on a directed cycle, its singleton is not stable (`alpha D = 0`), and every cyclic arc selector keeps
+  the loop (cyclomatic number at least 1). **FIXED 2026-10-26** (coordination/PROGRAMME.md A1,
+  Lancelot's item 4b): the body gains `loopless D`
+  (`meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v`; non-vacuity
+  `conjectures/grounding_P9.v:cyclic_spanning_hyps_nonvacuous`). No edge uses the row.
 - `arxiv:1608.03040#04` (Open Problem 3) →
   `conjectures/colouring_variants.v:majority_3col_eulerian_statement` — **too strong (mild)**.
   `eulerian` keeps only the balanced-degree condition and drops connectivity, so the hypothesis is

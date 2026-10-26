@@ -345,3 +345,17 @@ exists (TT 2 : diGraphType), (TT 2 : orientedDigraph); split.
 - exact: TT2_antidirected_tree.
 - exact: card_TT.
 Qed.
+
+(** ** The [loopless D] guard of [cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement]
+    (added on 2026-10-26) is not vacuous: the directed triangle is loopless and each of its
+    vertices lies on its Hamiltonian dicycle ([ham_C3]), so both hypotheses of the guarded body
+    hold together.  The guard's teeth (a looped vertex refutes the unguarded body) are in
+    meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v. *)
+Lemma cyclic_spanning_hyps_nonvacuous :
+  exists D : diGraphType,
+    loopless D /\ (forall v : D, exists c : seq D, dicycle c /\ v \in c).
+Proof.
+exists (tournament.C3 : diGraphType); split; first by move=> v; exact: arcxx.
+move=> v; exists [:: 0; 1; 1 + 1]; split; first by case/andP: ham_C3.
+by case: v => -[|[|[|]]].
+Qed.
