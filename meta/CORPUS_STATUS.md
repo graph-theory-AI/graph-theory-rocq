@@ -129,7 +129,7 @@ Area-local foundations (each area builds these on top of `base`):
 | minor-theory | `containment`, `hole_containments`, `minor_dec`, `poset_unavoidability`, `prism_configurations`, `ramsey_small`, `shallow_minors`, `width_params` |
 | packing-theory | `edge_families`, `edge_partitions`, `fair_matching`, `matching`, `tree_leaves` |
 | reconstruction-theory | `decks`, `kelly` |
-| spectral-graph-theory | `spectral`, `strongly_regular_matrix` |
+| spectral-graph-theory | `spectral`, `strongly_regular_matrix`, `triangle_free_srg` |
 | topological-graph-theory | `crossing`, `crossing_genus`, `embedding`, `geometry`, `girth`, `signed_embedding` |
 
 ## Conjecture dependency graph
@@ -285,7 +285,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
-- Statement legs over the 1673 non-alias rows: **416 done** · 10 partial · 45 blocked · 1202 todo.
+- Statement legs over the 1673 non-alias rows: **420 done** · 10 partial · 45 blocked · 1198 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -433,6 +433,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X228 | 5 | 0 | 1 | 0 | 6 |
 | X229 | 1 | 0 | 0 | 0 | 1 |
 | X23 | 2 | 0 | 0 | 0 | 2 |
+| X230 | 4 | 0 | 0 | 0 | 4 |
 | X24 | 1 | 0 | 0 | 0 | 1 |
 | X25 | 1 | 0 | 0 | 0 | 1 |
 | X26 | 1 | 0 | 0 | 0 | 1 |
