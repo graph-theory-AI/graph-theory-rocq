@@ -10522,14 +10522,14 @@
    "note": "Authored in X113.v:coarse_erdos_posa_cycles_forest_statement. Encodes the Chudnovsky-Seymour coarse Erdos-Posa conjecture with the two Erdos-Posa functions f,g quantified before the universal (k cycles pairwise distance >d, or delete a bounded ball to leave a forest)."
   },
   "std_chudnovsky_seymour_trotignon_question_on_subcubi": {
-   "statement": "done",
+   "statement": "blocked",
    "grounding": "todo",
    "edges": "todo",
    "correspondence": "todo",
    "audit_page": "todo",
    "commit": "x114-misc-batch1",
    "package": "graph-theory-misc",
-   "note": "Authored in X114.v:subcubic_induced_subdivision_np_complete_statement. Encodes the Chudnovsky-Seymour-Trotignon question: existence of a subcubic H whose induced-subdivision-containment problem is NP-complete (in_NP /\\ NP_hard) on the D7 relational complexity layer, with the X98 induced-subdivision model (byte-identical reuse). Graph content fully faithful; the D7 in_NP/NP_hard layer is the corpus-standard relational-complexity proxy (same layer as the done row complexity_of_the_h_factor_problem) -- no machine model, so classically weak but NOT axiom-free refutable in Rocq's constructive logic"
+   "note": "BLOCKED — 2026-10-26 (Lancelot, reviewer Arthur; Marc's decision of 2026-10-26, the text-preserving reblock repair; body unchanged): the D7 relational complexity layer gives NP_hard no hardness content (every problem with a yes-instance and a no-instance is NP_hard), so this existential body is PROVABLE with H = K_1 (kernel-checked under non-row names, evidence math-2026-10-26/np-hard-layer-by-arthur); a faithful encoding needs a cost-coupled NP-completeness vocabulary over GTBase's prog model (parked)."
   },
   "std_chung_s_question_on_efficient_generalized_regula": {
    "statement": "todo",

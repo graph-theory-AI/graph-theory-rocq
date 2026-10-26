@@ -831,6 +831,13 @@ carry their own `complete_between`/`anticomplete_between`/`pure_pair`.
   statement's doc block, manifest row and leg entry unchanged since the baseline, and a reviewed repair needs a
   change of the statement text. The leg change waits for a gate path for a text-preserving re-block, or for a
   re-encoding on a cost-coupled NP-completeness vocabulary.
+  RE-BLOCKED 2026-10-26 (Marc's decision of 2026-10-26, X114 option (i); Lancelot, reviewer Arthur):
+  `subcubic_induced_subdivision_np_complete_statement` is now blocked through the text-preserving "reblock" repair
+  of `meta/migration_report.py`. Its wave X114 row takes state blocked with a blocked_reason, so
+  `build_v2_manifest.py` moves the statement leg done -> blocked and withdraws the row's source-verification tuple;
+  its doc block gains the BLOCKED Notes sentence; its text and every migration certificate are unchanged. The five
+  specs carry the identical reblock repair on the row's statement objects (and on its original-statement objects).
+  The cost-coupled vocabulary stays parked.
 - Several rows state their extremal parameters RELATIONALLY (`is_book_thickness`,
   `is_pebbling_number`, `weighted_chromatic_number`, `weighted_clique_number`, `fas_opt`,
   `edp_opt`, `x89_max_quartet_distance`, `x141_zero_forcing_number`) and are therefore

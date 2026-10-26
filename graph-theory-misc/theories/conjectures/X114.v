@@ -158,9 +158,15 @@ Definition x114_subcubic (H : sgraph) : Prop := subcubic H.
     Notes: the induced-subdivision model is replicated byte for byte from
       extremal-graph-theory/theories/conjectures/X98.v because graph-theory-misc does not
       import that package.  The graph content is faithful; the complexity wrapper is the
-      corpus-standard relational proxy also used by the done row
-      opg:complexity_of_the_h_factor_problem, and is weaker than a machine-model NP-completeness
-      claim. *)
+      corpus-standard relational proxy also used by the row opg:complexity_of_the_h_factor_problem
+      (blocked 2026-10-26 for the same reason), and is weaker than a machine-model NP-completeness
+      claim.  BLOCKED 2026-10-26 (statement leg done -> blocked under the text-preserving reblock
+      repair, Marc's decision of 2026-10-26; Lancelot, reviewer Arthur; body unchanged): that layer
+      gives [NP_hard] no hardness content (every problem with a yes-instance and a no-instance is
+      [NP_hard]), so this existential body is PROVABLE with H = K_1, whose containment problem is
+      "G is nonempty" (kernel-checked under non-row names, evidence
+      math-2026-10-26/np-hard-layer-by-arthur).  A faithful encoding needs a cost-coupled
+      NP-completeness vocabulary over GTBase's prog model (parked by Marc's decision). *)
 Definition subcubic_induced_subdivision_np_complete_statement : Prop :=
   exists H : sgraph,
     x114_subcubic H /\ x114_np_complete (x114_hisc_problem H).
