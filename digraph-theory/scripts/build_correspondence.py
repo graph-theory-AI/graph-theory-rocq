@@ -29,11 +29,13 @@ docs/correspondence/curated.json (hand-edited).  Auto-joins to the corpus fill
 the rest.
 
   python3 scripts/build_correspondence.py            # write registry.json
-  python3 scripts/build_correspondence.py --check     # coverage + staleness gate
-  python3 scripts/build_correspondence.py --self-test # toolchain-free test of the staleness comparison
+  python3 scripts/build_correspondence.py --check       # coverage + staleness gate
+  python3 scripts/build_correspondence.py --check-fresh # staleness only (make correspondence-check)
+  python3 scripts/build_correspondence.py --self-test   # toolchain-free test of the staleness comparison
 
 --check fails when the committed registry.json differs, byte for byte, from the registry this run
 would write (regenerate it with the first command), as well as on the coverage problems below.
+--check-fresh fails only on that difference; coverage is not evaluated in this mode.
 
 Requires the library to be built (make) for the .glob spans, exactly like
 extract_quotes.py / statement_closure.py.  stdlib only.
@@ -252,10 +254,28 @@ def registry_current(committed, registry) -> bool:
     return committed is not None and committed == registry_text(registry).encode("utf-8")
 
 
+def freshness_problems(committed, registry) -> list:
+    """The freshness verdict shared by --check and --check-fresh: [] when the committed
+    bytes are current, else the one "stale or missing" problem."""
+    if registry_current(committed, registry):
+        return []
+    return [f"{REGISTRY.relative_to(ROOT)} is stale or missing: it differs from the "
+            f"registry this run would write; regenerate it with "
+            f"python3 scripts/build_correspondence.py"]
+
+
+def coverage_gaps(registry) -> list:
+    """Entries of a built registry without an authored decoded readback or a cluster
+    (the built-row part of --check's coverage problems)."""
+    return sorted(r["id"] for r in registry["entries"]
+                  if not r.get("decoded_authored") or r.get("cluster") == "?")
+
+
 def self_test():
     """Toolchain-free negative test of the staleness comparison (make mutation):
     a current registry passes; a changed entry, a missing file and one extra byte
-    are each stale."""
+    are each stale; and a current registry with a coverage gap passes the freshness
+    verdict of --check-fresh."""
     reg = {"meta": {"count": 1}, "entries": [{"id": "x", "decoded": "\u00e9"}]}
     good = registry_text(reg).encode("utf-8")
     cases = [
@@ -265,13 +285,20 @@ def self_test():
         ("extra byte", good + b"\n", reg, False),
     ]
     bad = [name for name, committed, r, want in cases if registry_current(committed, r) != want]
+    gap = {"meta": {"count": 1}, "entries": [{"id": "y", "decoded_authored": False, "cluster": "?"}]}
+    gap_text = registry_text(gap).encode("utf-8")
+    if freshness_problems(gap_text, gap) or coverage_gaps(gap) != ["y"]:
+        bad.append("current with a coverage gap")
     if bad:
         print("correspondence self-test FAILED: " + ", ".join(bad), file=sys.stderr)
         sys.exit(1)
-    print(f"correspondence self-test OK: {len(cases)} cases (1 current, 3 stale)")
+    print(f"correspondence self-test OK: {len(cases) + 1} cases (1 current, 3 stale, "
+          f"1 current with a coverage gap that --check-fresh does not evaluate)")
 
 
-def main(check: bool):
+def main(mode: str):
+    """mode: "write" (regenerate registry.json), "check" (coverage + freshness) or
+    "check-fresh" (freshness only)."""
     closure = sc.Closure()
     by_slug, by_ltitle, by_ctitle = load_corpus()
     curated = json.loads(CURATED.read_text(encoding="utf-8")) if CURATED.exists() else {}
@@ -411,7 +438,18 @@ def main(check: bool):
         "entries": rows,
     }
 
-    if check:
+    committed = REGISTRY.read_bytes() if REGISTRY.exists() else None
+    if mode == "check-fresh":
+        problems = freshness_problems(committed, registry)
+        if problems:
+            print("CORRESPONDENCE FRESHNESS CHECK FAILED:\n" + "\n\n".join(problems),
+                  file=sys.stderr)
+            sys.exit(1)
+        print(f"correspondence freshness OK: registry.json current ({len(rows)} entries); "
+              f"coverage not evaluated (see --check)")
+        return
+
+    if mode == "check":
         problems = []
         if skipped:
             problems.append(
@@ -435,12 +473,7 @@ def main(check: bool):
         # *inline-bound* endpoints (not standalone Definitions, e.g. one_cycle,
         # delta3) — the dashboard renders those as plain text, so they are not a
         # coverage failure and are deliberately not gated here.
-        committed = REGISTRY.read_bytes() if REGISTRY.exists() else None
-        if not registry_current(committed, registry):
-            problems.append(
-                f"{REGISTRY.relative_to(ROOT)} is stale or missing: it differs from the "
-                f"registry this run would write; regenerate it with "
-                f"python3 scripts/build_correspondence.py")
+        problems += freshness_problems(committed, registry)
         if problems:
             print("CORRESPONDENCE AUDIT FAILED:\n" + "\n\n".join(problems),
                   file=sys.stderr)
@@ -466,7 +499,12 @@ def main(check: bool):
 
 
 if __name__ == "__main__":
-    if "--self-test" in sys.argv[1:]:
+    args = sys.argv[1:]
+    if "--self-test" in args:
         self_test()
+    elif "--check-fresh" in args:
+        main("check-fresh")
+    elif "--check" in args:
+        main("check")
     else:
-        main(check="--check" in sys.argv[1:])
+        main("write")
