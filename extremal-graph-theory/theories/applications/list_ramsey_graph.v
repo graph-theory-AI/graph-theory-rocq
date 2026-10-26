@@ -2,6 +2,7 @@
 From GTBase Require Import base.
 From GraphTheory Require Import dom partition.
 From Extremal.foundations Require Import list_ramsey.
+From Extremal.conjectures Require Import X235.
 From Extremal.applications Require Import list_ramsey_nat.
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -50,9 +51,6 @@ have hx : x \in pblock P x by rewrite mem_pblock (cover_partition hp) inE.
 have hy : y \in pblock P x by rewrite hsame mem_pblock (cover_partition hp) inE.
 by have /stableP/(_ x y hx hy) := hs _ (hb x); rewrite hxy.
 Qed.
-
-Definition lr_color_graph (V : finType) (C : eqType) (phi : V -> V -> C) (c : C) : sgraph :=
-  fg_mk_sgraph (fun x y => phi x y == c).
 
 Lemma lr_color_graph_edge (V : finType) (C : eqType) (phi : V -> V -> C) (c : C) :
   (forall x y, phi x y = phi y x) ->
@@ -186,12 +184,6 @@ move=> spos sym; split.
   by have := leq_ltn_trans bound hc; rewrite ltnn.
 Qed.
 
-Definition lr_nat_graph_forces (s k n : nat) : Prop :=
-  exists L : 'I_n -> 'I_n -> seq nat,
-    lr_nat_valid_lists k L /\
-    forall phi, lr_nat_admissible L phi ->
-      exists c, s < χ([set: lr_color_graph phi c]).
-
 Lemma lr_nat_forces_graph (s k n : nat) :
   0 < s -> (lr_nat_forces s k n <-> lr_nat_graph_forces s k n).
 Proof.
@@ -202,18 +194,11 @@ move=> spos; split=> -[L [valid force]]; exists L; split=> //.
   exact: force phi legal.
 Qed.
 
-(** No corpus row: source-facing form of the list Ramsey equality, PROVED below as
-    [list_ramsey_chromatic_resolution]: colours are arbitrary natural numbers,
-    monochromatic graphs use the library chromatic number, and the Ramsey number is
-    expressed by its least-forcing-order characterisation. Same underlying result as
-    arXiv:2103.15175 Section 3.1, whose corpus row arxiv:2103.15175#00 carries no
-    formal_name and so cannot be cited; see
-    https://graph-theory-ai.github.io/graph-conjectures/arxiv/2103.15175__00/ *)
-Definition list_ramsey_chromatic_resolution_statement : Prop :=
-  forall s k : nat, 2 <= s -> 0 < k ->
-    lr_nat_graph_forces s k (s ^ k).+1 /\
-    forall n, lr_nat_graph_forces s k n -> (s ^ k).+1 <= n.
-
+(** The registered resolution of corpus row arxiv:2103.15175#00: its statement
+    [list_ramsey_chromatic_resolution_statement] (Extremal.conjectures.X235) holds. Colours are
+    arbitrary natural numbers, monochromatic graphs use the library chromatic number, and the
+    Ramsey number is expressed by its least-forcing-order characterisation (arXiv:2103.15175
+    Section 3.1). *)
 Theorem list_ramsey_chromatic_resolution : list_ramsey_chromatic_resolution_statement.
 Proof.
 move=> s k s2 kpos; have [upper lower] := list_ramsey_natural s2 kpos.
