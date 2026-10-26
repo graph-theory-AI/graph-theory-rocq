@@ -24381,13 +24381,13 @@
     ]
   },
   "counts": {
-    "files": 323,
-    "helpers": 2579,
+    "files": 324,
+    "helpers": 2585,
     "repeated_body_shapes": 148,
     "repeated_normalized_names": 214,
     "repeated_signature_shapes": 312,
-    "statements_excluded": 704,
-    "x_wave_helpers": 1422
+    "statements_excluded": 705,
+    "x_wave_helpers": 1428
   },
   "groups": {
     "body_shape_hash": {
@@ -25021,6 +25021,7 @@
         "Chromatic.conjectures.U5.sds_sym",
         "Chromatic.conjectures.U8.lc_irrefl",
         "Chromatic.conjectures.U8.lc_sym",
+        "Chromatic.conjectures.X210.x210_conflict_bound_teeth",
         "Chromatic.conjectures.X218.x218_multipartite_irrefl",
         "Chromatic.conjectures.X218.x218_multipartite_sym",
         "Chromatic.conjectures.X3.x3_complement_irrefl",
@@ -27709,7 +27710,8 @@
       ],
       "9a13e5e2c4b337460f762f95c988cd0ea67bb13d8bbf19593b51fb087ee85bcc": [
         "Chromatic.conjectures.X132.x132_weighted_flexible_exact",
-        "Chromatic.conjectures.X183.x183_weighted_flexible_exact"
+        "Chromatic.conjectures.X183.x183_weighted_flexible_exact",
+        "Chromatic.conjectures.X210.x210_conflict_k_colourable_under_rat_bound"
       ],
       "9c5ee70c512d9ecce3f2b94e2881ab4ca8c565c4e0ff8a2a264707d49530bd26": [
         "Digraph.conjectures.chi_bounded.chi_bounded_under",
@@ -32773,7 +32775,8 @@
       "body_shape_hash": "ee973ca7f909a493e26ad271428b01755a2833e17c68cbb3dd53fd3bf0a143e6",
       "declaration_hash": "1595182e6b91e0ed454c30bf8864ea3805fa47b3b8710d43a5e871c11d729c71",
       "direct_consumers": [
-        "Chromatic.conjectures.X210.x210_conflict_k_colourable_under_bound"
+        "Chromatic.conjectures.X210.x210_conflict_k_colourable_under_bound",
+        "Chromatic.conjectures.X210.x210_conflict_k_colourable_under_rat_bound"
       ],
       "kind": "Definition",
       "line": 20,
@@ -32791,9 +32794,7 @@
       "body_hash": "3b5f84647de3ab97495ea58e7ae530197aabea21d48faa62b71f900eaa272af1",
       "body_shape_hash": "66a9c00bdc3075a54408724a9dc35b32dfc81ed3d1f4c5d6e198f618f30d2a45",
       "declaration_hash": "9eb210f784bd2ad0016b16d0a9c471dfb6f1b457f10e02f505500bb76119e9dc",
-      "direct_consumers": [
-        "Chromatic.conjectures.X210.surface_conflict_colouring_sqrt_genus_statement"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 25,
       "local_dependencies": [
@@ -32808,6 +32809,67 @@
       "qualified_name": "Chromatic.conjectures.X210.x210_conflict_k_colourable_under_bound",
       "signature": "(G : sgraph) (k C : nat) : Prop",
       "signature_shape_hash": "5939ebc8996f1a4d8d27fb229e70f6abb8fabeef1fc5effa4c5625114fb551ba"
+    },
+    {
+      "body_hash": "3d634fbd89394ad8e7d6d058a7b05ca3a49d07df49a78e3cf711f6f9a55f3535",
+      "body_shape_hash": "3d634fbd89394ad8e7d6d058a7b05ca3a49d07df49a78e3cf711f6f9a55f3535",
+      "declaration_hash": "ee12f7b1cbe1f82d17acef3ee60fb5ed3f068cfb4fb4c1fe8d88a4f9a5fabc07",
+      "direct_consumers": [
+        "Chromatic.conjectures.X210.x210_conflict_k_colourable_under_rat_bound"
+      ],
+      "kind": "Definition",
+      "line": 30,
+      "local_dependencies": [],
+      "name": "x210_conflict_assignment_rat",
+      "normalized_name": "conflict_assignment_rat",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X210.v",
+      "phase": "X210",
+      "qualified_name": "Chromatic.conjectures.X210.x210_conflict_assignment_rat",
+      "signature": "(G : sgraph) (k p q : nat) (F : G -> G -> 'I_k -> 'I_k -> bool) : Prop",
+      "signature_shape_hash": "07578c43a2695b110980c3ea2f2346ef7945b3e5e618152df5d856b30b44baf1"
+    },
+    {
+      "body_hash": "becfd5e54a5d5f6383b62a183421d0e5ba941850cf1774a1f5b254b80ed8be37",
+      "body_shape_hash": "230048c735d45c3983e5ab6896c4f741293b909c5b8569945cbdb535454b9b4e",
+      "declaration_hash": "4d61a66c1d7f25453d376bb13bc12606bf8375cec37be6863c20d83939c91fcb",
+      "direct_consumers": [
+        "Chromatic.conjectures.X210.surface_conflict_colouring_sqrt_genus_statement",
+        "Chromatic.conjectures.X210.x210_conflict_bound_teeth"
+      ],
+      "kind": "Definition",
+      "line": 40,
+      "local_dependencies": [
+        "x210_conflict_assignment_rat",
+        "x210_conflict_colouring"
+      ],
+      "name": "x210_conflict_k_colourable_under_rat_bound",
+      "normalized_name": "conflict_k_colourable_under_rat_bound",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X210.v",
+      "phase": "X210",
+      "qualified_name": "Chromatic.conjectures.X210.x210_conflict_k_colourable_under_rat_bound",
+      "signature": "(G : sgraph) (k p q : nat) : Prop",
+      "signature_shape_hash": "9a13e5e2c4b337460f762f95c988cd0ea67bb13d8bbf19593b51fb087ee85bcc"
+    },
+    {
+      "body_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_shape_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "declaration_hash": "cf7efac2606cade906eea52706d523a72e375b2ec9fb90caa8eb86b3dde3e5c5",
+      "direct_consumers": [],
+      "kind": "Lemma",
+      "line": 45,
+      "local_dependencies": [
+        "x210_conflict_k_colourable_under_rat_bound"
+      ],
+      "name": "x210_conflict_bound_teeth",
+      "normalized_name": "conflict_bound_teeth",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X210.v",
+      "phase": "X210",
+      "qualified_name": "Chromatic.conjectures.X210.x210_conflict_bound_teeth",
+      "signature": ": ~ x210_conflict_k_colourable_under_rat_bound 'K_2 1 1 1",
+      "signature_shape_hash": "3ad3f58310232bcce0700c91b1150058c47b24a95f5f5e4fa0f0fe14860e0ed7"
     },
     {
       "body_hash": "fff167210f5d41a4fa4b510e01a41832119f1056518715f56270eaf0863ff978",
@@ -42009,6 +42071,67 @@
       "qualified_name": "Digraph.conjectures.X221.x221_c4or",
       "signature": "(b : 'Z_4 -> bool) : Type",
       "signature_shape_hash": "5fa8eae4d32e5556ed159cce34a64ef93ce497d3de8801edbed163bb85733b81"
+    },
+    {
+      "body_hash": "f44a4ec6beac337c0806ba9278e9da3837d0aa8aae6747ea0b09311bb5370beb",
+      "body_shape_hash": "f44a4ec6beac337c0806ba9278e9da3837d0aa8aae6747ea0b09311bb5370beb",
+      "declaration_hash": "4784ac81a7934db9a9ce6087833408a100cd7ab38f94e2744935d6644ed2661e",
+      "direct_consumers": [
+        "Digraph.conjectures.X231.x231_forward_pair"
+      ],
+      "kind": "Definition",
+      "line": 18,
+      "local_dependencies": [],
+      "name": "x231_forward_arc",
+      "normalized_name": "forward_arc",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X231.v",
+      "phase": "X231",
+      "qualified_name": "Digraph.conjectures.X231.x231_forward_arc",
+      "signature": "(D : diGraphType) (r : D -> nat) : rel D",
+      "signature_shape_hash": "646d09da8c2b75eb2c53ad40b22b6a759318a3e47d15f62bd6bfea0b4bb1cb9f"
+    },
+    {
+      "body_hash": "545230729e825121b6b336b34dba2bd8f1269f4a9da2c70ffde20730a90a076d",
+      "body_shape_hash": "b7a0d971b07797ffacfb165b9da6b3e8828159fe7de136620ec33a0034dc02ce",
+      "declaration_hash": "ef9809d63ca2678654be4a8294401b8a6be23a8c8f9abe27912fe7985ab0528b",
+      "direct_consumers": [
+        "Digraph.conjectures.X231.x231_forward_cover"
+      ],
+      "kind": "Definition",
+      "line": 26,
+      "local_dependencies": [
+        "x231_forward_arc"
+      ],
+      "name": "x231_forward_pair",
+      "normalized_name": "forward_pair",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X231.v",
+      "phase": "X231",
+      "qualified_name": "Digraph.conjectures.X231.x231_forward_pair",
+      "signature": "(D : diGraphType) (r : D -> nat) (x y : D) : bool",
+      "signature_shape_hash": "c3697ddcae38a6916fe9fba6aa2b08f04aad2cbc7bc12042f16bb72158f282fd"
+    },
+    {
+      "body_hash": "c2ad04ba3a857ae03fdce951542a5c944854967056e5f0c746a024b3d93dc0be",
+      "body_shape_hash": "17ab62a70b81b01bbfaaf2f8a933b2689c221dd9cd8c623d7b6dfde8d83084d2",
+      "declaration_hash": "900e77d05f658c3ff9e22877286c92e95934fd747f7797cdb6caec3c9a0ca798",
+      "direct_consumers": [
+        "Digraph.conjectures.X231.logarithmic_forward_cover_statement"
+      ],
+      "kind": "Definition",
+      "line": 32,
+      "local_dependencies": [
+        "x231_forward_pair"
+      ],
+      "name": "x231_forward_cover",
+      "normalized_name": "forward_cover",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X231.v",
+      "phase": "X231",
+      "qualified_name": "Digraph.conjectures.X231.x231_forward_cover",
+      "signature": "(D : diGraphType) (rs : seq {ffun D -> nat}) : Prop",
+      "signature_shape_hash": "784699206e33a85a9126782a764e704d4c93363c54e7a84ddcfb6aef2bde9e59"
     },
     {
       "body_hash": "029f2f2794eaf5bf3d7a0a3ba0f37074a7057a1c5a85ad5a84997a15f7db614d",
