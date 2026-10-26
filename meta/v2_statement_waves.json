@@ -6215,6 +6215,240 @@
       },
       "faithfulness_verified_by": "Arthur (X234 wave verification, 2026-10-26)",
       "faithfulness_result": "Readback 2026-10-26 (verifier Arthur): 3/3 PASS against the pinned texts and the e-prints. The bodies were read with X195's x195_arrows (every colouring {set Host} -> 'I_k has a mono_copy of some Fam i; only edge values are read) and x195_ramsey_number (least n with 'K_n arrowing), mono_copy (injective, adjacency-preserving, every image edge of colour c; not induced), GTBase complete_multipartite_graph n 2 (carrier 'I_n * 'I_2, adjacent iff x.1 != y.1) and clique_count_size (s-cliques; 1 at s = 0), all at work/coordinator 92f9b916. arxiv:2207.07775#01: r(k) = r(k,k) (l.1089) is x195_ramsey_number 2 of the single graph K_k; K_{r(k)-1}[2] is the 2-blowup with independent parts (l.1096: the red and blue edges of a K_n 3-colouring; l.1108, l.1110-1111: only edges across parts are coloured); mixed (l.1092-1094) = no monochromatic K_k and not x234_blowup_colouring, which under no monochromatic K_k is the same as not the blowup of a Ramsey colouring (one vertex per part lifts a monochromatic K_k of chi); for infinitely many k = for every N some k >= N, not all large k (l.1121); k <= 2 never witnesses (K_0 always has a copy; for k = 1, 2 the blowup K_0[2] or K_1[2] has no edge, so every colouring is a blowup colouring). arxiv:2312.06895#00: K_t-Ramsey (l.84) is x195_arrows G 2 for an arbitrary finite G; r_{K_s}(K_t) is a minimum over K_t-Ramsey graphs of the copies of K_s, which are exactly the s-cliques; minimum = C(R, s) iff attained (by K_R) and a lower bound, as encoded; s = 0 and t = 0 are harmless; R exists by Ramsey's theorem and is unique. arxiv:2312.06895#01: l.134 states the q-colour generalization (the TeX cites conj:clique-clique; the upstream note's 'Theorem 1.2' is a rendering of that reference), so the row is determined; q colours in both the Ramsey property and the Ramsey number (forced, as the Notes say); q >= 2 excludes the vacuous q = 0 (no map into 'I_0) and the trivial q = 1; at q = 2 the body is row #00's verbatim (Remark g234_multi_two). Grounding (grounding_X234.v at 54bad952, read; compiled by Marcol's MCP with no holes, the wave run's check_milestone decides): the hyp_inhabited instances hold (r_q(K_2) = 2 for q >= 1, K_2 arrows K_2); the not_trivially_true claims are in the contract form (rows #00 / #01: the lower bound without x195_arrows G fails at s = t = 2, R = 2, G = K_1, and implies the row; the 'exactly' variant fails at K_3; row 2207.07775#01: 'for every k >= 2' fails at k = 2 and implies the row); helper_sanity for the paper_specific helper x234_blowup_colouring has two positive instances and a negative one on K_2[2] (l.1110's mechanism). The three derived v2_legs_state entries (8a93dc82), recomputed from the wave, are identical; no lint allowlist entry."
+    },
+    "X236": {
+      "phase": "X236",
+      "repo": "chromatic-theory",
+      "defines_file": "X236.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X236 (A3 verifier Marcol; routing Lancelot (19), (21), (22); selection x236-selection-by-arthur, design x236-design-by-arthur agreed by Lancelot (22) and Marcol (70)), branch math/arthur-x236-20261026, 2026-10-26",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x236-colouring-six",
+      "rows": {
+        "axv_1810_00065_00": {
+          "formal_name": "ternary_three_colourable_statement",
+          "source_hash": "b1a1be2c708c2d77f11b0749e37a6302cf960afc36f7492033400acd111893c8",
+          "note": "Chudnovsky-Scott-Seymour-Spirkl, Proof of the Kalai-Meshulam conjecture (arXiv:1810.00065v1, main.tex): ternary = no induced cycle of length a multiple of three (l.83-84), the open problem that all ternary graphs are 3-colourable (l.95-96); induced cycles by GTBase has_ordinal_induced_cycle for k >= 3 (k = 0 holds trivially).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g236_ternary_hyp_inhabited",
+              "claim": "g236_ternary_hyp_claim",
+              "references": [
+                "ternary_three_colourable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g236_ternary_not_trivially_true",
+              "claim": "g236_ternary_ntt_claim",
+              "references": [
+                "ternary_three_colourable_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g236_ternary_helper_sanity",
+                "claim": "g236_ternary_helper_claim",
+                "references": [
+                  "x236_ternary"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2511_02892_02": {
+          "formal_name": "cycles_plus_k4s_four_colourable_statement",
+          "source_hash": "41e6c35fdd9a2aa31b61d9b44a961897dd2167548f134402e92646d5c16c708e",
+          "note": "Open problems of the 33rd Workshop on Cycles and Colourings (arXiv:2511.02892v1, PROBLEMS25/Haxell.tex), Problem 3.1 (l.13-15) in the strong-colouring frame of l.23: G with degrees 0 or 2 (a disjoint union of cycles, equivalent to the spanning reading) and H the cliques on a partition into 4-sets, on one vertex set; G union H is 4-colourable.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g236_k4_hyp_inhabited",
+              "claim": "g236_k4_hyp_claim",
+              "references": [
+                "cycles_plus_k4s_four_colourable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g236_k4_not_trivially_true",
+              "claim": "g236_k4_ntt_claim",
+              "references": [
+                "cycles_plus_k4s_four_colourable_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g236_k4_helper_sanity",
+                "claim": "g236_k4_helper_claim",
+                "references": [
+                  "x236_cycle_union",
+                  "x236_k4_parts",
+                  "x236_union_k4"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_1808_01605_00": {
+          "formal_name": "fractional_girth_subgraph_statement",
+          "source_hash": "d3a212ef3e7de1e1ffec9057e82ec416cd08e2e904fa6709082b8fab428405f9",
+          "note": "Triangle-free subgraphs with large fractional chromatic number (arXiv:1808.01605v1, main.tex), Conjecture 4 (l.91-94); chi_f (l.78) through GTBase bfold_colouring with b >= 1 (the LP optimum is attained by a b-fold colouring); real x and k reduced to naturals; has_subgraph and girth_geq (GTBase), as the sibling X31 row.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g236_frac_hyp_inhabited",
+              "claim": "g236_frac_hyp_claim",
+              "references": [
+                "fractional_girth_subgraph_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g236_frac_not_trivially_true",
+              "claim": "g236_frac_ntt_claim",
+              "references": [
+                "fractional_girth_subgraph_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g236_frac_helper_sanity",
+                "claim": "g236_frac_helper_claim",
+                "references": [
+                  "x236_frac_chi_at_least"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_1804_06104_00": {
+          "formal_name": "nsd_delta_plus_constant_statement",
+          "source_hash": "3be2ae81830011006df6e72fff0a1ab4ab5a3c35d1b54b5f2b0a48e81b87db3d",
+          "note": "Joret-Lochet, Progress on the adjacent vertex distinguishing edge colouring conjecture (arXiv:1804.06104v2, AVD.tex): neighbour sum distinguishing colourings (l.189-190) and the open problem of a Delta + O(1) bound (l.192), for graphs with no isolated edge; Chromatic X142's x142_neighbour_sum_edge_colourable (colours 1..k) with Delta G + C colours, one C for all graphs.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g236_nsd_hyp_inhabited",
+              "claim": "g236_nsd_hyp_claim",
+              "references": [
+                "nsd_delta_plus_constant_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g236_nsd_not_trivially_true",
+              "claim": "g236_nsd_ntt_claim",
+              "references": [
+                "nsd_delta_plus_constant_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g236_nsd_helper_sanity",
+                "claim": "g236_nsd_helper_claim",
+                "references": [
+                  "x236_no_isolated_edge"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2310_04265_06": {
+          "formal_name": "ordered_matching_free_chi_bounded_statement",
+          "source_hash": "488ef0141f0c6866979619f466b12422ec20a71a0568bebe0c79e94facff067e",
+          "note": "Clique number of tournaments (arXiv:2310.04265v1, the pinned version, main.tex), Conjecture 4.11 (l.1263-1265): for an ordered graph M of maximum degree at most 1, the ordered graphs with no induced ordered copy of M (l.1184) form a chi-bounded class (l.1186); ordered graphs on 'I_n, GTBase chi_bounded_via.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g236_ord_hyp_inhabited",
+              "claim": "g236_ord_hyp_claim",
+              "references": [
+                "ordered_matching_free_chi_bounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g236_ord_not_trivially_true",
+              "claim": "g236_ord_ntt_claim",
+              "references": [
+                "ordered_matching_free_chi_bounded_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g236_ord_helper_sanity",
+                "claim": "g236_ord_helper_claim",
+                "references": [
+                  "x236_ord_contains",
+                  "x236_max_degree_one"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2506_10227_00": {
+          "formal_name": "sun_free_chi_bounded_statement",
+          "source_hash": "7fbe38e5fea9274a7e053c8098d0cde905bc0b64ff25e0694f4336124e28aedc",
+          "note": "Suns in triangle-free graphs of large chromatic number (arXiv:2506.10227v2, main.tex): t-suns for t >= 4 and sun-free (l.100), the remark of l.138 that the class of sun-free graphs may already be chi-bounded (nets allowed); GTBase induced_free and chi_bounded_class.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g236_sun_hyp_inhabited",
+              "claim": "g236_sun_hyp_claim",
+              "references": [
+                "sun_free_chi_bounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g236_sun_not_trivially_true",
+              "claim": "g236_sun_ntt_claim",
+              "references": [
+                "sun_free_chi_bounded_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g236_sun_helper_sanity",
+                "claim": "g236_sun_helper_claim",
+                "references": [
+                  "x236_sun"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x236_ternary": {
+          "classification": "paper_specific",
+          "reason": "Ternary graphs of arXiv:1810.00065 l.83: no induced cycle of length k >= 3 divisible by 3, over GTBase has_ordinal_induced_cycle."
+        },
+        "x236_cycle_union": {
+          "classification": "paper_specific",
+          "reason": "The disjoint union of cycles of arXiv:2511.02892 Problem 3.1 on the shared vertex set: every degree is 0 or 2."
+        },
+        "x236_k4_parts": {
+          "classification": "paper_specific",
+          "reason": "The disjoint union of K_4's of arXiv:2511.02892 Problem 3.1 as a partition of the shared vertex set into parts of four vertices."
+        },
+        "x236_union_k4": {
+          "classification": "paper_specific",
+          "reason": "The union G u H of arXiv:2511.02892 Problem 3.1: adjacency in G or in one part, built with GTBase fg_mk_sgraph."
+        },
+        "x236_frac_chi_at_least": {
+          "classification": "paper_specific",
+          "reason": "chi_f(G) >= k of arXiv:1808.01605 l.78 through GTBase bfold_colouring with b >= 1. Local because Chromatic X130's x130_frac_chi_le is the other direction and the canonical fractional chromatic number (Extremal.foundations.fractional_colouring) builds after chromatic-theory (Marcol's design read (70) b)."
+        },
+        "x236_no_isolated_edge": {
+          "classification": "paper_specific",
+          "reason": "No isolated edge (no K_2 component) of arXiv:1804.06104 l.189: every edge has an end of degree at least 2."
+        },
+        "x236_ord_contains": {
+          "classification": "paper_specific",
+          "reason": "Induced ordered subgraphs of arXiv:2310.04265 l.1184 for ordered graphs on ordinals: an increasing map preserving adjacency both ways (fg_srel)."
+        },
+        "x236_max_degree_one": {
+          "classification": "paper_specific",
+          "reason": "Maximum degree at most 1 of the excluded ordered graph of arXiv:2310.04265 Conjecture 4.11."
+        },
+        "x236_sun": {
+          "classification": "paper_specific",
+          "reason": "The t-sun of arXiv:2506.10227 l.100: a t-cycle (GTBase ord_cycle_rel) with a pendant vertex at each cycle vertex, on 'I_t * bool."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
