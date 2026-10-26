@@ -26,7 +26,9 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them.
+corrections are applied explicitly (ERRATA below) since the review files predate them. Two
+literature corrections use the same list (Marc's decisions of 2026-10-25): X184 is solved by its
+own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved.
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -206,6 +208,14 @@ ERRATA = [
     ("2310.04265", "Conjecture 5.6", "solved",
      "Errata (Aboulker ranked list): implied by Crew–Fan–Koerts–Moore–Spirkl arXiv:2602.09863 "
      "plus dom(T) <= omega-bar(T)."),
+    # literature status corrections (Marc's decisions 3 and 4 of 2026-10-25); a studies row is keyed
+    # ("studies", slug) and applied in S6
+    ("1701.03366", "Antisymmetric variant of Jaeger's weak 3-flow conjecture", "solved",
+     "Literature: solved in its own source, arXiv:1701.03366 (SIAM J. Discrete Math. 32 (2018)), "
+     "Corollary 13(iv): every directed 12-edge-connected graph has a Z_5-antisymmetric flow (k = 12)."),
+    ("studies", "std_n_dl_s_conjecture_deck_reconstruction_of_trees", "disproved",
+     "Literature: false as printed; arXiv:2103.13359v3, Figure 1, gives two non-isomorphic trees on "
+     "13 vertices with the same 7-deck, and n = 13, ell = 7 meets every hypothesis."),
 ]
 
 
@@ -411,7 +421,7 @@ for rec in arxiv:
 if missing_reviews:
     sys.exit(f"{len(missing_reviews)} arXiv records lack a review (join on arxiv_id+title): "
              f"{missing_reviews[:5]}")
-if errata_hit != set(errata_by_key):
+if errata_hit != {k for k in errata_by_key if k[0] != "studies"}:
     sys.exit(f"errata records not found in corpus: {set(errata_by_key) - errata_hit}")
 for rk, rv_title, rec_title in retitled:
     sys.stderr.write(f"NOTE: {rk} joined by position, not by title (review {rv_title!r} vs "
@@ -613,6 +623,9 @@ if os.path.exists(STUDIES_PATH):
         alias = s.get("alias_of")
         if alias and alias not in known_rids:
             sys.exit(f"studies row {s['slug']} aliases unknown row {alias!r}")
+        status, note = errata_by_key.get(("studies", s["slug"]), ("open", None))
+        if note:
+            errata_hit.add(("studies", s["slug"]))
         rows.append({
             "row_id": f"studies:{s['slug']}", "slug": s["slug"], "corpus": "arxiv-studied",
             "record_key": ",".join(s.get("papers", []))[:120], "kind": s.get("kind"),
@@ -627,8 +640,8 @@ if os.path.exists(STUDIES_PATH):
             "license": "arXiv-derived (studies-role extraction; per-paper license at REC time)",
             "implemented_by": None, "source_verified_by": None, "source_verified_at": None,
             "verification_note": None, "status_verified_at": None,
-            "status": "open",   # studied third-party conjectures; SVER revisits promoted rows
-            "status_semantics": None, "review_status": "open", "review_date": None,
+            "status": status,   # open unless an ERRATA entry; SVER revisits promoted rows
+            "status_semantics": note, "review_status": "open", "review_date": None,
             "recovery": "none",
             "b1_candidate": False, "opg_match": None,
             "alias_of": alias, "parent": None,
@@ -642,6 +655,8 @@ if os.path.exists(STUDIES_PATH):
             # alias rows own no legs; the rest get overlay-tracked todo legs
             "legs": ({lg: "todo" for lg in LEGS} if alias else legs_for(s["slug"])),
         })
+if errata_hit != set(errata_by_key):
+    sys.exit(f"errata records not found in corpus: {set(errata_by_key) - errata_hit}")
 
 # merge classifier output (fields the classifier owns; None until it has run)
 for r in rows:
@@ -809,7 +824,8 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker errata applied). "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 2 literature "
+               "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
                "with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, "
