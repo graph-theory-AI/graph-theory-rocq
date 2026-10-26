@@ -3599,11 +3599,14 @@
    "audit_page": "todo"
   },
   "axv_2207_07775_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x234-ramsey-three",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X234.v:mixed_blowup_colouring_statement. Fox-Wigderson, Ramsey multiplicity and the Turan coloring (arXiv:2207.07775, multiplicity_aic_style.tex sha256 335c2e27), Conjecture conj:mixed (l.1114-1117): mixed blowup colourings (l.1092-1094) of K_{r(k)-1}[2] = complete_multipartite_graph (R-1) 2 (independent parts, l.1096, l.1108); r(k) = r(k,k) (l.1089) by X195's x195_ramsey_number 2; not a blowup of a Ramsey colouring = not x234_blowup_colouring; infinitely many k = for every N some k >= N (l.1121)."
   },
   "axv_2207_07775_02": {
    "statement": "todo",
@@ -4655,18 +4658,24 @@
    "audit_page": "todo"
   },
   "axv_2312_06895_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x234-ramsey-three",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X234.v:clique_ramsey_count_statement. Fox-Tidor-Zhang, Triangle Ramsey numbers of complete graphs (arXiv:2312.06895, main-v2.tex sha256 a6b1c85c), Conjecture conj:clique-clique (l.96-100): H-Ramsey and r_F(H) (l.84) by X195's x195_arrows G 2 and x195_ramsey_number 2; copies of K_s = s-cliques (clique_count_size); the minimum C(R, s) = attained (K_R) and a lower bound over every K_t-Ramsey graph; Chvatal's s = 2 l.88-92; R exists by Ramsey's theorem."
   },
   "axv_2312_06895_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x234-ramsey-three",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X234.v:multicolour_clique_ramsey_count_statement. Fox-Tidor-Zhang (arXiv:2312.06895, main-v2.tex sha256 a6b1c85c) l.134: the q-colour generalization of conj:clique-clique, stated by the paper; q colours in both the Ramsey property (x195_arrows G q) and the Ramsey number (r_q, x195_ramsey_number q); q >= 2 (q = 0 vacuous, q = 1 trivial); at q = 2 it is the body of axv_2312_06895_00."
   },
   "axv_2312_13061_00": {
    "statement": "todo",
