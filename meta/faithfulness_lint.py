@@ -216,6 +216,16 @@ def load_allowlist() -> dict[str, str]:
     return data["entries"]
 
 
+def stale_entries(allowlist: dict[str, str], findings: list[Finding],
+                  scanned: set[str] | None = None) -> list[str]:
+    """The allowlist keys no finding matches.  A --files scan passes the relative paths it read as
+    `scanned` and judges only the keys of those files: it says nothing about another file's entry.
+    The other scans pass None and judge every key."""
+    found = {f.key for f in findings}
+    return sorted(key for key in allowlist
+                  if key not in found and (scanned is None or key.split(":", 1)[0] in scanned))
+
+
 def validate() -> int:
     fixture = """
 Definition fixture_statement : Prop :=
@@ -260,8 +270,18 @@ Definition fixture_statement : Prop :=
         print("faithfulness-lint self-test FAILED: the guard window must read the statement's "
               "own doc block", file=sys.stderr)
         return 1
+    # Stale entries under a --files scan of p/B.v: B.v's unmatched entry is stale, A.v's entry is
+    # not judged (A.v was not scanned); the full scan judges both; a matching finding clears B.v's.
+    allow = {"p/A.v:a_statement:rule": "reason", "p/B.v:b_statement:rule": "reason"}
+    match = Finding("p/B.v", 1, "b_statement", "rule", "message")
+    if (stale_entries(allow, [], {"p/B.v"}) != ["p/B.v:b_statement:rule"]
+            or stale_entries(allow, [], None) != sorted(allow)
+            or stale_entries(allow, [match], {"p/B.v"})):
+        print("faithfulness-lint self-test FAILED: a --files scan must judge exactly the "
+              "allowlist entries of the scanned files", file=sys.stderr)
+        return 1
     print(f"faithfulness-lint self-test OK: {len(expected)} rule families exercised; "
-          "guard window anchored at the statement")
+          "guard window anchored at the statement; --files judges only its files' allowlist entries")
     return 0
 
 
@@ -302,7 +322,10 @@ def main(argv: list[str]) -> int:
         findings.extend(lint_source(rel, path.read_text(), watchlist))
 
     allowlist = load_allowlist()
-    stale = sorted(set(allowlist) - {f.key for f in findings})
+    # check_milestone's per-wave run and the mutation canaries scan with --files: they judge only
+    # the allowlist entries of the files they read, not another wave's.
+    scanned = {str(path.relative_to(ROOT)) for path in files} if args.files else None
+    stale = stale_entries(allowlist, findings, scanned)
     active = [f for f in findings if f.key not in allowlist]
     if args.json:
         print(json.dumps({
