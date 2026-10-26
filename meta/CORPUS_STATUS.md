@@ -285,7 +285,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
-- Statement legs over the 1673 non-alias rows: **420 done** · 10 partial · 45 blocked · 1198 todo.
+- Statement legs over the 1673 non-alias rows: **421 done** · 10 partial · 44 blocked · 1198 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -405,7 +405,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X200 | 1 | 0 | 0 | 0 | 1 |
 | X201 | 1 | 0 | 0 | 0 | 1 |
 | X202 | 0 | 0 | 1 | 0 | 1 |
-| X203 | 0 | 0 | 1 | 0 | 1 |
+| X203 | 1 | 0 | 0 | 0 | 1 |
 | X204 | 1 | 0 | 0 | 0 | 1 |
 | X205 | 0 | 0 | 1 | 0 | 1 |
 | X206 | 1 | 0 | 0 | 0 | 1 |
@@ -525,7 +525,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Upstream relations between corpus rows (adversarial AI review of the statements + literature), resolved against the manifests by `meta/build_corpus_relations.py` into `meta/corpus_relations.json`. **Not machine-checked** — the formally verified graph is the dependency graph above; these edges only say where an implication theorem is worth attempting (`cite="gc:<edge_id>"` on the resulting `@EDGE`).
 
 - **225 edges** from clone `b72c585` — by relation equivalent_to 8, implies 159, related_only 42, same_conjecture 16; by verdict confirmed 214, plausible 11; 0 endpoints without a manifest row.
-- **112 of the 167 implies/equivalent_to edges have both endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool for `implications_X2nn.v`.
+- **113 of the 167 implies/equivalent_to edges have both endpoints formalized** (both rows own a statement whose leg is done) — the candidate pool for `implications_X2nn.v`.
 - **108 edges are already mirrored by a Rocq `@EDGE`** (implies→`implies`, equivalent_to→`equiv`; `same_conjecture`/`related_only` are never mirrored).
-- **79 distinct endpoints of *confirmed* implies/equivalent_to edges own no done statement** — each is a row whose formalization would unlock at least one cross-check.
+- **78 distinct endpoints of *confirmed* implies/equivalent_to edges own no done statement** — each is a row whose formalization would unlock at least one cross-check.
 
