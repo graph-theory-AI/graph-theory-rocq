@@ -50,7 +50,17 @@
     ONE-WAY SOURCE-REPAIR certificate (original -> live), not a migration equivalence.  Its spec entry
     carries the identical repair as the degree_balance statement entry, which holds the text,
     doc-block, row and leg checks (meta/migration_report.py: an original-statement repair may rest on
-    its statement in exactly one other family spec).  Every other certificate keeps its exact iff. *)
+    its statement in exactly one other family spec).
+
+    SOURCE REPAIRS (2026-10-26, direction weaken): the live
+    [arc_disjoint_directed_cycles_in_regular_directed_gra_statement] gained a [0 < #|D|] guard (the
+    empty digraph is k-diregular for every k and has no cycle), and the live
+    [antidirected_trees_in_digraphs_statement] gained a [loopless D] guard ([nb_arcs] counts loops).
+    [P9Legacy] stays verbatim, and these two rows' certificates below are ONE-WAY SOURCE-REPAIR
+    certificates (frozen -> live), not migration equivalences; their statement entries in this spec
+    carry the repairs.
+
+    Every other certificate keeps its exact iff. *)
 
 From HB Require Import structures.
 From mathcomp Require Import all_boot all_fingroup all_algebra.
@@ -413,15 +423,19 @@ Lemma hamilton_cycle_in_small_d_diregular_graphs_statement_compat :
   <-> Digraph.conjectures.P9.hamilton_cycle_in_small_d_diregular_graphs_statement.
 Proof. exact: iff_refl. Qed.
 
+(** One-way source-repair certificate, not a migration equivalence (2026-10-26, direction weaken):
+    the live row gained the [loopless D] guard, so the frozen row implies it. *)
 Lemma antidirected_trees_in_digraphs_statement_compat :
   P9Legacy.antidirected_trees_in_digraphs_statement
-  <-> Digraph.conjectures.P9.antidirected_trees_in_digraphs_statement.
-Proof. exact: iff_refl. Qed.
+  -> Digraph.conjectures.P9.antidirected_trees_in_digraphs_statement.
+Proof. by move=> h D k hk _; exact: h. Qed.
 
+(** One-way source-repair certificate, not a migration equivalence (2026-10-26, direction weaken):
+    the live row gained the [0 < #|D|] guard, so the frozen row implies it. *)
 Lemma arc_disjoint_directed_cycles_in_regular_directed_gra_statement_compat :
   P9Legacy.arc_disjoint_directed_cycles_in_regular_directed_gra_statement
-  <-> Digraph.conjectures.P9.arc_disjoint_directed_cycles_in_regular_directed_gra_statement.
-Proof. exact: iff_refl. Qed.
+  -> Digraph.conjectures.P9.arc_disjoint_directed_cycles_in_regular_directed_gra_statement.
+Proof. by move=> h D k _; exact: h. Qed.
 
 Lemma decomposing_an_even_tournament_in_directed_paths_statement_compat :
   P9Legacy.decomposing_an_even_tournament_in_directed_paths_statement

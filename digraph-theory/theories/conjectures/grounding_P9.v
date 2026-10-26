@@ -45,6 +45,9 @@ From mathcomp Require Import all_boot all_fingroup all_algebra.
 From Digraph Require Import prelude digraph oriented dipath strong tournament.
 From Digraph Require Import classic_core dichromatic packing colouring_variants two_extremal.
 From Digraph Require Import interop_graph_theory chi_bounded subdivision P9.
+From Digraph Require Import cayley circulant.
+From mathcomp Require Import zify.
+From Stdlib Require Import Lia.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -295,3 +298,228 @@ Proof. by apply/setP=> -[u v]; rewrite /dipath_arcs !inE. Qed.
 Local Open Scope ring_scope.
 Lemma ham_C3 : @ham (tournament.C3 : diGraphType) [:: 0; 1; 1 + 1].
 Proof. by rewrite /ham /dicycle /= card_C3. Qed.
+
+(** ** The non-emptiness guard of [arc_disjoint_directed_cycles_in_regular_directed_gra_statement]
+    (added on 2026-10-26) is not vacuous: the directed triangle is non-empty and 1-diregular,
+    so the guarded hypotheses hold together at k = 1.  The guard's teeth (the empty digraph
+    refutes the unguarded body) are in
+    meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v. *)
+Lemma arc_disjoint_hyps_nonvacuous :
+  exists D : diGraphType, (0 < #|D|)%N /\ diregular D 1%N.
+Proof.
+exists (tournament.C3 : diGraphType); split; first by rewrite card_C3.
+apply/forallP => u; rewrite /outdeg /degree_balance.indeg; apply/andP; split; apply/eqP.
+- rewrite (_ : [set w | u --> w] = [set u + 1]) ?cards1 //.
+  by apply/setP => w; rewrite !inE arcC3E.
+- rewrite (_ : [set w | w --> u] = [set u - 1]) ?cards1 //.
+  apply/setP => w; rewrite !inE arcC3E.
+  by case: u w => -[|[|[|]]] // ? [[|[|[|]]] //].
+Qed.
+
+(** ** The [loopless D] guard of [antidirected_trees_in_digraphs_statement] (added on
+    2026-10-26) is not vacuous: at k = 2 the transitive tournament [TT 2] (one arc, no loop)
+    is a loopless host meeting the arc bound [(2 - 2) * #|D| < nb_arcs D], and [TT 2] is also a
+    two-vertex antidirected tree, so every hypothesis of the guarded body holds together.  The
+    guard's teeth (a looped vertex refutes the unguarded body) are in
+    meta/probe_hints/antidirected_trees_in_digraphs_statement.v. *)
+Lemma TT2_antidirected_tree : antidirected_tree (TT 2).
+Proof.
+rewrite /antidirected_tree /tree_digraph; apply/andP; split; first (apply/andP; split).
+- apply/forallP => u; apply/forallP => v.
+  have [->|huv] := eqVneq u v; first exact: connect0.
+  by apply: connect1; rewrite !arcTTE -neq_ltn val_eqE.
+- rewrite card_TT /nb_arcs.
+  apply/cards1P; exists (ord0, ord_max).
+  apply/setP => -[a b]; rewrite !inE arcTTE /=.
+  by case: a b => [[|[|a]] ha] [[|[|b]] hb].
+- apply/forallP => -[[|[|m]] hm] //=.
+  + by apply/orP; right; apply/eqP; apply: eq_card0 => u; rewrite !inE arcTTE.
+  + apply/orP; left; apply/eqP; apply: eq_card0 => w; rewrite !inE arcTTE /=.
+    by case: w => [[|[|w]] hw].
+Qed.
+
+Lemma antidirected_hyps_nonvacuous :
+  exists (D : diGraphType) (T : orientedDigraph),
+    [/\ loopless D, ((2 - 2) * #|D| < nb_arcs D)%N, antidirected_tree T & #|T| = 2%N].
+Proof.
+exists (TT 2 : diGraphType), (TT 2 : orientedDigraph); split.
+- by move=> v; exact: arcxx.
+- by rewrite mul0n; apply/card_gt0P; exists (ord0, ord_max); rewrite inE arcTTE.
+- exact: TT2_antidirected_tree.
+- exact: card_TT.
+Qed.
+
+(** ** The [loopless D] guard of [cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement]
+    (added on 2026-10-26) is not vacuous: the directed triangle is loopless and each of its
+    vertices lies on its Hamiltonian dicycle ([ham_C3]), so both hypotheses of the guarded body
+    hold together.  The guard's teeth (a looped vertex refutes the unguarded body) are in
+    meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v. *)
+Lemma cyclic_spanning_hyps_nonvacuous :
+  exists D : diGraphType,
+    loopless D /\ (forall v : D, exists c : seq D, dicycle c /\ v \in c).
+Proof.
+exists (tournament.C3 : diGraphType); split; first by move=> v; exact: arcxx.
+move=> v; exists [:: 0; 1; 1 + 1]; split; first by case/andP: ham_C3.
+by case: v => -[|[|[|]]].
+Qed.
+
+(** ** k-strong tournaments exist for every k (grounding for the partition row's guard)
+
+    The rotational tournament [RT m'] on 'Z_n, n = 2m + 1 (m = m'.+1), has the arcs
+    x -> x + 1, ..., x + m: its connection set [RTset] = {1, ..., m} hits each pair {z, -z}
+    (z != 0) exactly once ([RTset_cond]).  Deleting fewer than m vertices leaves it strong
+    ([RT_del_strong]): from a surviving vertex x, the first surviving vertex x + j after x in
+    cyclic order is an out-neighbour, because the skipped vertices x + 1, ..., x + (j - 1) are
+    deleted, so j - 1 <= #|S| < m; induction on the cyclic distance to the target closes it.
+    Hence [kstrong_tournament_exists]: every k has a k-strong tournament.  It feeds both the
+    teeth of the [0 < size ks] guard of [partitionning_a_tournament_into_k_strongly_connected_statement]
+    (meta/probe_hints/partitionning_a_tournament_into_k_strongly_connected_statement.v) and its
+    non-vacuity ([partition_hyps_nonvacuous] below). *)
+Section RT.
+Import GRing.Theory.
+Variable m' : nat.
+Local Notation m := m'.+1.
+Local Notation n := (m.*2.+1).
+
+Definition RTset : {set 'Z_n} := [set z : 'Z_n | (0 < val z <= m)%N].
+
+Lemma RTset_cond (z : 'Z_n) : (z != 0) = (z \in RTset) (+) (- z \in RTset).
+Proof.
+case: (eqVneq z 0) => [->|zN0] /=; first by rewrite oppr0 addbb.
+have vpos : (0 < val z)%N by rewrite lt0n -[0%N]/(val (0 : 'Z_n)) val_eqE.
+have vlt : (val z < n)%N := ltn_ord z.
+have voppE : val (- z) = ((n - val z) %% n)%N by [].
+rewrite !inE voppE modn_small ?ltn_subrL ?vpos //.
+move: (val z) vpos vlt => v vpos vlt /=.
+case: (leqP v m) => hv /=.
+- rewrite (_ : (0 < n - v <= m)%N = false) //.
+  by apply/negbTE; rewrite negb_and -ltnNge; apply/orP; right; lia.
+- by rewrite (_ : (0 < n - v <= m)%N = true) //; apply/andP; split; lia.
+Qed.
+
+(** A fresh carrier: canonical instances are keyed on the head constant, and [cayley] already
+    carries the [AC] tournament instance (constructions/circulant.v). *)
+Definition rt_carrier : Type := cayley RTset.
+HB.instance Definition _ := Finite.on rt_carrier.
+HB.instance Definition _ := HasArc.Build rt_carrier (@arc (cayley RTset)).
+
+Fact RT_irrefl : irreflexive (arc : rel rt_carrier).
+Proof.
+have h1 : 1%g \notin RTset by rewrite inE.
+by case: (@cayley_irreflP _ RTset) => _ /(_ h1).
+Qed.
+
+Fact RT_total (x y : rt_carrier) : (x != y) = (arc x y) (+) (arc y x).
+Proof.
+case: (@cayley_totalP _ RTset) => _ h; apply: h => z.
+by rewrite Zp_1gE Zp_invgE RTset_cond.
+Qed.
+
+HB.instance Definition _ :=
+  DiGraph_IsTournament.Build rt_carrier RT_irrefl RT_total.
+
+Definition RT : tournament := rt_carrier.
+
+Lemma RT_arcE (x y : RT) : (x --> y) = (y - x \in RTset).
+Proof. exact: circulant_arcE. Qed.
+
+Lemma card_RT : #|RT| = n.
+Proof. exact: card_ord. Qed.
+
+Lemma card_RTset : #|RTset| = m.
+Proof.
+rewrite cardsE cardE /enum_mem -enumT /= size_filter.
+rewrite -(count_map val (fun v => (0 < v <= m)%N)) val_enum_ord.
+have -> : (Zp_trunc n).+2 = (1 + m + m)%N by rewrite /Zp_trunc /=; lia.
+rewrite iotaD iotaD !count_cat /=.
+rewrite (@eq_in_count _ _ predT (iota (0 + 1).+1 m')).
+  by move=> v; rewrite mem_iota => /andP [h1 h2] /=; apply/andP; split; lia.
+rewrite (@eq_in_count _ _ pred0 (iota (0 + (1 + m)).+1 m')).
+  by move=> v; rewrite mem_iota => /andP [h1 h2] /=; apply/negbTE; apply/negP => /andP [_ h3]; lia.
+rewrite count_predT count_pred0 size_iota.
+have -> : (0 + (1 + m) <= m)%N = false by apply/negbTE; rewrite -ltnNge; lia.
+lia.
+Qed.
+
+Lemma val_natZn (j : nat) : (j < n)%N -> val (j%:R : 'Z_n) = j.
+Proof. by move=> hj; rewrite Zp_nat /= modn_small. Qed.
+
+Lemma RT_del_strong (S : {set RT}) : (#|S| < m)%N -> strongb (induced_digraph (~: S)).
+Proof.
+move=> hS; apply/strongP.
+pose dist (a b : induced_digraph (~: S)) : nat := val ((val b : 'Z_n) - (val a : 'Z_n)).
+suff H : forall d (a b : induced_digraph (~: S)), leq (dist a b) d -> connect arc a b.
+  by move=> a b; exact: (H _ a b (leqnn _)).
+elim=> [|d IH] a b hd.
+  have h0 : (val b : 'Z_n) - (val a : 'Z_n) = 0.
+    by apply/val_inj; move: hd; rewrite leqn0 => /eqP.
+  move: h0 => /eqP; rewrite subr_eq0 => /eqP hab.
+  have -> : b = a by apply/val_inj.
+  exact: connect0.
+case: (leqP (dist a b) d) => [hle|hgt]; first exact: IH.
+have hD : dist a b = d.+1 by apply/eqP; rewrite eqn_leq hd hgt.
+set x : 'Z_n := val a.
+set y : 'Z_n := val b.
+have hxS : (x : RT) \notin S by have := valP a; rewrite inE.
+have hyS : (y : RT) \notin S by have := valP b; rewrite inE.
+(* the first vertex after x, in cyclic order, that survives the deletion *)
+pose P j := (0 < j)%N && ((x + j%:R : RT) \notin S).
+have hPd : P d.+1.
+  rewrite /P /=; have -> : x + d.+1%:R = y by rewrite -hD /dist natr_Zp addrC subrK.
+  exact: hyS.
+case: (ex_minnP (ex_intro P _ hPd)) => j /andP [hj0 hjS] hmin.
+have hjd : (j <= d.+1)%N := hmin _ hPd.
+have hDn : (d.+1 < n)%N by rewrite -hD /dist; exact: ltn_ord.
+(* the skipped vertices x+1, ..., x+(j-1) are deleted, so the jump is at most m *)
+have hjm : (j <= m)%N.
+  rewrite leqNgt; apply/negP => hmj.
+  have hsub : [set x + z | z in RTset] \subset S.
+    apply/subsetP => w /imsetP [z hz ->].
+    have hz' := hz; rewrite inE in hz'; case/andP: hz' => hz0 hzm.
+    have hlt : (val z < j)%N by apply: (leq_ltn_trans hzm).
+    have hnP : ~~ P (val z) by apply/negP => /hmin; rewrite leqNgt hlt.
+    by move: hnP; rewrite /P hz0 /= natr_Zp negbK.
+  have := subset_leq_card hsub.
+  by rewrite (card_imset _ (addrI x)) card_RTset leqNgt hS.
+have hc : (x + j%:R : RT) \in ~: S by rewrite inE.
+pose c : induced_digraph (~: S) := exist _ (x + j%:R : RT) hc.
+have hjn : (j < n)%N by apply: (leq_ltn_trans hjd).
+have hac : a --> c.
+  rewrite sub_arcE RT_arcE /= (addrC x) addrK inE val_natZn //.
+  by rewrite hj0 hjm.
+have e1 : y - x = d.+1%:R by rewrite -hD /dist natr_Zp.
+have hcb : (dist c b <= d)%N.
+  have e2 : y - (x + j%:R) = (d.+1 - j)%:R by rewrite opprD addrA e1 natrB.
+  have -> : dist c b = val (y - (x + j%:R)) by [].
+  have hsn : (d.+1 - j < n)%N by apply: (leq_ltn_trans (leq_subr _ _)).
+  rewrite e2 (val_natZn hsn).
+  lia.
+exact: connect_trans (connect1 hac) (IH c b hcb).
+Qed.
+
+Lemma RT_kstrong : kstrong RT m.
+Proof.
+apply/andP; split; first by rewrite card_RT; lia.
+by apply/forall_inP => S hS; apply: RT_del_strong.
+Qed.
+
+End RT.
+
+(** For every k there is a k-strong tournament: the rotational tournament on 2(k+1)+1
+    vertices is (k+1)-strong, hence k-strong. *)
+Lemma kstrong_tournament_exists (k : nat) : exists T : tournament, kstrong T k.
+Proof.
+exists (RT k); apply/andP; split; first by rewrite card_RT; lia.
+by apply/forall_inP => S hS; apply: RT_del_strong; apply: (ltn_trans hS).
+Qed.
+
+(** The [0 < size ks] guard of [partitionning_a_tournament_into_k_strongly_connected_statement]
+    (added on 2026-10-26) is not vacuous: whatever the function g, the one-part list [:: 1] meets
+    the guard and the positivity hypothesis, and some tournament is g([:: 1])-strong. *)
+Lemma partition_hyps_nonvacuous (g : seq nat -> nat) :
+  exists (ks : seq nat) (T : tournament),
+    [/\ (0 < size ks)%N, all (fun k => 0 < k)%N ks & kstrong T (g ks)].
+Proof.
+have [T hT] := kstrong_tournament_exists (g [:: 1%N]).
+by exists [:: 1%N], T; split.
+Qed.

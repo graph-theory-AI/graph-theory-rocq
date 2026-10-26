@@ -1058,6 +1058,14 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   For #01, which the corpus marks disproved (Girão, Kittipassorn, Popielarz), the guard keeps the
   genuine loopless refutation as what the negation must capture. The relative edges e016, e017,
   e018 and e038 are re-proved over the guards, their reviewer fields cleared until review.
+- `arxiv:1608.03040#06` (Open Problem 7) →
+  `conjectures/X51.v:majority_choosable_universal_constant_statement` — **refutable (loop)** (found
+  2026-10-25, Arthur's F1 in his lane 4 review). A loop at v makes v a same-coloured out-neighbour of
+  itself, so the one-vertex digraph with a loop has no majority colouring from any lists, for every c.
+  The source's digraphs have no loops. **FIXED 2026-10-25** (coordination/PROGRAMME.md A1, Lancelot's
+  item 4b): the body gains `irreflexive (@arc D)`, the body of `two_extremal.loopless`
+  (`meta/probe_hints/majority_choosable_universal_constant_statement.v`; non-vacuity
+  `conjectures/grounding_X51.v:x51_hyps_nonvacuous`). No edge uses the row.
 - `arxiv:1608.03040#02` (Open Problem 1) →
   `conjectures/X45.v:majority_three_colouring_beta_statement` — **too strong**. The row asks
   whether SOME constant `beta < 1` works; the body fixes `beta = 1/2`, i.e. it restates
@@ -1106,6 +1114,61 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   adds `V1 != set0` and `V1 != setT`. The guard is needed (without it `V1 := setT` trivialises the
   complement clause), but it is not in the corpus text; the corpus text itself is garbled (it
   writes the hypothesis degree as `d`, leaving `f(d)` unused).
+  The row was also **refutable (empty digraph)**: the empty digraph meets the out-degree hypothesis
+  vacuously for every f and d but has no non-empty proper vertex set, so the body was false for every
+  f. **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
+  `0 < #|D|` (`meta/probe_hints/splitting_min_outdegree_statement.v`; non-vacuity
+  `conjectures/grounding_classic_core.v:splitting_hyps_nonvacuous`). Its only relation, e200, is
+  related_only with no Rocq edge.
+- `opg:arc_disjoint_directed_cycles_in_regular_directed_graphs` →
+  `conjectures/P9.v:arc_disjoint_directed_cycles_in_regular_directed_gra_statement` — **refutable
+  (empty digraph)** (found 2026-10-25, Marc's decision 5). The empty digraph is k-diregular for every
+  k, vacuously, and has no directed cycle, so the body failed at k = 1. **REPAIRED 2026-10-26**
+  (coordination/PROGRAMME.md A2, with the A4 direction weaken; Lancelot's item 4b): the live
+  statement now reads `forall (D : diGraphType) (k : nat), 0 < #|D| -> diregular D k -> ...`; the
+  exact replacement is `diregular D k ->` to `0 < #|D| -> diregular D k ->`. It is a WEAKENING
+  (old -> new), so the certificate is one-way, frozen -> live:
+  `migration/directed_neighbourhood.v` (`P9Legacy` verbatim; the row's statement entry carries the
+  repair) (`meta/probe_hints/arc_disjoint_directed_cycles_in_regular_directed_gra_statement.v`).
+  Loops do not reopen the defect (a looped vertex is a one-vertex dicycle). No manifest-row or leg
+  field changes; no edge uses the row.
+- `opg:antidirected_trees_in_digraphs` → `conjectures/P9.v:antidirected_trees_in_digraphs_statement` —
+  **refutable (loop)** (found 2026-10-25, Marc's decision 5). `nb_arcs` counts loops, so the
+  one-vertex digraph with a loop met the arc-count hypothesis at k = 2,
+  `(k - 2) * #|D| = 0 < 1 = nb_arcs D`, but cannot host the two-vertex antidirected tree `TT 2`.
+  **REPAIRED 2026-10-26** (coordination/PROGRAMME.md A2, with the A4 direction weaken; Lancelot's item
+  4b): the live statement now reads
+  `forall (D : diGraphType) (k : nat), 2 <= k -> loopless D -> (k - 2) * #|D| < nb_arcs D -> ...`; the
+  exact replacement is `2 <= k ->` to `2 <= k -> loopless D ->`. It is a WEAKENING (old -> new), so the
+  certificate is one-way, frozen -> live: `migration/directed_neighbourhood.v` (`P9Legacy` verbatim;
+  the row's statement entry carries the repair)
+  (`meta/probe_hints/antidirected_trees_in_digraphs_statement.v`). No manifest-row or leg field
+  changes; no Rocq edge uses the row.
+- `opg:cyclic_spanning_subdigraph_with_small_cyclomatic_number` →
+  `conjectures/P9.v:cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement` — **refutable
+  (loop)** (found 2026-10-25, Marc's decision 5). On the one-vertex digraph with a loop, the vertex lies
+  on a directed cycle, its singleton is not stable (`alpha D = 0`), and every cyclic arc selector keeps
+  the loop (cyclomatic number at least 1). **FIXED 2026-10-26** (coordination/PROGRAMME.md A1,
+  Lancelot's item 4b): the body gains `loopless D`
+  (`meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v`; non-vacuity
+  `conjectures/grounding_P9.v:cyclic_spanning_hyps_nonvacuous`). No edge uses the row.
+- `opg:linial_berge_path_partition_duality` → `conjectures/packing.v:linial_berge_statement` —
+  **refutable (loop)** (found 2026-10-25, Marc's decision 5). A looped vertex lies in no acyclic set,
+  so on the one-vertex digraph with a loop every k-dicolourable induced set is empty, while at k = 1
+  every path partition has 1-norm 1, and the duality equation `pp_knorm k Q = #|S|` failed.
+  **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
+  `irreflexive (@arc D)`, the body of `two_extremal.loopless` (`meta/probe_hints/linial_berge_statement.v`;
+  non-vacuity `conjectures/grounding_unvd_sad.v:linial_berge_hyps_nonvacuous`). No edge uses the row.
+- `opg:partitionning_a_tournament_into_k_strongly_connected_subtournaments` →
+  `conjectures/P9.v:partitionning_a_tournament_into_k_strongly_connected_statement` — **refutable
+  (empty list)** (found 2026-10-25, Marc's decision 5). For `ks = [::]` the positivity hypothesis holds
+  vacuously and some tournament is g([::])-strong, so it has a vertex, but it has no partition into zero
+  parts. **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
+  `0 < size ks` (`meta/probe_hints/partitionning_a_tournament_into_k_strongly_connected_statement.v`).
+  The existence of k-strong tournaments for every k, which both the refutation and the non-vacuity need,
+  is `conjectures/grounding_P9.v:kstrong_tournament_exists` (rotational tournaments on 2(k+1)+1
+  vertices; `RT_del_strong`); non-vacuity `conjectures/grounding_P9.v:partition_hyps_nonvacuous`. No edge
+  uses the row.
 - `arxiv:1608.03040#04` (Open Problem 3) →
   `conjectures/colouring_variants.v:majority_3col_eulerian_statement` — **too strong (mild)**.
   `eulerian` keeps only the balanced-degree condition and drops connectivity, so the hypothesis is

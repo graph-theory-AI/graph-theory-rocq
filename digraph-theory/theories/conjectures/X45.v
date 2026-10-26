@@ -39,8 +39,11 @@ Definition x45_same_colour_outneighbours
       The guard [loopless D] is load-bearing: [diGraphType] allows loops, a loop makes v an
       out-neighbour of itself carrying its own colour, and the one-vertex digraph with a loop
       then violates the bound for every beta < 1, so the question presupposes loopless
-      digraphs. The old body implies the new one (beta = 1/2); the converse is open. The
-      pinned review records the question as solved: Knox and Samal (2018) give beta = 2/3.
+      digraphs. The old body is false (the looped vertex), so it implies the new body only
+      trivially. The converse fails: the pinned review records the question as solved, Knox
+      and Samal (2018) give beta = 2/3, so the new body holds while the old one does not. The
+      open question is the loopless majority 3-colouring conjecture [majority_3col_statement]
+      (row arxiv:1608.03040#00), which implies the new body with p = 1, q = 2 (edge e038).
       Recorded in meta/STATEMENT_IMPROVEMENTS.md. *)
 Definition majority_three_colouring_beta_statement : Prop :=
   exists p q : nat, (p < q)%N /\

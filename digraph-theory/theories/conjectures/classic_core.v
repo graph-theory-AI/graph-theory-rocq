@@ -156,10 +156,10 @@ Definition jackson_hamilton_small_diregular_statement : Prop :=
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/splitting_a_digraph_with_minimum_outdegree_constraints.json
     English statement: (Open Problem Garden, Splitting a digraph with minimum outdegree constraints (Alon))
       There is a function f from naturals to naturals such that for every natural d and every
-      finite digraph D in which every vertex has out-degree at least f(d), the vertex set of D
-      splits into a set V1 and its complement, both nonempty, such that every vertex of V1 has
-      at least d out-neighbours inside V1 and every vertex outside V1 has at least d
-      out-neighbours outside V1.
+      finite digraph D with at least one vertex in which every vertex has out-degree at least
+      f(d), the vertex set of D splits into a set V1 and its complement, both nonempty, such
+      that every vertex of V1 has at least d out-neighbours inside V1 and every vertex outside
+      V1 has at least d out-neighbours outside V1.
     Definitions: [outdeg_in A v] - the number of out-neighbours of v lying in A, i.e. the
       out-degree of v in the subdigraph induced by A (core/oriented.v).
     Notes: Both parts are required to be nonempty. Without that guard, V1 := setT satisfies the
@@ -167,10 +167,16 @@ Definition jackson_hamilton_small_diregular_statement : Prop :=
       deliberate (and standard) reading of partitioned into two classes. The corpus text writes
       the hypothesis degree as d rather than f(d); the Rocq body uses the standard reading in
       which the existential function f gives the forcing degree and d is the degree demanded
-      inside each class. *)
+      inside each class.  The guard [0 < #|D|] is load-bearing: the empty digraph meets the
+      out-degree hypothesis vacuously but has no non-empty proper vertex set, so without the
+      guard the body is false for every f
+      (meta/probe_hints/splitting_min_outdegree_statement.v).  The source splits the vertex
+      set of a digraph into two non-empty parts.  The guard was added on 2026-10-26
+      (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition splitting_min_outdegree_statement : Prop :=
   exists f : nat -> nat,
     forall (D : diGraphType) (d : nat),
+      (0 < #|D|)%N ->
       (forall v : D, (f d <= outdeg v)%N) ->
       exists V1 : {set D},
         [/\ (* a PROPER bipartition: both parts nonempty (without this, V1 := setT makes

@@ -676,6 +676,16 @@ move=> k k0; exists [::], set0; split.
 - by move=> Q' _; rewrite cards0.
 Qed.
 
+(** GROUNDING (2026-10-26): the looplessness guard of [linial_berge_statement] is not vacuous.
+    The directed triangle is a non-empty loopless digraph, so the guarded body still speaks
+    about non-trivial digraphs.  The guard's teeth (a looped vertex refutes the unguarded body)
+    are in meta/probe_hints/linial_berge_statement.v. *)
+Lemma linial_berge_hyps_nonvacuous :
+  exists D : diGraphType, irreflexive (@arc D) /\ (0 < #|D|)%N.
+Proof.
+by exists (tournament.C3 : diGraphType); split; [move=> v; exact: arcxx | rewrite card_C3].
+Qed.
+
 (** *** Erdős–Pósa for long directed cycles *)
 
 (** On the empty digraph there is no dicycle at all, so the empty transversal

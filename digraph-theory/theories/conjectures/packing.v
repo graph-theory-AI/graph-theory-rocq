@@ -245,11 +245,14 @@ Definition woodall_statement : Prop :=
     Site: https://graph-theory-ai.github.io/graph-conjectures/op/linial_berge_path_partition_duality/
     Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/reviews/linial_berge_path_partition_duality.json
     English statement: (Open Problem Garden, Linial-Berge path partition duality)
-      For every finite digraph D and every k there are a partition Q of the vertex set into
-      directed paths and a vertex set S such that the subdigraph induced by S is k-dicolourable,
-      the k-norm of Q, that is the sum over its paths of min(k, number of vertices of the path),
-      equals the size of S, and no path partition of D has k-norm smaller than the size of S.
-    Definitions: [pp_partition Q] - Q is a list of directed paths whose vertex sets cover every
+      For every finite loopless digraph D and every k there are a partition Q of the vertex set
+      into directed paths and a vertex set S such that the subdigraph induced by S is
+      k-dicolourable, the k-norm of Q, that is the sum over its paths of min(k, number of
+      vertices of the path), equals the size of S, and no path partition of D has k-norm smaller
+      than the size of S.
+    Definitions: [irreflexive (@arc D)] - no vertex has an arc to itself (the body of
+      two_extremal.loopless, which this file does not import);
+      [pp_partition Q] - Q is a list of directed paths whose vertex sets cover every
       vertex exactly once (this file); [pp_knorm k Q] - the k-norm of a path partition (this
       file); [dicolorableb D k] - the vertex set splits into k parts each inducing an acyclic
       subdigraph, i.e. the dichromatic number is at most k (conjectures/dichromatic.v);
@@ -257,9 +260,14 @@ Definition woodall_statement : Prop :=
     Notes: The corpus states the inequality min k-norm <= max size of an induced k-colourable
       subdigraph; the Rocq body states the equality form of the duality by exhibiting a path
       partition and a certificate S that attain the common value, which also carries the easy
-      converse inequality. Path sizes are counted in vertices. *)
+      converse inequality. Path sizes are counted in vertices.  The looplessness guard is
+      load-bearing: a looped vertex lies in no acyclic set, so on the one-vertex digraph with a
+      loop every k-dicolourable induced set is empty while every path partition has 1-norm 1,
+      and the duality equation fails at k = 1 (meta/probe_hints/linial_berge_statement.v).  The
+      source's digraphs have no loops.  The guard was added on 2026-10-26
+      (meta/STATEMENT_IMPROVEMENTS.md). *)
 Definition linial_berge_statement : Prop :=
-  forall (D : diGraphType) (k : nat),
+  forall (D : diGraphType) (k : nat), irreflexive (@arc D) ->
     exists (Q : seq (D * seq D)) (S : {set D}),
       [/\ (* Q is a path-partition realizing the minimum k-norm *)
           pp_partition Q,
