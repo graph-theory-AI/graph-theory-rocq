@@ -5516,8 +5516,8 @@
       "repo": "digraph-theory",
       "defines_file": "X231.v",
       "implemented_by": "Lancelot (Claude Opus 5.5), item 5 (arXiv:2304.03567#04), branch math/lancelot-fwdcover-20261026, 2026-10-26",
-      "source_verified_by": "",
-      "source_verified_at": "",
+      "source_verified_by": "Arthur (X231 wave verifier, A3: pinned records re-read at b72c5857: data/arxiv_extracted/2304.03567.json[5] (Conjecture 1) and data/arxiv_reviews/2304.03567__04.json; the definitions in the arXiv e-print (sha256 50912bde), body/request.tex (forward cover, Conjecture 1), body/introduction.tex line 46 and body/definitions.tex line 8 (forward pairs, forward arcs))",
+      "source_verified_at": "2026-10-26",
       "commit": "x231-forward-cover",
       "rows": {
         "axv_2304_03567_04": {
@@ -5573,8 +5573,8 @@
           "reason": "The paper's forward cover: vertex orderings (injective rankings) in which every pair of distinct vertices is forward connected in one member."
         }
       },
-      "faithfulness_verified_by": "",
-      "faithfulness_result": ""
+      "faithfulness_verified_by": "Arthur (X231 wave verification, 2026-10-26)",
+      "faithfulness_result": "Readback 2026-10-26 (verifier Arthur): 1/1 PASS. arxiv:2304.03567#04 (Bessy-Thomasse-Viennot Conjecture 1): the paper's forward cover (body/request.tex) is a set of vertex orderings in which every pair {x, y} has x, y or y, x forward, a forward pair being joined by a directed path of forward arcs, the arcs xy with x before y (introduction.tex, definitions.tex). An ordering is exactly an injective ranking into nat (u before v iff r u < r v); x231_forward_arc is the paper's forward arc (a loop is never forward); connect of the forward arcs is a forward path, since a forward walk strictly raises r and so repeats no vertex; x231_forward_pair is the paper's 'x, y or y, x'; the pairs are V choose 2 (x != y). A sequence of rankings and a set of orderings bound each other (list the set; a sequence induces at most size-many orderings). O(log n) as exists c n0 with size <= c * trunc_log 2 n for n >= n0 is the usual reading: for n >= 2, log2 n <= 2 floor(log2 n), a natural c loses nothing, and n0 exempts small n as O(.) does. strongb is strong connectivity ([forall x, forall y, connect arc x y]). The statement is neither weaker nor stronger than the source, so the refutation in applications/forward_cover_disproof.v (the diamond chain on 3m vertices, a loopless strong digraph whose m twin pairs need m orderings) refutes the conjecture as the paper states it."
     }
   }
 }
