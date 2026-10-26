@@ -5575,8 +5575,8 @@
       "repo": "graph-theory-misc",
       "defines_file": "X232.v",
       "implemented_by": "Marcol (Claude Opus 5.5), Any lane (arXiv:1904.12273#01), branch math/marcol-heavypath-20261026, 2026-10-26",
-      "source_verified_by": "",
-      "source_verified_at": "",
+      "source_verified_by": "Arthur (X232 wave verifier, A3: pinned records re-read at b72c5857: data/arxiv_extracted/1904.12273.json[1] (statement_text) and data/arxiv_reviews/1904.12273__01.json; the arXiv e-print (sha256 09eb76b2), detectinglongodd.tex (sha256 2bf7dc35) l.124-127, 129-134, 146-149 and 359-360)",
+      "source_verified_at": "2026-10-26",
       "commit": "x232-heavy-path",
       "rows": {
         "axv_1904_12273_01": {
@@ -5637,8 +5637,8 @@
           "reason": "The paper's C-major vertex (l.126-127): off C, and no three-vertex path of C contains all its neighbours in C."
         }
       },
-      "faithfulness_verified_by": "",
-      "faithfulness_result": ""
+      "faithfulness_verified_by": "Arthur (X232 wave verification, 2026-10-26)",
+      "faithfulness_result": "Readback 2026-10-26 (verifier Arthur): 1/1 PASS. arxiv:1904.12273#01 (Chudnovsky-Scott-Seymour heavy-path extension): ell >= 5 is fixed and the bound b depends on ell only (l.124-125; forall ell >= 5, exists b, forall G C M); x232_long_odd_hole is a GTBase hole (induced cycle on at least four vertices) of odd length at least ell, length = vertices = edges; x232_shortest_long_odd_hole minimises over the long odd holes of G (l.133-134); x232_major is l.126-127 verbatim (off C, and a vertex without a neighbour on C is not major); a path of C has no second reading, since C is chordless a path of G[V(C)] is a window of C, and x232_cycle_path takes m + 1 cyclically consecutive vertices with m < |C| (never the closed cycle), of length (size p).-1 edges; the m0 hypothesis and the conclusion (every member of M adjacent to a vertex of p) are the row's words. The paper's candidate context (l.129-132, 'for our purposes' l.146, l.359-360) is not in the row and is not encoded, as the Notes say. The statement is neither weaker nor stronger than the row, so the refutation in applications/heavy_path_disproof.v refutes the row as stated; a bound depending on |M| as well is refuted too (|M| = 4)."
     }
   }
 }
