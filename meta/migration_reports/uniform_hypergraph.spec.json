@@ -31,7 +31,8 @@
     "D1 migrates nine conjecture-local uniformity helpers and the public hg_uniform/hg_uniformb onto GTBase.hypergraph_uniformity: uniform_family (Prop), uniform_familyb (Boolean) and the same-body indexed uniform_incidence for U5. Arbitrary finite carriers; no added guard; partite uniformity stays separate.",
     "Frozen at the C25 baseline: 11 sources, 7 chains (U12 forests/trees, X6 and XE1 extremal wrappers, X209 minimum excess, the natural-valued public hg_turan) and 20 complete current rows, each in a module importing only its own conjecture file. Five complete A9/A10 + D1 Originals (X209, X6 #834, XE2 #833, X108, X225 #01) reuse the frozen cut/degree/dmax modules by aliases: 25 whole-statement iff.",
     "Statuses, legs, docs, the X209 unused-T' defect, U12 edge connectivity and the opaque X225 dmax witness are unchanged. Public client: base/theories/examples/hypergraph_uniformity.v.",
-    "Source repair (2026-10-25, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md, turans_problem_for_hypergraphs entry), not a migration equivalence: the live U12 row turans_problem_for_hypergraphs_statement now conjoins the second conjecture of its OPG row (3-uniform on 2n vertices, no K_5^(3), at most n^2(n-1) hyperedges) to the K_4^(3) one, a strengthening. The frozen U12UniformLegacy row keeps the C25 text verbatim; its statement entry carries the repair (one exact text replacement, the pinned doc block, the record), and its certificate is kernel-checked as live -> frozen (the converse would derive the open K_5^(3) conjecture from the K_4^(3) one)."
+    "Source repair (2026-10-25, PROGRAMME A2; record meta/STATEMENT_IMPROVEMENTS.md, turans_problem_for_hypergraphs entry), not a migration equivalence: the live U12 row turans_problem_for_hypergraphs_statement now conjoins the second conjecture of its OPG row (3-uniform on 2n vertices, no K_5^(3), at most n^2(n-1) hyperedges) to the K_4^(3) one, a strengthening. The frozen U12UniformLegacy row keeps the C25 text verbatim; its statement entry carries the repair (one exact text replacement, the pinned doc block, the record), and its certificate is kernel-checked as live -> frozen (the converse would derive the open K_5^(3) conjecture from the K_4^(3) one).",
+    "Re-encoding of the X209 row (2026-10-26, PROGRAMME A2 with the A4 direction re-encode; record meta/STATEMENT_IMPROVEMENTS.md, arxiv:1803.08462#00 entry), not a migration equivalence: the live row uses x209_is_min_mc_scaled_excess (the source's multicoloured cut, baseline S(k,r) r!/r^k, minimum over every vertex type); the frozen X209UniformLegacy and X209UniformOriginal rows and chains are unchanged. Both certificates carry the placeholder relation ({frozen} -> True) /\\ ({live} -> True), since neither row implies the other; A9's cut_size spec carries the same repair and the kernel-checked defects. The row leaves partial (row fields implemented_by, source_verified_by, source_verified_at, verification_note; leg fields statement, commit, note)."
   ],
   "frozen": [
     {
@@ -291,7 +292,28 @@
         "x209_is_min_scaled_excess": "X209UniformLegacy.x209_is_min_scaled_excess"
       },
       "certificate": "Hypergraph.migration.uniform_hypergraph.hypergraph_cut_excess_theta_sqrt_statement_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "x209_is_min_scaled_excess r k m (excess m)",
+          "x209_is_min_mc_scaled_excess r k m (excess m)"
+        ],
+        "direction": "re-encode",
+        "relation": "({frozen} -> True) /\\ ({live} -> True)",
+        "doc_block_sha256": "38bcb2ac47b7a8cae908edc45eab38c272c5eb32ded3c1591a780e817ff913a3",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "implemented_by",
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "statement",
+          "commit",
+          "note"
+        ]
+      }
     },
     {
       "kind": "statement",
@@ -486,7 +508,28 @@
         "x209_is_min_scaled_excess": "X209UniformOriginal.x209_is_min_scaled_excess"
       },
       "certificate": "Hypergraph.migration.uniform_hypergraph.hypergraph_cut_excess_theta_sqrt_statement_original_compat",
-      "corpus": "v2"
+      "corpus": "v2",
+      "repair": {
+        "replace": [
+          "x209_is_min_scaled_excess r k m (excess m)",
+          "x209_is_min_mc_scaled_excess r k m (excess m)"
+        ],
+        "direction": "re-encode",
+        "relation": "({frozen} -> True) /\\ ({live} -> True)",
+        "doc_block_sha256": "38bcb2ac47b7a8cae908edc45eab38c272c5eb32ded3c1591a780e817ff913a3",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "implemented_by",
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "statement",
+          "commit",
+          "note"
+        ]
+      }
     },
     {
       "kind": "original-statement",

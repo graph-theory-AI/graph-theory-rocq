@@ -4538,20 +4538,18 @@
       "phase": "X209",
       "repo": "hypergraph-theory",
       "defines_file": "X209.v",
-      "implemented_by": "Batch X191-X210 statement authoring pass; retargeted by asymptotics foundation pass (Codex), 2026-07-16",
-      "source_verified_by": "Codex asymptotics retarget faithfulness readback, 2026-07-16",
-      "source_verified_at": "2026-07-16",
-      "commit": "asymptotics-foundation-retarget",
-      "faithfulness_verified_by": "Blocked-retargeting faithfulness audit (wf_63f4702e, 2026-07-17), OVERTURNING the 2026-07-16 retargeting",
+      "implemented_by": "Arthur (A2 re-encoding of the 2026-07-16 Codex statement, coordination/PROGRAMME.md section 3, Lancelot's routing message 9, 2026-10-26)",
+      "source_verified_by": "Arthur (source re-read: the pinned record data/arxiv_extracted/1803.08462.json at b72c5857 and the arXiv e-print, sha256 572e09cb, hypergraph-max-cut.tex l.188-190, 291-305, 317-319, 357-361, 2026-10-26)",
+      "source_verified_at": "2026-10-26",
+      "commit": "x209-multicoloured-cut-reencoding",
+      "faithfulness_verified_by": "",
       "rows": {
         "axv_1803_08462_00": {
           "formal_name": "hypergraph_cut_excess_theta_sqrt_statement",
-          "note": "Retargeted after GTBase.asymptotics: k-uniform hypergraphs, maximum r-cuts, denominator-scaled excess over the random-cut baseline, the extremal minimum over m-edge k-graphs, and Theta(sqrt m) as excess(m)^2 = Theta(m) are all explicit. Faithful-to-refuted: the source paper disproves this plausible conjecture outside the small tight cases.",
-          "state": "partial",
-          "partial_reason": "Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest risk = a minimality mis-quantification in the extremal-min helper: X209.v line 41 reads `forall (T' : finType) (E' : {set {set T}}) (y : nat), ...` — the bound `T'` is unused and `E'` is typed over the OUTER witness type `T`, so \"smallest max r-cut over all m-edge k-graphs\" is actually the minimum over m-edge k-graphs on one chooseable vertex set, not all. `x209_is_min_scaled_excess` is thus non-functional and `exists exc"
+          "note": "Re-encoded 2026-10-26 (coordination/PROGRAMME.md A2 with the A4 direction re-encode; frozen by the A9 cut_size and D1 uniform_hypergraph families): the multicoloured cut and the baseline S(k,r) r!/r^k of arXiv:1803.08462, and the minimum over every vertex type (x209_is_min_mc_scaled_excess); the earlier non-monochromatic cut and one-type minimum stay only in the frozen chains. Disproved by the source's Theorem 1.2."
         }
       },
-      "faithfulness_result": "OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest risk = a minimality mis-quantification in the extremal-min helper: X209.v line 41 reads `forall (T' : finType) (E' : {set {set T}}) (y : nat), ...` — the bound `T'` is unused and `E'` is typed over the OUTER witness type `T`, so \"smallest max r-cut over all m-edge k-graphs\" is actually the minimum over m-edge k-graphs on one chooseable vertex set, not all. `x209_is_min_scaled_excess` is thus non-functional and `exists excess, forall m, is_min...` can pick any per-vertex-set l"
+      "faithfulness_result": "RE-ENCODED 2026-10-26 (A2, A4 direction re-encode), independent review pending: the cut counts multicoloured edges (a vertex from every part) with the baseline S(k,r) r!/r^k, as arXiv:1803.08462 defines them (not the non-monochromatic edges with 1 - r^(1-k)), and the minimum ranges over every vertex type (E' over T'); no implication holds between the old and new rows. Previous result: OVERTURNED 2026-07-17. The 2026-07-16 retargeting to a finite witness surface is NOT faithful (leg -> partial). Biggest risk = a minimality mis-quantification in the extremal-min helper: X209.v line 41 reads `forall (T' : finType) (E' : {set {set T}}) (y : nat), ...` — the bound `T'` is unused and `E'` is typed over the OUTER witness type `T`, so \"smallest max r-cut over all m-edge k-graphs\" is actually the minimum over m-edge k-graphs on one chooseable vertex set, not all. `x209_is_min_scaled_excess` is thus non-functional and `exists excess, forall m, is_min...` can pick any per-vertex-set l"
     },
     "X216:digraph-theory": {
       "phase": "X216",

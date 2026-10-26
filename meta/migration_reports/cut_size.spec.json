@@ -28,12 +28,15 @@
     "GTBase.monochromatic.non_monochromatic_count_set0",
     "GTBase.monochromatic.non_monochromatic_count_const",
     "GTBase.monochromatic.non_monochromatic_count_small",
-    "GTBase.monochromatic.non_monochromatic_count_pair"
+    "GTBase.monochromatic.non_monochromatic_count_pair",
+    "Hypergraph.migration.cut_size.x209_old_min_not_minimal",
+    "Hypergraph.migration.cut_size.x209_cut_defect"
   ],
   "summary": [
     "Batch A, family A9 (cut sizes). Two representation classes stay explicit. X76's and X78's cut sizes count the edges of the graph with one end in A and the other outside; after M1 their bodies convert to the new GTBase.common.cut_size A := #|[set e in E(G) | ~~ [disjoint e & A] && ~~ (e \\subset A)]|. X209's cut size counts the members of an ARBITRARY supplied family that are not monochromatic under an arbitrary supplied ordinal colouring; it now unfolds to the graph-free GTBase.monochromatic.non_monochromatic_count, and its cut-edge test x209_cut_edge to C8's ~~ monochromatic_on (non_monochromatic_onP, a proved equality). No uniformity, nonemptiness, positivity or palette premise is added. Three statements are affected (X76, X78, X209) through X209's three chains (is_max_r_cut, scaled_excess, is_min_scaled_excess).",
     "",
-    "X209 defect, preserved: x209_is_min_scaled_excess binds a fresh T' but types E' over the OUTER carrier T, so T' is unused; the frozen chain keeps it verbatim and the row is not repaired. History: A7's X76/X78 per-row copies and Originals and A5's X78 snapshot call the live cut sizes and are documented below. X76Original and X78Original are pre-M1: cut sizes at 061154c over M1's frozen comprehension (bridged by M1's certificates), A7's pre-M1 counts and, for X78, A5's frozen containment. Natural subtraction, expected denominators, quantifier order, the whole excess function, statuses and doc blocks are unchanged."
+    "X209 defect, preserved: x209_is_min_scaled_excess binds a fresh T' but types E' over the OUTER carrier T, so T' is unused; the frozen chain keeps it verbatim and the row is not repaired. History: A7's X76/X78 per-row copies and Originals and A5's X78 snapshot call the live cut sizes and are documented below. X76Original and X78Original are pre-M1: cut sizes at 061154c over M1's frozen comprehension (bridged by M1's certificates), A7's pre-M1 counts and, for X78, A5's frozen containment. Natural subtraction, expected denominators, quantifier order, the whole excess function, statuses and doc blocks are unchanged.",
+    "Re-encoding (2026-10-26, PROGRAMME A2 with the A4 direction re-encode; record meta/STATEMENT_IMPROVEMENTS.md, arxiv:1803.08462#00 entry), not a migration equivalence: the frozen X209Legacy row keeps the non-monochromatic cut, the baseline 1 - r^(1-k) and the one-carrier minimum; the live row uses the new local x209_is_min_mc_scaled_excess (multicoloured cut, baseline S(k,r) r!/r^k through x209_stirling2, minimum over every vertex type), as the source arXiv:1803.08462 defines them. Neither row implies the other; the repair's relation is the placeholder ({frozen} -> True) /\\ ({live} -> True), and the two defects are the extra certificates x209_old_min_not_minimal and x209_cut_defect. The row leaves partial (row fields implemented_by, source_verified_by, source_verified_at, verification_note; leg fields statement, commit, note)."
   ],
   "frozen": [
     {
@@ -210,7 +213,28 @@
       "substitutions": {
         "x209_is_min_scaled_excess": "is_min_scaled_excess"
       },
-      "certificate": "Hypergraph.migration.cut_size.hypergraph_cut_excess_theta_sqrt_statement_compat"
+      "certificate": "Hypergraph.migration.cut_size.hypergraph_cut_excess_theta_sqrt_statement_compat",
+      "repair": {
+        "replace": [
+          "x209_is_min_scaled_excess r k m (excess m)",
+          "x209_is_min_mc_scaled_excess r k m (excess m)"
+        ],
+        "direction": "re-encode",
+        "relation": "({frozen} -> True) /\\ ({live} -> True)",
+        "doc_block_sha256": "38bcb2ac47b7a8cae908edc45eab38c272c5eb32ded3c1591a780e817ff913a3",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "implemented_by",
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "statement",
+          "commit",
+          "note"
+        ]
+      }
     },
     {
       "kind": "historical",
