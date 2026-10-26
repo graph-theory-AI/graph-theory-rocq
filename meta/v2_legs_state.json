@@ -1140,14 +1140,14 @@
    "audit_page": "todo"
   },
   "axv_1802_03727_00": {
-   "statement": "blocked",
+   "statement": "done",
    "grounding": "todo",
    "edges": "done",
    "correspondence": "todo",
    "audit_page": "todo",
-   "commit": "x191-x210-batch1",
+   "commit": "x203-nonempty-guard-repair",
    "package": "chromatic-theory",
-   "note": "BLOCKED — Faithfulness audit 2026-07-17 (meta/BLOCKED_RETARGETING_AUDIT.md): Biggest faithfulness risk: the statement is trivially FALSE (refutable), so it cannot encode an open conjecture. In chromatic-theory/theories/conjectures/X203.v, `separation_choosability_min_degree_unbounded_statement` is `exists x, (forall B, exists d, B<=x d) /\\ forall d G, x203_min_degree_at_least G d -> x203_separation_choosability_at_least G (x d)`. The `forall G : sgraph` includes the empty graph (vertex type void, 0 vertic"
+   "note": "Authored in X203.v:separation_choosability_min_degree_unbounded_statement. Repaired 2026-10-26 (coordination/PROGRAMME.md A2; the row is frozen by the A11 min_degree_at_least family): the guard 0 < #|G| excludes the empty graph, which refuted the old body (meta/probe_hints/separation_choosability_min_degree_unbounded_statement.v; faithfulness audit 2026-07-17, meta/BLOCKED_RETARGETING_AUDIT.md). Original source-facing statement name preserved: separation_choosability_min_degree_unbounded_statement."
   },
   "axv_1802_03727_01": {
    "statement": "done",
