@@ -70,9 +70,9 @@ End X232.
       does not state that hypothesis and it is not encoded. The statement is refuted in
       applications/heavy_path_disproof.v, at ell = 7, by graphs G(q) on 3q + 4 vertices with
       M of four members; so a bound depending on |M| as well is refuted too. Candidacy of
-      G(q) was checked by the source's referee report only computationally (ell = 7, odd
-      q >= 9), and the extension in the candidate setting stays open as far as this
-      refutation is concerned. *)
+      G(q) was checked only computationally (ell = 7, odd q >= 9), by the referee report of
+      the disproof write-up (coordination/sources/1904.12273__01), and the extension in the
+      candidate setting stays open as far as this refutation is concerned. *)
 Definition heavy_path_extension_statement : Prop :=
   forall ell : nat, 5 <= ell -> exists b : nat,
     forall (G : sgraph) (c : seq G) (M : {set G}),
