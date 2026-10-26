@@ -1112,6 +1112,13 @@ Beyond the mechanical warnings, the same notion is defined more than once in thi
   Lancelot's item 4b): the body gains `loopless D`
   (`meta/probe_hints/cyclic_spanning_subdigraph_with_small_cyclomatic_num_statement.v`; non-vacuity
   `conjectures/grounding_P9.v:cyclic_spanning_hyps_nonvacuous`). No edge uses the row.
+- `opg:linial_berge_path_partition_duality` → `conjectures/packing.v:linial_berge_statement` —
+  **refutable (loop)** (found 2026-10-25, Marc's decision 5). A looped vertex lies in no acyclic set,
+  so on the one-vertex digraph with a loop every k-dicolourable induced set is empty, while at k = 1
+  every path partition has 1-norm 1, and the duality equation `pp_knorm k Q = #|S|` failed.
+  **FIXED 2026-10-26** (coordination/PROGRAMME.md A1, Lancelot's item 4b): the body gains
+  `irreflexive (@arc D)`, the body of `two_extremal.loopless` (`meta/probe_hints/linial_berge_statement.v`;
+  non-vacuity `conjectures/grounding_unvd_sad.v:linial_berge_hyps_nonvacuous`). No edge uses the row.
 - `arxiv:1608.03040#04` (Open Problem 3) →
   `conjectures/colouring_variants.v:majority_3col_eulerian_statement` — **too strong (mild)**.
   `eulerian` keeps only the balanced-degree condition and drops connectivity, so the hypothesis is

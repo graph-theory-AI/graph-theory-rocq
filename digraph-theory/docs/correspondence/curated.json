@@ -1826,7 +1826,7 @@
     },
     "linial_berge_statement": {
       "title": "Linial–Berge path-partition duality",
-      "decoded": "For every digraph D and every k there exist a path-partition Q of V(D) (Q partitions every vertex into vertex-disjoint directed paths, pp_partition Q) and a vertex set S inducing a subdigraph with directed chromatic number ≤ k (dicolorableb (D[S]) k, i.e. χ⃗(D[S]) ≤ k) such that the k-norm of Q — the sum over paths of min(k, number of vertices on the path) — equals |S| (pp_knorm k Q = #|S|), and this is optimal: no path-partition Q' has k-norm smaller than |S| (forall Q' path-partition, #|S| ≤ pp_knorm k Q'). In other words the minimum k-norm over path-partitions equals the maximum order of an induced χ⃗ ≤ k subdigraph.",
+      "decoded": "For every loopless digraph D and every k there exist a path-partition Q of V(D) (Q partitions every vertex into vertex-disjoint directed paths, pp_partition Q) and a vertex set S inducing a subdigraph with directed chromatic number ≤ k (dicolorableb (D[S]) k, i.e. χ⃗(D[S]) ≤ k) such that the k-norm of Q — the sum over paths of min(k, number of vertices on the path) — equals |S| (pp_knorm k Q = #|S|), and this is optimal: no path-partition Q' has k-norm smaller than |S| (forall Q' path-partition, #|S| ≤ pp_knorm k Q'). In other words the minimum k-norm over path-partitions equals the maximum order of an induced χ⃗ ≤ k subdigraph.",
       "match_title": "Linial-Berge path partition duality",
       "source": {
         "slug": "linial_berge_path_partition_duality"
