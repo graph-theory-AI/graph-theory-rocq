@@ -692,6 +692,16 @@
       "note": "Proof consumer antidirected_tree_is_tree over the chain antidirected_tree; statement and script unchanged (conversion)."
     },
     {
+      "path": "digraph-theory/theories/conjectures/grounding_P9.v",
+      "name": "diregular",
+      "note": "Proof consumer arc_disjoint_hyps_nonvacuous (l.308), added on 2026-10-26 with the 0 < #|D| guard of arc_disjoint_directed_cycles_in_regular_directed_gra_statement (ece7cbfb): its type reads diregular D 1 over the directed triangle; no existing object changed."
+    },
+    {
+      "path": "digraph-theory/theories/conjectures/grounding_P9.v",
+      "name": "indeg",
+      "note": "Short-name match: the proof of arc_disjoint_hyps_nonvacuous (l.311, added on 2026-10-26, ece7cbfb) unfolds /outdeg /degree_balance.indeg; no existing object changed."
+    },
+    {
       "path": "digraph-theory/theories/conjectures/grounding_X2.v",
       "name": "min_semidegree_at_least",
       "note": "Proof consumers semideg_emptyD, x2_delta0_unguarded_false and x2_delta0_hyps_nonvacuous over the chain min_semidegree_at_least; statements unchanged."
