@@ -369,6 +369,16 @@ move=> h'; have : 1 * 3 + 2 * 1 <= 1 * 3 + 1 by apply: leq_trans h'; rewrite leq
 by [].
 Qed.
 
+(** A non-vacuous positive instance (Arthur's optional nit, his (137)): m_2(K_3) = 2 <= 2/1. *)
+Lemma g237_K3_two_density : x237_two_density_at_most 'K_3 2 1.
+Proof.
+move=> S h3.
+have hS : #|S| <= 3 by have := max_card S; rewrite card_ord.
+have e3 : #|S| = 3 by apply/eqP; rewrite eqn_leq hS h3.
+have := g237_edge_count_le (g237_card_induced S); rewrite e3 => he.
+by rewrite mul1n; apply: leq_trans (leq_add he (leqnn _)) _.
+Qed.
+
 Lemma g237_K2_forest_edges : x237_forest_edges (E('K_2)).
 Proof. by split=> //; apply: g237_small_forest; rewrite card_ord. Qed.
 
@@ -384,12 +394,12 @@ Qed.
 (** ** helper_sanity (shared by the six rows) *)
 
 Definition g237_ksw_helpers_claim : Prop :=
-  [/\ x237_two_density_at_most 'K_2 1 1, ~ x237_two_density_at_most 'K_3 1 1,
+  [/\ x237_two_density_at_most 'K_2 1 1, x237_two_density_at_most 'K_3 2 1, ~ x237_two_density_at_most 'K_3 1 1,
       x237_forest_edges (E('K_2)) & ~ x237_forest_edges (E('K_3))].
 
 Theorem g237_ksw_helpers_sanity : g237_ksw_helpers_claim.
 Proof.
-split; [exact: g237_K2_two_density | exact: g237_K3_not_two_density
+split; [exact: g237_K2_two_density | exact: g237_K3_two_density | exact: g237_K3_not_two_density
        | exact: g237_K2_forest_edges | exact: g237_K3_not_forest_edges].
 Qed.
 
