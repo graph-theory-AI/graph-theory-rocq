@@ -8125,11 +8125,14 @@
    "audit_page": "todo"
   },
   "erdos_554": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x239-cube-ramsey-turan-regular",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X239.v:odd_cycle_triangle_ramsey_ratio_statement. Erdos Problems #554 (open at the mirror 10fb9c15): R_k(C_{2n+1}) / R_k(K_3) -> 0 for n >= 2, as q R1 <= R3 eventually, with X195 x195_ramsey_number k. Literature: before the corpus pin (b72c5857, 2026-09-23), 2510.17981 (2025-10-20) Theorem 1.1 with 2608.02522 (v1 2026-08-03, v2 2026-09-07) l.236-240 give the row for n >= 4 (unrefereed lower bound); n = 2, 3 open."
   },
   "erdos_555": {
    "statement": "todo",
@@ -8281,11 +8284,14 @@
    "note": "Authored in XE2.v:erdos_570_statement. Encodes Erdos Problems #570 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_571": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x239-cube-ramsey-turan-regular",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X239.v:rational_turan_exponent_statement. Erdos Problems #571: for rational alpha = p/q in [1, 2) a bipartite G with ex(n; G) asymp n^alpha, both bounds to the q-th power, ex(n; G) required to exist (exists m). Literature: SOLVED before the corpus pin (b72c5857, 2026-09-23), not in the pinned status: proved (Lean) at the mirror, arXiv:2609.25050v1 (submitted 2026-09-06), unrefereed; encoded as stated."
   },
   "erdos_572": {
    "statement": "done",
@@ -8298,11 +8304,14 @@
    "note": "Authored in X237.v:even_cycle_turan_lower_statement. Erdos Problems #572 (open at the mirror 10fb9c15): for k >= 3, ex(n; C_{2k}) >> n^{1+1/k}, as a^k n^{k+1} <= (b ex)^k for n >= n0, with D2tur's is_turan_number and GTBase cycle_graph. Literature: open for general k (known for k = 2, 3, 5)."
   },
   "erdos_573": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x239-cube-ramsey-turan-regular",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X239.v:triangle_square_free_turan_asymptotic_statement. Erdos Problems #573 (open at the mirror 10fb9c15): ex(n; {C_3, C_4}) ~ (n/2)^{3/2}, affirmative form, squared with epsilon = 1/q, D2tur is_turan_number over the family {C_3, C_4}."
   },
   "erdos_574": {
    "statement": "todo",
@@ -8312,11 +8321,14 @@
    "audit_page": "todo"
   },
   "erdos_575": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x239-cube-ramsey-turan-regular",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X239.v:bipartite_turan_compactness_statement. Erdos Problems #575: for every finite family with a bipartite member some bipartite member G has ex(n; G) <<_F ex(n; F), affirmative form, the eventual form of D2tur opg:turan_number_of_a_finite_family. Literature: FALSE AS STATED before the corpus pin (b72c5857, 2026-09-23), not in the pinned status: the folklore family {K_{1,2}, 2K_2} (OpenAI report Ch. 10 Section 1.1; disproved at the mirror); the corrected cycle form refuted by its Theorem 1.1; encoded as stated."
   },
   "erdos_576": {
    "statement": "todo",
@@ -9258,11 +9270,14 @@
    "note": "Authored in XE2.v:erdos_816_statement. Encodes Erdos Problems #816 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_82": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x239-cube-ramsey-turan-regular",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X239.v:regular_induced_subgraph_superlogarithmic_statement. Erdos Problems #82 (open at the mirror 10fb9c15 and in 2604.08215v3 l.125-135): F(n) / log n -> oo, as M trunc_log 2 n <= |S| for a regular induced S, eventually (GTBase regular, induced)."
   },
   "erdos_832": {
    "statement": "done",
@@ -9349,11 +9364,14 @@
    "note": "Authored in XE1.v:erdos_85_statement. Encodes Erdos Problems #85 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_86": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x239-cube-ramsey-turan-regular",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X239.v:hypercube_dense_subgraph_C4_statement. Erdos Problems #86 (open at the teorth/erdosproblems mirror 10fb9c15): every subgraph of Q_n with >= (1/2 + o(1)) n 2^{n-1} edges contains a C_4, affirmative form, epsilon = 1/q as (q + 2) n 2^n <= 4 q |F|, spanning subgraphs by edge set (GTBase product_hypercube, del_edge_set, has_subgraph, cycle_graph 4)."
   },
   "erdos_87": {
    "statement": "done",
