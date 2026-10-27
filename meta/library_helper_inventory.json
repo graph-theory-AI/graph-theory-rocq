@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2001,
-      "cross_file_files": 1036,
+      "cross_file_declarations": 2005,
+      "cross_file_files": 1038,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -4295,7 +4295,11 @@
           "certificates_of": [],
           "declarations": [
             "chromatic-theory/theories/conjectures/X124.v:x124_poly_eval",
+            "chromatic-theory/theories/conjectures/X238.v:path_free_polynomial_tau_bound_statement",
+            "chromatic-theory/theories/conjectures/X238.v:tau_bounded_hereditary_polynomial_statement",
             "chromatic-theory/theories/conjectures/X3.v:x3_poly_eval",
+            "chromatic-theory/theories/conjectures/grounding_X238.v:g238_hered_hyp_claim",
+            "chromatic-theory/theories/conjectures/grounding_X238.v:g238_path_hyp_claim",
             "chromatic-theory/theories/examples/poly_list_chi_bounded.v:empty_list_forces_chi0",
             "chromatic-theory/theories/foundations/poly_forms.v:x3_poly_evalE",
             "chromatic-theory/theories/foundations/poly_forms.v:x3_poly_eval_dom",
@@ -4308,7 +4312,9 @@
           ],
           "files": [
             "chromatic-theory/theories/conjectures/X124.v",
+            "chromatic-theory/theories/conjectures/X238.v",
             "chromatic-theory/theories/conjectures/X3.v",
+            "chromatic-theory/theories/conjectures/grounding_X238.v",
             "chromatic-theory/theories/examples/poly_list_chi_bounded.v",
             "chromatic-theory/theories/foundations/poly_forms.v",
             "extremal-graph-theory/theories/conjectures/X59.v",
@@ -4318,6 +4324,8 @@
             "minor-theory/theories/conjectures/X220.v"
           ],
           "statements": [
+            "chromatic-theory/theories/conjectures/X238.v:path_free_polynomial_tau_bound_statement",
+            "chromatic-theory/theories/conjectures/X238.v:tau_bounded_hereditary_polynomial_statement",
             "extremal-graph-theory/theories/conjectures/X59.v:c4_free_subgraph_polynomial_average_degree_statement",
             "extremal-graph-theory/theories/conjectures/X60.v:induced_saturation_even_cycle_polynomial_size_statement",
             "graph-theory-misc/theories/conjectures/X128.v:dvorak_cheap_balanced_separator_bounded_expansion_statement",
@@ -4345,7 +4353,9 @@
         "provider_unlisted": false,
         "require_chain": {
           "chromatic-theory/theories/conjectures/X124.v": "unknown",
+          "chromatic-theory/theories/conjectures/X238.v": "unknown",
           "chromatic-theory/theories/conjectures/X3.v": "unknown",
+          "chromatic-theory/theories/conjectures/grounding_X238.v": "unknown",
           "chromatic-theory/theories/examples/poly_list_chi_bounded.v": "unknown",
           "chromatic-theory/theories/foundations/poly_forms.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X59.v": "unknown",
@@ -24513,13 +24523,13 @@
     ]
   },
   "counts": {
-    "files": 330,
-    "helpers": 2684,
+    "files": 331,
+    "helpers": 2685,
     "repeated_body_shapes": 150,
-    "repeated_normalized_names": 217,
+    "repeated_normalized_names": 218,
     "repeated_signature_shapes": 327,
-    "statements_excluded": 728,
-    "x_wave_helpers": 1523
+    "statements_excluded": 730,
+    "x_wave_helpers": 1524
   },
   "groups": {
     "body_shape_hash": {
@@ -26666,6 +26676,10 @@
       "switching_reconstructible": [
         "Digraph.conjectures.P9.switching_reconstructible",
         "Reconstruction.conjectures.U11.switching_reconstructible"
+      ],
+      "tau": [
+        "Chromatic.conjectures.X238.x238_tau",
+        "Packing.conjectures.X111.x111_tau"
       ],
       "theta": [
         "Minor.conjectures.X220.x220_theta",
@@ -33746,6 +33760,26 @@
       "qualified_name": "Chromatic.conjectures.X236.x236_sun",
       "signature": "(t : nat) : sgraph",
       "signature_shape_hash": "08966ef7549ff069ffd8cea512977011240f4bcbac34c770d72caca461a2a2c5"
+    },
+    {
+      "body_hash": "d7db7d0866544d15b2456a2bd5f4e150e10e2f819d08b3f05daf6d3b31539200",
+      "body_shape_hash": "d7db7d0866544d15b2456a2bd5f4e150e10e2f819d08b3f05daf6d3b31539200",
+      "declaration_hash": "139418feb1f074b01bc1dc786de0825cc80b0f4fccbac5be938e15839e7a1219",
+      "direct_consumers": [
+        "Chromatic.conjectures.X238.path_free_polynomial_tau_bound_statement",
+        "Chromatic.conjectures.X238.tau_bounded_hereditary_polynomial_statement"
+      ],
+      "kind": "Definition",
+      "line": 20,
+      "local_dependencies": [],
+      "name": "x238_tau",
+      "normalized_name": "tau",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X238.v",
+      "phase": "X238",
+      "qualified_name": "Chromatic.conjectures.X238.x238_tau",
+      "signature": "(G : sgraph) (d t : nat) : Prop",
+      "signature_shape_hash": "0ade3059baf628be21ec103dfa719f9abaffd5a9f8452b000aa9c2a8cb650509"
     },
     {
       "body_hash": "a252d3382e9e2e9f0450759c627d453616f368776f8069089a1ef10686104455",
