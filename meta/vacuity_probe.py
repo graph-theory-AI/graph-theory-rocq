@@ -30,7 +30,13 @@ Usage:
   python3 meta/vacuity_probe.py --all                                 # whole v2 conjecture corpus (slow)
   python3 meta/vacuity_probe.py --validate                            # self-test: regression + recall + control
 Runs with the coqc on PATH, or through `opam exec --switch $ROCQ_OPAM_SWITCH` when set (Rocq 9.1.1).  Read-only w.r.t. the repo (scratch in a tmpdir).
-Exit code 0 iff nothing was FLAGGED (suitable for `make probe`).
+Exit code 0 iff nothing was FLAGGED, INCOMPLETE or NOT-FOUND (suitable for `make probe`); a
+requested name the index does not hold (a misspelled or renamed statement) is NOT-FOUND.  A
+statement is INCOMPLETE when its probes could not search: one of its coqc runs ended abnormally
+(killed, e.g. by the OOM killer), the probes' common setup does not compile (the preflight: a parse
+error, an unbuilt or stale module, a renamed statement), its hint's imports do not load, or its
+small-model file failed outside its Fail commands.  Such runs settle nothing, so the probe fails
+closed instead of reporting `ok`; the designed timeout stays a search budget.
 """
 from __future__ import annotations
 import argparse, concurrent.futures, itertools, json, os, re, subprocess, sys, tempfile
@@ -115,6 +121,21 @@ def sh(args, timeout):
         return 124, "<timeout>"
 
 
+# A coqc run that ends abnormally settles nothing either way: killed by a signal (a negative return
+# code; the OOM killer's SIGKILL is -9) or killed under a wrapper shell or `opam exec` (137 = 128 + 9).
+# That is an environment failure, not a probe outcome, so the statement is INCOMPLETE, never `ok`
+# (fail closed).  The designed timeout (124 above) keeps its meaning: a search budget, not a failure.
+KILLED_RCS = {137}
+
+
+class ProbeIncomplete(Exception):
+    """A probe's coqc run ended abnormally; the statement it was probing gets no verdict."""
+
+
+def killed(rc: int) -> bool:
+    return rc < 0 or rc in KILLED_RCS
+
+
 def area_flags(area: str) -> list[str]:
     """Load-path flags for an area, parsed from its _CoqProject (paths made absolute)."""
     cp = ROOT / area / "_CoqProject"
@@ -149,14 +170,19 @@ def build_index() -> dict[str, tuple[str, str, str, str]]:
 
 
 def compile_snippet(area: str, ns: str, stem: str, body: str, timeout: int) -> tuple[bool, str]:
-    """Write a scratch .v that imports the module and appends `body`; return (compiled_ok, log)."""
-    header = f"From {ns}.conjectures Require Import {stem}.\n"
+    """Write a scratch .v that imports the module and appends `body`; return (compiled_ok, log).
+    A coqc run that ended abnormally raises ProbeIncomplete.  The ladders are ssreflect tactics
+    (`done`, `by []`, `move=>`), so the header imports MathComp's all_boot first: a statement file
+    that only Require Imports its dependencies does not bring ssreflect into the snippet."""
+    header = f"From mathcomp Require Import all_boot.\nFrom {ns}.conjectures Require Import {stem}.\n"
     with tempfile.TemporaryDirectory() as td:
         f = Path(td) / "probe.v"
         f.write_text(header + body + "\n")
         rc, log = sh([*coqc_cmd(), "-q", *area_flags(area), str(f)], timeout)
         if rc != 0 and ("No such file" in log or "not installed" in log or "command not found" in log):
             sys.exit(f"vacuity_probe: coqc toolchain unavailable ({log.strip()[:200]})")
+        if killed(rc):
+            raise ProbeIncomplete(f"coqc ended abnormally (rc {rc})")
         return rc == 0, log
 
 
@@ -164,12 +190,61 @@ def compile_hint(area: str, hint: Path, timeout: int) -> bool:
     """Compile a witness hint's TEXT in a throwaway tmpdir so NO .vo/.glob/.vos/.vok/.aux
     artifacts land next to the hint (the probe stays read-only w.r.t. the repo; hints only
     use logical `From ... Require` imports resolved via `area_flags`, so location is irrelevant).
-    rc==0 ⇒ the refutation still compiles ⇒ the statement is settleable."""
+    rc==0 ⇒ the refutation still compiles ⇒ the statement is settleable.  An abnormal end raises
+    ProbeIncomplete (it must not read as `stale-FIX-OK`), and so do imports that do not load: the
+    hint's leading Require / Import / Set block is compiled alone first, so a hint that fails only
+    because its libraries are unbuilt or stale is not a verified fix."""
     with tempfile.TemporaryDirectory() as td:
+        text = hint.read_text()
+        setup = Path(td) / "hint_setup.v"
+        setup.write_text(hint_setup(text) + "\n")
+        rc, log = sh([*coqc_cmd(), "-q", *area_flags(area), str(setup)], max(timeout, 90))
+        if killed(rc):
+            raise ProbeIncomplete(f"coqc ended abnormally on the imports of the hint {hint.name} (rc {rc})")
+        if rc != 0:
+            raise ProbeIncomplete(f"the imports of the hint {hint.name} do not load: {first_error(log)}")
         f = Path(td) / hint.name
-        f.write_text(hint.read_text())
+        f.write_text(text)
         rc, _ = sh([*coqc_cmd(), "-q", *area_flags(area), str(f)], max(timeout, 90))
+        if killed(rc):
+            raise ProbeIncomplete(f"coqc ended abnormally on the hint {hint.name} (rc {rc})")
         return rc == 0
+
+
+HINT_SETUP_RE = re.compile(r"(From|Require|Import|Export|Set|Unset|Local|Global|Open|Close)\b")
+
+
+def hint_setup(text: str) -> str:
+    """The leading sentences of a hint that load and configure (From / Require / Import / Set ...),
+    up to its first definition, lemma or section."""
+    clean = strip_comments(text)
+    i, out = 0, []
+    while True:
+        while i < len(clean) and clean[i].isspace():
+            i += 1
+        if i >= len(clean) or not HINT_SETUP_RE.match(clean, i):
+            return "\n".join(out)
+        j = sentence_end(clean, i)
+        out.append(clean[i:j].strip())
+        i = j
+
+
+def first_error(log: str) -> str:
+    lines = [line.strip() for line in log.splitlines() if line.strip()]
+    return next((line for line in lines if line.startswith("Error")), lines[-1] if lines else "")[:200]
+
+
+def preflight(area: str, ns: str, stem: str, name: str, timeout: int) -> None:
+    """The probes' common setup must compile on its own: the header, both ladders, the small-model
+    import, the statement as a Prop, and each ladder closing a trivial goal.  Otherwise every probe
+    would fail before searching (a parse error, an unbuilt or stale module, a renamed statement)
+    and read as "not settled", so the statement is INCOMPLETE instead."""
+    body = "\n".join(["From GTBase Require Import finite_graph.", LADDER, SMALL_LADDER,
+                      f"Check ({name} : Prop).",
+                      "Goal True. Proof. __probe. Qed.", "Goal True. Proof. __small_probe. Qed."])
+    ok, log = compile_snippet(area, ns, stem, body, max(timeout, 90))
+    if not ok:
+        raise ProbeIncomplete(f"probe setup does not compile: {first_error(log)}")
 
 
 def leading_binder_types(body: str, limit: int = 2) -> list[str]:
@@ -242,6 +317,10 @@ def compile_instantiations(area: str, ns: str, stem: str, name: str, body: str,
     # All attempted definitions are expected to fail. If one unexpectedly succeeds, Rocq
     # rejects its `Fail` wrapper with this diagnostic: that specialization settled the row.
     settled = (not ok) and "The command has not failed" in log
+    # Any other failure (not the timeout budget) happened outside the Fail commands: the
+    # specializations never ran, so the row has no verdict.
+    if not ok and not settled and log != "<timeout>":
+        raise ProbeIncomplete(f"small-model file failed outside its Fail commands: {first_error(log)}")
     return settled, log
 
 
@@ -249,15 +328,22 @@ def probe_statement(name: str, idx, timeout: int) -> dict:
     if name not in idx:
         return {"name": name, "status": "NOT-FOUND", "flag": False}
     area, stem, ns, body = idx[name]
-    # Layer 1: auto tripwire, both polarities.
-    ok_true, _ = compile_snippet(area, ns, stem, f"{LADDER}\nLemma __pt : {name}. Proof. __probe. Qed.", timeout)
-    ok_false, _ = compile_snippet(area, ns, stem, f"{LADDER}\nLemma __pf : ~ ({name}). Proof. __probe. Qed.", timeout)
-    # Layer 2: curated witness hint, if present.
-    hint = HINTS / f"{name}.v"
-    hint_state = "none"
-    if hint.exists():
-        hint_state = "settles" if compile_hint(area, hint, timeout) else "stale-FIX-OK"
-    instantiation, _ = compile_instantiations(area, ns, stem, name, body, timeout)
+    try:
+        # The common setup must compile, or no probe below can search.
+        preflight(area, ns, stem, name, timeout)
+        # Layer 1: auto tripwire, both polarities.
+        ok_true, _ = compile_snippet(area, ns, stem, f"{LADDER}\nLemma __pt : {name}. Proof. __probe. Qed.", timeout)
+        ok_false, _ = compile_snippet(area, ns, stem, f"{LADDER}\nLemma __pf : ~ ({name}). Proof. __probe. Qed.", timeout)
+        # Layer 2: curated witness hint, if present.
+        hint = HINTS / f"{name}.v"
+        hint_state = "none"
+        if hint.exists():
+            hint_state = "settles" if compile_hint(area, hint, timeout) else "stale-FIX-OK"
+        instantiation, _ = compile_instantiations(area, ns, stem, name, body, timeout)
+    except ProbeIncomplete as exc:
+        # A probe that could not search (a killed run, a setup that does not compile) leaves the
+        # statement without a verdict: neither ok nor FLAGGED.
+        return {"name": name, "area": area, "flag": False, "status": "INCOMPLETE", "reason": str(exc)}
     flag = ok_true or ok_false or hint_state == "settles" or instantiation
     return {
         "name": name, "area": area, "flag": flag,
@@ -282,18 +368,23 @@ def names_from_files(files: list[str]) -> list[str]:
 
 def report(rows: list[dict]) -> int:
     flagged = [r for r in rows if r.get("flag")]
+    incomplete = [r for r in rows if r.get("status") == "INCOMPLETE"]
+    not_found = [r for r in rows if r.get("status") == "NOT-FOUND"]
     print(f"\n{'statement':52s} {'auto=T':6s} {'auto=F':6s} {'small':6s} {'hint':14s} verdict")
     print("-" * 100)
     for r in sorted(rows, key=lambda r: (not r.get("flag"), r["name"])):
-        if r.get("status") == "NOT-FOUND":
-            print(f"{r['name']:52s} {'-':6s} {'-':6s} {'-':6s} {'-':14s} NOT-FOUND")
+        if r.get("status") in ("NOT-FOUND", "INCOMPLETE"):
+            reason = f" ({r['reason']})" if r.get("reason") else ""
+            print(f"{r['name']:52s} {'-':6s} {'-':6s} {'-':6s} {'-':14s} {r['status']}{reason}")
             continue
         print(f"{r['name']:52s} {str(r['auto_true']):6s} {str(r['auto_false']):6s} "
               f"{str(r['instantiation']):6s} "
               f"{r['hint']:14s} {'*** FLAGGED ***' if r['flag'] else 'ok'}")
     print("-" * 100)
-    print(f"{len(rows)} probed · {len(flagged)} FLAGGED")
-    return 1 if flagged else 0
+    print(f"{len(rows)} probed · {len(flagged)} FLAGGED"
+          + (f" · {len(incomplete)} INCOMPLETE (no search ran)" if incomplete else "")
+          + (f" · {len(not_found)} NOT-FOUND (not in the index)" if not_found else ""))
+    return 1 if flagged or incomplete or not_found else 0
 
 
 def probe_many(names: list[str], idx, timeout: int, jobs: int) -> list[dict]:
@@ -369,11 +460,19 @@ def validate(idx, timeout: int, jobs: int) -> int:
               f"hint={r.get('hint')} flag={r.get('flag')} — was a fix reverted?")
 
     print("\n== RECALL: synthetic vacuous fixture — MUST FLAG ==")
-    recall_ok = recall_flags(idx, timeout)
+    try:
+        recall_ok = recall_flags(idx, timeout)
+    except ProbeIncomplete as exc:
+        print(f"!! RECALL: {exc}")
+        recall_ok = False
     print(f"synthetic trivially-true statement flagged by AUTO tripwire: {recall_ok}   (want True)")
     if not recall_ok:
         print("!! RECALL: the flagging path did not fire on a trivially-true statement")
-    instantiation_ok = recall_instantiations(idx, timeout)
+    try:
+        instantiation_ok = recall_instantiations(idx, timeout)
+    except ProbeIncomplete as exc:
+        print(f"!! RECALL: {exc}")
+        instantiation_ok = False
     print(f"synthetic forall-n statement refuted at n=0:             {instantiation_ok}   (want True)")
     if not instantiation_ok:
         print("!! RECALL: the instantiation/small-model path did not fire")
@@ -382,13 +481,16 @@ def validate(idx, timeout: int, jobs: int) -> int:
     g = probe_many(CONTROL_GOOD, idx, timeout, jobs)
     report(g)
     fp = sum(r["flag"] for r in g)
+    # An INCOMPLETE or NOT-FOUND row is not a pass: no search ran on it, so it was never checked.
+    incomplete = [r["name"] for r in b + g if r.get("status") in ("INCOMPLETE", "NOT-FOUND")]
 
     print("\n== summary ==")
     print(f"regression (historical fixes stale-FIX-OK): {'PASS' if not reverted else 'FAIL'}")
     print(f"recall (synthetic vacuous flagged):         {'PASS' if recall_ok else 'FAIL'}")
     print(f"recall (small-model specialization):        {'PASS' if instantiation_ok else 'FAIL'}")
     print(f"control false-positives:                    {fp}/{len(g)}   (want 0)")
-    return 0 if (not reverted and recall_ok and instantiation_ok and fp == 0) else 1
+    print(f"rows without a verdict (no search ran):     {len(incomplete)}   (want 0)")
+    return 0 if (not reverted and recall_ok and instantiation_ok and fp == 0 and not incomplete) else 1
 
 
 def main():
