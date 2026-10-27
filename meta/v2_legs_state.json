@@ -3260,18 +3260,24 @@
    "note": "Authored in X65.v:forest_free_polynomial_chi_bound_statement. Encodes Conjecture 1.3: every forest-free graph class is polynomially chi-bounded."
   },
   "axv_2202_05557_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x238-tau-two",
+   "package": "chromatic-theory",
+   "note": "Authored in X238.v:path_free_polynomial_tau_bound_statement. Scott-Seymour, Polynomial bounds for chromatic number V (arXiv:2202.05557v2, main.tex): H-free = no induced copy (l.78), tau_d(G) the largest t with K_d(t) as a not necessarily induced subgraph (l.113-114), the first referee question (l.138-140), affirmative form, H = P_k (GTBase ordinal_path), natural coefficient lists (GTBase horner_nat). Solved since the pin by Part VIII, arXiv:2303.11766v1 paththm (l.124-127), cited in the Notes; encoded as stated."
   },
   "axv_2202_05557_02": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x238-tau-two",
+   "package": "chromatic-theory",
+   "note": "Authored in X238.v:tau_bounded_hereditary_polynomial_statement. Scott-Seymour, Polynomial bounds for chromatic number V (arXiv:2202.05557v2, main.tex): hereditary (l.87-88, GTBase hereditary_class), tau_d (l.113-114), the second referee question (l.141-143): the affirmative form of the main question with an arbitrary f : nat -> nat in the hypothesis; the fallback \"What if d = 2?\" is its d = 2 instance, implied by it (Notes; leg done as agreed in Marcol (90))."
   },
   "axv_2202_06810_00": {
    "statement": "todo",
