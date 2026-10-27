@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **144 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 78}, by kind {'equiv': 6, 'implies': 138, 'refutes': 0, 'specializes': 0}; 94 Qed-proved relative theorems.
+- **145 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 79}, by kind {'equiv': 6, 'implies': 139, 'refutes': 0, 'specializes': 0}; 95 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
   - `bipartite_digraph_asymmetric_outdegree_girth_statement` implies `bipartite_digraph_outdegree_girth_statement` (digraph-theory/implications_X46.v)
@@ -156,6 +156,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `every_forest_is_good_statement` implies `every_forest_is_multibounding_statement` (chromatic-theory/implications_X218.v)
   - `every_forest_is_good_statement` implies `good_trees_disjoint_union_good_statement` (chromatic-theory/implications_X66.v)
   - `every_forest_is_multibounding_statement` implies `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` (chromatic-theory/implications_X218.v)
+  - `every_forest_is_multibounding_statement` implies `path_free_polynomial_tau_bound_statement` (chromatic-theory/implications_X238.v)
   - `faithful_cycle_covers_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
   - `forest_free_polynomial_chi_bound_statement` equiv `every_forest_is_good_statement` (chromatic-theory/implications_X218.v)
   - `forest_free_polynomial_chi_bound_statement` implies `every_forest_is_multibounding_statement` (chromatic-theory/implications_X218.v)
@@ -215,13 +216,13 @@ Area-local foundations (each area builds these on top of `base`):
   - `tree_decomposition_leaf_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
-- Edge evidence: **78 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **79 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
   - **opg**: 40 done · 8 partial · 0 blocked · 179 todo  (227 rows)
-  - **v2**: 79 done · 5 partial · 0 blocked · 1589 todo  (1673 rows)
+  - **v2**: 80 done · 5 partial · 0 blocked · 1588 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
 
