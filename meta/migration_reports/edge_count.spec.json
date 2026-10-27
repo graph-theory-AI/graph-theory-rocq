@@ -1751,6 +1751,26 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X233.v",
       "name": "edge_count",
       "note": "Public-only client of the canonical GTBase.common.edge_count (the grounding certificates of wave X233); the short name coincides with the D2ram/D2tur source names, which it does not use."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X237.v",
+      "name": "edge_count",
+      "note": "X237 imports D2tur for is_turan_number (a chain of this family, used as ex(n; Fam) in rows erdos:572 / erdos:714) and imports GTBase LAST, so its unqualified edge_count is the canonical GTBase.common.edge_count (used for the 2-density and density bounds of the KSW row), not the D2tur source of the same name."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X237.v",
+      "name": "is_turan_number",
+      "note": "X237 imports D2tur for is_turan_number (a chain of this family, used as ex(n; Fam) in rows erdos:572 / erdos:714) and imports GTBase LAST, so its unqualified edge_count is the canonical GTBase.common.edge_count (used for the 2-density and density bounds of the KSW row), not the D2tur source of the same name."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X237.v",
+      "name": "edge_count",
+      "note": "X237 imports D2tur for is_turan_number (a chain of this family, used as ex(n; Fam) in rows erdos:572 / erdos:714) and imports GTBase LAST, so its unqualified edge_count is the canonical GTBase.common.edge_count (used for the 2-density and density bounds of the KSW row), not the D2tur source of the same name."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X237.v",
+      "name": "is_turan_number",
+      "note": "X237 imports D2tur for is_turan_number (a chain of this family, used as ex(n; Fam) in rows erdos:572 / erdos:714) and imports GTBase LAST, so its unqualified edge_count is the canonical GTBase.common.edge_count (used for the 2-density and density bounds of the KSW row), not the D2tur source of the same name."
     }
   ],
   "distinct_variants": [
