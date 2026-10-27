@@ -7736,6 +7736,130 @@
           }
         }
       }
+    },
+    "X244": {
+      "phase": "X244",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X244.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X244 (A3 verifier Arthur; routing Lancelot (81), (82); selection x244-selection-by-marcol, design x244-design-by-marcol), branch math/marcol-x244-20261027, 2026-10-27",
+      "source_verified_by": "Arthur (X244 wave verifier, A3: pinned records re-read: data/erdos_graph.json at b72c5857, statements of erdos 134, 618, 127, 925 and 76 (pinned status solved for all five), identical to the v2 manifest rows at work/coordinator eb7f4a9f whose source_hash values the wave pins (5 / 5 equal at 56b2ade3); the Mac's deposit coordination/sources/x244-source-mac-20261027 (SHA256SUMS 9ecede2b, 36 files): Alon's note Alon-remark1901.txt Theorem 1.2 (l.30-38) and the remark c(n) = n^{-eps}; the published chapter (Sum(m)it 280, DOI 10.1007/978-3-032-18810-6_2, published online 2026-05-28) Theorem 3.2 (text l.377-383); Alon 1996, Alon-bipartite3.txt Theorem 1.1 (l.33-37); Alon-Rodl, Alon-Rodl-arodl4.txt equation (1) (l.60-65); Gruslys-Letzter arXiv:2008.05311v2 triangle-packing.tex thm:main (l.187-188); the corpus pin b72c5857 committed 2026-09-23)",
+      "source_verified_at": "2026-10-27",
+      "commit": "x244-diameter-two-completion-edwards-ramsey-triangles",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "Arthur (X244 wave verification, 2026-10-27)",
+      "faithfulness_result": "Readback 2026-10-27 (verifier Arthur): 5/5 PASS against the pinned texts and the sources, at math/marcol-x244-20261027 = 4168eebb (X244.v blob 6e757a46, grounding_X244.v blob 40ec40eb), on 56b2ade3; the bodies equal the DESIGN r1 agreed in my item (200). The bodies were read with upstream GraphTheory.core.sgraph.compl (x -- y iff x != y and not x -- y in G), GTBase del_edge_set (x -- y in G and [set x; y] not in the deleted set), so that compl (del_edge_set (compl G) X) is G plus the pairs of X on the same carrier and, with X \\subset E(compl G), #|X| counts the added edges; GTBase graph_dist (truncated at #|G|), edge_count, has_subgraph, 'K_n; upstream stable and N(x); Extremal.foundations.edge_colourings mono_copy F col c (an injective adjacency-preserving map whose image edges all have colour c: a not necessarily induced monochromatic copy; colours of non-edges are never read). erdos:134: for eps = 1/q and delta = 1/p (both monotone), deg^{2q} n^2 < n^q is deg < n^{1/2 - 1/q}; at most n^2 / p added non-edges give a triangle-free graph with every distance <= 2 (diameter 2, as X243's erdos:133). erdos:618: (r deg)^2 <= n is deg <= sqrt n / r; the uniform form (for every 1/p some 1/r and n0) is the o(.) statement. erdos:127: the largest bipartite subgraph is the largest cut b; X = 8b + 1 - 4m - 8K >= 0 with X^2 >= 8m + 1 is exactly b >= m/2 + (sqrt(8m+1) - 1)/8 + K; \"a sequence with f(m_i) -> oo\" iff f is unbounded. erdos:925: (c |S|)^{3q} >= n^{q+3} is |S| >= n^{1/3 + 1/q} / c; exists delta iff exists q. erdos:76: q n^2 <= 12 q |T| + n^2 is |T| >= (1 - 1/q) n^2 / 12, the lower half of (1 + o(1)) n^2 / 12; triangles sharing at most one vertex are edge-disjoint; each triangle monochromatic in its own colour. Literature lines checked in the deposited files, dated against the corpus pin (b72c5857, 2026-09-23): #134 and #618 proved before the pin (Alon: a triangle-free G with maximum degree <= c(n) sqrt n, 2 (log n)^{1/3} n^{-1/6} <= c(n) <= 1/10, becomes triangle-free of diameter 2 by adding at most 2.5 c n^2 edges; c(n) = n^{-eps} gives 134 for 0 < eps < 1/6, a larger eps following because its degree hypothesis is stronger; c = 1/r with r >= max(10, 3p) gives 618; the chapter published online 2026-05-28); #127 proved before the pin (Alon 1996 Theorem 1.1: at e = n^2/2, n even, the largest cut is >= e/2 + sqrt(e/8) + c e^{1/4}, and (sqrt(8e+1) - 1)/8 <= sqrt(e/8)); #925 false before the pin (Alon-Rodl (1): r(K_3, K_3, K_m) = Theta(m^3 polylog m), so graphs not Ramsey for K_3 on m^{3-o(1)} vertices with independence number < m refute every fixed delta); #76 proved before the pin (Gruslys-Letzter: every 2-coloured K_n has n^2/12 + o(n^2) pairwise edge-disjoint monochromatic triangles). All encoded as stated; all pinned \"solved\", so no CORPUS_FEEDBACK. Grounding (grounding_X244.v read; no Admitted / Axiom / Parameter / Conjecture / Hypothesis; the wave run's check_milestone compiles and decides): hyp_inhabited per row (the edgeless complete_multipartite_graph 1 5; K_1 with m = 0 at K = 0; K_2, which has no injective image of K_3; K_3 with a constant colouring); not_trivially_true in the contract form for all five rows, each variant its statement with one load-bearing hypothesis dropped (triangle-freeness twice; edge_count G = m; \"not Ramsey for K_3\"; n0 <= n), false (a triangle with isolated vertices keeps its K_3 under any addition; K_1 at K = 1; K_N with N > c^{3q}; K_3 with one pair coloured differently at q = 2) and implying its row; helper_sanity [] in every row; the 20 theorem and claim names of the wave exist in the file. The derived v2_legs_state entries, recomputed from 56b2ade3 and the wave with jq, equal the committed file (whole file, jq -S); README 484 / 11 / 40 / 1,138 against 479 / 11 / 40 / 1,143 at 56b2ade3; LANDED gains X244 extremal-graph-theory; four allowlist entries (134, 618, 127, 925: exists-after-graph-forall; 76 has no graph binder G); the edge_count consumer entries for both files match the one tracked name the two files use.",
+      "rows": {
+        "erdos_134": {
+          "formal_name": "triangle_free_low_degree_diameter_two_completion_statement",
+          "source_hash": "3034f3117b2d41514f9fa0f73e1e140afc67a6937a4ff2c8207d54be36d8149d",
+          "note": "Erdos Problems #134, Erdos-Gyarfas (proved before the corpus pin, pinned status solved: Alon, Triangle-free graphs of diameter 2, Theorem 1.2; Sum(m)it 280 chapter Theorem 3.2, online 2026-05-28): a triangle-free graph with maximum degree < n^{1/2-eps} becomes a triangle-free graph of diameter 2 after adding at most delta n^2 edges; eps = 1/q, delta = 1/p, edges added as compl (del_edge_set (compl G) X) (GTBase has_subgraph, del_edge_set, graph_dist; upstream compl).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g244_low_hyp_inhabited",
+              "claim": "g244_low_hyp_claim",
+              "references": [
+                "triangle_free_low_degree_diameter_two_completion_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g244_low_not_trivially_true",
+              "claim": "g244_low_ntt_claim",
+              "references": [
+                "triangle_free_low_degree_diameter_two_completion_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_618": {
+          "formal_name": "triangle_free_sublinear_degree_diameter_two_completion_statement",
+          "source_hash": "80c92c708aef94e35874493f61c7ab0c920b4f058112395ee2db5c682207fa3e",
+          "note": "Erdos Problems #618 (proved before the corpus pin, pinned status solved: Alon, Triangle-free graphs of diameter 2, Theorem 1.2 with c = 1/r; Sum(m)it 280 chapter Theorem 3.2): maximum degree o(n^{1/2}) implies h_2(G) = o(n^2), uniform form (for every 1/p some 1/r and n0) (GTBase has_subgraph, del_edge_set, graph_dist; upstream compl).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g244_sub_hyp_inhabited",
+              "claim": "g244_sub_hyp_claim",
+              "references": [
+                "triangle_free_sublinear_degree_diameter_two_completion_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g244_sub_not_trivially_true",
+              "claim": "g244_sub_ntt_claim",
+              "references": [
+                "triangle_free_sublinear_degree_diameter_two_completion_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_127": {
+          "formal_name": "bipartite_subgraph_edwards_excess_unbounded_statement",
+          "source_hash": "48f62c277cc0550b330d185694d75633fd3c5333a09d804df317b4b3469b040b",
+          "note": "Erdos Problems #127, Erdos-Gyarfas-Kohayakawa (proved before the corpus pin, pinned status solved: Alon, Bipartite subgraphs, Combinatorica 16 (1996), Theorem 1.1): the excess f(m) of the largest bipartite subgraph over the Edwards bound m/2 + (sqrt(8m+1) - 1)/8 is unbounded, the largest cut with an integer witness for the square root (GTBase edge_count).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g244_cut_hyp_inhabited",
+              "claim": "g244_cut_hyp_claim",
+              "references": [
+                "bipartite_subgraph_edwards_excess_unbounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g244_cut_not_trivially_true",
+              "claim": "g244_cut_ntt_claim",
+              "references": [
+                "bipartite_subgraph_edwards_excess_unbounded_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_925": {
+          "formal_name": "not_triangle_ramsey_independent_set_exponent_statement",
+          "source_hash": "53f8818555a9f1514d396e1fc55a5d81e207d8a87d107e70193983799c7f2bb7",
+          "note": "Erdos Problems #925 (false before the corpus pin, pinned status solved: Alon and Rodl, Sharp bounds for some multicolor Ramsey numbers, Combinatorica 25 (2005), equation (1): R(3,3,m) = m^{3-o(1)}): graphs not Ramsey for K_3 have independent sets >> n^{1/3+delta}, delta = 1/q, affirmative form (Extremal.foundations mono_copy; upstream stable).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g244_ram_hyp_inhabited",
+              "claim": "g244_ram_hyp_claim",
+              "references": [
+                "not_triangle_ramsey_independent_set_exponent_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g244_ram_not_trivially_true",
+              "claim": "g244_ram_ntt_claim",
+              "references": [
+                "not_triangle_ramsey_independent_set_exponent_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_76": {
+          "formal_name": "two_colouring_edge_disjoint_monochromatic_triangles_statement",
+          "source_hash": "0d0a6ab6e19d5d54ff306693048eb28173f226317ff43bacdcfe5d99ed566514",
+          "note": "Erdos Problems #76 (proved before the corpus pin, pinned status solved: Gruslys and Letzter, arXiv:2008.05311v2, Theorem 1.2): every 2-colouring of K_n has at least (1 - o(1)) n^2/12 edge-disjoint monochromatic triangles, as 3-sets of 'I_n sharing at most one vertex.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g244_mono_hyp_inhabited",
+              "claim": "g244_mono_hyp_claim",
+              "references": [
+                "two_colouring_edge_disjoint_monochromatic_triangles_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g244_mono_not_trivially_true",
+              "claim": "g244_mono_ntt_claim",
+              "references": [
+                "two_colouring_edge_disjoint_monochromatic_triangles_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
