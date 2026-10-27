@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 1981,
-      "cross_file_files": 1028,
+      "cross_file_declarations": 2001,
+      "cross_file_files": 1036,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -4239,17 +4239,23 @@
           "declarations": [
             "chromatic-theory/theories/conjectures/U8.v:chi_bounded",
             "chromatic-theory/theories/conjectures/X112.v:x112_chi_bounded",
+            "chromatic-theory/theories/conjectures/X236.v:sun_free_chi_bounded_statement",
+            "chromatic-theory/theories/conjectures/grounding_X236.v:g236_all_not_chi_bounded",
+            "chromatic-theory/theories/conjectures/grounding_X236.v:g236_sun_ntt_claim",
             "chromatic-theory/theories/migration/complement.v:<line 130>"
           ],
           "files": [
             "chromatic-theory/theories/conjectures/U8.v",
             "chromatic-theory/theories/conjectures/X112.v",
+            "chromatic-theory/theories/conjectures/X236.v",
+            "chromatic-theory/theories/conjectures/grounding_X236.v",
             "chromatic-theory/theories/migration/complement.v"
           ],
           "statements": [
             "chromatic-theory/theories/conjectures/U8.v:graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement",
             "chromatic-theory/theories/conjectures/U8.v:vertex_minor_closed_classes_are_chi_bounded_statement",
-            "chromatic-theory/theories/conjectures/X112.v:chi_bounded_closure_substitution_gluing_statement"
+            "chromatic-theory/theories/conjectures/X112.v:chi_bounded_closure_substitution_gluing_statement",
+            "chromatic-theory/theories/conjectures/X236.v:sun_free_chi_bounded_statement"
           ],
           "undecided": [],
           "unlisted": []
@@ -4270,6 +4276,8 @@
         "require_chain": {
           "chromatic-theory/theories/conjectures/U8.v": "unknown",
           "chromatic-theory/theories/conjectures/X112.v": "unknown",
+          "chromatic-theory/theories/conjectures/X236.v": "unknown",
+          "chromatic-theory/theories/conjectures/grounding_X236.v": "unknown",
           "chromatic-theory/theories/migration/complement.v": "no"
         },
         "same_file": {
@@ -8115,6 +8123,7 @@
             "extremal-graph-theory/theories/conjectures/X233.v:x233_degree_bounded",
             "extremal-graph-theory/theories/conjectures/X233.v:x233_homogeneous",
             "extremal-graph-theory/theories/conjectures/X233.v:x233_max_density_at_most",
+            "extremal-graph-theory/theories/conjectures/X237.v:x237_two_density_at_most",
             "extremal-graph-theory/theories/conjectures/X4.v:x4_edge_count",
             "extremal-graph-theory/theories/conjectures/X76.v:x76_edge_count",
             "extremal-graph-theory/theories/conjectures/X78.v:x78_edge_count",
@@ -8138,6 +8147,9 @@
             "extremal-graph-theory/theories/conjectures/grounding_X233.v:g233_edge_count_setT",
             "extremal-graph-theory/theories/conjectures/grounding_X233.v:g233_universal_complete",
             "extremal-graph-theory/theories/conjectures/grounding_X233.v:g233_universal_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:<line 110>",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:<line 118>",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:g237_edge_count_le",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 14>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 21>",
             "extremal-graph-theory/theories/migration/cut_size.v:<line 13>",
@@ -8165,12 +8177,14 @@
             "cycle-theory/theories/migration/cycle_vertices.v",
             "extremal-graph-theory/theories/conjectures/D2tur.v",
             "extremal-graph-theory/theories/conjectures/X233.v",
+            "extremal-graph-theory/theories/conjectures/X237.v",
             "extremal-graph-theory/theories/conjectures/X4.v",
             "extremal-graph-theory/theories/conjectures/X76.v",
             "extremal-graph-theory/theories/conjectures/X78.v",
             "extremal-graph-theory/theories/conjectures/grounding_D2ram.v",
             "extremal-graph-theory/theories/conjectures/grounding_D2tur.v",
             "extremal-graph-theory/theories/conjectures/grounding_X233.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v",
             "extremal-graph-theory/theories/migration/clique_counts.v",
             "extremal-graph-theory/theories/migration/cut_size.v",
             "extremal-graph-theory/theories/migration/cycle_lengths.v",
@@ -8189,6 +8203,7 @@
             "extremal-graph-theory/theories/conjectures/X233.v:bounded_density_universal_graph_statement",
             "extremal-graph-theory/theories/conjectures/X233.v:polynomial_close_rodl_statement",
             "extremal-graph-theory/theories/conjectures/X233.v:polynomial_degree_bounding_statement",
+            "extremal-graph-theory/theories/conjectures/X237.v:forest_removal_two_density_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:book_triangle_edge_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:c5_edge_count_above_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:triangle_supersaturation_statement",
@@ -8223,12 +8238,14 @@
           "cycle-theory/theories/migration/cycle_vertices.v": "unknown",
           "extremal-graph-theory/theories/conjectures/D2tur.v": "no",
           "extremal-graph-theory/theories/conjectures/X233.v": "no",
+          "extremal-graph-theory/theories/conjectures/X237.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X4.v": "no",
           "extremal-graph-theory/theories/conjectures/X76.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X78.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_D2ram.v": "no",
           "extremal-graph-theory/theories/conjectures/grounding_D2tur.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X233.v": "no",
+          "extremal-graph-theory/theories/conjectures/grounding_X237.v": "unknown",
           "extremal-graph-theory/theories/migration/clique_counts.v": "no",
           "extremal-graph-theory/theories/migration/cut_size.v": "no",
           "extremal-graph-theory/theories/migration/cycle_lengths.v": "unknown",
@@ -8516,6 +8533,7 @@
             "extremal-graph-theory/theories/conjectures/X233.v:x233_degree_bounded",
             "extremal-graph-theory/theories/conjectures/X233.v:x233_homogeneous",
             "extremal-graph-theory/theories/conjectures/X233.v:x233_max_density_at_most",
+            "extremal-graph-theory/theories/conjectures/X237.v:x237_two_density_at_most",
             "extremal-graph-theory/theories/conjectures/X4.v:x4_edge_count",
             "extremal-graph-theory/theories/conjectures/X76.v:x76_edge_count",
             "extremal-graph-theory/theories/conjectures/X78.v:x78_edge_count",
@@ -8539,6 +8557,9 @@
             "extremal-graph-theory/theories/conjectures/grounding_X233.v:g233_edge_count_setT",
             "extremal-graph-theory/theories/conjectures/grounding_X233.v:g233_universal_complete",
             "extremal-graph-theory/theories/conjectures/grounding_X233.v:g233_universal_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:<line 110>",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:<line 118>",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:g237_edge_count_le",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 14>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 21>",
             "extremal-graph-theory/theories/migration/cut_size.v:<line 13>",
@@ -8566,12 +8587,14 @@
             "cycle-theory/theories/migration/cycle_vertices.v",
             "extremal-graph-theory/theories/conjectures/D2ram.v",
             "extremal-graph-theory/theories/conjectures/X233.v",
+            "extremal-graph-theory/theories/conjectures/X237.v",
             "extremal-graph-theory/theories/conjectures/X4.v",
             "extremal-graph-theory/theories/conjectures/X76.v",
             "extremal-graph-theory/theories/conjectures/X78.v",
             "extremal-graph-theory/theories/conjectures/grounding_D2ram.v",
             "extremal-graph-theory/theories/conjectures/grounding_D2tur.v",
             "extremal-graph-theory/theories/conjectures/grounding_X233.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v",
             "extremal-graph-theory/theories/migration/clique_counts.v",
             "extremal-graph-theory/theories/migration/cut_size.v",
             "extremal-graph-theory/theories/migration/cycle_lengths.v",
@@ -8589,6 +8612,7 @@
             "extremal-graph-theory/theories/conjectures/X233.v:bounded_density_universal_graph_statement",
             "extremal-graph-theory/theories/conjectures/X233.v:polynomial_close_rodl_statement",
             "extremal-graph-theory/theories/conjectures/X233.v:polynomial_degree_bounding_statement",
+            "extremal-graph-theory/theories/conjectures/X237.v:forest_removal_two_density_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:book_triangle_edge_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:c5_edge_count_above_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:triangle_supersaturation_statement",
@@ -8623,12 +8647,14 @@
           "cycle-theory/theories/migration/cycle_vertices.v": "unknown",
           "extremal-graph-theory/theories/conjectures/D2ram.v": "no",
           "extremal-graph-theory/theories/conjectures/X233.v": "no",
+          "extremal-graph-theory/theories/conjectures/X237.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X4.v": "no",
           "extremal-graph-theory/theories/conjectures/X76.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X78.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_D2ram.v": "no",
           "extremal-graph-theory/theories/conjectures/grounding_D2tur.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X233.v": "no",
+          "extremal-graph-theory/theories/conjectures/grounding_X237.v": "unknown",
           "extremal-graph-theory/theories/migration/clique_counts.v": "no",
           "extremal-graph-theory/theories/migration/cut_size.v": "no",
           "extremal-graph-theory/theories/migration/cycle_lengths.v": "unknown",
@@ -9047,6 +9073,9 @@
             "extremal-graph-theory/theories/conjectures/X234.v:clique_ramsey_count_statement",
             "extremal-graph-theory/theories/conjectures/X234.v:mixed_blowup_colouring_statement",
             "extremal-graph-theory/theories/conjectures/X234.v:multicolour_clique_ramsey_count_statement",
+            "extremal-graph-theory/theories/conjectures/X237.v:diagonal_ramsey_ratio_unbounded_statement",
+            "extremal-graph-theory/theories/conjectures/X237.v:hypercube_ramsey_linear_statement",
+            "extremal-graph-theory/theories/conjectures/X237.v:multicolour_clique_ramsey_exponential_statement",
             "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_K2_ramsey",
             "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_clique_exact",
             "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_clique_hyp_claim",
@@ -9057,17 +9086,28 @@
             "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_multi_hyp_claim",
             "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_multi_noarrows",
             "extremal-graph-theory/theories/conjectures/grounding_X234.v:g234_ramsey_unique",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:g237_K2_ramsey",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:g237_K3_one_colour",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:g237_Q1_ramsey",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:g237_diag_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:g237_hcube_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v:g237_schur_hyp_claim",
             "extremal-graph-theory/theories/conjectures/implications_X215.v:x215_ramsey_number_equiv_x195_ramsey_number"
           ],
           "files": [
             "extremal-graph-theory/theories/conjectures/X234.v",
+            "extremal-graph-theory/theories/conjectures/X237.v",
             "extremal-graph-theory/theories/conjectures/grounding_X234.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X237.v",
             "extremal-graph-theory/theories/conjectures/implications_X215.v"
           ],
           "statements": [
             "extremal-graph-theory/theories/conjectures/X234.v:clique_ramsey_count_statement",
             "extremal-graph-theory/theories/conjectures/X234.v:mixed_blowup_colouring_statement",
-            "extremal-graph-theory/theories/conjectures/X234.v:multicolour_clique_ramsey_count_statement"
+            "extremal-graph-theory/theories/conjectures/X234.v:multicolour_clique_ramsey_count_statement",
+            "extremal-graph-theory/theories/conjectures/X237.v:diagonal_ramsey_ratio_unbounded_statement",
+            "extremal-graph-theory/theories/conjectures/X237.v:hypercube_ramsey_linear_statement",
+            "extremal-graph-theory/theories/conjectures/X237.v:multicolour_clique_ramsey_exponential_statement"
           ],
           "undecided": [],
           "unlisted": []
@@ -9083,7 +9123,9 @@
         "provider_unlisted": false,
         "require_chain": {
           "extremal-graph-theory/theories/conjectures/X234.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/X237.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X234.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X237.v": "unknown",
           "extremal-graph-theory/theories/conjectures/implications_X215.v": "unknown"
         },
         "same_file": {
@@ -24471,13 +24513,13 @@
     ]
   },
   "counts": {
-    "files": 328,
-    "helpers": 2673,
+    "files": 330,
+    "helpers": 2684,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 217,
-    "repeated_signature_shapes": 326,
-    "statements_excluded": 716,
-    "x_wave_helpers": 1512
+    "repeated_signature_shapes": 327,
+    "statements_excluded": 728,
+    "x_wave_helpers": 1523
   },
   "groups": {
     "body_shape_hash": {
@@ -26847,6 +26889,7 @@
         "Hypergraph.conjectures.X117.x117_vertex"
       ],
       "08966ef7549ff069ffd8cea512977011240f4bcbac34c770d72caca461a2a2c5": [
+        "Chromatic.conjectures.X236.x236_sun",
         "Minor.conjectures.X220.x220_wall",
         "Packing.conjectures.X226.x226_path_graph"
       ],
@@ -27167,6 +27210,7 @@
         "Chromatic.conjectures.X203.x203_separation_choosable",
         "Chromatic.conjectures.X213.x213_edge_colourable",
         "Chromatic.conjectures.X219.x219_edge_choosable",
+        "Chromatic.conjectures.X236.x236_frac_chi_at_least",
         "Chromatic.conjectures.X43.x43_strong_edge_colourable",
         "Chromatic.conjectures.X63.x63_k_homogeneous_colouring",
         "Chromatic.conjectures.X7.x7_no_critical_edge",
@@ -27447,6 +27491,7 @@
       ],
       "4dd561f08c381d66c67df77987358c5ad813622ad1463a292bb1ea6d9a9ebb35": [
         "Chromatic.conjectures.XE1.xe1_strongly_independent_edges",
+        "Extremal.conjectures.X237.x237_forest_edges",
         "Extremal.conjectures.X4.x4_at_most_one_triangle_edge",
         "Extremal.conjectures.X4.x4_hits_every_triangle",
         "Packing.conjectures.X25.x25_hamiltonian_edge_set",
@@ -27870,6 +27915,10 @@
       "959f1b4dfed914f7810cc1904ccdc6777e4ccc1f59c9067de05ecc995638aaeb": [
         "Infinite.conjectures.D4inf2.minor_model",
         "Infinite.conjectures.D4inf2.proper_witness"
+      ],
+      "96c360e4e7ead6361d627252178c5f69ff7994c2a39e2a6e7b511706add34a6b": [
+        "Extremal.conjectures.X233.x233_max_density_at_most",
+        "Extremal.conjectures.X237.x237_two_density_at_most"
       ],
       "96ccf4e41e7654fa43da13d3b044e6d3d75975a8210a8bff5e4396940d45fc54": [
         "Chromatic.conjectures.X164.x164_instance",
@@ -28406,6 +28455,9 @@
         "Chromatic.conjectures.X188.x188_component_not_complete",
         "Chromatic.conjectures.X192.x192_triangle_free",
         "Chromatic.conjectures.X219.x219_frac_vertex_arboricity_le_two",
+        "Chromatic.conjectures.X236.x236_cycle_union",
+        "Chromatic.conjectures.X236.x236_no_isolated_edge",
+        "Chromatic.conjectures.X236.x236_ternary",
         "Chromatic.conjectures.X3.x3_alpha_omega_large_class",
         "Chromatic.conjectures.X3.x3_complete_graph",
         "Chromatic.conjectures.X3.x3_triangle_free_induced_subgraphs_chi_le3",
@@ -33523,6 +33575,177 @@
       "qualified_name": "Chromatic.conjectures.X219.x219_frac_vertex_arboricity_le_two",
       "signature": "(G : sgraph) : Prop",
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "4f344ee6f121c0b69e8195f3eca13b090265e0e0613b036d4ffb645394564670",
+      "body_shape_hash": "4f344ee6f121c0b69e8195f3eca13b090265e0e0613b036d4ffb645394564670",
+      "declaration_hash": "a63ccb70e43958696ca03bf7e17f54c0213224eedfea61cd777810b9fc4c1be1",
+      "direct_consumers": [
+        "Chromatic.conjectures.X236.ternary_three_colourable_statement"
+      ],
+      "kind": "Definition",
+      "line": 22,
+      "local_dependencies": [],
+      "name": "x236_ternary",
+      "normalized_name": "ternary",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "phase": "X236",
+      "qualified_name": "Chromatic.conjectures.X236.x236_ternary",
+      "signature": "(G : sgraph) : Prop",
+      "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "1afdd6e4395ad4132d282a1581b4c4294ed7dd0999c08bdb271ae81969f99a19",
+      "body_shape_hash": "1afdd6e4395ad4132d282a1581b4c4294ed7dd0999c08bdb271ae81969f99a19",
+      "declaration_hash": "826dc93b4b5434cd19541434238584e2f5d9d1fdf7a6ed81001cbf360bff7998",
+      "direct_consumers": [
+        "Chromatic.conjectures.X236.cycles_plus_k4s_four_colourable_statement"
+      ],
+      "kind": "Definition",
+      "line": 29,
+      "local_dependencies": [],
+      "name": "x236_cycle_union",
+      "normalized_name": "cycle_union",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "phase": "X236",
+      "qualified_name": "Chromatic.conjectures.X236.x236_cycle_union",
+      "signature": "(G : sgraph) : Prop",
+      "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "b5a76bc54a13338b207290481c3809f4f5abec27ac7f3f43967072ec388af4b7",
+      "body_shape_hash": "b5a76bc54a13338b207290481c3809f4f5abec27ac7f3f43967072ec388af4b7",
+      "declaration_hash": "b62eadd6c90e9f2b5338e937566d04c1e5598054f718106cb31e3e4d756ce9ad",
+      "direct_consumers": [
+        "Chromatic.conjectures.X236.cycles_plus_k4s_four_colourable_statement"
+      ],
+      "kind": "Definition",
+      "line": 34,
+      "local_dependencies": [],
+      "name": "x236_k4_parts",
+      "normalized_name": "k4_parts",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "phase": "X236",
+      "qualified_name": "Chromatic.conjectures.X236.x236_k4_parts",
+      "signature": "(G : sgraph) (n : nat) (p : G -> 'I_n) : Prop",
+      "signature_shape_hash": "d8b75c19edf70e031c5c1cc2195696235784b392b3e0e04b1cfac62d89a4b713"
+    },
+    {
+      "body_hash": "94729ad62d9ae635614f2ade4901775e93afb5edcb0d9ac038fc83e3a458a7b2",
+      "body_shape_hash": "94729ad62d9ae635614f2ade4901775e93afb5edcb0d9ac038fc83e3a458a7b2",
+      "declaration_hash": "218c78359465a9b6b50e1e233d22b2be030861482049cb2f149e70a14cb9a873",
+      "direct_consumers": [
+        "Chromatic.conjectures.X236.cycles_plus_k4s_four_colourable_statement"
+      ],
+      "kind": "Definition",
+      "line": 38,
+      "local_dependencies": [],
+      "name": "x236_union_k4",
+      "normalized_name": "union_k4",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "phase": "X236",
+      "qualified_name": "Chromatic.conjectures.X236.x236_union_k4",
+      "signature": "(G : sgraph) (n : nat) (p : G -> 'I_n) : sgraph",
+      "signature_shape_hash": "59402ad9d6aab48033bc240373b0b1bc83d6db59b83eb8b0074e093285b60225"
+    },
+    {
+      "body_hash": "a5c81d4b1ceada5d2d6d94d156b69417502b49679dff82b5cf79de14a457807c",
+      "body_shape_hash": "a5c81d4b1ceada5d2d6d94d156b69417502b49679dff82b5cf79de14a457807c",
+      "declaration_hash": "4ef90eec74d2fba17193d539ee5173166974b586e1a53e116a29aa92175ce432",
+      "direct_consumers": [
+        "Chromatic.conjectures.X236.fractional_girth_subgraph_statement"
+      ],
+      "kind": "Definition",
+      "line": 42,
+      "local_dependencies": [],
+      "name": "x236_frac_chi_at_least",
+      "normalized_name": "frac_chi_at_least",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "phase": "X236",
+      "qualified_name": "Chromatic.conjectures.X236.x236_frac_chi_at_least",
+      "signature": "(G : sgraph) (k : nat) : Prop",
+      "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
+    },
+    {
+      "body_hash": "24feb9672ff88e30ec992be18f59667f0f6894ecc3f54bd1f933c1c0bba21e54",
+      "body_shape_hash": "24feb9672ff88e30ec992be18f59667f0f6894ecc3f54bd1f933c1c0bba21e54",
+      "declaration_hash": "a95734a6076255d0840d799dd277f510d8d5fc67800fd844e42f753a961779e0",
+      "direct_consumers": [
+        "Chromatic.conjectures.X236.nsd_delta_plus_constant_statement"
+      ],
+      "kind": "Definition",
+      "line": 47,
+      "local_dependencies": [],
+      "name": "x236_no_isolated_edge",
+      "normalized_name": "no_isolated_edge",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "phase": "X236",
+      "qualified_name": "Chromatic.conjectures.X236.x236_no_isolated_edge",
+      "signature": "(G : sgraph) : Prop",
+      "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "8a63330534259c18811ebdfcc1e6cdadbc3ccd57d0d9196915b49523471f8929",
+      "body_shape_hash": "8a63330534259c18811ebdfcc1e6cdadbc3ccd57d0d9196915b49523471f8929",
+      "declaration_hash": "b8856ce3858748dbd6d32a6c37e08744b654956c59b80fc686ca648766d36286",
+      "direct_consumers": [
+        "Chromatic.conjectures.X236.ordered_matching_free_chi_bounded_statement"
+      ],
+      "kind": "Definition",
+      "line": 52,
+      "local_dependencies": [],
+      "name": "x236_ord_contains",
+      "normalized_name": "ord_contains",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "phase": "X236",
+      "qualified_name": "Chromatic.conjectures.X236.x236_ord_contains",
+      "signature": "(m n : nat) (M : rel 'I_m) (E : rel 'I_n) : Prop",
+      "signature_shape_hash": "5827464790a0aaa91bf7b7dae8daf0af1ef0247ac2831d9dd75e1b8ac2dd9da3"
+    },
+    {
+      "body_hash": "b2a945ab9c2fa4a1d17be28fc9e49f9b0766c18bc9f8992b6dd828423bb03cde",
+      "body_shape_hash": "b2a945ab9c2fa4a1d17be28fc9e49f9b0766c18bc9f8992b6dd828423bb03cde",
+      "declaration_hash": "0fb408d008f715bbeddb5b3e9f6b74c9824b56099a13ca4e41bc573381ae773e",
+      "direct_consumers": [
+        "Chromatic.conjectures.X236.ordered_matching_free_chi_bounded_statement"
+      ],
+      "kind": "Definition",
+      "line": 59,
+      "local_dependencies": [],
+      "name": "x236_max_degree_one",
+      "normalized_name": "max_degree_one",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "phase": "X236",
+      "qualified_name": "Chromatic.conjectures.X236.x236_max_degree_one",
+      "signature": "(m : nat) (M : rel 'I_m) : Prop",
+      "signature_shape_hash": "17d353799184dfe99d0f91e9e01409426040e265ec867e7efaaed9c8d47cafb8"
+    },
+    {
+      "body_hash": "1de624edddb43010466f837cde7f03a2369a92558edd221e60d9bf8d5f420a92",
+      "body_shape_hash": "1de624edddb43010466f837cde7f03a2369a92558edd221e60d9bf8d5f420a92",
+      "declaration_hash": "fa1c99cc54bd9cd666d137f6268077b37dab9899180c7cf8f0e5cd6740275df3",
+      "direct_consumers": [
+        "Chromatic.conjectures.X236.sun_free_chi_bounded_statement"
+      ],
+      "kind": "Definition",
+      "line": 63,
+      "local_dependencies": [],
+      "name": "x236_sun",
+      "normalized_name": "sun",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "phase": "X236",
+      "qualified_name": "Chromatic.conjectures.X236.x236_sun",
+      "signature": "(t : nat) : sgraph",
+      "signature_shape_hash": "08966ef7549ff069ffd8cea512977011240f4bcbac34c770d72caca461a2a2c5"
     },
     {
       "body_hash": "a252d3382e9e2e9f0450759c627d453616f368776f8069089a1ef10686104455",
@@ -58029,6 +58252,44 @@
       "qualified_name": "Extremal.conjectures.X235.lr_nat_graph_forces",
       "signature": "(s k n : nat) : Prop",
       "signature_shape_hash": "b5891de66ed67f58f7dffddbc8887b3478bfd63d3c42060461f8a282afdbde8b"
+    },
+    {
+      "body_hash": "f9e876b431052f6c271bf85aeae47300b2be3ed1373e89e82986e1780bfd037e",
+      "body_shape_hash": "f9e876b431052f6c271bf85aeae47300b2be3ed1373e89e82986e1780bfd037e",
+      "declaration_hash": "58b8f7e04cf76fbbced160482c2b5d029973b3de9382546824ed4618cf80938f",
+      "direct_consumers": [
+        "Extremal.conjectures.X237.forest_removal_two_density_statement"
+      ],
+      "kind": "Definition",
+      "line": 23,
+      "local_dependencies": [],
+      "name": "x237_two_density_at_most",
+      "normalized_name": "two_density_at_most",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X237.v",
+      "phase": "X237",
+      "qualified_name": "Extremal.conjectures.X237.x237_two_density_at_most",
+      "signature": "(H : sgraph) (a b : nat) : Prop",
+      "signature_shape_hash": "96c360e4e7ead6361d627252178c5f69ff7994c2a39e2a6e7b511706add34a6b"
+    },
+    {
+      "body_hash": "ed2eba6dacc083bb4b1b61e3d4aa3a1297a5436f24301ba26453d6ae1d74d68c",
+      "body_shape_hash": "ed2eba6dacc083bb4b1b61e3d4aa3a1297a5436f24301ba26453d6ae1d74d68c",
+      "declaration_hash": "3002b79b5681905c3e4a0327df04807c7e18c4a37c186760b9a9f3f9f97956e0",
+      "direct_consumers": [
+        "Extremal.conjectures.X237.forest_removal_two_density_statement"
+      ],
+      "kind": "Definition",
+      "line": 31,
+      "local_dependencies": [],
+      "name": "x237_forest_edges",
+      "normalized_name": "forest_edges",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X237.v",
+      "phase": "X237",
+      "qualified_name": "Extremal.conjectures.X237.x237_forest_edges",
+      "signature": "(G : sgraph) (F : {set {set G}}) : Prop",
+      "signature_shape_hash": "4dd561f08c381d66c67df77987358c5ad813622ad1463a292bb1ea6d9a9ebb35"
     },
     {
       "body_hash": "857e81095417ec9a7b32ad78ef7497e0e68db404b9edf9f8ff9d7b7f4a404cbd",
