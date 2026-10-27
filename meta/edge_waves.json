@@ -241,6 +241,20 @@
    "reviewed_at": "2026-10-26",
    "note": "The t=2 instance of Row 1 is exactly 'every 5-graph has circular flow number at most 2+2/2=3' (cfn_bound_t2); the direction of Steffen's cited equivalence used here is proved as steffen_3flow_5graphs: a 4-edge-connected G inflates (every vertex a doubled cycle through its arc ends) to a 5-graph, whose rational flow at r = 3+1/(m+1) orients the edges so that no set has more than twice as many leaving as entering edges, hence an integer flow with values 1 and 2 (odiff_demand_cut), which contracts to G"
   },
+  "clique_ramsey_polylog_lower_statement->ramsey_four_cubic_polylog_lower_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E1",
+   "host": "extremal-graph-theory",
+   "state": "verified",
+   "proof": "clique_ramsey_polylog_lower_implies_ramsey_four_cubic_polylog_lower",
+   "external": [],
+   "reason": "",
+   "proved_by": "Lancelot (Claude Opus 5.5), 2026-10-27: implications_X241.v",
+   "reviewed_by": "Arthur (second reader of the X240 erdos:986 => X241 erdos:166 edge, 2026-10-27)",
+   "reviewed_at": "2026-10-27",
+   "note": "Rocq-only edge (no corpus relation), stated in X241.v's Notes: erdos:986 at k = 4 gives c, p > 0 and n0 with n^4 <= p * R(4, n) * n * (trunc_log 2 n)^c for n >= n0; for n >= max(n0, 1) the factor n cancels, which is erdos:166's k^3 <= p * R(4, k) * (trunc_log 2 k)^c with the same c and p."
+  },
   "conj2_1605_statement->graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement:equiv": {
    "gc": "e010",
    "tier": "T4",

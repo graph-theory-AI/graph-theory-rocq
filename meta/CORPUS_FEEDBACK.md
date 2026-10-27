@@ -43,6 +43,7 @@ were already found by the 2026-09-23 statement re-sync.
 | `forest_free_polynomial_chi_bound_statement` | `every_forest_is_good_statement` | equiv | verified | `forest_free_polynomial_chi_bound_equiv_every_forest_is_good` (chromatic-theory/implications_X218.v) |
 | `smith_two_longest_cycles_statement` | `smith_longest_cycles_r_connected_statement` | equiv | verified | `smith_two_longest_cycles_equiv_smith_longest_cycles_r_connected` (cycle-theory/implications_X212.v) |
 | `every_forest_is_multibounding_statement` | `path_free_polynomial_tau_bound_statement` | implies | verified | `every_forest_is_multibounding_implies_path_free_polynomial_tau_bound` (chromatic-theory/implications_X238.v; 2026-10-27: arxiv:2303.11766#00 ⇒ arxiv:2202.05557#01, every path being a forest) |
+| `clique_ramsey_polylog_lower_statement` | `ramsey_four_cubic_polylog_lower_statement` | implies | verified | `clique_ramsey_polylog_lower_implies_ramsey_four_cubic_polylog_lower` (extremal-graph-theory/implications_X241.v; 2026-10-27: erdos:986 at k = 4 ⇒ erdos:166, the factor n cancelling) |
 
 Each row is a machine-checked theorem between two corpus statements that `data/relations.json` does not record; the `implies`/`equivalent_to` relation could be added with the theorem as citation.
 
