@@ -59,7 +59,7 @@ Unset Printing Implicit Defensive.
       fraction 1/2 is open.  The milestone header of this file describes an earlier encoding
       in which planarity was a universally-quantified oracle [is_planar] (planarity gate G2);
       the definition now uses the concrete [wagner_planar], so that caveat no longer applies
-      here - but it still applies to the copy of this statement in implications_U13.v. *)
+      here; implications_U13.v, which re-stated the oracle form, imports this file since 2026-10-27. *)
 Definition large_induced_forest_in_a_planar_graph_statement : Prop :=
   forall (G : sgraph),
     wagner_planar G ->
