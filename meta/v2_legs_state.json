@@ -7464,11 +7464,14 @@
    "audit_page": "todo"
   },
   "erdos_1008": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x242-regular-cycles-degree-ramsey-turan",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X242.v:c4_free_subgraph_two_thirds_statement. Erdos Problems #1008 (proved before the corpus pin, pinned status solved: Conlon, Fox and Sudakov, arXiv:1507.00547v2, Theorem th1 at r = 2): every graph with m edges has a C_4-free subgraph with >> m^{2/3} edges, written m^2 <= (c |F|)^3, spanning subgraph by edge set (GTBase del_edge_set, has_subgraph, cycle_graph 4, edge_count)."
   },
   "erdos_1009": {
    "statement": "done",
@@ -7896,11 +7899,14 @@
    "note": "Authored in X240.v:degenerate_bipartite_turan_exponent_statement. Erdos Problems #146 (DISPROVED before the corpus pin: OpenAI report Chapter 10 Theorem 1.2, unrefereed with Lean; mirror 10fb9c15 \"disproved (Lean)\" 2026-08-02): bipartite r-degenerate H has ex(n; H) << n^{2-1/r}, r >= 1, written m^r n <= C^r n^{2r} (D2tur is_turan_number, GTBase bipartite and k_degenerate); encoded as stated."
   },
   "erdos_147": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x242-regular-cycles-degree-ramsey-turan",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X242.v:bipartite_min_degree_turan_exponent_statement. Erdos Problems #147 (false before the corpus pin, pinned status solved; Janzer, arXiv:2109.06110v2 (r = 3) and arXiv:2006.01062v3 (every even r >= 4); mirror disproved (Lean) 2026-08-24): bipartite H of minimum degree r = t + 2 has ex(n; H) >> n^{2 - 1/(r-1) + eps}, eps = 1/s (D2tur is_turan_number, GTBase bipartite, min_degree_at_least)."
   },
   "erdos_149": {
    "statement": "done",
@@ -7977,11 +7983,14 @@
    "note": "Authored in X237.v:hypercube_ramsey_linear_statement. Erdos Problems #181 (open at the teorth/erdosproblems mirror 10fb9c15): R(Q_n) << 2^n, as exists C, R <= C 2^n, with X195's x195_ramsey_number 2 and GTBase product_hypercube. Literature: open (best 2^{(2-c)n}, Tikhomirov)."
   },
   "erdos_182": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x242-regular-cycles-degree-ramsey-turan",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X242.v:regular_subgraph_superlinear_edges_statement. Erdos Problems #182, the specific question (proved before the corpus pin, pinned status solved: Janzer and Sudakov, arXiv:2204.12455v2): n^{1+o(1)} edges force a nonempty k-regular subgraph, written n^{q+1} <= e^q (GTBase regular, has_subgraph, edge_count)."
   },
   "erdos_183": {
    "statement": "todo",
@@ -8045,11 +8054,14 @@
    "note": "Authored in XE2.v:erdos_518_statement. Encodes Erdos Problems #518 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_533": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x242-regular-cycles-degree-ramsey-turan",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X242.v:k5_free_dense_linear_triangle_free_set_statement. Erdos Problems #533 (false before the corpus pin, pinned status solved: Balogh and Lenz, arXiv:1109.4428v2 / 1109.4472v2, theta_3(K_5) >= 1/16; threshold 1/12 by Liu, Reiher, Sharifzadeh and Staden, arXiv:2103.10423v2): K_5-free graphs with delta n^2 edges have a triangle-free set of >>_delta n vertices, delta = 1/q (GTBase has_subgraph, edge_count, upstream induced)."
   },
   "erdos_544": {
    "statement": "done",
@@ -8338,11 +8350,14 @@
    "note": "Authored in X239.v:triangle_square_free_turan_asymptotic_statement. Erdos Problems #573 (open at the mirror 10fb9c15): ex(n; {C_3, C_4}) ~ (n/2)^{3/2}, affirmative form, squared with epsilon = 1/q, D2tur is_turan_number over the family {C_3, C_4}."
   },
   "erdos_574": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x242-regular-cycles-degree-ramsey-turan",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X242.v:odd_even_cycle_free_turan_asymptotic_statement. Erdos Problems #574 (false before the corpus pin, pinned status solved; Lazebnik, Ustimenko and Woldar, JCTB 1994, k = 3, 5; Furedi, Naor and Verstraete, Adv. Math. 2006, k = 3; mirror disproved 2026-03-28): ex(n; {C_{2k-1}, C_{2k}}) ~ (n/2)^{1+1/k}, k = j + 2, affirmative form; X239's erdos:573 at j = 0 (D2tur is_turan_number, GTBase cycle_graph)."
   },
   "erdos_575": {
    "statement": "done",
