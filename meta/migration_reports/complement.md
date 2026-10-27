@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py complement --details /tmp/migra
 
 - Canonical: `GraphTheory.core.sgraph.compl`.
 - Baseline: `49ddc033ec6be3372ba6813f044fd26922fad16d`.
-- Scope: 10 helpers, 16 statements, 59 frozen objects, 190 recorded references.
-- Source checks: 469/469 pass; consistent.
+- Scope: 10 helpers, 16 statements, 59 frozen objects, 199 recorded references.
+- Source checks: 478/478 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

@@ -7320,6 +7320,152 @@
           }
         }
       }
+    },
+    "X241": {
+      "phase": "X241",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X241.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X241 (A3 verifier Arthur; routing Lancelot (57), (60); selection x241-selection-by-marcol, design x241-design-by-marcol agreed by Arthur (180)), branch math/marcol-x241-20261027, 2026-10-27",
+      "source_verified_by": "Arthur (X241 wave verifier, A3: pinned records re-read: data/erdos_graph.json at b72c5857, statements of erdos 579, 911 and 1182 (pinned status open) and 166, 546 and 1014 (pinned status solved), identical to the v2 manifest rows at work/coordinator 0ff4ef23 whose source_hash values the wave pins (6 / 6 equal); Lancelot's fetch coordination/sources/x241-lancelot-20261027 (SHA256SUMS a19a22c2: 2306.04007v4 thm:main l.148-151, 1002.0095v1 main.tex l.118-120, the teorth/erdosproblems mirror at 10fb9c15: #579 l.9568 and #911 l.15020 open 2025-08-31, #1182 l.19505 open 2026-03-07, #166 l.2717 and #546 l.9030 proved, #1014 l.16715 \"proved (Lean)\" 2026-04-24) and the Mac's deposit coordination/sources/x241-mac-20261027 (SHA256SUMS e7584164: Brandt, \"Expanding graphs and Ramsey numbers\", Preprint A 96-24, 1996, brandt-1996.txt l.110-117 and l.302-320; the search-index records 579-record.txt, 1014-record.txt, 1182-record.txt); the corpus pin b72c5857 committed 2026-09-23)",
+      "source_verified_at": "2026-10-27",
+      "commit": "x241-octahedron-size-ramsey-goodness",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "Arthur (X241 wave verification, 2026-10-27)",
+      "faithfulness_result": "Readback 2026-10-27 (verifier Arthur): 6/6 PASS against the pinned texts and the sources, at math/marcol-x241-20261027 = 5fd229b5 (X241.v blob bf48adae, grounding_X241.v blob 66ae577d), on 0ff4ef23; the bodies equal the DESIGN r1 agreed in my item (180). The bodies were read with XE1's xe1_graph_ramsey_number H K R (every R-vertex graph contains H as a subgraph or its complement contains K, R least; \"exactly R\" equals \"at least R\" by monotonicity), xe1_diagonal_ramsey_number (= r(G)) and xe1_size_ramsey_number H K m (the least x4_edge_count m of a graph every symmetric 2-colouring of whose edges has a red H or a blue K), GTBase complete_multipartite_graph 3 2 (3 parts of size 2 = K_{2,2,2}), has_subgraph G H (= subgraph H G, not induced), min_degree_at_least G 1 (no isolated vertex), edge_count, 'K_n, upstream stable and connected, and MathComp trunc_log. erdos:579: delta = 1/q, n^2 <= q e and n <= c |S| with c and n0 before G (any delta > 0 is at least some 1/q); q <= 3 is vacuous for large n by mathematics (ex(n; K_{2,2,2}) = n^2/4 + o(n^2)), as the Notes say. erdos:911: the affirmative form with f eliminated is equivalent both ways: the best f is g(C) = inf R^(G)/e over n >= 1 and e >= C n, nondecreasing in C, so integer C suffice; n = 0 is excluded because R^ = 0 = f(C) * 0 there. erdos:1182: F(n)/n -> oo iff for every integer M, eventually every connected n-vertex G with at most M n edges has R(K_3, G) = 2n - 1 (R + 1 = 2n; R(K_3, G) >= 2n - 1 for connected G); \"Estimate f(n) and F(n)\" is in the Notes (the X183 erdos:715 convention). erdos:166: k^3 <= p R(4, k) (trunc_log 2 k)^c for large k, i.e. R(4, k) >> k^3 / (log k)^{O(1)} (base and floor absorbed by p). erdos:546: (trunc_log 2 R)^2 <= C m for G without isolated vertices, i.e. R(G) <= 2^{O(sqrt m)} (for m >= 1 the floor costs a constant factor; m = 0 is the empty graph, R = 0). erdos:1014: for k >= 3 and every q >= 1, eventually q R(k, l+1) <= (q + 1) R(k, l): the limit 1, since R(k, l) <= R(k, l+1). Literature lines checked in the fetched files, dated against the corpus pin (b72c5857, 2026-09-23): #579 and #911 open; #1182 FALSE as stated before the pin (Brandt 1996: f(n;m) is the largest integer such that every connected graph of order n and size at most f(n;m) is K_m-good, the row's F(n) at m = 3, l.110-112; almost every d-regular graph with d >= 168 has r(K_3, H) > 2n, so f(n;3)/n < 84, l.302-320; the 11.75 of l.117-118 not claimed; literature evidence, not kernel-checked); #166 proved before the pin (Mattheus and Verstraete, thm:main, r(4,t) = Omega(t^3 / log^4 t), v1 2023-06-06); #546 proved before the pin (Sudakov 2010, r(G) <= 2^{250 sqrt m}); #1014 proved before the pin per the mirror only (\"proved (Lean)\" 2026-04-24; the search-index record credits an internal OpenAI model; no paper and no Lean proof checked). All encoded as stated. Grounding (grounding_X241.v read; no Admitted / Axiom / Parameter / Conjecture / Hypothesis; the wave run's check_milestone compiles and decides): hyp_inhabited per row (K_3 is K_{2,2,2}-free with 9 <= 3 * 3; R^(K_2) = 1 on K_2 at C = 0; K_1 connected with R(K_3, K_1) = 1; R(K_4, K_1) = 1; r(K_2) = 2 with no isolated vertex; R(K_3, K_1) = 1 and R(K_3, K_2) = 3); not_trivially_true in the contract form for all six rows, each variant the statement with its load-bearing hypothesis dropped (no K_{2,2,2}; the size Ramsey, Ramsey or diagonal Ramsey relation), false (K_n has stable sets of one vertex; K_{2 C0 + 1} with m = 0; a path with R = 0; R = 0; K_2 with R = 2^(C + 1); R1 = 1 and R0 = 0) and implying its row; helper_sanity [] in every row (no local helper); the 24 theorem and claim names of the wave exist in the file. The derived v2_legs_state entries, recomputed from 0ff4ef23 and the wave with jq, equal the committed file (whole file, jq -S); README 468 / 11 / 40 / 1,154 against 462 / 11 / 40 / 1,160 at 0ff4ef23; LANDED gains X241 extremal-graph-theory; one allowlist entry (579, exists-after-graph-forall, the only row the lint rule matches); the complement, subgraph_of (xe1_graph_ramsey_number, xe1_diagonal_ramsey_number, both files, as X240) and edge_count (edge_count, xe1_size_ramsey_number, and x4_edge_count in the grounding) consumer entries match the names the two files use.",
+      "rows": {
+        "erdos_579": {
+          "formal_name": "octahedron_free_dense_linear_independent_set_statement",
+          "source_hash": "49b1288627e56eeadc20ab20591087d03952409f41a205c15929f3a9f1e3aa18",
+          "note": "Erdos Problems #579 (open at the teorth/erdosproblems mirror 10fb9c15): a K_{2,2,2}-free graph with delta n^2 edges has an independent set of size >>_delta n, delta = 1/q (GTBase complete_multipartite_graph 3 2, has_subgraph, edge_count; upstream stable).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g241_octa_hyp_inhabited",
+              "claim": "g241_octa_hyp_claim",
+              "references": [
+                "octahedron_free_dense_linear_independent_set_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g241_octa_not_trivially_true",
+              "claim": "g241_octa_ntt_claim",
+              "references": [
+                "octahedron_free_dense_linear_independent_set_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_911": {
+          "formal_name": "size_ramsey_superlinear_density_statement",
+          "source_hash": "b2884486d0f5df836dd2c8671cdb8fc25c26c8b261d84f114fedca84cee7597a",
+          "note": "Erdos Problems #911 (open at the teorth/erdosproblems mirror 10fb9c15): R^(G) > f(C) e with f(x)/x -> oo for graphs with e >= C n edges, affirmative form with f eliminated (for every M, eventually R^(G) > M C e) (XE1 xe1_size_ramsey_number, GTBase edge_count).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g241_size_hyp_inhabited",
+              "claim": "g241_size_hyp_claim",
+              "references": [
+                "size_ramsey_superlinear_density_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g241_size_not_trivially_true",
+              "claim": "g241_size_ntt_claim",
+              "references": [
+                "size_ramsey_superlinear_density_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1182": {
+          "formal_name": "triangle_goodness_sparse_connected_statement",
+          "source_hash": "7bf25f02eb044c08bbaaf2aea3efa6b3f86237a81734d97894d401dee30dbf1c",
+          "note": "Erdos Problems #1182, the specific question F(n)/n -> oo (FALSE as stated before the corpus pin: Brandt, Expanding graphs and Ramsey numbers, Preprint A 96-24, FU Berlin, 1996, f(n;3)/n < 84 eventually; literature evidence, not kernel-checked; mirror 10fb9c15 lists the problem open): every connected n-vertex G with at most M n edges eventually has R(K_3, G) = 2n - 1 (XE1 xe1_graph_ramsey_number, upstream connected); encoded as stated.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g241_good_hyp_inhabited",
+              "claim": "g241_good_hyp_claim",
+              "references": [
+                "triangle_goodness_sparse_connected_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g241_good_not_trivially_true",
+              "claim": "g241_good_ntt_claim",
+              "references": [
+                "triangle_goodness_sparse_connected_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_166": {
+          "formal_name": "ramsey_four_cubic_polylog_lower_statement",
+          "source_hash": "0e70b5cb5ebec926847a2e56f470b232a5a05d74840d0aec21642b77252a41a2",
+          "note": "Erdos Problems #166 (proved before the corpus pin: Mattheus and Verstraete, arXiv:2306.04007v4, r(4,t) = Omega(t^3 / log^4 t); mirror proved): R(4,k) >> k^3 / (log k)^{O(1)}, written k^3 <= p R (trunc_log 2 k)^c (XE1 xe1_graph_ramsey_number, MathComp trunc_log).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g241_r4_hyp_inhabited",
+              "claim": "g241_r4_hyp_claim",
+              "references": [
+                "ramsey_four_cubic_polylog_lower_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g241_r4_not_trivially_true",
+              "claim": "g241_r4_ntt_claim",
+              "references": [
+                "ramsey_four_cubic_polylog_lower_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_546": {
+          "formal_name": "ramsey_sqrt_edges_exponential_upper_statement",
+          "source_hash": "8fe311d415f3a642bb1f0731a899d0f09888bd7f15c713bd36b4742abee1f05a",
+          "note": "Erdos Problems #546 (proved before the corpus pin: Sudakov, arXiv:1002.0095v1, r(G) <= 2^{250 sqrt m}; mirror proved): R(G) <= 2^{O(sqrt m)} for G with m edges and no isolated vertex, written (trunc_log 2 R)^2 <= C m (XE1 xe1_diagonal_ramsey_number, GTBase min_degree_at_least, edge_count).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g241_sqrt_hyp_inhabited",
+              "claim": "g241_sqrt_hyp_claim",
+              "references": [
+                "ramsey_sqrt_edges_exponential_upper_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g241_sqrt_not_trivially_true",
+              "claim": "g241_sqrt_ntt_claim",
+              "references": [
+                "ramsey_sqrt_edges_exponential_upper_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1014": {
+          "formal_name": "off_diagonal_ramsey_consecutive_ratio_one_statement",
+          "source_hash": "9836d59d7b7a741e63c3056b37a66f686c92226cd5c597706c9f5c86f3f3b568",
+          "note": "Erdos Problems #1014 (proved before the corpus pin per the mirror 10fb9c15, proved (Lean) 2026-04-24, credited by the problem page to an internal OpenAI model; no paper or Lean proof checked): R(k,l+1)/R(k,l) -> 1 for fixed k >= 3, written q R(k,l+1) <= (q + 1) R(k,l) eventually for every q (XE1 xe1_graph_ramsey_number).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g241_ratio1_hyp_inhabited",
+              "claim": "g241_ratio1_hyp_claim",
+              "references": [
+                "off_diagonal_ramsey_consecutive_ratio_one_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g241_ratio1_not_trivially_true",
+              "claim": "g241_ratio1_ntt_claim",
+              "references": [
+                "off_diagonal_ramsey_consecutive_ratio_one_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }

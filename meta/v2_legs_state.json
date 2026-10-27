@@ -7512,11 +7512,14 @@
    "audit_page": "todo"
   },
   "erdos_1014": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x241-octahedron-size-ramsey-goodness",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X241.v:off_diagonal_ramsey_consecutive_ratio_one_statement. Erdos Problems #1014 (proved before the corpus pin per the mirror 10fb9c15, proved (Lean) 2026-04-24, credited by the problem page to an internal OpenAI model; no paper or Lean proof checked): R(k,l+1)/R(k,l) -> 1 for fixed k >= 3, written q R(k,l+1) <= (q + 1) R(k,l) eventually for every q (XE1 xe1_graph_ramsey_number)."
   },
   "erdos_1015": {
    "statement": "todo",
@@ -7808,11 +7811,14 @@
    "audit_page": "todo"
   },
   "erdos_1182": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x241-octahedron-size-ramsey-goodness",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X241.v:triangle_goodness_sparse_connected_statement. Erdos Problems #1182, the specific question F(n)/n -> oo (FALSE as stated before the corpus pin: Brandt, Expanding graphs and Ramsey numbers, Preprint A 96-24, FU Berlin, 1996, f(n;3)/n < 84 eventually; literature evidence, not kernel-checked; mirror 10fb9c15 lists the problem open): every connected n-vertex G with at most M n edges eventually has R(K_3, G) = 2n - 1 (XE1 xe1_graph_ramsey_number, upstream connected); encoded as stated."
   },
   "erdos_1216": {
    "statement": "done",
@@ -7941,11 +7947,14 @@
    "audit_page": "todo"
   },
   "erdos_166": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x241-octahedron-size-ramsey-goodness",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X241.v:ramsey_four_cubic_polylog_lower_statement. Erdos Problems #166 (proved before the corpus pin: Mattheus and Verstraete, arXiv:2306.04007v4, r(4,t) = Omega(t^3 / log^4 t); mirror proved): R(4,k) >> k^3 / (log k)^{O(1)}, written k^3 <= p R (trunc_log 2 k)^c (XE1 xe1_graph_ramsey_number, MathComp trunc_log)."
   },
   "erdos_167": {
    "statement": "done",
@@ -8063,11 +8072,14 @@
    "note": "Authored in XE1.v:erdos_545_statement. Encodes Erdos Problems #545 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_546": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x241-octahedron-size-ramsey-goodness",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X241.v:ramsey_sqrt_edges_exponential_upper_statement. Erdos Problems #546 (proved before the corpus pin: Sudakov, arXiv:1002.0095v1, r(G) <= 2^{250 sqrt m}; mirror proved): R(G) <= 2^{O(sqrt m)} for G with m edges and no isolated vertex, written (trunc_log 2 R)^2 <= C m (XE1 xe1_diagonal_ramsey_number, GTBase min_degree_at_least, edge_count)."
   },
   "erdos_547": {
    "statement": "done",
@@ -8367,11 +8379,14 @@
    "audit_page": "todo"
   },
   "erdos_579": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x241-octahedron-size-ramsey-goodness",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X241.v:octahedron_free_dense_linear_independent_set_statement. Erdos Problems #579 (open at the teorth/erdosproblems mirror 10fb9c15): a K_{2,2,2}-free graph with delta n^2 edges has an independent set of size >>_delta n, delta = 1/q (GTBase complete_multipartite_graph 3 2, has_subgraph, edge_count; upstream stable)."
   },
   "erdos_58": {
    "statement": "done",
@@ -9457,11 +9472,14 @@
    "note": "Authored in X4.v:book_triangle_edge_statement. Encodes the n^2/4 edge-threshold book result by requiring an edge with at least n/6 common neighbours, cross-multiplied."
   },
   "erdos_911": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x241-octahedron-size-ramsey-goodness",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X241.v:size_ramsey_superlinear_density_statement. Erdos Problems #911 (open at the teorth/erdosproblems mirror 10fb9c15): R^(G) > f(C) e with f(x)/x -> oo for graphs with e >= C n edges, affirmative form with f eliminated (for every M, eventually R^(G) > M C e) (XE1 xe1_size_ramsey_number, GTBase edge_count)."
   },
   "erdos_914": {
    "statement": "done",
