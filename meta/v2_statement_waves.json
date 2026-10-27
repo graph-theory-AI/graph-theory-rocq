@@ -7590,6 +7590,152 @@
           }
         }
       }
+    },
+    "X243": {
+      "phase": "X243",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X243.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X243 (A3 verifier Arthur; routing Lancelot (77), (79); selection x243-selection-by-marcol, design x243-design-by-marcol), branch math/marcol-x243-20261027, 2026-10-27",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x243-ramsey-induced-hypercube-c6-diameter-triangles",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "erdos_88": {
+          "formal_name": "ramsey_graph_induced_every_edge_count_statement",
+          "source_hash": "066dc553003f00e1fa2f7581d7b226d668c49608263774b3112447b5f5ef8bd8",
+          "note": "Erdos Problems #88, Erdos-McKay (proved before the corpus pin, pinned status solved: Kwan, Sah, Sauermann and Sawhney, arXiv:2208.02874v2, Theorem 1.1 and footnote 2): a graph with no clique or independent set on >= C log n vertices induces every edge count m <= delta n^2; integer C over log_2, delta = 1/p (upstream cliqueb, stable, induced; GTBase edge_count).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g243_mckay_hyp_inhabited",
+              "claim": "g243_mckay_hyp_claim",
+              "references": [
+                "ramsey_graph_induced_every_edge_count_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g243_mckay_not_trivially_true",
+              "claim": "g243_mckay_ntt_claim",
+              "references": [
+                "ramsey_graph_induced_every_edge_count_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_636": {
+          "formal_name": "ramsey_graph_distinct_size_edge_pairs_statement",
+          "source_hash": "f0b3977f35e9b325f45aed3ec39b51c26b3846de601678b0fe2d90eddcb3f239",
+          "note": "Erdos Problems #636, Erdos-Faudree-Sos (proved before the corpus pin, pinned status solved: Kwan and Sudakov, arXiv:1712.05656v4, abstract and l.860): such a graph has >> n^{5/2} induced subgraphs with pairwise different (vertex count, edge count), counted as distinct pairs, n^5 <= (p N)^2 (upstream cliqueb, stable, induced; GTBase edge_count; MathComp undup).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g243_pairs_hyp_inhabited",
+              "claim": "g243_pairs_hyp_claim",
+              "references": [
+                "ramsey_graph_distinct_size_edge_pairs_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g243_pairs_not_trivially_true",
+              "claim": "g243_pairs_ntt_claim",
+              "references": [
+                "ramsey_graph_distinct_size_edge_pairs_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_637": {
+          "formal_name": "ramsey_graph_induced_distinct_degrees_statement",
+          "source_hash": "5ba5712cea2b128760a21d6c7051e064b8d879e4a650b6cca5f30631f78ddb1d",
+          "note": "Erdos Problems #637, Erdos-Faudree-Sos (proved before the corpus pin, pinned status solved: Bukh and Sudakov, J. Combin. Theory Ser. B 97 (2007), Theorem 1.1): such a graph has an induced subgraph on >> n vertices with >> n^{1/2} distinct degrees (upstream cliqueb, stable, induced, N; MathComp undup).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g243_degrees_hyp_inhabited",
+              "claim": "g243_degrees_hyp_claim",
+              "references": [
+                "ramsey_graph_induced_distinct_degrees_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g243_degrees_not_trivially_true",
+              "claim": "g243_degrees_ntt_claim",
+              "references": [
+                "ramsey_graph_induced_distinct_degrees_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_666": {
+          "formal_name": "hypercube_dense_subgraph_C6_statement",
+          "source_hash": "76d37f0b413d6fa903d470a8269d0c12ff7d606ec72cdd258c2287ec37f093df",
+          "note": "Erdos Problems #666 (false before the corpus pin, pinned status solved: Chung 1992, Theorem 3, and Brouwer, Dejter and Thomassen 1993, Section 3, split E(Q_n) into four C_6-free classes, Conder 1993 into three; mirror disproved (Lean) 2026-02-06): every subgraph of Q_n with >= eps n 2^{n-1} edges contains a C_6, eps = 1/q, affirmative form as X239's erdos:86 (GTBase product_hypercube, del_edge_set, has_subgraph, cycle_graph).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g243_cube_hyp_inhabited",
+              "claim": "g243_cube_hyp_claim",
+              "references": [
+                "hypercube_dense_subgraph_C6_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g243_cube_not_trivially_true",
+              "claim": "g243_cube_ntt_claim",
+              "references": [
+                "hypercube_dense_subgraph_C6_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_133": {
+          "formal_name": "triangle_free_diameter_two_max_degree_statement",
+          "source_hash": "e01cb81924de10c7b5ceb1a8cf5f58ab1e1c059dbf1bf41489974fe514033aea",
+          "note": "Erdos Problems #133, the specific question (false before the corpus pin, pinned status solved: Furedi and Seress, J. Graph Theory 18 (1994), Lemma 2.4: maximal triangle-free graphs, of diameter 2, with maximum degree <= 5 sqrt(n) + 1): every triangle-free graph of diameter 2 has a vertex of degree >= c sqrt(n) for every c, eventually, affirmative form (GTBase has_subgraph, graph_dist; upstream N).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g243_diam_hyp_inhabited",
+              "claim": "g243_diam_hyp_claim",
+              "references": [
+                "triangle_free_diameter_two_max_degree_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g243_diam_not_trivially_true",
+              "claim": "g243_diam_ntt_claim",
+              "references": [
+                "triangle_free_diameter_two_max_degree_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1034": {
+          "formal_name": "dense_graph_triangle_half_two_neighbour_vertices_statement",
+          "source_hash": "8b59ff435886ce93344b7f2409113082cd0fa1fbb6cde04b2d2e91647815ad9b",
+          "note": "Erdos Problems #1034, Erdos-Faudree (false before the corpus pin, pinned status solved: Ma and Tang, On Erdos problem #1034, Theorem 2.1; mirror disproved (Lean) 2025-12-04): a graph with more than n^2/4 edges has a triangle T and more than (1/2 - o(1)) n vertices joined to two vertices of T, eps = 1/q, affirmative form (GTBase edge_count).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g243_book_hyp_inhabited",
+              "claim": "g243_book_hyp_claim",
+              "references": [
+                "dense_graph_triangle_half_two_neighbour_vertices_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g243_book_not_trivially_true",
+              "claim": "g243_book_ntt_claim",
+              "references": [
+                "dense_graph_triangle_half_two_neighbour_vertices_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
