@@ -8,12 +8,21 @@ compile (a parse error, a module that does not load), hint imports that do not l
 small-model file that fails outside its Fail commands must each make the statement INCOMPLETE and
 the exit code nonzero, in every probe layer and in --validate, and so must a name the index does not
 hold (NOT-FOUND); the designed timeout (124), an ordinary failure and an ordinary success keep
-their old verdicts."""
+their old verdicts.  The gate-tooling item (2026-10-27) adds: the preflight's two Locate checks (a
+name that does not resolve to the probed module's definition in the auto layers' or the small
+model's context is INCOMPLETE; a long name wrapped after "Constant" still resolves), PARAMETRIC (a
+target whose type is a product, not Prop), AMBIGUOUS (a --names name two files define), file-
+qualified --files / --wave targets, --target for any Definition, first_error's continuation lines,
+and an empty request exiting non-zero.  Temporary trees are only READ (nothing is executed there)."""
 from __future__ import annotations
 
 import contextlib
 import io
+import json
 from pathlib import Path
+import re
+import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -25,6 +34,19 @@ NAME = "fixture_statement"
 HINTED = "sparse_graph_low_chromatic_cut_statement"   # has meta/probe_hints/<name>.v
 BINDERS = "forall n : nat, 0 < n"                      # gets a small-model run
 PREFLIGHT_MARK = "Goal True. Proof. __probe. Qed."
+CLASSIFY_MARK = "forall __vp_x : _, _"                  # only the PARAMETRIC classification run
+
+
+def locate_log(text: str, first: str | None = None, second: str | None = None, wrap: bool = False) -> str:
+    """A coqc log for the preflight snippet `text`: its two Locate commands answered (by default with
+    the probed module's own constant, <ns>.conjectures.<stem>.<name> read from the snippet's header),
+    around the printed mark."""
+    name = re.search(r"Locate (\S+)\.", text).group(1)
+    ns, stem = re.search(r"From (\S+)\.conjectures Require Import (\S+)\.", text).groups()
+    own = f"{ns}.conjectures.{stem}.{name}"
+    sep = "\n" if wrap else " "
+    return (f"Constant{sep}{first or own}\n{VP.RESOLUTION_MARK} = 0\n     : nat\n"
+            f"Constant{sep}{second or own}\n")
 
 
 def entry(body: str = "True") -> tuple[str, str, str, str]:
@@ -49,8 +71,13 @@ def fake_sh(answer, seen=None):
 
 
 def setup_ok(answer):
-    """The probe preflight and the hint imports compile; every other run is `answer`'s."""
-    return lambda name, text: 0 if (name == "hint_setup.v" or PREFLIGHT_MARK in text) else answer(name, text)
+    """The probe preflight (with its two Locate answers) and the hint imports compile; every other
+    run is `answer`'s."""
+    def run(name, text):
+        if PREFLIGHT_MARK in text:
+            return 0, locate_log(text)
+        return 0 if name == "hint_setup.v" else answer(name, text)
+    return run
 
 
 def probe(idx, answer, name=NAME, seen=None):
@@ -95,7 +122,8 @@ class ProbeCouldNotSearch(unittest.TestCase):
         self.assert_incomplete(row, "hint")
 
     def test_hint_imports_that_do_not_load(self):
-        answer = lambda name, text: 1 if name == "hint_setup.v" else (0 if PREFLIGHT_MARK in text else 1)
+        answer = lambda name, text: (1 if name == "hint_setup.v"
+                                     else (0, locate_log(text)) if PREFLIGHT_MARK in text else 1)
         self.assert_incomplete(probe({HINTED: entry()}, answer, HINTED), "the imports of the hint")
 
     def test_killed_instantiation_run(self):
@@ -173,8 +201,11 @@ class ValidateFailsClosed(unittest.TestCase):
 
     @staticmethod
     def healthy(name, text):
-        # Setups compile, the two recall fixtures compile, hints and probes do not.
-        if name == "hint_setup.v" or PREFLIGHT_MARK in text:
+        # Setups compile (the preflight's names resolve), the two recall fixtures compile, hints and
+        # probes do not.
+        if PREFLIGHT_MARK in text:
+            return 0, locate_log(text)
+        if name == "hint_setup.v":
             return 0
         return 0 if ("__probe_selftest_vacuous_statement" in text
                      or "__probe_inst_fixture_statement" in text) else 1
@@ -217,6 +248,199 @@ class ValidateFailsClosed(unittest.TestCase):
             code = VP.validate(idx, VP.DEFAULT_TIMEOUT, 1)
         self.assertEqual(code, 1, out.getvalue())
         self.assertIn("rows without a verdict (no search ran):     1", out.getvalue())
+
+
+def fake_tree(files: dict[str, str], waves: dict | None = None):
+    """A temporary repository tree to READ: {relative path: text}; patches VP.ROOT and VP.META."""
+    td = tempfile.TemporaryDirectory()
+    root = Path(td.name).resolve()
+    for rel, text in files.items():
+        (root / rel).parent.mkdir(parents=True, exist_ok=True)
+        (root / rel).write_text(text)
+    (root / "meta").mkdir(exist_ok=True)
+    (root / "meta" / "v2_statement_waves.json").write_text(json.dumps({"waves": waves or {}}))
+    stack = contextlib.ExitStack()
+    stack.callback(td.cleanup)
+    stack.enter_context(patch.object(VP, "ROOT", root))
+    stack.enter_context(patch.object(VP, "META", root / "meta"))
+    return stack
+
+
+CONJ = "chromatic-theory/theories/conjectures"
+
+
+class Resolution(unittest.TestCase):
+    """The preflight's two Locate checks: both must name the probed module's own definition."""
+
+    def run_with(self, first=None, second=None, wrap=False, log=None):
+        def answer(name, text):
+            if PREFLIGHT_MARK in text:
+                return 0, (log if log is not None else locate_log(text, first, second, wrap))
+            return 1
+        return probe({NAME: entry()}, answer)
+
+    def test_wrong_module_in_the_auto_context(self):
+        row = self.run_with(first=f"{NS}.conjectures.Other.{NAME}")
+        self.assertEqual(row["status"], "INCOMPLETE")
+        self.assertIn(f"auto layers: {NS}.conjectures.Other.{NAME}", row["reason"])
+        self.assertEqual(report([row])[0], 1)
+
+    def test_wrong_module_in_the_small_model_context(self):
+        row = self.run_with(second=f"GTBase.finite_graph.{NAME}")
+        self.assertEqual(row["status"], "INCOMPLETE")
+        self.assertIn(f"small model: GTBase.finite_graph.{NAME}", row["reason"])
+
+    def test_no_constant_printed(self):
+        row = self.run_with(log="")
+        self.assertEqual(row["status"], "INCOMPLETE")
+        self.assertIn("<none>", row["reason"])
+
+    def test_wrapped_long_name_resolves(self):
+        # Positive control: Rocq breaks the line after "Constant" for a long qualified name.
+        row = self.run_with(wrap=True)
+        self.assertEqual(row["status"], "ok")
+        want = f"{NS}.conjectures.{STEM}.{NAME}"
+        self.assertEqual(row["resolved"], (want, want))
+        code, out = report([row])
+        self.assertEqual(code, 0)
+        self.assertIn(f"RESOLVED {NAME} -> {want} | {want}", out)
+
+    def test_both_locates_are_in_the_preflight(self):
+        seen: list[str] = []
+        probe({NAME: entry()}, setup_ok(lambda name, text: 1), seen=seen)
+        pre = next(text for text in seen if PREFLIGHT_MARK in text)
+        self.assertEqual(pre.count(f"Locate {NAME}."), 2)
+        # The first Locate precedes the finite_graph import (the auto layers' context), the second follows it.
+        self.assertLess(pre.index(f"Locate {NAME}."), pre.index("Require Import finite_graph"))
+        self.assertGreater(pre.rindex(f"Locate {NAME}."), pre.index("Require Import finite_graph"))
+
+
+class Parametric(unittest.TestCase):
+    TYPE_ERROR = (1, 'Error:\nThe term "fixture_statement" has type "(nat -> Prop) -> Prop"\n'
+                     'while it is expected to have type "Prop".')
+
+    def classify(self, classification_rc, seen=None):
+        def answer(name, text):
+            if CLASSIFY_MARK in text:
+                return classification_rc
+            return self.TYPE_ERROR if PREFLIGHT_MARK in text else 1
+        return probe({NAME: entry()}, answer, seen=seen)
+
+    def test_product_type_is_parametric_and_fails(self):
+        row = self.classify(0)
+        self.assertEqual(row["status"], "PARAMETRIC")
+        self.assertIn("--target", row["reason"])
+        code, out = report([row])
+        self.assertEqual(code, 1)
+        self.assertIn("1 probed · 0 FLAGGED · 1 PARAMETRIC", out)
+
+    def test_classification_that_fails_is_incomplete(self):
+        row = self.classify(1)
+        self.assertEqual(row["status"], "INCOMPLETE")
+        # first_error keeps the continuation of a bare "Error:".
+        self.assertIn('has type "(nat -> Prop) -> Prop"', row["reason"])
+
+    def test_killed_classification_is_incomplete(self):
+        row = self.classify(-9)
+        self.assertEqual(row["status"], "INCOMPLETE")
+        self.assertIn("rc -9", row["reason"])
+
+    def test_healthy_row_never_classifies(self):
+        seen: list[str] = []
+        row = probe({NAME: entry()}, setup_ok(lambda name, text: 1), seen=seen)
+        self.assertEqual(row["status"], "ok")
+        self.assertFalse(any(CLASSIFY_MARK in text for text in seen))
+
+    def test_instance_candidates_are_listed(self):
+        files = {f"{CONJ}/A.v": "Definition p_statement (q : nat -> Prop) : Prop := forall n, q n.\n",
+                 f"{CONJ}/B.v": ("Definition p_concrete : Prop :=\n  p_statement (fun n => n = n).\n"
+                                 "(* Definition p_old : Prop := p_statement (fun _ => True). *)\n"
+                                 "Definition p_statement_extra : Prop := True.\n")}
+        with fake_tree(files):
+            self.assertEqual(VP.instance_candidates("p_statement"), ["chromatic-theory/B:p_concrete"])
+
+
+class FirstError(unittest.TestCase):
+    def test_bare_error_keeps_its_continuation(self):
+        log = 'File "./probe.v", line 3:\nError:\nThe term "x" has type "nat"\nwhile it is expected.\n\nmore'
+        self.assertEqual(VP.first_error(log), 'Error: The term "x" has type "nat" while it is expected.')
+
+    def test_one_line_error_unchanged(self):
+        self.assertEqual(VP.first_error("Error: Syntax error.\nFile x"), "Error: Syntax error.")
+
+    def test_no_error_line_gives_the_last_line(self):
+        self.assertEqual(VP.first_error("a\n<timeout>\n"), "<timeout>")
+
+
+class Targets(unittest.TestCase):
+    FILES = {f"{CONJ}/A.v": ("Definition x_statement : Prop := True.\n"
+                             "Definition y_statement : Prop := False.\n"
+                             "(* Definition z_statement : Prop := True. *)\n"
+                             "Definition helper_def : Prop := True.\n"),
+             f"{CONJ}/B.v": "Definition x_statement : Prop := False.\n"}
+
+    def test_duplicated_name_is_not_indexed(self):
+        with fake_tree(self.FILES):
+            idx = VP.build_index()
+        self.assertNotIn("x_statement", idx)
+        self.assertEqual(idx.dups["x_statement"], ["chromatic-theory/A", "chromatic-theory/B"])
+        self.assertEqual(idx["y_statement"][:2], ("chromatic-theory", "A"))
+
+    def test_ambiguous_name_fails_without_a_coqc_run(self):
+        idx = VP.Index({NAME: entry()})
+        idx.dups["x_statement"] = ["chromatic-theory/A", "chromatic-theory/B"]
+        row = probe(idx, lambda name, text: self.fail("no coqc run for an AMBIGUOUS name"), "x_statement")
+        self.assertEqual(row["status"], "AMBIGUOUS")
+        code, out = report([row])
+        self.assertEqual(code, 1)
+        self.assertIn("1 AMBIGUOUS", out)
+
+    def test_files_are_probed_against_their_own_module(self):
+        with fake_tree(self.FILES):
+            targets = VP.targets_from_files([f"{CONJ}/B.v"])
+        self.assertEqual([(name, entry[:3]) for name, entry in targets],
+                         [("x_statement", ("chromatic-theory", "B", "Chromatic"))])
+        seen: list[str] = []
+        with patch.object(VP, "sh", fake_sh(setup_ok(lambda name, text: 1), seen)):
+            rows = VP.probe_targets(targets, VP.Index(), VP.DEFAULT_TIMEOUT, 1)
+        self.assertEqual(rows[0]["status"], "ok")
+        self.assertTrue(all("From Chromatic.conjectures Require Import B.\n" in text for text in seen))
+
+    def test_commented_definition_is_not_collected(self):
+        with fake_tree(self.FILES):
+            names = [name for name, _ in VP.targets_from_files([f"{CONJ}/A.v"])]
+        self.assertEqual(names, ["x_statement", "y_statement"])
+
+    def test_file_outside_a_conjecture_directory_exits(self):
+        with fake_tree({"chromatic-theory/theories/foundations/F.v": "Definition f_statement : Prop := True.\n"}):
+            with self.assertRaises(SystemExit):
+                VP.targets_from_files(["chromatic-theory/theories/foundations/F.v"])
+
+    def test_wave_uses_its_defines_file(self):
+        waves = {"XT": {"repo": "chromatic-theory", "defines_file": "B.v",
+                        "rows": {"r1": {"formal_name": "x_statement"}, "r2": {"formal_name": "y_statement"}}}}
+        with fake_tree(self.FILES, waves):
+            targets = VP.targets_from_wave("XT")
+            with self.assertRaises(SystemExit):
+                VP.targets_from_wave("NO_SUCH_WAVE")
+        self.assertEqual(targets[0][0], "x_statement")
+        self.assertEqual(targets[0][1][:2], ("chromatic-theory", "B"))
+        self.assertEqual(targets[1], ("y_statement", None))   # not in B.v: the index decides
+
+    def test_target_any_definition_and_not_found(self):
+        with fake_tree(self.FILES):
+            targets = VP.targets_from_specs(["chromatic-theory/A:helper_def", "chromatic-theory/A:missing",
+                                             "chromatic-theory/NOFILE:helper_def"])
+        self.assertEqual(targets[0], ("helper_def", ("chromatic-theory", "A", "Chromatic", " True.")))
+        self.assertEqual((targets[1][1]["status"], targets[2][1]["status"]), ("NOT-FOUND", "NOT-FOUND"))
+        self.assertEqual(VP.probe_target(targets[1], VP.Index(), VP.DEFAULT_TIMEOUT), targets[1][1])
+
+    def test_empty_request_exits_nonzero(self):
+        with patch.object(VP, "build_index", lambda: VP.Index()), \
+             patch.object(sys, "argv", ["vacuity_probe.py", "--names", ","]):
+            with self.assertRaises(SystemExit) as ctx:
+                VP.main()
+        self.assertNotIn(ctx.exception.code, (0, None))
 
 
 if __name__ == "__main__":
