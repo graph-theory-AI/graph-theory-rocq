@@ -7631,11 +7631,14 @@
    "audit_page": "todo"
   },
   "erdos_1034": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x243-ramsey-induced-hypercube-c6-diameter-triangles",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X243.v:dense_graph_triangle_half_two_neighbour_vertices_statement. Erdos Problems #1034, Erdos-Faudree (false before the corpus pin, pinned status solved: Ma and Tang, On Erdos problem #1034, Theorem 2.1; mirror disproved (Lean) 2025-12-04): a graph with more than n^2/4 edges has a triangle T and more than (1/2 - o(1)) n vertices joined to two vertices of T, eps = 1/q, affirmative form (GTBase edge_count)."
   },
   "erdos_1035": {
    "statement": "done",
@@ -7868,11 +7871,14 @@
    "audit_page": "todo"
   },
   "erdos_133": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x243-ramsey-induced-hypercube-c6-diameter-triangles",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X243.v:triangle_free_diameter_two_max_degree_statement. Erdos Problems #133, the specific question (false before the corpus pin, pinned status solved: Furedi and Seress, J. Graph Theory 18 (1994), Lemma 2.4: maximal triangle-free graphs, of diameter 2, with maximum degree <= 5 sqrt(n) + 1): every triangle-free graph of diameter 2 has a vertex of degree >= c sqrt(n) for every c, eventually, affirmative form (GTBase has_subgraph, graph_dist; upstream N)."
   },
   "erdos_134": {
    "statement": "todo",
@@ -8700,18 +8706,24 @@
    "note": "Authored in XE2.v:erdos_632_statement. Encodes Erdos Problems #632 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_636": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x243-ramsey-induced-hypercube-c6-diameter-triangles",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X243.v:ramsey_graph_distinct_size_edge_pairs_statement. Erdos Problems #636, Erdos-Faudree-Sos (proved before the corpus pin, pinned status solved: Kwan and Sudakov, arXiv:1712.05656v4, abstract and l.860): such a graph has >> n^{5/2} induced subgraphs with pairwise different (vertex count, edge count), counted as distinct pairs, n^5 <= (p N)^2 (upstream cliqueb, stable, induced; GTBase edge_count; MathComp undup)."
   },
   "erdos_637": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x243-ramsey-induced-hypercube-c6-diameter-triangles",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X243.v:ramsey_graph_induced_distinct_degrees_statement. Erdos Problems #637, Erdos-Faudree-Sos (proved before the corpus pin, pinned status solved: Bukh and Sudakov, J. Combin. Theory Ser. B 97 (2007), Theorem 1.1): such a graph has an induced subgraph on >> n vertices with >> n^{1/2} distinct degrees (upstream cliqueb, stable, induced, N; MathComp undup)."
   },
   "erdos_639": {
    "statement": "done",
@@ -8765,11 +8777,14 @@
    "audit_page": "todo"
   },
   "erdos_666": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x243-ramsey-induced-hypercube-c6-diameter-triangles",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X243.v:hypercube_dense_subgraph_C6_statement. Erdos Problems #666 (false before the corpus pin, pinned status solved: Chung 1992, Theorem 3, and Brouwer, Dejter and Thomassen 1993, Section 3, split E(Q_n) into four C_6-free classes, Conder 1993 into three; mirror disproved (Lean) 2026-02-06): every subgraph of Q_n with >= eps n 2^{n-1} edges contains a C_6, eps = 1/q, affirmative form as X239's erdos:86 (GTBase product_hypercube, del_edge_set, has_subgraph, cycle_graph)."
   },
   "erdos_667": {
    "statement": "todo",
@@ -9426,11 +9441,14 @@
    "note": "Authored in XE1.v:erdos_87_statement. Encodes Erdos Problems #87 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_88": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x243-ramsey-induced-hypercube-c6-diameter-triangles",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X243.v:ramsey_graph_induced_every_edge_count_statement. Erdos Problems #88, Erdos-McKay (proved before the corpus pin, pinned status solved: Kwan, Sah, Sauermann and Sawhney, arXiv:2208.02874v2, Theorem 1.1 and footnote 2): a graph with no clique or independent set on >= C log n vertices induces every edge count m <= delta n^2; integer C over log_2, delta = 1/p (upstream cliqueb, stable, induced; GTBase edge_count)."
   },
   "erdos_883": {
    "statement": "done",
