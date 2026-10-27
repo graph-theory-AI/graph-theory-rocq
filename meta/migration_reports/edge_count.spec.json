@@ -1826,6 +1826,26 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X241.v",
       "name": "xe1_size_ramsey_number",
       "note": "Wave X241 (2026-10-27): edge_count is the canonical GTBase.common.edge_count (GTBase imported last; X241.v imports no D2 module and grounding_X241.v none directly), matched by short name within extremal-graph-theory, where D2tur / D2ram hold the source; xe1_size_ramsey_number (row erdos:911) is XE1's size Ramsey number, an edge_count chain; the grounding writes X4.x4_edge_count when unfolding it. Imported, no copy; declared as for X239 / X240 / XE2."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X242.v",
+      "name": "edge_count",
+      "note": "Wave X242 (2026-10-27) imports D2tur for is_turan_number (ex(n; Fam), rows erdos:574 and erdos:147) and imports GTBase LAST, so its unqualified edge_count is the canonical GTBase.common.edge_count, not the D2tur source; declared as for X237 / X239 / X240."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X242.v",
+      "name": "is_turan_number",
+      "note": "Wave X242 (2026-10-27) imports D2tur for is_turan_number (ex(n; Fam), rows erdos:574 and erdos:147) and imports GTBase LAST, so its unqualified edge_count is the canonical GTBase.common.edge_count, not the D2tur source; declared as for X237 / X239 / X240."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X242.v",
+      "name": "edge_count",
+      "note": "Wave X242 (2026-10-27) imports D2tur for is_turan_number (ex(n; Fam), rows erdos:574 and erdos:147) and imports GTBase LAST, so its unqualified edge_count is the canonical GTBase.common.edge_count, not the D2tur source; declared as for X237 / X239 / X240."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X242.v",
+      "name": "is_turan_number",
+      "note": "Wave X242 (2026-10-27) imports D2tur for is_turan_number (ex(n; Fam), rows erdos:574 and erdos:147) and imports GTBase LAST, so its unqualified edge_count is the canonical GTBase.common.edge_count, not the D2tur source; declared as for X237 / X239 / X240."
     }
   ],
   "distinct_variants": [
