@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py poly_eval --details /tmp/migrat
 
 - Canonical: `GTBase.poly_nat.horner_nat`.
 - Baseline: `db16a76376d1a9c29142b38f97d5109d6dd942fa`.
-- Scope: 8 helpers, 12 statements, 39 frozen objects, 190 recorded references.
-- Source checks: 372/372 pass; consistent.
+- Scope: 8 helpers, 12 statements, 39 frozen objects, 194 recorded references.
+- Source checks: 376/376 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
