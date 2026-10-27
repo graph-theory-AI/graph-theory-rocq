@@ -26,10 +26,12 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Three
+corrections are applied explicitly (ERRATA below) since the review files predate them. Four
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
-wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source.
+wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
+wave X238, the path question arxiv:2202.05557#01 is solved by Part VIII of the same series
+(arXiv:2303.11766, Theorem 1.5), which its pinned review names without reading the theorem.
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -221,6 +223,11 @@ ERRATA = [
     ("2105.07370", "Union cover variant (open problem)", "solved",
      "Literature: implied by its own source, arXiv:2105.07370v2, Theorem 1.4: every H-free graph has "
      "a partition of V(G) into at most N eps-restricted subsets, in particular a union of at most N."),
+    # literature status correction (wave X238, Arthur's design; solved before the corpus pin)
+    ("2202.05557", "Question: Extending Theorem 1.6 to paths", "solved",
+     "Literature: solved by Nguyen, Scott and Seymour, arXiv:2303.11766 (J. Graph Theory 2024), "
+     "Theorem 1.5: for every path H and d >= 1 a polynomial f gives chi(G) <= f(t) for every H-free "
+     "G with no K_d(t) subgraph, i.e. a polynomial bound in tau_d(G)."),
 ]
 
 
@@ -829,7 +836,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 3 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 4 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
