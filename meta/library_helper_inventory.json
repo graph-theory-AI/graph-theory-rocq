@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2123,
-      "cross_file_files": 1068,
+      "cross_file_declarations": 2127,
+      "cross_file_files": 1072,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -7616,7 +7616,9 @@
             "digraph-theory/theories/conjectures/X1.v:<line 11>",
             "digraph-theory/theories/conjectures/X17.v:<line 6>",
             "digraph-theory/theories/conjectures/X221.v:<line 7>",
+            "digraph-theory/theories/conjectures/X246.v:<line 20>",
             "digraph-theory/theories/conjectures/grounding_X221.v:<line 42>",
+            "digraph-theory/theories/conjectures/grounding_X246.v:<line 17>",
             "digraph-theory/theories/conjectures/grounding_edges.v:<line 55>",
             "digraph-theory/theories/conjectures/grounding_edges.v:conj9_weaken_const'",
             "digraph-theory/theories/conjectures/grounding_fas_unvd.v:<line 28>",
@@ -7639,7 +7641,9 @@
             "digraph-theory/theories/conjectures/X1.v",
             "digraph-theory/theories/conjectures/X17.v",
             "digraph-theory/theories/conjectures/X221.v",
+            "digraph-theory/theories/conjectures/X246.v",
             "digraph-theory/theories/conjectures/grounding_X221.v",
+            "digraph-theory/theories/conjectures/grounding_X246.v",
             "digraph-theory/theories/conjectures/grounding_edges.v",
             "digraph-theory/theories/conjectures/grounding_fas_unvd.v",
             "digraph-theory/theories/conjectures/grounding_omegabar_unvd.v",
@@ -7674,7 +7678,9 @@
           "digraph-theory/theories/conjectures/X1.v": "unknown",
           "digraph-theory/theories/conjectures/X17.v": "no",
           "digraph-theory/theories/conjectures/X221.v": "no",
+          "digraph-theory/theories/conjectures/X246.v": "no",
           "digraph-theory/theories/conjectures/grounding_X221.v": "no",
+          "digraph-theory/theories/conjectures/grounding_X246.v": "no",
           "digraph-theory/theories/conjectures/grounding_edges.v": "no",
           "digraph-theory/theories/conjectures/grounding_fas_unvd.v": "no",
           "digraph-theory/theories/conjectures/grounding_omegabar_unvd.v": "no",
@@ -8210,6 +8216,7 @@
             "extremal-graph-theory/theories/conjectures/grounding_X243.v:g243_pairs_no_ramsey",
             "extremal-graph-theory/theories/conjectures/grounding_X244.v:<line 198>",
             "extremal-graph-theory/theories/conjectures/grounding_X244.v:g244_cut_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X245.v:<line 29>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 14>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 21>",
             "extremal-graph-theory/theories/migration/cut_size.v:<line 13>",
@@ -8255,6 +8262,7 @@
             "extremal-graph-theory/theories/conjectures/grounding_X242.v",
             "extremal-graph-theory/theories/conjectures/grounding_X243.v",
             "extremal-graph-theory/theories/conjectures/grounding_X244.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X245.v",
             "extremal-graph-theory/theories/migration/clique_counts.v",
             "extremal-graph-theory/theories/migration/cut_size.v",
             "extremal-graph-theory/theories/migration/cycle_lengths.v",
@@ -8337,6 +8345,7 @@
           "extremal-graph-theory/theories/conjectures/grounding_X242.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X243.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X244.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X245.v": "unknown",
           "extremal-graph-theory/theories/migration/clique_counts.v": "no",
           "extremal-graph-theory/theories/migration/cut_size.v": "no",
           "extremal-graph-theory/theories/migration/cycle_lengths.v": "unknown",
@@ -8698,6 +8707,7 @@
             "extremal-graph-theory/theories/conjectures/grounding_X243.v:g243_pairs_no_ramsey",
             "extremal-graph-theory/theories/conjectures/grounding_X244.v:<line 198>",
             "extremal-graph-theory/theories/conjectures/grounding_X244.v:g244_cut_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X245.v:<line 29>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 14>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 21>",
             "extremal-graph-theory/theories/migration/cut_size.v:<line 13>",
@@ -8743,6 +8753,7 @@
             "extremal-graph-theory/theories/conjectures/grounding_X242.v",
             "extremal-graph-theory/theories/conjectures/grounding_X243.v",
             "extremal-graph-theory/theories/conjectures/grounding_X244.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X245.v",
             "extremal-graph-theory/theories/migration/clique_counts.v",
             "extremal-graph-theory/theories/migration/cut_size.v",
             "extremal-graph-theory/theories/migration/cycle_lengths.v",
@@ -8824,6 +8835,7 @@
           "extremal-graph-theory/theories/conjectures/grounding_X242.v": "yes",
           "extremal-graph-theory/theories/conjectures/grounding_X243.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X244.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X245.v": "yes",
           "extremal-graph-theory/theories/migration/clique_counts.v": "no",
           "extremal-graph-theory/theories/migration/cut_size.v": "no",
           "extremal-graph-theory/theories/migration/cycle_lengths.v": "unknown",
@@ -24728,13 +24740,13 @@
     ]
   },
   "counts": {
-    "files": 337,
-    "helpers": 2685,
+    "files": 339,
+    "helpers": 2691,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 218,
-    "repeated_signature_shapes": 327,
-    "statements_excluded": 764,
-    "x_wave_helpers": 1524
+    "repeated_signature_shapes": 328,
+    "statements_excluded": 773,
+    "x_wave_helpers": 1530
   },
   "groups": {
     "body_shape_hash": {
@@ -24976,6 +24988,7 @@
         "Minor.conjectures.X42.x42_diamond"
       ],
       "589ddf4441503fa61dd7b4b8358903c2ad3d7ccf18bdb2764884dda9b7bea7d8": [
+        "Digraph.conjectures.X246.x246_cycle_or",
         "Digraph.conjectures.two_extremal.symcyc",
         "Digraph.conjectures.two_extremal_glue.dicyc"
       ],
@@ -27271,6 +27284,7 @@
         "Digraph.conjectures.X221.x221_eulerian",
         "Digraph.conjectures.X221.x221_oriented_complete_multipartite",
         "Digraph.conjectures.X221.x221_oriented_triangle_free",
+        "Digraph.conjectures.X246.x246_fas_le1",
         "Digraph.conjectures.X44.x44_even_dicycle",
         "Digraph.conjectures.X54.x54_no_induced_odd_dicycle",
         "Digraph.conjectures.chi_bounded.chordal_C3",
@@ -27647,6 +27661,10 @@
         "Extremal.conjectures.X120.x120_edges_between",
         "Extremal.conjectures.X120.x120_nonedges_between",
         "Extremal.conjectures.X223.x223_edges_between"
+      ],
+      "43f048d0a803d8e313c367efc1e3eefeb0f4e66d45fdb012660217e296af7896": [
+        "Digraph.conjectures.X246.x246_cycle_or_rel",
+        "Hom.conjectures.U3.pth_rel"
       ],
       "4481cde2fd8f4873f6f6c273189d6c6f35f6775f0c64692dfc545f0ac0cffe19": [
         "Extremal.conjectures.X88.x88_clique_count",
@@ -28361,7 +28379,9 @@
       "b2a8179a1f330346872603387f89ef5e02aaa9bbf3e10b300266a0fe5d38b0ce": [
         "Digraph.conjectures.X2.delta_plus_maderian",
         "Digraph.conjectures.X221.x221_eulerian_avoidable",
-        "Digraph.conjectures.X221.x221_eulerian_avoidable_sub"
+        "Digraph.conjectures.X221.x221_eulerian_avoidable_sub",
+        "Digraph.conjectures.X246.x246_avoidable",
+        "Digraph.conjectures.X246.x246_height"
       ],
       "b349edbd8727460c5c27fae24985aaf8e8bf31eebc8916f711a74ad4c152d099": [
         "Chromatic.conjectures.X3.x3_stable_set",
@@ -42855,6 +42875,119 @@
       "qualified_name": "Digraph.conjectures.X231.x231_forward_cover",
       "signature": "(D : diGraphType) (rs : seq {ffun D -> nat}) : Prop",
       "signature_shape_hash": "784699206e33a85a9126782a764e704d4c93363c54e7a84ddcfb6aef2bde9e59"
+    },
+    {
+      "body_hash": "33ccaaa0cc9b1575921fe453517f19013af4db97169bd7e8668b002f35a62b53",
+      "body_shape_hash": "33ccaaa0cc9b1575921fe453517f19013af4db97169bd7e8668b002f35a62b53",
+      "declaration_hash": "2a8c5179df260f9a897541090f51b15fa3c154ff27cb1ab90b6a46bfabe1691d",
+      "direct_consumers": [
+        "Digraph.conjectures.X246.height_function_not_avoidable_statement",
+        "Digraph.conjectures.X246.odd_cycle_orientations_avoidable_statement"
+      ],
+      "kind": "Definition",
+      "line": 27,
+      "local_dependencies": [],
+      "name": "x246_avoidable",
+      "normalized_name": "avoidable",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X246.v",
+      "phase": "X246",
+      "qualified_name": "Digraph.conjectures.X246.x246_avoidable",
+      "signature": "(F : diGraphType) : Prop",
+      "signature_shape_hash": "b2a8179a1f330346872603387f89ef5e02aaa9bbf3e10b300266a0fe5d38b0ce"
+    },
+    {
+      "body_hash": "589ddf4441503fa61dd7b4b8358903c2ad3d7ccf18bdb2764884dda9b7bea7d8",
+      "body_shape_hash": "589ddf4441503fa61dd7b4b8358903c2ad3d7ccf18bdb2764884dda9b7bea7d8",
+      "declaration_hash": "5a69a1316c952c5e8d0d40892afef4d90ed62b2b20f86cabd157482e97607c0a",
+      "direct_consumers": [
+        "Digraph.conjectures.X246.odd_cycle_orientations_avoidable_statement"
+      ],
+      "kind": "Definition",
+      "line": 45,
+      "local_dependencies": [],
+      "name": "x246_cycle_or",
+      "normalized_name": "cycle_or",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X246.v",
+      "phase": "X246",
+      "qualified_name": "Digraph.conjectures.X246.x246_cycle_or",
+      "signature": "(n : nat) (b : 'I_n -> bool) : Type",
+      "signature_shape_hash": "2cd7d4849eb001fe32c35522e3d6544bf4c3c04c1300353e3d65de4ff36109be"
+    },
+    {
+      "body_hash": "113bd5ce9abc19dfabfcd1936c913a533f37a2b41346b76fd779fdc405250aec",
+      "body_shape_hash": "113bd5ce9abc19dfabfcd1936c913a533f37a2b41346b76fd779fdc405250aec",
+      "declaration_hash": "80ca064886565e7985f2152807023f0f797a7dbe115969f185163ac094cb1d66",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 55,
+      "local_dependencies": [],
+      "name": "x246_cycle_or_rel",
+      "normalized_name": "cycle_or_rel",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X246.v",
+      "phase": "X246",
+      "qualified_name": "Digraph.conjectures.X246.x246_cycle_or_rel",
+      "signature": "(i j : 'I_n) : bool",
+      "signature_shape_hash": "43f048d0a803d8e313c367efc1e3eefeb0f4e66d45fdb012660217e296af7896"
+    },
+    {
+      "body_hash": "4959f7da0818eb90819ece3c5f887b24a8c1f274a65a65b81f501f78c0ed82e4",
+      "body_shape_hash": "4959f7da0818eb90819ece3c5f887b24a8c1f274a65a65b81f501f78c0ed82e4",
+      "declaration_hash": "8369759e29854e05b5a6fd86d4d859c07143dc3e6a678c32f6ff7a7e538add1e",
+      "direct_consumers": [
+        "Digraph.conjectures.X246.height_function_not_avoidable_statement"
+      ],
+      "kind": "Definition",
+      "line": 61,
+      "local_dependencies": [],
+      "name": "x246_height",
+      "normalized_name": "height",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X246.v",
+      "phase": "X246",
+      "qualified_name": "Digraph.conjectures.X246.x246_height",
+      "signature": "(F : diGraphType) : Prop",
+      "signature_shape_hash": "b2a8179a1f330346872603387f89ef5e02aaa9bbf3e10b300266a0fe5d38b0ce"
+    },
+    {
+      "body_hash": "7855b3ff67630c200db897ab01a0bf155e0c35b423c8417cd2a5bf03cc65b3b2",
+      "body_shape_hash": "7855b3ff67630c200db897ab01a0bf155e0c35b423c8417cd2a5bf03cc65b3b2",
+      "declaration_hash": "dcd02c3bba039489f8336a456b04601000cf81eeb1633fec958c16c941b48e82",
+      "direct_consumers": [
+        "Digraph.conjectures.X246.r_free_two_thirds_one_arc_from_acyclic_statement"
+      ],
+      "kind": "Definition",
+      "line": 68,
+      "local_dependencies": [],
+      "name": "x246_r_free",
+      "normalized_name": "r_free",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X246.v",
+      "phase": "X246",
+      "qualified_name": "Digraph.conjectures.X246.x246_r_free",
+      "signature": "(r : nat) (D : diGraphType) : Prop",
+      "signature_shape_hash": "86905298c12efa65f6ef59bdc9f0fc37eca3e91785d9d8144ef483261912f0b4"
+    },
+    {
+      "body_hash": "99133fc9432afa0f4bef249dab8ade6d22d299fc33c5faf461d750113e4a8338",
+      "body_shape_hash": "99133fc9432afa0f4bef249dab8ade6d22d299fc33c5faf461d750113e4a8338",
+      "declaration_hash": "16c552736c4b4ca860e9e506a57a995734b5b3f8f702318458ba78bc7f6f0f89",
+      "direct_consumers": [
+        "Digraph.conjectures.X246.r_free_two_thirds_one_arc_from_acyclic_statement"
+      ],
+      "kind": "Definition",
+      "line": 73,
+      "local_dependencies": [],
+      "name": "x246_fas_le1",
+      "normalized_name": "fas_le1",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X246.v",
+      "phase": "X246",
+      "qualified_name": "Digraph.conjectures.X246.x246_fas_le1",
+      "signature": "(D : diGraphType) : Prop",
+      "signature_shape_hash": "1df638342453dfeab4177ffe20578994bca0d7dc155ec596c82c0b58fc45aa39"
     },
     {
       "body_hash": "029f2f2794eaf5bf3d7a0a3ba0f37074a7057a1c5a85ad5a84997a15f7db614d",
