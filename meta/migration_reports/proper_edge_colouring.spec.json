@@ -583,6 +583,21 @@
       "path": "chromatic-theory/theories/conjectures/grounding_X236.v",
       "name": "x142_incident_sum",
       "note": "Wave X236 (Arthur, 2026-10-26): the grounding certificates of arxiv:1804.06104#00 use X142 vocabulary (K_2 has no neighbour sum distinguishing colouring); imported, no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X236.v",
+      "name": "flandrin_neighbour_sum_distinguishing_edge_colouring_statement",
+      "note": "Implication consumer (Rocq-only edge X142 => X236 arxiv:1804.06104#00): flandrin_neighbour_sum_distinguishing_edge_colouring_implies_nsd_delta_plus_constant applies the Flandrin row to the connected parts and transports x142_neighbour_sum_edge_colourable colourings (incident sums x142_incident_sum, properness proper_edge_colouring) between graphs; imported, no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X236.v",
+      "name": "x142_neighbour_sum_edge_colourable",
+      "note": "Implication consumer (Rocq-only edge X142 => X236 arxiv:1804.06104#00): flandrin_neighbour_sum_distinguishing_edge_colouring_implies_nsd_delta_plus_constant applies the Flandrin row to the connected parts and transports x142_neighbour_sum_edge_colourable colourings (incident sums x142_incident_sum, properness proper_edge_colouring) between graphs; imported, no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X236.v",
+      "name": "x142_incident_sum",
+      "note": "Implication consumer (Rocq-only edge X142 => X236 arxiv:1804.06104#00): flandrin_neighbour_sum_distinguishing_edge_colouring_implies_nsd_delta_plus_constant applies the Flandrin row to the connected parts and transports x142_neighbour_sum_edge_colourable colourings (incident sums x142_incident_sum, properness proper_edge_colouring) between graphs; imported, no copy."
     }
   ],
   "proof_consumers": [

@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 146,
+  "edges": 148,
   "by_status": {
    "candidate": 32,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 80
+   "verified": 82
   },
   "by_kind": {
    "equiv": 6,
-   "implies": 140,
+   "implies": 142,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 96
+  "proved_theorems": 98
  },
  "edges": [
   {
@@ -605,6 +605,19 @@
    "external": [],
    "sources": [
     "cycle-theory/implications_D1.v"
+   ]
+  },
+  {
+   "from": "flandrin_neighbour_sum_distinguishing_edge_colouring_statement",
+   "to": "nsd_delta_plus_constant_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "flandrin_neighbour_sum_distinguishing_edge_colouring_implies_nsd_delta_plus_constant",
+   "note": "Rocq-only edge (no corpus relation), stated in X236.v's Notes: Flandrin et al.'s Delta + 2 for connected graphs with at least 3 vertices other than C_5 gives Delta + 3 for every graph with no isolated edge (C = 3), by strong induction on the number of vertices: graphs on at most 2 vertices without an isolated edge have no edge; a connected graph on at least 3 vertices is C_5 (an explicit 5-colouring) or Flandrin's; a disconnected one splits into a component and its complement, whose colourings glue.",
+   "external": [],
+   "sources": [
+    "chromatic-theory/implications_X236.v"
    ]
   },
   {
@@ -1217,6 +1230,19 @@
    "external": [],
    "sources": [
     "extremal-graph-theory/implications_D2ram.v"
+   ]
+  },
+  {
+   "from": "odd_even_cycle_free_turan_asymptotic_statement",
+   "to": "triangle_square_free_turan_asymptotic_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "odd_even_cycle_free_turan_asymptotic_implies_triangle_square_free_turan_asymptotic",
+   "note": "Rocq-only edge (no corpus relation), stated in X242.v's Notes: erdos:574 at j = 0 (k = 2) is erdos:573 up to conversion: the family {C_{2j+3}, C_{2j+4}} is {C_3, C_4} and the bounds q^(j+2) n^(j+3) <= 2^(j+3) (q+1)^(j+2) m^(j+2) and 2^(j+3) q^(j+2) m^(j+2) <= (q+1)^(j+2) n^(j+3) are 573's with 2^3 = 8.",
+   "external": [],
+   "sources": [
+    "extremal-graph-theory/implications_X242.v"
    ]
   },
   {

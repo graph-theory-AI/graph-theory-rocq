@@ -44,6 +44,8 @@ were already found by the 2026-09-23 statement re-sync.
 | `smith_two_longest_cycles_statement` | `smith_longest_cycles_r_connected_statement` | equiv | verified | `smith_two_longest_cycles_equiv_smith_longest_cycles_r_connected` (cycle-theory/implications_X212.v) |
 | `every_forest_is_multibounding_statement` | `path_free_polynomial_tau_bound_statement` | implies | verified | `every_forest_is_multibounding_implies_path_free_polynomial_tau_bound` (chromatic-theory/implications_X238.v; 2026-10-27: arxiv:2303.11766#00 ⇒ arxiv:2202.05557#01, every path being a forest) |
 | `clique_ramsey_polylog_lower_statement` | `ramsey_four_cubic_polylog_lower_statement` | implies | verified | `clique_ramsey_polylog_lower_implies_ramsey_four_cubic_polylog_lower` (extremal-graph-theory/implications_X241.v; 2026-10-27: erdos:986 at k = 4 ⇒ erdos:166, the factor n cancelling) |
+| `odd_even_cycle_free_turan_asymptotic_statement` | `triangle_square_free_turan_asymptotic_statement` | implies | verified | `odd_even_cycle_free_turan_asymptotic_implies_triangle_square_free_turan_asymptotic` (extremal-graph-theory/implications_X242.v; 2026-10-27: erdos:574 at k = 2 ⇒ erdos:573, its j = 0 instance) |
+| `flandrin_neighbour_sum_distinguishing_edge_colouring_statement` | `nsd_delta_plus_constant_statement` | implies | verified | `flandrin_neighbour_sum_distinguishing_edge_colouring_implies_nsd_delta_plus_constant` (chromatic-theory/implications_X236.v; 2026-10-27: studies Flandrin et al. ⇒ arxiv:1804.06104#00 with C = 3, componentwise, C_5 by an explicit colouring) |
 
 Each row is a machine-checked theorem between two corpus statements that `data/relations.json` does not record; the `implies`/`equivalent_to` relation could be added with the theorem as citation.
 

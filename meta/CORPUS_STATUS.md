@@ -135,7 +135,7 @@ Area-local foundations (each area builds these on top of `base`):
 
 ## Conjecture dependency graph
 
-- **146 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 80}, by kind {'equiv': 6, 'implies': 140, 'refutes': 0, 'specializes': 0}; 96 Qed-proved relative theorems.
+- **148 edges** — by status {'candidate': 32, 'conditional': 2, 'refuted-direction': 32, 'verified': 82}, by kind {'equiv': 6, 'implies': 142, 'refutes': 0, 'specializes': 0}; 98 Qed-proved relative theorems.
 - Verified (Qed-closed, sound) edges:
   - `asymmetric_bipartite_list_colouring_statement` implies `list_chromatic_number_and_maximum_degree_of_bipartit_statement` (atlas/implications_A1.v)
   - `bipartite_digraph_asymmetric_outdegree_girth_statement` implies `bipartite_digraph_outdegree_girth_statement` (digraph-theory/implications_X46.v)
@@ -159,6 +159,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `every_forest_is_multibounding_statement` implies `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` (chromatic-theory/implications_X218.v)
   - `every_forest_is_multibounding_statement` implies `path_free_polynomial_tau_bound_statement` (chromatic-theory/implications_X238.v)
   - `faithful_cycle_covers_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
+  - `flandrin_neighbour_sum_distinguishing_edge_colouring_statement` implies `nsd_delta_plus_constant_statement` (chromatic-theory/implications_X236.v)
   - `forest_free_polynomial_chi_bound_statement` equiv `every_forest_is_good_statement` (chromatic-theory/implications_X218.v)
   - `forest_free_polynomial_chi_bound_statement` implies `every_forest_is_multibounding_statement` (chromatic-theory/implications_X218.v)
   - `forest_free_polynomial_chi_bound_statement` implies `graphs_with_a_forbidden_induced_tree_are_chi_bounded_statement` (chromatic-theory/implications_U8.v)
@@ -188,6 +189,7 @@ Area-local foundations (each area builds these on top of `base`):
   - `min_degree_forces_large_clique_or_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `min_degree_six_max_degree_eight_k6_minor_statement` implies `six_regular_has_k6_minor_statement` (minor-theory/implications_X5.v)
   - `multicolour_erdos_hajnal_statement` implies `the_erdos_hajnal_statement` (extremal-graph-theory/implications_D2ram.v)
+  - `odd_even_cycle_free_turan_asymptotic_statement` implies `triangle_square_free_turan_asymptotic_statement` (extremal-graph-theory/implications_X242.v)
   - `orientable_five_cycle_double_cover_statement` implies `cycle_double_cover_statement` (cycle-theory/implications_U6.v)
   - `orientable_five_cycle_double_cover_statement` implies `five_flow_statement` (cycle-theory/implications_D1.v)
   - `orientable_five_cycle_double_cover_statement` implies `m_n_cycle_covers_statement` (cycle-theory/implications_U6.v)
@@ -217,13 +219,13 @@ Area-local foundations (each area builds these on top of `base`):
   - `tree_decomposition_leaf_edge_connected_statement` implies `barat_thomassen_tree_decomposition_statement` (atlas/implications_A1.v)
   - `triangle_free_min_degree_log_bipartite_induced_statement` implies `large_girth_min_degree_bipartite_induced_statement` (extremal-graph-theory/implications_X13.v)
   - `triangle_free_planar_large_induced_two_degenerate_statement` implies `triangle_free_planar_five_sixths_two_degenerate_statement` (chromatic-theory/implications_X219.v)
-- Edge evidence: **80 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
+- Edge evidence: **82 verified** (Qed-closed, no external assumption) · **2 conditional** (Qed-closed relative to a named external assumption).
 - Conditional edges (with the external assumptions they are relative to):
   - `bounded_layered_treewidth_bounded_queue_number_statement` implies `planar_graphs_bounded_queue_number_statement` — external: `external_layered_treewidth_planar_statement` (atlas/implications_A1.v)
   - `reconstruction_statement` implies `edge_reconstruction_statement` — external: `external_whitney_line_inversion_statement` (reconstruction-theory/implications_U11.v)
 - Edge legs (overlay `edges` state over the non-alias rows of each corpus; derived from the evidence above by `meta/sync_edge_legs.py`):
   - **opg**: 40 done · 8 partial · 0 blocked · 179 todo  (227 rows)
-  - **v2**: 82 done · 5 partial · 0 blocked · 1586 todo  (1673 rows)
+  - **v2**: 86 done · 5 partial · 0 blocked · 1582 todo  (1673 rows)
 
 ### Documented non-edges (32 `refuted-direction`)
 
