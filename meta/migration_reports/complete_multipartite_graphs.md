@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py complete_multipartite_graphs --
 
 - Canonical: `GTBase.complete_multipartite_graphs.complete_multipartite_graph`.
 - Baseline: `9e3f1efa368ca76a654e4c11c796758f72af3ec9`.
-- Scope: 4 helpers, 2 statements, 11 frozen objects, 41 recorded references.
-- Source checks: 112/112 pass; consistent.
+- Scope: 4 helpers, 2 statements, 11 frozen objects, 43 recorded references.
+- Source checks: 114/114 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

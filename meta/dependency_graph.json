@@ -17,20 +17,20 @@
   "topological-graph-theory"
  ],
  "totals": {
-  "edges": 144,
+  "edges": 145,
   "by_status": {
    "candidate": 32,
    "conditional": 2,
    "refuted-direction": 32,
-   "verified": 78
+   "verified": 79
   },
   "by_kind": {
    "equiv": 6,
-   "implies": 138,
+   "implies": 139,
    "refutes": 0,
    "specializes": 0
   },
-  "proved_theorems": 94
+  "proved_theorems": 95
  },
  "edges": [
   {
@@ -527,6 +527,19 @@
    "external": [],
    "sources": [
     "chromatic-theory/implications_X218.v"
+   ]
+  },
+  {
+   "from": "every_forest_is_multibounding_statement",
+   "to": "path_free_polynomial_tau_bound_statement",
+   "kind": "implies",
+   "status": "verified",
+   "cite": "",
+   "proof": "every_forest_is_multibounding_implies_path_free_polynomial_tau_bound",
+   "note": "Rocq-only edge (no corpus relation), stated in X238.v's Notes: every path P_k is a forest, so multibounding gives chi(G) <= c(d) * s^e(d) for every P_k-induced-free G with no K_d(s) subgraph and s >= 1; tau_d(G) = t excludes K_d(t+1), so s = t+1 applies, and c(d) * (t+1)^e(d) is dominated by the natural-coefficient polynomial a + a * t^(e(d)+1), a = c(d) * 2^e(d).",
+   "external": [],
+   "sources": [
+    "chromatic-theory/implications_X238.v"
    ]
   },
   {

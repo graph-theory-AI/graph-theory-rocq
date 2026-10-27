@@ -619,6 +619,20 @@
    "reviewed_at": "2026-09-24",
    "note": "Corpus relation e035 (confirmed): every tree is a forest, so it is multibounding; take t = 1, where K_d(1) = K_d, and apply multiboundedness at d = omega(G)+1. A subgraph copy of K_d(1) is a clique on d vertices (x218_multipartite1_omega), so an omega(G)+1 copy is impossible, and the multibounding bound reads chi(G) <= c(omega(G)+1) * 1 ^ e(omega(G)+1) = c(omega(G)+1); the chi-bounding function of U8 is s |-> c s.+1. This edge is what the 2026-09-24 RE-ENCODING of x218_multibounding buys: with the earlier 'forall d, exists c e' body the function s |-> c s.+1 could not be built without countable choice."
   },
+  "every_forest_is_multibounding_statement->path_free_polynomial_tau_bound_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E1",
+   "host": "chromatic-theory",
+   "state": "verified",
+   "proof": "every_forest_is_multibounding_implies_path_free_polynomial_tau_bound",
+   "external": [],
+   "reason": "",
+   "proved_by": "Lancelot (Claude Opus 5.5), 2026-10-27: implications_X238.v",
+   "reviewed_by": "Arthur (second reader of the X218 => X238 #01 edge, 2026-10-27)",
+   "reviewed_at": "2026-10-27",
+   "note": "Rocq-only edge (no corpus relation), stated in X238.v's Notes: every path P_k is a forest, so multibounding gives chi(G) <= c(d) * s^e(d) for every P_k-induced-free G with no K_d(s) subgraph and s >= 1; tau_d(G) = t excludes K_d(t+1), so s = t+1 applies, and c(d) * (t+1)^e(d) is dominated by the natural-coefficient polynomial a + a * t^(e(d)+1), a = c(d) * 2^e(d)."
+  },
   "every_multigraph_widespread_statement->forest_of_lanterns_pervasive_statement:implies": {
    "gc": "e064",
    "tier": "T4",

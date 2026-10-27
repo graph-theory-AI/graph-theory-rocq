@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2021,
-      "cross_file_files": 1044,
+      "cross_file_declarations": 2022,
+      "cross_file_files": 1045,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -2009,11 +2009,13 @@
             "chromatic-theory/theories/conjectures/implications_X218.v:<line 63>",
             "chromatic-theory/theories/conjectures/implications_X218.v:x218_clique_has_multipartite",
             "chromatic-theory/theories/conjectures/implications_X218.v:x218_multipartite1_edge",
-            "chromatic-theory/theories/conjectures/implications_X218.v:x218_multipartite1_omega"
+            "chromatic-theory/theories/conjectures/implications_X218.v:x218_multipartite1_omega",
+            "chromatic-theory/theories/conjectures/implications_X238.v:<line 49>"
           ],
           "files": [
             "chromatic-theory/theories/conjectures/grounding_X218.v",
-            "chromatic-theory/theories/conjectures/implications_X218.v"
+            "chromatic-theory/theories/conjectures/implications_X218.v",
+            "chromatic-theory/theories/conjectures/implications_X238.v"
           ],
           "statements": [],
           "undecided": [],
@@ -2036,7 +2038,8 @@
         "provider_unlisted": false,
         "require_chain": {
           "chromatic-theory/theories/conjectures/grounding_X218.v": "no",
-          "chromatic-theory/theories/conjectures/implications_X218.v": "unknown"
+          "chromatic-theory/theories/conjectures/implications_X218.v": "unknown",
+          "chromatic-theory/theories/conjectures/implications_X238.v": "unknown"
         },
         "same_file": {
           "declarations": [

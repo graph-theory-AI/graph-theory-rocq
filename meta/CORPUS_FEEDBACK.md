@@ -39,6 +39,7 @@ were already found by the 2026-09-23 statement re-sync.
 | `chen_chvatal_metric_lines_statement` | `chen_chvatal_guarded_metric_lines_statement` | equiv | verified | `chen_chvatal_metric_lines_equiv_chen_chvatal_guarded_metric_lines` (graph-theory-misc/implications_X110.v) |
 | `forest_free_polynomial_chi_bound_statement` | `every_forest_is_good_statement` | equiv | verified | `forest_free_polynomial_chi_bound_equiv_every_forest_is_good` (chromatic-theory/implications_X218.v) |
 | `smith_two_longest_cycles_statement` | `smith_longest_cycles_r_connected_statement` | equiv | verified | `smith_two_longest_cycles_equiv_smith_longest_cycles_r_connected` (cycle-theory/implications_X212.v) |
+| `every_forest_is_multibounding_statement` | `path_free_polynomial_tau_bound_statement` | implies | verified | `every_forest_is_multibounding_implies_path_free_polynomial_tau_bound` (chromatic-theory/implications_X238.v; 2026-10-27: arxiv:2303.11766#00 ⇒ arxiv:2202.05557#01, every path being a forest) |
 
 Each row is a machine-checked theorem between two corpus statements that `data/relations.json` does not record; the `implies`/`equivalent_to` relation could be added with the theorem as citation.
 
