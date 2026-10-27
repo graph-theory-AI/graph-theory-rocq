@@ -7997,7 +7997,44 @@
                 "delta11_hero_transfer_k1_plus_statement"
               ]
             },
-            "helper_sanity": []
+            "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
+                ]
+              }
+            ]
           }
         },
         "axv_2510_11311_00": {
@@ -8031,7 +8068,29 @@
                 "theorem": "g246_cycle_or_helper_sanity",
                 "claim": "g246_cycle_or_helper_claim",
                 "references": [
-                  "x246_cycle_or"
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
                 ]
               }
             ]
@@ -8058,6 +8117,21 @@
             },
             "helper_sanity": [
               {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
                 "theorem": "g246_height_helper_sanity",
                 "claim": "g246_height_helper_claim",
                 "references": [
@@ -8065,10 +8139,17 @@
                 ]
               },
               {
-                "theorem": "g246_avoidable_helper_sanity",
-                "claim": "g246_avoidable_helper_claim",
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
                 "references": [
-                  "x246_avoidable"
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
                 ]
               }
             ]
@@ -8093,7 +8174,44 @@
                 "vertex_transitive_linear_perimeter_gap_statement"
               ]
             },
-            "helper_sanity": []
+            "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
+                ]
+              }
+            ]
           }
         },
         "axv_2602_16333_03": {
@@ -8115,7 +8233,44 @@
                 "vertex_transitive_path_cycle_ratio_statement"
               ]
             },
-            "helper_sanity": []
+            "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
+                ]
+              }
+            ]
           }
         },
         "axv_2204_01938_00": {
@@ -8138,6 +8293,28 @@
               ]
             },
             "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
               {
                 "theorem": "g246_r_free_helper_sanity",
                 "claim": "g246_r_free_helper_claim",

@@ -314,8 +314,9 @@ Proof. by split; [exact: g246_loop_avoidable1 | exact: g246_arc_not_avoidable]. 
 Definition g246_cycle_or_helper_claim : Prop :=
   [/\ (Ordinal (isT : 0 < 3) : x246_cycle_or (fun _ : 'I_3 => true)) --> Ordinal (isT : 1 < 3),
       (Ordinal (isT : 1 < 3) : x246_cycle_or (fun _ : 'I_3 => true)) --> Ordinal (isT : 2 < 3),
-      (Ordinal (isT : 2 < 3) : x246_cycle_or (fun _ : 'I_3 => true)) --> Ordinal (isT : 0 < 3) &
-      ~~ ((Ordinal (isT : 1 < 3) : x246_cycle_or (fun _ : 'I_3 => true)) --> Ordinal (isT : 0 < 3))].
+      (Ordinal (isT : 2 < 3) : x246_cycle_or (fun _ : 'I_3 => true)) --> Ordinal (isT : 0 < 3),
+      ~~ ((Ordinal (isT : 1 < 3) : x246_cycle_or (fun _ : 'I_3 => true)) --> Ordinal (isT : 0 < 3)) &
+      ~~ x246_cycle_or_rel (fun _ : 'I_3 => true) (Ordinal (isT : 1 < 3)) (Ordinal (isT : 0 < 3))].
 
 Theorem g246_cycle_or_helper_sanity : g246_cycle_or_helper_claim.
 Proof. by []. Qed.
