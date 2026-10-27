@@ -216,6 +216,16 @@
       "path": "chromatic-theory/theories/conjectures/implications_X218.v",
       "name": "x218_multipartite_rel",
       "note": "Implication consumers: x218_clique_has_multipartite and x218_multipartite1_edge (their unfold of x218_multipartite_rel), x218_multipartite1_omega and the e035 theorems over x218_multibounding keep their types and proofs unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X238.v",
+      "name": "every_forest_is_multibounding_statement",
+      "note": "Implication consumer (Rocq-only edge X218 => X238 #01): every_forest_is_multibounding_implies_path_free_polynomial_tau_bound applies every_forest_is_multibounding_statement to ordinal_path k and passes ~ has_subgraph G (x218_complete_multipartite d t.+1); it unfolds neither, so no certificate changes."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/implications_X238.v",
+      "name": "x218_complete_multipartite",
+      "note": "Implication consumer (Rocq-only edge X218 => X238 #01): every_forest_is_multibounding_implies_path_free_polynomial_tau_bound applies every_forest_is_multibounding_statement to ordinal_path k and passes ~ has_subgraph G (x218_complete_multipartite d t.+1); it unfolds neither, so no certificate changes."
     }
   ],
   "distinct_variants": [
