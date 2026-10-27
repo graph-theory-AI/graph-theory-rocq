@@ -6281,6 +6281,215 @@
       },
       "faithfulness_verified_by": "Arthur (X235 wave verification, 2026-10-26)",
       "faithfulness_result": "Readback 2026-10-26 (verifier Arthur): 1/1 PASS against the pinned text and the e-print. arxiv:2103.15175#00: list_ramsey_chromatic_resolution_statement says that for 2 <= s and 0 < k, (s^k).+1 forces and every forcing order is at least (s^k).+1, i.e. R_l(H_s, k) = s^k + 1 as the least n of l.128 / l.298; lr_nat_valid_lists is L : E(K_n) -> binom(N, k) (duplicate-free lists of k naturals, the same set in both orientations of an edge), lr_nat_admissible an L-colouring (symmetric, choosing from the lists), lr_color_graph the colour class on all vertices of K_n (GTBase fg_mk_sgraph), lr_nat_graph_forces the existence of lists all of whose L-colourings have a class of library chromatic number > s; a monochromatic copy of a graph with chromatic number > s exists iff some class has chi > s (a class contains the copy, and is itself a copy). The guards mirror the source (s >= 2 stated, k >= 1 implicit in binom(N, k)); either alone can be dropped, both together fail at s = k = 0 (0^0 = 1), as the Notes say. The move is verbatim: the five declarations of X235.v are byte-identical to their text at 23e3df2a (list_ramsey_nat.v, list_ramsey_graph.v), the applications files only gain the import, lose those declarations and change two comments (no proof line changes), and the A6 re-record changes statement, statement_file and source_locator of 2103.15175__00 (source_locator set to the value build_v2_manifest derives for the formal_name row, 1a571e6a; statement_sha256 unchanged; the A6 review is Lancelot's). Grounding (grounding_X235.v at ce73a9fb, read; compiled by Marcol's MCP with no holes, the wave run's check_milestone decides): hyp_inhabited at s = 2, k = 1 (the statement yields forces 2 1 3); not_trivially_true in the contract form (the unguarded variant fails at s = k = 0 by g235_forces_0_0_1 and implies the row), with forces 2 1 3, ~ forces 2 1 2 and the false R_l = s^k reading as extras; helper_sanity gives each of the four paper_specific helpers a positive and a negative instance. The derived v2_legs_state entry (674ba837), recomputed from the wave, is identical; the consumer scan finds no tracked name; no lint allowlist entry."
+    },
+    "X237": {
+      "phase": "X237",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X237.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X237 (A3; routing Lancelot (79) / (81) / (83), selection x237-selection-r2-by-marcol, design x237-design-by-marcol agreed by Arthur (135)), branch math/marcol-x237-20261027, 2026-10-27",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x237-ramsey-turan-density",
+      "rows": {
+        "erdos_181": {
+          "formal_name": "hypercube_ramsey_linear_statement",
+          "source_hash": "d23affe528c1786415ed6a1ed411cae1f397ef96e1625e03bde5e32fdf3a0e86",
+          "note": "Erdos Problems #181 (open at the teorth/erdosproblems mirror 10fb9c15): R(Q_n) << 2^n, as exists C, R <= C 2^n, with X195's x195_ramsey_number 2 and GTBase product_hypercube. Literature: open (best 2^{(2-c)n}, Tikhomirov).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g237_hcube_hyp_inhabited",
+              "claim": "g237_hcube_hyp_claim",
+              "references": [
+                "hypercube_ramsey_linear_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g237_hcube_not_trivially_true",
+              "claim": "g237_hcube_ntt_claim",
+              "references": [
+                "hypercube_ramsey_linear_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g237_ksw_helpers_sanity",
+                "claim": "g237_ksw_helpers_claim",
+                "references": [
+                  "x237_two_density_at_most",
+                  "x237_forest_edges"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_1029": {
+          "formal_name": "diagonal_ramsey_ratio_unbounded_statement",
+          "source_hash": "123cfc15d80f403269b542800625ca50151e42e05cd10c8fc012ad9925cea8e1",
+          "note": "Erdos Problems #1029 (open at the mirror 10fb9c15): R(k) / (k 2^{k/2}) -> infinity, squared: for every M, eventually M^2 k^2 2^k <= R(k)^2, with X195's x195_ramsey_number 2.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g237_diag_hyp_inhabited",
+              "claim": "g237_diag_hyp_claim",
+              "references": [
+                "diagonal_ramsey_ratio_unbounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g237_diag_not_trivially_true",
+              "claim": "g237_diag_ntt_claim",
+              "references": [
+                "diagonal_ramsey_ratio_unbounded_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g237_ksw_helpers_sanity",
+                "claim": "g237_ksw_helpers_claim",
+                "references": [
+                  "x237_two_density_at_most",
+                  "x237_forest_edges"
+                ]
+              }
+            ]
+          }
+        },
+        "std_schur_erd_s_problem": {
+          "formal_name": "multicolour_clique_ramsey_exponential_statement",
+          "source_hash": "ae66835e889d0f6365b45ac7ae1cd8c606b4ad1e976338d21f9e5e1f048b5204",
+          "note": "Fox-Pach-Suk (arXiv:1505.07429, l.56, l.71-73): R(p; m) = 2^{O(m)} for fixed p >= 3, affirmative form, as R <= C^m with X195's m-colour x195_ramsey_number; guard m >= 1 (equivalent, R(p; 1) = p). Literature: refuted at p = 3 since the pin in an unrefereed source (arXiv:2608.02522 l.236-240, a 2026 OpenAI report): CORPUS_FEEDBACK.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g237_schur_hyp_inhabited",
+              "claim": "g237_schur_hyp_claim",
+              "references": [
+                "multicolour_clique_ramsey_exponential_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g237_schur_not_trivially_true",
+              "claim": "g237_schur_ntt_claim",
+              "references": [
+                "multicolour_clique_ramsey_exponential_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g237_ksw_helpers_sanity",
+                "claim": "g237_ksw_helpers_claim",
+                "references": [
+                  "x237_two_density_at_most",
+                  "x237_forest_edges"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_572": {
+          "formal_name": "even_cycle_turan_lower_statement",
+          "source_hash": "09547de552bad234312853a55f8acd00c293da73bde4d770a273931b556d6ef6",
+          "note": "Erdos Problems #572 (open at the mirror 10fb9c15): for k >= 3, ex(n; C_{2k}) >> n^{1+1/k}, as a^k n^{k+1} <= (b ex)^k for n >= n0, with D2tur's is_turan_number and GTBase cycle_graph. Literature: open for general k (known for k = 2, 3, 5).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g237_c2k_hyp_inhabited",
+              "claim": "g237_c2k_hyp_claim",
+              "references": [
+                "even_cycle_turan_lower_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g237_c2k_not_trivially_true",
+              "claim": "g237_c2k_ntt_claim",
+              "references": [
+                "even_cycle_turan_lower_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g237_ksw_helpers_sanity",
+                "claim": "g237_ksw_helpers_claim",
+                "references": [
+                  "x237_two_density_at_most",
+                  "x237_forest_edges"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_714": {
+          "formal_name": "complete_bipartite_turan_lower_statement",
+          "source_hash": "27c3e290624c546f7b2e179c0e778b5e17ed49ebce443e3dca07dc4f62f8301b",
+          "note": "Erdos Problems #714 (open at the mirror 10fb9c15): ex(n; K_{r,r}) >> n^{2-1/r}, affirmative form, for r >= 2 (false at r = 1), as a^r n^{2r} <= (b ex)^r n, with D2tur's is_turan_number and GTBase complete_multipartite_graph 2 r. Literature: open for r >= 4.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g237_krr_hyp_inhabited",
+              "claim": "g237_krr_hyp_claim",
+              "references": [
+                "complete_bipartite_turan_lower_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g237_krr_not_trivially_true",
+              "claim": "g237_krr_ntt_claim",
+              "references": [
+                "complete_bipartite_turan_lower_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g237_ksw_helpers_sanity",
+                "claim": "g237_ksw_helpers_claim",
+                "references": [
+                  "x237_two_density_at_most",
+                  "x237_forest_edges"
+                ]
+              }
+            ]
+          }
+        },
+        "std_kuperwasser_samotij_wigderson_conjecture": {
+          "formal_name": "forest_removal_two_density_statement",
+          "source_hash": "1372182dae8434ffaa6fa9098ba1b63871392c48a6acb8600131000f2216a7c5",
+          "note": "Kuperwasser-Samotij-Wigderson, Conjecture 7.1 of arXiv:2402.03045 (l.109, 128, 169, 930-932): m(G) <= m gives a forest F with m_2(G - F) <= m, m = a/b rational (equivalent), with X233's x233_max_density_at_most and GTBase del_edge_set. Literature: resolved since the pin in an unrefereed preprint (Yancey, arXiv:2603.03086): CORPUS_FEEDBACK.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g237_ksw_hyp_inhabited",
+              "claim": "g237_ksw_hyp_claim",
+              "references": [
+                "forest_removal_two_density_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g237_ksw_not_trivially_true",
+              "claim": "g237_ksw_ntt_claim",
+              "references": [
+                "forest_removal_two_density_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g237_ksw_helpers_sanity",
+                "claim": "g237_ksw_helpers_claim",
+                "references": [
+                  "x237_two_density_at_most",
+                  "x237_forest_edges"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x237_two_density_at_most": {
+          "classification": "paper_specific",
+          "reason": "The 2-density bound m_2(H) <= a/b of arXiv:2402.03045 l.109, over vertex sets of size at least 3, written without subtraction (b e + 2a <= a |S| + b); no GTBase or registered 2-density exists."
+        },
+        "x237_forest_edges": {
+          "classification": "paper_specific",
+          "reason": "An edge set F of G whose spanning subgraph is a forest (arXiv:2402.03045 l.169, l.930-932), built from GTBase del_edge_set and the upstream is_forest."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
