@@ -8333,6 +8333,42 @@
           }
         }
       }
+    },
+    "X249": {
+      "phase": "X249",
+      "repo": "chromatic-theory",
+      "defines_file": "X249.v",
+      "implemented_by": "Lancelot (Claude Opus 5.5), wave X249 (A3 verifier Arthur; Any lane, further waves; design x249-design-by-lancelot), branch math/lancelot-x249-20261027, 2026-10-27",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x249-polynomial-gyarfas-sumner-duplicate",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "axv_2202_09118_02": {
+          "formal_name": "every_forest_is_good_duplicate_statement",
+          "source_hash": "9dabafcf20f1c215e18a2519ac8dd873ac19ce7342cae399416a7e98ab0a26f9",
+          "note": "arXiv:2202.09118, informal conjecture (polynomial Gyarfas-Sumner), Chudnovsky, Scott, Seymour and Spirkl 2022 (pinned status partial): every forest H is good, i.e. the class of H-free graphs is polynomially chi-bounded. A synonym of X218's every_forest_is_good_statement (the same wording in arXiv:2202.10412); corpus relation e006 (same_conjecture) with arxiv:2202.05557#00 (X65), equivalent by the verified edge forest_free_polynomial_chi_bound_equiv_every_forest_is_good.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g249_hyp_inhabited",
+              "claim": "g249_hyp_claim",
+              "references": [
+                "every_forest_is_good_duplicate_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g249_not_trivially_true",
+              "claim": "g249_ntt_claim",
+              "references": [
+                "every_forest_is_good_duplicate_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
