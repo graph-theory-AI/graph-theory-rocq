@@ -7174,6 +7174,152 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X239 wave verification, 2026-10-27)",
       "faithfulness_result": "Readback 2026-10-27 (verifier Arthur): 6/6 PASS against the pinned texts and the sources, at math/marcol-x239-20261027 = b5c628ce (X239.v blob cfd8411e, grounding_X239.v blob 44fe6603), on d48b1da9. The bodies were read with X195's x195_ramsey_number k Fam R (k colours, the least R with K_R arrowing Fam), D2tur's is_turan_number n Fam m (an attained maximum over n-vertex graphs with no not-necessarily-induced copy of a member, i.e. ex(n; Fam)), and GTBase product_hypercube, cycle_graph (cyc_rel: C_3 a triangle, C_4 the 4-cycle), del_edge_set (G (E(G) :\\: F) is the spanning subgraph with edge set F when F \\subset E(G)), has_subgraph, bipartite, regular, induced, and MathComp trunc_log. erdos:86: the affirmative form; (1/2 + o(1)) as \"for every q, eventually\", |F| >= (1/2 + 1/q) n 2^(n-1) iff (q + 2) n 2^n <= 4 q |F|; spanning subgraphs suffice (C_4-containment is monotone). erdos:554: for n >= 2, eventually q R_k(C_(2n+1)) <= R_k(K_3) for every q; the Notes' derivation for n >= 4 checked (1/n - 1/3 <= -1/12; n = 3 gives exponent 0). erdos:573: the affirmative form; q/(q+1) <= m / (n/2)^(3/2) <= (q+1)/q squared and multiplied out; {C_3, C_4} = cycle_graph (i + 3) on 'I_2. erdos:571: alpha = p/q in [1, 2) iff q <= p < 2q, both bounds to the q-th power; ex(n; G) required to exist (exists m), since the universal form would be trivially true at an edgeless G. erdos:82: for every M, eventually every graph has a regular induced subgraph on at least M trunc_log 2 |G| vertices (base and floor absorbed by M). erdos:575: the affirmative form, << as an eventual bound with C and N, as D2tur's OPG row. Literature lines checked in the fetched files, all dated against the corpus pin (b72c5857, 2026-09-23): #86, #573, #82 open (mirror; 2604.08215v3 l.125-135); #554 open, the row following for n >= 4 from results before the pin (2510.17981v1 Theorem 1.1, 2608.02522v2 l.236-240; the lower bound unrefereed); #571 solved before the pin (2609.25050v1 l.225, l.306, l.382 ff., unrefereed; Lean per the mirror); #575 false as stated before the pin (the folklore family {K_(1,2), 2K_2}: ex(n; F) = 1 against floor(n/2) and n - 1, OpenAI Chapter 10 Section 1.1; I checked the three values), which also refutes D2tur's turan_number_of_a_finite_family_statement as encoded (a decision item for Marc, Lancelot's routing). All encoded as stated. Grounding (grounding_X239.v read; no Admitted / Axiom / Parameter; the wave run's check_milestone compiles and decides): hyp_inhabited per row (Q_0 with F = set0, a degenerate instance commented in the file; one-colour Ramsey numbers R_1(C_5) = 5 and R_1(K_3) = 3; ex(1; {C_3, C_4}) = 0; graphs of every size; K_2 bipartite; alpha = 1); not_trivially_true in the contract form for all six rows: no edge-count hypothesis (F = set0), no Ramsey hypotheses (R1 = 1, R3 = 0), no Turan hypothesis (m = 0), no \"q <= p\" (at p = 0, q = 1: a degree-2 vertex beaten by a matching, two disjoint edges by a star, one edge by an embedding into any edge, an edgeless G by an embedding), no \"n0 <= |G|\" (K_2 at M = 3), no bipartite member ({K_3}); helper_sanity [] in every row (no local helper, helper_ownership {}). The derived v2_legs_state entries (6e3b96db), recomputed from the wave with jq, are identical; README 454 / 11 / 40 / 1,168 against d48b1da9; two reasoned allowlist entries (erdos:571, erdos:82), matching my lint simulation; the edge_count (is_turan_number, edge_count), ramsey_number and regularity (regular) consumer entries match my consumer scan."
+    },
+    "X240": {
+      "phase": "X240",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X240.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X240 (A3 verifier Arthur; routing Lancelot (48), (50); selection x240-selection-by-marcol, design x240-design-by-marcol agreed by Arthur (172)), branch math/marcol-x240-20261027, 2026-10-27",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x240-degenerate-turan-graph-ramsey",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "erdos_146": {
+          "formal_name": "degenerate_bipartite_turan_exponent_statement",
+          "source_hash": "80427312782480db1c054b1bb0680afee62e6e441ae3308dd791c3f3a5ecf0db",
+          "note": "Erdos Problems #146 (DISPROVED before the corpus pin: OpenAI report Chapter 10 Theorem 1.2, unrefereed with Lean; mirror 10fb9c15 \"disproved (Lean)\" 2026-08-02): bipartite r-degenerate H has ex(n; H) << n^{2-1/r}, r >= 1, written m^r n <= C^r n^{2r} (D2tur is_turan_number, GTBase bipartite and k_degenerate); encoded as stated.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g240_degen_hyp_inhabited",
+              "claim": "g240_degen_hyp_claim",
+              "references": [
+                "degenerate_bipartite_turan_exponent_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g240_degen_not_trivially_true",
+              "claim": "g240_degen_ntt_claim",
+              "references": [
+                "degenerate_bipartite_turan_exponent_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_159": {
+          "formal_name": "c4_clique_ramsey_power_saving_statement",
+          "source_hash": "c0ae14fd788dbddd78dbcf55e69c00c31b9b7d0ac5d4d835849a223a55589130",
+          "note": "Erdos Problems #159 (open at the teorth/erdosproblems mirror 10fb9c15): R(C_4, K_n) << n^{2-c} for some c > 0, c = a/b rational, written R^b n^a <= C^b n^{2b} (XE1 xe1_graph_ramsey_number, GTBase cycle_graph 4).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g240_c4_hyp_inhabited",
+              "claim": "g240_c4_hyp_claim",
+              "references": [
+                "c4_clique_ramsey_power_saving_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g240_c4_not_trivially_true",
+              "claim": "g240_c4_ntt_claim",
+              "references": [
+                "c4_clique_ramsey_power_saving_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_986": {
+          "formal_name": "clique_ramsey_polylog_lower_statement",
+          "source_hash": "ee75c183c67995d3ff07d28899db12c56318dddbe78727ad83611e35530be98f",
+          "note": "Erdos Problems #986 (PROVED before the corpus pin: Bradac arXiv:2605.28793v3 Theorem thm:main, v1 weaker, unrefereed; mirror 10fb9c15 \"proved\" 2026-06-21): for fixed k >= 3, R(k, n) >> n^{k-1}/(log n)^c, written n^k <= p R n (trunc_log 2 n)^c for n >= n0 (XE1 xe1_graph_ramsey_number, MathComp trunc_log); encoded as stated.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g240_polylog_hyp_inhabited",
+              "claim": "g240_polylog_hyp_claim",
+              "references": [
+                "clique_ramsey_polylog_lower_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g240_polylog_not_trivially_true",
+              "claim": "g240_polylog_ntt_claim",
+              "references": [
+                "clique_ramsey_polylog_lower_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1030": {
+          "formal_name": "consecutive_diagonal_ramsey_ratio_statement",
+          "source_hash": "9d8cba6650bb854a9f32c47003d7baf7581c9157562b6c4f177897d3b268c420",
+          "note": "Erdos Problems #1030 (open at the teorth/erdosproblems mirror 10fb9c15): R(k+1, k)/R(k, k) > 1 + c in the limit, liminf reading (eventually (q + 1) R(k, k) < q R(k+1, k)), equal to the pinned lim whenever it exists (XE1 xe1_graph_ramsey_number).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g240_ratio_hyp_inhabited",
+              "claim": "g240_ratio_hyp_claim",
+              "references": [
+                "consecutive_diagonal_ramsey_ratio_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g240_ratio_not_trivially_true",
+              "claim": "g240_ratio_ntt_claim",
+              "references": [
+                "consecutive_diagonal_ramsey_ratio_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_544": {
+          "formal_name": "triangle_ramsey_increment_unbounded_statement",
+          "source_hash": "db3a65fa8af21517d2bda2343dabf9e5be64d16881b47a7663d95bf45286862e",
+          "note": "Erdos Problems #544 (open at the teorth/erdosproblems mirror 10fb9c15): R(3, k+1) - R(3, k) -> oo, without subtraction (for every M, eventually R(3, k) + M <= R(3, k+1)); the o(k) question is in the Notes, as erdos:715 (XE1 xe1_graph_ramsey_number).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g240_incr_hyp_inhabited",
+              "claim": "g240_incr_hyp_claim",
+              "references": [
+                "triangle_ramsey_increment_unbounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g240_incr_not_trivially_true",
+              "claim": "g240_incr_ntt_claim",
+              "references": [
+                "triangle_ramsey_increment_unbounded_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_wigderson_s_edge_deletion_ramsey_conjecture": {
+          "formal_name": "edge_deletion_ramsey_constant_factor_statement",
+          "source_hash": "b95363b00b638e8521044117e754f8cab5bf985c50c29fab0358fa228168c141",
+          "note": "Wigderson's edge-deletion conjecture (arXiv:2208.11181v3 l.379-385, restated as open in the source arXiv:2311.01887v1 l.198; open as far as the sources show): r(G) <= C r(G - xy) for every graph G and edge xy (XE1 xe1_diagonal_ramsey_number, GTBase del_edge_set).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g240_wig_hyp_inhabited",
+              "claim": "g240_wig_hyp_claim",
+              "references": [
+                "edge_deletion_ramsey_constant_factor_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g240_wig_not_trivially_true",
+              "claim": "g240_wig_ntt_claim",
+              "references": [
+                "edge_deletion_ramsey_constant_factor_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
