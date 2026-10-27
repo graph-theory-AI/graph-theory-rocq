@@ -7466,6 +7466,130 @@
           }
         }
       }
+    },
+    "X242": {
+      "phase": "X242",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X242.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X242 (A3 verifier Arthur; routing Lancelot (70), (71), (72); selection x242-selection-by-marcol, design x242-design-by-marcol), branch math/marcol-x242-20261027, 2026-10-27",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x242-regular-cycles-degree-ramsey-turan",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "erdos_182": {
+          "formal_name": "regular_subgraph_superlinear_edges_statement",
+          "source_hash": "e5aaf8e6046e219401b71bec20ed0f7f5326b3a42a13cc6cff60e9cbe7b51a84",
+          "note": "Erdos Problems #182, the specific question (proved before the corpus pin, pinned status solved: Janzer and Sudakov, arXiv:2204.12455v2): n^{1+o(1)} edges force a nonempty k-regular subgraph, written n^{q+1} <= e^q (GTBase regular, has_subgraph, edge_count).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g242_reg_hyp_inhabited",
+              "claim": "g242_reg_hyp_claim",
+              "references": [
+                "regular_subgraph_superlinear_edges_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g242_reg_not_trivially_true",
+              "claim": "g242_reg_ntt_claim",
+              "references": [
+                "regular_subgraph_superlinear_edges_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_574": {
+          "formal_name": "odd_even_cycle_free_turan_asymptotic_statement",
+          "source_hash": "788424adbaf0c4ffcbc5a42300ce013b953bfe698686897ff64fc158c960fe26",
+          "note": "Erdos Problems #574 (false before the corpus pin, pinned status solved; Lazebnik, Ustimenko and Woldar, JCTB 1994, k = 3, 5; Furedi, Naor and Verstraete, Adv. Math. 2006, k = 3; mirror disproved 2026-03-28): ex(n; {C_{2k-1}, C_{2k}}) ~ (n/2)^{1+1/k}, k = j + 2, affirmative form; X239's erdos:573 at j = 0 (D2tur is_turan_number, GTBase cycle_graph).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g242_cyc_hyp_inhabited",
+              "claim": "g242_cyc_hyp_claim",
+              "references": [
+                "odd_even_cycle_free_turan_asymptotic_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g242_cyc_not_trivially_true",
+              "claim": "g242_cyc_ntt_claim",
+              "references": [
+                "odd_even_cycle_free_turan_asymptotic_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_147": {
+          "formal_name": "bipartite_min_degree_turan_exponent_statement",
+          "source_hash": "ec34ed460aca2e8f9eb8b958ed60e2f565f1dbcfbdc56b88ee604b20347ea314",
+          "note": "Erdos Problems #147 (false before the corpus pin, pinned status solved; Janzer, arXiv:2109.06110v2 (r = 3) and arXiv:2006.01062v3 (every even r >= 4); mirror disproved (Lean) 2026-08-24): bipartite H of minimum degree r = t + 2 has ex(n; H) >> n^{2 - 1/(r-1) + eps}, eps = 1/s (D2tur is_turan_number, GTBase bipartite, min_degree_at_least).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g242_mindeg_hyp_inhabited",
+              "claim": "g242_mindeg_hyp_claim",
+              "references": [
+                "bipartite_min_degree_turan_exponent_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g242_mindeg_not_trivially_true",
+              "claim": "g242_mindeg_ntt_claim",
+              "references": [
+                "bipartite_min_degree_turan_exponent_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_533": {
+          "formal_name": "k5_free_dense_linear_triangle_free_set_statement",
+          "source_hash": "857afc7fc084c340e5a034c0a4b396401c8d4487f905eb15ec5988832f71b029",
+          "note": "Erdos Problems #533 (false before the corpus pin, pinned status solved: Balogh and Lenz, arXiv:1109.4428v2 / 1109.4472v2, theta_3(K_5) >= 1/16; threshold 1/12 by Liu, Reiher, Sharifzadeh and Staden, arXiv:2103.10423v2): K_5-free graphs with delta n^2 edges have a triangle-free set of >>_delta n vertices, delta = 1/q (GTBase has_subgraph, edge_count, upstream induced).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g242_k5_hyp_inhabited",
+              "claim": "g242_k5_hyp_claim",
+              "references": [
+                "k5_free_dense_linear_triangle_free_set_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g242_k5_not_trivially_true",
+              "claim": "g242_k5_ntt_claim",
+              "references": [
+                "k5_free_dense_linear_triangle_free_set_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1008": {
+          "formal_name": "c4_free_subgraph_two_thirds_statement",
+          "source_hash": "1dd2586fffe3af9231496253ee0edf84e143d41405bf9b8ac9767d25a7469f10",
+          "note": "Erdos Problems #1008 (proved before the corpus pin, pinned status solved: Conlon, Fox and Sudakov, arXiv:1507.00547v2, Theorem th1 at r = 2): every graph with m edges has a C_4-free subgraph with >> m^{2/3} edges, written m^2 <= (c |F|)^3, spanning subgraph by edge set (GTBase del_edge_set, has_subgraph, cycle_graph 4, edge_count).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g242_c4sub_hyp_inhabited",
+              "claim": "g242_c4sub_hyp_claim",
+              "references": [
+                "c4_free_subgraph_two_thirds_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g242_c4sub_not_trivially_true",
+              "claim": "g242_c4sub_ntt_claim",
+              "references": [
+                "c4_free_subgraph_two_thirds_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
