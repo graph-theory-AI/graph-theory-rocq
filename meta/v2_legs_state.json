@@ -3376,11 +3376,14 @@
    "note": "Authored in X221.v:delta122_hero_oriented_complete_multipartite_statement. Question 1.4: is Delta(1,2,2) a hero in oriented complete multipartite graphs? dichromatic_bounded of the class of x221_oriented_complete_multipartite (oriented + transitive non-adjacency) Delta(1,2,2)-free digraphs. The corpus row is DISPROVED (Walczak, Remark 1.5 of the published version), so the Prop is expected false; no refutation is committed."
   },
   "axv_2202_13306_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x246-heroes-avoidable-vertex-transitive-rfree",
+   "package": "digraph-theory",
+   "note": "Authored in X246.v:delta11_hero_transfer_k1_plus_statement. Question 5.4 of Aboulker, Aubian, Charbit (open at the pin): if Delta(1,1,H) is a hero in Forb_ind(F) and H a hero in Forb_ind(K_1 + F), then Delta(1,1,H) is a hero in Forb_ind(K_1 + F); oriented ambient, H and F oriented (l.327), Delta(1,1,H) = c3sub K1 K1 H, K_1 + F = digraph_sum (heroes, dichromatic_bounded, oriented_dg)."
   },
   "axv_2202_13977_00": {
    "statement": "todo",
@@ -3424,11 +3427,14 @@
    "audit_page": "todo"
   },
   "axv_2204_01938_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x246-heroes-avoidable-vertex-transitive-rfree",
+   "package": "digraph-theory",
+   "note": "Authored in X246.v:r_free_two_thirds_one_arc_from_acyclic_statement. Fox, Himwich, Mani, introduction (the pinned text): every r-free digraph on n vertices with r > 2n/3 has beta <= 1; solved before the pin by Lum's MIT PRIMES research paper (12 January 2026, Theorem 1.5, the stronger (r-1)-free Conjecture 5.6; not peer-reviewed) (x246_r_free, x246_fas_le1)."
   },
   "axv_2204_01938_01": {
    "statement": "todo",
@@ -5694,18 +5700,24 @@
    "audit_page": "todo"
   },
   "axv_2510_11311_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x246-heroes-avoidable-vertex-transitive-rfree",
+   "package": "digraph-theory",
+   "note": "Authored in X246.v:odd_cycle_orientations_avoidable_statement. Conjecture 6.1 of Christoph, Janzer, Petrova, Steiner (open at the pin; Theorem 1.1 proves C_3 and C_5): every orientation of an odd cycle C_n, n >= 3, is avoidable (x246_avoidable, x246_cycle_or)."
   },
   "axv_2510_11311_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x246-heroes-avoidable-vertex-transitive-rfree",
+   "package": "digraph-theory",
+   "note": "Authored in X246.v:height_function_not_avoidable_statement. Question 6.2 of Christoph, Janzer, Petrova, Steiner (open at the pin), affirmative form: a digraph with a height function is not avoidable (x246_height, x246_avoidable)."
   },
   "axv_2510_11311_02": {
    "statement": "todo",
@@ -5955,11 +5967,14 @@
    "audit_page": "todo"
   },
   "axv_2602_16333_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x246-heroes-avoidable-vertex-transitive-rfree",
+   "package": "digraph-theory",
+   "note": "Authored in X246.v:vertex_transitive_linear_perimeter_gap_statement. Conjecture 4.1 of Bucic, Hendrey, Mohar, Steiner, Yepremyan (open at the pin; the paper proves a (1 - o(1)) ln n gap): for some eps = 1/m and orders n >= N for every N, a connected vertex transitive digraph has perimeter gap >= eps n (X2.weakly_connected, vertex_transitiveb, dicycle)."
   },
   "axv_2602_16333_01": {
    "statement": "todo",
@@ -5979,11 +5994,14 @@
    "note": "Authored in X2.v:vertex_transitive_longest_dicycles_intersect_statement. Encodes Question 4.3: connected vertex-transitive digraphs have pairwise-intersecting longest directed cycles. Re-read 2026-09-23 against the reworded graph-conjectures@b72c585 text (\"Is it true that in any connected vertex transitive digraph, any two longest directed cycles intersect?\", previously a synonymous paraphrase): same proposition, the Rocq body is unchanged and faithful; source_hash pinned."
   },
   "axv_2602_16333_03": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x246-heroes-avoidable-vertex-transitive-rfree",
+   "package": "digraph-theory",
+   "note": "Authored in X246.v:vertex_transitive_path_cycle_ratio_statement. Question 4.4 of Bucic, Hendrey, Mohar, Steiner, Yepremyan (open at the pin), affirmative form: some C bounds a longest path by C times a longest directed cycle in every vertex transitive digraph (vertex_transitiveb, dipath, dicycle)."
   },
   "axv_2603_02786_00": {
    "statement": "todo",
