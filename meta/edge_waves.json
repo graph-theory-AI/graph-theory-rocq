@@ -1487,6 +1487,20 @@
    "reviewed_at": null,
    "note": "existing annotation uses kind=specializes; wave E8 replaces it by a kind=implies theorem citing gc:e115 (the registry key for the proof is the :implies one)"
   },
+  "odd_even_cycle_free_turan_asymptotic_statement->triangle_square_free_turan_asymptotic_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E1",
+   "host": "extremal-graph-theory",
+   "state": "verified",
+   "proof": "odd_even_cycle_free_turan_asymptotic_implies_triangle_square_free_turan_asymptotic",
+   "external": [],
+   "reason": "",
+   "proved_by": "Lancelot (Claude Opus 5.5), 2026-10-27: implications_X242.v",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Rocq-only edge (no corpus relation), stated in X242.v's Notes: erdos:574 at j = 0 (k = 2) is erdos:573 up to conversion: the family {C_{2j+3}, C_{2j+4}} is {C_3, C_4} and the bounds q^(j+2) n^(j+3) <= 2^(j+3) (q+1)^(j+2) m^(j+2) and 2^(j+3) q^(j+2) m^(j+2) <= (q+1)^(j+2) n^(j+3) are 573's with 2^3 = 8."
+  },
   "odd_minor_free_defective_clustered_treedepth_statement->clustered_chromatic_minor_class_treedepth_bound_statement:implies": {
    "gc": "e168",
    "tier": "T4",
