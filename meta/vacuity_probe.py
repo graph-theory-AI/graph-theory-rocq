@@ -31,8 +31,11 @@ Usage:
   python3 meta/vacuity_probe.py --validate                            # self-test: regression + recall + control
 Runs with the coqc on PATH, or through `opam exec --switch $ROCQ_OPAM_SWITCH` when set (Rocq 9.1.1).  Read-only w.r.t. the repo (scratch in a tmpdir).
 Exit code 0 iff nothing was FLAGGED and nothing was INCOMPLETE (suitable for `make probe`).  A
-statement is INCOMPLETE when one of its coqc runs ended abnormally (killed, e.g. by the OOM killer):
-such a run settles nothing, so the probe fails closed instead of reporting `ok`.
+statement is INCOMPLETE when its probes could not search: one of its coqc runs ended abnormally
+(killed, e.g. by the OOM killer), the probes' common setup does not compile (the preflight: a parse
+error, an unbuilt or stale module, a renamed statement), its hint's imports do not load, or its
+small-model file failed outside its Fail commands.  Such runs settle nothing, so the probe fails
+closed instead of reporting `ok`; the designed timeout stays a search budget.
 """
 from __future__ import annotations
 import argparse, concurrent.futures, itertools, json, os, re, subprocess, sys, tempfile
@@ -167,8 +170,10 @@ def build_index() -> dict[str, tuple[str, str, str, str]]:
 
 def compile_snippet(area: str, ns: str, stem: str, body: str, timeout: int) -> tuple[bool, str]:
     """Write a scratch .v that imports the module and appends `body`; return (compiled_ok, log).
-    A coqc run that ended abnormally raises ProbeIncomplete."""
-    header = f"From {ns}.conjectures Require Import {stem}.\n"
+    A coqc run that ended abnormally raises ProbeIncomplete.  The ladders are ssreflect tactics
+    (`done`, `by []`, `move=>`), so the header imports MathComp's all_boot first: a statement file
+    that only Require Imports its dependencies does not bring ssreflect into the snippet."""
+    header = f"From mathcomp Require Import all_boot.\nFrom {ns}.conjectures Require Import {stem}.\n"
     with tempfile.TemporaryDirectory() as td:
         f = Path(td) / "probe.v"
         f.write_text(header + body + "\n")
@@ -185,14 +190,60 @@ def compile_hint(area: str, hint: Path, timeout: int) -> bool:
     artifacts land next to the hint (the probe stays read-only w.r.t. the repo; hints only
     use logical `From ... Require` imports resolved via `area_flags`, so location is irrelevant).
     rc==0 ⇒ the refutation still compiles ⇒ the statement is settleable.  An abnormal end raises
-    ProbeIncomplete (it must not read as `stale-FIX-OK`)."""
+    ProbeIncomplete (it must not read as `stale-FIX-OK`), and so do imports that do not load: the
+    hint's leading Require / Import / Set block is compiled alone first, so a hint that fails only
+    because its libraries are unbuilt or stale is not a verified fix."""
     with tempfile.TemporaryDirectory() as td:
+        text = hint.read_text()
+        setup = Path(td) / "hint_setup.v"
+        setup.write_text(hint_setup(text) + "\n")
+        rc, log = sh([*coqc_cmd(), "-q", *area_flags(area), str(setup)], max(timeout, 90))
+        if killed(rc):
+            raise ProbeIncomplete(f"coqc ended abnormally on the imports of the hint {hint.name} (rc {rc})")
+        if rc != 0:
+            raise ProbeIncomplete(f"the imports of the hint {hint.name} do not load: {first_error(log)}")
         f = Path(td) / hint.name
-        f.write_text(hint.read_text())
+        f.write_text(text)
         rc, _ = sh([*coqc_cmd(), "-q", *area_flags(area), str(f)], max(timeout, 90))
         if killed(rc):
             raise ProbeIncomplete(f"coqc ended abnormally on the hint {hint.name} (rc {rc})")
         return rc == 0
+
+
+HINT_SETUP_RE = re.compile(r"(From|Require|Import|Export|Set|Unset|Local|Global|Open|Close)\b")
+
+
+def hint_setup(text: str) -> str:
+    """The leading sentences of a hint that load and configure (From / Require / Import / Set ...),
+    up to its first definition, lemma or section."""
+    clean = strip_comments(text)
+    i, out = 0, []
+    while True:
+        while i < len(clean) and clean[i].isspace():
+            i += 1
+        if i >= len(clean) or not HINT_SETUP_RE.match(clean, i):
+            return "\n".join(out)
+        j = sentence_end(clean, i)
+        out.append(clean[i:j].strip())
+        i = j
+
+
+def first_error(log: str) -> str:
+    lines = [line.strip() for line in log.splitlines() if line.strip()]
+    return next((line for line in lines if line.startswith("Error")), lines[-1] if lines else "")[:200]
+
+
+def preflight(area: str, ns: str, stem: str, name: str, timeout: int) -> None:
+    """The probes' common setup must compile on its own: the header, both ladders, the small-model
+    import, the statement as a Prop, and each ladder closing a trivial goal.  Otherwise every probe
+    would fail before searching (a parse error, an unbuilt or stale module, a renamed statement)
+    and read as "not settled", so the statement is INCOMPLETE instead."""
+    body = "\n".join(["From GTBase Require Import finite_graph.", LADDER, SMALL_LADDER,
+                      f"Check ({name} : Prop).",
+                      "Goal True. Proof. __probe. Qed.", "Goal True. Proof. __small_probe. Qed."])
+    ok, log = compile_snippet(area, ns, stem, body, max(timeout, 90))
+    if not ok:
+        raise ProbeIncomplete(f"probe setup does not compile: {first_error(log)}")
 
 
 def leading_binder_types(body: str, limit: int = 2) -> list[str]:
@@ -265,6 +316,10 @@ def compile_instantiations(area: str, ns: str, stem: str, name: str, body: str,
     # All attempted definitions are expected to fail. If one unexpectedly succeeds, Rocq
     # rejects its `Fail` wrapper with this diagnostic: that specialization settled the row.
     settled = (not ok) and "The command has not failed" in log
+    # Any other failure (not the timeout budget) happened outside the Fail commands: the
+    # specializations never ran, so the row has no verdict.
+    if not ok and not settled and log != "<timeout>":
+        raise ProbeIncomplete(f"small-model file failed outside its Fail commands: {first_error(log)}")
     return settled, log
 
 
@@ -273,6 +328,8 @@ def probe_statement(name: str, idx, timeout: int) -> dict:
         return {"name": name, "status": "NOT-FOUND", "flag": False}
     area, stem, ns, body = idx[name]
     try:
+        # The common setup must compile, or no probe below can search.
+        preflight(area, ns, stem, name, timeout)
         # Layer 1: auto tripwire, both polarities.
         ok_true, _ = compile_snippet(area, ns, stem, f"{LADDER}\nLemma __pt : {name}. Proof. __probe. Qed.", timeout)
         ok_false, _ = compile_snippet(area, ns, stem, f"{LADDER}\nLemma __pf : ~ ({name}). Proof. __probe. Qed.", timeout)
@@ -283,7 +340,8 @@ def probe_statement(name: str, idx, timeout: int) -> dict:
             hint_state = "settles" if compile_hint(area, hint, timeout) else "stale-FIX-OK"
         instantiation, _ = compile_instantiations(area, ns, stem, name, body, timeout)
     except ProbeIncomplete as exc:
-        # One killed run leaves the statement without a verdict: neither ok nor FLAGGED.
+        # A probe that could not search (a killed run, a setup that does not compile) leaves the
+        # statement without a verdict: neither ok nor FLAGGED.
         return {"name": name, "area": area, "flag": False, "status": "INCOMPLETE", "reason": str(exc)}
     flag = ok_true or ok_false or hint_state == "settles" or instantiation
     return {
