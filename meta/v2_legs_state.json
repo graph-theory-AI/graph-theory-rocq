@@ -7567,11 +7567,14 @@
    "audit_page": "todo"
   },
   "erdos_1029": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x237-ramsey-turan-density",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X237.v:diagonal_ramsey_ratio_unbounded_statement. Erdos Problems #1029 (open at the mirror 10fb9c15): R(k) / (k 2^{k/2}) -> infinity, squared: for every M, eventually M^2 k^2 2^k <= R(k)^2, with X195's x195_ramsey_number 2."
   },
   "erdos_1030": {
    "statement": "todo",
@@ -7922,11 +7925,14 @@
    "note": "Authored in X5.v:triangle_packing_transversal_statement. Encodes the edge-disjoint triangle packing versus triangle edge-transversal bound tau <= 2k."
   },
   "erdos_181": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x237-ramsey-turan-density",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X237.v:hypercube_ramsey_linear_statement. Erdos Problems #181 (open at the teorth/erdosproblems mirror 10fb9c15): R(Q_n) << 2^n, as exists C, R <= C 2^n, with X195's x195_ramsey_number 2 and GTBase product_hypercube. Literature: open (best 2^{(2-c)n}, Tikhomirov)."
   },
   "erdos_182": {
    "statement": "todo",
@@ -8258,11 +8264,14 @@
    "audit_page": "todo"
   },
   "erdos_572": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x237-ramsey-turan-density",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X237.v:even_cycle_turan_lower_statement. Erdos Problems #572 (open at the mirror 10fb9c15): for k >= 3, ex(n; C_{2k}) >> n^{1+1/k}, as a^k n^{k+1} <= (b ex)^k for n >= n0, with D2tur's is_turan_number and GTBase cycle_graph. Literature: open for general k (known for k = 2, 3, 5)."
   },
   "erdos_573": {
    "statement": "todo",
@@ -8744,11 +8753,14 @@
    "audit_page": "todo"
   },
   "erdos_714": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x237-ramsey-turan-density",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X237.v:complete_bipartite_turan_lower_statement. Erdos Problems #714 (open at the mirror 10fb9c15): ex(n; K_{r,r}) >> n^{2-1/r}, affirmative form, for r >= 2 (false at r = 1), as a^r n^{2r} <= (b ex)^r n, with D2tur's is_turan_number and GTBase complete_multipartite_graph 2 r. Literature: open for r >= 4."
   },
   "erdos_715": {
    "statement": "done",
@@ -12008,11 +12020,14 @@
    "audit_page": "todo"
   },
   "std_kuperwasser_samotij_wigderson_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x237-ramsey-turan-density",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X237.v:forest_removal_two_density_statement. Kuperwasser-Samotij-Wigderson, Conjecture 7.1 of arXiv:2402.03045 (l.109, 128, 169, 930-932): m(G) <= m gives a forest F with m_2(G - F) <= m, m = a/b rational (equivalent), with X233's x233_max_density_at_most and GTBase del_edge_set. Literature: resolved since the pin in an unrefereed preprint (Yancey, arXiv:2603.03086): CORPUS_FEEDBACK."
   },
   "std_large_dom_implies_a_dom_cluster_conjecture_harut": {
    "statement": "todo",
@@ -12705,11 +12720,14 @@
    "audit_page": "todo"
   },
   "std_schur_erd_s_problem": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x237-ramsey-turan-density",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X237.v:multicolour_clique_ramsey_exponential_statement. Fox-Pach-Suk (arXiv:1505.07429, l.56, l.71-73): R(p; m) = 2^{O(m)} for fixed p >= 3, affirmative form, as R <= C^m with X195's m-colour x195_ramsey_number; guard m >= 1 (equivalent, R(p; 1) = p). Literature: refuted at p = 3 since the pin in an unrefereed source (arXiv:2608.02522 l.236-240, a 2026 OpenAI report): CORPUS_FEEDBACK."
   },
   "std_scott_s_conjecture_induced_subdivisions_and_chi": {
    "statement": "todo",
