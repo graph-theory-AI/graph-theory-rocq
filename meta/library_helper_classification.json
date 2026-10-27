@@ -1113,8 +1113,9 @@
     },
     "589ddf4441503fa61dd7b4b8358903c2ad3d7ccf18bdb2764884dda9b7bea7d8": {
       "class": "paper_specific",
-      "reason": "two 'I_n carrier copies carrying different arc relations (symmetric vs directed cycle)",
+      "reason": "three 'I_n carrier copies carrying different arc relations (the symmetric cycle and the directed cycle of two_extremal, an orientation b of C_n in X246's x246_cycle_or)",
       "members": [
+        "Digraph.conjectures.X246.x246_cycle_or",
         "Digraph.conjectures.two_extremal.symcyc",
         "Digraph.conjectures.two_extremal_glue.dicyc"
       ]
