@@ -7651,11 +7651,14 @@
    "note": "Authored in XE1.v:erdos_1035_statement. Encodes Erdos Problems #1035 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_1036": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x245-free-graph-counts-random-cube-nonisomorphic-induced",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X245.v:ramsey_graph_many_nonisomorphic_induced_subgraphs_statement. Erdos Problems #1036, Erdos-Renyi (proved before the corpus pin, pinned status solved: Shelah, J. Combin. Theory Ser. A 82 (1998), abstract and introduction (V); its Theorem (2) prints n edges, the encoding follows the abstract's n vertices, stated in the Notes): a graph with no clique or independent set on >= C log n vertices has 2^{Omega(n)} pairwise non-isomorphic induced subgraphs (upstream cliqueb, stable, induced, isomorphism)."
   },
   "erdos_1037": {
    "statement": "todo",
@@ -8399,11 +8402,14 @@
    "note": "Authored in X5.v:min_degree_half_disjoint_four_cycles_statement. Encodes the 4k-vertex, minimum-degree-2k statement forcing k vertex-disjoint 4-cycles."
   },
   "erdos_578": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x245-free-graph-counts-random-cube-nonisomorphic-induced",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X245.v:random_graph_spanning_hypercube_statement. Erdos Problems #578, Erdos-Bollobas (proved before the corpus pin, pinned status solved: Riordan, Spanning subgraphs of random graphs, Combin. Probab. Comput. 9 (2000), abstract): G(2^d, 1/2) contains a spanning Q_d almost surely, as at least (1 - 1/q) of the labelled graphs on 'I_(2^d) for large d (GTBase product_hypercube, has_subgraph, del_edge_set)."
   },
   "erdos_579": {
    "statement": "done",
@@ -8457,11 +8463,14 @@
    "audit_page": "todo"
   },
   "erdos_59": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x245-free-graph-counts-random-cube-nonisomorphic-induced",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X245.v:turan_exponent_free_graph_count_statement. Erdos Problems #59 (false before the corpus pin, pinned status solved: Morris and Saxton, arXiv:1309.2927v3, Proposition 1.4, C_6; mirror disproved (Lean) 2026-08-24): the number of labelled H-free graphs on n vertices is <= 2^{(1+o(1)) ex(n;H)} for every H containing a cycle (Morris-Saxton l.221; a forest is a degenerate counterexample, Arthur (211)), as every family of H-free edge sets on 'I_n, eps = 1/q, affirmative form (D2tur is_turan_number; GTBase has_subgraph, del_edge_set)."
   },
   "erdos_593": {
    "statement": "todo",
