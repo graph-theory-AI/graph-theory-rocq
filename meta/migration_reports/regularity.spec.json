@@ -336,6 +336,16 @@
       "path": "spectral-graph-theory/theories/conjectures/grounding_D5.v",
       "name": "regular",
       "note": "Lexical short-name match only: this file never imports Infinite (it is outside the actual reverse closure of Infinite.conjectures.D4inf3, five Infinite files by fresh rocq dep), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity), not the migrated Infinite source."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X239.v",
+      "name": "regular",
+      "note": "Wave X239 (2026-10-27): lexical short-name match only: this file never imports Infinite (it is outside the reverse closure of Infinite.conjectures.D4inf3), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity, row erdos:82), not the migrated Infinite source; declared as for U1 / X213."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X239.v",
+      "name": "regular",
+      "note": "Wave X239 (2026-10-27): lexical short-name match only: this file never imports Infinite (it is outside the reverse closure of Infinite.conjectures.D4inf3), so its regular is GTBase.base.regular (simple-graph neighbourhood regularity, row erdos:82), not the migrated Infinite source; declared as for U1 / X213."
     }
   ],
   "distinct_variants": [],
