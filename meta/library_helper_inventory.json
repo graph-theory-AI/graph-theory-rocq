@@ -24471,12 +24471,12 @@
     ]
   },
   "counts": {
-    "files": 327,
-    "helpers": 2669,
+    "files": 328,
+    "helpers": 2673,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 217,
     "repeated_signature_shapes": 326,
-    "statements_excluded": 715,
+    "statements_excluded": 716,
     "x_wave_helpers": 1512
   },
   "groups": {
@@ -57949,6 +57949,86 @@
       "qualified_name": "Extremal.conjectures.X234.x234_blowup_colouring",
       "signature": "(n : nat) (col : {set complete_multipartite_graph n 2} -> 'I_2) : Prop",
       "signature_shape_hash": "506cb3cdff5d5e083b51657d5f0b80450f192f726626eedba5a0c10adfa52453"
+    },
+    {
+      "body_hash": "a7266fd9b04fa3af776946e52bbc048a51192868c2c9db7342bfb64f59e9185a",
+      "body_shape_hash": "a7266fd9b04fa3af776946e52bbc048a51192868c2c9db7342bfb64f59e9185a",
+      "declaration_hash": "95efe8e4e10c8a9a168cda59d11b040eccde78c6543916824939bdb428616e01",
+      "direct_consumers": [
+        "Extremal.conjectures.X235.lr_nat_graph_forces"
+      ],
+      "kind": "Definition",
+      "line": 17,
+      "local_dependencies": [],
+      "name": "lr_nat_valid_lists",
+      "normalized_name": "lr_nat_valid_lists",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X235.v",
+      "phase": "X235",
+      "qualified_name": "Extremal.conjectures.X235.lr_nat_valid_lists",
+      "signature": "(V : finType) (k : nat) (L : V -> V -> seq nat) : Prop",
+      "signature_shape_hash": "f3b285472dc8aac6088bcd5cbfb4f3f98e6617085c61ad20344729295858892a"
+    },
+    {
+      "body_hash": "a3b9231165a8a485d7484e46f5dd52c4387058ad81bbcdc389138023f6ac8b23",
+      "body_shape_hash": "a3b9231165a8a485d7484e46f5dd52c4387058ad81bbcdc389138023f6ac8b23",
+      "declaration_hash": "025388ebc7a345817f5309a4a137ef10a090cee8e28fd5ef64f1a58cfe3da575",
+      "direct_consumers": [
+        "Extremal.conjectures.X235.lr_nat_graph_forces"
+      ],
+      "kind": "Definition",
+      "line": 26,
+      "local_dependencies": [],
+      "name": "lr_nat_admissible",
+      "normalized_name": "lr_nat_admissible",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X235.v",
+      "phase": "X235",
+      "qualified_name": "Extremal.conjectures.X235.lr_nat_admissible",
+      "signature": "(V : finType) (L : V -> V -> seq nat) (phi : V -> V -> nat) : Prop",
+      "signature_shape_hash": "411df26015c2f39151be98c84d47a2b6016f6ccf4f3213cf48e32885976c9e01"
+    },
+    {
+      "body_hash": "e3b5af699e3716f1123a84747f7fa6a190e2a673efc464ac42e49b542d3e9563",
+      "body_shape_hash": "e3b5af699e3716f1123a84747f7fa6a190e2a673efc464ac42e49b542d3e9563",
+      "declaration_hash": "a73ffb97665d0a1e28a05f44cb280059a5a17db3c26512ce0a5bcfb7f49c489f",
+      "direct_consumers": [
+        "Extremal.conjectures.X235.lr_nat_graph_forces"
+      ],
+      "kind": "Definition",
+      "line": 32,
+      "local_dependencies": [],
+      "name": "lr_color_graph",
+      "normalized_name": "lr_color_graph",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X235.v",
+      "phase": "X235",
+      "qualified_name": "Extremal.conjectures.X235.lr_color_graph",
+      "signature": "(V : finType) (C : eqType) (phi : V -> V -> C) (c : C) : sgraph",
+      "signature_shape_hash": "7496a55d58cb47dc73d24482bc9d81ff46d57474edebee4dceeeb2d014903dd1"
+    },
+    {
+      "body_hash": "12fc9335e046670fdd8eb63c48898be4d0063c648f8b385ec318cee42ac325f8",
+      "body_shape_hash": "12fc9335e046670fdd8eb63c48898be4d0063c648f8b385ec318cee42ac325f8",
+      "declaration_hash": "48bd15256f5fe72d47704e46e5db3cfb1577bf94011ac9b1eb466a4ab33a8fd9",
+      "direct_consumers": [
+        "Extremal.conjectures.X235.list_ramsey_chromatic_resolution_statement"
+      ],
+      "kind": "Definition",
+      "line": 36,
+      "local_dependencies": [
+        "lr_color_graph",
+        "lr_nat_admissible",
+        "lr_nat_valid_lists"
+      ],
+      "name": "lr_nat_graph_forces",
+      "normalized_name": "lr_nat_graph_forces",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X235.v",
+      "phase": "X235",
+      "qualified_name": "Extremal.conjectures.X235.lr_nat_graph_forces",
+      "signature": "(s k n : nat) : Prop",
+      "signature_shape_hash": "b5891de66ed67f58f7dffddbc8887b3478bfd63d3c42060461f8a282afdbde8b"
     },
     {
       "body_hash": "857e81095417ec9a7b32ad78ef7497e0e68db404b9edf9f8ff9d7b7f4a404cbd",
