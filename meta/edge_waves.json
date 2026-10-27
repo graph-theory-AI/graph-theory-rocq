@@ -629,8 +629,8 @@
    "external": [],
    "reason": "",
    "proved_by": "Lancelot (Claude Opus 5.5), 2026-10-27: implications_X238.v",
-   "reviewed_by": "",
-   "reviewed_at": "",
+   "reviewed_by": "Arthur (second reader of the X218 => X238 #01 edge, 2026-10-27)",
+   "reviewed_at": "2026-10-27",
    "note": "Rocq-only edge (no corpus relation), stated in X238.v's Notes: every path P_k is a forest, so multibounding gives chi(G) <= c(d) * s^e(d) for every P_k-induced-free G with no K_d(s) subgraph and s >= 1; tau_d(G) = t excludes K_d(t+1), so s = t+1 applies, and c(d) * (t+1)^e(d) is dominated by the natural-coefficient polynomial a + a * t^(e(d)+1), a = c(d) * 2^e(d)."
   },
   "every_multigraph_widespread_statement->forest_of_lanterns_pervasive_statement:implies": {
