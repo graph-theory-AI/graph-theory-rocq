@@ -30,7 +30,8 @@ Usage:
   python3 meta/vacuity_probe.py --all                                 # whole v2 conjecture corpus (slow)
   python3 meta/vacuity_probe.py --validate                            # self-test: regression + recall + control
 Runs with the coqc on PATH, or through `opam exec --switch $ROCQ_OPAM_SWITCH` when set (Rocq 9.1.1).  Read-only w.r.t. the repo (scratch in a tmpdir).
-Exit code 0 iff nothing was FLAGGED and nothing was INCOMPLETE (suitable for `make probe`).  A
+Exit code 0 iff nothing was FLAGGED, INCOMPLETE or NOT-FOUND (suitable for `make probe`); a
+requested name the index does not hold (a misspelled or renamed statement) is NOT-FOUND.  A
 statement is INCOMPLETE when its probes could not search: one of its coqc runs ended abnormally
 (killed, e.g. by the OOM killer), the probes' common setup does not compile (the preflight: a parse
 error, an unbuilt or stale module, a renamed statement), its hint's imports do not load, or its
@@ -368,6 +369,7 @@ def names_from_files(files: list[str]) -> list[str]:
 def report(rows: list[dict]) -> int:
     flagged = [r for r in rows if r.get("flag")]
     incomplete = [r for r in rows if r.get("status") == "INCOMPLETE"]
+    not_found = [r for r in rows if r.get("status") == "NOT-FOUND"]
     print(f"\n{'statement':52s} {'auto=T':6s} {'auto=F':6s} {'small':6s} {'hint':14s} verdict")
     print("-" * 100)
     for r in sorted(rows, key=lambda r: (not r.get("flag"), r["name"])):
@@ -380,8 +382,9 @@ def report(rows: list[dict]) -> int:
               f"{r['hint']:14s} {'*** FLAGGED ***' if r['flag'] else 'ok'}")
     print("-" * 100)
     print(f"{len(rows)} probed · {len(flagged)} FLAGGED"
-          + (f" · {len(incomplete)} INCOMPLETE (a coqc run ended abnormally)" if incomplete else ""))
-    return 1 if flagged or incomplete else 0
+          + (f" · {len(incomplete)} INCOMPLETE (no search ran)" if incomplete else "")
+          + (f" · {len(not_found)} NOT-FOUND (not in the index)" if not_found else ""))
+    return 1 if flagged or incomplete or not_found else 0
 
 
 def probe_many(names: list[str], idx, timeout: int, jobs: int) -> list[dict]:
@@ -478,15 +481,15 @@ def validate(idx, timeout: int, jobs: int) -> int:
     g = probe_many(CONTROL_GOOD, idx, timeout, jobs)
     report(g)
     fp = sum(r["flag"] for r in g)
-    # An INCOMPLETE control row is not a pass: its coqc was killed, so it was never checked.
-    incomplete = [r["name"] for r in b + g if r.get("status") == "INCOMPLETE"]
+    # An INCOMPLETE or NOT-FOUND row is not a pass: no search ran on it, so it was never checked.
+    incomplete = [r["name"] for r in b + g if r.get("status") in ("INCOMPLETE", "NOT-FOUND")]
 
     print("\n== summary ==")
     print(f"regression (historical fixes stale-FIX-OK): {'PASS' if not reverted else 'FAIL'}")
     print(f"recall (synthetic vacuous flagged):         {'PASS' if recall_ok else 'FAIL'}")
     print(f"recall (small-model specialization):        {'PASS' if instantiation_ok else 'FAIL'}")
     print(f"control false-positives:                    {fp}/{len(g)}   (want 0)")
-    print(f"incomplete probes (killed coqc runs):       {len(incomplete)}   (want 0)")
+    print(f"rows without a verdict (no search ran):     {len(incomplete)}   (want 0)")
     return 0 if (not reverted and recall_ok and instantiation_ok and fp == 0 and not incomplete) else 1
 
 

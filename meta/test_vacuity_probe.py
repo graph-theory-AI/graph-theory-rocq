@@ -6,8 +6,9 @@ from the scratch file it is given (no fake executable: /tmp is noexec in the con
 killed by a signal (a negative return code, or 137 under a wrapper), a probe setup that does not
 compile (a parse error, a module that does not load), hint imports that do not load and a
 small-model file that fails outside its Fail commands must each make the statement INCOMPLETE and
-the exit code nonzero, in every probe layer and in --validate; the designed timeout (124), an
-ordinary failure and an ordinary success keep their old verdicts."""
+the exit code nonzero, in every probe layer and in --validate, and so must a name the index does not
+hold (NOT-FOUND); the designed timeout (124), an ordinary failure and an ordinary success keep
+their old verdicts."""
 from __future__ import annotations
 
 import contextlib
@@ -106,6 +107,14 @@ class ProbeCouldNotSearch(unittest.TestCase):
         row = probe({NAME: entry(BINDERS)}, setup_ok(lambda name, text: 1))
         self.assert_incomplete(row, "outside its Fail commands")
 
+    def test_unknown_name_is_not_found_and_fails(self):
+        # A misspelled or renamed statement in --names / a wave row: no coqc run at all.
+        row = probe({NAME: entry()}, lambda name, text: 0, "no_such_statement")
+        self.assertEqual((row["status"], row["flag"]), ("NOT-FOUND", False))
+        code, out = report([row])
+        self.assertEqual(code, 1)
+        self.assertIn("1 probed · 0 FLAGGED · 1 NOT-FOUND (not in the index)", out)
+
 
 class UnchangedVerdicts(unittest.TestCase):
     def test_healthy_statement_is_ok(self):
@@ -179,13 +188,13 @@ class ValidateFailsClosed(unittest.TestCase):
     def test_healthy_fake_tree_passes(self):
         code, out = self.validate(self.healthy)
         self.assertEqual(code, 0, out)
-        self.assertIn("incomplete probes (killed coqc runs):       0", out)
+        self.assertIn("rows without a verdict (no search ran):     0", out)
 
     def test_killed_control_row_fails(self):
         victim = VP.CONTROL_GOOD[0]
         code, out = self.validate(lambda name, text: -9 if victim in text else self.healthy(name, text))
         self.assertEqual(code, 1, out)
-        self.assertIn("incomplete probes (killed coqc runs):       1", out)
+        self.assertIn("rows without a verdict (no search ran):     1", out)
 
     def test_control_whose_module_does_not_load_fails(self):
         # The preflight of one control row does not compile (an unbuilt library).
@@ -200,6 +209,14 @@ class ValidateFailsClosed(unittest.TestCase):
             lambda name, text: -9 if "__probe_selftest_vacuous_statement" in text else self.healthy(name, text))
         self.assertEqual(code, 1, out)
         self.assertIn("!! RECALL: coqc ended abnormally", out)
+
+    def test_control_missing_from_the_index_fails(self):
+        idx = {name: row for name, row in self.IDX.items() if name != VP.CONTROL_GOOD[0]}
+        out = io.StringIO()
+        with patch.object(VP, "sh", fake_sh(self.healthy)), contextlib.redirect_stdout(out):
+            code = VP.validate(idx, VP.DEFAULT_TIMEOUT, 1)
+        self.assertEqual(code, 1, out.getvalue())
+        self.assertIn("rows without a verdict (no search ran):     1", out.getvalue())
 
 
 if __name__ == "__main__":
