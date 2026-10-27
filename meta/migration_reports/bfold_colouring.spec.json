@@ -264,6 +264,16 @@
       "path": "extremal-graph-theory/theories/examples/fractional_colouring.v",
       "name": "is_fractional_chromatic",
       "note": "fractional-chromatic public-only client: its is_fractional_chromatic is the canonical Extremal.foundations.fractional_colouring name, a lexical match on the shared short name of this family's frozen chain member, not a use of the D2chr alias."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X236.v",
+      "name": "bfold_colouring",
+      "note": "Wave X236 (Arthur, 2026-10-26): x236_frac_chi_at_least reads chi_f >= k through the canonical GTBase bfold_colouring (b >= 1), as arXiv:1808.01605 l.78; a direct use of the canonical, no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X236.v",
+      "name": "bfold_colouring",
+      "note": "Wave X236 (Arthur, 2026-10-26): the grounding certificates of arXiv:1808.01605#00 build b-fold colourings with the canonical GTBase bfold_colouring; a direct use, no copy."
     }
   ],
   "distinct_variants": [

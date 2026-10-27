@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py proper_edge_colouring --details
 
 - Canonical: `GTBase.edge_colourings.proper_edge_colouring`.
 - Baseline: `3011c280a09f292461a3b1e5a99f7be3febfbbb9`.
-- Scope: 5 helpers, 7 statements, 28 frozen objects, 64 recorded references.
-- Source checks: 244/244 pass; consistent.
+- Scope: 5 helpers, 7 statements, 28 frozen objects, 70 recorded references.
+- Source checks: 250/250 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
