@@ -717,6 +717,20 @@
    "reviewed_at": null,
    "note": "REFUTED-DIRECTION (metadata wave M, 2026-09-24): classical antichain: a nowhere-zero 5-flow does not yield a nowhere-zero 3-flow. Earlier note: edge_connected 4 => bridgeless (hypothesis ok) but a nowhere-zero 5-flow does NOT yield a nowhere-zero 3-flow; conclusion implication fails. Does not compile."
   },
+  "flandrin_neighbour_sum_distinguishing_edge_colouring_statement->nsd_delta_plus_constant_statement:implies": {
+   "gc": null,
+   "tier": "T1",
+   "wave": "E1",
+   "host": "chromatic-theory",
+   "state": "verified",
+   "proof": "flandrin_neighbour_sum_distinguishing_edge_colouring_implies_nsd_delta_plus_constant",
+   "external": [],
+   "reason": "",
+   "proved_by": "Lancelot (Claude Opus 5.5), 2026-10-27: implications_X236.v",
+   "reviewed_by": "",
+   "reviewed_at": "",
+   "note": "Rocq-only edge (no corpus relation), stated in X236.v's Notes: Flandrin et al.'s Delta + 2 for connected graphs with at least 3 vertices other than C_5 gives Delta + 3 for every graph with no isolated edge (C = 3), by strong induction on the number of vertices: graphs on at most 2 vertices without an isolated edge have no edge; a connected graph on at least 3 vertices is C_5 (an explicit 5-colouring) or Flandrin's; a disconnected one splits into a component and its complement, whose colourings glue."
+  },
   "forest_free_polynomial_chi_bound_statement->every_forest_is_multibounding_statement:implies": {
    "gc": "e034",
    "tier": "T1",
