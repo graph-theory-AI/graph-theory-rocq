@@ -78,6 +78,7 @@ mutation:
 	python3 meta/test_statement_docs.py
 	python3 meta/test_check_edges.py
 	python3 meta/test_corpus_registry_pin.py
+	python3 meta/test_vacuity_probe.py
 	python3 meta/faithfulness_lint.py --validate
 	python3 meta/test_faithfulness_mutation.py
 	python3 meta/faithfulness_mutation.py --timeout 1800
