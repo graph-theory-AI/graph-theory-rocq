@@ -53,12 +53,14 @@ Definition x238_tau (G : sgraph) (d t : nat) : Prop :=
       the tau_d form: G never contains K_d(tau_d(G) + 1), and a G with no K_d(t) has
       tau_d(G) <= t - 1, so the K_d(t)-free form of Chromatic X218 ([x218_multibounding]) and this
       form differ by a polynomial shift; X218's row arxiv:2303.11766#00 (every forest is
-      multibounding) therefore implies this row.  Literature status: SOLVED since the pin, by
-      Nguyen, Scott and Seymour, "Polynomial bounds for chromatic number VIII. Excluding a path and
-      a complete multipartite graph" (arXiv:2303.11766v1, J. Graph Theory 2024), Theorem 1.5
-      (paththm, x/main.tex l.124-127): for every path H and all d >= 1 a polynomial f bounds
-      chi(G) by f(t) for every H-free G with no K_d(t) subgraph, for all t >= 1.  The row is
-      encoded as stated; no formal resolution is recorded. *)
+      multibounding) therefore implies this row.  Literature status: SOLVED before the corpus pin
+      (b72c5857, 2026-09-23), not in the pinned status: Nguyen, Scott and Seymour, "Polynomial
+      bounds for chromatic number VIII. Excluding a path and a complete multipartite graph"
+      (arXiv:2303.11766v1, submitted 2023-03-21; J. Graph Theory 2024), Theorem 1.5 (paththm,
+      x/main.tex l.124-127): for every path H and all d >= 1 a polynomial f bounds chi(G) by f(t)
+      for every H-free G with no K_d(t) subgraph, for all t >= 1.  The pinned review names Part
+      VIII but records "partial" (it could not read the theorem).  The row is encoded as stated; no
+      formal resolution is recorded. *)
 Definition path_free_polynomial_tau_bound_statement : Prop :=
   forall k d : nat, 1 <= d ->
     exists p : seq nat, forall (G : sgraph) (t : nat),
