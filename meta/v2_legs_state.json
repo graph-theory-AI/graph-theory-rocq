@@ -7601,11 +7601,14 @@
    "note": "Authored in X237.v:diagonal_ramsey_ratio_unbounded_statement. Erdos Problems #1029 (open at the mirror 10fb9c15): R(k) / (k 2^{k/2}) -> infinity, squared: for every M, eventually M^2 k^2 2^k <= R(k)^2, with X195's x195_ramsey_number 2."
   },
   "erdos_1030": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x240-degenerate-turan-graph-ramsey",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X240.v:consecutive_diagonal_ramsey_ratio_statement. Erdos Problems #1030 (open at the teorth/erdosproblems mirror 10fb9c15): R(k+1, k)/R(k, k) > 1 + c in the limit, liminf reading (eventually (q + 1) R(k, k) < q R(k+1, k)), equal to the pinned lim whenever it exists (XE1 xe1_graph_ramsey_number)."
   },
   "erdos_1031": {
    "statement": "todo",
@@ -7877,11 +7880,14 @@
    "audit_page": "todo"
   },
   "erdos_146": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x240-degenerate-turan-graph-ramsey",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X240.v:degenerate_bipartite_turan_exponent_statement. Erdos Problems #146 (DISPROVED before the corpus pin: OpenAI report Chapter 10 Theorem 1.2, unrefereed with Lean; mirror 10fb9c15 \"disproved (Lean)\" 2026-08-02): bipartite r-degenerate H has ex(n; H) << n^{2-1/r}, r >= 1, written m^r n <= C^r n^{2r} (D2tur is_turan_number, GTBase bipartite and k_degenerate); encoded as stated."
   },
   "erdos_147": {
    "statement": "todo",
@@ -7918,11 +7924,14 @@
    "note": "Authored in XE1.v:erdos_151_statement. Encodes Erdos Problems #151 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_159": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x240-degenerate-turan-graph-ramsey",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X240.v:c4_clique_ramsey_power_saving_statement. Erdos Problems #159 (open at the teorth/erdosproblems mirror 10fb9c15): R(C_4, K_n) << n^{2-c} for some c > 0, c = a/b rational, written R^b n^a <= C^b n^{2b} (XE1 xe1_graph_ramsey_number, GTBase cycle_graph 4)."
   },
   "erdos_165": {
    "statement": "todo",
@@ -8034,11 +8043,14 @@
    "audit_page": "todo"
   },
   "erdos_544": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x240-degenerate-turan-graph-ramsey",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X240.v:triangle_ramsey_increment_unbounded_statement. Erdos Problems #544 (open at the teorth/erdosproblems mirror 10fb9c15): R(3, k+1) - R(3, k) -> oo, without subtraction (for every M, eventually R(3, k) + M <= R(3, k+1)); the o(k) question is in the Notes, as erdos:715 (XE1 xe1_graph_ramsey_number)."
   },
   "erdos_545": {
    "statement": "done",
@@ -9585,11 +9597,14 @@
    "note": "Authored in XE1.v:erdos_944_statement. Encodes Erdos Problems #944 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_986": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x240-degenerate-turan-graph-ramsey",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X240.v:clique_ramsey_polylog_lower_statement. Erdos Problems #986 (PROVED before the corpus pin: Bradac arXiv:2605.28793v3 Theorem thm:main, v1 weaker, unrefereed; mirror 10fb9c15 \"proved\" 2026-06-21): for fixed k >= 3, R(k, n) >> n^{k-1}/(log n)^c, written n^k <= p R n (trunc_log 2 n)^c for n >= n0 (XE1 xe1_graph_ramsey_number, MathComp trunc_log); encoded as stated."
   },
   "erdos_993": {
    "statement": "done",
@@ -13160,11 +13175,14 @@
    "audit_page": "todo"
   },
   "std_wigderson_s_edge_deletion_ramsey_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x240-degenerate-turan-graph-ramsey",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X240.v:edge_deletion_ramsey_constant_factor_statement. Wigderson's edge-deletion conjecture (arXiv:2208.11181v3 l.379-385, restated as open in the source arXiv:2311.01887v1 l.198; open as far as the sources show): r(G) <= C r(G - xy) for every graph G and edge xy (XE1 xe1_diagonal_ramsey_number, GTBase del_edge_set)."
   },
   "std_wood_s_conjecture_on_pathwidth_and_binary_tree_s": {
    "statement": "todo",
