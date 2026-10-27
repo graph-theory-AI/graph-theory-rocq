@@ -7940,6 +7940,399 @@
           }
         }
       }
+    },
+    "X246": {
+      "phase": "X246",
+      "repo": "digraph-theory",
+      "defines_file": "X246.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X246 (A3 verifier Marcol; routing Lancelot (89), the 2204.01938 pinned-text decision (92); design x246-design-by-arthur, Marcol's read (171), items taken (218)), branch math/arthur-x246-20261027, 2026-10-27",
+      "source_verified_by": "Marcol (X246 wave verifier, A3: pinned records re-read at b72c5857: data/arxiv_conjectures.json statement_text of 2202.13306 #01, 2510.11311 #00 and #01, 2602.16333 #00 and #03 and 2204.01938 #00, identical to the v2 manifest rows whose source_hash values the wave pins, and the six data/arxiv_reviews records (five open, 2204.01938__00 solved); the e-prints of the Mac's deposit coordination/sources/x246-source-mac-20261027 (SHA256SUMS 34254974, 30 / 30 -c OK: 2202.13306v2 paper.tex, 2510.11311v1 main.tex, 2602.16333v1 main.tex, 2204.01938v2 paper.tex) and the Lum deposit coordination/sources/x246-lum-mac-20261027 (SHA256SUMS 0278b2c1, 6 / 6 -c OK: Lum.txt l.80, Theorem 1.5); every TeX line cited by the X246.v doc blocks re-read)",
+      "source_verified_at": "2026-10-27",
+      "commit": "x246-heroes-avoidable-vertex-transitive-rfree",
+      "helper_ownership": {
+        "x246_avoidable": {
+          "classification": "paper_specific",
+          "reason": "avoidability of arXiv:2510.11311 l.59 (minimum out-degree, F-free subdigraph, loopless hosts l.92), the shape of X221's x221_eulerian_avoidable_sub without the Eulerian hypothesis; no general min-out-degree avoidability exists in the library (git grep at 0b7a405e)."
+        },
+        "x246_cycle_or": {
+          "classification": "paper_specific",
+          "reason": "the orientation b of the cycle on 'I_n (the orientations of C_n of Conjecture 6.1), generalising X221's x221_c4or (n = 4)."
+        },
+        "x246_cycle_or_rel": {
+          "classification": "paper_specific",
+          "reason": "the arc relation of x246_cycle_or (i -> i+1 when b i, else i+1 -> i)."
+        },
+        "x246_height": {
+          "classification": "paper_specific",
+          "reason": "the height function of arXiv:2510.11311 l.87 (h(v) = h(u) + 1 on every arc), nat-valued up to a shift."
+        },
+        "x246_r_free": {
+          "classification": "paper_specific",
+          "reason": "r-free of arXiv:2204.01938 l.245 and Definition 5.3 (no directed cycle of length at most r), over the library's dicycle."
+        },
+        "x246_fas_le1": {
+          "classification": "paper_specific",
+          "reason": "beta(D) <= 1 of arXiv:2204.01938 l.189 over any digraph; path_fas.v's is_FAS lives in a Section over tournaments."
+        }
+      },
+      "faithfulness_verified_by": "Marcol (X246 wave verification, 2026-10-27)",
+      "faithfulness_result": "Readback 2026-10-27 (verifier Marcol): 6/6 PASS against the pinned texts and the e-prints, at math/arthur-x246-20261027 = ce9ca978 (X246.v blob 8af01d14, grounding_X246.v blob 9c5e8141; rebased by Arthur onto work/coordinator 4d11ed93 after the X245 integration (the r0 series d2d00300 + 822d3b72 kept as math/arthur-x246-20261027-r0); the delta 822d3b72 (cherry-picked as ce9ca978; my blocking item (173)) changes only g246_cycle_or_helper_claim (a fifth conjunct naming x246_cycle_or_rel, still by []) and the six rows' helper_sanity lists; X246.v, the digraph _CoqProject and poset_unavoidability.spec.json are the pre-rebase blobs, the waves file minus X246 and the legs other than the six rows are 4d11ed93's, and digraph-theory and base are unchanged between 0b7a405e and 4d11ed93). The bodies were read with the Digraph definitions at 0b7a405e: dipath x s (path arc x s, uniq; size s = arcs) and dicycle c (nonempty, cycle arc c, uniq; size c = arcs = vertices) (core/dipath.v); ind_subdigraph / ind_free (injective, arc-preserving and arc-reflecting: induced) and c3sub (blocks D1 => D2 => D3 => D1), K1 = TT 1 (conjectures/heroes.v); dichromatic_bounded (one B, acyclic colour classes; conjectures/dichromatic.v); oriented_dg (asymmetric, so loopless; heroes_dichotomy.v); digraph_sum (no cross arcs); outsel on induced_digraph S (every subdigraph on S); contains_subdigraph (unvd.v: injective, arc-preserving, not induced); vertex_transitiveb (automorphism.v) and X2.weakly_connected (underlying connectivity). arxiv:2202.13306#01: Question 5.4 (l.1121-1123) in its affirmative form; digraphs oriented (l.327), H-free induced (l.349), hero (l.350), K_1 + F disjoint union (l.353), Delta(1,1,H) = c3sub K1 K1 H (l.340, defined there for tournaments; for an oriented non-tournament H the implication is trivially true, stated in the Notes). arxiv:2510.11311#00: Conjecture 6.1 (l.335-337) for odd n >= 3 as the one guard odd n && (2 < n), every orientation one vector b (no loop or digon for n >= 3); avoidable as l.59 with loopless hosts and digons allowed (l.92), F-free not induced (l.57-59), the guards S != set0 and 0 < #|D| load-bearing; Theorem 1.1 (C_3, C_5) recorded as instances only. arxiv:2510.11311#01: Question 6.2 (l.341-343) affirmative; height function l.87 (nat-valued up to a shift). arxiv:2602.16333#00: Conjecture 4.1 (l.429-431); perimeter gap = order minus the longest directed cycle (printed l.150, l.116-117), connected = underlying (l.180), eps = 1/m, infinitely many n = an order >= N for every N, loops harmless. arxiv:2602.16333#03: Question 4.4 (l.483-485) affirmative, C natural, arcs as the length unit (l.173), no connectivity guard (components of a vertex transitive digraph are vertex transitive; the lead-in l.481 says connected), 0 < size s drops only the arcless case. arxiv:2204.01938#00: the PINNED introduction text (l.251; Lancelot's decision (92)), r-free = Definition 5.3 (l.602-603, l.245), beta <= 1 (l.189), 3r > 2n excluding loops and digons; Conjecture 5.6 ((r-1)-free, l.627-629) stronger and in the Notes, Remark 5.7 its tightness only. Literature: five rows open at the pin (pinned reviews open); 2204.01938#00 SOLVED BEFORE the corpus pin (b72c5857, 2026-09-23; pinned status solved) by K. Lum's MIT PRIMES research paper (MIT index item 466, 2026-01-12; the Mac's deposit x246-lum-mac-20261027, SHA256SUMS 0278b2c1): Theorem 1.5 (p.2, Lum.txt l.80) is the (r-1)-free form for r > floor(2n/3), which implies the row; not peer-reviewed, as the Notes say. Grounding (grounding_X246.v read; the run compiles it): hyp_inhabited per row (H = K1, F = TT 2; n = 3; the single arc with h = (0, 1); K1 at N = 1; the digon with the path [0; 1]; the single arc at r = 2); not_trivially_true per row with one hypothesis dropped (the second hero hypothesis: H = 2K1, F = K1 against the tournaments T_(k+1) = c3sub K1 T_k T_k, not k-dicolourable; the guard of #00: the single arc at n = 2, not avoidable on the loopless complete host; the height function: the one-vertex loop is avoidable; dicycle c: c = enum D at N = 1; vertex transitivity: the single arc; 2n < 3r: two disjoint directed triangles, 2-free with beta = 2, not Remark 5.7's example); helper_sanity in every row the same five certificates (g246_avoidable_helper_sanity: the one-vertex loop avoidable, the single arc not; g246_cycle_or_helper_sanity, referencing x246_cycle_or and x246_cycle_or_rel and naming both: the constant orientation of C_3 is the directed triangle 0 -> 1 -> 2 -> 0 and 1 -> 0 is absent; g246_height_helper_sanity: the single arc has a height function, two directed triangles do not; g246_r_free_helper_sanity: the single arc is 2-free, two triangles are not 3-free; g246_fas_helper_sanity: the single arc has beta <= 1, two disjoint triangles do not), so every inventory helper of X246.v is covered in every row. Metadata: the six source_hash values = the manifest's; the six pinned statement_text values (data/arxiv_conjectures.json at b72c5857) = the manifest's; legs recomputed from the wave with jq: identical, the six rows only; no allowlist entry (no sgraph binder); no repeated-name group; README 493 / 11 / 40 / 1,129 against 4d11ed93 (= the legs: 493 done, 11 partial, 40 blocked); consumers (comment-stripped scan of every name tracked by poset_unavoidability.spec.json): contains_subdigraph and unvd in X246.v, unvd in grounding_X246.v, the three declared entries.",
+      "rows": {
+        "axv_2202_13306_01": {
+          "formal_name": "delta11_hero_transfer_k1_plus_statement",
+          "source_hash": "a065017c07f976a7c5e0282b8b5366fbe0da03049d48c9dc7e13e9dd5d4e8077",
+          "note": "Question 5.4 of Aboulker, Aubian, Charbit (open at the pin): if Delta(1,1,H) is a hero in Forb_ind(F) and H a hero in Forb_ind(K_1 + F), then Delta(1,1,H) is a hero in Forb_ind(K_1 + F); oriented ambient, H and F oriented (l.327), Delta(1,1,H) = c3sub K1 K1 H, K_1 + F = digraph_sum (heroes, dichromatic_bounded, oriented_dg).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g246_hero_hyp_inhabited",
+              "claim": "g246_hero_hyp_claim",
+              "references": [
+                "delta11_hero_transfer_k1_plus_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g246_hero_not_trivially_true",
+              "claim": "g246_hero_ntt_claim",
+              "references": [
+                "delta11_hero_transfer_k1_plus_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2510_11311_00": {
+          "formal_name": "odd_cycle_orientations_avoidable_statement",
+          "source_hash": "54724dec3a398d10a0cf4812087d264619a3e37155079a0d4f2c8ddbec437c5f",
+          "note": "Conjecture 6.1 of Christoph, Janzer, Petrova, Steiner (open at the pin; Theorem 1.1 proves C_3 and C_5): every orientation of an odd cycle C_n, n >= 3, is avoidable (x246_avoidable, x246_cycle_or).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g246_odd_hyp_inhabited",
+              "claim": "g246_odd_hyp_claim",
+              "references": [
+                "odd_cycle_orientations_avoidable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g246_odd_not_trivially_true",
+              "claim": "g246_odd_ntt_claim",
+              "references": [
+                "odd_cycle_orientations_avoidable_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2510_11311_01": {
+          "formal_name": "height_function_not_avoidable_statement",
+          "source_hash": "65634a3b2e152fa475ce0c2fb98fb67b890c7db0561f45476128ca6b0eb82b3b",
+          "note": "Question 6.2 of Christoph, Janzer, Petrova, Steiner (open at the pin), affirmative form: a digraph with a height function is not avoidable (x246_height, x246_avoidable).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g246_height_hyp_inhabited",
+              "claim": "g246_height_hyp_claim",
+              "references": [
+                "height_function_not_avoidable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g246_height_not_trivially_true",
+              "claim": "g246_height_ntt_claim",
+              "references": [
+                "height_function_not_avoidable_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2602_16333_00": {
+          "formal_name": "vertex_transitive_linear_perimeter_gap_statement",
+          "source_hash": "230d1d74278af83458a36ff216d43fda68dacd568dc491c4280d859cc286554e",
+          "note": "Conjecture 4.1 of Bucic, Hendrey, Mohar, Steiner, Yepremyan (open at the pin; the paper proves a (1 - o(1)) ln n gap): for some eps = 1/m and orders n >= N for every N, a connected vertex transitive digraph has perimeter gap >= eps n (X2.weakly_connected, vertex_transitiveb, dicycle).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g246_gap_hyp_inhabited",
+              "claim": "g246_gap_hyp_claim",
+              "references": [
+                "vertex_transitive_linear_perimeter_gap_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g246_gap_not_trivially_true",
+              "claim": "g246_gap_ntt_claim",
+              "references": [
+                "vertex_transitive_linear_perimeter_gap_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2602_16333_03": {
+          "formal_name": "vertex_transitive_path_cycle_ratio_statement",
+          "source_hash": "de1bf4ff53af8c7905e0f3183e7f30a05be18fc82903169e51ef508d51429b60",
+          "note": "Question 4.4 of Bucic, Hendrey, Mohar, Steiner, Yepremyan (open at the pin), affirmative form: some C bounds a longest path by C times a longest directed cycle in every vertex transitive digraph (vertex_transitiveb, dipath, dicycle).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g246_ratio_hyp_inhabited",
+              "claim": "g246_ratio_hyp_claim",
+              "references": [
+                "vertex_transitive_path_cycle_ratio_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g246_ratio_not_trivially_true",
+              "claim": "g246_ratio_ntt_claim",
+              "references": [
+                "vertex_transitive_path_cycle_ratio_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2204_01938_00": {
+          "formal_name": "r_free_two_thirds_one_arc_from_acyclic_statement",
+          "source_hash": "2c8c2048df65977c85fbc9b9643df2c97b5528e6ca0b152ac84c18ae422c5435",
+          "note": "Fox, Himwich, Mani, introduction (the pinned text): every r-free digraph on n vertices with r > 2n/3 has beta <= 1; solved before the pin by Lum's MIT PRIMES research paper (12 January 2026, Theorem 1.5, the stronger (r-1)-free Conjecture 5.6; not peer-reviewed) (x246_r_free, x246_fas_le1).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g246_rfree_hyp_inhabited",
+              "claim": "g246_rfree_hyp_claim",
+              "references": [
+                "r_free_two_thirds_one_arc_from_acyclic_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g246_rfree_not_trivially_true",
+              "claim": "g246_rfree_ntt_claim",
+              "references": [
+                "r_free_two_thirds_one_arc_from_acyclic_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g246_avoidable_helper_sanity",
+                "claim": "g246_avoidable_helper_claim",
+                "references": [
+                  "x246_avoidable"
+                ]
+              },
+              {
+                "theorem": "g246_cycle_or_helper_sanity",
+                "claim": "g246_cycle_or_helper_claim",
+                "references": [
+                  "x246_cycle_or",
+                  "x246_cycle_or_rel"
+                ]
+              },
+              {
+                "theorem": "g246_height_helper_sanity",
+                "claim": "g246_height_helper_claim",
+                "references": [
+                  "x246_height"
+                ]
+              },
+              {
+                "theorem": "g246_r_free_helper_sanity",
+                "claim": "g246_r_free_helper_claim",
+                "references": [
+                  "x246_r_free"
+                ]
+              },
+              {
+                "theorem": "g246_fas_helper_sanity",
+                "claim": "g246_fas_helper_claim",
+                "references": [
+                  "x246_fas_le1"
+                ]
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
