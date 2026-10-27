@@ -6815,7 +6815,7 @@
         "std_schur_erd_s_problem": {
           "formal_name": "multicolour_clique_ramsey_exponential_statement",
           "source_hash": "ae66835e889d0f6365b45ac7ae1cd8c606b4ad1e976338d21f9e5e1f048b5204",
-          "note": "Fox-Pach-Suk (arXiv:1505.07429, l.56, l.71-73): R(p; m) = 2^{O(m)} for fixed p >= 3, affirmative form, as R <= C^m with X195's m-colour x195_ramsey_number; guard m >= 1 (equivalent, R(p; 1) = p). Literature: refuted at p = 3 since the pin in an unrefereed source (arXiv:2608.02522 l.236-240, a 2026 OpenAI report): CORPUS_FEEDBACK.",
+          "note": "Fox-Pach-Suk (arXiv:1505.07429, l.56, l.71-73): R(p; m) = 2^{O(m)} for fixed p >= 3, affirmative form, as R <= C^m with X195's m-colour x195_ramsey_number; guard m >= 1 (equivalent, R(p; 1) = p). Literature: refuted at p = 3 before the corpus pin (b72c5857, 2026-09-23), not in the pinned status, in an unrefereed source (arXiv:2608.02522, v1 2026-08-03, v2 2026-09-07, l.236-240, a 2026 OpenAI report): CORPUS_FEEDBACK.",
           "grounding": {
             "hyp_inhabited": {
               "theorem": "g237_schur_hyp_inhabited",
@@ -6908,7 +6908,7 @@
         "std_kuperwasser_samotij_wigderson_conjecture": {
           "formal_name": "forest_removal_two_density_statement",
           "source_hash": "1372182dae8434ffaa6fa9098ba1b63871392c48a6acb8600131000f2216a7c5",
-          "note": "Kuperwasser-Samotij-Wigderson, Conjecture 7.1 of arXiv:2402.03045 (l.109, 128, 169, 930-932): m(G) <= m gives a forest F with m_2(G - F) <= m, m = a/b rational (equivalent), with X233's x233_max_density_at_most and GTBase del_edge_set. Literature: resolved since the pin in an unrefereed preprint (Yancey, arXiv:2603.03086): CORPUS_FEEDBACK.",
+          "note": "Kuperwasser-Samotij-Wigderson, Conjecture 7.1 of arXiv:2402.03045 (l.109, 128, 169, 930-932): m(G) <= m gives a forest F with m_2(G - F) <= m, m = a/b rational (equivalent), with X233's x233_max_density_at_most and GTBase del_edge_set. Literature: resolved before the corpus pin (b72c5857, 2026-09-23), not in the pinned status, in an unrefereed preprint (Yancey, arXiv:2603.03086, v1 2026-03-03, v2 2026-04-29): CORPUS_FEEDBACK.",
           "grounding": {
             "hyp_inhabited": {
               "theorem": "g237_ksw_hyp_inhabited",

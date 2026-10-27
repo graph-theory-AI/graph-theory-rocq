@@ -82,7 +82,8 @@ Definition diagonal_ramsey_ratio_unbounded_statement : Prop :=
       "to decide whether R(p;m) = 2^{O(m)}, for a fixed p" l.56, the definition l.71, Schur's bounds
       l.72-73.  The affirmative form is stated.  2^{O(m)} is "at most C^m for some C".  The guard
       m >= 1 instead of the source's m >= 2 is equivalent, since R(p; 1) = p (replace C by max(C, p)).
-      Literature status: REFUTED since the pin at p = 3, in an unrefereed source: arXiv:2608.02522v2
+      Literature status: REFUTED at p = 3 BEFORE the corpus pin (b72c5857, 2026-09-23), not in the
+      pinned status, in an unrefereed source: arXiv:2608.02522v2 (v1 2026-08-03, v2 2026-09-07)
       general.tex l.236-240 reports R_k(C_3) >= (c k^{1/3} / log k)^k from a 2026 OpenAI report,
       so R(3; m) = m^{Theta(m)} is superexponential.  The row is encoded as stated; the finding is
       reported for the corpus. *)
@@ -145,7 +146,8 @@ Definition complete_bipartite_turan_lower_statement : Prop :=
       vertex set only raise both ratios); an empty maximum (no 3-set) is vacuous.  m = a/b is
       rational: the real statement is equivalent to "every G has a forest F with m_2(G - F) <=
       m(G)", m(G) being rational (F empty for edgeless G), so nothing is lost.  Literature status:
-      RESOLVED since the pin, in an unrefereed preprint: Yancey, arXiv:2603.03086v2 (l.44-48: "We
+      RESOLVED BEFORE the corpus pin (b72c5857, 2026-09-23), not in the pinned status, in an
+      unrefereed preprint: Yancey, arXiv:2603.03086v2 (v1 2026-03-03, v2 2026-04-29; l.44-48: "We
       prove the conjecture in full"); his (a, b)-sparseness counts nonempty subgraphs, i.e. those
       with an edge (l.64, l.280), so (1, -1)-sparse is a forest, (m, 0)-sparse is m(G) <= m and
       (m, 1 - 2m)-sparse is m_2 <= m, exactly this row.  The row is encoded as stated; the finding is
