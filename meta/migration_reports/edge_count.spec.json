@@ -1866,6 +1866,21 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X244.v",
       "name": "edge_count",
       "note": "Wave X244 (2026-10-27): edge_count is the canonical GTBase.common.edge_count (X244.v imports Extremal.foundations edge_colourings and GTBase base common graph_metric, GTBase last, no D2 module; grounding_X244.v adds X244 and GTBase modules only), matched by short name within extremal-graph-theory, where D2tur / D2ram hold the source; declared as for X241 / X243."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X245.v",
+      "name": "is_turan_number",
+      "note": "Wave X245 (2026-10-27) imports D2tur for is_turan_number (ex(n; H), row erdos:59) and imports GTBase LAST, so any unqualified edge_count is the canonical GTBase.common.edge_count; X245.v names is_turan_number only (edge_count appears in a comment), grounding_X245.v also uses D2tur.edge_count (ex(1; K_3) = 0); declared as for X242."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X245.v",
+      "name": "edge_count",
+      "note": "Wave X245 (2026-10-27) imports D2tur for is_turan_number (ex(n; H), row erdos:59) and imports GTBase LAST, so any unqualified edge_count is the canonical GTBase.common.edge_count; X245.v names is_turan_number only (edge_count appears in a comment), grounding_X245.v also uses D2tur.edge_count (ex(1; K_3) = 0); declared as for X242."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X245.v",
+      "name": "is_turan_number",
+      "note": "Wave X245 (2026-10-27) imports D2tur for is_turan_number (ex(n; H), row erdos:59) and imports GTBase LAST, so any unqualified edge_count is the canonical GTBase.common.edge_count; X245.v names is_turan_number only (edge_count appears in a comment), grounding_X245.v also uses D2tur.edge_count (ex(1; K_3) = 0); declared as for X242."
     }
   ],
   "distinct_variants": [
