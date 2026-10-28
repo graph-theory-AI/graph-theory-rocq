@@ -9181,6 +9181,86 @@
           }
         }
       }
+    },
+    "X252": {
+      "phase": "X252",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X252.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X252 (A3 verifier Arthur; routing Lancelot (123), (126), (127); selection x252-selection-by-marcol, design x252-design-by-marcol r1 and x252-design-r2-by-marcol), branch math/marcol-x252-20261028, 2026-10-28",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x252-two-degenerate-subdivision-dense-neighbourhoods",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "erdos_113": {
+          "formal_name": "bipartite_three_halves_iff_two_degenerate_statement",
+          "source_hash": "9fe54ee952f261a820a579eadd4aea9be1fe25c75f4bf9c3c5c67306b0099afd",
+          "note": "Erdos Problems #113, Erdos-Simonovits (false at the pin, pinned status solved, class_notes Solved (disproved): \"only if\" refuted by Janzer, arXiv:2109.06110v2, Theorem 1.4 (a 3-regular bipartite H with ex = O(n^{4/3+eps})); \"if\" refuted as erdos:146 at r = 2, X240 / CORPUS_FEEDBACK 23): a bipartite G has ex(n;G) << n^{3/2} (m^2 <= c n^3) iff no nonempty induced subgraph has minimum degree >= 3, encoded as stated (D2tur is_turan_number; GTBase bipartite, min_degree_at_least; upstream induced).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g252_deg_hyp_inhabited",
+              "claim": "g252_deg_hyp_claim",
+              "references": [
+                "bipartite_three_halves_iff_two_degenerate_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g252_deg_not_trivially_true",
+              "claim": "g252_deg_ntt_claim",
+              "references": [
+                "bipartite_three_halves_iff_two_degenerate_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1021": {
+          "formal_name": "one_subdivision_clique_turan_power_saving_statement",
+          "source_hash": "88b08e02a8b6707f73f8c73a755dd380a9612aa3ba3dd85d02925f3f4c6608b0",
+          "note": "Erdos Problems #1021, Erdos-Simonovits (proved before the pin, pinned status solved: Conlon and Lee, arXiv:1807.05008v2, Theorem 1.3; Janzer, arXiv:1809.00468v1, Theorem 3, c_k = 1/(4k - 6)): for every k >= 3 some c_k = 1/q with ex(n, G_k) << n^{3/2 - 1/q}, G_k the 1-subdivision of K_k, raised to the power 2q (D2tur is_turan_number; GTBase subdivision 'K_k 2).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g252_sd_hyp_inhabited",
+              "claim": "g252_sd_hyp_claim",
+              "references": [
+                "one_subdivision_clique_turan_power_saving_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g252_sd_not_trivially_true",
+              "claim": "g252_sd_ntt_claim",
+              "references": [
+                "one_subdivision_clique_turan_power_saving_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1079": {
+          "formal_name": "turan_density_neighbourhood_turan_statement",
+          "source_hash": "9961a51f04e9a0f6e0053500eb6b2ba653d9edc057d67f8d4cadb41eb31dc289",
+          "note": "Erdos Problems #1079, Erdos 1975 (proved before the pin, pinned status solved: Bollobas and Thomason, JCTB 31 (1981), the abstract; the Turan graph satisfies the non-strict row): for r >= 4 every graph on n >= 2 vertices with >= ex(n;K_r) edges has a vertex of degree d >= n/c_r whose neighbourhood spans >= ex(d;K_{r-1}) edges; Er75 prints ex + 1 in both places, the row ex (D2tur is_turan_number; GTBase edge_count; upstream induced, N(v)).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g252_nb_hyp_inhabited",
+              "claim": "g252_nb_hyp_claim",
+              "references": [
+                "turan_density_neighbourhood_turan_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g252_nb_not_trivially_true",
+              "claim": "g252_nb_ntt_claim",
+              "references": [
+                "turan_density_neighbourhood_turan_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
