@@ -8373,7 +8373,7 @@
         },
         "x248_subst_rel": {
           "classification": "paper_specific",
-          "reason": "the arc relation of x248_subst: the standard substitution (l.668 prints the two cross cases swapped; the proof at l.818 and [CPST13] read them as here)."
+          "reason": "the arc relation of x248_subst: the standard substitution (l.668 prints the two cross cases swapped; the proof reads them as here, l.785 (an arc of X marks a backward arc only when V(T_s) => V(T_s')), as does [CPST13])."
         },
         "x248_subst_closure": {
           "classification": "paper_specific",
@@ -8460,7 +8460,7 @@
         "axv_2310_04265_01": {
           "formal_name": "poly_chi_bounded_tournaments_subst_statement",
           "source_hash": "20d592857e4e4ef5e71bb5cf675f65bc2030e8dd38ad2cfe12911af490486ea2",
-          "note": "Aboulker, Aubian, Charbit, Lopes, Question 3.10: the substitution closure of a hereditary, polynomially dic-bounded class of tournaments is polynomially dic-bounded (c * t^d); the l.668 cases printed swapped are read as the standard substitution (l.818); open at the pin (x248_poly_dic_bounded, x248_hereditary, x248_subst, x248_subst_closure).",
+          "note": "Aboulker, Aubian, Charbit, Lopes, Question 3.10: the substitution closure of a hereditary, polynomially dic-bounded class of tournaments is polynomially dic-bounded (c * t^d); the l.668 cases printed swapped are read as the standard substitution (l.785); open at the pin (x248_poly_dic_bounded, x248_hereditary, x248_subst, x248_subst_closure).",
           "grounding": {
             "hyp_inhabited": {
               "theorem": "g248_poly_hyp_inhabited",

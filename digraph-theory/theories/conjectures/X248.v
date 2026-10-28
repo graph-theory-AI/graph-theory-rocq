@@ -125,9 +125,11 @@ Definition omega_dic_orderings_statement : Prop :=
       closure of C under substitution lies inside that of C', so the two readings agree. The
       closure is taken without isomorphic copies for the same reason. Substitution follows the
       standard definition: TeX l.668 prints the two arc cases swapped ("V(H_1) => v" when
-      vu is an arc), which the proof (l.818) and [CPST13] read as here. Polynomial means c * t^d
-      (see [x248_poly_dic_bounded]). The paper proves the non-polynomial version (Theorem 3.9,
-      with g(w) = (3w f(w))^w). Literature status: open at the pin (pinned status open). *)
+      vu is an arc); the proof reads them as here (l.785: an arc ss' of X with some vertex of
+      T_s' before some vertex of T_s marks a backward arc only when V(T_s) => V(T_s')), as does
+      [CPST13]. Polynomial means c * t^d (see [x248_poly_dic_bounded]). The paper proves the
+      non-polynomial version (Theorem 3.9, with g(w) = (3w f(w))^w). Literature status: open
+      at the pin (pinned status open). *)
 Definition poly_chi_bounded_tournaments_subst_statement : Prop :=
   forall C : diGraphType -> Prop, x248_hereditary C -> (forall D, C D -> is_tournament D) ->
     x248_poly_dic_bounded C -> x248_poly_dic_bounded (x248_subst_closure C).
