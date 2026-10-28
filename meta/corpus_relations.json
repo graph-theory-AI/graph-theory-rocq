@@ -17,7 +17,7 @@
    "plausible": 11
   },
   "n_unmapped_endpoints": 0,
-  "both_formalized": 153
+  "both_formalized": 155
  },
  "edges": [
   {
@@ -182,14 +182,14 @@
    "from_slug": "axv_2202_05557_00",
    "to_slug": "axv_2202_09118_02",
    "from_formal_name": "forest_free_polynomial_chi_bound_statement",
-   "to_formal_name": null,
+   "to_formal_name": "every_forest_is_good_duplicate_statement",
    "from_leg": "done",
-   "to_leg": "todo",
+   "to_leg": "done",
    "via_alias": {
     "from": null,
     "to": null
    },
-   "both_formalized": false,
+   "both_formalized": true,
    "rocq_edge": null,
    "argument": "Both statements are the polynomial strengthening of the Gyarfas-Sumner conjecture, with identical quantification and content: for every forest H, the class of H-free graphs is polynomially chi-bounded, i.e., there is a polynomial f with chi(G) <= f(omega(G)) for every H-free graph G. The target phrases it via the definition 'H is good' meaning exactly 'the class of H-free graphs is polynomially chi-bounded', and explicitly calls it the strengthening of Gyarfas-Sumner from chi-boundedness to polynomial chi-boundedness. Same forest quantifier, same graph class, same polynomial bound shape; not a fuzzy false match.",
    "citations": []
@@ -1632,15 +1632,15 @@
    "confidence": "high",
    "from_slug": "axv_2004_14789_00",
    "to_slug": "axv_2006_09877_01",
-   "from_formal_name": null,
+   "from_formal_name": "polynomial_expansion_bounded_twin_width_duplicate_statement",
    "to_formal_name": "polynomial_expansion_bounded_twin_width_statement",
-   "from_leg": "todo",
+   "from_leg": "done",
    "to_leg": "done",
    "via_alias": {
     "from": null,
     "to": null
    },
-   "both_formalized": false,
+   "both_formalized": true,
    "rocq_edge": null,
    "argument": "Both nodes pose the identical mathematical question: whether every graph class of polynomial expansion has bounded twin-width. The source phrases it as an informal remark/possible-inclusion in Twin-width I ('As far as we know, all classes of polynomial expansion may also have bounded twin-width'), the target as an explicit question in Twin-width II ('Do classes with polynomial expansion have bounded twin-width?'), both by the same line of work (Bonnet et al.). Same hypothesis class (polynomial expansion), same conclusion (bounded twin-width); only the speech-act (remark vs. question) differs. This is one open problem stated twice, not two problems.",
    "citations": [
