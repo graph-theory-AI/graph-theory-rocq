@@ -63,7 +63,7 @@ Theorem g249_not_trivially_true : g249_ntt_claim.
 Proof.
 split; last by move=> h H _; exact: h H.
 move=> h; have [c [d hb]] := h 'K_5.
-have := hb _ (g249_gap_graph_K5_free (c * 4 ^ d)).
+have := hb (gap_graph (c * 4 ^ d)) (@g249_gap_graph_K5_free (c * 4 ^ d)).
 case: (gap_graph_parameters (c * 4 ^ d)) => -> [_ ->].
 by rewrite -{2}[c * 4 ^ d]addn0 leq_add2l.
 Qed.
