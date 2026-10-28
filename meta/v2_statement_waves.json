@@ -8906,6 +8906,281 @@
           }
         }
       }
+    },
+    "X251": {
+      "phase": "X251",
+      "repo": "digraph-theory",
+      "defines_file": "X251.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X251 (A3 verifier Marcol; routing Lancelot (121) and (125); design x251-design-by-arthur r1 (244), Marcol's read (189)), branch math/arthur-x251-20261028, 2026-10-28",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x251-blowups-extensions-strong-eh",
+      "helper_ownership": {
+        "x251_blowup": {
+          "classification": "paper_specific",
+          "reason": "the vertex type of the k-blow-up D[k] of arXiv:2410.23566 l.176-181: the vertices of D times [k]."
+        },
+        "x251_blowup_rel": {
+          "classification": "paper_specific",
+          "reason": "the arc relation of the k-blow-up: an arc from every copy of u to every copy of v for every arc uv of D (the printed \"i <> j\" of l.180 is read as a misprint: l.177 and l.198)."
+        },
+        "x251_blowup_family": {
+          "classification": "paper_specific",
+          "reason": "the family F[k] = {D[k] | D in F} of l.182, up to digraph isomorphism (which preserves linear unavoidability)."
+        },
+        "x251_mad_le": {
+          "classification": "paper_specific",
+          "reason": "maximum average degree at most a (l.94-95): 2|A(D[S])| <= a |S| for every nonempty vertex set S; arcs counted (bounded mad is the same notion for the underlying graph)."
+        },
+        "x251_oriented_tree_of_order": {
+          "classification": "paper_specific",
+          "reason": "the digraphs isomorphic to an oriented tree of order n, X2's oriented_tree over orientedDigraph moved to diGraphType families for X221's x221_kextension."
+        },
+        "x251_seh": {
+          "classification": "paper_specific",
+          "reason": "the strong Erdos-Hajnal property of a tournament (arXiv:2202.13977 l.130-135): some c = 1/q with a pure pair of order at least c|G| in every H-free tournament G with more than one vertex."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "axv_2410_23566_01": {
+          "formal_name": "blowup_linear_unavoidability_statement",
+          "source_hash": "d10fdd2303327cb10a69ecfb5c3bc91d54256554e16541087a54c37a94a8cfa2",
+          "note": "Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud, Conjecture 7: the k-blow-ups (k positive) of a linearly unavoidable family of bounded maximum average degree are linearly unavoidable; the printed \"i <> j\" in the arc set (l.180) is read as a misprint; partial at the pin (proved for oriented trees) (x251_blowup, x251_blowup_family, x251_mad_le).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g251_blowup_hyp_inhabited",
+              "claim": "g251_blowup_hyp_claim",
+              "references": [
+                "blowup_linear_unavoidability_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g251_blowup_not_trivially_true",
+              "claim": "g251_blowup_ntt_claim",
+              "references": [
+                "blowup_linear_unavoidability_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g251_blowup_helper_sanity",
+                "claim": "g251_blowup_helper_claim",
+                "references": [
+                  "x251_blowup",
+                  "x251_blowup_rel"
+                ]
+              },
+              {
+                "theorem": "g251_blowup_family_helper_sanity",
+                "claim": "g251_blowup_family_helper_claim",
+                "references": [
+                  "x251_blowup_family"
+                ]
+              },
+              {
+                "theorem": "g251_mad_helper_sanity",
+                "claim": "g251_mad_helper_claim",
+                "references": [
+                  "x251_mad_le"
+                ]
+              },
+              {
+                "theorem": "g251_tree_helper_sanity",
+                "claim": "g251_tree_helper_claim",
+                "references": [
+                  "x251_oriented_tree_of_order"
+                ]
+              },
+              {
+                "theorem": "g251_seh_helper_sanity",
+                "claim": "g251_seh_helper_claim",
+                "references": [
+                  "x251_seh"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2410_23566_04": {
+          "formal_name": "kextension_oriented_tree_unavoidability_statement",
+          "source_hash": "c6df75568fa5b91e39d8e06711f1caaf75ba8cbe951bd76965b080db36536ccb",
+          "note": "Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud, Conjecture 10: an absolute C with every k-extension (k positive) of an oriented tree of order n > 1 C^k (2n-2)-unavoidable; the guard n > 1 is Sumner's (l.136), from which the conjecture is derived; open at the pin (x221_kextension, x251_oriented_tree_of_order).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g251_kext_hyp_inhabited",
+              "claim": "g251_kext_hyp_claim",
+              "references": [
+                "kextension_oriented_tree_unavoidability_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g251_kext_not_trivially_true",
+              "claim": "g251_kext_ntt_claim",
+              "references": [
+                "kextension_oriented_tree_unavoidability_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g251_blowup_helper_sanity",
+                "claim": "g251_blowup_helper_claim",
+                "references": [
+                  "x251_blowup",
+                  "x251_blowup_rel"
+                ]
+              },
+              {
+                "theorem": "g251_blowup_family_helper_sanity",
+                "claim": "g251_blowup_family_helper_claim",
+                "references": [
+                  "x251_blowup_family"
+                ]
+              },
+              {
+                "theorem": "g251_mad_helper_sanity",
+                "claim": "g251_mad_helper_claim",
+                "references": [
+                  "x251_mad_le"
+                ]
+              },
+              {
+                "theorem": "g251_tree_helper_sanity",
+                "claim": "g251_tree_helper_claim",
+                "references": [
+                  "x251_oriented_tree_of_order"
+                ]
+              },
+              {
+                "theorem": "g251_seh_helper_sanity",
+                "claim": "g251_seh_helper_claim",
+                "references": [
+                  "x251_seh"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2202_13977_00": {
+          "formal_name": "strong_eh_iff_forest_backedge_statement",
+          "source_hash": "78beabdb9a93752047fb2fe2e6a5c95de8fee81aa34e89c0932c8fc1e2111c39",
+          "note": "Chudnovsky, Scott, Seymour, Spirkl, Conjecture 1.5: a tournament has the strong EH-property iff some numbering has a forest backedge graph, encoded as stated; the \"only if\" direction is the source's Theorem 1.4; open at the pin (x251_seh).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g251_seh_hyp_inhabited",
+              "claim": "g251_seh_hyp_claim",
+              "references": [
+                "strong_eh_iff_forest_backedge_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g251_seh_not_trivially_true",
+              "claim": "g251_seh_ntt_claim",
+              "references": [
+                "strong_eh_iff_forest_backedge_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g251_blowup_helper_sanity",
+                "claim": "g251_blowup_helper_claim",
+                "references": [
+                  "x251_blowup",
+                  "x251_blowup_rel"
+                ]
+              },
+              {
+                "theorem": "g251_blowup_family_helper_sanity",
+                "claim": "g251_blowup_family_helper_claim",
+                "references": [
+                  "x251_blowup_family"
+                ]
+              },
+              {
+                "theorem": "g251_mad_helper_sanity",
+                "claim": "g251_mad_helper_claim",
+                "references": [
+                  "x251_mad_le"
+                ]
+              },
+              {
+                "theorem": "g251_tree_helper_sanity",
+                "claim": "g251_tree_helper_claim",
+                "references": [
+                  "x251_oriented_tree_of_order"
+                ]
+              },
+              {
+                "theorem": "g251_seh_helper_sanity",
+                "claim": "g251_seh_helper_claim",
+                "references": [
+                  "x251_seh"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2202_13977_01": {
+          "formal_name": "three_backedges_strong_eh_statement",
+          "source_hash": "5ef2b905c28ad4f5a58c6bdd8a35a5bb36e6cbd00dd5b9d59a1487afb9af8c51",
+          "note": "Chudnovsky, Scott, Seymour, Spirkl, Theorem 1.6 without its D_5-freeness sentence (left open, l.258): every tournament with a numbering of at most three backedges has the strong EH-property; open at the pin (x251_seh).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g251_three_hyp_inhabited",
+              "claim": "g251_three_hyp_claim",
+              "references": [
+                "three_backedges_strong_eh_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g251_three_not_trivially_true",
+              "claim": "g251_three_ntt_claim",
+              "references": [
+                "three_backedges_strong_eh_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g251_blowup_helper_sanity",
+                "claim": "g251_blowup_helper_claim",
+                "references": [
+                  "x251_blowup",
+                  "x251_blowup_rel"
+                ]
+              },
+              {
+                "theorem": "g251_blowup_family_helper_sanity",
+                "claim": "g251_blowup_family_helper_claim",
+                "references": [
+                  "x251_blowup_family"
+                ]
+              },
+              {
+                "theorem": "g251_mad_helper_sanity",
+                "claim": "g251_mad_helper_claim",
+                "references": [
+                  "x251_mad_le"
+                ]
+              },
+              {
+                "theorem": "g251_tree_helper_sanity",
+                "claim": "g251_tree_helper_claim",
+                "references": [
+                  "x251_oriented_tree_of_order"
+                ]
+              },
+              {
+                "theorem": "g251_seh_helper_sanity",
+                "claim": "g251_seh_helper_claim",
+                "references": [
+                  "x251_seh"
+                ]
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
