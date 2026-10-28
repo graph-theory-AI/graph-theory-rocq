@@ -9261,6 +9261,64 @@
           }
         }
       }
+    },
+    "X253": {
+      "phase": "X253",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X253.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X253 (A3 verifier Arthur; routing Lancelot (138); selection x253-selection-by-marcol, design x253-design-by-marcol r1), branch math/marcol-x253-20261028, 2026-10-28",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x253-apex-subdivision-multipartite-clique",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "erdos_926": {
+          "formal_name": "clique_subdivision_apex_turan_three_halves_statement",
+          "source_hash": "0f276d01fea3bad57d1d1d3f1e16cbf6dc9fac2e86fa8b4e790570b96d480671",
+          "note": "Erdos Problems #926, Erdos (proved before the pin, pinned status solved: Furedi, Combinatorica 11 (1991) 75-79, an n-vertex graph with >= k^{3/2} n^{3/2} edges contains L^k = H_k): for every k >= 4, ex(n;H_k) <<_k n^{3/2} (m^2 <= c n^3), H_k the 1-subdivision of K_k with a vertex joined to its k branch vertices (D2tur is_turan_number; GTBase subdivision; upstream add_node).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g253_ap_hyp_inhabited",
+              "claim": "g253_ap_hyp_claim",
+              "references": [
+                "clique_subdivision_apex_turan_three_halves_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g253_ap_not_trivially_true",
+              "claim": "g253_ap_ntt_claim",
+              "references": [
+                "clique_subdivision_apex_turan_three_halves_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1078": {
+          "formal_name": "balanced_multipartite_min_degree_clique_statement",
+          "source_hash": "6fc1de3b50f89b66c428c3e0defead14759af37cc18727664d4f514e7b9adc1e",
+          "note": "Erdos Problems #1078, Bollobas-Erdos-Szemeredi 1975 (proved before the pin, pinned status solved: Haxell, CPC 10 (2001); exact threshold Haxell-Szabo, CPC 15 (2006)): the o(1) as in BES75b p.98 (c_r = lim_n f_r(n)/n, conjecture lim_r (c_r - r + 2) = 1/2), its forcing half: for every q >= 1, for all large r and then all large n, an r-partite graph with n vertices in each part and minimum degree >= (r - 3/2 + 1/q) n contains K_r (GTBase has_subgraph; upstream N(v)); Er75 p.12 prints the stronger fixed-r form, not encoded.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g253_mp_hyp_inhabited",
+              "claim": "g253_mp_hyp_claim",
+              "references": [
+                "balanced_multipartite_min_degree_clique_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g253_mp_not_trivially_true",
+              "claim": "g253_mp_ntt_claim",
+              "references": [
+                "balanced_multipartite_min_degree_clique_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
