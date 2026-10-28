@@ -108,6 +108,16 @@
       "path": "minor-theory/theories/conjectures/grounding_X220.v",
       "name": "polynomial_expansion_bounded_twin_width_statement",
       "note": "Print Assumptions vernacular on the unchanged row; no proof depends on it."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X250.v",
+      "name": "polynomial_expansion_bounded_twin_width_statement",
+      "note": "Wave X250 (2026-10-28): X250.v defines the synonym polynomial_expansion_bounded_twin_width_duplicate_statement as this unchanged X220 statement, a reference at its exact type; no proof depends on it."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X250.v",
+      "name": "x220_polynomial_expansion",
+      "note": "Wave X250 (2026-10-28): g250_edgeless_poly_expansion and g250_hyp_claim use the predicate at its exact type; the proof destructures the canonical model only for the last field of minor_rmap (each edge of H is realised by an edge of G)."
     }
   ],
   "distinct_variants": [

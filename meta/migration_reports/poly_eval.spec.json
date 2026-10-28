@@ -175,6 +175,16 @@
       "path": "chromatic-theory/theories/conjectures/grounding_X238.v",
       "name": "horner_nat",
       "note": "Wave X238 (2026-10-27) names the canonical GTBase.poly_nat.horner_nat, imported from GTBase.poly_nat (Chromatic.foundations.chi_bounding is not imported); the public source Chromatic.foundations.chi_bounding.horner_nat only shares its short name. Not a use of that source."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/X250.v",
+      "name": "polynomial_expansion_bounded_twin_width_statement",
+      "note": "Wave X250 (2026-10-28): X250.v defines the synonym polynomial_expansion_bounded_twin_width_duplicate_statement as this unchanged X220 statement, a reference at its exact type; no proof depends on it."
+    },
+    {
+      "path": "minor-theory/theories/conjectures/grounding_X250.v",
+      "name": "x220_polynomial_expansion",
+      "note": "Wave X250 (2026-10-28): g250_edgeless_poly_expansion and g250_hyp_claim use the predicate at its exact type with the witness polynomial [::]; the proof shows E(H) = set0 and closes 0 <= x220_poly_eval [::] r * #|H| without unfolding the evaluation."
     }
   ],
   "distinct_variants": [],
