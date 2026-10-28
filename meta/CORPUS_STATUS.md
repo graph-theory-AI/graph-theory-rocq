@@ -290,7 +290,7 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 > Programme plan: `meta/V2_FULL_CORPUS_PLAN.md`. A growing corpus: `todo` rows are expected until the M-V2-STATEMENT-COMPLETE release; the gate here checks consistency, not completion.
 
 - **1790 tracked rows** — by corpus tag: arxiv 768, arxiv-studied 568, bm 38, derived 138, erdos 277, others 1; **117 alias rows** (no statement owed).
-- Statement legs over the 1673 non-alias rows: **503 done** · 11 partial · 40 blocked · 1119 todo.
+- Statement legs over the 1673 non-alias rows: **510 done** · 11 partial · 40 blocked · 1112 todo.
 
 | v2 phase | done | partial | blocked | todo | total |
 |---|--:|--:|--:|--:|--:|
@@ -461,6 +461,8 @@ Per-row provenance (the commit + package that landed each leg) lives in `meta/op
 | X249 | 1 | 0 | 0 | 0 | 1 |
 | X25 | 1 | 0 | 0 | 0 | 1 |
 | X250 | 1 | 0 | 0 | 0 | 1 |
+| X251 | 4 | 0 | 0 | 0 | 4 |
+| X252 | 3 | 0 | 0 | 0 | 3 |
 | X26 | 1 | 0 | 0 | 0 | 1 |
 | X27 | 1 | 0 | 0 | 0 | 1 |
 | X28 | 1 | 0 | 0 | 0 | 1 |

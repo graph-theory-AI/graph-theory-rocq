@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2145,
-      "cross_file_files": 1076,
+      "cross_file_declarations": 2167,
+      "cross_file_files": 1086,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -7569,14 +7569,20 @@
           "certificates_of": [],
           "declarations": [
             "digraph-theory/theories/conjectures/X17.v:sumner_oriented_tree_unavoidable_statement",
-            "digraph-theory/theories/conjectures/grounding_X221.v:x221_unavoidable_void"
+            "digraph-theory/theories/conjectures/X251.v:kextension_oriented_tree_unavoidability_statement",
+            "digraph-theory/theories/conjectures/grounding_X221.v:x221_unavoidable_void",
+            "digraph-theory/theories/conjectures/grounding_X251.v:g251_kext_any_order",
+            "digraph-theory/theories/conjectures/grounding_X251.v:g251_kext_hyp_claim"
           ],
           "files": [
             "digraph-theory/theories/conjectures/X17.v",
-            "digraph-theory/theories/conjectures/grounding_X221.v"
+            "digraph-theory/theories/conjectures/X251.v",
+            "digraph-theory/theories/conjectures/grounding_X221.v",
+            "digraph-theory/theories/conjectures/grounding_X251.v"
           ],
           "statements": [
-            "digraph-theory/theories/conjectures/X17.v:sumner_oriented_tree_unavoidable_statement"
+            "digraph-theory/theories/conjectures/X17.v:sumner_oriented_tree_unavoidable_statement",
+            "digraph-theory/theories/conjectures/X251.v:kextension_oriented_tree_unavoidability_statement"
           ],
           "undecided": [],
           "unlisted": []
@@ -7596,7 +7602,9 @@
         "provider_unlisted": false,
         "require_chain": {
           "digraph-theory/theories/conjectures/X17.v": "no",
-          "digraph-theory/theories/conjectures/grounding_X221.v": "no"
+          "digraph-theory/theories/conjectures/X251.v": "no",
+          "digraph-theory/theories/conjectures/grounding_X221.v": "no",
+          "digraph-theory/theories/conjectures/grounding_X251.v": "no"
         },
         "same_file": {
           "declarations": [
@@ -7617,8 +7625,10 @@
             "digraph-theory/theories/conjectures/X17.v:<line 6>",
             "digraph-theory/theories/conjectures/X221.v:<line 7>",
             "digraph-theory/theories/conjectures/X246.v:<line 20>",
+            "digraph-theory/theories/conjectures/X251.v:<line 20>",
             "digraph-theory/theories/conjectures/grounding_X221.v:<line 42>",
             "digraph-theory/theories/conjectures/grounding_X246.v:<line 17>",
+            "digraph-theory/theories/conjectures/grounding_X251.v:<line 19>",
             "digraph-theory/theories/conjectures/grounding_edges.v:<line 55>",
             "digraph-theory/theories/conjectures/grounding_edges.v:conj9_weaken_const'",
             "digraph-theory/theories/conjectures/grounding_fas_unvd.v:<line 28>",
@@ -7642,8 +7652,10 @@
             "digraph-theory/theories/conjectures/X17.v",
             "digraph-theory/theories/conjectures/X221.v",
             "digraph-theory/theories/conjectures/X246.v",
+            "digraph-theory/theories/conjectures/X251.v",
             "digraph-theory/theories/conjectures/grounding_X221.v",
             "digraph-theory/theories/conjectures/grounding_X246.v",
+            "digraph-theory/theories/conjectures/grounding_X251.v",
             "digraph-theory/theories/conjectures/grounding_edges.v",
             "digraph-theory/theories/conjectures/grounding_fas_unvd.v",
             "digraph-theory/theories/conjectures/grounding_omegabar_unvd.v",
@@ -7679,8 +7691,10 @@
           "digraph-theory/theories/conjectures/X17.v": "no",
           "digraph-theory/theories/conjectures/X221.v": "no",
           "digraph-theory/theories/conjectures/X246.v": "no",
+          "digraph-theory/theories/conjectures/X251.v": "no",
           "digraph-theory/theories/conjectures/grounding_X221.v": "no",
           "digraph-theory/theories/conjectures/grounding_X246.v": "no",
+          "digraph-theory/theories/conjectures/grounding_X251.v": "no",
           "digraph-theory/theories/conjectures/grounding_edges.v": "no",
           "digraph-theory/theories/conjectures/grounding_fas_unvd.v": "no",
           "digraph-theory/theories/conjectures/grounding_omegabar_unvd.v": "no",
@@ -8156,6 +8170,7 @@
             "extremal-graph-theory/theories/conjectures/X244.v:bipartite_subgraph_edwards_excess_unbounded_statement",
             "extremal-graph-theory/theories/conjectures/X247.v:c4_copies_above_ex_statement",
             "extremal-graph-theory/theories/conjectures/X247.v:triangle_degree_sum_above_quarter_statement",
+            "extremal-graph-theory/theories/conjectures/X252.v:turan_density_neighbourhood_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:x4_edge_count",
             "extremal-graph-theory/theories/conjectures/X76.v:x76_edge_count",
             "extremal-graph-theory/theories/conjectures/X78.v:x78_edge_count",
@@ -8226,6 +8241,11 @@
             "extremal-graph-theory/theories/conjectures/grounding_X247.v:g247_c4_hyp_claim",
             "extremal-graph-theory/theories/conjectures/grounding_X247.v:g247_complete_of_count",
             "extremal-graph-theory/theories/conjectures/grounding_X247.v:g247_tri_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:<line 135>",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:<line 153>",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:<line 90>",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:g252_nb_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:g252_nb_no_turan",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 14>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 21>",
             "extremal-graph-theory/theories/migration/cut_size.v:<line 13>",
@@ -8259,6 +8279,7 @@
             "extremal-graph-theory/theories/conjectures/X243.v",
             "extremal-graph-theory/theories/conjectures/X244.v",
             "extremal-graph-theory/theories/conjectures/X247.v",
+            "extremal-graph-theory/theories/conjectures/X252.v",
             "extremal-graph-theory/theories/conjectures/X4.v",
             "extremal-graph-theory/theories/conjectures/X76.v",
             "extremal-graph-theory/theories/conjectures/X78.v",
@@ -8274,6 +8295,7 @@
             "extremal-graph-theory/theories/conjectures/grounding_X244.v",
             "extremal-graph-theory/theories/conjectures/grounding_X245.v",
             "extremal-graph-theory/theories/conjectures/grounding_X247.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v",
             "extremal-graph-theory/theories/migration/clique_counts.v",
             "extremal-graph-theory/theories/migration/cut_size.v",
             "extremal-graph-theory/theories/migration/cycle_lengths.v",
@@ -8306,6 +8328,7 @@
             "extremal-graph-theory/theories/conjectures/X244.v:bipartite_subgraph_edwards_excess_unbounded_statement",
             "extremal-graph-theory/theories/conjectures/X247.v:c4_copies_above_ex_statement",
             "extremal-graph-theory/theories/conjectures/X247.v:triangle_degree_sum_above_quarter_statement",
+            "extremal-graph-theory/theories/conjectures/X252.v:turan_density_neighbourhood_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:book_triangle_edge_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:c5_edge_count_above_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:triangle_supersaturation_statement",
@@ -8346,6 +8369,7 @@
           "extremal-graph-theory/theories/conjectures/X243.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X244.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X247.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/X252.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X4.v": "no",
           "extremal-graph-theory/theories/conjectures/X76.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X78.v": "unknown",
@@ -8361,6 +8385,7 @@
           "extremal-graph-theory/theories/conjectures/grounding_X244.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X245.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X247.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X252.v": "unknown",
           "extremal-graph-theory/theories/migration/clique_counts.v": "no",
           "extremal-graph-theory/theories/migration/cut_size.v": "no",
           "extremal-graph-theory/theories/migration/cycle_lengths.v": "unknown",
@@ -8662,6 +8687,7 @@
             "extremal-graph-theory/theories/conjectures/X244.v:bipartite_subgraph_edwards_excess_unbounded_statement",
             "extremal-graph-theory/theories/conjectures/X247.v:c4_copies_above_ex_statement",
             "extremal-graph-theory/theories/conjectures/X247.v:triangle_degree_sum_above_quarter_statement",
+            "extremal-graph-theory/theories/conjectures/X252.v:turan_density_neighbourhood_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:x4_edge_count",
             "extremal-graph-theory/theories/conjectures/X76.v:x76_edge_count",
             "extremal-graph-theory/theories/conjectures/X78.v:x78_edge_count",
@@ -8732,6 +8758,11 @@
             "extremal-graph-theory/theories/conjectures/grounding_X247.v:g247_c4_hyp_claim",
             "extremal-graph-theory/theories/conjectures/grounding_X247.v:g247_complete_of_count",
             "extremal-graph-theory/theories/conjectures/grounding_X247.v:g247_tri_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:<line 135>",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:<line 153>",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:<line 90>",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:g252_nb_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:g252_nb_no_turan",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 14>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 21>",
             "extremal-graph-theory/theories/migration/cut_size.v:<line 13>",
@@ -8765,6 +8796,7 @@
             "extremal-graph-theory/theories/conjectures/X243.v",
             "extremal-graph-theory/theories/conjectures/X244.v",
             "extremal-graph-theory/theories/conjectures/X247.v",
+            "extremal-graph-theory/theories/conjectures/X252.v",
             "extremal-graph-theory/theories/conjectures/X4.v",
             "extremal-graph-theory/theories/conjectures/X76.v",
             "extremal-graph-theory/theories/conjectures/X78.v",
@@ -8780,6 +8812,7 @@
             "extremal-graph-theory/theories/conjectures/grounding_X244.v",
             "extremal-graph-theory/theories/conjectures/grounding_X245.v",
             "extremal-graph-theory/theories/conjectures/grounding_X247.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v",
             "extremal-graph-theory/theories/migration/clique_counts.v",
             "extremal-graph-theory/theories/migration/cut_size.v",
             "extremal-graph-theory/theories/migration/cycle_lengths.v",
@@ -8811,6 +8844,7 @@
             "extremal-graph-theory/theories/conjectures/X244.v:bipartite_subgraph_edwards_excess_unbounded_statement",
             "extremal-graph-theory/theories/conjectures/X247.v:c4_copies_above_ex_statement",
             "extremal-graph-theory/theories/conjectures/X247.v:triangle_degree_sum_above_quarter_statement",
+            "extremal-graph-theory/theories/conjectures/X252.v:turan_density_neighbourhood_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:book_triangle_edge_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:c5_edge_count_above_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:triangle_supersaturation_statement",
@@ -8851,6 +8885,7 @@
           "extremal-graph-theory/theories/conjectures/X243.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X244.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X247.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/X252.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X4.v": "no",
           "extremal-graph-theory/theories/conjectures/X76.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X78.v": "unknown",
@@ -8866,6 +8901,7 @@
           "extremal-graph-theory/theories/conjectures/grounding_X244.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X245.v": "yes",
           "extremal-graph-theory/theories/conjectures/grounding_X247.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X252.v": "yes",
           "extremal-graph-theory/theories/migration/clique_counts.v": "no",
           "extremal-graph-theory/theories/migration/cut_size.v": "no",
           "extremal-graph-theory/theories/migration/cycle_lengths.v": "unknown",
@@ -22004,6 +22040,7 @@
             "extremal-graph-theory/theories/conjectures/X239.v:rational_turan_exponent_statement",
             "extremal-graph-theory/theories/conjectures/X240.v:degenerate_bipartite_turan_exponent_statement",
             "extremal-graph-theory/theories/conjectures/X242.v:bipartite_min_degree_turan_exponent_statement",
+            "extremal-graph-theory/theories/conjectures/X252.v:bipartite_three_halves_iff_two_degenerate_statement",
             "extremal-graph-theory/theories/conjectures/X30.v:x30_bipartite_induced_log_min_degree",
             "extremal-graph-theory/theories/conjectures/XE1.v:erdos_23_statement",
             "extremal-graph-theory/theories/conjectures/XE2.v:erdos_73_statement",
@@ -22024,6 +22061,10 @@
             "extremal-graph-theory/theories/conjectures/grounding_X242.v:g242_K22_bipartite",
             "extremal-graph-theory/theories/conjectures/grounding_X242.v:g242_mindeg_hyp_claim",
             "extremal-graph-theory/theories/conjectures/grounding_X242.v:g242_mindeg_no_turan",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:<line 48>",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:g252_K33_bipartite",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:g252_deg_hyp_claim",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v:g252_deg_plus_two_degenerate",
             "extremal-graph-theory/theories/migration/delete_edges.v:bipartite_diso",
             "extremal-graph-theory/theories/migration/delete_edges.v:bipartite_plus_bounded_degree",
             "extremal-graph-theory/theories/migration/delete_edges.v:erdos_23_statement",
@@ -22075,6 +22116,7 @@
             "extremal-graph-theory/theories/conjectures/X239.v",
             "extremal-graph-theory/theories/conjectures/X240.v",
             "extremal-graph-theory/theories/conjectures/X242.v",
+            "extremal-graph-theory/theories/conjectures/X252.v",
             "extremal-graph-theory/theories/conjectures/X30.v",
             "extremal-graph-theory/theories/conjectures/XE1.v",
             "extremal-graph-theory/theories/conjectures/XE2.v",
@@ -22083,6 +22125,7 @@
             "extremal-graph-theory/theories/conjectures/grounding_X239.v",
             "extremal-graph-theory/theories/conjectures/grounding_X240.v",
             "extremal-graph-theory/theories/conjectures/grounding_X242.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X252.v",
             "extremal-graph-theory/theories/migration/delete_edges.v",
             "extremal-graph-theory/theories/migration/edge_count.v",
             "extremal-graph-theory/theories/migration/min_degree_at_least.v",
@@ -22113,6 +22156,7 @@
             "extremal-graph-theory/theories/conjectures/X239.v:rational_turan_exponent_statement",
             "extremal-graph-theory/theories/conjectures/X240.v:degenerate_bipartite_turan_exponent_statement",
             "extremal-graph-theory/theories/conjectures/X242.v:bipartite_min_degree_turan_exponent_statement",
+            "extremal-graph-theory/theories/conjectures/X252.v:bipartite_three_halves_iff_two_degenerate_statement",
             "extremal-graph-theory/theories/conjectures/X30.v:triangle_free_min_degree_log_bipartite_induced_statement",
             "extremal-graph-theory/theories/conjectures/XE1.v:erdos_23_statement",
             "extremal-graph-theory/theories/conjectures/XE2.v:erdos_613_statement",
@@ -22157,6 +22201,7 @@
           "extremal-graph-theory/theories/conjectures/X239.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X240.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X242.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/X252.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X30.v": "unknown",
           "extremal-graph-theory/theories/conjectures/XE1.v": "unknown",
           "extremal-graph-theory/theories/conjectures/XE2.v": "unknown",
@@ -22165,6 +22210,7 @@
           "extremal-graph-theory/theories/conjectures/grounding_X239.v": "no",
           "extremal-graph-theory/theories/conjectures/grounding_X240.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X242.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X252.v": "unknown",
           "extremal-graph-theory/theories/migration/delete_edges.v": "unknown",
           "extremal-graph-theory/theories/migration/edge_count.v": "unknown",
           "extremal-graph-theory/theories/migration/min_degree_at_least.v": "unknown",
@@ -24770,13 +24816,13 @@
     ]
   },
   "counts": {
-    "files": 343,
-    "helpers": 2700,
+    "files": 345,
+    "helpers": 2706,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 219,
-    "repeated_signature_shapes": 328,
-    "statements_excluded": 783,
-    "x_wave_helpers": 1539
+    "repeated_signature_shapes": 329,
+    "statements_excluded": 790,
+    "x_wave_helpers": 1545
   },
   "groups": {
     "body_shape_hash": {
@@ -28389,6 +28435,10 @@
       "b0078a7d98c08b1a4d4eec737a01ec561b08bed4f113cc1a0cb8a58230d3148f": [
         "Chromatic.conjectures.X33.x33_total_vertex",
         "Chromatic.conjectures.X43.x43_line_vertex"
+      ],
+      "b0dfe6ba147f7a2cc271fe001f31842cf4c6c3bcf9670d82812ca0f713ab47d7": [
+        "Digraph.conjectures.X193.x193_independence_number",
+        "Digraph.conjectures.X251.x251_mad_le"
       ],
       "b14cf0f39677bd91c15ddbac2c09cd8efab2992b68ea34fd94eb5549d405de6b": [
         "Chromatic.conjectures.U4.Delta_edge_critical",
@@ -43211,6 +43261,124 @@
       "qualified_name": "Digraph.conjectures.X248.x248_subst_closure",
       "signature": "(C : diGraphType -> Prop) : diGraphType -> Prop",
       "signature_shape_hash": "a5546f8706d92c1be2cfbd2ad954e692904266f1667e6ba97e49359b307e169a"
+    },
+    {
+      "body_hash": "314c2ae50d78dd036a0a3414b3a4a17006a254761df82ae51ed6591be5e6d0c0",
+      "body_shape_hash": "314c2ae50d78dd036a0a3414b3a4a17006a254761df82ae51ed6591be5e6d0c0",
+      "declaration_hash": "b76eea8be08d689040bbd158c7c112a0380b3b924fe4c3f3a81da37cafb033e2",
+      "direct_consumers": [
+        "Digraph.conjectures.X251.x251_blowup_family",
+        "Digraph.conjectures.X251.x251_blowup_rel"
+      ],
+      "kind": "Definition",
+      "line": 26,
+      "local_dependencies": [],
+      "name": "x251_blowup",
+      "normalized_name": "blowup",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X251.v",
+      "phase": "X251",
+      "qualified_name": "Digraph.conjectures.X251.x251_blowup",
+      "signature": "(D : diGraphType) (k : nat) : Type",
+      "signature_shape_hash": "cf7628902208f358bc627a458139c9472dfa69785c35759fc61cb76546d6783d"
+    },
+    {
+      "body_hash": "71c3ccd2b4830987d36a8ad0cde1eb161f7baa8f747a1a1f7f37b97099999b67",
+      "body_shape_hash": "71c3ccd2b4830987d36a8ad0cde1eb161f7baa8f747a1a1f7f37b97099999b67",
+      "declaration_hash": "379b43a60f46455fd670b6fcc0c4ea888f2aa9612ce9881b79d11b59238e19b2",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 36,
+      "local_dependencies": [
+        "x251_blowup"
+      ],
+      "name": "x251_blowup_rel",
+      "normalized_name": "blowup_rel",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X251.v",
+      "phase": "X251",
+      "qualified_name": "Digraph.conjectures.X251.x251_blowup_rel",
+      "signature": "(a b : x251_blowup D k) : bool",
+      "signature_shape_hash": "2d149318317271c0d744b26170886013dc02259c814aea5d45cd332106324ad8"
+    },
+    {
+      "body_hash": "99767d6fc43cfd979eb7296ad06fcc7ba50c48904ff2b902eaf215f5a09ce8c6",
+      "body_shape_hash": "2d9900911d541dfd3ad971070dfec14233d49b52624604df2a3aa1ef9a52a92a",
+      "declaration_hash": "f8df91ba724190af7a0f2883ff6f9670af2af9635b1c8f7b067bba2fea0adff6",
+      "direct_consumers": [
+        "Digraph.conjectures.X251.blowup_linear_unavoidability_statement"
+      ],
+      "kind": "Definition",
+      "line": 39,
+      "local_dependencies": [
+        "x251_blowup"
+      ],
+      "name": "x251_blowup_family",
+      "normalized_name": "blowup_family",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X251.v",
+      "phase": "X251",
+      "qualified_name": "Digraph.conjectures.X251.x251_blowup_family",
+      "signature": "(k : nat) (F : diGraphType -> Prop) (E : diGraphType) : Prop",
+      "signature_shape_hash": "31ff2b74ffc052d4db841d09be838f802f01b146d755ac04912005242f08bc99"
+    },
+    {
+      "body_hash": "70f6e406e53a82700b8ad75bc412ec62d594264cf7d8d3c3a8382cecfab34f8f",
+      "body_shape_hash": "70f6e406e53a82700b8ad75bc412ec62d594264cf7d8d3c3a8382cecfab34f8f",
+      "declaration_hash": "2965984f7110396c3b7c5d708192fff78b6c452fc68bc394659990e89b9d4f7a",
+      "direct_consumers": [
+        "Digraph.conjectures.X251.blowup_linear_unavoidability_statement"
+      ],
+      "kind": "Definition",
+      "line": 43,
+      "local_dependencies": [],
+      "name": "x251_mad_le",
+      "normalized_name": "mad_le",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X251.v",
+      "phase": "X251",
+      "qualified_name": "Digraph.conjectures.X251.x251_mad_le",
+      "signature": "(D : diGraphType) (a : nat) : Prop",
+      "signature_shape_hash": "b0dfe6ba147f7a2cc271fe001f31842cf4c6c3bcf9670d82812ca0f713ab47d7"
+    },
+    {
+      "body_hash": "b6f8a6a4dbfbd102fd5a4a2578a35ef9cd1b2498f43a1f13c2a8f05debaf46c7",
+      "body_shape_hash": "b6f8a6a4dbfbd102fd5a4a2578a35ef9cd1b2498f43a1f13c2a8f05debaf46c7",
+      "declaration_hash": "ebd19a164fe6f451d8e87afcc71dbbf33e320508df73f1c4f82db02ecd6f3a70",
+      "direct_consumers": [
+        "Digraph.conjectures.X251.kextension_oriented_tree_unavoidability_statement"
+      ],
+      "kind": "Definition",
+      "line": 48,
+      "local_dependencies": [],
+      "name": "x251_oriented_tree_of_order",
+      "normalized_name": "oriented_tree_of_order",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X251.v",
+      "phase": "X251",
+      "qualified_name": "Digraph.conjectures.X251.x251_oriented_tree_of_order",
+      "signature": "(n : nat) (A : diGraphType) : Prop",
+      "signature_shape_hash": "6d56823c640d8a20e0d3648237e241cf317c04ba8e83d45076c1b8dedc1345af"
+    },
+    {
+      "body_hash": "dffb0ad4080cab590639db4c4738c54e81fe948f80f7ac771bf157b144a2f670",
+      "body_shape_hash": "dffb0ad4080cab590639db4c4738c54e81fe948f80f7ac771bf157b144a2f670",
+      "declaration_hash": "b544979c491baa1421d722b2cfddea960c820f25996d0f0f1197e6c0c4535764",
+      "direct_consumers": [
+        "Digraph.conjectures.X251.strong_eh_iff_forest_backedge_statement",
+        "Digraph.conjectures.X251.three_backedges_strong_eh_statement"
+      ],
+      "kind": "Definition",
+      "line": 52,
+      "local_dependencies": [],
+      "name": "x251_seh",
+      "normalized_name": "seh",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X251.v",
+      "phase": "X251",
+      "qualified_name": "Digraph.conjectures.X251.x251_seh",
+      "signature": "(H : tournament) : Prop",
+      "signature_shape_hash": "ed99a9af62d255906573b985a5d056ffe406ff17014732b7ec492ff8364fcf92"
     },
     {
       "body_hash": "029f2f2794eaf5bf3d7a0a3ba0f37074a7057a1c5a85ad5a84997a15f7db614d",
