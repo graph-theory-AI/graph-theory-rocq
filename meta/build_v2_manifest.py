@@ -26,14 +26,16 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Five
+corrections are applied explicitly (ERRATA below) since the review files predate them. Eleven
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
 wave X238, the path question arxiv:2202.05557#01 is solved by Part VIII of the same series
 (arXiv:2303.11766, Theorem 1.5), which its pinned review names without reading the theorem. The
 studies row of Kiraly's O(1.4^m) cycle-count conjecture is solved by its own source
-(arXiv:1907.12091, Theorem 1).
+(arXiv:1907.12091, Theorem 1). Six studies rows of wave X254 were solved before the corpus pin:
+Gyarfas' long odd holes (arXiv:1701.07217v3), Trotignon-Vuskovic's ISK4 conjecture
+(arXiv:1704.08104v1) and the four rows of Tomescu's conjecture (arXiv:1712.06067v3, Theorem 1).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -236,6 +238,31 @@ ERRATA = [
      "Postle), Theorem 1: a simple graph with m edges has O(gamma^m) cycles, gamma = b(5)^(2/5) "
      "~ 1.38403 < 1.4 (l.257; Theorem 1 at l.68 prints 442368^(1/10), a typo for 442368^(1/40)) "
      "(Kiraly, EGRES TR-2009-03, Conjecture 7.15: c(G) <= c * 1.4^m)."),
+    # literature status corrections (Lancelot's lane, the studies rows of wave X254 solved before the corpus pin)
+    ("studies", "std_gy_rf_s_odd_hole_boundedness_conjecture", "solved",
+     "Literature: solved by Chudnovsky, Scott, Seymour and Spirkl, arXiv:1701.07217v3 (Induced "
+     "subgraphs of graphs with large chromatic number. VIII. Long odd holes), statement 1.3 (l.86-88): "
+     "for all kappa, ell >= 0 there is c such that omega(G) <= kappa and chi(G) > c give an odd hole "
+     "of length at least ell; take ell = l + 1. The paper is not among the row's records."),
+    ("studies", "std_trotignon_vu_kovi_conjecture_isk4_triangle_free", "solved",
+     "Literature: solved in its own source, arXiv:1704.08104v1 (Chudnovsky, Liu, Schaudt, Spirkl, "
+     "Trotignon and Vuskovic): Conjecture 1 (l.107-110, {ISK4, triangle}-free implies chi(G) <= 3) "
+     "is proved there (l.114)."),
+    ("studies", "std_tomescu_s_conjecture_maximum_number_of_proper_k_529", "solved",
+     "Literature: solved in its own source, arXiv:1712.06067v3 (Fox, He and Manners), Theorem 1 "
+     "(l.99-106): a connected G on n vertices with chi(G) = k >= 4 has P_G(k) <= k!(k-1)^(n-k), "
+     "with equality if and only if the 2-core of G is a k-clique."),
+    ("studies", "std_tomescu_s_conjecture_maximum_number_of_k_colorin", "solved",
+     "Literature: the same conjecture as the _529 row; solved by Fox, He and Manners, "
+     "arXiv:1712.06067v3, Theorem 1 (l.99-106), whose l.93 states the equivalent tree form of the "
+     "equality case (a tree attached to each vertex of K_k)."),
+    ("studies", "std_tomescu_s_conjecture_maximum_number_of_proper_k", "solved",
+     "Literature: the same conjecture as the _529 row; solved by Fox, He and Manners, "
+     "arXiv:1712.06067v3, Theorem 1 (l.99-106), whose l.93 states the equivalent tree form of the "
+     "equality case (a tree attached to each vertex of K_k)."),
+    ("studies", "std_tomescu_s_conjecture_maximum_number_of_proper_k_530", "solved",
+     "Literature: the same conjecture as the _529 row; solved by Fox, He and Manners, "
+     "arXiv:1712.06067v3, Theorem 1 (l.99-106)."),
 ]
 
 
@@ -844,7 +871,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 5 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 11 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
