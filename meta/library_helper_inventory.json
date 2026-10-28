@@ -24740,13 +24740,13 @@
     ]
   },
   "counts": {
-    "files": 341,
-    "helpers": 2691,
+    "files": 342,
+    "helpers": 2700,
     "repeated_body_shapes": 150,
-    "repeated_normalized_names": 218,
+    "repeated_normalized_names": 219,
     "repeated_signature_shapes": 328,
-    "statements_excluded": 775,
-    "x_wave_helpers": 1530
+    "statements_excluded": 780,
+    "x_wave_helpers": 1539
   },
   "groups": {
     "body_shape_hash": {
@@ -26401,6 +26401,10 @@
       "hat_strategy": [
         "GTMisc.conjectures.X227.x227_hat_strategy",
         "GTMisc.conjectures.X99.x99_hat_strategy"
+      ],
+      "hereditary": [
+        "Digraph.conjectures.X248.x248_hereditary",
+        "GTMisc.conjectures.X87.x87_hereditary"
       ],
       "hereditary_class": [
         "Chromatic.conjectures.X3.x3_hereditary_class",
@@ -28213,6 +28217,9 @@
         "Chromatic.conjectures.X210.x210_conflict_k_colourable_under_rat_bound"
       ],
       "9c5ee70c512d9ecce3f2b94e2881ab4ca8c565c4e0ff8a2a264707d49530bd26": [
+        "Digraph.conjectures.X248.x248_dic_bounded",
+        "Digraph.conjectures.X248.x248_hereditary",
+        "Digraph.conjectures.X248.x248_poly_dic_bounded",
         "Digraph.conjectures.chi_bounded.chi_bounded_under",
         "Digraph.conjectures.dichromatic.dichromatic_bounded"
       ],
@@ -28224,7 +28231,8 @@
       "9cab3099dbcff302bb508a32a1c3f35c4adb1063bf8c6752a219a2363705b907": [
         "Digraph.conjectures.P9.min_feedback",
         "Digraph.conjectures.X221.x221_alphavec",
-        "Digraph.conjectures.X221.x221_dichro"
+        "Digraph.conjectures.X221.x221_dichro",
+        "Digraph.conjectures.X248.x248_omegab_dg"
       ],
       "9cb5e5a08b0a2887259e6fc6ea3c5d291484174be0ce74b3cd80473b3c4f6391": [
         "Chromatic.conjectures.X187.x187_proper_3_colouring",
@@ -42988,6 +42996,191 @@
       "qualified_name": "Digraph.conjectures.X246.x246_fas_le1",
       "signature": "(D : diGraphType) : Prop",
       "signature_shape_hash": "1df638342453dfeab4177ffe20578994bca0d7dc155ec596c82c0b58fc45aa39"
+    },
+    {
+      "body_hash": "7060672e6b731dd06c771723a5059d910f3a7fe632590f73d94e6c74db8121ed",
+      "body_shape_hash": "7060672e6b731dd06c771723a5059d910f3a7fe632590f73d94e6c74db8121ed",
+      "declaration_hash": "e99cadcbf71fca9d072fd98bcd90f5a1d29366d6d539a42ca4c4265c99bf30af",
+      "direct_consumers": [
+        "Digraph.conjectures.X248.x248_backedge"
+      ],
+      "kind": "Definition",
+      "line": 27,
+      "local_dependencies": [],
+      "name": "x248_backedge_rel",
+      "normalized_name": "backedge_rel",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X248.v",
+      "phase": "X248",
+      "qualified_name": "Digraph.conjectures.X248.x248_backedge_rel",
+      "signature": "(D : diGraphType) (p : {perm D}) : rel D",
+      "signature_shape_hash": "3848ea5d1395b5ab38b1c090ed859abb938e43c87086386dc1b3d2d04410c688"
+    },
+    {
+      "body_hash": "654a3b99e7a49491963165bb2dfa342126c31e1982802eef2880aad18c26f831",
+      "body_shape_hash": "594fd6295302f204b74244305a2a81d265dd8a7f6970c631347fdb400f830f44",
+      "declaration_hash": "72b279ab0f7d968ecf29d879fb6d3e79a78fd7448de9a9ddabf11573904b72c2",
+      "direct_consumers": [
+        "Digraph.conjectures.X248.x248_omegab_dg"
+      ],
+      "kind": "Definition",
+      "line": 36,
+      "local_dependencies": [
+        "x248_backedge_rel"
+      ],
+      "name": "x248_backedge",
+      "normalized_name": "backedge",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X248.v",
+      "phase": "X248",
+      "qualified_name": "Digraph.conjectures.X248.x248_backedge",
+      "signature": "(D : diGraphType) (p : {perm D}) : sgraph",
+      "signature_shape_hash": "93af19b4bd3a70df854331d769af14ef86aad77a66a4f542d7d8564ab46f445b"
+    },
+    {
+      "body_hash": "356af588d82e470757f2b0f820392d72b3066b40f69d1aecb90fd83bc4bbb860",
+      "body_shape_hash": "3a9c0e347bdebeb1620ef8d202dc4e1991f2b3754c464f0ff2816c8935e903d4",
+      "declaration_hash": "d496932c91de0f9ca58d3ac2eec37368eec1d74e3bee42eeffb5dad20761219a",
+      "direct_consumers": [
+        "Digraph.conjectures.X248.x248_dic_bounded",
+        "Digraph.conjectures.X248.x248_poly_dic_bounded"
+      ],
+      "kind": "Definition",
+      "line": 42,
+      "local_dependencies": [
+        "x248_backedge"
+      ],
+      "name": "x248_omegab_dg",
+      "normalized_name": "omegab_dg",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X248.v",
+      "phase": "X248",
+      "qualified_name": "Digraph.conjectures.X248.x248_omegab_dg",
+      "signature": "(D : diGraphType) : nat",
+      "signature_shape_hash": "9cab3099dbcff302bb508a32a1c3f35c4adb1063bf8c6752a219a2363705b907"
+    },
+    {
+      "body_hash": "b0a1afd0ef45f67e222eb481014a0ee56c0d729e0747a04b8e9c43ee0e751ab1",
+      "body_shape_hash": "8fbd446250cf0be2296e30572dffa5b7015cc0e73c10d8bba0992f79bfbb9a5a",
+      "declaration_hash": "b8bae19521d2bc15cbbd429113e8c7acc719f079226256c46712597f384557ee",
+      "direct_consumers": [
+        "Digraph.conjectures.X248.chi_bounded_digraphs_subst_statement"
+      ],
+      "kind": "Definition",
+      "line": 48,
+      "local_dependencies": [
+        "x248_omegab_dg"
+      ],
+      "name": "x248_dic_bounded",
+      "normalized_name": "dic_bounded",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X248.v",
+      "phase": "X248",
+      "qualified_name": "Digraph.conjectures.X248.x248_dic_bounded",
+      "signature": "(C : diGraphType -> Prop) : Prop",
+      "signature_shape_hash": "9c5ee70c512d9ecce3f2b94e2881ab4ca8c565c4e0ff8a2a264707d49530bd26"
+    },
+    {
+      "body_hash": "6da5791ddf925c570989331a9383602ee05b26bd2ecc1d87bbf34807de05a79e",
+      "body_shape_hash": "9a2c1990e4a4405e634f7d18e1fd57c500e181efa7cdcbdba3b56784100b9a75",
+      "declaration_hash": "892c34939ad858cbec45a5c8c06ea58d7e1626f477bce44c8139add3e4807131",
+      "direct_consumers": [
+        "Digraph.conjectures.X248.poly_chi_bounded_tournaments_subst_statement"
+      ],
+      "kind": "Definition",
+      "line": 56,
+      "local_dependencies": [
+        "x248_omegab_dg"
+      ],
+      "name": "x248_poly_dic_bounded",
+      "normalized_name": "poly_dic_bounded",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X248.v",
+      "phase": "X248",
+      "qualified_name": "Digraph.conjectures.X248.x248_poly_dic_bounded",
+      "signature": "(C : diGraphType -> Prop) : Prop",
+      "signature_shape_hash": "9c5ee70c512d9ecce3f2b94e2881ab4ca8c565c4e0ff8a2a264707d49530bd26"
+    },
+    {
+      "body_hash": "f90cd486f18ed6c0f0466edf441f2d821b6272c1a025d682e5f51d512eadef54",
+      "body_shape_hash": "f90cd486f18ed6c0f0466edf441f2d821b6272c1a025d682e5f51d512eadef54",
+      "declaration_hash": "4848b38430aa5d38c44d66e6bd5e672c5d27468fddaa4ecc23b519a55df208e1",
+      "direct_consumers": [
+        "Digraph.conjectures.X248.chi_bounded_digraphs_subst_statement",
+        "Digraph.conjectures.X248.poly_chi_bounded_tournaments_subst_statement"
+      ],
+      "kind": "Definition",
+      "line": 59,
+      "local_dependencies": [],
+      "name": "x248_hereditary",
+      "normalized_name": "hereditary",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X248.v",
+      "phase": "X248",
+      "qualified_name": "Digraph.conjectures.X248.x248_hereditary",
+      "signature": "(C : diGraphType -> Prop) : Prop",
+      "signature_shape_hash": "9c5ee70c512d9ecce3f2b94e2881ab4ca8c565c4e0ff8a2a264707d49530bd26"
+    },
+    {
+      "body_hash": "f18c544f6f1b30af82b61afddbf8c2d04074cf63caa88bdcb5bb1abf88213e65",
+      "body_shape_hash": "f18c544f6f1b30af82b61afddbf8c2d04074cf63caa88bdcb5bb1abf88213e65",
+      "declaration_hash": "efe6bcaee3b3ae4832878c578a5830ddc486aef387ea8eb2ec1d0c67ca38984c",
+      "direct_consumers": [
+        "Digraph.conjectures.X248.x248_subst_closure",
+        "Digraph.conjectures.X248.x248_subst_rel"
+      ],
+      "kind": "Definition",
+      "line": 63,
+      "local_dependencies": [],
+      "name": "x248_subst",
+      "normalized_name": "subst",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X248.v",
+      "phase": "X248",
+      "qualified_name": "Digraph.conjectures.X248.x248_subst",
+      "signature": "(D1 : diGraphType) (u : D1) (D2 : diGraphType) : Type",
+      "signature_shape_hash": "5c4f5f02415c1b30a767d08f998480cbac1e83ef70cdd666b860d670a236fdeb"
+    },
+    {
+      "body_hash": "9afce6d2bd9739138af5018baf855c1d8e27b01415c21a542ef83d4fae9c53fe",
+      "body_shape_hash": "9afce6d2bd9739138af5018baf855c1d8e27b01415c21a542ef83d4fae9c53fe",
+      "declaration_hash": "5bc6747220ff0e042c32956fc635cb387ecb95a8f718405bec99caa29415ba9e",
+      "direct_consumers": [],
+      "kind": "Definition",
+      "line": 73,
+      "local_dependencies": [
+        "x248_subst"
+      ],
+      "name": "x248_subst_rel",
+      "normalized_name": "subst_rel",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X248.v",
+      "phase": "X248",
+      "qualified_name": "Digraph.conjectures.X248.x248_subst_rel",
+      "signature": "(a b : x248_subst u D2) : bool",
+      "signature_shape_hash": "1b40ec3245c8f9845e38f3352a1aa253989d618b1187c3815e4aba372b435f2c"
+    },
+    {
+      "body_hash": "02809dde6b2cbb00fd92a697450a9b5b76dc8dcb677ad4793bb8934251d55a50",
+      "body_shape_hash": "7c2f874d472f8fb8a472b51c3ec5b58f63f756d84002612b93e6f14cd76cdd17",
+      "declaration_hash": "82eaaa4a514606c74f1423ea982302a557443ab8f93705f0a102aaa19e927c9c",
+      "direct_consumers": [
+        "Digraph.conjectures.X248.chi_bounded_digraphs_subst_statement",
+        "Digraph.conjectures.X248.poly_chi_bounded_tournaments_subst_statement"
+      ],
+      "kind": "Inductive",
+      "line": 82,
+      "local_dependencies": [
+        "x248_subst"
+      ],
+      "name": "x248_subst_closure",
+      "normalized_name": "subst_closure",
+      "package": "digraph-theory",
+      "path": "digraph-theory/theories/conjectures/X248.v",
+      "phase": "X248",
+      "qualified_name": "Digraph.conjectures.X248.x248_subst_closure",
+      "signature": "(C : diGraphType -> Prop) : diGraphType -> Prop",
+      "signature_shape_hash": "a5546f8706d92c1be2cfbd2ad954e692904266f1667e6ba97e49359b307e169a"
     },
     {
       "body_hash": "029f2f2794eaf5bf3d7a0a3ba0f37074a7057a1c5a85ad5a84997a15f7db614d",
