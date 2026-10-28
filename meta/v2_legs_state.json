@@ -7663,11 +7663,14 @@
    "audit_page": "todo"
   },
   "erdos_1033": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x247-c4-copies-triangle-degree-sum-clique-free-diameter",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X247.v:triangle_degree_sum_above_quarter_statement. Erdos Problems #1033, Bollobas-Erdos (open at the pin; 2(sqrt 3 - 1) n + O(1) >= h(n) >= 21n/16, Erdos-Laskar / Fan): the named sub-question h(n) >= (2(sqrt 3 - 1) - o(1)) n, every graph with > n^2/4 edges has a triangle whose host degrees sum to at least that, with o(1) = 1/q eventually, squared without reals; Er82e p.71 prints the older 3n/2 form, a discrepancy recorded in the Notes (GTBase edge_count; upstream N(x))."
   },
   "erdos_1034": {
    "statement": "done",
@@ -8554,11 +8557,14 @@
    "audit_page": "todo"
   },
   "erdos_60": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x247-c4-copies-triangle-degree-sum-clique-free-diameter",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X247.v:c4_copies_above_ex_statement. Erdos Problems #60, Erdos-Simonovits (open at the pin; He, Ma and Yang, arXiv:1912.00986v1, Corollary 1.6, prove it for n = q^2 + q + 1, q = 2^k, k >= 40): every graph on n vertices with more edges than every C_4-free graph on n vertices contains >= c n^{1/2} copies of C_4 (distinct, not necessarily induced; counted as 4-edge sets), c absolute, affirmative form (GTBase edge_count, has_subgraph, cycle_graph, del_edge_set)."
   },
   "erdos_600": {
    "statement": "todo",
@@ -8606,11 +8612,14 @@
    "audit_page": "todo"
   },
   "erdos_612": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x247-c4-copies-triangle-degree-sum-clique-free-diameter",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X247.v:clique_free_diameter_min_degree_statement. Erdos Problems #612, Erdos-Pach-Pollack-Tuza (JCTB 47 (1989), Conjecture p.78-79, r and delta > 1 fixed, so the O(1) constant is C(r, d)): both parts, the diameter of a connected K_{2r}-free (resp. K_{2r+1}-free) graph of minimum degree d with (r-1)(3r+2) | d (resp. 3r-1 | d); false at the pin (pinned status open): Czabarka-Singgih-Szekely, JCTB 151 (2021), Theorem 3, refute the first part; the second part is open (GTBase min_degree, graph_dist, has_subgraph; upstream connected)."
   },
   "erdos_613": {
    "statement": "done",
