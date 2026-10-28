@@ -233,8 +233,9 @@ ERRATA = [
     # literature status correction (Lancelot's lane; solved in its own source before the corpus pin)
     ("studies", "std_kir_ly_s_cycle_count_conjecture", "solved",
      "Literature: solved in its own source, arXiv:1907.12091 (Dvorak, Morrison, Noel, Norin and "
-     "Postle), Theorem 1: a simple graph with m edges has O(gamma^m) cycles, gamma = 442368^(1/10) "
-     "~ 1.384 < 1.4 (Kiraly, EGRES TR-2009-03, Conjecture 7.15: c(G) <= c * 1.4^m)."),
+     "Postle), Theorem 1: a simple graph with m edges has O(gamma^m) cycles, gamma = b(5)^(2/5) "
+     "~ 1.38403 < 1.4 (l.257; Theorem 1 at l.68 prints 442368^(1/10), a typo for 442368^(1/40)) "
+     "(Kiraly, EGRES TR-2009-03, Conjecture 7.15: c(G) <= c * 1.4^m)."),
 ]
 
 
