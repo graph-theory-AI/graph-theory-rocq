@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py poset_unavoidability --details 
 
 - Canonical: `Minor.foundations.poset_unavoidability.poset_unavoidable`.
 - Baseline: `97605ddae838bc6e84b0602240148246e9d065f2`.
-- Scope: 4 helpers, 6 statements, 12 frozen objects, 81 recorded references.
-- Source checks: 179/179 pass; consistent.
+- Scope: 4 helpers, 6 statements, 12 frozen objects, 86 recorded references.
+- Source checks: 184/184 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
