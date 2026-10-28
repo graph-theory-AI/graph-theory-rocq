@@ -8826,6 +8826,86 @@
           }
         }
       }
+    },
+    "X247": {
+      "phase": "X247",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X247.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X247 (A3 verifier Arthur; routing Lancelot (96) and (114); selection x247-selection-by-marcol, design x247-design-by-marcol), branch math/marcol-x247-20261028, 2026-10-28",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x247-c4-copies-triangle-degree-sum-clique-free-diameter",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "erdos_60": {
+          "formal_name": "c4_copies_above_ex_statement",
+          "source_hash": "f73ffb7ab26fe4c820c5451662d268de3186274346316233d2646991ec2777aa",
+          "note": "Erdos Problems #60, Erdos-Simonovits (open at the pin; He, Ma and Yang, arXiv:1912.00986v1, Corollary 1.6, prove it for n = q^2 + q + 1, q = 2^k, k >= 40): every graph on n vertices with more edges than every C_4-free graph on n vertices contains >= c n^{1/2} copies of C_4 (distinct, not necessarily induced; counted as 4-edge sets), c absolute, affirmative form (GTBase edge_count, has_subgraph, cycle_graph, del_edge_set).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g247_c4_hyp_inhabited",
+              "claim": "g247_c4_hyp_claim",
+              "references": [
+                "c4_copies_above_ex_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g247_c4_not_trivially_true",
+              "claim": "g247_c4_ntt_claim",
+              "references": [
+                "c4_copies_above_ex_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1033": {
+          "formal_name": "triangle_degree_sum_above_quarter_statement",
+          "source_hash": "21d34b61cf28145957f9bd53d254cdd609b1ee35cf89e67a5b5adc12759e6542",
+          "note": "Erdos Problems #1033, Bollobas-Erdos (open at the pin; 2(sqrt 3 - 1) n + O(1) >= h(n) >= 21n/16, Erdos-Laskar / Fan): the named sub-question h(n) >= (2(sqrt 3 - 1) - o(1)) n, every graph with > n^2/4 edges has a triangle whose host degrees sum to at least that, with o(1) = 1/q eventually, squared without reals; Er82e p.71 prints the older 3n/2 form, a discrepancy recorded in the Notes (GTBase edge_count; upstream N(x)).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g247_tri_hyp_inhabited",
+              "claim": "g247_tri_hyp_claim",
+              "references": [
+                "triangle_degree_sum_above_quarter_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g247_tri_not_trivially_true",
+              "claim": "g247_tri_ntt_claim",
+              "references": [
+                "triangle_degree_sum_above_quarter_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_612": {
+          "formal_name": "clique_free_diameter_min_degree_statement",
+          "source_hash": "0dd2b502cbfb8276fff23b929f36b835bc39cfe2f3b5f33d95253b9379a25d4b",
+          "note": "Erdos Problems #612, Erdos-Pach-Pollack-Tuza (JCTB 47 (1989), Conjecture p.78-79, r and delta > 1 fixed, so the O(1) constant is C(r, d)): both parts, the diameter of a connected K_{2r}-free (resp. K_{2r+1}-free) graph of minimum degree d with (r-1)(3r+2) | d (resp. 3r-1 | d); false at the pin (pinned status open): Czabarka-Singgih-Szekely, JCTB 151 (2021), Theorem 3, refute the first part; the second part is open (GTBase min_degree, graph_dist, has_subgraph; upstream connected).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g247_diam_hyp_inhabited",
+              "claim": "g247_diam_hyp_claim",
+              "references": [
+                "clique_free_diameter_min_degree_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g247_diam_not_trivially_true",
+              "claim": "g247_diam_ntt_claim",
+              "references": [
+                "clique_free_diameter_min_degree_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
