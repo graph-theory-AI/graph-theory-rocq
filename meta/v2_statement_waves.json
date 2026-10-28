@@ -8369,6 +8369,42 @@
           }
         }
       }
+    },
+    "X250": {
+      "phase": "X250",
+      "repo": "minor-theory",
+      "defines_file": "X250.v",
+      "implemented_by": "Lancelot (Claude Opus 5.5), wave X250 (A3 verifier Arthur; Any lane, further waves; design x250-design-by-lancelot), branch math/lancelot-x250-20261028, 2026-10-28",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x250-polynomial-expansion-twin-width-duplicate",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "axv_2004_14789_00": {
+          "formal_name": "polynomial_expansion_bounded_twin_width_duplicate_statement",
+          "source_hash": "831af27748117a97e118e7d800ebd872fa05369d8769b26ad34ef024a5ab8a50",
+          "note": "arXiv:2004.14789, informal conjecture (polynomial expansion and bounded twin-width), Bonnet, Kim, Thomasse and Watrigant 2020 (pinned status open): all classes of polynomial expansion may also have bounded twin-width. A synonym of X220's polynomial_expansion_bounded_twin_width_statement (the same question in arXiv:2006.09877, Twin-width II); corpus relation e069 (same_conjecture, confirmed) with arxiv:2006.09877#01.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g250_hyp_inhabited",
+              "claim": "g250_hyp_claim",
+              "references": [
+                "polynomial_expansion_bounded_twin_width_duplicate_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g250_not_trivially_true",
+              "claim": "g250_ntt_claim",
+              "references": [
+                "polynomial_expansion_bounded_twin_width_duplicate_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
