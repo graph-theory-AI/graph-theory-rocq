@@ -541,6 +541,16 @@
       "path": "packing-theory/theories/conjectures/grounding_U9.v",
       "name": "is_induced_path",
       "note": "Actual Packing grounding: is_induced_path_triv and is_induced_path_spath keep their statements; their two proof scripts were adapted to the canonical full-endpoint view (the singleton lemma induced_path_between_seq1, and head/last/adjacency read off the destructured list). The other U9 groundings are untouched."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X254.v",
+      "name": "induced_subdivision",
+      "note": "Wave X254 (Arthur, 2026-10-28): studies:std_scott_s_conjecture_induced_subdivisions_and_chi (no induced subdivision of H) and studies:std_trotignon_vu_kovi_conjecture_isk4_triangle_free (no induced subdivision of K_4) use GTBase induced_subdivision, imported from GTBase induced_subdivisions; a direct use of the public wrapper, no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X254.v",
+      "name": "induced_subdivision",
+      "note": "Wave X254 (Arthur, 2026-10-28): the grounding certificates of the Scott and Trotignon-Vuskovic rows use GTBase induced_subdivision (K_1 has no induced subdivision of K_2 or K_4, from the injective branch map); a direct use of the public wrapper, no copy."
     }
   ],
   "distinct_variants": [
