@@ -458,6 +458,16 @@
       "path": "digraph-theory/theories/conjectures/grounding_X251.v",
       "name": "chi_bounded",
       "note": "Lexical module-import/prefix occurrence (wave X251, 2026-10-28): Digraph chi_bounded supplies underlying / urel for g251_TT_oriented_tree; not a reference to U8.chi_bounded, as grounding_X2."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X254.v",
+      "name": "chi_bounded_class",
+      "note": "Wave X254 (Arthur, 2026-10-28): studies:std_scott_s_conjecture_induced_subdivisions_and_chi states chi-boundedness of the classes with no induced subdivision of H with GTBase chi_bounded_class (imported after Chromatic.foundations chi_bounding, whose chi_bounded_class is an alias of it); a direct use, no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X254.v",
+      "name": "chi_bounded_class",
+      "note": "Wave X254 (Arthur, 2026-10-28): the grounding certificates of the Scott row use GTBase chi_bounded_class (the class of all graphs is not chi-bounded, g236_all_not_chi_bounded); a direct use, no copy."
     }
   ],
   "distinct_variants": [
