@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py shallow_minors --details /tmp/m
 
 - Canonical: `Minor.foundations.shallow_minors.internal_shallow_minor`.
 - Baseline: `311fdcb89dc12a78c62cb0ee6d2477896cbce9a7`.
-- Scope: 2 helpers, 1 statements, 4 frozen objects, 14 recorded references.
-- Source checks: 58/58 pass; consistent.
+- Scope: 2 helpers, 1 statements, 4 frozen objects, 17 recorded references.
+- Source checks: 61/61 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
