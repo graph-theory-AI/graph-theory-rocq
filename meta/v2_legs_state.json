@@ -7753,11 +7753,14 @@
    "audit_page": "todo"
   },
   "erdos_1078": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x253-apex-subdivision-multipartite-clique",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X253.v:balanced_multipartite_min_degree_clique_statement. Erdos Problems #1078, Bollobas-Erdos-Szemeredi 1975 (proved before the pin, pinned status solved: Haxell, CPC 10 (2001); exact threshold Haxell-Szabo, CPC 15 (2006)): the o(1) as in BES75b p.98 (c_r = lim_n f_r(n)/n, conjecture lim_r (c_r - r + 2) = 1/2), its forcing half: for every q >= 1, for all large r and then all large n, an r-partite graph with n vertices in each part and minimum degree >= (r - 3/2 + 1/q) n contains K_r (GTBase has_subgraph; upstream N(v)); Er75 p.12 prints the stronger fixed-r form, not encoded."
   },
   "erdos_1079": {
    "statement": "done",
@@ -9710,11 +9713,14 @@
    "note": "Authored in X244.v:not_triangle_ramsey_independent_set_exponent_statement. Erdos Problems #925 (false before the corpus pin, pinned status solved: Alon and Rodl, Sharp bounds for some multicolor Ramsey numbers, Combinatorica 25 (2005), equation (1): R(3,3,m) = m^{3-o(1)}): graphs not Ramsey for K_3 have independent sets >> n^{1/3+delta}, delta = 1/q, affirmative form (Extremal.foundations mono_copy; upstream stable)."
   },
   "erdos_926": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x253-apex-subdivision-multipartite-clique",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X253.v:clique_subdivision_apex_turan_three_halves_statement. Erdos Problems #926, Erdos (proved before the pin, pinned status solved: Furedi, Combinatorica 11 (1991) 75-79, an n-vertex graph with >= k^{3/2} n^{3/2} edges contains L^k = H_k): for every k >= 4, ex(n;H_k) <<_k n^{3/2} (m^2 <= c n^3), H_k the 1-subdivision of K_k with a vertex joined to its k branch vertices (D2tur is_turan_number; GTBase subdivision; upstream add_node)."
   },
   "erdos_927": {
    "statement": "todo",

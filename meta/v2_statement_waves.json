@@ -9261,6 +9261,64 @@
           }
         }
       }
+    },
+    "X253": {
+      "phase": "X253",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X253.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X253 (A3 verifier Arthur; routing Lancelot (138); selection x253-selection-by-marcol, design x253-design-by-marcol r1), branch math/marcol-x253-20261028, 2026-10-28",
+      "source_verified_by": "Arthur (X253 wave verifier, A3: pinned records re-read at b72c5857: data/erdos_graph.json records 926 and 1078 (the statement field; the builder hashes the statement alone, build_v2_manifest.py l.472 at 4b391d06), sha256 recomputed from the pinned records = 0f276d01fea3bad57d1d1d3f1e16cbf6dc9fac2e86fa8b4e790570b96d480671 and 6fc1de3b50f89b66c428c3e0defead14759af37cc18727664d4f514e7b9adc1e, equal to the manifest rows at work/coordinator 4b391d06 and to the wave's source_hash values; manifest status solved for both; the Mac's deposit coordination/sources/x253-source-mac-20261028 (SHA256SUMS acc42645, -c 64/64 OK): the live pages erdosproblems.com/926 and /1078 (and their LaTeX responses), Furedi, On a Turan type problem of Erdos, Combinatorica 11 (1991) 75-79 (Fu91.pdf pp.75-76; DOI 10.1007/BF01375476 per the Mac's correction), Bollobas-Erdos-Szemeredi, Discrete Math. 13 (1975) 97-107 (BES75b, printed p.98 read as the page image), Erdos 1975 (Er75.pdf, printed p.12 = PDF p.10, read from its embedded scan, byte-identical to the design packet's image), Haxell-Szabo, CPC 15 (2006) pp.1-2, Szabo-Tardos, Combinatorica 26 (2006) Theorem 1.1; not obtained, as SOURCE.md states: the AKS03 and Ha01 full texts)",
+      "source_verified_at": "2026-10-28",
+      "commit": "x253-apex-subdivision-multipartite-clique",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "Arthur (X253 wave verification, 2026-10-28)",
+      "faithfulness_result": "Readback 2026-10-28 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x253-20261028 = f2b77590e0ecd82495788ae1c8606ce05f2f8624 (bd71ea1e + the edge_count report commit) on work/coordinator 4b391d06, after my design read (257) of x253-design-by-marcol r1 (77365762): X253.v blob 6913a556 and grounding_X253.v blob 650cb21e, whose code blocks (comment-stripped, whitespace-normalised) equal the r1 draft's with my optional N1 taken (g253_mp_hyp_claim lists 1 <= 2: 15 blocks equal, 2 differ only by it). erdos:926: H_k = add_node (subdivision 'K_k 2) [set v | is_inl v] (base.v l.400-420: one inr vertex per unordered edge joined exactly to its two ends; add_node joins x exactly to the inl vertices) is the page's H_k and Furedi's L^k (p.76: x_0 joined to every y_i and to nothing else, x_ij to y_i and y_j); ex counts copies as subgraphs, not induced (p.75, D2tur's injective edge-preserving freeness); ex(n;H_k) <<_k n^{3/2} as m^2 <= c n^3 with c per k (Furedi's k^{3/2} n^{3/2} gives c = k^3); k >= 4 as the page; proved before the pin. erdos:1078: reading E, the forcing half of BES75b's conjecture (p.98: f_r(n) with the strict >, c_r = lim_n f_r(n)/n, c_r >= r - 2 + 1/2 - 1/(2(r-2)) for r > 4, conjecture lim_r (c_r - r + 2) = 1/2): for every q >= 1 there is r0 such that for every r >= r0 there is n0 such that for n >= n0 every r-partite graph with parts of size n and minimum degree >= (r - 3/2 + 1/q) n contains K_r, written (2qr + 2) n <= 2q deg + 3qn without a subtraction; E is the row with its o(1) any g(r) -> 0 of either sign (diagonalisation) and is limsup_r (c_r - r + 2) <= 1/2; the \"for every eps\" reading is false by BES75b's lower bound; the selection's fixed-r slack was vacuous (f = 0), equal to Er75's stronger fixed-r form (printed p.12), which the Notes record and the body does not encode; true at the pin by Haxell 2001 (Szabo-Tardos Theorem 1.1: classes of size >= 2d give an independent transversal; the complement between the parts gives K_r at minimum degree (r - 3/2) n for every r and n >= 1), the exact threshold (r - 1) n - ceil(s n / (2s - 1)), s = floor(r/2), by Haxell-Szabo Theorem 1.1 for both parities, in the Notes; the pinned citation key BES75 is Burr-Erdos-Spencer, the source is BES75b (a CORPUS_FEEDBACK candidate). Grounding (grounding_X253.v read): hyp_inhabited per row (k = 4 with the concrete Turan value ex(1; H_4) = 0, g253_turan_H4_1; K_r(n) with p the first coordinate for every r and n at q = 2, the degree clause with equality) and not_trivially_true per row, each variant the body minus exactly one clause (checked mechanically, whitespace-normalised, a perturbed control rejected): 926 without the Turan hypothesis, false at n = 0, m = 1; 1078 without the minimum-degree clause, false on the edgeless r-partite graph at q = 1, r = r0 + 2; no local helper, helper_sanity [] in both rows. Metadata: the two source_hash values recomputed = the manifest's; the waves file minus X253 = 4b391d06's (jq -S), helper_ownership {}; legs = the builder's derivation, the two rows only; README 510 / 11 / 40 / 1,112 -> 512 / 11 / 40 / 1,110; LANDED adds X253 extremal-graph-theory after X252; the allowlist unchanged (no subtraction, no existential after a graph binder); consumers: is_turan_number in both files and edge_count in the grounding declared in the edge_count spec (has_subgraph, complete_multipartite_graph and del_edge_set are canonical); the edge_count report committed byte-identical to the dev run's written copy (f2b77590). Dev run 1 (x253-dev-by-marcol, SHA256SUMS 46e1e272, 40 / 40 -c OK) fails only the four field steps (W1 12/14: the verifier fields and the two rows' source verification; A3a / A3: the independent verdict; A10: the four tuple violations); Print Assumptions clean on 2 statements + 4 certificates; vacuity 2 probed, 0 flagged; hard lint 0 active; statement docs 835 / 835; migration_report --all --check OK.",
+      "rows": {
+        "erdos_926": {
+          "formal_name": "clique_subdivision_apex_turan_three_halves_statement",
+          "source_hash": "0f276d01fea3bad57d1d1d3f1e16cbf6dc9fac2e86fa8b4e790570b96d480671",
+          "note": "Erdos Problems #926, Erdos (proved before the pin, pinned status solved: Furedi, Combinatorica 11 (1991) 75-79, an n-vertex graph with >= k^{3/2} n^{3/2} edges contains L^k = H_k): for every k >= 4, ex(n;H_k) <<_k n^{3/2} (m^2 <= c n^3), H_k the 1-subdivision of K_k with a vertex joined to its k branch vertices (D2tur is_turan_number; GTBase subdivision; upstream add_node).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g253_ap_hyp_inhabited",
+              "claim": "g253_ap_hyp_claim",
+              "references": [
+                "clique_subdivision_apex_turan_three_halves_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g253_ap_not_trivially_true",
+              "claim": "g253_ap_ntt_claim",
+              "references": [
+                "clique_subdivision_apex_turan_three_halves_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "erdos_1078": {
+          "formal_name": "balanced_multipartite_min_degree_clique_statement",
+          "source_hash": "6fc1de3b50f89b66c428c3e0defead14759af37cc18727664d4f514e7b9adc1e",
+          "note": "Erdos Problems #1078, Bollobas-Erdos-Szemeredi 1975 (proved before the pin, pinned status solved: Haxell, CPC 10 (2001); exact threshold Haxell-Szabo, CPC 15 (2006)): the o(1) as in BES75b p.98 (c_r = lim_n f_r(n)/n, conjecture lim_r (c_r - r + 2) = 1/2), its forcing half: for every q >= 1, for all large r and then all large n, an r-partite graph with n vertices in each part and minimum degree >= (r - 3/2 + 1/q) n contains K_r (GTBase has_subgraph; upstream N(v)); Er75 p.12 prints the stronger fixed-r form, not encoded.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g253_mp_hyp_inhabited",
+              "claim": "g253_mp_hyp_claim",
+              "references": [
+                "balanced_multipartite_min_degree_clique_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g253_mp_not_trivially_true",
+              "claim": "g253_mp_ntt_claim",
+              "references": [
+                "balanced_multipartite_min_degree_clique_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }

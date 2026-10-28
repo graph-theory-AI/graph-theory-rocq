@@ -1911,6 +1911,21 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X252.v",
       "name": "is_turan_number",
       "note": "Wave X252 (2026-10-28) imports D2tur for is_turan_number (ex(n; H), rows erdos:113, 1021, 1079) and imports GTBase LAST, so its unqualified edge_count is the canonical GTBase.common.edge_count, not the D2tur source; X252.v and grounding_X252.v both name is_turan_number and edge_count; declared as for X240 / X245."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X253.v",
+      "name": "is_turan_number",
+      "note": "Wave X253 (2026-10-28) imports D2tur for is_turan_number (ex(n; H_k), row erdos:926) and imports GTBase LAST, so the grounding's unqualified names are the canonical GTBase ones; X253.v names is_turan_number, grounding_X253.v names is_turan_number and D2tur.edge_count (the concrete Turan value ex(1; H_4) = 0); declared as for X245 / X252."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X253.v",
+      "name": "edge_count",
+      "note": "Wave X253 (2026-10-28) imports D2tur for is_turan_number (ex(n; H_k), row erdos:926) and imports GTBase LAST, so the grounding's unqualified names are the canonical GTBase ones; X253.v names is_turan_number, grounding_X253.v names is_turan_number and D2tur.edge_count (the concrete Turan value ex(1; H_4) = 0); declared as for X245 / X252."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X253.v",
+      "name": "is_turan_number",
+      "note": "Wave X253 (2026-10-28) imports D2tur for is_turan_number (ex(n; H_k), row erdos:926) and imports GTBase LAST, so the grounding's unqualified names are the canonical GTBase ones; X253.v names is_turan_number, grounding_X253.v names is_turan_number and D2tur.edge_count (the concrete Turan value ex(1; H_4) = 0); declared as for X245 / X252."
     }
   ],
   "distinct_variants": [
