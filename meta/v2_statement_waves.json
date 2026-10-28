@@ -9319,6 +9319,325 @@
           }
         }
       }
+    },
+    "X254": {
+      "phase": "X254",
+      "repo": "chromatic-theory",
+      "defines_file": "X254.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X254 (A3 verifier Marcol; routing Lancelot (144); selection x254-selection-by-arthur (256), design x254-design-by-arthur r1 (259)), branch math/arthur-x254-20261028, 2026-10-28",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x254-subdivisions-odd-holes-tomescu-multiholes",
+      "rows": {
+        "std_scott_s_conjecture_induced_subdivisions_and_chi": {
+          "formal_name": "scott_induced_subdivision_chi_bounded_statement",
+          "source_hash": "78bcf95277022c1e7837268abd6be393397bc4df9ed69cd5d80e735b2326d4f9",
+          "note": "Scott: for every graph H the graphs with no induced subdivision of H form a chi-bounded class (GTBase induced_subdivision, chi_bounded_class). Refuted before the pin (pinned status open): Pawlik, Kozik, Krawczyk, Lason, Micek, Trotter and Walczak, arXiv:1209.1595v5 (Theorem 1 and TeX l.108-109, H the 1-subdivision of a non-planar graph); encoded as stated, false at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g254_scott_hyp_inhabited",
+              "claim": "g254_scott_hyp_claim",
+              "references": [
+                "scott_induced_subdivision_chi_bounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g254_scott_not_trivially_true",
+              "claim": "g254_scott_ntt_claim",
+              "references": [
+                "scott_induced_subdivision_chi_bounded_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g254_two_core_helper_sanity",
+                "claim": "g254_two_core_helper_claim",
+                "references": [
+                  "x254_two_core"
+                ]
+              },
+              {
+                "theorem": "g254_multihole_helper_sanity",
+                "claim": "g254_multihole_helper_claim",
+                "references": [
+                  "x254_odd_multihole"
+                ]
+              }
+            ]
+          }
+        },
+        "std_gy_rf_s_odd_hole_boundedness_conjecture": {
+          "formal_name": "gyarfas_long_odd_hole_chi_bounded_statement",
+          "source_hash": "94e370a4f2bf781a48fd431bbb2bfd6fcc97312dccb0e6ab78d6bd5ecf3190d9",
+          "note": "Gyarfas: for all k, l > 0 there is n(k, l) bounding the chromatic number of the graphs with clique number at most k and every odd hole of length at most l (GTBase hole). Proved before the pin (pinned status open): Chudnovsky, Scott, Seymour and Spirkl, Long odd holes, arXiv:1701.07217v3, 1.3 (TeX l.86-91) with ell = l + 1.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g254_gy_hyp_inhabited",
+              "claim": "g254_gy_hyp_claim",
+              "references": [
+                "gyarfas_long_odd_hole_chi_bounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g254_gy_not_trivially_true",
+              "claim": "g254_gy_ntt_claim",
+              "references": [
+                "gyarfas_long_odd_hole_chi_bounded_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g254_two_core_helper_sanity",
+                "claim": "g254_two_core_helper_claim",
+                "references": [
+                  "x254_two_core"
+                ]
+              },
+              {
+                "theorem": "g254_multihole_helper_sanity",
+                "claim": "g254_multihole_helper_claim",
+                "references": [
+                  "x254_odd_multihole"
+                ]
+              }
+            ]
+          }
+        },
+        "std_trotignon_vu_kovi_conjecture_isk4_triangle_free": {
+          "formal_name": "isk4_triangle_free_three_colourable_statement",
+          "source_hash": "299b2c9902af1a0680d9456af7eecbb8fc6b411356e0fbc2097d3b6b7a30b277",
+          "note": "Trotignon and Vuskovic: a graph with no induced subdivision of K_4 and no triangle has chromatic number at most 3 (GTBase induced_subdivision, triangle_free). Proved before the pin (pinned status open): Chudnovsky, Liu, Schaudt, Spirkl, Trotignon and Vuskovic, arXiv:1704.08104v1, Conjecture 1 (TeX l.107-110) and l.114.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g254_tv_hyp_inhabited",
+              "claim": "g254_tv_hyp_claim",
+              "references": [
+                "isk4_triangle_free_three_colourable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g254_tv_not_trivially_true",
+              "claim": "g254_tv_ntt_claim",
+              "references": [
+                "isk4_triangle_free_three_colourable_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g254_two_core_helper_sanity",
+                "claim": "g254_two_core_helper_claim",
+                "references": [
+                  "x254_two_core"
+                ]
+              },
+              {
+                "theorem": "g254_multihole_helper_sanity",
+                "claim": "g254_multihole_helper_claim",
+                "references": [
+                  "x254_odd_multihole"
+                ]
+              }
+            ]
+          }
+        },
+        "std_tomescu_s_conjecture_maximum_number_of_proper_k_529": {
+          "formal_name": "tomescu_connected_colouring_count_statement",
+          "source_hash": "78de45723fb58cb35620a7fdd934ffac0cc66f9c54a3e552ab30c8b27753c71f",
+          "note": "Tomescu (the canonical row of four): a connected graph G on n vertices with chi(G) = k >= 4 has P_G(k) <= k!(k-1)^(n-k) proper colourings with labelled colours, with equality iff the 2-core of G is a k-clique (x254_two_core). Proved before the pin (pinned status open): Fox, He and Manners, arXiv:1712.06067v3, Theorem 1 (TeX l.98-105).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g254_tom_hyp_inhabited",
+              "claim": "g254_tom_hyp_claim",
+              "references": [
+                "tomescu_connected_colouring_count_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g254_tom_not_trivially_true",
+              "claim": "g254_tom_ntt_claim",
+              "references": [
+                "tomescu_connected_colouring_count_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g254_two_core_helper_sanity",
+                "claim": "g254_two_core_helper_claim",
+                "references": [
+                  "x254_two_core"
+                ]
+              },
+              {
+                "theorem": "g254_multihole_helper_sanity",
+                "claim": "g254_multihole_helper_claim",
+                "references": [
+                  "x254_odd_multihole"
+                ]
+              }
+            ]
+          }
+        },
+        "std_tomescu_s_conjecture_maximum_number_of_k_colorin": {
+          "formal_name": "tomescu_colouring_count_rooted_trees_statement",
+          "source_hash": "2c99862982f206833d6c87c163525a619856509aa136e21477edba049ed9737b",
+          "note": "Tomescu, the wording with the extremal graphs K_k plus a tree rooted at each clique vertex: a synonym of tomescu_connected_colouring_count_statement (for connected G that wording is the 2-core being a k-clique, arXiv:1712.06067v3 TeX l.93). Proved before the pin (pinned status open; Fox, He and Manners).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g254_tomkc_hyp_inhabited",
+              "claim": "g254_tomkc_hyp_claim",
+              "references": [
+                "tomescu_colouring_count_rooted_trees_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g254_tomkc_not_trivially_true",
+              "claim": "g254_tomkc_ntt_claim",
+              "references": [
+                "tomescu_colouring_count_rooted_trees_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g254_two_core_helper_sanity",
+                "claim": "g254_two_core_helper_claim",
+                "references": [
+                  "x254_two_core"
+                ]
+              },
+              {
+                "theorem": "g254_multihole_helper_sanity",
+                "claim": "g254_multihole_helper_claim",
+                "references": [
+                  "x254_odd_multihole"
+                ]
+              }
+            ]
+          }
+        },
+        "std_tomescu_s_conjecture_maximum_number_of_proper_k": {
+          "formal_name": "tomescu_colouring_count_rooted_trees_duplicate_statement",
+          "source_hash": "2c99862982f206833d6c87c163525a619856509aa136e21477edba049ed9737b",
+          "note": "Tomescu, the same pinned text as the ..._k_colorin row: a synonym of tomescu_connected_colouring_count_statement. Proved before the pin (pinned status open; Fox, He and Manners, arXiv:1712.06067v3).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g254_tompk_hyp_inhabited",
+              "claim": "g254_tompk_hyp_claim",
+              "references": [
+                "tomescu_colouring_count_rooted_trees_duplicate_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g254_tompk_not_trivially_true",
+              "claim": "g254_tompk_ntt_claim",
+              "references": [
+                "tomescu_colouring_count_rooted_trees_duplicate_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g254_two_core_helper_sanity",
+                "claim": "g254_two_core_helper_claim",
+                "references": [
+                  "x254_two_core"
+                ]
+              },
+              {
+                "theorem": "g254_multihole_helper_sanity",
+                "claim": "g254_multihole_helper_claim",
+                "references": [
+                  "x254_odd_multihole"
+                ]
+              }
+            ]
+          }
+        },
+        "std_tomescu_s_conjecture_maximum_number_of_proper_k_530": {
+          "formal_name": "tomescu_colouring_count_two_core_duplicate_statement",
+          "source_hash": "48fb39cd5af46f51fd3405c9a8b523d946b3068060792ae3a5c75bdee5f777e2",
+          "note": "Tomescu, the canonical text without its i.e. gloss: a synonym of tomescu_connected_colouring_count_statement. Proved before the pin (pinned status open; Fox, He and Manners, arXiv:1712.06067v3).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g254_tom530_hyp_inhabited",
+              "claim": "g254_tom530_hyp_claim",
+              "references": [
+                "tomescu_colouring_count_two_core_duplicate_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g254_tom530_not_trivially_true",
+              "claim": "g254_tom530_ntt_claim",
+              "references": [
+                "tomescu_colouring_count_two_core_duplicate_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g254_two_core_helper_sanity",
+                "claim": "g254_two_core_helper_claim",
+                "references": [
+                  "x254_two_core"
+                ]
+              },
+              {
+                "theorem": "g254_multihole_helper_sanity",
+                "claim": "g254_multihole_helper_claim",
+                "references": [
+                  "x254_odd_multihole"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2202_09118_01": {
+          "formal_name": "odd_multihole_free_poly_chi_bounded_statement",
+          "source_hash": "677309ae3810bc7eba0bf866199bdde78ea6ac499c5af30c2c521d4fd847da03",
+          "note": "Chudnovsky, Scott, Seymour and Spirkl, Disjoint holes (arXiv:2202.09118v1), open problem in affirmative form: for every k >= 1 the graphs with no k-multihole of odd cycles (x254_odd_multihole: k odd holes, pairwise disjoint and anticomplete) are polynomially chi-bounded; open at the pin (Theorem 1.1, four or odd, is not this row).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g254_mh_hyp_inhabited",
+              "claim": "g254_mh_hyp_claim",
+              "references": [
+                "odd_multihole_free_poly_chi_bounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g254_mh_not_trivially_true",
+              "claim": "g254_mh_ntt_claim",
+              "references": [
+                "odd_multihole_free_poly_chi_bounded_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g254_two_core_helper_sanity",
+                "claim": "g254_two_core_helper_claim",
+                "references": [
+                  "x254_two_core"
+                ]
+              },
+              {
+                "theorem": "g254_multihole_helper_sanity",
+                "claim": "g254_multihole_helper_claim",
+                "references": [
+                  "x254_odd_multihole"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x254_two_core": {
+          "classification": "paper_specific",
+          "reason": "The 2-core of arXiv:1712.06067v3 TeX l.93 (repeated deletion of vertices of degree at most one), as the union of the vertex sets in which every vertex has at least two neighbours inside: the largest such set, which the deletion process leaves."
+        },
+        "x254_odd_multihole": {
+          "classification": "paper_specific",
+          "reason": "A k-multihole in which all the cycles have odd length, arXiv:2202.09118v1 TeX l.70 and l.97-98: k odd holes (GTBase hole), pairwise vertex-disjoint and with no edge between two of them."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
