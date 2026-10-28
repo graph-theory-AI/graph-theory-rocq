@@ -26,12 +26,14 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Four
+corrections are applied explicitly (ERRATA below) since the review files predate them. Five
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
 wave X238, the path question arxiv:2202.05557#01 is solved by Part VIII of the same series
-(arXiv:2303.11766, Theorem 1.5), which its pinned review names without reading the theorem.
+(arXiv:2303.11766, Theorem 1.5), which its pinned review names without reading the theorem. The
+studies row of Kiraly's O(1.4^m) cycle-count conjecture is solved by its own source
+(arXiv:1907.12091, Theorem 1).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -228,6 +230,12 @@ ERRATA = [
      "Literature: solved by Nguyen, Scott and Seymour, arXiv:2303.11766 (J. Graph Theory 2024), "
      "Theorem 1.5: for every path H and d >= 1 a polynomial f gives chi(G) <= f(t) for every H-free "
      "G with no K_d(t) subgraph, i.e. a polynomial bound in tau_d(G)."),
+    # literature status correction (Lancelot's lane; solved in its own source before the corpus pin)
+    ("studies", "std_kir_ly_s_cycle_count_conjecture", "solved",
+     "Literature: solved in its own source, arXiv:1907.12091 (Dvorak, Morrison, Noel, Norin and "
+     "Postle), Theorem 1: a simple graph with m edges has O(gamma^m) cycles, gamma = b(5)^(2/5) "
+     "~ 1.38403 < 1.4 (l.257; Theorem 1 at l.68 prints 442368^(1/10), a typo for 442368^(1/40)) "
+     "(Kiraly, EGRES TR-2009-03, Conjecture 7.15: c(G) <= c * 1.4^m)."),
 ]
 
 
@@ -836,7 +844,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 4 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 5 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
