@@ -3392,18 +3392,24 @@
    "note": "Authored in X246.v:delta11_hero_transfer_k1_plus_statement. Question 5.4 of Aboulker, Aubian, Charbit (open at the pin): if Delta(1,1,H) is a hero in Forb_ind(F) and H a hero in Forb_ind(K_1 + F), then Delta(1,1,H) is a hero in Forb_ind(K_1 + F); oriented ambient, H and F oriented (l.327), Delta(1,1,H) = c3sub K1 K1 H, K_1 + F = digraph_sum (heroes, dichromatic_bounded, oriented_dg)."
   },
   "axv_2202_13977_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x251-blowups-extensions-strong-eh",
+   "package": "digraph-theory",
+   "note": "Authored in X251.v:strong_eh_iff_forest_backedge_statement. Chudnovsky, Scott, Seymour, Spirkl, Conjecture 1.5: a tournament has the strong EH-property iff some numbering has a forest backedge graph, encoded as stated; the \"only if\" direction is the source's Theorem 1.4; open at the pin (x251_seh)."
   },
   "axv_2202_13977_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x251-blowups-extensions-strong-eh",
+   "package": "digraph-theory",
+   "note": "Authored in X251.v:three_backedges_strong_eh_statement. Chudnovsky, Scott, Seymour, Spirkl, Theorem 1.6 without its D_5-freeness sentence (left open, l.258): every tournament with a numbering of at most three backedges has the strong EH-property; open at the pin (x251_seh)."
   },
   "axv_2203_03612_00": {
    "statement": "done",
@@ -5164,11 +5170,14 @@
    "note": "Reconciled to unvd.v:prob_6 (re-encodings: prob6_unvd_statement). prob_6 := forall alpha:rat, exists a d b:nat, forall D with 0<#|D| and mad D <= alpha, for unvd-value nD: nD <= a*#|D|^d + b. Matches Problem 6: 'for every (positive) alpha, does there exist a polynomial P_alpha with unvd(D) <= P_alpha(|V(D)|) for every digraph of max average degree <= alpha?'. mad correctly = max over nonempty S of 2*narcs_in(S)/|S| (average-degree density). Caveats (all non-defe"
   },
   "axv_2410_23566_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x251-blowups-extensions-strong-eh",
+   "package": "digraph-theory",
+   "note": "Authored in X251.v:blowup_linear_unavoidability_statement. Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud, Conjecture 7: the k-blow-ups (k positive) of a linearly unavoidable family of bounded maximum average degree are linearly unavoidable; the printed \"i <> j\" in the arc set (l.180) is read as a misprint; partial at the pin (proved for oriented trees) (x251_blowup, x251_blowup_family, x251_mad_le)."
   },
   "axv_2410_23566_02": {
    "statement": "todo",
@@ -5188,11 +5197,14 @@
    "note": "Reconciled to unvd.v:conj_9. conj_9 := exists C:nat, forall acyclic D (acyclicb) with 1<#|D| and vertex v, for the unvd-relation values nD of D and nDv of (del_vertex v = D-v): nD <= C*nDv. Matches Conjecture 9: 'There exists a constant C such that unvd(D) <= C*unvd(D-v) for every acyclic digraph D and every vertex v'. Quantifier structure, object (digraph), acyclicity guard, and D-v (del_vertex = induced on [set~ v]) all cor"
   },
   "axv_2410_23566_04": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x251-blowups-extensions-strong-eh",
+   "package": "digraph-theory",
+   "note": "Authored in X251.v:kextension_oriented_tree_unavoidability_statement. Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud, Conjecture 10: an absolute C with every k-extension (k positive) of an oriented tree of order n > 1 C^k (2n-2)-unavoidable; the guard n > 1 is Sumner's (l.136), from which the conjecture is derived; open at the pin (x221_kextension, x251_oriented_tree_of_order)."
   },
   "axv_2410_23566_05": {
    "statement": "done",
