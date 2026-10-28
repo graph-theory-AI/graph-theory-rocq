@@ -1,6 +1,6 @@
 {
   "meta": {
-    "count": 314,
+    "count": 319,
     "github_blob": "https://github.com/LLM4Rocq/digraph-theory/blob/main",
     "coqdoc": "https://llm4rocq.github.io/digraph-theory/doc",
     "generator": "scripts/build_correspondence.py"
@@ -2639,6 +2639,44 @@
       "faithfulness": ""
     },
     {
+      "id": "chi_binding_iff_forest_backedge_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "chi_binding_iff_forest_backedge_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2310.04265#05 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__05/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__05.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Conjecture 4.3) A tournament H is dic-binding if and only if H has a backedge graph which is a forest. Definitions: [ind_free H T] - T has no induced copy of H (conjectures/heroes.v); [x221_dichro], [omegabar], [backedge] as above; [is_forest] (coq-graph-theory). Notes: H is dic-binding when the H-free tournaments form a dic-bounded class (TeX l.988, l.412). The biconditional is encoded as stated (l.1045-1047). Literature status: DISPROVED at the pin (pinned status disproved): Aubian, arXiv:2401.07776, Theorem 4.2 refutes the \"if\" direction; the \"only if\" direction is the paper's theorem only_if_part_GS (l.1065-1067), so the row is false.",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2310.04265#05 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__05/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__05.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Conjecture 4.3) A tournament H is dic-binding if and only if H has a backedge graph which is a forest. Definitions: [ind_free H T] - T has no induced copy of H (conjectures/heroes.v); [x221_dichro], [omegabar], [backedge] as above; [is_forest] (coq-graph-theory). Notes: H is dic-binding when the H-free tournaments form a dic-bounded class (TeX l.988, l.412). The biconditional is encoded as stated (l.1045-1047). Literature status: DISPROVED at the pin (pinned status disproved): Aubian, arXiv:2401.07776, Theorem 4.2 refutes the \"if\" direction; the \"only if\" direction is the paper's theorem only_if_part_GS (l.1065-1067), so the row is false.",
+      "decoded_authored": false,
+      "formal": {
+        "name": "chi_binding_iff_forest_backedge_statement",
+        "file": "theories/conjectures/X248.v",
+        "line": 150,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X248.v#L150",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X248.html#Digraph.conjectures.X248.chi_binding_iff_forest_backedge_statement",
+        "verbatim": "Definition chi_binding_iff_forest_backedge_statement : Prop :=\n  forall H : tournament,\n    (exists f : nat -> nat, forall T : tournament, ind_free H T -> (x221_dichro T <= f (omegabar T))%N) <->\n    (exists p : {perm H}, is_forest [set: backedge p])."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
       "id": "chi_bounded_bounded_order",
       "kind": "grounding",
       "cluster": "P2",
@@ -2676,6 +2714,44 @@
         "conj4_1605_statement",
         "conj5_1605_statement"
       ],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "chi_bounded_digraphs_subst_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "chi_bounded_digraphs_subst_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2310.04265#11 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__11/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__11.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Conjecture 6.1) If a class of digraphs is dic-bounded, then so is its closure under substitution. Definitions: [x248_dic_bounded C], [x248_omegab_dg D], [x248_hereditary C], [x248_subst_closure C] (this file); [oriented_dg D] (conjectures/heroes_dichotomy.v). Notes: The paper's digraphs have no loops, no parallel and no anti-parallel arcs (TeX l.377), hence the guard that every member is oriented. The clique number of a digraph is [x248_omegab_dg] (l.403-406), which equals [omegabar] on tournaments. Classes, substitution and its closure are read as at arxiv:2310.04265#01. The tournament case is the paper's Theorem 3.9 (l.679-683). Literature status: open at the pin (pinned status open).",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2310.04265#11 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__11/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__11.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Conjecture 6.1) If a class of digraphs is dic-bounded, then so is its closure under substitution. Definitions: [x248_dic_bounded C], [x248_omegab_dg D], [x248_hereditary C], [x248_subst_closure C] (this file); [oriented_dg D] (conjectures/heroes_dichotomy.v). Notes: The paper's digraphs have no loops, no parallel and no anti-parallel arcs (TeX l.377), hence the guard that every member is oriented. The clique number of a digraph is [x248_omegab_dg] (l.403-406), which equals [omegabar] on tournaments. Classes, substitution and its closure are read as at arxiv:2310.04265#01. The tournament case is the paper's Theorem 3.9 (l.679-683). Literature status: open at the pin (pinned status open).",
+      "decoded_authored": false,
+      "formal": {
+        "name": "chi_bounded_digraphs_subst_statement",
+        "file": "theories/conjectures/X248.v",
+        "line": 186,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X248.v#L186",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X248.html#Digraph.conjectures.X248.chi_bounded_digraphs_subst_statement",
+        "verbatim": "Definition chi_bounded_digraphs_subst_statement : Prop :=\n  forall C : diGraphType -> Prop, x248_hereditary C -> (forall D, C D -> oriented_dg D) ->\n    x248_dic_bounded C -> x248_dic_bounded (x248_subst_closure C)."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
       "grounded_by": [],
       "grounding": [],
       "faithfulness": ""
@@ -8218,6 +8294,44 @@
       "faithfulness": ""
     },
     {
+      "id": "local_to_global_omegabar_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "local_to_global_omegabar_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2310.04265#08 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__08/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__08.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Conjecture 5.6) There is a function g such that every tournament in which every out-neighbourhood has clique number at most t has clique number at most g(t). Definitions: [omegabar] as above; [sub_tournament T S] - the sub-tournament on S (core/tournament.v). Notes: N^+(v) is the out-neighbourhood [set w | v --> w] and its clique number is that of the sub-tournament it induces (TeX l.1430-1432); g is chosen before t. Literature status: SOLVED at the pin (pinned status solved): Crew, Fan, Koerts, Moore, Spirkl, arXiv:2602.09863, Corollary 13.",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2310.04265#08 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__08/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__08.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Conjecture 5.6) There is a function g such that every tournament in which every out-neighbourhood has clique number at most t has clique number at most g(t). Definitions: [omegabar] as above; [sub_tournament T S] - the sub-tournament on S (core/tournament.v). Notes: N^+(v) is the out-neighbourhood [set w | v --> w] and its clique number is that of the sub-tournament it induces (TeX l.1430-1432); g is chosen before t. Literature status: SOLVED at the pin (pinned status solved): Crew, Fan, Koerts, Moore, Spirkl, arXiv:2602.09863, Corollary 13.",
+      "decoded_authored": false,
+      "formal": {
+        "name": "local_to_global_omegabar_statement",
+        "file": "theories/conjectures/X248.v",
+        "line": 168,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X248.v#L168",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X248.html#Digraph.conjectures.X248.local_to_global_omegabar_statement",
+        "verbatim": "Definition local_to_global_omegabar_statement : Prop :=\n  exists g : nat -> nat, forall (t : nat) (T : tournament),\n    (forall v : T, (omegabar (sub_tournament [set w | v --> w]) <= t)%N) -> (omegabar T <= g t)%N."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
       "id": "local_tournament_dichromatic_bound_statement",
       "kind": "conjecture",
       "cluster": "?",
@@ -9964,6 +10078,44 @@
       "faithfulness": ""
     },
     {
+      "id": "omega_dic_orderings_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "omega_dic_orderings_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2310.04265#00 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__00/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__00.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Question 3.5) Every tournament has a vertex ordering that is both an omega-ordering and a dic-ordering. Definitions: [omegab_at p] - the clique number of the backedge graph [backedge p] (invariants/omegabar.v, core/order.v); [omegabar T] - its least value over all orderings; [χ(_)] - the chromatic number (coq-graph-theory); [x221_dichro T] - the least k with a k-dicolouring (conjectures/X221.v). Notes: An ordering is an omega-ordering when the clique number of its backedge graph is omegabar(T), and a dic-ordering when \"dic(T^<) = dic(T)\" (TeX l.462); T^< is an undirected graph, whose dic is its chromatic number (l.391: dic(D) is the least chromatic number of a backedge graph). The question (l.549-551) is encoded in its affirmative form. Literature status: open at the pin (pinned status open; the review status \"unclear\" asked whether arXiv:2401.07776 refutes it; that paper's counterexample, Theorem 4.2, is the one to Conjecture 4.3, arxiv:2310.04265#05, per the corrected review of that row).",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2310.04265#00 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__00/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__00.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Question 3.5) Every tournament has a vertex ordering that is both an omega-ordering and a dic-ordering. Definitions: [omegab_at p] - the clique number of the backedge graph [backedge p] (invariants/omegabar.v, core/order.v); [omegabar T] - its least value over all orderings; [χ(_)] - the chromatic number (coq-graph-theory); [x221_dichro T] - the least k with a k-dicolouring (conjectures/X221.v). Notes: An ordering is an omega-ordering when the clique number of its backedge graph is omegabar(T), and a dic-ordering when \"dic(T^<) = dic(T)\" (TeX l.462); T^< is an undirected graph, whose dic is its chromatic number (l.391: dic(D) is the least chromatic number of a backedge graph). The question (l.549-551) is encoded in its affirmative form. Literature status: open at the pin (pinned status open; the review status \"unclear\" asked whether arXiv:2401.07776 refutes it; that paper's counterexample, Theorem 4.2, is the one to Conjecture 4.3, arxiv:2310.04265#05, per the corrected review of that row).",
+      "decoded_authored": false,
+      "formal": {
+        "name": "omega_dic_orderings_statement",
+        "file": "theories/conjectures/X248.v",
+        "line": 109,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X248.v#L109",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X248.html#Digraph.conjectures.X248.omega_dic_orderings_statement",
+        "verbatim": "Definition omega_dic_orderings_statement : Prop :=\n  forall T : tournament, exists p : {perm T},\n    omegab_at p = omegabar T /\\ χ([set: backedge p]) = x221_dichro T."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
       "id": "omegabar_AC",
       "kind": "proved-result",
       "cluster": "P1",
@@ -10997,6 +11149,44 @@
       "grounds": [
         "oriented_chromatic_planar_bounded_statement"
       ],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "poly_chi_bounded_tournaments_subst_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "poly_chi_bounded_tournaments_subst_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2310.04265#01 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__01/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__01.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Question 3.10) If a class of tournaments is polynomially dic-bounded, then so is its closure under substitution. Definitions: [x248_poly_dic_bounded C], [x248_hereditary C], [x248_subst_closure C] (this file); [is_tournament D] (conjectures/heroes.v). Notes: A class is closed under induced subdigraphs (TeX l.454); only induced-closure is required: for an induced-closed C, its closure under isomorphism C' is a class in the paper's sense with the same bound (dic and omegabar are isomorphism invariants), and the closure of C under substitution lies inside that of C', so the two readings agree. The closure is taken without isomorphic copies for the same reason. Substitution follows the standard definition: TeX l.668 prints the two arc cases swapped (\"V(H_1) => v\" when vu is an arc); the proof reads them as here (l.785: an arc ss' of X with some vertex of T_s' before some vertex of T_s marks a backward arc only when V(T_s) => V(T_s')), as does [CPST13]. Polynomial means c * t^d (see [x248_poly_dic_bounded]). The paper proves the non-polynomial version (Theorem 3.9, with g(w) = (3w f(w))^w). Literature status: open at the pin (pinned status open).",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2310.04265#01 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2310.04265__01/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2310.04265__01.json English statement: (Aboulker, Aubian, Charbit, Lopes, Clique number of tournaments, arXiv:2310.04265v1, Question 3.10) If a class of tournaments is polynomially dic-bounded, then so is its closure under substitution. Definitions: [x248_poly_dic_bounded C], [x248_hereditary C], [x248_subst_closure C] (this file); [is_tournament D] (conjectures/heroes.v). Notes: A class is closed under induced subdigraphs (TeX l.454); only induced-closure is required: for an induced-closed C, its closure under isomorphism C' is a class in the paper's sense with the same bound (dic and omegabar are isomorphism invariants), and the closure of C under substitution lies inside that of C', so the two readings agree. The closure is taken without isomorphic copies for the same reason. Substitution follows the standard definition: TeX l.668 prints the two arc cases swapped (\"V(H_1) => v\" when vu is an arc); the proof reads them as here (l.785: an arc ss' of X with some vertex of T_s' before some vertex of T_s marks a backward arc only when V(T_s) => V(T_s')), as does [CPST13]. Polynomial means c * t^d (see [x248_poly_dic_bounded]). The paper proves the non-polynomial version (Theorem 3.9, with g(w) = (3w f(w))^w). Literature status: open at the pin (pinned status open).",
+      "decoded_authored": false,
+      "formal": {
+        "name": "poly_chi_bounded_tournaments_subst_statement",
+        "file": "theories/conjectures/X248.v",
+        "line": 133,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X248.v#L133",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X248.html#Digraph.conjectures.X248.poly_chi_bounded_tournaments_subst_statement",
+        "verbatim": "Definition poly_chi_bounded_tournaments_subst_statement : Prop :=\n  forall C : diGraphType -> Prop, x248_hereditary C -> (forall D, C D -> is_tournament D) ->\n    x248_poly_dic_bounded C -> x248_poly_dic_bounded (x248_subst_closure C)."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
       "grounded_by": [],
       "grounding": [],
       "faithfulness": ""
