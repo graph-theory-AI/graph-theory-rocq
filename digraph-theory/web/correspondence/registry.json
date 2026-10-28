@@ -1,6 +1,6 @@
 {
   "meta": {
-    "count": 319,
+    "count": 323,
     "github_blob": "https://github.com/LLM4Rocq/digraph-theory/blob/main",
     "coqdoc": "https://llm4rocq.github.io/digraph-theory/doc",
     "generator": "scripts/build_correspondence.py"
@@ -2158,6 +2158,44 @@
         "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X46.v#L34",
         "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X46.html#Digraph.conjectures.X46.bipartite_digraph_outdegree_girth_statement",
         "verbatim": "Definition bipartite_digraph_outdegree_girth_statement : Prop :=\n  forall (k n : nat) (D : diGraphType) (A B : {set D}),\n    1 <= k ->\n    0 < n ->\n    x46_bipartition A B n ->\n    (forall v : D, n < k.+1 * outdeg v) ->\n    exists c : seq D,\n      dicycle c /\\\n      size c <= 2 * k."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "blowup_linear_unavoidability_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "blowup_linear_unavoidability_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2410.23566#01 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2410.23566__01/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2410.23566__01.json English statement: (Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud, Blow-ups and extensions of trees in tournaments, arXiv:2410.23566v1, Conjecture 7) If a family F of digraphs is linearly unavoidable and has bounded maximum average degree, then for every positive integer k the family F[k] of the k-blow-ups of its members is linearly unavoidable. Definitions: [linearly_unavoidable F] - one constant C with unavoidability number at most C |V(D)| throughout F (foundations/tournament_unavoidability.v); [x251_mad_le D a], [x251_blowup], [x251_blowup_family] (this file). Notes: k is positive, as the source states before the definition (l.176). The source prints the arc set of D[k] as {(u,i)(v,j) | uv in A(D), i, j in [k], i <> j} (l.180); the \"i <> j\" is read as a misprint and not encoded, because the same paragraph defines D[k] by blowing up each vertex into an independent set (l.177), D[1] would otherwise have no arc, and the source's maximum average degree of the k-blow-up of a tree of order n, 2k - 2k/n (l.198), counts k^2 arcs per arc. The family F[k] is taken up to isomorphism, which does not change linear unavoidability. The average degree of a nonempty digraph is 2|A(D)|/|V(D)| (l.94-95), counted here on the arcs; \"bounded\" does not depend on that convention, since the edges of the underlying graph and the arcs differ by at most a factor 2 plus the loops. The unavoidability number is relational, as in X221: a member with no unavoidability number (one with a directed cycle) imposes nothing, and its blow-ups have directed cycles too. The empty family, arcless members and single vertices are consistent with the source. Literature status: partial at the pin (pinned status partial): the source proves it for oriented trees (l.196-197: the k-blow-up of an oriented tree of order n is (2^(10+18k) k n)-unavoidable) and notes it for directed paths (l.194-195).",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2410.23566#01 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2410.23566__01/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2410.23566__01.json English statement: (Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud, Blow-ups and extensions of trees in tournaments, arXiv:2410.23566v1, Conjecture 7) If a family F of digraphs is linearly unavoidable and has bounded maximum average degree, then for every positive integer k the family F[k] of the k-blow-ups of its members is linearly unavoidable. Definitions: [linearly_unavoidable F] - one constant C with unavoidability number at most C |V(D)| throughout F (foundations/tournament_unavoidability.v); [x251_mad_le D a], [x251_blowup], [x251_blowup_family] (this file). Notes: k is positive, as the source states before the definition (l.176). The source prints the arc set of D[k] as {(u,i)(v,j) | uv in A(D), i, j in [k], i <> j} (l.180); the \"i <> j\" is read as a misprint and not encoded, because the same paragraph defines D[k] by blowing up each vertex into an independent set (l.177), D[1] would otherwise have no arc, and the source's maximum average degree of the k-blow-up of a tree of order n, 2k - 2k/n (l.198), counts k^2 arcs per arc. The family F[k] is taken up to isomorphism, which does not change linear unavoidability. The average degree of a nonempty digraph is 2|A(D)|/|V(D)| (l.94-95), counted here on the arcs; \"bounded\" does not depend on that convention, since the edges of the underlying graph and the arcs differ by at most a factor 2 plus the loops. The unavoidability number is relational, as in X221: a member with no unavoidability number (one with a directed cycle) imposes nothing, and its blow-ups have directed cycles too. The empty family, arcless members and single vertices are consistent with the source. Literature status: partial at the pin (pinned status partial): the source proves it for oriented trees (l.196-197: the k-blow-up of an oriented tree of order n is (2^(10+18k) k n)-unavoidable) and notes it for directed paths (l.194-195).",
+      "decoded_authored": false,
+      "formal": {
+        "name": "blowup_linear_unavoidability_statement",
+        "file": "theories/conjectures/X251.v",
+        "line": 86,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X251.v#L86",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X251.html#Digraph.conjectures.X251.blowup_linear_unavoidability_statement",
+        "verbatim": "Definition blowup_linear_unavoidability_statement : Prop :=\n  forall (F : diGraphType -> Prop) (k : nat), 1 <= k ->\n    linearly_unavoidable F ->\n    (exists a : nat, forall D : diGraphType, F D -> x251_mad_le D a) ->\n    linearly_unavoidable (x251_blowup_family k F)."
       },
       "status": "open",
       "axiom_free": false,
@@ -7901,6 +7939,44 @@
       "faithfulness": ""
     },
     {
+      "id": "kextension_oriented_tree_unavoidability_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "kextension_oriented_tree_unavoidability_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2410.23566#04 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2410.23566__04/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2410.23566__04.json English statement: (Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud, Blow-ups and extensions of trees in tournaments, arXiv:2410.23566v1, Conjecture 10) There is an absolute constant C such that for every positive integer k, every k-extension of an oriented tree of order n > 1 is C^k (2n - 2)-unavoidable. Definitions: [x221_kextension k F D] - D is acyclic and deleting some k vertices of D leaves a member of F up to isomorphism (conjectures/X221.v); [x251_oriented_tree_of_order n] (this file); [oriented_tree T] (X2.v); [unavoidable D N] - every tournament on N vertices contains D (conjectures/unvd.v). Notes: k-extensions are defined for positive k (l.211-212). The conjecture follows from Conjecture 9 together with Sumner's conjecture (l.218), which is stated for oriented trees of order n > 1 (l.136); the printed Conjecture 10 does not repeat that range, but at n = 1 the bound C^k (2n - 2) is 0 and no digraph with a vertex is 0-unavoidable, so the guard 1 < n is kept (load-bearing: grounding_X251.v). The subtraction 2 * n - 2 is natural-number subtraction, exact under the guard 1 < n. C is a natural number: unavoidability is monotone in the order (tournament_unavoidable_monotone), so a real constant can be rounded up. Literature status: open at the pin (pinned status open); the source proves the weaker bound 2 * 3^C(2k+2,2) |V(F)| for k-extensions of large oriented trees (l.230).",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2410.23566#04 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2410.23566__04/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2410.23566__04.json English statement: (Aboulker, Havet, Lochet, Lopes, Picasarri-Arrieta, Rambaud, Blow-ups and extensions of trees in tournaments, arXiv:2410.23566v1, Conjecture 10) There is an absolute constant C such that for every positive integer k, every k-extension of an oriented tree of order n > 1 is C^k (2n - 2)-unavoidable. Definitions: [x221_kextension k F D] - D is acyclic and deleting some k vertices of D leaves a member of F up to isomorphism (conjectures/X221.v); [x251_oriented_tree_of_order n] (this file); [oriented_tree T] (X2.v); [unavoidable D N] - every tournament on N vertices contains D (conjectures/unvd.v). Notes: k-extensions are defined for positive k (l.211-212). The conjecture follows from Conjecture 9 together with Sumner's conjecture (l.218), which is stated for oriented trees of order n > 1 (l.136); the printed Conjecture 10 does not repeat that range, but at n = 1 the bound C^k (2n - 2) is 0 and no digraph with a vertex is 0-unavoidable, so the guard 1 < n is kept (load-bearing: grounding_X251.v). The subtraction 2 * n - 2 is natural-number subtraction, exact under the guard 1 < n. C is a natural number: unavoidability is monotone in the order (tournament_unavoidable_monotone), so a real constant can be rounded up. Literature status: open at the pin (pinned status open); the source proves the weaker bound 2 * 3^C(2k+2,2) |V(F)| for k-extensions of large oriented trees (l.230).",
+      "decoded_authored": false,
+      "formal": {
+        "name": "kextension_oriented_tree_unavoidability_statement",
+        "file": "theories/conjectures/X251.v",
+        "line": 110,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X251.v#L110",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X251.html#Digraph.conjectures.X251.kextension_oriented_tree_unavoidability_statement",
+        "verbatim": "Definition kextension_oriented_tree_unavoidability_statement : Prop :=\n  exists C : nat, forall k n : nat, 1 <= k -> 1 < n ->\n    forall D : diGraphType, x221_kextension k (x251_oriented_tree_of_order n) D ->\n      unavoidable D (C ^ k * (2 * n - 2))."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
       "id": "kmajority_col_TT2",
       "kind": "grounding",
       "cluster": "P11",
@@ -11992,6 +12068,44 @@
       "faithfulness": ""
     },
     {
+      "id": "strong_eh_iff_forest_backedge_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "strong_eh_iff_forest_backedge_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2202.13977#00 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2202.13977__00/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2202.13977__00.json English statement: (Chudnovsky, Scott, Seymour, Spirkl, Pure pairs. X. Tournaments and the strong Erdos-Hajnal property, arXiv:2202.13977v3, Conjecture 1.5) A tournament has the strong EH-property if and only if it admits a numbering for which the backedge graph is a forest. Definitions: [x251_seh H] (this file); [backedge p] - the backedge graph of the numbering p: for i < j, v_i and v_j are adjacent iff v_j -> v_i (core/order.v; the source's l.144-149); [is_forest] (coq-graph-theory). Notes: G contains H when a subtournament of G is isomorphic to H (l.101-103), so H-free is [ind_free H G]. A numbering is a permutation of the vertices read through [ltp]. The biconditional is encoded as stated (l.216-217); its \"only if\" direction is the source's Theorem 1.4 (l.211-212). At the empty tournament and at TT 1 both sides hold. Literature status: open at the pin (pinned status open).",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2202.13977#00 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2202.13977__00/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2202.13977__00.json English statement: (Chudnovsky, Scott, Seymour, Spirkl, Pure pairs. X. Tournaments and the strong Erdos-Hajnal property, arXiv:2202.13977v3, Conjecture 1.5) A tournament has the strong EH-property if and only if it admits a numbering for which the backedge graph is a forest. Definitions: [x251_seh H] (this file); [backedge p] - the backedge graph of the numbering p: for i < j, v_i and v_j are adjacent iff v_j -> v_i (core/order.v; the source's l.144-149); [is_forest] (coq-graph-theory). Notes: G contains H when a subtournament of G is isomorphic to H (l.101-103), so H-free is [ind_free H G]. A numbering is a permutation of the vertices read through [ltp]. The biconditional is encoded as stated (l.216-217); its \"only if\" direction is the source's Theorem 1.4 (l.211-212). At the empty tournament and at TT 1 both sides hold. Literature status: open at the pin (pinned status open).",
+      "decoded_authored": false,
+      "formal": {
+        "name": "strong_eh_iff_forest_backedge_statement",
+        "file": "theories/conjectures/X251.v",
+        "line": 128,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X251.v#L128",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X251.html#Digraph.conjectures.X251.strong_eh_iff_forest_backedge_statement",
+        "verbatim": "Definition strong_eh_iff_forest_backedge_statement : Prop :=\n  forall H : tournament, x251_seh H <-> exists p : {perm H}, is_forest [set: backedge p]."
+      },
+      "status": "open",
+      "axiom_free": false,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
       "id": "strongly_connected_same_root_linear_branchings_statement",
       "kind": "conjecture",
       "cluster": "?",
@@ -12282,6 +12396,44 @@
       },
       "status": "proved",
       "axiom_free": true,
+      "edges": {
+        "implies": [],
+        "implied_by": [],
+        "refutes": [],
+        "refuted_by": [],
+        "equiv": []
+      },
+      "specializes": [],
+      "grounds": [],
+      "grounded_by": [],
+      "grounding": [],
+      "faithfulness": ""
+    },
+    {
+      "id": "three_backedges_strong_eh_statement",
+      "kind": "conjecture",
+      "cluster": "?",
+      "title": "three_backedges_strong_eh_statement",
+      "informal": {
+        "text": "Corpus row: arxiv:2202.13977#01 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2202.13977__01/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2202.13977__01.json English statement: (Chudnovsky, Scott, Seymour, Spirkl, Pure pairs. X. Tournaments and the strong Erdos-Hajnal property, arXiv:2202.13977v3, after Theorem 1.6) Every tournament that admits a numbering whose backedge graph has at most three edges has the strong EH-property. Definitions: [x251_seh H] (this file); [backedge p] (core/order.v); E(_) - the edge set of a simple graph (coq-graph-theory). Notes: the pinned text asks whether the second sentence of Theorem 1.6 (l.251-254), the D_5-freeness of H (a pattern {v_a v_d, v_a v_e, v_b v_e}, a < b < c < d < e, of backedges), can be omitted (l.258: \"that remains open\"). The row is Theorem 1.6 with that sentence dropped and every other hypothesis kept: a tournament with a numbering whose backedge graph has at most three edges. Literature status: open at the pin (pinned status open).",
+        "source": {
+          "name": "",
+          "url": "",
+          "attribution": ""
+        }
+      },
+      "decoded": "Corpus row: arxiv:2202.13977#01 Site: https://graph-theory-ai.github.io/graph-conjectures/arxiv/2202.13977__01/ Review: https://github.com/graph-theory-AI/graph-conjectures/blob/main/data/arxiv_reviews/2202.13977__01.json English statement: (Chudnovsky, Scott, Seymour, Spirkl, Pure pairs. X. Tournaments and the strong Erdos-Hajnal property, arXiv:2202.13977v3, after Theorem 1.6) Every tournament that admits a numbering whose backedge graph has at most three edges has the strong EH-property. Definitions: [x251_seh H] (this file); [backedge p] (core/order.v); E(_) - the edge set of a simple graph (coq-graph-theory). Notes: the pinned text asks whether the second sentence of Theorem 1.6 (l.251-254), the D_5-freeness of H (a pattern {v_a v_d, v_a v_e, v_b v_e}, a < b < c < d < e, of backedges), can be omitted (l.258: \"that remains open\"). The row is Theorem 1.6 with that sentence dropped and every other hypothesis kept: a tournament with a numbering whose backedge graph has at most three edges. Literature status: open at the pin (pinned status open).",
+      "decoded_authored": false,
+      "formal": {
+        "name": "three_backedges_strong_eh_statement",
+        "file": "theories/conjectures/X251.v",
+        "line": 145,
+        "github_url": "https://github.com/LLM4Rocq/digraph-theory/blob/main/theories/conjectures/X251.v#L145",
+        "coqdoc_url": "https://llm4rocq.github.io/digraph-theory/doc/Digraph.conjectures.X251.html#Digraph.conjectures.X251.three_backedges_strong_eh_statement",
+        "verbatim": "Definition three_backedges_strong_eh_statement : Prop :=\n  forall H : tournament, (exists p : {perm H}, #|E(backedge p)| <= 3) -> x251_seh H."
+      },
+      "status": "open",
+      "axiom_free": false,
       "edges": {
         "implies": [],
         "implied_by": [],
