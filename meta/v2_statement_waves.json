@@ -8334,6 +8334,427 @@
         }
       }
     },
+    "X248": {
+      "phase": "X248",
+      "repo": "digraph-theory",
+      "defines_file": "X248.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X248 (A3 verifier Marcol; routing Lancelot (100), no hold (110); design x248-design-by-arthur r3 (231)), branch math/arthur-x248-20261028, 2026-10-28",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x248-clique-number-of-tournaments",
+      "helper_ownership": {
+        "x248_backedge_rel": {
+          "classification": "paper_specific",
+          "reason": "the back-edge relation of arXiv:2310.04265 l.385-386 (u before v and v -> u) over every digraph; core/order.v's backedge_rel has the same body over tournaments only (Section Backedge) and is outside the inventory."
+        },
+        "x248_backedge": {
+          "classification": "paper_specific",
+          "reason": "the backedge graph D^< of l.385-386 as an sgraph over every digraph (core/order.v's backedge is over tournaments only); its symmetry and irreflexivity proofs are inline terms."
+        },
+        "x248_omegab_dg": {
+          "classification": "paper_specific",
+          "reason": "the clique number of a digraph (l.403-406): the clique number of the backedge graph at an arg-min ordering, omegabar's own body (invariants/omegabar.v) over every digraph; equal to omegabar on tournaments by reflexivity (g248_omegab_dg_tournament)."
+        },
+        "x248_dic_bounded": {
+          "classification": "paper_specific",
+          "reason": "dic-boundedness of a class of digraphs (l.412: dic <= f(omega)) with X221's x221_dichro and x248_omegab_dg; dichromatic.v's dichromatic_bounded is the constant-bound form."
+        },
+        "x248_poly_dic_bounded": {
+          "classification": "paper_specific",
+          "reason": "polynomial dic-boundedness (l.412, Question 3.10) in X218's c * t^d normal form."
+        },
+        "x248_hereditary": {
+          "classification": "paper_specific",
+          "reason": "a class in the paper's sense (l.454): closed under induced subdigraphs (induced_digraph)."
+        },
+        "x248_subst": {
+          "classification": "paper_specific",
+          "reason": "the vertex type of the substitution of D2 for the vertex u of D1 (l.663-668): the vertices of D1 other than u, then those of D2."
+        },
+        "x248_subst_rel": {
+          "classification": "paper_specific",
+          "reason": "the arc relation of x248_subst: the standard substitution (l.668 prints the two cross cases swapped; the proof at l.818 and [CPST13] read them as here)."
+        },
+        "x248_subst_closure": {
+          "classification": "paper_specific",
+          "reason": "the closure of a class under substitution (l.672), an inductive predicate without isomorphic copies (the Notes' argument: dic and omegabar are isomorphism invariants)."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "axv_2310_04265_00": {
+          "formal_name": "omega_dic_orderings_statement",
+          "source_hash": "c77a173583077b42cc1d0c8d2cb6d2771889756c4d6bd3b8cebcff758ef73d6d",
+          "note": "Aboulker, Aubian, Charbit, Lopes, Question 3.5: every tournament has a vertex ordering that is both an omega-ordering and a dic-ordering (the chromatic number of the backedge graph equals the dichromatic number, X221's x221_dichro); open at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g248_orderings_hyp_inhabited",
+              "claim": "g248_orderings_hyp_claim",
+              "references": [
+                "omega_dic_orderings_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g248_orderings_not_trivially_true",
+              "claim": "g248_orderings_ntt_claim",
+              "references": [
+                "omega_dic_orderings_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g248_backedge_helper_sanity",
+                "claim": "g248_backedge_helper_claim",
+                "references": [
+                  "x248_backedge_rel",
+                  "x248_backedge"
+                ]
+              },
+              {
+                "theorem": "g248_omegab_dg_helper_sanity",
+                "claim": "g248_omegab_dg_helper_claim",
+                "references": [
+                  "x248_omegab_dg"
+                ]
+              },
+              {
+                "theorem": "g248_dic_bounded_helper_sanity",
+                "claim": "g248_dic_bounded_helper_claim",
+                "references": [
+                  "x248_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_poly_helper_sanity",
+                "claim": "g248_poly_helper_claim",
+                "references": [
+                  "x248_poly_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_hereditary_helper_sanity",
+                "claim": "g248_hereditary_helper_claim",
+                "references": [
+                  "x248_hereditary"
+                ]
+              },
+              {
+                "theorem": "g248_subst_helper_sanity",
+                "claim": "g248_subst_helper_claim",
+                "references": [
+                  "x248_subst",
+                  "x248_subst_rel"
+                ]
+              },
+              {
+                "theorem": "g248_closure_helper_sanity",
+                "claim": "g248_closure_helper_claim",
+                "references": [
+                  "x248_subst_closure"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2310_04265_01": {
+          "formal_name": "poly_chi_bounded_tournaments_subst_statement",
+          "source_hash": "20d592857e4e4ef5e71bb5cf675f65bc2030e8dd38ad2cfe12911af490486ea2",
+          "note": "Aboulker, Aubian, Charbit, Lopes, Question 3.10: the substitution closure of a hereditary, polynomially dic-bounded class of tournaments is polynomially dic-bounded (c * t^d); the l.668 cases printed swapped are read as the standard substitution (l.818); open at the pin (x248_poly_dic_bounded, x248_hereditary, x248_subst, x248_subst_closure).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g248_poly_hyp_inhabited",
+              "claim": "g248_poly_hyp_claim",
+              "references": [
+                "poly_chi_bounded_tournaments_subst_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g248_poly_not_trivially_true",
+              "claim": "g248_poly_ntt_claim",
+              "references": [
+                "poly_chi_bounded_tournaments_subst_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g248_backedge_helper_sanity",
+                "claim": "g248_backedge_helper_claim",
+                "references": [
+                  "x248_backedge_rel",
+                  "x248_backedge"
+                ]
+              },
+              {
+                "theorem": "g248_omegab_dg_helper_sanity",
+                "claim": "g248_omegab_dg_helper_claim",
+                "references": [
+                  "x248_omegab_dg"
+                ]
+              },
+              {
+                "theorem": "g248_dic_bounded_helper_sanity",
+                "claim": "g248_dic_bounded_helper_claim",
+                "references": [
+                  "x248_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_poly_helper_sanity",
+                "claim": "g248_poly_helper_claim",
+                "references": [
+                  "x248_poly_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_hereditary_helper_sanity",
+                "claim": "g248_hereditary_helper_claim",
+                "references": [
+                  "x248_hereditary"
+                ]
+              },
+              {
+                "theorem": "g248_subst_helper_sanity",
+                "claim": "g248_subst_helper_claim",
+                "references": [
+                  "x248_subst",
+                  "x248_subst_rel"
+                ]
+              },
+              {
+                "theorem": "g248_closure_helper_sanity",
+                "claim": "g248_closure_helper_claim",
+                "references": [
+                  "x248_subst_closure"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2310_04265_05": {
+          "formal_name": "chi_binding_iff_forest_backedge_statement",
+          "source_hash": "0d7d4affe49885bed517510451fcbdb094f3fca1c772c6f8ca21c8f7026b5657",
+          "note": "Aboulker, Aubian, Charbit, Lopes, Conjecture 4.3, encoded as stated: a tournament H is dic-binding if and only if some backedge graph of H is a forest; disproved at the pin (Aubian, arXiv:2401.07776, Theorem 4.2 refutes the if direction).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g248_binding_hyp_inhabited",
+              "claim": "g248_binding_hyp_claim",
+              "references": [
+                "chi_binding_iff_forest_backedge_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g248_binding_not_trivially_true",
+              "claim": "g248_binding_ntt_claim",
+              "references": [
+                "chi_binding_iff_forest_backedge_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g248_backedge_helper_sanity",
+                "claim": "g248_backedge_helper_claim",
+                "references": [
+                  "x248_backedge_rel",
+                  "x248_backedge"
+                ]
+              },
+              {
+                "theorem": "g248_omegab_dg_helper_sanity",
+                "claim": "g248_omegab_dg_helper_claim",
+                "references": [
+                  "x248_omegab_dg"
+                ]
+              },
+              {
+                "theorem": "g248_dic_bounded_helper_sanity",
+                "claim": "g248_dic_bounded_helper_claim",
+                "references": [
+                  "x248_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_poly_helper_sanity",
+                "claim": "g248_poly_helper_claim",
+                "references": [
+                  "x248_poly_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_hereditary_helper_sanity",
+                "claim": "g248_hereditary_helper_claim",
+                "references": [
+                  "x248_hereditary"
+                ]
+              },
+              {
+                "theorem": "g248_subst_helper_sanity",
+                "claim": "g248_subst_helper_claim",
+                "references": [
+                  "x248_subst",
+                  "x248_subst_rel"
+                ]
+              },
+              {
+                "theorem": "g248_closure_helper_sanity",
+                "claim": "g248_closure_helper_claim",
+                "references": [
+                  "x248_subst_closure"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2310_04265_08": {
+          "formal_name": "local_to_global_omegabar_statement",
+          "source_hash": "e88315a2c3cac3132405b40a791f4c92bc1ff8f9870c1745b7ec03b8bed7831a",
+          "note": "Aboulker, Aubian, Charbit, Lopes, Conjecture 5.6: some g bounds the clique number of every tournament whose out-neighbourhoods have clique number at most t by g(t) (g before t); solved at the pin (Crew, Fan, Koerts, Moore, Spirkl, arXiv:2602.09863, Corollary 13).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g248_local_hyp_inhabited",
+              "claim": "g248_local_hyp_claim",
+              "references": [
+                "local_to_global_omegabar_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g248_local_not_trivially_true",
+              "claim": "g248_local_ntt_claim",
+              "references": [
+                "local_to_global_omegabar_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g248_backedge_helper_sanity",
+                "claim": "g248_backedge_helper_claim",
+                "references": [
+                  "x248_backedge_rel",
+                  "x248_backedge"
+                ]
+              },
+              {
+                "theorem": "g248_omegab_dg_helper_sanity",
+                "claim": "g248_omegab_dg_helper_claim",
+                "references": [
+                  "x248_omegab_dg"
+                ]
+              },
+              {
+                "theorem": "g248_dic_bounded_helper_sanity",
+                "claim": "g248_dic_bounded_helper_claim",
+                "references": [
+                  "x248_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_poly_helper_sanity",
+                "claim": "g248_poly_helper_claim",
+                "references": [
+                  "x248_poly_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_hereditary_helper_sanity",
+                "claim": "g248_hereditary_helper_claim",
+                "references": [
+                  "x248_hereditary"
+                ]
+              },
+              {
+                "theorem": "g248_subst_helper_sanity",
+                "claim": "g248_subst_helper_claim",
+                "references": [
+                  "x248_subst",
+                  "x248_subst_rel"
+                ]
+              },
+              {
+                "theorem": "g248_closure_helper_sanity",
+                "claim": "g248_closure_helper_claim",
+                "references": [
+                  "x248_subst_closure"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2310_04265_11": {
+          "formal_name": "chi_bounded_digraphs_subst_statement",
+          "source_hash": "d880b4c7deacf78aec2b6bcd7293f2c31c76305489dfb6be4704f9789591a6f6",
+          "note": "Aboulker, Aubian, Charbit, Lopes, Conjecture 6.1: the substitution closure of a hereditary, dic-bounded class of oriented digraphs is dic-bounded, with the digraph clique number (equal to omegabar on tournaments); open at the pin (x248_dic_bounded, x248_omegab_dg, x248_hereditary, x248_subst, x248_subst_closure).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g248_dsubst_hyp_inhabited",
+              "claim": "g248_dsubst_hyp_claim",
+              "references": [
+                "chi_bounded_digraphs_subst_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g248_dsubst_not_trivially_true",
+              "claim": "g248_dsubst_ntt_claim",
+              "references": [
+                "chi_bounded_digraphs_subst_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g248_backedge_helper_sanity",
+                "claim": "g248_backedge_helper_claim",
+                "references": [
+                  "x248_backedge_rel",
+                  "x248_backedge"
+                ]
+              },
+              {
+                "theorem": "g248_omegab_dg_helper_sanity",
+                "claim": "g248_omegab_dg_helper_claim",
+                "references": [
+                  "x248_omegab_dg"
+                ]
+              },
+              {
+                "theorem": "g248_dic_bounded_helper_sanity",
+                "claim": "g248_dic_bounded_helper_claim",
+                "references": [
+                  "x248_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_poly_helper_sanity",
+                "claim": "g248_poly_helper_claim",
+                "references": [
+                  "x248_poly_dic_bounded"
+                ]
+              },
+              {
+                "theorem": "g248_hereditary_helper_sanity",
+                "claim": "g248_hereditary_helper_claim",
+                "references": [
+                  "x248_hereditary"
+                ]
+              },
+              {
+                "theorem": "g248_subst_helper_sanity",
+                "claim": "g248_subst_helper_claim",
+                "references": [
+                  "x248_subst",
+                  "x248_subst_rel"
+                ]
+              },
+              {
+                "theorem": "g248_closure_helper_sanity",
+                "claim": "g248_closure_helper_claim",
+                "references": [
+                  "x248_subst_closure"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
     "X249": {
       "phase": "X249",
       "repo": "chromatic-theory",
