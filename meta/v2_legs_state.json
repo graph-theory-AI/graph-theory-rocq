@@ -4500,18 +4500,24 @@
    "note": "Authored in X26.v:bounded_degree_distant_induced_menger_statement. Encodes the bounded-degree distant induced-Menger row: for every d and maximum-degree bound Delta, either k distant X-Y paths exist or a separator of size less than Ck exists."
   },
   "axv_2310_04265_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x248-clique-number-of-tournaments",
+   "package": "digraph-theory",
+   "note": "Authored in X248.v:omega_dic_orderings_statement. Aboulker, Aubian, Charbit, Lopes, Question 3.5: every tournament has a vertex ordering that is both an omega-ordering and a dic-ordering (the chromatic number of the backedge graph equals the dichromatic number, X221's x221_dichro); open at the pin."
   },
   "axv_2310_04265_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x248-clique-number-of-tournaments",
+   "package": "digraph-theory",
+   "note": "Authored in X248.v:poly_chi_bounded_tournaments_subst_statement. Aboulker, Aubian, Charbit, Lopes, Question 3.10: the substitution closure of a hereditary, polynomially dic-bounded class of tournaments is polynomially dic-bounded (c * t^d); the l.668 cases printed swapped are read as the standard substitution (l.785); open at the pin (x248_poly_dic_bounded, x248_hereditary, x248_subst, x248_subst_closure)."
   },
   "axv_2310_04265_02": {
    "statement": "done",
@@ -4544,11 +4550,14 @@
    "note": "Reconciled to twinwidth.v:conj_3_16_statement (re-encodings: conj_3_16_concrete). exists f, forall nonempty tournament T, exists order p:{perm T}, bst_order p /\\ bclique p <= f(omegabar T). Encodes Conj 3.16 'exists f s.t. every T has a BST-ordering with omega(T^p)<=f(omega-bar)': bclique p = omega(T^p), correct exists-f/forall-T/exists-p structure with the BST-ordering conjunct. CAVEAT: BST-ordering is PARAMETRIC -- bst_order is an abstract Section Variable (recursive BST in-o | 2026-09-23 re-read against graph-conjectures@b72c585 and arXiv:2310.04265v2 (renumbered Conjecture 3.17): \"There ex"
   },
   "axv_2310_04265_05": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x248-clique-number-of-tournaments",
+   "package": "digraph-theory",
+   "note": "Authored in X248.v:chi_binding_iff_forest_backedge_statement. Aboulker, Aubian, Charbit, Lopes, Conjecture 4.3, encoded as stated: a tournament H is dic-binding if and only if some backedge graph of H is a forest; disproved at the pin (Aubian, arXiv:2401.07776, Theorem 4.2 refutes the if direction)."
   },
   "axv_2310_04265_06": {
    "statement": "done",
@@ -4571,11 +4580,14 @@
    "note": "Reconciled to clique_cluster.v:dom_omega_cluster_statement. Rocq: exists f ell:nat->nat, forall (T:tournament)(k:nat), f k<=domnum T -> exists S:{set T}, #|S|<=ell k /\\ k<=omegabar(sub_tournament S). Encodes AACL Conjecture 5.3 (Large dom implies an omegabar-cluster) = manifest #07, whose statement_text ('two functions f and ell ... every tournament T with dom(T)>=f(k) contains a subtournament X with |X|<=ell(k) and omegabar(X)>=k') matches verbatim. domnu"
   },
   "axv_2310_04265_08": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x248-clique-number-of-tournaments",
+   "package": "digraph-theory",
+   "note": "Authored in X248.v:local_to_global_omegabar_statement. Aboulker, Aubian, Charbit, Lopes, Conjecture 5.6: some g bounds the clique number of every tournament whose out-neighbourhoods have clique number at most t by g(t) (g before t); solved at the pin (Crew, Fan, Koerts, Moore, Spirkl, arXiv:2602.09863, Corollary 13)."
   },
   "axv_2310_04265_09": {
    "statement": "done",
@@ -4598,11 +4610,14 @@
    "note": "Reconciled to clique_cluster.v:conjecture_5_10_statement. Rocq: forall k, 3<=k -> forall N, exists T:tournament, kcritical k T /\\ N < #|T|. Encodes AACL (arXiv:2310.04265 v2) Conjecture 5.10 'For every integer k>=3, there are an infinite number of k-omegabar-critical tournaments.' kcritical (critical.v) = (omegabar T == k) && forall v, omegabar(del_tournament v)==k-1, exactly the paper's k-omegabar-critical definition. Quantifier nesting and the k>=3 gua"
   },
   "axv_2310_04265_11": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x248-clique-number-of-tournaments",
+   "package": "digraph-theory",
+   "note": "Authored in X248.v:chi_bounded_digraphs_subst_statement. Aboulker, Aubian, Charbit, Lopes, Conjecture 6.1: the substitution closure of a hereditary, dic-bounded class of oriented digraphs is dic-bounded, with the digraph clique number (equal to omegabar on tournaments); open at the pin (x248_dic_bounded, x248_omegab_dg, x248_hereditary, x248_subst, x248_subst_closure)."
   },
   "axv_2310_12891_00": {
    "statement": "done",

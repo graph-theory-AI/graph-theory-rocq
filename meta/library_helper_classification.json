@@ -473,6 +473,14 @@
       "family_id": "hat-guessing",
       "milestone": "post-rc-library-wave"
     },
+    "hereditary": {
+      "class": "paper_specific",
+      "reason": "a class of ordered graphs closed under order-preserving injective restrictions in X87 (x87_ordered_class on x87_edge_fun), a class of digraphs closed under induced subdigraphs (induced_digraph; arXiv:2310.04265 l.454) in X248: different notions over different objects",
+      "members": [
+        "Digraph.conjectures.X248.x248_hereditary",
+        "GTMisc.conjectures.X87.x87_hereditary"
+      ]
+    },
     "hom_count": {
       "class": "candidate_family",
       "reason": "homomorphism counts; D2tur, and X143 = X135",
