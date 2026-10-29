@@ -1926,6 +1926,26 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X253.v",
       "name": "is_turan_number",
       "note": "Wave X253 (2026-10-28) imports D2tur for is_turan_number (ex(n; H_k), row erdos:926) and imports GTBase LAST, so the grounding's unqualified names are the canonical GTBase ones; X253.v names is_turan_number, grounding_X253.v names is_turan_number and D2tur.edge_count (the concrete Turan value ex(1; H_4) = 0); declared as for X245 / X252."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X255.v",
+      "name": "xe1_size_ramsey_number",
+      "note": "Wave X255 (2026-10-28): xe1_size_ramsey_number (row erdos:720, size Ramsey numbers of paths and cycles) is XE1's size Ramsey number, an edge_count chain, named in X255.v and grounding_X255.v; the grounding writes X4.x4_edge_count and the canonical GTBase.common.edge_count (GTBase imported last) when unfolding it for the concrete values R^(P_0) = 0 and R^(C_2) = 1. Imported, no copy; declared as for X241."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X255.v",
+      "name": "edge_count",
+      "note": "Wave X255 (2026-10-28): xe1_size_ramsey_number (row erdos:720, size Ramsey numbers of paths and cycles) is XE1's size Ramsey number, an edge_count chain, named in X255.v and grounding_X255.v; the grounding writes X4.x4_edge_count and the canonical GTBase.common.edge_count (GTBase imported last) when unfolding it for the concrete values R^(P_0) = 0 and R^(C_2) = 1. Imported, no copy; declared as for X241."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X255.v",
+      "name": "x4_edge_count",
+      "note": "Wave X255 (2026-10-28): xe1_size_ramsey_number (row erdos:720, size Ramsey numbers of paths and cycles) is XE1's size Ramsey number, an edge_count chain, named in X255.v and grounding_X255.v; the grounding writes X4.x4_edge_count and the canonical GTBase.common.edge_count (GTBase imported last) when unfolding it for the concrete values R^(P_0) = 0 and R^(C_2) = 1. Imported, no copy; declared as for X241."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X255.v",
+      "name": "xe1_size_ramsey_number",
+      "note": "Wave X255 (2026-10-28): xe1_size_ramsey_number (row erdos:720, size Ramsey numbers of paths and cycles) is XE1's size Ramsey number, an edge_count chain, named in X255.v and grounding_X255.v; the grounding writes X4.x4_edge_count and the canonical GTBase.common.edge_count (GTBase imported last) when unfolding it for the concrete values R^(P_0) = 0 and R^(C_2) = 1. Imported, no copy; declared as for X241."
     }
   ],
   "distinct_variants": [
