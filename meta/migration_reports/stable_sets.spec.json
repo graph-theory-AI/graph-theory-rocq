@@ -1026,6 +1026,11 @@
       "path": "packing-theory/theories/conjectures/vocabulary_packing.v",
       "name": "xe1_stable_set",
       "note": "x18_independent_set_equiv_xe1_stable_set: proof and type unchanged."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X261.v",
+      "name": "xe2_cochromatic_colouring",
+      "note": "Wave X261 (Arthur, 2026-10-29): grounding_X261.v imports Chromatic.conjectures.XE2 and uses xe2_cochromatic_colouring in g261_cochromatic_at_mostP, the reflection of the wave's Boolean x261_cochromatic_at_most (erdos:625 and erdos:760: every colour class induces a complete or an empty graph). X261.v uses no tracked name."
     }
   ],
   "distinct_variants": [
