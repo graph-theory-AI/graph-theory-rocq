@@ -7579,11 +7579,14 @@
    "note": "Authored in X241.v:off_diagonal_ramsey_consecutive_ratio_one_statement. Erdos Problems #1014 (proved before the corpus pin per the mirror 10fb9c15, proved (Lean) 2026-04-24, credited by the problem page to an internal OpenAI model; no paper or Lean proof checked): R(k,l+1)/R(k,l) -> 1 for fixed k >= 3, written q R(k,l+1) <= (q + 1) R(k,l) eventually for every q (XE1 xe1_graph_ramsey_number)."
   },
   "erdos_1015": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x255-ramsey-ratio-size-ramsey-tiling",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X255.v:monochromatic_clique_tiling_leftover_statement. Erdos Problems #1015, Erdos (Er71, a question of Moon; pinned status solved, \"resolved in some other way\"): f(t) is the least leftover when a two-coloured K_n, n large, is tiled by vertex-disjoint monochromatic K_t of any colours (x255_mono_tiling_number); the two named questions as stated, f(t)^{1/t} -> 1 (its upper half; the lower half by g255_tiling_pos) and f(t) << t. FALSE at the pin: Burr, Erdos and Spencer, Trans. AMS 209 (1975), Theorem 6 and its construction give f(t) >= r(t, t-1) - 1 >= 2^((t-1)/2) - 1."
   },
   "erdos_1016": {
    "statement": "todo",
@@ -8238,11 +8241,14 @@
    "note": "Authored in XE1.v:erdos_552_statement. Encodes Erdos Problems #552 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_553": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x255-ramsey-ratio-size-ramsey-tiling",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X255.v:multicolour_triangle_clique_ramsey_ratio_statement. Erdos Problems #553, Erdos and Sos (proved before the pin, pinned status solved: Alon and Rodl, Combinatorica (2005) 125-141, r(K3, K3, Km) = Theta(m^3 poly log m), their Conjecture 1.1 being this row): for every C, eventually C R(3,n) <= R(3,3,n) (x255_ramsey_33n, the asymmetric three-colour Ramsey number; XE1 xe1_graph_ramsey_number for R(3,n), Theta(n^2 / log n) cited from Alon and Rodl's text)."
   },
   "erdos_554": {
    "statement": "done",
@@ -8990,11 +8996,14 @@
    "audit_page": "todo"
   },
   "erdos_720": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x255-ramsey-ratio-size-ramsey-tiling",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X255.v:path_cycle_size_ramsey_growth_statement. Erdos Problems #720, Erdos, Faudree, Rousseau and Schelp (pinned status solved, prize \"PROVED ... in the affirmative\"): the three asked clauses as stated, R^(P_n)/n -> oo, R^(P_n)/n^2 -> 0 and R^(C_n) = o(n^2) (XE1 xe1_size_ramsey_number; P_n = ordinal_path n.+1, n edges; C_n = cycle_graph n). FALSE at the pin: Beck's R^(P_n) < 900 n for large n (1983, restated in his Part II) refutes the first clause and gives the second; the third holds (Javadi, Khoeini, Omidi and Pokrovskiy). CORPUS_FEEDBACK: the prize wording."
   },
   "erdos_73": {
    "statement": "done",
