@@ -8755,11 +8755,14 @@
    "audit_page": "todo"
   },
   "erdos_625": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x261-cochromatic-choice-acyclic-subdivisions",
+   "package": "chromatic-theory",
+   "note": "Authored in X261.v:random_graph_chi_minus_cochromatic_unbounded_statement. Erdos Problems #625, Erdos and Gimbel (ErGi93; pinned status open, $1000): for G(n,1/2), for every M, with probability -> 1, zeta(G) + M <= chi(G) (x261_cochromatic_exact; classes induce complete or empty graphs). Convergence in probability, as Heckel (2408.13839v2 l.231; 2409.17614v2 l.251, l.257) and Steiner (2408.02400v2 l.113-115) read it. Open at the pin; He24, St24b and He24c are partial; Petkov's linked claim (625-claim.pdf, 10 September 2026) is cited, not verified."
   },
   "erdos_626": {
    "statement": "todo",
@@ -8987,11 +8990,14 @@
    "audit_page": "todo"
   },
   "erdos_717": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x261-cochromatic-choice-acyclic-subdivisions",
+   "package": "chromatic-theory",
+   "note": "Authored in X261.v:chi_clique_subdivision_root_log_statement. Erdos Problems #717, Erdos and Fajtlowicz (ErFa81; pinned status solved): sigma(G), the largest k such that G contains a subdivision of K_k (x261_clique_subdivision_order); (chi(G) trunc_log 2 n)^2 <= C n sigma(G)^2 for every graph on n vertices. Proved before the pin: Fox, Lee and Sudakov, arXiv:1107.1920v3, Theorem 1.1 (source.tex l.130-132), subdivisions as in l.92-95."
   },
   "erdos_719": {
    "statement": "done",
@@ -9188,11 +9194,14 @@
    "note": "Authored in X244.v:two_colouring_edge_disjoint_monochromatic_triangles_statement. Erdos Problems #76 (proved before the corpus pin, pinned status solved: Gruslys and Letzter, arXiv:2008.05311v2, Theorem 1.2): every 2-colouring of K_n has at least (1 - o(1)) n^2/12 edge-disjoint monochromatic triangles, as 3-sets of 'I_n sharing at most one vertex."
   },
   "erdos_760": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x261-cochromatic-choice-acyclic-subdivisions",
+   "package": "chromatic-theory",
+   "note": "Authored in X261.v:subgraph_large_cochromatic_number_statement. Erdos Problems #760, Erdos and Gimbel (ErGi93; pinned status solved): if chi(G) = m >= 2 (load-bearing: log 1 = 0), a subgraph H, not necessarily induced (has_subgraph), has m <= C k trunc_log 2 m for every cochromatic colouring of H with k colours. Proved before the pin: Alon, Krivelevich and Sudakov, Theorem 1.1 (AKS97.txt l.29-30); the linked Lean proof (plby f2462b28, C = 32) is an external proof."
   },
   "erdos_762": {
    "statement": "done",
@@ -9287,18 +9296,24 @@
    "note": "Authored in X6.v:three_uniform_hypergraph_dense_small_configuration_statement. Encodes the 3-uniform dense small-configuration statement on 3n vertices."
   },
   "erdos_797": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x261-cochromatic-choice-acyclic-subdivisions",
+   "package": "chromatic-theory",
+   "note": "Authored in X261.v:acyclic_chromatic_max_degree_subquadratic_statement. Erdos Problems #797, Erdos (AlBe76; pinned status solved): f(d) = o(d^2), f the largest acyclic chromatic number of a graph of maximum degree exactly d (x261_acyclic_colourable: proper, every cycle sees three colours); for every q >= 1, eventually q k <= d^2. \"Estimate f(d)\" is not formalised. Proved before the pin: Alon, McDiarmid and Reed (1991), Theorem 1.1 (p.278) and Proposition 2.2."
   },
   "erdos_799": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x261-cochromatic-choice-acyclic-subdivisions",
+   "package": "chromatic-theory",
+   "note": "Authored in X261.v:almost_all_graphs_choice_number_sublinear_statement. Erdos Problems #799, Erdos, Rubin and Taylor (ERT80; pinned status solved): almost all graphs (G(n,1/2), fg_whp) have chi_L(G) <= n %/ q for every q >= 1 (x261_choosable_b, equivalent to GTBase choosable, grounding_X261). Proved before the pin: Alon (1992), Corollary 1.3 (Al92.txt l.66-67): ch(G(n,1/2)) <= c n log log n / log n with probability -> 1."
   },
   "erdos_80": {
    "statement": "done",
