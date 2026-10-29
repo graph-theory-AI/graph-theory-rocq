@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Eleven
+corrections are applied explicitly (ERRATA below) since the review files predate them. Thirteen
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -36,6 +36,9 @@ studies row of Kiraly's O(1.4^m) cycle-count conjecture is solved by its own sou
 (arXiv:1907.12091, Theorem 1). Six studies rows of wave X254 were solved before the corpus pin:
 Gyarfas' long odd holes (arXiv:1701.07217v3), Trotignon-Vuskovic's ISK4 conjecture
 (arXiv:1704.08104v1) and the four rows of Tomescu's conjecture (arXiv:1712.06067v3, Theorem 1).
+Two studies rows of wave X256 were solved before the corpus pin: Mohar's (Delta+2)-edge-colouring
+conjecture (Narboni, arXiv:2302.12914v1, with Mohar's (chi'+2) theorem) and Vizing's edge-colouring
+Kempe question, the question of bm:bm-060 (arXiv:2302.12914v1).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -263,6 +266,20 @@ ERRATA = [
     ("studies", "std_tomescu_s_conjecture_maximum_number_of_proper_k_530", "solved",
      "Literature: the same conjecture as the _529 row; solved by Fox, He and Manners, "
      "arXiv:1712.06067v3, Theorem 1 (l.99-106)."),
+    # literature status corrections (Lancelot's lane, the studies rows of wave X256 solved before the corpus pin)
+    ("studies", "std_mohar_s_conjecture_kempe_equivalence_of_2_edge_c", "solved",
+     "Literature: by Vizing chi'(G) <= Delta(G) + 1. If chi'(G) = Delta(G) + 1, Delta(G) + 2 = chi'(G) + 1 "
+     "and Narboni, arXiv:2302.12914v1, Theorem 7 (intro.tex l.42-44), proves all (chi'(G) + 1)-edge-"
+     "colourings Kempe-equivalent; if chi'(G) = Delta(G), Delta(G) + 2 = chi'(G) + 2 and Mohar's theorem "
+     "(Kempe equivalence of colorings, Graph Theory in Paris, 2006; cited as Theorem 1.5 of "
+     "arXiv:2107.07900v1, l.190-192, and Theorem 6 of arXiv:2302.12914v1, l.36-38; not read here) proves "
+     "all (chi'(G) + 2)-edge-colourings Kempe-equivalent."),
+    ("studies", "std_vizing_s_edge_colouring_kempe_equivalence_questi", "solved",
+     "Literature: the question of bm:bm-060 (pinned solved; arXiv:2107.07900v1, Question 1.3), solved "
+     "by Narboni, arXiv:2302.12914v1: every k-edge-colouring with k > Delta(G) is Kempe-equivalent to a "
+     "(Delta(G) + 1)-edge-colouring (Vizing, Theorem 2, intro.tex l.11-15), and every (chi'(G) + 1)-edge-"
+     "colouring to every chi'(G)-edge-colouring (Lemma 8, l.48-49), so every k > chi'(G) reaches a "
+     "chi'(G)-edge-colouring."),
 ]
 
 
@@ -871,7 +888,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 11 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 13 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
