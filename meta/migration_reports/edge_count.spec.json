@@ -1966,6 +1966,16 @@
       "path": "chromatic-theory/theories/conjectures/grounding_X258.v",
       "name": "edge_count",
       "note": "Wave X258 (Arthur, 2026-10-29): lexical short-name match only: chromatic-theory never imports Extremal.conjectures.D2ram / D2tur (the frozen edge_count sources), so this edge_count (erdos:917's values: edge_count_Kn on K_4 and edge_count G <= C(#|G|, 2)) is the canonical GTBase.common.edge_count; declared as for XE1.v, X5.v, X241 and X242."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X259.v",
+      "name": "edge_count",
+      "note": "Wave X259 (2026-10-29): edge_count (GTBase.common) counts the edges of the graphs in erdos:809's chi_S(n,e,F) (some graph with n vertices and exactly e edges, x259_rainbow_forcing_colouring), named in X259.v; grounding_X259.v uses it to show that a graph with 3 vertices and 3 edges is K_3 (g259_complete_3_3, with card_draws). Imported, no copy; declared as for X257."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X259.v",
+      "name": "edge_count",
+      "note": "Wave X259 (2026-10-29): edge_count (GTBase.common) counts the edges of the graphs in erdos:809's chi_S(n,e,F) (some graph with n vertices and exactly e edges, x259_rainbow_forcing_colouring), named in X259.v; grounding_X259.v uses it to show that a graph with 3 vertices and 3 edges is K_3 (g259_complete_3_3, with card_draws). Imported, no copy; declared as for X257."
     }
   ],
   "distinct_variants": [

@@ -10437,6 +10437,121 @@
       },
       "faithfulness_verified_by": "Marcol (X258 wave verification, 2026-10-29)",
       "faithfulness_result": "Readback 2026-10-29 (verifier Marcol): 4/4 PASS against the pinned texts and the sources, at math/arthur-x258-20261029 = 2a66ee18e677c286fd98fd41f3850505a713ff58 (seven commits on work/coordinator 90255fbb), after my design read (220) of x258-design-by-arthur (7ae757fc; my packet x258-design-read-by-marcol a894abf8) and my interim (224): X258.v and grounding_X258.v at the dev-run head d3001eff equal the design packet's byte for byte; the chain was rebuilt from c5 with c6' (the edge_count notes reworded) and c7 (my S1, N1 in the bounded-ratio wording asked in (224), the two subtraction guard notes, compile check 1's proof fixes); against a4229d49 only X258.v (comments) and grounding_X258.v differ. Vocabulary: x258_odd_cycles_longer (every odd ucycle is longer than m; sizes 1 and 2 cannot occur), x258_odd_girth_number (the largest such m over graphs on n vertices with chi = k, with a witness), x258_triangle_free_order (the least order of a triangle-free graph with chi = k, with a witness), x258_edge_critical (Er69b p.28's Dirac criticality: every one-edge del_edges deletion has chi below k; isolated vertices allowed, so f_k(n) exists for every n >= k), x258_critical_edge_number (the largest edge count), x258_critical_bipartizing_number (X219's x219_subgraph_critical_for with chi < k, i.e. every proper subgraph has chi < k; the least m over such graphs of the least bipartizing deletion, GTBase bipartite_after_deletion). erdos:921: forall k >= 4, exists A B N, n <= A f^(k-2) /\\ f^(k-2) <= B n for n >= N (f asymp n^(1/(k-2)) with constants per k, Er69b p.31); true at the pin (KST84 Theorem 1 at c = 2, c_k = 4k; Example 3, with an odd cycle of length L of radius <= (L - 1)/2); the N1 note: f_k(n) <= f_k(n+1) (an isolated vertex), so the lower side for every large n needs the construction only along orders with bounded ratios. erdos:1013: the ratio's upper half, for every q >= 1 eventually h_3(k+1) / h_3(k) <= (q+1)/q, cross-multiplied; the lower half proved (g258_order_mono); open at the pin (the page's bounds are a factor 2 apart). erdos:917: the conjunction of the three asked clauses as stated ((a) n^2 <= C f; (b) and (c) two-sided q-approximations of f / ((t - 1) n^2 / (2t)), t = k %/ 3, (b) = (c) at k = 6), false at the pin by (c) at k = 7 (Toft's constructions, 2301.01656v1 l.89-91: 1/2 - 3/(14 - 8/7) = 4/15 > 1/4 for infinitely many n; the page's Stiebitz coefficients are the same values); (a) true (Toft, l.86), (b) open (l.93); the 720 / 1015 conjunction precedent; pinned open stands for (b). erdos:744: \"k a large fixed constant\" as exists K forall k >= K, f_k(n) -> oo, plus the k = 4 clause n <= 2^(C m) (f_4(n) >> log n), as printed; false at the pin under this reading and under \"every k >= 4\" (Rodl-Tuza per the page: f_k(n) = binomial(k-1, 2) for large n); the Notes say the status rests on the page. Grounding (grounding_X258.v read at 2a66ee18): hyp_inhabited f_4(4) = 2 (921, K_4), h_3(1) = 1 and h_3(2) = 2 (1013), f_4(4) = 6 (917, K_4) and f_4(4) = 2 (744, my S1: K_4 is 4-critical, a perfect matching bipartizes it, one pair leaves a triangle), each with the statement specialised to the clause it inhabits (k = 4, q = 1); not_trivially_true = the body minus its relational hypotheses, checked mechanically on the comment-stripped normalised text at 2a66ee18 (4/4, a control rejected); helper_sanity, four groups, listed in every row; the 24 certificate and claim names are present. Compile check 2 (x258-compile2-by-arthur, SHA256SUMS 7743b5b1, 10 files listed = present, -c OK): B2 rebuilt X258.v and grounding_X258.v, 13 Print Assumptions closed under the global context (the 12 certificate theorems and g258_order_mono), 0 with axioms; W4 0 active, 37 allowlisted; no Admitted, Axiom or Parameter in either file. Metadata: the four source_hash values recomputed equal; the four verifier keys empty before the fields; helper_ownership the six paper_specific helpers; legs statement / grounding done, notes 494 / 462 / 514 / 490 characters (under the 600 cap); README 531 / 11 / 40 / 1,091 -> 535 / 11 / 40 / 1,087; LANDED adds X258 chromatic-theory after X257; no allowlist entry; consumers: edge_count only (X258.v and grounding_X258.v, declared as a lexical match of the canonical GTBase.common.edge_count: chromatic-theory never imports D2ram / D2tur), equal to my comment-stripped scan against the 1,199 distinct frozen names (2,438 entries) of the 101 specs at 2a66ee18. Dev run 1 (x258-dev-by-arthur, SHA256SUMS f5df534b, -c OK) failed only on the declared field steps (W1, A3a / A3, A10) and on W4's doc-note finding at X258.v:89, fixed by c7's guard sentence (W4 0 active in compile check 2); W3 vacuity 4 probed, 0 flagged; statement docs 856 / 856; no migration report changed (edge_count 514 references), so there is no report commit."
+    },
+    "X259": {
+      "phase": "X259",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X259.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X259 (A3 verifier Arthur; routing Lancelot (183), (201); selection x259-selection-by-marcol, design x259-design-by-marcol r1), branch math/marcol-x259-20261029, 2026-10-29",
+      "source_verified_by": "Arthur (X259 wave verifier, A3: pinned records re-read at b72c5857: data/erdos_graph.json records 1105 and 809 (the statement field, which the builder hashes alone), sha256 recomputed = c970de83adfb874af64c412a3824ec3061125f16a1562b38de67ee72f24dd8c6 and 29f4ca92c9f5e5b982eb92815c09e361bc1756a3a6d43e0e1303e5fc7d55f331, equal to the manifest rows at work/coordinator 862ef061 (AH40) and to the wave's source_hash values; pinned status solved for 1105 (\"PROVED ... in the affirmative\") and open for 809; the Mac's deposit coordination/sources/x259-source-mac-20261029 (SHA256SUMS 98f1b5f8, -c OK): the live pages erdosproblems.com/1105 and /809 (erdos-1105.txt l.25-26, l.34-44; erdos-809.txt l.25-26, l.36-39), Erdos, Simonovits and Sos, Anti-Ramsey theorems (ESS75.txt l.28, l.45-49, l.146-148), Yuan, The anti-Ramsey number for paths, arXiv:2102.00807v3 (source.tex l.54, Theorem 1 l.69-75), Burr, Erdos, Graham and Sos, Maximal antiramsey graphs and the strong chromatic number (BEGS89-renyi.txt l.61, l.67-74, l.359-361), Bucic, Chen and Ma, arXiv:2603.18952v1 (main.tex l.196, l.215-225, l.707-708); not obtained, as SOURCE.md states: Montellano-Ballesteros and Neumann-Lara's full text (publisher preview only, its formula missing) and Er91)",
+      "source_verified_at": "2026-10-29",
+      "commit": "x259-anti-ramsey-cycles-paths-strong-chromatic",
+      "helper_ownership": {
+        "x259_rainbow_copy": {
+          "classification": "paper_specific",
+          "reason": "A rainbow (totally multicoloured) copy of F in an edge colouring of the host: an injective adjacency-preserving map, a not-necessarily-induced copy, whose image edges have pairwise distinct colours (Erdos, Simonovits and Sos, Anti-Ramsey theorems (1975), p.633; Burr, Erdos, Graham and Sos (1989), p.264: \"subgraph does not mean induced subgraph\"); the shape of edge_colourings mono_copy."
+        },
+        "x259_rainbow_free_colours": {
+          "classification": "paper_specific",
+          "reason": "Some edge colouring of K_n uses exactly r colours (counted on the edges) and has no rainbow copy of F: the colourings whose largest r is the anti-Ramsey number of erdos:1105 (pinned text)."
+        },
+        "x259_anti_ramsey_number": {
+          "classification": "paper_specific",
+          "reason": "AR(n,F) of erdos:1105: the maximum possible number of colours in which the edges of K_n can be coloured without a rainbow copy of F (pinned text; ESS75 p.633; Yuan, arXiv:2102.00807v3, source.tex l.54)."
+        },
+        "x259_rainbow_forcing_colouring": {
+          "classification": "paper_specific",
+          "reason": "Some graph with n vertices and exactly e edges has an edge colouring into I_r in which every copy of F is rainbow (erdos:809 pinned text; Burr, Erdos, Graham and Sos, J. Graph Theory 13 (1989), p.264)."
+        },
+        "x259_strong_chromatic_number": {
+          "classification": "paper_specific",
+          "reason": "chi_S(n,e,F) of erdos:809: the least r with x259_rainbow_forcing_colouring n e F r (BEGS89 p.264: \"the smallest number r such that there exists a G(n,e) that has an edge-coloring in r colors such that every L in G is TMC\")."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X259 wave verification, 2026-10-29)",
+      "faithfulness_result": "Readback 2026-10-29 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x259-20261029 = 558fe05f4ce29ad739f27b9151a63996b9ee2250 on work/coordinator 862ef061 (AH40), after my design read (298, FAITHFUL 2/2 with B1) of x259-design-by-marcol r1 (5499b975): grounding_X259.v is byte-identical to the packet's and X259.v differs from it only by B1's guard sentence at the end of the erdos:1105 Notes (my lint simulation: both statements clean). erdos:1105: AR(n,F) is the maximum number of colours, counted on the edges of K_n, with no rainbow copy of F (ESS75 l.45-49; Yuan l.54), C_k and P_k have k vertices (ESS75 l.28); the cycle clause for each k >= 3, scaled by 2(k-1) with per-k constants, which the page and MoNe05's abstract support as an asymptotic; the path clause is exactly Yuan's Theorem 1 for every n >= k >= 5 (l.69-75), and AR(5,P_5) = 5 by my own enumeration (all 22,827 six-colourings of K_5 have a rainbow P_5; 5 of the 42,525 five-colourings have none). erdos:809: chi_S(n,e,F) is the least r such that some graph with n vertices and exactly e edges has a colouring into 'I_r in which every copy of F (not necessarily induced) is rainbow (BEGS89 l.61, l.67-71), at e = floor(n^2/4) + 1, the ~ n^2/8 clause cross-multiplied for every q >= 1; open at the pin for k >= 3 (Bucic-Chen-Ma prove k >= 4, l.220-225; k = 3 remains open, l.707-708). In my MCP the design's combined file built (27 proof blocks, no holes) and the six certificates' Print Assumptions were closed. Dev run run-x259-1 (x259-dev-by-marcol, 539d365a): RESULT PASS-WITH-EXPECTED, the four declared steps failing only on the empty A3 fields (W1 12/14: Print Assumptions clean for 2 statements + 8 certificates, 15 exact-type probes), W3 2 probed / 0 flagged, W4 0 active findings, A12 rc 0; the seventh commit's edge_count.md is byte-identical to the written report (522 -> 524 references).",
+      "rows": {
+        "erdos_1105": {
+          "formal_name": "anti_ramsey_cycles_paths_statement",
+          "source_hash": "c970de83adfb874af64c412a3824ec3061125f16a1562b38de67ee72f24dd8c6",
+          "note": "Erdos Problems #1105, Erdos, Simonovits and Sos (ESS75; pinned status solved): AR(n,F) is the largest number of colours on the edges of K_n with no rainbow copy of F (x259_anti_ramsey_number); both asked clauses, in the affirmative form as both are proved: AR(n,C_k) = ((k-2)/2 + 1/(k-1)) n + O(1) for each k >= 3 (Montellano-Ballesteros and Neumann-Lara 2005) and the printed AR(n,P_k) for every n >= k >= 5 (Yuan, arXiv:2102.00807v3, Theorem 1).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g259_ar_hyp_inhabited",
+              "claim": "g259_ar_hyp_claim",
+              "references": [
+                "anti_ramsey_cycles_paths_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g259_ar_not_trivially_true",
+              "claim": "g259_ar_ntt_claim",
+              "references": [
+                "anti_ramsey_cycles_paths_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g259_ar_helper_sanity",
+                "claim": "g259_ar_helper_claim",
+                "references": [
+                  "x259_rainbow_copy",
+                  "x259_rainbow_free_colours",
+                  "x259_anti_ramsey_number"
+                ]
+              },
+              {
+                "theorem": "g259_cs_helper_sanity",
+                "claim": "g259_cs_helper_claim",
+                "references": [
+                  "x259_rainbow_forcing_colouring",
+                  "x259_strong_chromatic_number"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_809": {
+          "formal_name": "strong_chromatic_odd_cycles_statement",
+          "source_hash": "29f4ca92c9f5e5b982eb92815c09e361bc1756a3a6d43e0e1303e5fc7d55f331",
+          "note": "Erdos Problems #809, Burr, Erdos, Graham and Sos (BEGS89 p.270; pinned status open): chi_S(n,e,F) is the least r such that some graph with n vertices and exactly e edges has an r-colouring of its edges with every copy of F rainbow (x259_strong_chromatic_number); for every k >= 3, chi_S(n, floor(n^2/4) + 1, C_(2k+1)) ~ n^2/8, as asked. Bucic, Chen and Ma, arXiv:2603.18952v1 (before the pin), prove it for k >= 4; k = 3 (C_7) is open.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g259_cs_hyp_inhabited",
+              "claim": "g259_cs_hyp_claim",
+              "references": [
+                "strong_chromatic_odd_cycles_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g259_cs_not_trivially_true",
+              "claim": "g259_cs_ntt_claim",
+              "references": [
+                "strong_chromatic_odd_cycles_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g259_ar_helper_sanity",
+                "claim": "g259_ar_helper_claim",
+                "references": [
+                  "x259_rainbow_copy",
+                  "x259_rainbow_free_colours",
+                  "x259_anti_ramsey_number"
+                ]
+              },
+              {
+                "theorem": "g259_cs_helper_sanity",
+                "claim": "g259_cs_helper_claim",
+                "references": [
+                  "x259_rainbow_forcing_colouring",
+                  "x259_strong_chromatic_number"
+                ]
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
