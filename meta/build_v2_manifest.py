@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Seventeen
+corrections are applied explicitly (ERRATA below) since the review files predate them. Nineteen
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -41,7 +41,10 @@ conjecture (Narboni, arXiv:2302.12914v1, with Mohar's (chi'+2) theorem) and Vizi
 Kempe question, the question of bm:bm-060 (arXiv:2302.12914v1). By Marc's decision of 2026-10-29,
 four studies rows false as printed are disproved, their encoded statements kept: Kiraly's 4-regular
 cycle bound (K_5), Scott's induced-subdivision conjecture (arXiv:1209.1595), Las Vergnas-Meyniel A'
-(arXiv:2103.10684) and Mohar's k-regular Kempe conjecture (the triangular prism, k = 3).
+(arXiv:2103.10684) and Mohar's k-regular Kempe conjecture (the triangular prism, k = 3). Two studies
+rows behind wave X262 were settled before the corpus pin: Harris' degeneracy conjecture is solved
+(Martinsson, arXiv:2501.18238v1, Theorem 1.2), and the Blumenthal et al. question on the Hall ratio
+is answered negatively in its own record (arXiv:1812.07327v2, Corollary 3).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -304,6 +307,16 @@ ERRATA = [
      "3-colourings form two Kempe classes (van den Heuvel; arXiv:1503.03430v2, Lemma 1, l.176-178, and l.96). "
      "For k >= 4 the conjecture holds: arXiv:1510.06964v3, Theorem 1.1 (kempe.tex l.130-132), which recalls "
      "the prism (l.79)."),
+    # literature status corrections (Lancelot's lane; the studies rows behind wave X262, settled before the corpus pin)
+    ("studies", "std_harris_conjecture", "solved",
+     "Literature: proved by Martinsson, arXiv:2501.18238v1 (30 January 2025), Theorem 1.2 (source.tex l.118-119): every "
+     "triangle-free d-degenerate graph G has chi_f(G) <= (4 + o(1)) d / ln d. This is the row's statement, Janzer, Steiner "
+     "and Sudakov's Conjecture 3.1 (arXiv:2410.02437v1, main.tex l.242-244), from Harris, arXiv:1604.00438v8, Conjecture "
+     "6.2 (l.654-657)."),
+    ("studies", "std_blumenthal_et_al_question_on_fractional_chromati", "disproved",
+     "Literature: answered negatively in its own record, Dvorak, Ossona de Mendez and Wu, arXiv:1812.07327v2, Corollary 3 "
+     "(no1sub.tex l.139-141): for every c there is a graph with fractional chromatic number at least c and Hall ratio at "
+     "most 18, so no function of the Hall ratio bounds chi_f (l.137-138)."),
 ]
 
 
@@ -912,7 +925,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 17 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 19 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
