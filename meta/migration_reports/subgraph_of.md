@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py subgraph_of --details /tmp/migr
 
 - Canonical: `GTBase.common.has_subgraph`.
 - Baseline: `49ddc033ec6be3372ba6813f044fd26922fad16d`.
-- Scope: 7 helpers, 35 statements, 54 frozen objects, 311 recorded references.
-- Source checks: 597/597 pass; consistent.
+- Scope: 7 helpers, 35 statements, 54 frozen objects, 313 recorded references.
+- Source checks: 599/599 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

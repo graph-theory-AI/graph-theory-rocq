@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py edge_count --details /tmp/migra
 
 - Canonical: `GTBase.common.edge_count`.
 - Baseline: `ae0e6059bcb9ff7cbee3c425e719ad9c7d772656`.
-- Scope: 8 helpers, 40 statements, 113 frozen objects, 507 recorded references.
-- Source checks: 1082/1082 pass; consistent.
+- Scope: 8 helpers, 40 statements, 113 frozen objects, 514 recorded references.
+- Source checks: 1089/1089 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|

@@ -9638,6 +9638,154 @@
       },
       "faithfulness_verified_by": "Marcol (X254 wave verification, 2026-10-28)",
       "faithfulness_result": "Readback 2026-10-28 (verifier Marcol): 8/8 PASS against the pinned texts and the sources, at math/arthur-x254-20261028 = 4ebe13b8db4c6795f40030a8f24bfab07c18e198 (cc708376 + the report commits d1b5d06f and 4ebe13b8) on work/coordinator 4b391d06, after my design read (201) of x254-design-by-arthur r1 (22958c54): X254.v blob 8ed9f91f and grounding_X254.v blob 0eca0216 are byte-identical to the design packet's files. Scott: forall H, chi_bounded_class (fun G => ~ induced_subdivision H G), on the canonical strong induced model (GTBase.induced_subdivisions: injective branch vertices, endpoint-inclusive induced paths, global inducedness; H itself counts, as in the sources); refuted before the pin by 1209.1595v5 (Theorem 1 with l.108-109: H the 1-subdivision of a non-planar graph); encoded as stated, false at the pin. Gyarfas: forall k l > 0, exists N (before G), omega(G) <= k and every odd hole of size <= l give chi(G) <= N, on the canonical hole (ucycle, 3 < size, cyclic_chordless); proved by 1701.07217v3 statement 1.3 (l.86-88; \"In this paper we prove the third\", l.90-91) with ell = l + 1. Trotignon-Vuskovic: ~ induced_subdivision 'K_4 G -> triangle_free G -> chi(G) <= 3; 1704.08104v1 (contains = isomorphic to an induced subgraph, l.100; ISK4, l.102; Conjecture 1, l.107-110, proved, l.114). Tomescu: the canonical _529 is 4 <= k, connected, chi(G) = k -> P_G(k) <= k!(k-1)^(#|G| - k) with equality iff the 2-core is a clique with k vertices, P_G(k) the proper colourings into the labelled 'I_k (l.67-69), the 2-core x254_two_core = the union of the vertex sets of inner degree >= 2, the largest such set, which repeated deletion of vertices of degree <= 1 leaves (l.93); 1712.06067v3 Theorem 1 (l.99-106); k >= 4 load-bearing (l.95); the subtractions exact. _k_colorin and _proper_k (one pinned text, hash-equal) and _530 are Definitions := the canonical one; for connected G with chi(G) = k >= 4 \"K_k with a tree rooted at each clique vertex\" <=> \"the 2-core is a k-clique\" (every cycle lies in the 2-core, so the deleted part is a forest joined to the clique by exactly one edge per component; conversely a set of inner degree >= 2 meeting a rooted tree off its root would give the tree a non-root leaf in the set), the source's \"Equivalently\" (l.93). Odd multiholes: the affirmative form, forall k >= 1, poly_chi_bounded (fun G => ~ x254_odd_multihole G k), x254_odd_multihole = k odd holes, pairwise disjoint and anticomplete (l.70, l.97-98); open at the pin (l.102-104); the four-or-odd Theorem 1.1 (l.110-113) not encoded. Grounding (grounding_X254.v read): per row hyp_inhabited on K_1 or K_4 with the statement specialised there, and not_trivially_true dropping one hypothesis (Scott and multiholes: the class predicate weakened to all graphs, refuted by the gap graphs; Gyarfas: no odd-hole clause, refuted at k = 4; Trotignon-Vuskovic: no ISK4 clause, the Grotzsch graph = mycielski C_5, chi 4; Tomescu: no 4 <= k, K_2 at k = 2 attains the bound with an empty 2-core); helper_sanity for both helpers listed in every row (the 2-core of K_4 is all of K_4, that of K_2 empty; C_5 an odd 1-multihole, K_1 none); the 36 certificate and claim names are present. Metadata: the eight source_hash values recomputed equal; the waves file minus X254 = 4b391d06's (jq -S), its four verifier keys empty before the fields, helper_ownership the two paper_specific helpers; legs = the builder's derivation (my recomputation byte-identical), README 510 / 11 / 40 / 1,112 -> 518 / 11 / 40 / 1,104; LANDED adds X254 chromatic-theory after X252; the allowlist unchanged; consumers chi_bounded_class (chi_bounded spec) and induced_subdivision (induced_paths spec) declared in both files, equal to my comment-stripped scan of the 1,199 frozen spec names; the report commits d1b5d06f (chi_bounded.md, 71 -> 74 references, 202 / 202) and 4ebe13b8 (induced_paths.md, 148 -> 155, 302 / 302) byte-identical to the dev run's written copies. Dev run 1 (x254-dev-by-arthur, SHA256SUMS b109ac69, 42 / 42 -c OK; WRAPPER rc 0; the container gone at my check) fails only the four field steps (W1 12/14: the verifier fields and the eight rows' source verification; A3a / A3: the independent verdict; A10: the sixteen tuple violations); Print Assumptions clean on 8 statements + 32 grounding certificates; 110 exact-type shapes; vacuity --wave X254 8 probed, 0 flagged; hard lint 0 active; statement docs 841 / 841; migration_report --all --check OK."
+    },
+    "X255": {
+      "phase": "X255",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X255.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X255 (A3 verifier Arthur; routing Lancelot (153), design accepted as routing (160); selection x255-selection-by-marcol, design x255-design-by-marcol r1), branch math/marcol-x255-20261028, 2026-10-28",
+      "source_verified_by": "Arthur (X255 wave verifier, A3: pinned records re-read at b72c5857: data/erdos_graph.json records 553, 720 and 1015 (the statement field; the builder hashes the statement alone, build_v2_manifest.py l.499 at 6c9c33a3), sha256 recomputed from the pinned records = fdf11e8c2cfe5ccbb070c927f903391379a7a120b377b81ab5304b8499ff95db, 0c0050505f2b05dc230e4340bf4974d07a513f25b70533a86cbc44196edd0a5c and f70df8e718c4b1083c6c3c8aafb952782249d5eff41cb30e504c66a3aab9130a, equal to the manifest rows at work/coordinator 31cfdcbd and to the wave's source_hash values; pinned status solved for all three; the Mac's deposit coordination/sources/x255-source-mac-20261028 (SHA256SUMS 18e8ddc8, -c OK): the live pages erdosproblems.com/553, /720 and /1015 (text and LaTeX), Alon-Rodl, Sharp bounds for some multicolor Ramsey numbers (author version arodl4, l.18-19, 27-29, 47-48, 53-57, 60-61), Beck, On size Ramsey number of paths, trees and circuits. II (Beck-II-page48.png, (1)), Javadi, Khoeini, Omidi and Pokrovskiy, On the size-Ramsey number of cycles (accepted manuscript, l.19-20, 25-26, 55-56, 68-69), Burr-Erdos-Spencer, Trans. AMS 209 (1975) (BES75-page8.png, printed p.94: section 5 and Theorem 6), Erdos 1971 (Er71-page4.png, printed p.100, item 9); not obtained, as SOURCE.md states: Beck Part I (403), Haxell-Kohayakawa-Luczak, Moon 1966, Kim, Ajtai-Komlos-Szemeredi and Shearer)",
+      "source_verified_at": "2026-10-29",
+      "commit": "x255-ramsey-ratio-size-ramsey-tiling",
+      "helper_ownership": {
+        "x255_arrows_33n": {
+          "classification": "paper_specific",
+          "reason": "The arrow property of the asymmetric three-colour Ramsey number R(3,3,n) of erdos:553 (Alon and Rodl, Sharp bounds for some multicolor Ramsey numbers, l.27-29: a monochromatic copy of H_i in colour i for some i): every three-colouring of the edges of K_m has a colour-0 or colour-1 triangle or a colour-2 K_n (Extremal.foundations mono_copy). XE1's Ramsey number is two-colour and X195's symmetric."
+        },
+        "x255_ramsey_33n": {
+          "classification": "paper_specific",
+          "reason": "R(3,3,n) of erdos:553: the least m with x255_arrows_33n n m (the pinned text's \"smallest integer m such that ...\")."
+        },
+        "x255_mono_tiling_leftover": {
+          "classification": "paper_specific",
+          "reason": "The leftover of erdos:1015 (pinned text; Burr, Erdos and Spencer, Trans. AMS 209 (1975), section 5, p.94: vertex-disjoint monochromatic K_k, possibly of different colours, k fixed and n large): for some n0, every two-colouring of the pairs of K_n with n >= n0 has pairwise disjoint monochromatic t-sets, each in its own colour, covering all but at most r vertices."
+        },
+        "x255_mono_tiling_number": {
+          "classification": "paper_specific",
+          "reason": "f(t) of erdos:1015: the least r with x255_mono_tiling_leftover t r (the pinned text's \"Let f(t) be minimal such that ...\", over all large n as the page and BES75 read it)."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X255 wave verification, 2026-10-29)",
+      "faithfulness_result": "Readback 2026-10-29 (verifier Arthur): 3/3 PASS against the pinned texts and the sources, at math/marcol-x255-20261028 = 6c9c33a37169627b27fb520b30d989b52145d02c on work/coordinator 31cfdcbd, after my design read (270) of x255-design-by-marcol r1 (85a6912a): X255.v and grounding_X255.v are byte-identical to the packet's (sha256 c36ec81b, 4c46a90e). erdos:553: Alon-Rodl's Conjecture 1.1 (l.53-57) is the row and their abstract solves it (l.18-19, 60-61); x255_arrows_33n is their asymmetric multicolour Ramsey property, colour i for H_i (l.27-29: two triangle colours and a K_n colour, edges coloured through col [set x; y]); the body forall C, exists N, eventually C R(3,n) <= R(3,3,n) is the ratio -> oo; R(3,n) = Theta(n^2/log n) cited (l.47-48), not read; proved before the pin. erdos:720: the three asked clauses encoded as stated (Lancelot's (138) rule): R^(P_n)/n -> oo as forall M eventually M n <= R^, the two o(n^2) clauses as forall q >= 1 eventually q R^ <= n^2, with P_n = ordinal_path n.+1 (n edges, Beck's \"path of length n\") and C_n = cycle_graph n (n edges for n >= 3; n <= 2 below the asymptotic range); the first clause is refuted by Beck II (1), R^(P_n) < 900 n, so the row is false at the pin; the second follows from (1) and the third from Javadi et al. (l.25-26). erdos:1015: f(t) over all large n (the page's l.173, BES75's \"k fixed, n large\"), the least leftover r such that for some n0 every two-colouring of K_n, n >= n0, has vertex-disjoint monochromatic t-sets, each in a colour of its own (pinned text, Er71, BES75), leaving at most r vertices; over every n both questions fail trivially at n = R(t,t) - 1; under large n BES75 Theorem 6's construction (Figure 6: [A]^2 red, AB blue, [B]^2 without red K_t or blue K_(t-1); the printed \"[B]^2 red\" is a misprint) leaves r(t,t-1) - 1 >= 2^((t-1)/2) - 1 vertices for every n, so both questions are answered no, as stated, false at the pin; f^(1/t) -> 1 is encoded by its upper half (for every q >= 1 eventually q^t f <= (q+1)^t), the lower half holding by g255_tiling_pos (f >= 1 for t >= 2, kernel-checked); f << t as f <= C t for all t (t = 0 has no f); \"Estimate f(t)\" is not formalised. Grounding (grounding_X255.v read): hyp_inhabited per row with concrete values R(3,3,1) = 1 and R(3,1) = 1, R^(P_0) = 0 and R^(C_2) = 1, f(1) = 0; not_trivially_true per row, each variant the body minus its relational hypotheses (checked mechanically, whitespace-normalised, a control with one clause left in rejected): 553 without both Ramsey hypotheses (precedent grounding_X240's erdos:544, g240_incr_no_ramsey), false at a = 0, b = 1; 720 without the size Ramsey hypotheses, false at m = 0; 1015 without the tiling hypothesis, false at t = 0, f = 1; helper_sanity for the four paper_specific helpers in every row. Metadata: the three source_hash values recomputed = the manifest's; the waves file minus X255 = 31cfdcbd's (jq -S); legs = the builder's derivation (l.815, notes of 472, 579 and 585 characters, under the 600 cut), the three rows only; README 520 / 11 / 40 / 1,102 -> 523 / 11 / 40 / 1,099; LANDED adds X255 extremal-graph-theory after X254; the allowlist unchanged (no graph binder in any body); consumers: xe1_graph_ramsey_number declared in the complement and subgraph_of specs and xe1_size_ramsey_number, edge_count and x4_edge_count in the edge_count spec (both files where used); the three reports committed byte-identical to the dev run's written copies (6c9c33a3). Dev run 1 (x255-dev-by-marcol, SHA256SUMS c4e5b903, 45 files, -c OK) on c3576152 fails the four field steps only (W1 12/14: the verifier fields and the three rows' source verification; A3a / A3: the independent verdict; A10: the six tuple violations) and G2b, the 720 legs note cut at 600 characters, fixed in 21819501 (c3576152..6c9c33a3 changes that note in the waves and legs files and adds the three reports; no .v, spec, README or Makefile byte); Print Assumptions clean on 3 statements + 12 certificates; vacuity 3 probed, 0 flagged; hard lint 0 active; statement docs 846 / 846; migration_report --all --check OK.",
+      "rows": {
+        "erdos_553": {
+          "formal_name": "multicolour_triangle_clique_ramsey_ratio_statement",
+          "source_hash": "fdf11e8c2cfe5ccbb070c927f903391379a7a120b377b81ab5304b8499ff95db",
+          "note": "Erdos Problems #553, Erdos and Sos (proved before the pin, pinned status solved: Alon and Rodl, Combinatorica (2005) 125-141, r(K3, K3, Km) = Theta(m^3 poly log m), their Conjecture 1.1 being this row): for every C, eventually C R(3,n) <= R(3,3,n) (x255_ramsey_33n, the asymmetric three-colour Ramsey number; XE1 xe1_graph_ramsey_number for R(3,n), Theta(n^2 / log n) cited from Alon and Rodl's text).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g255_r33n_hyp_inhabited",
+              "claim": "g255_r33n_hyp_claim",
+              "references": [
+                "multicolour_triangle_clique_ramsey_ratio_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g255_r33n_not_trivially_true",
+              "claim": "g255_r33n_ntt_claim",
+              "references": [
+                "multicolour_triangle_clique_ramsey_ratio_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g255_r33n_helper_sanity",
+                "claim": "g255_r33n_helper_claim",
+                "references": [
+                  "x255_arrows_33n",
+                  "x255_ramsey_33n"
+                ]
+              },
+              {
+                "theorem": "g255_tiling_helper_sanity",
+                "claim": "g255_tiling_helper_claim",
+                "references": [
+                  "x255_mono_tiling_leftover",
+                  "x255_mono_tiling_number"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_720": {
+          "formal_name": "path_cycle_size_ramsey_growth_statement",
+          "source_hash": "0c0050505f2b05dc230e4340bf4974d07a513f25b70533a86cbc44196edd0a5c",
+          "note": "Erdos Problems #720, Erdos, Faudree, Rousseau and Schelp (pinned status solved, prize \"PROVED ... in the affirmative\"): the three asked clauses as stated, R^(P_n)/n -> oo, R^(P_n)/n^2 -> 0 and R^(C_n) = o(n^2) (XE1 xe1_size_ramsey_number; P_n = ordinal_path n.+1, n edges; C_n = cycle_graph n). FALSE at the pin: Beck's R^(P_n) < 900 n for large n (1983, restated in his Part II) refutes the first clause and gives the second; the third holds (Javadi, Khoeini, Omidi and Pokrovskiy). CORPUS_FEEDBACK: the prize wording.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g255_sr_hyp_inhabited",
+              "claim": "g255_sr_hyp_claim",
+              "references": [
+                "path_cycle_size_ramsey_growth_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g255_sr_not_trivially_true",
+              "claim": "g255_sr_ntt_claim",
+              "references": [
+                "path_cycle_size_ramsey_growth_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g255_r33n_helper_sanity",
+                "claim": "g255_r33n_helper_claim",
+                "references": [
+                  "x255_arrows_33n",
+                  "x255_ramsey_33n"
+                ]
+              },
+              {
+                "theorem": "g255_tiling_helper_sanity",
+                "claim": "g255_tiling_helper_claim",
+                "references": [
+                  "x255_mono_tiling_leftover",
+                  "x255_mono_tiling_number"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_1015": {
+          "formal_name": "monochromatic_clique_tiling_leftover_statement",
+          "source_hash": "f70df8e718c4b1083c6c3c8aafb952782249d5eff41cb30e504c66a3aab9130a",
+          "note": "Erdos Problems #1015, Erdos (Er71, a question of Moon; pinned status solved, \"resolved in some other way\"): f(t) is the least leftover when a two-coloured K_n, n large, is tiled by vertex-disjoint monochromatic K_t of any colours (x255_mono_tiling_number); the two named questions as stated, f(t)^{1/t} -> 1 (its upper half; the lower half by g255_tiling_pos) and f(t) << t. FALSE at the pin: Burr, Erdos and Spencer, Trans. AMS 209 (1975), Theorem 6 and its construction give f(t) >= r(t, t-1) - 1 >= 2^((t-1)/2) - 1.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g255_tl_hyp_inhabited",
+              "claim": "g255_tl_hyp_claim",
+              "references": [
+                "monochromatic_clique_tiling_leftover_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g255_tl_not_trivially_true",
+              "claim": "g255_tl_ntt_claim",
+              "references": [
+                "monochromatic_clique_tiling_leftover_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g255_r33n_helper_sanity",
+                "claim": "g255_r33n_helper_claim",
+                "references": [
+                  "x255_arrows_33n",
+                  "x255_ramsey_33n"
+                ]
+              },
+              {
+                "theorem": "g255_tiling_helper_sanity",
+                "claim": "g255_tiling_helper_claim",
+                "references": [
+                  "x255_mono_tiling_leftover",
+                  "x255_mono_tiling_number"
+                ]
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
