@@ -8606,11 +8606,14 @@
    "note": "Authored in X247.v:c4_copies_above_ex_statement. Erdos Problems #60, Erdos-Simonovits (open at the pin; He, Ma and Yang, arXiv:1912.00986v1, Corollary 1.6, prove it for n = q^2 + q + 1, q = 2^k, k >= 40): every graph on n vertices with more edges than every C_4-free graph on n vertices contains >= c n^{1/2} copies of C_4 (distinct, not necessarily induced; counted as 4-edge sets), c absolute, affirmative form (GTBase edge_count, has_subgraph, cycle_graph, del_edge_set)."
   },
   "erdos_600": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x257-edges-in-triangles-thresholds-books",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X257.v:triangle_covered_book_threshold_increments_statement. Erdos Problems #600, Erdos and Rothschild (Er87 item 11; pinned status open): e(n,r) is the least m such that every graph on n vertices with at least m edges, each in a triangle, has an edge in at least r triangles (x257_triangle_forcing_number; Er87's exactly-e(n,r)-edges wording is degenerate if taken literally, g257_exact_one); for every r >= 2, e(n,r+1) - e(n,r) -> oo and e(n,r+1) / e(n,r) -> 1 (its upper half; the lower half by g257_number_mono), the affirmative form of the open question."
   },
   "erdos_601": {
    "statement": "todo",
@@ -9289,11 +9292,14 @@
    "audit_page": "todo"
   },
   "erdos_80": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x257-edges-in-triangles-thresholds-books",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X257.v:triangle_covered_dense_book_polynomial_statement. Erdos Problems #80, Erdos and Rothschild (Er87 item 11; pinned status open): f_c(n), c = 1/p, is the largest m such that every graph on n vertices with at least c n^2 edges, each in a triangle, has an edge in at least m triangles (x257_book_number); the main question as stated, for every c an eps > 0 with f_c(n) > n^eps eventually. FALSE at the pin: Fox and Loh, arXiv:1106.0290v2, Theorem 1.1 (f_c(n) = n^{o(1)} for c < 1/4). The fallback f_c(n) >> log n, implied by it (g257_poly_log), is open and not encoded."
   },
   "erdos_800": {
    "statement": "done",
