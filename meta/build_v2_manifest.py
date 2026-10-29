@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Thirteen
+corrections are applied explicitly (ERRATA below) since the review files predate them. Seventeen
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -38,7 +38,10 @@ Gyarfas' long odd holes (arXiv:1701.07217v3), Trotignon-Vuskovic's ISK4 conjectu
 (arXiv:1704.08104v1) and the four rows of Tomescu's conjecture (arXiv:1712.06067v3, Theorem 1).
 Two studies rows of wave X256 were solved before the corpus pin: Mohar's (Delta+2)-edge-colouring
 conjecture (Narboni, arXiv:2302.12914v1, with Mohar's (chi'+2) theorem) and Vizing's edge-colouring
-Kempe question, the question of bm:bm-060 (arXiv:2302.12914v1).
+Kempe question, the question of bm:bm-060 (arXiv:2302.12914v1). By Marc's decision of 2026-10-29,
+four studies rows false as printed are disproved, their encoded statements kept: Kiraly's 4-regular
+cycle bound (K_5), Scott's induced-subdivision conjecture (arXiv:1209.1595), Las Vergnas-Meyniel A'
+(arXiv:2103.10684) and Mohar's k-regular Kempe conjecture (the triangular prism, k = 3).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -280,6 +283,27 @@ ERRATA = [
      "(Delta(G) + 1)-edge-colouring (Vizing, Theorem 2, intro.tex l.11-15), and every (chi'(G) + 1)-edge-"
      "colouring to every chi'(G)-edge-colouring (Lemma 8, l.48-49), so every k > chi'(G) reaches a "
      "chi'(G)-edge-colouring."),
+    # literature status corrections (Lancelot's lane; Marc's decision of 2026-10-29: four studies rows false as
+    # printed are disproved, their encoded statements kept)
+    ("studies", "std_kir_ly_s_cycle_count_conjecture_for_4_regular_gr", "disproved",
+     "Literature: false as printed. Kiraly, EGRES TR-2009-03, Conjecture 7.14 (p. 13): \"If G is 4-regular "
+     "then c(G) <= 1.99^n\", with no constant. K_5 is 4-regular with n = 5 (m = 10) and has 10 + 15 + 12 = 37 "
+     "cycles > 1.99^5 ~ 31.21. The asymptotic form holds: arXiv:1907.12091v1, Theorem 3 (l.120-122), "
+     "O(1.365^m) cycles at average degree 4."),
+    ("studies", "std_scott_s_conjecture_induced_subdivisions_and_chi", "disproved",
+     "Literature: refuted by Pawlik, Kozik, Krawczyk, Lason, Micek, Trotter and Walczak, arXiv:1209.1595v5 "
+     "(l.108-109): triangle-free intersection graphs of segments have unbounded chromatic number, and for H "
+     "the 1-subdivision of a non-planar graph no subdivision of H is a segment intersection graph."),
+    ("studies", "std_las_vergnas_meyniel_conjecture_a_kempe_equivalen", "disproved",
+     "Literature: the row's text is Conjecture A' of Las Vergnas and Meyniel (arXiv:2103.10684v2, Conjecture "
+     "1.2, l.160-162), refuted there (l.164) by Theorem 1.3 (l.166-168): for every eps > 0 and large t, a graph "
+     "with no K_t-minor (so no K_p-minor, p = (3/2 - eps)t >= t) has a frozen p-colouring (l.170), whose Kempe "
+     "class holds no (p - 1)-colouring."),
+    ("studies", "std_mohar_s_conjecture_kempe_equivalence_of_k_colour", "disproved",
+     "Literature: false as printed at k = 3. The triangular prism is 3-regular and not complete, and its "
+     "3-colourings form two Kempe classes (van den Heuvel; arXiv:1503.03430v2, Lemma 1, l.176-178, and l.96). "
+     "For k >= 4 the conjecture holds: arXiv:1510.06964v3, Theorem 1.1 (kempe.tex l.130-132), which recalls "
+     "the prism (l.79)."),
 ]
 
 
@@ -888,7 +912,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 13 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 17 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
