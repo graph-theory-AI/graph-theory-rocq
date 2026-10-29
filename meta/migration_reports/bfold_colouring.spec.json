@@ -274,6 +274,26 @@
       "path": "chromatic-theory/theories/conjectures/grounding_X236.v",
       "name": "bfold_colouring",
       "note": "Wave X236 (Arthur, 2026-10-26): the grounding certificates of arXiv:1808.01605#00 build b-fold colourings with the canonical GTBase bfold_colouring; a direct use, no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X262.v",
+      "name": "x130_frac_chi_le",
+      "note": "Wave X262 (Arthur, 2026-10-29): Harris's row (studies:std_harris_conjecture) reads chi_f(G) <= K d / log d as x130_frac_chi_le G (K * d) (trunc_log 2 d), the chain applied as X218 applies it to #04 of the same paper; a direct use of the unchanged X130 name, no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X262.v",
+      "name": "x130_frac_chi_le",
+      "note": "Grounding of X262: g262_frac_chi_K (chi_f(K_n) >= n), g262_frac_chi_C5 (chi_f(C_5) <= 5/2) and the Harris row certificates use the unchanged X130 name."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X262.v",
+      "name": "x130_bfold_colouring",
+      "note": "Grounding of X262: g262_C5_bfold states C_5's (5:2)-fold colouring with the unchanged X130 name and proves it through the canonical GTBase bfold_colouringP."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X262.v",
+      "name": "bfold_colouring",
+      "note": "Grounding of X262: g262_bfold_K_le (an (a:b)-fold colouring of K_n has n b <= a) is stated with the canonical GTBase bfold_colouring, a direct use of the canonical (as X236), no copy."
     }
   ],
   "distinct_variants": [

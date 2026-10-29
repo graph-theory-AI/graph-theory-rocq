@@ -11011,6 +11011,108 @@
           }
         }
       }
+    },
+    "X262": {
+      "phase": "X262",
+      "repo": "chromatic-theory",
+      "defines_file": "X262.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X262 (A3 verifier Marcol; routing Lancelot (216), (217); selection x262-selection-by-arthur (309), design x262-design-by-arthur r1), branch math/arthur-x262-20261029",
+      "source_verified_by": "Marcol (X262 wave verifier, A3: pinned records re-read: erdos:920 (data/erdos_graph.json, the statement hashed alone), studies:std_harris_conjecture, arxiv:2601.15245#02 and #03 in the v2 manifest of graph-conjectures b72c5857; the four source_hash values (367caaa0, 8d84d96a, 63d5a9ec, 6dbf1d0d) equal the manifest rows and the wave's; pinned statuses all open; the Mac's deposit coordination/sources/x262-source-mac-20261029 (SHA256SUMS ea727b6d, -c OK) read: Bradac 2605.28793v3 main.tex l.288-292 (Theorem 1.1, the v1 exponent noted); Martinsson 2501.18238v1 source.tex l.112-119 (Conjecture 1.1, Theorem 1.2); Janzer-Steiner-Sudakov 2410.02437v1 main.tex l.242-244 (Conjecture 3.1, the row's text); Bradac-Fox-Steiner-Sudakov-Zhang 2601.15245v1 main.tex l.145-147 (Theorem 1.1), l.181-183 (Theorem 1.5), l.187, l.777-780 (Problem 6.2, complete), l.784-786 (Problem 6.3); Er69b and Mattheus-Verstraete as cited by the design; Graver-Yackel not obtained, as SOURCE.md states)",
+      "source_verified_at": "2026-10-29",
+      "commit": "x262-kr-free-degenerate-chromatic",
+      "rows": {
+        "erdos_920": {
+          "formal_name": "kk_free_chromatic_lower_bound_statement",
+          "source_hash": "367caaa074fa5f6719b0ca4fab252a7b4a35aefee79dfca58e5373fad0cf4abe",
+          "note": "Erdos Problems #920, Erdos (Er69b p.29 Eq.(7); pinned status open): for k >= 4 there are c, C, N such that for n >= N some K_k-free graph on n vertices has n^(k-2) <= C chi^(k-1) (trunc_log 2 n)^(c(k-1)) (f_k(n) is a maximum, so a witness). True at the pin: Bradac, arXiv:2605.28793v3, Theorem 1.1 (main.tex l.288-291; v3 exponent s-1), and for k = 4 Mattheus and Verstraete, 2306.04007v5, Theorem 1, through chi >= n / alpha, with c = 2; the open label is stale.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g262_kf_hyp_inhabited",
+              "claim": "g262_kf_hyp_claim",
+              "references": [
+                "kk_free_chromatic_lower_bound_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g262_kf_not_trivially_true",
+              "claim": "g262_kf_ntt_claim",
+              "references": [
+                "kk_free_chromatic_lower_bound_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_harris_conjecture": {
+          "formal_name": "harris_triangle_free_degenerate_fractional_statement",
+          "source_hash": "8d84d96ac3b01fa0791f7a5cf40686b54ee5707ff33a31c02938ea051cadbff0",
+          "note": "Harris' Conjecture as Janzer, Steiner and Sudakov state it (2410.02437v1, Conjecture 3.1; Harris 1604.00438v8, Conjecture 6.2; pinned status open): K and d0 with x130_frac_chi_le G (K d) (trunc_log 2 d) for every triangle-free d-degenerate G, d >= d0. True at the pin: Martinsson, arXiv:2501.18238v1, Theorem 1.2 (source.tex l.118-119), chi_f <= (4 + o(1)) d / ln d, so K = 8. The Hall-ratio claim of 1812.07327 is a different statement.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g262_hr_hyp_inhabited",
+              "claim": "g262_hr_hyp_claim",
+              "references": [
+                "harris_triangle_free_degenerate_fractional_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g262_hr_not_trivially_true",
+              "claim": "g262_hr_ntt_claim",
+              "references": [
+                "harris_triangle_free_degenerate_fractional_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2601_15245_02": {
+          "formal_name": "triangle_free_degenerate_small_degree_chi_statement",
+          "source_hash": "63d5a9ec48a3e82ad2fe27095edec4d1cd7bf54e2c3dae308c84b9c64eb1ddad",
+          "note": "Bradac, Fox, Steiner, Sudakov and Zhang, Problem 6.2 (2601.15245v1, main.tex l.777-780, complete; pinned status open): for every q >= 1 (eps = 1/q) a C with chi(G) trunc_log 2 d <= C d for every triangle-free d-degenerate G with (trunc_log 2 Delta(G))^q <= d^(q-1); the base e and the floor are absorbed by the quantifier over eps, in both directions (Notes). Open at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g262_md_hyp_inhabited",
+              "claim": "g262_md_hyp_claim",
+              "references": [
+                "triangle_free_degenerate_small_degree_chi_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g262_md_not_trivially_true",
+              "claim": "g262_md_ntt_claim",
+              "references": [
+                "triangle_free_degenerate_small_degree_chi_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2601_15245_03": {
+          "formal_name": "kr_free_degenerate_critical_order_exponential_statement",
+          "source_hash": "6dbf1d0d335a5fea09ff6b4a3759cfb8571f7d3a148e2ee351b13a93c8c02cd1",
+          "note": "Bradac, Fox, Steiner, Sudakov and Zhang, Problem 6.3 (2601.15245v1, main.tex l.784-787; pinned status open): for r >= 3 there are m and d0, depending on r, with d <= m trunc_log 2 #|G| for every K_r-free d-degenerate G with chi(G) = d + 1 and d >= d0. Open at the pin; r = 3 is the paper's Theorem 1.5 (l.181-183), and l.187 leaves r >= 4 open.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g262_cr_hyp_inhabited",
+              "claim": "g262_cr_hyp_claim",
+              "references": [
+                "kr_free_degenerate_critical_order_exponential_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g262_cr_not_trivially_true",
+              "claim": "g262_cr_ntt_claim",
+              "references": [
+                "kr_free_degenerate_critical_order_exponential_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "Marcol (X262 wave verification, 2026-10-29)",
+      "faithfulness_result": "Readback 2026-10-29 (verifier Marcol): 4/4 PASS against the pinned texts and the sources, at math/arthur-x262-20261029 = 6e2b3f8cf5ab86191c5e94e8662dd354a65129e2 (seven commits on work/coordinator 4b20f907), after my design read ((242), FAITHFUL 4/4) of x262-design-by-arthur r1 (d67ce3f2; my packet x262-design-read-by-marcol dd864dba). X262.v and grounding_X262.v equal the design packet's byte for byte. No local helper (helper_sanity [] in every row). erdos:920: forall k >= 4, exists c C N, for n >= N a K_k-free G on n vertices with n^(k-2) <= C chi^(k-1) (trunc_log 2 n)^(c(k-1)): the witness form of the maximum f_k(n), the power (k-1) exact, c : nat and base / floor absorbed in C both ways; true at the pin (Bradac v3 Theorem 1.1 through chi >= n / (t-1), c_k = (2k-4)/(k-1) < 2), status open in the wave. Harris: 2410.02437v1 Conjecture 3.1 verbatim, with X130's x130_frac_chi_le (chi_f <= K d / trunc_log 2 d, attained); true at the pin (Martinsson Theorem 1.2, K = 8). #02: Problem 6.2 per q (eps = 1/q), (trunc_log 2 Delta)^q <= d^(q-1) -> chi trunc_log 2 d <= C d, equivalent both ways for large d, small d absorbed; open. #03: Problem 6.3, forall r >= 3 exists m d0, chi = d+1 -> d <= m trunc_log 2 |G| (e^(Omega_r(d)) both ways); r = 3 is the paper's Theorem 1.5, r >= 4 open (l.187). Grounding: hyp f_4(4) = 3 (K_4 minus an edge, upper bound by a non-edge), chi_f(C_5) <= 5/2 and K_2 (Harris), q = 1 with K_2 (#02), K_3 at r = 4 (#03); not_trivially_true = the body minus one hypothesis, checked mechanically on the comment-stripped normalised text (4/4, a control rejected), the constructions K_(d+1) sound; the 16 certificate and claim names present, 12 Print Assumptions lines. Compile: the dev run's container build (B2 compiled both files, 12 / 12 Print Assumptions closed, no axiom; W1 Print Assumptions clean 4 + 8, 40 exact-type probes). Metadata: source_hash values equal the manifest; the four verifier keys empty before the fields; legs statement / grounding done, notes 523 / 510 / 448 / 420 (under 600); README 545 / 11 / 40 / 1,077 -> 549 / 11 / 40 / 1,073; LANDED adds X262 chromatic-theory after X261; Site / Review as REG.row_urls (erdos / studies none, arXiv URLs); lint 4 / 4 clean, no allowlist entry; consumers: the four bfold_colouring entries (x130_frac_chi_le chain, x130_bfold_colouring and bfold_colouring source), equal to my comment-stripped scan, the report committed byte-identical. Dev run 1 (x262-dev-by-arthur, SHA256SUMS f29e71af, -c OK, 30 steps) failed only on the declared field steps (W1, A3a / A3, A10); W2 872 / 872; W3 4 probed, 0 flagged; W4 0 active (39 allowlisted); A12 rc 0."
     }
   }
 }

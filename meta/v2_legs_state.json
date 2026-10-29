@@ -5984,18 +5984,24 @@
    "audit_page": "todo"
   },
   "axv_2601_15245_02": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x262-kr-free-degenerate-chromatic",
+   "package": "chromatic-theory",
+   "note": "Authored in X262.v:triangle_free_degenerate_small_degree_chi_statement. Bradac, Fox, Steiner, Sudakov and Zhang, Problem 6.2 (2601.15245v1, main.tex l.777-780, complete; pinned status open): for every q >= 1 (eps = 1/q) a C with chi(G) trunc_log 2 d <= C d for every triangle-free d-degenerate G with (trunc_log 2 Delta(G))^q <= d^(q-1); the base e and the floor are absorbed by the quantifier over eps, in both directions (Notes). Open at the pin."
   },
   "axv_2601_15245_03": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x262-kr-free-degenerate-chromatic",
+   "package": "chromatic-theory",
+   "note": "Authored in X262.v:kr_free_degenerate_critical_order_exponential_statement. Bradac, Fox, Steiner, Sudakov and Zhang, Problem 6.3 (2601.15245v1, main.tex l.784-787; pinned status open): for r >= 3 there are m and d0, depending on r, with d <= m trunc_log 2 #|G| for every K_r-free d-degenerate G with chi(G) = d + 1 and d >= d0. Open at the pin; r = 3 is the paper's Theorem 1.5 (l.181-183), and l.187 leaves r >= 4 open."
   },
   "axv_2601_15245_04": {
    "statement": "done",
@@ -9719,11 +9725,14 @@
    "audit_page": "todo"
   },
   "erdos_920": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x262-kr-free-degenerate-chromatic",
+   "package": "chromatic-theory",
+   "note": "Authored in X262.v:kk_free_chromatic_lower_bound_statement. Erdos Problems #920, Erdos (Er69b p.29 Eq.(7); pinned status open): for k >= 4 there are c, C, N such that for n >= N some K_k-free graph on n vertices has n^(k-2) <= C chi^(k-1) (trunc_log 2 n)^(c(k-1)) (f_k(n) is a maximum, so a witness). True at the pin: Bradac, arXiv:2605.28793v3, Theorem 1.1 (main.tex l.288-291; v3 exponent s-1), and for k = 4 Mattheus and Verstraete, 2306.04007v5, Theorem 1, through chi >= n / alpha, with c = 2; the open label is stale."
   },
   "erdos_921": {
    "statement": "done",
@@ -11973,11 +11982,14 @@
    "audit_page": "todo"
   },
   "std_harris_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x262-kr-free-degenerate-chromatic",
+   "package": "chromatic-theory",
+   "note": "Authored in X262.v:harris_triangle_free_degenerate_fractional_statement. Harris' Conjecture as Janzer, Steiner and Sudakov state it (2410.02437v1, Conjecture 3.1; Harris 1604.00438v8, Conjecture 6.2; pinned status open): K and d0 with x130_frac_chi_le G (K d) (trunc_log 2 d) for every triangle-free d-degenerate G, d >= d0. True at the pin: Martinsson, arXiv:2501.18238v1, Theorem 1.2 (source.tex l.118-119), chi_f <= (4 + o(1)) d / ln d, so K = 8. The Hall-ratio claim of 1812.07327 is a different statement."
   },
   "std_harutyunyan_mcdiarmid_conjecture": {
    "statement": "todo",
