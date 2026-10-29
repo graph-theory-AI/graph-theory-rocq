@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py stable_sets --details /tmp/migr
 
 - Canonical: `GraphTheory.core.dom.stable`.
 - Baseline: `96be00e5259f813eed101893330ee162b63f69e2`.
-- Scope: 11 helpers, 17 statements, 73 frozen objects, 146 recorded references.
-- Source checks: 539/539 pass; consistent.
+- Scope: 11 helpers, 17 statements, 73 frozen objects, 147 recorded references.
+- Source checks: 540/540 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
