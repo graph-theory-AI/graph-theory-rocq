@@ -2180,6 +2180,20 @@ them.
   and its statement leg is `todo`, so the gate cannot link them; the file proves
   `question_6_1_disproved`. Registering the `formal_name` on that row (and on
   `arxiv:2209.09107#01`) would turn this orphan into a normal documented row.
+- **Two citation slips in wave notes** (2026-10-29, Lancelot's lit10, reviewer Arthur), checked on the Mac's deposits
+  `coordination/sources/x256-source-mac-20261028` and `x254-source-mac-20261028`. Each slip has one copy in four
+  places: the statement's doc block, its row note in `meta/v2_statement_waves.json`, and the generated notes in
+  `meta/v2_legs_state.json` and `meta/v2_corpus_manifest.json`. Recorded here, not fixed in place: a citation is not
+  worth a statement-file change (both files are named by migration report specs); a later change to those doc blocks
+  and notes should carry the fix.
+  - `X256.v` `mohar_regular_kempe_class_statement` cites Bonamy, Bousquet, Feghali and Johnson as
+    "arXiv:1510.06964v3, Theorem 1, l.130-132". The lines are right (kempe.tex l.130-132, `thm:main`), but the paper
+    numbers the theorem 1.1 (1510.06964v3.txt l.85 begins "Theorem 1.1."). The same Notes' "FJP's Theorem 1
+    (l.98-100)" is right (kempecubic.tex l.98-100; 1503.03430v2.txt l.77 begins "Theorem 1.").
+  - `X254.v` `tomescu_connected_colouring_count_statement` cites Fox, He and Manners as "arXiv:1712.06067v3, Theorem 1
+    (TeX l.98-105)". The number is right (1712.06067v3.txt l.56 begins "Theorem 1."), but the theorem is source.tex
+    l.99-106 (`\begin{thm}` at l.99, `\end{thm}` at l.106; l.98 is blank). Found by Arthur (O1 in their BOARD
+    item (268)).
 
 ## extremal-graph-theory
 
