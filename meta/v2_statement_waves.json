@@ -10443,8 +10443,8 @@
       "repo": "extremal-graph-theory",
       "defines_file": "X259.v",
       "implemented_by": "Marcol (Claude Opus 5.5), wave X259 (A3 verifier Arthur; routing Lancelot (183), (201); selection x259-selection-by-marcol, design x259-design-by-marcol r1), branch math/marcol-x259-20261029, 2026-10-29",
-      "source_verified_by": "",
-      "source_verified_at": "",
+      "source_verified_by": "Arthur (X259 wave verifier, A3: pinned records re-read at b72c5857: data/erdos_graph.json records 1105 and 809 (the statement field, which the builder hashes alone), sha256 recomputed = c970de83adfb874af64c412a3824ec3061125f16a1562b38de67ee72f24dd8c6 and 29f4ca92c9f5e5b982eb92815c09e361bc1756a3a6d43e0e1303e5fc7d55f331, equal to the manifest rows at work/coordinator 862ef061 (AH40) and to the wave's source_hash values; pinned status solved for 1105 (\"PROVED ... in the affirmative\") and open for 809; the Mac's deposit coordination/sources/x259-source-mac-20261029 (SHA256SUMS 98f1b5f8, -c OK): the live pages erdosproblems.com/1105 and /809 (erdos-1105.txt l.25-26, l.34-44; erdos-809.txt l.25-26, l.36-39), Erdos, Simonovits and Sos, Anti-Ramsey theorems (ESS75.txt l.28, l.45-49, l.146-148), Yuan, The anti-Ramsey number for paths, arXiv:2102.00807v3 (source.tex l.54, Theorem 1 l.69-75), Burr, Erdos, Graham and Sos, Maximal antiramsey graphs and the strong chromatic number (BEGS89-renyi.txt l.61, l.67-74, l.359-361), Bucic, Chen and Ma, arXiv:2603.18952v1 (main.tex l.196, l.215-225, l.707-708); not obtained, as SOURCE.md states: Montellano-Ballesteros and Neumann-Lara's full text (publisher preview only, its formula missing) and Er91)",
+      "source_verified_at": "2026-10-29",
       "commit": "x259-anti-ramsey-cycles-paths-strong-chromatic",
       "helper_ownership": {
         "x259_rainbow_copy": {
@@ -10468,8 +10468,8 @@
           "reason": "chi_S(n,e,F) of erdos:809: the least r with x259_rainbow_forcing_colouring n e F r (BEGS89 p.264: \"the smallest number r such that there exists a G(n,e) that has an edge-coloring in r colors such that every L in G is TMC\")."
         }
       },
-      "faithfulness_verified_by": "",
-      "faithfulness_result": "",
+      "faithfulness_verified_by": "Arthur (X259 wave verification, 2026-10-29)",
+      "faithfulness_result": "Readback 2026-10-29 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x259-20261029 = 558fe05f4ce29ad739f27b9151a63996b9ee2250 on work/coordinator 862ef061 (AH40), after my design read (298, FAITHFUL 2/2 with B1) of x259-design-by-marcol r1 (5499b975): grounding_X259.v is byte-identical to the packet's and X259.v differs from it only by B1's guard sentence at the end of the erdos:1105 Notes (my lint simulation: both statements clean). erdos:1105: AR(n,F) is the maximum number of colours, counted on the edges of K_n, with no rainbow copy of F (ESS75 l.45-49; Yuan l.54), C_k and P_k have k vertices (ESS75 l.28); the cycle clause for each k >= 3, scaled by 2(k-1) with per-k constants, which the page and MoNe05's abstract support as an asymptotic; the path clause is exactly Yuan's Theorem 1 for every n >= k >= 5 (l.69-75), and AR(5,P_5) = 5 by my own enumeration (all 22,827 six-colourings of K_5 have a rainbow P_5; 5 of the 42,525 five-colourings have none). erdos:809: chi_S(n,e,F) is the least r such that some graph with n vertices and exactly e edges has a colouring into 'I_r in which every copy of F (not necessarily induced) is rainbow (BEGS89 l.61, l.67-71), at e = floor(n^2/4) + 1, the ~ n^2/8 clause cross-multiplied for every q >= 1; open at the pin for k >= 3 (Bucic-Chen-Ma prove k >= 4, l.220-225; k = 3 remains open, l.707-708). In my MCP the design's combined file built (27 proof blocks, no holes) and the six certificates' Print Assumptions were closed. Dev run run-x259-1 (x259-dev-by-marcol, 539d365a): RESULT PASS-WITH-EXPECTED, the four declared steps failing only on the empty A3 fields (W1 12/14: Print Assumptions clean for 2 statements + 8 certificates, 15 exact-type probes), W3 2 probed / 0 flagged, W4 0 active findings, A12 rc 0; the seventh commit's edge_count.md is byte-identical to the written report (522 -> 524 references).",
       "rows": {
         "erdos_1105": {
           "formal_name": "anti_ramsey_cycles_paths_statement",
