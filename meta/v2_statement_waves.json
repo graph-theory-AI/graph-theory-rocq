@@ -10077,6 +10077,115 @@
       },
       "faithfulness_verified_by": "Marcol (X256 wave verification, 2026-10-29)",
       "faithfulness_result": "Readback 2026-10-29 (verifier Marcol): 6/6 PASS against the pinned texts and the sources, at math/arthur-x256-20261028 = 704afe0fff0aaa23fee5b6e076814babe301bd70 (ff2aa08d + the proper_edge_colouring report commit) on work/coordinator 31cfdcbd, after my design read (210) of x256-design-by-arthur r1 (1d97bfcc): grounding_X256.v blob 40f24937 is byte-identical to the design packet's, and X256.v (fdcb6d73) differs from it in comments only (comment-stripped, whitespace-normalised equal): my S1 (the #01 palette relabelling) and N1 (#00, k = 0) are taken as I asked. Vocabulary: x256_kempe_chain is a whole Kempe chain (nonempty, connected, coloured a or b, closed under a/b-coloured neighbours = a component of the subgraph induced by two colours, 2112.02313v1 l.156-157, 1510.06964v3 l.67), x256_kempe_change exchanges two distinct colours on one chain, x256_kempe_reach_le = at most n changes, pointwise; X162's vacuous step is not reused. #00: forall k, exists c d, any two proper k-colourings of a (k-1)-degenerate G are joined by at most c #|G|^d changes; the affirmative form of the open question; the polynomial may depend on k (l.209-219: bounds similar to Bousquet-Heinrich's O(n^(d+3))); open at the pin. Las Vergnas-Meyniel: the pinned text is Conjecture A' (l.160-162; A is l.154-156): a proper member of the Kempe class using fewer than t colours; disproved before the pin (l.164, Theorem 1.3 l.166-168, frozen colourings l.170: no K_t-minor, so none of K_s for s >= t, and a frozen s-colouring refutes A' at s); encoded as stated, false at the pin. #01: exists an integer c > 0, all (c t)-colourings of a K_t-minor-free graph Kempe equivalent; the Notes' equivalence of every reading of c'.t (integer, real or rational with ceiling or floor, every palette from c' t on) checked, including the join with K_m (no K_u-minor for m <= u - t), the relabelling of the colours off the clique and the windows [p(u) - (u - t), p(u)] chaining from u = t + ceil c' (C = ceil c' (ceil c' + 1)); no monotonicity in k used; c = 0 excluded; open at the pin (c' >= 3/2, l.191). Mohar k-regular: 3 <= k, regular G k, ~ clique [set: G], all proper k-colourings Kempe equivalent; false as stated at the pin by the triangular prism (1503.03430v2 l.96, Lemma 1 l.176-177 with l.174: two classes of its 12 colourings), the k >= 4 connected case proved (1510.06964v3 Theorem 1, l.130-132; componentwise, l.134); a K_(k+1) component leaves no k-colouring. Mohar (Delta + 2): all proper (Delta G + 2)-edge-colourings Kempe equivalent in X213's vocabulary, reaching a colouring that agrees with col2 on the edges (X213 changes never move the values on non-edges); solved before the pin (Vizing chi' <= Delta + 1; class 2 by Narboni, 2302.12914v1 intro.tex l.42-44; class 1 by Mohar's chi' + 2 theorem, cited at 2107.07900v1 l.190-192 and 2302.12914v1 l.36-38, not read). Vizing: a Definition := X213's vizing_kempe_interchange_statement, both directions immediate (studies => X213: chi' <= m, and k = chi' forces m = k, alpha itself, no change; X213 => studies: m = chi'); solved before the pin (2302.12914v1 main.tex l.160 with intro.tex l.11-15). Grounding (grounding_X256.v read): per row hyp_inhabited on K_2 or K_{3,3} with distinct proper colourings where two are compared, the statement specialised there; not_trivially_true = the body minus one hypothesis, checked mechanically on the comment-stripped normalised text with a rejected control (#00, #01, Mohar k-regular: proper col1; Mohar edge: x213_proper_edge_colouring col1; Las Vergnas-Meyniel: ~ minor G 'K_t; Vizing: x213_edge_colourable G m, against X213's body); helper_sanity for the three helpers listed in every row (the closure clause separates the (0,2)- and (0,1)-chains of K_2); the 15 certificate and claim names are present. Metadata: the six source_hash values recomputed equal; the waves file minus X256 = 31cfdcbd's (jq -S), its four verifier keys empty before the fields, helper_ownership the three paper_specific helpers; legs = the builder's derivation (my recomputation byte-identical; notes 312 to 509 characters, under the 600 cap); README 520 / 11 / 40 / 1,102 -> 526 / 11 / 40 / 1,096; LANDED adds X256 chromatic-theory after X254; the allowlist adds exactly the design packet's four exists-after-graph-forall entries (the rest jq -S equal); consumers x213_proper_edge_colouring, vizing_kempe_interchange_statement, x213_edge_colourable (proper_edge_colouring spec) and regular (regularity spec), equal to my comment-stripped scan of the 1,962 frozen spec names, no X162 name; the report commit 704afe0f (proper_edge_colouring.md, 87 -> 96 references, 276 / 276) byte-identical to the dev run's written copy. Dev run 1 (x256-dev-by-arthur, SHA256SUMS cdf78772, 41 / 41 -c OK; WRAPPER rc 0) fails only the four field steps (W1 12/14: the verifier fields and the six rows' source verification; A3a / A3: the independent verdict; A10: the twelve tuple violations); Print Assumptions clean on 6 statements + 30 grounding certificates; 60 exact-type shapes; vacuity 6 probed, 0 flagged; hard lint 0 active, 37 allowlisted; statement docs 849 / 849; migration_report --all --check OK."
+    },
+    "X257": {
+      "phase": "X257",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X257.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X257 (A3 verifier Arthur; routing Lancelot (168); selection x257-selection-by-marcol, design x257-design-by-marcol r1), branch math/marcol-x257-20261029, 2026-10-29",
+      "source_verified_by": "Arthur (X257 wave verifier, A3: pinned records re-read at b72c5857: data/erdos_graph.json records 600 and 80 (the statement field, which the builder hashes alone), sha256 recomputed = d3e33905b546430aafa776f0dc7240abdbcfd8342c1bb43dfe007f428e9808bc and b7197acb94ec31ac35d64afb51ee0a9b599376ebd7aa7ceb2fde879b1a11f2a9, equal to the manifest rows at work/coordinator 5bd6ba66 (AH38) and to the wave's source_hash values; pinned status open for both; the Mac's deposit coordination/sources/x257-source-mac-20261029 (SHA256SUMS 1f8fa800, -c OK): the live pages erdosproblems.com/600 and /80 (text and LaTeX; erdos-600.txt l.25, l.30-32; erdos-80.txt l.25-26, l.39-42), Erdos, Some problems on finite and infinite graphs, Contemp. Math. 65 (1987) 223-228, item 11 (page scans Er87-page4.png and Er87-page5.png, printed pp.226-227; title as the Mac's correction of 2026-10-29 confirms), Fox and Loh, On a problem of Erdos and Rothschild on edges in triangles, arXiv:1106.0290v2 (source.tex l.56-60, 78-81, 106-111, 116-123, 159-166, 629-632; Combinatorica 32 (2012) 619-628 per the MIT record); not obtained, as SOURCE.md states: the Combinatorica final version, Ruzsa-Szemeredi and Khadzhiivanov-Nikiforov)",
+      "source_verified_at": "2026-10-29",
+      "commit": "x257-edges-in-triangles-thresholds-books",
+      "helper_ownership": {
+        "x257_triangle_forcing": {
+          "classification": "paper_specific",
+          "reason": "The forcing property of erdos:600 (pinned text; Erdos, Some problems on finite and infinite graphs, Contemp. Math. 65 (1987), item 11): every graph on n vertices with at least m edges, each edge in a triangle, has an edge in at least r triangles, read through X230's x230_book_at_most (no bound b below r)."
+        },
+        "x257_triangle_forcing_number": {
+          "classification": "paper_specific",
+          "reason": "e(n,r) of erdos:600: the least m with x257_triangle_forcing n r m (the pinned text's \"Let e(n,r) be minimal such that ...\")."
+        },
+        "x257_book_forced": {
+          "classification": "paper_specific",
+          "reason": "The forced book of erdos:80 at c = 1/p (pinned text; Fox and Loh, arXiv:1106.0290v2, h(n,c), source.tex l.78-81): every graph on n vertices with at least n^2 / p edges, each edge in a triangle, has an edge in at least m triangles, read through X230's x230_book_at_most."
+        },
+        "x257_book_number": {
+          "classification": "paper_specific",
+          "reason": "f_c(n) of erdos:80 at c = 1/p: the largest m with x257_book_forced n p m (the pinned text's \"the maximal m such that ...\")."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X257 wave verification, 2026-10-29)",
+      "faithfulness_result": "Readback 2026-10-29 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x257-20261029 = 6d0e696a9dda00e1d4176fa0c82168cf451ff12f on work/coordinator 5bd6ba66 (AH38), after my design read (283, FAITHFUL 2/2) of x257-design-by-marcol r1 (17180aee): grounding_X257.v is byte-identical to the packet's and X257.v differs from it only by my N2 sentence in the erdos:600 Notes (a doc comment). erdos:600: the pinned \"at least e(n,r) edges\" threshold, r >= 2 as pinned; Er87 p.226 prints exactly e(n,r) edges, which taken literally is degenerate (g257_exact_one: one edge is never in a triangle, so the least value is at most 1, against Er87's own c n r_3(n) < e(n;2)), and the pinned threshold is the exact-edge property at every e >= m (g257_forcing_exact); the book number through X230's x230_book_at_most (forall b, book_at_most G b -> r <= b: some edge in at least r triangles); both clauses in affirmative form, open (Er87 p.227 \"Probably ... But perhaps ...\"), the ratio by its upper half with the lower half g257_number_mono; e(n,r) exists for every n (g257_forcing_vacuous). erdos:80: f_c(n) at c = 1/p (a larger c admits fewer graphs, so f_c only grows with c and every real c > 0 is covered), the largest m (Fox-Loh l.78-81; Er87's \"smallest\" is a slip); the main question as stated, eps after c (the abstract's order, l.56-58), FALSE at the pin by Fox-Loh Theorem 1.1 (l.116-123): at p = 5 their graphs qualify for large n, so f_{1/5}(n) <= n^{14/log log n} and n < f^q fails for every q, under either order of eps and c; the fallback >> log n is named in the Notes, implied by the main form (g257_poly_log) and open (l.159-166); \"Estimate f_c(n)\" not formalised; the relation is empty for n = 1, 2 and for p <= 2 (g257_book_empty_1), vacuous below N. Grounding (grounding_X257.v read): hyp_inhabited with concrete values e(3,2) = e(3,3) = 4 and f_{1/3}(3) = 1 (K_3); not_trivially_true per row, each variant the body minus its relational hypotheses (checked mechanically, whitespace-normalised, a control with one clause left in rejected): 600 without both threshold hypotheses, false at a = 1, b = 0; 80 without the book hypothesis, false at f = 0; helper_sanity for the four paper_specific helpers in both rows. Metadata: the two source_hash values recomputed = the manifest's; the waves file minus X257 = 5bd6ba66's (jq -S) and the X257 entry = the packet's x257-wave.json; legs = the builder's derivation (notes of 571 and 583 characters, under the 600 cut), the two rows only; README 529 / 11 / 40 / 1,093 -> 531 / 11 / 40 / 1,091; LANDED adds X257 extremal-graph-theory after X256; no allowlist entry (no graph binder in either body); consumers: edge_count declared in the edge_count spec for both files (70 -> 72 entries, the rest unchanged); the edge_count report committed byte-identical to the dev run's written copy. Dev run 1 (x257-dev-by-marcol, SHA256SUMS dc1b69d1, -c OK) on 4cfcd351 (each of its six commits differs from the rebuilt one only in X257.v's five N2 lines) fails the four field steps only (W1 12/14: the verifier fields and both rows' source verification; A3a / A3: the independent verdict; A10: four tuple violations); Print Assumptions clean on 2 statements + 8 certificates; exact-type probes (20 forbidden shapes) pass; vacuity 2 probed, 0 flagged; hard lint 0 active; statement docs 854 / 854; migration_report --all --check OK.",
+      "rows": {
+        "erdos_600": {
+          "formal_name": "triangle_covered_book_threshold_increments_statement",
+          "source_hash": "d3e33905b546430aafa776f0dc7240abdbcfd8342c1bb43dfe007f428e9808bc",
+          "note": "Erdos Problems #600, Erdos and Rothschild (Er87 item 11; pinned status open): e(n,r) is the least m such that every graph on n vertices with at least m edges, each in a triangle, has an edge in at least r triangles (x257_triangle_forcing_number; Er87's exactly-e(n,r)-edges wording is degenerate if taken literally, g257_exact_one); for every r >= 2, e(n,r+1) - e(n,r) -> oo and e(n,r+1) / e(n,r) -> 1 (its upper half; the lower half by g257_number_mono), the affirmative form of the open question.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g257_tf_hyp_inhabited",
+              "claim": "g257_tf_hyp_claim",
+              "references": [
+                "triangle_covered_book_threshold_increments_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g257_tf_not_trivially_true",
+              "claim": "g257_tf_ntt_claim",
+              "references": [
+                "triangle_covered_book_threshold_increments_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g257_tf_helper_sanity",
+                "claim": "g257_tf_helper_claim",
+                "references": [
+                  "x257_triangle_forcing",
+                  "x257_triangle_forcing_number"
+                ]
+              },
+              {
+                "theorem": "g257_bk_helper_sanity",
+                "claim": "g257_bk_helper_claim",
+                "references": [
+                  "x257_book_forced",
+                  "x257_book_number"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_80": {
+          "formal_name": "triangle_covered_dense_book_polynomial_statement",
+          "source_hash": "b7197acb94ec31ac35d64afb51ee0a9b599376ebd7aa7ceb2fde879b1a11f2a9",
+          "note": "Erdos Problems #80, Erdos and Rothschild (Er87 item 11; pinned status open): f_c(n), c = 1/p, is the largest m such that every graph on n vertices with at least c n^2 edges, each in a triangle, has an edge in at least m triangles (x257_book_number); the main question as stated, for every c an eps > 0 with f_c(n) > n^eps eventually. FALSE at the pin: Fox and Loh, arXiv:1106.0290v2, Theorem 1.1 (f_c(n) = n^{o(1)} for c < 1/4). The fallback f_c(n) >> log n, implied by it (g257_poly_log), is open and not encoded.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g257_bk_hyp_inhabited",
+              "claim": "g257_bk_hyp_claim",
+              "references": [
+                "triangle_covered_dense_book_polynomial_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g257_bk_not_trivially_true",
+              "claim": "g257_bk_ntt_claim",
+              "references": [
+                "triangle_covered_dense_book_polynomial_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g257_tf_helper_sanity",
+                "claim": "g257_tf_helper_claim",
+                "references": [
+                  "x257_triangle_forcing",
+                  "x257_triangle_forcing_number"
+                ]
+              },
+              {
+                "theorem": "g257_bk_helper_sanity",
+                "claim": "g257_bk_helper_claim",
+                "references": [
+                  "x257_book_forced",
+                  "x257_book_number"
+                ]
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
