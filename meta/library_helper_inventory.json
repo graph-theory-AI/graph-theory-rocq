@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2217,
-      "cross_file_files": 1101,
+      "cross_file_declarations": 2223,
+      "cross_file_files": 1105,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -8196,6 +8196,7 @@
             "extremal-graph-theory/theories/conjectures/X252.v:turan_density_neighbourhood_turan_statement",
             "extremal-graph-theory/theories/conjectures/X257.v:x257_book_forced",
             "extremal-graph-theory/theories/conjectures/X257.v:x257_triangle_forcing",
+            "extremal-graph-theory/theories/conjectures/X259.v:x259_rainbow_forcing_colouring",
             "extremal-graph-theory/theories/conjectures/X4.v:x4_edge_count",
             "extremal-graph-theory/theories/conjectures/X76.v:x76_edge_count",
             "extremal-graph-theory/theories/conjectures/X78.v:x78_edge_count",
@@ -8284,6 +8285,8 @@
             "extremal-graph-theory/theories/conjectures/grounding_X257.v:g257_K3_edges",
             "extremal-graph-theory/theories/conjectures/grounding_X257.v:g257_exact_one",
             "extremal-graph-theory/theories/conjectures/grounding_X257.v:g257_forcing_exact",
+            "extremal-graph-theory/theories/conjectures/grounding_X259.v:<line 164>",
+            "extremal-graph-theory/theories/conjectures/grounding_X259.v:g259_complete_3_3",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 14>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 21>",
             "extremal-graph-theory/theories/migration/cut_size.v:<line 13>",
@@ -8319,6 +8322,7 @@
             "extremal-graph-theory/theories/conjectures/X247.v",
             "extremal-graph-theory/theories/conjectures/X252.v",
             "extremal-graph-theory/theories/conjectures/X257.v",
+            "extremal-graph-theory/theories/conjectures/X259.v",
             "extremal-graph-theory/theories/conjectures/X4.v",
             "extremal-graph-theory/theories/conjectures/X76.v",
             "extremal-graph-theory/theories/conjectures/X78.v",
@@ -8338,6 +8342,7 @@
             "extremal-graph-theory/theories/conjectures/grounding_X253.v",
             "extremal-graph-theory/theories/conjectures/grounding_X255.v",
             "extremal-graph-theory/theories/conjectures/grounding_X257.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X259.v",
             "extremal-graph-theory/theories/migration/clique_counts.v",
             "extremal-graph-theory/theories/migration/cut_size.v",
             "extremal-graph-theory/theories/migration/cycle_lengths.v",
@@ -8373,6 +8378,7 @@
             "extremal-graph-theory/theories/conjectures/X252.v:turan_density_neighbourhood_turan_statement",
             "extremal-graph-theory/theories/conjectures/X257.v:triangle_covered_book_threshold_increments_statement",
             "extremal-graph-theory/theories/conjectures/X257.v:triangle_covered_dense_book_polynomial_statement",
+            "extremal-graph-theory/theories/conjectures/X259.v:strong_chromatic_odd_cycles_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:book_triangle_edge_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:c5_edge_count_above_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:triangle_supersaturation_statement",
@@ -8415,6 +8421,7 @@
           "extremal-graph-theory/theories/conjectures/X247.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X252.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X257.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/X259.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X4.v": "no",
           "extremal-graph-theory/theories/conjectures/X76.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X78.v": "unknown",
@@ -8434,6 +8441,7 @@
           "extremal-graph-theory/theories/conjectures/grounding_X253.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X255.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X257.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X259.v": "unknown",
           "extremal-graph-theory/theories/migration/clique_counts.v": "no",
           "extremal-graph-theory/theories/migration/cut_size.v": "no",
           "extremal-graph-theory/theories/migration/cycle_lengths.v": "unknown",
@@ -8738,6 +8746,7 @@
             "extremal-graph-theory/theories/conjectures/X252.v:turan_density_neighbourhood_turan_statement",
             "extremal-graph-theory/theories/conjectures/X257.v:x257_book_forced",
             "extremal-graph-theory/theories/conjectures/X257.v:x257_triangle_forcing",
+            "extremal-graph-theory/theories/conjectures/X259.v:x259_rainbow_forcing_colouring",
             "extremal-graph-theory/theories/conjectures/X4.v:x4_edge_count",
             "extremal-graph-theory/theories/conjectures/X76.v:x76_edge_count",
             "extremal-graph-theory/theories/conjectures/X78.v:x78_edge_count",
@@ -8826,6 +8835,8 @@
             "extremal-graph-theory/theories/conjectures/grounding_X257.v:g257_K3_edges",
             "extremal-graph-theory/theories/conjectures/grounding_X257.v:g257_exact_one",
             "extremal-graph-theory/theories/conjectures/grounding_X257.v:g257_forcing_exact",
+            "extremal-graph-theory/theories/conjectures/grounding_X259.v:<line 164>",
+            "extremal-graph-theory/theories/conjectures/grounding_X259.v:g259_complete_3_3",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 14>",
             "extremal-graph-theory/theories/migration/clique_counts.v:<line 21>",
             "extremal-graph-theory/theories/migration/cut_size.v:<line 13>",
@@ -8861,6 +8872,7 @@
             "extremal-graph-theory/theories/conjectures/X247.v",
             "extremal-graph-theory/theories/conjectures/X252.v",
             "extremal-graph-theory/theories/conjectures/X257.v",
+            "extremal-graph-theory/theories/conjectures/X259.v",
             "extremal-graph-theory/theories/conjectures/X4.v",
             "extremal-graph-theory/theories/conjectures/X76.v",
             "extremal-graph-theory/theories/conjectures/X78.v",
@@ -8880,6 +8892,7 @@
             "extremal-graph-theory/theories/conjectures/grounding_X253.v",
             "extremal-graph-theory/theories/conjectures/grounding_X255.v",
             "extremal-graph-theory/theories/conjectures/grounding_X257.v",
+            "extremal-graph-theory/theories/conjectures/grounding_X259.v",
             "extremal-graph-theory/theories/migration/clique_counts.v",
             "extremal-graph-theory/theories/migration/cut_size.v",
             "extremal-graph-theory/theories/migration/cycle_lengths.v",
@@ -8914,6 +8927,7 @@
             "extremal-graph-theory/theories/conjectures/X252.v:turan_density_neighbourhood_turan_statement",
             "extremal-graph-theory/theories/conjectures/X257.v:triangle_covered_book_threshold_increments_statement",
             "extremal-graph-theory/theories/conjectures/X257.v:triangle_covered_dense_book_polynomial_statement",
+            "extremal-graph-theory/theories/conjectures/X259.v:strong_chromatic_odd_cycles_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:book_triangle_edge_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:c5_edge_count_above_turan_statement",
             "extremal-graph-theory/theories/conjectures/X4.v:triangle_supersaturation_statement",
@@ -8956,6 +8970,7 @@
           "extremal-graph-theory/theories/conjectures/X247.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X252.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X257.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/X259.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X4.v": "no",
           "extremal-graph-theory/theories/conjectures/X76.v": "unknown",
           "extremal-graph-theory/theories/conjectures/X78.v": "unknown",
@@ -8975,6 +8990,7 @@
           "extremal-graph-theory/theories/conjectures/grounding_X253.v": "yes",
           "extremal-graph-theory/theories/conjectures/grounding_X255.v": "unknown",
           "extremal-graph-theory/theories/conjectures/grounding_X257.v": "unknown",
+          "extremal-graph-theory/theories/conjectures/grounding_X259.v": "unknown",
           "extremal-graph-theory/theories/migration/clique_counts.v": "no",
           "extremal-graph-theory/theories/migration/cut_size.v": "no",
           "extremal-graph-theory/theories/migration/cycle_lengths.v": "unknown",
@@ -24908,13 +24924,13 @@
     ]
   },
   "counts": {
-    "files": 351,
-    "helpers": 2725,
+    "files": 352,
+    "helpers": 2730,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 219,
     "repeated_signature_shapes": 332,
-    "statements_excluded": 815,
-    "x_wave_helpers": 1564
+    "statements_excluded": 817,
+    "x_wave_helpers": 1569
   },
   "groups": {
     "body_shape_hash": {
@@ -59541,6 +59557,107 @@
       "qualified_name": "Extremal.conjectures.X257.x257_book_number",
       "signature": "(n p f : nat) : Prop",
       "signature_shape_hash": "a33acd35e36a677629649ea383c5986b917aeaa82bf88716044a51236df42c60"
+    },
+    {
+      "body_hash": "80989bb11d0c1aa37f0afa75ff691096d36aec298c046d5f0d1335c488113055",
+      "body_shape_hash": "80989bb11d0c1aa37f0afa75ff691096d36aec298c046d5f0d1335c488113055",
+      "declaration_hash": "e7fcb2e0abaac534353f9887f8df3b73d76b89704983b54181e7c69b2fc3ceb4",
+      "direct_consumers": [
+        "Extremal.conjectures.X259.x259_rainbow_free_colours"
+      ],
+      "kind": "Definition",
+      "line": 20,
+      "local_dependencies": [],
+      "name": "x259_rainbow_copy",
+      "normalized_name": "rainbow_copy",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X259.v",
+      "phase": "X259",
+      "qualified_name": "Extremal.conjectures.X259.x259_rainbow_copy",
+      "signature": "(Host F : sgraph) (C : eqType) (col : {set Host} -> C) : Prop",
+      "signature_shape_hash": "d91e61de889c2e5a9253235232d3c857e454efe7371b4e5eee01391cdcfbd5df"
+    },
+    {
+      "body_hash": "17d6c61f1a949b9ab742342f39470c1357f351dbb8242e8409eeffe25007702a",
+      "body_shape_hash": "93def506b9b2327d531577b953c84dcee25111766d6e9c8f99ba13fbb8e0ea9c",
+      "declaration_hash": "12533f3c0e6dd3fc1ee04c8d1347c8dae5952730513c8b8c31b7854e537fd557",
+      "direct_consumers": [
+        "Extremal.conjectures.X259.x259_anti_ramsey_number"
+      ],
+      "kind": "Definition",
+      "line": 31,
+      "local_dependencies": [
+        "x259_rainbow_copy"
+      ],
+      "name": "x259_rainbow_free_colours",
+      "normalized_name": "rainbow_free_colours",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X259.v",
+      "phase": "X259",
+      "qualified_name": "Extremal.conjectures.X259.x259_rainbow_free_colours",
+      "signature": "(n : nat) (F : sgraph) (r : nat) : Prop",
+      "signature_shape_hash": "011d881db3bdf0765a3307a0cc8033554e2fdbf26634bf7594e7e2312f4132f4"
+    },
+    {
+      "body_hash": "06eb6b0e806b84111dc843978bf98f9e5e6d480d1d72ba9902a1a080b4b68eea",
+      "body_shape_hash": "d1a7f23447ea576722a37913804a089bddc9ecfefe4d92831bf5bcff6bc1fb0c",
+      "declaration_hash": "40761ae5b239470524a67dd5f9f9a2b0ec34ba73d5490d7eef67100867c0ead8",
+      "direct_consumers": [
+        "Extremal.conjectures.X259.anti_ramsey_cycles_paths_statement"
+      ],
+      "kind": "Definition",
+      "line": 36,
+      "local_dependencies": [
+        "x259_rainbow_free_colours"
+      ],
+      "name": "x259_anti_ramsey_number",
+      "normalized_name": "anti_ramsey_number",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X259.v",
+      "phase": "X259",
+      "qualified_name": "Extremal.conjectures.X259.x259_anti_ramsey_number",
+      "signature": "(n : nat) (F : sgraph) (a : nat) : Prop",
+      "signature_shape_hash": "71e827d3b46309ffbcf5cf49643b85d9511ec121f64097ccc43c422460ab8974"
+    },
+    {
+      "body_hash": "1e69181c7e4d0a270c7dabbba5d5194cd26bf72b58d5c112850e70cdc4384278",
+      "body_shape_hash": "1e69181c7e4d0a270c7dabbba5d5194cd26bf72b58d5c112850e70cdc4384278",
+      "declaration_hash": "be4ed1c84f70744451c3a72edd12881b8928bfe48dbc97889d0fb03544790c5a",
+      "direct_consumers": [
+        "Extremal.conjectures.X259.x259_strong_chromatic_number"
+      ],
+      "kind": "Definition",
+      "line": 40,
+      "local_dependencies": [],
+      "name": "x259_rainbow_forcing_colouring",
+      "normalized_name": "rainbow_forcing_colouring",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X259.v",
+      "phase": "X259",
+      "qualified_name": "Extremal.conjectures.X259.x259_rainbow_forcing_colouring",
+      "signature": "(n e : nat) (F : sgraph) (r : nat) : Prop",
+      "signature_shape_hash": "6f96cc0ac0384a2d4cc256aaee7099898569f69d2dcc956979bc9d70fdfb59ff"
+    },
+    {
+      "body_hash": "13d995211a376ac8aabb115d457107661c28561a20562f45c4ce12d253b647f9",
+      "body_shape_hash": "d8aaff6a45bd6de19e3234be47a0885299ec82475b52a3946b35b0dfc2bbcf47",
+      "declaration_hash": "cb6cc046699ef702d99e91d04fbb339c049f8b5f41c9c8b0d7a1eebb04f3abaf",
+      "direct_consumers": [
+        "Extremal.conjectures.X259.strong_chromatic_odd_cycles_statement"
+      ],
+      "kind": "Definition",
+      "line": 49,
+      "local_dependencies": [
+        "x259_rainbow_forcing_colouring"
+      ],
+      "name": "x259_strong_chromatic_number",
+      "normalized_name": "strong_chromatic_number",
+      "package": "extremal-graph-theory",
+      "path": "extremal-graph-theory/theories/conjectures/X259.v",
+      "phase": "X259",
+      "qualified_name": "Extremal.conjectures.X259.x259_strong_chromatic_number",
+      "signature": "(n e : nat) (F : sgraph) (s : nat) : Prop",
+      "signature_shape_hash": "3fa52e1c4b96e8f9beaf174ed08d0ecffc62104f34e1c8b203a1eacba66c2f99"
     },
     {
       "body_hash": "857e81095417ec9a7b32ad78ef7497e0e68db404b9edf9f8ff9d7b7f4a404cbd",
