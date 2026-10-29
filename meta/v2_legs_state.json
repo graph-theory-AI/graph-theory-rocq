@@ -7568,11 +7568,14 @@
    "audit_page": "todo"
   },
   "erdos_1013": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x258-critical-girth-chromatic",
+   "package": "chromatic-theory",
+   "note": "Authored in X258.v:triangle_free_chromatic_order_ratio_statement. Erdos Problems #1013, Erdos (Er71 item 6; pinned status open): h_3(k), the least order of a triangle-free graph with chromatic number k (x258_triangle_free_order). The proof clause h_3(k+1)/h_3(k) -> 1 as its upper half, for every q >= 1 eventually q h_3(k+1) <= (q+1) h_3(k); the lower half h_3(k) <= h_3(k+1) is proved (g258_order_mono). \"Find an asymptotic\" is not formalised. Open at the pin."
   },
   "erdos_1014": {
    "statement": "done",
@@ -9087,11 +9090,14 @@
    "note": "Authored in XE1.v:erdos_743_statement. Encodes Erdos Problems #743 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_744": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x258-critical-girth-chromatic",
+   "package": "chromatic-theory",
+   "note": "Authored in X258.v:critical_graph_bipartizing_edges_statement. Erdos Problems #744, Erdos, Hajnal and Szemeredi (pinned status solved, disproved): f_k(n), the least number of edges whose deletion makes a k-critical graph on n vertices bipartite (x258_critical_bipartizing_number). As stated: f_k(n) -> oo for every large k, and f_4(n) >> log n. False at the pin, as pinned: Rodl and Tuza (1985) proved f_k(n) = binomial(k-1, 2) for large n, as the page reports (the paper was not obtained)."
   },
   "erdos_745": {
    "statement": "todo",
@@ -9662,11 +9668,14 @@
    "note": "Authored in X5.v:cycle_with_external_three_neighbours_statement. Encodes the 2n-2 edge statement forcing a cycle and an external vertex adjacent to at least three vertices on it."
   },
   "erdos_917": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x258-critical-girth-chromatic",
+   "package": "chromatic-theory",
+   "note": "Authored in X258.v:critical_graph_edge_count_statement. Erdos Problems #917, Erdos (Er69b p.28, Dirac's edge-critical graphs; pinned status open): f_k(n), the largest edge count of an edge-critical k-chromatic graph on n vertices (x258_critical_edge_number). The three questions as stated: f_k(n) >>_k n^2 for k >= 4 (true, Toft 1970), f_6(n) ~ n^2/4 (open), f_k(n) ~ (1/2)(1 - 1/floor(k/3)) n^2 for k >= 6. False at the pin: Toft's constructions exceed the last for 3 not dividing k (arXiv:2301.01656v1, l.89-91)."
   },
   "erdos_918": {
    "statement": "todo",
@@ -9690,11 +9699,14 @@
    "audit_page": "todo"
   },
   "erdos_921": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x258-critical-girth-chromatic",
+   "package": "chromatic-theory",
+   "note": "Authored in X258.v:chromatic_odd_girth_order_statement. Erdos Problems #921, Erdos and Gallai (Er69b p.31; pinned status solved): f_k(n), the largest m such that a graph on n vertices with chromatic number k has every odd cycle longer than m (x258_odd_girth_number), is of order n^(1/(k-2)) for every k >= 4: eventually n <= A f^(k-2) and f^(k-2) <= B n, A and B depending on k. True at the pin: Kierstead, Szemeredi and Trotter, Combinatorica 4 (1984) 183-185, Theorem 1 (c = 2) and Example 3."
   },
   "erdos_922": {
    "statement": "done",

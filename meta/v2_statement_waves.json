@@ -10186,6 +10186,257 @@
           }
         }
       }
+    },
+    "X258": {
+      "phase": "X258",
+      "repo": "chromatic-theory",
+      "defines_file": "X258.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X258 (A3 verifier Marcol; routing Lancelot (170); selection x258-selection-by-arthur (281), design x258-design-by-arthur r1), branch math/arthur-x258-20261029, 2026-10-29",
+      "source_verified_by": "Marcol (X258 wave verifier, A3: pinned records re-read: erdos:921, erdos:1013, erdos:917 and erdos:744 in data/erdos_graph.json of graph-conjectures b72c5857 (the builder hashes the statement alone); the four sha256 values recomputed (67292951, ab540b2c, 60fe2d80, 190fce0d) equal the manifest rows and the wave's source_hash values; pinned statuses 921 solved, 1013 open, 917 open, 744 solved; the Mac's deposit coordination/sources/x258-source-mac-20261029 (SHA256SUMS f7a771d9, listed == present, -c OK) read: the pages erdos-921.txt l.34-38, erdos-1013.txt l.35-39, erdos-917.txt l.42-46, erdos-744.txt l.38-40; Er69b p.28 (Er69b.txt l.48-52, scan page2: Dirac's edge criticality, f_k(n)) and p.31 (l.190-192, scan page5: the Erdos-Gallai odd-circuit conjecture); Er71 item 6, pp.98-99 (Er71.txt l.70-80, scan page3: g(3,n), lim g(3,n+1)/g(3,n) = 1); KST84 pp.183-184 (Theorem 1 at c = 2 and Example 3, scans page1-2); 2301.01656v1 source.tex l.62, l.77, l.86, l.89-91, l.93, l.114-116, l.131-133; EHS82 pp.122-123 (scans page6-7: only infinite deletion functions); Rodl-Tuza 1985 not obtained (403), as SOURCE.md states, so erdos:744's refutation and its \"for all sufficiently large n\" rest on the page)",
+      "source_verified_at": "2026-10-29",
+      "commit": "x258-critical-girth-chromatic",
+      "rows": {
+        "erdos_921": {
+          "formal_name": "chromatic_odd_girth_order_statement",
+          "source_hash": "67292951bbe294d4eda7da7c3a41b3fb5a29d75daa2487769a6c8ac52d2cb834",
+          "note": "Erdos Problems #921, Erdos and Gallai (Er69b p.31; pinned status solved): f_k(n), the largest m such that a graph on n vertices with chromatic number k has every odd cycle longer than m (x258_odd_girth_number), is of order n^(1/(k-2)) for every k >= 4: eventually n <= A f^(k-2) and f^(k-2) <= B n, A and B depending on k. True at the pin: Kierstead, Szemeredi and Trotter, Combinatorica 4 (1984) 183-185, Theorem 1 (c = 2) and Example 3.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g258_og_hyp_inhabited",
+              "claim": "g258_og_hyp_claim",
+              "references": [
+                "chromatic_odd_girth_order_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g258_og_not_trivially_true",
+              "claim": "g258_og_ntt_claim",
+              "references": [
+                "chromatic_odd_girth_order_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g258_og_helper_sanity",
+                "claim": "g258_og_helper_claim",
+                "references": [
+                  "x258_odd_cycles_longer",
+                  "x258_odd_girth_number"
+                ]
+              },
+              {
+                "theorem": "g258_tf_helper_sanity",
+                "claim": "g258_tf_helper_claim",
+                "references": [
+                  "x258_triangle_free_order"
+                ]
+              },
+              {
+                "theorem": "g258_ce_helper_sanity",
+                "claim": "g258_ce_helper_claim",
+                "references": [
+                  "x258_edge_critical",
+                  "x258_critical_edge_number"
+                ]
+              },
+              {
+                "theorem": "g258_bz_helper_sanity",
+                "claim": "g258_bz_helper_claim",
+                "references": [
+                  "x258_critical_bipartizing_number"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_1013": {
+          "formal_name": "triangle_free_chromatic_order_ratio_statement",
+          "source_hash": "ab540b2c4fa6e80049c6fda3b2b518c5ba42342034631f64803b50aa2161cb98",
+          "note": "Erdos Problems #1013, Erdos (Er71 item 6; pinned status open): h_3(k), the least order of a triangle-free graph with chromatic number k (x258_triangle_free_order). The proof clause h_3(k+1)/h_3(k) -> 1 as its upper half, for every q >= 1 eventually q h_3(k+1) <= (q+1) h_3(k); the lower half h_3(k) <= h_3(k+1) is proved (g258_order_mono). \"Find an asymptotic\" is not formalised. Open at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g258_tf_hyp_inhabited",
+              "claim": "g258_tf_hyp_claim",
+              "references": [
+                "triangle_free_chromatic_order_ratio_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g258_tf_not_trivially_true",
+              "claim": "g258_tf_ntt_claim",
+              "references": [
+                "triangle_free_chromatic_order_ratio_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g258_og_helper_sanity",
+                "claim": "g258_og_helper_claim",
+                "references": [
+                  "x258_odd_cycles_longer",
+                  "x258_odd_girth_number"
+                ]
+              },
+              {
+                "theorem": "g258_tf_helper_sanity",
+                "claim": "g258_tf_helper_claim",
+                "references": [
+                  "x258_triangle_free_order"
+                ]
+              },
+              {
+                "theorem": "g258_ce_helper_sanity",
+                "claim": "g258_ce_helper_claim",
+                "references": [
+                  "x258_edge_critical",
+                  "x258_critical_edge_number"
+                ]
+              },
+              {
+                "theorem": "g258_bz_helper_sanity",
+                "claim": "g258_bz_helper_claim",
+                "references": [
+                  "x258_critical_bipartizing_number"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_917": {
+          "formal_name": "critical_graph_edge_count_statement",
+          "source_hash": "60fe2d8049bf8c802163430dec1abe9cd03eb5e2daa17eeb04ddcf73bf99b7ee",
+          "note": "Erdos Problems #917, Erdos (Er69b p.28, Dirac's edge-critical graphs; pinned status open): f_k(n), the largest edge count of an edge-critical k-chromatic graph on n vertices (x258_critical_edge_number). The three questions as stated: f_k(n) >>_k n^2 for k >= 4 (true, Toft 1970), f_6(n) ~ n^2/4 (open), f_k(n) ~ (1/2)(1 - 1/floor(k/3)) n^2 for k >= 6. False at the pin: Toft's constructions exceed the last for 3 not dividing k (arXiv:2301.01656v1, l.89-91).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g258_ce_hyp_inhabited",
+              "claim": "g258_ce_hyp_claim",
+              "references": [
+                "critical_graph_edge_count_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g258_ce_not_trivially_true",
+              "claim": "g258_ce_ntt_claim",
+              "references": [
+                "critical_graph_edge_count_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g258_og_helper_sanity",
+                "claim": "g258_og_helper_claim",
+                "references": [
+                  "x258_odd_cycles_longer",
+                  "x258_odd_girth_number"
+                ]
+              },
+              {
+                "theorem": "g258_tf_helper_sanity",
+                "claim": "g258_tf_helper_claim",
+                "references": [
+                  "x258_triangle_free_order"
+                ]
+              },
+              {
+                "theorem": "g258_ce_helper_sanity",
+                "claim": "g258_ce_helper_claim",
+                "references": [
+                  "x258_edge_critical",
+                  "x258_critical_edge_number"
+                ]
+              },
+              {
+                "theorem": "g258_bz_helper_sanity",
+                "claim": "g258_bz_helper_claim",
+                "references": [
+                  "x258_critical_bipartizing_number"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_744": {
+          "formal_name": "critical_graph_bipartizing_edges_statement",
+          "source_hash": "190fce0d36a7f1b4e294104a4d7a31d90f876caf85b5ad593df2385a0b764e0f",
+          "note": "Erdos Problems #744, Erdos, Hajnal and Szemeredi (pinned status solved, disproved): f_k(n), the least number of edges whose deletion makes a k-critical graph on n vertices bipartite (x258_critical_bipartizing_number). As stated: f_k(n) -> oo for every large k, and f_4(n) >> log n. False at the pin, as pinned: Rodl and Tuza (1985) proved f_k(n) = binomial(k-1, 2) for large n, as the page reports (the paper was not obtained).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g258_bz_hyp_inhabited",
+              "claim": "g258_bz_hyp_claim",
+              "references": [
+                "critical_graph_bipartizing_edges_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g258_bz_not_trivially_true",
+              "claim": "g258_bz_ntt_claim",
+              "references": [
+                "critical_graph_bipartizing_edges_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g258_og_helper_sanity",
+                "claim": "g258_og_helper_claim",
+                "references": [
+                  "x258_odd_cycles_longer",
+                  "x258_odd_girth_number"
+                ]
+              },
+              {
+                "theorem": "g258_tf_helper_sanity",
+                "claim": "g258_tf_helper_claim",
+                "references": [
+                  "x258_triangle_free_order"
+                ]
+              },
+              {
+                "theorem": "g258_ce_helper_sanity",
+                "claim": "g258_ce_helper_claim",
+                "references": [
+                  "x258_edge_critical",
+                  "x258_critical_edge_number"
+                ]
+              },
+              {
+                "theorem": "g258_bz_helper_sanity",
+                "claim": "g258_bz_helper_claim",
+                "references": [
+                  "x258_critical_bipartizing_number"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x258_odd_cycles_longer": {
+          "classification": "paper_specific",
+          "reason": "The odd-cycle condition of erdos:921 (pinned text; Er69b p.31, the smallest odd circuit): every odd cycle has length greater than m, over GTBase's ucycle; no shared odd-girth notion exists (XE2's odd_cycle_lengths_bounded counts the lengths)."
+        },
+        "x258_odd_girth_number": {
+          "classification": "paper_specific",
+          "reason": "f_k(n) of erdos:921: the largest m such that a graph on n vertices with chromatic number k has every odd cycle longer than m (the pinned text's \"the largest m such that there is a graph ...\")."
+        },
+        "x258_triangle_free_order": {
+          "classification": "paper_specific",
+          "reason": "h_3(k) of erdos:1013 (Er71 item 6, g(3,n)): the least order of a triangle-free graph with chromatic number k, over GTBase's triangle_free."
+        },
+        "x258_edge_critical": {
+          "classification": "paper_specific",
+          "reason": "Dirac's criticality as erdos:917 pins it (Er69b p.28: chi(G - R) < chi(G) for every edge R): every one-edge deletion (del_edges [set u; v], X219's edge clause) has chromatic number below k; X219's notion adds vertex deletions and XE1's edge_critical_set concerns a set of edges."
+        },
+        "x258_critical_edge_number": {
+          "classification": "paper_specific",
+          "reason": "f_k(n) of erdos:917: the largest edge count of an edge-critical graph on n vertices with chromatic number k (the pinned text's \"the largest number of edges ...\")."
+        },
+        "x258_critical_bipartizing_number": {
+          "classification": "paper_specific",
+          "reason": "f_k(n) of erdos:744: the least m such that a k-critical graph on n vertices (X219's x219_subgraph_critical_for with chi < k, every proper subgraph) becomes bipartite after deleting at most m pairs (GTBase's bipartite_after_deletion)."
+        }
+      },
+      "faithfulness_verified_by": "Marcol (X258 wave verification, 2026-10-29)",
+      "faithfulness_result": "Readback 2026-10-29 (verifier Marcol): 4/4 PASS against the pinned texts and the sources, at math/arthur-x258-20261029 = 2a66ee18e677c286fd98fd41f3850505a713ff58 (seven commits on work/coordinator 90255fbb), after my design read (220) of x258-design-by-arthur (7ae757fc; my packet x258-design-read-by-marcol a894abf8) and my interim (224): X258.v and grounding_X258.v at the dev-run head d3001eff equal the design packet's byte for byte; the chain was rebuilt from c5 with c6' (the edge_count notes reworded) and c7 (my S1, N1 in the bounded-ratio wording asked in (224), the two subtraction guard notes, compile check 1's proof fixes); against a4229d49 only X258.v (comments) and grounding_X258.v differ. Vocabulary: x258_odd_cycles_longer (every odd ucycle is longer than m; sizes 1 and 2 cannot occur), x258_odd_girth_number (the largest such m over graphs on n vertices with chi = k, with a witness), x258_triangle_free_order (the least order of a triangle-free graph with chi = k, with a witness), x258_edge_critical (Er69b p.28's Dirac criticality: every one-edge del_edges deletion has chi below k; isolated vertices allowed, so f_k(n) exists for every n >= k), x258_critical_edge_number (the largest edge count), x258_critical_bipartizing_number (X219's x219_subgraph_critical_for with chi < k, i.e. every proper subgraph has chi < k; the least m over such graphs of the least bipartizing deletion, GTBase bipartite_after_deletion). erdos:921: forall k >= 4, exists A B N, n <= A f^(k-2) /\\ f^(k-2) <= B n for n >= N (f asymp n^(1/(k-2)) with constants per k, Er69b p.31); true at the pin (KST84 Theorem 1 at c = 2, c_k = 4k; Example 3, with an odd cycle of length L of radius <= (L - 1)/2); the N1 note: f_k(n) <= f_k(n+1) (an isolated vertex), so the lower side for every large n needs the construction only along orders with bounded ratios. erdos:1013: the ratio's upper half, for every q >= 1 eventually h_3(k+1) / h_3(k) <= (q+1)/q, cross-multiplied; the lower half proved (g258_order_mono); open at the pin (the page's bounds are a factor 2 apart). erdos:917: the conjunction of the three asked clauses as stated ((a) n^2 <= C f; (b) and (c) two-sided q-approximations of f / ((t - 1) n^2 / (2t)), t = k %/ 3, (b) = (c) at k = 6), false at the pin by (c) at k = 7 (Toft's constructions, 2301.01656v1 l.89-91: 1/2 - 3/(14 - 8/7) = 4/15 > 1/4 for infinitely many n; the page's Stiebitz coefficients are the same values); (a) true (Toft, l.86), (b) open (l.93); the 720 / 1015 conjunction precedent; pinned open stands for (b). erdos:744: \"k a large fixed constant\" as exists K forall k >= K, f_k(n) -> oo, plus the k = 4 clause n <= 2^(C m) (f_4(n) >> log n), as printed; false at the pin under this reading and under \"every k >= 4\" (Rodl-Tuza per the page: f_k(n) = binomial(k-1, 2) for large n); the Notes say the status rests on the page. Grounding (grounding_X258.v read at 2a66ee18): hyp_inhabited f_4(4) = 2 (921, K_4), h_3(1) = 1 and h_3(2) = 2 (1013), f_4(4) = 6 (917, K_4) and f_4(4) = 2 (744, my S1: K_4 is 4-critical, a perfect matching bipartizes it, one pair leaves a triangle), each with the statement specialised to the clause it inhabits (k = 4, q = 1); not_trivially_true = the body minus its relational hypotheses, checked mechanically on the comment-stripped normalised text at 2a66ee18 (4/4, a control rejected); helper_sanity, four groups, listed in every row; the 24 certificate and claim names are present. Compile check 2 (x258-compile2-by-arthur, SHA256SUMS 7743b5b1, 10 files listed = present, -c OK): B2 rebuilt X258.v and grounding_X258.v, 13 Print Assumptions closed under the global context (the 12 certificate theorems and g258_order_mono), 0 with axioms; W4 0 active, 37 allowlisted; no Admitted, Axiom or Parameter in either file. Metadata: the four source_hash values recomputed equal; the four verifier keys empty before the fields; helper_ownership the six paper_specific helpers; legs statement / grounding done, notes 494 / 462 / 514 / 490 characters (under the 600 cap); README 531 / 11 / 40 / 1,091 -> 535 / 11 / 40 / 1,087; LANDED adds X258 chromatic-theory after X257; no allowlist entry; consumers: edge_count only (X258.v and grounding_X258.v, declared as a lexical match of the canonical GTBase.common.edge_count: chromatic-theory never imports D2ram / D2tur), equal to my comment-stripped scan against the 1,199 distinct frozen names (2,438 entries) of the 101 specs at 2a66ee18. Dev run 1 (x258-dev-by-arthur, SHA256SUMS f5df534b, -c OK) failed only on the declared field steps (W1, A3a / A3, A10) and on W4's doc-note finding at X258.v:89, fixed by c7's guard sentence (W4 0 active in compile check 2); W3 vacuity 4 probed, 0 flagged; statement docs 856 / 856; no migration report changed (edge_count 514 references), so there is no report commit."
     }
   }
 }
