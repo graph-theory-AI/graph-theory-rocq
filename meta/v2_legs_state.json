@@ -7839,11 +7839,14 @@
    "audit_page": "todo"
   },
   "erdos_1105": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x259-anti-ramsey-cycles-paths-strong-chromatic",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X259.v:anti_ramsey_cycles_paths_statement. Erdos Problems #1105, Erdos, Simonovits and Sos (ESS75; pinned status solved): AR(n,F) is the largest number of colours on the edges of K_n with no rainbow copy of F (x259_anti_ramsey_number); both asked clauses, in the affirmative form as both are proved: AR(n,C_k) = ((k-2)/2 + 1/(k-1)) n + O(1) for each k >= 3 (Montellano-Ballesteros and Neumann-Lara 2005) and the printed AR(n,P_k) for every n >= k >= 5 (Yuan, arXiv:2102.00807v3, Theorem 1)."
   },
   "erdos_111": {
    "statement": "todo",
@@ -9376,11 +9379,14 @@
    "audit_page": "todo"
   },
   "erdos_809": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x259-anti-ramsey-cycles-paths-strong-chromatic",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X259.v:strong_chromatic_odd_cycles_statement. Erdos Problems #809, Burr, Erdos, Graham and Sos (BEGS89 p.270; pinned status open): chi_S(n,e,F) is the least r such that some graph with n vertices and exactly e edges has an r-colouring of its edges with every copy of F rainbow (x259_strong_chromatic_number); for every k >= 3, chi_S(n, floor(n^2/4) + 1, C_(2k+1)) ~ n^2/8, as asked. Bucic, Chen and Ma, arXiv:2603.18952v1 (before the pin), prove it for k >= 4; k = 3 (C_7) is open."
   },
   "erdos_81": {
    "statement": "done",
