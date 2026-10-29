@@ -11011,6 +11011,108 @@
           }
         }
       }
+    },
+    "X262": {
+      "phase": "X262",
+      "repo": "chromatic-theory",
+      "defines_file": "X262.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X262 (A3 verifier Marcol; routing Lancelot (216), (217); selection x262-selection-by-arthur (309), design x262-design-by-arthur r1), branch math/arthur-x262-20261029",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x262-kr-free-degenerate-chromatic",
+      "rows": {
+        "erdos_920": {
+          "formal_name": "kk_free_chromatic_lower_bound_statement",
+          "source_hash": "367caaa074fa5f6719b0ca4fab252a7b4a35aefee79dfca58e5373fad0cf4abe",
+          "note": "Erdos Problems #920, Erdos (Er69b p.29 Eq.(7); pinned status open): for k >= 4 there are c, C, N such that for n >= N some K_k-free graph on n vertices has n^(k-2) <= C chi^(k-1) (trunc_log 2 n)^(c(k-1)) (f_k(n) is a maximum, so a witness). True at the pin: Bradac, arXiv:2605.28793v3, Theorem 1.1 (main.tex l.288-291; v3 exponent s-1), and for k = 4 Mattheus and Verstraete, 2306.04007v5, Theorem 1, through chi >= n / alpha, with c = 2; the open label is stale.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g262_kf_hyp_inhabited",
+              "claim": "g262_kf_hyp_claim",
+              "references": [
+                "kk_free_chromatic_lower_bound_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g262_kf_not_trivially_true",
+              "claim": "g262_kf_ntt_claim",
+              "references": [
+                "kk_free_chromatic_lower_bound_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_harris_conjecture": {
+          "formal_name": "harris_triangle_free_degenerate_fractional_statement",
+          "source_hash": "8d84d96ac3b01fa0791f7a5cf40686b54ee5707ff33a31c02938ea051cadbff0",
+          "note": "Harris' Conjecture as Janzer, Steiner and Sudakov state it (2410.02437v1, Conjecture 3.1; Harris 1604.00438v8, Conjecture 6.2; pinned status open): K and d0 with x130_frac_chi_le G (K d) (trunc_log 2 d) for every triangle-free d-degenerate G, d >= d0. True at the pin: Martinsson, arXiv:2501.18238v1, Theorem 1.2 (source.tex l.118-119), chi_f <= (4 + o(1)) d / ln d, so K = 8. The Hall-ratio claim of 1812.07327 is a different statement.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g262_hr_hyp_inhabited",
+              "claim": "g262_hr_hyp_claim",
+              "references": [
+                "harris_triangle_free_degenerate_fractional_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g262_hr_not_trivially_true",
+              "claim": "g262_hr_ntt_claim",
+              "references": [
+                "harris_triangle_free_degenerate_fractional_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2601_15245_02": {
+          "formal_name": "triangle_free_degenerate_small_degree_chi_statement",
+          "source_hash": "63d5a9ec48a3e82ad2fe27095edec4d1cd7bf54e2c3dae308c84b9c64eb1ddad",
+          "note": "Bradac, Fox, Steiner, Sudakov and Zhang, Problem 6.2 (2601.15245v1, main.tex l.777-780, complete; pinned status open): for every q >= 1 (eps = 1/q) a C with chi(G) trunc_log 2 d <= C d for every triangle-free d-degenerate G with (trunc_log 2 Delta(G))^q <= d^(q-1); the base e and the floor are absorbed by the quantifier over eps, in both directions (Notes). Open at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g262_md_hyp_inhabited",
+              "claim": "g262_md_hyp_claim",
+              "references": [
+                "triangle_free_degenerate_small_degree_chi_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g262_md_not_trivially_true",
+              "claim": "g262_md_ntt_claim",
+              "references": [
+                "triangle_free_degenerate_small_degree_chi_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2601_15245_03": {
+          "formal_name": "kr_free_degenerate_critical_order_exponential_statement",
+          "source_hash": "6dbf1d0d335a5fea09ff6b4a3759cfb8571f7d3a148e2ee351b13a93c8c02cd1",
+          "note": "Bradac, Fox, Steiner, Sudakov and Zhang, Problem 6.3 (2601.15245v1, main.tex l.784-787; pinned status open): for r >= 3 there are m and d0, depending on r, with d <= m trunc_log 2 #|G| for every K_r-free d-degenerate G with chi(G) = d + 1 and d >= d0. Open at the pin; r = 3 is the paper's Theorem 1.5 (l.181-183), and l.187 leaves r >= 4 open.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g262_cr_hyp_inhabited",
+              "claim": "g262_cr_hyp_claim",
+              "references": [
+                "kr_free_degenerate_critical_order_exponential_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g262_cr_not_trivially_true",
+              "claim": "g262_cr_ntt_claim",
+              "references": [
+                "kr_free_degenerate_critical_order_exponential_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
