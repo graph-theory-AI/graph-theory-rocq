@@ -1976,6 +1976,16 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X259.v",
       "name": "edge_count",
       "note": "Wave X259 (2026-10-29): edge_count (GTBase.common) counts the edges of the graphs in erdos:809's chi_S(n,e,F) (some graph with n vertices and exactly e edges, x259_rainbow_forcing_colouring), named in X259.v; grounding_X259.v uses it to show that a graph with 3 vertices and 3 edges is K_3 (g259_complete_3_3, with card_draws). Imported, no copy; declared as for X257."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X260.v",
+      "name": "edge_count",
+      "note": "Wave X260 (2026-10-29): edge_count (GTBase.common) states arxiv:2301.13305#00's guard on the fixed graph H (a positive even number of edges: 0 < edge_count H, ~~ odd (edge_count H)), named in X260.v; grounding_X260.v uses it for H = K_4 (edge_count 'K_4 = 6 by edge_count_Kn). Imported, no copy; declared as for X259."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X260.v",
+      "name": "edge_count",
+      "note": "Wave X260 (2026-10-29): edge_count (GTBase.common) states arxiv:2301.13305#00's guard on the fixed graph H (a positive even number of edges: 0 < edge_count H, ~~ odd (edge_count H)), named in X260.v; grounding_X260.v uses it for H = K_4 (edge_count 'K_4 = 6 by edge_count_Kn). Imported, no copy; declared as for X259."
     }
   ],
   "distinct_variants": [

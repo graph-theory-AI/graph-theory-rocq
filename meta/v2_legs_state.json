@@ -4007,18 +4007,24 @@
    "audit_page": "todo"
   },
   "axv_2301_13305_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x260-maximal-clique-sizes-graph-codes",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X260.v:graph_codes_even_edges_statement. Alon, Graph-codes (arXiv:2301.13305v2), Question 1.1 in its \"Equivalently\" form (pinned status partial): for every fixed graph H with a positive even number of edges, d_H(n) -> 0, where d_H(n) is the largest fraction of the 2^C(n,2) graphs on [n] in an H-code, a family with no two members whose symmetric difference is a copy of H (x260_code). Open at the pin; Versteegen (arXiv:2310.19891v2) bounds linear codes only."
   },
   "axv_2301_13305_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x260-maximal-clique-sizes-graph-codes",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X260.v:graph_codes_K4_statement. Alon, Graph-codes (arXiv:2301.13305v2), concluding remarks (pinned status partial): d_{K_4}(n) = o(1), the instance H = K_4 of Question 1.1, encoded as #00 with H := K_4 (x260_code). Open at the pin (Versteegen's Question 1.1); Alon proves the companion bound d_{K_4}(n) >= 1/n^{o(1)}."
   },
   "axv_2301_13305_02": {
    "statement": "todo",
@@ -9780,11 +9786,14 @@
    "note": "Authored in X253.v:clique_subdivision_apex_turan_three_halves_statement. Erdos Problems #926, Erdos (proved before the pin, pinned status solved: Furedi, Combinatorica 11 (1991) 75-79, an n-vertex graph with >= k^{3/2} n^{3/2} edges contains L^k = H_k): for every k >= 4, ex(n;H_k) <<_k n^{3/2} (m^2 <= c n^3), H_k the 1-subdivision of K_k with a vertex joined to its k branch vertices (D2tur is_turan_number; GTBase subdivision; upstream add_node)."
   },
   "erdos_927": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x260-maximal-clique-sizes-graph-codes",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X260.v:maximal_clique_sizes_statement. Erdos Problems #927, Moon and Moser; Erdos (Er66b, Er69b, Er71; pinned status solved, prize DISPROVED): g(n) is the largest number of distinct sizes of maximal cliques in a graph on n vertices (x260_clique_size_number); the asked g(n) = n - log_2 n - log_*(n) + O(1), as stated. FALSE at the pin: Spencer proved g(n) > n - log_2 n - O(1) (Er71 p.101, note added in proof; Gao, arXiv:2510.14804v3), so the log_* term cannot be absorbed."
   },
   "erdos_934": {
    "statement": "todo",
