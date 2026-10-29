@@ -7,11 +7,11 @@
     erdos:1013 without both order hypotheses: a = 0, b = 1 at q = 1; erdos:917's first clause: f = 0 against
     n^2 <= C f at k = 4; erdos:744's first clause: m = 0 against M = 1).  The concrete values are f_4(4) = 2 for
     erdos:921 and f_4(4) = 6 for erdos:917 (K_4: a graph whose chromatic number is its order is complete,
-    g258_adj_of_chi), h_3(1) = 1 and h_3(2) = 2 (K_1, K_2) and f_3(3) = 1 for erdos:744 (K_3 minus one edge is a path;
-    no 3-chromatic graph is bipartite).  helper_sanity: K_4's odd cycles are longer than 2 but not than 3, f_4(4) is 2
-    and not 3; h_3(2) is not 1; K_4 is edge-critical at 4 and K_2 is not at 1, f_4(4) of erdos:917 is 6 and not 5;
-    f_3(3) is 1 and not 0.  g258_order_mono (h_3(k) <= h_3(k+1)) is the fact X258.v's erdos:1013 Notes use for the
-    lower half of the ratio; g258_chi_sub_exact (every value below chi(A) is chi of a subset of A) proves it. *)
+    g258_adj_of_chi), h_3(1) = 1 and h_3(2) = 2 (K_1, K_2) and f_4(4) = 2 for erdos:744 (K_4 minus a perfect matching
+    is a 4-cycle; one deletion leaves a triangle).  helper_sanity: K_4's odd cycles are longer than 2 but not than 3,
+    f_4(4) is 2, not 3; h_3(2) is not 1; K_4 is edge-critical at 4, K_2 is not at 1, f_4(4) of erdos:917 is 6, not 5;
+    f_3(3) is 1, not 0 (the page's odd cycles).  g258_order_mono (h_3(k) <= h_3(k+1)) is the fact X258.v's erdos:1013
+    Notes use for the ratio's lower half; g258_chi_sub_exact (each value below chi(A) is chi of a subset) proves it. *)
 
 From GTBase Require Import base common colourings bipartitions.
 From Chromatic.conjectures Require Import X219 X258.
@@ -318,14 +318,104 @@ Qed.
 
 (** ** erdos:744 *)
 
-(** hyp_inhabited: f_3(3) = 1 (K_3); the statement's second clause. *)
+(** In a complete graph made bipartite by deleting S, two distinct vertices on one side form a pair of S. *)
+Lemma g258_same_side_pair (G : sgraph) (S : {set {set G}}) (A : {set G}) (x y : G) :
+  (forall u v : G, u != v -> u -- v) -> @bipartition (del_edge_set G S) A -> x != y ->
+  (x \in A) = (y \in A) -> [set x; y] \in S.
+Proof.
+move=> adj bA xy same; apply/negPn/negP => nS.
+have e : @edge_rel (del_edge_set G S) x y by rewrite /edge_rel /= /del_es_rel /= adj // nS.
+by move: (bA x y e); rewrite same; case: (y \in A).
+Qed.
+
+(** Two distinct pairs of S give #|S| >= 2. *)
+Lemma g258_two_pairs (G : sgraph) (S : {set {set G}}) (a b c : G) (P : {set G}) :
+  [set a; b] \in S -> P \in S -> c \in P -> c \notin [set a; b] -> 1 < #|S|.
+Proof.
+move=> ab P_S cP cab; apply/card_gt1P; exists [set a; b], P; split => //.
+by apply: contraNneq cab => ->.
+Qed.
+
+(** Deleting at most one edge never makes a complete graph on four vertices bipartite: one side holds three vertices,
+    or each side holds two, and each pair inside a side must be deleted. *)
+Lemma g258_bipartizing_ge2 (G : sgraph) (S : {set {set G}}) :
+  #|G| = 4 -> (forall u v : G, u != v -> u -- v) -> bipartite_after_deletion S -> 1 < #|S|.
+Proof.
+move=> hG adj [A bA].
+have pair := g258_same_side_pair adj bA.
+have hC : #|A| + #|~: A| = 4 by rewrite cardsC hG.
+case: (leqP 3 #|A|) => [/card_gt2P[x [y [z [[xA yA zA] [xy yz zx]]]]] | hA].
+  apply: (@g258_two_pairs G S x y z [set x; z]).
+  - by apply: pair => //; rewrite xA yA.
+  - by apply: pair; [rewrite eq_sym | rewrite xA zA].
+  - by rewrite !inE eqxx orbT.
+  - by rewrite !inE negb_or zx eq_sym yz.
+case: (leqP 3 #|~: A|) => [/card_gt2P[x [y [z [[xA yA zA] [xy yz zx]]]]] | hA'].
+  move: xA yA zA; rewrite !inE => xA yA zA.
+  apply: (@g258_two_pairs G S x y z [set x; z]).
+  - by apply: pair => //; rewrite (negbTE xA) (negbTE yA).
+  - by apply: pair; [rewrite eq_sym | rewrite (negbTE xA) (negbTE zA)].
+  - by rewrite !inE eqxx orbT.
+  - by rewrite !inE negb_or zx eq_sym yz.
+have h2 : 1 < #|A|.
+  by rewrite ltnNge; apply/negP => le1; have := leq_add le1 (hA' : #|~: A| <= 2); rewrite hC.
+have h2' : 1 < #|~: A|.
+  by rewrite ltnNge; apply/negP => le1; have := leq_add (hA : #|A| <= 2) le1; rewrite hC.
+have /card_gt1P[x [y [xA yA xy]]] := h2.
+have /card_gt1P[u [v [uA vA uv]]] := h2'.
+move: uA vA; rewrite !inE => uA vA.
+apply: (@g258_two_pairs G S x y u [set u; v]).
+- by apply: pair => //; rewrite xA yA.
+- by apply: pair => //; rewrite (negbTE uA) (negbTE vA).
+- by rewrite !inE eqxx.
+- by rewrite !inE negb_or; apply/andP; split; apply: contraNneq uA => ->.
+Qed.
+
+(** Two distinct vertices of a two-element set are the set. *)
+Lemma g258_side_pair (T : finType) (A : {set T}) (x y : T) :
+  #|A| = 2 -> x != y -> x \in A -> y \in A -> [set x; y] = A.
+Proof.
+move=> hA xy xA yA; apply/eqP; rewrite eqEcard cards2 xy hA; apply/andP; split => //.
+by apply/subsetP => z; rewrite !inE => /orP[] /eqP->.
+Qed.
+
+Lemma g258_critical_K4 : x219_subgraph_critical_for (fun H : sgraph => χ([set: H]) < 4) 'K_4.
+Proof.
+split; first by rewrite g258_chi_K ltnn.
+  move=> v; rewrite chiT chi_induced; apply: leq_ltn_trans (leq_chi _) _.
+  by have := cardsD1 v [set: 'K_4]; rewrite inE cardsT card_ord add1n => -[<-].
+by move=> u v uv; have := @g258_edge_critical_order 'K_4 u v uv; rewrite card_ord.
+Qed.
+
+(** f_4(4) = 2 for erdos:744: K_4 is 4-critical; deleting the pairs {0, 3} and {1, 2} leaves the 4-cycle with side
+    {0, 3}; one deletion never suffices (g258_bipartizing_ge2), and K_4 is the only 4-chromatic graph on 4 vertices. *)
+Lemma g258_bipartizing_K4 : x258_critical_bipartizing_number 4 4 2.
+Proof.
+split; last first.
+  move=> G hG hchi _ S hS; apply: (g258_bipartizing_ge2 hG _ hS).
+  by apply: g258_adj_of_chi; rewrite hchi hG.
+exists 'K_4; split; [by rewrite card_ord | exact: g258_chi_K | exact: g258_critical_K4 |].
+pose A0 : {set 'K_4} := [set ord0; ord_max].
+have hA0 : #|A0| = 2 by rewrite /A0 cards2.
+have hC0 : #|~: A0| = 2 by rewrite cardsCs setCK card_ord hA0.
+exists [set A0; ~: A0]; split; first by rewrite cards2 ltnS leq_b1.
+exists A0 => x y; rewrite /edge_rel /= /del_es_rel /= => /andP[xy nS].
+have xy' : x != y by rewrite (sg_edgeNeq xy).
+case xA: (x \in A0); case yA: (y \in A0) => //=.
+- by move: nS; rewrite (g258_side_pair hA0 xy' xA yA) !inE eqxx /=.
+- have xA' : x \in ~: A0 by rewrite inE xA.
+  have yA' : y \in ~: A0 by rewrite inE yA.
+  by move: nS; rewrite (g258_side_pair hC0 xy' xA' yA') !inE eqxx orbT /=.
+Qed.
+
+(** hyp_inhabited: f_4(4) = 2 (K_4); the statement's second clause, at k = 4. *)
 Definition g258_bz_hyp_claim : Prop :=
-  x258_critical_bipartizing_number 3 3 1 /\
+  x258_critical_bipartizing_number 4 4 2 /\
   (critical_graph_bipartizing_edges_statement ->
      exists C N : nat, forall n m : nat, N <= n -> x258_critical_bipartizing_number 4 n m -> n <= 2 ^ (C * m)).
 
 Theorem g258_bz_hyp_inhabited : g258_bz_hyp_claim.
-Proof. by split; [exact: g258_bipartizing_K3 | case]. Qed.
+Proof. by split; [exact: g258_bipartizing_K4 | case]. Qed.
 
 (** not_trivially_true: the first clause without its number hypothesis: m = 0 breaks M <= m at M = 1. *)
 Definition g258_bz_no_number : Prop :=

@@ -85,7 +85,10 @@ Definition x258_critical_bipartizing_number (k n m : nat) : Prop :=
       ("Erdos' conjecture is the special case c = 2, with c_k = 4k") gives chi(G) <= d + 1 when G has no odd cycle
       shorter than 4d n^(1/d), so f_k(n) < 4(k-2) n^(1/(k-2)); Example 3 (Gallai for d = 2, Lovasz and Schrijver in
       general) gives a graph on n vertices with chi(G) = d + 2 whose subgraphs of radius below n^(1/d) / 2 are
-      bipartite, hence with no odd cycle shorter than n^(1/d). *)
+      bipartite, hence with no odd cycle shorter than n^(1/d).  Also f_k(n) <= f_k(n+1) for n >= k: an added isolated
+      vertex keeps the chromatic number and the odd cycles; so the lower side for every large n needs the construction
+      only along orders n_j with bounded ratios n_(j+1) / n_j.  The exponent k - 2 is a truncated subtraction, guarded
+      by 4 <= k. *)
 Definition chromatic_odd_girth_order_statement : Prop :=
   forall k : nat, 4 <= k -> exists A B N : nat, forall n f : nat, N <= n ->
     x258_odd_girth_number k n f -> n <= A * f ^ (k - 2) /\ f ^ (k - 2) <= B * n.
@@ -144,7 +147,8 @@ Definition triangle_free_chromatic_order_ratio_statement : Prop :=
       (4/15) n^2 > n^2 / 4, the clause's value.  The page attributes the same coefficients to Stiebitz [St87],
       written (1/2)(1 - 1/(floor(k/3) + delta_k)) with delta_k = 0, 1/7, 24/69, "which disproves Erdos' conjectured
       asympotic for k not = 0 (mod 3)" (l.44-46); Toft's and Stiebitz's papers were not read.  The row is FALSE at the
-      pin (pinned status open; the page keeps the problem open for its other questions). *)
+      pin (pinned status open; the page keeps the problem open for its other questions).  In the third clause
+      k %/ 3 - 1 = t - 1 is a truncated subtraction, guarded by 6 <= k (t >= 2). *)
 Definition critical_graph_edge_count_statement : Prop :=
   [/\ forall k : nat, 4 <= k -> exists C N : nat, forall n f : nat, N <= n ->
         x258_critical_edge_number k n f -> n ^ 2 <= C * f,
