@@ -10552,6 +10552,310 @@
           }
         }
       }
+    },
+    "X261": {
+      "phase": "X261",
+      "repo": "chromatic-theory",
+      "defines_file": "X261.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X261 (A3 verifier Marcol; routing Lancelot (196); selection x261-selection-by-arthur (296), design x261-design-by-arthur r1), branch math/arthur-x261-20261029",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x261-cochromatic-choice-acyclic-subdivisions",
+      "rows": {
+        "erdos_625": {
+          "formal_name": "random_graph_chi_minus_cochromatic_unbounded_statement",
+          "source_hash": "1526230a9c13551d83f98e81c2780cdace1a860c19a020a608d5b0bc96a2f40f",
+          "note": "Erdos Problems #625, Erdos and Gimbel (ErGi93; pinned status open, $1000): for G(n,1/2), for every M, with probability -> 1, zeta(G) + M <= chi(G) (x261_cochromatic_exact; classes induce complete or empty graphs). Convergence in probability, as Heckel (2408.13839v2 l.231; 2409.17614v2 l.251, l.257) and Steiner (2408.02400v2 l.113-115) read it. Open at the pin; He24, St24b and He24c are partial; Petkov's linked claim (625-claim.pdf, 10 September 2026) is cited, not verified.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g261_co_hyp_inhabited",
+              "claim": "g261_co_hyp_claim",
+              "references": [
+                "random_graph_chi_minus_cochromatic_unbounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g261_co_not_trivially_true",
+              "claim": "g261_co_ntt_claim",
+              "references": [
+                "random_graph_chi_minus_cochromatic_unbounded_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g261_co_helper_sanity",
+                "claim": "g261_co_helper_claim",
+                "references": [
+                  "x261_cochromatic_at_most",
+                  "x261_cochromatic_exact"
+                ]
+              },
+              {
+                "theorem": "g261_sd_helper_sanity",
+                "claim": "g261_sd_helper_claim",
+                "references": [
+                  "x261_topological_clique",
+                  "x261_clique_subdivision_order"
+                ]
+              },
+              {
+                "theorem": "g261_ac_helper_sanity",
+                "claim": "g261_ac_helper_claim",
+                "references": [
+                  "x261_acyclic_colourable"
+                ]
+              },
+              {
+                "theorem": "g261_ch_helper_sanity",
+                "claim": "g261_ch_helper_claim",
+                "references": [
+                  "x261_choosable_b"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_717": {
+          "formal_name": "chi_clique_subdivision_root_log_statement",
+          "source_hash": "3318d0560f385fc646fcee1a28d08fe309bca032ede028467de858c935dcad1e",
+          "note": "Erdos Problems #717, Erdos and Fajtlowicz (ErFa81; pinned status solved): sigma(G), the largest k such that G contains a subdivision of K_k (x261_clique_subdivision_order); (chi(G) trunc_log 2 n)^2 <= C n sigma(G)^2 for every graph on n vertices. Proved before the pin: Fox, Lee and Sudakov, arXiv:1107.1920v3, Theorem 1.1 (source.tex l.130-132), subdivisions as in l.92-95.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g261_sd_hyp_inhabited",
+              "claim": "g261_sd_hyp_claim",
+              "references": [
+                "chi_clique_subdivision_root_log_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g261_sd_not_trivially_true",
+              "claim": "g261_sd_ntt_claim",
+              "references": [
+                "chi_clique_subdivision_root_log_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g261_co_helper_sanity",
+                "claim": "g261_co_helper_claim",
+                "references": [
+                  "x261_cochromatic_at_most",
+                  "x261_cochromatic_exact"
+                ]
+              },
+              {
+                "theorem": "g261_sd_helper_sanity",
+                "claim": "g261_sd_helper_claim",
+                "references": [
+                  "x261_topological_clique",
+                  "x261_clique_subdivision_order"
+                ]
+              },
+              {
+                "theorem": "g261_ac_helper_sanity",
+                "claim": "g261_ac_helper_claim",
+                "references": [
+                  "x261_acyclic_colourable"
+                ]
+              },
+              {
+                "theorem": "g261_ch_helper_sanity",
+                "claim": "g261_ch_helper_claim",
+                "references": [
+                  "x261_choosable_b"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_760": {
+          "formal_name": "subgraph_large_cochromatic_number_statement",
+          "source_hash": "83e4725c262fb78e73e5e3e059c49aa94a5f31dfad6e645bacfbe2e3bed10379",
+          "note": "Erdos Problems #760, Erdos and Gimbel (ErGi93; pinned status solved): if chi(G) = m >= 2 (load-bearing: log 1 = 0), a subgraph H, not necessarily induced (has_subgraph), has m <= C k trunc_log 2 m for every cochromatic colouring of H with k colours. Proved before the pin: Alon, Krivelevich and Sudakov, Theorem 1.1 (AKS97.txt l.29-30); the linked Lean proof (plby f2462b28, C = 32) is an external proof.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g261_zh_hyp_inhabited",
+              "claim": "g261_zh_hyp_claim",
+              "references": [
+                "subgraph_large_cochromatic_number_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g261_zh_not_trivially_true",
+              "claim": "g261_zh_ntt_claim",
+              "references": [
+                "subgraph_large_cochromatic_number_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g261_co_helper_sanity",
+                "claim": "g261_co_helper_claim",
+                "references": [
+                  "x261_cochromatic_at_most",
+                  "x261_cochromatic_exact"
+                ]
+              },
+              {
+                "theorem": "g261_sd_helper_sanity",
+                "claim": "g261_sd_helper_claim",
+                "references": [
+                  "x261_topological_clique",
+                  "x261_clique_subdivision_order"
+                ]
+              },
+              {
+                "theorem": "g261_ac_helper_sanity",
+                "claim": "g261_ac_helper_claim",
+                "references": [
+                  "x261_acyclic_colourable"
+                ]
+              },
+              {
+                "theorem": "g261_ch_helper_sanity",
+                "claim": "g261_ch_helper_claim",
+                "references": [
+                  "x261_choosable_b"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_797": {
+          "formal_name": "acyclic_chromatic_max_degree_subquadratic_statement",
+          "source_hash": "a67938001906d36a52b9a2d6cf6cae454f14272460f3b8af0573e15ab3862c9f",
+          "note": "Erdos Problems #797, Erdos (AlBe76; pinned status solved): f(d) = o(d^2), f the largest acyclic chromatic number of a graph of maximum degree exactly d (x261_acyclic_colourable: proper, every cycle sees three colours); for every q >= 1, eventually q k <= d^2. \"Estimate f(d)\" is not formalised. Proved before the pin: Alon, McDiarmid and Reed (1991), Theorem 1.1 (p.278) and Proposition 2.2.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g261_ac_hyp_inhabited",
+              "claim": "g261_ac_hyp_claim",
+              "references": [
+                "acyclic_chromatic_max_degree_subquadratic_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g261_ac_not_trivially_true",
+              "claim": "g261_ac_ntt_claim",
+              "references": [
+                "acyclic_chromatic_max_degree_subquadratic_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g261_co_helper_sanity",
+                "claim": "g261_co_helper_claim",
+                "references": [
+                  "x261_cochromatic_at_most",
+                  "x261_cochromatic_exact"
+                ]
+              },
+              {
+                "theorem": "g261_sd_helper_sanity",
+                "claim": "g261_sd_helper_claim",
+                "references": [
+                  "x261_topological_clique",
+                  "x261_clique_subdivision_order"
+                ]
+              },
+              {
+                "theorem": "g261_ac_helper_sanity",
+                "claim": "g261_ac_helper_claim",
+                "references": [
+                  "x261_acyclic_colourable"
+                ]
+              },
+              {
+                "theorem": "g261_ch_helper_sanity",
+                "claim": "g261_ch_helper_claim",
+                "references": [
+                  "x261_choosable_b"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_799": {
+          "formal_name": "almost_all_graphs_choice_number_sublinear_statement",
+          "source_hash": "ddc06f3f8cb72c50c70645e335d4391f8294f933ff0fcd51655c87ec6509bd77",
+          "note": "Erdos Problems #799, Erdos, Rubin and Taylor (ERT80; pinned status solved): almost all graphs (G(n,1/2), fg_whp) have chi_L(G) <= n %/ q for every q >= 1 (x261_choosable_b, equivalent to GTBase choosable, grounding_X261). Proved before the pin: Alon (1992), Corollary 1.3 (Al92.txt l.66-67): ch(G(n,1/2)) <= c n log log n / log n with probability -> 1.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g261_ch_hyp_inhabited",
+              "claim": "g261_ch_hyp_claim",
+              "references": [
+                "almost_all_graphs_choice_number_sublinear_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g261_ch_not_trivially_true",
+              "claim": "g261_ch_ntt_claim",
+              "references": [
+                "almost_all_graphs_choice_number_sublinear_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g261_co_helper_sanity",
+                "claim": "g261_co_helper_claim",
+                "references": [
+                  "x261_cochromatic_at_most",
+                  "x261_cochromatic_exact"
+                ]
+              },
+              {
+                "theorem": "g261_sd_helper_sanity",
+                "claim": "g261_sd_helper_claim",
+                "references": [
+                  "x261_topological_clique",
+                  "x261_clique_subdivision_order"
+                ]
+              },
+              {
+                "theorem": "g261_ac_helper_sanity",
+                "claim": "g261_ac_helper_claim",
+                "references": [
+                  "x261_acyclic_colourable"
+                ]
+              },
+              {
+                "theorem": "g261_ch_helper_sanity",
+                "claim": "g261_ch_helper_claim",
+                "references": [
+                  "x261_choosable_b"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x261_cochromatic_at_most": {
+          "classification": "paper_specific",
+          "reason": "The cochromatic colouring of erdos:625 and erdos:760 (pinned texts: each colour class induces a complete or an empty graph), as a Boolean over upstream cliqueb and stable so that it can describe a G(n,1/2) event; Chromatic.conjectures.XE2's xe2_cochromatic_colouring is the same notion as a Prop (grounding_X261's g261_cochromatic_at_mostP reflects it)."
+        },
+        "x261_cochromatic_exact": {
+          "classification": "paper_specific",
+          "reason": "zeta(G) of erdos:625 (the pinned text's cochromatic number, the minimum number of colours), relational and Boolean."
+        },
+        "x261_topological_clique": {
+          "classification": "paper_specific",
+          "reason": "G contains a subdivision of K_k, erdos:717 (pinned text; Fox, Lee and Sudakov, arXiv:1107.1920v3, source.tex l.92-95: the edges replaced by internally vertex-disjoint paths). chromatic-theory has no non-induced notion of it: GTBase's induced_subdivision is induced and base.v's subdivision is uniform."
+        },
+        "x261_clique_subdivision_order": {
+          "classification": "paper_specific",
+          "reason": "sigma(G) of erdos:717 (pinned text: the maximal k such that G contains a subdivision of K_k), relational."
+        },
+        "x261_acyclic_colourable": {
+          "classification": "paper_specific",
+          "reason": "The acyclic colouring of erdos:797 (pinned text: proper, no cycle containing only two colours; Alon, McDiarmid and Reed p.277) into 'I_k; Chromatic.conjectures.U4's acyclic_colouring is its list form, equivalent with whole-palette lists (g261_acyclic_colourableE)."
+        },
+        "x261_choosable_b": {
+          "classification": "paper_specific",
+          "reason": "The list colouring of erdos:799 (pinned text: lists of k colours) as a Boolean over the palette 'I_(#|G| * k), so that it can describe a G(n,1/2) event; grounding_X261 proves it equivalent to GTBase's choosable over any finite palette (g261_choosable_bE)."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
