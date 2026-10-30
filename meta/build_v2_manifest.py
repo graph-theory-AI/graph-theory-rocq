@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Nineteen
+corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -44,7 +44,9 @@ cycle bound (K_5), Scott's induced-subdivision conjecture (arXiv:1209.1595), Las
 (arXiv:2103.10684) and Mohar's k-regular Kempe conjecture (the triangular prism, k = 3). Two studies
 rows behind wave X262 were settled before the corpus pin: Harris' degeneracy conjecture is solved
 (Martinsson, arXiv:2501.18238v1, Theorem 1.2), and the Blumenthal et al. question on the Hall ratio
-is answered negatively in its own record (arXiv:1812.07327v2, Corollary 3).
+is answered negatively in its own record (arXiv:1812.07327v2, Corollary 3). The studies row of Guo,
+Kang and Zwaneveld's conjecture, behind wave X264, is refuted in its own record (Norin and Steiner,
+arXiv:2504.01548v1, Theorem 1.2).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -317,6 +319,12 @@ ERRATA = [
      "Literature: answered negatively in its own record, Dvorak, Ossona de Mendez and Wu, arXiv:1812.07327v2, Corollary 3 "
      "(no1sub.tex l.139-141): for every c there is a graph with fractional chromatic number at least c and Hall ratio at "
      "most 18, so no function of the Hall ratio bounds chi_f (l.137-138)."),
+    # literature status correction (Lancelot's lane; the studies row behind wave X264, refuted before the corpus pin)
+    ("studies", "std_guo_kang_zwaneveld_conjecture", "disproved",
+     "Literature: refuted in its own record by Norin and Steiner, arXiv:2504.01548v1 (2 April 2025), Theorem 1.2 "
+     "(main.tex l.124-126): for every d >= 2 there is a graph G with chi^d(G boxtimes K_(d+1)) <= k = 2d^3 + 2d^2 + d + 3 "
+     "but chi(G) > k (k = 29 at d = 2). The row is Guo, Kang and Zwaneveld's Conjecture 2 (arXiv:2411.06941v1, "
+     "improper-arXiv.tex l.128-129): chi(G) = chi^d(G boxtimes K_(d+1)) for every graph G and every d >= 0."),
 ]
 
 
@@ -925,7 +933,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 19 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 20 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
