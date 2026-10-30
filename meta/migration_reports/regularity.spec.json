@@ -366,6 +366,16 @@
       "path": "chromatic-theory/theories/conjectures/grounding_X256.v",
       "name": "regular",
       "note": "Wave X256 (2026-10-28): lexical short-name match only: this file never imports Infinite (it is outside the reverse closure of Infinite.conjectures.D4inf3), so its regular is GTBase.base.regular (K_{3,3} is 3-regular), not the migrated Infinite source; declared as for U1 / X213 / X239 / X242."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X263.v",
+      "name": "regular",
+      "note": "Wave X263 (2026-10-30): lexical short-name match only: this file never imports Infinite (it is outside the reverse closure of Infinite.conjectures.D4inf3), so its regular is GTBase.base.regular (simple-graph regularity of the induced subgraph G[S], row erdos:1031), not the migrated Infinite source; declared as for U1 / X213 / X239 / X242 / X256."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X263.v",
+      "name": "regular",
+      "note": "Wave X263 (2026-10-30): lexical short-name match only: this file never imports Infinite (it is outside the reverse closure of Infinite.conjectures.D4inf3), so its regular is GTBase.base.regular (K_32,32 is 32-regular, induced subgraphs of K_n are complete), not the migrated Infinite source; declared as for U1 / X213 / X239 / X242 / X256."
     }
   ],
   "distinct_variants": [],
