@@ -7704,11 +7704,14 @@
    "note": "Authored in X240.v:consecutive_diagonal_ramsey_ratio_statement. Erdos Problems #1030 (open at the teorth/erdosproblems mirror 10fb9c15): R(k+1, k)/R(k, k) > 1 + c in the limit, liminf reading (eventually (q + 1) R(k, k) < q R(k+1, k)), equal to the pinned lim whenever it exists (XE1 xe1_graph_ramsey_number)."
   },
   "erdos_1031": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x263-set-family-comparability-regular-induced-subgraphs",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X263.v:regular_induced_subgraph_statement. Erdos Problems #1031, Erdos, Fajtlowicz and Staton (Er93 p.340; pinned PROVED): a graph on n vertices with no clique and no stable set on at least 10 log_2 n vertices (n^10 <= 2^k, base 2 exactly) has an induced d-regular subgraph G[S] with 0 < d and d + 1 < |S| and log_2 n <= q |S|, for n >= N. Proved by Promel and Rodl (J. Combin. Theory Ser. A 88 (1999)): induced universality for every constant c > 0 (publisher abstract)."
   },
   "erdos_1033": {
    "statement": "done",
@@ -9276,11 +9279,14 @@
    "note": "Authored in XE2.v:erdos_775_statement. Encodes Erdos Problems #775 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_777": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x263-set-family-comparability-regular-induced-subgraphs",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X263.v:set_family_comparability_statement. Erdos Problems #777, Daykin and Erdos (Gu83; pinned status solved, resolved in some other way than a proof or disproof): the three asked clauses on the comparability graph G_F of a family F of subsets of [n] (x263_comparable_pairs), as a conjunction. FALSE at the pin: Alon and Frankl (Graphs Combin. 1 (1985), Example 6.1) refute the second; the first (Alon, Das, Glebov, Sudakov, arXiv:1411.4196v1) and the third (Alon-Frankl, Section 2) hold."
   },
   "erdos_778": {
    "statement": "todo",

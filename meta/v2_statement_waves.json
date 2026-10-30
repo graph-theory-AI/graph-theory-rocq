@@ -11279,6 +11279,85 @@
       },
       "faithfulness_verified_by": "Marcol (X264 wave verification, 2026-10-30)",
       "faithfulness_result": "Readback 2026-10-30 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x264-20261030 = 8aa669144546cc0681d16ef156ab727beb6ed4fb (six commits on work/coordinator a7bc0812), after my design read ((249), FAITHFUL 3/3) of x264-design-by-arthur r1 (588959fe; my packet x264-design-read-by-marcol 542dbdc2) and my delta read ((252), FAITHFUL 3/3) of r2 (c4589a3a; x264-design-r2-read-by-marcol fef0a987). X264.v equals r2's and grounding_X264.v r1's byte for byte. GKZ: forall G d k, chi(G) <= k iff x264_defective_colourable (G boxtimes K_(d+1)) d k, the equality of two least numbers (both upward closed), strong product = box_rel || tensor_rel = the l.125 footnote; false at the pin (Norin-Steiner Theorem 1.2, k = 2d^3 + 2d^2 + d + 3, 29 at d = 2), pinned open. 1803.10962#01: exists C, 0 < k, k_degenerate G d, C^2 d (trunc_log 2 n)^2 <= k^2 -> X210's x210_conflict_k_colourable_under_rat_bound G k 1 k (at most one forbidden pair per edge = exactly one for k > 0), simple graphs, guard 0 < k (the d = 0 or n <= 1 instances are edgeless); true at the pin (Bradshaw-Masarik Theorem 1.7, l.373-375), pinned solved. 2405.14795#01: for odd n, proper chi1 chi2 into one palette 'I_r admit s1 s2 : {perm 'I_n} with chi1(s1^-1 e) <> chi2(s2^-1 e) at every edge (l.106, m = 2); open. Helpers: x264_strong_rel, x264_strong_product, x264_defective_colourable, x264_rainbow_stacking, paper_specific, the only x264_ declarations of X264.v (r1's two Lemmas, unclassified in dev run 1's W5, removed in r2 with the proofs inline); helper_sanity sp / dc / rs in every row. Grounding: hyp K_2 boxtimes K_2 1-defective with 2 colours, K_2 1-degenerate, x + y mod 3 proper on K_3; not_trivially_true: GKZ with the blowup size freed (false at K_2, d = t = k = 1), sc without k_degenerate (K_2, d = 0, k = 1), rs without odd n (n = 2, two equal constant colourings). Metadata: source_hash equal to the manifest; the four verifier keys empty before the fields; legs statement / grounding done, notes 555 / 560 / 515 (under 600); README 549 / 11 / 40 / 1,073 -> 552 / 11 / 40 / 1,070; LANDED X264 chromatic-theory after X262; Site / Review per row_urls (studies none, arXiv URLs); lint clean, no allowlist entry; consumers none (proper_edge_colouring canonical; my scan finds no frozen name). Dev run 1 (x264-dev-by-arthur, 4573ad9a, -c OK, 29 steps): W5 the one unexpected failure (fixed by the sixth commit), the four field steps as declared; B2 compiled r1 under 9.2, W1 Print Assumptions 3 + 15 clean, 25 probe shapes, W2 875 / 875, W3 3 probed 0 FLAGGED, W4 0 active, A12 rc 0. r2's compile: Arthur's MCP (26 blocks, no holes); the real run recompiles it."
+    },
+    "X263": {
+      "phase": "X263",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X263.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X263 (A3 verifier Arthur; routing Lancelot (219), (231); selection x263-selection-by-marcol, design x263-design-by-marcol r1), branch math/marcol-x263-20261030, 2026-10-30",
+      "source_verified_by": "Arthur (X263 wave verifier, A3: pinned records re-read at b72c5857: data/erdos_graph.json records 777 and 1031 (the statement field, which the builder hashes alone), sha256 recomputed = 2bf676c8b97ab5ba4c6f1eab300c148cd8259bcb87dd7e3dd491408919b7f951 and ffb6ae258a1c19b1b66fa97b83fb63e7d58362642c3a666ae7ff8f311ca6ba73, equal to the manifest rows and to the wave's source_hash values, the upstream statements equal to the manifest's statement_text; pinned status solved for both (777 \"SOLVED This has been resolved in some other way than a proof or disproof.\", 1031 \"PROVED This has been solved in the affirmative.\"); the Mac's deposit coordination/sources/x263-source-mac-20261030 (SHA256SUMS 20ee3d57, -c OK) read: erdos-777.txt l.25-28 and l.35-42, erdos-1031.txt l.25 and l.34-36, Alon and Frankl's Example 6.1 on the page image visual/AlFr85-p9.png (printed p.21), ADGS 1411.4196v1 source.tex l.95 and l.137-145, PrRo99-publisher-read.md (the publisher abstract only); Gu83, Er93 p.340 and the full PrRo99 were not obtained, as SOURCE.md states, so 777's quantifiers rest on the pinned page and 1031's truth on the abstract, as Lancelot (231) decided)",
+      "source_verified_at": "2026-10-30",
+      "commit": "x263-set-family-comparability-regular-induced-subgraphs",
+      "helper_ownership": {
+        "x263_comparable_pairs": {
+          "classification": "paper_specific",
+          "reason": "The number of edges of G_F, the comparability graph of a family F of subsets of {1, ..., n} (erdos:777 pinned text; c(F) of Alon and Frankl, Graphs Combin. 1 (1985), p.13): ordered pairs (A, B) of members with A a proper subset of B."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X263 wave verification, 2026-10-30)",
+      "faithfulness_result": "Readback 2026-10-30 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x263-20261030 = b8d2495094d269aaa27650d7a64da0038c5f1798 (six commits on work/coordinator a7bc0812), after my design read ((319), FAITHFUL 2/2) of x263-design-by-marcol r1 (6007db05; my packet x263-design-read-by-arthur 83b3d8a5). X263.v and grounding_X263.v at b8d24950 equal the design packet's code after comment stripping; the only changes are comments carrying Lancelot's N1 (N load-bearing: 59 is the least n >= 2 with n^10 <= 2^n). Vocabulary: x263_comparable_pairs (ordered pairs (A, B) of members with A a proper subset of B: the edges of G_F, Alon-Frankl's c(F)); upstream cliqueb, stable and induced; GTBase regular. erdos:777: the three asked clauses as a conjunction (the erdos:720 / 1015 precedent), eps = c = 1/p and delta = 1/q (covered by monotonicity), squared and cross-multiplied exactly on naturals, the subtractions 2p - 1 and 2q - 1 guarded by 1 <= p and 1 <= q; FALSE at the pin: Q2 is refuted by Alon-Frankl Example 6.1 (printed p.21: at d = 1 the hypothesis holds at p = 32 while m^2 / 2^n is unbounded); Q1 (the page: ADGS Theorem 1.4 / Corollary 1.5, large n) and Q3 (Alon-Frankl Section 2) are affirmative and not needed for the verdict. erdos:1031: base 2 exactly (n^10 <= 2^|S|), the stronger reading; trivial = an induced clique or stable set; non-trivial = 0 < d and d + 1 < |S|; >> log n = |S| >= log2 n / q with q and N absolute, N load-bearing; true at the pin by Promel-Rodl's every-c1 universality (publisher abstract; an induced cycle C_k with k >= 4). Grounding: hyp_inhabited at the 2-chain on [1] (m^2 = 4 <= 4 * 1, Q2 at p = 4) and at K_32,32 on 64 vertices (threshold 60, each side keeps 28, so neither clique nor stable; G[V] 32-regular and non-trivial); not_trivially_true = Q2 without its density hypothesis (all 2^K subsets of [K]) and 1031 without its Ramsey hypothesis (K_N), each false and implying its row; helper_sanity (chain 1 pair, antichain 0, pairs <= m^2) listed in both rows. Compile: compile-x263-3 (Rocq 9.2) and dev run 1's B3 (the extremal build) at b8d24950 compiled both files; Print Assumptions closed on 2 / 2 statements + 6 certificates; 10 probe shapes. Metadata: source_hash 2 / 2 recomputed from b72c5857, equal; waves.X263 = the packet's x263-wave.json and the only waves change, its verifier fields empty before this; legs notes 500 / 483 = \"Authored in X263.v:<name>. \" + the wave note; README 549 / 11 / 40 / 1,073 -> 551 / 11 / 40 / 1,071; LANDED gains X263 extremal-graph-theory; the 1031 lint allowlist entry = the packet text and the only allowlist change (X261's line gains a comma); regularity.spec.json gains the two cross_module_consumers (X263.v, grounding_X263.v; notes = the packet's), as for U1 / X213 / X239 / X242. Dev run 1 (x263-dev-by-marcol, 025d8e99): PASS-WITH-EXPECTED, 31 steps, 27 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W2 874 / 874, W3 2 probed 0 flagged, W4 0 active (40 allowlisted), W5 rc 0, the G6 regularity and G6b stable_sets reports unchanged.",
+      "rows": {
+        "erdos_777": {
+          "formal_name": "set_family_comparability_statement",
+          "source_hash": "2bf676c8b97ab5ba4c6f1eab300c148cd8259bcb87dd7e3dd491408919b7f951",
+          "note": "Erdos Problems #777, Daykin and Erdos (Gu83; pinned status solved, resolved in some other way than a proof or disproof): the three asked clauses on the comparability graph G_F of a family F of subsets of [n] (x263_comparable_pairs), as a conjunction. FALSE at the pin: Alon and Frankl (Graphs Combin. 1 (1985), Example 6.1) refute the second; the first (Alon, Das, Glebov, Sudakov, arXiv:1411.4196v1) and the third (Alon-Frankl, Section 2) hold.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g263_cf_hyp_inhabited",
+              "claim": "g263_cf_hyp_claim",
+              "references": [
+                "set_family_comparability_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g263_cf_not_trivially_true",
+              "claim": "g263_cf_ntt_claim",
+              "references": [
+                "set_family_comparability_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g263_cp_helper_sanity",
+                "claim": "g263_cp_helper_claim",
+                "references": [
+                  "x263_comparable_pairs"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_1031": {
+          "formal_name": "regular_induced_subgraph_statement",
+          "source_hash": "ffb6ae258a1c19b1b66fa97b83fb63e7d58362642c3a666ae7ff8f311ca6ba73",
+          "note": "Erdos Problems #1031, Erdos, Fajtlowicz and Staton (Er93 p.340; pinned PROVED): a graph on n vertices with no clique and no stable set on at least 10 log_2 n vertices (n^10 <= 2^k, base 2 exactly) has an induced d-regular subgraph G[S] with 0 < d and d + 1 < |S| and log_2 n <= q |S|, for n >= N. Proved by Promel and Rodl (J. Combin. Theory Ser. A 88 (1999)): induced universality for every constant c > 0 (publisher abstract).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g263_ri_hyp_inhabited",
+              "claim": "g263_ri_hyp_claim",
+              "references": [
+                "regular_induced_subgraph_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g263_ri_not_trivially_true",
+              "claim": "g263_ri_ntt_claim",
+              "references": [
+                "regular_induced_subgraph_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g263_cp_helper_sanity",
+                "claim": "g263_cp_helper_claim",
+                "references": [
+                  "x263_comparable_pairs"
+                ]
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
