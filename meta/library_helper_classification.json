@@ -935,6 +935,16 @@
       "family_id": "tournaments",
       "milestone": "post-rc-library-wave"
     },
+    "treewidth_at_most": {
+      "class": "candidate_family",
+      "reason": "treewidth at most t, a tree decomposition whose bags have at most t + 1 vertices: X27 (minor-theory, over its own x27_tree_decomposition copy) and X266 (chromatic-theory, over GTBase tree_bag_decomposition; Campbell et al., arXiv:2407.21360v1 l.267-275) state the same notion; a width contract for the registered tree-decomposition family, which has none",
+      "members": [
+        "Chromatic.conjectures.X266.x266_treewidth_at_most",
+        "Minor.conjectures.X27.x27_treewidth_at_most"
+      ],
+      "family_id": "treewidth",
+      "milestone": "post-rc-library-wave"
+    },
     "unbounded": {
       "class": "paper_specific",
       "reason": "XE1's unbounded vs X13's tends to infinity: different notions under one name",

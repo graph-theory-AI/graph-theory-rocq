@@ -1617,11 +1617,14 @@
    "audit_page": "todo"
   },
   "axv_1812_07327_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x266-clustered-strong-products-hall-ratio",
+   "package": "chromatic-theory",
+   "note": "Authored in X266.v:hall_ratio_degree_weighted_fractional_chromatic_statement. Dvorak, Ossona de Mendez and Wu, Problem 5 of arXiv:1812.07327v2 (no1sub.tex l.161-164; pinned status solved), as its affirmative answer: some p, q > 0 such that for every F some G has chi_f(G) > F (X130), Hall ratio at most p / q over all subgraphs (x266_hall_ratio_le) and alpha_(deg_H)(H) >= (q / p) |E(H)| in every subgraph H (a stable set I of H with q |E(H)| <= p sum_(v in I) deg_H(v)). True at the pin: Steiner, arXiv:2411.16465v1, Theorem 1.5 (main.tex l.140-142), with c = 4 + delta."
   },
   "axv_1812_07327_02": {
    "statement": "todo",
@@ -5108,18 +5111,24 @@
    "audit_page": "todo"
   },
   "axv_2407_21360_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x266-clustered-strong-products-hall-ratio",
+   "package": "chromatic-theory",
+   "note": "Authored in X266.v:bounded_treewidth_path_product_clustering_statement. Campbell et al., Conjecture 7 of arXiv:2407.21360v1 (Clustered_Colouring_of_Graph_Products.tex l.242-244; pinned status partial): for every c >= 2 some t and q > 0 such that for every M some H of treewidth at most t (x266_treewidth_at_most) and path P_n, N = #|H| n >= M, have no c-colouring of H boxtimes P_n (x264_strong_product) of clustering s (clustered_colouring) whenever (q s)^(c^2-c+1) < N^c. At most t is equivalent for an existential t (pigeonhole). Proved for c = 2, 3 (Theorems 1, 2)."
   },
   "axv_2407_21360_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x266-clustered-strong-products-hall-ratio",
+   "package": "chromatic-theory",
+   "note": "Authored in X266.v:bounded_treewidth_products_three_colour_clustering_statement. Campbell et al., Conjecture 8 of arXiv:2407.21360v1 (l.248-250; pinned status open): some t > 0 and q > 0 such that for every M some H1, H2 of treewidth at most t (x266_treewidth_at_most), N = #|H1| #|H2| >= M, have no 3-colouring of H1 boxtimes H2 (x264_strong_product) of clustering s whenever (q s)^7 < N^4. At most t is equivalent for an existential t (pigeonhole, then padding both factors with K_(t+1)). Open at the pin; Theorem 3 gives Omega(N^(1/2))."
   },
   "axv_2408_02400_00": {
    "statement": "done",
