@@ -30,16 +30,13 @@ Unset Printing Implicit Defensive.
 Definition x264_strong_rel (G H : sgraph) : rel (G * H) :=
   fun p q => box_rel p q || tensor_rel p q.
 
-Lemma x264_strong_sym (G H : sgraph) : symmetric (@x264_strong_rel G H).
-Proof. by move=> p q; rewrite /x264_strong_rel box_sym tensor_sym. Qed.
-
-Lemma x264_strong_irrefl (G H : sgraph) : irreflexive (@x264_strong_rel G H).
-Proof. by move=> p; rewrite /x264_strong_rel box_irrefl tensor_irrefl. Qed.
-
 (** The strong product G boxtimes H.  Neither coq-graph-theory nor GTBase has one (base.v has the cartesian and
-    tensor products; extremal X191's [x191_clique_blowup] is a blow-up of K_m only). *)
+    tensor products; extremal X191's [x191_clique_blowup] is a blow-up of K_m only).  The symmetry and irreflexivity
+    proofs are given inline, from GTBase's [box_sym] / [tensor_sym] and [box_irrefl] / [tensor_irrefl]. *)
 Definition x264_strong_product (G H : sgraph) : sgraph :=
-  SGraph (@x264_strong_sym G H) (@x264_strong_irrefl G H).
+  @SGraph (G * H)%type (@x264_strong_rel G H)
+    (fun p q => congr2 orb (@box_sym G H p q) (@tensor_sym G H p q))
+    (fun p => congr2 orb (@box_irrefl G H p) (@tensor_irrefl G H p)).
 
 (** G has a d-defective colouring by 'I_k: every vertex has at most d neighbours of its own colour
     (2411.06941v1 l.178; Norin and Steiner, arXiv:2504.01548v1, main.tex l.110).  chi^d(G) is the least such k. *)
