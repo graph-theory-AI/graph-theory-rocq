@@ -24949,13 +24949,13 @@
     ]
   },
   "counts": {
-    "files": 355,
-    "helpers": 2741,
+    "files": 356,
+    "helpers": 2745,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 219,
-    "repeated_signature_shapes": 334,
-    "statements_excluded": 829,
-    "x_wave_helpers": 1580
+    "repeated_signature_shapes": 336,
+    "statements_excluded": 832,
+    "x_wave_helpers": 1584
   },
   "groups": {
     "body_shape_hash": {
@@ -27799,6 +27799,10 @@
         "GTMisc.conjectures.X62.x62_edges_covered_by_paths",
         "Minor.conjectures.X11.x11_pairwise_anticomplete_paths"
       ],
+      "366cf0504eb5573e8d91fea1912c4842edd6b9187cded4629a3763666ac2aa3f": [
+        "Chromatic.conjectures.X264.x264_strong_product",
+        "Chromatic.conjectures.X66.x66_disjoint_union"
+      ],
       "36c928f07bef7dd69144c3b3b2df61c58138722618b00e22072bfbdb382397dd": [
         "Digraph.conjectures.reals_growth.is_BigO",
         "Digraph.conjectures.reals_growth.is_BigOmega",
@@ -29010,6 +29014,10 @@
         "Topological.conjectures.D6emb.is_antiprism",
         "Topological.conjectures.D6emb.is_prism",
         "Topological.conjectures.X138.x138_clustered_two_colourable"
+      ],
+      "e08ad02c460305d78f8d5962ad0a584d5ea84c89911cfba40cd85868dff5e57c": [
+        "Chromatic.conjectures.X264.x264_defective_colourable",
+        "GTMisc.conjectures.X113.x113_has_k_distant_cycles"
       ],
       "e167a9578e53e5fe71c5c29fda7032143e8310e909120251c6308274454a1447": [
         "Topological.conjectures.D6emb.anti_dir",
@@ -34594,6 +34602,84 @@
       "qualified_name": "Chromatic.conjectures.X261.x261_choosable_b",
       "signature": "(G : sgraph) (k : nat) : bool",
       "signature_shape_hash": "2dfa0209a96d75a88801009d8ba7195a085ea00271e0a87197a15c4dd968dd2e"
+    },
+    {
+      "body_hash": "675a4aca84faba026b6813859c2a15004e5f77cbdbdc568c3bdaaccaad9336d0",
+      "body_shape_hash": "675a4aca84faba026b6813859c2a15004e5f77cbdbdc568c3bdaaccaad9336d0",
+      "declaration_hash": "bf136131cae85dfd1478fe88f850d3eb83686dc7ac63298298f0ab7005877f4c",
+      "direct_consumers": [
+        "Chromatic.conjectures.X264.x264_strong_product"
+      ],
+      "kind": "Definition",
+      "line": 24,
+      "local_dependencies": [],
+      "name": "x264_strong_rel",
+      "normalized_name": "strong_rel",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X264.v",
+      "phase": "X264",
+      "qualified_name": "Chromatic.conjectures.X264.x264_strong_rel",
+      "signature": "(G H : sgraph) : rel (G * H)",
+      "signature_shape_hash": "4fd20b38faae13696c4450bec6b35bd6ea573fbccf43528dd0cc315fc9faa99d"
+    },
+    {
+      "body_hash": "8b1be3e7647b790c81075ccc06cf0fe97501a817b2c4325c553e2457d729ae7f",
+      "body_shape_hash": "9a9711e88d0bf1cb1aa7cfa3dcba4ef133e674366e2c9cba5f2318dcfa00b229",
+      "declaration_hash": "77ba6acf7d8ca22ee46d1f7cf4172faefd0b28562267115808f298f432e418ad",
+      "direct_consumers": [
+        "Chromatic.conjectures.X264.guo_kang_zwaneveld_defective_strong_product_statement"
+      ],
+      "kind": "Definition",
+      "line": 32,
+      "local_dependencies": [
+        "x264_strong_rel"
+      ],
+      "name": "x264_strong_product",
+      "normalized_name": "strong_product",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X264.v",
+      "phase": "X264",
+      "qualified_name": "Chromatic.conjectures.X264.x264_strong_product",
+      "signature": "(G H : sgraph) : sgraph",
+      "signature_shape_hash": "366cf0504eb5573e8d91fea1912c4842edd6b9187cded4629a3763666ac2aa3f"
+    },
+    {
+      "body_hash": "e1715c685e6e6cda0b02e8fde07f29722308c3308080cd46fe7209d504a5fdd3",
+      "body_shape_hash": "e1715c685e6e6cda0b02e8fde07f29722308c3308080cd46fe7209d504a5fdd3",
+      "declaration_hash": "e9bc3e519b72e44032c2a6e397835fa347a02d71945545f3e9d7cbca4a44961f",
+      "direct_consumers": [
+        "Chromatic.conjectures.X264.guo_kang_zwaneveld_defective_strong_product_statement"
+      ],
+      "kind": "Definition",
+      "line": 40,
+      "local_dependencies": [],
+      "name": "x264_defective_colourable",
+      "normalized_name": "defective_colourable",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X264.v",
+      "phase": "X264",
+      "qualified_name": "Chromatic.conjectures.X264.x264_defective_colourable",
+      "signature": "(G : sgraph) (d k : nat) : Prop",
+      "signature_shape_hash": "e08ad02c460305d78f8d5962ad0a584d5ea84c89911cfba40cd85868dff5e57c"
+    },
+    {
+      "body_hash": "fa9acd22062796354721a570593c209c01d5164dcbdaf00dbd5e65e3f275e025",
+      "body_shape_hash": "fa9acd22062796354721a570593c209c01d5164dcbdaf00dbd5e65e3f275e025",
+      "declaration_hash": "a96f6e19b8a73ed504d264de0950a8d4a6a1e938bdcc990eec7e2f0ed3158075",
+      "direct_consumers": [
+        "Chromatic.conjectures.X264.odd_complete_proper_edge_colourings_rainbow_stacking_statement"
+      ],
+      "kind": "Definition",
+      "line": 46,
+      "local_dependencies": [],
+      "name": "x264_rainbow_stacking",
+      "normalized_name": "rainbow_stacking",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X264.v",
+      "phase": "X264",
+      "qualified_name": "Chromatic.conjectures.X264.x264_rainbow_stacking",
+      "signature": "(n r : nat) (chi1 chi2 : {set 'K_n} -> 'I_r) (s1 s2 : {perm 'I_n}) : Prop",
+      "signature_shape_hash": "2d2f9390a330e3089d83f9068e3772767d14f7f77eb66e21b109e47b9a0e1242"
     },
     {
       "body_hash": "a252d3382e9e2e9f0450759c627d453616f368776f8069089a1ef10686104455",
