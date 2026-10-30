@@ -1986,6 +1986,16 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X260.v",
       "name": "edge_count",
       "note": "Wave X260 (2026-10-29): edge_count (GTBase.common) states arxiv:2301.13305#00's guard on the fixed graph H (a positive even number of edges: 0 < edge_count H, ~~ odd (edge_count H)), named in X260.v; grounding_X260.v uses it for H = K_4 (edge_count 'K_4 = 6 by edge_count_Kn). Imported, no copy; declared as for X259."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/X265.v",
+      "name": "edge_count",
+      "note": "Wave X265 (2026-10-30): edge_count (GTBase.common) counts the edges in erdos:1077's hypothesis (at least n^(1 + alpha) edges: n^(b + a) <= edge_count G ^ b) and conclusion (at least eps m^(1 + alpha) edges: r^b m^(b + a) <= (p edge_count H)^b), named in X265.v; grounding_X265.v uses it for K_n (edge_count 'K_n = C(n, 2) by edge_count_Kn, n^3 <= C(n, 2)^2 for n >= 6) and for the subgraphs of an edgeless host (edge_count H = 0). Imported, no copy; declared as for X259 and X260."
+    },
+    {
+      "path": "extremal-graph-theory/theories/conjectures/grounding_X265.v",
+      "name": "edge_count",
+      "note": "Wave X265 (2026-10-30): edge_count (GTBase.common) counts the edges in erdos:1077's hypothesis (at least n^(1 + alpha) edges: n^(b + a) <= edge_count G ^ b) and conclusion (at least eps m^(1 + alpha) edges: r^b m^(b + a) <= (p edge_count H)^b), named in X265.v; grounding_X265.v uses it for K_n (edge_count 'K_n = C(n, 2) by edge_count_Kn, n^3 <= C(n, 2)^2 for n >= 6) and for the subgraphs of an edgeless host (edge_count H = 0). Imported, no copy; declared as for X259 and X260."
     }
   ],
   "distinct_variants": [
