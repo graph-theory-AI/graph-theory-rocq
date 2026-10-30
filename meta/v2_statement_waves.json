@@ -11358,6 +11358,64 @@
           }
         }
       }
+    },
+    "X265": {
+      "phase": "X265",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X265.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X265 (A3 verifier Arthur; routing Lancelot (251), (255); selection x265-selection-by-marcol, design x265-design-by-marcol r1), branch math/marcol-x265-20261030, 2026-10-30",
+      "source_verified_by": "Arthur (X265 wave verifier, A3: pinned records re-read at b72c5857: data/erdos_graph.json record 1077 (the statement field, which the builder hashes alone), sha256 recomputed = 0b731c36f7ef9f8a78e67b013d80076f5cf5cdcfc5b4356f83012d97803099e2, and data/arxiv_extracted/2004.10180.json record 2 (the first \"states\" record, \"Optimality of the o(n^{3/2}) bound in Corollary 1.4\"; statement_text + LF + context_text, as the builder hashes arxiv rows), sha256 recomputed = 6bfa0cb6662055f46a3023db7383ca0af121c5e6f6cf9d49a6b88aaef590891a, both equal to the manifest rows and to the wave's source_hash values, the upstream statements equal to the manifest's statement_text; pinned statuses: erdos:1077 solved (prize label \"DISPROVED This has been solved in the negative.\"), arxiv:2004.10180#00 open; the Mac's deposit coordination/sources/x265-source-mac-20261030 (SHA256SUMS c614ba6b, -c OK) read: Erdos and Simonovits 1970 printed pp.388-389 on the page images ErSi70-page-12.png / -13.png (for every eps and alpha, d > d0, e(G) > n^(1+alpha), m > n^(1-alpha), e(G^m) > eps m^(1+alpha)), erdos-1077.html (the pinned statement and the complete bipartite discussion), 2004.10180v3 main.tex l.204-209 (Corollary 1.4 and the open exponent) and l.1053-1055 (the remark of Section 7); Jiang-Longbrake 2507.03261v2 Theorem 1.3 is cited as printed)",
+      "source_verified_at": "2026-10-30",
+      "commit": "x265-balanced-dense-subgraphs-c5-free-triangle-deletion",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "Arthur (X265 wave verification, 2026-10-30)",
+      "faithfulness_result": "Readback 2026-10-30 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x265-20261030 = 2ac0ef89b4ce79d53a29ca520e8abb5c16c46d84 (seven commits on work/coordinator fdf15b28), after my design read ((332), FAITHFUL 2/2 with B1: g265_c5_hyp_claim did not mention its statement, the gate_contracts mention rule) of x265-design-by-marcol r1 (2202b744; my packet x265-design-read-by-arthur 8c3f2618) and my re-read of r2 ((333); x265-design-r2-by-marcol 49af2146, my packet x265-design-r2-read-by-arthur 8db4543e). X265.v and grounding_X265.v at 2ac0ef89 are byte-identical to the r2 packet; no local helper and no x265_ declaration. erdos:1077: encoded as stated, for every rational eps = r/p and alpha = a/b with 0 < a < b (eps universal, as Erdos-Simonovits 1970 p.388 quantify; a larger eps is stronger, so every real eps is covered; rational alpha restricts the real range and keeps the refuting alpha = 1/3; alpha >= 1 only vacuous), some D and N (d > d0 and the page's D-balanced are both some D by monotonicity), n^(b+a) <= e(G)^b, n^(b-a) < m^b, r^b m^(b+a) <= (p e(H))^b, D-balanced = exists d, min_degree H d /\\ Delta H <= D d; the page's \"at least\" encoded, the original's strict forms noted; FALSE at the pin, pinned status solved (answered negatively; page label DISPROVED; no status change, Lancelot (256)): K_(s, n - s) with s about 3 n^(1/3) has about 3 n^(4/3) edges while every D-balanced subgraph with an edge has m <= (D + 1) s = o(n^(2/3)) (I re-did the bound). arxiv:2004.10180#00: its affirmative answer, open at the pin: for every q >= 1, C and N some G with no C_5 subgraph on n >= N vertices whose every triangle-destroying F within E(G) has C n^(3q - 2) < |F|^(2q), i.e. no exponent 3/2 - 1/q works, which covers every real delta > 0 by monotonicity and every real constant through C; C_5-free non-induced. Grounding: 1077 hyp_inhabited at K_n (n >= 6, alpha = 1/2, eps = 1, D = 1) with the statement giving a large subgraph of K_n, not_trivially_true = 1077 without its edge-count hypothesis (the edgeless graph on N + 1 vertices); 2004.10180 hyp_inhabited (edgeless graphs C_5-free at every size, F = E(G), K_3, and the statement giving C_5-free graphs that are not triangle-free), not_trivially_true = without \"G - F triangle-free\" (F = set0 at C = 0); helper_sanity [] in both rows. Metadata: source_hash 2 / 2 recomputed from b72c5857, equal; waves.X265 = the r2 packet's x265-wave.json and the only waves change, its verifier fields empty before this; legs notes 581 / 413 = \"Authored in X265.v:<name>. \" + the wave note, no other legs entry changed; README 554 / 11 / 40 / 1,068 -> 556 / 11 / 40 / 1,066; LANDED gains X265 extremal-graph-theory; the 1077 lint allowlist entry = the packet text and the only allowlist change; edge_count.spec.json gains exactly the two cross_module_consumers (X265.v, grounding_X265.v); c7 2ac0ef89 commits edge_count.md byte-identical to the dev run's written copy. Dev run 1 (x265-dev-by-marcol, 44c3c163, -c OK): PASS-WITH-EXPECTED, 30 steps, 26 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12 / 14 (Print Assumptions clean on 2 / 2 statements + 4 certificates, 15 exact-type probes), W2 879 / 879, W3 2 probed 0 flagged, W4 0 active (41 allowlisted).",
+      "rows": {
+        "erdos_1077": {
+          "formal_name": "balanced_dense_subgraph_statement",
+          "source_hash": "0b731c36f7ef9f8a78e67b013d80076f5cf5cdcfc5b4356f83012d97803099e2",
+          "note": "Erdos Problems #1077, Erdos and Simonovits (ErSi70 pp.388-389; pinned status solved, answered negatively; page label DISPROVED): for every rational eps = r/p and alpha = a/b in (0, 1) there are D and N such that every G on n >= N vertices with at least n^(1+alpha) edges has a D-balanced subgraph (Delta <= D delta) on m > n^(1-alpha) vertices with at least eps m^(1+alpha) edges; eps universal as in the original. FALSE at the pin: K_(s,n-s) with s about 3 n^alpha refutes it for every 0 < alpha < 1/2 (the page's discussion).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g265_bd_hyp_inhabited",
+              "claim": "g265_bd_hyp_claim",
+              "references": [
+                "balanced_dense_subgraph_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g265_bd_not_trivially_true",
+              "claim": "g265_bd_ntt_claim",
+              "references": [
+                "balanced_dense_subgraph_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2004_10180_00": {
+          "formal_name": "c5_free_triangle_deletion_exponent_statement",
+          "source_hash": "6bfa0cb6662055f46a3023db7383ca0af121c5e6f6cf9d49a6b88aaef590891a",
+          "note": "Conlon, Fox, Sudakov and Zhao, arXiv:2004.10180v3, after Corollary 1.4 (pinned open), as its affirmative answer: the exponent 3/2 is best possible, i.e. for every q >= 1, C and N some C_5-free G (no C_5 subgraph) on n >= N vertices needs more than C^(1/(2q)) n^(3/2 - 1/q) deleted edges to become triangle-free. v3 leaves it open (PDF pp.3 and 17).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g265_c5_hyp_inhabited",
+              "claim": "g265_c5_hyp_claim",
+              "references": [
+                "c5_free_triangle_deletion_exponent_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g265_c5_not_trivially_true",
+              "claim": "g265_c5_ntt_claim",
+              "references": [
+                "c5_free_triangle_deletion_exponent_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }

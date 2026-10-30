@@ -2373,11 +2373,14 @@
    "note": "Authored in X219.v:asymmetric_bipartite_list_colouring_statement. Alon-Cambie-Kang Conjecture 7, the conjunction of its three sufficient conditions for (k_A,k_B)-choosability of bipartite graphs with part-wise maximum degrees. Real parameters are cleared by rearrangement over nat: epsilon = 1/q gives Delta_A <= k_A^q; the constants C become naturals; log becomes trunc_log 2; condition (iii) is raised to the power k_A and multiplied by log Delta, giving k_B^k_A >= C^k_A * D * (log D)^(k_A - 1), with no division or root. The wave's riskiest row. FIX 2026-09-23 (main session): conditions (ii) and"
   },
   "axv_2004_10180_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x265-balanced-dense-subgraphs-c5-free-triangle-deletion",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X265.v:c5_free_triangle_deletion_exponent_statement. Conlon, Fox, Sudakov and Zhao, arXiv:2004.10180v3, after Corollary 1.4 (pinned open), as its affirmative answer: the exponent 3/2 is best possible, i.e. for every q >= 1, C and N some C_5-free G (no C_5 subgraph) on n >= N vertices needs more than C^(1/(2q)) n^(3/2 - 1/q) deleted edges to become triangle-free. v3 leaves it open (PDF pp.3 and 17)."
   },
   "axv_2004_10180_01": {
    "statement": "todo",
@@ -7782,11 +7785,14 @@
    "audit_page": "todo"
   },
   "erdos_1077": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x265-balanced-dense-subgraphs-c5-free-triangle-deletion",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X265.v:balanced_dense_subgraph_statement. Erdos Problems #1077, Erdos and Simonovits (ErSi70 pp.388-389; pinned status solved, answered negatively; page label DISPROVED): for every rational eps = r/p and alpha = a/b in (0, 1) there are D and N such that every G on n >= N vertices with at least n^(1+alpha) edges has a D-balanced subgraph (Delta <= D delta) on m > n^(1-alpha) vertices with at least eps m^(1+alpha) edges; eps universal as in the original. FALSE at the pin: K_(s,n-s) with s about 3 n^alpha refutes it for every 0 < alpha < 1/2 (the page's discussion)."
   },
   "erdos_1078": {
    "statement": "done",
