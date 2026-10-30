@@ -11113,6 +11113,172 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Marcol (X262 wave verification, 2026-10-29)",
       "faithfulness_result": "Readback 2026-10-29 (verifier Marcol): 4/4 PASS against the pinned texts and the sources, at math/arthur-x262-20261029 = 6e2b3f8cf5ab86191c5e94e8662dd354a65129e2 (seven commits on work/coordinator 4b20f907), after my design read ((242), FAITHFUL 4/4) of x262-design-by-arthur r1 (d67ce3f2; my packet x262-design-read-by-marcol dd864dba). X262.v and grounding_X262.v equal the design packet's byte for byte. No local helper (helper_sanity [] in every row). erdos:920: forall k >= 4, exists c C N, for n >= N a K_k-free G on n vertices with n^(k-2) <= C chi^(k-1) (trunc_log 2 n)^(c(k-1)): the witness form of the maximum f_k(n), the power (k-1) exact, c : nat and base / floor absorbed in C both ways; true at the pin (Bradac v3 Theorem 1.1 through chi >= n / (t-1), c_k = (2k-4)/(k-1) < 2), status open in the wave. Harris: 2410.02437v1 Conjecture 3.1 verbatim, with X130's x130_frac_chi_le (chi_f <= K d / trunc_log 2 d, attained); true at the pin (Martinsson Theorem 1.2, K = 8). #02: Problem 6.2 per q (eps = 1/q), (trunc_log 2 Delta)^q <= d^(q-1) -> chi trunc_log 2 d <= C d, equivalent both ways for large d, small d absorbed; open. #03: Problem 6.3, forall r >= 3 exists m d0, chi = d+1 -> d <= m trunc_log 2 |G| (e^(Omega_r(d)) both ways); r = 3 is the paper's Theorem 1.5, r >= 4 open (l.187). Grounding: hyp f_4(4) = 3 (K_4 minus an edge, upper bound by a non-edge), chi_f(C_5) <= 5/2 and K_2 (Harris), q = 1 with K_2 (#02), K_3 at r = 4 (#03); not_trivially_true = the body minus one hypothesis, checked mechanically on the comment-stripped normalised text (4/4, a control rejected), the constructions K_(d+1) sound; the 16 certificate and claim names present, 12 Print Assumptions lines. Compile: the dev run's container build (B2 compiled both files, 12 / 12 Print Assumptions closed, no axiom; W1 Print Assumptions clean 4 + 8, 40 exact-type probes). Metadata: source_hash values equal the manifest; the four verifier keys empty before the fields; legs statement / grounding done, notes 523 / 510 / 448 / 420 (under 600); README 545 / 11 / 40 / 1,077 -> 549 / 11 / 40 / 1,073; LANDED adds X262 chromatic-theory after X261; Site / Review as REG.row_urls (erdos / studies none, arXiv URLs); lint 4 / 4 clean, no allowlist entry; consumers: the four bfold_colouring entries (x130_frac_chi_le chain, x130_bfold_colouring and bfold_colouring source), equal to my comment-stripped scan, the report committed byte-identical. Dev run 1 (x262-dev-by-arthur, SHA256SUMS f29e71af, -c OK, 30 steps) failed only on the declared field steps (W1, A3a / A3, A10); W2 872 / 872; W3 4 probed, 0 flagged; W4 0 active (39 allowlisted); A12 rc 0."
+    },
+    "X264": {
+      "phase": "X264",
+      "repo": "chromatic-theory",
+      "defines_file": "X264.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X264 (A3 verifier Marcol; routing Lancelot (227), (230); selection x264-selection-by-arthur (315), design x264-design-by-arthur r1), branch math/arthur-x264-20261030",
+      "source_verified_by": "Marcol (X264 wave verifier, A3: pinned records re-read: studies:std_guo_kang_zwaneveld_conjecture, arxiv:1803.10962#01 and arxiv:2405.14795#01 in the v2 manifest at a7bc0812 (graph-conjectures b72c5857); the three source_hash values (7b74139c = sha256 of the studies statement alone, c77c1e9d and 80d05cee = sha256 of statement + newline + context) equal the manifest rows and the wave's; pinned statuses open, solved, open; the Mac's deposit coordination/sources/x264-source-mac-20261030 (SHA256SUMS 9cbbf5bc, -c OK) read: Guo-Kang-Zwaneveld 2411.06941v1 improper-arXiv.tex l.112, l.125 (the strong product footnote), l.128-129 (Conjecture 2), l.132, l.178; Norin-Steiner 2504.01548v1 main.tex l.110, l.114, l.120, l.124-127 (Theorem 1.2), l.134-136 (Theorem 1.3); Dvorak-Esperet-Kang-Ozeki 1803.10962v2 dp1.tex l.69, l.80, l.86-90, l.168; Bradshaw-Masarik 2112.06333v2 SCCmain.tex l.143-147, l.221-225 (Question 1.5), l.241-248 (Theorem 1.7), l.264-270, l.373-375; Alon-Defant-Kravitz 2405.14795v1 main.tex l.106, l.388-391 (Proposition 3.2, n = 2^k - 2), l.410-414 (Question 3.3))",
+      "source_verified_at": "2026-10-30",
+      "commit": "x264-defective-single-conflict-rainbow",
+      "rows": {
+        "std_guo_kang_zwaneveld_conjecture": {
+          "formal_name": "guo_kang_zwaneveld_defective_strong_product_statement",
+          "source_hash": "7b74139c18af9bd01d40f1ffbe2497a35fdc52788e7a136c0a21b29e1fdb6aba",
+          "note": "Guo, Kang and Zwaneveld, Conjecture 2 of arXiv:2411.06941v1 (pinned status open): for every G, d and k, chi(G) <= k iff G boxtimes K_(d+1) (x264_strong_product) has a d-defective colouring by 'I_k (x264_defective_colourable), i.e. chi(G) = chi^d(G boxtimes K_(d+1)); direction -> always holds (g264_lift). FALSE at the pin: Norin and Steiner, arXiv:2504.01548v1, Theorem 1.2 (main.tex l.124-126), for every d >= 2 a G with chi^d(G boxtimes K_(d+1)) <= 2d^3 + 2d^2 + d + 3 < chi(G).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g264_gkz_hyp_inhabited",
+              "claim": "g264_gkz_hyp_claim",
+              "references": [
+                "guo_kang_zwaneveld_defective_strong_product_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g264_gkz_not_trivially_true",
+              "claim": "g264_gkz_ntt_claim",
+              "references": [
+                "guo_kang_zwaneveld_defective_strong_product_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g264_sp_helper_sanity",
+                "claim": "g264_sp_helper_claim",
+                "references": [
+                  "x264_strong_rel",
+                  "x264_strong_product"
+                ]
+              },
+              {
+                "theorem": "g264_dc_helper_sanity",
+                "claim": "g264_dc_helper_claim",
+                "references": [
+                  "x264_defective_colourable"
+                ]
+              },
+              {
+                "theorem": "g264_rs_helper_sanity",
+                "claim": "g264_rs_helper_claim",
+                "references": [
+                  "x264_rainbow_stacking"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_1803_10962_01": {
+          "formal_name": "degenerate_single_conflict_sqrt_log_statement",
+          "source_hash": "c77c1e9dc8bb1724a4135e241a67b4520e9132dec39a5aaeccb1c85520dd167e",
+          "note": "Dvorak, Esperet, Kang and Ozeki, arXiv:1803.10962v2 (dp1.tex l.168; pinned status solved): a natural C such that every positive k with C^2 d (trunc_log 2 n)^2 <= k^2 single-conflict colours every d-degenerate simple graph on n vertices (X210's x210_conflict_k_colourable_under_rat_bound G k 1 k, the exactly-one form by g264_single_conflictE); the guard 0 < k is load-bearing (g264_sc_guard_teeth). True at the pin: Bradshaw and Masarik, arXiv:2112.06333v2, Theorem 1.7 (SCCmain.tex l.241-246).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g264_sc_hyp_inhabited",
+              "claim": "g264_sc_hyp_claim",
+              "references": [
+                "degenerate_single_conflict_sqrt_log_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g264_sc_not_trivially_true",
+              "claim": "g264_sc_ntt_claim",
+              "references": [
+                "degenerate_single_conflict_sqrt_log_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g264_sp_helper_sanity",
+                "claim": "g264_sp_helper_claim",
+                "references": [
+                  "x264_strong_rel",
+                  "x264_strong_product"
+                ]
+              },
+              {
+                "theorem": "g264_dc_helper_sanity",
+                "claim": "g264_dc_helper_claim",
+                "references": [
+                  "x264_defective_colourable"
+                ]
+              },
+              {
+                "theorem": "g264_rs_helper_sanity",
+                "claim": "g264_rs_helper_claim",
+                "references": [
+                  "x264_rainbow_stacking"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2405_14795_01": {
+          "formal_name": "odd_complete_proper_edge_colourings_rainbow_stacking_statement",
+          "source_hash": "80d05cee490dc1d9258728c2e4f7090f91ee3c04131d439d9ffecebf0b93d4b4",
+          "note": "Alon, Defant and Kravitz, Question 3.3 (arXiv:2405.14795v1, main.tex l.410-412; pinned status open), as its affirmative answer: for odd n, every two proper edge-colourings of K_n into one palette 'I_r (GTBase proper_edge_colouring) admit vertex permutations s1, s2 with chi1(s1^-1 e) <> chi2(s2^-1 e) at every edge e (x264_rainbow_stacking, l.106). Open at the pin; yes for n = 3 and 5 (l.414), no for n = 2^k - 2 (Proposition 3.2).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g264_rs_hyp_inhabited",
+              "claim": "g264_rs_hyp_claim",
+              "references": [
+                "odd_complete_proper_edge_colourings_rainbow_stacking_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g264_rs_not_trivially_true",
+              "claim": "g264_rs_ntt_claim",
+              "references": [
+                "odd_complete_proper_edge_colourings_rainbow_stacking_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g264_sp_helper_sanity",
+                "claim": "g264_sp_helper_claim",
+                "references": [
+                  "x264_strong_rel",
+                  "x264_strong_product"
+                ]
+              },
+              {
+                "theorem": "g264_dc_helper_sanity",
+                "claim": "g264_dc_helper_claim",
+                "references": [
+                  "x264_defective_colourable"
+                ]
+              },
+              {
+                "theorem": "g264_rs_helper_sanity",
+                "claim": "g264_rs_helper_claim",
+                "references": [
+                  "x264_rainbow_stacking"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x264_strong_rel": {
+          "classification": "paper_specific",
+          "reason": "The adjacency of the strong product G boxtimes H of studies:std_guo_kang_zwaneveld_conjecture (Guo, Kang and Zwaneveld, arXiv:2411.06941v1, improper-arXiv.tex l.125: distinct, and in each coordinate equal or adjacent), the union of GTBase's box_rel and tensor_rel (grounding_X264's g264_strong_relE)."
+        },
+        "x264_strong_product": {
+          "classification": "paper_specific",
+          "reason": "The strong product G boxtimes H as an sgraph over x264_strong_rel. Neither coq-graph-theory nor GTBase has one (base.v has the cartesian and tensor products), and extremal X191's x191_clique_blowup is a blow-up of K_m only, in another package. With H = K_t it is Norin and Steiner's form (arXiv:2504.01548v1 l.114; g264_strong_KE)."
+        },
+        "x264_defective_colourable": {
+          "classification": "paper_specific",
+          "reason": "A d-defective (d-improper) colouring by 'I_k (2411.06941v1 l.178; 2504.01548v1 l.110): every vertex has at most d neighbours of its own colour, chi^d being the least such k. Chromatic X218's x218_defective_chromatic_class_le is a class-level notion with the defect bound chosen first; defect 0 is a proper colouring (g264_defective0)."
+        },
+        "x264_rainbow_stacking": {
+          "classification": "paper_specific",
+          "reason": "A rainbow stacking of two edge-colourings of K_n into a common palette 'I_r (Alon, Defant and Kravitz, arXiv:2405.14795v1, main.tex l.106, with m = 2): vertex permutations s1, s2 with chi1(s1^-1 e) <> chi2(s2^-1 e) at every edge e."
+        }
+      },
+      "faithfulness_verified_by": "Marcol (X264 wave verification, 2026-10-30)",
+      "faithfulness_result": "Readback 2026-10-30 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x264-20261030 = 8aa669144546cc0681d16ef156ab727beb6ed4fb (six commits on work/coordinator a7bc0812), after my design read ((249), FAITHFUL 3/3) of x264-design-by-arthur r1 (588959fe; my packet x264-design-read-by-marcol 542dbdc2) and my delta read ((252), FAITHFUL 3/3) of r2 (c4589a3a; x264-design-r2-read-by-marcol fef0a987). X264.v equals r2's and grounding_X264.v r1's byte for byte. GKZ: forall G d k, chi(G) <= k iff x264_defective_colourable (G boxtimes K_(d+1)) d k, the equality of two least numbers (both upward closed), strong product = box_rel || tensor_rel = the l.125 footnote; false at the pin (Norin-Steiner Theorem 1.2, k = 2d^3 + 2d^2 + d + 3, 29 at d = 2), pinned open. 1803.10962#01: exists C, 0 < k, k_degenerate G d, C^2 d (trunc_log 2 n)^2 <= k^2 -> X210's x210_conflict_k_colourable_under_rat_bound G k 1 k (at most one forbidden pair per edge = exactly one for k > 0), simple graphs, guard 0 < k (the d = 0 or n <= 1 instances are edgeless); true at the pin (Bradshaw-Masarik Theorem 1.7, l.373-375), pinned solved. 2405.14795#01: for odd n, proper chi1 chi2 into one palette 'I_r admit s1 s2 : {perm 'I_n} with chi1(s1^-1 e) <> chi2(s2^-1 e) at every edge (l.106, m = 2); open. Helpers: x264_strong_rel, x264_strong_product, x264_defective_colourable, x264_rainbow_stacking, paper_specific, the only x264_ declarations of X264.v (r1's two Lemmas, unclassified in dev run 1's W5, removed in r2 with the proofs inline); helper_sanity sp / dc / rs in every row. Grounding: hyp K_2 boxtimes K_2 1-defective with 2 colours, K_2 1-degenerate, x + y mod 3 proper on K_3; not_trivially_true: GKZ with the blowup size freed (false at K_2, d = t = k = 1), sc without k_degenerate (K_2, d = 0, k = 1), rs without odd n (n = 2, two equal constant colourings). Metadata: source_hash equal to the manifest; the four verifier keys empty before the fields; legs statement / grounding done, notes 555 / 560 / 515 (under 600); README 549 / 11 / 40 / 1,073 -> 552 / 11 / 40 / 1,070; LANDED X264 chromatic-theory after X262; Site / Review per row_urls (studies none, arXiv URLs); lint clean, no allowlist entry; consumers none (proper_edge_colouring canonical; my scan finds no frozen name). Dev run 1 (x264-dev-by-arthur, 4573ad9a, -c OK, 29 steps): W5 the one unexpected failure (fixed by the sixth commit), the four field steps as declared; B2 compiled r1 under 9.2, W1 Print Assumptions 3 + 15 clean, 25 probe shapes, W2 875 / 875, W3 3 probed 0 FLAGGED, W4 0 active, A12 rc 0. r2's compile: Arthur's MCP (26 blocks, no holes); the real run recompiles it."
     }
   }
 }
