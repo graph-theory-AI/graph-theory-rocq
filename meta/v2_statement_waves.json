@@ -11358,6 +11358,64 @@
           }
         }
       }
+    },
+    "X265": {
+      "phase": "X265",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X265.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X265 (A3 verifier Arthur; routing Lancelot (251), (255); selection x265-selection-by-marcol, design x265-design-by-marcol r1), branch math/marcol-x265-20261030, 2026-10-30",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x265-balanced-dense-subgraphs-c5-free-triangle-deletion",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": "",
+      "rows": {
+        "erdos_1077": {
+          "formal_name": "balanced_dense_subgraph_statement",
+          "source_hash": "0b731c36f7ef9f8a78e67b013d80076f5cf5cdcfc5b4356f83012d97803099e2",
+          "note": "Erdos Problems #1077, Erdos and Simonovits (ErSi70 pp.388-389; pinned status solved, answered negatively; page label DISPROVED): for every rational eps = r/p and alpha = a/b in (0, 1) there are D and N such that every G on n >= N vertices with at least n^(1+alpha) edges has a D-balanced subgraph (Delta <= D delta) on m > n^(1-alpha) vertices with at least eps m^(1+alpha) edges; eps universal as in the original. FALSE at the pin: K_(s,n-s) with s about 3 n^alpha refutes it for every 0 < alpha < 1/2 (the page's discussion).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g265_bd_hyp_inhabited",
+              "claim": "g265_bd_hyp_claim",
+              "references": [
+                "balanced_dense_subgraph_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g265_bd_not_trivially_true",
+              "claim": "g265_bd_ntt_claim",
+              "references": [
+                "balanced_dense_subgraph_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2004_10180_00": {
+          "formal_name": "c5_free_triangle_deletion_exponent_statement",
+          "source_hash": "6bfa0cb6662055f46a3023db7383ca0af121c5e6f6cf9d49a6b88aaef590891a",
+          "note": "Conlon, Fox, Sudakov and Zhao, arXiv:2004.10180v3, after Corollary 1.4 (pinned open), as its affirmative answer: the exponent 3/2 is best possible, i.e. for every q >= 1, C and N some C_5-free G (no C_5 subgraph) on n >= N vertices needs more than C^(1/(2q)) n^(3/2 - 1/q) deleted edges to become triangle-free. v3 leaves it open (PDF pp.3 and 17).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g265_c5_hyp_inhabited",
+              "claim": "g265_c5_hyp_claim",
+              "references": [
+                "c5_free_triangle_deletion_exponent_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g265_c5_not_trivially_true",
+              "claim": "g265_c5_ntt_claim",
+              "references": [
+                "c5_free_triangle_deletion_exponent_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }
