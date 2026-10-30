@@ -340,6 +340,16 @@
       "path": "base/theories/common.v",
       "name": "monochromatic",
       "note": "Canonical module import token (A9 requires GTBase.monochromatic without Import for cut_size_non_monochromatic); not a reference to the same-spelled GTMisc U13 predicate. Kernel closures disambiguate these names."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X266.v",
+      "name": "clustered_colouring",
+      "note": "Wave X266 (Arthur, 2026-10-30): arxiv:2407.21360#00 and #01 read \"every c-colouring has clustering at least s + 1\" as ~ clustered_colouring (H boxtimes P) c s; a direct use of the unchanged GTBase name, no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X266.v",
+      "name": "clustered_colouring",
+      "note": "Grounding of X266: g266_clustered_all, g266_K2P2_no_clustering1, g266_K2K2_no_clustering1 and the arxiv:2407.21360 certificates use the unchanged GTBase name; same_colour_on is never named (the proofs pass through monochromatic_on)."
     }
   ],
   "distinct_variants": [
