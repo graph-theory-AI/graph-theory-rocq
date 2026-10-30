@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py monochromatic --details /tmp/mi
 
 - Canonical: `GTBase.monochromatic.monochromatic_on`.
 - Baseline: `47eed16af2f9575575a573f3b8a93860d47e72ca`.
-- Scope: 3 helpers, 5 statements, 18 frozen objects, 71 recorded references.
-- Source checks: 162/162 pass; consistent.
+- Scope: 3 helpers, 5 statements, 18 frozen objects, 80 recorded references.
+- Source checks: 171/171 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
