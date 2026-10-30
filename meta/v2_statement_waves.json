@@ -11416,6 +11416,140 @@
           }
         }
       }
+    },
+    "X266": {
+      "phase": "X266",
+      "repo": "chromatic-theory",
+      "defines_file": "X266.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X266 (A3 verifier Marcol; routing Lancelot (252), (255); selection x266-selection-by-arthur (331), design x266-design-by-arthur r1), branch math/arthur-x266-20261030",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x266-clustered-strong-products-hall-ratio",
+      "rows": {
+        "axv_2407_21360_00": {
+          "formal_name": "bounded_treewidth_path_product_clustering_statement",
+          "source_hash": "135b923cd862a5dd9da01d7a7cb63a74f4ea4224cd352510017e9ca4fb0f1246",
+          "note": "Campbell et al., Conjecture 7 of arXiv:2407.21360v1 (Clustered_Colouring_of_Graph_Products.tex l.242-244; pinned status partial): for every c >= 2 some t and q > 0 such that for every M some H of treewidth at most t (x266_treewidth_at_most) and path P_n, N = #|H| n >= M, have no c-colouring of H boxtimes P_n (x264_strong_product) of clustering s (clustered_colouring) whenever (q s)^(c^2-c+1) < N^c. At most t is equivalent for an existential t (pigeonhole). Proved for c = 2, 3 (Theorems 1, 2).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g266_pc_hyp_inhabited",
+              "claim": "g266_pc_hyp_claim",
+              "references": [
+                "bounded_treewidth_path_product_clustering_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g266_pc_not_trivially_true",
+              "claim": "g266_pc_ntt_claim",
+              "references": [
+                "bounded_treewidth_path_product_clustering_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g266_tw_helper_sanity",
+                "claim": "g266_tw_helper_claim",
+                "references": [
+                  "x266_treewidth_at_most"
+                ]
+              },
+              {
+                "theorem": "g266_hr_helper_sanity",
+                "claim": "g266_hr_helper_claim",
+                "references": [
+                  "x266_hall_ratio_le"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2407_21360_01": {
+          "formal_name": "bounded_treewidth_products_three_colour_clustering_statement",
+          "source_hash": "99951d0fd8c536882344c5807f92bb778d15188973df055515b3f28591a76c61",
+          "note": "Campbell et al., Conjecture 8 of arXiv:2407.21360v1 (l.248-250; pinned status open): some t > 0 and q > 0 such that for every M some H1, H2 of treewidth at most t (x266_treewidth_at_most), N = #|H1| #|H2| >= M, have no 3-colouring of H1 boxtimes H2 (x264_strong_product) of clustering s whenever (q s)^7 < N^4. At most t is equivalent for an existential t (pigeonhole, then padding both factors with K_(t+1)). Open at the pin; Theorem 3 gives Omega(N^(1/2)).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g266_tc_hyp_inhabited",
+              "claim": "g266_tc_hyp_claim",
+              "references": [
+                "bounded_treewidth_products_three_colour_clustering_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g266_tc_not_trivially_true",
+              "claim": "g266_tc_ntt_claim",
+              "references": [
+                "bounded_treewidth_products_three_colour_clustering_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g266_tw_helper_sanity",
+                "claim": "g266_tw_helper_claim",
+                "references": [
+                  "x266_treewidth_at_most"
+                ]
+              },
+              {
+                "theorem": "g266_hr_helper_sanity",
+                "claim": "g266_hr_helper_claim",
+                "references": [
+                  "x266_hall_ratio_le"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_1812_07327_01": {
+          "formal_name": "hall_ratio_degree_weighted_fractional_chromatic_statement",
+          "source_hash": "a3fe8497f59d89ec4f209ed6094d6eed621c6d72df359f83f117d14ef4c31ca9",
+          "note": "Dvorak, Ossona de Mendez and Wu, Problem 5 of arXiv:1812.07327v2 (no1sub.tex l.161-164; pinned status solved), as its affirmative answer: some p, q > 0 such that for every F some G has chi_f(G) > F (X130), Hall ratio at most p / q over all subgraphs (x266_hall_ratio_le) and alpha_(deg_H)(H) >= (q / p) |E(H)| in every subgraph H (a stable set I of H with q |E(H)| <= p sum_(v in I) deg_H(v)). True at the pin: Steiner, arXiv:2411.16465v1, Theorem 1.5 (main.tex l.140-142), with c = 4 + delta.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g266_dw_hyp_inhabited",
+              "claim": "g266_dw_hyp_claim",
+              "references": [
+                "hall_ratio_degree_weighted_fractional_chromatic_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g266_dw_not_trivially_true",
+              "claim": "g266_dw_ntt_claim",
+              "references": [
+                "hall_ratio_degree_weighted_fractional_chromatic_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g266_tw_helper_sanity",
+                "claim": "g266_tw_helper_claim",
+                "references": [
+                  "x266_treewidth_at_most"
+                ]
+              },
+              {
+                "theorem": "g266_hr_helper_sanity",
+                "claim": "g266_hr_helper_claim",
+                "references": [
+                  "x266_hall_ratio_le"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x266_treewidth_at_most": {
+          "classification": "paper_specific",
+          "reason": "Treewidth at most t (Campbell et al., arXiv:2407.21360v1, Clustered_Colouring_of_Graph_Products.tex l.267-275): a tree-decomposition (GTBase tree_bag_decomposition over a tree T) whose bags all have at most t + 1 vertices. Minor-theory's x27_treewidth_at_most is the same notion over its own decomposition copy, in a package chromatic-theory does not import; GTBase's tree-decomposition family has no width contract (g266_treewidth_all, g266_treewidth0_edge)."
+        },
+        "x266_hall_ratio_le": {
+          "classification": "paper_specific",
+          "reason": "The Hall ratio at most p / q (Dvorak, Ossona de Mendez and Wu, arXiv:1812.07327v2, no1sub.tex l.92-95: the maximum of |V(H)| / alpha(H) over all subgraphs H), cross-multiplied over GTBase has_subgraph and coq-graph-theory's independence number. No corpus helper bounds the Hall ratio; rho(K_n) = n (g266_hall_K, g266_hall_K_lt)."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
