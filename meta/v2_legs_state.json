@@ -1281,11 +1281,14 @@
    "note": "PARTIAL (proxy) — Non-orientable surfaces are not modelled: surface_embeddable bounds the orientable genus, so the row covers only the graphs embeddable on orientable surfaces. Repaired 2026-10-26 (coordination/PROGRAMME.md A2): positive rational constants C = p/q and C'^2 = p'/q', guards connected [set: G] and 0 < k; the old body was false at k = 0 (X210Legacy_row_false in chromatic migration/surface_embeddable.v). Authored in X210.v:surface_conflict_colouring_sqrt_genus_statement."
   },
   "axv_1803_10962_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x264-defective-single-conflict-rainbow",
+   "package": "chromatic-theory",
+   "note": "Authored in X264.v:degenerate_single_conflict_sqrt_log_statement. Dvorak, Esperet, Kang and Ozeki, arXiv:1803.10962v2 (dp1.tex l.168; pinned status solved): a natural C such that every positive k with C^2 d (trunc_log 2 n)^2 <= k^2 single-conflict colours every d-degenerate simple graph on n vertices (X210's x210_conflict_k_colourable_under_rat_bound G k 1 k, the exactly-one form by g264_single_conflictE); the guard 0 < k is load-bearing (g264_sc_guard_teeth). True at the pin: Bradshaw and Masarik, arXiv:2112.06333v2, Theorem 1.7 (SCCmain.tex l.241-246)."
   },
   "axv_1804_01060_00": {
    "statement": "todo",
@@ -5034,11 +5037,14 @@
    "audit_page": "todo"
   },
   "axv_2405_14795_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x264-defective-single-conflict-rainbow",
+   "package": "chromatic-theory",
+   "note": "Authored in X264.v:odd_complete_proper_edge_colourings_rainbow_stacking_statement. Alon, Defant and Kravitz, Question 3.3 (arXiv:2405.14795v1, main.tex l.410-412; pinned status open), as its affirmative answer: for odd n, every two proper edge-colourings of K_n into one palette 'I_r (GTBase proper_edge_colouring) admit vertex permutations s1, s2 with chi1(s1^-1 e) <> chi2(s2^-1 e) at every edge e (x264_rainbow_stacking, l.106). Open at the pin; yes for n = 3 and 5 (l.414), no for n = 2^k - 2 (Proposition 3.2)."
   },
   "axv_2405_15353_00": {
    "statement": "todo",
@@ -11869,11 +11875,14 @@
    "audit_page": "todo"
   },
   "std_guo_kang_zwaneveld_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x264-defective-single-conflict-rainbow",
+   "package": "chromatic-theory",
+   "note": "Authored in X264.v:guo_kang_zwaneveld_defective_strong_product_statement. Guo, Kang and Zwaneveld, Conjecture 2 of arXiv:2411.06941v1 (pinned status open): for every G, d and k, chi(G) <= k iff G boxtimes K_(d+1) (x264_strong_product) has a d-defective colouring by 'I_k (x264_defective_colourable), i.e. chi(G) = chi^d(G boxtimes K_(d+1)); direction -> always holds (g264_lift). FALSE at the pin: Norin and Steiner, arXiv:2504.01548v1, Theorem 1.2 (main.tex l.124-126), for every d >= 2 a G with chi^d(G boxtimes K_(d+1)) <= 2d^3 + 2d^2 + d + 3 < chi(G)."
   },
   "std_gy_rf_s_complementation_conjecture": {
    "statement": "done",
