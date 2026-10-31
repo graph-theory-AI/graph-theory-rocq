@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-two
+corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-four
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -49,7 +49,11 @@ Kang and Zwaneveld's conjecture, behind wave X264, is refuted in its own record 
 arXiv:2504.01548v1, Theorem 1.2). The studies row of Plummer and Zha's conjecture, behind wave X268,
 is solved in its own record (Chudnovsky and Seymour, arXiv:2201.11505v2, Theorem 1.1). By Marc's
 decision of 2026-10-31, Question 6.1 of arXiv:2209.09107 (arxiv:2209.09107#00), false as printed, is
-disproved: the triangle, kernel-checked in its registered formal resolution.
+disproved: the triangle, kernel-checked in its registered formal resolution. Two studies rows were
+refuted before the corpus pin: Gruslys, Leader and Tan's hypercube edge-decomposition conjecture,
+behind wave X269, in its own record (Bonamy, Morrison and Scott, arXiv:1710.07255v3, Theorem 1.7), and
+Steinberg's conjecture, behind wave X270 (Cohen-Addad, Hebdige, Kral', Li and Salgado,
+arXiv:1604.05108v2, Theorem 3).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -344,6 +348,19 @@ ERRATA = [
      "oriented, and that orientation has exactly two Eulerian subgraphs, the empty one and the whole cycle, so EE = EO "
      "and it is not Alon-Tarsi. Kernel-checked: Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved "
      "(meta/formal_resolutions.json, record 2209.09107__00, direction disprove)."),
+    # literature status corrections (Lancelot's lane; the studies rows behind waves X269 and X270, refuted before the
+    # corpus pin; their encoded statements are kept)
+    ("studies", "std_gruslys_leader_tan_conjecture_hypercube_edge_dec", "disproved",
+     "Literature: refuted in its own record by Bonamy, Morrison and Scott, arXiv:1710.07255v3 (14 June 2020), "
+     "Theorem 1.7 (torus-final.tex l.133-136): for every k >= 5 there is a graph H with Q_(k-1) <= H <= Q_k such that "
+     "for no n can the edges of Q_n be covered by edge-disjoint copies of H. The row is the conjecture of Gruslys, "
+     "Leader and Tan, Conjecture 1.6 there (l.127-129, k >= 1), and Conjecture 11 of Gruslys, arXiv:1611.02021v1 "
+     "(hypercube-tiling.tex l.546-550)."),
+    ("studies", "std_steinberg_s_conjecture", "disproved",
+     "Literature: refuted by Cohen-Addad, Hebdige, Kral', Li and Salgado, arXiv:1604.05108v2 (19 April 2016), "
+     "Theorem 3 (steinberg.tex l.140-143): there is a planar graph with no cycles of length four or five that is not "
+     "3-colorable. The row is Steinberg's conjecture of 1976 (l.26 there): every planar graph without 4- and "
+     "5-cycles is 3-colourable."),
 ]
 
 
@@ -952,7 +969,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 22 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 24 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
