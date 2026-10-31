@@ -11997,11 +11997,14 @@
    "note": "Authored in X3.v:gyarfas_sumner_two_forbidden_statement. Encodes the two-forbidden-graphs Gyarfas-Sumner statement using absolute bounded chromatic number, complete graphs, and forests."
   },
   "std_h_hadwiger_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x271-odd-hadwiger-h-hadwiger-hajos-five",
+   "package": "minor-theory",
+   "note": "Authored in X271.v:h_hadwiger_minor_free_colourable_statement. Seymour's H-Hadwiger conjecture (Fischer and Steiner, arXiv:2304.04246v1, Conjecture 2; pinned open), encoded as stated for every H: a graph with no H minor has chi <= v(H) - 1. Over all H it is equivalent to Hadwiger's conjecture (bm:bm-041); an H without vertices is a minor of every graph."
   },
   "std_h_rsch_s_arborescence_balancing_question": {
    "statement": "todo",
@@ -12025,11 +12028,14 @@
    "audit_page": "todo"
   },
   "std_haj_s_conjecture_k_5": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x271-odd-hadwiger-h-hadwiger-hajos-five",
+   "package": "minor-theory",
+   "note": "Authored in X271.v:hajos_k5_subdivision_statement. Hajos' conjecture at five (Girao et al., arXiv:2605.10112v1, main.tex l.183-185; pinned open), encoded as stated: every graph with chi = 5 contains a subdivision of K_5, not necessarily induced; the chi >= 5 form is equivalent through a 5-chromatic subgraph. Open at the pin (t = 5, 6 open, false for t >= 7)."
   },
   "std_hajebi_s_conjecture": {
    "statement": "todo",
@@ -12765,18 +12771,24 @@
    "audit_page": "todo"
   },
   "std_odd_hadwiger_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x271-odd-hadwiger-h-hadwiger-hajos-five",
+   "package": "minor-theory",
+   "note": "Authored in X271.v:odd_hadwiger_chromatic_odd_minor_statement. The odd Hadwiger conjecture of Gerards and Seymour as Conjecture 1.2 of Kuhn, Sauermann, Steiner and Wigderson (arXiv:2512.20392v1; pinned open), encoded as stated: chi(G) >= t gives an odd K_t minor, in the sources' tree model (branch sets connected through bichromatic edges, a monochromatic edge per pair). FALSE at the pin: Theorem 1.3 of the same paper, for every large t."
   },
   "std_odd_hadwiger_conjecture_411": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x271-odd-hadwiger-h-hadwiger-hajos-five",
+   "package": "minor-theory",
+   "note": "Authored in X271.v:odd_hadwiger_odd_minor_free_colourable_statement. The odd Hadwiger conjecture as Conjecture 1.2 of Steiner (arXiv:2203.02766v1; pinned open), encoded as stated: for t >= 2 a graph with no odd K_t minor (the sources' tree model) has chi <= t - 1. FALSE at the pin: Kuhn, Sauermann, Steiner and Wigderson, arXiv:2512.20392v1, Theorem 1.3. One conjecture with studies:std_odd_hadwiger_conjecture."
   },
   "std_ordered_binary_matrix_removal_lemma_alon_fischer": {
    "statement": "todo",

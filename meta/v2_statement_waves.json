@@ -12237,6 +12237,145 @@
       },
       "faithfulness_verified_by": "Marcol (X272 wave verification, 2026-10-31)",
       "faithfulness_result": "Readback 2026-10-31 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x272-20261031 = 3da2f16e2103d54fdbf5374a92f7794a156f6858 (seven commits on work/coordinator d8edee48), after my design read ((294), FAITHFUL 3/3, no blocking item, N1 doc only; packet x272-design-read-by-marcol 254d2cd4). At 3da2f16e grounding_X272.v is the design packet's file byte for byte and X272.v differs from it only in the x272_col2_le comment, my N1 taken (the empty graph: the helper holds for every k, 0 included; no instance with k >= 1 distinguishes it from 1 + max). arxiv:2204.12683#00, as stated, open: every subcubic, triangle_free G with no subgraph copy (has_subgraph, not induced, not Theorem 1.4's components) of x272_f14a (GP(7,2)), x272_f14b, x272_f11 or x272_f22 has x130_frac_chi_le G 19 7 (an (a:b)-fold colouring with 0 < b and 7 a <= 19 b, the source's second condition); the four obstructions equal my independent TikZ transcription edge for edge (21, 21, 16 and 33 edges; the F22 stubs w4-x0, z4-z, x4-w), with n / alpha = 14/5, 14/5, 11/4, 11/4 as the paper states. studies:std_kierstead_et_al_question_on_the_2_coloring_numbe, as its affirmative answer, TRUE at the pin (1506.01412v3 Theorem 1; pinned open, the status correction a separate item): every wagner_planar G has x272_col2_le G 8, an injective rank with |L(v)| + 1 <= 8 at every v, L(v) the earlier vertices adjacent to v or sharing a neighbour later than v, exactly 2-reachability with the sources' +1. studies:std_thomassen_s_conjecture_exponentially_many_3_colo, as stated, FALSE at the pin (2108.12669v1 Theorem 1, after Thomassen's 2021 disproof; the status correction a separate item): some p, q >= 1 before all graphs with 2^(p #|G|) <= N^q for every wagner_planar, triangle_free G, N its labelled proper 3-colourings (G -> 'I_3); a rational beta = p / q is equivalent to a real one, and the unlabelled count would fail at K_1. Five local helpers, paper_specific: the four obstructions over fg_mk_sgraph and x272_col2_le; their stems in no file and no inventory name at d8edee48, their five body shapes with 0 hits; X139's x139_scol_at_most and X198's x198_col_star_le are different notions. Grounding: hyp_inhabited at K_2 (19/7 row; a (2:1)-colouring), K_4 (planar, col_2 <= 4) and K_1 (3 colourings); not_trivially_true drops one hypothesis each: triangle-freeness (19/7 row, false at K_4: subcubic, free of the four by size, chi_f >= 4), planarity (false at K_9: col_2 = 9) and triangle-freeness (Thomassen, false at K_4: planar, no proper 3-colouring); helper_sanity, the five groups in every row (orders, degrees and triangle-freeness by vm_compute bridged to the sgraph; col_2(K_9) <= 9 and not <= 8); every claim names its statement or helper (11/11). Independent type check: my MCP built the design's X272.v and grounding_X272.v with X130's two definitions copied verbatim, 28 proof blocks, no holes. Lint: three statements clean; row 3's existential precedes its graph quantifier, as printed. Consumers: bfold_colouring.spec gains three entries (x130_frac_chi_le in X272.v and grounding_X272.v; bfold_colouring in the grounding), 26 -> 29, exactly the frozen names the files use; the seventh commit 3da2f16e changes only meta/migration_reports/bfold_colouring.md, byte-identical to the dev run's written copy. Metadata: source_hash 3/3 recomputed from b72c5857, equal; waves.X272 = wave-x272.jq applied to the base, the only waves change, its verifier fields empty before this; spec = spec-bfold-x272.jq applied; legs notes 559 / 547 / 548 = \"Authored in X272.v:<name>. \" + the wave note, no other legs entry changed; README 571 / 11 / 40 / 1,051 -> 574 / 11 / 40 / 1,048; LANDED gains X272 chromatic-theory after X270. Dev run 1 (x272-dev-by-arthur, 0d118294, 42 listed = present, -c OK, on 9b97f27e): PASS-WITH-EXPECTED, 29 steps, 25 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12/14 (Print Assumptions clean on 3/3 statements + 21 certificates, 30 exact-type probes), W2 897/897, W3 3 probed 0 flagged, W4 0 active (44 allowlisted), W5, A11 and A12 rc 0."
+    },
+    "X271": {
+      "phase": "X271",
+      "repo": "minor-theory",
+      "defines_file": "X271.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X271 (A3 verifier Arthur; routing Lancelot (299), (307); selection x271-selection-by-marcol, design x271-design-by-marcol r1), branch math/marcol-x271-20261031",
+      "source_verified_by": "Arthur (X271 wave verifier, A3: pinned records re-read at graph-conjectures b72c5857, statement_text alone, the studies rows' builder rule: data/arxiv_extracted/2512.20392.json record 1 (role studies, Conjecture 1.2, the odd Hadwiger conjecture) = 282033b91d93967ba47bb1fbd00c14a66cd04312be2680ff2ec012edd25c201e, 2203.02766.json record 1 (role studies, Odd Hadwiger's Conjecture, Conjecture 1.2) = d0da447a58105f3f50b67d500a4f5147238e18db046c828d9e2e0877244e08d7, 2304.04246.json record 1 (role studies, Conjecture 2, the H-Hadwiger conjecture) = cdb9b63a2d922873636b8da6311cdcaa592fff7e0e849a6a28018d30d193caa6, 2605.10112.json record 0 (role studies, Hajos' conjecture at k = 5) = 6b172e8122be386e9f5275f2011cfa880cfa481ad1fc71249a64d053bedf9574; all four equal to the manifest rows and to the wave's source_hash values, the upstream statements equal to the manifest's statement_text; pinned statuses open (all four); the Mac's deposit coordination/sources/x271-source-mac-20261031 (SHA256SUMS 18401156, -c OK) read: Kuhn, Sauermann, Steiner and Wigderson 2512.20392v1 main.tex l.181-187 (the odd-minor tree model: vertex-disjoint trees, a proper 2-colouring of each, a monochromatic edge of G per pair), l.188-191 (Conjecture 1.2) and l.200-202 (Theorem 1.3: for every sufficiently large t a graph with chi >= t and no odd K_t minor); Steiner 2203.02766v1 main.tex l.124-126 (odd K_t-expansions as subgraphs) and l.139-141 (the conjecture, t >= 2); 2109.02302v1 l.79-86 and 2312.17130v2 l.91-97 (the same model); Fischer and Steiner 2304.04246v1 text l.69-74 (Conjecture 2, for every H); Girao et al. 2605.10112v1 main.tex l.183-185 (Hajos' conjecture, chi >= t, a subdivision as a subgraph, open for t in {5, 6}))",
+      "source_verified_at": "2026-10-31",
+      "commit": "x271-odd-hadwiger-h-hadwiger-hajos-five",
+      "helper_ownership": {
+        "x271_odd_minor_tree_model": {
+          "classification": "paper_specific",
+          "reason": "G contains H as an odd minor in the sources' tree model (Kuhn, Sauermann, Steiner and Wigderson, arXiv:2512.20392v1, main.tex l.182-187; Steiner, arXiv:2203.02766v1, main.tex l.124-126; arXiv:2109.02302v1, main.tex l.79-86): disjoint nonempty branch sets, each connected through its bichromatic edges under one 2-colouring (it spans a properly coloured tree), and a monochromatic edge of G between the branch sets of every edge of H; other edges inside a branch set are unconstrained. Chromatic X218's x218_odd_minor (blocked row arxiv:2308.15721#00) also asks every edge inside a branch set to be bichromatic, a model whose converse is not established, so it is a different body under a different name; Minor cannot import Chromatic. K_3 has an odd K_3 minor, K_1 no odd K_2 minor (g271_om_helper_sanity)."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X271 wave verification, 2026-10-31)",
+      "faithfulness_result": "Readback 2026-10-31 (verifier Arthur): 4/4 PASS against the pinned texts and the sources, at math/marcol-x271-20261031 = 794ff1aedac5b5d6ac70f7776324fa7e6b907f52 (five commits on work/coordinator d8edee48), after my design read ((368), FAITHFUL 4/4, the model decision right, optional N1 / N2; packet x271-design-read-by-arthur dedad7bf) of x271-design-by-marcol r1 (79df6f2f). grounding_X271.v at 794ff1ae is byte-identical to the r1 packet; X271.v differs from it only by N1 (row 2's Notes: the expansion's one additional edge per pair, in a subgraph, is the helper's monochromatic edge) and N2 (Theorem 1.3 at l.200-202), comments only. The helper x271_odd_minor_tree_model is the sources' tree model both ways: disjoint nonempty branch sets, one 2-colouring, each branch set connected through its bichromatic G-edges (iff it spans a properly coloured tree), a monochromatic G-edge for every edge of H; edges of G inside a branch set unconstrained, as printed; X218's stricter x218_odd_minor is not reused (name odd_minor_tree_model, body shape 2e1bb472, no inventory group). studies:std_odd_hadwiger_conjecture, as stated, FALSE at the pin (2512.20392v1 Theorem 1.3; t = 5 only announced): forall t G, t <= chi(G) -> an odd K_t minor; its t <= 1 instances hold. studies:std_odd_hadwiger_conjecture_411, as stated, FALSE at the pin: forall t G, 2 <= t -> no odd K_t minor -> chi(G) <= t - 1 (exact for t >= 2); the same conjecture. studies:std_h_hadwiger_conjecture, as stated, open: forall H G, ~ minor G H -> chi(G) <= v(H) - 1, upstream minor (GTBase's notation), for every H; the empty-H instance is vacuous (every G has the empty minor). studies:std_haj_s_conjecture_k_5, as stated, open: chi(G) = 5 -> a subdivision of K_5 in G (has_subdivision, a subgraph), chi = 5 and chi >= 5 equivalent. Grounding: hyp_inhabited at K_3 (row 1), t = 2 at K_1 (row 2), K_1 with no K_2 minor (row 3), K_5 (row 4); not_trivially_true drops one hypothesis each: t <= chi(G) (K_1 has no odd K_2 minor), no odd K_t minor (K_2), ~ minor G H (G = H = K_2), chi(G) = 5 (K_1); helper_sanity in every row (K_3 has an odd K_3 minor, K_1 no odd K_2 minor). My MCP (Rocq 9.2) builds the design's combined file (the containment.v stand-in verbatim): 20 blocks, Print Assumptions closed 13 / 13. Metadata: source_hash 4 / 4 recomputed from b72c5857, equal; waves.X271 = the r1 packet's x271-wave.json and the only waves change, its verifier fields empty before this; legs notes 440 / 412 / 355 / 360 = \"Authored in X271.v:<name>. \" + the wave note, no other legs entry changed; README 571 / 11 / 40 / 1,051 -> 575 / 11 / 40 / 1,047; LANDED gains X271 minor-theory; no allowlist or migration-spec change. Dev run 1 (x271-dev-by-marcol, aeac5d8f, -c OK): PASS-WITH-EXPECTED, 29 steps, 25 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12 / 14 (package compiles; Print Assumptions clean on 4 / 4 statements + 12 certificates; 40 exact-type probes), W2 898 / 898, W3 4 probed 0 flagged, W4 0 active (44 allowlisted), W5, A11 (no group) and A12 (101 / 101 reports OK) rc 0, G6 changed no report.",
+      "rows": {
+        "std_odd_hadwiger_conjecture": {
+          "formal_name": "odd_hadwiger_chromatic_odd_minor_statement",
+          "source_hash": "282033b91d93967ba47bb1fbd00c14a66cd04312be2680ff2ec012edd25c201e",
+          "note": "The odd Hadwiger conjecture of Gerards and Seymour as Conjecture 1.2 of Kuhn, Sauermann, Steiner and Wigderson (arXiv:2512.20392v1; pinned open), encoded as stated: chi(G) >= t gives an odd K_t minor, in the sources' tree model (branch sets connected through bichromatic edges, a monochromatic edge per pair). FALSE at the pin: Theorem 1.3 of the same paper, for every large t.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g271_ohc_hyp_inhabited",
+              "claim": "g271_ohc_hyp_claim",
+              "references": [
+                "odd_hadwiger_chromatic_odd_minor_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g271_ohc_not_trivially_true",
+              "claim": "g271_ohc_ntt_claim",
+              "references": [
+                "odd_hadwiger_chromatic_odd_minor_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g271_om_helper_sanity",
+                "claim": "g271_om_helper_claim",
+                "references": [
+                  "x271_odd_minor_tree_model"
+                ]
+              }
+            ]
+          }
+        },
+        "std_odd_hadwiger_conjecture_411": {
+          "formal_name": "odd_hadwiger_odd_minor_free_colourable_statement",
+          "source_hash": "d0da447a58105f3f50b67d500a4f5147238e18db046c828d9e2e0877244e08d7",
+          "note": "The odd Hadwiger conjecture as Conjecture 1.2 of Steiner (arXiv:2203.02766v1; pinned open), encoded as stated: for t >= 2 a graph with no odd K_t minor (the sources' tree model) has chi <= t - 1. FALSE at the pin: Kuhn, Sauermann, Steiner and Wigderson, arXiv:2512.20392v1, Theorem 1.3. One conjecture with studies:std_odd_hadwiger_conjecture.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g271_ohf_hyp_inhabited",
+              "claim": "g271_ohf_hyp_claim",
+              "references": [
+                "odd_hadwiger_odd_minor_free_colourable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g271_ohf_not_trivially_true",
+              "claim": "g271_ohf_ntt_claim",
+              "references": [
+                "odd_hadwiger_odd_minor_free_colourable_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g271_om_helper_sanity",
+                "claim": "g271_om_helper_claim",
+                "references": [
+                  "x271_odd_minor_tree_model"
+                ]
+              }
+            ]
+          }
+        },
+        "std_h_hadwiger_conjecture": {
+          "formal_name": "h_hadwiger_minor_free_colourable_statement",
+          "source_hash": "cdb9b63a2d922873636b8da6311cdcaa592fff7e0e849a6a28018d30d193caa6",
+          "note": "Seymour's H-Hadwiger conjecture (Fischer and Steiner, arXiv:2304.04246v1, Conjecture 2; pinned open), encoded as stated for every H: a graph with no H minor has chi <= v(H) - 1. Over all H it is equivalent to Hadwiger's conjecture (bm:bm-041); an H without vertices is a minor of every graph.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g271_hh_hyp_inhabited",
+              "claim": "g271_hh_hyp_claim",
+              "references": [
+                "h_hadwiger_minor_free_colourable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g271_hh_not_trivially_true",
+              "claim": "g271_hh_ntt_claim",
+              "references": [
+                "h_hadwiger_minor_free_colourable_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g271_om_helper_sanity",
+                "claim": "g271_om_helper_claim",
+                "references": [
+                  "x271_odd_minor_tree_model"
+                ]
+              }
+            ]
+          }
+        },
+        "std_haj_s_conjecture_k_5": {
+          "formal_name": "hajos_k5_subdivision_statement",
+          "source_hash": "6b172e8122be386e9f5275f2011cfa880cfa481ad1fc71249a64d053bedf9574",
+          "note": "Hajos' conjecture at five (Girao et al., arXiv:2605.10112v1, main.tex l.183-185; pinned open), encoded as stated: every graph with chi = 5 contains a subdivision of K_5, not necessarily induced; the chi >= 5 form is equivalent through a 5-chromatic subgraph. Open at the pin (t = 5, 6 open, false for t >= 7).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g271_hj_hyp_inhabited",
+              "claim": "g271_hj_hyp_claim",
+              "references": [
+                "hajos_k5_subdivision_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g271_hj_not_trivially_true",
+              "claim": "g271_hj_ntt_claim",
+              "references": [
+                "hajos_k5_subdivision_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g271_om_helper_sanity",
+                "claim": "g271_om_helper_claim",
+                "references": [
+                  "x271_odd_minor_tree_model"
+                ]
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
