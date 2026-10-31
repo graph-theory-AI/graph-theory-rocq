@@ -319,6 +319,21 @@
       "path": "chromatic-theory/theories/conjectures/grounding_X270.v",
       "name": "bfold_colouring",
       "note": "Grounding of X270: g270_bfold_K_le (an (a:b)-fold colouring of K_n has n b <= a, grounding_X262's argument) is stated with the canonical GTBase bfold_colouring, a direct use of the canonical (as X236 / X262), no copy."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/X272.v",
+      "name": "x130_frac_chi_le",
+      "note": "Wave X272 (Arthur, 2026-10-31): Conjecture 1.6 of arXiv:2204.12683 (arxiv:2204.12683#00) reads \"fractionally 19/7-colorable\" as x130_frac_chi_le G 19 7, as l.185-196 there define it; a direct use of the unchanged X130 name, no copy (as X270's Heckman-Thomas row)."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X272.v",
+      "name": "x130_frac_chi_le",
+      "note": "Grounding of X272: g272_frac_K2 (chi_f(K_2) <= 19/7), g272_frac_chi_K (chi_f(K_n) >= n) and the arxiv:2204.12683#00 certificates use the unchanged X130 name."
+    },
+    {
+      "path": "chromatic-theory/theories/conjectures/grounding_X272.v",
+      "name": "bfold_colouring",
+      "note": "Grounding of X272: g272_bfold_K_le (an (a:b)-fold colouring of K_n has n b <= a, grounding_X262's argument) is stated with the canonical GTBase bfold_colouring, a direct use of the canonical (as X236 / X262 / X270), no copy."
     }
   ],
   "distinct_variants": [
