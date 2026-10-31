@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-one
+corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-two
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -47,7 +47,9 @@ rows behind wave X262 were settled before the corpus pin: Harris' degeneracy con
 is answered negatively in its own record (arXiv:1812.07327v2, Corollary 3). The studies row of Guo,
 Kang and Zwaneveld's conjecture, behind wave X264, is refuted in its own record (Norin and Steiner,
 arXiv:2504.01548v1, Theorem 1.2). The studies row of Plummer and Zha's conjecture, behind wave X268,
-is solved in its own record (Chudnovsky and Seymour, arXiv:2201.11505v2, Theorem 1.1).
+is solved in its own record (Chudnovsky and Seymour, arXiv:2201.11505v2, Theorem 1.1). By Marc's
+decision of 2026-10-31, Question 6.1 of arXiv:2209.09107 (arxiv:2209.09107#00), false as printed, is
+disproved: the triangle, kernel-checked in its registered formal resolution.
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -333,6 +335,15 @@ ERRATA = [
      "is three-colourable, in particular every 3-connected, internally 4-connected one (l.76-77). The row is Plummer and "
      "Zha's conjecture, Electron. J. Combin. 21(1) (2014) #P1.34, Question 3.4 (p. 9): the graphs of their class G (p. 8: "
      "3-connected, internally 4-connected, of girth 5, every odd cycle longer than 5 with a chord) have chromatic number 3."),
+    # literature status correction (Lancelot's lane; Marc's decision of 2026-10-31: false as printed, disproved; the
+    # registered kernel disproof is unchanged)
+    ("2209.09107", "Question 6.1", "disproved",
+     "Literature: false as printed. Bradshaw, Chen, Ma, Mohar and Wu, arXiv:2209.09107v2, Question 6.1 (main.tex "
+     "l.1004-1009, PDF p. 14), asks for out-degree at least (deg_G(v) - 1)/2 with no floor, and l.1013 sums the same "
+     "bound. The triangle refutes it: every vertex needs out-degree at least 1, which forces all three edges, cyclically "
+     "oriented, and that orientation has exactly two Eulerian subgraphs, the empty one and the whole cycle, so EE = EO "
+     "and it is not Alon-Tarsi. Kernel-checked: Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved "
+     "(meta/formal_resolutions.json, record 2209.09107__00, direction disprove)."),
 ]
 
 
@@ -941,7 +952,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 21 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 22 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
