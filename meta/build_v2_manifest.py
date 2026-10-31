@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty
+corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-one
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -46,7 +46,8 @@ rows behind wave X262 were settled before the corpus pin: Harris' degeneracy con
 (Martinsson, arXiv:2501.18238v1, Theorem 1.2), and the Blumenthal et al. question on the Hall ratio
 is answered negatively in its own record (arXiv:1812.07327v2, Corollary 3). The studies row of Guo,
 Kang and Zwaneveld's conjecture, behind wave X264, is refuted in its own record (Norin and Steiner,
-arXiv:2504.01548v1, Theorem 1.2).
+arXiv:2504.01548v1, Theorem 1.2). The studies row of Plummer and Zha's conjecture, behind wave X268,
+is solved in its own record (Chudnovsky and Seymour, arXiv:2201.11505v2, Theorem 1.1).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -325,6 +326,13 @@ ERRATA = [
      "(main.tex l.124-126): for every d >= 2 there is a graph G with chi^d(G boxtimes K_(d+1)) <= k = 2d^3 + 2d^2 + d + 3 "
      "but chi(G) > k (k = 29 at d = 2). The row is Guo, Kang and Zwaneveld's Conjecture 2 (arXiv:2411.06941v1, "
      "improper-arXiv.tex l.128-129): chi(G) = chi^d(G boxtimes K_(d+1)) for every graph G and every d >= 0."),
+    # literature status correction (Lancelot's lane; the studies row behind wave X268, solved before the corpus pin)
+    ("studies", "std_plummer_zha_conjecture", "solved",
+     "Literature: proved in its own record by Chudnovsky and Seymour, arXiv:2201.11505v2 (31 January 2022), Theorem 1.1 "
+     "(source.tex l.80-82): every pentagraph (every cycle of length at least five, every induced odd cycle of length five) "
+     "is three-colourable, in particular every 3-connected, internally 4-connected one (l.76-77). The row is Plummer and "
+     "Zha's conjecture, Electron. J. Combin. 21(1) (2014) #P1.34, Question 3.4 (p. 9): the graphs of their class G (p. 8: "
+     "3-connected, internally 4-connected, of girth 5, every odd cycle longer than 5 with a chord) have chromatic number 3."),
 ]
 
 
@@ -933,7 +941,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 20 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 21 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
