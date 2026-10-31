@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2245,
-      "cross_file_files": 1114,
+      "cross_file_declarations": 2250,
+      "cross_file_files": 1116,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -19901,6 +19901,7 @@
             "atlas/theories/conjectures/implications_A1.v:<line 280>",
             "hypergraph-theory/theories/conjectures/X217.v:hypergraph_cop_number_sqrt_n_over_k_statement",
             "hypergraph-theory/theories/conjectures/X225.v:kpartite_hypergraph_turan_exponent_dmax_statement",
+            "hypergraph-theory/theories/conjectures/X267.v:six_three_hypergraph_statement",
             "hypergraph-theory/theories/conjectures/grounding_X217.v:x217_K2_uniform",
             "hypergraph-theory/theories/conjectures/grounding_X217.v:x217_edgeless_uniform",
             "hypergraph-theory/theories/conjectures/grounding_X217.v:x217_hypotheses_satisfiable",
@@ -19909,6 +19910,10 @@
             "hypergraph-theory/theories/conjectures/grounding_X225.v:x225_latin_hypergraph_uniform",
             "hypergraph-theory/theories/conjectures/grounding_X225.v:x225_pattern2_uniform",
             "hypergraph-theory/theories/conjectures/grounding_X225.v:x225_turan_hypotheses_satisfiable",
+            "hypergraph-theory/theories/conjectures/grounding_X267.v:g267_E_uniform",
+            "hypergraph-theory/theories/conjectures/grounding_X267.v:g267_complete3_uniform",
+            "hypergraph-theory/theories/conjectures/grounding_X267.v:g267_st_hyp_claim",
+            "hypergraph-theory/theories/conjectures/grounding_X267.v:g267_st_no63",
             "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v:k_uniform_equiv_hg_uniform",
             "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v:x104_uniform_equiv_hg_uniform",
             "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v:x108_uniform_equiv_hg_uniform",
@@ -19923,8 +19928,10 @@
             "atlas/theories/conjectures/implications_A1.v",
             "hypergraph-theory/theories/conjectures/X217.v",
             "hypergraph-theory/theories/conjectures/X225.v",
+            "hypergraph-theory/theories/conjectures/X267.v",
             "hypergraph-theory/theories/conjectures/grounding_X217.v",
             "hypergraph-theory/theories/conjectures/grounding_X225.v",
+            "hypergraph-theory/theories/conjectures/grounding_X267.v",
             "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
             "hypergraph-theory/theories/migration/incidence_degree.v",
             "hypergraph-theory/theories/migration/partite_uniform.v"
@@ -19932,6 +19939,7 @@
           "statements": [
             "hypergraph-theory/theories/conjectures/X217.v:hypergraph_cop_number_sqrt_n_over_k_statement",
             "hypergraph-theory/theories/conjectures/X225.v:kpartite_hypergraph_turan_exponent_dmax_statement",
+            "hypergraph-theory/theories/conjectures/X267.v:six_three_hypergraph_statement",
             "hypergraph-theory/theories/migration/incidence_degree.v:kpartite_hypergraph_turan_exponent_dmax_statement",
             "hypergraph-theory/theories/migration/partite_uniform.v:kpartite_hypergraph_turan_exponent_dmax_statement"
           ],
@@ -19955,8 +19963,10 @@
           "atlas/theories/conjectures/implications_A1.v": "unknown",
           "hypergraph-theory/theories/conjectures/X217.v": "unknown",
           "hypergraph-theory/theories/conjectures/X225.v": "unknown",
+          "hypergraph-theory/theories/conjectures/X267.v": "unknown",
           "hypergraph-theory/theories/conjectures/grounding_X217.v": "unknown",
           "hypergraph-theory/theories/conjectures/grounding_X225.v": "unknown",
+          "hypergraph-theory/theories/conjectures/grounding_X267.v": "unknown",
           "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v": "unknown",
           "hypergraph-theory/theories/migration/incidence_degree.v": "unknown",
           "hypergraph-theory/theories/migration/partite_uniform.v": "unknown"
@@ -24971,13 +24981,13 @@
     ]
   },
   "counts": {
-    "files": 358,
-    "helpers": 2746,
+    "files": 360,
+    "helpers": 2748,
     "repeated_body_shapes": 150,
-    "repeated_normalized_names": 219,
+    "repeated_normalized_names": 220,
     "repeated_signature_shapes": 336,
-    "statements_excluded": 836,
-    "x_wave_helpers": 1585
+    "statements_excluded": 842,
+    "x_wave_helpers": 1587
   },
   "groups": {
     "body_shape_hash": {
@@ -27152,6 +27162,10 @@
         "GTMisc.conjectures.X169.x169_tree_decomposition",
         "Minor.conjectures.X27.x27_tree_decomposition"
       ],
+      "treewidth_at_most": [
+        "Chromatic.conjectures.X266.x266_treewidth_at_most",
+        "Minor.conjectures.X27.x27_treewidth_at_most"
+      ],
       "tri_edges": [
         "Extremal.conjectures.XE2.xe2_tri_edges",
         "Packing.conjectures.U9.tri_edges",
@@ -28243,6 +28257,7 @@
       ],
       "7c703495a77277e658e78f355effae4fc92f81e73cbbba5108b28840574ff3ad": [
         "Chromatic.conjectures.X130.x130_frac_chi_le",
+        "Chromatic.conjectures.X266.x266_hall_ratio_le",
         "Extremal.conjectures.D2chr.circ_mixing",
         "Extremal.conjectures.D2chr.mixing_pair"
       ],
@@ -29113,6 +29128,7 @@
         "Packing.conjectures.X5.x5_edge_disjoint_triangles"
       ],
       "e9307f105f9e88cab7b8bacb0dbbe231e52f3ee2ccd1bc1037d00d4265c394eb": [
+        "Chromatic.conjectures.X266.x266_treewidth_at_most",
         "Extremal.conjectures.D2tur.Kt_minor_free",
         "Extremal.conjectures.X4.x4_K_free",
         "Extremal.conjectures.X4.x4_tau1",
@@ -34702,6 +34718,45 @@
       "qualified_name": "Chromatic.conjectures.X264.x264_rainbow_stacking",
       "signature": "(n r : nat) (chi1 chi2 : {set 'K_n} -> 'I_r) (s1 s2 : {perm 'I_n}) : Prop",
       "signature_shape_hash": "2d2f9390a330e3089d83f9068e3772767d14f7f77eb66e21b109e47b9a0e1242"
+    },
+    {
+      "body_hash": "e935f298c0465660c0dbeb534d92f751560988b3057ddeff1d22268f3947c41b",
+      "body_shape_hash": "e935f298c0465660c0dbeb534d92f751560988b3057ddeff1d22268f3947c41b",
+      "declaration_hash": "a43298540f11837f254a02f1c528a69fb11f418f6e786e91baba48636c9fdb39",
+      "direct_consumers": [
+        "Chromatic.conjectures.X266.bounded_treewidth_path_product_clustering_statement",
+        "Chromatic.conjectures.X266.bounded_treewidth_products_three_colour_clustering_statement"
+      ],
+      "kind": "Definition",
+      "line": 26,
+      "local_dependencies": [],
+      "name": "x266_treewidth_at_most",
+      "normalized_name": "treewidth_at_most",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X266.v",
+      "phase": "X266",
+      "qualified_name": "Chromatic.conjectures.X266.x266_treewidth_at_most",
+      "signature": "(G : sgraph) (t : nat) : Prop",
+      "signature_shape_hash": "e9307f105f9e88cab7b8bacb0dbbe231e52f3ee2ccd1bc1037d00d4265c394eb"
+    },
+    {
+      "body_hash": "82aafa8a71329c5eb0f67c6fc209903e5290a21170ff8b927f6ee12263331380",
+      "body_shape_hash": "82aafa8a71329c5eb0f67c6fc209903e5290a21170ff8b927f6ee12263331380",
+      "declaration_hash": "736eac745ae913ff1b62e6982fe99f8fde457f14bb4873ef0fb4e9aef10012f5",
+      "direct_consumers": [
+        "Chromatic.conjectures.X266.hall_ratio_degree_weighted_fractional_chromatic_statement"
+      ],
+      "kind": "Definition",
+      "line": 36,
+      "local_dependencies": [],
+      "name": "x266_hall_ratio_le",
+      "normalized_name": "hall_ratio_le",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X266.v",
+      "phase": "X266",
+      "qualified_name": "Chromatic.conjectures.X266.x266_hall_ratio_le",
+      "signature": "(G : sgraph) (p q : nat) : Prop",
+      "signature_shape_hash": "7c703495a77277e658e78f355effae4fc92f81e73cbbba5108b28840574ff3ad"
     },
     {
       "body_hash": "a252d3382e9e2e9f0450759c627d453616f368776f8069089a1ef10686104455",
