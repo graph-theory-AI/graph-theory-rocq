@@ -24981,13 +24981,13 @@
     ]
   },
   "counts": {
-    "files": 361,
-    "helpers": 2752,
+    "files": 362,
+    "helpers": 2754,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 220,
     "repeated_signature_shapes": 336,
-    "statements_excluded": 845,
-    "x_wave_helpers": 1591
+    "statements_excluded": 848,
+    "x_wave_helpers": 1593
   },
   "groups": {
     "body_shape_hash": {
@@ -29158,7 +29158,8 @@
         "Minor.conjectures.X200.x200_H_model_erdos_posa_oklogk",
         "Minor.conjectures.X220.x220_prism",
         "Minor.conjectures.X220.x220_theta",
-        "Minor.conjectures.X228.x228_unavoidable"
+        "Minor.conjectures.X228.x228_unavoidable",
+        "Packing.conjectures.X269.x269_multipartite_complete"
       ],
       "ead8429928c234b4f41804c2459c919510d5ef3ab798c9557230908d79ec6780": [
         "Digraph.conjectures.generalised_wheel.realises_gw",
@@ -81646,6 +81647,44 @@
       "qualified_name": "Packing.conjectures.X26.x26_separates_xy",
       "signature": "(G : sgraph) (X Y Z : {set G}) : Prop",
       "signature_shape_hash": "47b9fba58c9281b1d26c2704fd393c9ced9f9683950e1f15d464d0d4139af679"
+    },
+    {
+      "body_hash": "441fba39aeab6af63b7cd890cce75a2f47f5b7c0d58174acec8e35c1b7b3a02a",
+      "body_shape_hash": "441fba39aeab6af63b7cd890cce75a2f47f5b7c0d58174acec8e35c1b7b3a02a",
+      "declaration_hash": "08b4db19971bc7ec98c4a9912834dd16f57803c75b5ca861469d650441c8b597",
+      "direct_consumers": [
+        "Packing.conjectures.X269.alpha_ir_multipartite_products_statement"
+      ],
+      "kind": "Definition",
+      "line": 9,
+      "local_dependencies": [],
+      "name": "x269_multipartite_complete",
+      "normalized_name": "multipartite_complete",
+      "package": "packing-theory",
+      "path": "packing-theory/theories/conjectures/X269.v",
+      "phase": "X269",
+      "qualified_name": "Packing.conjectures.X269.x269_multipartite_complete",
+      "signature": "(H : sgraph) : Prop",
+      "signature_shape_hash": "ea123d14a47d3c8fecd3f855c427512e33b52cbaad7f5d5d8ade3431e24f4c1f"
+    },
+    {
+      "body_hash": "8342e762c0e03a8cc575baf37550be9542a7ddde6572530ad5f016a8fd14b46a",
+      "body_shape_hash": "bc503bafbbac5dde1327c28a2c5a5bc5c61ceae7140500a69e2a436ce17a8582",
+      "declaration_hash": "25f1b8cc1f618ea454b04a441506540b7f615d23c4bc4b502ede3b66d28eed4f",
+      "direct_consumers": [
+        "Packing.conjectures.X269.alpha_ir_multipartite_products_statement"
+      ],
+      "kind": "Fixpoint",
+      "line": 17,
+      "local_dependencies": [],
+      "name": "x269_tensor_prod",
+      "normalized_name": "tensor_prod",
+      "package": "packing-theory",
+      "path": "packing-theory/theories/conjectures/X269.v",
+      "phase": "X269",
+      "qualified_name": "Packing.conjectures.X269.x269_tensor_prod",
+      "signature": "(n : nat) : ('I_n.+1 -> sgraph) -> sgraph",
+      "signature_shape_hash": "39c577718dc49d86d1df6356aa7ee2f544dd284a1ca96f09de98cae2ad233e38"
     },
     {
       "body_hash": "e4408f2db71d93537093e7dd2dd69aaf55568e65fbe5e1ab1bf5f48158bdd073",
