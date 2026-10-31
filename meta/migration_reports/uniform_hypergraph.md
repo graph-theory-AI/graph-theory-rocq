@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py uniform_hypergraph --details /t
 
 - Canonical: `GTBase.hypergraph_uniformity.uniform_family`.
 - Baseline: `3be65eed7084abfae36dee74f7117b598325bc4c`.
-- Scope: 11 helpers, 20 statements, 44 frozen objects, 174 recorded references.
-- Source checks: 454/454 pass; consistent.
+- Scope: 11 helpers, 20 statements, 44 frozen objects, 179 recorded references.
+- Source checks: 459/459 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
