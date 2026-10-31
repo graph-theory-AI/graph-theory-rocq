@@ -11550,6 +11550,86 @@
       },
       "faithfulness_verified_by": "Marcol (X266 wave verification, 2026-10-30)",
       "faithfulness_result": "Readback 2026-10-30 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x266-20261030 = 37b92b0d724a3abcfdc454d309c72d84466ffa28 (ten commits on work/coordinator fdf15b28), after my design read ((264), FAITHFUL 3/3 with B1: a helper hid Problem 5's existential from the exists-after-graph-forall lint, and B2: Problem 5's not_trivially_true was a quantifier swap, not a dropped hypothesis; packet x266-design-read-by-marcol be05724f) and my re-read of the r2 delta ((265), FAITHFUL 3/3, both fixed; packet x266-design-r2-read-by-marcol 88d71b39). X266.v and grounding_X266.v at 37b92b0d are byte-identical to the r2 packet (b23b5af0). arxiv:2407.21360#00 (Conjecture 7): for every c >= 2 some t and q > 0 such that for every M some H of treewidth at most t and path P_n with M <= |H| n admit no c-colouring of H boxtimes P_n of clustering s whenever (q s)^(c^2-c+1) < (|H| n)^c; clustering as l.160 (every connected monochromatic set at most s), treewidth at most t equivalent to exact t for an existential t by pigeonhole, the strong product of l.290 (X264's helper); partial at the pin (c = 2 and 3 proved). arxiv:2407.21360#01 (Conjecture 8): some t > 0 and q > 0 such that for every M some H1, H2 of treewidth at most t with M <= |H1| |H2| admit no 3-colouring of H1 boxtimes H2 of clustering s whenever (q s)^7 < (|H1| |H2|)^4 (exact treewidth by padding both factors with K_(t+1)); open. arxiv:1812.07327#01 (Problem 5), its affirmative answer: some p, q > 0 such that for every F some G has chi_f(G) > F (~ x130_frac_chi_le G F 1), Hall ratio at most p/q over all subgraphs, and for every subgraph H an independent set I of H with q |E(H)| <= p sum_(v in I) deg_H(v) (alpha_(deg_H)(H) >= |E(H)| / c, inlined; the one allowlist entry records that I depends on H); true at the pin (Steiner 2411.16465v1 Theorem 1.5, c = 5). Grounding: hyp_inhabited at K_2 boxtimes P_2 / K_2 boxtimes K_2 (K_4, no clustering-1 colouring) and K_2 (chi_f > 1, rho <= 2, degree weights), with each statement's consequence; not_trivially_true = each body without its guard coupling s to N (#00, #01) and without has_subgraph G H (Problem 5, false at K_(2p+1)); helper_sanity tw / hr in every row. Metadata: waves = the r2 wave-x266.jq applied to fdf15b28 (only X266, verifier keys empty before this); legs 569 / 539 / 571 = Authored + wave note, only the three rows; README 554 -> 557 / 1,068 -> 1,065; LANDED; the allowlist and the two spec files = the r2 jq programs; bfold_colouring.md and monochromatic.md = the dev run's written copies; 37b92b0d names.treewidth_at_most candidate_family (family treewidth; members = the inventory group, X266 and X27 state one notion). Dev run 1 (x266-dev-by-arthur, c00d591b, -c OK): FAIL only on the four field steps and on the residual group treewidth_at_most (W1 helper ownership, W5, A11), which 37b92b0d answers; Print Assumptions 3 / 3 + 12, W2 880 / 880, W3 0 flagged, W4 0 active (41 allowlisted), A12 OK."
+    },
+    "X267": {
+      "phase": "X267",
+      "repo": "hypergraph-theory",
+      "defines_file": "X267.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X267 (A3 verifier Arthur; routing Lancelot (262), (268); selection x267-selection-by-marcol, design x267-design-by-marcol r1), branch math/marcol-x267-20261031",
+      "source_verified_by": "Arthur (X267 wave verifier, A3: pinned records re-read at b72c5857: data/erdos_graph.json record 716 (the statement field, which the builder hashes alone), sha256 recomputed = 4c725427b3a76a788a0889ecdd6a2b27a31ee9cbe65ed505637b664691b9ed02, and data/arxiv_extracted/2505.05339.json records 2 and 3 (the first two \"states\" records, Questions 4.1 and 4.2; statement_text + LF + context_text, as the builder hashes arxiv rows), sha256 recomputed = d3ac7f14324fff27cd7c29e1296aad8e79c8bcda8041f48b2622849c85bbc22a and ec931a6307895bb8f187b3b2815a44c55753d1d06d7823a396904c12348395e5, all three equal to the manifest rows and to the wave's source_hash values, the upstream statements equal to the manifest's statement_text; pinned statuses: erdos:716 solved (prize label \"PROVED This has been solved in the affirmative.\"), arxiv:2505.05339#00 and #01 solved; the Mac's deposit coordination/sources/x267-source-mac-20261030 (SHA256SUMS 2c1a4f8b, -c OK) read: erdos-716.readable.txt and erdos-716-latex.readable.txt (the statement and \"The answer is yes, proved by Ruzsa and Szemeredi [RuSz78]\") with bib-RuSz78.readable.txt (the original paper was not obtained and is cited from the page and the bibliography record only), 2505.05339v2 main.tex l.772-784 (Questions 4.1 and 4.2 printed in full), 2506.21286v2 main.tex l.263-271 (both questions named as answered), l.329-338 (Theorems 2 and 3), l.474-503 (Remarks 5-6 and Lemma 7, whose converse follows from the same matching bijection) and l.565-572 (Theorem 13, the equality for GP(5k + 11, 2)), with Remark 11 (3-edge-colourability))",
+      "source_verified_at": "2026-10-31",
+      "commit": "x267-six-three-alpha-stable-regular-graphs",
+      "helper_ownership": {},
+      "faithfulness_verified_by": "Arthur (X267 wave verification, 2026-10-31)",
+      "faithfulness_result": "Readback 2026-10-31 (verifier Arthur): 3/3 PASS against the pinned texts and the sources, at math/marcol-x267-20261031 = 50f06781c37e49e747d27a0af110b01ec4b00b4e (seven commits on work/coordinator f5a2fb6d), after my design read ((344), FAITHFUL 3/3 with no item) of x267-design-by-marcol r1 (7dac36fe; my packet x267-design-read-by-arthur 2f2d6b16). X267.v and grounding_X267.v at 50f06781 are byte-identical to the r1 packet; no local helper and no x267_ declaration. erdos:716: its affirmative answer, TRUE at the pin (pinned solved, page label PROVED): for every p >= 1 some N such that every 3-uniform hypergraph E on n >= N vertices in which any three distinct hyperedges span at least 7 vertices has p |E| <= n^2, i.e. ex_3(n, F) = o(n^2) with eps = 1/p; a member of F inside E (a subhypergraph, not necessarily induced) is three distinct edges inside six vertices, and for n >= 6 a smaller span pads to six; the answer rests on the page (RuSz78 not obtained). arxiv:2505.05339#00: its affirmative answer, TRUE at the pin (2506.21286v2 Theorem 13 with Remark 11): for every N a cubic 3-edge-colourable G on at least N vertices with alpha(G) = alpha(G - {u, v, x, y}) for all edges uv, xy; repeated edges allowed, equivalently by antitonicity. arxiv:2505.05339#01: its affirmative answer, TRUE at the pin (Theorem 3, with the counterexample-to-equality link of Remarks 5-6 and Lemma 7 in both directions): some d >= 4 and a non-empty d-regular d-edge-colourable G with alpha(G) = alpha(G minus the ends of any d - 1 edges); the guard 0 < #|G| is load-bearing (the empty graph satisfies the guard-free body vacuously). Grounding: 716 hyp_inhabited at three disjoint triples on 9 vertices, not_trivially_true = without the (6,3) hypothesis (the complete 3-graph, C(n, 3) > n^2 for n >= 9); #00 hyp_inhabited at K_(3,3), not_trivially_true = without \"x -- y\" (a closed neighbourhood deleted); #01 hyp_inhabited at K_(4,4), not_trivially_true = without \"u i -- v i\" (2(d - 1) >= d + 1 deleted vertices cover a closed neighbourhood); helper_sanity [] in all rows. Metadata: source_hash 3 / 3 recomputed from b72c5857, equal; waves.X267 = the r1 packet's x267-wave.json and the only waves change, its verifier fields empty before this; legs notes 472 / 443 / 455 = \"Authored in X267.v:<name>. \" + the wave note, no other legs entry changed; README 559 / 11 / 40 / 1,063 -> 562 / 11 / 40 / 1,060; LANDED gains X267 hypergraph-theory; the #00 lint allowlist entry = the packet text and the only allowlist change; regularity.spec.json and uniform_hypergraph.spec.json gain exactly the packet's four cross_module_consumers; c7 50f06781 commits uniform_hypergraph.md byte-identical to the dev run's written copy, and regularity.md is unchanged (lexical regular hits). Dev run 1 (x267-dev-by-marcol, d7a8c503, -c OK): PASS-WITH-EXPECTED, 30 steps, 26 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12 / 14 (Print Assumptions clean on 3 / 3 statements + 6 certificates, 15 exact-type probes), W2 885 / 885, W3 3 probed 0 flagged, W4 0 active (43 allowlisted), W5, A11 and A12 rc 0.",
+      "rows": {
+        "erdos_716": {
+          "formal_name": "six_three_hypergraph_statement",
+          "source_hash": "4c725427b3a76a788a0889ecdd6a2b27a31ee9cbe65ed505637b664691b9ed02",
+          "note": "Erdos Problems #716, a conjecture of Brown, Erdos and Sos [BES73] (pinned status solved, page label PROVED), as its affirmative answer: for every eps = 1/p some N such that every 3-uniform hypergraph on n >= N vertices in which any three distinct edges span at least 7 vertices (no member of F) has at most eps n^2 edges. TRUE at the pin: the page credits Ruzsa and Szemeredi [RuSz78] (the paper itself was not obtained).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g267_st_hyp_inhabited",
+              "claim": "g267_st_hyp_claim",
+              "references": [
+                "six_three_hypergraph_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g267_st_not_trivially_true",
+              "claim": "g267_st_ntt_claim",
+              "references": [
+                "six_three_hypergraph_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2505_05339_00": {
+          "formal_name": "cubic_alpha_stable_statement",
+          "source_hash": "d3ac7f14324fff27cd7c29e1296aad8e79c8bcda8041f48b2622849c85bbc22a",
+          "note": "Clow, Haxell and Mohar, arXiv:2505.05339v2, Question 4.1 (pinned solved), as its affirmative answer: for every N a cubic 3-edge-colourable G on at least N vertices with alpha(G) = alpha(G - {u, v, x, y}) for all edges uv, xy (repeated edges allowed, equivalently). TRUE at the pin: Abiad, Garbe, Povill and Spiegel, arXiv:2506.21286v2, Theorems 2 and 13 with Remark 11 (GP(5k + 11, 2), k >= 0).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g267_cubic_hyp_inhabited",
+              "claim": "g267_cubic_hyp_claim",
+              "references": [
+                "cubic_alpha_stable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g267_cubic_not_trivially_true",
+              "claim": "g267_cubic_ntt_claim",
+              "references": [
+                "cubic_alpha_stable_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2505_05339_01": {
+          "formal_name": "regular_alpha_stable_statement",
+          "source_hash": "ec931a6307895bb8f187b3b2815a44c55753d1d06d7823a396904c12348395e5",
+          "note": "Clow, Haxell and Mohar, arXiv:2505.05339v2, Question 4.2 (pinned solved), as its affirmative answer: some d >= 4 and a non-empty d-regular d-edge-colourable G with alpha(G) = alpha(G minus the ends of any d - 1 edges). TRUE at the pin: Abiad, Garbe, Povill and Spiegel, arXiv:2506.21286v2, Theorem 3 (quartic examples, the smallest on 70 vertices, verified computationally), with Remarks 5-6 and Lemma 7.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g267_regular_hyp_inhabited",
+              "claim": "g267_regular_hyp_claim",
+              "references": [
+                "regular_alpha_stable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g267_regular_not_trivially_true",
+              "claim": "g267_regular_ntt_claim",
+              "references": [
+                "regular_alpha_stable_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      }
     }
   }
 }

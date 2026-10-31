@@ -376,6 +376,16 @@
       "path": "extremal-graph-theory/theories/conjectures/grounding_X263.v",
       "name": "regular",
       "note": "Wave X263 (2026-10-30): lexical short-name match only: this file never imports Infinite (it is outside the reverse closure of Infinite.conjectures.D4inf3), so its regular is GTBase.base.regular (K_32,32 is 32-regular, induced subgraphs of K_n are complete), not the migrated Infinite source; declared as for U1 / X213 / X239 / X242 / X256."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X267.v",
+      "name": "regular",
+      "note": "Wave X267 (2026-10-31): lexical short-name match only: this file never imports Infinite (it is outside the reverse closure of Infinite.conjectures.D4inf3), so its regular is GTBase.base.regular (simple-graph regularity, rows arxiv:2505.05339#00 / #01), not the migrated Infinite source; declared as for U1 / X213 / X239 / X242 / X256 / X263."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X267.v",
+      "name": "regular",
+      "note": "Wave X267 (2026-10-31): lexical short-name match only: this file never imports Infinite (it is outside the reverse closure of Infinite.conjectures.D4inf3), so its regular is GTBase.base.regular (K_(3,3) and K_(4,4) are 3- and 4-regular), not the migrated Infinite source; declared as for U1 / X213 / X239 / X242 / X256 / X263."
     }
   ],
   "distinct_variants": [],
