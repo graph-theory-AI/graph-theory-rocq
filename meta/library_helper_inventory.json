@@ -24981,13 +24981,13 @@
     ]
   },
   "counts": {
-    "files": 360,
-    "helpers": 2748,
+    "files": 361,
+    "helpers": 2752,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 220,
     "repeated_signature_shapes": 336,
-    "statements_excluded": 842,
-    "x_wave_helpers": 1587
+    "statements_excluded": 845,
+    "x_wave_helpers": 1591
   },
   "groups": {
     "body_shape_hash": {
@@ -27703,6 +27703,7 @@
         "Chromatic.conjectures.X258.x258_edge_critical",
         "Chromatic.conjectures.X261.x261_acyclic_colourable",
         "Chromatic.conjectures.X261.x261_topological_clique",
+        "Chromatic.conjectures.X268.x268_at_le",
         "Chromatic.conjectures.X43.x43_strong_edge_colourable",
         "Chromatic.conjectures.X63.x63_k_homogeneous_colouring",
         "Chromatic.conjectures.X7.x7_no_critical_edge",
@@ -28984,6 +28985,8 @@
         "Chromatic.conjectures.X236.x236_cycle_union",
         "Chromatic.conjectures.X236.x236_no_isolated_edge",
         "Chromatic.conjectures.X236.x236_ternary",
+        "Chromatic.conjectures.X268.x268_internally_four_connected",
+        "Chromatic.conjectures.X268.x268_pentagraph",
         "Chromatic.conjectures.X3.x3_alpha_omega_large_class",
         "Chromatic.conjectures.X3.x3_complete_graph",
         "Chromatic.conjectures.X3.x3_triangle_free_induced_subgraphs_chi_le3",
@@ -29145,6 +29148,7 @@
         "Chromatic.conjectures.X177.x177_forest_of_lanterns",
         "Chromatic.conjectures.X177.x177_lantern",
         "Chromatic.conjectures.X218.x218_multibounding",
+        "Chromatic.conjectures.X268.x268_self_isolating",
         "Chromatic.conjectures.X66.x66_good",
         "Extremal.conjectures.D2ram.common_graph",
         "Extremal.conjectures.X207.x207_polynomial_rodl_delta",
@@ -34757,6 +34761,82 @@
       "qualified_name": "Chromatic.conjectures.X266.x266_hall_ratio_le",
       "signature": "(G : sgraph) (p q : nat) : Prop",
       "signature_shape_hash": "7c703495a77277e658e78f355effae4fc92f81e73cbbba5108b28840574ff3ad"
+    },
+    {
+      "body_hash": "72a079b758d338afe854dbe703531d3ea46b0f42f8f3a2d6b756c70c849561b9",
+      "body_shape_hash": "72a079b758d338afe854dbe703531d3ea46b0f42f8f3a2d6b756c70c849561b9",
+      "declaration_hash": "a2fc9eb44a7fdba07d36748878e0c19141cc2c14360bf0f500cc93df6b59b663",
+      "direct_consumers": [
+        "Chromatic.conjectures.X268.alon_tarsi_matching_removal_statement"
+      ],
+      "kind": "Definition",
+      "line": 24,
+      "local_dependencies": [],
+      "name": "x268_at_le",
+      "normalized_name": "at_le",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X268.v",
+      "phase": "X268",
+      "qualified_name": "Chromatic.conjectures.X268.x268_at_le",
+      "signature": "(G : sgraph) (k : nat) : Prop",
+      "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
+    },
+    {
+      "body_hash": "e16770141b2e9775fc5f50dc65eb202b491da4f92fc7cfb18c42af1bc20cba12",
+      "body_shape_hash": "e16770141b2e9775fc5f50dc65eb202b491da4f92fc7cfb18c42af1bc20cba12",
+      "declaration_hash": "634eb3426d39b2603a173d2701a303fbdbb6645f3747ed2073dee5f272eddabe",
+      "direct_consumers": [
+        "Chromatic.conjectures.X268.all_graphs_self_isolating_statement"
+      ],
+      "kind": "Definition",
+      "line": 37,
+      "local_dependencies": [],
+      "name": "x268_self_isolating",
+      "normalized_name": "self_isolating",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X268.v",
+      "phase": "X268",
+      "qualified_name": "Chromatic.conjectures.X268.x268_self_isolating",
+      "signature": "(H : sgraph) : Prop",
+      "signature_shape_hash": "ea123d14a47d3c8fecd3f855c427512e33b52cbaad7f5d5d8ade3431e24f4c1f"
+    },
+    {
+      "body_hash": "30b9ee315a66d879f401c6997b420717e7ec4bf22d3cdf3f1eef061463c9feb0",
+      "body_shape_hash": "30b9ee315a66d879f401c6997b420717e7ec4bf22d3cdf3f1eef061463c9feb0",
+      "declaration_hash": "cf20560c9d1cf10d65932f8f39a199e44cf895d80ac3414696f410439ebb758c",
+      "direct_consumers": [
+        "Chromatic.conjectures.X268.plummer_zha_pentagraph_three_colourable_statement"
+      ],
+      "kind": "Definition",
+      "line": 47,
+      "local_dependencies": [],
+      "name": "x268_internally_four_connected",
+      "normalized_name": "internally_four_connected",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X268.v",
+      "phase": "X268",
+      "qualified_name": "Chromatic.conjectures.X268.x268_internally_four_connected",
+      "signature": "(G : sgraph) : Prop",
+      "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "d29c9176b41b7022b0f9a6ddf2719177431109c53fb620a343710597b4b2b4f9",
+      "body_shape_hash": "d29c9176b41b7022b0f9a6ddf2719177431109c53fb620a343710597b4b2b4f9",
+      "declaration_hash": "91476bf0ccd02ba7ef91e5bc5b79d1415373e9a4d166cd0795b4282d18d45043",
+      "direct_consumers": [
+        "Chromatic.conjectures.X268.plummer_zha_pentagraph_three_colourable_statement"
+      ],
+      "kind": "Definition",
+      "line": 53,
+      "local_dependencies": [],
+      "name": "x268_pentagraph",
+      "normalized_name": "pentagraph",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X268.v",
+      "phase": "X268",
+      "qualified_name": "Chromatic.conjectures.X268.x268_pentagraph",
+      "signature": "(G : sgraph) : Prop",
+      "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
     },
     {
       "body_hash": "a252d3382e9e2e9f0450759c627d453616f368776f8069089a1ef10686104455",
