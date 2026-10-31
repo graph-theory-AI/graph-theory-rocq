@@ -11630,6 +11630,190 @@
           }
         }
       }
+    },
+    "X268": {
+      "phase": "X268",
+      "repo": "chromatic-theory",
+      "defines_file": "X268.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X268 (A3 verifier Marcol; routing Lancelot (267), (268); selection x268-selection-by-arthur (343), design x268-design-by-arthur r1), branch math/arthur-x268-20261030",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x268-alon-tarsi-matching-self-isolating-plummer-zha",
+      "rows": {
+        "axv_2209_09107_01": {
+          "formal_name": "alon_tarsi_matching_removal_statement",
+          "source_hash": "61e206ad508589f708fb5f5f079d424f24b9cdd068c771ff6e6175fa9401417c",
+          "note": "Bradshaw, Chen, Ma, Mohar and Wu, Question 6.2 of arXiv:2209.09107v2 (main.tex l.1015-1018; pinned status open), as its affirmative answer: some natural C such that every graph G has a matching M and some k with 2 k <= Delta(G) + 2 C and AT(G - M) <= k (x268_at_le: every edge oriented exactly once, an Alon-Tarsi orientation of Chromatic.foundations.alon_tarsi, outdegrees below k; l.215-222). C >= 1 is forced by the edgeless graphs; the paper notes C >= 1/2.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g268_am_hyp_inhabited",
+              "claim": "g268_am_hyp_claim",
+              "references": [
+                "alon_tarsi_matching_removal_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g268_am_not_trivially_true",
+              "claim": "g268_am_ntt_claim",
+              "references": [
+                "alon_tarsi_matching_removal_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g268_at_helper_sanity",
+                "claim": "g268_at_helper_claim",
+                "references": [
+                  "x268_at_le"
+                ]
+              },
+              {
+                "theorem": "g268_si_helper_sanity",
+                "claim": "g268_si_helper_claim",
+                "references": [
+                  "x268_self_isolating"
+                ]
+              },
+              {
+                "theorem": "g268_i4_helper_sanity",
+                "claim": "g268_i4_helper_claim",
+                "references": [
+                  "x268_internally_four_connected"
+                ]
+              },
+              {
+                "theorem": "g268_pg_helper_sanity",
+                "claim": "g268_pg_helper_claim",
+                "references": [
+                  "x268_pentagraph"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2202_09118_04": {
+          "formal_name": "all_graphs_self_isolating_statement",
+          "source_hash": "b4f380621ed9e7809d64775efb1193e10311d6a73a732c1f6bb04c43425a3b5d",
+          "note": "Chudnovsky, Scott, Seymour and Spirkl, arXiv:2202.09118v1 (source.tex l.141-150 and l.165; pinned status open): could it be that all graphs are self-isolating? Encoded as its affirmative answer, every H self-isolating (x268_self_isolating), with the polynomials psi and phi read as monomials c x^d and c' x^d' (equivalent both ways: omega >= 1 wherever the bounds bite). Proved for complete graphs, paths and complete bipartite graphs.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g268_si_hyp_inhabited",
+              "claim": "g268_si_hyp_claim",
+              "references": [
+                "all_graphs_self_isolating_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g268_si_not_trivially_true",
+              "claim": "g268_si_ntt_claim",
+              "references": [
+                "all_graphs_self_isolating_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g268_at_helper_sanity",
+                "claim": "g268_at_helper_claim",
+                "references": [
+                  "x268_at_le"
+                ]
+              },
+              {
+                "theorem": "g268_si_helper_sanity",
+                "claim": "g268_si_helper_claim",
+                "references": [
+                  "x268_self_isolating"
+                ]
+              },
+              {
+                "theorem": "g268_i4_helper_sanity",
+                "claim": "g268_i4_helper_claim",
+                "references": [
+                  "x268_internally_four_connected"
+                ]
+              },
+              {
+                "theorem": "g268_pg_helper_sanity",
+                "claim": "g268_pg_helper_claim",
+                "references": [
+                  "x268_pentagraph"
+                ]
+              }
+            ]
+          }
+        },
+        "std_plummer_zha_conjecture": {
+          "formal_name": "plummer_zha_pentagraph_three_colourable_statement",
+          "source_hash": "06de29f862d489cffb6fe8b200ffa7fb6c8ee5f971e9cce491abf2f0413b3468",
+          "note": "The Plummer-Zha conjecture (Plummer and Zha, Electron. J. Combin. 21(1) (2014) #P1.34, Question 3.4; pinned status open), encoded as stated: every 3-connected (k_connected G 3), internally 4-connected (x268_internally_four_connected: every 3-vertex cut is a neighbourhood) pentagraph (x268_pentagraph: girth >= 5, odd induced cycles of length 5) has chi <= 3. TRUE at the pin: Chudnovsky and Seymour, arXiv:2201.11505v2, Theorem 1.1 (every pentagraph is three-colourable).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g268_pz_hyp_inhabited",
+              "claim": "g268_pz_hyp_claim",
+              "references": [
+                "plummer_zha_pentagraph_three_colourable_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g268_pz_not_trivially_true",
+              "claim": "g268_pz_ntt_claim",
+              "references": [
+                "plummer_zha_pentagraph_three_colourable_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g268_at_helper_sanity",
+                "claim": "g268_at_helper_claim",
+                "references": [
+                  "x268_at_le"
+                ]
+              },
+              {
+                "theorem": "g268_si_helper_sanity",
+                "claim": "g268_si_helper_claim",
+                "references": [
+                  "x268_self_isolating"
+                ]
+              },
+              {
+                "theorem": "g268_i4_helper_sanity",
+                "claim": "g268_i4_helper_claim",
+                "references": [
+                  "x268_internally_four_connected"
+                ]
+              },
+              {
+                "theorem": "g268_pg_helper_sanity",
+                "claim": "g268_pg_helper_claim",
+                "references": [
+                  "x268_pentagraph"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x268_at_le": {
+          "classification": "paper_specific",
+          "reason": "AT(G) <= k (Bradshaw, Chen, Ma, Mohar and Wu, arXiv:2209.09107v2, main.tex l.215-222): an orientation of G with every edge oriented exactly once whose even and odd Eulerian sub-digraph counts differ (at_alon_tarsi of Chromatic.foundations.alon_tarsi) and whose outdegrees are below k. The applications file alon_tarsi_triangle.v orients a spanning subgraph (an edge may stay unoriented), a different notion; no corpus helper bounds the Alon-Tarsi number. AT(K_2) = 2 (g268_at_K2, g268_at_K2_not1)."
+        },
+        "x268_self_isolating": {
+          "classification": "paper_specific",
+          "reason": "Self-isolation (Chudnovsky, Scott, Seymour and Spirkl, arXiv:2202.09118v1, source.tex l.141-150), the paper's own notion, with the polynomials as monomials c x^d (the normal form of poly_chi_bounded, Chromatic.foundations.chi_bounding), over GTBase induced_free and anticomplete. No corpus helper states it; K_1 is self-isolating (g268_K1_self_isolating, the paper's proof for complete graphs at k = 1)."
+        },
+        "x268_internally_four_connected": {
+          "classification": "paper_specific",
+          "reason": "Internal 4-connectivity (Plummer and Zha, Electron. J. Combin. 21(1) (2014) #P1.34, p.1): every set of three vertices whose deletion disconnects G, in the k_connected form connected ([set: G] :\\: S), is the neighbourhood of a fourth vertex. No corpus helper states it; the Petersen graph and K_4 have it, P_5 does not (g268_petersen_int4, g268_K4_hyp, g268_P5_not_i4)."
+        },
+        "x268_pentagraph": {
+          "classification": "paper_specific",
+          "reason": "Pentagraphs (Chudnovsky and Seymour, arXiv:2201.11505v2, source.tex l.69-70): girth at least five (GTBase girth_geq) and every odd chordless cycle (GTBase induced_cycles chordless_cycle) of length five. No corpus helper states it; the Petersen graph is one, K_3 (a triangle) and C_7 (an odd hole of length 7) are not (g268_petersen_girth, g268_petersen_odd_chordless, g268_K3_not_pentagraph, g268_C7_not_pentagraph)."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
