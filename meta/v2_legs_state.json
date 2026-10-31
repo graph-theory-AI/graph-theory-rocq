@@ -5487,18 +5487,24 @@
    "audit_page": "todo"
   },
   "axv_2505_05339_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x267-six-three-alpha-stable-regular-graphs",
+   "package": "hypergraph-theory",
+   "note": "Authored in X267.v:cubic_alpha_stable_statement. Clow, Haxell and Mohar, arXiv:2505.05339v2, Question 4.1 (pinned solved), as its affirmative answer: for every N a cubic 3-edge-colourable G on at least N vertices with alpha(G) = alpha(G - {u, v, x, y}) for all edges uv, xy (repeated edges allowed, equivalently). TRUE at the pin: Abiad, Garbe, Povill and Spiegel, arXiv:2506.21286v2, Theorems 2 and 13 with Remark 11 (GP(5k + 11, 2), k >= 0)."
   },
   "axv_2505_05339_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x267-six-three-alpha-stable-regular-graphs",
+   "package": "hypergraph-theory",
+   "note": "Authored in X267.v:regular_alpha_stable_statement. Clow, Haxell and Mohar, arXiv:2505.05339v2, Question 4.2 (pinned solved), as its affirmative answer: some d >= 4 and a non-empty d-regular d-edge-colourable G with alpha(G) = alpha(G minus the ends of any d - 1 edges). TRUE at the pin: Abiad, Garbe, Povill and Spiegel, arXiv:2506.21286v2, Theorem 3 (quartic examples, the smallest on 70 vertices, verified computationally), with Remarks 5-6 and Lemma 7."
   },
   "axv_2505_05339_02": {
    "statement": "done",
@@ -9019,11 +9025,14 @@
    "note": "Authored in XE2.v:erdos_715_statement. Encodes Erdos Problems #715 in the XE Erdos clean/bounded statement wave."
   },
   "erdos_716": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x267-six-three-alpha-stable-regular-graphs",
+   "package": "hypergraph-theory",
+   "note": "Authored in X267.v:six_three_hypergraph_statement. Erdos Problems #716, a conjecture of Brown, Erdos and Sos [BES73] (pinned status solved, page label PROVED), as its affirmative answer: for every eps = 1/p some N such that every 3-uniform hypergraph on n >= N vertices in which any three distinct edges span at least 7 vertices (no member of F) has at most eps n^2 edges. TRUE at the pin: the page credits Ruzsa and Szemeredi [RuSz78] (the paper itself was not obtained)."
   },
   "erdos_717": {
    "statement": "done",
