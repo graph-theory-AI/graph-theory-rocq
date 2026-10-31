@@ -12028,6 +12028,215 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Marcol (X270 wave verification, 2026-10-31)",
       "faithfulness_result": "Readback 2026-10-31 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x270-20261031 = a39eb02e55e4bc9ffc93b9ab55af12e6f2fa6da2 (seven commits on work/coordinator 8e9c2c68), after my design read ((285), FAITHFUL 3/3, no blocking item, S1 doc only, N1; packet x270-design-read-by-marcol a4e237e3) and my check of the S1 delta ((287): X270.v and grounding_X270.v differ from the r1 packet 56c903ae only by the two S1 comments; the wave, spec, LANDED, README and legs commits equal the read deltas). The seventh commit a39eb02e changes only meta/migration_reports/bfold_colouring.md, byte-identical to the file written by dev run 1 (x270-dev-by-arthur, 0516f0cc). studies:std_steinberg_s_conjecture, as stated, FALSE at the pin (1604.05108v2 Theorem 3; pinned open, the status correction a separate item): every wagner_planar G with no_cycle_length (@edge_rel G) 4 and 5 (no ucycle of more than two vertices of that size, the genuine cycles of the source) has chi <= 3; X204's frozen x204_no_cycle_length not used. studies:std_krekovski_conjecture_separation_choosability_of, as stated, open: every wagner_planar G is x203_separation_choosable G 3 (every list assignment of exactly 3 colours over any finite palette with adjacent lists sharing at most one colour admits a proper colouring from the lists); Skrekovski's Problem 1 is (3,1,2)-choosability (|L(v)| >= 3, |L(u) cap L(v)| <= 3 - 2, q = 1 a proper L-colouring); exactly-3 lists (shrink), 'at most 3' (separation k-choosability implies (k+1)-choosability) and finite palettes (embed in Z^+) are equivalent, as the Notes say; X203's helper used unchanged, its first cross-file consumer, W5 / A11 rc 0 in the dev run as designed. studies:std_heckman_thomas_conjecture, as stated, open (2204.12683v3 proves 11/4, Corollary 1.5): every wagner_planar, subcubic, triangle-free G has x130_frac_chi_le G 8 3 (an (a:b)-fold colouring with 0 < b and 3 a <= 8 b), the source's second equivalent condition; positive a implied. No local helper, no x270_ declaration. Grounding: hyp_inhabited at K_3 (Steinberg; chi(K_3) = 3, the bound tight), K_2 (Skrekovski; separation 3-choosable) and K_2 (Heckman-Thomas; a (2:1)-colouring); not_trivially_true drops one hypothesis each: 'no 4-cycles' (Steinberg, false at K_4: planar, no 5-cycle, chi 4), planarity (Skrekovski, false at K_12 with the twelve lines of AG(2,3) on nine points, each line checked by hand, a proper colouring of K_12 injective into nine colours), triangle-freeness (Heckman-Thomas, false at K_4: chi_f >= 4); helper_sanity [] in every row; every claim names its statement. Independent type check: my MCP built X270.v and grounding_X270.v with X130's and X203's definitions copied verbatim, 17 proof blocks, no holes. Lint: three statements clean; the Heckman-Thomas existential inside X130's shared x130_frac_chi_le is invisible to exists-after-graph-forall (N1, a tool question; the order is the source's). Consumers: bfold_colouring.spec gains three entries (x130_frac_chi_le, chain, in X270.v and grounding_X270.v; bfold_colouring, source, in the grounding), 23 -> 26, as X262 / X266. Metadata: source_hash 3/3 recomputed from b72c5857, equal; waves.X270 = wave-x270.jq applied to the base, the only waves change, its verifier fields empty before this; legs notes 594 / 583 / 530 = \"Authored in X270.v:<name>. \" + the wave note, no other legs entry changed; README 565 / 11 / 40 / 1,057 -> 568 / 11 / 40 / 1,054; LANDED gains X270 chromatic-theory after X268. Dev run 1 (x270-dev-by-arthur, 0516f0cc, -c OK, on 98a2b773): PASS-WITH-EXPECTED, 29 steps, 25 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12/14 (Print Assumptions clean on 3/3 statements + 6 certificates, 30 exact-type probes), W2 891/891, W3 3 probed 0 flagged, W4 0 active (44 allowlisted), W5, A11 and A12 rc 0."
+    },
+    "X272": {
+      "phase": "X272",
+      "repo": "chromatic-theory",
+      "defines_file": "X272.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X272 (A3 verifier Marcol; routing Lancelot (301), (307); selection x272-selection-by-arthur (365), design x272-design-by-arthur r1), branch math/arthur-x272-20261031",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x272-obstructions-two-colouring-number-thomassen",
+      "rows": {
+        "axv_2204_12683_00": {
+          "formal_name": "dvorak_lidicky_postle_obstructions_fractional_nineteen_sevenths_statement",
+          "source_hash": "bfebff7c157857e6f2d94d9dc8227bb1239ee75e37d5bc0977dd05bbe1dc0f68",
+          "note": "Dvorak, Lidicky and Postle, Conjecture 1.6 of arXiv:2204.12683v3 (aic-elevenfour.tex l.269-272; pinned status open), encoded as stated: every subcubic triangle-free graph with no subgraph isomorphic to F14(1), F14(2), F11 or F22 (x272_f14a, x272_f14b, x272_f11, x272_f22, transcribed from the TikZ of Figures fig-forb and fig-forb2) has x130_frac_chi_le G 19 7. The obstructions match the paper: cubic or subcubic, triangle-free, n / alpha = 14/5, 14/5, 11/4, 11/4.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g272_dlp_hyp_inhabited",
+              "claim": "g272_dlp_hyp_claim",
+              "references": [
+                "dvorak_lidicky_postle_obstructions_fractional_nineteen_sevenths_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g272_dlp_not_trivially_true",
+              "claim": "g272_dlp_ntt_claim",
+              "references": [
+                "dvorak_lidicky_postle_obstructions_fractional_nineteen_sevenths_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g272_f14a_helper_sanity",
+                "claim": "g272_f14a_helper_claim",
+                "references": [
+                  "x272_f14a"
+                ]
+              },
+              {
+                "theorem": "g272_f14b_helper_sanity",
+                "claim": "g272_f14b_helper_claim",
+                "references": [
+                  "x272_f14b"
+                ]
+              },
+              {
+                "theorem": "g272_f11_helper_sanity",
+                "claim": "g272_f11_helper_claim",
+                "references": [
+                  "x272_f11"
+                ]
+              },
+              {
+                "theorem": "g272_f22_helper_sanity",
+                "claim": "g272_f22_helper_claim",
+                "references": [
+                  "x272_f22"
+                ]
+              },
+              {
+                "theorem": "g272_col2_helper_sanity",
+                "claim": "g272_col2_helper_claim",
+                "references": [
+                  "x272_col2_le"
+                ]
+              }
+            ]
+          }
+        },
+        "std_kierstead_et_al_question_on_the_2_coloring_numbe": {
+          "formal_name": "planar_two_colouring_number_at_most_eight_statement",
+          "source_hash": "33e073dde3bc8bcfaa6b925174448eb5ccd58cdddb8f8d3995a20f395c5fa64f",
+          "note": "Kierstead, Mohar, Spacapan, Yang and Zhu, Question 1 (2009 preprint, p.4; studies record arXiv:1506.01412; pinned status open), encoded as its affirmative answer: every planar graph (wagner_planar) has 2-colouring number at most 8 (x272_col2_le: an ordering in which every vertex has at most 7 earlier vertices adjacent to it or sharing a neighbour after it). TRUE at the pin: Dvorak, Kaiser and Kral', arXiv:1506.01412v3, Theorem 1; the status correction is a separate item.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g272_col_hyp_inhabited",
+              "claim": "g272_col_hyp_claim",
+              "references": [
+                "planar_two_colouring_number_at_most_eight_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g272_col_not_trivially_true",
+              "claim": "g272_col_ntt_claim",
+              "references": [
+                "planar_two_colouring_number_at_most_eight_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g272_f14a_helper_sanity",
+                "claim": "g272_f14a_helper_claim",
+                "references": [
+                  "x272_f14a"
+                ]
+              },
+              {
+                "theorem": "g272_f14b_helper_sanity",
+                "claim": "g272_f14b_helper_claim",
+                "references": [
+                  "x272_f14b"
+                ]
+              },
+              {
+                "theorem": "g272_f11_helper_sanity",
+                "claim": "g272_f11_helper_claim",
+                "references": [
+                  "x272_f11"
+                ]
+              },
+              {
+                "theorem": "g272_f22_helper_sanity",
+                "claim": "g272_f22_helper_claim",
+                "references": [
+                  "x272_f22"
+                ]
+              },
+              {
+                "theorem": "g272_col2_helper_sanity",
+                "claim": "g272_col2_helper_claim",
+                "references": [
+                  "x272_col2_le"
+                ]
+              }
+            ]
+          }
+        },
+        "std_thomassen_s_conjecture_exponentially_many_3_colo": {
+          "formal_name": "thomassen_triangle_free_planar_exponentially_many_three_colourings_statement",
+          "source_hash": "49c72c1856dfec37043cf94ebe5317d337c2eb1837e427fe8c805f0c8fe5d3c4",
+          "note": "Thomassen's conjecture (Conjecture 1 of arXiv:1702.00588v2; pinned status open), encoded as stated: some p, q >= 1 such that every triangle-free planar graph G has 2^(p |V(G)|) <= N^q for its number N of proper 3-colourings (labelled, 'I_3), that is at least 2^(beta n) with beta = p / q. FALSE at the pin: Dvorak and Postle, arXiv:2108.12669v1, Theorem 1 (at most 64^(n^0.731) 3-colourings for infinitely many n), after Thomassen's own 2021 disproof.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g272_th_hyp_inhabited",
+              "claim": "g272_th_hyp_claim",
+              "references": [
+                "thomassen_triangle_free_planar_exponentially_many_three_colourings_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g272_th_not_trivially_true",
+              "claim": "g272_th_ntt_claim",
+              "references": [
+                "thomassen_triangle_free_planar_exponentially_many_three_colourings_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g272_f14a_helper_sanity",
+                "claim": "g272_f14a_helper_claim",
+                "references": [
+                  "x272_f14a"
+                ]
+              },
+              {
+                "theorem": "g272_f14b_helper_sanity",
+                "claim": "g272_f14b_helper_claim",
+                "references": [
+                  "x272_f14b"
+                ]
+              },
+              {
+                "theorem": "g272_f11_helper_sanity",
+                "claim": "g272_f11_helper_claim",
+                "references": [
+                  "x272_f11"
+                ]
+              },
+              {
+                "theorem": "g272_f22_helper_sanity",
+                "claim": "g272_f22_helper_claim",
+                "references": [
+                  "x272_f22"
+                ]
+              },
+              {
+                "theorem": "g272_col2_helper_sanity",
+                "claim": "g272_col2_helper_claim",
+                "references": [
+                  "x272_col2_le"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x272_f14a": {
+          "classification": "paper_specific",
+          "reason": "The obstruction F14(1) of Dvorak, Lidicky and Postle (arXiv:2204.12683v3, Figure fig-forb, aic-elevenfour.tex l.392-405): the generalized Petersen graph GP(7, 2), an explicit edge list over GTBase fg_mk_sgraph. No corpus helper defines it; 14 vertices, cubic, triangle-free (g272_f14a_helper_sanity), alpha = 5 at design time."
+        },
+        "x272_f14b": {
+          "classification": "paper_specific",
+          "reason": "The obstruction F14(2) of arXiv:2204.12683v3 (Figure fig-forb, aic-elevenfour.tex l.407-431): an 8-cycle with six inner vertices, an explicit edge list over GTBase fg_mk_sgraph. No corpus helper defines it; 14 vertices, cubic, triangle-free (g272_f14b_helper_sanity), alpha = 5 at design time."
+        },
+        "x272_f11": {
+          "classification": "paper_specific",
+          "reason": "The obstruction F11 of arXiv:2204.12683v3 (Figure fig-forb2, aic-elevenfour.tex l.466-484): a 10-cycle with a path of length 2 and four chords, an explicit edge list over GTBase fg_mk_sgraph. No corpus helper defines it; 11 vertices, subcubic, triangle-free (g272_f11_helper_sanity), alpha = 4 at design time."
+        },
+        "x272_f22": {
+          "classification": "paper_specific",
+          "reason": "The obstruction F22 of arXiv:2204.12683v3 (Figure fig-forb2, aic-elevenfour.tex l.439-464, its numbered stubs paired into three edges), an explicit edge list over GTBase fg_mk_sgraph. No corpus helper defines it; 22 vertices, cubic, triangle-free (g272_f22_helper_sanity), alpha = 8 at design time."
+        },
+        "x272_col2_le": {
+          "classification": "paper_specific",
+          "reason": "The 2-colouring number at most k (Kierstead, Mohar, Spacapan, Yang and Zhu 2009, p.2; Dvorak, Kaiser and Kral', arXiv:1506.01412v3, twocol.tex l.57-71): an injective rank in which every vertex v has at most k - 1 earlier vertices adjacent to v or sharing a neighbour after v. X139's x139_scol_at_most bounds the earlier vertices at distance at most r with no condition on the path's interior, a different notion; X100's x100_col_deg is an edge-colour degree. col_2(K_9) = 9 (g272_col2_helper_sanity)."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
