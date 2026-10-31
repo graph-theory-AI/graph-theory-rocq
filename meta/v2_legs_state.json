@@ -12091,11 +12091,14 @@
    "audit_page": "todo"
   },
   "std_heckman_thomas_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x270-steinberg-skrekovski-heckman-thomas",
+   "package": "chromatic-theory",
+   "note": "Authored in X270.v:heckman_thomas_planar_subcubic_triangle_free_fractional_statement. The Heckman-Thomas conjecture (J. Combin. Theory Ser. B 96 (2006), p.2; studies record arXiv:2204.12683v3, Conjecture 1.2, aic-elevenfour.tex l.240-243; pinned status open), encoded as stated: every planar (wagner_planar), subcubic, triangle-free graph has fractional chromatic number at most 8/3 (Chromatic X130's x130_frac_chi_le G 8 3: an (a:b)-fold colouring with 0 < b and 3 a <= 8 b). The same source proves 11/4 (Corollary 1.5), not 8/3."
   },
   "std_henning_l_wenstein_rautenbach_conjecture": {
    "statement": "todo",
@@ -12355,11 +12358,14 @@
    "note": "Authored in X6.v:girth_five_planar_induced_forest_seven_tenths_statement. Encodes the planar girth-at-least-five induced-forest lower bound 7|V(G)|/10."
   },
   "std_krekovski_conjecture_separation_choosability_of": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x270-steinberg-skrekovski-heckman-thomas",
+   "package": "chromatic-theory",
+   "note": "Authored in X270.v:skrekovski_planar_separation_three_choosable_statement. Skrekovski's conjecture (Ars Combin. 58 (2001), Problem 1, p.172: is every planar graph (3,1,2)-choosable?; studies record arXiv:1803.10962v2, dp1.tex l.300; pinned status open), encoded as stated: every planar graph (wagner_planar) is separation 3-choosable (Chromatic X203's x203_separation_choosable G 3: lists of exactly 3 colours over any finite palette, adjacent lists sharing at most one colour, admit a proper colouring). Lists of exactly 3 colours are equivalent to the source's lists of at least 3."
   },
   "std_kuperwasser_samotij_wigderson_conjecture": {
    "statement": "done",
@@ -13231,11 +13237,14 @@
    "note": "Authored in X17.v:stein_oriented_paths_strict_semidegree_statement. Encodes Stein's conjecture: every nonempty oriented graph with strict minimum semidegree greater than k/2 contains every orientation of the k-edge path."
   },
   "std_steinberg_s_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x270-steinberg-skrekovski-heckman-thomas",
+   "package": "chromatic-theory",
+   "note": "Authored in X270.v:steinberg_planar_no_4_5_cycles_three_colourable_statement. Steinberg's conjecture (1976; studies record arXiv:1010.2472v3, disk.tex l.339-341; pinned status open), encoded as stated: every planar graph (wagner_planar) with no cycle of length 4 and none of length 5 (GTBase no_cycle_length, genuine cycles) has chromatic number at most 3. FALSE at the pin: Cohen-Addad, Hebdige, Kral', Li and Salgado (arXiv:1604.05108v2, Theorem 3, steinberg.tex l.140-143) give a planar graph without 4- and 5-cycles that is not 3-colourable; the status correction is a separate corpus item."
   },
   "std_strong_erd_s_hajnal_conjecture_for_tournaments": {
    "statement": "todo",
