@@ -6,8 +6,8 @@ Full evidence: `python3 meta/migration_report.py bfold_colouring --details /tmp/
 
 - Canonical: `GTBase.bfold_colourings.bfold_colouring`.
 - Baseline: `3bdfdae32824d4762ba8105367f7858a706a02e2`.
-- Scope: 2 helpers, 7 statements, 12 frozen objects, 89 recorded references.
-- Source checks: 165/165 pass; consistent.
+- Scope: 2 helpers, 7 statements, 12 frozen objects, 94 recorded references.
+- Source checks: 170/170 pass; consistent.
 
 | Statement / corpus row | Compatibility theorem |
 |---|---|
