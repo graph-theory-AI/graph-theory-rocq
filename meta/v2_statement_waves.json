@@ -11814,6 +11814,140 @@
       },
       "faithfulness_verified_by": "Marcol (X268 wave verification, 2026-10-31)",
       "faithfulness_result": "Readback 2026-10-31 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x268-20261030 = a626d74270cbe53df57e0aa34985279e253264e5 (five commits on work/coordinator 97d26fa2, X267's merge; rebased from 711bad6c on f5a2fb6d with the X268 files byte-equal and the waves, legs, allowlist and _CoqProject changes equal up to the base), after my design read ((278), FAITHFUL 3/3, no blocking item, N1-N3; packet x268-design-read-by-marcol deadae16) and my re-read of the r2 delta ((279), FAITHFUL 3/3; packet x268-design-r2-read-by-marcol 7ffc5aef). X268.v at a626d742 is byte-identical to the r2 packet (d93c36aa), grounding_X268.v to the r1 packet (48b30980). arxiv:2209.09107#01 (Question 6.2), its affirmative answer, open at the pin: some natural C such that every G has a matching M and k with 2 k <= Delta(G) + 2 C and AT(G - M) <= k (x268_at_le: an orientation with every edge oriented exactly once, Alon-Tarsi (EE != EO), outdegrees below k); AT integral, so this is AT(G - M) <= Delta / 2 + C; C >= 1/2 is the paper's remark, C >= 1 labelled our inference and proved from the statement. arxiv:2202.09118#04, its affirmative answer, open at the pin: every H is self-isolating, the non-decreasing polynomial psi and the polynomial phi read as monomials c x^d and c' x^d' (equivalent both ways: monomials dominate polynomials for x >= 1 and the guards force non-empty sets); G[A] H-free = induced_free, the copy disjoint from and anticomplete to A = anticomplete; the authors' aside (general functions make every graph self-isolating) noted. studies:std_plummer_zha_conjecture, as stated, TRUE at the pin (Chudnovsky-Seymour Theorem 1.1; pinned open, the status correction a separate item): every 3-connected, internally 4-connected pentagraph has chi <= 3, internal 4-connectivity being Plummer-Zha's exact neighbourhood condition and pentagraph Chudnovsky-Seymour's definition; the class G of Question 3.4 is these graphs with a 5-cycle. Helpers x268_at_le, x268_self_isolating, x268_internally_four_connected, x268_pentagraph (paper_specific): their stems match no base name and no inventory normalized_name, their body shapes none of the inventory's; no x268_ Lemma. Grounding: hyp_inhabited at K_2 (#01; C >= 1 from the statement), the Mycielski gap graphs (#04: the guard is satisfiable for every c', d'), the Petersen graph (Plummer-Zha); not_trivially_true drops one hypothesis each: Delta as G's maximum degree (#01, false at K_(2C+1) by the averaging bound), the guard chi(G) > c' omega(G)^d' (#04, false at K_1), the pentagraph hypothesis (Plummer-Zha, false at K_4); helper_sanity: the four groups in every row (AT(K_2) = 2; K_1 self-isolating; Petersen and K_4 internally 4-connected, P_5 not; Petersen a pentagraph, K_3 and C_7 not). Every claim names its references. Lint: #01 exists-after-graph-forall only, with its allowlist entry; the existential inside x268_self_isolating is invisible to that rule, a paper-named notion checked by hand (N1, a tool question). Consumers: none to declare (matching / petersen are digraph / cycle providers outside chromatic's mapping). Metadata: source_hash 3/3 recomputed from b72c5857, equal; waves.X268 = wave-x268.jq applied to the base, the only waves change, its verifier fields empty before this; legs notes 519 / 491 / 542 = \"Authored in X268.v:<name>. \" + the wave note, no other legs entry changed; README 562 / 11 / 40 / 1,060 -> 565 / 11 / 40 / 1,057 (= the legs counts); LANDED gains X268 chromatic-theory after X267; the #01 allowlist entry the only allowlist change. Dev run 1 (x268-dev-by-arthur, 0a1ed4e1, -c OK, on 711bad6c with the same X268 files): PASS-WITH-EXPECTED, 28 steps, 24 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12/14 (Print Assumptions clean on 3/3 statements + 18 certificate references, 30 exact-type probes), W2 885/885, W3 3 probed 0 flagged, W4 0 active (43 allowlisted), W5, A11 and A12 rc 0."
+    },
+    "X269": {
+      "phase": "X269",
+      "repo": "packing-theory",
+      "defines_file": "X269.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X269 (A3 verifier Arthur; routing Lancelot (276), (286); selection x269-selection-by-marcol, design x269-design-by-marcol r1), branch math/marcol-x269-20261031",
+      "source_verified_by": "Arthur (X269 wave verifier, A3: pinned records re-read at graph-conjectures b72c5857: data/arxiv_extracted/1904.02595.json record 1 (role states, Conjecture 1.2) and 2604.09449.json record 2 (role states, Conjecture 6.2), statement_text + LF + context_text, the arXiv rows' builder rule, sha256 recomputed = 290e48733ab641fc0203242dd0311c1e3c3b1ab7bd4b08d3ecc61d255bcae5e5 and 215f5da55b87623c4f960fac7f7bf9505913571226840a5a8f2ef4aa9ced7e24; 1710.07255.json record 1 (role studies, Conjecture 1.6 (Gruslys, Leader and Tan)), statement_text alone, the studies rows' rule, = bd8e9e770787ab964498da1486ad218c4ec6b8fd2af9da1695272b20481273e6; all three equal to the manifest rows and the wave's source_hash values, the upstream statements equal to the manifest's statement_text; pinned statuses open (all three); the Mac's deposit coordination/sources/x269-source-mac-20261031 (SHA256SUMS 5f97f410, -c OK) read: Alon-Defant 1904.02595v1 source.tex l.69 (the direct product, adjacent iff adjacent in every coordinate), l.73 (alpha, closed neighbourhoods, irredundant: N[S \\ {v}] <> N[S] for all v in S, IR the largest irredundant set), l.77-79 (Burcroff's Conjecture 1.1), l.102-103 (Theorem 1.4, from one factor) and l.137-139 (Conjecture 1.2; txt l.232); Hogan-Scott-Tsarev 2604.09449v2 main.tex l.79 (colour-balanced: |c^-1(i)| = |c^-1(j)|), l.81-83 (f_c(M), the sum over colours of ||c^-1(i) cap M| - t|), l.695-697 (Theorem 5.3) and l.747-749 (Conjecture 6.2; txt l.1553); Gruslys 1611.02021v1 hypercube-tiling.tex l.537-550 (the divisibility motivation and Conjecture 11; txt l.368-370); Bonamy-Morrison-Scott 1710.07255v3 torus-final.tex l.122-136 (edge packings, Conjecture 1.6 at l.127-129, Theorem 1.7 at l.133-136, txt l.90 and l.98))",
+      "source_verified_at": "2026-10-31",
+      "commit": "x269-alpha-ir-products-colour-balanced-matchings-hypercube-decompositions",
+      "helper_ownership": {
+        "x269_multipartite_complete": {
+          "classification": "paper_specific",
+          "reason": "Complete multipartite graphs with parts of arbitrary sizes (Alon and Defant, arXiv:1904.02595v1, source.tex l.69-73, l.127, Conjecture 1.2 at l.137-139): a part map p : H -> 'I_k with x -- y = (p x != p y). GTBase complete_multipartite_graphs is the balanced K_k(m) of Conjecture 1.1 (the inventory group complete_multipartite, U4 / X218); Extremal XE1's xe1_complete_multipartite_with_sizes is the same class presented by a sized partition (holds for some k and sizes iff this does), and Packing cannot import Extremal. K_2 is one, the triangular prism is not (g269_K2_mp, g269_prism_not_mp)."
+        },
+        "x269_tensor_prod": {
+          "classification": "paper_specific",
+          "reason": "The direct product H 0 x ... x H n of a family 'I_n.+1 -> sgraph (Alon and Defant, arXiv:1904.02595v1, source.tex l.69: adjacent iff adjacent in every coordinate), GTBase's binary tensor_product folded as H 0 x (H 1 x (...)). No corpus helper takes a product of a family; one factor is the factor itself and two factors are tensor_product with adjacency in both coordinates (g269_tp_helper_sanity)."
+        }
+      },
+      "faithfulness_verified_by": "Arthur (X269 wave verification, 2026-10-31)",
+      "faithfulness_result": "Readback 2026-10-31 (verifier Arthur): 3/3 PASS against the pinned texts and the sources, at math/marcol-x269-20261031 = 4fc1e216942b833aea259342bdd09d0400ebb74a (five commits on work/coordinator 8e9c2c68), after my design read ((356), FAITHFUL 3/3, no blocking item, optional N1; packet x269-design-read-by-arthur a2c260ce) of x269-design-by-marcol r1 (0a0fd1ed). grounding_X269.v at 4fc1e216 is byte-identical to the r1 packet; X269.v differs from it only by the N1 Notes sentence in the Gruslys-Leader-Tan block (hypercube-tiling.tex l.537-543, comment only; bodies, identifiers and lint unchanged). arxiv:1904.02595#00 (Conjecture 1.2), as stated, open at the pin: every family H 0, ..., H n (n + 1 >= 1 factors) of complete multipartite graphs (x269_multipartite_complete: a part map with x -- y = (p x != p y)) has alpha = IR on its direct product (x269_tensor_prod, GTBase tensor_product nested: adjacency in every coordinate); upstream irredundant (private_set D v = N[v] :\\: NS[D :\\ v] nonempty) is l.73's N[S \\ {v}] <> N[S], IR the arg max over irredundant sets, alpha the maximum stable set; one-part, vertex-free and single factors are true instances (in a complete multipartite H an irredundant set meets at most two parts, one vertex each when two, so IR = alpha). arxiv:2604.09449#01 (Conjecture 6.2), as stated, open at the pin: one C : nat before all k, t >= 1 such that every colour-balanced k-edge-colouring c of K_(2kt) (equal colour-class sizes on E(K_(2kt))) admits a perfect matching M (upstream matching, so M is in E(G), covering every vertex) with sum over colours of (a - t) + (t - a) = |a - t| below C; f_c integral, so a real C reduces to its ceiling. studies:std_gruslys_leader_tan_conjecture_hypercube_edge_dec, as stated, FALSE at the pin (1710.07255v3 Theorem 1.7; pinned open, the status correction a separate item): for every k >= 1 and every H embedded in Q_k (has_subgraph, not necessarily induced) with an edge, some n >= 1 and a list of embedded edge copies of H covering every edge of Q_n exactly once (edge_decomposition_exact (tuple_hypercube n) H D); \"non-empty\" read as \"has an edge\" (Notes: not a source definition; the status does not depend on it), 1 <= n load-bearing. Helpers x269_multipartite_complete and x269_tensor_prod (paper_specific): stems match no inventory normalized_name, body shapes 441fba39 / bc503baf match none (my bodyshape.pl; control XE1 eeb0e49f = inventory). Grounding: hyp_inhabited at K_2 x K_2 (#00), k = t = 1 on K_2 (#01, the constant positive), Q_1 decomposing Q_1 (GLT); not_trivially_true drops one hypothesis each: complete-multipartite (the one-factor prism K_3 box K_2, alpha <= 2 < 3 <= IR), colour-balance (k = 2, t = C + 1, every edge colour 0), \"has an edge\" (Q_0); helper_sanity both groups in every row. My MCP (Rocq 9.2) builds the combined file, BUILD OK 21 proof blocks, Print Assumptions closed 11 / 11. Metadata: source_hash 3 / 3 recomputed from b72c5857, equal; waves.X269 = the packet's x269-wave.json and the only waves change, its verifier fields empty before this; legs notes 398 / 423 / 395 = \"Authored in X269.v:<name>. \" + the wave note, no other legs entry changed; README 565 / 11 / 40 / 1,057 -> 568 / 11 / 40 / 1,054; LANDED gains X269 packing-theory; no allowlist or migration-spec change. Dev run 1 (x269-dev-by-marcol, 54f3e161, -c OK): PASS-WITH-EXPECTED, 31 steps, 27 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12 / 14 (Print Assumptions clean on 3 / 3 statements + 12 certificates, 30 exact-type probes), W2 891 / 891, W3 3 probed 0 flagged, W4 0 active (44 allowlisted), W5, A11 and A12 (101 / 101 reports OK) rc 0, G6 changed no report.",
+      "rows": {
+        "axv_1904_02595_00": {
+          "formal_name": "alpha_ir_multipartite_products_statement",
+          "source_hash": "290e48733ab641fc0203242dd0311c1e3c3b1ab7bd4b08d3ecc61d255bcae5e5",
+          "note": "Alon and Defant, arXiv:1904.02595v1, Conjecture 1.2 (pinned open), encoded as stated: for every family of n + 1 >= 1 complete multipartite graphs (any part sizes), the direct product has alpha = IR. Conjecture 1.1 (balanced factors) is proved there in all but 37 cases; one-part (edgeless) factors give edgeless products with alpha = IR.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g269_mp_hyp_inhabited",
+              "claim": "g269_mp_hyp_claim",
+              "references": [
+                "alpha_ir_multipartite_products_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g269_mp_not_trivially_true",
+              "claim": "g269_mp_ntt_claim",
+              "references": [
+                "alpha_ir_multipartite_products_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g269_mp_helper_sanity",
+                "claim": "g269_mp_helper_claim",
+                "references": [
+                  "x269_multipartite_complete"
+                ]
+              },
+              {
+                "theorem": "g269_tp_helper_sanity",
+                "claim": "g269_tp_helper_claim",
+                "references": [
+                  "x269_tensor_prod"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2604_09449_01": {
+          "formal_name": "colour_balanced_perfect_matching_statement",
+          "source_hash": "215f5da55b87623c4f960fac7f7bf9505913571226840a5a8f2ef4aa9ced7e24",
+          "note": "Hogan, Scott and Tsarev, arXiv:2604.09449v2, Conjecture 6.2 (pinned open), encoded as stated: one natural C (f_c is an integer) such that for all k, t >= 1 every colour-balanced k-edge-colouring of K_(2kt) has a perfect matching M with f_c(M) < C, f_c(M) the sum over colours of |#(M of colour i) - t|, written (a - t) + (t - a). Theorem 1.2 gives only O(k^2).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g269_cb_hyp_inhabited",
+              "claim": "g269_cb_hyp_claim",
+              "references": [
+                "colour_balanced_perfect_matching_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g269_cb_not_trivially_true",
+              "claim": "g269_cb_ntt_claim",
+              "references": [
+                "colour_balanced_perfect_matching_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g269_mp_helper_sanity",
+                "claim": "g269_mp_helper_claim",
+                "references": [
+                  "x269_multipartite_complete"
+                ]
+              },
+              {
+                "theorem": "g269_tp_helper_sanity",
+                "claim": "g269_tp_helper_claim",
+                "references": [
+                  "x269_tensor_prod"
+                ]
+              }
+            ]
+          }
+        },
+        "std_gruslys_leader_tan_conjecture_hypercube_edge_dec": {
+          "formal_name": "hypercube_edge_decomposition_statement",
+          "source_hash": "bd8e9e770787ab964498da1486ad218c4ec6b8fd2af9da1695272b20481273e6",
+          "note": "The Gruslys-Leader-Tan conjecture (Gruslys, arXiv:1611.02021v1, Conjecture 11; pinned open), encoded as stated: every subgraph H of Q_k (k >= 1) with an edge (non-empty, the edge-cover reading) edge-decomposes some Q_n, n >= 1. FALSE at the pin: Bonamy, Morrison and Scott, arXiv:1710.07255v3, Theorem 1.7 (k >= 5, Q_(k-1) <= H <= Q_k).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g269_hc_hyp_inhabited",
+              "claim": "g269_hc_hyp_claim",
+              "references": [
+                "hypercube_edge_decomposition_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g269_hc_not_trivially_true",
+              "claim": "g269_hc_ntt_claim",
+              "references": [
+                "hypercube_edge_decomposition_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g269_mp_helper_sanity",
+                "claim": "g269_mp_helper_claim",
+                "references": [
+                  "x269_multipartite_complete"
+                ]
+              },
+              {
+                "theorem": "g269_tp_helper_sanity",
+                "claim": "g269_tp_helper_claim",
+                "references": [
+                  "x269_tensor_prod"
+                ]
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }
