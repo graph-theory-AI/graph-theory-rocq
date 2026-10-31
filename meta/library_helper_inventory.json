@@ -24981,13 +24981,13 @@
     ]
   },
   "counts": {
-    "files": 363,
-    "helpers": 2754,
+    "files": 365,
+    "helpers": 2760,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 220,
     "repeated_signature_shapes": 336,
-    "statements_excluded": 851,
-    "x_wave_helpers": 1593
+    "statements_excluded": 858,
+    "x_wave_helpers": 1599
   },
   "groups": {
     "body_shape_hash": {
@@ -27259,6 +27259,10 @@
       "01e1240e4406dc8ba0f954cabf85e146d1f80fd42ebaecdc5c970defb1a97749": [
         "Chromatic.conjectures.U5.subdivide_edge_s",
         "Chromatic.conjectures.U8.local_complement",
+        "Chromatic.conjectures.X272.x272_f11",
+        "Chromatic.conjectures.X272.x272_f14a",
+        "Chromatic.conjectures.X272.x272_f14b",
+        "Chromatic.conjectures.X272.x272_f22",
         "Chromatic.conjectures.X43.x43_claw",
         "Chromatic.conjectures.X43.x43_diamond",
         "Cycle.conjectures.D1.cayley",
@@ -27704,6 +27708,7 @@
         "Chromatic.conjectures.X261.x261_acyclic_colourable",
         "Chromatic.conjectures.X261.x261_topological_clique",
         "Chromatic.conjectures.X268.x268_at_le",
+        "Chromatic.conjectures.X272.x272_col2_le",
         "Chromatic.conjectures.X43.x43_strong_edge_colourable",
         "Chromatic.conjectures.X63.x63_k_homogeneous_colouring",
         "Chromatic.conjectures.X7.x7_no_critical_edge",
@@ -27867,6 +27872,7 @@
         "GTMisc.conjectures.X172.x172_one_bridge_replacement",
         "Hom.conjectures.U3.hom_equiv",
         "Minor.conjectures.U7.immersion",
+        "Minor.conjectures.X271.x271_odd_minor_tree_model",
         "Minor.conjectures.X42.x42_induced_free",
         "Reconstruction.conjectures.U11.same_deck",
         "Reconstruction.conjectures.U11.same_edge_deck",
@@ -34838,6 +34844,101 @@
       "qualified_name": "Chromatic.conjectures.X268.x268_pentagraph",
       "signature": "(G : sgraph) : Prop",
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "a89a796e7447af901e36f72007503e831830df52d9b702dd708ccc08c8b4dd93",
+      "body_shape_hash": "a89a796e7447af901e36f72007503e831830df52d9b702dd708ccc08c8b4dd93",
+      "declaration_hash": "2ca5f8e4990bb1a6cbf5a08139f0eeb21a2460b3138dda8b49f9d4435f7af9ad",
+      "direct_consumers": [
+        "Chromatic.conjectures.X272.dvorak_lidicky_postle_obstructions_fractional_nineteen_sevenths_statement"
+      ],
+      "kind": "Definition",
+      "line": 27,
+      "local_dependencies": [],
+      "name": "x272_f14a",
+      "normalized_name": "f14a",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X272.v",
+      "phase": "X272",
+      "qualified_name": "Chromatic.conjectures.X272.x272_f14a",
+      "signature": ": sgraph",
+      "signature_shape_hash": "01e1240e4406dc8ba0f954cabf85e146d1f80fd42ebaecdc5c970defb1a97749"
+    },
+    {
+      "body_hash": "df611a2aab4b5b25c129bc18771bb6b2e1059cbd6755e875cca7d9d14e086ad5",
+      "body_shape_hash": "df611a2aab4b5b25c129bc18771bb6b2e1059cbd6755e875cca7d9d14e086ad5",
+      "declaration_hash": "97c2277b18a4a3faf7200f9b22a872cd4513822b016f0cc6127b01e96a9f4763",
+      "direct_consumers": [
+        "Chromatic.conjectures.X272.dvorak_lidicky_postle_obstructions_fractional_nineteen_sevenths_statement"
+      ],
+      "kind": "Definition",
+      "line": 39,
+      "local_dependencies": [],
+      "name": "x272_f14b",
+      "normalized_name": "f14b",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X272.v",
+      "phase": "X272",
+      "qualified_name": "Chromatic.conjectures.X272.x272_f14b",
+      "signature": ": sgraph",
+      "signature_shape_hash": "01e1240e4406dc8ba0f954cabf85e146d1f80fd42ebaecdc5c970defb1a97749"
+    },
+    {
+      "body_hash": "3c59d9a8d3c50b459f5d81a3479a9753a6fb5818b00c5751635f16df411c36bb",
+      "body_shape_hash": "3c59d9a8d3c50b459f5d81a3479a9753a6fb5818b00c5751635f16df411c36bb",
+      "declaration_hash": "a2b503a3e8dffa529ec37e8ce023c86430a580e88da3c976fe821ec643edd228",
+      "direct_consumers": [
+        "Chromatic.conjectures.X272.dvorak_lidicky_postle_obstructions_fractional_nineteen_sevenths_statement"
+      ],
+      "kind": "Definition",
+      "line": 48,
+      "local_dependencies": [],
+      "name": "x272_f11",
+      "normalized_name": "f11",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X272.v",
+      "phase": "X272",
+      "qualified_name": "Chromatic.conjectures.X272.x272_f11",
+      "signature": ": sgraph",
+      "signature_shape_hash": "01e1240e4406dc8ba0f954cabf85e146d1f80fd42ebaecdc5c970defb1a97749"
+    },
+    {
+      "body_hash": "1f8686899f9e1e52c8e5c569affe99382dbef75169a8e31b13e15d1a6b1c7d60",
+      "body_shape_hash": "1f8686899f9e1e52c8e5c569affe99382dbef75169a8e31b13e15d1a6b1c7d60",
+      "declaration_hash": "3c46c2a99449b079ccc78747827507e7d467de0029f56c44ba4b3d98d00f31df",
+      "direct_consumers": [
+        "Chromatic.conjectures.X272.dvorak_lidicky_postle_obstructions_fractional_nineteen_sevenths_statement"
+      ],
+      "kind": "Definition",
+      "line": 57,
+      "local_dependencies": [],
+      "name": "x272_f22",
+      "normalized_name": "f22",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X272.v",
+      "phase": "X272",
+      "qualified_name": "Chromatic.conjectures.X272.x272_f22",
+      "signature": ": sgraph",
+      "signature_shape_hash": "01e1240e4406dc8ba0f954cabf85e146d1f80fd42ebaecdc5c970defb1a97749"
+    },
+    {
+      "body_hash": "7bece98211570b9c244694eda55749b03e135dc23f11d559c5b90d4a04b018a8",
+      "body_shape_hash": "7bece98211570b9c244694eda55749b03e135dc23f11d559c5b90d4a04b018a8",
+      "declaration_hash": "021168f2ed3ce4edac90fdba71387efa7e0f557d55481fb9b5f1e5d99779f551",
+      "direct_consumers": [
+        "Chromatic.conjectures.X272.planar_two_colouring_number_at_most_eight_statement"
+      ],
+      "kind": "Definition",
+      "line": 72,
+      "local_dependencies": [],
+      "name": "x272_col2_le",
+      "normalized_name": "col2_le",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X272.v",
+      "phase": "X272",
+      "qualified_name": "Chromatic.conjectures.X272.x272_col2_le",
+      "signature": "(G : sgraph) (k : nat) : Prop",
+      "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
     },
     {
       "body_hash": "a252d3382e9e2e9f0450759c627d453616f368776f8069089a1ef10686104455",
@@ -79136,6 +79237,26 @@
       "qualified_name": "Minor.conjectures.X27.x27_even_hole_free",
       "signature": "(G : sgraph) : Prop",
       "signature_shape_hash": "e00382bad2a976ab54f1c8dda40b6bd8d8d63954b9635fbaeee92d4ce9bc7270"
+    },
+    {
+      "body_hash": "2e1bb472804d3ef3cd5284cf43cda4eedb9681ab5768d29932b1108fd46202ee",
+      "body_shape_hash": "2e1bb472804d3ef3cd5284cf43cda4eedb9681ab5768d29932b1108fd46202ee",
+      "declaration_hash": "c2630dd4febe9df9bda09a928d46e18278fd399e677860900d38dae7fb23830a",
+      "direct_consumers": [
+        "Minor.conjectures.X271.odd_hadwiger_chromatic_odd_minor_statement",
+        "Minor.conjectures.X271.odd_hadwiger_odd_minor_free_colourable_statement"
+      ],
+      "kind": "Definition",
+      "line": 10,
+      "local_dependencies": [],
+      "name": "x271_odd_minor_tree_model",
+      "normalized_name": "odd_minor_tree_model",
+      "package": "minor-theory",
+      "path": "minor-theory/theories/conjectures/X271.v",
+      "phase": "X271",
+      "qualified_name": "Minor.conjectures.X271.x271_odd_minor_tree_model",
+      "signature": "(G H : sgraph) : Prop",
+      "signature_shape_hash": "386157e12d686b4cdea1c7e7e1bddc5b3f28be1b17c3f1036579936afdc0bb30"
     },
     {
       "body_hash": "5edb615beec81191c63fde7ab2cee4db86341a0244022b1295f1b14a4dab4b23",
