@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-four
+corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-eight
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -53,7 +53,13 @@ disproved: the triangle, kernel-checked in its registered formal resolution. Two
 refuted before the corpus pin: Gruslys, Leader and Tan's hypercube edge-decomposition conjecture,
 behind wave X269, in its own record (Bonamy, Morrison and Scott, arXiv:1710.07255v3, Theorem 1.7), and
 Steinberg's conjecture, behind wave X270 (Cohen-Addad, Hebdige, Kral', Li and Salgado,
-arXiv:1604.05108v2, Theorem 3).
+arXiv:1604.05108v2, Theorem 3). Four studies rows were settled before the corpus pin: the two rows of
+the odd Hadwiger conjecture of Gerards and Seymour, behind wave X271, refuted by Kuhn, Sauermann,
+Steiner and Wigderson (arXiv:2512.20392v1, Theorem 1.3, the record of one of them); the question of
+Kierstead, Mohar, Spacapan, Yang and Zhu on the 2-colouring number of planar graphs, behind wave X272,
+answered in its own record (Dvorak, Kaiser and Kral', arXiv:1506.01412v3, Theorem 1); and Thomassen's
+conjecture on exponentially many 3-colourings of triangle-free planar graphs, behind wave X272 (refuted
+by Thomassen in 2021, and by Dvorak and Postle, arXiv:2108.12669v1, Theorem 1).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -361,6 +367,33 @@ ERRATA = [
      "Theorem 3 (steinberg.tex l.140-143): there is a planar graph with no cycles of length four or five that is not "
      "3-colorable. The row is Steinberg's conjecture of 1976 (l.26 there): every planar graph without 4- and "
      "5-cycles is 3-colourable."),
+    # literature status corrections (Lancelot's lane; the studies rows behind waves X271 and X272, settled before the
+    # corpus pin; their encoded statements are kept)
+    ("studies", "std_odd_hadwiger_conjecture", "disproved",
+     "Literature: refuted in its own record by Kuhn, Sauermann, Steiner and Wigderson, arXiv:2512.20392v1 (23 December "
+     "2025), Theorem 1.3 (main.tex l.200-202): for every fixed delta > 0 and every t sufficiently large with respect to "
+     "delta there is a graph G with chi(G) >= (3/2 - delta) t that does not have K_t as an odd minor; in particular, for "
+     "every sufficiently large t, a graph with chi(G) >= t and no odd K_t minor. The row is the odd Hadwiger conjecture "
+     "of Gerards and Seymour, Conjecture 1.2 there (l.188-191), with the tree definition of an odd minor (l.182-186)."),
+    ("studies", "std_odd_hadwiger_conjecture_411", "disproved",
+     "Literature: refuted by Kuhn, Sauermann, Steiner and Wigderson, arXiv:2512.20392v1 (23 December 2025), Theorem 1.3 "
+     "(main.tex l.200-202): for every sufficiently large t there is a graph with chi(G) >= t that does not have K_t as "
+     "an odd minor. The row is the colouring form of the odd Hadwiger conjecture of Gerards and Seymour, Conjecture 1.2 "
+     "of Steiner, arXiv:2203.02766v1 (main.tex l.139-141): for every t >= 2, a graph with no odd K_t-minor is properly "
+     "(t-1)-colourable."),
+    ("studies", "std_kierstead_et_al_question_on_the_2_coloring_numbe", "solved",
+     "Literature: answered in its own record by Dvorak, Kaiser and Kral', arXiv:1506.01412v3 (21 June 2018), Theorem 1 "
+     "(twocol.tex l.84-86): the two-coloring number of any planar graph is at most 8, with col_2(G) = 1 + the least, "
+     "over orderings of V(G), maximum size of L(v), the earlier vertices adjacent to v or sharing a later neighbour "
+     "with v (l.57-71). The row is Question 1 of Kierstead, Mohar, Spacapan, Yang and Zhu (preprint 2009, p. 4): is "
+     "col_2(G) <= 8 for every planar graph G?"),
+    ("studies", "std_thomassen_s_conjecture_exponentially_many_3_colo", "disproved",
+     "Literature: refuted by Thomassen in 2021 (for infinitely many n, an n-vertex triangle-free planar graph with at "
+     "most 2^(15n / log_2 n) 3-colourings) and, with a stronger bound, by Dvorak and Postle, arXiv:2108.12669v1 "
+     "(28 August 2021), Theorem 1 (bebound.tex l.60-63): for infinitely many n, an n-vertex triangle-free planar graph "
+     "with at most 64^(n^(log_(9/2) 3)) < 64^(n^0.731) 3-colourings; l.56-57 there record Thomassen's disproof. The row "
+     "is Thomassen's 2007 Conjecture 2.1(b), stated as Conjecture 1 of Dvorak and Sereni, arXiv:1702.00588v2 (main.tex "
+     "l.99-105): some beta > 0 such that every triangle-free planar graph G has at least 2^(beta |V(G)|) 3-colourings."),
 ]
 
 
@@ -969,7 +1002,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 24 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 28 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
