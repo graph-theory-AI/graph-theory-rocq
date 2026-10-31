@@ -814,6 +814,16 @@
       "path": "hypergraph-theory/theories/conjectures/vocabulary_hypergraph.v",
       "name": "x6_uniform",
       "note": "The seven *_equiv_hg_uniform bridges keep exact types; both sides now unfold to uniform_family, proofs unchanged."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/X267.v",
+      "name": "hg_uniform",
+      "note": "Wave X267 (2026-10-31): row erdos:716 uses the exported foundation predicate hg_uniform (Hypergraph.foundations.hypergraph) unchanged, as X217 / X225."
+    },
+    {
+      "path": "hypergraph-theory/theories/conjectures/grounding_X267.v",
+      "name": "hg_uniform",
+      "note": "Wave X267 (2026-10-31): the X267 grounding uses hg_uniform for the complete 3-graph and three disjoint triples, with unchanged proofs, as grounding_X217 / grounding_X225."
     }
   ],
   "distinct_variants": []
