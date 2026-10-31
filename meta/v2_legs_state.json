@@ -3359,11 +3359,14 @@
    "note": "Authored in X66.v:good_trees_disjoint_union_good_statement. Encodes the open problem that the disjoint union of two good trees is good."
   },
   "axv_2202_09118_04": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x268-alon-tarsi-matching-self-isolating-plummer-zha",
+   "package": "chromatic-theory",
+   "note": "Authored in X268.v:all_graphs_self_isolating_statement. Chudnovsky, Scott, Seymour and Spirkl, arXiv:2202.09118v1 (source.tex l.141-150 and l.165; pinned status open): could it be that all graphs are self-isolating? Encoded as its affirmative answer, every H self-isolating (x268_self_isolating), with the polynomials psi and phi read as monomials c x^d and c' x^d' (equivalent both ways: omega >= 1 wherever the bounds bite). Proved for complete graphs, paths and complete bipartite graphs."
   },
   "axv_2202_10412_00": {
    "statement": "done",
@@ -3776,11 +3779,14 @@
    "audit_page": "todo"
   },
   "axv_2209_09107_01": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x268-alon-tarsi-matching-self-isolating-plummer-zha",
+   "package": "chromatic-theory",
+   "note": "Authored in X268.v:alon_tarsi_matching_removal_statement. Bradshaw, Chen, Ma, Mohar and Wu, Question 6.2 of arXiv:2209.09107v2 (main.tex l.1015-1018; pinned status open), as its affirmative answer: some natural C such that every graph G has a matching M and some k with 2 k <= Delta(G) + 2 C and AT(G - M) <= k (x268_at_le: every edge oriented exactly once, an Alon-Tarsi orientation of Chromatic.foundations.alon_tarsi, outdegrees below k; l.215-222). C >= 1 is forced by the edgeless graphs; the paper notes C >= 1/2."
   },
   "axv_2209_12023_00": {
    "statement": "todo",
@@ -12881,11 +12887,14 @@
    "audit_page": "todo"
   },
   "std_plummer_zha_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x268-alon-tarsi-matching-self-isolating-plummer-zha",
+   "package": "chromatic-theory",
+   "note": "Authored in X268.v:plummer_zha_pentagraph_three_colourable_statement. The Plummer-Zha conjecture (Plummer and Zha, Electron. J. Combin. 21(1) (2014) #P1.34, Question 3.4; pinned status open), encoded as stated: every 3-connected (k_connected G 3), internally 4-connected (x268_internally_four_connected: every 3-vertex cut is a neighbourhood) pentagraph (x268_pentagraph: girth >= 5, odd induced cycles of length 5) has chi <= 3. TRUE at the pin: Chudnovsky and Seymour, arXiv:2201.11505v2, Theorem 1.1 (every pentagraph is three-colourable)."
   },
   "std_polynomial_freiman_ruzsa_conjecture": {
    "statement": "todo",
