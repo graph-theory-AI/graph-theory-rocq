@@ -6,8 +6,8 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2250,
-      "cross_file_files": 1116,
+      "cross_file_declarations": 2251,
+      "cross_file_files": 1117,
       "implicit_use": 3,
       "packages_without_project": [
         "graph-theory-base"
@@ -19,7 +19,7 @@
       ],
       "undecided_files": 0,
       "unlisted_files": 0,
-      "with_cross_file": 372,
+      "with_cross_file": 373,
       "with_own_certificate": 511,
       "with_same_file": 448
     },
@@ -412,8 +412,12 @@
         "alias": "Chromatic.conjectures.X100.x100_edge_set",
         "cross_file": {
           "certificates_of": [],
-          "declarations": [],
-          "files": [],
+          "declarations": [
+            "chromatic-theory/theories/conjectures/grounding_X275.v:<line 76>"
+          ],
+          "files": [
+            "chromatic-theory/theories/conjectures/grounding_X275.v"
+          ],
           "statements": [],
           "undecided": [],
           "unlisted": []
@@ -433,7 +437,9 @@
           ]
         },
         "provider_unlisted": false,
-        "require_chain": {},
+        "require_chain": {
+          "chromatic-theory/theories/conjectures/grounding_X275.v": "unknown"
+        },
         "same_file": {
           "declarations": [
             "x100_col_deg"
@@ -24981,12 +24987,12 @@
     ]
   },
   "counts": {
-    "files": 367,
+    "files": 369,
     "helpers": 2761,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 220,
     "repeated_signature_shapes": 337,
-    "statements_excluded": 864,
+    "statements_excluded": 868,
     "x_wave_helpers": 1600
   },
   "groups": {
