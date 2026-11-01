@@ -12485,6 +12485,86 @@
       },
       "faithfulness_verified_by": "Marcol (X273 wave verification, 2026-11-01)",
       "faithfulness_result": "Readback 2026-11-01 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x273-20261101 = f103a9c42c90cd2acaee46c96ae2af3b1028c793 (five commits on work/coordinator 61cebcbb), after my design read ((302), FAITHFUL 3/3 with one blocking documentation item B1; packet x273-design-read-by-marcol c335d821). At f103a9c4 grounding_X273.v is the design packet's file byte for byte and X273.v differs from it only in the six Site / Review lines of B1, now corpus_registry.row_urls' for the three arxiv rows. arxiv:2108.12669#00, in natural numbers and equivalent (my own check of both directions, written before the design): some k >= 1 such that every wagner_planar, triangle_free G with 0 < #|G| has 2^m <= N^k whenever 9^a < 3^b 2^a (a / b < log_(9/2) 3) and m^b <= #|G|^a, N its labelled proper 3-colourings (G -> 'I_3); c > 1 corresponds to c^k >= 2 and c = 2^(1/(2k)); the guard 0 < #|G| is load-bearing (0^0 = 1); Stdlib reals refused as axiom-dependent; open. arxiv:2103.05998#00, as stated over Theorem 1.4's parameters, open: some k >= 1 with t^2 <= k chi(G_(m,t)) and chi(G_(m,t)) <= k t^2 for every t >= 1 and even m >= 4t^2, one k equivalent to uniform c1, c2 > 0; x273_alon m t checked against the source definition (strict threshold m - 2t < Hamming distance over {ffun 'I_m -> bool}, fg_mk_sgraph's closure inert, exact under the guards); the even-m condition is Theorem 1.4's, whose proof defines the graph. arxiv:1809.05439#00, as its affirmative form over Theorem 5's class, open: every wagner_planar, triangle_free G and vertex x have phi : G -> {set 'I_9} with adjacent sets disjoint, |phi v| >= 3 for all v and |phi x| = 5 (>= 5 equivalent); the wheel caps x at 5. One local helper, x273_alon, paper_specific: no file and no inventory name at 61cebcbb, body shape c63fd08a with 0 hits among 2,760 helpers (replica control x272_col2_le). Grounding: hyp_inhabited at K_1 (2 <= 3^k), (m, t) = (4, 1) and K_2; not_trivially_true drops one load-bearing hypothesis each, refuted at non-empty graphs: triangle-freeness at K_4 (no proper 3-colouring), 4t^2 <= m at m = 2, t = 4k + 1 (four vertices, chi <= 4 < t^2 / k) and triangle-freeness at K_3 (5 + 3 + 3 > 9); helper_sanity g273_alon_helper_sanity in every row (order 2^m, the threshold adjacency, an edge of G_(4,1), chi(G_(4,1)) <= 4); every row claim names its statement (6/6), the helper claim names x273_alon. Independent type check: my MCP built the design's combined file, 15 proof blocks, no holes. Lint: rows 1 and 2 clean; row 3 exists-after-graph-forall, one allowlist entry, reason accurate. Consumers: no frozen name. Metadata: source_hash 3/3 recomputed from b72c5857, equal; waves = wave-x273.jq applied to 61cebcbb (jq -S equal), its verifier fields empty before this; allowlist = allowlist-x273.jq applied (44 -> 45); legs: only the three rows, notes 559 / 485 / 463 = \"Authored in X273.v:<name>. \" + the wave note; README 578 / 11 / 40 / 1,044 -> 581 / 11 / 40 / 1,041; LANDED gains X273 chromatic-theory after X272. Dev run 1 (x273-dev-by-arthur, 72a2dc4a, 40 listed = present, -c OK, on f103a9c4): PASS-WITH-EXPECTED, 28 steps, 24 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12/14 (Print Assumptions clean on 3/3 statements + 9 certificates, 30 exact-type probes), W2 904/904, W3 3 probed 0 flagged, W4 0 active (45 allowlisted), W5, A11 and A12 rc 0."
+    },
+    "X274": {
+      "phase": "X274",
+      "repo": "graph-theory-misc",
+      "defines_file": "X274.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X274 (A3 verifier Arthur; routing Lancelot (318); selection x274-selection-by-marcol, design x274-design-by-marcol r1), branch math/marcol-x274-20261031",
+      "source_verified_by": "Arthur (X274 wave verifier, A3: pinned records re-read at graph-conjectures b72c5857, statement_text alone, the studies rows' builder rule: data/arxiv_extracted/1810.00065.json record 0 (role studies, Kalai-Meshulam Conjecture) = da567974953788480a6bb3d73b53f9f308098eebad530eaf32092a6bd3f28632, 1809.04716.json record 0 (role studies, Linear Arboricity Conjecture (Conjecture 1.1)) = 1fadd1af7ce3fa5ce16e14ad40436d3e456cd026f6d22df081e84f39978c9fd3, 2505.08634.json record 2 (role studies, Walther-Zamfirescu Question) = 84fedfd35865ac1bb64222a94644f6610bbdfdd01ad057271328eddffe1d5411; all three equal to the manifest rows and to the wave's source_hash values, the upstream statements equal to the manifest's statement_text; pinned statuses open (all three); the sources read: the Mac's x236-mac-20261026 (SHA256SUMS c8a612fb, -c OK) 1810.00065v1 main.tex l.71-77 (abstract: f_G over all stable sets, +-2 on cycles of length divisible by three) and l.83-94 (ternary: no induced cycle of length a multiple of three; both Kalai-Meshulam conjectures now theorems, the row at l.91-94); x274-source-mac-20261101 (47544527, -c OK) 1809.04716v1 (13 September 2018, the only version) main.tex l.133 (linear forest; la(G)), l.135 (isolated vertices; the simple-graph Vizing bound), l.139-143 (Conjecture 1.1), l.145-147 (Remark 1.2), l.156-162 (Theorem 1.3, regular and asymptotic); x272-source-mac-20261031 (b62dd0bf, -c OK) 2505.08634v2 main.tex l.62-68 (four authors), l.84 (longest = maximum length), l.89-94 (Theorem 1), text l.62-65 (the question, widely open).)",
+      "source_verified_at": "2026-11-01",
+      "commit": "x274-kalai-meshulam-linear-arboricity-walther-zamfirescu",
+      "rows": {
+        "std_kalai_meshulam_conjecture": {
+          "formal_name": "kalai_meshulam_even_odd_stable_sets_statement",
+          "source_hash": "da567974953788480a6bb3d73b53f9f308098eebad530eaf32092a6bd3f28632",
+          "note": "The Kalai-Meshulam conjecture as (1.2) of Chudnovsky, Scott, Seymour and Spirkl (arXiv:1810.00065v1, main.tex l.91-94; pinned open), encoded as stated: in a ternary graph (no induced cycle of length k >= 3 divisible by three, X236's reading of l.83) the stable sets of even and of odd size, the empty set included, differ in number by at most one. TRUE at the pin: the same paper proves it (l.77, l.86).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g274_km_hyp_inhabited",
+              "claim": "g274_km_hyp_claim",
+              "references": [
+                "kalai_meshulam_even_odd_stable_sets_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g274_km_not_trivially_true",
+              "claim": "g274_km_ntt_claim",
+              "references": [
+                "kalai_meshulam_even_odd_stable_sets_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_linear_arboricity_conjecture": {
+          "formal_name": "linear_arboricity_conjecture_statement",
+          "source_hash": "1fadd1af7ce3fa5ce16e14ad40436d3e456cd026f6d22df081e84f39978c9fd3",
+          "note": "The linear arboricity conjecture of Akiyama, Exoo and Harary (studies record arXiv:1809.04716; pinned open), encoded as stated: every graph has an edge colouring with ceil((Delta + 1) / 2) colours whose classes are linear forests (GTBase linear_forest, edge_colour_class), i.e. la(G) <= ceil((Delta + 1) / 2). Open at the pin: Ferber, Fox and Jain (arXiv:1809.04716v1, Conjecture 1.1, main.tex l.139-143) prove only la(G) <= Delta/2 + C Delta^(2/3 - alpha) for Delta-regular G (Theorem 1.3). Simple graphs, as in the source.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g274_la_hyp_inhabited",
+              "claim": "g274_la_hyp_claim",
+              "references": [
+                "linear_arboricity_conjecture_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g274_la_not_trivially_true",
+              "claim": "g274_la_ntt_claim",
+              "references": [
+                "linear_arboricity_conjecture_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_walther_zamfirescu_longest_path_transversal_ques": {
+          "formal_name": "walther_zamfirescu_bounded_longest_path_transversal_statement",
+          "source_hash": "84fedfd35865ac1bb64222a94644f6610bbdfdd01ad057271328eddffe1d5411",
+          "note": "The Walther-Zamfirescu question (studies record arXiv:2505.08634v2, main.tex l.84; pinned open), encoded as the affirmative answer: one c > 0 such that every connected graph has a set of at most c vertices meeting every longest path (a repetition-free vertex sequence, consecutive vertices adjacent, with the most vertices). OPEN at the pin (l.84: \"remains widely open\"); Norin, Steiner, Thomasse and Wollan prove lpt(G) <= min{sqrt(8n), 33 l^(5/9)} (Theorem 1, l.89-94).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g274_wz_hyp_inhabited",
+              "claim": "g274_wz_hyp_claim",
+              "references": [
+                "walther_zamfirescu_bounded_longest_path_transversal_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g274_wz_not_trivially_true",
+              "claim": "g274_wz_ntt_claim",
+              "references": [
+                "walther_zamfirescu_bounded_longest_path_transversal_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "Arthur (X274 wave verification, 2026-11-01)",
+      "faithfulness_result": "Readback 2026-11-01 (verifier Arthur): 3/3 PASS against the pinned texts and the sources, at math/marcol-x274-20261031 = 94710578950df1986f4d8bfb9c638276677b5777 (five commits on work/coordinator 61cebcbb), after my design read ((379), FAITHFUL 3/3, no blocking item, optional N1 / N2; packet x274-design-read-by-arthur 871dcaf4) of x274-design-by-marcol r1 (48845a86). grounding_X274.v at 94710578 is byte-identical to the r1 packet; X274.v differs from it only by N1 (row 3's Notes: lpt(K_1) = 1, so a natural c with 0 < c loses nothing), a comment. No local helper. studies:std_kalai_meshulam_conjecture, as stated, TRUE at the pin (1810.00065v1): for every ternary graph (x236_ternary's body inlined: no induced cycle of length k >= 3 with 3 | k), e <= o + 1 and o <= e + 1 for the even and odd stable sets, the empty set included, i.e. |f_G| <= 1. studies:std_linear_arboricity_conjecture, as stated, open: every G has a colouring of {set G} with ceil((Delta + 1) / 2) colours whose classes (edge_colour_class) are linear forests, i.e. la(G) <= ceil((Delta + 1) / 2), simple graphs. studies:std_walther_zamfirescu_longest_path_transversal_ques, its affirmative answer, open: some natural c > 0 such that every connected G has at most c vertices meeting every longest path (uniq vertex sequences of maximal length). Grounding: hyp_inhabited at K_2 (KM, LA) and K_1 (WZ); not_trivially_true: without ternary (K_3: one even, three odd stable sets), the ceil(Delta / 2) variant (K_3; strictly stronger, edgeless graphs satisfy it), without connected (c + 1 isolated vertices). My MCP (Rocq 9.2) builds the design's combined file: 17 blocks, Print Assumptions closed 9 / 9. Metadata: source_hash 3 / 3 recomputed from b72c5857, equal; waves.X274 = the r1 packet's x274-wave.json and the only waves change, helper_ownership {} and helper_sanity [] in every row, its verifier fields empty before this; legs notes 469 / 583 / 553 = \"Authored in X274.v:<name>. \" + the wave note, no other legs entry changed; README 578 / 11 / 40 / 1,044 -> 581 / 11 / 40 / 1,041; LANDED gains X274 graph-theory-misc; the lint allowlist gains exactly the packet's two exists-after-graph-forall entries (46); no migration-spec change. Dev run 1 (x274-dev-by-marcol, 12c5fb41, -c OK): PASS-WITH-EXPECTED, 31 steps, 27 rc 0, only W1 / A3a / A3 / A10 on the empty fields; the runner switched to the branch and checked EXPECTED_HEAD before every step; W1 12 / 14 (package compiles; Print Assumptions clean on 3 / 3 statements + 6 certificates; 30 exact-type probes), W2 904 / 904, W3 3 probed 0 flagged, W4 0 active (46 allowlisted), W5, A11 (no group) and A12 rc 0, G6 changed no report."
     }
   }
 }
