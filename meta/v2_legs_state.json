@@ -12241,11 +12241,14 @@
    "audit_page": "todo"
   },
   "std_kalai_meshulam_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x274-kalai-meshulam-linear-arboricity-walther-zamfirescu",
+   "package": "graph-theory-misc",
+   "note": "Authored in X274.v:kalai_meshulam_even_odd_stable_sets_statement. The Kalai-Meshulam conjecture as (1.2) of Chudnovsky, Scott, Seymour and Spirkl (arXiv:1810.00065v1, main.tex l.91-94; pinned open), encoded as stated: in a ternary graph (no induced cycle of length k >= 3 divisible by three, X236's reading of l.83) the stable sets of even and of odd size, the empty set included, differ in number by at most one. TRUE at the pin: the same paper proves it (l.77, l.86)."
   },
   "std_kam_ev_liebenau_wood_yepremyan_question_on_size": {
    "statement": "todo",
@@ -12531,11 +12534,14 @@
    "audit_page": "todo"
   },
   "std_linear_arboricity_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x274-kalai-meshulam-linear-arboricity-walther-zamfirescu",
+   "package": "graph-theory-misc",
+   "note": "Authored in X274.v:linear_arboricity_conjecture_statement. The linear arboricity conjecture of Akiyama, Exoo and Harary (studies record arXiv:1809.04716; pinned open), encoded as stated: every graph has an edge colouring with ceil((Delta + 1) / 2) colours whose classes are linear forests (GTBase linear_forest, edge_colour_class), i.e. la(G) <= ceil((Delta + 1) / 2). Open at the pin: Ferber, Fox and Jain (arXiv:1809.04716v1, Conjecture 1.1, main.tex l.139-143) prove only la(G) <= Delta/2 + C Delta^(2/3 - alpha) for Delta-regular G (Theorem 1.3). Simple graphs, as in the source."
   },
   "std_linial_s_problem_on_topological_tur_n_numbers_fo": {
    "statement": "todo",
@@ -13490,11 +13496,14 @@
    "note": "Authored in X256.v:vizing_kempe_optimal_colouring_question_statement. Vizing's question (arXiv:2107.07900v1, Question 1.3): a synonym of X213's vizing_kempe_interchange_statement (bm:bm-060), both directions in the Notes. Solved before the pin (pinned status open), as X213 records (Narboni, arXiv:2302.12914v1)."
   },
   "std_walther_zamfirescu_longest_path_transversal_ques": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x274-kalai-meshulam-linear-arboricity-walther-zamfirescu",
+   "package": "graph-theory-misc",
+   "note": "Authored in X274.v:walther_zamfirescu_bounded_longest_path_transversal_statement. The Walther-Zamfirescu question (studies record arXiv:2505.08634v2, main.tex l.84; pinned open), encoded as the affirmative answer: one c > 0 such that every connected graph has a set of at most c vertices meeting every longest path (a repetition-free vertex sequence, consecutive vertices adjacent, with the most vertices). OPEN at the pin (l.84: \"remains widely open\"); Norin, Steiner, Thomasse and Wollan prove lpt(G) <= min{sqrt(8n), 33 l^(5/9)} (Theorem 1, l.89-94)."
   },
   "std_watanabe_ishii_sawa_question_on_n3_of_odd_cycles": {
    "statement": "todo",
