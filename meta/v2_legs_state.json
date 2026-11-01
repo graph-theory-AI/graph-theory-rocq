@@ -5679,11 +5679,14 @@
    "audit_page": "todo"
   },
   "axv_2507_04254_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x275-modular-zero-k-yao-zhou-density",
+   "package": "chromatic-theory",
+   "note": "Authored in X275.v:modular_edge_colouring_zero_mod_k_graphs_k_plus_little_o_statement. Conjecture 13 of arXiv:2507.04254v2 (main.tex l.394-397; pinned status open), encoded as stated with the o(k) term uniform over the 0_k-graphs: for every m >= 1 some k0 such that for every k >= k0 every graph with all degrees divisible by k has a mod k edge-colouring (X100's x100_modular_edge_colourable: non-zero colour-degrees 1 modulo k) with some q colours, m q <= (m + 1) k. At least one colour (an edgeless palette reading); k0 >= 2 avoids the degenerate k = 1."
   },
   "axv_2507_10840_00": {
    "statement": "todo",
@@ -13610,11 +13613,14 @@
    "audit_page": "todo"
   },
   "std_yao_zhou_conjecture_on_the_edge_density_of_4_cri": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x275-modular-zero-k-yao-zhou-density",
+   "package": "chromatic-theory",
+   "note": "Authored in X275.v:yao_zhou_four_critical_planar_edge_density_limsup_seven_thirds_statement. Yao and Zhou's conjecture as 2311.03132v1 states it (main.tex l.92-94; pinned status open): the limsup over graph order of |E| / |V| over 4-critical planar graphs (chi = 4 and x258_edge_critical G 4, as l.74) is 7/3, as two rational clauses for every eps = p / q (eventually <= 7/3 + eps; orders >= n0 with >= 7/3 - eps). FALSE at the pin: Theorem 1 there (l.98-100) gives L = 2.5."
   },
   "std_you_liu_zhai_shu_hong_conjecture_on_algebraic_co": {
    "statement": "todo",
