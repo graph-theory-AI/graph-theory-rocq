@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-eight
+corrections are applied explicitly (ERRATA below) since the review files predate them. Twenty-nine
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -59,7 +59,9 @@ Steiner and Wigderson (arXiv:2512.20392v1, Theorem 1.3, the record of one of the
 Kierstead, Mohar, Spacapan, Yang and Zhu on the 2-colouring number of planar graphs, behind wave X272,
 answered in its own record (Dvorak, Kaiser and Kral', arXiv:1506.01412v3, Theorem 1); and Thomassen's
 conjecture on exponentially many 3-colourings of triangle-free planar graphs, behind wave X272 (refuted
-by Thomassen in 2021, and by Dvorak and Postle, arXiv:2108.12669v1, Theorem 1).
+by Thomassen in 2021, and by Dvorak and Postle, arXiv:2108.12669v1, Theorem 1). The Kalai-Meshulam
+conjecture on ternary graphs, behind wave X274, is solved in its own record (Chudnovsky, Scott, Seymour
+and Spirkl, arXiv:1810.00065v1, Theorem 1.2).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -394,6 +396,14 @@ ERRATA = [
      "with at most 64^(n^(log_(9/2) 3)) < 64^(n^0.731) 3-colourings; l.56-57 there record Thomassen's disproof. The row "
      "is Thomassen's 2007 Conjecture 2.1(b), stated as Conjecture 1 of Dvorak and Sereni, arXiv:1702.00588v2 (main.tex "
      "l.99-105): some beta > 0 such that every triangle-free planar graph G has at least 2^(beta |V(G)|) 3-colourings."),
+    # literature status correction (Lancelot's lane; the studies row behind wave X274, proved before the corpus pin;
+    # its encoded statement is kept)
+    ("studies", "std_kalai_meshulam_conjecture", "solved",
+     "Literature: proved in its own record by Chudnovsky, Scott, Seymour and Spirkl, arXiv:1810.00065v1 (28 September "
+     "2018), Theorem 1.2 (main.tex l.91-94): for every ternary graph, the number of stable sets with even cardinality "
+     "and the number with odd cardinality differ by at most one, a graph being ternary if no induced cycle has length a "
+     "multiple of three (l.83); equivalently |f_G| <= 1 for f_G the sum of (-1)^|A| over all stable sets A (abstract, "
+     "l.71-77). The row is the Kalai-Meshulam conjecture of the late 1990s (l.84-86)."),
 ]
 
 
@@ -1002,7 +1012,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 28 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 29 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
