@@ -12376,6 +12376,115 @@
           }
         }
       }
+    },
+    "X273": {
+      "phase": "X273",
+      "repo": "chromatic-theory",
+      "defines_file": "X273.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X273 (A3 verifier Marcol; routing Lancelot (316), (320), (324); selection x273-selection-by-arthur (375), design x273-design-by-arthur r1), branch math/arthur-x273-20261101",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x273-three-colourings-alon-nine-colour-sets",
+      "rows": {
+        "axv_2108_12669_00": {
+          "formal_name": "dvorak_postle_triangle_free_planar_three_colourings_lower_bound_statement",
+          "source_hash": "667938656ce054d1a81b843988016122c700b98845156e78858542209e764905",
+          "note": "Conjecture 1 of Dvorak and Postle (arXiv:2108.12669v1, bebound.tex l.68-71; pinned status open), encoded in natural numbers and equivalent: some k >= 1 such that every n-vertex (n >= 1) triangle-free planar graph has 2^m <= N^k whenever 9^a < 3^b 2^a (a / b < log_(9/2) 3) and m^b <= n^a, N its number of proper 3-colourings ('I_3). Stdlib reals carry four axioms, which the gate refuses; c > 1 becomes k with c^k >= 2. The guard 0 < #|G| is load-bearing (0^0 = 1).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g273_dp_hyp_inhabited",
+              "claim": "g273_dp_hyp_claim",
+              "references": [
+                "dvorak_postle_triangle_free_planar_three_colourings_lower_bound_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g273_dp_not_trivially_true",
+              "claim": "g273_dp_ntt_claim",
+              "references": [
+                "dvorak_postle_triangle_free_planar_three_colourings_lower_bound_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g273_alon_helper_sanity",
+                "claim": "g273_alon_helper_claim",
+                "references": [
+                  "x273_alon"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_2103_05998_00": {
+          "formal_name": "alon_hamming_graph_chromatic_number_theta_t_squared_statement",
+          "source_hash": "b48225fbdb568f60973d031ac86417d7c29b7f0ebdd49488848dddd9c56210ab",
+          "note": "Alon's conjecture (arXiv:2103.05998v2, main.tex l.493-500; pinned status open), encoded as stated: some k >= 1 with t^2 <= k chi(G_(m,t)) and chi(G_(m,t)) <= k t^2 for all t >= 1 and even m >= 4t^2 (Theorem 1.4's conditions, l.119-126); x273_alon m t is G_(m,t), binary vectors adjacent iff their Hamming distance exceeds m - 2t (l.228-232). The paper proves 2t <= chi = O(t^2); the lower bound is open.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g273_alon_hyp_inhabited",
+              "claim": "g273_alon_hyp_claim",
+              "references": [
+                "alon_hamming_graph_chromatic_number_theta_t_squared_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g273_alon_not_trivially_true",
+              "claim": "g273_alon_ntt_claim",
+              "references": [
+                "alon_hamming_graph_chromatic_number_theta_t_squared_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g273_alon_helper_sanity",
+                "claim": "g273_alon_helper_claim",
+                "references": [
+                  "x273_alon"
+                ]
+              }
+            ]
+          }
+        },
+        "axv_1809_05439_00": {
+          "formal_name": "dvorak_hu_triangle_free_planar_nine_colour_sets_statement",
+          "source_hash": "1cfff4e5ee6369e95da4d2f59c05bc46d4dca7863b59bbeea42f5768388789ca",
+          "note": "The question after Theorem 5 of Dvorak and Hu (arXiv:1809.05439v1, nofrapl.tex l.157-159; pinned status open), as its affirmative form over Theorem 5's class (l.147-152): every triangle-free planar G with a vertex x has phi : G -> {set 'I_9}, adjacent sets disjoint (l.81-82), |phi(v)| >= 3 and |phi(x)| = 5; >= 5 is equivalent. The subdivided five-spoke wheel (l.159-161) caps x at 5.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g273_dh_hyp_inhabited",
+              "claim": "g273_dh_hyp_claim",
+              "references": [
+                "dvorak_hu_triangle_free_planar_nine_colour_sets_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g273_dh_not_trivially_true",
+              "claim": "g273_dh_ntt_claim",
+              "references": [
+                "dvorak_hu_triangle_free_planar_nine_colour_sets_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g273_alon_helper_sanity",
+                "claim": "g273_alon_helper_claim",
+                "references": [
+                  "x273_alon"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x273_alon": {
+          "classification": "paper_specific",
+          "reason": "Alon's graph G_(m,t) (arXiv:2103.05998v2, proof of Theorem 1.4, main.tex l.228-232): the binary vectors of length m ({ffun 'I_m -> bool}), adjacent iff their Hamming distance exceeds m - 2t, over GTBase fg_mk_sgraph (its closure changes nothing: the relation is symmetric and false on the diagonal). No corpus helper defines a Hamming-threshold graph: no inventory normalized_name alon, body shape unmatched; the hypercubes (U9, D3cr, XE1) and the Clebsch graph use distance 1 (or 4). 2^m vertices, adjacency exactly the threshold, G_(4,1) has an edge and chi <= 4 (g273_alon_helper_sanity)."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
