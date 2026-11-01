@@ -1436,11 +1436,14 @@
    "audit_page": "todo"
   },
   "axv_1809_05439_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x273-three-colourings-alon-nine-colour-sets",
+   "package": "chromatic-theory",
+   "note": "Authored in X273.v:dvorak_hu_triangle_free_planar_nine_colour_sets_statement. The question after Theorem 5 of Dvorak and Hu (arXiv:1809.05439v1, nofrapl.tex l.157-159; pinned status open), as its affirmative form over Theorem 5's class (l.147-152): every triangle-free planar G with a vertex x has phi : G -> {set 'I_9}, adjacent sets disjoint (l.81-82), |phi(v)| >= 3 and |phi(x)| = 5; >= 5 is equivalent. The subdivided five-spoke wheel (l.159-161) caps x at 5."
   },
   "axv_1809_08324_00": {
    "statement": "done",
@@ -2783,11 +2786,14 @@
    "note": "Authored in X228.v:random_embedding_expected_faces_linear_statement. Campion Loth-Halasz-Masarik-Mohar-Samal Conjecture 1 (SOLVED): E[F] = O(n). Same finite-average modelling as the companion row; O(n) is an EXISTENTIAL CONSTANT quantified outside the graph quantifier: exists c, forall G, total <= c * #|G| * nrot. implications_X228.v proves the corpus edge gc:e125 (Conjecture 4 implies Conjecture 1) with c = 2."
   },
   "axv_2103_05998_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x273-three-colourings-alon-nine-colour-sets",
+   "package": "chromatic-theory",
+   "note": "Authored in X273.v:alon_hamming_graph_chromatic_number_theta_t_squared_statement. Alon's conjecture (arXiv:2103.05998v2, main.tex l.493-500; pinned status open), encoded as stated: some k >= 1 with t^2 <= k chi(G_(m,t)) and chi(G_(m,t)) <= k t^2 for all t >= 1 and even m >= 4t^2 (Theorem 1.4's conditions, l.119-126); x273_alon m t is G_(m,t), binary vectors adjacent iff their Hamming distance exceeds m - 2t (l.228-232). The paper proves 2t <= chi = O(t^2); the lower bound is open."
   },
   "axv_2103_08698_00": {
    "statement": "todo",
@@ -3024,11 +3030,14 @@
    "note": "Authored in X38.v:min_degree_spanning_subgraph_small_degree_multiplicity_statement. Encodes the minimum-degree irregular-subgraph row: a spanning edge-subgraph has maximum degree-class multiplicity at most n/(delta+1)+2."
   },
   "axv_2108_12669_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x273-three-colourings-alon-nine-colour-sets",
+   "package": "chromatic-theory",
+   "note": "Authored in X273.v:dvorak_postle_triangle_free_planar_three_colourings_lower_bound_statement. Conjecture 1 of Dvorak and Postle (arXiv:2108.12669v1, bebound.tex l.68-71; pinned status open), encoded in natural numbers and equivalent: some k >= 1 such that every n-vertex (n >= 1) triangle-free planar graph has 2^m <= N^k whenever 9^a < 3^b 2^a (a / b < log_(9/2) 3) and m^b <= n^a, N its number of proper 3-colourings ('I_3). Stdlib reals carry four axioms, which the gate refuses; c > 1 becomes k with c^k >= 2. The guard 0 < #|G| is load-bearing (0^0 = 1)."
   },
   "axv_2109_00327_00": {
    "statement": "todo",
