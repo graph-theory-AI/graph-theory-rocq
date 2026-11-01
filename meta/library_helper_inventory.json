@@ -24981,13 +24981,13 @@
     ]
   },
   "counts": {
-    "files": 365,
-    "helpers": 2760,
+    "files": 366,
+    "helpers": 2761,
     "repeated_body_shapes": 150,
     "repeated_normalized_names": 220,
-    "repeated_signature_shapes": 336,
-    "statements_excluded": 858,
-    "x_wave_helpers": 1599
+    "repeated_signature_shapes": 337,
+    "statements_excluded": 861,
+    "x_wave_helpers": 1600
   },
   "groups": {
     "body_shape_hash": {
@@ -28151,6 +28151,10 @@
       "61431ad82459b59a4038be72eaa30152908d5eff83def0a27f2880536f8eb4d0": [
         "Cycle.conjectures.D1.ncomp",
         "Cycle.conjectures.D1.nullity"
+      ],
+      "625dac751598ade908ec395151085f6a8ada8cc68113aca2d12c96a64ee52933": [
+        "Chromatic.conjectures.X273.x273_alon",
+        "Extremal.conjectures.X191.x191_clique_blowup"
       ],
       "650e7d5e43da80fd9044285fdbf153bdbb236d7b8dd476f5bdc1dba83e870cb0": [
         "Digraph.conjectures.X216.x216_win",
@@ -34939,6 +34943,25 @@
       "qualified_name": "Chromatic.conjectures.X272.x272_col2_le",
       "signature": "(G : sgraph) (k : nat) : Prop",
       "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
+    },
+    {
+      "body_hash": "c63fd08a86d602f6c4ca16feb6210f5e739fd2f9594304eb2cc366463e97a4d4",
+      "body_shape_hash": "c63fd08a86d602f6c4ca16feb6210f5e739fd2f9594304eb2cc366463e97a4d4",
+      "declaration_hash": "080a76484df63e3504a289f94235b67225b2beeb10c32d82b2db6c06793bd243",
+      "direct_consumers": [
+        "Chromatic.conjectures.X273.alon_hamming_graph_chromatic_number_theta_t_squared_statement"
+      ],
+      "kind": "Definition",
+      "line": 22,
+      "local_dependencies": [],
+      "name": "x273_alon",
+      "normalized_name": "alon",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X273.v",
+      "phase": "X273",
+      "qualified_name": "Chromatic.conjectures.X273.x273_alon",
+      "signature": "(m t : nat) : sgraph",
+      "signature_shape_hash": "625dac751598ade908ec395151085f6a8ada8cc68113aca2d12c96a64ee52933"
     },
     {
       "body_hash": "a252d3382e9e2e9f0450759c627d453616f368776f8069089a1ef10686104455",
