@@ -12565,6 +12565,64 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X274 wave verification, 2026-11-01)",
       "faithfulness_result": "Readback 2026-11-01 (verifier Arthur): 3/3 PASS against the pinned texts and the sources, at math/marcol-x274-20261031 = 94710578950df1986f4d8bfb9c638276677b5777 (five commits on work/coordinator 61cebcbb), after my design read ((379), FAITHFUL 3/3, no blocking item, optional N1 / N2; packet x274-design-read-by-arthur 871dcaf4) of x274-design-by-marcol r1 (48845a86). grounding_X274.v at 94710578 is byte-identical to the r1 packet; X274.v differs from it only by N1 (row 3's Notes: lpt(K_1) = 1, so a natural c with 0 < c loses nothing), a comment. No local helper. studies:std_kalai_meshulam_conjecture, as stated, TRUE at the pin (1810.00065v1): for every ternary graph (x236_ternary's body inlined: no induced cycle of length k >= 3 with 3 | k), e <= o + 1 and o <= e + 1 for the even and odd stable sets, the empty set included, i.e. |f_G| <= 1. studies:std_linear_arboricity_conjecture, as stated, open: every G has a colouring of {set G} with ceil((Delta + 1) / 2) colours whose classes (edge_colour_class) are linear forests, i.e. la(G) <= ceil((Delta + 1) / 2), simple graphs. studies:std_walther_zamfirescu_longest_path_transversal_ques, its affirmative answer, open: some natural c > 0 such that every connected G has at most c vertices meeting every longest path (uniq vertex sequences of maximal length). Grounding: hyp_inhabited at K_2 (KM, LA) and K_1 (WZ); not_trivially_true: without ternary (K_3: one even, three odd stable sets), the ceil(Delta / 2) variant (K_3; strictly stronger, edgeless graphs satisfy it), without connected (c + 1 isolated vertices). My MCP (Rocq 9.2) builds the design's combined file: 17 blocks, Print Assumptions closed 9 / 9. Metadata: source_hash 3 / 3 recomputed from b72c5857, equal; waves.X274 = the r1 packet's x274-wave.json and the only waves change, helper_ownership {} and helper_sanity [] in every row, its verifier fields empty before this; legs notes 469 / 583 / 553 = \"Authored in X274.v:<name>. \" + the wave note, no other legs entry changed; README 578 / 11 / 40 / 1,044 -> 581 / 11 / 40 / 1,041; LANDED gains X274 graph-theory-misc; the lint allowlist gains exactly the packet's two exists-after-graph-forall entries (46); no migration-spec change. Dev run 1 (x274-dev-by-marcol, 12c5fb41, -c OK): PASS-WITH-EXPECTED, 31 steps, 27 rc 0, only W1 / A3a / A3 / A10 on the empty fields; the runner switched to the branch and checked EXPECTED_HEAD before every step; W1 12 / 14 (package compiles; Print Assumptions clean on 3 / 3 statements + 6 certificates; 30 exact-type probes), W2 904 / 904, W3 3 probed 0 flagged, W4 0 active (46 allowlisted), W5, A11 (no group) and A12 rc 0, G6 changed no report."
+    },
+    "X275": {
+      "phase": "X275",
+      "repo": "chromatic-theory",
+      "defines_file": "X275.v",
+      "implemented_by": "Arthur (Claude Opus 5.5), wave X275 (A3 verifier Marcol; routing Lancelot (333), (340); selection x275-selection-by-arthur (386), design x275-design-by-arthur r1), branch math/arthur-x275-20261101",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x275-modular-zero-k-yao-zhou-density",
+      "rows": {
+        "axv_2507_04254_00": {
+          "formal_name": "modular_edge_colouring_zero_mod_k_graphs_k_plus_little_o_statement",
+          "source_hash": "9704b586897240b4949b0211a104c3dd307bd77eb004422c6c318ce2612c5686",
+          "note": "Conjecture 13 of arXiv:2507.04254v2 (main.tex l.394-397; pinned status open), encoded as stated with the o(k) term uniform over the 0_k-graphs: for every m >= 1 some k0 such that for every k >= k0 every graph with all degrees divisible by k has a mod k edge-colouring (X100's x100_modular_edge_colourable: non-zero colour-degrees 1 modulo k) with some q colours, m q <= (m + 1) k. At least one colour (an edgeless palette reading); k0 >= 2 avoids the degenerate k = 1.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g275_mod_hyp_inhabited",
+              "claim": "g275_mod_hyp_claim",
+              "references": [
+                "modular_edge_colouring_zero_mod_k_graphs_k_plus_little_o_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g275_mod_not_trivially_true",
+              "claim": "g275_mod_ntt_claim",
+              "references": [
+                "modular_edge_colouring_zero_mod_k_graphs_k_plus_little_o_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_yao_zhou_conjecture_on_the_edge_density_of_4_cri": {
+          "formal_name": "yao_zhou_four_critical_planar_edge_density_limsup_seven_thirds_statement",
+          "source_hash": "5e8ced0eff0bcda62af516204148219762dc2e1db5d58fd00b3140de7cf8f126",
+          "note": "Yao and Zhou's conjecture as 2311.03132v1 states it (main.tex l.92-94; pinned status open): the limsup over graph order of |E| / |V| over 4-critical planar graphs (chi = 4 and x258_edge_critical G 4, as l.74) is 7/3, as two rational clauses for every eps = p / q (eventually <= 7/3 + eps; orders >= n0 with >= 7/3 - eps). FALSE at the pin: Theorem 1 there (l.98-100) gives L = 2.5.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g275_yz_hyp_inhabited",
+              "claim": "g275_yz_hyp_claim",
+              "references": [
+                "yao_zhou_four_critical_planar_edge_density_limsup_seven_thirds_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g275_yz_not_trivially_true",
+              "claim": "g275_yz_ntt_claim",
+              "references": [
+                "yao_zhou_four_critical_planar_edge_density_limsup_seven_thirds_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
