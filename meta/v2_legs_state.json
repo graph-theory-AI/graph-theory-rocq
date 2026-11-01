@@ -11439,11 +11439,14 @@
    "audit_page": "todo"
   },
   "std_erd_s_problem_on_k_r_graphs": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x276-erdos-kr-graphs-hajebi-clique-covers",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X276.v:erdos_kr_graphs_unbounded_statement. Erdos's problem on (k,r)-graphs as Problem 1.1 of Skottova and Steiner (arXiv:2508.08703v1, main.tex l.203-205; pinned open), encoded as the affirmative answer: for every k >= 4 and r, every large n carries a k-vertex-critical graph on n vertices with no critical set of at most r edges (critical: its deletion lowers chi, l.197-199), which is f_k(n) -> infinity. OPEN at the pin: the paper proves k >= 5 (Theorem 1.2, l.214-217); k = 4 stays open (l.210)."
   },
   "std_erd_s_rado_sunflower_conjecture": {
    "statement": "done",
@@ -12050,11 +12053,14 @@
    "note": "Authored in X271.v:hajos_k5_subdivision_statement. Hajos' conjecture at five (Girao et al., arXiv:2605.10112v1, main.tex l.183-185; pinned open), encoded as stated: every graph with chi = 5 contains a subdivision of K_5, not necessarily induced; the chi >= 5 form is equivalent through a 5-chromatic subgraph. Open at the pin (t = 5, 6 open, false for t >= 7)."
   },
   "std_hajebi_s_conjecture": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x276-erdos-kr-graphs-hajebi-clique-covers",
+   "package": "extremal-graph-theory",
+   "note": "Authored in X276.v:hajebi_ktt_free_subquadratic_clique_cover_statement. Hajebi's conjecture as Conjecture 1.5 of Nguyen, Scott, Seymour and Thomasse (arXiv:2211.12065v1, main.tex l.147-149; pinned open), encoded as stated with eps = 1/q and the O-constant C: every graph with no induced K_{t,t} (l.100) has a set of cliques covering every edge with #|cover|^q <= C |G|^(2q - 1). TRUE at the pin: the same paper proves it (Theorem 1.6, l.150-163)."
   },
   "std_harris_conjecture": {
    "statement": "done",
