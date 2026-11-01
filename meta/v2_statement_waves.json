@@ -12623,6 +12623,64 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Marcol (X275 wave verification, 2026-11-01)",
       "faithfulness_result": "Readback 2026-11-01 (verifier Marcol): 2/2 PASS against the pinned texts and the sources, at math/arthur-x275-20261101 = 9aa149c549e3b0daa2ee4b979a0cf8e5c0706c08 (five commits on work/coordinator 2dbe6da4), after my design read ((309), FAITHFUL 2/2 with one blocking documentation item B1, the 2311.03132v1 line citations; packet x275-design-read-by-marcol aaf2c7e7) and Arthur's r2 (x275-design-r2-by-arthur 60b006bb: B1 as listed, my optional O1 and O2). At 9aa149c5, X275.v and grounding_X275.v are the r2 files byte for byte, and their comment-stripped code is identical to r1's, which my MCP built as a stand-in (X100.v l.11-25 and X258.v l.45-46 at 2dbe6da4 verbatim in place of the Chromatic import): 11 proof blocks, no holes. arxiv:2507.04254#00, as stated with the o(k) term uniform over the 0_k-graphs, open: for every m >= 1 some k0 such that for every k >= k0 every graph whose degrees are all divisible by k (0 included) has q colours with m q <= (m + 1) k and x100_modular_edge_colourable G k q (X100's colouring, reused unchanged: every colour's degree at every vertex 0 or 1 mod k, = the source's chi'_k); the eventual form is one f in o(k) because chi'_k is bounded over all graphs for each k (main theorem), and k0 >= 2 avoids X100's degenerate k = 1; at least one colour is an implementation reading, below every bound. studies:std_yao_zhou_conjecture_on_the_edge_density_of_4_cri, as stated, FALSE at the pin: for every eps = p / q > 0, eventually 3 q |E| <= (7 q + 3 p) |V| over 4-critical planar graphs (chi = 4 and x258_edge_critical G 4, = l.74; wagner_planar) and, for every n0, a member of order >= n0 with 7 q |V| <= 3 q |E| + 3 p |V| (the limsup over graph order; no truncated subtraction; isolated vertices only lower the density); Theorem 1 of 2311.03132v1 (L = 2.5) refutes the upper clause, the lower clause is Yao and Zhou's theorem. No local helper (helper_sanity [] and helper_ownership {}); X100 and X258 consumed unchanged, no frozen name hit (consumer scan, 1,199 names). Grounding: hyp_inhabited at K_1 (0_k for every k; m = 1 gives q <= 2k) and K_4 (planar, chi 4, edge-critical); not_trivially_true: the mod variant with q < k, strictly stronger, false at K_(k+1) (a 0_k-graph needing k colours), a strengthened-conclusion form since without 0_k the row would follow from the open BCK conjecture; the yz variant whose upper clause ranges over all graphs, strictly stronger, false at K_n, n >= 8 (3 C(n, 2) > 10 n); every claim names its statement (4/4); no certificate rests on a graph without vertices. Lint: two exists-after-graph-forall findings, two allowlist entries with accurate reasons. Metadata: source_hash 2/2 recomputed from b72c5857, equal; waves = the r2 wave-x275.jq applied to 2dbe6da4 (byte), its verifier fields empty before this; allowlist = the r2 allowlist-x275.jq applied (byte, 47 -> 49); legs: only the two rows, notes 555 / 474 = \"Authored in X275.v:<name>. \" + the wave note; README 584 / 11 / 40 / 1,038 -> 586 / 11 / 40 / 1,036; LANDED gains X275 chromatic-theory after X274. Dev run 1 (x275-dev-by-arthur 8c4c0a48, 40 listed = present, -c OK, on 9aa149c5): PASS-WITH-EXPECTED, 28 steps, 24 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12/14 (Print Assumptions clean on 2/2 statements + 4 certificates, 20 exact-type probes), W2 909/909, W3 2 probed 0 flagged, W4 0 active (49 allowlisted), W5, A11 and A12 rc 0."
+    },
+    "X276": {
+      "phase": "X276",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X276.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X276 (A3 verifier Arthur; routing Lancelot (335), (340); selection x276-selection-by-marcol, design x276-design-by-marcol r1), branch math/marcol-x276-20261101",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x276-erdos-kr-graphs-hajebi-clique-covers",
+      "rows": {
+        "std_erd_s_problem_on_k_r_graphs": {
+          "formal_name": "erdos_kr_graphs_unbounded_statement",
+          "source_hash": "2491fc9604ad021002dd7d6c2289b2431d8740083b4dbf1269cfc656e8bc2b45",
+          "note": "Erdos's problem on (k,r)-graphs as Problem 1.1 of Skottova and Steiner (arXiv:2508.08703v1, main.tex l.203-205; pinned open), encoded as the affirmative answer: for every k >= 4 and r, every large n carries a k-vertex-critical graph on n vertices with no critical set of at most r edges (critical: its deletion lowers chi, l.197-199), which is f_k(n) -> infinity. OPEN at the pin: the paper proves k >= 5 (Theorem 1.2, l.214-217); k = 4 stays open (l.210).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g276_kr_hyp_inhabited",
+              "claim": "g276_kr_hyp_claim",
+              "references": [
+                "erdos_kr_graphs_unbounded_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g276_kr_not_trivially_true",
+              "claim": "g276_kr_ntt_claim",
+              "references": [
+                "erdos_kr_graphs_unbounded_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_hajebi_s_conjecture": {
+          "formal_name": "hajebi_ktt_free_subquadratic_clique_cover_statement",
+          "source_hash": "ad5bbba4486254249327b6a15d0634298bc20d3008ca12010cd137b31212c57e",
+          "note": "Hajebi's conjecture as Conjecture 1.5 of Nguyen, Scott, Seymour and Thomasse (arXiv:2211.12065v1, main.tex l.147-149; pinned open), encoded as stated with eps = 1/q and the O-constant C: every graph with no induced K_{t,t} (l.100) has a set of cliques covering every edge with #|cover|^q <= C |G|^(2q - 1). TRUE at the pin: the same paper proves it (Theorem 1.6, l.150-163).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g276_hj_hyp_inhabited",
+              "claim": "g276_hj_hyp_claim",
+              "references": [
+                "hajebi_ktt_free_subquadratic_clique_cover_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g276_hj_not_trivially_true",
+              "claim": "g276_hj_ntt_claim",
+              "references": [
+                "hajebi_ktt_free_subquadratic_clique_cover_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
