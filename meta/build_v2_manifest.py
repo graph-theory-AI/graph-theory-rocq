@@ -26,7 +26,7 @@ Every row carries `site_url` / `review_url`, derived from its row_id by corpus_r
 Status mapping (exact-type-gate vocabulary, plan §1.4): identity for open/partial/solved/
 disproved; `unclear` -> open (safest polarity: forbids committed direct proofs); the raw review
 status is preserved in `review_status`. The three ABOULKER_CONJECTURES_RANKED.md errata status
-corrections are applied explicitly (ERRATA below) since the review files predate them. Thirty-three
+corrections are applied explicitly (ERRATA below) since the review files predate them. Thirty-four
 literature corrections use the same list. By Marc's decisions of 2026-10-25, X184 is solved by its
 own source, and the studies row of Nydl's conjecture (keyed ("studies", slug)) is disproved. By
 wave X233's finding F1, the union cover variant arxiv:2105.07370#00 is solved by its own source. By
@@ -68,7 +68,9 @@ wave X276, proved by Nguyen, Scott, Seymour and Thomasse (arXiv:2211.12065v1, Th
 question of Javadi and Hajebi on linear clique covers, answered negatively in the same record (Theorem
 1.3). Meshulam's conjecture on Ruzsa-Szemeredi graphs, behind wave X278, was refuted before the pin by
 Alon, Moitra and Sudakov (STOC 2012; JEMS 15 (2013)), as its own record reports (arXiv:2001.00387v1,
-main.tex l.124-127 and l.140-143).
+main.tex l.124-127 and l.140-143). The conjecture of Pavez-Signe, Piga and Sanhueza-Matamala on
+k-connected graphs of prescribed Ramsey growth, behind wave X282, is proved in its own record (Ahme and
+Scott, arXiv:2311.01887v1, Theorem 3, for all sufficiently large n, as its Conjecture 16 asks).
 
 Recovery triage (plan §1.1 B3) is pinned HERE so the counts are reproducible:
   needed  iff statement_text is missing, shorter than SHORT_LEN chars, or matches INTERNAL_RE.
@@ -440,6 +442,17 @@ ERRATA = [
      "graphs on n vertices with r = n^(1-o(1)) and rt = (1-o(1)) C(n,2); l.142-143 there: this 'disproved Meshulam's "
      "conjecture in a strong form'. The row is Meshulam's conjecture as quoted at l.140-141: there are no (r,t)-RS "
      "graphs (l.128) with both rt = Theta(C(n,2)) and r >= n^Omega(1). The primary paper was not read here."),
+    # literature status correction (Lancelot's lane, lit22; the studies row behind wave X282, proved in its own record
+    # before the corpus pin; the encoded statement is kept)
+    ("studies", "std_pavez_sign_piga_sanhueza_matamala_conjecture_on", "solved",
+     "Literature: proved in its own record by Ahme and Scott, 'Graphs with arbitrary Ramsey number and connectivity', "
+     "arXiv:2311.01887v1 (3 November 2023), Theorem 3 (main.tex l.44-47): for every k >= 2 there is C_k > 0 such that "
+     "for every f : N -> N with n <= f(n) <= r(K_n) there are k-connected graphs G_n on n vertices with "
+     "f(n) <= r(G_n) <= C_k f(n); l.42 there: 'we prove their conjecture'. The theorem is printed 'for all n', but the "
+     "proof fixes a large n (l.106), and no graph on n <= k vertices is k-connected, so the bounds hold for all "
+     "sufficiently large n. That is what the row asks: Conjecture 16 of Pavez-Signe, Piga and Sanhueza-Matamala, "
+     "arXiv:2209.05455v3, main.tex l.486-489 (R(G_n) = Theta(f(n)) and G_n k-connected for all n sufficiently large), "
+     "quoted without that qualifier at l.38-40 of the record."),
 ]
 
 
@@ -1048,7 +1061,7 @@ manifest = {
     "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). "
                "Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — "
                "deterministic; regenerate + diff to review changes. Status uses the exact-type-gate "
-               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 33 literature "
+               "vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 34 literature "
                "errata applied). "
                "b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. "
                "source_text currently holds the extractor's statement; REC/implementation replaces it "
