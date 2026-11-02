@@ -24990,13 +24990,13 @@
     ]
   },
   "counts": {
-    "files": 369,
-    "helpers": 2763,
-    "repeated_body_shapes": 151,
-    "repeated_normalized_names": 221,
+    "files": 370,
+    "helpers": 2764,
+    "repeated_body_shapes": 152,
+    "repeated_normalized_names": 222,
     "repeated_signature_shapes": 337,
-    "statements_excluded": 868,
-    "x_wave_helpers": 1602
+    "statements_excluded": 869,
+    "x_wave_helpers": 1603
   },
   "groups": {
     "body_shape_hash": {
@@ -26146,6 +26146,10 @@
         "Extremal.conjectures.X60.x60_delete_edge_graph",
         "Reconstruction.conjectures.U11.sdel_edge"
       ],
+      "f28b9888c7158e6a72efe1a102e459e73c82eec3a8a5e5bb3fd808bbb50d8831": [
+        "Chromatic.conjectures.X194.x194_ctd_at_most",
+        "Chromatic.conjectures.X218.x218_ctd_at_most"
+      ],
       "f2b0ce0bbdce3e9a118c4cb04124bff42ba9f0e1e643cc7bdbc67d5e1c3db1fc": [
         "Chromatic.conjectures.X157.x157_path_internal",
         "Extremal.conjectures.XE2.xe2_internal_path_vertices"
@@ -26359,6 +26363,10 @@
       "cops_win_in": [
         "GTMisc.conjectures.X197.x197_cops_win_in",
         "Topological.conjectures.X202.x202_cops_win_in"
+      ],
+      "ctd_at_most": [
+        "Chromatic.conjectures.X194.x194_ctd_at_most",
+        "Chromatic.conjectures.X218.x218_ctd_at_most"
       ],
       "cubic": [
         "Chromatic.conjectures.U5.cubic",
@@ -27416,6 +27424,7 @@
       ],
       "0bae8f16ee0b381536cb1f07eb57f52b4be719e72f2739e0073bb1b84350db06": [
         "Chromatic.conjectures.X194.x194_clustered_chromatic_minor_class_le",
+        "Chromatic.conjectures.X194.x194_ctd_at_most",
         "Chromatic.conjectures.X218.x218_connected_treedepth_at_most",
         "Chromatic.conjectures.X218.x218_ctd_at_most"
       ],
@@ -33424,7 +33433,7 @@
       "body_shape_hash": "89a9968eff5bf6f7039ca5baae6edb01b789fe176e28c9928f5f8242803f06c3",
       "declaration_hash": "c7a67ed5807d820c6cd1dc3c6b846670296306fcb08d9f3c6907ef532992a986",
       "direct_consumers": [
-        "Chromatic.conjectures.X194.clustered_chromatic_minor_class_treedepth_bound_statement"
+        "Chromatic.conjectures.X194.x194_ctd_at_most"
       ],
       "kind": "Definition",
       "line": 19,
@@ -33441,6 +33450,27 @@
       "signature_shape_hash": "2cf69232ae4a655dc39c6e8919882e178b2cdf73018734822b5a52b739de6f6e"
     },
     {
+      "body_hash": "ab72bee6ee6688f655278c16a7da10e08449930965bfbfb231630fc4d317358f",
+      "body_shape_hash": "f28b9888c7158e6a72efe1a102e459e73c82eec3a8a5e5bb3fd808bbb50d8831",
+      "declaration_hash": "2134b88cce4a326d9d7c83324015b9c7ceb2bc52aa8f69b2756607883ce65cd6",
+      "direct_consumers": [
+        "Chromatic.conjectures.X194.clustered_chromatic_minor_class_treedepth_bound_statement"
+      ],
+      "kind": "Definition",
+      "line": 22,
+      "local_dependencies": [
+        "x194_treedepth_at_most"
+      ],
+      "name": "x194_ctd_at_most",
+      "normalized_name": "ctd_at_most",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X194.v",
+      "phase": "X194",
+      "qualified_name": "Chromatic.conjectures.X194.x194_ctd_at_most",
+      "signature": "(H : sgraph) (k : nat) : Prop",
+      "signature_shape_hash": "0bae8f16ee0b381536cb1f07eb57f52b4be719e72f2739e0073bb1b84350db06"
+    },
+    {
       "body_hash": "8fbbcbcb314fed764a82b6d9eba8c8c5c49049af3baddabc441dd0bba1da7c64",
       "body_shape_hash": "8fbbcbcb314fed764a82b6d9eba8c8c5c49049af3baddabc441dd0bba1da7c64",
       "declaration_hash": "1d861f729d82d2b8baf98753400709e776ad5fe7296388319513c12dbaca0f2c",
@@ -33448,7 +33478,7 @@
         "Chromatic.conjectures.X194.clustered_chromatic_minor_class_treedepth_bound_statement"
       ],
       "kind": "Definition",
-      "line": 22,
+      "line": 31,
       "local_dependencies": [],
       "name": "x194_clustered_chromatic_minor_class_le",
       "normalized_name": "clustered_chromatic_minor_class_le",
