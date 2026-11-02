@@ -37,7 +37,9 @@
     "GTBase.monochromatic.monochromatic_on_ext",
     "GTBase.monochromatic.monochromatic_on_relabel",
     "GTBase.monochromatic.non_monochromatic_onP",
-    "Chromatic.migration.monochromatic.x181_event_weight_compat"
+    "Chromatic.migration.monochromatic.x181_event_weight_compat",
+    "Chromatic.migration.monochromatic.x218_normalisation_defect",
+    "Chromatic.migration.monochromatic.x218_legacy_model_is_tree_model"
   ],
   "downstream_client": "base/theories/examples/monochromatic.v",
   "summary": [
@@ -197,6 +199,25 @@
         "x218_clustered_chromatic_class_le": "X218Legacy.x218_clustered_chromatic_class_le"
       },
       "certificate": "Chromatic.migration.monochromatic.odd_minor_free_defective_clustered_treedepth_statement_compat",
+      "repair": {
+        "replace": [
+          "    1 <= k ->\n    x218_connected_treedepth_at_most H k ->\n    ~ x218_connected_treedepth_at_most H k.-1 ->\n    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor G H) (k - 1) /\\\n    x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor G H) (k - 1)",
+          "    x218_ctd_at_most H k ->\n    ~ x218_ctd_at_most H k.-1 ->\n    x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (2 * k - 2) /\\\n    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (k - 1) /\\\n    (forall j : nat, j.+1 < k ->\n       ~ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) j)"
+        ],
+        "direction": "re-encode",
+        "relation": "({frozen} -> True) /\\ ({live} -> True)",
+        "doc_block_sha256": "0c60a76f17fd8dd2b388d1c12f96be9dcca305def5daeabb2679993f697f2bab",
+        "record": "meta/STATEMENT_IMPROVEMENTS.md",
+        "row_fields": [
+          "source_verified_by",
+          "source_verified_at",
+          "verification_note"
+        ],
+        "leg_fields": [
+          "statement",
+          "note"
+        ]
+      },
       "corpus": "v2"
     },
     {
@@ -304,7 +325,7 @@
     {
       "path": "chromatic-theory/theories/conjectures/X218.v",
       "name": "clustered_colouring",
-      "note": "Public foundation reaching path to the complete blocked X218 conjunction, frozen in this report."
+      "note": "Public foundation reaching path to the X218 conjunction (blocked when this report was frozen; re-encoded on 2026-11-02 under the repair entry of its statement), frozen in this report."
     },
     {
       "path": "topological-graph-theory/theories/conjectures/X138.v",
@@ -319,7 +340,7 @@
     {
       "path": "chromatic-theory/theories/conjectures/grounding_X218.v",
       "name": "odd_minor_free_defective_clustered_treedepth_statement",
-      "note": "Existing Print Assumptions of the complete blocked row; declaration and status unchanged."
+      "note": "Existing Print Assumptions of the X218 row (blocked when this report was frozen; its body re-encoded on 2026-11-02 under the repair entry of its statement)."
     },
     {
       "path": "base/theories/base.v",

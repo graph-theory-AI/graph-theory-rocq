@@ -3066,3 +3066,54 @@ as a `distinct_variants` entry of `meta/migration_reports/fractional_chromatic.s
   (`M_c(K_2) = 2`: `K_2` is `(k,q)`-mixing for every `k > 2q`); `circular_mixing_threshold_K2_not_attained` (at `2/1` the
   two colourings of `K_2` are frozen).
 - The row stays PARTIAL (no real-number layer); the logical relation between the two bodies is recorded by the reviewer.
+
+## chromatic-theory — `odd_minor_free_defective_clustered_treedepth_statement` re-encoded to the source's Conjecture 2 (2026-11-02)
+
+Item of coordination/PROGRAMME.md, section 3, Lancelot's lane: an A2 re-encoding with the A4 direction `re-encode`, routed
+in BOARD items (324) / (325) and (354), design x218-design-by-lancelot r1 (A3 verifier Arthur). The row
+arxiv:2308.15721#00 (`X218.v:261`) is frozen by the monochromatic family (`X218Legacy` in
+`chromatic-theory/theories/migration/monochromatic.v`, byte-identical); the repair entry is in
+`meta/migration_reports/monochromatic.spec.json`.
+
+- **Source** (the Mac's deposit coordination/sources/x218-source-mac-20261101): Hickingbotham, Kang, Oum, Steiner and
+  Wood, arXiv:2308.15721v2, arXiv.tex l.199-202 (v1 main.tex l.201-204 is the same): "For every graph H,
+  χ_⋆(G_H^odd) ≤ 2 ctd(H) − 2 and χ_Δ(G_H^odd) = ctd(H) − 1". The odd H-model (l.139-145): pairwise vertex-disjoint
+  subtrees, a 2-colouring with each tree properly coloured and a monochromatic edge for each edge of H. ctd (l.153): the
+  minimum vertex-height of a rooted tree T with V(T) = V(H) whose closure contains H. The class parameters (l.133): one
+  clustering / defect bound for the whole class.
+- **Before** (since the 2026-09-23 wave, statement leg blocked): both class parameters bounded by `k - 1`, the corpus
+  row's reconstructed statement_text (CORPUS_FEEDBACK items 10 and 64), over `x218_odd_minor` (every edge of G inside
+  a branch set bichromatic) and `x218_connected_treedepth_at_most` (some connected graph containing H as a subgraph
+  has tree-depth at most k).
+- **After**: the new local helpers `x218_odd_minor_tree_model` (the body of X271's `x271_odd_minor_tree_model`) and
+  `x218_ctd_at_most H k` (`0 < k` and some vertex `r` with `x194_treedepth_at_most (induced (~: [set r])) k.-1`), and
+  the body's one replacement, `    1 <= k -> ... (k - 1)` (five lines) -> the repaired text:
+
+```
+    x218_ctd_at_most H k ->
+    ~ x218_ctd_at_most H k.-1 ->
+    x218_clustered_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (2 * k - 2) /\
+    x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) (k - 1) /\
+    (forall j : nat, j.+1 < k ->
+       ~ x218_defective_chromatic_class_le (fun G : sgraph => ~ x218_odd_minor_tree_model G H) j)
+```
+
+  `x218_odd_minor` and `x218_connected_treedepth_at_most` stay unchanged for the frozen chain and their grounding
+  lemmas.
+- **Convention**: "= ctd(H) − 1" is the bound `k - 1` together with no class bound with `j < k - 1` colours. The graph
+  with no vertex has no rooted tree on its vertex set, so the body is vacuous there (`g218_no_ctd_empty`). At `k = 1`,
+  `H = K_1` and the class holds only the graph with no vertex.
+- **Teeth**: in `grounding_X218.v`, `g218_ominf_hyp_inhabited` (H = K_2 with ctd exactly 2, `g218_ctd_K2`),
+  `g218_ominf_not_trivially_true` (without "no odd H-minor" in the clustered clause the statement is false at
+  H = K_1) and `g218_ominf_exact_not_trivially_true` (without "k is exactly ctd(H)" it is false at H = K_1, k = 2:
+  the lower clause at j = 0); `g218_ctd_2K1` and `g218_td_2K1` (two isolated vertices: ctd 2, td 1, the case that
+  separates the two) and `g218_ctd_mono` (Arthur's A3 options O1 and O5). In `monochromatic.v`, `x218_normalisation_defect` (on K_3 with H = K_1 the branch set {0, 1, 2} coloured
+  (false, true, false) is a tree-model branch set with the monochromatic inner edge 0-2) and
+  `x218_legacy_model_is_tree_model` (every `x218_odd_minor` model is a tree model; the converse is not claimed).
+- **Relation**: a RE-ENCODING, recorded by the placeholder relation `({frozen} -> True) /\ ({live} -> True)`; no
+  implication is certified. The old connected tree-depth helper is, by an informal argument, equivalent to the
+  source's for nonempty H (design section 3 (c)), so the change there is to the source's own form, not a repair.
+- **Out of scope**: the edge e168 stays unscheduled (its note in `implications_X218.v` and `meta/edge_waves.json`
+  says why). `minor-theory/theories/conjectures/X271.v` is unchanged. In its Notes (l.48) only the adjective in
+  "(the blocked row arxiv:2308.15721#00)" goes out of date; the next change to X271.v can drop the word under its own
+  review (Marcol, X271's author, (317)).
