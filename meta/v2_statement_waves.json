@@ -12681,6 +12681,42 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X276 wave verification, 2026-11-01)",
       "faithfulness_result": "Readback 2026-11-01 (verifier Arthur): 2/2 PASS against the pinned texts and the sources, at math/marcol-x276-20261101 = e3d9799d22bde3045fc69b16cce61ce932d0624d (five commits on work/coordinator 2dbe6da4), after my design read ((389), FAITHFUL 2/2, no blocking item, optional N1 / N2, literature finding L1; packet x276-design-read-by-arthur c5e356f2) of x276-design-by-marcol r1 (998cb6e6). grounding_X276.v at e3d9799d is byte-identical to the r1 packet; X276.v differs from it only by N1 (row 2's Notes: the Javadi-Hajebi row is answered negatively by Theorem 1.3) and N2 (row 1's Notes: the f_k(n) := 0 convention cannot affect the limit), comments. No local helper. studies:std_erd_s_problem_on_k_r_graphs, the affirmative answer, open: for every k >= 4 and r, all large n carry a graph G on n vertices with chi(G) = k, chi(G - v) < k for every v, and k <= chi(G - F) for every set F of at most r edges (a (k,r)-graph, l.197-199), which is f_k(n) -> infinity by downward closure in r and finiteness of f_k(n); Theorem 1.2 proves k >= 5 only. studies:std_hajebi_s_conjecture, as stated, TRUE at the pin (Theorem 1.6): for t >= 1 some q >= 1 and C such that every induced-K_{t,t}-free G has a cover of its edges by cliques with |cover|^q <= C |G|^(2q - 1), that is O(|G|^(2 - 1/q)). Grounding: hyp_inhabited at k = 4 (r = 1) and at K_1 (t = 1); not_trivially_true drops 4 <= k (false at k = 2, r = 0: a 2-vertex-critical graph on 3 or more vertices keeps an edge after deleting a third vertex) and induced_free (false at K_{n,n}, n = C 2^(2q) + 1: n^2 cliques needed). My MCP (Rocq 9.2) builds the design's combined file: 7 blocks, Print Assumptions closed 6 / 6. Metadata: source_hash 2 / 2 recomputed from b72c5857, equal; waves.X276 = the r1 packet's x276-wave.json and the only waves change, helper_ownership {} and helper_sanity [] in both rows, its verifier fields empty before this; legs notes 512 / 446 = \"Authored in X276.v:<name>. \" + the wave note, no other legs entry changed; README 584 / 11 / 40 / 1,038 -> 586 / 11 / 40 / 1,036; LANDED gains X276 extremal-graph-theory; the lint allowlist gains exactly the packet's one exists-after-graph-forall entry (48); no migration-spec change. Dev run 1 (x276-dev-by-marcol, 0534f5f1, -c OK): PASS-WITH-EXPECTED, 30 steps, 26 rc 0, only W1 / A3a / A3 / A10 on the empty fields; the runner switched to the branch and checked EXPECTED_HEAD before every step; W1 12 / 14 (package compiles; Print Assumptions clean on 2 / 2 statements + 4 certificates; 20 exact-type probes), W2 909 / 909, W3 2 probed 0 flagged, W4 0 active (48 allowlisted), W5, A11 (no group) and A12 rc 0, G6 changed no report."
+    },
+    "X279": {
+      "phase": "X279",
+      "repo": "chromatic-theory",
+      "defines_file": "X279.v",
+      "implemented_by": "Lancelot (Claude Opus 5.5), wave X279, the arxiv:2209.09107#00 rebind (PROGRAMME A1, reviewer Arthur; plan (362), design x279-design-by-lancelot r1, A1 read x279-design-a1-by-arthur), branch math/lancelot-x279-20261102",
+      "source_verified_by": "Arthur (X279 A1 verifier, 2026-11-02: 2209.09107v2 main.tex (sha256 0f00ff09) l.1004-1009, l.216-217 and l.620 from the Mac's deposit x268-source-mac-20261030; packet x279-design-a1-by-arthur, SHA256SUMS 4054e982)",
+      "source_verified_at": "2026-11-02",
+      "commit": "x279-alon-tarsi-question-6-1-rebind",
+      "rows": {
+        "axv_2209_09107_00": {
+          "formal_name": "alon_tarsi_spanning_orientation_half_degree_statement",
+          "source_hash": "4429d4ab637cc816891ceb0680ef59b0bc25aa4c9471da94a82fe0a34ce7b7ef",
+          "note": "Question 6.1 of arXiv:2209.09107v2 (main.tex l.1004-1009), encoded as printed with no floor: an orientation A of a spanning subgraph (arcs in E(G), no edge both ways), Alon-Tarsi (EE != EO, l.215-222), with deg_G(v) <= 2 out(v) + 1 at every v. Status disproved (Marc 2026-10-31, ERRATA): the triangle, kernel-checked by the formal resolution 2209.09107__00 (grounding_X279.v). Rebind of the applications encoding (CORPUS_FEEDBACK 50); no local helper.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g279_hyp_inhabited",
+              "claim": "g279_hyp_claim",
+              "references": [
+                "alon_tarsi_spanning_orientation_half_degree_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g279_not_trivially_true",
+              "claim": "g279_ntt_claim",
+              "references": [
+                "alon_tarsi_spanning_orientation_half_degree_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "Arthur (X279 A1 read, 2026-11-02)",
+      "faithfulness_result": "A1 read 2026-11-02 (verifier Arthur, x279-design-a1-by-arthur 4054e982): FAITHFUL, 1/1 against main.tex l.1004-1009 and l.216-217 of 2209.09107v2, on design r1 (x279-design-by-lancelot f0b2fe1c), whose body this file states unchanged; the code review of the implementation is Arthur's, on the branch named in implemented_by."
     }
   }
 }

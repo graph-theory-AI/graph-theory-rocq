@@ -203,10 +203,16 @@ pairs remains outside this formalization.
 ## Alon–Tarsi orientation counterexample
 
 For source record `2209.09107__00`,
-`Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved` refutes the
-printed Question 6.1 of *List-avoiding orientations*. The triangle has no spanning
-subgraph with an Alon–Tarsi orientation meeting the requested bound at every
-vertex.
+`Chromatic.conjectures.grounding_X279.alon_tarsi_spanning_orientation_half_degree_disproved`
+refutes the printed Question 6.1 of *List-avoiding orientations*, stated as the
+row's own statement
+`Chromatic.conjectures.X279.alon_tarsi_spanning_orientation_half_degree_statement`
+(wave X279, the rebind of 2026-11-02). That statement is kernel-equivalent
+(`g279_statement_iff`) to the applications encoding
+`Chromatic.applications.alon_tarsi_triangle.question_6_1_statement`, and the
+theorem goes through that file's `question_6_1_disproved`. The triangle has no
+spanning subgraph with an Alon–Tarsi orientation meeting the requested bound at
+every vertex.
 
 The [printed question](https://arxiv.org/html/2209.09107v2) requires outdegree at
 least `(degree_G(v)-1)/2`, without a floor. The formal statement uses the exact
