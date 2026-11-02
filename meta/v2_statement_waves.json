@@ -12978,6 +12978,85 @@
       },
       "faithfulness_verified_by": "Marcol (X281 wave verification, 2026-11-02)",
       "faithfulness_result": "Readback 2026-11-02 (verifier Marcol): 3/3 PASS against the pinned texts and the sources, at math/arthur-x281-20261102 = 6b179327422870202c1e26a42be15ade6e79d4ea (five commits on work/coordinator 8c39c74f), after my design read ((331), FAITHFUL 3/3, packet x281-design-read-by-marcol 7b6e0f20) of x281-design-by-arthur r1 (27358d7b). At 6b179327 X281.v, grounding_X281.v and waves.X281 are the design packet's files byte for byte; my MCP (Rocq 9.2, all imports GTBase) built X281.v + grounding_X281.v as one file: 19 proof blocks, no holes. Helper x281_gen_chromatic_poly G H k = chromaticpolys.tex l.122-134: the SETS of proper k-colourings V(G) -> I_k inducing H in the k-colouring graph (adjacent when they differ at exactly one vertex), through an injective f; paper_specific; no names or body group; helper_sanity in all three rows (pi^(K_1) = the proper colourings; pi^(K_2) of K_1 = C(k, 2)). erdos:1092 as Er76c p.4: for r >= 1 some q > 0 such that every G whose every nonempty vertex set S has edges F inside G[S] with chi(G[S] - F) <= r and q|F| < |S| has chi(G) <= r + 1 (c_r = 1/q; induced subgraphs equivalent to all subgraphs; \"r-chromatic\" read as <= r; the f_r \">>\" form is the uniform constant); FALSE in the literature (Rodl 1982), historical body kept, status for Lancelot's lit21. erdos:627: for every rational eps = p/q some N >= 2 with |b(n1) - b(n2)| < eps over maximisers of chi/omega among labelled graphs on I_n (one exists for every n), b(n) = chi trunc_log(2, n)^2 / (omega n), cross-multiplied; the Cauchy criterion is the existence of the real limit, and trunc_log 2 is justified by the bound f(n) <= (3.71943 + o(1)) n / (log_2 n)^2 (l.175-178); open at the pin. arxiv:2402.04237#01: a family H_1..H_t chosen before n such that whp in G(n, 1/2) every graph on I_n agreeing with G in pi^(H_i)(k) for k = 0 .. n max_i |H_i| is isomorphic to G; degree <= n |H| and the add-K_1 equivalence give the printed question; open at the pin. Grounding: hyp at r = 2 (K_2), maximisers on every I_n with trunc_log 2 n > 0 from n = 2, positive mass and G' = G; ntt: erdos:1092 without its hypothesis (false at r = 1, chi(K_3) = 3), erdos:627 from N = 2 (false at K_2, K_3, eps = 1/7), Problem 12 without the polynomial hypothesis (every G' isomorphic fails from n = 2); each variant implies its row; no certificate of exact type S or ~ S (the rows are open). Metadata: source_hash 3/3 recomputed, equal; waves.X281 = the design packet's wave-x281.json, the only waves change, verifier fields empty before this; allowlist = base + the packet's one entry (54 -> 55); legs: erdos_1092, erdos_627, axv_2402_04237_01 done / done, notes 576 / 433 / 505 = \"Authored in X281.v:<name>. \" + the wave note, no other legs entry changed; README 594 / 12 / 39 / 1,028 -> 597 / 12 / 39 / 1,025; LANDED gains X281 chromatic-theory after X277. Dev run 1 (x281-dev-by-arthur f4f6d624, -c OK, 38 listed = present): PASS-WITH-EXPECTED, 28 steps, 24 rc 0, only W1 / A3a / A3 / A10 on the empty fields; W1 12 / 14 (helper ownership PASS; Print Assumptions clean on 3 / 3 statements + 9 certificates; 30 exact-type probes), W2 920 / 920, W3 3 probed 0 flagged, W4 0 active (55 allowlisted), A12 101 OK; written only the three generated files."
+    },
+    "X280": {
+      "phase": "X280",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X280.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X280 (A3 verifier Arthur; routing Lancelot (385); selection x280-selection-by-marcol, design x280-design-by-marcol r1), branch math/marcol-x280-20261102",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x280-pure-pairs-linear-side-erdos-805",
+      "rows": {
+        "axv_2201_04062_00": {
+          "formal_name": "pure_pairs_linear_side_small_congestion_statement",
+          "source_hash": "a51eb401bff6e5fa82bb32c8bc58813749086064ffb4db691f15cf02f9209830",
+          "note": "Possibility 1.6 of Scott, Seymour and Spirkl (arXiv:2201.04062v2, main.tex l.198-204; pinned open), the affirmative answer in the source's order c, xi, H, eps, G with c = 1/k, xi = 1/q, eps = 1/m: for every H of congestion at most 1/q (l.139-144), every H-free and complement-H-free G (induced, l.92-93) with |G| > 1 has a pure pair A, B (l.89-90) with |G| <= m|A| and |G|^(k-1) <= (m|B|)^k. OPEN at the pin (\"We were unable to decide this\", l.204).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g280_pp_hyp_inhabited",
+              "claim": "g280_pp_hyp_claim",
+              "references": [
+                "pure_pairs_linear_side_small_congestion_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g280_pp_not_trivially_true",
+              "claim": "g280_pp_ntt_claim",
+              "references": [
+                "pure_pairs_linear_side_small_congestion_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g280_cg_helper_sanity",
+                "claim": "g280_cg_helper_claim",
+                "references": [
+                  "x280_congestion_at_most"
+                ]
+              }
+            ]
+          }
+        },
+        "erdos_805": {
+          "formal_name": "erdos_805_log_cubed_window_statement",
+          "source_hash": "8e7fdc126a7f1cf014df10f68a0fce1ff24ac49bf6254ff07592b42acdd7b763",
+          "note": "Erdos Problems #805 (Erdos and Hajnal; pinned open): the specific question g(n) = (log n)^3, affirmative, for all large n, with base 2 and exact thresholds as Alon, Bucic and Sudakov read it (arXiv:2004.04718v2, l.164, l.189): a graph on n vertices in which every vertex set of at least (log_2 n)^3 vertices holds a clique and an independent set of size at least log_2 n. \"For which g(n)\" is not formalized. OPEN at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g280_e805_hyp_inhabited",
+              "claim": "g280_e805_hyp_claim",
+              "references": [
+                "erdos_805_log_cubed_window_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g280_e805_not_trivially_true",
+              "claim": "g280_e805_ntt_claim",
+              "references": [
+                "erdos_805_log_cubed_window_statement"
+              ]
+            },
+            "helper_sanity": [
+              {
+                "theorem": "g280_cg_helper_sanity",
+                "claim": "g280_cg_helper_claim",
+                "references": [
+                  "x280_congestion_at_most"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "helper_ownership": {
+        "x280_congestion_at_most": {
+          "classification": "paper_specific",
+          "reason": "The congestion of a graph as Scott, Seymour and Spirkl define it (arXiv:2201.04062v2, main.tex l.139-144): at most 1/q iff every subgraph J (a vertex set S with a set F of edges inside S) with an edge has q|F| <= q(|S| - 1) + |F|. Paper-specific parameter of the Pure pairs series; no inventory name or body group at the base."
+        }
+      },
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
