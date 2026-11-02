@@ -12717,6 +12717,86 @@
       "helper_ownership": {},
       "faithfulness_verified_by": "Arthur (X279 A1 read, 2026-11-02)",
       "faithfulness_result": "A1 read 2026-11-02 (verifier Arthur, x279-design-a1-by-arthur 4054e982): FAITHFUL, 1/1 against main.tex l.1004-1009 and l.216-217 of 2209.09107v2, on design r1 (x279-design-by-lancelot f0b2fe1c), whose body this file states unchanged; the code review of the implementation is Arthur's, on the branch named in implemented_by."
+    },
+    "X278": {
+      "phase": "X278",
+      "repo": "extremal-graph-theory",
+      "defines_file": "X278.v",
+      "implemented_by": "Marcol (Claude Opus 5.5), wave X278 (A3 verifier Arthur; routing Lancelot (350), (367); selection x278-selection-by-marcol, design x278-design-by-marcol r1), branch math/marcol-x278-20261102",
+      "source_verified_by": "",
+      "source_verified_at": "",
+      "commit": "x278-fox-himwich-mani-sharpness-meshulam-rs",
+      "rows": {
+        "axv_2102_10220_00": {
+          "formal_name": "kr_free_k_colourable_deletion_sharp_statement",
+          "source_hash": "7a2a094a966011caab43bff777baa8bd9ae37a379ab1117e30cdc0928c51976a",
+          "note": "Sharpness of Theorem 1.1 of Fox, Himwich and Mani (arXiv:2102.10220v2, main.tex l.171-176; pinned open), Theta_r encoded with the constants before k and the threshold after k: every K_r-free G on n vertices has edges F with chi(G - F) <= k and |F|^(r-2) k^(r-1) <= (A n^2)^(r-2) (Theorem 1.1), and some K_r-free G on n vertices needs (a |F|)^(r-2) k^(r-1) >= n^(2(r-2)). H-free is subgraph-free (l.155). OPEN for r >= 4; r = 3 is proved (l.176).",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g278_kr_hyp_inhabited",
+              "claim": "g278_kr_hyp_claim",
+              "references": [
+                "kr_free_k_colourable_deletion_sharp_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g278_kr_not_trivially_true",
+              "claim": "g278_kr_ntt_claim",
+              "references": [
+                "kr_free_k_colourable_deletion_sharp_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "axv_2102_10220_01": {
+          "formal_name": "odd_wheel_free_k_colourable_deletion_sharp_statement",
+          "source_hash": "07a72d498213d88189cf50ceefc44b45b1b272aa2b71d7b2af4f49b19f349bdd",
+          "note": "Sharpness of Theorem 1.5 of Fox, Himwich and Mani (arXiv:2102.10220v2, main.tex l.198-203; pinned open) for the odd wheel W_(2r+1), a (2r+1)-cycle plus a hub (l.198), encoded like arxiv:2102.10220#00 with the exponent 2 - 1/(r+1) cleared by the power r + 1, k >= 2 and n large in terms of k. The upper clause is Theorem 1.5; the lower clause is the conjecture (l.199), OPEN at the pin.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g278_ow_hyp_inhabited",
+              "claim": "g278_ow_hyp_claim",
+              "references": [
+                "odd_wheel_free_k_colourable_deletion_sharp_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g278_ow_not_trivially_true",
+              "claim": "g278_ow_ntt_claim",
+              "references": [
+                "odd_wheel_free_k_colourable_deletion_sharp_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        },
+        "std_meshulam_s_conjecture_on_ruzsa_szemer_di_graphs": {
+          "formal_name": "meshulam_ruzsa_szemeredi_statement",
+          "source_hash": "27aa274ba3519b3865fd2caf73d6e75932ad45c253912fc2e56eee3b51ea26f2",
+          "note": "Meshulam's conjecture as quoted by Alon and Shraibman (arXiv:2001.00387v1, main.tex l.140-141; pinned open), encoded as stated: for all a, b >= 1, eventually no (r,t)-RS graph on n vertices (E(G) partitioned into t induced matchings of size r, l.128) has n^2 <= a r t and n <= r^b. FALSE at the pin (informal): the paper reports that Alon, Moitra and Sudakov disproved it (l.124-127, l.142-143); the status is for a literature item.",
+          "grounding": {
+            "hyp_inhabited": {
+              "theorem": "g278_ms_hyp_inhabited",
+              "claim": "g278_ms_hyp_claim",
+              "references": [
+                "meshulam_ruzsa_szemeredi_statement"
+              ]
+            },
+            "not_trivially_true": {
+              "theorem": "g278_ms_not_trivially_true",
+              "claim": "g278_ms_ntt_claim",
+              "references": [
+                "meshulam_ruzsa_szemeredi_statement"
+              ]
+            },
+            "helper_sanity": []
+          }
+        }
+      },
+      "helper_ownership": {},
+      "faithfulness_verified_by": "",
+      "faithfulness_result": ""
     }
   }
 }
