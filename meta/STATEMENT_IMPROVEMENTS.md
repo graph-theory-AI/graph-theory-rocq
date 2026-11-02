@@ -2175,13 +2175,14 @@ them.
   `X154.v` of `X152.v`, in both cases deliberately, so that the two corpus rows cannot drift.
 - `erdos:` and `studies:` rows carry no site or review URL (`corpus_registry.row_urls` returns
   `(None, None)`), so 38 of the 122 blocks in this package say `Site: none` / `Review: none`.
-- One orphan: `applications/alon_tarsi_triangle.v question_6_1_statement`. The corpus DOES contain
-  the matching row `arxiv:2209.09107#00` ("Question 6.1"), but that row registers no `formal_name`
-  and its statement leg is `todo`, so the gate cannot link them; the file proves
-  `question_6_1_disproved`. Registering the `formal_name` on that row would turn this orphan into a
-  normal documented row (`arxiv:2209.09107#01` has its own since wave X268,
-  `alon_tarsi_matching_removal_statement`). By Marc's decision of 2026-10-31 (lit15, an ERRATA entry in
-  meta/build_v2_manifest.py) the row's status is `disproved`.
+- One orphan: `applications/alon_tarsi_triangle.v question_6_1_statement`, the applications encoding
+  of Question 6.1 of arXiv:2209.09107; the file proves `question_6_1_disproved`. Since wave X279
+  (2026-11-02, the rebind) the matching row `arxiv:2209.09107#00` has its own statement,
+  `X279.v alon_tarsi_spanning_orientation_half_degree_statement`, kernel-equivalent to it
+  (`grounding_X279.v`, `g279_statement_iff`), and the formal resolution 2209.09107__00 names that
+  statement (`arxiv:2209.09107#01` has its own since wave X268, `alon_tarsi_matching_removal_statement`).
+  By Marc's decision of 2026-10-31 (lit15, an ERRATA entry in meta/build_v2_manifest.py) the row's
+  status is `disproved`.
 - **Two citation slips in wave notes** (2026-10-29, Lancelot's lit10, reviewer Arthur), checked on the Mac's deposits
   `coordination/sources/x256-source-mac-20261028` and `x254-source-mac-20261028`. Each slip has one copy in four
   places: the statement's doc block, its row note in `meta/v2_statement_waves.json`, and the generated notes in

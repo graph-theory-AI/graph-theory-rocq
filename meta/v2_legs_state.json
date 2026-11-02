@@ -3787,11 +3787,14 @@
    "audit_page": "todo"
   },
   "axv_2209_09107_00": {
-   "statement": "todo",
-   "grounding": "todo",
+   "statement": "done",
+   "grounding": "done",
    "edges": "todo",
    "correspondence": "todo",
-   "audit_page": "todo"
+   "audit_page": "todo",
+   "commit": "x279-alon-tarsi-question-6-1-rebind",
+   "package": "chromatic-theory",
+   "note": "Authored in X279.v:alon_tarsi_spanning_orientation_half_degree_statement. Question 6.1 of arXiv:2209.09107v2 (main.tex l.1004-1009), encoded as printed with no floor: an orientation A of a spanning subgraph (arcs in E(G), no edge both ways), Alon-Tarsi (EE != EO, l.215-222), with deg_G(v) <= 2 out(v) + 1 at every v. Status disproved (Marc 2026-10-31, ERRATA): the triangle, kernel-checked by the formal resolution 2209.09107__00 (grounding_X279.v). Rebind of the applications encoding (CORPUS_FEEDBACK 50); no local helper."
   },
   "axv_2209_09107_01": {
    "statement": "done",

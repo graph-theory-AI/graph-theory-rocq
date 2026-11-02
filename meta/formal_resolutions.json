@@ -90,20 +90,20 @@
       "row_id": "arxiv:2209.09107#00",
       "source_hash": "4429d4ab637cc816891ceb0680ef59b0bc25aa4c9471da94a82fe0a34ce7b7ef",
       "source_text": "Does every graph $G$ have a spanning subgraph with an Alon-Tarsi orientation in which each vertex $v$ has out-degree at least $\\frac{1}{2}(\\deg_{G}(v)-1)$?",
-      "source_locator": "arXiv:2209.09107 — Question 6.1",
+      "source_locator": "arXiv:2209.09107 — Question 6.1 | Rocq: chromatic-theory/theories/conjectures/X279.v#alon_tarsi_spanning_orientation_half_degree_statement",
       "corpus": "v2",
       "package": "chromatic-theory",
       "direction": "disprove",
-      "statement": "Chromatic.applications.alon_tarsi_triangle.question_6_1_statement",
-      "statement_file": "chromatic-theory/theories/applications/alon_tarsi_triangle.v",
-      "statement_sha256": "c8ca2a8bec5b5aee3949c1554964e80fa80cba3465999ceb43796a433b5a053f",
-      "theorem": "Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved",
-      "theorem_file": "chromatic-theory/theories/applications/alon_tarsi_triangle.v",
+      "statement": "Chromatic.conjectures.X279.alon_tarsi_spanning_orientation_half_degree_statement",
+      "statement_file": "chromatic-theory/theories/conjectures/X279.v",
+      "statement_sha256": "a865caecdaa3bbdd74e009feaf5f832d499ae8c569db416150220a0e1b1b048a",
+      "theorem": "Chromatic.conjectures.grounding_X279.alon_tarsi_spanning_orientation_half_degree_disproved",
+      "theorem_file": "chromatic-theory/theories/conjectures/grounding_X279.v",
       "correspondence": {
-        "explanation": "The positive statement encodes exactly the printed unfloored Question 6.1: for every finite simple graph G there is an arc set on all original vertices, contained in the edges of G and asymmetric, whose even and odd Eulerian-subgraph counts differ and whose outdegree satisfies degree_G(v)<=2*outdegree(v)+1. Edges may be omitted, so this is an orientation of a spanning subgraph; the degree bound uses the original G. Every Eulerian arc subset is counted, including the empty subset. The disproof instantiates G as the triangle: the orientation and degree constraints force the arc set to be Eulerian with odd cardinality. Complementation within an odd Eulerian arc set bijects its even and odd Eulerian subgraphs, contradicting the Alon-Tarsi condition. Independent review checked the generic degree-subtraction and complement-involution lemmas, the complete three-vertex/nine-pair enumeration identities and six offdiagonal Boolean cases, the exact universal-statement negation, and the original printed question at https://arxiv.org/html/2209.09107v2. No floored variant or weaker constant-error question is claimed.",
-        "implemented_by": "Codex /root (statement and MCP degree development), /root/cochromatic_proof (parity and symbolic closure)",
-        "reviewed_by": "Codex /root/integration_audit (independent formal and primary-source readback)",
-        "reviewed_at": "2026-09-05"
+        "explanation": "The positive statement encodes exactly the printed unfloored Question 6.1: for every finite simple graph G there is an arc set on all original vertices, contained in the edges of G and asymmetric, whose even and odd Eulerian-subgraph counts differ and whose outdegree satisfies degree_G(v)<=2*outdegree(v)+1. Edges may be omitted, so this is an orientation of a spanning subgraph; the degree bound uses the original G. Every Eulerian arc subset is counted, including the empty subset. The disproof instantiates G as the triangle: the orientation and degree constraints force the arc set to be Eulerian with odd cardinality. Complementation within an odd Eulerian arc set bijects its even and odd Eulerian subgraphs, contradicting the Alon-Tarsi condition. Independent review checked the generic degree-subtraction and complement-involution lemmas, the complete three-vertex/nine-pair enumeration identities and six offdiagonal Boolean cases, the exact universal-statement negation, and the original printed question at https://arxiv.org/html/2209.09107v2. No floored variant or weaker constant-error question is claimed. Rebind (wave X279, 2026-11-02): the row's formal statement is Chromatic.conjectures.X279.alon_tarsi_spanning_orientation_half_degree_statement, the same encoding with Prop connectives, kernel-equivalent to Chromatic.applications.alon_tarsi_triangle.question_6_1_statement (grounding_X279.v, g279_statement_iff); the theorem refutes it through question_6_1_disproved. The 2026-09-05 review above, of the applications encoding, was Codex /root/integration_audit's independent formal and primary-source readback.",
+        "implemented_by": "Codex /root (statement and MCP degree development), /root/cochromatic_proof (parity and symbolic closure); Lancelot (the X279 rebind, 2026-11-02)",
+        "reviewed_by": "Arthur (the X279 rebind: A1 read x279-design-a1-by-arthur and the code review)",
+        "reviewed_at": "2026-11-02"
       }
     },
     {

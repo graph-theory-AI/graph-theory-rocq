@@ -19,10 +19,12 @@ Definition at_degree_bound (G : sgraph) (A : {set G * G}) :=
 
 (** No corpus row: applications-local encoding of Question 6.1 of arXiv:2209.09107v2, stated
     here with its unfloored bound so that it can be REFUTED below by the triangle (see
-    [question_6_1_disproved] in this file). The corpus does contain a row for this question,
-    arxiv:2209.09107#00, but that row registers no formal_name and its statement leg is still
-    todo, so the gate cannot link this definition to it; the row's page is
-    https://graph-theory-ai.github.io/graph-conjectures/arxiv/2209.09107__00/ *)
+    [question_6_1_disproved] in this file). The corpus row for this question, arxiv:2209.09107#00,
+    has its own statement since wave X279 (2026-11-02):
+    Chromatic.conjectures.X279.alon_tarsi_spanning_orientation_half_degree_statement, the same
+    encoding with Prop connectives, kernel-equivalent to this one (grounding_X279.v,
+    [g279_statement_iff]); the formal resolution 2209.09107__00 names that statement. The row's
+    page is https://graph-theory-ai.github.io/graph-conjectures/arxiv/2209.09107__00/ *)
 Definition question_6_1_statement : Prop :=
   forall G : sgraph, exists A : {set G * G},
     at_spanning_orientation A /\ at_alon_tarsi A /\ at_degree_bound A.

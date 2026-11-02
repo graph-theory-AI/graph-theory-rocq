@@ -359,8 +359,10 @@ ERRATA = [
      "l.1004-1009, PDF p. 14), asks for out-degree at least (deg_G(v) - 1)/2 with no floor, and l.1013 sums the same "
      "bound. The triangle refutes it: every vertex needs out-degree at least 1, which forces all three edges, cyclically "
      "oriented, and that orientation has exactly two Eulerian subgraphs, the empty one and the whole cycle, so EE = EO "
-     "and it is not Alon-Tarsi. Kernel-checked: Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved "
-     "(meta/formal_resolutions.json, record 2209.09107__00, direction disprove)."),
+     "and it is not Alon-Tarsi. Kernel-checked: Chromatic.conjectures.grounding_X279."
+     "alon_tarsi_spanning_orientation_half_degree_disproved, on the row's statement of wave X279, through "
+     "Chromatic.applications.alon_tarsi_triangle.question_6_1_disproved (meta/formal_resolutions.json, record "
+     "2209.09107__00, direction disprove)."),
     # literature status corrections (Lancelot's lane; the studies rows behind waves X269 and X270, refuted before the
     # corpus pin; their encoded statements are kept)
     ("studies", "std_gruslys_leader_tan_conjecture_hypercube_edge_dec", "disproved",
