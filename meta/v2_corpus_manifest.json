@@ -1,5 +1,5 @@
 {
- "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 29 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
+ "_README": "v2 corpus manifest (graph-conjectures beyond OPG; plan meta/V2_FULL_CORPUS_PLAN.md). Built by meta/build_v2_manifest.py from the upstream graph-conjectures clone — deterministic; regenerate + diff to review changes. Status uses the exact-type-gate vocabulary (unclear->open, raw kept in review_status; 3 Aboulker + 32 literature errata applied). b1_candidate rows are OPG-alias CANDIDATES pending per-record adjudication. source_text currently holds the extractor's statement; REC/implementation replaces it with our normalized statement (licensing: LICENSE-DATA.md). Corpus tags: arxiv, erdos, derived, arxiv-studied, bm (Bondy–Murty Appendix A records bm-NNN) and others (curated data/others_conjectures.json records). site_url/review_url are derived from row_id by corpus_registry.row_urls() (null for erdos/derived/studies rows, which have no public per-record page). Legs merge in from meta/v2_legs_state.json (the source of truth). Classifier fields (bucket/topic/formalizability/repo/phase/formal_name) come from the hand-maintained meta/v2_classification.json (edit there, then rebuild — never hand-edit this file) and from wave planning.",
  "schema_version": 1,
  "provenance": {
   "graph_conjectures_commit": "b72c5857060addbe4523016e88ae3aa626e958fd",
@@ -25,10 +25,10 @@
    "others": 1
   },
   "by_status": {
-   "disproved": 95,
-   "open": 1328,
+   "disproved": 97,
+   "open": 1325,
    "partial": 152,
-   "solved": 215
+   "solved": 216
   },
   "by_kind": {
    "Conjecture": 659,
@@ -38081,9 +38081,9 @@
    "source_excerpt": null,
    "license": null,
    "implemented_by": "Claude Opus 5 subagent, wave X218 (session 01P75Y6ikkgDyzUzzoef316Z)",
-   "source_verified_by": null,
-   "source_verified_at": null,
-   "verification_note": "BLOCKED — Two primitives could not be verified against arXiv:2308.15721 from the corpus text available here. (1) The ODD MINOR normalisation: the placeholder uses the standard model (nonempty connected pairwise-disjoint branch sets, a 2-colouring of G making every edge inside a branch set bichromatic and giving a monochromatic edge for every edge of H), but the paper's own convention -- whether the bipartition is required on all of G or only on the union of the branch sets -- is not recorded. (2) td-bar(H), the CONNECTED tree-depth, is encoded as the least tree-depth of a connected graph conta",
+   "source_verified_by": "Arthur (A3 verifier of the X218 repair, 2026-11-02: arXiv:2308.15721v2 arXiv.tex, sha256 6c6f1af9, l.131, 133, 139-145, 153, 199-202 and v1 main.tex l.140-146, 154, 201-204, from the Mac's deposit x218-source-mac-20261101; the pinned record data/arxiv_extracted/2308.15721.json at b72c5857; packet x218-design-a3-by-arthur, SHA256SUMS a5f5db9e)",
+   "source_verified_at": "2026-11-02",
+   "verification_note": "Authored in X218.v:odd_minor_free_defective_clustered_treedepth_statement. Re-encoded 2026-11-02 (coordination/PROGRAMME.md section 3, A2 with the A4 direction re-encode; frozen by the monochromatic family): Conjecture 2 of arXiv:2308.15721v2 (arXiv.tex l.199-202), clustered <= 2 ctd(H) - 2 and defective = ctd(H) - 1, over the source's tree model of odd minors (x218_odd_minor_tree_model) and its connected tree-depth (x218_ctd_at_most). Implemented by Lancelot; the earlier body (both bounds k - 1, x218_odd_minor) stays only in the frozen chain.",
    "status_verified_at": null,
    "status": "open",
    "status_semantics": null,
@@ -38110,7 +38110,7 @@
    "rocq_idiom": null,
    "new_primitives": null,
    "legs": {
-    "statement": "blocked",
+    "statement": "done",
     "grounding": "todo",
     "edges": "todo",
     "correspondence": "todo",
@@ -98758,8 +98758,8 @@
    "source_verified_at": "2026-11-01",
    "verification_note": "Authored in X276.v:hajebi_ktt_free_subquadratic_clique_cover_statement. Hajebi's conjecture as Conjecture 1.5 of Nguyen, Scott, Seymour and Thomasse (arXiv:2211.12065v1, main.tex l.147-149; pinned open), encoded as stated with eps = 1/q and the O-constant C: every graph with no induced K_{t,t} (l.100) has a set of cliques covering every edge with #|cover|^q <= C |G|^(2q - 1). TRUE at the pin: the same paper proves it (Theorem 1.6, l.150-163).",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "solved",
+   "status_semantics": "Literature: proved by Nguyen, Scott, Seymour and Thomasse, arXiv:2211.12065v1 (22 November 2022), Theorem 1.6 (main.tex l.152-163), which l.150 calls a proof of Conjecture 1.5 (l.147-149, Hajebi): for every integer t >= 1 there is eps > 0 such that every K_{t,t}-free graph G (no induced K_{t,t}, l.100) has a clique cover of size O(|G|^(2 - eps)).",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
@@ -100468,8 +100468,8 @@
    "source_verified_at": null,
    "verification_note": null,
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "disproved",
+   "status_semantics": "Literature: answered negatively in its own record by Nguyen, Scott, Seymour and Thomasse, arXiv:2211.12065v1 (22 November 2022), Theorem 1.3 (main.tex l.131-135): there is C > 0 such that for infinitely many n some graph G on n vertices with alpha(G) <= 3 requires C n^(6/5) / (log n)^2 cliques in every clique cover; l.127-128 there present it as a disproof. The row is the question of Javadi and Hajebi: do all graphs G with alpha(G) at most a constant admit clique covers of size O(|G|)?",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",
@@ -112389,8 +112389,8 @@
    "source_verified_at": "2026-11-01",
    "verification_note": "Authored in X275.v:yao_zhou_four_critical_planar_edge_density_limsup_seven_thirds_statement. Yao and Zhou's conjecture as 2311.03132v1 states it (main.tex l.92-94; pinned status open): the limsup over graph order of |E| / |V| over 4-critical planar graphs (chi = 4 and x258_edge_critical G 4, as l.74) is 7/3, as two rational clauses for every eps = p / q (eventually <= 7/3 + eps; orders >= n0 with >= 7/3 - eps). FALSE at the pin: Theorem 1 there (l.98-100) gives L = 2.5.",
    "status_verified_at": null,
-   "status": "open",
-   "status_semantics": null,
+   "status": "disproved",
+   "status_semantics": "Literature: refuted by Dvorak and Feghali, arXiv:2311.03132v1 (6 November 2023), Theorem 1 (main.tex l.98-100): L = 2.5, for L the limsup of |E(G)| / |V(G)| over all 4-critical planar graphs G (l.92-94); l.106-107 there: it refutes the conjecture of Yao and Zhou that L = 7/3. The row is that conjecture, in the limsup form of l.92-94 (the original paper, arXiv:1509.00760v1, states it for the supremum).",
    "review_status": "open",
    "review_date": null,
    "recovery": "none",

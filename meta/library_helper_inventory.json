@@ -6,7 +6,7 @@
         "atlas/_CoqProject: unlisted or unmapped local Require ClassicalLemmas.necklace.necklace in packing-theory/theories/foundations/fair_matching.v"
       ],
       "aliases": 527,
-      "cross_file_declarations": 2251,
+      "cross_file_declarations": 2254,
       "cross_file_files": 1117,
       "implicit_use": 3,
       "packages_without_project": [
@@ -2030,6 +2030,9 @@
         "cross_file": {
           "certificates_of": [],
           "declarations": [
+            "chromatic-theory/theories/conjectures/grounding_X218.v:<line 333>",
+            "chromatic-theory/theories/conjectures/grounding_X218.v:g218_ctd_2K1",
+            "chromatic-theory/theories/conjectures/grounding_X218.v:g218_td_2K1",
             "chromatic-theory/theories/conjectures/grounding_X218.v:x218_multibounding_at",
             "chromatic-theory/theories/conjectures/grounding_X218.v:x218_multibounding_pointwise",
             "chromatic-theory/theories/conjectures/grounding_X218.v:x218_multipartite_1_edgeless",
@@ -2083,7 +2086,7 @@
         "cross_file": {
           "certificates_of": [],
           "declarations": [
-            "chromatic-theory/theories/conjectures/grounding_X218.v:<line 74>",
+            "chromatic-theory/theories/conjectures/grounding_X218.v:<line 76>",
             "chromatic-theory/theories/conjectures/implications_X218.v:<line 40>",
             "chromatic-theory/theories/conjectures/implications_X218.v:<line 51>"
           ],
@@ -24988,12 +24991,12 @@
   },
   "counts": {
     "files": 369,
-    "helpers": 2761,
-    "repeated_body_shapes": 150,
-    "repeated_normalized_names": 220,
+    "helpers": 2763,
+    "repeated_body_shapes": 151,
+    "repeated_normalized_names": 221,
     "repeated_signature_shapes": 337,
     "statements_excluded": 868,
-    "x_wave_helpers": 1600
+    "x_wave_helpers": 1602
   },
   "groups": {
     "body_shape_hash": {
@@ -25109,6 +25112,10 @@
       "2da3ef4ff389999aa86ccaa9de1d11a776478f4da668b3855c295abd0c919f4a": [
         "Extremal.conjectures.D2pr.srel",
         "GTMisc.conjectures.U13.relAdj"
+      ],
+      "2e1bb472804d3ef3cd5284cf43cda4eedb9681ab5768d29932b1108fd46202ee": [
+        "Chromatic.conjectures.X218.x218_odd_minor_tree_model",
+        "Minor.conjectures.X271.x271_odd_minor_tree_model"
       ],
       "2ee66327b97a9751749aee1179cb0eafeb2e988d8040a89cf796e62c85f47bf2": [
         "Chromatic.conjectures.X81.x81_proper_orientation_bound",
@@ -26861,6 +26868,10 @@
         "Digraph.conjectures.X90.x90_np_complete",
         "GTMisc.conjectures.X114.x114_np_complete"
       ],
+      "odd_minor_tree_model": [
+        "Chromatic.conjectures.X218.x218_odd_minor_tree_model",
+        "Minor.conjectures.X271.x271_odd_minor_tree_model"
+      ],
       "oedges": [
         "Extremal.conjectures.D2tur.oedges",
         "GTMisc.conjectures.U13.oedges"
@@ -27405,7 +27416,8 @@
       ],
       "0bae8f16ee0b381536cb1f07eb57f52b4be719e72f2739e0073bb1b84350db06": [
         "Chromatic.conjectures.X194.x194_clustered_chromatic_minor_class_le",
-        "Chromatic.conjectures.X218.x218_connected_treedepth_at_most"
+        "Chromatic.conjectures.X218.x218_connected_treedepth_at_most",
+        "Chromatic.conjectures.X218.x218_ctd_at_most"
       ],
       "0e7ffb01cb60aebbe34dd5065c00f46eba85c0db946b913f08ce3d728e081987": [
         "GTMisc.conjectures.X128.x128_shallow_minor_model",
@@ -27863,6 +27875,7 @@
       "386157e12d686b4cdea1c7e7e1bddc5b3f28be1b17c3f1036579936afdc0bb30": [
         "Chromatic.conjectures.U5.homeomorphic_s",
         "Chromatic.conjectures.X218.x218_odd_minor",
+        "Chromatic.conjectures.X218.x218_odd_minor_tree_model",
         "Chromatic.conjectures.X3.x3_iso",
         "Chromatic.conjectures.X43.x43_induced_free",
         "Chromatic.conjectures.X50.x50_same_girth",
@@ -33946,9 +33959,7 @@
       "body_hash": "80a8d36bbd17cd26b26a266273b643026ea253d287a625b1ba3fc4e9dbd24b4f",
       "body_shape_hash": "80a8d36bbd17cd26b26a266273b643026ea253d287a625b1ba3fc4e9dbd24b4f",
       "declaration_hash": "1aa82475f397539770afc9d2b8bafcca3f29e9674dfdc5ffe257c9a327e91d22",
-      "direct_consumers": [
-        "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 68,
       "local_dependencies": [],
@@ -33965,9 +33976,7 @@
       "body_hash": "3e46df62564b9cc13155ea6bb53039d6d0e099b6f8e4be87d2ba1b5ae7f903b4",
       "body_shape_hash": "065810b1a98f260c047d89faaccd123b2cc7acc903f85ebb2cdfc5ed5d2b4857",
       "declaration_hash": "9dde5aab808b81b015534f614ea4d47a2c798eb491abdea23c9528f54f5b4570",
-      "direct_consumers": [
-        "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
-      ],
+      "direct_consumers": [],
       "kind": "Definition",
       "line": 81,
       "local_dependencies": [],
@@ -33981,6 +33990,44 @@
       "signature_shape_hash": "0bae8f16ee0b381536cb1f07eb57f52b4be719e72f2739e0073bb1b84350db06"
     },
     {
+      "body_hash": "2e1bb472804d3ef3cd5284cf43cda4eedb9681ab5768d29932b1108fd46202ee",
+      "body_shape_hash": "2e1bb472804d3ef3cd5284cf43cda4eedb9681ab5768d29932b1108fd46202ee",
+      "declaration_hash": "928ec3bc71254dcb5a1ef877ffc497127bbcb8fec500d560af845b3069960b38",
+      "direct_consumers": [
+        "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
+      ],
+      "kind": "Definition",
+      "line": 87,
+      "local_dependencies": [],
+      "name": "x218_odd_minor_tree_model",
+      "normalized_name": "odd_minor_tree_model",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "phase": "X218",
+      "qualified_name": "Chromatic.conjectures.X218.x218_odd_minor_tree_model",
+      "signature": "(G H : sgraph) : Prop",
+      "signature_shape_hash": "386157e12d686b4cdea1c7e7e1bddc5b3f28be1b17c3f1036579936afdc0bb30"
+    },
+    {
+      "body_hash": "ab72bee6ee6688f655278c16a7da10e08449930965bfbfb231630fc4d317358f",
+      "body_shape_hash": "f28b9888c7158e6a72efe1a102e459e73c82eec3a8a5e5bb3fd808bbb50d8831",
+      "declaration_hash": "3c97f6556e9044cc159912b4181018440e18a966845547f804a2741e7325765f",
+      "direct_consumers": [
+        "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
+      ],
+      "kind": "Definition",
+      "line": 103,
+      "local_dependencies": [],
+      "name": "x218_ctd_at_most",
+      "normalized_name": "ctd_at_most",
+      "package": "chromatic-theory",
+      "path": "chromatic-theory/theories/conjectures/X218.v",
+      "phase": "X218",
+      "qualified_name": "Chromatic.conjectures.X218.x218_ctd_at_most",
+      "signature": "(H : sgraph) (k : nat) : Prop",
+      "signature_shape_hash": "0bae8f16ee0b381536cb1f07eb57f52b4be719e72f2739e0073bb1b84350db06"
+    },
+    {
       "body_hash": "ea49dc98d696e8d1fbb7b7e56ad4fbe9f250f7332362340b24968c5cc2216e51",
       "body_shape_hash": "ea49dc98d696e8d1fbb7b7e56ad4fbe9f250f7332362340b24968c5cc2216e51",
       "declaration_hash": "5d2998b2efaccfb35bded9553de0fe20c3cb71766c6d719fd2feac9ba585f480",
@@ -33988,7 +34035,7 @@
         "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
       ],
       "kind": "Definition",
-      "line": 87,
+      "line": 111,
       "local_dependencies": [],
       "name": "x218_defective_chromatic_class_le",
       "normalized_name": "defective_chromatic_class_le",
@@ -34007,7 +34054,7 @@
         "Chromatic.conjectures.X218.odd_minor_free_defective_clustered_treedepth_statement"
       ],
       "kind": "Definition",
-      "line": 97,
+      "line": 121,
       "local_dependencies": [],
       "name": "x218_clustered_chromatic_class_le",
       "normalized_name": "clustered_chromatic_class_le",
